@@ -62,7 +62,7 @@ void dynamic_initializer_for__hkaiNavVolumeEdgeClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 132
@@ -97,7 +97,7 @@ void dynamic_initializer_for__hkaiNavVolumeClass__()
     &hkaiNavVolume_Default,
     0i64,
     0,
-    0xAu);
+    10);
 }
 
 // File Line: 207
@@ -109,23 +109,24 @@ hkClass *__fastcall hkaiNavVolume::staticClass()
 
 // File Line: 214
 // RVA: 0xBB6E20
-void __fastcall finishLoadedObjecthkaiNavVolume(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiNavVolume(hkaiNavVolume *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiNavVolume::hkaiNavVolume);
+  if ( p )
+    hkaiNavVolume::hkaiNavVolume(p, finishing);
 }
 
 // File Line: 220
 // RVA: 0xBB6E40
-void __fastcall cleanupLoadedObjecthkaiNavVolume(void *p)
+void __fastcall cleanupLoadedObjecthkaiNavVolume(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 224
 // RVA: 0xBB6E50
 hkBaseObjectVtbl *__fastcall getVtablehkaiNavVolume()
 {
-  hkaiNavVolume v1; // [rsp+20h] [rbp-A8h]
+  hkaiNavVolume v1; // [rsp+20h] [rbp-A8h] BYREF
 
   hkaiNavVolume::hkaiNavVolume(&v1, 0);
   return v1.vfptr;
@@ -142,8 +143,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiNavVolumeTypeInfo__()
   hkaiNavVolumeTypeInfo.m_typeName = "hkaiNavVolume";
   hkaiNavVolumeTypeInfo.m_vtable = result;
   hkaiNavVolumeTypeInfo.m_scopedName = "!hkaiNavVolume";
-  hkaiNavVolumeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiNavVolume;
-  hkaiNavVolumeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiNavVolume;
+  hkaiNavVolumeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiNavVolume;
+  hkaiNavVolumeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiNavVolume;
   return result;
 }
 

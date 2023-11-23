@@ -1,66 +1,69 @@
 // File Line: 38
 // RVA: 0xD986C0
-signed __int64 __fastcall hkpBroadPhaseJob::popJobTask(hkpBroadPhaseJob *this, hkArray<hkpSimulationIsland *,hkContainerHeapAllocator> *islands, hkpBroadPhaseJob *out)
+__int64 __fastcall hkpBroadPhaseJob::popJobTask(
+        hkpBroadPhaseJob *this,
+        hkArray<hkpSimulationIsland *,hkContainerHeapAllocator> *islands,
+        hkpBroadPhaseJob *out)
 {
-  hkpBuildJacobianTaskHeader *v3; // rdi
-  int v4; // er9
-  hkpWorld *v5; // rbx
+  hkpBuildJacobianTaskHeader *m_taskHeader; // rdi
+  int m_size; // r9d
+  hkpWorld *m_world; // rbx
   __int64 v6; // r14
   __int64 v7; // rsi
   hkpSimulationIsland *v8; // rbp
-  int v9; // er8
-  signed __int64 result; // rax
-  unsigned __int16 v11; // ax
+  int m_capacityAndFlags; // r8d
+  __int64 result; // rax
+  unsigned __int16 m_numIslands; // ax
 
-  v3 = this->m_taskHeader;
-  if ( v3 && (v4 = v3->m_newSplitIslands.m_size) != 0 )
+  m_taskHeader = this->m_taskHeader;
+  if ( m_taskHeader && (m_size = m_taskHeader->m_newSplitIslands.m_size) != 0 )
   {
-    v3->m_referenceCount += v4;
-    v3->m_numIslandsAfterSplit += v4;
+    m_taskHeader->m_referenceCount += m_size;
+    m_taskHeader->m_numIslandsAfterSplit += m_size;
     this->m_islandIndex = islands->m_size;
-    this->m_numIslands = v4;
-    v5 = out->m_island->m_world;
-    if ( v4 > 0 )
+    this->m_numIslands = m_size;
+    m_world = out->m_island->m_world;
+    if ( m_size > 0 )
     {
-      v6 = (unsigned int)v4;
+      v6 = (unsigned int)m_size;
       v7 = 0i64;
       do
       {
-        v8 = v3->m_newSplitIslands.m_data[v7];
-        v8->m_storageIndex = v5->m_activeSimulationIslands.m_size;
-        if ( v5->m_activeSimulationIslands.m_size == (v5->m_activeSimulationIslands.m_capacityAndFlags & 0x3FFFFFFF) )
+        v8 = m_taskHeader->m_newSplitIslands.m_data[v7];
+        v8->m_storageIndex = m_world->m_activeSimulationIslands.m_size;
+        if ( m_world->m_activeSimulationIslands.m_size == (m_world->m_activeSimulationIslands.m_capacityAndFlags & 0x3FFFFFFF) )
           hkArrayUtil::_reserveMore(
-            (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-            &v5->m_activeSimulationIslands,
+            &hkContainerHeapAllocator::s_alloc,
+            (const void **)&m_world->m_activeSimulationIslands.m_data,
             8);
         ++v7;
-        v5->m_activeSimulationIslands.m_data[v5->m_activeSimulationIslands.m_size++] = v8;
+        m_world->m_activeSimulationIslands.m_data[m_world->m_activeSimulationIslands.m_size++] = v8;
         --v6;
       }
       while ( v6 );
     }
-    v9 = v3->m_newSplitIslands.m_capacityAndFlags;
-    v3->m_newSplitIslands.m_size = 0;
-    if ( v9 >= 0 )
+    m_capacityAndFlags = m_taskHeader->m_newSplitIslands.m_capacityAndFlags;
+    m_taskHeader->m_newSplitIslands.m_size = 0;
+    if ( m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-        v3->m_newSplitIslands.m_data,
-        8 * v9);
-    v3->m_newSplitIslands.m_data = 0i64;
-    v3->m_newSplitIslands.m_capacityAndFlags = 2147483648;
-    result = 1i64;
+        &hkContainerHeapAllocator::s_alloc,
+        m_taskHeader->m_newSplitIslands.m_data,
+        8 * m_capacityAndFlags);
+    m_taskHeader->m_newSplitIslands.m_data = 0i64;
+    m_taskHeader->m_newSplitIslands.m_capacityAndFlags = 0x80000000;
+    return 1i64;
   }
   else
   {
-    v11 = this->m_numIslands;
-    if ( v11 <= 1u )
+    m_numIslands = this->m_numIslands;
+    if ( m_numIslands <= 1u )
     {
-      result = 0i64;
+      return 0i64;
     }
     else
     {
       ++this->m_islandIndex;
-      this->m_numIslands = v11 - 1;
+      this->m_numIslands = m_numIslands - 1;
       result = 1i64;
       out->m_numIslands = 1;
     }

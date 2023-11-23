@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkaBoneAttachmentClass__()
     0i64,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 61
@@ -28,36 +28,32 @@ hkClass *__fastcall hkaBoneAttachment::staticClass()
 
 // File Line: 68
 // RVA: 0xB1D1E0
-void __fastcall finishLoadedObjecthkaBoneAttachment(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaBoneAttachment(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
-  hkStringPtr *v2; // rbx
   hkStringPtr *v3; // rcx
-  int v4; // edi
 
   if ( p )
   {
-    v2 = (hkStringPtr *)p;
-    v3 = (hkStringPtr *)((char *)p + 16);
+    v3 = p + 2;
     v3[-2].m_stringAndFlag = (const char *)&hkaBoneAttachment::`vftable;
-    v4 = finishing;
-    hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
-    hkStringPtr::hkStringPtr(v2 + 13, (hkFinishLoadedObjectFlag)v4);
+    hkStringPtr::hkStringPtr(v3, finishing);
+    hkStringPtr::hkStringPtr(p + 13, finishing);
   }
 }
 
 // File Line: 74
 // RVA: 0xB1D230
-void __fastcall cleanupLoadedObjecthkaBoneAttachment(void *p)
+void __fastcall cleanupLoadedObjecthkaBoneAttachment(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 78
 // RVA: 0xB1D240
 void **__fastcall getVtablehkaBoneAttachment()
 {
-  hkStringPtr v1; // [rsp+30h] [rbp-78h]
-  hkStringPtr v2; // [rsp+88h] [rbp-20h]
+  hkStringPtr v1; // [rsp+30h] [rbp-78h] BYREF
+  hkStringPtr v2; // [rsp+88h] [rbp-20h] BYREF
 
   hkStringPtr::hkStringPtr(&v1, 0);
   hkStringPtr::hkStringPtr(&v2, 0);
@@ -75,8 +71,8 @@ void **dynamic_initializer_for__hkaBoneAttachmentTypeInfo__()
   hkaBoneAttachmentTypeInfo.m_typeName = "hkaBoneAttachment";
   hkaBoneAttachmentTypeInfo.m_vtable = result;
   hkaBoneAttachmentTypeInfo.m_scopedName = "!hkaBoneAttachment";
-  hkaBoneAttachmentTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaBoneAttachment;
-  hkaBoneAttachmentTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaBoneAttachment;
+  hkaBoneAttachmentTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaBoneAttachment;
+  hkaBoneAttachmentTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaBoneAttachment;
   return result;
 }
 

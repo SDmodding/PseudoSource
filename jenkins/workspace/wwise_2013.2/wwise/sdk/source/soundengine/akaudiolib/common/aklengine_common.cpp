@@ -1,20 +1,20 @@
 // File Line: 61
 // RVA: 0xA450A0
-signed __int64 __fastcall CAkLEngine::CreateLEnginePools()
+__int64 __fastcall CAkLEngine::CreateLEnginePools()
 {
-  signed int v0; // edx
-  int v1; // eax
+  unsigned int uLEngineDefaultPoolSize; // edx
+  int Pool; // eax
 
   if ( g_LEngineDefaultPoolId != -1 )
     return 1i64;
-  v0 = 0x1000000;
+  uLEngineDefaultPoolSize = 0x1000000;
   if ( g_PDSettings.uLEngineDefaultPoolSize > 0x40 )
-    v0 = g_PDSettings.uLEngineDefaultPoolSize;
-  v1 = AK::MemoryMgr::CreatePool(0i64, v0, 0x40u, 1u, 0x10u);
-  g_LEngineDefaultPoolId = v1;
-  if ( v1 != -1 )
+    uLEngineDefaultPoolSize = g_PDSettings.uLEngineDefaultPoolSize;
+  Pool = AK::MemoryMgr::CreatePool(0i64, uLEngineDefaultPoolSize, 0x40u, 1u, 0x10u);
+  g_LEngineDefaultPoolId = Pool;
+  if ( Pool != -1 )
   {
-    AkFXMemAlloc::m_instanceLower.m_poolId = v1;
+    AkFXMemAlloc::m_instanceLower.m_poolId = Pool;
     return 1i64;
   }
   return 52i64;
@@ -36,7 +36,7 @@ void CAkLEngine::DestroyLEnginePools(void)
 void __fastcall CAkLEngine::ApplyGlobalSettings(AkPlatformInitSettings *io_pPDSettings)
 {
   __int128 v1; // xmm3
-  unsigned __int16 v2; // ax
+  unsigned __int16 epi16; // ax
 
   if ( io_pPDSettings )
   {
@@ -44,10 +44,10 @@ void __fastcall CAkLEngine::ApplyGlobalSettings(AkPlatformInitSettings *io_pPDSe
     *(_OWORD *)&g_PDSettings.hWnd = *(_OWORD *)&io_pPDSettings->hWnd;
     *(_OWORD *)&g_PDSettings.threadLEngine.uStackSize = *(_OWORD *)&io_pPDSettings->threadLEngine.uStackSize;
     *(_OWORD *)&g_PDSettings.threadMonitor.nPriority = *(_OWORD *)&io_pPDSettings->threadMonitor.nPriority;
-    v2 = _mm_extract_epi16(*(__m128i *)&io_pPDSettings->fLEngineDefaultPoolRatioThreshold, 2);
+    epi16 = _mm_extract_epi16(*(__m128i *)&io_pPDSettings->fLEngineDefaultPoolRatioThreshold, 2);
     *(_OWORD *)&g_PDSettings.fLEngineDefaultPoolRatioThreshold = *(_OWORD *)&io_pPDSettings->fLEngineDefaultPoolRatioThreshold;
     g_PDSettings.pXAudio2 = io_pPDSettings->pXAudio2;
-    if ( v2 < 2u )
+    if ( epi16 < 2u )
       g_PDSettings.uNumRefillsInVoice = 4;
     *(_OWORD *)&io_pPDSettings->hWnd = v1;
     *(_OWORD *)&io_pPDSettings->threadLEngine.uStackSize = *(_OWORD *)&g_PDSettings.threadLEngine.uStackSize;
@@ -65,158 +65,130 @@ void __fastcall CAkLEngine::ApplyGlobalSettings(AkPlatformInitSettings *io_pPDSe
 // RVA: 0xA454A0
 void __fastcall CAkLEngine::VPLDestroySource(CAkVPLSrcCbxNodeBase *in_pCbx, __int64 in_bNotify)
 {
-  CAkVPLSrcCbxNodeBase *v2; // rdi
   int v3; // ebx
 
-  v2 = in_pCbx;
   (*(void (__fastcall **)(CAkVPLSrcCbxNodeBase *, __int64))in_pCbx->vfptr->gap8)(in_pCbx, in_bNotify);
   v3 = g_LEngineDefaultPoolId;
-  v2->vfptr->__vecDelDtor(v2, 0);
-  AK::MemoryMgr::Free(v3, v2);
+  in_pCbx->vfptr->__vecDelDtor(in_pCbx, 0i64);
+  AK::MemoryMgr::Free(v3, in_pCbx);
 }
 
 // File Line: 175
 // RVA: 0xA45150
-void __fastcall MergeLastAndCurrentValues(AkAuxSendValueEx *in_pNewValues, AkMergedEnvironmentValue *io_paMergedValues, bool in_bFirstBufferConsumed, char *out_uNumSends)
+void __fastcall MergeLastAndCurrentValues(
+        AkAuxSendValueEx *in_pNewValues,
+        AkMergedEnvironmentValue *io_paMergedValues,
+        bool in_bFirstBufferConsumed,
+        char *out_uNumSends)
 {
-  bool v4; // r13
-  AkMergedEnvironmentValue *v5; // rsi
-  AkAuxSendValueEx *v6; // r12
-  unsigned int v7; // er15
-  unsigned int v8; // er14
-  signed __int64 v9; // rbx
-  float v10; // xmm0_4
-  unsigned __int64 v11; // rdi
-  int v12; // eax
+  unsigned int v7; // r15d
+  unsigned int i; // r14d
+  __int64 v9; // rbx
+  float fControlValue; // xmm0_4
+  __int64 v11; // rdi
+  AkAuxType eAuxType; // eax
   void *v13; // rdx
   int v14; // ecx
-  MapStruct<unsigned __int64,AkVPL *> *v15; // rax
-  unsigned int v16; // er14
+  MapStruct<unsigned __int64,AkVPL *> *m_pItems; // rax
+  unsigned int v16; // r14d
   __int64 v17; // rdx
-  signed __int64 v18; // rcx
-  unsigned int v19; // eax
+  __int64 v18; // rcx
+  unsigned int auxBusID; // eax
   float v20; // xmm0_4
   AkAuxType v21; // eax
-  int *v22; // rbx
+  unsigned int *v22; // rbx
   __int64 v23; // r12
-  int v24; // er8
+  unsigned int v24; // r8d
   unsigned int v25; // eax
   char *v26; // rcx
-  unsigned int *v27; // rdx
-  signed __int64 v28; // rdi
-  int v29; // eax
-  void *v30; // rdx
+  unsigned int *p_auxBusID; // rdx
+  AkMergedEnvironmentValue *v28; // rdi
+  AkAuxType v29; // eax
+  MapStruct<unsigned __int64,AkVPL *> *v30; // rdx
   int v31; // ecx
-  int v32; // eax
+  unsigned int v32; // eax
   __int64 v33; // rbx
-  signed int v34; // edi
+  int v34; // edi
   char *v35; // rbx
   void *v36; // rdx
   __int64 v37; // r15
-  void *v38; // rdx
+  MapStruct<unsigned __int64,AkVPL *> *v38; // rdx
   int v39; // ecx
-  char v40[16]; // [rsp+20h] [rbp-B8h]
-  int v41; // [rsp+30h] [rbp-A8h]
-  int v42; // [rsp+34h] [rbp-A4h]
-  int v43[2]; // [rsp+38h] [rbp-A0h]
+  char v40[32]; // [rsp+20h] [rbp-B8h] BYREF
   void *in_pvMemAddress; // [rsp+40h] [rbp-98h]
-  __int64 v45[2]; // [rsp+48h] [rbp-90h]
-  __int64 v46; // [rsp+58h] [rbp-80h]
-  __int64 v47; // [rsp+60h] [rbp-78h]
-  __int64 v48; // [rsp+68h] [rbp-70h]
-  __int64 v49; // [rsp+78h] [rbp-60h]
-  __int64 v50; // [rsp+80h] [rbp-58h]
-  __int64 v51; // [rsp+98h] [rbp-40h]
-  __int64 v52; // [rsp+A0h] [rbp-38h]
-  __int64 v53; // [rsp+B8h] [rbp-20h]
-  __int64 v54; // [rsp+C0h] [rbp-18h]
-  __int64 v55; // [rsp+D8h] [rbp+0h]
-  __int64 v56; // [rsp+E0h] [rbp+8h]
-  __int64 v57; // [rsp+F8h] [rbp+20h]
-  __int64 v58; // [rsp+100h] [rbp+28h]
-  char v59; // [rsp+118h] [rbp+40h]
+  __int64 v42[26]; // [rsp+48h] [rbp-90h] BYREF
+  char v43; // [rsp+118h] [rbp+40h] BYREF
   char *vars0; // [rsp+160h] [rbp+88h]
   CAkVPLSrcCbxNodeBase *retaddr; // [rsp+168h] [rbp+90h]
 
-  v4 = in_bFirstBufferConsumed;
-  v5 = io_paMergedValues;
-  v6 = in_pNewValues;
   v7 = 0;
   in_pvMemAddress = 0i64;
-  v45[0] = 0i64;
-  v48 = 0i64;
-  v46 = 0i64;
-  v47 = 0i64;
-  v49 = 0i64;
-  v50 = 0i64;
-  v51 = 0i64;
-  v52 = 0i64;
-  v53 = 0i64;
-  v54 = 0i64;
-  v55 = 0i64;
-  v56 = 0i64;
-  v57 = 0i64;
-  v58 = 0i64;
-  v8 = 0;
-  if ( *out_uNumSends )
+  v42[0] = 0i64;
+  memset(&v42[2], 0, 24);
+  v42[6] = 0i64;
+  v42[7] = 0i64;
+  v42[10] = 0i64;
+  v42[11] = 0i64;
+  v42[14] = 0i64;
+  v42[15] = 0i64;
+  v42[18] = 0i64;
+  v42[19] = 0i64;
+  v42[22] = 0i64;
+  v42[23] = 0i64;
+  for ( i = 0; i < (unsigned __int8)*out_uNumSends; ++i )
   {
-    do
+    v9 = i;
+    fControlValue = io_paMergedValues[v9].fControlValue;
+    if ( fControlValue > 0.0 )
     {
-      v9 = v8;
-      v10 = v5[v9].fControlValue;
-      if ( v10 > 0.0 )
+      v11 = 4i64 * v7;
+      *(_DWORD *)&v40[v11 * 8 + 16] = io_paMergedValues[v9].auxBusID;
+      eAuxType = io_paMergedValues[v9].eAuxType;
+      *(float *)&v40[v11 * 8 + 20] = fControlValue;
+      *(_DWORD *)&v40[v11 * 8 + 24] = eAuxType;
+      v13 = (void *)v42[v11 - 1];
+      if ( v13 )
       {
-        v11 = 32i64 * v7;
-        *(int *)((char *)&v41 + v11) = v5[v9].auxBusID;
-        v12 = v5[v9].eAuxType;
-        *(float *)((char *)&v42 + v11) = v10;
-        v43[v11 / 4] = v12;
-        v13 = *(&in_pvMemAddress + 4 * v7);
-        if ( v13 )
-        {
-          v14 = g_DefaultPoolId;
-          v45[v11 / 8] = 0i64;
-          AK::MemoryMgr::Free(v14, v13);
-          out_uNumSends = vars0;
-          *(void **)((char *)&in_pvMemAddress + v11) = 0i64;
-        }
-        v15 = v5[v9].PerDeviceAuxBusses.m_pItems;
-        ++v7;
-        v5[v9].PerDeviceAuxBusses.m_pItems = 0i64;
-        *(void **)((char *)&in_pvMemAddress + v11) = v15;
-        LODWORD(v45[v11 / 8]) = v5[v9].PerDeviceAuxBusses.m_uLength;
-        LODWORD(v15) = v5[v9].PerDeviceAuxBusses.m_ulReserved;
-        *(_QWORD *)&v5[v9].PerDeviceAuxBusses.m_uLength = 0i64;
-        HIDWORD(v45[v11 / 8]) = (_DWORD)v15;
+        v14 = g_DefaultPoolId;
+        v42[4 * v7] = 0i64;
+        AK::MemoryMgr::Free(v14, v13);
+        out_uNumSends = vars0;
+        v42[4 * v7 - 1] = 0i64;
       }
-      ++v8;
+      m_pItems = io_paMergedValues[v9].PerDeviceAuxBusses.m_pItems;
+      ++v7;
+      io_paMergedValues[v9].PerDeviceAuxBusses.m_pItems = 0i64;
+      v42[v11 - 1] = (__int64)m_pItems;
+      LODWORD(v42[v11]) = io_paMergedValues[v9].PerDeviceAuxBusses.m_uLength;
+      LODWORD(m_pItems) = io_paMergedValues[v9].PerDeviceAuxBusses.m_ulReserved;
+      *(_QWORD *)&io_paMergedValues[v9].PerDeviceAuxBusses.m_uLength = 0i64;
+      HIDWORD(v42[v11]) = (_DWORD)m_pItems;
     }
-    while ( v8 < (unsigned __int8)*out_uNumSends );
   }
   v16 = 0;
   do
   {
     v17 = v16;
     v18 = v16;
-    v19 = v6[v18].auxBusID;
-    if ( !v19 )
+    auxBusID = in_pNewValues[v18].auxBusID;
+    if ( !auxBusID )
       break;
-    v20 = v6[v18].fControlValue;
-    v5[v18].auxBusID = v19;
-    v5[v18].fControlValue = v20;
-    if ( v4 )
+    v20 = in_pNewValues[v18].fControlValue;
+    io_paMergedValues[v18].auxBusID = auxBusID;
+    io_paMergedValues[v18].fControlValue = v20;
+    if ( in_bFirstBufferConsumed )
       v20 = 0.0;
-    v21 = v6[v18].eAuxType;
+    v21 = in_pNewValues[v18].eAuxType;
     ++v16;
-    v5[v18].fLastControlValue = v20;
-    v5[v18].eAuxType = v21;
-    v5[v18].PerDeviceAuxBusses.m_uLength = 0;
+    io_paMergedValues[v18].fLastControlValue = v20;
+    io_paMergedValues[v18].eAuxType = v21;
+    io_paMergedValues[v18].PerDeviceAuxBusses.m_uLength = 0;
     v40[v17] = 0;
   }
   while ( v16 < 8 );
   if ( v7 )
   {
-    v22 = (int *)((char *)v45 + 4);
+    v22 = (unsigned int *)v42 + 1;
     v23 = v7;
     while ( 1 )
     {
@@ -227,28 +199,28 @@ void __fastcall MergeLastAndCurrentValues(AkAuxSendValueEx *in_pNewValues, AkMer
 LABEL_19:
       if ( v16 < 8 )
       {
-        v28 = (signed __int64)&v5[v16];
-        *(_DWORD *)(v28 + 4) = *(v22 - 6);
+        v28 = &io_paMergedValues[v16];
+        LODWORD(v28->fLastControlValue) = *(v22 - 6);
         v29 = *(v22 - 5);
-        *(_DWORD *)(v28 + 8) = v24;
-        *(_DWORD *)(v28 + 12) = v29;
-        *(_DWORD *)v28 = 0;
-        v30 = *(void **)(v28 + 16);
+        v28->auxBusID = v24;
+        v28->eAuxType = v29;
+        v28->fControlValue = 0.0;
+        v30 = v28->PerDeviceAuxBusses.m_pItems;
         if ( v30 )
         {
           v31 = g_DefaultPoolId;
-          *(_DWORD *)(v28 + 24) = 0;
+          v28->PerDeviceAuxBusses.m_uLength = 0;
           AK::MemoryMgr::Free(v31, v30);
-          *(_QWORD *)(v28 + 16) = 0i64;
-          *(_DWORD *)(v28 + 28) = 0;
+          v28->PerDeviceAuxBusses.m_pItems = 0i64;
+          v28->PerDeviceAuxBusses.m_ulReserved = 0;
         }
         ++v16;
 LABEL_23:
-        *(_QWORD *)(v28 + 16) = *(_QWORD *)(v22 - 3);
-        *(_DWORD *)(v28 + 24) = *(v22 - 1);
+        v28->PerDeviceAuxBusses.m_pItems = *(MapStruct<unsigned __int64,AkVPL *> **)(v22 - 3);
+        v28->PerDeviceAuxBusses.m_uLength = *(v22 - 1);
         v32 = *v22;
         *(_QWORD *)(v22 - 1) = 0i64;
-        *(_DWORD *)(v28 + 28) = v32;
+        v28->PerDeviceAuxBusses.m_ulReserved = v32;
         *(_QWORD *)(v22 - 3) = 0i64;
       }
       v22 += 8;
@@ -259,26 +231,26 @@ LABEL_23:
       }
     }
     v26 = v40;
-    v27 = &v5->auxBusID;
-    while ( *v27 != v24 || *v26 )
+    p_auxBusID = &io_paMergedValues->auxBusID;
+    while ( *p_auxBusID != v24 || *v26 )
     {
       ++v25;
-      v27 += 8;
+      p_auxBusID += 8;
       ++v26;
       if ( v25 >= v16 )
         goto LABEL_19;
     }
     v37 = v25;
-    v28 = (signed __int64)&v5[v25];
-    *(_DWORD *)(v28 + 4) = *(v22 - 6);
-    v38 = *(void **)(v28 + 16);
+    v28 = &io_paMergedValues[v25];
+    LODWORD(v28->fLastControlValue) = *(v22 - 6);
+    v38 = v28->PerDeviceAuxBusses.m_pItems;
     if ( v38 )
     {
       v39 = g_DefaultPoolId;
-      *(_DWORD *)(v28 + 24) = 0;
+      v28->PerDeviceAuxBusses.m_uLength = 0;
       AK::MemoryMgr::Free(v39, v38);
-      *(_QWORD *)(v28 + 16) = 0i64;
-      *(_DWORD *)(v28 + 28) = 0;
+      v28->PerDeviceAuxBusses.m_pItems = 0i64;
+      v28->PerDeviceAuxBusses.m_ulReserved = 0;
     }
     v40[v37] = 1;
     goto LABEL_23;
@@ -290,14 +262,13 @@ LABEL_26:
     v33 = v16;
     do
     {
-      CAkLEngine::EnsureAuxBusExist(retaddr, v5);
-      ++v5;
+      CAkLEngine::EnsureAuxBusExist(retaddr, io_paMergedValues++);
       --v33;
     }
     while ( v33 );
   }
   v34 = 7;
-  v35 = &v59;
+  v35 = &v43;
   do
   {
     v36 = (void *)*((_QWORD *)v35 - 4);
@@ -316,22 +287,20 @@ LABEL_26:
 
 // File Line: 263
 // RVA: 0xA45450
-void __fastcall CAkLEngine::SetPanningRule(unsigned int in_iOutputID, AkSinkType in_eDeviceType, AkPanningRule in_panningRule)
+void __fastcall CAkLEngine::SetPanningRule(unsigned int in_iOutputID, int in_eDeviceType, AkPanningRule in_panningRule)
 {
   __int64 v3; // rax
   unsigned __int64 v4; // r9
-  unsigned __int64 *v5; // rcx
+  unsigned __int64 *i; // rcx
   AkDevice *v6; // rax
 
   v3 = 0i64;
   if ( CAkOutputMgr::m_Devices.m_uLength )
   {
-    v4 = (signed int)in_eDeviceType | ((unsigned __int64)in_iOutputID << 32);
-    v5 = &CAkOutputMgr::m_Devices.m_pItems->uDeviceID;
-    while ( *v5 != v4 )
+    v4 = in_eDeviceType | ((unsigned __int64)in_iOutputID << 32);
+    for ( i = &CAkOutputMgr::m_Devices.m_pItems->uDeviceID; *i != v4; i += 10 )
     {
       v3 = (unsigned int)(v3 + 1);
-      v5 += 10;
       if ( (unsigned int)v3 >= CAkOutputMgr::m_Devices.m_uLength )
         return;
     }

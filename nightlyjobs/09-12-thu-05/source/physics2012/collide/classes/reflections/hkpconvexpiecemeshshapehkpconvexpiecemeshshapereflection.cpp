@@ -28,26 +28,29 @@ hkClass *__fastcall hkpConvexPieceMeshShape::staticClass()
 
 // File Line: 68
 // RVA: 0xCEC420
-void __fastcall finishLoadedObjecthkpConvexPieceMeshShape(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpConvexPieceMeshShape(
+        hkpConvexPieceMeshShape *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpConvexPieceMeshShape::hkpConvexPieceMeshShape);
+  if ( p )
+    hkpConvexPieceMeshShape::hkpConvexPieceMeshShape(p, finishing);
 }
 
 // File Line: 74
 // RVA: 0xCEC440
-void __fastcall cleanupLoadedObjecthkpConvexPieceMeshShape(void *p)
+void __fastcall cleanupLoadedObjecthkpConvexPieceMeshShape(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 78
 // RVA: 0xCEC450
 hkBaseObjectVtbl *__fastcall getVtablehkpConvexPieceMeshShape()
 {
-  hkpConvexPieceMeshShape v1; // [rsp+20h] [rbp-58h]
+  hkpConvexPieceMeshShape v1; // [rsp+20h] [rbp-58h] BYREF
 
   hkpConvexPieceMeshShape::hkpConvexPieceMeshShape(&v1, 0);
-  return v1.vfptr;
+  return v1.hkpShapeCollection::hkpShape::hkpShapeBase::hkcdShape::hkReferencedObject::hkBaseObject::vfptr;
 }
 
 // File Line: 100
@@ -61,8 +64,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpConvexPieceMeshShapeTypeInfo__()
   hkpConvexPieceMeshShapeTypeInfo.m_typeName = "hkpConvexPieceMeshShape";
   hkpConvexPieceMeshShapeTypeInfo.m_vtable = result;
   hkpConvexPieceMeshShapeTypeInfo.m_scopedName = "!hkpConvexPieceMeshShape";
-  hkpConvexPieceMeshShapeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpConvexPieceMeshShape;
-  hkpConvexPieceMeshShapeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpConvexPieceMeshShape;
+  hkpConvexPieceMeshShapeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpConvexPieceMeshShape;
+  hkpConvexPieceMeshShapeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpConvexPieceMeshShape;
   return result;
 }
 

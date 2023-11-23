@@ -31,22 +31,21 @@ void UFG::LocalPlayerIsInCombatManager::DeleteInstance(void)
 
 // File Line: 58
 // RVA: 0x330420
-void __fastcall UFG::LocalPlayerIsInCombatManager::LocalPlayerIsInCombatManager(UFG::LocalPlayerIsInCombatManager *this)
+void __fastcall UFG::LocalPlayerIsInCombatManager::LocalPlayerIsInCombatManager(
+        UFG::LocalPlayerIsInCombatManager *this)
 {
-  UFG::LocalPlayerIsInCombatManager *v1; // rbx
   char v2; // cl
 
-  v1 = this;
   UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::RebindingComponentHandle<UFG::TransformNodeComponent,0>(&this->m_pLocalPlayerTransformNodeComponent);
-  UFG::RebindingComponentHandle<UFG::SimObjectCharacterPropertiesComponent,0>::RebindingComponentHandle<UFG::SimObjectCharacterPropertiesComponent,0>(&v1->m_pLocalPlayerSimObjectCharacterPropertiesComponent);
-  v1->m_TypesInCombatAny.mBits[0] = 0i64;
-  v1->m_TypesInCombatMelee.mBits[0] = 0i64;
-  *(_QWORD *)&v1->m_NumAttackersAny = 0i64;
-  v1->m_LastAnyCombatTimestamp = 0i64;
-  v1->m_LastMeleeCombatTimestamp = 0i64;
-  *((_BYTE *)v1 + 120) &= 0xFEu;
-  v1->m_TypesInCombatAny.mBits[0] = 0i64;
-  v1->m_TypesInCombatMelee.mBits[0] = 0i64;
+  UFG::RebindingComponentHandle<UFG::SimObjectCharacterPropertiesComponent,0>::RebindingComponentHandle<UFG::SimObjectCharacterPropertiesComponent,0>(&this->m_pLocalPlayerSimObjectCharacterPropertiesComponent);
+  this->m_TypesInCombatAny.mBits[0] = 0i64;
+  this->m_TypesInCombatMelee.mBits[0] = 0i64;
+  *(_QWORD *)&this->m_NumAttackersAny = 0i64;
+  this->m_LastAnyCombatTimestamp = 0i64;
+  this->m_LastMeleeCombatTimestamp = 0i64;
+  *((_BYTE *)this + 120) &= ~1u;
+  this->m_TypesInCombatAny.mBits[0] = 0i64;
+  this->m_TypesInCombatMelee.mBits[0] = 0i64;
   v2 = tweak_initted;
   if ( !tweak_initted )
     v2 = 1;
@@ -57,7 +56,6 @@ void __fastcall UFG::LocalPlayerIsInCombatManager::LocalPlayerIsInCombatManager(
 // RVA: 0x390570
 void __fastcall UFG::LocalPlayerIsInCombatManager::Update(UFG::LocalPlayerIsInCombatManager *this)
 {
-  UFG::LocalPlayerIsInCombatManager *v1; // rbx
   float v2; // xmm1_4
   unsigned int v3; // eax
   bool v4; // zf
@@ -65,57 +63,51 @@ void __fastcall UFG::LocalPlayerIsInCombatManager::Update(UFG::LocalPlayerIsInCo
   unsigned int v6; // eax
   UFG::SimObjectCharacter *v7; // rbx
   UFG::StimulusManager *v8; // rdi
-  UFG::StimulusParameters stimulus_parameters; // [rsp+30h] [rbp-28h]
+  UFG::StimulusParameters stimulus_parameters; // [rsp+30h] [rbp-28h] BYREF
 
-  v1 = this;
   UFG::LocalPlayerIsInCombatManager::FixupPointersToPlayer(this);
   v2 = UFG::LocalPlayerIsInCombatManager::s_MeleeDistance;
-  if ( v1->m_NumAttackersMelee )
+  if ( this->m_NumAttackersMelee )
     v2 = UFG::LocalPlayerIsInCombatManager::s_MeleeDistance
        + UFG::LocalPlayerIsInCombatManager::s_MeleeDistanceHysteresis;
   v3 = UFG::LocalPlayerIsInCombatManager::CountAttackerCloserThan(
-         v1,
+         this,
          v2,
          UFG::LocalPlayerIsInCombatManager::s_RangedDistance,
          0);
-  v4 = v1->m_NumAttackersMelee == 0;
-  v1->m_NumAttackersAny = v3;
+  v4 = this->m_NumAttackersMelee == 0;
+  this->m_NumAttackersAny = v3;
   v5 = UFG::LocalPlayerIsInCombatManager::s_MeleeDistance;
   if ( !v4 )
     v5 = UFG::LocalPlayerIsInCombatManager::s_MeleeDistance
        + UFG::LocalPlayerIsInCombatManager::s_MeleeDistanceHysteresis;
-  v6 = UFG::LocalPlayerIsInCombatManager::CountAttackerCloserThan(v1, v5, 0.0, 1);
-  v4 = v1->m_NumAttackersAny == 0;
-  v1->m_NumAttackersMelee = v6;
+  v6 = UFG::LocalPlayerIsInCombatManager::CountAttackerCloserThan(this, v5, 0.0, 1);
+  v4 = this->m_NumAttackersAny == 0;
+  this->m_NumAttackersMelee = v6;
   if ( v4 )
   {
     UFG::PedSpawnManager::msProxyExclusionZoneActive = 0;
   }
   else
   {
-    v1->m_LastAnyCombatTimestamp = UFG::Metrics::msInstance.mSimTimeMSec;
+    this->m_LastAnyCombatTimestamp = UFG::Metrics::msInstance.mSimTimeMSec;
     UFG::PedSpawnManager::msProxyExclusionZoneActive = 1;
   }
-  if ( v1->m_NumAttackersMelee )
+  if ( this->m_NumAttackersMelee )
   {
-    v1->m_LastMeleeCombatTimestamp = UFG::Metrics::msInstance.mSimTimeMSec;
+    this->m_LastMeleeCombatTimestamp = UFG::Metrics::msInstance.mSimTimeMSec;
     v7 = LocalPlayer;
     v8 = UFG::StimulusManager::s_pInstance;
     stimulus_parameters.m_StimulusProducerOffset = UFG::qVector3::msZero;
     stimulus_parameters.m_MaxStimulusDuration = -1.0;
     stimulus_parameters.m_EmitUntilSpeedLessThan = -1.0;
-    stimulus_parameters.m_StimulusEmissionType = 0;
+    stimulus_parameters.m_StimulusEmissionType = eSTIMULUS_EMISSION_ONE_OFF;
     UFG::StimulusManager::DeleteAllStimulusEmittersOfType(
       UFG::StimulusManager::s_pInstance,
       eSTIMULUS_MELEE_FIGHT_VS_COMBATANT,
-      (UFG::SimObject *)&LocalPlayer->vfptr,
-      0);
-    UFG::StimulusManager::AttachStimulusEmitterComponent(
-      v8,
-      &stru_1423BFC28,
-      &stimulus_parameters,
-      (UFG::SimObject *)&v7->vfptr,
-      0);
+      LocalPlayer,
+      eTARGET_TYPE_INVALID);
+    UFG::StimulusManager::AttachStimulusEmitterComponent(v8, &stru_1423BFC28, &stimulus_parameters, v7, 0);
   }
 }
 
@@ -124,49 +116,48 @@ void __fastcall UFG::LocalPlayerIsInCombatManager::Update(UFG::LocalPlayerIsInCo
 void __fastcall UFG::LocalPlayerIsInCombatManager::FixupPointersToPlayer(UFG::LocalPlayerIsInCombatManager *this)
 {
   UFG::SimObjectCharacterPropertiesComponent *v1; // rdi
-  UFG::LocalPlayerIsInCombatManager *v2; // rbx
-  UFG::TransformNodeComponent *v3; // rdx
+  UFG::TransformNodeComponent *m_pComponent; // rdx
 
   v1 = 0i64;
-  v2 = this;
   if ( !this->m_pLocalPlayerTransformNodeComponent.m_pSimComponent )
   {
     if ( LocalPlayer )
-      v3 = (UFG::TransformNodeComponent *)LocalPlayer->m_Components.p[2].m_pComponent;
+      m_pComponent = (UFG::TransformNodeComponent *)LocalPlayer->m_Components.p[2].m_pComponent;
     else
-      v3 = 0i64;
-    UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::Set(&this->m_pLocalPlayerTransformNodeComponent, v3);
+      m_pComponent = 0i64;
+    UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::Set(
+      &this->m_pLocalPlayerTransformNodeComponent,
+      m_pComponent);
   }
-  if ( !v2->m_pLocalPlayerSimObjectCharacterPropertiesComponent.m_pSimComponent )
+  if ( !this->m_pLocalPlayerSimObjectCharacterPropertiesComponent.m_pSimComponent )
   {
     if ( LocalPlayer )
-      v1 = UFG::SimObjectCVBase::GetComponent<UFG::SimObjectCharacterPropertiesComponent>((UFG::SimObjectCVBase *)&LocalPlayer->vfptr);
+      v1 = UFG::SimObjectCVBase::GetComponent<UFG::SimObjectCharacterPropertiesComponent>(LocalPlayer);
     UFG::RebindingComponentHandle<UFG::SimObjectCharacterPropertiesComponent,0>::Set(
-      &v2->m_pLocalPlayerSimObjectCharacterPropertiesComponent,
+      &this->m_pLocalPlayerSimObjectCharacterPropertiesComponent,
       v1);
   }
 }
 
 // File Line: 135
 // RVA: 0x36ABA0
-bool __fastcall UFG::LocalPlayerIsInCombatManager::IsInAnyCombat(UFG::LocalPlayerIsInCombatManager *this, UFG::eCharacterTypeEnum e)
+bool __fastcall UFG::LocalPlayerIsInCombatManager::IsInAnyCombat(UFG::LocalPlayerIsInCombatManager *this, int e)
 {
-  unsigned __int64 v2; // r8
+  unsigned __int64 m_LastAnyCombatTimestamp; // r8
   unsigned __int64 v3; // rax
   bool result; // al
 
-  v2 = this->m_LastAnyCombatTimestamp;
+  m_LastAnyCombatTimestamp = this->m_LastAnyCombatTimestamp;
   result = 0;
-  if ( v2 )
+  if ( m_LastAnyCombatTimestamp )
   {
-    if ( UFG::Metrics::msInstance.mSimTimeMSec - v2 < UFG::LocalPlayerIsInCombatManager::s_InCombatTimer )
+    if ( UFG::Metrics::msInstance.mSimTimeMSec - m_LastAnyCombatTimestamp < UFG::LocalPlayerIsInCombatManager::s_InCombatTimer )
     {
-      if ( e == eCHARACTER_TYPE_INVALID
-        || (v3 = this->m_TypesInCombatAny.mBits[(signed __int64)(signed int)e >> 6],
-            _bittest64((const signed __int64 *)&v3, e & 0x3F)) )
-      {
-        result = 1;
-      }
+      if ( !e )
+        return 1;
+      v3 = this->m_TypesInCombatAny.mBits[(__int64)e >> 6];
+      if ( _bittest64((const __int64 *)&v3, e & 0x3F) )
+        return 1;
     }
   }
   return result;
@@ -174,24 +165,23 @@ bool __fastcall UFG::LocalPlayerIsInCombatManager::IsInAnyCombat(UFG::LocalPlaye
 
 // File Line: 143
 // RVA: 0x36AE10
-bool __fastcall UFG::LocalPlayerIsInCombatManager::IsInMeleeCombat(UFG::LocalPlayerIsInCombatManager *this, UFG::eCharacterTypeEnum e)
+bool __fastcall UFG::LocalPlayerIsInCombatManager::IsInMeleeCombat(UFG::LocalPlayerIsInCombatManager *this, int e)
 {
-  unsigned __int64 v2; // r8
+  unsigned __int64 m_LastMeleeCombatTimestamp; // r8
   unsigned __int64 v3; // rax
   bool result; // al
 
-  v2 = this->m_LastMeleeCombatTimestamp;
+  m_LastMeleeCombatTimestamp = this->m_LastMeleeCombatTimestamp;
   result = 0;
-  if ( v2 )
+  if ( m_LastMeleeCombatTimestamp )
   {
-    if ( UFG::Metrics::msInstance.mSimTimeMSec - v2 < UFG::LocalPlayerIsInCombatManager::s_InCombatTimer )
+    if ( UFG::Metrics::msInstance.mSimTimeMSec - m_LastMeleeCombatTimestamp < UFG::LocalPlayerIsInCombatManager::s_InCombatTimer )
     {
-      if ( e == eCHARACTER_TYPE_INVALID
-        || (v3 = this->m_TypesInCombatMelee.mBits[(signed __int64)(signed int)e >> 6],
-            _bittest64((const signed __int64 *)&v3, e & 0x3F)) )
-      {
-        result = 1;
-      }
+      if ( !e )
+        return 1;
+      v3 = this->m_TypesInCombatMelee.mBits[(__int64)e >> 6];
+      if ( _bittest64((const __int64 *)&v3, e & 0x3F) )
+        return 1;
     }
   }
   return result;
@@ -199,13 +189,13 @@ bool __fastcall UFG::LocalPlayerIsInCombatManager::IsInMeleeCombat(UFG::LocalPla
 
 // File Line: 151
 // RVA: 0x361810
-__int64 __fastcall UFG::LocalPlayerIsInCombatManager::GetNumAttackersAny(UFG::LocalPlayerIsInCombatManager *this, bool cached)
+__int64 __fastcall UFG::LocalPlayerIsInCombatManager::GetNumAttackersAny(
+        UFG::LocalPlayerIsInCombatManager *this,
+        bool cached)
 {
-  UFG::LocalPlayerIsInCombatManager *v2; // rbx
   float v3; // xmm1_4
   __int64 result; // rax
 
-  v2 = this;
   if ( cached )
     return this->m_NumAttackersAny;
   v3 = UFG::LocalPlayerIsInCombatManager::s_MeleeDistance;
@@ -217,19 +207,19 @@ __int64 __fastcall UFG::LocalPlayerIsInCombatManager::GetNumAttackersAny(UFG::Lo
              v3,
              UFG::LocalPlayerIsInCombatManager::s_RangedDistance,
              0);
-  v2->m_NumAttackersAny = result;
+  this->m_NumAttackersAny = result;
   return result;
 }
 
 // File Line: 169
 // RVA: 0x361860
-__int64 __fastcall UFG::LocalPlayerIsInCombatManager::GetNumAttackersMelee(UFG::LocalPlayerIsInCombatManager *this, bool cached)
+__int64 __fastcall UFG::LocalPlayerIsInCombatManager::GetNumAttackersMelee(
+        UFG::LocalPlayerIsInCombatManager *this,
+        bool cached)
 {
-  UFG::LocalPlayerIsInCombatManager *v2; // rbx
   float v3; // xmm1_4
   __int64 result; // rax
 
-  v2 = this;
   if ( cached )
     return this->m_NumAttackersMelee;
   v3 = UFG::LocalPlayerIsInCombatManager::s_MeleeDistance;
@@ -237,23 +227,25 @@ __int64 __fastcall UFG::LocalPlayerIsInCombatManager::GetNumAttackersMelee(UFG::
     v3 = UFG::LocalPlayerIsInCombatManager::s_MeleeDistance
        + UFG::LocalPlayerIsInCombatManager::s_MeleeDistanceHysteresis;
   result = UFG::LocalPlayerIsInCombatManager::CountAttackerCloserThan(this, v3, 0.0, 1);
-  v2->m_NumAttackersMelee = result;
+  this->m_NumAttackersMelee = result;
   return result;
 }
 
 // File Line: 185
 // RVA: 0x34FEE0
-__int64 __fastcall UFG::LocalPlayerIsInCombatManager::CountAttackerCloserThan(UFG::LocalPlayerIsInCombatManager *this, float melee_distance, float ranged_distance, bool melee_only)
+__int64 __fastcall UFG::LocalPlayerIsInCombatManager::CountAttackerCloserThan(
+        UFG::LocalPlayerIsInCombatManager *this,
+        float melee_distance,
+        float ranged_distance,
+        bool melee_only)
 {
   bool v4; // di
-  float v5; // xmm7_4
-  UFG::LocalPlayerIsInCombatManager *v6; // r13
-  Render::DebugDrawContext *v7; // rbx
+  Render::DebugDrawContext *Context; // rbx
   unsigned int v8; // esi
   float v9; // xmm8_4
   UFG::SimObjectCharacter *v10; // r15
-  __int64 v11; // rdi
-  UFG::SimComponent *v12; // rbx
+  __int64 mPrev_low; // rdi
+  UFG::SimComponent *m_pSimComponent; // rbx
   UFG::NearbyCharacterManager *v13; // r8
   __int64 **v14; // rdx
   __int64 *v15; // rax
@@ -261,111 +253,101 @@ __int64 __fastcall UFG::LocalPlayerIsInCombatManager::CountAttackerCloserThan(UF
   _QWORD *v17; // rdx
   __int64 v18; // rcx
   __int64 *v19; // rax
-  UFG::NearbyCharacterManager *v20; // rcx
+  UFG::NearbyCharacterManager *mNext; // rcx
   __int64 *v21; // rdx
-  __int64 **v22; // rax
-  signed __int64 v23; // rcx
-  __int64 v24; // rcx
-  __int64 *v25; // rbp
-  __int64 v26; // rsi
-  UFG::TransformNodeComponent *v27; // rbx
-  __int64 v28; // rax
-  bool v29; // r15
-  UFG::SimObjectGame *v30; // rcx
-  unsigned __int16 v31; // dx
-  UFG::SimComponent *v32; // rax
-  bool v33; // r12
-  __int64 v34; // rdi
-  unsigned int v35; // eax
-  unsigned int v36; // eax
-  __int64 v37; // rdi
-  bool v38; // al
-  UFG::qColour *v39; // r9
-  float v40; // xmm6_4
-  UFG::qVector3 *v41; // rsi
-  UFG::qVector3 *v42; // r10
-  float v43; // xmm0_4
-  __m128 v44; // xmm1
-  bool v45; // r15
-  UFG::SimObjectCVBase *v46; // rcx
-  UFG::SimObjectCharacterPropertiesComponent *v47; // rax
-  unsigned __int16 v48; // dx
-  UFG::qColour *v49; // r9
-  UFG::qVector3 *v50; // rdx
-  signed __int64 v51; // rdx
-  signed __int64 v52; // rax
-  __int64 v53; // rbx
-  bool v54; // cl
-  __int64 v55; // rax
-  UFG::qVector3 *v56; // r8
-  UFG::qVector3 *v57; // rdx
-  __int64 i; // rax
-  _QWORD *v59; // rdx
-  __int64 v60; // rcx
-  _QWORD *v61; // rax
-  __int64 *v62; // rcx
-  __int64 **v63; // rax
-  unsigned __int64 v64; // rcx
-  bool v65; // dl
-  const char *v66; // rcx
-  char *v67; // rax
-  int v68; // er8
-  unsigned __int16 v69; // dx
-  UFG::FormationManagerComponent *v70; // rax
-  __int64 v72; // [rsp+0h] [rbp-128h]
+  __int64 v22; // rcx
+  __int64 v23; // rcx
+  __int64 *v24; // rbp
+  __int64 v25; // rsi
+  UFG::TransformNodeComponent *v26; // rbx
+  bool m_IsHostile; // r15
+  UFG::SimObjectGame *v28; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
+  bool v31; // r12
+  __int64 v32; // rdi
+  unsigned int v33; // eax
+  unsigned int MostUsedIndex; // eax
+  __int64 v35; // rdi
+  bool HasRangedWeaponEquippedWithAmmo; // al
+  UFG::qColour *v37; // r9
+  float v38; // xmm6_4
+  UFG::qVector3 *v39; // rsi
+  UFG::qVector3 *v40; // r10
+  float v41; // xmm0_4
+  __m128 x_low; // xmm1
+  bool v43; // r15
+  UFG::SimObjectCVBase *v44; // rcx
+  UFG::SimObjectCharacterPropertiesComponent *ComponentOfType; // rax
+  __int16 v46; // dx
+  UFG::qColour *v47; // r9
+  UFG::qVector3 *v48; // rdx
+  __int64 v49; // rdx
+  __int64 v50; // rax
+  __int64 m_eFactionClass; // rbx
+  bool v52; // cl
+  __int64 v53; // rax
+  UFG::qVector3 *v54; // r8
+  UFG::qVector3 *v55; // rdx
+  __int64 **i; // rax
+  _QWORD *v57; // rdx
+  __int64 *v58; // rcx
+  __int64 *v59; // rax
+  __int64 *v60; // rcx
+  __int64 **v61; // rax
+  unsigned __int64 m_LastMeleeCombatTimestamp; // rcx
+  bool v63; // dl
+  const char *v64; // rcx
+  const char *v65; // rax
+  int v66; // r8d
+  __int16 v67; // dx
+  UFG::FormationManagerComponent *v68; // rax
+  __int64 v70; // [rsp+0h] [rbp-128h] BYREF
   void (__fastcall *pre_draw_callback)(Illusion::Material *, Render::View *, Illusion::StateValues *, Illusion::Primitive *, Illusion::StateArgs *); // [rsp+28h] [rbp-100h]
-  bool is_screen_coords[8]; // [rsp+30h] [rbp-F8h]
-  unsigned int v75; // [rsp+38h] [rbp-F0h]
-  double v76; // [rsp+40h] [rbp-E8h]
-  double v77; // [rsp+48h] [rbp-E0h]
+  __int64 v72; // [rsp+38h] [rbp-F0h]
   UFG::qVector3 *p0; // [rsp+50h] [rbp-D8h]
-  Render::DebugDrawContext *v79; // [rsp+58h] [rbp-D0h]
-  __int64 v80; // [rsp+60h] [rbp-C8h]
-  __int64 **v81; // [rsp+68h] [rbp-C0h]
-  __int64 v82; // [rsp+70h] [rbp-B8h]
-  __int64 *v83; // [rsp+78h] [rbp-B0h]
-  __int64 v84; // [rsp+80h] [rbp-A8h]
-  __int64 *v85; // [rsp+88h] [rbp-A0h]
-  __int64 **v86; // [rsp+90h] [rbp-98h]
-  UFG::SimObjectCharacter *v87; // [rsp+130h] [rbp+8h]
-  char v88; // [rsp+138h] [rbp+10h]
-  unsigned int v89; // [rsp+140h] [rbp+18h]
-  bool v90; // [rsp+148h] [rbp+20h]
+  Render::DebugDrawContext *v74; // [rsp+58h] [rbp-D0h]
+  __int64 v75; // [rsp+60h] [rbp-C8h]
+  __int64 **v76; // [rsp+68h] [rbp-C0h]
+  __int64 v77; // [rsp+70h] [rbp-B8h]
+  __int64 v78[2]; // [rsp+78h] [rbp-B0h] BYREF
+  __int64 *v79; // [rsp+88h] [rbp-A0h] BYREF
+  __int64 **v80; // [rsp+90h] [rbp-98h]
+  UFG::SimObjectCharacter *v81; // [rsp+130h] [rbp+8h]
+  unsigned __int8 IsPlaying; // [rsp+138h] [rbp+10h]
+  unsigned int v83; // [rsp+140h] [rbp+18h]
 
-  v90 = melee_only;
-  v84 = -2i64;
+  v78[1] = -2i64;
   v4 = melee_only;
-  v5 = melee_distance;
-  v6 = this;
-  v7 = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 1u);
-  v79 = v7;
+  Context = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 1u);
+  v74 = Context;
   if ( v4 )
-    v6->m_TypesInCombatMelee.mBits[0] = 0i64;
+    this->m_TypesInCombatMelee.mBits[0] = 0i64;
   else
-    v6->m_TypesInCombatAny.mBits[0] = 0i64;
+    this->m_TypesInCombatAny.mBits[0] = 0i64;
   v8 = 0;
-  v89 = 0;
+  v83 = 0;
   if ( melee_distance <= ranged_distance )
     v9 = ranged_distance;
   else
     v9 = melee_distance;
   v10 = LocalPlayer;
-  v87 = LocalPlayer;
-  if ( v6->m_pLocalPlayerTransformNodeComponent.m_pSimComponent
-    && v6->m_pLocalPlayerSimObjectCharacterPropertiesComponent.m_pSimComponent )
+  v81 = LocalPlayer;
+  if ( this->m_pLocalPlayerTransformNodeComponent.m_pSimComponent
+    && this->m_pLocalPlayerSimObjectCharacterPropertiesComponent.m_pSimComponent )
   {
-    v11 = SLODWORD(v6->m_pLocalPlayerSimObjectCharacterPropertiesComponent.m_pSimComponent[3].m_SafePointerList.mNode.mPrev);
-    v12 = v6->m_pLocalPlayerTransformNodeComponent.m_pSimComponent;
-    UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v6->m_pLocalPlayerTransformNodeComponent.m_pSimComponent);
-    p0 = (UFG::qVector3 *)&v12[2].m_BoundComponentHandles;
-    v85 = (__int64 *)&v85;
-    v86 = &v85;
+    mPrev_low = SLODWORD(this->m_pLocalPlayerSimObjectCharacterPropertiesComponent.m_pSimComponent[3].m_SafePointerList.mNode.mPrev);
+    m_pSimComponent = this->m_pLocalPlayerTransformNodeComponent.m_pSimComponent;
+    UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)m_pSimComponent);
+    p0 = (UFG::qVector3 *)&m_pSimComponent[2].m_BoundComponentHandles;
+    v79 = (__int64 *)&v79;
+    v80 = &v79;
     v13 = UFG::NearbyCharacterManager::s_pInstance;
-    v14 = &v85;
-    v15 = (__int64 *)&v83;
-    v16 = &v72 + 15;
-    v83 = v16;
-    if ( &v83 != (__int64 **)v16 )
+    v14 = &v79;
+    v15 = v78;
+    v16 = &v70 + 15;
+    v78[0] = (__int64)v16;
+    if ( v78 != v16 )
     {
       do
       {
@@ -376,351 +358,307 @@ __int64 __fastcall UFG::LocalPlayerIsInCombatManager::CountAttackerCloserThan(UF
         *v19 = v18;
         *v17 = v17;
         v17[1] = v17;
-        v14 = v86;
-        v15 = (__int64 *)(v86 - 2);
+        v14 = v80;
+        v15 = (__int64 *)(v80 - 2);
       }
-      while ( v86 - 2 != (__int64 **)v16 );
+      while ( v80 - 2 != (__int64 **)v16 );
     }
-    v20 = (UFG::NearbyCharacterManager *)v13->m_Characters[0].mNode.mNext;
-    if ( v20 != v13 )
+    mNext = (UFG::NearbyCharacterManager *)v13->m_Characters[0].mNode.mNext;
+    if ( mNext != v13 )
     {
-      v21 = v85;
+      v21 = v79;
       do
       {
-        v22 = (__int64 **)&v20->m_Characters[1];
-        v21[1] = (__int64)&v20->m_Characters[1];
-        *v22 = v21;
-        v22[1] = (__int64 *)&v85;
-        v21 = (__int64 *)&v20->m_Characters[1];
-        v85 = (__int64 *)&v20->m_Characters[1];
-        v20 = (UFG::NearbyCharacterManager *)v20->m_Characters[0].mNode.mNext;
+        v21[1] = (__int64)&mNext->m_Characters[1];
+        mNext->m_Characters[1].mNode.mPrev = (UFG::qNode<UFG::NearbyCharacter,UFG::NearbyCharacterMasterList> *)v21;
+        mNext->m_Characters[1].mNode.mNext = (UFG::qNode<UFG::NearbyCharacter,UFG::NearbyCharacterMasterList> *)&v79;
+        v21 = (__int64 *)&mNext->m_Characters[1];
+        v79 = (__int64 *)&mNext->m_Characters[1];
+        mNext = (UFG::NearbyCharacterManager *)mNext->m_Characters[0].mNode.mNext;
       }
-      while ( v20 != v13 );
-      v14 = v86;
+      while ( mNext != v13 );
+      v14 = v80;
     }
-    v23 = (signed __int64)(v14 - 2);
-    v81 = v14 - 2;
-    v82 = v11;
+    v22 = (__int64)(v14 - 2);
+    v76 = v14 - 2;
+    v77 = mPrev_low;
     if ( v14 - 2 != (__int64 **)v16 )
     {
       do
       {
-        v24 = *(_QWORD *)(v23 + 48);
-        if ( !v24 )
-          goto LABEL_97;
-        if ( !(*(unsigned __int8 (**)(void))(*(_QWORD *)v24 + 112i64))() )
-          goto LABEL_97;
-        v25 = v81[6];
-        if ( (UFG::SimObjectCharacter *)v25[5] == v10 )
-          goto LABEL_97;
-        v26 = v25[53];
-        v27 = (UFG::TransformNodeComponent *)v25[11];
-        v80 = v25[35];
-        v28 = *((signed int *)v25 + 1041);
-        v29 = UFG::g_AIObjectiveParams[v28].m_IsHostile;
-        v88 = UFG::g_AIObjectiveParams[v28].m_IsHostile;
-        v30 = (UFG::SimObjectGame *)v25[5];
-        v33 = 0;
-        if ( v30 )
+        v23 = *(_QWORD *)(v22 + 48);
+        if ( !v23 )
+          goto LABEL_93;
+        if ( !(*(unsigned __int8 (__fastcall **)(__int64))(*(_QWORD *)v23 + 112i64))(v23) )
+          goto LABEL_93;
+        v24 = v76[6];
+        if ( (UFG::SimObjectCharacter *)v24[5] == v10 )
+          goto LABEL_93;
+        v25 = v24[53];
+        v26 = (UFG::TransformNodeComponent *)v24[11];
+        v75 = v24[35];
+        m_IsHostile = UFG::g_AIObjectiveParams[*((int *)v24 + 1041)].m_IsHostile;
+        IsPlaying = m_IsHostile;
+        v28 = (UFG::SimObjectGame *)v24[5];
+        v31 = 0;
+        if ( v28 )
         {
-          v31 = v30->m_Flags;
-          if ( (v31 >> 14) & 1 )
-          {
-            v32 = UFG::SimObjectGame::GetComponentOfTypeHK(v30, UFG::HudComponent::_TypeUID);
-          }
-          else if ( (v31 & 0x8000u) == 0 )
-          {
-            if ( (v31 >> 13) & 1 )
-              v32 = UFG::SimObjectGame::GetComponentOfTypeHK(v30, UFG::HudComponent::_TypeUID);
-            else
-              v32 = (v31 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v30, UFG::HudComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v30->vfptr, UFG::HudComponent::_TypeUID);
-          }
+          m_Flags = v28->m_Flags;
+          if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+            ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(v28, UFG::HudComponent::_TypeUID);
           else
-          {
-            v32 = UFG::SimObjectGame::GetComponentOfTypeHK(v30, UFG::HudComponent::_TypeUID);
-          }
-          if ( v32 && HIBYTE(v32[3].m_Flags) )
-            v33 = 1;
+            ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(v28, UFG::HudComponent::_TypeUID);
+          if ( ComponentOfTypeHK && HIBYTE(ComponentOfTypeHK[3].m_Flags) )
+            v31 = 1;
         }
-        if ( !v29 )
+        if ( !m_IsHostile )
         {
-          v34 = v25[192];
-          if ( v34 )
+          v32 = v24[192];
+          if ( v32 )
           {
-            v35 = _S31;
-            if ( !(_S31 & 1) )
+            v33 = _S31;
+            if ( (_S31 & 1) == 0 )
             {
               _S31 |= 1u;
-              hostileNodeId.mUID = UFG::qStringHashUpper32("Hostile", 0xFFFFFFFF);
-              v35 = _S31;
+              hostileNodeId.mUID = UFG::qStringHashUpper32("Hostile", -1);
+              v33 = _S31;
             }
-            if ( v35 & 2 )
+            if ( (v33 & 2) != 0 )
             {
-              v36 = mostUsed_Hostile;
+              MostUsedIndex = mostUsed_Hostile;
             }
             else
             {
-              _S31 = v35 | 2;
-              v36 = GetMostUsedIndex(hostileNodeId.mUID);
-              mostUsed_Hostile = v36;
+              _S31 = v33 | 2;
+              MostUsedIndex = GetMostUsedIndex(hostileNodeId.mUID);
+              mostUsed_Hostile = MostUsedIndex;
             }
-            v88 = ActionController::IsPlaying((ActionController *)(v34 + 216), &hostileNodeId, v36, 1);
+            IsPlaying = ActionController::IsPlaying((ActionController *)(v32 + 216), &hostileNodeId, MostUsedIndex, 1);
           }
         }
-        v37 = v25[59];
-        if ( !v37 || !v27 || !v26 || !v80 )
+        v35 = v24[59];
+        if ( !v35 || !v26 || !v25 || !v75 )
         {
-          if ( !UFG::LocalPlayerIsInCombatManager::s_DebugDrawWhetherInFight || !v27 )
-            goto LABEL_96;
-          UFG::TransformNodeComponent::UpdateWorldTransform(v27);
-          v39 = &UFG::qColour::Purple;
-LABEL_93:
-          v56 = (UFG::qVector3 *)&v27->mWorldTransform.v3;
-          goto LABEL_94;
+          if ( !UFG::LocalPlayerIsInCombatManager::s_DebugDrawWhetherInFight || !v26 )
+            goto LABEL_92;
+          UFG::TransformNodeComponent::UpdateWorldTransform(v26);
+          v37 = &UFG::qColour::Purple;
+LABEL_89:
+          v54 = (UFG::qVector3 *)&v26->mWorldTransform.v3;
+          goto LABEL_90;
         }
-        if ( *(_BYTE *)(v26 + 116) )
+        if ( *(_BYTE *)(v25 + 116) )
         {
           if ( UFG::LocalPlayerIsInCombatManager::s_DebugDrawWhetherInFight )
           {
-            UFG::TransformNodeComponent::UpdateWorldTransform(v27);
-            v39 = &UFG::qColour::Pink;
-            goto LABEL_93;
+            UFG::TransformNodeComponent::UpdateWorldTransform(v26);
+            v37 = &UFG::qColour::Pink;
+            goto LABEL_89;
           }
-          goto LABEL_96;
+          goto LABEL_92;
         }
-        v38 = UFG::HasRangedWeaponEquippedWithAmmo((UFG::TargetingSystemBaseComponent *)v25[59]);
-        if ( v90 )
+        HasRangedWeaponEquippedWithAmmo = UFG::HasRangedWeaponEquippedWithAmmo((UFG::TargetingSystemBaseComponent *)v24[59]);
+        if ( melee_only )
         {
-          if ( v38 )
+          if ( HasRangedWeaponEquippedWithAmmo )
           {
             if ( UFG::LocalPlayerIsInCombatManager::s_DebugDrawWhetherInFight )
             {
-              UFG::TransformNodeComponent::UpdateWorldTransform(v27);
-              v39 = &UFG::qColour::Black;
-              goto LABEL_93;
+              UFG::TransformNodeComponent::UpdateWorldTransform(v26);
+              v37 = &UFG::qColour::Black;
+              goto LABEL_89;
             }
-            goto LABEL_96;
+            goto LABEL_92;
           }
         }
-        else if ( v38 )
+        else if ( HasRangedWeaponEquippedWithAmmo )
         {
-          v40 = v9;
-          goto LABEL_53;
+          v38 = v9;
+          goto LABEL_51;
         }
-        v40 = v5;
-LABEL_53:
-        UFG::TransformNodeComponent::UpdateWorldTransform(v27);
-        v41 = (UFG::qVector3 *)&v27->mWorldTransform.v3;
-        v42 = p0;
-        v43 = p0->y - v27->mWorldTransform.v3.y;
-        v44 = (__m128)LODWORD(p0->x);
-        v44.m128_f32[0] = (float)((float)((float)(v44.m128_f32[0] - v27->mWorldTransform.v3.x)
-                                        * (float)(v44.m128_f32[0] - v27->mWorldTransform.v3.x))
-                                + (float)(v43 * v43))
-                        + (float)((float)(p0->z - v27->mWorldTransform.v3.z) * (float)(p0->z - v27->mWorldTransform.v3.z));
-        v45 = v40 > COERCE_FLOAT(_mm_sqrt_ps(v44));
-        v46 = *(UFG::SimObjectCVBase **)(56i64 * *(unsigned __int8 *)(*(_QWORD *)(v37 + 96) + 30i64)
-                                       + *(_QWORD *)(v37 + 88)
+        v38 = melee_distance;
+LABEL_51:
+        UFG::TransformNodeComponent::UpdateWorldTransform(v26);
+        v39 = (UFG::qVector3 *)&v26->mWorldTransform.v3;
+        v40 = p0;
+        v41 = p0->y - v26->mWorldTransform.v3.y;
+        x_low = (__m128)LODWORD(p0->x);
+        x_low.m128_f32[0] = (float)((float)((float)(x_low.m128_f32[0] - v26->mWorldTransform.v3.x)
+                                          * (float)(x_low.m128_f32[0] - v26->mWorldTransform.v3.x))
+                                  + (float)(v41 * v41))
+                          + (float)((float)(p0->z - v26->mWorldTransform.v3.z)
+                                  * (float)(p0->z - v26->mWorldTransform.v3.z));
+        v43 = v38 > _mm_sqrt_ps(x_low).m128_f32[0];
+        v44 = *(UFG::SimObjectCVBase **)(56i64 * *(unsigned __int8 *)(*(_QWORD *)(v35 + 96) + 30i64)
+                                       + *(_QWORD *)(v35 + 88)
                                        + 40);
-        if ( v46 )
+        if ( v44 )
         {
-          v48 = v46->m_Flags;
-          if ( (v48 >> 14) & 1 )
+          v46 = v44->m_Flags;
+          if ( (v46 & 0x4000) != 0 || v46 < 0 )
           {
-            v47 = UFG::SimObjectCVBase::GetComponent<UFG::SimObjectCharacterPropertiesComponent>(v46);
+            ComponentOfType = UFG::SimObjectCVBase::GetComponent<UFG::SimObjectCharacterPropertiesComponent>(v44);
           }
-          else if ( (v48 & 0x8000u) == 0 )
+          else if ( (v46 & 0x2000) != 0 || (v46 & 0x1000) != 0 )
           {
-            if ( (v48 >> 13) & 1 )
-            {
-              v47 = (UFG::SimObjectCharacterPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                    (UFG::SimObjectGame *)&v46->vfptr,
-                                                                    UFG::SimObjectCharacterPropertiesComponent::_TypeUID);
-            }
-            else if ( (v48 >> 12) & 1 )
-            {
-              v47 = (UFG::SimObjectCharacterPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                    (UFG::SimObjectGame *)&v46->vfptr,
-                                                                    UFG::SimObjectCharacterPropertiesComponent::_TypeUID);
-            }
-            else
-            {
-              v47 = (UFG::SimObjectCharacterPropertiesComponent *)UFG::SimObject::GetComponentOfType(
-                                                                    (UFG::SimObject *)&v46->vfptr,
-                                                                    UFG::SimObjectCharacterPropertiesComponent::_TypeUID);
-            }
+            ComponentOfType = (UFG::SimObjectCharacterPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                              v44,
+                                                                              UFG::SimObjectCharacterPropertiesComponent::_TypeUID);
           }
           else
           {
-            v47 = UFG::SimObjectCVBase::GetComponent<UFG::SimObjectCharacterPropertiesComponent>(v46);
+            ComponentOfType = (UFG::SimObjectCharacterPropertiesComponent *)UFG::SimObject::GetComponentOfType(
+                                                                              v44,
+                                                                              UFG::SimObjectCharacterPropertiesComponent::_TypeUID);
           }
-          v42 = p0;
+          v40 = p0;
         }
         else
         {
-          v47 = 0i64;
+          ComponentOfType = 0i64;
         }
-        if ( v33 )
+        if ( v31 )
         {
           if ( UFG::LocalPlayerIsInCombatManager::s_DebugDrawWhetherInFight )
           {
-            v49 = &UFG::qColour::Purple;
-            v50 = v42;
-            goto LABEL_68;
+            v47 = &UFG::qColour::Purple;
+            v48 = v40;
+            goto LABEL_64;
           }
-          goto LABEL_69;
+          goto LABEL_65;
         }
-        if ( v47 )
+        if ( ComponentOfType )
         {
-          v53 = v47->m_eFactionClass;
-          v54 = UFG::GameStatTracker::Instance()->mFactionInterface.mStandings[0][v53 + 39 * v82] == 0;
-          v55 = v25[65];
-          if ( v55 )
-            LOBYTE(v55) = *(_DWORD *)(v55 + 80) == 13;
-          if ( v88 && v54 && !(_BYTE)v55 )
+          m_eFactionClass = ComponentOfType->m_eFactionClass;
+          v52 = UFG::GameStatTracker::Instance()->mFactionInterface.mStandings[v77][m_eFactionClass] == FACTIONSTANDING_ALLIED;
+          v53 = v24[65];
+          if ( v53 )
+            LOBYTE(v53) = *(_DWORD *)(v53 + 80) == 13;
+          if ( IsPlaying && v52 && !(_BYTE)v53 )
           {
-            if ( v45 )
+            if ( v43 )
             {
               if ( UFG::LocalPlayerIsInCombatManager::s_DebugDrawWhetherInFight )
               {
-                v49 = &UFG::qColour::Blue;
-                v50 = p0;
-LABEL_68:
-                Render::DebugDrawContext::DrawLine(v79, v50, v41, v49, &UFG::qMatrix44::msIdentity, 0i64, 0);
+                v47 = &UFG::qColour::Blue;
+                v48 = p0;
+LABEL_64:
+                Render::DebugDrawContext::DrawLine(v74, v48, v39, v47, &UFG::qMatrix44::msIdentity, 0i64, 0);
               }
-LABEL_69:
-              v8 = v89++ + 1;
-              v10 = v87;
-              v51 = (signed __int64)*(signed int *)(v80 + 192) >> 6;
-              v52 = 1i64 << (*(_BYTE *)(v80 + 192) & 0x3F);
-              if ( v90 )
-                v6->m_TypesInCombatMelee.mBits[v51] |= v52;
+LABEL_65:
+              v8 = ++v83;
+              v10 = v81;
+              v49 = (__int64)*(int *)(v75 + 192) >> 6;
+              v50 = 1i64 << (*(_BYTE *)(v75 + 192) & 0x3F);
+              if ( melee_only )
+                this->m_TypesInCombatMelee.mBits[v49] |= v50;
               else
-                v6->m_TypesInCombatAny.mBits[v51] |= v52;
-              goto LABEL_97;
+                this->m_TypesInCombatAny.mBits[v49] |= v50;
+              goto LABEL_93;
             }
             if ( UFG::LocalPlayerIsInCombatManager::s_DebugDrawWhetherInFight )
             {
-              v39 = &UFG::qColour::Red;
-              goto LABEL_83;
+              v37 = &UFG::qColour::Red;
+              goto LABEL_79;
             }
           }
           else if ( UFG::LocalPlayerIsInCombatManager::s_DebugDrawWhetherInFight )
           {
-            v39 = &UFG::qColour::White;
-LABEL_83:
-            v56 = v41;
-LABEL_94:
-            v57 = p0;
-            goto LABEL_95;
+            v37 = &UFG::qColour::White;
+LABEL_79:
+            v54 = v39;
+LABEL_90:
+            v55 = p0;
+            goto LABEL_91;
           }
         }
         else if ( UFG::LocalPlayerIsInCombatManager::s_DebugDrawWhetherInFight )
         {
-          v39 = &UFG::qColour::Yellow;
-          v56 = (UFG::qVector3 *)&v27->mWorldTransform.v3;
-          v57 = v42;
-LABEL_95:
-          Render::DebugDrawContext::DrawLine(v79, v57, v56, v39, &UFG::qMatrix44::msIdentity, 0i64, 0);
-          goto LABEL_96;
+          v37 = &UFG::qColour::Yellow;
+          v54 = (UFG::qVector3 *)&v26->mWorldTransform.v3;
+          v55 = v40;
+LABEL_91:
+          Render::DebugDrawContext::DrawLine(v74, v55, v54, v37, &UFG::qMatrix44::msIdentity, 0i64, 0);
         }
-LABEL_96:
-        v8 = v89;
-        v10 = v87;
-LABEL_97:
-        v23 = (signed __int64)(v81[3] - 2);
-        v81 = (__int64 **)v23;
-        v16 = v83;
+LABEL_92:
+        v8 = v83;
+        v10 = v81;
+LABEL_93:
+        v22 = (__int64)(v76[3] - 2);
+        v76 = (__int64 **)v22;
+        v16 = (__int64 *)v78[0];
       }
-      while ( (__int64 *)v23 != v83 );
+      while ( v22 != v78[0] );
     }
-    for ( i = (__int64)(v86 - 2); v86 - 2 != (__int64 **)v16; i = (__int64)(v86 - 2) )
+    for ( i = v80 - 2; v80 - 2 != (__int64 **)v16; i = v80 - 2 )
     {
-      v59 = (_QWORD *)(i + 16);
-      v60 = *(_QWORD *)(i + 16);
-      v61 = *(_QWORD **)(i + 24);
-      *(_QWORD *)(v60 + 8) = v61;
-      *v61 = v60;
-      *v59 = v59;
-      v59[1] = v59;
+      v57 = i + 2;
+      v58 = i[2];
+      v59 = i[3];
+      v58[1] = (__int64)v59;
+      *v59 = (__int64)v58;
+      *v57 = v57;
+      v57[1] = v57;
     }
-    v62 = v85;
-    v63 = v86;
-    v85[1] = (__int64)v86;
-    *v63 = v62;
-    v85 = (__int64 *)&v85;
-    v86 = &v85;
-    v7 = v79;
-    v4 = v90;
+    v60 = v79;
+    v61 = v80;
+    v79[1] = (__int64)v80;
+    *v61 = v60;
+    v79 = (__int64 *)&v79;
+    v80 = &v79;
+    Context = v74;
+    v4 = melee_only;
   }
   if ( UFG::LocalPlayerIsInCombatManager::s_DebugDrawWhetherInFight )
   {
     if ( v4 )
-      v64 = v6->m_LastMeleeCombatTimestamp;
+      m_LastMeleeCombatTimestamp = this->m_LastMeleeCombatTimestamp;
     else
-      v64 = v6->m_LastAnyCombatTimestamp;
-    v65 = v64 && UFG::Metrics::msInstance.mSimTimeMSec - v64 < UFG::LocalPlayerIsInCombatManager::s_InCombatTimer;
-    v66 = "Any";
+      m_LastMeleeCombatTimestamp = this->m_LastAnyCombatTimestamp;
+    v63 = m_LastMeleeCombatTimestamp
+       && UFG::Metrics::msInstance.mSimTimeMSec - m_LastMeleeCombatTimestamp < UFG::LocalPlayerIsInCombatManager::s_InCombatTimer;
+    v64 = "Any";
     if ( v4 )
-      v66 = "Melee";
-    v67 = "False";
-    if ( v65 )
-      v67 = "True";
-    v68 = 20;
+      v64 = "Melee";
+    v65 = "False";
+    if ( v63 )
+      v65 = "True";
+    v66 = 20;
     if ( v4 )
-      v68 = 10;
-    v77 = ranged_distance;
-    v76 = v5;
-    v75 = v8;
-    *(_QWORD *)is_screen_coords = v66;
-    pre_draw_callback = (void (__fastcall *)(Illusion::Material *, Render::View *, Illusion::StateValues *, Illusion::Primitive *, Illusion::StateArgs *))v67;
+      v66 = 10;
+    LODWORD(v72) = v8;
     Render::DebugDrawContext::DrawTextA(
-      v7,
+      Context,
       100,
-      v68,
+      v66,
       &UFG::qColour::White,
       "IsInFight(%s) - NumAttackers%s(%d) and melee dist %.1f ranged dist %1.f",
-      v67);
+      v65,
+      v64,
+      v72,
+      melee_distance,
+      ranged_distance);
     if ( v4 && v10 )
     {
-      v69 = v10->m_Flags;
-      if ( (v69 >> 14) & 1 )
-      {
-        v70 = (UFG::FormationManagerComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                  (UFG::SimObjectGame *)&v10->vfptr,
+      v67 = v10->m_Flags;
+      if ( (v67 & 0x4000) != 0 || v67 < 0 || (v67 & 0x2000) != 0 || (v67 & 0x1000) != 0 )
+        v68 = (UFG::FormationManagerComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                  v10,
                                                   UFG::FormationManagerComponent::_TypeUID);
-      }
-      else if ( (v69 & 0x8000u) == 0 )
-      {
-        if ( (v69 >> 13) & 1 )
-        {
-          v70 = (UFG::FormationManagerComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                    (UFG::SimObjectGame *)&v10->vfptr,
-                                                    UFG::FormationManagerComponent::_TypeUID);
-        }
-        else if ( (v69 >> 12) & 1 )
-        {
-          v70 = (UFG::FormationManagerComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                    (UFG::SimObjectGame *)&v10->vfptr,
-                                                    UFG::FormationManagerComponent::_TypeUID);
-        }
-        else
-        {
-          v70 = (UFG::FormationManagerComponent *)UFG::SimObject::GetComponentOfType(
-                                                    (UFG::SimObject *)&v10->vfptr,
-                                                    UFG::FormationManagerComponent::_TypeUID);
-        }
-      }
       else
-      {
-        v70 = (UFG::FormationManagerComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                  (UFG::SimObjectGame *)&v10->vfptr,
+        v68 = (UFG::FormationManagerComponent *)UFG::SimObject::GetComponentOfType(
+                                                  v10,
                                                   UFG::FormationManagerComponent::_TypeUID);
-      }
-      if ( v70 )
+      if ( v68 )
       {
-        LODWORD(pre_draw_callback) = UFG::FormationManagerComponent::NumAttackersCloserThan(v70, v5, 5);
-        Render::DebugDrawContext::DrawTextA(v7, 100, 30, &UFG::qColour::White, "NumAIAttackers(%d)", pre_draw_callback);
+        LODWORD(pre_draw_callback) = UFG::FormationManagerComponent::NumAttackersCloserThan(v68, melee_distance, 5);
+        Render::DebugDrawContext::DrawTextA(
+          Context,
+          100,
+          30,
+          &UFG::qColour::White,
+          "NumAIAttackers(%d)",
+          pre_draw_callback);
       }
     }
   }

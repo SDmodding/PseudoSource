@@ -2,15 +2,13 @@
 // RVA: 0xD0450
 void __fastcall UFG::RoadNetworkVisibleArea::RoadNetworkVisibleArea(UFG::RoadNetworkVisibleArea *this)
 {
-  UFG::RoadNetworkVisibleArea *v1; // rbx
-  float v2; // xmm1_4
-  float v3; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
   float v4; // xmm1_4
   float v5; // xmm2_4
   float v6; // xmm1_4
   float v7; // xmm2_4
 
-  v1 = this;
   this->mRoadNetwork = 0i64;
   this->mPreviousVisibleRoadNetwork = 0i64;
   this->mCurrentVisibleRoadNetwork = 0i64;
@@ -30,42 +28,43 @@ void __fastcall UFG::RoadNetworkVisibleArea::RoadNetworkVisibleArea(UFG::RoadNet
   this->mPreviousClosestSubSegmentCollection.p = 0i64;
   *(_QWORD *)&this->mPreviousClosestSubSegmentCollection.size = 0i64;
   UFG::RoadNetworkVisibleAreaEdgeManager::RoadNetworkVisibleAreaEdgeManager(&this->mEdgeManager);
-  UFG::qBaseTreeRB::qBaseTreeRB(&v1->mVisitedSegments.mTree.mTree);
-  UFG::qBaseTreeRB::qBaseTreeRB(&v1->mVisitedIntersections.mTree.mTree);
-  v1->mVisibleAreaExpansionStep = 0;
-  v2 = UFG::qVector3::msZero.y;
-  v3 = UFG::qVector3::msZero.z;
-  v1->mPreviousStartPosition.x = UFG::qVector3::msZero.x;
-  v1->mPreviousStartPosition.y = v2;
-  v1->mPreviousStartPosition.z = v3;
+  UFG::qBaseTreeRB::qBaseTreeRB(&this->mVisitedSegments.mTree.mTree);
+  UFG::qBaseTreeRB::qBaseTreeRB(&this->mVisitedIntersections.mTree.mTree);
+  this->mVisibleAreaExpansionStep = 0;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
+  this->mPreviousStartPosition.x = UFG::qVector3::msZero.x;
+  this->mPreviousStartPosition.y = y;
+  this->mPreviousStartPosition.z = z;
   v4 = UFG::qVector3::msZero.y;
   v5 = UFG::qVector3::msZero.z;
-  v1->mStartPosition.x = UFG::qVector3::msZero.x;
-  v1->mStartPosition.y = v4;
-  v1->mStartPosition.z = v5;
+  this->mStartPosition.x = UFG::qVector3::msZero.x;
+  this->mStartPosition.y = v4;
+  this->mStartPosition.z = v5;
   v6 = UFG::qVector3::msDirFront.y;
   v7 = UFG::qVector3::msDirFront.z;
-  v1->mStartDirection.x = UFG::qVector3::msDirFront.x;
-  v1->mStartDirection.y = v6;
-  v1->mStartDirection.z = v7;
-  v1->mStartSpeed = 0.0;
-  v1->mForceVisibleAreaUpdate = 0;
+  this->mStartDirection.x = UFG::qVector3::msDirFront.x;
+  this->mStartDirection.y = v6;
+  this->mStartDirection.z = v7;
+  this->mStartSpeed = 0.0;
+  this->mForceVisibleAreaUpdate = 0;
 }
 
 // File Line: 87
 // RVA: 0xDCCD0
-void __fastcall UFG::RoadNetworkVisibleArea::Init(UFG::RoadNetworkVisibleArea *this, UFG::RoadNetworkResource *roadNetwork)
+void __fastcall UFG::RoadNetworkVisibleArea::Init(
+        UFG::RoadNetworkVisibleArea *this,
+        UFG::RoadNetworkResource *roadNetwork)
 {
-  UFG::RoadNetworkVisibleArea *v2; // rdi
-  float v3; // xmm1_4
-  float v4; // xmm2_4
-  char *v5; // rax
-  char *v6; // rax
-  char *v7; // rax
-  char *v8; // rax
-  unsigned int v9; // ecx
+  float y; // xmm1_4
+  float z; // xmm2_4
+  UFG::qArray<UFG::RoadNetworkNode *,0> *v5; // rax
+  UFG::qArray<UFG::RoadNetworkNode *,0> *v6; // rax
+  UFG::qArray<UFG::RoadNetworkSubSegment *,0> *v7; // rax
+  UFG::qArray<UFG::RoadNetworkSubSegment *,0> *v8; // rax
+  unsigned int size; // ecx
   unsigned int v10; // ebx
-  unsigned int v11; // edx
+  unsigned int capacity; // edx
   unsigned int v12; // edx
   unsigned int v13; // ecx
   unsigned int v14; // edx
@@ -73,114 +72,111 @@ void __fastcall UFG::RoadNetworkVisibleArea::Init(UFG::RoadNetworkVisibleArea *t
   unsigned int v16; // ecx
   unsigned int v17; // edx
   unsigned int v18; // edx
-  UFG::qArray<UFG::RoadNetworkSubSegment *,0> *v19; // r14
+  UFG::qArray<UFG::RoadNetworkSubSegment *,0> *p_mPreviousClosestSubSegmentCollection; // r14
   unsigned int v20; // eax
   unsigned int v21; // eax
 
-  v2 = this;
   *(_QWORD *)&this->mPreviousStartPosition.x = 0i64;
   this->mPreviousStartPosition.z = -1000.0;
   *(_QWORD *)&this->mStartPosition.x = 0i64;
   this->mStartPosition.z = -1000.0;
-  v3 = UFG::qVector3::msDirFront.y;
-  v4 = UFG::qVector3::msDirFront.z;
+  y = UFG::qVector3::msDirFront.y;
+  z = UFG::qVector3::msDirFront.z;
   this->mStartDirection.x = UFG::qVector3::msDirFront.x;
-  this->mStartDirection.y = v3;
-  this->mStartDirection.z = v4;
+  this->mStartDirection.y = y;
+  this->mStartDirection.z = z;
   this->mStartSpeed = 0.0;
   this->mRoadNetwork = roadNetwork;
-  v5 = UFG::qMalloc(0x10ui64, "qArray", 0i64);
+  v5 = (UFG::qArray<UFG::RoadNetworkNode *,0> *)UFG::qMalloc(0x10ui64, "qArray", 0i64);
   if ( v5 )
   {
-    *((_QWORD *)v5 + 1) = 0i64;
-    *(_QWORD *)v5 = 0i64;
+    v5->p = 0i64;
+    *(_QWORD *)&v5->size = 0i64;
   }
   else
   {
     v5 = 0i64;
   }
-  v2->mPreviousVisibleRoadNetwork = (UFG::qArray<UFG::RoadNetworkNode *,0> *)v5;
-  v6 = UFG::qMalloc(0x10ui64, "qArray", 0i64);
+  this->mPreviousVisibleRoadNetwork = v5;
+  v6 = (UFG::qArray<UFG::RoadNetworkNode *,0> *)UFG::qMalloc(0x10ui64, "qArray", 0i64);
   if ( v6 )
   {
-    *((_QWORD *)v6 + 1) = 0i64;
-    *(_QWORD *)v6 = 0i64;
+    v6->p = 0i64;
+    *(_QWORD *)&v6->size = 0i64;
   }
   else
   {
     v6 = 0i64;
   }
-  v2->mCurrentVisibleRoadNetwork = (UFG::qArray<UFG::RoadNetworkNode *,0> *)v6;
-  v7 = UFG::qMalloc(0x10ui64, "qArray", 0i64);
+  this->mCurrentVisibleRoadNetwork = v6;
+  v7 = (UFG::qArray<UFG::RoadNetworkSubSegment *,0> *)UFG::qMalloc(0x10ui64, "qArray", 0i64);
   if ( v7 )
   {
-    *((_QWORD *)v7 + 1) = 0i64;
-    *(_QWORD *)v7 = 0i64;
+    v7->p = 0i64;
+    *(_QWORD *)&v7->size = 0i64;
   }
   else
   {
     v7 = 0i64;
   }
-  v2->mPreviousVisibleSubSegments = (UFG::qArray<UFG::RoadNetworkSubSegment *,0> *)v7;
-  v8 = UFG::qMalloc(0x10ui64, "qArray", 0i64);
+  this->mPreviousVisibleSubSegments = v7;
+  v8 = (UFG::qArray<UFG::RoadNetworkSubSegment *,0> *)UFG::qMalloc(0x10ui64, "qArray", 0i64);
   if ( v8 )
   {
-    *((_QWORD *)v8 + 1) = 0i64;
-    *(_QWORD *)v8 = 0i64;
+    v8->p = 0i64;
+    *(_QWORD *)&v8->size = 0i64;
   }
   else
   {
     v8 = 0i64;
   }
-  v2->mCurrentVisibleSubSegments = (UFG::qArray<UFG::RoadNetworkSubSegment *,0> *)v8;
-  v9 = v2->mClosestNodeCollection.size;
+  this->mCurrentVisibleSubSegments = v8;
+  size = this->mClosestNodeCollection.size;
   v10 = 1;
-  if ( (signed int)(4 - v9) <= 0 )
+  if ( (int)(4 - size) <= 0 )
   {
-    if ( v9 != 4 )
+    if ( size != 4 )
     {
-      if ( v9 - 4 < v9 )
-        v2->mClosestNodeCollection.size = 4;
+      if ( size - 4 < size )
+        this->mClosestNodeCollection.size = 4;
       else
-        v2->mClosestNodeCollection.size = 0;
+        this->mClosestNodeCollection.size = 0;
     }
   }
   else
   {
-    v11 = v2->mClosestNodeCollection.capacity;
-    if ( v11 < 4 )
+    capacity = this->mClosestNodeCollection.capacity;
+    if ( capacity < 4 )
     {
-      if ( v11 )
-        v12 = 2 * v11;
+      if ( capacity )
+        v12 = 2 * capacity;
       else
         v12 = 1;
       for ( ; v12 < 4; v12 *= 2 )
         ;
-      if ( v12 <= 2 )
-        v12 = 2;
       if ( v12 - 4 > 0x10000 )
         v12 = 65540;
       UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(
-        (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&v2->mClosestNodeCollection,
+        (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&this->mClosestNodeCollection,
         v12,
         "RoadNetworkVisibleArea");
     }
-    v2->mClosestNodeCollection.size = 4;
+    this->mClosestNodeCollection.size = 4;
   }
-  v13 = v2->mClosestSubSegmentCollection.size;
-  if ( (signed int)(4 - v13) <= 0 )
+  v13 = this->mClosestSubSegmentCollection.size;
+  if ( (int)(4 - v13) <= 0 )
   {
     if ( v13 != 4 )
     {
       if ( v13 - 4 < v13 )
-        v2->mClosestSubSegmentCollection.size = 4;
+        this->mClosestSubSegmentCollection.size = 4;
       else
-        v2->mClosestSubSegmentCollection.size = 0;
+        this->mClosestSubSegmentCollection.size = 0;
     }
   }
   else
   {
-    v14 = v2->mClosestSubSegmentCollection.capacity;
+    v14 = this->mClosestSubSegmentCollection.capacity;
     if ( v14 < 4 )
     {
       if ( v14 )
@@ -189,31 +185,29 @@ void __fastcall UFG::RoadNetworkVisibleArea::Init(UFG::RoadNetworkVisibleArea *t
         v15 = 1;
       for ( ; v15 < 4; v15 *= 2 )
         ;
-      if ( v15 <= 2 )
-        v15 = 2;
       if ( v15 - 4 > 0x10000 )
         v15 = 65540;
       UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(
-        (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&v2->mClosestSubSegmentCollection,
+        (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&this->mClosestSubSegmentCollection,
         v15,
         "RoadNetworkVisibleArea");
     }
-    v2->mClosestSubSegmentCollection.size = 4;
+    this->mClosestSubSegmentCollection.size = 4;
   }
-  v16 = v2->mPreviousClosestNodeCollection.size;
-  if ( (signed int)(4 - v16) <= 0 )
+  v16 = this->mPreviousClosestNodeCollection.size;
+  if ( (int)(4 - v16) <= 0 )
   {
     if ( v16 != 4 )
     {
       if ( v16 - 4 < v16 )
-        v2->mPreviousClosestNodeCollection.size = 4;
+        this->mPreviousClosestNodeCollection.size = 4;
       else
-        v2->mPreviousClosestNodeCollection.size = 0;
+        this->mPreviousClosestNodeCollection.size = 0;
     }
   }
   else
   {
-    v17 = v2->mPreviousClosestNodeCollection.capacity;
+    v17 = this->mPreviousClosestNodeCollection.capacity;
     if ( v17 < 4 )
     {
       if ( v17 )
@@ -222,213 +216,199 @@ void __fastcall UFG::RoadNetworkVisibleArea::Init(UFG::RoadNetworkVisibleArea *t
         v18 = 1;
       for ( ; v18 < 4; v18 *= 2 )
         ;
-      if ( v18 <= 2 )
-        v18 = 2;
       if ( v18 - 4 > 0x10000 )
         v18 = 65540;
       UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(
-        (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&v2->mPreviousClosestNodeCollection,
+        (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&this->mPreviousClosestNodeCollection,
         v18,
         "RoadNetworkVisibleArea");
     }
-    v2->mPreviousClosestNodeCollection.size = 4;
+    this->mPreviousClosestNodeCollection.size = 4;
   }
-  v19 = &v2->mPreviousClosestSubSegmentCollection;
-  v20 = v2->mPreviousClosestSubSegmentCollection.size;
-  if ( (signed int)(4 - v20) <= 0 )
+  p_mPreviousClosestSubSegmentCollection = &this->mPreviousClosestSubSegmentCollection;
+  v20 = this->mPreviousClosestSubSegmentCollection.size;
+  if ( (int)(4 - v20) <= 0 )
   {
     if ( v20 != 4 )
     {
       if ( v20 - 4 < v20 )
-        v19->size = 4;
+        p_mPreviousClosestSubSegmentCollection->size = 4;
       else
-        v19->size = 0;
+        p_mPreviousClosestSubSegmentCollection->size = 0;
     }
   }
   else
   {
-    v21 = v2->mPreviousClosestSubSegmentCollection.capacity;
+    v21 = this->mPreviousClosestSubSegmentCollection.capacity;
     if ( v21 < 4 )
     {
       if ( v21 )
         v10 = 2 * v21;
       for ( ; v10 < 4; v10 *= 2 )
         ;
-      if ( v10 <= 2 )
-        v10 = 2;
       if ( v10 - 4 > 0x10000 )
         v10 = 65540;
       UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(
-        (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&v2->mPreviousClosestSubSegmentCollection,
+        (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&this->mPreviousClosestSubSegmentCollection,
         v10,
         "RoadNetworkVisibleArea");
     }
-    v19->size = 4;
+    p_mPreviousClosestSubSegmentCollection->size = 4;
   }
-  *v2->mClosestNodeCollection.p = 0i64;
-  *v2->mClosestSubSegmentCollection.p = 0i64;
-  *v2->mPreviousClosestNodeCollection.p = 0i64;
-  *v2->mPreviousClosestSubSegmentCollection.p = 0i64;
-  *((_QWORD *)v2->mClosestNodeCollection.p + 1) = 0i64;
-  *((_QWORD *)v2->mClosestSubSegmentCollection.p + 1) = 0i64;
-  *((_QWORD *)v2->mPreviousClosestNodeCollection.p + 1) = 0i64;
-  *((_QWORD *)v2->mPreviousClosestSubSegmentCollection.p + 1) = 0i64;
-  *((_QWORD *)v2->mClosestNodeCollection.p + 2) = 0i64;
-  *((_QWORD *)v2->mClosestSubSegmentCollection.p + 2) = 0i64;
-  *((_QWORD *)v2->mPreviousClosestNodeCollection.p + 2) = 0i64;
-  *((_QWORD *)v2->mPreviousClosestSubSegmentCollection.p + 2) = 0i64;
-  *((_QWORD *)v2->mClosestNodeCollection.p + 3) = 0i64;
-  *((_QWORD *)v2->mClosestSubSegmentCollection.p + 3) = 0i64;
-  *((_QWORD *)v2->mPreviousClosestNodeCollection.p + 3) = 0i64;
-  *((_QWORD *)v2->mPreviousClosestSubSegmentCollection.p + 3) = 0i64;
+  *this->mClosestNodeCollection.p = 0i64;
+  *this->mClosestSubSegmentCollection.p = 0i64;
+  *this->mPreviousClosestNodeCollection.p = 0i64;
+  *this->mPreviousClosestSubSegmentCollection.p = 0i64;
+  *((_QWORD *)this->mClosestNodeCollection.p + 1) = 0i64;
+  *((_QWORD *)this->mClosestSubSegmentCollection.p + 1) = 0i64;
+  *((_QWORD *)this->mPreviousClosestNodeCollection.p + 1) = 0i64;
+  *((_QWORD *)this->mPreviousClosestSubSegmentCollection.p + 1) = 0i64;
+  *((_QWORD *)this->mClosestNodeCollection.p + 2) = 0i64;
+  *((_QWORD *)this->mClosestSubSegmentCollection.p + 2) = 0i64;
+  *((_QWORD *)this->mPreviousClosestNodeCollection.p + 2) = 0i64;
+  *((_QWORD *)this->mPreviousClosestSubSegmentCollection.p + 2) = 0i64;
+  *((_QWORD *)this->mClosestNodeCollection.p + 3) = 0i64;
+  *((_QWORD *)this->mClosestSubSegmentCollection.p + 3) = 0i64;
+  *((_QWORD *)this->mPreviousClosestNodeCollection.p + 3) = 0i64;
+  *((_QWORD *)this->mPreviousClosestSubSegmentCollection.p + 3) = 0i64;
 }
 
 // File Line: 115
 // RVA: 0xDFC90
 void __fastcall UFG::RoadNetworkVisibleArea::Release(UFG::RoadNetworkVisibleArea *this)
 {
-  UFG::qArray<UFG::RoadNetworkNode *,0> *v1; // rdi
-  UFG::RoadNetworkVisibleArea *v2; // rbx
-  UFG::RoadNetworkNode **v3; // rcx
-  UFG::qArray<UFG::RoadNetworkNode *,0> *v4; // rdi
+  UFG::qArray<UFG::RoadNetworkNode *,0> *mPreviousVisibleRoadNetwork; // rdi
+  UFG::RoadNetworkNode **p; // rcx
+  UFG::qArray<UFG::RoadNetworkNode *,0> *mCurrentVisibleRoadNetwork; // rdi
   UFG::RoadNetworkNode **v5; // rcx
-  UFG::qArray<UFG::RoadNetworkSubSegment *,0> *v6; // rdi
+  UFG::qArray<UFG::RoadNetworkSubSegment *,0> *mPreviousVisibleSubSegments; // rdi
   UFG::RoadNetworkSubSegment **v7; // rcx
-  UFG::qArray<UFG::RoadNetworkSubSegment *,0> *v8; // rdi
+  UFG::qArray<UFG::RoadNetworkSubSegment *,0> *mCurrentVisibleSubSegments; // rdi
   UFG::RoadNetworkSubSegment **v9; // rcx
   UFG::RoadNetworkNode **v10; // rcx
   UFG::RoadNetworkSubSegment **v11; // rcx
   UFG::RoadNetworkNode **v12; // rcx
   UFG::RoadNetworkSubSegment **v13; // rcx
 
-  v1 = this->mPreviousVisibleRoadNetwork;
-  v2 = this;
-  if ( v1 )
+  mPreviousVisibleRoadNetwork = this->mPreviousVisibleRoadNetwork;
+  if ( mPreviousVisibleRoadNetwork )
   {
-    v3 = v1->p;
-    if ( v3 )
-      operator delete[](v3);
-    v1->p = 0i64;
-    *(_QWORD *)&v1->size = 0i64;
-    operator delete[](v1);
+    p = mPreviousVisibleRoadNetwork->p;
+    if ( p )
+      operator delete[](p);
+    mPreviousVisibleRoadNetwork->p = 0i64;
+    *(_QWORD *)&mPreviousVisibleRoadNetwork->size = 0i64;
+    operator delete[](mPreviousVisibleRoadNetwork);
   }
-  v4 = v2->mCurrentVisibleRoadNetwork;
-  if ( v4 )
+  mCurrentVisibleRoadNetwork = this->mCurrentVisibleRoadNetwork;
+  if ( mCurrentVisibleRoadNetwork )
   {
-    v5 = v4->p;
+    v5 = mCurrentVisibleRoadNetwork->p;
     if ( v5 )
       operator delete[](v5);
-    v4->p = 0i64;
-    *(_QWORD *)&v4->size = 0i64;
-    operator delete[](v4);
+    mCurrentVisibleRoadNetwork->p = 0i64;
+    *(_QWORD *)&mCurrentVisibleRoadNetwork->size = 0i64;
+    operator delete[](mCurrentVisibleRoadNetwork);
   }
-  v6 = v2->mPreviousVisibleSubSegments;
-  if ( v6 )
+  mPreviousVisibleSubSegments = this->mPreviousVisibleSubSegments;
+  if ( mPreviousVisibleSubSegments )
   {
-    v7 = v6->p;
+    v7 = mPreviousVisibleSubSegments->p;
     if ( v7 )
       operator delete[](v7);
-    v6->p = 0i64;
-    *(_QWORD *)&v6->size = 0i64;
-    operator delete[](v6);
+    mPreviousVisibleSubSegments->p = 0i64;
+    *(_QWORD *)&mPreviousVisibleSubSegments->size = 0i64;
+    operator delete[](mPreviousVisibleSubSegments);
   }
-  v8 = v2->mCurrentVisibleSubSegments;
-  if ( v8 )
+  mCurrentVisibleSubSegments = this->mCurrentVisibleSubSegments;
+  if ( mCurrentVisibleSubSegments )
   {
-    v9 = v8->p;
+    v9 = mCurrentVisibleSubSegments->p;
     if ( v9 )
       operator delete[](v9);
-    v8->p = 0i64;
-    *(_QWORD *)&v8->size = 0i64;
-    operator delete[](v8);
+    mCurrentVisibleSubSegments->p = 0i64;
+    *(_QWORD *)&mCurrentVisibleSubSegments->size = 0i64;
+    operator delete[](mCurrentVisibleSubSegments);
   }
-  v10 = v2->mClosestNodeCollection.p;
+  v10 = this->mClosestNodeCollection.p;
   if ( v10 )
     operator delete[](v10);
-  v2->mClosestNodeCollection.p = 0i64;
-  *(_QWORD *)&v2->mClosestNodeCollection.size = 0i64;
-  v11 = v2->mClosestSubSegmentCollection.p;
+  this->mClosestNodeCollection.p = 0i64;
+  *(_QWORD *)&this->mClosestNodeCollection.size = 0i64;
+  v11 = this->mClosestSubSegmentCollection.p;
   if ( v11 )
     operator delete[](v11);
-  v2->mClosestSubSegmentCollection.p = 0i64;
-  *(_QWORD *)&v2->mClosestSubSegmentCollection.size = 0i64;
-  v12 = v2->mPreviousClosestNodeCollection.p;
+  this->mClosestSubSegmentCollection.p = 0i64;
+  *(_QWORD *)&this->mClosestSubSegmentCollection.size = 0i64;
+  v12 = this->mPreviousClosestNodeCollection.p;
   if ( v12 )
     operator delete[](v12);
-  v2->mPreviousClosestNodeCollection.p = 0i64;
-  *(_QWORD *)&v2->mPreviousClosestNodeCollection.size = 0i64;
-  v13 = v2->mPreviousClosestSubSegmentCollection.p;
+  this->mPreviousClosestNodeCollection.p = 0i64;
+  *(_QWORD *)&this->mPreviousClosestNodeCollection.size = 0i64;
+  v13 = this->mPreviousClosestSubSegmentCollection.p;
   if ( v13 )
     operator delete[](v13);
-  v2->mPreviousClosestSubSegmentCollection.p = 0i64;
-  *(_QWORD *)&v2->mPreviousClosestSubSegmentCollection.size = 0i64;
-  UFG::RoadNetworkVisibleAreaEdgeManager::Clear(&v2->mEdgeManager);
+  this->mPreviousClosestSubSegmentCollection.p = 0i64;
+  *(_QWORD *)&this->mPreviousClosestSubSegmentCollection.size = 0i64;
+  UFG::RoadNetworkVisibleAreaEdgeManager::Clear(&this->mEdgeManager);
 }
 
 // File Line: 182
 // RVA: 0xDF970
 void __fastcall UFG::RoadNetworkVisibleArea::Reinitialize(UFG::RoadNetworkVisibleArea *this)
 {
-  UFG::RoadNetworkVisibleArea *v1; // rdi
-  unsigned int v2; // er8
+  unsigned int i; // r8d
   UFG::RoadNetworkSubSegment *v3; // r9
-  unsigned __int16 v4; // ax
-  unsigned int i; // er8
+  unsigned __int16 mActive; // ax
+  unsigned int j; // r8d
   UFG::RoadNetworkNode *v6; // r9
   unsigned __int16 v7; // ax
-  unsigned int j; // er8
+  unsigned int k; // r8d
   UFG::RoadNetworkSubSegment *v9; // r9
   unsigned __int16 v10; // ax
-  unsigned int k; // er8
+  unsigned int m; // r8d
   UFG::RoadNetworkNode *v12; // r9
   unsigned __int16 v13; // ax
-  UFG::qBaseTreeRB *l; // rax
-  UFG::qBaseNodeRB *v15; // rdx
+  UFG::qBaseTreeRB *n; // rax
+  UFG::qBaseNodeRB *mParent; // rdx
   __int16 v16; // cx
-  Render::SkinningCacheNode *v17; // rbx
+  Render::SkinningCacheNode *Head; // rbx
   Render::SkinningCacheNode *v18; // rbx
-  float v19; // xmm1_4
-  float v20; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
 
-  v1 = this;
   if ( this->mRoadNetwork )
   {
-    v2 = 0;
-    if ( this->mCurrentVisibleSubSegments->size )
+    for ( i = 0; i < this->mCurrentVisibleSubSegments->size; ++i )
     {
+      v3 = this->mCurrentVisibleSubSegments->p[i];
+      mActive = v3->mActive;
       do
-      {
-        v3 = this->mCurrentVisibleSubSegments->p[v2];
-        v4 = v3->mActive;
-        do
-          --v4;
-        while ( v4 );
-        v3->mActive = 0;
-        ++v2;
-      }
-      while ( v2 < this->mCurrentVisibleSubSegments->size );
+        --mActive;
+      while ( mActive );
+      v3->mActive = 0;
     }
-    for ( i = 0; i < this->mCurrentVisibleRoadNetwork->size; ++i )
+    for ( j = 0; j < this->mCurrentVisibleRoadNetwork->size; ++j )
     {
-      v6 = this->mCurrentVisibleRoadNetwork->p[i];
+      v6 = this->mCurrentVisibleRoadNetwork->p[j];
       v7 = v6->mActive;
       do
         --v7;
       while ( v7 );
       v6->mActive = 0;
     }
-    for ( j = 0; j < this->mPreviousVisibleSubSegments->size; ++j )
+    for ( k = 0; k < this->mPreviousVisibleSubSegments->size; ++k )
     {
-      v9 = this->mPreviousVisibleSubSegments->p[j];
+      v9 = this->mPreviousVisibleSubSegments->p[k];
       v10 = v9->mActive;
       do
         --v10;
       while ( v10 );
       v9->mActive = 0;
     }
-    for ( k = 0; k < this->mPreviousVisibleRoadNetwork->size; ++k )
+    for ( m = 0; m < this->mPreviousVisibleRoadNetwork->size; ++m )
     {
-      v12 = this->mPreviousVisibleRoadNetwork->p[k];
+      v12 = this->mPreviousVisibleRoadNetwork->p[m];
       v13 = v12->mActive;
       do
         --v13;
@@ -460,45 +440,45 @@ void __fastcall UFG::RoadNetworkVisibleArea::Reinitialize(UFG::RoadNetworkVisibl
     this->mPreviousClosestNodeFromAllTypes = 0i64;
     this->mPreviousClosestSubSegmentFromAllTypes = 0i64;
     UFG::RoadNetworkVisibleAreaEdgeManager::Clear(&this->mEdgeManager);
-    v1->mVisibleAreaExpansionStep = 0;
-    for ( l = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v1->mVisitedIntersections);
-          l;
-          l = UFG::qBaseTreeRB::GetNext(&v1->mVisitedIntersections.mTree.mTree, &l->mRoot) )
+    this->mVisibleAreaExpansionStep = 0;
+    for ( n = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&this->mVisitedIntersections);
+          n;
+          n = UFG::qBaseTreeRB::GetNext(&this->mVisitedIntersections.mTree.mTree, &n->mRoot) )
     {
-      v15 = l->mNULL.mParent;
-      v16 = WORD1(v15->mParent);
+      mParent = n->mNULL.mParent;
+      v16 = WORD1(mParent->mParent);
       do
         --v16;
       while ( v16 );
-      WORD1(v15->mParent) = 0;
+      WORD1(mParent->mParent) = 0;
     }
-    while ( v1->mVisitedSegments.mTree.mTree.mCount )
+    while ( this->mVisitedSegments.mTree.mTree.mCount )
     {
-      v17 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v1->mVisitedSegments);
+      Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&this->mVisitedSegments);
       UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
-        (UFG::qBaseTreeVariableRB<unsigned __int64> *)&v1->mVisitedSegments,
-        &v17->mNode);
-      operator delete[](v17);
+        (UFG::qBaseTreeVariableRB<unsigned __int64> *)&this->mVisitedSegments,
+        &Head->mNode);
+      operator delete[](Head);
     }
-    while ( v1->mVisitedIntersections.mTree.mTree.mCount )
+    while ( this->mVisitedIntersections.mTree.mTree.mCount )
     {
-      v18 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v1->mVisitedIntersections);
+      v18 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&this->mVisitedIntersections);
       UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
-        (UFG::qBaseTreeVariableRB<unsigned __int64> *)&v1->mVisitedIntersections,
+        (UFG::qBaseTreeVariableRB<unsigned __int64> *)&this->mVisitedIntersections,
         &v18->mNode);
       operator delete[](v18);
     }
-    *(_QWORD *)&v1->mPreviousStartPosition.x = 0i64;
-    v1->mPreviousStartPosition.z = -1000.0;
-    *(_QWORD *)&v1->mStartPosition.x = 0i64;
-    v1->mStartPosition.z = -1000.0;
-    v19 = UFG::qVector3::msDirFront.y;
-    v20 = UFG::qVector3::msDirFront.z;
-    v1->mStartDirection.x = UFG::qVector3::msDirFront.x;
-    v1->mStartDirection.y = v19;
-    v1->mStartDirection.z = v20;
-    v1->mStartSpeed = 0.0;
-    v1->mForceVisibleAreaUpdate = 1;
+    *(_QWORD *)&this->mPreviousStartPosition.x = 0i64;
+    this->mPreviousStartPosition.z = -1000.0;
+    *(_QWORD *)&this->mStartPosition.x = 0i64;
+    this->mStartPosition.z = -1000.0;
+    y = UFG::qVector3::msDirFront.y;
+    z = UFG::qVector3::msDirFront.z;
+    this->mStartDirection.x = UFG::qVector3::msDirFront.x;
+    this->mStartDirection.y = y;
+    this->mStartDirection.z = z;
+    this->mStartSpeed = 0.0;
+    this->mForceVisibleAreaUpdate = 1;
   }
 }
 
@@ -506,43 +486,41 @@ void __fastcall UFG::RoadNetworkVisibleArea::Reinitialize(UFG::RoadNetworkVisibl
 // RVA: 0xD38F0
 void __fastcall UFG::RoadNetworkVisibleArea::ClearLastVisibleArea(UFG::RoadNetworkVisibleArea *this)
 {
-  __int64 v1; // r8
-  UFG::RoadNetworkVisibleArea *v2; // rbp
+  __int64 size; // r8
   __int64 v3; // rdx
   UFG::RoadNetworkSubSegment *v4; // r9
-  unsigned __int16 v5; // ax
+  unsigned __int16 mActive; // ax
   unsigned int v6; // ecx
   __int64 v7; // rdi
   __int64 v8; // rsi
   UFG::RoadNetworkNode *v9; // rbx
-  unsigned int v10; // edx
+  unsigned int mIndex; // edx
   unsigned __int16 v11; // ax
   UFG::qBaseTreeRB *i; // rax
-  UFG::qBaseNodeRB *v13; // rdx
+  UFG::qBaseNodeRB *mParent; // rdx
   __int16 v14; // cx
-  Render::SkinningCacheNode *v15; // rbx
+  Render::SkinningCacheNode *Head; // rbx
   Render::SkinningCacheNode *v16; // rbx
 
-  v1 = this->mPreviousVisibleSubSegments->size;
-  v2 = this;
-  if ( (_DWORD)v1 )
+  size = this->mPreviousVisibleSubSegments->size;
+  if ( (_DWORD)size )
   {
     v3 = 0i64;
     do
     {
       v4 = this->mPreviousVisibleSubSegments->p[v3];
-      v5 = v4->mActive;
-      if ( v5 )
+      mActive = v4->mActive;
+      if ( mActive )
       {
         do
-          --v5;
-        while ( v5 );
+          --mActive;
+        while ( mActive );
         v4->mActive = 0;
       }
       ++v3;
-      --v1;
+      --size;
     }
-    while ( v1 );
+    while ( size );
   }
   v6 = this->mPreviousVisibleRoadNetwork->size;
   if ( v6 )
@@ -551,9 +529,9 @@ void __fastcall UFG::RoadNetworkVisibleArea::ClearLastVisibleArea(UFG::RoadNetwo
     v8 = v6;
     do
     {
-      v9 = v2->mPreviousVisibleRoadNetwork->p[v7];
-      v10 = v9->mIndex;
-      if ( !v10 || !UFG::qBaseTreeRB::Get(&v2->mVisitedIntersections.mTree.mTree, v10) )
+      v9 = this->mPreviousVisibleRoadNetwork->p[v7];
+      mIndex = v9->mIndex;
+      if ( !mIndex || !UFG::qBaseTreeRB::Get(&this->mVisitedIntersections.mTree.mTree, mIndex) )
       {
         v11 = v9->mActive;
         do
@@ -566,485 +544,465 @@ void __fastcall UFG::RoadNetworkVisibleArea::ClearLastVisibleArea(UFG::RoadNetwo
     }
     while ( v8 );
   }
-  for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v2->mVisitedIntersections);
+  for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&this->mVisitedIntersections);
         i;
-        i = UFG::qBaseTreeRB::GetNext(&v2->mVisitedIntersections.mTree.mTree, &i->mRoot) )
+        i = UFG::qBaseTreeRB::GetNext(&this->mVisitedIntersections.mTree.mTree, &i->mRoot) )
   {
-    v13 = i->mNULL.mParent;
-    v14 = WORD1(v13->mParent);
+    mParent = i->mNULL.mParent;
+    v14 = WORD1(mParent->mParent);
     do
       --v14;
     while ( v14 );
-    WORD1(v13->mParent) = 0;
+    WORD1(mParent->mParent) = 0;
   }
-  while ( v2->mVisitedSegments.mTree.mTree.mCount )
+  while ( this->mVisitedSegments.mTree.mTree.mCount )
   {
-    v15 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v2->mVisitedSegments);
+    Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&this->mVisitedSegments);
     UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
-      (UFG::qBaseTreeVariableRB<unsigned __int64> *)&v2->mVisitedSegments,
-      &v15->mNode);
-    operator delete[](v15);
+      (UFG::qBaseTreeVariableRB<unsigned __int64> *)&this->mVisitedSegments,
+      &Head->mNode);
+    operator delete[](Head);
   }
-  while ( v2->mVisitedIntersections.mTree.mTree.mCount )
+  while ( this->mVisitedIntersections.mTree.mTree.mCount )
   {
-    v16 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v2->mVisitedIntersections);
+    v16 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&this->mVisitedIntersections);
     UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
-      (UFG::qBaseTreeVariableRB<unsigned __int64> *)&v2->mVisitedIntersections,
+      (UFG::qBaseTreeVariableRB<unsigned __int64> *)&this->mVisitedIntersections,
       &v16->mNode);
     operator delete[](v16);
   }
-  UFG::RoadNetworkVisibleAreaEdgeManager::Clear(&v2->mEdgeManager);
-  v2->mVisibleAreaExpansionStep = 0;
+  UFG::RoadNetworkVisibleAreaEdgeManager::Clear(&this->mEdgeManager);
+  this->mVisibleAreaExpansionStep = 0;
 }
 
 // File Line: 358
 // RVA: 0xE1060
-bool __fastcall UFG::RoadNetworkVisibleArea::UpdateClosestRoadNetworkNodes(UFG::RoadNetworkVisibleArea *this)
+char __fastcall UFG::RoadNetworkVisibleArea::UpdateClosestRoadNetworkNodes(UFG::RoadNetworkVisibleArea *this)
 {
   float v1; // xmm7_4
   unsigned int v2; // edi
-  UFG::RoadNetworkVisibleArea *v3; // rbx
-  unsigned int v4; // er14
+  unsigned int v4; // r14d
   __int64 v5; // rsi
-  float v6; // xmm10_4
+  float x; // xmm10_4
   float v7; // xmm8_4
-  float v8; // xmm11_4
-  float v9; // xmm12_4
-  UFG::RoadNetworkResource *v10; // rcx
-  UFG::RoadNetworkSegment *v11; // rax
-  UFG::RoadNetworkSegment *v12; // rbp
+  float y; // xmm11_4
+  float z; // xmm12_4
+  UFG::RoadNetworkResource *mRoadNetwork; // rcx
+  UFG::RoadNetworkSegment *ClosestNode; // rax
+  UFG::RoadNetworkNode *v12; // rbp
   float v13; // xmm6_4
-  UFG::RoadNetworkSubSegment *v14; // rax
-  float *v15; // rcx
-  UFG::RoadNetworkNode *v16; // rcx
-  bool result; // al
-  UFG::RoadNetworkSubSegment *v18; // rcx
-  char *v19; // rcx
-  signed __int64 v20; // rdx
-  UFG::qVector3 nodePos; // [rsp+30h] [rbp-98h]
-  UFG::qVector3 pos; // [rsp+40h] [rbp-88h]
+  UFG::RoadNetworkSubSegment *ClosestSubSegment; // rax
+  UFG::RoadNetworkNode *v15; // rcx
+  UFG::RoadNetworkNode *mClosestNodeFromAllTypes; // rcx
+  char result; // al
+  UFG::RoadNetworkSubSegment *mClosestSubSegmentFromAllTypes; // rcx
+  UFG::RoadNetworkSubSegment **p; // rcx
+  char *v20; // rdx
+  UFG::qVector3 nodePos; // [rsp+30h] [rbp-98h] BYREF
+  UFG::qVector3 pos; // [rsp+40h] [rbp-88h] BYREF
 
   v1 = FLOAT_3_4028235e38;
   v2 = 0;
-  v3 = this;
   v4 = 0;
   v5 = 0i64;
-  v6 = this->mStartPosition.x;
-  pos.x = this->mStartPosition.x;
+  x = this->mStartPosition.x;
+  pos.x = x;
   v7 = FLOAT_3_4028235e38;
-  v8 = this->mStartPosition.y;
-  v9 = this->mStartPosition.z;
-  pos.y = this->mStartPosition.y;
-  pos.z = v9;
+  y = this->mStartPosition.y;
+  z = this->mStartPosition.z;
+  pos.y = y;
+  pos.z = z;
   do
   {
-    v10 = v3->mRoadNetwork;
+    mRoadNetwork = this->mRoadNetwork;
     nodePos = UFG::qVector3::msZero;
-    v11 = (UFG::RoadNetworkSegment *)UFG::RoadNetworkResource::GetClosestNode(v10, &pos, v4, &nodePos, 0i64);
-    v12 = v11;
-    v13 = (float)((float)((float)(nodePos.y - v8) * (float)(nodePos.y - v8))
-                + (float)((float)(nodePos.x - v6) * (float)(nodePos.x - v6)))
-        + (float)((float)(nodePos.z - v9) * (float)(nodePos.z - v9));
-    if ( v11 && v13 <= 19600.0 )
+    ClosestNode = (UFG::RoadNetworkSegment *)UFG::RoadNetworkResource::GetClosestNode(
+                                               mRoadNetwork,
+                                               &pos,
+                                               v4,
+                                               &nodePos,
+                                               0i64);
+    v12 = ClosestNode;
+    v13 = (float)((float)((float)(nodePos.y - y) * (float)(nodePos.y - y))
+                + (float)((float)(nodePos.x - x) * (float)(nodePos.x - x)))
+        + (float)((float)(nodePos.z - z) * (float)(nodePos.z - z));
+    if ( ClosestNode && v13 <= 19600.0 )
     {
-      if ( v11->mType.mValue )
+      if ( ClosestNode->mType.mValue )
       {
-        v3->mClosestSubSegmentCollection.p[v5] = 0i64;
-        v3->mClosestNodeCollection.p[v5] = (UFG::RoadNetworkNode *)&v11->mType;
-        v15 = (float *)&v3->mClosestNodeCollection.p[v5]->mType.mValue;
-        if ( (float)((float)((float)((float)(v15[4] - v8) * (float)(v15[4] - v8))
-                           + (float)((float)(v15[3] - v6) * (float)(v15[3] - v6)))
-                   + (float)((float)(v15[5] - v9) * (float)(v15[5] - v9))) < v1 )
+        this->mClosestSubSegmentCollection.p[v5] = 0i64;
+        this->mClosestNodeCollection.p[v5] = ClosestNode;
+        v15 = this->mClosestNodeCollection.p[v5];
+        if ( (float)((float)((float)((float)(v15->mPosition.y - y) * (float)(v15->mPosition.y - y))
+                           + (float)((float)(v15->mPosition.x - x) * (float)(v15->mPosition.x - x)))
+                   + (float)((float)(v15->mPosition.z - z) * (float)(v15->mPosition.z - z))) < v1 )
         {
-          v1 = (float)((float)((float)(v15[4] - v8) * (float)(v15[4] - v8))
-                     + (float)((float)(v15[3] - v6) * (float)(v15[3] - v6)))
-             + (float)((float)(v15[5] - v9) * (float)(v15[5] - v9));
-          v3->mClosestNodeFromAllTypes = (UFG::RoadNetworkNode *)v15;
+          v1 = (float)((float)((float)(v15->mPosition.y - y) * (float)(v15->mPosition.y - y))
+                     + (float)((float)(v15->mPosition.x - x) * (float)(v15->mPosition.x - x)))
+             + (float)((float)(v15->mPosition.z - z) * (float)(v15->mPosition.z - z));
+          this->mClosestNodeFromAllTypes = v15;
         }
       }
       else
       {
-        v14 = UFG::RoadNetworkSegment::GetClosestSubSegment(v11, &pos);
-        v3->mClosestSubSegmentCollection.p[v5] = v14;
-        v3->mClosestNodeCollection.p[v5] = (UFG::RoadNetworkNode *)&v12->mType;
+        ClosestSubSegment = UFG::RoadNetworkSegment::GetClosestSubSegment(ClosestNode, &pos);
+        this->mClosestSubSegmentCollection.p[v5] = ClosestSubSegment;
+        this->mClosestNodeCollection.p[v5] = v12;
         if ( v13 < v7 )
         {
           v7 = v13;
-          v3->mClosestSubSegmentFromAllTypes = v14;
+          this->mClosestSubSegmentFromAllTypes = ClosestSubSegment;
         }
         if ( v13 < v1 )
         {
           v1 = v13;
-          v3->mClosestNodeFromAllTypes = (UFG::RoadNetworkNode *)&v12->mType;
+          this->mClosestNodeFromAllTypes = v12;
         }
       }
     }
     else
     {
-      v3->mClosestNodeCollection.p[v5] = 0i64;
-      v3->mClosestSubSegmentCollection.p[v5] = 0i64;
+      this->mClosestNodeCollection.p[v5] = 0i64;
+      this->mClosestSubSegmentCollection.p[v5] = 0i64;
     }
     ++v4;
     ++v5;
   }
   while ( v4 < 4 );
-  v16 = v3->mClosestNodeFromAllTypes;
-  if ( v16 )
+  mClosestNodeFromAllTypes = this->mClosestNodeFromAllTypes;
+  if ( !mClosestNodeFromAllTypes )
+    return this->mPreviousClosestNodeFromAllTypes != 0i64;
+  if ( mClosestNodeFromAllTypes == this->mPreviousClosestNodeFromAllTypes )
   {
-    if ( v16 == v3->mPreviousClosestNodeFromAllTypes )
+    if ( mClosestNodeFromAllTypes->mType.mValue
+      || (mClosestSubSegmentFromAllTypes = this->mClosestSubSegmentFromAllTypes,
+          result = mClosestSubSegmentFromAllTypes != this->mPreviousClosestSubSegmentFromAllTypes,
+          mClosestSubSegmentFromAllTypes == this->mPreviousClosestSubSegmentFromAllTypes) )
     {
-      if ( v16->mType.mValue
-        || (v18 = v3->mClosestSubSegmentFromAllTypes,
-            result = v18 != v3->mPreviousClosestSubSegmentFromAllTypes,
-            v18 == v3->mPreviousClosestSubSegmentFromAllTypes) )
+      p = this->mClosestSubSegmentCollection.p;
+      v20 = (char *)((char *)this->mPreviousClosestSubSegmentCollection.p - (char *)p);
+      do
       {
-        v19 = (char *)v3->mClosestSubSegmentCollection.p;
-        v20 = (char *)v3->mPreviousClosestSubSegmentCollection.p - v19;
-        do
-        {
-          result = *(_QWORD *)v19 != *(_QWORD *)&v19[v20];
-          if ( result )
-            break;
-          ++v2;
-          v19 += 8;
-        }
-        while ( v2 < 4 );
+        result = *p != *(UFG::RoadNetworkSubSegment **)((char *)p + (_QWORD)v20);
+        if ( *p != *(UFG::RoadNetworkSubSegment **)((char *)p + (_QWORD)v20) )
+          break;
+        ++v2;
+        ++p;
       }
-      else
-      {
-        v3->mPreviousClosestSubSegmentFromAllTypes = v18;
-      }
+      while ( v2 < 4 );
     }
     else
     {
-      v3->mPreviousClosestNodeFromAllTypes = v16;
-      if ( v16->mType.mValue == 1 )
-        v3->mPreviousClosestSubSegmentFromAllTypes = 0i64;
-      else
-        v3->mPreviousClosestSubSegmentFromAllTypes = v3->mClosestSubSegmentFromAllTypes;
-      result = 1;
+      this->mPreviousClosestSubSegmentFromAllTypes = mClosestSubSegmentFromAllTypes;
     }
   }
   else
   {
-    result = 0;
-    if ( v3->mPreviousClosestNodeFromAllTypes )
-      result = 1;
+    this->mPreviousClosestNodeFromAllTypes = mClosestNodeFromAllTypes;
+    if ( mClosestNodeFromAllTypes->mType.mValue == 1 )
+      this->mPreviousClosestSubSegmentFromAllTypes = 0i64;
+    else
+      this->mPreviousClosestSubSegmentFromAllTypes = this->mClosestSubSegmentFromAllTypes;
+    return 1;
   }
   return result;
 }
 
 // File Line: 486
 // RVA: 0xE0FC0
-bool __fastcall UFG::RoadNetworkVisibleArea::Update(UFG::RoadNetworkVisibleArea *this, UFG::qArray<UFG::RoadNetworkSubSegment *,0> *deactivateSubSegments, UFG::qArray<UFG::RoadNetworkSubSegment *,0> *activateSubSegments)
+// attributes: thunk
+bool __fastcall UFG::RoadNetworkVisibleArea::Update(
+        UFG::RoadNetworkVisibleArea *this,
+        UFG::qArray<UFG::RoadNetworkSubSegment *,0> *deactivateSubSegments,
+        UFG::qArray<UFG::RoadNetworkSubSegment *,0> *activateSubSegments)
 {
   return UFG::RoadNetworkVisibleArea::UpdateByEdges(this, deactivateSubSegments, activateSubSegments);
 }
 
 // File Line: 492
 // RVA: 0xDBD10
-UFG::qVector3 *__fastcall UFG::RoadNetworkVisibleArea::GetSubjectPosition(UFG::RoadNetworkVisibleArea *this, UFG::qVector3 *result)
+UFG::qVector3 *__fastcall UFG::RoadNetworkVisibleArea::GetSubjectPosition(
+        UFG::RoadNetworkVisibleArea *this,
+        UFG::qVector3 *result)
 {
-  UFG::TransformNodeComponent *v2; // rdi
-  UFG::qVector3 *v3; // rbx
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rdi
   UFG::qVector3 *v4; // rax
-  float v5; // xmm1_4
-  float v6; // xmm0_4
+  float y; // xmm1_4
+  float z; // xmm0_4
 
-  v2 = (UFG::TransformNodeComponent *)LocalPlayer;
-  v3 = result;
+  m_pTransformNodeComponent = (UFG::TransformNodeComponent *)LocalPlayer;
   if ( LocalPlayer )
-    v2 = LocalPlayer->m_pTransformNodeComponent;
-  if ( v2 )
+    m_pTransformNodeComponent = LocalPlayer->m_pTransformNodeComponent;
+  if ( m_pTransformNodeComponent )
   {
-    UFG::TransformNodeComponent::UpdateWorldTransform(v2);
-    v3->x = v2->mWorldTransform.v3.x;
-    v3->y = v2->mWorldTransform.v3.y;
-    v3->z = v2->mWorldTransform.v3.z;
-    v4 = v3;
+    UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+    result->x = m_pTransformNodeComponent->mWorldTransform.v3.x;
+    result->y = m_pTransformNodeComponent->mWorldTransform.v3.y;
+    result->z = m_pTransformNodeComponent->mWorldTransform.v3.z;
+    return result;
   }
   else
   {
-    v5 = UFG::qVector3::msZero.y;
+    y = UFG::qVector3::msZero.y;
     v4 = result;
     result->x = UFG::qVector3::msZero.x;
-    v6 = UFG::qVector3::msZero.z;
-    result->y = v5;
-    result->z = v6;
+    z = UFG::qVector3::msZero.z;
+    result->y = y;
+    result->z = z;
   }
   return v4;
 }
 
 // File Line: 528
 // RVA: 0xDBDA0
-void __fastcall UFG::RoadNetworkVisibleArea::GetSubjectSpeed(UFG::RoadNetworkVisibleArea *this)
+double __fastcall UFG::RoadNetworkVisibleArea::GetSubjectSpeed(UFG::RoadNetworkVisibleArea *this)
 {
   UFG::SimObjectCharacter *v1; // rbx
-  unsigned __int16 v2; // cx
+  signed __int16 m_Flags; // cx
   UFG::CharacterSubjectComponent *v3; // rax
-  unsigned __int16 v4; // cx
-  UFG::CharacterOccupantComponent *v5; // rax
-  UFG::SimObjectGame *v6; // rax
-  unsigned __int16 v7; // dx
-  UFG::PhysicsMoverInterface *v8; // rax
+  double result; // xmm0_8
+  __int16 v5; // cx
+  UFG::CharacterOccupantComponent *m_pComponent; // rax
+  UFG::SimObjectGame *CurrentVehicle; // rax
+  __int16 v8; // dx
+  UFG::PhysicsMoverInterface *ComponentOfTypeHK; // rax
 
   v1 = LocalPlayer;
-  if ( LocalPlayer )
+  if ( !LocalPlayer )
+    return 0.0;
+  m_Flags = LocalPlayer->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 )
+    v3 = UFG::SimObjectCharacter::GetComponent<UFG::CharacterSubjectComponent>(LocalPlayer);
+  else
+    v3 = (UFG::CharacterSubjectComponent *)(m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+                                          ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                              LocalPlayer,
+                                              UFG::CharacterSubjectComponent::_TypeUID)
+                                          : UFG::SimObject::GetComponentOfType(
+                                              LocalPlayer,
+                                              UFG::CharacterSubjectComponent::_TypeUID));
+  if ( !v3 )
+    return 0.0;
+  result = ((double (__fastcall *)(UFG::CharacterSubjectComponent *))v3->vfptr[28].__vecDelDtor)(v3);
+  v5 = v1->m_Flags;
+  if ( (v5 & 0x4000) != 0 )
   {
-    v2 = LocalPlayer->m_Flags;
-    if ( (v2 >> 14) & 1 )
+    m_pComponent = (UFG::CharacterOccupantComponent *)v1->m_Components.p[44].m_pComponent;
+  }
+  else if ( v5 < 0 || (v5 & 0x2000) != 0 || (v5 & 0x1000) != 0 )
+  {
+    m_pComponent = (UFG::CharacterOccupantComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                        v1,
+                                                        UFG::CharacterOccupantComponent::_TypeUID);
+  }
+  else
+  {
+    m_pComponent = (UFG::CharacterOccupantComponent *)UFG::SimObject::GetComponentOfType(
+                                                        v1,
+                                                        UFG::CharacterOccupantComponent::_TypeUID);
+  }
+  if ( m_pComponent )
+  {
+    CurrentVehicle = (UFG::SimObjectGame *)UFG::CharacterOccupantComponent::GetCurrentVehicle(m_pComponent);
+    if ( CurrentVehicle )
     {
-      v3 = UFG::SimObjectCharacter::GetComponent<UFG::CharacterSubjectComponent>(LocalPlayer);
-    }
-    else if ( (v2 & 0x8000u) == 0 )
-    {
-      if ( (v2 >> 13) & 1 )
-        v3 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                 (UFG::SimObjectGame *)&LocalPlayer->vfptr,
-                                                 UFG::CharacterSubjectComponent::_TypeUID);
-      else
-        v3 = (UFG::CharacterSubjectComponent *)((v2 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                   (UFG::SimObjectGame *)&LocalPlayer->vfptr,
-                                                                   UFG::CharacterSubjectComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&LocalPlayer->vfptr, UFG::CharacterSubjectComponent::_TypeUID));
-    }
-    else
-    {
-      v3 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                               (UFG::SimObjectGame *)&LocalPlayer->vfptr,
-                                               UFG::CharacterSubjectComponent::_TypeUID);
-    }
-    if ( v3 )
-    {
-      ((void (__fastcall *)(UFG::CharacterSubjectComponent *))v3->vfptr[28].__vecDelDtor)(v3);
-      v4 = v1->m_Flags;
-      if ( (v4 >> 14) & 1 )
+      v8 = CurrentVehicle->m_Flags;
+      if ( (v8 & 0x4000) == 0 )
       {
-        v5 = (UFG::CharacterOccupantComponent *)v1->m_Components.p[44].m_pComponent;
-      }
-      else if ( (v4 & 0x8000u) == 0 )
-      {
-        if ( (v4 >> 13) & 1 )
-          v5 = (UFG::CharacterOccupantComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                    (UFG::SimObjectGame *)&v1->vfptr,
-                                                    UFG::CharacterOccupantComponent::_TypeUID);
-        else
-          v5 = (UFG::CharacterOccupantComponent *)((v4 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                      (UFG::SimObjectGame *)&v1->vfptr,
-                                                                      UFG::CharacterOccupantComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v1->vfptr, UFG::CharacterOccupantComponent::_TypeUID));
-      }
-      else
-      {
-        v5 = (UFG::CharacterOccupantComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                  (UFG::SimObjectGame *)&v1->vfptr,
-                                                  UFG::CharacterOccupantComponent::_TypeUID);
-      }
-      if ( v5 )
-      {
-        v6 = (UFG::SimObjectGame *)UFG::CharacterOccupantComponent::GetCurrentVehicle(v5);
-        if ( v6 )
+        if ( v8 >= 0 )
         {
-          v7 = v6->m_Flags;
-          if ( !((v7 >> 14) & 1) )
-          {
-            if ( (v7 & 0x8000u) == 0 )
-            {
-              if ( (v7 >> 13) & 1 )
-                return;
-              if ( (v7 >> 12) & 1 )
-                v8 = (UFG::PhysicsMoverInterface *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                     v6,
-                                                     UFG::PhysicsMoverInterface::_TypeUID);
-              else
-                v8 = (UFG::PhysicsMoverInterface *)UFG::SimObject::GetComponentOfType(
-                                                     (UFG::SimObject *)&v6->vfptr,
-                                                     UFG::PhysicsMoverInterface::_TypeUID);
-            }
-            else
-            {
-              v8 = (UFG::PhysicsMoverInterface *)v6->m_Components.p[34].m_pComponent;
-            }
-            if ( v8 )
-              UFG::PhysicsMoverInterface::GetLinearVelocityMagnitude(v8);
-          }
+          if ( (v8 & 0x2000) != 0 )
+            return result;
+          if ( (v8 & 0x1000) != 0 )
+            ComponentOfTypeHK = (UFG::PhysicsMoverInterface *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                CurrentVehicle,
+                                                                UFG::PhysicsMoverInterface::_TypeUID);
+          else
+            ComponentOfTypeHK = (UFG::PhysicsMoverInterface *)UFG::SimObject::GetComponentOfType(
+                                                                CurrentVehicle,
+                                                                UFG::PhysicsMoverInterface::_TypeUID);
         }
+        else
+        {
+          ComponentOfTypeHK = (UFG::PhysicsMoverInterface *)CurrentVehicle->m_Components.p[34].m_pComponent;
+        }
+        if ( ComponentOfTypeHK )
+          *(float *)&result = UFG::PhysicsMoverInterface::GetLinearVelocityMagnitude(ComponentOfTypeHK);
       }
     }
   }
+  return result;
 }
 
 // File Line: 562
 // RVA: 0xDB600
-UFG::qVector3 *__fastcall UFG::RoadNetworkVisibleArea::GetPreviousStartPosition(UFG::RoadNetworkVisibleArea *this, UFG::qVector3 *result)
+UFG::qVector3 *__fastcall UFG::RoadNetworkVisibleArea::GetPreviousStartPosition(
+        UFG::RoadNetworkVisibleArea *this,
+        UFG::qVector3 *result)
 {
-  result->x = this->mPreviousStartPosition.x;
-  result->y = this->mPreviousStartPosition.y;
-  result->z = this->mPreviousStartPosition.z;
+  *result = this->mPreviousStartPosition;
   return result;
 }
 
 // File Line: 567
 // RVA: 0xDBCE0
-UFG::qVector3 *__fastcall UFG::RoadNetworkVisibleArea::GetStartPosition(UFG::RoadNetworkVisibleArea *this, UFG::qVector3 *result)
+UFG::qVector3 *__fastcall UFG::RoadNetworkVisibleArea::GetStartPosition(
+        UFG::RoadNetworkVisibleArea *this,
+        UFG::qVector3 *result)
 {
-  result->x = this->mStartPosition.x;
-  result->y = this->mStartPosition.y;
-  result->z = this->mStartPosition.z;
+  *result = this->mStartPosition;
   return result;
 }
 
 // File Line: 584
 // RVA: 0xD2A80
-__int64 __fastcall UFG::RoadNetworkVisibleArea::BuildVisibleRoadNetworkByGrid(UFG::RoadNetworkVisibleArea *this, UFG::RoadNetworkNode *closestNode, unsigned int roadNetworkType)
+__int64 __fastcall UFG::RoadNetworkVisibleArea::BuildVisibleRoadNetworkByGrid(
+        UFG::RoadNetworkVisibleArea *this,
+        UFG::RoadNetworkNode *closestNode,
+        unsigned int roadNetworkType)
 {
-  unsigned int v3; // ebx
-  UFG::RoadNetworkVisibleArea *v4; // r14
   unsigned __int8 v5; // r15
-  bool v6; // al
-  float v7; // xmm6_4
-  float v8; // xmm7_4
-  float v9; // xmm8_4
-  float v10; // xmm9_4
-  UFG::RoadNetworkSegment **v11; // rdi
-  UFG::RoadNetworkSegment **v12; // r12
-  __int64 v13; // r13
-  UFG::RoadNetworkSegment *v14; // rdi
-  unsigned int v15; // edx
-  unsigned int v16; // esi
-  UFG::qBaseTreeRB *v17; // rbx
+  float v6; // xmm6_4
+  float x; // xmm7_4
+  float y; // xmm8_4
+  float z; // xmm9_4
+  UFG::RoadNetworkSegment **p; // rdi
+  UFG::RoadNetworkSegment **v11; // r12
+  __int64 size; // r13
+  UFG::RoadNetworkSegment *v13; // rdi
+  unsigned int mIndex; // edx
+  unsigned int v15; // esi
+  UFG::qBaseTreeRB *v16; // rbx
   UFG::RoadNetworkSubSegment *i; // rbx
-  Render::SkinningCacheNode *v19; // rbx
-  UFG::qVector3 pos; // [rsp+30h] [rbp-A8h]
-  UFG::qArray<UFG::RoadNetworkSegment *,0> segments; // [rsp+40h] [rbp-98h]
-  UFG::qVector3 nodePos; // [rsp+50h] [rbp-88h]
-  __int64 v24; // [rsp+60h] [rbp-78h]
-  __int64 v25; // [rsp+68h] [rbp-70h]
-  UFG::qBaseTreeRB v26; // [rsp+70h] [rbp-68h]
-  UFG::qBaseTreeRB *v27; // [rsp+118h] [rbp+40h]
+  Render::SkinningCacheNode *Head; // rbx
+  UFG::qVector3 pos; // [rsp+30h] [rbp-A8h] BYREF
+  UFG::qArray<UFG::RoadNetworkSegment *,0> segments; // [rsp+40h] [rbp-98h] BYREF
+  UFG::qVector3 nodePos; // [rsp+50h] [rbp-88h] BYREF
+  __int64 v23; // [rsp+60h] [rbp-78h]
+  __int64 v24; // [rsp+68h] [rbp-70h]
+  UFG::qBaseTreeRB v25; // [rsp+70h] [rbp-68h] BYREF
+  UFG::qBaseTreeRB *v26; // [rsp+118h] [rbp+40h]
 
-  v26.mNULL.mChild[0] = (UFG::qBaseNodeRB *)-2i64;
-  v3 = roadNetworkType;
-  v4 = this;
+  v25.mNULL.mChild[0] = (UFG::qBaseNodeRB *)-2i64;
   v5 = 0;
   segments.p = 0i64;
   *(_QWORD *)&segments.size = 0i64;
-  v25 = 0i64;
   v24 = 0i64;
-  v6 = roadNetworkType - 2 <= 1;
-  v7 = FLOAT_110_0;
-  if ( v6 )
-    v7 = FLOAT_200_0;
-  v8 = this->mStartPosition.x;
-  v9 = this->mStartPosition.y;
-  v10 = this->mStartPosition.z;
-  pos.x = this->mStartPosition.x;
-  pos.y = v9;
-  pos.z = v10;
-  if ( v6 )
+  v23 = 0i64;
+  v6 = FLOAT_110_0;
+  if ( roadNetworkType - 2 <= 1 )
+    v6 = FLOAT_200_0;
+  x = this->mStartPosition.x;
+  y = this->mStartPosition.y;
+  z = this->mStartPosition.z;
+  pos.x = x;
+  pos.y = y;
+  pos.z = z;
+  if ( roadNetworkType - 2 <= 1 )
   {
     nodePos = UFG::qVector3::msZero;
     if ( UFG::RoadNetworkResource::GetClosestNode(this->mRoadNetwork, &pos, roadNetworkType, &nodePos, 0i64) )
     {
-      v8 = nodePos.x;
+      x = nodePos.x;
       pos = nodePos;
-      v9 = nodePos.y;
-      v10 = nodePos.z;
+      y = nodePos.y;
+      z = nodePos.z;
     }
   }
-  UFG::RoadNetworkResource::GetSegmentsInGrid(v4->mRoadNetwork, &segments, &pos, v3, v7);
-  v27 = &v26;
-  UFG::qBaseTreeRB::qBaseTreeRB(&v26);
-  v11 = segments.p;
+  UFG::RoadNetworkResource::GetSegmentsInGrid(this->mRoadNetwork, &segments, &pos, roadNetworkType, v6);
+  v26 = &v25;
+  UFG::qBaseTreeRB::qBaseTreeRB(&v25);
+  p = segments.p;
   if ( segments.size )
   {
-    v12 = segments.p;
-    v13 = segments.size;
+    v11 = segments.p;
+    size = segments.size;
     do
     {
-      v14 = *v12;
-      v15 = (*v12)->mIndex;
-      if ( !v15 || !UFG::qBaseTreeRB::Get(&v26, v15) )
+      v13 = *v11;
+      mIndex = (*v11)->mIndex;
+      if ( !mIndex || !UFG::qBaseTreeRB::Get(&v25, mIndex) )
       {
-        v16 = v14->mIndex;
-        if ( !v16 || (v17 = UFG::qBaseTreeRB::Get(&v26, v16)) == 0i64 )
+        v15 = v13->mIndex;
+        if ( !v15 || (v16 = UFG::qBaseTreeRB::Get(&v25, v15)) == 0i64 )
         {
-          v17 = (UFG::qBaseTreeRB *)UFG::qMalloc(0x28ui64, "qMap::qMapNode32", 0i64);
-          v27 = v17;
-          if ( v17 )
+          v16 = (UFG::qBaseTreeRB *)UFG::qMalloc(0x28ui64, "qMap::qMapNode32", 0i64);
+          v26 = v16;
+          if ( v16 )
           {
-            v17->mRoot.mParent = 0i64;
-            v17->mRoot.mChild[0] = 0i64;
-            v17->mRoot.mChild[1] = 0i64;
-            v17->mRoot.mUID = v16;
-            v17->mNULL.mParent = (UFG::qBaseNodeRB *)v14;
+            v16->mRoot.mParent = 0i64;
+            v16->mRoot.mChild[0] = 0i64;
+            v16->mRoot.mChild[1] = 0i64;
+            v16->mRoot.mUID = v15;
+            v16->mNULL.mParent = (UFG::qBaseNodeRB *)v13;
           }
           else
           {
-            v17 = 0i64;
+            v16 = 0i64;
           }
-          UFG::qBaseTreeRB::Add(&v26, &v17->mRoot);
+          UFG::qBaseTreeRB::Add(&v25, &v16->mRoot);
         }
-        v17->mNULL.mParent = (UFG::qBaseNodeRB *)v14;
-        for ( i = (UFG::RoadNetworkSubSegment *)v14->mSubSegmentCollection.mNode.mNext;
-              i != (UFG::RoadNetworkSubSegment *)&v14->mSubSegmentCollection;
+        v16->mNULL.mParent = (UFG::qBaseNodeRB *)v13;
+        for ( i = (UFG::RoadNetworkSubSegment *)v13->mSubSegmentCollection.mNode.mNext;
+              i != (UFG::RoadNetworkSubSegment *)&v13->mSubSegmentCollection;
               i = (UFG::RoadNetworkSubSegment *)i->mNext )
         {
           if ( !i->mActive
-            && (float)(v7 * v7) > (float)((float)((float)((float)(v8 - i->mPosition.x) * (float)(v8 - i->mPosition.x))
-                                                + (float)((float)(v9 - i->mPosition.y) * (float)(v9 - i->mPosition.y)))
-                                        + (float)((float)(v10 - i->mPosition.z) * (float)(v10 - i->mPosition.z))) )
+            && (float)(v6 * v6) > (float)((float)((float)((float)(x - i->mPosition.x) * (float)(x - i->mPosition.x))
+                                                + (float)((float)(y - i->mPosition.y) * (float)(y - i->mPosition.y)))
+                                        + (float)((float)(z - i->mPosition.z) * (float)(z - i->mPosition.z))) )
           {
             v5 = 1;
-            UFG::RoadNetworkVisibleArea::CreateEdges(v4, i);
-            while ( !UFG::RoadNetworkVisibleAreaEdgeManager::ExpandOneStep(&v4->mEdgeManager) )
+            UFG::RoadNetworkVisibleArea::CreateEdges(this, i);
+            while ( !UFG::RoadNetworkVisibleAreaEdgeManager::ExpandOneStep(&this->mEdgeManager) )
               ;
           }
         }
       }
-      ++v12;
-      --v13;
+      ++v11;
+      --size;
     }
-    while ( v13 );
-    v11 = segments.p;
+    while ( size );
+    p = segments.p;
   }
-  v27 = &v26;
-  while ( v26.mRoot.mUID )
+  v26 = &v25;
+  while ( v25.mRoot.mUID )
   {
-    v19 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v26);
-    UFG::qBaseTreeVariableRB<unsigned __int64>::Remove((UFG::qBaseTreeVariableRB<unsigned __int64> *)&v26, &v19->mNode);
-    operator delete[](v19);
+    Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v25);
+    UFG::qBaseTreeVariableRB<unsigned __int64>::Remove((UFG::qBaseTreeVariableRB<unsigned __int64> *)&v25, &Head->mNode);
+    operator delete[](Head);
   }
-  UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)&v26);
-  v25 = 0i64;
+  UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)&v25);
   v24 = 0i64;
-  if ( v11 )
-    operator delete[](v11);
+  v23 = 0i64;
+  if ( p )
+    operator delete[](p);
   return v5;
-}
+}aseTreeRB((Render::S
 
 // File Line: 649
 // RVA: 0xD58A0
 bool __fastcall UFG::RoadNetworkVisibleArea::GenerateOceanVisibleArea(UFG::RoadNetworkVisibleArea *this)
 {
-  UFG::RoadNetworkNode **v1; // rax
-  UFG::RoadNetworkVisibleArea *v2; // rbx
+  UFG::RoadNetworkNode **p; // rax
   UFG::RoadNetworkNode *v3; // rdi
   bool result; // al
 
-  v1 = this->mClosestNodeCollection.p;
-  v2 = this;
-  v3 = v1[3];
+  p = this->mClosestNodeCollection.p;
+  v3 = p[3];
   if ( v3 )
   {
-    result = UFG::RoadNetworkVisibleArea::BuildVisibleRoadNetworkByGrid(this, v1[3], 3u);
+    result = UFG::RoadNetworkVisibleArea::BuildVisibleRoadNetworkByGrid(this, p[3], 3u);
     if ( v3->mType.mValue == 1 )
     {
-      *((_QWORD *)v2->mPreviousClosestNodeCollection.p + 3) = *((_QWORD *)v2->mClosestNodeCollection.p + 3);
-      *((_QWORD *)v2->mPreviousClosestSubSegmentCollection.p + 3) = 0i64;
+      *((_QWORD *)this->mPreviousClosestNodeCollection.p + 3) = *((_QWORD *)this->mClosestNodeCollection.p + 3);
+      *((_QWORD *)this->mPreviousClosestSubSegmentCollection.p + 3) = 0i64;
     }
     else
     {
-      *((_QWORD *)v2->mPreviousClosestNodeCollection.p + 3) = *((_QWORD *)v2->mClosestNodeCollection.p + 3);
-      *((_QWORD *)v2->mPreviousClosestSubSegmentCollection.p + 3) = *((_QWORD *)v2->mClosestSubSegmentCollection.p + 3);
+      *((_QWORD *)this->mPreviousClosestNodeCollection.p + 3) = *((_QWORD *)this->mClosestNodeCollection.p + 3);
+      *((_QWORD *)this->mPreviousClosestSubSegmentCollection.p + 3) = *((_QWORD *)this->mClosestSubSegmentCollection.p
+                                                                      + 3);
     }
   }
   else
@@ -1058,15 +1016,16 @@ bool __fastcall UFG::RoadNetworkVisibleArea::GenerateOceanVisibleArea(UFG::RoadN
 
 // File Line: 726
 // RVA: 0xDC450
-float __fastcall UFG::RoadNetworkVisibleArea::GetValidDistance(UFG::RoadNetworkVisibleArea *this, UFG::qVector3 *position, bool extensionAllowed, bool useSafetyMargin, bool isWater)
+float __fastcall UFG::RoadNetworkVisibleArea::GetValidDistance(
+        UFG::RoadNetworkVisibleArea *this,
+        UFG::qVector3 *position,
+        bool extensionAllowed,
+        bool useSafetyMargin,
+        bool isWater)
 {
-  float v5; // xmm6_4
-  bool v6; // r14
-  bool v7; // bp
-  UFG::qVector3 *v8; // rbx
-  UFG::RoadNetworkVisibleArea *v9; // rsi
-  bool v10; // di
-  bool v11; // al
+  float mCurrentVisibleDistance; // xmm6_4
+  bool IsWithinVisibleAngle; // di
+  bool IsWithinVisibleExpandAngle; // al
   float v12; // xmm0_4
   float v13; // xmm2_4
   float v14; // xmm0_4
@@ -1074,28 +1033,24 @@ float __fastcall UFG::RoadNetworkVisibleArea::GetValidDistance(UFG::RoadNetworkV
   float v16; // xmm0_4
   float v17; // xmm2_4
 
-  v5 = this->mCurrentVisibleDistance;
-  v6 = useSafetyMargin;
-  v7 = extensionAllowed;
-  v8 = position;
-  v9 = this;
-  v10 = UFG::RoadNetworkVisibleArea::IsWithinVisibleAngle(this, position);
-  v11 = UFG::RoadNetworkVisibleArea::IsWithinVisibleExpandAngle(v9, v8);
+  mCurrentVisibleDistance = this->mCurrentVisibleDistance;
+  IsWithinVisibleAngle = UFG::RoadNetworkVisibleArea::IsWithinVisibleAngle(this, position);
+  IsWithinVisibleExpandAngle = UFG::RoadNetworkVisibleArea::IsWithinVisibleExpandAngle(this, position);
   if ( isWater )
   {
-    v10 = 1;
-    v11 = 1;
+    IsWithinVisibleAngle = 1;
+    IsWithinVisibleExpandAngle = 1;
   }
-  else if ( !v10 )
+  else if ( !IsWithinVisibleAngle )
   {
     goto LABEL_8;
   }
-  if ( !v7 )
+  if ( !extensionAllowed )
   {
 LABEL_8:
-    if ( !v11 )
+    if ( !IsWithinVisibleExpandAngle )
       goto LABEL_15;
-    v12 = (float)((float)(v9->mStartSpeed * 3.5999999) - 23.0) * 1.5217391;
+    v12 = (float)((float)(this->mStartSpeed * 3.5999999) - 23.0) * 1.5217391;
     if ( v12 <= 0.0 )
     {
       v12 = 0.0;
@@ -1108,17 +1063,17 @@ LABEL_8:
     }
     v13 = v12;
 LABEL_14:
-    v5 = v5 + v13;
+    mCurrentVisibleDistance = mCurrentVisibleDistance + v13;
     goto LABEL_15;
   }
   if ( isWater )
-    v5 = v5 + 490.0;
+    mCurrentVisibleDistance = mCurrentVisibleDistance + 490.0;
   else
-    v5 = v5 + 60.0;
+    mCurrentVisibleDistance = mCurrentVisibleDistance + 60.0;
 LABEL_15:
-  if ( v10 || v7 )
+  if ( IsWithinVisibleAngle || extensionAllowed )
     goto LABEL_29;
-  v14 = (float)((float)(v9->mStartSpeed * 3.5999999) - 23.0) * 0.86956519;
+  v14 = (float)((float)(this->mStartSpeed * 3.5999999) - 23.0) * 0.86956519;
   if ( v14 <= 0.0 )
   {
     v14 = 0.0;
@@ -1131,234 +1086,225 @@ LABEL_15:
   }
   v15 = v14;
 LABEL_22:
-  v16 = v5 - v15;
+  v16 = mCurrentVisibleDistance - v15;
   if ( isWater )
     v17 = FLOAT_100_0;
   else
     v17 = Twk_RN_VisAreaMinVisibleDistanceDelta;
-  v5 = v9->mCurrentVisibleDistance - v17;
-  if ( v5 < 0.0 )
-    v5 = 0.0;
-  if ( v5 <= v16 )
-    v5 = v16;
+  mCurrentVisibleDistance = this->mCurrentVisibleDistance - v17;
+  if ( mCurrentVisibleDistance < 0.0 )
+    mCurrentVisibleDistance = 0.0;
+  if ( mCurrentVisibleDistance <= v16 )
+    mCurrentVisibleDistance = v16;
 LABEL_29:
-  if ( v6 )
-    v5 = v5 + -5.0;
-  return v5;
+  if ( useSafetyMargin )
+    return mCurrentVisibleDistance + -5.0;
+  return mCurrentVisibleDistance;
 }
 
 // File Line: 784
 // RVA: 0xDE4B0
-bool __fastcall UFG::RoadNetworkVisibleArea::IsInRange(UFG::RoadNetworkVisibleArea *this, UFG::RoadNetworkIntersection *roadInter, UFG::qVector3 *position)
+bool __fastcall UFG::RoadNetworkVisibleArea::IsInRange(
+        UFG::RoadNetworkVisibleArea *this,
+        UFG::RoadNetworkIntersection *roadInter,
+        UFG::qVector3 *position)
 {
-  UFG::RoadNetworkSubSegment *v3; // rax
-  UFG::qVector3 *v4; // r14
-  UFG::RoadNetworkIntersection *v5; // rbp
-  UFG::RoadNetworkVisibleArea *v6; // rbx
-  char v7; // r9
-  UFG::RoadNetworkIntersection *v8; // rcx
+  UFG::RoadNetworkSubSegment *mPreviousClosestSubSegmentFromAllTypes; // rax
+  char ExtendBeyondVisibleAreaLimit; // r9
+  UFG::RoadNetworkIntersection *mPreviousClosestNodeFromAllTypes; // rcx
   bool v9; // di
   bool isWater; // al
-  float v11; // xmm0_4
+  float ValidDistance; // xmm0_4
 
-  v3 = this->mPreviousClosestSubSegmentFromAllTypes;
-  v4 = position;
-  v5 = roadInter;
-  v6 = this;
-  if ( v3 )
+  mPreviousClosestSubSegmentFromAllTypes = this->mPreviousClosestSubSegmentFromAllTypes;
+  if ( mPreviousClosestSubSegmentFromAllTypes )
   {
-    v7 = (*(_DWORD *)&v3->mParentNode->mBits >> 6) & 1;
+    ExtendBeyondVisibleAreaLimit = (*(_DWORD *)&mPreviousClosestSubSegmentFromAllTypes->mParentNode->mBits & 0x40) != 0;
   }
   else
   {
-    v8 = (UFG::RoadNetworkIntersection *)this->mPreviousClosestNodeFromAllTypes;
-    if ( !v8 )
+    mPreviousClosestNodeFromAllTypes = (UFG::RoadNetworkIntersection *)this->mPreviousClosestNodeFromAllTypes;
+    if ( !mPreviousClosestNodeFromAllTypes )
     {
 LABEL_7:
       v9 = 0;
       goto LABEL_8;
     }
-    v7 = UFG::RoadNetworkIntersection::GetExtendBeyondVisibleAreaLimit(v8);
+    ExtendBeyondVisibleAreaLimit = UFG::RoadNetworkIntersection::GetExtendBeyondVisibleAreaLimit(mPreviousClosestNodeFromAllTypes);
   }
-  if ( !v7 )
+  if ( !ExtendBeyondVisibleAreaLimit )
     goto LABEL_7;
   v9 = 1;
-  if ( !UFG::RoadNetworkIntersection::GetExtendBeyondVisibleAreaLimit(v5) )
+  if ( !UFG::RoadNetworkIntersection::GetExtendBeyondVisibleAreaLimit(roadInter) )
     goto LABEL_7;
 LABEL_8:
-  isWater = UFG::RoadNetworkIntersection::IsWater(v5);
-  v11 = UFG::RoadNetworkVisibleArea::GetValidDistance(v6, v4, v9, 0, isWater);
-  return (float)(v11 * v11) > (float)((float)((float)((float)(v6->mStartPosition.y - v4->y)
-                                                    * (float)(v6->mStartPosition.y - v4->y))
-                                            + (float)((float)(v6->mStartPosition.x - v4->x)
-                                                    * (float)(v6->mStartPosition.x - v4->x)))
-                                    + (float)((float)(v6->mStartPosition.z - v4->z)
-                                            * (float)(v6->mStartPosition.z - v4->z)));
+  isWater = UFG::RoadNetworkIntersection::IsWater(roadInter);
+  ValidDistance = UFG::RoadNetworkVisibleArea::GetValidDistance(this, position, v9, 0, isWater);
+  return (float)(ValidDistance * ValidDistance) > (float)((float)((float)((float)(this->mStartPosition.y - position->y)
+                                                                        * (float)(this->mStartPosition.y - position->y))
+                                                                + (float)((float)(this->mStartPosition.x - position->x)
+                                                                        * (float)(this->mStartPosition.x - position->x)))
+                                                        + (float)((float)(this->mStartPosition.z - position->z)
+                                                                * (float)(this->mStartPosition.z - position->z)));
 }
 
 // File Line: 790
 // RVA: 0xDE5A0
-bool __fastcall UFG::RoadNetworkVisibleArea::IsInRange(UFG::RoadNetworkVisibleArea *this, UFG::RoadNetworkSegment *roadSeg, UFG::qVector3 *position)
+bool __fastcall UFG::RoadNetworkVisibleArea::IsInRange(
+        UFG::RoadNetworkVisibleArea *this,
+        UFG::RoadNetworkSegment *roadSeg,
+        UFG::qVector3 *position)
 {
-  UFG::qVector3 *v3; // r15
-  UFG::RoadNetworkSegment *v4; // rbx
   bool v5; // r14
-  UFG::RoadNetworkVisibleArea *v6; // rsi
-  unsigned int v7; // edi
-  UFG::qPropertySet *v8; // rax
+  unsigned int mValue; // edi
+  UFG::qPropertySet *RoadPropertySet; // rax
   unsigned int *v9; // rax
-  UFG::RoadNetworkSubSegment *v10; // rax
+  UFG::RoadNetworkSubSegment *mPreviousClosestSubSegmentFromAllTypes; // rax
   bool isWater; // di
-  char v12; // cl
-  UFG::RoadNetworkIntersection *v13; // rcx
-  float v14; // xmm0_4
+  char ExtendBeyondVisibleAreaLimit; // cl
+  UFG::RoadNetworkIntersection *mPreviousClosestNodeFromAllTypes; // rcx
+  float ValidDistance; // xmm0_4
 
-  v3 = position;
-  v4 = roadSeg;
   v5 = 1;
-  v6 = this;
   if ( roadSeg->mpPropertySetCached )
   {
-    v7 = roadSeg->mRoadNetworkType.mValue;
+    mValue = roadSeg->mRoadNetworkType.mValue;
   }
   else
   {
-    v8 = UFG::RoadNetworkSegment::GetRoadPropertySet(roadSeg);
-    v7 = 0;
-    if ( v8 )
+    RoadPropertySet = UFG::RoadNetworkSegment::GetRoadPropertySet(roadSeg);
+    mValue = 0;
+    if ( RoadPropertySet )
     {
-      v9 = UFG::qPropertySet::Get<unsigned long>(v8, (UFG::qSymbol *)&qSymbol_RoadNetworkType.mUID, DEPTH_RECURSE);
+      v9 = UFG::qPropertySet::Get<unsigned long>(RoadPropertySet, &qSymbol_RoadNetworkType, DEPTH_RECURSE);
       if ( v9 )
-        v7 = *v9;
+        mValue = *v9;
     }
   }
-  v10 = v6->mPreviousClosestSubSegmentFromAllTypes;
-  isWater = v7 - 2 <= 1;
-  if ( v10 )
+  mPreviousClosestSubSegmentFromAllTypes = this->mPreviousClosestSubSegmentFromAllTypes;
+  isWater = mValue - 2 <= 1;
+  if ( mPreviousClosestSubSegmentFromAllTypes )
   {
-    v12 = (*(_DWORD *)&v10->mParentNode->mBits >> 6) & 1;
+    ExtendBeyondVisibleAreaLimit = (*(_DWORD *)&mPreviousClosestSubSegmentFromAllTypes->mParentNode->mBits & 0x40) != 0;
   }
   else
   {
-    v13 = (UFG::RoadNetworkIntersection *)v6->mPreviousClosestNodeFromAllTypes;
-    if ( !v13 )
+    mPreviousClosestNodeFromAllTypes = (UFG::RoadNetworkIntersection *)this->mPreviousClosestNodeFromAllTypes;
+    if ( !mPreviousClosestNodeFromAllTypes )
     {
 LABEL_12:
       v5 = 0;
       goto LABEL_13;
     }
-    v12 = UFG::RoadNetworkIntersection::GetExtendBeyondVisibleAreaLimit(v13);
+    ExtendBeyondVisibleAreaLimit = UFG::RoadNetworkIntersection::GetExtendBeyondVisibleAreaLimit(mPreviousClosestNodeFromAllTypes);
   }
-  if ( !v12 || !((*(_DWORD *)&v4->mBits >> 6) & 1) )
+  if ( !ExtendBeyondVisibleAreaLimit || (*(_DWORD *)&roadSeg->mBits & 0x40) == 0 )
     goto LABEL_12;
 LABEL_13:
-  v14 = UFG::RoadNetworkVisibleArea::GetValidDistance(v6, v3, v5, 0, isWater);
-  return (float)(v14 * v14) > (float)((float)((float)((float)(v6->mStartPosition.y - v3->y)
-                                                    * (float)(v6->mStartPosition.y - v3->y))
-                                            + (float)((float)(v6->mStartPosition.x - v3->x)
-                                                    * (float)(v6->mStartPosition.x - v3->x)))
-                                    + (float)((float)(v6->mStartPosition.z - v3->z)
-                                            * (float)(v6->mStartPosition.z - v3->z)));
+  ValidDistance = UFG::RoadNetworkVisibleArea::GetValidDistance(this, position, v5, 0, isWater);
+  return (float)(ValidDistance * ValidDistance) > (float)((float)((float)((float)(this->mStartPosition.y - position->y)
+                                                                        * (float)(this->mStartPosition.y - position->y))
+                                                                + (float)((float)(this->mStartPosition.x - position->x)
+                                                                        * (float)(this->mStartPosition.x - position->x)))
+                                                        + (float)((float)(this->mStartPosition.z - position->z)
+                                                                * (float)(this->mStartPosition.z - position->z)));
 }
 
 // File Line: 796
 // RVA: 0xDEC60
-bool __fastcall UFG::RoadNetworkVisibleArea::IsSubSegmentInRange(UFG::RoadNetworkVisibleArea *this, UFG::RoadNetworkSubSegment *subSegment)
+bool __fastcall UFG::RoadNetworkVisibleArea::IsSubSegmentInRange(
+        UFG::RoadNetworkVisibleArea *this,
+        UFG::RoadNetworkSubSegment *subSegment)
 {
-  UFG::RoadNetworkSegment *v2; // rbp
-  UFG::RoadNetworkSubSegment *v3; // r15
+  UFG::RoadNetworkSegment *mParentNode; // rbp
   UFG::RoadNetworkConnection *v4; // rdi
-  UFG::RoadNetworkVisibleArea *v5; // r12
   __int64 v6; // r14
   float v7; // xmm6_4
-  __int64 v8; // rax
-  signed __int64 v9; // rax
-  signed __int64 v10; // rcx
-  __int64 v11; // rax
-  signed __int64 v12; // rsi
-  signed __int64 v13; // rax
-  __int64 v14; // rcx
-  UFG::RoadNetworkConnection *v15; // rcx
-  UFG::qBezierPathMemImaged *v16; // rax
-  UFG::RoadNetworkConnection *v17; // rbx
-  unsigned int v18; // eax
-  UFG::qBezierSplineMemImaged *v19; // rax
-  float v21; // xmm6_4
-  __int64 v22; // rax
-  signed __int64 v23; // rax
-  signed __int64 v24; // rcx
-  __int64 v25; // rax
-  signed __int64 v26; // rsi
-  signed __int64 v27; // rax
-  __int64 v28; // rcx
-  UFG::qBezierPathMemImaged *v29; // rax
-  UFG::RoadNetworkConnection *v30; // rbx
-  unsigned int v31; // eax
-  UFG::qBezierSplineMemImaged *v32; // rax
-  UFG::qVector3 result; // [rsp+20h] [rbp-48h]
-  float splineT; // [rsp+78h] [rbp+10h]
+  __int64 mOffset; // rax
+  char *v9; // rax
+  char *v10; // rcx
+  float *v11; // rsi
+  char *v12; // rax
+  __int64 v13; // rcx
+  UFG::RoadNetworkConnection *v14; // rcx
+  UFG::qBezierPathMemImaged *Path; // rbx
+  unsigned int SplineParameters; // eax
+  UFG::qBezierSplineMemImaged *v17; // rax
+  float v19; // xmm6_4
+  __int64 v20; // rax
+  char *v21; // rax
+  char *v22; // rcx
+  float *v23; // rsi
+  char *v24; // rax
+  __int64 v25; // rcx
+  UFG::qBezierPathMemImaged *v26; // rbx
+  unsigned int v27; // eax
+  UFG::qBezierSplineMemImaged *v28; // rax
+  UFG::qVector3 result; // [rsp+20h] [rbp-48h] BYREF
+  float splineT; // [rsp+78h] [rbp+10h] BYREF
 
-  v2 = subSegment->mParentNode;
-  v3 = subSegment;
+  mParentNode = subSegment->mParentNode;
   v4 = 0i64;
-  v5 = this;
-  v6 = ((unsigned __int8)v2->mNumLanes - 1) / 2;
+  v6 = (unsigned int)(((unsigned __int8)mParentNode->mNumLanes - 1) / 2);
   v7 = subSegment->mBeginTCollection[v6];
-  v8 = v2->mLane.mOffset;
-  if ( v8 )
-    v9 = (signed __int64)&v2->mLane + v8;
+  mOffset = mParentNode->mLane.mOffset;
+  if ( mOffset )
+    v9 = (char *)&mParentNode->mLane + mOffset;
   else
     v9 = 0i64;
-  v10 = v9 + 8 * v6;
-  v11 = *(_QWORD *)(v9 + 8 * v6);
-  v12 = v11 + v10;
-  if ( !v11 )
+  v10 = &v9[8 * v6];
+  v11 = (float *)&v10[*(_QWORD *)v10];
+  if ( !*(_QWORD *)v10 )
+    v11 = 0i64;
+  if ( *(_QWORD *)v11 )
+    v12 = (char *)v11 + *(_QWORD *)v11;
+  else
     v12 = 0i64;
-  if ( *(_QWORD *)v12 )
-    v13 = v12 + *(_QWORD *)v12;
+  v13 = *((_QWORD *)v12 + 4);
+  if ( v13 )
+    v14 = (UFG::RoadNetworkConnection *)&v12[v13 + 32];
   else
-    v13 = 0i64;
-  v14 = *(_QWORD *)(v13 + 32);
-  if ( v14 )
-    v15 = (UFG::RoadNetworkConnection *)(v13 + v14 + 32);
-  else
-    v15 = 0i64;
-  v16 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v15, *(unsigned __int16 *)(v12 + 38));
-  v17 = (UFG::RoadNetworkConnection *)v16;
-  v18 = UFG::qBezierPathMemImaged::GetSplineParameters(v16, v7, &splineT);
-  v19 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v17, v18);
-  UFG::RoadNetworkLane::GetOffsetPos(&result, v19, splineT, *(float *)(v12 + 40));
-  if ( UFG::RoadNetworkVisibleArea::IsInRange(v5, v2, &result) )
+    v14 = 0i64;
+  Path = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v14, *((unsigned __int16 *)v11 + 19));
+  SplineParameters = UFG::qBezierPathMemImaged::GetSplineParameters(Path, v7, &splineT);
+  v17 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                         (UFG::RoadNetworkConnection *)Path,
+                                         SplineParameters);
+  UFG::RoadNetworkLane::GetOffsetPos(&result, v17, splineT, v11[10]);
+  if ( UFG::RoadNetworkVisibleArea::IsInRange(this, mParentNode, &result) )
     return 1;
-  v21 = v3->mEndTCollection[v6];
-  v22 = v2->mLane.mOffset;
-  if ( v22 )
-    v23 = (signed __int64)&v2->mLane + v22;
+  v19 = subSegment->mEndTCollection[v6];
+  v20 = mParentNode->mLane.mOffset;
+  if ( v20 )
+    v21 = (char *)&mParentNode->mLane + v20;
   else
+    v21 = 0i64;
+  v22 = &v21[8 * v6];
+  v23 = (float *)&v22[*(_QWORD *)v22];
+  if ( !*(_QWORD *)v22 )
     v23 = 0i64;
-  v24 = v23 + 8 * v6;
-  v25 = *(_QWORD *)(v23 + 8 * v6);
-  v26 = v25 + v24;
-  if ( !v25 )
-    v26 = 0i64;
-  if ( *(_QWORD *)v26 )
-    v27 = v26 + *(_QWORD *)v26;
+  if ( *(_QWORD *)v23 )
+    v24 = (char *)v23 + *(_QWORD *)v23;
   else
-    v27 = 0i64;
-  v28 = *(_QWORD *)(v27 + 32);
-  if ( v28 )
-    v4 = (UFG::RoadNetworkConnection *)(v28 + v27 + 32);
-  v29 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v4, *(unsigned __int16 *)(v26 + 38));
-  v30 = (UFG::RoadNetworkConnection *)v29;
-  v31 = UFG::qBezierPathMemImaged::GetSplineParameters(v29, v21, &splineT);
-  v32 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v30, v31);
-  UFG::RoadNetworkLane::GetOffsetPos(&result, v32, splineT, *(float *)(v26 + 40));
-  return UFG::RoadNetworkVisibleArea::IsInRange(v5, v2, &result);
+    v24 = 0i64;
+  v25 = *((_QWORD *)v24 + 4);
+  if ( v25 )
+    v4 = (UFG::RoadNetworkConnection *)&v24[v25 + 32];
+  v26 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v4, *((unsigned __int16 *)v23 + 19));
+  v27 = UFG::qBezierPathMemImaged::GetSplineParameters(v26, v19, &splineT);
+  v28 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                         (UFG::RoadNetworkConnection *)v26,
+                                         v27);
+  UFG::RoadNetworkLane::GetOffsetPos(&result, v28, splineT, v23[10]);
+  return UFG::RoadNetworkVisibleArea::IsInRange(this, mParentNode, &result);
 }
 
 // File Line: 810
 // RVA: 0xDE6C0
-bool __fastcall UFG::RoadNetworkVisibleArea::IsNearStartPosition(UFG::RoadNetworkVisibleArea *this, UFG::qVector3 *pos, float maxDistance)
+bool __fastcall UFG::RoadNetworkVisibleArea::IsNearStartPosition(
+        UFG::RoadNetworkVisibleArea *this,
+        UFG::qVector3 *pos,
+        float maxDistance)
 {
   return (float)(maxDistance * maxDistance) > (float)((float)((float)((float)(this->mStartPosition.x - pos->x)
                                                                     * (float)(this->mStartPosition.x - pos->x))
@@ -1370,40 +1316,40 @@ bool __fastcall UFG::RoadNetworkVisibleArea::IsNearStartPosition(UFG::RoadNetwor
 
 // File Line: 818
 // RVA: 0xD22D0
-signed __int64 __fastcall UFG::RoadNetworkVisibleArea::AllowVisibleExtension(UFG::RoadNetworkVisibleArea *this, UFG::RoadNetworkNode *roadNode)
+_BOOL8 __fastcall UFG::RoadNetworkVisibleArea::AllowVisibleExtension(
+        UFG::RoadNetworkVisibleArea *this,
+        UFG::RoadNetworkIntersection *roadNode)
 {
-  UFG::RoadNetworkSubSegment *v2; // rax
-  UFG::RoadNetworkNode *v3; // rbx
-  bool v4; // cl
-  UFG::RoadNetworkIntersection *v5; // rcx
+  UFG::RoadNetworkSubSegment *mPreviousClosestSubSegmentFromAllTypes; // rax
+  bool ExtendBeyondVisibleAreaLimit; // cl
+  UFG::RoadNetworkIntersection *mPreviousClosestNodeFromAllTypes; // rcx
   bool v6; // zf
   bool v7; // cl
   UFG::RoadNetworkIntersection *v8; // rcx
 
-  v2 = this->mPreviousClosestSubSegmentFromAllTypes;
-  v3 = roadNode;
+  mPreviousClosestSubSegmentFromAllTypes = this->mPreviousClosestSubSegmentFromAllTypes;
   if ( roadNode->mType.mValue == 1 )
   {
-    if ( v2 )
+    if ( mPreviousClosestSubSegmentFromAllTypes )
     {
-      v4 = (*(_DWORD *)&v2->mParentNode->mBits >> 6) & 1;
+      ExtendBeyondVisibleAreaLimit = (*(_DWORD *)&mPreviousClosestSubSegmentFromAllTypes->mParentNode->mBits & 0x40) != 0;
     }
     else
     {
-      v5 = (UFG::RoadNetworkIntersection *)this->mPreviousClosestNodeFromAllTypes;
-      if ( !v5 )
+      mPreviousClosestNodeFromAllTypes = (UFG::RoadNetworkIntersection *)this->mPreviousClosestNodeFromAllTypes;
+      if ( !mPreviousClosestNodeFromAllTypes )
         return 0i64;
-      v4 = UFG::RoadNetworkIntersection::GetExtendBeyondVisibleAreaLimit(v5);
+      ExtendBeyondVisibleAreaLimit = UFG::RoadNetworkIntersection::GetExtendBeyondVisibleAreaLimit(mPreviousClosestNodeFromAllTypes);
     }
-    if ( !v4 )
+    if ( !ExtendBeyondVisibleAreaLimit )
       return 0i64;
-    v6 = UFG::RoadNetworkIntersection::GetExtendBeyondVisibleAreaLimit((UFG::RoadNetworkIntersection *)v3) == 0;
+    v6 = !UFG::RoadNetworkIntersection::GetExtendBeyondVisibleAreaLimit(roadNode);
   }
   else
   {
-    if ( v2 )
+    if ( mPreviousClosestSubSegmentFromAllTypes )
     {
-      v7 = (*(_DWORD *)&v2->mParentNode->mBits >> 6) & 1;
+      v7 = (*(_DWORD *)&mPreviousClosestSubSegmentFromAllTypes->mParentNode->mBits & 0x40) != 0;
     }
     else
     {
@@ -1414,115 +1360,113 @@ signed __int64 __fastcall UFG::RoadNetworkVisibleArea::AllowVisibleExtension(UFG
     }
     if ( !v7 )
       return 0i64;
-    v6 = ((LODWORD(v3[1].mOutgoingConnections.mOffset) >> 6) & 1) == 0;
+    v6 = (LODWORD(roadNode[1].mPosition.y) & 0x40) == 0;
   }
-  if ( !v6 )
-    return 1i64;
-  return 0i64;
+  return !v6;
 }
 
 // File Line: 894
 // RVA: 0xDF1C0
-bool __fastcall UFG::RoadNetworkVisibleArea::IsWithinVisibleExpandAngle(UFG::RoadNetworkVisibleArea *this, UFG::qVector3 *pos)
+bool __fastcall UFG::RoadNetworkVisibleArea::IsWithinVisibleExpandAngle(
+        UFG::RoadNetworkVisibleArea *this,
+        UFG::qVector3 *pos)
 {
-  __m128 v2; // xmm5
-  UFG::RoadNetworkVisibleArea *v3; // rbx
-  float v4; // xmm6_4
-  float v5; // xmm7_4
+  __m128 x_low; // xmm5
+  float y; // xmm6_4
+  float z; // xmm7_4
   __m128 v6; // xmm3
   float v7; // xmm1_4
   float v8; // xmm3_4
-  __m128 v9; // xmm5
+  __m128 y_low; // xmm5
   float v10; // xmm6_4
   __m128 v11; // xmm7
   float v12; // xmm2_4
   float v13; // xmm2_4
   float v14; // xmm0_4
-  UFG::qVector3 n2; // [rsp+20h] [rbp-48h]
-  UFG::qVector3 n1; // [rsp+30h] [rbp-38h]
+  UFG::qVector3 n2; // [rsp+20h] [rbp-48h] BYREF
+  UFG::qVector3 n1; // [rsp+30h] [rbp-38h] BYREF
 
-  v2 = (__m128)LODWORD(this->mStartDirection.x);
-  v6 = v2;
-  v3 = this;
-  v4 = this->mStartDirection.y;
-  v5 = this->mStartDirection.z;
-  v6.m128_f32[0] = (float)((float)(v2.m128_f32[0] * v2.m128_f32[0]) + (float)(v4 * v4)) + (float)(v5 * v5);
+  x_low = (__m128)LODWORD(this->mStartDirection.x);
+  v6 = x_low;
+  y = this->mStartDirection.y;
+  z = this->mStartDirection.z;
+  v6.m128_f32[0] = (float)((float)(x_low.m128_f32[0] * x_low.m128_f32[0]) + (float)(y * y)) + (float)(z * z);
   if ( v6.m128_f32[0] == 0.0 )
     v7 = 0.0;
   else
-    v7 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v6));
+    v7 = 1.0 / _mm_sqrt_ps(v6).m128_f32[0];
   v8 = pos->x - this->mStartPosition.x;
-  n1.z = v5 * v7;
-  n1.x = v2.m128_f32[0] * v7;
-  v9 = (__m128)LODWORD(pos->y);
-  v9.m128_f32[0] = v9.m128_f32[0] - this->mStartPosition.y;
-  n1.y = v4 * v7;
-  v11 = v9;
+  n1.z = z * v7;
+  n1.x = x_low.m128_f32[0] * v7;
+  y_low = (__m128)LODWORD(pos->y);
+  y_low.m128_f32[0] = y_low.m128_f32[0] - this->mStartPosition.y;
+  n1.y = y * v7;
+  v11 = y_low;
   v10 = pos->z - this->mStartPosition.z;
-  v11.m128_f32[0] = (float)((float)(v9.m128_f32[0] * v9.m128_f32[0]) + (float)(v8 * v8)) + (float)(v10 * v10);
+  v11.m128_f32[0] = (float)((float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(v8 * v8)) + (float)(v10 * v10);
   if ( v11.m128_f32[0] == 0.0 )
     v12 = 0.0;
   else
-    v12 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v11));
+    v12 = 1.0 / _mm_sqrt_ps(v11).m128_f32[0];
   n2.x = v8 * v12;
-  n2.y = v9.m128_f32[0] * v12;
+  n2.y = y_low.m128_f32[0] * v12;
   n2.z = v10 * v12;
   v13 = FLOAT_3_1415927;
   LODWORD(v14) = COERCE_UNSIGNED_INT(UFG::qAngleBetweenNormals(&n1, &n2)) & _xmm;
-  if ( (float)(v3->mStartSpeed * 3.5999999) > 23.0 )
+  if ( (float)(this->mStartSpeed * 3.5999999) > 23.0 )
     v13 = FLOAT_0_61086524;
   return v13 >= v14;
 }
 
 // File Line: 904
 // RVA: 0xDF070
-bool __fastcall UFG::RoadNetworkVisibleArea::IsWithinVisibleAngle(UFG::RoadNetworkVisibleArea *this, UFG::qVector3 *pos)
+bool __fastcall UFG::RoadNetworkVisibleArea::IsWithinVisibleAngle(
+        UFG::RoadNetworkVisibleArea *this,
+        UFG::qVector3 *pos)
 {
-  __m128 v2; // xmm5
-  UFG::RoadNetworkVisibleArea *v3; // rbx
-  float v4; // xmm6_4
-  float v5; // xmm7_4
+  __m128 x_low; // xmm5
+  float y; // xmm6_4
+  float z; // xmm7_4
   __m128 v6; // xmm3
   float v7; // xmm1_4
   float v8; // xmm3_4
-  __m128 v9; // xmm5
+  __m128 y_low; // xmm5
   float v10; // xmm6_4
   __m128 v11; // xmm7
   float v12; // xmm2_4
   float v13; // xmm2_4
   float v14; // xmm0_4
-  UFG::qVector3 n2; // [rsp+20h] [rbp-48h]
-  UFG::qVector3 n1; // [rsp+30h] [rbp-38h]
+  UFG::qVector3 n2; // [rsp+20h] [rbp-48h] BYREF
+  UFG::qVector3 n1; // [rsp+30h] [rbp-38h] BYREF
 
-  v2 = (__m128)LODWORD(this->mStartDirection.x);
-  v6 = v2;
-  v3 = this;
-  v4 = this->mStartDirection.y;
-  v5 = this->mStartDirection.z;
-  v6.m128_f32[0] = (float)((float)(v2.m128_f32[0] * v2.m128_f32[0]) + (float)(v4 * v4)) + (float)(v5 * v5);
+  x_low = (__m128)LODWORD(this->mStartDirection.x);
+  v6 = x_low;
+  y = this->mStartDirection.y;
+  z = this->mStartDirection.z;
+  v6.m128_f32[0] = (float)((float)(x_low.m128_f32[0] * x_low.m128_f32[0]) + (float)(y * y)) + (float)(z * z);
   if ( v6.m128_f32[0] == 0.0 )
     v7 = 0.0;
   else
-    v7 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v6));
+    v7 = 1.0 / _mm_sqrt_ps(v6).m128_f32[0];
   v8 = pos->x - this->mStartPosition.x;
-  n1.z = v5 * v7;
-  n1.x = v2.m128_f32[0] * v7;
-  v9 = (__m128)LODWORD(pos->y);
-  v9.m128_f32[0] = v9.m128_f32[0] - this->mStartPosition.y;
-  n1.y = v4 * v7;
-  v11 = v9;
+  n1.z = z * v7;
+  n1.x = x_low.m128_f32[0] * v7;
+  y_low = (__m128)LODWORD(pos->y);
+  y_low.m128_f32[0] = y_low.m128_f32[0] - this->mStartPosition.y;
+  n1.y = y * v7;
+  v11 = y_low;
   v10 = pos->z - this->mStartPosition.z;
-  v11.m128_f32[0] = (float)((float)(v9.m128_f32[0] * v9.m128_f32[0]) + (float)(v8 * v8)) + (float)(v10 * v10);
+  v11.m128_f32[0] = (float)((float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(v8 * v8)) + (float)(v10 * v10);
   if ( v11.m128_f32[0] == 0.0 )
     v12 = 0.0;
   else
-    v12 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v11));
+    v12 = 1.0 / _mm_sqrt_ps(v11).m128_f32[0];
   n2.x = v8 * v12;
-  n2.y = v9.m128_f32[0] * v12;
+  n2.y = y_low.m128_f32[0] * v12;
   n2.z = v10 * v12;
   v13 = FLOAT_3_1415927;
   LODWORD(v14) = COERCE_UNSIGNED_INT(UFG::qAngleBetweenNormals(&n1, &n2)) & _xmm;
-  if ( (float)(v3->mStartSpeed * 3.5999999) > 23.0 )
+  if ( (float)(this->mStartSpeed * 3.5999999) > 23.0 )
     v13 = FLOAT_1_6406095;
   return v13 >= v14;
 }
@@ -1540,7 +1484,7 @@ float __fastcall UFG::RoadNetworkVisibleArea::GetMinVisibleDistance(UFG::RoadNet
     v2 = Twk_RN_VisAreaMinVisibleDistanceDelta;
   result = this->mCurrentVisibleDistance - v2;
   if ( result < 0.0 )
-    result = 0.0;
+    return 0.0;
   return result;
 }
 
@@ -1553,14 +1497,13 @@ float __fastcall UFG::RoadNetworkVisibleArea::GetVisibleDistance(UFG::RoadNetwor
 
 // File Line: 962
 // RVA: 0xE0AC0
-char __fastcall UFG::RoadNetworkVisibleArea::ShouldUpdateVisibleArea(UFG::RoadNetworkVisibleArea *this)
+bool __fastcall UFG::RoadNetworkVisibleArea::ShouldUpdateVisibleArea(UFG::RoadNetworkVisibleArea *this)
 {
   UFG::TransformNodeComponent *v1; // rdi
-  UFG::RoadNetworkVisibleArea *v2; // rbx
-  UFG::TransformNodeComponent *v3; // rsi
-  float v4; // xmm3_4
-  float v5; // xmm4_4
-  float v6; // xmm5_4
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rsi
+  float x; // xmm3_4
+  float y; // xmm4_4
+  float z; // xmm5_4
   float v7; // xmm2_4
   float v8; // xmm1_4
   float v9; // xmm0_4
@@ -1569,20 +1512,20 @@ char __fastcall UFG::RoadNetworkVisibleArea::ShouldUpdateVisibleArea(UFG::RoadNe
   float v12; // xmm0_4
   float v13; // xmm1_4
   float v14; // xmm2_4
-  char result; // al
+  double SubjectSpeed; // xmm0_8
+  bool result; // al
 
   v1 = 0i64;
-  v2 = this;
   if ( LocalPlayer )
-    v3 = LocalPlayer->m_pTransformNodeComponent;
+    m_pTransformNodeComponent = LocalPlayer->m_pTransformNodeComponent;
   else
-    v3 = 0i64;
-  if ( v3 )
+    m_pTransformNodeComponent = 0i64;
+  if ( m_pTransformNodeComponent )
   {
-    UFG::TransformNodeComponent::UpdateWorldTransform(v3);
-    v4 = v3->mWorldTransform.v3.x;
-    v5 = v3->mWorldTransform.v3.y;
-    v6 = v3->mWorldTransform.v3.z;
+    UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+    x = m_pTransformNodeComponent->mWorldTransform.v3.x;
+    y = m_pTransformNodeComponent->mWorldTransform.v3.y;
+    z = m_pTransformNodeComponent->mWorldTransform.v3.z;
     v7 = UFG::qVector3::msZero.z;
     v8 = UFG::qVector3::msZero.y;
     v9 = UFG::qVector3::msZero.x;
@@ -1592,29 +1535,29 @@ char __fastcall UFG::RoadNetworkVisibleArea::ShouldUpdateVisibleArea(UFG::RoadNe
     v9 = UFG::qVector3::msZero.x;
     v8 = UFG::qVector3::msZero.y;
     v7 = UFG::qVector3::msZero.z;
-    v4 = UFG::qVector3::msZero.x;
-    v5 = UFG::qVector3::msZero.y;
-    v6 = UFG::qVector3::msZero.z;
+    x = UFG::qVector3::msZero.x;
+    y = UFG::qVector3::msZero.y;
+    z = UFG::qVector3::msZero.z;
   }
-  if ( v2->mForceVisibleAreaUpdate )
+  if ( this->mForceVisibleAreaUpdate )
   {
-    v2->mForceVisibleAreaUpdate = 0;
+    this->mForceVisibleAreaUpdate = 0;
   }
-  else if ( (v9 != v2->mStartPosition.x || v8 != v2->mStartPosition.y || v7 != v2->mStartPosition.z)
-         && (float)((float)((float)((float)(v5 - v2->mStartPosition.y) * (float)(v5 - v2->mStartPosition.y))
-                          + (float)((float)(v4 - v2->mStartPosition.x) * (float)(v4 - v2->mStartPosition.x)))
-                  + (float)((float)(v6 - v2->mStartPosition.z) * (float)(v6 - v2->mStartPosition.z))) <= 100.0 )
+  else if ( (v9 != this->mStartPosition.x || v8 != this->mStartPosition.y || v7 != this->mStartPosition.z)
+         && (float)((float)((float)((float)(y - this->mStartPosition.y) * (float)(y - this->mStartPosition.y))
+                          + (float)((float)(x - this->mStartPosition.x) * (float)(x - this->mStartPosition.x)))
+                  + (float)((float)(z - this->mStartPosition.z) * (float)(z - this->mStartPosition.z))) <= 100.0 )
   {
     return 0;
   }
-  v10 = v2->mStartPosition.y;
-  v11 = v2->mStartPosition.z;
-  v2->mPreviousStartPosition.x = v2->mStartPosition.x;
-  v2->mPreviousStartPosition.y = v10;
-  v2->mPreviousStartPosition.z = v11;
-  v2->mStartPosition.x = v4;
-  v2->mStartPosition.y = v5;
-  v2->mStartPosition.z = v6;
+  v10 = this->mStartPosition.y;
+  v11 = this->mStartPosition.z;
+  this->mPreviousStartPosition.x = this->mStartPosition.x;
+  this->mPreviousStartPosition.y = v10;
+  this->mPreviousStartPosition.z = v11;
+  this->mStartPosition.x = x;
+  this->mStartPosition.y = y;
+  this->mStartPosition.z = z;
   if ( LocalPlayer )
     v1 = LocalPlayer->m_pTransformNodeComponent;
   if ( v1 )
@@ -1630,12 +1573,12 @@ char __fastcall UFG::RoadNetworkVisibleArea::ShouldUpdateVisibleArea(UFG::RoadNe
     v13 = UFG::qVector3::msZero.y;
     v14 = UFG::qVector3::msZero.z;
   }
-  v2->mStartDirection.x = v12;
-  v2->mStartDirection.y = v13;
-  v2->mStartDirection.z = v14;
-  UFG::RoadNetworkVisibleArea::GetSubjectSpeed(v2);
+  this->mStartDirection.x = v12;
+  this->mStartDirection.y = v13;
+  this->mStartDirection.z = v14;
+  SubjectSpeed = UFG::RoadNetworkVisibleArea::GetSubjectSpeed(this);
   result = 1;
-  v2->mStartSpeed = v12;
+  this->mStartSpeed = *(float *)&SubjectSpeed;
   return result;
 }
 
@@ -1655,25 +1598,22 @@ void __fastcall UFG::RoadNetworkVisibleArea::SetForceVisibleAreaUpdate(UFG::Road
 
 // File Line: 1014
 // RVA: 0xE0FD0
-char __fastcall UFG::RoadNetworkVisibleArea::UpdateByEdges(UFG::RoadNetworkVisibleArea *this, UFG::qArray<UFG::RoadNetworkSubSegment *,0> *deactivateSubSegments, UFG::qArray<UFG::RoadNetworkSubSegment *,0> *activateSubSegments)
+bool __fastcall UFG::RoadNetworkVisibleArea::UpdateByEdges(
+        UFG::RoadNetworkVisibleArea *this,
+        UFG::qArray<UFG::RoadNetworkSubSegment *,0> *deactivateSubSegments,
+        UFG::qArray<UFG::RoadNetworkSubSegment *,0> *activateSubSegments)
 {
-  UFG::qArray<UFG::RoadNetworkSubSegment *,0> *v3; // rsi
-  UFG::qArray<UFG::RoadNetworkSubSegment *,0> *v4; // rbp
-  UFG::RoadNetworkVisibleArea *v5; // rbx
-  char v6; // di
+  char LandVisibleArea; // di
   char v7; // di
 
-  v3 = activateSubSegments;
-  v4 = deactivateSubSegments;
-  v5 = this;
   if ( !UFG::RoadNetworkVisibleArea::ShouldUpdateVisibleArea(this) )
     return 0;
-  UFG::RoadNetworkVisibleArea::ClearLastVisibleArea(v5);
-  UFG::RoadNetworkVisibleArea::UpdateClosestRoadNetworkNodes(v5);
-  v6 = UFG::RoadNetworkVisibleArea::GenerateLandVisibleArea(v5);
-  v7 = UFG::RoadNetworkVisibleArea::GenerateOceanVisibleArea(v5) | v6;
+  UFG::RoadNetworkVisibleArea::ClearLastVisibleArea(this);
+  UFG::RoadNetworkVisibleArea::UpdateClosestRoadNetworkNodes(this);
+  LandVisibleArea = UFG::RoadNetworkVisibleArea::GenerateLandVisibleArea(this);
+  v7 = UFG::RoadNetworkVisibleArea::GenerateOceanVisibleArea(this) | LandVisibleArea;
   if ( v7 )
-    UFG::RoadNetworkVisibleArea::UpdateVisibleArea(v5, v4, v3);
+    UFG::RoadNetworkVisibleArea::UpdateVisibleArea(this, deactivateSubSegments, activateSubSegments);
   return v7;
 }
 
@@ -1682,58 +1622,56 @@ char __fastcall UFG::RoadNetworkVisibleArea::UpdateByEdges(UFG::RoadNetworkVisib
 __int64 __fastcall UFG::RoadNetworkVisibleArea::GenerateLandVisibleArea(UFG::RoadNetworkVisibleArea *this)
 {
   unsigned __int8 v1; // r15
-  UFG::RoadNetworkVisibleArea *v2; // rbx
-  unsigned int v3; // er14
+  unsigned int v3; // r14d
   __int64 v4; // rdi
-  UFG::RoadNetworkNode **v5; // rax
+  UFG::RoadNetworkNode **p; // rax
   UFG::RoadNetworkNode *v6; // rsi
-  bool v7; // al
+  bool BuildVisibleRoadNetworkByGrid; // al
 
   v1 = 0;
-  v2 = this;
   v3 = 0;
   v4 = 0i64;
   do
   {
-    v5 = v2->mClosestNodeCollection.p;
-    v6 = v5[v4];
+    p = this->mClosestNodeCollection.p;
+    v6 = p[v4];
     if ( v3 != 3 )
     {
       if ( v6 )
       {
         if ( v6->mType.mValue == 1 )
-          v7 = UFG::RoadNetworkIntersection::GetBuildVisibleRoadNetworkByGrid((UFG::RoadNetworkIntersection *)v5[v4]);
+          BuildVisibleRoadNetworkByGrid = UFG::RoadNetworkIntersection::GetBuildVisibleRoadNetworkByGrid((UFG::RoadNetworkIntersection *)p[v4]);
         else
-          v7 = (LODWORD(v6[1].mOutgoingConnections.mOffset) >> 5) & 1;
-        if ( v7 )
+          BuildVisibleRoadNetworkByGrid = (v6[1].mOutgoingConnections.mOffset & 0x20) != 0;
+        if ( BuildVisibleRoadNetworkByGrid )
         {
-          v1 |= UFG::RoadNetworkVisibleArea::BuildVisibleRoadNetworkByGrid(v2, v6, v3);
+          v1 |= UFG::RoadNetworkVisibleArea::BuildVisibleRoadNetworkByGrid(this, v6, v3);
         }
         else
         {
           v1 |= 1u;
           if ( v6->mType.mValue == 1 )
-            UFG::RoadNetworkVisibleArea::CreateEdges(v2, (UFG::RoadNetworkIntersection *)v6);
+            UFG::RoadNetworkVisibleArea::CreateEdges(this, (UFG::RoadNetworkIntersection *)v6);
           else
-            UFG::RoadNetworkVisibleArea::CreateEdges(v2, v2->mClosestSubSegmentCollection.p[v4]);
-          while ( !UFG::RoadNetworkVisibleAreaEdgeManager::ExpandOneStep(&v2->mEdgeManager) )
+            UFG::RoadNetworkVisibleArea::CreateEdges(this, this->mClosestSubSegmentCollection.p[v4]);
+          while ( !UFG::RoadNetworkVisibleAreaEdgeManager::ExpandOneStep(&this->mEdgeManager) )
             ;
         }
         if ( v6->mType.mValue == 1 )
         {
-          v2->mPreviousClosestNodeCollection.p[v4] = v2->mClosestNodeCollection.p[v4];
-          v2->mPreviousClosestSubSegmentCollection.p[v4] = 0i64;
+          this->mPreviousClosestNodeCollection.p[v4] = this->mClosestNodeCollection.p[v4];
+          this->mPreviousClosestSubSegmentCollection.p[v4] = 0i64;
         }
         else
         {
-          v2->mPreviousClosestNodeCollection.p[v4] = v2->mClosestNodeCollection.p[v4];
-          v2->mPreviousClosestSubSegmentCollection.p[v4] = v2->mClosestSubSegmentCollection.p[v4];
+          this->mPreviousClosestNodeCollection.p[v4] = this->mClosestNodeCollection.p[v4];
+          this->mPreviousClosestSubSegmentCollection.p[v4] = this->mClosestSubSegmentCollection.p[v4];
         }
       }
       else
       {
-        v2->mPreviousClosestNodeCollection.p[v4] = 0i64;
-        v2->mPreviousClosestSubSegmentCollection.p[v4] = 0i64;
+        this->mPreviousClosestNodeCollection.p[v4] = 0i64;
+        this->mPreviousClosestSubSegmentCollection.p[v4] = 0i64;
       }
     }
     ++v3;
@@ -1745,33 +1683,34 @@ __int64 __fastcall UFG::RoadNetworkVisibleArea::GenerateLandVisibleArea(UFG::Roa
 
 // File Line: 1088
 // RVA: 0xE1C20
-void __fastcall UFG::RoadNetworkVisibleArea::UpdateVisibleArea(UFG::RoadNetworkVisibleArea *this, UFG::qArray<UFG::RoadNetworkSubSegment *,0> *deactivateSubSegments, UFG::qArray<UFG::RoadNetworkSubSegment *,0> *activateSubSegments)
+void __fastcall UFG::RoadNetworkVisibleArea::UpdateVisibleArea(
+        UFG::RoadNetworkVisibleArea *this,
+        UFG::qArray<UFG::RoadNetworkSubSegment *,0> *deactivateSubSegments,
+        UFG::qArray<UFG::RoadNetworkSubSegment *,0> *activateSubSegments)
 {
   __int64 v3; // r12
   UFG::qArray<UFG::RoadNetworkSubSegment *,0> *v4; // r14
-  UFG::qArray<UFG::RoadNetworkSubSegment *,0> *v5; // rdi
-  UFG::RoadNetworkVisibleArea *v6; // r13
-  UFG::RoadNetworkSubSegment **v7; // rcx
+  UFG::RoadNetworkSubSegment **p; // rcx
   UFG::RoadNetworkSubSegment *v8; // r8
-  signed __int64 v9; // rax
-  UFG::qArray<UFG::RoadNetworkSubSegment *,0> *v10; // rcx
-  unsigned int v11; // edx
+  UFG::RoadNetworkSubSegment **v9; // rax
+  UFG::qArray<UFG::RoadNetworkSubSegment *,0> *mCurrentVisibleSubSegments; // rcx
+  unsigned int size; // edx
   unsigned int v12; // eax
   UFG::RoadNetworkSubSegment **v13; // rcx
   __int64 v14; // r15
-  unsigned int v15; // ebx
+  unsigned int capacity; // ebx
   unsigned int v16; // esi
   unsigned int v17; // ebx
   unsigned __int64 v18; // rax
   char *v19; // rax
-  char *v20; // rbp
-  signed __int64 v21; // r9
-  signed __int64 v22; // r8
+  UFG::RoadNetworkSubSegment **v20; // rbp
+  __int64 i; // r9
+  __int64 v22; // r8
   UFG::RoadNetworkSubSegment **v23; // rcx
-  __int64 v24; // r12
+  __int64 j; // r12
   unsigned int v25; // eax
   UFG::RoadNetworkSubSegment *v26; // rbp
-  UFG::qArray<UFG::RoadNetworkSubSegment *,0> *v27; // rcx
+  UFG::qArray<UFG::RoadNetworkSubSegment *,0> *mPreviousVisibleSubSegments; // rcx
   unsigned int v28; // edx
   UFG::RoadNetworkSubSegment **v29; // rcx
   __int64 v30; // r15
@@ -1781,50 +1720,46 @@ void __fastcall UFG::RoadNetworkVisibleArea::UpdateVisibleArea(UFG::RoadNetworkV
   unsigned __int64 v34; // rax
   char *v35; // rax
   char *v36; // rsi
-  signed __int64 v37; // r9
-  signed __int64 v38; // r8
+  __int64 k; // r9
+  __int64 v38; // r8
   UFG::RoadNetworkSubSegment **v39; // rax
   UFG::qArray<UFG::RoadNetworkSubSegment *,0> *v40; // rcx
-  UFG::qArray<UFG::RoadNetworkNode *,0> *v41; // rcx
+  UFG::qArray<UFG::RoadNetworkNode *,0> *mPreviousVisibleRoadNetwork; // rcx
   UFG::RoadNetworkSubSegment **v42; // [rsp+60h] [rbp+8h]
-  UFG::qArray<UFG::RoadNetworkSubSegment *,0> *v43; // [rsp+70h] [rbp+18h]
 
-  v43 = activateSubSegments;
   v3 = 0i64;
   v4 = activateSubSegments;
-  v5 = deactivateSubSegments;
-  v6 = this;
   if ( this->mPreviousVisibleSubSegments->size )
   {
     do
     {
-      v7 = v6->mPreviousVisibleSubSegments->p;
-      v8 = v7[v3];
-      v9 = (signed __int64)&v7[v3];
-      v10 = v6->mCurrentVisibleSubSegments;
-      v11 = v10->size;
-      v42 = (UFG::RoadNetworkSubSegment **)v9;
+      p = this->mPreviousVisibleSubSegments->p;
+      v8 = p[v3];
+      v9 = &p[v3];
+      mCurrentVisibleSubSegments = this->mCurrentVisibleSubSegments;
+      size = mCurrentVisibleSubSegments->size;
+      v42 = v9;
       v12 = 0;
-      if ( !v10->size )
+      if ( !mCurrentVisibleSubSegments->size )
         goto LABEL_8;
-      v13 = v10->p;
+      v13 = mCurrentVisibleSubSegments->p;
       while ( v8 != *v13 )
       {
         ++v12;
         ++v13;
-        if ( v12 >= v11 )
+        if ( v12 >= size )
           goto LABEL_8;
       }
       if ( v12 == -1 )
       {
 LABEL_8:
-        v14 = v5->size;
-        v15 = v5->capacity;
+        v14 = deactivateSubSegments->size;
+        capacity = deactivateSubSegments->capacity;
         v16 = v14 + 1;
-        if ( (signed int)v14 + 1 > v15 )
+        if ( (int)v14 + 1 > capacity )
         {
-          if ( v15 )
-            v17 = 2 * v15;
+          if ( capacity )
+            v17 = 2 * capacity;
           else
             v17 = 1;
           for ( ; v17 < v16; v17 *= 2 )
@@ -1839,47 +1774,40 @@ LABEL_8:
             if ( !is_mul_ok(v17, 8ui64) )
               v18 = -1i64;
             v19 = UFG::qMalloc(v18, "qArray.Add.deactivateSubSegments", 0i64);
-            v20 = v19;
-            if ( v5->p )
+            v20 = (UFG::RoadNetworkSubSegment **)v19;
+            if ( deactivateSubSegments->p )
             {
-              v21 = 0i64;
-              if ( v5->size )
+              for ( i = 0i64;
+                    (unsigned int)i < deactivateSubSegments->size;
+                    *(_QWORD *)&v19[v22 * 8] = deactivateSubSegments->p[v22] )
               {
-                do
-                {
-                  v22 = v21;
-                  v21 = (unsigned int)(v21 + 1);
-                  *(_QWORD *)&v19[v22 * 8] = v5->p[v22];
-                }
-                while ( (unsigned int)v21 < v5->size );
+                v22 = i;
+                i = (unsigned int)(i + 1);
               }
-              operator delete[](v5->p);
+              operator delete[](deactivateSubSegments->p);
             }
-            v5->p = (UFG::RoadNetworkSubSegment **)v20;
-            v5->capacity = v17;
+            deactivateSubSegments->p = v20;
+            deactivateSubSegments->capacity = v17;
           }
         }
-        v23 = v5->p;
-        v5->size = v16;
+        v23 = deactivateSubSegments->p;
+        deactivateSubSegments->size = v16;
         v23[v14] = *v42;
       }
       v3 = (unsigned int)(v3 + 1);
     }
-    while ( (unsigned int)v3 < v6->mPreviousVisibleSubSegments->size );
-    v4 = v43;
+    while ( (unsigned int)v3 < this->mPreviousVisibleSubSegments->size );
+    v4 = activateSubSegments;
   }
-  v24 = 0i64;
-  if ( v6->mCurrentVisibleSubSegments->size )
+  for ( j = 0i64; (unsigned int)j < this->mCurrentVisibleSubSegments->size; j = (unsigned int)(j + 1) )
   {
-    do
+    v25 = 0;
+    v26 = this->mCurrentVisibleSubSegments->p[j];
+    mPreviousVisibleSubSegments = this->mPreviousVisibleSubSegments;
+    v28 = mPreviousVisibleSubSegments->size;
+    if ( mPreviousVisibleSubSegments->size )
     {
-      v25 = 0;
-      v26 = v6->mCurrentVisibleSubSegments->p[v24];
-      v27 = v6->mPreviousVisibleSubSegments;
-      v28 = v27->size;
-      if ( !v27->size )
-        goto LABEL_36;
-      v29 = v27->p;
+      v29 = mPreviousVisibleSubSegments->p;
       while ( v26 != *v29 )
       {
         ++v25;
@@ -1887,351 +1815,316 @@ LABEL_8:
         if ( v25 >= v28 )
           goto LABEL_36;
       }
-      if ( v25 == -1 )
-      {
-LABEL_36:
-        v30 = v4->size;
-        v31 = v4->capacity;
-        v32 = v30 + 1;
-        if ( (signed int)v30 + 1 > v31 )
-        {
-          if ( v31 )
-            v33 = 2 * v31;
-          else
-            v33 = 1;
-          for ( ; v33 < v32; v33 *= 2 )
-            ;
-          if ( v33 <= 2 )
-            v33 = 2;
-          if ( v33 - v32 > 0x10000 )
-            v33 = v30 + 65537;
-          if ( v33 != (_DWORD)v30 )
-          {
-            v34 = 8i64 * v33;
-            if ( !is_mul_ok(v33, 8ui64) )
-              v34 = -1i64;
-            v35 = UFG::qMalloc(v34, "qArray.Add.activateSubSegments", 0i64);
-            v36 = v35;
-            if ( v4->p )
-            {
-              v37 = 0i64;
-              if ( v4->size )
-              {
-                do
-                {
-                  v38 = v37;
-                  v37 = (unsigned int)(v37 + 1);
-                  *(_QWORD *)&v35[v38 * 8] = v4->p[v38];
-                }
-                while ( (unsigned int)v37 < v4->size );
-              }
-              operator delete[](v4->p);
-            }
-            v4->p = (UFG::RoadNetworkSubSegment **)v36;
-            v4->capacity = v33;
-          }
-        }
-        v39 = v4->p;
-        v4->size = v32;
-        v39[v30] = v26;
-      }
-      v24 = (unsigned int)(v24 + 1);
+      if ( v25 != -1 )
+        continue;
     }
-    while ( (unsigned int)v24 < v6->mCurrentVisibleSubSegments->size );
+LABEL_36:
+    v30 = v4->size;
+    v31 = v4->capacity;
+    v32 = v30 + 1;
+    if ( (int)v30 + 1 > v31 )
+    {
+      if ( v31 )
+        v33 = 2 * v31;
+      else
+        v33 = 1;
+      for ( ; v33 < v32; v33 *= 2 )
+        ;
+      if ( v33 <= 2 )
+        v33 = 2;
+      if ( v33 - v32 > 0x10000 )
+        v33 = v30 + 65537;
+      if ( v33 != (_DWORD)v30 )
+      {
+        v34 = 8i64 * v33;
+        if ( !is_mul_ok(v33, 8ui64) )
+          v34 = -1i64;
+        v35 = UFG::qMalloc(v34, "qArray.Add.activateSubSegments", 0i64);
+        v36 = v35;
+        if ( v4->p )
+        {
+          for ( k = 0i64; (unsigned int)k < v4->size; *(_QWORD *)&v35[v38 * 8] = v4->p[v38] )
+          {
+            v38 = k;
+            k = (unsigned int)(k + 1);
+          }
+          operator delete[](v4->p);
+        }
+        v4->p = (UFG::RoadNetworkSubSegment **)v36;
+        v4->capacity = v33;
+      }
+    }
+    v39 = v4->p;
+    v4->size = v32;
+    v39[v30] = v26;
   }
-  v40 = v6->mPreviousVisibleSubSegments;
-  v6->mPreviousVisibleSubSegments = v6->mCurrentVisibleSubSegments;
-  v6->mCurrentVisibleSubSegments = v40;
+  v40 = this->mPreviousVisibleSubSegments;
+  this->mPreviousVisibleSubSegments = this->mCurrentVisibleSubSegments;
+  this->mCurrentVisibleSubSegments = v40;
   v40->size = 0;
-  v41 = v6->mPreviousVisibleRoadNetwork;
-  v6->mPreviousVisibleRoadNetwork = v6->mCurrentVisibleRoadNetwork;
-  v6->mCurrentVisibleRoadNetwork = v41;
-  v41->size = 0;
+  mPreviousVisibleRoadNetwork = this->mPreviousVisibleRoadNetwork;
+  this->mPreviousVisibleRoadNetwork = this->mCurrentVisibleRoadNetwork;
+  this->mCurrentVisibleRoadNetwork = mPreviousVisibleRoadNetwork;
+  mPreviousVisibleRoadNetwork->size = 0;
 }
 
 // File Line: 1150
 // RVA: 0xD18B0
-void __fastcall UFG::RoadNetworkVisibleArea::AddEdge(UFG::RoadNetworkVisibleArea *this, UFG::RoadNetworkSubSegment *currentSubSegment, UFG::RoadNetworkSubSegment *nextSubSegment, UFG::RoadNetworkGate *nextGate)
+void __fastcall UFG::RoadNetworkVisibleArea::AddEdge(
+        UFG::RoadNetworkVisibleArea *this,
+        UFG::RoadNetworkSubSegment *currentSubSegment,
+        UFG::RoadNetworkSubSegment *nextSubSegment,
+        UFG::RoadNetworkGate *nextGate)
 {
-  UFG::RoadNetworkGate *v4; // rdi
-  UFG::RoadNetworkSubSegment *v5; // rsi
-  UFG::RoadNetworkSubSegment *v6; // rbp
-  UFG::RoadNetworkVisibleArea *v7; // rbx
   char *v8; // rax
 
-  v4 = nextGate;
-  v5 = nextSubSegment;
-  v6 = currentSubSegment;
-  v7 = this;
   v8 = UFG::qMalloc(0x100ui64, "RoadNetworkVisibleArea.RoadNetworkVisibleAreaEdge", 0i64);
   if ( v8 )
-    UFG::RoadNetworkVisibleAreaEdge::RoadNetworkVisibleAreaEdge((UFG::RoadNetworkVisibleAreaEdge *)v8, v7, v6, v5, v4);
-  UFG::DaemonManager::RegisterDaemon(&v7->mEdgeManager, (UFG::RoadNetworkVisibleAreaEdge *)v8);
+    UFG::RoadNetworkVisibleAreaEdge::RoadNetworkVisibleAreaEdge(
+      (UFG::RoadNetworkVisibleAreaEdge *)v8,
+      this,
+      currentSubSegment,
+      nextSubSegment,
+      nextGate);
+  UFG::DaemonManager::RegisterDaemon(&this->mEdgeManager, (UFG::RoadNetworkVisibleAreaEdge *)v8);
 }
 
 // File Line: 1165
 // RVA: 0xD1840
-void __fastcall UFG::RoadNetworkVisibleArea::AddEdge(UFG::RoadNetworkVisibleArea *this, UFG::RoadNetworkGate *gate, UFG::RoadNetworkVisibleAreaEdge *spawner)
+void __fastcall UFG::RoadNetworkVisibleArea::AddEdge(
+        UFG::RoadNetworkVisibleArea *this,
+        UFG::RoadNetworkGate *gate,
+        UFG::RoadNetworkVisibleAreaEdge *spawner)
 {
-  UFG::RoadNetworkVisibleAreaEdge *v3; // rdi
-  UFG::RoadNetworkGate *v4; // rsi
-  UFG::RoadNetworkVisibleArea *v5; // rbx
   char *v6; // rax
 
-  v3 = spawner;
-  v4 = gate;
-  v5 = this;
   v6 = UFG::qMalloc(0x100ui64, "RoadNetworkVisibleArea.RoadNetworkVisibleAreaEdge", 0i64);
   if ( v6 )
-    UFG::RoadNetworkVisibleAreaEdge::RoadNetworkVisibleAreaEdge((UFG::RoadNetworkVisibleAreaEdge *)v6, v4, v5, v3);
-  UFG::DaemonManager::RegisterDaemon(&v5->mEdgeManager, (UFG::RoadNetworkVisibleAreaEdge *)v6);
+    UFG::RoadNetworkVisibleAreaEdge::RoadNetworkVisibleAreaEdge(
+      (UFG::RoadNetworkVisibleAreaEdge *)v6,
+      gate,
+      this,
+      spawner);
+  UFG::DaemonManager::RegisterDaemon(&this->mEdgeManager, (UFG::RoadNetworkVisibleAreaEdge *)v6);
 }
 
 // File Line: 1172
 // RVA: 0xD3DF0
-void __fastcall UFG::RoadNetworkVisibleArea::CreateEdges(UFG::RoadNetworkVisibleArea *this, UFG::RoadNetworkIntersection *intersection, UFG::RoadNetworkVisibleAreaEdge *spawner, UFG::RoadNetworkGate *spawnerGate)
+void __fastcall UFG::RoadNetworkVisibleArea::CreateEdges(
+        UFG::RoadNetworkVisibleArea *this,
+        UFG::RoadNetworkIntersection *intersection,
+        UFG::RoadNetworkVisibleAreaEdge *spawner,
+        UFG::RoadNetworkGate *spawnerGate)
 {
-  __int64 v4; // rbp
-  UFG::RoadNetworkGate *v5; // r12
-  UFG::RoadNetworkVisibleAreaEdge *v6; // r13
-  UFG::RoadNetworkIntersection *v7; // r15
-  UFG::RoadNetworkVisibleArea *v8; // r14
-  __int64 v9; // rax
-  signed __int64 v10; // rcx
+  __int64 i; // rbp
+  __int64 mOffset; // rax
+  char *v10; // rcx
   __int64 v11; // rax
   UFG::RoadNetworkGate *v12; // rdi
   __int64 v13; // rax
   UFG::RoadNetworkSegment *v14; // rbx
   char v15; // si
-  unsigned int v16; // edx
+  unsigned int mIndex; // edx
   UFG::qBaseTreeRB *v17; // rax
   __int64 v18; // rax
   UFG::RoadNetworkGate *v19; // rdx
 
-  v4 = 0i64;
-  v5 = spawnerGate;
-  v6 = spawner;
-  v7 = intersection;
-  v8 = this;
-  if ( intersection->mNumGates )
+  for ( i = 0i64; (unsigned int)i < (unsigned __int8)intersection->mNumGates; i = (unsigned int)(i + 1) )
   {
-    do
+    mOffset = intersection->mGates.mOffset;
+    if ( mOffset )
+      v10 = (char *)&intersection->mGates + mOffset;
+    else
+      v10 = 0i64;
+    v11 = *(_QWORD *)&v10[8 * i];
+    if ( v11 )
+      v12 = (UFG::RoadNetworkGate *)&v10[8 * i + v11];
+    else
+      v12 = 0i64;
+    v13 = v12->mConnectedNode.mOffset;
+    if ( v13 )
+      v14 = (UFG::RoadNetworkSegment *)((char *)&v12->mConnectedNode + v13);
+    else
+      v14 = 0i64;
+    if ( v12 != spawnerGate && v14 )
     {
-      v9 = v7->mGates.mOffset;
-      if ( v9 )
-        v10 = (signed __int64)&v7->mGates + v9;
-      else
-        v10 = 0i64;
-      v11 = *(_QWORD *)(v10 + 8 * v4);
-      if ( v11 )
-        v12 = (UFG::RoadNetworkGate *)(v11 + v10 + 8 * v4);
-      else
-        v12 = 0i64;
-      v13 = v12->mConnectedNode.mOffset;
-      if ( v13 )
-        v14 = (UFG::RoadNetworkSegment *)((char *)&v12->mConnectedNode + v13);
-      else
-        v14 = 0i64;
-      if ( v12 != v5 && v14 )
+      v15 = 0;
+      if ( v14->mType.mValue == 1 )
       {
-        v15 = 0;
-        if ( v14->mType.mValue == 1 )
-        {
-          v16 = v14->mIndex;
-          if ( v16 )
-            v17 = UFG::qBaseTreeRB::Get(&v8->mVisitedIntersections.mTree.mTree, v16);
-          else
-            v17 = 0i64;
-          v15 = v17 != 0i64;
-        }
-        if ( !v14->mType.mValue )
-        {
-          v18 = v12->mConnectedGate.mOffset;
-          if ( v18 )
-            v19 = (UFG::RoadNetworkGate *)((char *)v12 + v18 + 16);
-          else
-            v19 = 0i64;
-          v15 |= UFG::RoadNetworkSegment::GetClosestSubSegment(v14, v19)->mActive != 0;
-        }
-        if ( !v15 )
-          UFG::RoadNetworkVisibleArea::AddEdge(v8, v12, v6);
+        mIndex = v14->mIndex;
+        if ( mIndex )
+          v17 = UFG::qBaseTreeRB::Get(&this->mVisitedIntersections.mTree.mTree, mIndex);
+        else
+          v17 = 0i64;
+        v15 = v17 != 0i64;
       }
-      v4 = (unsigned int)(v4 + 1);
+      if ( !v14->mType.mValue )
+      {
+        v18 = v12->mConnectedGate.mOffset;
+        if ( v18 )
+          v19 = (UFG::RoadNetworkGate *)((char *)&v12->mConnectedGate + v18);
+        else
+          v19 = 0i64;
+        v15 |= UFG::RoadNetworkSegment::GetClosestSubSegment(v14, v19)->mActive != 0;
+      }
+      if ( !v15 )
+        UFG::RoadNetworkVisibleArea::AddEdge(this, v12, spawner);
     }
-    while ( (unsigned int)v4 < (unsigned __int8)v7->mNumGates );
   }
 }
 
 // File Line: 1206
 // RVA: 0xD3A70
-void __fastcall UFG::RoadNetworkVisibleArea::CreateEdges(UFG::RoadNetworkVisibleArea *this, UFG::RoadNetworkIntersection *intersection)
+void __fastcall UFG::RoadNetworkVisibleArea::CreateEdges(
+        UFG::RoadNetworkVisibleArea *this,
+        UFG::RoadNetworkIntersection *intersection)
 {
-  UFG::RoadNetworkIntersection *v2; // r13
-  UFG::RoadNetworkVisibleArea *v3; // rdi
-  __int64 v4; // r15
-  __int64 v5; // rax
-  signed __int64 v6; // rcx
-  _QWORD *v7; // rdx
+  __int64 i; // r15
+  __int64 mOffset; // rax
+  char *v6; // rcx
+  char *v7; // rdx
   UFG::RoadNetworkGate *v8; // rbx
   __int64 v9; // rax
   char *v10; // rax
   UFG::RoadNetworkVisibleAreaEdge *v11; // rax
   UFG::RoadNetworkVisibleAreaEdge *v12; // r12
-  __int64 v13; // r14
+  __int64 size; // r14
   unsigned int v14; // esi
-  unsigned int v15; // ebx
+  unsigned int capacity; // ebx
   unsigned int v16; // ebx
   unsigned __int64 v17; // rax
   char *v18; // rax
-  char *v19; // rbp
-  __int64 v20; // r9
+  UFG::RoadNetworkVisibleAreaEdge **v19; // rbp
+  __int64 j; // r9
 
-  v2 = intersection;
-  v3 = this;
-  v4 = 0i64;
-  if ( intersection->mNumGates )
+  for ( i = 0i64; (unsigned int)i < (unsigned __int8)intersection->mNumGates; i = (unsigned int)(i + 1) )
   {
-    do
+    mOffset = intersection->mGates.mOffset;
+    if ( mOffset )
+      v6 = (char *)&intersection->mGates + mOffset;
+    else
+      v6 = 0i64;
+    v7 = &v6[8 * i];
+    if ( *(_QWORD *)v7 )
+      v8 = (UFG::RoadNetworkGate *)&v7[*(_QWORD *)v7];
+    else
+      v8 = 0i64;
+    v9 = v8->mConnectedNode.mOffset;
+    if ( v9 && (UFG::qOffset64<UFG::RoadNetworkNode *> *)((char *)&v8->mConnectedNode + v9) )
     {
-      v5 = v2->mGates.mOffset;
-      if ( v5 )
-        v6 = (signed __int64)&v2->mGates + v5;
-      else
-        v6 = 0i64;
-      v7 = (_QWORD *)(v6 + 8 * v4);
-      if ( *v7 )
-        v8 = (UFG::RoadNetworkGate *)((char *)v7 + *v7);
-      else
-        v8 = 0i64;
-      v9 = v8->mConnectedNode.mOffset;
-      if ( v9 && (UFG::qOffset64<UFG::RoadNetworkNode *> *)((char *)&v8->mConnectedNode + v9) )
+      v10 = UFG::qMalloc(0x100ui64, "RoadNetworkVisibleArea.RoadNetworkVisibleAreaEdge", 0i64);
+      if ( v10 )
       {
-        v10 = UFG::qMalloc(0x100ui64, "RoadNetworkVisibleArea.RoadNetworkVisibleAreaEdge", 0i64);
-        if ( v10 )
-        {
-          UFG::RoadNetworkVisibleAreaEdge::RoadNetworkVisibleAreaEdge((UFG::RoadNetworkVisibleAreaEdge *)v10, v3, v8);
-          v12 = v11;
-        }
-        else
-        {
-          v12 = 0i64;
-        }
-        v13 = v3->mEdgeManager.mEdgeCollection.size;
-        v14 = v13 + 1;
-        v15 = v3->mEdgeManager.mEdgeCollection.capacity;
-        if ( (signed int)v13 + 1 > v15 )
-        {
-          if ( v15 )
-            v16 = 2 * v15;
-          else
-            v16 = 1;
-          for ( ; v16 < v14; v16 *= 2 )
-            ;
-          if ( v16 <= 2 )
-            v16 = 2;
-          if ( v16 - v14 > 0x10000 )
-            v16 = v13 + 65537;
-          if ( v16 != (_DWORD)v13 )
-          {
-            v17 = 8i64 * v16;
-            if ( !is_mul_ok(v16, 8ui64) )
-              v17 = -1i64;
-            v18 = UFG::qMalloc(v17, "qArray.Add", 0i64);
-            v19 = v18;
-            if ( v3->mEdgeManager.mEdgeCollection.p )
-            {
-              v20 = 0i64;
-              if ( v3->mEdgeManager.mEdgeCollection.size )
-              {
-                do
-                {
-                  *(_QWORD *)&v18[8 * v20] = v3->mEdgeManager.mEdgeCollection.p[v20];
-                  v20 = (unsigned int)(v20 + 1);
-                }
-                while ( (unsigned int)v20 < v3->mEdgeManager.mEdgeCollection.size );
-              }
-              operator delete[](v3->mEdgeManager.mEdgeCollection.p);
-            }
-            v3->mEdgeManager.mEdgeCollection.p = (UFG::RoadNetworkVisibleAreaEdge **)v19;
-            v3->mEdgeManager.mEdgeCollection.capacity = v16;
-          }
-        }
-        v3->mEdgeManager.mEdgeCollection.size = v14;
-        v3->mEdgeManager.mEdgeCollection.p[v13] = v12;
+        UFG::RoadNetworkVisibleAreaEdge::RoadNetworkVisibleAreaEdge((UFG::RoadNetworkVisibleAreaEdge *)v10, this, v8);
+        v12 = v11;
       }
-      v4 = (unsigned int)(v4 + 1);
+      else
+      {
+        v12 = 0i64;
+      }
+      size = this->mEdgeManager.mEdgeCollection.size;
+      v14 = size + 1;
+      capacity = this->mEdgeManager.mEdgeCollection.capacity;
+      if ( (int)size + 1 > capacity )
+      {
+        if ( capacity )
+          v16 = 2 * capacity;
+        else
+          v16 = 1;
+        for ( ; v16 < v14; v16 *= 2 )
+          ;
+        if ( v16 <= 2 )
+          v16 = 2;
+        if ( v16 - v14 > 0x10000 )
+          v16 = size + 65537;
+        if ( v16 != (_DWORD)size )
+        {
+          v17 = 8i64 * v16;
+          if ( !is_mul_ok(v16, 8ui64) )
+            v17 = -1i64;
+          v18 = UFG::qMalloc(v17, "qArray.Add", 0i64);
+          v19 = (UFG::RoadNetworkVisibleAreaEdge **)v18;
+          if ( this->mEdgeManager.mEdgeCollection.p )
+          {
+            for ( j = 0i64; (unsigned int)j < this->mEdgeManager.mEdgeCollection.size; j = (unsigned int)(j + 1) )
+              *(_QWORD *)&v18[8 * j] = this->mEdgeManager.mEdgeCollection.p[j];
+            operator delete[](this->mEdgeManager.mEdgeCollection.p);
+          }
+          this->mEdgeManager.mEdgeCollection.p = v19;
+          this->mEdgeManager.mEdgeCollection.capacity = v16;
+        }
+      }
+      this->mEdgeManager.mEdgeCollection.size = v14;
+      this->mEdgeManager.mEdgeCollection.p[size] = v12;
     }
-    while ( (unsigned int)v4 < (unsigned __int8)v2->mNumGates );
   }
 }
 
 // File Line: 1225
 // RVA: 0xD3C40
-void __fastcall UFG::RoadNetworkVisibleArea::CreateEdges(UFG::RoadNetworkVisibleArea *this, UFG::RoadNetworkSubSegment *subSegment)
+void __fastcall UFG::RoadNetworkVisibleArea::CreateEdges(
+        UFG::RoadNetworkVisibleArea *this,
+        UFG::RoadNetworkSubSegment *subSegment)
 {
-  UFG::RoadNetworkSubSegment *v2; // rdi
-  UFG::RoadNetworkVisibleArea *v3; // rbp
-  UFG::RoadNetworkSegment *v4; // r8
-  signed __int64 v5; // r14
-  UFG::RoadNetworkSubSegment *v6; // rsi
+  UFG::RoadNetworkSegment *mParentNode; // r8
+  UFG::qList<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment,1,0> *p_mSubSegmentCollection; // r14
+  UFG::RoadNetworkSubSegment *mPrev; // rsi
   UFG::RoadNetworkGate *v7; // rbx
-  __int64 v8; // rax
+  __int64 mOffset; // rax
   _QWORD *v9; // rcx
   UFG::RoadNetworkGate *v10; // r9
-  signed __int64 v11; // rcx
+  char *v11; // rcx
   __int64 v12; // rax
   __int64 v13; // rax
-  UFG::RoadNetworkGate **v14; // r15
+  UFG::RoadNetworkGate **p; // r15
   UFG::RoadNetworkGate *v15; // r9
   __int64 v16; // rax
   UFG::RoadNetworkGate **v17; // rsi
   UFG::RoadNetworkGate *v18; // r9
   __int64 v19; // rax
-  UFG::qArray<UFG::RoadNetworkGate *,0> gateCollection; // [rsp+28h] [rbp-30h]
+  UFG::qArray<UFG::RoadNetworkGate *,0> gateCollection; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = subSegment;
-  v3 = this;
-  v4 = subSegment->mParentNode;
-  v5 = (signed __int64)&v4->mSubSegmentCollection;
-  v6 = (UFG::RoadNetworkSubSegment *)subSegment->mPrev;
+  mParentNode = subSegment->mParentNode;
+  p_mSubSegmentCollection = &mParentNode->mSubSegmentCollection;
+  mPrev = (UFG::RoadNetworkSubSegment *)subSegment->mPrev;
   v7 = 0i64;
-  if ( (UFG::qList<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment,1,0> *)subSegment->mNext == &v4->mSubSegmentCollection )
+  if ( (UFG::qList<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment,1,0> *)subSegment->mNext == &mParentNode->mSubSegmentCollection )
   {
-    if ( v6 == (UFG::RoadNetworkSubSegment *)v5 )
+    if ( mPrev == (UFG::RoadNetworkSubSegment *)p_mSubSegmentCollection )
     {
-      v8 = v4->mGates.mOffset;
-      if ( v8 )
-        v9 = (__int64 *)((char *)&v4->mGates.mOffset + v8);
+      mOffset = mParentNode->mGates.mOffset;
+      if ( mOffset )
+        v9 = (__int64 *)((char *)&mParentNode->mGates.mOffset + mOffset);
       else
         v9 = 0i64;
       v10 = (UFG::RoadNetworkGate *)((char *)v9 + *v9);
       if ( !*v9 )
         v10 = 0i64;
-      if ( v8 )
-        v11 = (signed __int64)&v4->mGates + v8;
+      if ( mOffset )
+        v11 = (char *)&mParentNode->mGates + mOffset;
       else
         v11 = 0i64;
-      v12 = *(_QWORD *)(v11 + 8);
+      v12 = *((_QWORD *)v11 + 1);
       if ( v12 )
-        v7 = (UFG::RoadNetworkGate *)(v12 + v11 + 8);
+        v7 = (UFG::RoadNetworkGate *)&v11[v12 + 8];
       v13 = v10->mConnectedNode.mOffset;
       if ( v13 )
       {
         if ( (UFG::qOffset64<UFG::RoadNetworkNode *> *)((char *)&v10->mConnectedNode + v13) )
-          UFG::RoadNetworkVisibleArea::AddEdge(v3, subSegment, 0i64, v10);
+          UFG::RoadNetworkVisibleArea::AddEdge(this, subSegment, 0i64, v10);
       }
-      UFG::RoadNetworkVisibleArea::AddEdge(v3, v2, 0i64, v7);
+      UFG::RoadNetworkVisibleArea::AddEdge(this, subSegment, 0i64, v7);
       return;
     }
     gateCollection.p = 0i64;
     *(_QWORD *)&gateCollection.size = 0i64;
     UFG::RoadNetworkSubSegment::GetGatesConnectedToSubSegment(subSegment, &gateCollection);
-    v14 = gateCollection.p;
+    p = gateCollection.p;
     v15 = *gateCollection.p;
     v16 = (*gateCollection.p)->mConnectedNode.mOffset;
     if ( v16 && (UFG::qOffset64<UFG::RoadNetworkNode *> *)((char *)&v15->mConnectedNode + v16) )
-      UFG::RoadNetworkVisibleArea::AddEdge(v3, v2, 0i64, v15);
-    operator delete[](v14);
+      UFG::RoadNetworkVisibleArea::AddEdge(this, subSegment, 0i64, v15);
+    operator delete[](p);
     gateCollection.p = 0i64;
     *(_QWORD *)&gateCollection.size = 0i64;
   }
@@ -2239,54 +2132,52 @@ void __fastcall UFG::RoadNetworkVisibleArea::CreateEdges(UFG::RoadNetworkVisible
   {
     UFG::RoadNetworkVisibleArea::AddEdge(this, subSegment, (UFG::RoadNetworkSubSegment *)subSegment->mNext, 0i64);
   }
-  if ( v6 == (UFG::RoadNetworkSubSegment *)v5 )
+  if ( mPrev == (UFG::RoadNetworkSubSegment *)p_mSubSegmentCollection )
   {
     gateCollection.p = 0i64;
     *(_QWORD *)&gateCollection.size = 0i64;
-    UFG::RoadNetworkSubSegment::GetGatesConnectedToSubSegment(v2, &gateCollection);
+    UFG::RoadNetworkSubSegment::GetGatesConnectedToSubSegment(subSegment, &gateCollection);
     v17 = gateCollection.p;
     v18 = *gateCollection.p;
     v19 = (*gateCollection.p)->mConnectedNode.mOffset;
     if ( v19 && (UFG::qOffset64<UFG::RoadNetworkNode *> *)((char *)&v18->mConnectedNode + v19) )
-      UFG::RoadNetworkVisibleArea::AddEdge(v3, v2, 0i64, v18);
+      UFG::RoadNetworkVisibleArea::AddEdge(this, subSegment, 0i64, v18);
     operator delete[](v17);
   }
   else
   {
-    UFG::RoadNetworkVisibleArea::AddEdge(v3, v2, v6, 0i64);
+    UFG::RoadNetworkVisibleArea::AddEdge(this, subSegment, mPrev, 0i64);
   }
 }
 
 // File Line: 1293
 // RVA: 0xD89C0
-UFG::RoadNetworkGate *__fastcall UFG::RoadNetworkVisibleArea::GetFirstValidGate(UFG::RoadNetworkVisibleArea *this, UFG::RoadNetworkIntersection *intersection)
+UFG::RoadNetworkGate *__fastcall UFG::RoadNetworkVisibleArea::GetFirstValidGate(
+        UFG::RoadNetworkVisibleArea *this,
+        UFG::RoadNetworkIntersection *intersection)
 {
   __int64 v2; // rbp
-  UFG::RoadNetworkIntersection *v3; // r14
-  UFG::RoadNetworkVisibleArea *v4; // r15
-  __int64 v5; // rax
-  signed __int64 v6; // rcx
+  __int64 mOffset; // rax
+  char *v6; // rcx
   __int64 v7; // rax
-  signed __int64 v8; // rsi
+  __int64 v8; // rsi
   __int64 v9; // rax
   UFG::RoadNetworkSegment *v10; // rbx
   char v11; // di
-  unsigned int v12; // edx
+  unsigned int mIndex; // edx
   UFG::qBaseTreeRB *v13; // rax
   __int64 v14; // rax
   UFG::RoadNetworkGate *v15; // rdx
 
   v2 = 0i64;
-  v3 = intersection;
-  v4 = this;
   if ( !intersection->mNumGates )
     return 0i64;
   while ( 1 )
   {
-    v5 = v3->mGates.mOffset;
-    v6 = (signed __int64)(v5 ? (UFG::qOffset64<UFG::qOffset64<UFG::RoadNetworkGate *> *> *)((char *)&v3->mGates + v5) : 0i64);
-    v7 = *(_QWORD *)(v6 + 8 * v2);
-    v8 = v7 ? v7 + v6 + 8 * v2 : 0i64;
+    mOffset = intersection->mGates.mOffset;
+    v6 = mOffset ? (char *)&intersection->mGates + mOffset : 0i64;
+    v7 = *(_QWORD *)&v6[8 * v2];
+    v8 = v7 ? (__int64)&v6[8 * v2 + v7] : 0i64;
     v9 = *(_QWORD *)(v8 + 8);
     if ( v9 )
     {
@@ -2296,9 +2187,9 @@ UFG::RoadNetworkGate *__fastcall UFG::RoadNetworkVisibleArea::GetFirstValidGate(
         v11 = 0;
         if ( v10->mType.mValue == 1 )
         {
-          v12 = v10->mIndex;
-          if ( v12 )
-            v13 = UFG::qBaseTreeRB::Get(&v4->mVisitedIntersections.mTree.mTree, v12);
+          mIndex = v10->mIndex;
+          if ( mIndex )
+            v13 = UFG::qBaseTreeRB::Get(&this->mVisitedIntersections.mTree.mTree, mIndex);
           else
             v13 = 0i64;
           v11 = v13 != 0i64;
@@ -2317,7 +2208,7 @@ UFG::RoadNetworkGate *__fastcall UFG::RoadNetworkVisibleArea::GetFirstValidGate(
       }
     }
     v2 = (unsigned int)(v2 + 1);
-    if ( (unsigned int)v2 >= (unsigned __int8)v3->mNumGates )
+    if ( (unsigned int)v2 >= (unsigned __int8)intersection->mNumGates )
       return 0i64;
   }
   return (UFG::RoadNetworkGate *)v8;
@@ -2325,27 +2216,27 @@ UFG::RoadNetworkGate *__fastcall UFG::RoadNetworkVisibleArea::GetFirstValidGate(
 
 // File Line: 1392
 // RVA: 0xD36E0
-void __fastcall UFG::RoadNetworkVisibleArea::ClaimSubSegmentVisited(UFG::RoadNetworkVisibleArea *this, UFG::RoadNetworkSubSegment *subSegment)
+void __fastcall UFG::RoadNetworkVisibleArea::ClaimSubSegmentVisited(
+        UFG::RoadNetworkVisibleArea *this,
+        UFG::RoadNetworkSubSegment *subSegment)
 {
-  UFG::RoadNetworkSubSegment *v2; // rsi
-  UFG::qArray<UFG::RoadNetworkSubSegment *,0> *v3; // rdi
-  __int64 v4; // rbp
-  unsigned int v5; // edx
+  UFG::qArray<UFG::RoadNetworkSubSegment *,0> *mCurrentVisibleSubSegments; // rdi
+  __int64 size; // rbp
+  unsigned int capacity; // edx
   unsigned int v6; // ebx
   unsigned int v7; // edx
-  UFG::RoadNetworkSubSegment **v8; // rax
+  UFG::RoadNetworkSubSegment **p; // rax
 
-  v2 = subSegment;
   if ( subSegment->mActive <= 1u )
   {
-    v3 = this->mCurrentVisibleSubSegments;
-    v4 = v3->size;
-    v5 = v3->capacity;
-    v6 = v4 + 1;
-    if ( (signed int)v4 + 1 > v5 )
+    mCurrentVisibleSubSegments = this->mCurrentVisibleSubSegments;
+    size = mCurrentVisibleSubSegments->size;
+    capacity = mCurrentVisibleSubSegments->capacity;
+    v6 = size + 1;
+    if ( (int)size + 1 > capacity )
     {
-      if ( v5 )
-        v7 = 2 * v5;
+      if ( capacity )
+        v7 = 2 * capacity;
       else
         v7 = 1;
       for ( ; v7 < v6; v7 *= 2 )
@@ -2353,15 +2244,15 @@ void __fastcall UFG::RoadNetworkVisibleArea::ClaimSubSegmentVisited(UFG::RoadNet
       if ( v7 <= 2 )
         v7 = 2;
       if ( v7 - v6 > 0x10000 )
-        v7 = v4 + 65537;
+        v7 = size + 65537;
       UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(
         (UFG::qArray<UFG::qReflectInventoryBase *,0> *)this->mCurrentVisibleSubSegments,
         v7,
         "qArray.Add");
     }
-    v8 = v3->p;
-    v3->size = v6;
-    v8[v4] = v2;
+    p = mCurrentVisibleSubSegments->p;
+    mCurrentVisibleSubSegments->size = v6;
+    p[size] = subSegment;
   }
 }
 
@@ -2369,178 +2260,170 @@ void __fastcall UFG::RoadNetworkVisibleArea::ClaimSubSegmentVisited(UFG::RoadNet
 // RVA: 0xD5750
 void __fastcall UFG::RoadNetworkVisibleArea::FirstSpawnPoint(UFG::RoadNetworkVisibleArea *this)
 {
-  ((void (*)(void))this->mEdgeManager.mSpawnPointIterator->vfptr->First)();
+  this->mEdgeManager.mSpawnPointIterator->vfptr->First(this->mEdgeManager.mSpawnPointIterator);
 }
 
 // File Line: 1407
 // RVA: 0xDF7C0
 __int64 __fastcall UFG::RoadNetworkVisibleArea::NoMoreSpawnPoints(UFG::RoadNetworkVisibleArea *this)
 {
-  return ((__int64 (*)(void))this->mEdgeManager.mSpawnPointIterator->vfptr->IsDone)();
+  return ((__int64 (__fastcall *)(UFG::SpawnPointIterator *))this->mEdgeManager.mSpawnPointIterator->vfptr->IsDone)(this->mEdgeManager.mSpawnPointIterator);
 }
 
 // File Line: 1413
 // RVA: 0xDF7B0
 void __fastcall UFG::RoadNetworkVisibleArea::NextSpawnPoint(UFG::RoadNetworkVisibleArea *this)
 {
-  ((void (*)(void))this->mEdgeManager.mSpawnPointIterator->vfptr->Next)();
+  this->mEdgeManager.mSpawnPointIterator->vfptr->Next(this->mEdgeManager.mSpawnPointIterator);
 }
 
 // File Line: 1419
 // RVA: 0xD85E0
-UFG::RoadNetworkSpawnPoint *__fastcall UFG::RoadNetworkVisibleArea::GetCurrentEdgeSpawnPoint(UFG::RoadNetworkVisibleArea *this)
+UFG::RoadNetworkSpawnPoint *__fastcall UFG::RoadNetworkVisibleArea::GetCurrentEdgeSpawnPoint(
+        UFG::RoadNetworkVisibleArea *this)
 {
-  return (UFG::RoadNetworkSpawnPoint *)((char *)this->mEdgeManager.mSpawnPointIterator->mCollection->p[this->mEdgeManager.mSpawnPointIterator->mCurrentIndex]
-                                      + 24 * (this->mEdgeManager.mSpawnPointIterator->mSpawnPointIndex + 1i64));
+  return &this->mEdgeManager.mSpawnPointIterator->mCollection->p[this->mEdgeManager.mSpawnPointIterator->mCurrentIndex]->mSpawnPoint[this->mEdgeManager.mSpawnPointIterator->mSpawnPointIndex];
 }
 
 // File Line: 1450
 // RVA: 0xD09C0
-void __fastcall UFG::RoadNetworkVisibleAreaEdgeManager::RoadNetworkVisibleAreaEdgeManager(UFG::RoadNetworkVisibleAreaEdgeManager *this)
+void __fastcall UFG::RoadNetworkVisibleAreaEdgeManager::RoadNetworkVisibleAreaEdgeManager(
+        UFG::RoadNetworkVisibleAreaEdgeManager *this)
 {
-  UFG::RoadNetworkVisibleAreaEdgeManager *v1; // rbx
-  char *v2; // rax
-  char *v3; // rax
-  char *v4; // rax
+  UFG::EdgeStepIterator *v2; // rax
+  UFG::OuterEdgeIterator *v3; // rax
+  UFG::SpawnPointIterator *v4; // rax
 
-  v1 = this;
   this->mEdgeCollection.p = 0i64;
   *(_QWORD *)&this->mEdgeCollection.size = 0i64;
-  v2 = UFG::qMalloc(0x20ui64, "RoadNetworkVisibleAreaEdgeManager::EdgeStepIterator", 0i64);
+  v2 = (UFG::EdgeStepIterator *)UFG::qMalloc(0x20ui64, "RoadNetworkVisibleAreaEdgeManager::EdgeStepIterator", 0i64);
   if ( v2 )
   {
-    *(_QWORD *)v2 = &UFG::EdgeIterator::`vftable;
-    *((_QWORD *)v2 + 2) = v1;
-    *(_QWORD *)v2 = &UFG::EdgeStepIterator::`vftable;
-    *((_DWORD *)v2 + 6) = -1;
-    *((_DWORD *)v2 + 2) = -1;
+    v2->vfptr = (UFG::EdgeIteratorVtbl *)&UFG::EdgeIterator::`vftable;
+    v2->mCollection = &this->mEdgeCollection;
+    v2->vfptr = (UFG::EdgeIteratorVtbl *)&UFG::EdgeStepIterator::`vftable;
+    v2->mEndOfStep = -1;
+    v2->mCurrentIndex = -1;
   }
   else
   {
     v2 = 0i64;
   }
-  v1->mStepIterator = (UFG::EdgeStepIterator *)v2;
-  v3 = UFG::qMalloc(0x20ui64, "RoadNetworkVisibleAreaEdgeManager::OuterEdgeIterator", 0i64);
+  this->mStepIterator = v2;
+  v3 = (UFG::OuterEdgeIterator *)UFG::qMalloc(0x20ui64, "RoadNetworkVisibleAreaEdgeManager::OuterEdgeIterator", 0i64);
   if ( v3 )
   {
-    *(_QWORD *)v3 = &UFG::EdgeIterator::`vftable;
-    *((_QWORD *)v3 + 2) = v1;
-    *(_QWORD *)v3 = &UFG::EdgeStepIterator::`vftable;
-    *((_DWORD *)v3 + 6) = -1;
-    *((_DWORD *)v3 + 2) = -1;
-    *(_QWORD *)v3 = &UFG::OuterEdgeIterator::`vftable;
+    v3->vfptr = (UFG::EdgeIteratorVtbl *)&UFG::EdgeIterator::`vftable;
+    v3->mCollection = &this->mEdgeCollection;
+    v3->vfptr = (UFG::EdgeIteratorVtbl *)&UFG::EdgeStepIterator::`vftable;
+    v3->mEndOfStep = -1;
+    v3->mCurrentIndex = -1;
+    v3->vfptr = (UFG::EdgeIteratorVtbl *)&UFG::OuterEdgeIterator::`vftable;
   }
   else
   {
     v3 = 0i64;
   }
-  v1->mOuterEdgeIterator = (UFG::OuterEdgeIterator *)v3;
-  v4 = UFG::qMalloc(0x20ui64, "RoadNetworkVisibleAreaEdgeManager::SpawnPointIterator", 0i64);
+  this->mOuterEdgeIterator = v3;
+  v4 = (UFG::SpawnPointIterator *)UFG::qMalloc(0x20ui64, "RoadNetworkVisibleAreaEdgeManager::SpawnPointIterator", 0i64);
   if ( v4 )
   {
-    *(_QWORD *)v4 = &UFG::EdgeIterator::`vftable;
-    *((_QWORD *)v4 + 2) = v1;
-    *(_QWORD *)v4 = &UFG::SpawnPointIterator::`vftable;
-    *((_DWORD *)v4 + 6) = 0;
+    v4->vfptr = (UFG::EdgeIteratorVtbl *)&UFG::EdgeIterator::`vftable;
+    v4->mCollection = &this->mEdgeCollection;
+    v4->vfptr = (UFG::EdgeIteratorVtbl *)&UFG::SpawnPointIterator::`vftable;
+    v4->mSpawnPointIndex = 0;
   }
   else
   {
     v4 = 0i64;
   }
-  v1->mSpawnPointIterator = (UFG::SpawnPointIterator *)v4;
+  this->mSpawnPointIterator = v4;
 }
 
 // File Line: 1456
 // RVA: 0xD1180
-void __fastcall UFG::RoadNetworkVisibleAreaEdgeManager::~RoadNetworkVisibleAreaEdgeManager(UFG::RoadNetworkVisibleAreaEdgeManager *this)
+void __fastcall UFG::RoadNetworkVisibleAreaEdgeManager::~RoadNetworkVisibleAreaEdgeManager(
+        UFG::RoadNetworkVisibleAreaEdgeManager *this)
 {
-  UFG::RoadNetworkVisibleAreaEdgeManager *v1; // rbx
-  UFG::EdgeStepIterator *v2; // rcx
-  UFG::OuterEdgeIterator *v3; // rcx
-  UFG::SpawnPointIterator *v4; // rcx
-  UFG::RoadNetworkVisibleAreaEdge **v5; // rcx
+  UFG::EdgeStepIterator *mStepIterator; // rcx
+  UFG::OuterEdgeIterator *mOuterEdgeIterator; // rcx
+  UFG::SpawnPointIterator *mSpawnPointIterator; // rcx
+  UFG::RoadNetworkVisibleAreaEdge **p; // rcx
 
-  v1 = this;
-  v2 = this->mStepIterator;
-  if ( v2 )
-    v2->vfptr->__vecDelDtor((UFG::EdgeIterator *)&v2->vfptr, 1u);
-  v3 = v1->mOuterEdgeIterator;
-  if ( v3 )
-    v3->vfptr->__vecDelDtor((UFG::EdgeIterator *)&v3->vfptr, 1u);
-  v4 = v1->mSpawnPointIterator;
-  if ( v4 )
-    v4->vfptr->__vecDelDtor((UFG::EdgeIterator *)&v4->vfptr, 1u);
-  v5 = v1->mEdgeCollection.p;
-  if ( v5 )
-    operator delete[](v5);
-  v1->mEdgeCollection.p = 0i64;
-  *(_QWORD *)&v1->mEdgeCollection.size = 0i64;
+  mStepIterator = this->mStepIterator;
+  if ( mStepIterator )
+    mStepIterator->vfptr->__vecDelDtor(mStepIterator, 1u);
+  mOuterEdgeIterator = this->mOuterEdgeIterator;
+  if ( mOuterEdgeIterator )
+    mOuterEdgeIterator->vfptr->__vecDelDtor(mOuterEdgeIterator, 1u);
+  mSpawnPointIterator = this->mSpawnPointIterator;
+  if ( mSpawnPointIterator )
+    mSpawnPointIterator->vfptr->__vecDelDtor(mSpawnPointIterator, 1u);
+  p = this->mEdgeCollection.p;
+  if ( p )
+    operator delete[](p);
+  this->mEdgeCollection.p = 0i64;
+  *(_QWORD *)&this->mEdgeCollection.size = 0i64;
 }
 
 // File Line: 1467
 // RVA: 0xD3770
 void __fastcall UFG::RoadNetworkVisibleAreaEdgeManager::Clear(UFG::RoadNetworkVisibleAreaEdgeManager *this)
 {
-  UFG::RoadNetworkVisibleAreaEdgeManager *v1; // rbx
   unsigned int i; // edi
-  signed __int64 v3; // r14
-  UFG::RoadNetworkVisibleAreaEdge **v4; // rax
+  unsigned __int64 v3; // r14
+  UFG::RoadNetworkVisibleAreaEdge **p; // rax
   UFG::RoadNetworkVisibleAreaEdge *v5; // rsi
   UFG::RoadNetworkVisibleAreaEdge **v6; // rcx
 
-  v1 = this;
-  for ( i = 0; i < v1->mEdgeCollection.size; v1->mEdgeCollection.p[v3] = 0i64 )
+  for ( i = 0; i < this->mEdgeCollection.size; this->mEdgeCollection.p[v3] = 0i64 )
   {
     v3 = i;
-    v4 = v1->mEdgeCollection.p;
-    v5 = v4[v3];
+    p = this->mEdgeCollection.p;
+    v5 = p[v3];
     if ( v5 )
     {
-      UFG::RoadNetworkVisibleAreaEdge::~RoadNetworkVisibleAreaEdge(v4[v3]);
+      UFG::RoadNetworkVisibleAreaEdge::~RoadNetworkVisibleAreaEdge(p[v3]);
       operator delete[](v5);
     }
     ++i;
   }
-  v6 = v1->mEdgeCollection.p;
+  v6 = this->mEdgeCollection.p;
   if ( v6 )
     operator delete[](v6);
-  v1->mEdgeCollection.p = 0i64;
-  *(_QWORD *)&v1->mEdgeCollection.size = 0i64;
+  this->mEdgeCollection.p = 0i64;
+  *(_QWORD *)&this->mEdgeCollection.size = 0i64;
 }
 
 // File Line: 1480
 // RVA: 0xD4900
 char __fastcall UFG::RoadNetworkVisibleAreaEdgeManager::ExpandOneStep(UFG::RoadNetworkVisibleAreaEdgeManager *this)
 {
-  UFG::RoadNetworkVisibleAreaEdgeManager *v1; // rbx
-  char result; // al
   UFG::RoadNetworkVisibleAreaEdge *v3; // rcx
 
-  v1 = this;
-  ((void (*)(void))this->mStepIterator->vfptr->First)();
-  if ( ((unsigned __int8 (*)(void))v1->mStepIterator->vfptr->IsDone)() )
+  this->mStepIterator->vfptr->First(this->mStepIterator);
+  if ( this->mStepIterator->vfptr->IsDone(this->mStepIterator) )
   {
-    ((void (*)(void))v1->mOuterEdgeIterator->vfptr->First)();
-    while ( !((unsigned __int8 (*)(void))v1->mOuterEdgeIterator->vfptr->IsDone)() )
+    this->mOuterEdgeIterator->vfptr->First(this->mOuterEdgeIterator);
+    while ( !this->mOuterEdgeIterator->vfptr->IsDone(this->mOuterEdgeIterator) )
     {
-      v3 = v1->mOuterEdgeIterator->mCollection->p[v1->mOuterEdgeIterator->mCurrentIndex];
+      v3 = this->mOuterEdgeIterator->mCollection->p[this->mOuterEdgeIterator->mCurrentIndex];
       if ( !v3->mNumSpawnPoints )
         UFG::RoadNetworkVisibleAreaEdge::AttachSpawnPoints(v3);
-      ((void (*)(void))v1->mOuterEdgeIterator->vfptr->Next)();
+      this->mOuterEdgeIterator->vfptr->Next(this->mOuterEdgeIterator);
     }
-    result = 1;
+    return 1;
   }
   else
   {
     do
     {
-      UFG::RoadNetworkVisibleAreaEdge::ExpandOneStep(v1->mStepIterator->mCollection->p[v1->mStepIterator->mCurrentIndex]);
-      ((void (*)(void))v1->mStepIterator->vfptr->Next)();
+      UFG::RoadNetworkVisibleAreaEdge::ExpandOneStep(this->mStepIterator->mCollection->p[this->mStepIterator->mCurrentIndex]);
+      this->mStepIterator->vfptr->Next(this->mStepIterator);
     }
-    while ( !((unsigned __int8 (*)(void))v1->mStepIterator->vfptr->IsDone)() );
-    result = 0;
+    while ( !this->mStepIterator->vfptr->IsDone(this->mStepIterator) );
+    return 0;
   }
-  return result;
 }
 
 // File Line: 1531
@@ -2555,28 +2438,24 @@ void __fastcall UFG::EdgeStepIterator::~EdgeStepIterator(UFG::EdgeStepIterator *
 // RVA: 0xD5670
 void __fastcall UFG::EdgeStepIterator::First(UFG::EdgeStepIterator *this)
 {
-  UFG::qArray<UFG::RoadNetworkVisibleAreaEdge *,0> *v1; // rax
+  UFG::qArray<UFG::RoadNetworkVisibleAreaEdge *,0> *mCollection; // rax
   __int64 v2; // rbx
-  unsigned int v3; // edx
-  UFG::EdgeStepIterator *v4; // rdi
+  unsigned int size; // edx
 
-  v1 = this->mCollection;
+  mCollection = this->mCollection;
   this->mCurrentIndex = -1;
   v2 = 0i64;
-  v3 = v1->size;
-  v4 = this;
-  this->mEndOfStep = v1->size;
-  if ( v3 )
+  size = mCollection->size;
+  this->mEndOfStep = mCollection->size;
+  if ( size )
   {
-    while ( !(unsigned __int8)v4->vfptr[1].__vecDelDtor(
-                                (UFG::EdgeIterator *)&v4->vfptr,
-                                (unsigned int)v4->mCollection->p[v2]) )
+    while ( !this->vfptr[1].__vecDelDtor(this, this->mCollection->p[v2]) )
     {
       v2 = (unsigned int)(v2 + 1);
-      if ( (unsigned int)v2 >= v4->mEndOfStep )
+      if ( (unsigned int)v2 >= this->mEndOfStep )
         return;
     }
-    v4->mCurrentIndex = v2;
+    this->mCurrentIndex = v2;
   }
 }
 
@@ -2584,27 +2463,23 @@ void __fastcall UFG::EdgeStepIterator::First(UFG::EdgeStepIterator *this)
 // RVA: 0xDF6A0
 void __fastcall UFG::EdgeStepIterator::Next(UFG::EdgeStepIterator *this)
 {
-  unsigned int v1; // ebx
-  UFG::EdgeStepIterator *v2; // rdi
+  unsigned int mCurrentIndex; // ebx
   __int64 v3; // rbx
 
-  v1 = this->mCurrentIndex;
-  v2 = this;
-  if ( v1 != -1 )
+  mCurrentIndex = this->mCurrentIndex;
+  if ( mCurrentIndex != -1 )
   {
-    v3 = v1 + 1;
+    v3 = mCurrentIndex + 1;
     this->mCurrentIndex = -1;
     if ( (unsigned int)v3 < this->mEndOfStep )
     {
-      while ( !(unsigned __int8)v2->vfptr[1].__vecDelDtor(
-                                  (UFG::EdgeIterator *)&v2->vfptr,
-                                  (unsigned int)v2->mCollection->p[v3]) )
+      while ( !this->vfptr[1].__vecDelDtor(this, this->mCollection->p[v3]) )
       {
         v3 = (unsigned int)(v3 + 1);
-        if ( (unsigned int)v3 >= v2->mEndOfStep )
+        if ( (unsigned int)v3 >= this->mEndOfStep )
           return;
       }
-      v2->mCurrentIndex = v3;
+      this->mCurrentIndex = v3;
     }
   }
 }
@@ -2620,7 +2495,7 @@ __int64 __fastcall UFG::EdgeStepIterator::IsDone(UFG::EdgeStepIterator *this)
 // RVA: 0xDEE10
 bool __fastcall UFG::EdgeStepIterator::IsValid(UFG::EdgeStepIterator *this, UFG::RoadNetworkVisibleAreaEdge *edge)
 {
-  return edge->mComplete != 1;
+  return !edge->mComplete;
 }
 
 // File Line: 1594
@@ -2634,26 +2509,22 @@ bool __fastcall UFG::OuterEdgeIterator::IsValid(UFG::OuterEdgeIterator *this, UF
 // RVA: 0xD56E0
 void __fastcall UFG::SpawnPointIterator::First(UFG::SpawnPointIterator *this)
 {
-  UFG::qArray<UFG::RoadNetworkVisibleAreaEdge *,0> *v1; // rax
+  UFG::qArray<UFG::RoadNetworkVisibleAreaEdge *,0> *mCollection; // rax
   __int64 v2; // rbx
-  UFG::SpawnPointIterator *v3; // rdi
 
-  v1 = this->mCollection;
+  mCollection = this->mCollection;
   v2 = 0i64;
   this->mCurrentIndex = -1;
-  v3 = this;
-  if ( v1->size )
+  if ( mCollection->size )
   {
-    while ( !(unsigned __int8)v3->vfptr[1].__vecDelDtor(
-                                (UFG::EdgeIterator *)&v3->vfptr,
-                                (unsigned int)v3->mCollection->p[v2]) )
+    while ( !this->vfptr[1].__vecDelDtor(this, this->mCollection->p[v2]) )
     {
       v2 = (unsigned int)(v2 + 1);
-      if ( (unsigned int)v2 >= v3->mCollection->size )
+      if ( (unsigned int)v2 >= this->mCollection->size )
         return;
     }
-    v3->mSpawnPointIndex = 0;
-    v3->mCurrentIndex = v2;
+    this->mSpawnPointIndex = 0;
+    this->mCurrentIndex = v2;
   }
 }
 
@@ -2661,39 +2532,35 @@ void __fastcall UFG::SpawnPointIterator::First(UFG::SpawnPointIterator *this)
 // RVA: 0xDF710
 void __fastcall UFG::SpawnPointIterator::Next(UFG::SpawnPointIterator *this)
 {
-  __int64 v1; // rbx
-  UFG::SpawnPointIterator *v2; // rdi
-  UFG::qArray<UFG::RoadNetworkVisibleAreaEdge *,0> *v3; // r8
-  unsigned int v4; // ecx
+  __int64 mCurrentIndex; // rbx
+  UFG::qArray<UFG::RoadNetworkVisibleAreaEdge *,0> *mCollection; // r8
+  unsigned int mSpawnPointIndex; // ecx
   __int64 v5; // rbx
 
-  v1 = this->mCurrentIndex;
-  v2 = this;
-  if ( (_DWORD)v1 != -1 )
+  mCurrentIndex = this->mCurrentIndex;
+  if ( (_DWORD)mCurrentIndex != -1 )
   {
-    v3 = this->mCollection;
-    v4 = this->mSpawnPointIndex;
-    if ( v4 >= v3->p[v1]->mNumSpawnPoints - 1 )
+    mCollection = this->mCollection;
+    mSpawnPointIndex = this->mSpawnPointIndex;
+    if ( mSpawnPointIndex >= mCollection->p[mCurrentIndex]->mNumSpawnPoints - 1 )
     {
-      v5 = (unsigned int)(v1 + 1);
-      v2->mCurrentIndex = -1;
-      if ( (unsigned int)v5 < v3->size )
+      v5 = (unsigned int)(mCurrentIndex + 1);
+      this->mCurrentIndex = -1;
+      if ( (unsigned int)v5 < mCollection->size )
       {
-        while ( !(unsigned __int8)v2->vfptr[1].__vecDelDtor(
-                                    (UFG::EdgeIterator *)&v2->vfptr,
-                                    (unsigned int)v2->mCollection->p[v5]) )
+        while ( !this->vfptr[1].__vecDelDtor(this, this->mCollection->p[v5]) )
         {
           v5 = (unsigned int)(v5 + 1);
-          if ( (unsigned int)v5 >= v2->mCollection->size )
+          if ( (unsigned int)v5 >= this->mCollection->size )
             return;
         }
-        v2->mSpawnPointIndex = 0;
-        v2->mCurrentIndex = v5;
+        this->mSpawnPointIndex = 0;
+        this->mCurrentIndex = v5;
       }
     }
     else
     {
-      v2->mSpawnPointIndex = v4 + 1;
+      this->mSpawnPointIndex = mSpawnPointIndex + 1;
     }
   }
 }
@@ -2707,432 +2574,403 @@ __int64 __fastcall UFG::SpawnPointIterator::IsDone(UFG::SpawnPointIterator *this
 
 // File Line: 1655
 // RVA: 0xDEE40
-bool __fastcall UFG::SpawnPointIterator::IsValid(UFG::SpawnPointIterator *this, UFG::RoadNetworkVisibleAreaEdge *edge)
+_BOOL8 __fastcall UFG::SpawnPointIterator::IsValid(
+        UFG::SpawnPointIterator *this,
+        UFG::RoadNetworkVisibleAreaEdge *edge)
 {
   return edge->mNumSpawnPoints != 0;
 }
 
 // File Line: 1685
 // RVA: 0xD06E0
-void __fastcall UFG::RoadNetworkVisibleAreaEdge::RoadNetworkVisibleAreaEdge(UFG::RoadNetworkVisibleAreaEdge *this, UFG::RoadNetworkVisibleArea *visibleArea, UFG::RoadNetworkGate *startingGate)
+void __fastcall UFG::RoadNetworkVisibleAreaEdge::RoadNetworkVisibleAreaEdge(
+        UFG::RoadNetworkVisibleAreaEdge *this,
+        UFG::RoadNetworkVisibleArea *visibleArea,
+        UFG::RoadNetworkGate *startingGate)
 {
-  UFG::RoadNetworkGate *v3; // rbx
-  UFG::RoadNetworkVisibleAreaEdge *v4; // rdi
-  float v5; // xmm1_4
-  float v6; // xmm2_4
-  UFG::RoadNetworkGate *v7; // rbx
-  __int64 v8; // rax
+  float y; // xmm1_4
+  float z; // xmm2_4
+  UFG::RoadNetworkGate *mPreviousGate; // rbx
+  __int64 mOffset; // rax
   UFG::RoadNetworkSegment *v9; // rcx
   __int64 v10; // rax
   UFG::RoadNetworkGate *v11; // rdx
   UFG::RoadNetworkNode *v12; // rdx
 
-  v3 = startingGate;
-  v4 = this;
-  this->mPrev = (UFG::qNode<UFG::RoadNetworkVisibleAreaEdge,UFG::RoadNetworkVisibleAreaEdge> *)&this->mPrev;
-  this->mNext = (UFG::qNode<UFG::RoadNetworkVisibleAreaEdge,UFG::RoadNetworkVisibleAreaEdge> *)&this->mPrev;
+  this->mPrev = this;
+  this->mNext = this;
   this->mVisibleArea = visibleArea;
   `eh vector constructor iterator(
     this->mSpawnPoint,
     0x18ui64,
     6,
     (void (__fastcall *)(void *))UFG::RoadNetworkSpawnPoint::RoadNetworkSpawnPoint);
-  v4->mT = -1.0;
-  v4->mComplete = 0;
-  v4->mNumSpawnPoints = 0;
-  v4->mNodesToStart.p = 0i64;
-  *(_QWORD *)&v4->mNodesToStart.size = 0i64;
-  v4->mCurrentSubSegment = 0i64;
-  v4->mNextSubSegment = 0i64;
-  v4->mPreviousSubSegment = 0i64;
-  v4->mNextGate = 0i64;
-  v4->mPreviousGate = v3;
-  v5 = UFG::qVector3::msZero.y;
-  v6 = UFG::qVector3::msZero.z;
-  v4->mDirection.x = UFG::qVector3::msZero.x;
-  v4->mDirection.y = v5;
-  v4->mDirection.z = v6;
-  v7 = v4->mPreviousGate;
-  if ( v7 )
+  this->mT = -1.0;
+  this->mComplete = 0;
+  this->mNumSpawnPoints = 0;
+  this->mNodesToStart.p = 0i64;
+  *(_QWORD *)&this->mNodesToStart.size = 0i64;
+  this->mCurrentSubSegment = 0i64;
+  this->mNextSubSegment = 0i64;
+  this->mPreviousSubSegment = 0i64;
+  this->mNextGate = 0i64;
+  this->mPreviousGate = startingGate;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
+  this->mDirection.x = UFG::qVector3::msZero.x;
+  this->mDirection.y = y;
+  this->mDirection.z = z;
+  mPreviousGate = this->mPreviousGate;
+  if ( mPreviousGate )
   {
-    v8 = v7->mConnectedNode.mOffset;
-    if ( v8 )
-      v9 = (UFG::RoadNetworkSegment *)((char *)&v7->mConnectedNode + v8);
+    mOffset = mPreviousGate->mConnectedNode.mOffset;
+    if ( mOffset )
+      v9 = (UFG::RoadNetworkSegment *)((char *)&mPreviousGate->mConnectedNode + mOffset);
     else
       v9 = 0i64;
-    v10 = v7->mConnectedGate.mOffset;
+    v10 = mPreviousGate->mConnectedGate.mOffset;
     if ( v10 )
-      v11 = (UFG::RoadNetworkGate *)((char *)v7 + v10 + 16);
+      v11 = (UFG::RoadNetworkGate *)((char *)&mPreviousGate->mConnectedGate + v10);
     else
       v11 = 0i64;
-    v4->mCurrentSubSegment = UFG::RoadNetworkSegment::GetClosestSubSegment(v9, v11);
+    this->mCurrentSubSegment = UFG::RoadNetworkSegment::GetClosestSubSegment(v9, v11);
   }
-  v12 = (UFG::RoadNetworkNode *)((char *)v7 + v7->mNode.mOffset);
-  if ( !v7->mNode.mOffset )
+  v12 = (UFG::RoadNetworkNode *)((char *)mPreviousGate + mPreviousGate->mNode.mOffset);
+  if ( !mPreviousGate->mNode.mOffset )
     v12 = 0i64;
-  UFG::RoadNetworkVisibleAreaEdge::AddNodeToPath(v4, v12);
-  v4->mNextSubSegment = UFG::RoadNetworkVisibleAreaEdge::GetNextSubSegment(v4);
-  ++v4->mCurrentSubSegment->mActive;
-  UFG::RoadNetworkVisibleAreaEdge::AddNodeToPath(
-    v4,
-    (UFG::RoadNetworkNode *)&v4->mCurrentSubSegment->mParentNode->mType);
-  UFG::RoadNetworkVisibleAreaEdge::UpdateDirection(v4);
-  UFG::RoadNetworkVisibleAreaEdge::RefreshT(v4);
-  UFG::RoadNetworkVisibleArea::ClaimSubSegmentVisited(v4->mVisibleArea, v4->mCurrentSubSegment);
-  v4->mNextGate = 0i64;
-  v4->mPreviousGate = 0i64;
+  UFG::RoadNetworkVisibleAreaEdge::AddNodeToPath(this, v12);
+  this->mNextSubSegment = UFG::RoadNetworkVisibleAreaEdge::GetNextSubSegment(this);
+  ++this->mCurrentSubSegment->mActive;
+  UFG::RoadNetworkVisibleAreaEdge::AddNodeToPath(this, this->mCurrentSubSegment->mParentNode);
+  UFG::RoadNetworkVisibleAreaEdge::UpdateDirection(this);
+  UFG::RoadNetworkVisibleAreaEdge::RefreshT(this);
+  UFG::RoadNetworkVisibleArea::ClaimSubSegmentVisited(this->mVisibleArea, this->mCurrentSubSegment);
+  this->mNextGate = 0i64;
+  this->mPreviousGate = 0i64;
 }
 
 // File Line: 1710
 // RVA: 0xD05B0
-void __fastcall UFG::RoadNetworkVisibleAreaEdge::RoadNetworkVisibleAreaEdge(UFG::RoadNetworkVisibleAreaEdge *this, UFG::RoadNetworkGate *startingGate, UFG::RoadNetworkVisibleArea *visibleArea, UFG::RoadNetworkVisibleAreaEdge *spawner)
+void __fastcall UFG::RoadNetworkVisibleAreaEdge::RoadNetworkVisibleAreaEdge(
+        UFG::RoadNetworkVisibleAreaEdge *this,
+        UFG::RoadNetworkGate *startingGate,
+        UFG::RoadNetworkVisibleArea *visibleArea,
+        UFG::RoadNetworkVisibleAreaEdge *spawner)
 {
-  UFG::RoadNetworkVisibleAreaEdge *v4; // rsi
-  UFG::RoadNetworkGate *v5; // rbx
-  UFG::RoadNetworkVisibleAreaEdge *v6; // rdi
   UFG::RoadNetworkGate *v7; // rdx
-  float v8; // xmm1_4
-  float v9; // xmm2_4
-  UFG::RoadNetworkGate *v10; // rax
-  __int64 v11; // rcx
+  float y; // xmm1_4
+  float z; // xmm2_4
+  UFG::RoadNetworkGate *mPreviousGate; // rax
+  __int64 mOffset; // rcx
   UFG::RoadNetworkSegment *v12; // r8
   __int64 v13; // rcx
 
-  v4 = spawner;
-  v5 = startingGate;
-  v6 = this;
-  this->mPrev = (UFG::qNode<UFG::RoadNetworkVisibleAreaEdge,UFG::RoadNetworkVisibleAreaEdge> *)&this->mPrev;
-  this->mNext = (UFG::qNode<UFG::RoadNetworkVisibleAreaEdge,UFG::RoadNetworkVisibleAreaEdge> *)&this->mPrev;
+  this->mPrev = this;
+  this->mNext = this;
   this->mVisibleArea = visibleArea;
   `eh vector constructor iterator(
     this->mSpawnPoint,
     0x18ui64,
     6,
     (void (__fastcall *)(void *))UFG::RoadNetworkSpawnPoint::RoadNetworkSpawnPoint);
-  v6->mT = -1.0;
-  v6->mComplete = 0;
+  this->mT = -1.0;
+  this->mComplete = 0;
   v7 = 0i64;
-  v6->mNumSpawnPoints = 0;
-  v6->mNodesToStart.p = 0i64;
-  *(_QWORD *)&v6->mNodesToStart.size = 0i64;
-  v6->mCurrentSubSegment = 0i64;
-  v6->mNextSubSegment = 0i64;
-  v6->mPreviousSubSegment = 0i64;
-  v6->mNextGate = 0i64;
-  v6->mPreviousGate = v5;
-  v8 = UFG::qVector3::msZero.y;
-  v9 = UFG::qVector3::msZero.z;
-  v6->mDirection.x = UFG::qVector3::msZero.x;
-  v6->mDirection.y = v8;
-  v6->mDirection.z = v9;
-  v10 = v6->mPreviousGate;
-  if ( v10 )
+  this->mNumSpawnPoints = 0;
+  this->mNodesToStart.p = 0i64;
+  *(_QWORD *)&this->mNodesToStart.size = 0i64;
+  this->mCurrentSubSegment = 0i64;
+  this->mNextSubSegment = 0i64;
+  this->mPreviousSubSegment = 0i64;
+  this->mNextGate = 0i64;
+  this->mPreviousGate = startingGate;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
+  this->mDirection.x = UFG::qVector3::msZero.x;
+  this->mDirection.y = y;
+  this->mDirection.z = z;
+  mPreviousGate = this->mPreviousGate;
+  if ( mPreviousGate )
   {
-    v11 = v10->mConnectedNode.mOffset;
-    if ( v11 )
-      v12 = (UFG::RoadNetworkSegment *)((char *)&v10->mConnectedNode + v11);
+    mOffset = mPreviousGate->mConnectedNode.mOffset;
+    if ( mOffset )
+      v12 = (UFG::RoadNetworkSegment *)((char *)&mPreviousGate->mConnectedNode + mOffset);
     else
       v12 = 0i64;
-    v13 = v10->mConnectedGate.mOffset;
+    v13 = mPreviousGate->mConnectedGate.mOffset;
     if ( v13 )
-      v7 = (UFG::RoadNetworkGate *)((char *)v10 + v13 + 16);
-    v6->mCurrentSubSegment = UFG::RoadNetworkSegment::GetClosestSubSegment(v12, v7);
+      v7 = (UFG::RoadNetworkGate *)((char *)&mPreviousGate->mConnectedGate + v13);
+    this->mCurrentSubSegment = UFG::RoadNetworkSegment::GetClosestSubSegment(v12, v7);
   }
-  UFG::RoadNetworkVisibleAreaEdge::Init(v6, v4);
+  UFG::RoadNetworkVisibleAreaEdge::Init(this, spawner);
 }
 
 // File Line: 1727
 // RVA: 0xD0880
-void __fastcall UFG::RoadNetworkVisibleAreaEdge::RoadNetworkVisibleAreaEdge(UFG::RoadNetworkVisibleAreaEdge *this, UFG::RoadNetworkVisibleArea *visibleArea, UFG::RoadNetworkSubSegment *current, UFG::RoadNetworkSubSegment *next, UFG::RoadNetworkGate *nextGate)
+void __fastcall UFG::RoadNetworkVisibleAreaEdge::RoadNetworkVisibleAreaEdge(
+        UFG::RoadNetworkVisibleAreaEdge *this,
+        UFG::RoadNetworkVisibleArea *visibleArea,
+        UFG::RoadNetworkSubSegment *current,
+        UFG::RoadNetworkSubSegment *next,
+        UFG::RoadNetworkGate *nextGate)
 {
-  UFG::RoadNetworkSubSegment *v5; // rdi
-  UFG::RoadNetworkSubSegment *v6; // rbx
-  UFG::RoadNetworkVisibleAreaEdge *v7; // rsi
-  float v8; // xmm1_4
-  float v9; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
 
-  v5 = next;
-  v6 = current;
-  v7 = this;
-  this->mPrev = (UFG::qNode<UFG::RoadNetworkVisibleAreaEdge,UFG::RoadNetworkVisibleAreaEdge> *)&this->mPrev;
-  this->mNext = (UFG::qNode<UFG::RoadNetworkVisibleAreaEdge,UFG::RoadNetworkVisibleAreaEdge> *)&this->mPrev;
+  this->mPrev = this;
+  this->mNext = this;
   this->mVisibleArea = visibleArea;
   `eh vector constructor iterator(
     this->mSpawnPoint,
     0x18ui64,
     6,
     (void (__fastcall *)(void *))UFG::RoadNetworkSpawnPoint::RoadNetworkSpawnPoint);
-  v7->mT = -1.0;
-  v7->mComplete = 0;
-  v7->mNumSpawnPoints = 0;
-  v7->mNodesToStart.p = 0i64;
-  *(_QWORD *)&v7->mNodesToStart.size = 0i64;
-  v7->mCurrentSubSegment = v6;
-  v7->mNextSubSegment = v5;
-  v7->mPreviousSubSegment = 0i64;
-  v7->mNextGate = nextGate;
-  v7->mPreviousGate = 0i64;
-  v8 = UFG::qVector3::msZero.y;
-  v9 = UFG::qVector3::msZero.z;
-  v7->mDirection.x = UFG::qVector3::msZero.x;
-  v7->mDirection.y = v8;
-  v7->mDirection.z = v9;
-  ++v7->mCurrentSubSegment->mActive;
-  UFG::RoadNetworkVisibleAreaEdge::AddNodeToPath(
-    v7,
-    (UFG::RoadNetworkNode *)&v7->mCurrentSubSegment->mParentNode->mType);
-  UFG::RoadNetworkVisibleAreaEdge::UpdateDirection(v7);
-  UFG::RoadNetworkVisibleAreaEdge::RefreshT(v7);
-  UFG::RoadNetworkVisibleArea::ClaimSubSegmentVisited(v7->mVisibleArea, v7->mCurrentSubSegment);
-  v7->mNextGate = 0i64;
-  v7->mPreviousGate = 0i64;
+  this->mT = -1.0;
+  this->mComplete = 0;
+  this->mNumSpawnPoints = 0;
+  this->mNodesToStart.p = 0i64;
+  *(_QWORD *)&this->mNodesToStart.size = 0i64;
+  this->mCurrentSubSegment = current;
+  this->mNextSubSegment = next;
+  this->mPreviousSubSegment = 0i64;
+  this->mNextGate = nextGate;
+  this->mPreviousGate = 0i64;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
+  this->mDirection.x = UFG::qVector3::msZero.x;
+  this->mDirection.y = y;
+  this->mDirection.z = z;
+  ++this->mCurrentSubSegment->mActive;
+  UFG::RoadNetworkVisibleAreaEdge::AddNodeToPath(this, this->mCurrentSubSegment->mParentNode);
+  UFG::RoadNetworkVisibleAreaEdge::UpdateDirection(this);
+  UFG::RoadNetworkVisibleAreaEdge::RefreshT(this);
+  UFG::RoadNetworkVisibleArea::ClaimSubSegmentVisited(this->mVisibleArea, this->mCurrentSubSegment);
+  this->mNextGate = 0i64;
+  this->mPreviousGate = 0i64;
 }
 
 // File Line: 1733
 // RVA: 0xD10B0
 void __fastcall UFG::RoadNetworkVisibleAreaEdge::~RoadNetworkVisibleAreaEdge(UFG::RoadNetworkVisibleAreaEdge *this)
 {
-  UFG::RoadNetworkVisibleAreaEdge *v1; // rbx
-  unsigned int v2; // edx
-  __int64 v3; // rax
-  __int64 v4; // rax
-  UFG::RoadNetworkNode **v5; // rcx
-  UFG::qNode<UFG::RoadNetworkVisibleAreaEdge,UFG::RoadNetworkVisibleAreaEdge> *v6; // rcx
-  UFG::qNode<UFG::RoadNetworkVisibleAreaEdge,UFG::RoadNetworkVisibleAreaEdge> *v7; // rax
+  unsigned int i; // edx
+  UFG::RoadNetworkLane *mLane; // rax
+  UFG::RoadNetworkSubSegment *mSubSegment; // rax
+  UFG::RoadNetworkNode **p; // rcx
+  UFG::qNode<UFG::RoadNetworkVisibleAreaEdge,UFG::RoadNetworkVisibleAreaEdge> *mPrev; // rcx
+  UFG::qNode<UFG::RoadNetworkVisibleAreaEdge,UFG::RoadNetworkVisibleAreaEdge> *mNext; // rax
 
-  v1 = this;
-  v2 = 0;
-  if ( this->mNumSpawnPoints )
+  for ( i = 0; i < this->mNumSpawnPoints; ++i )
   {
-    do
+    mLane = this->mSpawnPoint[i].mLane;
+    if ( mLane )
     {
-      v3 = *((_QWORD *)&this->mPrev + 3 * (v2 + 1i64));
-      if ( v3 )
-      {
-        *(_QWORD *)(v3 + 24) = 0i64;
-        *(_DWORD *)(v3 + 32) = 0;
-        v4 = *((_QWORD *)&this->mNext + 3 * (v2 + 1i64));
-        --*(_DWORD *)(v4 + 48);
-        *((_QWORD *)&this->mNext + 3 * (v2 + 1i64)) = 0i64;
-        *((_QWORD *)&this->mPrev + 3 * (v2 + 1i64)) = 0i64;
-        *((_QWORD *)&this->mVisibleArea + 3 * (v2 + 1i64)) = 0i64;
-      }
-      ++v2;
+      mLane->mSpawnPoint = 0i64;
+      mLane->mSpawnT = 0.0;
+      mSubSegment = this->mSpawnPoint[i].mSubSegment;
+      --mSubSegment->mNumSpawnPoints;
+      this->mSpawnPoint[i].mSubSegment = 0i64;
+      this->mSpawnPoint[i].mLane = 0i64;
+      *(_QWORD *)&this->mSpawnPoint[i].mSpawnTime = 0i64;
     }
-    while ( v2 < this->mNumSpawnPoints );
   }
-  v5 = this->mNodesToStart.p;
-  if ( v5 )
-    operator delete[](v5);
-  v1->mNodesToStart.p = 0i64;
-  *(_QWORD *)&v1->mNodesToStart.size = 0i64;
-  `eh vector destructor iterator(v1->mSpawnPoint, 0x18ui64, 6, (void (__fastcall *)(void *))_);
-  v6 = v1->mPrev;
-  v7 = v1->mNext;
-  v6->mNext = v7;
-  v7->mPrev = v6;
-  v1->mPrev = (UFG::qNode<UFG::RoadNetworkVisibleAreaEdge,UFG::RoadNetworkVisibleAreaEdge> *)&v1->mPrev;
-  v1->mNext = (UFG::qNode<UFG::RoadNetworkVisibleAreaEdge,UFG::RoadNetworkVisibleAreaEdge> *)&v1->mPrev;
+  p = this->mNodesToStart.p;
+  if ( p )
+    operator delete[](p);
+  this->mNodesToStart.p = 0i64;
+  *(_QWORD *)&this->mNodesToStart.size = 0i64;
+  `eh vector destructor iterator(this->mSpawnPoint, 0x18ui64, 6, (void (__fastcall *)(void *))_);
+  mPrev = this->mPrev;
+  mNext = this->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->mPrev = this;
+  this->mNext = this;
 }
 
 // File Line: 1773
 // RVA: 0xDD070
-void __fastcall UFG::RoadNetworkVisibleAreaEdge::Init(UFG::RoadNetworkVisibleAreaEdge *this, UFG::RoadNetworkVisibleAreaEdge *spawner)
+void __fastcall UFG::RoadNetworkVisibleAreaEdge::Init(
+        UFG::RoadNetworkVisibleAreaEdge *this,
+        UFG::RoadNetworkVisibleAreaEdge *spawner)
 {
-  UFG::RoadNetworkVisibleAreaEdge *v2; // rbx
-
-  v2 = this;
   if ( spawner )
   {
     UFG::qArray<UFG::qPropertySet *,0>::Clone(&spawner->mNodesToStart, &this->mNodesToStart);
-    v2->mNextSubSegment = UFG::RoadNetworkVisibleAreaEdge::GetNextSubSegment(v2);
+    this->mNextSubSegment = UFG::RoadNetworkVisibleAreaEdge::GetNextSubSegment(this);
   }
-  ++v2->mCurrentSubSegment->mActive;
-  UFG::RoadNetworkVisibleAreaEdge::AddNodeToPath(
-    v2,
-    (UFG::RoadNetworkNode *)&v2->mCurrentSubSegment->mParentNode->mType);
-  UFG::RoadNetworkVisibleAreaEdge::UpdateDirection(v2);
-  UFG::RoadNetworkVisibleAreaEdge::RefreshT(v2);
-  UFG::RoadNetworkVisibleArea::ClaimSubSegmentVisited(v2->mVisibleArea, v2->mCurrentSubSegment);
-  v2->mNextGate = 0i64;
-  v2->mPreviousGate = 0i64;
+  ++this->mCurrentSubSegment->mActive;
+  UFG::RoadNetworkVisibleAreaEdge::AddNodeToPath(this, (Render::VerletCloth *)this->mCurrentSubSegment->mParentNode);
+  UFG::RoadNetworkVisibleAreaEdge::UpdateDirection(this);
+  UFG::RoadNetworkVisibleAreaEdge::RefreshT(this);
+  UFG::RoadNetworkVisibleArea::ClaimSubSegmentVisited(this->mVisibleArea, this->mCurrentSubSegment);
+  this->mNextGate = 0i64;
+  this->mPreviousGate = 0i64;
 }
 
 // File Line: 1789
 // RVA: 0xD8610
-UFG::qVector3 *__fastcall UFG::RoadNetworkVisibleAreaEdge::GetCurrentPosition(UFG::RoadNetworkVisibleAreaEdge *this, UFG::qVector3 *result)
+UFG::qVector3 *__fastcall UFG::RoadNetworkVisibleAreaEdge::GetCurrentPosition(
+        UFG::RoadNetworkVisibleAreaEdge *this,
+        UFG::qVector3 *result)
 {
-  UFG::qVector3 *v2; // rsi
-  UFG::RoadNetworkVisibleAreaEdge *v3; // r11
-  UFG::RoadNetworkSegment *v4; // r9
+  UFG::RoadNetworkSegment *mParentNode; // r9
   UFG::RoadNetworkConnection *v5; // rcx
-  __int64 v6; // r8
-  __int64 v7; // rax
-  signed __int64 v8; // rdx
-  signed __int64 v9; // r10
-  __int64 v10; // rax
-  signed __int64 v11; // rax
-  float v12; // xmm6_4
-  __int64 v13; // r10
-  signed __int64 v14; // rdx
-  __int64 v15; // rax
-  signed __int64 v16; // rdi
-  signed __int64 v17; // rax
-  __int64 v18; // rdx
-  UFG::qBezierPathMemImaged *v19; // rax
-  UFG::RoadNetworkConnection *v20; // rbx
-  unsigned int v21; // eax
-  UFG::qBezierSplineMemImaged *v22; // rax
-  UFG::qVector3 *v23; // rax
-  float v24; // xmm1_4
-  float v25; // xmm0_4
-  UFG::qVector3 resulta; // [rsp+20h] [rbp-28h]
-  float splineT; // [rsp+50h] [rbp+8h]
+  __int64 mOffset; // r8
+  char *v7; // rdx
+  char *v8; // r10
+  char *v9; // rax
+  float mT; // xmm6_4
+  __int64 v11; // r10
+  char *v12; // rdx
+  __int64 v13; // rax
+  char *v14; // rdi
+  char *v15; // rax
+  __int64 v16; // rdx
+  UFG::qBezierPathMemImaged *Path; // rbx
+  unsigned int SplineParameters; // eax
+  UFG::qBezierSplineMemImaged *v19; // rax
+  UFG::qVector3 *v20; // rax
+  float y; // xmm1_4
+  float z; // xmm0_4
+  UFG::qVector3 resulta; // [rsp+20h] [rbp-28h] BYREF
+  float splineT; // [rsp+50h] [rbp+8h] BYREF
 
-  v2 = result;
-  v3 = this;
-  v4 = this->mCurrentSubSegment->mParentNode;
+  mParentNode = this->mCurrentSubSegment->mParentNode;
   v5 = 0i64;
-  v6 = v4->mLane.mOffset;
-  v7 = ((unsigned __int8)v4->mNumLanes - 1) / 2;
-  if ( v6 )
-    v8 = (signed __int64)&v4->mLane + v6;
+  mOffset = mParentNode->mLane.mOffset;
+  if ( mOffset )
+    v7 = (char *)&mParentNode->mLane + mOffset;
   else
-    v8 = 0i64;
-  v9 = v8 + 8 * v7;
-  v10 = *(_QWORD *)(v8 + 8 * v7);
-  if ( v10 )
-    v11 = v9 + v10;
+    v7 = 0i64;
+  v8 = &v7[8 * (((unsigned __int8)mParentNode->mNumLanes - 1) / 2)];
+  if ( *(_QWORD *)v8 )
+    v9 = &v8[*(_QWORD *)v8];
   else
-    v11 = 0i64;
-  v12 = v3->mT;
-  v13 = *(unsigned __int16 *)(v11 + 36);
-  if ( v6 )
-    v14 = (signed __int64)&v4->mLane + v6;
+    v9 = 0i64;
+  mT = this->mT;
+  v11 = *((unsigned __int16 *)v9 + 18);
+  if ( mOffset )
+    v12 = (char *)&mParentNode->mLane + mOffset;
   else
+    v12 = 0i64;
+  v13 = *(_QWORD *)&v12[8 * v11];
+  v14 = &v12[8 * v11 + v13];
+  if ( !v13 )
     v14 = 0i64;
-  v15 = *(_QWORD *)(v14 + 8 * v13);
-  v16 = v15 + v14 + 8 * v13;
-  if ( !v15 )
-    v16 = 0i64;
-  if ( *(_QWORD *)v16 )
-    v17 = v16 + *(_QWORD *)v16;
+  if ( *(_QWORD *)v14 )
+    v15 = &v14[*(_QWORD *)v14];
   else
-    v17 = 0i64;
-  v18 = *(_QWORD *)(v17 + 32);
-  if ( v18 )
-    v5 = (UFG::RoadNetworkConnection *)(v18 + v17 + 32);
-  v19 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v5, *(unsigned __int16 *)(v16 + 38));
-  v20 = (UFG::RoadNetworkConnection *)v19;
-  v21 = UFG::qBezierPathMemImaged::GetSplineParameters(v19, v12, &splineT);
-  v22 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v20, v21);
-  UFG::RoadNetworkLane::GetOffsetPos(&resulta, v22, splineT, *(float *)(v16 + 40));
-  v23 = v2;
-  v24 = resulta.y;
-  v2->x = resulta.x;
-  v25 = resulta.z;
-  v2->y = v24;
-  v2->z = v25;
-  return v23;
+    v15 = 0i64;
+  v16 = *((_QWORD *)v15 + 4);
+  if ( v16 )
+    v5 = (UFG::RoadNetworkConnection *)&v15[v16 + 32];
+  Path = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v5, *((unsigned __int16 *)v14 + 19));
+  SplineParameters = UFG::qBezierPathMemImaged::GetSplineParameters(Path, mT, &splineT);
+  v19 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                         (UFG::RoadNetworkConnection *)Path,
+                                         SplineParameters);
+  UFG::RoadNetworkLane::GetOffsetPos(&resulta, v19, splineT, *((float *)v14 + 10));
+  v20 = result;
+  y = resulta.y;
+  result->x = resulta.x;
+  z = resulta.z;
+  result->y = y;
+  result->z = z;
+  return v20;
 }
 
 // File Line: 1812
 // RVA: 0xD4710
 void __fastcall UFG::RoadNetworkVisibleAreaEdge::ExpandOneStep(UFG::RoadNetworkVisibleAreaEdge *this)
 {
-  UFG::RoadNetworkVisibleAreaEdge *v1; // rdi
   UFG::RoadNetworkSegment *v2; // rbx
-  unsigned int v3; // edx
-  __int64 v4; // rax
-  __int64 v5; // rax
-  UFG::RoadNetworkSubSegment *v6; // rax
+  unsigned int i; // edx
+  UFG::RoadNetworkLane *mLane; // rax
+  UFG::RoadNetworkSubSegment *mSubSegment; // rax
+  UFG::RoadNetworkSubSegment *NextSubSegment; // rax
   UFG::RoadNetworkSubSegment *v7; // rsi
-  UFG::RoadNetworkGate *v8; // rbp
-  __int64 v9; // rax
+  UFG::RoadNetworkGate *NextGate; // rbp
+  __int64 mOffset; // rax
   UFG::RoadNetworkSegment *v10; // rsi
-  UFG::RoadNetworkSubSegment *v11; // rax
-  UFG::RoadNetworkGate *v12; // rax
+  UFG::RoadNetworkSubSegment *ClosestSubSegment; // rax
+  UFG::RoadNetworkGate *FirstValidGate; // rax
   UFG::RoadNetworkGate *v13; // rbp
   __int64 v14; // rax
   UFG::RoadNetworkSubSegment *v15; // rbx
-  UFG::qVector3 result; // [rsp+20h] [rbp-28h]
-  UFG::qVector3 position; // [rsp+30h] [rbp-18h]
+  UFG::qVector3 result; // [rsp+20h] [rbp-28h] BYREF
+  UFG::qVector3 position; // [rsp+30h] [rbp-18h] BYREF
 
-  v1 = this;
-  if ( this->mComplete != 1 )
+  if ( !this->mComplete )
   {
     v2 = 0i64;
-    v3 = 0;
-    if ( this->mNumSpawnPoints )
+    for ( i = 0; i < this->mNumSpawnPoints; ++i )
     {
-      do
+      mLane = this->mSpawnPoint[i].mLane;
+      if ( mLane )
       {
-        v4 = *((_QWORD *)&this->mPrev + 3 * (v3 + 1i64));
-        if ( v4 )
-        {
-          *(_QWORD *)(v4 + 24) = 0i64;
-          *(_DWORD *)(v4 + 32) = 0;
-          v5 = *((_QWORD *)&this->mNext + 3 * (v3 + 1i64));
-          --*(_DWORD *)(v5 + 48);
-          *((_QWORD *)&this->mNext + 3 * (v3 + 1i64)) = 0i64;
-          *((_QWORD *)&this->mPrev + 3 * (v3 + 1i64)) = 0i64;
-          *((_QWORD *)&this->mVisibleArea + 3 * (v3 + 1i64)) = 0i64;
-        }
-        ++v3;
+        mLane->mSpawnPoint = 0i64;
+        mLane->mSpawnT = 0.0;
+        mSubSegment = this->mSpawnPoint[i].mSubSegment;
+        --mSubSegment->mNumSpawnPoints;
+        this->mSpawnPoint[i].mSubSegment = 0i64;
+        this->mSpawnPoint[i].mLane = 0i64;
+        *(_QWORD *)&this->mSpawnPoint[i].mSpawnTime = 0i64;
       }
-      while ( v3 < this->mNumSpawnPoints );
     }
     this->mNumSpawnPoints = 0;
     UFG::RoadNetworkVisibleAreaEdge::GetCurrentPosition(this, &result);
     position = result;
-    v6 = UFG::RoadNetworkVisibleAreaEdge::GetNextSubSegment(v1);
-    v7 = v6;
-    if ( v6 )
+    NextSubSegment = UFG::RoadNetworkVisibleAreaEdge::GetNextSubSegment(this);
+    v7 = NextSubSegment;
+    if ( NextSubSegment )
     {
-      if ( UFG::RoadNetworkVisibleArea::IsSubSegmentInRange(v1->mVisibleArea, v6) )
+      if ( UFG::RoadNetworkVisibleArea::IsSubSegmentInRange(this->mVisibleArea, NextSubSegment) )
       {
-        UFG::RoadNetworkVisibleAreaEdge::SetCurrentSubSegment(v1, v7);
+        UFG::RoadNetworkVisibleAreaEdge::SetCurrentSubSegment(this, v7);
       }
-      else if ( !v1->mComplete )
+      else if ( !this->mComplete )
       {
-        v1->mComplete = 1;
+        this->mComplete = 1;
       }
     }
     else
     {
-      v8 = UFG::RoadNetworkVisibleAreaEdge::GetNextGate(v1);
-      if ( !UFG::RoadNetworkVisibleAreaEdge::ShouldExpand(v1, v8) )
+      NextGate = UFG::RoadNetworkVisibleAreaEdge::GetNextGate(this);
+      if ( !UFG::RoadNetworkVisibleAreaEdge::ShouldExpand(this, NextGate) )
         goto LABEL_25;
-      v9 = v8->mConnectedNode.mOffset;
-      if ( v9 )
-        v10 = (UFG::RoadNetworkSegment *)((char *)&v8->mConnectedNode + v9);
+      mOffset = NextGate->mConnectedNode.mOffset;
+      if ( mOffset )
+        v10 = (UFG::RoadNetworkSegment *)((char *)&NextGate->mConnectedNode + mOffset);
       else
         v10 = 0i64;
-      if ( 0 == v10->mType.mValue )
+      if ( !v10->mType.mValue )
       {
-        v11 = UFG::RoadNetworkSegment::GetClosestSubSegment(v10, &position);
-        v1->mPreviousGate = v8;
-        UFG::RoadNetworkVisibleAreaEdge::SetCurrentSubSegment(v1, v11);
+        ClosestSubSegment = UFG::RoadNetworkSegment::GetClosestSubSegment(v10, &position);
+        this->mPreviousGate = NextGate;
+        UFG::RoadNetworkVisibleAreaEdge::SetCurrentSubSegment(this, ClosestSubSegment);
         return;
       }
-      UFG::RoadNetworkVisibleAreaEdge::AddNodeToPath(v1, (UFG::RoadNetworkNode *)&v10->mType);
-      v12 = UFG::RoadNetworkVisibleArea::GetFirstValidGate(v1->mVisibleArea, (UFG::RoadNetworkIntersection *)v10);
-      v13 = v12;
-      if ( v12 )
+      UFG::RoadNetworkVisibleAreaEdge::AddNodeToPath(this, (Render::VerletCloth *)v10);
+      FirstValidGate = UFG::RoadNetworkVisibleArea::GetFirstValidGate(
+                         this->mVisibleArea,
+                         (UFG::RoadNetworkIntersection *)v10);
+      v13 = FirstValidGate;
+      if ( FirstValidGate )
       {
-        v1->mPreviousGate = v12;
-        v14 = v12->mConnectedNode.mOffset;
+        this->mPreviousGate = FirstValidGate;
+        v14 = FirstValidGate->mConnectedNode.mOffset;
         if ( v14 )
           v2 = (UFG::RoadNetworkSegment *)((char *)&v13->mConnectedNode + v14);
         v15 = UFG::RoadNetworkSegment::GetClosestSubSegment(v2, &v13->mPosition);
-        UFG::RoadNetworkVisibleArea::CreateEdges(v1->mVisibleArea, (UFG::RoadNetworkIntersection *)v10, v1, v13);
-        UFG::RoadNetworkVisibleAreaEdge::SetCurrentSubSegment(v1, v15);
+        UFG::RoadNetworkVisibleArea::CreateEdges(this->mVisibleArea, (UFG::RoadNetworkIntersection *)v10, this, v13);
+        UFG::RoadNetworkVisibleAreaEdge::SetCurrentSubSegment(this, v15);
       }
       else
       {
 LABEL_25:
-        if ( !v1->mComplete )
-          v1->mComplete = 1;
+        if ( !this->mComplete )
+          this->mComplete = 1;
       }
     }
   }
@@ -3140,155 +2978,160 @@ LABEL_25:
 
 // File Line: 1884
 // RVA: 0xD1BE0
-void __fastcall UFG::RoadNetworkVisibleAreaEdge::AddNodeToPath(UFG::RoadNetworkVisibleAreaEdge *this, UFG::RoadNetworkNode *node)
+void __fastcall UFG::RoadNetworkVisibleAreaEdge::AddNodeToPath(
+        UFG::RoadNetworkVisibleAreaEdge *this,
+        Render::VerletCloth *node)
 {
-  unsigned __int16 v2; // ax
-  unsigned __int128 v3; // di
-  UFG::RoadNetworkVisibleArea *v4; // rcx
-  unsigned int v5; // edx
-  __int64 v6; // rbp
-  unsigned int v7; // edx
-  unsigned int v8; // ebx
-  unsigned int v9; // edx
-  __int64 v10; // rax
-  Render::VerletCloth *value; // [rsp+30h] [rbp+8h]
+  unsigned __int16 mPrev; // ax
+  UFG::RoadNetworkVisibleArea *mVisibleArea; // rcx
+  unsigned int mPrevSoftVertPosUnconstrained; // edx
+  __int64 size; // rbp
+  unsigned int capacity; // edx
+  unsigned int v9; // ebx
+  unsigned int v10; // edx
+  UFG::RoadNetworkNode **p; // rax
+  Render::VerletCloth *value; // [rsp+30h] [rbp+8h] BYREF
 
-  v2 = node->mType.mValue;
-  v3 = __PAIR__((unsigned __int64)this, (unsigned __int64)node);
-  if ( node->mType.mValue == 1 )
-    ++node->mActive;
-  v4 = this->mVisibleArea;
-  value = (Render::VerletCloth *)node;
-  v5 = node->mIndex;
-  if ( v2 == 1 )
-    UFG::qMap<Render::VerletCloth *>::Set((UFG::qMap<Render::VerletCloth *> *)&v4->mVisitedIntersections, v5, &value);
+  mPrev = (unsigned __int16)node->mPrev;
+  if ( LOWORD(node->mPrev) == 1 )
+    ++WORD1(node->mPrev);
+  mVisibleArea = this->mVisibleArea;
+  value = node;
+  mPrevSoftVertPosUnconstrained = (unsigned int)node->mPrevSoftVertPosUnconstrained;
+  if ( mPrev == 1 )
+    UFG::qMap<Render::VerletCloth *>::Set(
+      (UFG::qMap<Render::VerletCloth *> *)&mVisibleArea->mVisitedIntersections,
+      mPrevSoftVertPosUnconstrained,
+      &value);
   else
-    UFG::qMap<Render::VerletCloth *>::Set((UFG::qMap<Render::VerletCloth *> *)&v4->mVisitedSegments, v5, &value);
-  v6 = *(unsigned int *)(*((_QWORD *)&v3 + 1) + 184i64);
-  v7 = *(_DWORD *)(*((_QWORD *)&v3 + 1) + 188i64);
-  v8 = v6 + 1;
-  if ( (signed int)v6 + 1 > v7 )
+    UFG::qMap<Render::VerletCloth *>::Set(
+      (UFG::qMap<Render::VerletCloth *> *)&mVisibleArea->mVisitedSegments,
+      mPrevSoftVertPosUnconstrained,
+      &value);
+  size = this->mNodesToStart.size;
+  capacity = this->mNodesToStart.capacity;
+  v9 = size + 1;
+  if ( (int)size + 1 > capacity )
   {
-    if ( v7 )
-      v9 = 2 * v7;
+    if ( capacity )
+      v10 = 2 * capacity;
     else
-      v9 = 1;
-    for ( ; v9 < v8; v9 *= 2 )
+      v10 = 1;
+    for ( ; v10 < v9; v10 *= 2 )
       ;
-    if ( v9 <= 2 )
-      v9 = 2;
-    if ( v9 - v8 > 0x10000 )
-      v9 = v6 + 65537;
+    if ( v10 <= 2 )
+      v10 = 2;
+    if ( v10 - v9 > 0x10000 )
+      v10 = size + 65537;
     UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(
-      (UFG::qArray<UFG::qReflectInventoryBase *,0> *)(*((_QWORD *)&v3 + 1) + 184i64),
-      v9,
+      (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&this->mNodesToStart,
+      v10,
       "qArray.Add.mNodesToStart");
   }
-  v10 = *(_QWORD *)(*((_QWORD *)&v3 + 1) + 192i64);
-  *(_DWORD *)(*((_QWORD *)&v3 + 1) + 184i64) = v8;
-  *(_QWORD *)(v10 + 8 * v6) = v3;
+  p = this->mNodesToStart.p;
+  this->mNodesToStart.size = v9;
+  p[size] = (UFG::RoadNetworkNode *)node;
 }
 
 // File Line: 1905
 // RVA: 0xE0980
-char __fastcall UFG::RoadNetworkVisibleAreaEdge::ShouldExpand(UFG::RoadNetworkVisibleAreaEdge *this, UFG::RoadNetworkGate *gate)
+bool __fastcall UFG::RoadNetworkVisibleAreaEdge::ShouldExpand(
+        UFG::RoadNetworkVisibleAreaEdge *this,
+        UFG::RoadNetworkGate *gate)
 {
-  UFG::RoadNetworkGate *v2; // rbx
-  UFG::RoadNetworkVisibleAreaEdge *v3; // rbp
-  __int64 v4; // rax
+  __int64 mOffset; // rax
   UFG::qBaseTreeRB *v5; // rsi
   UFG::RoadNetworkIntersection *v6; // rdi
-  float v7; // xmm1_4
-  float v8; // xmm0_4
-  UFG::RoadNetworkGate *v9; // rax
-  unsigned int v10; // edx
-  UFG::RoadNetworkVisibleArea *v11; // rcx
+  float y; // xmm1_4
+  float z; // xmm0_4
+  UFG::RoadNetworkGate *ClosestGate; // rax
+  unsigned int mIndex; // edx
+  UFG::RoadNetworkVisibleArea *mVisibleArea; // rcx
   float v12; // xmm1_4
   float v13; // xmm0_4
   bool v14; // bl
-  bool v15; // al
+  bool IsSubSegmentInRange; // al
   __int64 v16; // rax
-  UFG::RoadNetworkSubSegment *v17; // rax
-  char v18; // al
-  UFG::qVector3 position; // [rsp+20h] [rbp-28h]
-  UFG::qVector3 result; // [rsp+30h] [rbp-18h]
+  UFG::RoadNetworkSubSegment *ClosestSubSegment; // rax
+  UFG::qVector3 position; // [rsp+20h] [rbp-28h] BYREF
+  UFG::qVector3 result; // [rsp+30h] [rbp-18h] BYREF
 
-  v2 = gate;
-  v3 = this;
   if ( !gate )
     return 0;
-  v4 = gate->mConnectedNode.mOffset;
+  mOffset = gate->mConnectedNode.mOffset;
   v5 = 0i64;
-  if ( v4 )
-    v6 = (UFG::RoadNetworkIntersection *)((char *)&gate->mConnectedNode + v4);
+  if ( mOffset )
+    v6 = (UFG::RoadNetworkIntersection *)((char *)&gate->mConnectedNode + mOffset);
   else
     v6 = 0i64;
-  v7 = gate->mPosition.y;
+  y = gate->mPosition.y;
   position.x = gate->mPosition.x;
-  v8 = gate->mPosition.z;
-  position.y = v7;
-  position.z = v8;
+  z = gate->mPosition.z;
+  position.y = y;
+  position.z = z;
   UFG::RoadNetworkVisibleAreaEdge::GetCurrentPosition(this, &result);
   if ( !v6 )
-    goto LABEL_21;
+    return 0;
   if ( v6->mType.mValue == 1 )
   {
-    v9 = UFG::RoadNetworkIntersection::GetClosestGate(v6, &result);
-    v10 = v6->mIndex;
-    v11 = v3->mVisibleArea;
-    v12 = v9->mPosition.y;
-    position.x = v9->mPosition.x;
-    v13 = v9->mPosition.z;
+    ClosestGate = UFG::RoadNetworkIntersection::GetClosestGate(v6, &result);
+    mIndex = v6->mIndex;
+    mVisibleArea = this->mVisibleArea;
+    v12 = ClosestGate->mPosition.y;
+    position.x = ClosestGate->mPosition.x;
+    v13 = ClosestGate->mPosition.z;
     position.y = v12;
     position.z = v13;
-    if ( v10 )
-      v5 = UFG::qBaseTreeRB::Get(&v11->mVisitedIntersections.mTree.mTree, v10);
+    if ( mIndex )
+      v5 = UFG::qBaseTreeRB::Get(&mVisibleArea->mVisitedIntersections.mTree.mTree, mIndex);
     v14 = v5 != 0i64;
-    v15 = UFG::RoadNetworkVisibleArea::IsInRange(v3->mVisibleArea, v6, &position);
+    IsSubSegmentInRange = UFG::RoadNetworkVisibleArea::IsInRange(this->mVisibleArea, v6, &position);
   }
   else
   {
-    v16 = v2->mConnectedGate.mOffset;
+    v16 = gate->mConnectedGate.mOffset;
     if ( v16 )
-      v5 = (UFG::qBaseTreeRB *)((char *)&v2->mConnectedGate + v16);
-    v17 = UFG::RoadNetworkSegment::GetClosestSubSegment((UFG::RoadNetworkSegment *)v6, (UFG::RoadNetworkGate *)v5);
-    v14 = v17->mActive != 0;
-    v15 = UFG::RoadNetworkVisibleArea::IsSubSegmentInRange(v3->mVisibleArea, v17);
+      v5 = (UFG::qBaseTreeRB *)((char *)&gate->mConnectedGate + v16);
+    ClosestSubSegment = UFG::RoadNetworkSegment::GetClosestSubSegment(
+                          (UFG::RoadNetworkSegment *)v6,
+                          (UFG::RoadNetworkGate *)v5);
+    v14 = ClosestSubSegment->mActive != 0;
+    IsSubSegmentInRange = UFG::RoadNetworkVisibleArea::IsSubSegmentInRange(this->mVisibleArea, ClosestSubSegment);
   }
-  if ( !v14 && v15 )
-    v18 = 1;
-  else
-LABEL_21:
-    v18 = 0;
-  return v18;
+  return !v14 && IsSubSegmentInRange;
 }
 
 // File Line: 1946
 // RVA: 0xDADD0
-UFG::RoadNetworkSubSegment *__fastcall UFG::RoadNetworkVisibleAreaEdge::GetNextSubSegment(UFG::RoadNetworkVisibleAreaEdge *this)
+UFG::RoadNetworkSubSegment *__fastcall UFG::RoadNetworkVisibleAreaEdge::GetNextSubSegment(
+        UFG::RoadNetworkVisibleAreaEdge *this)
 {
-  UFG::RoadNetworkSubSegment *v1; // rdx
-  UFG::RoadNetworkSubSegment *v2; // r10
+  UFG::RoadNetworkSubSegment *mCurrentSubSegment; // rdx
+  __int64 v2; // r10
   UFG::RoadNetworkSubSegment *result; // rax
-  UFG::RoadNetworkSubSegment *v4; // r8
+  UFG::RoadNetworkSubSegment *p_mSubSegmentCollection; // r8
 
-  v1 = this->mCurrentSubSegment;
+  mCurrentSubSegment = this->mCurrentSubSegment;
   v2 = 0i64;
-  result = (UFG::RoadNetworkSubSegment *)v1->mNext;
-  v4 = (UFG::RoadNetworkSubSegment *)&v1->mParentNode->mSubSegmentCollection;
-  if ( result == v4
-    || (float)((float)((float)((float)(result->mPosition.y - v1->mPosition.y) * this->mDirection.y)
-                     + (float)((float)(result->mPosition.x - v1->mPosition.x) * this->mDirection.x))
-             + (float)((float)(result->mPosition.z - v1->mPosition.z) * this->mDirection.z)) <= 0.0 )
+  result = (UFG::RoadNetworkSubSegment *)mCurrentSubSegment->mNext;
+  p_mSubSegmentCollection = (UFG::RoadNetworkSubSegment *)&mCurrentSubSegment->mParentNode->mSubSegmentCollection;
+  if ( result == p_mSubSegmentCollection
+    || (float)((float)((float)((float)(result->mPosition.y - mCurrentSubSegment->mPosition.y) * this->mDirection.y)
+                     + (float)((float)(result->mPosition.x - mCurrentSubSegment->mPosition.x) * this->mDirection.x))
+             + (float)((float)(result->mPosition.z - mCurrentSubSegment->mPosition.z) * this->mDirection.z)) <= 0.0 )
   {
-    if ( (UFG::RoadNetworkSubSegment *)v1->mPrev != v4
-      && (float)((float)((float)((float)(*((float *)&v1->mPrev[1].mNext + 1) - v1->mPosition.y) * this->mDirection.y)
-                       + (float)((float)(*(float *)&v1->mPrev[1].mNext - v1->mPosition.x) * this->mDirection.x))
-               + (float)((float)(*(float *)&v1->mPrev[2].mPrev - v1->mPosition.z) * this->mDirection.z)) > 0.0 )
+    if ( mCurrentSubSegment->mPrev != p_mSubSegmentCollection
+      && (float)((float)((float)((float)(*((float *)&mCurrentSubSegment->mPrev[1].mNext + 1)
+                                       - mCurrentSubSegment->mPosition.y)
+                               * this->mDirection.y)
+                       + (float)((float)(*(float *)&mCurrentSubSegment->mPrev[1].mNext - mCurrentSubSegment->mPosition.x)
+                               * this->mDirection.x))
+               + (float)((float)(*(float *)&mCurrentSubSegment->mPrev[2].mPrev - mCurrentSubSegment->mPosition.z)
+                       * this->mDirection.z)) > 0.0 )
     {
-      v2 = (UFG::RoadNetworkSubSegment *)v1->mPrev;
+      return (UFG::RoadNetworkSubSegment *)mCurrentSubSegment->mPrev;
     }
-    result = v2;
+    return (UFG::RoadNetworkSubSegment *)v2;
   }
   return result;
 }
@@ -3297,8 +3140,8 @@ UFG::RoadNetworkSubSegment *__fastcall UFG::RoadNetworkVisibleAreaEdge::GetNextS
 // RVA: 0xE1650
 void __fastcall UFG::RoadNetworkVisibleAreaEdge::UpdateDirection(UFG::RoadNetworkVisibleAreaEdge *this)
 {
-  UFG::RoadNetworkSubSegment *v1; // rax
-  UFG::RoadNetworkSubSegment *v2; // rdx
+  UFG::RoadNetworkSubSegment *mCurrentSubSegment; // rax
+  UFG::RoadNetworkSubSegment *mPreviousSubSegment; // rdx
   float v3; // xmm8_4
   float v4; // xmm3_4
   float v5; // xmm4_4
@@ -3307,54 +3150,54 @@ void __fastcall UFG::RoadNetworkVisibleAreaEdge::UpdateDirection(UFG::RoadNetwor
   float v8; // xmm0_4
   float v9; // xmm1_4
   float v10; // xmm2_4
-  UFG::RoadNetworkSubSegment *v11; // rdx
-  UFG::RoadNetworkGate *v12; // rdx
-  UFG::RoadNetworkGate *v13; // rdx
+  UFG::RoadNetworkSubSegment *mNextSubSegment; // rdx
+  UFG::RoadNetworkGate *mNextGate; // rdx
+  UFG::RoadNetworkGate *mPreviousGate; // rdx
   float v14; // [rsp+0h] [rbp-48h]
   float v15; // [rsp+4h] [rbp-44h]
   float v16; // [rsp+8h] [rbp-40h]
 
-  v1 = this->mCurrentSubSegment;
-  if ( v1 )
+  mCurrentSubSegment = this->mCurrentSubSegment;
+  if ( mCurrentSubSegment )
   {
-    v2 = this->mPreviousSubSegment;
-    v3 = v1->mEndPos.z - v1->mPosition.z;
-    v4 = v1->mBeginPos.x - v1->mPosition.x;
-    v5 = v1->mBeginPos.y - v1->mPosition.y;
-    v6 = v1->mBeginPos.z - v1->mPosition.z;
-    v7 = v1->mEndPos.y - v1->mPosition.y;
-    if ( v2 )
+    mPreviousSubSegment = this->mPreviousSubSegment;
+    v3 = mCurrentSubSegment->mEndPos.z - mCurrentSubSegment->mPosition.z;
+    v4 = mCurrentSubSegment->mBeginPos.x - mCurrentSubSegment->mPosition.x;
+    v5 = mCurrentSubSegment->mBeginPos.y - mCurrentSubSegment->mPosition.y;
+    v6 = mCurrentSubSegment->mBeginPos.z - mCurrentSubSegment->mPosition.z;
+    v7 = mCurrentSubSegment->mEndPos.y - mCurrentSubSegment->mPosition.y;
+    if ( mPreviousSubSegment )
     {
-      v8 = v1->mPosition.x - v2->mPosition.x;
-      v9 = v1->mPosition.y - v2->mPosition.y;
-      v10 = v1->mPosition.z - v2->mPosition.z;
+      v8 = mCurrentSubSegment->mPosition.x - mPreviousSubSegment->mPosition.x;
+      v9 = mCurrentSubSegment->mPosition.y - mPreviousSubSegment->mPosition.y;
+      v10 = mCurrentSubSegment->mPosition.z - mPreviousSubSegment->mPosition.z;
     }
     else
     {
-      v11 = this->mNextSubSegment;
-      if ( v11 )
+      mNextSubSegment = this->mNextSubSegment;
+      if ( mNextSubSegment )
       {
-        v8 = v11->mPosition.x - v1->mPosition.x;
-        v9 = v11->mPosition.y - v1->mPosition.y;
-        v10 = v11->mPosition.z - v1->mPosition.z;
+        v8 = mNextSubSegment->mPosition.x - mCurrentSubSegment->mPosition.x;
+        v9 = mNextSubSegment->mPosition.y - mCurrentSubSegment->mPosition.y;
+        v10 = mNextSubSegment->mPosition.z - mCurrentSubSegment->mPosition.z;
       }
       else
       {
-        v12 = this->mNextGate;
-        if ( v12 )
+        mNextGate = this->mNextGate;
+        if ( mNextGate )
         {
-          v8 = v12->mPosition.x - v1->mPosition.x;
-          v9 = v12->mPosition.y - v1->mPosition.y;
-          v10 = v12->mPosition.z - v1->mPosition.z;
+          v8 = mNextGate->mPosition.x - mCurrentSubSegment->mPosition.x;
+          v9 = mNextGate->mPosition.y - mCurrentSubSegment->mPosition.y;
+          v10 = mNextGate->mPosition.z - mCurrentSubSegment->mPosition.z;
         }
         else
         {
-          v13 = this->mPreviousGate;
-          if ( v13 )
+          mPreviousGate = this->mPreviousGate;
+          if ( mPreviousGate )
           {
-            v8 = v1->mPosition.x - v13->mPosition.x;
-            v9 = v1->mPosition.y - v13->mPosition.y;
-            v10 = v1->mPosition.z - v13->mPosition.z;
+            v8 = mCurrentSubSegment->mPosition.x - mPreviousGate->mPosition.x;
+            v9 = mCurrentSubSegment->mPosition.y - mPreviousGate->mPosition.y;
+            v10 = mCurrentSubSegment->mPosition.z - mPreviousGate->mPosition.z;
           }
           else
           {
@@ -3367,7 +3210,7 @@ void __fastcall UFG::RoadNetworkVisibleAreaEdge::UpdateDirection(UFG::RoadNetwor
     }
     if ( (float)((float)((float)(v9 * v5) + (float)(v8 * v4)) + (float)(v10 * v6)) <= 0.0 )
     {
-      this->mDirection.x = v1->mEndPos.x - v1->mPosition.x;
+      this->mDirection.x = mCurrentSubSegment->mEndPos.x - mCurrentSubSegment->mPosition.x;
       this->mDirection.y = v7;
       this->mDirection.z = v3;
     }
@@ -3382,122 +3225,122 @@ void __fastcall UFG::RoadNetworkVisibleAreaEdge::UpdateDirection(UFG::RoadNetwor
 
 // File Line: 2010
 // RVA: 0xE0400
-void __fastcall UFG::RoadNetworkVisibleAreaEdge::SetCurrentSubSegment(UFG::RoadNetworkVisibleAreaEdge *this, UFG::RoadNetworkSubSegment *subSegment)
+void __fastcall UFG::RoadNetworkVisibleAreaEdge::SetCurrentSubSegment(
+        UFG::RoadNetworkVisibleAreaEdge *this,
+        UFG::RoadNetworkSubSegment *subSegment)
 {
-  unsigned int v2; // eax
+  unsigned int size; // eax
   UFG::RoadNetworkNode *v3; // rsi
-  UFG::RoadNetworkSubSegment *v4; // rdi
-  UFG::RoadNetworkVisibleAreaEdge *v5; // rbx
-  UFG::RoadNetworkSegment *v6; // rdx
-  UFG::RoadNetworkSubSegment *v7; // rax
+  UFG::RoadNetworkSegment *mParentNode; // rdx
+  UFG::RoadNetworkSubSegment *mCurrentSubSegment; // rax
 
-  v2 = this->mNodesToStart.size;
+  size = this->mNodesToStart.size;
   v3 = 0i64;
-  v4 = subSegment;
-  v5 = this;
-  if ( v2 )
-    v3 = this->mNodesToStart.p[v2 - 1];
-  v6 = subSegment->mParentNode;
-  if ( v6 == (UFG::RoadNetworkSegment *)v3 )
+  if ( size )
+    v3 = this->mNodesToStart.p[size - 1];
+  mParentNode = subSegment->mParentNode;
+  if ( mParentNode == v3 )
   {
-    v7 = this->mCurrentSubSegment;
+    mCurrentSubSegment = this->mCurrentSubSegment;
     this->mNextSubSegment = 0i64;
-    this->mPreviousSubSegment = v7;
+    this->mPreviousSubSegment = mCurrentSubSegment;
   }
   else
   {
-    UFG::RoadNetworkVisibleAreaEdge::AddNodeToPath(this, (UFG::RoadNetworkNode *)&v6->mType);
+    UFG::RoadNetworkVisibleAreaEdge::AddNodeToPath(this, (Render::VerletCloth *)mParentNode);
     if ( v3->mType.mValue == 1 )
-      v5->mPreviousSubSegment = 0i64;
+      this->mPreviousSubSegment = 0i64;
   }
-  v5->mCurrentSubSegment = v4;
-  ++v4->mActive;
-  UFG::RoadNetworkVisibleAreaEdge::UpdateDirection(v5);
-  UFG::RoadNetworkVisibleAreaEdge::RefreshT(v5);
-  UFG::RoadNetworkVisibleArea::ClaimSubSegmentVisited(v5->mVisibleArea, v5->mCurrentSubSegment);
+  this->mCurrentSubSegment = subSegment;
+  ++subSegment->mActive;
+  UFG::RoadNetworkVisibleAreaEdge::UpdateDirection(this);
+  UFG::RoadNetworkVisibleAreaEdge::RefreshT(this);
+  UFG::RoadNetworkVisibleArea::ClaimSubSegmentVisited(this->mVisibleArea, this->mCurrentSubSegment);
 }
 
 // File Line: 2038
 // RVA: 0xDF900
 void __fastcall UFG::RoadNetworkVisibleAreaEdge::RefreshT(UFG::RoadNetworkVisibleAreaEdge *this)
 {
-  UFG::RoadNetworkSubSegment *v1; // rax
-  float *v2; // rax
+  UFG::RoadNetworkSubSegment *mCurrentSubSegment; // rax
+  float *mEndTCollection; // rax
 
-  v1 = this->mCurrentSubSegment;
-  if ( (float)((float)((float)((float)(v1->mBeginPos.y - v1->mPosition.y) * this->mDirection.y)
-                     + (float)((float)(v1->mBeginPos.x - v1->mPosition.x) * this->mDirection.x))
-             + (float)((float)(v1->mBeginPos.z - v1->mPosition.z) * this->mDirection.z)) <= 0.0 )
-    v2 = v1->mEndTCollection;
+  mCurrentSubSegment = this->mCurrentSubSegment;
+  if ( (float)((float)((float)((float)(mCurrentSubSegment->mBeginPos.y - mCurrentSubSegment->mPosition.y)
+                             * this->mDirection.y)
+                     + (float)((float)(mCurrentSubSegment->mBeginPos.x - mCurrentSubSegment->mPosition.x)
+                             * this->mDirection.x))
+             + (float)((float)(mCurrentSubSegment->mBeginPos.z - mCurrentSubSegment->mPosition.z) * this->mDirection.z)) <= 0.0 )
+    mEndTCollection = mCurrentSubSegment->mEndTCollection;
   else
-    v2 = v1->mBeginTCollection;
-  this->mT = *v2;
+    mEndTCollection = mCurrentSubSegment->mBeginTCollection;
+  this->mT = *mEndTCollection;
 }
 
 // File Line: 2063
 // RVA: 0xDABD0
 UFG::RoadNetworkGate *__fastcall UFG::RoadNetworkVisibleAreaEdge::GetNextGate(UFG::RoadNetworkVisibleAreaEdge *this)
 {
-  UFG::RoadNetworkVisibleAreaEdge *v1; // rbx
   UFG::RoadNetworkGate *v2; // rsi
-  UFG::RoadNetworkSegment *v3; // r15
-  __int64 v4; // rax
+  UFG::RoadNetworkSegment *mParentNode; // r15
+  __int64 mOffset; // rax
   _QWORD *v5; // rcx
   UFG::RoadNetworkGate *v6; // rbp
-  signed __int64 v7; // rcx
+  char *v7; // rcx
   __int64 v8; // rax
   UFG::RoadNetworkGate *v9; // r14
-  UFG::RoadNetworkGate **v10; // r12
+  UFG::RoadNetworkGate **p; // r12
   UFG::RoadNetworkGate *v11; // rax
-  UFG::RoadNetworkSubSegment *v12; // rax
-  UFG::RoadNetworkSubSegment *v13; // rdi
+  UFG::RoadNetworkSubSegment *NextSubSegment; // rax
+  UFG::RoadNetworkSubSegment *mCurrentSubSegment; // rdi
   bool v14; // zf
-  UFG::RoadNetworkSubSegment *v15; // rbx
+  UFG::RoadNetworkSubSegment *ClosestSubSegment; // rbx
   UFG::RoadNetworkSubSegment *v16; // rax
-  UFG::qArray<UFG::RoadNetworkGate *,0> gateCollection; // [rsp+28h] [rbp-40h]
+  UFG::qArray<UFG::RoadNetworkGate *,0> gateCollection; // [rsp+28h] [rbp-40h] BYREF
 
-  v1 = this;
   v2 = 0i64;
-  v3 = this->mCurrentSubSegment->mParentNode;
-  v4 = v3->mGates.mOffset;
-  if ( v4 )
-    v5 = (__int64 *)((char *)&v3->mGates.mOffset + v4);
+  mParentNode = this->mCurrentSubSegment->mParentNode;
+  mOffset = mParentNode->mGates.mOffset;
+  if ( mOffset )
+    v5 = (__int64 *)((char *)&mParentNode->mGates.mOffset + mOffset);
   else
     v5 = 0i64;
   v6 = (UFG::RoadNetworkGate *)((char *)v5 + *v5);
   if ( !*v5 )
     v6 = 0i64;
-  if ( v4 )
-    v7 = (signed __int64)&v3->mGates + v4;
+  if ( mOffset )
+    v7 = (char *)&mParentNode->mGates + mOffset;
   else
     v7 = 0i64;
-  v8 = *(_QWORD *)(v7 + 8);
+  v8 = *((_QWORD *)v7 + 1);
   if ( v8 )
-    v9 = (UFG::RoadNetworkGate *)(v8 + v7 + 8);
+    v9 = (UFG::RoadNetworkGate *)&v7[v8 + 8];
   else
     v9 = 0i64;
   gateCollection.p = 0i64;
   *(_QWORD *)&gateCollection.size = 0i64;
-  UFG::RoadNetworkSubSegment::GetGatesConnectedToSubSegment(v1->mCurrentSubSegment, &gateCollection);
-  v10 = gateCollection.p;
+  UFG::RoadNetworkSubSegment::GetGatesConnectedToSubSegment(
+    this->mCurrentSubSegment,
+    (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&gateCollection);
+  p = gateCollection.p;
   if ( gateCollection.size == 2 )
   {
     v2 = v9;
-    if ( (float)((float)((float)((float)(v6->mPosition.y - v1->mCurrentSubSegment->mPosition.y) * v1->mDirection.y)
-                       + (float)((float)(v6->mPosition.x - v1->mCurrentSubSegment->mPosition.x) * v1->mDirection.x))
-               + (float)((float)(v6->mPosition.z - v1->mCurrentSubSegment->mPosition.z) * v1->mDirection.z)) > 0.0 )
+    if ( (float)((float)((float)((float)(v6->mPosition.y - this->mCurrentSubSegment->mPosition.y) * this->mDirection.y)
+                       + (float)((float)(v6->mPosition.x - this->mCurrentSubSegment->mPosition.x) * this->mDirection.x))
+               + (float)((float)(v6->mPosition.z - this->mCurrentSubSegment->mPosition.z) * this->mDirection.z)) > 0.0 )
       v2 = v6;
     goto LABEL_21;
   }
   if ( gateCollection.size == 1 )
   {
     v2 = *gateCollection.p;
-    if ( (float)((float)((float)((float)((*gateCollection.p)->mPosition.y - v1->mCurrentSubSegment->mPosition.y)
-                               * v1->mDirection.y)
-                       + (float)((float)((*gateCollection.p)->mPosition.x - v1->mCurrentSubSegment->mPosition.x)
-                               * v1->mDirection.x))
-               + (float)((float)((*gateCollection.p)->mPosition.z - v1->mCurrentSubSegment->mPosition.z)
-                       * v1->mDirection.z)) <= 0.0 )
+    if ( (float)((float)((float)((float)((*gateCollection.p)->mPosition.y - this->mCurrentSubSegment->mPosition.y)
+                               * this->mDirection.y)
+                       + (float)((float)((*gateCollection.p)->mPosition.x - this->mCurrentSubSegment->mPosition.x)
+                               * this->mDirection.x))
+               + (float)((float)((*gateCollection.p)->mPosition.z - this->mCurrentSubSegment->mPosition.z)
+                       * this->mDirection.z)) <= 0.0 )
     {
       v11 = v6;
       if ( v6 == v2 )
@@ -3508,33 +3351,33 @@ LABEL_21:
     if ( v2 )
       goto LABEL_31;
   }
-  if ( v1->mPreviousSubSegment )
+  if ( this->mPreviousSubSegment )
   {
-    v12 = 0i64;
-    v13 = v1->mCurrentSubSegment;
+    NextSubSegment = 0i64;
+    mCurrentSubSegment = this->mCurrentSubSegment;
     v14 = 1;
     do
     {
       if ( !v14 )
-        v13 = v12;
-      v12 = UFG::RoadNetworkVisibleAreaEdge::GetNextSubSegment(v1);
-      v14 = v12 == 0i64;
+        mCurrentSubSegment = NextSubSegment;
+      NextSubSegment = UFG::RoadNetworkVisibleAreaEdge::GetNextSubSegment(this);
+      v14 = NextSubSegment == 0i64;
     }
-    while ( v12 );
-    v15 = UFG::RoadNetworkSegment::GetClosestSubSegment(v3, v6);
-    v16 = UFG::RoadNetworkSegment::GetClosestSubSegment(v3, v9);
-    if ( v15 == v13 )
+    while ( NextSubSegment );
+    ClosestSubSegment = UFG::RoadNetworkSegment::GetClosestSubSegment(mParentNode, v6);
+    v16 = UFG::RoadNetworkSegment::GetClosestSubSegment(mParentNode, v9);
+    if ( ClosestSubSegment == mCurrentSubSegment )
     {
       v2 = v6;
     }
-    else if ( v16 == v13 )
+    else if ( v16 == mCurrentSubSegment )
     {
       v2 = v9;
     }
   }
 LABEL_31:
-  if ( v10 )
-    operator delete[](v10);
+  if ( p )
+    operator delete[](p);
   return v2;
 }
 
@@ -3542,110 +3385,108 @@ LABEL_31:
 // RVA: 0xD24E0
 void __fastcall UFG::RoadNetworkVisibleAreaEdge::AttachSpawnPoints(UFG::RoadNetworkVisibleAreaEdge *this)
 {
-  UFG::RoadNetworkVisibleAreaEdge *v1; // rbx
-  unsigned int v2; // edx
-  __int64 v3; // rax
-  __int64 v4; // rax
-  UFG::RoadNetworkSubSegment *v5; // rax
-  UFG::RoadNetworkSegment *v6; // rsi
+  unsigned int i; // edx
+  UFG::RoadNetworkLane *mLane; // rax
+  UFG::RoadNetworkSubSegment *mSubSegment; // rax
+  UFG::RoadNetworkSubSegment *mCurrentSubSegment; // rax
+  UFG::RoadNetworkSegment *mParentNode; // rsi
   char v7; // r12
   __int64 v8; // r15
   __int64 v9; // rdi
   __int64 v10; // rbp
-  __int64 v11; // r14
-  __int64 v12; // rdx
-  signed __int64 v13; // rax
-  signed __int64 v14; // rcx
+  __int64 mNumLanes; // r14
+  __int64 mOffset; // rdx
+  char *v13; // rax
+  char *v14; // rcx
   __int64 v15; // rax
-  _QWORD *v16; // rax
+  char *v16; // rax
   __int64 v17; // rcx
-  signed __int64 v18; // r8
+  char *v18; // r8
   char *v19; // rcx
   __int64 v20; // rax
   char *v21; // rax
   char *v22; // rcx
   __int64 v23; // rax
-  signed __int64 v24; // rax
+  char *v24; // rax
   UFG::RoadNetworkSubSegment *v25; // rax
-  float *v26; // rcx
+  float *mBeginTCollection; // rcx
   float v27; // xmm7_4
-  signed __int64 v28; // rax
-  signed __int64 v29; // rcx
+  char *v28; // rax
+  char *v29; // rcx
   __int64 v30; // rax
-  signed __int64 v31; // rax
-  signed __int64 v32; // rcx
+  char *v31; // rax
+  char *v32; // rcx
   unsigned int v33; // edx
   __int64 v34; // rax
   UFG::RoadNetworkConnection *v35; // rcx
   float v36; // xmm1_4
   float v37; // xmm0_4
   float v38; // xmm0_4
-  __int64 v39; // r9
+  __int64 mNumSpawnPoints; // r9
   __int64 v40; // rax
-  signed __int64 v41; // rcx
-  signed __int64 v42; // rax
+  char *v41; // rcx
+  char *v42; // rax
   __int64 v43; // rcx
   UFG::RoadNetworkLane *v44; // r8
   UFG::RoadNetworkSubSegment *v45; // rdx
   UFG::RoadNetworkSpawnPoint *v46; // rcx
 
-  v1 = this;
-  v2 = 0;
-  if ( this->mNumSpawnPoints )
+  for ( i = 0; i < this->mNumSpawnPoints; ++i )
   {
-    do
+    mLane = this->mSpawnPoint[i].mLane;
+    if ( mLane )
     {
-      v3 = *((_QWORD *)&this->mPrev + 3 * (v2 + 1i64));
-      if ( v3 )
-      {
-        *(_QWORD *)(v3 + 24) = 0i64;
-        *(_DWORD *)(v3 + 32) = 0;
-        v4 = *((_QWORD *)&this->mNext + 3 * (v2 + 1i64));
-        --*(_DWORD *)(v4 + 48);
-        *((_QWORD *)&this->mNext + 3 * (v2 + 1i64)) = 0i64;
-        *((_QWORD *)&this->mPrev + 3 * (v2 + 1i64)) = 0i64;
-        *((_QWORD *)&this->mVisibleArea + 3 * (v2 + 1i64)) = 0i64;
-      }
-      ++v2;
+      mLane->mSpawnPoint = 0i64;
+      mLane->mSpawnT = 0.0;
+      mSubSegment = this->mSpawnPoint[i].mSubSegment;
+      --mSubSegment->mNumSpawnPoints;
+      this->mSpawnPoint[i].mSubSegment = 0i64;
+      this->mSpawnPoint[i].mLane = 0i64;
+      *(_QWORD *)&this->mSpawnPoint[i].mSpawnTime = 0i64;
     }
-    while ( v2 < this->mNumSpawnPoints );
   }
-  v5 = this->mCurrentSubSegment;
+  mCurrentSubSegment = this->mCurrentSubSegment;
   this->mNumSpawnPoints = 0;
-  v6 = v5->mParentNode;
-  LODWORD(v5) = ((float)((float)((float)((float)(v5->mBeginPos.y - v5->mPosition.y) * this->mDirection.y)
-                               + (float)((float)(v5->mBeginPos.x - v5->mPosition.x) * this->mDirection.x))
-                       + (float)((float)(v5->mBeginPos.z - v5->mPosition.z) * this->mDirection.z)) <= 0.0)
-              + 1;
+  mParentNode = mCurrentSubSegment->mParentNode;
+  LODWORD(mCurrentSubSegment) = ((float)((float)((float)((float)(mCurrentSubSegment->mBeginPos.y
+                                                               - mCurrentSubSegment->mPosition.y)
+                                                       * this->mDirection.y)
+                                               + (float)((float)(mCurrentSubSegment->mBeginPos.x
+                                                               - mCurrentSubSegment->mPosition.x)
+                                                       * this->mDirection.x))
+                                       + (float)((float)(mCurrentSubSegment->mBeginPos.z
+                                                       - mCurrentSubSegment->mPosition.z)
+                                               * this->mDirection.z)) <= 0.0)
+                              + 1;
   v7 = 0;
-  v8 = (signed int)v5;
-  if ( (_DWORD)v5 == 2 )
+  v8 = (int)mCurrentSubSegment;
+  if ( (_DWORD)mCurrentSubSegment == 2 )
     v7 = 1;
-  if ( v6->mNumLanes )
+  if ( mParentNode->mNumLanes )
   {
     v9 = 0i64;
     v10 = 0i64;
-    v11 = (unsigned __int8)v6->mNumLanes;
+    mNumLanes = (unsigned __int8)mParentNode->mNumLanes;
     do
     {
-      v12 = v6->mLane.mOffset;
-      if ( v12 )
-        v13 = (signed __int64)&v6->mLane + v12;
+      mOffset = mParentNode->mLane.mOffset;
+      if ( mOffset )
+        v13 = (char *)&mParentNode->mLane + mOffset;
       else
         v13 = 0i64;
-      v14 = v9 + v13;
-      v15 = *(_QWORD *)(v9 + v13);
+      v14 = &v13[v9];
+      v15 = *(_QWORD *)&v13[v9];
       if ( v15 )
-        v16 = (_QWORD *)(v14 + v15);
+        v16 = &v14[v15];
       else
         v16 = 0i64;
-      v17 = v16[1];
+      v17 = *((_QWORD *)v16 + 1);
       if ( v17 )
-        v18 = (signed __int64)v16 + v17 + 8;
+        v18 = &v16[v17 + 8];
       else
         v18 = 0i64;
-      if ( *v16 )
-        v19 = (char *)v16 + *v16;
+      if ( *(_QWORD *)v16 )
+        v19 = &v16[*(_QWORD *)v16];
       else
         v19 = 0i64;
       v20 = *((_QWORD *)v19 + 6);
@@ -3659,35 +3500,35 @@ void __fastcall UFG::RoadNetworkVisibleAreaEdge::AttachSpawnPoints(UFG::RoadNetw
         v22 = 0i64;
       v23 = *((_QWORD *)v22 + 1);
       if ( v23 )
-        v24 = (signed __int64)&v22[v23 + 8];
+        v24 = &v22[v23 + 8];
       else
         v24 = 0i64;
       if ( v7 == (v18 != v24) )
       {
-        v25 = v1->mCurrentSubSegment;
+        v25 = this->mCurrentSubSegment;
         if ( v8 == 1 )
-          v26 = v25->mBeginTCollection;
+          mBeginTCollection = v25->mBeginTCollection;
         else
-          v26 = v25->mEndTCollection;
-        v27 = v26[v10];
-        if ( v12 )
-          v28 = (signed __int64)&v6->mLane + v12;
+          mBeginTCollection = v25->mEndTCollection;
+        v27 = mBeginTCollection[v10];
+        if ( mOffset )
+          v28 = (char *)&mParentNode->mLane + mOffset;
         else
           v28 = 0i64;
-        v29 = v9 + v28;
-        v30 = *(_QWORD *)(v9 + v28);
+        v29 = &v28[v9];
+        v30 = *(_QWORD *)&v28[v9];
         if ( v30 )
-          v31 = v29 + v30;
+          v31 = &v29[v30];
         else
           v31 = 0i64;
         if ( *(_QWORD *)v31 )
-          v32 = v31 + *(_QWORD *)v31;
+          v32 = &v31[*(_QWORD *)v31];
         else
           v32 = 0i64;
-        v33 = *(unsigned __int16 *)(v31 + 38);
-        v34 = *(_QWORD *)(v32 + 32);
+        v33 = *((unsigned __int16 *)v31 + 19);
+        v34 = *((_QWORD *)v32 + 4);
         if ( v34 )
-          v35 = (UFG::RoadNetworkConnection *)(v34 + v32 + 32);
+          v35 = (UFG::RoadNetworkConnection *)&v32[v34 + 32];
         else
           v35 = 0i64;
         v36 = *((float *)&UFG::qBezierPathCollectionMemImaged::GetPath(v35, v33)->mNode.mOffset + 1);
@@ -3704,35 +3545,35 @@ void __fastcall UFG::RoadNetworkVisibleAreaEdge::AttachSpawnPoints(UFG::RoadNetw
         {
           v38 = *(float *)&FLOAT_1_0;
         }
-        v39 = v1->mNumSpawnPoints;
-        if ( (unsigned int)v39 < 6 )
+        mNumSpawnPoints = this->mNumSpawnPoints;
+        if ( (unsigned int)mNumSpawnPoints < 6 )
         {
-          v40 = v6->mLane.mOffset;
+          v40 = mParentNode->mLane.mOffset;
           if ( v40 )
-            v41 = (signed __int64)&v6->mLane + v40;
+            v41 = (char *)&mParentNode->mLane + v40;
           else
             v41 = 0i64;
-          v42 = v9 + v41;
-          v43 = *(_QWORD *)(v9 + v41);
-          v44 = (UFG::RoadNetworkLane *)(v43 + v42);
+          v42 = &v41[v9];
+          v43 = *(_QWORD *)&v41[v9];
+          v44 = (UFG::RoadNetworkLane *)&v42[v43];
           if ( !v43 )
             v44 = 0i64;
-          v45 = v1->mCurrentSubSegment;
-          v46 = (UFG::RoadNetworkSpawnPoint *)((char *)v1 + 24 * (v39 + 1));
+          v45 = this->mCurrentSubSegment;
+          v46 = &this->mSpawnPoint[mNumSpawnPoints];
           v46->mLane = v44;
           v46->mSubSegment = v45;
           ++v45->mNumSpawnPoints;
           v44->mSpawnT = v38;
           v44->mSpawnPoint = v46;
           UFG::RoadNetworkSpawnPoint::Reset(v46);
-          ++v1->mNumSpawnPoints;
+          ++this->mNumSpawnPoints;
         }
       }
       ++v10;
       v9 += 8i64;
-      --v11;
+      --mNumLanes;
     }
-    while ( v11 );
+    while ( mNumLanes );
   }
 }
 
@@ -3740,35 +3581,33 @@ void __fastcall UFG::RoadNetworkVisibleAreaEdge::AttachSpawnPoints(UFG::RoadNetw
 // RVA: 0xDE710
 bool __fastcall UFG::RoadNetworkVisibleAreaEdge::IsOuterEdge(UFG::RoadNetworkVisibleAreaEdge *this)
 {
-  UFG::RoadNetworkVisibleAreaEdge *v1; // rbx
-  UFG::RoadNetworkSubSegment *v2; // rax
-  UFG::RoadNetworkGate *v4; // rax
-  __int64 v5; // rcx
-  signed __int64 v6; // rax
+  UFG::RoadNetworkSubSegment *NextSubSegment; // rax
+  UFG::RoadNetworkGate *NextGate; // rax
+  __int64 mOffset; // rcx
+  char *v6; // rax
   bool v7; // cl
   unsigned int v8; // edx
 
-  v1 = this;
-  v2 = UFG::RoadNetworkVisibleAreaEdge::GetNextSubSegment(this);
-  if ( v2 )
-    return v2->mActive == 0;
-  v4 = UFG::RoadNetworkVisibleAreaEdge::GetNextGate(v1);
-  if ( !v4 )
+  NextSubSegment = UFG::RoadNetworkVisibleAreaEdge::GetNextSubSegment(this);
+  if ( NextSubSegment )
+    return NextSubSegment->mActive == 0;
+  NextGate = UFG::RoadNetworkVisibleAreaEdge::GetNextGate(this);
+  if ( !NextGate )
     return 1;
-  v5 = v4->mConnectedNode.mOffset;
-  if ( !v5 )
+  mOffset = NextGate->mConnectedNode.mOffset;
+  if ( !mOffset )
     return 1;
-  v6 = (signed __int64)&v4->mConnectedNode + v5;
+  v6 = (char *)&NextGate->mConnectedNode + mOffset;
   if ( !v6 )
     return 1;
   v7 = 0;
   if ( *(_WORD *)v6 == 1 )
   {
-    v8 = *(_DWORD *)(v6 + 24);
+    v8 = *((_DWORD *)v6 + 6);
     if ( !v8 )
       return 1;
-    v7 = UFG::qBaseTreeRB::Get(&v1->mVisibleArea->mVisitedIntersections.mTree.mTree, v8) != 0i64;
+    v7 = UFG::qBaseTreeRB::Get(&this->mVisibleArea->mVisitedIntersections.mTree.mTree, v8) != 0i64;
   }
-  return v7 == 0;
+  return !v7;
 }
 

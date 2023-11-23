@@ -28,23 +28,24 @@ hkClass *__fastcall hkpRigidBody::staticClass()
 
 // File Line: 58
 // RVA: 0xD51050
-void __fastcall finishLoadedObjecthkpRigidBody(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpRigidBody(hkpRigidBody *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpRigidBody::hkpRigidBody);
+  if ( p )
+    hkpRigidBody::hkpRigidBody(p, finishing);
 }
 
 // File Line: 64
 // RVA: 0xD51070
-void __fastcall cleanupLoadedObjecthkpRigidBody(void *p)
+void __fastcall cleanupLoadedObjecthkpRigidBody(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 68
 // RVA: 0xD51080
 hkBaseObjectVtbl *__fastcall getVtablehkpRigidBody()
 {
-  hkpRigidBody v1; // [rsp+20h] [rbp-2D8h]
+  hkpRigidBody v1; // [rsp+20h] [rbp-2D8h] BYREF
 
   hkpRigidBody::hkpRigidBody(&v1, 0);
   return v1.vfptr;
@@ -61,8 +62,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpRigidBodyTypeInfo__()
   hkpRigidBodyTypeInfo.m_typeName = "hkpRigidBody";
   hkpRigidBodyTypeInfo.m_vtable = result;
   hkpRigidBodyTypeInfo.m_scopedName = "!hkpRigidBody";
-  hkpRigidBodyTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpRigidBody;
-  hkpRigidBodyTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpRigidBody;
+  hkpRigidBodyTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpRigidBody;
+  hkpRigidBodyTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpRigidBody;
   return result;
 }
 

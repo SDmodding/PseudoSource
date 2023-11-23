@@ -14,14 +14,18 @@ void __fastcall hkaiNewFaceCutterUtil::checkStateMembership(hkaiNewFaceCutterUti
 
 // File Line: 74
 // RVA: 0x12F71F0
-void __fastcall hkaiNewFaceCutterUtil::checkStateIntersection(hkaiNewFaceCutterUtil::State *state, hkaiNewFaceCutterUtil::Vec2 sweepLine)
+void __fastcall hkaiNewFaceCutterUtil::checkStateIntersection(
+        hkaiNewFaceCutterUtil::State *state,
+        hkaiNewFaceCutterUtil::Vec2 sweepLine)
 {
   ;
 }
 
 // File Line: 91
 // RVA: 0x12F7200
-void __fastcall hkaiNewFaceCutterUtil::checkStateOrdering(hkaiNewFaceCutterUtil::State *state, hkaiNewFaceCutterUtil::Vec2 sweepLine)
+void __fastcall hkaiNewFaceCutterUtil::checkStateOrdering(
+        hkaiNewFaceCutterUtil::State *state,
+        hkaiNewFaceCutterUtil::Vec2 sweepLine)
 {
   ;
 }
@@ -49,7 +53,9 @@ void __fastcall hkaiNewFaceCutterUtil::checkRegionPointsUnique(hkaiNewFaceCutter
 
 // File Line: 205
 // RVA: 0x12F7160
-void __fastcall hkaiNewFaceCutterUtil::checkState(hkaiNewFaceCutterUtil::State *state, hkaiNewFaceCutterUtil::Vec2 sweepLine)
+void __fastcall hkaiNewFaceCutterUtil::checkState(
+        hkaiNewFaceCutterUtil::State *state,
+        hkaiNewFaceCutterUtil::Vec2 sweepLine)
 {
   ;
 }
@@ -63,7 +69,9 @@ void __fastcall hkaiNewFaceCutterUtil::checkRegionClosure(hkaiNewFaceCutterUtil:
 
 // File Line: 229
 // RVA: 0x12F7250
-void __fastcall hkaiNewFaceCutterUtil::checkRegionNearlyConvex(hkaiNewFaceCutterUtil::State *state, hkaiNewFaceCutterUtil::Region *region)
+void __fastcall hkaiNewFaceCutterUtil::checkRegionNearlyConvex(
+        hkaiNewFaceCutterUtil::State *state,
+        hkaiNewFaceCutterUtil::Region *region)
 {
   ;
 }
@@ -86,15 +94,15 @@ void __fastcall hkaiNewFaceCutterUtil::checkRegions(hkaiNewFaceCutterUtil::State
 // RVA: 0x12F7180
 char __fastcall hkaiNewFaceCutterUtil::isSegmentInState(hkaiNewFaceCutterUtil::State *state, __int16 segmentIndex)
 {
-  __int16 v2; // ax
+  __int16 m_firstSegment; // ax
 
-  v2 = state->m_sweepState.m_firstSegment;
-  if ( v2 == -1 )
+  m_firstSegment = state->m_sweepState.m_firstSegment;
+  if ( m_firstSegment == -1 )
     return 0;
-  while ( v2 != segmentIndex )
+  while ( m_firstSegment != segmentIndex )
   {
-    v2 = state->m_segments.m_data[v2].m_nextSegment;
-    if ( v2 == -1 )
+    m_firstSegment = state->m_segments.m_data[m_firstSegment].m_nextSegment;
+    if ( m_firstSegment == -1 )
       return 0;
   }
   return 1;

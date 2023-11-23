@@ -2,64 +2,61 @@
 // RVA: 0x1488320
 __int64 dynamic_initializer_for__gSpawnTask__()
 {
-  unk_142047568 = &unk_142047568;
-  unk_142047570 = &unk_142047568;
+  qword_142047568 = &qword_142047568;
+  unk_142047570 = &qword_142047568;
   gSpawnTask.vfptr = (ITaskVtbl *)&SpawnTask::`vftable;
   unk_142047578 = 0i64;
-  unk_142047580 = &unk_142047580;
-  unk_142047588 = &unk_142047580;
+  qword_142047580 = &qword_142047580;
+  unk_142047588 = &qword_142047580;
   unk_142047590 = 0i64;
   unk_142047598 = 0i64;
-  _mm_store_si128((__m128i *)&unk_1420475A0, (__m128i)0i64);
+  unk_1420475A0 = 0i64;
   unk_1420475B0 = 0;
   unk_1420475B8 = -1i64;
   unk_1420475C0 = 0;
   unk_142047628 = 0;
   UFG::qMemSet(&unk_14204762C, 0, 0x28u);
   UFG::qMemSet(&unk_1420475E8, 0, 0x40u);
-  _mm_store_si128((__m128i *)&unk_1420475D0, (__m128i)0i64);
+  unk_1420475D0 = 0i64;
   unk_1420475E0 = 0i64;
   unk_142047658 = 0;
   ActionController::ActionController(&stru_142047660);
-  return atexit(dynamic_atexit_destructor_for__gSpawnTask__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gSpawnTask__);
 }
 
 // File Line: 101
 // RVA: 0x26BEE0
-__int64 __fastcall ActionController::BreakPointMessageHandler(ActionController *this, const char *baseMessage, const char *appendedMessage)
+__int64 __fastcall ActionController::BreakPointMessageHandler(
+        ActionController *this,
+        const char *baseMessage,
+        const char *appendedMessage)
 {
-  const char *v3; // rsi
-  const char *v4; // rbp
-  ActionController *v5; // rdi
-  ActionNodePlayable *v6; // rcx
+  ActionNodePlayable *m_currentNode; // rcx
   const char *v7; // rbx
-  const char *v8; // rax
-  ActionNode *v9; // rcx
-  char *v10; // rcx
+  const char *NameFullPathe_DBG; // rax
+  ActionNodePlayable *m_SequenceNode; // rcx
+  const char *v10; // rcx
   const char *v11; // rax
   unsigned int v12; // ebx
-  UFG::qString v14; // [rsp+38h] [rbp-60h]
-  UFG::qString v15; // [rsp+60h] [rbp-38h]
+  UFG::qString v14; // [rsp+38h] [rbp-60h] BYREF
+  UFG::qString v15; // [rsp+60h] [rbp-38h] BYREF
 
-  v3 = appendedMessage;
-  v4 = baseMessage;
-  v5 = this;
-  v6 = this->m_currentNode;
+  m_currentNode = this->m_currentNode;
   v7 = "NULL";
-  if ( v6 )
-    v8 = ActionNode::GetNameFullPathe_DBG((ActionNode *)&v6->vfptr);
+  if ( m_currentNode )
+    NameFullPathe_DBG = ActionNode::GetNameFullPathe_DBG(m_currentNode);
   else
-    v8 = "NULL";
-  UFG::qString::qString(&v15, v8);
-  v9 = (ActionNode *)&v5->m_SequenceNode->vfptr;
-  if ( v9 )
-    v7 = ActionNode::GetNameFullPathe_DBG(v9);
+    NameFullPathe_DBG = "NULL";
+  UFG::qString::qString(&v15, NameFullPathe_DBG);
+  m_SequenceNode = this->m_SequenceNode;
+  if ( m_SequenceNode )
+    v7 = ActionNode::GetNameFullPathe_DBG(m_SequenceNode);
   UFG::qString::qString(&v14, v7);
-  v10 = &customWorldMapCaption;
-  if ( v3 )
-    v10 = (char *)v3;
+  v10 = &customCaption;
+  if ( appendedMessage )
+    v10 = appendedMessage;
   v11 = "FALSE";
-  if ( v5->mOverRideNode )
+  if ( this->mOverRideNode )
     v11 = "TRUE";
   v12 = ActionTreeDebugMessageHandler(
           "ACTIONCONTROLLER:%s\n"
@@ -69,12 +66,11 @@ __int64 __fastcall ActionController::BreakPointMessageHandler(ActionController *
           "%s\n"
           " \t\t\t\t\t\t\t\t\tOverRide:%s\n"
           " \t\t\t\t\t\t\t\t\t%s\n",
-          v4,
+          baseMessage,
           v15.mData,
           v14.mData,
           v11,
-          v10,
-          -2i64);
+          v10);
   UFG::qString::~qString(&v14);
   UFG::qString::~qString(&v15);
   return v12;
@@ -84,11 +80,9 @@ __int64 __fastcall ActionController::BreakPointMessageHandler(ActionController *
 // RVA: 0x273CF0
 void __fastcall ActionController::breakOnPlay(ActionController *this, ActionNode *node)
 {
-  ActionController *v2; // rbx
-  char *v3; // rax
-  UFG::qString result; // [rsp+28h] [rbp-30h]
+  char *NameFullPathe_DBG; // rax
+  UFG::qString result; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = this;
   if ( ActionController::sBreakOnPlay
     && node
     && ActionNode::sEnableNodeBreakPoints
@@ -96,9 +90,9 @@ void __fastcall ActionController::breakOnPlay(ActionController *this, ActionNode
     && this->m_Context->mDebugBreak
     && ActionNode::sSoftBreakPoints )
   {
-    v3 = ActionNode::GetNameFullPathe_DBG(node);
-    UFG::qString::FormatEx(&result, "NewNode:\n%s", v3);
-    ActionController::BreakPointMessageHandler(v2, "ActionController::breakOnPlay", result.mData);
+    NameFullPathe_DBG = ActionNode::GetNameFullPathe_DBG(node);
+    UFG::qString::FormatEx(&result, "NewNode:\n%s", NameFullPathe_DBG);
+    ActionController::BreakPointMessageHandler(this, "ActionController::breakOnPlay", result.mData);
     UFG::qString::~qString(&result);
   }
 }
@@ -107,11 +101,9 @@ void __fastcall ActionController::breakOnPlay(ActionController *this, ActionNode
 // RVA: 0x273D80
 void __fastcall ActionController::breakOnStart(ActionController *this, ActionNode *node)
 {
-  ActionController *v2; // rbx
-  char *v3; // rax
-  UFG::qString result; // [rsp+28h] [rbp-30h]
+  char *NameFullPathe_DBG; // rax
+  UFG::qString result; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = this;
   if ( ActionController::sBreakOnStart
     && node
     && ActionNode::sEnableNodeBreakPoints
@@ -119,9 +111,9 @@ void __fastcall ActionController::breakOnStart(ActionController *this, ActionNod
     && this->m_Context->mDebugBreak
     && ActionNode::sSoftBreakPoints )
   {
-    v3 = ActionNode::GetNameFullPathe_DBG(node);
-    UFG::qString::FormatEx(&result, "NewNode:\n%s", v3);
-    ActionController::BreakPointMessageHandler(v2, "ActionController::breakOnStart", result.mData);
+    NameFullPathe_DBG = ActionNode::GetNameFullPathe_DBG(node);
+    UFG::qString::FormatEx(&result, "NewNode:\n%s", NameFullPathe_DBG);
+    ActionController::BreakPointMessageHandler(this, "ActionController::breakOnStart", result.mData);
     UFG::qString::~qString(&result);
   }
 }
@@ -130,10 +122,6 @@ void __fastcall ActionController::breakOnStart(ActionController *this, ActionNod
 // RVA: 0x268850
 void __fastcall ActionController::ActionController(ActionController *this)
 {
-  UFG::qList<ITask,ITask,0,0> *v1; // [rsp+28h] [rbp+10h]
-  UFG::qList<ITask,ITask,0,0> *v2; // [rsp+28h] [rbp+10h]
-  UFG::qList<IFinishUpdate,IFinishUpdate,0,0> *v3; // [rsp+28h] [rbp+10h]
-
   this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
   this->vfptr = (Expression::IMemberMapVtbl *)&ActionController::`vftable;
@@ -144,16 +132,13 @@ void __fastcall ActionController::ActionController(ActionController *this)
   this->m_OnEnterExitCallbacksEnabled = 0;
   this->m_previousNode = 0i64;
   this->m_SequenceNode = 0i64;
-  v1 = &this->m_RunningTasks;
-  v1->mNode.mPrev = &v1->mNode;
-  v1->mNode.mNext = &v1->mNode;
-  v2 = &this->m_SequencedTasks;
-  v2->mNode.mPrev = &v2->mNode;
-  v2->mNode.mNext = &v2->mNode;
+  this->m_RunningTasks.mNode.mPrev = &this->m_RunningTasks.mNode;
+  this->m_RunningTasks.mNode.mNext = &this->m_RunningTasks.mNode;
+  this->m_SequencedTasks.mNode.mPrev = &this->m_SequencedTasks.mNode;
+  this->m_SequencedTasks.mNode.mNext = &this->m_SequencedTasks.mNode;
   this->mRunningMasterRate = 1.0;
-  v3 = &this->m_FinishUpdateTasks;
-  v3->mNode.mPrev = &v3->mNode;
-  v3->mNode.mNext = &v3->mNode;
+  this->m_FinishUpdateTasks.mNode.mPrev = &this->m_FinishUpdateTasks.mNode;
+  this->m_FinishUpdateTasks.mNode.mNext = &this->m_FinishUpdateTasks.mNode;
   this->m_PlayingMostUsedMask = 0i64;
   this->m_NumPlayingNodes = 0;
   this->m_SequencePriority = -1;
@@ -168,137 +153,136 @@ void __fastcall ActionController::ActionController(ActionController *this)
 // RVA: 0x269730
 void __fastcall ActionController::~ActionController(ActionController *this)
 {
-  ActionController *v1; // rbx
-
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&ActionController::`vftable;
   ActionController::nodeCleanup(this);
-  v1->m_SequenceNode = 0i64;
-  v1->m_previousNode = 0i64;
-  UFG::qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>::~qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>((UFG::qList<ITask,ITask,0,0> *)&v1->m_FinishUpdateTasks);
-  UFG::qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>::~qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>(&v1->m_SequencedTasks);
-  UFG::qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>::~qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>(&v1->m_RunningTasks);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->m_SequenceNode = 0i64;
+  this->m_previousNode = 0i64;
+  UFG::qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>::~qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>((UFG::qList<ITask,ITask,0,0> *)&this->m_FinishUpdateTasks);
+  UFG::qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>::~qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>(&this->m_SequencedTasks);
+  UFG::qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>::~qList<UFG::PowerManagedResource,UFG::PowerManagedResourceList,0,0>(&this->m_RunningTasks);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 309
 // RVA: 0x270730
 void __fastcall ActionController::Play(ActionController *this)
 {
-  ActionController::Play(this, this->m_Context->m_OpeningBranch, 0);
+  ActionController::Play(this, (ActionNodePlayable *)this->m_Context->m_OpeningBranch, 0);
 }
 
 // File Line: 314
 // RVA: 0x270140
-void __fastcall ActionController::Play(ActionController *this, ActionNode *node, bool forcePlay)
+void __fastcall ActionController::Play(ActionController *this, ActionNodePlayable *node, bool forcePlay)
 {
-  ActionContext *v3; // rax
-  bool v4; // r14
-  ActionNodePlayable *v5; // rdi
-  ActionController *v6; // rbx
+  ActionContext *m_Context; // rax
   ActionContext *v7; // rbp
-  UFG::SimObjectCVBase *v8; // rcx
-  unsigned __int64 v9; // rsi
+  UFG::SimObjectCVBase *m_pPointer; // rcx
+  unsigned __int64 mSignals; // rsi
   UFG::AICharacterControllerBaseComponent *v10; // rax
-  __int64 v11; // rax
+  Expression::IMemberMap *v11; // rax
   ActionNodeRoot *v12; // rsi
   ActionContext *v13; // rdx
-  ActionNode *v14; // rcx
+  ActionNode *m_OpeningBranch; // rcx
   __int64 v15; // rax
   ActionContext *v16; // rdx
   UFG::ActionTreeComponentBase *v17; // rcx
   UEL::ParametersBase *v18; // rsi
-  UFG::SimObject *v19; // rcx
-  unsigned __int16 v20; // dx
-  UFG::SimComponent *v21; // rax
+  UFG::SimObjectGame *v19; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *ComponentOfType; // rax
   ActionNodePlayable *v22; // rax
-  int v23; // edx
+  int m_SequencePriority; // edx
   int v24; // ecx
 
   if ( node )
   {
-    v3 = this->m_Context;
-    v4 = forcePlay;
-    v5 = (ActionNodePlayable *)node;
-    v6 = this;
-    if ( v3 )
+    m_Context = this->m_Context;
+    if ( m_Context )
     {
-      v3->mProbabilitiesValid = 0;
+      m_Context->mProbabilitiesValid = 0;
       v7 = this->m_Context;
-      v8 = (UFG::SimObjectCVBase *)v7->mSimObject.m_pPointer;
-      v9 = 0i64;
-      if ( v8 )
+      m_pPointer = (UFG::SimObjectCVBase *)v7->mSimObject.m_pPointer;
+      mSignals = 0i64;
+      if ( m_pPointer )
       {
-        if ( (v8->m_Flags >> 14) & 1 )
+        if ( (m_pPointer->m_Flags & 0x4000) != 0 )
         {
-          v10 = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerBaseComponent>(v8);
+          v10 = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerBaseComponent>(m_pPointer);
           if ( v10 )
-            v9 = v10->m_Intention.mSignals;
+            mSignals = v10->m_Intention.mSignals;
         }
       }
-      v7->mSignals = v9;
+      v7->mSignals = mSignals;
     }
-    v11 = (__int64)v5->vfptr[1].GetResourceOwner((Expression::IMemberMap *)&v5->vfptr);
+    v11 = node->vfptr[1].GetResourceOwner(node);
     v12 = (ActionNodeRoot *)v11;
     if ( v11 )
     {
-      v13 = v6->m_Context;
-      if ( v13->mActionTreeComponentBase[*(char *)(v11 + 236)] || v13->mActionTreeComponentBase[1] )
+      v13 = this->m_Context;
+      if ( v13->mActionTreeComponentBase[SBYTE4(v11[14].mResourceOwner)] || v13->mActionTreeComponentBase[1] )
       {
-        v14 = v13->m_OpeningBranch;
-        v15 = v14 ? ((__int64 (*)(void))v14->vfptr[1].GetResourceOwner)() : 0i64;
+        m_OpeningBranch = v13->m_OpeningBranch;
+        v15 = m_OpeningBranch ? (__int64)m_OpeningBranch->vfptr[1].GetResourceOwner(m_OpeningBranch) : 0i64;
         if ( (ActionNodeRoot *)v15 != v12 )
         {
-          v16 = v6->m_Context;
+          v16 = this->m_Context;
           v17 = v16->mActionTreeComponentBase[v12->mActionTreeType.mValue];
           if ( !v17 )
             v17 = v16->mActionTreeComponentBase[1];
           if ( UFG::ActionTreeComponentBase::AllocateFor(v17, v12) )
-            ActionNodeRoot::Init(v12, v6->m_Context);
+            ActionNodeRoot::Init(v12, this->m_Context);
         }
       }
     }
     v18 = UEL::gCurrentParameters;
-    v19 = v6->m_Context->mSimObject.m_pPointer;
+    v19 = (UFG::SimObjectGame *)this->m_Context->mSimObject.m_pPointer;
     if ( v19
-      && ((v20 = v19->m_Flags, !((v20 >> 14) & 1)) ? ((v20 & 0x8000u) == 0 ? (!((v20 >> 13) & 1) ? (!((v20 >> 12) & 1) ? (v21 = UFG::SimObject::GetComponentOfType(v19, UFG::UELComponent::_TypeUID)) : (v21 = UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)v19, UFG::UELComponent::_TypeUID))) : (v21 = v19->m_Components.p->m_pComponent)) : (v21 = v19->m_Components.p->m_pComponent)) : (v21 = v19->m_Components.p->m_pComponent),
-          v21) )
+      && ((m_Flags = v19->m_Flags, (m_Flags & 0x4000) == 0)
+        ? (m_Flags >= 0
+         ? ((m_Flags & 0x2000) == 0
+          ? ((m_Flags & 0x1000) == 0
+           ? (ComponentOfType = UFG::SimObject::GetComponentOfType(v19, UFG::UELComponent::_TypeUID))
+           : (ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(v19, UFG::UELComponent::_TypeUID)))
+          : (ComponentOfType = v19->m_Components.p->m_pComponent))
+         : (ComponentOfType = v19->m_Components.p->m_pComponent))
+        : (ComponentOfType = v19->m_Components.p->m_pComponent),
+          ComponentOfType) )
     {
-      UEL::gCurrentParameters = (UEL::ParametersBase *)&v21[1].m_TypeUID;
+      UEL::gCurrentParameters = (UEL::ParametersBase *)&ComponentOfType[1].m_TypeUID;
     }
     else
     {
       UEL::gCurrentParameters = 0i64;
     }
-    v22 = (ActionNodePlayable *)((__int64 (__fastcall *)(ActionNodePlayable *, ActionContext *))v5->vfptr[2].GetClassNameUID)(
-                                  v5,
-                                  v6->m_Context);
-    if ( !v22 && v4 )
+    v22 = (ActionNodePlayable *)((__int64 (__fastcall *)(ActionNodePlayable *, ActionContext *))node->vfptr[2].GetClassNameUID)(
+                                  node,
+                                  this->m_Context);
+    if ( !v22 && forcePlay )
     {
-      if ( v5->vfptr->GetClassNameUID((Expression::IMemberMap *)&v5->vfptr) == TrackLibraryNode::sClassNameUID )
+      if ( node->vfptr->GetClassNameUID(node) == TrackLibraryNode::sClassNameUID )
       {
-        ActionController::PlayTracks(v6, v5, 1, 0.0);
+        ActionController::PlayTracks(this, node, 1, 0.0);
         return;
       }
-      v22 = (ActionNodePlayable *)((__int64 (__fastcall *)(ActionNodePlayable *))v5->vfptr[2].GetResourcePath)(v5);
+      v22 = (ActionNodePlayable *)((__int64 (__fastcall *)(ActionNodePlayable *))node->vfptr[2].GetResourcePath)(node);
     }
-    if ( v6->mUpdating )
+    if ( this->mUpdating )
     {
-      v23 = v6->m_SequencePriority;
-      v24 = v23 + 1;
+      m_SequencePriority = this->m_SequencePriority;
+      v24 = m_SequencePriority + 1;
       if ( v22 )
       {
-        if ( v24 > v23 )
+        if ( v24 > m_SequencePriority )
         {
-          v6->m_SequencePriority = v24;
-          v6->m_SequenceNode = v22;
+          this->m_SequencePriority = v24;
+          this->m_SequenceNode = v22;
         }
-        v6->mOverRideNode = 1;
+        this->mOverRideNode = 1;
       }
     }
     else
     {
-      ActionController::Play(v6, v22);
+      ActionController::Play(this, v22);
     }
     UEL::gCurrentParameters = v18;
   }
@@ -306,27 +290,26 @@ void __fastcall ActionController::Play(ActionController *this, ActionNode *node,
 
 // File Line: 395
 // RVA: 0x275880
-void __fastcall ActionController::setPlayingNodeUID(ActionController *this, ActionNodePlayable *currentNode, bool addPlayingInfo)
+void __fastcall ActionController::setPlayingNodeUID(
+        ActionController *this,
+        ActionNodePlayable *currentNode,
+        bool addPlayingInfo)
 {
-  unsigned int v3; // edi
-  ActionNodePlayable *v4; // rbx
-  ActionController *v5; // rsi
-  unsigned __int64 v6; // rbp
-  __int64 v7; // rax
-  signed __int64 v8; // r8
-  __int64 v9; // rdx
+  unsigned int m_NumPlayingNodes; // edi
+  unsigned __int64 m_PlayingMostUsedMask; // rbp
+  __int64 mOffset; // rax
+  ActionNodePlayable *v8; // r8
+  __int64 mMostUsedIndex; // rdx
   __int64 v10; // rax
-  ActionContext *v11; // rcx
+  ActionContext *m_Context; // rcx
   char v12; // al
 
-  v3 = 0;
-  v4 = currentNode;
-  v5 = this;
-  v6 = 0i64;
+  m_NumPlayingNodes = 0;
+  m_PlayingMostUsedMask = 0i64;
   if ( addPlayingInfo )
   {
-    v3 = this->m_NumPlayingNodes;
-    v6 = this->m_PlayingMostUsedMask;
+    m_NumPlayingNodes = this->m_NumPlayingNodes;
+    m_PlayingMostUsedMask = this->m_PlayingMostUsedMask;
   }
   else
   {
@@ -334,48 +317,46 @@ void __fastcall ActionController::setPlayingNodeUID(ActionController *this, Acti
   }
   while ( 1 )
   {
-    v7 = v4->mParent.mOffset;
-    if ( !v7 )
+    mOffset = currentNode->mParent.mOffset;
+    if ( !mOffset )
       break;
-    v8 = (signed __int64)&v4->mParent + v7;
+    v8 = (ActionNodePlayable *)((char *)&currentNode->mParent + mOffset);
     if ( !v8 )
       break;
-    if ( v3 < 0x20 )
+    if ( m_NumPlayingNodes < 0x20 )
     {
-      v9 = v4->mMostUsedIndex;
-      v10 = v3++;
-      v5->m_PlayingNodeUID[v10].mUID = v4->mID.mUID;
-      if ( (_DWORD)v9 != -1 )
+      mMostUsedIndex = currentNode->mMostUsedIndex;
+      v10 = m_NumPlayingNodes++;
+      this->m_PlayingNodeUID[v10].mUID = currentNode->mID.mUID;
+      if ( (_DWORD)mMostUsedIndex != -1 )
       {
-        v11 = v5->m_Context;
-        for ( v6 |= 1i64 << v9; v11; v11 = v11->mParentContext )
+        m_Context = this->m_Context;
+        for ( m_PlayingMostUsedMask |= 1i64 << mMostUsedIndex; m_Context; m_Context = m_Context->mParentContext )
         {
-          v12 = v11->mMostUsedPlayCount[v9];
+          v12 = m_Context->mMostUsedPlayCount[mMostUsedIndex];
           if ( (unsigned __int8)v12 >= 0xFAu )
             break;
-          v11->mMostUsedPlayCount[v9] = v12 + 1;
+          m_Context->mMostUsedPlayCount[mMostUsedIndex] = v12 + 1;
         }
       }
     }
-    v4 = (ActionNodePlayable *)v8;
+    currentNode = v8;
   }
-  v5->m_PlayingMostUsedMask = v6;
-  v5->m_NumPlayingNodes = v3;
+  this->m_PlayingMostUsedMask = m_PlayingMostUsedMask;
+  this->m_NumPlayingNodes = m_NumPlayingNodes;
 }
 
 // File Line: 449
 // RVA: 0x270360
 void __fastcall ActionController::Play(ActionController *this, ActionNodePlayable *node)
 {
-  ActionNodePlayable *v2; // rbx
-  ActionController *v3; // rsi
-  ActionContext *v4; // rax
-  int v5; // ecx
+  ActionContext *m_Context; // rax
+  int m_SequencePriority; // ecx
   int v6; // eax
-  __int64 v7; // rax
+  Expression::IMemberMap *v7; // rax
   ActionNodeRoot *v8; // rbx
   ActionContext *v9; // rdx
-  ActionNode *v10; // rcx
+  ActionNode *m_OpeningBranch; // rcx
   __int64 v11; // rax
   ActionContext *v12; // rdx
   UFG::ActionTreeComponentBase *v13; // rcx
@@ -383,101 +364,99 @@ void __fastcall ActionController::Play(ActionController *this, ActionNodePlayabl
   char *v15; // r9
   __int64 v16; // rbp
   __int64 v17; // rdi
-  signed __int64 v18; // r14
-  signed __int64 v19; // rcx
+  __int64 v18; // r14
+  __int64 v19; // rcx
   __int64 v20; // rax
   ActionNodePlayable *v21; // rdx
   UFG::qNode<ITask,ITask> *v22; // rax
-  UFG::qNode<ITask,ITask> *v23; // rcx
-  ActionNodePlayable *v24; // rax
-  __int64 v25; // rcx
-  signed __int64 v26; // rax
-  ActionNode *v27; // rbx
+  UFG::qNode<ITask,ITask> *mPrev; // rcx
+  ActionNodePlayable *m_currentNode; // rax
+  __int64 mOffset; // rcx
+  UFG::qOffset64<ActionNode *> *p_mParent; // rax
+  ActionNode *i; // rbx
   __int64 v28; // rax
   __int64 v29; // rdi
   __int64 v30; // rbp
-  signed __int64 v31; // r15
-  UFG::qList<ITask,ITask,0,0> *v32; // r14
-  signed __int64 v33; // rcx
+  __int64 v31; // r15
+  UFG::qList<ITask,ITask,0,0> *p_m_SequencedTasks; // r14
+  __int64 v33; // rcx
   UFG::qNode<ITask,ITask> *v34; // rax
   UFG::qNode<ITask,ITask> *v35; // rcx
   __int64 v36; // rax
-  signed __int64 v37; // rbx
+  UFG::qOffset64<ActionNode *> *v37; // rbx
   ActionNodePlayable *v38; // r8
-  int v39; // er10
+  int v39; // r10d
   ActionNode *v40; // r11
-  signed __int64 v41; // rcx
-  signed __int64 v42; // rdx
+  ActionNode *v41; // rcx
+  ActionNodePlayable *v42; // rdx
   __int64 v43; // rax
-  signed __int64 v44; // rdx
+  UFG::qOffset64<ActionNode *> *v44; // rdx
   __int64 v45; // rax
-  signed __int64 v46; // rcx
+  UFG::qOffset64<ActionNode *> *v46; // rcx
   bool v47; // zf
   __int64 v48; // rax
-  signed __int64 v49; // r8
-  __int64 v50; // rbp
+  UFG::qOffset64<ActionNode *> *v49; // r8
+  __int64 j; // rbp
   __int64 v51; // rdi
   ActionContext *v52; // r14
-  __int64 *i; // rbx
+  __int64 *k; // rbx
   __int64 v54; // [rsp+18h] [rbp-120h]
-  char v55; // [rsp+20h] [rbp-118h]
+  char v55; // [rsp+20h] [rbp-118h] BYREF
 
-  v2 = node;
-  v3 = this;
-  ActionController::breakOnPlay(this, (ActionNode *)&node->vfptr);
-  v4 = v3->m_Context;
-  if ( v4 )
-    v4->mProbabilitiesValid = 0;
-  if ( v3->mUpdating )
+  ActionController::breakOnPlay(this, node);
+  m_Context = this->m_Context;
+  if ( m_Context )
+    m_Context->mProbabilitiesValid = 0;
+  if ( this->mUpdating )
   {
-    v5 = v3->m_SequencePriority;
-    v6 = v5 + 1;
-    if ( v2 )
+    m_SequencePriority = this->m_SequencePriority;
+    v6 = m_SequencePriority + 1;
+    if ( node )
     {
-      if ( v6 > v5 )
+      if ( v6 > m_SequencePriority )
       {
-        v3->m_SequencePriority = v6;
-        v3->m_SequenceNode = v2;
+        this->m_SequencePriority = v6;
+        this->m_SequenceNode = node;
       }
-      v3->mOverRideNode = 1;
+      this->mOverRideNode = 1;
     }
   }
   else
   {
-    ActionController::breakOnStart(v3, (ActionNode *)&v2->vfptr);
-    ActionController::nodeCleanup(v3);
-    v3->m_SequenceNode = 0i64;
-    v3->m_currentNode = v2;
-    if ( v2 )
+    ActionController::breakOnStart(this, node);
+    ActionController::nodeCleanup(this);
+    this->m_SequenceNode = 0i64;
+    this->m_currentNode = node;
+    if ( node )
     {
-      v7 = (__int64)v2->vfptr[1].GetResourceOwner((Expression::IMemberMap *)&v2->vfptr);
+      v7 = node->vfptr[1].GetResourceOwner(node);
       v8 = (ActionNodeRoot *)v7;
       if ( v7 )
       {
-        v9 = v3->m_Context;
-        if ( v9->mActionTreeComponentBase[*(char *)(v7 + 236)] || v9->mActionTreeComponentBase[1] )
+        v9 = this->m_Context;
+        if ( v9->mActionTreeComponentBase[SBYTE4(v7[14].mResourceOwner)] || v9->mActionTreeComponentBase[1] )
         {
-          v10 = v9->m_OpeningBranch;
-          v11 = v10 ? ((__int64 (*)(void))v10->vfptr[1].GetResourceOwner)() : 0i64;
+          m_OpeningBranch = v9->m_OpeningBranch;
+          v11 = m_OpeningBranch ? (__int64)m_OpeningBranch->vfptr[1].GetResourceOwner(m_OpeningBranch) : 0i64;
           if ( (ActionNodeRoot *)v11 != v8 )
           {
-            v12 = v3->m_Context;
+            v12 = this->m_Context;
             v13 = v12->mActionTreeComponentBase[v8->mActionTreeType.mValue];
             if ( !v13 )
               v13 = v12->mActionTreeComponentBase[1];
             if ( UFG::ActionTreeComponentBase::AllocateFor(v13, v8) )
-              ActionNodeRoot::Init(v8, v3->m_Context);
+              ActionNodeRoot::Init(v8, this->m_Context);
           }
         }
       }
-      ActionController::setPlayingNodeUID(v3, v3->m_currentNode, 0);
-      v14 = ((__int64 (*)(void))v3->m_currentNode->vfptr[3].GetClassNameUID)();
+      ActionController::setPlayingNodeUID(this, this->m_currentNode, 0);
+      v14 = ((__int64 (__fastcall *)(ActionNodePlayable *))this->m_currentNode->vfptr[3].GetClassNameUID)(this->m_currentNode);
       v16 = v14;
       if ( v14 )
       {
         v17 = 0i64;
         v18 = *(_QWORD *)(v14 + 24) + v14 + 24;
-        if ( *(_DWORD *)(v14 + 16) & 0x7FFFFFFF )
+        if ( (*(_DWORD *)(v14 + 16) & 0x7FFFFFFF) != 0 )
         {
           do
           {
@@ -490,141 +469,133 @@ void __fastcall ActionController::Play(ActionController *this, ActionNodePlayabl
               v21 = *(ActionNodePlayable **)(v20 + 0x48);
               if ( v21 )
                 v21 = (ActionNodePlayable *)((char *)v21 + v20 + 72);
-              ActionController::PlayTracks(v3, v21, 1, *(float *)(v19 + 48));
+              ActionController::PlayTracks(this, v21, 1, *(float *)(v19 + 48));
             }
             else
             {
-              v22 = (UFG::qNode<ITask,ITask> *)(*(__int64 (__fastcall **)(signed __int64, const char *))(*(_QWORD *)v19 + 80i64))(
+              v22 = (UFG::qNode<ITask,ITask> *)(*(__int64 (__fastcall **)(__int64, const char *))(*(_QWORD *)v19 + 80i64))(
                                                  v19,
                                                  "ActionController::Play(): My tasks");
-              v23 = v3->m_SequencedTasks.mNode.mPrev;
+              mPrev = this->m_SequencedTasks.mNode.mPrev;
               v22 = (UFG::qNode<ITask,ITask> *)((char *)v22 + 8);
-              v23->mNext = v22;
-              v22->mPrev = v23;
-              v22->mNext = &v3->m_SequencedTasks.mNode;
-              v3->m_SequencedTasks.mNode.mPrev = v22;
+              mPrev->mNext = v22;
+              v22->mPrev = mPrev;
+              v22->mNext = &this->m_SequencedTasks.mNode;
+              this->m_SequencedTasks.mNode.mPrev = v22;
             }
             v17 = (unsigned int)(v17 + 1);
           }
           while ( (unsigned int)v17 < (*(_DWORD *)(v16 + 16) & 0x7FFFFFFFu) );
         }
       }
-      if ( v3->m_BankTracksEnabled )
+      if ( this->m_BankTracksEnabled )
       {
-        v24 = v3->m_currentNode;
-        v25 = v24->mParent.mOffset;
-        v26 = (signed __int64)&v24->mParent;
-        if ( v25 )
+        m_currentNode = this->m_currentNode;
+        mOffset = m_currentNode->mParent.mOffset;
+        p_mParent = &m_currentNode->mParent;
+        if ( mOffset )
         {
-          v27 = (ActionNode *)(v25 + v26);
-          if ( v25 + v26 )
+          for ( i = (ActionNode *)((char *)p_mParent + mOffset); i; i = (ActionNode *)((char *)v37 + v36) )
           {
-            do
+            if ( i->vfptr->GetClassNameUID(i) == ActionNodeBank::sClassNameUID
+              || i->vfptr->GetClassNameUID(i) == ActionNodeRoot::sClassNameUID )
             {
-              if ( v27->vfptr->GetClassNameUID((Expression::IMemberMap *)&v27->vfptr) == ActionNodeBank::sClassNameUID
-                || v27->vfptr->GetClassNameUID((Expression::IMemberMap *)&v27->vfptr) == ActionNodeRoot::sClassNameUID )
+              v28 = ((__int64 (__fastcall *)(ActionNode *))i->vfptr[3].GetClassNameUID)(i);
+              v29 = v28;
+              if ( v28 )
               {
-                v28 = v27->vfptr[3].GetClassNameUID((Expression::IMemberMap *)&v27->vfptr);
-                v29 = v28;
-                if ( v28 )
+                v30 = 0i64;
+                v31 = v28 + *(_QWORD *)(v28 + 24) + 24i64;
+                if ( (*(_DWORD *)(v28 + 16) & 0x7FFFFFFF) != 0 )
                 {
-                  v30 = 0i64;
-                  v31 = v28 + *(_QWORD *)(v28 + 24) + 24i64;
-                  if ( *(_DWORD *)(v28 + 16) & 0x7FFFFFFF )
+                  p_m_SequencedTasks = &this->m_SequencedTasks;
+                  do
                   {
-                    v32 = &v3->m_SequencedTasks;
-                    do
-                    {
-                      v33 = *(_QWORD *)(v31 + 8 * v30) + v31 + 8 * v30;
-                      v34 = (UFG::qNode<ITask,ITask> *)(*(__int64 (__fastcall **)(signed __int64, const char *))(*(_QWORD *)v33 + 80i64))(
-                                                         v33,
-                                                         "ActionController::Play(): Parents tasks");
-                      v35 = v32->mNode.mPrev;
-                      v30 = (unsigned int)(v30 + 1);
-                      v34 = (UFG::qNode<ITask,ITask> *)((char *)v34 + 8);
-                      v35->mNext = v34;
-                      v34->mPrev = v35;
-                      v34->mNext = &v32->mNode;
-                      v32->mNode.mPrev = v34;
-                    }
-                    while ( (unsigned int)v30 < (*(_DWORD *)(v29 + 16) & 0x7FFFFFFFu) );
+                    v33 = *(_QWORD *)(v31 + 8 * v30) + v31 + 8 * v30;
+                    v34 = (UFG::qNode<ITask,ITask> *)(*(__int64 (__fastcall **)(__int64, const char *))(*(_QWORD *)v33 + 80i64))(
+                                                       v33,
+                                                       "ActionController::Play(): Parents tasks");
+                    v35 = p_m_SequencedTasks->mNode.mPrev;
+                    v30 = (unsigned int)(v30 + 1);
+                    v34 = (UFG::qNode<ITask,ITask> *)((char *)v34 + 8);
+                    v35->mNext = v34;
+                    v34->mPrev = v35;
+                    v34->mNext = &p_m_SequencedTasks->mNode;
+                    p_m_SequencedTasks->mNode.mPrev = v34;
                   }
+                  while ( (unsigned int)v30 < (*(_DWORD *)(v29 + 16) & 0x7FFFFFFFu) );
                 }
               }
-              if ( v27 == v3->m_Context->m_OpeningBranch )
-                break;
-              v36 = v27->mParent.mOffset;
-              v37 = (signed __int64)&v27->mParent;
-              if ( !v36 )
-                break;
-              v27 = (ActionNode *)(v36 + v37);
             }
-            while ( v27 );
+            if ( i == this->m_Context->m_OpeningBranch )
+              break;
+            v36 = i->mParent.mOffset;
+            v37 = &i->mParent;
+            if ( !v36 )
+              break;
           }
         }
       }
-      if ( v3->m_OnEnterExitCallbacksEnabled )
+      if ( this->m_OnEnterExitCallbacksEnabled )
       {
-        v38 = v3->m_currentNode;
+        v38 = this->m_currentNode;
         v39 = 0;
         if ( v38 )
         {
           v15 = &v55;
-          v40 = v3->m_Context->m_OpeningBranch;
+          v40 = this->m_Context->m_OpeningBranch;
           do
           {
             ++v39;
             *(_QWORD *)v15 = v38;
             v15 += 8;
-            v41 = (signed __int64)v40;
-            v42 = (signed __int64)v38;
-            if ( v38 == (ActionNodePlayable *)v40 )
+            v41 = v40;
+            v42 = v38;
+            if ( v38 == v40 )
               break;
             while ( v41 )
             {
-              if ( *(_DWORD *)(v42 + 40) != *(_DWORD *)(v41 + 40) )
+              if ( v42->mID.mUID != v41->mID.mUID )
                 goto LABEL_58;
-              v43 = *(_QWORD *)(v42 + 16);
-              v44 = v42 + 16;
+              v43 = v42->mParent.mOffset;
+              v44 = &v42->mParent;
               if ( v43 )
-                v42 = v43 + v44;
+                v42 = (ActionNodePlayable *)((char *)v44 + v43);
               else
                 v42 = 0i64;
-              v45 = *(_QWORD *)(v41 + 16);
-              v46 = v41 + 16;
+              v45 = v41->mParent.mOffset;
+              v46 = &v41->mParent;
               if ( v45 )
-                v41 = v45 + v46;
+                v41 = (ActionNode *)((char *)v46 + v45);
               else
                 v41 = 0i64;
               if ( !v42 )
               {
-                v47 = v41 == 0;
+                v47 = v41 == 0i64;
                 goto LABEL_57;
               }
             }
-            v47 = v42 == 0;
+            v47 = v42 == 0i64;
 LABEL_57:
             if ( v47 )
               break;
 LABEL_58:
             v48 = v38->mParent.mOffset;
-            v49 = (signed __int64)&v38->mParent;
+            v49 = &v38->mParent;
             if ( !v48 )
               break;
-            v38 = (ActionNodePlayable *)(v48 + v49);
+            v38 = (ActionNodePlayable *)((char *)v49 + v48);
           }
           while ( v38 );
         }
-        v50 = v39;
-        while ( v50 > 0 )
+        for ( j = v39; j > 0; --j )
         {
-          v51 = *(&v54 + v50);
-          v52 = v3->m_Context;
-          --v50;
-          for ( i = *(__int64 **)(v51 + 24); i; i = (__int64 *)*i )
+          v51 = *(&v54 + j);
+          v52 = this->m_Context;
+          for ( k = *(__int64 **)(v51 + 24); k; k = (__int64 *)*k )
           {
-            if ( !*((_DWORD *)i + 6) )
-              ((void (__fastcall *)(__int64, __int64, ActionContext *, char *))i[2])(i[1], v51, v52, v15);
+            if ( !*((_DWORD *)k + 6) )
+              ((void (__fastcall *)(__int64, __int64, ActionContext *, char *))k[2])(k[1], v51, v52, v15);
           }
         }
       }
@@ -634,153 +605,149 @@ LABEL_58:
 
 // File Line: 625
 // RVA: 0x270740
-void __fastcall ActionController::PlayTracks(ActionController *this, ActionNode *node, bool offsetTimeBeginAndEnd, float offsetTime)
+void __fastcall ActionController::PlayTracks(
+        ActionController *this,
+        ActionNode *node,
+        bool offsetTimeBeginAndEnd,
+        float offsetTime)
 {
-  ActionContext *v4; // rbx
-  bool v5; // bp
-  ActionController *v6; // rsi
-  ActionNode *v7; // r14
-  UFG::SimObjectCVBase *v8; // rcx
-  unsigned __int64 v9; // rdi
+  ActionContext *m_Context; // rbx
+  UFG::SimObjectCVBase *m_pPointer; // rcx
+  unsigned __int64 mSignals; // rdi
   UFG::AICharacterControllerBaseComponent *v10; // rax
   ActionNodePlayable *v11; // rax
 
-  v4 = this->m_Context;
-  v5 = offsetTimeBeginAndEnd;
-  v6 = this;
-  v7 = node;
-  if ( v4 )
+  m_Context = this->m_Context;
+  if ( m_Context )
   {
-    v8 = (UFG::SimObjectCVBase *)v4->mSimObject.m_pPointer;
-    v9 = 0i64;
-    if ( v8 )
+    m_pPointer = (UFG::SimObjectCVBase *)m_Context->mSimObject.m_pPointer;
+    mSignals = 0i64;
+    if ( m_pPointer )
     {
-      if ( (v8->m_Flags >> 14) & 1 )
+      if ( (m_pPointer->m_Flags & 0x4000) != 0 )
       {
-        v10 = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerBaseComponent>(v8);
+        v10 = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerBaseComponent>(m_pPointer);
         if ( v10 )
-          v9 = v10->m_Intention.mSignals;
+          mSignals = v10->m_Intention.mSignals;
       }
     }
-    v4->mSignals = v9;
+    m_Context->mSignals = mSignals;
   }
-  v11 = (ActionNodePlayable *)((__int64 (__fastcall *)(ActionNode *, ActionContext *))v7->vfptr[2].GetClassNameUID)(
-                                v7,
-                                v6->m_Context);
+  v11 = (ActionNodePlayable *)((__int64 (__fastcall *)(ActionNode *, ActionContext *))node->vfptr[2].GetClassNameUID)(
+                                node,
+                                this->m_Context);
   if ( v11 )
-    ActionController::PlayTracks(v6, v11, v5, offsetTime);
+    ActionController::PlayTracks(this, v11, offsetTimeBeginAndEnd, offsetTime);
 }
 
 // File Line: 641
 // RVA: 0x2707F0
-void __fastcall ActionController::PlayTracks(ActionController *this, ActionNodePlayable *node, bool offsetTimeBeginAndEnd, float offsetTime)
+void __fastcall ActionController::PlayTracks(
+        ActionController *this,
+        ActionNodePlayable *node,
+        bool offsetTimeBeginAndEnd,
+        float offsetTime)
 {
-  ActionController *v4; // rbx
   __int64 v5; // rax
   __int64 v6; // rbp
-  __int64 v7; // rdx
-  signed __int64 v8; // rcx
-  __int64 v9; // rsi
-  signed __int64 v10; // rdi
-  signed __int64 v11; // rcx
-  signed __int64 v12; // rax
-  bool v13; // dl
-  signed __int64 v14; // rax
-  bool v15; // dl
-  __int64 v16; // rax
-  ActionNodePlayable *v17; // rdx
-  __int64 v18; // rax
+  __int64 v7; // rcx
+  __int64 v8; // rsi
+  ActionNodePlayable **p_m_SequenceNode; // rdi
+  __int64 v10; // rcx
+  UFG::qNode<ITask,ITask> **p_mNext; // rax
+  bool v12; // dl
+  unsigned __int64 *v13; // rax
+  bool v14; // dl
+  __int64 v15; // rax
+  ActionNodePlayable *v16; // rdx
+  __int64 v17; // rax
+  float v18; // xmm0_4
   float v19; // xmm0_4
-  float v20; // xmm0_4
-  UFG::qNode<ITask,ITask> *v21; // rcx
-  UFG::qNode<ITask,ITask> *v22; // rax
-  signed __int64 v23; // [rsp+68h] [rbp+10h]
-  bool v24; // [rsp+70h] [rbp+18h]
+  UFG::qNode<ITask,ITask> *v20; // rcx
+  UFG::qNode<ITask,ITask> *mPrev; // rax
+  __int64 v22; // [rsp+68h] [rbp+10h]
 
   if ( node )
   {
-    v24 = offsetTimeBeginAndEnd;
-    v4 = this;
-    v5 = node->vfptr[3].GetClassNameUID((Expression::IMemberMap *)node);
+    v5 = ((__int64 (__fastcall *)(ActionNodePlayable *))node->vfptr[3].GetClassNameUID)(node);
     v6 = v5;
     if ( v5 )
     {
-      v7 = *(_QWORD *)(v5 + 24);
-      v8 = v7 + v5 + 24;
-      v9 = 0i64;
-      v23 = v7 + v5 + 24;
-      if ( *(_DWORD *)(v5 + 16) & 0x7FFFFFFF )
+      v7 = *(_QWORD *)(v5 + 24) + v5 + 24;
+      v8 = 0i64;
+      v22 = v7;
+      if ( (*(_DWORD *)(v5 + 16) & 0x7FFFFFFF) != 0 )
       {
-        v10 = (signed __int64)&v4->m_SequenceNode;
+        p_m_SequenceNode = &this->m_SequenceNode;
         do
         {
-          v11 = *(_QWORD *)(v8 + 8 * v9) + v8 + 8 * v9;
-          v12 = (signed __int64)&v4->m_RunningTasks.mNode.mNext[-1].mNext;
-          v13 = v12 == v10;
-          if ( v4->m_RunningTasks.mNode.mNext != (UFG::qNode<ITask,ITask> *)8 )
+          v10 = *(_QWORD *)(v7 + 8 * v8) + v7 + 8 * v8;
+          p_mNext = &this->m_RunningTasks.mNode.mNext[-1].mNext;
+          v12 = p_mNext == (UFG::qNode<ITask,ITask> **)p_m_SequenceNode;
+          if ( this->m_RunningTasks.mNode.mNext != (UFG::qNode<ITask,ITask> *)8 )
           {
             do
             {
-              if ( v13 )
+              if ( v12 )
                 break;
-              if ( v11 == *(_QWORD *)(v12 + 24) )
+              if ( (UFG::qNode<ITask,ITask> *)v10 == p_mNext[3] )
                 goto LABEL_26;
-              v12 = *(_QWORD *)(v12 + 16) - 8i64;
-              v13 = v12 == v10;
+              p_mNext = &p_mNext[2][-1].mNext;
+              v12 = p_mNext == (UFG::qNode<ITask,ITask> **)p_m_SequenceNode;
             }
-            while ( v12 );
+            while ( p_mNext );
           }
-          v14 = (signed __int64)&v4->m_SequencedTasks.mNode.mNext[-1].mNext;
-          v15 = v14 == (_QWORD)v4 + 88;
-          if ( v4->m_SequencedTasks.mNode.mNext != (UFG::qNode<ITask,ITask> *)8 )
+          v13 = (unsigned __int64 *)&this->m_SequencedTasks.mNode.mNext[-1].mNext;
+          v14 = v13 == &this->m_RunningSpawnTasksTmp[1];
+          if ( this->m_SequencedTasks.mNode.mNext != (UFG::qNode<ITask,ITask> *)8 )
           {
             do
             {
-              if ( v15 )
+              if ( v14 )
                 break;
-              if ( v11 == *(_QWORD *)(v14 + 24) )
+              if ( v10 == v13[3] )
                 goto LABEL_26;
-              v14 = *(_QWORD *)(v14 + 16) - 8i64;
-              v15 = v14 == (_QWORD)v4 + 88;
+              v13 = (unsigned __int64 *)(v13[2] - 8);
+              v14 = v13 == &this->m_RunningSpawnTasksTmp[1];
             }
-            while ( v14 );
+            while ( v13 );
           }
-          if ( *(_DWORD *)(v11 + 16) == ExecuteTrackLibraryTrack::sClassNameUID )
+          if ( *(_DWORD *)(v10 + 16) == ExecuteTrackLibraryTrack::sClassNameUID )
           {
-            v16 = *(_QWORD *)(v11 + 56);
+            v15 = *(_QWORD *)(v10 + 56);
+            if ( v15 )
+              v15 += v10 + 56;
+            v16 = *(ActionNodePlayable **)(v15 + 72);
             if ( v16 )
-              v16 += v11 + 56;
-            v17 = *(ActionNodePlayable **)(v16 + 72);
-            if ( v17 )
-              v17 = (ActionNodePlayable *)((char *)v17 + v16 + 72);
-            ActionController::PlayTracks(v4, v17, 1, *(float *)(v11 + 48));
+              v16 = (ActionNodePlayable *)((char *)v16 + v15 + 72);
+            ActionController::PlayTracks(this, v16, 1, *(float *)(v10 + 48));
           }
           else
           {
-            v18 = (*(__int64 (__fastcall **)(signed __int64, const char *))(*(_QWORD *)v11 + 80i64))(
-                    v11,
+            v17 = (*(__int64 (__fastcall **)(__int64, const char *))(*(_QWORD *)v10 + 80i64))(
+                    v10,
                     "ActionController::PlayTracks()");
-            if ( v24 && offsetTime > 0.0 )
+            if ( offsetTimeBeginAndEnd && offsetTime > 0.0 )
             {
-              v19 = *(float *)(v18 + 32);
+              v18 = *(float *)(v17 + 32);
+              if ( v18 >= 0.0 )
+                *(float *)(v17 + 32) = v18 + offsetTime;
+              v19 = *(float *)(v17 + 36);
               if ( v19 >= 0.0 )
-                *(float *)(v18 + 32) = v19 + offsetTime;
-              v20 = *(float *)(v18 + 36);
-              if ( v20 >= 0.0 )
-                *(float *)(v18 + 36) = v20 + offsetTime;
+                *(float *)(v17 + 36) = v19 + offsetTime;
             }
-            v21 = (UFG::qNode<ITask,ITask> *)(v18 + 8);
-            v22 = v4->m_SequencedTasks.mNode.mPrev;
-            v22->mNext = v21;
-            v21->mPrev = v22;
-            v21->mNext = &v4->m_SequencedTasks.mNode;
-            v4->m_SequencedTasks.mNode.mPrev = v21;
+            v20 = (UFG::qNode<ITask,ITask> *)(v17 + 8);
+            mPrev = this->m_SequencedTasks.mNode.mPrev;
+            mPrev->mNext = v20;
+            v20->mPrev = mPrev;
+            v20->mNext = &this->m_SequencedTasks.mNode;
+            this->m_SequencedTasks.mNode.mPrev = v20;
           }
 LABEL_26:
-          v8 = v23;
-          v9 = (unsigned int)(v9 + 1);
+          v7 = v22;
+          v8 = (unsigned int)(v8 + 1);
         }
-        while ( (unsigned int)v9 < (*(_DWORD *)(v6 + 16) & 0x7FFFFFFFu) );
+        while ( (unsigned int)v8 < (*(_DWORD *)(v6 + 16) & 0x7FFFFFFFu) );
       }
     }
   }
@@ -788,101 +755,100 @@ LABEL_26:
 
 // File Line: 706
 // RVA: 0x2709B0
-void __fastcall ActionController::PlayTracks(ActionController *this, ITrack *track, bool offsetTimeBeginAndEnd, float offsetTime)
+void __fastcall ActionController::PlayTracks(
+        ActionController *this,
+        ITrack *track,
+        bool offsetTimeBeginAndEnd,
+        float offsetTime)
 {
-  ITrack *v4; // rbx
-  ITrack **v5; // rax
-  bool v6; // si
-  ActionController *v7; // rdi
+  ActionNodePlayable **p_mNext; // rax
   bool v8; // dl
   unsigned __int64 *v9; // rdx
-  ITrack **v10; // rax
+  unsigned __int64 *v10; // rax
   bool i; // cl
-  Expression::IMemberMapVtbl *v12; // rax
+  Expression::IMemberMapVtbl *vfptr; // rax
   ActionNodePlayable *v13; // rdx
-  signed __int64 v14; // rax
+  char *v14; // rax
   __int64 v15; // rcx
-  __int64 v16; // rax
+  Expression::IMemberMap *v16; // rax
   float v17; // xmm0_4
   float v18; // xmm0_4
-  UFG::qNode<ITask,ITask> *v19; // rcx
-  UFG::qNode<ITask,ITask> *v20; // rax
+  UFG::qNode<ITask,ITask> *p_mResourceOwner; // rcx
+  UFG::qNode<ITask,ITask> *mPrev; // rax
 
   if ( track )
   {
-    v4 = track;
-    v5 = (ITrack **)&this->m_RunningTasks.mNode.mNext[-1].mNext;
-    v6 = offsetTimeBeginAndEnd;
-    v7 = this;
-    v8 = v5 == (ITrack **)&this->m_SequenceNode;
+    p_mNext = (ActionNodePlayable **)&this->m_RunningTasks.mNode.mNext[-1].mNext;
+    v8 = p_mNext == &this->m_SequenceNode;
     if ( this->m_RunningTasks.mNode.mNext != (UFG::qNode<ITask,ITask> *)8 )
     {
       do
       {
         if ( v8 )
           break;
-        if ( v4 == v5[3] )
+        if ( track == (ITrack *)p_mNext[3] )
           return;
-        v5 = (ITrack **)&v5[2][-1].mTimeBegin;
-        v8 = v5 == (ITrack **)&this->m_SequenceNode;
+        p_mNext = (ActionNodePlayable **)&p_mNext[2][-1].mChildren.mData;
+        v8 = p_mNext == &this->m_SequenceNode;
       }
-      while ( v5 );
+      while ( p_mNext );
     }
     v9 = &this->m_RunningSpawnTasksTmp[1];
-    v10 = (ITrack **)&this->m_SequencedTasks.mNode.mNext[-1].mNext;
-    for ( i = v10 == (ITrack **)&this->m_RunningSpawnTasksTmp[1]; v10; i = v10 == (ITrack **)v9 )
+    v10 = (unsigned __int64 *)&this->m_SequencedTasks.mNode.mNext[-1].mNext;
+    for ( i = v10 == &this->m_RunningSpawnTasksTmp[1]; v10; i = v10 == v9 )
     {
       if ( i )
         break;
-      if ( v4 == v10[3] )
+      if ( track == (ITrack *)v10[3] )
         return;
-      v10 = (ITrack **)&v10[2][-1].mTimeBegin;
+      v10 = (unsigned __int64 *)(v10[2] - 8);
     }
-    if ( v4->m_TrackClassNameUID == ExecuteTrackLibraryTrack::sClassNameUID )
+    if ( track->m_TrackClassNameUID == ExecuteTrackLibraryTrack::sClassNameUID )
     {
-      v12 = v4[1].vfptr;
+      vfptr = track[1].vfptr;
       v13 = 0i64;
-      if ( v12 )
-        v14 = (signed __int64)&v12->ResolveReferences + (_QWORD)v4;
+      if ( vfptr )
+        v14 = (char *)&vfptr->ResolveReferences + (_QWORD)track;
       else
         v14 = 0i64;
-      v15 = *(_QWORD *)(v14 + 72);
+      v15 = *((_QWORD *)v14 + 9);
       if ( v15 )
-        v13 = (ActionNodePlayable *)(v15 + v14 + 72);
-      ActionController::PlayTracks(v7, v13, 1, v4->mTimeBegin);
+        v13 = (ActionNodePlayable *)&v14[v15 + 72];
+      ActionController::PlayTracks(this, v13, 1, track->mTimeBegin);
     }
-    v16 = (__int64)v4->vfptr[1].FindWithOldPath((Expression::IMemberMap *)&v4->vfptr, "ActionController::PlayTracks()");
-    if ( v6 && offsetTime > 0.0 )
+    v16 = track->vfptr[1].FindWithOldPath(track, "ActionController::PlayTracks()");
+    if ( offsetTimeBeginAndEnd && offsetTime > 0.0 )
     {
-      v17 = *(float *)(v16 + 32);
+      v17 = *(float *)&v16[2].vfptr;
       if ( v17 >= 0.0 )
-        *(float *)(v16 + 32) = v17 + offsetTime;
-      v18 = *(float *)(v16 + 36);
+        *(float *)&v16[2].vfptr = v17 + offsetTime;
+      v18 = *((float *)&v16[2].vfptr + 1);
       if ( v18 >= 0.0 )
-        *(float *)(v16 + 36) = v18 + offsetTime;
+        *((float *)&v16[2].vfptr + 1) = v18 + offsetTime;
     }
-    v19 = (UFG::qNode<ITask,ITask> *)(v16 + 8);
-    v20 = v7->m_SequencedTasks.mNode.mPrev;
-    v20->mNext = v19;
-    v19->mPrev = v20;
-    v19->mNext = &v7->m_SequencedTasks.mNode;
-    v7->m_SequencedTasks.mNode.mPrev = v19;
+    p_mResourceOwner = (UFG::qNode<ITask,ITask> *)&v16->mResourceOwner;
+    mPrev = this->m_SequencedTasks.mNode.mPrev;
+    mPrev->mNext = p_mResourceOwner;
+    p_mResourceOwner->mPrev = mPrev;
+    p_mResourceOwner->mNext = &this->m_SequencedTasks.mNode;
+    this->m_SequencedTasks.mNode.mPrev = p_mResourceOwner;
   }
 }
 
 // File Line: 756
 // RVA: 0x270B10
-void __fastcall ActionController::PlayTracks(ActionController *this, TrackGroup *group, bool offsetTimeBeginAndEnd, float offsetTime)
+void __fastcall ActionController::PlayTracks(
+        ActionController *this,
+        TrackGroup *group,
+        bool offsetTimeBeginAndEnd,
+        float offsetTime)
 {
   __int64 v4; // rsi
   char *v5; // r14
-  bool v6; // r15
-  TrackGroup *v7; // rbp
-  ActionController *v8; // rdi
-  signed __int64 v9; // rbx
-  signed __int64 v10; // rax
+  __int64 v9; // rbx
+  ActionNodePlayable **p_mNext; // rax
   bool v11; // cl
-  signed __int64 v12; // rax
+  unsigned __int64 *v12; // rax
   bool v13; // cl
   __int64 v14; // rax
   __int64 v15; // rcx
@@ -891,49 +857,46 @@ void __fastcall ActionController::PlayTracks(ActionController *this, TrackGroup 
   float v18; // xmm0_4
   float v19; // xmm0_4
   UFG::qNode<ITask,ITask> *v20; // rcx
-  UFG::qNode<ITask,ITask> *v21; // rax
+  UFG::qNode<ITask,ITask> *mPrev; // rax
 
   if ( group )
   {
     v4 = 0i64;
     v5 = (char *)&group->mTracks.mData + group->mTracks.mData.mOffset;
-    v6 = offsetTimeBeginAndEnd;
-    v7 = group;
-    v8 = this;
-    if ( group->mTracks.mCount & 0x7FFFFFFF )
+    if ( (group->mTracks.mCount & 0x7FFFFFFF) != 0 )
     {
       do
       {
-        v9 = (signed __int64)&v5[8 * v4 + *(_QWORD *)&v5[8 * v4]];
+        v9 = (__int64)&v5[8 * v4 + *(_QWORD *)&v5[8 * v4]];
         if ( v9 )
         {
-          v10 = (signed __int64)&v8->m_RunningTasks.mNode.mNext[-1].mNext;
-          v11 = v10 == (_QWORD)v8 + 56;
-          if ( v8->m_RunningTasks.mNode.mNext != (UFG::qNode<ITask,ITask> *)8 )
+          p_mNext = (ActionNodePlayable **)&this->m_RunningTasks.mNode.mNext[-1].mNext;
+          v11 = p_mNext == &this->m_SequenceNode;
+          if ( this->m_RunningTasks.mNode.mNext != (UFG::qNode<ITask,ITask> *)8 )
           {
             do
             {
               if ( v11 )
                 break;
-              if ( v9 == *(_QWORD *)(v10 + 24) )
+              if ( (ActionNodePlayable *)v9 == p_mNext[3] )
                 goto LABEL_26;
-              v10 = *(_QWORD *)(v10 + 16) - 8i64;
-              v11 = v10 == (_QWORD)v8 + 56;
+              p_mNext = (ActionNodePlayable **)&p_mNext[2][-1].mChildren.mData;
+              v11 = p_mNext == &this->m_SequenceNode;
             }
-            while ( v10 );
+            while ( p_mNext );
           }
-          v12 = (signed __int64)&v8->m_SequencedTasks.mNode.mNext[-1].mNext;
-          v13 = v12 == (_QWORD)v8 + 88;
-          if ( v8->m_SequencedTasks.mNode.mNext != (UFG::qNode<ITask,ITask> *)8 )
+          v12 = (unsigned __int64 *)&this->m_SequencedTasks.mNode.mNext[-1].mNext;
+          v13 = v12 == &this->m_RunningSpawnTasksTmp[1];
+          if ( this->m_SequencedTasks.mNode.mNext != (UFG::qNode<ITask,ITask> *)8 )
           {
             do
             {
               if ( v13 )
                 break;
-              if ( v9 == *(_QWORD *)(v12 + 24) )
+              if ( v9 == v12[3] )
                 goto LABEL_26;
-              v12 = *(_QWORD *)(v12 + 16) - 8i64;
-              v13 = v12 == (_QWORD)v8 + 88;
+              v12 = (unsigned __int64 *)(v12[2] - 8);
+              v13 = v12 == &this->m_RunningSpawnTasksTmp[1];
             }
             while ( v12 );
           }
@@ -947,12 +910,12 @@ void __fastcall ActionController::PlayTracks(ActionController *this, TrackGroup 
               v16 = (ActionNodePlayable *)(v15 + v14 + 72);
             else
               v16 = 0i64;
-            ActionController::PlayTracks(v8, v16, 1, *(float *)(v9 + 48));
+            ActionController::PlayTracks(this, v16, 1, *(float *)(v9 + 48));
           }
-          v17 = (*(__int64 (__fastcall **)(signed __int64, const char *))(*(_QWORD *)v9 + 80i64))(
+          v17 = (*(__int64 (__fastcall **)(__int64, const char *))(*(_QWORD *)v9 + 80i64))(
                   v9,
                   "ActionController::PlayTracks()");
-          if ( v6 && offsetTime > 0.0 )
+          if ( offsetTimeBeginAndEnd && offsetTime > 0.0 )
           {
             v18 = *(float *)(v17 + 32);
             if ( v18 >= 0.0 )
@@ -962,23 +925,27 @@ void __fastcall ActionController::PlayTracks(ActionController *this, TrackGroup 
               *(float *)(v17 + 36) = v19 + offsetTime;
           }
           v20 = (UFG::qNode<ITask,ITask> *)(v17 + 8);
-          v21 = v8->m_SequencedTasks.mNode.mPrev;
-          v21->mNext = v20;
-          v20->mPrev = v21;
-          v20->mNext = &v8->m_SequencedTasks.mNode;
-          v8->m_SequencedTasks.mNode.mPrev = v20;
+          mPrev = this->m_SequencedTasks.mNode.mPrev;
+          mPrev->mNext = v20;
+          v20->mPrev = mPrev;
+          v20->mNext = &this->m_SequencedTasks.mNode;
+          this->m_SequencedTasks.mNode.mPrev = v20;
         }
 LABEL_26:
         v4 = (unsigned int)(v4 + 1);
       }
-      while ( (unsigned int)v4 < (v7->mTracks.mCount & 0x7FFFFFFFu) );
+      while ( (unsigned int)v4 < (group->mTracks.mCount & 0x7FFFFFFFu) );
     }
   }
 }
 
 // File Line: 787
 // RVA: 0x272290
-void __fastcall ActionController::Sequence(ActionController *this, ActionNodePlayable *node, int priority, bool override)
+void __fastcall ActionController::Sequence(
+        ActionController *this,
+        ActionNodePlayable *node,
+        int priority,
+        bool override)
 {
   if ( node )
   {
@@ -996,113 +963,100 @@ void __fastcall ActionController::Sequence(ActionController *this, ActionNodePla
 // RVA: 0x272A80
 void __fastcall ActionController::Stop(ActionController *this)
 {
-  ActionController *v1; // rbx
-
-  v1 = this;
   ActionController::nodeCleanup(this);
-  v1->m_SequenceNode = 0i64;
-  v1->m_previousNode = 0i64;
+  this->m_SequenceNode = 0i64;
+  this->m_previousNode = 0i64;
 }
 
 // File Line: 820
 // RVA: 0x272E40
 void __fastcall ActionController::Update(ActionController *this, float timeDelta)
 {
-  ActionController *v2; // rbx
-  ActionNodePlayable *v3; // rax
-  signed __int64 v4; // rdi
+  ActionNodePlayable *m_currentNode; // rax
+  ActionController *v4; // rdi
   float v5; // xmm0_4
-  signed __int64 v6; // r14
-  __int64 v7; // rcx
-  _QWORD *v8; // rax
-  UFG::qNode<ITask,ITask> **v9; // rdx
-  UFG::qNode<ITask,ITask> *v10; // rax
-  __int64 v11; // rsi
-  __int64 v12; // rax
-  signed __int64 v13; // rcx
-  float v14; // xmm0_4
-  __int64 v15; // rcx
-  unsigned __int64 v16; // rax
-  unsigned __int64 *v17; // rcx
-  ActionContext *v18; // rdi
-  signed __int64 v19; // r14
-  UFG::SimObjectCVBase *v20; // rcx
-  unsigned __int64 v21; // rsi
-  UFG::AICharacterControllerBaseComponent *v22; // rax
-  ActionNodePlayable **v23; // r12
-  signed __int64 v24; // r8
-  signed __int64 v25; // rdx
-  signed __int64 v26; // rcx
-  __int64 v27; // rdi
-  __int64 v28; // rax
-  signed __int64 v29; // rdi
-  signed __int64 v30; // rcx
-  float v31; // xmm0_4
-  float v32; // xmm7_4
-  signed __int64 v33; // r15
-  signed __int64 v34; // rdi
-  char v35; // r13
-  float v36; // xmm0_4
-  signed __int64 v37; // r15
-  __int64 v38; // rcx
-  _QWORD *v39; // rax
-  UFG::qNode<ITask,ITask> **v40; // rdx
-  UFG::qNode<ITask,ITask> *v41; // rax
-  __int64 v42; // rsi
-  __int64 v43; // rax
-  signed __int64 v44; // rcx
-  float v45; // xmm0_4
-  __int64 v46; // rcx
-  unsigned __int64 v47; // rax
-  unsigned __int64 *v48; // rcx
-  __int64 v49; // rax
-  bool v50; // cf
-  bool v51; // zf
-  char v52; // al
-  signed __int64 v53; // rdx
-  signed __int64 v54; // rcx
-  ActionNodePlayable *v55; // rax
-  const char *v56; // r8
-  bool v57; // di
-  signed __int64 v58; // rdi
-  float v59; // xmm0_4
-  signed __int64 v60; // r14
-  __int64 v61; // rcx
-  _QWORD *v62; // rax
-  UFG::qNode<ITask,ITask> **v63; // rdx
-  UFG::qNode<ITask,ITask> *v64; // rax
-  __int64 v65; // rsi
-  __int64 v66; // rax
-  signed __int64 v67; // rcx
-  float v68; // xmm0_4
-  __int64 v69; // rcx
-  unsigned __int64 v70; // rax
-  unsigned __int64 *v71; // rcx
-  signed __int64 v72; // rdi
-  float v73; // xmm0_4
-  signed __int64 v74; // r14
-  __int64 v75; // rcx
-  _QWORD *v76; // rax
-  UFG::qNode<ITask,ITask> **v77; // rdx
-  UFG::qNode<ITask,ITask> *v78; // rax
-  __int64 v79; // rsi
-  __int64 v80; // rax
-  signed __int64 v81; // rcx
-  float v82; // xmm0_4
-  __int64 v83; // rcx
-  unsigned __int64 v84; // rax
-  unsigned __int64 *v85; // rcx
-  __int64 v86; // [rsp+30h] [rbp-9h]
-  __int16 v87; // [rsp+44h] [rbp+Bh]
+  ActionController *v6; // r14
+  Expression::IMemberMap *v7; // rcx
+  ActionNodePlayable *v8; // rax
+  UFG::qNode<ITask,ITask> *v9; // rax
+  ActionContext *v10; // rsi
+  ActionController *v11; // rax
+  char *v12; // rcx
+  float v13; // xmm0_4
+  ActionContext *v14; // rcx
+  unsigned __int64 v15; // rax
+  ActionContext *m_Context; // rdi
+  UFG::qNode<ITask,ITask> **v17; // r14
+  UFG::SimObjectCVBase *m_pPointer; // rcx
+  unsigned __int64 mSignals; // rsi
+  UFG::AICharacterControllerBaseComponent *v20; // rax
+  ActionNodePlayable **p_m_SequenceNode; // r12
+  ActionController *v22; // r8
+  ActionController *p_mNext; // rdx
+  __int64 p_mData; // rcx
+  ActionContext *v25; // rdi
+  ActionController *mActionController; // rax
+  ActionNode **p_m_OpeningBranch; // rdi
+  __int64 v28; // rcx
+  float v29; // xmm0_4
+  float v30; // xmm7_4
+  unsigned __int64 *v31; // r15
+  ActionController *v32; // rdi
+  char v33; // r13
+  float m_ActionNodePlayTime; // xmm0_4
+  ActionController *v35; // r15
+  Expression::IMemberMap *mResourceOwner; // rcx
+  ActionNodePlayable *v37; // rax
+  UFG::qNode<ITask,ITask> *mPrev; // rax
+  ActionContext *v39; // rsi
+  ActionController *v40; // rax
+  char *v41; // rcx
+  float v42; // xmm0_4
+  ActionContext *v43; // rcx
+  unsigned __int64 v44; // rax
+  ActionContext *v45; // rax
+  bool v46; // cc
+  char v47; // al
+  UFG::qNode<ITask,ITask> **v48; // rdx
+  __int64 v49; // rcx
+  bool v50; // zf
+  ActionNodePlayable *v51; // rax
+  const char *v52; // r8
+  bool v53; // di
+  unsigned __int64 *v54; // rdi
+  float v55; // xmm0_4
+  __int64 v56; // r14
+  unsigned __int64 v57; // rcx
+  unsigned __int64 *v58; // rax
+  UFG::qNode<ITask,ITask> *v59; // rax
+  unsigned __int64 v60; // rsi
+  __int64 v61; // rax
+  unsigned __int64 v62; // rcx
+  float v63; // xmm0_4
+  unsigned __int64 v64; // rcx
+  unsigned __int64 v65; // rax
+  unsigned __int64 *v66; // rdi
+  float v67; // xmm0_4
+  __int64 v68; // r14
+  unsigned __int64 v69; // rcx
+  unsigned __int64 *v70; // rax
+  UFG::qNode<ITask,ITask> *v71; // rax
+  unsigned __int64 v72; // rsi
+  __int64 v73; // rax
+  unsigned __int64 v74; // rcx
+  float v75; // xmm0_4
+  unsigned __int64 v76; // rcx
+  unsigned __int64 v77; // rax
+  __int64 v78[2]; // [rsp+30h] [rbp-9h] BYREF
+  __int16 v79; // [rsp+44h] [rbp+Bh]
 
-  v2 = this;
   if ( ActionController::sBreakOnUpdate )
   {
-    v3 = this->m_currentNode;
-    if ( v3 )
+    m_currentNode = this->m_currentNode;
+    if ( m_currentNode )
     {
       if ( ActionNode::sEnableNodeBreakPoints
-        && v3->mBreakPoint
+        && m_currentNode->mBreakPoint
         && this->m_Context->mDebugBreak
         && ActionNode::sSoftBreakPoints )
       {
@@ -1110,564 +1064,540 @@ void __fastcall ActionController::Update(ActionController *this, float timeDelta
       }
     }
   }
-  if ( v2->m_currentNode || !v2->mKeepAlive )
+  if ( this->m_currentNode || !this->mKeepAlive )
   {
-    v18 = v2->m_Context;
-    v19 = 0i64;
-    if ( v18 )
+    m_Context = this->m_Context;
+    v17 = 0i64;
+    if ( m_Context )
     {
-      v20 = (UFG::SimObjectCVBase *)v18->mSimObject.m_pPointer;
-      v21 = 0i64;
-      if ( v20 )
+      m_pPointer = (UFG::SimObjectCVBase *)m_Context->mSimObject.m_pPointer;
+      mSignals = 0i64;
+      if ( m_pPointer )
       {
-        if ( (v20->m_Flags >> 14) & 1 )
+        if ( (m_pPointer->m_Flags & 0x4000) != 0 )
         {
-          v22 = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerBaseComponent>(v20);
-          if ( v22 )
-            v21 = v22->m_Intention.mSignals;
+          v20 = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerBaseComponent>(m_pPointer);
+          if ( v20 )
+            mSignals = v20->m_Intention.mSignals;
         }
       }
-      v18->mSignals = v21;
+      m_Context->mSignals = mSignals;
     }
-    v23 = &v2->m_SequenceNode;
-    v24 = 0i64;
-    v25 = (signed __int64)&v2->m_RunningTasks.mNode.mNext[-1].mNext;
-    if ( (ActionNodePlayable **)v25 != &v2->m_SequenceNode )
+    p_m_SequenceNode = &this->m_SequenceNode;
+    v22 = 0i64;
+    p_mNext = (ActionController *)&this->m_RunningTasks.mNode.mNext[-1].mNext;
+    if ( p_mNext != (ActionController *)&this->m_SequenceNode )
     {
       do
       {
-        v26 = *(_QWORD *)(v25 + 16) - 8i64;
-        if ( *(_BYTE *)(*(_QWORD *)(v25 + 24) + 22i64) )
-          v24 = v25;
-        v25 = *(_QWORD *)(v25 + 16) - 8i64;
+        p_mData = (__int64)&p_mNext->m_currentNode[-1].mChildren.mData;
+        if ( BYTE6(p_mNext->m_Context->mSimObject.m_pPointer) )
+          v22 = p_mNext;
+        p_mNext = (ActionController *)&p_mNext->m_currentNode[-1].mChildren.mData;
       }
-      while ( (ActionNodePlayable **)v26 != v23 );
-      if ( v24 )
+      while ( (ActionNodePlayable **)p_mData != p_m_SequenceNode );
+      if ( v22 )
       {
-        v27 = *(_QWORD *)(v24 + 24);
-        v28 = *(_QWORD *)(v27 + 32);
-        v29 = v27 + 24;
-        if ( v28
-          && (v30 = v29 + v28 + 8) != 0
-          && ((*(void (__fastcall **)(signed __int64, __int64 *, UEL::ParametersBase *, _QWORD, UFG::qStringBuilder *))(*(_QWORD *)v30 + 24i64))(
-                v30,
-                &v86,
+        v25 = v22->m_Context;
+        mActionController = v25->mActionController;
+        p_m_OpeningBranch = &v25->m_OpeningBranch;
+        if ( mActionController
+          && (v28 = (__int64)&mActionController->mResourceOwner + (_QWORD)p_m_OpeningBranch) != 0
+          && ((*(void (__fastcall **)(__int64, __int64 *, UEL::ParametersBase *, _QWORD, UFG::qStringBuilder *))(*(_QWORD *)v28 + 24i64))(
+                v28,
+                v78,
                 UEL::gCurrentParameters,
                 0i64,
                 UEL::gCurrentStringBuilder),
-              v87) )
+              v79) )
         {
-          if ( v87 == 4 )
-            v31 = *(float *)&v86;
+          if ( v79 == 4 )
+            v29 = *(float *)v78;
           else
-            v31 = (float)(signed int)v86;
+            v29 = (float)SLODWORD(v78[0]);
         }
         else
         {
-          v31 = *(float *)(v29 + 16);
+          v29 = *((float *)p_m_OpeningBranch + 4);
         }
-        v2->mRunningMasterRate = v31;
+        this->mRunningMasterRate = v29;
       }
     }
-    v32 = timeDelta * v2->mRunningMasterRate;
-    v33 = (signed __int64)&v2->m_RunningSpawnTasksTmp[1];
-    v34 = (signed __int64)&v2->m_SequencedTasks.mNode.mNext[-1].mNext;
-    v35 = 0;
-    v2->mUpdating = 1;
-    v2->m_ActionNodePlayTime = v32 + v2->m_ActionNodePlayTime;
-    if ( (unsigned __int64 *)v34 != &v2->m_RunningSpawnTasksTmp[1] )
+    v30 = timeDelta * this->mRunningMasterRate;
+    v31 = &this->m_RunningSpawnTasksTmp[1];
+    v32 = (ActionController *)&this->m_SequencedTasks.mNode.mNext[-1].mNext;
+    v33 = 0;
+    this->mUpdating = 1;
+    this->m_ActionNodePlayTime = v30 + this->m_ActionNodePlayTime;
+    if ( v32 != (ActionController *)&this->m_RunningSpawnTasksTmp[1] )
     {
       do
       {
-        v36 = *(float *)(v34 + 32);
-        v37 = *(_QWORD *)(v34 + 16) - 8i64;
-        if ( v36 < 0.0 || v36 > v2->m_ActionNodePlayTime )
+        m_ActionNodePlayTime = v32->m_ActionNodePlayTime;
+        v35 = (ActionController *)&v32->m_currentNode[-1].mChildren.mData;
+        if ( m_ActionNodePlayTime < 0.0 || m_ActionNodePlayTime > this->m_ActionNodePlayTime )
         {
-          v49 = *(_QWORD *)(v34 + 24);
-          if ( !*(_BYTE *)(v49 + 22)
-            || (v50 = *(float *)(v49 + 48) > 0.0, v51 = *(float *)(v49 + 48) == 0.0, v52 = 1, !v50 && !v51) )
-          {
-            v52 = 0;
-          }
-          v35 |= v52;
+          v45 = v32->m_Context;
+          if ( !BYTE6(v45->mSimObject.m_pPointer) || (v46 = *(float *)&v45->mDebugBreak >= 0.0, v47 = 1, !v46) )
+            v47 = 0;
+          v33 |= v47;
         }
         else
         {
-          v38 = *(_QWORD *)(v34 + 8);
-          v39 = *(_QWORD **)(v34 + 16);
-          v40 = (UFG::qNode<ITask,ITask> **)(v34 + 8);
-          *(_QWORD *)(v38 + 8) = v39;
-          *v39 = v38;
-          *v40 = (UFG::qNode<ITask,ITask> *)v40;
-          v40[1] = (UFG::qNode<ITask,ITask> *)v40;
-          v41 = v2->m_RunningTasks.mNode.mPrev;
-          v41->mNext = (UFG::qNode<ITask,ITask> *)(v34 + 8);
-          *v40 = v41;
-          v40[1] = &v2->m_RunningTasks.mNode;
-          v2->m_RunningTasks.mNode.mPrev = (UFG::qNode<ITask,ITask> *)(v34 + 8);
-          v42 = *(_QWORD *)(v34 + 24);
-          if ( *(_BYTE *)(v42 + 22) )
+          mResourceOwner = v32->mResourceOwner;
+          v37 = v32->m_currentNode;
+          mResourceOwner->mResourceOwner = v37;
+          v37->vfptr = (Expression::IMemberMapVtbl *)mResourceOwner;
+          v32->mResourceOwner = (Expression::IMemberMap *)&v32->mResourceOwner;
+          v32->m_currentNode = (ActionNodePlayable *)&v32->mResourceOwner;
+          mPrev = this->m_RunningTasks.mNode.mPrev;
+          mPrev->mNext = (UFG::qNode<ITask,ITask> *)&v32->mResourceOwner;
+          v32->mResourceOwner = (Expression::IMemberMap *)mPrev;
+          v32->m_currentNode = (ActionNodePlayable *)&this->m_RunningTasks;
+          this->m_RunningTasks.mNode.mPrev = (UFG::qNode<ITask,ITask> *)&v32->mResourceOwner;
+          v39 = v32->m_Context;
+          if ( BYTE6(v39->mSimObject.m_pPointer) )
           {
-            v43 = *(_QWORD *)(v42 + 32);
-            if ( v43
-              && (v44 = v42 + v43 + 32) != 0
-              && ((*(void (__fastcall **)(signed __int64, __int64 *, UEL::ParametersBase *, _QWORD, UFG::qStringBuilder *))(*(_QWORD *)v44 + 24i64))(
-                    v44,
-                    &v86,
+            v40 = v39->mActionController;
+            if ( v40
+              && (v41 = (char *)&v40->m_ActionNodePlayTime + (_QWORD)v39) != 0i64
+              && ((*(void (__fastcall **)(char *, __int64 *, UEL::ParametersBase *, _QWORD, UFG::qStringBuilder *))(*(_QWORD *)v41 + 24i64))(
+                    v41,
+                    v78,
                     UEL::gCurrentParameters,
                     0i64,
                     UEL::gCurrentStringBuilder),
-                  v87) )
+                  v79) )
             {
-              if ( v87 == 4 )
-                v45 = *(float *)&v86;
+              if ( v79 == 4 )
+                v42 = *(float *)v78;
               else
-                v45 = (float)(signed int)v86;
+                v42 = (float)SLODWORD(v78[0]);
             }
             else
             {
-              v45 = *(float *)(v42 + 40);
+              v42 = *(float *)&v39->mParentContext;
             }
-            v2->mRunningMasterRate = v45;
+            this->mRunningMasterRate = v42;
           }
-          (*(void (__fastcall **)(signed __int64, ActionContext *, signed __int64))(*(_QWORD *)v34 + 8i64))(
-            v34,
-            v2->m_Context,
-            v24);
-          v46 = *(_QWORD *)(v34 + 24);
-          if ( v46 && *(_DWORD *)(v46 + 16) == SpawnTrack::sClassNameUID )
+          ((void (__fastcall *)(ActionController *, ActionContext *, ActionController *))v32->vfptr->__vecDelDtor)(
+            v32,
+            this->m_Context,
+            v22);
+          v43 = v32->m_Context;
+          if ( v43 && LODWORD(v43->mSimObject.m_pPointer) == SpawnTrack::sClassNameUID )
           {
-            v47 = v2->m_RunningSpawnTasksTmp[0];
-            v48 = (unsigned __int64 *)(v34 + 40);
-            *(_QWORD *)(v47 + 8) = v34 + 40;
-            *v48 = v47;
-            v48[1] = (unsigned __int64)v2->m_RunningSpawnTasksTmp;
-            v2->m_RunningSpawnTasksTmp[0] = v34 + 40;
+            v44 = this->m_RunningSpawnTasksTmp[0];
+            *(_QWORD *)(v44 + 8) = &v32->m_OnEnterExitCallbacksEnabled;
+            *(_QWORD *)&v32->m_OnEnterExitCallbacksEnabled = v44;
+            v32->m_previousNode = (ActionNodePlayable *)this->m_RunningSpawnTasksTmp;
+            this->m_RunningSpawnTasksTmp[0] = (unsigned __int64)&v32->m_OnEnterExitCallbacksEnabled;
           }
         }
-        v34 = v37;
+        v32 = v35;
       }
-      while ( (unsigned __int64 *)v37 != &v2->m_RunningSpawnTasksTmp[1] );
-      v33 = (signed __int64)&v2->m_RunningSpawnTasksTmp[1];
+      while ( v35 != (ActionController *)&this->m_RunningSpawnTasksTmp[1] );
+      v31 = &this->m_RunningSpawnTasksTmp[1];
     }
-    ActionController::updateTasks(v2, v32);
-    v53 = (signed __int64)&v2->m_RunningTasks.mNode.mNext[-1].mNext;
-    if ( (ActionNodePlayable **)v53 != v23 )
+    ActionController::updateTasks(this, v30);
+    v48 = &this->m_RunningTasks.mNode.mNext[-1].mNext;
+    if ( v48 != (UFG::qNode<ITask,ITask> **)p_m_SequenceNode )
     {
       do
       {
-        v54 = *(_QWORD *)(v53 + 16) - 8i64;
-        if ( *(_BYTE *)(*(_QWORD *)(v53 + 24) + 22i64) )
-          v19 = v53;
-        v53 = *(_QWORD *)(v53 + 16) - 8i64;
+        v49 = (__int64)&v48[2][-1].mNext;
+        if ( BYTE6(v48[3][1].mPrev) )
+          v17 = v48;
+        v48 = &v48[2][-1].mNext;
       }
-      while ( (ActionNodePlayable **)v54 != v23 );
+      while ( (ActionNodePlayable **)v49 != p_m_SequenceNode );
     }
-    v51 = v2->mOverRideNode == 0;
-    v2->mUpdating = 0;
-    if ( !v51 || !v19 && !v35 )
+    v50 = this->mOverRideNode == 0;
+    this->mUpdating = 0;
+    if ( !v50 || !v17 && !v33 )
     {
       if ( ActionController::sBreakOnEnd )
       {
-        v55 = v2->m_currentNode;
-        if ( v55 )
+        v51 = this->m_currentNode;
+        if ( v51 )
         {
           if ( ActionNode::sEnableNodeBreakPoints
-            && v55->mBreakPoint
-            && v2->m_Context->mDebugBreak
+            && v51->mBreakPoint
+            && this->m_Context->mDebugBreak
             && ActionNode::sSoftBreakPoints )
           {
-            v56 = "masterTracksRunning:FALSE";
-            if ( v19 )
-              v56 = "masterTracksRunning:TRUE";
-            ActionController::BreakPointMessageHandler(v2, "ActionController::breakOnEnd", v56);
+            v52 = "masterTracksRunning:FALSE";
+            if ( v17 )
+              v52 = "masterTracksRunning:TRUE";
+            ActionController::BreakPointMessageHandler(this, "ActionController::breakOnEnd", v52);
           }
         }
       }
-      v57 = v2->mKeepAlive != 0;
-      ActionController::nodeCleanup(v2);
-      if ( *v23 )
+      v53 = this->mKeepAlive != 0;
+      ActionController::nodeCleanup(this);
+      if ( *p_m_SequenceNode )
       {
-        ActionController::Play(v2, *v23);
-        v58 = (signed __int64)&v2->m_SequencedTasks.mNode.mNext[-1].mNext;
-        if ( v58 != v33 )
+        ActionController::Play(this, *p_m_SequenceNode);
+        v54 = (unsigned __int64 *)&this->m_SequencedTasks.mNode.mNext[-1].mNext;
+        if ( v54 != v31 )
         {
           do
           {
-            v59 = *(float *)(v58 + 32);
-            v60 = *(_QWORD *)(v58 + 16) - 8i64;
-            if ( v59 >= 0.0 && v59 <= v2->m_ActionNodePlayTime )
+            v55 = *((float *)v54 + 8);
+            v56 = v54[2] - 8;
+            if ( v55 >= 0.0 && v55 <= this->m_ActionNodePlayTime )
             {
-              v61 = *(_QWORD *)(v58 + 8);
-              v62 = *(_QWORD **)(v58 + 16);
-              v63 = (UFG::qNode<ITask,ITask> **)(v58 + 8);
-              *(_QWORD *)(v61 + 8) = v62;
-              *v62 = v61;
-              *v63 = (UFG::qNode<ITask,ITask> *)v63;
-              v63[1] = (UFG::qNode<ITask,ITask> *)v63;
-              v64 = v2->m_RunningTasks.mNode.mPrev;
-              v64->mNext = (UFG::qNode<ITask,ITask> *)(v58 + 8);
-              *v63 = v64;
-              v63[1] = &v2->m_RunningTasks.mNode;
-              v2->m_RunningTasks.mNode.mPrev = (UFG::qNode<ITask,ITask> *)(v58 + 8);
-              v65 = *(_QWORD *)(v58 + 24);
-              if ( *(_BYTE *)(v65 + 22) )
+              v57 = v54[1];
+              v58 = (unsigned __int64 *)v54[2];
+              *(_QWORD *)(v57 + 8) = v58;
+              *v58 = v57;
+              v54[1] = (unsigned __int64)(v54 + 1);
+              v54[2] = (unsigned __int64)(v54 + 1);
+              v59 = this->m_RunningTasks.mNode.mPrev;
+              v59->mNext = (UFG::qNode<ITask,ITask> *)(v54 + 1);
+              v54[1] = (unsigned __int64)v59;
+              v54[2] = (unsigned __int64)&this->m_RunningTasks;
+              this->m_RunningTasks.mNode.mPrev = (UFG::qNode<ITask,ITask> *)(v54 + 1);
+              v60 = v54[3];
+              if ( *(_BYTE *)(v60 + 22) )
               {
-                v66 = *(_QWORD *)(v65 + 32);
-                if ( v66
-                  && (v67 = v65 + v66 + 32) != 0
-                  && ((*(void (__fastcall **)(signed __int64, __int64 *, UEL::ParametersBase *, _QWORD, UFG::qStringBuilder *))(*(_QWORD *)v67 + 24i64))(
-                        v67,
-                        &v86,
+                v61 = *(_QWORD *)(v60 + 32);
+                if ( v61
+                  && (v62 = v60 + v61 + 32) != 0
+                  && ((*(void (__fastcall **)(unsigned __int64, __int64 *, UEL::ParametersBase *, _QWORD, UFG::qStringBuilder *))(*(_QWORD *)v62 + 24i64))(
+                        v62,
+                        v78,
                         UEL::gCurrentParameters,
                         0i64,
                         UEL::gCurrentStringBuilder),
-                      v87) )
+                      v79) )
                 {
-                  if ( v87 == 4 )
-                    v68 = *(float *)&v86;
+                  if ( v79 == 4 )
+                    v63 = *(float *)v78;
                   else
-                    v68 = (float)(signed int)v86;
+                    v63 = (float)SLODWORD(v78[0]);
                 }
                 else
                 {
-                  v68 = *(float *)(v65 + 40);
+                  v63 = *(float *)(v60 + 40);
                 }
-                v2->mRunningMasterRate = v68;
+                this->mRunningMasterRate = v63;
               }
-              (*(void (__fastcall **)(signed __int64, ActionContext *))(*(_QWORD *)v58 + 8i64))(v58, v2->m_Context);
-              v69 = *(_QWORD *)(v58 + 24);
-              if ( v69 && *(_DWORD *)(v69 + 16) == SpawnTrack::sClassNameUID )
+              (*(void (__fastcall **)(unsigned __int64 *, ActionContext *))(*v54 + 8))(v54, this->m_Context);
+              v64 = v54[3];
+              if ( v64 && *(_DWORD *)(v64 + 16) == SpawnTrack::sClassNameUID )
               {
-                v70 = v2->m_RunningSpawnTasksTmp[0];
-                v71 = (unsigned __int64 *)(v58 + 40);
-                *(_QWORD *)(v70 + 8) = v58 + 40;
-                *v71 = v70;
-                v71[1] = (unsigned __int64)v2->m_RunningSpawnTasksTmp;
-                v2->m_RunningSpawnTasksTmp[0] = v58 + 40;
+                v65 = this->m_RunningSpawnTasksTmp[0];
+                *(_QWORD *)(v65 + 8) = v54 + 5;
+                v54[5] = v65;
+                v54[6] = (unsigned __int64)this->m_RunningSpawnTasksTmp;
+                this->m_RunningSpawnTasksTmp[0] = (unsigned __int64)(v54 + 5);
               }
             }
-            v58 = v60;
+            v54 = (unsigned __int64 *)v56;
           }
-          while ( v60 != v33 );
+          while ( (unsigned __int64 *)v56 != v31 );
         }
       }
-      else if ( v57 )
+      else if ( v53 )
       {
-        ActionController::Play(v2, v2->m_Context->m_OpeningBranch, 0);
-        v72 = (signed __int64)&v2->m_SequencedTasks.mNode.mNext[-1].mNext;
-        if ( v72 != v33 )
+        ActionController::Play(this, (ActionNodePlayable *)this->m_Context->m_OpeningBranch, 0);
+        v66 = (unsigned __int64 *)&this->m_SequencedTasks.mNode.mNext[-1].mNext;
+        if ( v66 != v31 )
         {
           do
           {
-            v73 = *(float *)(v72 + 32);
-            v74 = *(_QWORD *)(v72 + 16) - 8i64;
-            if ( v73 >= 0.0 && v73 <= v2->m_ActionNodePlayTime )
+            v67 = *((float *)v66 + 8);
+            v68 = v66[2] - 8;
+            if ( v67 >= 0.0 && v67 <= this->m_ActionNodePlayTime )
             {
-              v75 = *(_QWORD *)(v72 + 8);
-              v76 = *(_QWORD **)(v72 + 16);
-              v77 = (UFG::qNode<ITask,ITask> **)(v72 + 8);
-              *(_QWORD *)(v75 + 8) = v76;
-              *v76 = v75;
-              *v77 = (UFG::qNode<ITask,ITask> *)v77;
-              v77[1] = (UFG::qNode<ITask,ITask> *)v77;
-              v78 = v2->m_RunningTasks.mNode.mPrev;
-              v78->mNext = (UFG::qNode<ITask,ITask> *)(v72 + 8);
-              *v77 = v78;
-              v77[1] = &v2->m_RunningTasks.mNode;
-              v2->m_RunningTasks.mNode.mPrev = (UFG::qNode<ITask,ITask> *)(v72 + 8);
-              v79 = *(_QWORD *)(v72 + 24);
-              if ( *(_BYTE *)(v79 + 22) )
+              v69 = v66[1];
+              v70 = (unsigned __int64 *)v66[2];
+              *(_QWORD *)(v69 + 8) = v70;
+              *v70 = v69;
+              v66[1] = (unsigned __int64)(v66 + 1);
+              v66[2] = (unsigned __int64)(v66 + 1);
+              v71 = this->m_RunningTasks.mNode.mPrev;
+              v71->mNext = (UFG::qNode<ITask,ITask> *)(v66 + 1);
+              v66[1] = (unsigned __int64)v71;
+              v66[2] = (unsigned __int64)&this->m_RunningTasks;
+              this->m_RunningTasks.mNode.mPrev = (UFG::qNode<ITask,ITask> *)(v66 + 1);
+              v72 = v66[3];
+              if ( *(_BYTE *)(v72 + 22) )
               {
-                v80 = *(_QWORD *)(v79 + 32);
-                if ( v80
-                  && (v81 = v79 + v80 + 32) != 0
-                  && ((*(void (__fastcall **)(signed __int64, __int64 *, UEL::ParametersBase *, _QWORD, UFG::qStringBuilder *))(*(_QWORD *)v81 + 24i64))(
-                        v81,
-                        &v86,
+                v73 = *(_QWORD *)(v72 + 32);
+                if ( v73
+                  && (v74 = v72 + v73 + 32) != 0
+                  && ((*(void (__fastcall **)(unsigned __int64, __int64 *, UEL::ParametersBase *, _QWORD, UFG::qStringBuilder *))(*(_QWORD *)v74 + 24i64))(
+                        v74,
+                        v78,
                         UEL::gCurrentParameters,
                         0i64,
                         UEL::gCurrentStringBuilder),
-                      v87) )
+                      v79) )
                 {
-                  if ( v87 == 4 )
-                    v82 = *(float *)&v86;
+                  if ( v79 == 4 )
+                    v75 = *(float *)v78;
                   else
-                    v82 = (float)(signed int)v86;
+                    v75 = (float)SLODWORD(v78[0]);
                 }
                 else
                 {
-                  v82 = *(float *)(v79 + 40);
+                  v75 = *(float *)(v72 + 40);
                 }
-                v2->mRunningMasterRate = v82;
+                this->mRunningMasterRate = v75;
               }
-              (*(void (__fastcall **)(signed __int64, ActionContext *))(*(_QWORD *)v72 + 8i64))(v72, v2->m_Context);
-              v83 = *(_QWORD *)(v72 + 24);
-              if ( v83 && *(_DWORD *)(v83 + 16) == SpawnTrack::sClassNameUID )
+              (*(void (__fastcall **)(unsigned __int64 *, ActionContext *))(*v66 + 8))(v66, this->m_Context);
+              v76 = v66[3];
+              if ( v76 && *(_DWORD *)(v76 + 16) == SpawnTrack::sClassNameUID )
               {
-                v84 = v2->m_RunningSpawnTasksTmp[0];
-                v85 = (unsigned __int64 *)(v72 + 40);
-                *(_QWORD *)(v84 + 8) = v72 + 40;
-                *v85 = v84;
-                v85[1] = (unsigned __int64)v2->m_RunningSpawnTasksTmp;
-                v2->m_RunningSpawnTasksTmp[0] = v72 + 40;
+                v77 = this->m_RunningSpawnTasksTmp[0];
+                *(_QWORD *)(v77 + 8) = v66 + 5;
+                v66[5] = v77;
+                v66[6] = (unsigned __int64)this->m_RunningSpawnTasksTmp;
+                this->m_RunningSpawnTasksTmp[0] = (unsigned __int64)(v66 + 5);
               }
             }
-            v72 = v74;
+            v66 = (unsigned __int64 *)v68;
           }
-          while ( v74 != v33 );
+          while ( (unsigned __int64 *)v68 != v31 );
         }
       }
     }
   }
   else
   {
-    ActionController::Play(v2, v2->m_Context->m_OpeningBranch, 0);
-    v4 = (signed __int64)&v2->m_SequencedTasks.mNode.mNext[-1].mNext;
-    if ( (unsigned __int64 *)v4 != &v2->m_RunningSpawnTasksTmp[1] )
+    ActionController::Play(this, (ActionNodePlayable *)this->m_Context->m_OpeningBranch, 0);
+    v4 = (ActionController *)&this->m_SequencedTasks.mNode.mNext[-1].mNext;
+    if ( v4 != (ActionController *)&this->m_RunningSpawnTasksTmp[1] )
     {
       do
       {
-        v5 = *(float *)(v4 + 32);
-        v6 = *(_QWORD *)(v4 + 16) - 8i64;
-        if ( v5 >= 0.0 && v5 <= v2->m_ActionNodePlayTime )
+        v5 = v4->m_ActionNodePlayTime;
+        v6 = (ActionController *)&v4->m_currentNode[-1].mChildren.mData;
+        if ( v5 >= 0.0 && v5 <= this->m_ActionNodePlayTime )
         {
-          v7 = *(_QWORD *)(v4 + 8);
-          v8 = *(_QWORD **)(v4 + 16);
-          v9 = (UFG::qNode<ITask,ITask> **)(v4 + 8);
-          *(_QWORD *)(v7 + 8) = v8;
-          *v8 = v7;
-          *v9 = (UFG::qNode<ITask,ITask> *)v9;
-          v9[1] = (UFG::qNode<ITask,ITask> *)v9;
-          v10 = v2->m_RunningTasks.mNode.mPrev;
-          v10->mNext = (UFG::qNode<ITask,ITask> *)(v4 + 8);
-          *v9 = v10;
-          v9[1] = &v2->m_RunningTasks.mNode;
-          v2->m_RunningTasks.mNode.mPrev = (UFG::qNode<ITask,ITask> *)(v4 + 8);
-          v11 = *(_QWORD *)(v4 + 24);
-          if ( *(_BYTE *)(v11 + 22) )
+          v7 = v4->mResourceOwner;
+          v8 = v4->m_currentNode;
+          v7->mResourceOwner = v8;
+          v8->vfptr = (Expression::IMemberMapVtbl *)v7;
+          v4->mResourceOwner = (Expression::IMemberMap *)&v4->mResourceOwner;
+          v4->m_currentNode = (ActionNodePlayable *)&v4->mResourceOwner;
+          v9 = this->m_RunningTasks.mNode.mPrev;
+          v9->mNext = (UFG::qNode<ITask,ITask> *)&v4->mResourceOwner;
+          v4->mResourceOwner = (Expression::IMemberMap *)v9;
+          v4->m_currentNode = (ActionNodePlayable *)&this->m_RunningTasks;
+          this->m_RunningTasks.mNode.mPrev = (UFG::qNode<ITask,ITask> *)&v4->mResourceOwner;
+          v10 = v4->m_Context;
+          if ( BYTE6(v10->mSimObject.m_pPointer) )
           {
-            v12 = *(_QWORD *)(v11 + 32);
-            if ( v12
-              && (v13 = v11 + v12 + 32) != 0
-              && ((*(void (__fastcall **)(signed __int64, __int64 *, UEL::ParametersBase *, _QWORD, UFG::qStringBuilder *))(*(_QWORD *)v13 + 24i64))(
-                    v13,
-                    &v86,
+            v11 = v10->mActionController;
+            if ( v11
+              && (v12 = (char *)&v11->m_ActionNodePlayTime + (_QWORD)v10) != 0i64
+              && ((*(void (__fastcall **)(char *, __int64 *, UEL::ParametersBase *, _QWORD, UFG::qStringBuilder *))(*(_QWORD *)v12 + 24i64))(
+                    v12,
+                    v78,
                     UEL::gCurrentParameters,
                     0i64,
                     UEL::gCurrentStringBuilder),
-                  v87) )
+                  v79) )
             {
-              if ( v87 == 4 )
-                v14 = *(float *)&v86;
+              if ( v79 == 4 )
+                v13 = *(float *)v78;
               else
-                v14 = (float)(signed int)v86;
+                v13 = (float)SLODWORD(v78[0]);
             }
             else
             {
-              v14 = *(float *)(v11 + 40);
+              v13 = *(float *)&v10->mParentContext;
             }
-            v2->mRunningMasterRate = v14;
+            this->mRunningMasterRate = v13;
           }
-          (*(void (__fastcall **)(signed __int64, ActionContext *))(*(_QWORD *)v4 + 8i64))(v4, v2->m_Context);
-          v15 = *(_QWORD *)(v4 + 24);
-          if ( v15 )
+          v4->vfptr->__vecDelDtor(v4, (unsigned int)this->m_Context);
+          v14 = v4->m_Context;
+          if ( v14 )
           {
-            if ( *(_DWORD *)(v15 + 16) == SpawnTrack::sClassNameUID )
+            if ( LODWORD(v14->mSimObject.m_pPointer) == SpawnTrack::sClassNameUID )
             {
-              v16 = v2->m_RunningSpawnTasksTmp[0];
-              v17 = (unsigned __int64 *)(v4 + 40);
-              *(_QWORD *)(v16 + 8) = v4 + 40;
-              *v17 = v16;
-              v17[1] = (unsigned __int64)v2->m_RunningSpawnTasksTmp;
-              v2->m_RunningSpawnTasksTmp[0] = v4 + 40;
+              v15 = this->m_RunningSpawnTasksTmp[0];
+              *(_QWORD *)(v15 + 8) = &v4->m_OnEnterExitCallbacksEnabled;
+              *(_QWORD *)&v4->m_OnEnterExitCallbacksEnabled = v15;
+              v4->m_previousNode = (ActionNodePlayable *)this->m_RunningSpawnTasksTmp;
+              this->m_RunningSpawnTasksTmp[0] = (unsigned __int64)&v4->m_OnEnterExitCallbacksEnabled;
             }
           }
         }
         v4 = v6;
       }
-      while ( (unsigned __int64 *)v6 != &v2->m_RunningSpawnTasksTmp[1] );
+      while ( v6 != (ActionController *)&this->m_RunningSpawnTasksTmp[1] );
     }
   }
-}ameUID )
-            {
-              v16 = v2->m_RunningSpawn
+}
 
 // File Line: 933
 // RVA: 0x275E20
 __int64 __fastcall ActionController::updateTasksTimeBegin(ActionController *this, float timeDelta, bool nodeEnd)
 {
-  char *v3; // r12
+  unsigned __int64 *v3; // r12
   unsigned __int8 v4; // r15
-  ActionController *v5; // rbx
-  bool v6; // r14
-  ActionController *v7; // rsi
-  float v8; // xmm0_4
-  signed __int64 v9; // rbp
-  Expression::IMemberMap *v10; // rcx
-  ActionNodePlayable *v11; // rax
-  Expression::IMemberMap **v12; // rdx
-  UFG::qNode<ITask,ITask> *v13; // rax
-  ActionContext *v14; // rdi
-  ActionController *v15; // rax
-  signed __int64 v16; // rcx
-  float v17; // xmm0_4
-  ActionContext *v18; // rcx
-  unsigned __int64 v19; // rax
-  char *v20; // rdx
-  ActionContext *v21; // rax
-  char v22; // al
-  __int64 v24; // [rsp+30h] [rbp-58h]
-  __int16 v25; // [rsp+44h] [rbp-44h]
+  ActionController *p_mNext; // rbx
+  float m_ActionNodePlayTime; // xmm0_4
+  __int64 p_mData; // rbp
+  Expression::IMemberMap *mResourceOwner; // rcx
+  ActionNodePlayable *m_currentNode; // rax
+  UFG::qNode<ITask,ITask> *mPrev; // rax
+  ActionContext *m_Context; // rdi
+  ActionController *mActionController; // rax
+  char *v15; // rcx
+  float v16; // xmm0_4
+  ActionContext *v17; // rcx
+  unsigned __int64 v18; // rax
+  ActionContext *v19; // rax
+  char v20; // al
+  __int64 v22; // [rsp+30h] [rbp-58h] BYREF
+  __int16 v23; // [rsp+44h] [rbp-44h]
 
-  v3 = (char *)&this->m_RunningSpawnTasksTmp[1];
+  v3 = &this->m_RunningSpawnTasksTmp[1];
   v4 = 0;
-  v5 = (ActionController *)&this->m_SequencedTasks.mNode.mNext[-1].mNext;
-  v6 = nodeEnd;
-  v7 = this;
-  if ( v5 != (ActionController *)&this->m_RunningSpawnTasksTmp[1] )
+  p_mNext = (ActionController *)&this->m_SequencedTasks.mNode.mNext[-1].mNext;
+  if ( p_mNext != (ActionController *)&this->m_RunningSpawnTasksTmp[1] )
   {
     do
     {
-      v8 = v5->m_ActionNodePlayTime;
-      v9 = (signed __int64)&v5->m_currentNode[-1].mChildren.mData;
-      if ( v6 )
+      m_ActionNodePlayTime = p_mNext->m_ActionNodePlayTime;
+      p_mData = (__int64)&p_mNext->m_currentNode[-1].mChildren.mData;
+      if ( nodeEnd )
       {
-        if ( v8 < 0.0 )
+        if ( m_ActionNodePlayTime < 0.0 )
           goto LABEL_7;
       }
-      else if ( v8 >= 0.0 && v8 <= v7->m_ActionNodePlayTime )
+      else if ( m_ActionNodePlayTime >= 0.0 && m_ActionNodePlayTime <= this->m_ActionNodePlayTime )
       {
 LABEL_7:
-        v10 = v5->mResourceOwner;
-        v11 = v5->m_currentNode;
-        v12 = &v5->mResourceOwner;
-        v10->mResourceOwner = (Expression::IMemberMap *)&v11->vfptr;
-        v11->vfptr = (Expression::IMemberMapVtbl *)v10;
-        v13 = v7->m_RunningTasks.mNode.mPrev;
-        v13->mNext = (UFG::qNode<ITask,ITask> *)&v5->mResourceOwner;
-        *v12 = (Expression::IMemberMap *)v13;
-        v12[1] = (Expression::IMemberMap *)&v7->m_RunningTasks;
-        v14 = v5->m_Context;
-        v7->m_RunningTasks.mNode.mPrev = (UFG::qNode<ITask,ITask> *)&v5->mResourceOwner;
-        if ( BYTE6(v14->mSimObject.m_pPointer) )
+        mResourceOwner = p_mNext->mResourceOwner;
+        m_currentNode = p_mNext->m_currentNode;
+        mResourceOwner->mResourceOwner = m_currentNode;
+        m_currentNode->vfptr = (Expression::IMemberMapVtbl *)mResourceOwner;
+        mPrev = this->m_RunningTasks.mNode.mPrev;
+        mPrev->mNext = (UFG::qNode<ITask,ITask> *)&p_mNext->mResourceOwner;
+        p_mNext->mResourceOwner = (Expression::IMemberMap *)mPrev;
+        p_mNext->m_currentNode = (ActionNodePlayable *)&this->m_RunningTasks;
+        m_Context = p_mNext->m_Context;
+        this->m_RunningTasks.mNode.mPrev = (UFG::qNode<ITask,ITask> *)&p_mNext->mResourceOwner;
+        if ( BYTE6(m_Context->mSimObject.m_pPointer) )
         {
-          v15 = v14->mActionController;
-          if ( v15
-            && (v16 = (signed __int64)&v14->mActionController + (_QWORD)v15) != 0
-            && ((*(void (__fastcall **)(signed __int64, __int64 *, UEL::ParametersBase *, _QWORD, UFG::qStringBuilder *))(*(_QWORD *)v16 + 24i64))(
-                  v16,
-                  &v24,
+          mActionController = m_Context->mActionController;
+          if ( mActionController
+            && (v15 = (char *)&m_Context->mActionController + (_QWORD)mActionController) != 0i64
+            && ((*(void (__fastcall **)(char *, __int64 *, UEL::ParametersBase *, _QWORD, UFG::qStringBuilder *))(*(_QWORD *)v15 + 24i64))(
+                  v15,
+                  &v22,
                   UEL::gCurrentParameters,
                   0i64,
                   UEL::gCurrentStringBuilder),
-                v25) )
+                v23) )
           {
-            if ( v25 == 4 )
-              v17 = *(float *)&v24;
+            if ( v23 == 4 )
+              v16 = *(float *)&v22;
             else
-              v17 = (float)(signed int)v24;
+              v16 = (float)(int)v22;
           }
           else
           {
-            v17 = *(float *)&v14->mParentContext;
+            v16 = *(float *)&m_Context->mParentContext;
           }
-          v7->mRunningMasterRate = v17;
+          this->mRunningMasterRate = v16;
         }
-        v5->vfptr->__vecDelDtor((Expression::IMemberMap *)&v5->vfptr, (unsigned int)v7->m_Context);
-        v18 = v5->m_Context;
-        if ( v18 && LODWORD(v18->mSimObject.m_pPointer) == SpawnTrack::sClassNameUID )
+        p_mNext->vfptr->__vecDelDtor(p_mNext, (unsigned int)this->m_Context);
+        v17 = p_mNext->m_Context;
+        if ( v17 && LODWORD(v17->mSimObject.m_pPointer) == SpawnTrack::sClassNameUID )
         {
-          v19 = v7->m_RunningSpawnTasksTmp[0];
-          v20 = &v5->m_OnEnterExitCallbacksEnabled;
-          *(_QWORD *)(v19 + 8) = (char *)v5 + 40;
-          v7->m_RunningSpawnTasksTmp[0] = (unsigned __int64)&v5->m_OnEnterExitCallbacksEnabled;
-          *(_QWORD *)v20 = v19;
-          *((_QWORD *)v20 + 1) = (char *)v7 + 80;
+          v18 = this->m_RunningSpawnTasksTmp[0];
+          *(_QWORD *)(v18 + 8) = &p_mNext->m_OnEnterExitCallbacksEnabled;
+          this->m_RunningSpawnTasksTmp[0] = (unsigned __int64)&p_mNext->m_OnEnterExitCallbacksEnabled;
+          *(_QWORD *)&p_mNext->m_OnEnterExitCallbacksEnabled = v18;
+          p_mNext->m_previousNode = (ActionNodePlayable *)this->m_RunningSpawnTasksTmp;
         }
-        if ( v6 )
-          v5->vfptr->CreateClone((Expression::IMemberMap *)&v5->vfptr);
+        if ( nodeEnd )
+          p_mNext->vfptr->CreateClone(p_mNext);
         goto LABEL_26;
       }
-      v21 = v5->m_Context;
-      if ( BYTE6(v21->mSimObject.m_pPointer) )
+      v19 = p_mNext->m_Context;
+      if ( BYTE6(v19->mSimObject.m_pPointer) )
       {
-        if ( v6 )
+        if ( nodeEnd )
         {
-          if ( *(float *)&v21->mDebugBreak < 0.0 )
+          if ( *(float *)&v19->mDebugBreak < 0.0 )
           {
 LABEL_29:
-            v22 = 1;
+            v20 = 1;
             goto LABEL_25;
           }
         }
-        else if ( *(float *)&v21->mDebugBreak >= 0.0 )
+        else if ( *(float *)&v19->mDebugBreak >= 0.0 )
         {
           goto LABEL_29;
         }
       }
-      v22 = 0;
+      v20 = 0;
 LABEL_25:
-      v4 |= v22;
+      v4 |= v20;
 LABEL_26:
-      v5 = (ActionController *)v9;
+      p_mNext = (ActionController *)p_mData;
     }
-    while ( (char *)v9 != v3 );
+    while ( (unsigned __int64 *)p_mData != v3 );
   }
   return v4;
-}
+}xt = (ActionController *)p_mData;
+    }
+    while
 
 // File Line: 1049
 // RVA: 0x275D30
 void __fastcall ActionController::updateTasks(ActionController *this, float timeDelta)
 {
-  ActionNodePlayable **v2; // rbp
-  ActionController *v3; // rbx
-  ActionController *v4; // rsi
+  ActionNodePlayable **p_m_SequenceNode; // rbp
+  ActionController *p_mNext; // rbx
   float v5; // xmm6_4
-  signed __int64 v6; // rdi
-  Expression::IMemberMap *v7; // rdx
-  ActionNodePlayable *v8; // rax
-  Expression::IMemberMap **v9; // r8
-  signed __int64 v10; // rcx
-  signed __int64 v11; // rbx
+  __int64 p_mData; // rdi
+  Expression::IMemberMap *mResourceOwner; // rdx
+  ActionNodePlayable *m_currentNode; // rax
+  ActionController *v9; // rcx
+  ActionController *v10; // rbx
 
-  v2 = &this->m_SequenceNode;
-  v3 = (ActionController *)&this->m_RunningTasks.mNode.mNext[-1].mNext;
-  v4 = this;
-  if ( v3 != (ActionController *)&this->m_SequenceNode )
+  p_m_SequenceNode = &this->m_SequenceNode;
+  p_mNext = (ActionController *)&this->m_RunningTasks.mNode.mNext[-1].mNext;
+  if ( p_mNext != (ActionController *)&this->m_SequenceNode )
   {
     do
     {
-      v5 = *(float *)&v3->mUpdating;
-      v6 = (signed __int64)&v3->m_currentNode[-1].mChildren.mData;
-      if ( !(unsigned __int8)v3->vfptr->CreateClone((Expression::IMemberMap *)&v3->vfptr)
-        || v5 >= 0.0 && v5 <= v4->m_ActionNodePlayTime )
+      v5 = *(float *)&p_mNext->mUpdating;
+      p_mData = (__int64)&p_mNext->m_currentNode[-1].mChildren.mData;
+      if ( !p_mNext->vfptr->CreateClone(p_mNext) || v5 >= 0.0 && v5 <= this->m_ActionNodePlayTime )
       {
-        ((void (__fastcall *)(ActionController *))v3->vfptr->Serialize)(v3);
-        v7 = v3->mResourceOwner;
-        v8 = v3->m_currentNode;
-        v9 = &v3->mResourceOwner;
-        v7->mResourceOwner = (Expression::IMemberMap *)&v8->vfptr;
-        v8->vfptr = (Expression::IMemberMapVtbl *)v7;
-        *v9 = (Expression::IMemberMap *)v9;
-        v9[1] = (Expression::IMemberMap *)v9;
-        v3->vfptr->FindWithOldPath((Expression::IMemberMap *)&v3->vfptr, (const char *)1);
+        ((void (__fastcall *)(ActionController *))p_mNext->vfptr->Serialize)(p_mNext);
+        mResourceOwner = p_mNext->mResourceOwner;
+        m_currentNode = p_mNext->m_currentNode;
+        mResourceOwner->mResourceOwner = m_currentNode;
+        m_currentNode->vfptr = (Expression::IMemberMapVtbl *)mResourceOwner;
+        p_mNext->mResourceOwner = (Expression::IMemberMap *)&p_mNext->mResourceOwner;
+        p_mNext->m_currentNode = (ActionNodePlayable *)&p_mNext->mResourceOwner;
+        p_mNext->vfptr->FindWithOldPath(p_mNext, (const char *)1);
       }
-      v3 = (ActionController *)v6;
+      p_mNext = (ActionController *)p_mData;
     }
-    while ( (ActionNodePlayable **)v6 != v2 );
+    while ( (ActionNodePlayable **)p_mData != p_m_SequenceNode );
   }
-  v10 = (signed __int64)&v4->m_FinishUpdateTasks.mNode.mNext[-1].mNext;
-  if ( (ActionController *)v10 != (ActionController *)&v4->mRunningMasterRate )
+  v9 = (ActionController *)&this->m_FinishUpdateTasks.mNode.mNext[-1].mNext;
+  if ( v9 != (ActionController *)&this->mRunningMasterRate )
   {
     do
     {
-      v11 = *(_QWORD *)(v10 + 16) - 8i64;
-      (**(void (***)(void))v10)();
-      v10 = v11;
+      v10 = (ActionController *)&v9->m_currentNode[-1].mChildren.mData;
+      ((void (__fastcall *)(ActionController *))v9->vfptr->FindWithOldPath)(v9);
+      v9 = v10;
     }
-    while ( (ActionController *)v11 != (ActionController *)&v4->mRunningMasterRate );
+    while ( v10 != (ActionController *)&this->mRunningMasterRate );
   }
 }
 
@@ -1675,30 +1605,26 @@ void __fastcall ActionController::updateTasks(ActionController *this, float time
 // RVA: 0x273E10
 void __fastcall ActionController::clearSequencedTasks(ActionController *this)
 {
-  char *v1; // rdi
-  ActionController *v2; // rbx
-  signed __int64 v3; // rcx
-  UFG::qNode<ITask,ITask> *v4; // r8
-  UFG::qNode<ITask,ITask> *v5; // rdx
-  UFG::qNode<ITask,ITask> *v6; // rax
+  UFG::qNode<ITask,ITask> *v1; // rdi
+  UFG::qNode<ITask,ITask> **p_mNext; // rcx
+  UFG::qNode<ITask,ITask> *mPrev; // rdx
+  UFG::qNode<ITask,ITask> *v5; // rax
 
-  v1 = (char *)&this->m_RunningSpawnTasksTmp[1];
-  v2 = this;
+  v1 = (UFG::qNode<ITask,ITask> *)&this->m_RunningSpawnTasksTmp[1];
   if ( (unsigned __int64 *)&this->m_SequencedTasks.mNode.mNext[-1].mNext != &this->m_RunningSpawnTasksTmp[1] )
   {
     do
     {
-      v3 = (signed __int64)&v2->m_SequencedTasks.mNode.mNext[-1].mNext;
-      v4 = v2->m_SequencedTasks.mNode.mNext;
-      v5 = v2->m_SequencedTasks.mNode.mNext->mPrev;
-      v6 = *(UFG::qNode<ITask,ITask> **)(v3 + 16);
-      v5->mNext = v6;
-      v6->mPrev = v5;
-      v4->mPrev = v4;
-      v4->mNext = v4;
-      (**(void (__fastcall ***)(signed __int64, signed __int64))v3)(v3, 1i64);
+      p_mNext = &this->m_SequencedTasks.mNode.mNext[-1].mNext;
+      mPrev = this->m_SequencedTasks.mNode.mNext->mPrev;
+      v5 = p_mNext[2];
+      mPrev->mNext = v5;
+      v5->mPrev = mPrev;
+      p_mNext[1] = (UFG::qNode<ITask,ITask> *)(p_mNext + 1);
+      p_mNext[2] = (UFG::qNode<ITask,ITask> *)(p_mNext + 1);
+      ((void (__fastcall *)(UFG::qNode<ITask,ITask> **, __int64))(*p_mNext)->mPrev)(p_mNext, 1i64);
     }
-    while ( (char *)&v2->m_SequencedTasks.mNode.mNext[-1].mNext != v1 );
+    while ( (UFG::qNode<ITask,ITask> *)((char *)this->m_SequencedTasks.mNode.mNext - 8) != v1 );
   }
 }
 
@@ -1706,29 +1632,23 @@ void __fastcall ActionController::clearSequencedTasks(ActionController *this)
 // RVA: 0x273C70
 void __fastcall ActionController::allTasksTimeEnd(ActionController *this)
 {
-  ActionNodePlayable **v1; // rsi
-  ActionController *v2; // rdi
-  UFG::qNode<ITask,ITask> *v3; // rbx
-  UFG::qNode<ITask,ITask> *v4; // rdx
+  ActionNodePlayable **p_m_SequenceNode; // rsi
+  UFG::qNode<ITask,ITask> *mNext; // rbx
+  UFG::qNode<ITask,ITask> *mPrev; // rdx
   UFG::qNode<ITask,ITask> *v5; // rax
 
-  v1 = &this->m_SequenceNode;
-  v2 = this;
-  if ( (ActionNodePlayable **)&this->m_RunningTasks.mNode.mNext[-1].mNext != &this->m_SequenceNode )
+  p_m_SequenceNode = &this->m_SequenceNode;
+  while ( (ActionNodePlayable **)&this->m_RunningTasks.mNode.mNext[-1].mNext != p_m_SequenceNode )
   {
-    do
-    {
-      v3 = v2->m_RunningTasks.mNode.mNext;
-      ((void (__fastcall *)(UFG::qNode<ITask,ITask> **))v3[-1].mNext[1].mNext)(&v3[-1].mNext);
-      v4 = v3->mPrev;
-      v5 = v3->mNext;
-      v4->mNext = v5;
-      v5->mPrev = v4;
-      v3->mPrev = v3;
-      v3->mNext = v3;
-      ((void (__fastcall *)(UFG::qNode<ITask,ITask> **, signed __int64))v3[-1].mNext->mPrev)(&v3[-1].mNext, 1i64);
-    }
-    while ( (ActionNodePlayable **)&v2->m_RunningTasks.mNode.mNext[-1].mNext != v1 );
+    mNext = this->m_RunningTasks.mNode.mNext;
+    ((void (__fastcall *)(UFG::qNode<ITask,ITask> **))mNext[-1].mNext[1].mNext)(&mNext[-1].mNext);
+    mPrev = mNext->mPrev;
+    v5 = mNext->mNext;
+    mPrev->mNext = v5;
+    v5->mPrev = mPrev;
+    mNext->mPrev = mNext;
+    mNext->mNext = mNext;
+    ((void (__fastcall *)(UFG::qNode<ITask,ITask> **, __int64))mNext[-1].mNext->mPrev)(&mNext[-1].mNext, 1i64);
   }
 }
 
@@ -1736,81 +1656,77 @@ void __fastcall ActionController::allTasksTimeEnd(ActionController *this)
 // RVA: 0x2755C0
 void __fastcall ActionController::nodeCleanup(ActionController *this)
 {
-  ActionNodePlayable *v1; // rdi
-  ActionController *v2; // rsi
-  ConditionCallback *v3; // rbx
+  ActionNodePlayable *m_currentNode; // rdi
+  ConditionCallback *mFirstCallback; // rbx
   ActionContext *i; // rbp
   ActionNodePlayable *v5; // rdx
-  ActionNodePlayable *v6; // rcx
-  __int64 v7; // rax
-  signed __int64 v8; // rdx
+  ActionNode *m_OpeningBranch; // rcx
+  __int64 mOffset; // rax
+  UFG::qOffset64<ActionNode *> *p_mParent; // rdx
   __int64 v9; // rax
-  signed __int64 v10; // rcx
+  UFG::qOffset64<ActionNode *> *v10; // rcx
   bool v11; // zf
   __int64 v12; // rax
-  signed __int64 v13; // rdi
-  signed __int64 v14; // rbx
-  signed __int64 v15; // rbp
-  __int64 v16; // rcx
-  _QWORD *v17; // rax
-  UFG::qNode<ITask,ITask> **v18; // rdx
-  UFG::qNode<ITask,ITask> *v19; // rax
-  __int64 v20; // rdi
-  __int64 v21; // rax
-  signed __int64 v22; // rcx
-  float v23; // xmm0_4
-  __int64 v24; // rcx
-  unsigned __int64 v25; // rax
-  unsigned __int64 *v26; // rdx
-  signed __int64 v27; // rax
-  __int64 v28; // rcx
-  signed __int64 v29; // rdx
-  __int64 v30; // rcx
+  UFG::qOffset64<ActionNode *> *v13; // rdi
+  ActionController *p_mNext; // rbx
+  ActionController *p_mData; // rbp
+  Expression::IMemberMap *mResourceOwner; // rcx
+  ActionNodePlayable *v17; // rax
+  UFG::qNode<ITask,ITask> *mPrev; // rax
+  ActionContext *m_Context; // rdi
+  ActionController *mActionController; // rax
+  char *v21; // rcx
+  float v22; // xmm0_4
+  ActionContext *v23; // rcx
+  unsigned __int64 v24; // rax
+  ActionNodePlayable *v25; // rax
+  __int64 v26; // rcx
+  ActionNodePlayable *v27; // rdx
+  __int64 mMostUsedIndex; // rcx
   ActionContext *j; // rax
-  __int64 v32; // [rsp+30h] [rbp-48h]
-  __int16 v33; // [rsp+44h] [rbp-34h]
+  __int64 v30; // [rsp+30h] [rbp-48h] BYREF
+  __int16 v31; // [rsp+44h] [rbp-34h]
 
-  v1 = this->m_currentNode;
-  v2 = this;
+  m_currentNode = this->m_currentNode;
   this->mUpdating = 1;
-  if ( v1 )
-    this->m_previousNode = v1;
-  if ( this->m_OnEnterExitCallbacksEnabled && v1 )
+  if ( m_currentNode )
+    this->m_previousNode = m_currentNode;
+  if ( this->m_OnEnterExitCallbacksEnabled && m_currentNode )
   {
     do
     {
-      v3 = v1->mFirstCallback;
-      for ( i = v2->m_Context; v3; v3 = v3->mNextCallback )
+      mFirstCallback = m_currentNode->mFirstCallback;
+      for ( i = this->m_Context; mFirstCallback; mFirstCallback = mFirstCallback->mNextCallback )
       {
-        if ( v3->mType == 1 )
-          ((void (__fastcall *)(fastdelegate::detail::GenericClass *, ActionNodePlayable *, ActionContext *))v3->m_CallbackDelegate.m_Closure.m_pFunction)(
-            v3->m_CallbackDelegate.m_Closure.m_pthis,
-            v1,
+        if ( mFirstCallback->mType == ON_EXIT )
+          ((void (__fastcall *)(fastdelegate::detail::GenericClass *, ActionNodePlayable *, ActionContext *))mFirstCallback->m_CallbackDelegate.m_Closure.m_pFunction)(
+            mFirstCallback->m_CallbackDelegate.m_Closure.m_pthis,
+            m_currentNode,
             i);
       }
-      v5 = v1;
-      v6 = (ActionNodePlayable *)v2->m_Context->m_OpeningBranch;
-      if ( v1 == v6 )
+      v5 = m_currentNode;
+      m_OpeningBranch = this->m_Context->m_OpeningBranch;
+      if ( m_currentNode == m_OpeningBranch )
         break;
-      while ( v6 )
+      while ( m_OpeningBranch )
       {
-        if ( v5->mID.mUID != v6->mID.mUID )
+        if ( v5->mID.mUID != m_OpeningBranch->mID.mUID )
           goto LABEL_22;
-        v7 = v5->mParent.mOffset;
-        v8 = (signed __int64)&v5->mParent;
-        if ( v7 )
-          v5 = (ActionNodePlayable *)(v7 + v8);
+        mOffset = v5->mParent.mOffset;
+        p_mParent = &v5->mParent;
+        if ( mOffset )
+          v5 = (ActionNodePlayable *)((char *)p_mParent + mOffset);
         else
           v5 = 0i64;
-        v9 = v6->mParent.mOffset;
-        v10 = (signed __int64)&v6->mParent;
+        v9 = m_OpeningBranch->mParent.mOffset;
+        v10 = &m_OpeningBranch->mParent;
         if ( v9 )
-          v6 = (ActionNodePlayable *)(v9 + v10);
+          m_OpeningBranch = (ActionNode *)((char *)v10 + v9);
         else
-          v6 = 0i64;
+          m_OpeningBranch = 0i64;
         if ( !v5 )
         {
-          v11 = v6 == 0i64;
+          v11 = m_OpeningBranch == 0i64;
           goto LABEL_21;
         }
       }
@@ -1819,125 +1735,123 @@ LABEL_21:
       if ( v11 )
         break;
 LABEL_22:
-      v12 = v1->mParent.mOffset;
-      v13 = (signed __int64)&v1->mParent;
+      v12 = m_currentNode->mParent.mOffset;
+      v13 = &m_currentNode->mParent;
       if ( !v12 )
         break;
-      v1 = (ActionNodePlayable *)(v12 + v13);
+      m_currentNode = (ActionNodePlayable *)((char *)v13 + v12);
     }
-    while ( v1 );
+    while ( m_currentNode );
   }
-  v14 = (signed __int64)&v2->m_SequencedTasks.mNode.mNext[-1].mNext;
-  if ( (unsigned __int64 *)v14 != &v2->m_RunningSpawnTasksTmp[1] )
+  p_mNext = (ActionController *)&this->m_SequencedTasks.mNode.mNext[-1].mNext;
+  if ( p_mNext != (ActionController *)&this->m_RunningSpawnTasksTmp[1] )
   {
     do
     {
-      v15 = *(_QWORD *)(v14 + 16) - 8i64;
-      if ( *(float *)(v14 + 32) < 0.0 )
+      p_mData = (ActionController *)&p_mNext->m_currentNode[-1].mChildren.mData;
+      if ( p_mNext->m_ActionNodePlayTime < 0.0 )
       {
-        v16 = *(_QWORD *)(v14 + 8);
-        v17 = *(_QWORD **)(v14 + 16);
-        v18 = (UFG::qNode<ITask,ITask> **)(v14 + 8);
-        *(_QWORD *)(v16 + 8) = v17;
-        *v17 = v16;
-        *v18 = (UFG::qNode<ITask,ITask> *)v18;
-        v18[1] = (UFG::qNode<ITask,ITask> *)v18;
-        v19 = v2->m_RunningTasks.mNode.mPrev;
-        v19->mNext = (UFG::qNode<ITask,ITask> *)(v14 + 8);
-        *v18 = v19;
-        v18[1] = &v2->m_RunningTasks.mNode;
-        v2->m_RunningTasks.mNode.mPrev = (UFG::qNode<ITask,ITask> *)(v14 + 8);
-        v20 = *(_QWORD *)(v14 + 24);
-        if ( *(_BYTE *)(v20 + 22) )
+        mResourceOwner = p_mNext->mResourceOwner;
+        v17 = p_mNext->m_currentNode;
+        mResourceOwner->mResourceOwner = v17;
+        v17->vfptr = (Expression::IMemberMapVtbl *)mResourceOwner;
+        p_mNext->mResourceOwner = (Expression::IMemberMap *)&p_mNext->mResourceOwner;
+        p_mNext->m_currentNode = (ActionNodePlayable *)&p_mNext->mResourceOwner;
+        mPrev = this->m_RunningTasks.mNode.mPrev;
+        mPrev->mNext = (UFG::qNode<ITask,ITask> *)&p_mNext->mResourceOwner;
+        p_mNext->mResourceOwner = (Expression::IMemberMap *)mPrev;
+        p_mNext->m_currentNode = (ActionNodePlayable *)&this->m_RunningTasks;
+        this->m_RunningTasks.mNode.mPrev = (UFG::qNode<ITask,ITask> *)&p_mNext->mResourceOwner;
+        m_Context = p_mNext->m_Context;
+        if ( BYTE6(m_Context->mSimObject.m_pPointer) )
         {
-          v21 = *(_QWORD *)(v20 + 32);
-          if ( v21
-            && (v22 = v21 + v20 + 32) != 0
-            && ((*(void (__fastcall **)(signed __int64, __int64 *, UEL::ParametersBase *, _QWORD, UFG::qStringBuilder *))(*(_QWORD *)v22 + 24i64))(
-                  v22,
-                  &v32,
+          mActionController = m_Context->mActionController;
+          if ( mActionController
+            && (v21 = (char *)&m_Context->mActionController + (_QWORD)mActionController) != 0i64
+            && ((*(void (__fastcall **)(char *, __int64 *, UEL::ParametersBase *, _QWORD, UFG::qStringBuilder *))(*(_QWORD *)v21 + 24i64))(
+                  v21,
+                  &v30,
                   UEL::gCurrentParameters,
                   0i64,
                   UEL::gCurrentStringBuilder),
-                v33) )
+                v31) )
           {
-            if ( v33 == 4 )
-              v23 = *(float *)&v32;
+            if ( v31 == 4 )
+              v22 = *(float *)&v30;
             else
-              v23 = (float)(signed int)v32;
+              v22 = (float)(int)v30;
           }
           else
           {
-            v23 = *(float *)(v20 + 40);
+            v22 = *(float *)&m_Context->mParentContext;
           }
-          v2->mRunningMasterRate = v23;
+          this->mRunningMasterRate = v22;
         }
-        (*(void (__fastcall **)(signed __int64, ActionContext *))(*(_QWORD *)v14 + 8i64))(v14, v2->m_Context);
-        v24 = *(_QWORD *)(v14 + 24);
-        if ( v24 && *(_DWORD *)(v24 + 16) == SpawnTrack::sClassNameUID )
+        p_mNext->vfptr->__vecDelDtor(p_mNext, (unsigned int)this->m_Context);
+        v23 = p_mNext->m_Context;
+        if ( v23 && LODWORD(v23->mSimObject.m_pPointer) == SpawnTrack::sClassNameUID )
         {
-          v25 = v2->m_RunningSpawnTasksTmp[0];
-          v26 = (unsigned __int64 *)(v14 + 40);
-          *(_QWORD *)(v25 + 8) = v14 + 40;
-          *v26 = v25;
-          v26[1] = (unsigned __int64)v2->m_RunningSpawnTasksTmp;
-          v2->m_RunningSpawnTasksTmp[0] = v14 + 40;
+          v24 = this->m_RunningSpawnTasksTmp[0];
+          *(_QWORD *)(v24 + 8) = &p_mNext->m_OnEnterExitCallbacksEnabled;
+          *(_QWORD *)&p_mNext->m_OnEnterExitCallbacksEnabled = v24;
+          p_mNext->m_previousNode = (ActionNodePlayable *)this->m_RunningSpawnTasksTmp;
+          this->m_RunningSpawnTasksTmp[0] = (unsigned __int64)&p_mNext->m_OnEnterExitCallbacksEnabled;
         }
-        (*(void (__fastcall **)(signed __int64))(*(_QWORD *)v14 + 16i64))(v14);
+        p_mNext->vfptr->CreateClone(p_mNext);
       }
-      v14 = v15;
+      p_mNext = p_mData;
     }
-    while ( (unsigned __int64 *)v15 != &v2->m_RunningSpawnTasksTmp[1] );
+    while ( p_mData != (ActionController *)&this->m_RunningSpawnTasksTmp[1] );
   }
-  ActionController::allTasksTimeEnd(v2);
-  ActionController::clearSequencedTasks(v2);
-  v27 = (signed __int64)v2->m_currentNode;
-  if ( v27 )
+  ActionController::allTasksTimeEnd(this);
+  ActionController::clearSequencedTasks(this);
+  v25 = this->m_currentNode;
+  if ( v25 )
   {
     while ( 1 )
     {
-      v28 = *(_QWORD *)(v27 + 16);
-      if ( !v28 )
+      v26 = v25->mParent.mOffset;
+      if ( !v26 )
         break;
-      v29 = v28 + v27 + 16;
-      if ( !v29 )
+      v27 = (ActionNodePlayable *)((char *)&v25->mParent + v26);
+      if ( !v27 )
         break;
-      v30 = *(unsigned int *)(v27 + 32);
-      if ( (_DWORD)v30 != -1 )
+      mMostUsedIndex = v25->mMostUsedIndex;
+      if ( (_DWORD)mMostUsedIndex != -1 )
       {
-        for ( j = v2->m_Context; j; j = j->mParentContext )
-          --j->mMostUsedPlayCount[v30];
+        for ( j = this->m_Context; j; j = j->mParentContext )
+          --j->mMostUsedPlayCount[mMostUsedIndex];
       }
-      v27 = v29;
+      v25 = v27;
     }
   }
-  v2->m_currentNode = 0i64;
-  v2->m_NumPlayingNodes = 0;
-  v2->m_PlayingMostUsedMask = 0i64;
-  v2->mOverRideNode = 0;
-  v2->m_ActionNodePlayTime = 0.0;
-  v2->mUpdating = 0;
-  v2->m_SequencePriority = -1;
+  this->m_currentNode = 0i64;
+  this->m_NumPlayingNodes = 0;
+  this->m_PlayingMostUsedMask = 0i64;
+  this->mOverRideNode = 0;
+  this->m_ActionNodePlayTime = 0.0;
+  this->mUpdating = 0;
+  this->m_SequencePriority = -1;
 }
 
 // File Line: 1269
 // RVA: 0x26F310
-char __fastcall ActionController::IsPlaying(ActionController *this, ActionNode *node)
+char __fastcall ActionController::IsPlaying(ActionController *this, ActionNodePlayable *node)
 {
-  ActionNodePlayable *v2; // rax
-  __int64 v3; // rcx
+  ActionNodePlayable *m_currentNode; // rax
+  __int64 mOffset; // rcx
 
-  v2 = this->m_currentNode;
-  if ( v2 )
+  m_currentNode = this->m_currentNode;
+  if ( m_currentNode )
   {
     while ( 1 )
     {
-      v3 = v2->mParent.mOffset;
-      if ( !v3 || !(UFG::qOffset64<ActionNode *> *)((char *)&v2->mParent + v3) )
+      mOffset = m_currentNode->mParent.mOffset;
+      if ( !mOffset || !(UFG::qOffset64<ActionNode *> *)((char *)&m_currentNode->mParent + mOffset) )
         break;
-      if ( node == (ActionNode *)v2 )
+      if ( node == m_currentNode )
         return 1;
-      v2 = (ActionNodePlayable *)((char *)v2 + v3 + 16);
+      m_currentNode = (ActionNodePlayable *)((char *)m_currentNode + mOffset + 16);
     }
   }
   return 0;
@@ -1947,229 +1861,232 @@ char __fastcall ActionController::IsPlaying(ActionController *this, ActionNode *
 // RVA: 0x1488310
 __int64 dynamic_initializer_for__gPlayEntries__()
 {
-  return atexit(dynamic_atexit_destructor_for__gPlayEntries__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gPlayEntries__);
 }
 
 // File Line: 1368
 // RVA: 0x26F170
-unsigned __int8 __fastcall ActionController::IsPlaying(ActionController *this, ActionID *node_id, unsigned int mostUsedIndex, const bool recurseOnSpawns)
+unsigned __int8 __fastcall ActionController::IsPlaying(
+        ActionController *this,
+        ActionID *node_id,
+        unsigned int mostUsedIndex,
+        const bool recurseOnSpawns)
 {
-  unsigned int v4; // ebx
-  ActionController *v5; // r10
-  unsigned __int8 result; // al
-  unsigned __int64 v7; // rax
-  unsigned int v8; // edx
+  unsigned int mUID; // ebx
+  unsigned __int64 m_PlayingMostUsedMask; // rax
+  unsigned int m_NumPlayingNodes; // edx
   unsigned int v9; // ecx
-  ActionID *v10; // rax
-  signed __int64 v11; // r11
-  signed __int64 v12; // rdx
+  ActionID *m_PlayingNodeUID; // rax
+  char *p_m_OnEnterExitCallbacksEnabled; // r11
+  ActionController *p_mPad2; // rdx
   unsigned int v13; // esi
   unsigned int v14; // edi
-  signed __int64 v15; // r9
-  signed __int64 v16; // r10
-  signed __int64 v17; // rcx
-  signed __int64 v18; // r8
+  Expression::IMemberMap **p_mResourceOwner; // r9
+  char *p_m_previousNode; // r10
+  __int64 p_mNext; // rcx
+  __int64 v18; // r8
   __int64 v19; // rax
   __int64 v20; // rax
-  unsigned int v21; // er8
+  unsigned int v21; // r8d
   unsigned int v22; // ecx
   _DWORD *v23; // rax
   __m128i v24[32]; // [rsp+0h] [rbp-208h]
 
-  v4 = node_id->mUID;
-  v5 = this;
+  mUID = node_id->mUID;
   if ( mostUsedIndex == -1 )
   {
-    v8 = this->m_NumPlayingNodes;
+    m_NumPlayingNodes = this->m_NumPlayingNodes;
     v9 = 0;
-    if ( v8 )
+    if ( m_NumPlayingNodes )
     {
-      v10 = v5->m_PlayingNodeUID;
-      while ( v10->mUID != v4 )
+      m_PlayingNodeUID = this->m_PlayingNodeUID;
+      while ( m_PlayingNodeUID->mUID != mUID )
       {
         ++v9;
-        ++v10;
-        if ( v9 >= v8 )
+        ++m_PlayingNodeUID;
+        if ( v9 >= m_NumPlayingNodes )
           goto LABEL_9;
       }
-      result = 1;
+      return 1;
     }
     else
     {
 LABEL_9:
-      if ( recurseOnSpawns
-        && (v11 = (signed __int64)&v5->m_OnEnterExitCallbacksEnabled,
-            v12 = v5->m_RunningSpawnTasksTmp[1] - 40,
-            (char *)v12 != &v5->m_OnEnterExitCallbacksEnabled) )
+      if ( !recurseOnSpawns )
+        return 0;
+      p_m_OnEnterExitCallbacksEnabled = &this->m_OnEnterExitCallbacksEnabled;
+      p_mPad2 = (ActionController *)(this->m_RunningSpawnTasksTmp[1] - 40);
+      if ( p_mPad2 == (ActionController *)&this->m_OnEnterExitCallbacksEnabled )
+      {
+        return 0;
+      }
+      else
       {
         v13 = 1;
-        _mm_store_si128(v24, (__m128i)0i64);
-        if ( v12 )
+        v24[0] = 0i64;
+        if ( p_mPad2 )
         {
           v14 = 0;
           while ( 1 )
           {
-            v15 = v12 + 288;
-            v16 = v12 + 328;
-            v17 = *(_QWORD *)(v12 + 376) - 40i64;
-            if ( v17 == v12 + 328 )
+            p_mResourceOwner = &p_mPad2[1].mResourceOwner;
+            p_m_previousNode = (char *)&p_mPad2[1].m_previousNode;
+            p_mNext = (__int64)&p_mPad2[1].m_SequencedTasks.mNode.mPrev[-3].mNext;
+            if ( (ActionNodePlayable **)p_mNext == &p_mPad2[1].m_previousNode )
             {
-              v12 = *(_QWORD *)(v12 + 48) - 40i64;
-              if ( v12 == v11 )
+              p_mPad2 = (ActionController *)&p_mPad2->m_previousNode[-1].mPad2;
+              if ( p_mPad2 == (ActionController *)p_m_OnEnterExitCallbacksEnabled )
               {
                 --v13;
                 v20 = v14--;
-                v12 = v24[v20].m128i_i64[0];
-                v11 = v24[v20].m128i_i64[1];
+                p_mPad2 = (ActionController *)v24[v20].m128i_i64[0];
+                p_m_OnEnterExitCallbacksEnabled = (char *)v24[v20].m128i_i64[1];
               }
             }
             else
             {
-              v18 = *(_QWORD *)(v12 + 48) - 40i64;
-              if ( v18 != v11 )
+              v18 = (__int64)&p_mPad2->m_previousNode[-1].mPad2;
+              if ( (char *)v18 != p_m_OnEnterExitCallbacksEnabled )
               {
                 v19 = v13++;
                 v19 *= 16i64;
                 ++v14;
                 *(__int64 *)((char *)v24[0].m128i_i64 + v19) = v18;
-                *(__int64 *)((char *)&v24[0].m128i_i64[1] + v19) = v11;
+                *(__int64 *)((char *)&v24[0].m128i_i64[1] + v19) = (__int64)p_m_OnEnterExitCallbacksEnabled;
               }
-              v12 = v17;
-              v11 = v16;
+              p_mPad2 = (ActionController *)p_mNext;
+              p_m_OnEnterExitCallbacksEnabled = p_m_previousNode;
             }
-            v21 = *(_DWORD *)(v15 + 144);
+            v21 = *((_DWORD *)p_mResourceOwner + 36);
             v22 = 0;
             if ( v21 )
               break;
 LABEL_24:
-            if ( !v12 )
+            if ( !p_mPad2 )
               return 0;
           }
-          v23 = (_DWORD *)(v15 + 148);
-          while ( *v23 != v4 )
+          v23 = (_DWORD *)p_mResourceOwner + 37;
+          while ( *v23 != mUID )
           {
             ++v22;
             ++v23;
             if ( v22 >= v21 )
               goto LABEL_24;
           }
-          result = 1;
+          return 1;
         }
         else
         {
-          result = 0;
+          return 0;
         }
-      }
-      else
-      {
-        result = 0;
       }
     }
   }
   else if ( recurseOnSpawns )
   {
-    result = this->m_Context->mMostUsedPlayCount[mostUsedIndex] != 0;
+    return this->m_Context->mMostUsedPlayCount[mostUsedIndex] != 0;
   }
   else
   {
-    v7 = this->m_PlayingMostUsedMask;
-    result = _bittest64((const signed __int64 *)&v7, mostUsedIndex);
+    m_PlayingMostUsedMask = this->m_PlayingMostUsedMask;
+    return _bittest64((const __int64 *)&m_PlayingMostUsedMask, mostUsedIndex);
   }
-  return result;
 }
 
 // File Line: 1615
 // RVA: 0x26F400
-char __fastcall ActionController::IsPlayingFullPath(ActionController *this, ActionNode *testNode, const bool recurseOnSpawns)
+char __fastcall ActionController::IsPlayingFullPath(
+        ActionController *this,
+        ActionNodePlayable *testNode,
+        const bool recurseOnSpawns)
 {
-  ActionNodePlayable *v3; // rax
-  ActionController *v4; // r10
-  unsigned int v5; // ebp
+  ActionNodePlayable *m_currentNode; // rax
+  unsigned int mMostUsedIndex; // ebp
   unsigned int v6; // edi
-  signed __int64 v7; // r14
+  __int64 v7; // r14
   unsigned int v8; // esi
-  __int64 v9; // rcx
-  signed __int64 v11; // rbx
-  signed __int64 v12; // r9
-  signed __int64 v13; // r10
-  signed __int64 v14; // r11
-  signed __int64 v15; // rcx
-  signed __int64 v16; // r8
+  __int64 mOffset; // rcx
+  char *p_m_OnEnterExitCallbacksEnabled; // rbx
+  ActionController *p_mPad2; // r9
+  Expression::IMemberMap **p_mResourceOwner; // r10
+  char *p_m_previousNode; // r11
+  __int64 p_mNext; // rcx
+  __int64 v16; // r8
   __int64 v17; // rax
   __int64 v18; // rax
   ActionNode *v19; // rax
   __int64 v20; // rcx
   __int128 v21[32]; // [rsp+0h] [rbp-208h]
 
-  v3 = this->m_currentNode;
-  v4 = this;
+  m_currentNode = this->m_currentNode;
   if ( testNode )
-    v5 = testNode->mMostUsedIndex;
+    mMostUsedIndex = testNode->mMostUsedIndex;
   else
-    v5 = -1;
+    mMostUsedIndex = -1;
   v6 = 0;
   v7 = 0i64;
   v8 = 1;
-  if ( v5 == -1 || (v7 = 1i64 << v5, (1i64 << v5) & this->m_PlayingMostUsedMask) )
+  if ( mMostUsedIndex == -1
+    || (v7 = 1i64 << mMostUsedIndex, ((1i64 << mMostUsedIndex) & this->m_PlayingMostUsedMask) != 0) )
   {
-    if ( v3 )
+    if ( m_currentNode )
     {
       while ( 1 )
       {
-        v9 = v3->mParent.mOffset;
-        if ( !v9 || !(UFG::qOffset64<ActionNode *> *)((char *)&v3->mParent + v9) )
+        mOffset = m_currentNode->mParent.mOffset;
+        if ( !mOffset || !(UFG::qOffset64<ActionNode *> *)((char *)&m_currentNode->mParent + mOffset) )
           break;
-        if ( (unsigned int)testNode >= (unsigned int)v3 )
+        if ( (unsigned int)testNode >= (unsigned int)m_currentNode )
         {
-          if ( testNode == (ActionNode *)v3 )
+          if ( testNode == m_currentNode )
             return 1;
-          if ( (unsigned int)testNode > (unsigned int)v3 )
+          if ( (unsigned int)testNode > (unsigned int)m_currentNode )
             break;
         }
-        v3 = (ActionNodePlayable *)((char *)v3 + v9 + 16);
+        m_currentNode = (ActionNodePlayable *)((char *)m_currentNode + mOffset + 16);
       }
     }
   }
   if ( !recurseOnSpawns )
     return 0;
-  v11 = (signed __int64)&v4->m_OnEnterExitCallbacksEnabled;
-  v12 = v4->m_RunningSpawnTasksTmp[1] - 40;
-  if ( (char *)v12 != &v4->m_OnEnterExitCallbacksEnabled )
+  p_m_OnEnterExitCallbacksEnabled = &this->m_OnEnterExitCallbacksEnabled;
+  p_mPad2 = (ActionController *)(this->m_RunningSpawnTasksTmp[1] - 40);
+  if ( p_mPad2 != (ActionController *)&this->m_OnEnterExitCallbacksEnabled )
   {
-    _mm_store_si128((__m128i *)v21, (__m128i)0i64);
-    while ( v12 )
+    v21[0] = 0i64;
+    while ( p_mPad2 )
     {
-      v13 = v12 + 288;
-      v14 = v12 + 328;
-      v15 = *(_QWORD *)(v12 + 376) - 40i64;
-      if ( v15 == v12 + 328 )
+      p_mResourceOwner = &p_mPad2[1].mResourceOwner;
+      p_m_previousNode = (char *)&p_mPad2[1].m_previousNode;
+      p_mNext = (__int64)&p_mPad2[1].m_SequencedTasks.mNode.mPrev[-3].mNext;
+      if ( (ActionNodePlayable **)p_mNext == &p_mPad2[1].m_previousNode )
       {
-        v12 = *(_QWORD *)(v12 + 48) - 40i64;
-        if ( v12 == v11 )
+        p_mPad2 = (ActionController *)&p_mPad2->m_previousNode[-1].mPad2;
+        if ( p_mPad2 == (ActionController *)p_m_OnEnterExitCallbacksEnabled )
         {
           --v8;
           v18 = v6--;
-          v12 = *(_QWORD *)&v21[v18];
-          v11 = *((_QWORD *)&v21[v18] + 1);
+          p_mPad2 = *(ActionController **)&v21[v18];
+          p_m_OnEnterExitCallbacksEnabled = (char *)*((_QWORD *)&v21[v18] + 1);
         }
       }
       else
       {
-        v16 = *(_QWORD *)(v12 + 48) - 40i64;
-        if ( v16 != v11 )
+        v16 = (__int64)&p_mPad2->m_previousNode[-1].mPad2;
+        if ( (char *)v16 != p_m_OnEnterExitCallbacksEnabled )
         {
           v17 = v8++;
           v17 *= 16i64;
           ++v6;
           *(_QWORD *)((char *)v21 + v17) = v16;
-          *(_QWORD *)((char *)v21 + v17 + 8) = v11;
+          *(_QWORD *)((char *)v21 + v17 + 8) = p_m_OnEnterExitCallbacksEnabled;
         }
-        v12 = v15;
-        v11 = v14;
+        p_mPad2 = (ActionController *)p_mNext;
+        p_m_OnEnterExitCallbacksEnabled = p_m_previousNode;
       }
-      if ( v5 == -1 || v7 & *(_QWORD *)(v13 + 136) )
+      if ( mMostUsedIndex == -1 || (v7 & (unsigned __int64)p_mResourceOwner[17]) != 0 )
       {
-        v19 = *(ActionNode **)(v13 + 16);
+        v19 = (ActionNode *)p_mResourceOwner[2];
         if ( v19 )
         {
           while ( 1 )
@@ -2195,169 +2112,148 @@ char __fastcall ActionController::IsPlayingFullPath(ActionController *this, Acti
 
 // File Line: 1790
 // RVA: 0x26F350
-bool __fastcall ActionController::IsPlayingFullPath(ActionController *this, ActionPath *animPath, const bool recurseOnSpawns)
+bool __fastcall ActionController::IsPlayingFullPath(ActionController *this, ActionPath *animPath, bool recurseOnSpawns)
 {
-  ActionController *v3; // r15
   ActionNode *v4; // rcx
   unsigned int v5; // ebx
-  bool v6; // bp
-  ActionPath *v7; // r14
   unsigned int v8; // edi
-  signed __int64 v9; // rsi
-  __int64 v10; // rax
-  signed __int64 v11; // rdx
-  int v13; // [rsp+48h] [rbp+10h]
+  __int64 v9; // rsi
+  __int64 mOffset; // rax
+  char *v11; // rdx
+  int v13; // [rsp+48h] [rbp+10h] BYREF
 
-  v3 = this;
   v4 = 0i64;
   v5 = animPath->mPath.mCount & 0x7FFFFFFF;
-  v6 = recurseOnSpawns;
-  v7 = animPath;
   if ( v5 > 1 )
   {
     v4 = ActionNode::smRoot;
     v8 = 1;
-    if ( v5 > 1 )
+    v9 = 4i64;
+    do
     {
-      v9 = 4i64;
-      do
-      {
-        if ( !v4 )
-          break;
-        v10 = v7->mPath.mData.mOffset;
-        v11 = (signed __int64)(v10 ? (UFG::qOffset64<ActionID *> *)((char *)&v7->mPath.mData + v10) : 0i64);
-        v13 = *(_DWORD *)(v9 + v11);
-        ++v8;
-        v9 += 4i64;
-        v4 = (ActionNode *)((__int64 (__fastcall *)(ActionNode *, int *, _QWORD))v4->vfptr[1].CreateClone)(
-                             v4,
-                             &v13,
-                             0i64);
-      }
-      while ( v8 < v5 );
+      if ( !v4 )
+        break;
+      mOffset = animPath->mPath.mData.mOffset;
+      v11 = mOffset ? (char *)&animPath->mPath.mData + mOffset : 0i64;
+      v13 = *(_DWORD *)&v11[v9];
+      ++v8;
+      v9 += 4i64;
+      v4 = (ActionNode *)((__int64 (__fastcall *)(ActionNode *, int *, _QWORD))v4->vfptr[1].CreateClone)(v4, &v13, 0i64);
     }
+    while ( v8 < v5 );
   }
-  return ActionController::IsPlayingFullPath(v3, v4, v6);
+  return ActionController::IsPlayingFullPath(this, v4, recurseOnSpawns);
 }
 
 // File Line: 1796
 // RVA: 0x26F130
-UFG::qNode<ITask,ITask> **__fastcall ActionController::IsPlaying(ActionController *this, ITrack *track)
+ActionNodePlayable **__fastcall ActionController::IsPlaying(ActionController *this, ITrack *track)
 {
-  ActionNodePlayable **v2; // r9
-  UFG::qNode<ITask,ITask> **v3; // r8
+  ActionNodePlayable **p_m_SequenceNode; // r9
+  ActionNodePlayable **p_mNext; // r8
   bool i; // zf
   ITrack *v5; // rcx
-  signed __int64 v6; // rax
+  __int64 p_mData; // rax
 
-  v2 = &this->m_SequenceNode;
-  v3 = &this->m_RunningTasks.mNode.mNext[-1].mNext;
-  for ( i = v3 == (UFG::qNode<ITask,ITask> **)&this->m_SequenceNode; !i; i = v6 == (_QWORD)v2 )
+  p_m_SequenceNode = &this->m_SequenceNode;
+  p_mNext = (ActionNodePlayable **)&this->m_RunningTasks.mNode.mNext[-1].mNext;
+  for ( i = p_mNext == &this->m_SequenceNode; !i; i = p_mData == (_QWORD)p_m_SequenceNode )
   {
-    v5 = (ITrack *)v3[3];
-    v6 = (signed __int64)&v3[2][-1].mNext;
+    v5 = (ITrack *)p_mNext[3];
+    p_mData = (__int64)&p_mNext[2][-1].mChildren.mData;
     if ( v5 && track == v5 )
-      return v3;
-    v3 = &v3[2][-1].mNext;
+      return p_mNext;
+    p_mNext = (ActionNodePlayable **)&p_mNext[2][-1].mChildren.mData;
   }
   return 0i64;
 }
 
 // File Line: 1813
 // RVA: 0x273AB0
-char __fastcall ActionController::WasPlaying(ActionController *this, ActionID *animID, const bool recurseOnSpawns)
+char __fastcall ActionController::WasPlaying(ActionController *this, ActionID *animID, bool recurseOnSpawns)
 {
-  bool v3; // si
-  ActionID *v4; // rbp
-  ActionController *v5; // rdi
-  ActionNodePlayable *v6; // rax
-  __int64 v7; // rcx
-  signed __int64 v8; // rax
-  char result; // al
+  ActionNodePlayable *m_previousNode; // rax
+  __int64 mOffset; // rcx
+  UFG::qOffset64<ActionNode *> *p_mParent; // rax
   unsigned __int64 v10; // rcx
-  signed __int64 v11; // rdi
-  signed __int64 v12; // rcx
-  signed __int64 v13; // rbx
+  char *p_m_OnEnterExitCallbacksEnabled; // rdi
+  __int64 v12; // rcx
+  __int64 v13; // rbx
 
-  v3 = recurseOnSpawns;
-  v4 = animID;
-  v5 = this;
-  if ( this->m_ActionNodePlayTime == 0.0 && (v6 = this->m_previousNode) != 0i64 )
+  if ( this->m_ActionNodePlayTime == 0.0 && (m_previousNode = this->m_previousNode) != 0i64 )
   {
-    while ( v6->mID.mUID != animID->mUID )
+    while ( m_previousNode->mID.mUID != animID->mUID )
     {
-      v7 = v6->mParent.mOffset;
-      v8 = (signed __int64)&v6->mParent;
-      if ( v7 )
+      mOffset = m_previousNode->mParent.mOffset;
+      p_mParent = &m_previousNode->mParent;
+      if ( mOffset )
       {
-        v6 = (ActionNodePlayable *)(v7 + v8);
-        if ( v6 )
+        m_previousNode = (ActionNodePlayable *)((char *)p_mParent + mOffset);
+        if ( m_previousNode )
           continue;
       }
       goto LABEL_6;
     }
-    result = 1;
+    return 1;
   }
   else
   {
 LABEL_6:
     if ( recurseOnSpawns )
     {
-      v10 = v5->m_RunningSpawnTasksTmp[1];
-      v11 = (signed __int64)&v5->m_OnEnterExitCallbacksEnabled;
+      v10 = this->m_RunningSpawnTasksTmp[1];
+      p_m_OnEnterExitCallbacksEnabled = &this->m_OnEnterExitCallbacksEnabled;
       v12 = v10 - 40;
-      if ( v12 == v11 )
+      if ( (char *)v12 == p_m_OnEnterExitCallbacksEnabled )
       {
-LABEL_12:
-        result = 0;
+        return 0;
       }
       else
       {
         while ( 1 )
         {
           v13 = *(_QWORD *)(v12 + 48) - 40i64;
-          if ( ActionController::WasPlaying((ActionController *)(v12 + 288), v4, v3) )
+          if ( ActionController::WasPlaying((ActionController *)(v12 + 288), animID, recurseOnSpawns) )
             break;
           v12 = v13;
-          if ( v13 == v11 )
-            goto LABEL_12;
+          if ( (char *)v13 == p_m_OnEnterExitCallbacksEnabled )
+            return 0;
         }
-        result = 1;
+        return 1;
       }
     }
     else
     {
-      result = 0;
+      return 0;
     }
   }
-  return result;
 }
 
 // File Line: 1857
 // RVA: 0x273B90
-char __fastcall ActionController::WasPlayingFullPath(ActionController *this, ActionNode *testNode)
+char __fastcall ActionController::WasPlayingFullPath(ActionController *this, ActionNodePlayable *testNode)
 {
-  ActionNodePlayable *v2; // rax
-  __int64 v3; // rcx
+  ActionNodePlayable *m_previousNode; // rax
+  __int64 mOffset; // rcx
 
   if ( this->m_ActionNodePlayTime == 0.0 )
   {
-    v2 = this->m_previousNode;
-    if ( v2 )
+    m_previousNode = this->m_previousNode;
+    if ( m_previousNode )
     {
       while ( 1 )
       {
-        v3 = v2->mParent.mOffset;
-        if ( !v3 || !(UFG::qOffset64<ActionNode *> *)((char *)&v2->mParent + v3) )
+        mOffset = m_previousNode->mParent.mOffset;
+        if ( !mOffset || !(UFG::qOffset64<ActionNode *> *)((char *)&m_previousNode->mParent + mOffset) )
           break;
-        if ( (unsigned int)testNode >= (unsigned int)v2 )
+        if ( (unsigned int)testNode >= (unsigned int)m_previousNode )
         {
-          if ( testNode == (ActionNode *)v2 )
+          if ( testNode == m_previousNode )
             return 1;
-          if ( (unsigned int)testNode > (unsigned int)v2 )
+          if ( (unsigned int)testNode > (unsigned int)m_previousNode )
             return 0;
         }
-        v2 = (ActionNodePlayable *)((char *)v2 + v3 + 16);
+        m_previousNode = (ActionNodePlayable *)((char *)m_previousNode + mOffset + 16);
       }
     }
   }
@@ -2366,7 +2262,12 @@ char __fastcall ActionController::WasPlayingFullPath(ActionController *this, Act
 
 // File Line: 2079
 // RVA: 0x26E5B0
-void __fastcall ActionController::GetDebugString(ActionController *this, UFG::qStringBuilder *debugStringBuilder, const bool bShowAllTracks, ActionController *pControllerToHighlight, ITrack *pTrackToHighlight)
+void __fastcall ActionController::GetDebugString(
+        ActionController *this,
+        UFG::qStringBuilder *debugStringBuilder,
+        const bool bShowAllTracks,
+        ActionController *pControllerToHighlight,
+        ITrack *pTrackToHighlight)
 {
   bool v5; // r8
 
@@ -2383,120 +2284,117 @@ void __fastcall ActionController::GetDebugString(ActionController *this, UFG::qS
 
 // File Line: 2120
 // RVA: 0x275FF0
-void __fastcall ActionController::writeDebugDisplayToString(ActionController *this, UFG::qStringBuilder *debugStringBuilder, const bool bShowAllTracks, ActionController *pControllerToHighlight, ITrack *pTrackToHighlight, const int indentSpaces, ITask *pParentTask)
+void __fastcall ActionController::writeDebugDisplayToString(
+        ActionController *this,
+        UFG::qStringBuilder *debugStringBuilder,
+        bool bShowAllTracks,
+        ActionController *pControllerToHighlight,
+        ITrack *pTrackToHighlight,
+        unsigned int indentSpaces,
+        ITask *pParentTask)
 {
   bool v7; // bl
-  UFG::qStringBuilder *v8; // rdi
-  ActionController *v9; // rsi
-  ActionNode *v10; // rcx
-  int v11; // ebp
-  float v12; // xmm6_4
-  char *v13; // rax
+  ActionNodePlayable *m_currentNode; // rcx
+  unsigned int v11; // ebp
+  float mRunningMasterRate; // xmm6_4
+  char *String_DBG; // rax
   unsigned int v14; // ebx
   const char *v15; // rdx
-  signed __int64 v16; // rbx
-  __int64 v17; // rdi
+  UFG::qNode<ITask,ITask> **p_mNext; // rbx
+  ITrack *v17; // rdi
   bool v18; // bp
   bool v19; // si
   UFG::qStringBuilder *v20; // rdi
-  int v21; // [rsp+40h] [rbp-88h]
-  ActionPath pathToPopulate; // [rsp+50h] [rbp-78h]
-  UFG::qString v23; // [rsp+60h] [rbp-68h]
+  int mLength; // [rsp+40h] [rbp-88h]
+  ActionPath pathToPopulate; // [rsp+50h] [rbp-78h] BYREF
+  UFG::qString v23; // [rsp+60h] [rbp-68h] BYREF
   bool v24; // [rsp+D0h] [rbp+8h]
-  signed __int64 i; // [rsp+D0h] [rbp+8h]
-  UFG::qStringBuilder *debugStringBuildera; // [rsp+D8h] [rbp+10h]
-  bool v27; // [rsp+E0h] [rbp+18h]
-  ActionController *pControllerToHighlighta; // [rsp+E8h] [rbp+20h]
+  ActionNodePlayable **i; // [rsp+D0h] [rbp+8h]
 
-  pControllerToHighlighta = pControllerToHighlight;
-  v27 = bShowAllTracks;
-  debugStringBuildera = debugStringBuilder;
   v7 = bShowAllTracks;
-  v8 = debugStringBuilder;
-  v9 = this;
   v24 = this == pControllerToHighlight;
-  v21 = 0;
+  mLength = 0;
   if ( this == pControllerToHighlight )
   {
     UFG::qString::qString(&v23, "=>");
-    UFG::qStringBuilder::Add(v8, v23.mData, -1);
-    v21 = v23.mLength;
+    UFG::qStringBuilder::Add(debugStringBuilder, v23.mData, -1);
+    mLength = v23.mLength;
     UFG::qString::~qString(&v23);
   }
   pathToPopulate.mPath.mCount = 0;
   pathToPopulate.mPath.mData.mOffset = 0i64;
   if ( pParentTask
-    && InvokeBehaviourTrack::sClassNameUID == ((unsigned int (*)(void))pParentTask->m_Track->vfptr->GetClassNameUID)() )
+    && InvokeBehaviourTrack::sClassNameUID == pParentTask->m_Track->vfptr->GetClassNameUID(pParentTask->m_Track) )
   {
     v11 = indentSpaces;
   }
   else
   {
-    v10 = (ActionNode *)&v9->m_currentNode->vfptr;
-    if ( !v10 )
+    m_currentNode = this->m_currentNode;
+    if ( !m_currentNode )
     {
       UFG::qStringBuilder::Format(
-        v8,
+        debugStringBuilder,
         "%*s%s:%0.3f@%0.3f\n",
-        (unsigned int)indentSpaces,
-        &customWorldMapCaption,
+        indentSpaces,
+        &customCaption,
         "NULL",
-        v9->m_ActionNodePlayTime,
-        v9->mRunningMasterRate);
+        this->m_ActionNodePlayTime,
+        this->mRunningMasterRate);
       goto LABEL_30;
     }
-    ActionNode::GetNameFullPath(v10, &pathToPopulate);
+    ActionNode::GetNameFullPath(m_currentNode, &pathToPopulate);
     v11 = indentSpaces;
-    v12 = v9->mRunningMasterRate;
-    v13 = ActionPath::GetString_DBG(&pathToPopulate);
-    v14 = indentSpaces - v21;
-    if ( indentSpaces - v21 < 0 )
+    mRunningMasterRate = this->mRunningMasterRate;
+    String_DBG = ActionPath::GetString_DBG(&pathToPopulate);
+    v14 = indentSpaces - mLength;
+    if ( (int)(indentSpaces - mLength) < 0 )
       v14 = 0;
     UFG::qStringBuilder::Format(
-      v8,
+      debugStringBuilder,
       "%*s%s:%0.3f@%0.3f",
       v14,
-      &customWorldMapCaption,
-      v13,
-      v9->m_ActionNodePlayTime,
-      v12);
-    v7 = v27;
+      &customCaption,
+      String_DBG,
+      this->m_ActionNodePlayTime,
+      mRunningMasterRate);
+    v7 = bShowAllTracks;
   }
   v15 = " <=\n";
   if ( !v24 )
     v15 = "\n";
-  UFG::qStringBuilder::Add(v8, v15, -1);
+  UFG::qStringBuilder::Add(debugStringBuilder, v15, -1);
   if ( v7 )
     indentSpaces = sSpacesPerTrackIndent + v11;
-  v16 = (signed __int64)&v9->m_RunningTasks.mNode.mNext[-1].mNext;
-  for ( i = (signed __int64)&v9->m_SequenceNode; v16 != i; v16 = *(_QWORD *)(v16 + 16) - 8i64 )
+  p_mNext = &this->m_RunningTasks.mNode.mNext[-1].mNext;
+  for ( i = &this->m_SequenceNode; p_mNext != (UFG::qNode<ITask,ITask> **)i; p_mNext = &p_mNext[2][-1].mNext )
   {
-    v17 = *(_QWORD *)(v16 + 24);
-    v18 = InvokeBehaviourTrack::sClassNameUID == (*(unsigned int (__fastcall **)(_QWORD))(*(_QWORD *)v17 + 40i64))(*(_QWORD *)(v16 + 24));
-    v19 = SpawnTrack::sClassNameUID == (*(unsigned int (__fastcall **)(__int64))(*(_QWORD *)v17 + 40i64))(v17) || v18;
-    (*(void (__fastcall **)(__int64))(*(_QWORD *)v17 + 40i64))(v17);
-    if ( v19 || v27 )
+    v17 = (ITrack *)p_mNext[3];
+    v18 = InvokeBehaviourTrack::sClassNameUID == v17->vfptr->GetClassNameUID(v17);
+    v19 = SpawnTrack::sClassNameUID == v17->vfptr->GetClassNameUID(v17) || v18;
+    v17->vfptr->GetClassNameUID(v17);
+    if ( v19 || bShowAllTracks )
     {
-      if ( v18 || v17 != (_QWORD)pTrackToHighlight )
+      if ( v18 || v17 != pTrackToHighlight )
       {
-        v20 = debugStringBuildera;
+        v20 = debugStringBuilder;
       }
       else
       {
         UFG::qString::qString(&v23, "=>");
-        v20 = debugStringBuildera;
-        UFG::qStringBuilder::Add(debugStringBuildera, v23.mData, -1);
+        v20 = debugStringBuilder;
+        UFG::qStringBuilder::Add(debugStringBuilder, v23.mData, -1);
         UFG::qString::~qString(&v23);
       }
       if ( v19 )
         ActionController::writeDebugDisplayToString(
-          (ActionController *)(v16 + 288),
+          (ActionController *)(p_mNext + 36),
           v20,
-          v27,
-          pControllerToHighlighta,
+          bShowAllTracks,
+          pControllerToHighlight,
           pTrackToHighlight,
           indentSpaces + sSpacesPerIndent,
-          (ITask *)v16);
+          (ITask *)p_mNext);
     }
   }
 LABEL_30:
@@ -2505,8 +2403,7 @@ LABEL_30:
     if ( (UFG::qOffset64<ActionID *> *)((char *)&pathToPopulate.mPath.mData + pathToPopulate.mPath.mData.mOffset) )
       operator delete[]((char *)&pathToPopulate.mPath.mData + pathToPopulate.mPath.mData.mOffset);
   }
-}ata.mOffset) )
-      operator delete[]((
+}
 
 // File Line: 2261
 // RVA: 0x148A440
@@ -2527,7 +2424,7 @@ __int64 dynamic_initializer_for__gActionControllerFactory__()
     &gActionControllerFactory,
     sActionControllerFactoryList,
     sActionControllerFactoryListNum);
-  return atexit(dynamic_atexit_destructor_for__gActionControllerFactory__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gActionControllerFactory__);
 }
 
 // File Line: 2271
@@ -2554,64 +2451,64 @@ ActionPath *__fastcall ActionController::GetPlayingFullPath(ActionController *th
 // RVA: 0x26E1E0
 __int64 __fastcall ActionController::GetChildCount(ActionController *this)
 {
-  ActionNodePlayable **v1; // r10
+  ActionNodePlayable **p_m_SequenceNode; // r10
   __int64 result; // rax
-  UFG::qNode<ITask,ITask> **v3; // rdx
+  ActionNodePlayable **p_mNext; // rdx
   bool i; // cl
-  UFG::qNode<ITask,ITask> *v5; // rcx
+  ActionNodePlayable *v5; // rcx
 
-  v1 = &this->m_SequenceNode;
+  p_m_SequenceNode = &this->m_SequenceNode;
   result = 0i64;
-  v3 = &this->m_RunningTasks.mNode.mNext[-1].mNext;
-  for ( i = v3 == (UFG::qNode<ITask,ITask> **)&this->m_SequenceNode; v3; i = v3 == (UFG::qNode<ITask,ITask> **)v1 )
+  p_mNext = (ActionNodePlayable **)&this->m_RunningTasks.mNode.mNext[-1].mNext;
+  for ( i = p_mNext == &this->m_SequenceNode; p_mNext; i = p_mNext == p_m_SequenceNode )
   {
     if ( i )
       break;
-    v5 = v3[3];
-    if ( gReflectAllActionTreeTasks || v5 && SpawnTrack::sClassNameUID == LODWORD(v5[1].mPrev) )
+    v5 = p_mNext[3];
+    if ( gReflectAllActionTreeTasks || v5 && SpawnTrack::sClassNameUID == LODWORD(v5->mParent.mOffset) )
       result = (unsigned int)(result + 1);
-    v3 = &v3[2][-1].mNext;
+    p_mNext = (ActionNodePlayable **)&p_mNext[2][-1].mChildren.mData;
   }
   return result;
 }
 
 // File Line: 2371
 // RVA: 0x26E100
-UFG::qNode<ITask,ITask> *__fastcall ActionController::GetChild2(ActionController *this, int priority)
+ActionNodePlayable **__fastcall ActionController::GetChild2(ActionController *this, int priority)
 {
-  ActionNodePlayable **v2; // r11
-  int v3; // er8
-  UFG::qNode<ITask,ITask> **v4; // rax
+  ActionNodePlayable **p_m_SequenceNode; // r11
+  int v3; // r8d
+  ActionNodePlayable **p_mNext; // rax
   bool i; // cl
-  UFG::qNode<ITask,ITask> *v6; // rcx
+  ActionNodePlayable *v6; // rcx
 
-  v2 = &this->m_SequenceNode;
+  p_m_SequenceNode = &this->m_SequenceNode;
   v3 = 0;
-  v4 = &this->m_RunningTasks.mNode.mNext[-1].mNext;
-  for ( i = v4 == (UFG::qNode<ITask,ITask> **)&this->m_SequenceNode; v4; i = v4 == (UFG::qNode<ITask,ITask> **)v2 )
+  p_mNext = (ActionNodePlayable **)&this->m_RunningTasks.mNode.mNext[-1].mNext;
+  for ( i = p_mNext == &this->m_SequenceNode; p_mNext; i = p_mNext == p_m_SequenceNode )
   {
     if ( i )
       return 0i64;
-    v6 = v4[3];
+    v6 = p_mNext[3];
     if ( gReflectAllActionTreeTasks )
     {
       if ( priority == v3 && v6 )
       {
-        if ( SpawnTrack::sClassNameUID == LODWORD(v6[1].mPrev) )
-          return (UFG::qNode<ITask,ITask> *)(v4 + 36);
-        return v4[3];
+        if ( SpawnTrack::sClassNameUID == LODWORD(v6->mParent.mOffset) )
+          return p_mNext + 36;
+        return (ActionNodePlayable **)p_mNext[3];
       }
     }
     else
     {
-      if ( !v6 || SpawnTrack::sClassNameUID != LODWORD(v6[1].mPrev) )
+      if ( !v6 || SpawnTrack::sClassNameUID != LODWORD(v6->mParent.mOffset) )
         goto LABEL_12;
       if ( priority == v3 )
-        return (UFG::qNode<ITask,ITask> *)(v4 + 36);
+        return p_mNext + 36;
     }
     ++v3;
 LABEL_12:
-    v4 = &v4[2][-1].mNext;
+    p_mNext = (ActionNodePlayable **)&p_mNext[2][-1].mChildren.mData;
   }
   return 0i64;
 }

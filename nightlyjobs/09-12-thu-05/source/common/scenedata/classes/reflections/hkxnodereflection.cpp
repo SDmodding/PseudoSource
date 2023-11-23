@@ -28,17 +28,17 @@ hkClass *__fastcall hkxNode::AnnotationData::staticClass()
 
 // File Line: 66
 // RVA: 0xE329C0
-void __fastcall finishLoadedObjecthkxNodeAnnotationData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxNodeAnnotationData(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
   if ( p )
-    hkStringPtr::hkStringPtr((hkStringPtr *)p + 1, (hkFinishLoadedObjectFlag)finishing);
+    hkStringPtr::hkStringPtr(p + 1, finishing);
 }
 
 // File Line: 72
 // RVA: 0xE329E0
-void __fastcall cleanupLoadedObjecthkxNodeAnnotationData(void *p)
+void __fastcall cleanupLoadedObjecthkxNodeAnnotationData(hkStringPtr *p)
 {
-  hkStringPtr::~hkStringPtr((hkStringPtr *)p + 1);
+  hkStringPtr::~hkStringPtr(p + 1);
 }
 
 // File Line: 117
@@ -59,7 +59,7 @@ void dynamic_initializer_for__hkxNodeClass__()
     0i64,
     0i64,
     0,
-    4u);
+    4);
 }
 
 // File Line: 120
@@ -71,36 +71,32 @@ hkClass *__fastcall hkxNode::staticClass()
 
 // File Line: 127
 // RVA: 0xE329F0
-void __fastcall finishLoadedObjecthkxNode(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxNode(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
-  hkStringPtr *v2; // rbx
   hkStringPtr *v3; // rcx
-  int v4; // edi
 
   if ( p )
   {
-    v2 = (hkStringPtr *)p;
-    v3 = (hkStringPtr *)((char *)p + 32);
+    v3 = p + 4;
     v3[-4].m_stringAndFlag = (const char *)&hkxNode::`vftable;
-    v4 = finishing;
-    hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
-    hkStringPtr::hkStringPtr(v2 + 14, (hkFinishLoadedObjectFlag)v4);
+    hkStringPtr::hkStringPtr(v3, finishing);
+    hkStringPtr::hkStringPtr(p + 14, finishing);
   }
 }
 
 // File Line: 133
 // RVA: 0xE32A40
-void __fastcall cleanupLoadedObjecthkxNode(void *p)
+void __fastcall cleanupLoadedObjecthkxNode(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 137
 // RVA: 0xE32A50
 void **__fastcall getVtablehkxNode()
 {
-  hkStringPtr v1; // [rsp+40h] [rbp-68h]
-  hkStringPtr v2; // [rsp+90h] [rbp-18h]
+  hkStringPtr v1; // [rsp+40h] [rbp-68h] BYREF
+  hkStringPtr v2; // [rsp+90h] [rbp-18h] BYREF
 
   hkStringPtr::hkStringPtr(&v1, 0);
   hkStringPtr::hkStringPtr(&v2, 0);
@@ -118,8 +114,8 @@ void **dynamic_initializer_for__hkxNodeTypeInfo__()
   hkxNodeTypeInfo.m_typeName = "hkxNode";
   hkxNodeTypeInfo.m_vtable = result;
   hkxNodeTypeInfo.m_scopedName = "!hkxNode";
-  hkxNodeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxNode;
-  hkxNodeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxNode;
+  hkxNodeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxNode;
+  hkxNodeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxNode;
   return result;
 }
 

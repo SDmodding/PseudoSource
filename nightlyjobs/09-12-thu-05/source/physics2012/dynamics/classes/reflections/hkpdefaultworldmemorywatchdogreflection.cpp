@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkpDefaultWorldMemoryWatchDogClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 55
@@ -28,17 +28,17 @@ hkClass *__fastcall hkpDefaultWorldMemoryWatchDog::staticClass()
 
 // File Line: 62
 // RVA: 0xD50BC0
-void __fastcall finishLoadedObjecthkpDefaultWorldMemoryWatchDog(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpDefaultWorldMemoryWatchDog(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpDefaultWorldMemoryWatchDog::`vftable;
+    *p = &hkpDefaultWorldMemoryWatchDog::`vftable;
 }
 
 // File Line: 68
 // RVA: 0xD50BE0
-void __fastcall cleanupLoadedObjecthkpDefaultWorldMemoryWatchDog(void *p)
+void __fastcall cleanupLoadedObjecthkpDefaultWorldMemoryWatchDog(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 72
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkpDefaultWorldMemoryWatchDogTypeInfo__()
   hkpDefaultWorldMemoryWatchDogTypeInfo.m_typeName = "hkpDefaultWorldMemoryWatchDog";
   hkpDefaultWorldMemoryWatchDogTypeInfo.m_vtable = result;
   hkpDefaultWorldMemoryWatchDogTypeInfo.m_scopedName = "!hkpDefaultWorldMemoryWatchDog";
-  hkpDefaultWorldMemoryWatchDogTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpDefaultWorldMemoryWatchDog;
-  hkpDefaultWorldMemoryWatchDogTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpDefaultWorldMemoryWatchDog;
+  hkpDefaultWorldMemoryWatchDogTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpDefaultWorldMemoryWatchDog;
+  hkpDefaultWorldMemoryWatchDogTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpDefaultWorldMemoryWatchDog;
   return result;
 }
 

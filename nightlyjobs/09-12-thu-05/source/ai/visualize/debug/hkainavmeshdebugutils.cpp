@@ -1,6 +1,7 @@
 // File Line: 76
 // RVA: 0xC464D0
-void __fastcall hkaiNavMeshDebugUtils::SmallEdgeSettings::SmallEdgeSettings(hkaiNavMeshDebugUtils::SmallEdgeSettings *this)
+void __fastcall hkaiNavMeshDebugUtils::SmallEdgeSettings::SmallEdgeSettings(
+        hkaiNavMeshDebugUtils::SmallEdgeSettings *this)
 {
   *(_WORD *)&this->m_markSmallEdges.m_bool = 0;
   this->m_smallBoundaryEdgeColor = hkColor::YELLOW;
@@ -11,7 +12,8 @@ void __fastcall hkaiNavMeshDebugUtils::SmallEdgeSettings::SmallEdgeSettings(hkai
 
 // File Line: 84
 // RVA: 0xC46510
-void __fastcall hkaiNavMeshDebugUtils::NonplanarFacesSettings::NonplanarFacesSettings(hkaiNavMeshDebugUtils::NonplanarFacesSettings *this)
+void __fastcall hkaiNavMeshDebugUtils::NonplanarFacesSettings::NonplanarFacesSettings(
+        hkaiNavMeshDebugUtils::NonplanarFacesSettings *this)
 {
   *(_WORD *)&this->m_highlightNonplanarFaces.m_bool = 0;
   this->m_scaleMultiplier = 1.0;
@@ -19,7 +21,8 @@ void __fastcall hkaiNavMeshDebugUtils::NonplanarFacesSettings::NonplanarFacesSet
 
 // File Line: 93
 // RVA: 0xC46530
-void __fastcall hkaiNavMeshDebugUtils::FaceNormalSettings::FaceNormalSettings(hkaiNavMeshDebugUtils::FaceNormalSettings *this)
+void __fastcall hkaiNavMeshDebugUtils::FaceNormalSettings::FaceNormalSettings(
+        hkaiNavMeshDebugUtils::FaceNormalSettings *this)
 {
   *(_WORD *)&this->m_highlightFaceNormals.m_bool = 0;
   this->m_up.m_quad = _xmm;
@@ -30,8 +33,7 @@ void __fastcall hkaiNavMeshDebugUtils::FaceNormalSettings::FaceNormalSettings(hk
 // RVA: 0xC46560
 void __fastcall hkaiNavMeshDebugUtils::DebugInfo::DebugInfo(hkaiNavMeshDebugUtils::DebugInfo *this)
 {
-  hkaiNavMeshDebugUtils::DebugInfo *v1; // rbx
-  hkaiNavMeshDebugUtils::SmallEdgeSettings *v2; // rcx
+  hkaiNavMeshDebugUtils::SmallEdgeSettings *p_m_smallEdgeSettings; // rcx
   __m128 v3; // xmm1
   __m128 v4; // xmm3
   __m128 v5; // xmm2
@@ -39,58 +41,57 @@ void __fastcall hkaiNavMeshDebugUtils::DebugInfo::DebugInfo(hkaiNavMeshDebugUtil
   *(_DWORD *)&this->m_allowFaceTransparency.m_bool = 65793;
   *(_QWORD *)&this->m_showUserEdges.m_bool = 1i64;
   *(_WORD *)&this->m_showEdgeConnections.m_bool = 0;
-  v1 = this;
-  v2 = &this->m_smallEdgeSettings;
-  v2[-7].m_markerOffset.m_quad.m128_u64[0] = 0i64;
-  v2[-7].m_markerOffset.m_quad.m128_i32[2] = 0;
-  *(_QWORD *)&v2[-6].m_markSmallEdges.m_bool = 0i64;
-  v2[-6].m_smallSharedEdgeColor = 0;
-  LOBYTE(v2[-6].m_smallEdgeTolerance) = 0;
-  v2[-6].m_markerOffset.m_quad.m128_i32[0] = hkColor::ORANGE;
-  v2[-6].m_markerOffset.m_quad.m128_i32[1] = hkColor::RED;
-  v2[-6].m_markerOffset.m_quad.m128_i32[2] = hkColor::BLUE;
-  v2[-6].m_markerOffset.m_quad.m128_i32[3] = hkColor::CYAN;
-  *(_DWORD *)&v2[-5].m_markSmallEdges.m_bool = hkColor::CYAN;
-  v2[-5].m_smallBoundaryEdgeColor = hkColor::LIGHTBLUE;
-  v2[-5].m_smallSharedEdgeColor = hkColor::BLACK;
-  LODWORD(v2[-5].m_smallEdgeTolerance) = hkColor::BLACK;
-  v2[-5].m_markerOffset.m_quad.m128_i32[0] = hkColor::PURPLE;
-  v2[-5].m_markerOffset.m_quad.m128_i32[1] = hkColor::BLUE;
-  v2[-5].m_markerOffset.m_quad.m128_i32[2] = hkColor::PURPLE;
-  v2[-5].m_markerOffset.m_quad.m128_i32[3] = hkColor::BLUE;
-  v2[-4].m_markSmallEdges.m_bool = 0;
-  v2[-4].m_smallBoundaryEdgeColor = 0;
-  v2[-4].m_smallSharedEdgeColor = 1028443341;
-  *(_QWORD *)&v2[-4].m_smallEdgeTolerance = -1i64;
-  v2[-4].m_markerOffset.m_quad.m128_i8[4] = 0;
-  v2[-3].m_markerOffset.m_quad.m128_i8[0] = 0;
-  hkaiNavMeshDebugUtils::SmallEdgeSettings::SmallEdgeSettings(v2);
-  hkaiNavMeshDebugUtils::NonplanarFacesSettings::NonplanarFacesSettings(&v1->m_nonplanarFacesSettings);
-  hkaiNavMeshDebugUtils::FaceNormalSettings::FaceNormalSettings(&v1->m_faceNormalSettings);
-  hkaiGraphDebugUtils::DebugInfo::DebugInfo(&v1->m_clusterGraphSettings);
-  v1->m_instanceEnabled.m_storage.m_words.m_data = 0i64;
-  v1->m_instanceEnabled.m_storage.m_words.m_size = 0;
-  v1->m_instanceEnabled.m_storage.m_words.m_capacityAndFlags = 2147483648;
-  v1->m_instanceEnabled.m_storage.m_numBits = 0;
-  v1->m_displayOffset = (hkVector4f)_xmm;
-  v1->m_hiddenFaceOffset = 0i64;
-  v1->m_sortDirection = 0i64;
-  v1->m_lightDirection.m_quad = g_vectorfConstants[0];
+  p_m_smallEdgeSettings = &this->m_smallEdgeSettings;
+  p_m_smallEdgeSettings[-7].m_markerOffset.m_quad.m128_u64[0] = 0i64;
+  p_m_smallEdgeSettings[-7].m_markerOffset.m_quad.m128_i32[2] = 0;
+  *(_QWORD *)&p_m_smallEdgeSettings[-6].m_markSmallEdges.m_bool = 0i64;
+  p_m_smallEdgeSettings[-6].m_smallSharedEdgeColor = 0;
+  LOBYTE(p_m_smallEdgeSettings[-6].m_smallEdgeTolerance) = 0;
+  p_m_smallEdgeSettings[-6].m_markerOffset.m_quad.m128_i32[0] = hkColor::ORANGE;
+  p_m_smallEdgeSettings[-6].m_markerOffset.m_quad.m128_i32[1] = hkColor::RED;
+  p_m_smallEdgeSettings[-6].m_markerOffset.m_quad.m128_i32[2] = hkColor::BLUE;
+  p_m_smallEdgeSettings[-6].m_markerOffset.m_quad.m128_i32[3] = hkColor::CYAN;
+  *(_DWORD *)&p_m_smallEdgeSettings[-5].m_markSmallEdges.m_bool = hkColor::CYAN;
+  p_m_smallEdgeSettings[-5].m_smallBoundaryEdgeColor = hkColor::LIGHTBLUE;
+  p_m_smallEdgeSettings[-5].m_smallSharedEdgeColor = hkColor::BLACK;
+  LODWORD(p_m_smallEdgeSettings[-5].m_smallEdgeTolerance) = hkColor::BLACK;
+  p_m_smallEdgeSettings[-5].m_markerOffset.m_quad.m128_i32[0] = hkColor::PURPLE;
+  p_m_smallEdgeSettings[-5].m_markerOffset.m_quad.m128_i32[1] = hkColor::BLUE;
+  p_m_smallEdgeSettings[-5].m_markerOffset.m_quad.m128_i32[2] = hkColor::PURPLE;
+  p_m_smallEdgeSettings[-5].m_markerOffset.m_quad.m128_i32[3] = hkColor::BLUE;
+  p_m_smallEdgeSettings[-4].m_markSmallEdges.m_bool = 0;
+  p_m_smallEdgeSettings[-4].m_smallBoundaryEdgeColor = 0;
+  p_m_smallEdgeSettings[-4].m_smallSharedEdgeColor = 1028443341;
+  *(_QWORD *)&p_m_smallEdgeSettings[-4].m_smallEdgeTolerance = -1i64;
+  p_m_smallEdgeSettings[-4].m_markerOffset.m_quad.m128_i8[4] = 0;
+  p_m_smallEdgeSettings[-3].m_markerOffset.m_quad.m128_i8[0] = 0;
+  hkaiNavMeshDebugUtils::SmallEdgeSettings::SmallEdgeSettings(p_m_smallEdgeSettings);
+  hkaiNavMeshDebugUtils::NonplanarFacesSettings::NonplanarFacesSettings(&this->m_nonplanarFacesSettings);
+  hkaiNavMeshDebugUtils::FaceNormalSettings::FaceNormalSettings(&this->m_faceNormalSettings);
+  hkaiGraphDebugUtils::DebugInfo::DebugInfo(&this->m_clusterGraphSettings);
+  this->m_instanceEnabled.m_storage.m_words.m_data = 0i64;
+  this->m_instanceEnabled.m_storage.m_words.m_size = 0;
+  this->m_instanceEnabled.m_storage.m_words.m_capacityAndFlags = 0x80000000;
+  this->m_instanceEnabled.m_storage.m_numBits = 0;
+  this->m_displayOffset = (hkVector4f)_xmm;
+  this->m_hiddenFaceOffset = 0i64;
+  this->m_sortDirection = 0i64;
+  this->m_lightDirection.m_quad = g_vectorfConstants[0];
   v3 = _mm_mul_ps(g_vectorfConstants[0], g_vectorfConstants[0]);
   v4 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v3, v3, 85), _mm_shuffle_ps(v3, v3, 0)), _mm_shuffle_ps(v3, v3, 170));
   v5 = _mm_rsqrt_ps(v4);
-  v1->m_faceOffset = 0i64;
-  v1->m_lightDirection.m_quad = _mm_mul_ps(
-                                  _mm_andnot_ps(
-                                    _mm_cmpleps(v4, (__m128)0i64),
-                                    _mm_mul_ps(
-                                      _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v5, v4), v5)),
-                                      _mm_mul_ps(*(__m128 *)_xmm, v5))),
-                                  g_vectorfConstants[0]);
-  v1->m_pruneLabelsAabb.m_min = (hkVector4f)xmmword_141A712A0;
-  v1->m_pruneLabelsAabb.m_max.m_quad = _mm_xor_ps(
-                                         (__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 0),
-                                         v1->m_pruneLabelsAabb.m_min.m_quad);
+  this->m_faceOffset = 0i64;
+  this->m_lightDirection.m_quad = _mm_mul_ps(
+                                    _mm_andnot_ps(
+                                      _mm_cmple_ps(v4, (__m128)0i64),
+                                      _mm_mul_ps(
+                                        _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v5, v4), v5)),
+                                        _mm_mul_ps(*(__m128 *)_xmm, v5))),
+                                    g_vectorfConstants[0]);
+  this->m_pruneLabelsAabb.m_min = (hkVector4f)xmmword_141A712A0;
+  this->m_pruneLabelsAabb.m_max.m_quad = _mm_xor_ps(
+                                           (__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 0),
+                                           this->m_pruneLabelsAabb.m_min.m_quad);
 }
 
 // File Line: 153
@@ -113,9 +114,11 @@ bool __fastcall hkaiNavMeshDebugUtils::DebugInfo::shouldDrawEdges(hkaiNavMeshDeb
   return this->m_showEdges.m_bool
       || this->m_showEdgeConnections.m_bool
       || this->m_showVertices.m_bool
-      || *(_WORD *)&this->m_labelVertices.m_bool
+      || this->m_labelVertices.m_bool
+      || this->m_labelEdges.m_bool
       || this->m_showEdgeData.m_bool
-      || *(_WORD *)&this->m_showEdgeNormals.m_bool;
+      || this->m_showEdgeNormals.m_bool
+      || this->m_showVertexNormals.m_bool;
 }
 
 // File Line: 177
@@ -127,35 +130,31 @@ _BOOL8 __fastcall hkaiNavMeshDebugUtils::DebugInfo::shouldDrawUserEdges(hkaiNavM
 
 // File Line: 241
 // RVA: 0xC47150
-void __fastcall hkaiNavMeshDebugUtils::highlightNavMeshEdges(hkaiNavMeshInstance *mesh, hkArrayBase<unsigned int> *edgesVisited, unsigned int highlightColor, hkVector4f *offset)
+void __fastcall hkaiNavMeshDebugUtils::highlightNavMeshEdges(
+        hkaiNavMeshInstance *mesh,
+        hkArrayBase<unsigned int> *edgesVisited,
+        unsigned int highlightColor,
+        hkVector4f *offset)
 {
-  int v4; // er12
-  hkVector4f *v5; // r13
-  hkArrayBase<unsigned int> *v6; // rdi
-  hkaiNavMeshInstance *v7; // rbx
+  int v4; // r12d
   hkArray<int,hkContainerHeapAllocator> *instanceMap; // rbp
   __int64 v9; // rsi
   hkaiNavMesh::Edge *v10; // rax
-  signed int v11; // edx
-  __int64 v12; // rcx
-  __m128 *v13; // rcx
-  __m128 v14; // xmm4
-  __m128 v15; // xmm5
-  __int64 v16; // rax
-  __m128 v17; // xmm6
-  __m128 v18; // xmm7
+  int m_numOriginalVertices; // edx
+  __int64 m_a; // rcx
+  hkVector4f *v13; // rcx
+  hkVector4f v14; // xmm4
+  hkVector4f v15; // xmm5
+  __int64 m_b; // rax
+  hkVector4f v17; // xmm6
+  hkVector4f v18; // xmm7
   __m128 v19; // xmm2
-  __m128 *v20; // rax
-  __m128 v21; // xmm1
-  hkVector4f end; // [rsp+30h] [rbp-68h]
-  hkVector4f start; // [rsp+40h] [rbp-58h]
-  unsigned int color; // [rsp+B0h] [rbp+18h]
+  hkVector4f *v20; // rax
+  __m128 m_quad; // xmm1
+  hkVector4f end; // [rsp+30h] [rbp-68h] BYREF
+  hkVector4f start; // [rsp+40h] [rbp-58h] BYREF
 
-  color = highlightColor;
   v4 = 0;
-  v5 = offset;
-  v6 = edgesVisited;
-  v7 = mesh;
   if ( edgesVisited->m_size > 0 )
   {
     instanceMap = &mesh->m_edgeMap;
@@ -163,100 +162,95 @@ void __fastcall hkaiNavMeshDebugUtils::highlightNavMeshEdges(hkaiNavMeshInstance
     do
     {
       v10 = hkaiNavMeshInstance_get_hkaiNavMesh::Edge__23(
-              v7->m_originalEdges,
-              v7->m_numOriginalEdges,
-              &v7->m_instancedEdges,
-              &v7->m_ownedEdges,
+              mesh->m_originalEdges,
+              mesh->m_numOriginalEdges,
+              &mesh->m_instancedEdges,
+              &mesh->m_ownedEdges,
               instanceMap,
-              v6->m_data[v9]);
-      v11 = v7->m_numOriginalVertices;
-      v12 = v10->m_a;
-      if ( (signed int)v12 >= v11 )
-        v13 = &v7->m_ownedVertices.m_data[(signed int)v12 - v11].m_quad;
+              edgesVisited->m_data[v9]);
+      m_numOriginalVertices = mesh->m_numOriginalVertices;
+      m_a = v10->m_a;
+      if ( (int)m_a >= m_numOriginalVertices )
+        v13 = &mesh->m_ownedVertices.m_data[(int)m_a - m_numOriginalVertices];
       else
-        v13 = &v7->m_originalVertices[v12].m_quad;
-      v14 = v7->m_referenceFrame.m_transform.m_rotation.m_col1.m_quad;
-      v15 = v7->m_referenceFrame.m_transform.m_rotation.m_col0.m_quad;
-      v16 = v10->m_b;
-      v17 = v7->m_referenceFrame.m_transform.m_rotation.m_col2.m_quad;
-      v18 = v7->m_referenceFrame.m_transform.m_translation.m_quad;
+        v13 = &mesh->m_originalVertices[m_a];
+      v14.m_quad = (__m128)mesh->m_referenceFrame.m_transform.m_rotation.m_col1;
+      v15.m_quad = (__m128)mesh->m_referenceFrame.m_transform.m_rotation.m_col0;
+      m_b = v10->m_b;
+      v17.m_quad = (__m128)mesh->m_referenceFrame.m_transform.m_rotation.m_col2;
+      v18.m_quad = (__m128)mesh->m_referenceFrame.m_transform.m_translation;
       v19 = _mm_add_ps(
               _mm_add_ps(
                 _mm_add_ps(
-                  _mm_mul_ps(_mm_shuffle_ps(*v13, *v13, 0), v15),
-                  _mm_mul_ps(_mm_shuffle_ps(*v13, *v13, 85), v14)),
-                _mm_mul_ps(_mm_shuffle_ps(*v13, *v13, 170), v17)),
-              v18);
-      if ( (signed int)v16 >= v11 )
-        v20 = &v7->m_ownedVertices.m_data[(signed int)v16 - v11].m_quad;
+                  _mm_mul_ps(_mm_shuffle_ps(v13->m_quad, v13->m_quad, 0), v15.m_quad),
+                  _mm_mul_ps(_mm_shuffle_ps(v13->m_quad, v13->m_quad, 85), v14.m_quad)),
+                _mm_mul_ps(_mm_shuffle_ps(v13->m_quad, v13->m_quad, 170), v17.m_quad)),
+              v18.m_quad);
+      if ( (int)m_b >= m_numOriginalVertices )
+        v20 = &mesh->m_ownedVertices.m_data[(int)m_b - m_numOriginalVertices];
       else
-        v20 = &v7->m_originalVertices[v16].m_quad;
-      v21 = *v20;
-      start.m_quad = _mm_add_ps(v5->m_quad, v19);
+        v20 = &mesh->m_originalVertices[m_b];
+      m_quad = v20->m_quad;
+      start.m_quad = _mm_add_ps(offset->m_quad, v19);
       end.m_quad = _mm_add_ps(
                      _mm_add_ps(
                        _mm_add_ps(
                          _mm_add_ps(
-                           _mm_mul_ps(_mm_shuffle_ps(v21, v21, 0), v15),
-                           _mm_mul_ps(_mm_shuffle_ps(v21, v21, 85), v14)),
-                         _mm_mul_ps(_mm_shuffle_ps(v21, v21, 170), v17)),
-                       v18),
-                     v5->m_quad);
+                           _mm_mul_ps(_mm_shuffle_ps(m_quad, m_quad, 0), v15.m_quad),
+                           _mm_mul_ps(_mm_shuffle_ps(m_quad, m_quad, 85), v14.m_quad)),
+                         _mm_mul_ps(_mm_shuffle_ps(m_quad, m_quad, 170), v17.m_quad)),
+                       v18.m_quad),
+                     offset->m_quad);
       hkDebugDisplay::displayLine(
         hkSingleton<hkDebugDisplay>::s_instance,
         &start,
         &end,
-        color,
+        highlightColor,
         0,
         (int)hkDebugDisplayProcess::m_tag);
       ++v4;
       ++v9;
     }
-    while ( v4 < v6->m_size );
+    while ( v4 < edgesVisited->m_size );
   }
 }
 
 // File Line: 255
 // RVA: 0xC470D0
-void __fastcall hkaiNavMeshDebugUtils::highlightNavMeshEdges(hkaiNavMesh *mesh, hkArrayBase<unsigned int> *edgesVisited, unsigned int highlightColor, hkVector4f *offset)
+void __fastcall hkaiNavMeshDebugUtils::highlightNavMeshEdges(
+        hkaiNavMesh *mesh,
+        hkArrayBase<unsigned int> *edgesVisited,
+        unsigned int highlightColor,
+        hkVector4f *offset)
 {
-  hkaiNavMesh *v4; // rbx
-  hkVector4f *v5; // rdi
-  unsigned int v6; // esi
-  hkArrayBase<unsigned int> *v7; // rbp
-  hkaiNavMeshInstance mesha; // [rsp+20h] [rbp-1E8h]
+  hkaiNavMeshInstance mesha; // [rsp+20h] [rbp-1E8h] BYREF
 
-  v4 = mesh;
-  v5 = offset;
-  v6 = highlightColor;
-  v7 = edgesVisited;
   hkaiNavMeshInstance::hkaiNavMeshInstance(&mesha);
-  hkaiNavMeshInstance::tempInit(&mesha, v4, 0);
-  hkaiNavMeshDebugUtils::highlightNavMeshEdges(&mesha, v7, v6, v5);
+  hkaiNavMeshInstance::tempInit(&mesha, mesh, 0);
+  hkaiNavMeshDebugUtils::highlightNavMeshEdges(&mesha, edgesVisited, highlightColor, offset);
   hkaiNavMeshInstance::~hkaiNavMeshInstance(&mesha);
 }
 
 // File Line: 264
 // RVA: 0xC47310
-void __fastcall hkaiNavMeshDebugUtils::highlightNavMeshEdgeMidpoints(hkaiNavMesh *mesh, int faceIndexStart, int faceIndexEnd, hkArrayBase<unsigned int> *edgesVisited, unsigned int highlightColor, float highlightRadius, float displayOffset)
+void __fastcall hkaiNavMeshDebugUtils::highlightNavMeshEdgeMidpoints(
+        hkaiNavMesh *mesh,
+        int faceIndexStart,
+        int faceIndexEnd,
+        hkArrayBase<unsigned int> *edgesVisited,
+        unsigned int highlightColor,
+        float highlightRadius,
+        float displayOffset)
 {
-  hkaiNavMesh *v7; // rbx
-  hkArrayBase<unsigned int> *v8; // rdi
-  int v9; // esi
-  int v10; // ebp
-  hkaiNavMeshInstance mesha; // [rsp+40h] [rbp-1E8h]
+  hkaiNavMeshInstance mesha; // [rsp+40h] [rbp-1E8h] BYREF
 
-  v7 = mesh;
-  v8 = edgesVisited;
-  v9 = faceIndexEnd;
-  v10 = faceIndexStart;
   hkaiNavMeshInstance::hkaiNavMeshInstance(&mesha);
-  hkaiNavMeshInstance::tempInit(&mesha, v7, 0);
+  hkaiNavMeshInstance::tempInit(&mesha, mesh, 0);
   hkaiNavMeshDebugUtils::highlightNavMeshEdgeMidpoints(
     &mesha,
-    v10,
-    v9,
-    v8,
+    faceIndexStart,
+    faceIndexEnd,
+    edgesVisited,
     highlightColor,
     highlightRadius,
     displayOffset);
@@ -265,25 +259,26 @@ void __fastcall hkaiNavMeshDebugUtils::highlightNavMeshEdgeMidpoints(hkaiNavMesh
 
 // File Line: 271
 // RVA: 0xC47450
-void __fastcall hkaiNavMeshDebugUtils::highlightNavMeshEdgeMidpoints(hkaiNavMesh *mesh, int faceIndexStart, hkVector4f *startPoint, int faceIndexEnd, hkVector4f *endPoint, hkArrayBase<unsigned int> *edgesVisited, unsigned int highlightColor, float highlightRadius, float displayOffset)
+void __fastcall hkaiNavMeshDebugUtils::highlightNavMeshEdgeMidpoints(
+        hkaiNavMesh *mesh,
+        int faceIndexStart,
+        hkVector4f *startPoint,
+        int faceIndexEnd,
+        hkVector4f *endPoint,
+        hkArrayBase<unsigned int> *edgesVisited,
+        unsigned int highlightColor,
+        float highlightRadius,
+        float displayOffset)
 {
-  hkaiNavMesh *v9; // rbx
-  int v10; // edi
-  hkVector4f *v11; // rsi
-  int v12; // ebp
-  hkaiNavMeshInstance mesha; // [rsp+50h] [rbp-1E8h]
+  hkaiNavMeshInstance mesha; // [rsp+50h] [rbp-1E8h] BYREF
 
-  v9 = mesh;
-  v10 = faceIndexEnd;
-  v11 = startPoint;
-  v12 = faceIndexStart;
   hkaiNavMeshInstance::hkaiNavMeshInstance(&mesha);
-  hkaiNavMeshInstance::tempInit(&mesha, v9, 0);
+  hkaiNavMeshInstance::tempInit(&mesha, mesh, 0);
   hkaiNavMeshDebugUtils::highlightNavMeshEdgeMidpoints(
     &mesha,
-    v12,
-    v11,
-    v10,
+    faceIndexStart,
+    startPoint,
+    faceIndexEnd,
     endPoint,
     edgesVisited,
     highlightColor,
@@ -294,37 +289,34 @@ void __fastcall hkaiNavMeshDebugUtils::highlightNavMeshEdgeMidpoints(hkaiNavMesh
 
 // File Line: 278
 // RVA: 0xC473B0
-void __fastcall hkaiNavMeshDebugUtils::highlightNavMeshEdgeMidpoints(hkaiNavMeshInstance *mesh, __int64 faceIndexStart, int faceIndexEnd, hkArrayBase<unsigned int> *edgesVisited, unsigned int highlightColor, float highlightRadius, float displayOffset)
+void __fastcall hkaiNavMeshDebugUtils::highlightNavMeshEdgeMidpoints(
+        hkaiNavMeshUtils *mesh,
+        hkaiNavMeshInstance *faceIndexStart,
+        unsigned int faceIndexEnd,
+        hkVector4f *edgesVisited,
+        unsigned int highlightColor,
+        float highlightRadius,
+        float displayOffset)
 {
-  unsigned int v7; // edi
-  hkArrayBase<unsigned int> *v8; // rbx
   int v9; // esi
-  hkaiNavMeshInstance *v10; // rbp
   hkVector4f *v11; // r9
-  hkVector4f endPoint; // [rsp+50h] [rbp-28h]
-  int faceIndex; // [rsp+60h] [rbp-18h]
+  hkVector4f endPoint; // [rsp+50h] [rbp-28h] BYREF
+  __m128 faceIndex; // [rsp+60h] [rbp-18h] BYREF
 
-  v7 = faceIndexEnd;
-  v8 = edgesVisited;
-  v9 = faceIndexStart;
-  v10 = mesh;
+  v9 = (int)faceIndexStart;
+  hkaiNavMeshUtils::calcFaceCentroid<hkaiNavMeshInstance>(mesh, faceIndexStart, &faceIndex, edgesVisited);
   hkaiNavMeshUtils::calcFaceCentroid<hkaiNavMeshInstance>(
-    (hkaiNavMeshUtils *)mesh,
-    (hkaiNavMeshInstance *)faceIndexStart,
-    (__int64)&faceIndex,
-    (hkVector4f *)edgesVisited);
-  hkaiNavMeshUtils::calcFaceCentroid<hkaiNavMeshInstance>(
-    (hkaiNavMeshUtils *)v10,
-    (hkaiNavMeshInstance *)v7,
-    (__int64)&endPoint,
+    mesh,
+    (hkaiNavMeshInstance *)faceIndexEnd,
+    &endPoint.m_quad,
     v11);
   hkaiNavMeshDebugUtils::highlightNavMeshEdgeMidpoints(
-    v10,
+    (hkaiNavMeshInstance *)mesh,
     v9,
     (hkVector4f *)&faceIndex,
-    v7,
+    faceIndexEnd,
     &endPoint,
-    v8,
+    (hkArrayBase<unsigned int> *)edgesVisited,
     highlightColor,
     highlightRadius,
     displayOffset);
@@ -332,14 +324,23 @@ void __fastcall hkaiNavMeshDebugUtils::highlightNavMeshEdgeMidpoints(hkaiNavMesh
 
 // File Line: 287
 // RVA: 0xC47510
-void __usercall hkaiNavMeshDebugUtils::highlightNavMeshEdgeMidpoints(hkaiNavMeshInstance *mesh@<rcx>, int faceIndexStart@<edx>, hkVector4f *startPoint@<r8>, __int64 faceIndexEnd@<r9>, __int64 a5@<r12>, __m128 a6@<xmm12>, hkVector4f *endPoint, hkArrayBase<unsigned int> *edgesVisited, unsigned int highlightColor, float highlightRadius, float displayOffset)
+void __fastcall hkaiNavMeshDebugUtils::highlightNavMeshEdgeMidpoints(
+        hkSimdFloat32 *mesh,
+        unsigned int faceIndexStart,
+        hkVector4f *startPoint,
+        hkVector4f *faceIndexEnd,
+        hkVector4f *endPoint,
+        hkArrayBase<unsigned int> *edgesVisited,
+        unsigned int highlightColor,
+        float highlightRadius,
+        float displayOffset)
 {
-  signed int v11; // er14
-  unsigned int v12; // er10
-  signed int v13; // eax
-  unsigned int v14; // er15
-  hkaiNavMeshInstance *v15; // rbx
-  signed __int64 v16; // rsi
+  unsigned int v9; // r12d
+  __m128 v10; // xmm12
+  int v11; // r14d
+  unsigned int v12; // r10d
+  int v13; // eax
+  __int64 v16; // rsi
   __m128 *v17; // r12
   __m128 v18; // xmm12
   hkVector4f *v19; // r9
@@ -348,7 +349,7 @@ void __usercall hkaiNavMeshDebugUtils::highlightNavMeshEdgeMidpoints(hkaiNavMesh
   hkVector4f *v22; // r9
   hkaiNavMeshInstance *v23; // r8
   __m128 v24; // xmm1
-  __m128 v25; // xmm10
+  __m128 m_quad; // xmm10
   __m128 v26; // xmm1
   __m128 v27; // xmm1
   __m128 v28; // xmm2
@@ -365,64 +366,65 @@ void __usercall hkaiNavMeshDebugUtils::highlightNavMeshEdgeMidpoints(hkaiNavMesh
   __m128 v39; // xmm4
   __m128 v40; // xmm1
   __m128 v41; // xmm5
-  __m128 v42; // xmm1
-  __m128 v43; // xmm6
-  __m128 v44; // xmm5
-  __m128 v45; // xmm0
-  __m128 v46; // xmm4
+  __m128 v42; // xmm0
+  __m128 v43; // xmm5
+  __m128 v44; // xmm6
+  __m128 v45; // xmm5
+  __m128 v46; // xmm0
   __m128 v47; // xmm4
-  __m128 v48; // xmm1
-  __m128 v49; // xmm2
-  __m128 v50; // xmm1
-  __m128 v51; // xmm8
-  __m128 v52; // xmm3
-  __m128 v53; // xmm0
-  __m128 v54; // xmm2
-  __m128 v55; // xmm0
-  __m128 v56; // xmm4
-  __m128 v57; // xmm1
-  int edgeIndex[4]; // [rsp+40h] [rbp-90h]
-  hkVector4f start; // [rsp+50h] [rbp-80h]
-  int faceIndex[4]; // [rsp+60h] [rbp-70h]
-  hkVector4f a; // [rsp+70h] [rbp-60h]
-  char v62; // [rsp+80h] [rbp-50h]
-  char v63; // [rsp+90h] [rbp-40h]
-  char v64; // [rsp+A0h] [rbp-30h]
-  hkVector4f *v65; // [rsp+1A0h] [rbp+D0h]
-  unsigned int v66; // [rsp+1A8h] [rbp+D8h]
+  __m128 v48; // xmm4
+  __m128 v49; // xmm1
+  __m128 v50; // xmm2
+  __m128 v51; // xmm1
+  __m128 v52; // xmm8
+  __m128 v53; // xmm3
+  __m128 v54; // xmm0
+  __m128 v55; // xmm2
+  __m128 v56; // xmm0
+  __m128 v57; // xmm4
+  __m128 v58; // xmm1
+  int edgeIndex[4]; // [rsp+40h] [rbp-90h] BYREF
+  hkVector4f start; // [rsp+50h] [rbp-80h] BYREF
+  int faceIndex[4]; // [rsp+60h] [rbp-70h] BYREF
+  hkVector4f a; // [rsp+70h] [rbp-60h] BYREF
+  hkaiNavMeshUtils v63; // [rsp+80h] [rbp-50h] BYREF
+  hkaiNavMeshUtils v64; // [rsp+90h] [rbp-40h] BYREF
+  hkaiNavMeshUtils v65; // [rsp+A0h] [rbp-30h] BYREF
+  __m128 v66; // [rsp+110h] [rbp+40h]
+  hkVector4f *v67; // [rsp+1A0h] [rbp+D0h]
+  unsigned int v68; // [rsp+1A8h] [rbp+D8h]
   __m128 *vars0; // [rsp+1B0h] [rbp+E0h]
   _DWORD *retaddr; // [rsp+1B8h] [rbp+E8h]
-  __int64 color; // [rsp+1C0h] [rbp+F0h]
-  float v70; // [rsp+1C8h] [rbp+F8h]
-  hkVector4f *v71[2]; // [rsp+1D0h] [rbp+100h]
+  unsigned int color; // [rsp+1C0h] [rbp+F0h]
+  float v72; // [rsp+1C8h] [rbp+F8h]
+  float v73; // [rsp+1D0h] [rbp+100h]
 
-  v71[0] = startPoint;
+  v73 = *(float *)&startPoint;
   v11 = -1;
-  v12 = faceIndexEnd;
+  v12 = (unsigned int)faceIndexEnd;
   v13 = retaddr[2];
-  v14 = faceIndexStart;
-  v15 = mesh;
   v16 = -1i64;
   if ( v13 > -1 )
   {
-    color = a5;
+    color = v9;
     v17 = vars0;
-    a6.m128_f32[0] = *(float *)&startPoint;
-    v18 = _mm_shuffle_ps(a6, a6, 0);
+    v66 = v10;
+    v10.m128_f32[0] = *(float *)&startPoint;
+    v18 = _mm_shuffle_ps(v10, v10, 0);
     while ( v16 == -1 )
     {
       start.m_quad = startPoint->m_quad;
       hkaiNavMeshUtils::calcFaceNormal<hkaiNavMeshInstance>(
-        (hkaiNavMeshUtils *)&v62,
-        (hkSimdFloat32 *)v15,
-        (hkaiNavMeshInstance *)v14,
-        (__int64)faceIndex);
+        &v63,
+        mesh,
+        (hkaiNavMeshInstance *)faceIndexStart,
+        (__m128 *)faceIndex);
       if ( retaddr[2] )
       {
         hkaiNavMeshUtils::calcEdgeMidpoint<hkaiNavMeshInstance>(
-          (hkaiNavMeshUtils *)v15,
+          (hkaiNavMeshUtils *)mesh,
           (hkaiNavMeshInstance *)**(unsigned int **)retaddr,
-          (__int64)edgeIndex,
+          (__m128 *)edgeIndex,
           v19);
 LABEL_13:
         v20 = *(__m128 *)edgeIndex;
@@ -431,11 +433,11 @@ LABEL_13:
       v20 = *v17;
       *(__m128 *)edgeIndex = *v17;
 LABEL_14:
-      if ( v70 > 0.0 )
+      if ( v72 > 0.0 )
       {
-        v25 = start.m_quad;
-        v26 = (__m128)LODWORD(v71[0]);
-        v26.m128_f32[0] = *(float *)v71 * 0.1;
+        m_quad = start.m_quad;
+        v26 = (__m128)LODWORD(v73);
+        v26.m128_f32[0] = v73 * 0.1;
         v27 = _mm_mul_ps(_mm_shuffle_ps(v26, v26, 0), *(__m128 *)faceIndex);
         v28 = _mm_add_ps(*(__m128 *)faceIndex, v27);
         v29 = _mm_add_ps(start.m_quad, v27);
@@ -449,14 +451,14 @@ LABEL_14:
         v35 = _mm_rsqrt_ps(v34);
         v36 = _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v35, v34), v35));
         v37 = _mm_mul_ps(*(__m128 *)_xmm, v35);
-        v38 = (__m128)LODWORD(v70);
-        v38.m128_f32[0] = v70 * -1.2;
-        v39 = _mm_andnot_ps(_mm_cmpleps(v34, (__m128)0i64), _mm_mul_ps(v36, v37));
-        v40 = (__m128)LODWORD(v70);
-        v40.m128_f32[0] = v70 * 1.2;
+        v38 = (__m128)LODWORD(v72);
+        v38.m128_f32[0] = v72 * -1.2;
+        v39 = _mm_andnot_ps(_mm_cmple_ps(v34, (__m128)0i64), _mm_mul_ps(v36, v37));
+        v40 = (__m128)LODWORD(v72);
+        v40.m128_f32[0] = v72 * 1.2;
         v41 = _mm_mul_ps(v32, v39);
-        v42 = _mm_mul_ps(_mm_shuffle_ps(v40, v40, 0), v41);
         *(__m128 *)faceIndex = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v38, v38, 0), v41), v20);
+        v42 = _mm_mul_ps(_mm_shuffle_ps(v40, v40, 0), v41);
         a.m_quad = _mm_add_ps(v42, v20);
         start.m_quad = _mm_add_ps(v42, v29);
         hkDebugDisplay::displayTriangle(
@@ -476,29 +478,30 @@ LABEL_14:
           0,
           (int)hkDebugDisplayProcess::m_tag);
         v43 = _mm_mul_ps(v18, *(__m128 *)faceIndex);
-        v44 = _mm_add_ps(v43, v25);
-        *(__m128 *)edgeIndex = _mm_add_ps(v43, v20);
-        v45 = _mm_sub_ps(v44, *(__m128 *)edgeIndex);
-        v46 = _mm_sub_ps(
-                _mm_mul_ps(_mm_shuffle_ps(v45, v45, 201), *(__m128 *)faceIndex),
-                _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)faceIndex, *(__m128 *)faceIndex, 201), v45));
-        v47 = _mm_shuffle_ps(v46, v46, 201);
-        v48 = _mm_mul_ps(v47, v47);
-        v49 = _mm_add_ps(
-                _mm_add_ps(_mm_shuffle_ps(v48, v48, 85), _mm_shuffle_ps(v48, v48, 0)),
-                _mm_shuffle_ps(v48, v48, 170));
-        v50 = _mm_rsqrt_ps(v49);
-        v51 = _mm_mul_ps(*(__m128 *)_xmm, v50);
-        v52 = _mm_cmpleps(v49, (__m128)0i64);
-        v53 = _mm_mul_ps(v50, v49);
-        v54 = _mm_xor_ps((__m128)LODWORD(v70), *(__m128 *)_xmm);
-        v55 = _mm_mul_ps(v53, v50);
-        v50.m128_f32[0] = v70;
-        v56 = _mm_mul_ps(v47, _mm_andnot_ps(v52, _mm_mul_ps(_mm_sub_ps((__m128)_xmm, v55), v51)));
-        v57 = _mm_mul_ps(_mm_shuffle_ps(v50, v50, 0), v56);
-        start.m_quad = _mm_add_ps(v44, v57);
-        *(__m128 *)faceIndex = _mm_add_ps(*(__m128 *)edgeIndex, _mm_mul_ps(_mm_shuffle_ps(v54, v54, 0), v56));
-        a.m_quad = _mm_add_ps(*(__m128 *)edgeIndex, v57);
+        v44 = _mm_add_ps(v43, v20);
+        v45 = _mm_add_ps(v43, m_quad);
+        *(__m128 *)edgeIndex = v44;
+        v46 = _mm_sub_ps(v45, v44);
+        v47 = _mm_sub_ps(
+                _mm_mul_ps(_mm_shuffle_ps(v46, v46, 201), *(__m128 *)faceIndex),
+                _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)faceIndex, *(__m128 *)faceIndex, 201), v46));
+        v48 = _mm_shuffle_ps(v47, v47, 201);
+        v49 = _mm_mul_ps(v48, v48);
+        v50 = _mm_add_ps(
+                _mm_add_ps(_mm_shuffle_ps(v49, v49, 85), _mm_shuffle_ps(v49, v49, 0)),
+                _mm_shuffle_ps(v49, v49, 170));
+        v51 = _mm_rsqrt_ps(v50);
+        v52 = _mm_mul_ps(*(__m128 *)_xmm, v51);
+        v53 = _mm_cmple_ps(v50, (__m128)0i64);
+        v54 = _mm_mul_ps(v51, v50);
+        v55 = _mm_xor_ps((__m128)LODWORD(v72), *(__m128 *)_xmm);
+        v56 = _mm_mul_ps(v54, v51);
+        v51.m128_f32[0] = v72;
+        v57 = _mm_mul_ps(v48, _mm_andnot_ps(v53, _mm_mul_ps(_mm_sub_ps((__m128)_xmm, v56), v52)));
+        v58 = _mm_mul_ps(_mm_shuffle_ps(v51, v51, 0), v57);
+        start.m_quad = _mm_add_ps(v45, v58);
+        *(__m128 *)faceIndex = _mm_add_ps(v44, _mm_mul_ps(_mm_shuffle_ps(v55, v55, 0), v57));
+        a.m_quad = _mm_add_ps(v44, v58);
         hkDebugDisplay::displayTriangle(
           hkSingleton<hkDebugDisplay>::s_instance,
           &a,
@@ -530,8 +533,8 @@ LABEL_14:
           (int)hkDebugDisplayProcess::m_tag);
       }
       v13 = retaddr[2];
-      startPoint = v65;
-      v12 = v66;
+      startPoint = v67;
+      v12 = v68;
       ++v11;
       ++v16;
       if ( v11 >= v13 )
@@ -540,44 +543,36 @@ LABEL_14:
     if ( v11 == v13 - 1 )
     {
       *(__m128 *)edgeIndex = *v17;
-      hkaiNavMeshUtils::calcFaceNormal<hkaiNavMeshInstance>(
-        (hkaiNavMeshUtils *)&v64,
-        (hkSimdFloat32 *)v15,
-        (hkaiNavMeshInstance *)v12,
-        (__int64)faceIndex);
+      hkaiNavMeshUtils::calcFaceNormal<hkaiNavMeshInstance>(&v65, mesh, (hkaiNavMeshInstance *)v12, (__m128 *)faceIndex);
       hkaiNavMeshUtils::calcEdgeMidpoint<hkaiNavMeshInstance>(
-        (hkaiNavMeshUtils *)v15,
-        (hkaiNavMeshInstance *)*(unsigned int *)(*(_QWORD *)retaddr + 4i64 * (signed int)retaddr[2] - 4),
-        (__int64)&start,
+        (hkaiNavMeshUtils *)mesh,
+        (hkaiNavMeshInstance *)*(unsigned int *)(*(_QWORD *)retaddr + 4i64 * (int)retaddr[2] - 4),
+        &start.m_quad,
         v21);
     }
     else
     {
       hkaiNavMeshUtils::calcEdgeMidpoint<hkaiNavMeshInstance>(
-        (hkaiNavMeshUtils *)v15,
+        (hkaiNavMeshUtils *)mesh,
         (hkaiNavMeshInstance *)*(unsigned int *)(*(_QWORD *)retaddr + 4 * v16),
-        (__int64)&start,
-        (hkVector4f *)faceIndexEnd);
+        &start.m_quad,
+        faceIndexEnd);
       hkaiNavMeshUtils::calcEdgeMidpoint<hkaiNavMeshInstance>(
-        (hkaiNavMeshUtils *)v15,
+        (hkaiNavMeshUtils *)mesh,
         (hkaiNavMeshInstance *)*(unsigned int *)(*(_QWORD *)retaddr + 4 * v16 + 4),
-        (__int64)edgeIndex,
+        (__m128 *)edgeIndex,
         v22);
       if ( v16 )
         v23 = (hkaiNavMeshInstance *)(hkaiNavMeshInstance_get_hkaiNavMesh::Edge__23(
-                                        v15->m_originalEdges,
-                                        v15->m_numOriginalEdges,
-                                        &v15->m_instancedEdges,
-                                        &v15->m_ownedEdges,
-                                        &v15->m_edgeMap,
+                                        (hkaiNavMesh::Edge *)mesh[2].m_real.m128_u64[0],
+                                        mesh[2].m_real.m128_i32[2],
+                                        (hkArray<hkaiNavMesh::Edge,hkContainerHeapAllocator> *)&mesh[16],
+                                        (hkArray<hkaiNavMesh::Edge,hkContainerHeapAllocator> *)&mesh[18],
+                                        (hkArray<int,hkContainerHeapAllocator> *)&mesh[13],
                                         *(_DWORD *)(*(_QWORD *)retaddr + 4 * v16 - 4))->m_oppositeFace & 0x3FFFFF);
       else
-        v23 = (hkaiNavMeshInstance *)v14;
-      hkaiNavMeshUtils::calcFaceNormal<hkaiNavMeshInstance>(
-        (hkaiNavMeshUtils *)&v63,
-        (hkSimdFloat32 *)v15,
-        v23,
-        (__int64)faceIndex);
+        v23 = (hkaiNavMeshInstance *)faceIndexStart;
+      hkaiNavMeshUtils::calcFaceNormal<hkaiNavMeshInstance>(&v64, mesh, v23, (__m128 *)faceIndex);
     }
     goto LABEL_13;
   }
@@ -585,31 +580,46 @@ LABEL_14:
 
 // File Line: 375
 // RVA: 0xC47A60
-void __fastcall hkaiNavMeshDebugUtils::drawPath(hkaiPath *path, float width, hkVector4f *up, unsigned int color, unsigned int lastSegmentColor, float offset)
+void __fastcall hkaiNavMeshDebugUtils::drawPath(
+        hkaiPath *path,
+        float width,
+        hkVector4f *up,
+        unsigned int color,
+        unsigned int lastSegmentColor,
+        float offset)
 {
   hkaiNavMeshDebugUtils::_drawPath(path, width, up, color, lastSegmentColor, 0i64, 0, offset);
 }
 
 // File Line: 380
 // RVA: 0xC47AA0
-void __usercall hkaiNavMeshDebugUtils::_drawPath(hkaiPath *path@<rcx>, float width@<xmm1>, hkVector4f *up@<r8>, unsigned int color@<r9d>, __m128 a5@<xmm9>, unsigned int lastSegmentColor, hkDebugDisplayHandler *displayHandler, int tag, float offset)
+void __fastcall hkaiNavMeshDebugUtils::_drawPath(
+        hkaiPath *path,
+        float width,
+        hkVector4f *up,
+        unsigned int color,
+        unsigned int lastSegmentColor,
+        hkDebugDisplayHandler *displayHandler,
+        int tag,
+        float offset)
 {
-  signed __int64 v9; // rax
-  signed int v10; // er15
+  __m128 v8; // xmm9
+  __int64 m_size; // rax
+  int v10; // r15d
   unsigned int v11; // edx
-  signed __int64 v12; // rsi
-  signed __int64 v13; // r13
+  __int64 v12; // rsi
+  __int64 v13; // r13
   __m128 v14; // xmm7
   float v15; // xmm2_4
   hkDebugDisplayHandler *v16; // rbx
-  int v17; // er14
+  int v17; // r14d
   int v18; // eax
   __m128 v19; // xmm9
   __int64 v20; // r12
   bool v21; // zf
-  hkaiPath::PathPoint *v22; // rax
+  hkaiPath::PathPoint *m_data; // rax
   unsigned int v23; // edi
-  __m128 v24; // xmm8
+  __m128 m_quad; // xmm8
   __m128 v25; // xmm6
   __m128 v26; // xmm0
   __m128 v27; // xmm5
@@ -618,62 +628,53 @@ void __usercall hkaiNavMeshDebugUtils::_drawPath(hkaiPath *path@<rcx>, float wid
   __m128 v30; // xmm3
   __m128 v31; // xmm2
   __m128 v32; // xmm4
-  __int64 v33; // ST38_8
-  __int64 v34; // ST30_8
-  __int64 v35; // ST28_8
-  __int64 v36; // ST38_8
-  __int64 v37; // ST30_8
-  __int64 v38; // ST28_8
-  __int64 id; // [rsp+28h] [rbp-D8h]
-  __int64 v40; // [rsp+30h] [rbp-D0h]
-  __int64 v41; // [rsp+38h] [rbp-C8h]
-  unsigned int v42; // [rsp+40h] [rbp-C0h]
-  hkVector4f c; // [rsp+50h] [rbp-B0h]
-  hkVector4f a; // [rsp+60h] [rbp-A0h]
-  hkVector4f v45; // [rsp+70h] [rbp-90h]
-  hkVector4f v46; // [rsp+80h] [rbp-80h]
-  char v47; // [rsp+90h] [rbp-70h]
-  hkVector4f b; // [rsp+A0h] [rbp-60h]
-  char v49; // [rsp+B0h] [rbp-50h]
-  char v50; // [rsp+B4h] [rbp-4Ch]
-  hkVector4f v51; // [rsp+C0h] [rbp-40h]
-  hkVector4f v52; // [rsp+D0h] [rbp-30h]
-  hkaiPath *v53; // [rsp+190h] [rbp+90h]
-  int v54; // [rsp+198h] [rbp+98h]
-  float v55; // [rsp+1A0h] [rbp+A0h]
+  hkVector4f c; // [rsp+50h] [rbp-B0h] BYREF
+  hkVector4f a; // [rsp+60h] [rbp-A0h] BYREF
+  hkVector4f v36; // [rsp+70h] [rbp-90h] BYREF
+  hkVector4f v37; // [rsp+80h] [rbp-80h] BYREF
+  char v38; // [rsp+90h] [rbp-70h] BYREF
+  hkVector4f b; // [rsp+A0h] [rbp-60h] BYREF
+  hkResult v40; // [rsp+B0h] [rbp-50h] BYREF
+  char v41; // [rsp+B4h] [rbp-4Ch] BYREF
+  hkVector4f v42; // [rsp+C0h] [rbp-40h] BYREF
+  hkVector4f v43; // [rsp+D0h] [rbp-30h] BYREF
+  __m128 v44; // [rsp+110h] [rbp+10h]
+  hkaiPath *v45; // [rsp+190h] [rbp+90h]
+  int v46; // [rsp+198h] [rbp+98h]
+  float v47; // [rsp+1A0h] [rbp+A0h] BYREF
 
-  v53 = path;
-  v9 = path->m_points.m_size;
+  v45 = path;
+  m_size = path->m_points.m_size;
   v10 = 1;
   v11 = color;
   v12 = 1i64;
-  v13 = v9;
-  v55 = FLOAT_0_050000001;
-  v42 = color;
+  v13 = m_size;
+  v47 = FLOAT_0_050000001;
   v14 = _mm_mul_ps(_mm_shuffle_ps((__m128)LODWORD(offset), (__m128)LODWORD(offset), 0), up->m_quad);
   v15 = fmaxf(width * 0.5, 0.050000001);
-  if ( v9 > 1 )
+  if ( m_size > 1 )
   {
     v16 = displayHandler;
     v17 = tag;
-    a5.m128_f32[0] = v15;
-    v18 = v9 - 1;
-    v19 = _mm_shuffle_ps(a5, a5, 0);
-    v54 = v18;
+    v44 = v8;
+    v8.m128_f32[0] = v15;
+    v18 = m_size - 1;
+    v19 = _mm_shuffle_ps(v8, v8, 0);
+    v46 = v18;
     v20 = 0i64;
     do
     {
       v21 = v10 == v18;
-      v22 = path->m_points.m_data;
+      m_data = path->m_points.m_data;
       v23 = v11;
       if ( v21 )
         v23 = lastSegmentColor;
-      v24 = v22[v20].m_position.m_quad;
-      v25 = v22[v20 + 1].m_position.m_quad;
-      v26 = _mm_sub_ps(v22[v20].m_position.m_quad, v25);
+      m_quad = m_data[v20].m_position.m_quad;
+      v25 = m_data[v20 + 1].m_position.m_quad;
+      v26 = _mm_sub_ps(m_quad, v25);
       v27 = _mm_sub_ps(
-              _mm_mul_ps(_mm_shuffle_ps(v22[v20].m_normal.m_quad, v22[v20].m_normal.m_quad, 201), v26),
-              _mm_mul_ps(_mm_shuffle_ps(v26, v26, 201), v22[v20].m_normal.m_quad));
+              _mm_mul_ps(_mm_shuffle_ps(m_data[v20].m_normal.m_quad, m_data[v20].m_normal.m_quad, 201), v26),
+              _mm_mul_ps(_mm_shuffle_ps(v26, v26, 201), m_data[v20].m_normal.m_quad));
       v28 = _mm_shuffle_ps(v27, v27, 201);
       v29 = _mm_mul_ps(v28, v28);
       v30 = _mm_add_ps(
@@ -683,26 +684,20 @@ void __usercall hkaiNavMeshDebugUtils::_drawPath(hkaiPath *path@<rcx>, float wid
       v32 = _mm_mul_ps(
               _mm_mul_ps(
                 _mm_andnot_ps(
-                  _mm_cmpleps(v30, (__m128)0i64),
+                  _mm_cmple_ps(v30, (__m128)0i64),
                   _mm_mul_ps(
                     _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v31, v30), v31)),
                     _mm_mul_ps(*(__m128 *)_xmm, v31))),
                 v28),
               v19);
-      c.m_quad = _mm_add_ps(_mm_add_ps(v32, v24), v14);
+      c.m_quad = _mm_add_ps(_mm_add_ps(v32, m_quad), v14);
       b.m_quad = _mm_add_ps(_mm_add_ps(v32, v25), v14);
       a.m_quad = _mm_add_ps(_mm_sub_ps(v25, v32), v14);
-      v46.m_quad = _mm_add_ps(_mm_sub_ps(v24, v32), v14);
+      v37.m_quad = _mm_add_ps(_mm_sub_ps(m_quad, v32), v14);
       if ( v16 )
       {
-        LODWORD(v41) = v17;
-        LODWORD(v40) = 0;
-        LODWORD(id) = v23;
-        v16->vfptr->displayTriangle(v16, (hkResult *)&v55, &a, &b, &c, id, v40, v41);
-        LODWORD(v33) = v17;
-        LODWORD(v34) = 0;
-        LODWORD(v35) = v23;
-        v16->vfptr->displayTriangle(v16, (hkResult *)&v47, &c, &v46, &a, v35, v34, v33);
+        v16->vfptr->displayTriangle(v16, (hkResult *)&v47, &a, &b, &c, v23, 0, v17);
+        v16->vfptr->displayTriangle(v16, (hkResult *)&v38, &c, &v37, &a, v23, 0, v17);
       }
       else
       {
@@ -717,7 +712,7 @@ void __usercall hkaiNavMeshDebugUtils::_drawPath(hkaiPath *path@<rcx>, float wid
         hkDebugDisplay::displayTriangle(
           hkSingleton<hkDebugDisplay>::s_instance,
           &c,
-          &v46,
+          &v37,
           &a,
           v23,
           0,
@@ -725,44 +720,38 @@ void __usercall hkaiNavMeshDebugUtils::_drawPath(hkaiPath *path@<rcx>, float wid
       }
       if ( v12 > 1 )
       {
-        v45.m_quad = _mm_add_ps(v14, v24);
+        v36.m_quad = _mm_add_ps(v14, m_quad);
         if ( v16 )
         {
-          LODWORD(v41) = v17;
-          LODWORD(v40) = 0;
-          LODWORD(id) = v23;
-          v16->vfptr->displayTriangle(v16, (hkResult *)&v50, &c, &v51, &v45, id, v40, v41);
-          LODWORD(v36) = v17;
-          LODWORD(v37) = 0;
-          LODWORD(v38) = v23;
-          v16->vfptr->displayTriangle(v16, (hkResult *)&v49, &v52, &v46, &v45, v38, v37, v36);
+          v16->vfptr->displayTriangle(v16, (hkResult *)&v41, &c, &v42, &v36, v23, 0, v17);
+          v16->vfptr->displayTriangle(v16, &v40, &v43, &v37, &v36, v23, 0, v17);
         }
         else
         {
           hkDebugDisplay::displayTriangle(
             hkSingleton<hkDebugDisplay>::s_instance,
             &c,
-            &v51,
-            &v45,
+            &v42,
+            &v36,
             v23,
             0,
             (int)hkDebugDisplayProcess::m_tag);
           hkDebugDisplay::displayTriangle(
             hkSingleton<hkDebugDisplay>::s_instance,
-            &v52,
-            &v46,
-            &v45,
+            &v43,
+            &v37,
+            &v36,
             v23,
             0,
             (int)hkDebugDisplayProcess::m_tag);
         }
       }
-      path = v53;
-      v18 = v54;
-      v11 = v42;
+      path = v45;
+      v18 = v46;
+      v11 = color;
       ++v12;
-      v51.m_quad = b.m_quad;
-      v52.m_quad = a.m_quad;
+      v42.m_quad = b.m_quad;
+      v43.m_quad = a.m_quad;
       ++v10;
       ++v20;
     }
@@ -772,460 +761,403 @@ void __usercall hkaiNavMeshDebugUtils::_drawPath(hkaiPath *path@<rcx>, float wid
 
 // File Line: 436
 // RVA: 0xC47EB0
-void __fastcall hkaiNavMeshDebugUtils::drawPathWithRadius(hkaiPathfindingUtil::FindPathInput *pathInput, hkaiPathfindingUtil::FindPathOutput *pathOutput, unsigned int color, unsigned int failureColor, float displayOffset)
+void __fastcall hkaiNavMeshDebugUtils::drawPathWithRadius(
+        hkaiPathfindingUtil::FindPathInput *pathInput,
+        hkaiPathfindingUtil::FindPathOutput *pathOutput,
+        unsigned int color,
+        unsigned int failureColor,
+        float displayOffset)
 {
   hkaiNavMeshDebugUtils::_drawPathWithRadius(pathInput, pathOutput, color, failureColor, 0i64, 0, displayOffset);
 }
 
 // File Line: 441
 // RVA: 0xC47EE0
-void __usercall hkaiNavMeshDebugUtils::_drawPathWithRadius(hkaiPathfindingUtil::FindPathInput *pathInput@<rcx>, hkaiPathfindingUtil::FindPathOutput *pathOutput@<rdx>, unsigned int color@<r8d>, unsigned int failureColor@<r9d>, hkDebugDisplayHandler *a5@<rdi>, __m128 *a6@<xmm9>, hkDebugDisplayHandler *displayHandler, int tag, float displayOffset)
+void __fastcall hkaiNavMeshDebugUtils::_drawPathWithRadius(
+        hkaiPathfindingUtil::FindPathInput *pathInput,
+        hkaiPathfindingUtil::FindPathOutput *pathOutput,
+        unsigned int color,
+        unsigned int failureColor,
+        hkDebugDisplayHandler *displayHandler,
+        int tag,
+        float displayOffset)
 {
-  unsigned int v9; // er13
-  int v10; // er9
-  hkaiPathfindingUtil::FindPathOutput *v11; // r14
-  int v12; // edx
-  int v13; // er9
-  unsigned int v14; // er12
-  hkaiPathfindingUtil::FindPathInput *v15; // r15
-  int v16; // edi
-  __int64 v17; // rbx
-  hkaiPath::PathPoint *v18; // rsi
-  hkaiPath::PathPoint *v19; // rcx
-  int v20; // eax
-  unsigned int v21; // ecx
-  __m128 v22; // xmm6
-  hkVector4f *v23; // rdi
-  int v24; // ebx
-  hkaiPath::PathPoint *v25; // rcx
-  hkVector4f v26; // xmm0
-  float offset[4]; // [rsp+38h] [rbp-31h]
-  hkaiPath path; // [rsp+48h] [rbp-21h]
-  hkResult result; // [rsp+C8h] [rbp+5Fh]
-  hkDebugDisplayHandler *v30; // [rsp+D8h] [rbp+6Fh]
+  hkDebugDisplayHandler *v7; // rdi
+  int m_size; // r9d
+  int v11; // edx
+  int v12; // r9d
+  int v15; // edi
+  __int64 v16; // rbx
+  hkaiPath::PathPoint *m_data; // rsi
+  hkaiPath::PathPoint *v18; // rcx
+  int m_storage; // eax
+  unsigned int v20; // ecx
+  __m128 v21; // xmm6
+  hkVector4f *v22; // rdi
+  unsigned int v23; // ebx
+  hkaiPath::PathPoint *v24; // rcx
+  __m128 m_quad; // xmm0
+  float offset[4]; // [rsp+38h] [rbp-31h] BYREF
+  hkaiPath path; // [rsp+48h] [rbp-21h] BYREF
+  hkResult result; // [rsp+C8h] [rbp+5Fh] BYREF
+  hkDebugDisplayHandler *v29; // [rsp+D8h] [rbp+6Fh]
 
-  v30 = a5;
-  v9 = failureColor;
-  v10 = pathOutput->m_pathOut.m_size;
-  v11 = pathOutput;
-  v12 = 0;
-  v13 = 2 * v10;
-  v14 = color;
-  v15 = pathInput;
+  v29 = v7;
+  m_size = pathOutput->m_pathOut.m_size;
+  v11 = 0;
+  v12 = 2 * m_size;
   *(_DWORD *)&path.m_memSizeAndFlags = 0x1FFFF;
   path.vfptr = (hkBaseObjectVtbl *)&hkaiPath::`vftable;
   path.m_points.m_data = 0i64;
   path.m_points.m_size = 0;
-  path.m_points.m_capacityAndFlags = 2147483648;
+  path.m_points.m_capacityAndFlags = 0x80000000;
   path.m_referenceFrame.m_storage = 0;
-  if ( v13 > 0 )
+  if ( v12 > 0 )
   {
-    if ( v13 < 0 )
-      v13 = 0;
-    hkArrayUtil::_reserve(
-      &result,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &path.m_points,
-      v13,
-      48);
-    v12 = path.m_points.m_size;
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, &path.m_points, v12, 48);
+    v11 = path.m_points.m_size;
   }
-  v16 = 0;
-  if ( v11->m_pathOut.m_size > 0 )
+  v15 = 0;
+  if ( pathOutput->m_pathOut.m_size > 0 )
   {
-    v17 = 0i64;
+    v16 = 0i64;
     do
     {
-      v18 = v11->m_pathOut.m_data;
-      if ( v12 == (path.m_points.m_capacityAndFlags & 0x3FFFFFFF) )
+      m_data = pathOutput->m_pathOut.m_data;
+      if ( v11 == (path.m_points.m_capacityAndFlags & 0x3FFFFFFF) )
       {
-        hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &path.m_points, 48);
-        v12 = path.m_points.m_size;
+        hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &path.m_points, 48);
+        v11 = path.m_points.m_size;
       }
-      v19 = &path.m_points.m_data[v12];
-      if ( v19 )
+      v18 = &path.m_points.m_data[v11];
+      if ( v18 )
       {
-        v19->m_position = v18[v17].m_position;
-        v19->m_normal = v18[v17].m_normal;
-        *(_OWORD *)&v19->m_userEdgeData = *(_OWORD *)&v18[v17].m_userEdgeData;
-        v12 = path.m_points.m_size;
+        v18->m_position = m_data[v16].m_position;
+        v18->m_normal = m_data[v16].m_normal;
+        *(_OWORD *)&v18->m_userEdgeData = *(_OWORD *)&m_data[v16].m_userEdgeData;
+        v11 = path.m_points.m_size;
       }
-      ++v12;
+      ++v11;
+      ++v15;
       ++v16;
-      ++v17;
-      path.m_points.m_size = v12;
+      path.m_points.m_size = v11;
     }
-    while ( v16 < v11->m_pathOut.m_size );
+    while ( v15 < pathOutput->m_pathOut.m_size );
   }
-  v20 = (unsigned __int8)v11->m_outputParameters.m_status.m_storage;
-  v21 = v14;
-  v22 = _mm_mul_ps(
+  m_storage = (unsigned __int8)pathOutput->m_outputParameters.m_status.m_storage;
+  v20 = color;
+  v21 = _mm_mul_ps(
           _mm_cvtepi32_ps(
             _mm_add_epi32(
-              _mm_unpacklo_epi16((__m128i)0i64, _mm_loadl_epi64((const __m128i *)&v15->m_searchParameters)),
+              _mm_unpacklo_epi16((__m128i)0i64, _mm_loadl_epi64((const __m128i *)&pathInput->m_searchParameters)),
               _mm_loadu_si128((const __m128i *)hkPackedUnitVector_m_offset))),
           (__m128)xmmword_141A713A0);
-  *(__m128 *)offset = v22;
-  if ( (unsigned int)(v20 - 3) <= 1 && v15->m_goalPoints.m_size == 1 )
+  *(__m128 *)offset = v21;
+  if ( (unsigned int)(m_storage - 3) <= 1 && pathInput->m_goalPoints.m_size == 1 )
   {
-    v23 = v15->m_goalPoints.m_data;
-    v24 = *v15->m_goalFaceKeys.m_data >> 22;
-    if ( v12 == (path.m_points.m_capacityAndFlags & 0x3FFFFFFF) )
+    v22 = pathInput->m_goalPoints.m_data;
+    v23 = *pathInput->m_goalFaceKeys.m_data >> 22;
+    if ( v11 == (path.m_points.m_capacityAndFlags & 0x3FFFFFFF) )
     {
-      hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &path.m_points, 48);
-      v12 = path.m_points.m_size;
+      hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &path.m_points, 48);
+      v11 = path.m_points.m_size;
     }
-    v25 = &path.m_points.m_data[v12];
-    path.m_points.m_size = v12 + 1;
-    v26.m_quad = v23->m_quad;
-    v25->m_normal.m_quad = v22;
-    v25->m_sectionId = v24;
-    v25->m_userEdgeData = 0;
-    v25->m_flags.m_storage = 0;
-    v25->m_position = (hkVector4f)v26.m_quad;
-    v21 = v9;
+    v24 = &path.m_points.m_data[v11];
+    path.m_points.m_size = v11 + 1;
+    m_quad = v22->m_quad;
+    v24->m_normal.m_quad = v21;
+    v24->m_sectionId = v23;
+    v24->m_userEdgeData = 0;
+    v24->m_flags.m_storage = 0;
+    v24->m_position.m_quad = m_quad;
+    v20 = failureColor;
   }
   hkaiNavMeshDebugUtils::_drawPath(
     &path,
-    v15->m_agentInfo.m_diameter,
+    pathInput->m_agentInfo.m_diameter,
     (hkVector4f *)offset,
-    v14,
-    a6,
-    v21,
-    v30,
+    color,
+    v20,
+    v29,
     (int)displayHandler,
     *(float *)&tag);
   path.m_points.m_size = 0;
   if ( path.m_points.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       path.m_points.m_data,
       48 * (path.m_points.m_capacityAndFlags & 0x3FFFFFFF));
-}ainerHeapAllocator::s_alloc,
-      path.m_points.m_data,
-      48 * (path.m_points.m_capacityAndFlags & 0x3FFFFFFF));
+}
 
 // File Line: 466
 // RVA: 0xC4B4A0
-int perturbColor(...)
+// local variable allocation has failed, the output may be wrong!
+unsigned int __fastcall perturbColor(unsigned int color, int seed, double variance)
 {
   __m128 v3; // xmm4
-  int v4; // edx
-  signed int v5; // eax
-  int v6; // edx
+  int v4; // eax
+  float v5; // xmm0_4
+  int v6; // eax
   float v7; // xmm0_4
-  signed int v8; // eax
-  int v9; // edx
-  __m128 v10; // ST20_16
-  __m128 v11; // xmm3
-  __m128 v12; // xmm0
-  __m128 v13; // xmm0
+  int v8; // eax
+  __m128 v9; // xmm3
+  __m128 v10; // xmm0
+  __m128 v11; // xmm0
+  __m128 v13; // [rsp+20h] [rbp-38h]
 
   v3 = 0i64;
   v4 = 1664525 * seed + 1013904223;
-  v5 = v4;
+  v5 = (float)v4;
   v6 = 1664525 * v4 + 1013904223;
-  v7 = (float)v5;
-  v8 = v6;
-  v9 = 1664525 * v6 + 1013904223;
-  v10.m128_f32[0] = (float)((float)(v7 * 2.3283064e-10) * 2.0) - 1.0;
-  v10.m128_f32[1] = (float)((float)((float)v8 * 2.3283064e-10) * 2.0) - 1.0;
-  v10.m128_f32[2] = (float)((float)((float)v9 * 2.3283064e-10) * 2.0) - 1.0;
-  v11 = 0i64;
+  v13.m128_f32[0] = (float)((float)(v5 * 2.3283064e-10) * 2.0) - 1.0;
+  v7 = (float)v6;
+  v8 = 1664525 * v6 + 1013904223;
+  v13.m128_f32[1] = (float)((float)(v7 * 2.3283064e-10) * 2.0) - 1.0;
+  v13.m128_f32[2] = (float)((float)((float)v8 * 2.3283064e-10) * 2.0) - 1.0;
+  v9 = 0i64;
   v3.m128_f32[0] = (float)BYTE2(color) * 0.0039215689;
-  v11.m128_f32[0] = (float)BYTE1(color) * 0.0039215689;
-  v10.m128_f32[3] = (float)((float)((float)v9 * 2.3283064e-10) * 2.0) - 1.0;
-  v12 = 0i64;
-  v12.m128_f32[0] = (float)(unsigned __int8)color * 0.0039215689;
-  v13 = _mm_min_ps(
+  v9.m128_f32[0] = (float)BYTE1(color) * 0.0039215689;
+  v13.m128_f32[3] = (float)((float)((float)(1664525 * v8 + 1013904223) * 2.3283064e-10) * 2.0) - 1.0;
+  v10 = 0i64;
+  v10.m128_f32[0] = (float)(unsigned __int8)color * 0.0039215689;
+  v11 = _mm_min_ps(
           query.m_quad,
           _mm_max_ps(
             (__m128)0i64,
             _mm_add_ps(
-              _mm_mul_ps(_mm_shuffle_ps((__m128)variance, (__m128)variance, 0), v10),
-              _mm_unpacklo_ps(_mm_unpacklo_ps(v3, v12), _mm_unpacklo_ps(v11, (__m128)0i64)))));
+              _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)&variance, *(__m128 *)&variance, 0), v13),
+              _mm_unpacklo_ps(_mm_unpacklo_ps(v3, v10), _mm_unpacklo_ps(v9, (__m128)0i64)))));
   return hkColor::rgbFromFloats(
-           v13.m128_f32[0],
-           COERCE_CONST_FLOAT(_mm_shuffle_ps(v13, v13, 85)),
-           COERCE_CONST_FLOAT(_mm_shuffle_ps(v13, v13, 170)),
-           (float)(color >> 24) * 0.0039215689);
+           v11.m128_f32[0],
+           _mm_shuffle_ps(v11, v11, 85).m128_f32[0],
+           _mm_shuffle_ps(v11, v11, 170).m128_f32[0],
+           (float)HIBYTE(color) * 0.0039215689);
 }
 
 // File Line: 487
 // RVA: 0xC4B610
 __int64 __fastcall realToOrderedUint(const float *in)
 {
-  return *(_DWORD *)in ^ ((*(_DWORD *)in >> 31) | 0x80000000);
+  return *(_DWORD *)in ^ ((*(int *)in >> 31) | 0x80000000);
 }
 
 // File Line: 500
 // RVA: 0xC46810
-void __fastcall hkaiNavMeshDebugUtils::showNavMesh(hkDebugDisplayHandler *displayHandler, int tag, hkaiNavMeshDebugUtils::DebugInfo *settings, hkaiNavMesh *navMesh)
+void __fastcall hkaiNavMeshDebugUtils::showNavMesh(
+        hkDebugDisplayHandler *displayHandler,
+        int tag,
+        hkaiNavMeshDebugUtils::DebugInfo *settings,
+        hkaiNavMesh *navMesh)
 {
-  hkDebugDisplayHandler *v4; // rbp
-  hkaiNavMesh *v5; // rbx
-  hkaiNavMeshDebugUtils::DebugInfo *v6; // rdi
-  int v7; // esi
-  int v8; // er9
-  hkaiStreamingCollection::InstanceInfo *v9; // r8
-  __int64 v10; // rdx
-  hkaiDirectedGraphInstance **v11; // rax
-  hkaiStreamingCollection array; // [rsp+30h] [rbp-228h]
-  hkResult result; // [rsp+60h] [rbp-1F8h]
-  hkaiNavMeshInstance v14; // [rsp+70h] [rbp-1E8h]
+  hkaiStreamingCollection::InstanceInfo *m_data; // r8
+  __int64 v9; // rdx
+  hkaiDirectedGraphInstance **p_m_clusterGraphInstance; // rax
+  hkaiStreamingCollection array; // [rsp+30h] [rbp-228h] BYREF
+  hkResult result; // [rsp+60h] [rbp-1F8h] BYREF
+  hkaiNavMeshInstance v13; // [rsp+70h] [rbp-1E8h] BYREF
 
-  v4 = displayHandler;
-  v5 = navMesh;
-  v6 = settings;
-  v7 = tag;
-  hkaiNavMeshInstance::hkaiNavMeshInstance(&v14);
-  hkaiNavMeshInstance::tempInit(&v14, v5, 0);
+  hkaiNavMeshInstance::hkaiNavMeshInstance(&v13);
+  hkaiNavMeshInstance::tempInit(&v13, navMesh, 0);
   hkaiStreamingCollection::hkaiStreamingCollection(&array);
   array.m_isTemporary.m_bool = 1;
-  if ( (array.m_instances.m_capacityAndFlags & 0x3FFFFFFF) < 1 )
-  {
-    v8 = 1;
-    if ( 2 * (array.m_instances.m_capacityAndFlags & 0x3FFFFFFF) > 1 )
-      v8 = 2 * (array.m_instances.m_capacityAndFlags & 0x3FFFFFFF);
-    hkArrayUtil::_reserve(
-      &result,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &array.m_instances,
-      v8,
-      48);
-  }
-  v9 = array.m_instances.m_data;
-  v10 = 1 - array.m_instances.m_size;
+  if ( (array.m_instances.m_capacityAndFlags & 0x3FFFFFFF) == 0 )
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, &array.m_instances, 1, 48);
+  m_data = array.m_instances.m_data;
+  v9 = 1 - array.m_instances.m_size;
   if ( 1 - array.m_instances.m_size > 0 )
   {
-    v11 = &array.m_instances.m_data[array.m_instances.m_size].m_clusterGraphInstance;
+    p_m_clusterGraphInstance = &array.m_instances.m_data[array.m_instances.m_size].m_clusterGraphInstance;
     do
     {
-      if ( v11 != (hkaiDirectedGraphInstance **)16 )
+      if ( p_m_clusterGraphInstance != (hkaiDirectedGraphInstance **)16 )
       {
-        *(v11 - 2) = 0i64;
-        *(v11 - 1) = 0i64;
-        *v11 = 0i64;
-        v11[1] = 0i64;
-        v11[2] = 0i64;
-        *((_DWORD *)v11 + 6) = -1;
+        *(p_m_clusterGraphInstance - 2) = 0i64;
+        *(p_m_clusterGraphInstance - 1) = 0i64;
+        *p_m_clusterGraphInstance = 0i64;
+        p_m_clusterGraphInstance[1] = 0i64;
+        p_m_clusterGraphInstance[2] = 0i64;
+        *((_DWORD *)p_m_clusterGraphInstance + 6) = -1;
       }
-      v11 += 6;
-      --v10;
+      p_m_clusterGraphInstance += 6;
+      --v9;
     }
-    while ( v10 );
-    v9 = array.m_instances.m_data;
+    while ( v9 );
+    m_data = array.m_instances.m_data;
   }
   array.m_instances.m_size = 1;
-  v9->m_instancePtr = &v14;
+  m_data->m_instancePtr = &v13;
   array.m_instances.m_data->m_clusterGraphInstance = 0i64;
   array.m_instances.m_data->m_mediator = 0i64;
-  hkaiNavMeshDebugUtils::showStreamingCollection(v4, v7, v6, &array);
+  hkaiNavMeshDebugUtils::showStreamingCollection(displayHandler, tag, settings, &array);
   hkaiStreamingCollection::~hkaiStreamingCollection(&array);
-  hkaiNavMeshInstance::~hkaiNavMeshInstance(&v14);
+  hkaiNavMeshInstance::~hkaiNavMeshInstance(&v13);
 }
 
 // File Line: 511
 // RVA: 0xC46E70
 void __fastcall hkaiNavMeshDebugUtils::showNavMesh(hkaiNavMeshDebugUtils::DebugInfo *settings, hkaiNavMesh *navMesh)
 {
-  hkaiNavMeshDebugUtils::DebugInfo *v2; // rdi
-  hkaiNavMesh *v3; // rbx
-  int v4; // er9
-  hkaiStreamingCollection::InstanceInfo *v5; // r8
-  __int64 v6; // rdx
-  hkaiDirectedGraphInstance **v7; // rax
-  hkaiStreamingCollection array; // [rsp+30h] [rbp-218h]
-  hkaiNavMeshInstance v9; // [rsp+60h] [rbp-1E8h]
-  hkResult result; // [rsp+260h] [rbp+18h]
+  hkaiStreamingCollection::InstanceInfo *m_data; // r8
+  __int64 v5; // rdx
+  hkaiDirectedGraphInstance **p_m_clusterGraphInstance; // rax
+  hkaiStreamingCollection array; // [rsp+30h] [rbp-218h] BYREF
+  hkaiNavMeshInstance v8; // [rsp+60h] [rbp-1E8h] BYREF
+  hkResult result; // [rsp+260h] [rbp+18h] BYREF
 
-  v2 = settings;
-  v3 = navMesh;
-  hkaiNavMeshInstance::hkaiNavMeshInstance(&v9);
-  hkaiNavMeshInstance::tempInit(&v9, v3, 0);
+  hkaiNavMeshInstance::hkaiNavMeshInstance(&v8);
+  hkaiNavMeshInstance::tempInit(&v8, navMesh, 0);
   hkaiStreamingCollection::hkaiStreamingCollection(&array);
   array.m_isTemporary.m_bool = 1;
-  if ( (array.m_instances.m_capacityAndFlags & 0x3FFFFFFF) < 1 )
-  {
-    v4 = 1;
-    if ( 2 * (array.m_instances.m_capacityAndFlags & 0x3FFFFFFF) > 1 )
-      v4 = 2 * (array.m_instances.m_capacityAndFlags & 0x3FFFFFFF);
-    hkArrayUtil::_reserve(
-      &result,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &array.m_instances,
-      v4,
-      48);
-  }
-  v5 = array.m_instances.m_data;
-  v6 = 1 - array.m_instances.m_size;
+  if ( (array.m_instances.m_capacityAndFlags & 0x3FFFFFFF) == 0 )
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, &array.m_instances, 1, 48);
+  m_data = array.m_instances.m_data;
+  v5 = 1 - array.m_instances.m_size;
   if ( 1 - array.m_instances.m_size > 0 )
   {
-    v7 = &array.m_instances.m_data[array.m_instances.m_size].m_clusterGraphInstance;
+    p_m_clusterGraphInstance = &array.m_instances.m_data[array.m_instances.m_size].m_clusterGraphInstance;
     do
     {
-      if ( v7 != (hkaiDirectedGraphInstance **)16 )
+      if ( p_m_clusterGraphInstance != (hkaiDirectedGraphInstance **)16 )
       {
-        *(v7 - 2) = 0i64;
-        *(v7 - 1) = 0i64;
-        *v7 = 0i64;
-        v7[1] = 0i64;
-        v7[2] = 0i64;
-        *((_DWORD *)v7 + 6) = -1;
+        *(p_m_clusterGraphInstance - 2) = 0i64;
+        *(p_m_clusterGraphInstance - 1) = 0i64;
+        *p_m_clusterGraphInstance = 0i64;
+        p_m_clusterGraphInstance[1] = 0i64;
+        p_m_clusterGraphInstance[2] = 0i64;
+        *((_DWORD *)p_m_clusterGraphInstance + 6) = -1;
       }
-      v7 += 6;
-      --v6;
+      p_m_clusterGraphInstance += 6;
+      --v5;
     }
-    while ( v6 );
-    v5 = array.m_instances.m_data;
+    while ( v5 );
+    m_data = array.m_instances.m_data;
   }
   array.m_instances.m_size = 1;
-  v5->m_instancePtr = &v9;
+  m_data->m_instancePtr = &v8;
   array.m_instances.m_data->m_clusterGraphInstance = 0i64;
   array.m_instances.m_data->m_mediator = 0i64;
-  hkaiNavMeshDebugUtils::showStreamingCollection(0i64, 0, v2, &array);
+  hkaiNavMeshDebugUtils::showStreamingCollection(0i64, 0, settings, &array);
   hkaiStreamingCollection::~hkaiStreamingCollection(&array);
-  hkaiNavMeshInstance::~hkaiNavMeshInstance(&v9);
+  hkaiNavMeshInstance::~hkaiNavMeshInstance(&v8);
 }
 
 // File Line: 522
 // RVA: 0xC46FB0
-void __fastcall hkaiNavMeshDebugUtils::showNavMesh(hkaiNavMeshDebugUtils::DebugInfo *settings, hkaiNavMeshInstance *nmi)
+void __fastcall hkaiNavMeshDebugUtils::showNavMesh(
+        hkaiNavMeshDebugUtils::DebugInfo *settings,
+        hkaiNavMeshInstance *nmi)
 {
-  hkaiNavMeshDebugUtils::DebugInfo *v2; // rdi
-  hkaiNavMeshInstance *v3; // rbx
-  int v4; // er9
-  hkaiStreamingCollection::InstanceInfo *v5; // r8
-  __int64 v6; // rdx
-  hkaiDirectedGraphInstance **v7; // rax
-  hkaiStreamingCollection array; // [rsp+30h] [rbp-38h]
-  hkResult result; // [rsp+78h] [rbp+10h]
+  hkaiStreamingCollection::InstanceInfo *m_data; // r8
+  __int64 v5; // rdx
+  hkaiDirectedGraphInstance **p_m_clusterGraphInstance; // rax
+  hkaiStreamingCollection array; // [rsp+30h] [rbp-38h] BYREF
+  hkResult result; // [rsp+78h] [rbp+10h] BYREF
 
-  v2 = settings;
-  v3 = nmi;
   hkaiStreamingCollection::hkaiStreamingCollection(&array);
   array.m_isTemporary.m_bool = 1;
-  if ( (array.m_instances.m_capacityAndFlags & 0x3FFFFFFF) < 1 )
-  {
-    v4 = 1;
-    if ( 2 * (array.m_instances.m_capacityAndFlags & 0x3FFFFFFF) > 1 )
-      v4 = 2 * (array.m_instances.m_capacityAndFlags & 0x3FFFFFFF);
-    hkArrayUtil::_reserve(
-      &result,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &array.m_instances,
-      v4,
-      48);
-  }
-  v5 = array.m_instances.m_data;
-  v6 = 1 - array.m_instances.m_size;
+  if ( (array.m_instances.m_capacityAndFlags & 0x3FFFFFFF) == 0 )
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, &array.m_instances, 1, 48);
+  m_data = array.m_instances.m_data;
+  v5 = 1 - array.m_instances.m_size;
   if ( 1 - array.m_instances.m_size > 0 )
   {
-    v7 = &array.m_instances.m_data[array.m_instances.m_size].m_clusterGraphInstance;
+    p_m_clusterGraphInstance = &array.m_instances.m_data[array.m_instances.m_size].m_clusterGraphInstance;
     do
     {
-      if ( v7 != (hkaiDirectedGraphInstance **)16 )
+      if ( p_m_clusterGraphInstance != (hkaiDirectedGraphInstance **)16 )
       {
-        *(v7 - 2) = 0i64;
-        *(v7 - 1) = 0i64;
-        *v7 = 0i64;
-        v7[1] = 0i64;
-        v7[2] = 0i64;
-        *((_DWORD *)v7 + 6) = -1;
+        *(p_m_clusterGraphInstance - 2) = 0i64;
+        *(p_m_clusterGraphInstance - 1) = 0i64;
+        *p_m_clusterGraphInstance = 0i64;
+        p_m_clusterGraphInstance[1] = 0i64;
+        p_m_clusterGraphInstance[2] = 0i64;
+        *((_DWORD *)p_m_clusterGraphInstance + 6) = -1;
       }
-      v7 += 6;
-      --v6;
+      p_m_clusterGraphInstance += 6;
+      --v5;
     }
-    while ( v6 );
-    v5 = array.m_instances.m_data;
+    while ( v5 );
+    m_data = array.m_instances.m_data;
   }
   array.m_instances.m_size = 1;
-  v5->m_instancePtr = v3;
+  m_data->m_instancePtr = nmi;
   array.m_instances.m_data->m_clusterGraphInstance = 0i64;
   array.m_instances.m_data->m_mediator = 0i64;
-  hkaiNavMeshDebugUtils::showStreamingCollection(0i64, 0, v2, &array);
+  hkaiNavMeshDebugUtils::showStreamingCollection(0i64, 0, settings, &array);
   hkaiStreamingCollection::~hkaiStreamingCollection(&array);
 }
 
 // File Line: 530
 // RVA: 0xC46960
-void __fastcall hkaiNavMeshDebugUtils::showNavMesh(hkDebugDisplayHandler *displayHandler, int tag, hkaiNavMeshDebugUtils::DebugInfo *settings, hkaiNavMeshInstance *nmi)
+void __fastcall hkaiNavMeshDebugUtils::showNavMesh(
+        hkDebugDisplayHandler *displayHandler,
+        int tag,
+        hkaiNavMeshDebugUtils::DebugInfo *settings,
+        hkaiNavMeshInstance *nmi)
 {
-  hkDebugDisplayHandler *v4; // rbp
-  hkaiNavMeshInstance *v5; // rbx
-  hkaiNavMeshDebugUtils::DebugInfo *v6; // rdi
-  int v7; // esi
-  int v8; // er9
-  hkaiStreamingCollection::InstanceInfo *v9; // r8
-  __int64 v10; // rdx
-  hkaiDirectedGraphInstance **v11; // rax
-  hkaiStreamingCollection array; // [rsp+30h] [rbp-38h]
-  hkResult result; // [rsp+88h] [rbp+20h]
+  hkaiStreamingCollection::InstanceInfo *m_data; // r8
+  __int64 v9; // rdx
+  hkaiDirectedGraphInstance **p_m_clusterGraphInstance; // rax
+  hkaiStreamingCollection array; // [rsp+30h] [rbp-38h] BYREF
+  hkResult result; // [rsp+88h] [rbp+20h] BYREF
 
-  v4 = displayHandler;
-  v5 = nmi;
-  v6 = settings;
-  v7 = tag;
   hkaiStreamingCollection::hkaiStreamingCollection(&array);
   array.m_isTemporary.m_bool = 1;
-  if ( (array.m_instances.m_capacityAndFlags & 0x3FFFFFFF) < 1 )
-  {
-    v8 = 1;
-    if ( 2 * (array.m_instances.m_capacityAndFlags & 0x3FFFFFFF) > 1 )
-      v8 = 2 * (array.m_instances.m_capacityAndFlags & 0x3FFFFFFF);
-    hkArrayUtil::_reserve(
-      &result,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &array.m_instances,
-      v8,
-      48);
-  }
-  v9 = array.m_instances.m_data;
-  v10 = 1 - array.m_instances.m_size;
+  if ( (array.m_instances.m_capacityAndFlags & 0x3FFFFFFF) == 0 )
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, &array.m_instances, 1, 48);
+  m_data = array.m_instances.m_data;
+  v9 = 1 - array.m_instances.m_size;
   if ( 1 - array.m_instances.m_size > 0 )
   {
-    v11 = &array.m_instances.m_data[array.m_instances.m_size].m_clusterGraphInstance;
+    p_m_clusterGraphInstance = &array.m_instances.m_data[array.m_instances.m_size].m_clusterGraphInstance;
     do
     {
-      if ( v11 != (hkaiDirectedGraphInstance **)16 )
+      if ( p_m_clusterGraphInstance != (hkaiDirectedGraphInstance **)16 )
       {
-        *(v11 - 2) = 0i64;
-        *(v11 - 1) = 0i64;
-        *v11 = 0i64;
-        v11[1] = 0i64;
-        v11[2] = 0i64;
-        *((_DWORD *)v11 + 6) = -1;
+        *(p_m_clusterGraphInstance - 2) = 0i64;
+        *(p_m_clusterGraphInstance - 1) = 0i64;
+        *p_m_clusterGraphInstance = 0i64;
+        p_m_clusterGraphInstance[1] = 0i64;
+        p_m_clusterGraphInstance[2] = 0i64;
+        *((_DWORD *)p_m_clusterGraphInstance + 6) = -1;
       }
-      v11 += 6;
-      --v10;
+      p_m_clusterGraphInstance += 6;
+      --v9;
     }
-    while ( v10 );
-    v9 = array.m_instances.m_data;
+    while ( v9 );
+    m_data = array.m_instances.m_data;
   }
   array.m_instances.m_size = 1;
-  v9->m_instancePtr = v5;
+  m_data->m_instancePtr = nmi;
   array.m_instances.m_data->m_clusterGraphInstance = 0i64;
   array.m_instances.m_data->m_mediator = 0i64;
-  hkaiNavMeshDebugUtils::showStreamingCollection(v4, v7, v6, &array);
+  hkaiNavMeshDebugUtils::showStreamingCollection(displayHandler, tag, settings, &array);
   hkaiStreamingCollection::~hkaiStreamingCollection(&array);
 }
 
 // File Line: 538
 // RVA: 0xC470B0
-void __fastcall hkaiNavMeshDebugUtils::showStreamingCollection(hkaiNavMeshDebugUtils::DebugInfo *settings, hkaiStreamingCollection *collection)
+void __fastcall hkaiNavMeshDebugUtils::showStreamingCollection(
+        hkaiNavMeshDebugUtils::DebugInfo *settings,
+        hkaiStreamingCollection *collection)
 {
   hkaiNavMeshDebugUtils::showStreamingCollection(0i64, 0, settings, collection);
 }
 
 // File Line: 543
 // RVA: 0xC4B630
-unsigned int __fastcall getLitColor(float r, float g, float b, float alpha, hkVector4f *v0, hkVector4f *v1, hkVector4f *v2, hkVector4f *lightDir)
+unsigned int __fastcall getLitColor(
+        float r,
+        float g,
+        float b,
+        float alpha,
+        hkVector4f *v0,
+        hkVector4f *v1,
+        hkVector4f *v2,
+        hkVector4f *lightDir)
 {
-  float v8; // xmm9_4
-  float v9; // xmm8_4
   __m128 v10; // xmm6
   __m128 v11; // xmm5
-  float v12; // xmm11_4
   __m128 v13; // xmm7
   __m128 v14; // xmm7
   __m128 v15; // xmm1
@@ -1233,11 +1165,8 @@ unsigned int __fastcall getLitColor(float r, float g, float b, float alpha, hkVe
   __m128 v17; // xmm2
   __m128 v18; // xmm4
 
-  v8 = g;
-  v9 = b;
   v10 = _mm_sub_ps(v1->m_quad, v0->m_quad);
   v11 = _mm_sub_ps(v2->m_quad, v0->m_quad);
-  v12 = alpha;
   v13 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v11, v11, 201), v10), _mm_mul_ps(_mm_shuffle_ps(v10, v10, 201), v11));
   v14 = _mm_shuffle_ps(v13, v13, 201);
   v15 = _mm_mul_ps(v14, v14);
@@ -1246,7 +1175,7 @@ unsigned int __fastcall getLitColor(float r, float g, float b, float alpha, hkVe
   v18 = _mm_mul_ps(
           _mm_mul_ps(
             _mm_andnot_ps(
-              _mm_cmpleps(v16, (__m128)0i64),
+              _mm_cmple_ps(v16, (__m128)0i64),
               _mm_mul_ps(
                 _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v17, v16), v17)),
                 _mm_mul_ps(*(__m128 *)_xmm, v17))),
@@ -1255,23 +1184,28 @@ unsigned int __fastcall getLitColor(float r, float g, float b, float alpha, hkVe
   v15.m128_f32[0] = fmaxf(
                       0.0,
                       (float)(0.0
-                            - (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v18, v18, 85))
-                                            + COERCE_FLOAT(_mm_shuffle_ps(v18, v18, 0)))
-                                    + COERCE_FLOAT(_mm_shuffle_ps(v18, v18, 170))))
+                            - (float)((float)(_mm_shuffle_ps(v18, v18, 85).m128_f32[0]
+                                            + _mm_shuffle_ps(v18, v18, 0).m128_f32[0])
+                                    + _mm_shuffle_ps(v18, v18, 170).m128_f32[0]))
                     + 0.75)
                   * 0.5714286;
-  return hkColor::rgbFromFloats(v15.m128_f32[0] * r, v15.m128_f32[0] * v8, v15.m128_f32[0] * v9, v12);
+  return hkColor::rgbFromFloats(v15.m128_f32[0] * r, v15.m128_f32[0] * g, v15.m128_f32[0] * b, alpha);
 }
 
 // File Line: 562
 // RVA: 0xC4B7A0
-unsigned int __fastcall getLitColor_0(unsigned int color, hkVector4f *v0, hkVector4f *v1, hkVector4f *v2, hkVector4f *lightDir)
+unsigned int __fastcall getLitColor_0(
+        unsigned int color,
+        hkVector4f *v0,
+        hkVector4f *v1,
+        hkVector4f *v2,
+        hkVector4f *lightDir)
 {
   return getLitColor(
            (float)BYTE2(color) * 0.0039215689,
            (float)BYTE1(color) * 0.0039215689,
            (float)(unsigned __int8)color * 0.0039215689,
-           (float)(color >> 24) * 0.0039215689,
+           (float)HIBYTE(color) * 0.0039215689,
            v0,
            v1,
            v2,
@@ -1282,24 +1216,19 @@ unsigned int __fastcall getLitColor_0(unsigned int color, hkVector4f *v0, hkVect
 // RVA: 0xC4B820
 void __fastcall formatUserData(hkStringBuf *label, const int *dataPtr, int N)
 {
-  int v3; // er15
   int v4; // esi
-  const int *v5; // rbx
   __int64 v6; // rax
   __int64 v7; // rdi
-  hkStringBuf *v8; // r14
-  __int64 v9; // rbp
-  int v10; // er15
-  const char *v11; // r9
+  __int64 v9; // r8
+  __int64 v10; // rbp
+  int v11; // r15d
+  const char *v12; // r9
 
   if ( N > 0 )
   {
-    v3 = N;
     v4 = 0;
-    v5 = dataPtr;
     v6 = 0i64;
     v7 = N;
-    v8 = label;
     while ( !dataPtr[v6] )
     {
       if ( ++v6 >= N )
@@ -1307,253 +1236,248 @@ void __fastcall formatUserData(hkStringBuf *label, const int *dataPtr, int N)
     }
     if ( N == 1 )
     {
-      if ( *dataPtr )
-        hkStringBuf::printf(label, "[%d]");
+      v9 = *(unsigned int *)dataPtr;
+      if ( (_DWORD)v9 )
+        hkStringBuf::printf(label, "[%d]", v9);
     }
     else
     {
       hkStringBuf::operator=(label, "[");
-      v9 = 0i64;
-      v10 = v3 - 1;
+      v10 = 0i64;
+      v11 = N - 1;
       do
       {
-        v11 = ", ";
-        if ( v4 == v10 )
-          v11 = "]";
-        hkStringBuf::appendPrintf(v8, "%d%s", (unsigned int)v5[v9++], v11);
+        v12 = ", ";
+        if ( v4 == v11 )
+          v12 = "]";
+        hkStringBuf::appendPrintf(label, "%d%s", (unsigned int)dataPtr[v10++], v12);
         ++v4;
       }
-      while ( v9 < v7 );
+      while ( v10 < v7 );
     }
   }
 }
 
 // File Line: 613
 // RVA: 0xC46A80
-void __fastcall hkaiNavMeshDebugUtils::showStreamingCollection(hkDebugDisplayHandler *displayHandler, int tag, hkaiNavMeshDebugUtils::DebugInfo *settings, hkaiStreamingCollection *collection)
+void __fastcall hkaiNavMeshDebugUtils::showStreamingCollection(
+        hkDebugDisplayHandler *displayHandler,
+        int tag,
+        hkaiNavMeshDebugUtils::DebugInfo *settings,
+        hkaiStreamingCollection *collection)
 {
   hkaiStreamingCollection *v4; // r15
-  hkaiNavMeshDebugUtils::DebugInfo *v5; // rsi
-  bool v6; // al
-  bool v7; // di
-  bool v8; // al
-  bool v9; // bl
-  bool v10; // al
-  __int64 v11; // r13
-  int v12; // er14
-  __int64 v13; // rbx
-  hkaiNavMeshInstance *v14; // rbx
-  _QWORD *v15; // r8
-  _QWORD *v16; // rcx
-  unsigned __int64 v17; // rax
-  signed __int64 v18; // rcx
-  hkArrayBase<int> *v19; // r12
-  int v20; // edi
-  int v21; // er9
-  int v22; // edx
-  int v23; // ecx
-  int v24; // er15
-  int v25; // edi
-  char *v26; // rax
-  int v27; // er8
-  unsigned int v28; // eax
-  unsigned int v29; // er14
-  unsigned int faceColor; // ST28_4
-  int v31; // er14
-  _QWORD *v32; // rax
-  _QWORD *v33; // rcx
-  _QWORD *v34; // r8
-  unsigned __int64 v35; // rax
-  signed __int64 v36; // rcx
-  bool v37; // [rsp+30h] [rbp-50h]
-  bool v38; // [rsp+31h] [rbp-4Fh]
-  bool v39; // [rsp+32h] [rbp-4Eh]
-  char v40; // [rsp+33h] [rbp-4Dh]
-  char v41; // [rsp+34h] [rbp-4Ch]
-  int v42; // [rsp+38h] [rbp-48h]
-  void *array; // [rsp+40h] [rbp-40h]
-  int v44; // [rsp+48h] [rbp-38h]
-  int v45; // [rsp+4Ch] [rbp-34h]
-  hkArray<hkRadixSort::SortData32,hkContainerDebugAllocator> sortArray; // [rsp+50h] [rbp-30h]
-  hkResult result; // [rsp+60h] [rbp-20h]
-  __int64 v48; // [rsp+68h] [rbp-18h]
-  hkDebugDisplayHandler *displayHandlera; // [rsp+B0h] [rbp+30h]
-  int taga; // [rsp+B8h] [rbp+38h]
-  hkaiStreamingCollection *collectiona; // [rsp+C8h] [rbp+48h]
+  bool shouldDrawEdges; // bl
+  bool shouldDrawUserEdges; // al
+  __int64 v8; // r13
+  int v9; // r14d
+  __int64 v10; // rbx
+  hkaiNavMeshInstance *v11; // rbx
+  _QWORD *Value; // r8
+  _QWORD *v13; // rcx
+  unsigned __int64 v14; // rax
+  _QWORD *v15; // rcx
+  hkArray<int,hkContainerHeapAllocator> *m_regionMap; // r12
+  int v17; // edi
+  int m_size; // edx
+  int m_numOriginalFaces; // ecx
+  int v20; // r15d
+  int m_userData; // edi
+  char *v22; // rax
+  int m_showSingleRegionIndex; // r8d
+  unsigned int UnlitFaceColor; // eax
+  unsigned int v25; // r14d
+  int v26; // r14d
+  _QWORD *v27; // rax
+  _QWORD *v28; // rcx
+  _QWORD *v29; // r8
+  unsigned __int64 v30; // rax
+  _QWORD *v31; // rcx
+  unsigned int faceColor; // [rsp+28h] [rbp-58h]
+  bool shouldDrawFaces; // [rsp+30h] [rbp-50h]
+  bool v34; // [rsp+31h] [rbp-4Fh]
+  bool v35; // [rsp+32h] [rbp-4Eh]
+  char v36; // [rsp+33h] [rbp-4Dh] BYREF
+  char m_storage; // [rsp+34h] [rbp-4Ch] BYREF
+  int v38; // [rsp+38h] [rbp-48h]
+  hkArrayBase<int> array; // [rsp+40h] [rbp-40h] BYREF
+  hkArray<hkRadixSort::SortData32,hkContainerDebugAllocator> sortArray; // [rsp+50h] [rbp-30h] BYREF
+  hkResult result; // [rsp+60h] [rbp-20h] BYREF
+  __int64 v42; // [rsp+68h] [rbp-18h]
 
-  collectiona = collection;
-  taga = tag;
-  displayHandlera = displayHandler;
   v4 = collection;
-  v5 = settings;
-  v6 = hkaiNavMeshDebugUtils::DebugInfo::shouldDrawFaces(settings);
-  v7 = v6;
-  v37 = v6;
-  v8 = hkaiNavMeshDebugUtils::DebugInfo::shouldDrawEdges(v5);
-  v9 = v8;
-  v38 = v8;
-  v10 = hkaiNavMeshDebugUtils::DebugInfo::shouldDrawUserEdges(v5);
-  v39 = v10;
-  if ( v7 || v9 || v10 )
+  shouldDrawFaces = hkaiNavMeshDebugUtils::DebugInfo::shouldDrawFaces(settings);
+  shouldDrawEdges = hkaiNavMeshDebugUtils::DebugInfo::shouldDrawEdges(settings);
+  v34 = shouldDrawEdges;
+  shouldDrawUserEdges = hkaiNavMeshDebugUtils::DebugInfo::shouldDrawUserEdges(settings);
+  v35 = shouldDrawUserEdges;
+  if ( __PAIR16__(shouldDrawEdges, shouldDrawFaces) || shouldDrawUserEdges )
   {
-    v11 = 0i64;
-    v12 = 0;
-    v42 = 0;
+    v8 = 0i64;
+    v9 = 0;
+    v38 = 0;
     if ( v4->m_instances.m_size > 0 )
     {
-      v13 = 0i64;
-      v48 = 0i64;
+      v10 = 0i64;
+      v42 = 0i64;
       do
       {
-        if ( v12 >= v5->m_instanceEnabled.m_storage.m_numBits
-          || (v5->m_instanceEnabled.m_storage.m_words.m_data[(signed __int64)v12 >> 5] >> (v12 & 0x1F)) & 1 )
+        if ( v9 >= settings->m_instanceEnabled.m_storage.m_numBits
+          || ((settings->m_instanceEnabled.m_storage.m_words.m_data[(__int64)v9 >> 5] >> (v9 & 0x1F)) & 1) != 0 )
         {
-          v14 = *(hkaiNavMeshInstance **)((char *)&v4->m_instances.m_data->m_instancePtr + v13);
-          if ( v14 )
+          v11 = *(hkaiNavMeshInstance **)((char *)&v4->m_instances.m_data->m_instancePtr + v10);
+          if ( v11 )
           {
-            v15 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-            v16 = (_QWORD *)v15[1];
-            if ( (unsigned __int64)v16 < v15[3] )
+            Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+            v13 = (_QWORD *)Value[1];
+            if ( (unsigned __int64)v13 < Value[3] )
             {
-              *v16 = "TtshowStreamingCollection";
-              v17 = __rdtsc();
-              v18 = (signed __int64)(v16 + 2);
-              *(_DWORD *)(v18 - 8) = v17;
-              v15[1] = v18;
+              *v13 = "TtshowStreamingCollection";
+              v14 = __rdtsc();
+              v15 = v13 + 2;
+              *((_DWORD *)v15 - 2) = v14;
+              Value[1] = v15;
             }
-            v19 = (hkArrayBase<int> *)&v5->m_regionMap->m_data;
+            m_regionMap = settings->m_regionMap;
             sortArray.m_data = 0i64;
             sortArray.m_size = 0;
-            sortArray.m_capacityAndFlags = 2147483648;
-            array = 0i64;
-            v44 = 0;
-            v45 = 2147483648;
-            if ( !v19 || v19->m_size != v14->m_numOriginalFaces + v14->m_ownedFaces.m_size )
+            sortArray.m_capacityAndFlags = 0x80000000;
+            array.m_data = 0i64;
+            array.m_size = 0;
+            array.m_capacityAndFlags = 0x80000000;
+            if ( !m_regionMap || m_regionMap->m_size != v11->m_numOriginalFaces + v11->m_ownedFaces.m_size )
             {
-              if ( v5->m_colorRegions.m_bool
-                || v5->m_showSingleRegionIndex != -1
-                || v5->m_highlightSingleRegionIndex != -1 )
+              if ( settings->m_colorRegions.m_bool
+                || settings->m_showSingleRegionIndex != -1
+                || settings->m_highlightSingleRegionIndex != -1 )
               {
-                v20 = v14->m_numOriginalFaces + v14->m_ownedFaces.m_size;
-                if ( v20 <= 0 )
-                {
-                  result.m_enum = 0;
-                }
+                v17 = v11->m_numOriginalFaces + v11->m_ownedFaces.m_size;
+                if ( v17 <= 0 )
+                  result.m_enum = HK_SUCCESS;
                 else
-                {
-                  v21 = v14->m_numOriginalFaces + v14->m_ownedFaces.m_size;
-                  if ( v20 < 0 )
-                    v21 = 0;
                   hkArrayUtil::_reserve(
                     &result,
-                    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
+                    &hkContainerHeapAllocator::s_alloc,
                     &array,
-                    v21,
+                    v11->m_numOriginalFaces + v11->m_ownedFaces.m_size,
                     4);
-                }
-                v44 = v20;
-                hkaiNavMeshUtils::computeRegions(v14, 0, (hkArrayBase<int> *)&array, 0i64);
+                array.m_size = v17;
+                hkaiNavMeshUtils::computeRegions(v11, 0, &array, 0i64);
               }
-              v19 = (hkArrayBase<int> *)&array;
+              m_regionMap = (hkArray<int,hkContainerHeapAllocator> *)&array;
             }
-            if ( v5->m_sortTransparentFaces.m_bool )
-              hkaiNavMeshDebugUtils::_sortTransparentFaces(v14, v5, &sortArray);
-            v22 = v14->m_ownedFaces.m_size;
-            v23 = v14->m_numOriginalFaces;
-            v24 = 0;
-            if ( v23 + v22 > 0 )
+            if ( settings->m_sortTransparentFaces.m_bool )
+              hkaiNavMeshDebugUtils::_sortTransparentFaces(v11, settings, &sortArray);
+            m_size = v11->m_ownedFaces.m_size;
+            m_numOriginalFaces = v11->m_numOriginalFaces;
+            v20 = 0;
+            if ( m_numOriginalFaces + m_size > 0 )
             {
               do
               {
-                if ( v5->m_sortTransparentFaces.m_bool )
-                  v25 = *((_DWORD *)&sortArray.m_data[v22 + (signed __int64)v23 - v11] - 1);
+                if ( settings->m_sortTransparentFaces.m_bool )
+                  m_userData = sortArray.m_data[m_size + (__int64)m_numOriginalFaces - v8 - 1].m_userData;
                 else
-                  v25 = v24;
-                if ( v14->m_faceFlags.m_size )
+                  m_userData = v20;
+                if ( v11->m_faceFlags.m_size )
                 {
-                  v26 = &v41;
-                  v41 = v14->m_faceFlags.m_data[v25].m_storage;
+                  v22 = &m_storage;
+                  m_storage = v11->m_faceFlags.m_data[m_userData].m_storage;
                 }
                 else
                 {
-                  v40 = 0;
-                  v26 = &v40;
+                  v36 = 0;
+                  v22 = &v36;
                 }
-                v27 = v5->m_showSingleRegionIndex;
-                if ( (v27 == -1 || v19->m_data[v25] == v27) && (!(*v26 & 1) || v5->m_showHiddenFaces.m_bool) )
+                m_showSingleRegionIndex = settings->m_showSingleRegionIndex;
+                if ( (m_showSingleRegionIndex == -1 || m_regionMap->m_data[m_userData] == m_showSingleRegionIndex)
+                  && ((*v22 & 1) == 0 || settings->m_showHiddenFaces.m_bool) )
                 {
-                  if ( !v37 && !v38 )
-                    goto LABEL_56;
-                  v28 = hkaiNavMeshDebugUtils::_getUnlitFaceColor(v14, v5, v19, v25);
-                  v29 = v28;
-                  if ( v37 )
-                    hkaiNavMeshDebugUtils::_showFace(displayHandlera, taga, v14, v5, v25, v28);
-                  if ( v38 )
+                  if ( !shouldDrawFaces && !v34 )
+                    goto LABEL_39;
+                  UnlitFaceColor = hkaiNavMeshDebugUtils::_getUnlitFaceColor(v11, settings, m_regionMap, m_userData);
+                  v25 = UnlitFaceColor;
+                  if ( shouldDrawFaces )
+                    hkaiNavMeshDebugUtils::_showFace(displayHandler, tag, v11, settings, m_userData, UnlitFaceColor);
+                  if ( v34 )
                   {
-                    faceColor = v29;
-                    v31 = taga;
-                    hkaiNavMeshDebugUtils::_showEdgesForFace(displayHandlera, taga, v14, v5, v25, faceColor);
+                    faceColor = v25;
+                    v26 = tag;
+                    hkaiNavMeshDebugUtils::_showEdgesForFace(displayHandler, tag, v11, settings, m_userData, faceColor);
                   }
                   else
                   {
-LABEL_56:
-                    v31 = taga;
+LABEL_39:
+                    v26 = tag;
                   }
-                  if ( v39 )
-                    hkaiNavMeshDebugUtils::_showUserEdgesForFace(displayHandlera, v31, collectiona, v14, v5, v25);
+                  if ( v35 )
+                    hkaiNavMeshDebugUtils::_showUserEdgesForFace(
+                      displayHandler,
+                      v26,
+                      collection,
+                      v11,
+                      settings,
+                      m_userData);
                 }
-                v22 = v14->m_ownedFaces.m_size;
-                v23 = v14->m_numOriginalFaces;
-                ++v24;
-                ++v11;
+                m_size = v11->m_ownedFaces.m_size;
+                m_numOriginalFaces = v11->m_numOriginalFaces;
+                ++v20;
+                ++v8;
               }
-              while ( v24 < v23 + v22 );
-              v12 = v42;
+              while ( v20 < m_numOriginalFaces + m_size );
+              v9 = v38;
             }
-            v11 = 0i64;
-            v44 = 0;
-            if ( v45 >= 0 )
+            v8 = 0i64;
+            array.m_size = 0;
+            if ( array.m_capacityAndFlags >= 0 )
               hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-                (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-                array,
-                4 * v45);
-            array = 0i64;
-            v45 = 2147483648;
+                &hkContainerHeapAllocator::s_alloc,
+                array.m_data,
+                4 * array.m_capacityAndFlags);
+            array.m_data = 0i64;
+            array.m_capacityAndFlags = 0x80000000;
             sortArray.m_size = 0;
             if ( sortArray.m_capacityAndFlags >= 0 )
               hkContainerDebugAllocator::s_alloc.vfptr->bufFree(
-                (hkMemoryAllocator *)&hkContainerDebugAllocator::s_alloc,
+                &hkContainerDebugAllocator::s_alloc,
                 sortArray.m_data,
                 8 * sortArray.m_capacityAndFlags);
             sortArray.m_data = 0i64;
-            sortArray.m_capacityAndFlags = 2147483648;
-            v32 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-            v4 = collectiona;
-            v33 = (_QWORD *)v32[1];
-            v34 = v32;
-            if ( (unsigned __int64)v33 < v32[3] )
+            sortArray.m_capacityAndFlags = 0x80000000;
+            v27 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+            v4 = collection;
+            v28 = (_QWORD *)v27[1];
+            v29 = v27;
+            if ( (unsigned __int64)v28 < v27[3] )
             {
-              *v33 = "Et";
-              v35 = __rdtsc();
-              v36 = (signed __int64)(v33 + 2);
-              *(_DWORD *)(v36 - 8) = v35;
-              v34[1] = v36;
+              *v28 = "Et";
+              v30 = __rdtsc();
+              v31 = v28 + 2;
+              *((_DWORD *)v31 - 2) = v30;
+              v29[1] = v31;
             }
           }
         }
-        v48 += 48i64;
-        ++v12;
-        v13 = v48;
-        v42 = v12;
+        v42 += 48i64;
+        ++v9;
+        v10 = v42;
+        v38 = v9;
       }
-      while ( v12 < v4->m_instances.m_size );
+      while ( v9 < v4->m_instances.m_size );
     }
   }
 }
 
 // File Line: 698
 // RVA: 0xC4B8F0
-int cubicHermite(...)
+// local variable allocation has failed, the output may be wrong!
+void __fastcall cubicHermite(
+        double t,
+        hkVector4f *p0,
+        hkVector4f *p1,
+        hkVector4f *n0,
+        hkVector4f *n1,
+        hkVector4f *pOut)
 {
   float v6; // xmm4_4
   __m128 v7; // xmm7
@@ -1562,12 +1486,12 @@ int cubicHermite(...)
   __m128 v10; // xmm3
   __m128 v11; // xmm1
   __m128 v12; // xmm2
-  hkVector4f v13; // xmm3
-  hkVector4f v14; // xmm2
-  hkVector4f v15; // xmm1
+  __m128 v13; // xmm3
+  __m128 v14; // xmm2
+  __m128 v15; // xmm1
 
   v6 = *(float *)&t;
-  v7 = (__m128)t;
+  v7 = *(__m128 *)&t;
   v7.m128_f32[0] = *(float *)&t * *(float *)&t;
   v8 = v7;
   v9 = v7;
@@ -1579,21 +1503,24 @@ int cubicHermite(...)
   v10.m128_f32[0] = (float)((float)((float)(v7.m128_f32[0] * v6) * 2.0) - (float)(v7.m128_f32[0] * 3.0)) + 1.0;
   v12.m128_f32[0] = (float)((float)(v7.m128_f32[0] * v6) - (float)(v7.m128_f32[0] * 2.0)) + v6;
   v11.m128_f32[0] = (float)((float)(v7.m128_f32[0] * v6) * -2.0) + (float)(v7.m128_f32[0] * 3.0);
-  v13.m_quad = _mm_mul_ps(_mm_shuffle_ps(v10, v10, 0), p0->m_quad);
-  *pOut = (hkVector4f)v13.m_quad;
-  v14.m_quad = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v12, v12, 0), n0->m_quad), v13.m_quad);
-  *pOut = (hkVector4f)v14.m_quad;
-  v15.m_quad = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v11, v11, 0), p1->m_quad), v14.m_quad);
-  *pOut = (hkVector4f)v15.m_quad;
-  pOut->m_quad = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v9, v9, 0), n1->m_quad), v15.m_quad);
+  v13 = _mm_mul_ps(_mm_shuffle_ps(v10, v10, 0), p0->m_quad);
+  *pOut = (hkVector4f)v13;
+  v14 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v12, v12, 0), n0->m_quad), v13);
+  *pOut = (hkVector4f)v14;
+  v15 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v11, v11, 0), p1->m_quad), v14);
+  *pOut = (hkVector4f)v15;
+  pOut->m_quad = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v9, v9, 0), n1->m_quad), v15);
 }
 
 // File Line: 714
 // RVA: 0xC4B9B0
-void __fastcall getEdgeArcPoints(hkVector4f *start, hkVector4f *end, hkVector4f *inNormal, hkVector4f *outNormal, hkArray<hkVector4f,hkContainerHeapAllocator> *pointsOut)
+void __fastcall getEdgeArcPoints(
+        hkVector4f *start,
+        hkVector4f *end,
+        hkVector4f *inNormal,
+        hkVector4f *outNormal,
+        hkArray<hkVector4f,hkContainerHeapAllocator> *pointsOut)
 {
-  hkVector4f *v5; // rbp
-  hkVector4f *v6; // rsi
   __m128 v7; // xmm1
   __m128 v8; // xmm1
   int v9; // eax
@@ -1601,24 +1528,20 @@ void __fastcall getEdgeArcPoints(hkVector4f *start, hkVector4f *end, hkVector4f 
   __m128 v11; // xmm1
   __m128 v12; // xmm3
   __m128 v13; // xmm5
-  float v14; // xmm6_4
-  signed __int64 v15; // rdi
-  __int64 v16; // r10
-  int v17; // er10
-  __int64 v18; // r10
-  hkVector4f n1; // [rsp+30h] [rbp-58h]
-  hkVector4f n0; // [rsp+40h] [rbp-48h]
-  hkVector4f pOut; // [rsp+50h] [rbp-38h]
+  double v14; // xmm6_8
+  __int64 v15; // rdi
+  int v16; // r10d
+  hkVector4f n1; // [rsp+30h] [rbp-58h] BYREF
+  hkVector4f n0; // [rsp+40h] [rbp-48h] BYREF
+  hkVector4f pOut; // [rsp+50h] [rbp-38h] BYREF
 
-  v5 = end;
-  v6 = start;
   v7 = _mm_sub_ps(start->m_quad, end->m_quad);
   v8 = _mm_mul_ps(v7, v7);
   v9 = pointsOut->m_capacityAndFlags & 0x3FFFFFFF;
   v10 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v8, v8, 85), _mm_shuffle_ps(v8, v8, 0)), _mm_shuffle_ps(v8, v8, 170));
   v11 = _mm_rsqrt_ps(v10);
   v12 = _mm_andnot_ps(
-          _mm_cmpleps(v10, (__m128)0i64),
+          _mm_cmple_ps(v10, (__m128)0i64),
           _mm_mul_ps(
             _mm_mul_ps(
               _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v10, v11), v11)),
@@ -1629,20 +1552,18 @@ void __fastcall getEdgeArcPoints(hkVector4f *start, hkVector4f *end, hkVector4f 
                 _mm_xor_ps((__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 0), outNormal->m_quad),
                 v12);
   n0.m_quad = v13;
-  v14 = FLOAT_0_1;
+  *(_QWORD *)&v14 = LODWORD(FLOAT_0_1);
   if ( pointsOut->m_size == v9 )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, pointsOut, 16);
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, pointsOut, 16);
   v15 = 10i64;
-  pointsOut->m_data[pointsOut->m_size++] = (hkVector4f)v6->m_quad;
-  v16 = (unsigned int)pointsOut->m_size;
+  pointsOut->m_data[pointsOut->m_size++] = (hkVector4f)start->m_quad;
   do
   {
-    cubicHermite(v14, v6, v5, &n0, &n1, &pOut);
-    if ( v17 == (pointsOut->m_capacityAndFlags & 0x3FFFFFFF) )
-      hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, pointsOut, 16);
-    v14 = v14 + 0.1;
+    cubicHermite(v14, start, end, &n0, &n1, &pOut);
+    if ( v16 == (pointsOut->m_capacityAndFlags & 0x3FFFFFFF) )
+      hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, pointsOut, 16);
+    *(float *)&v14 = *(float *)&v14 + 0.1;
     pointsOut->m_data[pointsOut->m_size++] = (hkVector4f)pOut.m_quad;
-    v18 = (unsigned int)pointsOut->m_size;
     --v15;
   }
   while ( v15 );
@@ -1650,261 +1571,275 @@ void __fastcall getEdgeArcPoints(hkVector4f *start, hkVector4f *end, hkVector4f 
 
 // File Line: 736
 // RVA: 0xC48850
-void __fastcall hkaiNavMeshDebugUtils::_showUserEdgeArc(bool curEnabled, bool oppEnabled, hkVector4f *curStart, hkVector4f *curEnd, hkVector4f *oppStart, hkVector4f *oppEnd, hkVector4f *curNormal, hkVector4f *oppNormal, unsigned int color, hkaiNavMeshDebugUtils::DebugInfo *settings, hkDebugDisplayHandler *displayHandler, int tag)
+void __fastcall hkaiNavMeshDebugUtils::_showUserEdgeArc(
+        bool curEnabled,
+        bool oppEnabled,
+        hkVector4f *curStart,
+        hkVector4f *curEnd,
+        hkVector4f *oppStart,
+        hkVector4f *oppEnd,
+        hkVector4f *curNormal,
+        hkVector4f *oppNormal,
+        unsigned int color,
+        hkaiNavMeshDebugUtils::DebugInfo *settings,
+        hkDebugDisplayHandler *displayHandler,
+        int tag)
 {
-  hkDisplayGeometry *v12; // rbx
-  hkVector4f *v13; // [rsp+20h] [rbp-48h]
-  hkVector4f *v14; // [rsp+28h] [rbp-40h]
-  hkArrayBase<hkDisplayGeometry *> geometries; // [rsp+40h] [rbp-28h]
-  hkDisplayGeometry *v16; // [rsp+50h] [rbp-18h]
+  hkDisplayGeometry *UserEdgeArc; // rbx
+  hkArrayBase<hkDisplayGeometry *> geometries; // [rsp+40h] [rbp-28h] BYREF
+  hkDisplayGeometry *v14; // [rsp+50h] [rbp-18h] BYREF
 
-  v12 = hkaiNavMeshDebugUtils::makeUserEdgeArc(
-          curEnabled,
-          oppEnabled,
-          curStart,
-          curEnd,
-          oppStart,
-          oppEnd,
-          curNormal,
-          oppNormal);
+  UserEdgeArc = hkaiNavMeshDebugUtils::makeUserEdgeArc(
+                  curEnabled,
+                  oppEnabled,
+                  curStart,
+                  curEnd,
+                  oppStart,
+                  oppEnd,
+                  curNormal,
+                  oppNormal);
   geometries.m_capacityAndFlags = -2147483647;
   geometries.m_size = 1;
-  geometries.m_data = &v16;
-  v16 = v12;
+  geometries.m_data = &v14;
+  v14 = UserEdgeArc;
   if ( displayHandler )
-  {
-    LODWORD(v14) = tag;
-    LODWORD(v13) = 0;
     displayHandler->vfptr->displayGeometry(
       displayHandler,
       (hkResult *)&displayHandler,
       &geometries,
       color & 0xFFFFFF | (color >> 1) & 0x7F000000,
-      (int)v13,
-      (int)v14);
-  }
+      0,
+      tag);
   else
-  {
     hkDebugDisplay::displayGeometry(
       hkSingleton<hkDebugDisplay>::s_instance,
       &geometries,
       color & 0xFFFFFF | (color >> 1) & 0x7F000000,
       0,
       (int)hkDebugDisplayProcess::m_tag);
-  }
-  hkReferencedObject::removeReference((hkReferencedObject *)&v12->vfptr);
+  hkReferencedObject::removeReference(UserEdgeArc);
   geometries.m_size = 0;
   if ( geometries.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       geometries.m_data,
       8 * geometries.m_capacityAndFlags);
 }
 
 // File Line: 758
 // RVA: 0xC48990
-hkArray<hkVector4f,hkContainerHeapAllocator> *__fastcall hkaiNavMeshDebugUtils::makeUserEdgeArc(bool curEnabled, bool oppEnabled, hkVector4f *curStart, hkVector4f *curEnd, hkVector4f *oppStart, hkVector4f *oppEnd, hkVector4f *curNormal, hkVector4f *oppNormal)
+hkArray<hkVector4f,hkContainerHeapAllocator> *__fastcall hkaiNavMeshDebugUtils::makeUserEdgeArc(
+        bool curEnabled,
+        bool oppEnabled,
+        hkVector4f *curStart,
+        hkVector4f *curEnd,
+        hkVector4f *oppStart,
+        hkVector4f *oppEnd,
+        hkVector4f *curNormal,
+        hkVector4f *oppNormal)
 {
-  hkVector4f *v8; // r14
-  hkVector4f *v9; // rsi
-  _QWORD **v10; // rax
-  hkDisplayWireframe *v11; // rax
-  int v12; // er15
-  __int64 v13; // r12
-  hkArray<hkVector4f,hkContainerHeapAllocator> *v14; // rdi
-  __int64 v15; // rsi
-  hkArray<hkVector4f,hkContainerHeapAllocator> *v16; // rbx
-  __m128 v17; // xmm6
-  hkVector4f *v18; // rdi
+  hkVector4f *v8; // rbx
+  _QWORD **Value; // rax
+  hkDisplayWireframe *v12; // rax
+  int v13; // r15d
+  __int64 m_size; // r12
+  hkArray<hkVector4f,hkContainerHeapAllocator> *v15; // rdi
+  __int64 v16; // rsi
+  hkArray<hkVector4f,hkContainerHeapAllocator> *v17; // rbx
+  __m128 v18; // xmm6
   hkVector4f *v19; // rdi
   hkVector4f *v20; // rdi
   hkVector4f *v21; // rdi
-  hkVector4f v22; // xmm0
-  int v23; // eax
-  hkVector4f *v24; // r14
-  hkVector4f *v25; // r14
+  hkVector4f *v22; // rdi
+  hkVector4f v23; // xmm0
+  int v24; // eax
+  hkVector4f *m_data; // r14
   hkVector4f *v26; // r14
   hkVector4f *v27; // r14
-  __m128 v28; // xmm8
-  __m128 v29; // xmm9
-  __m128 v30; // xmm6
-  __m128 v31; // xmm7
-  int v32; // eax
-  int v33; // eax
+  hkVector4f *v28; // r14
+  __m128 v29; // xmm8
+  __m128 v30; // xmm9
+  __m128 v31; // xmm6
+  __m128 v32; // xmm7
+  int m_capacityAndFlags; // eax
   int v34; // eax
   int v35; // eax
+  int v36; // eax
   hkArray<hkVector4f,hkContainerHeapAllocator> *pointsOut; // [rsp+20h] [rbp-69h]
-  __int64 v38; // [rsp+28h] [rbp-61h]
-  hkArray<hkVector4f,hkContainerHeapAllocator> v39; // [rsp+30h] [rbp-59h]
-  hkArray<hkVector4f,hkContainerHeapAllocator> v40; // [rsp+40h] [rbp-49h]
+  __int64 v39; // [rsp+28h] [rbp-61h]
+  hkArray<hkVector4f,hkContainerHeapAllocator> v40; // [rsp+30h] [rbp-59h] BYREF
+  hkArray<hkVector4f,hkContainerHeapAllocator> v41; // [rsp+40h] [rbp-49h] BYREF
   char vars0; // [rsp+D0h] [rbp+47h]
   void *retaddr; // [rsp+D8h] [rbp+4Fh]
-  hkVector4f *v43; // [rsp+F0h] [rbp+67h]
   hkVector4f *end; // [rsp+F8h] [rbp+6Fh]
 
-  v8 = curStart;
-  v9 = curEnd;
-  v10 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v11 = (hkDisplayWireframe *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v10[11] + 8i64))(v10[11], 128i64);
-  v12 = 0;
-  if ( v11 )
-    hkDisplayWireframe::hkDisplayWireframe(v11);
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v12 = (hkDisplayWireframe *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 128i64);
+  v13 = 0;
+  if ( v12 )
+    hkDisplayWireframe::hkDisplayWireframe(v12);
+  v41.m_data = 0i64;
+  v41.m_size = 0;
+  v41.m_capacityAndFlags = 0x80000000;
   v40.m_data = 0i64;
   v40.m_size = 0;
-  v40.m_capacityAndFlags = 2147483648;
-  v39.m_data = 0i64;
-  v39.m_size = 0;
-  v39.m_capacityAndFlags = 2147483648;
-  getEdgeArcPoints(v8, end, oppStart, oppEnd, &v40);
-  getEdgeArcPoints(v9, v43, oppStart, oppEnd, &v39);
-  v13 = v40.m_size;
-  v14 = pointsOut;
-  v15 = 0i64;
-  v16 = pointsOut + 7;
-  v38 = v40.m_size - 1;
-  if ( v38 > 0 )
+  v40.m_capacityAndFlags = 0x80000000;
+  getEdgeArcPoints(curStart, end, oppStart, oppEnd, &v41);
+  getEdgeArcPoints(curEnd, v8, oppStart, oppEnd, &v40);
+  m_size = v41.m_size;
+  v15 = pointsOut;
+  v16 = 0i64;
+  v17 = pointsOut + 7;
+  v39 = v41.m_size - 1;
+  if ( v39 > 0 )
   {
-    while ( v15 || !(_BYTE)retaddr )
+    while ( v16 || !(_BYTE)retaddr )
     {
-      if ( v12 == (_DWORD)v13 - 2 && vars0 )
+      if ( v13 == (_DWORD)m_size - 2 && vars0 )
       {
-        v17 = _mm_add_ps(
-                _mm_mul_ps(_mm_sub_ps(v39.m_data[v13 - 1].m_quad, v40.m_data[v13 - 1].m_quad), *(__m128 *)_xmm),
-                v40.m_data[v13 - 1].m_quad);
+        v18 = _mm_add_ps(
+                _mm_mul_ps(_mm_sub_ps(v40.m_data[m_size - 1].m_quad, v41.m_data[m_size - 1].m_quad), *(__m128 *)_xmm),
+                v41.m_data[m_size - 1].m_quad);
         if ( pointsOut[7].m_size == (pointsOut[7].m_capacityAndFlags & 0x3FFFFFFF) )
-          hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v16, 16);
-        pointsOut[7].m_data[pointsOut[7].m_size++].m_quad = v17;
-        v24 = v40.m_data;
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, v17, 16);
+        pointsOut[7].m_data[pointsOut[7].m_size++].m_quad = v18;
+        m_data = v41.m_data;
         if ( pointsOut[7].m_size == (pointsOut[7].m_capacityAndFlags & 0x3FFFFFFF) )
-          hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v16, 16);
-        pointsOut[7].m_data[pointsOut[7].m_size++] = v24[v13 - 2];
-        v25 = v40.m_data;
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, v17, 16);
+        pointsOut[7].m_data[pointsOut[7].m_size++] = m_data[m_size - 2];
+        v26 = v41.m_data;
         if ( pointsOut[7].m_size == (pointsOut[7].m_capacityAndFlags & 0x3FFFFFFF) )
-          hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v16, 16);
-        pointsOut[7].m_data[pointsOut[7].m_size++] = v25[v13 - 2];
-        v26 = v39.m_data;
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, v17, 16);
+        pointsOut[7].m_data[pointsOut[7].m_size++] = v26[m_size - 2];
+        v27 = v40.m_data;
         if ( pointsOut[7].m_size == (pointsOut[7].m_capacityAndFlags & 0x3FFFFFFF) )
-          hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v16, 16);
-        pointsOut[7].m_data[pointsOut[7].m_size++] = v26[v13 - 2];
-        v27 = v39.m_data;
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, v17, 16);
+        pointsOut[7].m_data[pointsOut[7].m_size++] = v27[m_size - 2];
+        v28 = v40.m_data;
         if ( pointsOut[7].m_size == (pointsOut[7].m_capacityAndFlags & 0x3FFFFFFF) )
-          hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v16, 16);
-        v22.m_quad = (__m128)v27[v13 - 2];
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, v17, 16);
+        v23.m_quad = (__m128)v28[m_size - 2];
         goto LABEL_17;
       }
-      v28 = _mm_add_ps(
-              _mm_mul_ps(_mm_sub_ps(v39.m_data[v15 + 1].m_quad, v40.m_data[v15 + 1].m_quad), (__m128)_xmm),
-              v40.m_data[v15 + 1].m_quad);
       v29 = _mm_add_ps(
-              _mm_mul_ps(_mm_sub_ps(v40.m_data[v15 + 1].m_quad, v39.m_data[v15 + 1].m_quad), (__m128)_xmm),
-              v39.m_data[v15 + 1].m_quad);
+              _mm_mul_ps(_mm_sub_ps(v40.m_data[v16 + 1].m_quad, v41.m_data[v16 + 1].m_quad), (__m128)_xmm),
+              v41.m_data[v16 + 1].m_quad);
       v30 = _mm_add_ps(
-              _mm_mul_ps(_mm_sub_ps(v39.m_data[v15].m_quad, v40.m_data[v15].m_quad), (__m128)_xmm),
-              v40.m_data[v15].m_quad);
+              _mm_mul_ps(_mm_sub_ps(v41.m_data[v16 + 1].m_quad, v40.m_data[v16 + 1].m_quad), (__m128)_xmm),
+              v40.m_data[v16 + 1].m_quad);
       v31 = _mm_add_ps(
-              _mm_mul_ps(_mm_sub_ps(v40.m_data[v15].m_quad, v39.m_data[v15].m_quad), (__m128)_xmm),
-              v39.m_data[v15].m_quad);
+              _mm_mul_ps(_mm_sub_ps(v40.m_data[v16].m_quad, v41.m_data[v16].m_quad), (__m128)_xmm),
+              v41.m_data[v16].m_quad);
+      v32 = _mm_add_ps(
+              _mm_mul_ps(_mm_sub_ps(v41.m_data[v16].m_quad, v40.m_data[v16].m_quad), (__m128)_xmm),
+              v40.m_data[v16].m_quad);
       if ( pointsOut[7].m_size == (pointsOut[7].m_capacityAndFlags & 0x3FFFFFFF) )
-        hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v16, 16);
-      pointsOut[7].m_data[pointsOut[7].m_size].m_quad = v30;
-      v32 = pointsOut[7].m_capacityAndFlags;
-      if ( ++pointsOut[7].m_size == (v32 & 0x3FFFFFFF) )
-        hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v16, 16);
-      pointsOut[7].m_data[pointsOut[7].m_size].m_quad = v28;
-      v33 = pointsOut[7].m_capacityAndFlags;
-      if ( ++pointsOut[7].m_size == (v33 & 0x3FFFFFFF) )
-        hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v16, 16);
+        hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, v17, 16);
       pointsOut[7].m_data[pointsOut[7].m_size].m_quad = v31;
+      m_capacityAndFlags = pointsOut[7].m_capacityAndFlags;
+      if ( ++pointsOut[7].m_size == (m_capacityAndFlags & 0x3FFFFFFF) )
+        hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, v17, 16);
+      pointsOut[7].m_data[pointsOut[7].m_size].m_quad = v29;
       v34 = pointsOut[7].m_capacityAndFlags;
       if ( ++pointsOut[7].m_size == (v34 & 0x3FFFFFFF) )
-        hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v16, 16);
-      pointsOut[7].m_data[pointsOut[7].m_size++].m_quad = v29;
-      if ( v15 <= 0 )
-        goto LABEL_48;
-      if ( pointsOut[7].m_size == (pointsOut[7].m_capacityAndFlags & 0x3FFFFFFF) )
-        hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v16, 16);
-      pointsOut[7].m_data[pointsOut[7].m_size].m_quad = v30;
+        hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, v17, 16);
+      pointsOut[7].m_data[pointsOut[7].m_size].m_quad = v32;
       v35 = pointsOut[7].m_capacityAndFlags;
       if ( ++pointsOut[7].m_size == (v35 & 0x3FFFFFFF) )
-        hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v16, 16);
+        hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, v17, 16);
+      pointsOut[7].m_data[pointsOut[7].m_size++].m_quad = v30;
+      if ( v16 <= 0 )
+        goto LABEL_48;
+      if ( pointsOut[7].m_size == (pointsOut[7].m_capacityAndFlags & 0x3FFFFFFF) )
+        hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, v17, 16);
       pointsOut[7].m_data[pointsOut[7].m_size].m_quad = v31;
+      v36 = pointsOut[7].m_capacityAndFlags;
+      if ( ++pointsOut[7].m_size == (v36 & 0x3FFFFFFF) )
+        hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, v17, 16);
+      pointsOut[7].m_data[pointsOut[7].m_size].m_quad = v32;
 LABEL_47:
       ++pointsOut[7].m_size;
 LABEL_48:
-      ++v15;
-      ++v12;
-      if ( v15 >= v38 )
+      ++v16;
+      ++v13;
+      if ( v16 >= v39 )
       {
-        v14 = pointsOut;
+        v15 = pointsOut;
         goto LABEL_50;
       }
     }
-    v17 = _mm_add_ps(
-            _mm_mul_ps(_mm_sub_ps(v39.m_data->m_quad, v40.m_data->m_quad), *(__m128 *)_xmm),
-            v40.m_data->m_quad);
+    v18 = _mm_add_ps(
+            _mm_mul_ps(_mm_sub_ps(v40.m_data->m_quad, v41.m_data->m_quad), *(__m128 *)_xmm),
+            v41.m_data->m_quad);
     if ( pointsOut[7].m_size == (pointsOut[7].m_capacityAndFlags & 0x3FFFFFFF) )
-      hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v16, 16);
-    pointsOut[7].m_data[pointsOut[7].m_size++].m_quad = v17;
-    v18 = v40.m_data;
+      hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, v17, 16);
+    pointsOut[7].m_data[pointsOut[7].m_size++].m_quad = v18;
+    v19 = v41.m_data;
     if ( pointsOut[7].m_size == (pointsOut[7].m_capacityAndFlags & 0x3FFFFFFF) )
-      hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v16, 16);
-    pointsOut[7].m_data[pointsOut[7].m_size++] = (hkVector4f)v18[1].m_quad;
-    v19 = v40.m_data;
-    if ( pointsOut[7].m_size == (pointsOut[7].m_capacityAndFlags & 0x3FFFFFFF) )
-      hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v16, 16);
+      hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, v17, 16);
     pointsOut[7].m_data[pointsOut[7].m_size++] = (hkVector4f)v19[1].m_quad;
-    v20 = v39.m_data;
+    v20 = v41.m_data;
     if ( pointsOut[7].m_size == (pointsOut[7].m_capacityAndFlags & 0x3FFFFFFF) )
-      hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v16, 16);
+      hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, v17, 16);
     pointsOut[7].m_data[pointsOut[7].m_size++] = (hkVector4f)v20[1].m_quad;
-    v21 = v39.m_data;
+    v21 = v40.m_data;
     if ( pointsOut[7].m_size == (pointsOut[7].m_capacityAndFlags & 0x3FFFFFFF) )
-      hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v16, 16);
-    v22.m_quad = (__m128)v21[1];
+      hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, v17, 16);
+    pointsOut[7].m_data[pointsOut[7].m_size++] = (hkVector4f)v21[1].m_quad;
+    v22 = v40.m_data;
+    if ( pointsOut[7].m_size == (pointsOut[7].m_capacityAndFlags & 0x3FFFFFFF) )
+      hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, v17, 16);
+    v23.m_quad = (__m128)v22[1];
 LABEL_17:
-    pointsOut[7].m_data[pointsOut[7].m_size] = (hkVector4f)v22.m_quad;
-    v23 = pointsOut[7].m_capacityAndFlags;
-    if ( ++pointsOut[7].m_size == (v23 & 0x3FFFFFFF) )
-      hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v16, 16);
-    pointsOut[7].m_data[pointsOut[7].m_size].m_quad = v17;
+    pointsOut[7].m_data[pointsOut[7].m_size] = (hkVector4f)v23.m_quad;
+    v24 = pointsOut[7].m_capacityAndFlags;
+    if ( ++pointsOut[7].m_size == (v24 & 0x3FFFFFFF) )
+      hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, v17, 16);
+    pointsOut[7].m_data[pointsOut[7].m_size].m_quad = v18;
     goto LABEL_47;
   }
 LABEL_50:
-  v39.m_size = 0;
-  if ( v39.m_capacityAndFlags >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v39.m_data,
-      16 * v39.m_capacityAndFlags);
-  v39.m_data = 0i64;
   v40.m_size = 0;
-  v39.m_capacityAndFlags = 2147483648;
   if ( v40.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       v40.m_data,
       16 * v40.m_capacityAndFlags);
-  return v14;
+  v40.m_data = 0i64;
+  v41.m_size = 0;
+  v40.m_capacityAndFlags = 0x80000000;
+  if ( v41.m_capacityAndFlags >= 0 )
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
+      &hkContainerHeapAllocator::s_alloc,
+      v41.m_data,
+      16 * v41.m_capacityAndFlags);
+  return v15;
 }
 
 // File Line: 821
 // RVA: 0xC48350
-void __usercall hkaiNavMeshDebugUtils::_showUserEdgePair(hkaiStreamingCollection *collection@<rcx>, hkaiNavMeshDebugUtils::DebugInfo *settings@<rdx>, unsigned int faceKey@<r8d>, unsigned int uedgeKey@<r9d>, hkDebugDisplayHandler *a5@<rbx>, hkDebugDisplayHandler *displayHandler, int tag)
+void __fastcall hkaiNavMeshDebugUtils::_showUserEdgePair(
+        hkaiStreamingCollection *collection,
+        hkaiNavMeshDebugUtils::DebugInfo *settings,
+        unsigned int faceKey,
+        int uedgeKey,
+        hkDebugDisplayHandler *displayHandler,
+        int tag)
 {
-  hkaiNavMeshDebugUtils::DebugInfo *v7; // r13
-  hkaiStreamingCollection::InstanceInfo *v8; // rax
-  unsigned int v9; // ebx
-  hkaiNavMeshInstance *v10; // rdi
-  int v11; // er14
+  hkDebugDisplayHandler *v6; // rbx
+  hkaiStreamingCollection::InstanceInfo *m_data; // rax
+  unsigned int index; // ebx
+  hkaiNavMeshInstance *m_instancePtr; // rdi
+  int m_numOriginalEdges; // r14d
   hkaiNavMesh::Edge *v12; // r15
   int v13; // esi
-  __m128 v14; // xmm6
+  hkVector4f v14; // xmm6
   bool v15; // zf
-  char *v16; // rdx
-  unsigned int v17; // er12
-  unsigned int v18; // ecx
-  signed int v19; // eax
-  unsigned int color; // er14
+  char *m_storage; // rdx
+  int v17; // r12d
+  unsigned int m_oppositeEdge; // ecx
+  int m_runtimeId; // eax
+  unsigned int color; // r14d
   unsigned int v21; // ecx
   unsigned int v22; // eax
   unsigned int v23; // esi
@@ -1912,132 +1847,115 @@ void __usercall hkaiNavMeshDebugUtils::_showUserEdgePair(hkaiStreamingCollection
   hkaiNavMeshInstance *v25; // rsi
   hkaiNavMesh::Edge *v26; // r12
   BOOL v27; // esi
-  BOOL v28; // er12
-  hkArray<int,hkContainerHeapAllocator> *instanceMap; // [rsp+20h] [rbp-D0h]
-  hkArray<int,hkContainerHeapAllocator> *instanceMapa; // [rsp+20h] [rbp-D0h]
-  hkArray<int,hkContainerHeapAllocator> *instanceMapb; // [rsp+20h] [rbp-D0h]
-  __int64 index; // [rsp+28h] [rbp-C8h]
-  __int64 indexa; // [rsp+28h] [rbp-C8h]
-  __int64 indexb; // [rsp+28h] [rbp-C8h]
-  __int64 striding; // [rsp+30h] [rbp-C0h]
-  hkVector4f pos; // [rsp+60h] [rbp-90h]
-  hkVector4f edgeB; // [rsp+70h] [rbp-80h]
-  hkVector4f edgeA; // [rsp+80h] [rbp-70h]
-  hkaiNavMeshInstance *v39; // [rsp+90h] [rbp-60h]
-  hkVector4f end; // [rsp+A0h] [rbp-50h]
-  char v41; // [rsp+B0h] [rbp-40h]
-  hkVector4f oppNormal; // [rsp+C0h] [rbp-30h]
-  char v43; // [rsp+D0h] [rbp-20h]
-  int faceIndex; // [rsp+E0h] [rbp-10h]
-  hkStringBuf v45; // [rsp+F0h] [rbp+0h]
+  BOOL v28; // r12d
+  hkVector4f pos; // [rsp+60h] [rbp-90h] BYREF
+  hkVector4f edgeB; // [rsp+70h] [rbp-80h] BYREF
+  hkVector4f edgeA; // [rsp+80h] [rbp-70h] BYREF
+  hkaiNavMeshInstance *v32; // [rsp+90h] [rbp-60h]
+  hkVector4f end; // [rsp+A0h] [rbp-50h] BYREF
+  char v34; // [rsp+B0h] [rbp-40h] BYREF
+  hkVector4f oppNormal; // [rsp+C0h] [rbp-30h] BYREF
+  hkaiNavMeshUtils v36[16]; // [rsp+D0h] [rbp-20h] BYREF
+  __m128 faceIndex; // [rsp+E0h] [rbp-10h] BYREF
+  hkStringBuf v38; // [rsp+F0h] [rbp+0h] BYREF
   __int64 vars0; // [rsp+1D0h] [rbp+E0h]
-  void *retaddr; // [rsp+1D8h] [rbp+E8h]
-  unsigned int v48; // [rsp+1E8h] [rbp+F8h]
-  hkDebugDisplayHandler *v49; // [rsp+1F0h] [rbp+100h]
-  unsigned int v50; // [rsp+1F8h] [rbp+108h]
+  void *retaddr; // [rsp+1D8h] [rbp+E8h] BYREF
+  unsigned int v41; // [rsp+1E8h] [rbp+F8h]
+  hkDebugDisplayHandler *v42; // [rsp+1F0h] [rbp+100h]
 
-  v50 = uedgeKey;
-  v7 = settings;
   if ( settings->m_showUserEdges.m_bool )
   {
-    v49 = a5;
-    v8 = collection->m_instances.m_data;
-    v9 = uedgeKey & 0x3FFFFF;
+    v42 = v6;
+    m_data = collection->m_instances.m_data;
+    index = uedgeKey & 0x3FFFFF;
     edgeB.m_quad.m128_i32[0] = faceKey & 0x3FFFFF;
-    v10 = v8[faceKey >> 22].m_instancePtr;
-    v11 = v10->m_numOriginalEdges;
+    m_instancePtr = m_data[faceKey >> 22].m_instancePtr;
+    m_numOriginalEdges = m_instancePtr->m_numOriginalEdges;
     v12 = hkaiNavMeshInstance_get_hkaiNavMesh::Edge__23(
-            v10->m_originalEdges,
-            v10->m_numOriginalEdges,
-            &v10->m_instancedEdges,
-            &v10->m_ownedEdges,
-            &v10->m_edgeMap,
+            m_instancePtr->m_originalEdges,
+            m_numOriginalEdges,
+            &m_instancePtr->m_instancedEdges,
+            &m_instancePtr->m_ownedEdges,
+            &m_instancePtr->m_edgeMap,
             uedgeKey & 0x3FFFFF);
-    v13 = v10->m_edgeDataStriding ? *hkaiNavMeshInstance_getWithStriding_int__4(
-                                       v10->m_originalEdgeData,
-                                       v11,
-                                       &v10->m_instancedEdgeData,
-                                       &v10->m_ownedEdgeData,
-                                       &v10->m_edgeMap,
-                                       v9,
-                                       v10->m_edgeDataStriding) : 0;
+    v13 = m_instancePtr->m_edgeDataStriding
+        ? *hkaiNavMeshInstance_getWithStriding_int__4(
+             m_instancePtr->m_originalEdgeData,
+             m_numOriginalEdges,
+             &m_instancePtr->m_instancedEdgeData,
+             &m_instancePtr->m_ownedEdgeData,
+             &m_instancePtr->m_edgeMap,
+             index,
+             m_instancePtr->m_edgeDataStriding)
+        : 0;
     if ( v12->m_oppositeEdge != -1 )
     {
-      v14 = v7->m_displayOffset.m_quad;
-      hkaiNavMeshInstance::getEdgePoints(v10, v9, &edgeA, &edgeB);
-      v15 = v7->m_labelEdges.m_bool == 0;
-      v16 = v45.m_string.m_storage;
-      v45.m_string.m_data = v45.m_string.m_storage;
-      v45.m_string.m_capacityAndFlags = -2147483520;
-      v45.m_string.m_size = 1;
-      v45.m_string.m_storage[0] = 0;
-      edgeB.m_quad = _mm_add_ps(edgeB.m_quad, v14);
-      edgeA.m_quad = _mm_add_ps(edgeA.m_quad, v14);
+      v14.m_quad = (__m128)settings->m_displayOffset;
+      hkaiNavMeshInstance::getEdgePoints(m_instancePtr, index, &edgeA, &edgeB);
+      v15 = settings->m_labelEdges.m_bool == 0;
+      m_storage = v38.m_string.m_storage;
+      v38.m_string.m_data = v38.m_string.m_storage;
+      v38.m_string.m_capacityAndFlags = -2147483520;
+      v38.m_string.m_size = 1;
+      v38.m_string.m_storage[0] = 0;
+      edgeB.m_quad = _mm_add_ps(edgeB.m_quad, v14.m_quad);
+      edgeA.m_quad = _mm_add_ps(edgeA.m_quad, v14.m_quad);
       pos.m_quad = _mm_add_ps(
                      _mm_mul_ps(_mm_sub_ps(edgeB.m_quad, edgeA.m_quad), (__m128)xmmword_141A711B0),
                      edgeA.m_quad);
       if ( !v15 )
       {
-        hkStringBuf::printf(&v45, "%d ", v9);
-        v16 = v45.m_string.m_data;
+        hkStringBuf::printf(&v38, "%d ", index);
+        m_storage = v38.m_string.m_data;
       }
-      if ( v49 )
+      if ( v42 )
       {
-        v17 = v50;
-        LODWORD(striding) = v50;
-        LODWORD(index) = 0;
-        LODWORD(instanceMap) = v7->m_edgeLabelColor;
-        v49->vfptr->display3dText(v49, (hkResult *)&retaddr, v16, &pos, (unsigned int)instanceMap, index, striding);
+        v17 = uedgeKey;
+        v42->vfptr->display3dText(v42, (hkResult *)&retaddr, m_storage, &pos, settings->m_edgeLabelColor, 0, uedgeKey);
       }
       else
       {
         hkDebugDisplay::display3dText(
           hkSingleton<hkDebugDisplay>::s_instance,
-          v16,
+          m_storage,
           &pos,
-          v7->m_edgeLabelColor,
+          settings->m_edgeLabelColor,
           0,
           (int)hkDebugDisplayProcess::m_tag);
-        v17 = v50;
+        v17 = uedgeKey;
       }
-      v45.m_string.m_size = 0;
-      if ( v45.m_string.m_capacityAndFlags >= 0 )
+      v38.m_string.m_size = 0;
+      if ( v38.m_string.m_capacityAndFlags >= 0 )
         hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-          v45.m_string.m_data,
-          v45.m_string.m_capacityAndFlags & 0x3FFFFFFF);
-      v18 = v12->m_oppositeEdge;
-      if ( v12->m_flags.m_storage & 0x40 )
-        v19 = v18 >> 22;
+          &hkContainerTempAllocator::s_alloc,
+          v38.m_string.m_data,
+          v38.m_string.m_capacityAndFlags & 0x3FFFFFFF);
+      m_oppositeEdge = v12->m_oppositeEdge;
+      if ( (v12->m_flags.m_storage & 0x40) != 0 )
+        m_runtimeId = m_oppositeEdge >> 22;
       else
-        v19 = v10->m_runtimeId;
-      if ( v18 == -1 )
-        v19 = -1;
-      v39 = *(hkaiNavMeshInstance **)(*(_QWORD *)(vars0 + 32) + 48i64 * v19);
-      LOBYTE(retaddr) = v39 != 0i64;
-      if ( v7->m_colorUserEdgesByData.m_bool )
+        m_runtimeId = m_instancePtr->m_runtimeId;
+      if ( m_oppositeEdge == -1 )
+        m_runtimeId = -1;
+      v32 = *(hkaiNavMeshInstance **)(*(_QWORD *)(vars0 + 32) + 48i64 * m_runtimeId);
+      LOBYTE(retaddr) = v32 != 0i64;
+      if ( settings->m_colorUserEdgesByData.m_bool )
         color = hkColor::getPaletteColor(v13, 127);
       else
-        color = v7->m_userEdgeColor;
+        color = settings->m_userEdgeColor;
       v21 = v12->m_oppositeEdge;
-      if ( v12->m_flags.m_storage & 0x40 )
+      if ( (v12->m_flags.m_storage & 0x40) != 0 )
         v22 = v21 & 0xFFC00000;
       else
-        v22 = v10->m_runtimeId << 22;
+        v22 = m_instancePtr->m_runtimeId << 22;
       v23 = v22 | v21 & 0x3FFFFF;
       if ( v21 == -1 )
         v23 = -1;
-      if ( !(_BYTE)retaddr || (v24 = v48, v48 < v23) )
+      if ( !(_BYTE)retaddr || (v24 = v41, v41 < v23) )
       {
-        if ( v49 )
-        {
-          LODWORD(striding) = v17;
-          LODWORD(indexa) = 0;
-          LODWORD(instanceMapa) = color;
-          v49->vfptr->displayLine(v49, (hkResult *)&v41, &edgeA, &edgeB, (unsigned int)instanceMapa, indexa, striding);
-        }
+        if ( v42 )
+          v42->vfptr->displayLine(v42, (hkResult *)&v34, &edgeA, &edgeB, color, 0, v17);
         else
-        {
           hkDebugDisplay::displayLine(
             hkSingleton<hkDebugDisplay>::s_instance,
             &edgeA,
@@ -2045,34 +1963,27 @@ void __usercall hkaiNavMeshDebugUtils::_showUserEdgePair(hkaiStreamingCollection
             color,
             0,
             (int)hkDebugDisplayProcess::m_tag);
-        }
-        v24 = v48;
+        v24 = v41;
       }
       if ( (_BYTE)retaddr && v24 < v23 )
       {
-        v25 = v39;
+        v25 = v32;
         v26 = hkaiNavMeshInstance_get_hkaiNavMesh::Edge__23(
-                v39->m_originalEdges,
-                v39->m_numOriginalEdges,
-                &v39->m_instancedEdges,
-                &v39->m_ownedEdges,
-                &v39->m_edgeMap,
+                v32->m_originalEdges,
+                v32->m_numOriginalEdges,
+                &v32->m_instancedEdges,
+                &v32->m_ownedEdges,
+                &v32->m_edgeMap,
                 v12->m_oppositeEdge & 0x3FFFFF);
         hkaiNavMeshInstance::getEdgePoints(v25, v26, &pos, &end);
         v15 = v12->m_oppositeEdge == -1;
-        pos.m_quad = _mm_add_ps(pos.m_quad, v14);
-        end.m_quad = _mm_add_ps(end.m_quad, v14);
-        v27 = !v15 && !(v12->m_flags.m_storage & 0x20);
-        v28 = v26->m_oppositeEdge != -1 && !(v26->m_flags.m_storage & 0x20);
-        if ( v49 )
-        {
-          LODWORD(striding) = v50;
-          LODWORD(indexb) = 0;
-          LODWORD(instanceMapb) = color;
-          v49->vfptr->displayLine(v49, (hkResult *)&retaddr, &pos, &end, (unsigned int)instanceMapb, indexb, striding);
-        }
+        pos.m_quad = _mm_add_ps(pos.m_quad, v14.m_quad);
+        end.m_quad = _mm_add_ps(end.m_quad, v14.m_quad);
+        v27 = !v15 && (v12->m_flags.m_storage & 0x20) == 0;
+        v28 = v26->m_oppositeEdge != -1 && (v26->m_flags.m_storage & 0x20) == 0;
+        if ( v42 )
+          v42->vfptr->displayLine(v42, (hkResult *)&retaddr, &pos, &end, color, 0, uedgeKey);
         else
-        {
           hkDebugDisplay::displayLine(
             hkSingleton<hkDebugDisplay>::s_instance,
             &pos,
@@ -2080,21 +1991,20 @@ void __usercall hkaiNavMeshDebugUtils::_showUserEdgePair(hkaiStreamingCollection
             color,
             0,
             (int)hkDebugDisplayProcess::m_tag);
-        }
         hkaiNavMeshUtils::calcFaceNormal<hkaiNavMeshInstance>(
-          (hkaiNavMeshUtils *)&v43,
-          (hkSimdFloat32 *)v10,
+          v36,
+          (hkSimdFloat32 *)m_instancePtr,
           (hkaiNavMeshInstance *)edgeB.m_quad.m128_u32[0],
-          (__int64)&faceIndex);
+          &faceIndex);
         hkaiNavMeshUtils::calcFaceNormal<hkaiNavMeshInstance>(
-          (hkaiNavMeshUtils *)&v43,
-          (hkSimdFloat32 *)v39,
+          v36,
+          (hkSimdFloat32 *)v32,
           (hkaiNavMeshInstance *)(v12->m_oppositeFace & 0x3FFFFF),
-          (__int64)&oppNormal);
+          &oppNormal.m_quad);
         if ( v27 || v28 )
           hkaiNavMeshDebugUtils::_showUserEdgeArc(
-            v27 != 0,
-            v28 != 0,
+            v27,
+            v28,
             &edgeA,
             &edgeB,
             &pos,
@@ -2102,30 +2012,20 @@ void __usercall hkaiNavMeshDebugUtils::_showUserEdgePair(hkaiStreamingCollection
             (hkVector4f *)&faceIndex,
             &oppNormal,
             color,
-            v7,
-            v49,
-            v50);
+            settings,
+            v42,
+            uedgeKey);
       }
     }
   }
-}            &oppNormal,
-            color,
-            v7,
-            v49,
-            v50);
-      }
-    }
-  }
 }
 
 // File Line: 906
 // RVA: 0xC48FE0
-float __fastcall hkaiNavMeshDebugUtils::_calcNonplanarity(hkaiNavMeshInstance *nmi, int faceIdx)
+float __fastcall hkaiNavMeshDebugUtils::_calcNonplanarity(hkSimdFloat32 *nmi, unsigned int faceIdx)
 {
   float v2; // xmm6_4
   float v3; // xmm7_4
-  int index; // ebx
-  hkaiNavMeshInstance *v5; // rdi
   int v6; // edx
   hkaiNavMesh::Face *v7; // rcx
   __m128 v8; // xmm1
@@ -2134,101 +2034,101 @@ float __fastcall hkaiNavMeshDebugUtils::_calcNonplanarity(hkaiNavMeshInstance *n
   __m128 v11; // xmm12
   hkaiNavMesh::Face *v12; // rax
   hkaiNavMesh::Face *v13; // rsi
-  __int16 v14; // r15
-  int v15; // ebx
-  int v16; // ebp
-  int v17; // er13
-  __m128 v18; // xmm8
-  signed int v19; // er14
+  __int16 m_numUserEdges; // r15
+  int m_startEdgeIndex; // ebx
+  int m_startUserEdgeIndex; // ebp
+  int v17; // r13d
+  hkVector4f v18; // xmm8
+  int v19; // r14d
   hkArray<hkaiNavMesh::Edge,hkContainerHeapAllocator> *v20; // r9
-  __m128 v21; // xmm9
-  __m128 v22; // xmm10
+  hkVector4f v21; // xmm9
+  hkVector4f v22; // xmm10
   hkArray<hkaiNavMesh::Edge,hkContainerHeapAllocator> *v23; // r8
-  __m128 v24; // xmm11
-  __int64 v25; // rcx
-  __m128 *v26; // rax
+  hkVector4f v24; // xmm11
+  __int64 m_a; // rcx
+  hkVector4f *v26; // rax
   __m128 v27; // xmm2
   float v28; // xmm1_4
-  int faceIndex[4]; // [rsp+30h] [rbp-C8h]
-  char v31; // [rsp+40h] [rbp-B8h]
+  int faceIndex[4]; // [rsp+30h] [rbp-C8h] BYREF
+  hkaiNavMeshUtils v31; // [rsp+40h] [rbp-B8h] BYREF
 
   v2 = FLOAT_N3_40282e38;
   v3 = FLOAT_3_40282e38;
-  index = faceIdx;
-  v5 = nmi;
-  hkaiNavMeshUtils::calcFaceNormal<hkaiNavMeshInstance>(
-    (hkaiNavMeshUtils *)&v31,
-    (hkSimdFloat32 *)nmi,
-    (hkaiNavMeshInstance *)(unsigned int)faceIdx,
-    (__int64)faceIndex);
-  v6 = v5->m_numOriginalFaces;
-  v7 = v5->m_originalFaces;
+  hkaiNavMeshUtils::calcFaceNormal<hkaiNavMeshInstance>(&v31, nmi, (hkaiNavMeshInstance *)faceIdx, (__m128 *)faceIndex);
+  v6 = nmi[1].m_real.m128_i32[2];
+  v7 = (hkaiNavMesh::Face *)nmi[1].m_real.m128_u64[0];
   v8 = _mm_mul_ps(*(__m128 *)faceIndex, *(__m128 *)faceIndex);
   v9 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v8, v8, 85), _mm_shuffle_ps(v8, v8, 0)), _mm_shuffle_ps(v8, v8, 170));
   v10 = _mm_rsqrt_ps(v9);
   v11 = _mm_mul_ps(
           *(__m128 *)faceIndex,
           _mm_andnot_ps(
-            _mm_cmpleps(v9, (__m128)0i64),
+            _mm_cmple_ps(v9, (__m128)0i64),
             _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v10, v9), v10)), _mm_mul_ps(*(__m128 *)_xmm, v10))));
   *(__m128 *)faceIndex = v11;
   v12 = hkaiNavMeshInstance_get_hkaiNavMesh::Face__21(
           v7,
           v6,
-          &v5->m_instancedFaces,
-          &v5->m_ownedFaces,
-          &v5->m_faceMap,
-          index);
+          (hkArray<hkaiNavMesh::Face,hkContainerHeapAllocator> *)&nmi[15],
+          (hkArray<hkaiNavMesh::Face,hkContainerHeapAllocator> *)&nmi[17],
+          (hkArray<int,hkContainerHeapAllocator> *)&nmi[14],
+          faceIdx);
   v13 = v12;
-  v14 = v12->m_numUserEdges;
-  if ( v14 <= 0 )
-    v15 = v12->m_startEdgeIndex;
+  m_numUserEdges = v12->m_numUserEdges;
+  if ( m_numUserEdges <= 0 )
+    m_startEdgeIndex = v12->m_startEdgeIndex;
   else
-    v15 = v12->m_startUserEdgeIndex;
-  if ( v15 != -1 )
+    m_startEdgeIndex = v12->m_startUserEdgeIndex;
+  if ( m_startEdgeIndex != -1 )
   {
-    v16 = v12->m_startUserEdgeIndex;
-    v17 = v5->m_numOriginalEdges;
-    v18 = v5->m_referenceFrame.m_transform.m_rotation.m_col1.m_quad;
-    v19 = v5->m_numOriginalVertices;
-    v20 = &v5->m_ownedEdges;
-    v21 = v5->m_referenceFrame.m_transform.m_rotation.m_col0.m_quad;
-    v22 = v5->m_referenceFrame.m_transform.m_rotation.m_col2.m_quad;
-    v23 = &v5->m_instancedEdges;
-    v24 = v5->m_referenceFrame.m_transform.m_translation.m_quad;
+    m_startUserEdgeIndex = v12->m_startUserEdgeIndex;
+    v17 = nmi[2].m_real.m128_i32[2];
+    v18.m_quad = (__m128)nmi[8];
+    v19 = nmi[3].m_real.m128_i32[2];
+    v20 = (hkArray<hkaiNavMesh::Edge,hkContainerHeapAllocator> *)&nmi[18];
+    v21.m_quad = (__m128)nmi[7];
+    v22.m_quad = (__m128)nmi[9];
+    v23 = (hkArray<hkaiNavMesh::Edge,hkContainerHeapAllocator> *)&nmi[16];
+    v24.m_quad = (__m128)nmi[10];
     while ( 1 )
     {
-      v25 = hkaiNavMeshInstance_get_hkaiNavMesh::Edge__23(v5->m_originalEdges, v17, v23, v20, &v5->m_edgeMap, v15)->m_a;
-      if ( (signed int)v25 >= v19 )
-        v26 = &v5->m_ownedVertices.m_data[(signed int)v25 - v19].m_quad;
+      m_a = hkaiNavMeshInstance_get_hkaiNavMesh::Edge__23(
+              (hkaiNavMesh::Edge *)nmi[2].m_real.m128_u64[0],
+              v17,
+              v23,
+              v20,
+              (hkArray<int,hkContainerHeapAllocator> *)&nmi[13],
+              m_startEdgeIndex)->m_a;
+      if ( (int)m_a >= v19 )
+        v26 = (hkVector4f *)(nmi[19].m_real.m128_u64[0] + 16i64 * ((int)m_a - v19));
       else
-        v26 = &v5->m_originalVertices[v25].m_quad;
+        v26 = (hkVector4f *)(nmi[3].m_real.m128_u64[0] + 16 * m_a);
       v27 = _mm_mul_ps(
               _mm_add_ps(
                 _mm_add_ps(
                   _mm_add_ps(
-                    _mm_mul_ps(_mm_shuffle_ps(*v26, *v26, 0), v21),
-                    _mm_mul_ps(_mm_shuffle_ps(*v26, *v26, 85), v18)),
-                  _mm_mul_ps(_mm_shuffle_ps(*v26, *v26, 170), v22)),
-                v24),
+                    _mm_mul_ps(_mm_shuffle_ps(v26->m_quad, v26->m_quad, 0), v21.m_quad),
+                    _mm_mul_ps(_mm_shuffle_ps(v26->m_quad, v26->m_quad, 85), v18.m_quad)),
+                  _mm_mul_ps(_mm_shuffle_ps(v26->m_quad, v26->m_quad, 170), v22.m_quad)),
+                v24.m_quad),
               v11);
-      v28 = (float)(COERCE_FLOAT(_mm_shuffle_ps(v27, v27, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v27, v27, 0)))
-          + COERCE_FLOAT(_mm_shuffle_ps(v27, v27, 170));
+      v28 = (float)(_mm_shuffle_ps(v27, v27, 85).m128_f32[0] + _mm_shuffle_ps(v27, v27, 0).m128_f32[0])
+          + _mm_shuffle_ps(v27, v27, 170).m128_f32[0];
       v3 = fminf(v3, v28);
       v2 = fmaxf(v2, v28);
-      if ( v15 >= v16 && v15 < v14 + v16 - 1 )
+      if ( m_startEdgeIndex >= m_startUserEdgeIndex && m_startEdgeIndex < m_numUserEdges + m_startUserEdgeIndex - 1 )
         goto LABEL_15;
-      if ( v15 != v14 + v16 - 1 )
+      if ( m_startEdgeIndex != m_numUserEdges + m_startUserEdgeIndex - 1 )
         break;
-      v15 = v13->m_startEdgeIndex;
+      m_startEdgeIndex = v13->m_startEdgeIndex;
 LABEL_16:
-      if ( v15 == -1 )
+      if ( m_startEdgeIndex == -1 )
         return v2 - v3;
     }
-    if ( v15 < v13->m_startEdgeIndex || v15 >= v13->m_numEdges + v13->m_startEdgeIndex - 1 )
+    if ( m_startEdgeIndex < v13->m_startEdgeIndex || m_startEdgeIndex >= v13->m_numEdges + v13->m_startEdgeIndex - 1 )
       return v2 - v3;
 LABEL_15:
-    ++v15;
+    ++m_startEdgeIndex;
     goto LABEL_16;
   }
   return v2 - v3;
@@ -2238,14 +2138,14 @@ LABEL_15:
 // RVA: 0xC48140
 void __fastcall hkaiNavMeshDebugUtils::reportMemoryUsed(hkaiNavMesh *mesh)
 {
-  int v1; // edx
+  int m_size; // edx
   hkaiNavMesh *v2; // rbx
-  int v3; // er15
-  int v4; // er12
-  int v5; // er13
+  int v3; // r15d
+  int v4; // r12d
+  int v5; // r13d
   int v6; // esi
   int v7; // edi
-  int v8; // er14
+  int v8; // r14d
   int v9; // ebp
   int v10; // edi
   hkOstream *v11; // rax
@@ -2263,26 +2163,26 @@ void __fastcall hkaiNavMeshDebugUtils::reportMemoryUsed(hkaiNavMesh *mesh)
   hkOstream *v23; // rax
   hkOstream *v24; // rax
   hkOstream *v25; // rax
-  hkErrStream v26; // [rsp+20h] [rbp-248h]
-  char buf; // [rsp+40h] [rbp-228h]
+  hkErrStream v26; // [rsp+20h] [rbp-248h] BYREF
+  char buf[512]; // [rsp+40h] [rbp-228h] BYREF
 
-  v1 = mesh->m_edges.m_size;
+  m_size = mesh->m_edges.m_size;
   v2 = mesh;
   v3 = 16 * mesh->m_faces.m_size;
-  v4 = 20 * v1;
+  v4 = 20 * m_size;
   v5 = 16 * mesh->m_vertices.m_size;
   v6 = 4 * mesh->m_faces.m_size * mesh->m_faceDataStriding;
-  v7 = 4 * v1 * mesh->m_edgeDataStriding;
-  ((void (__fastcall *)(hkError *, signed __int64, const char *))hkSingleton<hkError>::s_instance->vfptr[4].__first_virtual_table_function__)(
+  v7 = 4 * m_size * mesh->m_edgeDataStriding;
+  ((void (__fastcall *)(hkError *, __int64, const char *))hkSingleton<hkError>::s_instance->vfptr[4].__first_virtual_table_function__)(
     hkSingleton<hkError>::s_instance,
     1367214621i64,
     "hkaiNavMeshDebugUtils::reportMemoryUsed");
-  hkErrStream::hkErrStream(&v26, &buf, 512);
+  hkErrStream::hkErrStream(&v26, buf, 512);
   v8 = v2->m_vertices.m_size;
   v9 = v2->m_edges.m_size;
   LODWORD(v2) = v2->m_faces.m_size;
   v10 = v6 + v7;
-  v11 = hkOstream::operator<<((hkOstream *)&v26.vfptr, "\nMemory:\n Faces ( ");
+  v11 = hkOstream::operator<<(&v26, "\nMemory:\n Faces ( ");
   v12 = hkOstream::operator<<(v11, (int)v2);
   v13 = hkOstream::operator<<(v12, " )\t:");
   v14 = hkOstream::operator<<(v13, v3);
@@ -2298,9 +2198,9 @@ void __fastcall hkaiNavMeshDebugUtils::reportMemoryUsed(hkaiNavMesh *mesh)
   v24 = hkOstream::operator<<(v23, v10);
   v25 = hkOstream::operator<<(v24, "\n Total:");
   hkOstream::operator<<(v25, v3 + v4 + v10 + v5 + 176);
-  hkError::messageReport(-1, &buf, "Debug\\hkaiNavMeshDebugUtils.cpp", 945);
-  hkOstream::~hkOstream((hkOstream *)&v26.vfptr);
-  ((void (*)(void))hkSingleton<hkError>::s_instance->vfptr[5].__vecDelDtor)();
+  hkError::messageReport(-1, buf, "Debug\\hkaiNavMeshDebugUtils.cpp", 945);
+  hkOstream::~hkOstream(&v26);
+  ((void (__fastcall *)(hkError *))hkSingleton<hkError>::s_instance->vfptr[5].__vecDelDtor)(hkSingleton<hkError>::s_instance);
 }
 
 // File Line: 950
@@ -2317,120 +2217,118 @@ unsigned __int64 __fastcall hkaiNavMeshDebugUtils::getMemoryUsed(hkaiNavMesh *me
 
 // File Line: 963
 // RVA: 0xC492D0
-void __fastcall hkaiNavMeshDebugUtils::_sortTransparentFaces(hkaiNavMeshInstance *nmi, hkaiNavMeshDebugUtils::DebugInfo *settings, hkArray<hkRadixSort::SortData32,hkContainerDebugAllocator> *sortArray, hkVector4f *a4)
+void __fastcall hkaiNavMeshDebugUtils::_sortTransparentFaces(
+        hkaiNavMeshUtils *nmi,
+        hkaiNavMeshDebugUtils::DebugInfo *settings,
+        hkArray<hkRadixSort::SortData32,hkContainerDebugAllocator> *sortArray,
+        hkVector4f *a4)
 {
   int v4; // eax
   int v5; // ebx
-  hkArray<hkRadixSort::SortData32,hkContainerDebugAllocator> *v6; // rsi
-  hkaiNavMeshDebugUtils::DebugInfo *v7; // r12
-  hkaiNavMeshInstance *v8; // rdi
   int v9; // eax
-  int v10; // er9
+  int v10; // r9d
   int v11; // edx
-  signed __int64 i; // rcx
-  hkRadixSort::SortData32 *v13; // rax
+  __int64 v12; // rcx
+  hkRadixSort::SortData32 *m_data; // rax
   hkRadixSort::SortData32 *v14; // rbp
-  int v15; // er14
+  int v15; // r14d
   __int64 v16; // r15
   hkRadixSort::SortData32 *v17; // rdx
   __m128 v18; // xmm2
-  int v19; // eax
-  signed int v20; // edi
-  int faceIndex[4]; // [rsp+30h] [rbp-38h]
-  float v22; // [rsp+70h] [rbp+8h]
+  __int32 v19; // eax
+  int v20; // edi
+  int faceIndex[4]; // [rsp+30h] [rbp-38h] BYREF
+  hkResult v22; // [rsp+70h] [rbp+8h] BYREF
 
   v4 = sortArray->m_capacityAndFlags & 0x3FFFFFFF;
-  v5 = (nmi->m_numOriginalFaces + nmi->m_ownedFaces.m_size + 3) & 0xFFFFFFFC;
-  v6 = sortArray;
-  v7 = settings;
-  v8 = nmi;
+  v5 = (*(_DWORD *)&nmi[24] + *(_DWORD *)&nmi[280] + 3) & 0xFFFFFFFC;
   if ( v4 < v5 )
   {
     v9 = 2 * v4;
-    v10 = (nmi->m_numOriginalFaces + nmi->m_ownedFaces.m_size + 3) & 0xFFFFFFFC;
+    v10 = (*(_DWORD *)&nmi[24] + *(_DWORD *)&nmi[280] + 3) & 0xFFFFFFFC;
     if ( v5 < v9 )
       v10 = v9;
-    hkArrayUtil::_reserve(
-      (hkResult *)&v22,
-      (hkMemoryAllocator *)&hkContainerDebugAllocator::s_alloc.vfptr,
-      sortArray,
-      v10,
-      8);
+    hkArrayUtil::_reserve(&v22, &hkContainerDebugAllocator::s_alloc, sortArray, v10, 8);
   }
-  v6->m_size = v5;
-  v11 = v8->m_ownedFaces.m_size + v8->m_numOriginalFaces;
-  for ( i = v11; i < v5; ++v11 )
+  sortArray->m_size = v5;
+  v11 = *(_DWORD *)&nmi[280] + *(_DWORD *)&nmi[24];
+  v12 = v11;
+  if ( v11 < (__int64)v5 )
   {
-    v13 = v6->m_data;
-    *((_DWORD *)&v13[++i] - 1) = v11;
-    v13[i - 1].m_key = 0x7FFFFFFF;
+    do
+    {
+      m_data = sortArray->m_data;
+      m_data[v12++].m_userData = v11;
+      m_data[v12 - 1].m_key = 0x7FFFFFFF;
+      ++v11;
+    }
+    while ( v12 < v5 );
   }
   v14 = 0i64;
   v15 = 0;
-  if ( v8->m_ownedFaces.m_size + v8->m_numOriginalFaces > 0 )
+  if ( *(_DWORD *)&nmi[280] + *(_DWORD *)&nmi[24] > 0 )
   {
     v16 = 0i64;
     do
     {
       hkaiNavMeshUtils::calcFaceCentroid<hkaiNavMeshInstance>(
-        (hkaiNavMeshUtils *)v8,
+        nmi,
         (hkaiNavMeshInstance *)(unsigned int)v15,
-        (__int64)faceIndex,
+        (__m128 *)faceIndex,
         a4);
-      v17 = v6->m_data;
+      v17 = sortArray->m_data;
       ++v16;
-      *(__m128 *)faceIndex = _mm_add_ps(*(__m128 *)faceIndex, v7->m_displayOffset.m_quad);
-      *((_DWORD *)&v17[v16] - 1) = v15++;
-      v18 = _mm_mul_ps(*(__m128 *)faceIndex, v7->m_sortDirection.m_quad);
-      v22 = (float)(COERCE_FLOAT(_mm_shuffle_ps(v18, v18, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v18, v18, 0)))
-          + COERCE_FLOAT(_mm_shuffle_ps(v18, v18, 170));
-      v17[v16 - 1].m_key = (LODWORD(v22) ^ ((SLODWORD(v22) >> 31) | 0x80000001)) >> 1;
+      *(__m128 *)faceIndex = _mm_add_ps(*(__m128 *)faceIndex, settings->m_displayOffset.m_quad);
+      v17[v16 - 1].m_userData = v15++;
+      v18 = _mm_mul_ps(*(__m128 *)faceIndex, settings->m_sortDirection.m_quad);
+      *(float *)&v22.m_enum = (float)(_mm_shuffle_ps(v18, v18, 85).m128_f32[0] + _mm_shuffle_ps(v18, v18, 0).m128_f32[0])
+                            + _mm_shuffle_ps(v18, v18, 170).m128_f32[0];
+      v17[v16 - 1].m_key = (v22.m_enum ^ ((v22.m_enum >> 31) | 0x80000001)) >> 1;
     }
-    while ( v15 < v8->m_ownedFaces.m_size + v8->m_numOriginalFaces );
+    while ( v15 < *(_DWORD *)&nmi[280] + *(_DWORD *)&nmi[24] );
   }
   v19 = v5;
   if ( v5 )
   {
-    LODWORD(v22) = 8 * v5;
+    v22.m_enum = 8 * v5;
     v14 = (hkRadixSort::SortData32 *)hkContainerDebugAllocator::s_alloc.vfptr->bufAlloc(
-                                       (hkMemoryAllocator *)&hkContainerDebugAllocator::s_alloc,
-                                       (int *)&v22);
-    v19 = SLODWORD(v22) / 8;
+                                       &hkContainerDebugAllocator::s_alloc,
+                                       &v22);
+    v19 = v22.m_enum / 8;
   }
-  v20 = 2147483648;
+  v20 = 0x80000000;
   if ( v19 )
     v20 = v19;
-  hkRadixSort::sort32(v6->m_data, v5, v14);
+  hkRadixSort::sort32(sortArray->m_data, v5, v14);
   if ( v20 >= 0 )
-    hkContainerDebugAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerDebugAllocator::s_alloc,
-      v14,
-      8 * v20);
+    hkContainerDebugAllocator::s_alloc.vfptr->bufFree(&hkContainerDebugAllocator::s_alloc, v14, 8 * v20);
 }
 
 // File Line: 990
 // RVA: 0xC494B0
-void __fastcall hkaiNavMeshDebugUtils::_showFace(hkDebugDisplayHandler *displayHandler, int tag, hkaiNavMeshInstance *nmi, hkaiNavMeshDebugUtils::DebugInfo *settings, int faceIdx, unsigned int faceColor)
+void __fastcall hkaiNavMeshDebugUtils::_showFace(
+        hkDebugDisplayHandler *displayHandler,
+        int tag,
+        hkaiNavMeshInstance *nmi,
+        hkaiNavMeshDebugUtils::DebugInfo *settings,
+        int faceIdx,
+        unsigned int faceColor)
 {
-  int v6; // er15
-  __int64 v7; // r14
-  hkaiNavMeshInstance *v8; // rdi
-  int v9; // er13
-  hkDebugDisplayHandler *v10; // rsi
-  hkaiNavMeshDebugUtils::DebugInfo *v11; // rbx
+  int m_numOriginalFaces; // r15d
+  unsigned int v7; // r14d
   hkaiNavMesh::Face *v12; // rax
   hkArray<int,hkContainerHeapAllocator> *v13; // r11
-  int v14; // ecx
+  int striding; // ecx
   int *v15; // r15
-  int v16; // er12
+  int v16; // r12d
   hkVector4f *v17; // r9
   bool v18; // zf
   __m128 v19; // xmm9
-  unsigned int v20; // er9
-  int v21; // er13
+  unsigned int m_normalsColor; // r9d
+  int v21; // r13d
   __m128 v22; // xmm0
   const char *v23; // rdx
-  int v24; // er8
+  int m_faceDataStriding; // r8d
   float v25; // xmm6_4
   hkVector4f *v26; // r9
   char v27; // r15
@@ -2438,567 +2336,541 @@ void __fastcall hkaiNavMeshDebugUtils::_showFace(hkDebugDisplayHandler *displayH
   __m128 v29; // xmm2
   __int64 v30; // r12
   __m128 v31; // xmm7
-  __int64 v32; // rcx
-  signed int v33; // eax
+  __int64 m_a; // rcx
+  int m_numOriginalVertices; // eax
   hkVector4f *v34; // rax
-  __m128 v35; // xmm1
+  __m128 m_quad; // xmm1
   int v36; // eax
-  unsigned int v37; // er15
+  unsigned int LitColor; // r15d
   hkVector4f *v38; // r9
-  int v39; // ST20_4
-  float v40; // xmm0_4
-  __m128 v41; // xmm1
-  float v42; // xmm2_4
+  float v39; // xmm0_4
+  __m128 v40; // xmm1
+  float v41; // xmm2_4
   hkAabb *instanceMap; // [rsp+20h] [rbp-A8h]
-  __int64 index; // [rsp+28h] [rbp-A0h]
-  __int64 indexa; // [rsp+28h] [rbp-A0h]
-  __int64 striding; // [rsp+30h] [rbp-98h]
-  hkVector4f *lightDir; // [rsp+38h] [rbp-90h]
-  hkVector4f faceOffset; // [rsp+40h] [rbp-88h]
-  int v49; // [rsp+50h] [rbp-78h]
-  hkaiNavMesh::Face *v50; // [rsp+58h] [rbp-70h]
-  hkVector4f end; // [rsp+60h] [rbp-68h]
-  hkVector4f dir; // [rsp+70h] [rbp-58h]
-  char v53; // [rsp+88h] [rbp-40h]
-  char v54; // [rsp+8Ch] [rbp-3Ch]
-  char v55; // [rsp+90h] [rbp-38h]
-  hkSimdFloat32 extraRadius; // [rsp+98h] [rbp-30h]
-  __m128 v57; // [rsp+A8h] [rbp-20h]
-  hkStringBuf v58; // [rsp+B8h] [rbp-10h]
-  hkStringBuf label; // [rsp+148h] [rbp+80h]
-  int v60; // [rsp+280h] [rbp+1B8h]
-  char v61; // [rsp+288h] [rbp+1C0h]
-  char v62; // [rsp+290h] [rbp+1C8h]
-  int v63; // [rsp+298h] [rbp+1D0h]
+  _BYTE faceOffset[24]; // [rsp+40h] [rbp-88h] BYREF
+  hkaiNavMesh::Face *v44; // [rsp+58h] [rbp-70h]
+  _BYTE end[40]; // [rsp+60h] [rbp-68h] BYREF
+  char v46[4]; // [rsp+88h] [rbp-40h] BYREF
+  char v47[4]; // [rsp+8Ch] [rbp-3Ch] BYREF
+  char v48[8]; // [rsp+90h] [rbp-38h] BYREF
+  hkSimdFloat32 extraRadius; // [rsp+98h] [rbp-30h] BYREF
+  __m128 v50; // [rsp+A8h] [rbp-20h]
+  hkStringBuf v51; // [rsp+B8h] [rbp-10h] BYREF
+  hkStringBuf label; // [rsp+148h] [rbp+80h] BYREF
+  int v53; // [rsp+280h] [rbp+1B8h]
+  char m_storage; // [rsp+288h] [rbp+1C0h]
+  char v55; // [rsp+290h] [rbp+1C8h]
+  unsigned int index; // [rsp+298h] [rbp+1D0h]
   unsigned int vars0; // [rsp+2A0h] [rbp+1D8h]
 
-  v6 = nmi->m_numOriginalFaces;
-  v7 = v63;
-  v8 = nmi;
-  v9 = tag;
-  v10 = displayHandler;
-  v11 = settings;
+  m_numOriginalFaces = nmi->m_numOriginalFaces;
+  v7 = index;
   v12 = hkaiNavMeshInstance_get_hkaiNavMesh::Face__21(
           nmi->m_originalFaces,
-          nmi->m_numOriginalFaces,
+          m_numOriginalFaces,
           &nmi->m_instancedFaces,
           &nmi->m_ownedFaces,
           &nmi->m_faceMap,
-          v63);
-  v14 = v8->m_faceDataStriding;
-  v50 = v12;
-  if ( v14 )
+          index);
+  striding = nmi->m_faceDataStriding;
+  v44 = v12;
+  if ( striding )
     v15 = hkaiNavMeshInstance_getWithStriding_int__4(
-            v8->m_originalFaceData,
-            v6,
-            &v8->m_instancedFaceData,
-            &v8->m_ownedFaceData,
+            nmi->m_originalFaceData,
+            m_numOriginalFaces,
+            &nmi->m_instancedFaceData,
+            &nmi->m_ownedFaceData,
             v13,
-            v7,
-            v14);
+            index,
+            striding);
   else
     v15 = 0i64;
-  if ( v8->m_faceFlags.m_size )
-    v61 = v8->m_faceFlags.m_data[v7].m_storage;
+  if ( nmi->m_faceFlags.m_size )
+    m_storage = nmi->m_faceFlags.m_data[index].m_storage;
   else
-    v61 = 0;
-  v16 = v61 & 1;
-  hkaiNavMeshDebugUtils::_calcFaceOffset(v8, v11, v7, (hkVector4f *)((char *)&faceOffset + 8));
-  v18 = v11->m_showNormals.m_bool == 0;
-  v19 = *(__m128 *)((char *)&faceOffset + 8);
-  dir.m_quad = 0i64;
-  faceOffset.m_quad = 0i64;
-  v62 = 0;
-  v61 = 0;
+    m_storage = 0;
+  v16 = m_storage & 1;
+  hkaiNavMeshDebugUtils::_calcFaceOffset(nmi, settings, index, (hkVector4f *)&faceOffset[8]);
+  v18 = settings->m_showNormals.m_bool == 0;
+  v19 = *(__m128 *)&faceOffset[8];
+  *(_OWORD *)&end[16] = 0i64;
+  *(_OWORD *)faceOffset = 0i64;
+  v55 = 0;
+  m_storage = 0;
   if ( !v18 )
   {
     hkaiNavMeshUtils::calcFaceCentroid<hkaiNavMeshInstance>(
-      (hkaiNavMeshUtils *)v8,
-      (hkaiNavMeshInstance *)(unsigned int)v7,
-      (__int64)&faceOffset,
+      (hkaiNavMeshUtils *)nmi,
+      (hkaiNavMeshInstance *)v7,
+      (__m128 *)faceOffset,
       v17);
-    v20 = v11->m_normalsColor;
-    v61 = 1;
-    faceOffset.m_quad = _mm_add_ps(faceOffset.m_quad, v19);
-    if ( v10 )
-      hkDebugDisplayHandler::displayArrow(v10, &faceOffset, &dir, v20, 0, v9);
+    m_normalsColor = settings->m_normalsColor;
+    m_storage = 1;
+    *(__m128 *)faceOffset = _mm_add_ps(*(__m128 *)faceOffset, v19);
+    if ( displayHandler )
+      hkDebugDisplayHandler::displayArrow(
+        displayHandler,
+        (hkVector4f *)faceOffset,
+        (hkVector4f *)&end[16],
+        m_normalsColor,
+        0,
+        tag);
     else
       hkDebugDisplay::displayArrow(
         hkSingleton<hkDebugDisplay>::s_instance,
-        &faceOffset,
-        &dir,
-        v20,
+        (hkVector4f *)faceOffset,
+        (hkVector4f *)&end[16],
+        m_normalsColor,
         0,
         (int)hkDebugDisplayProcess::m_tag);
   }
   v21 = 1;
-  v22 = _mm_cmpleps(v11->m_pruneLabelsAabb.m_max.m_quad, v11->m_pruneLabelsAabb.m_min.m_quad);
-  if ( _mm_movemask_ps(v22) & 7
-    || (*(hkVector4f *)((char *)&faceOffset + 8) = 0i64,
+  v22 = _mm_cmple_ps(settings->m_pruneLabelsAabb.m_max.m_quad, settings->m_pruneLabelsAabb.m_min.m_quad);
+  if ( (_mm_movemask_ps(v22) & 7) != 0
+    || (*(_OWORD *)&faceOffset[8] = 0i64,
         hkaiNavMeshUtils::calcFaceAabb<hkaiNavMeshInstance>(
-          (hkaiNavMeshUtils *)v8,
-          (hkaiNavMeshInstance *)(unsigned int)v7,
-          (__int64)&faceOffset.m_quad.m128_i64[1],
+          (hkaiNavMeshUtils *)nmi,
+          (hkaiNavMeshInstance *)v7,
+          (__m128 *)&faceOffset[8],
           &extraRadius,
           instanceMap),
-        v22 = _mm_cmpleps(v11->m_pruneLabelsAabb.m_min.m_quad, v57),
-        (_mm_movemask_ps(_mm_and_ps(_mm_cmpleps(extraRadius.m_real, v11->m_pruneLabelsAabb.m_max.m_quad), v22)) & 7) == 7) )
+        v22 = _mm_cmple_ps(settings->m_pruneLabelsAabb.m_min.m_quad, v50),
+        (_mm_movemask_ps(_mm_and_ps(_mm_cmple_ps(extraRadius.m_real, settings->m_pruneLabelsAabb.m_max.m_quad), v22)) & 7) == 7) )
   {
-    v18 = v11->m_labelFaces.m_bool == 0;
-    v58.m_string.m_capacityAndFlags = -2147483520;
-    v58.m_string.m_data = v58.m_string.m_storage;
-    v58.m_string.m_size = 1;
-    v58.m_string.m_storage[0] = 0;
+    v18 = settings->m_labelFaces.m_bool == 0;
+    v51.m_string.m_capacityAndFlags = -2147483520;
+    v51.m_string.m_data = v51.m_string.m_storage;
+    v51.m_string.m_size = 1;
+    v51.m_string.m_storage[0] = 0;
     if ( !v18 )
     {
       v23 = "%d(%d)-H ";
       if ( !v16 )
         v23 = "%d(%d) ";
-      hkStringBuf::printf(&v58, v23, (unsigned int)v7, (unsigned int)v50->m_numEdges);
+      hkStringBuf::printf(&v51, v23, v7, (unsigned int)v44->m_numEdges);
     }
-    if ( v11->m_showFaceData.m_bool )
+    if ( settings->m_showFaceData.m_bool )
     {
       if ( v15 )
       {
-        v24 = v8->m_faceDataStriding;
+        m_faceDataStriding = nmi->m_faceDataStriding;
         label.m_string.m_data = label.m_string.m_storage;
         label.m_string.m_capacityAndFlags = -2147483520;
         label.m_string.m_size = 1;
         label.m_string.m_storage[0] = 0;
-        formatUserData(&label, v15, v24);
-        hkStringBuf::operator+=(&v58, label.m_string.m_data);
+        formatUserData(&label, v15, m_faceDataStriding);
+        hkStringBuf::operator+=(&v51, label.m_string.m_data);
         label.m_string.m_size = 0;
         if ( label.m_string.m_capacityAndFlags >= 0 )
           hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-            (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
+            &hkContainerTempAllocator::s_alloc,
             label.m_string.m_data,
             label.m_string.m_capacityAndFlags & 0x3FFFFFFF);
       }
     }
-    if ( v58.m_string.m_size - 1 > 0 )
+    if ( v51.m_string.m_size - 1 > 0 )
     {
-      if ( !v61 )
+      if ( !m_storage )
       {
         hkaiNavMeshUtils::calcFaceCentroid<hkaiNavMeshInstance>(
-          (hkaiNavMeshUtils *)v8,
-          (hkaiNavMeshInstance *)(unsigned int)v7,
-          (__int64)&faceOffset,
+          (hkaiNavMeshUtils *)nmi,
+          (hkaiNavMeshInstance *)v7,
+          (__m128 *)faceOffset,
           v17);
-        v61 = 1;
-        v22 = _mm_add_ps(faceOffset.m_quad, v19);
-        faceOffset.m_quad = v22;
+        m_storage = 1;
+        v22 = _mm_add_ps(*(__m128 *)faceOffset, v19);
+        *(__m128 *)faceOffset = v22;
       }
-      if ( v10 )
-      {
-        LODWORD(striding) = v60;
-        LODWORD(index) = 0;
-        LODWORD(instanceMap) = v11->m_faceLabelColor;
-        v10->vfptr->display3dText(
-          v10,
-          (hkResult *)&v49,
-          v58.m_string.m_data,
-          &faceOffset,
-          (unsigned int)instanceMap,
-          index,
-          striding);
-      }
+      if ( displayHandler )
+        displayHandler->vfptr->display3dText(
+          displayHandler,
+          (hkResult *)&faceOffset[16],
+          v51.m_string.m_data,
+          (hkVector4f *)faceOffset,
+          settings->m_faceLabelColor,
+          0,
+          v53);
       else
-      {
         hkDebugDisplay::display3dText(
           hkSingleton<hkDebugDisplay>::s_instance,
-          v58.m_string.m_data,
-          &faceOffset,
-          v11->m_faceLabelColor,
+          v51.m_string.m_data,
+          (hkVector4f *)faceOffset,
+          settings->m_faceLabelColor,
           0,
           (int)hkDebugDisplayProcess::m_tag);
-      }
     }
-    v58.m_string.m_size = 0;
-    if ( v58.m_string.m_capacityAndFlags >= 0 )
+    v51.m_string.m_size = 0;
+    if ( v51.m_string.m_capacityAndFlags >= 0 )
       hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-        v58.m_string.m_data,
-        v58.m_string.m_capacityAndFlags & 0x3FFFFFFF);
+        &hkContainerTempAllocator::s_alloc,
+        v51.m_string.m_data,
+        v51.m_string.m_capacityAndFlags & 0x3FFFFFFF);
   }
   v25 = FLOAT_N1_0;
-  if ( v11->m_nonplanarFacesSettings.m_drawNonplanarity.m_bool )
+  if ( settings->m_nonplanarFacesSettings.m_drawNonplanarity.m_bool )
   {
     hkaiNavMeshUtils::calcFaceNormal<hkaiNavMeshInstance>(
-      (hkaiNavMeshUtils *)&faceOffset.m_quad.m128_u16[4],
-      (hkSimdFloat32 *)v8,
-      (hkaiNavMeshInstance *)(unsigned int)v7,
-      (__int64)&dir);
-    v27 = v61;
-    v62 = 1;
-    if ( !v61 )
+      (hkaiNavMeshUtils *)&faceOffset[8],
+      (hkSimdFloat32 *)nmi,
+      (hkaiNavMeshInstance *)v7,
+      (__m128 *)&end[16]);
+    v27 = m_storage;
+    v55 = 1;
+    if ( !m_storage )
     {
       hkaiNavMeshUtils::calcFaceCentroid<hkaiNavMeshInstance>(
-        (hkaiNavMeshUtils *)v8,
-        (hkaiNavMeshInstance *)(unsigned int)v7,
-        (__int64)&faceOffset,
+        (hkaiNavMeshUtils *)nmi,
+        (hkaiNavMeshInstance *)v7,
+        (__m128 *)faceOffset,
         v26);
-      v61 = 1;
+      m_storage = 1;
       v27 = 1;
-      v22 = _mm_add_ps(faceOffset.m_quad, v19);
-      faceOffset.m_quad = v22;
+      v22 = _mm_add_ps(*(__m128 *)faceOffset, v19);
+      *(__m128 *)faceOffset = v22;
     }
-    v22.m128_f32[0] = hkaiNavMeshDebugUtils::_calcNonplanarity(v8, v7);
+    v22.m128_f32[0] = hkaiNavMeshDebugUtils::_calcNonplanarity((hkSimdFloat32 *)nmi, v7);
     v28 = v22;
     v25 = v22.m128_f32[0];
-    v28.m128_f32[0] = v22.m128_f32[0] * v11->m_nonplanarFacesSettings.m_scaleMultiplier;
-    end.m_quad = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v28, v28, 0), dir.m_quad), faceOffset.m_quad);
-    if ( v10 )
-    {
-      LODWORD(striding) = v60;
-      LODWORD(index) = 0;
-      LODWORD(instanceMap) = hkColor::BLUE;
-      v10->vfptr->displayLine(v10, (hkResult *)&v49, &faceOffset, &end, (unsigned int)instanceMap, index, striding);
-    }
+    v28.m128_f32[0] = v22.m128_f32[0] * settings->m_nonplanarFacesSettings.m_scaleMultiplier;
+    *(__m128 *)end = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v28, v28, 0), *(__m128 *)&end[16]), *(__m128 *)faceOffset);
+    if ( displayHandler )
+      displayHandler->vfptr->displayLine(
+        displayHandler,
+        (hkResult *)&faceOffset[16],
+        (hkVector4f *)faceOffset,
+        (hkVector4f *)end,
+        hkColor::BLUE,
+        0,
+        v53);
     else
-    {
       hkDebugDisplay::displayLine(
         hkSingleton<hkDebugDisplay>::s_instance,
-        &faceOffset,
-        &end,
+        (hkVector4f *)faceOffset,
+        (hkVector4f *)end,
         hkColor::BLUE,
         0,
         (int)hkDebugDisplayProcess::m_tag);
-    }
   }
   else
   {
-    v27 = v61;
+    v27 = m_storage;
   }
-  if ( v11->m_faceNormalSettings.m_drawFaceNormal.m_bool )
+  if ( settings->m_faceNormalSettings.m_drawFaceNormal.m_bool )
   {
-    v29 = _mm_mul_ps(v11->m_faceNormalSettings.m_up.m_quad, dir.m_quad);
-    if ( (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v29, v29, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v29, v29, 0)))
-               + COERCE_FLOAT(_mm_shuffle_ps(v29, v29, 170))) < v11->m_faceNormalSettings.m_cosAngleThreshold )
+    v29 = _mm_mul_ps(settings->m_faceNormalSettings.m_up.m_quad, *(__m128 *)&end[16]);
+    if ( (float)((float)(_mm_shuffle_ps(v29, v29, 85).m128_f32[0] + _mm_shuffle_ps(v29, v29, 0).m128_f32[0])
+               + _mm_shuffle_ps(v29, v29, 170).m128_f32[0]) < settings->m_faceNormalSettings.m_cosAngleThreshold )
     {
-      if ( !v62 )
+      if ( !v55 )
       {
         hkaiNavMeshUtils::calcFaceNormal<hkaiNavMeshInstance>(
-          (hkaiNavMeshUtils *)&faceOffset.m_quad.m128_u16[4],
-          (hkSimdFloat32 *)v8,
-          (hkaiNavMeshInstance *)(unsigned int)v7,
-          (__int64)&dir);
-        v62 = 1;
+          (hkaiNavMeshUtils *)&faceOffset[8],
+          (hkSimdFloat32 *)nmi,
+          (hkaiNavMeshInstance *)v7,
+          (__m128 *)&end[16]);
+        v55 = 1;
       }
       if ( !v27 )
       {
         hkaiNavMeshUtils::calcFaceCentroid<hkaiNavMeshInstance>(
-          (hkaiNavMeshUtils *)v8,
-          (hkaiNavMeshInstance *)(unsigned int)v7,
-          (__int64)&faceOffset,
+          (hkaiNavMeshUtils *)nmi,
+          (hkaiNavMeshInstance *)v7,
+          (__m128 *)faceOffset,
           v17);
-        v61 = 1;
-        faceOffset.m_quad = _mm_add_ps(faceOffset.m_quad, v19);
+        m_storage = 1;
+        *(__m128 *)faceOffset = _mm_add_ps(*(__m128 *)faceOffset, v19);
       }
-      end.m_quad = _mm_add_ps(faceOffset.m_quad, dir.m_quad);
-      if ( v10 )
-      {
-        LODWORD(striding) = v60;
-        LODWORD(index) = 0;
-        LODWORD(instanceMap) = hkColor::BLUE;
-        v10->vfptr->displayLine(v10, (hkResult *)&v49, &faceOffset, &end, (unsigned int)instanceMap, index, striding);
-      }
+      *(__m128 *)end = _mm_add_ps(*(__m128 *)faceOffset, *(__m128 *)&end[16]);
+      if ( displayHandler )
+        displayHandler->vfptr->displayLine(
+          displayHandler,
+          (hkResult *)&faceOffset[16],
+          (hkVector4f *)faceOffset,
+          (hkVector4f *)end,
+          hkColor::BLUE,
+          0,
+          v53);
       else
-      {
         hkDebugDisplay::displayLine(
           hkSingleton<hkDebugDisplay>::s_instance,
-          &faceOffset,
-          &end,
+          (hkVector4f *)faceOffset,
+          (hkVector4f *)end,
           hkColor::BLUE,
           0,
           (int)hkDebugDisplayProcess::m_tag);
-      }
     }
   }
-  if ( v11->m_showFaces.m_bool || v11->m_showHiddenFaces.m_bool && v16 )
+  if ( settings->m_showFaces.m_bool || settings->m_showHiddenFaces.m_bool && v16 )
   {
-    v30 = (__int64)v50;
-    v31 = _mm_add_ps(v11->m_faceOffset.m_quad, v19);
-    v32 = hkaiNavMeshInstance_get_hkaiNavMesh::Edge__23(
-            v8->m_originalEdges,
-            v8->m_numOriginalEdges,
-            &v8->m_instancedEdges,
-            &v8->m_ownedEdges,
-            &v8->m_edgeMap,
-            v50->m_startEdgeIndex)->m_a;
-    v33 = v8->m_numOriginalVertices;
-    v34 = (signed int)v32 >= v33 ? &v8->m_ownedVertices.m_data[(signed int)v32 - v33] : &v8->m_originalVertices[v32];
-    v35 = v34->m_quad;
-    v36 = *(signed __int16 *)(v30 + 8) - 1;
-    end.m_quad = _mm_add_ps(
-                   _mm_add_ps(
-                     _mm_add_ps(
+    v30 = (__int64)v44;
+    v31 = _mm_add_ps(settings->m_faceOffset.m_quad, v19);
+    m_a = hkaiNavMeshInstance_get_hkaiNavMesh::Edge__23(
+            nmi->m_originalEdges,
+            nmi->m_numOriginalEdges,
+            &nmi->m_instancedEdges,
+            &nmi->m_ownedEdges,
+            &nmi->m_edgeMap,
+            v44->m_startEdgeIndex)->m_a;
+    m_numOriginalVertices = nmi->m_numOriginalVertices;
+    v34 = (int)m_a >= m_numOriginalVertices
+        ? &nmi->m_ownedVertices.m_data[(int)m_a - m_numOriginalVertices]
+        : &nmi->m_originalVertices[m_a];
+    m_quad = v34->m_quad;
+    v36 = *(__int16 *)(v30 + 8) - 1;
+    *(__m128 *)end = _mm_add_ps(
                        _mm_add_ps(
-                         _mm_mul_ps(
-                           _mm_shuffle_ps(v35, v35, 85),
-                           v8->m_referenceFrame.m_transform.m_rotation.m_col1.m_quad),
-                         _mm_mul_ps(
-                           _mm_shuffle_ps(v35, v35, 0),
-                           v8->m_referenceFrame.m_transform.m_rotation.m_col0.m_quad)),
-                       _mm_mul_ps(
-                         _mm_shuffle_ps(v35, v35, 170),
-                         v8->m_referenceFrame.m_transform.m_rotation.m_col2.m_quad)),
-                     v8->m_referenceFrame.m_transform.m_translation.m_quad),
-                   v31);
+                         _mm_add_ps(
+                           _mm_add_ps(
+                             _mm_mul_ps(
+                               _mm_shuffle_ps(m_quad, m_quad, 85),
+                               nmi->m_referenceFrame.m_transform.m_rotation.m_col1.m_quad),
+                             _mm_mul_ps(
+                               _mm_shuffle_ps(m_quad, m_quad, 0),
+                               nmi->m_referenceFrame.m_transform.m_rotation.m_col0.m_quad)),
+                           _mm_mul_ps(
+                             _mm_shuffle_ps(m_quad, m_quad, 170),
+                             nmi->m_referenceFrame.m_transform.m_rotation.m_col2.m_quad)),
+                         nmi->m_referenceFrame.m_transform.m_translation.m_quad),
+                       v31);
     if ( v36 > 1 )
     {
       do
       {
-        v37 = vars0;
-        hkaiNavMeshInstance::getEdgePoints(
-          v8,
-          v21 + *(_DWORD *)v30,
-          (hkVector4f *)((char *)&end + 8),
-          (hkVector4f *)((char *)&dir + 8));
-        v18 = v11->m_showFanEdges.m_bool == 0;
-        *(hkVector4f *)((char *)&end + 8) = (hkVector4f)_mm_add_ps(*(__m128 *)((char *)&end.m_quad + 8), v31);
-        *(hkVector4f *)((char *)&dir + 8) = (hkVector4f)_mm_add_ps(*(__m128 *)((char *)&dir.m_quad + 8), v31);
+        LitColor = vars0;
+        hkaiNavMeshInstance::getEdgePoints(nmi, v21 + *(_DWORD *)v30, (hkVector4f *)&end[8], (hkVector4f *)&end[24]);
+        v18 = settings->m_showFanEdges.m_bool == 0;
+        *(__m128 *)&end[8] = _mm_add_ps(*(__m128 *)&end[8], v31);
+        *(__m128 *)&end[24] = _mm_add_ps(*(__m128 *)&end[24], v31);
         if ( !v18 && v21 != 1 )
         {
-          if ( v10 )
-          {
-            v39 = v11->m_fanEdgeColor;
-            ((void (__fastcall *)(hkDebugDisplayHandler *, char *, hkVector4f *, unsigned __int16 *))v10->vfptr->displayLine)(
-              v10,
-              &v53,
-              &end,
-              &end.m_quad.m128_u16[4]);
-          }
+          if ( displayHandler )
+            displayHandler->vfptr->displayLine(
+              displayHandler,
+              (hkResult *)v46,
+              (hkVector4f *)end,
+              (hkVector4f *)&end[8],
+              settings->m_fanEdgeColor,
+              0,
+              v53);
           else
-          {
             hkDebugDisplay::displayLine(
               hkSingleton<hkDebugDisplay>::s_instance,
-              &end,
-              (hkVector4f *)((char *)&end + 8),
-              v11->m_fanEdgeColor,
+              (hkVector4f *)end,
+              (hkVector4f *)&end[8],
+              settings->m_fanEdgeColor,
               0,
               (int)hkDebugDisplayProcess::m_tag);
-          }
         }
-        if ( v11->m_nonplanarFacesSettings.m_highlightNonplanarFaces.m_bool )
+        if ( settings->m_nonplanarFacesSettings.m_highlightNonplanarFaces.m_bool )
         {
           if ( v25 == -1.0 )
-            v25 = hkaiNavMeshDebugUtils::_calcNonplanarity(v8, v7);
-          end.m_quad.m128_i32[0] = 0;
-          v49 = 1065353216;
-          *(float *)&v50 = v25 / v11->m_nonplanarFacesSettings.m_scaleMultiplier;
-          v40 = 1.0 - fminf(fmaxf(*(float *)&v50, 0.0), 1.0);
-          v37 = hkColor::rgbFromFloats(v40, v40, 1.0, 1.0);
+            v25 = hkaiNavMeshDebugUtils::_calcNonplanarity((hkSimdFloat32 *)nmi, v7);
+          *(_DWORD *)end = 0;
+          *(_DWORD *)&faceOffset[16] = 1065353216;
+          *(float *)&v44 = v25 / settings->m_nonplanarFacesSettings.m_scaleMultiplier;
+          v39 = 1.0 - fminf(fmaxf(*(float *)&v44, 0.0), 1.0);
+          LitColor = hkColor::rgbFromFloats(v39, v39, 1.0, 1.0);
         }
-        else if ( v11->m_faceNormalSettings.m_highlightFaceNormals.m_bool )
+        else if ( settings->m_faceNormalSettings.m_highlightFaceNormals.m_bool )
         {
-          v37 = hkColor::WHITE;
-          if ( !v62 )
+          LitColor = hkColor::WHITE;
+          if ( !v55 )
           {
             hkaiNavMeshUtils::calcFaceNormal<hkaiNavMeshInstance>(
               (hkaiNavMeshUtils *)&extraRadius,
-              (hkSimdFloat32 *)v8,
-              (hkaiNavMeshInstance *)(unsigned int)v7,
-              (__int64)&dir);
-            v62 = 1;
+              (hkSimdFloat32 *)nmi,
+              (hkaiNavMeshInstance *)v7,
+              (__m128 *)&end[16]);
+            v55 = 1;
           }
-          v41 = _mm_mul_ps(dir.m_quad, v11->m_faceNormalSettings.m_up.m_quad);
-          v42 = (float)(COERCE_FLOAT(_mm_shuffle_ps(v41, v41, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v41, v41, 0)))
-              + COERCE_FLOAT(_mm_shuffle_ps(v41, v41, 170));
-          if ( v42 < v11->m_faceNormalSettings.m_cosAngleThreshold )
-            v37 = hkColor::BLUE;
-          if ( v42 < v11->m_faceNormalSettings.m_cosAngleThreshold )
+          v40 = _mm_mul_ps(*(__m128 *)&end[16], settings->m_faceNormalSettings.m_up.m_quad);
+          v41 = (float)(_mm_shuffle_ps(v40, v40, 85).m128_f32[0] + _mm_shuffle_ps(v40, v40, 0).m128_f32[0])
+              + _mm_shuffle_ps(v40, v40, 170).m128_f32[0];
+          if ( v41 < settings->m_faceNormalSettings.m_cosAngleThreshold )
+            LitColor = hkColor::BLUE;
+          if ( v41 < settings->m_faceNormalSettings.m_cosAngleThreshold )
           {
-            if ( !v61 )
+            if ( !m_storage )
             {
               hkaiNavMeshUtils::calcFaceCentroid<hkaiNavMeshInstance>(
-                (hkaiNavMeshUtils *)v8,
-                (hkaiNavMeshInstance *)(unsigned int)v7,
-                (__int64)&faceOffset,
+                (hkaiNavMeshUtils *)nmi,
+                (hkaiNavMeshInstance *)v7,
+                (__m128 *)faceOffset,
                 v38);
-              v61 = 1;
-              faceOffset.m_quad = _mm_add_ps(faceOffset.m_quad, v19);
+              m_storage = 1;
+              *(__m128 *)faceOffset = _mm_add_ps(*(__m128 *)faceOffset, v19);
             }
-            *(hkVector4f *)((char *)&faceOffset + 8) = (hkVector4f)_mm_add_ps(
-                                                                     _mm_mul_ps(
-                                                                       _mm_shuffle_ps(
-                                                                         (__m128)LODWORD(v11->m_faceNormalSettings.m_scaleMultiplier),
-                                                                         (__m128)LODWORD(v11->m_faceNormalSettings.m_scaleMultiplier),
-                                                                         0),
-                                                                       v11->m_faceNormalSettings.m_up.m_quad),
-                                                                     faceOffset.m_quad);
-            if ( !v10 )
+            *(__m128 *)&faceOffset[8] = _mm_add_ps(
+                                          _mm_mul_ps(
+                                            _mm_shuffle_ps(
+                                              (__m128)LODWORD(settings->m_faceNormalSettings.m_scaleMultiplier),
+                                              (__m128)LODWORD(settings->m_faceNormalSettings.m_scaleMultiplier),
+                                              0),
+                                            settings->m_faceNormalSettings.m_up.m_quad),
+                                          *(__m128 *)faceOffset);
+            if ( !displayHandler )
             {
               hkDebugDisplay::displayLine(
                 hkSingleton<hkDebugDisplay>::s_instance,
-                &faceOffset,
-                (hkVector4f *)((char *)&faceOffset + 8),
+                (hkVector4f *)faceOffset,
+                (hkVector4f *)&faceOffset[8],
                 hkColor::BLUE,
                 0,
                 (int)hkDebugDisplayProcess::m_tag);
 LABEL_75:
               hkDebugDisplay::displayTriangle(
                 hkSingleton<hkDebugDisplay>::s_instance,
-                &end,
-                (hkVector4f *)((char *)&end + 8),
-                (hkVector4f *)((char *)&dir + 8),
-                v37,
+                (hkVector4f *)end,
+                (hkVector4f *)&end[8],
+                (hkVector4f *)&end[24],
+                LitColor,
                 0,
                 (int)hkDebugDisplayProcess::m_tag);
-              v30 = (__int64)v50;
+              v30 = (__int64)v44;
               goto LABEL_76;
             }
-            ((void (__fastcall *)(hkDebugDisplayHandler *, char *, hkVector4f *, unsigned __int16 *))v10->vfptr->displayLine)(
-              v10,
-              &v54,
-              &faceOffset,
-              &faceOffset.m_quad.m128_u16[4]);
+            displayHandler->vfptr->displayLine(
+              displayHandler,
+              (hkResult *)v47,
+              (hkVector4f *)faceOffset,
+              (hkVector4f *)&faceOffset[8],
+              hkColor::BLUE,
+              0,
+              v53);
           }
-          v30 = (__int64)v50;
+          v30 = (__int64)v44;
         }
-        else if ( v11->m_lightFaces.m_bool )
+        else if ( settings->m_lightFaces.m_bool )
         {
-          v37 = getLitColor(
-                  (float)BYTE2(v37) * 0.0039215689,
-                  (float)BYTE1(v37) * 0.0039215689,
-                  (float)(unsigned __int8)v37 * 0.0039215689,
-                  (float)(v37 >> 24) * 0.0039215689,
-                  &end,
-                  (hkVector4f *)((char *)&end + 8),
-                  (hkVector4f *)((char *)&dir + 8),
-                  &v11->m_lightDirection);
+          LitColor = getLitColor(
+                       (float)BYTE2(LitColor) * 0.0039215689,
+                       (float)BYTE1(LitColor) * 0.0039215689,
+                       (float)(unsigned __int8)LitColor * 0.0039215689,
+                       (float)HIBYTE(LitColor) * 0.0039215689,
+                       (hkVector4f *)end,
+                       (hkVector4f *)&end[8],
+                       (hkVector4f *)&end[24],
+                       &settings->m_lightDirection);
         }
-        if ( !v10 )
+        if ( !displayHandler )
           goto LABEL_75;
-        LODWORD(lightDir) = v60;
-        LODWORD(striding) = 0;
-        LODWORD(indexa) = v37;
-        v10->vfptr->displayTriangle(
-          v10,
-          (hkResult *)&v55,
-          &end,
-          (hkVector4f *)((char *)&end + 8),
-          (hkVector4f *)((char *)&dir + 8),
-          indexa,
-          striding,
-          (int)lightDir);
+        displayHandler->vfptr->displayTriangle(
+          displayHandler,
+          (hkResult *)v48,
+          (hkVector4f *)end,
+          (hkVector4f *)&end[8],
+          (hkVector4f *)&end[24],
+          LitColor,
+          0,
+          v53);
 LABEL_76:
         ++v21;
       }
-      while ( v21 < *(signed __int16 *)(v30 + 8) - 1 );
+      while ( v21 < *(__int16 *)(v30 + 8) - 1 );
     }
   }
 }
 
 // File Line: 1137
 // RVA: 0xC49EF0
-void __fastcall hkaiNavMeshDebugUtils::_showEdgesForFace(hkDebugDisplayHandler *displayHandler, int tag, hkaiNavMeshInstance *nmi, hkaiNavMeshDebugUtils::DebugInfo *settings, int faceIdx, unsigned int faceColor)
+void __fastcall hkaiNavMeshDebugUtils::_showEdgesForFace(
+        hkDebugDisplayHandler *displayHandler,
+        int tag,
+        hkaiNavMeshInstance *nmi,
+        hkaiNavMeshDebugUtils::DebugInfo *settings,
+        unsigned int faceIdx,
+        unsigned int faceColor)
 {
-  unsigned int v6; // er12
-  hkaiNavMeshInstance *v7; // rdi
-  int v8; // er13
-  hkDebugDisplayHandler *v9; // r14
-  hkaiNavMeshDebugUtils::DebugInfo *v10; // rbx
+  unsigned int v6; // r12d
   hkaiNavMesh::Face *v11; // rsi
   int v12; // ecx
-  hkArray<int,hkContainerHeapAllocator> *v13; // rdx
-  hkArray<hkaiNavMesh::Edge,hkContainerHeapAllocator> *v14; // r8
-  hkArray<hkaiNavMesh::Edge,hkContainerHeapAllocator> *v15; // r10
-  __m128 v16; // xmm8
-  int v17; // eax
-  int v18; // esi
+  hkArray<int,hkContainerHeapAllocator> *p_m_edgeMap; // rdx
+  hkArray<hkaiNavMesh::Edge,hkContainerHeapAllocator> *p_m_ownedEdges; // r8
+  hkArray<hkaiNavMesh::Edge,hkContainerHeapAllocator> *p_m_instancedEdges; // r10
+  __m128 m_quad; // xmm8
+  int m_startEdgeIndex; // eax
+  int m_numOriginalEdges; // esi
   hkVector4f *v19; // r9
   hkaiNavMesh::Edge *v20; // r15
-  int v21; // eax
-  __int64 v22; // rax
-  signed int v23; // ecx
-  __m128 *v24; // rax
+  int striding; // eax
+  __int64 m_a; // rax
+  int m_numOriginalVertices; // ecx
+  hkVector4f *v24; // rax
   __m128 v25; // xmm1
-  __m128 v26; // xmm2
-  __m128 v27; // xmm3
-  __int64 v28; // rax
-  __m128 v29; // xmm4
-  __m128 v30; // xmm5
+  hkVector4f v26; // xmm2
+  hkVector4f v27; // xmm3
+  __int64 m_b; // rax
+  hkVector4f v29; // xmm4
+  hkVector4f v30; // xmm5
   __m128 v31; // xmm7
-  __m128 *v32; // rax
+  hkVector4f *v32; // rax
   __m128 v33; // xmm6
   __m128 v34; // xmm0
   __m128 v35; // xmm1
   __m128 v36; // xmm2
-  unsigned int v37; // esi
-  unsigned int v38; // er8
-  char v39; // dl
+  unsigned int m_sharedEdgeColor; // esi
+  unsigned int m_oppositeEdge; // r8d
+  char m_storage; // dl
   bool v40; // r12
   hkaiNavMesh::Edge *v41; // rax
-  bool v42; // al
   unsigned int v43; // edx
   __m128 v44; // xmm3
   __m128 v45; // xmm3
   __m128 v46; // xmm1
   __m128 v47; // xmm0
-  unsigned int v48; // ecx
-  unsigned int v49; // er9
-  unsigned int v50; // er9
-  float v51; // xmm2_4
+  unsigned int m_smallBoundaryEdgeColor; // ecx
+  unsigned int m_smallSharedEdgeColor; // r9d
+  unsigned int m_vertexLabelColor; // r9d
+  float m_vertexDisplaySize; // xmm2_4
   bool v52; // zf
-  int v53; // er15
-  int v54; // er8
+  int v53; // r15d
+  int m_edgeDataStriding; // r8d
   __m128 v55; // xmm1
   __m128 v56; // xmm1
   __m128 v57; // xmm4
   __m128 v58; // xmm1
   __m128 v59; // xmm0
-  __int64 v60; // ST30_8
-  __int64 v61; // ST28_8
-  hkArray<int,hkContainerHeapAllocator> *v62; // ST20_8
-  unsigned int v63; // er9
-  unsigned int v64; // er9
+  unsigned int m_edgeNormalColor; // r9d
+  unsigned int m_vertexNormalColor; // r9d
   hkAabb *instanceMap; // [rsp+20h] [rbp-E0h]
-  hkArray<int,hkContainerHeapAllocator> *instanceMapa; // [rsp+20h] [rbp-E0h]
-  hkArray<int,hkContainerHeapAllocator> *instanceMapb; // [rsp+20h] [rbp-E0h]
-  __int64 index; // [rsp+28h] [rbp-D8h]
-  _QWORD striding[2]; // [rsp+30h] [rbp-D0h]
-  char v70; // [rsp+40h] [rbp-C0h]
-  int v71; // [rsp+44h] [rbp-BCh]
-  int v72; // [rsp+48h] [rbp-B8h]
-  hkVector4f start; // [rsp+50h] [rbp-B0h]
-  BOOL v74; // [rsp+60h] [rbp-A0h]
-  hkVector4f end; // [rsp+70h] [rbp-90h]
-  int v76[4]; // [rsp+80h] [rbp-80h]
+  char v63; // [rsp+40h] [rbp-C0h]
+  int v64; // [rsp+44h] [rbp-BCh]
+  int index; // [rsp+48h] [rbp-B8h]
+  hkVector4f start; // [rsp+50h] [rbp-B0h] BYREF
+  BOOL v67; // [rsp+60h] [rbp-A0h]
+  hkVector4f end; // [rsp+70h] [rbp-90h] BYREF
+  int v69[4]; // [rsp+80h] [rbp-80h] BYREF
   int *dataPtr; // [rsp+90h] [rbp-70h]
-  hkaiNavMesh::Face *v78; // [rsp+98h] [rbp-68h]
-  hkVector4f faceNormal; // [rsp+A0h] [rbp-60h]
-  int v80[4]; // [rsp+B0h] [rbp-50h]
-  int faceIndex[4]; // [rsp+C0h] [rbp-40h]
-  hkVector4f faceOffset; // [rsp+D0h] [rbp-30h]
-  hkVector4f pos; // [rsp+E0h] [rbp-20h]
-  char v84; // [rsp+F0h] [rbp-10h]
-  char v85; // [rsp+F4h] [rbp-Ch]
-  hkVector4f v86; // [rsp+100h] [rbp+0h]
-  char v87; // [rsp+110h] [rbp+10h]
-  char v88; // [rsp+114h] [rbp+14h]
-  char v89; // [rsp+118h] [rbp+18h]
-  char v90; // [rsp+11Ch] [rbp+1Ch]
-  hkVector4f v91; // [rsp+120h] [rbp+20h]
-  char buf; // [rsp+130h] [rbp+30h]
-  hkVector4f v93; // [rsp+140h] [rbp+40h]
-  hkVector4f v94; // [rsp+150h] [rbp+50h]
-  hkVector4f v95; // [rsp+160h] [rbp+60h]
-  hkVector4f edgeB; // [rsp+170h] [rbp+70h]
-  hkVector4f edgeA; // [rsp+180h] [rbp+80h]
-  hkSimdFloat32 extraRadius; // [rsp+190h] [rbp+90h]
-  __m128 v99; // [rsp+1A0h] [rbp+A0h]
-  hkStringBuf v100; // [rsp+1B0h] [rbp+B0h]
-  hkStringBuf label; // [rsp+240h] [rbp+140h]
-  char v102; // [rsp+2D0h] [rbp+1D0h]
-  char v103; // [rsp+2E0h] [rbp+1E0h]
-  char v104; // [rsp+3B0h] [rbp+2B0h]
-  char v105; // [rsp+3B8h] [rbp+2B8h]
+  hkaiNavMesh::Face *v71; // [rsp+98h] [rbp-68h]
+  hkVector4f faceNormal; // [rsp+A0h] [rbp-60h] BYREF
+  int v73[4]; // [rsp+B0h] [rbp-50h] BYREF
+  int faceIndex[4]; // [rsp+C0h] [rbp-40h] BYREF
+  hkVector4f faceOffset; // [rsp+D0h] [rbp-30h] BYREF
+  hkVector4f pos; // [rsp+E0h] [rbp-20h] BYREF
+  char v77[4]; // [rsp+F0h] [rbp-10h] BYREF
+  char v78[12]; // [rsp+F4h] [rbp-Ch] BYREF
+  hkVector4f v79; // [rsp+100h] [rbp+0h] BYREF
+  char v80[4]; // [rsp+110h] [rbp+10h] BYREF
+  char v81[4]; // [rsp+114h] [rbp+14h] BYREF
+  char v82[4]; // [rsp+118h] [rbp+18h] BYREF
+  char v83[4]; // [rsp+11Ch] [rbp+1Ch] BYREF
+  hkVector4f v84; // [rsp+120h] [rbp+20h] BYREF
+  char buf[16]; // [rsp+130h] [rbp+30h] BYREF
+  hkVector4f v86; // [rsp+140h] [rbp+40h] BYREF
+  hkVector4f v87; // [rsp+150h] [rbp+50h] BYREF
+  hkVector4f v88; // [rsp+160h] [rbp+60h] BYREF
+  hkVector4f edgeB; // [rsp+170h] [rbp+70h] BYREF
+  hkVector4f edgeA; // [rsp+180h] [rbp+80h] BYREF
+  hkSimdFloat32 extraRadius; // [rsp+190h] [rbp+90h] BYREF
+  __m128 v92; // [rsp+1A0h] [rbp+A0h]
+  hkStringBuf v93; // [rsp+1B0h] [rbp+B0h] BYREF
+  hkStringBuf label; // [rsp+240h] [rbp+140h] BYREF
+  hkaiNavMeshUtils v95; // [rsp+2D0h] [rbp+1D0h] BYREF
+  hkaiNavMeshUtils v96; // [rsp+2E0h] [rbp+1E0h] BYREF
+  char v97; // [rsp+3B0h] [rbp+2B0h]
+  char v98; // [rsp+3B8h] [rbp+2B8h]
 
   v6 = faceIdx;
-  v7 = nmi;
-  v8 = tag;
-  v9 = displayHandler;
-  v10 = settings;
   v11 = hkaiNavMeshInstance_get_hkaiNavMesh::Face__21(
           nmi->m_originalFaces,
           nmi->m_numOriginalFaces,
@@ -3006,328 +2878,334 @@ void __fastcall hkaiNavMeshDebugUtils::_showEdgesForFace(hkDebugDisplayHandler *
           &nmi->m_ownedFaces,
           &nmi->m_faceMap,
           faceIdx);
-  v78 = v11;
-  *(_OWORD *)v76 = 0i64;
-  *(_OWORD *)v80 = 0i64;
-  v104 = 0;
-  v105 = 0;
-  hkaiNavMeshDebugUtils::_calcFaceOffset(v7, v10, faceIdx, &faceOffset);
-  v74 = 1;
-  if ( (v10->m_labelVertices.m_bool || v10->m_labelEdges.m_bool || v10->m_showEdgeData.m_bool)
-    && !(_mm_movemask_ps(_mm_cmpleps(v10->m_pruneLabelsAabb.m_max.m_quad, v10->m_pruneLabelsAabb.m_min.m_quad)) & 7) )
+  v71 = v11;
+  *(_OWORD *)v69 = 0i64;
+  *(_OWORD *)v73 = 0i64;
+  v97 = 0;
+  v98 = 0;
+  hkaiNavMeshDebugUtils::_calcFaceOffset(nmi, settings, faceIdx, &faceOffset);
+  v67 = 1;
+  if ( (*(_WORD *)&settings->m_labelVertices.m_bool || settings->m_showEdgeData.m_bool)
+    && (_mm_movemask_ps(_mm_cmple_ps(settings->m_pruneLabelsAabb.m_max.m_quad, settings->m_pruneLabelsAabb.m_min.m_quad)) & 7) == 0 )
   {
     *(_OWORD *)faceIndex = 0i64;
     hkaiNavMeshUtils::calcFaceAabb<hkaiNavMeshInstance>(
-      (hkaiNavMeshUtils *)v7,
-      (hkaiNavMeshInstance *)(unsigned int)faceIdx,
-      (__int64)faceIndex,
+      (hkaiNavMeshUtils *)nmi,
+      (hkaiNavMeshInstance *)faceIdx,
+      (__m128 *)faceIndex,
       &extraRadius,
       instanceMap);
-    v74 = (_mm_movemask_ps(
+    v67 = (_mm_movemask_ps(
              _mm_and_ps(
-               _mm_cmpleps(extraRadius.m_real, v10->m_pruneLabelsAabb.m_max.m_quad),
-               _mm_cmpleps(v10->m_pruneLabelsAabb.m_min.m_quad, v99))) & 7) == 7;
+               _mm_cmple_ps(extraRadius.m_real, settings->m_pruneLabelsAabb.m_max.m_quad),
+               _mm_cmple_ps(settings->m_pruneLabelsAabb.m_min.m_quad, v92))) & 7) == 7;
   }
   v12 = 0;
-  v71 = 0;
+  v64 = 0;
   if ( v11->m_numEdges > 0 )
   {
-    v13 = &v7->m_edgeMap;
-    v14 = &v7->m_ownedEdges;
-    v15 = &v7->m_instancedEdges;
-    v16 = faceOffset.m_quad;
+    p_m_edgeMap = &nmi->m_edgeMap;
+    p_m_ownedEdges = &nmi->m_ownedEdges;
+    p_m_instancedEdges = &nmi->m_instancedEdges;
+    m_quad = faceOffset.m_quad;
     do
     {
-      v17 = v11->m_startEdgeIndex;
-      v18 = v7->m_numOriginalEdges;
+      m_startEdgeIndex = v11->m_startEdgeIndex;
+      m_numOriginalEdges = nmi->m_numOriginalEdges;
       faceNormal.m_quad = 0i64;
-      v70 = 0;
-      v72 = v12 + v17;
-      v20 = hkaiNavMeshInstance_get_hkaiNavMesh::Edge__23(v7->m_originalEdges, v18, v15, v14, v13, v12 + v17);
-      v21 = v7->m_edgeDataStriding;
-      if ( v21 )
+      v63 = 0;
+      index = v12 + m_startEdgeIndex;
+      v20 = hkaiNavMeshInstance_get_hkaiNavMesh::Edge__23(
+              nmi->m_originalEdges,
+              m_numOriginalEdges,
+              p_m_instancedEdges,
+              p_m_ownedEdges,
+              p_m_edgeMap,
+              v12 + m_startEdgeIndex);
+      striding = nmi->m_edgeDataStriding;
+      if ( striding )
         dataPtr = hkaiNavMeshInstance_getWithStriding_int__4(
-                    v7->m_originalEdgeData,
-                    v18,
-                    &v7->m_instancedEdgeData,
-                    &v7->m_ownedEdgeData,
-                    &v7->m_edgeMap,
-                    v72,
-                    v21);
+                    nmi->m_originalEdgeData,
+                    m_numOriginalEdges,
+                    &nmi->m_instancedEdgeData,
+                    &nmi->m_ownedEdgeData,
+                    &nmi->m_edgeMap,
+                    index,
+                    striding);
       else
         dataPtr = 0i64;
-      v22 = v20->m_a;
-      v23 = v7->m_numOriginalVertices;
-      if ( (signed int)v22 >= v23 )
-        v24 = &v7->m_ownedVertices.m_data[(signed int)v22 - v23].m_quad;
+      m_a = v20->m_a;
+      m_numOriginalVertices = nmi->m_numOriginalVertices;
+      if ( (int)m_a >= m_numOriginalVertices )
+        v24 = &nmi->m_ownedVertices.m_data[(int)m_a - m_numOriginalVertices];
       else
-        v24 = &v7->m_originalVertices[v22].m_quad;
-      v25 = *v24;
-      v26 = v7->m_referenceFrame.m_transform.m_rotation.m_col1.m_quad;
-      v27 = v7->m_referenceFrame.m_transform.m_rotation.m_col0.m_quad;
-      v28 = v20->m_b;
-      v29 = v7->m_referenceFrame.m_transform.m_rotation.m_col2.m_quad;
-      v30 = v7->m_referenceFrame.m_transform.m_translation.m_quad;
+        v24 = &nmi->m_originalVertices[m_a];
+      v25 = v24->m_quad;
+      v26.m_quad = (__m128)nmi->m_referenceFrame.m_transform.m_rotation.m_col1;
+      v27.m_quad = (__m128)nmi->m_referenceFrame.m_transform.m_rotation.m_col0;
+      m_b = v20->m_b;
+      v29.m_quad = (__m128)nmi->m_referenceFrame.m_transform.m_rotation.m_col2;
+      v30.m_quad = (__m128)nmi->m_referenceFrame.m_transform.m_translation;
       v31 = _mm_add_ps(
               _mm_add_ps(
-                _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v25, v25, 0), v27), _mm_mul_ps(_mm_shuffle_ps(v25, v25, 85), v26)),
-                _mm_mul_ps(_mm_shuffle_ps(v25, v25, 170), v29)),
-              v30);
-      if ( (signed int)v28 >= v23 )
-        v32 = &v7->m_ownedVertices.m_data[(signed int)v28 - v23].m_quad;
+                _mm_add_ps(
+                  _mm_mul_ps(_mm_shuffle_ps(v25, v25, 0), v27.m_quad),
+                  _mm_mul_ps(_mm_shuffle_ps(v25, v25, 85), v26.m_quad)),
+                _mm_mul_ps(_mm_shuffle_ps(v25, v25, 170), v29.m_quad)),
+              v30.m_quad);
+      if ( (int)m_b >= m_numOriginalVertices )
+        v32 = &nmi->m_ownedVertices.m_data[(int)m_b - m_numOriginalVertices];
       else
-        v32 = &v7->m_originalVertices[v28].m_quad;
+        v32 = &nmi->m_originalVertices[m_b];
       v33 = _mm_add_ps(
               _mm_add_ps(
                 _mm_add_ps(
-                  _mm_mul_ps(_mm_shuffle_ps(*v32, *v32, 0), v27),
-                  _mm_mul_ps(_mm_shuffle_ps(*v32, *v32, 85), v26)),
-                _mm_mul_ps(_mm_shuffle_ps(*v32, *v32, 170), v29)),
-              v30);
-      if ( v10->m_contractEdges.m_bool )
+                  _mm_mul_ps(_mm_shuffle_ps(v32->m_quad, v32->m_quad, 0), v27.m_quad),
+                  _mm_mul_ps(_mm_shuffle_ps(v32->m_quad, v32->m_quad, 85), v26.m_quad)),
+                _mm_mul_ps(_mm_shuffle_ps(v32->m_quad, v32->m_quad, 170), v29.m_quad)),
+              v30.m_quad);
+      if ( settings->m_contractEdges.m_bool )
       {
-        if ( !v105 )
+        if ( !v98 )
         {
           hkaiNavMeshUtils::calcFaceCentroid<hkaiNavMeshInstance>(
-            (hkaiNavMeshUtils *)v7,
+            (hkaiNavMeshUtils *)nmi,
             (hkaiNavMeshInstance *)v6,
-            (__int64)v80,
+            (__m128 *)v73,
             v19);
-          v105 = 1;
-          *(__m128 *)v80 = _mm_add_ps(*(__m128 *)v80, v16);
+          v98 = 1;
+          *(__m128 *)v73 = _mm_add_ps(*(__m128 *)v73, m_quad);
         }
         v34 = _mm_shuffle_ps(
-                (__m128)LODWORD(v10->m_edgeContractionRadius),
-                (__m128)LODWORD(v10->m_edgeContractionRadius),
+                (__m128)LODWORD(settings->m_edgeContractionRadius),
+                (__m128)LODWORD(settings->m_edgeContractionRadius),
                 0);
-        v35 = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(*(__m128 *)v80, v33), v34), v33);
-        v36 = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(*(__m128 *)v80, v31), v34), v31);
+        v35 = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(*(__m128 *)v73, v33), v34), v33);
+        v36 = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(*(__m128 *)v73, v31), v34), v31);
       }
       else
       {
         v36 = v31;
         v35 = v33;
       }
-      v37 = v10->m_sharedEdgeColor;
-      start.m_quad = _mm_add_ps(v36, v16);
-      end.m_quad = _mm_add_ps(v35, v16);
-      v38 = v20->m_oppositeEdge;
-      if ( v38 == -1 )
+      m_sharedEdgeColor = settings->m_sharedEdgeColor;
+      start.m_quad = _mm_add_ps(v36, m_quad);
+      end.m_quad = _mm_add_ps(v35, m_quad);
+      m_oppositeEdge = v20->m_oppositeEdge;
+      if ( m_oppositeEdge == -1 )
       {
-        v37 = v10->m_boundaryEdgeColor;
+        m_sharedEdgeColor = settings->m_boundaryEdgeColor;
       }
-      else if ( v20->m_flags.m_storage & 0x40 )
+      else if ( (v20->m_flags.m_storage & 0x40) != 0 )
       {
-        v37 = v10->m_externalEdgeColor;
+        m_sharedEdgeColor = settings->m_externalEdgeColor;
       }
-      v39 = v20->m_flags.m_storage;
-      if ( v39 & 2 )
-        v37 = ((((v37 ^ v10->m_faceColor) >> 1) & 0x7F7F7F) + (v10->m_faceColor & v37)) | 0xFF000000;
-      v40 = v38 == -1 || v39 & 0x40;
-      if ( v10->m_lightFaces.m_bool && !v40 )
-        v37 = hkColor::rgbFromFloats(
-                (float)((float)((float)BYTE2(faceColor) * 0.0039215689) + (float)((float)BYTE2(v37) * 0.0039215689))
-              * 0.5,
-                (float)((float)((float)BYTE1(faceColor) * 0.0039215689) + (float)((float)BYTE1(v37) * 0.0039215689))
-              * 0.5,
-                (float)((float)((float)(unsigned __int8)faceColor * 0.0039215689)
-                      + (float)((float)(unsigned __int8)v37 * 0.0039215689))
-              * 0.5,
-                (float)(v37 >> 24) * 0.0039215689);
-      if ( !v10->m_showEdges.m_bool )
-        goto LABEL_50;
-      if ( !v40 && faceIdx >= (signed int)(v20->m_oppositeFace & 0x3FFFFF) )
+      m_storage = v20->m_flags.m_storage;
+      if ( (m_storage & 2) != 0 )
+        m_sharedEdgeColor = ((((m_sharedEdgeColor ^ settings->m_faceColor) >> 1) & 0x7F7F7F)
+                           + (settings->m_faceColor & m_sharedEdgeColor)) | 0xFF000000;
+      v40 = m_oppositeEdge == -1 || (m_storage & 0x40) != 0;
+      if ( settings->m_lightFaces.m_bool && !v40 )
+        m_sharedEdgeColor = hkColor::rgbFromFloats(
+                              (float)((float)((float)BYTE2(faceColor) * 0.0039215689)
+                                    + (float)((float)BYTE2(m_sharedEdgeColor) * 0.0039215689))
+                            * 0.5,
+                              (float)((float)((float)BYTE1(faceColor) * 0.0039215689)
+                                    + (float)((float)BYTE1(m_sharedEdgeColor) * 0.0039215689))
+                            * 0.5,
+                              (float)((float)((float)(unsigned __int8)faceColor * 0.0039215689)
+                                    + (float)((float)(unsigned __int8)m_sharedEdgeColor * 0.0039215689))
+                            * 0.5,
+                              (float)HIBYTE(m_sharedEdgeColor) * 0.0039215689);
+      if ( !settings->m_showEdges.m_bool )
+        goto LABEL_49;
+      if ( !v40 && (int)faceIdx >= (signed int)(v20->m_oppositeFace & 0x3FFFFF) )
       {
-        v42 = (v41 = hkaiNavMeshInstance_get_hkaiNavMesh::Edge__23(
-                       v7->m_originalEdges,
-                       v7->m_numOriginalEdges,
-                       &v7->m_instancedEdges,
-                       &v7->m_ownedEdges,
-                       &v7->m_edgeMap,
-                       v20->m_oppositeEdge & 0x3FFFFF),
-               v20->m_a == v41->m_a)
-           && v20->m_b == v41->m_b
-           || v20->m_a == v41->m_b && v20->m_b == v41->m_a;
-        if ( v42 )
-          goto LABEL_50;
+        v41 = hkaiNavMeshInstance_get_hkaiNavMesh::Edge__23(
+                nmi->m_originalEdges,
+                nmi->m_numOriginalEdges,
+                &nmi->m_instancedEdges,
+                &nmi->m_ownedEdges,
+                &nmi->m_edgeMap,
+                v20->m_oppositeEdge & 0x3FFFFF);
+        if ( v20->m_a == v41->m_a && v20->m_b == v41->m_b )
+          goto LABEL_49;
+        if ( v20->m_a == v41->m_b && v20->m_b == v41->m_a )
+          goto LABEL_49;
       }
-      if ( v9 )
-      {
-        LODWORD(striding[0]) = v8;
-        LODWORD(index) = 0;
-        LODWORD(instanceMapa) = v37;
-        v9->vfptr->displayLine(v9, (hkResult *)&v87, &start, &end, (unsigned int)instanceMapa, index, striding[0]);
-      }
+      if ( displayHandler )
+        displayHandler->vfptr->displayLine(displayHandler, (hkResult *)v80, &start, &end, m_sharedEdgeColor, 0, tag);
       else
-      {
         hkDebugDisplay::displayLine(
           hkSingleton<hkDebugDisplay>::s_instance,
           &start,
           &end,
-          v37,
+          m_sharedEdgeColor,
           0,
           (int)hkDebugDisplayProcess::m_tag);
-      }
       if ( v20->m_a == v20->m_b )
       {
-        if ( v10->m_smallEdgeSettings.m_markDegenerateEdges.m_bool )
-          goto LABEL_56;
+        if ( settings->m_smallEdgeSettings.m_markDegenerateEdges.m_bool )
+          goto LABEL_55;
       }
-      else if ( v10->m_smallEdgeSettings.m_markSmallEdges.m_bool )
+      else if ( settings->m_smallEdgeSettings.m_markSmallEdges.m_bool )
       {
         v44 = _mm_sub_ps(start.m_quad, end.m_quad);
         v45 = _mm_mul_ps(v44, v44);
-        if ( (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v45, v45, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v45, v45, 0)))
-                   + COERCE_FLOAT(_mm_shuffle_ps(v45, v45, 170))) <= (float)(v10->m_smallEdgeSettings.m_smallEdgeTolerance
-                                                                           * v10->m_smallEdgeSettings.m_smallEdgeTolerance) )
+        if ( (float)((float)(_mm_shuffle_ps(v45, v45, 85).m128_f32[0] + _mm_shuffle_ps(v45, v45, 0).m128_f32[0])
+                   + _mm_shuffle_ps(v45, v45, 170).m128_f32[0]) <= (float)(settings->m_smallEdgeSettings.m_smallEdgeTolerance
+                                                                         * settings->m_smallEdgeSettings.m_smallEdgeTolerance) )
         {
-LABEL_56:
+LABEL_55:
           v46 = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(end.m_quad, start.m_quad), (__m128)_xmm), start.m_quad);
-          v47 = _mm_add_ps(v10->m_smallEdgeSettings.m_markerOffset.m_quad, v46);
-          v93.m_quad = v46;
-          v95.m_quad = v47;
-          if ( v9 )
+          v47 = _mm_add_ps(settings->m_smallEdgeSettings.m_markerOffset.m_quad, v46);
+          v86.m_quad = v46;
+          v88.m_quad = v47;
+          if ( displayHandler )
           {
             if ( v40 )
-              v48 = v10->m_smallEdgeSettings.m_smallBoundaryEdgeColor;
+              m_smallBoundaryEdgeColor = settings->m_smallEdgeSettings.m_smallBoundaryEdgeColor;
             else
-              v48 = v10->m_smallEdgeSettings.m_smallSharedEdgeColor;
-            LODWORD(striding[0]) = v8;
-            LODWORD(index) = 0;
-            LODWORD(instanceMapa) = v48;
-            v9->vfptr->displayLine(v9, (hkResult *)&v88, &v93, &v95, (unsigned int)instanceMapa, index, striding[0]);
+              m_smallBoundaryEdgeColor = settings->m_smallEdgeSettings.m_smallSharedEdgeColor;
+            displayHandler->vfptr->displayLine(
+              displayHandler,
+              (hkResult *)v81,
+              &v86,
+              &v88,
+              m_smallBoundaryEdgeColor,
+              0,
+              tag);
           }
           else
           {
             if ( v40 )
-              v49 = v10->m_smallEdgeSettings.m_smallBoundaryEdgeColor;
+              m_smallSharedEdgeColor = settings->m_smallEdgeSettings.m_smallBoundaryEdgeColor;
             else
-              v49 = v10->m_smallEdgeSettings.m_smallSharedEdgeColor;
+              m_smallSharedEdgeColor = settings->m_smallEdgeSettings.m_smallSharedEdgeColor;
             hkDebugDisplay::displayLine(
               hkSingleton<hkDebugDisplay>::s_instance,
-              &v93,
-              &v95,
-              v49,
+              &v86,
+              &v88,
+              m_smallSharedEdgeColor,
               0,
               (int)hkDebugDisplayProcess::m_tag);
           }
-          goto LABEL_50;
         }
       }
-LABEL_50:
-      if ( v10->m_showEdgeConnections.m_bool )
+LABEL_49:
+      if ( settings->m_showEdgeConnections.m_bool )
       {
         v43 = v20->m_oppositeEdge;
         if ( v43 != -1 )
         {
-          v94.m_quad = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(end.m_quad, start.m_quad), (__m128)_xmm), start.m_quad);
-          hkaiNavMeshInstance::getEdgePoints(v7, v43 & 0x3FFFFF, &edgeA, &edgeB);
-          v91.m_quad = _mm_add_ps(
+          v87.m_quad = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(end.m_quad, start.m_quad), (__m128)_xmm), start.m_quad);
+          hkaiNavMeshInstance::getEdgePoints(nmi, v43 & 0x3FFFFF, &edgeA, &edgeB);
+          v84.m_quad = _mm_add_ps(
                          _mm_add_ps(_mm_mul_ps(_mm_sub_ps(edgeA.m_quad, edgeB.m_quad), (__m128)_xmm), edgeB.m_quad),
-                         v16);
-          if ( v9 )
-          {
-            LODWORD(striding[0]) = v8;
-            LODWORD(index) = 0;
-            LODWORD(instanceMapa) = v10->m_edgeNormalColor;
-            v9->vfptr->displayLine(v9, (hkResult *)&v89, &v94, &v91, (unsigned int)instanceMapa, index, striding[0]);
-          }
+                         m_quad);
+          if ( displayHandler )
+            displayHandler->vfptr->displayLine(
+              displayHandler,
+              (hkResult *)v82,
+              &v87,
+              &v84,
+              settings->m_edgeNormalColor,
+              0,
+              tag);
           else
-          {
             hkDebugDisplay::displayLine(
               hkSingleton<hkDebugDisplay>::s_instance,
-              &v94,
-              &v91,
-              v10->m_edgeNormalColor,
+              &v87,
+              &v84,
+              settings->m_edgeNormalColor,
               0,
               (int)hkDebugDisplayProcess::m_tag);
-          }
         }
       }
-      if ( v10->m_showVertices.m_bool )
+      if ( settings->m_showVertices.m_bool )
       {
-        v50 = v10->m_vertexLabelColor;
-        v51 = v10->m_vertexDisplaySize;
-        if ( v9 )
-          hkDebugDisplayHandler::displayStar(v9, &start, v51, v50, 0, v8);
+        m_vertexLabelColor = settings->m_vertexLabelColor;
+        m_vertexDisplaySize = settings->m_vertexDisplaySize;
+        if ( displayHandler )
+          hkDebugDisplayHandler::displayStar(displayHandler, &start, m_vertexDisplaySize, m_vertexLabelColor, 0, tag);
         else
           hkDebugDisplay::displayStar(
             hkSingleton<hkDebugDisplay>::s_instance,
             &start,
-            v51,
-            v50,
+            m_vertexDisplaySize,
+            m_vertexLabelColor,
             0,
             (int)hkDebugDisplayProcess::m_tag);
       }
-      if ( v74 )
+      if ( v67 )
       {
-        v52 = v10->m_labelVertices.m_bool == 0;
-        v100.m_string.m_capacityAndFlags = -2147483520;
-        v100.m_string.m_data = v100.m_string.m_storage;
-        v100.m_string.m_size = 1;
-        v100.m_string.m_storage[0] = 0;
+        v52 = settings->m_labelVertices.m_bool == 0;
+        v93.m_string.m_capacityAndFlags = -2147483520;
+        v93.m_string.m_data = v93.m_string.m_storage;
+        v93.m_string.m_size = 1;
+        v93.m_string.m_storage[0] = 0;
         if ( !v52 )
         {
-          hkString::sprintf(&buf, "%d", (unsigned int)v20->m_a);
-          if ( v9 )
-          {
-            LODWORD(striding[0]) = v8;
-            LODWORD(index) = 0;
-            LODWORD(instanceMapa) = v10->m_vertexLabelColor;
-            v9->vfptr->display3dText(v9, (hkResult *)&v85, &buf, &start, (unsigned int)instanceMapa, index, striding[0]);
-          }
+          hkString::sprintf(buf, "%d", (unsigned int)v20->m_a);
+          if ( displayHandler )
+            displayHandler->vfptr->display3dText(
+              displayHandler,
+              (hkResult *)v78,
+              buf,
+              &start,
+              settings->m_vertexLabelColor,
+              0,
+              tag);
           else
-          {
             hkDebugDisplay::display3dText(
               hkSingleton<hkDebugDisplay>::s_instance,
-              &buf,
+              buf,
               &start,
-              v10->m_vertexLabelColor,
+              settings->m_vertexLabelColor,
               0,
               (int)hkDebugDisplayProcess::m_tag);
-          }
         }
-        v53 = v71;
-        if ( v10->m_labelEdges.m_bool )
-          hkStringBuf::printf(&v100, "%d ", (unsigned int)(v71 + v78->m_startEdgeIndex));
-        if ( v10->m_showEdgeData.m_bool )
+        v53 = v64;
+        if ( settings->m_labelEdges.m_bool )
+          hkStringBuf::printf(&v93, "%d ", (unsigned int)(v64 + v71->m_startEdgeIndex));
+        if ( settings->m_showEdgeData.m_bool )
         {
           if ( dataPtr )
           {
-            v54 = v7->m_edgeDataStriding;
+            m_edgeDataStriding = nmi->m_edgeDataStriding;
             label.m_string.m_data = label.m_string.m_storage;
             label.m_string.m_capacityAndFlags = -2147483520;
             label.m_string.m_size = 1;
             label.m_string.m_storage[0] = 0;
-            formatUserData(&label, dataPtr, v54);
-            hkStringBuf::operator+=(&v100, label.m_string.m_data);
+            formatUserData(&label, dataPtr, m_edgeDataStriding);
+            hkStringBuf::operator+=(&v93, label.m_string.m_data);
             label.m_string.m_size = 0;
             if ( label.m_string.m_capacityAndFlags >= 0 )
               hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-                (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
+                &hkContainerTempAllocator::s_alloc,
                 label.m_string.m_data,
                 label.m_string.m_capacityAndFlags & 0x3FFFFFFF);
           }
         }
-        if ( v100.m_string.m_size - 1 > 0 )
+        if ( v93.m_string.m_size - 1 > 0 )
         {
-          v86.m_quad = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(end.m_quad, start.m_quad), (__m128)_xmm), start.m_quad);
-          if ( !v104 )
+          v79.m_quad = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(end.m_quad, start.m_quad), (__m128)_xmm), start.m_quad);
+          if ( !v97 )
           {
             hkaiNavMeshUtils::calcFaceNormal<hkaiNavMeshInstance>(
-              (hkaiNavMeshUtils *)&v103,
-              (hkSimdFloat32 *)v7,
-              (hkaiNavMeshInstance *)(unsigned int)faceIdx,
-              (__int64)v76);
-            v104 = 1;
+              &v96,
+              (hkSimdFloat32 *)nmi,
+              (hkaiNavMeshInstance *)faceIdx,
+              (__m128 *)v69);
+            v97 = 1;
           }
           hkaiNavMeshUtils::calcEdgePlane<hkaiNavMeshInstance>(
-            (hkaiNavMeshUtils *)v7,
-            (hkaiNavMeshInstance *)(unsigned int)faceIdx,
-            v72,
-            (__int64)v76,
+            (hkaiNavMeshUtils *)nmi,
+            (hkaiNavMeshInstance *)faceIdx,
+            index,
+            (__m128 *)v69,
             &faceNormal);
-          v70 = 1;
+          v63 = 1;
           v55 = _mm_sub_ps(start.m_quad, end.m_quad);
           v56 = _mm_mul_ps(v55, v55);
           v57 = _mm_add_ps(
@@ -3335,157 +3213,161 @@ LABEL_50:
                   _mm_shuffle_ps(v56, v56, 170));
           v58 = _mm_rsqrt_ps(v57);
           v59 = _mm_mul_ps(*(__m128 *)_xmm, v58);
-          v59.m128_f32[0] = COERCE_FLOAT(
-                              _mm_andnot_ps(
-                                _mm_cmpleps(v57, (__m128)0i64),
-                                _mm_mul_ps(
-                                  _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v58, v57), v58)), v59),
-                                  v57)))
+          v59.m128_f32[0] = _mm_andnot_ps(
+                              _mm_cmple_ps(v57, (__m128)0i64),
+                              _mm_mul_ps(
+                                _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v58, v57), v58)), v59),
+                                v57)).m128_f32[0]
                           * -0.0099999998;
-          pos.m_quad = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v59, v59, 0), faceNormal.m_quad), v86.m_quad);
-          if ( v9 )
+          pos.m_quad = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v59, v59, 0), faceNormal.m_quad), v79.m_quad);
+          if ( displayHandler )
           {
-            LODWORD(striding[0]) = v8;
-            LODWORD(index) = 0;
-            LODWORD(instanceMapb) = v10->m_edgeLabelColor;
-            v9->vfptr->display3dText(
-              v9,
-              (hkResult *)&v90,
-              v100.m_string.m_data,
+            displayHandler->vfptr->display3dText(
+              displayHandler,
+              (hkResult *)v83,
+              v93.m_string.m_data,
               &pos,
-              (unsigned int)instanceMapb,
-              index,
-              striding[0]);
-            LODWORD(v60) = v8;
-            LODWORD(v61) = 0;
-            LODWORD(v62) = v10->m_edgeLabelColor;
-            v9->vfptr->displayLine(v9, (hkResult *)&v84, &v86, &pos, (unsigned int)v62, v61, v60);
+              settings->m_edgeLabelColor,
+              0,
+              tag);
+            displayHandler->vfptr->displayLine(
+              displayHandler,
+              (hkResult *)v77,
+              &v79,
+              &pos,
+              settings->m_edgeLabelColor,
+              0,
+              tag);
           }
           else
           {
             hkDebugDisplay::display3dText(
               hkSingleton<hkDebugDisplay>::s_instance,
-              v100.m_string.m_data,
+              v93.m_string.m_data,
               &pos,
-              v10->m_edgeLabelColor,
+              settings->m_edgeLabelColor,
               0,
               (int)hkDebugDisplayProcess::m_tag);
             hkDebugDisplay::displayLine(
               hkSingleton<hkDebugDisplay>::s_instance,
-              &v86,
+              &v79,
               &pos,
-              v10->m_edgeLabelColor,
+              settings->m_edgeLabelColor,
               0,
               (int)hkDebugDisplayProcess::m_tag);
           }
         }
-        v100.m_string.m_size = 0;
-        if ( v100.m_string.m_capacityAndFlags >= 0 )
+        v93.m_string.m_size = 0;
+        if ( v93.m_string.m_capacityAndFlags >= 0 )
           hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-            (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-            v100.m_string.m_data,
-            v100.m_string.m_capacityAndFlags & 0x3FFFFFFF);
+            &hkContainerTempAllocator::s_alloc,
+            v93.m_string.m_data,
+            v93.m_string.m_capacityAndFlags & 0x3FFFFFFF);
       }
       else
       {
-        v53 = v71;
+        v53 = v64;
       }
-      if ( v10->m_showEdgeNormals.m_bool )
+      if ( settings->m_showEdgeNormals.m_bool )
       {
         faceOffset.m_quad = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(end.m_quad, start.m_quad), (__m128)_xmm), start.m_quad);
-        if ( !v104 )
+        if ( !v97 )
         {
           hkaiNavMeshUtils::calcFaceNormal<hkaiNavMeshInstance>(
-            (hkaiNavMeshUtils *)&v102,
-            (hkSimdFloat32 *)v7,
-            (hkaiNavMeshInstance *)(unsigned int)faceIdx,
-            (__int64)v76);
-          v104 = 1;
+            &v95,
+            (hkSimdFloat32 *)nmi,
+            (hkaiNavMeshInstance *)faceIdx,
+            (__m128 *)v69);
+          v97 = 1;
         }
-        if ( !v70 )
+        if ( !v63 )
           hkaiNavMeshUtils::calcEdgePlane<hkaiNavMeshInstance>(
-            (hkaiNavMeshUtils *)v7,
-            (hkaiNavMeshInstance *)(unsigned int)faceIdx,
-            v72,
-            (__int64)v76,
+            (hkaiNavMeshUtils *)nmi,
+            (hkaiNavMeshInstance *)faceIdx,
+            index,
+            (__m128 *)v69,
             &faceNormal);
-        v63 = v10->m_edgeNormalColor;
-        if ( v9 )
-          hkDebugDisplayHandler::displayArrow(v9, &faceOffset, &faceNormal, v63, 0, v8);
+        m_edgeNormalColor = settings->m_edgeNormalColor;
+        if ( displayHandler )
+          hkDebugDisplayHandler::displayArrow(displayHandler, &faceOffset, &faceNormal, m_edgeNormalColor, 0, tag);
         else
           hkDebugDisplay::displayArrow(
             hkSingleton<hkDebugDisplay>::s_instance,
             &faceOffset,
             &faceNormal,
-            v63,
+            m_edgeNormalColor,
             0,
             (int)hkDebugDisplayProcess::m_tag);
       }
       v6 = faceIdx;
-      if ( v10->m_showVertexNormals.m_bool )
+      if ( settings->m_showVertexNormals.m_bool )
       {
-        if ( !v104 )
+        if ( !v97 )
         {
           hkaiNavMeshUtils::calcFaceNormal<hkaiNavMeshInstance>(
             (hkaiNavMeshUtils *)&extraRadius,
-            (hkSimdFloat32 *)v7,
-            (hkaiNavMeshInstance *)(unsigned int)faceIdx,
-            (__int64)v76);
-          v104 = 1;
+            (hkSimdFloat32 *)nmi,
+            (hkaiNavMeshInstance *)faceIdx,
+            (__m128 *)v69);
+          v97 = 1;
         }
         hkaiNavMeshUtils::calcVertexPlane<hkaiNavMeshInstance>(
-          (hkaiNavMeshUtils *)v7,
-          (hkaiNavMeshInstance *)(unsigned int)faceIdx,
+          (hkaiNavMeshUtils *)nmi,
+          (hkaiNavMeshInstance *)faceIdx,
           v53,
-          (__int64)v76,
+          (__m128 *)v69,
           (hkVector4f *)faceIndex);
-        v64 = v10->m_vertexNormalColor;
-        if ( v9 )
-          hkDebugDisplayHandler::displayArrow(v9, &start, (hkVector4f *)faceIndex, v64, 0, v8);
+        m_vertexNormalColor = settings->m_vertexNormalColor;
+        if ( displayHandler )
+          hkDebugDisplayHandler::displayArrow(
+            displayHandler,
+            &start,
+            (hkVector4f *)faceIndex,
+            m_vertexNormalColor,
+            0,
+            tag);
         else
           hkDebugDisplay::displayArrow(
             hkSingleton<hkDebugDisplay>::s_instance,
             &start,
             (hkVector4f *)faceIndex,
-            v64,
+            m_vertexNormalColor,
             0,
             (int)hkDebugDisplayProcess::m_tag);
       }
-      v11 = v78;
-      v13 = &v7->m_edgeMap;
-      v12 = v71 + 1;
-      v14 = &v7->m_ownedEdges;
-      v71 = v12;
-      v15 = &v7->m_instancedEdges;
+      v11 = v71;
+      p_m_edgeMap = &nmi->m_edgeMap;
+      v12 = v64 + 1;
+      p_m_ownedEdges = &nmi->m_ownedEdges;
+      v64 = v12;
+      p_m_instancedEdges = &nmi->m_instancedEdges;
     }
-    while ( v12 < v78->m_numEdges );
+    while ( v12 < v71->m_numEdges );
   }
 }
 
 // File Line: 1348
 // RVA: 0xC4AB50
-void __fastcall hkaiNavMeshDebugUtils::_showUserEdgesForFace(hkDebugDisplayHandler *displayHandler, int tag, hkaiStreamingCollection *collection, hkaiNavMeshInstance *nmi, hkaiNavMeshDebugUtils::DebugInfo *settings, int faceIdx)
+void __fastcall hkaiNavMeshDebugUtils::_showUserEdgesForFace(
+        hkDebugDisplayHandler *displayHandler,
+        int tag,
+        hkaiStreamingCollection *collection,
+        hkaiNavMeshInstance *nmi,
+        hkaiNavMeshDebugUtils::DebugInfo *settings,
+        int faceIdx)
 {
-  hkaiNavMeshInstance *v6; // rsi
-  int v7; // er12
-  hkDebugDisplayHandler *v8; // r13
-  hkaiStreamingCollection *v9; // r15
   hkaiNavMesh::Face *v10; // rdi
-  _QWORD *v11; // r8
+  _QWORD *Value; // r8
   _QWORD *v12; // rcx
   unsigned __int64 v13; // rax
-  signed __int64 v14; // rcx
-  unsigned __int64 v15; // rbx
+  _QWORD *v14; // rcx
+  int m_startUserEdgeIndex; // ebx
   _QWORD *v16; // rax
   _QWORD *v17; // rcx
   _QWORD *v18; // r8
   unsigned __int64 v19; // rax
-  signed __int64 v20; // rcx
+  _QWORD *v20; // rcx
 
-  v6 = nmi;
-  v7 = tag;
-  v8 = displayHandler;
-  v9 = collection;
   v10 = hkaiNavMeshInstance_get_hkaiNavMesh::Face__21(
           nmi->m_originalFaces,
           nmi->m_numOriginalFaces,
@@ -3495,32 +3377,28 @@ void __fastcall hkaiNavMeshDebugUtils::_showUserEdgesForFace(hkDebugDisplayHandl
           faceIdx);
   if ( v10->m_numUserEdges )
   {
-    v11 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-    v12 = (_QWORD *)v11[1];
-    if ( (unsigned __int64)v12 < v11[3] )
+    Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+    v12 = (_QWORD *)Value[1];
+    if ( (unsigned __int64)v12 < Value[3] )
     {
       *v12 = "TtuserEdges";
       v13 = __rdtsc();
-      v14 = (signed __int64)(v12 + 2);
-      *(_DWORD *)(v14 - 8) = v13;
-      v11[1] = v14;
+      v14 = v12 + 2;
+      *((_DWORD *)v14 - 2) = v13;
+      Value[1] = v14;
     }
-    v15 = (unsigned int)v10->m_startUserEdgeIndex;
-    if ( (signed int)v15 < (signed int)v15 + v10->m_numUserEdges )
+    m_startUserEdgeIndex = v10->m_startUserEdgeIndex;
+    if ( m_startUserEdgeIndex < m_startUserEdgeIndex + v10->m_numUserEdges )
     {
       do
-      {
         hkaiNavMeshDebugUtils::_showUserEdgePair(
-          v9,
+          collection,
           settings,
-          faceIdx | (v6->m_runtimeId << 22),
-          v15 | (v6->m_runtimeId << 22),
-          (hkDebugDisplayHandler *)v15,
-          v8,
-          v7);
-        v15 = (unsigned int)(v15 + 1);
-      }
-      while ( (signed int)v15 < v10->m_startUserEdgeIndex + v10->m_numUserEdges );
+          faceIdx | (nmi->m_runtimeId << 22),
+          m_startUserEdgeIndex++ | (nmi->m_runtimeId << 22),
+          displayHandler,
+          tag);
+      while ( m_startUserEdgeIndex < v10->m_startUserEdgeIndex + v10->m_numUserEdges );
     }
     v16 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
     v17 = (_QWORD *)v16[1];
@@ -3529,8 +3407,8 @@ void __fastcall hkaiNavMeshDebugUtils::_showUserEdgesForFace(hkDebugDisplayHandl
     {
       *v17 = "Et";
       v19 = __rdtsc();
-      v20 = (signed __int64)(v17 + 2);
-      *(_DWORD *)(v20 - 8) = v19;
+      v20 = v17 + 2;
+      *((_DWORD *)v20 - 2) = v19;
       v18[1] = v20;
     }
   }
@@ -3538,18 +3416,22 @@ void __fastcall hkaiNavMeshDebugUtils::_showUserEdgesForFace(hkDebugDisplayHandl
 
 // File Line: 1367
 // RVA: 0xC4ACA0
-void __fastcall hkaiNavMeshDebugUtils::_calcFaceOffset(hkaiNavMeshInstance *nmi, hkaiNavMeshDebugUtils::DebugInfo *settings, int faceIdx, hkVector4f *faceOffset)
+void __fastcall hkaiNavMeshDebugUtils::_calcFaceOffset(
+        hkaiNavMeshInstance *nmi,
+        hkaiNavMeshDebugUtils::DebugInfo *settings,
+        int faceIdx,
+        hkVector4f *faceOffset)
 {
   hkVector4f v4; // xmm1
-  char v5; // [rsp+8h] [rbp+8h]
+  char m_storage; // [rsp+8h] [rbp+8h]
 
   if ( nmi->m_faceFlags.m_size )
-    v5 = nmi->m_faceFlags.m_data[faceIdx].m_storage;
+    m_storage = nmi->m_faceFlags.m_data[faceIdx].m_storage;
   else
-    v5 = 0;
+    m_storage = 0;
   v4.m_quad = (__m128)settings->m_displayOffset;
   *faceOffset = settings->m_displayOffset;
-  if ( v5 & 1 )
+  if ( (m_storage & 1) != 0 )
   {
     if ( settings->m_showHiddenFaces.m_bool )
       faceOffset->m_quad = _mm_add_ps(settings->m_hiddenFaceOffset.m_quad, v4.m_quad);
@@ -3558,31 +3440,30 @@ void __fastcall hkaiNavMeshDebugUtils::_calcFaceOffset(hkaiNavMeshInstance *nmi,
 
 // File Line: 1381
 // RVA: 0xC4ACF0
-__int64 __fastcall hkaiNavMeshDebugUtils::_getUnlitFaceColor(hkaiNavMeshInstance *nmi, hkaiNavMeshDebugUtils::DebugInfo *settings, hkArrayBase<int> *regions, int faceIdx)
+__int64 __fastcall hkaiNavMeshDebugUtils::_getUnlitFaceColor(
+        hkaiNavMeshInstance *nmi,
+        hkaiNavMeshDebugUtils::DebugInfo *settings,
+        hkArrayBase<int> *regions,
+        int faceIdx)
 {
   __int64 index; // rdi
-  hkaiNavMeshDebugUtils::DebugInfo *v5; // rbx
   hkArray<int,hkContainerHeapAllocator> *instanceMap; // rbp
-  hkArrayBase<int> *v7; // r15
   hkaiNavMesh::Face *v8; // rax
   hkArray<int,hkContainerHeapAllocator> *v9; // r11
   int striding; // ecx
   int v11; // esi
   hkaiNavMesh::Face *v12; // r13
   int *v13; // r8
-  int v14; // edx
+  int m_highlightSingleRegionIndex; // edx
   float v15; // xmm6_4
-  unsigned int v16; // ecx
-  unsigned __int64 v17; // r8
-  int v18; // ecx
-  float v19; // xmm0_4
-  __int16 v20; // ax
-  char v22; // [rsp+70h] [rbp+8h]
+  unsigned int m_faceColor; // ecx
+  int m_numMaterialColors; // ecx
+  float v18; // xmm0_4
+  __int16 m_clusterIndex; // ax
+  char v21; // [rsp+70h] [rbp+8h]
 
   index = faceIdx;
-  v5 = settings;
   instanceMap = &nmi->m_faceMap;
-  v7 = regions;
   v8 = hkaiNavMeshInstance_get_hkaiNavMesh::Face__21(
          nmi->m_originalFaces,
          nmi->m_numOriginalFaces,
@@ -3605,329 +3486,311 @@ __int64 __fastcall hkaiNavMeshDebugUtils::_getUnlitFaceColor(hkaiNavMeshInstance
   else
     v13 = 0i64;
   if ( v9[20].m_size )
-    v22 = *((_BYTE *)v9[20].m_data + index);
+    v21 = *((_BYTE *)v9[20].m_data + index);
   else
-    v22 = 0;
-  v14 = v5->m_highlightSingleRegionIndex;
+    v21 = 0;
+  m_highlightSingleRegionIndex = settings->m_highlightSingleRegionIndex;
   v15 = *(float *)&FLOAT_1_0;
-  if ( v14 == -1 || v7->m_data[index] != v14 )
+  if ( m_highlightSingleRegionIndex == -1 || regions->m_data[index] != m_highlightSingleRegionIndex )
   {
-    if ( v5->m_colorRegions.m_bool )
+    if ( settings->m_colorRegions.m_bool )
     {
-      v17 = v7->m_data[index];
-      v16 = regionColors[v17 - 12 * ((unsigned __int64)(v17 * (unsigned __int128)0xAAAAAAAAAAAAAAABui64 >> 64) >> 3)];
+      m_faceColor = regionColors[regions->m_data[index] % 0xCui64];
     }
     else
     {
-      v18 = v5->m_numMaterialColors;
-      if ( v18 <= 0 )
+      m_numMaterialColors = settings->m_numMaterialColors;
+      if ( m_numMaterialColors <= 0 )
       {
-        v16 = v5->m_faceColor;
+        m_faceColor = settings->m_faceColor;
       }
       else
       {
         if ( v13 )
           v11 = *v13;
-        v16 = v5->m_materialColors[v11 % v18];
+        m_faceColor = settings->m_materialColors[v11 % m_numMaterialColors];
       }
     }
-    if ( v5->m_allowFaceTransparency.m_bool )
+    if ( settings->m_allowFaceTransparency.m_bool )
     {
-      v19 = v5->m_lightFaces.m_bool ? FLOAT_0_80000001 : FLOAT_0_25;
-      v15 = (float)((float)(v16 >> 24) * 0.0039215689) * v19;
-      if ( v22 & 1 )
+      v18 = settings->m_lightFaces.m_bool ? FLOAT_0_80000001 : FLOAT_0_25;
+      v15 = (float)((float)HIBYTE(m_faceColor) * 0.0039215689) * v18;
+      if ( (v21 & 1) != 0 )
         v15 = v15 * 0.25;
     }
-    if ( v5->m_showClusters.m_bool )
+    if ( settings->m_showClusters.m_bool )
     {
-      v20 = v12->m_clusterIndex;
-      if ( v20 >= 0 )
-        v16 = perturbColor(v16, v20, 0.30000001);
+      m_clusterIndex = v12->m_clusterIndex;
+      if ( m_clusterIndex >= 0 )
+        m_faceColor = perturbColor(m_faceColor, m_clusterIndex, 0.30000001);
     }
   }
   else
   {
-    v16 = hkColor::rgbFromChars(255, 100, 0, 255);
-    if ( v5->m_allowFaceTransparency.m_bool )
+    m_faceColor = hkColor::rgbFromChars(255, 100, 0, 255);
+    if ( settings->m_allowFaceTransparency.m_bool )
       v15 = FLOAT_0_627451;
   }
-  return v16 & 0xFFFFFF | ((unsigned __int8)(signed int)(float)(v15 * 255.0) << 24);
+  return m_faceColor & 0xFFFFFF | ((unsigned __int8)(int)(float)(v15 * 255.0) << 24);
 }
 
 // File Line: 1438
 // RVA: 0xC4AF00
 void __fastcall hkaiNavMeshDebugUtils::dumpMeshToZir(hkaiNavMesh *navMesh, hkVector4f *up, const char *filename)
 {
-  hkaiNavMesh *v3; // rbx
-  const char *v4; // rdi
-  hkVector4f *v5; // rsi
-  hkaiNavMeshInstance navMeshInstance; // [rsp+20h] [rbp-1E8h]
+  hkaiNavMeshInstance navMeshInstance; // [rsp+20h] [rbp-1E8h] BYREF
 
-  v3 = navMesh;
-  v4 = filename;
-  v5 = up;
   hkaiNavMeshInstance::hkaiNavMeshInstance(&navMeshInstance);
-  hkaiNavMeshInstance::tempInit(&navMeshInstance, v3, 0);
-  hkaiNavMeshDebugUtils::dumpMeshToZir(&navMeshInstance, v5, v4);
+  hkaiNavMeshInstance::tempInit(&navMeshInstance, navMesh, 0);
+  hkaiNavMeshDebugUtils::dumpMeshToZir(&navMeshInstance, up, filename);
   hkaiNavMeshInstance::~hkaiNavMeshInstance(&navMeshInstance);
 }
 
 // File Line: 1445
 // RVA: 0xC4AF70
-void __fastcall hkaiNavMeshDebugUtils::dumpMeshToZir(hkaiNavMeshInstance *navMeshInstance, hkVector4f *up, const char *filename)
+void __fastcall hkaiNavMeshDebugUtils::dumpMeshToZir(
+        hkaiNavMeshInstance *navMeshInstance,
+        hkVector4f *up,
+        const char *filename)
 {
-  const char *v3; // rbx
-  hkaiNavMeshInstance *v4; // r13
   int v5; // ebx
-  int v6; // er9
-  int v7; // edi
-  __int64 v8; // rsi
-  __int64 v9; // r14
-  int v10; // ecx
-  __m128 *v11; // rax
-  __m128 v12; // xmm1
-  _DWORD *v13; // rbx
-  int v14; // ebx
-  __int64 v15; // rcx
-  __int64 v16; // rax
-  hkArray<int,hkContainerHeapAllocator> *v17; // rdx
-  hkArray<hkaiNavMesh::Face,hkContainerHeapAllocator> *v18; // r8
-  hkArray<hkaiNavMesh::Face,hkContainerHeapAllocator> *v19; // r10
-  bool v20; // zf
-  int v21; // er14
-  hkResult *v22; // rax
-  bool v23; // r12
-  hkaiNavMesh::Face *v24; // rax
-  hkaiNavMesh::Face *v25; // rsi
-  int v26; // ebx
-  hkaiNavMesh::Edge *v27; // rax
-  char v28; // cl
-  hkaiNavMesh::Edge *v29; // r8
-  int v30; // eax
-  int v31; // edi
-  int v32; // er15
-  int v33; // edx
-  int v34; // ebx
-  hkaiZirWriter::SegmentStyle segmentStyle; // [rsp+30h] [rbp-C0h]
-  hkArrayBase<int> points; // [rsp+40h] [rbp-B0h]
-  _DWORD *array; // [rsp+50h] [rbp-A0h]
-  int v38; // [rsp+58h] [rbp-98h]
-  int v39; // [rsp+5Ch] [rbp-94h]
-  int v40; // [rsp+60h] [rbp-90h]
-  const char *v41; // [rsp+68h] [rbp-88h]
-  int v42; // [rsp+70h] [rbp-80h]
-  __int64 v43; // [rsp+78h] [rbp-78h]
-  int v44; // [rsp+80h] [rbp-70h]
-  __int64 v45; // [rsp+88h] [rbp-68h]
-  int v46; // [rsp+90h] [rbp-60h]
-  __int64 v47; // [rsp+98h] [rbp-58h]
-  hkaiZirWriter::NamePattern namePattern; // [rsp+A0h] [rbp-50h]
-  hkaiZirWriter::NamePattern v49; // [rsp+B8h] [rbp-38h]
-  hkaiZirWriter::Window window; // [rsp+D0h] [rbp-20h]
-  hkaiZirWriter::PointStyle pointStyle; // [rsp+E0h] [rbp-10h]
-  __int64 v52; // [rsp+F0h] [rbp+0h]
-  hkAabb aabbOut; // [rsp+100h] [rbp+10h]
-  hkaiZirWriter v54; // [rsp+120h] [rbp+30h]
-  hkResult result; // [rsp+1A0h] [rbp+B0h]
-  __int64 v56; // [rsp+1B8h] [rbp+C8h]
+  int v6; // edi
+  __int64 v7; // rsi
+  __int64 i; // r14
+  int m_numOriginalVertices; // ecx
+  hkVector4f *v10; // rax
+  __m128 m_quad; // xmm1
+  _DWORD *v12; // rbx
+  int v13; // ebx
+  __int64 v14; // rcx
+  __int64 v15; // rax
+  hkArray<int,hkContainerHeapAllocator> *p_m_faceMap; // rdx
+  hkArray<hkaiNavMesh::Face,hkContainerHeapAllocator> *p_m_ownedFaces; // r8
+  hkArray<hkaiNavMesh::Face,hkContainerHeapAllocator> *p_m_instancedFaces; // r10
+  bool v19; // zf
+  int m_size; // r14d
+  hkResult *p_result; // rax
+  bool v22; // r12
+  hkaiNavMesh::Face *v23; // rax
+  hkaiNavMesh::Face *v24; // rsi
+  int m_startEdgeIndex; // ebx
+  hkaiNavMesh::Edge *v26; // rax
+  char m_storage; // cl
+  hkaiNavMesh::Edge *v28; // r8
+  int v29; // eax
+  int v30; // edi
+  int v31; // r15d
+  int m_startUserEdgeIndex; // edx
+  int v33; // ebx
+  hkaiZirWriter::SegmentStyle segmentStyle; // [rsp+30h] [rbp-C0h] BYREF
+  hkArrayBase<int> points; // [rsp+40h] [rbp-B0h] BYREF
+  _DWORD *array; // [rsp+50h] [rbp-A0h] BYREF
+  int v37; // [rsp+58h] [rbp-98h]
+  int v38; // [rsp+5Ch] [rbp-94h]
+  int v39; // [rsp+60h] [rbp-90h]
+  __int64 v40; // [rsp+68h] [rbp-88h]
+  int v41; // [rsp+70h] [rbp-80h]
+  __int64 v42; // [rsp+78h] [rbp-78h]
+  int v43; // [rsp+80h] [rbp-70h]
+  __int64 v44; // [rsp+88h] [rbp-68h]
+  int v45; // [rsp+90h] [rbp-60h]
+  __int64 v46; // [rsp+98h] [rbp-58h]
+  hkaiZirWriter::NamePattern namePattern; // [rsp+A0h] [rbp-50h] BYREF
+  hkaiZirWriter::NamePattern v48; // [rsp+B8h] [rbp-38h] BYREF
+  hkaiZirWriter::Window window; // [rsp+D0h] [rbp-20h] BYREF
+  hkaiZirWriter::PointStyle pointStyle; // [rsp+E0h] [rbp-10h] BYREF
+  __int64 v51; // [rsp+F0h] [rbp+0h]
+  hkAabb aabbOut; // [rsp+100h] [rbp+10h] BYREF
+  hkaiZirWriter v53; // [rsp+120h] [rbp+30h] BYREF
+  hkResult result; // [rsp+1A0h] [rbp+B0h] BYREF
+  __int64 v55; // [rsp+1B8h] [rbp+C8h] BYREF
 
-  v3 = filename;
-  v4 = navMeshInstance;
   hkaiNavMeshInstance::getAabb(navMeshInstance, &aabbOut);
   *(_QWORD *)&window.m_minX = aabbOut.m_min.m_quad.m128_u64[0];
   *(_QWORD *)&window.m_maxX = aabbOut.m_max.m_quad.m128_u64[0];
-  hkaiZirWriter::hkaiZirWriter(&v54, v3, &window);
-  v5 = v4->m_numOriginalVertices + v4->m_ownedVertices.m_size;
+  hkaiZirWriter::hkaiZirWriter(&v53, filename, &window);
+  v5 = navMeshInstance->m_numOriginalVertices + navMeshInstance->m_ownedVertices.m_size;
   array = 0i64;
-  v38 = 0;
-  v39 = 2147483648;
+  v37 = 0;
+  v38 = 0x80000000;
   if ( v5 > 0 )
-  {
-    v6 = v5;
-    if ( v5 < 0 )
-      v6 = 0;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, v6, 4);
-  }
-  v38 = v5;
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, &array, v5, 4);
+  v37 = v5;
   pointStyle.m_color = 0;
   *(_QWORD *)&pointStyle.m_shape = 1i64;
   pointStyle.m_hidden = 0;
-  v7 = 0;
-  v8 = 0i64;
-  v9 = v5;
-  if ( v5 > 0 )
+  v6 = 0;
+  v7 = 0i64;
+  for ( i = v5;
+        v7 < i;
+        v12[v7 - 1] = hkaiZirWriter::addPoint(
+                        &v53,
+                        m_quad.m128_f32[0],
+                        _mm_shuffle_ps(m_quad, m_quad, 85).m128_f32[0],
+                        &pointStyle,
+                        &namePattern,
+                        "Vertex") )
   {
-    do
-    {
-      v10 = v4->m_numOriginalVertices;
-      if ( v7 >= v10 )
-        v11 = &v4->m_ownedVertices.m_data[v7 - v10].m_quad;
-      else
-        v11 = &v4->m_originalVertices[v7].m_quad;
-      v12 = *v11;
-      v13 = array;
-      namePattern.m_prefix = "v";
-      namePattern.m_index = v7;
-      namePattern.m_suffix = &customWorldMapCaption;
-      ++v8;
-      ++v7;
-      v13[v8 - 1] = hkaiZirWriter::addPoint(
-                      &v54,
-                      v12.m128_f32[0],
-                      COERCE_FLOAT(_mm_shuffle_ps(v12, v12, 85)),
-                      &pointStyle,
-                      &namePattern,
-                      "Vertex");
-    }
-    while ( v8 < v9 );
+    m_numOriginalVertices = navMeshInstance->m_numOriginalVertices;
+    if ( v6 >= m_numOriginalVertices )
+      v10 = &navMeshInstance->m_ownedVertices.m_data[v6 - m_numOriginalVertices];
+    else
+      v10 = &navMeshInstance->m_originalVertices[v6];
+    m_quad = v10->m_quad;
+    v12 = array;
+    namePattern.m_prefix = "v";
+    namePattern.m_index = v6;
+    namePattern.m_suffix = &customCaption;
+    ++v7;
+    ++v6;
   }
-  v14 = 0;
-  v15 = 0i64;
-  v16 = v4->m_numOriginalFaces + v4->m_ownedFaces.m_size;
-  v45 = 2i64;
-  LOWORD(v46) = 1;
-  v43 = 4i64;
-  LOWORD(v44) = 1;
-  v41 = (const char *)3;
-  LOWORD(v42) = 1;
-  BYTE2(v42) = 0;
+  v13 = 0;
+  v14 = 0i64;
+  v15 = navMeshInstance->m_numOriginalFaces + navMeshInstance->m_ownedFaces.m_size;
+  v44 = 2i64;
+  LOWORD(v45) = 1;
+  v42 = 4i64;
+  LOWORD(v43) = 1;
+  v40 = 3i64;
+  LOWORD(v41) = 1;
+  BYTE2(v41) = 0;
   points.m_data = 0i64;
-  points.m_capacityAndFlags = 2147483648;
-  v40 = 0;
-  v47 = 0i64;
-  v52 = v16;
-  if ( v16 > 0 )
+  points.m_capacityAndFlags = 0x80000000;
+  v39 = 0;
+  v46 = 0i64;
+  v51 = v15;
+  if ( v15 > 0 )
   {
-    v17 = &v4->m_faceMap;
-    v18 = &v4->m_ownedFaces;
-    v19 = &v4->m_instancedFaces;
+    p_m_faceMap = &navMeshInstance->m_faceMap;
+    p_m_ownedFaces = &navMeshInstance->m_ownedFaces;
+    p_m_instancedFaces = &navMeshInstance->m_instancedFaces;
     while ( 1 )
     {
-      v20 = v4->m_faceFlags.m_size == 0;
-      v21 = 0;
+      v19 = navMeshInstance->m_faceFlags.m_size == 0;
+      m_size = 0;
       points.m_size = 0;
-      if ( v20 )
+      if ( v19 )
       {
-        LOBYTE(v56) = 0;
-        v22 = (hkResult *)&v56;
+        LOBYTE(v55) = 0;
+        p_result = (hkResult *)&v55;
       }
       else
       {
-        v22 = &result;
-        LOBYTE(result.m_enum) = v4->m_faceFlags.m_data[v15].m_storage;
+        p_result = &result;
+        LOBYTE(result.m_enum) = navMeshInstance->m_faceFlags.m_data[v14].m_storage;
       }
-      v23 = v22->m_enum & 1;
-      v24 = hkaiNavMeshInstance_get_hkaiNavMesh::Face__21(
-              v4->m_originalFaces,
-              v4->m_numOriginalFaces,
-              v19,
-              v18,
-              v17,
-              v14);
-      v25 = v24;
-      v26 = v24->m_numUserEdges <= 0 ? v24->m_startEdgeIndex : v24->m_startUserEdgeIndex;
-      if ( v26 != -1 )
+      v22 = p_result->m_enum & 1;
+      v23 = hkaiNavMeshInstance_get_hkaiNavMesh::Face__21(
+              navMeshInstance->m_originalFaces,
+              navMeshInstance->m_numOriginalFaces,
+              p_m_instancedFaces,
+              p_m_ownedFaces,
+              p_m_faceMap,
+              v13);
+      v24 = v23;
+      m_startEdgeIndex = v23->m_numUserEdges <= 0 ? v23->m_startEdgeIndex : v23->m_startUserEdgeIndex;
+      if ( m_startEdgeIndex != -1 )
         break;
-LABEL_38:
-      v34 = v40;
-      namePattern.m_prefix = v41;
-      namePattern.m_index = v42;
-      v49.m_prefix = "f";
-      v49.m_suffix = &customWorldMapCaption;
-      BYTE2(namePattern.m_index) = v23;
-      v49.m_index = v40;
-      hkaiZirWriter::addPolygon(&v54, &points, (hkaiZirWriter::PolygonStyle *)&namePattern, &v49, "Polygon");
-      v14 = v34 + 1;
-      v17 = &v4->m_faceMap;
-      v15 = v47 + 1;
-      v40 = v14;
-      v18 = &v4->m_ownedFaces;
-      v47 = v15;
-      v19 = &v4->m_instancedFaces;
-      if ( v15 >= v52 )
-        goto LABEL_39;
+LABEL_36:
+      v33 = v39;
+      namePattern.m_prefix = (const char *)v40;
+      namePattern.m_index = v41;
+      v48.m_prefix = "f";
+      v48.m_suffix = &customCaption;
+      BYTE2(namePattern.m_index) = v22;
+      v48.m_index = v39;
+      hkaiZirWriter::addPolygon(&v53, &points, (hkaiZirWriter::PolygonStyle *)&namePattern, &v48, "Polygon");
+      v13 = v33 + 1;
+      p_m_faceMap = &navMeshInstance->m_faceMap;
+      v14 = v46 + 1;
+      v39 = v13;
+      p_m_ownedFaces = &navMeshInstance->m_ownedFaces;
+      v46 = v14;
+      p_m_instancedFaces = &navMeshInstance->m_instancedFaces;
+      if ( v14 >= v51 )
+        goto LABEL_37;
     }
     while ( 1 )
     {
-      v27 = hkaiNavMeshInstance_get_hkaiNavMesh::Edge__23(
-              v4->m_originalEdges,
-              v4->m_numOriginalEdges,
-              &v4->m_instancedEdges,
-              &v4->m_ownedEdges,
-              &v4->m_edgeMap,
-              v26);
+      v26 = hkaiNavMeshInstance_get_hkaiNavMesh::Edge__23(
+              navMeshInstance->m_originalEdges,
+              navMeshInstance->m_numOriginalEdges,
+              &navMeshInstance->m_instancedEdges,
+              &navMeshInstance->m_ownedEdges,
+              &navMeshInstance->m_edgeMap,
+              m_startEdgeIndex);
       *(_QWORD *)&segmentStyle.m_color = 0i64;
       *(_WORD *)&segmentStyle.m_arrow = 0;
-      v28 = v27->m_flags.m_storage;
-      v29 = v27;
-      if ( v28 & 0x10 )
+      m_storage = v26->m_flags.m_storage;
+      v28 = v26;
+      if ( (m_storage & 0x10) != 0 )
       {
-        *(_QWORD *)&segmentStyle.m_color = v43;
-        v30 = v44;
+        *(_QWORD *)&segmentStyle.m_color = v42;
+        v29 = v43;
       }
-      else if ( v27->m_oppositeEdge == -1 || v28 & 0x20 )
+      else if ( v26->m_oppositeEdge == -1 || (m_storage & 0x20) != 0 )
       {
-        *(_QWORD *)&segmentStyle.m_color = v43;
-        v30 = v42;
+        *(_QWORD *)&segmentStyle.m_color = v42;
+        v29 = v41;
       }
       else
       {
-        *(_QWORD *)&segmentStyle.m_color = v45;
-        v30 = v46;
+        *(_QWORD *)&segmentStyle.m_color = v44;
+        v29 = v45;
       }
-      *(_DWORD *)&segmentStyle.m_arrow = v30;
-      segmentStyle.m_hidden = v23;
-      v31 = array[v29->m_a];
-      v32 = array[v29->m_b];
-      if ( !(v29->m_flags.m_storage & 0x10) )
+      *(_DWORD *)&segmentStyle.m_arrow = v29;
+      segmentStyle.m_hidden = v22;
+      v30 = array[v28->m_a];
+      v31 = array[v28->m_b];
+      if ( (v28->m_flags.m_storage & 0x10) == 0 )
       {
-        if ( v21 == (points.m_capacityAndFlags & 0x3FFFFFFF) )
+        if ( m_size == (points.m_capacityAndFlags & 0x3FFFFFFF) )
         {
-          hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &points, 4);
-          v21 = points.m_size;
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &points, 4);
+          m_size = points.m_size;
         }
-        points.m_data[v21] = v31;
+        points.m_data[m_size] = v30;
         ++points.m_size;
       }
-      v49.m_prefix = "e";
-      v49.m_suffix = &customWorldMapCaption;
-      v49.m_index = v26;
-      hkaiZirWriter::addSegment(&v54, v31, v32, &segmentStyle, &v49, 0i64);
-      v33 = v25->m_startUserEdgeIndex;
-      if ( v26 < v33 || v26 >= v25->m_numUserEdges + v33 - 1 )
+      v48.m_prefix = "e";
+      v48.m_suffix = &customCaption;
+      v48.m_index = m_startEdgeIndex;
+      hkaiZirWriter::addSegment(&v53, v30, v31, &segmentStyle, &v48, 0i64);
+      m_startUserEdgeIndex = v24->m_startUserEdgeIndex;
+      if ( m_startEdgeIndex < m_startUserEdgeIndex || m_startEdgeIndex >= v24->m_numUserEdges + m_startUserEdgeIndex - 1 )
       {
-        if ( v26 == v25->m_numUserEdges + v33 - 1 )
+        if ( m_startEdgeIndex == v24->m_numUserEdges + m_startUserEdgeIndex - 1 )
         {
-          v26 = v25->m_startEdgeIndex;
-          goto LABEL_36;
+          m_startEdgeIndex = v24->m_startEdgeIndex;
+          goto LABEL_34;
         }
-        if ( v26 < v25->m_startEdgeIndex || v26 >= v25->m_numEdges + v25->m_startEdgeIndex - 1 )
-          goto LABEL_38;
+        if ( m_startEdgeIndex < v24->m_startEdgeIndex || m_startEdgeIndex >= v24->m_numEdges + v24->m_startEdgeIndex - 1 )
+          goto LABEL_36;
       }
-      ++v26;
-LABEL_36:
-      if ( v26 == -1 )
-        goto LABEL_38;
-      v21 = points.m_size;
+      ++m_startEdgeIndex;
+LABEL_34:
+      if ( m_startEdgeIndex == -1 )
+        goto LABEL_36;
+      m_size = points.m_size;
     }
   }
-LABEL_39:
+LABEL_37:
   points.m_size = 0;
   if ( points.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       points.m_data,
       4 * points.m_capacityAndFlags);
   points.m_data = 0i64;
-  points.m_capacityAndFlags = 2147483648;
-  v38 = 0;
-  if ( v39 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      array,
-      4 * v39);
+  points.m_capacityAndFlags = 0x80000000;
+  v37 = 0;
+  if ( v38 >= 0 )
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, array, 4 * v38);
   array = 0i64;
-  v39 = 2147483648;
-  hkaiZirWriter::~hkaiZirWriter(&v54);
-}
+  v38 = 0x80000000;
+  hkaiZirWriter::~hkaiZirWriter(&v53);
+}AndFlags = 0x80000000;
+  v37 = 0;
+  if ( v38 >= 0 )
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAll
 

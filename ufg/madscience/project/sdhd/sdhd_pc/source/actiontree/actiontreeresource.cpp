@@ -3,14 +3,14 @@
 __int64 dynamic_initializer_for__gActionTreeResourceInventory__()
 {
   UFG::qResourceInventory::qResourceInventory(
-    (UFG::qResourceInventory *)&gActionTreeResourceInventory.vfptr,
+    &gActionTreeResourceInventory,
     "ActionTreeResourceInventory",
     0x8DB8241B,
     0x4BCE8537u,
     0,
     0);
   gActionTreeResourceInventory.vfptr = (UFG::qResourceInventoryVtbl *)&ActionTreeResourceInventory::`vftable;
-  return atexit(dynamic_atexit_destructor_for__gActionTreeResourceInventory__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gActionTreeResourceInventory__);
 }
 
 // File Line: 66
@@ -18,14 +18,14 @@ __int64 dynamic_initializer_for__gActionTreeResourceInventory__()
 __int64 dynamic_initializer_for__gAnimationGroupResourceInventory__()
 {
   UFG::qResourceInventory::qResourceInventory(
-    (UFG::qResourceInventory *)&gAnimationGroupResourceInventory.vfptr,
+    &gAnimationGroupResourceInventory,
     "AnimationGroupResourceInventory",
     0x58087229u,
     0x3D0EBC72u,
     0,
     0);
   gAnimationGroupResourceInventory.vfptr = (UFG::qResourceInventoryVtbl *)&AnimationGroupResourceInventory::`vftable;
-  return atexit(dynamic_atexit_destructor_for__gAnimationGroupResourceInventory__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gAnimationGroupResourceInventory__);
 }
 
 // File Line: 67
@@ -33,14 +33,14 @@ __int64 dynamic_initializer_for__gAnimationGroupResourceInventory__()
 __int64 dynamic_initializer_for__gWeightSetGroupResourceInventory__()
 {
   UFG::qResourceInventory::qResourceInventory(
-    (UFG::qResourceInventory *)&gWeightSetGroupResourceInventory.vfptr,
+    &gWeightSetGroupResourceInventory,
     "WeightSetGroupResourceInventory",
     0x50C27D5Fu,
     0x1146D4C8u,
     0,
     0);
   gWeightSetGroupResourceInventory.vfptr = (UFG::qResourceInventoryVtbl *)&WeightSetGroupResourceInventory::`vftable;
-  return atexit(dynamic_atexit_destructor_for__gWeightSetGroupResourceInventory__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gWeightSetGroupResourceInventory__);
 }
 
 // File Line: 71
@@ -48,14 +48,14 @@ __int64 dynamic_initializer_for__gWeightSetGroupResourceInventory__()
 __int64 dynamic_initializer_for__gUELFragmentTableInventory__()
 {
   UFG::qResourceInventory::qResourceInventory(
-    (UFG::qResourceInventory *)&gUELFragmentTableInventory.vfptr,
+    &gUELFragmentTableInventory,
     "UELFragmentTableInventory",
     0x2DB16C3Eu,
     0x32890C01u,
     0,
     0);
   gUELFragmentTableInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UELFragmentTableInventory::`vftable;
-  return atexit(dynamic_atexit_destructor_for__gUELFragmentTableInventory__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gUELFragmentTableInventory__);
 }
 
 // File Line: 72
@@ -63,14 +63,14 @@ __int64 dynamic_initializer_for__gUELFragmentTableInventory__()
 __int64 dynamic_initializer_for__gRigInfoResourceInventory__()
 {
   UFG::qResourceInventory::qResourceInventory(
-    (UFG::qResourceInventory *)&gRigInfoResourceInventory.vfptr,
+    &gRigInfoResourceInventory,
     "RigInfoResourceInventory",
     0xAEF1F66F,
     0x36C2E8Eu,
     0,
     0);
   gRigInfoResourceInventory.vfptr = (UFG::qResourceInventoryVtbl *)&RigInfoResourceInventory::`vftable;
-  return atexit(dynamic_atexit_destructor_for__gRigInfoResourceInventory__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gRigInfoResourceInventory__);
 }
 
 // File Line: 73
@@ -78,28 +78,25 @@ __int64 dynamic_initializer_for__gRigInfoResourceInventory__()
 __int64 dynamic_initializer_for__gBlendTreeResourceInventory__()
 {
   UFG::qResourceInventory::qResourceInventory(
-    (UFG::qResourceInventory *)&gBlendTreeResourceInventory.vfptr,
+    &gBlendTreeResourceInventory,
     "BlendTreeResourceInventory",
     0x2680E48u,
     0xE691BB97,
     0,
     0);
   gBlendTreeResourceInventory.vfptr = (UFG::qResourceInventoryVtbl *)&BlendTreeResourceInventory::`vftable;
-  return atexit(dynamic_atexit_destructor_for__gBlendTreeResourceInventory__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gBlendTreeResourceInventory__);
 }
 
 // File Line: 80
 // RVA: 0x2CA570
-void __fastcall InPlaceInit<AccuracyEnsureMissTrack>::InPlaceNew(void *ptr)
+void __fastcall InPlaceInit<AccuracyEnsureMissTrack>::InPlaceNew(ITrack *ptr)
 {
-  _QWORD *v1; // rbx
-
-  v1 = ptr;
   if ( ptr )
   {
-    ITrack::ITrack((ITrack *)ptr, 0);
-    *v1 = &Track<AccuracyEnsureMissTask>::`vftable;
-    *v1 = &AccuracyEnsureMissTrack::`vftable;
+    ITrack::ITrack(ptr, 0);
+    ptr->vfptr = (Expression::IMemberMapVtbl *)&Track<AccuracyEnsureMissTask>::`vftable;
+    ptr->vfptr = (Expression::IMemberMapVtbl *)&AccuracyEnsureMissTrack::`vftable;
   }
 }
 
@@ -117,7 +114,7 @@ ClassTypeDescriptor *__fastcall GetTypeDescriptors(unsigned int *count)
   unsigned int *v1; // rbx
 
   v1 = count;
-  if ( !(_S4_5 & 1) )
+  if ( (_S4_5 & 1) == 0 )
   {
     _S4_5 |= 1u;
     gTypeDescriptors[0].mUID = TargetActionRequestTrack::sClassNameUID;
@@ -2151,36 +2148,32 @@ ClassTypeDescriptor *__fastcall GetTypeDescriptors(unsigned int *count)
     qword_1423B5928 = (__int64)InPlaceInit<UEL::ParameterExpression>::InPlaceNew;
     dword_1423B5930 = UEL::InvocationExpression::sClassNameUID;
     qword_1423B5938 = (__int64)InPlaceInit<UEL::InvocationExpression>::InPlaceNew;
-    dword_1423B5940 = UEL::
+    dword_1423B5940 = U
 
 // File Line: 126
 // RVA: 0x2BD5F0
-void __fastcall Fixup(TypeTable *typeTable, void *resource)
+void __fastcall Fixup(TypeTable *typeTable, char *resource)
 {
-  TypeTable *v2; // rbx
-  char *v3; // rbp
-  UFG::qOffset64<TypeTableEntry *> *v4; // rdi
-  ClassTypeDescriptor *v5; // r10
+  UFG::qOffset64<TypeTableEntry *> *p_mEntries; // rdi
+  ClassTypeDescriptor *TypeDescriptors; // r10
   char *v6; // rsi
-  unsigned int v7; // er9
+  unsigned int v7; // r9d
   unsigned int v8; // edx
   __int64 v9; // rax
   unsigned int v10; // ebx
   char *v11; // rcx
   char *v12; // rdx
-  unsigned int count; // [rsp+30h] [rbp+8h]
+  unsigned int count; // [rsp+30h] [rbp+8h] BYREF
 
-  v2 = typeTable;
-  v3 = (char *)resource;
   count = 0;
-  v4 = &typeTable->mEntries;
-  v5 = GetTypeDescriptors(&count);
-  if ( v4->mOffset )
-    v6 = (char *)v4 + v4->mOffset;
+  p_mEntries = &typeTable->mEntries;
+  TypeDescriptors = GetTypeDescriptors(&count);
+  if ( p_mEntries->mOffset )
+    v6 = (char *)p_mEntries + p_mEntries->mOffset;
   else
     v6 = 0i64;
   v7 = 0;
-  if ( v2->mNumEntries )
+  if ( typeTable->mNumEntries )
   {
     v8 = count;
     do
@@ -2188,27 +2181,27 @@ void __fastcall Fixup(TypeTable *typeTable, void *resource)
       v9 = 0i64;
       if ( v8 )
       {
-        while ( v5[(unsigned int)v9].mUID != *(_DWORD *)&v6[16 * v7] )
+        while ( TypeDescriptors[(unsigned int)v9].mUID != *(_DWORD *)&v6[16 * v7] )
         {
           v9 = (unsigned int)(v9 + 1);
           if ( (unsigned int)v9 >= v8 )
             goto LABEL_11;
         }
-        *(_QWORD *)&v6[16 * v7 + 8] = v5[v9].mfnInPlaceNew;
+        *(_QWORD *)&v6[16 * v7 + 8] = TypeDescriptors[v9].mfnInPlaceNew;
       }
 LABEL_11:
       ++v7;
     }
-    while ( v7 < v2->mNumEntries );
+    while ( v7 < typeTable->mNumEntries );
   }
   UFG::qSymbolRegistry::SetAssertOnEmptySymbolCtor(1);
-  v10 = 4 * v2->mFirstFixupOffset;
+  v10 = 4 * typeTable->mFirstFixupOffset;
   while ( v10 )
   {
-    v11 = &v3[v10];
+    v11 = &resource[v10];
     v10 = 4 * (*(_DWORD *)v11 & 0x7FFFFF);
-    if ( v4->mOffset )
-      v12 = (char *)v4 + v4->mOffset;
+    if ( p_mEntries->mOffset )
+      v12 = (char *)p_mEntries + p_mEntries->mOffset;
     else
       v12 = 0i64;
     (*(void (**)(void))&v12[16 * (*(_DWORD *)v11 >> 23) + 8])();
@@ -2218,77 +2211,71 @@ LABEL_11:
 
 // File Line: 185
 // RVA: 0x2AEE60
-void __fastcall ActionTreeResourceInventory::Add(ActionTreeResourceInventory *this, UFG::qResourceData *resource_data)
+void __fastcall ActionTreeResourceInventory::Add(ActionTreeResourceInventory *this, ActionTreeResource *resource_data)
 {
-  UFG::qResourceData *v2; // rbx
-  ActionTreeResourceInventory *v3; // rsi
-  UFG::qBaseNodeRB *v4; // rax
-  signed __int64 v5; // rdi
+  UFG::qBaseNodeRB *mOffset; // rax
+  char *v5; // rdi
   TypeTable *v6; // rcx
   UFG::qBaseNodeRB *v7; // rax
 
-  v2 = resource_data;
-  v3 = this;
   if ( resource_data )
     UFG::qResourceData::qResourceData(resource_data);
-  v4 = v2[1].mNode.mChild[0];
+  mOffset = (UFG::qBaseNodeRB *)resource_data->mTypeTable.mOffset;
   v5 = 0i64;
-  if ( v4 )
-    v6 = (TypeTable *)((char *)v2[1].mNode.mChild + (_QWORD)v4);
+  if ( mOffset )
+    v6 = (TypeTable *)((char *)&resource_data->mTypeTable + (_QWORD)mOffset);
   else
     v6 = 0i64;
-  Fixup(v6, v2);
-  v7 = v2[1].mNode.mParent;
+  Fixup(v6, resource_data);
+  v7 = (UFG::qBaseNodeRB *)resource_data->mRootNode.mOffset;
   if ( v7 )
-    v5 = (signed __int64)&v2[1] + (_QWORD)v7;
-  ActionNode::smRoot->vfptr[2].__vecDelDtor((Expression::IMemberMap *)ActionNode::smRoot, v5);
-  UFG::qResourceInventory::Add((UFG::qResourceInventory *)&v3->vfptr, v2);
-  v3->mpLastLoadedResource = (ActionTreeResource *)v2;
+    v5 = (char *)&resource_data->mRootNode + (_QWORD)v7;
+  ActionNode::smRoot->vfptr[2].__vecDelDtor(ActionNode::smRoot, (unsigned int)v5);
+  UFG::qResourceInventory::Add(this, resource_data);
+  this->mpLastLoadedResource = resource_data;
 }
 
 // File Line: 225
 // RVA: 0x2DC500
-void __fastcall ActionTreeResourceInventory::Remove(ActionTreeResourceInventory *this, UFG::qResourceData *resource_data)
+void __fastcall ActionTreeResourceInventory::Remove(
+        ActionTreeResourceInventory *this,
+        ActionTreeResource *resource_data)
 {
-  UFG::qResourceData *v2; // rdi
-  ActionTreeResourceInventory *v3; // rsi
-  UFG::qBaseNodeRB *v4; // rax
+  UFG::qBaseNodeRB *mOffset; // rax
   IActionTreeSerializer *v5; // rdx
-  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v6; // rcx
-  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v7; // rax
+  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *mPrev; // rcx
+  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *mNext; // rax
 
-  v2 = resource_data;
-  v3 = this;
-  UFG::qResourceInventory::Remove((UFG::qResourceInventory *)&this->vfptr, resource_data);
-  v4 = v2[1].mNode.mParent;
-  if ( v4 )
-    v5 = (IActionTreeSerializer *)((char *)&v2[1] + (_QWORD)v4);
+  UFG::qResourceInventory::Remove(this, resource_data);
+  mOffset = (UFG::qBaseNodeRB *)resource_data->mRootNode.mOffset;
+  if ( mOffset )
+    v5 = (IActionTreeSerializer *)((char *)&resource_data->mRootNode + (_QWORD)mOffset);
   else
     v5 = 0i64;
-  ActionNode::smRoot->vfptr[2].Serialize((Expression::IMemberMap *)ActionNode::smRoot, v5);
-  UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0>::DeleteNodes(&v2->mResourceHandles);
-  v6 = v2->mResourceHandles.mNode.mPrev;
-  v7 = v2->mResourceHandles.mNode.mNext;
-  v6->mNext = v7;
-  v7->mPrev = v6;
-  v2->mResourceHandles.mNode.mPrev = &v2->mResourceHandles.mNode;
-  v2->mResourceHandles.mNode.mNext = &v2->mResourceHandles.mNode;
-  if ( (UFG::qResourceData *)v3->mpLastLoadedResource == v2 )
-    v3->mpLastLoadedResource = 0i64;
+  ActionNode::smRoot->vfptr[2].Serialize(ActionNode::smRoot, v5);
+  UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0>::DeleteNodes(&resource_data->mResourceHandles);
+  mPrev = resource_data->mResourceHandles.UFG::qResourceData::mNode.mPrev;
+  mNext = resource_data->mResourceHandles.UFG::qResourceData::mNode.mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  resource_data->mResourceHandles.UFG::qResourceData::mNode.mPrev = &resource_data->mResourceHandles.UFG::qResourceData::mNode;
+  resource_data->mResourceHandles.UFG::qResourceData::mNode.mNext = &resource_data->mResourceHandles.UFG::qResourceData::mNode;
+  if ( this->mpLastLoadedResource == resource_data )
+    this->mpLastLoadedResource = 0i64;
 }
 
 // File Line: 264
 // RVA: 0x2AEF00
-void __fastcall AnimationGroupResourceInventory::Add(AnimationGroupResourceInventory *this, UFG::qResourceData *resource_data)
+void __fastcall AnimationGroupResourceInventory::Add(
+        AnimationGroupResourceInventory *this,
+        UFG::qResourceData *resource_data)
 {
-  UFG::qResourceData *v2; // rbx
   UFG::qBaseNodeRB *v3; // rax
   AnimationGroup *v4; // rdi
   TypeTable *v5; // rcx
-  UFG::qBaseNodeRB *v6; // rax
-  AnimationDataBase *v7; // rax
+  UFG::qBaseNodeRB *mParent; // rax
+  AnimationDataBase *Instance; // rax
 
-  v2 = resource_data;
   v3 = resource_data[1].mNode.mChild[0];
   v4 = 0i64;
   if ( v3 )
@@ -2296,62 +2283,60 @@ void __fastcall AnimationGroupResourceInventory::Add(AnimationGroupResourceInven
   else
     v5 = 0i64;
   Fixup(v5, resource_data);
-  UFG::qResourceData::qResourceData(v2);
-  v6 = v2[1].mNode.mParent;
-  if ( v6 )
-    v4 = (AnimationGroup *)((char *)&v2[1] + (_QWORD)v6);
-  v7 = AnimationDataBase::GetInstance();
-  AnimationDataBase::AddAnimBank(v7, v4);
+  UFG::qResourceData::qResourceData(resource_data);
+  mParent = resource_data[1].mNode.mParent;
+  if ( mParent )
+    v4 = (AnimationGroup *)((char *)&resource_data[1] + (_QWORD)mParent);
+  Instance = AnimationDataBase::GetInstance();
+  AnimationDataBase::AddAnimBank(Instance, v4);
 }
 
 // File Line: 276
 // RVA: 0x2DC5A0
-void __fastcall AnimationGroupResourceInventory::Remove(AnimationGroupResourceInventory *this, UFG::qResourceData *resource_data)
+void __fastcall AnimationGroupResourceInventory::Remove(
+        AnimationGroupResourceInventory *this,
+        UFG::qResourceData *resource_data)
 {
-  UFG::qResourceData *v2; // rsi
-  UFG::qBaseNodeRB *v3; // rax
+  UFG::qBaseNodeRB *mParent; // rax
   AnimationGroup *v4; // rbx
   AnimationGroup *v5; // rdi
-  AnimationDataBase *v6; // rax
+  AnimationDataBase *Instance; // rax
   UFG::qBaseNodeRB *v7; // rax
-  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v8; // rcx
-  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v9; // rax
+  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *mPrev; // rcx
+  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *mNext; // rax
 
-  v2 = resource_data;
-  UFG::qResourceInventory::Remove((UFG::qResourceInventory *)&this->vfptr, resource_data);
-  v3 = v2[1].mNode.mParent;
+  UFG::qResourceInventory::Remove(this, resource_data);
+  mParent = resource_data[1].mNode.mParent;
   v4 = 0i64;
-  if ( v3 )
-    v5 = (AnimationGroup *)((char *)&v2[1] + (_QWORD)v3);
+  if ( mParent )
+    v5 = (AnimationGroup *)((char *)&resource_data[1] + (_QWORD)mParent);
   else
     v5 = 0i64;
-  v6 = AnimationDataBase::GetInstance();
-  AnimationDataBase::RemoveAnimBank(v6, v5);
-  v7 = v2[1].mNode.mParent;
+  Instance = AnimationDataBase::GetInstance();
+  AnimationDataBase::RemoveAnimBank(Instance, v5);
+  v7 = resource_data[1].mNode.mParent;
   if ( v7 )
-    v4 = (AnimationGroup *)((char *)&v2[1] + (_QWORD)v7);
+    v4 = (AnimationGroup *)((char *)&resource_data[1] + (_QWORD)v7);
   AnimationGroup::Destroy(v4);
-  UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0>::DeleteNodes(&v2->mResourceHandles);
-  v8 = v2->mResourceHandles.mNode.mPrev;
-  v9 = v2->mResourceHandles.mNode.mNext;
-  v8->mNext = v9;
-  v9->mPrev = v8;
-  v2->mResourceHandles.mNode.mPrev = &v2->mResourceHandles.mNode;
-  v2->mResourceHandles.mNode.mNext = &v2->mResourceHandles.mNode;
+  UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0>::DeleteNodes(&resource_data->mResourceHandles);
+  mPrev = resource_data->mResourceHandles.mNode.mPrev;
+  mNext = resource_data->mResourceHandles.mNode.mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  resource_data->mResourceHandles.mNode.mPrev = &resource_data->mResourceHandles.mNode;
+  resource_data->mResourceHandles.mNode.mNext = &resource_data->mResourceHandles.mNode;
 }
 
 // File Line: 297
 // RVA: 0x2AEFE0
 void __fastcall RigInfoResourceInventory::Add(RigInfoResourceInventory *this, UFG::qResourceData *resource_data)
 {
-  UFG::qResourceData *v2; // rbx
   UFG::qBaseNodeRB *v3; // rax
   WeightSetGroup *v4; // rdi
   TypeTable *v5; // rcx
-  UFG::qBaseNodeRB *v6; // rax
-  WeightSetDataBase *v7; // rax
+  UFG::qBaseNodeRB *mParent; // rax
+  WeightSetDataBase *Instance; // rax
 
-  v2 = resource_data;
   v3 = resource_data[1].mNode.mChild[0];
   v4 = 0i64;
   if ( v3 )
@@ -2359,57 +2344,51 @@ void __fastcall RigInfoResourceInventory::Add(RigInfoResourceInventory *this, UF
   else
     v5 = 0i64;
   Fixup(v5, resource_data);
-  UFG::qResourceData::qResourceData(v2);
-  v6 = v2[1].mNode.mParent;
-  if ( v6 )
-    v4 = (WeightSetGroup *)((char *)&v2[1] + (_QWORD)v6);
-  v7 = (WeightSetDataBase *)RigInfoDataBase::GetInstance();
-  WeightSetDataBase::AddWeightSetGroup(v7, v4);
+  UFG::qResourceData::qResourceData(resource_data);
+  mParent = resource_data[1].mNode.mParent;
+  if ( mParent )
+    v4 = (WeightSetGroup *)((char *)&resource_data[1] + (_QWORD)mParent);
+  Instance = (WeightSetDataBase *)RigInfoDataBase::GetInstance();
+  WeightSetDataBase::AddWeightSetGroup(Instance, v4);
 }
 
 // File Line: 310
 // RVA: 0x2DC6C0
 void __fastcall RigInfoResourceInventory::Remove(RigInfoResourceInventory *this, UFG::qResourceData *resource_data)
 {
-  UFG::qResourceData *v2; // rbx
-  UFG::qBaseNodeRB *v3; // rax
+  UFG::qBaseNodeRB *mParent; // rax
   WeightSetGroup *v4; // rdi
-  WeightSetDataBase *v5; // rax
-  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v6; // rcx
-  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v7; // rax
-  UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0> *v8; // [rsp+48h] [rbp+10h]
+  WeightSetDataBase *Instance; // rax
+  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *mPrev; // rcx
+  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *mNext; // rax
 
-  v2 = resource_data;
-  UFG::qResourceInventory::Remove((UFG::qResourceInventory *)&this->vfptr, resource_data);
-  v3 = v2[1].mNode.mParent;
-  if ( v3 )
-    v4 = (WeightSetGroup *)((char *)&v2[1] + (_QWORD)v3);
+  UFG::qResourceInventory::Remove(this, resource_data);
+  mParent = resource_data[1].mNode.mParent;
+  if ( mParent )
+    v4 = (WeightSetGroup *)((char *)&resource_data[1] + (_QWORD)mParent);
   else
     v4 = 0i64;
-  v5 = (WeightSetDataBase *)RigInfoDataBase::GetInstance();
-  RigInfoDataBase::RemoveRigInfo(v5, v4);
-  v8 = &v2->mResourceHandles;
-  UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0>::DeleteNodes(&v2->mResourceHandles);
-  v6 = v2->mResourceHandles.mNode.mPrev;
-  v7 = v2->mResourceHandles.mNode.mNext;
-  v6->mNext = v7;
-  v7->mPrev = v6;
-  v8->mNode.mPrev = &v8->mNode;
-  v8->mNode.mNext = &v8->mNode;
+  Instance = (WeightSetDataBase *)RigInfoDataBase::GetInstance();
+  RigInfoDataBase::RemoveRigInfo(Instance, v4);
+  UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0>::DeleteNodes(&resource_data->mResourceHandles);
+  mPrev = resource_data->mResourceHandles.mNode.mPrev;
+  mNext = resource_data->mResourceHandles.mNode.mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  resource_data->mResourceHandles.mNode.mPrev = &resource_data->mResourceHandles.mNode;
+  resource_data->mResourceHandles.mNode.mNext = &resource_data->mResourceHandles.mNode;
 }
 
 // File Line: 330
 // RVA: 0x2AEF70
 void __fastcall BlendTreeResourceInventory::Add(BlendTreeResourceInventory *this, UFG::qResourceData *resource_data)
 {
-  UFG::qResourceData *v2; // rbx
   UFG::qBaseNodeRB *v3; // rax
   PoseNode *v4; // rdi
   TypeTable *v5; // rcx
-  UFG::qBaseNodeRB *v6; // rax
-  BlendTreeDataBase *v7; // rax
+  UFG::qBaseNodeRB *mParent; // rax
+  BlendTreeDataBase *Instance; // rax
 
-  v2 = resource_data;
   v3 = resource_data[1].mNode.mChild[0];
   v4 = 0i64;
   if ( v3 )
@@ -2417,57 +2396,53 @@ void __fastcall BlendTreeResourceInventory::Add(BlendTreeResourceInventory *this
   else
     v5 = 0i64;
   Fixup(v5, resource_data);
-  UFG::qResourceData::qResourceData(v2);
-  v6 = v2[1].mNode.mParent;
-  if ( v6 )
-    v4 = (PoseNode *)((char *)&v2[1] + (_QWORD)v6);
-  v7 = BlendTreeDataBase::GetInstance();
-  BlendTreeDataBase::AddBlendTrees(v7, v4);
+  UFG::qResourceData::qResourceData(resource_data);
+  mParent = resource_data[1].mNode.mParent;
+  if ( mParent )
+    v4 = (PoseNode *)((char *)&resource_data[1] + (_QWORD)mParent);
+  Instance = BlendTreeDataBase::GetInstance();
+  BlendTreeDataBase::AddBlendTrees(Instance, v4);
 }
 
 // File Line: 345
 // RVA: 0x2DC640
 void __fastcall BlendTreeResourceInventory::Remove(BlendTreeResourceInventory *this, UFG::qResourceData *resource_data)
 {
-  UFG::qResourceData *v2; // rbx
-  UFG::qBaseNodeRB *v3; // rax
+  UFG::qBaseNodeRB *mParent; // rax
   PoseNode *v4; // rdi
-  BlendTreeDataBase *v5; // rax
-  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v6; // rcx
-  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v7; // rax
-  UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0> *v8; // [rsp+48h] [rbp+10h]
+  BlendTreeDataBase *Instance; // rax
+  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *mPrev; // rcx
+  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *mNext; // rax
 
-  v2 = resource_data;
-  UFG::qResourceInventory::Remove((UFG::qResourceInventory *)&this->vfptr, resource_data);
-  v3 = v2[1].mNode.mParent;
-  if ( v3 )
-    v4 = (PoseNode *)((char *)&v2[1] + (_QWORD)v3);
+  UFG::qResourceInventory::Remove(this, resource_data);
+  mParent = resource_data[1].mNode.mParent;
+  if ( mParent )
+    v4 = (PoseNode *)((char *)&resource_data[1] + (_QWORD)mParent);
   else
     v4 = 0i64;
-  v5 = BlendTreeDataBase::GetInstance();
-  BlendTreeDataBase::RemoveBlendTrees(v5, v4);
-  v8 = &v2->mResourceHandles;
-  UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0>::DeleteNodes(&v2->mResourceHandles);
-  v6 = v2->mResourceHandles.mNode.mPrev;
-  v7 = v2->mResourceHandles.mNode.mNext;
-  v6->mNext = v7;
-  v7->mPrev = v6;
-  v8->mNode.mPrev = &v8->mNode;
-  v8->mNode.mNext = &v8->mNode;
+  Instance = BlendTreeDataBase::GetInstance();
+  BlendTreeDataBase::RemoveBlendTrees(Instance, v4);
+  UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0>::DeleteNodes(&resource_data->mResourceHandles);
+  mPrev = resource_data->mResourceHandles.mNode.mPrev;
+  mNext = resource_data->mResourceHandles.mNode.mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  resource_data->mResourceHandles.mNode.mPrev = &resource_data->mResourceHandles.mNode;
+  resource_data->mResourceHandles.mNode.mNext = &resource_data->mResourceHandles.mNode;
 }
 
 // File Line: 366
 // RVA: 0x2AF0C0
-void __fastcall WeightSetGroupResourceInventory::Add(WeightSetGroupResourceInventory *this, UFG::qResourceData *resource_data)
+void __fastcall WeightSetGroupResourceInventory::Add(
+        WeightSetGroupResourceInventory *this,
+        UFG::qResourceData *resource_data)
 {
-  UFG::qResourceData *v2; // rbx
   UFG::qBaseNodeRB *v3; // rax
   WeightSetGroup *v4; // rdi
   TypeTable *v5; // rcx
-  UFG::qBaseNodeRB *v6; // rax
-  WeightSetDataBase *v7; // rax
+  UFG::qBaseNodeRB *mParent; // rax
+  WeightSetDataBase *Instance; // rax
 
-  v2 = resource_data;
   v3 = resource_data[1].mNode.mChild[0];
   v4 = 0i64;
   if ( v3 )
@@ -2475,56 +2450,52 @@ void __fastcall WeightSetGroupResourceInventory::Add(WeightSetGroupResourceInven
   else
     v5 = 0i64;
   Fixup(v5, resource_data);
-  UFG::qResourceData::qResourceData(v2);
-  v6 = v2[1].mNode.mParent;
-  if ( v6 )
-    v4 = (WeightSetGroup *)((char *)&v2[1] + (_QWORD)v6);
-  v7 = WeightSetDataBase::GetInstance();
-  WeightSetDataBase::AddWeightSetGroup(v7, v4);
+  UFG::qResourceData::qResourceData(resource_data);
+  mParent = resource_data[1].mNode.mParent;
+  if ( mParent )
+    v4 = (WeightSetGroup *)((char *)&resource_data[1] + (_QWORD)mParent);
+  Instance = WeightSetDataBase::GetInstance();
+  WeightSetDataBase::AddWeightSetGroup(Instance, v4);
 }
 
 // File Line: 378
 // RVA: 0x2DC7A0
-void __fastcall WeightSetGroupResourceInventory::Remove(WeightSetGroupResourceInventory *this, UFG::qResourceData *resource_data)
+void __fastcall WeightSetGroupResourceInventory::Remove(
+        WeightSetGroupResourceInventory *this,
+        UFG::qResourceData *resource_data)
 {
-  UFG::qResourceData *v2; // rbx
-  UFG::qBaseNodeRB *v3; // rax
+  UFG::qBaseNodeRB *mParent; // rax
   WeightSetGroup *v4; // rdi
-  WeightSetDataBase *v5; // rax
-  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v6; // rcx
-  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v7; // rax
-  UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0> *v8; // [rsp+48h] [rbp+10h]
+  WeightSetDataBase *Instance; // rax
+  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *mPrev; // rcx
+  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *mNext; // rax
 
-  v2 = resource_data;
-  UFG::qResourceInventory::Remove((UFG::qResourceInventory *)&this->vfptr, resource_data);
-  v3 = v2[1].mNode.mParent;
-  if ( v3 )
-    v4 = (WeightSetGroup *)((char *)&v2[1] + (_QWORD)v3);
+  UFG::qResourceInventory::Remove(this, resource_data);
+  mParent = resource_data[1].mNode.mParent;
+  if ( mParent )
+    v4 = (WeightSetGroup *)((char *)&resource_data[1] + (_QWORD)mParent);
   else
     v4 = 0i64;
-  v5 = WeightSetDataBase::GetInstance();
-  RigInfoDataBase::RemoveRigInfo(v5, v4);
-  v8 = &v2->mResourceHandles;
-  UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0>::DeleteNodes(&v2->mResourceHandles);
-  v6 = v2->mResourceHandles.mNode.mPrev;
-  v7 = v2->mResourceHandles.mNode.mNext;
-  v6->mNext = v7;
-  v7->mPrev = v6;
-  v8->mNode.mPrev = &v8->mNode;
-  v8->mNode.mNext = &v8->mNode;
+  Instance = WeightSetDataBase::GetInstance();
+  RigInfoDataBase::RemoveRigInfo(Instance, v4);
+  UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0>::DeleteNodes(&resource_data->mResourceHandles);
+  mPrev = resource_data->mResourceHandles.mNode.mPrev;
+  mNext = resource_data->mResourceHandles.mNode.mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  resource_data->mResourceHandles.mNode.mPrev = &resource_data->mResourceHandles.mNode;
+  resource_data->mResourceHandles.mNode.mNext = &resource_data->mResourceHandles.mNode;
 }
 
 // File Line: 432
 // RVA: 0x2AF050
 void __fastcall UELFragmentTableInventory::Add(UELFragmentTableInventory *this, UFG::qResourceData *resource_data)
 {
-  UFG::qResourceData *v2; // rbx
   UFG::qBaseNodeRB *v3; // rax
   BinPtrArray<UEL::FragmentExpression,0,0> *v4; // rdi
   TypeTable *v5; // rcx
-  UFG::qBaseNodeRB *v6; // rax
+  UFG::qBaseNodeRB *mParent; // rax
 
-  v2 = resource_data;
   v3 = resource_data[1].mNode.mChild[0];
   v4 = 0i64;
   if ( v3 )
@@ -2532,10 +2503,10 @@ void __fastcall UELFragmentTableInventory::Add(UELFragmentTableInventory *this, 
   else
     v5 = 0i64;
   Fixup(v5, resource_data);
-  UFG::qResourceData::qResourceData(v2);
-  v6 = v2[1].mNode.mParent;
-  if ( v6 )
-    v4 = (BinPtrArray<UEL::FragmentExpression,0,0> *)((char *)&v2[1] + (_QWORD)v6);
+  UFG::qResourceData::qResourceData(resource_data);
+  mParent = resource_data[1].mNode.mParent;
+  if ( mParent )
+    v4 = (BinPtrArray<UEL::FragmentExpression,0,0> *)((char *)&resource_data[1] + (_QWORD)mParent);
   UFG::UELRuntime::SetFragmentTable(v4 + 1);
 }
 
@@ -2543,21 +2514,17 @@ void __fastcall UELFragmentTableInventory::Add(UELFragmentTableInventory *this, 
 // RVA: 0x2DC740
 void __fastcall UELFragmentTableInventory::Remove(UELFragmentTableInventory *this, UFG::qResourceData *resource_data)
 {
-  UFG::qResourceData *v2; // rbx
-  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v3; // rcx
-  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v4; // rax
-  UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0> *v5; // [rsp+48h] [rbp+10h]
+  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *mPrev; // rcx
+  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *mNext; // rax
 
-  v2 = resource_data;
-  UFG::qResourceInventory::Remove((UFG::qResourceInventory *)&this->vfptr, resource_data);
+  UFG::qResourceInventory::Remove(this, resource_data);
   UFG::UELRuntime::SetFragmentTable(0i64);
-  v5 = &v2->mResourceHandles;
-  UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0>::DeleteNodes(&v2->mResourceHandles);
-  v3 = v2->mResourceHandles.mNode.mPrev;
-  v4 = v2->mResourceHandles.mNode.mNext;
-  v3->mNext = v4;
-  v4->mPrev = v3;
-  v5->mNode.mPrev = &v5->mNode;
-  v5->mNode.mNext = &v5->mNode;
+  UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0>::DeleteNodes(&resource_data->mResourceHandles);
+  mPrev = resource_data->mResourceHandles.mNode.mPrev;
+  mNext = resource_data->mResourceHandles.mNode.mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  resource_data->mResourceHandles.mNode.mPrev = &resource_data->mResourceHandles.mNode;
+  resource_data->mResourceHandles.mNode.mNext = &resource_data->mResourceHandles.mNode;
 }
 

@@ -11,16 +11,16 @@ void __fastcall hkpCompressedMeshShapeBuilder::hkpCompressedMeshShapeBuilder(hkp
   *(_DWORD *)&this->m_leftOver.m_memSizeAndFlags = 0x1FFFF;
   this->m_leftOver.m_vertices.m_data = 0i64;
   this->m_leftOver.m_vertices.m_size = 0;
-  this->m_leftOver.m_vertices.m_capacityAndFlags = 2147483648;
+  this->m_leftOver.m_vertices.m_capacityAndFlags = 0x80000000;
   this->m_leftOver.m_triangles.m_data = 0i64;
   this->m_leftOver.m_triangles.m_size = 0;
-  this->m_leftOver.m_triangles.m_capacityAndFlags = 2147483648;
+  this->m_leftOver.m_triangles.m_capacityAndFlags = 0x80000000;
   this->m_Tjunctions.m_data = 0i64;
   this->m_Tjunctions.m_size = 0;
-  this->m_Tjunctions.m_capacityAndFlags = 2147483648;
+  this->m_Tjunctions.m_capacityAndFlags = 0x80000000;
   this->m_weldedVertices.m_data = 0i64;
   this->m_weldedVertices.m_size = 0;
-  this->m_weldedVertices.m_capacityAndFlags = 2147483648;
+  this->m_weldedVertices.m_capacityAndFlags = 0x80000000;
   *(_QWORD *)&this->m_statistics.m_numVertices = 0i64;
   *(_QWORD *)&this->m_statistics.m_maxExtent = 0i64;
   *(_QWORD *)&this->m_statistics.m_error = 0i64;
@@ -31,48 +31,47 @@ void __fastcall hkpCompressedMeshShapeBuilder::hkpCompressedMeshShapeBuilder(hkp
   this->m_statistics.m_numChunkClones = 0;
   this->m_bigMapping.m_data = 0i64;
   this->m_bigMapping.m_size = 0;
-  this->m_bigMapping.m_capacityAndFlags = 2147483648;
+  this->m_bigMapping.m_capacityAndFlags = 0x80000000;
   this->subparts.m_data = 0i64;
   this->subparts.m_size = 0;
-  this->subparts.m_capacityAndFlags = 2147483648;
+  this->subparts.m_capacityAndFlags = 0x80000000;
   this->m_shapeKeys.m_data = 0i64;
   this->m_shapeKeys.m_size = 0;
-  this->m_shapeKeys.m_capacityAndFlags = 2147483648;
+  this->m_shapeKeys.m_capacityAndFlags = 0x80000000;
   this->m_createMapping = 0;
   this->m_geometry.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable;
   *(_DWORD *)&this->m_geometry.m_memSizeAndFlags = 0x1FFFF;
   this->m_geometry.m_vertices.m_data = 0i64;
   this->m_geometry.m_vertices.m_size = 0;
-  this->m_geometry.m_vertices.m_capacityAndFlags = 2147483648;
+  this->m_geometry.m_vertices.m_capacityAndFlags = 0x80000000;
   this->m_geometry.m_triangles.m_data = 0i64;
   this->m_geometry.m_triangles.m_size = 0;
-  this->m_geometry.m_triangles.m_capacityAndFlags = 2147483648;
+  this->m_geometry.m_triangles.m_capacityAndFlags = 0x80000000;
 }
 
 // File Line: 273
 // RVA: 0x1326940
-void __fastcall hkpCompressedMeshShapeBuilder::MappingTree::~MappingTree(hkpCompressedMeshShapeBuilder::MappingTree *this)
+void __fastcall hkpCompressedMeshShapeBuilder::MappingTree::~MappingTree(
+        hkpCompressedMeshShapeBuilder::MappingTree *this)
 {
-  hkpCompressedMeshShapeBuilder::MappingTree *v1; // rbx
-  hkpCompressedMeshShapeBuilder::MappingTree *v2; // rcx
-  hkpCompressedMeshShapeBuilder::MappingTree *v3; // rcx
-  int v4; // eax
+  hkpCompressedMeshShapeBuilder::MappingTree *m_left; // rcx
+  hkpCompressedMeshShapeBuilder::MappingTree *m_right; // rcx
+  int m_capacityAndFlags; // eax
 
-  v1 = this;
-  v2 = this->m_left;
-  if ( v2 )
-    hkpCompressedMeshShapeBuilder::MappingTree::`scalar deleting destructor(v2, 1u);
-  v3 = v1->m_right;
-  if ( v3 )
-    hkpCompressedMeshShapeBuilder::MappingTree::`scalar deleting destructor(v3, 1u);
-  v4 = v1->m_triangles.m_capacityAndFlags;
-  v1->m_triangles.m_size = 0;
-  if ( v4 >= 0 )
+  m_left = this->m_left;
+  if ( m_left )
+    hkpCompressedMeshShapeBuilder::MappingTree::`scalar deleting destructor(m_left, 1u);
+  m_right = this->m_right;
+  if ( m_right )
+    hkpCompressedMeshShapeBuilder::MappingTree::`scalar deleting destructor(m_right, 1u);
+  m_capacityAndFlags = this->m_triangles.m_capacityAndFlags;
+  this->m_triangles.m_size = 0;
+  if ( m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_triangles.m_data,
-      20 * (v4 & 0x3FFFFFFF));
-  v1->m_triangles.m_capacityAndFlags = 2147483648;
-  v1->m_triangles.m_data = 0i64;
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_triangles.m_data,
+      20 * (m_capacityAndFlags & 0x3FFFFFFF));
+  this->m_triangles.m_capacityAndFlags = 0x80000000;
+  this->m_triangles.m_data = 0i64;
 }
 

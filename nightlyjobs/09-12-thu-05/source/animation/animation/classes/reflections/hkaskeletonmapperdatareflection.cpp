@@ -132,7 +132,7 @@ void dynamic_initializer_for__hkaSkeletonMapperDataClass__()
     &hkaSkeletonMapperData_Default,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 246
@@ -144,15 +144,17 @@ hkClass *__fastcall hkaSkeletonMapperData::staticClass()
 
 // File Line: 253
 // RVA: 0xB1C7E0
-void __fastcall finishLoadedObjecthkaSkeletonMapperData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaSkeletonMapperData(hkaSkeletonMapperData *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaSkeletonMapperData::hkaSkeletonMapperData);
+  if ( p )
+    hkaSkeletonMapperData::hkaSkeletonMapperData(p, finishing);
 }
 
 // File Line: 259
 // RVA: 0xB1C800
-void __fastcall cleanupLoadedObjecthkaSkeletonMapperData(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkaSkeletonMapperData(hkaSkeletonMapperData *p)
 {
-  hkaSkeletonMapperData::~hkaSkeletonMapperData((hkaSkeletonMapperData *)p);
+  hkaSkeletonMapperData::~hkaSkeletonMapperData(p);
 }
 

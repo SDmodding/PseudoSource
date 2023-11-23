@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkaiConvexSilhouetteSetClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 62
@@ -28,23 +28,26 @@ hkClass *__fastcall hkaiConvexSilhouetteSet::staticClass()
 
 // File Line: 69
 // RVA: 0xBB62B0
-void __fastcall finishLoadedObjecthkaiConvexSilhouetteSet(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiConvexSilhouetteSet(
+        hkaiConvexSilhouetteSet *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiConvexSilhouetteSet::hkaiConvexSilhouetteSet);
+  if ( p )
+    hkaiConvexSilhouetteSet::hkaiConvexSilhouetteSet(p, finishing);
 }
 
 // File Line: 75
 // RVA: 0xBB62D0
-void __fastcall cleanupLoadedObjecthkaiConvexSilhouetteSet(void *p)
+void __fastcall cleanupLoadedObjecthkaiConvexSilhouetteSet(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 79
 // RVA: 0xBB62E0
 hkBaseObjectVtbl *__fastcall getVtablehkaiConvexSilhouetteSet()
 {
-  hkaiConvexSilhouetteSet v1; // [rsp+20h] [rbp-68h]
+  hkaiConvexSilhouetteSet v1; // [rsp+20h] [rbp-68h] BYREF
 
   hkaiConvexSilhouetteSet::hkaiConvexSilhouetteSet(&v1, 0);
   return v1.vfptr;
@@ -61,8 +64,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiConvexSilhouetteSetTypeInfo__()
   hkaiConvexSilhouetteSetTypeInfo.m_typeName = "hkaiConvexSilhouetteSet";
   hkaiConvexSilhouetteSetTypeInfo.m_vtable = result;
   hkaiConvexSilhouetteSetTypeInfo.m_scopedName = "!hkaiConvexSilhouetteSet";
-  hkaiConvexSilhouetteSetTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiConvexSilhouetteSet;
-  hkaiConvexSilhouetteSetTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiConvexSilhouetteSet;
+  hkaiConvexSilhouetteSetTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiConvexSilhouetteSet;
+  hkaiConvexSilhouetteSetTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiConvexSilhouetteSet;
   return result;
 }
 

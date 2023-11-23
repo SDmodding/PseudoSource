@@ -28,43 +28,39 @@ hkClass *__fastcall hkpProjectileGun::staticClass()
 
 // File Line: 114
 // RVA: 0xE0B5A0
-void __fastcall finishLoadedObjecthkpProjectileGun(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpProjectileGun(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
-  _DWORD *v2; // rbx
   hkStringPtr *v3; // rcx
-  int v4; // edi
 
   if ( p )
   {
-    v2 = p;
-    v3 = (hkStringPtr *)((char *)p + 24);
+    v3 = p + 3;
     v3[-3].m_stringAndFlag = (const char *)&hkpFirstPersonGun::`vftable;
-    v4 = finishing;
-    hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
-    v2[13] = 2147483648;
-    *((_QWORD *)v2 + 5) = 0i64;
-    v2[12] = 0;
-    if ( v4 )
-      *((_BYTE *)v2 + 16) = 0;
-    *(_QWORD *)v2 = &hkpProjectileGun::`vftable;
-    *((_QWORD *)v2 + 9) = 0i64;
-    v2[20] = 0;
-    v2[21] = 2147483648;
+    hkStringPtr::hkStringPtr(v3, finishing);
+    HIDWORD(p[6].m_stringAndFlag) = 0x80000000;
+    p[5].m_stringAndFlag = 0i64;
+    LODWORD(p[6].m_stringAndFlag) = 0;
+    if ( finishing.m_finishing )
+      LOBYTE(p[2].m_stringAndFlag) = 0;
+    p->m_stringAndFlag = (const char *)&hkpProjectileGun::`vftable;
+    p[9].m_stringAndFlag = 0i64;
+    LODWORD(p[10].m_stringAndFlag) = 0;
+    HIDWORD(p[10].m_stringAndFlag) = 0x80000000;
   }
 }
 
 // File Line: 120
 // RVA: 0xE0B610
-void __fastcall cleanupLoadedObjecthkpProjectileGun(void *p)
+void __fastcall cleanupLoadedObjecthkpProjectileGun(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 124
 // RVA: 0xE0B620
 void **__fastcall getVtablehkpProjectileGun()
 {
-  hkStringPtr v1; // [rsp+38h] [rbp-60h]
+  hkStringPtr v1; // [rsp+38h] [rbp-60h] BYREF
 
   hkStringPtr::hkStringPtr(&v1, 0);
   return &hkpProjectileGun::`vftable;
@@ -81,8 +77,8 @@ void **dynamic_initializer_for__hkpProjectileGunTypeInfo__()
   hkpProjectileGunTypeInfo.m_typeName = "hkpProjectileGun";
   hkpProjectileGunTypeInfo.m_vtable = result;
   hkpProjectileGunTypeInfo.m_scopedName = "!hkpProjectileGun";
-  hkpProjectileGunTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpProjectileGun;
-  hkpProjectileGunTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpProjectileGun;
+  hkpProjectileGunTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpProjectileGun;
+  hkpProjectileGunTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpProjectileGun;
   return result;
 }
 

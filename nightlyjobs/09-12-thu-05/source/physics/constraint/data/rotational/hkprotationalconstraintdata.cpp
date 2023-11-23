@@ -18,40 +18,43 @@ void __fastcall hkpRotationalConstraintData::hkpRotationalConstraintData(hkpRota
 
 // File Line: 23
 // RVA: 0xD4DC90
-void __fastcall hkpRotationalConstraintData::setInWorldSpace(hkpRotationalConstraintData *this, hkQuaternionf *bodyARotation, hkQuaternionf *bodyBRotation)
+void __fastcall hkpRotationalConstraintData::setInWorldSpace(
+        hkpRotationalConstraintData *this,
+        hkQuaternionf *bodyARotation,
+        hkQuaternionf *bodyBRotation)
 {
-  hkpRotationalConstraintData *v3; // rbx
-  hkQuaternionf *v4; // rdi
-
-  v3 = this;
-  v4 = bodyBRotation;
   hkRotationf::set(&this->m_atoms.m_rotations.m_rotationA, bodyARotation);
-  hkRotationf::set(&v3->m_atoms.m_rotations.m_rotationB, v4);
+  hkRotationf::set(&this->m_atoms.m_rotations.m_rotationB, bodyBRotation);
 }
 
 // File Line: 29
 // RVA: 0xD4DC60
 void __fastcall hkpRotationalConstraintData::setInBodySpace(hkpRotationalConstraintData *this, hkQuaternionf *aTb)
 {
-  hkRotationf *v2; // rcx
+  hkRotationf *p_m_rotationB; // rcx
 
-  v2 = &this->m_atoms.m_rotations.m_rotationB;
-  v2[-1].m_col0 = (hkVector4f)transform.m_quad;
-  v2[-1].m_col1 = (hkVector4f)direction.m_quad;
-  v2[-1].m_col2 = (hkVector4f)stru_141A71280.m_quad;
-  hkRotationf::set(v2, aTb);
+  p_m_rotationB = &this->m_atoms.m_rotations.m_rotationB;
+  p_m_rotationB[-1].m_col0 = (hkVector4f)transform.m_quad;
+  p_m_rotationB[-1].m_col1 = (hkVector4f)direction.m_quad;
+  p_m_rotationB[-1].m_col2 = (hkVector4f)stru_141A71280.m_quad;
+  hkRotationf::set(p_m_rotationB, aTb);
 }
 
 // File Line: 35
 // RVA: 0xD4DD50
-void __fastcall hkpRotationalConstraintData::getConstraintInfo(hkpRotationalConstraintData *this, hkpConstraintData::ConstraintInfo *infoOut)
+void __fastcall hkpRotationalConstraintData::getConstraintInfo(
+        hkpRotationalConstraintData *this,
+        hkpConstraintData::ConstraintInfo *infoOut)
 {
-  hkpConstraintData::getConstraintInfoUtil((hkpConstraintAtom *)&this->m_atoms.m_rotations.m_type, 128, infoOut);
+  hkpConstraintData::getConstraintInfoUtil(&this->m_atoms.m_rotations, 0x80u, infoOut);
 }
 
 // File Line: 40
 // RVA: 0xD4DD70
-void __fastcall hkpRotationalConstraintData::getRuntimeInfo(hkpRotationalConstraintData *this, hkBool wantRuntime, hkpConstraintData::RuntimeInfo *infoOut)
+void __fastcall hkpRotationalConstraintData::getRuntimeInfo(
+        hkpRotationalConstraintData *this,
+        hkBool wantRuntime,
+        hkpConstraintData::RuntimeInfo *infoOut)
 {
   if ( wantRuntime.m_bool )
   {
@@ -68,29 +71,22 @@ void __fastcall hkpRotationalConstraintData::getRuntimeInfo(hkpRotationalConstra
 // RVA: 0xD4DCE0
 hkBool *__fastcall hkpRotationalConstraintData::isValid(hkpRotationalConstraintData *this, hkBool *result)
 {
-  hkpRotationalConstraintData *v2; // rdi
-  hkBool *v3; // rbx
-  hkBool *v4; // rax
-
-  v2 = this;
-  v3 = result;
   if ( hkRotationf::isOrthonormal(&this->m_atoms.m_rotations.m_rotationA, 0.0000099999997)
-    && hkRotationf::isOrthonormal(&v2->m_atoms.m_rotations.m_rotationB, 0.0000099999997) )
+    && hkRotationf::isOrthonormal(&this->m_atoms.m_rotations.m_rotationB, 0.0000099999997) )
   {
-    v3->m_bool = 1;
-    v4 = v3;
+    result->m_bool = 1;
+    return result;
   }
   else
   {
-    v3->m_bool = 0;
-    v4 = v3;
+    result->m_bool = 0;
+    return result;
   }
-  return v4;
 }
 
 // File Line: 59
 // RVA: 0xD4DCD0
-signed __int64 __fastcall hkpRotationalConstraintData::getType(hkpRotationalConstraintData *this)
+__int64 __fastcall hkpRotationalConstraintData::getType(hkpRotationalConstraintData *this)
 {
   return 16i64;
 }

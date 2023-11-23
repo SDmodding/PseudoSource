@@ -1,10 +1,16 @@
 // File Line: 151
 // RVA: 0xCE70
-void __fastcall Render::ViewSettings::ViewSettings(Render::ViewSettings *this, UFG::qMatrix44 *world_view, UFG::qMatrix44 *projection, int cull_index, float cull_pixel_density_threshold, float cull_pixel_distance_bias)
+void __fastcall Render::ViewSettings::ViewSettings(
+        Render::ViewSettings *this,
+        UFG::qMatrix44 *world_view,
+        UFG::qMatrix44 *projection,
+        int cull_index,
+        float cull_pixel_density_threshold,
+        float cull_pixel_distance_bias)
 {
-  float v6; // eax
-  float v7; // xmm1_4
-  float v8; // xmm2_4
+  float x; // eax
+  float z; // xmm1_4
+  float w; // xmm2_4
   float v9; // xmm1_4
   float v10; // eax
   float v11; // xmm2_4
@@ -27,13 +33,13 @@ void __fastcall Render::ViewSettings::ViewSettings(Render::ViewSettings *this, U
   float v28; // eax
   float v29; // xmm2_4
 
-  v6 = world_view->v0.x;
-  v7 = world_view->v0.z;
-  v8 = world_view->v0.w;
+  x = world_view->v0.x;
+  z = world_view->v0.z;
+  w = world_view->v0.w;
   this->mWorldView.v0.y = world_view->v0.y;
-  this->mWorldView.v0.z = v7;
-  this->mWorldView.v0.x = v6;
-  this->mWorldView.v0.w = v8;
+  this->mWorldView.v0.z = z;
+  this->mWorldView.v0.x = x;
+  this->mWorldView.v0.w = w;
   v9 = world_view->v1.z;
   v10 = world_view->v1.x;
   v11 = world_view->v1.w;

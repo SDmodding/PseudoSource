@@ -1,9 +1,10 @@
 // File Line: 296
 // RVA: 0x98B6D0
-Scaleform::Render::Size<unsigned long> *__fastcall Scaleform::Render::DrawableImage::GetSize(Scaleform::Render::DrawableImage *this, Scaleform::Render::Size<unsigned long> *result)
+Scaleform::Render::Size<unsigned long> *__fastcall Scaleform::Render::DrawableImage::GetSize(
+        Scaleform::Render::DrawableImage *this,
+        Scaleform::Render::Size<unsigned long> *result)
 {
-  result->Width = this->ISize.Width;
-  result->Height = this->ISize.Height;
+  *result = this->ISize;
   return result;
 }
 

@@ -2,7 +2,7 @@
 // RVA: 0x154DAA0
 __int64 dynamic_initializer_for__UFG::RecorderInterface::s_RecorderInterfaceList__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::RecorderInterface::s_RecorderInterfaceList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::RecorderInterface::s_RecorderInterfaceList__);
 }
 
 // File Line: 29
@@ -24,7 +24,7 @@ __int64 dynamic_initializer_for__UFG::RecorderInterface::_TypeIDesc__()
 // RVA: 0x154DAC0
 __int64 dynamic_initializer_for__UFG::SplineRecorderComponent::s_SplineRecorderComponentList__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::SplineRecorderComponent::s_SplineRecorderComponentList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::SplineRecorderComponent::s_SplineRecorderComponentList__);
 }
 
 // File Line: 45

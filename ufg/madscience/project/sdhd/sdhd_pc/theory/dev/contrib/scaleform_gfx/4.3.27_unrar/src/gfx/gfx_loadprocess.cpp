@@ -2,10 +2,6 @@
 // RVA: 0x8995B0
 void __fastcall Scaleform::GFx::LoadStates::LoadStates(Scaleform::GFx::LoadStates *this)
 {
-  Scaleform::GFx::LoadStates *v1; // rbx
-  signed __int64 v2; // [rsp+48h] [rbp+10h]
-
-  v1 = this;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
@@ -24,62 +20,57 @@ void __fastcall Scaleform::GFx::LoadStates::LoadStates(Scaleform::GFx::LoadState
   this->pWeakResourceLib.pObject = 0i64;
   this->pLoaderImpl.pObject = 0i64;
   Scaleform::String::String(&this->RelativePath);
-  v1->ThreadedLoading = 0;
-  v2 = (signed __int64)&v1->SubstituteFontMovieDefs;
-  *(_OWORD *)v2 = 0ui64;
-  *(_QWORD *)(v2 + 16) = 0i64;
+  this->ThreadedLoading = 0;
+  this->SubstituteFontMovieDefs.Data.Data = 0i64;
+  this->SubstituteFontMovieDefs.Data.Size = 0i64;
+  this->SubstituteFontMovieDefs.Data.Policy.Capacity = 0i64;
 }
 
 // File Line: 44
 // RVA: 0x899220
-void __fastcall Scaleform::GFx::LoadStates::LoadStates(Scaleform::GFx::LoadStates *this, Scaleform::GFx::LoaderImpl *pimpl, Scaleform::GFx::StateBag *pstates, Scaleform::GFx::MovieDefBindStates *pbindStates)
+void __fastcall Scaleform::GFx::LoadStates::LoadStates(
+        Scaleform::GFx::LoadStates *this,
+        Scaleform::GFx::Resource *pimpl,
+        Scaleform::GFx::ResourceLibBase **pstates,
+        Scaleform::GFx::MovieDefBindStates *pbindStates)
 {
-  Scaleform::GFx::MovieDefBindStates *v4; // r15
-  Scaleform::GFx::StateBag *v5; // rdi
-  Scaleform::GFx::LoaderImpl *v6; // rbp
-  Scaleform::GFx::LoadStates *v7; // rbx
   Scaleform::GFx::MovieDefBindStates *v8; // rsi
-  Scaleform::Array<Scaleform::Ptr<Scaleform::GFx::MovieDefImpl>,2,Scaleform::ArrayDefaultPolicy> *v9; // rax
-  Scaleform::Render::RenderBuffer *v10; // rcx
-  Scaleform::GFx::ResourceWeakLib *v11; // r14
-  Scaleform::Render::RenderBuffer *v12; // rcx
+  Scaleform::Render::RenderBuffer *pObject; // rcx
+  Scaleform::GFx::ResourceWeakLib *pLib; // r14
+  Scaleform::Render::RenderBuffer *v11; // rcx
+  Scaleform::GFx::MovieDefBindStates *v12; // rax
   Scaleform::GFx::MovieDefBindStates *v13; // rax
   Scaleform::GFx::MovieDefBindStates *v14; // rax
-  Scaleform::GFx::MovieDefBindStates *v15; // rax
-  Scaleform::Render::RenderBuffer *v16; // rcx
-  Scaleform::GFx::Resource **v17; // rsi
-  Scaleform::Render::RenderBuffer *v18; // rcx
-  Scaleform::GFx::Resource **v19; // rsi
-  Scaleform::Render::RenderBuffer *v20; // rcx
-  Scaleform::GFx::Resource **v21; // rsi
-  Scaleform::Render::RenderBuffer *v22; // rcx
-  Scaleform::GFx::Resource **v23; // rsi
-  Scaleform::Render::RenderBuffer *v24; // rcx
-  Scaleform::GFx::Resource **v25; // rsi
-  Scaleform::Render::RenderBuffer *v26; // rcx
-  Scaleform::GFx::Resource **v27; // rsi
-  Scaleform::Render::RenderBuffer *v28; // rcx
-  Scaleform::GFx::Resource **v29; // rsi
-  Scaleform::Render::RenderBuffer *v30; // rcx
-  Scaleform::GFx::Resource **v31; // rdi
-  Scaleform::Render::RenderBuffer *v32; // rcx
-  Scaleform::Ptr<Scaleform::GFx::TaskManager> v33; // [rsp+20h] [rbp-78h]
-  Scaleform::Ptr<Scaleform::GFx::ImageFileHandlerRegistry> v34; // [rsp+28h] [rbp-70h]
-  Scaleform::Ptr<Scaleform::GFx::ZlibSupportBase> v35; // [rsp+30h] [rbp-68h]
-  Scaleform::Ptr<Scaleform::GFx::ASSupport> v36; // [rsp+38h] [rbp-60h]
-  Scaleform::Ptr<Scaleform::GFx::ASSupport> v37; // [rsp+40h] [rbp-58h]
-  __int64 v38; // [rsp+48h] [rbp-50h]
-  Scaleform::Array<Scaleform::Ptr<Scaleform::GFx::MovieDefImpl>,2,Scaleform::ArrayDefaultPolicy> *v39; // [rsp+50h] [rbp-48h]
-  void *v40; // [rsp+58h] [rbp-40h]
-  Scaleform::Ptr<Scaleform::GFx::LogState> result; // [rsp+A8h] [rbp+10h]
-  Scaleform::Ptr<Scaleform::GFx::ParseControl> v42; // [rsp+B0h] [rbp+18h]
-  Scaleform::Ptr<Scaleform::GFx::ProgressHandler> v43; // [rsp+B8h] [rbp+20h]
+  Scaleform::Render::RenderBuffer *v15; // rcx
+  Scaleform::GFx::Resource **LogState; // rsi
+  Scaleform::Render::RenderBuffer *v17; // rcx
+  Scaleform::GFx::Resource **ParseControl; // rsi
+  Scaleform::Render::RenderBuffer *v19; // rcx
+  Scaleform::GFx::Resource **ProgressHandler; // rsi
+  Scaleform::Render::RenderBuffer *v21; // rcx
+  Scaleform::GFx::Resource **TaskManager; // rsi
+  Scaleform::Render::RenderBuffer *v23; // rcx
+  Scaleform::GFx::Resource **ImageFileHandlerRegistry; // rsi
+  Scaleform::Render::RenderBuffer *v25; // rcx
+  Scaleform::GFx::Resource **ZlibSupport; // rsi
+  Scaleform::Render::RenderBuffer *v27; // rcx
+  Scaleform::GFx::Resource **AS2Support; // rsi
+  Scaleform::Render::RenderBuffer *v29; // rcx
+  Scaleform::GFx::Resource **AS3Support; // rdi
+  Scaleform::Render::RenderBuffer *v31; // rcx
+  Scaleform::Ptr<Scaleform::GFx::TaskManager> v32; // [rsp+20h] [rbp-78h] BYREF
+  Scaleform::Ptr<Scaleform::GFx::ImageFileHandlerRegistry> v33; // [rsp+28h] [rbp-70h] BYREF
+  Scaleform::Ptr<Scaleform::GFx::ZlibSupportBase> v34; // [rsp+30h] [rbp-68h] BYREF
+  Scaleform::Ptr<Scaleform::GFx::ASSupport> v35; // [rsp+38h] [rbp-60h] BYREF
+  Scaleform::Ptr<Scaleform::GFx::ASSupport> v36; // [rsp+40h] [rbp-58h] BYREF
+  __int64 v37; // [rsp+48h] [rbp-50h]
+  Scaleform::Array<Scaleform::Ptr<Scaleform::GFx::MovieDefImpl>,2,Scaleform::ArrayDefaultPolicy> *p_SubstituteFontMovieDefs; // [rsp+50h] [rbp-48h]
+  Scaleform::Array<Scaleform::Ptr<Scaleform::GFx::MovieDefImpl>,2,Scaleform::ArrayDefaultPolicy> *v39; // [rsp+58h] [rbp-40h]
+  Scaleform::Ptr<Scaleform::GFx::LogState> result; // [rsp+A8h] [rbp+10h] BYREF
+  Scaleform::Ptr<Scaleform::GFx::ParseControl> v41; // [rsp+B0h] [rbp+18h] BYREF
+  Scaleform::Ptr<Scaleform::GFx::ProgressHandler> v42; // [rsp+B8h] [rbp+20h] BYREF
 
-  v38 = -2i64;
-  v4 = pbindStates;
-  v5 = pstates;
-  v6 = pimpl;
-  v7 = this;
+  v37 = -2i64;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
@@ -99,130 +90,144 @@ void __fastcall Scaleform::GFx::LoadStates::LoadStates(Scaleform::GFx::LoadState
   this->pWeakResourceLib.pObject = 0i64;
   this->pLoaderImpl.pObject = 0i64;
   Scaleform::String::String(&this->RelativePath);
-  v7->ThreadedLoading = 0;
-  v9 = &v7->SubstituteFontMovieDefs;
-  v39 = v9;
-  v40 = &v7->SubstituteFontMovieDefs;
-  v9->Data.Data = 0i64;
-  v9->Data.Size = 0i64;
-  v9->Data.Policy.Capacity = 0i64;
-  if ( v6 )
-    Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)v6);
-  v10 = (Scaleform::Render::RenderBuffer *)v7->pLoaderImpl.pObject;
-  if ( v10 )
-    Scaleform::RefCountImpl::Release(v10);
-  v7->pLoaderImpl.pObject = v6;
-  v11 = v6->pWeakResourceLib.pObject;
+  this->ThreadedLoading = 0;
+  p_SubstituteFontMovieDefs = &this->SubstituteFontMovieDefs;
+  v39 = &this->SubstituteFontMovieDefs;
+  this->SubstituteFontMovieDefs.Data.Data = 0i64;
+  this->SubstituteFontMovieDefs.Data.Size = 0i64;
+  this->SubstituteFontMovieDefs.Data.Policy.Capacity = 0i64;
+  if ( pimpl )
+    Scaleform::Render::RenderBuffer::AddRef(pimpl);
+  pObject = (Scaleform::Render::RenderBuffer *)this->pLoaderImpl.pObject;
+  if ( pObject )
+    Scaleform::RefCountImpl::Release(pObject);
+  this->pLoaderImpl.pObject = (Scaleform::GFx::LoaderImpl *)pimpl;
+  pLib = (Scaleform::GFx::ResourceWeakLib *)pimpl[1].pLib;
+  if ( pLib )
+    Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)pimpl[1].pLib);
+  v11 = (Scaleform::Render::RenderBuffer *)this->pWeakResourceLib.pObject;
   if ( v11 )
-    Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)v6->pWeakResourceLib.pObject);
-  v12 = (Scaleform::Render::RenderBuffer *)v7->pWeakResourceLib.pObject;
-  if ( v12 )
-    Scaleform::RefCountImpl::Release(v12);
-  v7->pWeakResourceLib.pObject = v11;
-  if ( !v5 )
-    v5 = (Scaleform::GFx::StateBag *)&v6->vfptr;
-  v13 = (Scaleform::GFx::MovieDefBindStates *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
+    Scaleform::RefCountImpl::Release(v11);
+  this->pWeakResourceLib.pObject = pLib;
+  if ( !pstates )
+    pstates = &pimpl->pLib;
+  v12 = (Scaleform::GFx::MovieDefBindStates *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
                                                 Scaleform::Memory::pGlobalHeap,
                                                 80i64);
-  v40 = v13;
-  if ( v4 )
+  v39 = (Scaleform::Array<Scaleform::Ptr<Scaleform::GFx::MovieDefImpl>,2,Scaleform::ArrayDefaultPolicy> *)v12;
+  if ( pbindStates )
   {
-    if ( v13 )
+    if ( v12 )
     {
-      Scaleform::GFx::MovieDefBindStates::MovieDefBindStates(v13, v4);
-      v8 = v14;
+      Scaleform::GFx::MovieDefBindStates::MovieDefBindStates(v12, pbindStates);
+      v8 = v13;
     }
   }
-  else if ( v13 )
+  else if ( v12 )
   {
-    Scaleform::GFx::MovieDefBindStates::MovieDefBindStates(v13, v5);
-    v8 = v15;
+    Scaleform::GFx::MovieDefBindStates::MovieDefBindStates(v12, (Scaleform::GFx::StateBag *)pstates);
+    v8 = v14;
   }
-  v16 = (Scaleform::Render::RenderBuffer *)v7->pBindStates.pObject;
-  if ( v16 )
-    Scaleform::RefCountImpl::Release(v16);
-  v7->pBindStates.pObject = v8;
-  v17 = (Scaleform::GFx::Resource **)Scaleform::GFx::StateBag::GetLogState(v5, &result);
-  if ( *v17 )
-    Scaleform::Render::RenderBuffer::AddRef(*v17);
-  v18 = (Scaleform::Render::RenderBuffer *)v7->pLog.pObject;
-  if ( v18 )
-    Scaleform::RefCountImpl::Release(v18);
-  v7->pLog.pObject = (Scaleform::GFx::LogState *)*v17;
+  v15 = (Scaleform::Render::RenderBuffer *)this->pBindStates.pObject;
+  if ( v15 )
+    Scaleform::RefCountImpl::Release(v15);
+  this->pBindStates.pObject = v8;
+  LogState = (Scaleform::GFx::Resource **)Scaleform::GFx::StateBag::GetLogState(
+                                            (Scaleform::GFx::StateBag *)pstates,
+                                            &result);
+  if ( *LogState )
+    Scaleform::Render::RenderBuffer::AddRef(*LogState);
+  v17 = (Scaleform::Render::RenderBuffer *)this->pLog.pObject;
+  if ( v17 )
+    Scaleform::RefCountImpl::Release(v17);
+  this->pLog.pObject = (Scaleform::GFx::LogState *)*LogState;
   if ( result.pObject )
     Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)result.pObject);
-  v19 = (Scaleform::GFx::Resource **)Scaleform::GFx::StateBag::GetParseControl(v5, &v42);
-  if ( *v19 )
-    Scaleform::Render::RenderBuffer::AddRef(*v19);
-  v20 = (Scaleform::Render::RenderBuffer *)v7->pParseControl.pObject;
-  if ( v20 )
-    Scaleform::RefCountImpl::Release(v20);
-  v7->pParseControl.pObject = (Scaleform::GFx::ParseControl *)*v19;
+  ParseControl = (Scaleform::GFx::Resource **)Scaleform::GFx::StateBag::GetParseControl(
+                                                (Scaleform::GFx::StateBag *)pstates,
+                                                &v41);
+  if ( *ParseControl )
+    Scaleform::Render::RenderBuffer::AddRef(*ParseControl);
+  v19 = (Scaleform::Render::RenderBuffer *)this->pParseControl.pObject;
+  if ( v19 )
+    Scaleform::RefCountImpl::Release(v19);
+  this->pParseControl.pObject = (Scaleform::GFx::ParseControl *)*ParseControl;
+  if ( v41.pObject )
+    Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v41.pObject);
+  ProgressHandler = (Scaleform::GFx::Resource **)Scaleform::GFx::StateBag::GetProgressHandler(
+                                                   (Scaleform::GFx::StateBag *)pstates,
+                                                   &v42);
+  if ( *ProgressHandler )
+    Scaleform::Render::RenderBuffer::AddRef(*ProgressHandler);
+  v21 = (Scaleform::Render::RenderBuffer *)this->pProgressHandler.pObject;
+  if ( v21 )
+    Scaleform::RefCountImpl::Release(v21);
+  this->pProgressHandler.pObject = (Scaleform::GFx::ProgressHandler *)*ProgressHandler;
   if ( v42.pObject )
     Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v42.pObject);
-  v21 = (Scaleform::GFx::Resource **)Scaleform::GFx::StateBag::GetProgressHandler(v5, &v43);
-  if ( *v21 )
-    Scaleform::Render::RenderBuffer::AddRef(*v21);
-  v22 = (Scaleform::Render::RenderBuffer *)v7->pProgressHandler.pObject;
-  if ( v22 )
-    Scaleform::RefCountImpl::Release(v22);
-  v7->pProgressHandler.pObject = (Scaleform::GFx::ProgressHandler *)*v21;
-  if ( v43.pObject )
-    Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v43.pObject);
-  v23 = (Scaleform::GFx::Resource **)Scaleform::GFx::StateBag::GetTaskManager(v5, &v33);
-  if ( *v23 )
-    Scaleform::Render::RenderBuffer::AddRef(*v23);
-  v24 = (Scaleform::Render::RenderBuffer *)v7->pTaskManager.pObject;
-  if ( v24 )
-    Scaleform::RefCountImpl::Release(v24);
-  v7->pTaskManager.pObject = (Scaleform::GFx::TaskManager *)*v23;
+  TaskManager = (Scaleform::GFx::Resource **)Scaleform::GFx::StateBag::GetTaskManager(
+                                               (Scaleform::GFx::StateBag *)pstates,
+                                               &v32);
+  if ( *TaskManager )
+    Scaleform::Render::RenderBuffer::AddRef(*TaskManager);
+  v23 = (Scaleform::Render::RenderBuffer *)this->pTaskManager.pObject;
+  if ( v23 )
+    Scaleform::RefCountImpl::Release(v23);
+  this->pTaskManager.pObject = (Scaleform::GFx::TaskManager *)*TaskManager;
+  if ( v32.pObject )
+    Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v32.pObject);
+  ImageFileHandlerRegistry = (Scaleform::GFx::Resource **)Scaleform::GFx::StateBag::GetImageFileHandlerRegistry(
+                                                            (Scaleform::GFx::StateBag *)pstates,
+                                                            &v33);
+  if ( *ImageFileHandlerRegistry )
+    Scaleform::Render::RenderBuffer::AddRef(*ImageFileHandlerRegistry);
+  v25 = (Scaleform::Render::RenderBuffer *)this->pImageFileHandlerRegistry.pObject;
+  if ( v25 )
+    Scaleform::RefCountImpl::Release(v25);
+  this->pImageFileHandlerRegistry.pObject = (Scaleform::GFx::ImageFileHandlerRegistry *)*ImageFileHandlerRegistry;
   if ( v33.pObject )
     Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v33.pObject);
-  v25 = (Scaleform::GFx::Resource **)Scaleform::GFx::StateBag::GetImageFileHandlerRegistry(v5, &v34);
-  if ( *v25 )
-    Scaleform::Render::RenderBuffer::AddRef(*v25);
-  v26 = (Scaleform::Render::RenderBuffer *)v7->pImageFileHandlerRegistry.pObject;
-  if ( v26 )
-    Scaleform::RefCountImpl::Release(v26);
-  v7->pImageFileHandlerRegistry.pObject = (Scaleform::GFx::ImageFileHandlerRegistry *)*v25;
+  ZlibSupport = (Scaleform::GFx::Resource **)Scaleform::GFx::StateBag::GetZlibSupport(
+                                               (Scaleform::GFx::StateBag *)pstates,
+                                               &v34);
+  if ( *ZlibSupport )
+    Scaleform::Render::RenderBuffer::AddRef(*ZlibSupport);
+  v27 = (Scaleform::Render::RenderBuffer *)this->pZlibSupport.pObject;
+  if ( v27 )
+    Scaleform::RefCountImpl::Release(v27);
+  this->pZlibSupport.pObject = (Scaleform::GFx::ZlibSupportBase *)*ZlibSupport;
   if ( v34.pObject )
     Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v34.pObject);
-  v27 = (Scaleform::GFx::Resource **)Scaleform::GFx::StateBag::GetZlibSupport(v5, &v35);
-  if ( *v27 )
-    Scaleform::Render::RenderBuffer::AddRef(*v27);
-  v28 = (Scaleform::Render::RenderBuffer *)v7->pZlibSupport.pObject;
-  if ( v28 )
-    Scaleform::RefCountImpl::Release(v28);
-  v7->pZlibSupport.pObject = (Scaleform::GFx::ZlibSupportBase *)*v27;
+  AS2Support = (Scaleform::GFx::Resource **)Scaleform::GFx::StateBag::GetAS2Support(
+                                              (Scaleform::GFx::StateBag *)pstates,
+                                              &v35);
+  if ( *AS2Support )
+    Scaleform::Render::RenderBuffer::AddRef(*AS2Support);
+  v29 = (Scaleform::Render::RenderBuffer *)this->pAS2Support.pObject;
+  if ( v29 )
+    Scaleform::RefCountImpl::Release(v29);
+  this->pAS2Support.pObject = (Scaleform::GFx::ASSupport *)*AS2Support;
   if ( v35.pObject )
     Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v35.pObject);
-  v29 = (Scaleform::GFx::Resource **)Scaleform::GFx::StateBag::GetAS2Support(v5, &v36);
-  if ( *v29 )
-    Scaleform::Render::RenderBuffer::AddRef(*v29);
-  v30 = (Scaleform::Render::RenderBuffer *)v7->pAS2Support.pObject;
-  if ( v30 )
-    Scaleform::RefCountImpl::Release(v30);
-  v7->pAS2Support.pObject = (Scaleform::GFx::ASSupport *)*v29;
+  AS3Support = (Scaleform::GFx::Resource **)Scaleform::GFx::StateBag::GetAS3Support(
+                                              (Scaleform::GFx::StateBag *)pstates,
+                                              &v36);
+  if ( *AS3Support )
+    Scaleform::Render::RenderBuffer::AddRef(*AS3Support);
+  v31 = (Scaleform::Render::RenderBuffer *)this->pAS3Support.pObject;
+  if ( v31 )
+    Scaleform::RefCountImpl::Release(v31);
+  this->pAS3Support.pObject = (Scaleform::GFx::ASSupport *)*AS3Support;
   if ( v36.pObject )
     Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v36.pObject);
-  v31 = (Scaleform::GFx::Resource **)Scaleform::GFx::StateBag::GetAS3Support(v5, &v37);
-  if ( *v31 )
-    Scaleform::Render::RenderBuffer::AddRef(*v31);
-  v32 = (Scaleform::Render::RenderBuffer *)v7->pAS3Support.pObject;
-  if ( v32 )
-    Scaleform::RefCountImpl::Release(v32);
-  v7->pAS3Support.pObject = (Scaleform::GFx::ASSupport *)*v31;
-  if ( v37.pObject )
-    Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v37.pObject);
 }
 
 // File Line: 80
 // RVA: 0x8A5430
 void __fastcall Scaleform::GFx::LoadStates::~LoadStates(Scaleform::GFx::LoadStates *this)
 {
-  Scaleform::GFx::LoadStates *v1; // rdi
-  Scaleform::Array<Scaleform::Ptr<Scaleform::GFx::MovieDefImpl>,2,Scaleform::ArrayDefaultPolicy> *v2; // rbx
-  Scaleform::Render::RenderBuffer *v3; // rcx
+  Scaleform::Array<Scaleform::Ptr<Scaleform::GFx::MovieDefImpl>,2,Scaleform::ArrayDefaultPolicy> *p_SubstituteFontMovieDefs; // rbx
+  Scaleform::Render::RenderBuffer *pObject; // rcx
   Scaleform::Render::RenderBuffer *v4; // rcx
   Scaleform::Render::RenderBuffer *v5; // rcx
   Scaleform::Render::RenderBuffer *v6; // rcx
@@ -234,50 +239,49 @@ void __fastcall Scaleform::GFx::LoadStates::~LoadStates(Scaleform::GFx::LoadStat
   Scaleform::Render::RenderBuffer *v12; // rcx
   Scaleform::Render::RenderBuffer *v13; // rcx
 
-  v1 = this;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::LoadStates::`vftable;
-  v2 = &this->SubstituteFontMovieDefs;
+  p_SubstituteFontMovieDefs = &this->SubstituteFontMovieDefs;
   Scaleform::ConstructorMov<Scaleform::Ptr<Scaleform::GFx::MovieDefImpl>>::DestructArray(
     this->SubstituteFontMovieDefs.Data.Data,
     this->SubstituteFontMovieDefs.Data.Size);
-  if ( v2->Data.Data )
-    ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
-  if ( !_InterlockedDecrement((volatile signed __int32 *)((v1->RelativePath.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-    ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
-  v3 = (Scaleform::Render::RenderBuffer *)v1->pLoaderImpl.pObject;
-  if ( v3 )
-    Scaleform::RefCountImpl::Release(v3);
-  v4 = (Scaleform::Render::RenderBuffer *)v1->pWeakResourceLib.pObject;
+  if ( p_SubstituteFontMovieDefs->Data.Data )
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+  if ( !_InterlockedDecrement((volatile signed __int32 *)((this->RelativePath.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+  pObject = (Scaleform::Render::RenderBuffer *)this->pLoaderImpl.pObject;
+  if ( pObject )
+    Scaleform::RefCountImpl::Release(pObject);
+  v4 = (Scaleform::Render::RenderBuffer *)this->pWeakResourceLib.pObject;
   if ( v4 )
     Scaleform::RefCountImpl::Release(v4);
-  v5 = (Scaleform::Render::RenderBuffer *)v1->pAS3Support.pObject;
+  v5 = (Scaleform::Render::RenderBuffer *)this->pAS3Support.pObject;
   if ( v5 )
     Scaleform::RefCountImpl::Release(v5);
-  v6 = (Scaleform::Render::RenderBuffer *)v1->pAS2Support.pObject;
+  v6 = (Scaleform::Render::RenderBuffer *)this->pAS2Support.pObject;
   if ( v6 )
     Scaleform::RefCountImpl::Release(v6);
-  v7 = (Scaleform::Render::RenderBuffer *)v1->pZlibSupport.pObject;
+  v7 = (Scaleform::Render::RenderBuffer *)this->pZlibSupport.pObject;
   if ( v7 )
     Scaleform::RefCountImpl::Release(v7);
-  v8 = (Scaleform::Render::RenderBuffer *)v1->pImageFileHandlerRegistry.pObject;
+  v8 = (Scaleform::Render::RenderBuffer *)this->pImageFileHandlerRegistry.pObject;
   if ( v8 )
     Scaleform::RefCountImpl::Release(v8);
-  v9 = (Scaleform::Render::RenderBuffer *)v1->pTaskManager.pObject;
+  v9 = (Scaleform::Render::RenderBuffer *)this->pTaskManager.pObject;
   if ( v9 )
     Scaleform::RefCountImpl::Release(v9);
-  v10 = (Scaleform::Render::RenderBuffer *)v1->pProgressHandler.pObject;
+  v10 = (Scaleform::Render::RenderBuffer *)this->pProgressHandler.pObject;
   if ( v10 )
     Scaleform::RefCountImpl::Release(v10);
-  v11 = (Scaleform::Render::RenderBuffer *)v1->pParseControl.pObject;
+  v11 = (Scaleform::Render::RenderBuffer *)this->pParseControl.pObject;
   if ( v11 )
     Scaleform::RefCountImpl::Release(v11);
-  v12 = (Scaleform::Render::RenderBuffer *)v1->pLog.pObject;
+  v12 = (Scaleform::Render::RenderBuffer *)this->pLog.pObject;
   if ( v12 )
     Scaleform::RefCountImpl::Release(v12);
-  v13 = (Scaleform::Render::RenderBuffer *)v1->pBindStates.pObject;
+  v13 = (Scaleform::Render::RenderBuffer *)this->pBindStates.pObject;
   if ( v13 )
     Scaleform::RefCountImpl::Release(v13);
-  Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&v1->vfptr);
+  Scaleform::RefCountImplCore::~RefCountImplCore(this);
 }
 
 // File Line: 103
@@ -289,77 +293,77 @@ Scaleform::GFx::ImageCreator *__fastcall Scaleform::GFx::LoadStates::GetImageCre
 
 // File Line: 109
 // RVA: 0x90ADA0
-void __fastcall Scaleform::GFx::LoadStates::SetRelativePathForDataDef(Scaleform::GFx::LoadStates *this, Scaleform::GFx::MovieDataDef *pdef)
+void __fastcall Scaleform::GFx::LoadStates::SetRelativePathForDataDef(
+        Scaleform::GFx::LoadStates *this,
+        Scaleform::GFx::MovieDataDef *pdef)
 {
-  Scaleform::String *v2; // rbx
+  Scaleform::String *p_RelativePath; // rbx
 
-  v2 = &this->RelativePath;
+  p_RelativePath = &this->RelativePath;
   Scaleform::String::operator=(
     &this->RelativePath,
     (const char *)((pdef->pData.pObject->FileURL.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12));
-  if ( !Scaleform::GFx::URLBuilder::ExtractFilePath(v2) )
-    Scaleform::String::Clear(v2);
+  if ( !Scaleform::GFx::URLBuilder::ExtractFilePath(p_RelativePath) )
+    Scaleform::String::Clear(p_RelativePath);
 }
 
 // File Line: 120
 // RVA: 0x8EECE0
-Scaleform::File *__fastcall Scaleform::GFx::LoadStates::OpenFile(Scaleform::GFx::LoadStates *this, const char *pfilename, unsigned int loadConstants)
+Scaleform::File *__fastcall Scaleform::GFx::LoadStates::OpenFile(
+        Scaleform::GFx::LoadStates *this,
+        const char *pfilename,
+        unsigned int loadConstants)
 {
-  const char *v3; // rdi
-  Scaleform::GFx::LoadStates *v4; // rbx
   Scaleform::GFx::LogState *v5; // rcx
-  Scaleform::File *result; // rax
-  Scaleform::Log *v7; // r8
-  signed int v8; // ST20_4
+  Scaleform::Log *pObject; // r8
 
-  v3 = pfilename;
-  v4 = this;
   if ( this->pBindStates.pObject->pFileOpener.pObject )
   {
-    if ( _bittest((const signed int *)&loadConstants, 0x15u) )
+    if ( (loadConstants & 0x200000) != 0 )
     {
-      v7 = 0i64;
+      pObject = 0i64;
     }
     else
     {
-      v7 = this->pLog.pObject->pLog.pObject;
-      if ( !v7 )
-        v7 = Scaleform::Log::GetGlobalLog();
+      pObject = this->pLog.pObject->pLog.pObject;
+      if ( !pObject )
+        pObject = Scaleform::Log::GetGlobalLog();
     }
-    v8 = 438;
-    result = (Scaleform::File *)((__int64 (__fastcall *)(Scaleform::GFx::FileOpener *, const char *, Scaleform::Log *, signed __int64, signed int))v4->pBindStates.pObject->pFileOpener.pObject->vfptr[3].__vecDelDtor)(
-                                  v4->pBindStates.pObject->pFileOpener.pObject,
-                                  v3,
-                                  v7,
-                                  33i64,
-                                  v8);
+    return (Scaleform::File *)((__int64 (__fastcall *)(Scaleform::GFx::FileOpener *, const char *, Scaleform::Log *, __int64, int))this->pBindStates.pObject->pFileOpener.pObject->vfptr[3].__vecDelDtor)(
+                                this->pBindStates.pObject->pFileOpener.pObject,
+                                pfilename,
+                                pObject,
+                                33i64,
+                                438);
   }
   else
   {
     v5 = this->pLog.pObject;
     if ( v5 )
     {
-      if ( !_bittest((const signed int *)&loadConstants, 0x15u) )
+      if ( (loadConstants & 0x200000) == 0 )
         Scaleform::GFx::LogBase<Scaleform::GFx::LogState>::LogError(
-          (Scaleform::GFx::LogBase<Scaleform::GFx::LogState> *)&v5->vfptr,
+          &v5->Scaleform::GFx::LogBase<Scaleform::GFx::LogState>,
           "Loader failed to open %s, FileOpener not installe",
           pfilename);
     }
-    result = 0i64;
+    return 0i64;
   }
-  return result;
 }
 
 // File Line: 136
 // RVA: 0x8B8900
-void __fastcall Scaleform::GFx::LoadStates::BuildURL(Scaleform::GFx::LoadStates *this, Scaleform::String *pdest, Scaleform::GFx::URLBuilder::LocationInfo *loc)
+void __fastcall Scaleform::GFx::LoadStates::BuildURL(
+        Scaleform::GFx::LoadStates *this,
+        Scaleform::String *pdest,
+        Scaleform::GFx::URLBuilder::LocationInfo *loc)
 {
-  Scaleform::GFx::URLBuilder *v3; // rcx
+  Scaleform::GFx::URLBuilder *pObject; // rcx
 
-  v3 = this->pBindStates.pObject->pURLBulider.pObject;
-  if ( v3 )
-    ((void (__fastcall *)(Scaleform::GFx::URLBuilder *, Scaleform::String *, Scaleform::GFx::URLBuilder::LocationInfo *, Scaleform::String *))v3->vfptr[1].__vecDelDtor)(
-      v3,
+  pObject = this->pBindStates.pObject->pURLBulider.pObject;
+  if ( pObject )
+    ((void (__fastcall *)(Scaleform::GFx::URLBuilder *, Scaleform::String *, Scaleform::GFx::URLBuilder::LocationInfo *, Scaleform::String *))pObject->vfptr[1].__vecDelDtor)(
+      pObject,
       pdest,
       loc,
       pdest);
@@ -371,7 +375,6 @@ void __fastcall Scaleform::GFx::LoadStates::BuildURL(Scaleform::GFx::LoadStates 
 // RVA: 0x8BCD70
 Scaleform::GFx::LoadStates *__fastcall Scaleform::GFx::LoadStates::CloneForImport(Scaleform::GFx::LoadStates *this)
 {
-  Scaleform::GFx::LoadStates *v1; // rdi
   Scaleform::GFx::MovieDefBindStates *v2; // rax
   _QWORD *v3; // rbx
   Scaleform::GFx::Resource *v4; // rax
@@ -379,7 +382,7 @@ Scaleform::GFx::LoadStates *__fastcall Scaleform::GFx::LoadStates::CloneForImpor
   Scaleform::GFx::LoadStates *v6; // rax
   _QWORD *v7; // rax
   Scaleform::Render::RenderBuffer *v8; // rcx
-  Scaleform::GFx::Resource *v9; // rcx
+  Scaleform::GFx::Resource *pObject; // rcx
   Scaleform::Render::RenderBuffer *v10; // rcx
   Scaleform::GFx::Resource *v11; // rcx
   Scaleform::Render::RenderBuffer *v12; // rcx
@@ -389,9 +392,9 @@ Scaleform::GFx::LoadStates *__fastcall Scaleform::GFx::LoadStates::CloneForImpor
   Scaleform::Render::RenderBuffer *v16; // rcx
   Scaleform::GFx::Resource *v17; // rcx
   Scaleform::Render::RenderBuffer *v18; // rcx
-  Scaleform::GFx::Resource *v19; // rcx
+  Scaleform::GFx::ResourceWeakLib *v19; // rcx
   Scaleform::Render::RenderBuffer *v20; // rcx
-  Scaleform::GFx::Resource *v21; // rcx
+  Scaleform::GFx::ImageFileHandlerRegistry *v21; // rcx
   Scaleform::Render::RenderBuffer *v22; // rcx
   Scaleform::GFx::Resource *v23; // rcx
   Scaleform::Render::RenderBuffer *v24; // rcx
@@ -400,14 +403,13 @@ Scaleform::GFx::LoadStates *__fastcall Scaleform::GFx::LoadStates::CloneForImpor
   Scaleform::GFx::Resource *v27; // rcx
   Scaleform::Render::RenderBuffer *v28; // rcx
 
-  v1 = this;
-  v2 = (Scaleform::GFx::MovieDefBindStates *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
+  v2 = (Scaleform::GFx::MovieDefBindStates *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
                                                Scaleform::Memory::pGlobalHeap,
                                                80i64);
   v3 = 0i64;
   if ( v2 )
   {
-    Scaleform::GFx::MovieDefBindStates::MovieDefBindStates(v2, v1->pBindStates.pObject);
+    Scaleform::GFx::MovieDefBindStates::MovieDefBindStates(v2, this->pBindStates.pObject);
     v5 = v4;
   }
   else
@@ -416,7 +418,7 @@ Scaleform::GFx::LoadStates *__fastcall Scaleform::GFx::LoadStates::CloneForImpor
   }
   v6 = (Scaleform::GFx::LoadStates *)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(
                                        Scaleform::Memory::pGlobalHeap,
-                                       144ui64,
+                                       144i64,
                                        0i64);
   if ( v6 )
   {
@@ -431,76 +433,76 @@ Scaleform::GFx::LoadStates *__fastcall Scaleform::GFx::LoadStates::CloneForImpor
     if ( v8 )
       Scaleform::RefCountImpl::Release(v8);
     v3[2] = v5;
-    v9 = (Scaleform::GFx::Resource *)v1->pLoaderImpl.pObject;
-    if ( v9 )
-      Scaleform::Render::RenderBuffer::AddRef(v9);
+    pObject = (Scaleform::GFx::Resource *)this->pLoaderImpl.pObject;
+    if ( pObject )
+      Scaleform::Render::RenderBuffer::AddRef(pObject);
     v10 = (Scaleform::Render::RenderBuffer *)v3[12];
     if ( v10 )
       Scaleform::RefCountImpl::Release(v10);
-    v3[12] = v1->pLoaderImpl.pObject;
-    v11 = (Scaleform::GFx::Resource *)v1->pLog.pObject;
+    v3[12] = this->pLoaderImpl.pObject;
+    v11 = (Scaleform::GFx::Resource *)this->pLog.pObject;
     if ( v11 )
       Scaleform::Render::RenderBuffer::AddRef(v11);
     v12 = (Scaleform::Render::RenderBuffer *)v3[3];
     if ( v12 )
       Scaleform::RefCountImpl::Release(v12);
-    v3[3] = v1->pLog.pObject;
-    v13 = (Scaleform::GFx::Resource *)v1->pProgressHandler.pObject;
+    v3[3] = this->pLog.pObject;
+    v13 = (Scaleform::GFx::Resource *)this->pProgressHandler.pObject;
     if ( v13 )
       Scaleform::Render::RenderBuffer::AddRef(v13);
     v14 = (Scaleform::Render::RenderBuffer *)v3[5];
     if ( v14 )
       Scaleform::RefCountImpl::Release(v14);
-    v3[5] = v1->pProgressHandler.pObject;
-    v15 = (Scaleform::GFx::Resource *)v1->pTaskManager.pObject;
+    v3[5] = this->pProgressHandler.pObject;
+    v15 = (Scaleform::GFx::Resource *)this->pTaskManager.pObject;
     if ( v15 )
       Scaleform::Render::RenderBuffer::AddRef(v15);
     v16 = (Scaleform::Render::RenderBuffer *)v3[6];
     if ( v16 )
       Scaleform::RefCountImpl::Release(v16);
-    v3[6] = v1->pTaskManager.pObject;
-    v17 = (Scaleform::GFx::Resource *)v1->pParseControl.pObject;
+    v3[6] = this->pTaskManager.pObject;
+    v17 = (Scaleform::GFx::Resource *)this->pParseControl.pObject;
     if ( v17 )
       Scaleform::Render::RenderBuffer::AddRef(v17);
     v18 = (Scaleform::Render::RenderBuffer *)v3[4];
     if ( v18 )
       Scaleform::RefCountImpl::Release(v18);
-    v3[4] = v1->pParseControl.pObject;
-    v19 = (Scaleform::GFx::Resource *)v1->pWeakResourceLib.pObject;
+    v3[4] = this->pParseControl.pObject;
+    v19 = this->pWeakResourceLib.pObject;
     if ( v19 )
-      Scaleform::Render::RenderBuffer::AddRef(v19);
+      Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)v19);
     v20 = (Scaleform::Render::RenderBuffer *)v3[11];
     if ( v20 )
       Scaleform::RefCountImpl::Release(v20);
-    v3[11] = v1->pWeakResourceLib.pObject;
-    v21 = (Scaleform::GFx::Resource *)v1->pImageFileHandlerRegistry.pObject;
+    v3[11] = this->pWeakResourceLib.pObject;
+    v21 = this->pImageFileHandlerRegistry.pObject;
     if ( v21 )
-      Scaleform::Render::RenderBuffer::AddRef(v21);
+      Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)v21);
     v22 = (Scaleform::Render::RenderBuffer *)v3[7];
     if ( v22 )
       Scaleform::RefCountImpl::Release(v22);
-    v3[7] = v1->pImageFileHandlerRegistry.pObject;
-    v23 = (Scaleform::GFx::Resource *)v1->pZlibSupport.pObject;
+    v3[7] = this->pImageFileHandlerRegistry.pObject;
+    v23 = (Scaleform::GFx::Resource *)this->pZlibSupport.pObject;
     if ( v23 )
       Scaleform::Render::RenderBuffer::AddRef(v23);
     v24 = (Scaleform::Render::RenderBuffer *)v3[8];
     if ( v24 )
       Scaleform::RefCountImpl::Release(v24);
-    v3[8] = v1->pZlibSupport.pObject;
-    v25 = (Scaleform::GFx::Resource *)v1->pAS2Support.pObject;
+    v3[8] = this->pZlibSupport.pObject;
+    v25 = (Scaleform::GFx::Resource *)this->pAS2Support.pObject;
     if ( v25 )
       Scaleform::Render::RenderBuffer::AddRef(v25);
     v26 = (Scaleform::Render::RenderBuffer *)v3[9];
     if ( v26 )
       Scaleform::RefCountImpl::Release(v26);
-    v3[9] = v1->pAS2Support.pObject;
-    v27 = (Scaleform::GFx::Resource *)v1->pAS3Support.pObject;
+    v3[9] = this->pAS2Support.pObject;
+    v27 = (Scaleform::GFx::Resource *)this->pAS3Support.pObject;
     if ( v27 )
       Scaleform::Render::RenderBuffer::AddRef(v27);
     v28 = (Scaleform::Render::RenderBuffer *)v3[10];
     if ( v28 )
       Scaleform::RefCountImpl::Release(v28);
-    v3[10] = v1->pAS3Support.pObject;
+    v3[10] = this->pAS3Support.pObject;
   }
   if ( v5 )
     Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v5);
@@ -509,75 +511,69 @@ Scaleform::GFx::LoadStates *__fastcall Scaleform::GFx::LoadStates::CloneForImpor
 
 // File Line: 197
 // RVA: 0x898C70
-void __fastcall Scaleform::GFx::LoadProcess::LoadProcess(Scaleform::GFx::LoadProcess *this, Scaleform::GFx::MovieDataDef *pdataDef, Scaleform::GFx::LoadStates *pstates, unsigned int loadFlags)
+void __fastcall Scaleform::GFx::LoadProcess::LoadProcess(
+        Scaleform::GFx::LoadProcess *this,
+        Scaleform::GFx::MovieDataDef *pdataDef,
+        Scaleform::GFx::LoadStates *pstates,
+        unsigned int loadFlags)
 {
-  unsigned int v4; // ebp
-  Scaleform::GFx::LoadStates *v5; // rbx
-  Scaleform::GFx::MovieDataDef *v6; // rsi
-  Scaleform::GFx::LoadProcess *v7; // rdi
-  Scaleform::GFx::ParseControl *v8; // rax
-  unsigned int v9; // eax
+  Scaleform::GFx::ParseControl *pObject; // rax
+  unsigned int ParseFlags; // eax
   Scaleform::GFx::Resource *v10; // rcx
   Scaleform::Render::RenderBuffer *v11; // rcx
-  signed __int64 v12; // [rsp+78h] [rbp+10h]
 
-  v4 = loadFlags;
-  v5 = pstates;
-  v6 = pdataDef;
-  v7 = this;
-  Scaleform::GFx::LoaderTask::LoaderTask((Scaleform::GFx::LoaderTask *)&this->vfptr, pstates, Id_MovieDataLoad);
-  v7->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>::`vftable;
-  v7->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::LoadProcess::`vftable{for `Scaleform::GFx::LoaderTask};
-  v7->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>Vtbl *)&Scaleform::GFx::LoadProcess::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>};
-  v7->pBindProcess.pObject = 0i64;
-  v7->pLoadData.pObject = 0i64;
-  Scaleform::GFx::SWFProcessInfo::SWFProcessInfo(&v7->ProcessInfo, v6->pData.pObject->pHeap);
-  v7->pJpegTables.pObject = 0i64;
+  Scaleform::GFx::LoaderTask::LoaderTask(this, pstates, Id_MovieDataLoad);
+  this->Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>::vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>::`vftable;
+  this->Scaleform::GFx::LoaderTask::Scaleform::GFx::Task::Scaleform::RefCountBase<Scaleform::GFx::Task,2>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::LoadProcess::`vftable{for `Scaleform::GFx::LoaderTask};
+  this->Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>::vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>Vtbl *)&Scaleform::GFx::LoadProcess::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>};
+  this->pBindProcess.pObject = 0i64;
+  this->pLoadData.pObject = 0i64;
+  Scaleform::GFx::SWFProcessInfo::SWFProcessInfo(&this->ProcessInfo, pdataDef->pData.pObject->pHeap);
+  this->pJpegTables.pObject = 0i64;
   `eh vector constructor iterator(
-    v7->FrameTags,
+    this->FrameTags,
     0x18ui64,
     2,
     (void (__fastcall *)(void *))Scaleform::Array<Scaleform::GFx::ExecuteTag *,2,Scaleform::ArrayConstPolicy<32,16,0>>::Array<Scaleform::GFx::ExecuteTag *,2,Scaleform::ArrayConstPolicy<32,16,0>>);
-  v12 = (signed __int64)&v7->InitActionTags;
-  *(_OWORD *)v12 = 0ui64;
-  *(_QWORD *)(v12 + 16) = 0i64;
-  v8 = v5->pParseControl.pObject;
-  if ( v8 )
-    v9 = v8->ParseFlags;
+  this->InitActionTags.Data.Data = 0i64;
+  this->InitActionTags.Data.Size = 0i64;
+  this->InitActionTags.Data.Policy.Capacity = 0i64;
+  pObject = pstates->pParseControl.pObject;
+  if ( pObject )
+    ParseFlags = pObject->ParseFlags;
   else
-    v9 = 0;
-  v7->ParseFlags = v9;
-  v10 = (Scaleform::GFx::Resource *)v6->pData.pObject;
+    ParseFlags = 0;
+  this->ParseFlags = ParseFlags;
+  v10 = (Scaleform::GFx::Resource *)pdataDef->pData.pObject;
   if ( v10 )
     Scaleform::Render::RenderBuffer::AddRef(v10);
-  v11 = (Scaleform::Render::RenderBuffer *)v7->pLoadData.pObject;
+  v11 = (Scaleform::Render::RenderBuffer *)this->pLoadData.pObject;
   if ( v11 )
     Scaleform::RefCountImpl::Release(v11);
-  v7->pLoadData.pObject = v6->pData.pObject;
-  v7->pDataDef_Unsafe = v6;
-  v7->pTimelineDef = 0i64;
-  v7->LoadFlags = v4;
-  v7->LoadState = 0;
-  v7->ImportIndex = 0;
-  *(_QWORD *)&v7->ImportDataCount = 0i64;
-  v7->FontDataCount = 0;
-  v7->pImportDataLast = 0i64;
-  v7->pImportData = 0i64;
-  v7->pResourceDataLast = 0i64;
-  v7->pResourceData = 0i64;
-  v7->pFontDataLast = 0i64;
-  v7->pFontData = 0i64;
-  v7->pAltStream = 0i64;
-  v7->pTempBindData = 0i64;
-  v7->ASInitActionTagsNum = 0;
+  this->pLoadData.pObject = pdataDef->pData.pObject;
+  this->pDataDef_Unsafe = pdataDef;
+  this->pTimelineDef = 0i64;
+  this->LoadFlags = loadFlags;
+  this->LoadState = LS_LoadingRoot;
+  this->ImportIndex = 0;
+  *(_QWORD *)&this->ImportDataCount = 0i64;
+  this->FontDataCount = 0;
+  this->pImportDataLast = 0i64;
+  this->pImportData = 0i64;
+  this->pResourceDataLast = 0i64;
+  this->pResourceData = 0i64;
+  this->pFontDataLast = 0i64;
+  this->pFontData = 0i64;
+  this->pAltStream = 0i64;
+  this->pTempBindData = 0i64;
+  this->ASInitActionTagsNum = 0;
 }
 
 // File Line: 253
 // RVA: 0x8A5170
 void __fastcall Scaleform::GFx::LoadProcess::~LoadProcess(Scaleform::GFx::LoadProcess *this)
 {
-  Scaleform::GFx::LoadProcess *v1; // rdi
-  Scaleform::Render::RenderBuffer *v2; // rcx
+  Scaleform::Render::RenderBuffer *pObject; // rcx
   Scaleform::GFx::MovieDataDef::LoadTaskData *v3; // rax
   Scaleform::GFx::LoadUpdateSync *v4; // rsi
   Scaleform::Render::RenderBuffer *v5; // rcx
@@ -588,32 +584,31 @@ void __fastcall Scaleform::GFx::LoadProcess::~LoadProcess(Scaleform::GFx::LoadPr
   Scaleform::Render::RenderBuffer *v10; // rcx
   Scaleform::Render::RenderBuffer *v11; // rcx
 
-  v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::LoadProcess::`vftable{for `Scaleform::GFx::LoaderTask};
-  this->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>Vtbl *)&Scaleform::GFx::LoadProcess::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>};
-  v2 = (Scaleform::Render::RenderBuffer *)this->pJpegTables.pObject;
-  if ( v2 )
-    Scaleform::RefCountImpl::Release(v2);
-  v1->pJpegTables.pObject = 0i64;
-  v3 = v1->pLoadData.pObject;
+  this->Scaleform::GFx::LoaderTask::Scaleform::GFx::Task::Scaleform::RefCountBase<Scaleform::GFx::Task,2>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::LoadProcess::`vftable{for `Scaleform::GFx::LoaderTask};
+  this->Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>::vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>Vtbl *)&Scaleform::GFx::LoadProcess::`vftable{for `Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>};
+  pObject = (Scaleform::Render::RenderBuffer *)this->pJpegTables.pObject;
+  if ( pObject )
+    Scaleform::RefCountImpl::Release(pObject);
+  this->pJpegTables.pObject = 0i64;
+  v3 = this->pLoadData.pObject;
   v4 = v3->pFrameUpdate.pObject;
   if ( v4 )
     Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)v3->pFrameUpdate.pObject);
-  Scaleform::String::Clear((Scaleform::String *)&v1->ProcessInfo.Stream.FileName.0);
-  v5 = (Scaleform::Render::RenderBuffer *)v1->ProcessInfo.Stream.pInput.pObject;
+  Scaleform::String::Clear(&this->ProcessInfo.Stream.FileName);
+  v5 = (Scaleform::Render::RenderBuffer *)this->ProcessInfo.Stream.pInput.pObject;
   if ( v5 )
     Scaleform::RefCountImpl::Release(v5);
-  v1->ProcessInfo.Stream.pInput.pObject = 0i64;
-  v1->ProcessInfo.Stream.pLog = 0i64;
-  v1->ProcessInfo.Stream.pParseControl = 0i64;
-  v6 = (Scaleform::Render::RenderBuffer *)v1->pLoadData.pObject;
+  this->ProcessInfo.Stream.pInput.pObject = 0i64;
+  this->ProcessInfo.Stream.pLog = 0i64;
+  this->ProcessInfo.Stream.pParseControl = 0i64;
+  v6 = (Scaleform::Render::RenderBuffer *)this->pLoadData.pObject;
   if ( v6 )
     Scaleform::RefCountImpl::Release(v6);
-  v1->pLoadData.pObject = 0i64;
-  v7 = (Scaleform::Render::RenderBuffer *)v1->pBindProcess.pObject;
+  this->pLoadData.pObject = 0i64;
+  v7 = (Scaleform::Render::RenderBuffer *)this->pBindProcess.pObject;
   if ( v7 )
     Scaleform::RefCountImpl::Release(v7);
-  v1->pBindProcess.pObject = 0i64;
+  this->pBindProcess.pObject = 0i64;
   if ( v4 )
   {
     Scaleform::Mutex::DoLock(&v4->mMutex);
@@ -623,44 +618,40 @@ void __fastcall Scaleform::GFx::LoadProcess::~LoadProcess(Scaleform::GFx::LoadPr
   }
   if ( v4 )
     Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v4);
-  if ( v1->InitActionTags.Data.Data )
-    ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+  if ( this->InitActionTags.Data.Data )
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
   `eh vector destructor iterator(
-    v1->FrameTags,
+    this->FrameTags,
     0x18ui64,
     2,
     (void (__fastcall *)(void *))Scaleform::Array<unsigned char,2,Scaleform::ArrayDefaultPolicy>::~Array<unsigned char,2,Scaleform::ArrayDefaultPolicy>);
-  v8 = (Scaleform::Render::RenderBuffer *)v1->pJpegTables.pObject;
+  v8 = (Scaleform::Render::RenderBuffer *)this->pJpegTables.pObject;
   if ( v8 )
     Scaleform::RefCountImpl::Release(v8);
-  Scaleform::GFx::SWFProcessInfo::~SWFProcessInfo(&v1->ProcessInfo);
-  v9 = (Scaleform::Render::RenderBuffer *)v1->pLoadData.pObject;
+  Scaleform::GFx::SWFProcessInfo::~SWFProcessInfo(&this->ProcessInfo);
+  v9 = (Scaleform::Render::RenderBuffer *)this->pLoadData.pObject;
   if ( v9 )
     Scaleform::RefCountImpl::Release(v9);
-  v10 = (Scaleform::Render::RenderBuffer *)v1->pBindProcess.pObject;
+  v10 = (Scaleform::Render::RenderBuffer *)this->pBindProcess.pObject;
   if ( v10 )
     Scaleform::RefCountImpl::Release(v10);
-  v1->vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>::`vftable;
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::LoaderTask::`vftable;
-  Scaleform::GFx::LoaderImpl::UnRegisterLoadProcess(
-    v1->pLoadStates.pObject->pLoaderImpl.pObject,
-    (Scaleform::GFx::LoaderTask *)&v1->vfptr);
-  v11 = (Scaleform::Render::RenderBuffer *)v1->pLoadStates.pObject;
+  this->Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>::vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>Vtbl *)&Scaleform::GFx::LogBase<Scaleform::GFx::LoadProcess>::`vftable;
+  this->Scaleform::GFx::LoaderTask::Scaleform::GFx::Task::Scaleform::RefCountBase<Scaleform::GFx::Task,2>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::LoaderTask::`vftable;
+  Scaleform::GFx::LoaderImpl::UnRegisterLoadProcess(this->pLoadStates.pObject->pLoaderImpl.pObject, this);
+  v11 = (Scaleform::Render::RenderBuffer *)this->pLoadStates.pObject;
   if ( v11 )
     Scaleform::RefCountImpl::Release(v11);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Task::`vftable;
-  Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&v1->vfptr);
+  this->Scaleform::GFx::LoaderTask::Scaleform::GFx::Task::Scaleform::RefCountBase<Scaleform::GFx::Task,2>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Task::`vftable;
+  Scaleform::RefCountImplCore::~RefCountImplCore(this);
 }
 
 // File Line: 295
 // RVA: 0x8B6FB0
 char __fastcall Scaleform::GFx::LoadProcess::BeginSWFLoading(Scaleform::GFx::LoadProcess *this, Scaleform::File *pfile)
 {
-  Scaleform::GFx::LoadProcess *v2; // rdi
   char result; // al
-  Scaleform::GFx::MovieDataDef::LoadTaskData *v4; // rbx
+  Scaleform::GFx::MovieDataDef::LoadTaskData *pObject; // rbx
 
-  v2 = this;
   result = Scaleform::GFx::SWFProcessInfo::Initialize(
              &this->ProcessInfo,
              pfile,
@@ -670,11 +661,11 @@ char __fastcall Scaleform::GFx::LoadProcess::BeginSWFLoading(Scaleform::GFx::Loa
              1);
   if ( result )
   {
-    v2->pLoadData.pObject->FileAttributes = v2->ProcessInfo.FileAttributes;
-    v4 = v2->pLoadData.pObject;
-    Scaleform::GFx::MovieHeaderData::operator=(&v4->Header, &v2->ProcessInfo.Header);
-    Scaleform::GFx::MovieDataDef::LoadTaskData::UpdateLoadState(v4, v4->LoadingFrame, LS_LoadingFrames);
-    result = 1;
+    this->pLoadData.pObject->FileAttributes = this->ProcessInfo.FileAttributes;
+    pObject = this->pLoadData.pObject;
+    Scaleform::GFx::MovieHeaderData::operator=(&pObject->Header, &this->ProcessInfo.Header);
+    Scaleform::GFx::MovieDataDef::LoadTaskData::UpdateLoadState(pObject, pObject->LoadingFrame, LS_LoadingFrames);
+    return 1;
   }
   return result;
 }
@@ -683,20 +674,19 @@ char __fastcall Scaleform::GFx::LoadProcess::BeginSWFLoading(Scaleform::GFx::Loa
 // RVA: 0x8BD270
 void __fastcall Scaleform::GFx::LoadProcess::CommitFrameTags(Scaleform::GFx::LoadProcess *this)
 {
-  Scaleform::GFx::LoadProcess *v1; // rbx
-  __int64 v2; // rcx
-  Scaleform::GFx::LoadStates *v3; // rax
+  __int64 LoadState; // rcx
+  Scaleform::GFx::LoadStates *pObject; // rax
   Scaleform::GFx::LogState *v4; // rbp
-  unsigned __int64 v5; // rax
+  unsigned __int64 Size; // rax
   Scaleform::GFx::MovieDataDef::LoadTaskData *v6; // rcx
   size_t v7; // rdi
-  unsigned __int64 v8; // r8
-  Scaleform::GFx::DataAllocator *v9; // rcx
+  unsigned __int64 BytesLeft; // r8
+  Scaleform::GFx::DataAllocator *p_TagMemAllocator; // rcx
   unsigned __int64 v10; // rdx
-  char *v11; // r9
+  char *pCurrent; // r9
   char *v12; // rax
   Scaleform::GFx::MovieDataDef::LoadTaskData *v13; // r14
-  signed __int64 v14; // rsi
+  Scaleform::GFx::Task *v14; // rsi
   Scaleform::GFx::LogState *v15; // r15
   __int64 v16; // rax
   unsigned __int64 v17; // r9
@@ -710,57 +700,56 @@ void __fastcall Scaleform::GFx::LoadProcess::CommitFrameTags(Scaleform::GFx::Loa
   size_t v25; // rdi
   unsigned __int64 v26; // rdx
   char *v27; // rcx
-  char *v28; // [rsp+20h] [rbp-28h]
-  int v29; // [rsp+28h] [rbp-20h]
+  char *v28; // [rsp+20h] [rbp-28h] BYREF
+  Scaleform::GFx::Task::TaskId ThisTaskId; // [rsp+28h] [rbp-20h]
 
-  v1 = this;
-  v2 = this->LoadState;
-  v3 = v1->pLoadStates.pObject;
-  if ( (_DWORD)v2 == 1 )
+  LoadState = this->LoadState;
+  pObject = this->pLoadStates.pObject;
+  if ( (_DWORD)LoadState == 1 )
   {
-    v4 = v3->pLog.pObject;
+    v4 = pObject->pLog.pObject;
     v28 = 0i64;
-    v29 = 0;
-    v5 = v1->FrameTags[1].Data.Size;
-    if ( v5 )
+    ThisTaskId = 0;
+    Size = this->FrameTags[1].Data.Size;
+    if ( Size )
     {
-      v6 = v1->pLoadData.pObject;
-      v7 = 8 * v5;
-      v8 = v6->TagMemAllocator.BytesLeft;
-      v9 = &v6->TagMemAllocator;
-      v10 = (8 * v5 + 7) & 0xFFFFFFFFFFFFFFF8ui64;
-      if ( v10 > v8 )
+      v6 = this->pLoadData.pObject;
+      v7 = 8 * Size;
+      BytesLeft = v6->TagMemAllocator.BytesLeft;
+      p_TagMemAllocator = &v6->TagMemAllocator;
+      v10 = (8 * Size + 7) & 0xFFFFFFFFFFFFFFF8ui64;
+      if ( v10 > BytesLeft )
       {
-        v11 = (char *)Scaleform::GFx::DataAllocator::OverflowAlloc(v9, v10);
+        pCurrent = (char *)Scaleform::GFx::DataAllocator::OverflowAlloc(p_TagMemAllocator, v10);
       }
       else
       {
-        v11 = v9->pCurrent;
-        v12 = &v9->pCurrent[v10];
-        v9->BytesLeft = v8 - v10;
-        v9->pCurrent = v12;
+        pCurrent = p_TagMemAllocator->pCurrent;
+        v12 = &p_TagMemAllocator->pCurrent[v10];
+        p_TagMemAllocator->BytesLeft = BytesLeft - v10;
+        p_TagMemAllocator->pCurrent = v12;
       }
-      v28 = v11;
-      if ( v11 )
+      v28 = pCurrent;
+      if ( pCurrent )
       {
-        memmove(v11, v1->FrameTags[1].Data.Data, v7);
-        v29 = v1->FrameTags[1].Data.Size;
+        memmove(pCurrent, this->FrameTags[1].Data.Data, v7);
+        ThisTaskId = this->FrameTags[1].Data.Size;
       }
-      Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::GFx::ExecuteTag *,Scaleform::AllocatorGH<Scaleform::GFx::ExecuteTag *,2>,Scaleform::ArrayConstPolicy<32,16,0>>>::Clear((Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::GFx::ExecuteTag *,Scaleform::AllocatorGH<Scaleform::GFx::ExecuteTag *,2>,Scaleform::ArrayConstPolicy<32,16,0> > > *)&v1->FrameTags[1].Data);
+      Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::GFx::ExecuteTag *,Scaleform::AllocatorGH<Scaleform::GFx::ExecuteTag *,2>,Scaleform::ArrayConstPolicy<32,16,0>>>::Clear(&this->FrameTags[1]);
     }
-    ((void (__fastcall *)(Scaleform::GFx::TimelineIODef *, char **, Scaleform::GFx::LogState *))v1->pTimelineDef->vfptr[4].__vecDelDtor)(
-      v1->pTimelineDef,
+    ((void (__fastcall *)(Scaleform::GFx::TimelineIODef *, char **, Scaleform::GFx::LogState *))this->pTimelineDef->vfptr[4].__vecDelDtor)(
+      this->pTimelineDef,
       &v28,
       v4);
   }
   else
   {
-    v13 = v1->pLoadData.pObject;
-    v14 = (signed __int64)v1 + 24 * v2;
-    v15 = v3->pLog.pObject;
+    v13 = this->pLoadData.pObject;
+    v14 = (Scaleform::GFx::LoadProcess *)((char *)this + 24 * LoadState);
+    v15 = pObject->pLog.pObject;
     v28 = 0i64;
-    v29 = 0;
-    v16 = *(_QWORD *)(v14 + 976);
+    ThisTaskId = 0;
+    v16 = *(_QWORD *)&v14[40].ThisTaskId;
     if ( v16 )
     {
       v17 = v13->TagMemAllocator.BytesLeft;
@@ -779,20 +768,20 @@ void __fastcall Scaleform::GFx::LoadProcess::CommitFrameTags(Scaleform::GFx::Loa
       v28 = v20;
       if ( v20 )
       {
-        memmove(v20, *(const void **)(v14 + 968), v18);
-        v29 = *(_DWORD *)(v14 + 976);
+        memmove(v20, *(const void **)&v14[40].RefCount, v18);
+        ThisTaskId = v14[40].ThisTaskId;
       }
-      Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::GFx::ExecuteTag *,Scaleform::AllocatorGH<Scaleform::GFx::ExecuteTag *,2>,Scaleform::ArrayConstPolicy<32,16,0>>>::Clear((Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::GFx::ExecuteTag *,Scaleform::AllocatorGH<Scaleform::GFx::ExecuteTag *,2>,Scaleform::ArrayConstPolicy<32,16,0> > > *)(v14 + 968));
+      Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::GFx::ExecuteTag *,Scaleform::AllocatorGH<Scaleform::GFx::ExecuteTag *,2>,Scaleform::ArrayConstPolicy<32,16,0>>>::Clear((Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::GFx::ExecuteTag *,Scaleform::AllocatorGH<Scaleform::GFx::ExecuteTag *,2>,Scaleform::ArrayConstPolicy<32,16,0> > > *)&v14[40].RefCount);
     }
     ((void (__fastcall *)(Scaleform::GFx::MovieDataDef::LoadTaskData *, char **, Scaleform::GFx::LogState *))v13->vfptr[2].__vecDelDtor)(
       v13,
       &v28,
       v15);
-    v21 = v1->pLoadData.pObject;
-    v22 = v1->pLoadStates.pObject->pLog.pObject;
+    v21 = this->pLoadData.pObject;
+    v22 = this->pLoadStates.pObject->pLog.pObject;
     v28 = 0i64;
-    v29 = 0;
-    v23 = v1->InitActionTags.Data.Size;
+    ThisTaskId = 0;
+    v23 = this->InitActionTags.Data.Size;
     if ( v23 )
     {
       v24 = v21->TagMemAllocator.BytesLeft;
@@ -811,10 +800,10 @@ void __fastcall Scaleform::GFx::LoadProcess::CommitFrameTags(Scaleform::GFx::Loa
       v28 = v27;
       if ( v27 )
       {
-        memmove(v27, v1->InitActionTags.Data.Data, v25);
-        v29 = v1->InitActionTags.Data.Size;
+        memmove(v27, this->InitActionTags.Data.Data, v25);
+        ThisTaskId = this->InitActionTags.Data.Size;
       }
-      Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::GFx::ExecuteTag *,Scaleform::AllocatorGH<Scaleform::GFx::ExecuteTag *,2>,Scaleform::ArrayConstPolicy<32,16,0>>>::Clear((Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::GFx::ExecuteTag *,Scaleform::AllocatorGH<Scaleform::GFx::ExecuteTag *,2>,Scaleform::ArrayConstPolicy<32,16,0> > > *)&v1->InitActionTags.Data);
+      Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::GFx::ExecuteTag *,Scaleform::AllocatorGH<Scaleform::GFx::ExecuteTag *,2>,Scaleform::ArrayConstPolicy<32,16,0>>>::Clear(&this->InitActionTags);
     }
     ((void (__fastcall *)(Scaleform::GFx::MovieDataDef::LoadTaskData *, char **, Scaleform::GFx::LogState *))v21->vfptr[3].__vecDelDtor)(
       v21,
@@ -827,153 +816,143 @@ void __fastcall Scaleform::GFx::LoadProcess::CommitFrameTags(Scaleform::GFx::Loa
 // RVA: 0x8BB3F0
 void __fastcall Scaleform::GFx::LoadProcess::CleanupFrameTags(Scaleform::GFx::LoadProcess *this)
 {
-  Scaleform::GFx::LoadProcess *v1; // rbx
-  unsigned __int64 v2; // rdi
-  Scaleform::GFx::ExecuteTag *v3; // rcx
   unsigned __int64 i; // rdi
-  Scaleform::GFx::ExecuteTag *v5; // rcx
+  Scaleform::GFx::ExecuteTag *v3; // rcx
   unsigned __int64 j; // rdi
+  Scaleform::GFx::ExecuteTag *v5; // rcx
+  unsigned __int64 k; // rdi
   Scaleform::GFx::ExecuteTag *v7; // rcx
-  Scaleform::GFx::ExecuteTag **v8; // rdx
+  Scaleform::GFx::ExecuteTag **Data; // rdx
   Scaleform::GFx::ExecuteTag **v9; // rax
   Scaleform::GFx::ExecuteTag **v10; // rdx
   Scaleform::GFx::ExecuteTag **v11; // rax
   Scaleform::GFx::ExecuteTag **v12; // rdx
   Scaleform::GFx::ExecuteTag **v13; // rax
-  int v14; // [rsp+30h] [rbp+8h]
+  int v14; // [rsp+30h] [rbp+8h] BYREF
 
-  v1 = this;
-  v2 = 0i64;
-  if ( this->FrameTags[1].Data.Size )
+  for ( i = 0i64; i < this->FrameTags[1].Data.Size; ++i )
   {
-    do
-    {
-      v3 = v1->FrameTags[1].Data.Data[v2];
-      v3->vfptr->__vecDelDtor(v3, 0);
-      ++v2;
-    }
-    while ( v2 < v1->FrameTags[1].Data.Size );
+    v3 = this->FrameTags[1].Data.Data[i];
+    v3->vfptr->__vecDelDtor(v3, 0);
   }
-  for ( i = 0i64; i < v1->FrameTags[0].Data.Size; ++i )
+  for ( j = 0i64; j < this->FrameTags[0].Data.Size; ++j )
   {
-    v5 = v1->FrameTags[0].Data.Data[i];
+    v5 = this->FrameTags[0].Data.Data[j];
     v5->vfptr->__vecDelDtor(v5, 0);
   }
-  for ( j = 0i64; j < v1->InitActionTags.Data.Size; ++j )
+  for ( k = 0i64; k < this->InitActionTags.Data.Size; ++k )
   {
-    v7 = v1->InitActionTags.Data.Data[j];
+    v7 = this->InitActionTags.Data.Data[k];
     v7->vfptr->__vecDelDtor(v7, 0);
   }
-  if ( v1->FrameTags[1].Data.Size > 0 && v1->FrameTags[1].Data.Policy.Capacity & 0xFFFFFFFFFFFFFFFEui64 )
+  if ( this->FrameTags[1].Data.Size && (this->FrameTags[1].Data.Policy.Capacity & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    v8 = v1->FrameTags[1].Data.Data;
-    if ( v8 )
+    Data = this->FrameTags[1].Data.Data;
+    if ( Data )
     {
       v9 = (Scaleform::GFx::ExecuteTag **)Scaleform::Memory::pGlobalHeap->vfptr->Realloc(
                                             Scaleform::Memory::pGlobalHeap,
-                                            v8,
-                                            256ui64);
+                                            Data,
+                                            256i64);
     }
     else
     {
       v14 = 2;
       v9 = (Scaleform::GFx::ExecuteTag **)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(
                                             Scaleform::Memory::pGlobalHeap,
-                                            256ui64,
-                                            (Scaleform::AllocInfo *)&v14);
+                                            256i64,
+                                            &v14);
     }
-    v1->FrameTags[1].Data.Data = v9;
-    v1->FrameTags[1].Data.Policy.Capacity = 32i64;
+    this->FrameTags[1].Data.Data = v9;
+    this->FrameTags[1].Data.Policy.Capacity = 32i64;
   }
-  v1->FrameTags[1].Data.Size = 0i64;
-  if ( v1->FrameTags[0].Data.Size > 0 && v1->FrameTags[0].Data.Policy.Capacity & 0xFFFFFFFFFFFFFFFEui64 )
+  this->FrameTags[1].Data.Size = 0i64;
+  if ( this->FrameTags[0].Data.Size && (this->FrameTags[0].Data.Policy.Capacity & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    v10 = v1->FrameTags[0].Data.Data;
+    v10 = this->FrameTags[0].Data.Data;
     if ( v10 )
     {
       v11 = (Scaleform::GFx::ExecuteTag **)Scaleform::Memory::pGlobalHeap->vfptr->Realloc(
                                              Scaleform::Memory::pGlobalHeap,
                                              v10,
-                                             256ui64);
+                                             256i64);
     }
     else
     {
       v14 = 2;
       v11 = (Scaleform::GFx::ExecuteTag **)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(
                                              Scaleform::Memory::pGlobalHeap,
-                                             256ui64,
-                                             (Scaleform::AllocInfo *)&v14);
+                                             256i64,
+                                             &v14);
     }
-    v1->FrameTags[0].Data.Data = v11;
-    v1->FrameTags[0].Data.Policy.Capacity = 32i64;
+    this->FrameTags[0].Data.Data = v11;
+    this->FrameTags[0].Data.Policy.Capacity = 32i64;
   }
-  v1->FrameTags[0].Data.Size = 0i64;
-  if ( v1->InitActionTags.Data.Size > 0 && v1->InitActionTags.Data.Policy.Capacity & 0xFFFFFFFFFFFFFFFEui64 )
+  this->FrameTags[0].Data.Size = 0i64;
+  if ( this->InitActionTags.Data.Size && (this->InitActionTags.Data.Policy.Capacity & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    v12 = v1->InitActionTags.Data.Data;
+    v12 = this->InitActionTags.Data.Data;
     if ( v12 )
     {
       v13 = (Scaleform::GFx::ExecuteTag **)Scaleform::Memory::pGlobalHeap->vfptr->Realloc(
                                              Scaleform::Memory::pGlobalHeap,
                                              v12,
-                                             256ui64);
+                                             256i64);
     }
     else
     {
       v14 = 2;
       v13 = (Scaleform::GFx::ExecuteTag **)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(
                                              Scaleform::Memory::pGlobalHeap,
-                                             256ui64,
-                                             (Scaleform::AllocInfo *)&v14);
+                                             256i64,
+                                             &v14);
     }
-    v1->InitActionTags.Data.Data = v13;
-    v1->InitActionTags.Data.Policy.Capacity = 32i64;
+    this->InitActionTags.Data.Data = v13;
+    this->InitActionTags.Data.Policy.Capacity = 32i64;
   }
-  v1->InitActionTags.Data.Size = 0i64;
+  this->InitActionTags.Data.Size = 0i64;
 }
 
 // File Line: 372
 // RVA: 0x8B04C0
-Scaleform::GFx::ResourceHandle *__fastcall Scaleform::GFx::LoadProcess::AddDataResource(Scaleform::GFx::LoadProcess *this, Scaleform::GFx::ResourceHandle *result, __int64 rid, Scaleform::GFx::ResourceData *resData)
+Scaleform::GFx::ResourceHandle *__fastcall Scaleform::GFx::LoadProcess::AddDataResource(
+        Scaleform::GFx::LoadProcess *this,
+        Scaleform::GFx::ResourceHandle *result,
+        unsigned int *rid,
+        Scaleform::GFx::ResourceData *resData)
 {
-  Scaleform::GFx::ResourceData *v4; // r14
-  Scaleform::GFx::ResourceHandle *v5; // rbp
-  Scaleform::GFx::LoadProcess *v6; // rdi
-  Scaleform::GFx::MovieDataDef::LoadTaskData *v7; // rsi
+  Scaleform::GFx::MovieDataDef::LoadTaskData *pObject; // rsi
   Scaleform::GFx::ResourceDataNode *v8; // rbx
-  Scaleform::GFx::ResourceId rida; // [rsp+50h] [rbp+8h]
+  Scaleform::GFx::ResourceId rida; // [rsp+50h] [rbp+8h] BYREF
   Scaleform::GFx::ResourceHandle *v11; // [rsp+58h] [rbp+10h]
 
   v11 = result;
-  v4 = resData;
-  v5 = result;
-  v6 = this;
-  rida.Id = *(_DWORD *)rid;
+  rida.Id = *rid;
   Scaleform::GFx::MovieDataDef::LoadTaskData::AddNewResourceHandle(
     this->pLoadData.pObject,
     result,
     (Scaleform::GFx::ResourceId)&rida);
-  v7 = v6->pLoadData.pObject;
-  v8 = Scaleform::GFx::MovieDataDef::LoadTaskData::AllocMovieDefClass<Scaleform::GFx::ResourceDataNode>(v6->pLoadData.pObject);
+  pObject = this->pLoadData.pObject;
+  v8 = Scaleform::GFx::MovieDataDef::LoadTaskData::AllocMovieDefClass<Scaleform::GFx::ResourceDataNode>(pObject);
   if ( v8 )
   {
-    if ( v4->pInterface )
-      v4->pInterface->vfptr->AddRef(v4->pInterface, v4->hData);
+    if ( resData->pInterface )
+      resData->pInterface->vfptr->AddRef(resData->pInterface, resData->hData);
     if ( v8->Data.pInterface )
       v8->Data.pInterface->vfptr->Release(v8->Data.pInterface, v8->Data.hData);
-    v8->Data.pInterface = v4->pInterface;
-    v8->Data.hData = v4->hData;
-    v8->BindIndex = v5->BindIndex;
-    if ( !v6->pResourceData )
-      v6->pResourceData = v8;
-    if ( v7->BindData.pResourceNodes.Value )
-      v7->BindData.pResourceNodesLast->pNext.Value = v8;
+    v8->Data.pInterface = resData->pInterface;
+    v8->Data.hData = resData->hData;
+    v8->BindIndex = result->BindIndex;
+    if ( !this->pResourceData )
+      this->pResourceData = v8;
+    if ( pObject->BindData.pResourceNodes.Value )
+      pObject->BindData.pResourceNodesLast->pNext.Value = v8;
     else
-      v7->BindData.pResourceNodes.Value = v8;
-    v7->BindData.pResourceNodesLast = v8;
-    ++v6->ResourceDataCount;
+      pObject->BindData.pResourceNodes.Value = v8;
+    pObject->BindData.pResourceNodesLast = v8;
+    ++this->ResourceDataCount;
   }
-  return v5;
+  return result;
 }
 
 // File Line: 400
@@ -981,300 +960,284 @@ Scaleform::GFx::ResourceHandle *__fastcall Scaleform::GFx::LoadProcess::AddDataR
 __int64 Scaleform::GFx::_dynamic_initializer_for__static_inst__()
 {
   static_inst.vfptr = (Scaleform::GFx::ResourceData::DataInterfaceVtbl *)&Scaleform::GFx::FontResourceCreator::`vftable;
-  return atexit(Scaleform::GFx::_dynamic_atexit_destructor_for__static_inst__);
+  return atexit((int (__fastcall *)())Scaleform::GFx::_dynamic_atexit_destructor_for__static_inst__);
 }
 
 // File Line: 402
 // RVA: 0x8B0F40
-Scaleform::GFx::ResourceHandle *__fastcall Scaleform::GFx::LoadProcess::AddFontDataResource(Scaleform::GFx::LoadProcess *this, Scaleform::GFx::ResourceHandle *result, __int64 rid, Scaleform::Render::Font *pfontData)
+Scaleform::GFx::ResourceHandle *__fastcall Scaleform::GFx::LoadProcess::AddFontDataResource(
+        Scaleform::GFx::LoadProcess *this,
+        Scaleform::GFx::ResourceHandle *result,
+        unsigned int *rid,
+        Scaleform::GFx::Resource *pfontData)
 {
-  Scaleform::GFx::Resource *v4; // rbp
-  unsigned int *v5; // r15
-  Scaleform::GFx::ResourceHandle *v6; // r14
-  Scaleform::GFx::LoadProcess *v7; // rdi
   Scaleform::GFx::FontDataUseNode *v8; // rax
   Scaleform::GFx::FontDataUseNode *v9; // rbx
-  Scaleform::GFx::MovieDataDef::LoadTaskData *v10; // rsi
+  Scaleform::GFx::MovieDataDef::LoadTaskData *pObject; // rsi
   Scaleform::Render::RenderBuffer *v11; // rcx
-  Scaleform::GFx::ResourceData resData; // [rsp+30h] [rbp-38h]
-  Scaleform::GFx::ResourceId rida; // [rsp+70h] [rbp+8h]
+  Scaleform::GFx::ResourceData resData; // [rsp+30h] [rbp-38h] BYREF
+  Scaleform::GFx::ResourceId rida; // [rsp+70h] [rbp+8h] BYREF
   Scaleform::GFx::ResourceHandle *v15; // [rsp+78h] [rbp+10h]
 
   v15 = result;
-  v4 = (Scaleform::GFx::Resource *)pfontData;
-  v5 = (unsigned int *)rid;
-  v6 = result;
-  v7 = this;
-  static_inst.vfptr->AddRef((Scaleform::GFx::ResourceData::DataInterface *)&static_inst, pfontData);
-  resData.pInterface = (Scaleform::GFx::ResourceData::DataInterface *)&static_inst;
-  resData.hData = v4;
-  rida.Id = *v5;
-  Scaleform::GFx::LoadProcess::AddDataResource(v7, v6, (__int64)&rida, &resData);
-  v8 = Scaleform::GFx::MovieDataDef::LoadTaskData::AllocMovieDefClass<Scaleform::GFx::FontDataUseNode>(v7->pLoadData.pObject);
+  static_inst.vfptr->AddRef(&static_inst, pfontData);
+  resData.pInterface = &static_inst;
+  resData.hData = pfontData;
+  rida.Id = *rid;
+  Scaleform::GFx::LoadProcess::AddDataResource(this, result, &rida.Id, &resData);
+  v8 = Scaleform::GFx::MovieDataDef::LoadTaskData::AllocMovieDefClass<Scaleform::GFx::FontDataUseNode>(this->pLoadData.pObject);
   v9 = v8;
   if ( v8 )
   {
-    v10 = v7->pLoadData.pObject;
-    v8->Id.Id = *v5;
-    if ( v4 )
-      Scaleform::Render::RenderBuffer::AddRef(v4);
+    pObject = this->pLoadData.pObject;
+    v8->Id.Id = *rid;
+    if ( pfontData )
+      Scaleform::Render::RenderBuffer::AddRef(pfontData);
     v11 = (Scaleform::Render::RenderBuffer *)v9->pFontData.pObject;
     if ( v11 )
       Scaleform::RefCountImpl::Release(v11);
-    v9->pFontData.pObject = (Scaleform::Render::Font *)v4;
-    v9->BindIndex = v6->BindIndex;
-    if ( !v7->pFontData )
-      v7->pFontData = v9;
-    if ( v10->BindData.pFonts.Value )
-      v10->BindData.pFontsLast->pNext.Value = v9;
+    v9->pFontData.pObject = (Scaleform::Render::Font *)pfontData;
+    v9->BindIndex = result->BindIndex;
+    if ( !this->pFontData )
+      this->pFontData = v9;
+    if ( pObject->BindData.pFonts.Value )
+      pObject->BindData.pFontsLast->pNext.Value = v9;
     else
-      v10->BindData.pFonts.Value = v9;
-    v10->BindData.pFontsLast = v9;
-    ++v7->FontDataCount;
+      pObject->BindData.pFonts.Value = v9;
+    pObject->BindData.pFontsLast = v9;
+    ++this->FontDataCount;
   }
-  static_inst.vfptr->Release((Scaleform::GFx::ResourceData::DataInterface *)&static_inst, v4);
-  return v6;
+  static_inst.vfptr->Release(&static_inst, pfontData);
+  return result;
 }
 
 // File Line: 457
 // RVA: 0x8B14E0
-void __fastcall Scaleform::GFx::LoadProcess::AddImageResource(Scaleform::GFx::LoadProcess *this, __int64 rid, Scaleform::Render::ImageSource *pimage)
+void __fastcall Scaleform::GFx::LoadProcess::AddImageResource(
+        Scaleform::GFx::LoadProcess *this,
+        int *rid,
+        Scaleform::Render::ImageSource *pimage)
 {
-  int *v3; // r12
-  Scaleform::GFx::LoadProcess *v4; // r14
-  Scaleform::GFx::MovieDefBindStates *v5; // rax
+  Scaleform::GFx::MovieDefBindStates *pObject; // rax
   Scaleform::GFx::ImageCreator *v6; // rcx
-  __int64 v7; // rdx
-  __int64 v8; // rax
-  Scaleform::Render::Image *v9; // rdi
-  Scaleform::GFx::ImageResource *v10; // rax
-  Scaleform::GFx::Resource *v11; // rax
-  Scaleform::GFx::Resource *v12; // rbx
-  int v13; // eax
-  Scaleform::GFx::ResourceLibBase *v14; // rcx
-  __int64 v15; // rbx
-  Scaleform::Render::Image *v16; // rax
-  Scaleform::Render::Image *v17; // r15
-  Scaleform::Render::WrapperImageSource *v18; // rax
-  Scaleform::Render::ImageSource *v19; // rax
-  Scaleform::Render::ImageSource *v20; // rdi
-  Scaleform::GFx::Resource *v21; // rbx
-  Scaleform::GFx::ResourceLibBase *v22; // rcx
-  Scaleform::RefCountImplCore v23; // [rsp+20h] [rbp-E0h]
-  int v24; // [rsp+30h] [rbp-D0h]
-  Scaleform::Render::RenderBuffer *v25; // [rsp+38h] [rbp-C8h]
-  int v26; // [rsp+40h] [rbp-C0h]
-  Scaleform::GFx::ResourceData result; // [rsp+48h] [rbp-B8h]
-  Scaleform::GFx::ResourceHandle v28; // [rsp+58h] [rbp-A8h]
-  int v29; // [rsp+68h] [rbp-98h]
-  __int64 v30; // [rsp+70h] [rbp-90h]
-  int v31; // [rsp+78h] [rbp-88h]
-  int v32; // [rsp+7Ch] [rbp-84h]
-  __int64 v33; // [rsp+80h] [rbp-80h]
-  __int64 v34; // [rsp+88h] [rbp-78h]
-  __int64 v35; // [rsp+90h] [rbp-70h]
-  __int64 v36; // [rsp+98h] [rbp-68h]
-  int v37; // [rsp+A0h] [rbp-60h]
-  __int64 v38; // [rsp+A8h] [rbp-58h]
-  __int64 v39; // [rsp+B0h] [rbp-50h]
-  __int64 v40; // [rsp+B8h] [rbp-48h]
-  int v41; // [rsp+C0h] [rbp-40h]
-  int v42; // [rsp+C8h] [rbp-38h]
-  __int64 v43; // [rsp+D0h] [rbp-30h]
-  int v44; // [rsp+D8h] [rbp-28h]
-  int v45; // [rsp+DCh] [rbp-24h]
-  __int64 v46; // [rsp+E0h] [rbp-20h]
-  __int64 v47; // [rsp+E8h] [rbp-18h]
-  __int64 v48; // [rsp+F0h] [rbp-10h]
-  __int64 v49; // [rsp+F8h] [rbp-8h]
-  Scaleform::Render::ImageSource *v50; // [rsp+100h] [rbp+0h]
-  __int64 v51; // [rsp+108h] [rbp+8h]
-  __int64 v52; // [rsp+110h] [rbp+10h]
-  Scaleform::Render::Image *v53; // [rsp+118h] [rbp+18h]
-  Scaleform::GFx::Resource *v54; // [rsp+120h] [rbp+20h]
-  Scaleform::GFx::ImageResource *rida; // [rsp+180h] [rbp+80h]
-  Scaleform::Render::WrapperImageSource *v56; // [rsp+188h] [rbp+88h]
+  Scaleform::MemoryHeap *pHeap; // rdx
+  Scaleform::Render::Image *v8; // rdi
+  Scaleform::GFx::ImageResource *v9; // rax
+  Scaleform::GFx::Resource *v10; // rax
+  Scaleform::GFx::Resource *v11; // rbx
+  int v12; // eax
+  Scaleform::GFx::ResourceLibBase *pLib; // rcx
+  Scaleform::MemoryHeap *v14; // rbx
+  Scaleform::Render::Image *v15; // r15
+  Scaleform::Render::WrapperImageSource *v16; // rax
+  Scaleform::Render::ImageSource *v17; // rax
+  Scaleform::Render::ImageSource *v18; // rdi
+  Scaleform::GFx::Resource *pResource; // rbx
+  Scaleform::GFx::ResourceLibBase *v20; // rcx
+  Scaleform::RefCountImplCore v21; // [rsp+20h] [rbp-E0h] BYREF
+  int v22; // [rsp+30h] [rbp-D0h]
+  Scaleform::Render::RenderBuffer *v23; // [rsp+38h] [rbp-C8h]
+  int v24; // [rsp+40h] [rbp-C0h]
+  Scaleform::GFx::ResourceData result; // [rsp+48h] [rbp-B8h] BYREF
+  Scaleform::GFx::ResourceHandle v26; // [rsp+58h] [rbp-A8h] BYREF
+  int v27; // [rsp+68h] [rbp-98h] BYREF
+  Scaleform::MemoryHeap *v28; // [rsp+70h] [rbp-90h]
+  int v29; // [rsp+78h] [rbp-88h]
+  int v30; // [rsp+7Ch] [rbp-84h]
+  __int64 v31; // [rsp+80h] [rbp-80h]
+  __int64 v32; // [rsp+88h] [rbp-78h]
+  __int64 v33; // [rsp+90h] [rbp-70h]
+  __int64 v34; // [rsp+98h] [rbp-68h]
+  int v35; // [rsp+A0h] [rbp-60h] BYREF
+  Scaleform::MemoryHeap *v36; // [rsp+A8h] [rbp-58h]
+  __int64 v37; // [rsp+B0h] [rbp-50h]
+  __int64 v38; // [rsp+B8h] [rbp-48h]
+  int v39; // [rsp+C0h] [rbp-40h]
+  int v40; // [rsp+C8h] [rbp-38h]
+  Scaleform::MemoryHeap *v41; // [rsp+D0h] [rbp-30h]
+  int v42; // [rsp+D8h] [rbp-28h]
+  int v43; // [rsp+DCh] [rbp-24h]
+  __int64 v44; // [rsp+E0h] [rbp-20h]
+  __int64 v45; // [rsp+E8h] [rbp-18h]
+  __int64 v46; // [rsp+F0h] [rbp-10h]
+  __int64 v47; // [rsp+F8h] [rbp-8h]
+  Scaleform::Render::ImageSource *v48; // [rsp+100h] [rbp+0h]
+  __int64 v49; // [rsp+108h] [rbp+8h]
+  Scaleform::Render::Image *v50; // [rsp+110h] [rbp+10h]
+  Scaleform::Render::Image *v51; // [rsp+118h] [rbp+18h]
+  Scaleform::GFx::Resource *v52; // [rsp+120h] [rbp+20h]
+  Scaleform::GFx::ImageResource *rida; // [rsp+180h] [rbp+80h] BYREF
+  Scaleform::Render::WrapperImageSource *v54; // [rsp+188h] [rbp+88h] BYREF
 
   if ( pimage )
   {
-    v51 = -2i64;
-    v3 = (int *)rid;
-    v4 = this;
+    v49 = -2i64;
     if ( SLOBYTE(this->LoadFlags) >= 0
-      && (v5 = this->pLoadStates.pObject->pBindStates.pObject, v5->pImageCreator.pObject)
-      && (v6 = v5->pImageCreator.pObject) != 0i64 )
+      && (pObject = this->pLoadStates.pObject->pBindStates.pObject, pObject->pImageCreator.pObject)
+      && (v6 = pObject->pImageCreator.pObject) != 0i64 )
     {
-      v7 = (__int64)v4->pLoadData.pObject->pHeap;
+      pHeap = this->pLoadData.pObject->pHeap;
+      v27 = 1;
+      v28 = pHeap;
       v29 = 1;
-      v30 = v7;
-      v31 = 1;
-      v32 = 1;
+      v30 = 1;
+      v31 = 0i64;
+      v32 = 0i64;
       v33 = 0i64;
       v34 = 0i64;
-      v35 = 0i64;
-      v36 = 0i64;
-      v8 = (__int64)v6->vfptr[4].__vecDelDtor((Scaleform::RefCountImplCore *)&v6->vfptr, (unsigned int)&v29);
-      v9 = (Scaleform::Render::Image *)v8;
-      v52 = v8;
-      v10 = (Scaleform::GFx::ImageResource *)(*(__int64 (__fastcall **)(__int64, signed __int64, _QWORD))(*(_QWORD *)v30 + 80i64))(
-                                               v30,
-                                               104i64,
-                                               0i64);
-      rida = v10;
-      if ( v10 )
+      v8 = (Scaleform::Render::Image *)v6->vfptr[4].__vecDelDtor(v6, (unsigned int)&v27);
+      v50 = v8;
+      v9 = (Scaleform::GFx::ImageResource *)v28->vfptr->Alloc(v28, 104ui64, 0i64);
+      rida = v9;
+      if ( v9 )
       {
-        Scaleform::GFx::ImageResource::ImageResource(v10, v9, Use_Bitmap);
-        v12 = v11;
+        Scaleform::GFx::ImageResource::ImageResource(v9, v8, Use_Bitmap);
+        v11 = v10;
       }
       else
       {
-        v12 = 0i64;
+        v11 = 0i64;
       }
-      v54 = v12;
-      v13 = *v3;
-      v26 = *v3;
-      if ( v4->LoadState == LS_LoadingRoot )
+      v52 = v11;
+      v12 = *rid;
+      v24 = *rid;
+      if ( this->LoadState == LS_LoadingRoot )
       {
-        LODWORD(rida) = v13;
+        LODWORD(rida) = v12;
         Scaleform::GFx::MovieDataDef::LoadTaskData::AddResource(
-          v4->pLoadData.pObject,
+          this->pLoadData.pObject,
           (Scaleform::GFx::ResourceId)&rida,
-          v12);
+          v11);
       }
-      if ( v12 && !_InterlockedDecrement(&v12->RefCount.Value) )
+      if ( v11 && !_InterlockedDecrement(&v11->RefCount.Value) )
       {
-        v14 = v12->pLib;
-        if ( v14 )
+        pLib = v11->pLib;
+        if ( pLib )
         {
-          v14->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v14->vfptr, (unsigned int)v12);
-          v12->pLib = 0i64;
+          pLib->vfptr[1].__vecDelDtor(pLib, (unsigned int)v11);
+          v11->pLib = 0i64;
         }
-        v12->vfptr->__vecDelDtor(v12, 1u);
+        v11->vfptr->__vecDelDtor(v11, 1u);
       }
-      if ( v9 )
-        ((void (__fastcall *)(Scaleform::Render::Image *))v9->vfptr[2].__vecDelDtor)(v9);
+      if ( v8 )
+        ((void (__fastcall *)(Scaleform::Render::Image *))v8->vfptr[2].__vecDelDtor)(v8);
     }
     else
     {
-      v15 = (__int64)v4->pLoadData.pObject->pHeap;
+      v14 = this->pLoadData.pObject->pHeap;
+      v40 = 1;
+      v41 = v14;
       v42 = 1;
-      v43 = v15;
-      v44 = 1;
-      v45 = 1;
+      v43 = 1;
+      v44 = 0i64;
+      v45 = 0i64;
       v46 = 0i64;
       v47 = 0i64;
-      v48 = 0i64;
-      v49 = 0i64;
-      v23.RefCount = 1;
-      v24 = 14;
-      v23.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ImageCreator::`vftable;
-      v25 = 0i64;
-      v40 = 0i64;
-      v41 = 0;
-      v38 = v15;
-      v37 = 1;
-      v39 = 0i64;
-      v16 = (Scaleform::Render::Image *)pimage->vfptr[12].__vecDelDtor(
-                                          (Scaleform::RefCountImplCore *)pimage,
-                                          (unsigned int)&v37);
-      v17 = v16;
-      v53 = v16;
-      v18 = (Scaleform::Render::WrapperImageSource *)(*(__int64 (__fastcall **)(__int64, signed __int64, _QWORD))(*(_QWORD *)v15 + 80i64))(
-                                                       v15,
-                                                       24i64,
-                                                       0i64);
-      v56 = v18;
-      if ( v18 )
+      v21.RefCount = 1;
+      v22 = 14;
+      v21.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ImageCreator::`vftable;
+      v23 = 0i64;
+      v38 = 0i64;
+      v39 = 0;
+      v36 = v14;
+      v35 = 1;
+      v37 = 0i64;
+      v15 = (Scaleform::Render::Image *)pimage->vfptr[12].__vecDelDtor(pimage, &v35);
+      v51 = v15;
+      v16 = (Scaleform::Render::WrapperImageSource *)v14->vfptr->Alloc(v14, 24ui64, 0i64);
+      v54 = v16;
+      if ( v16 )
       {
-        Scaleform::Render::WrapperImageSource::WrapperImageSource(v18, v17);
-        v20 = v19;
+        Scaleform::Render::WrapperImageSource::WrapperImageSource(v16, v15);
+        v18 = v17;
       }
       else
       {
-        v20 = 0i64;
+        v18 = 0i64;
       }
-      v50 = v20;
-      Scaleform::GFx::ImageResourceCreator::CreateImageResourceData(&result, v20);
-      LODWORD(v56) = *v3;
-      Scaleform::GFx::LoadProcess::AddDataResource(v4, &v28, (__int64)&v56, &result);
-      if ( v28.HType == RH_Pointer )
+      v48 = v18;
+      Scaleform::GFx::ImageResourceCreator::CreateImageResourceData(&result, v18);
+      LODWORD(v54) = *rid;
+      Scaleform::GFx::LoadProcess::AddDataResource(this, &v26, (unsigned int *)&v54, &result);
+      if ( v26.HType == RH_Pointer )
       {
-        v21 = v28.pResource;
-        if ( v28.pResource )
+        pResource = v26.pResource;
+        if ( v26.pResource )
         {
-          if ( !_InterlockedDecrement(&v28.pResource->RefCount.Value) )
+          if ( !_InterlockedDecrement(&v26.pResource->RefCount.Value) )
           {
-            v22 = v21->pLib;
-            if ( v22 )
+            v20 = pResource->pLib;
+            if ( v20 )
             {
-              v22->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v22->vfptr, (unsigned int)v21);
-              v21->pLib = 0i64;
+              v20->vfptr[1].__vecDelDtor(v20, (unsigned int)pResource);
+              pResource->pLib = 0i64;
             }
-            v21->vfptr->__vecDelDtor(v21, 1u);
+            pResource->vfptr->__vecDelDtor(pResource, 1u);
           }
         }
       }
       if ( result.pInterface )
         result.pInterface->vfptr->Release(result.pInterface, result.hData);
-      if ( v20 )
-        ((void (__fastcall *)(Scaleform::Render::ImageSource *))v20->vfptr[2].__vecDelDtor)(v20);
-      if ( v17 )
-        ((void (__fastcall *)(Scaleform::Render::Image *))v17->vfptr[2].__vecDelDtor)(v17);
-      if ( v25 )
-        Scaleform::RefCountImpl::Release(v25);
-      v23.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable;
-      Scaleform::RefCountImplCore::~RefCountImplCore(&v23);
+      if ( v18 )
+        ((void (__fastcall *)(Scaleform::Render::ImageSource *))v18->vfptr[2].__vecDelDtor)(v18);
+      if ( v15 )
+        ((void (__fastcall *)(Scaleform::Render::Image *))v15->vfptr[2].__vecDelDtor)(v15);
+      if ( v23 )
+        Scaleform::RefCountImpl::Release(v23);
+      v21.vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::State::`vftable;
+      Scaleform::RefCountImplCore::~RefCountImplCore(&v21);
     }
   }
 }
 
 // File Line: 489
 // RVA: 0x8BFD50
-Scaleform::GFx::FrameBindData *__fastcall Scaleform::GFx::LoadProcess::CreateFrameBindData(Scaleform::GFx::LoadProcess *this)
+Scaleform::GFx::FrameBindData *__fastcall Scaleform::GFx::LoadProcess::CreateFrameBindData(
+        Scaleform::GFx::LoadProcess *this)
 {
-  Scaleform::GFx::LoadProcess *v1; // rbx
   Scaleform::GFx::FrameBindData *result; // rax
 
-  v1 = this;
   result = Scaleform::GFx::MovieDataDef::LoadTaskData::AllocMovieDefClass<Scaleform::GFx::FrameBindData>(this->pLoadData.pObject);
   if ( result )
   {
-    result->ImportCount = v1->ImportDataCount;
-    result->pImportData = v1->pImportData;
-    result->FontCount = v1->FontDataCount;
-    result->pFontData = v1->pFontData;
-    result->ResourceCount = v1->ResourceDataCount;
-    result->pResourceData = v1->pResourceData;
-    *(_QWORD *)&v1->ImportDataCount = 0i64;
-    v1->FontDataCount = 0;
-    v1->pImportData = 0i64;
-    v1->pResourceData = 0i64;
-    v1->pFontData = 0i64;
+    result->ImportCount = this->ImportDataCount;
+    result->pImportData = this->pImportData;
+    result->FontCount = this->FontDataCount;
+    result->pFontData = this->pFontData;
+    result->ResourceCount = this->ResourceDataCount;
+    result->pResourceData = this->pResourceData;
+    *(_QWORD *)&this->ImportDataCount = 0i64;
+    this->FontDataCount = 0;
+    this->pImportData = 0i64;
+    this->pResourceData = 0i64;
+    this->pFontData = 0i64;
   }
   return result;
 }
 
 // File Line: 523
 // RVA: 0x8C2CE0
-__int64 __fastcall Scaleform::GFx::ImageFileResourceCreator::CreateResource(Scaleform::GFx::ImageFileResourceCreator *this, void *hdata, Scaleform::GFx::ResourceBindData *pbindData, Scaleform::GFx::LoadStates *pls)
+__int64 __fastcall Scaleform::GFx::ImageFileResourceCreator::CreateResource(
+        Scaleform::GFx::ImageFileResourceCreator *this,
+        unsigned __int16 *hdata,
+        Scaleform::GFx::ResourceBindData *pbindData,
+        Scaleform::GFx::LoadStates *pls)
 {
-  Scaleform::GFx::LoadStates *v4; // r15
   Scaleform::GFx::ResourceBindData *v5; // rdi
-  unsigned __int16 *v6; // r14
   Scaleform::GFx::ResourceFileInfo *v7; // rax
   __int64 v8; // rsi
   Scaleform::GFx::Resource *v9; // rbx
   _DWORD *v10; // rax
-  Scaleform::GFx::URLBuilder *v11; // rcx
+  Scaleform::GFx::URLBuilder *pObject; // rcx
   Scaleform::Render::Image *v12; // rdi
   Scaleform::GFx::MovieDefBindStates *v13; // r8
   __int64 v14; // rcx
   int v15; // eax
   Scaleform::GFx::ImageFileHandlerRegistry *v16; // rbx
   Scaleform::GFx::FileOpener *v17; // rdi
-  Scaleform::Log *v18; // rax
+  Scaleform::GFx::LogState *GlobalLog; // rax
   int v19; // edx
-  __int64 v20; // rdi
+  Scaleform::GFx::ImageFileHandlerRegistry *v20; // rdi
   __int64 v21; // rdx
   Scaleform::GFx::LogState *v22; // rax
   Scaleform::Log *v23; // rax
@@ -1285,53 +1248,51 @@ __int64 __fastcall Scaleform::GFx::ImageFileResourceCreator::CreateResource(Scal
   const char *v28; // rdx
   unsigned __int8 v29; // di
   Scaleform::GFx::Resource *v30; // rbx
-  Scaleform::GFx::ResourceLibBase *v31; // rcx
+  Scaleform::GFx::ResourceLibBase *pLib; // rcx
   __int64 v32; // rbx
   Scaleform::GFx::ResourceLibBase *v33; // rcx
-  Scaleform::GFx::Resource *v34; // rbx
+  Scaleform::GFx::Resource *pResource; // rbx
   Scaleform::GFx::ResourceLibBase *v35; // rcx
-  Scaleform::GFx::ResourceLib::BindHandle phandle; // [rsp+30h] [rbp-D0h]
-  __int64 v38; // [rsp+40h] [rbp-C0h]
+  Scaleform::GFx::ResourceLib::BindHandle phandle; // [rsp+30h] [rbp-D0h] BYREF
+  __int64 v38; // [rsp+40h] [rbp-C0h] BYREF
   Scaleform::Render::Image *pimage; // [rsp+48h] [rbp-B8h]
-  __m128 v40; // [rsp+50h] [rbp-B0h]
+  __m128 v40; // [rsp+50h] [rbp-B0h] BYREF
   __m128 v41; // [rsp+60h] [rbp-A0h]
   Scaleform::MemoryHeap *pimageHeap; // [rsp+70h] [rbp-90h]
-  Scaleform::GFx::ImageResource *v43; // [rsp+78h] [rbp-88h]
-  Scaleform::GFx::ResourceKey result; // [rsp+80h] [rbp-80h]
-  Scaleform::GFx::URLBuilder::LocationInfo loc; // [rsp+90h] [rbp-70h]
-  int v46; // [rsp+A8h] [rbp-58h]
+  __int64 v43; // [rsp+78h] [rbp-88h]
+  Scaleform::GFx::ResourceKey result; // [rsp+80h] [rbp-80h] BYREF
+  Scaleform::GFx::URLBuilder::LocationInfo loc; // [rsp+90h] [rbp-70h] BYREF
+  int v46; // [rsp+A8h] [rbp-58h] BYREF
   Scaleform::MemoryHeap *v47; // [rsp+B0h] [rbp-50h]
   int v48; // [rsp+B8h] [rbp-48h]
   int v49; // [rsp+BCh] [rbp-44h]
   Scaleform::Log *v50; // [rsp+C0h] [rbp-40h]
   __int64 v51; // [rsp+C8h] [rbp-38h]
-  __int64 v52; // [rsp+D0h] [rbp-30h]
+  Scaleform::GFx::ImageFileHandlerRegistry *v52; // [rsp+D0h] [rbp-30h]
   __int64 v53; // [rsp+D8h] [rbp-28h]
-  int v54; // [rsp+E0h] [rbp-20h]
+  int v54; // [rsp+E0h] [rbp-20h] BYREF
   Scaleform::MemoryHeap *v55; // [rsp+E8h] [rbp-18h]
   int v56; // [rsp+F0h] [rbp-10h]
   int v57; // [rsp+F4h] [rbp-Ch]
-  Scaleform::Log *v58; // [rsp+F8h] [rbp-8h]
+  Scaleform::GFx::LogState *v58; // [rsp+F8h] [rbp-8h]
   __int128 v59; // [rsp+100h] [rbp+0h]
   __int64 v60; // [rsp+110h] [rbp+10h]
   Scaleform::Render::ImageFileFormat v61; // [rsp+118h] [rbp+18h]
   __int64 v62; // [rsp+120h] [rbp+20h]
-  Scaleform::String v63; // [rsp+128h] [rbp+28h]
+  Scaleform::String v63; // [rsp+128h] [rbp+28h] BYREF
   int v64; // [rsp+130h] [rbp+30h]
   int v65; // [rsp+134h] [rbp+34h]
   Scaleform::MemoryHeap *v66; // [rsp+140h] [rbp+40h]
   __int64 v67; // [rsp+148h] [rbp+48h]
   __int64 v68; // [rsp+150h] [rbp+50h]
-  Scaleform::String v69; // [rsp+1A8h] [rbp+A8h]
+  Scaleform::String v69; // [rsp+1A8h] [rbp+A8h] BYREF
   Scaleform::GFx::ResourceBindData *v70; // [rsp+1B0h] [rbp+B0h]
   Scaleform::GFx::Resource *v71; // [rsp+1B8h] [rbp+B8h]
 
   v70 = pbindData;
   v68 = -2i64;
-  v4 = pls;
   v5 = pbindData;
-  v6 = (unsigned __int16 *)hdata;
-  v7 = (Scaleform::GFx::ResourceFileInfo *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
+  v7 = (Scaleform::GFx::ResourceFileInfo *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
                                              Scaleform::Memory::pGlobalHeap,
                                              56i64);
   v8 = (__int64)v7;
@@ -1339,12 +1300,12 @@ __int64 __fastcall Scaleform::GFx::ImageFileResourceCreator::CreateResource(Scal
   v9 = 0i64;
   if ( v7 )
   {
-    Scaleform::GFx::ResourceFileInfo::ResourceFileInfo(v7, (Scaleform::GFx::ResourceFileInfo *)v6);
+    Scaleform::GFx::ResourceFileInfo::ResourceFileInfo(v7, (Scaleform::GFx::ResourceFileInfo *)hdata);
     *(_QWORD *)v8 = &Scaleform::GFx::ImageFileInfo::`vftable;
     Scaleform::String::String((Scaleform::String *)(v8 + 48));
-    *(_WORD *)(v8 + 40) = v6[20];
-    *(_WORD *)(v8 + 42) = v6[21];
-    *(_DWORD *)(v8 + 44) = *((_DWORD *)v6 + 11);
+    *(_WORD *)(v8 + 40) = hdata[20];
+    *(_WORD *)(v8 + 42) = hdata[21];
+    *(_DWORD *)(v8 + 44) = *((_DWORD *)hdata + 11);
   }
   else
   {
@@ -1357,74 +1318,74 @@ __int64 __fastcall Scaleform::GFx::ImageFileResourceCreator::CreateResource(Scal
     if ( v10 )
       *(_DWORD *)(v8 + 16) = *v10;
   }
-  loc.Use = 2;
-  Scaleform::String::String(&loc.FileName, (Scaleform::String *)v6 + 4);
-  Scaleform::String::String(&loc.ParentPath, &v4->RelativePath);
-  v11 = v4->pBindStates.pObject->pURLBulider.pObject;
-  if ( v11 )
-    ((void (__fastcall *)(Scaleform::GFx::URLBuilder *, __int64, Scaleform::GFx::URLBuilder::LocationInfo *))v11->vfptr[1].__vecDelDtor)(
-      v11,
+  loc.Use = File_ImageImport;
+  Scaleform::String::String(&loc.FileName, (Scaleform::String *)hdata + 4);
+  Scaleform::String::String(&loc.ParentPath, &pls->RelativePath);
+  pObject = pls->pBindStates.pObject->pURLBulider.pObject;
+  if ( pObject )
+    ((void (__fastcall *)(Scaleform::GFx::URLBuilder *, __int64, Scaleform::GFx::URLBuilder::LocationInfo *))pObject->vfptr[1].__vecDelDtor)(
+      pObject,
       v8 + 32,
       &loc);
   else
     Scaleform::GFx::URLBuilder::DefaultBuildURL((Scaleform::String *)(v8 + 32), &loc);
-  pimageHeap = v4->pWeakResourceLib.pObject->pImageHeap.pObject;
+  pimageHeap = pls->pWeakResourceLib.pObject->pImageHeap.pObject;
   v66 = pimageHeap;
   Scaleform::GFx::ImageResource::CreateImageFileKey(
     &result,
     (Scaleform::GFx::ImageFileInfo *)v8,
-    v4->pBindStates.pObject->pFileOpener.pObject,
-    v4->pBindStates.pObject->pImageCreator.pObject,
+    (Scaleform::GFx::Resource *)pls->pBindStates.pObject->pFileOpener.pObject,
+    (Scaleform::GFx::Resource *)pls->pBindStates.pObject->pImageCreator.pObject,
     pimageHeap);
   Scaleform::String::String(&v69);
-  phandle.State = 0;
+  phandle.State = RS_Unbound;
   phandle.pResource = 0i64;
   v71 = 0i64;
-  if ( (unsigned int)Scaleform::GFx::ResourceWeakLib::BindResourceKey(v4->pWeakResourceLib.pObject, &phandle, &result) == 3 )
+  if ( (unsigned int)Scaleform::GFx::ResourceWeakLib::BindResourceKey(pls->pWeakResourceLib.pObject, &phandle, &result) == 3 )
   {
     v12 = 0i64;
     pimage = 0i64;
-    v13 = v4->pBindStates.pObject;
+    v13 = pls->pBindStates.pObject;
     v14 = (__int64)v13->pImageCreator.pObject;
     v38 = v14;
     if ( !v14 )
-      goto LABEL_70;
-    v15 = *((_DWORD *)v6 + 11);
-    if ( *((_QWORD *)v6 + 3) )
+      goto LABEL_30;
+    v15 = *((_DWORD *)hdata + 11);
+    if ( *((_QWORD *)hdata + 3) )
     {
       v54 = 2;
       v55 = pimageHeap;
       v56 = 0;
       v57 = v15;
       v58 = 0i64;
-      _mm_store_si128((__m128i *)&v59, (__m128i)0i64);
+      v59 = 0i64;
       v60 = 0i64;
       Scaleform::String::String(&v63);
-      v16 = v4->pImageFileHandlerRegistry.pObject;
-      v17 = v4->pBindStates.pObject->pFileOpener.pObject;
-      v18 = (Scaleform::Log *)v4->pLog.pObject;
-      if ( v18 )
+      v16 = pls->pImageFileHandlerRegistry.pObject;
+      v17 = pls->pBindStates.pObject->pFileOpener.pObject;
+      GlobalLog = pls->pLog.pObject;
+      if ( GlobalLog )
       {
-        v18 = (Scaleform::Log *)v18[2].vfptr;
-        if ( !v18 )
-          v18 = Scaleform::Log::GetGlobalLog();
+        GlobalLog = (Scaleform::GFx::LogState *)GlobalLog->pLog.pObject;
+        if ( !GlobalLog )
+          GlobalLog = (Scaleform::GFx::LogState *)Scaleform::Log::GetGlobalLog();
       }
       *(_QWORD *)&v59 = v17;
-      v58 = v18;
+      v58 = GlobalLog;
       *((_QWORD *)&v59 + 1) = v16;
-      v62 = *((_QWORD *)v6 + 3);
-      v61 = Scaleform::GFx::LoaderImpl::FileFormat2RenderImageFile(*((Scaleform::GFx::FileTypeConstants::FileFormatType *)v6
+      v62 = *((_QWORD *)hdata + 3);
+      v61 = Scaleform::GFx::LoaderImpl::FileFormat2RenderImageFile(*((Scaleform::GFx::FileTypeConstants::FileFormatType *)hdata
                                                                    + 4));
-      v19 = v6[21];
-      v64 = v6[20];
+      v19 = hdata[21];
+      v64 = hdata[20];
       v65 = v19;
-      Scaleform::String::operator=(&v63, (Scaleform::String *)v6 + 6);
+      Scaleform::String::operator=(&v63, (Scaleform::String *)hdata + 6);
       pimage = (Scaleform::Render::Image *)(*(__int64 (__fastcall **)(__int64, int *, __int64))(*(_QWORD *)v38 + 24i64))(
                                              v38,
                                              &v54,
                                              v8 + 32);
       if ( !_InterlockedDecrement((volatile signed __int32 *)((v63.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-        ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
+        ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
       v9 = v71;
       v12 = pimage;
     }
@@ -1438,10 +1399,10 @@ __int64 __fastcall Scaleform::GFx::ImageFileResourceCreator::CreateResource(Scal
       v51 = 0i64;
       v52 = 0i64;
       v53 = 0i64;
-      v20 = (__int64)v4->pImageFileHandlerRegistry.pObject;
+      v20 = pls->pImageFileHandlerRegistry.pObject;
       v21 = (__int64)v13->pFileOpener.pObject;
-      v43 = (Scaleform::GFx::ImageResource *)v13->pFileOpener.pObject;
-      v22 = v4->pLog.pObject;
+      v43 = v21;
+      v22 = pls->pLog.pObject;
       if ( v22 )
       {
         v23 = v22->pLog.pObject;
@@ -1449,7 +1410,7 @@ __int64 __fastcall Scaleform::GFx::ImageFileResourceCreator::CreateResource(Scal
         {
           v23 = Scaleform::Log::GetGlobalLog();
           v14 = v38;
-          v21 = (__int64)v43;
+          v21 = v43;
         }
       }
       else
@@ -1466,28 +1427,28 @@ __int64 __fastcall Scaleform::GFx::ImageFileResourceCreator::CreateResource(Scal
       pimage = v12;
     }
     if ( !v12 )
-      goto LABEL_70;
+      goto LABEL_30;
     v40 = (__m128)_xmm;
     v41 = _xmm;
-    v12->vfptr[5].__vecDelDtor((Scaleform::RefCountImplCore *)&v12->vfptr, (unsigned int)&v38);
-    v24 = (__m128)COERCE_UNSIGNED_INT((float)v6[21]);
+    v12->vfptr[5].__vecDelDtor(v12, (unsigned int)&v38);
+    v24 = (__m128)COERCE_UNSIGNED_INT((float)hdata[21]);
     v24.m128_f32[0] = v24.m128_f32[0] / (float)SHIDWORD(v38);
-    v25 = (__m128)COERCE_UNSIGNED_INT((float)v6[20]);
-    v25.m128_f32[0] = v25.m128_f32[0] / (float)(signed int)v38;
+    v25 = (__m128)COERCE_UNSIGNED_INT((float)hdata[20]);
+    v25.m128_f32[0] = v25.m128_f32[0] / (float)(int)v38;
     v40 = _mm_mul_ps(v40, _mm_shuffle_ps(v25, v25, 0));
     v41 = _mm_mul_ps(v41, _mm_shuffle_ps(v24, v24, 0));
     ((void (__fastcall *)(Scaleform::Render::Image *, __m128 *, _QWORD))v12->vfptr[13].__vecDelDtor)(v12, &v40, 0i64);
-    v26 = (Scaleform::GFx::ImageResource *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))pimageHeap->vfptr->Alloc)(
+    v26 = (Scaleform::GFx::ImageResource *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))pimageHeap->vfptr->Alloc)(
                                              pimageHeap,
                                              104i64);
-    v43 = v26;
+    v43 = (__int64)v26;
     if ( v26 )
     {
       Scaleform::GFx::ImageResource::ImageResource(
         v26,
         v12,
         &result,
-        *((Scaleform::GFx::Resource::ResourceUse *)v6 + 11));
+        *((Scaleform::GFx::Resource::ResourceUse *)hdata + 11));
       v9 = v27;
     }
     else
@@ -1501,7 +1462,7 @@ __int64 __fastcall Scaleform::GFx::ImageFileResourceCreator::CreateResource(Scal
     }
     else
     {
-LABEL_70:
+LABEL_30:
       Scaleform::String::operator=(&v69, "Failed to load image ");
       Scaleform::String::operator+=(&v69, (Scaleform::String *)(v8 + 32));
       Scaleform::String::AppendString(&v69, "", -1i64);
@@ -1519,8 +1480,8 @@ LABEL_70:
     v71 = v9;
     if ( v9 )
       goto LABEL_41;
-    if ( phandle.State < 2 )
-      v28 = &customWorldMapCaption;
+    if ( phandle.State < RS_WaitingResolve )
+      v28 = &customCaption;
     else
       v28 = (const char *)((*(_QWORD *)&phandle.pResource[2].RefCount.Value & 0xFFFFFFFFFFFFFFFCui64) + 12);
     Scaleform::String::operator=(&v69, v28);
@@ -1528,9 +1489,9 @@ LABEL_70:
   if ( !v9 )
   {
     Scaleform::GFx::LogBase<Scaleform::GFx::LogState>::LogError(
-      (Scaleform::GFx::LogBase<Scaleform::GFx::LogState> *)&v4->pLog.pObject->vfptr,
+      &pls->pLog.pObject->Scaleform::GFx::LogBase<Scaleform::GFx::LogState>,
       "%s",
-      (v69.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12);
+      (const char *)((v69.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12));
     v29 = 0;
     goto LABEL_47;
   }
@@ -1539,10 +1500,10 @@ LABEL_41:
   v30 = v5->pResource.pObject;
   if ( v5->pResource.pObject && !_InterlockedDecrement(&v30->RefCount.Value) )
   {
-    v31 = v30->pLib;
-    if ( v31 )
+    pLib = v30->pLib;
+    if ( pLib )
     {
-      v31->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v31->vfptr, (unsigned int)v30);
+      pLib->vfptr[1].__vecDelDtor(pLib, (unsigned int)v30);
       v30->pLib = 0i64;
     }
     v30->vfptr->__vecDelDtor(v30, 1u);
@@ -1557,77 +1518,74 @@ LABEL_47:
     v33 = v71->pLib;
     if ( v33 )
     {
-      v33->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v33->vfptr, (unsigned int)v71);
+      v33->vfptr[1].__vecDelDtor(v33, (unsigned int)v71);
       *(_QWORD *)(v32 + 16) = 0i64;
     }
-    (**(void (__fastcall ***)(__int64, signed __int64))v32)(v32, 1i64);
+    (**(void (__fastcall ***)(__int64, __int64))v32)(v32, 1i64);
   }
-  if ( phandle.State == 1 )
+  if ( phandle.State == RS_Available )
   {
     if ( !_InterlockedDecrement(&phandle.pResource->RefCount.Value) )
     {
-      v34 = phandle.pResource;
+      pResource = phandle.pResource;
       v35 = phandle.pResource->pLib;
       if ( v35 )
       {
-        v35->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v35->vfptr, (unsigned int)phandle.pResource);
-        v34->pLib = 0i64;
+        v35->vfptr[1].__vecDelDtor(v35, (unsigned int)phandle.pResource);
+        pResource->pLib = 0i64;
       }
-      v34->vfptr->__vecDelDtor(v34, 1u);
+      pResource->vfptr->__vecDelDtor(pResource, 1u);
     }
   }
-  else if ( phandle.State >= 2 )
+  else if ( phandle.State >= RS_WaitingResolve )
   {
     Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)phandle.pResource);
   }
   if ( !_InterlockedDecrement((volatile signed __int32 *)((v69.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-    ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
   if ( result.pKeyInterface )
     result.pKeyInterface->vfptr->Release(result.pKeyInterface, result.hKeyData);
   if ( !_InterlockedDecrement((volatile signed __int32 *)((loc.ParentPath.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-    ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
   if ( _InterlockedExchangeAdd(
          (volatile signed __int32 *)((loc.FileName.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8),
          0xFFFFFFFF) == 1 )
-    ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
   Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)v8);
   return v29;
-}vfptr->Free)();
-  if ( _InterlockedExchangeAdd(
-         (volatile signed __int32 *)((loc.FileName.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8),
+}
 
 // File Line: 633
 // RVA: 0x8C0000
-Scaleform::GFx::ResourceData *__fastcall Scaleform::GFx::ImageFileResourceCreator::CreateImageFileResourceData(Scaleform::GFx::ResourceData *result, Scaleform::GFx::ImageFileInfo *prfi)
+Scaleform::GFx::ResourceData *__fastcall Scaleform::GFx::ImageFileResourceCreator::CreateImageFileResourceData(
+        Scaleform::GFx::ResourceData *result,
+        Scaleform::GFx::ImageFileInfo *prfi)
 {
-  Scaleform::GFx::ImageFileInfo *v2; // rdi
-  Scaleform::GFx::ResourceData *v3; // rbx
-
-  v2 = prfi;
-  v3 = result;
-  if ( !(_S13_10 & 1) )
+  if ( (_S13_10 & 1) == 0 )
   {
     _S13_10 |= 1u;
     inst.vfptr = (Scaleform::GFx::ResourceData::DataInterfaceVtbl *)&Scaleform::GFx::ImageFileResourceCreator::`vftable;
     atexit(Scaleform::GFx::ImageFileResourceCreator::CreateImageFileResourceData_::_2_::_dynamic_atexit_destructor_for__inst__);
   }
-  inst.vfptr->AddRef((Scaleform::GFx::ResourceData::DataInterface *)&inst, v2);
-  v3->pInterface = (Scaleform::GFx::ResourceData::DataInterface *)&inst;
-  v3->hData = v2;
-  return v3;
+  inst.vfptr->AddRef(&inst, prfi);
+  result->pInterface = &inst;
+  result->hData = prfi;
+  return result;
 }
 
 // File Line: 643
 // RVA: 0x8C3300
-char __fastcall Scaleform::GFx::ImageResourceCreator::CreateResource(Scaleform::GFx::ImageResourceCreator *this, void *hdata, Scaleform::GFx::ResourceBindData *pbindData, Scaleform::GFx::LoadStates *pls, Scaleform::MemoryHeap *pbindHeap)
+char __fastcall Scaleform::GFx::ImageResourceCreator::CreateResource(
+        Scaleform::GFx::ImageResourceCreator *this,
+        void *hdata,
+        Scaleform::GFx::ResourceBindData *pbindData,
+        Scaleform::GFx::LoadStates *pls,
+        Scaleform::MemoryHeap *pbindHeap)
 {
-  Scaleform::GFx::LoadStates *v5; // rdi
-  Scaleform::GFx::ResourceBindData *v6; // r15
-  void *v7; // r14
-  Scaleform::GFx::ImageFileHandlerRegistry *v8; // rsi
+  Scaleform::GFx::ImageFileHandlerRegistry *pObject; // rsi
   Scaleform::GFx::FileOpener *v9; // rbp
   Scaleform::GFx::LogState *v10; // rax
-  Scaleform::Log *v11; // rax
+  Scaleform::Log *GlobalLog; // rax
   Scaleform::GFx::ImageCreator *v12; // rcx
   Scaleform::Render::Image *v14; // r14
   char v15; // si
@@ -1635,9 +1593,9 @@ char __fastcall Scaleform::GFx::ImageResourceCreator::CreateResource(Scaleform::
   Scaleform::GFx::Resource *v17; // rax
   Scaleform::GFx::Resource *v18; // rdi
   Scaleform::GFx::Resource *v19; // rsi
-  Scaleform::GFx::ResourceLibBase *v20; // rcx
+  Scaleform::GFx::ResourceLibBase *pLib; // rcx
   Scaleform::GFx::ResourceLibBase *v21; // rcx
-  int v22; // [rsp+28h] [rbp-60h]
+  int v22; // [rsp+28h] [rbp-60h] BYREF
   Scaleform::MemoryHeap *v23; // [rsp+30h] [rbp-58h]
   __int64 v24; // [rsp+38h] [rbp-50h]
   Scaleform::Log *v25; // [rsp+40h] [rbp-48h]
@@ -1645,9 +1603,6 @@ char __fastcall Scaleform::GFx::ImageResourceCreator::CreateResource(Scaleform::
   Scaleform::GFx::ImageFileHandlerRegistry *v27; // [rsp+50h] [rbp-38h]
   __int64 v28; // [rsp+58h] [rbp-30h]
 
-  v5 = pls;
-  v6 = pbindData;
-  v7 = hdata;
   v22 = 1;
   v23 = pbindHeap;
   v24 = 0i64;
@@ -1655,33 +1610,33 @@ char __fastcall Scaleform::GFx::ImageResourceCreator::CreateResource(Scaleform::
   v26 = 0i64;
   v27 = 0i64;
   v28 = 0i64;
-  v8 = pls->pImageFileHandlerRegistry.pObject;
+  pObject = pls->pImageFileHandlerRegistry.pObject;
   v9 = pls->pBindStates.pObject->pFileOpener.pObject;
   v10 = pls->pLog.pObject;
   if ( v10 )
   {
-    v11 = v10->pLog.pObject;
-    if ( !v11 )
-      v11 = Scaleform::Log::GetGlobalLog();
+    GlobalLog = v10->pLog.pObject;
+    if ( !GlobalLog )
+      GlobalLog = Scaleform::Log::GetGlobalLog();
   }
   else
   {
-    v11 = 0i64;
+    GlobalLog = 0i64;
   }
   v26 = v9;
-  v25 = v11;
-  v27 = v8;
+  v25 = GlobalLog;
+  v27 = pObject;
   v23 = pbindHeap;
-  v12 = v5->pBindStates.pObject->pImageCreator.pObject;
+  v12 = pls->pBindStates.pObject->pImageCreator.pObject;
   if ( !v12 )
     return 0;
   v14 = (Scaleform::Render::Image *)((__int64 (__fastcall *)(Scaleform::GFx::ImageCreator *, int *, void *))v12->vfptr[4].__vecDelDtor)(
                                       v12,
                                       &v22,
-                                      v7);
+                                      hdata);
   if ( v14 )
   {
-    v16 = (Scaleform::GFx::ImageResource *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))pbindHeap->vfptr->Alloc)(
+    v16 = (Scaleform::GFx::ImageResource *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))pbindHeap->vfptr->Alloc)(
                                              pbindHeap,
                                              104i64);
     if ( v16 )
@@ -1696,18 +1651,18 @@ char __fastcall Scaleform::GFx::ImageResourceCreator::CreateResource(Scaleform::
     if ( v18 )
     {
       _InterlockedExchangeAdd(&v18->RefCount.Value, 1u);
-      v19 = v6->pResource.pObject;
-      if ( v6->pResource.pObject && !_InterlockedDecrement(&v19->RefCount.Value) )
+      v19 = pbindData->pResource.pObject;
+      if ( pbindData->pResource.pObject && !_InterlockedDecrement(&v19->RefCount.Value) )
       {
-        v20 = v19->pLib;
-        if ( v20 )
+        pLib = v19->pLib;
+        if ( pLib )
         {
-          v20->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v20->vfptr, (unsigned int)v19);
+          pLib->vfptr[1].__vecDelDtor(pLib, (unsigned int)v19);
           v19->pLib = 0i64;
         }
         v19->vfptr->__vecDelDtor(v19, 1u);
       }
-      v6->pResource.pObject = v18;
+      pbindData->pResource.pObject = v18;
       v15 = 1;
     }
     else
@@ -1719,7 +1674,7 @@ char __fastcall Scaleform::GFx::ImageResourceCreator::CreateResource(Scaleform::
       v21 = v18->pLib;
       if ( v21 )
       {
-        v21->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v21->vfptr, (unsigned int)v18);
+        v21->vfptr[1].__vecDelDtor(v21, (unsigned int)v18);
         v18->pLib = 0i64;
       }
       v18->vfptr->__vecDelDtor(v18, 1u);
@@ -1736,64 +1691,62 @@ char __fastcall Scaleform::GFx::ImageResourceCreator::CreateResource(Scaleform::
 
 // File Line: 676
 // RVA: 0x8C03A0
-Scaleform::GFx::ResourceData *__fastcall Scaleform::GFx::ImageResourceCreator::CreateImageResourceData(Scaleform::GFx::ResourceData *result, Scaleform::Render::ImageSource *pimage)
+Scaleform::GFx::ResourceData *__fastcall Scaleform::GFx::ImageResourceCreator::CreateImageResourceData(
+        Scaleform::GFx::ResourceData *result,
+        Scaleform::Render::ImageSource *pimage)
 {
-  Scaleform::Render::ImageSource *v2; // rdi
-  Scaleform::GFx::ResourceData *v3; // rbx
-
-  v2 = pimage;
-  v3 = result;
-  if ( !(_S14_7 & 1) )
+  if ( (_S14_7 & 1) == 0 )
   {
     _S14_7 |= 1u;
     inst_0.vfptr = (Scaleform::GFx::ResourceData::DataInterfaceVtbl *)&Scaleform::GFx::ImageResourceCreator::`vftable;
     atexit(Scaleform::GFx::ImageResourceCreator::CreateImageResourceData_::_2_::_dynamic_atexit_destructor_for__inst__);
   }
-  if ( v2 )
+  if ( pimage )
   {
-    inst_0.vfptr->AddRef((Scaleform::GFx::ResourceData::DataInterface *)&inst_0, v2);
-    v3->pInterface = (Scaleform::GFx::ResourceData::DataInterface *)&inst_0;
-    v3->hData = v2;
+    inst_0.vfptr->AddRef(&inst_0, pimage);
+    result->pInterface = &inst_0;
+    result->hData = pimage;
   }
   else
   {
-    v3->pInterface = 0i64;
-    v3->hData = 0i64;
+    result->pInterface = 0i64;
+    result->hData = 0i64;
   }
-  return v3;
+  return result;
 }
 
 // File Line: 688
 // RVA: 0x8C34C0
-char __fastcall Scaleform::GFx::SubImageResourceCreator::CreateResource(Scaleform::GFx::SubImageResourceCreator *this, void *hdata, Scaleform::GFx::ResourceBindData *pbindData, Scaleform::GFx::LoadStates *pls, Scaleform::MemoryHeap *pbindHeap)
+char __fastcall Scaleform::GFx::SubImageResourceCreator::CreateResource(
+        Scaleform::GFx::SubImageResourceCreator *this,
+        void *hdata,
+        Scaleform::GFx::ResourceBindData *pbindData,
+        Scaleform::GFx::LoadStates *pls,
+        Scaleform::MemoryHeap *pbindHeap)
 {
-  Scaleform::GFx::ResourceBindData *v5; // r14
-  Scaleform::Render::Rect<unsigned long> *v6; // rbp
   Scaleform::GFx::ImageResource *v7; // rdi
   __int64 v8; // rdx
-  Scaleform::GFx::Resource *v9; // rax
+  Scaleform::GFx::Resource *Resource; // rax
   Scaleform::GFx::ImageResource *v10; // rsi
-  Scaleform::GFx::Resource *v11; // rsi
-  Scaleform::GFx::ResourceLibBase *v12; // rcx
+  Scaleform::GFx::Resource *pResource; // rsi
+  Scaleform::GFx::ResourceLibBase *pLib; // rcx
   Scaleform::GFx::SubImageResource *v14; // rax
   Scaleform::GFx::Resource *v15; // rax
   Scaleform::GFx::Resource *v16; // rsi
-  Scaleform::GFx::Resource *v17; // rdi
+  Scaleform::GFx::Resource *pObject; // rdi
   Scaleform::GFx::ResourceLibBase *v18; // rcx
-  Scaleform::GFx::ResourceId baseid; // [rsp+30h] [rbp-48h]
+  Scaleform::GFx::ResourceId baseid; // [rsp+30h] [rbp-48h] BYREF
   int v20; // [rsp+34h] [rbp-44h]
   __int64 v21; // [rsp+38h] [rbp-40h]
   Scaleform::GFx::SubImageResource *v22; // [rsp+40h] [rbp-38h]
-  Scaleform::GFx::ResourceHandle v23; // [rsp+48h] [rbp-30h]
-  int v24; // [rsp+88h] [rbp+10h]
+  Scaleform::GFx::ResourceHandle v23; // [rsp+48h] [rbp-30h] BYREF
+  int v24; // [rsp+88h] [rbp+10h] BYREF
 
   v21 = -2i64;
-  v5 = pbindData;
-  v6 = (Scaleform::Render::Rect<unsigned long> *)hdata;
   v7 = (Scaleform::GFx::ImageResource *)*((_QWORD *)hdata + 3);
   if ( !v7 )
   {
-    v23.HType = 0;
+    v23.HType = RH_Pointer;
     v23.pResource = 0i64;
     v20 = *((_DWORD *)hdata + 4);
     v8 = *(_QWORD *)(*(_QWORD *)&pbindData->pBinding->pOwnerDefRes[4].RefCount.Value + 24i64);
@@ -1802,25 +1755,28 @@ char __fastcall Scaleform::GFx::SubImageResourceCreator::CreateResource(Scalefor
       *(Scaleform::GFx::MovieDataDef::LoadTaskData **)(v8 + 64),
       &v23,
       (Scaleform::GFx::ResourceId)&v24);
-    v9 = Scaleform::GFx::ResourceHandle::GetResource(&v23, v5->pBinding);
-    v10 = (Scaleform::GFx::ImageResource *)v9;
-    if ( v9 && (v9->vfptr->GetResourceTypeCode(v9) & 0xFF00) == 256 )
+    Resource = Scaleform::GFx::ResourceHandle::GetResource(&v23, pbindData->pBinding);
+    v10 = (Scaleform::GFx::ImageResource *)Resource;
+    if ( Resource
+      && (((__int64 (__fastcall *)(Scaleform::GFx::Resource *))Resource->vfptr->GetResourceTypeCode)(Resource) & 0xFF00) == 256 )
+    {
       v7 = v10;
+    }
     if ( v23.HType == RH_Pointer && v23.pResource && !_InterlockedDecrement(&v23.pResource->RefCount.Value) )
     {
-      v11 = v23.pResource;
-      v12 = v23.pResource->pLib;
-      if ( v12 )
+      pResource = v23.pResource;
+      pLib = v23.pResource->pLib;
+      if ( pLib )
       {
-        v12->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v12->vfptr, (unsigned int)v23.pResource);
-        v11->pLib = 0i64;
+        pLib->vfptr[1].__vecDelDtor(pLib, (unsigned int)v23.pResource);
+        pResource->pLib = 0i64;
       }
-      v11->vfptr->__vecDelDtor(v11, 1u);
+      pResource->vfptr->__vecDelDtor(pResource, 1u);
     }
     if ( !v7 )
       return 0;
   }
-  v14 = (Scaleform::GFx::SubImageResource *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64, _QWORD, Scaleform::GFx::LoadStates *))pbindHeap->vfptr->Alloc)(
+  v14 = (Scaleform::GFx::SubImageResource *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64, _QWORD, Scaleform::GFx::LoadStates *))pbindHeap->vfptr->Alloc)(
                                               pbindHeap,
                                               128i64,
                                               0i64,
@@ -1829,155 +1785,163 @@ char __fastcall Scaleform::GFx::SubImageResourceCreator::CreateResource(Scalefor
   if ( v14 )
   {
     baseid.Id = 0;
-    Scaleform::GFx::SubImageResource::SubImageResource(v14, v7, (__int64)&baseid, v6 + 2);
+    Scaleform::GFx::SubImageResource::SubImageResource(
+      v14,
+      v7,
+      &baseid.Id,
+      (Scaleform::Render::Rect<unsigned long> *)hdata + 2);
     v16 = v15;
   }
   else
   {
     v16 = 0i64;
   }
-  v17 = v5->pResource.pObject;
-  if ( v5->pResource.pObject && !_InterlockedDecrement(&v17->RefCount.Value) )
+  pObject = pbindData->pResource.pObject;
+  if ( pbindData->pResource.pObject && !_InterlockedDecrement(&pObject->RefCount.Value) )
   {
-    v18 = v17->pLib;
+    v18 = pObject->pLib;
     if ( v18 )
     {
-      v18->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v18->vfptr, (unsigned int)v17);
-      v17->pLib = 0i64;
+      v18->vfptr[1].__vecDelDtor(v18, (unsigned int)pObject);
+      pObject->pLib = 0i64;
     }
-    v17->vfptr->__vecDelDtor(v17, 1u);
+    pObject->vfptr->__vecDelDtor(pObject, 1u);
   }
-  v5->pResource.pObject = v16;
+  pbindData->pResource.pObject = v16;
   return 1;
 }
 
 // File Line: 722
 // RVA: 0x8C3FC0
-Scaleform::GFx::ResourceData *__fastcall Scaleform::GFx::SubImageResourceCreator::CreateSubImageResourceData(Scaleform::GFx::ResourceData *result, Scaleform::GFx::SubImageResourceInfo *pinfo)
+Scaleform::GFx::ResourceData *__fastcall Scaleform::GFx::SubImageResourceCreator::CreateSubImageResourceData(
+        Scaleform::GFx::ResourceData *result,
+        Scaleform::GFx::SubImageResourceInfo *pinfo)
 {
-  Scaleform::GFx::SubImageResourceInfo *v2; // rdi
-  Scaleform::GFx::ResourceData *v3; // rbx
-
-  v2 = pinfo;
-  v3 = result;
-  if ( !(_S15_7 & 1) )
+  if ( (_S15_7 & 1) == 0 )
   {
     _S15_7 |= 1u;
     inst_1.vfptr = (Scaleform::GFx::ResourceData::DataInterfaceVtbl *)&Scaleform::GFx::SubImageResourceCreator::`vftable;
     atexit(Scaleform::GFx::SubImageResourceCreator::CreateSubImageResourceData_::_2_::_dynamic_atexit_destructor_for__inst__);
   }
-  inst_1.vfptr->AddRef((Scaleform::GFx::ResourceData::DataInterface *)&inst_1, v2);
-  v3->pInterface = (Scaleform::GFx::ResourceData::DataInterface *)&inst_1;
-  v3->hData = v2;
-  return v3;
+  inst_1.vfptr->AddRef(&inst_1, pinfo);
+  result->pInterface = &inst_1;
+  result->hData = pinfo;
+  return result;
 }
 
 // File Line: 734
 // RVA: 0x8C2AE0
-bool __fastcall Scaleform::GFx::FontResourceCreator::CreateResource(Scaleform::GFx::FontResourceCreator *this, void *hdata, Scaleform::GFx::ResourceBindData *pbindData, Scaleform::GFx::LoadStates *pls, Scaleform::MemoryHeap *pbindHeap)
+bool __fastcall Scaleform::GFx::FontResourceCreator::CreateResource(
+        Scaleform::GFx::FontResourceCreator *this,
+        Scaleform::GFx::Resource *hdata,
+        Scaleform::GFx::ResourceBindData *pbindData,
+        Scaleform::GFx::LoadStates *pls,
+        Scaleform::MemoryHeap *pbindHeap)
 {
-  Scaleform::GFx::LoadStates *v5; // r15
-  Scaleform::GFx::ResourceBindData *v6; // r12
-  Scaleform::Render::Font *v7; // r14
   unsigned int v8; // ebp
   __int64 v9; // rcx
-  Scaleform::GFx::MovieDefImpl *v10; // r13
-  Scaleform::GFx::FontDataUseNode *volatile v11; // rbx
+  Scaleform::GFx::MovieDefImpl *pObject; // r13
+  Scaleform::GFx::FontDataUseNode *volatile Value; // rbx
   Scaleform::Render::Font *v12; // rsi
   int v13; // edi
   const char *v14; // rsi
   const char *v15; // rax
-  unsigned int v16; // er8
-  bool result; // al
+  unsigned int BindIndex; // r8d
   bool v18; // zf
   Scaleform::GFx::FontResource *v19; // rax
   Scaleform::GFx::Resource *v20; // rax
   Scaleform::GFx::Resource *v21; // rdi
   Scaleform::GFx::Resource *v22; // rbx
-  Scaleform::GFx::ResourceLibBase *v23; // rcx
+  Scaleform::GFx::ResourceLibBase *pLib; // rcx
 
-  v5 = pls;
-  v6 = pbindData;
-  v7 = (Scaleform::Render::Font *)hdata;
   v8 = 0;
   if ( pls->SubstituteFontMovieDefs.Data.Size )
   {
     v9 = 0i64;
     while ( 1 )
     {
-      v10 = v5->SubstituteFontMovieDefs.Data.Data[v9].pObject;
-      v11 = v10->pBindData.pObject->pDataDef.pObject->pData.pObject->BindData.pFonts.Value;
-      if ( v11 )
+      pObject = pls->SubstituteFontMovieDefs.Data.Data[v9].pObject;
+      Value = pObject->pBindData.pObject->pDataDef.pObject->pData.pObject->BindData.pFonts.Value;
+      if ( Value )
         break;
 LABEL_8:
       v9 = ++v8;
-      if ( v8 >= v5->SubstituteFontMovieDefs.Data.Size )
+      if ( v8 >= pls->SubstituteFontMovieDefs.Data.Size )
         goto LABEL_15;
     }
     while ( 1 )
     {
-      v12 = v11->pFontData.pObject;
-      if ( ((unsigned int (__fastcall *)(Scaleform::Render::Font *))v12->vfptr[18].__vecDelDtor)(v11->pFontData.pObject) )
+      v12 = Value->pFontData.pObject;
+      if ( ((unsigned int (__fastcall *)(Scaleform::Render::Font *))v12->vfptr[18].__vecDelDtor)(v12) )
       {
         v13 = v12->Flags & 0x303;
         v14 = (const char *)((__int64 (__fastcall *)(Scaleform::Render::Font *))v12->vfptr[1].__vecDelDtor)(v12);
-        if ( (v7->Flags & (v13 & 0x10 | ((v13 & 0x300) != 0 ? 0x300 : 0) | 3)) == (v13 & 0x313) )
+        if ( (HIDWORD(hdata[1].vfptr) & (v13 & 0x10 | ((v13 & 0x300) != 0 ? 0x300 : 0) | 3)) == (v13 & 0x313) )
         {
-          v15 = (const char *)((__int64 (__fastcall *)(Scaleform::Render::Font *))v7->vfptr[1].__vecDelDtor)(v7);
+          v15 = (const char *)((__int64 (__fastcall *)(Scaleform::GFx::Resource *))hdata->vfptr->GetKey)(hdata);
           if ( !Scaleform::String::CompareNoCase(v15, v14) )
             break;
         }
       }
-      v11 = v11->pNext.Value;
-      if ( !v11 )
+      Value = Value->pNext.Value;
+      if ( !Value )
         goto LABEL_8;
     }
-    v16 = v11->BindIndex;
-    if ( v10->pBindData.pObject->ResourceBinding.Frozen && v16 < v10->pBindData.pObject->ResourceBinding.ResourceCount )
-      Scaleform::GFx::ResourceBindData::operator=(v6, &v10->pBindData.pObject->ResourceBinding.pResources[v16]);
+    BindIndex = Value->BindIndex;
+    if ( pObject->pBindData.pObject->ResourceBinding.Frozen
+      && BindIndex < pObject->pBindData.pObject->ResourceBinding.ResourceCount )
+    {
+      Scaleform::GFx::ResourceBindData::operator=(
+        pbindData,
+        &pObject->pBindData.pObject->ResourceBinding.pResources[BindIndex]);
+    }
     else
-      Scaleform::GFx::ResourceBinding::GetResourceData_Locked(&v10->pBindData.pObject->ResourceBinding, v6, v16);
-    result = 1;
+    {
+      Scaleform::GFx::ResourceBinding::GetResourceData_Locked(
+        &pObject->pBindData.pObject->ResourceBinding,
+        pbindData,
+        BindIndex);
+    }
+    return 1;
   }
   else
   {
 LABEL_15:
-    if ( !((unsigned __int8 (__fastcall *)(Scaleform::Render::Font *))v7->vfptr[19].__vecDelDtor)(v7)
-      && ((__int64 (__fastcall *)(Scaleform::Render::Font *))v7->vfptr[1].__vecDelDtor)(v7) )
+    if ( !hdata->vfptr[4].GetResourceReport(hdata)
+      && ((__int64 (__fastcall *)(Scaleform::GFx::Resource *))hdata->vfptr->GetKey)(hdata) )
     {
-      v7->Flags |= 0x40u;
+      HIDWORD(hdata[1].vfptr) |= 0x40u;
     }
-    v18 = v6->pResource.pObject == 0i64;
-    if ( !v6->pResource.pObject )
+    v18 = pbindData->pResource.pObject == 0i64;
+    if ( !pbindData->pResource.pObject )
     {
-      v19 = (Scaleform::GFx::FontResource *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))pbindHeap->vfptr->Alloc)(
+      v19 = (Scaleform::GFx::FontResource *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))pbindHeap->vfptr->Alloc)(
                                               pbindHeap,
                                               64i64);
       if ( v19 )
       {
-        Scaleform::GFx::FontResource::FontResource(v19, v7, v6->pBinding);
+        Scaleform::GFx::FontResource::FontResource(v19, hdata, pbindData->pBinding);
         v21 = v20;
       }
       else
       {
         v21 = 0i64;
       }
-      v22 = v6->pResource.pObject;
-      if ( v6->pResource.pObject && !_InterlockedDecrement(&v22->RefCount.Value) )
+      v22 = pbindData->pResource.pObject;
+      if ( pbindData->pResource.pObject && !_InterlockedDecrement(&v22->RefCount.Value) )
       {
-        v23 = v22->pLib;
-        if ( v23 )
+        pLib = v22->pLib;
+        if ( pLib )
         {
-          v23->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v23->vfptr, (unsigned int)v22);
+          pLib->vfptr[1].__vecDelDtor(pLib, (unsigned int)v22);
           v22->pLib = 0i64;
         }
         v22->vfptr->__vecDelDtor(v22, 1u);
       }
-      v6->pResource.pObject = v21;
+      pbindData->pResource.pObject = v21;
       v18 = v21 == 0i64;
     }
-    result = !v18;
+    return !v18;
   }
-  return result;
 }
 

@@ -4,7 +4,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_GAMESTATE_PAUSE__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("GAMESTATE_PAUSE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("GAMESTATE_PAUSE", -1);
   UI_HASH_GAMESTATE_PAUSE = result;
   return result;
 }
@@ -15,7 +15,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_GAMESTATE_UNPAUSE__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("GAMESTATE_UNPAUSE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("GAMESTATE_UNPAUSE", -1);
   UI_HASH_GAMESTATE_UNPAUSE = result;
   return result;
 }

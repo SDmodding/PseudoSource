@@ -28,7 +28,7 @@ void dynamic_initializer_for__hkaiCharacterClass__()
     &hkaiCharacter_Default,
     0i64,
     0,
-    0x1Cu);
+    28);
 }
 
 // File Line: 155
@@ -40,23 +40,24 @@ hkClass *__fastcall hkaiCharacter::staticClass()
 
 // File Line: 162
 // RVA: 0xBB60D0
-void __fastcall finishLoadedObjecthkaiCharacter(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiCharacter(hkaiCharacter *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiCharacter::hkaiCharacter);
+  if ( p )
+    hkaiCharacter::hkaiCharacter(p, finishing);
 }
 
 // File Line: 168
 // RVA: 0xBB60F0
-void __fastcall cleanupLoadedObjecthkaiCharacter(void *p)
+void __fastcall cleanupLoadedObjecthkaiCharacter(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 172
 // RVA: 0xBB6100
 hkBaseObjectVtbl *__fastcall getVtablehkaiCharacter()
 {
-  hkaiCharacter v1; // [rsp+20h] [rbp-C8h]
+  hkaiCharacter v1; // [rsp+20h] [rbp-C8h] BYREF
 
   hkaiCharacter::hkaiCharacter(&v1, 0);
   return v1.vfptr;
@@ -73,8 +74,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiCharacterTypeInfo__()
   hkaiCharacterTypeInfo.m_typeName = "hkaiCharacter";
   hkaiCharacterTypeInfo.m_vtable = result;
   hkaiCharacterTypeInfo.m_scopedName = "!hkaiCharacter";
-  hkaiCharacterTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiCharacter;
-  hkaiCharacterTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiCharacter;
+  hkaiCharacterTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiCharacter;
+  hkaiCharacterTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiCharacter;
   return result;
 }
 

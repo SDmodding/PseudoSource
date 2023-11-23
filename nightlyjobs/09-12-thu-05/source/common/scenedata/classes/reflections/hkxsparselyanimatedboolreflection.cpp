@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkxSparselyAnimatedBoolClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 59
@@ -28,17 +28,17 @@ hkClass *__fastcall hkxSparselyAnimatedBool::staticClass()
 
 // File Line: 66
 // RVA: 0xE32F20
-void __fastcall finishLoadedObjecthkxSparselyAnimatedBool(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxSparselyAnimatedBool(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxSparselyAnimatedBool::`vftable;
+    *p = &hkxSparselyAnimatedBool::`vftable;
 }
 
 // File Line: 72
 // RVA: 0xE32F40
-void __fastcall cleanupLoadedObjecthkxSparselyAnimatedBool(void *p)
+void __fastcall cleanupLoadedObjecthkxSparselyAnimatedBool(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 76
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkxSparselyAnimatedBoolTypeInfo__()
   hkxSparselyAnimatedBoolTypeInfo.m_typeName = "hkxSparselyAnimatedBool";
   hkxSparselyAnimatedBoolTypeInfo.m_vtable = result;
   hkxSparselyAnimatedBoolTypeInfo.m_scopedName = "!hkxSparselyAnimatedBool";
-  hkxSparselyAnimatedBoolTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxSparselyAnimatedBool;
-  hkxSparselyAnimatedBoolTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxSparselyAnimatedBool;
+  hkxSparselyAnimatedBoolTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxSparselyAnimatedBool;
+  hkxSparselyAnimatedBoolTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxSparselyAnimatedBool;
   return result;
 }
 

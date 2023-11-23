@@ -28,23 +28,24 @@ hkClass *__fastcall hkpPlaneShape::staticClass()
 
 // File Line: 71
 // RVA: 0xCEC860
-void __fastcall finishLoadedObjecthkpPlaneShape(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpPlaneShape(hkpPlaneShape *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpPlaneShape::hkpPlaneShape);
+  if ( p )
+    hkpPlaneShape::hkpPlaneShape(p, finishing);
 }
 
 // File Line: 77
 // RVA: 0xCEC880
-void __fastcall cleanupLoadedObjecthkpPlaneShape(void *p)
+void __fastcall cleanupLoadedObjecthkpPlaneShape(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 81
 // RVA: 0xCEC890
 hkBaseObjectVtbl *__fastcall getVtablehkpPlaneShape()
 {
-  hkpPlaneShape v1; // [rsp+20h] [rbp-58h]
+  hkpPlaneShape v1; // [rsp+20h] [rbp-58h] BYREF
 
   hkpPlaneShape::hkpPlaneShape(&v1, 0);
   return v1.vfptr;
@@ -61,8 +62,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpPlaneShapeTypeInfo__()
   hkpPlaneShapeTypeInfo.m_typeName = "hkpPlaneShape";
   hkpPlaneShapeTypeInfo.m_vtable = result;
   hkpPlaneShapeTypeInfo.m_scopedName = "!hkpPlaneShape";
-  hkpPlaneShapeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpPlaneShape;
-  hkpPlaneShapeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpPlaneShape;
+  hkpPlaneShapeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpPlaneShape;
+  hkpPlaneShapeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpPlaneShape;
   return result;
 }
 

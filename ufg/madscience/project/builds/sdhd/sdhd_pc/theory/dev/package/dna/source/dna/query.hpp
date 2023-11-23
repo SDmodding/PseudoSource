@@ -2,10 +2,10 @@
 // RVA: 0x9CC50
 void __fastcall DNA::Query::~Query(DNA::Query *this)
 {
-  DNA::IQueryNode *v1; // rcx
+  DNA::IQueryNode *mRoot; // rcx
 
-  v1 = this->mRoot;
-  if ( v1 )
-    ((void (__fastcall *)(DNA::IQueryNode *, signed __int64))v1->vfptr->~IQueryNode)(v1, 1i64);
+  mRoot = this->mRoot;
+  if ( mRoot )
+    ((void (__fastcall *)(DNA::IQueryNode *, __int64))mRoot->vfptr->~IQueryNode)(mRoot, 1i64);
 }
 

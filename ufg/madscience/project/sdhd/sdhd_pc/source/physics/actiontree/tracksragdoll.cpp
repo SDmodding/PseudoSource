@@ -3,7 +3,7 @@
 __int64 dynamic_initializer_for__ragdollTrackEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&ragdollTrackEnum, gRaddollModeStringList, 4, 0i64);
-  return atexit(dynamic_atexit_destructor_for__ragdollTrackEnum__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__ragdollTrackEnum__);
 }
 
 // File Line: 35
@@ -21,40 +21,32 @@ __int64 dynamic_initializer_for__RagdollTrack::sClassNameUID__()
 // RVA: 0x2E0B20
 void __fastcall RagdollTrack::RagdollTrack(RagdollTrack *this)
 {
-  RagdollTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, RagdollTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&RagdollTrack::`vftable;
-  *(_QWORD *)&v1->mRagdollMode.mValue = 0i64;
-  *(_WORD *)&v1->mActivate = 1;
-  v1->mApplyHitImpulseScale = 0.0;
-  v1->mMaster = 1;
+  ITrack::ITrack(this, RagdollTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&RagdollTrack::`vftable;
+  *(_QWORD *)&this->mRagdollMode.mValue = 0i64;
+  *(_WORD *)&this->mActivate = 1;
+  this->mApplyHitImpulseScale = 0.0;
+  this->mMaster = 1;
 }
 
 // File Line: 59
 // RVA: 0x2E4C20
 void __fastcall RagdollTrack::~RagdollTrack(RagdollTrack *this)
 {
-  RagdollTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&RagdollTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 76
@@ -72,36 +64,28 @@ __int64 dynamic_initializer_for__RagdollCollisionTrack::sClassNameUID__()
 // RVA: 0x2E0930
 void __fastcall RagdollCollisionTrack::RagdollCollisionTrack(RagdollCollisionTrack *this)
 {
-  RagdollCollisionTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, RagdollCollisionTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollCollisionTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&RagdollCollisionTrack::`vftable;
+  ITrack::ITrack(this, RagdollCollisionTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollCollisionTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&RagdollCollisionTrack::`vftable;
 }
 
 // File Line: 87
 // RVA: 0x2E4980
 void __fastcall RagdollCollisionTrack::~RagdollCollisionTrack(RagdollCollisionTrack *this)
 {
-  RagdollCollisionTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&RagdollCollisionTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 98
@@ -119,39 +103,31 @@ __int64 dynamic_initializer_for__RagdollImpulseTrack::sClassNameUID__()
 // RVA: 0x2E09C0
 void __fastcall RagdollImpulseTrack::RagdollImpulseTrack(RagdollImpulseTrack *this)
 {
-  RagdollImpulseTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, RagdollImpulseTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollImpulseTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&RagdollImpulseTrack::`vftable;
-  *(_QWORD *)&v1->mDirection = 0i64;
-  v1->mElevation = 0.0;
-  v1->mHitLimbName = UFG::gNullQSymbolUC;
+  ITrack::ITrack(this, RagdollImpulseTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollImpulseTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&RagdollImpulseTrack::`vftable;
+  *(_QWORD *)&this->mDirection = 0i64;
+  this->mElevation = 0.0;
+  this->mHitLimbName = UFG::gNullQSymbolUC;
 }
 
 // File Line: 117
 // RVA: 0x2E4A60
 void __fastcall RagdollImpulseTrack::~RagdollImpulseTrack(RagdollImpulseTrack *this)
 {
-  RagdollImpulseTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&RagdollImpulseTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 132
@@ -169,41 +145,33 @@ __int64 dynamic_initializer_for__RagdollAngularImpulseTrack::sClassNameUID__()
 // RVA: 0x2E05E0
 void __fastcall RagdollAngularImpulseTrack::RagdollAngularImpulseTrack(RagdollAngularImpulseTrack *this)
 {
-  RagdollAngularImpulseTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, RagdollAngularImpulseTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollAngularImpulseTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&RagdollAngularImpulseTrack::`vftable;
-  *(_QWORD *)&v1->mRoll = 0i64;
-  *(_QWORD *)&v1->mScrew = 0i64;
-  v1->mConnectionTransfer = 1.0;
-  v1->mHitLimbName = UFG::gNullQSymbolUC;
-  v1->mUseVelocityFrame = 0;
+  ITrack::ITrack(this, RagdollAngularImpulseTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollAngularImpulseTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&RagdollAngularImpulseTrack::`vftable;
+  *(_QWORD *)&this->mRoll = 0i64;
+  *(_QWORD *)&this->mScrew = 0i64;
+  this->mConnectionTransfer = 1.0;
+  this->mHitLimbName = UFG::gNullQSymbolUC;
+  this->mUseVelocityFrame = 0;
 }
 
 // File Line: 157
 // RVA: 0x2E4590
 void __fastcall RagdollAngularImpulseTrack::~RagdollAngularImpulseTrack(RagdollAngularImpulseTrack *this)
 {
-  RagdollAngularImpulseTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&RagdollAngularImpulseTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 175
@@ -221,39 +189,31 @@ __int64 dynamic_initializer_for__RagdollMotorTrack::sClassNameUID__()
 // RVA: 0x2E0A20
 void __fastcall RagdollMotorTrack::RagdollMotorTrack(RagdollMotorTrack *this)
 {
-  RagdollMotorTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, RagdollMotorTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollMotorTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&RagdollMotorTrack::`vftable;
-  v1->mMaxForce = 800.0;
-  v1->mLimbName = UFG::gNullQSymbolUC;
-  v1->mMaster = 1;
+  ITrack::ITrack(this, RagdollMotorTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollMotorTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&RagdollMotorTrack::`vftable;
+  this->mMaxForce = 800.0;
+  this->mLimbName = UFG::gNullQSymbolUC;
+  this->mMaster = 1;
 }
 
 // File Line: 194
 // RVA: 0x2E4AD0
 void __fastcall RagdollMotorTrack::~RagdollMotorTrack(RagdollMotorTrack *this)
 {
-  RagdollMotorTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&RagdollMotorTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 207
@@ -271,38 +231,30 @@ __int64 dynamic_initializer_for__RagdollBlendMotorTrack::sClassNameUID__()
 // RVA: 0x2E06B0
 void __fastcall RagdollBlendMotorTrack::RagdollBlendMotorTrack(RagdollBlendMotorTrack *this)
 {
-  RagdollBlendMotorTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, RagdollBlendMotorTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollBlendMotorTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&RagdollBlendMotorTrack::`vftable;
-  *(_QWORD *)&v1->mTargetStrength = 1145569280i64;
-  v1->mMaster = 1;
+  ITrack::ITrack(this, RagdollBlendMotorTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollBlendMotorTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&RagdollBlendMotorTrack::`vftable;
+  *(_QWORD *)&this->mTargetStrength = 1145569280i64;
+  this->mMaster = 1;
 }
 
 // File Line: 224
 // RVA: 0x2E4670
 void __fastcall RagdollBlendMotorTrack::~RagdollBlendMotorTrack(RagdollBlendMotorTrack *this)
 {
-  RagdollBlendMotorTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&RagdollBlendMotorTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 237
@@ -320,41 +272,33 @@ __int64 dynamic_initializer_for__RagdollAquireTrack::sClassNameUID__()
 // RVA: 0x2E0640
 void __fastcall RagdollAquireTrack::RagdollAquireTrack(RagdollAquireTrack *this)
 {
-  RagdollAquireTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, RagdollAquireTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollAquireTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&RagdollAquireTrack::`vftable;
-  v1->mRagdollMode.mValue = 0;
-  v1->mVelocityTrackingStrength = 1.0;
-  v1->mMotorStrength = 1000.0;
-  *(_QWORD *)&v1->mBlendWeight = 1065353216i64;
-  v1->mAngularLimitStrength = 1.0;
+  ITrack::ITrack(this, RagdollAquireTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollAquireTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&RagdollAquireTrack::`vftable;
+  this->mRagdollMode.mValue = 0;
+  this->mVelocityTrackingStrength = 1.0;
+  this->mMotorStrength = 1000.0;
+  *(_QWORD *)&this->mBlendWeight = 1065353216i64;
+  this->mAngularLimitStrength = 1.0;
 }
 
 // File Line: 259
 // RVA: 0x2E4600
 void __fastcall RagdollAquireTrack::~RagdollAquireTrack(RagdollAquireTrack *this)
 {
-  RagdollAquireTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&RagdollAquireTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 276
@@ -372,37 +316,29 @@ __int64 dynamic_initializer_for__RagdollReleaseTrack::sClassNameUID__()
 // RVA: 0x2E0A80
 void __fastcall RagdollReleaseTrack::RagdollReleaseTrack(RagdollReleaseTrack *this)
 {
-  RagdollReleaseTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, RagdollReleaseTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollReleaseTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&RagdollReleaseTrack::`vftable;
-  v1->mForceRelease = 0;
+  ITrack::ITrack(this, RagdollReleaseTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollReleaseTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&RagdollReleaseTrack::`vftable;
+  this->mForceRelease = 0;
 }
 
 // File Line: 288
 // RVA: 0x2E4B40
 void __fastcall RagdollReleaseTrack::~RagdollReleaseTrack(RagdollReleaseTrack *this)
 {
-  RagdollReleaseTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&RagdollReleaseTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 300
@@ -420,37 +356,29 @@ __int64 dynamic_initializer_for__RagdollChangeModeTrack::sClassNameUID__()
 // RVA: 0x2E07A0
 void __fastcall RagdollChangeModeTrack::RagdollChangeModeTrack(RagdollChangeModeTrack *this)
 {
-  RagdollChangeModeTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, RagdollChangeModeTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollChangeModeTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&RagdollChangeModeTrack::`vftable;
-  v1->mRagdollMode.mValue = 0;
+  ITrack::ITrack(this, RagdollChangeModeTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollChangeModeTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&RagdollChangeModeTrack::`vftable;
+  this->mRagdollMode.mValue = 0;
 }
 
 // File Line: 312
 // RVA: 0x2E47C0
 void __fastcall RagdollChangeModeTrack::~RagdollChangeModeTrack(RagdollChangeModeTrack *this)
 {
-  RagdollChangeModeTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&RagdollChangeModeTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 324
@@ -468,37 +396,29 @@ __int64 dynamic_initializer_for__RagdollSetFrictionTrack::sClassNameUID__()
 // RVA: 0x2E0AD0
 void __fastcall RagdollSetFrictionTrack::RagdollSetFrictionTrack(RagdollSetFrictionTrack *this)
 {
-  RagdollSetFrictionTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, RagdollSetFrictionTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollSetFrictionTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&RagdollSetFrictionTrack::`vftable;
-  v1->mMu = 0.69999999;
+  ITrack::ITrack(this, RagdollSetFrictionTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollSetFrictionTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&RagdollSetFrictionTrack::`vftable;
+  this->mMu = 0.69999999;
 }
 
 // File Line: 337
 // RVA: 0x2E4BB0
 void __fastcall RagdollSetFrictionTrack::~RagdollSetFrictionTrack(RagdollSetFrictionTrack *this)
 {
-  RagdollSetFrictionTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&RagdollSetFrictionTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 349
@@ -516,37 +436,29 @@ __int64 dynamic_initializer_for__RagdollAdjustMassTrack::sClassNameUID__()
 // RVA: 0x2E0590
 void __fastcall RagdollAdjustMassTrack::RagdollAdjustMassTrack(RagdollAdjustMassTrack *this)
 {
-  RagdollAdjustMassTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, RagdollAdjustMassTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollAdjustMassTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&RagdollAdjustMassTrack::`vftable;
-  v1->mMu = 0.69999999;
+  ITrack::ITrack(this, RagdollAdjustMassTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollAdjustMassTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&RagdollAdjustMassTrack::`vftable;
+  this->mMu = 0.69999999;
 }
 
 // File Line: 362
 // RVA: 0x2E4520
 void __fastcall RagdollAdjustMassTrack::~RagdollAdjustMassTrack(RagdollAdjustMassTrack *this)
 {
-  RagdollAdjustMassTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&RagdollAdjustMassTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 374
@@ -564,37 +476,29 @@ __int64 dynamic_initializer_for__RagdollChangeMotorTrack::sClassNameUID__()
 // RVA: 0x2E07F0
 void __fastcall RagdollChangeMotorTrack::RagdollChangeMotorTrack(RagdollChangeMotorTrack *this)
 {
-  RagdollChangeMotorTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, RagdollChangeMotorTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollChangeMotorTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&RagdollChangeMotorTrack::`vftable;
-  v1->mTargetStrength = 1000.0;
+  ITrack::ITrack(this, RagdollChangeMotorTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollChangeMotorTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&RagdollChangeMotorTrack::`vftable;
+  this->mTargetStrength = 1000.0;
 }
 
 // File Line: 388
 // RVA: 0x2E4830
 void __fastcall RagdollChangeMotorTrack::~RagdollChangeMotorTrack(RagdollChangeMotorTrack *this)
 {
-  RagdollChangeMotorTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&RagdollChangeMotorTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 400
@@ -612,37 +516,29 @@ __int64 dynamic_initializer_for__RagdollChangeBlendWeightTrack::sClassNameUID__(
 // RVA: 0x2E0750
 void __fastcall RagdollChangeBlendWeightTrack::RagdollChangeBlendWeightTrack(RagdollChangeBlendWeightTrack *this)
 {
-  RagdollChangeBlendWeightTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, RagdollChangeBlendWeightTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollChangeBlendWeightTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&RagdollChangeBlendWeightTrack::`vftable;
-  v1->mTargetStrength = 1.0;
+  ITrack::ITrack(this, RagdollChangeBlendWeightTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollChangeBlendWeightTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&RagdollChangeBlendWeightTrack::`vftable;
+  this->mTargetStrength = 1.0;
 }
 
 // File Line: 414
 // RVA: 0x2E4750
 void __fastcall RagdollChangeBlendWeightTrack::~RagdollChangeBlendWeightTrack(RagdollChangeBlendWeightTrack *this)
 {
-  RagdollChangeBlendWeightTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&RagdollChangeBlendWeightTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 426
@@ -658,40 +554,34 @@ __int64 dynamic_initializer_for__RagdollChangeVelocityTrackingStrTrack::sClassNa
 
 // File Line: 438
 // RVA: 0x2E08E0
-void __fastcall RagdollChangeVelocityTrackingStrTrack::RagdollChangeVelocityTrackingStrTrack(RagdollChangeVelocityTrackingStrTrack *this)
+void __fastcall RagdollChangeVelocityTrackingStrTrack::RagdollChangeVelocityTrackingStrTrack(
+        RagdollChangeVelocityTrackingStrTrack *this)
 {
-  RagdollChangeVelocityTrackingStrTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, RagdollChangeVelocityTrackingStrTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollChangeVelocityTrackingStrTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&RagdollChangeVelocityTrackingStrTrack::`vftable;
-  v1->mTargetStrength = 1.0;
-  v1->mLimbName = UFG::gNullQSymbolUC;
+  ITrack::ITrack(this, RagdollChangeVelocityTrackingStrTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollChangeVelocityTrackingStrTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&RagdollChangeVelocityTrackingStrTrack::`vftable;
+  this->mTargetStrength = 1.0;
+  this->mLimbName = UFG::gNullQSymbolUC;
 }
 
 // File Line: 442
 // RVA: 0x2E4910
-void __fastcall RagdollChangeVelocityTrackingStrTrack::~RagdollChangeVelocityTrackingStrTrack(RagdollChangeVelocityTrackingStrTrack *this)
+void __fastcall RagdollChangeVelocityTrackingStrTrack::~RagdollChangeVelocityTrackingStrTrack(
+        RagdollChangeVelocityTrackingStrTrack *this)
 {
-  RagdollChangeVelocityTrackingStrTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&RagdollChangeVelocityTrackingStrTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 583
@@ -707,50 +597,44 @@ __int64 dynamic_initializer_for__RagdollChangeVelocityTrackingParamsRawTrack::sC
 
 // File Line: 632
 // RVA: 0x2E0840
-void __fastcall RagdollChangeVelocityTrackingParamsRawTrack::RagdollChangeVelocityTrackingParamsRawTrack(RagdollChangeVelocityTrackingParamsRawTrack *this)
+void __fastcall RagdollChangeVelocityTrackingParamsRawTrack::RagdollChangeVelocityTrackingParamsRawTrack(
+        RagdollChangeVelocityTrackingParamsRawTrack *this)
 {
-  RagdollChangeVelocityTrackingParamsRawTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, RagdollChangeVelocityTrackingParamsRawTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollChangeVelocityTrackingParamsRawTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&RagdollChangeVelocityTrackingParamsRawTrack::`vftable;
-  v1->mLimbName = UFG::gNullQSymbolUC;
-  *(_QWORD *)&v1->mHierarchyGain = 1043207291i64;
-  v1->mAccelerationGain = 1.0;
-  v1->mVelocityGain = 0.60000002;
-  v1->mPositionGain = 0.050000001;
-  v1->mPositionMaxLinearVelocity = 1.4;
-  v1->mPositionMaxAngularVelocity = 1.8;
-  v1->mSnapGain = 0.1;
-  v1->mSnapMaxLinearVelocity = 0.30000001;
-  v1->mSnapMaxAngularVelocity = 0.30000001;
-  v1->mSnapMaxLinearDistance = 0.029999999;
-  v1->mSnapMaxAngularDistance = 0.1;
+  ITrack::ITrack(this, RagdollChangeVelocityTrackingParamsRawTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollChangeVelocityTrackingParamsRawTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&RagdollChangeVelocityTrackingParamsRawTrack::`vftable;
+  this->mLimbName = UFG::gNullQSymbolUC;
+  *(_QWORD *)&this->mHierarchyGain = 1043207291i64;
+  this->mAccelerationGain = 1.0;
+  this->mVelocityGain = 0.60000002;
+  this->mPositionGain = 0.050000001;
+  this->mPositionMaxLinearVelocity = 1.4;
+  this->mPositionMaxAngularVelocity = 1.8;
+  this->mSnapGain = 0.1;
+  this->mSnapMaxLinearVelocity = 0.30000001;
+  this->mSnapMaxAngularVelocity = 0.30000001;
+  this->mSnapMaxLinearDistance = 0.029999999;
+  this->mSnapMaxAngularDistance = 0.1;
 }
 
 // File Line: 637
 // RVA: 0x2E48A0
-void __fastcall RagdollChangeVelocityTrackingParamsRawTrack::~RagdollChangeVelocityTrackingParamsRawTrack(RagdollChangeVelocityTrackingParamsRawTrack *this)
+void __fastcall RagdollChangeVelocityTrackingParamsRawTrack::~RagdollChangeVelocityTrackingParamsRawTrack(
+        RagdollChangeVelocityTrackingParamsRawTrack *this)
 {
-  RagdollChangeVelocityTrackingParamsRawTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&RagdollChangeVelocityTrackingParamsRawTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 662
@@ -766,39 +650,33 @@ __int64 dynamic_initializer_for__RagdollChangeAngularLimitStrTrack::sClassNameUI
 
 // File Line: 672
 // RVA: 0x2E0700
-void __fastcall RagdollChangeAngularLimitStrTrack::RagdollChangeAngularLimitStrTrack(RagdollChangeAngularLimitStrTrack *this)
+void __fastcall RagdollChangeAngularLimitStrTrack::RagdollChangeAngularLimitStrTrack(
+        RagdollChangeAngularLimitStrTrack *this)
 {
-  RagdollChangeAngularLimitStrTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, RagdollChangeAngularLimitStrTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollChangeAngularLimitStrTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&RagdollChangeAngularLimitStrTrack::`vftable;
-  v1->mTargetStrength = 1.0;
+  ITrack::ITrack(this, RagdollChangeAngularLimitStrTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollChangeAngularLimitStrTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&RagdollChangeAngularLimitStrTrack::`vftable;
+  this->mTargetStrength = 1.0;
 }
 
 // File Line: 676
 // RVA: 0x2E46E0
-void __fastcall RagdollChangeAngularLimitStrTrack::~RagdollChangeAngularLimitStrTrack(RagdollChangeAngularLimitStrTrack *this)
+void __fastcall RagdollChangeAngularLimitStrTrack::~RagdollChangeAngularLimitStrTrack(
+        RagdollChangeAngularLimitStrTrack *this)
 {
-  RagdollChangeAngularLimitStrTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&RagdollChangeAngularLimitStrTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 688
@@ -816,36 +694,28 @@ __int64 dynamic_initializer_for__RagdollDeathImpulseTrack::sClassNameUID__()
 // RVA: 0x2E0970
 void __fastcall RagdollDeathImpulseTrack::RagdollDeathImpulseTrack(RagdollDeathImpulseTrack *this)
 {
-  RagdollDeathImpulseTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, RagdollDeathImpulseTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollDeathImpulseTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&RagdollDeathImpulseTrack::`vftable;
-  v1->mApplyHitImpulseScale = 1.0;
+  ITrack::ITrack(this, RagdollDeathImpulseTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<RagdollDeathImpulseTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&RagdollDeathImpulseTrack::`vftable;
+  this->mApplyHitImpulseScale = 1.0;
 }
 
 // File Line: 701
 // RVA: 0x2E49F0
 void __fastcall RagdollDeathImpulseTrack::~RagdollDeathImpulseTrack(RagdollDeathImpulseTrack *this)
 {
-  RagdollDeathImpulseTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&RagdollDeathImpulseTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 

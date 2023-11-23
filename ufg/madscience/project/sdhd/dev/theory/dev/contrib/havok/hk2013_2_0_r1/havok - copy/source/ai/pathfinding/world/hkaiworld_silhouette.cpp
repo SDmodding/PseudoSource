@@ -1,6 +1,8 @@
 // File Line: 22
 // RVA: 0xBCF0D0
-void __fastcall hkaiWorld::setupReferenceFrame(hkaiWorld *this, hkaiReferenceFrameAndExtrusion *referenceFrameAndExtrusion)
+void __fastcall hkaiWorld::setupReferenceFrame(
+        hkaiWorld *this,
+        hkaiReferenceFrameAndExtrusion *referenceFrameAndExtrusion)
 {
   referenceFrameAndExtrusion->m_up = this->m_up;
   referenceFrameAndExtrusion->m_cellExtrusion = this->m_silhouetteExtrusion;
@@ -11,91 +13,78 @@ void __fastcall hkaiWorld::setupReferenceFrame(hkaiWorld *this, hkaiReferenceFra
 // RVA: 0xBCE830
 void __fastcall hkaiWorld::addSilhouetteGenerator(hkaiWorld *this, hkaiSilhouetteGenerator *generator)
 {
-  hkaiSilhouetteGenerator *v2; // rbx
-  hkaiWorld *v3; // rsi
   hkRefPtr<hkaiSilhouetteGenerator> *v4; // r14
-  hkaiOverlapManager *v5; // rcx
+  hkaiOverlapManager *m_pntr; // rcx
 
-  v2 = generator;
-  v3 = this;
   if ( generator )
-    hkReferencedObject::addReference((hkReferencedObject *)&generator->vfptr);
-  if ( v3->m_silhouetteGenerators.m_size == (v3->m_silhouetteGenerators.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &v3->m_silhouetteGenerators,
-      8);
-  v4 = &v3->m_silhouetteGenerators.m_data[v3->m_silhouetteGenerators.m_size];
+    hkReferencedObject::addReference(generator);
+  if ( this->m_silhouetteGenerators.m_size == (this->m_silhouetteGenerators.m_capacityAndFlags & 0x3FFFFFFF) )
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &this->m_silhouetteGenerators, 8);
+  v4 = &this->m_silhouetteGenerators.m_data[this->m_silhouetteGenerators.m_size];
   if ( v4 )
   {
-    if ( v2 )
-      hkReferencedObject::addReference((hkReferencedObject *)&v2->vfptr);
-    v4->m_pntr = v2;
+    if ( generator )
+      hkReferencedObject::addReference(generator);
+    v4->m_pntr = generator;
   }
-  ++v3->m_silhouetteGenerators.m_size;
-  if ( v2 )
-    hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
-  v5 = v3->m_overlapManager.m_pntr;
-  if ( v5 )
-    hkaiOverlapManager::addSilhouetteGenerator(v5, v2);
+  ++this->m_silhouetteGenerators.m_size;
+  if ( generator )
+    hkReferencedObject::removeReference(generator);
+  m_pntr = this->m_overlapManager.m_pntr;
+  if ( m_pntr )
+    hkaiOverlapManager::addSilhouetteGenerator(m_pntr, generator);
 }
 
 // File Line: 39
 // RVA: 0xBCE8E0
 void __fastcall hkaiWorld::removeSilhouetteGenerator(hkaiWorld *this, hkaiSilhouetteGenerator *generator)
 {
-  hkaiSilhouetteGenerator *v2; // rbx
-  hkaiWorld *v3; // rsi
-  __int64 v4; // rcx
-  signed int v5; // edi
+  __int64 m_size; // rcx
+  int v5; // edi
   __int64 v6; // rdx
-  hkRefPtr<hkaiSilhouetteGenerator> *v7; // rax
-  hkaiOverlapManager *v8; // rcx
+  hkRefPtr<hkaiSilhouetteGenerator> *m_data; // rax
+  hkaiOverlapManager *m_pntr; // rcx
   hkRefPtr<hkaiSilhouetteGenerator> *v9; // rbx
   hkReferencedObject *v10; // rcx
-  signed __int64 v11; // r14
-  __int64 v12; // rax
+  __int64 v11; // rax
 
-  v2 = generator;
-  v3 = this;
   if ( generator )
-    hkReferencedObject::addReference((hkReferencedObject *)&generator->vfptr);
-  v4 = v3->m_silhouetteGenerators.m_size;
+    hkReferencedObject::addReference(generator);
+  m_size = this->m_silhouetteGenerators.m_size;
   v5 = 0;
   v6 = 0i64;
-  if ( v4 <= 0 )
+  if ( m_size <= 0 )
   {
 LABEL_7:
     v5 = -1;
   }
   else
   {
-    v7 = v3->m_silhouetteGenerators.m_data;
-    while ( v7->m_pntr != v2 )
+    m_data = this->m_silhouetteGenerators.m_data;
+    while ( m_data->m_pntr != generator )
     {
       ++v6;
       ++v5;
-      ++v7;
-      if ( v6 >= v4 )
+      ++m_data;
+      if ( v6 >= m_size )
         goto LABEL_7;
     }
   }
-  if ( v2 )
-    hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
+  if ( generator )
+    hkReferencedObject::removeReference(generator);
   if ( v5 >= 0 )
   {
-    v8 = v3->m_overlapManager.m_pntr;
-    if ( v8 )
-      hkaiOverlapManager::removeSilhouetteGenerator(v8, v2);
-    v9 = v3->m_silhouetteGenerators.m_data;
-    v10 = (hkReferencedObject *)&v9[v5].m_pntr->vfptr;
-    v11 = v5;
+    m_pntr = this->m_overlapManager.m_pntr;
+    if ( m_pntr )
+      hkaiOverlapManager::removeSilhouetteGenerator(m_pntr, generator);
+    v9 = this->m_silhouetteGenerators.m_data;
+    v10 = v9[v5].m_pntr;
     if ( v10 )
       hkReferencedObject::removeReference(v10);
-    v9[v11].m_pntr = 0i64;
-    v12 = --v3->m_silhouetteGenerators.m_size;
-    if ( (_DWORD)v12 != v5 )
-      v3->m_silhouetteGenerators.m_data[v11].m_pntr = v3->m_silhouetteGenerators.m_data[v12].m_pntr;
+    v9[v5].m_pntr = 0i64;
+    v11 = --this->m_silhouetteGenerators.m_size;
+    if ( (_DWORD)v11 != v5 )
+      this->m_silhouetteGenerators.m_data[v5].m_pntr = this->m_silhouetteGenerators.m_data[v11].m_pntr;
   }
 }
 
@@ -104,20 +93,18 @@ LABEL_7:
 void __fastcall hkaiWorld::setSilhouetteExtrusion(hkaiWorld *this, float e)
 {
   bool v2; // zf
-  hkaiWorld *v3; // rbx
-  hkaiReferenceFrameAndExtrusion referenceFrameAndExtrusion; // [rsp+20h] [rbp-28h]
+  hkaiReferenceFrameAndExtrusion referenceFrameAndExtrusion; // [rsp+20h] [rbp-28h] BYREF
 
   v2 = this->m_overlapManager.m_pntr == 0i64;
   this->m_silhouetteExtrusion = e;
-  v3 = this;
   if ( !v2 )
   {
     referenceFrameAndExtrusion.m_cellExtrusion = -1.0;
     referenceFrameAndExtrusion.m_silhouetteRadiusExpasion = -1.0;
     referenceFrameAndExtrusion.m_up = 0i64;
     hkaiWorld::setupReferenceFrame(this, &referenceFrameAndExtrusion);
-    hkaiOverlapManager::setReferenceFrameAndExtrusion(v3->m_overlapManager.m_pntr, &referenceFrameAndExtrusion);
-    hkaiWorld::invalidateAllSilhouettes(v3);
+    hkaiOverlapManager::setReferenceFrameAndExtrusion(this->m_overlapManager.m_pntr, &referenceFrameAndExtrusion);
+    hkaiWorld::invalidateAllSilhouettes(this);
   }
 }
 
@@ -130,35 +117,31 @@ void __fastcall hkaiWorld::stepSilhouettes(hkaiWorld *this, hkBitField *sections
 
 // File Line: 73
 // RVA: 0xBCEE60
-void __fastcall hkaiWorld::stepSilhouettesMT(hkaiWorld *this, hkBitField *sectionsToStep, hkJobQueue *jobQueue, hkJobThreadPool *threadPool)
+void __fastcall hkaiWorld::stepSilhouettesMT(
+        hkaiWorld *this,
+        hkBitField *sectionsToStep,
+        hkJobQueue *jobQueue,
+        hkJobThreadPool *threadPool)
 {
-  hkJobThreadPool *v4; // r12
-  hkJobQueue *v5; // r15
-  hkBitField *v6; // rbp
-  hkaiWorld *v7; // rbx
   int v8; // edi
-  BOOL v9; // er14
+  BOOL v9; // r14d
   __int64 v10; // rsi
-  hkaiOverlapManager *v11; // rdx
+  hkaiOverlapManager *m_pntr; // rdx
   hkaiNavMeshSilhouetteSelector *v12; // rdx
-  _QWORD *v13; // r8
+  _QWORD *Value; // r8
   _QWORD *v14; // rcx
   unsigned __int64 v15; // rax
-  signed __int64 v16; // rcx
+  _QWORD *v16; // rcx
   int v17; // esi
   __int64 v18; // rdi
   _QWORD *v19; // r8
   _QWORD *v20; // rcx
   unsigned __int64 v21; // rax
-  signed __int64 v22; // rcx
-  hkArray<unsigned int,hkContainerTempAllocator> uncutFaceKeys; // [rsp+40h] [rbp-68h]
-  hkArray<unsigned int,hkContainerTempAllocator> cutFaceKeys; // [rsp+50h] [rbp-58h]
-  hkaiWorld::NavMeshModifiedCallbackContext v25; // [rsp+60h] [rbp-48h]
+  _QWORD *v22; // rcx
+  hkArray<unsigned int,hkContainerTempAllocator> uncutFaceKeys; // [rsp+40h] [rbp-68h] BYREF
+  hkArray<unsigned int,hkContainerTempAllocator> cutFaceKeys; // [rsp+50h] [rbp-58h] BYREF
+  hkaiWorld::NavMeshModifiedCallbackContext v25; // [rsp+60h] [rbp-48h] BYREF
 
-  v4 = threadPool;
-  v5 = jobQueue;
-  v6 = sectionsToStep;
-  v7 = this;
   if ( this->m_overlapManager.m_pntr )
   {
     v8 = 0;
@@ -168,68 +151,68 @@ void __fastcall hkaiWorld::stepSilhouettesMT(hkaiWorld *this, hkBitField *sectio
       v10 = 0i64;
       do
       {
-        v7->m_listeners.m_data[v10]->vfptr->preSilhouetteStepCallback(
-          v7->m_listeners.m_data[v10],
-          v7,
+        this->m_listeners.m_data[v10]->vfptr->preSilhouetteStepCallback(
+          this->m_listeners.m_data[v10],
+          this,
           (hkaiWorld::StepThreading)v9,
-          v6);
+          sectionsToStep);
         ++v8;
         ++v10;
       }
-      while ( v8 < v7->m_listeners.m_size );
+      while ( v8 < this->m_listeners.m_size );
     }
     hkaiOverlapManager::updateOverlapsOfAllGenerators(
-      v7->m_overlapManager.m_pntr,
-      &v7->m_silhouetteGenerators,
-      v6,
-      v7->m_forceSilhouetteUpdates.m_bool != 0);
-    v11 = v7->m_overlapManager.m_pntr;
+      this->m_overlapManager.m_pntr,
+      &this->m_silhouetteGenerators,
+      sectionsToStep,
+      this->m_forceSilhouetteUpdates.m_bool != 0);
+    m_pntr = this->m_overlapManager.m_pntr;
     cutFaceKeys.m_data = 0i64;
     cutFaceKeys.m_size = 0;
-    cutFaceKeys.m_capacityAndFlags = 2147483648;
+    cutFaceKeys.m_capacityAndFlags = 0x80000000;
     uncutFaceKeys.m_data = 0i64;
     uncutFaceKeys.m_size = 0;
-    uncutFaceKeys.m_capacityAndFlags = 2147483648;
-    if ( v11 )
-      v12 = (hkaiNavMeshSilhouetteSelector *)&v11->vfptr;
+    uncutFaceKeys.m_capacityAndFlags = 0x80000000;
+    if ( m_pntr )
+      v12 = &m_pntr->hkaiNavMeshSilhouetteSelector;
     else
       v12 = 0i64;
     if ( hkaiNavMeshCutter::cutSilhouettesIncremental(
-           v7->m_cutter.m_pntr,
+           this->m_cutter.m_pntr,
            v12,
-           &v7->m_silhouetteGenerationParameters,
+           &this->m_silhouetteGenerationParameters,
            &cutFaceKeys,
            &uncutFaceKeys,
-           v6,
-           v5,
-           v4) )
+           sectionsToStep,
+           jobQueue,
+           threadPool) )
     {
-      v13 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-      v14 = (_QWORD *)v13[1];
-      if ( (unsigned __int64)v14 < v13[3] )
+      Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+      v14 = (_QWORD *)Value[1];
+      if ( (unsigned __int64)v14 < Value[3] )
       {
         *v14 = "TtdynamicNavMeshModifiedCallback";
         v15 = __rdtsc();
-        v16 = (signed __int64)(v14 + 2);
-        *(_DWORD *)(v16 - 8) = v15;
-        v13[1] = v16;
+        v16 = v14 + 2;
+        *((_DWORD *)v16 - 2) = v15;
+        Value[1] = v16;
       }
       hkaiWorld::NavMeshModifiedCallbackContext::NavMeshModifiedCallbackContext(
         &v25,
-        v7,
-        (hkArrayBase<unsigned int> *)&cutFaceKeys.m_data,
-        (hkArrayBase<unsigned int> *)&uncutFaceKeys.m_data);
+        this,
+        &cutFaceKeys,
+        &uncutFaceKeys);
       v17 = 0;
-      if ( v7->m_listeners.m_size > 0 )
+      if ( this->m_listeners.m_size > 0 )
       {
         v18 = 0i64;
         do
         {
-          v7->m_listeners.m_data[v18]->vfptr->dynamicNavMeshModifiedCallback(v7->m_listeners.m_data[v18], &v25);
+          this->m_listeners.m_data[v18]->vfptr->dynamicNavMeshModifiedCallback(this->m_listeners.m_data[v18], &v25);
           ++v17;
           ++v18;
         }
-        while ( v17 < v7->m_listeners.m_size );
+        while ( v17 < this->m_listeners.m_size );
       }
       v19 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
       v20 = (_QWORD *)v19[1];
@@ -237,103 +220,103 @@ void __fastcall hkaiWorld::stepSilhouettesMT(hkaiWorld *this, hkBitField *sectio
       {
         *v20 = "Et";
         v21 = __rdtsc();
-        v22 = (signed __int64)(v20 + 2);
-        *(_DWORD *)(v22 - 8) = v21;
+        v22 = v20 + 2;
+        *((_DWORD *)v22 - 2) = v21;
         v19[1] = v22;
       }
     }
-    hkaiOverlapManager::markFrameDone(v7->m_overlapManager.m_pntr);
+    hkaiOverlapManager::markFrameDone(this->m_overlapManager.m_pntr);
     uncutFaceKeys.m_size = 0;
     if ( uncutFaceKeys.m_capacityAndFlags >= 0 )
       hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
+        &hkContainerTempAllocator::s_alloc,
         uncutFaceKeys.m_data,
         4 * uncutFaceKeys.m_capacityAndFlags);
     uncutFaceKeys.m_data = 0i64;
     cutFaceKeys.m_size = 0;
-    uncutFaceKeys.m_capacityAndFlags = 2147483648;
+    uncutFaceKeys.m_capacityAndFlags = 0x80000000;
     if ( cutFaceKeys.m_capacityAndFlags >= 0 )
       hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
+        &hkContainerTempAllocator::s_alloc,
         cutFaceKeys.m_data,
         4 * cutFaceKeys.m_capacityAndFlags);
   }
-}locator *)&hkContainerTempAllocator:
+}
 
 // File Line: 118
 // RVA: 0xBCEA20
 void __fastcall hkaiWorld::invalidateAllSilhouettes(hkaiWorld *this)
 {
-  hkaiWorld *v1; // rsi
   int v2; // ebx
   __int64 v3; // rdi
-  hkErrStream v4; // [rsp+20h] [rbp-228h]
-  char buf; // [rsp+40h] [rbp-208h]
+  hkErrStream v4; // [rsp+20h] [rbp-228h] BYREF
+  char buf[520]; // [rsp+40h] [rbp-208h] BYREF
 
-  v1 = this;
   if ( this->m_overlapManager.m_pntr )
   {
-    hkErrStream::hkErrStream(&v4, &buf, 512);
+    hkErrStream::hkErrStream(&v4, buf, 512);
     hkOstream::operator<<(
-      (hkOstream *)&v4.vfptr,
+      &v4,
       "Changing silhouette generation settings is very slow and should not be done at runtime.");
-    hkError::messageWarning(1862547905, &buf, "World\\hkaiWorld_silhouette.cpp", 122);
-    hkOstream::~hkOstream((hkOstream *)&v4.vfptr);
-    hkaiOverlapManager::updateReferenceFrameAndExtrusion(v1->m_overlapManager.m_pntr);
+    hkError::messageWarning(1862547905, buf, "World\\hkaiWorld_silhouette.cpp", 122);
+    hkOstream::~hkOstream(&v4);
+    hkaiOverlapManager::updateReferenceFrameAndExtrusion(this->m_overlapManager.m_pntr);
   }
   v2 = 0;
-  if ( v1->m_silhouetteGenerators.m_size > 0 )
+  if ( this->m_silhouetteGenerators.m_size > 0 )
   {
     v3 = 0i64;
     do
     {
-      ((void (*)(void))v1->m_silhouetteGenerators.m_data[v3].m_pntr->vfptr[2].__vecDelDtor)();
+      ((void (__fastcall *)(hkaiSilhouetteGenerator *))this->m_silhouetteGenerators.m_data[v3].m_pntr->vfptr[2].__vecDelDtor)(this->m_silhouetteGenerators.m_data[v3].m_pntr);
       ++v2;
       ++v3;
     }
-    while ( v2 < v1->m_silhouetteGenerators.m_size );
+    while ( v2 < this->m_silhouetteGenerators.m_size );
   }
 }
 
 // File Line: 133
 // RVA: 0xBCEAE0
-void __fastcall hkaiWorld::forceSilhouetteInformation(hkaiWorld *this, hkArray<hkRefPtr<hkaiSilhouetteGenerator>,hkContainerHeapAllocator> *silhouettes, hkArray<hkaiOverlapManagerSection,hkContainerHeapAllocator> *managerSections)
+void __fastcall hkaiWorld::forceSilhouetteInformation(
+        hkaiWorld *this,
+        hkArray<hkRefPtr<hkaiSilhouetteGenerator>,hkContainerHeapAllocator> *silhouettes,
+        hkArray<hkaiOverlapManagerSection,hkContainerHeapAllocator> *managerSections)
 {
-  hkArray<hkRefPtr<hkaiSilhouetteGenerator>,hkContainerHeapAllocator> *v3; // r15
-  hkArray<hkRefPtr<hkaiSilhouetteGenerator>,hkContainerHeapAllocator> *v4; // r13
-  hkRefPtr<hkaiSilhouetteGenerator> *v5; // rdi
+  hkArray<hkRefPtr<hkaiSilhouetteGenerator>,hkContainerHeapAllocator> *p_m_silhouetteGenerators; // r15
+  hkRefPtr<hkaiSilhouetteGenerator> *m_data; // rdi
   int v6; // eax
   __int64 i; // rbx
-  hkReferencedObject *v8; // rcx
-  __int64 v9; // rbp
-  int v10; // er12
+  hkReferencedObject *m_pntr; // rcx
+  __int64 m_size; // rbp
+  int v10; // r12d
   int v11; // eax
   int v12; // eax
-  int v13; // er9
-  signed __int64 v14; // rdi
+  int v13; // r9d
+  __int64 v14; // rdi
   __int64 j; // rbx
   hkReferencedObject *v16; // rcx
-  hkReferencedObject **v17; // rbx
-  signed __int64 v18; // rsi
+  hkReferencedObject **p_m_pntr; // rbx
+  char *v18; // rsi
   __int64 v19; // rdi
   hkReferencedObject *v20; // rcx
   hkReferencedObject *v21; // rax
-  hkReferencedObject **v22; // rbx
+  hkRefPtr<hkaiSilhouetteGenerator> *v22; // rbx
   __int64 v23; // rsi
   signed __int64 v24; // r14
   __int64 v25; // r14
   hkResultEnum v26; // eax
   hkaiWorld *v27; // rsi
-  signed __int64 v28; // rbx
-  signed __int64 v29; // r14
+  __int64 v28; // rbx
+  __int64 v29; // r14
   __int64 v30; // r12
   _DWORD *v31; // r13
-  signed int v32; // ebx
-  int v33; // er15
+  int v32; // ebx
+  int v33; // r15d
   int v34; // eax
   int v35; // eax
-  int v36; // er9
-  signed __int64 v37; // rdi
+  int v36; // r9d
+  __int64 v37; // rdi
   __int64 v38; // rbx
   hkReferencedObject *v39; // rcx
   hkReferencedObject **v40; // rbx
@@ -343,78 +326,74 @@ void __fastcall hkaiWorld::forceSilhouetteInformation(hkaiWorld *this, hkArray<h
   hkReferencedObject *v44; // rax
   hkReferencedObject **v45; // rbx
   __int64 v46; // rsi
-  signed __int64 v47; // r14
+  __int64 v47; // r14
   __int64 v48; // [rsp+30h] [rbp-58h]
-  signed __int64 v49; // [rsp+38h] [rbp-50h]
-  hkaiWorld *v50; // [rsp+90h] [rbp+8h]
-  hkResult result; // [rsp+98h] [rbp+10h]
+  __int64 v49; // [rsp+38h] [rbp-50h]
+  hkResult result; // [rsp+98h] [rbp+10h] BYREF
   hkArray<hkaiOverlapManagerSection,hkContainerHeapAllocator> *v52; // [rsp+A0h] [rbp+18h]
-  hkResult v53; // [rsp+A8h] [rbp+20h]
+  hkResult v53; // [rsp+A8h] [rbp+20h] BYREF
 
   v52 = managerSections;
-  v50 = this;
-  v3 = &this->m_silhouetteGenerators;
-  v4 = silhouettes;
-  v5 = this->m_silhouetteGenerators.m_data;
+  p_m_silhouetteGenerators = &this->m_silhouetteGenerators;
+  m_data = this->m_silhouetteGenerators.m_data;
   v6 = this->m_silhouetteGenerators.m_size - 1;
-  for ( i = v6; i >= 0; v5[i--].m_pntr = 0i64 )
+  for ( i = v6; i >= 0; m_data[i--].m_pntr = 0i64 )
   {
-    v8 = (hkReferencedObject *)&v5[i].m_pntr->vfptr;
-    if ( v8 )
-      hkReferencedObject::removeReference(v8);
+    m_pntr = m_data[i].m_pntr;
+    if ( m_pntr )
+      hkReferencedObject::removeReference(m_pntr);
   }
-  v3->m_size = 0;
-  v9 = v4->m_size;
-  v10 = v4->m_size;
-  if ( (signed int)v9 > 0 )
+  p_m_silhouetteGenerators->m_size = 0;
+  m_size = silhouettes->m_size;
+  v10 = silhouettes->m_size;
+  if ( (int)m_size > 0 )
     v10 = 0;
-  v11 = v3->m_capacityAndFlags & 0x3FFFFFFF;
-  if ( v11 < (signed int)v9 )
+  v11 = p_m_silhouetteGenerators->m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v11 < (int)m_size )
   {
     v12 = 2 * v11;
-    v13 = v9;
-    if ( (signed int)v9 < v12 )
+    v13 = silhouettes->m_size;
+    if ( (int)m_size < v12 )
       v13 = v12;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v3, v13, 8);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, p_m_silhouetteGenerators, v13, 8);
   }
-  v14 = (signed __int64)&v3->m_data[v9];
-  for ( j = -1 - (signed int)v9; j >= 0; *(_QWORD *)(v14 + 8 * j--) = 0i64 )
+  v14 = (__int64)&p_m_silhouetteGenerators->m_data[m_size];
+  for ( j = -1 - (int)m_size; j >= 0; *(_QWORD *)(v14 + 8 * j--) = 0i64 )
   {
     v16 = *(hkReferencedObject **)(v14 + 8 * j);
     if ( v16 )
       hkReferencedObject::removeReference(v16);
   }
-  v17 = (hkReferencedObject **)v3->m_data;
+  p_m_pntr = &p_m_silhouetteGenerators->m_data->m_pntr;
   if ( v10 > 0 )
   {
-    v18 = (char *)v4->m_data - (char *)v17;
+    v18 = (char *)((char *)silhouettes->m_data - (char *)p_m_pntr);
     v19 = v10;
     do
     {
-      v20 = *(hkReferencedObject **)((char *)v17 + v18);
+      v20 = *(hkReferencedObject **)((char *)p_m_pntr + (_QWORD)v18);
       if ( v20 )
         hkReferencedObject::addReference(v20);
-      if ( *v17 )
-        hkReferencedObject::removeReference(*v17);
-      v21 = *(hkReferencedObject **)((char *)v17 + v18);
-      ++v17;
-      *(v17 - 1) = v21;
+      if ( *p_m_pntr )
+        hkReferencedObject::removeReference(*p_m_pntr);
+      v21 = *(hkReferencedObject **)((char *)p_m_pntr++ + (_QWORD)v18);
+      *(p_m_pntr - 1) = v21;
       --v19;
     }
     while ( v19 );
   }
-  v22 = (hkReferencedObject **)&v4->m_data[v10];
-  v23 = (signed int)v9 - v10;
-  if ( (signed int)v9 - v10 > 0 )
+  v22 = &silhouettes->m_data[v10];
+  v23 = (int)m_size - v10;
+  if ( (int)m_size - v10 > 0 )
   {
-    v24 = (char *)&v3->m_data[v10] - (char *)v22;
+    v24 = (char *)&p_m_silhouetteGenerators->m_data[v10] - (char *)v22;
     do
     {
-      if ( (hkReferencedObject **)((char *)v22 + v24) )
+      if ( (hkRefPtr<hkaiSilhouetteGenerator> *)((char *)v22 + v24) )
       {
-        if ( *v22 )
-          hkReferencedObject::addReference(*v22);
-        *(hkReferencedObject **)((char *)v22 + v24) = *v22;
+        if ( v22->m_pntr )
+          hkReferencedObject::addReference(v22->m_pntr);
+        *(hkRefPtr<hkaiSilhouetteGenerator> *)((char *)v22 + v24) = (hkRefPtr<hkaiSilhouetteGenerator>)v22->m_pntr;
       }
       ++v22;
       --v23;
@@ -422,41 +401,41 @@ void __fastcall hkaiWorld::forceSilhouetteInformation(hkaiWorld *this, hkArray<h
     while ( v23 );
   }
   v25 = (__int64)v52;
-  v3->m_size = v9;
-  v26 = 0;
-  result.m_enum = 0;
-  if ( *(_DWORD *)(v25 + 8) > 0 )
+  p_m_silhouetteGenerators->m_size = m_size;
+  v26 = HK_SUCCESS;
+  result.m_enum = HK_SUCCESS;
+  if ( *(int *)(v25 + 8) > 0 )
   {
-    v27 = v50;
+    v27 = this;
     v28 = 0i64;
     v48 = 0i64;
     do
     {
       v49 = v26;
-      hkaiOverlapManagerSection::clearGeneratorData(&v27->m_overlapManager.m_pntr->m_sections.m_data[v26]);
+      hkaiOverlapManagerSection::clearGeneratorData(&v27->m_overlapManager.m_pntr->m_sections.m_data[v49]);
       v29 = v28 + *(_QWORD *)v25;
-      v30 = *(signed int *)(v29 + 24);
+      v30 = *(int *)(v29 + 24);
       v31 = (_DWORD *)((char *)v27->m_overlapManager.m_pntr->m_sections.m_data + v28);
       v32 = v31[6];
       v33 = v30;
-      if ( (signed int)v30 > v32 )
+      if ( (int)v30 > v32 )
         v33 = v31[6];
       v34 = v31[7] & 0x3FFFFFFF;
-      if ( v34 >= (signed int)v30 )
+      if ( v34 >= (int)v30 )
       {
-        v53.m_enum = 0;
+        v53.m_enum = HK_SUCCESS;
       }
       else
       {
         v35 = 2 * v34;
-        v36 = v30;
-        if ( (signed int)v30 < v35 )
+        v36 = *(_DWORD *)(v29 + 24);
+        if ( (int)v30 < v35 )
           v36 = v35;
-        hkArrayUtil::_reserve(&v53, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v31 + 4, v36, 8);
+        hkArrayUtil::_reserve(&v53, &hkContainerHeapAllocator::s_alloc, v31 + 4, v36, 8);
       }
       v37 = *((_QWORD *)v31 + 2) + 8 * v30;
-      v38 = v32 - (signed int)v30 - 1;
-      if ( (signed int)v38 >= 0 )
+      v38 = v32 - (int)v30 - 1;
+      if ( (int)v38 >= 0 )
       {
         do
         {
@@ -479,16 +458,15 @@ void __fastcall hkaiWorld::forceSilhouetteInformation(hkaiWorld *this, hkArray<h
             hkReferencedObject::addReference(v43);
           if ( *v40 )
             hkReferencedObject::removeReference(*v40);
-          v44 = *(hkReferencedObject **)((char *)v40 + v41);
-          ++v40;
+          v44 = *(hkReferencedObject **)((char *)v40++ + v41);
           *(v40 - 1) = v44;
           --v42;
         }
         while ( v42 );
       }
       v45 = (hkReferencedObject **)(*(_QWORD *)(v29 + 16) + 8i64 * v33);
-      v46 = (signed int)v30 - v33;
-      if ( (signed int)v30 - v33 > 0 )
+      v46 = (int)v30 - v33;
+      if ( (int)v30 - v33 > 0 )
       {
         v47 = *((_QWORD *)v31 + 2) + 8i64 * v33 - (_QWORD)v45;
         do
@@ -504,16 +482,18 @@ void __fastcall hkaiWorld::forceSilhouetteInformation(hkaiWorld *this, hkArray<h
         }
         while ( v46 );
       }
-      v27 = v50;
+      v27 = this;
       v25 = (__int64)v52;
       v31[6] = v30;
-      v50->m_overlapManager.m_pntr->m_sections.m_data[v48].m_numOriginalFaces = *(_DWORD *)(*(_QWORD *)v25 + v48 * 72 + 8);
+      this->m_overlapManager.m_pntr->m_sections.m_data[v48].m_numOriginalFaces = *(_DWORD *)(*(_QWORD *)v25
+                                                                                           + v48 * 72
+                                                                                           + 8);
       hkSet<hkIntRealPair,hkContainerHeapAllocator,hkMapOperations<hkIntRealPair>>::operator=(
-        (hkSet<hkIntRealPair,hkContainerHeapAllocator,hkMapOperations<hkIntRealPair> > *)&v50->m_overlapManager.m_pntr->m_sections.m_data[v49].m_facePriorities.m_elem,
+        &this->m_overlapManager.m_pntr->m_sections.m_data[v49].m_facePriorities,
         (hkSet<hkIntRealPair,hkContainerHeapAllocator,hkMapOperations<hkIntRealPair> > *)(v49 * 72
                                                                                         + *(_QWORD *)v25
                                                                                         + 48i64));
-      hkaiOverlapManagerSection::rebuildMap(&v50->m_overlapManager.m_pntr->m_sections.m_data[v49], 1);
+      hkaiOverlapManagerSection::rebuildMap(&this->m_overlapManager.m_pntr->m_sections.m_data[v49], 1);
       v28 = v48 * 72 + 72;
       v26 = result.m_enum + 1;
       ++v48;
@@ -525,7 +505,11 @@ void __fastcall hkaiWorld::forceSilhouetteInformation(hkaiWorld *this, hkArray<h
 
 // File Line: 155
 // RVA: 0xBCE810
-void __fastcall hkaiWorld::NavMeshModifiedCallbackContext::NavMeshModifiedCallbackContext(hkaiWorld::NavMeshModifiedCallbackContext *this, hkaiWorld *world, hkArrayBase<unsigned int> *cutFaceKeys, hkArrayBase<unsigned int> *uncutFaceKeys)
+void __fastcall hkaiWorld::NavMeshModifiedCallbackContext::NavMeshModifiedCallbackContext(
+        hkaiWorld::NavMeshModifiedCallbackContext *this,
+        hkaiWorld *world,
+        hkArrayBase<unsigned int> *cutFaceKeys,
+        hkArrayBase<unsigned int> *uncutFaceKeys)
 {
   this->m_world = world;
   this->m_cutFaceKeys = cutFaceKeys;

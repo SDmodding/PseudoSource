@@ -2,28 +2,26 @@
 // RVA: 0xBBEFD0
 void __fastcall hkaiSearchMemoryStorage::~hkaiSearchMemoryStorage(hkaiSearchMemoryStorage *this)
 {
-  int v1; // er8
-  hkaiSearchMemoryStorage *v2; // rbx
-  int v3; // er8
+  int m_capacityAndFlags; // r8d
+  int v3; // r8d
 
-  v1 = this->m_searchStateStorage.m_capacityAndFlags;
-  v2 = this;
+  m_capacityAndFlags = this->m_searchStateStorage.m_capacityAndFlags;
   this->m_searchStateStorage.m_size = 0;
-  if ( v1 >= 0 )
+  if ( m_capacityAndFlags >= 0 )
     hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
+      &hkContainerTempAllocator::s_alloc,
       this->m_searchStateStorage.m_data,
-      v1 & 0x3FFFFFFF);
-  v2->m_searchStateStorage.m_data = 0i64;
-  v2->m_searchStateStorage.m_capacityAndFlags = 2147483648;
-  v3 = v2->m_openSetStorage.m_capacityAndFlags;
-  v2->m_openSetStorage.m_size = 0;
+      m_capacityAndFlags & 0x3FFFFFFF);
+  this->m_searchStateStorage.m_data = 0i64;
+  this->m_searchStateStorage.m_capacityAndFlags = 0x80000000;
+  v3 = this->m_openSetStorage.m_capacityAndFlags;
+  this->m_openSetStorage.m_size = 0;
   if ( v3 >= 0 )
     hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-      v2->m_openSetStorage.m_data,
+      &hkContainerTempAllocator::s_alloc,
+      this->m_openSetStorage.m_data,
       v3 & 0x3FFFFFFF);
-  v2->m_openSetStorage.m_capacityAndFlags = 2147483648;
-  v2->m_openSetStorage.m_data = 0i64;
+  this->m_openSetStorage.m_capacityAndFlags = 0x80000000;
+  this->m_openSetStorage.m_data = 0i64;
 }
 

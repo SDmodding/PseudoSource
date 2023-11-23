@@ -1,24 +1,22 @@
 // File Line: 47
 // RVA: 0x4384D0
-void __fastcall UFG::ResourcePriorityBucket::AddChild(UFG::ResourcePriorityBucket *this, UFG::ResourcePriorityBucket *child)
+void __fastcall UFG::ResourcePriorityBucket::AddChild(
+        UFG::ResourcePriorityBucket *this,
+        UFG::ResourcePriorityBucket *child)
 {
-  __int64 v2; // r14
-  UFG::ResourcePriorityBucket *v3; // rsi
-  unsigned int v4; // edx
+  __int64 size; // r14
+  unsigned int capacity; // edx
   unsigned int v5; // ebx
-  UFG::ResourcePriorityBucket *v6; // rbp
   unsigned int v7; // edx
-  UFG::ResourcePriorityBucket **v8; // rax
+  UFG::ResourcePriorityBucket **p; // rax
 
-  v2 = this->mChildren.size;
-  v3 = child;
-  v4 = this->mChildren.capacity;
-  v5 = v2 + 1;
-  v6 = this;
-  if ( (signed int)v2 + 1 > v4 )
+  size = this->mChildren.size;
+  capacity = this->mChildren.capacity;
+  v5 = size + 1;
+  if ( (int)size + 1 > capacity )
   {
-    if ( v4 )
-      v7 = 2 * v4;
+    if ( capacity )
+      v7 = 2 * capacity;
     else
       v7 = 1;
     for ( ; v7 < v5; v7 *= 2 )
@@ -26,34 +24,34 @@ void __fastcall UFG::ResourcePriorityBucket::AddChild(UFG::ResourcePriorityBucke
     if ( v7 <= 2 )
       v7 = 2;
     if ( v7 - v5 > 0x10000 )
-      v7 = v2 + 65537;
+      v7 = size + 65537;
     UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(
       (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&this->mChildren,
       v7,
       "ResourcePriorityBucket::mChildren");
   }
-  v8 = v6->mChildren.p;
-  v6->mChildren.size = v5;
-  v8[v2] = v3;
-  v3->mpParent = v6;
+  p = this->mChildren.p;
+  this->mChildren.size = v5;
+  p[size] = child;
+  child->mpParent = this;
 }
 
 // File Line: 121
 // RVA: 0x436C60
 void __fastcall UFG::PreloadRequest::PreloadRequest(UFG::PreloadRequest *this)
 {
-  signed int v1; // edx
-  UFG::qColour **v2; // rax
+  int v1; // edx
+  UFG::qColour **p_mColourTint; // rax
 
-  this->mPrev = (UFG::qNode<UFG::PreloadRequest,UFG::PreloadRequest> *)&this->mPrev;
-  this->mNext = (UFG::qNode<UFG::PreloadRequest,UFG::PreloadRequest> *)&this->mPrev;
+  this->mPrev = this;
+  this->mNext = this;
   v1 = 15;
-  v2 = &this->mInstance.mPart[0].mColourTint;
+  p_mColourTint = &this->mInstance.mPart[0].mColourTint;
   do
   {
-    *(v2 - 1) = 0i64;
-    *v2 = 0i64;
-    v2 += 2;
+    *(p_mColourTint - 1) = 0i64;
+    *p_mColourTint = 0i64;
+    p_mColourTint += 2;
     --v1;
   }
   while ( v1 >= 0 );

@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkxTextureInplaceClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 58
@@ -28,36 +28,32 @@ hkClass *__fastcall hkxTextureInplace::staticClass()
 
 // File Line: 65
 // RVA: 0xE33470
-void __fastcall finishLoadedObjecthkxTextureInplace(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxTextureInplace(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
-  hkStringPtr *v2; // rbx
   hkStringPtr *v3; // rcx
-  int v4; // edi
 
   if ( p )
   {
-    v2 = (hkStringPtr *)p;
-    v3 = (hkStringPtr *)((char *)p + 40);
+    v3 = p + 5;
     v3[-5].m_stringAndFlag = (const char *)&hkxTextureInplace::`vftable;
-    v4 = finishing;
-    hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
-    hkStringPtr::hkStringPtr(v2 + 6, (hkFinishLoadedObjectFlag)v4);
+    hkStringPtr::hkStringPtr(v3, finishing);
+    hkStringPtr::hkStringPtr(p + 6, finishing);
   }
 }
 
 // File Line: 71
 // RVA: 0xE334C0
-void __fastcall cleanupLoadedObjecthkxTextureInplace(void *p)
+void __fastcall cleanupLoadedObjecthkxTextureInplace(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 75
 // RVA: 0xE334D0
 void **__fastcall getVtablehkxTextureInplace()
 {
-  hkStringPtr v1; // [rsp+48h] [rbp-20h]
-  hkStringPtr v2; // [rsp+50h] [rbp-18h]
+  hkStringPtr v1; // [rsp+48h] [rbp-20h] BYREF
+  hkStringPtr v2; // [rsp+50h] [rbp-18h] BYREF
 
   hkStringPtr::hkStringPtr(&v1, 0);
   hkStringPtr::hkStringPtr(&v2, 0);
@@ -75,8 +71,8 @@ void **dynamic_initializer_for__hkxTextureInplaceTypeInfo__()
   hkxTextureInplaceTypeInfo.m_typeName = "hkxTextureInplace";
   hkxTextureInplaceTypeInfo.m_vtable = result;
   hkxTextureInplaceTypeInfo.m_scopedName = "!hkxTextureInplace";
-  hkxTextureInplaceTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxTextureInplace;
-  hkxTextureInplaceTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxTextureInplace;
+  hkxTextureInplaceTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxTextureInplace;
+  hkxTextureInplaceTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxTextureInplace;
   return result;
 }
 

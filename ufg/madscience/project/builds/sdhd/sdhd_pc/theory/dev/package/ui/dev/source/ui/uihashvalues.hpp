@@ -4,7 +4,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_DPAD_UP_REPEAT___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("DPAD_UP_REPEAT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("DPAD_UP_REPEAT", -1);
   UI_HASH_DPAD_UP_REPEAT_5 = result;
   return result;
 }
@@ -15,7 +15,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_DPAD_DOWN_RELEASED___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("DPAD_DOWN_RELEASED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("DPAD_DOWN_RELEASED", -1);
   UI_HASH_DPAD_DOWN_RELEASED_5 = result;
   return result;
 }
@@ -26,7 +26,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_DPAD_LEFT_RELEASED___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("DPAD_LEFT_RELEASED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("DPAD_LEFT_RELEASED", -1);
   UI_HASH_DPAD_LEFT_RELEASED_5 = result;
   return result;
 }
@@ -37,7 +37,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_DPAD_RIGHT_REPEAT___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("DPAD_RIGHT_REPEAT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("DPAD_RIGHT_REPEAT", -1);
   UI_HASH_DPAD_RIGHT_REPEAT_5 = result;
   return result;
 }
@@ -48,7 +48,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_BUTTON_START_RELEASED___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("BUTTON_START_RELEASED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("BUTTON_START_RELEASED", -1);
   UI_HASH_BUTTON_START_RELEASED_5 = result;
   return result;
 }
@@ -59,7 +59,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_BUTTON_SELECT_RELEASED___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("BUTTON_SELECT_RELEASED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("BUTTON_SELECT_RELEASED", -1);
   UI_HASH_BUTTON_SELECT_RELEASED_5 = result;
   return result;
 }
@@ -70,7 +70,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_BUTTON_ACCEPT_RELEASED___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("BUTTON_ACCEPT_RELEASED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("BUTTON_ACCEPT_RELEASED", -1);
   UI_HASH_BUTTON_ACCEPT_RELEASED_5 = result;
   return result;
 }
@@ -81,7 +81,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_BUTTON_BACK_REPEAT___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("BUTTON_BACK_REPEAT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("BUTTON_BACK_REPEAT", -1);
   UI_HASH_BUTTON_BACK_REPEAT_5 = result;
   return result;
 }
@@ -92,7 +92,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_BUTTON_BUTTON1_REPEAT___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("BUTTON_BUTTON1_REPEAT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("BUTTON_BUTTON1_REPEAT", -1);
   UI_HASH_BUTTON_BUTTON1_REPEAT_5 = result;
   return result;
 }
@@ -103,7 +103,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_BUTTON_BUTTON2_REPEAT___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("BUTTON_BUTTON2_REPEAT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("BUTTON_BUTTON2_REPEAT", -1);
   UI_HASH_BUTTON_BUTTON2_REPEAT_5 = result;
   return result;
 }
@@ -114,7 +114,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_BUTTON_L1_PRESSED___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("BUTTON_L1_PRESSED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("BUTTON_L1_PRESSED", -1);
   UI_HASH_BUTTON_L1_PRESSED_5 = result;
   return result;
 }
@@ -125,7 +125,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_BUTTON_L2_REPEAT___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("BUTTON_L2_REPEAT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("BUTTON_L2_REPEAT", -1);
   UI_HASH_BUTTON_L2_REPEAT_5 = result;
   return result;
 }
@@ -136,7 +136,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_BUTTON_L3_PRESSED___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("BUTTON_L3_PRESSED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("BUTTON_L3_PRESSED", -1);
   UI_HASH_BUTTON_L3_PRESSED_5 = result;
   return result;
 }
@@ -147,7 +147,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_BUTTON_R1_REPEAT___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("BUTTON_R1_REPEAT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("BUTTON_R1_REPEAT", -1);
   UI_HASH_BUTTON_R1_REPEAT_5 = result;
   return result;
 }
@@ -158,7 +158,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_BUTTON_R2_PRESSED___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("BUTTON_R2_PRESSED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("BUTTON_R2_PRESSED", -1);
   UI_HASH_BUTTON_R2_PRESSED_5 = result;
   return result;
 }
@@ -169,7 +169,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_BUTTON_R3_REPEAT___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("BUTTON_R3_REPEAT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("BUTTON_R3_REPEAT", -1);
   UI_HASH_BUTTON_R3_REPEAT_5 = result;
   return result;
 }
@@ -180,7 +180,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_THUMBSTICK_RIGHT___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("THUMBSTICK_RIGHT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("THUMBSTICK_RIGHT", -1);
   UI_HASH_THUMBSTICK_RIGHT_5 = result;
   return result;
 }
@@ -191,7 +191,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_THUMBSTICK_RIGHT_UP___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("THUMBSTICK_RIGHT_UP", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("THUMBSTICK_RIGHT_UP", -1);
   UI_HASH_THUMBSTICK_RIGHT_UP_5 = result;
   return result;
 }
@@ -202,7 +202,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_THUMBSTICK_RIGHT_DOWN___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("THUMBSTICK_RIGHT_DOWN", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("THUMBSTICK_RIGHT_DOWN", -1);
   UI_HASH_THUMBSTICK_RIGHT_DOWN_5 = result;
   return result;
 }
@@ -213,7 +213,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_THUMBSTICK_RIGHT_LEFT___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("THUMBSTICK_RIGHT_LEFT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("THUMBSTICK_RIGHT_LEFT", -1);
   UI_HASH_THUMBSTICK_RIGHT_LEFT_5 = result;
   return result;
 }
@@ -224,7 +224,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_THUMBSTICK_RIGHT_RIGHT___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("THUMBSTICK_RIGHT_RIGHT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("THUMBSTICK_RIGHT_RIGHT", -1);
   UI_HASH_THUMBSTICK_RIGHT_RIGHT_5 = result;
   return result;
 }
@@ -235,7 +235,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_THUMBSTICK_LEFT___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("THUMBSTICK_LEFT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("THUMBSTICK_LEFT", -1);
   UI_HASH_THUMBSTICK_LEFT_5 = result;
   return result;
 }
@@ -246,7 +246,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_THUMBSTICK_LEFT_UP___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("THUMBSTICK_LEFT_UP", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("THUMBSTICK_LEFT_UP", -1);
   UI_HASH_THUMBSTICK_LEFT_UP_5 = result;
   return result;
 }
@@ -257,7 +257,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_THUMBSTICK_LEFT_DOWN___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("THUMBSTICK_LEFT_DOWN", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("THUMBSTICK_LEFT_DOWN", -1);
   UI_HASH_THUMBSTICK_LEFT_DOWN_5 = result;
   return result;
 }
@@ -268,7 +268,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_THUMBSTICK_LEFT_LEFT___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("THUMBSTICK_LEFT_LEFT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("THUMBSTICK_LEFT_LEFT", -1);
   UI_HASH_THUMBSTICK_LEFT_LEFT_5 = result;
   return result;
 }
@@ -279,7 +279,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_THUMBSTICK_LEFT_RIGHT___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("THUMBSTICK_LEFT_RIGHT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("THUMBSTICK_LEFT_RIGHT", -1);
   UI_HASH_THUMBSTICK_LEFT_RIGHT_5 = result;
   return result;
 }
@@ -290,7 +290,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MOUSE_MOVE___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("MOUSE_MOVE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("MOUSE_MOVE", -1);
   UI_HASH_MOUSE_MOVE_5 = result;
   return result;
 }
@@ -301,7 +301,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MOUSE_BUTTON_LEFT_RELEASED___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("MOUSE_BUTTON_LEFT_RELEASED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("MOUSE_BUTTON_LEFT_RELEASED", -1);
   UI_HASH_MOUSE_BUTTON_LEFT_RELEASED_5 = result;
   return result;
 }
@@ -312,7 +312,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MOUSE_BUTTON_RIGHT_REPEAT___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("MOUSE_BUTTON_RIGHT_REPEAT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("MOUSE_BUTTON_RIGHT_REPEAT", -1);
   UI_HASH_MOUSE_BUTTON_RIGHT_REPEAT_5 = result;
   return result;
 }
@@ -323,7 +323,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MOUSE_BUTTON_MIDDLE_REPEAT___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("MOUSE_BUTTON_MIDDLE_REPEAT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("MOUSE_BUTTON_MIDDLE_REPEAT", -1);
   UI_HASH_MOUSE_BUTTON_MIDDLE_REPEAT_5 = result;
   return result;
 }
@@ -334,7 +334,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MOUSE_BUTTON_4_REPEAT___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("MOUSE_BUTTON_4_REPEAT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("MOUSE_BUTTON_4_REPEAT", -1);
   UI_HASH_MOUSE_BUTTON_4_REPEAT_5 = result;
   return result;
 }
@@ -345,7 +345,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MOUSE_BUTTON_5_REPEAT___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("MOUSE_BUTTON_5_REPEAT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("MOUSE_BUTTON_5_REPEAT", -1);
   UI_HASH_MOUSE_BUTTON_5_REPEAT_5 = result;
   return result;
 }
@@ -356,7 +356,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MOUSE_WHEEL_SCROLL___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("MOUSE_WHEEL_SCROLL", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("MOUSE_WHEEL_SCROLL", -1);
   UI_HASH_MOUSE_WHEEL_SCROLL_5 = result;
   return result;
 }
@@ -367,7 +367,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_KEYBOARD_INPUT___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("KEYBOARD_INPUT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("KEYBOARD_INPUT", -1);
   UI_HASH_KEYBOARD_INPUT_5 = result;
   return result;
 }
@@ -378,7 +378,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_KEYBOARD_ESC_RELEASED___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("KEYBOARD_ESC_RELEASED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("KEYBOARD_ESC_RELEASED", -1);
   UI_HASH_KEYBOARD_ESC_RELEASED_5 = result;
   return result;
 }
@@ -389,7 +389,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SCREEN_PUSHED___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SCREEN_PUSHED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SCREEN_PUSHED", -1);
   UI_HASH_SCREEN_PUSHED_5 = result;
   return result;
 }
@@ -400,7 +400,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SCREEN_POPPED___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SCREEN_POPPED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SCREEN_POPPED", -1);
   UI_HASH_SCREEN_POPPED_5 = result;
   return result;
 }
@@ -411,7 +411,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_DIALOG_YES___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("DIALOG_YES", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("DIALOG_YES", -1);
   UI_HASH_DIALOG_YES_5 = result;
   return result;
 }
@@ -422,7 +422,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_DIALOG_NO___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("DIALOG_NO", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("DIALOG_NO", -1);
   UI_HASH_DIALOG_NO_5 = result;
   return result;
 }
@@ -433,7 +433,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_DIALOG_OK___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("DIALOG_OK", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("DIALOG_OK", -1);
   UI_HASH_DIALOG_OK_5 = result;
   return result;
 }
@@ -444,7 +444,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_DIALOG_CANCEL___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("DIALOG_CANCEL", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("DIALOG_CANCEL", -1);
   UI_HASH_DIALOG_CANCEL_5 = result;
   return result;
 }
@@ -455,7 +455,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_DIM_COMPLETE___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("DIM_COMPLETE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("DIM_COMPLETE", -1);
   UI_HASH_DIM_COMPLETE_5 = result;
   return result;
 }
@@ -466,7 +466,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_UNDIM_COMPLETE___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("UNDIM_COMPLETE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("UNDIM_COMPLETE", -1);
   UI_HASH_UNDIM_COMPLETE_5 = result;
   return result;
 }
@@ -477,7 +477,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_INTRO_COMPLETE___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("INTRO_COMPLETE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("INTRO_COMPLETE", -1);
   UI_HASH_INTRO_COMPLETE_5 = result;
   return result;
 }
@@ -488,7 +488,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_INTRO_ANIM_COMPLETE___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("INTRO_ANIM_COMPLETE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("INTRO_ANIM_COMPLETE", -1);
   UI_HASH_INTRO_ANIM_COMPLETE_5 = result;
   return result;
 }
@@ -499,7 +499,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OUTRO___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OUTRO", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OUTRO", -1);
   UI_HASH_OUTRO_5 = result;
   return result;
 }
@@ -510,7 +510,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OUTRO_COMPLETE___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OUTRO_COMPLETE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OUTRO_COMPLETE", -1);
   UI_HASH_OUTRO_COMPLETE_5 = result;
   return result;
 }
@@ -521,7 +521,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OUTRO_ANIM_COMPLETE___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OUTRO_ANIM_COMPLETE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OUTRO_ANIM_COMPLETE", -1);
   UI_HASH_OUTRO_ANIM_COMPLETE_5 = result;
   return result;
 }
@@ -532,7 +532,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_UNPAUSE___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("UNPAUSE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("UNPAUSE", -1);
   UI_HASH_UNPAUSE_5 = result;
   return result;
 }
@@ -543,7 +543,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_ENABLE_INPUT___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("ENABLE_INPUT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("ENABLE_INPUT", -1);
   UI_HASH_ENABLE_INPUT_5 = result;
   return result;
 }
@@ -554,7 +554,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_DISABLE_INPUT___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("DISABLE_INPUT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("DISABLE_INPUT", -1);
   UI_HASH_DISABLE_INPUT_5 = result;
   return result;
 }
@@ -565,7 +565,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_INPUT_SWAPPED___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("INPUT_SWAPPED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("INPUT_SWAPPED", -1);
   UI_HASH_INPUT_SWAPPED_5 = result;
   return result;
 }
@@ -576,7 +576,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_FADE_IN_COMPLETE___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("FADE_IN_COMPLETE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("FADE_IN_COMPLETE", -1);
   UI_HASH_FADE_IN_COMPLETE_5 = result;
   return result;
 }
@@ -587,7 +587,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_FADE_OUT_COMPLETE___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("FADE_OUT_COMPLETE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("FADE_OUT_COMPLETE", -1);
   UI_HASH_FADE_OUT_COMPLETE_5 = result;
   return result;
 }
@@ -598,7 +598,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_FADE_IN___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("FADE_IN", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("FADE_IN", -1);
   UI_HASH_FADE_IN_5 = result;
   return result;
 }
@@ -609,7 +609,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_FADE_OUT___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("FADE_OUT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("FADE_OUT", -1);
   UI_HASH_FADE_OUT_5 = result;
   return result;
 }
@@ -620,7 +620,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_FADE_IN_HALF_COMPLETE___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("FADE_IN_HALF_COMPLETE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("FADE_IN_HALF_COMPLETE", -1);
   UI_HASH_FADE_IN_HALF_COMPLETE_5 = result;
   return result;
 }
@@ -631,7 +631,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_FADE_OUT_HALF_COMPLETE___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("FADE_OUT_HALF_COMPLETE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("FADE_OUT_HALF_COMPLETE", -1);
   UI_HASH_FADE_OUT_HALF_COMPLETE_5 = result;
   return result;
 }
@@ -642,7 +642,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_CANCEL___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("CANCEL", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("CANCEL", -1);
   UI_HASH_CANCEL_5 = result;
   return result;
 }
@@ -653,7 +653,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_INVALID___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("INVALID", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("INVALID", -1);
   UI_HASH_INVALID_5 = result;
   return result;
 }
@@ -664,7 +664,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_ERROR___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("ERROR", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("ERROR", -1);
   UI_HASH_ERROR_5 = result;
   return result;
 }
@@ -675,7 +675,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SCROLL___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SCROLL", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SCROLL", -1);
   UI_HASH_SCROLL_5 = result;
   return result;
 }
@@ -686,7 +686,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_LIST_OPTION_HIGHLIGHTED___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("LIST_OPTION_HIGHLIGHTED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("LIST_OPTION_HIGHLIGHTED", -1);
   UI_HASH_LIST_OPTION_HIGHLIGHTED_5 = result;
   return result;
 }
@@ -697,7 +697,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_LIST_OPTION_SELECTED___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("LIST_OPTION_SELECTED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("LIST_OPTION_SELECTED", -1);
   UI_HASH_LIST_OPTION_SELECTED_5 = result;
   return result;
 }
@@ -708,7 +708,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTION_HIGHLIGHTED___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTION_HIGHLIGHTED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTION_HIGHLIGHTED", -1);
   UI_HASH_OPTION_HIGHLIGHTED_5 = result;
   return result;
 }
@@ -719,7 +719,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_OPTION_DISABLED___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("OPTION_DISABLED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("OPTION_DISABLED", -1);
   UI_HASH_OPTION_DISABLED_5 = result;
   return result;
 }
@@ -730,7 +730,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_GAME_UNLOADING___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("GAME_UNLOADING", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("GAME_UNLOADING", -1);
   UI_HASH_GAME_UNLOADING_5 = result;
   return result;
 }
@@ -741,7 +741,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_TWEEN_COMPLETE___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("TWEEN_COMPLETE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("TWEEN_COMPLETE", -1);
   UI_HASH_TWEEN_COMPLETE_5 = result;
   return result;
 }
@@ -752,7 +752,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_REQUEST_STATE_CHANGE___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("REQUEST_STATE_CHANGE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("REQUEST_STATE_CHANGE", -1);
   UI_HASH_REQUEST_STATE_CHANGE_5 = result;
   return result;
 }
@@ -763,7 +763,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_LOAD_GAME___5()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("LOAD_GAME", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("LOAD_GAME", -1);
   UI_HASH_LOAD_GAME_5 = result;
   return result;
 }

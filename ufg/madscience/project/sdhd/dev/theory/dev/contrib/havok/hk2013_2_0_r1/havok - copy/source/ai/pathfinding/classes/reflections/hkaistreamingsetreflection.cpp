@@ -51,7 +51,7 @@ void dynamic_initializer_for__hkaiStreamingSetGraphConnectionClass__()
     &hkaiStreamingSetGraphConnection_Default,
     0i64,
     0,
-    3u);
+    3);
 }
 
 // File Line: 154
@@ -140,8 +140,9 @@ void __fastcall finishLoadedObjecthkaiStreamingSet(void *p, int finishing)
 
 // File Line: 307
 // RVA: 0xBB81C0
-void __fastcall cleanupLoadedObjecthkaiStreamingSet(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkaiStreamingSet(hkaiStreamingSet *p)
 {
-  hkaiStreamingSet::~hkaiStreamingSet((hkaiStreamingSet *)p);
+  hkaiStreamingSet::~hkaiStreamingSet(p);
 }
 

@@ -7,7 +7,7 @@ __int64 hkHavokCurrentClasses::_dynamic_initializer_for__hkHavokDefaultClassRegi
     hkBuiltinTypeRegistry::StaticLinkedClasses,
     -1,
     "hk_2013.2.0-r1");
-  return atexit(hkHavokCurrentClasses::_dynamic_atexit_destructor_for__hkHavokDefaultClassRegistry__);
+  return atexit((int (__fastcall *)())hkHavokCurrentClasses::_dynamic_atexit_destructor_for__hkHavokDefaultClassRegistry__);
 }
 
 // File Line: 30
@@ -15,28 +15,24 @@ __int64 hkHavokCurrentClasses::_dynamic_initializer_for__hkHavokDefaultClassRegi
 void __fastcall hkBuiltinTypeRegistry::addType(hkBuiltinTypeRegistry *this, hkTypeInfo *info, hkClass *klass)
 {
   hkDefaultClassNameRegistry *v3; // rbx
-  hkClass *v4; // rsi
-  hkBaseObjectVtbl *v5; // rdi
-  hkTypeInfo *v6; // rbp
-  const char *v7; // rax
+  hkBaseObjectVtbl *vfptr; // rdi
+  const char *Name; // rax
 
   v3 = hkSingleton<hkDefaultClassNameRegistry>::s_instance;
-  v4 = klass;
-  v5 = hkSingleton<hkDefaultClassNameRegistry>::s_instance->vfptr;
-  v6 = info;
-  v7 = hkClass::getName(klass);
-  ((void (__fastcall *)(hkDefaultClassNameRegistry *, hkClass *, const char *))v5[3].__first_virtual_table_function__)(
+  vfptr = hkSingleton<hkDefaultClassNameRegistry>::s_instance->vfptr;
+  Name = hkClass::getName(klass);
+  ((void (__fastcall *)(hkDefaultClassNameRegistry *, hkClass *, const char *))vfptr[3].__first_virtual_table_function__)(
     v3,
-    v4,
-    v7);
+    klass,
+    Name);
   ((void (__fastcall *)(hkTypeInfoRegistry *, hkTypeInfo *))hkSingleton<hkTypeInfoRegistry>::s_instance->vfptr[1].__first_virtual_table_function__)(
     hkSingleton<hkTypeInfoRegistry>::s_instance,
-    v6);
-  if ( (signed int)hkClass::getNumInterfaces(v4) > 0 )
+    info);
+  if ( (int)hkClass::getNumInterfaces(klass) > 0 )
     ((void (__fastcall *)(hkVtableClassRegistry *, const void *, hkClass *))hkSingleton<hkVtableClassRegistry>::s_instance->vfptr[1].__first_virtual_table_function__)(
       hkSingleton<hkVtableClassRegistry>::s_instance,
-      v6->m_vtable,
-      v4);
+      info->m_vtable,
+      klass);
 }
 
 // File Line: 49
@@ -45,23 +41,17 @@ void __fastcall hkDefaultBuiltinTypeRegistry::init(hkDefaultBuiltinTypeRegistry 
 {
   hkTypeInfo *v1; // rcx
   hkTypeInfoRegistry *v2; // rdi
-  hkTypeInfo *const *v3; // rbx
+  hkTypeInfo *const *i; // rbx
 
   ((void (__fastcall *)(hkDefaultClassNameRegistry *, hkStaticClassNameRegistry *))hkSingleton<hkDefaultClassNameRegistry>::s_instance->vfptr[4].__first_virtual_table_function__)(
     hkSingleton<hkDefaultClassNameRegistry>::s_instance,
     &hkHavokCurrentClasses::hkHavokDefaultClassRegistry);
   v1 = hkBuiltinTypeRegistry::StaticLinkedTypeInfos[0];
   v2 = hkSingleton<hkTypeInfoRegistry>::s_instance;
-  v3 = hkBuiltinTypeRegistry::StaticLinkedTypeInfos;
-  if ( hkBuiltinTypeRegistry::StaticLinkedTypeInfos[0] )
+  for ( i = hkBuiltinTypeRegistry::StaticLinkedTypeInfos; v1; ++i )
   {
-    do
-    {
-      ((void (__fastcall *)(hkTypeInfoRegistry *, hkTypeInfo *))v2->vfptr[1].__first_virtual_table_function__)(v2, v1);
-      v1 = (hkTypeInfo *)*((_QWORD *)v3 + 1);
-      ++v3;
-    }
-    while ( v1 );
+    ((void (__fastcall *)(hkTypeInfoRegistry *, hkTypeInfo *))v2->vfptr[1].__first_virtual_table_function__)(v2, v1);
+    v1 = (hkTypeInfo *)*((_QWORD *)i + 1);
   }
   hkVtableClassRegistry::registerList(
     hkSingleton<hkVtableClassRegistry>::s_instance,
@@ -78,14 +68,16 @@ hkTypeInfoRegistry *__fastcall hkDefaultBuiltinTypeRegistry::getTypeInfoRegistry
 
 // File Line: 61
 // RVA: 0xE38A00
-hkDefaultClassNameRegistry *__fastcall hkDefaultBuiltinTypeRegistry::getClassNameRegistry(hkDefaultBuiltinTypeRegistry *this)
+hkDefaultClassNameRegistry *__fastcall hkDefaultBuiltinTypeRegistry::getClassNameRegistry(
+        hkDefaultBuiltinTypeRegistry *this)
 {
   return hkSingleton<hkDefaultClassNameRegistry>::s_instance;
 }
 
 // File Line: 66
 // RVA: 0xE38BD0
-hkVtableClassRegistry *__fastcall hkDefaultBuiltinTypeRegistry::getVtableClassRegistry(hkDefaultBuiltinTypeRegistry *this)
+hkVtableClassRegistry *__fastcall hkDefaultBuiltinTypeRegistry::getVtableClassRegistry(
+        hkDefaultBuiltinTypeRegistry *this)
 {
   return hkSingleton<hkVtableClassRegistry>::s_instance;
 }
@@ -94,8 +86,7 @@ hkVtableClassRegistry *__fastcall hkDefaultBuiltinTypeRegistry::getVtableClassRe
 // RVA: 0xE38E40
 void __fastcall hkDefaultBuiltinTypeRegistry::reinitialize(hkDefaultBuiltinTypeRegistry *this)
 {
-  hkDefaultBuiltinTypeRegistry *v1; // rdi
-  _QWORD **v2; // rax
+  _QWORD **Value; // rax
   __int64 v3; // rax
   hkDefaultClassNameRegistry *v4; // rbx
   _QWORD **v5; // rax
@@ -105,9 +96,8 @@ void __fastcall hkDefaultBuiltinTypeRegistry::reinitialize(hkDefaultBuiltinTypeR
   __int64 v9; // rax
   hkVtableClassRegistry *v10; // rbx
 
-  v1 = this;
-  v2 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v3 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v2[11] + 8i64))(v2[11], 56i64);
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v3 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 56i64);
   v4 = (hkDefaultClassNameRegistry *)v3;
   if ( v3 )
   {
@@ -124,10 +114,10 @@ void __fastcall hkDefaultBuiltinTypeRegistry::reinitialize(hkDefaultBuiltinTypeR
     v4 = 0i64;
   }
   if ( hkSingleton<hkDefaultClassNameRegistry>::s_instance )
-    hkReferencedObject::removeReferenceLockUnchecked((hkReferencedObject *)&hkSingleton<hkDefaultClassNameRegistry>::s_instance->vfptr);
+    hkReferencedObject::removeReferenceLockUnchecked(hkSingleton<hkDefaultClassNameRegistry>::s_instance);
   hkSingleton<hkDefaultClassNameRegistry>::s_instance = v4;
   v5 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v6 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v5[11] + 8i64))(v5[11], 48i64);
+  v6 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*v5[11] + 8i64))(v5[11], 48i64);
   v7 = (hkTypeInfoRegistry *)v6;
   if ( v6 )
   {
@@ -144,10 +134,10 @@ void __fastcall hkDefaultBuiltinTypeRegistry::reinitialize(hkDefaultBuiltinTypeR
     v7 = 0i64;
   }
   if ( hkSingleton<hkTypeInfoRegistry>::s_instance )
-    hkReferencedObject::removeReferenceLockUnchecked((hkReferencedObject *)&hkSingleton<hkTypeInfoRegistry>::s_instance->vfptr);
+    hkReferencedObject::removeReferenceLockUnchecked(hkSingleton<hkTypeInfoRegistry>::s_instance);
   hkSingleton<hkTypeInfoRegistry>::s_instance = v7;
   v8 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v9 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v8[11] + 8i64))(v8[11], 32i64);
+  v9 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*v8[11] + 8i64))(v8[11], 32i64);
   v10 = (hkVtableClassRegistry *)v9;
   if ( v9 )
   {
@@ -162,16 +152,16 @@ void __fastcall hkDefaultBuiltinTypeRegistry::reinitialize(hkDefaultBuiltinTypeR
     v10 = 0i64;
   }
   if ( hkSingleton<hkVtableClassRegistry>::s_instance )
-    hkReferencedObject::removeReferenceLockUnchecked((hkReferencedObject *)&hkSingleton<hkVtableClassRegistry>::s_instance->vfptr);
+    hkReferencedObject::removeReferenceLockUnchecked(hkSingleton<hkVtableClassRegistry>::s_instance);
   hkSingleton<hkVtableClassRegistry>::s_instance = v10;
-  hkDefaultBuiltinTypeRegistry::init(v1);
+  hkDefaultBuiltinTypeRegistry::init(this);
 }
 
 // File Line: 81
 // RVA: 0xE387D0
 hkReferencedObject *__fastcall hkCreateBuiltInTypeRegistry()
 {
-  _QWORD **v0; // rax
+  _QWORD **Value; // rax
   __int64 v1; // rax
   __int64 v2; // rbx
 
@@ -181,8 +171,8 @@ hkReferencedObject *__fastcall hkCreateBuiltInTypeRegistry()
   {
     return 0i64;
   }
-  v0 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v1 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v0[11] + 8i64))(v0[11], 16i64);
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v1 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 16i64);
   v2 = v1;
   if ( !v1 )
     return 0i64;

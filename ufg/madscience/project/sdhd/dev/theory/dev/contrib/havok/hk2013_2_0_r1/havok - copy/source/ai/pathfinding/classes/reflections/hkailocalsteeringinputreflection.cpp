@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkaiLocalSteeringInputClass__()
     0i64,
     0i64,
     0,
-    6u);
+    6);
 }
 
 // File Line: 73

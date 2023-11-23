@@ -1,25 +1,18 @@
 // File Line: 521
 // RVA: 0x83480
-std::_String_val<std::_Simple_types<char> > *__fastcall std::_String_val<std::_Simple_types<char>>::_Myptr(std::_String_val<std::_Simple_types<char> > *this)
+std::_String_val<std::_Simple_types<char> > *__fastcall std::_String_val<std::_Simple_types<char>>::_Myptr(
+        std::_String_val<std::_Simple_types<char> > *this)
 {
-  std::_String_val<std::_Simple_types<char> > *result; // rax
-
   if ( this->_Myres < 0x10 )
-    result = this;
+    return this;
   else
-    result = (std::_String_val<std::_Simple_types<char> > *)this->_Bx._Ptr;
-  return result;
+    return (std::_String_val<std::_Simple_types<char> > *)this->_Bx._Ptr;
 }
 
 // File Line: 948
 // RVA: 0x83100
-void __fastcall std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Assign_rv(std::basic_string<char,std::char_traits<char>,std::allocator<char> > *this, std::basic_string<char,std::char_traits<char>,std::allocator<char> > *_Right)
+void __fastcall std::string::_Assign_rv(std::string *this, std::string *_Right)
 {
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v2; // rbx
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v3; // rdi
-
-  v2 = _Right;
-  v3 = this;
   if ( _Right->_Myres >= 0x10 )
   {
     if ( this )
@@ -30,52 +23,49 @@ void __fastcall std::basic_string<char,std::char_traits<char>,std::allocator<cha
   {
     memmove(this, _Right, _Right->_Mysize + 1);
   }
-  v3->_Mysize = v2->_Mysize;
-  v3->_Myres = v2->_Myres;
-  v2->_Myres = 15i64;
-  v2->_Mysize = 0i64;
-  v2->_Bx._Buf[0] = 0;
+  this->_Mysize = _Right->_Mysize;
+  this->_Myres = _Right->_Myres;
+  _Right->_Myres = 15i64;
+  _Right->_Mysize = 0i64;
+  _Right->_Bx._Buf[0] = 0;
 }
 
 // File Line: 963
 // RVA: 0x82B90
-void __fastcall std::basic_string<char,std::char_traits<char>,std::allocator<char>>::~basic_string<char,std::char_traits<char>,std::allocator<char>>(std::basic_string<char,std::char_traits<char>,std::allocator<char> > *this)
+void __fastcall std::string::~string(std::string *this)
 {
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v1; // rbx
-
-  v1 = this;
   if ( this->_Myres >= 0x10 )
     Illusion::ShaderParam::operator delete(this->_Bx._Ptr);
-  v1->_Myres = 15i64;
-  v1->_Mysize = 0i64;
-  v1->_Bx._Buf[0] = 0;
+  this->_Myres = 15i64;
+  this->_Mysize = 0i64;
+  this->_Bx._Buf[0] = 0;
 }
 
 // File Line: 1019
 // RVA: 0x834F0
-std::basic_string<char,std::char_traits<char>,std::allocator<char> > *__fastcall std::basic_string<char,std::char_traits<char>,std::allocator<char>>::append(std::basic_string<char,std::char_traits<char>,std::allocator<char> > *this, std::basic_string<char,std::char_traits<char>,std::allocator<char> > *_Right, unsigned __int64 _Roff, unsigned __int64 _Count)
+std::string *__fastcall std::string::append(
+        std::string *this,
+        std::string *_Right,
+        unsigned __int64 _Roff,
+        unsigned __int64 _Count)
 {
-  unsigned __int64 v4; // rax
-  unsigned __int64 v5; // rsi
-  unsigned __int64 v6; // rbp
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v7; // r14
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v8; // rbx
+  unsigned __int64 Mysize; // rax
+  size_t v5; // rsi
+  std::string *Ptr; // r14
   unsigned __int64 v9; // rax
   unsigned __int64 v10; // r8
   unsigned __int64 v11; // rdi
-  unsigned __int64 v12; // rax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v13; // rcx
+  unsigned __int64 Myres; // rax
+  std::string *v13; // rcx
   bool v14; // cf
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v15; // rax
+  std::string *v15; // rax
 
-  v4 = _Right->_Mysize;
+  Mysize = _Right->_Mysize;
   v5 = _Count;
-  v6 = _Roff;
-  v7 = _Right;
-  v8 = this;
-  if ( v4 < _Roff )
+  Ptr = _Right;
+  if ( Mysize < _Roff )
     std::_Xout_of_range("invalid string position");
-  v9 = v4 - _Roff;
+  v9 = Mysize - _Roff;
   v10 = this->_Mysize;
   if ( v9 < _Count )
     v5 = v9;
@@ -84,140 +74,135 @@ std::basic_string<char,std::char_traits<char>,std::allocator<char> > *__fastcall
   if ( v5 )
   {
     v11 = v10 + v5;
-    if ( v10 + v5 > 0xFFFFFFFFFFFFFFFEui64 )
+    if ( v10 + v5 == -1i64 )
       std::_Xlength_error("string too long");
-    v12 = this->_Myres;
-    if ( v12 >= v11 )
+    Myres = this->_Myres;
+    if ( Myres >= v11 )
     {
       if ( !v11 )
       {
         this->_Mysize = 0i64;
-        if ( v12 < 0x10 )
+        if ( Myres < 0x10 )
           this->_Bx._Buf[0] = 0;
         else
           *this->_Bx._Ptr = 0;
-        return v8;
+        return this;
       }
     }
     else
     {
-      std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Copy(this, v10 + v5, v10);
+      std::string::_Copy(this, v10 + v5, v10);
       if ( !v11 )
-        return v8;
+        return this;
     }
-    if ( v7->_Myres >= 0x10 )
-      v7 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v7->_Bx._Ptr;
-    if ( v8->_Myres < 0x10 )
-      v13 = v8;
+    if ( Ptr->_Myres >= 0x10 )
+      Ptr = (std::string *)Ptr->_Bx._Ptr;
+    if ( this->_Myres < 0x10 )
+      v13 = this;
     else
-      v13 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v8->_Bx._Ptr;
-    if ( v5 )
-      memmove(&v13->_Bx._Buf[v8->_Mysize], &v7->_Bx._Buf[v6], v5);
-    v14 = v8->_Myres < 0x10;
-    v8->_Mysize = v11;
+      v13 = (std::string *)this->_Bx._Ptr;
+    memmove(&v13->_Bx._Buf[this->_Mysize], &Ptr->_Bx._Buf[_Roff], v5);
+    v14 = this->_Myres < 0x10;
+    this->_Mysize = v11;
     if ( v14 )
-      v15 = v8;
+      v15 = this;
     else
-      v15 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v8->_Bx._Ptr;
+      v15 = (std::string *)this->_Bx._Ptr;
     v15->_Bx._Buf[v11] = 0;
   }
-  return v8;
+  return this;
 }
 
 // File Line: 1066
 // RVA: 0x83620
-std::basic_string<char,std::char_traits<char>,std::allocator<char> > *__fastcall std::basic_string<char,std::char_traits<char>,std::allocator<char>>::append(std::basic_string<char,std::char_traits<char>,std::allocator<char> > *this, unsigned __int64 _Count, char _Ch)
+std::string *__fastcall std::string::append(std::string *this, size_t _Count, char _Ch)
 {
-  char v3; // bp
-  unsigned __int64 v4; // r8
-  unsigned __int64 v5; // rsi
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v6; // rbx
+  unsigned __int64 Mysize; // r8
   unsigned __int64 v7; // rdi
-  unsigned __int64 v8; // rax
+  unsigned __int64 Myres; // rax
   unsigned __int64 v9; // rcx
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v10; // rax
+  std::string *Ptr; // rax
   bool v11; // cf
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v12; // rax
+  std::string *v12; // rax
 
-  v3 = _Ch;
-  v4 = this->_Mysize;
-  v5 = _Count;
-  v6 = this;
-  if ( -1i64 - v4 <= _Count )
+  Mysize = this->_Mysize;
+  if ( -1i64 - Mysize <= _Count )
     std::_Xlength_error("string too long");
   if ( _Count )
   {
-    v7 = v4 + _Count;
-    if ( v4 + _Count > 0xFFFFFFFFFFFFFFFEui64 )
+    v7 = Mysize + _Count;
+    if ( Mysize + _Count == -1i64 )
       std::_Xlength_error("string too long");
-    v8 = this->_Myres;
-    if ( v8 >= v7 )
+    Myres = this->_Myres;
+    if ( Myres >= v7 )
     {
       if ( !v7 )
       {
         this->_Mysize = 0i64;
-        if ( v8 < 0x10 )
+        if ( Myres < 0x10 )
           this->_Bx._Buf[0] = 0;
         else
           *this->_Bx._Ptr = 0;
-        return v6;
+        return this;
       }
     }
     else
     {
-      std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Copy(this, v4 + _Count, v4);
+      std::string::_Copy(this, Mysize + _Count, Mysize);
       if ( !v7 )
-        return v6;
+        return this;
     }
-    v9 = v6->_Mysize;
-    if ( v5 == 1 )
+    v9 = this->_Mysize;
+    if ( _Count == 1 )
     {
-      if ( v6->_Myres < 0x10 )
-        v6->_Bx._Buf[v9] = v3;
+      if ( this->_Myres < 0x10 )
+        this->_Bx._Buf[v9] = _Ch;
       else
-        v6->_Bx._Ptr[v9] = v3;
+        this->_Bx._Ptr[v9] = _Ch;
     }
     else
     {
-      if ( v6->_Myres < 0x10 )
-        v10 = v6;
+      if ( this->_Myres < 0x10 )
+        Ptr = this;
       else
-        v10 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v6->_Bx._Ptr;
-      memset(&v10->_Bx._Buf[v9], v3, v5);
+        Ptr = (std::string *)this->_Bx._Ptr;
+      memset(&Ptr->_Bx._Buf[v9], _Ch, _Count);
     }
-    v11 = v6->_Myres < 0x10;
-    v6->_Mysize = v7;
+    v11 = this->_Myres < 0x10;
+    this->_Mysize = v7;
     if ( v11 )
-      v12 = v6;
+      v12 = this;
     else
-      v12 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v6->_Bx._Ptr;
+      v12 = (std::string *)this->_Bx._Ptr;
     v12->_Bx._Buf[v7] = 0;
   }
-  return v6;
+  return this;
 }
 
 // File Line: 1104
 // RVA: 0x83730
-std::basic_string<char,std::char_traits<char>,std::allocator<char> > *__fastcall std::basic_string<char,std::char_traits<char>,std::allocator<char>>::assign(std::basic_string<char,std::char_traits<char>,std::allocator<char> > *this, std::basic_string<char,std::char_traits<char>,std::allocator<char> > *_Right, unsigned __int64 _Roff, unsigned __int64 _Count)
+std::string *__fastcall std::string::assign(
+        std::string *this,
+        std::string *_Right,
+        unsigned __int64 _Roff,
+        unsigned __int64 _Count)
 {
-  unsigned __int64 v4; // rdi
-  unsigned __int64 v5; // rbp
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v6; // rsi
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v7; // rbx
-  size_t v8; // rdi
+  unsigned __int64 Mysize; // rdi
+  std::string *Ptr; // rsi
+  std::string *v7; // rbx
+  unsigned __int64 v8; // rdi
   unsigned __int64 v9; // rax
   bool v10; // cf
-  unsigned __int64 v11; // rax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v12; // rcx
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v13; // rax
+  unsigned __int64 Myres; // rax
+  std::string *v12; // rcx
+  std::string *v13; // rax
 
-  v4 = _Right->_Mysize;
-  v5 = _Roff;
-  v6 = _Right;
+  Mysize = _Right->_Mysize;
+  Ptr = _Right;
   v7 = this;
-  if ( v4 < _Roff )
+  if ( Mysize < _Roff )
     std::_Xout_of_range("invalid string position");
-  v8 = v4 - _Roff;
+  v8 = Mysize - _Roff;
   if ( _Count < v8 )
     v8 = _Count;
   if ( this == _Right )
@@ -228,21 +213,21 @@ std::basic_string<char,std::char_traits<char>,std::allocator<char> > *__fastcall
     v10 = this->_Myres < 0x10;
     this->_Mysize = v9;
     if ( !v10 )
-      this = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)this->_Bx._Ptr;
+      this = (std::string *)this->_Bx._Ptr;
     this->_Bx._Buf[v9] = 0;
-    std::basic_string<char,std::char_traits<char>,std::allocator<char>>::erase(v7, 0i64, _Roff);
+    std::string::erase(v7, 0i64, _Roff);
   }
   else
   {
-    if ( v8 > 0xFFFFFFFFFFFFFFFEui64 )
+    if ( v8 == -1i64 )
       std::_Xlength_error("string too long");
-    v11 = this->_Myres;
-    if ( v11 >= v8 )
+    Myres = this->_Myres;
+    if ( Myres >= v8 )
     {
       if ( !v8 )
       {
         this->_Mysize = 0i64;
-        if ( v11 < 0x10 )
+        if ( Myres < 0x10 )
           this->_Bx._Buf[0] = 0;
         else
           *this->_Bx._Ptr = 0;
@@ -251,24 +236,23 @@ std::basic_string<char,std::char_traits<char>,std::allocator<char> > *__fastcall
     }
     else
     {
-      std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Copy(this, v8, this->_Mysize);
+      std::string::_Copy(this, v8, this->_Mysize);
       if ( !v8 )
         return v7;
     }
-    if ( v6->_Myres >= 0x10 )
-      v6 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v6->_Bx._Ptr;
+    if ( Ptr->_Myres >= 0x10 )
+      Ptr = (std::string *)Ptr->_Bx._Ptr;
     if ( v7->_Myres < 0x10 )
       v12 = v7;
     else
-      v12 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v7->_Bx._Ptr;
-    if ( v8 )
-      memmove(v12, &v6->_Bx._Buf[v5], v8);
+      v12 = (std::string *)v7->_Bx._Ptr;
+    memmove(v12, &Ptr->_Bx._Buf[_Roff], v8);
     v10 = v7->_Myres < 0x10;
     v7->_Mysize = v8;
     if ( v10 )
       v13 = v7;
     else
-      v13 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v7->_Bx._Ptr;
+      v13 = (std::string *)v7->_Bx._Ptr;
     v13->_Bx._Buf[v8] = 0;
   }
   return v7;
@@ -276,47 +260,39 @@ std::basic_string<char,std::char_traits<char>,std::allocator<char> > *__fastcall
 
 // File Line: 1123
 // RVA: 0x83860
-std::basic_string<char,std::char_traits<char>,std::allocator<char> > *__fastcall std::basic_string<char,std::char_traits<char>,std::allocator<char>>::assign(std::basic_string<char,std::char_traits<char>,std::allocator<char> > *this, const char *_Ptr, unsigned __int64 _Count)
+std::string *__fastcall std::string::assign(std::string *this, const char *_Ptr, unsigned __int64 _Count)
 {
-  unsigned __int64 v3; // rdi
-  const char *v4; // rsi
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v5; // rbx
-  unsigned __int64 v6; // rdx
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v7; // rax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v8; // rax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *result; // rax
+  std::string *v5; // rbx
+  unsigned __int64 Myres; // rdx
+  std::string *v7; // rax
+  std::string *Ptr; // rax
+  std::string *result; // rax
   unsigned __int64 v10; // rax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v11; // rcx
+  std::string *v11; // rcx
   bool v12; // cf
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v13; // rax
+  std::string *v13; // rax
 
-  v3 = _Count;
-  v4 = _Ptr;
   v5 = this;
   if ( !_Ptr )
-    goto LABEL_34;
-  v6 = this->_Myres;
-  v7 = v6 < 0x10 ? this : this->_Bx._Ptr;
-  if ( v4 < (const char *)v7 )
-    goto LABEL_34;
-  if ( v6 >= 0x10 )
-    this = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)this->_Bx._Ptr;
-  if ( (char *)this + v5->_Mysize > v4 )
+    goto LABEL_13;
+  Myres = this->_Myres;
+  v7 = Myres < 0x10 ? this : (std::string *)this->_Bx._Ptr;
+  if ( _Ptr < (const char *)v7 )
+    goto LABEL_13;
+  if ( Myres >= 0x10 )
+    this = (std::string *)this->_Bx._Ptr;
+  if ( (char *)this + v5->_Mysize > _Ptr )
   {
-    if ( v6 < 0x10 )
-      v8 = v5;
+    if ( Myres < 0x10 )
+      Ptr = v5;
     else
-      v8 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v5->_Bx._Ptr;
-    result = std::basic_string<char,std::char_traits<char>,std::allocator<char>>::assign(
-               v5,
-               v5,
-               v4 - (const char *)v8,
-               _Count);
+      Ptr = (std::string *)v5->_Bx._Ptr;
+    return std::string::assign(v5, v5, _Ptr - (const char *)Ptr, _Count);
   }
   else
   {
-LABEL_34:
-    if ( _Count > 0xFFFFFFFFFFFFFFFEui64 )
+LABEL_13:
+    if ( _Count == -1i64 )
       std::_Xlength_error("string too long");
     v10 = v5->_Myres;
     if ( v10 >= _Count )
@@ -332,62 +308,52 @@ LABEL_34:
         else
         {
           *v5->_Bx._Ptr = 0;
-          result = v5;
+          return v5;
         }
         return result;
       }
     }
     else
     {
-      std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Copy(v5, _Count, v5->_Mysize);
+      std::string::_Copy(v5, _Count, v5->_Mysize);
     }
-    if ( v3 )
+    if ( _Count )
     {
       if ( v5->_Myres < 0x10 )
         v11 = v5;
       else
-        v11 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v5->_Bx._Ptr;
-      if ( v3 )
-        memmove(v11, v4, v3);
+        v11 = (std::string *)v5->_Bx._Ptr;
+      memmove(v11, _Ptr, _Count);
       v12 = v5->_Myres < 0x10;
-      v5->_Mysize = v3;
+      v5->_Mysize = _Count;
       if ( v12 )
         v13 = v5;
       else
-        v13 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v5->_Bx._Ptr;
-      v13->_Bx._Buf[v3] = 0;
+        v13 = (std::string *)v5->_Bx._Ptr;
+      v13->_Bx._Buf[_Count] = 0;
     }
-    result = v5;
+    return v5;
   }
-  return result;
 }
 
 // File Line: 1148
 // RVA: 0x86AA0
-std::basic_string<char,std::char_traits<char>,std::allocator<char> > *__fastcall std::basic_string<char,std::char_traits<char>,std::allocator<char>>::assign(std::basic_string<char,std::char_traits<char>,std::allocator<char> > *this, unsigned __int64 _Count, char _Ch)
+std::string *__fastcall std::string::assign(std::string *this, unsigned __int64 _Count, char _Ch)
 {
-  char v3; // si
-  unsigned __int64 v4; // rdi
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v5; // rbx
-  unsigned __int64 v6; // rax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v8; // rcx
+  unsigned __int64 Myres; // rax
+  std::string *Ptr; // rcx
   bool v9; // cf
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v10; // rax
+  std::string *v10; // rax
 
-  v3 = _Ch;
-  v4 = _Count;
-  v5 = this;
   if ( _Count == -1i64 )
     std::_Xlength_error("string too long");
-  if ( _Count > 0xFFFFFFFFFFFFFFFEui64 )
-    std::_Xlength_error("string too long");
-  v6 = this->_Myres;
-  if ( v6 >= _Count )
+  Myres = this->_Myres;
+  if ( Myres >= _Count )
   {
     if ( !_Count )
     {
       this->_Mysize = 0i64;
-      if ( v6 < 0x10 )
+      if ( Myres < 0x10 )
         this->_Bx._Buf[0] = 0;
       else
         *this->_Bx._Ptr = 0;
@@ -396,270 +362,260 @@ std::basic_string<char,std::char_traits<char>,std::allocator<char> > *__fastcall
   }
   else
   {
-    std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Copy(this, _Count, this->_Mysize);
+    std::string::_Copy(this, _Count, this->_Mysize);
   }
-  if ( v4 )
+  if ( _Count )
   {
-    if ( v4 == 1 )
+    if ( _Count == 1 )
     {
-      if ( v5->_Myres < 0x10 )
-        v5->_Bx._Buf[0] = v3;
+      if ( this->_Myres < 0x10 )
+        this->_Bx._Buf[0] = _Ch;
       else
-        *v5->_Bx._Ptr = v3;
+        *this->_Bx._Ptr = _Ch;
     }
     else
     {
-      if ( v5->_Myres < 0x10 )
-        v8 = v5;
+      if ( this->_Myres < 0x10 )
+        Ptr = this;
       else
-        v8 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v5->_Bx._Ptr;
-      memset(v8, v3, v4);
+        Ptr = (std::string *)this->_Bx._Ptr;
+      memset(Ptr, _Ch, _Count);
     }
-    v9 = v5->_Myres < 0x10;
-    v5->_Mysize = v4;
+    v9 = this->_Myres < 0x10;
+    this->_Mysize = _Count;
     if ( v9 )
-      v10 = v5;
+      v10 = this;
     else
-      v10 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v5->_Bx._Ptr;
-    v10->_Bx._Buf[v4] = 0;
+      v10 = (std::string *)this->_Bx._Ptr;
+    v10->_Bx._Buf[_Count] = 0;
   }
-  return v5;
+  return this;
 }
 
 // File Line: 1185
 // RVA: 0x83E20
-std::basic_string<char,std::char_traits<char>,std::allocator<char> > *__fastcall std::basic_string<char,std::char_traits<char>,std::allocator<char>>::insert(std::basic_string<char,std::char_traits<char>,std::allocator<char> > *this, unsigned __int64 _Off, std::basic_string<char,std::char_traits<char>,std::allocator<char> > *_Right, unsigned __int64 _Roff, unsigned __int64 _Count)
+std::string *__fastcall std::string::insert(
+        std::string *this,
+        unsigned __int64 _Off,
+        std::string *_Right,
+        unsigned __int64 _Roff,
+        size_t _Count)
 {
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v5; // r14
-  unsigned __int64 v6; // r8
+  unsigned __int64 Mysize; // r8
   unsigned __int64 v7; // r15
-  unsigned __int64 v8; // rbp
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v9; // rbx
   unsigned __int64 v10; // rax
   unsigned __int64 v11; // rax
-  unsigned __int64 v12; // rdi
+  size_t v12; // rdi
   unsigned __int64 v13; // rsi
-  unsigned __int64 v14; // rax
+  unsigned __int64 Myres; // rax
   unsigned __int64 v15; // rax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v16; // rcx
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v17; // rax
-  unsigned __int64 v18; // rax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v19; // rcx
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v20; // rax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v21; // rax
-  bool v22; // cf
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v23; // rax
+  std::string *Ptr; // rcx
+  std::string *v17; // rax
+  size_t v18; // r8
+  unsigned __int64 v19; // rax
+  std::string *v20; // rcx
+  std::string *v21; // rax
+  std::string *v22; // rax
+  bool v23; // cf
+  std::string *v24; // rax
 
-  v5 = _Right;
-  v6 = this->_Mysize;
+  Mysize = this->_Mysize;
   v7 = _Roff;
-  v8 = _Off;
-  v9 = this;
-  if ( v6 < _Off || (v10 = v5->_Mysize, v10 < _Roff) )
+  if ( Mysize < _Off || (v10 = _Right->_Mysize, v10 < _Roff) )
     std::_Xout_of_range("invalid string position");
   v11 = v10 - _Roff;
   v12 = _Count;
   if ( v11 < _Count )
     v12 = v11;
-  if ( -1i64 - v6 <= v12 )
+  if ( -1i64 - Mysize <= v12 )
     std::_Xlength_error("string too long");
   if ( v12 )
   {
-    v13 = v6 + v12;
-    if ( v6 + v12 > 0xFFFFFFFFFFFFFFFEui64 )
+    v13 = Mysize + v12;
+    if ( Mysize + v12 == -1i64 )
       std::_Xlength_error("string too long");
-    v14 = this->_Myres;
-    if ( v14 >= v13 )
+    Myres = this->_Myres;
+    if ( Myres >= v13 )
     {
       if ( !v13 )
       {
         this->_Mysize = 0i64;
-        if ( v14 < 0x10 )
+        if ( Myres < 0x10 )
           this->_Bx._Buf[0] = 0;
         else
           *this->_Bx._Ptr = 0;
-        return v9;
+        return this;
       }
     }
     else
     {
-      std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Copy(this, v6 + v12, v6);
+      std::string::_Copy(this, Mysize + v12, Mysize);
       if ( !v13 )
-        return v9;
+        return this;
     }
-    v15 = v9->_Myres;
+    v15 = this->_Myres;
     if ( v15 < 0x10 )
-      v16 = v9;
+      Ptr = this;
     else
-      v16 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v9->_Bx._Ptr;
+      Ptr = (std::string *)this->_Bx._Ptr;
     if ( v15 < 0x10 )
-      v17 = v9;
+      v17 = this;
     else
-      v17 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v9->_Bx._Ptr;
-    if ( v9->_Mysize != v8 )
-      memmove(&v17->_Bx._Buf[v8 + v12], &v16->_Bx._Buf[v8], v9->_Mysize - v8);
-    if ( v9 == v5 )
+      v17 = (std::string *)this->_Bx._Ptr;
+    v18 = this->_Mysize - _Off;
+    if ( v18 )
+      memmove(&v17->_Bx._Buf[_Off + v12], &Ptr->_Bx._Buf[_Off], v18);
+    if ( this == _Right )
     {
-      if ( v8 < v7 )
+      if ( _Off < v7 )
         v7 += v12;
-      v18 = v9->_Myres;
-      if ( v18 < 0x10 )
-        v19 = v9;
+      v19 = this->_Myres;
+      if ( v19 < 0x10 )
+        v20 = this;
       else
-        v19 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v9->_Bx._Ptr;
-      if ( v18 < 0x10 )
-        v20 = v9;
+        v20 = (std::string *)this->_Bx._Ptr;
+      if ( v19 < 0x10 )
+        v21 = this;
       else
-        v20 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v9->_Bx._Ptr;
-      if ( v12 )
-        memmove(&v20->_Bx._Buf[v8], &v19->_Bx._Buf[v7], v12);
+        v21 = (std::string *)this->_Bx._Ptr;
+      memmove(&v21->_Bx._Buf[_Off], &v20->_Bx._Buf[v7], v12);
     }
     else
     {
-      if ( v5->_Myres >= 0x10 )
-        v5 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v5->_Bx._Ptr;
-      if ( v9->_Myres < 0x10 )
-        v21 = v9;
+      if ( _Right->_Myres >= 0x10 )
+        _Right = (std::string *)_Right->_Bx._Ptr;
+      if ( this->_Myres < 0x10 )
+        v22 = this;
       else
-        v21 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v9->_Bx._Ptr;
-      if ( v12 )
-        memmove(&v21->_Bx._Buf[v8], &v5->_Bx._Buf[v7], v12);
+        v22 = (std::string *)this->_Bx._Ptr;
+      memmove(&v22->_Bx._Buf[_Off], &_Right->_Bx._Buf[v7], v12);
     }
-    v22 = v9->_Myres < 0x10;
-    v9->_Mysize = v13;
-    if ( v22 )
-      v23 = v9;
+    v23 = this->_Myres < 0x10;
+    this->_Mysize = v13;
+    if ( v23 )
+      v24 = this;
     else
-      v23 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v9->_Bx._Ptr;
-    v23->_Bx._Buf[v13] = 0;
+      v24 = (std::string *)this->_Bx._Ptr;
+    v24->_Bx._Buf[v13] = 0;
   }
-  return v9;
+  return this;
 }
 
 // File Line: 1246
 // RVA: 0x87A30
-std::basic_string<char,std::char_traits<char>,std::allocator<char> > *__fastcall std::basic_string<char,std::char_traits<char>,std::allocator<char>>::insert(std::basic_string<char,std::char_traits<char>,std::allocator<char> > *this, unsigned __int64 _Off, unsigned __int64 _Count, char _Ch)
+std::string *__fastcall std::string::insert(std::string *this, unsigned __int64 _Off, size_t _Count, char _Ch)
 {
-  unsigned __int64 v4; // rsi
-  unsigned __int64 v5; // r8
-  char v6; // r14
-  unsigned __int64 v7; // rbp
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v8; // rbx
+  unsigned __int64 Mysize; // r8
   unsigned __int64 v9; // rdi
-  unsigned __int64 v10; // rax
+  unsigned __int64 Myres; // rax
   unsigned __int64 v11; // rax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v12; // rcx
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v13; // rax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v14; // rax
-  bool v15; // cf
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v16; // rax
+  std::string *Ptr; // rcx
+  std::string *v13; // rax
+  size_t v14; // r8
+  std::string *v15; // rax
+  bool v16; // cf
+  std::string *v17; // rax
 
-  v4 = _Count;
-  v5 = this->_Mysize;
-  v6 = _Ch;
-  v7 = _Off;
-  v8 = this;
-  if ( v5 < _Off )
+  Mysize = this->_Mysize;
+  if ( Mysize < _Off )
     std::_Xout_of_range("invalid string position");
-  if ( -1i64 - v5 <= v4 )
+  if ( -1i64 - Mysize <= _Count )
     std::_Xlength_error("string too long");
-  if ( v4 )
+  if ( _Count )
   {
-    v9 = v5 + v4;
-    if ( v5 + v4 > 0xFFFFFFFFFFFFFFFEui64 )
+    v9 = Mysize + _Count;
+    if ( Mysize + _Count == -1i64 )
       std::_Xlength_error("string too long");
-    v10 = this->_Myres;
-    if ( v10 >= v9 )
+    Myres = this->_Myres;
+    if ( Myres >= v9 )
     {
       if ( !v9 )
       {
         this->_Mysize = 0i64;
-        if ( v10 < 0x10 )
+        if ( Myres < 0x10 )
           this->_Bx._Buf[0] = 0;
         else
           *this->_Bx._Ptr = 0;
-        return v8;
+        return this;
       }
     }
     else
     {
-      std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Copy(this, v5 + v4, v5);
+      std::string::_Copy(this, Mysize + _Count, Mysize);
       if ( !v9 )
-        return v8;
+        return this;
     }
-    v11 = v8->_Myres;
+    v11 = this->_Myres;
     if ( v11 < 0x10 )
-      v12 = v8;
+      Ptr = this;
     else
-      v12 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v8->_Bx._Ptr;
+      Ptr = (std::string *)this->_Bx._Ptr;
     if ( v11 < 0x10 )
-      v13 = v8;
+      v13 = this;
     else
-      v13 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v8->_Bx._Ptr;
-    if ( v8->_Mysize != v7 )
-      memmove(&v13->_Bx._Buf[v7 + v4], &v12->_Bx._Buf[v7], v8->_Mysize - v7);
-    if ( v4 == 1 )
+      v13 = (std::string *)this->_Bx._Ptr;
+    v14 = this->_Mysize - _Off;
+    if ( v14 )
+      memmove(&v13->_Bx._Buf[_Off + _Count], &Ptr->_Bx._Buf[_Off], v14);
+    if ( _Count == 1 )
     {
-      if ( v8->_Myres < 0x10 )
-        v8->_Bx._Buf[v7] = v6;
+      if ( this->_Myres < 0x10 )
+        this->_Bx._Buf[_Off] = _Ch;
       else
-        v8->_Bx._Ptr[v7] = v6;
+        this->_Bx._Ptr[_Off] = _Ch;
     }
     else
     {
-      if ( v8->_Myres < 0x10 )
-        v14 = v8;
+      if ( this->_Myres < 0x10 )
+        v15 = this;
       else
-        v14 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v8->_Bx._Ptr;
-      memset(&v14->_Bx._Buf[v7], v6, v4);
+        v15 = (std::string *)this->_Bx._Ptr;
+      memset(&v15->_Bx._Buf[_Off], _Ch, _Count);
     }
-    v15 = v8->_Myres < 0x10;
-    v8->_Mysize = v9;
-    if ( v15 )
-      v16 = v8;
+    v16 = this->_Myres < 0x10;
+    this->_Mysize = v9;
+    if ( v16 )
+      v17 = this;
     else
-      v16 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v8->_Bx._Ptr;
-    v16->_Bx._Buf[v9] = 0;
+      v17 = (std::string *)this->_Bx._Ptr;
+    v17->_Bx._Buf[v9] = 0;
   }
-  return v8;
+  return this;
 }
 
 // File Line: 1317
 // RVA: 0x83C20
-std::basic_string<char,std::char_traits<char>,std::allocator<char> > *__fastcall std::basic_string<char,std::char_traits<char>,std::allocator<char>>::erase(std::basic_string<char,std::char_traits<char>,std::allocator<char> > *this, unsigned __int64 _Off, unsigned __int64 _Count)
+std::string *__fastcall std::string::erase(std::string *this, unsigned __int64 _Off, unsigned __int64 _Count)
 {
-  unsigned __int64 v3; // rdi
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v4; // rbx
+  unsigned __int64 Mysize; // rdi
   bool v5; // cf
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *result; // rax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v7; // rax
+  std::string *Ptr; // rax
   unsigned __int64 v8; // rdi
 
-  v3 = this->_Mysize;
-  v4 = this;
-  if ( v3 < _Off )
+  Mysize = this->_Mysize;
+  if ( Mysize < _Off )
     std::_Xout_of_range("invalid string position");
-  if ( v3 - _Off > _Count )
+  if ( Mysize - _Off > _Count )
   {
     if ( _Count )
     {
       if ( this->_Myres < 0x10 )
-        v7 = this;
+        Ptr = this;
       else
-        v7 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)this->_Bx._Ptr;
-      v8 = v3 - _Count;
+        Ptr = (std::string *)this->_Bx._Ptr;
+      v8 = Mysize - _Count;
       if ( v8 != _Off )
-        memmove(&v7->_Bx._Buf[_Off], &v7->_Bx._Buf[_Off + _Count], v8 - _Off);
-      v5 = v4->_Myres < 0x10;
-      v4->_Mysize = v8;
+        memmove(&Ptr->_Bx._Buf[_Off], &Ptr->_Bx._Buf[_Off + _Count], v8 - _Off);
+      v5 = this->_Myres < 0x10;
+      this->_Mysize = v8;
       if ( !v5 )
       {
-        v4->_Bx._Ptr[v8] = 0;
-        return v4;
+        this->_Bx._Ptr[v8] = 0;
+        return this;
       }
-      v4->_Bx._Buf[v8] = 0;
+      this->_Bx._Buf[v8] = 0;
     }
-    result = v4;
+    return this;
   }
   else
   {
@@ -669,46 +625,45 @@ std::basic_string<char,std::char_traits<char>,std::allocator<char> > *__fastcall
       this->_Bx._Buf[_Off] = 0;
     else
       this->_Bx._Ptr[_Off] = 0;
-    result = this;
+    return this;
   }
-  return result;
 }
 
 // File Line: 2116
 // RVA: 0x15D7C0
-signed __int64 __fastcall std::basic_string<char,std::char_traits<char>,std::allocator<char>>::compare(std::basic_string<char,std::char_traits<char>,std::allocator<char> > *this, std::basic_string<char,std::char_traits<char>,std::allocator<char> > *_Right)
+__int64 __fastcall std::string::compare(std::string *this, std::string *_Right)
 {
-  unsigned __int64 v2; // rdi
+  unsigned __int64 Mysize; // rdi
   unsigned __int64 v3; // rbx
   size_t v4; // r8
   unsigned int v5; // esi
-  signed __int64 result; // rax
+  __int64 result; // rax
 
-  v2 = _Right->_Mysize;
+  Mysize = _Right->_Mysize;
   if ( _Right->_Myres >= 0x10 )
-    _Right = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)_Right->_Bx._Ptr;
+    _Right = (std::string *)_Right->_Bx._Ptr;
   v3 = this->_Mysize;
   if ( this->_Myres >= 0x10 )
-    this = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)this->_Bx._Ptr;
-  v4 = v2;
-  if ( v3 < v2 )
+    this = (std::string *)this->_Bx._Ptr;
+  v4 = Mysize;
+  if ( v3 < Mysize )
     v4 = v3;
   v5 = 0;
   if ( v4 )
     LODWORD(result) = memcmp(this, _Right, v4);
   else
     LODWORD(result) = 0;
-  result = (signed int)result;
+  result = (int)result;
   if ( !(_DWORD)result )
   {
-    if ( v3 >= v2 )
+    if ( v3 >= Mysize )
     {
-      LOBYTE(v5) = v3 != v2;
-      result = v5;
+      LOBYTE(v5) = v3 != Mysize;
+      return v5;
     }
     else
     {
-      result = 0xFFFFFFFFi64;
+      return 0xFFFFFFFFi64;
     }
   }
   return result;
@@ -716,24 +671,29 @@ signed __int64 __fastcall std::basic_string<char,std::char_traits<char>,std::all
 
 // File Line: 2151
 // RVA: 0x15D840
-signed __int64 __fastcall std::basic_string<char,std::char_traits<char>,std::allocator<char>>::compare(std::basic_string<char,std::char_traits<char>,std::allocator<char> > *this, unsigned __int64 _Off, unsigned __int64 _N0, const char *_Ptr, unsigned __int64 _Count)
+__int64 __fastcall std::string::compare(
+        std::string *this,
+        unsigned __int64 _Off,
+        unsigned __int64 _N0,
+        const char *_Ptr,
+        size_t _Count)
 {
-  unsigned __int64 v5; // rax
+  unsigned __int64 Mysize; // rax
   unsigned __int64 v6; // rbx
   unsigned __int64 v7; // rax
-  unsigned __int64 v8; // r8
+  size_t v8; // r8
   unsigned int v9; // esi
-  signed __int64 result; // rax
+  __int64 result; // rax
 
-  v5 = this->_Mysize;
+  Mysize = this->_Mysize;
   v6 = _N0;
-  if ( v5 < _Off )
+  if ( Mysize < _Off )
     std::_Xout_of_range("invalid string position");
-  v7 = v5 - _Off;
+  v7 = Mysize - _Off;
   if ( v7 < _N0 )
     v6 = v7;
   if ( this->_Myres >= 0x10 )
-    this = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)this->_Bx._Ptr;
+    this = (std::string *)this->_Bx._Ptr;
   v8 = _Count;
   if ( v6 < _Count )
     v8 = v6;
@@ -742,17 +702,17 @@ signed __int64 __fastcall std::basic_string<char,std::char_traits<char>,std::all
     LODWORD(result) = memcmp(&this->_Bx._Buf[_Off], _Ptr, v8);
   else
     LODWORD(result) = 0;
-  result = (signed int)result;
+  result = (int)result;
   if ( !(_DWORD)result )
   {
     if ( v6 >= _Count )
     {
       LOBYTE(v9) = v6 != _Count;
-      result = v9;
+      return v9;
     }
     else
     {
-      result = 0xFFFFFFFFi64;
+      return 0xFFFFFFFFi64;
     }
   }
   return result;
@@ -760,59 +720,59 @@ signed __int64 __fastcall std::basic_string<char,std::char_traits<char>,std::all
 
 // File Line: 2182
 // RVA: 0x83180
-void __fastcall std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Copy(std::basic_string<char,std::char_traits<char>,std::allocator<char> > *this, unsigned __int64 _Newsize, unsigned __int64 _Oldlen)
+// positive sp value has been detected, the output may be wrong!
+void __fastcall std::string::_Copy(std::string *this, unsigned __int64 _Newsize, size_t _Oldlen)
 {
-  unsigned __int64 v3; // rsi
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v4; // rbx
+  std::string *v4; // rbx
   unsigned __int64 v5; // rdi
-  unsigned __int64 v6; // r8
+  unsigned __int64 Myres; // r8
   unsigned __int64 v7; // rcx
-  unsigned __int64 v8; // rcx
-  void *v9; // r14
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v10; // rdx
+  void *v8; // r14
+  std::string *Ptr; // rdx
 
-  v3 = _Oldlen;
   v4 = this;
   v5 = _Newsize | 0xF;
-  if ( (_Newsize | 0xF) <= 0xFFFFFFFFFFFFFFFEui64 )
-  {
-    v6 = this->_Myres;
-    v7 = this->_Myres >> 1;
-    if ( v7 > (unsigned __int64)(v5 * (unsigned __int128)0xAAAAAAAAAAAAAAABui64 >> 64) >> 1 )
-    {
-      v5 = -2i64;
-      if ( v6 <= -2i64 - v7 )
-        v5 = v7 + v6;
-    }
-  }
-  else
+  if ( (_Newsize | 0xF) == -1i64 )
   {
     v5 = _Newsize;
   }
-  v8 = v5 + 1;
-  v9 = 0i64;
+  else
+  {
+    Myres = this->_Myres;
+    v7 = Myres >> 1;
+    if ( Myres >> 1 > v5 / 3 )
+    {
+      v5 = -2i64;
+      if ( Myres <= -2i64 - v7 )
+        v5 = v7 + Myres;
+    }
+  }
+  v8 = 0i64;
   if ( v5 != -1i64 )
   {
-    if ( v8 > 0xFFFFFFFFFFFFFFFFui64 || (v9 = AMemory::malloc_default(v8)) == 0i64 )
+    v8 = AMemory::malloc_default(v5 + 1);
+    if ( !v8 )
       std::_Xbad_alloc();
   }
-  if ( v3 )
+  if ( _Oldlen )
   {
-    v10 = v4->_Myres < 0x10 ? v4 : v4->_Bx._Ptr;
-    if ( v3 )
-      memmove(v9, v10, v3);
+    if ( v4->_Myres < 0x10 )
+      Ptr = v4;
+    else
+      Ptr = (std::string *)v4->_Bx._Ptr;
+    memmove(v8, Ptr, _Oldlen);
   }
   if ( v4->_Myres >= 0x10 )
     Illusion::ShaderParam::operator delete(v4->_Bx._Ptr);
   v4->_Myres = 15i64;
   v4->_Mysize = 0i64;
   v4->_Bx._Buf[0] = 0;
-  v4->_Bx._Ptr = (char *)v9;
+  v4->_Bx._Ptr = (char *)v8;
   v4->_Myres = v5;
-  v4->_Mysize = v3;
+  v4->_Mysize = _Oldlen;
   if ( v5 >= 0x10 )
-    v4 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v4->_Bx._Ptr;
-  v4->_Bx._Buf[v3] = 0;
+    v4 = (std::string *)v4->_Bx._Ptr;
+  v4->_Bx._Buf[_Oldlen] = 0;
 }
 
 // File Line: 2197
@@ -825,49 +785,47 @@ void __fastcall std::basic_string<char,std::char_traits<char>,std::allocator<cha
 
 // File Line: 2223
 // RVA: 0x833A0
-bool __fastcall std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Grow(std::basic_string<char,std::char_traits<char>,std::allocator<char> > *this, unsigned __int64 _Newsize, bool _Trim)
+bool __fastcall std::string::_Grow(std::string *this, unsigned __int64 _Newsize, bool _Trim)
 {
-  unsigned __int64 v3; // rdi
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v4; // rbx
-  unsigned __int64 v5; // rax
-  size_t v6; // rsi
-  char *v7; // r14
+  std::string *v4; // rbx
+  unsigned __int64 Myres; // rax
+  unsigned __int64 Mysize; // rsi
+  char *Ptr; // r14
 
-  v3 = _Newsize;
   v4 = this;
-  if ( _Newsize > 0xFFFFFFFFFFFFFFFEui64 )
+  if ( _Newsize == -1i64 )
     std::_Xlength_error("string too long");
-  v5 = this->_Myres;
-  if ( v5 >= _Newsize )
+  Myres = this->_Myres;
+  if ( Myres >= _Newsize )
   {
     if ( _Trim && _Newsize < 0x10 )
     {
-      v6 = this->_Mysize;
-      if ( _Newsize < v6 )
-        v6 = _Newsize;
-      if ( v5 >= 0x10 )
+      Mysize = this->_Mysize;
+      if ( _Newsize < Mysize )
+        Mysize = _Newsize;
+      if ( Myres >= 0x10 )
       {
-        v7 = this->_Bx._Ptr;
-        if ( v6 >= 1 )
-          memmove(this, this->_Bx._Ptr, v6);
-        Illusion::ShaderParam::operator delete(v7);
+        Ptr = this->_Bx._Ptr;
+        if ( Mysize )
+          memmove(this, this->_Bx._Ptr, Mysize);
+        Illusion::ShaderParam::operator delete(Ptr);
       }
-      v4->_Mysize = v6;
+      v4->_Mysize = Mysize;
       v4->_Myres = 15i64;
-      v4->_Bx._Buf[v6] = 0;
+      v4->_Bx._Buf[Mysize] = 0;
     }
     else if ( !_Newsize )
     {
       this->_Mysize = 0i64;
-      if ( v5 >= 0x10 )
-        v4 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)this->_Bx._Ptr;
+      if ( Myres >= 0x10 )
+        v4 = (std::string *)this->_Bx._Ptr;
       v4->_Bx._Buf[0] = 0;
     }
   }
   else
   {
-    std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Copy(this, _Newsize, this->_Mysize);
+    std::string::_Copy(this, _Newsize, this->_Mysize);
   }
-  return v3 != 0;
+  return _Newsize != 0;
 }
 

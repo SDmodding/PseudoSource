@@ -2,7 +2,7 @@
 // RVA: 0x1467270
 __int64 dynamic_initializer_for__SyncedCharacterAnimationComponent::s_SyncedCharacterAnimationComponentList__()
 {
-  return atexit(dynamic_atexit_destructor_for__SyncedCharacterAnimationComponent::s_SyncedCharacterAnimationComponentList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__SyncedCharacterAnimationComponent::s_SyncedCharacterAnimationComponentList__);
 }
 
 // File Line: 28

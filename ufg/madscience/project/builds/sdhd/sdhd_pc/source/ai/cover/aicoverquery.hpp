@@ -11,21 +11,17 @@ void __fastcall UFG::AICoverQuery::CoverQueryRecord::CoverQueryRecord(UFG::AICov
 // RVA: 0x335F60
 void __fastcall UFG::AICoverQuery::CoverQueryRecord::~CoverQueryRecord(UFG::AICoverQuery::CoverQueryRecord *this)
 {
-  UFG::AICoverQuery::CoverQueryRecord *v1; // rbx
-  UFG::CoverPosition *v2; // rcx
-  bool v3; // zf
+  UFG::CoverPosition *m_pCoverPosition; // rcx
 
-  v1 = this;
   this->vfptr = (UFG::AICoverQuery::CoverQueryRecordVtbl *)&UFG::AICoverQuery::CoverQueryRecord::`vftable;
-  v2 = this->m_pCoverPosition;
-  if ( v2 )
+  m_pCoverPosition = this->m_pCoverPosition;
+  if ( m_pCoverPosition )
   {
-    v3 = v2->m_iRefCount-- == 1;
-    if ( v3 )
-      v2->vfptr->__vecDelDtor((UFG::CoverObjectBase *)&v2->vfptr, 1u);
-    v1->m_pCoverPosition = 0i64;
+    if ( m_pCoverPosition->m_iRefCount-- == 1 )
+      m_pCoverPosition->vfptr->__vecDelDtor(m_pCoverPosition, 1u);
+    this->m_pCoverPosition = 0i64;
   }
-  v1->m_bPathFound = 0;
+  this->m_bPathFound = 0;
 }
 
 // File Line: 179
@@ -40,12 +36,12 @@ bool __fastcall UFG::AICoverQuery::IsCompleted(UFG::AICoverQuery *this)
 void __fastcall UFG::AICoverQuery::StateInit(UFG::AICoverQuery *this, unsigned int uState)
 {
   __int64 v2; // rdx
-  void (__fastcall *v3)(UFG::AICoverQuery *); // rax
+  void (__fastcall *m_InitFunc)(UFG::AICoverQuery *); // rax
 
   v2 = uState;
-  v3 = UFG::AICoverQuery::ms_aStateInfo[v2].m_InitFunc;
-  if ( v3 )
-    v3((UFG::AICoverQuery *)((char *)this + *(signed int *)UFG::AICoverQuery::ms_aStateInfo[v2].gap8));
+  m_InitFunc = UFG::AICoverQuery::ms_aStateInfo[v2].m_InitFunc;
+  if ( m_InitFunc )
+    m_InitFunc((UFG::AICoverQuery *)((char *)this + *(int *)UFG::AICoverQuery::ms_aStateInfo[v2].gap8));
 }
 
 // File Line: 193
@@ -53,6 +49,6 @@ void __fastcall UFG::AICoverQuery::StateInit(UFG::AICoverQuery *this, unsigned i
 void __fastcall UFG::AICoverQuery::StateUpdate(UFG::AICoverQuery *this, unsigned int uState)
 {
   UFG::AICoverQuery::ms_aStateInfo[uState].m_UpdateFunc((UFG::AICoverQuery *)((char *)this
-                                                                            + *(signed int *)UFG::AICoverQuery::ms_aStateInfo[uState].gap18));
+                                                                            + *(int *)UFG::AICoverQuery::ms_aStateInfo[uState].gap18));
 }
 

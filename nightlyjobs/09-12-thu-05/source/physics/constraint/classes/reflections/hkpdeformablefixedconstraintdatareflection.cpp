@@ -70,30 +70,29 @@ hkClass *__fastcall hkpDeformableFixedConstraintData::staticClass()
 
 // File Line: 122
 // RVA: 0xD437C0
-void __fastcall finishLoadedObjecthkpDeformableFixedConstraintData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpDeformableFixedConstraintData(
+        hkpConstraintData *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  _QWORD *v2; // rbx
-
   if ( p )
   {
-    v2 = p;
-    hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpDeformableFixedConstraintData::`vftable;
+    hkpConstraintData::hkpConstraintData(p, finishing);
+    p->vfptr = (hkBaseObjectVtbl *)&hkpDeformableFixedConstraintData::`vftable;
   }
 }
 
 // File Line: 128
 // RVA: 0xD437F0
-void __fastcall cleanupLoadedObjecthkpDeformableFixedConstraintData(void *p)
+void __fastcall cleanupLoadedObjecthkpDeformableFixedConstraintData(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 132
 // RVA: 0xD43800
 void **__fastcall getVtablehkpDeformableFixedConstraintData()
 {
-  hkpConstraintData v1; // [rsp+20h] [rbp-178h]
+  hkpConstraintData v1; // [rsp+20h] [rbp-178h] BYREF
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
   return &hkpDeformableFixedConstraintData::`vftable;
@@ -110,8 +109,8 @@ void **dynamic_initializer_for__hkpDeformableFixedConstraintDataTypeInfo__()
   hkpDeformableFixedConstraintDataTypeInfo.m_typeName = "hkpDeformableFixedConstraintData";
   hkpDeformableFixedConstraintDataTypeInfo.m_vtable = result;
   hkpDeformableFixedConstraintDataTypeInfo.m_scopedName = "!hkpDeformableFixedConstraintData";
-  hkpDeformableFixedConstraintDataTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpDeformableFixedConstraintData;
-  hkpDeformableFixedConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpDeformableFixedConstraintData;
+  hkpDeformableFixedConstraintDataTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpDeformableFixedConstraintData;
+  hkpDeformableFixedConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpDeformableFixedConstraintData;
   return result;
 }
 

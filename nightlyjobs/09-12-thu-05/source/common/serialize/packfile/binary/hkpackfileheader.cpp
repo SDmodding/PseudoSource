@@ -2,43 +2,40 @@
 // RVA: 0xE58840
 hkResult *__fastcall hkPackfileHeader::readHeader(hkResult *result, hkStreamReader *stream, hkPackfileHeader *out)
 {
-  hkPackfileHeader *v3; // rdi
-  hkResult *v4; // rbx
-  hkResult *v5; // rax
-  char dst; // [rsp+20h] [rbp-48h]
+  char dst[72]; // [rsp+20h] [rbp-48h] BYREF
 
-  v3 = out;
-  v4 = result;
-  if ( ((signed int (__fastcall *)(hkStreamReader *, hkPackfileHeader *, signed __int64))stream->vfptr[2].__vecDelDtor)(
+  if ( ((int (__fastcall *)(hkStreamReader *, hkPackfileHeader *, __int64))stream->vfptr[2].__vecDelDtor)(
          stream,
          out,
-         64i64) < 64
-    || (hkString::memSet(&dst, -1, 64), v3->m_magic[0] != 1474355287)
-    || v3->m_magic[1] != 281067536 )
+         64i64) >= 64
+    && (hkString::memSet(dst, -1, 0x40u), out->m_magic[0] == 1474355287)
+    && out->m_magic[1] == 281067536 )
   {
-    v4->m_enum = 1;
-    v5 = v4;
+    result->m_enum = HK_SUCCESS;
+    return result;
   }
   else
   {
-    v4->m_enum = 0;
-    v5 = v4;
+    result->m_enum = HK_FAILURE;
+    return result;
   }
-  return v5;
 }
 
 // File Line: 32
 // RVA: 0xE587E0
-hkPackfileSectionHeader *__fastcall hkPackfileHeader::getSectionHeader(hkPackfileHeader *this, const void *packfileData, int i)
+hkPackfileSectionHeader *__fastcall hkPackfileHeader::getSectionHeader(
+        hkPackfileHeader *this,
+        _DWORD *packfileData,
+        int i)
 {
-  signed int v4; // ecx
-  signed int v5; // eax
+  int v4; // ecx
+  int v5; // eax
 
-  if ( !*((_DWORD *)packfileData + 5) )
+  if ( !packfileData[5] )
     return 0i64;
-  v4 = *((_DWORD *)packfileData + 3);
+  v4 = packfileData[3];
   if ( v4 <= 10 )
-    return (hkPackfileSectionHeader *)((char *)packfileData + 48 * i + 64);
+    return (hkPackfileSectionHeader *)&packfileData[12 * i + 16];
   v5 = 0;
   if ( v4 == 11 )
     v5 = 64;
@@ -47,8 +44,12 @@ hkPackfileSectionHeader *__fastcall hkPackfileHeader::getSectionHeader(hkPackfil
 
 // File Line: 82
 // RVA: 0xE58830
-hkPackfileSectionHeader *__fastcall hkPackfileHeader::getSectionHeader(hkPackfileHeader *this, void *packfileData, int i)
+// attributes: thunk
+hkPackfileSectionHeader *__fastcall hkPackfileHeader::getSectionHeader(
+        hkPackfileHeader *this,
+        _DWORD *packfileData,
+        int i)
 {
-  return hkPackfileHeader::getSectionHeader(this, packfileData, i);
+  return ?getSectionHeader@hkPackfileHeader@@QEBAPEBVhkPackfileSectionHeader@@PEBXH@Z(this, packfileData, i);
 }
 

@@ -42,17 +42,17 @@ hkClass *__fastcall hkpSingleShapeContainer::staticClass()
 
 // File Line: 90
 // RVA: 0xCEBED0
-void __fastcall finishLoadedObjecthkpSingleShapeContainer(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpSingleShapeContainer(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpSingleShapeContainer::`vftable;
+    *p = &hkpSingleShapeContainer::`vftable;
 }
 
 // File Line: 96
 // RVA: 0xCEBEF0
-void __fastcall cleanupLoadedObjecthkpSingleShapeContainer(void *p)
+void __fastcall cleanupLoadedObjecthkpSingleShapeContainer(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 100
@@ -73,8 +73,8 @@ void **dynamic_initializer_for__hkpSingleShapeContainerTypeInfo__()
   hkpSingleShapeContainerTypeInfo.m_typeName = "hkpSingleShapeContainer";
   hkpSingleShapeContainerTypeInfo.m_vtable = result;
   hkpSingleShapeContainerTypeInfo.m_scopedName = "!hkpSingleShapeContainer";
-  hkpSingleShapeContainerTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpSingleShapeContainer;
-  hkpSingleShapeContainerTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpSingleShapeContainer;
+  hkpSingleShapeContainerTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpSingleShapeContainer;
+  hkpSingleShapeContainerTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpSingleShapeContainer;
   return result;
 }
 

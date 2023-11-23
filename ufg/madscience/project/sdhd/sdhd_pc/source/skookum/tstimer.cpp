@@ -11,12 +11,12 @@ void __fastcall UFG::SimpleTimer::SimpleTimer(UFG::SimpleTimer *this)
 // RVA: 0x510510
 void __fastcall UFG::SimpleTimer::Start(UFG::SimpleTimer *this)
 {
-  unsigned __int64 v1; // rax
+  unsigned __int64 mSimTimeMSec; // rax
 
-  v1 = UFG::Metrics::msInstance.mSimTimeMSec;
+  mSimTimeMSec = UFG::Metrics::msInstance.mSimTimeMSec;
   this->mElapsedTime = 0.0;
   this->mIsStarted = 1;
-  this->mTimestamp = v1;
+  this->mTimestamp = mSimTimeMSec;
 }
 
 // File Line: 66
@@ -28,7 +28,7 @@ void __fastcall UFG::SimpleTimer::Stop(UFG::SimpleTimer *this)
   if ( this->mIsStarted )
   {
     v1 = (float)(LODWORD(UFG::Metrics::msInstance.mSimTimeMSec) - LODWORD(this->mTimestamp));
-    if ( (signed __int64)(UFG::Metrics::msInstance.mSimTimeMSec - this->mTimestamp) < 0 )
+    if ( (__int64)(UFG::Metrics::msInstance.mSimTimeMSec - this->mTimestamp) < 0 )
       v1 = v1 + 1.8446744e19;
     this->mIsStarted = 0;
     this->mElapsedTime = (float)(v1 * 0.001) + this->mElapsedTime;
@@ -57,9 +57,9 @@ float __fastcall UFG::SimpleTimer::GetElapsedSeconds(UFG::SimpleTimer *this)
   if ( this->mIsStarted )
   {
     v2 = (float)(LODWORD(UFG::Metrics::msInstance.mSimTimeMSec) - LODWORD(this->mTimestamp));
-    if ( (signed __int64)(UFG::Metrics::msInstance.mSimTimeMSec - this->mTimestamp) < 0 )
+    if ( (__int64)(UFG::Metrics::msInstance.mSimTimeMSec - this->mTimestamp) < 0 )
       v2 = v2 + 1.8446744e19;
-    result = result + (float)(v2 * 0.001);
+    return result + (float)(v2 * 0.001);
   }
   return result;
 }
@@ -70,7 +70,7 @@ void __fastcall UFG::SimpleTimer::SetElapsedTime(UFG::SimpleTimer *this, float e
 {
   bool v2; // zf
 
-  v2 = this->mIsStarted == 0;
+  v2 = !this->mIsStarted;
   this->mElapsedTime = elapsedTime;
   if ( !v2 )
     this->mTimestamp = UFG::Metrics::msInstance.mSimTimeMSec;
@@ -81,28 +81,46 @@ void __fastcall UFG::SimpleTimer::SetElapsedTime(UFG::SimpleTimer *this, float e
 void UFG::TSTimer::BindAtomics(void)
 {
   UFG::SkookumMgr::mspTimerClass = SSBrain::get_class("Timer");
-  SSClass::register_method_func(UFG::SkookumMgr::mspTimerClass, &ASymbolX_ctor, UFG::TSTimer::Mthd_constructor, 0);
-  SSClass::register_method_func(UFG::SkookumMgr::mspTimerClass, &ASymbolX_dtor, UFG::TSTimer::Mthd_destructor, 0);
-  SSClass::register_method_func(UFG::SkookumMgr::mspTimerClass, "start", UFG::TSTimer::Mthd_start, 0);
-  SSClass::register_method_func(UFG::SkookumMgr::mspTimerClass, "stop", UFG::TSTimer::Mthd_stop, 0);
-  SSClass::register_method_func(UFG::SkookumMgr::mspTimerClass, "resume", UFG::TSTimer::Mthd_resume, 0);
+  SSClass::register_method_func(
+    UFG::SkookumMgr::mspTimerClass,
+    &ASymbolX_ctor,
+    UFG::TSTimer::Mthd_constructor,
+    SSBindFlag_instance_no_rebind);
+  SSClass::register_method_func(
+    UFG::SkookumMgr::mspTimerClass,
+    &ASymbolX_dtor,
+    UFG::TSTimer::Mthd_destructor,
+    SSBindFlag_instance_no_rebind);
+  SSClass::register_method_func(
+    UFG::SkookumMgr::mspTimerClass,
+    "start",
+    UFG::TSTimer::Mthd_start,
+    SSBindFlag_instance_no_rebind);
+  SSClass::register_method_func(
+    UFG::SkookumMgr::mspTimerClass,
+    "stop",
+    UFG::TSTimer::Mthd_stop,
+    SSBindFlag_instance_no_rebind);
+  SSClass::register_method_func(
+    UFG::SkookumMgr::mspTimerClass,
+    "resume",
+    UFG::TSTimer::Mthd_resume,
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
     UFG::SkookumMgr::mspTimerClass,
     "get_elapsed_seconds",
     UFG::TSTimer::Mthd_get_elapsed_seconds,
-    0);
+    SSBindFlag_instance_no_rebind);
 }
 
 // File Line: 150
 // RVA: 0x4F6CB0
 void __fastcall UFG::TSTimer::Mthd_constructor(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // rbx
   UFG::allocator::free_link *v3; // rax
   UFG::allocator::free_link *v4; // rdx
-  SSObjectBase *v5; // rcx
+  SSObjectBase *i_obj_p; // rcx
 
-  v2 = pScope;
   v3 = UFG::qMalloc(0x10ui64, "Skookum.Timer", 0i64);
   v4 = v3;
   if ( v3 )
@@ -115,9 +133,9 @@ void __fastcall UFG::TSTimer::Mthd_constructor(SSInvokedMethod *pScope, SSInstan
   {
     v4 = 0i64;
   }
-  v5 = v2->i_scope_p.i_obj_p;
-  if ( v5 && v2->i_scope_p.i_ptr_id == v5->i_ptr_id )
-    v5[2].vfptr = (SSObjectBaseVtbl *)v4;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( i_obj_p && pScope->i_scope_p.i_ptr_id == i_obj_p->i_ptr_id )
+    i_obj_p[2].vfptr = (SSObjectBaseVtbl *)v4;
   else
     *(_QWORD *)&MEMORY[0x20] = v4;
 }
@@ -126,51 +144,52 @@ void __fastcall UFG::TSTimer::Mthd_constructor(SSInvokedMethod *pScope, SSInstan
 // RVA: 0x4F7EF0
 void __fastcall UFG::TSTimer::Mthd_destructor(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rdx
+  SSObjectBase *i_obj_p; // rdx
+  SSObjectBaseVtbl *vfptr; // rcx
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  JUMPOUT(v2[2].vfptr, 0i64, operator delete[]);
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  vfptr = i_obj_p[2].vfptr;
+  if ( vfptr )
+    operator delete[](vfptr);
 }
 
 // File Line: 169
 // RVA: 0x50BD90
 void __fastcall UFG::TSTimer::Mthd_start(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // rdx
-  SSObjectBase *v3; // rcx
-  SSObjectBaseVtbl *v4; // rcx
+  SSObjectBase *i_obj_p; // rcx
+  SSObjectBaseVtbl *vfptr; // rcx
 
-  v2 = pScope;
-  v3 = pScope->i_scope_p.i_obj_p;
-  if ( !v3 || v2->i_scope_p.i_ptr_id != v3->i_ptr_id )
-    v3 = 0i64;
-  v4 = v3[2].vfptr;
-  v4->__vecDelDtor = (void *(__fastcall *)(SSObjectBase *, unsigned int))UFG::Metrics::msInstance.mSimTimeMSec;
-  LODWORD(v4->get_obj_type) = 0;
-  BYTE4(v4->get_obj_type) = 1;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  vfptr = i_obj_p[2].vfptr;
+  vfptr->__vecDelDtor = (void *(__fastcall *)(SSObjectBase *, unsigned int))UFG::Metrics::msInstance.mSimTimeMSec;
+  LODWORD(vfptr->get_obj_type) = 0;
+  BYTE4(vfptr->get_obj_type) = 1;
 }
 
 // File Line: 179
 // RVA: 0x50C1E0
 void __fastcall UFG::TSTimer::Mthd_stop(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rdx
-  SSObjectBaseVtbl *v3; // rcx
+  SSObjectBase *i_obj_p; // rdx
+  SSObjectBaseVtbl *vfptr; // rcx
   float v4; // xmm0_4
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  v3 = v2[2].vfptr;
-  if ( BYTE4(v3->get_obj_type) )
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  vfptr = i_obj_p[2].vfptr;
+  if ( BYTE4(vfptr->get_obj_type) )
   {
-    v4 = (float)(LODWORD(UFG::Metrics::msInstance.mSimTimeMSec) - LODWORD(v3->__vecDelDtor));
-    if ( (signed __int64)(UFG::Metrics::msInstance.mSimTimeMSec - (unsigned __int64)v3->__vecDelDtor) < 0 )
+    v4 = (float)(LODWORD(UFG::Metrics::msInstance.mSimTimeMSec) - LODWORD(vfptr->__vecDelDtor));
+    if ( (__int64)(UFG::Metrics::msInstance.mSimTimeMSec - (unsigned __int64)vfptr->__vecDelDtor) < 0 )
       v4 = v4 + 1.8446744e19;
-    BYTE4(v3->get_obj_type) = 0;
-    *(float *)&v3->get_obj_type = (float)(v4 * 0.001) + *(float *)&v3->get_obj_type;
+    BYTE4(vfptr->get_obj_type) = 0;
+    *(float *)&vfptr->get_obj_type = (float)(v4 * 0.001) + *(float *)&vfptr->get_obj_type;
   }
 }
 
@@ -178,17 +197,17 @@ void __fastcall UFG::TSTimer::Mthd_stop(SSInvokedMethod *pScope, SSInstance **pp
 // RVA: 0x506A20
 void __fastcall UFG::TSTimer::Mthd_resume(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rdx
-  SSObjectBaseVtbl *v3; // rcx
+  SSObjectBase *i_obj_p; // rdx
+  SSObjectBaseVtbl *vfptr; // rcx
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  v3 = v2[2].vfptr;
-  if ( !BYTE4(v3->get_obj_type) )
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  vfptr = i_obj_p[2].vfptr;
+  if ( !BYTE4(vfptr->get_obj_type) )
   {
-    BYTE4(v3->get_obj_type) = 1;
-    v3->__vecDelDtor = (void *(__fastcall *)(SSObjectBase *, unsigned int))UFG::Metrics::msInstance.mSimTimeMSec;
+    BYTE4(vfptr->get_obj_type) = 1;
+    vfptr->__vecDelDtor = (void *(__fastcall *)(SSObjectBase *, unsigned int))UFG::Metrics::msInstance.mSimTimeMSec;
   }
 }
 
@@ -196,22 +215,22 @@ void __fastcall UFG::TSTimer::Mthd_resume(SSInvokedMethod *pScope, SSInstance **
 // RVA: 0x4FCB60
 void __fastcall UFG::TSTimer::Mthd_get_elapsed_seconds(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  SSObjectBaseVtbl *v3; // rcx
+  SSObjectBase *i_obj_p; // r8
+  SSObjectBaseVtbl *vfptr; // rcx
   float v4; // xmm1_4
   float v5; // xmm0_4
 
   if ( ppResult )
   {
-    v2 = pScope->i_scope_p.i_obj_p;
-    if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-      v2 = 0i64;
-    v3 = v2[2].vfptr;
-    v4 = *(float *)&v3->get_obj_type;
-    if ( BYTE4(v3->get_obj_type) )
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    vfptr = i_obj_p[2].vfptr;
+    v4 = *(float *)&vfptr->get_obj_type;
+    if ( BYTE4(vfptr->get_obj_type) )
     {
-      v5 = (float)(LODWORD(UFG::Metrics::msInstance.mSimTimeMSec) - LODWORD(v3->__vecDelDtor));
-      if ( (signed __int64)(UFG::Metrics::msInstance.mSimTimeMSec - (unsigned __int64)v3->__vecDelDtor) < 0 )
+      v5 = (float)(LODWORD(UFG::Metrics::msInstance.mSimTimeMSec) - LODWORD(vfptr->__vecDelDtor));
+      if ( (__int64)(UFG::Metrics::msInstance.mSimTimeMSec - (unsigned __int64)vfptr->__vecDelDtor) < 0 )
         v5 = v5 + 1.8446744e19;
       v4 = v4 + (float)(v5 * 0.001);
     }

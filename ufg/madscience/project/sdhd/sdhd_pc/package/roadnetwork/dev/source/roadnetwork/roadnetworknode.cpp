@@ -2,14 +2,12 @@
 // RVA: 0xDF620
 void __fastcall qPagedLinearAllocator::NewPage(qPagedLinearAllocator *this)
 {
-  qPagedLinearAllocator *v1; // rbx
   char *v2; // rax
-  char *v3; // rdx
-  UFG::qNode<qPagedLinearAllocator::PageHeader,qPagedLinearAllocator::PageHeader> *v4; // rax
+  qPagedLinearAllocator::PageHeader *v3; // rdx
+  UFG::qNode<qPagedLinearAllocator::PageHeader,qPagedLinearAllocator::PageHeader> *mPrev; // rax
 
-  v1 = this;
   v2 = UFG::qMemoryPool::Allocate(this->mpPool, this->mPageSize, this->mPageTag, 0i64, 1u);
-  v3 = v2;
+  v3 = (qPagedLinearAllocator::PageHeader *)v2;
   if ( v2 )
   {
     *(_QWORD *)v2 = v2;
@@ -19,21 +17,21 @@ void __fastcall qPagedLinearAllocator::NewPage(qPagedLinearAllocator *this)
   {
     v3 = 0i64;
   }
-  v1->mpCurrentPage = (qPagedLinearAllocator::PageHeader *)v3;
-  v4 = v1->mPages.mNode.mPrev;
-  v4->mNext = (UFG::qNode<qPagedLinearAllocator::PageHeader,qPagedLinearAllocator::PageHeader> *)v3;
-  *(_QWORD *)v3 = v4;
-  *((_QWORD *)v3 + 1) = (char *)v1 + 48;
-  v1->mPages.mNode.mPrev = (UFG::qNode<qPagedLinearAllocator::PageHeader,qPagedLinearAllocator::PageHeader> *)v3;
-  v1->mpCurrentPos = &v1->mpCurrentPage[1];
-  v1->mRemainingBytesOnPage = v1->mPageSize - 16;
+  this->mpCurrentPage = v3;
+  mPrev = this->mPages.mNode.mPrev;
+  mPrev->mNext = v3;
+  v3->mPrev = mPrev;
+  v3->mNext = &this->mPages.mNode;
+  this->mPages.mNode.mPrev = v3;
+  this->mpCurrentPos = &this->mpCurrentPage[1];
+  this->mRemainingBytesOnPage = this->mPageSize - 16;
 }
 
 // File Line: 148
 // RVA: 0xD96B0
 qPagedLinearAllocator *__fastcall GetLaneTAllocator()
 {
-  if ( !(_S3_3 & 1) )
+  if ( (_S3_3 & 1) == 0 )
   {
     _S3_3 |= 1u;
     allocator.mpPool = UFG::gMainMemoryPool;
@@ -51,24 +49,24 @@ qPagedLinearAllocator *__fastcall GetLaneTAllocator()
 
 // File Line: 187
 // RVA: 0xD8D80
-UFG::RoadNetworkConnection *__fastcall UFG::RoadNetworkGate::GetIncomingConnection(UFG::RoadNetworkGate *this, unsigned int index)
+UFG::RoadNetworkConnection *__fastcall UFG::RoadNetworkGate::GetIncomingConnection(
+        UFG::RoadNetworkGate *this,
+        unsigned int index)
 {
-  __int64 v2; // rax
+  __int64 mOffset; // rax
   char *v3; // rcx
-  __int64 v4; // rax
-  signed __int64 v5; // rdx
+  UFG::RoadNetworkConnection **v4; // rdx
   UFG::RoadNetworkConnection *result; // rax
 
-  v2 = this->mIncomingConnection.mOffset;
-  if ( v2 )
-    v3 = (char *)&this->mIncomingConnection + v2;
+  mOffset = this->mIncomingConnection.mOffset;
+  if ( mOffset )
+    v3 = (char *)&this->mIncomingConnection + mOffset;
   else
     v3 = 0i64;
-  v4 = index;
-  v5 = (signed __int64)&v3[8 * v4];
-  result = *(UFG::RoadNetworkConnection **)&v3[8 * v4];
-  if ( result )
-    result = (UFG::RoadNetworkConnection *)((char *)result + v5);
+  v4 = (UFG::RoadNetworkConnection **)&v3[8 * index];
+  result = *v4;
+  if ( *v4 )
+    return (UFG::RoadNetworkConnection *)((char *)result + (_QWORD)v4);
   return result;
 }
 
@@ -76,22 +74,22 @@ UFG::RoadNetworkConnection *__fastcall UFG::RoadNetworkGate::GetIncomingConnecti
 // RVA: 0xD5EA0
 UFG::RoadNetworkLane *__fastcall UFG::RoadNetworkNode::GetCenterLane(UFG::RoadNetworkNode *this)
 {
-  __int64 v1; // rdx
+  __int64 mOffset; // rdx
   __int64 v2; // rax
   char *v3; // rcx
-  signed __int64 v4; // rdx
+  UFG::RoadNetworkLane **v4; // rdx
   UFG::RoadNetworkLane *result; // rax
 
-  v1 = this->mLane.mOffset;
-  v2 = ((unsigned __int8)this->mNumLanes - 1) / 2;
-  if ( v1 )
-    v3 = (char *)&this->mLane + v1;
+  mOffset = this->mLane.mOffset;
+  v2 = (unsigned int)(((unsigned __int8)this->mNumLanes - 1) / 2);
+  if ( mOffset )
+    v3 = (char *)&this->mLane + mOffset;
   else
     v3 = 0i64;
-  v4 = (signed __int64)&v3[8 * v2];
-  result = *(UFG::RoadNetworkLane **)&v3[8 * v2];
-  if ( result )
-    result = (UFG::RoadNetworkLane *)((char *)result + v4);
+  v4 = (UFG::RoadNetworkLane **)&v3[8 * v2];
+  result = *v4;
+  if ( *v4 )
+    return (UFG::RoadNetworkLane *)((char *)result + (_QWORD)v4);
   return result;
 }
 
@@ -99,21 +97,22 @@ UFG::RoadNetworkLane *__fastcall UFG::RoadNetworkNode::GetCenterLane(UFG::RoadNe
 // RVA: 0xD5EE0
 __int64 __fastcall UFG::RoadNetworkNode::GetCenterLaneIndex(UFG::RoadNetworkNode *this)
 {
-  return ((unsigned __int8)this->mNumLanes - 1) / 2;
+  return (unsigned int)(((unsigned __int8)this->mNumLanes - 1) / 2);
 }
 
 // File Line: 531
 // RVA: 0xD69F0
-UFG::RoadNetworkLane *__fastcall UFG::RoadNetworkSegment::GetClosestLaneToCenter(UFG::RoadNetworkSegment *this, unsigned int index)
+UFG::RoadNetworkLane *__fastcall UFG::RoadNetworkSegment::GetClosestLaneToCenter(
+        UFG::RoadNetworkSegment *this,
+        unsigned int index)
 {
-  unsigned int v2; // er8
-  UFG::RoadNetworkLane *v3; // rbx
+  unsigned int v2; // r8d
+  __int64 v3; // rbx
   __int64 v4; // r9
-  __int64 v5; // rax
+  __int64 mOffset; // rax
   char *v6; // rcx
   __int64 v7; // rax
-  UFG::RoadNetworkLane *result; // rax
-  UFG::qOffset64<UFG::qOffset64<UFG::RoadNetworkLane *> *> *v9; // r13
+  UFG::qOffset64<UFG::qOffset64<UFG::RoadNetworkLane *> *> *p_mLane; // r13
   __int64 v10; // r14
   _QWORD *v11; // rax
   UFG::RoadNetworkLane *v12; // r12
@@ -122,92 +121,87 @@ UFG::RoadNetworkLane *__fastcall UFG::RoadNetworkSegment::GetClosestLaneToCenter
   __int64 v15; // rcx
   UFG::RoadNetworkLane *v16; // r15
   char *v17; // rcx
-  __int64 v18; // rax
-  signed __int64 v19; // rdx
-  __int64 v20; // rax
-  UFG::RoadNetworkLane *v21; // rsi
-  char *v22; // rcx
-  __int64 v23; // rax
-  signed __int64 v24; // rdi
-  __int64 v25; // r10
-  signed __int64 v26; // r8
-  __int64 v27; // r11
+  char *v18; // rdx
+  char *v19; // rsi
+  char *v20; // rcx
+  __int64 v21; // rax
+  char *v22; // rdi
+  __int64 v23; // r10
+  char *v24; // r8
+  __int64 v25; // r11
+  char *v26; // rax
+  __int64 v27; // rcx
   char *v28; // rax
-  __int64 v29; // rcx
-  char *v30; // rax
-  char *v31; // rdx
-  __int64 v32; // rax
-  signed __int64 v33; // rax
-  bool v34; // zf
-  __int64 v35; // rax
-  signed __int64 v36; // r8
-  char *v37; // rcx
-  __int64 v38; // rax
-  char *v39; // rax
-  char *v40; // rdx
+  char *v29; // rdx
+  __int64 v30; // rax
+  char *v31; // rax
+  bool v32; // zf
+  __int64 v33; // rax
+  char *v34; // r8
+  char *v35; // rcx
+  __int64 v36; // rax
+  char *v37; // rax
+  char *v38; // rdx
+  __int64 v39; // rax
+  char *v40; // rax
   __int64 v41; // rax
-  signed __int64 v42; // rax
-  __int64 v43; // rax
-  signed __int64 v44; // r8
-  signed __int64 v45; // rcx
-  __int64 v46; // rax
-  _QWORD *v47; // rax
-  char *v48; // rdx
-  __int64 v49; // rax
-  signed __int64 v50; // rax
-  bool v51; // r9
-  signed __int64 v52; // r8
+  char *v42; // r8
+  char *v43; // rcx
+  __int64 v44; // rax
+  char *v45; // rax
+  char *v46; // rdx
+  __int64 v47; // rax
+  char *v48; // rax
+  bool v49; // r9
+  char *v50; // r8
+  char *v51; // rax
+  __int64 v52; // rcx
   char *v53; // rax
-  __int64 v54; // rcx
-  char *v55; // rax
-  char *v56; // rdx
+  char *v54; // rdx
+  __int64 v55; // rax
+  char *v56; // rax
   __int64 v57; // rax
-  signed __int64 v58; // rax
-  __int64 v59; // rax
-  signed __int64 v60; // rbp
-  signed __int64 v61; // rcx
-  __int64 v62; // rax
-  _QWORD *v63; // rax
-  char *v64; // rdx
+  char *v58; // rbp
+  char *v59; // rcx
+  __int64 v60; // rax
+  char *v61; // rax
+  char *v62; // rdx
+  __int64 v63; // rax
+  __int64 v64; // rsi
   __int64 v65; // rax
-  signed __int64 v66; // rsi
-  __int64 v67; // rax
-  char *v68; // rcx
-  signed __int64 v69; // rdx
-  __int64 v70; // rax
+  char *v66; // rcx
+  char *v67; // rdx
+  __int64 v68; // rax
+  char *v69; // rbp
+  char *v70; // rcx
   __int64 v71; // rax
-  signed __int64 v72; // rbp
-  signed __int64 v73; // rcx
+  char *v72; // rax
+  char *v73; // rdx
   __int64 v74; // rax
-  _QWORD *v75; // rax
-  char *v76; // rdx
-  __int64 v77; // rax
-  signed __int64 v78; // rsi
-  char *v79; // rcx
-  __int64 v80; // rax
-  signed __int64 v81; // rdx
-  __int64 v82; // rax
-  unsigned int v83; // [rsp+60h] [rbp+8h]
-  UFG::RoadNetworkLane *v84; // [rsp+70h] [rbp+18h]
+  __int64 v75; // rsi
+  char *v76; // rcx
+  char *v77; // rdx
+  unsigned int v78; // [rsp+60h] [rbp+8h]
+  char *v79; // [rsp+70h] [rbp+18h]
 
   LOBYTE(v2) = this->mNumLanes;
   v3 = 0i64;
   v4 = index;
   if ( (_BYTE)v2 == 1 )
   {
-    v5 = this->mLane.mOffset;
-    if ( v5 )
-      v6 = (char *)&this->mLane + v5;
+    mOffset = this->mLane.mOffset;
+    if ( mOffset )
+      v6 = (char *)&this->mLane + mOffset;
     else
       v6 = 0i64;
     v7 = *(_QWORD *)&v6[8 * index];
     if ( v7 )
-      v3 = (UFG::RoadNetworkLane *)&v6[8 * index + v7];
-    result = v3;
+      return (UFG::RoadNetworkLane *)&v6[8 * index + v7];
+    return (UFG::RoadNetworkLane *)v3;
   }
   else
   {
-    v9 = &this->mLane;
+    p_mLane = &this->mLane;
     v10 = this->mLane.mOffset;
     v11 = (__int64 *)((char *)&this->mLane.mOffset + v10);
     if ( !v10 )
@@ -215,677 +209,632 @@ UFG::RoadNetworkLane *__fastcall UFG::RoadNetworkSegment::GetClosestLaneToCenter
     v12 = (UFG::RoadNetworkLane *)((char *)v11 + *v11);
     if ( !*v11 )
       v12 = 0i64;
-    v13 = (char *)v9 + v10;
+    v13 = (char *)p_mLane + v10;
     if ( !v10 )
       v13 = 0i64;
     v2 = (unsigned __int8)v2;
-    v83 = v2;
+    v78 = v2;
     v14 = (unsigned int)(unsigned __int8)v2 - 1;
     v15 = *(_QWORD *)&v13[8 * v14];
     v16 = (UFG::RoadNetworkLane *)&v13[8 * v14 + v15];
     if ( !v15 )
       v16 = 0i64;
-    v17 = (char *)v9 + v10;
-    v18 = (signed int)(v2 - 1) / 2;
+    v17 = (char *)p_mLane + v10;
     if ( !v10 )
       v17 = 0i64;
-    v19 = (signed __int64)&v17[8 * v18];
-    v20 = *(_QWORD *)&v17[8 * v18];
-    v21 = (UFG::RoadNetworkLane *)(v19 + v20);
-    if ( !v20 )
-      v21 = 0i64;
-    v84 = v21;
-    v22 = (char *)v9 + v10;
+    v18 = &v17[8 * (((unsigned __int8)v2 - 1) / 2)];
+    v19 = &v18[*(_QWORD *)v18];
+    if ( !*(_QWORD *)v18 )
+      v19 = 0i64;
+    v79 = v19;
+    v20 = (char *)p_mLane + v10;
     if ( !v10 )
+      v20 = 0i64;
+    v21 = *(_QWORD *)&v20[8 * v4];
+    v22 = &v20[8 * v4 + v21];
+    if ( !v21 )
       v22 = 0i64;
-    v23 = *(_QWORD *)&v22[8 * v4];
-    v24 = (signed __int64)&v22[8 * v4 + v23];
-    if ( !v23 )
+    v23 = v12->mStartGate.mOffset;
+    if ( v23 )
+      v24 = (char *)&v12->mStartGate + v23;
+    else
       v24 = 0i64;
-    v25 = v12->mStartGate.mOffset;
-    if ( v25 )
-      v26 = (signed __int64)&v12->mStartGate + v25;
-    else
-      v26 = 0i64;
-    v27 = v12->mNode.mOffset;
-    v28 = (char *)v12 + v12->mNode.mOffset;
+    v25 = v12->mNode.mOffset;
+    v26 = (char *)v12 + v12->mNode.mOffset;
     if ( !v12->mNode.mOffset )
+      v26 = 0i64;
+    v27 = *((_QWORD *)v26 + 6);
+    if ( v27 )
+      v28 = &v26[v27 + 48];
+    else
       v28 = 0i64;
-    v29 = *((_QWORD *)v28 + 6);
-    if ( v29 )
-      v30 = &v28[v29 + 48];
+    v29 = &v28[*(_QWORD *)v28];
+    if ( !*(_QWORD *)v28 )
+      v29 = 0i64;
+    v30 = *((_QWORD *)v29 + 1);
+    if ( v30 )
+      v31 = &v29[v30 + 8];
     else
-      v30 = 0i64;
-    v31 = &v30[*(_QWORD *)v30];
-    if ( !*(_QWORD *)v30 )
       v31 = 0i64;
-    v32 = *((_QWORD *)v31 + 1);
-    if ( v32 )
-      v33 = (signed __int64)&v31[v32 + 8];
+    v32 = v24 == v31;
+    v33 = v16->mStartGate.mOffset;
+    if ( v33 )
+      v34 = (char *)&v16->mStartGate + v33;
     else
-      v33 = 0i64;
-    v34 = v26 == v33;
-    v35 = v16->mStartGate.mOffset;
-    if ( v35 )
-      v36 = (signed __int64)&v16->mStartGate + v35;
-    else
-      v36 = 0i64;
-    v37 = (char *)v16 + v16->mNode.mOffset;
+      v34 = 0i64;
+    v35 = (char *)v16 + v16->mNode.mOffset;
     if ( !v16->mNode.mOffset )
+      v35 = 0i64;
+    v36 = *((_QWORD *)v35 + 6);
+    if ( v36 )
+      v37 = &v35[v36 + 48];
+    else
       v37 = 0i64;
-    v38 = *((_QWORD *)v37 + 6);
-    if ( v38 )
-      v39 = &v37[v38 + 48];
+    v38 = &v37[*(_QWORD *)v37];
+    if ( !*(_QWORD *)v37 )
+      v38 = 0i64;
+    v39 = *((_QWORD *)v38 + 1);
+    if ( v39 )
+      v40 = &v38[v39 + 8];
     else
-      v39 = 0i64;
-    v40 = &v39[*(_QWORD *)v39];
-    if ( !*(_QWORD *)v39 )
       v40 = 0i64;
-    v41 = *((_QWORD *)v40 + 1);
-    if ( v41 )
-      v42 = (signed __int64)&v40[v41 + 8];
-    else
-      v42 = 0i64;
-    if ( !v34 != (v36 != v42) )
+    if ( !v32 != (v34 != v40) )
     {
-      v43 = *(_QWORD *)(v24 + 8);
-      if ( v43 )
-        v44 = v24 + v43 + 8;
+      v41 = *((_QWORD *)v22 + 1);
+      if ( v41 )
+        v42 = &v22[v41 + 8];
       else
-        v44 = 0i64;
-      v45 = *(_QWORD *)v24 + v24;
-      if ( !*(_QWORD *)v24 )
+        v42 = 0i64;
+      v43 = &v22[*(_QWORD *)v22];
+      if ( !*(_QWORD *)v22 )
+        v43 = 0i64;
+      v44 = *((_QWORD *)v43 + 6);
+      if ( v44 )
+        v45 = &v43[v44 + 48];
+      else
         v45 = 0i64;
-      v46 = *(_QWORD *)(v45 + 48);
-      if ( v46 )
-        v47 = (_QWORD *)(v45 + v46 + 48);
+      v46 = &v45[*(_QWORD *)v45];
+      if ( !*(_QWORD *)v45 )
+        v46 = 0i64;
+      v47 = *((_QWORD *)v46 + 1);
+      if ( v47 )
+        v48 = &v46[v47 + 8];
       else
-        v47 = 0i64;
-      v48 = (char *)v47 + *v47;
-      if ( !*v47 )
         v48 = 0i64;
-      v49 = *((_QWORD *)v48 + 1);
-      if ( v49 )
-        v50 = (signed __int64)&v48[v49 + 8];
+      v49 = v42 != v48;
+      if ( v23 )
+        v50 = (char *)&v12->mStartGate + v23;
       else
         v50 = 0i64;
-      v51 = v44 != v50;
-      if ( v25 )
-        v52 = (signed __int64)&v12->mStartGate + v25;
+      v51 = (char *)v12 + v25;
+      if ( !v25 )
+        v51 = 0i64;
+      v52 = *((_QWORD *)v51 + 6);
+      if ( v52 )
+        v53 = &v51[v52 + 48];
       else
-        v52 = 0i64;
-      v53 = (char *)v12 + v27;
-      if ( !v27 )
         v53 = 0i64;
-      v54 = *((_QWORD *)v53 + 6);
-      if ( v54 )
-        v55 = &v53[v54 + 48];
+      v54 = &v53[*(_QWORD *)v53];
+      if ( !*(_QWORD *)v53 )
+        v54 = 0i64;
+      v55 = *((_QWORD *)v54 + 1);
+      if ( v55 )
+        v56 = &v54[v55 + 8];
       else
-        v55 = 0i64;
-      v56 = &v55[*(_QWORD *)v55];
-      if ( !*(_QWORD *)v55 )
         v56 = 0i64;
-      v57 = *((_QWORD *)v56 + 1);
-      if ( v57 )
-        v58 = (signed __int64)&v56[v57 + 8];
-      else
-        v58 = 0i64;
-      if ( v51 == (v52 != v58) )
+      if ( v49 == (v50 != v56) )
       {
         while ( 1 )
         {
-          v59 = *(_QWORD *)(v24 + 8);
-          if ( v59 )
-            v60 = v24 + v59 + 8;
+          v57 = *((_QWORD *)v22 + 1);
+          if ( v57 )
+            v58 = &v22[v57 + 8];
           else
-            v60 = 0i64;
-          v61 = *(_QWORD *)v24 + v24;
-          if ( !*(_QWORD *)v24 )
+            v58 = 0i64;
+          v59 = &v22[*(_QWORD *)v22];
+          if ( !*(_QWORD *)v22 )
+            v59 = 0i64;
+          v60 = *((_QWORD *)v59 + 6);
+          if ( v60 )
+            v61 = &v59[v60 + 48];
+          else
             v61 = 0i64;
-          v62 = *(_QWORD *)(v61 + 48);
-          if ( v62 )
-            v63 = (_QWORD *)(v61 + v62 + 48);
-          else
-            v63 = 0i64;
-          v64 = (char *)v63 + *v63;
-          if ( !*v63 )
-            v64 = 0i64;
-          v65 = *((_QWORD *)v64 + 1);
-          v66 = (signed __int64)(v65 ? &v64[v65 + 8] : 0i64);
-          if ( (v60 != v66) != UFG::RoadNetworkLane::IsReversedInNode(v12) )
+          v62 = &v61[*(_QWORD *)v61];
+          if ( !*(_QWORD *)v61 )
+            v62 = 0i64;
+          v63 = *((_QWORD *)v62 + 1);
+          v64 = v63 ? (__int64)&v62[v63 + 8] : 0i64;
+          if ( (v58 != (char *)v64) != UFG::RoadNetworkLane::IsReversedInNode(v12) )
             break;
-          v84 = (UFG::RoadNetworkLane *)v24;
-          v67 = (unsigned int)*(unsigned __int16 *)(v24 + 36) + 1;
-          if ( (unsigned int)v67 >= v83 )
-          {
-            v21 = (UFG::RoadNetworkLane *)v24;
-            goto LABEL_119;
-          }
-          v68 = (char *)v9 + v10;
+          v79 = v22;
+          v65 = (unsigned int)*((unsigned __int16 *)v22 + 18) + 1;
+          if ( (unsigned int)v65 >= v78 )
+            return (UFG::RoadNetworkLane *)v22;
+          v66 = (char *)p_mLane + v10;
           if ( !v10 )
-            v68 = 0i64;
-          v69 = (signed __int64)&v68[8 * v67];
-          v70 = *(_QWORD *)&v68[8 * v67];
-          if ( v70 )
-            v24 = v69 + v70;
+            v66 = 0i64;
+          v67 = &v66[8 * v65];
+          if ( *(_QWORD *)v67 )
+            v22 = &v67[*(_QWORD *)v67];
           else
-            v24 = 0i64;
+            v22 = 0i64;
         }
       }
       else
       {
         while ( 1 )
         {
-          v71 = *(_QWORD *)(v24 + 8);
+          v68 = *((_QWORD *)v22 + 1);
+          if ( v68 )
+            v69 = &v22[v68 + 8];
+          else
+            v69 = 0i64;
+          v70 = &v22[*(_QWORD *)v22];
+          if ( !*(_QWORD *)v22 )
+            v70 = 0i64;
+          v71 = *((_QWORD *)v70 + 6);
           if ( v71 )
-            v72 = v24 + v71 + 8;
+            v72 = &v70[v71 + 48];
           else
             v72 = 0i64;
-          v73 = *(_QWORD *)v24 + v24;
-          if ( !*(_QWORD *)v24 )
+          v73 = &v72[*(_QWORD *)v72];
+          if ( !*(_QWORD *)v72 )
             v73 = 0i64;
-          v74 = *(_QWORD *)(v73 + 48);
-          if ( v74 )
-            v75 = (_QWORD *)(v73 + v74 + 48);
-          else
-            v75 = 0i64;
-          v76 = (char *)v75 + *v75;
-          if ( !*v75 )
-            v76 = 0i64;
-          v77 = *((_QWORD *)v76 + 1);
-          v78 = (signed __int64)(v77 ? &v76[v77 + 8] : 0i64);
-          if ( (v72 != v78) != UFG::RoadNetworkLane::IsReversedInNode(v16) )
+          v74 = *((_QWORD *)v73 + 1);
+          v75 = v74 ? (__int64)&v73[v74 + 8] : 0i64;
+          if ( (v69 != (char *)v75) != UFG::RoadNetworkLane::IsReversedInNode(v16) )
             break;
-          v84 = (UFG::RoadNetworkLane *)v24;
-          v79 = (char *)v9 + v10;
-          v80 = (unsigned int)*(unsigned __int16 *)(v24 + 36) - 1;
+          v79 = v22;
+          v76 = (char *)p_mLane + v10;
           if ( !v10 )
-            v79 = 0i64;
-          v81 = (signed __int64)&v79[8 * v80];
-          v82 = *(_QWORD *)&v79[8 * v80];
-          if ( v82 )
-            v24 = v81 + v82;
+            v76 = 0i64;
+          v77 = &v76[8 * *((unsigned __int16 *)v22 + 18) - 8];
+          if ( *(_QWORD *)v77 )
+            v22 = &v77[*(_QWORD *)v77];
           else
-            v24 = 0i64;
+            v22 = 0i64;
         }
       }
-      v21 = v84;
+      return (UFG::RoadNetworkLane *)v79;
     }
-LABEL_119:
-    result = v21;
+    return (UFG::RoadNetworkLane *)v19;
   }
-  return result;
-}
-            v79 = 0i64;
-          v81 = (signed __int64)&v79[8 * v80];
-          v82 = *(_QWORD *)&v79
+}
 
 // File Line: 577
 // RVA: 0xDAA30
-UFG::qVector3 *__fastcall UFG::RoadNetworkNode::GetNearestPos(UFG::RoadNetworkNode *this, UFG::qVector3 *result, UFG::qVector3 *pos, UFG::RoadNetworkLane **nearestLane, float *nearestT)
+UFG::qVector3 *__fastcall UFG::RoadNetworkNode::GetNearestPos(
+        UFG::RoadNetworkNode *this,
+        UFG::qVector3 *result,
+        UFG::qVector3 *pos,
+        UFG::RoadNetworkLane **nearestLane,
+        float *nearestT)
 {
   UFG::RoadNetworkLane *v5; // rbp
   __int64 v6; // rdi
   float v7; // xmm6_4
   float v8; // xmm7_4
-  UFG::RoadNetworkLane **v9; // r12
-  UFG::qVector3 *v10; // r15
-  UFG::qVector3 *v11; // r14
-  UFG::RoadNetworkNode *v12; // rsi
-  __int64 v13; // rax
-  signed __int64 v14; // rcx
+  __int64 mOffset; // rax
+  char *v14; // rcx
   __int64 v15; // rax
-  signed __int64 v16; // rbx
+  UFG::RoadNetworkLane *v16; // rbx
   __int64 v17; // rax
   UFG::RoadNetworkConnection *v18; // rcx
-  UFG::qBezierPathMemImaged *v19; // rax
-  float v20; // xmm4_4
-  float v21; // xmm5_4
+  UFG::qBezierPathMemImaged *Path; // rax
+  float y; // xmm4_4
+  float z; // xmm5_4
   float v22; // xmm2_4
   float *v23; // rax
-  UFG::qVector3 resulta; // [rsp+20h] [rbp-58h]
-  float t; // [rsp+80h] [rbp+8h]
+  UFG::qVector3 resulta; // [rsp+20h] [rbp-58h] BYREF
+  float t; // [rsp+80h] [rbp+8h] BYREF
 
   v5 = 0i64;
-  result->x = this->mPosition.x;
+  *result = this->mPosition;
   v6 = 0i64;
   v7 = 0.0;
   v8 = FLOAT_3_4028235e38;
-  result->y = this->mPosition.y;
-  v9 = nearestLane;
-  v10 = pos;
-  v11 = result;
-  v12 = this;
-  result->z = this->mPosition.z;
-  t = 0.0;
-  if ( this->mNumLanes )
+  for ( t = 0.0; (unsigned int)v6 < (unsigned __int8)this->mNumLanes; v6 = (unsigned int)(v6 + 1) )
   {
-    do
+    mOffset = this->mLane.mOffset;
+    if ( mOffset )
+      v14 = (char *)&this->mLane + mOffset;
+    else
+      v14 = 0i64;
+    v15 = *(_QWORD *)&v14[8 * v6];
+    if ( v15 )
+      v16 = (UFG::RoadNetworkLane *)&v14[8 * v6 + v15];
+    else
+      v16 = 0i64;
+    v17 = v16->mNode.mOffset;
+    if ( v16->mNode.mOffset )
+      v17 += (__int64)v16;
+    v18 = *(UFG::RoadNetworkConnection **)(v17 + 32);
+    if ( v18 )
+      v18 = (UFG::RoadNetworkConnection *)((char *)v18 + v17 + 32);
+    Path = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v18, v16->mPathIndex);
+    UFG::qBezierPathMemImaged::ClosestPoint3D(Path, &resulta, pos, &t);
+    y = resulta.y;
+    z = resulta.z;
+    v22 = (float)((float)((float)(resulta.y - pos->y) * (float)(resulta.y - pos->y))
+                + (float)((float)(resulta.x - pos->x) * (float)(resulta.x - pos->x)))
+        + (float)((float)(resulta.z - pos->z) * (float)(resulta.z - pos->z));
+    if ( v22 < v8 )
     {
-      v13 = v12->mLane.mOffset;
-      if ( v13 )
-        v14 = (signed __int64)&v12->mLane + v13;
-      else
-        v14 = 0i64;
-      v15 = *(_QWORD *)(v14 + 8 * v6);
-      if ( v15 )
-        v16 = v15 + v14 + 8 * v6;
-      else
-        v16 = 0i64;
-      v17 = *(_QWORD *)v16;
-      if ( *(_QWORD *)v16 )
-        v17 += v16;
-      v18 = *(UFG::RoadNetworkConnection **)(v17 + 32);
-      if ( v18 )
-        v18 = (UFG::RoadNetworkConnection *)((char *)v18 + v17 + 32);
-      v19 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
-                                           v18,
-                                           *(unsigned __int16 *)(v16 + 38));
-      UFG::qBezierPathMemImaged::ClosestPoint3D(v19, &resulta, v10, &t);
-      v20 = resulta.y;
-      v21 = resulta.z;
-      v22 = (float)((float)((float)(resulta.y - v10->y) * (float)(resulta.y - v10->y))
-                  + (float)((float)(resulta.x - v10->x) * (float)(resulta.x - v10->x)))
-          + (float)((float)(resulta.z - v10->z) * (float)(resulta.z - v10->z));
-      if ( v22 < v8 )
-      {
-        v7 = t;
-        v11->x = resulta.x;
-        v11->y = v20;
-        v8 = v22;
-        v5 = (UFG::RoadNetworkLane *)v16;
-        v11->z = v21;
-      }
-      v6 = (unsigned int)(v6 + 1);
+      v7 = t;
+      result->x = resulta.x;
+      result->y = y;
+      v8 = v22;
+      v5 = v16;
+      result->z = z;
     }
-    while ( (unsigned int)v6 < (unsigned __int8)v12->mNumLanes );
   }
   v23 = nearestT;
-  *v9 = v5;
+  *nearestLane = v5;
   *v23 = v7;
-  return v11;
+  return result;
 }
 
 // File Line: 607
 // RVA: 0xDA430
-UFG::qVector3 *__fastcall UFG::RoadNetworkNode::GetNearestPos(UFG::RoadNetworkNode *this, UFG::qVector3 *result, UFG::qVector3 *pos, UFG::qVector3 *_heading, UFG::RoadNetworkLane **nearestLane, float *nearestT)
+UFG::qVector3 *__fastcall UFG::RoadNetworkNode::GetNearestPos(
+        UFG::RoadNetworkNode *this,
+        UFG::qVector3 *result,
+        UFG::qVector3 *pos,
+        UFG::qVector3 *_heading,
+        UFG::RoadNetworkLane **nearestLane,
+        float *nearestT)
 {
   float v6; // xmm7_4
-  UFG::qVector3 *v7; // r15
-  UFG::qVector3 *v8; // r13
-  UFG::RoadNetworkNode *v9; // rdi
-  float v10; // xmm10_4
-  __m128 v11; // xmm9
-  float v12; // xmm11_4
+  float y; // xmm10_4
+  __m128 x_low; // xmm9
+  float z; // xmm11_4
   __m128 v13; // xmm2
   float v14; // xmm1_4
   float v15; // xmm9_4
   float v16; // xmm10_4
-  _QWORD *v17; // r14
+  char *v17; // r14
   float v18; // xmm11_4
   float v19; // xmm6_4
   unsigned int v20; // ecx
   __int64 v21; // r12
-  __int64 v22; // rax
-  signed __int64 v23; // rcx
+  __int64 mOffset; // rax
+  char *v23; // rcx
   __int64 v24; // rax
-  signed __int64 v25; // rsi
+  char *v25; // rsi
   _QWORD *v26; // rax
   float *v27; // r15
   __int64 v28; // rax
   UFG::RoadNetworkConnection *v29; // rcx
-  UFG::qBezierPathMemImaged *v30; // rax
-  UFG::RoadNetworkConnection *v31; // rbx
-  unsigned int v32; // eax
-  UFG::qBezierSplineMemImaged *v33; // rax
-  float v34; // xmm2_4
-  __m128 v35; // xmm3
-  float v36; // xmm4_4
-  __m128 v37; // xmm5
-  float v38; // xmm1_4
-  float v39; // xmm2_4
-  __int64 v40; // rax
-  __int64 v41; // r12
-  __int64 v42; // rax
-  signed __int64 v43; // rcx
-  __int64 v44; // rax
-  signed __int64 v45; // rsi
-  _QWORD *v46; // rax
-  float *v47; // r15
-  __int64 v48; // rax
-  UFG::RoadNetworkConnection *v49; // rcx
-  UFG::qBezierPathMemImaged *v50; // rax
-  UFG::RoadNetworkConnection *v51; // rbx
-  unsigned int v52; // eax
-  UFG::qBezierSplineMemImaged *v53; // rax
-  float v54; // ST1C_4
-  float v55; // xmm2_4
-  __m128 v56; // xmm3
-  float v57; // xmm4_4
-  __m128 v58; // xmm5
-  float v59; // xmm1_4
-  float v60; // xmm2_4
-  __int64 v61; // rax
-  float v62; // xmm6_4
-  char *v63; // rsi
-  __int64 v64; // rdi
-  char *v65; // rbx
-  __int64 v66; // rax
-  UFG::RoadNetworkConnection *v67; // rcx
-  UFG::qBezierPathMemImaged *v68; // rax
-  float v69; // xmm4_4
-  float v70; // xmm5_4
-  __m128 v71; // xmm2
-  float v72; // xmm1_4
-  float v73; // xmm6_4
-  __int64 v74; // rsi
-  __int64 v75; // rax
-  signed __int64 v76; // rcx
-  __int64 v77; // rax
-  signed __int64 v78; // rbx
-  __int64 v79; // rax
-  UFG::RoadNetworkConnection *v80; // rcx
-  UFG::qBezierPathMemImaged *v81; // rax
-  float v82; // xmm4_4
-  float v83; // xmm5_4
-  __m128 v84; // xmm2
-  float v85; // xmm1_4
-  float splineT; // [rsp+20h] [rbp-79h]
-  UFG::qVector3 resulta; // [rsp+28h] [rbp-71h]
-  UFG::qVector3 v89; // [rsp+38h] [rbp-61h]
-  unsigned int v90; // [rsp+F0h] [rbp+57h]
-  float t; // [rsp+F8h] [rbp+5Fh]
-  float *vars0; // [rsp+100h] [rbp+67h]
-  float retaddr; // [rsp+108h] [rbp+6Fh]
-  _QWORD *v94; // [rsp+110h] [rbp+77h]
-  float *v95; // [rsp+118h] [rbp+7Fh]
+  UFG::qBezierPathMemImaged *Path; // rbx
+  unsigned int SplineParameters; // eax
+  UFG::qBezierSplineMemImaged *v32; // rax
+  float v33; // xmm2_4
+  __m128 y_low; // xmm3
+  float v35; // xmm4_4
+  __m128 v36; // xmm5
+  float v37; // xmm1_4
+  float v38; // xmm2_4
+  __int64 v39; // rax
+  __int64 j; // r12
+  __int64 v41; // rax
+  char *v42; // rcx
+  __int64 v43; // rax
+  char *v44; // rsi
+  _QWORD *v45; // rax
+  float *v46; // r15
+  __int64 v47; // rax
+  UFG::RoadNetworkConnection *v48; // rcx
+  UFG::qBezierPathMemImaged *v49; // rbx
+  unsigned int v50; // eax
+  UFG::qBezierSplineMemImaged *v51; // rax
+  float v52; // xmm2_4
+  __m128 v53; // xmm3
+  float v54; // xmm4_4
+  __m128 v55; // xmm5
+  float v56; // xmm1_4
+  float v57; // xmm2_4
+  __int64 v58; // rax
+  float v59; // xmm6_4
+  char *v60; // rsi
+  __int64 v61; // rdi
+  char *v62; // rbx
+  __int64 v63; // rax
+  UFG::RoadNetworkConnection *v64; // rcx
+  UFG::qBezierPathMemImaged *v65; // rax
+  float v66; // xmm4_4
+  float v67; // xmm5_4
+  __m128 v68; // xmm2
+  float v69; // xmm1_4
+  float v70; // xmm6_4
+  __int64 v71; // rsi
+  __int64 v72; // rax
+  char *v73; // rcx
+  __int64 v74; // rax
+  char *v75; // rbx
+  __int64 v76; // rax
+  UFG::RoadNetworkConnection *v77; // rcx
+  UFG::qBezierPathMemImaged *v78; // rax
+  float v79; // xmm4_4
+  float v80; // xmm5_4
+  __m128 v81; // xmm2
+  float v82; // xmm1_4
+  float v84; // [rsp+1Ch] [rbp-7Dh]
+  float splineT; // [rsp+20h] [rbp-79h] BYREF
+  UFG::qVector3 resulta; // [rsp+28h] [rbp-71h] BYREF
+  UFG::qVector3 v87; // [rsp+38h] [rbp-61h] BYREF
+  unsigned int i; // [rsp+F0h] [rbp+57h]
+  float t; // [rsp+F8h] [rbp+5Fh] BYREF
+  UFG::qVector3 *vars0; // [rsp+100h] [rbp+67h]
+  void *retaddr; // [rsp+108h] [rbp+6Fh] BYREF
+  char **v92; // [rsp+110h] [rbp+77h]
+  float *v93; // [rsp+118h] [rbp+7Fh]
 
   v6 = 0.0;
-  v7 = pos;
-  v8 = result;
-  v9 = this;
-  v10 = _heading->y;
-  v11 = (__m128)LODWORD(_heading->x);
-  v12 = _heading->z;
-  result->x = this->mPosition.x;
-  result->y = this->mPosition.y;
-  v13 = v11;
-  result->z = this->mPosition.z;
-  v13.m128_f32[0] = (float)((float)(v11.m128_f32[0] * v11.m128_f32[0]) + (float)(v10 * v10)) + (float)(v12 * v12);
+  y = _heading->y;
+  x_low = (__m128)LODWORD(_heading->x);
+  z = _heading->z;
+  *result = this->mPosition;
+  v13 = x_low;
+  v13.m128_f32[0] = (float)((float)(x_low.m128_f32[0] * x_low.m128_f32[0]) + (float)(y * y)) + (float)(z * z);
   if ( v13.m128_f32[0] == 0.0 )
     v14 = 0.0;
   else
-    v14 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v13));
-  v15 = v11.m128_f32[0] * v14;
-  v16 = v10 * v14;
+    v14 = 1.0 / _mm_sqrt_ps(v13).m128_f32[0];
+  v15 = x_low.m128_f32[0] * v14;
+  v16 = y * v14;
   v17 = 0i64;
-  v18 = v12 * v14;
+  v18 = z * v14;
   if ( this->mType.mValue == 1 )
   {
     v19 = FLOAT_N2_0;
     v20 = 0;
     v21 = 0i64;
-    v90 = 0;
-    if ( v9->mNumIncomingConnections > 0u )
+    for ( i = 0; (unsigned int)v21 < (unsigned __int8)this->mNumIncomingConnections; v21 = (unsigned int)(v21 + 1) )
     {
-      do
+      mOffset = this->mIncomingConnections.mOffset;
+      if ( mOffset )
+        v23 = (char *)&this->mIncomingConnections + mOffset;
+      else
+        v23 = 0i64;
+      v24 = *(_QWORD *)&v23[8 * v21];
+      if ( v24 )
+        v25 = &v23[8 * v21 + v24];
+      else
+        v25 = 0i64;
+      v26 = (_QWORD *)*((_QWORD *)v25 + 1);
+      if ( v26 )
+        v26 = (_QWORD *)((char *)v26 + (_QWORD)v25 + 8);
+      if ( *v26 )
+        v27 = (float *)((char *)v26 + *v26);
+      else
+        v27 = 0i64;
+      v28 = *(_QWORD *)v27;
+      if ( *(_QWORD *)v27 )
+        v28 += (__int64)v27;
+      v29 = *(UFG::RoadNetworkConnection **)(v28 + 32);
+      if ( v29 )
+        v29 = (UFG::RoadNetworkConnection *)((char *)v29 + v28 + 32);
+      Path = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                            v29,
+                                            *((unsigned __int16 *)v27 + 19));
+      SplineParameters = UFG::qBezierPathMemImaged::GetSplineParameters(Path, 0.0, &splineT);
+      v32 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                             (UFG::RoadNetworkConnection *)Path,
+                                             SplineParameters);
+      UFG::RoadNetworkLane::GetOffsetPos(&resulta, v32, splineT, v27[10]);
+      pos = vars0;
+      y_low = (__m128)LODWORD(resulta.y);
+      v33 = resulta.x - vars0->x;
+      y_low.m128_f32[0] = resulta.y - vars0->y;
+      v35 = resulta.z - vars0->z;
+      v36 = y_low;
+      v36.m128_f32[0] = (float)((float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(v33 * v33))
+                      + (float)(v35 * v35);
+      if ( v36.m128_f32[0] == 0.0 )
+        v37 = 0.0;
+      else
+        v37 = 1.0 / _mm_sqrt_ps(v36).m128_f32[0];
+      v38 = (float)((float)((float)(v33 * v37) * v15) + (float)((float)(y_low.m128_f32[0] * v37) * v16))
+          + (float)((float)(v35 * v37) * v18);
+      if ( v38 <= v19 )
       {
-        v22 = v9->mIncomingConnections.mOffset;
-        if ( v22 )
-          v23 = (signed __int64)&v9->mIncomingConnections + v22;
-        else
-          v23 = 0i64;
-        v24 = *(_QWORD *)(v23 + 8 * v21);
-        if ( v24 )
-          v25 = v23 + 8 * v21 + v24;
-        else
-          v25 = 0i64;
-        v26 = *(_QWORD **)(v25 + 8);
-        if ( v26 )
-          v26 = (_QWORD *)((char *)v26 + v25 + 8);
-        if ( *v26 )
-          v27 = (float *)((char *)v26 + *v26);
-        else
-          v27 = 0i64;
-        v28 = *(_QWORD *)v27;
-        if ( *(_QWORD *)v27 )
-          v28 += (__int64)v27;
-        v29 = *(UFG::RoadNetworkConnection **)(v28 + 32);
-        if ( v29 )
-          v29 = (UFG::RoadNetworkConnection *)((char *)v29 + v28 + 32);
-        v30 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
-                                             v29,
-                                             *((unsigned __int16 *)v27 + 19));
-        v31 = (UFG::RoadNetworkConnection *)v30;
-        v32 = UFG::qBezierPathMemImaged::GetSplineParameters(v30, 0.0, &splineT);
-        v33 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v31, v32);
-        UFG::RoadNetworkLane::GetOffsetPos(&resulta, v33, splineT, v27[10]);
-        v7 = (UFG::qVector3 *)vars0;
-        v35 = (__m128)LODWORD(resulta.y);
-        v34 = resulta.x - *vars0;
-        v35.m128_f32[0] = resulta.y - vars0[1];
-        v36 = resulta.z - vars0[2];
-        v37 = v35;
-        v37.m128_f32[0] = (float)((float)(v35.m128_f32[0] * v35.m128_f32[0]) + (float)(v34 * v34)) + (float)(v36 * v36);
-        if ( v37.m128_f32[0] == 0.0 )
-          v38 = 0.0;
-        else
-          v38 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v37));
-        v39 = (float)((float)((float)(v34 * v38) * v15) + (float)((float)(v35.m128_f32[0] * v38) * v16))
-            + (float)((float)(v36 * v38) * v18);
-        if ( v39 <= v19 )
-        {
-          v20 = v90;
-        }
-        else
-        {
-          v40 = *(_QWORD *)(v25 + 8);
-          v20 = *(_DWORD *)v25;
-          v90 = *(_DWORD *)v25;
-          if ( v40 )
-          {
-            v19 = v39;
-            v17 = (_QWORD *)(v25 + v40 + 8);
-          }
-          else
-          {
-            v17 = 0i64;
-            v19 = v39;
-          }
-        }
-        v21 = (unsigned int)(v21 + 1);
+        v20 = i;
       }
-      while ( (unsigned int)v21 < (unsigned __int8)v9->mNumIncomingConnections );
+      else
+      {
+        v39 = *((_QWORD *)v25 + 1);
+        v20 = *(_DWORD *)v25;
+        i = *(_DWORD *)v25;
+        if ( v39 )
+        {
+          v19 = v38;
+          v17 = &v25[v39 + 8];
+        }
+        else
+        {
+          v17 = 0i64;
+          v19 = v38;
+        }
+      }
     }
-    v41 = 0i64;
-    if ( v9->mNumOutgoingConnections )
+    for ( j = 0i64; (unsigned int)j < (unsigned __int8)this->mNumOutgoingConnections; j = (unsigned int)(j + 1) )
     {
-      do
+      v41 = this->mOutgoingConnections.mOffset;
+      if ( v41 )
+        v42 = (char *)&this->mOutgoingConnections + v41;
+      else
+        v42 = 0i64;
+      v43 = *(_QWORD *)&v42[8 * j];
+      if ( v43 )
+        v44 = &v42[8 * j + v43];
+      else
+        v44 = 0i64;
+      v45 = (_QWORD *)*((_QWORD *)v44 + 1);
+      if ( v45 )
+        v45 = (_QWORD *)((char *)v45 + (_QWORD)v44 + 8);
+      if ( *v45 )
+        v46 = (float *)((char *)v45 + *v45);
+      else
+        v46 = 0i64;
+      v47 = *(_QWORD *)v46;
+      if ( *(_QWORD *)v46 )
+        v47 += (__int64)v46;
+      v48 = *(UFG::RoadNetworkConnection **)(v47 + 32);
+      if ( v48 )
+        v48 = (UFG::RoadNetworkConnection *)((char *)v48 + v47 + 32);
+      v49 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                           v48,
+                                           *((unsigned __int16 *)v46 + 19));
+      v50 = UFG::qBezierPathMemImaged::GetSplineParameters(v49, 1.0, &splineT);
+      v51 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                             (UFG::RoadNetworkConnection *)v49,
+                                             v50);
+      UFG::RoadNetworkLane::GetOffsetPos(&v87, v51, splineT, v46[10]);
+      pos = vars0;
+      v53 = (__m128)LODWORD(v84);
+      v52 = v87.x - vars0->x;
+      v53.m128_f32[0] = v84 - vars0->y;
+      v54 = splineT - vars0->z;
+      v55 = v53;
+      v55.m128_f32[0] = (float)((float)(v53.m128_f32[0] * v53.m128_f32[0]) + (float)(v52 * v52)) + (float)(v54 * v54);
+      if ( v55.m128_f32[0] == 0.0 )
+        v56 = 0.0;
+      else
+        v56 = 1.0 / _mm_sqrt_ps(v55).m128_f32[0];
+      v57 = (float)((float)((float)(v52 * v56) * v15) + (float)((float)(v53.m128_f32[0] * v56) * v16))
+          + (float)((float)(v54 * v56) * v18);
+      if ( v57 <= v19 )
       {
-        v42 = v9->mOutgoingConnections.mOffset;
-        if ( v42 )
-          v43 = (signed __int64)&v9->mOutgoingConnections + v42;
-        else
-          v43 = 0i64;
-        v44 = *(_QWORD *)(v43 + 8 * v41);
-        if ( v44 )
-          v45 = v43 + 8 * v41 + v44;
-        else
-          v45 = 0i64;
-        v46 = *(_QWORD **)(v45 + 8);
-        if ( v46 )
-          v46 = (_QWORD *)((char *)v46 + v45 + 8);
-        if ( *v46 )
-          v47 = (float *)((char *)v46 + *v46);
-        else
-          v47 = 0i64;
-        v48 = *(_QWORD *)v47;
-        if ( *(_QWORD *)v47 )
-          v48 += (__int64)v47;
-        v49 = *(UFG::RoadNetworkConnection **)(v48 + 32);
-        if ( v49 )
-          v49 = (UFG::RoadNetworkConnection *)((char *)v49 + v48 + 32);
-        v50 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
-                                             v49,
-                                             *((unsigned __int16 *)v47 + 19));
-        v51 = (UFG::RoadNetworkConnection *)v50;
-        v52 = UFG::qBezierPathMemImaged::GetSplineParameters(v50, 1.0, &splineT);
-        v53 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v51, v52);
-        UFG::RoadNetworkLane::GetOffsetPos(&v89, v53, splineT, v47[10]);
-        v7 = (UFG::qVector3 *)vars0;
-        v56 = (__m128)LODWORD(v54);
-        v55 = v89.x - *vars0;
-        v56.m128_f32[0] = v54 - vars0[1];
-        v57 = splineT - vars0[2];
-        v58 = v56;
-        v58.m128_f32[0] = (float)((float)(v56.m128_f32[0] * v56.m128_f32[0]) + (float)(v55 * v55)) + (float)(v57 * v57);
-        if ( v58.m128_f32[0] == 0.0 )
-          v59 = 0.0;
-        else
-          v59 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v58));
-        v60 = (float)((float)((float)(v55 * v59) * v15) + (float)((float)(v56.m128_f32[0] * v59) * v16))
-            + (float)((float)(v57 * v59) * v18);
-        if ( v60 <= v19 )
-        {
-          v20 = v90;
-        }
-        else
-        {
-          v61 = *(_QWORD *)(v45 + 8);
-          v20 = *(_DWORD *)v45;
-          v90 = *(_DWORD *)v45;
-          if ( v61 )
-          {
-            v19 = v60;
-            v17 = (_QWORD *)(v45 + v61 + 8);
-          }
-          else
-          {
-            v17 = 0i64;
-            v19 = v60;
-          }
-        }
-        v41 = (unsigned int)(v41 + 1);
+        v20 = i;
       }
-      while ( (unsigned int)v41 < (unsigned __int8)v9->mNumOutgoingConnections );
+      else
+      {
+        v58 = *((_QWORD *)v44 + 1);
+        v20 = *(_DWORD *)v44;
+        i = *(_DWORD *)v44;
+        if ( v58 )
+        {
+          v19 = v57;
+          v17 = &v44[v58 + 8];
+        }
+        else
+        {
+          v17 = 0i64;
+          v19 = v57;
+        }
+      }
     }
-    v62 = FLOAT_3_4028235e38;
-    v63 = 0i64;
+    v59 = FLOAT_3_4028235e38;
+    v60 = 0i64;
     t = 0.0;
     if ( v20 )
     {
-      v64 = v20;
+      v61 = v20;
       do
       {
-        if ( *v17 )
-          v65 = (char *)v17 + *v17;
+        if ( *(_QWORD *)v17 )
+          v62 = &v17[*(_QWORD *)v17];
         else
-          v65 = 0i64;
-        v66 = *(_QWORD *)v65;
-        if ( *(_QWORD *)v65 )
-          v66 += (__int64)v65;
-        v67 = *(UFG::RoadNetworkConnection **)(v66 + 32);
-        if ( v67 )
-          v67 = (UFG::RoadNetworkConnection *)((char *)v67 + v66 + 32);
-        v68 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
-                                             v67,
-                                             *((unsigned __int16 *)v65 + 19));
-        UFG::qBezierPathMemImaged::ClosestPoint3D(v68, &resulta, v7, &t);
-        v69 = resulta.y;
-        v70 = resulta.z;
-        v71 = (__m128)LODWORD(resulta.y);
-        v71.m128_f32[0] = (float)((float)((float)(resulta.y - v7->y) * (float)(resulta.y - v7->y))
-                                + (float)((float)(resulta.x - v7->x) * (float)(resulta.x - v7->x)))
-                        + (float)((float)(resulta.z - v7->z) * (float)(resulta.z - v7->z));
-        LODWORD(v72) = (unsigned __int128)_mm_sqrt_ps(v71);
-        if ( v72 < v62 )
+          v62 = 0i64;
+        v63 = *(_QWORD *)v62;
+        if ( *(_QWORD *)v62 )
+          v63 += (__int64)v62;
+        v64 = *(UFG::RoadNetworkConnection **)(v63 + 32);
+        if ( v64 )
+          v64 = (UFG::RoadNetworkConnection *)((char *)v64 + v63 + 32);
+        v65 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                             v64,
+                                             *((unsigned __int16 *)v62 + 19));
+        UFG::qBezierPathMemImaged::ClosestPoint3D(v65, &resulta, pos, &t);
+        v66 = resulta.y;
+        v67 = resulta.z;
+        v68 = (__m128)LODWORD(resulta.y);
+        v68.m128_f32[0] = (float)((float)((float)(resulta.y - pos->y) * (float)(resulta.y - pos->y))
+                                + (float)((float)(resulta.x - pos->x) * (float)(resulta.x - pos->x)))
+                        + (float)((float)(resulta.z - pos->z) * (float)(resulta.z - pos->z));
+        v69 = _mm_sqrt_ps(v68).m128_f32[0];
+        if ( v69 < v59 )
         {
           v6 = t;
-          v8->x = resulta.x;
-          v8->y = v69;
-          v62 = v72;
-          v63 = v65;
-          v8->z = v70;
+          result->x = resulta.x;
+          result->y = v66;
+          v59 = v69;
+          v60 = v62;
+          result->z = v67;
         }
-        ++v17;
-        --v64;
+        v17 += 8;
+        --v61;
       }
-      while ( v64 );
+      while ( v61 );
     }
-    *v94 = v63;
+    *v92 = v60;
   }
   else
   {
-    v73 = FLOAT_3_4028235e38;
-    v74 = 0i64;
-    retaddr = 0.0;
-    if ( this->mNumLanes )
+    v70 = FLOAT_3_4028235e38;
+    v71 = 0i64;
+    for ( LODWORD(retaddr) = 0; (unsigned int)v71 < (unsigned __int8)this->mNumLanes; v71 = (unsigned int)(v71 + 1) )
     {
-      do
+      v72 = this->mLane.mOffset;
+      if ( v72 )
+        v73 = (char *)&this->mLane + v72;
+      else
+        v73 = 0i64;
+      v74 = *(_QWORD *)&v73[8 * v71];
+      if ( v74 )
+        v75 = &v73[8 * v71 + v74];
+      else
+        v75 = 0i64;
+      v76 = *(_QWORD *)v75;
+      if ( *(_QWORD *)v75 )
+        v76 += (__int64)v75;
+      v77 = *(UFG::RoadNetworkConnection **)(v76 + 32);
+      if ( v77 )
+        v77 = (UFG::RoadNetworkConnection *)((char *)v77 + v76 + 32);
+      v78 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                           v77,
+                                           *((unsigned __int16 *)v75 + 19));
+      UFG::qBezierPathMemImaged::ClosestPoint3D(v78, &resulta, pos, (float *)&retaddr);
+      v79 = resulta.y;
+      v80 = resulta.z;
+      v81 = (__m128)LODWORD(resulta.y);
+      v81.m128_f32[0] = (float)((float)((float)(resulta.y - pos->y) * (float)(resulta.y - pos->y))
+                              + (float)((float)(resulta.x - pos->x) * (float)(resulta.x - pos->x)))
+                      + (float)((float)(resulta.z - pos->z) * (float)(resulta.z - pos->z));
+      v82 = _mm_sqrt_ps(v81).m128_f32[0];
+      if ( v82 < v70 )
       {
-        v75 = v9->mLane.mOffset;
-        if ( v75 )
-          v76 = (signed __int64)&v9->mLane + v75;
-        else
-          v76 = 0i64;
-        v77 = *(_QWORD *)(v76 + 8 * v74);
-        if ( v77 )
-          v78 = v77 + v76 + 8 * v74;
-        else
-          v78 = 0i64;
-        v79 = *(_QWORD *)v78;
-        if ( *(_QWORD *)v78 )
-          v79 += v78;
-        v80 = *(UFG::RoadNetworkConnection **)(v79 + 32);
-        if ( v80 )
-          v80 = (UFG::RoadNetworkConnection *)((char *)v80 + v79 + 32);
-        v81 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
-                                             v80,
-                                             *(unsigned __int16 *)(v78 + 38));
-        UFG::qBezierPathMemImaged::ClosestPoint3D(v81, &resulta, v7, &retaddr);
-        v82 = resulta.y;
-        v83 = resulta.z;
-        v84 = (__m128)LODWORD(resulta.y);
-        v84.m128_f32[0] = (float)((float)((float)(resulta.y - v7->y) * (float)(resulta.y - v7->y))
-                                + (float)((float)(resulta.x - v7->x) * (float)(resulta.x - v7->x)))
-                        + (float)((float)(resulta.z - v7->z) * (float)(resulta.z - v7->z));
-        LODWORD(v85) = (unsigned __int128)_mm_sqrt_ps(v84);
-        if ( v85 < v73 )
-        {
-          v6 = retaddr;
-          v8->x = resulta.x;
-          v8->y = v82;
-          v73 = v85;
-          v17 = (_QWORD *)v78;
-          v8->z = v83;
-        }
-        v74 = (unsigned int)(v74 + 1);
+        v6 = *(float *)&retaddr;
+        result->x = resulta.x;
+        result->y = v79;
+        v70 = v82;
+        v17 = v75;
+        result->z = v80;
       }
-      while ( (unsigned int)v74 < (unsigned __int8)v9->mNumLanes );
     }
-    *v94 = v17;
+    *v92 = v17;
   }
-  *v95 = v6;
-  return v8;
+  *v93 = v6;
+  return result;
 }
 
 // File Line: 695
 // RVA: 0xD70B0
-UFG::qVector3 *__fastcall UFG::RoadNetworkNode::GetClosestPosition(UFG::RoadNetworkNode *this, UFG::qVector3 *result, UFG::qVector3 *pos, float *nearestT)
+UFG::qVector3 *__fastcall UFG::RoadNetworkNode::GetClosestPosition(
+        UFG::RoadNetworkNode *this,
+        UFG::qVector3 *result,
+        UFG::qVector3 *pos,
+        float *nearestT)
 {
-  float *v4; // rdi
-  UFG::qVector3 *v5; // rbx
   UFG::qVector3 *v6; // rax
-  float v7; // [rsp+48h] [rbp+10h]
-  UFG::RoadNetworkLane *nearestLane; // [rsp+58h] [rbp+20h]
+  float v7; // [rsp+48h] [rbp+10h] BYREF
+  UFG::RoadNetworkLane *nearestLane; // [rsp+58h] [rbp+20h] BYREF
 
-  v4 = nearestT;
-  v5 = result;
   v7 = 0.0;
   UFG::RoadNetworkNode::GetNearestPos(this, result, pos, &nearestLane, &v7);
-  v6 = v5;
-  if ( v4 )
-    *v4 = v7;
+  v6 = result;
+  if ( nearestT )
+    *nearestT = v7;
   return v6;
 }
 
@@ -893,9 +842,9 @@ UFG::qVector3 *__fastcall UFG::RoadNetworkNode::GetClosestPosition(UFG::RoadNetw
 // RVA: 0xD69B0
 UFG::RoadNetworkLane *__fastcall UFG::RoadNetworkNode::GetClosestLane(UFG::RoadNetworkNode *this, UFG::qVector3 *pos)
 {
-  UFG::qVector3 result; // [rsp+30h] [rbp-18h]
-  float nearestT; // [rsp+60h] [rbp+18h]
-  UFG::RoadNetworkLane *nearestLane; // [rsp+68h] [rbp+20h]
+  UFG::qVector3 result; // [rsp+30h] [rbp-18h] BYREF
+  float nearestT; // [rsp+60h] [rbp+18h] BYREF
+  UFG::RoadNetworkLane *nearestLane; // [rsp+68h] [rbp+20h] BYREF
 
   nearestLane = 0i64;
   UFG::RoadNetworkNode::GetNearestPos(this, &result, pos, &nearestLane, &nearestT);
@@ -904,50 +853,45 @@ UFG::RoadNetworkLane *__fastcall UFG::RoadNetworkNode::GetClosestLane(UFG::RoadN
 
 // File Line: 713
 // RVA: 0xD81D0
-float __fastcall UFG::RoadNetworkNode::GetClosestT(UFG::RoadNetworkNode *this, unsigned int laneIndex, UFG::qVector3 *position)
+float __fastcall UFG::RoadNetworkNode::GetClosestT(
+        UFG::RoadNetworkNode *this,
+        unsigned int laneIndex,
+        UFG::qVector3 *position)
 {
-  __int64 v3; // r9
-  UFG::RoadNetworkNode *v4; // rax
+  __int64 mOffset; // r9
   UFG::RoadNetworkConnection *v5; // rcx
-  UFG::qVector3 *v6; // rbx
-  signed __int64 v7; // r9
-  __int64 v8; // rax
-  signed __int64 v9; // rdx
-  __int64 v10; // rax
-  signed __int64 v11; // rax
-  signed __int64 v12; // rdx
-  unsigned int v13; // er8
-  __int64 v14; // rax
-  UFG::qBezierPathMemImaged *v15; // rax
-  UFG::qVector3 result; // [rsp+20h] [rbp-18h]
-  float t; // [rsp+48h] [rbp+10h]
+  char *v7; // r9
+  char *v8; // rdx
+  char *v9; // rax
+  char *v10; // rdx
+  unsigned int v11; // r8d
+  __int64 v12; // rax
+  UFG::qBezierPathMemImaged *Path; // rax
+  UFG::qVector3 result; // [rsp+20h] [rbp-18h] BYREF
+  float t; // [rsp+48h] [rbp+10h] BYREF
 
-  v3 = this->mLane.mOffset;
-  v4 = this;
+  mOffset = this->mLane.mOffset;
   v5 = 0i64;
-  v6 = position;
-  if ( v3 )
-    v7 = (signed __int64)&v4->mLane + v3;
+  if ( mOffset )
+    v7 = (char *)&this->mLane + mOffset;
   else
     v7 = 0i64;
-  v8 = laneIndex;
-  v9 = v7 + 8 * v8;
-  v10 = *(_QWORD *)(v7 + 8 * v8);
-  if ( v10 )
-    v11 = v9 + v10;
+  v8 = &v7[8 * laneIndex];
+  if ( *(_QWORD *)v8 )
+    v9 = &v8[*(_QWORD *)v8];
   else
-    v11 = 0i64;
+    v9 = 0i64;
   t = 0.0;
-  if ( *(_QWORD *)v11 )
-    v12 = v11 + *(_QWORD *)v11;
+  if ( *(_QWORD *)v9 )
+    v10 = &v9[*(_QWORD *)v9];
   else
-    v12 = 0i64;
-  v13 = *(unsigned __int16 *)(v11 + 38);
-  v14 = *(_QWORD *)(v12 + 32);
-  if ( v14 )
-    v5 = (UFG::RoadNetworkConnection *)(v14 + v12 + 32);
-  v15 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v5, v13);
-  UFG::qBezierPathMemImaged::ClosestPoint3D(v15, &result, v6, &t);
+    v10 = 0i64;
+  v11 = *((unsigned __int16 *)v9 + 19);
+  v12 = *((_QWORD *)v10 + 4);
+  if ( v12 )
+    v5 = (UFG::RoadNetworkConnection *)&v10[v12 + 32];
+  Path = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v5, v11);
+  UFG::qBezierPathMemImaged::ClosestPoint3D(Path, &result, position, &t);
   return t;
 }
 
@@ -955,109 +899,108 @@ float __fastcall UFG::RoadNetworkNode::GetClosestT(UFG::RoadNetworkNode *this, u
 // RVA: 0xD94E0
 UFG::RoadNetworkLane *__fastcall UFG::RoadNetworkNode::GetLane(UFG::RoadNetworkNode *this, const unsigned int index)
 {
-  __int64 v2; // rax
+  __int64 mOffset; // rax
   char *v3; // rcx
-  __int64 v4; // rax
-  signed __int64 v5; // rdx
+  UFG::RoadNetworkLane **v4; // rdx
   UFG::RoadNetworkLane *result; // rax
 
-  v2 = this->mLane.mOffset;
-  if ( v2 )
-    v3 = (char *)&this->mLane + v2;
+  mOffset = this->mLane.mOffset;
+  if ( mOffset )
+    v3 = (char *)&this->mLane + mOffset;
   else
     v3 = 0i64;
-  v4 = index;
-  v5 = (signed __int64)&v3[8 * v4];
-  result = *(UFG::RoadNetworkLane **)&v3[8 * v4];
-  if ( result )
-    result = (UFG::RoadNetworkLane *)((char *)result + v5);
+  v4 = (UFG::RoadNetworkLane **)&v3[8 * index];
+  result = *v4;
+  if ( *v4 )
+    return (UFG::RoadNetworkLane *)((char *)result + (_QWORD)v4);
   return result;
 }
 
 // File Line: 762
 // RVA: 0xDB470
-UFG::qVector3 *__fastcall UFG::RoadNetworkNode::GetPos(UFG::RoadNetworkNode *this, UFG::qVector3 *result, unsigned int laneIndex, float laneT)
+UFG::qVector3 *__fastcall UFG::RoadNetworkNode::GetPos(
+        UFG::RoadNetworkNode *this,
+        UFG::qVector3 *result,
+        unsigned int laneIndex,
+        float laneT)
 {
-  UFG::qVector3 *v4; // rbx
-  __int64 v5; // rdx
-  UFG::RoadNetworkNode *v6; // rax
+  __int64 mOffset; // rdx
   UFG::RoadNetworkLane *v7; // rcx
-  signed __int64 v8; // r9
-  __int64 v9; // rax
+  char *v8; // r9
+  char *v9; // rdx
 
-  v4 = result;
-  v5 = this->mLane.mOffset;
-  v6 = this;
+  mOffset = this->mLane.mOffset;
   v7 = 0i64;
-  if ( v5 )
-    v8 = (signed __int64)&v6->mLane + v5;
+  if ( mOffset )
+    v8 = (char *)&this->mLane + mOffset;
   else
     v8 = 0i64;
-  v9 = *(_QWORD *)(v8 + 8i64 * laneIndex);
-  if ( v9 )
-    v7 = (UFG::RoadNetworkLane *)(v9 + v8 + 8i64 * laneIndex);
-  UFG::RoadNetworkLane::GetPos(v7, v4, laneT);
-  return v4;
+  v9 = &v8[8 * laneIndex];
+  if ( *(_QWORD *)v9 )
+    v7 = (UFG::RoadNetworkLane *)&v9[*(_QWORD *)v9];
+  UFG::RoadNetworkLane::GetPos(v7, result, laneT);
+  return result;
 }
 
 // File Line: 774
 // RVA: 0xDC020
-UFG::qVector3 *__fastcall UFG::RoadNetworkNode::GetTangent(UFG::RoadNetworkNode *this, UFG::qVector3 *result, unsigned int laneIndex, float laneT)
+UFG::qVector3 *__fastcall UFG::RoadNetworkNode::GetTangent(
+        UFG::RoadNetworkNode *this,
+        UFG::qVector3 *result,
+        unsigned int laneIndex,
+        float laneT)
 {
-  __int64 v4; // rax
+  __int64 mOffset; // rax
   UFG::RoadNetworkConnection *v5; // r9
-  UFG::qVector3 *v6; // rdi
   char *v7; // r10
-  __int64 v8; // rax
-  signed __int64 v9; // rax
+  char *v8; // rdx
+  char *v9; // rax
   unsigned int v10; // edx
   __int64 v11; // rax
-  UFG::qBezierPathMemImaged *v12; // rax
-  UFG::RoadNetworkConnection *v13; // rbx
-  unsigned int v14; // eax
-  UFG::qBezierSplineMemImaged *v15; // rax
-  float splineT; // [rsp+50h] [rbp+18h]
+  UFG::qBezierPathMemImaged *Path; // rbx
+  unsigned int SplineParameters; // eax
+  UFG::qBezierSplineMemImaged *v14; // rax
+  float splineT; // [rsp+50h] [rbp+18h] BYREF
 
-  v4 = this->mLane.mOffset;
+  mOffset = this->mLane.mOffset;
   v5 = 0i64;
-  v6 = result;
-  if ( v4 )
-    v7 = (char *)&this->mLane + v4;
+  if ( mOffset )
+    v7 = (char *)&this->mLane + mOffset;
   else
     v7 = 0i64;
-  v8 = *(_QWORD *)&v7[8 * laneIndex];
-  if ( v8 )
-    v9 = (signed __int64)&v7[8 * laneIndex + v8];
+  v8 = &v7[8 * laneIndex];
+  if ( *(_QWORD *)v8 )
+    v9 = &v8[*(_QWORD *)v8];
   else
     v9 = 0i64;
-  v10 = *(unsigned __int16 *)(v9 + 38);
+  v10 = *((unsigned __int16 *)v9 + 19);
   v11 = this->mPathCollection.mOffset;
   if ( v11 )
     v5 = (UFG::RoadNetworkConnection *)((char *)&this->mPathCollection + v11);
-  v12 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v5, v10);
-  v13 = (UFG::RoadNetworkConnection *)v12;
+  Path = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v5, v10);
   splineT = 0.0;
-  v14 = UFG::qBezierPathMemImaged::GetSplineParameters(v12, laneT, &splineT);
-  v15 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v13, v14);
-  UFG::qBezierSplineMemImaged::GetTangent(v15, v6, splineT);
-  return v6;
+  SplineParameters = UFG::qBezierPathMemImaged::GetSplineParameters(Path, laneT, &splineT);
+  v14 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                         (UFG::RoadNetworkConnection *)Path,
+                                         SplineParameters);
+  UFG::qBezierSplineMemImaged::GetTangent(v14, result, splineT);
+  return result;
 }
 
 // File Line: 786
 // RVA: 0xDC930
 void __fastcall UFG::RoadNetworkNode::Init(UFG::RoadNetworkNode *this)
 {
-  UFG::RoadNetworkNode *v1; // rsi
-  UFG::qList<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification,1,0> *v2; // r15
+  UFG::qList<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification,1,0> *p_mModifications; // r15
   char *v3; // r14
-  unsigned int v4; // edi
+  unsigned int mNumLanes; // edi
   unsigned int v5; // ebx
   unsigned __int64 v6; // rax
   bool v7; // zf
-  unsigned int v8; // ecx
-  __int64 v9; // rax
-  signed __int64 v10; // rdx
-  _QWORD *v11; // rax
+  unsigned int i; // ecx
+  __int64 mOffset; // rax
+  char *v10; // rdx
+  char *v11; // rax
   char *v12; // rax
   char *v13; // rax
   char *v14; // rbx
@@ -1065,40 +1008,32 @@ void __fastcall UFG::RoadNetworkNode::Init(UFG::RoadNetworkNode *this)
   __int64 v16; // rbp
   unsigned __int64 v17; // rax
   __int64 v18; // rdx
-  UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *v19; // rax
-  unsigned int v20; // ecx
+  UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *mPrev; // rax
+  unsigned int j; // ecx
   __int64 v21; // rax
-  signed __int64 v22; // rdx
-  _QWORD *v23; // r8
+  char *v22; // rdx
+  char *v23; // r8
   char *v24; // rax
   _QWORD *v25; // rax
 
-  v1 = this;
-  v2 = &this->mModifications;
-  v2->mNode.mPrev = &v2->mNode;
-  v2->mNode.mNext = &v2->mNode;
+  p_mModifications = &this->mModifications;
+  this->mModifications.mNode.mPrev = &this->mModifications.mNode;
+  this->mModifications.mNode.mNext = &this->mModifications.mNode;
   v3 = 0i64;
-  v4 = (unsigned __int8)this->mNumLanes;
-  if ( (signed int)v4 <= 0 )
-  {
-    v7 = v4 == 0;
-    v4 = 0;
-    if ( !v7 )
-      v4 = 0;
-  }
-  else
+  mNumLanes = (unsigned __int8)this->mNumLanes;
+  if ( this->mNumLanes )
   {
     v5 = 1;
-    if ( v4 <= 1 )
-      goto LABEL_47;
+    if ( mNumLanes <= 1 )
+      goto LABEL_5;
     do
       v5 *= 2;
-    while ( v5 < v4 );
+    while ( v5 < mNumLanes );
     if ( v5 <= 4 )
-LABEL_47:
+LABEL_5:
       v5 = 4;
-    if ( v5 - v4 > 0x10000 )
-      v5 = v4 + 0x10000;
+    if ( v5 - mNumLanes > 0x10000 )
+      v5 = mNumLanes + 0x10000;
     if ( v5 )
     {
       v6 = 4i64 * v5;
@@ -1107,24 +1042,25 @@ LABEL_47:
       v3 = UFG::qMalloc(v6, "RoadNetworkNode", 0i64);
     }
   }
-  v8 = 0;
-  if ( v1->mNumLanes > 0u )
+  else
   {
-    do
-    {
-      v9 = v1->mLane.mOffset;
-      if ( v9 )
-        v10 = (signed __int64)&v1->mLane + v9;
-      else
-        v10 = 0i64;
-      v11 = (_QWORD *)(v10 + 8i64 * v8);
-      if ( *v11 )
-        v12 = (char *)v11 + *v11;
-      else
-        v12 = 0i64;
-      *(_DWORD *)&v3[4 * v8++] = (unsigned __int8)v12[44];
-    }
-    while ( v8 < (unsigned __int8)v1->mNumLanes );
+    v7 = mNumLanes == 0;
+    mNumLanes = 0;
+    if ( !v7 )
+      mNumLanes = 0;
+  }
+  for ( i = 0; i < (unsigned __int8)this->mNumLanes; *(_DWORD *)&v3[4 * i++] = (unsigned __int8)v12[44] )
+  {
+    mOffset = this->mLane.mOffset;
+    if ( mOffset )
+      v10 = (char *)&this->mLane + mOffset;
+    else
+      v10 = 0i64;
+    v11 = &v10[8 * i];
+    if ( *(_QWORD *)v11 )
+      v12 = &v11[*(_QWORD *)v11];
+    else
+      v12 = 0i64;
   }
   v13 = UFG::qMalloc(0x28ui64, "RoadNetworkNode.RoadNetworkNodeModification", 0i64);
   v14 = v13;
@@ -1134,32 +1070,29 @@ LABEL_47:
     *((_QWORD *)v13 + 1) = v13;
     *((_QWORD *)v13 + 3) = 0i64;
     *((_QWORD *)v13 + 2) = 0i64;
-    *((_QWORD *)v13 + 4) = v1;
+    *((_QWORD *)v13 + 4) = this;
     v15 = (void *)*((_QWORD *)v13 + 3);
     if ( v15 )
       operator delete[](v15);
     *((_QWORD *)v14 + 3) = 0i64;
     *((_QWORD *)v14 + 2) = 0i64;
-    if ( v4 )
+    if ( mNumLanes )
     {
-      *((_DWORD *)v14 + 4) = v4;
-      v16 = v4;
-      v17 = 4i64 * v4;
-      if ( !is_mul_ok(v4, 4ui64) )
+      *((_DWORD *)v14 + 4) = mNumLanes;
+      v16 = mNumLanes;
+      v17 = 4i64 * mNumLanes;
+      if ( !is_mul_ok(mNumLanes, 4ui64) )
         v17 = -1i64;
       *((_QWORD *)v14 + 3) = UFG::qMalloc(v17, "qArray.Clone", 0i64);
-      *((_DWORD *)v14 + 5) = v4;
-      if ( v4 )
+      *((_DWORD *)v14 + 5) = mNumLanes;
+      v18 = 0i64;
+      do
       {
-        v18 = 0i64;
-        do
-        {
-          *(_DWORD *)(v18 + *((_QWORD *)v14 + 3)) = *(_DWORD *)&v3[v18];
-          v18 += 4i64;
-          --v16;
-        }
-        while ( v16 );
+        *(_DWORD *)(v18 + *((_QWORD *)v14 + 3)) = *(_DWORD *)&v3[v18];
+        v18 += 4i64;
+        --v16;
       }
+      while ( v16 );
     }
     else
     {
@@ -1171,32 +1104,26 @@ LABEL_47:
   {
     v14 = 0i64;
   }
-  v19 = v2->mNode.mPrev;
-  v19->mNext = (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)v14;
-  *(_QWORD *)v14 = v19;
-  *((_QWORD *)v14 + 1) = v2;
-  v2->mNode.mPrev = (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)v14;
-  v20 = 0;
-  if ( v1->mNumLanes > 0u )
+  mPrev = p_mModifications->mNode.mPrev;
+  mPrev->mNext = (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)v14;
+  *(_QWORD *)v14 = mPrev;
+  *((_QWORD *)v14 + 1) = p_mModifications;
+  p_mModifications->mNode.mPrev = (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)v14;
+  for ( j = 0; j < (unsigned __int8)this->mNumLanes; ++j )
   {
-    do
-    {
-      v21 = v1->mLane.mOffset;
-      if ( v21 )
-        v22 = (signed __int64)&v1->mLane + v21;
-      else
-        v22 = 0i64;
-      v23 = (_QWORD *)(v22 + 8i64 * v20);
-      if ( *v23 )
-        v24 = (char *)v23 + *v23;
-      else
-        v24 = 0i64;
-      v25 = v24 + 112;
-      *v25 = v25;
-      v25[1] = v25;
-      ++v20;
-    }
-    while ( v20 < (unsigned __int8)v1->mNumLanes );
+    v21 = this->mLane.mOffset;
+    if ( v21 )
+      v22 = (char *)&this->mLane + v21;
+    else
+      v22 = 0i64;
+    v23 = &v22[8 * j];
+    if ( *(_QWORD *)v23 )
+      v24 = &v23[*(_QWORD *)v23];
+    else
+      v24 = 0i64;
+    v25 = v24 + 112;
+    *v25 = v25;
+    v25[1] = v25;
   }
   if ( v3 )
     operator delete[](v3);
@@ -1206,7 +1133,7 @@ LABEL_47:
 // RVA: 0xDEF20
 char __fastcall UFG::RoadNetworkNode::IsWater(UFG::RoadNetworkNode *this)
 {
-  UFG::qPropertySet *v2; // rax
+  UFG::qPropertySet *RoadPropertySet; // rax
   unsigned int v3; // ebx
   unsigned int *v4; // rax
 
@@ -1214,11 +1141,11 @@ char __fastcall UFG::RoadNetworkNode::IsWater(UFG::RoadNetworkNode *this)
     return UFG::RoadNetworkIntersection::IsWater((UFG::RoadNetworkIntersection *)this);
   if ( *(_QWORD *)&this[1].mDataHash )
     return (unsigned int)(*(_DWORD *)&this[1].mNumLanes - 2) <= 1;
-  v2 = UFG::RoadNetworkSegment::GetRoadPropertySet((UFG::RoadNetworkSegment *)this);
+  RoadPropertySet = UFG::RoadNetworkSegment::GetRoadPropertySet((UFG::RoadNetworkSegment *)this);
   v3 = 0;
-  if ( v2 )
+  if ( RoadPropertySet )
   {
-    v4 = UFG::qPropertySet::Get<unsigned long>(v2, (UFG::qSymbol *)&qSymbol_RoadNetworkType.mUID, DEPTH_RECURSE);
+    v4 = UFG::qPropertySet::Get<unsigned long>(RoadPropertySet, &qSymbol_RoadNetworkType, DEPTH_RECURSE);
     if ( v4 )
       v3 = *v4;
   }
@@ -1229,41 +1156,38 @@ char __fastcall UFG::RoadNetworkNode::IsWater(UFG::RoadNetworkNode *this)
 // RVA: 0xDE3D0
 char __fastcall UFG::RoadNetworkNode::IsConnectedToNode(UFG::RoadNetworkNode *this, UFG::RoadNetworkNode *roadNode)
 {
-  unsigned int v2; // er11
-  unsigned int v3; // er8
-  __int64 v4; // r10
-  UFG::qOffset64<UFG::qOffset64<UFG::RoadNetworkGate *> *> *v5; // rbx
-  __int64 v6; // r9
+  unsigned int mNumGates; // r11d
+  int v3; // r8d
+  __int64 mOffset; // r10
+  UFG::qOffset64<UFG::qOffset64<UFG::RoadNetworkGate *> *> *p_mGates; // rbx
+  __int64 i; // r9
   char *v7; // rax
   char *v8; // rcx
   __int64 v9; // rax
   __int64 v10; // rcx
   UFG::RoadNetworkNode *v11; // rax
 
-  v2 = (unsigned __int8)this->mNumGates;
+  mNumGates = (unsigned __int8)this->mNumGates;
   v3 = 0;
   if ( !this->mNumGates )
     return 0;
-  v4 = this->mGates.mOffset;
-  v5 = &this->mGates;
-  v6 = 0i64;
-  while ( 1 )
+  mOffset = this->mGates.mOffset;
+  p_mGates = &this->mGates;
+  for ( i = 0i64; ; i += 8i64 )
   {
-    if ( v4 )
-      v7 = (char *)v5 + v4;
+    if ( mOffset )
+      v7 = (char *)p_mGates + mOffset;
     else
       v7 = 0i64;
-    v8 = &v7[v6];
-    v9 = *(_QWORD *)&v7[v6];
+    v8 = &v7[i];
+    v9 = *(_QWORD *)&v7[i];
     if ( v9 )
       v9 += (__int64)v8;
     v10 = *(_QWORD *)(v9 + 8);
-    v11 = (UFG::RoadNetworkNode *)(v10 ? v10 + v9 + 8 : 0i64);
+    v11 = v10 ? (UFG::RoadNetworkNode *)(v10 + v9 + 8) : 0i64;
     if ( v11 == roadNode )
       break;
-    ++v3;
-    v6 += 8i64;
-    if ( v3 >= v2 )
+    if ( ++v3 >= mNumGates )
       return 0;
   }
   return 1;
@@ -1273,36 +1197,35 @@ char __fastcall UFG::RoadNetworkNode::IsConnectedToNode(UFG::RoadNetworkNode *th
 // RVA: 0xDB7A0
 __int64 __fastcall UFG::RoadNetworkIntersection::GetRoadNetworkType(UFG::RoadNetworkIntersection *this)
 {
-  unsigned int v1; // er10
+  unsigned int mNumGates; // r10d
   unsigned int v2; // ebx
-  unsigned int v3; // edx
-  __int64 v4; // r9
-  UFG::qOffset64<UFG::qOffset64<UFG::RoadNetworkGate *> *> *v5; // r11
-  __int64 v6; // r8
+  int v3; // edx
+  __int64 mOffset; // r9
+  UFG::qOffset64<UFG::qOffset64<UFG::RoadNetworkGate *> *> *p_mGates; // r11
+  __int64 i; // r8
   char *v7; // rax
   char *v8; // rcx
   __int64 v9; // rax
   char *v10; // rax
   __int64 v11; // rcx
   UFG::RoadNetworkSegment *v12; // rcx
-  UFG::qPropertySet *v14; // rax
+  UFG::qPropertySet *RoadPropertySet; // rax
   unsigned int *v15; // rax
 
-  v1 = (unsigned __int8)this->mNumGates;
+  mNumGates = (unsigned __int8)this->mNumGates;
   v2 = 0;
   v3 = 0;
   if ( this->mNumGates )
   {
-    v4 = this->mGates.mOffset;
-    v5 = &this->mGates;
-    v6 = 0i64;
-    while ( 1 )
+    mOffset = this->mGates.mOffset;
+    p_mGates = &this->mGates;
+    for ( i = 0i64; ; i += 8i64 )
     {
-      v7 = (char *)v5 + v4;
-      if ( !v4 )
+      v7 = (char *)p_mGates + mOffset;
+      if ( !mOffset )
         v7 = 0i64;
-      v8 = &v7[v6];
-      v9 = *(_QWORD *)&v7[v6];
+      v8 = &v7[i];
+      v9 = *(_QWORD *)&v7[i];
       v10 = v9 ? &v8[v9] : 0i64;
       v11 = *((_QWORD *)v10 + 1);
       if ( v11 )
@@ -1311,19 +1234,17 @@ __int64 __fastcall UFG::RoadNetworkIntersection::GetRoadNetworkType(UFG::RoadNet
         if ( v12 )
           break;
       }
-      ++v3;
-      v6 += 8i64;
-      if ( v3 >= v1 )
+      if ( ++v3 >= mNumGates )
         return 0i64;
     }
     if ( v12->mpPropertySetCached )
       return v12->mRoadNetworkType.mValue;
-    v14 = UFG::RoadNetworkSegment::GetRoadPropertySet(v12);
-    if ( v14 )
+    RoadPropertySet = UFG::RoadNetworkSegment::GetRoadPropertySet(v12);
+    if ( RoadPropertySet )
     {
-      v15 = UFG::qPropertySet::Get<unsigned long>(v14, (UFG::qSymbol *)&qSymbol_RoadNetworkType.mUID, DEPTH_RECURSE);
+      v15 = UFG::qPropertySet::Get<unsigned long>(RoadPropertySet, &qSymbol_RoadNetworkType, DEPTH_RECURSE);
       if ( v15 )
-        v2 = *v15;
+        return *v15;
     }
   }
   return v2;
@@ -1331,46 +1252,42 @@ __int64 __fastcall UFG::RoadNetworkIntersection::GetRoadNetworkType(UFG::RoadNet
 
 // File Line: 989
 // RVA: 0xD1740
-UFG::RoadNetworkNodeModification *__fastcall UFG::RoadNetworkNode::AddChangeLaneFlagsModification(UFG::RoadNetworkNode *this, UFG::qArray<unsigned long,0> *laneFlags)
+UFG::RoadNetworkNodeModification *__fastcall UFG::RoadNetworkNode::AddChangeLaneFlagsModification(
+        UFG::RoadNetworkNode *this,
+        UFG::qArray<unsigned long,0> *laneFlags)
 {
-  UFG::qArray<unsigned long,0> *v2; // rbp
-  UFG::RoadNetworkNode *v3; // rsi
   char *v4; // rax
   char *v5; // rbx
-  _QWORD *v6; // rdx
-  UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *v7; // rax
+  UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *mPrev; // rax
   UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *i; // rax
-  __int64 v9; // r8
-  __int64 v10; // rax
-  signed __int64 v11; // rcx
-  _QWORD *v12; // rax
-  char *v13; // rax
+  __int64 j; // r8
+  __int64 mOffset; // rax
+  char *v10; // rcx
+  char *v11; // rax
+  char *v12; // rax
 
-  v2 = laneFlags;
-  v3 = this;
   v4 = UFG::qMalloc(0x28ui64, "RoadNetworkNode.RoadNetworkNodeModification", 0i64);
   v5 = v4;
   if ( v4 )
   {
     *(_QWORD *)v4 = v4;
     *((_QWORD *)v4 + 1) = v4;
-    v6 = v4 + 16;
-    v6[1] = 0i64;
-    *v6 = 0i64;
-    *((_QWORD *)v4 + 4) = v3;
-    UFG::qArray<enum  DNA::PropertyState::Enum,0>::Clone(v2, (UFG::qArray<unsigned long,0> *)v4 + 1);
+    *((_QWORD *)v4 + 3) = 0i64;
+    *((_QWORD *)v4 + 2) = 0i64;
+    *((_QWORD *)v4 + 4) = this;
+    UFG::qArray<enum DNA::PropertyState::Enum,0>::Clone(laneFlags, (UFG::qArray<unsigned long,0> *)v4 + 1);
   }
   else
   {
     v5 = 0i64;
   }
-  v7 = v3->mModifications.mNode.mPrev;
-  v7->mNext = (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)v5;
-  *(_QWORD *)v5 = v7;
-  *((_QWORD *)v5 + 1) = (char *)v3 + 80;
-  v3->mModifications.mNode.mPrev = (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)v5;
-  for ( i = v3->mModifications.mNode.mNext;
-        i != (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)&v3->mModifications;
+  mPrev = this->mModifications.mNode.mPrev;
+  mPrev->mNext = (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)v5;
+  *(_QWORD *)v5 = mPrev;
+  *((_QWORD *)v5 + 1) = &this->mModifications;
+  this->mModifications.mNode.mPrev = (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)v5;
+  for ( i = this->mModifications.mNode.mNext;
+        i != (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)&this->mModifications;
         i = i->mNext )
   {
     if ( i == (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)v5 )
@@ -1378,25 +1295,19 @@ UFG::RoadNetworkNodeModification *__fastcall UFG::RoadNetworkNode::AddChangeLane
   }
   if ( *((_DWORD *)v5 + 4) )
   {
-    v9 = 0i64;
-    if ( v3->mNumLanes )
+    for ( j = 0i64; (unsigned int)j < (unsigned __int8)this->mNumLanes; j = (unsigned int)(j + 1) )
     {
-      do
-      {
-        v10 = v3->mLane.mOffset;
-        if ( v10 )
-          v11 = (signed __int64)&v3->mLane + v10;
-        else
-          v11 = 0i64;
-        v12 = (_QWORD *)(v11 + 8 * v9);
-        if ( *v12 )
-          v13 = (char *)v12 + *v12;
-        else
-          v13 = 0i64;
-        v13[44] = *(_BYTE *)(*((_QWORD *)v5 + 3) + 4 * v9);
-        v9 = (unsigned int)(v9 + 1);
-      }
-      while ( (unsigned int)v9 < (unsigned __int8)v3->mNumLanes );
+      mOffset = this->mLane.mOffset;
+      if ( mOffset )
+        v10 = (char *)&this->mLane + mOffset;
+      else
+        v10 = 0i64;
+      v11 = &v10[8 * j];
+      if ( *(_QWORD *)v11 )
+        v12 = &v11[*(_QWORD *)v11];
+      else
+        v12 = 0i64;
+      v12[44] = *(_BYTE *)(*((_QWORD *)v5 + 3) + 4 * j);
     }
   }
   return (UFG::RoadNetworkNodeModification *)v5;
@@ -1404,17 +1315,19 @@ UFG::RoadNetworkNodeModification *__fastcall UFG::RoadNetworkNode::AddChangeLane
 
 // File Line: 999
 // RVA: 0xE0000
-void __fastcall UFG::RoadNetworkNode::RemoveModification(UFG::RoadNetworkNode *this, UFG::RoadNetworkNodeModification *modification)
+void __fastcall UFG::RoadNetworkNode::RemoveModification(
+        UFG::RoadNetworkNode *this,
+        UFG::RoadNetworkNodeModification *modification)
 {
-  UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *v2; // r8
-  UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *v3; // rax
+  UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *mPrev; // r8
+  UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *mNext; // rax
 
-  v2 = modification->mPrev;
-  v3 = modification->mNext;
-  v2->mNext = v3;
-  v3->mPrev = v2;
-  modification->mPrev = (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)&modification->mPrev;
-  modification->mNext = (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)&modification->mPrev;
+  mPrev = modification->mPrev;
+  mNext = modification->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  modification->mPrev = modification;
+  modification->mNext = modification;
   UFG::RoadNetworkNode::ApplyAllModifications(this);
 }
 
@@ -1422,52 +1335,38 @@ void __fastcall UFG::RoadNetworkNode::RemoveModification(UFG::RoadNetworkNode *t
 // RVA: 0xD2370
 void __fastcall UFG::RoadNetworkNode::ApplyAllModifications(UFG::RoadNetworkNode *this)
 {
-  UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *v1; // r10
-  UFG::qList<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification,1,0> *v2; // rbx
-  UFG::RoadNetworkNode *v3; // r11
-  __int64 v4; // r8
-  __int64 v5; // rax
-  signed __int64 v6; // rcx
-  signed __int64 v7; // rax
-  __int64 v8; // rcx
-  signed __int64 v9; // rdx
-  char v10; // cl
+  UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *mNext; // r10
+  UFG::qList<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification,1,0> *i; // rbx
+  __int64 j; // r8
+  __int64 mOffset; // rax
+  char *v6; // rcx
+  char *v7; // rax
+  char *v8; // rdx
+  char v9; // cl
 
-  v1 = this->mModifications.mNode.mNext;
-  v2 = &this->mModifications;
-  v3 = this;
-  if ( v1 != (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)&this->mModifications )
+  mNext = this->mModifications.mNode.mNext;
+  for ( i = &this->mModifications;
+        mNext != (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)i;
+        mNext = mNext->mNext )
   {
-    do
+    if ( LODWORD(mNext[1].mPrev) )
     {
-      if ( LODWORD(v1[1].mPrev) )
+      for ( j = 0i64; (unsigned int)j < (unsigned __int8)this->mNumLanes; v8[44] = v9 )
       {
-        v4 = 0i64;
-        if ( v3->mNumLanes )
-        {
-          do
-          {
-            v5 = v3->mLane.mOffset;
-            if ( v5 )
-              v6 = (signed __int64)&v3->mLane + v5;
-            else
-              v6 = 0i64;
-            v7 = v6 + 8 * v4;
-            v8 = *(_QWORD *)(v6 + 8 * v4);
-            if ( v8 )
-              v9 = v8 + v7;
-            else
-              v9 = 0i64;
-            v10 = *((_BYTE *)&v1[1].mNext->mPrev + 4 * v4);
-            v4 = (unsigned int)(v4 + 1);
-            *(_BYTE *)(v9 + 44) = v10;
-          }
-          while ( (unsigned int)v4 < (unsigned __int8)v3->mNumLanes );
-        }
+        mOffset = this->mLane.mOffset;
+        if ( mOffset )
+          v6 = (char *)&this->mLane + mOffset;
+        else
+          v6 = 0i64;
+        v7 = &v6[8 * j];
+        if ( *(_QWORD *)v7 )
+          v8 = &v7[*(_QWORD *)v7];
+        else
+          v8 = 0i64;
+        v9 = *((_BYTE *)&mNext[1].mNext->mPrev + 4 * j);
+        j = (unsigned int)(j + 1);
       }
-      v1 = v1->mNext;
     }
-    while ( v1 != (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)v2 );
   }
 }
 
@@ -1475,58 +1374,55 @@ void __fastcall UFG::RoadNetworkNode::ApplyAllModifications(UFG::RoadNetworkNode
 // RVA: 0xD0F30
 void __fastcall UFG::RoadNetworkSegment::~RoadNetworkSegment(UFG::RoadNetworkSegment *this)
 {
-  UFG::RoadNetworkSegment *v1; // rsi
-  UFG::qList<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment,1,0> *v2; // rdi
-  UFG::RoadNetworkSubSegment *v3; // rbx
-  UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *v4; // rcx
+  UFG::qList<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment,1,0> *p_mSubSegmentCollection; // rdi
+  UFG::RoadNetworkSubSegment *mNext; // rbx
+  UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *mPrev; // rcx
   UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *v5; // rax
   UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *v6; // rcx
   UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *v7; // rax
   UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *v8; // rcx
   UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *v9; // rax
 
-  v1 = this;
-  v2 = &this->mSubSegmentCollection;
-  v3 = (UFG::RoadNetworkSubSegment *)this->mSubSegmentCollection.mNode.mNext;
-  if ( v3 != (UFG::RoadNetworkSubSegment *)&this->mSubSegmentCollection )
+  p_mSubSegmentCollection = &this->mSubSegmentCollection;
+  mNext = (UFG::RoadNetworkSubSegment *)this->mSubSegmentCollection.mNode.mNext;
+  if ( mNext != (UFG::RoadNetworkSubSegment *)&this->mSubSegmentCollection )
   {
     do
     {
-      v4 = v3->mPrev;
-      v5 = v3->mNext;
-      v4->mNext = v5;
-      v5->mPrev = v4;
-      v3->mPrev = (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *)&v3->mPrev;
-      v3->mNext = (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *)&v3->mPrev;
-      UFG::RoadNetworkSubSegment::~RoadNetworkSubSegment(v3);
-      operator delete[](v3);
-      v3 = (UFG::RoadNetworkSubSegment *)v2->mNode.mNext;
+      mPrev = mNext->mPrev;
+      v5 = mNext->mNext;
+      mPrev->mNext = v5;
+      v5->mPrev = mPrev;
+      mNext->mPrev = mNext;
+      mNext->mNext = mNext;
+      UFG::RoadNetworkSubSegment::~RoadNetworkSubSegment(mNext);
+      operator delete[](mNext);
+      mNext = (UFG::RoadNetworkSubSegment *)p_mSubSegmentCollection->mNode.mNext;
     }
-    while ( v3 != (UFG::RoadNetworkSubSegment *)v2 );
+    while ( mNext != (UFG::RoadNetworkSubSegment *)p_mSubSegmentCollection );
   }
-  UFG::qList<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification,1,0>::DeleteNodes(&v1->mModifications);
-  UFG::qList<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment,1,0>::DeleteNodes(v2);
-  v6 = v2->mNode.mPrev;
-  v7 = v2->mNode.mNext;
+  UFG::qList<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification,1,0>::DeleteNodes(&this->mModifications);
+  UFG::qList<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment,1,0>::DeleteNodes(p_mSubSegmentCollection);
+  v6 = p_mSubSegmentCollection->mNode.mPrev;
+  v7 = p_mSubSegmentCollection->mNode.mNext;
   v6->mNext = v7;
   v7->mPrev = v6;
-  v2->mNode.mPrev = &v2->mNode;
-  v2->mNode.mNext = &v2->mNode;
-  UFG::qList<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification,1,0>::DeleteNodes(&v1->mModifications);
-  v8 = v1->mModifications.mNode.mPrev;
-  v9 = v1->mModifications.mNode.mNext;
+  p_mSubSegmentCollection->mNode.mPrev = &p_mSubSegmentCollection->mNode;
+  p_mSubSegmentCollection->mNode.mNext = &p_mSubSegmentCollection->mNode;
+  UFG::qList<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification,1,0>::DeleteNodes(&this->mModifications);
+  v8 = this->mModifications.mNode.mPrev;
+  v9 = this->mModifications.mNode.mNext;
   v8->mNext = v9;
   v9->mPrev = v8;
-  v1->mModifications.mNode.mPrev = &v1->mModifications.mNode;
-  v1->mModifications.mNode.mNext = &v1->mModifications.mNode;
+  this->mModifications.mNode.mPrev = &this->mModifications.mNode;
+  this->mModifications.mNode.mNext = &this->mModifications.mNode;
 }
 
 // File Line: 1335
 // RVA: 0xE0200
 void __fastcall UFG::RoadNetworkSegment::SetBitsFromRoadPropertySet(UFG::RoadNetworkSegment *this)
 {
-  UFG::RoadNetworkSegment *v1; // rbx
-  UFG::qPropertySet *v2; // rax
+  UFG::qPropertySet *RoadPropertySet; // rax
   UFG::qPropertySet *v3; // rdi
   bool *v4; // rax
   char *v5; // rcx
@@ -1544,66 +1440,65 @@ void __fastcall UFG::RoadNetworkSegment::SetBitsFromRoadPropertySet(UFG::RoadNet
   bool *v17; // rax
   char *v18; // rcx
   unsigned int *v19; // rax
-  UFG::qPropertySet *v20; // rax
+  UFG::qPropertySet *AdditionalRoadPropertySet; // rax
   bool *v21; // rax
   char *v22; // rcx
-  char v23; // [rsp+38h] [rbp+10h]
+  char v23; // [rsp+38h] [rbp+10h] BYREF
 
-  v1 = this;
-  v2 = UFG::RoadNetworkSegment::GetRoadPropertySet(this);
-  v3 = v2;
-  if ( v2 )
+  RoadPropertySet = UFG::RoadNetworkSegment::GetRoadPropertySet(this);
+  v3 = RoadPropertySet;
+  if ( RoadPropertySet )
   {
     v23 = 0;
-    v4 = UFG::qPropertySet::Get<bool>(v2, (UFG::qSymbol *)&qSymbol_WayFinderNoPlayer.mUID, DEPTH_RECURSE);
+    v4 = UFG::qPropertySet::Get<bool>(RoadPropertySet, &qSymbol_WayFinderNoPlayer, DEPTH_RECURSE);
     v5 = &v23;
     if ( v4 )
       v5 = (char *)v4;
     v6 = (unsigned __int8)*v5;
     v23 = 0;
-    *(_DWORD *)&v1->mBits ^= (*(_DWORD *)&v1->mBits ^ v6) & 1;
-    v7 = UFG::qPropertySet::Get<bool>(v3, (UFG::qSymbol *)&qSymbol_WayFinderNoVehicle.mUID, DEPTH_RECURSE);
+    *(_DWORD *)&this->mBits ^= (*(_DWORD *)&this->mBits ^ v6) & 1;
+    v7 = UFG::qPropertySet::Get<bool>(v3, &qSymbol_WayFinderNoVehicle, DEPTH_RECURSE);
     v8 = &v23;
     if ( v7 )
       v8 = (char *)v7;
     v9 = (unsigned __int8)*v8;
     v23 = 0;
-    *(_DWORD *)&v1->mBits ^= (*(_DWORD *)&v1->mBits ^ 2 * v9) & 2;
-    v10 = UFG::qPropertySet::Get<bool>(v3, (UFG::qSymbol *)&qSymbol_GpsRestricted.mUID, DEPTH_RECURSE);
+    *(_DWORD *)&this->mBits ^= (*(_DWORD *)&this->mBits ^ (2 * v9)) & 2;
+    v10 = UFG::qPropertySet::Get<bool>(v3, &qSymbol_GpsRestricted, DEPTH_RECURSE);
     v11 = &v23;
     if ( v10 )
       v11 = (char *)v10;
     v12 = (unsigned __int8)*v11;
     v23 = 0;
-    *(_DWORD *)&v1->mBits ^= (*(_DWORD *)&v1->mBits ^ 4 * v12) & 4;
-    v13 = UFG::qPropertySet::Get<bool>(v3, (UFG::qSymbol *)&qSymbol_WayFinderGPSOnly.mUID, DEPTH_RECURSE);
+    *(_DWORD *)&this->mBits ^= (*(_DWORD *)&this->mBits ^ (4 * v12)) & 4;
+    v13 = UFG::qPropertySet::Get<bool>(v3, &qSymbol_WayFinderGPSOnly, DEPTH_RECURSE);
     v14 = &v23;
     if ( v13 )
       v14 = (char *)v13;
-    *(_DWORD *)&v1->mBits ^= (*(_DWORD *)&v1->mBits ^ 8 * (unsigned __int8)*v14) & 8;
-    v15 = UFG::qPropertySet::Get<bool>(v3, (UFG::qSymbol *)&qSymbol_RoadDriveableTraffic.mUID, DEPTH_RECURSE);
+    *(_DWORD *)&this->mBits ^= (*(_DWORD *)&this->mBits ^ (8 * (unsigned __int8)*v14)) & 8;
+    v15 = UFG::qPropertySet::Get<bool>(v3, &qSymbol_RoadDriveableTraffic, DEPTH_RECURSE);
     v16 = v15 && !*v15;
-    *(_DWORD *)&v1->mBits &= 0xFFFFFFEF;
-    *(_DWORD *)&v1->mBits |= 16 * v16;
+    *(_DWORD *)&this->mBits &= ~0x10u;
+    *(_DWORD *)&this->mBits |= 16 * v16;
     v23 = 0;
-    v17 = UFG::qPropertySet::Get<bool>(v3, (UFG::qSymbol *)&qSymbol_ExtendBeyondVisibleAreaLimit.mUID, DEPTH_RECURSE);
+    v17 = UFG::qPropertySet::Get<bool>(v3, &qSymbol_ExtendBeyondVisibleAreaLimit, DEPTH_RECURSE);
     v18 = &v23;
     if ( v17 )
       v18 = (char *)v17;
-    *(_DWORD *)&v1->mBits ^= (*(_DWORD *)&v1->mBits ^ ((unsigned __int8)*v18 << 6)) & 0x40;
-    v19 = UFG::qPropertySet::Get<unsigned long>(v3, (UFG::qSymbol *)&qSymbol_RoadNetworkType.mUID, DEPTH_RECURSE);
+    *(_DWORD *)&this->mBits ^= (*(_DWORD *)&this->mBits ^ ((unsigned __int8)*v18 << 6)) & 0x40;
+    v19 = UFG::qPropertySet::Get<unsigned long>(v3, &qSymbol_RoadNetworkType, DEPTH_RECURSE);
     if ( v19 )
-      v1->mRoadNetworkType.mValue = *v19;
+      this->mRoadNetworkType.mValue = *v19;
   }
-  v20 = UFG::RoadNetworkSegment::GetAdditionalRoadPropertySet(v1);
-  if ( v20 )
+  AdditionalRoadPropertySet = UFG::RoadNetworkSegment::GetAdditionalRoadPropertySet(this);
+  if ( AdditionalRoadPropertySet )
   {
     v23 = 0;
-    v21 = UFG::qPropertySet::Get<bool>(v20, (UFG::qSymbol *)&qSymbol_BuildVisibleRoadNetworkByGrid.mUID, DEPTH_RECURSE);
+    v21 = UFG::qPropertySet::Get<bool>(AdditionalRoadPropertySet, &qSymbol_BuildVisibleRoadNetworkByGrid, DEPTH_RECURSE);
     v22 = &v23;
     if ( v21 )
       v22 = (char *)v21;
-    *(_DWORD *)&v1->mBits ^= (*(_DWORD *)&v1->mBits ^ 32 * (unsigned __int8)*v22) & 0x20;
+    *(_DWORD *)&this->mBits ^= (*(_DWORD *)&this->mBits ^ (32 * (unsigned __int8)*v22)) & 0x20;
   }
 }
 
@@ -1615,7 +1510,7 @@ __int64 dynamic_initializer_for__gRoadSetPropertySetName__()
 
   v0 = UFG::qStringHash32("default-roadnetwork-roadset", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gRoadSetPropertySetName, v0);
-  return atexit(dynamic_atexit_destructor_for__gRoadSetPropertySetName__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gRoadSetPropertySetName__);
 }
 
 // File Line: 1370
@@ -1623,24 +1518,22 @@ __int64 dynamic_initializer_for__gRoadSetPropertySetName__()
 UFG::qPropertySet *__fastcall UFG::RoadNetworkSegment::GetRoadPropertySet(UFG::RoadNetworkSegment *this)
 {
   UFG::qPropertySet *result; // rax
-  UFG::RoadNetworkSegment *v2; // rbp
-  UFG::qPropertySet *v3; // rax
+  UFG::qPropertySet *PropertySet; // rax
   UFG::qPropertyList *v4; // rax
   UFG::qPropertyList *v5; // r14
-  unsigned int v6; // esi
+  unsigned int mNumElements; // esi
   unsigned int v7; // ebx
   UFG::qSymbol *v8; // rax
   UFG::qPropertySet *v9; // rax
   UFG::qPropertySet *v10; // rdi
 
   result = this->mpPropertySetCached;
-  v2 = this;
   if ( !result )
   {
-    v3 = UFG::PropertySetManager::GetPropertySet((UFG::qSymbol *)&gRoadSetPropertySetName.mUID);
-    v4 = UFG::qPropertySet::Get<UFG::qPropertyList>(v3, (UFG::qSymbol *)&qSymbol_RoadSet.mUID, DEPTH_RECURSE);
+    PropertySet = UFG::PropertySetManager::GetPropertySet(&gRoadSetPropertySetName);
+    v4 = UFG::qPropertySet::Get<UFG::qPropertyList>(PropertySet, &qSymbol_RoadSet, DEPTH_RECURSE);
     v5 = v4;
-    if ( v4 && (v6 = v4->mNumElements, v7 = 0, v6) )
+    if ( v4 && (mNumElements = v4->mNumElements, v7 = 0, mNumElements) )
     {
       while ( 1 )
       {
@@ -1649,23 +1542,19 @@ UFG::qPropertySet *__fastcall UFG::RoadNetworkSegment::GetRoadPropertySet(UFG::R
         v10 = v9;
         if ( v9 )
         {
-          if ( v2->mPropertyID1 == *UFG::qPropertySet::Get<unsigned long>(
-                                      v9,
-                                      (UFG::qSymbol *)&qSymbol_RoadID.mUID,
-                                      DEPTH_RECURSE) )
+          if ( this->mPropertyID1 == *UFG::qPropertySet::Get<unsigned long>(v9, &qSymbol_RoadID, DEPTH_RECURSE) )
             break;
         }
-        if ( ++v7 >= v6 )
-          goto LABEL_7;
+        if ( ++v7 >= mNumElements )
+          return 0i64;
       }
-      if ( v10->mFlags & 1 )
-        v2->mpPropertySetCached = v10;
-      result = v10;
+      if ( (v10->mFlags & 1) != 0 )
+        this->mpPropertySetCached = v10;
+      return v10;
     }
     else
     {
-LABEL_7:
-      result = 0i64;
+      return 0i64;
     }
   }
   return result;
@@ -1679,32 +1568,30 @@ __int64 dynamic_initializer_for__gRoadSetPropertySetNameAdditional__()
 
   v0 = UFG::qStringHash32("default-roadnetwork-additional-roadset", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gRoadSetPropertySetNameAdditional, v0);
-  return atexit(dynamic_atexit_destructor_for__gRoadSetPropertySetNameAdditional__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gRoadSetPropertySetNameAdditional__);
 }
 
 // File Line: 1414
 // RVA: 0xD5950
 UFG::qPropertySet *__fastcall UFG::RoadNetworkSegment::GetAdditionalRoadPropertySet(UFG::RoadNetworkSegment *this)
 {
-  UFG::RoadNetworkSegment *v1; // r14
-  UFG::qPropertySet *v2; // rax
+  UFG::qPropertySet *PropertySet; // rax
   UFG::qPropertyList *v3; // rax
   UFG::qPropertyList *v4; // rbp
-  unsigned int v5; // esi
+  unsigned int mNumElements; // esi
   unsigned int v6; // ebx
   UFG::qSymbol *v7; // rax
   UFG::qPropertySet *v8; // rax
   UFG::qPropertySet *v9; // rdi
 
-  v1 = this;
-  v2 = UFG::PropertySetManager::GetPropertySet((UFG::qSymbol *)&gRoadSetPropertySetNameAdditional.mUID);
-  v3 = UFG::qPropertySet::Get<UFG::qPropertyList>(v2, (UFG::qSymbol *)&qSymbol_RoadSet.mUID, DEPTH_RECURSE);
+  PropertySet = UFG::PropertySetManager::GetPropertySet(&gRoadSetPropertySetNameAdditional);
+  v3 = UFG::qPropertySet::Get<UFG::qPropertyList>(PropertySet, &qSymbol_RoadSet, DEPTH_RECURSE);
   v4 = v3;
   if ( !v3 )
     return 0i64;
-  v5 = v3->mNumElements;
+  mNumElements = v3->mNumElements;
   v6 = 0;
-  if ( !v5 )
+  if ( !mNumElements )
     return 0i64;
   while ( 1 )
   {
@@ -1713,13 +1600,10 @@ UFG::qPropertySet *__fastcall UFG::RoadNetworkSegment::GetAdditionalRoadProperty
     v9 = v8;
     if ( v8 )
     {
-      if ( v1->mPropertyID2 == *UFG::qPropertySet::Get<unsigned long>(
-                                  v8,
-                                  (UFG::qSymbol *)&qSymbol_RoadIDAdditional.mUID,
-                                  DEPTH_RECURSE) )
+      if ( this->mPropertyID2 == *UFG::qPropertySet::Get<unsigned long>(v8, &qSymbol_RoadIDAdditional, DEPTH_RECURSE) )
         break;
     }
-    if ( ++v6 >= v5 )
+    if ( ++v6 >= mNumElements )
       return 0i64;
   }
   return v9;
@@ -1730,21 +1614,21 @@ UFG::qPropertySet *__fastcall UFG::RoadNetworkSegment::GetAdditionalRoadProperty
 float __fastcall UFG::RoadNetworkSegment::GetRoadDensity(UFG::RoadNetworkSegment *this)
 {
   float v1; // xmm6_4
-  UFG::qPropertySet *v2; // rbx
-  float v3; // xmm7_4
+  UFG::qPropertySet *RoadPropertySet; // rbx
+  float m_SecondsSinceMidnight; // xmm7_4
   float *v4; // rax
   float v5; // xmm0_4
 
   v1 = FLOAT_0_0123;
-  v2 = UFG::RoadNetworkSegment::GetRoadPropertySet(this);
-  if ( v2 )
+  RoadPropertySet = UFG::RoadNetworkSegment::GetRoadPropertySet(this);
+  if ( RoadPropertySet )
   {
-    if ( ((v3 = UFG::TimeOfDayManager::GetInstance()->m_SecondsSinceMidnight,
+    if ( ((m_SecondsSinceMidnight = UFG::TimeOfDayManager::GetInstance()->m_SecondsSinceMidnight,
            UFG::TimeOfDayManager::GetInstance(),
-           v3 >= 75600.0)
-       || (UFG::TimeOfDayManager::GetInstance(), v3 <= 21600.0))
-      && (v4 = UFG::qPropertySet::Get<float>(v2, (UFG::qSymbol *)&qSymbol_DensityNight.mUID, DEPTH_RECURSE)) != 0i64
-      || (v4 = UFG::qPropertySet::Get<float>(v2, (UFG::qSymbol *)&qSymbol_Density.mUID, DEPTH_RECURSE)) != 0i64 )
+           m_SecondsSinceMidnight >= 75600.0)
+       || (UFG::TimeOfDayManager::GetInstance(), m_SecondsSinceMidnight <= 21600.0))
+      && (v4 = UFG::qPropertySet::Get<float>(RoadPropertySet, &qSymbol_DensityNight, DEPTH_RECURSE)) != 0i64
+      || (v4 = UFG::qPropertySet::Get<float>(RoadPropertySet, &qSymbol_Density, DEPTH_RECURSE)) != 0i64 )
     {
       v1 = *v4;
       if ( *v4 > 0.0 )
@@ -1761,19 +1645,19 @@ float __fastcall UFG::RoadNetworkSegment::GetRoadDensity(UFG::RoadNetworkSegment
 // RVA: 0xDB850
 __int64 __fastcall UFG::RoadNetworkSegment::GetRoadNetworkType(UFG::RoadNetworkSegment *this)
 {
-  UFG::qPropertySet *v2; // rax
+  UFG::qPropertySet *RoadPropertySet; // rax
   unsigned int v3; // ebx
   unsigned int *v4; // rax
 
   if ( this->mpPropertySetCached )
     return this->mRoadNetworkType.mValue;
-  v2 = UFG::RoadNetworkSegment::GetRoadPropertySet(this);
+  RoadPropertySet = UFG::RoadNetworkSegment::GetRoadPropertySet(this);
   v3 = 0;
-  if ( v2 )
+  if ( RoadPropertySet )
   {
-    v4 = UFG::qPropertySet::Get<unsigned long>(v2, (UFG::qSymbol *)&qSymbol_RoadNetworkType.mUID, DEPTH_RECURSE);
+    v4 = UFG::qPropertySet::Get<unsigned long>(RoadPropertySet, &qSymbol_RoadNetworkType, DEPTH_RECURSE);
     if ( v4 )
-      v3 = *v4;
+      return *v4;
   }
   return v3;
 }
@@ -1782,17 +1666,17 @@ __int64 __fastcall UFG::RoadNetworkSegment::GetRoadNetworkType(UFG::RoadNetworkS
 // RVA: 0xDEFA0
 bool __fastcall UFG::RoadNetworkSegment::IsWater(UFG::RoadNetworkSegment *this)
 {
-  UFG::qPropertySet *v2; // rax
+  UFG::qPropertySet *RoadPropertySet; // rax
   unsigned int v3; // ebx
   unsigned int *v4; // rax
 
   if ( this->mpPropertySetCached )
     return this->mRoadNetworkType.mValue - 2 <= 1;
-  v2 = UFG::RoadNetworkSegment::GetRoadPropertySet(this);
+  RoadPropertySet = UFG::RoadNetworkSegment::GetRoadPropertySet(this);
   v3 = 0;
-  if ( v2 )
+  if ( RoadPropertySet )
   {
-    v4 = UFG::qPropertySet::Get<unsigned long>(v2, (UFG::qSymbol *)&qSymbol_RoadNetworkType.mUID, DEPTH_RECURSE);
+    v4 = UFG::qPropertySet::Get<unsigned long>(RoadPropertySet, &qSymbol_RoadNetworkType, DEPTH_RECURSE);
     if ( v4 )
       v3 = *v4;
   }
@@ -1803,149 +1687,136 @@ bool __fastcall UFG::RoadNetworkSegment::IsWater(UFG::RoadNetworkSegment *this)
 // RVA: 0xD1CC0
 void __fastcall UFG::RoadNetworkSegment::AddParkingSpot(UFG::RoadNetworkSegment *this, UFG::ParkingSpot *spot)
 {
-  UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *v2; // r8
-  UFG::qList<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment,1,0> *v3; // rbx
-  UFG::ParkingSpot *v4; // rsi
-  UFG::RoadNetworkSegment *v5; // r11
-  __int64 v6; // r10
-  float v7; // xmm0_4
-  __int64 v8; // rdi
-  signed __int64 v9; // rax
-  signed __int64 v10; // rcx
-  __int64 v11; // rax
-  signed __int64 v12; // rdx
-  __int64 v13; // rcx
-  float v14; // xmm1_4
-  float v15; // xmm2_4
-  __int64 v16; // rax
-  signed __int64 v17; // r9
-  __int64 v18; // rax
-  __int64 v19; // rcx
-  signed __int64 v20; // rax
-  __int64 v21; // rcx
-  __int64 v22; // rax
-  bool v23; // cf
-  bool v24; // zf
-  UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *v25; // rax
-  UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot> *v26; // rcx
+  UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *mNext; // r8
+  UFG::qList<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment,1,0> *p_mSubSegmentCollection; // rbx
+  __int64 mOffset; // r10
+  float mClosestT; // xmm0_4
+  __int64 mClosestLaneIndex; // rdi
+  char *v9; // rax
+  char *v10; // rcx
+  char *v11; // rdx
+  __int64 v12; // rcx
+  float v13; // xmm1_4
+  float v14; // xmm2_4
+  __int64 v15; // rax
+  char *v16; // r9
+  __int64 v17; // rax
+  __int64 v18; // rcx
+  __int64 *v19; // rax
+  __int64 v20; // rcx
+  char *v21; // rax
+  bool v22; // cc
+  UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot> *v23; // rax
 
-  v2 = this->mSubSegmentCollection.mNode.mNext;
-  v3 = &this->mSubSegmentCollection;
-  v4 = spot;
-  v5 = this;
-  if ( v2 != (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *)&this->mSubSegmentCollection )
+  mNext = this->mSubSegmentCollection.mNode.mNext;
+  p_mSubSegmentCollection = &this->mSubSegmentCollection;
+  if ( mNext != (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *)&this->mSubSegmentCollection )
   {
-    v6 = this->mLane.mOffset;
-    v7 = spot->mClosestT;
-    v8 = spot->mClosestLaneIndex;
+    mOffset = this->mLane.mOffset;
+    mClosestT = spot->mClosestT;
+    mClosestLaneIndex = spot->mClosestLaneIndex;
     do
     {
-      if ( v6 )
-        v9 = (signed __int64)&v5->mLane + v6;
+      if ( mOffset )
+        v9 = (char *)&this->mLane + mOffset;
       else
         v9 = 0i64;
-      v10 = v9 + 8 * v8;
-      v11 = *(_QWORD *)(v9 + 8 * v8);
-      if ( v11 )
-        v12 = v11 + v10;
+      v10 = &v9[8 * mClosestLaneIndex];
+      if ( *(_QWORD *)v10 )
+        v11 = &v10[*(_QWORD *)v10];
       else
-        v12 = 0i64;
-      v13 = *(unsigned __int16 *)(v12 + 36);
-      v14 = *((float *)&v2[5].mPrev->mPrev + v13);
-      v15 = *((float *)&v2[5].mNext->mPrev + v13);
-      v16 = *(_QWORD *)(v12 + 8);
-      if ( v16 )
-        v17 = v16 + v12 + 8;
+        v11 = 0i64;
+      v12 = *((unsigned __int16 *)v11 + 18);
+      v13 = *((float *)&mNext[5].mPrev->mPrev + v12);
+      v14 = *((float *)&mNext[5].mNext->mPrev + v12);
+      v15 = *((_QWORD *)v11 + 1);
+      if ( v15 )
+        v16 = &v11[v15 + 8];
       else
-        v17 = 0i64;
-      v18 = *(_QWORD *)v12;
-      if ( *(_QWORD *)v12 )
-        v18 += v12;
-      v19 = *(_QWORD *)(v18 + 48);
-      if ( v19 )
-        v20 = v19 + v18 + 48;
+        v16 = 0i64;
+      v17 = *(_QWORD *)v11;
+      if ( *(_QWORD *)v11 )
+        v17 += (__int64)v11;
+      v18 = *(_QWORD *)(v17 + 48);
+      if ( v18 )
+        v19 = (__int64 *)(v18 + v17 + 48);
       else
-        v20 = 0i64;
-      v21 = *(_QWORD *)v20;
-      if ( *(_QWORD *)v20 )
-        v21 += v20;
-      v22 = *(_QWORD *)(v21 + 8);
+        v19 = 0i64;
+      v20 = *v19;
+      if ( *v19 )
+        v20 += (__int64)v19;
+      v21 = *(char **)(v20 + 8);
+      if ( v21 )
+        v21 += v20 + 8;
+      if ( v16 == v21 )
+      {
+        if ( mClosestT < v13 )
+          goto LABEL_27;
+        v22 = mClosestT <= v14;
+      }
+      else
+      {
+        if ( mClosestT < v14 )
+          goto LABEL_27;
+        v22 = mClosestT <= v13;
+      }
       if ( v22 )
-        v22 += v21 + 8;
-      if ( v17 == v22 )
       {
-        if ( v7 < v14 )
-          goto LABEL_27;
-        v23 = v7 < v15;
-        v24 = v7 == v15;
-      }
-      else
-      {
-        if ( v7 < v15 )
-          goto LABEL_27;
-        v23 = v7 < v14;
-        v24 = v7 == v14;
-      }
-      if ( v23 || v24 )
-      {
-        v25 = v2[6].mNext;
-        v26 = (UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot> *)&v4->mPrev;
-        v25->mNext = (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *)&v4->mPrev;
-        v26->mPrev = (UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot> *)v25;
-        v26->mNext = (UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot> *)&v2[6].mNext;
-        v2[6].mNext = (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *)&v4->mPrev;
-        ++LOWORD(v2[6].mPrev);
+        v23 = (UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot> *)mNext[6].mNext;
+        v23->mNext = &spot->UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot>;
+        spot->UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot>::mPrev = v23;
+        spot->UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot>::mNext = (UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot> *)&mNext[6].mNext;
+        mNext[6].mNext = (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *)&spot->UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot>;
+        ++LOWORD(mNext[6].mPrev);
         return;
       }
 LABEL_27:
-      v2 = v2->mNext;
+      mNext = mNext->mNext;
     }
-    while ( v2 != (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *)v3 );
+    while ( mNext != (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *)p_mSubSegmentCollection );
   }
 }
 
 // File Line: 1531
 // RVA: 0xD5CB0
-void __fastcall UFG::RoadNetworkSubSegment::GetAvailableParkingSpots(UFG::RoadNetworkSubSegment *this, UFG::qArray<UFG::ParkingSpot *,0> *availableParkingSpots)
+void __fastcall UFG::RoadNetworkSubSegment::GetAvailableParkingSpots(
+        UFG::RoadNetworkSubSegment *this,
+        UFG::qArray<UFG::ParkingSpot *,0> *availableParkingSpots)
 {
-  UFG::RoadNetworkSubSegment *v2; // rbx
-  UFG::ParkingSpot **v3; // rcx
-  UFG::qArray<UFG::ParkingSpot *,0> *v4; // rdi
-  signed __int64 v5; // r12
-  UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot> *v6; // r14
-  __int64 v7; // r15
-  unsigned int v8; // ebx
+  UFG::ParkingSpot **p; // rcx
+  UFG::RoadNetworkSubSegment *v5; // r12
+  UFG::RoadNetworkSubSegment *v6; // r14
+  __int64 size; // r15
+  unsigned int capacity; // ebx
   unsigned int v9; // esi
   unsigned int v10; // ebx
   unsigned __int64 v11; // rax
   char *v12; // rax
-  char *v13; // rbp
-  signed __int64 v14; // r9
-  signed __int64 v15; // r8
+  UFG::ParkingSpot **v13; // rbp
+  __int64 i; // r9
+  __int64 v15; // r8
   UFG::ParkingSpot **v16; // rax
 
-  v2 = this;
-  v3 = availableParkingSpots->p;
-  v4 = availableParkingSpots;
-  if ( v3 )
-    operator delete[](v3);
-  v4->p = 0i64;
-  *(_QWORD *)&v4->size = 0i64;
-  v5 = (signed __int64)&v2[-1].mPosition.z;
-  v6 = v2->mParkingSpotCollection.mNode.mNext - 12;
-  if ( v6 != (UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot> *)&v2[-1].mPosition.z )
+  p = availableParkingSpots->p;
+  if ( p )
+    operator delete[](p);
+  availableParkingSpots->p = 0i64;
+  *(_QWORD *)&availableParkingSpots->size = 0i64;
+  v5 = (UFG::RoadNetworkSubSegment *)((char *)this - 88);
+  v6 = (UFG::RoadNetworkSubSegment *)&this->mParkingSpotCollection.mNode.mNext[-12];
+  if ( v6 != (UFG::RoadNetworkSubSegment *)&this[-1].mPosition.z )
   {
     do
     {
-      if ( ((unsigned __int8 (__fastcall *)(UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot> *))v6->mPrev[9].mPrev)(v6) )
+      if ( ((unsigned __int8 (__fastcall *)(UFG::RoadNetworkSubSegment *))v6->mPrev[9].mPrev)(v6) )
       {
-        v7 = v4->size;
-        v8 = v4->capacity;
-        v9 = v7 + 1;
-        if ( (signed int)v7 + 1 > v8 )
+        size = availableParkingSpots->size;
+        capacity = availableParkingSpots->capacity;
+        v9 = size + 1;
+        if ( (int)size + 1 > capacity )
         {
-          if ( v8 )
-            v10 = 2 * v8;
+          if ( capacity )
+            v10 = 2 * capacity;
           else
             v10 = 1;
           for ( ; v10 < v9; v10 *= 2 )
@@ -1953,40 +1824,36 @@ void __fastcall UFG::RoadNetworkSubSegment::GetAvailableParkingSpots(UFG::RoadNe
           if ( v10 <= 2 )
             v10 = 2;
           if ( v10 - v9 > 0x10000 )
-            v10 = v7 + 65537;
-          if ( v10 != (_DWORD)v7 )
+            v10 = size + 65537;
+          if ( v10 != (_DWORD)size )
           {
             v11 = 8i64 * v10;
             if ( !is_mul_ok(v10, 8ui64) )
               v11 = -1i64;
             v12 = UFG::qMalloc(v11, "qArray.Add", 0i64);
-            v13 = v12;
-            if ( v4->p )
+            v13 = (UFG::ParkingSpot **)v12;
+            if ( availableParkingSpots->p )
             {
-              v14 = 0i64;
-              if ( v4->size )
+              for ( i = 0i64;
+                    (unsigned int)i < availableParkingSpots->size;
+                    *(_QWORD *)&v12[v15 * 8] = availableParkingSpots->p[v15] )
               {
-                do
-                {
-                  v15 = v14;
-                  v14 = (unsigned int)(v14 + 1);
-                  *(_QWORD *)&v12[v15 * 8] = v4->p[v15];
-                }
-                while ( (unsigned int)v14 < v4->size );
+                v15 = i;
+                i = (unsigned int)(i + 1);
               }
-              operator delete[](v4->p);
+              operator delete[](availableParkingSpots->p);
             }
-            v4->p = (UFG::ParkingSpot **)v13;
-            v4->capacity = v10;
+            availableParkingSpots->p = v13;
+            availableParkingSpots->capacity = v10;
           }
         }
-        v16 = v4->p;
-        v4->size = v9;
-        v16[v7] = (UFG::ParkingSpot *)v6;
+        v16 = availableParkingSpots->p;
+        availableParkingSpots->size = v9;
+        v16[size] = (UFG::ParkingSpot *)v6;
       }
-      v6 = v6[12].mNext - 12;
+      v6 = (UFG::RoadNetworkSubSegment *)(v6[1].mBeginTCollection - 48);
     }
-    while ( v6 != (UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot> *)v5 );
+    while ( v6 != v5 );
   }
 }
 
@@ -2018,54 +1885,50 @@ __int64 __fastcall UFG::RoadNetworkSubSegment::GetNumAvailableParkingSpots(UFG::
 // RVA: 0xDF800
 void __fastcall UFG::RoadNetworkSegment::RecalculateLaneOffset(UFG::RoadNetworkSegment *this, unsigned int laneIndex)
 {
-  __int64 v2; // rax
+  __int64 mOffset; // rax
   __int64 v3; // r15
   char *v4; // rdx
   __int64 v5; // rax
-  signed __int64 v6; // rsi
-  UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *v7; // rbp
-  UFG::qList<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment,1,0> *v8; // r12
-  signed __int64 i; // rdi
+  UFG::RoadNetworkLane *v6; // rsi
+  UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *mNext; // rbp
+  UFG::qList<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment,1,0> *p_mSubSegmentCollection; // r12
+  __int64 i; // rdi
   __int64 v10; // rbx
   float v11; // xmm0_4
   float v12; // xmm1_4
 
-  v2 = this->mLane.mOffset;
+  mOffset = this->mLane.mOffset;
   v3 = laneIndex;
-  if ( v2 )
-    v4 = (char *)&this->mLane + v2;
+  if ( mOffset )
+    v4 = (char *)&this->mLane + mOffset;
   else
     v4 = 0i64;
   v5 = *(_QWORD *)&v4[8 * v3];
   if ( v5 )
-    v6 = (signed __int64)&v4[8 * v3 + v5];
+    v6 = (UFG::RoadNetworkLane *)&v4[8 * v3 + v5];
   else
     v6 = 0i64;
-  v7 = this->mSubSegmentCollection.mNode.mNext;
-  v8 = &this->mSubSegmentCollection;
-  *(_DWORD *)(v6 + 40) = 0;
-  if ( v7 != (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *)&this->mSubSegmentCollection )
+  mNext = this->mSubSegmentCollection.mNode.mNext;
+  p_mSubSegmentCollection = &this->mSubSegmentCollection;
+  for ( v6->mOffset = 0.0;
+        mNext != (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *)p_mSubSegmentCollection;
+        mNext = mNext->mNext )
   {
-    do
+    for ( i = (__int64)&mNext[7].mPrev[-12];
+          (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> **)i != &mNext[-6].mNext;
+          i = *(_QWORD *)(i + 200) - 192i64 )
     {
-      for ( i = (signed __int64)&v7[7].mPrev[-12];
-            (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> **)i != &v7[-6].mNext;
-            i = *(_QWORD *)(i + 200) - 192i64 )
+      if ( (_DWORD)v3 == *(unsigned __int16 *)(i + 136) )
       {
-        if ( (_DWORD)v3 == *(unsigned __int16 *)(i + 136) )
-        {
-          v10 = *(_QWORD *)(i + 104);
-          UFG::TransformNodeComponent::UpdateWorldTransform(*(UFG::TransformNodeComponent **)(i + 104));
-          v11 = UFG::RoadNetworkLane::CalculateParkingOffset((UFG::RoadNetworkLane *)v6, (UFG::qVector3 *)(v10 + 176));
-          v12 = *(float *)(v6 + 40);
-          if ( v12 <= v11 )
-            v12 = v11;
-          *(float *)(v6 + 40) = v12;
-        }
+        v10 = *(_QWORD *)(i + 104);
+        UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v10);
+        v11 = UFG::RoadNetworkLane::CalculateParkingOffset(v6, (UFG::qVector3 *)(v10 + 176));
+        v12 = v6->mOffset;
+        if ( v12 <= v11 )
+          v12 = v11;
+        v6->mOffset = v12;
       }
-      v7 = v7->mNext;
     }
-    while ( v7 != (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *)v8 );
   }
 }
 
@@ -2073,18 +1936,17 @@ void __fastcall UFG::RoadNetworkSegment::RecalculateLaneOffset(UFG::RoadNetworkS
 // RVA: 0xD3F00
 void __fastcall UFG::RoadNetworkSegment::CreateSubSegments(UFG::RoadNetworkSegment *this)
 {
-  UFG::RoadNetworkSegment *v1; // rsi
   __int64 v2; // rax
-  __int64 v3; // rcx
+  __int64 mOffset; // rcx
   UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *v4; // rbx
-  signed __int64 v5; // rcx
-  _QWORD *v6; // rdx
+  char *v5; // rcx
+  char *v6; // rdx
   char *v7; // rax
   char *v8; // rcx
   unsigned int v9; // edx
   __int64 v10; // rax
   UFG::RoadNetworkConnection *v11; // rcx
-  __int128 v12; // xmm7
+  float v12; // xmm7_4
   char *v13; // rax
   UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *v14; // rax
   UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *v15; // rax
@@ -2092,7 +1954,7 @@ void __fastcall UFG::RoadNetworkSegment::CreateSubSegments(UFG::RoadNetworkSegme
   char *v17; // rax
   UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *v18; // rax
   UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *v19; // rcx
-  UFG::qList<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment,1,0> *v20; // rdi
+  UFG::qList<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment,1,0> *p_mSubSegmentCollection; // rdi
   UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *v21; // rax
   char *v22; // rax
   UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *v23; // rax
@@ -2102,12 +1964,12 @@ void __fastcall UFG::RoadNetworkSegment::CreateSubSegments(UFG::RoadNetworkSegme
   char *v27; // rax
   UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *v28; // rax
   UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *v29; // rcx
-  UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *v30; // rax
-  signed int v31; // ebp
+  UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *mPrev; // rax
+  int v31; // ebp
   float v32; // xmm10_4
-  unsigned int v33; // er14
+  unsigned int v33; // r14d
   float v34; // xmm10_4
-  unsigned int v35; // er15
+  unsigned int v35; // r15d
   char *v36; // rax
   UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *v37; // rax
   UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *v38; // rcx
@@ -2129,17 +1991,16 @@ void __fastcall UFG::RoadNetworkSegment::CreateSubSegments(UFG::RoadNetworkSegme
   UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *v54; // rax
   UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *v55; // rax
 
-  v1 = this;
-  v2 = ((unsigned __int8)this->mNumLanes - 1) / 2;
-  v3 = this->mLane.mOffset;
+  v2 = (unsigned int)(((unsigned __int8)this->mNumLanes - 1) / 2);
+  mOffset = this->mLane.mOffset;
   v4 = 0i64;
-  if ( v3 )
-    v5 = (signed __int64)&v1->mLane + v3;
+  if ( mOffset )
+    v5 = (char *)&this->mLane + mOffset;
   else
     v5 = 0i64;
-  v6 = (_QWORD *)(v5 + 8 * v2);
-  if ( *v6 )
-    v7 = (char *)v6 + *v6;
+  v6 = &v5[8 * v2];
+  if ( *(_QWORD *)v6 )
+    v7 = &v6[*(_QWORD *)v6];
   else
     v7 = 0i64;
   if ( *(_QWORD *)v7 )
@@ -2152,34 +2013,34 @@ void __fastcall UFG::RoadNetworkSegment::CreateSubSegments(UFG::RoadNetworkSegme
     v11 = (UFG::RoadNetworkConnection *)&v8[v10 + 32];
   else
     v11 = 0i64;
-  v12 = HIDWORD(UFG::qBezierPathCollectionMemImaged::GetPath(v11, v9)->mNode.mOffset);
-  if ( *(float *)&v12 >= 30.0 )
+  v12 = *((float *)&UFG::qBezierPathCollectionMemImaged::GetPath(v11, v9)->mNode.mOffset + 1);
+  if ( v12 >= 30.0 )
   {
-    if ( *(float *)&v12 >= 45.0 )
+    if ( v12 >= 45.0 )
     {
-      v24 = 1.0 / *(float *)&v12;
-      v25 = (float)(1.0 / *(float *)&v12) * 15.0;
-      v26 = (float)(1.0 / *(float *)&v12) * 15.0;
+      v24 = 1.0 / v12;
+      v25 = (float)(1.0 / v12) * 15.0;
+      v26 = v25;
       v27 = UFG::qMalloc(0x78ui64, "RoadNetworkSubSegment", 0i64);
       if ( v27 )
       {
-        UFG::RoadNetworkSubSegment::RoadNetworkSubSegment((UFG::RoadNetworkSubSegment *)v27, v1, 15.0, 0.0);
+        UFG::RoadNetworkSubSegment::RoadNetworkSubSegment((UFG::RoadNetworkSubSegment *)v27, this, 15.0, 0.0);
         v29 = v28;
       }
       else
       {
         v29 = 0i64;
       }
-      v20 = &v1->mSubSegmentCollection;
-      v30 = v1->mSubSegmentCollection.mNode.mPrev;
-      v30->mNext = v29;
-      v29->mPrev = v30;
-      v29->mNext = &v1->mSubSegmentCollection.mNode;
-      v1->mSubSegmentCollection.mNode.mPrev = v29;
+      p_mSubSegmentCollection = &this->mSubSegmentCollection;
+      mPrev = this->mSubSegmentCollection.mNode.mPrev;
+      mPrev->mNext = v29;
+      v29->mPrev = mPrev;
+      v29->mNext = &this->mSubSegmentCollection.mNode;
+      this->mSubSegmentCollection.mNode.mPrev = v29;
       v31 = 1;
-      v32 = (float)(*(float *)&v12 - 30.0) * 0.025;
-      v33 = (signed int)v32;
-      v34 = (float)(v32 - (float)(signed int)v32) * 40.0;
+      v32 = (float)(v12 - 30.0) * 0.025;
+      v33 = (int)v32;
+      v34 = (float)(v32 - (float)(int)v32) * 40.0;
       v35 = 0;
       if ( v34 < 15.0 )
       {
@@ -2187,18 +2048,18 @@ void __fastcall UFG::RoadNetworkSegment::CreateSubSegments(UFG::RoadNetworkSegme
         v36 = UFG::qMalloc(0x78ui64, "RoadNetworkSubSegment", 0i64);
         if ( v36 )
         {
-          UFG::RoadNetworkSubSegment::RoadNetworkSubSegment((UFG::RoadNetworkSubSegment *)v36, v1, 15.0, v25);
+          UFG::RoadNetworkSubSegment::RoadNetworkSubSegment((UFG::RoadNetworkSubSegment *)v36, this, 15.0, v25);
           v38 = v37;
         }
         else
         {
           v38 = 0i64;
         }
-        v39 = v20->mNode.mPrev;
+        v39 = p_mSubSegmentCollection->mNode.mPrev;
         v39->mNext = v38;
         v38->mPrev = v39;
-        v38->mNext = &v20->mNode;
-        v20->mNode.mPrev = v38;
+        v38->mNext = &p_mSubSegmentCollection->mNode;
+        p_mSubSegmentCollection->mNode.mPrev = v38;
         v31 = 2;
         v25 = v25 * 2.0;
         v34 = 40.0 - (float)(15.0 - v34);
@@ -2208,18 +2069,18 @@ void __fastcall UFG::RoadNetworkSegment::CreateSubSegments(UFG::RoadNetworkSegme
       v41 = UFG::qMalloc(0x78ui64, "RoadNetworkSubSegment", 0i64);
       if ( v41 )
       {
-        UFG::RoadNetworkSubSegment::RoadNetworkSubSegment((UFG::RoadNetworkSubSegment *)v41, v1, v34, v25);
+        UFG::RoadNetworkSubSegment::RoadNetworkSubSegment((UFG::RoadNetworkSubSegment *)v41, this, v34, v25);
         v43 = v42;
       }
       else
       {
         v43 = 0i64;
       }
-      v44 = v20->mNode.mPrev;
+      v44 = p_mSubSegmentCollection->mNode.mPrev;
       v44->mNext = v43;
       v43->mPrev = v44;
-      v43->mNext = &v20->mNode;
-      v20->mNode.mPrev = v43;
+      v43->mNext = &p_mSubSegmentCollection->mNode;
+      p_mSubSegmentCollection->mNode.mPrev = v43;
       v45 = v31 + 1;
       v46 = v40;
       v47 = v24 * 40.0;
@@ -2232,18 +2093,18 @@ void __fastcall UFG::RoadNetworkSegment::CreateSubSegments(UFG::RoadNetworkSegme
           v49 = UFG::qMalloc(0x78ui64, "RoadNetworkSubSegment", 0i64);
           if ( v49 )
           {
-            UFG::RoadNetworkSubSegment::RoadNetworkSubSegment((UFG::RoadNetworkSubSegment *)v49, v1, 40.0, v46);
+            UFG::RoadNetworkSubSegment::RoadNetworkSubSegment((UFG::RoadNetworkSubSegment *)v49, this, 40.0, v46);
             v51 = v50;
           }
           else
           {
             v51 = 0i64;
           }
-          v52 = v20->mNode.mPrev;
+          v52 = p_mSubSegmentCollection->mNode.mPrev;
           v52->mNext = v51;
           v51->mPrev = v52;
-          v51->mNext = &v20->mNode;
-          v20->mNode.mPrev = v51;
+          v51->mNext = &p_mSubSegmentCollection->mNode;
+          p_mSubSegmentCollection->mNode.mPrev = v51;
           ++v45;
           v46 = v40;
           --v48;
@@ -2255,325 +2116,336 @@ void __fastcall UFG::RoadNetworkSegment::CreateSubSegments(UFG::RoadNetworkSegme
       {
         UFG::RoadNetworkSubSegment::RoadNetworkSubSegment(
           (UFG::RoadNetworkSubSegment *)v53,
-          v1,
-          (float)(1.0 - v40) * *(float *)&v12,
+          this,
+          (float)(1.0 - v40) * v12,
           v40);
         v4 = v54;
       }
     }
     else
     {
-      v16 = *(float *)&v12 * 0.5;
+      v16 = v12 * 0.5;
       v17 = UFG::qMalloc(0x78ui64, "RoadNetworkSubSegment", 0i64);
       if ( v17 )
       {
-        UFG::RoadNetworkSubSegment::RoadNetworkSubSegment((UFG::RoadNetworkSubSegment *)v17, v1, v16, 0.0);
+        UFG::RoadNetworkSubSegment::RoadNetworkSubSegment((UFG::RoadNetworkSubSegment *)v17, this, v16, 0.0);
         v19 = v18;
       }
       else
       {
         v19 = 0i64;
       }
-      v20 = &v1->mSubSegmentCollection;
-      v21 = v1->mSubSegmentCollection.mNode.mPrev;
+      p_mSubSegmentCollection = &this->mSubSegmentCollection;
+      v21 = this->mSubSegmentCollection.mNode.mPrev;
       v21->mNext = v19;
       v19->mPrev = v21;
-      v19->mNext = &v1->mSubSegmentCollection.mNode;
-      v1->mSubSegmentCollection.mNode.mPrev = v19;
+      v19->mNext = &this->mSubSegmentCollection.mNode;
+      this->mSubSegmentCollection.mNode.mPrev = v19;
       v22 = UFG::qMalloc(0x78ui64, "RoadNetworkSubSegment", 0i64);
       if ( v22 )
       {
-        UFG::RoadNetworkSubSegment::RoadNetworkSubSegment((UFG::RoadNetworkSubSegment *)v22, v1, v16, 0.5);
+        UFG::RoadNetworkSubSegment::RoadNetworkSubSegment((UFG::RoadNetworkSubSegment *)v22, this, v16, 0.5);
         v4 = v23;
       }
     }
-    v55 = v20->mNode.mPrev;
+    v55 = p_mSubSegmentCollection->mNode.mPrev;
     v55->mNext = v4;
     v4->mPrev = v55;
-    v4->mNext = &v20->mNode;
-    v20->mNode.mPrev = v4;
+    v4->mNext = &p_mSubSegmentCollection->mNode;
+    p_mSubSegmentCollection->mNode.mPrev = v4;
   }
   else
   {
     v13 = UFG::qMalloc(0x78ui64, "RoadNetworkSubSegment", 0i64);
     if ( v13 )
     {
-      UFG::RoadNetworkSubSegment::RoadNetworkSubSegment((UFG::RoadNetworkSubSegment *)v13, v1, *(float *)&v12, 0.0);
+      UFG::RoadNetworkSubSegment::RoadNetworkSubSegment((UFG::RoadNetworkSubSegment *)v13, this, v12, 0.0);
       v4 = v14;
     }
-    v15 = v1->mSubSegmentCollection.mNode.mPrev;
+    v15 = this->mSubSegmentCollection.mNode.mPrev;
     v15->mNext = v4;
     v4->mPrev = v15;
-    v4->mNext = &v1->mSubSegmentCollection.mNode;
-    v1->mSubSegmentCollection.mNode.mPrev = v4;
+    v4->mNext = &this->mSubSegmentCollection.mNode;
+    this->mSubSegmentCollection.mNode.mPrev = v4;
   }
 }
 
 // File Line: 1735
 // RVA: 0xD9F20
-int UFG::RoadNetworkSegment::GetMatchingT(...)
+// local variable allocation has failed, the output may be wrong!
+float __fastcall UFG::RoadNetworkSegment::GetMatchingT(
+        UFG::RoadNetworkSegment *this,
+        const unsigned int laneIndex,
+        double t,
+        const unsigned int otherLaneIndex)
 {
   __int64 v4; // r14
-  UFG::RoadNetworkSegment *v5; // rdi
-  __int64 v6; // rax
+  __int64 mOffset; // rax
   char *v7; // rcx
-  __int64 v8; // rax
-  signed __int64 v9; // rdx
-  __int64 v10; // rax
-  signed __int64 v11; // rsi
-  signed __int64 v12; // rcx
-  __int64 v13; // rax
-  __int64 v14; // r8
-  signed __int64 v15; // rdx
-  __int64 v16; // rax
-  signed __int64 v17; // r8
-  unsigned int v18; // edx
-  __int64 v19; // rax
-  UFG::RoadNetworkConnection *v20; // rcx
-  UFG::qBezierPathMemImaged *v21; // rax
-  float v22; // xmm7_4
-  UFG::RoadNetworkConnection *v23; // rbx
-  unsigned int v24; // eax
-  UFG::qBezierSplineMemImaged *v25; // rax
+  char *v8; // rdx
+  char *v9; // rsi
+  char *v10; // rcx
+  __int64 v11; // rax
+  __int64 v12; // r8
+  char *v13; // rdx
+  __int64 v14; // rax
+  char *v15; // r8
+  unsigned int v16; // edx
+  __int64 v17; // rax
+  UFG::RoadNetworkConnection *v18; // rcx
+  float v19; // xmm7_4
+  UFG::qBezierPathMemImaged *Path; // rbx
+  unsigned int SplineParameters; // eax
+  UFG::qBezierSplineMemImaged *v22; // rax
+  __int64 v23; // rax
+  __int128 v24; // xmm6
+  char *v25; // rcx
   __int64 v26; // rax
-  __int128 v27; // xmm6
-  signed __int64 v28; // rcx
-  __int64 v29; // rax
-  signed __int64 v30; // rdi
-  __int64 v31; // rax
-  signed __int64 v32; // rdx
-  __int64 v33; // rax
-  __int64 *v34; // rcx
-  __int64 v35; // rax
-  __int64 v36; // rcx
-  __int64 v37; // rax
-  bool v38; // r9
-  signed __int64 v39; // r8
-  __int64 v40; // rcx
-  signed __int64 v41; // rax
-  __int64 *v42; // rdx
-  __int64 v43; // rax
-  __int64 v44; // rdx
-  __int128 v45; // xmm8
-  bool v46; // r14
-  signed __int64 v47; // rax
-  UFG::RoadNetworkConnection *v48; // rcx
-  UFG::qBezierPathMemImaged *v49; // rax
-  UFG::RoadNetworkConnection *v50; // rbx
-  unsigned int v51; // eax
-  UFG::qBezierSplineMemImaged *v52; // rax
-  __int64 v53; // rax
-  UFG::RoadNetworkConnection *v54; // rcx
-  UFG::qBezierPathMemImaged *v55; // rax
-  UFG::RoadNetworkConnection *v56; // rbx
-  unsigned int v57; // eax
-  UFG::qBezierSplineMemImaged *v58; // rax
-  float v59; // xmm1_4
-  int v60; // esi
-  __int64 v61; // rax
-  __int128 v62; // xmm6
-  UFG::RoadNetworkConnection *v63; // rcx
-  UFG::qBezierPathMemImaged *v64; // rax
-  UFG::RoadNetworkConnection *v65; // rbx
-  unsigned int v66; // eax
-  UFG::qBezierSplineMemImaged *v67; // rax
-  float v68; // xmm1_4
-  UFG::qVector3 v2; // [rsp+8h] [rbp-79h]
-  UFG::qVector3 v71; // [rsp+18h] [rbp-69h]
-  UFG::qVector3 v72; // [rsp+28h] [rbp-59h]
-  UFG::qVector3 v73; // [rsp+38h] [rbp-49h]
-  UFG::qVector3 result; // [rsp+48h] [rbp-39h]
-  float splineT; // [rsp+F0h] [rbp+6Fh]
+  char *v27; // rdi
+  __int64 v28; // rax
+  char *v29; // rdx
+  __int64 v30; // rax
+  __int64 *v31; // rcx
+  __int64 v32; // rax
+  char *v33; // rcx
+  __int64 v34; // rax
+  bool v35; // r9
+  char *v36; // r8
+  __int64 v37; // rcx
+  char *v38; // rax
+  __int64 *v39; // rdx
+  __int64 v40; // rax
+  char *v41; // rdx
+  __int128 v42; // xmm8
+  bool v43; // r14
+  char *v44; // rax
+  UFG::RoadNetworkConnection *v45; // rcx
+  UFG::qBezierPathMemImaged *v46; // rbx
+  unsigned int v47; // eax
+  UFG::qBezierSplineMemImaged *v48; // rax
+  __int64 v49; // rax
+  UFG::RoadNetworkConnection *v50; // rcx
+  UFG::qBezierPathMemImaged *v51; // rbx
+  unsigned int v52; // eax
+  UFG::qBezierSplineMemImaged *v53; // rax
+  float v54; // xmm1_4
+  int v55; // esi
+  __int64 v56; // rax
+  __int128 v57; // xmm6
+  UFG::RoadNetworkConnection *v58; // rcx
+  UFG::qBezierPathMemImaged *v59; // rbx
+  unsigned int v60; // eax
+  UFG::qBezierSplineMemImaged *v61; // rax
+  float v62; // xmm1_4
+  UFG::qVector3 v2; // [rsp+8h] [rbp-79h] BYREF
+  UFG::qVector3 v65; // [rsp+18h] [rbp-69h] BYREF
+  UFG::qVector3 v66; // [rsp+28h] [rbp-59h] BYREF
+  UFG::qVector3 v67; // [rsp+38h] [rbp-49h] BYREF
+  UFG::qVector3 result; // [rsp+48h] [rbp-39h] BYREF
+  float splineT; // [rsp+F0h] [rbp+6Fh] BYREF
 
   v4 = otherLaneIndex;
-  v5 = this;
-  v6 = this->mLane.mOffset;
-  if ( v6 )
-    v7 = (char *)&this->mLane + v6;
+  mOffset = this->mLane.mOffset;
+  if ( mOffset )
+    v7 = (char *)&this->mLane + mOffset;
   else
     v7 = 0i64;
-  v8 = laneIndex;
-  v9 = (signed __int64)&v7[8 * v8];
-  v10 = *(_QWORD *)&v7[8 * v8];
-  if ( v10 )
-    v11 = v10 + v9;
+  v8 = &v7[8 * laneIndex];
+  if ( *(_QWORD *)v8 )
+    v9 = &v8[*(_QWORD *)v8];
   else
-    v11 = 0i64;
-  if ( *(_QWORD *)v11 )
-    v12 = *(_QWORD *)v11 + v11;
+    v9 = 0i64;
+  if ( *(_QWORD *)v9 )
+    v10 = &v9[*(_QWORD *)v9];
   else
-    v12 = 0i64;
-  v13 = *(_QWORD *)(v12 + 48);
-  v14 = *(unsigned __int16 *)(v11 + 36);
-  if ( v13 )
-    v15 = v13 + v12 + 48;
+    v10 = 0i64;
+  v11 = *((_QWORD *)v10 + 6);
+  v12 = *((unsigned __int16 *)v9 + 18);
+  if ( v11 )
+    v13 = &v10[v11 + 48];
   else
-    v15 = 0i64;
-  v16 = *(_QWORD *)(v15 + 8 * v14);
-  v17 = v15 + 8 * v14;
-  if ( v16 )
-    v16 += v17;
-  v18 = *(unsigned __int16 *)(v16 + 38);
-  v19 = *(_QWORD *)(v12 + 32);
-  if ( v19 )
-    v20 = (UFG::RoadNetworkConnection *)(v19 + v12 + 32);
+    v13 = 0i64;
+  v14 = *(_QWORD *)&v13[8 * v12];
+  v15 = &v13[8 * v12];
+  if ( v14 )
+    v14 += (__int64)v15;
+  v16 = *(unsigned __int16 *)(v14 + 38);
+  v17 = *((_QWORD *)v10 + 4);
+  if ( v17 )
+    v18 = (UFG::RoadNetworkConnection *)&v10[v17 + 32];
   else
-    v20 = 0i64;
-  v21 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v20, v18);
-  v22 = 0.0;
+    v18 = 0i64;
+  v19 = 0.0;
   splineT = 0.0;
-  v23 = (UFG::RoadNetworkConnection *)v21;
-  v24 = UFG::qBezierPathMemImaged::GetSplineParameters(v21, *(const float *)&t, &splineT);
-  v25 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v23, v24);
-  UFG::qBezierSplineMemImaged::GetTangent(v25, &result, splineT);
-  v26 = v5->mLane.mOffset;
-  v27 = t;
+  Path = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v18, v16);
+  SplineParameters = UFG::qBezierPathMemImaged::GetSplineParameters(Path, *(const float *)&t, &splineT);
+  v22 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                         (UFG::RoadNetworkConnection *)Path,
+                                         SplineParameters);
+  UFG::qBezierSplineMemImaged::GetTangent(v22, &result, splineT);
+  v23 = this->mLane.mOffset;
+  v24 = *(_OWORD *)&t;
+  if ( v23 )
+    v25 = (char *)&this->mLane + v23;
+  else
+    v25 = 0i64;
+  v26 = *(_QWORD *)&v25[8 * v4];
   if ( v26 )
-    v28 = (signed __int64)&v5->mLane + v26;
+    v27 = &v25[8 * v4 + v26];
   else
-    v28 = 0i64;
-  v29 = *(_QWORD *)(v28 + 8 * v4);
-  if ( v29 )
-    v30 = v28 + 8 * v4 + v29;
+    v27 = 0i64;
+  v28 = *((_QWORD *)v27 + 1);
+  if ( v28 )
+    v29 = &v27[v28 + 8];
   else
-    v30 = 0i64;
-  v31 = *(_QWORD *)(v30 + 8);
+    v29 = 0i64;
+  v30 = *(_QWORD *)v27;
+  if ( *(_QWORD *)v27 )
+    v30 += (__int64)v27;
+  v31 = *(__int64 **)(v30 + 48);
   if ( v31 )
-    v32 = v30 + v31 + 8;
-  else
-    v32 = 0i64;
-  v33 = *(_QWORD *)v30;
-  if ( *(_QWORD *)v30 )
-    v33 += v30;
-  v34 = *(__int64 **)(v33 + 48);
+    v31 = (__int64 *)((char *)v31 + v30 + 48);
+  v32 = *v31;
+  if ( *v31 )
+    v32 += (__int64)v31;
+  v33 = *(char **)(v32 + 8);
+  if ( v33 )
+    v33 += v32 + 8;
+  v34 = *((_QWORD *)v9 + 1);
+  v35 = v29 != v33;
   if ( v34 )
-    v34 = (__int64 *)((char *)v34 + v33 + 48);
-  v35 = *v34;
-  if ( *v34 )
-    v35 += (__int64)v34;
-  v36 = *(_QWORD *)(v35 + 8);
-  if ( v36 )
-    v36 += v35 + 8;
-  v37 = *(_QWORD *)(v11 + 8);
-  v38 = v32 != v36;
-  if ( v37 )
-    v39 = v11 + v37 + 8;
+    v36 = &v9[v34 + 8];
   else
-    v39 = 0i64;
-  v40 = *(_QWORD *)v11;
-  if ( *(_QWORD *)v11 )
-    v41 = v40 + v11;
+    v36 = 0i64;
+  v37 = *(_QWORD *)v9;
+  if ( *(_QWORD *)v9 )
+    v38 = &v9[v37];
   else
-    v41 = 0i64;
-  v42 = *(__int64 **)(v41 + 48);
-  if ( v42 )
-    v42 = (__int64 *)((char *)v42 + v41 + 48);
-  v43 = *v42;
-  if ( *v42 )
-    v43 += (__int64)v42;
-  v44 = *(_QWORD *)(v43 + 8);
-  if ( v44 )
-    v44 += v43 + 8;
-  v45 = (unsigned int)FLOAT_1_0;
-  v46 = v38 != (v39 != v44);
-  if ( v38 != (v39 != v44) )
+    v38 = 0i64;
+  v39 = (__int64 *)*((_QWORD *)v38 + 6);
+  if ( v39 )
+    v39 = (__int64 *)((char *)v39 + (_QWORD)v38 + 48);
+  v40 = *v39;
+  if ( *v39 )
+    v40 += (__int64)v39;
+  v41 = *(char **)(v40 + 8);
+  if ( v41 )
+    v41 += v40 + 8;
+  v42 = (unsigned int)FLOAT_1_0;
+  v43 = v35 != (v36 != v41);
+  if ( v35 != (v36 != v41) )
   {
-    v27 = (unsigned int)FLOAT_1_0;
-    *(float *)&v27 = 1.0 - *(float *)&t;
+    v24 = (unsigned int)FLOAT_1_0;
+    *(float *)&v24 = 1.0 - *(float *)&t;
   }
-  if ( v40 )
-    v47 = v40 + v11;
+  if ( v37 )
+    v44 = &v9[v37];
   else
-    v47 = 0i64;
-  v48 = *(UFG::RoadNetworkConnection **)(v47 + 32);
-  if ( v48 )
-    v48 = (UFG::RoadNetworkConnection *)((char *)v48 + v47 + 32);
-  v49 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v48, *(unsigned __int16 *)(v11 + 38));
-  v50 = (UFG::RoadNetworkConnection *)v49;
-  v51 = UFG::qBezierPathMemImaged::GetSplineParameters(v49, *(const float *)&t, &splineT);
-  v52 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v50, v51);
-  UFG::RoadNetworkLane::GetOffsetPos(&v71, v52, splineT, *(float *)(v11 + 40));
-  v53 = *(_QWORD *)v30;
-  if ( *(_QWORD *)v30 )
-    v53 += v30;
-  v54 = *(UFG::RoadNetworkConnection **)(v53 + 32);
-  if ( v54 )
-    v54 = (UFG::RoadNetworkConnection *)((char *)v54 + v53 + 32);
-  v55 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v54, *(unsigned __int16 *)(v30 + 38));
-  v56 = (UFG::RoadNetworkConnection *)v55;
-  v57 = UFG::qBezierPathMemImaged::GetSplineParameters(v55, *(const float *)&v27, &splineT);
-  v58 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v56, v57);
-  UFG::RoadNetworkLane::GetOffsetPos(&v72, v58, splineT, *(float *)(v30 + 40));
-  v59 = UFG::qAngleBetween(&result, &v2);
-  if ( (float)(1.5707964 - v59) > 0.06981317 )
+    v44 = 0i64;
+  v45 = (UFG::RoadNetworkConnection *)*((_QWORD *)v44 + 4);
+  if ( v45 )
+    v45 = (UFG::RoadNetworkConnection *)((char *)v45 + (_QWORD)v44 + 32);
+  v46 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v45, *((unsigned __int16 *)v9 + 19));
+  v47 = UFG::qBezierPathMemImaged::GetSplineParameters(v46, *(const float *)&t, &splineT);
+  v48 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                         (UFG::RoadNetworkConnection *)v46,
+                                         v47);
+  UFG::RoadNetworkLane::GetOffsetPos(&v65, v48, splineT, *((float *)v9 + 10));
+  v49 = *(_QWORD *)v27;
+  if ( *(_QWORD *)v27 )
+    v49 += (__int64)v27;
+  v50 = *(UFG::RoadNetworkConnection **)(v49 + 32);
+  if ( v50 )
+    v50 = (UFG::RoadNetworkConnection *)((char *)v50 + v49 + 32);
+  v51 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v50, *((unsigned __int16 *)v27 + 19));
+  v52 = UFG::qBezierPathMemImaged::GetSplineParameters(v51, *(const float *)&v24, &splineT);
+  v53 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                         (UFG::RoadNetworkConnection *)v51,
+                                         v52);
+  UFG::RoadNetworkLane::GetOffsetPos(&v66, v53, splineT, *((float *)v27 + 10));
+  v54 = UFG::qAngleBetween(&result, &v2);
+  if ( (float)(1.5707964 - v54) > 0.06981317 )
   {
-    if ( v59 <= 1.5707964 )
+    if ( v54 <= 1.5707964 )
     {
-      if ( !v46 )
+      if ( !v43 )
       {
-        v45 = v27;
+        v42 = v24;
         goto LABEL_65;
       }
     }
-    else if ( v46 )
+    else if ( v43 )
     {
-      v45 = v27;
+      v42 = v24;
 LABEL_65:
-      v60 = 0;
+      v55 = 0;
       while ( 1 )
       {
-        v61 = *(_QWORD *)v30;
-        v62 = v45;
-        *(float *)&v62 = (float)((float)(*(float *)&v45 - v22) * 0.5) + v22;
-        if ( *(_QWORD *)v30 )
-          v61 += v30;
-        v63 = *(UFG::RoadNetworkConnection **)(v61 + 32);
-        if ( v63 )
-          v63 = (UFG::RoadNetworkConnection *)((char *)v63 + v61 + 32);
-        v64 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
-                                             v63,
-                                             *(unsigned __int16 *)(v30 + 38));
-        v65 = (UFG::RoadNetworkConnection *)v64;
-        v66 = UFG::qBezierPathMemImaged::GetSplineParameters(v64, *(const float *)&v62, &splineT);
-        v67 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v65, v66);
-        UFG::RoadNetworkLane::GetOffsetPos(&v73, v67, splineT, *(float *)(v30 + 40));
-        v68 = UFG::qAngleBetween(&result, &v2);
-        if ( COERCE_FLOAT(COERCE_UNSIGNED_INT(1.5707964 - v68) & _xmm) < 0.06981317 )
-          return *(float *)&v62;
-        if ( v68 <= 1.5707964 )
+        v56 = *(_QWORD *)v27;
+        v57 = v42;
+        *(float *)&v57 = (float)((float)(*(float *)&v42 - v19) * 0.5) + v19;
+        if ( *(_QWORD *)v27 )
+          v56 += (__int64)v27;
+        v58 = *(UFG::RoadNetworkConnection **)(v56 + 32);
+        if ( v58 )
+          v58 = (UFG::RoadNetworkConnection *)((char *)v58 + v56 + 32);
+        v59 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                             v58,
+                                             *((unsigned __int16 *)v27 + 19));
+        v60 = UFG::qBezierPathMemImaged::GetSplineParameters(v59, *(const float *)&v57, &splineT);
+        v61 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                               (UFG::RoadNetworkConnection *)v59,
+                                               v60);
+        UFG::RoadNetworkLane::GetOffsetPos(&v67, v61, splineT, *((float *)v27 + 10));
+        v62 = UFG::qAngleBetween(&result, &v2);
+        if ( COERCE_FLOAT(COERCE_UNSIGNED_INT(1.5707964 - v62) & _xmm) < 0.06981317 )
+          return *(float *)&v57;
+        if ( v62 <= 1.5707964 )
         {
-          if ( v46 )
+          if ( v43 )
           {
 LABEL_76:
-            v22 = (float)((float)(*(float *)&v45 - v22) * 0.5) + v22;
+            v19 = (float)((float)(*(float *)&v42 - v19) * 0.5) + v19;
             goto LABEL_77;
           }
-          v45 = v62;
+          v42 = v57;
         }
         else
         {
-          if ( !v46 )
+          if ( !v43 )
             goto LABEL_76;
-          v45 = v62;
+          v42 = v57;
         }
 LABEL_77:
-        if ( ++v60 >= 10 )
-          return *(float *)&v62;
+        if ( ++v55 >= 10 )
+          return *(float *)&v57;
       }
     }
-    v22 = *(float *)&v27;
+    v19 = *(float *)&v24;
     goto LABEL_65;
   }
-  return *(float *)&v27;
+  return *(float *)&v24;
+}*(float *)&v57;
+      }
+    }
+    v19 = *(float *)&v24;
+    goto LABEL_65;
+  }
+  return *(float *)&v24;
 }
 
 // File Line: 1809
 // RVA: 0xDBF30
-float __fastcall UFG::RoadNetworkSegment::GetTFromDistance(UFG::RoadNetworkSegment *this, UFG::RoadNetworkLane *lane, float distance, float beginT, bool forward)
+float __fastcall UFG::RoadNetworkSegment::GetTFromDistance(
+        UFG::RoadNetworkSegment *this,
+        UFG::RoadNetworkLane *lane,
+        float distance,
+        float beginT,
+        bool forward)
 {
   UFG::RoadNetworkConnection *v5; // rcx
   char *v6; // rax
-  unsigned int v7; // er8
+  unsigned int mPathIndex; // r8d
   __int64 v8; // rdx
   float v9; // xmm1_4
   float v10; // xmm6_4
@@ -2585,11 +2457,11 @@ float __fastcall UFG::RoadNetworkSegment::GetTFromDistance(UFG::RoadNetworkSegme
     v6 = (char *)lane + lane->mNode.mOffset;
   else
     v6 = 0i64;
-  v7 = lane->mPathIndex;
+  mPathIndex = lane->mPathIndex;
   v8 = *((_QWORD *)v6 + 4);
   if ( v8 )
     v5 = (UFG::RoadNetworkConnection *)&v6[v8 + 32];
-  v9 = *((float *)&UFG::qBezierPathCollectionMemImaged::GetPath(v5, v7)->mNode.mOffset + 1);
+  v9 = *((float *)&UFG::qBezierPathCollectionMemImaged::GetPath(v5, mPathIndex)->mNode.mOffset + 1);
   if ( v9 <= 0.0 )
     v10 = 0.0;
   else
@@ -2608,16 +2480,17 @@ float __fastcall UFG::RoadNetworkSegment::GetTFromDistance(UFG::RoadNetworkSegme
 
 // File Line: 1917
 // RVA: 0xD7E20
-UFG::RoadNetworkSubSegment *__fastcall UFG::RoadNetworkSegment::GetClosestSubSegment(UFG::RoadNetworkSegment *this, UFG::qVector3 *position)
+UFG::RoadNetworkSubSegment *__fastcall UFG::RoadNetworkSegment::GetClosestSubSegment(
+        UFG::RoadNetworkSegment *this,
+        UFG::qVector3 *position)
 {
-  UFG::RoadNetworkSegment *v2; // rbp
   float *v3; // r12
   float v4; // xmm6_4
   float v5; // xmm2_4
-  UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *v6; // rax
-  UFG::qList<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment,1,0> *v7; // r13
-  float v8; // xmm3_4
-  float v9; // xmm4_4
+  UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *mNext; // rax
+  UFG::qList<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment,1,0> *i; // r13
+  float x; // xmm3_4
+  float y; // xmm4_4
   unsigned __int64 v10; // rax
   char *v11; // r14
   unsigned int v12; // ecx
@@ -2632,34 +2505,27 @@ UFG::RoadNetworkSubSegment *__fastcall UFG::RoadNetworkSegment::GetClosestSubSeg
   char *v21; // r15
   _QWORD *v22; // rdx
   __int64 v23; // r8
-  float v24; // xmm2_4
+  float z; // xmm2_4
   char *v25; // rax
   __int64 v26; // rdx
-  UFG::qVector3 *v28; // [rsp+A8h] [rbp+10h]
 
-  v28 = position;
-  v2 = this;
   v3 = 0i64;
   v4 = FLOAT_3_4028235e38;
   v5 = FLOAT_3_4028235e38;
-  v6 = this->mSubSegmentCollection.mNode.mNext;
-  v7 = &this->mSubSegmentCollection;
-  if ( v6 != (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *)&this->mSubSegmentCollection )
+  mNext = this->mSubSegmentCollection.mNode.mNext;
+  for ( i = &this->mSubSegmentCollection;
+        mNext != (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *)i;
+        mNext = mNext->mNext )
   {
-    do
+    x = position->x;
+    y = position->y;
+    if ( (float)((float)((float)(x - *(float *)&mNext[1].mNext) * (float)(x - *(float *)&mNext[1].mNext))
+               + (float)((float)(y - *((float *)&mNext[1].mNext + 1)) * (float)(y - *((float *)&mNext[1].mNext + 1)))) < v5 )
     {
-      v8 = position->x;
-      v9 = position->y;
-      if ( (float)((float)((float)(v8 - *(float *)&v6[1].mNext) * (float)(v8 - *(float *)&v6[1].mNext))
-                 + (float)((float)(v9 - *((float *)&v6[1].mNext + 1)) * (float)(v9 - *((float *)&v6[1].mNext + 1)))) < v5 )
-      {
-        v3 = (float *)v6;
-        v5 = (float)((float)(v8 - *(float *)&v6[1].mNext) * (float)(v8 - *(float *)&v6[1].mNext))
-           + (float)((float)(v9 - *((float *)&v6[1].mNext + 1)) * (float)(v9 - *((float *)&v6[1].mNext + 1)));
-      }
-      v6 = v6->mNext;
+      v3 = (float *)mNext;
+      v5 = (float)((float)(x - *(float *)&mNext[1].mNext) * (float)(x - *(float *)&mNext[1].mNext))
+         + (float)((float)(y - *((float *)&mNext[1].mNext + 1)) * (float)(y - *((float *)&mNext[1].mNext + 1)));
     }
-    while ( v6 != (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *)v7 );
   }
   v10 = 16i64;
   if ( !is_mul_ok(2ui64, 8ui64) )
@@ -2668,9 +2534,9 @@ UFG::RoadNetworkSubSegment *__fastcall UFG::RoadNetworkSegment::GetClosestSubSeg
   v12 = 2;
   v13 = 1;
   *(_QWORD *)v11 = v3;
-  v14 = v2->mSubSegmentCollection.mNode.mNext;
-  if ( v14 == (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *)v7 )
-    goto LABEL_43;
+  v14 = this->mSubSegmentCollection.mNode.mNext;
+  if ( v14 == (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *)i )
+    goto LABEL_37;
   do
   {
     if ( v14 != (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *)v3 )
@@ -2727,10 +2593,10 @@ UFG::RoadNetworkSubSegment *__fastcall UFG::RoadNetworkSegment::GetClosestSubSeg
     }
     v14 = v14->mNext;
   }
-  while ( v14 != (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *)v7 );
+  while ( v14 != (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *)i );
   if ( v13 == 1 )
   {
-LABEL_43:
+LABEL_37:
     v3 = *(float **)v11;
   }
   else if ( v13 )
@@ -2739,11 +2605,11 @@ LABEL_43:
     v26 = v13;
     do
     {
-      v24 = v28->z;
-      if ( (float)(COERCE_FLOAT(COERCE_UNSIGNED_INT(v24 - *(float *)(*(_QWORD *)v25 + 32i64)) & _xmm) + 4.0) < v4 )
+      z = position->z;
+      if ( (float)(COERCE_FLOAT(COERCE_UNSIGNED_INT(z - *(float *)(*(_QWORD *)v25 + 32i64)) & _xmm) + 4.0) < v4 )
       {
         v3 = *(float **)v25;
-        LODWORD(v4) = COERCE_UNSIGNED_INT(v24 - *(float *)(*(_QWORD *)v25 + 32i64)) & _xmm;
+        LODWORD(v4) = COERCE_UNSIGNED_INT(z - *(float *)(*(_QWORD *)v25 + 32i64)) & _xmm;
       }
       v25 += 8;
       --v26;
@@ -2757,192 +2623,191 @@ LABEL_43:
 
 // File Line: 1981
 // RVA: 0xD80C0
-UFG::RoadNetworkSubSegment *__fastcall UFG::RoadNetworkSegment::GetClosestSubSegment(UFG::RoadNetworkSegment *this, UFG::RoadNetworkGate *gate)
+UFG::RoadNetworkSubSegment *__fastcall UFG::RoadNetworkSegment::GetClosestSubSegment(
+        UFG::RoadNetworkSegment *this,
+        UFG::RoadNetworkGate *gate)
 {
   UFG::RoadNetworkSubSegment *result; // rax
-  UFG::RoadNetworkSubSegment *v3; // r8
+  UFG::RoadNetworkSubSegment *mPrev; // r8
   float v4; // xmm7_4
   float v5; // xmm6_4
 
   result = (UFG::RoadNetworkSubSegment *)this->mSubSegmentCollection.mNode.mNext;
-  v3 = (UFG::RoadNetworkSubSegment *)this->mSubSegmentCollection.mNode.mPrev;
-  if ( result != v3 )
+  mPrev = (UFG::RoadNetworkSubSegment *)this->mSubSegmentCollection.mNode.mPrev;
+  if ( result != mPrev )
   {
     v4 = result->mPosition.y - gate->mPosition.y;
-    v5 = v3->mPosition.y - gate->mPosition.y;
+    v5 = mPrev->mPosition.y - gate->mPosition.y;
     if ( (float)((float)((float)(v5 * v5)
-                       + (float)((float)(v3->mPosition.x - gate->mPosition.x)
-                               * (float)(v3->mPosition.x - gate->mPosition.x)))
-               + (float)((float)(v3->mPosition.z - gate->mPosition.z) * (float)(v3->mPosition.z - gate->mPosition.z))) > (float)((float)((float)(v4 * v4) + (float)((float)(result->mPosition.x - gate->mPosition.x) * (float)(result->mPosition.x - gate->mPosition.x))) + (float)((float)(result->mPosition.z - gate->mPosition.z) * (float)(result->mPosition.z - gate->mPosition.z))) )
-      v3 = (UFG::RoadNetworkSubSegment *)this->mSubSegmentCollection.mNode.mNext;
-    result = v3;
+                       + (float)((float)(mPrev->mPosition.x - gate->mPosition.x)
+                               * (float)(mPrev->mPosition.x - gate->mPosition.x)))
+               + (float)((float)(mPrev->mPosition.z - gate->mPosition.z)
+                       * (float)(mPrev->mPosition.z - gate->mPosition.z))) > (float)((float)((float)(v4 * v4)
+                                                                                           + (float)((float)(result->mPosition.x - gate->mPosition.x) * (float)(result->mPosition.x - gate->mPosition.x)))
+                                                                                   + (float)((float)(result->mPosition.z - gate->mPosition.z)
+                                                                                           * (float)(result->mPosition.z - gate->mPosition.z))) )
+      return (UFG::RoadNetworkSubSegment *)this->mSubSegmentCollection.mNode.mNext;
+    return mPrev;
   }
   return result;
 }
 
 // File Line: 2011
 // RVA: 0xCFA30
-void __fastcall UFG::RoadNetworkSubSegment::RoadNetworkSubSegment(UFG::RoadNetworkSubSegment *this, UFG::RoadNetworkSegment *segment, float length, float beginT)
+void __fastcall UFG::RoadNetworkSubSegment::RoadNetworkSubSegment(
+        UFG::RoadNetworkSubSegment *this,
+        UFG::RoadNetworkSegment *segment,
+        float length,
+        float beginT)
 {
-  UFG::RoadNetworkSegment *v4; // rsi
-  UFG::RoadNetworkSubSegment *v5; // rdi
-  signed __int64 v6; // r12
-  UFG::qList<UFG::ParkingSpot,UFG::ParkingSpot,1,0> *v7; // rax
-  __int64 v8; // rax
-  _QWORD *v9; // rax
-  float *v10; // r14
-  char *v11; // rax
-  __int64 v12; // rcx
-  UFG::RoadNetworkConnection *v13; // rcx
-  UFG::qBezierPathMemImaged *v14; // rax
-  UFG::RoadNetworkConnection *v15; // rbx
-  unsigned int v16; // eax
-  UFG::qBezierSplineMemImaged *v17; // rax
-  __int64 v18; // rax
-  _QWORD *v19; // rax
-  float *v20; // r14
-  char *v21; // rax
-  __int64 v22; // rcx
-  UFG::RoadNetworkConnection *v23; // rcx
-  UFG::qBezierPathMemImaged *v24; // rax
-  UFG::RoadNetworkConnection *v25; // rbx
-  float v26; // xmm8_4
-  unsigned int v27; // eax
-  UFG::qBezierSplineMemImaged *v28; // rax
-  __int64 v29; // r13
-  unsigned int v30; // er15
-  qPagedLinearAllocator *v31; // rax
-  qPagedLinearAllocator *v32; // rbx
-  __int64 v33; // r14
+  __int64 v6; // r12
+  __int64 mOffset; // rax
+  _QWORD *v8; // rax
+  float *v9; // r14
+  char *v10; // rax
+  __int64 v11; // rcx
+  UFG::RoadNetworkConnection *v12; // rcx
+  UFG::qBezierPathMemImaged *Path; // rbx
+  unsigned int SplineParameters; // eax
+  UFG::qBezierSplineMemImaged *v15; // rax
+  __int64 v16; // rax
+  _QWORD *v17; // rax
+  float *v18; // r14
+  char *v19; // rax
+  __int64 v20; // rcx
+  UFG::RoadNetworkConnection *v21; // rcx
+  UFG::qBezierPathMemImaged *v22; // rbx
+  float v23; // xmm8_4
+  unsigned int v24; // eax
+  UFG::qBezierSplineMemImaged *v25; // rax
+  __int64 mNumLanes; // r13
+  unsigned int v27; // r15d
+  qPagedLinearAllocator *LaneTAllocator; // rax
+  qPagedLinearAllocator *v29; // rbx
+  __int64 v30; // r14
+  float *mpCurrentPos; // rcx
+  qPagedLinearAllocator *v32; // rax
+  qPagedLinearAllocator *v33; // rbx
   float *v34; // rcx
-  qPagedLinearAllocator *v35; // rax
-  qPagedLinearAllocator *v36; // rbx
-  float *v37; // rcx
-  __int64 v38; // rax
-  _QWORD *v39; // rax
-  __int64 v40; // r15
-  float *v41; // r14
-  char *v42; // rax
-  __int64 v43; // rcx
-  UFG::RoadNetworkConnection *v44; // rcx
-  UFG::qBezierPathMemImaged *v45; // rax
-  UFG::RoadNetworkConnection *v46; // rbx
-  unsigned int v47; // eax
-  UFG::qBezierSplineMemImaged *v48; // rax
-  __int64 v49; // rax
-  _QWORD *v50; // rax
-  float *v51; // r14
-  char *v52; // rax
-  __int64 v53; // rcx
-  UFG::RoadNetworkConnection *v54; // rcx
-  UFG::qBezierPathMemImaged *v55; // rax
-  UFG::RoadNetworkConnection *v56; // rbx
-  unsigned int v57; // eax
-  UFG::qBezierSplineMemImaged *v58; // rax
-  float v59; // xmm10_4
-  float v60; // xmm11_4
-  float v61; // xmm12_4
-  float v62; // xmm13_4
-  __int64 v63; // rax
-  _QWORD *v64; // rax
-  _QWORD *v65; // rax
-  __int64 v66; // rcx
-  signed __int64 v67; // rdx
-  char *v68; // rcx
-  __int64 v69; // rax
-  char *v70; // rax
-  char *v71; // rcx
-  __int64 v72; // rax
-  signed __int64 v73; // rax
-  signed __int64 v74; // rsi
-  __int64 v75; // r14
-  UFG::qOffset64<UFG::qOffset64<UFG::RoadNetworkLane *> *> *v76; // rax
-  char *v77; // rcx
-  signed __int64 v78; // rax
-  __int64 v79; // rcx
-  signed __int64 v80; // rbx
-  signed __int64 v81; // rax
-  __int64 v82; // rcx
-  UFG::RoadNetworkConnection *v83; // rcx
-  UFG::qBezierPathMemImaged *v84; // rax
-  signed __int64 v85; // rax
-  __int64 v86; // rcx
-  UFG::RoadNetworkConnection *v87; // rcx
-  UFG::qBezierPathMemImaged *v88; // rax
-  __int64 v89; // rax
-  signed __int64 v90; // rdx
-  signed __int64 v91; // rax
-  __int64 v92; // rcx
-  _QWORD *v93; // rcx
-  char *v94; // rax
-  __int64 v95; // rcx
-  signed __int64 v96; // rcx
-  float v97; // xmm0_4
-  float v98; // xmm1_4
-  __int64 v99; // rax
-  signed __int64 v100; // rdx
-  signed __int64 v101; // rax
-  __int64 v102; // rcx
-  _QWORD *v103; // rax
-  char *v104; // rcx
-  __int64 v105; // rax
-  signed __int64 v106; // rax
-  float v107; // xmm8_4
-  float v108; // xmm9_4
-  float v109; // xmm10_4
-  float v110; // xmm11_4
-  float v111; // xmm14_4
-  float v112; // xmm15_4
-  float v113; // xmm12_4
-  __int64 v114; // r14
-  __int64 v115; // r12
-  float v116; // xmm6_4
-  UFG::RoadNetworkSegment *v117; // rax
-  __int64 v118; // rcx
-  signed __int64 v119; // rax
-  signed __int64 v120; // rcx
-  __int64 v121; // rax
-  signed __int64 v122; // rsi
-  signed __int64 v123; // rax
-  __int64 v124; // rcx
-  UFG::RoadNetworkConnection *v125; // rcx
-  UFG::qBezierPathMemImaged *v126; // rax
-  UFG::RoadNetworkConnection *v127; // rbx
-  unsigned int v128; // eax
-  UFG::qBezierSplineMemImaged *v129; // rax
-  float v130; // xmm6_4
-  UFG::RoadNetworkSegment *v131; // rax
+  __int64 v35; // rax
+  _QWORD *v36; // rax
+  __int64 v37; // r15
+  float *v38; // r14
+  char *v39; // rax
+  __int64 v40; // rcx
+  UFG::RoadNetworkConnection *v41; // rcx
+  UFG::qBezierPathMemImaged *v42; // rbx
+  unsigned int v43; // eax
+  UFG::qBezierSplineMemImaged *v44; // rax
+  __int64 v45; // rax
+  _QWORD *v46; // rax
+  float *v47; // r14
+  char *v48; // rax
+  __int64 v49; // rcx
+  UFG::RoadNetworkConnection *v50; // rcx
+  UFG::qBezierPathMemImaged *v51; // rbx
+  unsigned int v52; // eax
+  UFG::qBezierSplineMemImaged *v53; // rax
+  float v54; // xmm10_4
+  float v55; // xmm11_4
+  float v56; // xmm12_4
+  float v57; // xmm13_4
+  __int64 v58; // rax
+  _QWORD *v59; // rax
+  _QWORD *v60; // rax
+  __int64 v61; // rcx
+  char *v62; // rdx
+  char *v63; // rcx
+  __int64 v64; // rax
+  char *v65; // rax
+  char *v66; // rcx
+  __int64 v67; // rax
+  char *v68; // rax
+  __int64 v69; // rsi
+  __int64 i; // r14
+  UFG::qOffset64<UFG::qOffset64<UFG::RoadNetworkLane *> *> *p_mLane; // rax
+  char *v72; // rcx
+  char *v73; // rax
+  __int64 v74; // rcx
+  char *v75; // rbx
+  char *v76; // rax
+  __int64 v77; // rcx
+  UFG::RoadNetworkConnection *v78; // rcx
+  UFG::qBezierPathMemImaged *v79; // rax
+  char *v80; // rax
+  __int64 v81; // rcx
+  UFG::RoadNetworkConnection *v82; // rcx
+  UFG::qBezierPathMemImaged *v83; // rax
+  __int64 v84; // rax
+  char *v85; // rdx
+  char *v86; // rax
+  __int64 v87; // rcx
+  char *v88; // rcx
+  char *v89; // rax
+  __int64 v90; // rcx
+  char *v91; // rcx
+  float v92; // xmm0_4
+  float v93; // xmm1_4
+  __int64 v94; // rax
+  char *v95; // rdx
+  char *v96; // rax
+  __int64 v97; // rcx
+  char *v98; // rax
+  char *v99; // rcx
+  __int64 v100; // rax
+  char *v101; // rax
+  float x; // xmm8_4
+  float y; // xmm9_4
+  float z; // xmm10_4
+  float v105; // xmm11_4
+  float v106; // xmm14_4
+  float v107; // xmm15_4
+  float v108; // xmm12_4
+  __int64 v109; // r14
+  __int64 v110; // r12
+  float v111; // xmm6_4
+  UFG::RoadNetworkSegment *mParentNode; // rax
+  __int64 v113; // rcx
+  char *v114; // rax
+  char *v115; // rcx
+  __int64 v116; // rax
+  char *v117; // rsi
+  char *v118; // rax
+  __int64 v119; // rcx
+  UFG::RoadNetworkConnection *v120; // rcx
+  UFG::qBezierPathMemImaged *v121; // rbx
+  unsigned int v122; // eax
+  UFG::qBezierSplineMemImaged *v123; // rax
+  float v124; // xmm6_4
+  UFG::RoadNetworkSegment *v125; // rax
+  __int64 v126; // rcx
+  char *v127; // rax
+  char *v128; // rcx
+  __int64 v129; // rax
+  char *v130; // rsi
+  char *v131; // rax
   __int64 v132; // rcx
-  signed __int64 v133; // rax
-  signed __int64 v134; // rcx
-  __int64 v135; // rax
-  signed __int64 v136; // rsi
-  signed __int64 v137; // rax
-  __int64 v138; // rcx
-  UFG::RoadNetworkConnection *v139; // rcx
-  UFG::qBezierPathMemImaged *v140; // rax
-  UFG::RoadNetworkConnection *v141; // rbx
-  unsigned int v142; // eax
-  UFG::qBezierSplineMemImaged *v143; // rax
-  float v144; // xmm7_4
-  float v145; // xmm2_4
-  float v146; // xmm0_4
-  UFG::qVector3 v147; // [rsp+28h] [rbp-98h]
-  UFG::qVector3 v148; // [rsp+38h] [rbp-88h]
-  UFG::qVector3 pos; // [rsp+48h] [rbp-78h]
-  UFG::qVector3 v150; // [rsp+58h] [rbp-68h]
-  UFG::qVector3 result; // [rsp+68h] [rbp-58h]
-  UFG::qVector3 v152; // [rsp+78h] [rbp-48h]
-  UFG::qList<UFG::ParkingSpot,UFG::ParkingSpot,1,0> *v153; // [rsp+148h] [rbp+88h]
-  float t; // [rsp+150h] [rbp+90h]
-  float v155; // [rsp+158h] [rbp+98h]
-  float pathT; // [rsp+160h] [rbp+A0h]
-  float splineT; // [rsp+168h] [rbp+A8h]
+  UFG::RoadNetworkConnection *v133; // rcx
+  UFG::qBezierPathMemImaged *v134; // rbx
+  unsigned int v135; // eax
+  UFG::qBezierSplineMemImaged *v136; // rax
+  float v137; // xmm7_4
+  float v138; // xmm2_4
+  float v139; // xmm0_4
+  UFG::qVector3 v140; // [rsp+28h] [rbp-98h] BYREF
+  UFG::qVector3 v141; // [rsp+38h] [rbp-88h] BYREF
+  UFG::qVector3 pos; // [rsp+48h] [rbp-78h] BYREF
+  UFG::qVector3 v143; // [rsp+58h] [rbp-68h] BYREF
+  UFG::qVector3 result; // [rsp+68h] [rbp-58h] BYREF
+  UFG::qVector3 v145; // [rsp+78h] [rbp-48h] BYREF
+  UFG::qList<UFG::ParkingSpot,UFG::ParkingSpot,1,0> *p_mParkingSpotCollection; // [rsp+148h] [rbp+88h]
+  float t; // [rsp+150h] [rbp+90h] BYREF
+  float v148; // [rsp+158h] [rbp+98h] BYREF
+  float pathT; // [rsp+160h] [rbp+A0h] BYREF
+  float splineT; // [rsp+168h] [rbp+A8h] BYREF
 
-  v4 = segment;
-  v5 = this;
-  this->mPrev = (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *)&this->mPrev;
-  this->mNext = (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *)&this->mPrev;
+  this->mPrev = this;
+  this->mNext = this;
   this->mParentNode = segment;
   this->mLength = length;
   this->mActive = 0;
@@ -2951,513 +2816,505 @@ void __fastcall UFG::RoadNetworkSubSegment::RoadNetworkSubSegment(UFG::RoadNetwo
   this->mStatus.mValue = 4;
   this->mNumSpawnPoints = 0;
   this->mNumParkingSpots = 0;
-  v7 = &this->mParkingSpotCollection;
-  v153 = v7;
-  v7->mNode.mPrev = &v7->mNode;
-  v7->mNode.mNext = &v7->mNode;
-  v7->mNode.mPrev = &v7->mNode;
+  p_mParkingSpotCollection = &this->mParkingSpotCollection;
+  this->mParkingSpotCollection.mNode.mPrev = &this->mParkingSpotCollection.mNode;
   this->mParkingSpotCollection.mNode.mNext = &this->mParkingSpotCollection.mNode;
-  v8 = segment->mLane.mOffset;
-  if ( v8 )
-    v9 = (__int64 *)((char *)&segment->mLane.mOffset + v8);
+  this->mParkingSpotCollection.mNode.mPrev = &this->mParkingSpotCollection.mNode;
+  this->mParkingSpotCollection.mNode.mNext = &this->mParkingSpotCollection.mNode;
+  mOffset = segment->mLane.mOffset;
+  if ( mOffset )
+    v8 = (__int64 *)((char *)&segment->mLane.mOffset + mOffset);
   else
+    v8 = 0i64;
+  v9 = (float *)((char *)v8 + *v8);
+  if ( !*v8 )
     v9 = 0i64;
-  v10 = (float *)((char *)v9 + *v9);
-  if ( !*v9 )
+  if ( *(_QWORD *)v9 )
+    v10 = (char *)v9 + *(_QWORD *)v9;
+  else
     v10 = 0i64;
-  if ( *(_QWORD *)v10 )
-    v11 = (char *)v10 + *(_QWORD *)v10;
+  v11 = *((_QWORD *)v10 + 4);
+  if ( v11 )
+    v12 = (UFG::RoadNetworkConnection *)&v10[v11 + 32];
   else
-    v11 = 0i64;
-  v12 = *((_QWORD *)v11 + 4);
-  if ( v12 )
-    v13 = (UFG::RoadNetworkConnection *)&v11[v12 + 32];
+    v12 = 0i64;
+  Path = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v12, *((unsigned __int16 *)v9 + 19));
+  SplineParameters = UFG::qBezierPathMemImaged::GetSplineParameters(Path, beginT, &splineT);
+  v15 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                         (UFG::RoadNetworkConnection *)Path,
+                                         SplineParameters);
+  UFG::RoadNetworkLane::GetOffsetPos(&result, v15, splineT, v9[10]);
+  v16 = segment->mLane.mOffset;
+  if ( v16 )
+    v17 = (__int64 *)((char *)&segment->mLane.mOffset + v16);
   else
-    v13 = 0i64;
-  v14 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v13, *((unsigned __int16 *)v10 + 19));
-  v15 = (UFG::RoadNetworkConnection *)v14;
-  v16 = UFG::qBezierPathMemImaged::GetSplineParameters(v14, beginT, &splineT);
-  v17 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v15, v16);
-  UFG::RoadNetworkLane::GetOffsetPos(&result, v17, splineT, v10[10]);
-  v18 = v4->mLane.mOffset;
-  if ( v18 )
-    v19 = (__int64 *)((char *)&v4->mLane.mOffset + v18);
+    v17 = 0i64;
+  v18 = (float *)((char *)v17 + *v17);
+  if ( !*v17 )
+    v18 = 0i64;
+  if ( *(_QWORD *)v18 )
+    v19 = (char *)v18 + *(_QWORD *)v18;
   else
     v19 = 0i64;
-  v20 = (float *)((char *)v19 + *v19);
-  if ( !*v19 )
-    v20 = 0i64;
-  if ( *(_QWORD *)v20 )
-    v21 = (char *)v20 + *(_QWORD *)v20;
+  v20 = *((_QWORD *)v19 + 4);
+  if ( v20 )
+    v21 = (UFG::RoadNetworkConnection *)&v19[v20 + 32];
   else
     v21 = 0i64;
-  v22 = *((_QWORD *)v21 + 4);
-  if ( v22 )
-    v23 = (UFG::RoadNetworkConnection *)&v21[v22 + 32];
-  else
-    v23 = 0i64;
-  v24 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v23, *((unsigned __int16 *)v20 + 19));
-  v25 = (UFG::RoadNetworkConnection *)v24;
-  v26 = pathT;
-  v27 = UFG::qBezierPathMemImaged::GetSplineParameters(v24, pathT, &splineT);
-  v28 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v25, v27);
-  UFG::RoadNetworkLane::GetOffsetPos(&v152, v28, splineT, v20[10]);
-  v29 = (unsigned __int8)v4->mNumLanes;
-  LODWORD(v153) = v29;
-  v30 = 4 * v29;
-  v31 = GetLaneTAllocator();
-  v32 = v31;
-  if ( !v31->mpCurrentPage )
-    qPagedLinearAllocator::NewPage(v31);
-  if ( v30 > v32->mRemainingBytesOnPage )
+  v22 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v21, *((unsigned __int16 *)v18 + 19));
+  v23 = pathT;
+  v24 = UFG::qBezierPathMemImaged::GetSplineParameters(v22, pathT, &splineT);
+  v25 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                         (UFG::RoadNetworkConnection *)v22,
+                                         v24);
+  UFG::RoadNetworkLane::GetOffsetPos(&v145, v25, splineT, v18[10]);
+  mNumLanes = (unsigned __int8)segment->mNumLanes;
+  LODWORD(p_mParkingSpotCollection) = mNumLanes;
+  v27 = 4 * mNumLanes;
+  LaneTAllocator = GetLaneTAllocator();
+  v29 = LaneTAllocator;
+  if ( !LaneTAllocator->mpCurrentPage )
+    qPagedLinearAllocator::NewPage(LaneTAllocator);
+  if ( v27 > v29->mRemainingBytesOnPage )
+    qPagedLinearAllocator::NewPage(v29);
+  v30 = (v27 + 3) & 0xFFFFFFFC;
+  mpCurrentPos = (float *)v29->mpCurrentPos;
+  v29->mpCurrentPos = (char *)mpCurrentPos + v30;
+  v29->mRemainingBytesOnPage -= v30;
+  this->mBeginTCollection = mpCurrentPos;
+  v32 = GetLaneTAllocator();
+  v33 = v32;
+  if ( !v32->mpCurrentPage )
     qPagedLinearAllocator::NewPage(v32);
-  v33 = (v30 + 3) & 0xFFFFFFFC;
-  v34 = (float *)v32->mpCurrentPos;
-  v32->mpCurrentPos = (char *)v34 + v33;
-  v32->mRemainingBytesOnPage -= v33;
-  v5->mBeginTCollection = v34;
-  v35 = GetLaneTAllocator();
-  v36 = v35;
-  if ( !v35->mpCurrentPage )
-    qPagedLinearAllocator::NewPage(v35);
-  if ( v30 > v36->mRemainingBytesOnPage )
-    qPagedLinearAllocator::NewPage(v36);
-  v37 = (float *)v36->mpCurrentPos;
-  v36->mpCurrentPos = (char *)v37 + v33;
-  v36->mRemainingBytesOnPage -= v33;
-  v5->mEndTCollection = v37;
-  *v5->mBeginTCollection = beginT;
-  *v5->mEndTCollection = v26;
-  v38 = v4->mLane.mOffset;
-  if ( v38 )
+  if ( v27 > v33->mRemainingBytesOnPage )
+    qPagedLinearAllocator::NewPage(v33);
+  v34 = (float *)v33->mpCurrentPos;
+  v33->mpCurrentPos = (char *)v34 + v30;
+  v33->mRemainingBytesOnPage -= v30;
+  this->mEndTCollection = v34;
+  *this->mBeginTCollection = beginT;
+  *this->mEndTCollection = v23;
+  v35 = segment->mLane.mOffset;
+  if ( v35 )
   {
-    v39 = (__int64 *)((char *)&v4->mLane.mOffset + v38);
-    v40 = 0i64;
+    v36 = (__int64 *)((char *)&segment->mLane.mOffset + v35);
+    v37 = 0i64;
   }
   else
   {
-    v40 = 0i64;
+    v37 = 0i64;
+    v36 = 0i64;
+  }
+  v38 = (float *)((char *)v36 + *v36);
+  if ( !*v36 )
+    v38 = 0i64;
+  if ( *(_QWORD *)v38 )
+    v39 = (char *)v38 + *(_QWORD *)v38;
+  else
     v39 = 0i64;
-  }
-  v41 = (float *)((char *)v39 + *v39);
-  if ( !*v39 )
+  v40 = *((_QWORD *)v39 + 4);
+  if ( v40 )
+    v41 = (UFG::RoadNetworkConnection *)&v39[v40 + 32];
+  else
     v41 = 0i64;
-  if ( *(_QWORD *)v41 )
-    v42 = (char *)v41 + *(_QWORD *)v41;
+  v42 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v41, *((unsigned __int16 *)v38 + 19));
+  v43 = UFG::qBezierPathMemImaged::GetSplineParameters(v42, beginT, &splineT);
+  v44 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                         (UFG::RoadNetworkConnection *)v42,
+                                         v43);
+  UFG::RoadNetworkLane::GetOffsetPos(&pos, v44, splineT, v38[10]);
+  v45 = segment->mLane.mOffset;
+  if ( v45 )
+    v46 = (__int64 *)((char *)&segment->mLane.mOffset + v45);
   else
-    v42 = 0i64;
-  v43 = *((_QWORD *)v42 + 4);
-  if ( v43 )
-    v44 = (UFG::RoadNetworkConnection *)&v42[v43 + 32];
+    v46 = 0i64;
+  v47 = (float *)((char *)v46 + *v46);
+  if ( !*v46 )
+    v47 = 0i64;
+  if ( *(_QWORD *)v47 )
+    v48 = (char *)v47 + *(_QWORD *)v47;
   else
-    v44 = 0i64;
-  v45 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v44, *((unsigned __int16 *)v41 + 19));
-  v46 = (UFG::RoadNetworkConnection *)v45;
-  v47 = UFG::qBezierPathMemImaged::GetSplineParameters(v45, beginT, &splineT);
-  v48 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v46, v47);
-  UFG::RoadNetworkLane::GetOffsetPos(&pos, v48, splineT, v41[10]);
-  v49 = v4->mLane.mOffset;
+    v48 = 0i64;
+  v49 = *((_QWORD *)v48 + 4);
   if ( v49 )
-    v50 = (__int64 *)((char *)&v4->mLane.mOffset + v49);
+    v50 = (UFG::RoadNetworkConnection *)&v48[v49 + 32];
   else
     v50 = 0i64;
-  v51 = (float *)((char *)v50 + *v50);
-  if ( !*v50 )
-    v51 = 0i64;
-  if ( *(_QWORD *)v51 )
-    v52 = (char *)v51 + *(_QWORD *)v51;
+  v51 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v50, *((unsigned __int16 *)v47 + 19));
+  v52 = UFG::qBezierPathMemImaged::GetSplineParameters(v51, v23, &splineT);
+  v53 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                         (UFG::RoadNetworkConnection *)v51,
+                                         v52);
+  UFG::RoadNetworkLane::GetOffsetPos(&v143, v53, splineT, v47[10]);
+  v54 = *(float *)&FLOAT_1_0;
+  v55 = 0.0;
+  v56 = 0.0;
+  v57 = *(float *)&FLOAT_1_0;
+  v58 = segment->mLane.mOffset;
+  if ( v58 )
+    v59 = (__int64 *)((char *)&segment->mLane.mOffset + v58);
   else
-    v52 = 0i64;
-  v53 = *((_QWORD *)v52 + 4);
-  if ( v53 )
-    v54 = (UFG::RoadNetworkConnection *)&v52[v53 + 32];
+    v59 = 0i64;
+  if ( *v59 )
+    v60 = (_QWORD *)((char *)v59 + *v59);
   else
-    v54 = 0i64;
-  v55 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v54, *((unsigned __int16 *)v51 + 19));
-  v56 = (UFG::RoadNetworkConnection *)v55;
-  v57 = UFG::qBezierPathMemImaged::GetSplineParameters(v55, v26, &splineT);
-  v58 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v56, v57);
-  UFG::RoadNetworkLane::GetOffsetPos(&v150, v58, splineT, v51[10]);
-  v59 = *(float *)&FLOAT_1_0;
-  v60 = 0.0;
-  v61 = 0.0;
-  v62 = *(float *)&FLOAT_1_0;
-  v63 = v4->mLane.mOffset;
-  if ( v63 )
-    v64 = (__int64 *)((char *)&v4->mLane.mOffset + v63);
+    v60 = 0i64;
+  v61 = v60[1];
+  if ( v61 )
+    v62 = (char *)v60 + v61 + 8;
   else
-    v64 = 0i64;
-  if ( *v64 )
-    v65 = (_QWORD *)((char *)v64 + *v64);
+    v62 = 0i64;
+  if ( *v60 )
+    v63 = (char *)v60 + *v60;
+  else
+    v63 = 0i64;
+  v64 = *((_QWORD *)v63 + 6);
+  if ( v64 )
+    v65 = &v63[v64 + 48];
   else
     v65 = 0i64;
-  v66 = v65[1];
-  if ( v66 )
-    v67 = (signed __int64)v65 + v66 + 8;
+  if ( *(_QWORD *)v65 )
+    v66 = &v65[*(_QWORD *)v65];
   else
-    v67 = 0i64;
-  if ( *v65 )
-    v68 = (char *)v65 + *v65;
+    v66 = 0i64;
+  v67 = *((_QWORD *)v66 + 1);
+  if ( v67 )
+    v68 = &v66[v67 + 8];
   else
     v68 = 0i64;
-  v69 = *((_QWORD *)v68 + 6);
-  if ( v69 )
-    v70 = &v68[v69 + 48];
-  else
-    v70 = 0i64;
-  if ( *(_QWORD *)v70 )
-    v71 = &v70[*(_QWORD *)v70];
-  else
-    v71 = 0i64;
-  v72 = *((_QWORD *)v71 + 1);
-  if ( v72 )
-    v73 = (signed __int64)&v71[v72 + 8];
-  else
-    v73 = 0i64;
-  if ( v67 == v73 )
+  if ( v62 == v68 )
   {
     if ( beginT < 1.0 )
-      v59 = beginT;
-    if ( v26 > 0.0 )
-      v60 = v26;
+      v54 = beginT;
+    if ( v23 > 0.0 )
+      v55 = v23;
   }
   else
   {
     if ( beginT > 0.0 )
-      v61 = beginT;
-    if ( v26 < 1.0 )
-      v62 = v26;
+      v56 = beginT;
+    if ( v23 < 1.0 )
+      v57 = v23;
   }
-  if ( (unsigned int)v29 > 1 )
+  if ( (unsigned int)mNumLanes > 1 )
   {
-    v74 = 8i64;
-    v75 = (unsigned int)(v29 - 1);
-    do
+    v69 = 8i64;
+    for ( i = (unsigned int)(mNumLanes - 1); i; --i )
     {
       splineT = 3.4028235e38;
       pathT = 3.4028235e38;
-      v76 = &v5->mParentNode->mLane;
-      if ( v76->mOffset )
-        v77 = (char *)v76 + v76->mOffset;
+      p_mLane = &this->mParentNode->mLane;
+      if ( p_mLane->mOffset )
+        v72 = (char *)p_mLane + p_mLane->mOffset;
       else
-        v77 = 0i64;
-      v78 = (signed __int64)&v77[v74];
-      v79 = *(_QWORD *)&v77[v74];
-      v80 = v79 + v78;
-      if ( !v79 )
+        v72 = 0i64;
+      v73 = &v72[v69];
+      v74 = *(_QWORD *)&v72[v69];
+      v75 = &v73[v74];
+      if ( !v74 )
+        v75 = 0i64;
+      if ( *(_QWORD *)v75 )
+        v76 = &v75[*(_QWORD *)v75];
+      else
+        v76 = 0i64;
+      v77 = *((_QWORD *)v76 + 4);
+      if ( v77 )
+        v78 = (UFG::RoadNetworkConnection *)&v76[v77 + 32];
+      else
+        v78 = 0i64;
+      v79 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                           v78,
+                                           *((unsigned __int16 *)v75 + 19));
+      UFG::qBezierPathMemImaged::ClosestPoint3D(v79, &v141, &pos, &splineT);
+      if ( *(_QWORD *)v75 )
+        v80 = &v75[*(_QWORD *)v75];
+      else
         v80 = 0i64;
-      if ( *(_QWORD *)v80 )
-        v81 = v80 + *(_QWORD *)v80;
+      v81 = *((_QWORD *)v80 + 4);
+      if ( v81 )
+        v82 = (UFG::RoadNetworkConnection *)&v80[v81 + 32];
       else
-        v81 = 0i64;
-      v82 = *(_QWORD *)(v81 + 32);
-      if ( v82 )
-        v83 = (UFG::RoadNetworkConnection *)(v81 + v82 + 32);
-      else
-        v83 = 0i64;
-      v84 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
-                                           v83,
-                                           *(unsigned __int16 *)(v80 + 38));
-      UFG::qBezierPathMemImaged::ClosestPoint3D(v84, &v148, &pos, &splineT);
-      if ( *(_QWORD *)v80 )
-        v85 = v80 + *(_QWORD *)v80;
+        v82 = 0i64;
+      v83 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                           v82,
+                                           *((unsigned __int16 *)v75 + 19));
+      UFG::qBezierPathMemImaged::ClosestPoint3D(v83, &v140, &v143, &pathT);
+      v84 = *((_QWORD *)v75 + 1);
+      if ( v84 )
+        v85 = &v75[v84 + 8];
       else
         v85 = 0i64;
-      v86 = *(_QWORD *)(v85 + 32);
-      if ( v86 )
-        v87 = (UFG::RoadNetworkConnection *)(v85 + v86 + 32);
+      if ( *(_QWORD *)v75 )
+        v86 = &v75[*(_QWORD *)v75];
       else
-        v87 = 0i64;
-      v88 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
-                                           v87,
-                                           *(unsigned __int16 *)(v80 + 38));
-      UFG::qBezierPathMemImaged::ClosestPoint3D(v88, &v147, &v150, &pathT);
-      v89 = *(_QWORD *)(v80 + 8);
-      if ( v89 )
-        v90 = v89 + v80 + 8;
+        v86 = 0i64;
+      v87 = *((_QWORD *)v86 + 6);
+      if ( v87 )
+        v88 = &v86[v87 + 48];
       else
-        v90 = 0i64;
-      if ( *(_QWORD *)v80 )
-        v91 = v80 + *(_QWORD *)v80;
+        v88 = 0i64;
+      if ( *(_QWORD *)v88 )
+        v89 = &v88[*(_QWORD *)v88];
+      else
+        v89 = 0i64;
+      v90 = *((_QWORD *)v89 + 1);
+      if ( v90 )
+        v91 = &v89[v90 + 8];
       else
         v91 = 0i64;
-      v92 = *(_QWORD *)(v91 + 48);
-      if ( v92 )
-        v93 = (_QWORD *)(v91 + v92 + 48);
-      else
-        v93 = 0i64;
-      if ( *v93 )
-        v94 = (char *)v93 + *v93;
-      else
-        v94 = 0i64;
-      v95 = *((_QWORD *)v94 + 1);
-      if ( v95 )
-        v96 = (signed __int64)&v94[v95 + 8];
-      else
-        v96 = 0i64;
-      if ( v90 == v96 )
+      if ( v85 == v91 )
       {
         if ( beginT == 0.0 )
         {
-          v97 = 0.0;
+          v92 = 0.0;
           splineT = 0.0;
         }
         else
         {
-          v97 = splineT;
+          v92 = splineT;
         }
-        if ( v26 != 1.0 )
+        if ( v23 != 1.0 )
           goto LABEL_128;
-        v98 = *(float *)&FLOAT_1_0;
+        v93 = *(float *)&FLOAT_1_0;
         pathT = *(float *)&FLOAT_1_0;
       }
       else
       {
         if ( beginT == 0.0 )
         {
-          v97 = *(float *)&FLOAT_1_0;
+          v92 = *(float *)&FLOAT_1_0;
           splineT = *(float *)&FLOAT_1_0;
         }
         else
         {
-          v97 = splineT;
+          v92 = splineT;
         }
-        if ( v26 != 1.0 )
+        if ( v23 != 1.0 )
         {
 LABEL_128:
-          v98 = pathT;
+          v93 = pathT;
           goto LABEL_129;
         }
-        v98 = 0.0;
+        v93 = 0.0;
         pathT = 0.0;
       }
 LABEL_129:
-      v99 = *(_QWORD *)(v80 + 8);
-      if ( v99 )
-        v100 = v99 + v80 + 8;
+      v94 = *((_QWORD *)v75 + 1);
+      if ( v94 )
+        v95 = &v75[v94 + 8];
       else
-        v100 = 0i64;
-      if ( *(_QWORD *)v80 )
-        v101 = v80 + *(_QWORD *)v80;
+        v95 = 0i64;
+      if ( *(_QWORD *)v75 )
+        v96 = &v75[*(_QWORD *)v75];
+      else
+        v96 = 0i64;
+      v97 = *((_QWORD *)v96 + 6);
+      if ( v97 )
+        v98 = &v96[v97 + 48];
+      else
+        v98 = 0i64;
+      if ( *(_QWORD *)v98 )
+        v99 = &v98[*(_QWORD *)v98];
+      else
+        v99 = 0i64;
+      v100 = *((_QWORD *)v99 + 1);
+      if ( v100 )
+        v101 = &v99[v100 + 8];
       else
         v101 = 0i64;
-      v102 = *(_QWORD *)(v101 + 48);
-      if ( v102 )
-        v103 = (_QWORD *)(v102 + v101 + 48);
-      else
-        v103 = 0i64;
-      if ( *v103 )
-        v104 = (char *)v103 + *v103;
-      else
-        v104 = 0i64;
-      v105 = *((_QWORD *)v104 + 1);
-      if ( v105 )
-        v106 = (signed __int64)&v104[v105 + 8];
-      else
-        v106 = 0i64;
-      if ( v100 == v106 )
+      if ( v95 == v101 )
       {
-        if ( v97 < v59 )
-          v59 = v97;
-        if ( v98 > v60 )
-          v60 = v98;
+        if ( v92 < v54 )
+          v54 = v92;
+        if ( v93 > v55 )
+          v55 = v93;
       }
       else
       {
-        if ( v97 > v61 )
-          v61 = v97;
-        if ( v98 < v62 )
-          v62 = v98;
+        if ( v92 > v56 )
+          v56 = v92;
+        if ( v93 < v57 )
+          v57 = v93;
       }
-      v5->mBeginTCollection[v6] = v97;
-      v5->mEndTCollection[v6] = pathT;
-      v74 += 8i64;
+      this->mBeginTCollection[v6] = v92;
+      this->mEndTCollection[v6] = pathT;
+      v69 += 8i64;
       ++v6;
-      --v75;
     }
-    while ( v75 );
   }
-  v107 = UFG::qVector3::msZero.x;
-  v108 = UFG::qVector3::msZero.y;
-  v109 = UFG::qVector3::msZero.z;
-  v110 = UFG::qVector3::msZero.x;
-  v111 = UFG::qVector3::msZero.y;
-  v112 = UFG::qVector3::msZero.z;
-  v113 = UFG::qVector3::msZero.x;
+  x = UFG::qVector3::msZero.x;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
+  v105 = UFG::qVector3::msZero.x;
+  v106 = UFG::qVector3::msZero.y;
+  v107 = UFG::qVector3::msZero.z;
+  v108 = UFG::qVector3::msZero.x;
   pathT = UFG::qVector3::msZero.y;
   splineT = UFG::qVector3::msZero.z;
-  if ( (_DWORD)v29 )
+  if ( (_DWORD)mNumLanes )
   {
-    v114 = 0i64;
-    v115 = v29;
+    v109 = 0i64;
+    v110 = mNumLanes;
     do
     {
-      v116 = v5->mBeginTCollection[v40];
-      v117 = v5->mParentNode;
-      v118 = v117->mLane.mOffset;
-      if ( v118 )
-        v119 = (signed __int64)&v117->mLane + v118;
+      v111 = this->mBeginTCollection[v37];
+      mParentNode = this->mParentNode;
+      v113 = mParentNode->mLane.mOffset;
+      if ( v113 )
+        v114 = (char *)&mParentNode->mLane + v113;
       else
-        v119 = 0i64;
-      v120 = v114 + v119;
-      v121 = *(_QWORD *)(v114 + v119);
-      v122 = v121 + v120;
-      if ( !v121 )
-        v122 = 0i64;
-      if ( *(_QWORD *)v122 )
-        v123 = v122 + *(_QWORD *)v122;
+        v114 = 0i64;
+      v115 = &v114[v109];
+      v116 = *(_QWORD *)&v114[v109];
+      v117 = &v115[v116];
+      if ( !v116 )
+        v117 = 0i64;
+      if ( *(_QWORD *)v117 )
+        v118 = &v117[*(_QWORD *)v117];
       else
-        v123 = 0i64;
-      v124 = *(_QWORD *)(v123 + 32);
-      if ( v124 )
-        v125 = (UFG::RoadNetworkConnection *)(v123 + v124 + 32);
+        v118 = 0i64;
+      v119 = *((_QWORD *)v118 + 4);
+      if ( v119 )
+        v120 = (UFG::RoadNetworkConnection *)&v118[v119 + 32];
       else
-        v125 = 0i64;
-      v126 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
-                                            v125,
-                                            *(unsigned __int16 *)(v122 + 38));
-      v127 = (UFG::RoadNetworkConnection *)v126;
-      v128 = UFG::qBezierPathMemImaged::GetSplineParameters(v126, v116, &t);
-      v129 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v127, v128);
-      UFG::RoadNetworkLane::GetOffsetPos(&v147, v129, t, *(float *)(v122 + 40));
-      v130 = v5->mEndTCollection[v40];
-      v131 = v5->mParentNode;
-      v132 = v131->mLane.mOffset;
+        v120 = 0i64;
+      v121 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                            v120,
+                                            *((unsigned __int16 *)v117 + 19));
+      v122 = UFG::qBezierPathMemImaged::GetSplineParameters(v121, v111, &t);
+      v123 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                              (UFG::RoadNetworkConnection *)v121,
+                                              v122);
+      UFG::RoadNetworkLane::GetOffsetPos(&v140, v123, t, *((float *)v117 + 10));
+      v124 = this->mEndTCollection[v37];
+      v125 = this->mParentNode;
+      v126 = v125->mLane.mOffset;
+      if ( v126 )
+        v127 = (char *)&v125->mLane + v126;
+      else
+        v127 = 0i64;
+      v128 = &v127[v109];
+      v129 = *(_QWORD *)&v127[v109];
+      v130 = &v128[v129];
+      if ( !v129 )
+        v130 = 0i64;
+      if ( *(_QWORD *)v130 )
+        v131 = &v130[*(_QWORD *)v130];
+      else
+        v131 = 0i64;
+      v132 = *((_QWORD *)v131 + 4);
       if ( v132 )
-        v133 = (signed __int64)&v131->mLane + v132;
+        v133 = (UFG::RoadNetworkConnection *)&v131[v132 + 32];
       else
         v133 = 0i64;
-      v134 = v114 + v133;
-      v135 = *(_QWORD *)(v114 + v133);
-      v136 = v135 + v134;
-      if ( !v135 )
-        v136 = 0i64;
-      if ( *(_QWORD *)v136 )
-        v137 = v136 + *(_QWORD *)v136;
-      else
-        v137 = 0i64;
-      v138 = *(_QWORD *)(v137 + 32);
-      if ( v138 )
-        v139 = (UFG::RoadNetworkConnection *)(v137 + v138 + 32);
-      else
-        v139 = 0i64;
-      v140 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
-                                            v139,
-                                            *(unsigned __int16 *)(v136 + 38));
-      v141 = (UFG::RoadNetworkConnection *)v140;
-      v142 = UFG::qBezierPathMemImaged::GetSplineParameters(v140, v130, &v155);
-      v143 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v141, v142);
-      UFG::RoadNetworkLane::GetOffsetPos(&v148, v143, v155, *(float *)(v136 + 40));
-      v109 = v147.z + v109;
-      v108 = v147.y + v108;
-      v107 = v107 + v147.x;
-      v112 = v148.z + v112;
-      v111 = v148.y + v111;
-      v110 = v110 + v148.x;
-      splineT = (float)((float)(v148.z + v147.z) * 0.5) + splineT;
-      pathT = (float)((float)(v148.y + v147.y) * 0.5) + pathT;
-      v113 = v113 + (float)((float)(v148.x + v147.x) * 0.5);
-      ++v40;
-      v114 += 8i64;
-      --v115;
+      v134 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                            v133,
+                                            *((unsigned __int16 *)v130 + 19));
+      v135 = UFG::qBezierPathMemImaged::GetSplineParameters(v134, v124, &v148);
+      v136 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                              (UFG::RoadNetworkConnection *)v134,
+                                              v135);
+      UFG::RoadNetworkLane::GetOffsetPos(&v141, v136, v148, *((float *)v130 + 10));
+      z = v140.z + z;
+      y = v140.y + y;
+      x = x + v140.x;
+      v107 = v141.z + v107;
+      v106 = v141.y + v106;
+      v105 = v105 + v141.x;
+      splineT = (float)((float)(v141.z + v140.z) * 0.5) + splineT;
+      pathT = (float)((float)(v141.y + v140.y) * 0.5) + pathT;
+      v108 = v108 + (float)((float)(v141.x + v140.x) * 0.5);
+      ++v37;
+      v109 += 8i64;
+      --v110;
     }
-    while ( v115 );
-    LODWORD(v29) = (_DWORD)v153;
+    while ( v110 );
+    LODWORD(mNumLanes) = (_DWORD)p_mParkingSpotCollection;
   }
-  v144 = 1.0 / (float)(signed int)v29;
-  v5->mBeginPos.x = v144 * v107;
-  v5->mBeginPos.y = v144 * v108;
-  v5->mBeginPos.z = v144 * v109;
-  v5->mEndPos.x = v144 * v110;
-  v5->mEndPos.y = v144 * v111;
-  v5->mEndPos.z = v144 * v112;
-  v145 = v144 * splineT;
-  v146 = v144 * pathT;
-  v5->mPosition.x = v144 * v113;
-  v5->mPosition.y = v146;
-  v5->mPosition.z = v145;
+  v137 = 1.0 / (float)(int)mNumLanes;
+  this->mBeginPos.x = v137 * x;
+  this->mBeginPos.y = v137 * y;
+  this->mBeginPos.z = v137 * z;
+  this->mEndPos.x = v137 * v105;
+  this->mEndPos.y = v137 * v106;
+  this->mEndPos.z = v137 * v107;
+  v138 = v137 * splineT;
+  v139 = v137 * pathT;
+  this->mPosition.x = v137 * v108;
+  this->mPosition.y = v139;
+  this->mPosition.z = v138;
 }
 
 // File Line: 2113
 // RVA: 0xD1000
 void __fastcall UFG::RoadNetworkSubSegment::~RoadNetworkSubSegment(UFG::RoadNetworkSubSegment *this)
 {
-  UFG::RoadNetworkSubSegment *v1; // rdi
-  UFG::qList<UFG::ParkingSpot,UFG::ParkingSpot,1,0> *v2; // rbx
+  UFG::qList<UFG::ParkingSpot,UFG::ParkingSpot,1,0> *p_mParkingSpotCollection; // rbx
   UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot> *v3; // rax
-  UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot> *v4; // r8
+  UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot> *i; // r8
   UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot> *v5; // rdx
-  UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot> *v6; // rcx
-  UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot> *v7; // rax
+  UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot> *mPrev; // rcx
+  UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot> *mNext; // rax
   UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot> *v8; // rcx
   UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot> *v9; // rax
   UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *v10; // rcx
   UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *v11; // rax
 
-  v1 = this;
-  v2 = &this->mParkingSpotCollection;
+  p_mParkingSpotCollection = &this->mParkingSpotCollection;
   v3 = this->mParkingSpotCollection.mNode.mNext - 12;
-  v4 = (UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot> *)&this[-1].mPosition.z;
-  if ( v3 != (UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot> *)&this[-1].mPosition.z )
+  for ( i = (UFG::qNode<UFG::ParkingSpot,UFG::ParkingSpot> *)&this[-1].mPosition.z;
+        v3 != i;
+        v3 = p_mParkingSpotCollection->mNode.mNext - 12 )
   {
-    do
-    {
-      v5 = v3 + 12;
-      v6 = v3[12].mPrev;
-      v7 = v3[12].mNext;
-      v6->mNext = v7;
-      v7->mPrev = v6;
-      v5->mPrev = v5;
-      v5->mNext = v5;
-      v3 = v2->mNode.mNext - 12;
-    }
-    while ( v3 != v4 );
+    v5 = v3 + 12;
+    mPrev = v3[12].mPrev;
+    mNext = v3[12].mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    v5->mPrev = v5;
+    v5->mNext = v5;
   }
-  UFG::qList<UFG::ParkingSpot,UFG::ParkingSpot,1,0>::DeleteNodes(v2);
-  v8 = v2->mNode.mPrev;
-  v9 = v2->mNode.mNext;
+  UFG::qList<UFG::ParkingSpot,UFG::ParkingSpot,1,0>::DeleteNodes(p_mParkingSpotCollection);
+  v8 = p_mParkingSpotCollection->mNode.mPrev;
+  v9 = p_mParkingSpotCollection->mNode.mNext;
   v8->mNext = v9;
   v9->mPrev = v8;
-  v2->mNode.mPrev = &v2->mNode;
-  v2->mNode.mNext = &v2->mNode;
-  v10 = v1->mPrev;
-  v11 = v1->mNext;
+  p_mParkingSpotCollection->mNode.mPrev = &p_mParkingSpotCollection->mNode;
+  p_mParkingSpotCollection->mNode.mNext = &p_mParkingSpotCollection->mNode;
+  v10 = this->mPrev;
+  v11 = this->mNext;
   v10->mNext = v11;
   v11->mPrev = v10;
-  v1->mPrev = (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *)&v1->mPrev;
-  v1->mNext = (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *)&v1->mPrev;
+  this->mPrev = this;
+  this->mNext = this;
 }
 
 // File Line: 2148
 // RVA: 0xDF000
-char __fastcall UFG::RoadNetworkSubSegment::IsWithinSubSegment(UFG::RoadNetworkSubSegment *this, UFG::RoadNetworkLane *roadLane, float laneT)
+bool __fastcall UFG::RoadNetworkSubSegment::IsWithinSubSegment(
+        UFG::RoadNetworkSubSegment *this,
+        UFG::RoadNetworkLane *roadLane,
+        float laneT)
 {
-  __int64 v3; // r8
+  __int64 mLaneIndex; // r8
   float v4; // xmm7_4
   float v5; // xmm8_4
-  bool v6; // cf
-  bool v7; // zf
 
-  v3 = roadLane->mLaneIndex;
-  v4 = this->mBeginTCollection[v3];
-  v5 = this->mEndTCollection[v3];
+  mLaneIndex = roadLane->mLaneIndex;
+  v4 = this->mBeginTCollection[mLaneIndex];
+  v5 = this->mEndTCollection[mLaneIndex];
   if ( UFG::RoadNetworkLane::IsReversedInNode(roadLane) )
   {
     if ( laneT < v5 )
       return 0;
-    v6 = laneT < v4;
-    v7 = laneT == v4;
+    return laneT <= v4;
   }
   else
   {
     if ( laneT < v4 )
       return 0;
-    v6 = laneT < v5;
-    v7 = laneT == v5;
+    return laneT <= v5;
   }
-  if ( v6 || v7 )
-    return 1;
-  return 0;
 }
 
 // File Line: 2242
@@ -3476,62 +3333,60 @@ float __fastcall UFG::RoadNetworkSubSegment::GetEndT(UFG::RoadNetworkSubSegment 
 
 // File Line: 2303
 // RVA: 0xD8DB0
-void __fastcall UFG::RoadNetworkSubSegment::GetGatesConnectedToSubSegment(UFG::RoadNetworkSubSegment *this, UFG::qArray<UFG::RoadNetworkGate *,0> *gateCollection)
+void __fastcall UFG::RoadNetworkSubSegment::GetGatesConnectedToSubSegment(
+        UFG::RoadNetworkSubSegment *this,
+        UFG::qArray<UFG::qReflectInventoryBase *,0> *gateCollection)
 {
-  UFG::RoadNetworkSubSegment *v2; // r15
-  UFG::RoadNetworkGate **v3; // rcx
-  UFG::qArray<UFG::qReflectInventoryBase *,0> *v4; // rsi
-  signed __int64 v5; // rax
-  UFG::RoadNetworkSegment *v6; // rdi
-  __int64 v7; // rcx
+  UFG::RoadNetworkGate **p; // rcx
+  char *v5; // rax
+  UFG::RoadNetworkSegment *mParentNode; // rdi
+  __int64 mOffset; // rcx
   _QWORD *v8; // rdx
-  char *v9; // r8
-  signed __int64 v10; // rdx
+  UFG::RoadNetworkGate *v9; // r8
+  char *v10; // rdx
   __int64 v11; // rcx
-  signed __int64 v12; // r14
+  UFG::RoadNetworkGate *v12; // r14
   __int64 v13; // rcx
   _QWORD *v14; // rcx
   char *v15; // r9
   __int64 v16; // rcx
-  signed __int64 v17; // rbp
-  signed __int64 v18; // rdi
+  UFG::RoadNetworkGate *v17; // rbp
+  UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *p_mNode; // rdi
   unsigned int v19; // ebx
-  UFG::qReflectInventoryBase **v20; // rax
-  __int64 v21; // rbp
-  unsigned int v22; // eax
+  UFG::RoadNetworkGate **v20; // rax
+  __int64 size; // rbp
+  unsigned int capacity; // eax
   unsigned int v23; // edi
-  UFG::qReflectInventoryBase **v24; // rax
+  UFG::RoadNetworkGate **v24; // rax
 
-  v2 = this;
-  v3 = gateCollection->p;
-  v4 = (UFG::qArray<UFG::qReflectInventoryBase *,0> *)gateCollection;
-  if ( v3 )
-    operator delete[](v3);
+  p = (UFG::RoadNetworkGate **)gateCollection->p;
+  if ( p )
+    operator delete[](p);
   v5 = 0i64;
-  v4->p = 0i64;
-  *(_QWORD *)&v4->size = 0i64;
-  v6 = v2->mParentNode;
-  v7 = v6->mGates.mOffset;
-  if ( v7 )
-    v8 = (__int64 *)((char *)&v6->mGates.mOffset + v7);
+  gateCollection->p = 0i64;
+  *(_QWORD *)&gateCollection->size = 0i64;
+  mParentNode = this->mParentNode;
+  mOffset = mParentNode->mGates.mOffset;
+  if ( mOffset )
+    v8 = (__int64 *)((char *)&mParentNode->mGates.mOffset + mOffset);
   else
     v8 = 0i64;
   if ( *v8 )
-    v9 = (char *)v8 + *v8;
+    v9 = (UFG::RoadNetworkGate *)((char *)v8 + *v8);
   else
     v9 = 0i64;
-  if ( v7 )
-    v10 = (signed __int64)&v6->mGates + v7;
+  if ( mOffset )
+    v10 = (char *)&mParentNode->mGates + mOffset;
   else
     v10 = 0i64;
-  v11 = *(_QWORD *)(v10 + 8);
+  v11 = *((_QWORD *)v10 + 1);
   if ( v11 )
-    v12 = v11 + v10 + 8;
+    v12 = (UFG::RoadNetworkGate *)&v10[v11 + 8];
   else
     v12 = 0i64;
-  v13 = v6->mLane.mOffset;
+  v13 = mParentNode->mLane.mOffset;
   if ( v13 )
-    v14 = (__int64 *)((char *)&v6->mLane.mOffset + v13);
+    v14 = (__int64 *)((char *)&mParentNode->mLane.mOffset + v13);
   else
     v14 = 0i64;
   v15 = (char *)v14 + *v14;
@@ -3539,122 +3394,116 @@ void __fastcall UFG::RoadNetworkSubSegment::GetGatesConnectedToSubSegment(UFG::R
     v15 = 0i64;
   v16 = *((_QWORD *)v15 + 1);
   if ( v16 )
-    v5 = (signed __int64)&v15[v16 + 8];
-  if ( (char *)v5 == v9 )
+    v5 = &v15[v16 + 8];
+  if ( v5 == (char *)v9 )
   {
-    v17 = (signed __int64)v9;
+    v17 = v9;
   }
   else
   {
     v17 = v12;
-    v12 = (signed __int64)v9;
+    v12 = v9;
   }
-  v18 = (signed __int64)&v6->mSubSegmentCollection;
+  p_mNode = &mParentNode->mSubSegmentCollection.mNode;
   v19 = 1;
-  if ( v2->mPrev == (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *)v18 )
+  if ( this->mPrev == p_mNode )
   {
-    UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(v4, 2u, "qArray.Add");
-    v20 = v4->p;
-    v4->size = 1;
-    *v20 = (UFG::qReflectInventoryBase *)v17;
+    UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(gateCollection, 2u, "qArray.Add");
+    v20 = (UFG::RoadNetworkGate **)gateCollection->p;
+    gateCollection->size = 1;
+    *v20 = v17;
   }
-  if ( v2->mNext == (UFG::qNode<UFG::RoadNetworkSubSegment,UFG::RoadNetworkSubSegment> *)v18 )
+  if ( this->mNext == p_mNode )
   {
-    v21 = v4->size;
-    v22 = v4->capacity;
-    v23 = v21 + 1;
-    if ( (signed int)v21 + 1 > v22 )
+    size = gateCollection->size;
+    capacity = gateCollection->capacity;
+    v23 = size + 1;
+    if ( (int)size + 1 > capacity )
     {
-      if ( v22 )
-        v19 = 2 * v22;
+      if ( capacity )
+        v19 = 2 * capacity;
       for ( ; v19 < v23; v19 *= 2 )
         ;
       if ( v19 <= 2 )
         v19 = 2;
       if ( v19 - v23 > 0x10000 )
-        v19 = v21 + 65537;
-      UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(v4, v19, "qArray.Add");
+        v19 = size + 65537;
+      UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(gateCollection, v19, "qArray.Add");
     }
-    v24 = v4->p;
-    v4->size = v23;
-    v24[v21] = (UFG::qReflectInventoryBase *)v12;
+    v24 = (UFG::RoadNetworkGate **)gateCollection->p;
+    gateCollection->size = v23;
+    v24[size] = v12;
   }
 }
 
 // File Line: 2365
 // RVA: 0xCF8F0
-void __fastcall UFG::RoadNetworkNodeModification::RoadNetworkNodeModification(UFG::RoadNetworkNodeModification *this, UFG::RoadNetworkNode *node)
+void __fastcall UFG::RoadNetworkNodeModification::RoadNetworkNodeModification(
+        UFG::RoadNetworkNodeModification *this,
+        UFG::RoadNetworkNode *node)
 {
-  UFG::RoadNetworkNode *v2; // rbp
-  UFG::RoadNetworkNodeModification *v3; // rsi
-  unsigned int v4; // ecx
+  unsigned int size; // ecx
   int v5; // eax
-  unsigned int v6; // ebx
-  unsigned int v7; // edx
+  unsigned int mNumLanes; // ebx
+  unsigned int capacity; // edx
   unsigned int v8; // edx
-  unsigned int v9; // edx
-  __int64 v10; // rax
-  signed __int64 v11; // rcx
-  _QWORD *v12; // rax
+  unsigned int v9; // eax
+  unsigned int i; // edx
+  __int64 mOffset; // rax
+  char *v12; // rcx
   char *v13; // rax
+  char *v14; // rax
 
-  v2 = node;
-  v3 = this;
-  this->mPrev = (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)&this->mPrev;
-  this->mNext = (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)&this->mPrev;
+  this->mPrev = this;
+  this->mNext = this;
   this->mLaneFlagsCollection.p = 0i64;
   *(_QWORD *)&this->mLaneFlagsCollection.size = 0i64;
   this->mNode = node;
-  v4 = this->mLaneFlagsCollection.size;
-  v5 = (unsigned __int8)node->mNumLanes - v4;
+  size = this->mLaneFlagsCollection.size;
+  v5 = (unsigned __int8)node->mNumLanes - size;
   if ( v5 <= 0 )
   {
-    if ( v4 != (unsigned __int8)node->mNumLanes )
+    v9 = size - (unsigned __int8)node->mNumLanes;
+    if ( v9 )
     {
-      if ( v4 - (unsigned __int8)node->mNumLanes < v4 )
-        v3->mLaneFlagsCollection.size = (unsigned __int8)node->mNumLanes;
+      if ( v9 < size )
+        this->mLaneFlagsCollection.size = (unsigned __int8)node->mNumLanes;
       else
-        v3->mLaneFlagsCollection.size = 0;
+        this->mLaneFlagsCollection.size = 0;
     }
   }
   else
   {
-    v6 = (unsigned __int8)node->mNumLanes;
-    v7 = v3->mLaneFlagsCollection.capacity;
-    if ( v4 + v5 > v7 )
+    mNumLanes = (unsigned __int8)node->mNumLanes;
+    capacity = this->mLaneFlagsCollection.capacity;
+    if ( size + v5 > capacity )
     {
-      if ( v7 )
-        v8 = 2 * v7;
+      if ( capacity )
+        v8 = 2 * capacity;
       else
         v8 = 1;
-      for ( ; v8 < v6; v8 *= 2 )
+      for ( ; v8 < mNumLanes; v8 *= 2 )
         ;
       if ( v8 <= 4 )
         v8 = 4;
-      if ( v8 - v6 > 0x10000 )
-        v8 = v6 + 0x10000;
-      UFG::qArray<long,0>::Reallocate(&v3->mLaneFlagsCollection, v8, "RoadNetworkNodeModification");
+      if ( v8 - mNumLanes > 0x10000 )
+        v8 = mNumLanes + 0x10000;
+      UFG::qArray<long,0>::Reallocate(&this->mLaneFlagsCollection, v8, "RoadNetworkNodeModification");
     }
-    v3->mLaneFlagsCollection.size = v6;
+    this->mLaneFlagsCollection.size = mNumLanes;
   }
-  v9 = 0;
-  if ( v2->mNumLanes > 0u )
+  for ( i = 0; i < (unsigned __int8)node->mNumLanes; this->mLaneFlagsCollection.p[i++] = (unsigned __int8)v14[44] )
   {
-    do
-    {
-      v10 = v2->mLane.mOffset;
-      if ( v10 )
-        v11 = (signed __int64)&v2->mLane + v10;
-      else
-        v11 = 0i64;
-      v12 = (_QWORD *)(v11 + 8i64 * v9);
-      if ( *v12 )
-        v13 = (char *)v12 + *v12;
-      else
-        v13 = 0i64;
-      v3->mLaneFlagsCollection.p[v9++] = (unsigned __int8)v13[44];
-    }
-    while ( v9 < (unsigned __int8)v2->mNumLanes );
+    mOffset = node->mLane.mOffset;
+    if ( mOffset )
+      v12 = (char *)&node->mLane + mOffset;
+    else
+      v12 = 0i64;
+    v13 = &v12[8 * i];
+    if ( *(_QWORD *)v13 )
+      v14 = &v13[*(_QWORD *)v13];
+    else
+      v14 = 0i64;
   }
 }
 
@@ -3662,120 +3511,119 @@ void __fastcall UFG::RoadNetworkNodeModification::RoadNetworkNodeModification(UF
 // RVA: 0xD0EC0
 void __fastcall UFG::RoadNetworkNodeModification::~RoadNetworkNodeModification(UFG::RoadNetworkNodeModification *this)
 {
-  UFG::RoadNetworkNodeModification *v1; // rbx
-  unsigned int *v2; // rcx
+  unsigned int *p; // rcx
   unsigned int *v3; // rcx
-  UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *v4; // rcx
-  UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *v5; // rax
+  UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *mPrev; // rcx
+  UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *mNext; // rax
 
-  v1 = this;
-  v2 = this->mLaneFlagsCollection.p;
-  if ( v2 )
-    operator delete[](v2);
-  v1->mLaneFlagsCollection.p = 0i64;
-  *(_QWORD *)&v1->mLaneFlagsCollection.size = 0i64;
-  v3 = v1->mLaneFlagsCollection.p;
+  p = this->mLaneFlagsCollection.p;
+  if ( p )
+    operator delete[](p);
+  this->mLaneFlagsCollection.p = 0i64;
+  *(_QWORD *)&this->mLaneFlagsCollection.size = 0i64;
+  v3 = this->mLaneFlagsCollection.p;
   if ( v3 )
     operator delete[](v3);
-  v1->mLaneFlagsCollection.p = 0i64;
-  *(_QWORD *)&v1->mLaneFlagsCollection.size = 0i64;
-  v4 = v1->mPrev;
-  v5 = v1->mNext;
-  v4->mNext = v5;
-  v5->mPrev = v4;
-  v1->mPrev = (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)&v1->mPrev;
-  v1->mNext = (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)&v1->mPrev;
+  this->mLaneFlagsCollection.p = 0i64;
+  *(_QWORD *)&this->mLaneFlagsCollection.size = 0i64;
+  mPrev = this->mPrev;
+  mNext = this->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->mPrev = this;
+  this->mNext = this;
 }
 
 // File Line: 2421
 // RVA: 0xD0D90
 void __fastcall UFG::RoadNetworkIntersection::~RoadNetworkIntersection(UFG::RoadNetworkIntersection *this)
 {
-  UFG::RoadNetworkIntersection *v1; // rdi
   __int64 v2; // rsi
-  __int64 v3; // rbp
-  __int64 v4; // rax
-  signed __int64 v5; // rcx
-  signed __int64 v6; // rax
+  __int64 mNumTrafficLightLocations; // rbp
+  __int64 mOffset; // rax
+  char *v5; // rcx
+  char *v6; // rax
   __int64 v7; // rcx
-  signed __int64 v8; // rbx
+  char *v8; // rbx
   unsigned int v9; // edx
   unsigned int v10; // edx
-  UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *v11; // rcx
-  UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *v12; // rax
+  UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *mPrev; // rcx
+  UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *mNext; // rax
 
-  v1 = this;
   if ( this->mNumTrafficLightLocations )
   {
     v2 = 0i64;
-    v3 = (unsigned __int8)this->mNumTrafficLightLocations;
+    mNumTrafficLightLocations = (unsigned __int8)this->mNumTrafficLightLocations;
     do
     {
-      if ( v1->mNumTrafficLightLocations
-        && ((v4 = v1->mTrafficLightLocations.mOffset) == 0 ? (v5 = 0i64) : (v5 = (signed __int64)&v1->mTrafficLightLocations
-                                                                               + v4),
-            v6 = v2 + v5,
-            (v7 = *(_QWORD *)(v2 + v5)) != 0) )
+      if ( this->mNumTrafficLightLocations
+        && ((mOffset = this->mTrafficLightLocations.mOffset) == 0
+          ? (v5 = 0i64)
+          : (v5 = (char *)&this->mTrafficLightLocations + mOffset),
+            v6 = &v5[v2],
+            (v7 = *(_QWORD *)&v5[v2]) != 0) )
       {
-        v8 = v7 + v6;
+        v8 = &v6[v7];
       }
       else
       {
         v8 = 0i64;
       }
-      v9 = *(_DWORD *)(v8 + 28);
+      v9 = *((_DWORD *)v8 + 7);
       if ( v9 != -1 )
       {
-        Render::FXManager::KillEffect(&Render::gFXManager, v9, 0);
-        *(_DWORD *)(v8 + 28) = -1;
+        Render::FXManager::KillEffect(&Render::gFXManager, v9, FXKILLOPTION_DEFAULT);
+        *((_DWORD *)v8 + 7) = -1;
       }
-      v10 = *(_DWORD *)(v8 + 32);
+      v10 = *((_DWORD *)v8 + 8);
       if ( v10 != -1 )
       {
-        Render::FXManager::KillEffect(&Render::gFXManager, v10, 0);
-        *(_DWORD *)(v8 + 32) = -1;
+        Render::FXManager::KillEffect(&Render::gFXManager, v10, FXKILLOPTION_DEFAULT);
+        *((_DWORD *)v8 + 8) = -1;
       }
       v2 += 8i64;
-      --v3;
+      --mNumTrafficLightLocations;
     }
-    while ( v3 );
+    while ( mNumTrafficLightLocations );
   }
-  UFG::qList<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification,1,0>::DeleteNodes(&v1->mModifications);
-  UFG::qList<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification,1,0>::DeleteNodes(&v1->mModifications);
-  v11 = v1->mModifications.mNode.mPrev;
-  v12 = v1->mModifications.mNode.mNext;
-  v11->mNext = v12;
-  v12->mPrev = v11;
-  v1->mModifications.mNode.mPrev = &v1->mModifications.mNode;
-  v1->mModifications.mNode.mNext = &v1->mModifications.mNode;
+  UFG::qList<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification,1,0>::DeleteNodes(&this->mModifications);
+  UFG::qList<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification,1,0>::DeleteNodes(&this->mModifications);
+  mPrev = this->mModifications.mNode.mPrev;
+  mNext = this->mModifications.mNode.mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->mModifications.mNode.mPrev = &this->mModifications.mNode;
+  this->mModifications.mNode.mNext = &this->mModifications.mNode;
 }
 
 // File Line: 2463
 // RVA: 0xDC3F0
-UFG::RoadNetworkTrafficLightPhase *__fastcall UFG::RoadNetworkIntersection::GetTrafficLightPhase(UFG::RoadNetworkIntersection *this, unsigned int index)
+UFG::RoadNetworkTrafficLightPhase *__fastcall UFG::RoadNetworkIntersection::GetTrafficLightPhase(
+        UFG::RoadNetworkIntersection *this,
+        unsigned int index)
 {
   __int64 v2; // r8
-  __int64 v4; // rdx
-  UFG::qOffset64<UFG::qOffset64<UFG::RoadNetworkTrafficLightPhase *> *> *v5; // rax
-  signed __int64 v6; // rcx
+  __int64 mOffset; // rdx
+  UFG::qOffset64<UFG::qOffset64<UFG::RoadNetworkTrafficLightPhase *> *> *p_mLightPhases; // rax
+  __int64 v6; // rcx
   char *v7; // rdx
   __int64 v8; // rax
-  signed __int64 v9; // r8
+  char *v9; // r8
 
   v2 = index;
   if ( !this->mNumLightPhases )
     return 0i64;
-  v4 = this->mLightPhases.mOffset;
-  v5 = &this->mLightPhases;
+  mOffset = this->mLightPhases.mOffset;
+  p_mLightPhases = &this->mLightPhases;
   v6 = 0i64;
-  if ( v4 )
-    v7 = (char *)v5 + v4;
+  if ( mOffset )
+    v7 = (char *)p_mLightPhases + mOffset;
   else
     v7 = 0i64;
   v8 = *(_QWORD *)&v7[8 * v2];
-  v9 = (signed __int64)&v7[8 * v2];
+  v9 = &v7[8 * v2];
   if ( v8 )
-    v6 = v8 + v9;
+    return (UFG::RoadNetworkTrafficLightPhase *)&v9[v8];
   return (UFG::RoadNetworkTrafficLightPhase *)v6;
 }
 
@@ -3783,109 +3631,101 @@ UFG::RoadNetworkTrafficLightPhase *__fastcall UFG::RoadNetworkIntersection::GetT
 // RVA: 0xDB620
 float __fastcall UFG::RoadNetworkIntersection::GetRemainingGreenLightTime(UFG::RoadNetworkIntersection *this)
 {
-  char v1; // r8
-  signed __int64 v2; // rdx
-  __int64 v3; // rax
+  char mNumLightPhases; // r8
+  float *v2; // rdx
+  __int64 mOffset; // rax
   char *v4; // r9
-  __int64 v5; // rax
-  signed __int64 v6; // r10
+  char *v5; // r10
+  char *v6; // rax
   __int64 v7; // rax
-  signed __int64 v8; // rax
-  __int64 v9; // rax
-  char *v10; // r8
-  __int64 v11; // rax
-  signed __int64 v12; // r9
-  __int64 v13; // rax
+  char *v8; // r8
+  char *v9; // r9
 
-  v1 = this->mNumLightPhases;
+  mNumLightPhases = this->mNumLightPhases;
   v2 = 0i64;
-  if ( v1
-    && ((v3 = this->mLightPhases.mOffset) == 0 ? (v4 = 0i64) : (v4 = (char *)&this->mLightPhases + v3),
-        v5 = this->mCurrentPhaseIndex,
-        v6 = (signed __int64)&v4[8 * v5],
-        (v7 = *(_QWORD *)&v4[8 * v5]) != 0) )
+  if ( mNumLightPhases
+    && ((mOffset = this->mLightPhases.mOffset) == 0 ? (v4 = 0i64) : (v4 = (char *)&this->mLightPhases + mOffset),
+        v5 = &v4[8 * this->mCurrentPhaseIndex],
+        *(_QWORD *)v5) )
   {
-    v8 = v6 + v7;
+    v6 = &v5[*(_QWORD *)v5];
   }
   else
   {
-    v8 = 0i64;
+    v6 = 0i64;
   }
-  if ( *(_DWORD *)(v8 + 24) != 2 )
+  if ( *((_DWORD *)v6 + 6) != 2 )
     return FLOAT_N1_0;
-  if ( v1 )
+  if ( mNumLightPhases )
   {
-    v9 = this->mLightPhases.mOffset;
-    if ( v9 )
-      v10 = (char *)&this->mLightPhases + v9;
+    v7 = this->mLightPhases.mOffset;
+    if ( v7 )
+      v8 = (char *)&this->mLightPhases + v7;
     else
-      v10 = 0i64;
-    v11 = this->mCurrentPhaseIndex;
-    v12 = (signed __int64)&v10[8 * v11];
-    v13 = *(_QWORD *)&v10[8 * v11];
-    if ( v13 )
-      v2 = v13 + v12;
+      v8 = 0i64;
+    v9 = &v8[8 * this->mCurrentPhaseIndex];
+    if ( *(_QWORD *)v9 )
+      v2 = (float *)&v9[*(_QWORD *)v9];
   }
-  return *(float *)(v2 + 4) - this->mTimer;
+  return v2[1] - this->mTimer;
 }
 
 // File Line: 2575
 // RVA: 0xDD970
 void __fastcall UFG::RoadNetworkIntersection::InitializePhases(UFG::RoadNetworkIntersection *this)
 {
-  UFG::RoadNetworkIntersection *v1; // rbx
   float v2; // xmm0_4
-  signed __int64 v3; // rcx
-  __int64 v4; // rax
-  __int64 *v5; // rcx
+  char *v3; // rcx
+  __int64 mOffset; // rax
+  char *v5; // rcx
   __int64 v6; // rax
 
-  v1 = this;
   UFG::OnlineManager::Instance();
-  v2 = UFG::qRandom((float)(unsigned __int8)v1->mNumLightPhases, &UFG::qDefaultSeed);
+  v2 = UFG::qRandom((float)(unsigned __int8)this->mNumLightPhases, &UFG::qDefaultSeed);
   v3 = 0i64;
-  v1->mTimer = 0.0;
-  v1->mCurrentPhaseIndex = (signed int)v2;
-  if ( v1->mNumLightPhases )
+  this->mTimer = 0.0;
+  this->mCurrentPhaseIndex = (int)v2;
+  if ( this->mNumLightPhases )
   {
-    v4 = v1->mLightPhases.mOffset;
-    if ( v4 )
-      v3 = (signed __int64)&v1->mLightPhases + v4;
-    v5 = (__int64 *)(v3 + 8i64 * (unsigned int)(signed int)v2);
-    v6 = *v5;
-    if ( *v5 )
+    mOffset = this->mLightPhases.mOffset;
+    if ( mOffset )
+      v3 = (char *)&this->mLightPhases + mOffset;
+    v5 = &v3[8 * (int)v2];
+    v6 = *(_QWORD *)v5;
+    if ( *(_QWORD *)v5 )
     {
-      if ( (__int64 *)((char *)v5 + v6) )
-        UFG::RoadNetworkIntersection::EnableLanes(v1, (UFG::RoadNetworkTrafficLightPhase *)((char *)v5 + v6), 0);
+      if ( &v5[v6] )
+        UFG::RoadNetworkIntersection::EnableLanes(this, (UFG::RoadNetworkTrafficLightPhase *)&v5[v6], 0);
     }
   }
 }
 
 // File Line: 2602
 // RVA: 0xE17E0
-void __fastcall UFG::RoadNetworkIntersection::UpdateLights(UFG::RoadNetworkIntersection *this, float seconds, UFG::qVector3 *viewPosition, float visibleDistance)
+void __fastcall UFG::RoadNetworkIntersection::UpdateLights(
+        UFG::RoadNetworkIntersection *this,
+        float seconds,
+        UFG::qVector3 *viewPosition,
+        float visibleDistance)
 {
   bool v4; // si
-  char v5; // al
-  UFG::RoadNetworkIntersection *v6; // rbx
-  __int64 v7; // rax
+  char mNumLightPhases; // al
+  __int64 mOffset; // rax
   char *v8; // rcx
-  __int64 v9; // r8
-  signed __int64 v10; // rdx
-  __int64 v11; // rcx
-  signed __int64 v12; // rdi
-  signed __int64 v13; // rcx
-  __int64 v14; // rax
-  float v15; // xmm8_4
-  float v16; // xmm7_4
-  float v17; // xmm6_4
-  unsigned int v18; // ecx
-  unsigned int v19; // eax
-  UFG::RoadNetworkTrafficLightPhase *v20; // rax
+  __int64 mCurrentPhaseIndex; // r8
+  char *v10; // rdx
+  UFG::RoadNetworkTrafficLightPhase *v11; // rdi
+  char *v12; // rcx
+  __int64 v13; // rax
+  float v14; // xmm8_4
+  float v15; // xmm7_4
+  float v16; // xmm6_4
+  unsigned int v17; // ecx
+  unsigned int v18; // eax
+  UFG::RoadNetworkTrafficLightPhase *TrafficLightPhase; // rax
 
   v4 = 0;
-  v5 = this->mNumLightPhases;
-  v6 = this;
+  mNumLightPhases = this->mNumLightPhases;
   if ( (float)(visibleDistance * visibleDistance) > (float)((float)((float)((float)(viewPosition->x - this->mPosition.x)
                                                                           * (float)(viewPosition->x - this->mPosition.x))
                                                                   + (float)((float)(viewPosition->y - this->mPosition.y)
@@ -3893,47 +3733,46 @@ void __fastcall UFG::RoadNetworkIntersection::UpdateLights(UFG::RoadNetworkInter
                                                           + (float)((float)(viewPosition->z - this->mPosition.z)
                                                                   * (float)(viewPosition->z - this->mPosition.z))) )
     v4 = 1;
-  if ( v5 && (v5 != 1 || this->mIsMerged) )
+  if ( mNumLightPhases && (mNumLightPhases != 1 || this->mIsMerged) )
   {
-    v7 = this->mLightPhases.mOffset;
-    if ( v7 )
-      v8 = (char *)&this->mLightPhases + v7;
+    mOffset = this->mLightPhases.mOffset;
+    if ( mOffset )
+      v8 = (char *)&this->mLightPhases + mOffset;
     else
       v8 = 0i64;
-    v9 = v6->mCurrentPhaseIndex;
-    v10 = (signed __int64)&v8[8 * v9];
-    v11 = *(_QWORD *)&v8[8 * v9];
-    if ( v11 )
-      v12 = v11 + v10;
+    mCurrentPhaseIndex = this->mCurrentPhaseIndex;
+    v10 = &v8[8 * mCurrentPhaseIndex];
+    if ( *(_QWORD *)v10 )
+      v11 = (UFG::RoadNetworkTrafficLightPhase *)&v10[*(_QWORD *)v10];
+    else
+      v11 = 0i64;
+    if ( mOffset )
+      v12 = (char *)&this->mLightPhases + mOffset;
     else
       v12 = 0i64;
-    if ( v7 )
-      v13 = (signed __int64)&v6->mLightPhases + v7;
-    else
-      v13 = 0i64;
-    v14 = *(_QWORD *)(v13 + 8 * v9);
-    if ( v14 )
-      v14 += v13 + 8 * v9;
-    v15 = *(float *)(v14 + 4);
-    v16 = *(float *)(v14 + 4) + *(float *)(v14 + 8);
-    if ( v6->mEnableTimer )
+    v13 = *(_QWORD *)&v12[8 * mCurrentPhaseIndex];
+    if ( v13 )
+      v13 += (__int64)&v12[8 * mCurrentPhaseIndex];
+    v14 = *(float *)(v13 + 4);
+    v15 = v14 + *(float *)(v13 + 8);
+    if ( this->mEnableTimer )
     {
       UFG::OnlineManager::Instance();
-      v17 = seconds + v6->mTimer;
-      v6->mTimer = v17;
-      if ( v17 <= v16 )
+      v16 = seconds + this->mTimer;
+      this->mTimer = v16;
+      if ( v16 <= v15 )
       {
-        if ( v17 > v15 && *(_DWORD *)(v12 + 24) == 2 )
-          UFG::RoadNetworkTrafficLightPhase::SetLaneStatus((UFG::RoadNetworkTrafficLightPhase *)v12, YELLOW, v4);
+        if ( v16 > v14 && v11->mCurrentStatus == GREEN )
+          UFG::RoadNetworkTrafficLightPhase::SetLaneStatus(v11, YELLOW, v4);
       }
       else
       {
-        v18 = (unsigned __int8)v6->mNumLightPhases;
-        v19 = v6->mCurrentPhaseIndex + 1;
-        v6->mTimer = 0.0;
-        v6->mCurrentPhaseIndex = v19 % v18;
-        v20 = UFG::RoadNetworkIntersection::GetTrafficLightPhase(v6, v19 % v18);
-        UFG::RoadNetworkIntersection::EnableLanes(v6, v20, v4);
+        v17 = (unsigned __int8)this->mNumLightPhases;
+        v18 = this->mCurrentPhaseIndex + 1;
+        this->mTimer = 0.0;
+        this->mCurrentPhaseIndex = v18 % v17;
+        TrafficLightPhase = UFG::RoadNetworkIntersection::GetTrafficLightPhase(this, v18 % v17);
+        UFG::RoadNetworkIntersection::EnableLanes(this, TrafficLightPhase, v4);
       }
     }
   }
@@ -3941,140 +3780,131 @@ void __fastcall UFG::RoadNetworkIntersection::UpdateLights(UFG::RoadNetworkInter
 
 // File Line: 2669
 // RVA: 0xD4590
-void __fastcall UFG::RoadNetworkIntersection::EnableLanes(UFG::RoadNetworkIntersection *this, UFG::RoadNetworkTrafficLightPhase *phase, bool updateTrafficLightEffects)
+void __fastcall UFG::RoadNetworkIntersection::EnableLanes(
+        UFG::RoadNetworkIntersection *this,
+        UFG::RoadNetworkTrafficLightPhase *phase,
+        bool updateTrafficLightEffects)
 {
-  unsigned int v3; // eax
-  unsigned int v4; // esi
+  unsigned int mNumLightPhases; // eax
+  unsigned int mIndex; // esi
   __int64 v5; // rbx
-  bool v6; // bp
-  UFG::RoadNetworkTrafficLightPhase *v7; // r14
-  UFG::RoadNetworkIntersection *v8; // rdi
-  __int64 v9; // rax
-  signed __int64 v10; // rcx
+  __int64 mOffset; // rax
+  char *v10; // rcx
   __int64 v11; // rax
   UFG::RoadNetworkTrafficLightPhase *v12; // rcx
-  unsigned int v13; // eax
+  unsigned int mNumProtectedLanes; // eax
   __int64 v14; // rdx
   __int64 v15; // r8
   __int64 v16; // rax
-  signed __int64 v17; // rcx
-  signed __int64 v18; // rax
+  char *v17; // rcx
+  char *v18; // rax
   __int64 v19; // rcx
-  signed __int64 v20; // rax
-  unsigned int v21; // eax
+  char *v20; // rax
+  unsigned int mNumPermissiveLanes; // eax
   __int64 v22; // rdx
   __int64 v23; // r8
   __int64 v24; // rax
-  signed __int64 v25; // rcx
-  signed __int64 v26; // rax
+  char *v25; // rcx
+  char *v26; // rax
   __int64 v27; // rcx
-  signed __int64 v28; // rax
-  __int64 v29; // rbx
+  char *v28; // rax
+  __int64 i; // rbx
   __int64 v30; // rax
-  signed __int64 v31; // rcx
+  char *v31; // rcx
   UFG::RoadNetworkTrafficLightLocation **v32; // rax
   UFG::RoadNetworkTrafficLightLocation *v33; // rcx
 
-  LOBYTE(v3) = this->mNumLightPhases;
-  v4 = phase->mIndex;
+  LOBYTE(mNumLightPhases) = this->mNumLightPhases;
+  mIndex = phase->mIndex;
   v5 = 0i64;
-  v6 = updateTrafficLightEffects;
-  v7 = phase;
-  v8 = this;
-  if ( (_BYTE)v3 )
+  if ( (_BYTE)mNumLightPhases )
   {
     do
     {
-      if ( (_DWORD)v5 != v4 )
+      if ( (_DWORD)v5 != mIndex )
       {
-        if ( (_BYTE)v3
-          && ((v9 = v8->mLightPhases.mOffset) == 0 ? (v10 = 0i64) : (v10 = (signed __int64)&v8->mLightPhases + v9),
-              (v11 = *(_QWORD *)(v10 + 8 * v5)) != 0) )
+        if ( (_BYTE)mNumLightPhases
+          && ((mOffset = this->mLightPhases.mOffset) == 0 ? (v10 = 0i64) : (v10 = (char *)&this->mLightPhases + mOffset),
+              (v11 = *(_QWORD *)&v10[8 * v5]) != 0) )
         {
-          v12 = (UFG::RoadNetworkTrafficLightPhase *)(v11 + v10 + 8 * v5);
+          v12 = (UFG::RoadNetworkTrafficLightPhase *)&v10[8 * v5 + v11];
         }
         else
         {
           v12 = 0i64;
         }
-        UFG::RoadNetworkTrafficLightPhase::SetLaneStatus(v12, 0, v6);
+        UFG::RoadNetworkTrafficLightPhase::SetLaneStatus(v12, RED, updateTrafficLightEffects);
       }
-      v3 = (unsigned __int8)v8->mNumLightPhases;
+      mNumLightPhases = (unsigned __int8)this->mNumLightPhases;
       v5 = (unsigned int)(v5 + 1);
     }
-    while ( (unsigned int)v5 < v3 );
+    while ( (unsigned int)v5 < mNumLightPhases );
   }
-  v13 = v7->mNumProtectedLanes;
-  v7->mCurrentStatus = 2;
-  if ( v13 )
+  mNumProtectedLanes = phase->mNumProtectedLanes;
+  phase->mCurrentStatus = GREEN;
+  if ( mNumProtectedLanes )
   {
     v14 = 0i64;
-    v15 = v13;
+    v15 = mNumProtectedLanes;
     do
     {
-      v16 = v7->mProtectedLanes.mOffset;
+      v16 = phase->mProtectedLanes.mOffset;
       if ( v16 )
-        v17 = (signed __int64)&v7->mProtectedLanes + v16;
+        v17 = (char *)&phase->mProtectedLanes + v16;
       else
         v17 = 0i64;
-      v18 = v14 + v17;
-      v19 = *(_QWORD *)(v14 + v17);
+      v18 = &v17[v14];
+      v19 = *(_QWORD *)&v17[v14];
       if ( v19 )
-        v20 = v19 + v18;
+        v20 = &v18[v19];
       else
         v20 = 0i64;
       v14 += 8i64;
-      *(_BYTE *)(v20 + 55) = 2;
+      v20[55] = 2;
       --v15;
     }
     while ( v15 );
   }
-  v21 = v7->mNumPermissiveLanes;
-  if ( v21 )
+  mNumPermissiveLanes = phase->mNumPermissiveLanes;
+  if ( mNumPermissiveLanes )
   {
     v22 = 0i64;
-    v23 = v21;
+    v23 = mNumPermissiveLanes;
     do
     {
-      v24 = v7->mPermissiveLanes.mOffset;
+      v24 = phase->mPermissiveLanes.mOffset;
       if ( v24 )
-        v25 = (signed __int64)&v7->mPermissiveLanes + v24;
+        v25 = (char *)&phase->mPermissiveLanes + v24;
       else
         v25 = 0i64;
-      v26 = v22 + v25;
-      v27 = *(_QWORD *)(v22 + v25);
+      v26 = &v25[v22];
+      v27 = *(_QWORD *)&v25[v22];
       if ( v27 )
-        v28 = v27 + v26;
+        v28 = &v26[v27];
       else
         v28 = 0i64;
       v22 += 8i64;
-      *(_BYTE *)(v28 + 55) = 2;
+      v28[55] = 2;
       --v23;
     }
     while ( v23 );
   }
-  if ( v6 )
+  if ( updateTrafficLightEffects )
   {
-    v29 = 0i64;
-    if ( v7->mNumTrafficLights )
+    for ( i = 0i64; (unsigned int)i < phase->mNumTrafficLights; i = (unsigned int)(i + 1) )
     {
-      do
-      {
-        v30 = v7->mTrafficLightCollection.mOffset;
-        if ( v30 )
-          v31 = (signed __int64)&v7->mTrafficLightCollection + v30;
-        else
-          v31 = 0i64;
-        v32 = *(UFG::RoadNetworkTrafficLightLocation ***)(v31 + 8 * v29);
-        if ( v32 )
-          v32 = (UFG::RoadNetworkTrafficLightLocation **)((char *)v32 + 8 * v29 + v31);
-        v33 = *v32;
-        if ( *v32 )
-          v33 = (UFG::RoadNetworkTrafficLightLocation *)((char *)v33 + (_QWORD)v32);
-        UFG::RoadNetworkTrafficLightLocation::SetLampEffect(v33, green, 0);
-        v29 = (unsigned int)(v29 + 1);
-      }
-      while ( (unsigned int)v29 < v7->mNumTrafficLights );
+      v30 = phase->mTrafficLightCollection.mOffset;
+      if ( v30 )
+        v31 = (char *)&phase->mTrafficLightCollection + v30;
+      else
+        v31 = 0i64;
+      v32 = *(UFG::RoadNetworkTrafficLightLocation ***)&v31[8 * i];
+      if ( v32 )
+        v32 = (UFG::RoadNetworkTrafficLightLocation **)&v31[8 * i + (_QWORD)v32];
+      v33 = *v32;
+      if ( *v32 )
+        v33 = (UFG::RoadNetworkTrafficLightLocation *)((char *)v33 + (_QWORD)v32);
+      UFG::RoadNetworkTrafficLightLocation::SetLampEffect(v33, green, Straight);
     }
   }
 }
@@ -4083,270 +3913,263 @@ void __fastcall UFG::RoadNetworkIntersection::EnableLanes(UFG::RoadNetworkInters
 // RVA: 0xD8F60
 float __fastcall UFG::RoadNetworkIntersection::GetIntersectionRadius(UFG::RoadNetworkIntersection *this)
 {
-  signed int v1; // ebx
-  UFG::RoadNetworkIntersection *v2; // r8
+  int mNumGates; // ebx
   unsigned int v3; // edi
   __int64 v4; // rcx
   float v5; // xmm2_4
-  __int64 v6; // rdx
-  float v7; // xmm3_4
-  float v8; // xmm4_4
+  __int64 mOffset; // rdx
+  float x; // xmm3_4
+  float y; // xmm4_4
   unsigned int v9; // eax
   __int64 v10; // r11
-  signed __int64 v11; // rax
-  signed __int64 v12; // r9
-  __int64 v13; // rax
-  signed __int64 v14; // r10
-  signed __int64 v15; // rax
-  signed __int64 v16; // r9
-  __int64 v17; // rax
-  signed __int64 v18; // r9
-  signed __int64 v19; // r10
-  signed __int64 v20; // rax
-  signed __int64 v21; // r9
-  __int64 v22; // rax
-  signed __int64 v23; // r9
-  signed __int64 v24; // r10
-  signed __int64 v25; // rax
-  signed __int64 v26; // r9
-  __int64 v27; // rax
-  signed __int64 v28; // r9
-  signed __int64 v29; // r10
-  __int64 v30; // r9
-  float v31; // xmm3_4
-  float v32; // xmm4_4
-  signed __int64 v33; // rdx
-  __int64 v34; // r10
-  signed __int64 v35; // rax
-  signed __int64 v36; // rcx
-  __int64 v37; // rax
+  char *v11; // rax
+  char *v12; // r9
+  float *v13; // r10
+  char *v14; // rax
+  char *v15; // r9
+  __int64 v16; // rax
+  char *v17; // r9
+  char *v18; // r10
+  char *v19; // rax
+  char *v20; // r9
+  __int64 v21; // rax
+  char *v22; // r9
+  char *v23; // r10
+  char *v24; // rax
+  char *v25; // r9
+  __int64 v26; // rax
+  char *v27; // r9
+  char *v28; // r10
+  __int64 v29; // r9
+  float v30; // xmm3_4
+  float v31; // xmm4_4
+  __int64 v32; // rdx
+  __int64 v33; // r10
+  char *v34; // rax
+  char *v35; // rcx
+  __int64 v36; // rax
 
-  v1 = (unsigned __int8)this->mNumGates;
-  v2 = this;
+  mNumGates = (unsigned __int8)this->mNumGates;
   v3 = 0;
   v4 = 0i64;
   v5 = 0.0;
-  if ( v1 >= 4 )
+  if ( mNumGates >= 4 )
   {
-    v6 = v2->mGates.mOffset;
-    v7 = v2->mPosition.x;
-    v8 = v2->mPosition.y;
-    v9 = ((unsigned int)(v1 - 4) >> 2) + 1;
+    mOffset = this->mGates.mOffset;
+    x = this->mPosition.x;
+    y = this->mPosition.y;
+    v9 = ((unsigned int)(mNumGates - 4) >> 2) + 1;
     v10 = v9;
     v3 = 4 * v9;
     do
     {
-      if ( v6 )
-        v11 = (signed __int64)&v2->mGates + v6;
+      if ( mOffset )
+        v11 = (char *)&this->mGates + mOffset;
       else
         v11 = 0i64;
-      v12 = v11 + 8 * v4;
-      v13 = *(_QWORD *)(v11 + 8 * v4);
-      if ( v13 )
-        v14 = v13 + v12;
+      v12 = &v11[8 * v4];
+      if ( *(_QWORD *)v12 )
+        v13 = (float *)&v12[*(_QWORD *)v12];
+      else
+        v13 = 0i64;
+      if ( (float)((float)((float)(v13[7] - y) * (float)(v13[7] - y))
+                 + (float)((float)(v13[6] - x) * (float)(v13[6] - x))) > v5 )
+        v5 = (float)((float)(v13[7] - y) * (float)(v13[7] - y)) + (float)((float)(v13[6] - x) * (float)(v13[6] - x));
+      if ( mOffset )
+        v14 = (char *)&this->mGates + mOffset;
       else
         v14 = 0i64;
-      if ( (float)((float)((float)(*(float *)(v14 + 28) - v8) * (float)(*(float *)(v14 + 28) - v8))
-                 + (float)((float)(*(float *)(v14 + 24) - v7) * (float)(*(float *)(v14 + 24) - v7))) > v5 )
-        v5 = (float)((float)(*(float *)(v14 + 28) - v8) * (float)(*(float *)(v14 + 28) - v8))
-           + (float)((float)(*(float *)(v14 + 24) - v7) * (float)(*(float *)(v14 + 24) - v7));
-      if ( v6 )
-        v15 = (signed __int64)&v2->mGates + v6;
+      v15 = v14 + 8;
+      v16 = *(_QWORD *)&v14[8 * v4 + 8];
+      v17 = &v15[8 * v4];
+      if ( v16 )
+        v18 = &v17[v16];
       else
-        v15 = 0i64;
-      v16 = v15 + 8;
-      v17 = *(_QWORD *)(v15 + 8 + 8 * v4);
-      v18 = v16 + 8 * v4;
-      if ( v17 )
-        v19 = v17 + v18;
+        v18 = 0i64;
+      if ( (float)((float)((float)(*((float *)v18 + 7) - y) * (float)(*((float *)v18 + 7) - y))
+                 + (float)((float)(*((float *)v18 + 6) - x) * (float)(*((float *)v18 + 6) - x))) > v5 )
+        v5 = (float)((float)(*((float *)v18 + 7) - y) * (float)(*((float *)v18 + 7) - y))
+           + (float)((float)(*((float *)v18 + 6) - x) * (float)(*((float *)v18 + 6) - x));
+      if ( mOffset )
+        v19 = (char *)&this->mGates + mOffset;
       else
         v19 = 0i64;
-      if ( (float)((float)((float)(*(float *)(v19 + 28) - v8) * (float)(*(float *)(v19 + 28) - v8))
-                 + (float)((float)(*(float *)(v19 + 24) - v7) * (float)(*(float *)(v19 + 24) - v7))) > v5 )
-        v5 = (float)((float)(*(float *)(v19 + 28) - v8) * (float)(*(float *)(v19 + 28) - v8))
-           + (float)((float)(*(float *)(v19 + 24) - v7) * (float)(*(float *)(v19 + 24) - v7));
-      if ( v6 )
-        v20 = (signed __int64)&v2->mGates + v6;
+      v20 = v19 + 16;
+      v21 = *(_QWORD *)&v19[8 * v4 + 16];
+      v22 = &v20[8 * v4];
+      if ( v21 )
+        v23 = &v22[v21];
       else
-        v20 = 0i64;
-      v21 = v20 + 16;
-      v22 = *(_QWORD *)(v20 + 16 + 8 * v4);
-      v23 = v21 + 8 * v4;
-      if ( v22 )
-        v24 = v22 + v23;
+        v23 = 0i64;
+      if ( (float)((float)((float)(*((float *)v23 + 7) - y) * (float)(*((float *)v23 + 7) - y))
+                 + (float)((float)(*((float *)v23 + 6) - x) * (float)(*((float *)v23 + 6) - x))) > v5 )
+        v5 = (float)((float)(*((float *)v23 + 7) - y) * (float)(*((float *)v23 + 7) - y))
+           + (float)((float)(*((float *)v23 + 6) - x) * (float)(*((float *)v23 + 6) - x));
+      if ( mOffset )
+        v24 = (char *)&this->mGates + mOffset;
       else
         v24 = 0i64;
-      if ( (float)((float)((float)(*(float *)(v24 + 28) - v8) * (float)(*(float *)(v24 + 28) - v8))
-                 + (float)((float)(*(float *)(v24 + 24) - v7) * (float)(*(float *)(v24 + 24) - v7))) > v5 )
-        v5 = (float)((float)(*(float *)(v24 + 28) - v8) * (float)(*(float *)(v24 + 28) - v8))
-           + (float)((float)(*(float *)(v24 + 24) - v7) * (float)(*(float *)(v24 + 24) - v7));
-      if ( v6 )
-        v25 = (signed __int64)&v2->mGates + v6;
+      v25 = v24 + 24;
+      v26 = *(_QWORD *)&v24[8 * v4 + 24];
+      v27 = &v25[8 * v4];
+      if ( v26 )
+        v28 = &v27[v26];
       else
-        v25 = 0i64;
-      v26 = v25 + 24;
-      v27 = *(_QWORD *)(v25 + 24 + 8 * v4);
-      v28 = v26 + 8 * v4;
-      if ( v27 )
-        v29 = v27 + v28;
-      else
-        v29 = 0i64;
-      if ( (float)((float)((float)(*(float *)(v29 + 28) - v8) * (float)(*(float *)(v29 + 28) - v8))
-                 + (float)((float)(*(float *)(v29 + 24) - v7) * (float)(*(float *)(v29 + 24) - v7))) > v5 )
-        v5 = (float)((float)(*(float *)(v29 + 28) - v8) * (float)(*(float *)(v29 + 28) - v8))
-           + (float)((float)(*(float *)(v29 + 24) - v7) * (float)(*(float *)(v29 + 24) - v7));
+        v28 = 0i64;
+      if ( (float)((float)((float)(*((float *)v28 + 7) - y) * (float)(*((float *)v28 + 7) - y))
+                 + (float)((float)(*((float *)v28 + 6) - x) * (float)(*((float *)v28 + 6) - x))) > v5 )
+        v5 = (float)((float)(*((float *)v28 + 7) - y) * (float)(*((float *)v28 + 7) - y))
+           + (float)((float)(*((float *)v28 + 6) - x) * (float)(*((float *)v28 + 6) - x));
       v4 += 4i64;
       --v10;
     }
     while ( v10 );
   }
-  if ( v3 < v1 )
+  if ( v3 < mNumGates )
   {
-    v30 = v2->mGates.mOffset;
-    v33 = 8 * v4;
-    v34 = v1 - v3;
+    v29 = this->mGates.mOffset;
+    v32 = 8 * v4;
+    v33 = mNumGates - v3;
     do
     {
-      if ( v30 )
-        v35 = (signed __int64)&v2->mGates + v30;
+      if ( v29 )
+        v34 = (char *)&this->mGates + v29;
       else
-        v35 = 0i64;
-      v36 = v33 + v35;
-      v37 = *(_QWORD *)(v33 + v35);
-      if ( v37 )
-        v37 += v36;
-      v31 = v2->mPosition.x;
-      v32 = v2->mPosition.y;
-      if ( (float)((float)((float)(*(float *)(v37 + 28) - v32) * (float)(*(float *)(v37 + 28) - v32))
-                 + (float)((float)(*(float *)(v37 + 24) - v31) * (float)(*(float *)(v37 + 24) - v31))) > v5 )
-        v5 = (float)((float)(*(float *)(v37 + 28) - v32) * (float)(*(float *)(v37 + 28) - v32))
-           + (float)((float)(*(float *)(v37 + 24) - v31) * (float)(*(float *)(v37 + 24) - v31));
-      v33 += 8i64;
-      --v34;
+        v34 = 0i64;
+      v35 = &v34[v32];
+      v36 = *(_QWORD *)&v34[v32];
+      if ( v36 )
+        v36 += (__int64)v35;
+      v30 = this->mPosition.x;
+      v31 = this->mPosition.y;
+      if ( (float)((float)((float)(*(float *)(v36 + 28) - v31) * (float)(*(float *)(v36 + 28) - v31))
+                 + (float)((float)(*(float *)(v36 + 24) - v30) * (float)(*(float *)(v36 + 24) - v30))) > v5 )
+        v5 = (float)((float)(*(float *)(v36 + 28) - v31) * (float)(*(float *)(v36 + 28) - v31))
+           + (float)((float)(*(float *)(v36 + 24) - v30) * (float)(*(float *)(v36 + 24) - v30));
+      v32 += 8i64;
+      --v33;
     }
-    while ( v34 );
+    while ( v33 );
   }
   return fsqrt(v5);
 }
 
 // File Line: 2702
 // RVA: 0xD5F70
-UFG::RoadNetworkGate *__fastcall UFG::RoadNetworkIntersection::GetClosestGate(UFG::RoadNetworkIntersection *this, UFG::qVector3 *pos)
+UFG::RoadNetworkGate *__fastcall UFG::RoadNetworkIntersection::GetClosestGate(
+        UFG::RoadNetworkIntersection *this,
+        UFG::qVector3 *pos)
 {
-  signed int v2; // ebx
+  unsigned int mNumGates; // ebx
   float v3; // xmm2_4
-  UFG::qVector3 *v4; // rdi
   __int64 v5; // r11
   unsigned int v6; // esi
   __int64 v7; // rdx
-  UFG::RoadNetworkIntersection *v8; // r10
-  __int64 v9; // r8
-  float v10; // xmm3_4
-  float v11; // xmm4_4
+  __int64 mOffset; // r8
+  float x; // xmm3_4
+  float y; // xmm4_4
   unsigned int v12; // eax
   __int64 v13; // r9
-  signed __int64 v14; // rax
-  signed __int64 v15; // rcx
+  char *v14; // rax
+  char *v15; // rcx
   __int64 v16; // rax
-  signed __int64 v17; // rax
-  signed __int64 v18; // rcx
+  char *v17; // rax
+  char *v18; // rcx
   __int64 v19; // rax
-  signed __int64 v20; // rcx
-  signed __int64 v21; // rax
-  signed __int64 v22; // rcx
+  char *v20; // rcx
+  char *v21; // rax
+  char *v22; // rcx
   __int64 v23; // rax
-  signed __int64 v24; // rcx
-  signed __int64 v25; // rax
-  signed __int64 v26; // rcx
+  char *v24; // rcx
+  char *v25; // rax
+  char *v26; // rcx
   __int64 v27; // rax
-  signed __int64 v28; // rcx
+  char *v28; // rcx
   __int64 v29; // r8
   float v30; // xmm3_4
   float v31; // xmm4_4
-  signed __int64 v32; // rdx
+  __int64 v32; // rdx
   __int64 v33; // r9
-  signed __int64 v34; // rax
-  signed __int64 v35; // rcx
+  char *v34; // rax
+  char *v35; // rcx
   __int64 v36; // rax
 
-  v2 = (unsigned __int8)this->mNumGates;
+  mNumGates = (unsigned __int8)this->mNumGates;
   v3 = FLOAT_3_4028235e38;
-  v4 = pos;
   v5 = 0i64;
   v6 = 0;
   v7 = 0i64;
-  v8 = this;
-  if ( v2 >= 4 )
+  if ( mNumGates >= 4 )
   {
-    v9 = this->mGates.mOffset;
-    v10 = v4->x;
-    v11 = v4->y;
-    v12 = ((unsigned int)(v2 - 4) >> 2) + 1;
+    mOffset = this->mGates.mOffset;
+    x = pos->x;
+    y = pos->y;
+    v12 = ((mNumGates - 4) >> 2) + 1;
     v13 = v12;
     v6 = 4 * v12;
     do
     {
-      if ( v9 )
-        v14 = (signed __int64)&v8->mGates + v9;
+      if ( mOffset )
+        v14 = (char *)&this->mGates + mOffset;
       else
         v14 = 0i64;
-      v15 = v14 + 8 * v7;
-      v16 = *(_QWORD *)(v14 + 8 * v7);
-      if ( v16 )
-        v16 += v15;
-      if ( (float)((float)((float)(*(float *)(v16 + 28) - v11) * (float)(*(float *)(v16 + 28) - v11))
-                 + (float)((float)(*(float *)(v16 + 24) - v10) * (float)(*(float *)(v16 + 24) - v10))) < v3 )
+      v15 = &v14[8 * v7];
+      v16 = *(_QWORD *)v15;
+      if ( *(_QWORD *)v15 )
+        v16 += (__int64)v15;
+      if ( (float)((float)((float)(*(float *)(v16 + 28) - y) * (float)(*(float *)(v16 + 28) - y))
+                 + (float)((float)(*(float *)(v16 + 24) - x) * (float)(*(float *)(v16 + 24) - x))) < v3 )
       {
-        v3 = (float)((float)(*(float *)(v16 + 28) - v11) * (float)(*(float *)(v16 + 28) - v11))
-           + (float)((float)(*(float *)(v16 + 24) - v10) * (float)(*(float *)(v16 + 24) - v10));
+        v3 = (float)((float)(*(float *)(v16 + 28) - y) * (float)(*(float *)(v16 + 28) - y))
+           + (float)((float)(*(float *)(v16 + 24) - x) * (float)(*(float *)(v16 + 24) - x));
         v5 = v16;
       }
-      if ( v9 )
-        v17 = (signed __int64)&v8->mGates + v9;
+      if ( mOffset )
+        v17 = (char *)&this->mGates + mOffset;
       else
         v17 = 0i64;
       v18 = v17 + 8;
-      v19 = *(_QWORD *)(v17 + 8 + 8 * v7);
-      v20 = v18 + 8 * v7;
+      v19 = *(_QWORD *)&v17[8 * v7 + 8];
+      v20 = &v18[8 * v7];
       if ( v19 )
-        v19 += v20;
-      if ( (float)((float)((float)(*(float *)(v19 + 28) - v11) * (float)(*(float *)(v19 + 28) - v11))
-                 + (float)((float)(*(float *)(v19 + 24) - v10) * (float)(*(float *)(v19 + 24) - v10))) < v3 )
+        v19 += (__int64)v20;
+      if ( (float)((float)((float)(*(float *)(v19 + 28) - y) * (float)(*(float *)(v19 + 28) - y))
+                 + (float)((float)(*(float *)(v19 + 24) - x) * (float)(*(float *)(v19 + 24) - x))) < v3 )
       {
-        v3 = (float)((float)(*(float *)(v19 + 28) - v11) * (float)(*(float *)(v19 + 28) - v11))
-           + (float)((float)(*(float *)(v19 + 24) - v10) * (float)(*(float *)(v19 + 24) - v10));
+        v3 = (float)((float)(*(float *)(v19 + 28) - y) * (float)(*(float *)(v19 + 28) - y))
+           + (float)((float)(*(float *)(v19 + 24) - x) * (float)(*(float *)(v19 + 24) - x));
         v5 = v19;
       }
-      if ( v9 )
-        v21 = (signed __int64)&v8->mGates + v9;
+      if ( mOffset )
+        v21 = (char *)&this->mGates + mOffset;
       else
         v21 = 0i64;
       v22 = v21 + 16;
-      v23 = *(_QWORD *)(v21 + 16 + 8 * v7);
-      v24 = v22 + 8 * v7;
+      v23 = *(_QWORD *)&v21[8 * v7 + 16];
+      v24 = &v22[8 * v7];
       if ( v23 )
-        v23 += v24;
-      if ( (float)((float)((float)(*(float *)(v23 + 28) - v11) * (float)(*(float *)(v23 + 28) - v11))
-                 + (float)((float)(*(float *)(v23 + 24) - v10) * (float)(*(float *)(v23 + 24) - v10))) < v3 )
+        v23 += (__int64)v24;
+      if ( (float)((float)((float)(*(float *)(v23 + 28) - y) * (float)(*(float *)(v23 + 28) - y))
+                 + (float)((float)(*(float *)(v23 + 24) - x) * (float)(*(float *)(v23 + 24) - x))) < v3 )
       {
-        v3 = (float)((float)(*(float *)(v23 + 28) - v11) * (float)(*(float *)(v23 + 28) - v11))
-           + (float)((float)(*(float *)(v23 + 24) - v10) * (float)(*(float *)(v23 + 24) - v10));
+        v3 = (float)((float)(*(float *)(v23 + 28) - y) * (float)(*(float *)(v23 + 28) - y))
+           + (float)((float)(*(float *)(v23 + 24) - x) * (float)(*(float *)(v23 + 24) - x));
         v5 = v23;
       }
-      if ( v9 )
-        v25 = (signed __int64)&v8->mGates + v9;
+      if ( mOffset )
+        v25 = (char *)&this->mGates + mOffset;
       else
         v25 = 0i64;
       v26 = v25 + 24;
-      v27 = *(_QWORD *)(v25 + 24 + 8 * v7);
-      v28 = v26 + 8 * v7;
+      v27 = *(_QWORD *)&v25[8 * v7 + 24];
+      v28 = &v26[8 * v7];
       if ( v27 )
-        v27 += v28;
-      if ( (float)((float)((float)(*(float *)(v27 + 28) - v11) * (float)(*(float *)(v27 + 28) - v11))
-                 + (float)((float)(*(float *)(v27 + 24) - v10) * (float)(*(float *)(v27 + 24) - v10))) < v3 )
+        v27 += (__int64)v28;
+      if ( (float)((float)((float)(*(float *)(v27 + 28) - y) * (float)(*(float *)(v27 + 28) - y))
+                 + (float)((float)(*(float *)(v27 + 24) - x) * (float)(*(float *)(v27 + 24) - x))) < v3 )
       {
-        v3 = (float)((float)(*(float *)(v27 + 28) - v11) * (float)(*(float *)(v27 + 28) - v11))
-           + (float)((float)(*(float *)(v27 + 24) - v10) * (float)(*(float *)(v27 + 24) - v10));
+        v3 = (float)((float)(*(float *)(v27 + 28) - y) * (float)(*(float *)(v27 + 28) - y))
+           + (float)((float)(*(float *)(v27 + 24) - x) * (float)(*(float *)(v27 + 24) - x));
         v5 = v27;
       }
       v7 += 4i64;
@@ -4354,23 +4177,23 @@ UFG::RoadNetworkGate *__fastcall UFG::RoadNetworkIntersection::GetClosestGate(UF
     }
     while ( v13 );
   }
-  if ( v6 < v2 )
+  if ( v6 < mNumGates )
   {
-    v29 = v8->mGates.mOffset;
+    v29 = this->mGates.mOffset;
     v32 = 8 * v7;
-    v33 = v2 - v6;
+    v33 = mNumGates - v6;
     do
     {
       if ( v29 )
-        v34 = (signed __int64)&v8->mGates + v29;
+        v34 = (char *)&this->mGates + v29;
       else
         v34 = 0i64;
-      v35 = v32 + v34;
-      v36 = *(_QWORD *)(v32 + v34);
+      v35 = &v34[v32];
+      v36 = *(_QWORD *)&v34[v32];
       if ( v36 )
-        v36 += v35;
-      v30 = v4->x;
-      v31 = v4->y;
+        v36 += (__int64)v35;
+      v30 = pos->x;
+      v31 = pos->y;
       if ( (float)((float)((float)(*(float *)(v36 + 28) - v31) * (float)(*(float *)(v36 + 28) - v31))
                  + (float)((float)(*(float *)(v36 + 24) - v30) * (float)(*(float *)(v36 + 24) - v30))) < v3 )
       {
@@ -4388,29 +4211,29 @@ UFG::RoadNetworkGate *__fastcall UFG::RoadNetworkIntersection::GetClosestGate(UF
 
 // File Line: 2739
 // RVA: 0xD1940
-void __fastcall UFG::RoadNetworkIntersection::AddLanesToGateModification(UFG::RoadNetworkIntersection *this, const unsigned int gateIndex, unsigned int flags)
+void __fastcall UFG::RoadNetworkIntersection::AddLanesToGateModification(
+        UFG::RoadNetworkIntersection *this,
+        unsigned int gateIndex,
+        unsigned int flags)
 {
-  unsigned int v3; // er12
-  unsigned int v4; // er13
-  UFG::RoadNetworkIntersection *v5; // rbp
   char *v6; // r15
-  unsigned int v7; // esi
+  unsigned int mNumLanes; // esi
   unsigned int v8; // ebx
   unsigned __int64 v9; // rax
   bool v10; // zf
   unsigned int v11; // edi
-  __int64 v12; // rax
-  signed __int64 v13; // rcx
-  _QWORD *v14; // rax
+  __int64 mOffset; // rax
+  char *v13; // rcx
+  char *v14; // rax
   char *v15; // rax
   __int64 v16; // rcx
-  signed __int64 v17; // rbx
-  unsigned int *v18; // r14
-  UFG::RoadNetworkConnection *v19; // rax
+  char *v17; // rbx
+  char *v18; // r14
+  UFG::RoadNetworkConnection *IncomingConnection; // rax
   __int64 v20; // rcx
-  signed __int64 v21; // rdx
+  char *v21; // rdx
   __int64 v22; // rax
-  _QWORD *v23; // rax
+  char *v23; // rax
   char *v24; // rcx
   char *v25; // rax
   char *v26; // rbx
@@ -4418,36 +4241,25 @@ void __fastcall UFG::RoadNetworkIntersection::AddLanesToGateModification(UFG::Ro
   __int64 v28; // rdi
   unsigned __int64 v29; // rax
   __int64 v30; // rdx
-  UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *v31; // rax
+  UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *mPrev; // rax
   unsigned int v32; // [rsp+70h] [rbp+8h]
 
-  v3 = flags;
-  v4 = gateIndex;
-  v5 = this;
   v6 = 0i64;
-  v7 = (unsigned __int8)this->mNumLanes;
-  v32 = v7;
-  if ( (signed int)v7 <= 0 )
-  {
-    v10 = v7 == 0;
-    v7 = 0;
-    if ( !v10 )
-      v7 = 0;
-    v32 = 0;
-  }
-  else
+  mNumLanes = (unsigned __int8)this->mNumLanes;
+  v32 = mNumLanes;
+  if ( this->mNumLanes )
   {
     v8 = 1;
-    if ( v7 <= 1 )
-      goto LABEL_55;
+    if ( mNumLanes <= 1 )
+      goto LABEL_5;
     do
       v8 *= 2;
-    while ( v8 < v7 );
+    while ( v8 < mNumLanes );
     if ( v8 <= 4 )
-LABEL_55:
+LABEL_5:
       v8 = 4;
-    if ( v8 - v7 > 0x10000 )
-      v8 = v7 + 0x10000;
+    if ( v8 - mNumLanes > 0x10000 )
+      v8 = mNumLanes + 0x10000;
     if ( v8 )
     {
       v9 = 4i64 * v8;
@@ -4456,49 +4268,57 @@ LABEL_55:
       v6 = UFG::qMalloc(v9, "RoadNetworkIntersection", 0i64);
     }
   }
+  else
+  {
+    v10 = mNumLanes == 0;
+    mNumLanes = 0;
+    if ( !v10 )
+      mNumLanes = 0;
+    v32 = 0;
+  }
   v11 = 0;
-  if ( v5->mNumLanes > 0u )
+  if ( this->mNumLanes )
   {
     do
     {
-      v12 = v5->mLane.mOffset;
-      if ( v12 )
-        v13 = (signed __int64)&v5->mLane + v12;
+      mOffset = this->mLane.mOffset;
+      if ( mOffset )
+        v13 = (char *)&this->mLane + mOffset;
       else
         v13 = 0i64;
-      v14 = (_QWORD *)(v13 + 8i64 * v11);
-      if ( *v14 )
-        v15 = (char *)v14 + *v14;
+      v14 = &v13[8 * v11];
+      if ( *(_QWORD *)v14 )
+        v15 = &v14[*(_QWORD *)v14];
       else
         v15 = 0i64;
       v16 = *((_QWORD *)v15 + 13);
       if ( v16 )
-        v17 = (signed __int64)&v15[v16 + 104];
+        v17 = &v15[v16 + 104];
       else
         v17 = 0i64;
-      v18 = (unsigned int *)&v6[4 * v11];
-      *v18 = (unsigned __int8)v15[44];
-      v19 = UFG::RoadNetworkGate::GetIncomingConnection((UFG::RoadNetworkGate *)v5, v4);
-      v20 = v19->mLaneList.mOffset;
+      v18 = &v6[4 * v11];
+      *(_DWORD *)v18 = (unsigned __int8)v15[44];
+      IncomingConnection = UFG::RoadNetworkGate::GetIncomingConnection((UFG::RoadNetworkGate *)this, gateIndex);
+      v20 = IncomingConnection->mLaneList.mOffset;
       if ( v20 )
-        v21 = (signed __int64)&v19->mLaneList + v20;
+        v21 = (char *)&IncomingConnection->mLaneList + v20;
       else
         v21 = 0i64;
-      v22 = *(_QWORD *)(v17 + 24);
+      v22 = *((_QWORD *)v17 + 3);
       if ( v22 )
-        v23 = (_QWORD *)(v17 + v22 + 24);
+        v23 = &v17[v22 + 24];
       else
         v23 = 0i64;
-      if ( *v23 )
-        v24 = (char *)v23 + *v23;
+      if ( *(_QWORD *)v23 )
+        v24 = &v23[*(_QWORD *)v23];
       else
         v24 = 0i64;
-      if ( v24 == (char *)v21 )
-        *v18 = v3;
+      if ( v24 == v21 )
+        *(_DWORD *)v18 = flags;
       ++v11;
     }
-    while ( v11 < (unsigned __int8)v5->mNumLanes );
-    v7 = v32;
+    while ( v11 < (unsigned __int8)this->mNumLanes );
+    mNumLanes = v32;
   }
   v25 = UFG::qMalloc(0x30ui64, "RoadNetworkIntersection.RoadNetworkIntersectionModification", 0i64);
   v26 = v25;
@@ -4508,32 +4328,29 @@ LABEL_55:
     *((_QWORD *)v25 + 1) = v25;
     *((_QWORD *)v25 + 3) = 0i64;
     *((_QWORD *)v25 + 2) = 0i64;
-    *((_QWORD *)v25 + 4) = v5;
+    *((_QWORD *)v25 + 4) = this;
     v27 = (void *)*((_QWORD *)v25 + 3);
     if ( v27 )
       operator delete[](v27);
     *((_QWORD *)v26 + 3) = 0i64;
     *((_QWORD *)v26 + 2) = 0i64;
-    if ( v7 )
+    if ( mNumLanes )
     {
-      *((_DWORD *)v26 + 4) = v7;
-      v28 = v7;
-      v29 = 4i64 * v7;
-      if ( !is_mul_ok(v7, 4ui64) )
+      *((_DWORD *)v26 + 4) = mNumLanes;
+      v28 = mNumLanes;
+      v29 = 4i64 * mNumLanes;
+      if ( !is_mul_ok(mNumLanes, 4ui64) )
         v29 = -1i64;
       *((_QWORD *)v26 + 3) = UFG::qMalloc(v29, "qArray.Clone", 0i64);
-      *((_DWORD *)v26 + 5) = v7;
-      if ( v7 )
+      *((_DWORD *)v26 + 5) = mNumLanes;
+      v30 = 0i64;
+      do
       {
-        v30 = 0i64;
-        do
-        {
-          *(_DWORD *)(v30 + *((_QWORD *)v26 + 3)) = *(_DWORD *)&v6[v30];
-          v30 += 4i64;
-          --v28;
-        }
-        while ( v28 );
+        *(_DWORD *)(v30 + *((_QWORD *)v26 + 3)) = *(_DWORD *)&v6[v30];
+        v30 += 4i64;
+        --v28;
       }
+      while ( v28 );
     }
     else
     {
@@ -4546,134 +4363,114 @@ LABEL_55:
   {
     v26 = 0i64;
   }
-  v31 = v5->mModifications.mNode.mPrev;
-  v31->mNext = (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)v26;
-  *(_QWORD *)v26 = v31;
-  *((_QWORD *)v26 + 1) = (char *)v5 + 80;
-  v5->mModifications.mNode.mPrev = (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)v26;
-  UFG::RoadNetworkIntersection::ApplyModification(v5, (UFG::RoadNetworkNodeModification *)v26);
+  mPrev = this->mModifications.mNode.mPrev;
+  mPrev->mNext = (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)v26;
+  *(_QWORD *)v26 = mPrev;
+  *((_QWORD *)v26 + 1) = &this->mModifications;
+  this->mModifications.mNode.mPrev = (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)v26;
+  UFG::RoadNetworkIntersection::ApplyModification(this, (UFG::RoadNetworkNodeModification *)v26);
   if ( v6 )
     operator delete[](v6);
 }
 
 // File Line: 2765
 // RVA: 0xD1DF0
-void __fastcall UFG::RoadNetworkIntersection::AddPhaseModification(UFG::RoadNetworkIntersection *this, UFG::RoadNetworkIntersectionModification::AllPhaseStatus status)
+void __fastcall UFG::RoadNetworkIntersection::AddPhaseModification(
+        UFG::RoadNetworkIntersection *this,
+        UFG::RoadNetworkIntersectionModification::AllPhaseStatus status)
 {
-  UFG::RoadNetworkIntersectionModification::AllPhaseStatus v2; // esi
-  UFG::RoadNetworkIntersection *v3; // rdi
   char *v4; // rax
   char *v5; // rbx
-  UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *v6; // rax
+  UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *mPrev; // rax
 
-  v2 = status;
-  v3 = this;
   v4 = UFG::qMalloc(0x30ui64, "RoadNetworkIntersection.RoadNetworkIntersectionModification", 0i64);
   v5 = v4;
   if ( v4 )
   {
-    UFG::RoadNetworkNodeModification::RoadNetworkNodeModification(
-      (UFG::RoadNetworkNodeModification *)v4,
-      (UFG::RoadNetworkNode *)&v3->mType);
-    *((_DWORD *)v5 + 10) = v2;
+    UFG::RoadNetworkNodeModification::RoadNetworkNodeModification((UFG::RoadNetworkNodeModification *)v4, this);
+    *((_DWORD *)v5 + 10) = status;
   }
   else
   {
     v5 = 0i64;
   }
-  v6 = v3->mModifications.mNode.mPrev;
-  v6->mNext = (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)v5;
-  *(_QWORD *)v5 = v6;
-  *((_QWORD *)v5 + 1) = (char *)v3 + 80;
-  v3->mModifications.mNode.mPrev = (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)v5;
-  UFG::RoadNetworkIntersection::ApplyModification(v3, (UFG::RoadNetworkNodeModification *)v5);
+  mPrev = this->mModifications.mNode.mPrev;
+  mPrev->mNext = (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)v5;
+  *(_QWORD *)v5 = mPrev;
+  *((_QWORD *)v5 + 1) = &this->mModifications;
+  this->mModifications.mNode.mPrev = (UFG::qNode<UFG::RoadNetworkNodeModification,UFG::RoadNetworkNodeModification> *)v5;
+  UFG::RoadNetworkIntersection::ApplyModification(this, (UFG::RoadNetworkNodeModification *)v5);
 }
 
 // File Line: 2773
 // RVA: 0xD23F0
-void __fastcall UFG::RoadNetworkIntersection::ApplyModification(UFG::RoadNetworkIntersection *this, UFG::RoadNetworkNodeModification *modification)
+void __fastcall UFG::RoadNetworkIntersection::ApplyModification(
+        UFG::RoadNetworkIntersection *this,
+        UFG::RoadNetworkNodeModification *modification)
 {
-  UFG::RoadNetworkNodeModification *v2; // r10
-  UFG::RoadNetworkIntersection *v3; // rbx
-  unsigned int v4; // er8
-  __int64 v5; // rax
-  signed __int64 v6; // rcx
+  unsigned int i; // r8d
+  __int64 mOffset; // rax
+  char *v6; // rcx
   __int64 v7; // r9
-  signed __int64 v8; // rax
-  __int64 v9; // rcx
-  signed __int64 v10; // rdx
-  int v11; // eax
-  char v12; // r9
-  unsigned int v13; // ecx
-  __int64 v14; // rax
-  signed __int64 v15; // rdx
-  __int64 v16; // rax
-  signed __int64 v17; // rax
+  char *v8; // rax
+  char *v9; // rdx
+  int mPrev; // eax
+  char v11; // r9
+  unsigned int j; // ecx
+  __int64 v13; // rax
+  char *v14; // rdx
+  char *v15; // r8
+  char *v16; // rax
 
-  v2 = modification;
-  v3 = this;
   if ( modification->mLaneFlagsCollection.size )
   {
-    v4 = 0;
-    if ( this->mNumLanes > 0u )
+    for ( i = 0; i < (unsigned __int8)this->mNumLanes; v9[44] = modification->mLaneFlagsCollection.p[v7] )
     {
-      do
-      {
-        v5 = v3->mLane.mOffset;
-        if ( v5 )
-          v6 = (signed __int64)&v3->mLane + v5;
-        else
-          v6 = 0i64;
-        v7 = v4;
-        v8 = v6 + 8i64 * v4;
-        v9 = *(_QWORD *)(v6 + 8i64 * v4);
-        v10 = v9 + v8;
-        if ( !v9 )
-          v10 = 0i64;
-        ++v4;
-        *(_BYTE *)(v10 + 44) = v2->mLaneFlagsCollection.p[v7];
-      }
-      while ( v4 < (unsigned __int8)v3->mNumLanes );
+      mOffset = this->mLane.mOffset;
+      if ( mOffset )
+        v6 = (char *)&this->mLane + mOffset;
+      else
+        v6 = 0i64;
+      v7 = i;
+      v8 = &v6[8 * i];
+      v9 = &v8[*(_QWORD *)v8];
+      if ( !*(_QWORD *)v8 )
+        v9 = 0i64;
+      ++i;
     }
   }
-  v11 = (int)v2[1].mPrev;
-  if ( v11 )
+  mPrev = (int)modification[1].mPrev;
+  if ( mPrev )
   {
-    v12 = 2;
-    v3->mEnableTimer = 0;
-    if ( v11 == 2 )
+    v11 = 2;
+    this->mEnableTimer = 0;
+    if ( mPrev == 2 )
     {
-      v12 = 1;
+      v11 = 1;
     }
-    else if ( v11 == 1 )
+    else if ( mPrev == 1 )
     {
-      v12 = 0;
+      v11 = 0;
     }
-    v13 = 0;
-    if ( v3->mNumLanes > 0u )
+    for ( j = 0; j < (unsigned __int8)this->mNumLanes; ++j )
     {
-      do
-      {
-        v14 = v3->mLane.mOffset;
-        if ( v14 )
-          v15 = (signed __int64)&v3->mLane + v14;
-        else
-          v15 = 0i64;
-        v16 = *(_QWORD *)(v15 + 8i64 * v13);
-        if ( v16 )
-          v17 = v15 + 8i64 * v13 + v16;
-        else
-          v17 = 0i64;
-        *(_BYTE *)(v17 + 55) = v12;
-        ++v13;
-      }
-      while ( v13 < (unsigned __int8)v3->mNumLanes );
+      v13 = this->mLane.mOffset;
+      if ( v13 )
+        v14 = (char *)&this->mLane + v13;
+      else
+        v14 = 0i64;
+      v15 = &v14[8 * j];
+      if ( *(_QWORD *)v15 )
+        v16 = &v15[*(_QWORD *)v15];
+      else
+        v16 = 0i64;
+      v16[55] = v11;
     }
   }
   else
   {
-    UFG::RoadNetworkIntersection::InitializePhases(v3);
-    v3->mEnableTimer = 1;
+    UFG::RoadNetworkIntersection::InitializePhases(this);
+    this->mEnableTimer = 1;
   }
 }
 
@@ -4681,29 +4478,28 @@ void __fastcall UFG::RoadNetworkIntersection::ApplyModification(UFG::RoadNetwork
 // RVA: 0xD87C0
 char __fastcall UFG::RoadNetworkIntersection::GetExtendBeyondVisibleAreaLimit(UFG::RoadNetworkIntersection *this)
 {
-  unsigned int v1; // er11
-  unsigned int v2; // edx
-  __int64 v3; // r10
-  UFG::qOffset64<UFG::qOffset64<UFG::RoadNetworkGate *> *> *v4; // rbx
-  __int64 v5; // r9
+  unsigned int mNumGates; // r11d
+  int v2; // edx
+  __int64 mOffset; // r10
+  UFG::qOffset64<UFG::qOffset64<UFG::RoadNetworkGate *> *> *p_mGates; // rbx
+  __int64 i; // r9
   char *v6; // rax
   char *v7; // rcx
   __int64 v8; // rax
   __int64 v9; // rcx
-  signed __int64 v10; // r8
+  __int64 v10; // r8
 
-  v1 = (unsigned __int8)this->mNumGates;
+  mNumGates = (unsigned __int8)this->mNumGates;
   v2 = 0;
   if ( !this->mNumGates )
     return 0;
-  v3 = this->mGates.mOffset;
-  v4 = &this->mGates;
-  v5 = 0i64;
-  while ( 1 )
+  mOffset = this->mGates.mOffset;
+  p_mGates = &this->mGates;
+  for ( i = 0i64; ; i += 8i64 )
   {
-    v6 = (char *)(v3 ? (UFG::qOffset64<UFG::qOffset64<UFG::RoadNetworkGate *> *> *)((char *)v4 + v3) : 0i64);
-    v7 = &v6[v5];
-    v8 = *(_QWORD *)&v6[v5];
+    v6 = mOffset ? (char *)p_mGates + mOffset : 0i64;
+    v7 = &v6[i];
+    v8 = *(_QWORD *)&v6[i];
     if ( v8 )
       v8 += (__int64)v7;
     v9 = *(_QWORD *)(v8 + 8);
@@ -4712,13 +4508,11 @@ char __fastcall UFG::RoadNetworkIntersection::GetExtendBeyondVisibleAreaLimit(UF
       v10 = v9 + v8 + 8;
       if ( v10 )
       {
-        if ( (*(_DWORD *)(v10 + 168) >> 6) & 1 )
+        if ( (*(_DWORD *)(v10 + 168) & 0x40) != 0 )
           break;
       }
     }
-    ++v2;
-    v5 += 8i64;
-    if ( v2 >= v1 )
+    if ( ++v2 >= mNumGates )
       return 0;
   }
   return 1;
@@ -4728,30 +4522,30 @@ char __fastcall UFG::RoadNetworkIntersection::GetExtendBeyondVisibleAreaLimit(UF
 // RVA: 0xD5E30
 bool __fastcall UFG::RoadNetworkIntersection::GetBuildVisibleRoadNetworkByGrid(UFG::RoadNetworkIntersection *this)
 {
-  unsigned int v1; // ebx
+  unsigned int mNumGates; // ebx
   bool result; // al
-  unsigned int v3; // er9
-  __int64 v4; // r11
-  UFG::qOffset64<UFG::qOffset64<UFG::RoadNetworkGate *> *> *v5; // rdi
+  unsigned int v3; // r9d
+  __int64 mOffset; // r11
+  UFG::qOffset64<UFG::qOffset64<UFG::RoadNetworkGate *> *> *p_mGates; // rdi
   __int64 v6; // r10
   char *v7; // rcx
   char *v8; // rdx
   __int64 v9; // rcx
   __int64 v10; // rdx
-  signed __int64 v11; // r8
+  __int64 v11; // r8
 
-  v1 = (unsigned __int8)this->mNumGates;
+  mNumGates = (unsigned __int8)this->mNumGates;
   result = 0;
   v3 = 0;
   if ( this->mNumGates )
   {
-    v4 = this->mGates.mOffset;
-    v5 = &this->mGates;
+    mOffset = this->mGates.mOffset;
+    p_mGates = &this->mGates;
     v6 = 0i64;
     do
     {
-      if ( v4 )
-        v7 = (char *)v5 + v4;
+      if ( mOffset )
+        v7 = (char *)p_mGates + mOffset;
       else
         v7 = 0i64;
       v8 = &v7[v6];
@@ -4764,15 +4558,15 @@ bool __fastcall UFG::RoadNetworkIntersection::GetBuildVisibleRoadNetworkByGrid(U
         v11 = v10 + v9 + 8;
         if ( v11 )
         {
-          result = (*(_DWORD *)(v11 + 168) >> 5) & 1;
-          if ( result )
+          result = (*(_DWORD *)(v11 + 168) & 0x20) != 0;
+          if ( (*(_DWORD *)(v11 + 168) & 0x20) != 0 )
             break;
         }
       }
       ++v3;
       v6 += 8i64;
     }
-    while ( v3 < v1 );
+    while ( v3 < mNumGates );
   }
   return result;
 }
@@ -4782,30 +4576,28 @@ bool __fastcall UFG::RoadNetworkIntersection::GetBuildVisibleRoadNetworkByGrid(U
 char __fastcall UFG::RoadNetworkIntersection::IsWater(UFG::RoadNetworkIntersection *this)
 {
   __int64 v1; // rdi
-  UFG::RoadNetworkIntersection *v2; // rsi
-  __int64 v3; // rax
-  signed __int64 v4; // rcx
+  __int64 mOffset; // rax
+  char *v4; // rcx
   __int64 v5; // rax
   __int64 v6; // rcx
   UFG::RoadNetworkSegment *v7; // rcx
-  unsigned int v8; // ebx
-  UFG::qPropertySet *v9; // rax
+  unsigned int mValue; // ebx
+  UFG::qPropertySet *RoadPropertySet; // rax
   unsigned int *v10; // rax
 
   v1 = 0i64;
-  v2 = this;
   if ( !this->mNumGates )
     return 0;
   while ( 1 )
   {
-    v3 = v2->mGates.mOffset;
-    if ( v3 )
-      v4 = (signed __int64)&v2->mGates + v3;
+    mOffset = this->mGates.mOffset;
+    if ( mOffset )
+      v4 = (char *)&this->mGates + mOffset;
     else
       v4 = 0i64;
-    v5 = *(_QWORD *)(v4 + 8 * v1);
+    v5 = *(_QWORD *)&v4[8 * v1];
     if ( v5 )
-      v5 += v4 + 8 * v1;
+      v5 += (__int64)&v4[8 * v1];
     v6 = *(_QWORD *)(v5 + 8);
     if ( v6 )
     {
@@ -4814,28 +4606,25 @@ char __fastcall UFG::RoadNetworkIntersection::IsWater(UFG::RoadNetworkIntersecti
       {
         if ( v7->mpPropertySetCached )
         {
-          v8 = v7->mRoadNetworkType.mValue;
+          mValue = v7->mRoadNetworkType.mValue;
         }
         else
         {
-          v9 = UFG::RoadNetworkSegment::GetRoadPropertySet(v7);
-          v8 = 0;
-          if ( v9 )
+          RoadPropertySet = UFG::RoadNetworkSegment::GetRoadPropertySet(v7);
+          mValue = 0;
+          if ( RoadPropertySet )
           {
-            v10 = UFG::qPropertySet::Get<unsigned long>(
-                    v9,
-                    (UFG::qSymbol *)&qSymbol_RoadNetworkType.mUID,
-                    DEPTH_RECURSE);
+            v10 = UFG::qPropertySet::Get<unsigned long>(RoadPropertySet, &qSymbol_RoadNetworkType, DEPTH_RECURSE);
             if ( v10 )
-              v8 = *v10;
+              mValue = *v10;
           }
         }
-        if ( v8 - 2 <= 1 )
+        if ( mValue - 2 <= 1 )
           break;
       }
     }
     v1 = (unsigned int)(v1 + 1);
-    if ( (unsigned int)v1 >= (unsigned __int8)v2->mNumGates )
+    if ( (unsigned int)v1 >= (unsigned __int8)this->mNumGates )
       return 0;
   }
   return 1;
@@ -4843,125 +4632,116 @@ char __fastcall UFG::RoadNetworkIntersection::IsWater(UFG::RoadNetworkIntersecti
 
 // File Line: 3122
 // RVA: 0xE0850
-void __fastcall UFG::RoadNetworkTrafficLightPhase::SetLaneStatus(UFG::RoadNetworkTrafficLightPhase *this, UFG::RoadNetworkLane::LaneStatus laneStatus, bool updateTrafficLightEffects)
+void __fastcall UFG::RoadNetworkTrafficLightPhase::SetLaneStatus(
+        UFG::RoadNetworkTrafficLightPhase *this,
+        UFG::RoadNetworkLane::LaneStatus laneStatus,
+        bool updateTrafficLightEffects)
 {
-  unsigned int v3; // eax
-  bool v4; // r11
-  UFG::RoadNetworkLane::LaneStatus v5; // ebx
-  UFG::RoadNetworkTrafficLightPhase *v6; // rsi
+  unsigned int mNumProtectedLanes; // eax
   __int64 v7; // r9
   __int64 v8; // r10
-  __int64 v9; // rax
-  signed __int64 v10; // rcx
-  signed __int64 v11; // rax
+  __int64 mOffset; // rax
+  char *v10; // rcx
+  char *v11; // rax
   __int64 v12; // rcx
-  signed __int64 v13; // rax
-  unsigned int v14; // eax
+  char *v13; // rax
+  unsigned int mNumPermissiveLanes; // eax
   __int64 v15; // rdx
   __int64 v16; // r8
   __int64 v17; // rax
-  signed __int64 v18; // rcx
-  signed __int64 v19; // rax
+  char *v18; // rcx
+  char *v19; // rax
   __int64 v20; // rcx
-  signed __int64 v21; // rax
-  __int64 v22; // rdi
+  char *v21; // rax
+  __int64 i; // rdi
   __int64 v23; // rax
-  signed __int64 v24; // rcx
+  char *v24; // rcx
   UFG::RoadNetworkTrafficLightLocation **v25; // rax
   UFG::RoadNetworkTrafficLightLocation *v26; // rcx
   UFG::RoadNetworkTrafficLightLampData::TrafficLightColour v27; // edx
 
-  v3 = this->mNumProtectedLanes;
-  v4 = updateTrafficLightEffects;
-  v5 = laneStatus;
-  v6 = this;
+  mNumProtectedLanes = this->mNumProtectedLanes;
   this->mCurrentStatus = laneStatus;
-  if ( v3 )
+  if ( mNumProtectedLanes )
   {
     v7 = 0i64;
-    v8 = v3;
+    v8 = mNumProtectedLanes;
     do
     {
-      v9 = v6->mProtectedLanes.mOffset;
-      if ( v9 )
-        v10 = (signed __int64)&v6->mProtectedLanes + v9;
+      mOffset = this->mProtectedLanes.mOffset;
+      if ( mOffset )
+        v10 = (char *)&this->mProtectedLanes + mOffset;
       else
         v10 = 0i64;
-      v11 = v7 + v10;
-      v12 = *(_QWORD *)(v7 + v10);
+      v11 = &v10[v7];
+      v12 = *(_QWORD *)&v10[v7];
       if ( v12 )
-        v13 = v12 + v11;
+        v13 = &v11[v12];
       else
         v13 = 0i64;
       v7 += 8i64;
-      *(_BYTE *)(v13 + 55) = laneStatus;
+      v13[55] = laneStatus;
       --v8;
     }
     while ( v8 );
   }
-  v14 = v6->mNumPermissiveLanes;
-  if ( v14 )
+  mNumPermissiveLanes = this->mNumPermissiveLanes;
+  if ( mNumPermissiveLanes )
   {
     v15 = 0i64;
-    v16 = v14;
+    v16 = mNumPermissiveLanes;
     do
     {
-      v17 = v6->mPermissiveLanes.mOffset;
+      v17 = this->mPermissiveLanes.mOffset;
       if ( v17 )
-        v18 = (signed __int64)&v6->mPermissiveLanes + v17;
+        v18 = (char *)&this->mPermissiveLanes + v17;
       else
         v18 = 0i64;
-      v19 = v15 + v18;
-      v20 = *(_QWORD *)(v15 + v18);
+      v19 = &v18[v15];
+      v20 = *(_QWORD *)&v18[v15];
       if ( v20 )
-        v21 = v20 + v19;
+        v21 = &v19[v20];
       else
         v21 = 0i64;
       v15 += 8i64;
-      *(_BYTE *)(v21 + 55) = v5;
+      v21[55] = laneStatus;
       --v16;
     }
     while ( v16 );
   }
-  if ( v4 )
+  if ( updateTrafficLightEffects )
   {
-    v22 = 0i64;
-    if ( v6->mNumTrafficLights )
+    for ( i = 0i64; (unsigned int)i < this->mNumTrafficLights; i = (unsigned int)(i + 1) )
     {
-      do
+      v23 = this->mTrafficLightCollection.mOffset;
+      if ( v23 )
+        v24 = (char *)&this->mTrafficLightCollection + v23;
+      else
+        v24 = 0i64;
+      v25 = *(UFG::RoadNetworkTrafficLightLocation ***)&v24[8 * i];
+      if ( v25 )
+        v25 = (UFG::RoadNetworkTrafficLightLocation **)&v24[8 * i + (_QWORD)v25];
+      v26 = *v25;
+      if ( *v25 )
+        v26 = (UFG::RoadNetworkTrafficLightLocation *)((char *)v26 + (_QWORD)v25);
+      if ( laneStatus )
       {
-        v23 = v6->mTrafficLightCollection.mOffset;
-        if ( v23 )
-          v24 = (signed __int64)&v6->mTrafficLightCollection + v23;
-        else
-          v24 = 0i64;
-        v25 = *(UFG::RoadNetworkTrafficLightLocation ***)(v24 + 8 * v22);
-        if ( v25 )
-          v25 = (UFG::RoadNetworkTrafficLightLocation **)((char *)v25 + 8 * v22 + v24);
-        v26 = *v25;
-        if ( *v25 )
-          v26 = (UFG::RoadNetworkTrafficLightLocation *)((char *)v26 + (_QWORD)v25);
-        if ( v5 )
+        if ( laneStatus == YELLOW )
         {
-          if ( v5 == 1 )
-          {
-            v27 = 1;
-          }
-          else
-          {
-            v27 = 3;
-            if ( v5 == 2 )
-              v27 = 2;
-          }
+          v27 = yellow;
         }
         else
         {
-          v27 = 0;
+          v27 = numColours;
+          if ( laneStatus == GREEN )
+            v27 = green;
         }
-        UFG::RoadNetworkTrafficLightLocation::SetLampEffect(v26, v27, 0);
-        v22 = (unsigned int)(v22 + 1);
       }
-      while ( (unsigned int)v22 < v6->mNumTrafficLights );
+      else
+      {
+        v27 = red;
+      }
+      UFG::RoadNetworkTrafficLightLocation::SetLampEffect(v26, v27, Straight);
     }
   }
 }
@@ -4971,18 +4751,15 @@ void __fastcall UFG::RoadNetworkTrafficLightPhase::SetLaneStatus(UFG::RoadNetwor
 hkSeekableStreamReader *dynamic_initializer_for__UFG::RoadNetworkTrafficLightLampData::trafficLight001__()
 {
   hkSeekableStreamReader *v0; // rbx
-  signed int v1; // edi
+  int i; // edi
   hkSeekableStreamReader *result; // rax
 
   v0 = &UFG::RoadNetworkTrafficLightLampData::trafficLight001;
-  v1 = 2;
-  do
+  for ( i = 2; i >= 0; --i )
   {
     result = Assembly::GetRCX(v0);
     v0 += 4;
-    --v1;
   }
-  while ( v1 >= 0 );
   return result;
 }
 
@@ -4991,18 +4768,15 @@ hkSeekableStreamReader *dynamic_initializer_for__UFG::RoadNetworkTrafficLightLam
 hkSeekableStreamReader *dynamic_initializer_for__UFG::RoadNetworkTrafficLightLampData::trafficLight002__()
 {
   hkSeekableStreamReader *v0; // rbx
-  signed int v1; // edi
+  int i; // edi
   hkSeekableStreamReader *result; // rax
 
   v0 = &UFG::RoadNetworkTrafficLightLampData::trafficLight002;
-  v1 = 2;
-  do
+  for ( i = 2; i >= 0; --i )
   {
     result = Assembly::GetRCX(v0);
     v0 += 4;
-    --v1;
   }
-  while ( v1 >= 0 );
   return result;
 }
 
@@ -5038,27 +4812,26 @@ void UFG::RoadNetworkTrafficLightLampData::Init(void)
 
 // File Line: 3213
 // RVA: 0xD9430
-__int64 __fastcall UFG::RoadNetworkTrafficLightLampData::GetLampEffectUID(UFG::RoadNetworkTrafficLightLampData::TrafficLightColour colour)
+__int64 __fastcall UFG::RoadNetworkTrafficLightLampData::GetLampEffectUID(
+        UFG::RoadNetworkTrafficLightLampData::TrafficLightColour colour)
 {
-  UFG::RoadNetworkTrafficLightLampData::TrafficLightColour v1; // ebx
   unsigned int v2; // eax
   __int64 result; // rax
 
-  v1 = colour;
   v2 = _S8_1;
-  if ( !(_S8_1 & 1) )
+  if ( (_S8_1 & 1) == 0 )
   {
     _S8_1 |= 1u;
     redUID = UFG::qStringHashUpper32("HK_Stoplight_Red_01_Effect", 0xFFFFFFFF);
     v2 = _S8_1;
   }
-  if ( !(v2 & 2) )
+  if ( (v2 & 2) == 0 )
   {
     _S8_1 = v2 | 2;
     yellowUID = UFG::qStringHashUpper32("HK_Stoplight_Yellow_01_Effect", 0xFFFFFFFF);
     v2 = _S8_1;
   }
-  if ( v2 & 4 )
+  if ( (v2 & 4) != 0 )
   {
     result = greenUID;
   }
@@ -5068,11 +4841,11 @@ __int64 __fastcall UFG::RoadNetworkTrafficLightLampData::GetLampEffectUID(UFG::R
     result = UFG::qStringHashUpper32("HK_Stoplight_Green_01_Effect", 0xFFFFFFFF);
     greenUID = result;
   }
-  if ( v1 != 2 )
+  if ( colour != green )
   {
     result = redUID;
-    if ( v1 == 1 )
-      result = yellowUID;
+    if ( colour == yellow )
+      return yellowUID;
   }
   return result;
 }
@@ -5083,7 +4856,7 @@ __int64 __fastcall UFG::RoadNetworkTrafficLightLampData::GetArrowEffectUID()
 {
   __int64 result; // rax
 
-  if ( _S9_0 & 1 )
+  if ( (_S9_0 & 1) != 0 )
     return greenArrowUID;
   _S9_0 |= 1u;
   result = UFG::qStringHashUpper32("HK_Stoplight_GrnArrow_01_Effect", 0xFFFFFFFF);
@@ -5095,271 +4868,253 @@ __int64 __fastcall UFG::RoadNetworkTrafficLightLampData::GetArrowEffectUID()
 // RVA: 0xD4580
 void __fastcall UFG::RoadNetworkTrafficLightLocation::EnableEffects(UFG::RoadNetworkTrafficLightLocation *this)
 {
-  this->mFlags &= 0xFFFFFFFB;
+  this->mFlags &= ~4u;
 }
 
 // File Line: 3258
 // RVA: 0xD4530
 void __fastcall UFG::RoadNetworkTrafficLightLocation::DisableEffects(UFG::RoadNetworkTrafficLightLocation *this)
 {
-  unsigned int v1; // edx
-  UFG::RoadNetworkTrafficLightLocation *v2; // rbx
-  unsigned int v3; // edx
+  unsigned int mVehicleSignalEffect; // edx
+  unsigned int mPedestrianSignalEffect; // edx
 
-  v1 = this->mVehicleSignalEffect;
-  v2 = this;
-  if ( v1 != -1 )
+  mVehicleSignalEffect = this->mVehicleSignalEffect;
+  if ( mVehicleSignalEffect != -1 )
   {
-    Render::FXManager::KillEffect(&Render::gFXManager, v1, 0);
-    v2->mVehicleSignalEffect = -1;
+    Render::FXManager::KillEffect(&Render::gFXManager, mVehicleSignalEffect, FXKILLOPTION_DEFAULT);
+    this->mVehicleSignalEffect = -1;
   }
-  v3 = v2->mPedestrianSignalEffect;
-  if ( v3 != -1 )
+  mPedestrianSignalEffect = this->mPedestrianSignalEffect;
+  if ( mPedestrianSignalEffect != -1 )
   {
-    Render::FXManager::KillEffect(&Render::gFXManager, v3, 0);
-    v2->mPedestrianSignalEffect = -1;
+    Render::FXManager::KillEffect(&Render::gFXManager, mPedestrianSignalEffect, FXKILLOPTION_DEFAULT);
+    this->mPedestrianSignalEffect = -1;
   }
-  v2->mFlags |= 4u;
+  this->mFlags |= 4u;
 }
 
 // File Line: 3299
 // RVA: 0xE04C0
-void __fastcall UFG::RoadNetworkTrafficLightLocation::SetLampEffect(UFG::RoadNetworkTrafficLightLocation *this, UFG::RoadNetworkTrafficLightLampData::TrafficLightColour colour, UFG::RoadNetworkLane::LaneTurnDirection turnDirection)
+void __fastcall UFG::RoadNetworkTrafficLightLocation::SetLampEffect(
+        UFG::RoadNetworkTrafficLightLocation *this,
+        UFG::RoadNetworkTrafficLightLampData::TrafficLightColour colour,
+        UFG::RoadNetworkLane::LaneTurnDirection turnDirection)
 {
   __int64 v3; // rdi
-  unsigned int v4; // edx
-  UFG::RoadNetworkLane::LaneTurnDirection v5; // esi
-  UFG::RoadNetworkTrafficLightLocation *v6; // rbx
-  unsigned int v7; // edx
-  unsigned int v8; // eax
+  unsigned int mVehicleSignalEffect; // edx
+  unsigned int mPedestrianSignalEffect; // edx
+  unsigned int mFlags; // eax
   bool v9; // zf
   hkSeekableStreamReader *v10; // rax
-  float v11; // xmm6_4
-  __m128 v12; // xmm5
-  float v13; // xmm7_4
+  float y; // xmm6_4
+  __m128 x_low; // xmm5
+  float z; // xmm7_4
   __m128 v14; // xmm2
   float v15; // xmm1_4
-  __m128 v16; // xmm8
-  float v17; // xmm5_4
-  float v18; // xmm6_4
-  float v19; // xmm7_4
-  __m128 v20; // xmm2
-  float v21; // xmm0_4
-  __m128 v22; // xmm2
-  __m128 v23; // xmm1
+  float v16; // xmm5_4
+  float v17; // xmm6_4
+  float v18; // xmm7_4
+  __m128 v19; // xmm2
+  float v20; // xmm0_4
+  __m128 v21; // xmm2
+  __m128 v22; // xmm1
+  float v23; // xmm10_4
   float v24; // xmm10_4
-  float v25; // xmm10_4
-  __m128 v26; // xmm11
-  float v27; // xmm10_4
-  __m128 v28; // xmm8
-  float v29; // xmm1_4
-  float v30; // xmm2_4
-  float v31; // xmm0_4
-  __m128 v32; // xmm9
-  float v33; // xmm2_4
-  float v34; // xmm8_4
-  __m128 v35; // xmm5
-  float v36; // xmm3_4
+  __m128 v25; // xmm11
+  float v26; // xmm10_4
+  __m128 v27; // xmm8
+  float v28; // xmm1_4
+  float v29; // xmm0_4
+  __m128 v30; // xmm9
+  float v31; // xmm2_4
+  float v32; // xmm8_4
+  __m128 v33; // xmm5
+  float v34; // xmm3_4
+  float x; // xmm0_4
+  float v36; // xmm1_4
   float v37; // xmm0_4
-  float v38; // xmm1_4
-  float v39; // xmm0_4
-  unsigned int v40; // eax
-  UFG::qMatrix44 b; // [rsp+30h] [rbp-E8h]
-  UFG::qMatrix44 result; // [rsp+70h] [rbp-A8h]
+  unsigned int ArrowEffectUID; // eax
+  UFG::qMatrix44 b; // [rsp+30h] [rbp-E8h] BYREF
+  UFG::qMatrix44 result; // [rsp+70h] [rbp-A8h] BYREF
 
   v3 = colour;
-  v4 = this->mVehicleSignalEffect;
-  v5 = turnDirection;
-  v6 = this;
-  if ( v4 != -1 )
+  mVehicleSignalEffect = this->mVehicleSignalEffect;
+  if ( mVehicleSignalEffect != -1 )
   {
-    Render::FXManager::KillEffect(&Render::gFXManager, v4, 0);
-    v6->mVehicleSignalEffect = -1;
+    Render::FXManager::KillEffect(&Render::gFXManager, mVehicleSignalEffect, FXKILLOPTION_DEFAULT);
+    this->mVehicleSignalEffect = -1;
   }
-  v7 = v6->mPedestrianSignalEffect;
-  if ( v7 != -1 )
+  mPedestrianSignalEffect = this->mPedestrianSignalEffect;
+  if ( mPedestrianSignalEffect != -1 )
   {
-    Render::FXManager::KillEffect(&Render::gFXManager, v7, 0);
-    v6->mPedestrianSignalEffect = -1;
+    Render::FXManager::KillEffect(&Render::gFXManager, mPedestrianSignalEffect, FXKILLOPTION_DEFAULT);
+    this->mPedestrianSignalEffect = -1;
   }
-  v8 = v6->mFlags;
-  if ( !(v8 & 4) )
+  mFlags = this->mFlags;
+  if ( (mFlags & 4) == 0 )
   {
-    if ( v8 & 1 || (v9 = (v8 & 2) == 0, v10 = &UFG::RoadNetworkTrafficLightLampData::trafficLight002, v9) )
+    if ( (mFlags & 1) != 0 || (v9 = (mFlags & 2) == 0, v10 = &UFG::RoadNetworkTrafficLightLampData::trafficLight002, v9) )
       v10 = &UFG::RoadNetworkTrafficLightLampData::trafficLight001;
-    v11 = v6->mDirection.y;
-    v12 = (__m128)LODWORD(v6->mDirection.x);
-    v13 = v6->mDirection.z;
-    v14 = v12;
-    v14.m128_f32[0] = (float)((float)(v12.m128_f32[0] * v12.m128_f32[0]) + (float)(v11 * v11)) + (float)(v13 * v13);
+    y = this->mDirection.y;
+    x_low = (__m128)LODWORD(this->mDirection.x);
+    z = this->mDirection.z;
+    v14 = x_low;
+    v14.m128_f32[0] = (float)((float)(x_low.m128_f32[0] * x_low.m128_f32[0]) + (float)(y * y)) + (float)(z * z);
     if ( v14.m128_f32[0] == 0.0 )
       v15 = 0.0;
     else
-      v15 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v14));
-    v16 = (__m128)LODWORD(UFG::qVector3::msDirUp.x);
-    v17 = v12.m128_f32[0] * v15;
-    v18 = v11 * v15;
-    v19 = v13 * v15;
+      v15 = 1.0 / _mm_sqrt_ps(v14).m128_f32[0];
+    v16 = x_low.m128_f32[0] * v15;
+    v17 = y * v15;
+    v18 = z * v15;
     b.v0.w = 0.0;
-    v20 = v16;
-    b.v0.x = v17;
-    b.v0.y = v18;
-    b.v0.z = v19;
-    v20.m128_f32[0] = (float)((float)(v16.m128_f32[0] * v16.m128_f32[0])
+    v19 = (__m128)LODWORD(UFG::qVector3::msDirUp.x);
+    b.v0.x = v16;
+    b.v0.y = v17;
+    b.v0.z = v18;
+    v19.m128_f32[0] = (float)((float)(v19.m128_f32[0] * v19.m128_f32[0])
                             + (float)(UFG::qVector3::msDirUp.y * UFG::qVector3::msDirUp.y))
                     + (float)(UFG::qVector3::msDirUp.z * UFG::qVector3::msDirUp.z);
-    if ( v20.m128_f32[0] == 0.0 )
+    if ( v19.m128_f32[0] == 0.0 )
     {
-      v22 = 0i64;
+      v21 = 0i64;
     }
     else
     {
-      LODWORD(v21) = (unsigned __int128)_mm_sqrt_ps(v20);
-      v22 = (__m128)(unsigned int)FLOAT_1_0;
-      v22.m128_f32[0] = 1.0 / v21;
+      v20 = _mm_sqrt_ps(v19).m128_f32[0];
+      v21 = (__m128)(unsigned int)FLOAT_1_0;
+      v21.m128_f32[0] = 1.0 / v20;
     }
-    v23 = v22;
-    v24 = v22.m128_f32[0];
-    v22.m128_f32[0] = v22.m128_f32[0] * UFG::qVector3::msDirUp.z;
-    v25 = v24 * UFG::qVector3::msDirUp.x;
-    v23.m128_f32[0] = v23.m128_f32[0] * UFG::qVector3::msDirUp.y;
-    v26 = v23;
-    v26.m128_f32[0] = (float)(v23.m128_f32[0] * v19) - (float)(v22.m128_f32[0] * v18);
-    v22.m128_f32[0] = (float)(v22.m128_f32[0] * v17) - (float)(v25 * v19);
-    v27 = (float)(v25 * v18) - (float)(v23.m128_f32[0] * v17);
-    v28 = v22;
-    v28.m128_f32[0] = (float)((float)(v22.m128_f32[0] * v22.m128_f32[0]) + (float)(v26.m128_f32[0] * v26.m128_f32[0]))
-                    + (float)(v27 * v27);
-    if ( v28.m128_f32[0] == 0.0 )
-      v29 = 0.0;
+    v22 = v21;
+    v23 = v21.m128_f32[0];
+    v21.m128_f32[0] = v21.m128_f32[0] * UFG::qVector3::msDirUp.z;
+    v24 = v23 * UFG::qVector3::msDirUp.x;
+    v22.m128_f32[0] = v22.m128_f32[0] * UFG::qVector3::msDirUp.y;
+    v25 = v22;
+    v25.m128_f32[0] = (float)(v22.m128_f32[0] * v18) - (float)(v21.m128_f32[0] * v17);
+    v21.m128_f32[0] = (float)(v21.m128_f32[0] * v16) - (float)(v24 * v18);
+    v26 = (float)(v24 * v17) - (float)(v22.m128_f32[0] * v16);
+    v27 = v21;
+    v27.m128_f32[0] = (float)((float)(v21.m128_f32[0] * v21.m128_f32[0]) + (float)(v25.m128_f32[0] * v25.m128_f32[0]))
+                    + (float)(v26 * v26);
+    if ( v27.m128_f32[0] == 0.0 )
+      v28 = 0.0;
     else
-      v29 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v28));
-    v26.m128_f32[0] = v26.m128_f32[0] * v29;
-    v30 = v22.m128_f32[0] * v29;
+      v28 = 1.0 / _mm_sqrt_ps(v27).m128_f32[0];
+    v25.m128_f32[0] = v25.m128_f32[0] * v28;
     b.v1.w = 0.0;
-    v32 = v26;
-    b.v1.z = v27 * v29;
-    LODWORD(b.v1.x) = v26.m128_i32[0];
-    b.v1.y = v30;
-    v31 = v30 * v19;
-    v32.m128_f32[0] = (float)(v26.m128_f32[0] * v19) - (float)((float)(v27 * v29) * v17);
-    v33 = (float)(v30 * v17) - (float)(v26.m128_f32[0] * v18);
-    v34 = (float)((float)(v27 * v29) * v18) - v31;
-    v35 = v32;
-    v35.m128_f32[0] = (float)((float)(v32.m128_f32[0] * v32.m128_f32[0]) + (float)(v34 * v34)) + (float)(v33 * v33);
-    if ( v35.m128_f32[0] == 0.0 )
-      v36 = 0.0;
+    v30 = v25;
+    b.v1.z = v26 * v28;
+    LODWORD(b.v1.x) = v25.m128_i32[0];
+    b.v1.y = v21.m128_f32[0] * v28;
+    v29 = (float)(v21.m128_f32[0] * v28) * v18;
+    v30.m128_f32[0] = (float)(v25.m128_f32[0] * v18) - (float)((float)(v26 * v28) * v16);
+    v31 = (float)((float)(v21.m128_f32[0] * v28) * v16) - (float)(v25.m128_f32[0] * v17);
+    v32 = (float)((float)(v26 * v28) * v17) - v29;
+    v33 = v30;
+    v33.m128_f32[0] = (float)((float)(v30.m128_f32[0] * v30.m128_f32[0]) + (float)(v32 * v32)) + (float)(v31 * v31);
+    if ( v33.m128_f32[0] == 0.0 )
+      v34 = 0.0;
     else
-      v36 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v35));
-    v37 = v6->mPosition.x;
-    v38 = v6->mPosition.y;
+      v34 = 1.0 / _mm_sqrt_ps(v33).m128_f32[0];
+    x = this->mPosition.x;
+    v36 = this->mPosition.y;
     b.v2.w = 0.0;
     b.v3.w = 1.0;
-    b.v3.x = v37;
-    v39 = v6->mPosition.z;
-    b.v3.y = v38;
-    b.v3.z = v39;
-    b.v2.x = v34 * v36;
-    b.v2.y = v32.m128_f32[0] * v36;
-    b.v2.z = v33 * v36;
+    b.v3.x = x;
+    v37 = this->mPosition.z;
+    b.v3.y = v36;
+    b.v3.z = v37;
+    b.v2.x = v32 * v34;
+    b.v2.y = v30.m128_f32[0] * v34;
+    b.v2.z = v31 * v34;
     UFG::qMatrix44::operator*((UFG::qMatrix44 *)&v10[4 * v3], &result, &b);
-    if ( (_DWORD)v3 != 2 || v5 != 2 )
-      v40 = UFG::RoadNetworkTrafficLightLampData::GetLampEffectUID((UFG::RoadNetworkTrafficLightLampData::TrafficLightColour)v3);
+    if ( (_DWORD)v3 == 2 && turnDirection == RightTurn )
+      ArrowEffectUID = UFG::RoadNetworkTrafficLightLampData::GetArrowEffectUID();
     else
-      v40 = UFG::RoadNetworkTrafficLightLampData::GetArrowEffectUID();
-    v6->mVehicleSignalEffect = Render::FXManager::CreateEffect(&Render::gFXManager, v40, &result, 0xFFFFFFFF);
+      ArrowEffectUID = UFG::RoadNetworkTrafficLightLampData::GetLampEffectUID((UFG::RoadNetworkTrafficLightLampData::TrafficLightColour)v3);
+    this->mVehicleSignalEffect = Render::FXManager::CreateEffect(
+                                   &Render::gFXManager,
+                                   ArrowEffectUID,
+                                   &result,
+                                   0xFFFFFFFF);
   }
 }
 
 // File Line: 3336
 // RVA: 0xDC5C0
-void __fastcall UFG::RoadNetworkConnection::GetValidLanes(UFG::RoadNetworkConnection *this, unsigned int laneFlags, UFG::qArray<unsigned long,0> *laneIDs)
+void __fastcall UFG::RoadNetworkConnection::GetValidLanes(
+        UFG::RoadNetworkConnection *this,
+        unsigned __int8 laneFlags,
+        UFG::qArray<unsigned long,0> *laneIDs)
 {
   __int64 v3; // r14
-  UFG::qArray<unsigned long,0> *v4; // rdi
-  unsigned __int8 v5; // r12
-  UFG::RoadNetworkConnection *v6; // r13
-  __int64 v7; // rax
-  signed __int64 v8; // rcx
+  __int64 mOffset; // rax
+  char *v8; // rcx
   __int64 v9; // rax
-  __int64 v10; // r15
-  unsigned int v11; // ebx
+  __int64 size; // r15
+  unsigned int capacity; // ebx
   unsigned int v12; // esi
   unsigned int v13; // ebx
   unsigned __int64 v14; // rax
   char *v15; // rax
   unsigned int *v16; // rbp
-  signed __int64 v17; // r9
-  signed __int64 v18; // r8
-  unsigned int *v19; // rax
+  __int64 i; // r9
+  __int64 v18; // r8
+  unsigned int *p; // rax
 
   v3 = 0i64;
-  laneIDs->size = 0;
-  v4 = laneIDs;
-  v5 = laneFlags;
-  v6 = this;
-  if ( this->mNumLanes )
+  for ( laneIDs->size = 0; (unsigned int)v3 < this->mNumLanes; v3 = (unsigned int)(v3 + 1) )
   {
-    do
+    mOffset = this->mLaneList.mOffset;
+    if ( mOffset )
+      v8 = (char *)&this->mLaneList + mOffset;
+    else
+      v8 = 0i64;
+    v9 = *(_QWORD *)&v8[8 * v3];
+    if ( v9 )
+      v9 += (__int64)&v8[8 * v3];
+    if ( (laneFlags & *(_BYTE *)(v9 + 44)) != 0 )
     {
-      v7 = v6->mLaneList.mOffset;
-      if ( v7 )
-        v8 = (signed __int64)&v6->mLaneList + v7;
-      else
-        v8 = 0i64;
-      v9 = *(_QWORD *)(v8 + 8 * v3);
-      if ( v9 )
-        v9 += v8 + 8 * v3;
-      if ( v5 & *(_BYTE *)(v9 + 44) )
+      size = laneIDs->size;
+      capacity = laneIDs->capacity;
+      v12 = size + 1;
+      if ( (int)size + 1 > capacity )
       {
-        v10 = v4->size;
-        v11 = v4->capacity;
-        v12 = v10 + 1;
-        if ( (signed int)v10 + 1 > v11 )
+        if ( capacity )
+          v13 = 2 * capacity;
+        else
+          v13 = 1;
+        for ( ; v13 < v12; v13 *= 2 )
+          ;
+        if ( v13 <= 4 )
+          v13 = 4;
+        if ( v13 - v12 > 0x10000 )
+          v13 = size + 65537;
+        if ( v13 != (_DWORD)size )
         {
-          if ( v11 )
-            v13 = 2 * v11;
-          else
-            v13 = 1;
-          for ( ; v13 < v12; v13 *= 2 )
-            ;
-          if ( v13 <= 4 )
-            v13 = 4;
-          if ( v13 - v12 > 0x10000 )
-            v13 = v10 + 65537;
-          if ( v13 != (_DWORD)v10 )
+          v14 = 4i64 * v13;
+          if ( !is_mul_ok(v13, 4ui64) )
+            v14 = -1i64;
+          v15 = UFG::qMalloc(v14, "qArray.Add", 0i64);
+          v16 = (unsigned int *)v15;
+          if ( laneIDs->p )
           {
-            v14 = 4i64 * v13;
-            if ( !is_mul_ok(v13, 4ui64) )
-              v14 = -1i64;
-            v15 = UFG::qMalloc(v14, "qArray.Add", 0i64);
-            v16 = (unsigned int *)v15;
-            if ( v4->p )
+            for ( i = 0i64; (unsigned int)i < laneIDs->size; *(_DWORD *)&v15[v18 * 4] = laneIDs->p[v18] )
             {
-              v17 = 0i64;
-              if ( v4->size )
-              {
-                do
-                {
-                  v18 = v17;
-                  v17 = (unsigned int)(v17 + 1);
-                  *(_DWORD *)&v15[v18 * 4] = v4->p[v18];
-                }
-                while ( (unsigned int)v17 < v4->size );
-              }
-              operator delete[](v4->p);
+              v18 = i;
+              i = (unsigned int)(i + 1);
             }
-            v4->p = v16;
-            v4->capacity = v13;
+            operator delete[](laneIDs->p);
           }
+          laneIDs->p = v16;
+          laneIDs->capacity = v13;
         }
-        v19 = v4->p;
-        v4->size = v12;
-        v19[v10] = v3;
       }
-      v3 = (unsigned int)(v3 + 1);
+      p = laneIDs->p;
+      laneIDs->size = v12;
+      p[size] = v3;
     }
-    while ( (unsigned int)v3 < v6->mNumLanes );
   }
 }
 
@@ -5367,26 +5122,24 @@ void __fastcall UFG::RoadNetworkConnection::GetValidLanes(UFG::RoadNetworkConnec
 // RVA: 0xDE7A0
 char __fastcall UFG::RoadNetworkLane::IsPermissive(UFG::RoadNetworkLane *this, bool checkCurrentPhaseOnly)
 {
-  UFG::RoadNetworkLane *v2; // rdi
   char *v3; // rbp
   unsigned int v5; // ebx
-  unsigned int v6; // er14
-  signed __int64 v7; // rsi
+  unsigned int v6; // r14d
+  __int64 i; // rsi
   __int64 v8; // rax
-  signed __int64 v9; // rcx
-  signed __int64 v10; // rax
+  __int64 v9; // rcx
+  __int64 v10; // rax
   __int64 v11; // rcx
-  signed __int64 v12; // rax
-  unsigned int v13; // er10
+  __int64 v12; // rax
+  unsigned int v13; // r10d
   unsigned int v14; // edx
   __int64 v15; // r9
-  signed __int64 v16; // r11
+  __int64 v16; // r11
   __int64 v17; // r8
-  signed __int64 v18; // rax
-  signed __int64 v19; // rcx
+  __int64 v18; // rax
+  __int64 v19; // rcx
   UFG::RoadNetworkLane *v20; // rax
 
-  v2 = this;
   if ( this->mNode.mOffset )
     v3 = (char *)this + this->mNode.mOffset;
   else
@@ -5402,15 +5155,14 @@ char __fastcall UFG::RoadNetworkLane::IsPermissive(UFG::RoadNetworkLane *this, b
   }
   if ( v5 >= v6 )
     return 0;
-  v7 = 8i64 * v5;
-  while ( 1 )
+  for ( i = 8i64 * v5; ; i += 8i64 )
   {
     if ( v3[107] )
     {
       v8 = *((_QWORD *)v3 + 14);
-      v9 = (signed __int64)(v8 ? &v3[v8 + 112] : 0i64);
-      v10 = v7 + v9;
-      v11 = *(_QWORD *)(v7 + v9);
+      v9 = v8 ? (__int64)&v3[v8 + 112] : 0i64;
+      v10 = i + v9;
+      v11 = *(_QWORD *)(i + v9);
       if ( v11 )
       {
         v12 = v11 + v10;
@@ -5424,9 +5176,7 @@ char __fastcall UFG::RoadNetworkLane::IsPermissive(UFG::RoadNetworkLane *this, b
       }
     }
 LABEL_25:
-    ++v5;
-    v7 += 8i64;
-    if ( v5 >= v6 )
+    if ( ++v5 >= v6 )
       return 0;
   }
   v15 = *(_QWORD *)(v12 + 40);
@@ -5439,7 +5189,7 @@ LABEL_25:
     v20 = *(UFG::RoadNetworkLane **)(v17 + v18);
     if ( v20 )
       v20 = (UFG::RoadNetworkLane *)((char *)v20 + v19);
-    if ( v20 == v2 )
+    if ( v20 == this )
       return 1;
     ++v14;
     v17 += 8i64;
@@ -5454,146 +5204,145 @@ float __fastcall UFG::RoadNetworkLane::GetLength(UFG::RoadNetworkLane *this)
 {
   UFG::RoadNetworkConnection *v1; // r8
   char *v2; // rax
-  unsigned int v3; // edx
+  unsigned int mPathIndex; // edx
   __int64 v4; // rcx
-  __int128 v5; // xmm0
 
   v1 = 0i64;
   if ( this->mNode.mOffset )
     v2 = (char *)this + this->mNode.mOffset;
   else
     v2 = 0i64;
-  v3 = this->mPathIndex;
+  mPathIndex = this->mPathIndex;
   v4 = *((_QWORD *)v2 + 4);
   if ( v4 )
     v1 = (UFG::RoadNetworkConnection *)&v2[v4 + 32];
-  v5 = HIDWORD(UFG::qBezierPathCollectionMemImaged::GetPath(v1, v3)->mNode.mOffset);
-  return *(float *)&v5;
+  return *((float *)&UFG::qBezierPathCollectionMemImaged::GetPath(v1, mPathIndex)->mNode.mOffset + 1);
 }
 
 // File Line: 3420
 // RVA: 0xD1640
-void __fastcall UFG::RoadNetworkLane::AddCarGuide(UFG::RoadNetworkLane *this, UFG::RoadNetworkGuide *guide, bool spawned)
+void __fastcall UFG::RoadNetworkLane::AddCarGuide(
+        UFG::RoadNetworkLane *this,
+        UFG::RoadNetworkGuide *guide,
+        bool spawned)
 {
-  UFG::qNode<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide> *v3; // r9
-  UFG::qNode<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide> *v4; // rax
+  UFG::qNode<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide> *mPrev; // r9
+  UFG::qNode<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide> *mNext; // rax
   UFG::qNode<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide> *v5; // r10
-  UFG::RoadNetworkLane *v6; // r11
   UFG::qNode<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide> *v7; // rcx
-  float v8; // xmm0_4
+  float m_LaneT; // xmm0_4
   float v9; // xmm2_4
-  signed __int64 v10; // rcx
-  signed __int64 v11; // rdx
+  __int64 p_mNext; // rcx
+  char *v11; // rdx
   UFG::qNode<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide> *v12; // rax
   UFG::qNode<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide> *v13; // rcx
   float v14; // xmm1_4
-  UFG::qList<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide,1,0> *v15; // rcx
+  UFG::qList<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide,1,0> *p_mCars; // rcx
   float v16; // xmm2_4
-  signed __int64 v17; // rax
+  __int64 v17; // rax
   float v18; // xmm1_4
   UFG::qNode<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide> *v19; // rax
 
-  v3 = guide->mPrev;
-  v4 = guide->mNext;
-  v5 = (UFG::qNode<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide> *)&guide->mPrev;
-  v3->mNext = v4;
-  v4->mPrev = v3;
-  v5->mPrev = v5;
-  v5->mNext = v5;
-  v6 = this;
-  if ( spawned
-    && (UFG::qOffset64<UFG::RoadNetworkConnection *> *)&this->mCars.mNode.mNext[-2].mNext != &this->mStartConnection )
+  mPrev = guide->mPrev;
+  mNext = guide->mNext;
+  v5 = &guide->UFG::qNode<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide>;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  guide->mPrev = &guide->UFG::qNode<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide>;
+  guide->mNext = &guide->UFG::qNode<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide>;
+  if ( !spawned
+    || (UFG::qOffset64<UFG::RoadNetworkConnection *> *)&this->mCars.mNode.mNext[-2].mNext == &this->mStartConnection )
+  {
+    p_mCars = &this->mCars;
+  }
+  else
   {
     v7 = this->mCars.mNode.mNext;
-    v8 = guide->m_CurrentLocation.m_LaneT;
+    m_LaneT = guide->m_CurrentLocation.m_LaneT;
     v9 = *(float *)&v7[2].mPrev;
-    v10 = (signed __int64)&v7[-2].mNext;
-    v11 = (signed __int64)&v6->mCars.mNode.mPrev[-2].mNext;
-    if ( v8 == v9 )
+    p_mNext = (__int64)&v7[-2].mNext;
+    v11 = (char *)&this->mCars.mNode.mPrev[-2].mNext;
+    if ( m_LaneT == v9 )
     {
 LABEL_4:
-      v12 = *(UFG::qNode<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide> **)(v10 + 24);
-      v13 = (UFG::qNode<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide> *)(v10 + 24);
+      v12 = *(UFG::qNode<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide> **)(p_mNext + 24);
+      v13 = (UFG::qNode<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide> *)(p_mNext + 24);
       v12->mNext = v5;
       v5->mPrev = v12;
       v5->mNext = v13;
       v13->mPrev = v5;
       return;
     }
-    v14 = *(float *)(v11 + 56);
-    if ( v8 == v14 )
-      goto LABEL_22;
-    if ( v8 <= v9 )
+    v14 = *((float *)v11 + 14);
+    if ( m_LaneT == v14 )
+      goto LABEL_6;
+    if ( m_LaneT <= v9 )
       goto LABEL_4;
-    if ( v8 > v14 )
+    if ( m_LaneT > v14 )
     {
-LABEL_22:
-      v15 = (UFG::qList<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide,1,0> *)v6->mCars.mNode.mPrev;
+LABEL_6:
+      p_mCars = (UFG::qList<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide,1,0> *)this->mCars.mNode.mPrev;
     }
     else
     {
-      if ( v10 == v11 )
+      if ( (char *)p_mNext == v11 )
         return;
       while ( 1 )
       {
-        v16 = *(float *)(v10 + 56);
-        v17 = *(_QWORD *)(v10 + 32) - 24i64;
-        if ( v8 == v16 )
+        v16 = *(float *)(p_mNext + 56);
+        v17 = *(_QWORD *)(p_mNext + 32) - 24i64;
+        if ( m_LaneT == v16 )
         {
 LABEL_16:
-          v15 = (UFG::qList<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide,1,0> *)(v10 + 24);
+          p_mCars = (UFG::qList<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide,1,0> *)(p_mNext + 24);
           goto LABEL_19;
         }
         v18 = *(float *)(v17 + 56);
-        if ( v8 == v18 )
+        if ( m_LaneT == v18 )
           break;
-        if ( v8 > v16 && v8 < v18 )
+        if ( m_LaneT > v16 && m_LaneT < v18 )
           goto LABEL_16;
-        v10 = *(_QWORD *)(v10 + 32) - 24i64;
-        if ( v17 == v11 )
+        p_mNext = *(_QWORD *)(p_mNext + 32) - 24i64;
+        if ( (char *)v17 == v11 )
           return;
       }
-      v15 = *(UFG::qList<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide,1,0> **)(v10 + 32);
+      p_mCars = *(UFG::qList<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide,1,0> **)(p_mNext + 32);
     }
   }
-  else
-  {
-    v15 = &this->mCars;
-  }
 LABEL_19:
-  v19 = v15->mNode.mNext;
-  v15->mNode.mNext = v5;
-  v5->mPrev = &v15->mNode;
+  v19 = p_mCars->mNode.mNext;
+  p_mCars->mNode.mNext = v5;
+  v5->mPrev = &p_mCars->mNode;
   v5->mNext = v19;
   v19->mPrev = v5;
 }
 
 // File Line: 3514
 // RVA: 0xDB180
-UFG::qVector3 *__fastcall UFG::RoadNetworkLane::GetOffsetPos(UFG::qVector3 *result, UFG::qBezierSplineMemImaged *spline, float t, float offset)
+UFG::qVector3 *__fastcall UFG::RoadNetworkLane::GetOffsetPos(
+        UFG::qVector3 *result,
+        UFG::qBezierSplineMemImaged *spline,
+        float t,
+        float offset)
 {
-  UFG::qVector3 *v4; // rbx
-  float v5; // xmm7_4
   float v6; // xmm3_4
   int v7; // xmm2_4
   float v8; // xmm1_4
   float v9; // xmm1_4
   float v10; // xmm0_4
   float v11; // xmm2_4
-  float v12; // xmm1_4
-  UFG::qVector3 *v13; // rax
-  float v14; // xmm0_4
-  UFG::qVector3 tangent; // [rsp+20h] [rbp-38h]
+  float z; // xmm1_4
+  UFG::qVector3 *Position; // rax
+  float y; // xmm0_4
+  UFG::qVector3 tangent; // [rsp+20h] [rbp-38h] BYREF
 
-  v4 = result;
-  v5 = offset;
   if ( offset == 0.0 )
   {
-    v13 = UFG::qBezierSplineMemImaged::GetPosition(spline, &tangent, t);
-    v14 = v13->y;
-    v12 = v13->z;
-    v4->x = v13->x;
-    v4->y = v14;
+    Position = UFG::qBezierSplineMemImaged::GetPosition(spline, &tangent, t);
+    y = Position->y;
+    z = Position->z;
+    result->x = Position->x;
+    result->y = y;
   }
   else
   {
@@ -5606,178 +5355,176 @@ UFG::qVector3 *__fastcall UFG::RoadNetworkLane::GetOffsetPos(UFG::qVector3 *resu
     else
       v9 = 1.0 / fsqrt(v8);
     v10 = v9;
-    v11 = (float)((float)(*(float *)&v7 * v9) * v5) + v4->y;
-    v12 = (float)((float)(v9 * 0.0) * v5) + v4->z;
-    v4->y = v11;
-    v4->x = (float)((float)(v10 * v6) * v5) + v4->x;
+    v11 = (float)((float)(*(float *)&v7 * v9) * offset) + result->y;
+    z = (float)((float)(v9 * 0.0) * offset) + result->z;
+    result->y = v11;
+    result->x = (float)((float)(v10 * v6) * offset) + result->x;
   }
-  v4->z = v12;
-  return v4;
+  result->z = z;
+  return result;
 }
 
 // File Line: 3542
 // RVA: 0xDB270
-char __fastcall UFG::RoadNetworkLane::GetOffsetPosAndTangent(UFG::qBezierSplineMemImaged *spline, float t, float offset, UFG::qVector3 *pos, UFG::qVector3 *tangent)
+char __fastcall UFG::RoadNetworkLane::GetOffsetPosAndTangent(
+        UFG::qBezierSplineMemImaged *spline,
+        float t,
+        float offset,
+        UFG::qVector3 *pos,
+        UFG::qVector3 *tangent)
 {
-  UFG::qVector3 *v5; // rdi
-  float v6; // xmm6_4
-  float v7; // xmm4_4
+  float y; // xmm4_4
   int v8; // xmm3_4
   float v9; // xmm1_4
   float v10; // xmm2_4
   float v11; // xmm4_4
   float v12; // xmm3_4
 
-  v5 = pos;
-  v6 = offset;
   UFG::qBezierSplineMemImaged::GetPositionAndTangent(spline, t, pos, tangent);
   if ( offset != 0.0 )
   {
-    v7 = tangent->y;
+    y = tangent->y;
     v8 = LODWORD(tangent->x) ^ _xmm[0];
-    v9 = (float)(*(float *)&v8 * *(float *)&v8) + (float)(v7 * v7);
+    v9 = (float)(*(float *)&v8 * *(float *)&v8) + (float)(y * y);
     if ( v9 == 0.0 )
       v10 = 0.0;
     else
       v10 = 1.0 / fsqrt(v9);
-    v11 = (float)((float)(v7 * v10) * v6) + v5->x;
-    v12 = (float)((float)(*(float *)&v8 * v10) * v6) + v5->y;
-    v5->z = (float)((float)(v10 * 0.0) * v6) + v5->z;
-    v5->x = v11;
-    v5->y = v12;
+    v11 = (float)((float)(y * v10) * offset) + pos->x;
+    v12 = (float)((float)(*(float *)&v8 * v10) * offset) + pos->y;
+    pos->z = (float)((float)(v10 * 0.0) * offset) + pos->z;
+    pos->x = v11;
+    pos->y = v12;
   }
   return 1;
 }
 
 // File Line: 3564
 // RVA: 0xDB570
-UFG::qVector3 *__fastcall UFG::RoadNetworkLane::GetPosNoOffset(UFG::RoadNetworkLane *this, UFG::qVector3 *result, float laneT)
+UFG::qVector3 *__fastcall UFG::RoadNetworkLane::GetPosNoOffset(
+        UFG::RoadNetworkLane *this,
+        UFG::qVector3 *result,
+        float laneT)
 {
-  __int64 v3; // rax
+  __int64 mOffset; // rax
   UFG::RoadNetworkConnection *v4; // r8
-  UFG::qVector3 *v5; // rdi
   char *v6; // rax
-  unsigned int v7; // edx
+  unsigned int mPathIndex; // edx
   __int64 v8; // rcx
-  UFG::qBezierPathMemImaged *v9; // rax
-  UFG::RoadNetworkConnection *v10; // rbx
-  unsigned int v11; // eax
-  UFG::qBezierSplineMemImaged *v12; // rax
-  float splineT; // [rsp+40h] [rbp+8h]
+  UFG::qBezierPathMemImaged *Path; // rbx
+  unsigned int SplineParameters; // eax
+  UFG::qBezierSplineMemImaged *v11; // rax
+  float splineT; // [rsp+40h] [rbp+8h] BYREF
 
-  v3 = this->mNode.mOffset;
+  mOffset = this->mNode.mOffset;
   v4 = 0i64;
-  v5 = result;
   splineT = 0.0;
-  if ( v3 )
-    v6 = (char *)this + v3;
+  if ( mOffset )
+    v6 = (char *)this + mOffset;
   else
     v6 = 0i64;
-  v7 = this->mPathIndex;
+  mPathIndex = this->mPathIndex;
   v8 = *((_QWORD *)v6 + 4);
   if ( v8 )
     v4 = (UFG::RoadNetworkConnection *)&v6[v8 + 32];
-  v9 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v4, v7);
-  v10 = (UFG::RoadNetworkConnection *)v9;
-  v11 = UFG::qBezierPathMemImaged::GetSplineParameters(v9, laneT, &splineT);
-  v12 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v10, v11);
-  UFG::RoadNetworkLane::GetOffsetPos(v5, v12, splineT, 0.0);
-  return v5;
+  Path = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v4, mPathIndex);
+  SplineParameters = UFG::qBezierPathMemImaged::GetSplineParameters(Path, laneT, &splineT);
+  v11 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                         (UFG::RoadNetworkConnection *)Path,
+                                         SplineParameters);
+  UFG::RoadNetworkLane::GetOffsetPos(result, v11, splineT, 0.0);
+  return result;
 }
 
 // File Line: 3574
 // RVA: 0xDB0D0
-UFG::qVector3 *__fastcall UFG::RoadNetworkLane::GetOffsetPos(UFG::RoadNetworkLane *this, UFG::qVector3 *result, float t, float offset)
+UFG::qVector3 *__fastcall UFG::RoadNetworkLane::GetOffsetPos(
+        UFG::RoadNetworkLane *this,
+        UFG::qVector3 *result,
+        float t,
+        float offset)
 {
-  __int64 v4; // rax
-  UFG::RoadNetworkLane *v5; // rdi
+  __int64 mOffset; // rax
   UFG::RoadNetworkConnection *v6; // rcx
-  UFG::qVector3 *v7; // rsi
   char *v8; // rax
   __int64 v9; // rdx
-  UFG::qBezierPathMemImaged *v10; // rax
-  UFG::RoadNetworkConnection *v11; // rbx
-  unsigned int v12; // eax
-  UFG::qBezierSplineMemImaged *v13; // rax
-  float splineT; // [rsp+68h] [rbp+20h]
+  UFG::qBezierPathMemImaged *Path; // rbx
+  unsigned int SplineParameters; // eax
+  UFG::qBezierSplineMemImaged *v12; // rax
+  float splineT; // [rsp+68h] [rbp+20h] BYREF
 
-  v4 = this->mNode.mOffset;
-  v5 = this;
+  mOffset = this->mNode.mOffset;
   v6 = 0i64;
-  v7 = result;
-  if ( v4 )
-    v8 = (char *)v5 + v4;
+  if ( mOffset )
+    v8 = (char *)this + mOffset;
   else
     v8 = 0i64;
   v9 = *((_QWORD *)v8 + 4);
   if ( v9 )
     v6 = (UFG::RoadNetworkConnection *)&v8[v9 + 32];
-  v10 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v6, v5->mPathIndex);
-  v11 = (UFG::RoadNetworkConnection *)v10;
-  v12 = UFG::qBezierPathMemImaged::GetSplineParameters(v10, t, &splineT);
-  v13 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v11, v12);
-  UFG::RoadNetworkLane::GetOffsetPos(v7, v13, splineT, offset + v5->mOffset);
-  return v7;
+  Path = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v6, this->mPathIndex);
+  SplineParameters = UFG::qBezierPathMemImaged::GetSplineParameters(Path, t, &splineT);
+  v12 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                         (UFG::RoadNetworkConnection *)Path,
+                                         SplineParameters);
+  UFG::RoadNetworkLane::GetOffsetPos(result, v12, splineT, offset + this->mOffset);
+  return result;
 }
 
 // File Line: 3594
 // RVA: 0xDA3C0
-UFG::qVector3 *__fastcall UFG::RoadNetworkLane::GetNearestPoint(UFG::RoadNetworkLane *this, UFG::qVector3 *result, UFG::qVector3 *pos, float *laneT)
+UFG::qVector3 *__fastcall UFG::RoadNetworkLane::GetNearestPoint(
+        UFG::RoadNetworkLane *this,
+        UFG::qVector3 *result,
+        UFG::qVector3 *pos,
+        float *laneT)
 {
   UFG::RoadNetworkConnection *v4; // r10
-  float *v5; // rdi
-  UFG::qVector3 *v6; // rsi
-  UFG::qVector3 *v7; // rbx
   char *v8; // rax
-  unsigned int v9; // edx
+  unsigned int mPathIndex; // edx
   __int64 v10; // rcx
-  UFG::qBezierPathMemImaged *v11; // rax
+  UFG::qBezierPathMemImaged *Path; // rax
 
   v4 = 0i64;
-  v5 = laneT;
-  v6 = pos;
-  v7 = result;
   if ( this->mNode.mOffset )
     v8 = (char *)this + this->mNode.mOffset;
   else
     v8 = 0i64;
-  v9 = this->mPathIndex;
+  mPathIndex = this->mPathIndex;
   v10 = *((_QWORD *)v8 + 4);
   if ( v10 )
     v4 = (UFG::RoadNetworkConnection *)&v8[v10 + 32];
-  v11 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v4, v9);
-  UFG::qBezierPathMemImaged::ClosestPoint3D(v11, v7, v6, v5);
-  return v7;
+  Path = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v4, mPathIndex);
+  UFG::qBezierPathMemImaged::ClosestPoint3D(Path, result, pos, laneT);
+  return result;
 }
 
 // File Line: 3602
 // RVA: 0xD8160
 float __fastcall UFG::RoadNetworkLane::GetClosestT(UFG::RoadNetworkLane *this, UFG::qVector3 *pos)
 {
-  __int64 v2; // rax
+  __int64 mOffset; // rax
   UFG::RoadNetworkConnection *v3; // r8
-  UFG::qVector3 *v4; // rbx
   char *v5; // rax
-  unsigned int v6; // edx
+  unsigned int mPathIndex; // edx
   __int64 v7; // rcx
-  UFG::qBezierPathMemImaged *v8; // rax
-  UFG::qVector3 result; // [rsp+20h] [rbp-18h]
-  float t; // [rsp+40h] [rbp+8h]
+  UFG::qBezierPathMemImaged *Path; // rax
+  UFG::qVector3 result; // [rsp+20h] [rbp-18h] BYREF
+  float t; // [rsp+40h] [rbp+8h] BYREF
 
-  v2 = this->mNode.mOffset;
+  mOffset = this->mNode.mOffset;
   v3 = 0i64;
-  v4 = pos;
   t = 0.0;
-  if ( v2 )
-    v5 = (char *)this + v2;
+  if ( mOffset )
+    v5 = (char *)this + mOffset;
   else
     v5 = 0i64;
-  v6 = this->mPathIndex;
+  mPathIndex = this->mPathIndex;
   v7 = *((_QWORD *)v5 + 4);
   if ( v7 )
     v3 = (UFG::RoadNetworkConnection *)&v5[v7 + 32];
-  v8 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v3, v6);
-  UFG::qBezierPathMemImaged::ClosestPoint3D(v8, &result, v4, &t);
+  Path = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v3, mPathIndex);
+  UFG::qBezierPathMemImaged::ClosestPoint3D(Path, &result, pos, &t);
   return t;
 }
 
@@ -5785,102 +5532,93 @@ float __fastcall UFG::RoadNetworkLane::GetClosestT(UFG::RoadNetworkLane *this, U
 // RVA: 0xDB360
 UFG::qVector3 *__fastcall UFG::RoadNetworkLane::GetPos(UFG::RoadNetworkLane *this, UFG::qVector3 *result, float t)
 {
-  __int64 v3; // rax
-  UFG::RoadNetworkLane *v4; // rdi
+  __int64 mOffset; // rax
   UFG::RoadNetworkConnection *v5; // rcx
-  UFG::qVector3 *v6; // rsi
   char *v7; // rax
   __int64 v8; // rdx
-  UFG::qBezierPathMemImaged *v9; // rax
-  UFG::RoadNetworkConnection *v10; // rbx
-  unsigned int v11; // eax
-  UFG::qBezierSplineMemImaged *v12; // rax
-  float splineT; // [rsp+40h] [rbp+8h]
+  UFG::qBezierPathMemImaged *Path; // rbx
+  unsigned int SplineParameters; // eax
+  UFG::qBezierSplineMemImaged *v11; // rax
+  float splineT; // [rsp+40h] [rbp+8h] BYREF
 
-  v3 = this->mNode.mOffset;
-  v4 = this;
+  mOffset = this->mNode.mOffset;
   v5 = 0i64;
-  v6 = result;
-  if ( v3 )
-    v7 = (char *)v4 + v3;
+  if ( mOffset )
+    v7 = (char *)this + mOffset;
   else
     v7 = 0i64;
   v8 = *((_QWORD *)v7 + 4);
   if ( v8 )
     v5 = (UFG::RoadNetworkConnection *)&v7[v8 + 32];
-  v9 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v5, v4->mPathIndex);
-  v10 = (UFG::RoadNetworkConnection *)v9;
-  v11 = UFG::qBezierPathMemImaged::GetSplineParameters(v9, t, &splineT);
-  v12 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v10, v11);
-  UFG::RoadNetworkLane::GetOffsetPos(v6, v12, splineT, v4->mOffset);
-  return v6;
+  Path = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v5, this->mPathIndex);
+  SplineParameters = UFG::qBezierPathMemImaged::GetSplineParameters(Path, t, &splineT);
+  v11 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                         (UFG::RoadNetworkConnection *)Path,
+                                         SplineParameters);
+  UFG::RoadNetworkLane::GetOffsetPos(result, v11, splineT, this->mOffset);
+  return result;
 }
 
 // File Line: 3619
 // RVA: 0xDB4C0
-char __fastcall UFG::RoadNetworkLane::GetPosAndTangent(UFG::RoadNetworkLane *this, float t, UFG::qVector3 *pos, UFG::qVector3 *tangent)
+char __fastcall UFG::RoadNetworkLane::GetPosAndTangent(
+        UFG::RoadNetworkLane *this,
+        float t,
+        UFG::qVector3 *pos,
+        UFG::qVector3 *tangent)
 {
-  __int64 v4; // rax
-  UFG::RoadNetworkLane *v5; // rdi
+  __int64 mOffset; // rax
   UFG::RoadNetworkConnection *v6; // rcx
-  UFG::qVector3 *v7; // rsi
-  UFG::qVector3 *v8; // rbp
   char *v9; // rax
   __int64 v10; // rdx
-  UFG::qBezierPathMemImaged *v11; // rax
-  UFG::RoadNetworkConnection *v12; // rbx
-  unsigned int v13; // eax
-  UFG::qBezierSplineMemImaged *v14; // rax
-  float splineT; // [rsp+50h] [rbp+8h]
+  UFG::qBezierPathMemImaged *Path; // rbx
+  unsigned int SplineParameters; // eax
+  UFG::qBezierSplineMemImaged *v13; // rax
+  float splineT; // [rsp+50h] [rbp+8h] BYREF
 
-  v4 = this->mNode.mOffset;
-  v5 = this;
+  mOffset = this->mNode.mOffset;
   v6 = 0i64;
-  v7 = tangent;
-  v8 = pos;
-  if ( v4 )
-    v9 = (char *)v5 + v4;
+  if ( mOffset )
+    v9 = (char *)this + mOffset;
   else
     v9 = 0i64;
   v10 = *((_QWORD *)v9 + 4);
   if ( v10 )
     v6 = (UFG::RoadNetworkConnection *)&v9[v10 + 32];
-  v11 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v6, v5->mPathIndex);
-  v12 = (UFG::RoadNetworkConnection *)v11;
-  v13 = UFG::qBezierPathMemImaged::GetSplineParameters(v11, t, &splineT);
-  v14 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v12, v13);
-  return UFG::RoadNetworkLane::GetOffsetPosAndTangent(v14, splineT, v5->mOffset, v8, v7);
+  Path = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v6, this->mPathIndex);
+  SplineParameters = UFG::qBezierPathMemImaged::GetSplineParameters(Path, t, &splineT);
+  v13 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                         (UFG::RoadNetworkConnection *)Path,
+                                         SplineParameters);
+  return UFG::RoadNetworkLane::GetOffsetPosAndTangent(v13, splineT, this->mOffset, pos, tangent);
 }
 
 // File Line: 3631
 // RVA: 0xD5F50
-UFG::qNode<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide> **__fastcall UFG::RoadNetworkLane::GetClosestCarToStart(UFG::RoadNetworkLane *this)
+UFG::qNode<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide> **__fastcall UFG::RoadNetworkLane::GetClosestCarToStart(
+        UFG::RoadNetworkLane *this)
 {
-  UFG::qNode<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide> **result; // rax
-
   if ( (UFG::qOffset64<UFG::RoadNetworkConnection *> *)&this->mCars.mNode.mNext[-2].mNext == &this->mStartConnection )
-    result = 0i64;
+    return 0i64;
   else
-    result = &this->mCars.mNode.mNext[-2].mNext;
-  return result;
+    return &this->mCars.mNode.mNext[-2].mNext;
 }
 
 // File Line: 3647
 // RVA: 0xDE8A0
 bool __fastcall UFG::RoadNetworkLane::IsReversedInNode(UFG::RoadNetworkLane *this)
 {
-  __int64 v1; // rdx
+  __int64 mOffset; // rdx
   char *v2; // r9
   char *v3; // r8
   __int64 v4; // rcx
   char *v5; // rcx
   char *v6; // r8
   __int64 v7; // rcx
-  bool result; // al
 
-  v1 = this->mStartGate.mOffset;
-  if ( v1 )
-    v2 = (char *)&this->mStartGate + v1;
+  mOffset = this->mStartGate.mOffset;
+  if ( mOffset )
+    v2 = (char *)&this->mStartGate + mOffset;
   else
     v2 = 0i64;
   v3 = (char *)this + this->mNode.mOffset;
@@ -5896,58 +5634,54 @@ bool __fastcall UFG::RoadNetworkLane::IsReversedInNode(UFG::RoadNetworkLane *thi
     v6 = 0i64;
   v7 = *((_QWORD *)v6 + 1);
   if ( v7 )
-    result = v2 != &v6[v7 + 8];
+    return v2 != &v6[v7 + 8];
   else
-    result = v2 != 0i64;
-  return result;
+    return v2 != 0i64;
 }
 
 // File Line: 3653
 // RVA: 0xD9510
-signed __int64 __fastcall UFG::RoadNetworkLane::GetLaneDirection(UFG::RoadNetworkLane *this, UFG::RoadNetworkLane *otherLane)
+signed __int64 __fastcall UFG::RoadNetworkLane::GetLaneDirection(
+        UFG::RoadNetworkLane *this,
+        UFG::RoadNetworkLane *otherLane)
 {
-  UFG::RoadNetworkLane *v2; // r8
-  __int64 v3; // rcx
+  __int64 mOffset; // rcx
   signed __int64 result; // rax
   char *v5; // r9
-  UFG::RoadNetworkLane *v6; // rbp
   __int64 v7; // r11
-  signed __int64 v8; // rdi
+  char *v8; // rdi
   char *v9; // rcx
   char *v10; // r10
   __int64 v11; // rcx
-  signed __int64 v12; // r15
+  char *v12; // r15
   __int64 v13; // rcx
-  signed __int64 v14; // rsi
-  int v15; // er14
+  char *v14; // rsi
+  int mLaneIndex; // r14d
   unsigned int v16; // ebx
-  int v17; // er10
+  int v17; // r10d
   __int64 v18; // r8
-  signed __int64 v19; // r9
-  signed __int64 v20; // rcx
-  signed __int64 v21; // rdx
+  __int64 v19; // r9
+  char *v20; // rcx
+  char *v21; // rdx
   __int64 v22; // rcx
   UFG::RoadNetworkLane *v23; // rcx
   __int64 v24; // rdx
-  signed __int64 v25; // rdx
-  int v26; // er9
+  __int64 v25; // rdx
+  int v26; // r9d
   __int64 i; // r8
-  signed __int64 v28; // rcx
-  signed __int64 v29; // rdx
-  __int64 v30; // rcx
-  UFG::RoadNetworkLane *v31; // rcx
+  char *v28; // rcx
+  char *v29; // rdx
+  UFG::RoadNetworkLane *v30; // rcx
+  __int64 v31; // rdx
   __int64 v32; // rdx
-  signed __int64 v33; // rdx
 
-  v2 = this;
-  v3 = this->mNode.mOffset;
+  mOffset = this->mNode.mOffset;
   result = 0i64;
-  v5 = (char *)v2 + v3;
-  v6 = otherLane;
-  if ( !v3 )
+  v5 = (char *)this + mOffset;
+  if ( !mOffset )
     v5 = 0i64;
   v7 = *((_QWORD *)v5 + 6);
-  v8 = (signed __int64)(v5 + 48);
+  v8 = v5 + 48;
   v9 = &v5[v7 + 48];
   if ( !v7 )
     v9 = 0i64;
@@ -5956,37 +5690,37 @@ signed __int64 __fastcall UFG::RoadNetworkLane::GetLaneDirection(UFG::RoadNetwor
     v10 = 0i64;
   v11 = *((_QWORD *)v10 + 1);
   if ( v11 )
-    v12 = (signed __int64)&v10[v11 + 8];
+    v12 = &v10[v11 + 8];
   else
     v12 = 0i64;
-  v13 = v2->mStartGate.mOffset;
+  v13 = this->mStartGate.mOffset;
   if ( v13 )
-    v14 = (signed __int64)&v2->mStartGate + v13;
+    v14 = (char *)&this->mStartGate + v13;
   else
     v14 = 0i64;
-  v15 = v2->mLaneIndex;
+  mLaneIndex = this->mLaneIndex;
   v16 = (unsigned __int8)v5[40];
   v17 = 0;
-  v18 = (unsigned int)(v15 + 1);
+  v18 = (unsigned int)(mLaneIndex + 1);
   if ( (unsigned int)v18 < v16 )
   {
     v19 = 8 * v18;
     do
     {
-      v20 = v7 + v8;
+      v20 = &v8[v7];
       if ( !v7 )
         v20 = 0i64;
-      v21 = v19 + v20;
-      v22 = *(_QWORD *)(v19 + v20);
-      v23 = (UFG::RoadNetworkLane *)(v22 ? v21 + v22 : 0i64);
+      v21 = &v20[v19];
+      v22 = *(_QWORD *)&v20[v19];
+      v23 = v22 ? (UFG::RoadNetworkLane *)&v21[v22] : 0i64;
       v24 = v23->mStartGate.mOffset;
-      v25 = (signed __int64)(v24 ? (UFG::qOffset64<UFG::RoadNetworkGate *> *)((char *)&v23->mStartGate + v24) : 0i64);
-      if ( v25 != v14 )
+      v25 = v24 ? (__int64)&v23->mStartGate + v24 : 0i64;
+      if ( (char *)v25 != v14 )
         break;
-      if ( v23 == v6 )
+      if ( v23 == otherLane )
       {
-        v17 = v18 - v15;
-        if ( (_DWORD)v18 != v15 )
+        v17 = v18 - mLaneIndex;
+        if ( (_DWORD)v18 != mLaneIndex )
           goto LABEL_42;
         break;
       }
@@ -5995,22 +5729,21 @@ signed __int64 __fastcall UFG::RoadNetworkLane::GetLaneDirection(UFG::RoadNetwor
     }
     while ( (unsigned int)v18 < v16 );
   }
-  v26 = v15 - 1;
-  for ( i = v15 - 1; i >= 0; --i )
+  v26 = mLaneIndex - 1;
+  for ( i = mLaneIndex - 1; i >= 0; --i )
   {
-    v28 = v7 + v8;
+    v28 = &v8[v7];
     if ( !v7 )
       v28 = 0i64;
-    v29 = v28 + 8 * i;
-    v30 = *(_QWORD *)(v28 + 8 * i);
-    v31 = (UFG::RoadNetworkLane *)(v30 ? v29 + v30 : 0i64);
-    v32 = v31->mStartGate.mOffset;
-    v33 = (signed __int64)(v32 ? (UFG::qOffset64<UFG::RoadNetworkGate *> *)((char *)&v31->mStartGate + v32) : 0i64);
-    if ( v33 != v14 )
+    v29 = &v28[8 * i];
+    v30 = *(_QWORD *)v29 ? (UFG::RoadNetworkLane *)&v29[*(_QWORD *)v29] : 0i64;
+    v31 = v30->mStartGate.mOffset;
+    v32 = v31 ? (__int64)&v30->mStartGate + v31 : 0i64;
+    if ( (char *)v32 != v14 )
       break;
-    if ( v31 == v6 )
+    if ( v30 == otherLane )
     {
-      v17 = v26 - v15;
+      v17 = v26 - mLaneIndex;
       break;
     }
     --v26;
@@ -6021,98 +5754,94 @@ LABEL_42:
   if ( v17 > 0 )
     return 1i64;
   if ( v17 < 0 )
-    result = 2i64;
+    return 2i64;
   return result;
 }
 
 // File Line: 3700
 // RVA: 0xDC430
-signed __int64 __fastcall UFG::RoadNetworkLane::GetTurnDirection(UFG::RoadNetworkLane *this)
+__int64 __fastcall UFG::RoadNetworkLane::GetTurnDirection(UFG::RoadNetworkLane *this)
 {
-  char v1; // dl
-  signed __int64 result; // rax
+  char mDirection; // dl
+  __int64 result; // rax
 
-  v1 = this->mDirection;
-  if ( v1 == -1 )
+  mDirection = this->mDirection;
+  if ( mDirection == -1 )
     return 1i64;
   result = 0i64;
-  if ( v1 == 1 )
-    result = 2i64;
+  if ( mDirection == 1 )
+    return 2i64;
   return result;
 }
 
 // File Line: 3730
 // RVA: 0xDE4A0
-bool __fastcall UFG::RoadNetworkLane::IsFlagMatch(UFG::RoadNetworkLane *this, unsigned int laneFlags)
+bool __fastcall UFG::RoadNetworkLane::IsFlagMatch(UFG::RoadNetworkLane *this, unsigned __int8 laneFlags)
 {
-  return ((unsigned __int8)laneFlags & this->mLaneFlags) != 0;
+  return (laneFlags & this->mLaneFlags) != 0;
 }
 
 // File Line: 3735
 // RVA: 0xDF350
 bool __fastcall UFG::RoadNetworkLane::LaneChangeAvailable(UFG::RoadNetworkLane *this, unsigned int *whichLanes)
 {
-  unsigned int *v2; // r13
-  UFG::RoadNetworkLane *v3; // r14
-  signed int v4; // er12
-  __int64 v5; // r15
+  unsigned int v4; // r12d
+  __int64 mOffset; // r15
   char *v6; // rbp
-  signed int v8; // esi
-  signed int v9; // edi
-  int v10; // eax
-  signed int v11; // er11
+  int v8; // esi
+  int v9; // edi
+  int mLaneIndex; // eax
+  int v11; // r11d
   __int64 v12; // rcx
   __int64 v13; // r10
   __int64 v14; // rax
-  signed __int64 v15; // rdx
+  char *v15; // rdx
   __int64 v16; // rax
-  signed __int64 v17; // rcx
-  _QWORD *v18; // rax
+  char *v17; // rcx
+  char *v18; // rax
   __int64 v19; // rcx
-  signed __int64 v20; // r8
+  char *v20; // r8
   char *v21; // rdx
   __int64 v22; // rax
   char *v23; // rax
   char *v24; // rdx
   __int64 v25; // rax
-  signed __int64 v26; // rax
+  char *v26; // rax
   bool v27; // zf
   __int64 v28; // rax
-  signed __int64 v29; // r8
+  char *v29; // r8
   char *v30; // rax
   __int64 v31; // rcx
   char *v32; // rax
   char *v33; // rdx
   __int64 v34; // rax
-  signed __int64 v35; // rcx
+  char *v35; // rcx
   __int64 v36; // rax
-  signed __int64 v37; // rcx
+  char *v37; // rcx
   __int64 v38; // rax
-  _QWORD *v39; // rax
+  char *v39; // rax
   __int64 v40; // rcx
-  signed __int64 v41; // r8
+  char *v41; // r8
   char *v42; // rdx
   __int64 v43; // rax
   char *v44; // rax
   char *v45; // rdx
   __int64 v46; // rax
-  signed __int64 v47; // rax
+  char *v47; // rax
   bool v48; // zf
   __int64 v49; // rax
-  signed __int64 v50; // r8
+  char *v50; // r8
   char *v51; // rax
   __int64 v52; // rcx
   char *v53; // rax
   char *v54; // rdx
   __int64 v55; // rax
-  signed __int64 v56; // rax
+  char *v56; // rax
 
-  v2 = whichLanes;
-  v3 = this;
   v4 = 0;
   if ( whichLanes )
     *whichLanes = 0;
-  v5 = this->mNode.mOffset;
+  mOffset = this->mNode.mOffset;
   v6 = (char *)this + this->mNode.mOffset;
   if ( !this->mNode.mOffset )
     v6 = 0i64;
@@ -6125,30 +5854,30 @@ bool __fastcall UFG::RoadNetworkLane::LaneChangeAvailable(UFG::RoadNetworkLane *
     v8 = 1;
     v9 = -1;
   }
-  v10 = v3->mLaneIndex;
+  mLaneIndex = this->mLaneIndex;
   v11 = (unsigned __int8)v6[40];
-  v12 = (unsigned int)(v10 + v8);
-  v13 = (unsigned int)(v10 + v9);
-  if ( (signed int)v12 >= 0 && (signed int)v12 < v11 )
+  v12 = (unsigned int)(mLaneIndex + v8);
+  v13 = (unsigned int)(mLaneIndex + v9);
+  if ( (int)v12 >= 0 && (int)v12 < v11 )
   {
     v14 = *((_QWORD *)v6 + 6);
     if ( v14 )
-      v15 = (signed __int64)&v6[v14 + 48];
+      v15 = &v6[v14 + 48];
     else
       v15 = 0i64;
-    v16 = *(_QWORD *)(v15 + 8 * v12);
-    v17 = v15 + 8 * v12;
+    v16 = *(_QWORD *)&v15[8 * v12];
+    v17 = &v15[8 * v12];
     if ( v16 )
-      v18 = (_QWORD *)(v17 + v16);
+      v18 = &v17[v16];
     else
       v18 = 0i64;
-    v19 = v18[1];
+    v19 = *((_QWORD *)v18 + 1);
     if ( v19 )
-      v20 = (signed __int64)v18 + v19 + 8;
+      v20 = &v18[v19 + 8];
     else
       v20 = 0i64;
-    v21 = (char *)v18 + *v18;
-    if ( !*v18 )
+    v21 = &v18[*(_QWORD *)v18];
+    if ( !*(_QWORD *)v18 )
       v21 = 0i64;
     v22 = *((_QWORD *)v21 + 6);
     if ( v22 )
@@ -6160,17 +5889,17 @@ bool __fastcall UFG::RoadNetworkLane::LaneChangeAvailable(UFG::RoadNetworkLane *
       v24 = 0i64;
     v25 = *((_QWORD *)v24 + 1);
     if ( v25 )
-      v26 = (signed __int64)&v24[v25 + 8];
+      v26 = &v24[v25 + 8];
     else
       v26 = 0i64;
     v27 = v20 == v26;
-    v28 = v3->mStartGate.mOffset;
+    v28 = this->mStartGate.mOffset;
     if ( v28 )
-      v29 = (signed __int64)&v3->mStartGate + v28;
+      v29 = (char *)&this->mStartGate + v28;
     else
       v29 = 0i64;
-    v30 = (char *)v3 + v5;
-    if ( !v5 )
+    v30 = (char *)this + mOffset;
+    if ( !mOffset )
       v30 = 0i64;
     v31 = *((_QWORD *)v30 + 6);
     if ( v31 )
@@ -6182,31 +5911,31 @@ bool __fastcall UFG::RoadNetworkLane::LaneChangeAvailable(UFG::RoadNetworkLane *
       v33 = 0i64;
     v34 = *((_QWORD *)v33 + 1);
     if ( v34 )
-      v35 = (signed __int64)&v33[v34 + 8];
+      v35 = &v33[v34 + 8];
     else
       v35 = 0i64;
     if ( !v27 == (v29 != v35) )
       v4 = 2;
   }
-  if ( (signed int)v13 >= 0 && (signed int)v13 < v11 )
+  if ( (int)v13 >= 0 && (int)v13 < v11 )
   {
     v36 = *((_QWORD *)v6 + 6);
     if ( v36 )
-      v37 = (signed __int64)&v6[v36 + 48];
+      v37 = &v6[v36 + 48];
     else
       v37 = 0i64;
-    v38 = *(_QWORD *)(v37 + 8 * v13);
+    v38 = *(_QWORD *)&v37[8 * v13];
     if ( v38 )
-      v39 = (_QWORD *)(v37 + 8 * v13 + v38);
+      v39 = &v37[8 * v13 + v38];
     else
       v39 = 0i64;
-    v40 = v39[1];
+    v40 = *((_QWORD *)v39 + 1);
     if ( v40 )
-      v41 = (signed __int64)v39 + v40 + 8;
+      v41 = &v39[v40 + 8];
     else
       v41 = 0i64;
-    v42 = (char *)v39 + *v39;
-    if ( !*v39 )
+    v42 = &v39[*(_QWORD *)v39];
+    if ( !*(_QWORD *)v39 )
       v42 = 0i64;
     v43 = *((_QWORD *)v42 + 6);
     if ( v43 )
@@ -6218,17 +5947,17 @@ bool __fastcall UFG::RoadNetworkLane::LaneChangeAvailable(UFG::RoadNetworkLane *
       v45 = 0i64;
     v46 = *((_QWORD *)v45 + 1);
     if ( v46 )
-      v47 = (signed __int64)&v45[v46 + 8];
+      v47 = &v45[v46 + 8];
     else
       v47 = 0i64;
     v48 = v41 == v47;
-    v49 = v3->mStartGate.mOffset;
+    v49 = this->mStartGate.mOffset;
     if ( v49 )
-      v50 = (signed __int64)&v3->mStartGate + v49;
+      v50 = (char *)&this->mStartGate + v49;
     else
       v50 = 0i64;
-    v51 = (char *)v3 + v5;
-    if ( !v5 )
+    v51 = (char *)this + mOffset;
+    if ( !mOffset )
       v51 = 0i64;
     v52 = *((_QWORD *)v51 + 6);
     if ( v52 )
@@ -6240,14 +5969,14 @@ bool __fastcall UFG::RoadNetworkLane::LaneChangeAvailable(UFG::RoadNetworkLane *
       v54 = 0i64;
     v55 = *((_QWORD *)v54 + 1);
     if ( v55 )
-      v56 = (signed __int64)&v54[v55 + 8];
+      v56 = &v54[v55 + 8];
     else
       v56 = 0i64;
     if ( !v48 == (v50 != v56) )
       ++v4;
   }
-  if ( v2 )
-    *v2 = v4;
+  if ( whichLanes )
+    *whichLanes = v4;
   return v4 != 0;
 }
 
@@ -6255,18 +5984,17 @@ bool __fastcall UFG::RoadNetworkLane::LaneChangeAvailable(UFG::RoadNetworkLane *
 // RVA: 0xDAF70
 __int64 __fastcall UFG::RoadNetworkLane::GetNumberOfCarsInLaneAheadOfDistance(UFG::RoadNetworkLane *this, float d)
 {
-  UFG::qNode<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide> *v2; // rax
-  UFG::RoadNetworkLane *v3; // rsi
-  UFG::qOffset64<UFG::RoadNetworkConnection *> *v4; // rcx
-  signed __int64 v5; // rax
+  UFG::qNode<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide> *mNext; // rax
+  UFG::qOffset64<UFG::RoadNetworkConnection *> *p_mStartConnection; // rcx
+  __int64 p_mNext; // rax
   int v6; // edx
-  __int64 v7; // rax
-  signed __int64 v8; // rdi
+  __int64 mOffset; // rax
+  __int64 v8; // rdi
   UFG::RoadNetworkConnection *v9; // rcx
-  UFG::RoadNetworkLane *v10; // rax
-  UFG::qNode<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide> *v11; // rbx
-  signed __int64 v12; // rsi
-  signed __int64 v13; // rbx
+  UFG::RoadNetworkLane *Path; // rax
+  UFG::qNode<UFG::RoadNetworkGuide,UFG::RoadNetworkGuide> *mPrev; // rbx
+  UFG::qOffset64<UFG::RoadNetworkConnection *> *v12; // rsi
+  __int64 v13; // rbx
   unsigned int v14; // ebp
   float i; // xmm6_4
   __int64 v16; // rax
@@ -6281,34 +6009,35 @@ __int64 __fastcall UFG::RoadNetworkLane::GetNumberOfCarsInLaneAheadOfDistance(UF
   UFG::RoadNetworkConnection *v25; // rcx
   float v26; // xmm0_4
 
-  v2 = this->mCars.mNode.mNext;
-  v3 = this;
-  v4 = &this->mStartConnection;
-  v5 = (signed __int64)&v2[-2].mNext;
+  mNext = this->mCars.mNode.mNext;
+  p_mStartConnection = &this->mStartConnection;
+  p_mNext = (__int64)&mNext[-2].mNext;
   v6 = 0;
-  if ( (UFG::qOffset64<UFG::RoadNetworkConnection *> *)v5 == v4 )
+  if ( (UFG::qOffset64<UFG::RoadNetworkConnection *> *)p_mNext == p_mStartConnection )
     return 0i64;
   do
   {
     ++v6;
-    v5 = *(_QWORD *)(v5 + 32) - 24i64;
+    p_mNext = *(_QWORD *)(p_mNext + 32) - 24i64;
   }
-  while ( (UFG::qOffset64<UFG::RoadNetworkConnection *> *)v5 != v4 );
+  while ( (UFG::qOffset64<UFG::RoadNetworkConnection *> *)p_mNext != p_mStartConnection );
   if ( !v6 )
     return 0i64;
-  v7 = v3->mNode.mOffset;
+  mOffset = this->mNode.mOffset;
   v8 = 0i64;
-  if ( v3->mNode.mOffset )
-    v7 += (__int64)v3;
-  v9 = *(UFG::RoadNetworkConnection **)(v7 + 32);
+  if ( this->mNode.mOffset )
+    mOffset += (__int64)this;
+  v9 = *(UFG::RoadNetworkConnection **)(mOffset + 32);
   if ( v9 )
-    v9 = (UFG::RoadNetworkConnection *)((char *)v9 + v7 + 32);
-  v10 = UFG::qBezierPathCollectionMemImaged::GetPath(v9, v3->mPathIndex);
-  v11 = v3->mCars.mNode.mPrev;
-  v12 = (signed __int64)&v3->mStartConnection;
-  v13 = (signed __int64)&v11[-2].mNext;
+    v9 = (UFG::RoadNetworkConnection *)((char *)v9 + mOffset + 32);
+  Path = UFG::qBezierPathCollectionMemImaged::GetPath(v9, this->mPathIndex);
+  mPrev = this->mCars.mNode.mPrev;
+  v12 = &this->mStartConnection;
+  v13 = (__int64)&mPrev[-2].mNext;
   v14 = 0;
-  for ( i = *((float *)&v10->mNode.mOffset + 1); v13 != v12; v13 = *(_QWORD *)(v13 + 24) - 24i64 )
+  for ( i = *((float *)&Path->mNode.mOffset + 1);
+        (UFG::qOffset64<UFG::RoadNetworkConnection *> *)v13 != v12;
+        v13 = *(_QWORD *)(v13 + 24) - 24i64 )
   {
     if ( v8 )
     {
@@ -6355,183 +6084,176 @@ __int64 __fastcall UFG::RoadNetworkLane::GetStatus(UFG::RoadNetworkLane *this)
 // RVA: 0xD2DA0
 float __fastcall UFG::RoadNetworkLane::CalculateParkingOffset(UFG::RoadNetworkLane *this, UFG::qVector3 *position)
 {
-  UFG::qVector3 *v2; // rsi
-  UFG::RoadNetworkLane *v3; // rdi
-  __int64 v4; // rax
-  unsigned int v5; // edx
+  __int64 mOffset; // rax
+  unsigned int mPathIndex; // edx
   UFG::RoadNetworkConnection *v6; // rcx
-  UFG::qBezierPathMemImaged *v7; // rax
+  UFG::qBezierPathMemImaged *Path; // rax
   __int64 v8; // rax
   UFG::RoadNetworkConnection *v9; // rcx
   UFG::qBezierPathMemImaged *v10; // rax
   float v11; // xmm8_4
   UFG::RoadNetworkConnection *v12; // rbx
-  unsigned int v13; // eax
+  unsigned int SplineParameters; // eax
   UFG::qBezierSplineMemImaged *v14; // rax
-  __m128 v15; // xmm2
+  __m128 y_low; // xmm2
   float v16; // xmm6_4
   __int64 v17; // rax
   UFG::RoadNetworkConnection *v18; // rcx
-  UFG::qBezierPathMemImaged *v19; // rax
-  UFG::RoadNetworkConnection *v20; // rbx
-  unsigned int v21; // eax
-  UFG::qBezierSplineMemImaged *v22; // rax
-  __m128 v23; // xmm3
-  UFG::qVector3 result; // [rsp+20h] [rbp-68h]
-  float t; // [rsp+90h] [rbp+8h]
-  float splineT; // [rsp+98h] [rbp+10h]
+  UFG::qBezierPathMemImaged *v19; // rbx
+  unsigned int v20; // eax
+  UFG::qBezierSplineMemImaged *v21; // rax
+  __m128 v22; // xmm3
+  UFG::qVector3 result; // [rsp+20h] [rbp-68h] BYREF
+  float t; // [rsp+90h] [rbp+8h] BYREF
+  float splineT; // [rsp+98h] [rbp+10h] BYREF
 
-  v2 = position;
-  v3 = this;
   t = 0.0;
-  v4 = this->mNode.mOffset;
+  mOffset = this->mNode.mOffset;
   if ( this->mNode.mOffset )
-    v4 += (__int64)this;
-  v5 = this->mPathIndex;
-  v6 = *(UFG::RoadNetworkConnection **)(v4 + 32);
+    mOffset += (__int64)this;
+  mPathIndex = this->mPathIndex;
+  v6 = *(UFG::RoadNetworkConnection **)(mOffset + 32);
   if ( v6 )
-    v6 = (UFG::RoadNetworkConnection *)((char *)v6 + v4 + 32);
-  v7 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v6, v5);
-  UFG::qBezierPathMemImaged::ClosestPoint3D(v7, &result, v2, &t);
-  v8 = v3->mNode.mOffset;
-  if ( v3->mNode.mOffset )
-    v8 += (__int64)v3;
+    v6 = (UFG::RoadNetworkConnection *)((char *)v6 + mOffset + 32);
+  Path = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v6, mPathIndex);
+  UFG::qBezierPathMemImaged::ClosestPoint3D(Path, &result, position, &t);
+  v8 = this->mNode.mOffset;
+  if ( this->mNode.mOffset )
+    v8 += (__int64)this;
   v9 = *(UFG::RoadNetworkConnection **)(v8 + 32);
   if ( v9 )
     v9 = (UFG::RoadNetworkConnection *)((char *)v9 + v8 + 32);
-  v10 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v9, v3->mPathIndex);
+  v10 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v9, this->mPathIndex);
   v11 = t;
   v12 = (UFG::RoadNetworkConnection *)v10;
-  v13 = UFG::qBezierPathMemImaged::GetSplineParameters(v10, t, &splineT);
-  v14 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v12, v13);
-  UFG::RoadNetworkLane::GetOffsetPos(&result, v14, splineT, v3->mOffset);
-  v15 = (__m128)LODWORD(result.y);
-  v16 = v3->mOffset;
-  v15.m128_f32[0] = (float)((float)((float)(result.y - v2->y) * (float)(result.y - v2->y))
-                          + (float)((float)(result.x - v2->x) * (float)(result.x - v2->x)))
-                  + (float)((float)(result.z - v2->z) * (float)(result.z - v2->z));
-  if ( (float)(COERCE_FLOAT(_mm_sqrt_ps(v15)) - 2.0) < 0.75 )
+  SplineParameters = UFG::qBezierPathMemImaged::GetSplineParameters(v10, t, &splineT);
+  v14 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v12, SplineParameters);
+  UFG::RoadNetworkLane::GetOffsetPos(&result, v14, splineT, this->mOffset);
+  y_low = (__m128)LODWORD(result.y);
+  v16 = this->mOffset;
+  y_low.m128_f32[0] = (float)((float)((float)(result.y - position->y) * (float)(result.y - position->y))
+                            + (float)((float)(result.x - position->x) * (float)(result.x - position->x)))
+                    + (float)((float)(result.z - position->z) * (float)(result.z - position->z));
+  if ( (float)(_mm_sqrt_ps(y_low).m128_f32[0] - 2.0) < 0.75 )
   {
     do
     {
-      v17 = v3->mNode.mOffset;
+      v17 = this->mNode.mOffset;
       v16 = v16 + 0.25;
-      if ( v3->mNode.mOffset )
-        v17 += (__int64)v3;
+      if ( this->mNode.mOffset )
+        v17 += (__int64)this;
       v18 = *(UFG::RoadNetworkConnection **)(v17 + 32);
       if ( v18 )
         v18 = (UFG::RoadNetworkConnection *)((char *)v18 + v17 + 32);
-      v19 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v18, v3->mPathIndex);
-      v20 = (UFG::RoadNetworkConnection *)v19;
-      v21 = UFG::qBezierPathMemImaged::GetSplineParameters(v19, v11, &t);
-      v22 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v20, v21);
-      UFG::RoadNetworkLane::GetOffsetPos(&result, v22, t, v16 + v3->mOffset);
-      v23 = (__m128)LODWORD(result.y);
-      v23.m128_f32[0] = (float)((float)((float)(result.y - v2->y) * (float)(result.y - v2->y))
-                              + (float)((float)(result.x - v2->x) * (float)(result.x - v2->x)))
-                      + (float)((float)(result.z - v2->z) * (float)(result.z - v2->z));
+      v19 = (UFG::qBezierPathMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(v18, this->mPathIndex);
+      v20 = UFG::qBezierPathMemImaged::GetSplineParameters(v19, v11, &t);
+      v21 = (UFG::qBezierSplineMemImaged *)UFG::qBezierPathCollectionMemImaged::GetPath(
+                                             (UFG::RoadNetworkConnection *)v19,
+                                             v20);
+      UFG::RoadNetworkLane::GetOffsetPos(&result, v21, t, v16 + this->mOffset);
+      v22 = (__m128)LODWORD(result.y);
+      v22.m128_f32[0] = (float)((float)((float)(result.y - position->y) * (float)(result.y - position->y))
+                              + (float)((float)(result.x - position->x) * (float)(result.x - position->x)))
+                      + (float)((float)(result.z - position->z) * (float)(result.z - position->z));
     }
-    while ( (float)(COERCE_FLOAT(_mm_sqrt_ps(v23)) - 2.0) < 0.75 );
+    while ( (float)(_mm_sqrt_ps(v22).m128_f32[0] - 2.0) < 0.75 );
   }
   return v16;
 }
 
 // File Line: 3977
 // RVA: 0xDB330
-UFG::RoadNetworkConnection *__fastcall UFG::RoadNetworkGate::GetOutgoingConnection(UFG::RoadNetworkGate *this, unsigned int index)
+UFG::RoadNetworkConnection *__fastcall UFG::RoadNetworkGate::GetOutgoingConnection(
+        UFG::RoadNetworkGate *this,
+        unsigned int index)
 {
-  __int64 v2; // rax
+  __int64 mOffset; // rax
   char *v3; // rcx
-  __int64 v4; // rax
-  signed __int64 v5; // rdx
+  UFG::RoadNetworkConnection **v4; // rdx
   UFG::RoadNetworkConnection *result; // rax
 
-  v2 = this->mOutgoingConnection.mOffset;
-  if ( v2 )
-    v3 = (char *)&this->mOutgoingConnection + v2;
+  mOffset = this->mOutgoingConnection.mOffset;
+  if ( mOffset )
+    v3 = (char *)&this->mOutgoingConnection + mOffset;
   else
     v3 = 0i64;
-  v4 = index;
-  v5 = (signed __int64)&v3[8 * v4];
-  result = *(UFG::RoadNetworkConnection **)&v3[8 * v4];
-  if ( result )
-    result = (UFG::RoadNetworkConnection *)((char *)result + v5);
+  v4 = (UFG::RoadNetworkConnection **)&v3[8 * index];
+  result = *v4;
+  if ( *v4 )
+    return (UFG::RoadNetworkConnection *)((char *)result + (_QWORD)v4);
   return result;
 }
 
 // File Line: 3984
 // RVA: 0xD5B30
-UFG::RoadNetworkLane *__fastcall UFG::RoadNetworkGate::GetAnyLaneLeadingToNode(UFG::RoadNetworkGate *this, UFG::RoadNetworkNode *targetNode)
+UFG::RoadNetworkLane *__fastcall UFG::RoadNetworkGate::GetAnyLaneLeadingToNode(
+        UFG::RoadNetworkGate *this,
+        UFG::RoadNetworkNode *targetNode)
 {
-  unsigned int v2; // er15
-  unsigned int v3; // edi
-  UFG::RoadNetworkNode *v4; // rbp
-  __int64 v5; // r14
-  UFG::qOffset64<UFG::qOffset64<UFG::RoadNetworkConnection *> *> *v6; // r12
-  __int64 v7; // rsi
+  unsigned int mNumOutgoingConnections; // r15d
+  int v3; // edi
+  __int64 mOffset; // r14
+  UFG::qOffset64<UFG::qOffset64<UFG::RoadNetworkConnection *> *> *p_mOutgoingConnection; // r12
+  __int64 i; // rsi
   char *v8; // rax
   char *v9; // rcx
   __int64 v10; // rax
   __int64 v11; // rcx
-  signed __int64 v12; // rax
-  unsigned int v13; // er11
-  unsigned int v14; // er8
+  unsigned int *v12; // rax
+  unsigned int v13; // r11d
+  unsigned int v14; // r8d
   __int64 v15; // r10
-  signed __int64 v16; // rbx
+  int *v16; // rbx
   __int64 v17; // r9
-  signed __int64 v18; // rax
-  signed __int64 v19; // rcx
+  __int64 v18; // rax
+  __int64 v19; // rcx
   __int64 v20; // rax
   __int64 v21; // rdx
   __int64 v22; // rax
-  signed __int64 v23; // rcx
+  __int64 v23; // rcx
   _QWORD *v24; // rax
   UFG::RoadNetworkNode **v25; // rax
   UFG::RoadNetworkNode *v26; // rcx
 
-  v2 = this->mNumOutgoingConnections;
+  mNumOutgoingConnections = this->mNumOutgoingConnections;
   v3 = 0;
-  v4 = targetNode;
-  if ( !v2 )
+  if ( !mNumOutgoingConnections )
     return 0i64;
-  v5 = this->mOutgoingConnection.mOffset;
-  v6 = &this->mOutgoingConnection;
-  v7 = 0i64;
-  while ( 1 )
+  mOffset = this->mOutgoingConnection.mOffset;
+  p_mOutgoingConnection = &this->mOutgoingConnection;
+  for ( i = 0i64; ; i += 8i64 )
   {
-    if ( v5 )
-      v8 = (char *)v6 + v5;
+    if ( mOffset )
+      v8 = (char *)p_mOutgoingConnection + mOffset;
     else
       v8 = 0i64;
-    v9 = &v8[v7];
-    v10 = *(_QWORD *)&v8[v7];
+    v9 = &v8[i];
+    v10 = *(_QWORD *)&v8[i];
     if ( v10 )
       v10 += (__int64)v9;
     v11 = *(_QWORD *)(v10 + 16);
     if ( v11 )
     {
-      v12 = v11 + v10 + 16;
+      v12 = (unsigned int *)(v11 + v10 + 16);
       if ( v12 )
       {
-        v13 = *(_DWORD *)v12;
+        v13 = *v12;
         v14 = 0;
-        if ( *(_DWORD *)v12 )
+        if ( *v12 )
           break;
       }
     }
 LABEL_30:
-    ++v3;
-    v7 += 8i64;
-    if ( v3 >= v2 )
+    if ( ++v3 >= mNumOutgoingConnections )
       return 0i64;
   }
-  v15 = *(_QWORD *)(v12 + 8);
-  v16 = v12 + 8;
+  v15 = *((_QWORD *)v12 + 1);
+  v16 = (int *)(v12 + 2);
   v17 = 0i64;
   while ( 1 )
   {
     if ( v15 )
-      v18 = v15 + v16;
+      v18 = (__int64)v16 + v15;
     else
       v18 = 0i64;
     v19 = v17 + v18;
@@ -6548,11 +6270,11 @@ LABEL_30:
     v24 = *(_QWORD **)(v23 + 8);
     if ( v24 )
       v24 = (_QWORD *)((char *)v24 + v23 + 8);
-    v25 = (UFG::RoadNetworkNode **)(*v24 ? (_QWORD *)((char *)v24 + *v24) : 0i64);
+    v25 = *v24 ? (UFG::RoadNetworkNode **)((char *)v24 + *v24) : 0i64;
     v26 = *v25;
     if ( *v25 )
       v26 = (UFG::RoadNetworkNode *)((char *)v26 + (_QWORD)v25);
-    if ( v26 == v4 )
+    if ( v26 == targetNode )
       return (UFG::RoadNetworkLane *)v21;
     ++v14;
     v17 += 8i64;
@@ -6563,77 +6285,74 @@ LABEL_30:
 
 // File Line: 4010
 // RVA: 0xD5A00
-UFG::RoadNetworkLane *__fastcall UFG::RoadNetworkGate::GetAnyLaneLeadingHereFromNode(UFG::RoadNetworkGate *this, UFG::RoadNetworkNode *targetNode)
+UFG::RoadNetworkLane *__fastcall UFG::RoadNetworkGate::GetAnyLaneLeadingHereFromNode(
+        UFG::RoadNetworkGate *this,
+        UFG::RoadNetworkNode *targetNode)
 {
-  unsigned int v2; // er15
-  unsigned int v3; // edi
-  UFG::RoadNetworkNode *v4; // rbp
-  __int64 v5; // r14
-  UFG::qOffset64<UFG::qOffset64<UFG::RoadNetworkConnection *> *> *v6; // r12
-  __int64 v7; // rsi
+  unsigned int mNumIncomingConnections; // r15d
+  int v3; // edi
+  __int64 mOffset; // r14
+  UFG::qOffset64<UFG::qOffset64<UFG::RoadNetworkConnection *> *> *p_mIncomingConnection; // r12
+  __int64 i; // rsi
   char *v8; // rax
   char *v9; // rcx
   __int64 v10; // rax
   __int64 v11; // rcx
-  signed __int64 v12; // rax
-  unsigned int v13; // er11
-  unsigned int v14; // er8
+  unsigned int *v12; // rax
+  unsigned int v13; // r11d
+  unsigned int v14; // r8d
   __int64 v15; // r10
-  signed __int64 v16; // rbx
+  int *v16; // rbx
   __int64 v17; // r9
-  signed __int64 v18; // rax
-  signed __int64 v19; // rcx
+  __int64 v18; // rax
+  __int64 v19; // rcx
   __int64 v20; // rax
   __int64 v21; // rdx
   __int64 v22; // rax
-  signed __int64 v23; // rcx
+  __int64 v23; // rcx
   _QWORD *v24; // rax
   UFG::RoadNetworkNode **v25; // rax
   UFG::RoadNetworkNode *v26; // rcx
 
-  v2 = this->mNumIncomingConnections;
+  mNumIncomingConnections = this->mNumIncomingConnections;
   v3 = 0;
-  v4 = targetNode;
-  if ( !v2 )
+  if ( !mNumIncomingConnections )
     return 0i64;
-  v5 = this->mIncomingConnection.mOffset;
-  v6 = &this->mIncomingConnection;
-  v7 = 0i64;
-  while ( 1 )
+  mOffset = this->mIncomingConnection.mOffset;
+  p_mIncomingConnection = &this->mIncomingConnection;
+  for ( i = 0i64; ; i += 8i64 )
   {
-    if ( v5 )
-      v8 = (char *)v6 + v5;
+    if ( mOffset )
+      v8 = (char *)p_mIncomingConnection + mOffset;
     else
       v8 = 0i64;
-    v9 = &v8[v7];
-    v10 = *(_QWORD *)&v8[v7];
+    v9 = &v8[i];
+    v10 = *(_QWORD *)&v8[i];
     if ( v10 )
       v10 += (__int64)v9;
     v11 = *(_QWORD *)(v10 + 16);
     if ( v11 )
     {
-      v12 = v11 + v10 + 16;
+      v12 = (unsigned int *)(v11 + v10 + 16);
       if ( v12 )
       {
-        v13 = *(_DWORD *)v12;
+        v13 = *v12;
         v14 = 0;
-        if ( *(_DWORD *)v12 )
+        if ( *v12 )
           break;
       }
     }
 LABEL_30:
-    ++v3;
-    v7 += 8i64;
-    if ( v3 >= v2 )
+    if ( ++v3 >= mNumIncomingConnections )
       return 0i64;
   }
-  v15 = *(_QWORD *)(v12 + 8);
-  v16 = v12 + 8;
+  v15 = *((_QWORD *)v12 + 1);
+  v16 = (int *)(v12 + 2);
   v17 = 0i64;
   while ( 1 )
   {
     if ( v15 )
-      v18 = v15 + v16;
+      v18 = (__int64)v16 + v15;
     else
       v18 = 0i64;
     v19 = v17 + v18;
@@ -6650,11 +6369,11 @@ LABEL_30:
     v24 = *(_QWORD **)(v23 + 8);
     if ( v24 )
       v24 = (_QWORD *)((char *)v24 + v23 + 8);
-    v25 = (UFG::RoadNetworkNode **)(*v24 ? (_QWORD *)((char *)v24 + *v24) : 0i64);
+    v25 = *v24 ? (UFG::RoadNetworkNode **)((char *)v24 + *v24) : 0i64;
     v26 = *v25;
     if ( *v25 )
       v26 = (UFG::RoadNetworkNode *)((char *)v26 + (_QWORD)v25);
-    if ( v26 == v4 )
+    if ( v26 == targetNode )
       return (UFG::RoadNetworkLane *)v21;
     ++v14;
     v17 += 8i64;
@@ -6665,53 +6384,53 @@ LABEL_30:
 
 // File Line: 4031
 // RVA: 0xD8840
-UFG::RoadNetworkLane *__fastcall UFG::RoadNetworkGate::GetFirstOutgoingLaneLeadingToNode(UFG::RoadNetworkGate *this, UFG::RoadNetworkNode *targetNode)
+UFG::RoadNetworkLane *__fastcall UFG::RoadNetworkGate::GetFirstOutgoingLaneLeadingToNode(
+        UFG::RoadNetworkGate *this,
+        UFG::RoadNetworkNode *targetNode)
 {
-  unsigned int v2; // er13
-  char *v3; // r8
-  UFG::RoadNetworkNode *v4; // r15
+  unsigned int mNumOutgoingConnections; // r13d
+  __int64 v3; // r8
   unsigned int v5; // ebp
-  __int64 v6; // r12
-  UFG::qOffset64<UFG::qOffset64<UFG::RoadNetworkConnection *> *> *v7; // rax
+  __int64 mOffset; // r12
+  UFG::qOffset64<UFG::qOffset64<UFG::RoadNetworkConnection *> *> *p_mOutgoingConnection; // rax
   __int64 v8; // r14
   char *v9; // rax
   char *v10; // rcx
   __int64 v11; // rax
   char *v12; // rsi
   __int64 v13; // rax
-  signed __int64 v14; // rax
+  unsigned int *v14; // rax
   unsigned int v15; // ebx
-  unsigned int v16; // er9
+  unsigned int v16; // r9d
   __int64 v17; // r11
-  signed __int64 v18; // rdi
+  int *v18; // rdi
   __int64 v19; // r10
-  signed __int64 v20; // rax
-  signed __int64 v21; // rcx
+  __int64 v20; // rax
+  __int64 v21; // rcx
   __int64 v22; // rax
-  _QWORD *v23; // rax
-  _WORD *v24; // rdx
+  char *v23; // rax
+  char *v24; // rdx
   __int64 v25; // rcx
-  signed __int64 v26; // rax
+  char *v26; // rax
   __int64 v27; // rcx
-  _QWORD *v28; // rax
+  char *v28; // rax
   UFG::RoadNetworkNode *v29; // rcx
   __int64 v30; // rax
   char *v31; // rax
   UFG::qOffset64<UFG::qOffset64<UFG::RoadNetworkConnection *> *> *i; // [rsp+30h] [rbp+8h]
 
-  v2 = this->mNumOutgoingConnections;
+  mNumOutgoingConnections = this->mNumOutgoingConnections;
   v3 = 0i64;
-  v4 = targetNode;
   v5 = 0;
-  if ( !v2 )
+  if ( !mNumOutgoingConnections )
     return 0i64;
-  v6 = this->mOutgoingConnection.mOffset;
-  v7 = &this->mOutgoingConnection;
+  mOffset = this->mOutgoingConnection.mOffset;
+  p_mOutgoingConnection = &this->mOutgoingConnection;
   v8 = 0i64;
-  for ( i = &this->mOutgoingConnection; ; v7 = i )
+  for ( i = &this->mOutgoingConnection; ; p_mOutgoingConnection = i )
   {
-    if ( v6 )
-      v9 = (char *)v7 + v6;
+    if ( mOffset )
+      v9 = (char *)p_mOutgoingConnection + mOffset;
     else
       v9 = 0i64;
     v10 = &v9[v8];
@@ -6722,57 +6441,57 @@ UFG::RoadNetworkLane *__fastcall UFG::RoadNetworkGate::GetFirstOutgoingLaneLeadi
     v13 = *((_QWORD *)v12 + 2);
     if ( v13 )
     {
-      v14 = (signed __int64)&v12[v13 + 16];
+      v14 = (unsigned int *)&v12[v13 + 16];
       if ( v14 )
       {
-        v15 = *(_DWORD *)v14;
+        v15 = *v14;
         v16 = 0;
-        if ( *(_DWORD *)v14 )
+        if ( *v14 )
           break;
       }
     }
 LABEL_34:
     ++v5;
     v8 += 8i64;
-    if ( v5 >= v2 )
+    if ( v5 >= mNumOutgoingConnections )
       return 0i64;
   }
-  v17 = *(_QWORD *)(v14 + 8);
-  v18 = v14 + 8;
+  v17 = *((_QWORD *)v14 + 1);
+  v18 = (int *)(v14 + 2);
   v19 = 0i64;
   while ( 1 )
   {
-    v20 = v17 + v18;
+    v20 = (__int64)v18 + v17;
     if ( !v17 )
       v20 = 0i64;
     v21 = v19 + v20;
     v22 = *(_QWORD *)(v19 + v20);
     if ( v22 )
-      v23 = (_QWORD *)(v21 + v22);
+      v23 = (char *)(v21 + v22);
     else
       v23 = 0i64;
-    v24 = (_WORD *)((char *)v23 + *v23);
-    if ( !*v23 )
+    v24 = &v23[*(_QWORD *)v23];
+    if ( !*(_QWORD *)v23 )
       v24 = 0i64;
-    if ( *v24 == 1 )
+    if ( *(_WORD *)v24 == 1 )
     {
-      v25 = v23[13];
+      v25 = *((_QWORD *)v23 + 13);
       if ( v25 )
-        v26 = (signed __int64)v23 + v25 + 104;
+        v26 = &v23[v25 + 104];
       else
         v26 = 0i64;
-      v27 = *(_QWORD *)(v26 + 8);
+      v27 = *((_QWORD *)v26 + 1);
       if ( v27 )
-        v28 = (_QWORD *)(v27 + v26 + 8);
+        v28 = &v26[v27 + 8];
       else
         v28 = 0i64;
-      if ( *v28 )
-        v23 = (_QWORD *)((char *)v28 + *v28);
+      if ( *(_QWORD *)v28 )
+        v23 = &v28[*(_QWORD *)v28];
       else
         v23 = 0i64;
     }
-    v29 = (UFG::RoadNetworkNode *)(*v23 ? (_QWORD *)((char *)v23 + *v23) : 0i64);
-    if ( v29 == v4 )
+    v29 = *(_QWORD *)v23 ? (UFG::RoadNetworkNode *)&v23[*(_QWORD *)v23] : 0i64;
+    if ( v29 == targetNode )
       break;
     ++v16;
     v19 += 8i64;
@@ -6785,51 +6504,53 @@ LABEL_34:
   else
     v31 = 0i64;
   if ( *(_QWORD *)v31 )
-    v3 = &v31[*(_QWORD *)v31];
+    return (UFG::RoadNetworkLane *)&v31[*(_QWORD *)v31];
   return (UFG::RoadNetworkLane *)v3;
 }
 
 // File Line: 4060
 // RVA: 0xD9D40
-void __fastcall UFG::RoadNetworkGate::GetLanesLeadingToNode(UFG::RoadNetworkGate *this, UFG::RoadNetworkNode *targetNode, UFG::RoadNetworkLane **laneList, unsigned int *numLanes, const unsigned int maxLanes, unsigned int laneFlags)
+void __fastcall UFG::RoadNetworkGate::GetLanesLeadingToNode(
+        UFG::RoadNetworkGate *this,
+        UFG::RoadNetworkNode *targetNode,
+        UFG::RoadNetworkLane **laneList,
+        unsigned int *numLanes,
+        unsigned int maxLanes,
+        unsigned __int8 laneFlags)
 {
   __int64 v6; // rbp
-  UFG::RoadNetworkNode *v7; // r14
-  UFG::RoadNetworkGate *v8; // r13
-  __int64 v9; // rax
-  signed __int64 v10; // rcx
+  __int64 mOffset; // rax
+  char *v10; // rcx
   __int64 v11; // rax
-  signed __int64 v12; // r10
+  __int64 v12; // r10
   __int64 v13; // rax
-  signed __int64 v14; // rsi
+  __int64 v14; // rsi
   __int64 v15; // r11
   __int64 v16; // rax
-  signed __int64 v17; // rcx
+  __int64 v17; // rcx
   __int64 v18; // rax
-  signed __int64 v19; // rcx
+  __int64 v19; // rcx
   _WORD *v20; // rdx
   __int64 v21; // rax
-  signed __int64 v22; // rdx
+  __int64 v22; // rdx
   _QWORD *v23; // rax
-  signed __int64 v24; // rax
+  UFG::RoadNetworkNode **v24; // rax
   UFG::RoadNetworkNode *v25; // rcx
   __int64 v26; // rdx
   __int64 v27; // rax
-  signed __int64 v28; // rcx
+  __int64 v28; // rcx
   __int64 v29; // rax
   UFG::RoadNetworkLane *v30; // rcx
 
   v6 = 0i64;
-  v7 = targetNode;
-  v8 = this;
   if ( this->mNumOutgoingConnections )
   {
     while ( 1 )
     {
-      v9 = v8->mOutgoingConnection.mOffset;
-      v10 = (signed __int64)(v9 ? (UFG::qOffset64<UFG::qOffset64<UFG::RoadNetworkConnection *> *> *)((char *)&v8->mOutgoingConnection + v9) : 0i64);
-      v11 = *(_QWORD *)(v10 + 8 * v6);
-      v12 = v11 ? v11 + v10 + 8 * v6 : 0i64;
+      mOffset = this->mOutgoingConnection.mOffset;
+      v10 = mOffset ? (char *)&this->mOutgoingConnection + mOffset : 0i64;
+      v11 = *(_QWORD *)&v10[8 * v6];
+      v12 = v11 ? (__int64)&v10[8 * v6 + v11] : 0i64;
       v13 = *(_QWORD *)(v12 + 16);
       if ( v13 )
       {
@@ -6843,7 +6564,7 @@ void __fastcall UFG::RoadNetworkGate::GetLanesLeadingToNode(UFG::RoadNetworkGate
       }
 LABEL_44:
       v6 = (unsigned int)(v6 + 1);
-      if ( (unsigned int)v6 >= v8->mNumOutgoingConnections )
+      if ( (unsigned int)v6 >= this->mNumOutgoingConnections )
         return;
     }
     while ( 1 )
@@ -6852,7 +6573,7 @@ LABEL_44:
       v17 = v16 ? v16 + v14 + 8 : 0i64;
       v18 = *(_QWORD *)(v17 + 8 * v15);
       v19 = v18 ? v18 + v17 + 8 * v15 : 0i64;
-      v20 = (_WORD *)(*(_QWORD *)v19 ? *(_QWORD *)v19 + v19 : 0i64);
+      v20 = *(_QWORD *)v19 ? (_WORD *)(*(_QWORD *)v19 + v19) : 0i64;
       if ( *v20 == 1 )
       {
         v21 = *(_QWORD *)(v19 + 104);
@@ -6863,18 +6584,18 @@ LABEL_44:
         v23 = *(_QWORD **)(v22 + 8);
         if ( v23 )
           v23 = (_QWORD *)((char *)v23 + v22 + 8);
-        v24 = (signed __int64)(*v23 ? (_QWORD *)((char *)v23 + *v23) : 0i64);
+        v24 = *v23 ? (UFG::RoadNetworkNode **)((char *)v23 + *v23) : 0i64;
       }
       else
       {
-        v24 = v19;
+        v24 = (UFG::RoadNetworkNode **)v19;
       }
-      if ( (unsigned __int8)laneFlags & *(_BYTE *)(v19 + 44) )
+      if ( (laneFlags & *(_BYTE *)(v19 + 44)) != 0 )
       {
-        v25 = *(UFG::RoadNetworkNode **)v24;
-        if ( *(_QWORD *)v24 )
-          v25 = (UFG::RoadNetworkNode *)((char *)v25 + v24);
-        if ( v25 == v7 )
+        v25 = *v24;
+        if ( *v24 )
+          v25 = (UFG::RoadNetworkNode *)((char *)v25 + (_QWORD)v24);
+        if ( v25 == targetNode )
         {
           v26 = 0i64;
           if ( *(_DWORD *)v12 )
@@ -6891,7 +6612,7 @@ LABEL_43:
       v27 = *(_QWORD *)(v12 + 8);
       v28 = v27 ? v27 + v12 + 8 : 0i64;
       v29 = *(_QWORD *)(v28 + 8 * v26);
-      v30 = (UFG::RoadNetworkLane *)(v29 ? v29 + v28 + 8 * v26 : 0i64);
+      v30 = v29 ? (UFG::RoadNetworkLane *)(v29 + v28 + 8 * v26) : 0i64;
       laneList[(*numLanes)++] = v30;
       if ( *numLanes == maxLanes )
         break;

@@ -2,46 +2,46 @@
 // RVA: 0x15BE010
 __int64 dynamic_initializer_for__CAkURenderer::m_listCtxs__()
 {
-  return atexit(dynamic_atexit_destructor_for__CAkURenderer::m_listCtxs__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__CAkURenderer::m_listCtxs__);
 }
 
 // File Line: 69
 // RVA: 0x15BDFF0
 __int64 dynamic_initializer_for__CAkURenderer::m_CtxNotifQueue__()
 {
-  return atexit(dynamic_atexit_destructor_for__CAkURenderer::m_CtxNotifQueue__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__CAkURenderer::m_CtxNotifQueue__);
 }
 
 // File Line: 72
 // RVA: 0x15BDFE0
 __int64 dynamic_initializer_for__CAkURenderer::m_BusLimiters__()
 {
-  return atexit(dynamic_atexit_destructor_for__CAkURenderer::m_BusLimiters__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__CAkURenderer::m_BusLimiters__);
 }
 
 // File Line: 73
 // RVA: 0x15BDFD0
 __int64 dynamic_initializer_for__CAkURenderer::m_AMLimiters__()
 {
-  return atexit(dynamic_atexit_destructor_for__CAkURenderer::m_AMLimiters__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__CAkURenderer::m_AMLimiters__);
 }
 
 // File Line: 74
 // RVA: 0x15BE000
 __int64 dynamic_initializer_for__CAkURenderer::m_GlobalLimiter__()
 {
-  return atexit(dynamic_atexit_destructor_for__CAkURenderer::m_GlobalLimiter__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__CAkURenderer::m_GlobalLimiter__);
 }
 
 // File Line: 86
 // RVA: 0xA626A0
-signed __int64 __fastcall CAkURenderer::Init()
+__int64 __fastcall CAkURenderer::Init()
 {
   CAkList2<CAkURenderer::ContextNotif,CAkURenderer::ContextNotif const &,1,ArrayPoolDefault>::ListItem *v0; // rax
   CAkList2<CAkURenderer::ContextNotif,CAkURenderer::ContextNotif const &,1,ArrayPoolDefault>::ListItem *v1; // rcx
-  signed __int64 result; // rax
+  __int64 result; // rax
   unsigned int v3; // edx
-  signed __int64 v4; // rax
+  CAkList2<CAkURenderer::ContextNotif,CAkURenderer::ContextNotif const &,1,ArrayPoolDefault>::ListItem *v4; // rax
 
   CAkURenderer::m_uNumVirtualizedSounds = 0;
   CAkURenderer::m_CtxNotifQueue.m_ulNumListItems = 0;
@@ -57,13 +57,13 @@ signed __int64 __fastcall CAkURenderer::Init()
     v3 = 0;
     do
     {
-      v4 = (signed __int64)&v1[1];
+      v4 = v1 + 1;
       ++v3;
       v1->pNextListItem = v1 + 1;
       ++v1;
     }
     while ( v3 < CAkURenderer::m_CtxNotifQueue.m_ulMinNumListItems );
-    *(_QWORD *)(v4 - 32) = 0i64;
+    v4[-1].pNextListItem = 0i64;
     result = 1i64;
   }
   else
@@ -73,7 +73,7 @@ signed __int64 __fastcall CAkURenderer::Init()
   CAkURenderer::m_CtxNotifQueue.m_pFirst = 0i64;
   CAkURenderer::m_CtxNotifQueue.m_pLast = 0i64;
   if ( (_DWORD)result == 1 )
-    result = CAkLEngine::Init();
+    return CAkLEngine::Init();
   return result;
 }
 
@@ -84,11 +84,11 @@ void CAkURenderer::Term(void)
   __int64 v0; // rdx
   __int64 v1; // rcx
   _BOOL8 v2; // r8
-  CAkList2<CAkURenderer::ContextNotif,CAkURenderer::ContextNotif const &,1,ArrayPoolDefault>::ListItem *v3; // rdx
-  CAkList2<CAkURenderer::ContextNotif,CAkURenderer::ContextNotif const &,1,ArrayPoolDefault>::ListItem *v4; // rcx
-  CAkList2<CAkURenderer::ContextNotif,CAkURenderer::ContextNotif const &,1,ArrayPoolDefault>::ListItem *v5; // rax
-  CAkList2<CAkURenderer::ContextNotif,CAkURenderer::ContextNotif const &,1,ArrayPoolDefault>::ListItem *v6; // rcx
-  CAkList2<CAkURenderer::ContextNotif,CAkURenderer::ContextNotif const &,1,ArrayPoolDefault>::ListItem *v7; // rbx
+  CAkList2<CAkURenderer::ContextNotif,CAkURenderer::ContextNotif const &,1,ArrayPoolDefault>::ListItem *m_pFree; // rdx
+  CAkList2<CAkURenderer::ContextNotif,CAkURenderer::ContextNotif const &,1,ArrayPoolDefault>::ListItem *m_pFirst; // rcx
+  CAkList2<CAkURenderer::ContextNotif,CAkURenderer::ContextNotif const &,1,ArrayPoolDefault>::ListItem *m_pLast; // rax
+  CAkList2<CAkURenderer::ContextNotif,CAkURenderer::ContextNotif const &,1,ArrayPoolDefault>::ListItem *m_pvMemStart; // rcx
+  CAkList2<CAkURenderer::ContextNotif,CAkURenderer::ContextNotif const &,1,ArrayPoolDefault>::ListItem *pNextListItem; // rbx
 
   CAkLEngine::Term();
   CAkURenderer::DestroyAllPBIs(v1, v0, v2);
@@ -97,49 +97,49 @@ void CAkURenderer::Term(void)
   CAkURenderer::m_listCtxs.m_ulNumListItems = 0;
   if ( CAkURenderer::m_CtxNotifQueue.m_ulMaxNumListItems )
   {
-    v3 = CAkURenderer::m_CtxNotifQueue.m_pFree;
+    m_pFree = CAkURenderer::m_CtxNotifQueue.m_pFree;
     while ( 1 )
     {
-      v4 = CAkURenderer::m_CtxNotifQueue.m_pFirst;
+      m_pFirst = CAkURenderer::m_CtxNotifQueue.m_pFirst;
       if ( !CAkURenderer::m_CtxNotifQueue.m_pFirst )
         break;
       CAkURenderer::m_CtxNotifQueue.m_pFirst = CAkURenderer::m_CtxNotifQueue.m_pFirst->pNextListItem;
-      v5 = CAkURenderer::m_CtxNotifQueue.m_pLast;
-      if ( v4 == CAkURenderer::m_CtxNotifQueue.m_pLast )
-        v5 = 0i64;
-      CAkURenderer::m_CtxNotifQueue.m_pLast = v5;
-      if ( v4 < CAkURenderer::m_CtxNotifQueue.m_pvMemStart
-        || v4 >= &CAkURenderer::m_CtxNotifQueue.m_pvMemStart[(unsigned __int64)CAkURenderer::m_CtxNotifQueue.m_ulMinNumListItems] )
+      m_pLast = CAkURenderer::m_CtxNotifQueue.m_pLast;
+      if ( m_pFirst == CAkURenderer::m_CtxNotifQueue.m_pLast )
+        m_pLast = 0i64;
+      CAkURenderer::m_CtxNotifQueue.m_pLast = m_pLast;
+      if ( m_pFirst < CAkURenderer::m_CtxNotifQueue.m_pvMemStart
+        || m_pFirst >= &CAkURenderer::m_CtxNotifQueue.m_pvMemStart[(unsigned __int64)CAkURenderer::m_CtxNotifQueue.m_ulMinNumListItems] )
       {
-        AK::MemoryMgr::Free(g_DefaultPoolId, v4);
-        v3 = CAkURenderer::m_CtxNotifQueue.m_pFree;
+        AK::MemoryMgr::Free(g_DefaultPoolId, m_pFirst);
+        m_pFree = CAkURenderer::m_CtxNotifQueue.m_pFree;
         --CAkURenderer::m_CtxNotifQueue.m_ulNumListItems;
       }
       else
       {
-        v4->pNextListItem = v3;
+        m_pFirst->pNextListItem = m_pFree;
         --CAkURenderer::m_CtxNotifQueue.m_ulNumListItems;
-        v3 = v4;
-        CAkURenderer::m_CtxNotifQueue.m_pFree = v4;
+        m_pFree = m_pFirst;
+        CAkURenderer::m_CtxNotifQueue.m_pFree = m_pFirst;
       }
     }
-    v6 = CAkURenderer::m_CtxNotifQueue.m_pvMemStart;
-    if ( v3 )
+    m_pvMemStart = CAkURenderer::m_CtxNotifQueue.m_pvMemStart;
+    if ( m_pFree )
     {
       do
       {
-        v7 = v3->pNextListItem;
-        if ( v3 < v6 || v3 >= &v6[CAkURenderer::m_CtxNotifQueue.m_ulMinNumListItems] )
+        pNextListItem = m_pFree->pNextListItem;
+        if ( m_pFree < m_pvMemStart || m_pFree >= &m_pvMemStart[CAkURenderer::m_CtxNotifQueue.m_ulMinNumListItems] )
         {
-          AK::MemoryMgr::Free(g_DefaultPoolId, v3);
-          v6 = CAkURenderer::m_CtxNotifQueue.m_pvMemStart;
+          AK::MemoryMgr::Free(g_DefaultPoolId, m_pFree);
+          m_pvMemStart = CAkURenderer::m_CtxNotifQueue.m_pvMemStart;
         }
-        v3 = v7;
+        m_pFree = pNextListItem;
       }
-      while ( v7 );
+      while ( pNextListItem );
     }
-    if ( v6 )
-      AK::MemoryMgr::Free(g_DefaultPoolId, v6);
+    if ( m_pvMemStart )
+      AK::MemoryMgr::Free(g_DefaultPoolId, m_pvMemStart);
     *(_QWORD *)&CAkURenderer::m_CtxNotifQueue.m_ulMinNumListItems = 0i64;
     CAkURenderer::m_CtxNotifQueue.m_pFirst = 0i64;
     CAkURenderer::m_CtxNotifQueue.m_pLast = 0i64;
@@ -151,47 +151,44 @@ void CAkURenderer::Term(void)
 
 // File Line: 120
 // RVA: 0xA63870
-PriorityInfoCurrent *__fastcall CAkURenderer::_CalcInitialPriority(PriorityInfoCurrent *result, CAkSoundBase *in_pSound, CAkRegisteredObj *in_pGameObj, float *out_fMaxRadius)
+PriorityInfoCurrent *__fastcall CAkURenderer::_CalcInitialPriority(
+        PriorityInfoCurrent *result,
+        CAkSoundBase *in_pSound,
+        CAkRegisteredObj *in_pGameObj,
+        float *out_fMaxRadius)
 {
-  PriorityInfoCurrent *v4; // rdi
-  CAkSoundBase *v5; // rbx
-  float *v6; // rsi
-  CAkRegisteredObj *v7; // rbp
-  CAkIndexableVtbl *v8; // rax
+  CAkIndexableVtbl *vfptr; // rax
   bool v9; // zf
-  float v10; // xmm0_4
+  float MinDistance; // xmm0_4
   float v11; // xmm0_4
   float v12; // xmm1_4
-  PriorityInfo resulta; // [rsp+40h] [rbp+8h]
+  PriorityInfo resulta; // [rsp+40h] [rbp+8h] BYREF
 
-  v4 = result;
-  v5 = in_pSound;
-  v6 = out_fMaxRadius;
-  v7 = in_pGameObj;
   *out_fMaxRadius = 0.0;
-  resulta = *CAkParameterNodeBase::GetPriority((CAkParameterNodeBase *)&in_pSound->vfptr, &resulta, in_pGameObj);
-  v4->priorityInfo = resulta;
-  v8 = v5->vfptr;
-  v4->currentPriority.priority = resulta.priority;
-  if ( ((unsigned __int8 (__fastcall *)(CAkSoundBase *, float *))v8[7].Release)(v5, v6) )
+  resulta = *CAkParameterNodeBase::GetPriority(in_pSound, &resulta, in_pGameObj);
+  result->priorityInfo = resulta;
+  vfptr = in_pSound->vfptr;
+  result->currentPriority.priority = resulta.priority;
+  if ( ((unsigned __int8 (__fastcall *)(CAkSoundBase *, float *))vfptr[7].Release)(in_pSound, out_fMaxRadius) )
   {
-    v9 = v4->priorityInfo.distanceOffset == 0.0;
-    *v6 = v7->m_fScalingFactor * *v6;
+    v9 = result->priorityInfo.distanceOffset == 0.0;
+    *out_fMaxRadius = in_pGameObj->m_fScalingFactor * *out_fMaxRadius;
     if ( v9 )
-      return v4;
-    v10 = CAkURenderer::GetMinDistance((AkSoundPositionRef *)&v7->m_PosKeep.m_aPos);
-    if ( v10 >= *v6 )
-      v11 = v4->priorityInfo.priority + v4->priorityInfo.distanceOffset;
+      return result;
+    MinDistance = CAkURenderer::GetMinDistance(&in_pGameObj->m_PosKeep);
+    if ( MinDistance >= *out_fMaxRadius )
+      v11 = result->priorityInfo.priority + result->priorityInfo.distanceOffset;
     else
-      v11 = (float)((float)(v10 / *v6) * v4->priorityInfo.distanceOffset) + v4->priorityInfo.priority;
+      v11 = (float)((float)(MinDistance / *out_fMaxRadius) * result->priorityInfo.distanceOffset)
+          + result->priorityInfo.priority;
     if ( v11 >= 0.0 )
     {
       v12 = FLOAT_100_0;
       if ( v11 > 100.0 )
       {
 LABEL_11:
-        v4->currentPriority.priority = v12;
-        return v4;
+        result->currentPriority.priority = v12;
+        return result;
       }
       if ( v11 >= 0.0 )
       {
@@ -202,99 +199,88 @@ LABEL_11:
     v12 = 0.0;
     goto LABEL_11;
   }
-  return v4;
+  return result;
 }
 
 // File Line: 144
 // RVA: 0xA62590
 float __fastcall CAkURenderer::GetMinDistance(AkSoundPositionRef *in_rPosRef)
 {
-  unsigned int v1; // ebp
+  unsigned int m_uListenerMask; // ebp
   __int64 v2; // r14
-  float v3; // xmm6_4
-  AkSoundPositionRef *v4; // rdi
-  signed __int64 v5; // rsi
+  float i; // xmm6_4
+  __int64 v5; // rsi
   float v6; // xmm0_4
-  __int64 i; // rbx
-  unsigned __int16 v9; // ax
-  AkSoundPosition *v10; // rdx
+  __int64 j; // rbx
+  unsigned __int16 m_uNumPos; // ax
+  AkSoundPosition *m_aPos; // rdx
   float v11; // xmm0_4
 
-  v1 = (unsigned __int8)in_rPosRef->m_uListenerMask;
+  m_uListenerMask = (unsigned __int8)in_rPosRef->m_uListenerMask;
   v2 = 0i64;
-  v3 = FLOAT_1_0e10;
-  v4 = in_rPosRef;
-  if ( in_rPosRef->m_uListenerMask )
+  for ( i = FLOAT_1_0e10; m_uListenerMask; m_uListenerMask >>= 1 )
   {
-    do
+    if ( (m_uListenerMask & 1) != 0 )
     {
-      if ( v1 & 1 )
+      v5 = 144 * v2;
+      if ( (*((_BYTE *)in_rPosRef + 11) & 7) == 0 || in_rPosRef->m_uNumPos )
       {
-        v5 = 144 * v2;
-        if ( !(*((_BYTE *)v4 + 11) & 7) || v4->m_uNumPos )
+        for ( j = 0i64; ; j = (unsigned int)(j + 1) )
         {
-          for ( i = 0i64; ; i = (unsigned int)(i + 1) )
-          {
-            v9 = 1;
-            if ( *((_BYTE *)v4 + 11) & 7 )
-              v9 = v4->m_uNumPos;
-            if ( (unsigned int)i >= v9 )
-              break;
-            v10 = &g_DefaultSoundPosition;
-            if ( v4->m_aPos )
-              v10 = v4->m_aPos;
-            v11 = AkMath::Distance((AkVector *)((char *)&CAkListener::m_listeners + v5 + 24), &v10[i].Position)
-                / *(float *)((char *)&CAkListener::m_listeners + v5 + 36);
-            if ( v3 >= v11 )
-              v3 = v11;
-          }
-        }
-        else
-        {
-          v6 = AkMath::Distance(
-                 (AkVector *)((char *)&CAkListener::m_listeners + v5 + 24),
-                 &g_DefaultSoundPosition.Position)
-             / *(float *)((char *)&CAkListener::m_listeners + v5 + 36);
-          if ( v3 >= v6 )
-            v3 = v6;
+          m_uNumPos = 1;
+          if ( (*((_BYTE *)in_rPosRef + 11) & 7) != 0 )
+            m_uNumPos = in_rPosRef->m_uNumPos;
+          if ( (unsigned int)j >= m_uNumPos )
+            break;
+          m_aPos = &g_DefaultSoundPosition;
+          if ( in_rPosRef->m_aPos )
+            m_aPos = in_rPosRef->m_aPos;
+          v11 = AkMath::Distance((AkVector *)((char *)&CAkListener::m_listeners + v5 + 24), &m_aPos[j].Position)
+              / *(float *)((char *)&CAkListener::m_listeners + v5 + 36);
+          if ( i >= v11 )
+            i = v11;
         }
       }
-      v2 = (unsigned int)(v2 + 1);
-      v1 >>= 1;
+      else
+      {
+        v6 = AkMath::Distance(
+               (AkVector *)((char *)&CAkListener::m_listeners + v5 + 24),
+               &g_DefaultSoundPosition.Position)
+           / *(float *)((char *)&CAkListener::m_listeners + v5 + 36);
+        if ( i >= v6 )
+          i = v6;
+      }
     }
-    while ( v1 );
+    v2 = (unsigned int)(v2 + 1);
   }
-  return v3;
+  return i;
 }
 
 // File Line: 177
 // RVA: 0xA63060
-signed __int64 __fastcall ResolveExternalSource(CAkSource **io_pSource, AkPBIParams *in_rPBIParams)
+__int64 __fastcall ResolveExternalSource(CAkSource **io_pSource, AkPBIParams *in_rPBIParams)
 {
-  AkExternalSourceArray *v2; // rbx
-  CAkSource **v3; // rsi
+  AkExternalSourceArray *pExternalSrcs; // rbx
   CAkSource *v5; // rdi
-  unsigned int v6; // edx
-  signed __int64 v7; // rax
+  unsigned int m_nCount; // edx
+  AkExternalSourceInfo *m_pSrcs; // rax
   unsigned int v8; // ecx
-  unsigned int v9; // er10
+  unsigned int v9; // r10d
   int v10; // ebx
-  unsigned int v11; // ecx
-  __int128 v12; // [rsp+40h] [rbp-28h]
-  unsigned int v13; // [rsp+50h] [rbp-18h]
+  unsigned int sourceID; // ecx
+  AkMediaInformation v12[2]; // [rsp+40h] [rbp-28h] BYREF
 
-  v2 = in_rPBIParams->userParams.m_CustomParam.pExternalSrcs;
-  v3 = io_pSource;
-  if ( !v2 )
+  pExternalSrcs = in_rPBIParams->userParams.m_CustomParam.pExternalSrcs;
+  if ( !pExternalSrcs )
     return 2i64;
   v5 = CAkSource::Clone(*io_pSource);
-  *v3 = v5;
+  *io_pSource = v5;
   if ( !v5 )
     return 52i64;
-  v6 = v2->m_nCount;
-  v7 = (signed __int64)v2->m_pSrcs;
+  m_nCount = pExternalSrcs->m_nCount;
+  m_pSrcs = pExternalSrcs->m_pSrcs;
   v8 = 0;
-  if ( !v6 )
+  if ( !m_nCount )
   {
 LABEL_12:
     v10 = g_DefaultPoolId;
@@ -304,43 +290,43 @@ LABEL_12:
   }
   while ( 1 )
   {
-    if ( v5->m_sSrcTypeInfo.mediaInfo.uFileID != *(_DWORD *)v7 )
+    if ( v5->m_sSrcTypeInfo.mediaInfo.uFileID != m_pSrcs->iExternalSrcCookie )
       goto LABEL_11;
-    v9 = (*(_DWORD *)(v7 + 4) << 16) + 1;
-    if ( *(_QWORD *)(v7 + 8) )
+    v9 = (m_pSrcs->idCodec << 16) + 1;
+    if ( m_pSrcs->szFile )
       break;
-    if ( *(_DWORD *)(v7 + 24) > 0u && *(_QWORD *)(v7 + 16) )
+    if ( m_pSrcs->uiMemorySize && m_pSrcs->pInMemory )
     {
-      LODWORD(v12) = v5->m_sSrcTypeInfo.mediaInfo.sourceID;
-      HIDWORD(v12) = *(_DWORD *)(v7 + 24);
-      *(_QWORD *)((char *)&v12 + 4) = 0xFFFFFFFFi64;
-      v13 = v13 & 0xFFFFF88C | 0x18C;
-      CAkSource::SetSource(v5, v9, *(void **)(v7 + 16), (AkMediaInformation *)&v12);
+      v12[0].sourceID = v5->m_sSrcTypeInfo.mediaInfo.sourceID;
+      v12[0].uInMemoryMediaSize = m_pSrcs->uiMemorySize;
+      *(_QWORD *)&v12[0].uFileID = 0xFFFFFFFFi64;
+      *((_DWORD *)v12 + 4) = *((_DWORD *)v12 + 4) & 0xFFFFF800 | 0x18C;
+      CAkSource::SetSource(v5, v9, m_pSrcs->pInMemory, v12);
       return 1i64;
     }
-    if ( *(_DWORD *)(v7 + 28) )
+    if ( m_pSrcs->idFile )
     {
-      v11 = v5->m_sSrcTypeInfo.mediaInfo.sourceID;
-      *((_QWORD *)&v12 + 1) = 0i64;
-      LODWORD(v12) = v11;
-      *(_QWORD *)((char *)&v12 + 4) = *(unsigned int *)(v7 + 28);
-      v13 = v13 & 0xFFFFF804 | 0x104;
-      CAkSource::SetSource(v5, v9, (AkMediaInformation *)&v12);
+      sourceID = v5->m_sSrcTypeInfo.mediaInfo.sourceID;
+      *(_QWORD *)&v12[0].uFileOffset = 0i64;
+      v12[0].sourceID = sourceID;
+      v12[0].uFileID = m_pSrcs->idFile;
+      *((_DWORD *)v12 + 4) = *((_DWORD *)v12 + 4) & 0xFFFFF800 | 0x104;
+      CAkSource::SetSource(v5, v9, v12);
       return 1i64;
     }
 LABEL_11:
     ++v8;
-    v7 += 32i64;
-    if ( v8 >= v6 )
+    ++m_pSrcs;
+    if ( v8 >= m_nCount )
       goto LABEL_12;
   }
   CAkSource::SetSource(
     v5,
     v5->m_sSrcTypeInfo.mediaInfo.sourceID,
     v9,
-    *(const wchar_t **)(v7 + 8),
+    m_pSrcs->szFile,
     0xFFFFFFFF,
-    (*((_DWORD *)&v5->m_sSrcTypeInfo.mediaInfo + 4) >> 9) & 1,
+    (*((_DWORD *)&v5->m_sSrcTypeInfo.mediaInfo + 4) & 0x200) != 0,
     1);
   return 1i64;
 }
@@ -349,303 +335,246 @@ LABEL_11:
 // RVA: 0xA62690
 bool __fastcall CAkURenderer::GetVirtualBehaviorAction(AkBelowThresholdBehavior in_belowThresholdBehavior)
 {
-  return in_belowThresholdBehavior != 1;
+  return in_belowThresholdBehavior != AkBelowThresholdBehavior_KillVoice;
 }
 
 // File Line: 269
 // RVA: 0xA62BE0
 AKRESULT __fastcall CAkURenderer::Play(CAkSoundBase *in_pSound, CAkSource *in_pSource, AkPBIParams *in_rPBIParams)
 {
-  AkPBIParams *v3; // rdi
-  AMD_HD3D *v4; // r15
-  AKRESULT v5; // er12
-  float v6; // xmm6_4
-  AKRESULT v7; // er13
-  __int64 v8; // rax
-  __int64 v9; // rax
+  AKRESULT v5; // r12d
+  float priority; // xmm6_4
+  AKRESULT v7; // r13d
+  CAkRegisteredObj *pGameObj; // rax
+  CAkIndexableVtbl *vfptr; // rax
   int v10; // eax
   bool v11; // si
   CAkSource *v12; // r8
-  __int64 v13; // rcx
-  __int64 v14; // rax
-  CAkPBIAware *v15; // rcx
-  CAkIndexableVtbl *v16; // r10
-  __int64 v17; // rax
-  CAkPBI *v18; // rsi
-  __int64 v19; // r8
-  int v20; // eax
-  __int64 v21; // rdx
-  AKRESULT v22; // eax
-  int v23; // ebx
-  __int64 v24; // rax
-  __int64 v25; // rax
-  unsigned __int64 v26; // r8
-  __int64 v27; // rax
-  __int64 v28; // rax
-  __int64 v29; // rax
-  unsigned __int64 v30; // r8
-  PriorityInfoCurrent result; // [rsp+8h] [rbp-59h]
-  __int64 v32; // [rsp+18h] [rbp-49h]
-  PriorityInfoCurrent *v33; // [rsp+20h] [rbp-41h]
-  __int64 v34; // [rsp+28h] [rbp-39h]
-  __int64 v35; // [rsp+30h] [rbp-31h]
-  __int64 v36; // [rsp+38h] [rbp-29h]
-  __int64 v37; // [rsp+40h] [rbp-21h]
-  int v38; // [rsp+48h] [rbp-19h]
-  __int16 v39; // [rsp+4Ch] [rbp-15h]
-  int v40; // [rsp+50h] [rbp-11h]
-  __int64 v41; // [rsp+58h] [rbp-9h]
-  __int64 v42; // [rsp+60h] [rbp-1h]
-  __int64 v43; // [rsp+68h] [rbp+7h]
-  int v44; // [rsp+70h] [rbp+Fh]
-  __int16 v45; // [rsp+74h] [rbp+13h]
-  CAkSource *io_pSource; // [rsp+D0h] [rbp+6Fh]
+  CAkRegisteredObj *v13; // rcx
+  CAkIndexableVtbl *v14; // rax
+  __int64 v15; // rax
+  CAkPBI *v16; // rsi
+  __int64 v17; // r8
+  int v18; // eax
+  __int64 v19; // rdx
+  AKRESULT v20; // eax
+  int v21; // ebx
+  CAkRegisteredObj *v22; // rax
+  CAkIndexableVtbl *v23; // rax
+  CAkRegisteredObj *v24; // rax
+  CAkIndexableVtbl *v25; // rax
+  PriorityInfoCurrent result; // [rsp+8h] [rbp-59h] BYREF
+  __int64 v27; // [rsp+18h] [rbp-49h] BYREF
+  PlayHistory *p_playHistory; // [rsp+20h] [rbp-41h]
+  __int64 v29[2]; // [rsp+28h] [rbp-39h] BYREF
+  __int64 v30; // [rsp+38h] [rbp-29h]
+  PriorityInfoCurrent v31; // [rsp+40h] [rbp-21h] BYREF
+  int v32; // [rsp+50h] [rbp-11h] BYREF
+  CAkRegisteredObj *v33; // [rsp+58h] [rbp-9h]
+  __int64 v34; // [rsp+60h] [rbp-1h]
+  __int64 v35; // [rsp+68h] [rbp+7h]
+  int v36; // [rsp+70h] [rbp+Fh]
+  __int16 v37; // [rsp+74h] [rbp+13h]
+  CAkSource *io_pSource; // [rsp+D0h] [rbp+6Fh] BYREF
   float out_fMaxRadius; // [rsp+D8h] [rbp+77h]
-  AkVirtualQueueBehavior out_Behavior; // [rsp+E0h] [rbp+7Fh]
-  __int64 v49; // [rsp+110h] [rbp+AFh]
+  AkVirtualQueueBehavior out_Behavior[4]; // [rsp+E0h] [rbp+7Fh] BYREF
+  float v41; // [rsp+110h] [rbp+AFh] BYREF
 
-  v3 = in_rPBIParams;
-  v4 = (AMD_HD3D *)in_pSound;
-  v5 = 2;
-  CAkURenderer::_CalcInitialPriority((PriorityInfoCurrent *)&v37, in_pSound, in_rPBIParams->pGameObj, (float *)&v49);
-  v6 = result.currentPriority.priority;
+  v5 = AK_Fail;
+  CAkURenderer::_CalcInitialPriority(&v31, in_pSound, in_rPBIParams->pGameObj, &v41);
+  priority = result.currentPriority.priority;
   if ( !CAkURenderer::ValidateMemoryLimit(result.currentPriority.priority)
-    || (v7 = CAkURenderer::ValidateMaximumNumberVoiceLimit(v6), v7 == 2) )
+    || (v7 = CAkURenderer::ValidateMaximumNumberVoiceLimit(priority), v7 == AK_Fail) )
   {
-    v5 = 3;
-LABEL_3:
-    v30 = v3->pGameObj->m_GameObjID;
-    v33 = (PriorityInfoCurrent *)&v3->playHistory;
-    _(v4);
+    v5 = AK_PartialSuccess;
+LABEL_20:
+    p_playHistory = &in_rPBIParams->playHistory;
+    _((AMD_HD3D *)in_pSound);
     return v5;
   }
-  v36 = 0i64;
-  v37 = 0i64;
-  v8 = (__int64)v3->pGameObj;
-  *(float *)&v34 = result.currentPriority.priority;
-  v35 = v8;
-  v9 = *(_QWORD *)&v4->mEnableStereo;
-  v38 = 3;
-  v39 = 256;
-  v10 = (*(__int64 (__fastcall **)(AMD_HD3D *, __int64 *))(v9 + 272))(v4, &v34);
+  v30 = 0i64;
+  v31.currentPriority = 0i64;
+  pGameObj = in_rPBIParams->pGameObj;
+  *(float *)v29 = result.currentPriority.priority;
+  v29[1] = (__int64)pGameObj;
+  vfptr = in_pSound->vfptr;
+  LODWORD(v31.priorityInfo.priority) = 3;
+  LOWORD(v31.priorityInfo.distanceOffset) = 256;
+  v10 = ((__int64 (__fastcall *)(CAkSoundBase *, __int64 *))vfptr[8].Release)(in_pSound, v29);
   v11 = v10 != 2;
-  if ( v10 == 80 || v7 == 80 )
-  {
-    v11 = 1;
-    if ( CAkParameterNode::GetVirtualBehavior((CAkParameterNode *)v4, &out_Behavior) == 1 )
-      v11 = 0;
-  }
+  if ( v10 == 80 || v7 == AK_MustBeVirtualized )
+    v11 = CAkParameterNode::GetVirtualBehavior(in_pSound, out_Behavior) != AkBelowThresholdBehavior_KillVoice;
   if ( !v11 )
   {
-    v42 = 0i64;
-    v43 = 0i64;
-    v28 = (__int64)v3->pGameObj;
-    v40 = 0;
-    v41 = v28;
-    v29 = *(_QWORD *)&v4->mEnableStereo;
-    v5 = 3;
-    v44 = 3;
-    v45 = 256;
-    (*(void (__fastcall **)(AMD_HD3D *, int *))(v29 + 280))(v4, &v40);
-    goto LABEL_3;
+    v34 = 0i64;
+    v35 = 0i64;
+    v24 = in_rPBIParams->pGameObj;
+    v32 = 0;
+    v33 = v24;
+    v25 = in_pSound->vfptr;
+    v5 = AK_PartialSuccess;
+    v36 = 3;
+    v37 = 256;
+    ((void (__fastcall *)(CAkSoundBase *, int *))v25[8].Category)(in_pSound, &v32);
+    goto LABEL_20;
   }
   v12 = io_pSource;
   if ( (io_pSource->m_sSrcTypeInfo.dwID & 0xFFFF0000) == 0x80000 )
   {
-    v5 = ResolveExternalSource(&io_pSource, v3);
-    if ( v5 != 1 )
+    v5 = ResolveExternalSource(&io_pSource, in_rPBIParams);
+    if ( v5 != AK_Success )
     {
-      v13 = (__int64)v3->pGameObj;
-      v42 = 0i64;
-      v43 = 0i64;
-      v14 = *(_QWORD *)&v4->mEnableStereo;
-      v40 = 0;
-      v41 = v13;
-      v44 = 3;
-      v45 = 256;
-      (*(void (__fastcall **)(AMD_HD3D *, int *))(v14 + 280))(v4, &v40);
+      v13 = in_rPBIParams->pGameObj;
+      v34 = 0i64;
+      v35 = 0i64;
+      v14 = in_pSound->vfptr;
+      v32 = 0;
+      v33 = v13;
+      v36 = 3;
+      v37 = 256;
+      ((void (__fastcall *)(CAkSoundBase *, int *))v14[8].Category)(in_pSound, &v32);
       return v5;
     }
     v12 = io_pSource;
   }
-  v15 = v3->pInstigator;
-  v16 = v15->vfptr;
-  v35 = v37;
-  v34 = v36;
-  v33 = &result;
-  v17 = ((__int64 (__fastcall *)(CAkPBIAware *, AMD_HD3D *, CAkSource *, AkPBIParams *, PriorityInfoCurrent *, __int64, __int64))v16[1].__vecDelDtor)(
-          v15,
-          v4,
+  v15 = ((__int64 (__fastcall *)(CAkPBIAware *, CAkSoundBase *, CAkSource *, AkPBIParams *, PriorityInfoCurrent *, __int64, _QWORD))in_rPBIParams->pInstigator->vfptr[1].__vecDelDtor)(
+          in_rPBIParams->pInstigator,
+          in_pSound,
           v12,
-          v3,
+          in_rPBIParams,
           &result,
-          v36,
-          v37);
-  v18 = (CAkPBI *)v17;
-  if ( !v17 )
+          v30,
+          *(_QWORD *)&v31.currentPriority);
+  v16 = (CAkPBI *)v15;
+  if ( !v15 )
   {
-    v42 = 0i64;
-    v43 = 0i64;
-    v24 = (__int64)v3->pGameObj;
-    v40 = 0;
-    v41 = v24;
-    v25 = *(_QWORD *)&v4->mEnableStereo;
-    v44 = 3;
-    v45 = 256;
-    (*(void (__fastcall **)(AMD_HD3D *, int *))(v25 + 280))(v4, &v40);
-LABEL_22:
-    v26 = v3->pGameObj->m_GameObjID;
-    v27 = (unsigned __int8)-v3->bIsFirst;
-    v33 = (PriorityInfoCurrent *)&v3->playHistory;
-    _(v4);
-    if ( v5 != 3 )
-      return v5;
-    goto LABEL_3;
+    v34 = 0i64;
+    v35 = 0i64;
+    v22 = in_rPBIParams->pGameObj;
+    v32 = 0;
+    v33 = v22;
+    v23 = in_pSound->vfptr;
+    v36 = 3;
+    v37 = 256;
+    ((void (__fastcall *)(CAkSoundBase *, int *))v23[8].Category)(in_pSound, &v32);
+    goto LABEL_20;
   }
-  if ( v3->eType )
+  if ( in_rPBIParams->eType )
   {
-    v20 = (*(__int64 (__fastcall **)(__int64, AkPathInfo *))(*(_QWORD *)v17 + 16i64))(
-            v17,
-            v3->pContinuousParams->pPathInfo);
+    v18 = (*(__int64 (__fastcall **)(__int64, AkPathInfo *))(*(_QWORD *)v15 + 16i64))(
+            v15,
+            in_rPBIParams->pContinuousParams->pPathInfo);
   }
   else
   {
-    v19 = *(_QWORD *)v17;
-    v32 = 0i64;
-    LODWORD(v33) = 0;
-    v20 = (*(__int64 (__fastcall **)(__int64, __int64 *))(v19 + 16))(v17, &v32);
+    v17 = *(_QWORD *)v15;
+    v27 = 0i64;
+    LODWORD(p_playHistory) = 0;
+    v18 = (*(__int64 (__fastcall **)(__int64, __int64 *))(v17 + 16))(v15, &v27);
   }
-  if ( v20 != 1
-    || (v18->m_fMaxDistance = out_fMaxRadius,
-        v18->m_iFrameOffset = v3->uFrameOffset,
-        v22 = CAkURenderer::Play(v18, v3->pTransitionParameters, v3->ePlaybackState),
-        v22 != 1) )
+  if ( v18 != 1
+    || (v16->m_fMaxDistance = out_fMaxRadius,
+        v16->m_iFrameOffset = in_rPBIParams->uFrameOffset,
+        v20 = CAkURenderer::Play(v16, in_rPBIParams->pTransitionParameters, in_rPBIParams->ePlaybackState),
+        v20 != AK_Success) )
   {
-    LOBYTE(v21) = 1;
-    ((void (__fastcall *)(CAkPBI *, __int64))v18->vfptr[1].~CAkTransportAware)(v18, v21);
-    v23 = g_DefaultPoolId;
-    ((void (__fastcall *)(CAkPBI *, _QWORD))v18->vfptr->~CAkTransportAware)(v18, 0i64);
-    AK::MemoryMgr::Free(v23, v18);
-    goto LABEL_22;
+    LOBYTE(v19) = 1;
+    ((void (__fastcall *)(CAkPBI *, __int64))v16->CAkTransportAware::vfptr[1].~CAkTransportAware)(v16, v19);
+    v21 = g_DefaultPoolId;
+    ((void (__fastcall *)(CAkPBI *, _QWORD))v16->CAkTransportAware::vfptr->~CAkTransportAware)(v16, 0i64);
+    AK::MemoryMgr::Free(v21, v16);
+    goto LABEL_20;
   }
-  return v22;
+  return v20;
 }
 
 // File Line: 455
 // RVA: 0xA62B60
-AKRESULT __fastcall CAkURenderer::Play(CAkPBI *in_pContext, TransParams *in_rTparameters, AkPlaybackState in_ePlaybackState)
+AKRESULT __fastcall CAkURenderer::Play(
+        CAkPBI *in_pContext,
+        TransParams *in_rTparameters,
+        AkPlaybackState in_ePlaybackState)
 {
-  AkPlaybackState v3; // ebx
-  TransParams *v4; // rdi
-  CAkPBI *v5; // rsi
-  bool v6; // r8
   AKRESULT result; // eax
 
-  v3 = in_ePlaybackState;
-  v4 = in_rTparameters;
-  v5 = in_pContext;
   CAkPBI::_InitPlay(in_pContext);
-  v6 = 0;
-  if ( v3 == 1 )
-    v6 = 1;
-  result = CAkPBI::_Play(v5, v4, v6, 0);
-  if ( result == 1 )
+  result = CAkPBI::_Play(in_pContext, in_rTparameters, in_ePlaybackState == PB_Paused, 0);
+  if ( result == AK_Success )
   {
-    v5->pNextItem = 0i64;
+    in_pContext->pNextItem = 0i64;
     if ( CAkURenderer::m_listCtxs.m_pLast )
-      CAkURenderer::m_listCtxs.m_pLast->pNextItem = v5;
+      CAkURenderer::m_listCtxs.m_pLast->pNextItem = in_pContext;
     else
-      CAkURenderer::m_listCtxs.m_pFirst = v5;
+      CAkURenderer::m_listCtxs.m_pFirst = in_pContext;
     ++CAkURenderer::m_listCtxs.m_ulNumListItems;
-    CAkURenderer::m_listCtxs.m_pLast = v5;
+    CAkURenderer::m_listCtxs.m_pLast = in_pContext;
   }
   return result;
 }
 
 // File Line: 495
 // RVA: 0xA632C0
-signed __int64 __fastcall CAkURenderer::Stop(CAkSoundBase *in_pSound, CAkRegisteredObj *in_pGameObj, TransParams *in_rTparameters, unsigned int in_PlayingID)
+__int64 __fastcall CAkURenderer::Stop(
+        CAkSoundBase *in_pSound,
+        CAkRegisteredObj *in_pGameObj,
+        TransParams *in_rTparameters,
+        unsigned int in_PlayingID)
 {
-  CAkPBI *v4; // rbx
-  unsigned int v5; // esi
-  TransParams *v6; // r14
-  CAkRegisteredObj *v7; // rdi
-  CAkSoundBase *v8; // rbp
+  CAkPBI *i; // rbx
 
-  v4 = CAkURenderer::m_listCtxs.m_pFirst;
-  v5 = in_PlayingID;
-  v6 = in_rTparameters;
-  v7 = in_pGameObj;
-  v8 = in_pSound;
-  if ( CAkURenderer::m_listCtxs.m_pFirst )
+  for ( i = CAkURenderer::m_listCtxs.m_pFirst; i; i = i->pNextItem )
   {
-    do
+    if ( i->m_pSound == in_pSound
+      && (!in_pGameObj || i->m_pGameObj == in_pGameObj)
+      && (!in_PlayingID || i->m_UserParams.m_PlayingID == in_PlayingID) )
     {
-      if ( v4->m_pSound == v8 && (!v7 || v4->m_pGameObj == v7) && (!v5 || v4->m_UserParams.m_PlayingID == v5) )
-        CAkPBI::_Stop(v4, v6, 1);
-      v4 = v4->pNextItem;
+      CAkPBI::_Stop(i, in_rTparameters, 1);
     }
-    while ( v4 );
   }
   return 1i64;
 }
 
 // File Line: 524
 // RVA: 0xA62940
-signed __int64 __fastcall CAkURenderer::Pause(CAkSoundBase *in_pSound, CAkRegisteredObj *in_pGameObj, TransParams *in_rTparameters, unsigned int in_PlayingID)
+__int64 __fastcall CAkURenderer::Pause(
+        CAkSoundBase *in_pSound,
+        CAkRegisteredObj *in_pGameObj,
+        TransParams *in_rTparameters,
+        unsigned int in_PlayingID)
 {
-  CAkPBI *v4; // rbx
-  unsigned int v5; // esi
-  TransParams *v6; // r14
-  CAkRegisteredObj *v7; // rdi
-  CAkSoundBase *v8; // rbp
+  CAkPBI *i; // rbx
 
-  v4 = CAkURenderer::m_listCtxs.m_pFirst;
-  v5 = in_PlayingID;
-  v6 = in_rTparameters;
-  v7 = in_pGameObj;
-  v8 = in_pSound;
-  if ( CAkURenderer::m_listCtxs.m_pFirst )
+  for ( i = CAkURenderer::m_listCtxs.m_pFirst; i; i = i->pNextItem )
   {
-    do
+    if ( i->m_pSound == in_pSound
+      && (!in_pGameObj || i->m_pGameObj == in_pGameObj)
+      && (!in_PlayingID || i->m_UserParams.m_PlayingID == in_PlayingID) )
     {
-      if ( v4->m_pSound == v8 && (!v7 || v4->m_pGameObj == v7) && (!v5 || v4->m_UserParams.m_PlayingID == v5) )
-        CAkPBI::_Pause(v4, v6);
-      v4 = v4->pNextItem;
+      CAkPBI::_Pause(i, in_rTparameters);
     }
-    while ( v4 );
   }
   return 1i64;
 }
 
 // File Line: 554
 // RVA: 0xA63230
-signed __int64 __fastcall CAkURenderer::Resume(CAkSoundBase *in_pSound, CAkRegisteredObj *in_pGameObj, TransParams *in_rTparameters, bool in_bIsMasterResume, unsigned int in_PlayingID)
+__int64 __fastcall CAkURenderer::Resume(
+        CAkSoundBase *in_pSound,
+        CAkRegisteredObj *in_pGameObj,
+        TransParams *in_rTparameters,
+        bool in_bIsMasterResume,
+        unsigned int in_PlayingID)
 {
-  CAkPBI *v5; // rbx
-  bool v6; // r14
-  TransParams *v7; // r15
-  CAkRegisteredObj *v8; // rsi
-  CAkSoundBase *v9; // rbp
+  CAkPBI *i; // rbx
 
-  v5 = CAkURenderer::m_listCtxs.m_pFirst;
-  v6 = in_bIsMasterResume;
-  v7 = in_rTparameters;
-  v8 = in_pGameObj;
-  v9 = in_pSound;
-  if ( CAkURenderer::m_listCtxs.m_pFirst )
+  for ( i = CAkURenderer::m_listCtxs.m_pFirst; i; i = i->pNextItem )
   {
-    do
+    if ( i->m_pSound == in_pSound
+      && (!in_pGameObj || i->m_pGameObj == in_pGameObj)
+      && (!in_PlayingID || i->m_UserParams.m_PlayingID == in_PlayingID) )
     {
-      if ( v5->m_pSound == v9
-        && (!v8 || v5->m_pGameObj == v8)
-        && (!in_PlayingID || v5->m_UserParams.m_PlayingID == in_PlayingID) )
-      {
-        CAkPBI::_Resume(v5, v7, v6);
-      }
-      v5 = v5->pNextItem;
+      CAkPBI::_Resume(i, in_rTparameters, in_bIsMasterResume);
     }
-    while ( v5 );
   }
   return 1i64;
 }
@@ -673,26 +602,26 @@ void __fastcall CAkURenderer::EnqueueContext(CAkPBI *in_pContext)
 void __fastcall CAkURenderer::DecrementVirtualCount(bool in_bAllowKick)
 {
   unsigned int v1; // edx
-  int v2; // er12
-  CAkPBI **v3; // rbx
+  int m_u16LimiterMax; // r12d
+  CAkPBI **m_pItems; // rbx
   CAkPBI *v4; // r15
   CAkPBI **v5; // rdi
   unsigned __int16 v6; // bp
-  signed int v7; // er14
+  int v7; // r14d
   float v8; // xmm8_4
   CAkPBI *v9; // rsi
   char v10; // al
-  float v11; // xmm6_4
-  AkBelowThresholdBehavior v12; // eax
-  AkVirtualQueueBehavior out_Behavior; // [rsp+80h] [rbp+8h]
+  float priority; // xmm6_4
+  AkBelowThresholdBehavior VirtualBehavior; // eax
+  AkVirtualQueueBehavior out_Behavior; // [rsp+80h] [rbp+8h] BYREF
 
-  v1 = CAkURenderer::m_uNumVirtualizedSounds-- - 1;
+  v1 = --CAkURenderer::m_uNumVirtualizedSounds;
   if ( in_bAllowKick )
   {
-    v2 = CAkURenderer::m_GlobalLimiter.m_u16LimiterMax;
+    m_u16LimiterMax = CAkURenderer::m_GlobalLimiter.m_u16LimiterMax;
     if ( CAkURenderer::m_listCtxs.m_ulNumListItems - v1 > CAkURenderer::m_GlobalLimiter.m_u16LimiterMax )
     {
-      v3 = CAkURenderer::m_GlobalLimiter.m_sortedPBIList.m_pItems;
+      m_pItems = CAkURenderer::m_GlobalLimiter.m_sortedPBIList.m_pItems;
       v4 = 0i64;
       v5 = &CAkURenderer::m_GlobalLimiter.m_sortedPBIList.m_pItems[CAkURenderer::m_GlobalLimiter.m_sortedPBIList.m_uLength];
       v6 = 0;
@@ -702,31 +631,31 @@ void __fastcall CAkURenderer::DecrementVirtualCount(bool in_bAllowKick)
       {
         do
         {
-          v9 = *v3;
-          if ( !(*((_BYTE *)*v3 + 374) & 1) )
+          v9 = *m_pItems;
+          if ( (*((_BYTE *)*m_pItems + 374) & 1) == 0 )
           {
             v10 = *((_BYTE *)v9 + 375);
-            if ( !(v10 & 0x10) && !(v10 & 0x40) )
+            if ( (v10 & 0x10) == 0 && (v10 & 0x40) == 0 )
             {
-              v11 = v9->m_PriorityInfoCurrent.currentPriority.priority;
+              priority = v9->m_PriorityInfoCurrent.currentPriority.priority;
               ++v6;
-              if ( v11 <= 101.0 )
+              if ( priority <= 101.0 )
               {
-                v12 = CAkPBI::GetVirtualBehavior(*v3, &out_Behavior);
-                if ( v12 )
+                VirtualBehavior = CAkPBI::GetVirtualBehavior(*m_pItems, &out_Behavior);
+                if ( VirtualBehavior )
                 {
-                  v7 = v12;
+                  v7 = VirtualBehavior;
                   v4 = v9;
-                  v8 = v11;
+                  v8 = priority;
                 }
               }
             }
           }
-          ++v3;
+          ++m_pItems;
         }
-        while ( v3 != v5 );
+        while ( m_pItems != v5 );
       }
-      if ( v6 + 1 > v2 && v8 <= 101.0 && v8 != 101.0 && v4 && v7 == 1 )
+      if ( v6 + 1 > m_u16LimiterMax && v8 < 101.0 && v4 && v7 == 1 )
         CAkPBI::Kick(v4, KickFrom_OverGlobalLimit);
     }
   }
@@ -734,30 +663,36 @@ void __fastcall CAkURenderer::DecrementVirtualCount(bool in_bAllowKick)
 
 // File Line: 750
 // RVA: 0xA62790
-signed __int64 __fastcall CAkURenderer::Kick(CAkLimiter *in_pLimiter, unsigned __int16 in_uMaxInstances, float in_fPriority, CAkRegisteredObj *in_pGameObj, bool in_bKickNewest, bool in_bUseVirtualBehavior, CAkParameterNodeBase **out_pKicked, KickFrom in_eReason)
+__int64 __fastcall CAkURenderer::Kick(
+        CAkLimiter *in_pLimiter,
+        unsigned __int16 in_uMaxInstances,
+        float in_fPriority,
+        CAkRegisteredObj *in_pGameObj,
+        bool in_bKickNewest,
+        bool in_bUseVirtualBehavior,
+        CAkParameterNodeBase **out_pKicked,
+        KickFrom in_eReason)
 {
-  CAkRegisteredObj *v8; // r12
   bool v10; // r8
-  CAkPBI **v11; // rbx
+  CAkPBI **m_pItems; // rbx
   CAkPBI *v12; // r14
   float v13; // xmm8_4
   CAkPBI **v14; // rdi
   unsigned int v15; // ebp
   unsigned __int16 v16; // r13
-  signed int v17; // er15
+  int v17; // r15d
   CAkPBI *v18; // rsi
   char v19; // al
-  float v20; // xmm6_4
-  AkBelowThresholdBehavior v21; // eax
-  AkVirtualQueueBehavior out_Behavior; // [rsp+90h] [rbp+8h]
+  float priority; // xmm6_4
+  AkBelowThresholdBehavior VirtualBehavior; // eax
+  AkVirtualQueueBehavior out_Behavior; // [rsp+90h] [rbp+8h] BYREF
   unsigned __int16 v23; // [rsp+98h] [rbp+10h]
 
   v23 = in_uMaxInstances;
-  v8 = in_pGameObj;
   if ( !in_pLimiter )
     return 1i64;
   v10 = in_bUseVirtualBehavior;
-  v11 = in_pLimiter->m_sortedPBIList.m_pItems;
+  m_pItems = in_pLimiter->m_sortedPBIList.m_pItems;
   v12 = 0i64;
   v13 = FLOAT_101_0;
   v14 = &in_pLimiter->m_sortedPBIList.m_pItems[in_pLimiter->m_sortedPBIList.m_uLength];
@@ -768,35 +703,34 @@ signed __int64 __fastcall CAkURenderer::Kick(CAkLimiter *in_pLimiter, unsigned _
   {
     while ( 1 )
     {
-      v18 = *v11;
-      if ( v8 && v18->m_pGameObj != v8 )
+      v18 = *m_pItems;
+      if ( in_pGameObj && v18->m_pGameObj != in_pGameObj )
         goto LABEL_14;
-      if ( *((_BYTE *)v18 + 374) & 1 )
+      if ( (*((_BYTE *)v18 + 374) & 1) != 0 )
         goto LABEL_14;
       v19 = *((_BYTE *)v18 + 375);
-      if ( v19 & 0x10 )
+      if ( (v19 & 0x10) != 0 )
         goto LABEL_14;
-      if ( v19 & 0x40 )
+      if ( (v19 & 0x40) != 0 )
         goto LABEL_14;
-      v20 = v18->m_PriorityInfoCurrent.currentPriority.priority;
+      priority = v18->m_PriorityInfoCurrent.currentPriority.priority;
       ++v16;
-      if ( v20 > in_fPriority )
+      if ( priority > in_fPriority )
         goto LABEL_14;
       if ( !v10 )
         goto LABEL_13;
-      v21 = CAkPBI::GetVirtualBehavior(*v11, &out_Behavior);
-      if ( v21 )
+      VirtualBehavior = CAkPBI::GetVirtualBehavior(*m_pItems, &out_Behavior);
+      if ( VirtualBehavior )
         break;
 LABEL_14:
       v10 = in_bUseVirtualBehavior;
-      ++v11;
-      if ( v11 == v14 )
+      if ( ++m_pItems == v14 )
         goto LABEL_15;
     }
-    v17 = v21;
+    v17 = VirtualBehavior;
 LABEL_13:
     v12 = v18;
-    v13 = v20;
+    v13 = priority;
     goto LABEL_14;
   }
 LABEL_15:
@@ -805,14 +739,14 @@ LABEL_15:
   if ( in_fPriority < v13 || in_bKickNewest && in_fPriority == v13 || !v12 )
   {
     if ( v10 )
-      v15 = 80;
+      return 80;
   }
   else
   {
-    *out_pKicked = (CAkParameterNodeBase *)&v12->m_pSound->vfptr;
+    *out_pKicked = v12->m_pSound;
     if ( !v10 || v17 == 1 )
       CAkPBI::Kick(v12, in_eReason);
-    v15 = 1;
+    return 1;
   }
   return v15;
 }
@@ -821,83 +755,70 @@ LABEL_15:
 // RVA: 0xA636E0
 char __fastcall CAkURenderer::ValidateMemoryLimit(float in_fPriority)
 {
-  float v1; // xmm7_4
-  float v2; // xmm8_4
-  float v3; // xmm7_4
-  CAkPBI *v4; // rax
-  float v5; // xmm1_4
-  CAkPBI *v6; // r8
-  char v7; // cl
-  float v8; // xmm0_4
-  AK::MemoryMgr::PoolMemInfo out_memInfo; // [rsp+58h] [rbp+10h]
+  float fDefaultPoolRatioThreshold; // xmm7_4
+  float fLEngineDefaultPoolRatioThreshold; // xmm7_4
+  CAkPBI *m_pFirst; // rax
+  float priority; // xmm1_4
+  CAkPBI *i; // r8
+  char v6; // cl
+  AK::MemoryMgr::PoolMemInfo out_memInfo; // [rsp+58h] [rbp+10h] BYREF
 
-  v1 = unk_14249E974;
-  v2 = in_fPriority;
-  if ( unk_14249E974 >= 1.0
+  fDefaultPoolRatioThreshold = g_settings.fDefaultPoolRatioThreshold;
+  if ( g_settings.fDefaultPoolRatioThreshold >= 1.0
     || (AK::MemoryMgr::GetPoolMemoryUsed(g_DefaultPoolId, &out_memInfo), !out_memInfo.uReserved)
-    || (float)((float)(signed int)out_memInfo.uUsed / (float)(signed int)out_memInfo.uReserved) <= v1 )
+    || (float)((float)(int)out_memInfo.uUsed / (float)(int)out_memInfo.uReserved) <= fDefaultPoolRatioThreshold )
   {
-    v3 = g_PDSettings.fLEngineDefaultPoolRatioThreshold;
+    fLEngineDefaultPoolRatioThreshold = g_PDSettings.fLEngineDefaultPoolRatioThreshold;
     if ( g_PDSettings.fLEngineDefaultPoolRatioThreshold >= 1.0 )
       return 1;
     AK::MemoryMgr::GetPoolMemoryUsed(g_LEngineDefaultPoolId, &out_memInfo);
     if ( !out_memInfo.uReserved
-      || (float)((float)(signed int)out_memInfo.uUsed / (float)(signed int)out_memInfo.uReserved) <= v3 )
+      || (float)((float)(int)out_memInfo.uUsed / (float)(int)out_memInfo.uReserved) <= fLEngineDefaultPoolRatioThreshold )
     {
       return 1;
     }
   }
-  v4 = CAkURenderer::m_listCtxs.m_pFirst;
-  v5 = FLOAT_101_0;
-  v6 = 0i64;
-  if ( CAkURenderer::m_listCtxs.m_pFirst )
+  m_pFirst = CAkURenderer::m_listCtxs.m_pFirst;
+  priority = FLOAT_101_0;
+  for ( i = 0i64; m_pFirst; m_pFirst = m_pFirst->pNextItem )
   {
-    do
+    if ( (*((_BYTE *)m_pFirst + 374) & 1) == 0 )
     {
-      if ( !(*((_BYTE *)v4 + 374) & 1) )
+      v6 = *((_BYTE *)m_pFirst + 375);
+      if ( (v6 & 0x10) == 0 && (v6 & 0x40) == 0 && m_pFirst->m_PriorityInfoCurrent.currentPriority.priority <= priority )
       {
-        v7 = *((_BYTE *)v4 + 375);
-        if ( !(v7 & 0x10) && !(v7 & 0x40) )
-        {
-          v8 = v4->m_PriorityInfoCurrent.currentPriority.priority;
-          if ( v8 < v5 || v8 == v5 )
-          {
-            v6 = v4;
-            v5 = v4->m_PriorityInfoCurrent.currentPriority.priority;
-          }
-        }
+        i = m_pFirst;
+        priority = m_pFirst->m_PriorityInfoCurrent.currentPriority.priority;
       }
-      v4 = v4->pNextItem;
     }
-    while ( v4 );
   }
-  if ( v2 < v5 || v2 == v5 || !v6 )
+  if ( in_fPriority <= priority || !i )
     return 0;
-  CAkPBI::Kick(v6, KickFrom_OverMemoryLimit);
+  CAkPBI::Kick(i, KickFrom_OverMemoryLimit);
   return 1;
 }
 
 // File Line: 904
 // RVA: 0xA63580
-signed __int64 __fastcall CAkURenderer::ValidateMaximumNumberVoiceLimit(float in_fPriority)
+__int64 __fastcall CAkURenderer::ValidateMaximumNumberVoiceLimit(float in_fPriority)
 {
-  int v1; // er12
-  CAkPBI **v2; // rbx
+  int m_u16LimiterMax; // r12d
+  CAkPBI **m_pItems; // rbx
   CAkPBI *v3; // r15
   CAkPBI **v4; // rdi
   float v5; // xmm8_4
   unsigned __int16 v6; // bp
-  signed int v7; // er14
+  int v7; // r14d
   CAkPBI *v8; // rsi
   char v9; // al
-  float v10; // xmm6_4
-  AkBelowThresholdBehavior v11; // eax
-  AkVirtualQueueBehavior out_Behavior; // [rsp+88h] [rbp+10h]
+  float priority; // xmm6_4
+  AkBelowThresholdBehavior VirtualBehavior; // eax
+  AkVirtualQueueBehavior out_Behavior; // [rsp+88h] [rbp+10h] BYREF
 
-  v1 = CAkURenderer::m_GlobalLimiter.m_u16LimiterMax;
+  m_u16LimiterMax = CAkURenderer::m_GlobalLimiter.m_u16LimiterMax;
   if ( CAkURenderer::m_listCtxs.m_ulNumListItems - CAkURenderer::m_uNumVirtualizedSounds + 1 <= CAkURenderer::m_GlobalLimiter.m_u16LimiterMax )
     return 1i64;
-  v2 = CAkURenderer::m_GlobalLimiter.m_sortedPBIList.m_pItems;
+  m_pItems = CAkURenderer::m_GlobalLimiter.m_sortedPBIList.m_pItems;
   v3 = 0i64;
   v4 = &CAkURenderer::m_GlobalLimiter.m_sortedPBIList.m_pItems[CAkURenderer::m_GlobalLimiter.m_sortedPBIList.m_uLength];
   v5 = FLOAT_101_0;
@@ -907,33 +828,33 @@ signed __int64 __fastcall CAkURenderer::ValidateMaximumNumberVoiceLimit(float in
   {
     do
     {
-      v8 = *v2;
-      if ( !(*((_BYTE *)*v2 + 374) & 1) )
+      v8 = *m_pItems;
+      if ( (*((_BYTE *)*m_pItems + 374) & 1) == 0 )
       {
         v9 = *((_BYTE *)v8 + 375);
-        if ( !(v9 & 0x10) && !(v9 & 0x40) )
+        if ( (v9 & 0x10) == 0 && (v9 & 0x40) == 0 )
         {
-          v10 = v8->m_PriorityInfoCurrent.currentPriority.priority;
+          priority = v8->m_PriorityInfoCurrent.currentPriority.priority;
           ++v6;
-          if ( v10 <= in_fPriority )
+          if ( priority <= in_fPriority )
           {
-            v11 = CAkPBI::GetVirtualBehavior(*v2, &out_Behavior);
-            if ( v11 )
+            VirtualBehavior = CAkPBI::GetVirtualBehavior(*m_pItems, &out_Behavior);
+            if ( VirtualBehavior )
             {
-              v7 = v11;
+              v7 = VirtualBehavior;
               v3 = v8;
-              v5 = v10;
+              v5 = priority;
             }
           }
         }
       }
-      ++v2;
+      ++m_pItems;
     }
-    while ( v2 != v4 );
+    while ( m_pItems != v4 );
   }
-  if ( v6 + 1 <= v1 )
+  if ( v6 + 1 <= m_u16LimiterMax )
     return 1i64;
-  if ( in_fPriority >= v5 && in_fPriority != v5 && v3 )
+  if ( in_fPriority > v5 && v3 )
   {
     if ( v7 == 1 )
       CAkPBI::Kick(v3, KickFrom_OverGlobalLimit);
@@ -944,49 +865,44 @@ signed __int64 __fastcall CAkURenderer::ValidateMaximumNumberVoiceLimit(float in
 
 // File Line: 933
 // RVA: 0xA63530
-AKRESULT __fastcall CAkURenderer::ValidateLimits(float in_fPriority, AkMonitorData::NotificationReason *out_eReasonOfFailure)
+AKRESULT __fastcall CAkURenderer::ValidateLimits(
+        float in_fPriority,
+        AkMonitorData::NotificationReason *out_eReasonOfFailure)
 {
-  AkMonitorData::NotificationReason *v2; // rbx
-  AKRESULT result; // eax
-
-  v2 = out_eReasonOfFailure;
   if ( CAkURenderer::ValidateMemoryLimit(in_fPriority) )
   {
-    *v2 = 33;
-    result = CAkURenderer::ValidateMaximumNumberVoiceLimit(in_fPriority);
+    *out_eReasonOfFailure = NotificationReason_PlayFailedGlobalLimit;
+    return CAkURenderer::ValidateMaximumNumberVoiceLimit(in_fPriority);
   }
   else
   {
-    *v2 = 34;
-    result = 2;
+    *out_eReasonOfFailure = NotificationReason_PlayFailedMemoryThreshold;
+    return 2;
   }
-  return result;
 }
 
 // File Line: 946
 // RVA: 0xA624B0
-void __fastcall CAkURenderer::EnqueueContextNotif(CAkPBI *in_pPBI, AkCtxState in_eState, AkCtxDestroyReason in_eDestroyReason, float in_fEstimatedTime)
+void __fastcall CAkURenderer::EnqueueContextNotif(
+        CAkPBI *in_pPBI,
+        AkCtxState in_eState,
+        AkCtxDestroyReason in_eDestroyReason,
+        float in_fEstimatedTime)
 {
-  CAkList2<CAkURenderer::ContextNotif,CAkURenderer::ContextNotif const &,1,ArrayPoolDefault>::ListItem *v4; // r9
-  AkCtxDestroyReason v5; // ebx
-  AkCtxState v6; // edi
-  CAkPBI *v7; // rsi
+  CAkList2<CAkURenderer::ContextNotif,CAkURenderer::ContextNotif const &,1,ArrayPoolDefault>::ListItem *m_pFree; // r9
   CAkList2<CAkURenderer::ContextNotif,CAkURenderer::ContextNotif const &,1,ArrayPoolDefault>::ListItem *v8; // rax
-  CAkURenderer::ContextNotif *v9; // rax
+  CAkURenderer::ContextNotif *p_Item; // rax
 
-  v4 = CAkURenderer::m_CtxNotifQueue.m_pFree;
-  v5 = in_eDestroyReason;
-  v6 = in_eState;
-  v7 = in_pPBI;
+  m_pFree = CAkURenderer::m_CtxNotifQueue.m_pFree;
   if ( !CAkURenderer::m_CtxNotifQueue.m_pFree )
   {
     if ( CAkURenderer::m_CtxNotifQueue.m_ulNumListItems >= CAkURenderer::m_CtxNotifQueue.m_ulMaxNumListItems
       || (v8 = (CAkList2<CAkURenderer::ContextNotif,CAkURenderer::ContextNotif const &,1,ArrayPoolDefault>::ListItem *)AK::MemoryMgr::Malloc(g_DefaultPoolId, (unsigned int)(LODWORD(CAkURenderer::m_CtxNotifQueue.m_pFree) + 32)),
-          (v4 = v8) == 0i64) )
+          (m_pFree = v8) == 0i64) )
     {
 LABEL_9:
       CAkURenderer::PerformContextNotif();
-      v9 = CAkList2<CAkURenderer::ContextNotif,CAkURenderer::ContextNotif const &,1,ArrayPoolDefault>::AddLast(&CAkURenderer::m_CtxNotifQueue);
+      p_Item = CAkList2<CAkURenderer::ContextNotif,CAkURenderer::ContextNotif const &,1,ArrayPoolDefault>::AddLast(&CAkURenderer::m_CtxNotifQueue);
       goto LABEL_10;
     }
     v8->pNextListItem = CAkURenderer::m_CtxNotifQueue.m_pFree;
@@ -994,53 +910,57 @@ LABEL_9:
   }
   if ( CAkURenderer::m_CtxNotifQueue.m_pLast )
   {
-    CAkURenderer::m_CtxNotifQueue.m_pLast->pNextListItem = v4;
-    v4 = CAkURenderer::m_CtxNotifQueue.m_pFree;
+    CAkURenderer::m_CtxNotifQueue.m_pLast->pNextListItem = m_pFree;
+    m_pFree = CAkURenderer::m_CtxNotifQueue.m_pFree;
   }
   else
   {
-    CAkURenderer::m_CtxNotifQueue.m_pFirst = v4;
+    CAkURenderer::m_CtxNotifQueue.m_pFirst = m_pFree;
   }
-  CAkURenderer::m_CtxNotifQueue.m_pLast = v4;
-  CAkURenderer::m_CtxNotifQueue.m_pFree = v4->pNextListItem;
-  v4->pNextListItem = 0i64;
+  CAkURenderer::m_CtxNotifQueue.m_pLast = m_pFree;
+  CAkURenderer::m_CtxNotifQueue.m_pFree = m_pFree->pNextListItem;
+  m_pFree->pNextListItem = 0i64;
   ++CAkURenderer::m_CtxNotifQueue.m_ulNumListItems;
-  v9 = &CAkURenderer::m_CtxNotifQueue.m_pLast->Item;
+  p_Item = &CAkURenderer::m_CtxNotifQueue.m_pLast->Item;
   if ( CAkURenderer::m_CtxNotifQueue.m_pLast == (CAkList2<CAkURenderer::ContextNotif,CAkURenderer::ContextNotif const &,1,ArrayPoolDefault>::ListItem *)-8i64 )
     goto LABEL_9;
 LABEL_10:
-  v9->fEstimatedLength = in_fEstimatedTime;
-  v9->pPBI = v7;
-  v9->DestroyReason = v5;
-  v9->state = v6;
+  p_Item->fEstimatedLength = in_fEstimatedTime;
+  p_Item->pPBI = in_pPBI;
+  p_Item->DestroyReason = in_eDestroyReason;
+  p_Item->state = in_eState;
 }
 
 // File Line: 971
 // RVA: 0xA629D0
 void CAkURenderer::PerformContextNotif(void)
 {
-  CAkList2<CAkURenderer::ContextNotif,CAkURenderer::ContextNotif const &,1,ArrayPoolDefault>::ListItem *v0; // rbx
+  CAkList2<CAkURenderer::ContextNotif,CAkURenderer::ContextNotif const &,1,ArrayPoolDefault>::ListItem *m_pFirst; // rbx
   CAkPBI *v1; // rdx
   CAkPBI *v2; // rcx
-  CAkPBI *v3; // rax
-  CAkPBI *v4; // rdi
+  CAkPBI *m_pLast; // rax
+  CAkPBI *pPBI; // rdi
   int v5; // ebx
   CAkList2<CAkURenderer::ContextNotif,CAkURenderer::ContextNotif const &,1,ArrayPoolDefault>::ListItem *v6; // rax
-  unsigned int v7; // eax
+  unsigned int m_ulNumListItems; // eax
 
   if ( CAkURenderer::m_CtxNotifQueue.m_ulNumListItems )
   {
-    v0 = CAkURenderer::m_CtxNotifQueue.m_pFirst;
+    m_pFirst = CAkURenderer::m_CtxNotifQueue.m_pFirst;
     do
     {
-      CAkPBI::ProcessContextNotif(v0->Item.pPBI, v0->Item.state, v0->Item.DestroyReason, v0->Item.fEstimatedLength);
-      if ( v0->Item.state == 4 )
+      CAkPBI::ProcessContextNotif(
+        m_pFirst->Item.pPBI,
+        m_pFirst->Item.state,
+        m_pFirst->Item.DestroyReason,
+        m_pFirst->Item.fEstimatedLength);
+      if ( m_pFirst->Item.state == CtxStateToDestroy )
       {
         v1 = 0i64;
         v2 = CAkURenderer::m_listCtxs.m_pFirst;
         if ( CAkURenderer::m_listCtxs.m_pFirst )
         {
-          while ( v2 != v0->Item.pPBI )
+          while ( v2 != m_pFirst->Item.pPBI )
           {
             v1 = v2;
             v2 = v2->pNextItem;
@@ -1053,48 +973,48 @@ void CAkURenderer::PerformContextNotif(void)
               CAkURenderer::m_listCtxs.m_pFirst = v2->pNextItem;
             else
               v1->pNextItem = v2->pNextItem;
-            v3 = CAkURenderer::m_listCtxs.m_pLast;
+            m_pLast = CAkURenderer::m_listCtxs.m_pLast;
             if ( v2 == CAkURenderer::m_listCtxs.m_pLast )
-              v3 = v1;
+              m_pLast = v1;
             --CAkURenderer::m_listCtxs.m_ulNumListItems;
-            CAkURenderer::m_listCtxs.m_pLast = v3;
+            CAkURenderer::m_listCtxs.m_pLast = m_pLast;
           }
         }
 LABEL_15:
-        v4 = v0->Item.pPBI;
-        CAkLEngineCmds::DequeuePBI(v0->Item.pPBI);
-        ((void (__fastcall *)(CAkPBI *, _QWORD))v4->vfptr[1].~CAkTransportAware)(v4, 0i64);
+        pPBI = m_pFirst->Item.pPBI;
+        CAkLEngineCmds::DequeuePBI(pPBI);
+        ((void (__fastcall *)(CAkPBI *, _QWORD))pPBI->CAkTransportAware::vfptr[1].~CAkTransportAware)(pPBI, 0i64);
         v5 = g_DefaultPoolId;
-        ((void (__fastcall *)(CAkPBI *, _QWORD))v4->vfptr->~CAkTransportAware)(v4, 0i64);
-        AK::MemoryMgr::Free(v5, v4);
+        ((void (__fastcall *)(CAkPBI *, _QWORD))pPBI->CAkTransportAware::vfptr->~CAkTransportAware)(pPBI, 0i64);
+        AK::MemoryMgr::Free(v5, pPBI);
       }
-      v0 = CAkURenderer::m_CtxNotifQueue.m_pFirst;
+      m_pFirst = CAkURenderer::m_CtxNotifQueue.m_pFirst;
       if ( CAkURenderer::m_CtxNotifQueue.m_pFirst )
       {
         CAkURenderer::m_CtxNotifQueue.m_pFirst = CAkURenderer::m_CtxNotifQueue.m_pFirst->pNextListItem;
         v6 = CAkURenderer::m_CtxNotifQueue.m_pLast;
-        if ( v0 == CAkURenderer::m_CtxNotifQueue.m_pLast )
+        if ( m_pFirst == CAkURenderer::m_CtxNotifQueue.m_pLast )
           v6 = 0i64;
         CAkURenderer::m_CtxNotifQueue.m_pLast = v6;
-        if ( v0 < CAkURenderer::m_CtxNotifQueue.m_pvMemStart
-          || v0 >= &CAkURenderer::m_CtxNotifQueue.m_pvMemStart[(unsigned __int64)CAkURenderer::m_CtxNotifQueue.m_ulMinNumListItems] )
+        if ( m_pFirst < CAkURenderer::m_CtxNotifQueue.m_pvMemStart
+          || m_pFirst >= &CAkURenderer::m_CtxNotifQueue.m_pvMemStart[(unsigned __int64)CAkURenderer::m_CtxNotifQueue.m_ulMinNumListItems] )
         {
-          AK::MemoryMgr::Free(g_DefaultPoolId, v0);
+          AK::MemoryMgr::Free(g_DefaultPoolId, m_pFirst);
         }
         else
         {
-          v0->pNextListItem = CAkURenderer::m_CtxNotifQueue.m_pFree;
-          CAkURenderer::m_CtxNotifQueue.m_pFree = v0;
+          m_pFirst->pNextListItem = CAkURenderer::m_CtxNotifQueue.m_pFree;
+          CAkURenderer::m_CtxNotifQueue.m_pFree = m_pFirst;
         }
-        v0 = CAkURenderer::m_CtxNotifQueue.m_pFirst;
-        v7 = CAkURenderer::m_CtxNotifQueue.m_ulNumListItems-- - 1;
+        m_pFirst = CAkURenderer::m_CtxNotifQueue.m_pFirst;
+        m_ulNumListItems = --CAkURenderer::m_CtxNotifQueue.m_ulNumListItems;
       }
       else
       {
-        v7 = CAkURenderer::m_CtxNotifQueue.m_ulNumListItems;
+        m_ulNumListItems = CAkURenderer::m_CtxNotifQueue.m_ulNumListItems;
       }
     }
-    while ( v7 );
+    while ( m_ulNumListItems );
   }
 }
 
@@ -1102,42 +1022,33 @@ LABEL_15:
 // RVA: 0xA623C0
 void __fastcall CAkURenderer::DestroyAllPBIs(__int64 a1, __int64 a2, _BOOL8 a3)
 {
-  CAkPBI *v3; // rax
-  CAkPBI *v4; // rdi
-  CAkPBI *v5; // rax
+  CAkPBI *m_pFirst; // rax
+  CAkPBI *i; // rdi
+  CAkPBI *pNextItem; // rax
   int v6; // ebx
 
-  v3 = CAkURenderer::m_listCtxs.m_pFirst;
-  v4 = CAkURenderer::m_listCtxs.m_pFirst;
-  if ( CAkURenderer::m_listCtxs.m_pFirst )
+  m_pFirst = CAkURenderer::m_listCtxs.m_pFirst;
+  for ( i = CAkURenderer::m_listCtxs.m_pFirst; CAkURenderer::m_listCtxs.m_pFirst; i = CAkURenderer::m_listCtxs.m_pFirst )
   {
-    if ( !CAkURenderer::m_listCtxs.m_pFirst )
-      goto LABEL_7;
-    do
+    pNextItem = m_pFirst->pNextItem;
+    if ( pNextItem )
     {
-      v5 = v3->pNextItem;
-      if ( v5 )
-      {
-        CAkURenderer::m_listCtxs.m_pFirst = v5;
-      }
-      else
-      {
-        CAkURenderer::m_listCtxs.m_pFirst = 0i64;
-        CAkURenderer::m_listCtxs.m_pLast = 0i64;
-      }
-      --CAkURenderer::m_listCtxs.m_ulNumListItems;
-LABEL_7:
-      LOBYTE(a3) = 1;
-      v4->vfptr->_Stop((CAkTransportAware *)&v4->vfptr, 0i64, a3, 0);
-      CAkLEngineCmds::DequeuePBI(v4);
-      ((void (__fastcall *)(CAkPBI *, _QWORD))v4->vfptr[1].~CAkTransportAware)(v4, 0i64);
-      v6 = g_DefaultPoolId;
-      ((void (__fastcall *)(CAkPBI *, _QWORD))v4->vfptr->~CAkTransportAware)(v4, 0i64);
-      AK::MemoryMgr::Free(v6, v4);
-      v3 = CAkURenderer::m_listCtxs.m_pFirst;
-      v4 = CAkURenderer::m_listCtxs.m_pFirst;
+      CAkURenderer::m_listCtxs.m_pFirst = pNextItem;
     }
-    while ( CAkURenderer::m_listCtxs.m_pFirst );
+    else
+    {
+      CAkURenderer::m_listCtxs.m_pFirst = 0i64;
+      CAkURenderer::m_listCtxs.m_pLast = 0i64;
+    }
+    --CAkURenderer::m_listCtxs.m_ulNumListItems;
+    LOBYTE(a3) = 1;
+    i->CAkTransportAware::vfptr->_Stop(i, AkPBIStopMode_Normal, a3, 0);
+    CAkLEngineCmds::DequeuePBI(i);
+    ((void (__fastcall *)(CAkPBI *, _QWORD))i->CAkTransportAware::vfptr[1].~CAkTransportAware)(i, 0i64);
+    v6 = g_DefaultPoolId;
+    ((void (__fastcall *)(CAkPBI *, _QWORD))i->CAkTransportAware::vfptr->~CAkTransportAware)(i, 0i64);
+    AK::MemoryMgr::Free(v6, i);
+    m_pFirst = CAkURenderer::m_listCtxs.m_pFirst;
   }
 }
 
@@ -1145,47 +1056,33 @@ LABEL_7:
 // RVA: 0xA63350
 void __fastcall CAkURenderer::StopAllPBIs(CAkUsageSlot *in_pUsageSlot)
 {
-  CAkPBI *v1; // rbx
-  CAkUsageSlot *v2; // rdi
-  TransParams in_transParams; // [rsp+38h] [rbp+10h]
+  CAkPBI *i; // rbx
+  TransParams in_transParams; // [rsp+38h] [rbp+10h] BYREF
 
-  v1 = CAkURenderer::m_listCtxs.m_pFirst;
-  v2 = in_pUsageSlot;
-  if ( CAkURenderer::m_listCtxs.m_pFirst )
+  for ( i = CAkURenderer::m_listCtxs.m_pFirst; i; i = i->pNextItem )
   {
-    do
+    if ( CAkPBI::IsUsingThisSlot(i, in_pUsageSlot) )
     {
-      if ( CAkPBI::IsUsingThisSlot(v1, v2) )
-      {
-        in_transParams = 0i64;
-        CAkPBI::_Stop(v1, &in_transParams, 1);
-        CAkAudioMgr::StopPendingAction(g_pAudioMgr, (CAkParameterNodeBase *)&v1->m_pSound->vfptr, 0i64, 0);
-      }
-      v1 = v1->pNextItem;
+      in_transParams = 0i64;
+      CAkPBI::_Stop(i, &in_transParams, 1);
+      CAkAudioMgr::StopPendingAction(g_pAudioMgr, i->m_pSound, 0i64, 0);
     }
-    while ( v1 );
   }
-  CAkLEngine::StopMixBussesUsingThisSlot(v2);
+  CAkLEngine::StopMixBussesUsingThisSlot(in_pUsageSlot);
 }
 
 // File Line: 1153
 // RVA: 0xA62740
 void CAkURenderer::InvalidateAllMotionPBIs(void)
 {
-  CAkPBI *v0; // rbx
+  CAkPBI *i; // rbx
   char v1; // al
 
-  v0 = CAkURenderer::m_listCtxs.m_pFirst;
-  if ( CAkURenderer::m_listCtxs.m_pFirst )
+  for ( i = CAkURenderer::m_listCtxs.m_pFirst; i; i = i->pNextItem )
   {
-    do
-    {
-      v1 = *((_BYTE *)v0 + 371);
-      if ( (v1 & 3) == 1 && (v1 & 0xC) == 4 )
-        CAkPBI::InvalidateFeedbackParameters(v0);
-      v0 = v0->pNextItem;
-    }
-    while ( v0 );
+    v1 = *((_BYTE *)i + 371);
+    if ( (v1 & 3) == 1 && (v1 & 0xC) == 4 )
+      CAkPBI::InvalidateFeedbackParameters(i);
   }
 }
 
@@ -1193,9 +1090,9 @@ void CAkURenderer::InvalidateAllMotionPBIs(void)
 // RVA: 0xA621C0
 void __fastcall CAkURenderer::AddBusLimiter(CAkLimiter *in_pLimiter)
 {
-  CAkLimiter *v1; // rax
+  CAkLimiter *m_pFirst; // rax
 
-  v1 = CAkURenderer::m_BusLimiters.m_pFirst;
+  m_pFirst = CAkURenderer::m_BusLimiters.m_pFirst;
   if ( CAkURenderer::m_BusLimiters.m_pFirst )
   {
     in_pLimiter->pNextLightItem = CAkURenderer::m_BusLimiters.m_pFirst;
@@ -1204,7 +1101,7 @@ void __fastcall CAkURenderer::AddBusLimiter(CAkLimiter *in_pLimiter)
   else
   {
     CAkURenderer::m_BusLimiters.m_pFirst = in_pLimiter;
-    in_pLimiter->pNextLightItem = v1;
+    in_pLimiter->pNextLightItem = m_pFirst;
   }
 }
 
@@ -1213,25 +1110,25 @@ void __fastcall CAkURenderer::AddBusLimiter(CAkLimiter *in_pLimiter)
 void __fastcall CAkURenderer::RemoveBusLimiter(CAkLimiter *in_pLimiter)
 {
   CAkLimiter *v1; // r8
-  CAkLimiter *v2; // rdx
+  CAkLimiter *m_pFirst; // rdx
 
   v1 = 0i64;
-  v2 = CAkURenderer::m_BusLimiters.m_pFirst;
+  m_pFirst = CAkURenderer::m_BusLimiters.m_pFirst;
   if ( CAkURenderer::m_BusLimiters.m_pFirst )
   {
-    while ( v2 != in_pLimiter )
+    while ( m_pFirst != in_pLimiter )
     {
-      v1 = v2;
-      v2 = v2->pNextLightItem;
-      if ( !v2 )
+      v1 = m_pFirst;
+      m_pFirst = m_pFirst->pNextLightItem;
+      if ( !m_pFirst )
         return;
     }
-    if ( v2 )
+    if ( m_pFirst )
     {
-      if ( v2 == CAkURenderer::m_BusLimiters.m_pFirst )
-        CAkURenderer::m_BusLimiters.m_pFirst = v2->pNextLightItem;
+      if ( m_pFirst == CAkURenderer::m_BusLimiters.m_pFirst )
+        CAkURenderer::m_BusLimiters.m_pFirst = m_pFirst->pNextLightItem;
       else
-        v1->pNextLightItem = v2->pNextLightItem;
+        v1->pNextLightItem = m_pFirst->pNextLightItem;
     }
   }
 }
@@ -1240,9 +1137,9 @@ void __fastcall CAkURenderer::RemoveBusLimiter(CAkLimiter *in_pLimiter)
 // RVA: 0xA62190
 void __fastcall CAkURenderer::AddAMLimiter(CAkLimiter *in_pLimiter)
 {
-  CAkLimiter *v1; // rax
+  CAkLimiter *m_pFirst; // rax
 
-  v1 = CAkURenderer::m_AMLimiters.m_pFirst;
+  m_pFirst = CAkURenderer::m_AMLimiters.m_pFirst;
   if ( CAkURenderer::m_AMLimiters.m_pFirst )
   {
     in_pLimiter->pNextLightItem = CAkURenderer::m_AMLimiters.m_pFirst;
@@ -1251,7 +1148,7 @@ void __fastcall CAkURenderer::AddAMLimiter(CAkLimiter *in_pLimiter)
   else
   {
     CAkURenderer::m_AMLimiters.m_pFirst = in_pLimiter;
-    in_pLimiter->pNextLightItem = v1;
+    in_pLimiter->pNextLightItem = m_pFirst;
   }
 }
 
@@ -1260,25 +1157,25 @@ void __fastcall CAkURenderer::AddAMLimiter(CAkLimiter *in_pLimiter)
 void __fastcall CAkURenderer::RemoveAMLimiter(CAkLimiter *in_pLimiter)
 {
   CAkLimiter *v1; // r8
-  CAkLimiter *v2; // rdx
+  CAkLimiter *m_pFirst; // rdx
 
   v1 = 0i64;
-  v2 = CAkURenderer::m_AMLimiters.m_pFirst;
+  m_pFirst = CAkURenderer::m_AMLimiters.m_pFirst;
   if ( CAkURenderer::m_AMLimiters.m_pFirst )
   {
-    while ( v2 != in_pLimiter )
+    while ( m_pFirst != in_pLimiter )
     {
-      v1 = v2;
-      v2 = v2->pNextLightItem;
-      if ( !v2 )
+      v1 = m_pFirst;
+      m_pFirst = m_pFirst->pNextLightItem;
+      if ( !m_pFirst )
         return;
     }
-    if ( v2 )
+    if ( m_pFirst )
     {
-      if ( v2 == CAkURenderer::m_AMLimiters.m_pFirst )
-        CAkURenderer::m_AMLimiters.m_pFirst = v2->pNextLightItem;
+      if ( m_pFirst == CAkURenderer::m_AMLimiters.m_pFirst )
+        CAkURenderer::m_AMLimiters.m_pFirst = m_pFirst->pNextLightItem;
       else
-        v1->pNextLightItem = v2->pNextLightItem;
+        v1->pNextLightItem = m_pFirst->pNextLightItem;
     }
   }
 }
@@ -1287,40 +1184,16 @@ void __fastcall CAkURenderer::RemoveAMLimiter(CAkLimiter *in_pLimiter)
 // RVA: 0xA62F30
 void CAkURenderer::ProcessLimiters(void)
 {
-  CAkPBI *v0; // rax
-  CAkLimiter *v1; // rbx
-  CAkLimiter *v2; // rbx
+  CAkPBI *i; // rax
+  CAkLimiter *j; // rbx
+  CAkLimiter *k; // rbx
 
-  v0 = CAkURenderer::m_listCtxs.m_pFirst;
-  if ( CAkURenderer::m_listCtxs.m_pFirst )
-  {
-    do
-    {
-      *((_BYTE *)v0 + 375) = *((_BYTE *)v0 + 375) & 0xCF | 2 * (*((_BYTE *)v0 + 375) & 0x10);
-      v0 = v0->pNextItem;
-    }
-    while ( v0 );
-  }
+  for ( i = CAkURenderer::m_listCtxs.m_pFirst; i; i = i->pNextItem )
+    *((_BYTE *)i + 375) = *((_BYTE *)i + 375) & 0xCF | (2 * (*((_BYTE *)i + 375) & 0x10));
   CAkLimiter::UpdateFlags(&CAkURenderer::m_GlobalLimiter);
-  v1 = CAkURenderer::m_BusLimiters.m_pFirst;
-  if ( CAkURenderer::m_BusLimiters.m_pFirst )
-  {
-    do
-    {
-      CAkLimiter::UpdateFlags(v1);
-      v1 = v1->pNextLightItem;
-    }
-    while ( v1 );
-  }
-  v2 = CAkURenderer::m_AMLimiters.m_pFirst;
-  if ( CAkURenderer::m_AMLimiters.m_pFirst )
-  {
-    do
-    {
-      CAkLimiter::UpdateFlags(v2);
-      v2 = v2->pNextLightItem;
-    }
-    while ( v2 );
-  }
+  for ( j = CAkURenderer::m_BusLimiters.m_pFirst; j; j = j->pNextLightItem )
+    CAkLimiter::UpdateFlags(j);
+  for ( k = CAkURenderer::m_AMLimiters.m_pFirst; k; k = k->pNextLightItem )
+    CAkLimiter::UpdateFlags(k);
 }
 

@@ -2,18 +2,16 @@
 // RVA: 0x29D230
 void __fastcall Phoneme::~Phoneme(Phoneme *this)
 {
-  UFG::qNode<Phoneme,Phoneme> *v1; // r8
-  UFG::qNode<Phoneme,Phoneme> *v2; // rdx
-  UFG::qNode<Phoneme,Phoneme> *v3; // rax
+  UFG::qNode<Phoneme,Phoneme> *mPrev; // rdx
+  UFG::qNode<Phoneme,Phoneme> *mNext; // rax
 
   this->vfptr = (Expression::IMemberMapVtbl *)&Phoneme::`vftable;
-  v1 = (UFG::qNode<Phoneme,Phoneme> *)&this->mPrev;
-  v2 = this->mPrev;
-  v3 = this->mNext;
-  v2->mNext = v3;
-  v3->mPrev = v2;
-  v1->mPrev = v1;
-  v1->mNext = v1;
+  mPrev = this->mPrev;
+  mNext = this->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->mPrev = &this->UFG::qNode<Phoneme,Phoneme>;
+  this->mNext = &this->UFG::qNode<Phoneme,Phoneme>;
   this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
@@ -50,16 +48,14 @@ __int64 __fastcall Phoneme_Ee::GetPhonemeIndex(Phoneme_Ee *this)
 Phoneme_Eh *__fastcall Phoneme_Eh::Create()
 {
   char *v0; // rcx
-  _QWORD *v1; // rax
 
   v0 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0x28ui64, "MemberMap::Phoneme_Eh", 0i64, 1u);
   if ( !v0 )
     return 0i64;
   *(_QWORD *)v0 = &Expression::IMemberMap::`vftable;
   *((_QWORD *)v0 + 1) = 0i64;
-  v1 = v0 + 16;
-  *v1 = v1;
-  v1[1] = v1;
+  *((_QWORD *)v0 + 2) = v0 + 16;
+  *((_QWORD *)v0 + 3) = v0 + 16;
   *(_QWORD *)v0 = &Phoneme::`vftable;
   *((_DWORD *)v0 + 8) = 0;
   *(_QWORD *)v0 = &Phoneme_Eh::`vftable;

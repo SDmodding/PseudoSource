@@ -51,7 +51,7 @@ void dynamic_initializer_for__hkpVehicleDataClass__()
     &hkpVehicleData_Default,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 150
@@ -63,17 +63,17 @@ hkClass *__fastcall hkpVehicleData::staticClass()
 
 // File Line: 157
 // RVA: 0xE25220
-void __fastcall finishLoadedObjecthkpVehicleData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpVehicleData(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleData::`vftable;
+    *p = &hkpVehicleData::`vftable;
 }
 
 // File Line: 163
 // RVA: 0xE25240
-void __fastcall cleanupLoadedObjecthkpVehicleData(void *p)
+void __fastcall cleanupLoadedObjecthkpVehicleData(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 167
@@ -94,8 +94,8 @@ void **dynamic_initializer_for__hkpVehicleDataTypeInfo__()
   hkpVehicleDataTypeInfo.m_typeName = "hkpVehicleData";
   hkpVehicleDataTypeInfo.m_vtable = result;
   hkpVehicleDataTypeInfo.m_scopedName = "!hkpVehicleData";
-  hkpVehicleDataTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpVehicleData;
-  hkpVehicleDataTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpVehicleData;
+  hkpVehicleDataTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpVehicleData;
+  hkpVehicleDataTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpVehicleData;
   return result;
 }
 

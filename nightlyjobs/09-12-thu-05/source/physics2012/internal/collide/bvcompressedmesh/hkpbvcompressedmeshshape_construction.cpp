@@ -1,111 +1,111 @@
 // File Line: 29
 // RVA: 0xDE82B0
-void __fastcall hkpBvCompressedMeshShape::hkpBvCompressedMeshShape(hkpBvCompressedMeshShape *this, hkpBvCompressedMeshShapeCinfo *cInfo)
+void __fastcall hkpBvCompressedMeshShape::hkpBvCompressedMeshShape(
+        hkpBvCompressedMeshShape *this,
+        hkpBvCompressedMeshShapeCinfo *cInfo)
 {
   char *v2; // rdi
   hkpBvCompressedMeshShape *v3; // r15
-  hkpBvCompressedMeshShapeCinfo *v4; // rsi
-  hkArray<hkStringPtr,hkContainerHeapAllocator> *v5; // rax
-  __int64 v6; // r12
-  int v7; // eax
-  __int64 v8; // r14
-  __int64 v9; // rbx
-  int v10; // ecx
-  unsigned int v11; // eax
-  int v12; // ecx
-  __int64 v13; // r13
-  int v14; // ecx
-  int v15; // eax
-  unsigned int *v16; // r12
-  int v17; // er15
-  int v18; // ebx
-  __int64 v19; // rdi
-  unsigned int v20; // eax
-  int v21; // ebx
-  signed __int64 v22; // rdi
-  unsigned int v23; // eax
-  int v24; // er8
-  __int64 v25; // rdi
-  int v26; // ecx
-  int v27; // eax
-  int v28; // ebx
-  __int64 v29; // rdi
-  unsigned __int8 v30; // al
-  _DWORD *v31; // rcx
-  int v32; // ebx
-  signed __int64 v33; // rdi
-  unsigned __int8 v34; // al
-  char *v35; // rcx
-  int v36; // edx
-  __int64 v37; // rcx
-  int v38; // eax
-  unsigned int *v39; // r15
-  int v40; // er14
-  hkStringPtr *v41; // rdi
-  signed int v42; // edi
-  unsigned int *v43; // rbx
-  int v44; // er12
-  int v45; // edi
-  signed __int64 v46; // rbx
-  int v47; // er8
-  __int64 v48; // rdi
-  int v49; // ecx
-  int v50; // eax
-  int v51; // edi
-  hkStringPtr *v52; // rbx
-  unsigned int *v53; // rdx
-  __int64 v54; // r8
-  int v55; // eax
-  unsigned int *v56; // r12
-  int v57; // er15
-  int v58; // ebx
-  __int64 v59; // rdi
-  unsigned int v60; // eax
-  __int64 v61; // r14
-  int v62; // ebx
-  signed __int64 v63; // rdi
-  unsigned int v64; // eax
-  int v65; // er8
-  __int64 v66; // rdi
-  int v67; // ecx
-  int v68; // eax
-  int v69; // ebx
+  __int64 v5; // r12
+  int v6; // eax
+  __int64 v7; // r14
+  __int64 v8; // rbx
+  int v9; // ecx
+  unsigned int v10; // eax
+  int m_storage; // ecx
+  __int64 v12; // r13
+  int v13; // ecx
+  int v14; // eax
+  unsigned int *v15; // r12
+  int v16; // r15d
+  int v17; // ebx
+  __int64 v18; // rdi
+  unsigned int v19; // eax
+  int v20; // ebx
+  unsigned int *v21; // rdi
+  unsigned int v22; // eax
+  int v23; // r8d
+  __int64 v24; // rdi
+  int v25; // ecx
+  int v26; // eax
+  int v27; // ebx
+  __int64 v28; // rdi
+  unsigned __int8 v29; // al
+  _DWORD *v30; // rcx
+  int v31; // ebx
+  __int64 v32; // rdi
+  unsigned __int8 v33; // al
+  char *v34; // rcx
+  int v35; // edx
+  __int64 v36; // rcx
+  int v37; // eax
+  unsigned int *v38; // r15
+  int v39; // r14d
+  hkStringPtr *v40; // rdi
+  int v41; // edi
+  hkStringPtr *v42; // rbx
+  int v43; // r12d
+  int v44; // edi
+  hkStringPtr *v45; // rbx
+  int v46; // r8d
+  __int64 v47; // rdi
+  int v48; // ecx
+  int v49; // eax
+  int v50; // edi
+  hkStringPtr *v51; // rbx
+  unsigned int *v52; // rdx
+  __int64 v53; // r8
+  int v54; // eax
+  unsigned int *v55; // r12
+  int v56; // r15d
+  int v57; // ebx
+  __int64 v58; // rdi
+  unsigned int v59; // eax
+  __int64 v60; // r14
+  int v61; // ebx
+  unsigned int *v62; // rdi
+  unsigned int v63; // eax
+  int v64; // r8d
+  __int64 v65; // rdi
+  int v66; // ecx
+  int v67; // eax
+  int v68; // ebx
   __int64 i; // rdi
-  unsigned __int8 v71; // al
-  _DWORD *v72; // rcx
-  __int64 v73; // r14
-  int v74; // ebx
-  signed __int64 v75; // rdi
-  unsigned __int8 v76; // al
-  char *v77; // rcx
-  int v78; // edx
-  __int64 v79; // rcx
-  char v80; // bl
-  hkBool v81; // dl
+  unsigned __int8 v70; // al
+  _DWORD *v71; // rcx
+  __int64 v72; // r14
+  int v73; // ebx
+  __int64 v74; // rdi
+  unsigned __int8 v75; // al
+  char *v76; // rcx
+  int v77; // edx
+  __int64 v78; // rcx
+  char m_bool; // bl
+  char v80; // dl
   __int64 k; // rdi
   __int64 j; // rcx
-  signed __int64 v84; // rcx
-  int v85; // eax
-  int v86; // er14
-  int v87; // er9
-  float v88; // xmm1_4
-  float v89; // xmm1_4
-  hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *v90; // rcx
-  hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *v91; // rcx
-  hkArray<unsigned int,hkContainerHeapAllocator> indices; // [rsp+30h] [rbp-D0h]
-  char *v93; // [rsp+40h] [rbp-C0h]
-  int v94; // [rsp+48h] [rbp-B8h]
-  int v95; // [rsp+4Ch] [rbp-B4h]
-  __int64 v96; // [rsp+50h] [rbp-B0h]
-  hkArray<unsigned int,hkContainerHeapAllocator> values; // [rsp+58h] [rbp-A8h]
-  hkcdStaticMeshTreeBase::BuildMapping mapping; // [rsp+68h] [rbp-98h]
-  int v99; // [rsp+98h] [rbp-68h]
-  hkpBvCompressedMeshShape_Internals::GeometryProvider baseProvider; // [rsp+A0h] [rbp-60h]
-  hkcdStaticMeshTreeBase::BuildConfig baseConfig; // [rsp+C0h] [rbp-40h]
+  __int64 v83; // rcx
+  int v84; // eax
+  int v85; // r14d
+  int v86; // r9d
+  float m_vertexWeldingTolerance; // xmm1_4
+  float m_maxVerticesError; // xmm1_4
+  hkArray<unsigned int,hkContainerHeapAllocator> *m_triangleIndexToShapeKeyMap; // rcx
+  hkArray<unsigned int,hkContainerHeapAllocator> *m_convexShapeIndexToShapeKeyMap; // rcx
+  hkArray<unsigned int,hkContainerHeapAllocator> indices; // [rsp+30h] [rbp-D0h] BYREF
+  char *v92; // [rsp+40h] [rbp-C0h] BYREF
+  int v93; // [rsp+48h] [rbp-B8h]
+  int v94; // [rsp+4Ch] [rbp-B4h]
+  __int64 v95; // [rsp+50h] [rbp-B0h]
+  hkArray<unsigned int,hkContainerHeapAllocator> values; // [rsp+58h] [rbp-A8h] BYREF
+  hkcdStaticMeshTreeBase::BuildMapping mapping; // [rsp+68h] [rbp-98h] BYREF
+  int v98; // [rsp+98h] [rbp-68h]
+  hkpBvCompressedMeshShape_Internals::GeometryProvider baseProvider; // [rsp+A0h] [rbp-60h] BYREF
+  hkcdStaticMeshTreeBase::BuildConfig baseConfig; // [rsp+C0h] [rbp-40h] BYREF
   hkArray<hkStringPtr,hkContainerHeapAllocator> *palette; // [rsp+F0h] [rbp-10h]
-  hkpBvCompressedMeshShape *result; // [rsp+150h] [rbp+50h]
-  unsigned int v104; // [rsp+158h] [rbp+58h]
-  int v105; // [rsp+160h] [rbp+60h]
+  hkpBvCompressedMeshShape *result; // [rsp+150h] [rbp+50h] BYREF
+  unsigned int v103; // [rsp+158h] [rbp+58h] BYREF
+  int v104; // [rsp+160h] [rbp+60h] BYREF
 
   result = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
@@ -113,435 +113,418 @@ void __fastcall hkpBvCompressedMeshShape::hkpBvCompressedMeshShape(hkpBvCompress
   v2 = 0i64;
   this->m_userData = 0i64;
   this->m_bvTreeType.m_storage = 3;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpBvCompressedMeshShape::`vftable{for `hkpBvTreeShape};
+  this->hkpBvTreeShape::hkpShape::hkpShapeBase::hkcdShape::hkReferencedObject::hkBaseObject::vfptr = (hkBaseObjectVtbl *)&hkpBvCompressedMeshShape::`vftable{for `hkpBvTreeShape};
   v3 = this;
-  this->vfptr = (hkpShapeContainerVtbl *)&hkpBvCompressedMeshShape::`vftable{for `hkpShapeContainer};
-  v4 = cInfo;
+  this->hkpShapeContainer::vfptr = (hkpShapeContainerVtbl *)&hkpBvCompressedMeshShape::`vftable{for `hkpShapeContainer};
   this->m_convexRadius = cInfo->m_convexRadius;
   this->m_weldingType.m_storage = cInfo->m_weldingType;
   this->m_collisionFilterInfoPalette.m_data = 0i64;
   this->m_collisionFilterInfoPalette.m_size = 0;
-  this->m_collisionFilterInfoPalette.m_capacityAndFlags = 2147483648;
-  v5 = &this->m_userStringPalette;
+  this->m_collisionFilterInfoPalette.m_capacityAndFlags = 0x80000000;
   this->m_userDataPalette.m_data = 0i64;
   this->m_userDataPalette.m_size = 0;
-  this->m_userDataPalette.m_capacityAndFlags = 2147483648;
-  v5->m_data = 0i64;
-  v5->m_size = 0;
-  v5->m_capacityAndFlags = 2147483648;
+  this->m_userDataPalette.m_capacityAndFlags = 0x80000000;
+  this->m_userStringPalette.m_data = 0i64;
+  this->m_userStringPalette.m_size = 0;
+  this->m_userStringPalette.m_capacityAndFlags = 0x80000000;
   palette = &this->m_userStringPalette;
-  v6 = cInfo->vfptr->getNumTriangles(cInfo);
-  v7 = v4->vfptr->getNumConvexShapes(v4);
-  v8 = v7;
-  v9 = (unsigned int)(v7 + v6);
-  v99 = v7;
-  v104 = v7 + v6;
+  v5 = cInfo->vfptr->getNumTriangles(cInfo);
+  v6 = cInfo->vfptr->getNumConvexShapes(cInfo);
+  v7 = v6;
+  v8 = (unsigned int)(v6 + v5);
+  v98 = v6;
+  v103 = v6 + v5;
   if ( v3 != (hkpBvCompressedMeshShape *)-112i64 )
     hkpBvCompressedMeshShapeTree::hkpBvCompressedMeshShapeTree((hkpBvCompressedMeshShapeTree *)v3->m_tree);
-  v10 = v9;
-  v93 = 0i64;
-  v94 = 0;
-  v95 = 2147483648;
-  if ( (_DWORD)v9 )
+  v9 = v8;
+  v92 = 0i64;
+  v93 = 0;
+  v94 = 0x80000000;
+  if ( (_DWORD)v8 )
   {
-    v105 = 4 * v9;
-    v2 = (char *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
-                   (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-                   &v105);
-    v10 = v105 / 4;
+    v104 = 4 * v8;
+    v2 = (char *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(&hkContainerHeapAllocator::s_alloc, &v104);
+    v9 = v104 / 4;
   }
-  v11 = 2147483648;
-  v93 = v2;
-  if ( v10 )
-    v11 = v10;
-  v12 = (unsigned __int8)v4->m_collisionFilterInfoMode.m_storage;
-  v94 = v9;
-  v95 = v11;
-  v13 = v6;
-  v96 = v8;
-  if ( v12 )
+  v10 = 0x80000000;
+  v92 = v2;
+  if ( v9 )
+    v10 = v9;
+  m_storage = (unsigned __int8)cInfo->m_collisionFilterInfoMode.m_storage;
+  v93 = v8;
+  v94 = v10;
+  v12 = v5;
+  v95 = v7;
+  if ( m_storage )
   {
-    v14 = v12 - 1;
-    if ( v14 )
+    v13 = m_storage - 1;
+    if ( v13 )
     {
-      if ( v14 != 1 )
+      if ( v13 != 1 )
       {
         v3->m_hasPerPrimitiveCollisionFilterInfo.m_bool = 0;
         goto LABEL_30;
       }
       v3->m_hasPerPrimitiveCollisionFilterInfo.m_bool = 1;
-      v15 = v9;
-      if ( (_DWORD)v9 )
+      v14 = v8;
+      if ( (_DWORD)v8 )
       {
-        v105 = 4 * v9;
-        v16 = (unsigned int *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
-                                (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-                                &v105);
-        v15 = v105 / 4;
+        v104 = 4 * v8;
+        v15 = (unsigned int *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
+                                &hkContainerHeapAllocator::s_alloc,
+                                &v104);
+        v14 = v104 / 4;
       }
       else
       {
-        v16 = 0i64;
+        v15 = 0i64;
       }
-      v17 = 2147483648;
-      values.m_size = v9;
-      if ( v15 )
-        v17 = v15;
-      v18 = 0;
-      v19 = 0i64;
-      values.m_capacityAndFlags = v17;
-      for ( values.m_data = v16; v19 < v13; v16[v19 - 1] = v20 )
+      v16 = 0x80000000;
+      values.m_size = v8;
+      if ( v14 )
+        v16 = v14;
+      v17 = 0;
+      v18 = 0i64;
+      values.m_capacityAndFlags = v16;
+      for ( values.m_data = v15; v18 < v12; v15[v18 - 1] = v19 )
       {
-        v20 = v4->vfptr->getTriangleCollisionFilterInfo(v4, v18);
-        ++v19;
+        v19 = cInfo->vfptr->getTriangleCollisionFilterInfo(cInfo, v17);
         ++v18;
+        ++v17;
       }
-      v21 = 0;
-      if ( v8 > 0 )
+      v20 = 0;
+      if ( v7 > 0 )
       {
-        v22 = (signed __int64)&v16[v13];
+        v21 = &v15[v12];
         do
         {
-          v23 = v4->vfptr->getConvexShapeCollisionFilterInfo(v4, v21++);
-          v22 += 4i64;
-          *(_DWORD *)(v22 - 4) = v23;
-          --v8;
+          v22 = cInfo->vfptr->getConvexShapeCollisionFilterInfo(cInfo, v20++);
+          *v21++ = v22;
+          --v7;
         }
-        while ( v8 );
+        while ( v7 );
       }
       indices.m_data = 0i64;
       indices.m_size = 0;
-      indices.m_capacityAndFlags = 2147483648;
+      indices.m_capacityAndFlags = 0x80000000;
       createIntPalette(&values, 8, &result->m_collisionFilterInfoPalette, &indices);
-      v24 = 0;
-      if ( v94 > 0 )
+      v23 = 0;
+      if ( v93 > 0 )
       {
-        v25 = 0i64;
+        v24 = 0i64;
         do
         {
-          ++v24;
-          v26 = LOBYTE(indices.m_data[v25]);
-          v27 = *(_DWORD *)&v93[v25 * 4];
-          ++v25;
-          *(_DWORD *)&v93[v25 * 4 - 4] = v27 & 0xFFFFFF00 | v26;
+          ++v23;
+          v25 = LOBYTE(indices.m_data[v24]);
+          v26 = *(_DWORD *)&v92[v24 * 4];
+          *(_DWORD *)&v92[++v24 * 4 - 4] = v26 & 0xFFFFFF00 | v25;
         }
-        while ( v24 < v94 );
+        while ( v23 < v93 );
       }
       indices.m_size = 0;
       if ( indices.m_capacityAndFlags >= 0 )
         hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+          &hkContainerHeapAllocator::s_alloc,
           indices.m_data,
           4 * indices.m_capacityAndFlags);
-      if ( v17 >= 0 )
-        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-          v16,
-          4 * v17);
+      if ( v16 >= 0 )
+        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v15, 4 * v16);
       v3 = result;
-      LODWORD(v6) = v13;
+      LODWORD(v5) = v12;
     }
     else
     {
-      v28 = 0;
-      v29 = 0i64;
+      v27 = 0;
+      v28 = 0i64;
       v3->m_hasPerPrimitiveCollisionFilterInfo.m_bool = 1;
-      if ( (signed int)v6 > 0 )
+      if ( (int)v5 > 0 )
       {
         do
         {
-          v30 = v4->vfptr->getTriangleCollisionFilterInfo(v4, v28);
-          v31 = v93;
-          v31[++v29 - 1] &= 0xFFFFFF00;
+          v29 = cInfo->vfptr->getTriangleCollisionFilterInfo(cInfo, v27);
+          v30 = v92;
           ++v28;
-          v31[v29 - 1] |= v30;
+          *(_DWORD *)&v92[4 * v28 - 4] &= 0xFFFFFF00;
+          ++v27;
+          v30[v28 - 1] |= v29;
         }
-        while ( v29 < v6 );
+        while ( v28 < v5 );
       }
-      v32 = 0;
-      if ( v8 > 0 )
+      v31 = 0;
+      if ( v7 > 0 )
       {
-        v33 = 4 * v6;
+        v32 = 4 * v5;
         do
         {
-          v34 = v4->vfptr->getConvexShapeCollisionFilterInfo(v4, v32);
-          v35 = v93;
-          ++v32;
-          *(_DWORD *)&v35[v33] &= 0xFFFFFF00;
-          v33 += 4i64;
-          *(_DWORD *)&v35[v33 - 4] |= v34;
-          --v8;
+          v33 = cInfo->vfptr->getConvexShapeCollisionFilterInfo(cInfo, v31);
+          v34 = v92;
+          ++v31;
+          *(_DWORD *)&v92[v32] &= 0xFFFFFF00;
+          v32 += 4i64;
+          *(_DWORD *)&v34[v32 - 4] |= v33;
+          --v7;
         }
-        while ( v8 );
+        while ( v7 );
       }
     }
-    v9 = v104;
+    v8 = v103;
   }
   else
   {
-    v36 = 0;
+    v35 = 0;
     v3->m_hasPerPrimitiveCollisionFilterInfo.m_bool = 0;
-    if ( (signed int)v9 > 0 )
+    if ( (int)v8 > 0 )
     {
-      v37 = 0i64;
+      v36 = 0i64;
       do
       {
-        ++v36;
-        v37 += 4i64;
-        v93[v37 - 4] = 0;
+        ++v35;
+        v36 += 4i64;
+        v92[v36 - 4] = 0;
       }
-      while ( v36 < v94 );
+      while ( v35 < v93 );
     }
   }
 LABEL_30:
-  if ( !v4->m_userDataMode.m_storage )
+  if ( !cInfo->m_userDataMode.m_storage )
   {
     v3->m_hasPerPrimitiveUserData.m_bool = 0;
-    v78 = 0;
-    if ( v94 > 0 )
+    v77 = 0;
+    if ( v93 > 0 )
     {
-      v79 = 0i64;
+      v78 = 0i64;
       do
       {
-        ++v78;
-        v79 += 4i64;
-        v93[v79 - 3] = 0;
+        ++v77;
+        v78 += 4i64;
+        v92[v78 - 3] = 0;
       }
-      while ( v78 < v94 );
+      while ( v77 < v93 );
     }
     goto LABEL_99;
   }
-  if ( v4->m_userDataMode.m_storage != 1 )
+  if ( cInfo->m_userDataMode.m_storage != 1 )
   {
-    if ( v4->m_userDataMode.m_storage == 2 )
+    if ( cInfo->m_userDataMode.m_storage == 2 )
     {
       v3->m_hasPerPrimitiveUserData.m_bool = 1;
-      v55 = v9;
-      if ( (_DWORD)v9 )
+      v54 = v8;
+      if ( (_DWORD)v8 )
       {
-        v104 = 4 * v9;
-        v56 = (unsigned int *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
-                                (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-                                (int *)&v104);
-        v55 = (signed int)v104 / 4;
+        v103 = 4 * v8;
+        v55 = (unsigned int *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
+                                &hkContainerHeapAllocator::s_alloc,
+                                &v103);
+        v54 = (int)v103 / 4;
       }
       else
       {
-        v56 = 0i64;
+        v55 = 0i64;
       }
-      v57 = 2147483648;
-      values.m_size = v9;
-      if ( v55 )
-        v57 = v55;
-      v58 = 0;
-      v59 = 0i64;
-      values.m_capacityAndFlags = v57;
-      for ( values.m_data = v56; v59 < v13; v56[v59 - 1] = v60 )
+      v56 = 0x80000000;
+      values.m_size = v8;
+      if ( v54 )
+        v56 = v54;
+      v57 = 0;
+      v58 = 0i64;
+      values.m_capacityAndFlags = v56;
+      for ( values.m_data = v55; v58 < v12; v55[v58 - 1] = v59 )
       {
-        v60 = v4->vfptr->getTriangleUserData(v4, v58);
-        ++v59;
+        v59 = cInfo->vfptr->getTriangleUserData(cInfo, v57);
         ++v58;
+        ++v57;
       }
-      v61 = v96;
-      v62 = 0;
-      if ( v96 > 0 )
+      v60 = v95;
+      v61 = 0;
+      if ( v95 > 0 )
       {
-        v63 = (signed __int64)&v56[v13];
+        v62 = &v55[v12];
         do
         {
-          v64 = v4->vfptr->getConvexShapeUserData(v4, v62++);
-          v63 += 4i64;
-          *(_DWORD *)(v63 - 4) = v64;
-          --v61;
+          v63 = cInfo->vfptr->getConvexShapeUserData(cInfo, v61++);
+          *v62++ = v63;
+          --v60;
         }
-        while ( v61 );
+        while ( v60 );
       }
       indices.m_data = 0i64;
       indices.m_size = 0;
-      indices.m_capacityAndFlags = 2147483648;
+      indices.m_capacityAndFlags = 0x80000000;
       createIntPalette(&values, 8, &result->m_userDataPalette, &indices);
-      v65 = 0;
-      if ( v94 > 0 )
+      v64 = 0;
+      if ( v93 > 0 )
       {
-        v66 = 0i64;
+        v65 = 0i64;
         do
         {
-          ++v65;
-          v67 = LOBYTE(indices.m_data[v66]);
-          v68 = *(_DWORD *)&v93[v66 * 4];
-          ++v66;
-          *(_DWORD *)&v93[v66 * 4 - 4] = v68 & 0xFFFF00FF | (v67 << 8);
+          ++v64;
+          v66 = LOBYTE(indices.m_data[v65]);
+          v67 = *(_DWORD *)&v92[v65 * 4];
+          *(_DWORD *)&v92[++v65 * 4 - 4] = v67 & 0xFFFF00FF | (v66 << 8);
         }
-        while ( v65 < v94 );
+        while ( v64 < v93 );
       }
       indices.m_size = 0;
       if ( indices.m_capacityAndFlags >= 0 )
         hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+          &hkContainerHeapAllocator::s_alloc,
           indices.m_data,
           4 * indices.m_capacityAndFlags);
-      if ( v57 < 0 )
+      if ( v56 < 0 )
         goto LABEL_72;
-      v53 = v56;
-      v54 = (unsigned int)(4 * v57);
+      v52 = v55;
+      v53 = (unsigned int)(4 * v56);
     }
     else
     {
-      if ( v4->m_userDataMode.m_storage != 3 )
+      if ( cInfo->m_userDataMode.m_storage != 3 )
       {
         v3->m_hasPerPrimitiveUserData.m_bool = 0;
 LABEL_99:
-        v73 = v96;
+        v72 = v95;
         goto LABEL_100;
       }
       v3->m_hasPerPrimitiveUserData.m_bool = 1;
-      v38 = v9;
-      if ( (_DWORD)v9 )
+      v37 = v8;
+      if ( (_DWORD)v8 )
       {
-        v105 = 8 * v9;
-        v39 = (unsigned int *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
-                                (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-                                &v105);
-        v38 = v105 / 8;
+        v104 = 8 * v8;
+        v38 = (unsigned int *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
+                                &hkContainerHeapAllocator::s_alloc,
+                                &v104);
+        v37 = v104 / 8;
       }
       else
       {
-        v39 = 0i64;
+        v38 = 0i64;
       }
-      v40 = 2147483648;
-      values.m_data = v39;
-      if ( v38 )
-        v40 = v38;
-      values.m_size = v9;
-      values.m_capacityAndFlags = v40;
-      if ( (signed int)v9 > 0 )
+      v39 = 0x80000000;
+      values.m_data = v38;
+      if ( v37 )
+        v39 = v37;
+      values.m_size = v8;
+      values.m_capacityAndFlags = v39;
+      if ( (int)v8 > 0 )
       {
-        v41 = (hkStringPtr *)v39;
+        v40 = (hkStringPtr *)v38;
         do
         {
-          if ( v41 )
-            hkStringPtr::hkStringPtr(v41);
-          ++v41;
-          --v9;
+          if ( v40 )
+            hkStringPtr::hkStringPtr(v40);
+          ++v40;
+          --v8;
         }
-        while ( v9 );
+        while ( v8 );
       }
-      v42 = 0;
-      if ( (signed int)v6 > 0 )
+      v41 = 0;
+      if ( (int)v5 > 0 )
       {
-        v43 = v39;
+        v42 = (hkStringPtr *)v38;
         do
-        {
-          v4->vfptr->getTriangleUserString(v4, v42++, (hkStringPtr *)v43);
-          v43 += 2;
-        }
-        while ( v42 < (signed int)v6 );
+          cInfo->vfptr->getTriangleUserString(cInfo, v41++, v42++);
+        while ( v41 < (int)v5 );
       }
-      v44 = v99;
-      v45 = 0;
-      if ( v99 > 0 )
+      v43 = v98;
+      v44 = 0;
+      if ( v98 > 0 )
       {
-        v46 = (signed __int64)&v39[2 * v13];
+        v45 = (hkStringPtr *)&v38[2 * v12];
         do
-        {
-          v4->vfptr->getConvexShapeUserString(v4, v45++, (hkStringPtr *)v46);
-          v46 += 8i64;
-        }
-        while ( v45 < v44 );
+          cInfo->vfptr->getConvexShapeUserString(cInfo, v44++, v45++);
+        while ( v44 < v43 );
       }
       indices.m_data = 0i64;
       indices.m_size = 0;
-      indices.m_capacityAndFlags = 2147483648;
+      indices.m_capacityAndFlags = 0x80000000;
       createStringPalette((hkArray<hkStringPtr,hkContainerHeapAllocator> *)&values, 8, palette, &indices);
-      v47 = 0;
-      if ( v94 > 0 )
+      v46 = 0;
+      if ( v93 > 0 )
       {
-        v48 = 0i64;
+        v47 = 0i64;
         do
         {
-          ++v47;
-          v49 = LOBYTE(indices.m_data[v48]);
-          v50 = *(_DWORD *)&v93[v48 * 4];
-          ++v48;
-          *(_DWORD *)&v93[v48 * 4 - 4] = v50 & 0xFFFF00FF | (v49 << 8);
+          ++v46;
+          v48 = LOBYTE(indices.m_data[v47]);
+          v49 = *(_DWORD *)&v92[v47 * 4];
+          *(_DWORD *)&v92[++v47 * 4 - 4] = v49 & 0xFFFF00FF | (v48 << 8);
         }
-        while ( v47 < v94 );
+        while ( v46 < v93 );
       }
       indices.m_size = 0;
       if ( indices.m_capacityAndFlags >= 0 )
         hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+          &hkContainerHeapAllocator::s_alloc,
           indices.m_data,
           4 * indices.m_capacityAndFlags);
-      v51 = v104 - 1;
-      if ( (signed int)(v104 - 1) >= 0 )
+      v50 = v103 - 1;
+      if ( (int)(v103 - 1) >= 0 )
       {
-        v52 = (hkStringPtr *)&v39[2 * v51];
+        v51 = (hkStringPtr *)&v38[2 * v50];
         do
         {
-          hkStringPtr::~hkStringPtr(v52);
-          --v52;
-          --v51;
+          hkStringPtr::~hkStringPtr(v51--);
+          --v50;
         }
-        while ( v51 >= 0 );
+        while ( v50 >= 0 );
       }
-      if ( v40 < 0 )
+      if ( v39 < 0 )
       {
 LABEL_72:
         v3 = result;
         goto LABEL_99;
       }
-      v53 = v39;
-      v54 = (unsigned int)(8 * v40);
+      v52 = v38;
+      v53 = (unsigned int)(8 * v39);
     }
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc, v53, v54);
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v52, v53);
     goto LABEL_72;
   }
   v3->m_hasPerPrimitiveUserData.m_bool = 1;
-  v69 = 0;
-  for ( i = 0i64; i < v13; v72[i - 1] |= v71 << 8 )
+  v68 = 0;
+  for ( i = 0i64; i < v12; v71[i - 1] |= v70 << 8 )
   {
-    v71 = v4->vfptr->getTriangleUserData(v4, v69);
-    v72 = v93;
-    v72[++i - 1] &= 0xFFFF00FF;
-    ++v69;
+    v70 = cInfo->vfptr->getTriangleUserData(cInfo, v68);
+    v71 = v92;
+    ++i;
+    *(_DWORD *)&v92[4 * i - 4] &= 0xFFFF00FF;
+    ++v68;
   }
-  v73 = v96;
-  v74 = 0;
-  if ( v96 > 0 )
+  v72 = v95;
+  v73 = 0;
+  if ( v95 > 0 )
   {
-    v75 = 4 * v13;
+    v74 = 4 * v12;
     do
     {
-      v76 = v4->vfptr->getConvexShapeUserData(v4, v74);
-      v77 = v93;
-      ++v74;
-      *(_DWORD *)&v77[v75] &= 0xFFFF00FF;
-      v75 += 4i64;
-      *(_DWORD *)&v77[v75 - 4] |= v76 << 8;
-      --v73;
+      v75 = cInfo->vfptr->getConvexShapeUserData(cInfo, v73);
+      v76 = v92;
+      ++v73;
+      *(_DWORD *)&v92[v74] &= 0xFFFF00FF;
+      v74 += 4i64;
+      *(_DWORD *)&v76[v74 - 4] |= v75 << 8;
+      --v72;
     }
-    while ( v73 );
+    while ( v72 );
     goto LABEL_99;
   }
 LABEL_100:
-  v80 = v4->m_preserveVertexOrder.m_bool;
-  if ( v4->m_weldingType == 6 )
+  m_bool = cInfo->m_preserveVertexOrder.m_bool;
+  if ( cInfo->m_weldingType == WELDING_TYPE_NONE )
   {
-    for ( j = 0i64; j < v13; *(_WORD *)&v93[4 * j - 2] = 0 )
+    for ( j = 0i64; j < v12; *(_WORD *)&v92[4 * j - 2] = 0 )
       ++j;
   }
   else
   {
-    v81.m_bool = v4->m_weldOpenEdges.m_bool;
-    v80 = 1;
+    v80 = cInfo->m_weldOpenEdges.m_bool;
+    m_bool = 1;
     indices.m_data = 0i64;
     indices.m_size = 0;
-    indices.m_capacityAndFlags = 2147483648;
-    computeWeldingInfo(v4, v81, (hkArray<unsigned short,hkContainerHeapAllocator> *)&indices);
+    indices.m_capacityAndFlags = 0x80000000;
+    computeWeldingInfo(cInfo, (hkBool)v80, (hkArray<unsigned short,hkContainerHeapAllocator> *)&indices);
     for ( k = 0i64;
-          k < v13;
-          *(_DWORD *)&v93[4 * k - 4] = *(unsigned __int16 *)&v93[4 * k - 4] | (*((unsigned __int16 *)indices.m_data
+          k < v12;
+          *(_DWORD *)&v92[4 * k - 4] = *(unsigned __int16 *)&v92[4 * k - 4] | (*((unsigned __int16 *)indices.m_data
                                                                                + k
                                                                                - 1) << 16) )
     {
@@ -550,132 +533,124 @@ LABEL_100:
     indices.m_size = 0;
     if ( indices.m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+        &hkContainerHeapAllocator::s_alloc,
         indices.m_data,
         2 * (indices.m_capacityAndFlags & 0x3FFFFFFF));
   }
-  if ( v73 > 0 )
+  if ( v72 > 0 )
   {
-    v84 = 4 * v13;
+    v83 = 4 * v12;
     do
     {
-      v84 += 4i64;
-      *(_WORD *)&v93[v84 - 2] = 0;
-      --v73;
+      v83 += 4i64;
+      *(_WORD *)&v92[v83 - 2] = 0;
+      --v72;
     }
-    while ( v73 );
+    while ( v72 );
   }
-  baseProvider.m_meshCInfo = v4;
+  baseProvider.m_meshCInfo = cInfo;
   baseProvider.m_caches.m_data = 0i64;
   baseProvider.m_caches.m_size = 0;
-  baseProvider.m_caches.m_capacityAndFlags = 2147483648;
-  baseProvider.m_primitiveData = (hkArray<hkpBvCompressedMeshShape_Internals::PrimitiveData,hkContainerHeapAllocator> *)&v93;
-  v85 = v4->vfptr->getNumConvexShapes(v4);
-  v86 = v85;
-  if ( (baseProvider.m_caches.m_capacityAndFlags & 0x3FFFFFFF) < v85 )
+  baseProvider.m_caches.m_capacityAndFlags = 0x80000000;
+  baseProvider.m_primitiveData = (hkArray<hkpBvCompressedMeshShape_Internals::PrimitiveData,hkContainerHeapAllocator> *)&v92;
+  v84 = cInfo->vfptr->getNumConvexShapes(cInfo);
+  v85 = v84;
+  if ( (baseProvider.m_caches.m_capacityAndFlags & 0x3FFFFFFF) < v84 )
   {
-    v87 = v85;
-    if ( v85 < 2 * (baseProvider.m_caches.m_capacityAndFlags & 0x3FFFFFFF) )
-      v87 = 2 * (baseProvider.m_caches.m_capacityAndFlags & 0x3FFFFFFF);
+    v86 = v84;
+    if ( v84 < 2 * (baseProvider.m_caches.m_capacityAndFlags & 0x3FFFFFFF) )
+      v86 = 2 * (baseProvider.m_caches.m_capacityAndFlags & 0x3FFFFFFF);
     hkArrayUtil::_reserve(
       (hkResult *)&result,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &baseProvider.m_caches,
-      v87,
+      &hkContainerHeapAllocator::s_alloc,
+      (const void **)&baseProvider.m_caches.m_data,
+      v86,
       8);
   }
-  if ( v86 - baseProvider.m_caches.m_size > 0 )
-    memset(&baseProvider.m_caches.m_data[baseProvider.m_caches.m_size], 0, 8i64 * (v86 - baseProvider.m_caches.m_size));
-  v88 = v4->m_vertexWeldingTolerance;
-  baseConfig.m_convexRadius = v4->m_convexRadius;
-  baseConfig.m_weldTolerance = v88;
-  baseProvider.m_caches.m_size = v86;
+  if ( v85 - baseProvider.m_caches.m_size > 0 )
+    memset(&baseProvider.m_caches.m_data[baseProvider.m_caches.m_size], 0, 8i64 * (v85 - baseProvider.m_caches.m_size));
+  m_vertexWeldingTolerance = cInfo->m_vertexWeldingTolerance;
+  baseConfig.m_convexRadius = cInfo->m_convexRadius;
+  baseConfig.m_weldTolerance = m_vertexWeldingTolerance;
+  baseProvider.m_caches.m_size = v85;
   *(_WORD *)&baseConfig.m_globalOptimizations.m_bool = 256;
   baseConfig.m_forceConvexQuads.m_bool = 0;
-  v89 = v4->m_maxVerticesError;
+  m_maxVerticesError = cInfo->m_maxVerticesError;
   baseConfig.m_degenerateTolerance = hkDefaultTriangleDegeneracyTolerance;
   baseConfig.m_vertexHasFlags.m_bool = 0;
   *(_QWORD *)&baseConfig.m_balanceThreshold = 0i64;
   *(_QWORD *)&baseConfig.m_pbd = 1i64;
-  baseConfig.m_maxCompressionError = v89;
+  baseConfig.m_maxCompressionError = m_maxVerticesError;
   baseConfig.m_weldVertices.m_bool = 1;
-  baseConfig.m_preserveVertexOrder.m_bool = v80;
+  baseConfig.m_preserveVertexOrder.m_bool = m_bool;
   mapping.m_triangleIndexToKey.m_data = 0i64;
   mapping.m_triangleIndexToKey.m_size = 0;
-  mapping.m_triangleIndexToKey.m_capacityAndFlags = 2147483648;
+  mapping.m_triangleIndexToKey.m_capacityAndFlags = 0x80000000;
   mapping.m_customIndexToKey.m_data = 0i64;
   mapping.m_customIndexToKey.m_size = 0;
-  mapping.m_customIndexToKey.m_capacityAndFlags = 2147483648;
+  mapping.m_customIndexToKey.m_capacityAndFlags = 0x80000000;
   mapping.m_triangleVertexRotations.m_data = 0i64;
   mapping.m_triangleVertexRotations.m_size = 0;
-  mapping.m_triangleVertexRotations.m_capacityAndFlags = 2147483648;
+  mapping.m_triangleVertexRotations.m_capacityAndFlags = 0x80000000;
   hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::build<hkpBvCompressedMeshShape_Internals::GeometryProvider>(
     (hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun> *)v3->m_tree,
     &baseConfig,
     &baseProvider,
     &mapping);
-  v90 = (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)v4->m_triangleIndexToShapeKeyMap;
-  if ( v90 )
+  m_triangleIndexToShapeKeyMap = cInfo->m_triangleIndexToShapeKeyMap;
+  if ( m_triangleIndexToShapeKeyMap )
     hkArray<hkpTreeBroadPhase32::Handle,hkContainerHeapAllocator>::swap(
-      v90,
+      (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)m_triangleIndexToShapeKeyMap,
       (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&mapping);
-  v91 = (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)v4->m_convexShapeIndexToShapeKeyMap;
-  if ( v91 )
+  m_convexShapeIndexToShapeKeyMap = cInfo->m_convexShapeIndexToShapeKeyMap;
+  if ( m_convexShapeIndexToShapeKeyMap )
     hkArray<hkpTreeBroadPhase32::Handle,hkContainerHeapAllocator>::swap(
-      v91,
+      (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)m_convexShapeIndexToShapeKeyMap,
       (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&mapping.m_customIndexToKey);
   mapping.m_triangleVertexRotations.m_size = 0;
   if ( mapping.m_triangleVertexRotations.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       mapping.m_triangleVertexRotations.m_data,
       mapping.m_triangleVertexRotations.m_capacityAndFlags & 0x3FFFFFFF);
   mapping.m_triangleVertexRotations.m_data = 0i64;
-  mapping.m_triangleVertexRotations.m_capacityAndFlags = 2147483648;
+  mapping.m_triangleVertexRotations.m_capacityAndFlags = 0x80000000;
   mapping.m_customIndexToKey.m_size = 0;
   if ( mapping.m_customIndexToKey.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       mapping.m_customIndexToKey.m_data,
       4 * mapping.m_customIndexToKey.m_capacityAndFlags);
   mapping.m_customIndexToKey.m_data = 0i64;
-  mapping.m_customIndexToKey.m_capacityAndFlags = 2147483648;
+  mapping.m_customIndexToKey.m_capacityAndFlags = 0x80000000;
   mapping.m_triangleIndexToKey.m_size = 0;
   if ( mapping.m_triangleIndexToKey.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       mapping.m_triangleIndexToKey.m_data,
       4 * mapping.m_triangleIndexToKey.m_capacityAndFlags);
   mapping.m_triangleIndexToKey.m_data = 0i64;
-  mapping.m_triangleIndexToKey.m_capacityAndFlags = 2147483648;
+  mapping.m_triangleIndexToKey.m_capacityAndFlags = 0x80000000;
   hkpBvCompressedMeshShape_Internals::GeometryProvider::~GeometryProvider(&baseProvider);
-  v94 = 0;
-  if ( v95 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v93,
-      4 * v95);
-}r *)&hkContainerHeapAllocator::s_alloc,
-      v93,
-      4 * v95);
+  v93 = 0;
+  if ( v94 >= 0 )
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v92, 4 * v94);
+}r->bufFree(&hkContainerHeapAllocator::s_alloc, v92, 4 * v94);
 }
 
 // File Line: 294
 // RVA: 0xDE8D40
-void __fastcall hkpBvCompressedMeshShape::hkpBvCompressedMeshShape(hkpBvCompressedMeshShape *this, hkFinishLoadedObjectFlag flag)
+void __fastcall hkpBvCompressedMeshShape::hkpBvCompressedMeshShape(
+        hkpBvCompressedMeshShape *this,
+        hkFinishLoadedObjectFlag flag)
 {
-  hkpBvCompressedMeshShape *v2; // rbx
-  int v3; // [rsp+38h] [rbp+10h]
-
-  v3 = flag.m_finishing;
-  v2 = this;
-  hkpBvTreeShape::hkpBvTreeShape((hkpBvTreeShape *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpBvCompressedMeshShape::`vftable{for `hkpBvTreeShape};
-  v2->vfptr = (hkpShapeContainerVtbl *)&hkpBvCompressedMeshShape::`vftable{for `hkpShapeContainer};
-  if ( v3 )
+  hkpBvTreeShape::hkpBvTreeShape(this, flag);
+  this->hkpBvTreeShape::hkpShape::hkpShapeBase::hkcdShape::hkReferencedObject::hkBaseObject::vfptr = (hkBaseObjectVtbl *)&hkpBvCompressedMeshShape::`vftable{for `hkpBvTreeShape};
+  this->hkpShapeContainer::vfptr = (hkpShapeContainerVtbl *)&hkpBvCompressedMeshShape::`vftable{for `hkpShapeContainer};
+  if ( flag.m_finishing )
   {
-    v2->m_type.m_storage = 17;
-    v2->m_bvTreeType.m_storage = 3;
+    this->m_type.m_storage = 17;
+    this->m_bvTreeType.m_storage = 3;
   }
 }
 
@@ -683,169 +658,167 @@ void __fastcall hkpBvCompressedMeshShape::hkpBvCompressedMeshShape(hkpBvCompress
 // RVA: 0xDE8D90
 void __fastcall hkpBvCompressedMeshShape::~hkpBvCompressedMeshShape(hkpBvCompressedMeshShape *this)
 {
-  hkpBvCompressedMeshShape *v1; // rdi
-  hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun> *v2; // rcx
+  char *m_tree; // rcx
   int v3; // ebx
   hkStringPtr *v4; // rsi
-  int v5; // er8
-  int v6; // er8
-  int v7; // er8
+  int m_capacityAndFlags; // r8d
+  int v6; // r8d
+  int v7; // r8d
 
-  v1 = this;
-  v2 = (hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun> *)this->m_tree;
-  *(_QWORD *)&v2[-1].m_numPrimitiveKeys = &hkpBvCompressedMeshShape::`vftable{for `hkpBvTreeShape};
-  *(_QWORD *)&v2[-1].m_primitives.m_size = &hkpBvCompressedMeshShape::`vftable{for `hkpShapeContainer};
-  hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::~hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>(v2);
-  v3 = v1->m_userStringPalette.m_size - 1;
+  m_tree = this->m_tree;
+  *((_QWORD *)m_tree - 14) = &hkpBvCompressedMeshShape::`vftable{for `hkpBvTreeShape};
+  *((_QWORD *)m_tree - 9) = &hkpBvCompressedMeshShape::`vftable{for `hkpShapeContainer};
+  hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::~hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>((hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun> *)m_tree);
+  v3 = this->m_userStringPalette.m_size - 1;
   if ( v3 >= 0 )
   {
-    v4 = &v1->m_userStringPalette.m_data[v3];
+    v4 = &this->m_userStringPalette.m_data[v3];
     do
     {
-      hkStringPtr::~hkStringPtr(v4);
-      --v4;
+      hkStringPtr::~hkStringPtr(v4--);
       --v3;
     }
     while ( v3 >= 0 );
   }
-  v5 = v1->m_userStringPalette.m_capacityAndFlags;
-  v1->m_userStringPalette.m_size = 0;
-  if ( v5 >= 0 )
+  m_capacityAndFlags = this->m_userStringPalette.m_capacityAndFlags;
+  this->m_userStringPalette.m_size = 0;
+  if ( m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_userStringPalette.m_data,
-      8 * v5);
-  v1->m_userStringPalette.m_data = 0i64;
-  v1->m_userStringPalette.m_capacityAndFlags = 2147483648;
-  v6 = v1->m_userDataPalette.m_capacityAndFlags;
-  v1->m_userDataPalette.m_size = 0;
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_userStringPalette.m_data,
+      8 * m_capacityAndFlags);
+  this->m_userStringPalette.m_data = 0i64;
+  this->m_userStringPalette.m_capacityAndFlags = 0x80000000;
+  v6 = this->m_userDataPalette.m_capacityAndFlags;
+  this->m_userDataPalette.m_size = 0;
   if ( v6 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_userDataPalette.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_userDataPalette.m_data,
       4 * v6);
-  v1->m_userDataPalette.m_data = 0i64;
-  v1->m_userDataPalette.m_capacityAndFlags = 2147483648;
-  v7 = v1->m_collisionFilterInfoPalette.m_capacityAndFlags;
-  v1->m_collisionFilterInfoPalette.m_size = 0;
+  this->m_userDataPalette.m_data = 0i64;
+  this->m_userDataPalette.m_capacityAndFlags = 0x80000000;
+  v7 = this->m_collisionFilterInfoPalette.m_capacityAndFlags;
+  this->m_collisionFilterInfoPalette.m_size = 0;
   if ( v7 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_collisionFilterInfoPalette.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_collisionFilterInfoPalette.m_data,
       4 * v7);
-  v1->m_collisionFilterInfoPalette.m_data = 0i64;
-  v1->m_collisionFilterInfoPalette.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkpShapeContainerVtbl *)&hkpShapeContainer::`vftable;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+  this->m_collisionFilterInfoPalette.m_data = 0i64;
+  this->m_collisionFilterInfoPalette.m_capacityAndFlags = 0x80000000;
+  this->hkpShapeContainer::vfptr = (hkpShapeContainerVtbl *)&hkpShapeContainer::`vftable;
+  this->hkpBvTreeShape::hkpShape::hkpShapeBase::hkcdShape::hkReferencedObject::hkBaseObject::vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 347
 // RVA: 0xDE99E0
-void __fastcall createPalette_hkStringPtr_hkStringMap_unsigned_int_hkContainerHeapAllocator___(hkArray<hkStringPtr,hkContainerHeapAllocator> *values, int indexSize, hkArray<hkStringPtr,hkContainerHeapAllocator> *palette, hkArray<unsigned int,hkContainerHeapAllocator> *indices)
+void __fastcall createPalette_hkStringPtr_hkStringMap_unsigned_int_hkContainerHeapAllocator___(
+        hkArray<hkStringPtr,hkContainerHeapAllocator> *values,
+        char indexSize,
+        hkArray<hkStringPtr,hkContainerHeapAllocator> *palette,
+        hkArray<unsigned int,hkContainerHeapAllocator> *indices)
 {
   hkArray<hkStringPtr,hkContainerHeapAllocator> *v4; // r12
-  char v5; // di
-  hkArray<unsigned int,hkContainerHeapAllocator> *v6; // r13
-  hkArray<hkStringPtr,hkContainerHeapAllocator> *v7; // rbx
   int v8; // eax
-  signed int v9; // er15
+  int v9; // r15d
   unsigned int v10; // esi
   int v11; // eax
-  int v12; // er9
-  __int64 v13; // r14
+  int v12; // r9d
+  __int64 m_size; // r14
   int v14; // eax
   int v15; // eax
-  int v16; // er9
+  int v16; // r9d
   int v17; // ebp
   __int64 v18; // rdi
-  Dummy *v19; // rax
-  int v20; // er14
+  Dummy *inserted; // rax
+  unsigned int Value; // r14d
   hkStringPtr *v21; // r12
   hkStringPtr *v22; // rcx
   int v23; // edx
-  hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator> v24; // [rsp+30h] [rbp-58h]
-  hkArray<hkStringPtr,hkContainerHeapAllocator> *v25; // [rsp+90h] [rbp+8h]
-  hkResult result; // [rsp+98h] [rbp+10h]
+  hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator> v24; // [rsp+30h] [rbp-58h] BYREF
+  hkResult result; // [rsp+98h] [rbp+10h] BYREF
   __int64 v27; // [rsp+A0h] [rbp+18h]
 
-  v25 = values;
   v4 = values;
-  v5 = indexSize;
-  v6 = indices;
-  v7 = palette;
   hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>(
     &v24,
     0);
-  v8 = v7->m_capacityAndFlags & 0x3FFFFFFF;
-  v9 = 1 << v5;
+  v8 = palette->m_capacityAndFlags & 0x3FFFFFFF;
+  v9 = 1 << indexSize;
   v10 = 0;
-  if ( v8 < 1 << v5 )
+  if ( v8 < 1 << indexSize )
   {
     v11 = 2 * v8;
-    v12 = 1 << v5;
+    v12 = 1 << indexSize;
     if ( v9 < v11 )
       v12 = v11;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v7, v12, 8);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&palette->m_data, v12, 8);
   }
-  v13 = v4->m_size;
-  v14 = v6->m_capacityAndFlags & 0x3FFFFFFF;
-  if ( v14 < (signed int)v13 )
+  m_size = v4->m_size;
+  v14 = indices->m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v14 < (int)m_size )
   {
     v15 = 2 * v14;
-    v16 = v13;
-    if ( (signed int)v13 < v15 )
+    v16 = v4->m_size;
+    if ( (int)m_size < v15 )
       v16 = v15;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v6, v16, 4);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&indices->m_data, v16, 4);
   }
-  v6->m_size = v13;
+  indices->m_size = m_size;
   v17 = 0;
   v18 = 0i64;
-  v27 = v13;
-  if ( (signed int)v13 > 0 )
+  v27 = m_size;
+  if ( (int)m_size > 0 )
   {
     do
     {
-      v19 = hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::findOrInsertKey(
-              &v24,
-              (_QWORD)v4->m_data[v18].m_stringAndFlag & 0xFFFFFFFFFFFFFFFEui64,
-              v10);
-      v20 = hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getValue(
-              (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&v24,
-              v19);
-      if ( v20 == v10 )
+      inserted = hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::findOrInsertKey(
+                   &v24,
+                   (const char *)((unsigned __int64)v4->m_data[v18].m_stringAndFlag & 0xFFFFFFFFFFFFFFFEui64),
+                   v10);
+      Value = hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getValue(
+                (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&v24,
+                inserted);
+      if ( Value == v10 )
       {
         if ( v10 == v9 )
         {
-          v20 = v9 - 1;
+          Value = v9 - 1;
         }
         else
         {
           v21 = &v4->m_data[v17];
-          if ( v7->m_size == (v7->m_capacityAndFlags & 0x3FFFFFFF) )
-            hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v7, 8);
-          v22 = &v7->m_data[v7->m_size];
+          if ( palette->m_size == (palette->m_capacityAndFlags & 0x3FFFFFFF) )
+            hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&palette->m_data, 8);
+          v22 = &palette->m_data[palette->m_size];
           if ( v22 )
             hkStringPtr::hkStringPtr(v22, v21);
-          ++v7->m_size;
-          v4 = v25;
+          ++palette->m_size;
+          v4 = values;
           ++v10;
         }
       }
       ++v18;
       ++v17;
-      v6->m_data[v18 - 1] = v20;
+      indices->m_data[v18 - 1] = Value;
     }
     while ( v18 < v27 );
   }
-  v23 = v7->m_size;
-  if ( v23 < (v7->m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reduce((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v7, 8, 0i64, v23);
+  v23 = palette->m_size;
+  if ( v23 < (palette->m_capacityAndFlags & 0x3FFFFFFF) )
+    hkArrayUtil::_reduce(&hkContainerHeapAllocator::s_alloc, (const void **)&palette->m_data, 8, 0i64, v23);
   hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::~hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>(&v24);
 }
 
 // File Line: 392
 // RVA: 0xDE8F00
-void __fastcall createIntPalette(hkArray<unsigned int,hkContainerHeapAllocator> *values, int indexSize, hkArray<unsigned int,hkContainerHeapAllocator> *palette, hkArray<unsigned int,hkContainerHeapAllocator> *indices)
+// attributes: thunk
+void __fastcall createIntPalette(
+        hkArray<unsigned int,hkContainerHeapAllocator> *values,
+        int indexSize,
+        hkArray<unsigned int,hkContainerHeapAllocator> *palette,
+        hkArray<unsigned int,hkContainerHeapAllocator> *indices)
 {
   createPalette_unsigned_int_hkMap__anonymous_namespace_::MapKey32_int_A0x59affef2::MapOperationsMapKey32_hkContainerHeapAllocator___(
     values,
@@ -856,108 +829,105 @@ void __fastcall createIntPalette(hkArray<unsigned int,hkContainerHeapAllocator> 
 
 // File Line: 397
 // RVA: 0xDE8F10
-void __fastcall createStringPalette(hkArray<hkStringPtr,hkContainerHeapAllocator> *values, int indexSize, hkArray<hkStringPtr,hkContainerHeapAllocator> *palette, hkArray<unsigned int,hkContainerHeapAllocator> *indices)
+// attributes: thunk
+void __fastcall createStringPalette(
+        hkArray<hkStringPtr,hkContainerHeapAllocator> *values,
+        int indexSize,
+        hkArray<hkStringPtr,hkContainerHeapAllocator> *palette,
+        hkArray<unsigned int,hkContainerHeapAllocator> *indices)
 {
   createPalette_hkStringPtr_hkStringMap_unsigned_int_hkContainerHeapAllocator___(values, indexSize, palette, indices);
 }
 
 // File Line: 427
 // RVA: 0xDE8F20
-void __fastcall computeWeldingInfo(hkpBvCompressedMeshShapeCinfo *cinfo, hkBool weldOpenEdges, hkArray<unsigned short,hkContainerHeapAllocator> *weldingInfo)
+void __fastcall computeWeldingInfo(
+        hkpBvCompressedMeshShapeCinfo *cinfo,
+        hkBool weldOpenEdges,
+        hkArray<unsigned short,hkContainerHeapAllocator> *weldingInfo)
 {
-  hkArray<unsigned short,hkContainerHeapAllocator> *v3; // rbx
-  hkpBvCompressedMeshShapeCinfo *v4; // rdi
   int v5; // eax
   int v6; // ecx
   __int64 v7; // r13
   int v8; // ecx
-  int v9; // er9
-  signed int i; // er15
-  unsigned int v11; // er14
+  int v9; // r9d
+  int i; // r15d
+  unsigned int m_firstFree; // r14d
   __m128 v12; // xmm6
   __m128 v13; // xmm7
-  hkcdDynamicTree::CodecRawUint *v14; // rdx
+  hkcdDynamicTree::CodecRawUint *m_data; // rdx
   unsigned __int64 v15; // rbx
   hkcdDynamicTree::CodecRawUint *v16; // r9
-  __int64 v17; // r12
+  __int64 m_root; // r12
   hkVector4f v18; // xmm7
   hkVector4f v19; // xmm8
   unsigned int v20; // edx
-  __m128 *v21; // r10
+  __m128 *p_m_quad; // r10
   __int64 v22; // rax
-  signed __int64 v23; // rsi
+  hkcdDynamicTree::CodecRawUint *v23; // rsi
   __m128 v24; // xmm9
   __m128 v25; // xmm10
-  signed __int64 v26; // rcx
+  __int64 v26; // rcx
   __m128 v27; // xmm1
-  __m128 v28; // xmm3
-  __m128 *v29; // rcx
-  __m128 v30; // xmm2
+  __m128 *v28; // rcx
+  __m128 m_quad; // xmm2
+  __m128 v30; // xmm3
   __m128 v31; // xmm3
-  __m128 v32; // xmm3
+  __m128 v32; // xmm2
   __m128 v33; // xmm2
-  __m128 v34; // xmm2
-  __m128 v35; // xmm6
+  __m128 v34; // xmm6
+  __m128 v35; // xmm5
   __m128 v36; // xmm5
-  __m128 v37; // xmm5
-  unsigned __int64 v38; // r11
-  float v39; // eax
-  signed __int64 v40; // rcx
-  __m128 v41; // xmm1
-  unsigned int v42; // ecx
-  unsigned int v43; // er15
-  __m128 v44; // xmm6
-  hkLifoAllocator *v45; // rax
-  hkcdTreeQueries<hkcdTreeQueriesStacks::Dynamic,64,0>::AabbOverlapsNoEarlyExitWrapper<NeighborsQuery> *v46; // r9
-  hkcdDynamicTree::CodecRawUint *v47; // rcx
-  unsigned __int64 v48; // rdx
-  int v49; // eax
-  char *v50; // rsi
-  signed int v51; // ebx
-  hkLifoAllocator *v52; // rax
-  int v53; // er8
-  __int64 v54; // r12
-  int v55; // eax
-  hkVector4f *v56; // r13
-  signed int v57; // er14
-  __int64 v58; // rsi
-  signed __int64 v59; // rbx
-  __int64 v60; // r15
-  __int64 v61; // rbx
-  unsigned __int16 v62; // ax
-  __int64 v63; // rsi
-  hkcdDynamicTree::DynamicStorage<0,hkcdDynamicTree::AnisotropicMetric,hkcdDynamicTree::CodecRawUint> v64; // [rsp+30h] [rbp-C8h]
-  int v65; // [rsp+48h] [rbp-B0h]
-  unsigned int branch[2]; // [rsp+4Ch] [rbp-ACh]
-  hkcdDynamicTree::CodecRawUint *v67; // [rsp+58h] [rbp-A0h]
+  __int64 v37; // r11
+  int v38; // eax
+  signed __int64 v39; // rcx
+  __m128 v40; // xmm1
+  unsigned int v41; // ecx
+  int v42; // r15d
+  __m128 v43; // xmm6
+  hkLifoAllocator *Value; // rax
+  hkcdTreeQueries<hkcdTreeQueriesStacks::Dynamic,64,0>::AabbOverlapsNoEarlyExitWrapper<NeighborsQuery> *v45; // r9
+  hkcdDynamicTree::CodecRawUint *m_cur; // rcx
+  hkVector4f *p_m_max; // rdx
+  int m_size; // eax
+  char *v49; // rsi
+  signed int v50; // ebx
+  hkLifoAllocator *v51; // rax
+  int v52; // r8d
+  __int64 v53; // r12
+  int v54; // eax
+  hkVector4f *v55; // r13
+  int v56; // r14d
+  __int64 v57; // rsi
+  hkVector4f *v58; // rbx
+  __int64 v59; // r15
+  __int64 v60; // rbx
+  unsigned __int16 v61; // ax
+  __int64 v62; // rsi
+  hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorage32> v63; // [rsp+30h] [rbp-C8h] BYREF
+  hkcdDynamicTree::CodecRawUint *v64; // [rsp+58h] [rbp-A0h] BYREF
   int numNeighbors[2]; // [rsp+60h] [rbp-98h]
-  hkcdDynamicTree::DefaultTree48Storage output; // [rsp+68h] [rbp-90h]
-  unsigned int v70; // [rsp+90h] [rbp-68h]
-  __int64 v71; // [rsp+98h] [rbp-60h]
-  unsigned int v72; // [rsp+A0h] [rbp-58h]
-  unsigned int v73; // [rsp+A4h] [rbp-54h]
-  unsigned int v74; // [rsp+A8h] [rbp-50h]
-  unsigned int v75; // [rsp+B0h] [rbp-48h]
-  unsigned int v76; // [rsp+B4h] [rbp-44h]
-  unsigned int v77; // [rsp+B8h] [rbp-40h]
-  hkVector4f triangle; // [rsp+C8h] [rbp-30h]
-  __m128 v79; // [rsp+D8h] [rbp-20h]
-  __m128 v80; // [rsp+E8h] [rbp-10h]
-  unsigned int v81; // [rsp+F8h] [rbp+0h]
-  __int64 *v82; // [rsp+100h] [rbp+8h]
-  hkcdTreeQueriesStacks::Dynamic<64,unsigned int> stackInstance; // [rsp+108h] [rbp+10h]
-  __m128 v84; // [rsp+128h] [rbp+30h]
-  void *retaddr; // [rsp+1D8h] [rbp+E0h]
-  hkBool v86; // [rsp+1E0h] [rbp+E8h]
-  __int64 *v87; // [rsp+1E8h] [rbp+F0h]
-  hkArray<unsigned short,hkContainerHeapAllocator> *result; // [rsp+1F0h] [rbp+F8h]
+  hkcdDynamicTree::DefaultTree48Storage output; // [rsp+68h] [rbp-90h] BYREF
+  int v67; // [rsp+90h] [rbp-68h]
+  __int64 v68; // [rsp+98h] [rbp-60h]
+  int v69[4]; // [rsp+A0h] [rbp-58h] BYREF
+  int v70[6]; // [rsp+B0h] [rbp-48h] BYREF
+  hkVector4f triangle; // [rsp+C8h] [rbp-30h] BYREF
+  __m128 v72; // [rsp+D8h] [rbp-20h] BYREF
+  __m128 v73; // [rsp+E8h] [rbp-10h] BYREF
+  int v74; // [rsp+F8h] [rbp+0h] BYREF
+  __int64 *v75; // [rsp+100h] [rbp+8h]
+  hkcdTreeQueriesStacks::Dynamic<64,unsigned int> stackInstance; // [rsp+108h] [rbp+10h] BYREF
+  __m128 v77; // [rsp+128h] [rbp+30h]
+  void *retaddr; // [rsp+1D8h] [rbp+E0h] BYREF
+  hkBool v79; // [rsp+1E0h] [rbp+E8h]
+  __int64 *v80; // [rsp+1E8h] [rbp+F0h]
+  hkArray<unsigned short,hkContainerHeapAllocator> *result; // [rsp+1F0h] [rbp+F8h] BYREF
 
   result = weldingInfo;
-  LOBYTE(v87) = weldOpenEdges;
-  v3 = weldingInfo;
-  v4 = cinfo;
-  v5 = ((__int64 (*)(void))cinfo->vfptr->getNumTriangles)();
-  v6 = v3->m_capacityAndFlags & 0x3FFFFFFF;
+  LOBYTE(v80) = weldOpenEdges;
+  v5 = cinfo->vfptr->getNumTriangles(cinfo);
+  v6 = weldingInfo->m_capacityAndFlags & 0x3FFFFFFF;
   v7 = v5;
   if ( v6 < v5 )
   {
@@ -967,288 +937,266 @@ void __fastcall computeWeldingInfo(hkpBvCompressedMeshShapeCinfo *cinfo, hkBool 
       v9 = v8;
     hkArrayUtil::_reserve(
       (hkResult *)&retaddr,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      v3,
+      &hkContainerHeapAllocator::s_alloc,
+      (const void **)&weldingInfo->m_data,
       v9,
       2);
   }
-  v3->m_size = v7;
-  v64.m_nodes.m_size = 0;
-  v64.m_nodes.m_data = 0i64;
-  v64.m_nodes.m_capacityAndFlags = 2147483648;
-  v64.m_firstFree = 0;
-  *(_QWORD *)branch = 0i64;
-  v65 = 0;
+  weldingInfo->m_size = v7;
+  v63.m_nodes.m_size = 0;
+  v63.m_nodes.m_data = 0i64;
+  v63.m_nodes.m_capacityAndFlags = 0x80000000;
+  v63.m_firstFree = 0;
+  *(_QWORD *)&v63.m_path = 0i64;
+  v63.m_numLeaves = 0;
   hkcdDynamicTree::DynamicStorage<0,hkcdDynamicTree::AnisotropicMetric,hkcdDynamicTree::CodecRawUint>::reserveNodes(
-    &v64,
+    &v63,
     (hkResult *)&retaddr,
     2 * v7);
-  for ( i = 0; i < (signed int)v7; ++i )
+  for ( i = 0; i < (int)v7; ++i )
   {
-    v4->vfptr->getIndices(v4, i, (int *)&output.m_root);
-    v4->vfptr->getVertex(v4, output.m_root, &triangle);
-    v4->vfptr->getVertex(v4, *(&output.m_root + 1), (hkVector4f *)&v79);
-    v4->vfptr->getVertex(v4, v70, (hkVector4f *)&v80);
-    v11 = v64.m_firstFree;
-    v12 = _mm_max_ps(_mm_max_ps(triangle.m_quad, v79), v80);
-    v13 = _mm_min_ps(_mm_min_ps(triangle.m_quad, v79), v80);
-    if ( !v64.m_firstFree )
+    cinfo->vfptr->getIndices(cinfo, i, (int *)&output.m_root);
+    cinfo->vfptr->getVertex(cinfo, output.m_root, &triangle);
+    cinfo->vfptr->getVertex(cinfo, *(&output.m_root + 1), (hkVector4f *)&v72);
+    cinfo->vfptr->getVertex(cinfo, v67, (hkVector4f *)&v73);
+    m_firstFree = v63.m_firstFree;
+    v12 = _mm_max_ps(_mm_max_ps(triangle.m_quad, v72), v73);
+    v13 = _mm_min_ps(_mm_min_ps(triangle.m_quad, v72), v73);
+    if ( !v63.m_firstFree )
     {
       hkcdDynamicTree::DynamicStorage<0,hkcdDynamicTree::AnisotropicMetric,hkcdDynamicTree::CodecRawUint>::reserveNodes(
-        &v64,
+        &v63,
         (hkResult *)&retaddr,
-        v64.m_firstFree + 1);
-      v11 = v64.m_firstFree;
+        1);
+      m_firstFree = v63.m_firstFree;
     }
-    v14 = v64.m_nodes.m_data;
-    v64.m_firstFree = v64.m_nodes.m_data[v11].m_aabb.m_min.m_quad.m128_u32[0];
-    v15 = v11;
-    v64.m_nodes.m_data[v15].m_children[0] = 0;
-    v14[v15].m_children[1] = i;
-    v14[v15].m_aabb.m_min.m_quad = v13;
-    v14[v15].m_aabb.m_max.m_quad = v12;
-    v16 = v64.m_nodes.m_data;
-    v17 = branch[1];
-    v18.m_quad = (__m128)v64.m_nodes.m_data[v11].m_aabb.m_min;
-    v19.m_quad = (__m128)v64.m_nodes.m_data[v11].m_aabb.m_max;
-    if ( branch[1] )
+    m_data = v63.m_nodes.m_data;
+    v63.m_firstFree = v63.m_nodes.m_data[m_firstFree].m_aabb.m_min.m_quad.m128_u32[0];
+    v15 = m_firstFree;
+    v63.m_nodes.m_data[v15].m_children[0] = 0;
+    m_data[v15].m_children[1] = i;
+    m_data[v15].m_aabb.m_min.m_quad = v13;
+    m_data[v15].m_aabb.m_max.m_quad = v12;
+    v16 = v63.m_nodes.m_data;
+    m_root = v63.m_root;
+    v18.m_quad = (__m128)v63.m_nodes.m_data[m_firstFree].m_aabb.m_min;
+    v19.m_quad = (__m128)v63.m_nodes.m_data[m_firstFree].m_aabb.m_max;
+    if ( v63.m_root )
     {
-      v20 = v64.m_firstFree;
-      if ( !v64.m_firstFree )
+      v20 = v63.m_firstFree;
+      if ( !v63.m_firstFree )
       {
         hkcdDynamicTree::DynamicStorage<0,hkcdDynamicTree::AnisotropicMetric,hkcdDynamicTree::CodecRawUint>::reserveNodes(
-          &v64,
+          &v63,
           (hkResult *)&result,
-          v64.m_firstFree + 1);
-        v20 = v64.m_firstFree;
-        v16 = v64.m_nodes.m_data;
+          1);
+        v20 = v63.m_firstFree;
+        v16 = v63.m_nodes.m_data;
       }
-      v21 = &v16[v17].m_aabb.m_min.m_quad;
-      v64.m_firstFree = v16[v20].m_aabb.m_min.m_quad.m128_u32[0];
-      v22 = v21[2].m128_u32[1];
-      v23 = (signed __int64)&v16[v20];
+      p_m_quad = &v16[m_root].m_aabb.m_min.m_quad;
+      v63.m_firstFree = v16[v20].m_aabb.m_min.m_quad.m128_u32[0];
+      v22 = p_m_quad[2].m128_u32[1];
+      v23 = &v16[v20];
       if ( (_DWORD)v22 )
       {
         v24 = _mm_add_ps(v19.m_quad, v18.m_quad);
         v25 = _mm_sub_ps(v19.m_quad, v18.m_quad);
         do
         {
-          v26 = v21[2].m128_u32[2];
-          v27 = _mm_max_ps(v21[1], v19.m_quad);
-          *v21 = _mm_min_ps(*v21, v18.m_quad);
-          v21[1] = v27;
-          v67 = &v16[v22];
-          v28 = v67->m_aabb.m_max.m_quad;
-          v29 = &v16[v26].m_aabb.m_min.m_quad;
-          v16 = v64.m_nodes.m_data;
-          v30 = v28;
-          v31 = _mm_sub_ps(v28, v67->m_aabb.m_min.m_quad);
-          *(_QWORD *)numNeighbors = v29;
-          v32 = _mm_add_ps(v31, v25);
-          v33 = _mm_sub_ps(_mm_add_ps(v30, v67->m_aabb.m_min.m_quad), v24);
-          v34 = _mm_mul_ps(v33, v33);
-          v35 = _mm_add_ps(_mm_sub_ps(v29[1], *v29), v25);
-          v36 = _mm_sub_ps(_mm_add_ps(v29[1], *v29), v24);
-          v37 = _mm_mul_ps(v36, v36);
-          v21 = (__m128 *)*(&v67
-                          + ((float)((float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v34, v34, 85))
-                                                   + COERCE_FLOAT(_mm_shuffle_ps(v34, v34, 0)))
-                                           + COERCE_FLOAT(_mm_shuffle_ps(v34, v34, 170)))
-                                   * (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v32, v32, 85))
-                                                   + COERCE_FLOAT(_mm_shuffle_ps(v32, v32, 0)))
-                                           + COERCE_FLOAT(_mm_shuffle_ps(v32, v32, 170)))) > (float)((float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v37, v37, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v37, v37, 0))) + COERCE_FLOAT(_mm_shuffle_ps(v37, v37, 170))) * (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v35, v35, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v35, v35, 0))) + COERCE_FLOAT(_mm_shuffle_ps(v35, v35, 170))))));
-          v22 = v21[2].m128_u32[1];
+          v26 = p_m_quad[2].m128_u32[2];
+          v27 = _mm_max_ps(p_m_quad[1], v19.m_quad);
+          *p_m_quad = _mm_min_ps(*p_m_quad, v18.m_quad);
+          p_m_quad[1] = v27;
+          v64 = &v16[v22];
+          v28 = &v16[v26].m_aabb.m_min.m_quad;
+          v16 = v63.m_nodes.m_data;
+          m_quad = v64->m_aabb.m_max.m_quad;
+          v30 = _mm_sub_ps(m_quad, v64->m_aabb.m_min.m_quad);
+          *(_QWORD *)numNeighbors = v28;
+          v31 = _mm_add_ps(v30, v25);
+          v32 = _mm_sub_ps(_mm_add_ps(m_quad, v64->m_aabb.m_min.m_quad), v24);
+          v33 = _mm_mul_ps(v32, v32);
+          v34 = _mm_add_ps(_mm_sub_ps(v28[1], *v28), v25);
+          v35 = _mm_sub_ps(_mm_add_ps(v28[1], *v28), v24);
+          v36 = _mm_mul_ps(v35, v35);
+          p_m_quad = *(__m128 **)&numNeighbors[2
+                                             * ((float)((float)((float)(_mm_shuffle_ps(v33, v33, 85).m128_f32[0]
+                                                                      + _mm_shuffle_ps(v33, v33, 0).m128_f32[0])
+                                                              + _mm_shuffle_ps(v33, v33, 170).m128_f32[0])
+                                                      * (float)((float)(_mm_shuffle_ps(v31, v31, 85).m128_f32[0]
+                                                                      + _mm_shuffle_ps(v31, v31, 0).m128_f32[0])
+                                                              + _mm_shuffle_ps(v31, v31, 170).m128_f32[0])) > (float)((float)((float)(_mm_shuffle_ps(v36, v36, 85).m128_f32[0] + _mm_shuffle_ps(v36, v36, 0).m128_f32[0]) + _mm_shuffle_ps(v36, v36, 170).m128_f32[0]) * (float)((float)(_mm_shuffle_ps(v34, v34, 85).m128_f32[0] + _mm_shuffle_ps(v34, v34, 0).m128_f32[0]) + _mm_shuffle_ps(v34, v34, 170).m128_f32[0])))
+                                             - 2];
+          v22 = p_m_quad[2].m128_u32[1];
         }
         while ( (_DWORD)v22 );
       }
-      v38 = ((unsigned __int64)((unsigned __int128)((v23 - (signed __int64)v16) * (signed __int128)3074457345618258603i64) >> 64) >> 63)
-          + ((signed __int64)((unsigned __int128)((v23 - (signed __int64)v16) * (signed __int128)3074457345618258603i64) >> 64) >> 3);
-      v39 = v21[2].m128_f32[0];
-      if ( v39 == 0.0 )
-        branch[1] = ((unsigned __int64)((unsigned __int128)((v23 - (signed __int64)v16)
-                                                          * (signed __int128)3074457345618258603i64) >> 64) >> 63)
-                  + ((signed __int64)((unsigned __int128)((v23 - (signed __int64)v16)
-                                                        * (signed __int128)3074457345618258603i64) >> 64) >> 3);
+      v37 = v23 - v16;
+      v38 = p_m_quad[2].m128_i32[0];
+      if ( v38 )
+        v16[v38].m_children[v16[v38].m_children[1] == (unsigned int)(((char *)p_m_quad - (char *)v16) / 48)] = v37;
       else
-        v16->m_children[(v16[LODWORD(v39)].m_children[1] == ((unsigned __int64)((unsigned __int128)(((char *)v21 - (char *)v16)
-                                                                                                  * (signed __int128)3074457345618258603i64) >> 64) >> 63)
-                                                          + (unsigned int)((signed __int64)((unsigned __int128)(((char *)v21 - (char *)v16) * (signed __int128)3074457345618258603i64) >> 64) >> 3))
-                      + 12i64 * LODWORD(v39)] = v38;
-      *(float *)(v23 + 32) = v21[2].m128_f32[0];
-      v40 = (char *)v21 - (char *)v64.m_nodes.m_data;
-      *(_DWORD *)(v23 + 40) = v11;
-      *(_DWORD *)(v23 + 36) = ((unsigned __int64)((unsigned __int128)(v40 * (signed __int128)3074457345618258603i64) >> 64) >> 63)
-                            + ((signed __int64)((unsigned __int128)(v40 * (signed __int128)3074457345618258603i64) >> 64) >> 3);
-      v21[2].m128_i32[0] = v38;
-      v64.m_nodes.m_data[v11].m_parent = v38;
-      v41 = _mm_max_ps(v21[1], v19.m_quad);
-      *(__m128 *)v23 = _mm_min_ps(*v21, v18.m_quad);
-      *(__m128 *)(v23 + 16) = v41;
+        v63.m_root = v23 - v16;
+      v23->m_parent = p_m_quad[2].m128_u32[0];
+      v39 = (char *)p_m_quad - (char *)v63.m_nodes.m_data;
+      v23->m_children[1] = m_firstFree;
+      v23->m_children[0] = v39 / 48;
+      p_m_quad[2].m128_i32[0] = v37;
+      v63.m_nodes.m_data[m_firstFree].m_parent = v37;
+      v40 = _mm_max_ps(p_m_quad[1], v19.m_quad);
+      v23->m_aabb.m_min.m_quad = _mm_min_ps(*p_m_quad, v18.m_quad);
+      v23->m_aabb.m_max.m_quad = v40;
     }
     else
     {
-      branch[1] = v11;
-      v64.m_nodes.m_data[v11].m_parent = 0;
+      v63.m_root = m_firstFree;
+      v63.m_nodes.m_data[m_firstFree].m_parent = 0;
     }
-    ++v65;
+    ++v63.m_numLeaves;
   }
-  hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorage32>::rebuildBranchSAH(
-    (hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorage32> *)&v64,
-    branch[1],
-    (hkBool)1,
-    32,
-    16);
-  if ( branch[1] )
+  hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorage32>::rebuildBranchSAH(&v63, v63.m_root, (hkBool)1, 32, 16);
+  if ( v63.m_root )
   {
     output.m_nodes.m_size = 0;
     output.m_nodes.m_data = 0i64;
-    output.m_nodes.m_capacityAndFlags = 2147483648;
+    output.m_nodes.m_capacityAndFlags = 0x80000000;
     *(_QWORD *)(&output.m_firstFree + 1) = 0i64;
     output.m_firstFree = 0;
     hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorage32>::copyTo<hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorage32>>(
-      (hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorage32> *)&v64,
+      &v63,
       &output);
     hkArray<hkpTreeBroadPhase32::Handle,hkContainerHeapAllocator>::swap(
       (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&output,
-      (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&v64);
-    v42 = output.m_firstFree;
-    output.m_firstFree = v64.m_firstFree;
-    v64.m_firstFree = v42;
-    branch[1] = 1;
+      (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&v63);
+    v41 = output.m_firstFree;
+    output.m_firstFree = v63.m_firstFree;
+    v63.m_firstFree = v41;
+    v63.m_root = 1;
     output.m_nodes.m_size = 0;
     if ( output.m_nodes.m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+        &hkContainerHeapAllocator::s_alloc,
         output.m_nodes.m_data,
         48 * (output.m_nodes.m_capacityAndFlags & 0x3FFFFFFF));
   }
   LODWORD(retaddr) = 1028443341;
-  v43 = 0;
+  v42 = 0;
   LODWORD(result) = 0;
-  v71 = 0i64;
-  v44 = _mm_shuffle_ps((__m128)0x3D4CCCCDu, (__m128)0x3D4CCCCDu, 0);
+  v68 = 0i64;
+  v43 = _mm_shuffle_ps((__m128)0x3D4CCCCDu, (__m128)0x3D4CCCCDu, 0);
   *(_QWORD *)&output.m_root = v7;
-  if ( (signed int)v7 > 0 )
+  if ( (int)v7 > 0 )
   {
     do
     {
-      v4->vfptr->getIndices(v4, v43, (int *)&v75);
-      v4->vfptr->getVertex(v4, v75, &triangle);
-      v4->vfptr->getVertex(v4, v76, (hkVector4f *)&v79);
-      v4->vfptr->getVertex(v4, v77, (hkVector4f *)&v80);
-      v82 = (__int64 *)&v67;
-      v67 = 0i64;
+      cinfo->vfptr->getIndices(cinfo, v42, v70);
+      cinfo->vfptr->getVertex(cinfo, v70[0], &triangle);
+      cinfo->vfptr->getVertex(cinfo, v70[1], (hkVector4f *)&v72);
+      cinfo->vfptr->getVertex(cinfo, v70[2], (hkVector4f *)&v73);
+      v75 = (__int64 *)&v64;
+      v64 = 0i64;
       numNeighbors[0] = 0;
-      numNeighbors[1] = 2147483648;
-      v81 = v43;
-      stackInstance.m_stack.m_data = &v81;
+      numNeighbors[1] = 0x80000000;
+      v74 = v42;
+      stackInstance.m_stack.m_data = (unsigned int *)&v74;
       output.m_nodes.m_data = 0i64;
-      v84 = _mm_add_ps(_mm_max_ps(_mm_max_ps(triangle.m_quad, v79), v80), v44);
+      v77 = _mm_add_ps(_mm_max_ps(_mm_max_ps(triangle.m_quad, v72), v73), v43);
       output.m_nodes.m_size = 0;
-      output.m_nodes.m_capacityAndFlags = 2147483648;
+      output.m_nodes.m_capacityAndFlags = 0x80000000;
       output.m_firstFree = 64;
       *(__m128 *)&stackInstance.m_stack.m_localMemory = _mm_sub_ps(
-                                                          _mm_min_ps(_mm_min_ps(triangle.m_quad, v79), v80),
-                                                          v44);
-      v45 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v47 = (hkcdDynamicTree::CodecRawUint *)v45->m_cur;
-      v48 = (unsigned __int64)&v47[5].m_aabb.m_max;
-      if ( v45->m_slabSize < 256 || (void *)v48 > v45->m_end )
-        v47 = (hkcdDynamicTree::CodecRawUint *)hkLifoAllocator::allocateFromNewSlab(v45, 256);
+                                                          _mm_min_ps(_mm_min_ps(triangle.m_quad, v72), v73),
+                                                          v43);
+      Value = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+      m_cur = (hkcdDynamicTree::CodecRawUint *)Value->m_cur;
+      p_m_max = &m_cur[5].m_aabb.m_max;
+      if ( Value->m_slabSize < 256 || p_m_max > Value->m_end )
+        m_cur = (hkcdDynamicTree::CodecRawUint *)hkLifoAllocator::allocateFromNewSlab(Value, 256);
       else
-        v45->m_cur = (void *)v48;
-      output.m_nodes.m_data = v47;
-      *(_QWORD *)&output.m_firstFree = v47;
+        Value->m_cur = p_m_max;
+      output.m_nodes.m_data = m_cur;
+      *(_QWORD *)&output.m_firstFree = m_cur;
       output.m_nodes.m_capacityAndFlags = -2147483584;
       hkcdTreeQueries<hkcdTreeQueriesStacks::Dynamic,64,0>::unary<hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorage32>,hkcdTreeQueriesStacks::Dynamic<64,unsigned int>,hkcdTreeQueries<hkcdTreeQueriesStacks::Dynamic,64,0>::AabbOverlapsNoEarlyExitWrapper<`anonymous namespace::NeighborsQuery>>(
-        (hkcdTreeQueries<hkcdTreeQueriesStacks::Dynamic,64,0> *)&v64,
-        (hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorage32> *)&output.m_nodes,
+        (hkcdTreeQueries<hkcdTreeQueriesStacks::Dynamic,64,0> *)&v63,
+        &output,
         &stackInstance,
-        v46);
-      v49 = output.m_nodes.m_size;
-      v50 = *(char **)&output.m_firstFree;
+        v45);
+      m_size = output.m_nodes.m_size;
+      v49 = *(char **)&output.m_firstFree;
       if ( *(hkcdDynamicTree::CodecRawUint **)&output.m_firstFree == output.m_nodes.m_data )
-        v49 = 0;
-      output.m_nodes.m_size = v49;
-      v51 = (4 * output.m_firstFree + 127) & 0xFFFFFF80;
-      v52 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v53 = (v51 + 15) & 0xFFFFFFF0;
-      if ( v51 > v52->m_slabSize || &v50[v53] != v52->m_cur || v52->m_firstNonLifoEnd == v50 )
-        hkLifoAllocator::slowBlockFree(v52, v50, v53);
+        m_size = 0;
+      output.m_nodes.m_size = m_size;
+      v50 = (4 * output.m_firstFree + 127) & 0xFFFFFF80;
+      v51 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+      v52 = (v50 + 15) & 0xFFFFFFF0;
+      if ( v50 > v51->m_slabSize || &v49[v52] != v51->m_cur || v51->m_firstNonLifoEnd == v49 )
+        hkLifoAllocator::slowBlockFree(v51, v49, v52);
       else
-        v52->m_cur = v50;
+        v51->m_cur = v49;
       output.m_nodes.m_size = 0;
       if ( output.m_nodes.m_capacityAndFlags >= 0 )
         hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+          &hkContainerHeapAllocator::s_alloc,
           output.m_nodes.m_data,
           4 * output.m_nodes.m_capacityAndFlags);
-      v54 = (unsigned int)numNeighbors[0];
-      v55 = 3 * numNeighbors[0];
+      v53 = (unsigned int)numNeighbors[0];
+      v54 = 3 * numNeighbors[0];
       if ( 3 * numNeighbors[0] )
       {
         LODWORD(retaddr) = 48 * numNeighbors[0];
-        v56 = (hkVector4f *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
-                              (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-                              (int *)&retaddr);
-        v55 = (signed int)retaddr / 16;
+        v55 = (hkVector4f *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
+                              &hkContainerHeapAllocator::s_alloc,
+                              &retaddr);
+        v54 = (int)retaddr / 16;
       }
       else
       {
-        v56 = 0i64;
+        v55 = 0i64;
       }
-      v57 = 2147483648;
-      if ( v55 )
-        v57 = v55;
-      if ( (signed int)v54 > 0 )
+      v56 = 0x80000000;
+      if ( v54 )
+        v56 = v54;
+      if ( (int)v53 > 0 )
       {
-        v58 = 0i64;
-        v59 = (signed __int64)&v56[2];
-        v60 = v54;
+        v57 = 0i64;
+        v58 = v55 + 2;
+        v59 = v53;
         do
         {
-          v4->vfptr->getIndices(v4, v67->m_aabb.m_min.m_quad.m128_i32[v58], (int *)&v72);
-          v4->vfptr->getVertex(v4, v72, (hkVector4f *)(v59 - 32));
-          v4->vfptr->getVertex(v4, v73, (hkVector4f *)(v59 - 16));
-          v4->vfptr->getVertex(v4, v74, (hkVector4f *)v59);
-          v59 += 48i64;
-          ++v58;
-          --v60;
+          cinfo->vfptr->getIndices(cinfo, v64->m_aabb.m_min.m_quad.m128_u32[v57], v69);
+          cinfo->vfptr->getVertex(cinfo, v69[0], &v58[-2]);
+          cinfo->vfptr->getVertex(cinfo, v69[1], &v58[-1]);
+          cinfo->vfptr->getVertex(cinfo, v69[2], v58);
+          v58 += 3;
+          ++v57;
+          --v59;
         }
-        while ( v60 );
-        v43 = (unsigned int)result;
+        while ( v59 );
+        v42 = (int)result;
       }
-      v61 = *v87;
-      v62 = hkpMeshWeldingUtility::computeTriangleWeldingInfo(&triangle, v56, v54, v86, 0.050000001);
-      v63 = v71;
-      *(_WORD *)(v61 + 2 * v71) = v62;
-      if ( v57 >= 0 )
-        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-          v56,
-          16 * v57);
+      v60 = *v80;
+      v61 = hkpMeshWeldingUtility::computeTriangleWeldingInfo(&triangle, v55, v53, v79, 0.050000001);
+      v62 = v68;
+      *(_WORD *)(v60 + 2 * v68) = v61;
+      if ( v56 >= 0 )
+        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v55, 16 * v56);
       numNeighbors[0] = 0;
       if ( numNeighbors[1] >= 0 )
-        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-          v67,
-          4 * numNeighbors[1]);
-      ++v43;
-      v67 = 0i64;
-      numNeighbors[1] = 2147483648;
-      LODWORD(result) = v43;
-      v71 = v63 + 1;
+        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v64, 4 * numNeighbors[1]);
+      ++v42;
+      v64 = 0i64;
+      numNeighbors[1] = 0x80000000;
+      LODWORD(result) = v42;
+      v68 = v62 + 1;
     }
-    while ( v63 + 1 < *(_QWORD *)&output.m_root );
+    while ( v62 + 1 < *(__int64 *)&output.m_root );
   }
-  v64.m_nodes.m_size = 0;
-  if ( v64.m_nodes.m_capacityAndFlags >= 0 )
+  v63.m_nodes.m_size = 0;
+  if ( v63.m_nodes.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v64.m_nodes.m_data,
-      48 * (v64.m_nodes.m_capacityAndFlags & 0x3FFFFFFF));
-}lloc,
-      v64.m_nodes.m_data,
-      48 * (v64.m_nodes.m_capacityAndFlags & 0x3FFFFFFF));
+      &hkContainerHeapAllocator::s_alloc,
+      v63.m_nodes.m_data,
+      48 * (v63.m_nodes.m_capacityAndFlags & 0x3FFFFFFF));
 }
 

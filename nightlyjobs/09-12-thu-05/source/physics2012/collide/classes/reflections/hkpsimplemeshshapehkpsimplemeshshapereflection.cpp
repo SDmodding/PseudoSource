@@ -74,26 +74,27 @@ hkClass *__fastcall hkpSimpleMeshShape::staticClass()
 
 // File Line: 161
 // RVA: 0xCECDB0
-void __fastcall finishLoadedObjecthkpSimpleMeshShape(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpSimpleMeshShape(hkpSimpleMeshShape *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpSimpleMeshShape::hkpSimpleMeshShape);
+  if ( p )
+    hkpSimpleMeshShape::hkpSimpleMeshShape(p, finishing);
 }
 
 // File Line: 167
 // RVA: 0xCECDD0
-void __fastcall cleanupLoadedObjecthkpSimpleMeshShape(void *p)
+void __fastcall cleanupLoadedObjecthkpSimpleMeshShape(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 171
 // RVA: 0xCECDE0
 hkBaseObjectVtbl *__fastcall getVtablehkpSimpleMeshShape()
 {
-  hkpSimpleMeshShape v1; // [rsp+20h] [rbp-78h]
+  hkpSimpleMeshShape v1; // [rsp+20h] [rbp-78h] BYREF
 
   hkpSimpleMeshShape::hkpSimpleMeshShape(&v1, 0);
-  return v1.vfptr;
+  return v1.hkpShapeCollection::hkpShape::hkpShapeBase::hkcdShape::hkReferencedObject::hkBaseObject::vfptr;
 }
 
 // File Line: 193
@@ -107,8 +108,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpSimpleMeshShapeTypeInfo__()
   hkpSimpleMeshShapeTypeInfo.m_typeName = "hkpSimpleMeshShape";
   hkpSimpleMeshShapeTypeInfo.m_vtable = result;
   hkpSimpleMeshShapeTypeInfo.m_scopedName = "!hkpSimpleMeshShape";
-  hkpSimpleMeshShapeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpSimpleMeshShape;
-  hkpSimpleMeshShapeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpSimpleMeshShape;
+  hkpSimpleMeshShapeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpSimpleMeshShape;
+  hkpSimpleMeshShapeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpSimpleMeshShape;
   return result;
 }
 

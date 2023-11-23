@@ -2,17 +2,15 @@
 // RVA: 0x9B5240
 void __fastcall Scaleform::HeapPT::BitSet1::SetUsed(unsigned int *buf, unsigned __int64 start, unsigned __int64 num)
 {
-  unsigned int *v3; // r10
   unsigned __int64 v4; // r11
   unsigned int v5; // eax
   unsigned __int64 v6; // rcx
   unsigned __int64 v7; // r8
-  unsigned __int64 v8; // r11
-  signed __int64 v9; // rax
+  __int64 v8; // r11
+  unsigned __int64 v9; // rax
   unsigned int *v10; // rdi
   unsigned __int64 i; // rcx
 
-  v3 = buf;
   v4 = start + num - 1;
   v5 = Scaleform::HeapPT::BitSet1::HeadUsedTable[start & 0x1F];
   v6 = start >> 5;
@@ -20,22 +18,19 @@ void __fastcall Scaleform::HeapPT::BitSet1::SetUsed(unsigned int *buf, unsigned 
   v8 = v4 & 0x1F;
   if ( v7 <= start >> 5 )
   {
-    v3[v6] |= Scaleform::HeapPT::BitSet1::TailUsedTable[v8] & v5;
+    buf[v6] |= Scaleform::HeapPT::BitSet1::TailUsedTable[v8] & v5;
   }
   else
   {
-    v3[v6] |= v5;
+    buf[v6] |= v5;
     v9 = v6 + 1;
     if ( v6 + 1 < v7 )
     {
-      v10 = &v3[v9];
+      v10 = &buf[v9];
       for ( i = v7 - v9; i; --i )
-      {
-        *v10 = -1;
-        ++v10;
-      }
+        *v10++ = -1;
     }
-    v3[v7] |= Scaleform::HeapPT::BitSet1::TailUsedTable[v8];
+    buf[v7] |= Scaleform::HeapPT::BitSet1::TailUsedTable[v8];
   }
 }
 
@@ -43,17 +38,15 @@ void __fastcall Scaleform::HeapPT::BitSet1::SetUsed(unsigned int *buf, unsigned 
 // RVA: 0x9B0600
 void __fastcall Scaleform::HeapPT::BitSet1::SetFree(unsigned int *buf, unsigned __int64 start, unsigned __int64 num)
 {
-  unsigned int *v3; // r10
   unsigned __int64 v4; // r11
   unsigned int v5; // eax
   unsigned __int64 v6; // rcx
   unsigned __int64 v7; // r8
-  unsigned __int64 v8; // r11
-  signed __int64 v9; // rax
+  __int64 v8; // r11
+  unsigned __int64 v9; // rax
   unsigned int *v10; // rdi
   unsigned __int64 i; // rcx
 
-  v3 = buf;
   v4 = start + num - 1;
   v5 = Scaleform::HeapPT::BitSet1::HeadFreeTable[start & 0x1F];
   v6 = start >> 5;
@@ -61,38 +54,32 @@ void __fastcall Scaleform::HeapPT::BitSet1::SetFree(unsigned int *buf, unsigned 
   v8 = v4 & 0x1F;
   if ( v7 <= start >> 5 )
   {
-    v3[v6] &= Scaleform::HeapPT::BitSet1::TailFreeTable[v8] | v5;
+    buf[v6] &= Scaleform::HeapPT::BitSet1::TailFreeTable[v8] | v5;
   }
   else
   {
-    v3[v6] &= v5;
+    buf[v6] &= v5;
     v9 = v6 + 1;
     if ( v6 + 1 < v7 )
     {
-      v10 = &v3[v9];
+      v10 = &buf[v9];
       for ( i = v7 - v9; i; --i )
-      {
-        *v10 = 0;
-        ++v10;
-      }
+        *v10++ = 0;
     }
-    v3[v7] &= Scaleform::HeapPT::BitSet1::TailFreeTable[v8];
+    buf[v7] &= Scaleform::HeapPT::BitSet1::TailFreeTable[v8];
   }
 }
 
 // File Line: 147
 // RVA: 0x979C80
-signed __int64 __fastcall Scaleform::HeapPT::BitSet1::FindFreeSize(const unsigned int *buf, unsigned __int64 start)
+unsigned __int64 __fastcall Scaleform::HeapPT::BitSet1::FindFreeSize(const unsigned int *buf, unsigned __int64 start)
 {
   unsigned __int64 v2; // r10
   unsigned int v3; // eax
-  unsigned int v4; // er9
-  unsigned int v5; // er9
-  int v6; // ecx
-  signed __int64 result; // rax
-  int v8; // ecx
+  unsigned int v4; // r9d
+  unsigned int v5; // r9d
   unsigned __int64 v9; // r8
-  signed __int64 i; // rdx
+  unsigned __int64 i; // rdx
   unsigned __int64 v11; // rcx
   __int64 v12; // rcx
   __int64 v13; // rcx
@@ -112,15 +99,15 @@ signed __int64 __fastcall Scaleform::HeapPT::BitSet1::FindFreeSize(const unsigne
         v12 = (unsigned __int8)Scaleform::HeapPT::BitSet1::LastFreeBlock[(unsigned __int8)v11];
       else
         v12 = (unsigned __int8)Scaleform::HeapPT::BitSet1::LastFreeBlock[BYTE1(v11)] + 8;
-      result = v12 + i;
+      return v12 + i;
     }
     else
     {
-      if ( v11 & 0xFF0000 )
+      if ( (v11 & 0xFF0000) != 0 )
         v13 = (unsigned __int8)Scaleform::HeapPT::BitSet1::LastFreeBlock[BYTE2(v11)] + 16;
       else
         v13 = (unsigned __int8)Scaleform::HeapPT::BitSet1::LastFreeBlock[v11 >> 24] + 24;
-      result = v13 + i;
+      return v13 + i;
     }
   }
   else
@@ -129,20 +116,18 @@ signed __int64 __fastcall Scaleform::HeapPT::BitSet1::FindFreeSize(const unsigne
     if ( (_WORD)v5 )
     {
       if ( (_BYTE)v5 )
-        v6 = (unsigned __int8)Scaleform::HeapPT::BitSet1::LastFreeBlock[(unsigned __int8)v5];
+        return (int)(unsigned __int8)Scaleform::HeapPT::BitSet1::LastFreeBlock[(unsigned __int8)v5];
       else
-        v6 = (unsigned __int8)Scaleform::HeapPT::BitSet1::LastFreeBlock[BYTE1(v5)] + 8;
-      result = v6;
+        return (unsigned __int8)Scaleform::HeapPT::BitSet1::LastFreeBlock[BYTE1(v5)] + 8;
+    }
+    else if ( (v5 & 0xFF0000) != 0 )
+    {
+      return (unsigned __int8)Scaleform::HeapPT::BitSet1::LastFreeBlock[BYTE2(v5)] + 16;
     }
     else
     {
-      if ( v5 & 0xFF0000 )
-        v8 = (unsigned __int8)Scaleform::HeapPT::BitSet1::LastFreeBlock[BYTE2(v5)] + 16;
-      else
-        v8 = (unsigned __int8)Scaleform::HeapPT::BitSet1::LastFreeBlock[(unsigned __int64)v5 >> 24] + 24;
-      result = v8;
+      return (unsigned __int8)Scaleform::HeapPT::BitSet1::LastFreeBlock[(unsigned __int64)v5 >> 24] + 24;
     }
   }
-  return result;
 }
 

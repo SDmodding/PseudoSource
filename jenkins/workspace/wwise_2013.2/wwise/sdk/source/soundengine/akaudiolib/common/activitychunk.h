@@ -2,24 +2,22 @@
 // RVA: 0xA715D0
 void __fastcall StructMaxInst::DisableLimiter(StructMaxInst *this)
 {
-  CAkLimiter *v1; // rbx
-  StructMaxInst *v2; // rdi
-  CAkPBI **v3; // rdx
+  CAkLimiter *m_pLimiter; // rbx
+  CAkPBI **m_pItems; // rdx
 
-  v1 = this->m_pLimiter;
-  v2 = this;
+  m_pLimiter = this->m_pLimiter;
   if ( this->m_pLimiter )
   {
-    v3 = v1->m_sortedPBIList.m_pItems;
-    if ( v1->m_sortedPBIList.m_pItems )
+    m_pItems = m_pLimiter->m_sortedPBIList.m_pItems;
+    if ( m_pLimiter->m_sortedPBIList.m_pItems )
     {
-      v1->m_sortedPBIList.m_uLength = 0;
-      AK::MemoryMgr::Free(g_DefaultPoolId, v3);
-      v1->m_sortedPBIList.m_pItems = 0i64;
-      v1->m_sortedPBIList.m_ulReserved = 0;
+      m_pLimiter->m_sortedPBIList.m_uLength = 0;
+      AK::MemoryMgr::Free(g_DefaultPoolId, m_pItems);
+      m_pLimiter->m_sortedPBIList.m_pItems = 0i64;
+      m_pLimiter->m_sortedPBIList.m_ulReserved = 0;
     }
-    AK::MemoryMgr::Free(g_DefaultPoolId, v2->m_pLimiter);
-    v2->m_pLimiter = 0i64;
+    AK::MemoryMgr::Free(g_DefaultPoolId, this->m_pLimiter);
+    this->m_pLimiter = 0i64;
   }
 }
 
@@ -27,36 +25,34 @@ void __fastcall StructMaxInst::DisableLimiter(StructMaxInst *this)
 // RVA: 0xA70560
 void __fastcall AkActivityChunk::~AkActivityChunk(AkActivityChunk *this)
 {
-  CAkPBI **v1; // rdx
-  AkActivityChunk *v2; // rbx
+  CAkPBI **m_pItems; // rdx
   MapStruct<CAkRegisteredObj *,StructMaxInst> *v3; // rdx
   CAkParameterNodeBase **v4; // rdx
 
-  v1 = this->m_Limiter.m_sortedPBIList.m_pItems;
-  v2 = this;
-  if ( v1 )
+  m_pItems = this->m_Limiter.m_sortedPBIList.m_pItems;
+  if ( m_pItems )
   {
     this->m_Limiter.m_sortedPBIList.m_uLength = 0;
-    AK::MemoryMgr::Free(g_DefaultPoolId, v1);
-    v2->m_Limiter.m_sortedPBIList.m_pItems = 0i64;
-    v2->m_Limiter.m_sortedPBIList.m_ulReserved = 0;
+    AK::MemoryMgr::Free(g_DefaultPoolId, m_pItems);
+    this->m_Limiter.m_sortedPBIList.m_pItems = 0i64;
+    this->m_Limiter.m_sortedPBIList.m_ulReserved = 0;
   }
-  v2->m_listPBI.m_pFirst = 0i64;
-  v3 = v2->m_ListPlayCountPerObj.m_pItems;
-  if ( v2->m_ListPlayCountPerObj.m_pItems )
+  this->m_listPBI.m_pFirst = 0i64;
+  v3 = this->m_ListPlayCountPerObj.m_pItems;
+  if ( this->m_ListPlayCountPerObj.m_pItems )
   {
-    v2->m_ListPlayCountPerObj.m_uLength = 0;
+    this->m_ListPlayCountPerObj.m_uLength = 0;
     AK::MemoryMgr::Free(g_DefaultPoolId, v3);
-    v2->m_ListPlayCountPerObj.m_pItems = 0i64;
-    v2->m_ListPlayCountPerObj.m_ulReserved = 0;
+    this->m_ListPlayCountPerObj.m_pItems = 0i64;
+    this->m_ListPlayCountPerObj.m_ulReserved = 0;
   }
-  v4 = v2->m_ActiveChildren.m_pItems;
+  v4 = this->m_ActiveChildren.m_pItems;
   if ( v4 )
   {
-    v2->m_ActiveChildren.m_uLength = 0;
+    this->m_ActiveChildren.m_uLength = 0;
     AK::MemoryMgr::Free(g_DefaultPoolId, v4);
-    v2->m_ActiveChildren.m_pItems = 0i64;
-    v2->m_ActiveChildren.m_ulReserved = 0;
+    this->m_ActiveChildren.m_pItems = 0i64;
+    this->m_ActiveChildren.m_ulReserved = 0;
   }
 }
 

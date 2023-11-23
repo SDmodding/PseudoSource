@@ -1,26 +1,22 @@
 // File Line: 76
 // RVA: 0x25CB30
-UFG::allocator::free_link *__fastcall antlr3ExceptionNew(unsigned int exception, void *name, void *message, char freeMessage)
+UFG::allocator::free_link *__fastcall antlr3ExceptionNew(
+        unsigned int exception,
+        UFG::allocator::free_link *name,
+        UFG::allocator::free_link *message,
+        char freeMessage)
 {
-  UFG::allocator::free_link *v4; // rsi
-  unsigned int v5; // ebp
-  char v6; // bl
-  UFG::allocator::free_link *v7; // rdi
   UFG::allocator::free_link *result; // rax
 
-  v4 = (UFG::allocator::free_link *)name;
-  v5 = exception;
-  v6 = freeMessage;
-  v7 = (UFG::allocator::free_link *)message;
   result = antlrCalloc(1u, 0xA0u);
   if ( result )
   {
-    result[1].mNext = v4;
-    LODWORD(result->mNext) = v5;
+    result[1].mNext = name;
+    LODWORD(result->mNext) = exception;
     result[18].mNext = (UFG::allocator::free_link *)antlr3ExceptionPrint;
-    result[2].mNext = v7;
+    result[2].mNext = message;
     result[19].mNext = (UFG::allocator::free_link *)antlr3ExceptionFree;
-    LOBYTE(result[4].mNext) = v6;
+    LOBYTE(result[4].mNext) = freeMessage;
   }
   return result;
 }
@@ -38,24 +34,24 @@ void __fastcall antlr3ExceptionPrint(ANTLR3_EXCEPTION_struct *ex)
 void __fastcall antlr3ExceptionFree(ANTLR3_EXCEPTION_struct *ex)
 {
   ANTLR3_EXCEPTION_struct *v1; // rbx
-  ANTLR3_EXCEPTION_struct *v2; // rdi
-  void (__fastcall *v3)(void *); // rax
+  ANTLR3_EXCEPTION_struct *nextException; // rdi
+  void (__fastcall *freeCustom)(void *); // rax
 
   if ( ex )
   {
     v1 = ex;
     do
     {
-      v2 = v1->nextException;
+      nextException = v1->nextException;
       if ( v1->freeMessage == 1 )
-        antlrFree(v1->message);
-      v3 = v1->freeCustom;
-      if ( v3 )
-        v3(v1->custom);
-      antlrFree(v1);
-      v1 = v2;
+        antlrFree((char *)v1->message);
+      freeCustom = v1->freeCustom;
+      if ( freeCustom )
+        freeCustom(v1->custom);
+      antlrFree((char *)v1);
+      v1 = nextException;
     }
-    while ( v2 );
+    while ( nextException );
   }
 }
 

@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkaiPlaneVolumeClass__()
     &hkaiPlaneVolume_Default,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 83
@@ -28,23 +28,24 @@ hkClass *__fastcall hkaiPlaneVolume::staticClass()
 
 // File Line: 90
 // RVA: 0xBB74B0
-void __fastcall finishLoadedObjecthkaiPlaneVolume(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiPlaneVolume(hkaiPlaneVolume *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiPlaneVolume::hkaiPlaneVolume);
+  if ( p )
+    hkaiPlaneVolume::hkaiPlaneVolume(p, finishing);
 }
 
 // File Line: 96
 // RVA: 0xBB74D0
-void __fastcall cleanupLoadedObjecthkaiPlaneVolume(void *p)
+void __fastcall cleanupLoadedObjecthkaiPlaneVolume(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 100
 // RVA: 0xBB74E0
 hkBaseObjectVtbl *__fastcall getVtablehkaiPlaneVolume()
 {
-  hkaiPlaneVolume v1; // [rsp+20h] [rbp-88h]
+  hkaiPlaneVolume v1; // [rsp+20h] [rbp-88h] BYREF
 
   hkaiPlaneVolume::hkaiPlaneVolume(&v1, 0);
   return v1.vfptr;
@@ -61,8 +62,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiPlaneVolumeTypeInfo__()
   hkaiPlaneVolumeTypeInfo.m_typeName = "hkaiPlaneVolume";
   hkaiPlaneVolumeTypeInfo.m_vtable = result;
   hkaiPlaneVolumeTypeInfo.m_scopedName = "!hkaiPlaneVolume";
-  hkaiPlaneVolumeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiPlaneVolume;
-  hkaiPlaneVolumeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiPlaneVolume;
+  hkaiPlaneVolumeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiPlaneVolume;
+  hkaiPlaneVolumeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiPlaneVolume;
   return result;
 }
 

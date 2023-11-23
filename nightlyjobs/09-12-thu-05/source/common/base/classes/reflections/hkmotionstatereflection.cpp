@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkMotionStateClass__()
     0i64,
     0i64,
     0,
-    3u);
+    3);
 }
 
 // File Line: 66

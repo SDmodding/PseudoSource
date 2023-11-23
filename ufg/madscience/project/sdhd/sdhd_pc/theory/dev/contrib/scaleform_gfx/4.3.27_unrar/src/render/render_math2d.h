@@ -2,28 +2,31 @@
 // RVA: 0x9986F0
 float __fastcall Scaleform::Render::Math2D::LinePointDistance(float x1, float y1, float x2, float y2, float x, float y)
 {
-  float v6; // xmm9_4
   float v7; // xmm6_4
   float v8; // xmm7_4
   float v9; // xmm4_4
   __m128 v10; // xmm0
   float result; // xmm0_4
 
-  v6 = x1;
   v7 = x2 - x1;
   v8 = y2 - y1;
   v9 = fsqrt((float)(v8 * v8) + (float)(v7 * v7));
   if ( v9 != 0.0 )
     return (float)((float)((float)(x - x2) * v8) - (float)((float)(y - y2) * v7)) / v9;
   v10 = (__m128)LODWORD(y);
-  v10.m128_f32[0] = (float)((float)(y - y1) * (float)(y - y1)) + (float)((float)(x - v6) * (float)(x - v6));
-  LODWORD(result) = (unsigned __int128)_mm_sqrt_ps(v10);
+  v10.m128_f32[0] = (float)((float)(y - y1) * (float)(y - y1)) + (float)((float)(x - x1) * (float)(x - x1));
+  LODWORD(result) = _mm_sqrt_ps(v10).m128_u32[0];
   return result;
 }
 
 // File Line: 217
 // RVA: 0x935640
-float __fastcall Scaleform::Render::Math2D::TurnRatio<Scaleform::Render::Hairliner::OutVertexType,Scaleform::Render::Hairliner::OutVertexType,Scaleform::Render::Hairliner::OutVertexType>(Scaleform::Render::TessVertex *v1, Scaleform::Render::TessVertex *v2, Scaleform::Render::TessVertex *v3, float len1, float len2)
+float __fastcall Scaleform::Render::Math2D::TurnRatio<Scaleform::Render::Hairliner::OutVertexType,Scaleform::Render::Hairliner::OutVertexType,Scaleform::Render::Hairliner::OutVertexType>(
+        Scaleform::Render::TessVertex *v1,
+        Scaleform::Render::TessVertex *v2,
+        Scaleform::Render::TessVertex *v3,
+        float len1,
+        float len2)
 {
   float v5; // xmm6_4
   float v6; // xmm4_4
@@ -43,45 +46,56 @@ float __fastcall Scaleform::Render::Math2D::TurnRatio<Scaleform::Render::Hairlin
 
 // File Line: 275
 // RVA: 0x996890
-char __fastcall Scaleform::Render::Math2D::Intersection(float ax, float ay, float bx, float by, float cx, float cy, float dx, float dy, float *x, float *y, float epsilon)
+char __fastcall Scaleform::Render::Math2D::Intersection(
+        float ax,
+        float ay,
+        float bx,
+        float by,
+        float cx,
+        float cy,
+        float dx,
+        float dy,
+        float *x,
+        float *y,
+        float epsilon)
 {
   float v11; // xmm2_4
-  float v12; // xmm7_4
   float v13; // xmm3_4
   float v14; // xmm4_4
   float v16; // xmm1_4
 
   v11 = bx - ax;
-  v12 = ay;
   v13 = by - ay;
   v14 = (float)((float)(dy - cy) * v11) - (float)((float)(dx - cx) * v13);
   if ( COERCE_FLOAT(LODWORD(v14) & _xmm) < epsilon )
     return 0;
   v16 = (float)((float)((float)(ay - cy) * (float)(dx - cx)) - (float)((float)(ax - cx) * (float)(dy - cy))) / v14;
   *x = (float)(v11 * v16) + ax;
-  *y = (float)(v13 * v16) + v12;
+  *y = (float)(v13 * v16) + ay;
   return 1;
 }
 
 // File Line: 454
 // RVA: 0x8C4370
-void __fastcall Scaleform::Render::Math2D::CubicCurveExtremum(float x1, float x2, float x3, float x4, float *t1, float *t2)
+void __fastcall Scaleform::Render::Math2D::CubicCurveExtremum(
+        float x1,
+        float x2,
+        float x3,
+        float x4,
+        float *t1,
+        float *t2)
 {
-  float v6; // xmm6_4
-  float v7; // xmm4_4
   float v8; // xmm2_4
   float v9; // xmm7_4
   float v10; // xmm6_4
   float v11; // xmm0_4
   float v12; // xmm3_4
 
-  v6 = x3;
   *t1 = -1.0;
   *t2 = -1.0;
-  v7 = x3;
   v8 = x2 - x1;
-  v9 = (float)((float)(x4 - (float)(v7 * 3.0)) + (float)(x2 * 3.0)) - x1;
-  v10 = (float)(v6 - (float)(x2 * 2.0)) + x1;
+  v9 = (float)((float)(x4 - (float)(x3 * 3.0)) + (float)(x2 * 3.0)) - x1;
+  v10 = (float)(x3 - (float)(x2 * 2.0)) + x1;
   if ( COERCE_FLOAT(LODWORD(v9) & _xmm) <= 0.001 )
   {
     if ( COERCE_FLOAT(LODWORD(v10) & _xmm) > 0.001 )

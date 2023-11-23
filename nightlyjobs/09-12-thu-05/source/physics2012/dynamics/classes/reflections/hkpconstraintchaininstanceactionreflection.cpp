@@ -28,33 +28,31 @@ hkClass *__fastcall hkpConstraintChainInstanceAction::staticClass()
 
 // File Line: 65
 // RVA: 0xD50520
-void __fastcall finishLoadedObjecthkpConstraintChainInstanceAction(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpConstraintChainInstanceAction(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
-  _QWORD *v2; // rbx
   hkStringPtr *v3; // rcx
 
   if ( p )
   {
-    v2 = p;
-    v3 = (hkStringPtr *)((char *)p + 40);
+    v3 = p + 5;
     v3[-5].m_stringAndFlag = (const char *)&hkpAction::`vftable;
-    hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpConstraintChainInstanceAction::`vftable;
+    hkStringPtr::hkStringPtr(v3, finishing);
+    p->m_stringAndFlag = (const char *)&hkpConstraintChainInstanceAction::`vftable;
   }
 }
 
 // File Line: 71
 // RVA: 0xD50560
-void __fastcall cleanupLoadedObjecthkpConstraintChainInstanceAction(void *p)
+void __fastcall cleanupLoadedObjecthkpConstraintChainInstanceAction(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 75
 // RVA: 0xD50570
 void **__fastcall getVtablehkpConstraintChainInstanceAction()
 {
-  hkStringPtr v1; // [rsp+48h] [rbp-20h]
+  hkStringPtr v1; // [rsp+48h] [rbp-20h] BYREF
 
   hkStringPtr::hkStringPtr(&v1, 0);
   return &hkpConstraintChainInstanceAction::`vftable;
@@ -71,8 +69,8 @@ void **dynamic_initializer_for__hkpConstraintChainInstanceActionTypeInfo__()
   hkpConstraintChainInstanceActionTypeInfo.m_typeName = "hkpConstraintChainInstanceAction";
   hkpConstraintChainInstanceActionTypeInfo.m_vtable = result;
   hkpConstraintChainInstanceActionTypeInfo.m_scopedName = "!hkpConstraintChainInstanceAction";
-  hkpConstraintChainInstanceActionTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpConstraintChainInstanceAction;
-  hkpConstraintChainInstanceActionTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpConstraintChainInstanceAction;
+  hkpConstraintChainInstanceActionTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpConstraintChainInstanceAction;
+  hkpConstraintChainInstanceActionTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpConstraintChainInstanceAction;
   return result;
 }
 

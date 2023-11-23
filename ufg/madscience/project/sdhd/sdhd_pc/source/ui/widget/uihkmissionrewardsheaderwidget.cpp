@@ -3,7 +3,7 @@
 __int64 dynamic_initializer_for__UFG::UIHKMissionRewardsHeaderWidget::Title__()
 {
   UFG::qString::qString(&UFG::UIHKMissionRewardsHeaderWidget::Title);
-  return atexit(dynamic_atexit_destructor_for__UFG::UIHKMissionRewardsHeaderWidget::Title__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::UIHKMissionRewardsHeaderWidget::Title__);
 }
 
 // File Line: 17
@@ -11,49 +11,52 @@ __int64 dynamic_initializer_for__UFG::UIHKMissionRewardsHeaderWidget::Title__()
 __int64 dynamic_initializer_for__UFG::UIHKMissionRewardsHeaderWidget::Caption__()
 {
   UFG::qString::qString(&UFG::UIHKMissionRewardsHeaderWidget::Caption);
-  return atexit(dynamic_atexit_destructor_for__UFG::UIHKMissionRewardsHeaderWidget::Caption__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::UIHKMissionRewardsHeaderWidget::Caption__);
 }
 
 // File Line: 18
 // RVA: 0x1566B60
 __int64 dynamic_initializer_for__UFG::UIHKMissionRewardsHeaderWidget::GamesliceType__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::UIHKMissionRewardsHeaderWidget::GamesliceType__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::UIHKMissionRewardsHeaderWidget::GamesliceType__);
 }
 
 // File Line: 29
 // RVA: 0x5C9910
-void __fastcall UFG::UIHKMissionRewardsHeaderWidget::~UIHKMissionRewardsHeaderWidget(UFG::UIHKMissionRewardsHeaderWidget *this)
+void __fastcall UFG::UIHKMissionRewardsHeaderWidget::~UIHKMissionRewardsHeaderWidget(
+        UFG::UIHKMissionRewardsHeaderWidget *this)
 {
   this->vfptr = (UFG::UIHKMissionRewardsHeaderWidgetVtbl *)&UFG::UIHKMissionRewardsHeaderWidget::`vftable;
 }
 
 // File Line: 34
 // RVA: 0x5EBE30
-void __fastcall UFG::UIHKMissionRewardsHeaderWidget::HandleScreenInit(UFG::UIHKMissionRewardsHeaderWidget *this, UFG::UIScreen *screen)
+void __fastcall UFG::UIHKMissionRewardsHeaderWidget::HandleScreenInit(
+        UFG::UIHKMissionRewardsHeaderWidget *this,
+        UFG::UIScreen *screen)
 {
-  this->mState = 0;
+  this->mState = STATE_NONE;
 }
 
 // File Line: 40
 // RVA: 0x614F90
-void __fastcall UFG::UIHKMissionRewardsHeaderWidget::Update(UFG::UIHKMissionRewardsHeaderWidget *this, UFG::UIScreen *screen, float elapsed)
+void __fastcall UFG::UIHKMissionRewardsHeaderWidget::Update(
+        UFG::UIHKMissionRewardsHeaderWidget *this,
+        UFG::UIScreen *screen,
+        float elapsed)
 {
-  UFG::UIHKMissionRewardsHeaderWidget *v3; // rbx
   __int32 v4; // ecx
-  int v5; // ecx
-  int v6; // ecx
-  int v7; // ecx
-  Scaleform::GFx::Movie *v8; // rcx
+  __int32 v5; // ecx
+  __int32 v6; // ecx
+  __int32 v7; // ecx
+  Scaleform::GFx::Movie *pObject; // rcx
   float v9; // xmm2_4
   float v10; // xmm2_4
-  bool v11; // cf
-  bool v12; // zf
-  Scaleform::GFx::Movie *v13; // rcx
-  float v14; // xmm2_4
-  Scaleform::GFx::Movie *v15; // rcx
+  bool v11; // cc
+  Scaleform::GFx::Movie *v12; // rcx
+  float v13; // xmm2_4
+  Scaleform::GFx::Movie *v14; // rcx
 
-  v3 = this;
   v4 = this->mState - 3;
   if ( v4 )
   {
@@ -65,161 +68,163 @@ void __fastcall UFG::UIHKMissionRewardsHeaderWidget::Update(UFG::UIHKMissionRewa
       {
         if ( v7 == 1 )
         {
-          v8 = screen->mRenderable->m_movie.pObject;
-          if ( v8 )
-            Scaleform::GFx::Movie::Invoke(v8, "MissionRewards_UnloadHeader", 0i64, 0i64, 0);
-          v3->mState = 0;
+          pObject = screen->mRenderable->m_movie.pObject;
+          if ( pObject )
+            Scaleform::GFx::Movie::Invoke(pObject, "MissionRewards_UnloadHeader", 0i64, 0i64, 0);
+          this->mState = STATE_NONE;
         }
       }
       else
       {
-        v9 = elapsed + v3->mTimer;
-        v3->mTimer = v9;
+        v9 = elapsed + this->mTimer;
+        this->mTimer = v9;
         if ( v9 > 20.0 )
-          v3->mState = 7;
+          this->mState = STATE_SYNCED|STATE_WAITING;
       }
     }
     else
     {
-      v10 = elapsed + v3->mTimer;
-      v11 = v10 < v3->Duration;
-      v12 = v10 == v3->Duration;
-      v3->mTimer = v10;
-      if ( !v11 && !v12 )
+      v10 = elapsed + this->mTimer;
+      v11 = v10 <= this->Duration;
+      this->mTimer = v10;
+      if ( !v11 )
       {
-        v13 = screen->mRenderable->m_movie.pObject;
-        if ( v13 )
-          Scaleform::GFx::Movie::Invoke(v13, "hideFaceLevelUp", 0i64, 0i64, 0);
-        v3->mState = 6;
+        v12 = screen->mRenderable->m_movie.pObject;
+        if ( v12 )
+          Scaleform::GFx::Movie::Invoke(v12, "hideFaceLevelUp", 0i64, 0i64, 0);
+        this->mState = STATE_DONE|STATE_WAITING;
       }
     }
   }
   else
   {
-    v14 = elapsed + v3->mTimer;
-    v11 = v14 < v3->Duration;
-    v12 = v14 == v3->Duration;
-    v3->mTimer = v14;
-    if ( !v11 && !v12 )
+    v13 = elapsed + this->mTimer;
+    v11 = v13 <= this->Duration;
+    this->mTimer = v13;
+    if ( !v11 )
     {
-      v15 = screen->mRenderable->m_movie.pObject;
-      if ( v15 )
-        Scaleform::GFx::Movie::Invoke(v15, "hideMissionComplete", 0i64, 0i64, 0);
-      v3->mState = 5;
+      v14 = screen->mRenderable->m_movie.pObject;
+      if ( v14 )
+        Scaleform::GFx::Movie::Invoke(v14, "hideMissionComplete", 0i64, 0i64, 0);
+      this->mState = STATE_SYNCED;
     }
   }
 }
 
 // File Line: 106
 // RVA: 0x5EABD0
-void __fastcall UFG::UIHKMissionRewardsHeaderWidget::HandleMessage(UFG::UIHKMissionRewardsHeaderWidget *this, UFG::UIScreen *screen, unsigned int msgId, UFG::UIMessage *msg)
+void __fastcall UFG::UIHKMissionRewardsHeaderWidget::HandleMessage(
+        UFG::UIHKMissionRewardsHeaderWidget *this,
+        UFG::UIScreen *screen,
+        unsigned int msgId,
+        UFG::UIMessage *msg)
 {
-  UFG::UIHKMissionRewardsHeaderWidget *v4; // rbx
-  Scaleform::GFx::Movie *v5; // rcx
+  Scaleform::GFx::Movie *pObject; // rcx
 
-  v4 = this;
   switch ( this->mState )
   {
-    case 1:
+    case STATE_QUEUED:
       if ( msgId == UI_HASH_WIDGET_LOADED_20 )
       {
         UFG::UIHKMissionRewardsHeaderWidget::Flash_Show(this, screen);
-        v4->mState = 3;
+        this->mState = STATE_EXECUTING;
       }
       break;
-    case 2:
+    case STATE_WAITING:
       if ( msgId == UI_HASH_WIDGET_LOADED_20 )
       {
-        v5 = screen->mRenderable->m_movie.pObject;
-        if ( v5 )
-          Scaleform::GFx::Movie::Invoke(v5, "showFaceLevelUp", 0i64, 0i64, 0);
-        v4->mState = 4;
+        pObject = screen->mRenderable->m_movie.pObject;
+        if ( pObject )
+          Scaleform::GFx::Movie::Invoke(pObject, "showFaceLevelUp", 0i64, 0i64, 0);
+        this->mState = STATE_DONE;
       }
       break;
-    case 5:
+    case STATE_SYNCED:
       if ( msgId == UI_HASH_REWARDS_COMPLETE_MSG_OUTRO_DONE_20 )
-        this->mState = 7;
+        this->mState = STATE_SYNCED|STATE_WAITING;
       break;
     default:
-      if ( this->mState == 6 && msgId == UI_HASH_FACE_LEVELUP_MSG_OUTRO_DONE_20 )
-        this->mState = 7;
+      if ( this->mState == (STATE_DONE|STATE_WAITING) && msgId == UI_HASH_FACE_LEVELUP_MSG_OUTRO_DONE_20 )
+        this->mState = STATE_SYNCED|STATE_WAITING;
       break;
   }
 }
 
 // File Line: 151
 // RVA: 0x611D60
-void __fastcall UFG::UIHKMissionRewardsHeaderWidget::Start(UFG::UIHKMissionRewardsHeaderWidget *this, UFG::UIScreen *screen)
+void __fastcall UFG::UIHKMissionRewardsHeaderWidget::Start(
+        UFG::UIHKMissionRewardsHeaderWidget *this,
+        UFG::UIScreen *screen)
 {
-  UFG::UIHKMissionRewardsHeaderWidget *v2; // rbx
-  Scaleform::GFx::Movie *v3; // rcx
+  Scaleform::GFx::Movie *pObject; // rcx
 
-  v2 = this;
   if ( this->mState == STATE_NONE )
   {
-    v3 = screen->mRenderable->m_movie.pObject;
-    if ( v3 )
-      Scaleform::GFx::Movie::Invoke(v3, "MissionRewards_LoadHeader", 0i64, 0i64, 0);
-    *(_QWORD *)&v2->mState = 1i64;
+    pObject = screen->mRenderable->m_movie.pObject;
+    if ( pObject )
+      Scaleform::GFx::Movie::Invoke(pObject, "MissionRewards_LoadHeader", 0i64, 0i64, 0);
+    *(_QWORD *)&this->mState = 1i64;
   }
 }
 
 // File Line: 166
 // RVA: 0x611E50
-void __fastcall UFG::UIHKMissionRewardsHeaderWidget::StartFaceLevelUp(UFG::UIHKMissionRewardsHeaderWidget *this, UFG::UIScreen *screen)
+void __fastcall UFG::UIHKMissionRewardsHeaderWidget::StartFaceLevelUp(
+        UFG::UIHKMissionRewardsHeaderWidget *this,
+        UFG::UIScreen *screen)
 {
-  UFG::UIHKMissionRewardsHeaderWidget::eState v2; // eax
-  UFG::UIHKMissionRewardsHeaderWidget *v3; // rbx
-  Scaleform::GFx::Movie *v4; // rcx
+  UFG::UIHKMissionRewardsHeaderWidget::eState mState; // eax
+  Scaleform::GFx::Movie *pObject; // rcx
 
-  v2 = this->mState;
-  v3 = this;
-  if ( v2 == STATE_NONE || v2 == 7 )
+  mState = this->mState;
+  if ( mState == STATE_NONE || mState == (STATE_SYNCED|STATE_WAITING) )
   {
-    v4 = screen->mRenderable->m_movie.pObject;
-    if ( v4 )
-      Scaleform::GFx::Movie::Invoke(v4, "MissionRewards_LoadHeader", 0i64, 0i64, 0);
-    *(_QWORD *)&v3->mState = 2i64;
+    pObject = screen->mRenderable->m_movie.pObject;
+    if ( pObject )
+      Scaleform::GFx::Movie::Invoke(pObject, "MissionRewards_LoadHeader", 0i64, 0i64, 0);
+    *(_QWORD *)&this->mState = 2i64;
   }
 }
 
 // File Line: 208
 // RVA: 0x5E3140
-void __fastcall UFG::UIHKMissionRewardsHeaderWidget::Flash_Show(UFG::UIHKMissionRewardsHeaderWidget *this, UFG::UIScreen *screen)
+void __fastcall UFG::UIHKMissionRewardsHeaderWidget::Flash_Show(
+        UFG::UIHKMissionRewardsHeaderWidget *this,
+        UFG::UIScreen *screen)
 {
-  Scaleform::GFx::Movie *v2; // rbx
-  char *v3; // rdi
+  Scaleform::GFx::Movie *pObject; // rbx
+  char *mData; // rdi
   char *v4; // rdi
-  Scaleform::GFx::Value pargs; // [rsp+40h] [rbp-68h]
-  char v6; // [rsp+70h] [rbp-38h]
+  Scaleform::GFx::Value pargs; // [rsp+40h] [rbp-68h] BYREF
+  char v6[16]; // [rsp+70h] [rbp-38h] BYREF
   __int64 v7; // [rsp+80h] [rbp-28h]
-  unsigned int v8; // [rsp+88h] [rbp-20h]
+  int v8; // [rsp+88h] [rbp-20h]
   char *v9; // [rsp+90h] [rbp-18h]
 
-  v2 = screen->mRenderable->m_movie.pObject;
-  if ( v2 )
+  pObject = screen->mRenderable->m_movie.pObject;
+  if ( pObject )
   {
     `eh vector constructor iterator(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-    v3 = UFG::UIHKMissionRewardsHeaderWidget::Caption.mData;
-    if ( ((unsigned int)pargs.Type >> 6) & 1 )
+    mData = UFG::UIHKMissionRewardsHeaderWidget::Caption.mData;
+    if ( (pargs.Type & 0x40) != 0 )
     {
-      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
+      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&pargs.pObjectInterface->vfptr->gap8[8])(
         pargs.pObjectInterface,
         &pargs,
-        *(_QWORD *)&pargs.mValue.NValue);
+        pargs.mValue);
       pargs.pObjectInterface = 0i64;
     }
-    pargs.Type = 6;
-    *(_QWORD *)&pargs.mValue.NValue = v3;
+    pargs.Type = VT_String;
+    pargs.mValue.pString = mData;
     v4 = UFG::UIHKMissionRewardsHeaderWidget::Title.mData;
-    if ( (v8 >> 6) & 1 )
+    if ( (v8 & 0x40) != 0 )
     {
-      (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v7 + 16i64))(v7, &v6, v9);
+      (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v7 + 16i64))(v7, v6, v9);
       v7 = 0i64;
     }
     v8 = 6;
     v9 = v4;
-    Scaleform::GFx::Movie::Invoke(v2, "showMissionComplete", 0i64, &pargs, 2u);
+    Scaleform::GFx::Movie::Invoke(pObject, "showMissionComplete", 0i64, &pargs, 2u);
     if ( UFG::UIHKMissionRewardsHeaderWidget::GamesliceType.mUID == qSymbol_Mission_20.mUID )
       UFG::TiDo::GetIsInstantiated();
     `eh vector destructor iterator(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);

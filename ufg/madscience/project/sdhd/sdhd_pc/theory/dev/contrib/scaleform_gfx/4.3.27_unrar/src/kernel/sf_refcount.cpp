@@ -19,7 +19,7 @@ void __fastcall Scaleform::RefCountImpl::Release(Scaleform::Render::RenderBuffer
   if ( !_InterlockedDecrement(&this->RefCount) )
   {
     if ( this )
-      this->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)this, 1u);
+      this->vfptr->__vecDelDtor(this, 1i64);
   }
 }
 
@@ -27,50 +27,42 @@ void __fastcall Scaleform::RefCountImpl::Release(Scaleform::Render::RenderBuffer
 // RVA: 0x9A7C80
 void __fastcall Scaleform::RefCountNTSImpl::Release(Scaleform::RefCountNTSImpl *this)
 {
-  bool v1; // zf
-
-  v1 = this->RefCount-- == 1;
-  if ( v1 )
-    this->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)this, 1u);
+  if ( this->RefCount-- == 1 )
+    this->vfptr->__vecDelDtor(this, 1i64);
 }
 
 // File Line: 107
 // RVA: 0x94C2B0
 void __fastcall Scaleform::RefCountWeakSupportImpl::~RefCountWeakSupportImpl(Scaleform::RefCountWeakSupportImpl *this)
 {
-  Scaleform::RefCountWeakSupportImpl *v1; // rbx
-  Scaleform::WeakPtrProxy *v2; // rax
+  Scaleform::WeakPtrProxy *pWeakProxy; // rax
   Scaleform::WeakPtrProxy *v3; // rdx
-  bool v4; // zf
 
-  v1 = this;
   this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountWeakSupportImpl::`vftable;
-  v2 = this->pWeakProxy;
-  if ( v2 )
+  pWeakProxy = this->pWeakProxy;
+  if ( pWeakProxy )
   {
-    v2->pObject = 0i64;
+    pWeakProxy->pObject = 0i64;
     v3 = this->pWeakProxy;
-    v4 = v3->RefCount-- == 1;
-    if ( v4 )
-      ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+    if ( v3->RefCount-- == 1 )
+      ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
   }
-  v1->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
+  this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
 }
 
 // File Line: 117
 // RVA: 0x96A990
-Scaleform::WeakPtrProxy *__fastcall Scaleform::RefCountWeakSupportImpl::CreateWeakProxy(Scaleform::RefCountWeakSupportImpl *this)
+Scaleform::WeakPtrProxy *__fastcall Scaleform::RefCountWeakSupportImpl::CreateWeakProxy(
+        Scaleform::RefCountWeakSupportImpl *this)
 {
-  Scaleform::RefCountWeakSupportImpl *v1; // rbx
   Scaleform::WeakPtrProxy *result; // rax
-  int v3; // [rsp+48h] [rbp+10h]
+  int v3; // [rsp+48h] [rbp+10h] BYREF
   Scaleform::WeakPtrProxy *v4; // [rsp+50h] [rbp+18h]
 
-  v1 = this;
   if ( this->pWeakProxy )
-    goto LABEL_8;
+    goto LABEL_5;
   v3 = 2;
-  result = (Scaleform::WeakPtrProxy *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, Scaleform::RefCountWeakSupportImpl *, signed __int64, int *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap)(
+  result = (Scaleform::WeakPtrProxy *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, Scaleform::RefCountWeakSupportImpl *, __int64, int *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap)(
                                         Scaleform::Memory::pGlobalHeap,
                                         this,
                                         16i64,
@@ -80,14 +72,14 @@ Scaleform::WeakPtrProxy *__fastcall Scaleform::RefCountWeakSupportImpl::CreateWe
   if ( result )
   {
     result->RefCount = 1;
-    result->pObject = v1;
+    result->pObject = this;
   }
-  v1->pWeakProxy = result;
+  this->pWeakProxy = result;
   if ( result )
   {
-LABEL_8:
-    ++v1->pWeakProxy->RefCount;
-    result = v1->pWeakProxy;
+LABEL_5:
+    ++this->pWeakProxy->RefCount;
+    return this->pWeakProxy;
   }
   return result;
 }

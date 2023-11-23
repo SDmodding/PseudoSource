@@ -2,82 +2,70 @@
 // RVA: 0xD17B90
 void __fastcall hkpFastMeshShape::hkpFastMeshShape(hkpFastMeshShape *this, float radius, int numBitsForSubpartIndex)
 {
-  hkpFastMeshShape *v3; // rbx
-
-  v3 = this;
-  hkpMeshShape::hkpMeshShape((hkpMeshShape *)&this->vfptr, radius, numBitsForSubpartIndex);
-  v3->vfptr = (hkBaseObjectVtbl *)&hkpFastMeshShape::`vftable{for `hkpShape};
-  v3->vfptr = (hkpShapeContainerVtbl *)&hkpFastMeshShape::`vftable{for `hkpShapeContainer};
+  hkpMeshShape::hkpMeshShape(this, radius, numBitsForSubpartIndex);
+  this->hkpMeshShape::hkpShapeCollection::hkpShape::hkpShapeBase::hkcdShape::hkReferencedObject::hkBaseObject::vfptr = (hkBaseObjectVtbl *)&hkpFastMeshShape::`vftable{for `hkpShape};
+  this->hkpMeshShape::hkpShapeCollection::hkpShapeContainer::vfptr = (hkpShapeContainerVtbl *)&hkpFastMeshShape::`vftable{for `hkpShapeContainer};
 }
 
 // File Line: 25
 // RVA: 0xD17BD0
 void __fastcall hkpFastMeshShape::hkpFastMeshShape(hkpFastMeshShape *this, hkFinishLoadedObjectFlag flag)
 {
-  hkpFastMeshShape *v2; // rbx
-  int v3; // [rsp+38h] [rbp+10h]
-
-  v3 = flag.m_finishing;
-  v2 = this;
-  hkpMeshShape::hkpMeshShape((hkpMeshShape *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpFastMeshShape::`vftable{for `hkpShape};
-  v2->vfptr = (hkpShapeContainerVtbl *)&hkpFastMeshShape::`vftable{for `hkpShapeContainer};
-  if ( v3 )
-    v2->m_type.m_storage = 27;
+  hkpMeshShape::hkpMeshShape(this, flag);
+  this->hkpMeshShape::hkpShapeCollection::hkpShape::hkpShapeBase::hkcdShape::hkReferencedObject::hkBaseObject::vfptr = (hkBaseObjectVtbl *)&hkpFastMeshShape::`vftable{for `hkpShape};
+  this->hkpMeshShape::hkpShapeCollection::hkpShapeContainer::vfptr = (hkpShapeContainerVtbl *)&hkpFastMeshShape::`vftable{for `hkpShapeContainer};
+  if ( flag.m_finishing )
+    this->m_type.m_storage = 27;
 }
 
 // File Line: 36
 // RVA: 0xD17C10
-hkpShape *__fastcall hkpFastMeshShape::getChildShape(hkpFastMeshShape *this, unsigned int key, char (*buffer)[512])
+hkpShape *__fastcall hkpFastMeshShape::getChildShape(hkpFastMeshShape *this, unsigned int key, hkpShape *buffer)
 {
   __int64 v3; // rsi
-  char (*v4)[512]; // rbx
-  __m128 *v5; // rdi
-  int v6; // er9
+  int v6; // r9d
   unsigned __int16 *v7; // r11
   __int64 v8; // rcx
   __m128 *v9; // rbp
   __m128 *v10; // r8
   __m128 *v11; // r9
-  __int16 v12; // cx
-  float v13; // xmm0_4
-  unsigned __int8 v14; // al
+  unsigned __int16 v12; // cx
+  int m_data_high; // xmm0_4
+  unsigned __int8 m_data; // al
   hkpShape *result; // rax
 
   v3 = *(_QWORD *)&this->m_disableWelding.m_bool;
-  v4 = buffer;
-  v5 = (__m128 *)this;
   v6 = *(_DWORD *)(v3 + 8);
   v7 = (unsigned __int16 *)(*(_QWORD *)(v3 + 16) + key * *(_DWORD *)(v3 + 28));
-  v8 = (signed int)(key & *(_DWORD *)(v3 + 32));
+  v8 = (int)(key & *(_DWORD *)(v3 + 32));
   v9 = (__m128 *)(*(_QWORD *)v3 + v6 * *v7);
   v10 = (__m128 *)(*(_QWORD *)v3 + v6 * v7[v8 + 1]);
   v11 = (__m128 *)(*(_QWORD *)v3 + v6 * v7[(v8 ^ 1) + 1]);
-  if ( v5[4].m128_i32[0] )
-    v12 = *(_WORD *)(v5[3].m128_u64[1] + 2i64 * (signed int)(key + *(_DWORD *)(v3 + 72)));
+  if ( this->m_numBitsForSubpartIndex )
+    v12 = *(_WORD *)(this->m_scaling.m_quad.m128_u64[1] + 2i64 * (int)(key + *(_DWORD *)(v3 + 72)));
   else
     v12 = 0;
-  if ( v4 )
+  if ( buffer )
   {
-    v13 = v5[4].m128_f32[3];
-    v14 = v5[4].m128_i8[8];
-    *(_DWORD *)&(*v4)[8] = 0x1FFFF;
-    *(_DWORD *)&(*v4)[16] = 1026;
-    *(_QWORD *)&(*v4)[24] = 0i64;
-    *(float *)&(*v4)[32] = v13;
-    *(_WORD *)&(*v4)[40] = v12;
-    *(_WORD *)&(*v4)[42] = v14;
-    *(_OWORD *)&(*v4)[96] = 0i64;
-    *(_QWORD *)v4 = &hkpTriangleShape::`vftable;
+    m_data_high = HIDWORD(this->m_subparts.m_data);
+    m_data = (unsigned __int8)this->m_subparts.m_data;
+    *(_DWORD *)&buffer->m_memSizeAndFlags = 0x1FFFF;
+    *(_DWORD *)&buffer->m_type.m_storage = 1026;
+    buffer->m_userData = 0i64;
+    LODWORD(buffer[1].vfptr) = m_data_high;
+    buffer[1].m_memSizeAndFlags = v12;
+    buffer[1].m_referenceCount = m_data;
+    buffer[3].hkReferencedObject = 0i64;
+    buffer->vfptr = (hkBaseObjectVtbl *)&hkpTriangleShape::`vftable;
   }
   else
   {
-    v4 = 0i64;
+    buffer = 0i64;
   }
-  result = (hkpShape *)v4;
-  *(__m128 *)&(*v4)[48] = _mm_mul_ps(v5[1], *v9);
-  *(__m128 *)&(*v4)[64] = _mm_mul_ps(v5[1], *v10);
-  *(__m128 *)&(*v4)[80] = _mm_mul_ps(*v11, v5[1]);
+  result = buffer;
+  *(__m128 *)&buffer[1].m_type.m_storage = _mm_mul_ps(*(__m128 *)&this->m_type.m_storage, *v9);
+  buffer[2].hkReferencedObject = (hkReferencedObject)_mm_mul_ps(*(__m128 *)&this->m_type.m_storage, *v10);
+  *(__m128 *)&buffer[2].m_type.m_storage = _mm_mul_ps(*v11, *(__m128 *)&this->m_type.m_storage);
   return result;
 }
 

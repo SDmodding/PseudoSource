@@ -2,44 +2,32 @@
 // RVA: 0x9F8930
 void __fastcall Scaleform::Render::TextPrimitiveBundle::unpinLayerBatches(Scaleform::Render::TextPrimitiveBundle *this)
 {
-  unsigned __int64 v1; // rax
-  unsigned __int64 v2; // r10
-  Scaleform::Ptr<Scaleform::Render::TextLayerPrimitive> *v3; // r9
-  Scaleform::Render::TextLayerPrimitive *v4; // r9
-  unsigned __int64 v5; // rdx
-  Scaleform::Render::TreeCacheNode *v6; // r8
-  signed __int64 v7; // rax
+  unsigned __int64 Size; // rax
+  unsigned __int64 i; // r10
+  _QWORD *p_pData; // r9
+  __int64 v4; // r9
+  unsigned __int64 j; // rdx
+  __int64 v6; // r8
+  __int64 v7; // rax
 
-  v1 = this->Layers.Size;
-  v2 = 0i64;
-  if ( v1 )
+  Size = this->Layers.Size;
+  for ( i = 0i64; i < Size; ++i )
   {
-    do
+    if ( Size <= 2 )
+      p_pData = &this->Layers.AD.pData;
+    else
+      p_pData = &this->Layers.AD.pData->pObject;
+    v4 = p_pData[i];
+    for ( j = 0i64; j < *(_QWORD *)(v4 + 112); ++j )
     {
-      if ( v1 <= 2 )
-        v3 = (Scaleform::Ptr<Scaleform::Render::TextLayerPrimitive> *)&this->Layers.8;
+      v6 = *(_QWORD *)(*(_QWORD *)(*(_QWORD *)(v4 + 104) + 8 * j) + 56i64);
+      if ( (*(_DWORD *)(v6 + 240) & 0x20) != 0 )
+        v7 = v6 + 208;
       else
-        v3 = this->Layers.AD.pData;
-      v4 = v3[v2].pObject;
-      v5 = 0i64;
-      if ( v4->Entries.Data.Size )
-      {
-        do
-        {
-          v6 = v4->Entries.Data.Data[v5]->pSourceNode;
-          if ( (LODWORD(v6[2].pNext) >> 5) & 1 )
-            v7 = (signed __int64)&v6[1].SortParentBounds;
-          else
-            v7 = 0i64;
-          --*(_QWORD *)(v7 + 136);
-          ++v5;
-        }
-        while ( v5 < v4->Entries.Data.Size );
-      }
-      v1 = this->Layers.Size;
-      ++v2;
+        v7 = 0i64;
+      --*(_QWORD *)(v7 + 136);
     }
-    while ( v2 < v1 );
+    Size = this->Layers.Size;
   }
 }
 

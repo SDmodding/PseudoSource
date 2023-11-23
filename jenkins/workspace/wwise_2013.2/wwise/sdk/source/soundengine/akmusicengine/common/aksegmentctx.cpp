@@ -1,106 +1,105 @@
 // File Line: 67
 // RVA: 0xAAD8E0
-void __fastcall CAkSegmentCtx::CAkSegmentCtx(CAkSegmentCtx *this, CAkMusicSegment *in_pSegmentNode, CAkMusicCtx *in_pParentCtx)
+void __fastcall CAkSegmentCtx::CAkSegmentCtx(
+        CAkSegmentCtx *this,
+        CAkMusicSegment *in_pSegmentNode,
+        CAkMusicCtx *in_pParentCtx)
 {
-  CAkMusicSegment *v3; // rbx
-  CAkSegmentCtx *v4; // rdi
-  CAkAudioLibIndex *v5; // rbx
+  CAkAudioLibIndex *NodeLock; // rbx
   unsigned __int16 v6; // ax
-  signed int v7; // er13
+  signed int v7; // r13d
   CAkMusicTrack **v8; // rax
   unsigned __int16 v9; // bp
   CAkMusicTrack *v10; // r14
-  unsigned __int64 v11; // r12
-  unsigned __int64 v12; // rcx
-  unsigned int v13; // er15
+  unsigned __int64 m_uLength; // r12
+  unsigned __int64 m_ulReserved; // rcx
+  unsigned int v13; // r15d
   CAkMusicTrack **v14; // rsi
   unsigned __int64 v15; // r8
   unsigned __int64 v16; // rdx
   __int64 v17; // rcx
   CAkMusicTrack **v18; // rdx
 
-  v3 = in_pSegmentNode;
-  v4 = this;
-  CAkMusicCtx::CAkMusicCtx((CAkMusicCtx *)&this->vfptr, in_pParentCtx);
-  v4->vfptr = (CAkChildCtxVtbl *)&CAkSegmentCtx::`vftable{for `CAkChildCtx};
-  v4->vfptr = (CAkTransportAwareVtbl *)&CAkSegmentCtx::`vftable{for `CAkTransportAware};
-  v4->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable{for `ITransitionable};
-  CAkContextualMusicSequencer::CAkContextualMusicSequencer(&v4->m_sequencer);
-  v4->m_pSegmentNode = v3;
-  v4->m_pOwner = 0i64;
-  v4->m_iAudibleTime = 0;
-  v4->m_arTracks.m_pItems = 0i64;
-  *(_QWORD *)&v4->m_arTracks.m_uLength = 0i64;
-  v4->m_arTrackRS.m_pItems = 0i64;
-  *(_QWORD *)&v4->m_arTrackRS.m_uLength = 0i64;
-  v4->m_listAutomation.m_pFirst = 0i64;
-  if ( v4->m_pSegmentNode )
+  CAkMusicCtx::CAkMusicCtx(this, in_pParentCtx);
+  this->CAkMusicCtx::CAkChildCtx::vfptr = (CAkChildCtxVtbl *)&CAkSegmentCtx::`vftable{for `CAkChildCtx};
+  this->CAkMusicCtx::CAkTransportAware::vfptr = (CAkTransportAwareVtbl *)&CAkSegmentCtx::`vftable{for `CAkTransportAware};
+  this->CAkMusicCtx::ITransitionable::vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable{for `ITransitionable};
+  CAkContextualMusicSequencer::CAkContextualMusicSequencer(&this->m_sequencer);
+  this->m_pSegmentNode = in_pSegmentNode;
+  this->m_pOwner = 0i64;
+  this->m_iAudibleTime = 0;
+  this->m_arTracks.m_pItems = 0i64;
+  *(_QWORD *)&this->m_arTracks.m_uLength = 0i64;
+  this->m_arTrackRS.m_pItems = 0i64;
+  *(_QWORD *)&this->m_arTrackRS.m_uLength = 0i64;
+  this->m_listAutomation.m_pFirst = 0i64;
+  if ( this->m_pSegmentNode )
   {
-    v5 = CAkAudioLibIndex::GetNodeLock(g_pIndex, 0);
-    EnterCriticalSection(&v5->m_idxAudioNode.m_IndexLock.m_csLock);
-    ((void (*)(void))v4->m_pSegmentNode->vfptr->AddRef)();
-    v6 = ((__int64 (*)(void))v4->m_pSegmentNode->vfptr[20].Release)();
+    NodeLock = CAkAudioLibIndex::GetNodeLock(g_pIndex, AkNodeType_Default);
+    EnterCriticalSection(&NodeLock->m_idxAudioNode.m_IndexLock.m_csLock);
+    this->m_pSegmentNode->vfptr->AddRef(this->m_pSegmentNode);
+    v6 = this->m_pSegmentNode->vfptr[20].Release(this->m_pSegmentNode);
     v7 = v6;
     if ( v6 )
     {
       v8 = (CAkMusicTrack **)AK::MemoryMgr::Malloc(g_DefaultPoolId, 8i64 * v6);
-      v4->m_arTracks.m_pItems = v8;
+      this->m_arTracks.m_pItems = v8;
       if ( !v8 )
       {
-        LeaveCriticalSection(&v5->m_idxAudioNode.m_IndexLock.m_csLock);
+LABEL_17:
+        LeaveCriticalSection(&NodeLock->m_idxAudioNode.m_IndexLock.m_csLock);
         return;
       }
-      v4->m_arTracks.m_ulReserved = v7;
+      this->m_arTracks.m_ulReserved = v7;
     }
     v9 = 0;
     if ( v7 > 0 )
     {
       while ( 1 )
       {
-        v10 = CAkMusicSegment::Track(v4->m_pSegmentNode, v9);
-        v10->vfptr->AddRef((CAkIndexable *)&v10->vfptr);
-        v11 = v4->m_arTracks.m_uLength;
-        v12 = v4->m_arTracks.m_ulReserved;
-        if ( v11 < v12 )
+        v10 = CAkMusicSegment::Track(this->m_pSegmentNode, v9);
+        v10->vfptr->AddRef(v10);
+        m_uLength = this->m_arTracks.m_uLength;
+        m_ulReserved = this->m_arTracks.m_ulReserved;
+        if ( m_uLength < m_ulReserved )
           goto LABEL_13;
-        v13 = v12 + 4;
-        v14 = (CAkMusicTrack **)AK::MemoryMgr::Malloc(g_DefaultPoolId, 8i64 * (unsigned int)(v12 + 4));
+        v13 = m_ulReserved + 4;
+        v14 = (CAkMusicTrack **)AK::MemoryMgr::Malloc(g_DefaultPoolId, 8i64 * (unsigned int)(m_ulReserved + 4));
         if ( v14 )
           break;
 LABEL_16:
         if ( ++v9 >= v7 )
           goto LABEL_17;
       }
-      v15 = v4->m_arTracks.m_uLength;
-      if ( v4->m_arTracks.m_pItems )
+      v15 = this->m_arTracks.m_uLength;
+      if ( this->m_arTracks.m_pItems )
       {
         v16 = 0i64;
-        if ( v4->m_arTracks.m_uLength )
+        if ( this->m_arTracks.m_uLength )
         {
           do
           {
             ++v16;
-            v14[v16 - 1] = v4->m_arTracks.m_pItems[v16 - 1];
+            v14[v16 - 1] = this->m_arTracks.m_pItems[v16 - 1];
           }
           while ( v16 < v15 );
         }
-        AK::MemoryMgr::Free(g_DefaultPoolId, v4->m_arTracks.m_pItems);
+        AK::MemoryMgr::Free(g_DefaultPoolId, this->m_arTracks.m_pItems);
       }
-      v4->m_arTracks.m_pItems = v14;
-      v4->m_arTracks.m_ulReserved = v13;
+      this->m_arTracks.m_pItems = v14;
+      this->m_arTracks.m_ulReserved = v13;
 LABEL_13:
-      if ( v11 < v4->m_arTracks.m_ulReserved )
+      if ( m_uLength < this->m_arTracks.m_ulReserved )
       {
-        v17 = v4->m_arTracks.m_uLength;
-        v18 = &v4->m_arTracks.m_pItems[v17];
-        v4->m_arTracks.m_uLength = v17 + 1;
+        v17 = this->m_arTracks.m_uLength;
+        v18 = &this->m_arTracks.m_pItems[v17];
+        this->m_arTracks.m_uLength = v17 + 1;
         if ( v18 )
           *v18 = v10;
       }
       goto LABEL_16;
     }
-LABEL_17:
-    LeaveCriticalSection(&v5->m_idxAudioNode.m_IndexLock.m_csLock);
+    goto LABEL_17;
   }
 }
 
@@ -108,114 +107,107 @@ LABEL_17:
 // RVA: 0xAADBB0
 void __fastcall CAkSegmentCtx::~CAkSegmentCtx(CAkSegmentCtx *this)
 {
-  CAkSegmentCtx *v1; // rsi
-  unsigned __int16 *v2; // rdx
-  CAkAudioLibIndex *v3; // rdi
+  unsigned __int16 *m_pItems; // rdx
+  CAkAudioLibIndex *NodeLock; // rdi
   CAkMusicTrack **v4; // rbx
   CAkMusicTrack **v5; // rdx
 
-  v1 = this;
-  this->vfptr = (CAkChildCtxVtbl *)&CAkSegmentCtx::`vftable{for `CAkChildCtx};
-  this->vfptr = (CAkTransportAwareVtbl *)&CAkSegmentCtx::`vftable{for `CAkTransportAware};
-  this->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable{for `ITransitionable};
+  this->CAkMusicCtx::CAkChildCtx::vfptr = (CAkChildCtxVtbl *)&CAkSegmentCtx::`vftable{for `CAkChildCtx};
+  this->CAkMusicCtx::CAkTransportAware::vfptr = (CAkTransportAwareVtbl *)&CAkSegmentCtx::`vftable{for `CAkTransportAware};
+  this->CAkMusicCtx::ITransitionable::vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable{for `ITransitionable};
   this->m_sequencer.m_pFirst = 0i64;
   this->m_sequencer.m_pLast = 0i64;
-  v2 = this->m_arTrackRS.m_pItems;
-  if ( v2 )
+  m_pItems = this->m_arTrackRS.m_pItems;
+  if ( m_pItems )
   {
     this->m_arTrackRS.m_uLength = 0;
-    AK::MemoryMgr::Free(g_DefaultPoolId, v2);
-    v1->m_arTrackRS.m_pItems = 0i64;
-    v1->m_arTrackRS.m_ulReserved = 0;
+    AK::MemoryMgr::Free(g_DefaultPoolId, m_pItems);
+    this->m_arTrackRS.m_pItems = 0i64;
+    this->m_arTrackRS.m_ulReserved = 0;
   }
-  if ( v1->m_pSegmentNode )
+  if ( this->m_pSegmentNode )
   {
-    v3 = CAkAudioLibIndex::GetNodeLock(g_pIndex, 0);
-    EnterCriticalSection(&v3->m_idxAudioNode.m_IndexLock.m_csLock);
-    v4 = v1->m_arTracks.m_pItems;
-    if ( v4 != &v4[v1->m_arTracks.m_uLength] )
+    NodeLock = CAkAudioLibIndex::GetNodeLock(g_pIndex, AkNodeType_Default);
+    EnterCriticalSection(&NodeLock->m_idxAudioNode.m_IndexLock.m_csLock);
+    v4 = this->m_arTracks.m_pItems;
+    if ( v4 != &v4[this->m_arTracks.m_uLength] )
     {
       do
       {
-        ((void (*)(void))(*v4)->vfptr->Release)();
+        (*v4)->vfptr->Release(*v4);
         ++v4;
       }
-      while ( v4 != &v1->m_arTracks.m_pItems[v1->m_arTracks.m_uLength] );
+      while ( v4 != &this->m_arTracks.m_pItems[this->m_arTracks.m_uLength] );
     }
-    ((void (*)(void))v1->m_pSegmentNode->vfptr->Release)();
-    LeaveCriticalSection(&v3->m_idxAudioNode.m_IndexLock.m_csLock);
+    this->m_pSegmentNode->vfptr->Release(this->m_pSegmentNode);
+    LeaveCriticalSection(&NodeLock->m_idxAudioNode.m_IndexLock.m_csLock);
   }
-  v5 = v1->m_arTracks.m_pItems;
+  v5 = this->m_arTracks.m_pItems;
   if ( v5 )
   {
-    v1->m_arTracks.m_uLength = 0;
+    this->m_arTracks.m_uLength = 0;
     AK::MemoryMgr::Free(g_DefaultPoolId, v5);
-    v1->m_arTracks.m_pItems = 0i64;
-    v1->m_arTracks.m_ulReserved = 0;
+    this->m_arTracks.m_pItems = 0i64;
+    this->m_arTracks.m_ulReserved = 0;
   }
-  CAkContextualMusicSequencer::~CAkContextualMusicSequencer(&v1->m_sequencer);
-  CAkMusicCtx::~CAkMusicCtx((CAkMusicCtx *)&v1->vfptr);
+  CAkContextualMusicSequencer::~CAkContextualMusicSequencer(&this->m_sequencer);
+  CAkMusicCtx::~CAkMusicCtx(this);
 }
 
 // File Line: 117
 // RVA: 0xAAE500
-signed __int64 __fastcall CAkSegmentCtx::Init(CAkSegmentCtx *this, CAkRegisteredObj *in_GameObject, UserParams *in_rUserparams)
+__int64 __fastcall CAkSegmentCtx::Init(
+        CAkSegmentCtx *this,
+        CAkRegisteredObj *in_GameObject,
+        UserParams *in_rUserparams)
 {
-  CAkSegmentCtx *v3; // rdi
-  unsigned int v4; // ebx
+  unsigned int m_uLength; // ebx
   unsigned __int16 *v5; // rax
-  CAkMusicTrack **v6; // rbx
-  unsigned __int16 v7; // si
+  CAkMusicTrack **m_pItems; // rbx
+  unsigned __int16 NextRS; // si
   unsigned __int16 *v8; // rax
 
-  v3 = this;
-  CAkMusicCtx::Init((CAkMusicCtx *)&this->vfptr, in_GameObject, in_rUserparams);
-  v4 = v3->m_arTracks.m_uLength;
-  if ( v4 )
+  CAkMusicCtx::Init(this, in_GameObject, in_rUserparams);
+  m_uLength = this->m_arTracks.m_uLength;
+  if ( m_uLength )
   {
-    v5 = (unsigned __int16 *)AK::MemoryMgr::Malloc(g_DefaultPoolId, 2i64 * v4);
-    v3->m_arTrackRS.m_pItems = v5;
+    v5 = (unsigned __int16 *)AK::MemoryMgr::Malloc(g_DefaultPoolId, 2i64 * m_uLength);
+    this->m_arTrackRS.m_pItems = v5;
     if ( !v5 )
       return 52i64;
-    v3->m_arTrackRS.m_ulReserved = v4;
+    this->m_arTrackRS.m_ulReserved = m_uLength;
   }
-  v6 = v3->m_arTracks.m_pItems;
-  if ( v6 != &v6[v3->m_arTracks.m_uLength] )
+  m_pItems = this->m_arTracks.m_pItems;
+  if ( m_pItems != &m_pItems[this->m_arTracks.m_uLength] )
   {
     do
     {
-      v7 = CAkMusicTrack::GetNextRS(*v6);
-      v8 = AkArray<unsigned short,unsigned short,ArrayPoolDefault,16,AkArrayAllocatorDefault>::AddLast(&v3->m_arTrackRS);
+      NextRS = CAkMusicTrack::GetNextRS(*m_pItems);
+      v8 = AkArray<unsigned short,unsigned short,ArrayPoolDefault,16,AkArrayAllocatorDefault>::AddLast(&this->m_arTrackRS);
       if ( v8 )
-        *v8 = v7;
-      ++v6;
+        *v8 = NextRS;
+      ++m_pItems;
     }
-    while ( v6 != &v3->m_arTracks.m_pItems[v3->m_arTracks.m_uLength] );
+    while ( m_pItems != &this->m_arTracks.m_pItems[this->m_arTracks.m_uLength] );
   }
   return 1i64;
 }
 
 // File Line: 142
 // RVA: 0xAAE6D0
-void __fastcall CAkSegmentCtx::Process(CAkSegmentCtx *this, int in_iTime, unsigned int in_uNumSamples)
+void __fastcall CAkSegmentCtx::Process(CAkSegmentCtx *this, int in_iTime, int in_uNumSamples)
 {
-  unsigned int v3; // ebx
-  int v4; // ebp
-  CAkSegmentCtx *v5; // rdi
   int v6; // esi
   AkMusicAutomation *i; // rbx
   float v8; // xmm0_4
-  unsigned int out_index; // [rsp+38h] [rbp+10h]
+  unsigned int out_index; // [rsp+38h] [rbp+10h] BYREF
 
   ++this->m_uRefCount;
-  v3 = in_uNumSamples;
-  v4 = in_iTime;
-  v5 = this;
-  if ( *((_BYTE *)&this->0 + 98) & 2 && this->m_uNumLastSamples != -1 )
-    v3 = this->m_uNumLastSamples;
-  CAkSegmentCtx::ExecuteScheduledCmds(this, in_iTime, v3);
-  v6 = v3 + CAkMusicSegment::PreEntryDuration(v5->m_pSegmentNode) + v4;
-  for ( i = v5->m_listAutomation.m_pFirst; i; i = i->pNextLightItem )
+  if ( (*((_BYTE *)&this->CAkMusicCtx + 98) & 2) != 0 && this->m_uNumLastSamples != -1 )
+    in_uNumSamples = this->m_uNumLastSamples;
+  CAkSegmentCtx::ExecuteScheduledCmds(this, in_iTime, in_uNumSamples);
+  v6 = in_uNumSamples + CAkMusicSegment::PreEntryDuration(this->m_pSegmentNode) + in_iTime;
+  for ( i = this->m_listAutomation.m_pFirst; i; i = i->pNextLightItem )
   {
     v8 = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::ConvertInternal(
            &i->pAutomationData->m_tableAutomation,
@@ -224,128 +216,126 @@ void __fastcall CAkSegmentCtx::Process(CAkSegmentCtx *this, int in_iTime, unsign
            &out_index);
     CAkMusicPBI::SetAutomationValue(i->pPBI, i->pAutomationData->m_eAutoType, v8);
   }
-  if ( *((_BYTE *)&v5->0 + 98) & 2 )
-    v5->vfptr[1].OnPaused((CAkChildCtx *)&v5->vfptr);
-  CAkMusicCtx::Release((CAkMusicCtx *)&v5->vfptr);
+  if ( (*((_BYTE *)&this->CAkMusicCtx + 98) & 2) != 0 )
+    this->CAkMusicCtx::CAkChildCtx::vfptr[1].OnPaused(this);
+  CAkMusicCtx::Release(this);
 }
 
 // File Line: 162
 // RVA: 0xAAE840
 void __fastcall CAkSegmentCtx::ScheduleAudioClips(CAkSegmentCtx *this)
 {
-  int v1; // ebp
+  int m_iAudibleTime; // ebp
   CAkSegmentCtx *v2; // rsi
   int v3; // eax
-  CAkMusicTrack **v4; // rbx
+  CAkMusicTrack **m_pItems; // rbx
   __int64 v5; // r8
   int v6; // ebp
-  unsigned int v7; // er12
+  unsigned int v7; // r12d
   CAkMusicTrack *v8; // rbx
-  signed __int64 v9; // rcx
+  __int64 v9; // rcx
   __int64 v10; // r13
   AkTrackSrc *v11; // rdi
-  CAkMusicSource *v12; // rax
-  unsigned int v13; // er15
-  int v14; // edx
-  int v15; // esi
-  AkMusicActionPlay *v16; // r14
-  int v17; // eax
-  CAkMusicTrack **v18; // [rsp+20h] [rbp-58h]
-  signed __int64 v19; // [rsp+28h] [rbp-50h]
-  CAkSegmentCtx *v20; // [rsp+80h] [rbp+8h]
-  unsigned int v21; // [rsp+88h] [rbp+10h]
-  int v22; // [rsp+90h] [rbp+18h]
-  unsigned int v23; // [rsp+98h] [rbp+20h]
+  CAkMusicSource *SourcePtr; // rax
+  int v13; // edx
+  unsigned int m_uStreamingLookAhead; // r15d
+  signed int uClipStartPosition; // edx
+  unsigned int v16; // esi
+  AkMusicActionPlay *v17; // r14
+  int v18; // eax
+  CAkMusicTrack **v19; // [rsp+20h] [rbp-58h]
+  __int64 v20; // [rsp+28h] [rbp-50h]
+  unsigned int iSourceTrimOffset; // [rsp+88h] [rbp+10h]
+  int v23; // [rsp+90h] [rbp+18h]
+  unsigned int m_uLength; // [rsp+98h] [rbp+20h]
 
-  v20 = this;
-  v1 = this->m_iAudibleTime;
+  m_iAudibleTime = this->m_iAudibleTime;
   v2 = this;
   v3 = CAkMusicSegment::PreEntryDuration(this->m_pSegmentNode);
-  v4 = v2->m_arTracks.m_pItems;
+  m_pItems = v2->m_arTracks.m_pItems;
   v5 = 0i64;
-  v6 = v3 + v1;
-  v22 = 0;
-  v18 = v2->m_arTracks.m_pItems;
-  if ( v4 != &v4[v2->m_arTracks.m_uLength] )
+  v6 = v3 + m_iAudibleTime;
+  v23 = 0;
+  v19 = m_pItems;
+  if ( m_pItems != &m_pItems[v2->m_arTracks.m_uLength] )
   {
     do
     {
       v7 = 0;
-      v23 = (*v4)->m_arTrackPlaylist.m_uLength;
-      if ( v23 )
+      m_uLength = (*m_pItems)->m_arTrackPlaylist.m_uLength;
+      if ( m_uLength )
       {
-        v8 = *v4;
+        v8 = *m_pItems;
         v9 = 2 * v5;
         v10 = 0i64;
-        v19 = 2 * v5;
+        v20 = 2 * v5;
         do
         {
           v11 = &v8->m_arTrackPlaylist.m_pItems[v10];
           if ( v11->uSubTrackIndex == *(unsigned __int16 *)((char *)v2->m_arTrackRS.m_pItems + v9) )
           {
-            v12 = CAkMusicTrack::GetSourcePtr(v8, v11->srcID);
-            if ( v12 )
+            SourcePtr = CAkMusicTrack::GetSourcePtr(v8, v11->srcID);
+            if ( SourcePtr )
             {
-              v13 = 0;
-              if ( (*((_DWORD *)&v12->m_sSrcTypeInfo.mediaInfo + 4) & 0x7C) == 4
-                && (!((*((_DWORD *)&v12->m_sSrcTypeInfo.mediaInfo + 4) >> 1) & 1)
-                 || v6 > (signed int)v11->uClipStartPosition
-                 || v11->iSourceTrimOffset) )
+              v13 = *((_DWORD *)&SourcePtr->m_sSrcTypeInfo.mediaInfo + 4);
+              m_uStreamingLookAhead = 0;
+              if ( (v13 & 0x7C) == 4
+                && ((v13 & 2) == 0 || v6 > (signed int)v11->uClipStartPosition || v11->iSourceTrimOffset) )
               {
-                v13 = v12->m_uStreamingLookAhead;
+                m_uStreamingLookAhead = SourcePtr->m_uStreamingLookAhead;
               }
-              v14 = v11->uClipStartPosition;
-              if ( v6 < (signed int)(v14 + v11->uClipDuration) )
+              uClipStartPosition = v11->uClipStartPosition;
+              if ( v6 < (signed int)(uClipStartPosition + v11->uClipDuration) )
               {
-                if ( v6 <= v14 )
+                if ( v6 <= uClipStartPosition )
                 {
-                  v21 = v11->iSourceTrimOffset;
-                  v15 = v14 - v13;
+                  iSourceTrimOffset = v11->iSourceTrimOffset;
+                  v16 = uClipStartPosition - m_uStreamingLookAhead;
                 }
                 else
                 {
-                  v15 = v6 - v13;
-                  v21 = (v6 + v11->iSourceTrimOffset - v14) % v11->uSrcDuration;
+                  v16 = v6 - m_uStreamingLookAhead;
+                  iSourceTrimOffset = (v6 + v11->iSourceTrimOffset - uClipStartPosition) % v11->uSrcDuration;
                 }
-                v16 = (AkMusicActionPlay *)AK::MemoryMgr::Malloc(g_DefaultPoolId, 0x38ui64);
-                if ( v16 )
+                v17 = (AkMusicActionPlay *)AK::MemoryMgr::Malloc(g_DefaultPoolId, 0x38ui64);
+                if ( v17 )
                 {
-                  v17 = CAkMusicSegment::PreEntryDuration(v20->m_pSegmentNode);
-                  v16->m_pTrack = v8;
-                  v16->m_rTrackSrc = v11;
-                  v16->m_uPlayOffset = v13;
-                  v16->vfptr = (AkMusicActionVtbl *)&AkMusicActionPlay::`vftable;
-                  v16->m_iTime = v15 - v17;
-                  v16->m_uSourceOffset = v21;
-                  v16->m_listAutomation.m_pFirst = 0i64;
-                  AkMusicActionPlay::AttachClipAutomation(v16, v7, 0, v11->uClipStartPosition);
-                  AkMusicActionPlay::AttachClipAutomation(v16, v7, AutomationType_LPF, v11->uClipStartPosition);
-                  AkMusicActionPlay::AttachClipAutomation(v16, v7, AutomationType_FadeIn, v11->uClipStartPosition);
-                  AkMusicActionPlay::AttachClipAutomation(v16, v7, AutomationType_FadeOut, v11->uClipStartPosition);
-                  v2 = v20;
-                  CAkContextualMusicSequencer::ScheduleAction(&v20->m_sequencer, (AkMusicAction *)&v16->vfptr);
+                  v18 = CAkMusicSegment::PreEntryDuration(this->m_pSegmentNode);
+                  v17->m_pTrack = v8;
+                  v17->m_rTrackSrc = v11;
+                  v17->m_uPlayOffset = m_uStreamingLookAhead;
+                  v17->vfptr = (AkMusicActionVtbl *)&AkMusicActionPlay::`vftable;
+                  v17->m_iTime = v16 - v18;
+                  v17->m_uSourceOffset = iSourceTrimOffset;
+                  v17->m_listAutomation.m_pFirst = 0i64;
+                  AkMusicActionPlay::AttachClipAutomation(v17, v7, AutomationType_Volume, v11->uClipStartPosition);
+                  AkMusicActionPlay::AttachClipAutomation(v17, v7, AutomationType_LPF, v11->uClipStartPosition);
+                  AkMusicActionPlay::AttachClipAutomation(v17, v7, AutomationType_FadeIn, v11->uClipStartPosition);
+                  AkMusicActionPlay::AttachClipAutomation(v17, v7, AutomationType_FadeOut, v11->uClipStartPosition);
+                  v2 = this;
+                  CAkContextualMusicSequencer::ScheduleAction(&this->m_sequencer, v17);
                 }
                 else
                 {
-                  v2 = v20;
+                  v2 = this;
                 }
               }
             }
           }
-          v9 = v19;
+          v9 = v20;
           ++v7;
           ++v10;
         }
-        while ( v7 < v23 );
-        v4 = v18;
-        LODWORD(v5) = v22;
+        while ( v7 < m_uLength );
+        m_pItems = v19;
+        LODWORD(v5) = v23;
       }
-      ++v4;
+      ++m_pItems;
       v5 = (unsigned int)(v5 + 1);
-      v18 = v4;
-      v22 = v5;
+      v19 = m_pItems;
+      v23 = v5;
     }
-    while ( v4 != &v2->m_arTracks.m_pItems[v2->m_arTracks.m_uLength] );
+    while ( m_pItems != &v2->m_arTracks.m_pItems[v2->m_arTracks.m_uLength] );
   }
 }
 
@@ -361,277 +351,261 @@ __int64 __fastcall CAkSegmentCtx::Prepare(CAkSegmentCtx *this, int in_iSourceOff
 // RVA: 0xAAE600
 void __fastcall CAkSegmentCtx::OnPlayed(CAkSegmentCtx *this)
 {
-  CAkSegmentCtx *v1; // rbx
-
-  v1 = this;
-  CAkMusicCtx::OnPlayed((CAkMusicCtx *)&this->vfptr);
-  CAkSegmentCtx::ScheduleAudioClips(v1);
+  CAkMusicCtx::OnPlayed(this);
+  CAkSegmentCtx::ScheduleAudioClips(this);
 }
 
 // File Line: 326
 // RVA: 0xAAE620
 void __fastcall CAkSegmentCtx::OnStopped(CAkSegmentCtx *this)
 {
-  CAkSegmentCtx *v1; // rbx
-  AkMusicAutomation *v2; // rdx
-  CAkScheduledItem *v3; // rdx
-  CAkMusicCtx *v4; // rcx
+  AkMusicAutomation *m_pFirst; // rdx
+  CAkScheduledItem *m_pOwner; // rdx
+  CAkMusicCtx *m_pT; // rcx
 
   ++this->m_uRefCount;
-  v1 = this;
-  while ( v1->m_listAutomation.m_pFirst )
+  while ( this->m_listAutomation.m_pFirst )
   {
-    v2 = v1->m_listAutomation.m_pFirst;
-    if ( v2 )
+    m_pFirst = this->m_listAutomation.m_pFirst;
+    if ( m_pFirst )
     {
-      v1->m_listAutomation.m_pFirst = v2->pNextLightItem;
-      AK::MemoryMgr::Free(g_DefaultPoolId, v2);
+      this->m_listAutomation.m_pFirst = m_pFirst->pNextLightItem;
+      AK::MemoryMgr::Free(g_DefaultPoolId, m_pFirst);
     }
   }
-  CAkContextualMusicSequencer::Flush(&v1->m_sequencer);
-  v3 = v1->m_pOwner;
-  if ( v3 )
+  CAkContextualMusicSequencer::Flush(&this->m_sequencer);
+  m_pOwner = this->m_pOwner;
+  if ( m_pOwner )
   {
-    v3->m_pSegment.m_pT->m_pOwner = 0i64;
-    v4 = (CAkMusicCtx *)&v3->m_pSegment.m_pT->vfptr;
-    v3->m_pSegment.m_pT = 0i64;
-    if ( v4 )
-      CAkMusicCtx::Release(v4);
+    m_pOwner->m_pSegment.m_pT->m_pOwner = 0i64;
+    m_pT = m_pOwner->m_pSegment.m_pT;
+    m_pOwner->m_pSegment.m_pT = 0i64;
+    if ( m_pT )
+      CAkMusicCtx::Release(m_pT);
   }
-  CAkMusicCtx::OnStopped((CAkMusicCtx *)&v1->vfptr);
-  CAkMusicCtx::Release((CAkMusicCtx *)&v1->vfptr);
+  CAkMusicCtx::OnStopped(this);
+  CAkMusicCtx::Release(this);
 }
 
 // File Line: 348
 // RVA: 0xAAE5D0
 void __fastcall CAkSegmentCtx::OnPaused(CAkSegmentCtx *this)
 {
-  CAkSegmentCtx *v1; // rbx
-  CAkScheduledItem *v2; // rcx
+  CAkScheduledItem *m_pOwner; // rcx
 
-  v1 = this;
-  CAkMusicCtx::OnPaused((CAkMusicCtx *)&this->vfptr);
-  v2 = v1->m_pOwner;
-  if ( v2 )
-    CAkScheduledItem::OnPaused(v2);
+  CAkMusicCtx::OnPaused(this);
+  m_pOwner = this->m_pOwner;
+  if ( m_pOwner )
+    CAkScheduledItem::OnPaused(m_pOwner);
 }
 
 // File Line: 449
 // RVA: 0xAAE040
-void __fastcall CAkSegmentCtx::ExecuteScheduledCmds(CAkSegmentCtx *this, int in_iTime, unsigned int in_uNumSamples)
+void __fastcall CAkSegmentCtx::ExecuteScheduledCmds(CAkSegmentCtx *this, int in_iTime, int in_uNumSamples)
 {
-  CAkContextualMusicSequencer *v3; // rsi
-  CAkSegmentCtx *v4; // r15
-  int v5; // er13
-  int v6; // er14
-  AkMusicAutomation *v7; // rdi
-  unsigned int v8; // er12
-  int v9; // eax
+  CAkContextualMusicSequencer *p_m_sequencer; // rsi
+  int v5; // r13d
+  int v6; // r14d
+  AkMusicAutomation *i; // rdi
+  unsigned int v8; // r12d
+  AkMusicActionType v9; // eax
   AkMusicAction *v10; // rsi
-  AkMusicAutomation *v11; // rbx
+  AkMusicAutomation *m_pFirst; // rbx
   int v12; // eax
   float v13; // xmm0_4
-  AkMusicAutomation *v14; // rax
-  int v15; // ecx
-  AkMusicAction *v16; // r13
-  CAkMusicCtx *v17; // rax
-  CAkChildCtxVtbl *v18; // rbx
-  unsigned int v19; // edx
-  int v20; // edi
-  int v21; // esi
-  CAkRegisteredObj *v22; // r14
-  CAkMusicSource *v23; // rax
-  unsigned int in_uSourceOffset; // ST38_4
-  AkTrackSrc *v25; // rsi
-  AkMusicAction *v26; // rdi
-  int v27; // ebx
-  int v28; // eax
-  AkMusicActionVtbl *v29; // rcx
-  AkMusicAutomation *v30; // rax
-  int v31; // ecx
-  AkMusicAction *v32; // rbx
-  int v33; // edi
-  unsigned int v34; // edi
-  AkMusicActionVtbl *v35; // rbx
-  int v36; // eax
-  float v37; // xmm0_4
-  AkMusicAction *out_pAction; // [rsp+50h] [rbp-19h]
-  TransParams in_transParams; // [rsp+58h] [rbp-11h]
-  __m128i v40; // [rsp+60h] [rbp-9h]
-  __m128i v41; // [rsp+70h] [rbp+7h]
-  AkTrackSrc *out_index; // [rsp+D0h] [rbp+67h]
-  int v43; // [rsp+D8h] [rbp+6Fh]
-  unsigned int v44; // [rsp+E0h] [rbp+77h]
-  CAkMusicPBI *out_pPBI; // [rsp+E8h] [rbp+7Fh]
+  AkMusicAutomation *pNextLightItem; // rax
+  AkMusicAction *v15; // r13
+  CAkMusicCtx *m_pParentCtx; // rax
+  CAkChildCtxVtbl *vfptr; // rbx
+  unsigned int vfptr_high; // edx
+  int v19; // edi
+  int m_iTime; // esi
+  CAkRegisteredObj *OnLastFrame; // r14
+  CAkMusicSource *SourcePtr; // rax
+  AkTrackSrc *v23; // rsi
+  AkMusicAction *v24; // rdi
+  int v25; // ebx
+  int v26; // eax
+  AkMusicAutomation *v27; // rcx
+  AkMusicAutomation *v28; // rax
+  AkClipAutomationType m_eAutoType; // ecx
+  AkMusicAction *v30; // rbx
+  int v31; // edi
+  int v32; // edi
+  AkMusicActionVtbl *v33; // rbx
+  int v34; // eax
+  float v35; // xmm0_4
+  unsigned int in_uSourceOffset; // [rsp+38h] [rbp-31h]
+  AkMusicAction *out_pAction; // [rsp+50h] [rbp-19h] BYREF
+  TransParams in_transParams; // [rsp+58h] [rbp-11h] BYREF
+  __int128 v39; // [rsp+60h] [rbp-9h]
+  __int128 v40; // [rsp+70h] [rbp+7h]
+  AkTrackSrc *out_index; // [rsp+D0h] [rbp+67h] BYREF
+  int v42; // [rsp+D8h] [rbp+6Fh]
+  int v43; // [rsp+E0h] [rbp+77h]
+  CAkMusicPBI *out_pPBI; // [rsp+E8h] [rbp+7Fh] BYREF
 
-  v44 = in_uNumSamples;
-  v43 = in_iTime;
-  v3 = &this->m_sequencer;
-  v4 = this;
+  v43 = in_uNumSamples;
+  v42 = in_iTime;
+  p_m_sequencer = &this->m_sequencer;
   v5 = in_uNumSamples;
   v6 = in_iTime;
-  if ( CAkContextualMusicSequencer::PopImminentAction(&this->m_sequencer, in_iTime, in_uNumSamples, &out_pAction) == 45 )
+  if ( CAkContextualMusicSequencer::PopImminentAction(&this->m_sequencer, in_iTime, in_uNumSamples, &out_pAction) == AK_DataReady )
   {
-    v7 = 0i64;
-    while ( 1 )
+    for ( i = 0i64; ; i = 0i64 )
     {
       v8 = out_pAction->m_iTime - v6;
-      v9 = ((__int64 (*)(void))out_pAction->vfptr->Type)();
-      if ( !v9 )
+      v9 = out_pAction->vfptr->Type(out_pAction);
+      if ( v9 == MusicActionTypePlay )
         break;
-      if ( v9 == 1 )
+      if ( v9 == MusicActionTypeStop )
       {
         v10 = out_pAction;
         CAkMusicPBI::_Stop((CAkMusicPBI *)out_pAction[1].vfptr, v8);
         if ( LOBYTE(v10[1].pNextItem) )
         {
-          v11 = v4->m_listAutomation.m_pFirst;
-          while ( v11 )
+          m_pFirst = this->m_listAutomation.m_pFirst;
+          while ( m_pFirst )
           {
-            if ( v11->pPBI == (CAkMusicPBI *)v10[1].vfptr )
+            if ( m_pFirst->pPBI == (CAkMusicPBI *)v10[1].vfptr )
             {
-              v12 = CAkMusicSegment::PreEntryDuration(v4->m_pSegmentNode);
+              v12 = CAkMusicSegment::PreEntryDuration(this->m_pSegmentNode);
               v13 = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::ConvertInternal(
-                      &v11->pAutomationData->m_tableAutomation,
-                      (float)(v5 + v6 + v12 - v11->iTimeStart),
+                      &m_pFirst->pAutomationData->m_tableAutomation,
+                      (float)(v5 + v6 + v12 - m_pFirst->iTimeStart),
                       0,
                       (unsigned int *)&out_index);
-              CAkMusicPBI::SetAutomationValue(v11->pPBI, v11->pAutomationData->m_eAutoType, v13);
-              v14 = v11->pNextLightItem;
-              v40.m128i_i64[1] = (__int64)v7;
-              v40.m128i_i64[0] = (__int64)v14;
-              if ( v11 == v4->m_listAutomation.m_pFirst )
-                v4->m_listAutomation.m_pFirst = v14;
+              CAkMusicPBI::SetAutomationValue(m_pFirst->pPBI, m_pFirst->pAutomationData->m_eAutoType, v13);
+              pNextLightItem = m_pFirst->pNextLightItem;
+              *((_QWORD *)&v39 + 1) = i;
+              *(_QWORD *)&v39 = pNextLightItem;
+              if ( m_pFirst == this->m_listAutomation.m_pFirst )
+                this->m_listAutomation.m_pFirst = pNextLightItem;
               else
-                v7->pNextLightItem = v14;
-              v15 = g_DefaultPoolId;
-              _mm_store_si128(&v41, v40);
-              AK::MemoryMgr::Free(v15, v11);
-              v7 = (AkMusicAutomation *)v41.m128i_i64[1];
-              v11 = (AkMusicAutomation *)v41.m128i_i64[0];
+                i->pNextLightItem = pNextLightItem;
+              v40 = v39;
+              AK::MemoryMgr::Free(g_DefaultPoolId, m_pFirst);
+              i = (AkMusicAutomation *)*((_QWORD *)&v40 + 1);
+              m_pFirst = (AkMusicAutomation *)v40;
             }
             else
             {
-              v7 = v11;
-              v11 = v11->pNextLightItem;
+              i = m_pFirst;
+              m_pFirst = m_pFirst->pNextLightItem;
             }
           }
         }
         goto LABEL_30;
       }
 LABEL_31:
-      v32 = out_pAction;
-      v33 = g_DefaultPoolId;
+      v30 = out_pAction;
+      v31 = g_DefaultPoolId;
       if ( out_pAction )
       {
-        out_pAction->vfptr->__vecDelDtor(out_pAction, 0);
-        AK::MemoryMgr::Free(v33, v32);
+        out_pAction->vfptr->__vecDelDtor(out_pAction, 0i64);
+        AK::MemoryMgr::Free(v31, v30);
       }
-      v7 = 0i64;
-      if ( CAkContextualMusicSequencer::PopImminentAction(v3, v6, v5, &out_pAction) != 45 )
+      if ( CAkContextualMusicSequencer::PopImminentAction(p_m_sequencer, v6, v5, &out_pAction) != AK_DataReady )
         return;
     }
-    v16 = out_pAction;
-    v17 = v4->m_pParentCtx;
+    v15 = out_pAction;
+    m_pParentCtx = this->m_pParentCtx;
     in_transParams.TransitionTime = 0;
     out_pPBI = 0i64;
-    v18 = v17[1].vfptr;
-    v19 = HIDWORD(out_pAction[1].pNextItem->vfptr);
-    v20 = *(&out_pAction[1].m_iTime + 1);
-    v21 = out_pAction[1].m_iTime;
-    v22 = (CAkRegisteredObj *)v18[1].OnLastFrame;
+    vfptr = m_pParentCtx[1].CAkChildCtx::vfptr;
+    vfptr_high = HIDWORD(out_pAction[1].pNextItem->vfptr);
+    v19 = *(&out_pAction[1].m_iTime + 1);
+    m_iTime = out_pAction[1].m_iTime;
+    OnLastFrame = (CAkRegisteredObj *)vfptr[1].OnLastFrame;
     out_index = (AkTrackSrc *)out_pAction[1].pNextItem;
-    v23 = CAkMusicTrack::GetSourcePtr((CAkMusicTrack *)out_pAction[1].vfptr, v19);
-    in_uSourceOffset = v21;
-    v25 = out_index;
+    SourcePtr = CAkMusicTrack::GetSourcePtr((CAkMusicTrack *)out_pAction[1].vfptr, vfptr_high);
+    in_uSourceOffset = m_iTime;
+    v23 = out_index;
     if ( (unsigned int)CAkMusicRenderer::Play(
-                         (CAkMusicCtx *)&v4->vfptr,
-                         (CAkSoundBase *)v16[1].vfptr,
-                         (CAkSource *)&v23->m_sSrcTypeInfo,
-                         v22,
+                         this,
+                         (CAkSoundBase *)v15[1].vfptr,
+                         SourcePtr,
+                         OnLastFrame,
                          &in_transParams,
-                         (UserParams *)&v18->SetPBIFade,
+                         (UserParams *)&vfptr->SetPBIFade,
                          out_index,
                          in_uSourceOffset,
-                         v20 + v8,
+                         v19 + v8,
                          &out_pPBI) == 1 )
     {
-      if ( *((_BYTE *)&v4->0 + 98) & 2 )
+      if ( (*((_BYTE *)&this->CAkMusicCtx + 98) & 2) != 0 )
       {
-        CAkMusicPBI::_Stop(out_pPBI, v4->m_uNumLastSamples);
-        v6 = v43;
-        v34 = v44;
+        CAkMusicPBI::_Stop(out_pPBI, this->m_uNumLastSamples);
+        v6 = v42;
+        v32 = v43;
         while ( 1 )
         {
-          v35 = v16[2].vfptr;
-          if ( !v35 )
+          v33 = v15[2].vfptr;
+          if ( !v33 )
             break;
-          v16[2].vfptr = (AkMusicActionVtbl *)v35[1].Type;
-          v35->Type = (AkMusicActionType (__fastcall *)(AkMusicAction *))out_pPBI;
-          v36 = CAkMusicSegment::PreEntryDuration(v4->m_pSegmentNode);
-          v37 = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::ConvertInternal(
-                  (CAkConversionTable<AkRTPCGraphPointBase<float>,float> *)((char *)v35->__vecDelDtor + 8),
-                  (float)(signed int)(v34 + v6 + v36 - LODWORD(v35[1].__vecDelDtor)),
+          v15[2].vfptr = (AkMusicActionVtbl *)v33[1].Type;
+          v33->Type = (AkMusicActionType (__fastcall *)(AkMusicAction *))out_pPBI;
+          v34 = CAkMusicSegment::PreEntryDuration(this->m_pSegmentNode);
+          v35 = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::ConvertInternal(
+                  (CAkConversionTable<AkRTPCGraphPointBase<float>,float> *)((char *)v33->__vecDelDtor + 8),
+                  (float)(v32 + v6 + v34 - LODWORD(v33[1].__vecDelDtor)),
                   0,
                   (unsigned int *)&out_index);
-          CAkMusicPBI::SetAutomationValue(
-            (CAkMusicPBI *)v35->Type,
-            *((AkClipAutomationType *)v35->__vecDelDtor + 1),
-            v37);
-          AK::MemoryMgr::Free(g_DefaultPoolId, v35);
+          CAkMusicPBI::SetAutomationValue((CAkMusicPBI *)v33->Type, *((_DWORD *)v33->__vecDelDtor + 1), v35);
+          AK::MemoryMgr::Free(g_DefaultPoolId, v33);
         }
         goto LABEL_29;
       }
-      v26 = (AkMusicAction *)AK::MemoryMgr::Malloc(g_DefaultPoolId, 0x28ui64);
-      if ( v26 )
+      v24 = (AkMusicAction *)AK::MemoryMgr::Malloc(g_DefaultPoolId, 0x28ui64);
+      if ( v24 )
       {
-        v27 = v25->uClipStartPosition + v25->uClipDuration;
-        v28 = CAkMusicSegment::PreEntryDuration(v4->m_pSegmentNode);
-        v26[1].vfptr = (AkMusicActionVtbl *)out_pPBI;
-        v3 = &v4->m_sequencer;
-        v26->vfptr = (AkMusicActionVtbl *)&AkMusicActionStop::`vftable;
-        v26->m_iTime = v27 - v28;
-        CAkContextualMusicSequencer::ScheduleAction(&v4->m_sequencer, v26);
+        v25 = v23->uClipStartPosition + v23->uClipDuration;
+        v26 = CAkMusicSegment::PreEntryDuration(this->m_pSegmentNode);
+        v24[1].vfptr = (AkMusicActionVtbl *)out_pPBI;
+        p_m_sequencer = &this->m_sequencer;
+        v24->vfptr = (AkMusicActionVtbl *)&AkMusicActionStop::`vftable;
+        v24->m_iTime = v25 - v26;
+        CAkContextualMusicSequencer::ScheduleAction(&this->m_sequencer, v24);
         while ( 1 )
         {
-          v29 = v16[2].vfptr;
-          if ( !v29 )
+          v27 = (AkMusicAutomation *)v15[2].vfptr;
+          if ( !v27 )
             break;
-          v16[2].vfptr = (AkMusicActionVtbl *)v29[1].Type;
-          v29->Type = (AkMusicActionType (__fastcall *)(AkMusicAction *))out_pPBI;
-          LOBYTE(v26[1].pNextItem) = 1;
-          v30 = v4->m_listAutomation.m_pFirst;
-          if ( v30 )
+          v15[2].vfptr = (AkMusicActionVtbl *)v27->pNextLightItem;
+          v27->pPBI = out_pPBI;
+          LOBYTE(v24[1].pNextItem) = 1;
+          v28 = this->m_listAutomation.m_pFirst;
+          if ( v28 )
           {
-            v29[1].Type = (AkMusicActionType (__fastcall *)(AkMusicAction *))v30;
-            v4->m_listAutomation.m_pFirst = (AkMusicAutomation *)v29;
+            v27->pNextLightItem = v28;
+            this->m_listAutomation.m_pFirst = v27;
           }
           else
           {
-            v4->m_listAutomation.m_pFirst = (AkMusicAutomation *)v29;
-            v29[1].Type = 0i64;
+            this->m_listAutomation.m_pFirst = v27;
+            v27->pNextLightItem = 0i64;
           }
-          v31 = *((_DWORD *)v29->__vecDelDtor + 1);
-          if ( v31 == 2 )
+          m_eAutoType = v27->pAutomationData->m_eAutoType;
+          if ( m_eAutoType == AutomationType_FadeIn )
           {
             CAkMusicPBI::FixStartTimeForFadeIn(out_pPBI);
           }
-          else if ( v31 == 3 )
+          else if ( m_eAutoType == AutomationType_FadeOut )
           {
             *((_DWORD *)out_pPBI + 144) |= 2u;
           }
         }
-        v6 = v43;
-        v5 = v44;
+        v6 = v42;
+        v5 = v43;
         goto LABEL_31;
       }
       CAkMusicPBI::_Stop(out_pPBI, 0i64);
     }
-    v6 = v43;
+    v6 = v42;
 LABEL_29:
-    v5 = v44;
+    v5 = v43;
 LABEL_30:
-    v3 = &v4->m_sequencer;
+    p_m_sequencer = &this->m_sequencer;
     goto LABEL_31;
   }
 }
@@ -640,155 +614,142 @@ LABEL_30:
 // RVA: 0xAADEE0
 __int64 __fastcall CAkSegmentCtx::ComputeMinSrcLookAhead(CAkSegmentCtx *this, int in_iPosition)
 {
-  CAkSegmentCtx *v2; // r14
-  int v3; // er13
   int v4; // eax
-  CAkMusicTrack **v5; // rbx
-  int v6; // ebp
-  int v7; // er13
+  CAkMusicTrack **m_pItems; // rbx
+  signed int v6; // ebp
+  int v7; // r13d
   __int64 v8; // r12
   CAkMusicTrack *v9; // rsi
   AkTrackSrc *v10; // rax
-  unsigned int *v11; // rdi
-  CAkMusicSource *v12; // rax
-  int v13; // edx
-  unsigned int v14; // er9
-  int v15; // er9
+  unsigned int *p_uClipStartPosition; // rdi
+  CAkMusicSource *SourcePtr; // rax
+  int v13; // r8d
+  int v14; // edx
+  unsigned int m_uStreamingLookAhead; // r9d
+  signed int v16; // r9d
 
-  v2 = this;
-  v3 = in_iPosition;
   v4 = CAkMusicSegment::PreEntryDuration(this->m_pSegmentNode);
-  v5 = v2->m_arTracks.m_pItems;
+  m_pItems = this->m_arTracks.m_pItems;
   v6 = 0;
-  v7 = v4 + v3;
+  v7 = v4 + in_iPosition;
   v8 = 0i64;
-  if ( v5 != &v5[v2->m_arTracks.m_uLength] )
+  if ( m_pItems != &m_pItems[this->m_arTracks.m_uLength] )
   {
     do
     {
-      v9 = *v5;
-      v10 = (*v5)->m_arTrackPlaylist.m_pItems;
-      if ( v10 != &v10[(*v5)->m_arTrackPlaylist.m_uLength] )
+      v9 = *m_pItems;
+      v10 = (*m_pItems)->m_arTrackPlaylist.m_pItems;
+      if ( v10 != &v10[(*m_pItems)->m_arTrackPlaylist.m_uLength] )
       {
-        v11 = &v10->uClipStartPosition;
+        p_uClipStartPosition = &v10->uClipStartPosition;
         do
         {
-          if ( *(v11 - 2) == v2->m_arTrackRS.m_pItems[v8] )
+          if ( *(p_uClipStartPosition - 2) == this->m_arTrackRS.m_pItems[v8] )
           {
-            v12 = CAkMusicTrack::GetSourcePtr(v9, *(v11 - 1));
-            if ( v12 )
+            SourcePtr = CAkMusicTrack::GetSourcePtr(v9, *(p_uClipStartPosition - 1));
+            if ( SourcePtr )
             {
-              v13 = *v11 - v7;
-              v14 = 0;
-              if ( (*((_DWORD *)&v12->m_sSrcTypeInfo.mediaInfo + 4) & 0x7C) == 4
-                && (!((*((_DWORD *)&v12->m_sSrcTypeInfo.mediaInfo + 4) >> 1) & 1) || v13 < 0 || v11[3]) )
-              {
-                v14 = v12->m_uStreamingLookAhead;
-              }
-              if ( v13 < 0 )
-                v13 = 0;
-              v15 = v14 - v13;
-              if ( v6 < v15 )
-                v6 = v15;
+              v13 = *((_DWORD *)&SourcePtr->m_sSrcTypeInfo.mediaInfo + 4);
+              v14 = *p_uClipStartPosition - v7;
+              m_uStreamingLookAhead = 0;
+              if ( (v13 & 0x7C) == 4 && ((v13 & 2) == 0 || v14 < 0 || p_uClipStartPosition[3]) )
+                m_uStreamingLookAhead = SourcePtr->m_uStreamingLookAhead;
+              if ( v14 < 0 )
+                v14 = 0;
+              v16 = m_uStreamingLookAhead - v14;
+              if ( v6 < v16 )
+                v6 = v16;
             }
           }
-          v11 += 6;
+          p_uClipStartPosition += 6;
         }
-        while ( v11 - 2 != &v9->m_arTrackPlaylist.m_pItems[v9->m_arTrackPlaylist.m_uLength].uSubTrackIndex );
+        while ( p_uClipStartPosition - 2 != &v9->m_arTrackPlaylist.m_pItems[v9->m_arTrackPlaylist.m_uLength].uSubTrackIndex );
       }
-      ++v5;
+      ++m_pItems;
       v8 = (unsigned int)(v8 + 1);
     }
-    while ( v5 != &v2->m_arTracks.m_pItems[v2->m_arTracks.m_uLength] );
+    while ( m_pItems != &this->m_arTracks.m_pItems[this->m_arTracks.m_uLength] );
   }
   return (unsigned int)v6;
 }
 
 // File Line: 699
 // RVA: 0xAAE7A0
-void __fastcall CAkSegmentCtx::RemoveAllReferences(CAkSegmentCtx *this, CAkPBI *in_pCtx)
+void __fastcall CAkSegmentCtx::RemoveAllReferences(CAkSegmentCtx *this, CAkMusicPBI *in_pCtx)
 {
-  CAkSegmentCtx *v2; // rbx
-  CAkPBI *v3; // rdi
-  AkMusicAutomation *v4; // rax
+  AkMusicAutomation *m_pFirst; // rax
   AkMusicAutomation *v5; // r8
-  AkMusicAutomation *v6; // rcx
-  __int128 v7; // [rsp+20h] [rbp-28h]
-  __m128i v8; // [rsp+30h] [rbp-18h]
+  AkMusicAutomation *pNextLightItem; // rcx
+  AkMusicAutomation *v7; // [rsp+30h] [rbp-18h]
+  AkMusicAutomation *v8; // [rsp+38h] [rbp-10h]
 
-  v2 = this;
-  v3 = in_pCtx;
-  CAkContextualMusicSequencer::ClearActionsByTarget(&this->m_sequencer, (CAkMusicPBI *)in_pCtx);
-  v4 = v2->m_listAutomation.m_pFirst;
+  CAkContextualMusicSequencer::ClearActionsByTarget(&this->m_sequencer, in_pCtx);
+  m_pFirst = this->m_listAutomation.m_pFirst;
   v5 = 0i64;
-  while ( v4 )
+  while ( m_pFirst )
   {
-    if ( (CAkPBI *)v4->pPBI == v3 )
+    if ( m_pFirst->pPBI == in_pCtx )
     {
-      v6 = v4->pNextLightItem;
-      v8.m128i_i64[1] = (__int64)v5;
-      v8.m128i_i64[0] = (__int64)v6;
-      if ( v4 == v2->m_listAutomation.m_pFirst )
-        v2->m_listAutomation.m_pFirst = v6;
+      pNextLightItem = m_pFirst->pNextLightItem;
+      v8 = v5;
+      v7 = pNextLightItem;
+      if ( m_pFirst == this->m_listAutomation.m_pFirst )
+        this->m_listAutomation.m_pFirst = pNextLightItem;
       else
-        v5->pNextLightItem = v6;
-      _mm_store_si128((__m128i *)&v7, v8);
-      if ( v4 )
-        AK::MemoryMgr::Free(g_DefaultPoolId, v4);
-      v5 = (AkMusicAutomation *)*((_QWORD *)&v7 + 1);
-      v4 = (AkMusicAutomation *)v7;
+        v5->pNextLightItem = pNextLightItem;
+      AK::MemoryMgr::Free(g_DefaultPoolId, m_pFirst);
+      v5 = v8;
+      m_pFirst = v7;
     }
     else
     {
-      v5 = v4;
-      v4 = v4->pNextLightItem;
+      v5 = m_pFirst;
+      m_pFirst = m_pFirst->pNextLightItem;
     }
   }
 }
 
 // File Line: 726
 // RVA: 0xAAE410
-char __fastcall CAkSegmentCtx::GetSourceInfoForPlaybackRestart(CAkSegmentCtx *this, CAkMusicPBI *in_pCtx, int *out_iLookAhead, int *out_iSourceOffset)
+bool __fastcall CAkSegmentCtx::GetSourceInfoForPlaybackRestart(
+        CAkSegmentCtx *this,
+        CAkMusicPBI *in_pCtx,
+        unsigned int *out_iLookAhead,
+        int *out_iSourceOffset)
 {
-  int *v4; // r14
-  int *v5; // rsi
-  CAkSegmentCtx *v6; // rbp
-  char result; // al
-  CAkSource *v8; // rcx
-  CAkChainCtx *v9; // rcx
-  AkTrackSrc *v10; // r15
-  unsigned int v11; // edi
-  int v12; // ebx
+  bool result; // al
+  CAkSource *m_pSource; // rcx
+  CAkChainCtx *m_pParentCtx; // rcx
+  AkTrackSrc *m_pSrcInfo; // r15
+  unsigned int m_uCurTimeWindowSize; // edi
+  int SegmentPosition; // ebx
   int v13; // eax
-  unsigned int v14; // er9
-  int v15; // er8
+  unsigned int uClipStartPosition; // r9d
+  int v15; // r8d
   signed int v16; // edx
 
-  v4 = out_iSourceOffset;
-  v5 = out_iLookAhead;
-  v6 = this;
-  if ( (*((_BYTE *)&this->0 + 98) & 0xFu) > 1 )
+  if ( (*((_BYTE *)&this->CAkMusicCtx + 98) & 0xFu) > 1 )
     return 0;
-  v8 = in_pCtx->m_pSource;
-  if ( (*((_DWORD *)&v8->m_sSrcTypeInfo.mediaInfo + 4) & 0x7C) == 4 )
-    *out_iLookAhead = v8[1].m_sSrcTypeInfo.mediaInfo.sourceID;
+  m_pSource = in_pCtx->m_pSource;
+  if ( (*((_DWORD *)&m_pSource->m_sSrcTypeInfo.mediaInfo + 4) & 0x7C) == 4 )
+    *out_iLookAhead = m_pSource[1].m_sSrcTypeInfo.mediaInfo.sourceID;
   else
     *out_iLookAhead = 0;
   *out_iLookAhead = (*out_iLookAhead + 1023) & 0xFFFFFC00;
-  v9 = (CAkChainCtx *)v6->m_pParentCtx;
-  v10 = in_pCtx->m_pSrcInfo;
-  v11 = v9->m_pSequencer->m_uCurTimeWindowSize;
-  v12 = CAkChainCtx::GetSegmentPosition(v9, v6->m_pOwner);
-  v13 = CAkMusicSegment::PreEntryDuration(v6->m_pSegmentNode);
-  v14 = v10->uClipStartPosition;
-  v15 = v12 - v11 + v13;
-  if ( *v5 + v15 >= (signed int)(v14 + v10->uClipDuration) )
+  m_pParentCtx = (CAkChainCtx *)this->m_pParentCtx;
+  m_pSrcInfo = in_pCtx->m_pSrcInfo;
+  m_uCurTimeWindowSize = m_pParentCtx->m_pSequencer->m_uCurTimeWindowSize;
+  SegmentPosition = CAkChainCtx::GetSegmentPosition(m_pParentCtx, this->m_pOwner);
+  v13 = CAkMusicSegment::PreEntryDuration(this->m_pSegmentNode);
+  uClipStartPosition = m_pSrcInfo->uClipStartPosition;
+  v15 = SegmentPosition - m_uCurTimeWindowSize + v13;
+  if ( (int)(*out_iLookAhead + v15) >= (int)(uClipStartPosition + m_pSrcInfo->uClipDuration) )
     return 0;
-  v16 = (v15 + *v5 + v10->iSourceTrimOffset - v14) % v10->uSrcDuration;
+  v16 = (v15 + *out_iLookAhead + m_pSrcInfo->iSourceTrimOffset - uClipStartPosition) % m_pSrcInfo->uSrcDuration;
   result = 1;
   if ( v16 < 0 )
     v16 = 0;
-  *v4 = v16;
+  *out_iSourceOffset = v16;
   return result;
 }
 

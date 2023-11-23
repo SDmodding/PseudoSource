@@ -4,7 +4,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_LOADING_ICON_SHOW___1()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("LOADING_ICON_SHOW", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("LOADING_ICON_SHOW", -1);
   UI_HASH_LOADING_ICON_SHOW_1 = result;
   return result;
 }
@@ -15,7 +15,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_LOADING_ICON_SHOW_NEXT_SAVE_ICON_
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("LOADING_ICON_SHOW_NEXT_SAVE_ICON", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("LOADING_ICON_SHOW_NEXT_SAVE_ICON", -1);
   UI_HASH_LOADING_ICON_SHOW_NEXT_SAVE_ICON_1 = result;
   return result;
 }
@@ -26,7 +26,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_LOADING_ICON_HIDE___1()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("LOADING_ICON_HIDE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("LOADING_ICON_HIDE", -1);
   UI_HASH_LOADING_ICON_HIDE_1 = result;
   return result;
 }

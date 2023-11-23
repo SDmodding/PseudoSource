@@ -5,12 +5,12 @@ __int64 UFG::_dynamic_initializer_for__gSim__()
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::gSim.mSimObjects.mTree);
   UFG::qBaseTreeRB::qBaseTreeRB(&stru_14235C3E8);
   UFG::qBaseTreeRB::qBaseTreeRB(&stru_14235C430);
-  unk_14235C478 = &unk_14235C478;
-  unk_14235C480 = &unk_14235C478;
+  qword_14235C478 = (__int64)&qword_14235C478;
+  qword_14235C480 = (__int64)&qword_14235C478;
   LocalPlayer = 0i64;
   unk_14235C498 = 0i64;
   unk_14235C490 = 0i64;
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSim__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSim__);
 }
 
 // File Line: 22
@@ -24,20 +24,16 @@ UFG::ComponentIDDesc *__fastcall UFG::TransformNodeComponent::GetDesc(UFG::Trans
 // RVA: 0x190320
 UFG::SimObject *__fastcall UFG::Simulation::CreateSimObject(UFG::Simulation *this, UFG::qSymbol *name)
 {
-  UFG::qSymbol *v2; // rbx
-  UFG::Simulation *v3; // rsi
   UFG::allocator::free_link *v4; // rax
-  UFG::qBaseNodeRB *v5; // rdi
+  UFG::qNodeRB<UFG::SimObject> *v5; // rdi
   UFG::SimObject *v6; // rax
   UFG::SimObject *v7; // rbx
 
-  v2 = name;
-  v3 = this;
   v4 = UFG::qMemoryPool::Allocate(gSimulationMemoryPool, 0x80ui64, "SimObject", 0i64, 1u);
   v5 = 0i64;
   if ( v4 )
   {
-    UFG::SimObject::SimObject((UFG::SimObject *)v4, v2);
+    UFG::SimObject::SimObject((UFG::SimObject *)v4, name);
     v7 = v6;
   }
   else
@@ -45,8 +41,8 @@ UFG::SimObject *__fastcall UFG::Simulation::CreateSimObject(UFG::Simulation *thi
     v7 = 0i64;
   }
   if ( v7 )
-    v5 = &v7->mNode;
-  UFG::qBaseTreeRB::Add(&v3->mSimObjects.mTree, v5);
+    v5 = &v7->UFG::qNodeRB<UFG::SimObject>;
+  UFG::qBaseTreeRB::Add(&this->mSimObjects.mTree, &v5->mNode);
   return v7;
 }
 
@@ -64,23 +60,21 @@ void __fastcall UFG::Simulation::TrackSimObject(UFG::Simulation *this, UFG::SimO
 // RVA: 0x1917C0
 char __fastcall UFG::Simulation::UntrackSimObject(UFG::Simulation *this, UFG::SimObject *pSimObj)
 {
-  UFG::qBaseNodeVariableRB<unsigned __int64> *v2; // rdi
-  UFG::SimObject *v3; // rbx
-  UFG::qBaseTreeVariableRB<unsigned __int64> *v4; // rsi
-  UFG::qBaseNodeRB *v5; // rdx
+  UFG::qNodeRB<UFG::SimObject> *v2; // rdi
+  UFG::qNodeRB<UFG::SimObject> *v5; // rdx
 
   v2 = 0i64;
-  v3 = pSimObj;
-  v4 = (UFG::qBaseTreeVariableRB<unsigned __int64> *)this;
   if ( pSimObj )
-    v5 = &pSimObj->mNode;
+    v5 = &pSimObj->UFG::qNodeRB<UFG::SimObject>;
   else
     v5 = 0i64;
-  if ( !UFG::qBaseTreeRB::Contains(&this->mSimObjects.mTree, v5) )
+  if ( !UFG::qBaseTreeRB::Contains(&this->mSimObjects.mTree, &v5->mNode) )
     return 0;
-  if ( v3 )
-    v2 = (UFG::qBaseNodeVariableRB<unsigned __int64> *)&v3->mNode;
-  UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(v4, v2);
+  if ( pSimObj )
+    v2 = &pSimObj->UFG::qNodeRB<UFG::SimObject>;
+  UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
+    (UFG::qBaseTreeVariableRB<unsigned __int64> *)this,
+    (UFG::qBaseNodeVariableRB<unsigned __int64> *)v2);
   return 1;
 }
 
@@ -88,67 +82,66 @@ char __fastcall UFG::Simulation::UntrackSimObject(UFG::Simulation *this, UFG::Si
 // RVA: 0x190760
 void __fastcall UFG::Simulation::DestroySimObject(UFG::Simulation *this, UFG::SimObject *object)
 {
-  UFG::qArray<UFG::qReflectInventoryBase *,0> *v2; // rsi
-  UFG::SimObject *v3; // rbx
+  UFG::qArray<UFG::qReflectInventoryBase *,0> *p_m_aCurrentDestructingObjects; // rsi
   unsigned int v4; // eax
-  unsigned int v5; // edx
-  UFG::Simulation *v6; // rbp
-  UFG::SimObject **v7; // r8
+  unsigned int size; // edx
+  UFG::SimObject **p; // r8
   bool v8; // al
-  UFG::qBaseNodeRB *v9; // rdx
-  UFG::qBaseTreeVariableRB<unsigned __int64> *v10; // rcx
+  UFG::qNodeRB<UFG::SimObject> *v9; // rdx
+  UFG::qBaseTreeVariableRB<unsigned __int64> *p_mSimObjectsToBeDeleted; // rcx
   __int64 v11; // rbp
-  unsigned int v12; // edx
+  unsigned int capacity; // edx
   unsigned int v13; // edi
   unsigned int v14; // edx
   UFG::qReflectInventoryBase **v15; // rax
-  unsigned int v16; // er8
+  unsigned int v16; // r8d
   __int64 v17; // rcx
   UFG::qReflectInventoryBase **v18; // rdx
 
-  v2 = (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&this->m_aCurrentDestructingObjects;
-  v3 = object;
+  p_m_aCurrentDestructingObjects = (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&this->m_aCurrentDestructingObjects;
   v4 = 0;
-  v5 = this->m_aCurrentDestructingObjects.size;
-  v6 = this;
-  if ( !v5 )
+  size = this->m_aCurrentDestructingObjects.size;
+  if ( !size )
     goto LABEL_7;
-  v7 = this->m_aCurrentDestructingObjects.p;
-  while ( v3 != *v7 )
+  p = this->m_aCurrentDestructingObjects.p;
+  while ( object != *p )
   {
     ++v4;
-    ++v7;
-    if ( v4 >= v5 )
+    ++p;
+    if ( v4 >= size )
       goto LABEL_7;
   }
   if ( v4 == -1 )
   {
 LABEL_7:
-    if ( (_QWORD)v3->mNode.mParent & 0xFFFFFFFFFFFFFFFEui64 && !UFG::Simulation::UntrackSimObject(this, v3) )
+    if ( ((unsigned __int64)object->mNode.mParent & 0xFFFFFFFFFFFFFFFEui64) != 0
+      && !UFG::Simulation::UntrackSimObject(this, object) )
     {
-      v8 = UFG::qBaseTreeRB::Contains(&v6->mSimObjectsToBeDeleted.mTree, &v3->mNode);
-      v9 = &v3->mNode;
+      v8 = UFG::qBaseTreeRB::Contains(&this->mSimObjectsToBeDeleted.mTree, &object->mNode);
+      v9 = &object->UFG::qNodeRB<UFG::SimObject>;
       if ( v8 )
       {
-        v10 = (UFG::qBaseTreeVariableRB<unsigned __int64> *)&v6->mSimObjectsToBeDeleted;
+        p_mSimObjectsToBeDeleted = (UFG::qBaseTreeVariableRB<unsigned __int64> *)&this->mSimObjectsToBeDeleted;
       }
       else
       {
-        if ( !UFG::qBaseTreeRB::Contains(&v6->mSimObjectsToBeDeletedRecursively.mTree, v9) )
+        if ( !UFG::qBaseTreeRB::Contains(&this->mSimObjectsToBeDeletedRecursively.mTree, &v9->mNode) )
           goto LABEL_14;
-        v9 = &v3->mNode;
-        v10 = (UFG::qBaseTreeVariableRB<unsigned __int64> *)&v6->mSimObjectsToBeDeletedRecursively;
+        v9 = &object->UFG::qNodeRB<UFG::SimObject>;
+        p_mSimObjectsToBeDeleted = (UFG::qBaseTreeVariableRB<unsigned __int64> *)&this->mSimObjectsToBeDeletedRecursively;
       }
-      UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(v10, (UFG::qBaseNodeVariableRB<unsigned __int64> *)v9);
+      UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
+        p_mSimObjectsToBeDeleted,
+        (UFG::qBaseNodeVariableRB<unsigned __int64> *)v9);
     }
 LABEL_14:
-    v11 = v2->size;
-    v12 = v2->capacity;
+    v11 = p_m_aCurrentDestructingObjects->size;
+    capacity = p_m_aCurrentDestructingObjects->capacity;
     v13 = v11 + 1;
-    if ( (signed int)v11 + 1 > v12 )
+    if ( (int)v11 + 1 > capacity )
     {
-      if ( v12 )
-        v14 = 2 * v12;
+      if ( capacity )
+        v14 = 2 * capacity;
       else
         v14 = 1;
       for ( ; v14 < v13; v14 *= 2 )
@@ -157,30 +150,30 @@ LABEL_14:
         v14 = 2;
       if ( v14 - v13 > 0x10000 )
         v14 = v11 + 65537;
-      UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(v2, v14, "qArray.Add");
+      UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(p_m_aCurrentDestructingObjects, v14, "qArray.Add");
     }
-    v15 = v2->p;
-    v2->size = v13;
-    v15[v11] = (UFG::qReflectInventoryBase *)v3;
-    v3->vfptr->__vecDelDtor((UFG::qSafePointerNode<UFG::SimObject> *)&v3->vfptr, 1u);
-    v16 = v2->size;
+    v15 = p_m_aCurrentDestructingObjects->p;
+    p_m_aCurrentDestructingObjects->size = v13;
+    v15[v11] = (UFG::qReflectInventoryBase *)object;
+    object->vfptr->__vecDelDtor(object, 1i64);
+    v16 = p_m_aCurrentDestructingObjects->size;
     v17 = 0i64;
-    if ( v2->size )
+    if ( p_m_aCurrentDestructingObjects->size )
     {
-      v18 = v2->p;
-      while ( v3 != (UFG::SimObject *)v18[v17] )
+      v18 = p_m_aCurrentDestructingObjects->p;
+      while ( object != (UFG::SimObject *)v18[v17] )
       {
         v17 = (unsigned int)(v17 + 1);
         if ( (unsigned int)v17 >= v16 )
           return;
       }
-      if ( (signed int)v17 >= 0 )
+      if ( (int)v17 >= 0 )
       {
         v18[v17] = v18[v16 - 1];
-        if ( v2->size > 1 )
-          --v2->size;
+        if ( p_m_aCurrentDestructingObjects->size > 1 )
+          --p_m_aCurrentDestructingObjects->size;
         else
-          v2->size = 0;
+          p_m_aCurrentDestructingObjects->size = 0;
       }
     }
   }
@@ -190,41 +183,37 @@ LABEL_14:
 // RVA: 0x190F10
 void __fastcall UFG::Simulation::QueueSimObjectToBeDestroyed(UFG::Simulation *this, UFG::SimObject *pSimObj)
 {
-  UFG::qBaseNodeRB *v2; // rdi
-  UFG::SimObject *v3; // rbx
-  unsigned int v4; // edx
-  UFG::Simulation *v5; // rsi
+  UFG::qNodeRB<UFG::SimObject> *v2; // rdi
+  unsigned int size; // edx
   unsigned int v6; // eax
-  UFG::SimObject **v7; // r8
-  UFG::qBaseNodeRB *v8; // rdx
+  UFG::SimObject **p; // r8
+  UFG::qNodeRB<UFG::SimObject> *v8; // rdx
 
   v2 = 0i64;
-  v3 = pSimObj;
-  v4 = this->m_aCurrentDestructingObjects.size;
-  v5 = this;
+  size = this->m_aCurrentDestructingObjects.size;
   v6 = 0;
-  if ( !v4 )
+  if ( !size )
     goto LABEL_7;
-  v7 = this->m_aCurrentDestructingObjects.p;
-  while ( v3 != *v7 )
+  p = this->m_aCurrentDestructingObjects.p;
+  while ( pSimObj != *p )
   {
     ++v6;
-    ++v7;
-    if ( v6 >= v4 )
+    ++p;
+    if ( v6 >= size )
       goto LABEL_7;
   }
   if ( v6 == -1 )
   {
 LABEL_7:
-    UFG::Simulation::UntrackSimObject(this, v3);
-    v8 = &v3->mNode;
-    if ( !v3 )
+    UFG::Simulation::UntrackSimObject(this, pSimObj);
+    v8 = &pSimObj->UFG::qNodeRB<UFG::SimObject>;
+    if ( !pSimObj )
       v8 = 0i64;
-    if ( !UFG::qBaseTreeRB::Contains(&v5->mSimObjectsToBeDeleted.mTree, v8) )
+    if ( !UFG::qBaseTreeRB::Contains(&this->mSimObjectsToBeDeleted.mTree, &v8->mNode) )
     {
-      if ( v3 )
-        v2 = &v3->mNode;
-      UFG::qBaseTreeRB::Add(&v5->mSimObjectsToBeDeleted.mTree, v2);
+      if ( pSimObj )
+        v2 = &pSimObj->UFG::qNodeRB<UFG::SimObject>;
+      UFG::qBaseTreeRB::Add(&this->mSimObjectsToBeDeleted.mTree, &v2->mNode);
     }
   }
 }
@@ -233,34 +222,32 @@ LABEL_7:
 // RVA: 0x191030
 void __fastcall UFG::Simulation::QueueTrackedSimObjectToBeDestroyed(UFG::Simulation *this, UFG::SimObject *pSimObj)
 {
-  UFG::qBaseNodeRB *v2; // rdi
-  UFG::SimObject *v3; // rbx
-  UFG::Simulation *v4; // rsi
-  UFG::qBaseNodeRB *v5; // rdx
-  UFG::qBaseNodeVariableRB<unsigned __int64> *v6; // rdx
-  UFG::qBaseNodeRB *v7; // rdx
+  UFG::qNodeRB<UFG::SimObject> *v2; // rdi
+  UFG::qNodeRB<UFG::SimObject> *v5; // rdx
+  UFG::qNodeRB<UFG::SimObject> *v6; // rdx
+  UFG::qNodeRB<UFG::SimObject> *v7; // rdx
 
   v2 = 0i64;
-  v3 = pSimObj;
-  v4 = this;
   if ( pSimObj )
-    v5 = &pSimObj->mNode;
+    v5 = &pSimObj->UFG::qNodeRB<UFG::SimObject>;
   else
     v5 = 0i64;
-  if ( UFG::qBaseTreeRB::Contains(&this->mSimObjects.mTree, v5) )
+  if ( UFG::qBaseTreeRB::Contains(&this->mSimObjects.mTree, &v5->mNode) )
   {
-    v6 = (UFG::qBaseNodeVariableRB<unsigned __int64> *)&v3->mNode;
-    if ( !v3 )
+    v6 = &pSimObj->UFG::qNodeRB<UFG::SimObject>;
+    if ( !pSimObj )
       v6 = 0i64;
-    UFG::qBaseTreeVariableRB<unsigned __int64>::Remove((UFG::qBaseTreeVariableRB<unsigned __int64> *)v4, v6);
-    v7 = &v3->mNode;
-    if ( !v3 )
+    UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
+      (UFG::qBaseTreeVariableRB<unsigned __int64> *)this,
+      (UFG::qBaseNodeVariableRB<unsigned __int64> *)v6);
+    v7 = &pSimObj->UFG::qNodeRB<UFG::SimObject>;
+    if ( !pSimObj )
       v7 = 0i64;
-    if ( !UFG::qBaseTreeRB::Contains(&v4->mSimObjectsToBeDeleted.mTree, v7) )
+    if ( !UFG::qBaseTreeRB::Contains(&this->mSimObjectsToBeDeleted.mTree, &v7->mNode) )
     {
-      if ( v3 )
-        v2 = &v3->mNode;
-      UFG::qBaseTreeRB::Add(&v4->mSimObjectsToBeDeleted.mTree, v2);
+      if ( pSimObj )
+        v2 = &pSimObj->UFG::qNodeRB<UFG::SimObject>;
+      UFG::qBaseTreeRB::Add(&this->mSimObjectsToBeDeleted.mTree, &v2->mNode);
     }
   }
 }
@@ -269,35 +256,33 @@ void __fastcall UFG::Simulation::QueueTrackedSimObjectToBeDestroyed(UFG::Simulat
 // RVA: 0x190FA0
 void __fastcall UFG::Simulation::QueueSimObjectToBeDestroyedRecursive(UFG::Simulation *this, UFG::SimObject *pSimObj)
 {
-  UFG::qBaseNodeRB *v2; // rdi
-  UFG::SimObject *v3; // rbx
-  UFG::Simulation *v4; // rsi
-  UFG::qBaseNodeRB *v5; // rdx
-  UFG::qBaseNodeVariableRB<unsigned __int64> *v6; // rdx
-  UFG::qBaseNodeRB *v7; // rdx
+  UFG::qNodeRB<UFG::SimObject> *v2; // rdi
+  UFG::qNodeRB<UFG::SimObject> *v5; // rdx
+  UFG::qNodeRB<UFG::SimObject> *v6; // rdx
+  UFG::qNodeRB<UFG::SimObject> *v7; // rdx
 
   v2 = 0i64;
-  v3 = pSimObj;
-  v4 = this;
   if ( pSimObj )
-    v5 = &pSimObj->mNode;
+    v5 = &pSimObj->UFG::qNodeRB<UFG::SimObject>;
   else
     v5 = 0i64;
-  if ( UFG::qBaseTreeRB::Contains(&this->mSimObjects.mTree, v5) )
+  if ( UFG::qBaseTreeRB::Contains(&this->mSimObjects.mTree, &v5->mNode) )
   {
-    v6 = (UFG::qBaseNodeVariableRB<unsigned __int64> *)&v3->mNode;
-    if ( !v3 )
+    v6 = &pSimObj->UFG::qNodeRB<UFG::SimObject>;
+    if ( !pSimObj )
       v6 = 0i64;
-    UFG::qBaseTreeVariableRB<unsigned __int64>::Remove((UFG::qBaseTreeVariableRB<unsigned __int64> *)v4, v6);
+    UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
+      (UFG::qBaseTreeVariableRB<unsigned __int64> *)this,
+      (UFG::qBaseNodeVariableRB<unsigned __int64> *)v6);
   }
-  v7 = &v3->mNode;
-  if ( !v3 )
+  v7 = &pSimObj->UFG::qNodeRB<UFG::SimObject>;
+  if ( !pSimObj )
     v7 = 0i64;
-  if ( !UFG::qBaseTreeRB::Contains(&v4->mSimObjectsToBeDeletedRecursively.mTree, v7) )
+  if ( !UFG::qBaseTreeRB::Contains(&this->mSimObjectsToBeDeletedRecursively.mTree, &v7->mNode) )
   {
-    if ( v3 )
-      v2 = &v3->mNode;
-    UFG::qBaseTreeRB::Add(&v4->mSimObjectsToBeDeletedRecursively.mTree, v2);
+    if ( pSimObj )
+      v2 = &pSimObj->UFG::qNodeRB<UFG::SimObject>;
+    UFG::qBaseTreeRB::Add(&this->mSimObjectsToBeDeletedRecursively.mTree, &v2->mNode);
   }
 }
 
@@ -305,20 +290,18 @@ void __fastcall UFG::Simulation::QueueSimObjectToBeDestroyedRecursive(UFG::Simul
 // RVA: 0x190720
 void __fastcall UFG::Simulation::DestroySimComponent(UFG::Simulation *this, UFG::SimComponent *component)
 {
-  UFG::SimObject *v2; // rcx
-  UFG::SimComponent *v3; // rbx
+  UFG::SimObject *m_pSimObject; // rcx
 
   if ( component )
   {
-    v2 = component->m_pSimObject;
-    v3 = component;
-    if ( v2 )
+    m_pSimObject = component->m_pSimObject;
+    if ( m_pSimObject )
     {
-      if ( (LOBYTE(v2->m_Flags) >> 1) & 1 )
+      if ( (m_pSimObject->m_Flags & 2) != 0 )
         return;
-      ((void (*)(void))v2->vfptr[2].__vecDelDtor)();
+      ((void (__fastcall *)(UFG::SimObject *))m_pSimObject->vfptr[2].__vecDelDtor)(m_pSimObject);
     }
-    v3->vfptr->__vecDelDtor((UFG::qSafePointerNode<UFG::SimComponent> *)&v3->vfptr, 1u);
+    component->vfptr->__vecDelDtor(component, 1i64);
   }
 }
 
@@ -326,39 +309,37 @@ void __fastcall UFG::Simulation::DestroySimComponent(UFG::Simulation *this, UFG:
 // RVA: 0x1905D0
 void __fastcall UFG::Simulation::DestroyAllSimObjects(UFG::Simulation *this)
 {
-  UFG::Simulation *v1; // rdi
-  UFG::qBaseNodeRB *v2; // rax
-  UFG::SimObject *v3; // rbx
+  UFG::qBaseNodeRB *Tail; // rax
+  UFG::SimObject *p_mUID; // rbx
   UFG::qBaseNodeRB *v4; // rdx
   UFG::qBaseNodeVariableRB<unsigned __int64> *v5; // rdx
 
-  v1 = this;
   UFG::Simulation::DestroyQueuedSimObjects(this);
-  if ( v1->mSimObjects.mTree.mCount )
+  if ( this->mSimObjects.mTree.mCount )
   {
     while ( 1 )
     {
-      v2 = UFG::qBaseTreeRB::GetTail(&v1->mSimObjects.mTree);
-      if ( !v2 )
+      Tail = UFG::qBaseTreeRB::GetTail(&this->mSimObjects.mTree);
+      if ( !Tail )
         break;
-      v3 = (UFG::SimObject *)&v2[-2].mUID;
-      if ( v2 == (UFG::qBaseNodeRB *)40 )
+      p_mUID = (UFG::SimObject *)&Tail[-2].mUID;
+      if ( Tail == (UFG::qBaseNodeRB *)40 )
         goto LABEL_6;
-      v4 = v2;
+      v4 = Tail;
 LABEL_7:
-      if ( UFG::qBaseTreeRB::Contains(&v1->mSimObjects.mTree, v4) )
+      if ( UFG::qBaseTreeRB::Contains(&this->mSimObjects.mTree, v4) )
       {
-        if ( v3 )
-          v5 = (UFG::qBaseNodeVariableRB<unsigned __int64> *)&v3->mNode;
+        if ( p_mUID )
+          v5 = (UFG::qBaseNodeVariableRB<unsigned __int64> *)&p_mUID->UFG::qNodeRB<UFG::SimObject>;
         else
           v5 = 0i64;
-        UFG::qBaseTreeVariableRB<unsigned __int64>::Remove((UFG::qBaseTreeVariableRB<unsigned __int64> *)v1, v5);
+        UFG::qBaseTreeVariableRB<unsigned __int64>::Remove((UFG::qBaseTreeVariableRB<unsigned __int64> *)this, v5);
       }
-      UFG::Simulation::DestroySimObject(v1, v3);
-      if ( !v1->mSimObjects.mTree.mCount )
+      UFG::Simulation::DestroySimObject(this, p_mUID);
+      if ( !this->mSimObjects.mTree.mCount )
         return;
     }
-    v3 = 0i64;
+    p_mUID = 0i64;
 LABEL_6:
     v4 = 0i64;
     goto LABEL_7;
@@ -369,45 +350,43 @@ LABEL_6:
 // RVA: 0x190650
 void __fastcall UFG::Simulation::DestroyQueuedSimObjects(UFG::Simulation *this)
 {
-  UFG::Simulation *v1; // rdi
-  UFG::qBaseNodeRB *v2; // rax
-  UFG::SimObject *v3; // rbx
+  UFG::qBaseNodeRB *Tail; // rax
+  UFG::SimObject *p_mUID; // rbx
   UFG::qBaseNodeVariableRB<unsigned __int64> *v4; // rdx
   UFG::qBaseNodeRB *v5; // rax
   UFG::SimObject *v6; // rbx
   UFG::qBaseNodeVariableRB<unsigned __int64> *v7; // rdx
 
-  v1 = this;
   if ( this->mSimObjectsToBeDeleted.mTree.mCount )
   {
     while ( 1 )
     {
-      v2 = UFG::qBaseTreeRB::GetTail(&v1->mSimObjectsToBeDeleted.mTree);
-      if ( !v2 )
+      Tail = UFG::qBaseTreeRB::GetTail(&this->mSimObjectsToBeDeleted.mTree);
+      if ( !Tail )
         break;
-      v3 = (UFG::SimObject *)&v2[0xFFFFFFFE].mUID;
-      if ( v2 == (UFG::qBaseNodeRB *)0x28 )
+      p_mUID = (UFG::SimObject *)&Tail[0xFFFFFFFE].mUID;
+      if ( Tail == (UFG::qBaseNodeRB *)0x28 )
         goto LABEL_6;
-      v4 = (UFG::qBaseNodeVariableRB<unsigned __int64> *)v2;
+      v4 = (UFG::qBaseNodeVariableRB<unsigned __int64> *)Tail;
 LABEL_7:
       UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
-        (UFG::qBaseTreeVariableRB<unsigned __int64> *)&v1->mSimObjectsToBeDeleted,
+        (UFG::qBaseTreeVariableRB<unsigned __int64> *)&this->mSimObjectsToBeDeleted,
         v4);
-      UFG::Simulation::DestroySimObject(v1, v3);
-      if ( !v1->mSimObjectsToBeDeleted.mTree.mCount )
+      UFG::Simulation::DestroySimObject(this, p_mUID);
+      if ( !this->mSimObjectsToBeDeleted.mTree.mCount )
         goto LABEL_8;
     }
-    v3 = 0i64;
+    p_mUID = 0i64;
 LABEL_6:
     v4 = 0i64;
     goto LABEL_7;
   }
 LABEL_8:
-  if ( v1->mSimObjectsToBeDeletedRecursively.mTree.mCount )
+  if ( this->mSimObjectsToBeDeletedRecursively.mTree.mCount )
   {
     while ( 1 )
     {
-      v5 = UFG::qBaseTreeRB::GetTail(&v1->mSimObjectsToBeDeletedRecursively.mTree);
+      v5 = UFG::qBaseTreeRB::GetTail(&this->mSimObjectsToBeDeletedRecursively.mTree);
       if ( !v5 )
         break;
       v6 = (UFG::SimObject *)&v5[-2].mUID;
@@ -416,11 +395,11 @@ LABEL_8:
       v7 = (UFG::qBaseNodeVariableRB<unsigned __int64> *)v5;
 LABEL_14:
       UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
-        (UFG::qBaseTreeVariableRB<unsigned __int64> *)&v1->mSimObjectsToBeDeletedRecursively,
+        (UFG::qBaseTreeVariableRB<unsigned __int64> *)&this->mSimObjectsToBeDeletedRecursively,
         v7);
       if ( v6 )
-        UFG::Simulation::DestroySimObject(v1, v6);
-      if ( !v1->mSimObjectsToBeDeletedRecursively.mTree.mCount )
+        UFG::Simulation::DestroySimObject(this, v6);
+      if ( !this->mSimObjectsToBeDeletedRecursively.mTree.mCount )
         return;
     }
     v6 = 0i64;
@@ -432,85 +411,89 @@ LABEL_13:
 
 // File Line: 268
 // RVA: 0x190A50
-UFG::qSymbol *__fastcall UFG::Simulation::GenerateUniqueName(UFG::Simulation *this, UFG::qSymbol *result, const char *pRoot)
+UFG::qSymbol *__fastcall UFG::Simulation::GenerateUniqueName(
+        UFG::Simulation *this,
+        UFG::qSymbol *result,
+        const char *pRoot)
 {
-  UFG::qSymbol *v3; // rdi
-  UFG::Simulation *v4; // rsi
-  UFG::qSymbol *v5; // rax
-  unsigned int v6; // ebx
+  UFG::qWiseSymbol *increment; // rax
+  unsigned int mUID; // ebx
   UFG::qBaseTreeRB *v7; // rax
   UFG::qBaseTreeRB *v8; // rax
-  UFG::qSymbol resulta; // [rsp+38h] [rbp+10h]
+  UFG::qSymbol resulta; // [rsp+38h] [rbp+10h] BYREF
 
-  v3 = result;
-  v4 = this;
   UFG::qSymbol::create_from_string(result, pRoot);
   while ( 1 )
   {
-    v5 = UFG::qSymbol::create_increment(&resulta, v3, 1);
-    v6 = v5->mUID;
-    v3->mUID = v5->mUID;
-    if ( !v6 )
+    increment = UFG::qSymbol::create_increment((UFG::qWiseSymbol *)&resulta, result, 1);
+    mUID = increment->mUID;
+    result->mUID = increment->mUID;
+    if ( !mUID )
       break;
-    v7 = UFG::qBaseTreeRB::Get(&v4->mSimObjects.mTree, v6);
+    v7 = UFG::qBaseTreeRB::Get(&this->mSimObjects.mTree, mUID);
     if ( !v7 || v7 == (UFG::qBaseTreeRB *)40 )
     {
-      v8 = UFG::qBaseTreeRB::Get(&v4->mSimObjectsToBeDeleted.mTree, v6);
+      v8 = UFG::qBaseTreeRB::Get(&this->mSimObjectsToBeDeleted.mTree, mUID);
       if ( !v8 || v8 == (UFG::qBaseTreeRB *)40 )
         break;
     }
   }
-  return v3;
+  return result;
 }
 
 // File Line: 280
 // RVA: 0x1909D0
-UFG::qSymbol *__fastcall UFG::Simulation::GenerateUniqueName(UFG::Simulation *this, UFG::qSymbol *result, UFG::qSymbol *root)
+UFG::qSymbol *__fastcall UFG::Simulation::GenerateUniqueName(
+        UFG::Simulation *this,
+        UFG::qSymbol *result,
+        UFG::qSymbol *root)
 {
-  unsigned __int128 v3; // di
-  UFG::qSymbol *v4; // rax
-  unsigned int v5; // ebx
-  UFG::qBaseTreeRB *v6; // rax
+  UFG::qWiseSymbol *increment; // rax
+  unsigned int mUID; // ebx
   UFG::qBaseTreeRB *v7; // rax
-  UFG::qSymbol resulta; // [rsp+38h] [rbp+10h]
+  UFG::qBaseTreeRB *v8; // rax
+  UFG::qSymbol resulta; // [rsp+38h] [rbp+10h] BYREF
 
-  v3 = __PAIR__((unsigned __int64)this, (unsigned __int64)result);
   result->mUID = root->mUID;
   while ( 1 )
   {
-    v4 = UFG::qSymbol::create_increment(&resulta, (UFG::qSymbol *)v3, 1);
-    v5 = v4->mUID;
-    *(UFG::qSymbol *)v3 = (UFG::qSymbol)v4->mUID;
-    if ( !v5 )
+    increment = UFG::qSymbol::create_increment((UFG::qWiseSymbol *)&resulta, result, 1);
+    mUID = increment->mUID;
+    result->mUID = increment->mUID;
+    if ( !mUID )
       break;
-    v6 = UFG::qBaseTreeRB::Get(*((UFG::qBaseTreeRB **)&v3 + 1), v5);
-    if ( !v6 || v6 == (UFG::qBaseTreeRB *)40 )
+    v7 = UFG::qBaseTreeRB::Get(&this->mSimObjects.mTree, mUID);
+    if ( !v7 || v7 == (UFG::qBaseTreeRB *)40 )
     {
-      v7 = UFG::qBaseTreeRB::Get((UFG::qBaseTreeRB *)(*((_QWORD *)&v3 + 1) + 72i64), v5);
-      if ( !v7 || v7 == (UFG::qBaseTreeRB *)40 )
+      v8 = UFG::qBaseTreeRB::Get(&this->mSimObjectsToBeDeleted.mTree, mUID);
+      if ( !v8 || v8 == (UFG::qBaseTreeRB *)40 )
         break;
     }
   }
-  return (UFG::qSymbol *)v3;
+  return result;
 }
 
 // File Line: 307
 // RVA: 0x190BF0
 UFG::qBaseNodeRB *__fastcall UFG::Simulation::GetSimObject(UFG::Simulation *this, UFG::qSymbol *name)
 {
-  unsigned int v2; // ebx
-  UFG::Simulation *v3; // rdi
+  unsigned int mUID; // ebx
   UFG::qBaseTreeRB *v4; // rax
   UFG::qBaseNodeRB *result; // rax
   UFG::qBaseTreeRB *v6; // rax
 
-  v2 = name->mUID;
-  v3 = this;
-  if ( !name->mUID
-    || ((v4 = UFG::qBaseTreeRB::Get(&this->mSimObjects.mTree, v2)) == 0i64 || (result = &v4[-1].mNULL) == 0i64)
-    && ((v6 = UFG::qBaseTreeRB::Get(&v3->mSimObjectsToBeDeleted.mTree, v2)) == 0i64 || (result = &v6[-1].mNULL) == 0i64) )
+  mUID = name->mUID;
+  if ( !name->mUID )
+    return 0i64;
+  v4 = UFG::qBaseTreeRB::Get(&this->mSimObjects.mTree, mUID);
+  if ( !v4 || (result = &v4[-1].mNULL) == 0i64 )
   {
-    result = 0i64;
+    v6 = UFG::qBaseTreeRB::Get(&this->mSimObjectsToBeDeleted.mTree, mUID);
+    if ( !v6 )
+      return 0i64;
+    result = &v6[-1].mNULL;
+    if ( !result )
+      return 0i64;
   }
   return result;
 }
@@ -519,19 +502,21 @@ UFG::qBaseNodeRB *__fastcall UFG::Simulation::GetSimObject(UFG::Simulation *this
 // RVA: 0x190C40
 UFG::qBaseNodeRB *__fastcall UFG::Simulation::GetSimObject(UFG::Simulation *this, unsigned int name_uid)
 {
-  unsigned int v2; // ebx
-  UFG::Simulation *v3; // rdi
   UFG::qBaseTreeRB *v4; // rax
   UFG::qBaseNodeRB *result; // rax
   UFG::qBaseTreeRB *v6; // rax
 
-  v2 = name_uid;
-  v3 = this;
-  if ( !name_uid
-    || ((v4 = UFG::qBaseTreeRB::Get(&this->mSimObjects.mTree, name_uid)) == 0i64 || (result = &v4[-1].mNULL) == 0i64)
-    && ((v6 = UFG::qBaseTreeRB::Get(&v3->mSimObjectsToBeDeleted.mTree, v2)) == 0i64 || (result = &v6[-1].mNULL) == 0i64) )
+  if ( !name_uid )
+    return 0i64;
+  v4 = UFG::qBaseTreeRB::Get(&this->mSimObjects.mTree, name_uid);
+  if ( !v4 || (result = &v4[-1].mNULL) == 0i64 )
   {
-    result = 0i64;
+    v6 = UFG::qBaseTreeRB::Get(&this->mSimObjectsToBeDeleted.mTree, name_uid);
+    if ( !v6 )
+      return 0i64;
+    result = &v6[-1].mNULL;
+    if ( !result )
+      return 0i64;
   }
   return result;
 }

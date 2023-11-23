@@ -70,8 +70,9 @@ void __fastcall finishLoadedObjecthkaiIntervalPartitionLibrary(void *p, int fini
 
 // File Line: 118
 // RVA: 0xC32670
-void __fastcall cleanupLoadedObjecthkaiIntervalPartitionLibrary(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkaiIntervalPartitionLibrary(hkaiIntervalPartitionLibrary *p)
 {
-  hkaiIntervalPartitionLibrary::~hkaiIntervalPartitionLibrary((hkaiIntervalPartitionLibrary *)p);
+  hkaiIntervalPartitionLibrary::~hkaiIntervalPartitionLibrary(p);
 }
 

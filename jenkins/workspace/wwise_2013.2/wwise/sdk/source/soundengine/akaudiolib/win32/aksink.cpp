@@ -11,19 +11,17 @@ void __fastcall CAkSink::CAkSink(CAkSink *this, AkSinkType in_eType)
 
 // File Line: 63
 // RVA: 0xA766C0
-signed __int64 __fastcall CAkSink::AllocBuffer(CAkSink *this)
+__int64 __fastcall CAkSink::AllocBuffer(CAkSink *this)
 {
-  unsigned int v1; // eax
-  CAkSink *v2; // rbx
-  int i; // er8
+  unsigned int m_SpeakersConfig; // eax
+  int i; // r8d
   size_t v4; // rsi
   void *v5; // rax
   void *v6; // rdi
   unsigned int v8; // eax
 
-  v1 = this->m_SpeakersConfig;
-  v2 = this;
-  for ( i = 0; v1; v1 &= v1 - 1 )
+  m_SpeakersConfig = this->m_SpeakersConfig;
+  for ( i = 0; m_SpeakersConfig; m_SpeakersConfig &= m_SpeakersConfig - 1 )
     ++i;
   v4 = (unsigned int)(i << 12);
   v5 = AK::MemoryMgr::Malign(g_LEngineDefaultPoolId, (unsigned int)v4, 0x10u);
@@ -31,21 +29,22 @@ signed __int64 __fastcall CAkSink::AllocBuffer(CAkSink *this)
   if ( !v5 )
     return 52i64;
   memset(v5, 0, v4);
-  v2->m_MasterOut.pData = 0i64;
-  *(_QWORD *)&v2->m_MasterOut.eState = 43i64;
-  v8 = v2->m_SpeakersConfig;
-  v2->m_MasterOut.pData = v6;
-  *(_DWORD *)&v2->m_MasterOut.uMaxFrames = 1024;
-  v2->m_MasterOut.uChannelMask = v8;
+  this->m_MasterOut.pData = 0i64;
+  *(_QWORD *)&this->m_MasterOut.eState = 43i64;
+  v8 = this->m_SpeakersConfig;
+  this->m_MasterOut.pData = v6;
+  *(_DWORD *)&this->m_MasterOut.uMaxFrames = 1024;
+  this->m_MasterOut.uChannelMask = v8;
   return 1i64;
 }
 
 // File Line: 82
 // RVA: 0xA76810
-CAkSinkDummy *__fastcall CAkSink::CreateInternal(AkOutputSettings *in_settings, AkSinkType in_eType, unsigned int in_uInstance)
+CAkSinkDummy *__fastcall CAkSink::CreateInternal(
+        AkOutputSettings *in_settings,
+        unsigned int in_eType,
+        unsigned int in_uInstance)
 {
-  AkSinkType v3; // ebp
-  AkOutputSettings *v4; // rsi
   CAkSinkXAudio2 *v5; // rax
   CAkSinkDirectSound *v6; // rax
   CAkSinkDirectSound *v7; // rdi
@@ -53,11 +52,9 @@ CAkSinkDummy *__fastcall CAkSink::CreateInternal(AkOutputSettings *in_settings, 
   CAkSinkDirectSound *v10; // rax
   CAkSinkDirectSound *v11; // rax
   int v12; // ebx
-  unsigned int v13; // ecx
+  unsigned int m_SpeakersConfig; // ecx
 
-  v3 = in_eType;
-  v4 = in_settings;
-  if ( (unsigned int)in_eType <= 1 )
+  if ( in_eType <= 1 )
   {
     v5 = (CAkSinkXAudio2 *)AK::MemoryMgr::Malloc(g_LEngineDefaultPoolId, 0xC8ui64);
     if ( !v5 )
@@ -69,15 +66,15 @@ CAkSinkDummy *__fastcall CAkSink::CreateInternal(AkOutputSettings *in_settings, 
     if ( ((unsigned int (__fastcall *)(CAkSinkDirectSound *, AkPlatformInitSettings *, _QWORD, _QWORD))v6->vfptr[1].__vecDelDtor)(
            v6,
            &g_PDSettings,
-           v4->uChannelMask,
-           (unsigned int)v3) == 1 )
+           in_settings->uChannelMask,
+           in_eType) == 1 )
       return (CAkSinkDummy *)v7;
-    v7->vfptr->Term((CAkSink *)&v7->vfptr);
+    v7->vfptr->Term(v7);
     v9 = g_LEngineDefaultPoolId;
-    v7->vfptr->__vecDelDtor((CAkSink *)&v7->vfptr, 0);
+    v7->vfptr->__vecDelDtor(v7, 0);
     AK::MemoryMgr::Free(v9, v7);
   }
-  if ( !(v3 & 0xFFFFFFFD) )
+  if ( (in_eType & 0xFFFFFFFD) == 0 )
   {
     v10 = (CAkSinkDirectSound *)AK::MemoryMgr::Malloc(g_LEngineDefaultPoolId, 0x68ui64);
     if ( !v10 )
@@ -86,30 +83,31 @@ CAkSinkDummy *__fastcall CAkSink::CreateInternal(AkOutputSettings *in_settings, 
     v7 = v11;
     if ( !v11 )
       return 0i64;
-    if ( CAkSinkDirectSound::Init(v11, &g_PDSettings, v4->uChannelMask) == 1 )
+    if ( CAkSinkDirectSound::Init(v11, &g_PDSettings, in_settings->uChannelMask) == AK_Success )
       return (CAkSinkDummy *)v7;
-    v7->vfptr->Term((CAkSink *)&v7->vfptr);
+    v7->vfptr->Term(v7);
     v12 = g_LEngineDefaultPoolId;
-    v7->vfptr->__vecDelDtor((CAkSink *)&v7->vfptr, 0);
+    v7->vfptr->__vecDelDtor(v7, 0);
     AK::MemoryMgr::Free(v12, v7);
   }
-  if ( v3 != 3 )
+  if ( in_eType != 3 )
     return 0i64;
-  if ( !v4->uChannelMask )
+  if ( !in_settings->uChannelMask )
   {
     if ( g_pAkSink )
     {
-      v13 = g_pAkSink->m_SpeakersConfig;
-      v4->uChannelMask = v13;
-      return CAkSink::CreateDummy(v13);
+      m_SpeakersConfig = g_pAkSink->m_SpeakersConfig;
+      in_settings->uChannelMask = m_SpeakersConfig;
+      return CAkSink::CreateDummy(m_SpeakersConfig);
     }
-    v4->uChannelMask = 3;
+    in_settings->uChannelMask = 3;
   }
-  return CAkSink::CreateDummy(v4->uChannelMask);
+  return CAkSink::CreateDummy(in_settings->uChannelMask);
 }
 
 // File Line: 196
 // RVA: 0xA76760
+// attributes: thunk
 CAkSink *__fastcall CAkSink::Create(AkOutputSettings *in_settings, AkSinkType in_eType, unsigned int in_uInstance)
 {
   return CAkSink::CreateInternal(in_settings, in_eType, in_uInstance);
@@ -119,30 +117,28 @@ CAkSink *__fastcall CAkSink::Create(AkOutputSettings *in_settings, AkSinkType in
 // RVA: 0xA76770
 CAkSinkDummy *__fastcall CAkSink::CreateDummy(unsigned int in_uChannelMask)
 {
-  unsigned int v1; // ebx
   CAkSinkDummy *result; // rax
   CAkSink *v3; // rdi
   int v4; // ebx
 
-  v1 = in_uChannelMask;
   result = (CAkSinkDummy *)AK::MemoryMgr::Malloc(g_LEngineDefaultPoolId, 0x48ui64);
-  v3 = (CAkSink *)&result->vfptr;
+  v3 = result;
   if ( result )
   {
     result->m_pCapture = 0i64;
     result->m_SpeakersConfig = 0;
     result->m_MasterOut.pData = 0i64;
-    result->m_eType = 3;
+    result->m_eType = AkSink_Dummy;
     result->vfptr = (CAkSinkVtbl *)&CAkSinkDummy::`vftable;
-    if ( CAkSinkDummy::Init(result, v1) != 1 )
+    if ( CAkSinkDummy::Init(result, in_uChannelMask) != AK_Success )
     {
       v3->vfptr->Term(v3);
       v4 = g_LEngineDefaultPoolId;
       v3->vfptr->__vecDelDtor(v3, 0);
       AK::MemoryMgr::Free(v4, v3);
-      v3 = 0i64;
+      return 0i64;
     }
-    result = (CAkSinkDummy *)v3;
+    return (CAkSinkDummy *)v3;
   }
   return result;
 }
@@ -151,23 +147,25 @@ CAkSinkDummy *__fastcall CAkSink::CreateDummy(unsigned int in_uChannelMask)
 // RVA: 0xA76C30
 void __fastcall CAkSink::StartOutputCapture(CAkSink *this, const wchar_t *in_CaptureFileName)
 {
-  const wchar_t *v2; // rsi
-  CAkSink *v3; // rdi
-  unsigned int v4; // eax
+  unsigned int m_SpeakersConfig; // eax
   unsigned __int16 i; // r8
   unsigned int v6; // ebx
   AkCaptureMgr *v7; // rax
 
-  v2 = in_CaptureFileName;
-  v3 = this;
   if ( !this->m_pCapture )
   {
-    v4 = this->m_SpeakersConfig;
-    for ( i = 0; v4; v4 &= v4 - 1 )
+    m_SpeakersConfig = this->m_SpeakersConfig;
+    for ( i = 0; m_SpeakersConfig; m_SpeakersConfig &= m_SpeakersConfig - 1 )
       ++i;
     v6 = i;
     v7 = AkCaptureMgr::Instance();
-    v3->m_pCapture = AkCaptureMgr::StartCapture(v7, v2, v6, AkAudioLibSettings::g_pipelineCoreFrequency, 0x10u, Int16);
+    this->m_pCapture = AkCaptureMgr::StartCapture(
+                         v7,
+                         in_CaptureFileName,
+                         v6,
+                         AkAudioLibSettings::g_pipelineCoreFrequency,
+                         0x10u,
+                         Int16);
   }
 }
 
@@ -175,44 +173,40 @@ void __fastcall CAkSink::StartOutputCapture(CAkSink *this, const wchar_t *in_Cap
 // RVA: 0xA76CB0
 void __fastcall CAkSink::StopOutputCapture(CAkSink *this)
 {
-  CAkSink *v1; // rbx
-  AkCaptureFile *v2; // rcx
+  AkCaptureFile *m_pCapture; // rcx
 
-  v1 = this;
-  v2 = this->m_pCapture;
-  if ( v2 )
+  m_pCapture = this->m_pCapture;
+  if ( m_pCapture )
   {
-    AkCaptureFile::StopCapture(v2);
-    v1->m_pCapture = 0i64;
+    AkCaptureFile::StopCapture(m_pCapture);
+    this->m_pCapture = 0i64;
   }
 }
 
 // File Line: 336
 // RVA: 0xA76960
-signed __int64 __fastcall CAkSinkDummy::Init(CAkSinkDummy *this, unsigned int in_uChannels)
+__int64 __fastcall CAkSinkDummy::Init(CAkSinkDummy *this, unsigned int in_uChannels)
 {
-  unsigned int v2; // ebx
-  CAkSinkDummy *v3; // rdi
   unsigned int v4; // edx
   __int16 v5; // cx
   int i; // ecx
   unsigned __int64 v7; // rsi
   void *v8; // rax
   void *v9; // rbx
-  unsigned int v11; // eax
+  unsigned int m_SpeakersConfig; // eax
 
-  v2 = in_uChannels;
-  v3 = this;
   this->m_Timer = GetTickCount();
-  v3->m_SpeakersConfig = v2;
-  v4 = v2;
+  this->m_SpeakersConfig = in_uChannels;
+  v4 = in_uChannels;
   v5 = 0;
-  for ( v3->m_dwMSPerBuffer = (signed int)(1000.0
-                                         / ((double)(signed int)AkAudioLibSettings::g_pipelineCoreFrequency
-                                          * 0.0009765625)); v4; v4 &= v4 - 1 )
+  for ( this->m_dwMSPerBuffer = (int)(1000.0 / ((double)(int)AkAudioLibSettings::g_pipelineCoreFrequency * 0.0009765625));
+        v4;
+        v4 &= v4 - 1 )
+  {
     ++v5;
-  v3->m_usBlockAlign = 2 * v5;
-  for ( i = 0; v2; v2 &= v2 - 1 )
+  }
+  this->m_usBlockAlign = 2 * v5;
+  for ( i = 0; in_uChannels; in_uChannels &= in_uChannels - 1 )
     ++i;
   v7 = (unsigned int)(i << 12);
   v8 = AK::MemoryMgr::Malign(g_LEngineDefaultPoolId, v7, 0x10u);
@@ -220,12 +214,12 @@ signed __int64 __fastcall CAkSinkDummy::Init(CAkSinkDummy *this, unsigned int in
   if ( !v8 )
     return 52i64;
   memset(v8, 0, v7);
-  v3->m_MasterOut.pData = 0i64;
-  *(_QWORD *)&v3->m_MasterOut.eState = 43i64;
-  v11 = v3->m_SpeakersConfig;
-  v3->m_MasterOut.pData = v9;
-  *(_DWORD *)&v3->m_MasterOut.uMaxFrames = 1024;
-  v3->m_MasterOut.uChannelMask = v11;
+  this->m_MasterOut.pData = 0i64;
+  *(_QWORD *)&this->m_MasterOut.eState = 43i64;
+  m_SpeakersConfig = this->m_SpeakersConfig;
+  this->m_MasterOut.pData = v9;
+  *(_DWORD *)&this->m_MasterOut.uMaxFrames = 1024;
+  this->m_MasterOut.uChannelMask = m_SpeakersConfig;
   return 1i64;
 }
 
@@ -233,142 +227,130 @@ signed __int64 __fastcall CAkSinkDummy::Init(CAkSinkDummy *this, unsigned int in
 // RVA: 0xA76CE0
 void __fastcall CAkSinkDummy::Term(CAkSinkDummy *this)
 {
-  void *v1; // rdx
-  CAkSinkDummy *v2; // rbx
-  AkCaptureFile *v3; // rcx
+  void *pData; // rdx
+  AkCaptureFile *m_pCapture; // rcx
 
-  v1 = this->m_MasterOut.pData;
-  v2 = this;
-  if ( v1 )
+  pData = this->m_MasterOut.pData;
+  if ( pData )
   {
-    AK::MemoryMgr::Free(g_LEngineDefaultPoolId, v1);
-    v2->m_MasterOut.pData = 0i64;
+    AK::MemoryMgr::Free(g_LEngineDefaultPoolId, pData);
+    this->m_MasterOut.pData = 0i64;
   }
-  v3 = v2->m_pCapture;
-  if ( v3 )
+  m_pCapture = this->m_pCapture;
+  if ( m_pCapture )
   {
-    AkCaptureFile::StopCapture(v3);
-    v2->m_pCapture = 0i64;
+    AkCaptureFile::StopCapture(m_pCapture);
+    this->m_pCapture = 0i64;
   }
 }
 
 // File Line: 396
 // RVA: 0xA76A50
-signed __int64 __fastcall CAkSinkDummy::IsDataNeeded(CAkSinkDummy *this, unsigned int *out_uBuffersNeeded)
+__int64 __fastcall CAkSinkDummy::IsDataNeeded(CAkSinkDummy *this, unsigned int *out_uBuffersNeeded)
 {
-  unsigned int *v2; // rdi
-  CAkSinkDummy *v3; // rbx
-  DWORD v4; // eax
-  unsigned int v5; // edx
+  unsigned int TickCount; // eax
+  unsigned int m_Timer; // edx
   unsigned int v6; // ecx
-  signed __int64 result; // rax
   unsigned int v8; // eax
 
-  v2 = out_uBuffersNeeded;
-  v3 = this;
-  v4 = GetTickCount();
-  v5 = v3->m_Timer;
-  v6 = v4;
-  if ( v4 >= v5 )
+  TickCount = GetTickCount();
+  m_Timer = this->m_Timer;
+  v6 = TickCount;
+  if ( TickCount >= m_Timer )
   {
-    v8 = (v4 - v5) / v3->m_dwMSPerBuffer;
-    *v2 = v8;
+    v8 = (TickCount - m_Timer) / this->m_dwMSPerBuffer;
+    *out_uBuffersNeeded = v8;
     if ( v8 )
-      v3->m_Timer = v6;
-    result = 1i64;
+      this->m_Timer = v6;
+    return 1i64;
   }
   else
   {
-    *v2 = 1;
-    v3->m_Timer = v4;
-    result = 1i64;
+    *out_uBuffersNeeded = 1;
+    this->m_Timer = TickCount;
+    return 1i64;
   }
-  return result;
 }
 
 // File Line: 418
 // RVA: 0xA76AB0
-signed __int64 __fastcall CAkSinkDummy::PassData(CAkSinkDummy *this)
+__int64 __fastcall CAkSinkDummy::PassData(CAkSinkDummy *this)
 {
-  unsigned int v1; // edx
-  __m128 *v2; // rbx
-  int v3; // er8
-  CAkSinkDummy *i; // r9
+  unsigned int uChannelMask; // edx
+  __m128 *pData; // rbx
+  int i; // r8d
   int v5; // edx
   __int64 v6; // r8
-  signed __int64 v7; // rcx
+  __int64 v7; // rcx
   signed __int64 v8; // rcx
   void *v9; // rsp
   void *v10; // rsp
   unsigned __int64 v11; // r11
-  char *v12; // r10
+  char *p_in_pData; // r10
   __m128 *v13; // rcx
   __m128 v14; // xmm4
   __m128 v15; // xmm3
   __m128i v16; // xmm2
   __m128i v17; // xmm0
-  char in_pData; // [rsp+20h] [rbp+0h]
+  char in_pData; // [rsp+20h] [rbp+0h] BYREF
 
-  v1 = this->m_MasterOut.uChannelMask;
-  v2 = (__m128 *)this->m_MasterOut.pData;
-  v3 = 0;
-  for ( i = this; v1; v1 &= v1 - 1 )
-    ++v3;
-  v5 = v3 * this->m_MasterOut.uValidFrames;
+  uChannelMask = this->m_MasterOut.uChannelMask;
+  pData = (__m128 *)this->m_MasterOut.pData;
+  for ( i = 0; uChannelMask; uChannelMask &= uChannelMask - 1 )
+    ++i;
+  v5 = i * this->m_MasterOut.uValidFrames;
   v6 = (unsigned int)(2 * v5);
   if ( this->m_pCapture )
   {
     v7 = v6 + 15;
     if ( v6 + 15 <= (unsigned __int64)(unsigned int)v6 )
-      v7 = 1152921504606846960i64;
+      v7 = 0xFFFFFFFFFFFFFF0i64;
     v8 = v7 & 0xFFFFFFFFFFFFFFF0ui64;
     v9 = alloca(v8);
     v10 = alloca(v8);
-    v11 = (unsigned __int64)v2->m128_u64 + 4 * v5;
-    v12 = &in_pData;
-    if ( (unsigned __int64)v2 < v11 )
+    v11 = (unsigned __int64)pData->m128_u64 + 4 * v5;
+    p_in_pData = &in_pData;
+    if ( (unsigned __int64)pData < v11 )
     {
-      v13 = v2 + 3;
+      v13 = pData + 3;
       do
       {
-        v12 += 32;
+        p_in_pData += 32;
         v14 = _mm_mul_ps(v13[-1], (__m128)_xmm);
         v15 = *v13;
         v16 = _mm_cvtps_epi32(_mm_mul_ps(v13[-3], (__m128)_xmm));
         v17 = _mm_cvtps_epi32(_mm_mul_ps(v13[-2], (__m128)_xmm));
         v13 += 4;
-        _mm_storeu_si128((__m128i *)v12 - 2, _mm_packs_epi32(v16, v17));
-        _mm_storeu_si128(
-          (__m128i *)v12 - 1,
-          _mm_packs_epi32(_mm_cvtps_epi32(v14), _mm_cvtps_epi32(_mm_mul_ps(v15, (__m128)_xmm))));
+        *((__m128i *)p_in_pData - 2) = _mm_packs_epi32(v16, v17);
+        *((__m128i *)p_in_pData - 1) = _mm_packs_epi32(
+                                         _mm_cvtps_epi32(v14),
+                                         _mm_cvtps_epi32(_mm_mul_ps(v15, (__m128)_xmm)));
       }
       while ( (unsigned __int64)&v13[-3] < v11 );
     }
-    AkCaptureFile::PassSampleData(i->m_pCapture, &in_pData, v6);
+    AkCaptureFile::PassSampleData(this->m_pCapture, &in_pData, v6);
   }
   return 1i64;
 }
 
 // File Line: 440
 // RVA: 0xA76BB0
-signed __int64 __fastcall CAkSinkDummy::PassSilence(CAkSinkDummy *this)
+__int64 __fastcall CAkSinkDummy::PassSilence(CAkSinkDummy *this)
 {
-  CAkSinkDummy *v1; // rsi
   __int64 v2; // rdi
-  signed __int64 v3; // rax
+  __int64 v3; // rax
   void *v4; // rsp
-  char Dst; // [rsp+20h] [rbp+0h]
+  char Dst; // [rsp+20h] [rbp+0h] BYREF
 
-  v1 = this;
-  v2 = (unsigned int)this->m_usBlockAlign << 10;
+  v2 = this->m_usBlockAlign << 10;
   if ( this->m_pCapture )
   {
     v3 = v2 + 15;
     if ( v2 + 15 <= (unsigned __int64)(unsigned int)v2 )
-      v3 = 1152921504606846960i64;
-    v4 = alloca(v3);
+      v3 = 0xFFFFFFFFFFFFFF0i64;
+    v4 = alloca(v3 & 0xFFFFFFFFFFFFFFF0ui64);
     memset(&Dst, 0, (unsigned int)v2);
-    AkCaptureFile::PassSampleData(v1->m_pCapture, &Dst, v2);
+    AkCaptureFile::PassSampleData(this->m_pCapture, &Dst, v2);
   }
   return 1i64;
 }

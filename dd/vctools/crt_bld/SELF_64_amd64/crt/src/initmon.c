@@ -1,14 +1,13 @@
 // File Line: 65
 // RVA: 0x12D91A8
-signed __int64 __fastcall _init_monetary(threadlocaleinfostruct *ploci)
+__int64 __fastcall _init_monetary(threadlocaleinfostruct *ploci)
 {
-  threadlocaleinfostruct *v1; // rsi
-  lconv *v2; // r15
-  lconv *v3; // r12
+  int *v2; // r15
+  _DWORD *v3; // r12
   lconv *v4; // r14
-  lconv *v6; // rax
-  lconv *v7; // rcx
-  lconv *v8; // rax
+  _DWORD *v6; // rax
+  void *v7; // rcx
+  int *v8; // rax
   const wchar_t *v9; // rdi
   int v10; // ebx
   int v11; // ebx
@@ -30,42 +29,41 @@ signed __int64 __fastcall _init_monetary(threadlocaleinfostruct *ploci)
   int v27; // ebx
   int v28; // ebx
   int v29; // ebx
-  char *v30; // rdx
+  char *mon_grouping; // rdx
   char v31; // cl
   char *v32; // r8
   char v33; // al
   lconv *v34; // rdx
   lconv *v35; // rcx
-  signed __int64 v36; // rax
+  __int64 v36; // rax
   __int128 v37; // xmm1
-  volatile signed __int32 *v38; // rax
-  volatile signed __int32 *v39; // rcx
-  localeinfo_struct plocinfo; // [rsp+30h] [rbp-10h]
+  int *lconv_mon_refcount; // rax
+  int *lconv_intl_refcount; // rcx
+  localeinfo_struct plocinfo; // [rsp+30h] [rbp-10h] BYREF
 
-  v1 = ploci;
   plocinfo.locinfo = ploci;
   v2 = 0i64;
   plocinfo.mbcinfo = 0i64;
-  if ( *(_OWORD *)&ploci->locale_name[3] != 0i64 )
+  if ( ploci->locale_name[3] || ploci->locale_name[4] )
   {
     v4 = (lconv *)calloc_crt(1ui64, 0x98ui64);
     if ( !v4 )
       return 1i64;
-    v6 = (lconv *)malloc_crt(4ui64);
+    v6 = malloc_crt(4ui64);
     v3 = v6;
     if ( !v6 )
     {
       v7 = v4;
-LABEL_7:
+LABEL_8:
       free(v7);
       return 1i64;
     }
-    LODWORD(v6->decimal_point) = 0;
-    if ( !v1->locale_name[3] )
+    *v6 = 0;
+    if ( !ploci->locale_name[3] )
     {
       v34 = &_lconv_c;
       v35 = v4;
-      if ( ((unsigned __int8)v4 | (unsigned __int8)&_lconv_c) & 0xF )
+      if ( (((unsigned __int8)v4 | (unsigned __int8)&_lconv_c) & 0xF) != 0 )
       {
         memmove(v4, &_lconv_c, 0x98ui64);
       }
@@ -91,66 +89,66 @@ LABEL_7:
         *(_OWORD *)&v35->decimal_point = *(_OWORD *)&v34->decimal_point;
         v35->grouping = v34->grouping;
       }
-LABEL_28:
-      v4->decimal_point = v1->lconv->decimal_point;
-      v4->thousands_sep = v1->lconv->thousands_sep;
-      v4->grouping = v1->lconv->grouping;
-      v4->_W_decimal_point = v1->lconv->_W_decimal_point;
-      v4->_W_thousands_sep = v1->lconv->_W_thousands_sep;
-      LODWORD(v3->decimal_point) = 1;
+LABEL_29:
+      v4->decimal_point = ploci->lconv->decimal_point;
+      v4->thousands_sep = ploci->lconv->thousands_sep;
+      v4->grouping = ploci->lconv->grouping;
+      v4->_W_decimal_point = ploci->lconv->_W_decimal_point;
+      v4->_W_thousands_sep = ploci->lconv->_W_thousands_sep;
+      *v3 = 1;
       if ( v2 )
-        LODWORD(v2->decimal_point) = 1;
-      goto LABEL_30;
+        *v2 = 1;
+      goto LABEL_31;
     }
-    v8 = (lconv *)malloc_crt(4ui64);
+    v8 = (int *)malloc_crt(4ui64);
     v2 = v8;
     if ( !v8 )
     {
       free(v4);
       v7 = v3;
-      goto LABEL_7;
+      goto LABEL_8;
     }
-    LODWORD(v8->decimal_point) = 0;
-    v9 = v1->locale_name[3];
-    v10 = _getlocaleinfo(&plocinfo, 1, v1->locale_name[3], 0x15u, &v4->int_curr_symbol);
-    v11 = (unsigned __int64)_getlocaleinfo(&plocinfo, 1, v9, 0x14u, &v4->currency_symbol) | v10;
-    v12 = (unsigned __int64)_getlocaleinfo(&plocinfo, 1, v9, 0x16u, &v4->mon_decimal_point) | v11;
-    v13 = (unsigned __int64)_getlocaleinfo(&plocinfo, 1, v9, 0x17u, &v4->mon_thousands_sep) | v12;
-    v14 = (unsigned __int64)_getlocaleinfo(&plocinfo, 1, v9, 0x18u, &v4->mon_grouping) | v13;
-    v15 = (unsigned __int64)_getlocaleinfo(&plocinfo, 1, v9, 0x50u, &v4->positive_sign) | v14;
-    v16 = (unsigned __int64)_getlocaleinfo(&plocinfo, 1, v9, 0x51u, &v4->negative_sign) | v15;
-    v17 = (unsigned __int64)_getlocaleinfo(&plocinfo, 0, v9, 0x1Au, &v4->int_frac_digits) | v16;
-    v18 = (unsigned __int64)_getlocaleinfo(&plocinfo, 0, v9, 0x19u, &v4->frac_digits) | v17;
-    v19 = (unsigned __int64)_getlocaleinfo(&plocinfo, 0, v9, 0x54u, &v4->p_cs_precedes) | v18;
-    v20 = (unsigned __int64)_getlocaleinfo(&plocinfo, 0, v9, 0x55u, &v4->p_sep_by_space) | v19;
-    v21 = (unsigned __int64)_getlocaleinfo(&plocinfo, 0, v9, 0x56u, &v4->n_cs_precedes) | v20;
-    v22 = (unsigned __int64)_getlocaleinfo(&plocinfo, 0, v9, 0x57u, &v4->n_sep_by_space) | v21;
-    v23 = (unsigned __int64)_getlocaleinfo(&plocinfo, 0, v9, 0x52u, &v4->p_sign_posn) | v22;
-    v24 = (unsigned __int64)_getlocaleinfo(&plocinfo, 0, v9, 0x53u, &v4->n_sign_posn) | v23;
-    v25 = (unsigned __int64)_getlocaleinfo(&plocinfo, 2, v9, 0x15u, &v4->_W_int_curr_symbol) | v24;
-    v26 = (unsigned __int64)_getlocaleinfo(&plocinfo, 2, v9, 0x14u, &v4->_W_currency_symbol) | v25;
-    v27 = (unsigned __int64)_getlocaleinfo(&plocinfo, 2, v9, 0x16u, &v4->_W_mon_decimal_point) | v26;
-    v28 = (unsigned __int64)_getlocaleinfo(&plocinfo, 2, v9, 0x17u, &v4->_W_mon_thousands_sep) | v27;
-    v29 = (unsigned __int64)_getlocaleinfo(&plocinfo, 2, v9, 0x50u, &v4->_W_positive_sign) | v28;
-    if ( v29 | (unsigned int)_getlocaleinfo(&plocinfo, 2, v9, 0x51u, &v4->_W_negative_sign) )
+    *v8 = 0;
+    v9 = ploci->locale_name[3];
+    v10 = _getlocaleinfo(&plocinfo, 1, v9, 0x15u, (void **)&v4->int_curr_symbol);
+    v11 = _getlocaleinfo(&plocinfo, 1, v9, 0x14u, (void **)&v4->currency_symbol) | v10;
+    v12 = _getlocaleinfo(&plocinfo, 1, v9, 0x16u, (void **)&v4->mon_decimal_point) | v11;
+    v13 = _getlocaleinfo(&plocinfo, 1, v9, 0x17u, (void **)&v4->mon_thousands_sep) | v12;
+    v14 = _getlocaleinfo(&plocinfo, 1, v9, 0x18u, (void **)&v4->mon_grouping) | v13;
+    v15 = _getlocaleinfo(&plocinfo, 1, v9, 0x50u, (void **)&v4->positive_sign) | v14;
+    v16 = _getlocaleinfo(&plocinfo, 1, v9, 0x51u, (void **)&v4->negative_sign) | v15;
+    v17 = _getlocaleinfo(&plocinfo, 0, v9, 0x1Au, (void **)&v4->int_frac_digits) | v16;
+    v18 = _getlocaleinfo(&plocinfo, 0, v9, 0x19u, (void **)&v4->frac_digits) | v17;
+    v19 = _getlocaleinfo(&plocinfo, 0, v9, 0x54u, (void **)&v4->p_cs_precedes) | v18;
+    v20 = _getlocaleinfo(&plocinfo, 0, v9, 0x55u, (void **)&v4->p_sep_by_space) | v19;
+    v21 = _getlocaleinfo(&plocinfo, 0, v9, 0x56u, (void **)&v4->n_cs_precedes) | v20;
+    v22 = _getlocaleinfo(&plocinfo, 0, v9, 0x57u, (void **)&v4->n_sep_by_space) | v21;
+    v23 = _getlocaleinfo(&plocinfo, 0, v9, 0x52u, (void **)&v4->p_sign_posn) | v22;
+    v24 = _getlocaleinfo(&plocinfo, 0, v9, 0x53u, (void **)&v4->n_sign_posn) | v23;
+    v25 = _getlocaleinfo(&plocinfo, 2, v9, 0x15u, (void **)&v4->_W_int_curr_symbol) | v24;
+    v26 = _getlocaleinfo(&plocinfo, 2, v9, 0x14u, (void **)&v4->_W_currency_symbol) | v25;
+    v27 = _getlocaleinfo(&plocinfo, 2, v9, 0x16u, (void **)&v4->_W_mon_decimal_point) | v26;
+    v28 = _getlocaleinfo(&plocinfo, 2, v9, 0x17u, (void **)&v4->_W_mon_thousands_sep) | v27;
+    v29 = _getlocaleinfo(&plocinfo, 2, v9, 0x50u, (void **)&v4->_W_positive_sign) | v28;
+    if ( v29 | (unsigned int)_getlocaleinfo(&plocinfo, 2, v9, 0x51u, (void **)&v4->_W_negative_sign) )
     {
       _free_lconv_mon(v4);
       free(v4);
       free(v3);
       v7 = v2;
-      goto LABEL_7;
+      goto LABEL_8;
     }
-    v30 = v4->mon_grouping;
+    mon_grouping = v4->mon_grouping;
     while ( 1 )
     {
-      if ( !*v30 )
-        goto LABEL_28;
-      v31 = *v30;
-      if ( (unsigned __int8)(*v30 - 48) <= 9u )
+      if ( !*mon_grouping )
+        goto LABEL_29;
+      v31 = *mon_grouping;
+      if ( (unsigned __int8)(*mon_grouping - 48) <= 9u )
         break;
       if ( v31 == 59 )
       {
-        v32 = v30;
+        v32 = mon_grouping;
         do
         {
           v33 = v32[1];
@@ -160,31 +158,31 @@ LABEL_28:
       }
       else
       {
-LABEL_16:
-        ++v30;
+LABEL_17:
+        ++mon_grouping;
       }
     }
-    *v30 = v31 - 48;
-    goto LABEL_16;
+    *mon_grouping = v31 - 48;
+    goto LABEL_17;
   }
   v3 = 0i64;
   v4 = &_lconv_c;
-LABEL_30:
-  v38 = v1->lconv_mon_refcount;
-  if ( v38 )
-    _InterlockedDecrement(v38);
-  v39 = v1->lconv_intl_refcount;
-  if ( v39 )
+LABEL_31:
+  lconv_mon_refcount = ploci->lconv_mon_refcount;
+  if ( lconv_mon_refcount )
+    _InterlockedDecrement(lconv_mon_refcount);
+  lconv_intl_refcount = ploci->lconv_intl_refcount;
+  if ( lconv_intl_refcount )
   {
-    if ( !_InterlockedDecrement(v39) )
+    if ( !_InterlockedDecrement(lconv_intl_refcount) )
     {
-      free(v1->lconv);
-      free(v1->lconv_intl_refcount);
+      free(ploci->lconv);
+      free(ploci->lconv_intl_refcount);
     }
   }
-  v1->lconv_mon_refcount = (int *)v2;
-  v1->lconv_intl_refcount = (int *)v3;
-  v1->lconv = v4;
+  ploci->lconv_mon_refcount = v2;
+  ploci->lconv_intl_refcount = v3;
+  ploci->lconv = v4;
   return 0i64;
 }
 
@@ -192,63 +190,61 @@ LABEL_30:
 // RVA: 0x12D909C
 void __fastcall _free_lconv_mon(lconv *l)
 {
-  lconv *v1; // rbx
-  char *v2; // rcx
-  char *v3; // rcx
-  char *v4; // rcx
-  char *v5; // rcx
-  char *v6; // rcx
-  char *v7; // rcx
-  char *v8; // rcx
-  wchar_t *v9; // rcx
-  wchar_t *v10; // rcx
-  wchar_t *v11; // rcx
-  wchar_t *v12; // rcx
-  wchar_t *v13; // rcx
-  wchar_t *v14; // rcx
+  char *int_curr_symbol; // rcx
+  char *currency_symbol; // rcx
+  char *mon_decimal_point; // rcx
+  char *mon_thousands_sep; // rcx
+  char *mon_grouping; // rcx
+  char *positive_sign; // rcx
+  char *negative_sign; // rcx
+  wchar_t *W_int_curr_symbol; // rcx
+  wchar_t *W_currency_symbol; // rcx
+  wchar_t *W_mon_decimal_point; // rcx
+  wchar_t *W_mon_thousands_sep; // rcx
+  wchar_t *W_positive_sign; // rcx
+  wchar_t *W_negative_sign; // rcx
 
   if ( l )
   {
-    v1 = l;
-    v2 = l->int_curr_symbol;
-    if ( v2 != _lconv_c.int_curr_symbol )
-      free(v2);
-    v3 = v1->currency_symbol;
-    if ( v3 != _lconv_c.currency_symbol )
-      free(v3);
-    v4 = v1->mon_decimal_point;
-    if ( v4 != _lconv_c.mon_decimal_point )
-      free(v4);
-    v5 = v1->mon_thousands_sep;
-    if ( v5 != _lconv_c.mon_thousands_sep )
-      free(v5);
-    v6 = v1->mon_grouping;
-    if ( v6 != _lconv_c.mon_grouping )
-      free(v6);
-    v7 = v1->positive_sign;
-    if ( v7 != _lconv_c.positive_sign )
-      free(v7);
-    v8 = v1->negative_sign;
-    if ( v8 != _lconv_c.negative_sign )
-      free(v8);
-    v9 = v1->_W_int_curr_symbol;
-    if ( v9 != _lconv_c._W_int_curr_symbol )
-      free(v9);
-    v10 = v1->_W_currency_symbol;
-    if ( v10 != _lconv_c._W_currency_symbol )
-      free(v10);
-    v11 = v1->_W_mon_decimal_point;
-    if ( v11 != _lconv_c._W_mon_decimal_point )
-      free(v11);
-    v12 = v1->_W_mon_thousands_sep;
-    if ( v12 != _lconv_c._W_mon_thousands_sep )
-      free(v12);
-    v13 = v1->_W_positive_sign;
-    if ( v13 != _lconv_c._W_positive_sign )
-      free(v13);
-    v14 = v1->_W_negative_sign;
-    if ( v14 != _lconv_c._W_negative_sign )
-      free(v14);
+    int_curr_symbol = l->int_curr_symbol;
+    if ( int_curr_symbol != _lconv_c.int_curr_symbol )
+      free(int_curr_symbol);
+    currency_symbol = l->currency_symbol;
+    if ( currency_symbol != _lconv_c.currency_symbol )
+      free(currency_symbol);
+    mon_decimal_point = l->mon_decimal_point;
+    if ( mon_decimal_point != _lconv_c.mon_decimal_point )
+      free(mon_decimal_point);
+    mon_thousands_sep = l->mon_thousands_sep;
+    if ( mon_thousands_sep != _lconv_c.mon_thousands_sep )
+      free(mon_thousands_sep);
+    mon_grouping = l->mon_grouping;
+    if ( mon_grouping != _lconv_c.mon_grouping )
+      free(mon_grouping);
+    positive_sign = l->positive_sign;
+    if ( positive_sign != _lconv_c.positive_sign )
+      free(positive_sign);
+    negative_sign = l->negative_sign;
+    if ( negative_sign != _lconv_c.negative_sign )
+      free(negative_sign);
+    W_int_curr_symbol = l->_W_int_curr_symbol;
+    if ( W_int_curr_symbol != _lconv_c._W_int_curr_symbol )
+      free(W_int_curr_symbol);
+    W_currency_symbol = l->_W_currency_symbol;
+    if ( W_currency_symbol != _lconv_c._W_currency_symbol )
+      free(W_currency_symbol);
+    W_mon_decimal_point = l->_W_mon_decimal_point;
+    if ( W_mon_decimal_point != _lconv_c._W_mon_decimal_point )
+      free(W_mon_decimal_point);
+    W_mon_thousands_sep = l->_W_mon_thousands_sep;
+    if ( W_mon_thousands_sep != _lconv_c._W_mon_thousands_sep )
+      free(W_mon_thousands_sep);
+    W_positive_sign = l->_W_positive_sign;
+    if ( W_positive_sign != _lconv_c._W_positive_sign )
+      free(W_positive_sign);
+    W_negative_sign = l->_W_negative_sign;
+    if ( W_negative_sign != _lconv_c._W_negative_sign )
+      free(W_negative_sign);
   }
 }
 

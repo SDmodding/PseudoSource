@@ -1,16 +1,14 @@
 // File Line: 43
 // RVA: 0x427440
-OSuite::ZAtomBase *__fastcall OSuite::ZAtomBase::Cast<OSuite::ZOEntry>(OSuite::ZAtomBase *this)
+OSuite::ZOEntry *__fastcall OSuite::ZAtomBase::Cast<OSuite::ZOEntry>(OSuite::ZAtomBase *this)
 {
-  OSuite::ZAtomBase *v1; // rbx
   char v2; // al
-  OSuite::ZAtomBase *v3; // rdx
+  __int64 v3; // rdx
 
-  v1 = this;
-  v2 = (__int64)this->vfptr[1].__vecDelDtor((OSuite::ZObject *)this, OSuite::ZOEntry::s_nClassId);
+  v2 = (char)this->vfptr[1].__vecDelDtor(this, (unsigned int)OSuite::ZOEntry::s_nClassId);
   v3 = 0i64;
   if ( v2 )
-    v3 = v1;
-  return v3;
+    return (OSuite::ZOEntry *)this;
+  return (OSuite::ZOEntry *)v3;
 }
 

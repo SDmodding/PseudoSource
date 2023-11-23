@@ -70,30 +70,27 @@ hkClass *__fastcall hkpWheelConstraintData::staticClass()
 
 // File Line: 146
 // RVA: 0xD447A0
-void __fastcall finishLoadedObjecthkpWheelConstraintData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpWheelConstraintData(hkpConstraintData *p, hkFinishLoadedObjectFlag finishing)
 {
-  _QWORD *v2; // rbx
-
   if ( p )
   {
-    v2 = p;
-    hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpWheelConstraintData::`vftable;
+    hkpConstraintData::hkpConstraintData(p, finishing);
+    p->vfptr = (hkBaseObjectVtbl *)&hkpWheelConstraintData::`vftable;
   }
 }
 
 // File Line: 152
 // RVA: 0xD447D0
-void __fastcall cleanupLoadedObjecthkpWheelConstraintData(void *p)
+void __fastcall cleanupLoadedObjecthkpWheelConstraintData(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 156
 // RVA: 0xD447E0
 void **__fastcall getVtablehkpWheelConstraintData()
 {
-  hkpConstraintData v1; // [rsp+20h] [rbp-198h]
+  hkpConstraintData v1; // [rsp+20h] [rbp-198h] BYREF
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
   return &hkpWheelConstraintData::`vftable;
@@ -110,8 +107,8 @@ void **dynamic_initializer_for__hkpWheelConstraintDataTypeInfo__()
   hkpWheelConstraintDataTypeInfo.m_typeName = "hkpWheelConstraintData";
   hkpWheelConstraintDataTypeInfo.m_vtable = result;
   hkpWheelConstraintDataTypeInfo.m_scopedName = "!hkpWheelConstraintData";
-  hkpWheelConstraintDataTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpWheelConstraintData;
-  hkpWheelConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpWheelConstraintData;
+  hkpWheelConstraintDataTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpWheelConstraintData;
+  hkpWheelConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpWheelConstraintData;
   return result;
 }
 

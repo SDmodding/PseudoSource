@@ -1,17 +1,16 @@
 // File Line: 238
 // RVA: 0x829D0
-void __fastcall std::ios_base::failure::failure(std::ios_base::failure *this, const char *_Message, std::error_code *_Errcode)
+void __fastcall std::ios_base::failure::failure(
+        std::ios_base::failure *this,
+        const char *_Message,
+        std::error_code *_Errcode)
 {
-  std::error_code *v3; // rdi
-  std::ios_base::failure *v4; // rbx
   unsigned __int64 v5; // r8
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v6; // rax
+  std::string *Ptr; // rax
   std::error_code v7; // [rsp+30h] [rbp-38h]
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > v8; // [rsp+40h] [rbp-28h]
-  char *_What; // [rsp+78h] [rbp+10h]
+  std::string v8; // [rsp+40h] [rbp-28h] BYREF
+  char *_What; // [rsp+78h] [rbp+10h] BYREF
 
-  v3 = _Errcode;
-  v4 = this;
   v8._Myres = 15i64;
   v8._Mysize = 0i64;
   v8._Bx._Buf[0] = 0;
@@ -26,44 +25,44 @@ void __fastcall std::ios_base::failure::failure(std::ios_base::failure *this, co
   {
     v5 = 0i64;
   }
-  std::basic_string<char,std::char_traits<char>,std::allocator<char>>::assign(&v8, _Message, v5);
-  v7 = *v3;
-  v6 = &v8;
+  std::string::assign(&v8, _Message, v5);
+  v7 = *_Errcode;
+  Ptr = &v8;
   if ( v8._Myres >= 0x10 )
-    v6 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v8._Bx._Ptr;
-  _What = (char *)v6;
-  std::exception::exception((std::exception *)&v4->vfptr, (const char *const *)&_What);
-  v4->vfptr = (std::exceptionVtbl *)&std::runtime_error::`vftable;
-  v4->vfptr = (std::exceptionVtbl *)&std::system_error::`vftable;
-  v4->_Mycode = v7;
+    Ptr = (std::string *)v8._Bx._Ptr;
+  _What = (char *)Ptr;
+  std::exception::exception(this, (const char *const *)&_What);
+  this->vfptr = (std::exceptionVtbl *)&std::runtime_error::`vftable;
+  this->vfptr = (std::exceptionVtbl *)&std::system_error::`vftable;
+  this->_Mycode = v7;
   if ( v8._Myres >= 0x10 )
     Illusion::ShaderParam::operator delete(v8._Bx._Ptr);
-  v4->vfptr = (std::exceptionVtbl *)&std::ios_base::failure::`vftable;
+  this->vfptr = (std::exceptionVtbl *)&std::ios_base::failure::`vftable;
 }
 
 // File Line: 301
 // RVA: 0x839A0
-void __fastcall std::ios_base::clear(std::ios_base *this, int _State, bool _Reraise)
+void __fastcall std::ios_base::clear(std::ios_base *this, char _State, bool _Reraise)
 {
-  int v3; // eax
+  int Except; // eax
   int v4; // edx
   int v5; // eax
-  std::error_code _Errcode; // [rsp+20h] [rbp-48h]
-  std::ios_base::failure pExceptionObject; // [rsp+30h] [rbp-38h]
+  std::error_code _Errcode; // [rsp+20h] [rbp-48h] BYREF
+  std::ios_base::failure pExceptionObject; // [rsp+30h] [rbp-38h] BYREF
 
-  v3 = this->_Except;
+  Except = this->_Except;
   v4 = _State & 0x17;
   this->_Mystate = v4;
-  v5 = v4 & v3;
+  v5 = v4 & Except;
   if ( v5 )
   {
     if ( !_Reraise )
     {
       _Errcode._Myval = 1;
-      if ( !(v5 & 4) )
+      if ( (v5 & 4) == 0 )
       {
-        _Errcode._Mycat = (std::error_category *)&std::_Error_objects<int>::_Iostream_object;
-        if ( !(v5 & 2) )
+        _Errcode._Mycat = &std::_Error_objects<int>::_Iostream_object;
+        if ( (v5 & 2) == 0 )
         {
           std::ios_base::failure::failure(&pExceptionObject, "ios_base::eofbit set", &_Errcode);
           CxxThrowException(&pExceptionObject, &TI4_AVfailure_ios_base_std__);
@@ -71,7 +70,7 @@ void __fastcall std::ios_base::clear(std::ios_base *this, int _State, bool _Rera
         std::ios_base::failure::failure(&pExceptionObject, "ios_base::failbit set", &_Errcode);
         CxxThrowException(&pExceptionObject, &TI4_AVfailure_ios_base_std__);
       }
-      _Errcode._Mycat = (std::error_category *)&std::_Error_objects<int>::_Iostream_object;
+      _Errcode._Mycat = &std::_Error_objects<int>::_Iostream_object;
       std::ios_base::failure::failure(&pExceptionObject, "ios_base::badbit set", &_Errcode);
       CxxThrowException(&pExceptionObject, &TI4_AVfailure_ios_base_std__);
     }
@@ -83,14 +82,12 @@ void __fastcall std::ios_base::clear(std::ios_base *this, int _State, bool _Rera
 // RVA: 0x83DD0
 std::locale *__fastcall std::ios_base::getloc(std::ios_base *this, std::locale *result)
 {
-  std::locale *v2; // rbx
-  std::locale::_Locimp *v3; // rcx
+  std::locale::_Locimp *Ptr; // rcx
 
-  v2 = result;
-  v3 = this->_Ploc->_Ptr;
-  result->_Ptr = v3;
-  ((void (__cdecl *)(std::locale::_Locimp *, std::locale *))v3->vfptr->_Incref)(v3, result);
-  return v2;
+  Ptr = this->_Ploc->_Ptr;
+  result->_Ptr = Ptr;
+  Ptr->vfptr->_Incref(Ptr);
+  return result;
 }
 
 // File Line: 531
@@ -105,10 +102,8 @@ void __fastcall std::ios_base::~ios_base(std::ios_base *this)
 // RVA: 0x86380
 void __fastcall std::ios_base::_Init(std::ios_base *this)
 {
-  std::ios_base *v1; // rbx
   std::locale *v2; // rdi
 
-  v1 = this;
   this->_Fmtfl = 513;
   this->_Ploc = 0i64;
   this->_Stdstr = 0i64;
@@ -122,11 +117,11 @@ void __fastcall std::ios_base::_Init(std::ios_base *this)
   if ( v2 )
   {
     v2->_Ptr = std::locale::_Init(1);
-    v1->_Ploc = v2;
+    this->_Ploc = v2;
   }
   else
   {
-    v1->_Ploc = 0i64;
+    this->_Ploc = 0i64;
   }
 }
 

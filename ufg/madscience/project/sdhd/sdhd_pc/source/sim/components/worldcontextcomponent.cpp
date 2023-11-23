@@ -2,7 +2,7 @@
 // RVA: 0x15441E0
 __int64 dynamic_initializer_for__UFG::WorldContextComponent::s_WorldContextComponentList__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::WorldContextComponent::s_WorldContextComponentList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::WorldContextComponent::s_WorldContextComponentList__);
 }
 
 // File Line: 86
@@ -22,57 +22,58 @@ __int64 dynamic_initializer_for__UFG::WorldContextComponent::_TypeIDesc__()
 
 // File Line: 104
 // RVA: 0x547280
-UFG::SimComponent *__fastcall UFG::WorldContextComponent::PropertiesOnActivateNew(UFG::SceneObjectProperties *pSceneObj, bool required)
+UFG::SimComponent *__fastcall UFG::WorldContextComponent::PropertiesOnActivateNew(
+        UFG::SceneObjectProperties *pSceneObj,
+        bool required)
 {
-  bool v2; // bp
-  UFG::SceneObjectProperties *v3; // rbx
-  UFG::qPropertySet *v4; // rcx
+  UFG::qPropertySet *mpWritableProperties; // rcx
   UFG::qPropertySet *v5; // rax
   UFG::SimComponent *v6; // rsi
-  component_WorldContext *v7; // rdi
-  UFG::qMemoryPool *v9; // rax
+  component_WorldContext *MemImagePtr; // rdi
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
   UFG::allocator::free_link *v10; // rax
   UFG::SimComponent *v11; // rax
-  UFG::SimObject *v12; // rdx
+  UFG::SimObject *m_pSimObject; // rdx
   unsigned int v13; // ebx
-  UFG::SimObjectModifier v14; // [rsp+38h] [rbp-30h]
+  UFG::SimObjectModifier v14; // [rsp+38h] [rbp-30h] BYREF
 
-  v2 = required;
-  v3 = pSceneObj;
-  v4 = pSceneObj->mpWritableProperties;
-  if ( !v4 )
-    v4 = v3->mpConstProperties;
+  mpWritableProperties = pSceneObj->mpWritableProperties;
+  if ( !mpWritableProperties )
+    mpWritableProperties = pSceneObj->mpConstProperties;
   v5 = UFG::qPropertySet::Get<UFG::qPropertySet>(
-         v4,
-         (UFG::qSymbol *)&component_WorldContext::sPropertyName.mUID,
+         mpWritableProperties,
+         (UFG::qArray<unsigned long,0> *)&component_WorldContext::sPropertyName,
          DEPTH_RECURSE);
   v6 = 0i64;
   if ( v5 )
   {
-    v7 = (component_WorldContext *)UFG::qPropertySet::GetMemImagePtr(v5);
-    if ( v7 )
+    MemImagePtr = (component_WorldContext *)UFG::qPropertySet::GetMemImagePtr(v5);
+    if ( MemImagePtr )
       goto LABEL_9;
   }
   else
   {
-    v7 = 0i64;
+    MemImagePtr = 0i64;
   }
-  if ( !v2 )
+  if ( !required )
     return 0i64;
 LABEL_9:
-  v9 = UFG::GetSimulationMemoryPool();
-  v10 = UFG::qMemoryPool::Allocate(v9, 0x270ui64, "WorldContextComponent", 0i64, 1u);
+  SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+  v10 = UFG::qMemoryPool::Allocate(SimulationMemoryPool, 0x270ui64, "WorldContextComponent", 0i64, 1u);
   if ( v10 )
   {
-    UFG::WorldContextComponent::WorldContextComponent((UFG::WorldContextComponent *)v10, v3->m_NameUID, v7);
+    UFG::WorldContextComponent::WorldContextComponent(
+      (UFG::WorldContextComponent *)v10,
+      pSceneObj->m_NameUID,
+      MemImagePtr);
     v6 = v11;
   }
-  v12 = v3->m_pSimObject;
-  if ( (v12->m_Flags >> 14) & 1 )
+  m_pSimObject = pSceneObj->m_pSimObject;
+  if ( (m_pSimObject->m_Flags & 0x4000) != 0 )
     v13 = 28;
   else
     v13 = -1;
-  UFG::SimObjectModifier::SimObjectModifier(&v14, v12, 1);
+  UFG::SimObjectModifier::SimObjectModifier(&v14, m_pSimObject, 1);
   UFG::SimObjectModifier::AttachComponent(&v14, v6, v13);
   UFG::SimObjectModifier::Close(&v14);
   UFG::SimObjectModifier::~SimObjectModifier(&v14);
@@ -87,102 +88,89 @@ __int64 UFG::_dynamic_initializer_for__qSymbol_WC_StinkyFeet__()
 
   v0 = UFG::qStringHash32("WC_StinkyFeet", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&qSymbol_WC_StinkyFeet, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qSymbol_WC_StinkyFeet__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qSymbol_WC_StinkyFeet__);
 }
 
 // File Line: 129
 // RVA: 0x51A1C0
-void __fastcall UFG::WorldContextComponent::WorldContextComponent(UFG::WorldContextComponent *this, unsigned int name_uid, component_WorldContext *dataPtr)
+void __fastcall UFG::WorldContextComponent::WorldContextComponent(
+        UFG::WorldContextComponent *this,
+        unsigned int name_uid,
+        component_WorldContext *dataPtr)
 {
-  component_WorldContext *v3; // rdi
-  UFG::WorldContextComponent *v4; // rsi
-  UFG::qNode<UFG::WorldContextComponent,UFG::WorldContextComponent> *v5; // rbx
-  UFG::qNode<UFG::WorldContextComponent,UFG::WorldContextComponent> *v6; // rax
-  __m128 v7; // xmm4
-  __m128 v8; // xmm3
-  char v9; // cl
-  UFG::qSafePointer<UFG::ParkourHandle,UFG::ParkourHandle> *v10; // [rsp+60h] [rbp+18h]
-  UFG::qSafePointer<UFG::ParkourHandle,UFG::ParkourHandle> *v11; // [rsp+60h] [rbp+18h]
-  UFG::qList<Attachment,Attachment,1,0> *v12; // [rsp+60h] [rbp+18h]
+  UFG::qNode<UFG::WorldContextComponent,UFG::WorldContextComponent> *mPrev; // rax
+  UFG::qVector4 v6; // xmm4
+  UFG::qVector4 v7; // xmm3
+  char v8; // cl
 
-  v3 = dataPtr;
-  v4 = this;
-  UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v5 = (UFG::qNode<UFG::WorldContextComponent,UFG::WorldContextComponent> *)&v4->mPrev;
-  v5->mPrev = v5;
-  v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::WorldContextComponent::`vftable;
-  v10 = &v4->mFocusParkourHandle;
-  v10->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v10->mPrev;
-  v10->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v10->mPrev;
-  v4->mFocusParkourHandle.m_pPointer = 0i64;
-  v11 = &v4->mParkourHandle;
-  v11->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v11->mPrev;
-  v11->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v11->mPrev;
-  v4->mParkourHandle.m_pPointer = 0i64;
-  UFG::CoverCornerHandle::CoverCornerHandle(&v4->mFocusCoverCornerHandle);
-  UFG::CoverCornerHandle::CoverCornerHandle(&v4->mLatchedCoverCornerHandle);
-  v12 = &v4->mAttachments;
-  v12->mNode.mPrev = &v12->mNode;
-  v12->mNode.mNext = &v12->mNode;
-  UFG::RebindingComponentHandle<UFG::CharacterPhysicsComponent,0>::RebindingComponentHandle<UFG::CharacterPhysicsComponent,0>(&v4->mCharacterPhysicsComponent);
-  UFG::RebindingComponentHandle<UFG::ActionTreeComponent,0>::RebindingComponentHandle<UFG::ActionTreeComponent,0>(&v4->mActionTreeComponent);
-  v6 = UFG::WorldContextComponent::s_WorldContextComponentList.mNode.mPrev;
-  UFG::WorldContextComponent::s_WorldContextComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::WorldContextComponent,UFG::WorldContextComponent> *)&v4->mPrev;
-  v5->mPrev = v6;
-  v4->mNext = (UFG::qNode<UFG::WorldContextComponent,UFG::WorldContextComponent> *)&UFG::WorldContextComponent::s_WorldContextComponentList;
-  UFG::WorldContextComponent::s_WorldContextComponentList.mNode.mPrev = (UFG::qNode<UFG::WorldContextComponent,UFG::WorldContextComponent> *)&v4->mPrev;
-  UFG::SimComponent::AddType(
-    (UFG::SimComponent *)&v4->vfptr,
-    UFG::WorldContextComponent::_WorldContextComponentTypeUID,
-    "WorldContextComponent");
+  UFG::SimComponent::SimComponent(this, name_uid);
+  this->mPrev = &this->UFG::qNode<UFG::WorldContextComponent,UFG::WorldContextComponent>;
+  this->mNext = &this->UFG::qNode<UFG::WorldContextComponent,UFG::WorldContextComponent>;
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::WorldContextComponent::`vftable;
+  this->mFocusParkourHandle.mPrev = &this->mFocusParkourHandle;
+  this->mFocusParkourHandle.mNext = &this->mFocusParkourHandle;
+  this->mFocusParkourHandle.m_pPointer = 0i64;
+  this->mParkourHandle.mPrev = &this->mParkourHandle;
+  this->mParkourHandle.mNext = &this->mParkourHandle;
+  this->mParkourHandle.m_pPointer = 0i64;
+  UFG::CoverCornerHandle::CoverCornerHandle(&this->mFocusCoverCornerHandle);
+  UFG::CoverCornerHandle::CoverCornerHandle(&this->mLatchedCoverCornerHandle);
+  this->mAttachments.mNode.mPrev = &this->mAttachments.mNode;
+  this->mAttachments.mNode.mNext = &this->mAttachments.mNode;
+  UFG::RebindingComponentHandle<UFG::CharacterPhysicsComponent,0>::RebindingComponentHandle<UFG::CharacterPhysicsComponent,0>(&this->mCharacterPhysicsComponent);
+  UFG::RebindingComponentHandle<UFG::ActionTreeComponent,0>::RebindingComponentHandle<UFG::ActionTreeComponent,0>(&this->mActionTreeComponent);
+  mPrev = UFG::WorldContextComponent::s_WorldContextComponentList.mNode.mPrev;
+  UFG::WorldContextComponent::s_WorldContextComponentList.mNode.mPrev->mNext = &this->UFG::qNode<UFG::WorldContextComponent,UFG::WorldContextComponent>;
+  this->mPrev = mPrev;
+  this->mNext = (UFG::qNode<UFG::WorldContextComponent,UFG::WorldContextComponent> *)&UFG::WorldContextComponent::s_WorldContextComponentList;
+  UFG::WorldContextComponent::s_WorldContextComponentList.mNode.mPrev = &this->UFG::qNode<UFG::WorldContextComponent,UFG::WorldContextComponent>;
+  UFG::SimComponent::AddType(this, UFG::WorldContextComponent::_WorldContextComponentTypeUID, "WorldContextComponent");
+  v6 = 0i64;
   v7 = 0i64;
-  v8 = 0i64;
-  v8.m128_f32[0] = (float)1;
-  v4->mLatchTest.v0 = (UFG::qVector4)v8;
-  v4->mLatchTest.v1 = (UFG::qVector4)_mm_shuffle_ps(v8, v8, 81);
-  v4->mLatchTest.v2 = (UFG::qVector4)_mm_shuffle_ps(v8, v8, 69);
-  v4->mLatchTest.v3 = (UFG::qVector4)_mm_shuffle_ps(v8, v8, 21);
-  v7.m128_f32[0] = (float)1;
-  v4->mWorldAnchor.v0 = (UFG::qVector4)v7;
-  v4->mWorldAnchor.v1 = (UFG::qVector4)_mm_shuffle_ps(v7, v7, 81);
-  v4->mWorldAnchor.v2 = (UFG::qVector4)_mm_shuffle_ps(v7, v7, 69);
-  v4->mWorldAnchor.v3 = (UFG::qVector4)_mm_shuffle_ps(v7, v7, 21);
-  v4->mSyncLatchedHandle = 0;
-  *(_WORD *)&v4->mbSyncingCoverLCorner = 0;
-  v4->mbSyncingCoverParkour = 0;
-  v4->mSyncBoneIndex = 0;
-  v4->mSyncPositionOnly = 0;
-  *(_DWORD *)&v4->mSyncPlanar = 0;
-  *(_WORD *)&v4->mLockSyncPosition = 0;
-  v4->mDistanceFromEdge = 0.40000001;
-  v4->mBlendRate = 1.0;
-  v4->mBlendWeight = 1.0;
-  v4->mpCoverPosition = 0i64;
-  v4->mToSwimming = 0i64;
-  v4->mSyncFeet = v3->WC_StinkyFeet;
-  v9 = tweaks_added;
+  v7.x = (float)1;
+  this->mLatchTest.v0 = v7;
+  this->mLatchTest.v1 = (UFG::qVector4)_mm_shuffle_ps((__m128)v7, (__m128)v7, 81);
+  this->mLatchTest.v2 = (UFG::qVector4)_mm_shuffle_ps((__m128)v7, (__m128)v7, 69);
+  this->mLatchTest.v3 = (UFG::qVector4)_mm_shuffle_ps((__m128)v7, (__m128)v7, 21);
+  v6.x = (float)1;
+  this->mWorldAnchor.v0 = v6;
+  this->mWorldAnchor.v1 = (UFG::qVector4)_mm_shuffle_ps((__m128)v6, (__m128)v6, 81);
+  this->mWorldAnchor.v2 = (UFG::qVector4)_mm_shuffle_ps((__m128)v6, (__m128)v6, 69);
+  this->mWorldAnchor.v3 = (UFG::qVector4)_mm_shuffle_ps((__m128)v6, (__m128)v6, 21);
+  this->mSyncLatchedHandle = 0;
+  *(_WORD *)&this->mbSyncingCoverLCorner = 0;
+  this->mbSyncingCoverParkour = 0;
+  this->mSyncBoneIndex = 0;
+  this->mSyncPositionOnly = 0;
+  *(_DWORD *)&this->mSyncPlanar = 0;
+  *(_WORD *)&this->mLockSyncPosition = 0;
+  this->mDistanceFromEdge = 0.40000001;
+  this->mBlendRate = 1.0;
+  this->mBlendWeight = 1.0;
+  this->mpCoverPosition = 0i64;
+  this->mToSwimming = 0i64;
+  this->mSyncFeet = dataPtr->WC_StinkyFeet;
+  v8 = tweaks_added;
   if ( !tweaks_added )
-    v9 = 1;
-  tweaks_added = v9;
+    v8 = 1;
+  tweaks_added = v8;
 }
 
 // File Line: 179
 // RVA: 0x51D620
 void __fastcall UFG::WorldContextComponent::~WorldContextComponent(UFG::WorldContextComponent *this)
 {
-  UFG::WorldContextComponent *v1; // rdi
   UFG::qNode<UFG::WorldContextComponent,UFG::WorldContextComponent> *v2; // rsi
-  UFG::qNode<UFG::WorldContextComponent,UFG::WorldContextComponent> *v3; // rcx
-  UFG::qNode<UFG::WorldContextComponent,UFG::WorldContextComponent> *v4; // rax
+  UFG::qNode<UFG::WorldContextComponent,UFG::WorldContextComponent> *mPrev; // rcx
+  UFG::qNode<UFG::WorldContextComponent,UFG::WorldContextComponent> *mNext; // rax
   UFG::qNode<Attachment,Attachment> *v5; // rcx
   UFG::qNode<Attachment,Attachment> *v6; // rax
-  UFG::qSafePointer<UFG::ParkourHandle,UFG::ParkourHandle> *v7; // rdx
+  UFG::qSafePointer<UFG::ParkourHandle,UFG::ParkourHandle> *p_mParkourHandle; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v8; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v9; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v10; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v11; // rax
-  UFG::qSafePointer<UFG::ParkourHandle,UFG::ParkourHandle> *v12; // rdx
+  UFG::qSafePointer<UFG::ParkourHandle,UFG::ParkourHandle> *p_mFocusParkourHandle; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v13; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v14; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v15; // rcx
@@ -190,80 +178,76 @@ void __fastcall UFG::WorldContextComponent::~WorldContextComponent(UFG::WorldCon
   UFG::qNode<UFG::WorldContextComponent,UFG::WorldContextComponent> *v17; // rcx
   UFG::qNode<UFG::WorldContextComponent,UFG::WorldContextComponent> *v18; // rax
 
-  v1 = this;
   this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::WorldContextComponent::`vftable;
   UFG::WorldContextComponent::DetachAll(this);
-  if ( v1 == UFG::WorldContextComponent::s_WorldContextComponentpCurrentIterator )
-    UFG::WorldContextComponent::s_WorldContextComponentpCurrentIterator = (UFG::WorldContextComponent *)&v1->mPrev[-4];
-  v2 = (UFG::qNode<UFG::WorldContextComponent,UFG::WorldContextComponent> *)&v1->mPrev;
-  v3 = v1->mPrev;
-  v4 = v1->mNext;
-  v3->mNext = v4;
-  v4->mPrev = v3;
-  v2->mPrev = v2;
-  v2->mNext = v2;
-  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->mActionTreeComponent);
-  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->mCharacterPhysicsComponent);
-  UFG::qList<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption,1,0>::DeleteNodes((UFG::qList<UFG::GUIObjectBase,UFG::GUIObjectBase,1,0> *)&v1->mAttachments);
-  v5 = v1->mAttachments.mNode.mPrev;
-  v6 = v1->mAttachments.mNode.mNext;
+  if ( this == UFG::WorldContextComponent::s_WorldContextComponentpCurrentIterator )
+    UFG::WorldContextComponent::s_WorldContextComponentpCurrentIterator = (UFG::WorldContextComponent *)&this->mPrev[-4];
+  v2 = &this->UFG::qNode<UFG::WorldContextComponent,UFG::WorldContextComponent>;
+  mPrev = this->mPrev;
+  mNext = this->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->mPrev = &this->UFG::qNode<UFG::WorldContextComponent,UFG::WorldContextComponent>;
+  this->mNext = &this->UFG::qNode<UFG::WorldContextComponent,UFG::WorldContextComponent>;
+  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&this->mActionTreeComponent);
+  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&this->mCharacterPhysicsComponent);
+  UFG::qList<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption,1,0>::DeleteNodes((UFG::qList<UFG::GUIObjectBase,UFG::GUIObjectBase,1,0> *)&this->mAttachments);
+  v5 = this->mAttachments.mNode.mPrev;
+  v6 = this->mAttachments.mNode.mNext;
   v5->mNext = v6;
   v6->mPrev = v5;
-  v1->mAttachments.mNode.mPrev = &v1->mAttachments.mNode;
-  v1->mAttachments.mNode.mNext = &v1->mAttachments.mNode;
-  UFG::CoverCornerHandle::~CoverCornerHandle(&v1->mLatchedCoverCornerHandle);
-  UFG::CoverCornerHandle::~CoverCornerHandle(&v1->mFocusCoverCornerHandle);
-  v7 = &v1->mParkourHandle;
-  if ( v1->mParkourHandle.m_pPointer )
+  this->mAttachments.mNode.mPrev = &this->mAttachments.mNode;
+  this->mAttachments.mNode.mNext = &this->mAttachments.mNode;
+  UFG::CoverCornerHandle::~CoverCornerHandle(&this->mLatchedCoverCornerHandle);
+  UFG::CoverCornerHandle::~CoverCornerHandle(&this->mFocusCoverCornerHandle);
+  p_mParkourHandle = &this->mParkourHandle;
+  if ( this->mParkourHandle.m_pPointer )
   {
-    v8 = v7->mPrev;
-    v9 = v1->mParkourHandle.mNext;
+    v8 = p_mParkourHandle->mPrev;
+    v9 = this->mParkourHandle.mNext;
     v8->mNext = v9;
     v9->mPrev = v8;
-    v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v7->mPrev;
-    v1->mParkourHandle.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v1->mParkourHandle.mPrev;
+    p_mParkourHandle->mPrev = p_mParkourHandle;
+    this->mParkourHandle.mNext = &this->mParkourHandle;
   }
-  v1->mParkourHandle.m_pPointer = 0i64;
-  v10 = v7->mPrev;
-  v11 = v1->mParkourHandle.mNext;
+  this->mParkourHandle.m_pPointer = 0i64;
+  v10 = p_mParkourHandle->mPrev;
+  v11 = this->mParkourHandle.mNext;
   v10->mNext = v11;
   v11->mPrev = v10;
-  v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v7->mPrev;
-  v1->mParkourHandle.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v1->mParkourHandle.mPrev;
-  v12 = &v1->mFocusParkourHandle;
-  if ( v1->mFocusParkourHandle.m_pPointer )
+  p_mParkourHandle->mPrev = p_mParkourHandle;
+  this->mParkourHandle.mNext = &this->mParkourHandle;
+  p_mFocusParkourHandle = &this->mFocusParkourHandle;
+  if ( this->mFocusParkourHandle.m_pPointer )
   {
-    v13 = v12->mPrev;
-    v14 = v1->mFocusParkourHandle.mNext;
+    v13 = p_mFocusParkourHandle->mPrev;
+    v14 = this->mFocusParkourHandle.mNext;
     v13->mNext = v14;
     v14->mPrev = v13;
-    v12->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v12->mPrev;
-    v1->mFocusParkourHandle.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v1->mFocusParkourHandle.mPrev;
+    p_mFocusParkourHandle->mPrev = p_mFocusParkourHandle;
+    this->mFocusParkourHandle.mNext = &this->mFocusParkourHandle;
   }
-  v1->mFocusParkourHandle.m_pPointer = 0i64;
-  v15 = v12->mPrev;
-  v16 = v1->mFocusParkourHandle.mNext;
+  this->mFocusParkourHandle.m_pPointer = 0i64;
+  v15 = p_mFocusParkourHandle->mPrev;
+  v16 = this->mFocusParkourHandle.mNext;
   v15->mNext = v16;
   v16->mPrev = v15;
-  v12->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v12->mPrev;
-  v1->mFocusParkourHandle.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v1->mFocusParkourHandle.mPrev;
+  p_mFocusParkourHandle->mPrev = p_mFocusParkourHandle;
+  this->mFocusParkourHandle.mNext = &this->mFocusParkourHandle;
   v17 = v2->mPrev;
-  v18 = v1->mNext;
+  v18 = this->mNext;
   v17->mNext = v18;
   v18->mPrev = v17;
   v2->mPrev = v2;
-  v1->mNext = (UFG::qNode<UFG::WorldContextComponent,UFG::WorldContextComponent> *)&v1->mPrev;
-  UFG::SimComponent::~SimComponent((UFG::SimComponent *)&v1->vfptr);
+  this->mNext = &this->UFG::qNode<UFG::WorldContextComponent,UFG::WorldContextComponent>;
+  UFG::SimComponent::~SimComponent(this);
 }
 
 // File Line: 206
 // RVA: 0x536560
 void __fastcall UFG::WorldContextComponent::InitActionTree(UFG::WorldContextComponent *this)
 {
-  UFG::WorldContextComponent *v1; // rbx
-
-  v1 = this;
-  if ( !(_S62_0 & 1) )
+  if ( (_S62_0 & 1) == 0 )
   {
     _S62_0 |= 1u;
     pathToSwimmingOpps.mPath.mCount = 0;
@@ -273,229 +257,220 @@ void __fastcall UFG::WorldContextComponent::InitActionTree(UFG::WorldContextComp
       "\\Global\\GlobalActions\\Swimming\\OpportunityToSwimFromWorldContextComponent");
     atexit(UFG::WorldContextComponent::InitActionTree_::_2_::_dynamic_atexit_destructor_for__pathToSwimmingOpps__);
   }
-  v1->mToSwimming = ActionNode::Find(&pathToSwimmingOpps, 0i64);
+  this->mToSwimming = ActionNode::Find(&pathToSwimmingOpps, 0i64);
 }
 
 // File Line: 221
 // RVA: 0x53F3A0
-void __fastcall UFG::WorldContextComponent::OnAttach(UFG::WorldContextComponent *this, UFG::SimObject *object)
+void __fastcall UFG::WorldContextComponent::OnAttach(UFG::WorldContextComponent *this, UFG::SimObjectCharacter *object)
 {
-  UFG::WorldContextComponent *v2; // rbx
-  UFG::RebindingComponentHandle<UFG::CharacterPhysicsComponent,0> *v3; // rcx
-  UFG::SimObjectCharacter *v4; // rdi
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v5; // r8
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v6; // rax
+  UFG::RebindingComponentHandle<UFG::CharacterPhysicsComponent,0> *p_mCharacterPhysicsComponent; // rcx
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mPrev; // r8
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mNext; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v7; // rdx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v8; // rax
-  UFG::RebindingComponentHandle<UFG::ActionTreeComponent,0> *v9; // r8
+  UFG::RebindingComponentHandle<UFG::ActionTreeComponent,0> *p_mActionTreeComponent; // r8
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v10; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v11; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v12; // rdx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v13; // rax
 
-  v2 = this;
-  v3 = &this->mCharacterPhysicsComponent;
-  v4 = (UFG::SimObjectCharacter *)object;
-  if ( v3->m_pSimComponent )
+  p_mCharacterPhysicsComponent = &this->mCharacterPhysicsComponent;
+  if ( p_mCharacterPhysicsComponent->m_pSimComponent )
   {
-    v5 = v3->mPrev;
-    v6 = v3->mNext;
-    v5->mNext = v6;
-    v6->mPrev = v5;
-    v3->m_pSimComponent = 0i64;
+    mPrev = p_mCharacterPhysicsComponent->mPrev;
+    mNext = p_mCharacterPhysicsComponent->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mCharacterPhysicsComponent->m_pSimComponent = 0i64;
 LABEL_7:
-    v3->m_pSimObject = 0i64;
-    v3->mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v3->mPrev;
-    v3->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v3->mPrev;
+    p_mCharacterPhysicsComponent->m_pSimObject = 0i64;
+    p_mCharacterPhysicsComponent->mNext = p_mCharacterPhysicsComponent;
+    p_mCharacterPhysicsComponent->mPrev = p_mCharacterPhysicsComponent;
     goto LABEL_8;
   }
-  if ( v3->m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::CharacterPhysicsComponent,0> *)v3->mPrev != v3
-     || (UFG::RebindingComponentHandle<UFG::CharacterPhysicsComponent,0> *)v3->mNext != v3) )
+  if ( p_mCharacterPhysicsComponent->m_pSimObject
+    && (p_mCharacterPhysicsComponent->mPrev != p_mCharacterPhysicsComponent
+     || p_mCharacterPhysicsComponent->mNext != p_mCharacterPhysicsComponent) )
   {
-    v7 = v3->mPrev;
-    v8 = v3->mNext;
+    v7 = p_mCharacterPhysicsComponent->mPrev;
+    v8 = p_mCharacterPhysicsComponent->mNext;
     v7->mNext = v8;
     v8->mPrev = v7;
     goto LABEL_7;
   }
 LABEL_8:
-  v3->m_Changed = 1;
-  v3->m_pSimObject = (UFG::SimObject *)&v4->vfptr;
-  v3->m_TypeUID = UFG::CharacterPhysicsComponent::_TypeUID;
+  p_mCharacterPhysicsComponent->m_Changed = 1;
+  p_mCharacterPhysicsComponent->m_pSimObject = object;
+  p_mCharacterPhysicsComponent->m_TypeUID = UFG::CharacterPhysicsComponent::_TypeUID;
   UFG::RebindingComponentHandle<UFG::CharacterPhysicsComponent,0>::BindInternal<UFG::SimObject>(
-    v3,
-    (UFG::SimObject *)&v4->vfptr);
-  v9 = &v2->mActionTreeComponent;
-  if ( v2->mActionTreeComponent.m_pSimComponent )
+    p_mCharacterPhysicsComponent,
+    object);
+  p_mActionTreeComponent = &this->mActionTreeComponent;
+  if ( this->mActionTreeComponent.m_pSimComponent )
   {
-    v10 = v9->mPrev;
-    v11 = v2->mActionTreeComponent.mNext;
+    v10 = p_mActionTreeComponent->mPrev;
+    v11 = this->mActionTreeComponent.mNext;
     v10->mNext = v11;
     v11->mPrev = v10;
-    v2->mActionTreeComponent.m_pSimComponent = 0i64;
+    this->mActionTreeComponent.m_pSimComponent = 0i64;
 LABEL_14:
-    v2->mActionTreeComponent.m_pSimObject = 0i64;
-    v2->mActionTreeComponent.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v2->mActionTreeComponent.mPrev;
-    v9->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v9->mPrev;
+    this->mActionTreeComponent.m_pSimObject = 0i64;
+    this->mActionTreeComponent.mNext = &this->mActionTreeComponent;
+    p_mActionTreeComponent->mPrev = p_mActionTreeComponent;
     goto LABEL_15;
   }
-  if ( v2->mActionTreeComponent.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::ActionTreeComponent,0> *)v9->mPrev != v9
-     || (UFG::RebindingComponentHandle<UFG::ActionTreeComponent,0> *)v2->mActionTreeComponent.mNext != &v2->mActionTreeComponent) )
+  if ( this->mActionTreeComponent.m_pSimObject
+    && (p_mActionTreeComponent->mPrev != p_mActionTreeComponent
+     || this->mActionTreeComponent.mNext != &this->mActionTreeComponent) )
   {
-    v12 = v9->mPrev;
-    v13 = v2->mActionTreeComponent.mNext;
+    v12 = p_mActionTreeComponent->mPrev;
+    v13 = this->mActionTreeComponent.mNext;
     v12->mNext = v13;
     v13->mPrev = v12;
     goto LABEL_14;
   }
 LABEL_15:
-  v2->mActionTreeComponent.m_Changed = 1;
-  v2->mActionTreeComponent.m_pSimObject = (UFG::SimObject *)&v4->vfptr;
-  v2->mActionTreeComponent.m_TypeUID = UFG::ActionTreeComponent::_TypeUID;
+  this->mActionTreeComponent.m_Changed = 1;
+  this->mActionTreeComponent.m_pSimObject = object;
+  this->mActionTreeComponent.m_TypeUID = UFG::ActionTreeComponent::_TypeUID;
   UFG::RebindingComponentHandle<UFG::ActionTreeComponent,0>::BindInternal<UFG::SimObject>(
-    &v2->mActionTreeComponent,
-    (UFG::SimObject *)&v4->vfptr);
-  if ( v4 == UFG::GetLocalPlayer() )
-    v2->mSyncFeet = 1;
-  UFG::WorldContextComponent::InitActionTree(v2);
+    &this->mActionTreeComponent,
+    object);
+  if ( object == UFG::GetLocalPlayer() )
+    this->mSyncFeet = 1;
+  UFG::WorldContextComponent::InitActionTree(this);
 }
 
 // File Line: 236
 // RVA: 0x5412E0
 void __fastcall UFG::WorldContextComponent::OnDetach(UFG::WorldContextComponent *this)
 {
-  UFG::RebindingComponentHandle<UFG::CharacterPhysicsComponent,0> *v1; // r8
-  UFG::WorldContextComponent *v2; // rbx
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v3; // rdx
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v4; // rax
+  UFG::RebindingComponentHandle<UFG::CharacterPhysicsComponent,0> *p_mCharacterPhysicsComponent; // r8
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mPrev; // rdx
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mNext; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v5; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v6; // rax
-  UFG::RebindingComponentHandle<UFG::ActionTreeComponent,0> *v7; // rdx
+  UFG::RebindingComponentHandle<UFG::ActionTreeComponent,0> *p_mActionTreeComponent; // rdx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v8; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v9; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v10; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v11; // rax
-  UFG::CoverPosition *v12; // rcx
-  bool v13; // zf
+  UFG::CoverPosition *mpCoverPosition; // rcx
 
-  v1 = &this->mCharacterPhysicsComponent;
-  v2 = this;
+  p_mCharacterPhysicsComponent = &this->mCharacterPhysicsComponent;
   if ( this->mCharacterPhysicsComponent.m_pSimComponent )
   {
-    v3 = v1->mPrev;
-    v4 = this->mCharacterPhysicsComponent.mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
+    mPrev = p_mCharacterPhysicsComponent->mPrev;
+    mNext = this->mCharacterPhysicsComponent.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
     this->mCharacterPhysicsComponent.m_pSimComponent = 0i64;
 LABEL_7:
-    v1->m_pSimObject = 0i64;
-    v1->mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v1->mPrev;
-    v1->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v1->mPrev;
+    p_mCharacterPhysicsComponent->m_pSimObject = 0i64;
+    p_mCharacterPhysicsComponent->mNext = p_mCharacterPhysicsComponent;
+    p_mCharacterPhysicsComponent->mPrev = p_mCharacterPhysicsComponent;
     goto LABEL_8;
   }
   if ( this->mCharacterPhysicsComponent.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::CharacterPhysicsComponent,0> *)v1->mPrev != v1
-     || (UFG::RebindingComponentHandle<UFG::CharacterPhysicsComponent,0> *)this->mCharacterPhysicsComponent.mNext != &this->mCharacterPhysicsComponent) )
+    && (p_mCharacterPhysicsComponent->mPrev != p_mCharacterPhysicsComponent
+     || this->mCharacterPhysicsComponent.mNext != &this->mCharacterPhysicsComponent) )
   {
-    v5 = v1->mPrev;
-    v6 = v1->mNext;
+    v5 = p_mCharacterPhysicsComponent->mPrev;
+    v6 = p_mCharacterPhysicsComponent->mNext;
     v5->mNext = v6;
     v6->mPrev = v5;
     goto LABEL_7;
   }
 LABEL_8:
-  v7 = &v2->mActionTreeComponent;
-  v1->m_Changed = 1;
-  if ( v2->mActionTreeComponent.m_pSimComponent )
+  p_mActionTreeComponent = &this->mActionTreeComponent;
+  p_mCharacterPhysicsComponent->m_Changed = 1;
+  if ( this->mActionTreeComponent.m_pSimComponent )
   {
-    v8 = v7->mPrev;
-    v9 = v2->mActionTreeComponent.mNext;
+    v8 = p_mActionTreeComponent->mPrev;
+    v9 = this->mActionTreeComponent.mNext;
     v8->mNext = v9;
     v9->mPrev = v8;
-    v2->mActionTreeComponent.m_pSimComponent = 0i64;
+    this->mActionTreeComponent.m_pSimComponent = 0i64;
 LABEL_14:
-    v2->mActionTreeComponent.m_pSimObject = 0i64;
-    v2->mActionTreeComponent.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v2->mActionTreeComponent.mPrev;
-    v7->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v7->mPrev;
+    this->mActionTreeComponent.m_pSimObject = 0i64;
+    this->mActionTreeComponent.mNext = &this->mActionTreeComponent;
+    p_mActionTreeComponent->mPrev = p_mActionTreeComponent;
     goto LABEL_15;
   }
-  if ( v2->mActionTreeComponent.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::ActionTreeComponent,0> *)v7->mPrev != v7
-     || (UFG::RebindingComponentHandle<UFG::ActionTreeComponent,0> *)v2->mActionTreeComponent.mNext != &v2->mActionTreeComponent) )
+  if ( this->mActionTreeComponent.m_pSimObject
+    && (p_mActionTreeComponent->mPrev != p_mActionTreeComponent
+     || this->mActionTreeComponent.mNext != &this->mActionTreeComponent) )
   {
-    v10 = v7->mPrev;
-    v11 = v2->mActionTreeComponent.mNext;
+    v10 = p_mActionTreeComponent->mPrev;
+    v11 = this->mActionTreeComponent.mNext;
     v10->mNext = v11;
     v11->mPrev = v10;
     goto LABEL_14;
   }
 LABEL_15:
-  v2->mActionTreeComponent.m_Changed = 1;
-  v12 = v2->mpCoverPosition;
-  if ( v12 )
+  this->mActionTreeComponent.m_Changed = 1;
+  mpCoverPosition = this->mpCoverPosition;
+  if ( mpCoverPosition )
   {
-    v13 = v12->m_iRefCount-- == 1;
-    if ( v13 )
-      v12->vfptr->__vecDelDtor((UFG::CoverObjectBase *)&v12->vfptr, 1u);
-    v2->mpCoverPosition = 0i64;
+    if ( mpCoverPosition->m_iRefCount-- == 1 )
+      mpCoverPosition->vfptr->__vecDelDtor(mpCoverPosition, 1u);
+    this->mpCoverPosition = 0i64;
   }
 }
 
 // File Line: 245
 // RVA: 0x54D1B0
-void __fastcall UFG::WorldContextComponent::SetFocusParkourHandle(UFG::WorldContextComponent *this, UFG::ParkourHandle *newHandle, ActionNode *node)
+void __fastcall UFG::WorldContextComponent::SetFocusParkourHandle(
+        UFG::WorldContextComponent *this,
+        UFG::ParkourHandle *newHandle,
+        ActionNode *node)
 {
-  UFG::ParkourHandle *v3; // rax
-  UFG::ParkourHandle *v4; // r10
-  UFG::WorldContextComponent *v5; // r9
-  UFG::qSafePointer<UFG::ParkourHandle,UFG::ParkourHandle> *v6; // r8
-  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v7; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v8; // rax
+  UFG::ParkourHandle *m_pPointer; // rax
+  UFG::qSafePointer<UFG::ParkourHandle,UFG::ParkourHandle> *p_mFocusParkourHandle; // r8
+  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qSafePointer<UFG::ParkourHandle,UFG::ParkourHandle> *v9; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v10; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v11; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v12; // rax
 
-  v3 = this->mFocusParkourHandle.m_pPointer;
-  v4 = newHandle;
-  v5 = this;
-  if ( v3 )
+  m_pPointer = this->mFocusParkourHandle.m_pPointer;
+  if ( m_pPointer )
   {
-    *((_DWORD *)v3 + 38) &= 0xFFFFFFFE;
-    v6 = &this->mFocusParkourHandle;
+    *((_DWORD *)m_pPointer + 38) &= ~1u;
+    p_mFocusParkourHandle = &this->mFocusParkourHandle;
     if ( this->mFocusParkourHandle.m_pPointer )
     {
-      v7 = v6->mPrev;
-      v8 = v6->mNext;
-      v7->mNext = v8;
-      v8->mPrev = v7;
-      v6->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v6->mPrev;
-      v6->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v6->mPrev;
+      mPrev = p_mFocusParkourHandle->mPrev;
+      mNext = p_mFocusParkourHandle->mNext;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
+      p_mFocusParkourHandle->mPrev = p_mFocusParkourHandle;
+      p_mFocusParkourHandle->mNext = p_mFocusParkourHandle;
     }
-    v6->m_pPointer = 0i64;
+    p_mFocusParkourHandle->m_pPointer = 0i64;
   }
   if ( newHandle )
   {
-    v9 = &v5->mFocusParkourHandle;
-    if ( v5->mFocusParkourHandle.m_pPointer )
+    v9 = &this->mFocusParkourHandle;
+    if ( this->mFocusParkourHandle.m_pPointer )
     {
       v10 = v9->mPrev;
-      v11 = v5->mFocusParkourHandle.mNext;
+      v11 = this->mFocusParkourHandle.mNext;
       v10->mNext = v11;
       v11->mPrev = v10;
-      v9->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v9->mPrev;
-      v5->mFocusParkourHandle.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v5->mFocusParkourHandle.mPrev;
+      v9->mPrev = v9;
+      this->mFocusParkourHandle.mNext = &this->mFocusParkourHandle;
     }
-    v5->mFocusParkourHandle.m_pPointer = v4;
-    v12 = v4->m_SafePointerList.mNode.mPrev;
-    v12->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v9->mPrev;
+    this->mFocusParkourHandle.m_pPointer = newHandle;
+    v12 = newHandle->m_SafePointerList.mNode.UFG::qSafePointerNode<UFG::ParkourHandle>::mPrev;
+    v12->mNext = v9;
     v9->mPrev = v12;
-    v5->mFocusParkourHandle.mNext = &v4->m_SafePointerList.mNode;
-    v4->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v9->mPrev;
-    *((_DWORD *)v5->mFocusParkourHandle.m_pPointer + 38) |= 1u;
-    v5->mFocusLatchCount = 0;
+    this->mFocusParkourHandle.mNext = &newHandle->m_SafePointerList.mNode;
+    newHandle->m_SafePointerList.mNode.UFG::qSafePointerNode<UFG::ParkourHandle>::mPrev = v9;
+    *((_DWORD *)this->mFocusParkourHandle.m_pPointer + 38) |= 1u;
+    this->mFocusLatchCount = 0;
   }
 }
 
@@ -503,63 +478,63 @@ void __fastcall UFG::WorldContextComponent::SetFocusParkourHandle(UFG::WorldCont
 // RVA: 0x53C880
 void __fastcall UFG::WorldContextComponent::LatchFocusParkourHandle(UFG::WorldContextComponent *this)
 {
-  UFG::ParkourHandle *v1; // rdx
-  UFG::WorldContextComponent *v2; // rbx
-  UFG::qSafePointer<UFG::ParkourHandle,UFG::ParkourHandle> *v3; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v4; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v5; // rax
+  UFG::ParkourHandle *m_pPointer; // rdx
+  UFG::qSafePointer<UFG::ParkourHandle,UFG::ParkourHandle> *p_mFocusParkourHandle; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *mNext; // rax
 
-  v1 = this->mFocusParkourHandle.m_pPointer;
-  v2 = this;
-  if ( v1 )
+  m_pPointer = this->mFocusParkourHandle.m_pPointer;
+  if ( m_pPointer )
   {
-    UFG::WorldContextComponent::LatchParkourHandle(this, v1);
-    v3 = &v2->mFocusParkourHandle;
-    if ( v2->mFocusParkourHandle.m_pPointer )
+    UFG::WorldContextComponent::LatchParkourHandle(this, m_pPointer);
+    p_mFocusParkourHandle = &this->mFocusParkourHandle;
+    if ( this->mFocusParkourHandle.m_pPointer )
     {
-      v4 = v3->mPrev;
-      v5 = v2->mFocusParkourHandle.mNext;
-      v4->mNext = v5;
-      v5->mPrev = v4;
-      v3->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v3->mPrev;
-      v2->mFocusParkourHandle.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v2->mFocusParkourHandle.mPrev;
+      mPrev = p_mFocusParkourHandle->mPrev;
+      mNext = this->mFocusParkourHandle.mNext;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
+      p_mFocusParkourHandle->mPrev = p_mFocusParkourHandle;
+      this->mFocusParkourHandle.mNext = &this->mFocusParkourHandle;
     }
-    v2->mFocusParkourHandle.m_pPointer = 0i64;
+    this->mFocusParkourHandle.m_pPointer = 0i64;
   }
 }
 
 // File Line: 292
 // RVA: 0x53C8D0
-void __fastcall UFG::WorldContextComponent::LatchParkourHandle(UFG::WorldContextComponent *this, UFG::ParkourHandle *newHandle)
+void __fastcall UFG::WorldContextComponent::LatchParkourHandle(
+        UFG::WorldContextComponent *this,
+        UFG::ParkourHandle *newHandle)
 {
-  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v2; // r9
-  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v3; // r8
-  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v4; // rax
+  UFG::qSafePointer<UFG::ParkourHandle,UFG::ParkourHandle> *p_mParkourHandle; // r9
+  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *mPrev; // r8
+  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v5; // rax
-  UFG::ParkourHandle *v6; // rax
+  UFG::ParkourHandle *m_pPointer; // rax
 
-  v2 = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&this->mParkourHandle.mPrev;
+  p_mParkourHandle = &this->mParkourHandle;
   if ( this->mParkourHandle.m_pPointer )
   {
-    v3 = v2->mPrev;
-    v4 = this->mParkourHandle.mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v2->mPrev = v2;
-    this->mParkourHandle.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&this->mParkourHandle.mPrev;
+    mPrev = p_mParkourHandle->mPrev;
+    mNext = this->mParkourHandle.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mParkourHandle->mPrev = p_mParkourHandle;
+    this->mParkourHandle.mNext = &this->mParkourHandle;
   }
   this->mParkourHandle.m_pPointer = newHandle;
   if ( newHandle )
   {
-    v5 = newHandle->m_SafePointerList.mNode.mPrev;
-    v5->mNext = v2;
-    v2->mPrev = v5;
+    v5 = newHandle->m_SafePointerList.mNode.UFG::qSafePointerNode<UFG::ParkourHandle>::mPrev;
+    v5->mNext = p_mParkourHandle;
+    p_mParkourHandle->mPrev = v5;
     this->mParkourHandle.mNext = &newHandle->m_SafePointerList.mNode;
-    newHandle->m_SafePointerList.mNode.mPrev = v2;
+    newHandle->m_SafePointerList.mNode.UFG::qSafePointerNode<UFG::ParkourHandle>::mPrev = p_mParkourHandle;
   }
-  v6 = this->mParkourHandle.m_pPointer;
-  if ( v6 )
-    *((_DWORD *)v6 + 38) |= 1u;
+  m_pPointer = this->mParkourHandle.m_pPointer;
+  if ( m_pPointer )
+    *((_DWORD *)m_pPointer + 38) |= 1u;
   if ( UFG::WorldContextComponent::s_SimPauseOnSync )
   {
     UFG::Metrics::msInstance.mSimPausedDebug = 1;
@@ -571,50 +546,58 @@ void __fastcall UFG::WorldContextComponent::LatchParkourHandle(UFG::WorldContext
 // RVA: 0x522DB0
 void __fastcall UFG::WorldContextComponent::ClearLatchedParkourHandle(UFG::WorldContextComponent *this)
 {
-  UFG::ParkourHandle *v1; // rax
-  UFG::WorldContextComponent *v2; // r8
-  UFG::qSafePointer<UFG::ParkourHandle,UFG::ParkourHandle> *v3; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v4; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v5; // rax
+  UFG::ParkourHandle *m_pPointer; // rax
+  UFG::qSafePointer<UFG::ParkourHandle,UFG::ParkourHandle> *p_mParkourHandle; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::ParkourHandle *v6; // rax
-  UFG::qSafePointer<UFG::ParkourHandle,UFG::ParkourHandle> *v7; // rdx
+  UFG::qSafePointer<UFG::ParkourHandle,UFG::ParkourHandle> *p_mFocusParkourHandle; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v8; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v9; // rax
 
-  v1 = this->mParkourHandle.m_pPointer;
-  v2 = this;
-  if ( v1 )
-    *((_DWORD *)v1 + 38) &= 0xFFFFFFFE;
-  v3 = &this->mParkourHandle;
+  m_pPointer = this->mParkourHandle.m_pPointer;
+  if ( m_pPointer )
+    *((_DWORD *)m_pPointer + 38) &= ~1u;
+  p_mParkourHandle = &this->mParkourHandle;
   if ( this->mParkourHandle.m_pPointer )
   {
-    v4 = v3->mPrev;
-    v5 = v3->mNext;
-    v4->mNext = v5;
-    v5->mPrev = v4;
-    v3->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v3->mPrev;
-    v3->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v3->mPrev;
+    mPrev = p_mParkourHandle->mPrev;
+    mNext = p_mParkourHandle->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mParkourHandle->mPrev = p_mParkourHandle;
+    p_mParkourHandle->mNext = p_mParkourHandle;
   }
-  v3->m_pPointer = 0i64;
-  v6 = v2->mFocusParkourHandle.m_pPointer;
+  p_mParkourHandle->m_pPointer = 0i64;
+  v6 = this->mFocusParkourHandle.m_pPointer;
   if ( v6 )
-    *((_DWORD *)v6 + 38) &= 0xFFFFFFFE;
-  v7 = &v2->mFocusParkourHandle;
-  if ( v2->mFocusParkourHandle.m_pPointer )
+    *((_DWORD *)v6 + 38) &= ~1u;
+  p_mFocusParkourHandle = &this->mFocusParkourHandle;
+  if ( this->mFocusParkourHandle.m_pPointer )
   {
-    v8 = v7->mPrev;
-    v9 = v2->mFocusParkourHandle.mNext;
+    v8 = p_mFocusParkourHandle->mPrev;
+    v9 = this->mFocusParkourHandle.mNext;
     v8->mNext = v9;
     v9->mPrev = v8;
-    v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v7->mPrev;
-    v2->mFocusParkourHandle.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v2->mFocusParkourHandle.mPrev;
+    p_mFocusParkourHandle->mPrev = p_mFocusParkourHandle;
+    this->mFocusParkourHandle.mNext = &this->mFocusParkourHandle;
   }
-  v2->mFocusParkourHandle.m_pPointer = 0i64;
+  this->mFocusParkourHandle.m_pPointer = 0i64;
 }
 
 // File Line: 337
 // RVA: 0x550050
-void __fastcall UFG::WorldContextComponent::StartSyncHandle(UFG::WorldContextComponent *this, int syncBoneIndex, bool positionOnly, bool syncToClosestEndpoint, bool planer, bool syncXforward, bool syncLeftEdge, bool syncRightEdge, float distanceFromEdge, float blendIn)
+void __fastcall UFG::WorldContextComponent::StartSyncHandle(
+        UFG::WorldContextComponent *this,
+        int syncBoneIndex,
+        bool positionOnly,
+        bool syncToClosestEndpoint,
+        bool planer,
+        bool syncXforward,
+        bool syncLeftEdge,
+        bool syncRightEdge,
+        float distanceFromEdge,
+        float blendIn)
 {
   this->mSyncPlanar = planer;
   this->mSyncLatchedHandle = 1;
@@ -640,7 +623,17 @@ void __fastcall UFG::WorldContextComponent::StartSyncHandle(UFG::WorldContextCom
 
 // File Line: 358
 // RVA: 0x54FFB0
-void __fastcall UFG::WorldContextComponent::StartSync(UFG::WorldContextComponent *this, int syncBoneIndex, bool positionOnly, bool syncToClosestEndpoint, bool planer, bool syncXforward, bool syncLeftEdge, bool syncRightEdge, float distanceFromEdge, float blendIn)
+void __fastcall UFG::WorldContextComponent::StartSync(
+        UFG::WorldContextComponent *this,
+        int syncBoneIndex,
+        bool positionOnly,
+        bool syncToClosestEndpoint,
+        bool planer,
+        bool syncXforward,
+        bool syncLeftEdge,
+        bool syncRightEdge,
+        float distanceFromEdge,
+        float blendIn)
 {
   this->mSyncPlanar = planer;
   this->mSyncBoneIndex = syncBoneIndex;
@@ -665,27 +658,23 @@ void __fastcall UFG::WorldContextComponent::StartSync(UFG::WorldContextComponent
 
 // File Line: 390
 // RVA: 0x54C6A0
-void __fastcall UFG::WorldContextComponent::SetCoverPosition(UFG::WorldContextComponent *this, UFG::CoverPosition *pPosition)
+void __fastcall UFG::WorldContextComponent::SetCoverPosition(
+        UFG::WorldContextComponent *this,
+        UFG::CoverPosition *pPosition)
 {
-  UFG::WorldContextComponent *v2; // rdi
-  UFG::CoverPosition *v3; // rcx
-  UFG::CoverPosition *v4; // rbx
-  bool v5; // zf
+  UFG::CoverPosition *mpCoverPosition; // rcx
 
-  v2 = this;
-  v3 = this->mpCoverPosition;
-  v4 = pPosition;
-  if ( v3 )
+  mpCoverPosition = this->mpCoverPosition;
+  if ( mpCoverPosition )
   {
-    v5 = v3->m_iRefCount-- == 1;
-    if ( v5 )
-      v3->vfptr->__vecDelDtor((UFG::CoverObjectBase *)&v3->vfptr, 1u);
-    v2->mpCoverPosition = 0i64;
+    if ( mpCoverPosition->m_iRefCount-- == 1 )
+      mpCoverPosition->vfptr->__vecDelDtor(mpCoverPosition, 1u);
+    this->mpCoverPosition = 0i64;
   }
-  if ( v4 )
+  if ( pPosition )
   {
-    v2->mpCoverPosition = v4;
-    ++v4->m_iRefCount;
+    this->mpCoverPosition = pPosition;
+    ++pPosition->m_iRefCount;
   }
 }
 
@@ -693,159 +682,156 @@ void __fastcall UFG::WorldContextComponent::SetCoverPosition(UFG::WorldContextCo
 // RVA: 0x55CFA0
 void __fastcall UFG::WorldContextComponent::Update(UFG::WorldContextComponent *this, float delta_sec)
 {
-  float v2; // xmm15_4
-  UFG::WorldContextComponent *v3; // rbx
   float v4; // xmm10_4
-  float v5; // xmm1_4
+  float mBlendRate; // xmm1_4
   float v6; // xmm0_4
-  __int64 v7; // rsi
-  ActionNodeRoot *v8; // rax
-  ActionNodeRoot *v9; // rdi
-  __int64 v10; // r9
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v11; // r8
-  UFG::ActionTreeComponentBase *v12; // rcx
-  ActionNodePlayable *v13; // rax
-  Render::DebugDrawContext *v14; // r15
-  Render::DebugDrawContext *v15; // r12
-  UFG::SimObject *v16; // rsi
-  UFG::TransformNodeComponent *v17; // rsi
-  signed __int64 v18; // rdi
-  float v19; // xmm2_4
-  float v20; // xmm1_4
-  float v21; // xmm3_4
-  float v22; // xmm4_4
-  __m128 v23; // xmm5
-  float v24; // xmm3_4
-  __m128 v25; // xmm2
-  float v26; // xmm2_4
-  float v27; // xmm1_4
-  float v28; // xmm0_4
-  float v29; // xmm2_4
-  int v30; // xmm8_4
-  int v31; // xmm7_4
-  float v32; // xmm1_4
-  float v33; // xmm0_4
-  float v34; // xmm8_4
-  float v35; // xmm7_4
-  float v36; // xmm13_4
-  float v37; // xmm14_4
-  float v38; // xmm11_4
-  __m128 v39; // xmm2
-  float v40; // xmm7_4
-  float v41; // xmm8_4
-  float v42; // xmm6_4
-  float v43; // xmm3_4
-  float v44; // xmm4_4
-  float v45; // xmm1_4
-  float v46; // xmm0_4
-  UFG::SimObject *v47; // rcx
-  UFG::SensorComponent *v48; // rdi
-  unsigned __int16 v49; // dx
-  unsigned int v50; // er8
-  unsigned int v51; // er10
-  signed __int64 v52; // rdx
-  unsigned int v53; // er8
-  unsigned int v54; // er10
-  UFG::SimObjectProp *v55; // rcx
-  UFG::CharacterAnimationComponent *v56; // rcx
-  unsigned __int16 v57; // dx
-  UFG::CharacterAnimationComponent *v58; // rax
-  unsigned int v59; // er8
-  unsigned int v60; // er10
-  UFG::SimComponentHolder *v61; // rsi
-  UFG::SimObject *v62; // rsi
-  UFG::TransformNodeComponent *v63; // rsi
-  float v64; // xmm1_4
-  float v65; // xmm2_4
-  float v66; // xmm6_4
-  float v67; // xmm7_4
-  float v68; // xmm8_4
-  unsigned int i; // er14
-  UFG::ParkourHandle *v70; // rdi
-  float v71; // xmm3_4
-  int v72; // xmm1_4
-  int v73; // xmm2_4
-  UFG::ParkourHandle *v74; // rax
-  UFG::ParkourHandle *v75; // rax
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mNext; // rcx
+  __int64 v8; // rsi
+  ActionNodeRoot *v9; // rax
+  ActionNodeRoot *v10; // rdi
+  __int64 mValue; // r9
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v12; // r8
+  UFG::ActionTreeComponentBase *mPrev; // rcx
+  ActionNodePlayable *v14; // rax
+  Render::DebugDrawContext *Context; // r15
+  Render::DebugDrawContext *v16; // r12
+  UFG::SimObject *m_pSimObject; // rsi
+  UFG::TransformNodeComponent *v18; // rsi
+  UFG::qVector3 *p_m_TypeUID; // rdi
+  float v20; // xmm2_4
+  float v21; // xmm1_4
+  float z; // xmm3_4
+  float x; // xmm4_4
+  __m128 y_low; // xmm5
+  float v25; // xmm3_4
+  __m128 v26; // xmm2
+  float v27; // xmm2_4
+  float v28; // xmm1_4
+  float v29; // xmm0_4
+  float v30; // xmm2_4
+  int v31; // xmm8_4
+  int v32; // xmm7_4
+  float v33; // xmm1_4
+  float v34; // xmm0_4
+  float v35; // xmm8_4
+  float v36; // xmm7_4
+  float v37; // xmm13_4
+  float y; // xmm14_4
+  float v39; // xmm11_4
+  __m128 v40; // xmm2
+  float v41; // xmm7_4
+  float v42; // xmm8_4
+  double v43; // xmm4_8
+  float v44; // xmm6_4
+  float v45; // xmm3_4
+  float v46; // xmm1_4
+  double v47; // xmm0_8
+  UFG::SimObject *v48; // rcx
+  UFG::SensorComponent *m_pComponent; // rdi
+  __int16 m_Flags; // dx
+  unsigned int vfptr; // r8d
+  unsigned int size; // r10d
+  __int64 v53; // rdx
+  unsigned int v54; // r8d
+  unsigned int v55; // r10d
+  UFG::SimObjectProp *v56; // rcx
+  UFG::CharacterAnimationComponent *v57; // rcx
+  __int16 v58; // dx
+  UFG::CharacterAnimationComponent *ComponentOfType; // rax
+  unsigned int mComponentTableEntryCount; // r8d
+  unsigned int v61; // r10d
+  UFG::SimComponentHolder *p; // rsi
+  UFG::SimObject *v63; // rsi
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rsi
+  float v65; // xmm1_4
+  float v66; // xmm2_4
+  int v67; // xmm6_4
+  int v68; // xmm7_4
+  int v69; // xmm8_4
+  unsigned int i; // r14d
+  UFG::ParkourHandle *v71; // rdi
+  float v72; // xmm3_4
+  float v73; // xmm1_4
+  float v74; // xmm2_4
+  UFG::ParkourHandle *m_pPointer; // rax
   UFG::ParkourHandle *v76; // rax
   UFG::ParkourHandle *v77; // rax
-  UFG::qVector3 *v78; // rax
-  float v79; // xmm6_4
-  float v80; // xmm7_4
-  UFG::qVector3 *v81; // rax
-  float v82; // xmm3_4
-  __m128 v83; // xmm4
-  float v84; // xmm5_4
-  __m128 v85; // xmm2
-  float v86; // xmm1_4
-  float v87; // xmm15_4
-  float v88; // xmm1_4
-  float v89; // xmm2_4
-  float v90; // xmm3_4
-  float v91; // xmm1_4
-  float v92; // xmm2_4
-  float v93; // xmm3_4
-  float v94; // xmm1_4
-  float v95; // xmm2_4
-  float v96; // xmm3_4
-  float v97; // xmm1_4
-  float v98; // xmm2_4
-  float v99; // xmm3_4
-  float v100; // xmm13_4
-  float v101; // xmm14_4
-  float v102; // xmm12_4
-  float v103; // xmm14_4
-  float v104; // xmm4_4
-  float v105; // xmm14_4
-  UFG::ParkourHandle *v106; // rax
-  UFG::qSafePointer<UFG::ParkourHandle,UFG::ParkourHandle> *v107; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v108; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v109; // rax
-  UFG::qNode<Attachment,Attachment> **v110; // rdi
-  signed __int64 j; // rbx
-  UFG::qVector3 p1; // [rsp+80h] [rbp-80h]
-  float v113; // [rsp+90h] [rbp-70h]
-  float v114; // [rsp+94h] [rbp-6Ch]
-  float v115; // [rsp+98h] [rbp-68h]
-  UFG::qVector3 world_position; // [rsp+A0h] [rbp-60h]
-  float v117; // [rsp+B0h] [rbp-50h]
-  float v118; // [rsp+B4h] [rbp-4Ch]
-  float v119; // [rsp+B8h] [rbp-48h]
-  float v120; // [rsp+BCh] [rbp-44h]
-  UFG::qMatrix44 m; // [rsp+C0h] [rbp-40h]
-  UFG::qVector3 vmax; // [rsp+100h] [rbp+0h]
-  UFG::qVector3 v123; // [rsp+110h] [rbp+10h]
-  UFG::qVector3 v124; // [rsp+11Ch] [rbp+1Ch]
-  float v125; // [rsp+128h] [rbp+28h]
-  int v126; // [rsp+12Ch] [rbp+2Ch]
-  int v127; // [rsp+130h] [rbp+30h]
-  UFG::qVector3 vmin; // [rsp+138h] [rbp+38h]
-  UFG::qMatrix44 d; // [rsp+150h] [rbp+50h]
-  __int64 v130; // [rsp+190h] [rbp+90h]
-  __int64 v131; // [rsp+198h] [rbp+98h]
-  UFG::qVector3 result; // [rsp+1A0h] [rbp+A0h]
-  UFG::qVector3 v133; // [rsp+1ACh] [rbp+ACh]
-  UFG::qFixedArray<UFG::qSafePointer<UFG::ParkourHandle,UFG::ParkourHandle>,768> out; // [rsp+1C0h] [rbp+C0h]
-  char v135; // [rsp+4AC0h] [rbp+49C0h]
-  float v136; // [rsp+4AC8h] [rbp+49C8h]
-  float v137; // [rsp+4AD0h] [rbp+49D0h]
-  float v138; // [rsp+4AD8h] [rbp+49D8h]
+  UFG::ParkourHandle *v78; // rax
+  UFG::qVector3 *Position; // rax
+  float v80; // xmm6_4
+  float v81; // xmm7_4
+  UFG::qVector3 *Axis; // rax
+  float v83; // xmm3_4
+  __m128 x_low; // xmm4
+  float v85; // xmm5_4
+  __m128 v86; // xmm2
+  float v87; // xmm1_4
+  float v88; // xmm15_4
+  float v89; // xmm1_4
+  float v90; // xmm2_4
+  float w; // xmm3_4
+  float v92; // xmm1_4
+  float v93; // xmm2_4
+  float v94; // xmm3_4
+  float v95; // xmm1_4
+  float v96; // xmm2_4
+  float v97; // xmm3_4
+  float v98; // xmm1_4
+  float v99; // xmm2_4
+  float v100; // xmm3_4
+  float v101; // xmm13_4
+  float v102; // xmm14_4
+  float v103; // xmm12_4
+  float v104; // xmm14_4
+  float v105; // xmm4_4
+  float v106; // xmm14_4
+  UFG::ParkourHandle *v107; // rax
+  UFG::qSafePointer<UFG::ParkourHandle,UFG::ParkourHandle> *p_mFocusParkourHandle; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v109; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v110; // rax
+  bool *p_mNext; // rdi
+  bool *j; // rbx
+  UFG::qVector3 p1; // [rsp+80h] [rbp-80h] BYREF
+  float v114; // [rsp+90h] [rbp-70h]
+  float v115; // [rsp+94h] [rbp-6Ch]
+  float v116; // [rsp+98h] [rbp-68h]
+  UFG::qVector3 world_position; // [rsp+A0h] [rbp-60h] BYREF
+  int v118; // [rsp+B0h] [rbp-50h]
+  float v119; // [rsp+B4h] [rbp-4Ch] BYREF
+  int v120; // [rsp+B8h] [rbp-48h]
+  int v121; // [rsp+BCh] [rbp-44h]
+  UFG::qMatrix44 m; // [rsp+C0h] [rbp-40h] BYREF
+  UFG::qVector3 vmax; // [rsp+100h] [rbp+0h] BYREF
+  UFG::qVector3 v124; // [rsp+110h] [rbp+10h] BYREF
+  UFG::qVector3 v125; // [rsp+11Ch] [rbp+1Ch] BYREF
+  UFG::qVector3 v126; // [rsp+128h] [rbp+28h] BYREF
+  UFG::qVector3 vmin; // [rsp+138h] [rbp+38h] BYREF
+  UFG::qMatrix44 d; // [rsp+150h] [rbp+50h] BYREF
+  UFG::ParkourHandle *v129[2]; // [rsp+190h] [rbp+90h] BYREF
+  UFG::qVector3 result; // [rsp+1A0h] [rbp+A0h] BYREF
+  UFG::qVector3 v131; // [rsp+1ACh] [rbp+ACh] BYREF
+  UFG::qFixedArray<UFG::qSafePointer<UFG::ParkourHandle,UFG::ParkourHandle>,768> out; // [rsp+1C0h] [rbp+C0h] BYREF
+  bool v133; // [rsp+4AC0h] [rbp+49C0h] BYREF
+  float v134; // [rsp+4AC8h] [rbp+49C8h]
+  float v135; // [rsp+4AD0h] [rbp+49D0h]
+  float v136; // [rsp+4AD8h] [rbp+49D8h]
 
-  v136 = delta_sec;
-  v131 = -2i64;
-  v2 = delta_sec;
-  v3 = this;
-  if ( (LOBYTE(this->m_Flags) >> 1) & 1 )
+  v134 = delta_sec;
+  v129[1] = (UFG::ParkourHandle *)-2i64;
+  if ( (this->m_Flags & 2) != 0 )
     return;
   v4 = *(float *)&FLOAT_1_0;
-  if ( this->mSyncLatchedHandle || *(_WORD *)&this->mbSyncingCoverParkour || this->mbSyncingCoverRCorner )
+  if ( this->mSyncLatchedHandle
+    || this->mbSyncingCoverParkour
+    || this->mbSyncingCoverLCorner
+    || this->mbSyncingCoverRCorner )
   {
-    v5 = this->mBlendRate;
-    if ( v5 != 0.0 )
+    mBlendRate = this->mBlendRate;
+    if ( mBlendRate != 0.0 )
     {
-      v6 = (float)(v5 * v2) + this->mBlendWeight;
+      v6 = (float)(mBlendRate * delta_sec) + this->mBlendWeight;
       this->mBlendWeight = v6;
-      if ( v5 <= 0.0 )
+      if ( mBlendRate <= 0.0 )
       {
         if ( v6 <= 0.0 )
           this->mBlendWeight = 0.0;
@@ -860,127 +846,129 @@ void __fastcall UFG::WorldContextComponent::Update(UFG::WorldContextComponent *t
     && this->mCharacterPhysicsComponent.m_pSimComponent
     && UFG::CharacterPhysicsComponent::IsInWater((UFG::CharacterPhysicsComponent *)this->mCharacterPhysicsComponent.m_pSimComponent) )
   {
-    v7 = ((__int64 (*)(void))v3->mActionTreeComponent.m_pSimComponent[2].m_BoundComponentHandles.mNode.mNext[1].mNext->mPrev[9].mNext)();
-    v8 = (ActionNodeRoot *)((__int64 (*)(void))v3->mToSwimming->vfptr[1].GetResourceOwner)();
-    v9 = v8;
-    v10 = v8->mActionTreeType.mValue;
-    v11 = v3->mActionTreeComponent.m_pSimComponent[2].m_BoundComponentHandles.mNode.mNext;
-    if ( (*((_QWORD *)&v11[4].mNext + v10) || v11[5].mPrev) && (ActionNodeRoot *)v7 != v8 )
+    mNext = this->mActionTreeComponent.m_pSimComponent[2].m_BoundComponentHandles.mNode.mNext[1].mNext;
+    v8 = ((__int64 (__fastcall *)(UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *))mNext->mPrev[9].mNext)(mNext);
+    v9 = (ActionNodeRoot *)this->mToSwimming->vfptr[1].GetResourceOwner(this->mToSwimming);
+    v10 = v9;
+    mValue = v9->mActionTreeType.mValue;
+    v12 = this->mActionTreeComponent.m_pSimComponent[2].m_BoundComponentHandles.mNode.mNext;
+    if ( (*((_QWORD *)&v12[4].mNext + mValue) || v12[5].mPrev) && (ActionNodeRoot *)v8 != v9 )
     {
-      v12 = (UFG::ActionTreeComponentBase *)*((_QWORD *)&v11[4].mNext + v10);
-      if ( !v12 )
-        v12 = (UFG::ActionTreeComponentBase *)v11[5].mPrev;
-      if ( UFG::ActionTreeComponentBase::AllocateFor(v12, v8) )
+      mPrev = (UFG::ActionTreeComponentBase *)*((_QWORD *)&v12[4].mNext + mValue);
+      if ( !mPrev )
+        mPrev = (UFG::ActionTreeComponentBase *)v12[5].mPrev;
+      if ( UFG::ActionTreeComponentBase::AllocateFor(mPrev, v9) )
         ActionNodeRoot::Init(
-          v9,
-          (ActionContext *)v3->mActionTreeComponent.m_pSimComponent[2].m_BoundComponentHandles.mNode.mNext);
+          v10,
+          (ActionContext *)this->mActionTreeComponent.m_pSimComponent[2].m_BoundComponentHandles.mNode.mNext);
     }
-    v13 = (ActionNodePlayable *)((__int64 (__fastcall *)(ActionNode *, UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *))v3->mToSwimming->vfptr[2].GetClassNameUID)(
-                                  v3->mToSwimming,
-                                  v3->mActionTreeComponent.m_pSimComponent[2].m_BoundComponentHandles.mNode.mNext);
-    if ( v13 )
-      ActionController::PlayTracks((ActionController *)&v3->mActionTreeComponent.m_pSimComponent[3], v13, 0, 0.0);
+    v14 = (ActionNodePlayable *)((__int64 (__fastcall *)(ActionNode *, UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *))this->mToSwimming->vfptr[2].GetClassNameUID)(
+                                  this->mToSwimming,
+                                  this->mActionTreeComponent.m_pSimComponent[2].m_BoundComponentHandles.mNode.mNext);
+    if ( v14 )
+      ActionController::PlayTracks((ActionController *)&this->mActionTreeComponent.m_pSimComponent[3], v14, 0, 0.0);
   }
-  v14 = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 1u);
-  v15 = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 2u);
+  Context = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 1u);
+  v16 = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 2u);
   if ( UFG::WorldContextComponent::s_DrawGroundDebug )
   {
-    v16 = v3->m_pSimObject;
-    v17 = v16 ? v16->m_pTransformNodeComponent : 0i64;
-    if ( v3->mCharacterPhysicsComponent.m_pSimComponent )
+    m_pSimObject = this->m_pSimObject;
+    v18 = m_pSimObject ? m_pSimObject->m_pTransformNodeComponent : 0i64;
+    if ( this->mCharacterPhysicsComponent.m_pSimComponent )
     {
-      v18 = (signed __int64)&v3->mCharacterPhysicsComponent.m_pSimComponent[5].m_TypeUID;
-      v19 = *((float *)&v3->mCharacterPhysicsComponent.m_pSimComponent[5].m_pSimObject + 1)
-          + *(float *)&v3->mCharacterPhysicsComponent.m_pSimComponent[5].m_Flags;
-      v20 = *(float *)&v3->mCharacterPhysicsComponent.m_pSimComponent[5].m_pSimObject
-          + *(float *)&v3->mCharacterPhysicsComponent.m_pSimComponent[5].m_NameUID;
-      p1.x = *(float *)(&v3->mCharacterPhysicsComponent.m_pSimComponent[5].m_SimObjIndex + 1) + *(float *)v18;
-      p1.y = v20;
-      p1.z = v19;
+      p_m_TypeUID = (UFG::qVector3 *)&this->mCharacterPhysicsComponent.m_pSimComponent[5].m_TypeUID;
+      v20 = *((float *)&this->mCharacterPhysicsComponent.m_pSimComponent[5].m_pSimObject + 1)
+          + *(float *)&this->mCharacterPhysicsComponent.m_pSimComponent[5].m_Flags;
+      v21 = *(float *)&this->mCharacterPhysicsComponent.m_pSimComponent[5].m_pSimObject
+          + *(float *)&this->mCharacterPhysicsComponent.m_pSimComponent[5].m_NameUID;
+      p1.x = *(float *)(&this->mCharacterPhysicsComponent.m_pSimComponent[5].m_SimObjIndex + 1) + p_m_TypeUID->x;
+      p1.y = v21;
+      p1.z = v20;
       Render::DebugDrawContext::DrawLine(
-        v14,
-        (UFG::qVector3 *)v18,
+        Context,
+        p_m_TypeUID,
         &p1,
         &UFG::qColour::Cyan,
         &UFG::qMatrix44::msIdentity,
         0i64,
         0);
-      v21 = *(float *)(v18 + 20);
-      if ( v21 < 0.94999999 && v21 > 0.050000001 )
+      z = p_m_TypeUID[1].z;
+      if ( z < 0.94999999 && z > 0.050000001 )
       {
-        v22 = *(float *)(v18 + 12);
-        v23 = (__m128)*(unsigned int *)(v18 + 16);
-        v24 = v21 - (float)(1.0 / v21);
-        v25 = v23;
-        v25.m128_f32[0] = (float)((float)(v23.m128_f32[0] * v23.m128_f32[0]) + (float)(v22 * v22)) + (float)(v24 * v24);
-        v26 = v25.m128_f32[0] == 0.0 ? 0.0 : 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v25));
-        v27 = v26 * v24;
-        v28 = v26 * v23.m128_f32[0];
-        v29 = v26 * v22;
-        v30 = LODWORD(v27) ^ _xmm[0];
+        x = p_m_TypeUID[1].x;
+        y_low = (__m128)LODWORD(p_m_TypeUID[1].y);
+        v25 = z - (float)(1.0 / z);
+        v26 = y_low;
+        v26.m128_f32[0] = (float)((float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(x * x)) + (float)(v25 * v25);
+        v27 = v26.m128_f32[0] == 0.0 ? 0.0 : 1.0 / _mm_sqrt_ps(v26).m128_f32[0];
+        v28 = v27 * v25;
+        v29 = v27 * y_low.m128_f32[0];
+        v30 = v27 * x;
         v31 = LODWORD(v28) ^ _xmm[0];
-        v32 = v27 + *(float *)(v18 + 8);
-        v33 = v28 + *(float *)(v18 + 4);
-        p1.x = v29 + *(float *)v18;
-        p1.y = v33;
-        p1.z = v32;
+        v32 = LODWORD(v29) ^ _xmm[0];
+        v33 = v28 + p_m_TypeUID->z;
+        v34 = v29 + p_m_TypeUID->y;
+        p1.x = v30 + p_m_TypeUID->x;
+        p1.y = v34;
+        p1.z = v33;
         Render::DebugDrawContext::DrawLine(
-          v14,
-          (UFG::qVector3 *)v18,
+          Context,
+          p_m_TypeUID,
           &p1,
           &UFG::qColour::Green,
           &UFG::qMatrix44::msIdentity,
           0i64,
           0);
-        v34 = *(float *)&v30 + *(float *)(v18 + 8);
-        v35 = *(float *)&v31 + *(float *)(v18 + 4);
-        p1.x = COERCE_FLOAT(LODWORD(v29) ^ _xmm[0]) + *(float *)v18;
-        p1.y = v35;
-        p1.z = v34;
+        v35 = *(float *)&v31 + p_m_TypeUID->z;
+        v36 = *(float *)&v32 + p_m_TypeUID->y;
+        p1.x = COERCE_FLOAT(LODWORD(v30) ^ _xmm[0]) + p_m_TypeUID->x;
+        p1.y = v36;
+        p1.z = v35;
         Render::DebugDrawContext::DrawLine(
-          v14,
-          (UFG::qVector3 *)v18,
+          Context,
+          p_m_TypeUID,
           &p1,
           &UFG::qColour::Red,
           &UFG::qMatrix44::msIdentity,
           0i64,
           0);
-        if ( v17 )
+        if ( v18 )
         {
-          UFG::TransformNodeComponent::UpdateWorldTransform(v17);
-          v36 = v17->mWorldTransform.v3.x;
-          v37 = v17->mWorldTransform.v3.y;
-          v38 = v17->mWorldTransform.v3.z;
-          UFG::TransformNodeComponent::UpdateWorldTransform(v17);
-          v39 = (__m128)LODWORD(v17->mWorldTransform.v0.y);
-          v40 = *(float *)(v18 + 16);
-          v41 = *(float *)(v18 + 12);
-          v42 = *(float *)(v18 + 20);
-          v43 = (float)((float)(v17->mWorldTransform.v0.x * v41) + (float)(v17->mWorldTransform.v0.y * v40))
-              + (float)(v17->mWorldTransform.v0.z * v42);
-          if ( v43 > -0.94999999 && v43 < 0.94999999 )
+          UFG::TransformNodeComponent::UpdateWorldTransform(v18);
+          v37 = v18->mWorldTransform.v3.x;
+          y = v18->mWorldTransform.v3.y;
+          v39 = v18->mWorldTransform.v3.z;
+          UFG::TransformNodeComponent::UpdateWorldTransform(v18);
+          v40 = (__m128)LODWORD(v18->mWorldTransform.v0.y);
+          v41 = p_m_TypeUID[1].y;
+          v42 = p_m_TypeUID[1].x;
+          *(_QWORD *)&v43 = LODWORD(v18->mWorldTransform.v0.z);
+          v44 = p_m_TypeUID[1].z;
+          v45 = (float)((float)(v18->mWorldTransform.v0.x * v42) + (float)(v18->mWorldTransform.v0.y * v41))
+              + (float)(v18->mWorldTransform.v0.z * v44);
+          if ( v45 > -0.94999999 && v45 < 0.94999999 )
           {
-            v44 = v17->mWorldTransform.v0.z - (float)(v42 * v43);
-            v39.m128_f32[0] = (float)((float)((float)(v39.m128_f32[0] - (float)(v40 * v43))
-                                            * (float)(v39.m128_f32[0] - (float)(v40 * v43)))
-                                    + (float)((float)(v17->mWorldTransform.v0.x - (float)(v41 * v43))
-                                            * (float)(v17->mWorldTransform.v0.x - (float)(v41 * v43))))
-                            + (float)(v44 * v44);
-            if ( v39.m128_f32[0] == 0.0 )
-              v45 = 0.0;
+            *(float *)&v43 = *(float *)&v43 - (float)(v44 * v45);
+            v40.m128_f32[0] = (float)((float)((float)(v40.m128_f32[0] - (float)(v41 * v45))
+                                            * (float)(v40.m128_f32[0] - (float)(v41 * v45)))
+                                    + (float)((float)(v18->mWorldTransform.v0.x - (float)(v42 * v45))
+                                            * (float)(v18->mWorldTransform.v0.x - (float)(v42 * v45))))
+                            + (float)(*(float *)&v43 * *(float *)&v43);
+            if ( v40.m128_f32[0] == 0.0 )
+              v46 = 0.0;
             else
-              v45 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v39));
-            v46 = v44 * v45;
-            UFG::qASin(v44 * v45);
-            p1.x = v36;
-            p1.y = v37;
-            p1.z = v38 + 0.1;
+              v46 = 1.0 / _mm_sqrt_ps(v40).m128_f32[0];
+            *(float *)&v43 = *(float *)&v43 * v46;
+            v47 = UFG::qASin(v43);
+            p1.x = v37;
+            p1.y = y;
+            p1.z = v39 + 0.1;
             Render::DebugDrawContext::DrawText(
-              v14,
+              Context,
               &p1,
               &UFG::qColour::Green,
               "Grade:%0.3f:",
-              (float)((float)(v46 * 180.0) * 0.31830987));
+              (float)((float)(*(float *)&v47 * 180.0) * 0.31830987));
           }
         }
       }
@@ -989,283 +977,283 @@ void __fastcall UFG::WorldContextComponent::Update(UFG::WorldContextComponent *t
   if ( UFG::WorldContextComponent::s_DrawParkourSensing )
   {
     gDebugPark = 1;
-    v47 = v3->m_pSimObject;
-    if ( !v47 )
+    v48 = this->m_pSimObject;
+    if ( !v48 )
     {
-LABEL_42:
-      v48 = 0i64;
-      goto LABEL_61;
+LABEL_43:
+      m_pComponent = 0i64;
+      goto LABEL_62;
     }
-    v49 = v47->m_Flags;
-    if ( (v49 >> 14) & 1 )
+    m_Flags = v48->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v48 = (UFG::SensorComponent *)v47->m_Components.p[26].m_pComponent;
-      goto LABEL_61;
+      m_pComponent = (UFG::SensorComponent *)v48->m_Components.p[26].m_pComponent;
+      goto LABEL_62;
     }
-    if ( (v49 & 0x8000u) != 0 )
+    if ( m_Flags < 0 )
     {
-      v48 = (UFG::SensorComponent *)v47->m_Components.p[26].m_pComponent;
-      goto LABEL_61;
+      m_pComponent = (UFG::SensorComponent *)v48->m_Components.p[26].m_pComponent;
+      goto LABEL_62;
     }
-    if ( (v49 >> 13) & 1 )
+    if ( (m_Flags & 0x2000) != 0 )
     {
-      v50 = (unsigned int)v47[1].vfptr;
-      v51 = v47->m_Components.size;
-      if ( v50 >= v51 )
-        goto LABEL_42;
+      vfptr = (unsigned int)v48[1].vfptr;
+      size = v48->m_Components.size;
+      if ( vfptr >= size )
+        goto LABEL_43;
       while ( 1 )
       {
-        v52 = (signed __int64)&v47->m_Components.p[v50];
-        if ( (*(_DWORD *)(v52 + 8) & 0xFE000000) == (UFG::SensorComponent::_TypeUID & 0xFE000000)
-          && !(UFG::SensorComponent::_TypeUID & ~*(_DWORD *)(v52 + 8) & 0x1FFFFFF) )
+        v53 = (__int64)&v48->m_Components.p[vfptr];
+        if ( (*(_DWORD *)(v53 + 8) & 0xFE000000) == (UFG::SensorComponent::_TypeUID & 0xFE000000)
+          && (UFG::SensorComponent::_TypeUID & ~*(_DWORD *)(v53 + 8) & 0x1FFFFFF) == 0 )
         {
           break;
         }
-        if ( ++v50 >= v51 )
-          goto LABEL_42;
+        if ( ++vfptr >= size )
+          goto LABEL_43;
       }
     }
     else
     {
-      if ( !((v49 >> 12) & 1) )
+      if ( (m_Flags & 0x1000) == 0 )
       {
-        v48 = (UFG::SensorComponent *)UFG::SimObject::GetComponentOfType(v47, UFG::SensorComponent::_TypeUID);
-LABEL_61:
-        v55 = (UFG::SimObjectProp *)v3->m_pSimObject;
-        if ( !v55 )
-        {
+        m_pComponent = (UFG::SensorComponent *)UFG::SimObject::GetComponentOfType(v48, UFG::SensorComponent::_TypeUID);
 LABEL_62:
-          v56 = 0i64;
-          goto LABEL_85;
-        }
-        v57 = v55->m_Flags;
-        if ( (v57 >> 14) & 1 )
+        v56 = (UFG::SimObjectProp *)this->m_pSimObject;
+        if ( !v56 )
         {
-          v56 = (UFG::CharacterAnimationComponent *)v55->m_Components.p[9].m_pComponent;
-          if ( v56 && !((UFG::CharacterAnimationComponent::_TypeUID ^ v56->m_TypeUID) & 0xFE000000) )
+LABEL_63:
+          v57 = 0i64;
+          goto LABEL_86;
+        }
+        v58 = v56->m_Flags;
+        if ( (v58 & 0x4000) != 0 )
+        {
+          v57 = (UFG::CharacterAnimationComponent *)v56->m_Components.p[9].m_pComponent;
+          if ( v57 && ((UFG::CharacterAnimationComponent::_TypeUID ^ v57->m_TypeUID) & 0xFE000000) == 0 )
           {
-            if ( UFG::CharacterAnimationComponent::_TypeUID & ~v56->m_TypeUID & 0x1FFFFFF )
-              v56 = 0i64;
-            goto LABEL_85;
+            if ( (UFG::CharacterAnimationComponent::_TypeUID & ~v57->m_TypeUID & 0x1FFFFFF) != 0 )
+              v57 = 0i64;
+            goto LABEL_86;
           }
-          goto LABEL_62;
+          goto LABEL_63;
         }
-        if ( (v57 & 0x8000u) != 0 )
+        if ( v58 < 0 )
         {
-          v56 = (UFG::CharacterAnimationComponent *)v55->m_Components.p[9].m_pComponent;
-          if ( v56 && !((UFG::CharacterAnimationComponent::_TypeUID ^ v56->m_TypeUID) & 0xFE000000) )
+          v57 = (UFG::CharacterAnimationComponent *)v56->m_Components.p[9].m_pComponent;
+          if ( v57 && ((UFG::CharacterAnimationComponent::_TypeUID ^ v57->m_TypeUID) & 0xFE000000) == 0 )
           {
-            if ( UFG::CharacterAnimationComponent::_TypeUID & ~v56->m_TypeUID & 0x1FFFFFF )
-              v56 = 0i64;
-            goto LABEL_85;
+            if ( (UFG::CharacterAnimationComponent::_TypeUID & ~v57->m_TypeUID & 0x1FFFFFF) != 0 )
+              v57 = 0i64;
+            goto LABEL_86;
           }
-          goto LABEL_62;
+          goto LABEL_63;
         }
-        if ( (v57 >> 13) & 1 )
+        if ( (v58 & 0x2000) != 0 )
         {
-          v58 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>(v55);
+          ComponentOfType = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>(v56);
         }
         else
         {
-          if ( (v57 >> 12) & 1 )
+          if ( (v58 & 0x1000) != 0 )
           {
-            v59 = v55->mComponentTableEntryCount;
-            v60 = v55->m_Components.size;
-            if ( v59 < v60 )
+            mComponentTableEntryCount = v56->mComponentTableEntryCount;
+            v61 = v56->m_Components.size;
+            if ( mComponentTableEntryCount < v61 )
             {
-              v61 = v55->m_Components.p;
-              while ( (v61[v59].m_TypeUID & 0xFE000000) != (UFG::CharacterAnimationComponent::_TypeUID & 0xFE000000)
-                   || UFG::CharacterAnimationComponent::_TypeUID & ~v61[v59].m_TypeUID & 0x1FFFFFF )
+              p = v56->m_Components.p;
+              while ( (p[mComponentTableEntryCount].m_TypeUID & 0xFE000000) != (UFG::CharacterAnimationComponent::_TypeUID & 0xFE000000)
+                   || (UFG::CharacterAnimationComponent::_TypeUID & ~p[mComponentTableEntryCount].m_TypeUID & 0x1FFFFFF) != 0 )
               {
-                if ( ++v59 >= v60 )
-                  goto LABEL_62;
+                if ( ++mComponentTableEntryCount >= v61 )
+                  goto LABEL_63;
               }
-              v56 = (UFG::CharacterAnimationComponent *)v61[v59].m_pComponent;
-              goto LABEL_85;
+              v57 = (UFG::CharacterAnimationComponent *)p[mComponentTableEntryCount].m_pComponent;
+              goto LABEL_86;
             }
-            goto LABEL_62;
+            goto LABEL_63;
           }
-          v58 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                      (UFG::SimObject *)&v55->vfptr,
-                                                      UFG::CharacterAnimationComponent::_TypeUID);
+          ComponentOfType = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                  v56,
+                                                                  UFG::CharacterAnimationComponent::_TypeUID);
         }
-        v56 = v58;
-LABEL_85:
-        v62 = v3->m_pSimObject;
-        if ( v62 )
-          v63 = v62->m_pTransformNodeComponent;
+        v57 = ComponentOfType;
+LABEL_86:
+        v63 = this->m_pSimObject;
+        if ( v63 )
+          m_pTransformNodeComponent = v63->m_pTransformNodeComponent;
         else
-          v63 = 0i64;
-        if ( v48 && v56 && v63 )
+          m_pTransformNodeComponent = 0i64;
+        if ( m_pComponent && v57 && m_pTransformNodeComponent )
         {
-          UFG::TransformNodeComponent::UpdateWorldTransform(v63);
-          v64 = v63->mWorldTransform.v3.y;
-          v65 = v63->mWorldTransform.v3.z;
-          p1.x = v63->mWorldTransform.v3.x;
-          p1.y = v64;
-          p1.z = v65;
-          UFG::TransformNodeComponent::UpdateWorldTransform(v63);
-          v130 = 0i64;
-          v118 = FLOAT_3_4028235e38;
-          UFG::SensorComponent::GetExtents(v48, &vmin, &vmax);
-          LODWORD(v66) = COERCE_UNSIGNED_INT(vmax.x - vmin.x) & _xmm;
-          LODWORD(v119) = COERCE_UNSIGNED_INT(vmax.x - vmin.x) & _xmm;
-          LODWORD(v67) = COERCE_UNSIGNED_INT(vmax.y - vmin.y) & _xmm;
-          LODWORD(v117) = COERCE_UNSIGNED_INT(vmax.y - vmin.y) & _xmm;
-          LODWORD(v68) = COERCE_UNSIGNED_INT(vmax.z - vmin.z) & _xmm;
-          LODWORD(v120) = COERCE_UNSIGNED_INT(vmax.z - vmin.z) & _xmm;
+          UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+          v65 = m_pTransformNodeComponent->mWorldTransform.v3.y;
+          v66 = m_pTransformNodeComponent->mWorldTransform.v3.z;
+          p1.x = m_pTransformNodeComponent->mWorldTransform.v3.x;
+          p1.y = v65;
+          p1.z = v66;
+          UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+          v129[0] = 0i64;
+          v119 = FLOAT_3_4028235e38;
+          UFG::SensorComponent::GetExtents(m_pComponent, &vmin, &vmax);
+          v67 = COERCE_UNSIGNED_INT(vmax.x - vmin.x) & _xmm;
+          v120 = v67;
+          v68 = COERCE_UNSIGNED_INT(vmax.y - vmin.y) & _xmm;
+          v118 = v68;
+          v69 = COERCE_UNSIGNED_INT(vmax.z - vmin.z) & _xmm;
+          v121 = v69;
           `eh vector constructor iterator(
             out.p,
             0x18ui64,
             768,
             (void (__fastcall *)(void *))UFG::qSafePointer<UFG::SimObject,UFG::SimObjectCharacter>::qSafePointer<UFG::SimObject,UFG::SimObjectCharacter>);
           out.size = 0;
-          UFG::SensorComponent::GetParkourHandles(v48, &out);
-          v135 = 0;
+          UFG::SensorComponent::GetParkourHandles(m_pComponent, &out);
+          v133 = 0;
           for ( i = 0; i < out.size; ++i )
           {
-            v70 = (UFG::ParkourHandle *)*((_QWORD *)&out.p[0].m_pPointer + 3 * i);
-            if ( v70 )
+            v71 = (UFG::ParkourHandle *)*((_QWORD *)&out.p[0].m_pPointer + 3 * i);
+            if ( v71 )
             {
-              if ( v66 >= v67 )
-                v71 = v67;
+              if ( *(float *)&v67 >= *(float *)&v68 )
+                v72 = *(float *)&v68;
               else
-                v71 = v66;
-              v72 = LODWORD(v63->mWorldTransform.v0.y);
-              v73 = LODWORD(v63->mWorldTransform.v0.z);
-              v125 = v63->mWorldTransform.v0.x;
-              v126 = v72;
-              v127 = v73;
+                v72 = *(float *)&v67;
+              v73 = m_pTransformNodeComponent->mWorldTransform.v0.y;
+              v74 = m_pTransformNodeComponent->mWorldTransform.v0.z;
+              v126.x = m_pTransformNodeComponent->mWorldTransform.v0.x;
+              v126.y = v73;
+              v126.z = v74;
               compareParkourHandles(
-                0xFFFFFFFF,
+                -1,
                 &p1,
-                (UFG::qVector3 *)&v125,
+                &v126,
                 3.1415927,
                 0.0,
                 0.0,
-                v71,
+                v72,
                 0.0,
-                v68,
+                *(const float *)&v69,
                 &world_position,
-                v70,
-                (UFG::ParkourHandle **)&v130,
-                &v118,
-                (bool *)&v135);
-              v74 = v3->mFocusParkourHandle.m_pPointer;
-              if ( v74 && v70 == v74 )
+                v71,
+                v129,
+                &v119,
+                &v133);
+              m_pPointer = this->mFocusParkourHandle.m_pPointer;
+              if ( m_pPointer && v71 == m_pPointer )
               {
                 Render::DebugDrawContext::DrawLine(
-                  v15,
+                  v16,
                   &p1,
                   &world_position,
                   &UFG::qColour::Cyan,
                   &UFG::qMatrix44::msIdentity,
                   0i64,
                   0);
-                Render::DebugDrawContext::DrawText(v14, &world_position, &UFG::qColour::Cyan, "FocusHandle");
+                Render::DebugDrawContext::DrawText(Context, &world_position, &UFG::qColour::Cyan, "FocusHandle");
               }
-              v75 = v3->mParkourHandle.m_pPointer;
-              if ( v75 && v70 == v75 )
+              v76 = this->mParkourHandle.m_pPointer;
+              if ( v76 && v71 == v76 )
               {
                 Render::DebugDrawContext::DrawLine(
-                  v15,
+                  v16,
                   &p1,
                   &world_position,
                   &UFG::qColour::DeepPink,
                   &UFG::qMatrix44::msIdentity,
                   0i64,
                   0);
-                v124.x = world_position.x;
-                v124.y = world_position.y;
-                v124.z = world_position.z - 0.1;
-                Render::DebugDrawContext::DrawText(v14, &v124, &UFG::qColour::DeepPink, "LatchedHandle");
+                v125.x = world_position.x;
+                v125.y = world_position.y;
+                v125.z = world_position.z - 0.1;
+                Render::DebugDrawContext::DrawText(Context, &v125, &UFG::qColour::DeepPink, "LatchedHandle");
               }
-              v76 = v3->mFocusParkourHandle.m_pPointer;
-              if ( v76 && v70 == v76 || (v77 = v3->mParkourHandle.m_pPointer) != 0i64 && v70 == v77 )
+              v77 = this->mFocusParkourHandle.m_pPointer;
+              if ( v77 && v71 == v77 || (v78 = this->mParkourHandle.m_pPointer) != 0i64 && v71 == v78 )
               {
-                v78 = UFG::ParkourHandle::GetPosition(v70, &result);
-                v137 = v78->x;
-                v79 = v78->y;
-                v138 = v78->y;
-                v80 = v78->z;
-                v113 = v78->z;
-                v81 = UFG::ParkourHandle::GetAxis(v70, &v133);
-                v82 = v81->y;
-                v83 = (__m128)LODWORD(v81->x);
-                v84 = v81->z;
-                v85 = v83;
-                v85.m128_f32[0] = (float)((float)(v83.m128_f32[0] * v83.m128_f32[0]) + (float)(v82 * v82))
-                                + (float)(v84 * v84);
-                if ( v85.m128_f32[0] == 0.0 )
-                  v86 = 0.0;
+                Position = UFG::ParkourHandle::GetPosition(v71, &result);
+                v135 = Position->x;
+                v80 = Position->y;
+                v136 = v80;
+                v81 = Position->z;
+                v114 = v81;
+                Axis = UFG::ParkourHandle::GetAxis(v71, &v131);
+                v83 = Axis->y;
+                x_low = (__m128)LODWORD(Axis->x);
+                v85 = Axis->z;
+                v86 = x_low;
+                v86.m128_f32[0] = (float)((float)(x_low.m128_f32[0] * x_low.m128_f32[0]) + (float)(v83 * v83))
+                                + (float)(v85 * v85);
+                if ( v86.m128_f32[0] == 0.0 )
+                  v87 = 0.0;
                 else
-                  v86 = v4 / COERCE_FLOAT(_mm_sqrt_ps(v85));
-                v87 = v86 * v84;
-                v114 = v86 * v82;
-                v115 = v86 * v83.m128_f32[0];
-                UFG::TransformNodeComponent::UpdateWorldTransform(v63);
-                v88 = v63->mWorldTransform.v0.y;
-                v89 = v63->mWorldTransform.v0.z;
-                v90 = v63->mWorldTransform.v0.w;
-                m.v0.x = v63->mWorldTransform.v0.x;
-                m.v0.y = v88;
-                m.v0.z = v89;
-                m.v0.w = v90;
-                v91 = v63->mWorldTransform.v1.y;
-                v92 = v63->mWorldTransform.v1.z;
-                v93 = v63->mWorldTransform.v1.w;
-                m.v1.x = v63->mWorldTransform.v1.x;
-                m.v1.y = v91;
-                m.v1.z = v92;
-                m.v1.w = v93;
-                v94 = v63->mWorldTransform.v2.y;
-                v95 = v63->mWorldTransform.v2.z;
-                v96 = v63->mWorldTransform.v2.w;
-                m.v2.x = v63->mWorldTransform.v2.x;
-                m.v2.y = v94;
-                m.v2.z = v95;
-                m.v2.w = v96;
-                v97 = v63->mWorldTransform.v3.y;
-                v98 = v63->mWorldTransform.v3.z;
-                v99 = v63->mWorldTransform.v3.w;
-                m.v3.x = v63->mWorldTransform.v3.x;
-                m.v3.y = v97;
-                m.v3.z = v98;
-                m.v3.w = v99;
+                  v87 = v4 / _mm_sqrt_ps(v86).m128_f32[0];
+                v88 = v87 * v85;
+                v115 = v87 * v83;
+                v116 = v87 * x_low.m128_f32[0];
+                UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+                v89 = m_pTransformNodeComponent->mWorldTransform.v0.y;
+                v90 = m_pTransformNodeComponent->mWorldTransform.v0.z;
+                w = m_pTransformNodeComponent->mWorldTransform.v0.w;
+                m.v0.x = m_pTransformNodeComponent->mWorldTransform.v0.x;
+                m.v0.y = v89;
+                m.v0.z = v90;
+                m.v0.w = w;
+                v92 = m_pTransformNodeComponent->mWorldTransform.v1.y;
+                v93 = m_pTransformNodeComponent->mWorldTransform.v1.z;
+                v94 = m_pTransformNodeComponent->mWorldTransform.v1.w;
+                m.v1.x = m_pTransformNodeComponent->mWorldTransform.v1.x;
+                m.v1.y = v92;
+                m.v1.z = v93;
+                m.v1.w = v94;
+                v95 = m_pTransformNodeComponent->mWorldTransform.v2.y;
+                v96 = m_pTransformNodeComponent->mWorldTransform.v2.z;
+                v97 = m_pTransformNodeComponent->mWorldTransform.v2.w;
+                m.v2.x = m_pTransformNodeComponent->mWorldTransform.v2.x;
+                m.v2.y = v95;
+                m.v2.z = v96;
+                m.v2.w = v97;
+                v98 = m_pTransformNodeComponent->mWorldTransform.v3.y;
+                v99 = m_pTransformNodeComponent->mWorldTransform.v3.z;
+                v100 = m_pTransformNodeComponent->mWorldTransform.v3.w;
+                m.v3.x = m_pTransformNodeComponent->mWorldTransform.v3.x;
+                m.v3.y = v98;
+                m.v3.z = v99;
+                m.v3.w = v100;
                 UFG::qInverseAffine(&d, &m);
-                v100 = (float)((float)((float)(v137 * d.v0.x) + (float)(v79 * d.v1.x)) + (float)(v80 * d.v2.x)) + d.v3.x;
-                v101 = (float)((float)((float)(v137 * d.v0.y) + (float)(v79 * d.v1.y)) + (float)(v80 * d.v2.y)) + d.v3.y;
-                v102 = (float)((float)((float)(v137 * d.v0.z) + (float)(v138 * d.v1.z)) + (float)(v113 * d.v2.z))
+                v101 = (float)((float)((float)(v135 * d.v0.x) + (float)(v80 * d.v1.x)) + (float)(v81 * d.v2.x)) + d.v3.x;
+                v102 = (float)((float)((float)(v135 * d.v0.y) + (float)(v80 * d.v1.y)) + (float)(v81 * d.v2.y)) + d.v3.y;
+                v103 = (float)((float)((float)(v135 * d.v0.z) + (float)(v136 * d.v1.z)) + (float)(v114 * d.v2.z))
                      + d.v3.z;
-                v137 = (float)((float)((float)(v137 * d.v0.w) + (float)(v138 * d.v1.w)) + (float)(v113 * d.v2.w))
+                v135 = (float)((float)((float)(v135 * d.v0.w) + (float)(v136 * d.v1.w)) + (float)(v114 * d.v2.w))
                      + d.v3.w;
-                LODWORD(v103) = COERCE_UNSIGNED_INT(
-                                  v101
-                                / (float)((float)((float)(v114 * d.v1.y) + (float)(d.v0.y * v115))
-                                        + (float)(v87 * d.v2.y))) ^ _xmm[0];
-                v104 = (float)(v103
-                             * (float)((float)((float)(v114 * d.v1.x) + (float)(d.v0.x * v115)) + (float)(v87 * d.v2.x)))
-                     + v100;
-                v105 = (float)(v103
-                             * (float)((float)((float)(v114 * d.v1.z) + (float)(d.v0.z * v115)) + (float)(v87 * d.v2.z)))
-                     + v102;
-                v123.x = (float)((float)((float)(m.v0.x * v104) + (float)(m.v1.x * 0.0)) + (float)(m.v2.x * v105))
-                       + (float)(m.v3.x * v137);
-                v123.y = (float)((float)((float)(m.v0.y * v104) + (float)(m.v1.y * 0.0)) + (float)(m.v2.y * v105))
-                       + (float)(m.v3.y * v137);
-                v123.z = (float)((float)((float)(m.v0.z * v104) + (float)(m.v1.z * 0.0)) + (float)(m.v2.z * v105))
-                       + (float)(m.v3.z * v137);
+                LODWORD(v104) = COERCE_UNSIGNED_INT(
+                                  v102
+                                / (float)((float)((float)(v115 * d.v1.y) + (float)(d.v0.y * v116))
+                                        + (float)(v88 * d.v2.y))) ^ _xmm[0];
+                v105 = (float)(v104
+                             * (float)((float)((float)(v115 * d.v1.x) + (float)(d.v0.x * v116)) + (float)(v88 * d.v2.x)))
+                     + v101;
+                v106 = (float)(v104
+                             * (float)((float)((float)(v115 * d.v1.z) + (float)(d.v0.z * v116)) + (float)(v88 * d.v2.z)))
+                     + v103;
+                v124.x = (float)((float)((float)(m.v0.x * v105) + (float)(m.v1.x * 0.0)) + (float)(m.v2.x * v106))
+                       + (float)(m.v3.x * v135);
+                v124.y = (float)((float)((float)(m.v0.y * v105) + (float)(m.v1.y * 0.0)) + (float)(m.v2.y * v106))
+                       + (float)(m.v3.y * v135);
+                v124.z = (float)((float)((float)(m.v0.z * v105) + (float)(m.v1.z * 0.0)) + (float)(m.v2.z * v106))
+                       + (float)(m.v3.z * v135);
                 Render::DebugDrawContext::DrawLine(
-                  v15,
+                  v16,
                   &p1,
-                  &v123,
+                  &v124,
                   &UFG::qColour::Cyan,
                   &UFG::qMatrix44::msIdentity,
                   0i64,
                   0);
-                v66 = v119;
-                v67 = v117;
-                v68 = v120;
+                v67 = v120;
+                v68 = v118;
+                v69 = v121;
                 v4 = *(float *)&FLOAT_1_0;
               }
             }
@@ -1277,85 +1265,71 @@ LABEL_85:
             768,
             (void (__fastcall *)(void *))UFG::qSafePointer<AnimationGroup,AnimationGroup>::~qSafePointer<AnimationGroup,AnimationGroup>);
         }
-        goto LABEL_112;
+        goto LABEL_113;
       }
-      v53 = (unsigned int)v47[1].vfptr;
-      v54 = v47->m_Components.size;
-      if ( v53 >= v54 )
-        goto LABEL_42;
+      v54 = (unsigned int)v48[1].vfptr;
+      v55 = v48->m_Components.size;
+      if ( v54 >= v55 )
+        goto LABEL_43;
       while ( 1 )
       {
-        v52 = (signed __int64)&v47->m_Components.p[v53];
-        if ( (*(_DWORD *)(v52 + 8) & 0xFE000000) == (UFG::SensorComponent::_TypeUID & 0xFE000000)
-          && !(UFG::SensorComponent::_TypeUID & ~*(_DWORD *)(v52 + 8) & 0x1FFFFFF) )
+        v53 = (__int64)&v48->m_Components.p[v54];
+        if ( (*(_DWORD *)(v53 + 8) & 0xFE000000) == (UFG::SensorComponent::_TypeUID & 0xFE000000)
+          && (UFG::SensorComponent::_TypeUID & ~*(_DWORD *)(v53 + 8) & 0x1FFFFFF) == 0 )
         {
           break;
         }
-        if ( ++v53 >= v54 )
-          goto LABEL_42;
+        if ( ++v54 >= v55 )
+          goto LABEL_43;
       }
     }
-    v48 = *(UFG::SensorComponent **)v52;
-    goto LABEL_61;
+    m_pComponent = *(UFG::SensorComponent **)v53;
+    goto LABEL_62;
   }
-LABEL_112:
-  v106 = v3->mFocusParkourHandle.m_pPointer;
-  if ( v106 )
+LABEL_113:
+  v107 = this->mFocusParkourHandle.m_pPointer;
+  if ( v107 )
   {
-    if ( v3->mFocusLatchCount > 10 )
+    if ( this->mFocusLatchCount > 10 )
     {
-      *((_DWORD *)v106 + 38) &= 0xFFFFFFFE;
-      v107 = &v3->mFocusParkourHandle;
-      if ( v3->mFocusParkourHandle.m_pPointer )
+      *((_DWORD *)v107 + 38) &= ~1u;
+      p_mFocusParkourHandle = &this->mFocusParkourHandle;
+      if ( this->mFocusParkourHandle.m_pPointer )
       {
-        v108 = v107->mPrev;
-        v109 = v3->mFocusParkourHandle.mNext;
-        v108->mNext = v109;
-        v109->mPrev = v108;
-        v107->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v107->mPrev;
-        v3->mFocusParkourHandle.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v3->mFocusParkourHandle.mPrev;
+        v109 = p_mFocusParkourHandle->mPrev;
+        v110 = this->mFocusParkourHandle.mNext;
+        v109->mNext = v110;
+        v110->mPrev = v109;
+        p_mFocusParkourHandle->mPrev = p_mFocusParkourHandle;
+        this->mFocusParkourHandle.mNext = &this->mFocusParkourHandle;
       }
-      v3->mFocusParkourHandle.m_pPointer = 0i64;
+      this->mFocusParkourHandle.m_pPointer = 0i64;
     }
-    ++v3->mFocusLatchCount;
+    ++this->mFocusLatchCount;
   }
-  v110 = &v3->mAttachments.mNode.mNext[-1].mNext;
-  for ( j = (signed __int64)&v3->mbSyncingCoverParkour;
-        v110 != (UFG::qNode<Attachment,Attachment> **)j;
-        v110 = &v110[2][-1].mNext )
-  {
-    ((void (__fastcall *)(UFG::qNode<Attachment,Attachment> **))(*v110)->mNext)(v110);
-  }
-}ePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v107->mPrev;
-        v3->mFocusParkourHandle.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *)&v3->mFocusParkourHandle.mPrev;
-      }
-      v3->mFocusParkourHandle.m_pPointer = 0i64;
-    }
-    ++v3->mFocusLatchCount;
-  }
-  v110 = &v3->mAttachments.mNode.mNext[-1].mNext;
-  for ( j = (signed __int64)&v3->mbSyncingCoverParkour;
- 
+  p_mNext = (bool *)&this->mAttachments.mNode.mNext[-1].mNext;
+  for ( j = &this->mbSyncingCoverParkour; p_mNext != j; p_mNext = (bool *)(*((_QWORD *)p_mNext + 2) - 8i64) )
+    (*(void (__fastcall **)(bool *))(*(_QWORD *)p_mNext + 8i64))(p_mNext);
+}
 
 // File Line: 737
 // RVA: 0x564070
-void __fastcall UFG::adjustTransformInReferanceFrame_RotX(UFG::qMatrix44 *inputOutputFrame, UFG::qMatrix44 *adjustmentFrame, float rotX)
+void __fastcall UFG::adjustTransformInReferanceFrame_RotX(
+        UFG::qMatrix44 *inputOutputFrame,
+        UFG::qMatrix44 *adjustmentFrame,
+        float rotX)
 {
-  UFG::qMatrix44 *v3; // rdi
-  UFG::qMatrix44 *v4; // rbx
   UFG::qMatrix44 *v5; // rax
   UFG::qVector4 v6; // xmm3
   UFG::qVector4 v7; // xmm2
   UFG::qVector4 v8; // xmm1
-  UFG::qMatrix44 result; // [rsp+20h] [rbp-188h]
-  UFG::qMatrix44 dest; // [rsp+60h] [rbp-148h]
-  UFG::qMatrix44 b; // [rsp+A0h] [rbp-108h]
-  UFG::qMatrix44 v12; // [rsp+E0h] [rbp-C8h]
+  UFG::qMatrix44 result; // [rsp+20h] [rbp-188h] BYREF
+  UFG::qMatrix44 dest; // [rsp+60h] [rbp-148h] BYREF
+  UFG::qMatrix44 b; // [rsp+A0h] [rbp-108h] BYREF
+  UFG::qMatrix44 v12; // [rsp+E0h] [rbp-C8h] BYREF
 
-  v3 = inputOutputFrame;
-  v4 = adjustmentFrame;
   UFG::qInverseAffine(&b, adjustmentFrame);
-  UFG::qMatrix44::operator*(v3, &result, &b);
+  UFG::qMatrix44::operator*(inputOutputFrame, &result, &b);
   UFG::qRotationMatrixX(&dest, rotX);
   result.v0 = (UFG::qVector4)_mm_add_ps(
                                _mm_add_ps(
@@ -1401,15 +1375,17 @@ void __fastcall UFG::adjustTransformInReferanceFrame_RotX(UFG::qMatrix44 *inputO
                                      (__m128)0i64)),
                                  _mm_mul_ps(_mm_shuffle_ps((__m128)result.v3, (__m128)result.v3, 170), (__m128)dest.v2)),
                                _mm_mul_ps(_mm_shuffle_ps((__m128)result.v3, (__m128)result.v3, 255), (__m128)dest.v3));
-  v5 = UFG::qMatrix44::operator*(&result, &v12, v4);
+  v5 = UFG::qMatrix44::operator*(&result, &v12, adjustmentFrame);
   v6 = v5->v1;
   v7 = v5->v2;
   v8 = v5->v3;
-  v3->v0 = v5->v0;
-  v3->v1 = v6;
-  v3->v2 = v7;
-  v3->v3 = v8;
-}
+  inputOutputFrame->v0 = v5->v0;
+  inputOutputFrame->v1 = v6;
+  inputOutputFrame->v2 = v7;
+  inputOutputFrame->v3 = v8;
+} = v6;
+  inputOutputFrame->v2 = v7;
+  inputOutputFram
 
 // File Line: 751
 // RVA: 0x154C560
@@ -1417,7 +1393,7 @@ __int64 UFG::_dynamic_initializer_for__sLeftArmIKNameUID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("LeftArmIK", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("LeftArmIK", -1);
   UFG::sLeftArmIKNameUID = result;
   return result;
 }
@@ -1428,7 +1404,7 @@ __int64 UFG::_dynamic_initializer_for__sRightArmIKNameUID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("RightArmIK", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("RightArmIK", -1);
   UFG::sRightArmIKNameUID = result;
   return result;
 }
@@ -1439,7 +1415,7 @@ __int64 UFG::_dynamic_initializer_for__sLeftLegIKNameUID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("LeftLegIK", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("LeftLegIK", -1);
   UFG::sLeftLegIKNameUID = result;
   return result;
 }
@@ -1450,7 +1426,7 @@ __int64 UFG::_dynamic_initializer_for__sRightLegIKNameUID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("RightLegIK", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("RightLegIK", -1);
   UFG::sRightLegIKNameUID = result;
   return result;
 }
@@ -1461,7 +1437,7 @@ __int64 UFG::_dynamic_initializer_for__sRightShoulderTwistUID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("RightShoulderTwist", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("RightShoulderTwist", -1);
   UFG::sRightShoulderTwistUID = result;
   return result;
 }
@@ -1472,7 +1448,7 @@ __int64 UFG::_dynamic_initializer_for__sLeftShoulderTwistUID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("LeftShoulderTwist", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("LeftShoulderTwist", -1);
   UFG::sLeftShoulderTwistUID = result;
   return result;
 }
@@ -1483,7 +1459,7 @@ __int64 UFG::_dynamic_initializer_for__sRightForearmTwistUID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("RightForearmTwist", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("RightForearmTwist", -1);
   UFG::sRightForearmTwistUID = result;
   return result;
 }
@@ -1494,7 +1470,7 @@ __int64 UFG::_dynamic_initializer_for__sLeftForearmTwistUID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("LeftForearmTwist", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("LeftForearmTwist", -1);
   UFG::sLeftForearmTwistUID = result;
   return result;
 }
@@ -1504,59 +1480,55 @@ __int64 UFG::_dynamic_initializer_for__sLeftForearmTwistUID__()
 __int64 UFG::_dynamic_initializer_for__sSyncUID__()
 {
   UFG::qSymbolUC::create_from_string(&UFG::sSyncUID, "Sync01");
-  return atexit(UFG::_dynamic_atexit_destructor_for__sSyncUID__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__sSyncUID__);
 }
 
 // File Line: 775
 // RVA: 0x56DAD0
 void __fastcall UFG::syncHands(Creature *creature, UFG::qVector3 *origin, UFG::qVector3 *axis)
 {
-  UFG::qVector3 *v3; // rbx
-  Creature *v4; // rbp
-  signed __int64 v5; // rdi
-  UFG::qNode<PoseDriver,PoseDriver> *v6; // rax
-  UFG::qList<UFG::qSafePointerBase<Creature>,UFG::qSafePointerNodeList,1,0> *v7; // rcx
-  signed __int64 v8; // rax
-  signed __int64 v9; // r15
-  signed __int64 v10; // r14
-  signed __int64 v11; // rsi
+  __int64 v5; // rdi
+  UFG::qNode<PoseDriver,PoseDriver> *mNext; // rax
+  UFG::qList<UFG::qSafePointerBase<Creature>,UFG::qSafePointerNodeList,1,0> *p_m_SafePointerList; // rcx
+  __int64 v8; // rax
+  __int64 v9; // r15
+  __int64 v10; // r14
+  __int64 v11; // rsi
   __int64 v12; // rdx
   __int64 v13; // rdx
   int v14; // eax
   int v15; // eax
   bool v16; // zf
   __m128 v17; // xmm2
-  int v18; // eax
-  float v19; // xmm5_4
-  __m128 v20; // xmm2
+  int BoneID; // eax
+  float x; // xmm5_4
+  __m128 y_low; // xmm2
   float v21; // xmm4_4
   __m128 v22; // xmm1
   float v23; // xmm3_4
-  float v24; // xmm8_4
+  float z; // xmm8_4
   float v25; // xmm2_4
   float v26; // xmm0_4
   int v27; // xmm6_4
   __int64 v28; // rdx
-  UFG::qMatrix44 adjustmentFrame; // [rsp+20h] [rbp-148h]
+  UFG::qMatrix44 adjustmentFrame; // [rsp+20h] [rbp-148h] BYREF
   __m128 v30; // [rsp+60h] [rbp-108h]
   __m128 v31; // [rsp+70h] [rbp-F8h]
   __m128 v32; // [rsp+80h] [rbp-E8h]
   __m128 v33; // [rsp+90h] [rbp-D8h]
-  UFG::qMatrix44 transform; // [rsp+A0h] [rbp-C8h]
-  UFG::qMatrix44 inputOutputFrame; // [rsp+E0h] [rbp-88h]
+  UFG::qMatrix44 transform; // [rsp+A0h] [rbp-C8h] BYREF
+  UFG::qMatrix44 inputOutputFrame; // [rsp+E0h] [rbp-88h] BYREF
 
-  v3 = axis;
-  v4 = creature;
   if ( sEnableSyncHands )
   {
     v5 = 0i64;
-    v6 = creature->mPoseDrivers.mNode.mNext;
-    v7 = &creature->m_SafePointerList;
-    v8 = (signed __int64)&v6[-1];
+    mNext = creature->mPoseDrivers.mNode.mNext;
+    p_m_SafePointerList = &creature->m_SafePointerList;
+    v8 = (__int64)&mNext[-1];
     v9 = 0i64;
     v10 = 0i64;
     v11 = 0i64;
-    if ( (UFG::qList<UFG::qSafePointerBase<Creature>,UFG::qSafePointerNodeList,1,0> *)v8 != v7 )
+    if ( (UFG::qList<UFG::qSafePointerBase<Creature>,UFG::qSafePointerNodeList,1,0> *)v8 != p_m_SafePointerList )
     {
       v12 = (unsigned int)sEnableForarmTwistTest;
       do
@@ -1574,23 +1546,23 @@ void __fastcall UFG::syncHands(Creature *creature, UFG::qVector3 *origin, UFG::q
         }
         v8 = *(_QWORD *)(v8 + 24) - 16i64;
       }
-      while ( (UFG::qList<UFG::qSafePointerBase<Creature>,UFG::qSafePointerNodeList,1,0> *)v8 != v7 );
+      while ( (UFG::qList<UFG::qSafePointerBase<Creature>,UFG::qSafePointerNodeList,1,0> *)v8 != p_m_SafePointerList );
       if ( v5 && v9 )
       {
         LOBYTE(v12) = 1;
-        (*(void (__fastcall **)(signed __int64, __int64, _QWORD, _QWORD))(*(_QWORD *)v5 + 88i64))(
+        (*(void (__fastcall **)(__int64, __int64, _QWORD, _QWORD))(*(_QWORD *)v5 + 88i64))(
           v5,
           v12,
           UFG::sLeftArmIKNameUID,
           UFG::sRightArmIKNameUID);
         LOBYTE(v13) = 1;
-        (*(void (__fastcall **)(signed __int64, __int64))(*(_QWORD *)v9 + 88i64))(v9, v13);
-        v14 = (*(__int64 (__fastcall **)(signed __int64))(*(_QWORD *)v5 + 112i64))(v5);
-        Creature::GetTransform(v4, v14, &transform);
-        v15 = (*(__int64 (__fastcall **)(signed __int64))(*(_QWORD *)v9 + 112i64))(v9);
-        Creature::GetTransform(v4, v15, &inputOutputFrame);
-        Creature::GetTransform(v4, sFollowJointID, &adjustmentFrame);
-        v16 = v4->mPose.mRigHandle.mData == 0i64;
+        (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)v9 + 88i64))(v9, v13);
+        v14 = (*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v5 + 112i64))(v5);
+        Creature::GetTransform(creature, v14, &transform);
+        v15 = (*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v9 + 112i64))(v9);
+        Creature::GetTransform(creature, v15, &inputOutputFrame);
+        Creature::GetTransform(creature, sFollowJointID, &adjustmentFrame);
+        v16 = creature->mPose.mRigHandle.mData == 0i64;
         v17 = 0i64;
         v17.m128_f32[0] = (float)1;
         v30 = v17;
@@ -1598,22 +1570,22 @@ void __fastcall UFG::syncHands(Creature *creature, UFG::qVector3 *origin, UFG::q
         v31 = _mm_shuffle_ps(v17, v17, 81);
         v32 = _mm_shuffle_ps(v17, v17, 69);
         if ( v16 )
-          v18 = -1;
+          BoneID = -1;
         else
-          v18 = Skeleton::GetBoneID(v4->mPose.mRigHandle.mUFGSkeleton, UFG::sSyncUID.mUID);
-        Creature::GetTransform(v4, v18, &adjustmentFrame);
-        v19 = v3->x;
-        v20 = (__m128)LODWORD(v3->y);
+          BoneID = Skeleton::GetBoneID(creature->mPose.mRigHandle.mUFGSkeleton, UFG::sSyncUID.mUID);
+        Creature::GetTransform(creature, BoneID, &adjustmentFrame);
+        x = axis->x;
+        y_low = (__m128)LODWORD(axis->y);
         v21 = *(float *)&FLOAT_1_0;
-        v22 = v20;
-        v22.m128_f32[0] = (float)(v20.m128_f32[0] * v20.m128_f32[0]) + (float)(v19 * v19);
+        v22 = y_low;
+        v22.m128_f32[0] = (float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(x * x);
         if ( v22.m128_f32[0] == 0.0 )
           v23 = 0.0;
         else
-          v23 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v22));
-        v24 = v3->z;
-        v25 = (float)((float)(v20.m128_f32[0] * (float)(v20.m128_f32[0] * v23)) + (float)(v19 * (float)(v19 * v23)))
-            + (float)(v3->z * (float)(v23 * 0.0));
+          v23 = 1.0 / _mm_sqrt_ps(v22).m128_f32[0];
+        z = axis->z;
+        v25 = (float)((float)(y_low.m128_f32[0] * (float)(y_low.m128_f32[0] * v23)) + (float)(x * (float)(x * v23)))
+            + (float)(z * (float)(v23 * 0.0));
         if ( v25 <= -1.0 )
         {
           v25 = FLOAT_N1_0;
@@ -1626,36 +1598,35 @@ void __fastcall UFG::syncHands(Creature *creature, UFG::qVector3 *origin, UFG::q
 LABEL_31:
         v26 = acosf(v21);
         v27 = LODWORD(v26);
-        if ( v24 < 0.0 )
+        if ( z < 0.0 )
           v27 = LODWORD(v26) ^ _xmm[0];
         UFG::adjustTransformInReferanceFrame_RotX(&transform, &adjustmentFrame, *(float *)&v27);
         UFG::adjustTransformInReferanceFrame_RotX(&inputOutputFrame, &adjustmentFrame, *(float *)&v27);
-        (*(void (__fastcall **)(signed __int64, SkeletalPose *, UFG::qMatrix44 *))(*(_QWORD *)v5 + 120i64))(
+        (*(void (__fastcall **)(__int64, SkeletalPose *, UFG::qMatrix44 *))(*(_QWORD *)v5 + 120i64))(
           v5,
-          &v4->mPose,
+          &creature->mPose,
           &transform);
-        (*(void (__fastcall **)(signed __int64, SkeletalPose *, UFG::qMatrix44 *))(*(_QWORD *)v9 + 120i64))(
+        (*(void (__fastcall **)(__int64, SkeletalPose *, UFG::qMatrix44 *))(*(_QWORD *)v9 + 120i64))(
           v9,
-          &v4->mPose,
+          &creature->mPose,
           &inputOutputFrame);
         if ( v10 )
         {
           LOBYTE(v28) = 1;
-          (*(void (__fastcall **)(signed __int64, __int64))(*(_QWORD *)v10 + 88i64))(v10, v28);
+          (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)v10 + 88i64))(v10, v28);
         }
         if ( v11 )
         {
           LOBYTE(v28) = 1;
-          (*(void (__fastcall **)(signed __int64, __int64))(*(_QWORD *)v11 + 88i64))(v11, v28);
+          (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)v11 + 88i64))(v11, v28);
         }
-        Creature::updateEffectorsToPose(v4);
-        (*(void (__fastcall **)(signed __int64, _QWORD))(*(_QWORD *)v5 + 88i64))(v5, 0i64);
-        (*(void (__fastcall **)(signed __int64, _QWORD))(*(_QWORD *)v9 + 88i64))(v9, 0i64);
+        Creature::updateEffectorsToPose(creature);
+        (*(void (__fastcall **)(__int64, _QWORD))(*(_QWORD *)v5 + 88i64))(v5, 0i64);
+        (*(void (__fastcall **)(__int64, _QWORD))(*(_QWORD *)v9 + 88i64))(v9, 0i64);
         if ( v10 )
-          (*(void (__fastcall **)(signed __int64, _QWORD))(*(_QWORD *)v10 + 88i64))(v10, 0i64);
+          (*(void (__fastcall **)(__int64, _QWORD))(*(_QWORD *)v10 + 88i64))(v10, 0i64);
         if ( v11 )
-          (*(void (__fastcall **)(signed __int64, _QWORD))(*(_QWORD *)v11 + 88i64))(v11, 0i64);
-        return;
+          (*(void (__fastcall **)(__int64, _QWORD))(*(_QWORD *)v11 + 88i64))(v11, 0i64);
       }
     }
   }
@@ -1670,32 +1641,31 @@ void UFG::_dynamic_initializer_for__sGroundNormalFilter__()
 
 // File Line: 894
 // RVA: 0x563E30
-__int64 __fastcall UFG::adJustEffectorToGround(Creature *creature, int jointID, UFG::qMatrix44 *inputOutupMatrix, UFG::CollisionLayers layer, float legUp)
+__int64 __fastcall UFG::adJustEffectorToGround(
+        Creature *creature,
+        int jointID,
+        UFG::qMatrix44 *inputOutupMatrix,
+        unsigned int layer,
+        float legUp)
 {
-  unsigned int v5; // ebx
-  UFG::qMatrix44 *v6; // rsi
   unsigned __int8 v7; // di
-  float v8; // xmm6_4
-  float v9; // xmm5_4
-  float v10; // xmm2_4
-  float v11; // xmm3_4
-  float v12; // xmm0_4
-  float v13; // xmm1_4
-  float v14; // xmm0_4
-  Render::DebugDrawContext *v15; // rbx
-  Render::DebugDrawContext *v16; // rax
-  UFG::qColour *v17; // r9
-  UFG::qVector3 rayStart; // [rsp+40h] [rbp-C0h]
-  UFG::qVector3 rayEnd; // [rsp+50h] [rbp-B0h]
-  UFG::RayCastData data; // [rsp+60h] [rbp-A0h]
+  float x; // xmm6_4
+  float y; // xmm5_4
+  float z; // xmm3_4
+  float v11; // xmm0_4
+  float v12; // xmm1_4
+  float v13; // xmm0_4
+  Render::DebugDrawContext *Context; // rbx
+  Render::DebugDrawContext *v15; // rax
+  UFG::qColour *v16; // r9
+  UFG::qVector3 rayStart; // [rsp+40h] [rbp-C0h] BYREF
+  UFG::qVector3 rayEnd; // [rsp+50h] [rbp-B0h] BYREF
+  UFG::RayCastData data; // [rsp+60h] [rbp-A0h] BYREF
 
-  v5 = layer;
-  v6 = inputOutupMatrix;
   v7 = 0;
   Creature::GetTransform(creature, jointID, inputOutupMatrix);
-  v8 = v6->v3.x;
-  v9 = v6->v3.y;
-  v10 = v6->v3.x;
+  x = inputOutupMatrix->v3.x;
+  y = inputOutupMatrix->v3.y;
   data.mInput.m_enableShapeCollectionFilter.m_bool = 0;
   LODWORD(data.mOutput.m_hitFraction) = (_DWORD)FLOAT_1_0;
   data.mInput.m_filterInfo = 0;
@@ -1704,77 +1674,73 @@ __int64 __fastcall UFG::adJustEffectorToGround(Creature *creature, int jointID, 
   data.mOutput.m_shapeKeyIndex = 0;
   data.mOutput.m_shapeKeys[0] = -1;
   data.mOutput.m_rootCollidable = 0i64;
-  v11 = v6->v3.z;
-  rayStart.x = v10 + (float)(UFG::qVector3::msDirUp.x * legUp);
+  z = inputOutupMatrix->v3.z;
+  rayStart.x = x + (float)(UFG::qVector3::msDirUp.x * legUp);
   data.mDebugName = 0i64;
   data.mCollisionModelName.mUID = -1;
-  rayStart.y = v9 + (float)(UFG::qVector3::msDirUp.y * legUp);
-  rayEnd.x = v8 - (float)(UFG::qVector3::msDirUp.x * sDownLeg);
-  rayEnd.y = v9 - (float)(UFG::qVector3::msDirUp.y * sDownLeg);
-  rayEnd.z = v11 - (float)(UFG::qVector3::msDirUp.z * sDownLeg);
-  rayStart.z = v11 + (float)(UFG::qVector3::msDirUp.z * legUp);
-  UFG::RayCastData::Init(&data, &rayStart, &rayEnd, v5);
+  rayStart.y = y + (float)(UFG::qVector3::msDirUp.y * legUp);
+  rayEnd.x = x - (float)(UFG::qVector3::msDirUp.x * sDownLeg);
+  rayEnd.y = y - (float)(UFG::qVector3::msDirUp.y * sDownLeg);
+  rayEnd.z = z - (float)(UFG::qVector3::msDirUp.z * sDownLeg);
+  rayStart.z = z + (float)(UFG::qVector3::msDirUp.z * legUp);
+  UFG::RayCastData::Init(&data, &rayStart, &rayEnd, layer);
   if ( UFG::BasePhysicsSystem::CastRay(UFG::BasePhysicsSystem::mInstance, &data) )
   {
-    v12 = data.point.x;
-    v13 = data.point.y;
+    v11 = data.point.x;
+    v12 = data.point.y;
     v7 = 0;
-    v6->v3.w = 1.0;
-    v6->v3.x = v12;
-    v14 = data.point.z;
-    v6->v3.y = v13;
-    v6->v3.z = v14;
+    inputOutupMatrix->v3.w = 1.0;
+    inputOutupMatrix->v3.x = v11;
+    v13 = data.point.z;
+    inputOutupMatrix->v3.y = v12;
+    inputOutupMatrix->v3.z = v13;
     if ( data.normal.z >= sGroundNormalFilter )
       v7 = 1;
   }
   if ( sDebugDraw )
   {
-    v15 = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 2u);
-    v16 = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 1u);
+    Context = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 2u);
+    v15 = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 1u);
     if ( v7 )
     {
-      Render::DebugDrawContext::DrawCoord(v16, v6, sContactScale, 0i64);
-      v17 = &UFG::qColour::Gold;
+      Render::DebugDrawContext::DrawCoord(v15, inputOutupMatrix, sContactScale, 0i64);
+      v16 = &UFG::qColour::Gold;
     }
     else
     {
-      v17 = &UFG::qColour::DeepPink;
+      v16 = &UFG::qColour::DeepPink;
     }
-    Render::DebugDrawContext::DrawLine(v15, &rayStart, &rayEnd, v17, &UFG::qMatrix44::msIdentity, 0i64, 0);
+    Render::DebugDrawContext::DrawLine(Context, &rayStart, &rayEnd, v16, &UFG::qMatrix44::msIdentity, 0i64, 0);
   }
   return v7;
 }
 
 // File Line: 942
 // RVA: 0x56D880
-void __fastcall UFG::syncFeet(Creature *creature, UFG::CollisionLayers layer, float legUp)
+void __fastcall UFG::syncFeet(Creature *creature, unsigned int layer, float legUp)
 {
-  UFG::CollisionLayers v3; // ebp
-  Creature *v4; // rsi
-  UFG::qNode<PoseDriver,PoseDriver> *v5; // rax
-  signed __int64 v6; // rbx
-  UFG::qList<UFG::qSafePointerBase<Creature>,UFG::qSafePointerNodeList,1,0> *v7; // rcx
-  signed __int64 v8; // rax
-  signed __int64 v9; // rdi
+  UFG::qNode<PoseDriver,PoseDriver> *mNext; // rax
+  __int64 v6; // rbx
+  UFG::qList<UFG::qSafePointerBase<Creature>,UFG::qSafePointerNodeList,1,0> *p_m_SafePointerList; // rcx
+  __int64 v8; // rax
+  __int64 v9; // rdi
   int v10; // eax
   __int64 v11; // rdx
   __int64 v12; // rax
   int v13; // eax
   __int64 v14; // rdx
   __int64 v15; // rax
-  UFG::qMatrix44 inputOutupMatrix; // [rsp+30h] [rbp-98h]
-  UFG::qMatrix44 v17; // [rsp+70h] [rbp-58h]
+  UFG::qMatrix44 inputOutupMatrix; // [rsp+30h] [rbp-98h] BYREF
+  UFG::qMatrix44 v17; // [rsp+70h] [rbp-58h] BYREF
 
-  v3 = layer;
-  v4 = creature;
   if ( sEnableSyncFeet )
   {
-    v5 = creature->mPoseDrivers.mNode.mNext;
+    mNext = creature->mPoseDrivers.mNode.mNext;
     v6 = 0i64;
-    v7 = &creature->m_SafePointerList;
-    v8 = (signed __int64)&v5[-1];
+    p_m_SafePointerList = &creature->m_SafePointerList;
+    v8 = (__int64)&mNext[-1];
     v9 = 0i64;
-    if ( (UFG::qList<UFG::qSafePointerBase<Creature>,UFG::qSafePointerNodeList,1,0> *)v8 != v7 )
+    if ( (UFG::qList<UFG::qSafePointerBase<Creature>,UFG::qSafePointerNodeList,1,0> *)v8 != p_m_SafePointerList )
     {
       do
       {
@@ -1784,14 +1750,14 @@ void __fastcall UFG::syncFeet(Creature *creature, UFG::CollisionLayers layer, fl
           v9 = v8;
         v8 = *(_QWORD *)(v8 + 24) - 16i64;
       }
-      while ( (UFG::qList<UFG::qSafePointerBase<Creature>,UFG::qSafePointerNodeList,1,0> *)v8 != v7 );
+      while ( (UFG::qList<UFG::qSafePointerBase<Creature>,UFG::qSafePointerNodeList,1,0> *)v8 != p_m_SafePointerList );
       if ( v6 && v9 )
       {
-        v10 = (*(__int64 (__fastcall **)(signed __int64, _QWORD, _QWORD))(*(_QWORD *)v6 + 112i64))(
+        v10 = (*(__int64 (__fastcall **)(__int64, _QWORD, _QWORD))(*(_QWORD *)v6 + 112i64))(
                 v6,
                 UFG::sLeftLegIKNameUID,
                 UFG::sRightLegIKNameUID);
-        if ( (unsigned __int8)UFG::adJustEffectorToGround(v4, v10, &inputOutupMatrix, v3, legUp) )
+        if ( (unsigned __int8)UFG::adJustEffectorToGround(creature, v10, &inputOutupMatrix, layer, legUp) )
         {
           v12 = *(_QWORD *)v6;
           LOBYTE(v11) = 1;
@@ -1799,14 +1765,14 @@ void __fastcall UFG::syncFeet(Creature *creature, UFG::CollisionLayers layer, fl
           inputOutupMatrix.v3.x = inputOutupMatrix.v3.x + (float)(UFG::qVector3::msDirUp.x * sDownLeg);
           inputOutupMatrix.v3.y = inputOutupMatrix.v3.y + (float)(UFG::qVector3::msDirUp.y * sDownLeg);
           inputOutupMatrix.v3.z = inputOutupMatrix.v3.z + (float)(UFG::qVector3::msDirUp.z * sDownLeg);
-          (*(void (__fastcall **)(signed __int64, __int64))(v12 + 88))(v6, v11);
-          (*(void (__fastcall **)(signed __int64, SkeletalPose *, UFG::qMatrix44 *))(*(_QWORD *)v6 + 120i64))(
+          (*(void (__fastcall **)(__int64, __int64))(v12 + 88))(v6, v11);
+          (*(void (__fastcall **)(__int64, SkeletalPose *, UFG::qMatrix44 *))(*(_QWORD *)v6 + 120i64))(
             v6,
-            &v4->mPose,
+            &creature->mPose,
             &inputOutupMatrix);
         }
-        v13 = (*(__int64 (__fastcall **)(signed __int64))(*(_QWORD *)v9 + 112i64))(v9);
-        if ( (unsigned __int8)UFG::adJustEffectorToGround(v4, v13, &v17, v3, legUp) )
+        v13 = (*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v9 + 112i64))(v9);
+        if ( (unsigned __int8)UFG::adJustEffectorToGround(creature, v13, &v17, layer, legUp) )
         {
           v15 = *(_QWORD *)v9;
           LOBYTE(v14) = 1;
@@ -1814,15 +1780,15 @@ void __fastcall UFG::syncFeet(Creature *creature, UFG::CollisionLayers layer, fl
           v17.v3.x = v17.v3.x + (float)(UFG::qVector3::msDirUp.x * sDownLeg);
           v17.v3.y = v17.v3.y + (float)(UFG::qVector3::msDirUp.y * sDownLeg);
           v17.v3.z = v17.v3.z + (float)(UFG::qVector3::msDirUp.z * sDownLeg);
-          (*(void (__fastcall **)(signed __int64, __int64))(v15 + 88))(v9, v14);
-          (*(void (__fastcall **)(signed __int64, SkeletalPose *, UFG::qMatrix44 *))(*(_QWORD *)v9 + 120i64))(
+          (*(void (__fastcall **)(__int64, __int64))(v15 + 88))(v9, v14);
+          (*(void (__fastcall **)(__int64, SkeletalPose *, UFG::qMatrix44 *))(*(_QWORD *)v9 + 120i64))(
             v9,
-            &v4->mPose,
+            &creature->mPose,
             &v17);
         }
-        Creature::updateEffectorsToPose(v4);
-        (*(void (__fastcall **)(signed __int64, _QWORD))(*(_QWORD *)v6 + 88i64))(v6, 0i64);
-        (*(void (__fastcall **)(signed __int64, _QWORD))(*(_QWORD *)v9 + 88i64))(v9, 0i64);
+        Creature::updateEffectorsToPose(creature);
+        (*(void (__fastcall **)(__int64, _QWORD))(*(_QWORD *)v6 + 88i64))(v6, 0i64);
+        (*(void (__fastcall **)(__int64, _QWORD))(*(_QWORD *)v9 + 88i64))(v9, 0i64);
       }
     }
   }
@@ -1832,450 +1798,429 @@ void __fastcall UFG::syncFeet(Creature *creature, UFG::CollisionLayers layer, fl
 // RVA: 0x5619B0
 void __fastcall UFG::WorldContextComponent::UpdateTransformsPost(UFG::WorldContextComponent *this)
 {
-  UFG::WorldContextComponent *v1; // rsi
   UFG::SimComponent *v2; // r14
-  UFG::SimObjectProp *v3; // rcx
-  unsigned __int16 v4; // dx
+  UFG::SimObjectProp *m_pSimObject; // rcx
+  __int16 m_Flags; // dx
   __int64 v5; // rdx
-  UFG::CharacterAnimationComponent *v6; // rcx
-  UFG::CharacterAnimationComponent *v7; // rax
+  UFG::CharacterAnimationComponent *m_pComponent; // rcx
+  UFG::CharacterAnimationComponent *ComponentOfType; // rax
   bool v8; // zf
-  unsigned int v9; // er9
-  unsigned int v10; // er11
-  signed __int64 v11; // r8
-  Creature *v12; // r15
-  float v13; // xmm10_4
-  float v14; // xmm11_4
+  unsigned int mComponentTableEntryCount; // r9d
+  unsigned int size; // r11d
+  __int64 v11; // r8
+  Creature *mCreature; // r15
+  float x; // xmm10_4
+  float y; // xmm11_4
   __m128 v15; // xmm7
-  UFG::CoverPosition *v16; // rcx
-  UFG::CoverCornerHandle *v17; // rcx
+  UFG::CoverPosition *mpCoverPosition; // rcx
+  UFG::CoverCornerHandle *p_m_LeftCorner; // rcx
   UFG::CoverCorner *v18; // rax
   float v19; // xmm8_4
   float v20; // xmm9_4
-  __m128 v21; // xmm5
+  __m128 z_low; // xmm5
   float v22; // xmm6_4
-  float v23; // xmm0_4
-  __m128 v24; // xmm2
-  float v25; // xmm14_4
-  float v26; // xmm9_4
-  float v27; // xmm8_4
-  float v28; // xmm9_4
-  float v29; // xmm0_4
-  float v30; // xmm6_4
-  float v31; // xmm0_4
-  float v32; // xmm3_4
-  float v33; // xmm4_4
-  UFG::qVector4 v34; // xmm1
-  UFG::ParkourHandle *v35; // rbx
-  UFG::CoverPosition *v36; // rbx
-  UFG::qVector3 *v37; // rax
-  float v38; // xmm15_4
-  float v39; // xmm6_4
-  float v40; // xmm9_4
-  UFG::qVector3 *v41; // rax
-  float v42; // xmm3_4
-  __m128 v43; // xmm4
-  float v44; // xmm5_4
-  __m128 v45; // xmm2
-  float v46; // xmm10_4
-  float v47; // xmm11_4
-  float v48; // xmm0_4
-  float v49; // xmm6_4
-  float v50; // xmm9_4
-  float v51; // xmm15_4
-  float v52; // xmm0_4
+  __m128 v23; // xmm2
+  float v24; // xmm14_4
+  float v25; // xmm9_4
+  float v26; // xmm8_4
+  float v27; // xmm9_4
+  float SideOffset; // xmm6_4
+  float FrontOffset; // xmm0_4
+  float v30; // xmm3_4
+  float v31; // xmm4_4
+  UFG::qVector4 v32; // xmm1
+  UFG::ParkourHandle *m_pPointer; // rbx
+  UFG::CoverPosition *v34; // rbx
+  UFG::qVector3 *Position; // rax
+  float v36; // xmm15_4
+  float v37; // xmm6_4
+  float z; // xmm9_4
+  UFG::qVector3 *Axis; // rax
+  float v40; // xmm3_4
+  __m128 x_low; // xmm4
+  float v42; // xmm5_4
+  __m128 v43; // xmm2
+  float v44; // xmm10_4
+  float v45; // xmm11_4
+  float HalfLength; // xmm0_4
+  float v47; // xmm6_4
+  float v48; // xmm9_4
+  float v49; // xmm15_4
+  float v50; // xmm0_4
+  float v51; // xmm13_4
+  UFG::CoverPosition *v52; // rcx
   float v53; // xmm13_4
-  UFG::CoverPosition *v54; // rcx
-  float v55; // xmm13_4
-  __m128 v56; // xmm6
-  float v57; // xmm9_4
+  __m128 v54; // xmm6
+  float v55; // xmm9_4
+  __m128 v56; // xmm2
+  float v57; // xmm8_4
   float v58; // xmm0_4
-  __m128 v59; // xmm2
-  float v60; // xmm8_4
-  float v61; // xmm0_4
-  UFG::CoverPosition *v62; // rax
-  float v63; // xmm13_4
-  float v64; // xmm6_4
-  float v65; // xmm9_4
-  int v66; // xmm1_4
-  float v67; // xmm0_4
+  UFG::CoverPosition *v59; // rax
+  float v60; // xmm13_4
+  float v61; // xmm6_4
+  float v62; // xmm9_4
+  int v63; // xmm1_4
+  float v64; // xmm0_4
+  float v65; // xmm0_4
+  float m_fDistToLeft; // xmm6_4
+  float m_fDistToRight; // xmm9_4
   float v68; // xmm0_4
-  float v69; // xmm6_4
-  float v70; // xmm9_4
-  float v71; // xmm0_4
-  float v72; // xmm1_4
-  float v73; // xmm0_4
-  float v74; // xmm9_4
-  float v75; // xmm9_4
-  float v76; // xmm6_4
-  __m128 v77; // xmm9
-  float v78; // xmm13_4
-  float v79; // xmm0_4
-  __m128 v80; // xmm2
-  float v81; // xmm8_4
-  float v82; // xmm0_4
-  float v83; // xmm6_4
-  bool v84; // al
-  float v85; // xmm2_4
-  int v86; // er8
-  bool v87; // al
-  int v88; // er8
-  bool v89; // ST58_1
-  bool v90; // al
-  bool v91; // ST50_1
-  bool v92; // al
-  bool v93; // ST40_1
-  bool fSegmentLength; // ST28_1
-  Render::DebugDrawContext *v95; // rbx
-  Render::DebugDrawManager *v96; // rax
-  Render::DebugDrawContext *v97; // rdi
-  const char *v98; // rax
-  UFG::SimComponent *v99; // rax
-  char v100; // di
-  UFG::SimObjectProp *v101; // rcx
-  unsigned __int16 v102; // r8
-  UFG::CharacterAnimationComponent *v103; // rcx
-  UFG::CharacterAnimationComponent *v104; // rax
-  unsigned int v105; // er9
-  unsigned int v106; // er11
-  signed __int64 v107; // r8
-  Creature *v108; // rbx
-  UFG::SimObject *v109; // rcx
-  unsigned __int16 v110; // dx
-  unsigned int v111; // er8
-  unsigned int v112; // er10
-  signed __int64 v113; // rdx
-  unsigned int v114; // er8
-  unsigned int v115; // er10
-  unsigned int v116; // er8
-  unsigned int v117; // er10
-  float v118; // xmm2_4
-  UFG::CollisionLayers v119; // edx
-  UFG::qNode<Attachment,Attachment> *v120; // rbx
-  signed __int64 v121; // rsi
-  UFG::qNode<Attachment,Attachment> **i; // rbx
+  float v69; // xmm1_4
+  float v70; // xmm0_4
+  float v71; // xmm9_4
+  float v72; // xmm9_4
+  float v73; // xmm6_4
+  __m128 v74; // xmm9
+  float v75; // xmm13_4
+  __m128 v76; // xmm2
+  float v77; // xmm8_4
+  float v78; // xmm0_4
+  float v79; // xmm6_4
+  bool mSyncPositionOnly; // al
+  float v81; // xmm2_4
+  int mSyncBoneIndex; // r8d
+  bool mSyncPlanar; // al
+  int v84; // r8d
+  bool mSyncToClosestEndpoint; // al
+  bool mSyncXForward; // al
+  Render::DebugDrawContext *Context; // rbx
+  Render::DebugDrawManager *v88; // rax
+  Render::DebugDrawContext *v89; // rdi
+  const char *v90; // rax
+  UFG::SimComponent *m_pSimComponent; // rax
+  char v92; // di
+  UFG::SimObjectProp *v93; // rcx
+  __int16 v94; // r8
+  UFG::CharacterAnimationComponent *v95; // rcx
+  UFG::CharacterAnimationComponent *v96; // rax
+  unsigned int v97; // r9d
+  unsigned int v98; // r11d
+  __int64 v99; // r8
+  Creature *v100; // rbx
+  UFG::SimObject *v101; // rcx
+  __int16 v102; // dx
+  unsigned int vfptr; // r8d
+  unsigned int v104; // r10d
+  __int64 v105; // rdx
+  unsigned int v106; // r8d
+  unsigned int v107; // r10d
+  unsigned int v108; // r8d
+  unsigned int v109; // r10d
+  float v110; // xmm2_4
+  UFG::CollisionLayers v111; // edx
+  UFG::qNode<Attachment,Attachment> *mNext; // rbx
+  bool *p_mbSyncingCoverParkour; // rsi
+  bool *i; // rbx
+  bool fSegmentLength; // [rsp+28h] [rbp-C8h]
   float fLeftConstraint; // [rsp+30h] [rbp-C0h]
-  float fRightConstraint; // [rsp+38h] [rbp-B8h]
+  char fRightConstraint; // [rsp+38h] [rbp-B8h]
   bool syncPositionOnly; // [rsp+40h] [rbp-B0h]
+  bool syncPositionOnlya; // [rsp+40h] [rbp-B0h]
   bool syncForward; // [rsp+48h] [rbp-A8h]
   bool syncClosestEndPoint; // [rsp+50h] [rbp-A0h]
+  bool syncClosestEndPointa; // [rsp+50h] [rbp-A0h]
   bool syncPlanar; // [rsp+58h] [rbp-98h]
-  UFG::qVector3 p1; // [rsp+60h] [rbp-90h]
-  UFG::qVector3 result; // [rsp+70h] [rbp-80h]
-  float v131; // [rsp+7Ch] [rbp-74h]
-  float v132; // [rsp+80h] [rbp-70h]
-  int v133; // [rsp+88h] [rbp-68h]
-  int v134; // [rsp+8Ch] [rbp-64h]
-  int v135; // [rsp+90h] [rbp-60h]
-  UFG::qMatrix44 outMatrix; // [rsp+A0h] [rbp-50h]
-  float vars0; // [rsp+1C0h] [rbp+D0h]
-  float retaddr; // [rsp+1C8h] [rbp+D8h]
-  float v139; // [rsp+1D0h] [rbp+E0h]
-  float v140; // [rsp+1D8h] [rbp+E8h]
+  bool syncPlanara; // [rsp+58h] [rbp-98h]
+  UFG::qVector3 p1; // [rsp+60h] [rbp-90h] BYREF
+  UFG::qVector4 result; // [rsp+70h] [rbp-80h] BYREF
+  float v127; // [rsp+80h] [rbp-70h]
+  UFG::qVector3 v128; // [rsp+88h] [rbp-68h] BYREF
+  UFG::qMatrix44 outMatrix; // [rsp+A0h] [rbp-50h] BYREF
+  float vars0; // [rsp+1C0h] [rbp+D0h] BYREF
+  void *retaddr; // [rsp+1C8h] [rbp+D8h] BYREF
+  float v132; // [rsp+1D0h] [rbp+E0h]
+  float v133; // [rsp+1D8h] [rbp+E8h]
 
-  v1 = this;
-  if ( (LOBYTE(this->m_Flags) >> 1) & 1 )
+  if ( (this->m_Flags & 2) != 0 )
     return;
   v2 = 0i64;
-  if ( !this->mSyncLatchedHandle && !*(_WORD *)&this->mbSyncingCoverParkour && !this->mbSyncingCoverRCorner )
-    goto LABEL_79;
-  v3 = (UFG::SimObjectProp *)this->m_pSimObject;
-  if ( !v3 )
-    goto LABEL_79;
-  v4 = v3->m_Flags;
-  if ( (v4 >> 14) & 1 )
+  if ( !this->mSyncLatchedHandle
+    && !this->mbSyncingCoverParkour
+    && !this->mbSyncingCoverLCorner
+    && !this->mbSyncingCoverRCorner )
+  {
+    goto LABEL_80;
+  }
+  m_pSimObject = (UFG::SimObjectProp *)this->m_pSimObject;
+  if ( !m_pSimObject )
+    goto LABEL_80;
+  m_Flags = m_pSimObject->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 )
   {
     v5 = UFG::CharacterAnimationComponent::_TypeUID;
-    v6 = (UFG::CharacterAnimationComponent *)v3->m_Components.p[9].m_pComponent;
-    if ( !v6
-      || (UFG::CharacterAnimationComponent::_TypeUID ^ v6->m_TypeUID) & 0xFE000000
-      || UFG::CharacterAnimationComponent::_TypeUID & ~v6->m_TypeUID & 0x1FFFFFF )
+    m_pComponent = (UFG::CharacterAnimationComponent *)m_pSimObject->m_Components.p[9].m_pComponent;
+    if ( !m_pComponent
+      || ((UFG::CharacterAnimationComponent::_TypeUID ^ m_pComponent->m_TypeUID) & 0xFE000000) != 0
+      || (UFG::CharacterAnimationComponent::_TypeUID & ~m_pComponent->m_TypeUID & 0x1FFFFFF) != 0 )
     {
-      goto LABEL_10;
+      goto LABEL_11;
     }
-    goto LABEL_28;
+    goto LABEL_29;
   }
-  if ( (v4 & 0x8000u) != 0 )
+  if ( m_Flags < 0 )
   {
     v5 = UFG::CharacterAnimationComponent::_TypeUID;
-    v6 = (UFG::CharacterAnimationComponent *)v3->m_Components.p[9].m_pComponent;
-    if ( !v6 || (UFG::CharacterAnimationComponent::_TypeUID ^ v6->m_TypeUID) & 0xFE000000 )
-      goto LABEL_10;
-    if ( UFG::CharacterAnimationComponent::_TypeUID & ~v6->m_TypeUID & 0x1FFFFFF )
-      v6 = 0i64;
-    goto LABEL_28;
+    m_pComponent = (UFG::CharacterAnimationComponent *)m_pSimObject->m_Components.p[9].m_pComponent;
+    if ( !m_pComponent || ((UFG::CharacterAnimationComponent::_TypeUID ^ m_pComponent->m_TypeUID) & 0xFE000000) != 0 )
+      goto LABEL_11;
+    if ( (UFG::CharacterAnimationComponent::_TypeUID & ~m_pComponent->m_TypeUID & 0x1FFFFFF) != 0 )
+      m_pComponent = 0i64;
+    goto LABEL_29;
   }
-  if ( (v4 >> 13) & 1 )
+  if ( (m_Flags & 0x2000) != 0 )
   {
-    v7 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>(v3);
-LABEL_27:
+    ComponentOfType = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>(m_pSimObject);
+LABEL_28:
     v5 = UFG::CharacterAnimationComponent::_TypeUID;
-    v6 = v7;
-    goto LABEL_28;
+    m_pComponent = ComponentOfType;
+    goto LABEL_29;
   }
-  v8 = ((v4 >> 12) & 1) == 0;
+  v8 = (m_Flags & 0x1000) == 0;
   v5 = UFG::CharacterAnimationComponent::_TypeUID;
   if ( v8 )
   {
-    v7 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                               (UFG::SimObject *)&v3->vfptr,
-                                               UFG::CharacterAnimationComponent::_TypeUID);
-    goto LABEL_27;
-  }
-  v9 = v3->mComponentTableEntryCount;
-  v10 = v3->m_Components.size;
-  if ( v9 >= v10 )
-  {
-LABEL_10:
-    v6 = 0i64;
+    ComponentOfType = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                            m_pSimObject,
+                                                            UFG::CharacterAnimationComponent::_TypeUID);
     goto LABEL_28;
   }
-  v11 = (signed __int64)&v3->m_Components.p[v9];
-  while ( (*(_DWORD *)(v11 + 8) & 0xFE000000) != (UFG::CharacterAnimationComponent::_TypeUID & 0xFE000000)
-       || UFG::CharacterAnimationComponent::_TypeUID & ~*(_DWORD *)(v11 + 8) & 0x1FFFFFF )
+  mComponentTableEntryCount = m_pSimObject->mComponentTableEntryCount;
+  size = m_pSimObject->m_Components.size;
+  if ( mComponentTableEntryCount >= size )
   {
-    ++v9;
+LABEL_11:
+    m_pComponent = 0i64;
+    goto LABEL_29;
+  }
+  v11 = (__int64)&m_pSimObject->m_Components.p[mComponentTableEntryCount];
+  while ( (*(_DWORD *)(v11 + 8) & 0xFE000000) != (UFG::CharacterAnimationComponent::_TypeUID & 0xFE000000)
+       || (UFG::CharacterAnimationComponent::_TypeUID & ~*(_DWORD *)(v11 + 8) & 0x1FFFFFF) != 0 )
+  {
+    ++mComponentTableEntryCount;
     v11 += 16i64;
-    if ( v9 >= v10 )
+    if ( mComponentTableEntryCount >= size )
     {
-      v6 = 0i64;
-      goto LABEL_28;
+      m_pComponent = 0i64;
+      goto LABEL_29;
     }
   }
-  v6 = *(UFG::CharacterAnimationComponent **)v11;
-LABEL_28:
-  if ( !v6 )
-    goto LABEL_80;
-  v12 = v6->mCreature;
-  if ( !v12 )
+  m_pComponent = *(UFG::CharacterAnimationComponent **)v11;
+LABEL_29:
+  if ( !m_pComponent )
+    goto LABEL_81;
+  mCreature = m_pComponent->mCreature;
+  if ( !mCreature )
     return;
-  v13 = UFG::qVector3::msDirRight.x;
-  v14 = UFG::qVector3::msDirRight.y;
+  x = UFG::qVector3::msDirRight.x;
+  y = UFG::qVector3::msDirRight.y;
   v15.m128_i32[0] = LODWORD(UFG::qVector3::msDirRight.z);
-  if ( v1->mSyncLatchedHandle )
+  if ( this->mSyncLatchedHandle )
   {
-    v35 = v1->mParkourHandle.m_pPointer;
+    m_pPointer = this->mParkourHandle.m_pPointer;
   }
   else
   {
-    if ( !v1->mbSyncingCoverParkour )
+    if ( !this->mbSyncingCoverParkour )
     {
-      v16 = v1->mpCoverPosition;
-      if ( v16 )
+      mpCoverPosition = this->mpCoverPosition;
+      if ( mpCoverPosition )
       {
-        if ( v1->mbSyncingCoverLCorner )
-          v17 = &v16->m_LeftCorner;
+        if ( this->mbSyncingCoverLCorner )
+          p_m_LeftCorner = &mpCoverPosition->m_LeftCorner;
         else
-          v17 = &v16->m_RightCorner;
-        v18 = (UFG::CoverCorner *)UFG::CoverCornerHandle::Get(v17);
-        if ( !v18 || v1->mSyncBoneIndex < 0 )
-          goto LABEL_79;
+          p_m_LeftCorner = &mpCoverPosition->m_RightCorner;
+        v18 = UFG::CoverCornerHandle::Get(p_m_LeftCorner);
+        if ( !v18 || this->mSyncBoneIndex < 0 )
+          goto LABEL_80;
         UFG::CoverCorner::GetSyncMatrix(v18, &outMatrix);
-        v1->mpCoverPosition->vfptr->GetWallNormal((UFG::CoverObjectBase *)&v1->mpCoverPosition->vfptr, &p1);
-        v21 = (__m128)LODWORD(p1.z);
+        this->mpCoverPosition->vfptr->GetWallNormal(this->mpCoverPosition, &p1);
+        z_low = (__m128)LODWORD(p1.z);
         v19 = 0.0;
         v20 = (float)(p1.y * UFG::qVector3::msDirUp.z) - (float)(p1.z * UFG::qVector3::msDirUp.y);
-        v21.m128_f32[0] = (float)(p1.z * UFG::qVector3::msDirUp.x) - (float)(p1.x * UFG::qVector3::msDirUp.z);
+        z_low.m128_f32[0] = (float)(p1.z * UFG::qVector3::msDirUp.x) - (float)(p1.x * UFG::qVector3::msDirUp.z);
         v22 = (float)(p1.x * UFG::qVector3::msDirUp.y) - (float)(p1.y * UFG::qVector3::msDirUp.x);
-        v23 = v20 * v20;
-        v24 = v21;
-        v24.m128_f32[0] = (float)((float)(v21.m128_f32[0] * v21.m128_f32[0]) + (float)(v20 * v20)) + (float)(v22 * v22);
-        if ( v24.m128_f32[0] != 0.0 )
-        {
-          LODWORD(v23) = (unsigned __int128)_mm_sqrt_ps(v24);
-          v19 = 1.0 / v23;
-        }
-        v25 = v19 * v20;
-        v26 = v19;
-        v27 = v19 * v22;
-        v28 = v26 * v21.m128_f32[0];
-        v29 = UFG::CoverObjectBase::GetSideOffset((UFG::CoverObjectBase *)&v1->mpCoverPosition->vfptr, v23);
-        v30 = v29;
-        v31 = UFG::CoverObjectBase::GetFrontOffset((UFG::CoverObjectBase *)&v1->mpCoverPosition->vfptr, v29);
-        v32 = outMatrix.v3.x + (float)(v31 * p1.x);
-        v33 = outMatrix.v3.y + (float)(v31 * p1.y);
-        if ( v1->mbSyncingCoverLCorner )
-          LODWORD(v30) ^= _xmm[0];
+        v23 = z_low;
+        v23.m128_f32[0] = (float)((float)(z_low.m128_f32[0] * z_low.m128_f32[0]) + (float)(v20 * v20))
+                        + (float)(v22 * v22);
+        if ( v23.m128_f32[0] != 0.0 )
+          v19 = 1.0 / _mm_sqrt_ps(v23).m128_f32[0];
+        v24 = v19 * v20;
+        v25 = v19;
+        v26 = v19 * v22;
+        v27 = v25 * z_low.m128_f32[0];
+        SideOffset = UFG::CoverObjectBase::GetSideOffset(this->mpCoverPosition);
+        FrontOffset = UFG::CoverObjectBase::GetFrontOffset(this->mpCoverPosition);
+        v30 = outMatrix.v3.x + (float)(FrontOffset * p1.x);
+        v31 = outMatrix.v3.y + (float)(FrontOffset * p1.y);
+        if ( this->mbSyncingCoverLCorner )
+          LODWORD(SideOffset) ^= _xmm[0];
         outMatrix.v3.w = (float)(outMatrix.v3.w + 1.0) + 1.0;
-        outMatrix.v3.z = (float)(outMatrix.v3.z + (float)(v31 * p1.z)) + (float)(v30 * v27);
-        v34 = outMatrix.v2;
-        v1->mWorldAnchor.v0 = outMatrix.v0;
-        outMatrix.v3.x = v32 + (float)(v30 * v25);
-        outMatrix.v3.y = v33 + (float)(v30 * v28);
-        v1->mWorldAnchor.v1 = outMatrix.v1;
-        v1->mWorldAnchor.v2 = v34;
-        v1->mWorldAnchor.v3 = outMatrix.v3;
-LABEL_78:
-        Creature::Attach(v12, v1->mSyncBoneIndex, 2, &v1->mWorldAnchor, v1->mBlendWeight);
-        LODWORD(result.x) = LODWORD(v13) ^ _xmm[0];
-        LODWORD(result.y) = LODWORD(v14) ^ _xmm[0];
-        LODWORD(result.z) = v15.m128_i32[0] ^ _xmm[0];
-        UFG::syncHands(v12, (UFG::qVector3 *)((char *)&result + 8), &result);
+        outMatrix.v3.z = (float)(outMatrix.v3.z + (float)(FrontOffset * p1.z)) + (float)(SideOffset * v26);
+        v32 = outMatrix.v2;
+        this->mWorldAnchor.v0 = outMatrix.v0;
+        outMatrix.v3.x = v30 + (float)(SideOffset * v24);
+        outMatrix.v3.y = v31 + (float)(SideOffset * v27);
+        this->mWorldAnchor.v1 = outMatrix.v1;
+        this->mWorldAnchor.v2 = v32;
+        this->mWorldAnchor.v3 = outMatrix.v3;
 LABEL_79:
+        Creature::Attach(mCreature, this->mSyncBoneIndex, 2, &this->mWorldAnchor, this->mBlendWeight);
+        LODWORD(result.x) = LODWORD(x) ^ _xmm[0];
+        LODWORD(result.y) = LODWORD(y) ^ _xmm[0];
+        LODWORD(result.z) = v15.m128_i32[0] ^ _xmm[0];
+        UFG::syncHands(mCreature, (UFG::qVector3 *)&result.z, (UFG::qVector3 *)&result);
+LABEL_80:
         v5 = UFG::CharacterAnimationComponent::_TypeUID;
-        goto LABEL_80;
+        goto LABEL_81;
       }
-      goto LABEL_80;
+      goto LABEL_81;
     }
-    v36 = v1->mpCoverPosition;
-    if ( !v36 )
-      goto LABEL_80;
-    v35 = v36->m_pParkourHandle.m_pPointer;
+    v34 = this->mpCoverPosition;
+    if ( !v34 )
+      goto LABEL_81;
+    m_pPointer = v34->m_pParkourHandle.m_pPointer;
   }
-  if ( v35 && v1->mSyncBoneIndex >= 0 )
+  if ( m_pPointer && this->mSyncBoneIndex >= 0 )
   {
-    v37 = UFG::ParkourHandle::GetPosition(v35, &result);
-    v38 = v37->x;
-    v39 = v37->y;
-    v40 = v37->z;
-    v41 = UFG::ParkourHandle::GetAxis(v35, &result);
-    v42 = v41->y;
-    v43 = (__m128)LODWORD(v41->x);
-    v44 = v41->z;
-    v45 = v43;
-    v45.m128_f32[0] = (float)((float)(v43.m128_f32[0] * v43.m128_f32[0]) + (float)(v42 * v42)) + (float)(v44 * v44);
-    if ( v45.m128_f32[0] == 0.0 )
+    Position = UFG::ParkourHandle::GetPosition(m_pPointer, (UFG::qVector3 *)&result);
+    v36 = Position->x;
+    v37 = Position->y;
+    z = Position->z;
+    Axis = UFG::ParkourHandle::GetAxis(m_pPointer, (UFG::qVector3 *)&result);
+    v40 = Axis->y;
+    x_low = (__m128)LODWORD(Axis->x);
+    v42 = Axis->z;
+    v43 = x_low;
+    v43.m128_f32[0] = (float)((float)(x_low.m128_f32[0] * x_low.m128_f32[0]) + (float)(v40 * v40)) + (float)(v42 * v42);
+    if ( v43.m128_f32[0] == 0.0 )
     {
       v15 = 0i64;
     }
     else
     {
       v15 = (__m128)(unsigned int)FLOAT_1_0;
-      v15.m128_f32[0] = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v45));
+      v15.m128_f32[0] = 1.0 / _mm_sqrt_ps(v43).m128_f32[0];
     }
-    v46 = v15.m128_f32[0];
-    v47 = v15.m128_f32[0];
-    v15.m128_f32[0] = v15.m128_f32[0] * v44;
-    v13 = v46 * v43.m128_f32[0];
-    v14 = v47 * v42;
-    v48 = UFG::ParkourHandle::GetHalfLength(v35);
-    v49 = v39 + (float)(v14 * v48);
-    v50 = v40 + (float)(v15.m128_f32[0] * v48);
-    v51 = v38 + (float)(v13 * v48);
-    v139 = v49;
-    v140 = v50;
-    v52 = UFG::ParkourHandle::GetHalfLength(v35);
-    retaddr = 0.0;
+    v44 = v15.m128_f32[0];
+    v45 = v15.m128_f32[0];
+    v15.m128_f32[0] = v15.m128_f32[0] * v42;
+    x = v44 * x_low.m128_f32[0];
+    y = v45 * v40;
+    HalfLength = UFG::ParkourHandle::GetHalfLength(m_pPointer);
+    v47 = v37 + (float)(y * HalfLength);
+    v48 = z + (float)(v15.m128_f32[0] * HalfLength);
+    v49 = v36 + (float)(x * HalfLength);
+    v132 = v47;
+    v133 = v48;
+    v50 = UFG::ParkourHandle::GetHalfLength(m_pPointer);
+    LODWORD(retaddr) = 0;
     vars0 = 0.0;
-    v53 = v52 * 2.0;
-    result.x = v52 * 2.0;
-    if ( v1->mbSyncingCoverParkour )
+    v51 = v50 * 2.0;
+    result.x = v50 * 2.0;
+    if ( this->mbSyncingCoverParkour )
     {
-      v54 = v1->mpCoverPosition;
-      if ( v54 && !v1->mSyncPositionLocked )
+      v52 = this->mpCoverPosition;
+      if ( v52 && !this->mSyncPositionLocked )
       {
-        if ( v1->mLockSyncPosition == 1 )
-          v1->mSyncPositionLocked = 1;
-        if ( v54->m_bInbetweenParkourLine )
+        if ( this->mLockSyncPosition )
+          this->mSyncPositionLocked = 1;
+        if ( v52->m_bInbetweenParkourLine )
         {
-          v56 = (__m128)LODWORD(v54->m_vInbetweenParkourAxis.z);
-          v55 = (float)(v54->m_vInbetweenParkourAxis.y * UFG::qVector3::msDirUp.z)
-              - (float)(v56.m128_f32[0] * UFG::qVector3::msDirUp.y);
-          v56.m128_f32[0] = (float)(v56.m128_f32[0] * UFG::qVector3::msDirUp.x)
-                          - (float)(v54->m_vInbetweenParkourAxis.x * UFG::qVector3::msDirUp.z);
-          v57 = (float)(v54->m_vInbetweenParkourAxis.x * UFG::qVector3::msDirUp.y)
-              - (float)(v54->m_vInbetweenParkourAxis.y * UFG::qVector3::msDirUp.x);
-          v58 = v55 * v55;
-          v59 = v56;
-          v59.m128_f32[0] = (float)((float)(v56.m128_f32[0] * v56.m128_f32[0]) + (float)(v55 * v55))
-                          + (float)(v57 * v57);
-          if ( v59.m128_f32[0] == 0.0 )
-          {
-            v60 = 0.0;
-          }
+          v54 = (__m128)LODWORD(v52->m_vInbetweenParkourAxis.z);
+          v53 = (float)(v52->m_vInbetweenParkourAxis.y * UFG::qVector3::msDirUp.z)
+              - (float)(v54.m128_f32[0] * UFG::qVector3::msDirUp.y);
+          v54.m128_f32[0] = (float)(v54.m128_f32[0] * UFG::qVector3::msDirUp.x)
+                          - (float)(v52->m_vInbetweenParkourAxis.x * UFG::qVector3::msDirUp.z);
+          v55 = (float)(v52->m_vInbetweenParkourAxis.x * UFG::qVector3::msDirUp.y)
+              - (float)(v52->m_vInbetweenParkourAxis.y * UFG::qVector3::msDirUp.x);
+          v56 = v54;
+          v56.m128_f32[0] = (float)((float)(v54.m128_f32[0] * v54.m128_f32[0]) + (float)(v53 * v53))
+                          + (float)(v55 * v55);
+          if ( v56.m128_f32[0] == 0.0 )
+            v57 = 0.0;
           else
-          {
-            LODWORD(v58) = (unsigned __int128)_mm_sqrt_ps(v59);
-            v60 = 1.0 / v58;
-          }
-          v61 = UFG::CoverObjectBase::GetFrontOffset((UFG::CoverObjectBase *)&v54->vfptr, v58);
-          v62 = v1->mpCoverPosition;
-          v63 = (float)((float)(v55 * v60) * v61) + v62->m_vInbetweenParkourPosition.x;
-          v64 = (float)((float)(v56.m128_f32[0] * v60) * v61) + v62->m_vInbetweenParkourPosition.y;
-          v65 = (float)((float)(v57 * v60) * v61) + v62->m_vInbetweenParkourPosition.z;
-          v66 = LODWORD(v62->m_vInbetweenParkourAxis.y) ^ _xmm[0];
-          LODWORD(p1.x) = LODWORD(v62->m_vInbetweenParkourAxis.x) ^ _xmm[0];
-          v67 = v62->m_vInbetweenParkourAxis.z;
-          result.x = v63;
-          syncPlanar = v1->mSyncPlanar;
-          syncClosestEndPoint = v1->mSyncToClosestEndpoint;
-          LOBYTE(v62) = v1->mSyncXForward;
-          LODWORD(p1.z) = LODWORD(v67) ^ _xmm[0];
-          result.y = v64;
-          syncForward = (char)v62;
-          LOBYTE(v62) = v1->mSyncPositionOnly;
-          result.z = v65;
-          LODWORD(p1.y) = v66;
-          syncPositionOnly = (char)v62;
-          fRightConstraint = FLOAT_N3_4028235e38;
+            v57 = 1.0 / _mm_sqrt_ps(v56).m128_f32[0];
+          v58 = UFG::CoverObjectBase::GetFrontOffset(v52);
+          v59 = this->mpCoverPosition;
+          v60 = (float)((float)(v53 * v57) * v58) + v59->m_vInbetweenParkourPosition.x;
+          v61 = (float)((float)(v54.m128_f32[0] * v57) * v58) + v59->m_vInbetweenParkourPosition.y;
+          v62 = (float)((float)(v55 * v57) * v58) + v59->m_vInbetweenParkourPosition.z;
+          v63 = LODWORD(v59->m_vInbetweenParkourAxis.y) ^ _xmm[0];
+          LODWORD(p1.x) = LODWORD(v59->m_vInbetweenParkourAxis.x) ^ _xmm[0];
+          v64 = v59->m_vInbetweenParkourAxis.z;
+          result.x = v60;
+          syncPlanar = this->mSyncPlanar;
+          syncClosestEndPoint = this->mSyncToClosestEndpoint;
+          LOBYTE(v59) = this->mSyncXForward;
+          LODWORD(p1.z) = LODWORD(v64) ^ _xmm[0];
+          result.y = v61;
+          syncForward = (char)v59;
+          LOBYTE(v59) = this->mSyncPositionOnly;
+          result.z = v62;
+          LODWORD(p1.y) = v63;
+          syncPositionOnly = (char)v59;
+          fRightConstraint = LOBYTE(FLOAT_N3_4028235e38);
           fLeftConstraint = FLOAT_N3_4028235e38;
-          v68 = FLOAT_2_0;
+          v65 = FLOAT_2_0;
         }
         else
         {
-          if ( v54->m_pParkourHandle.m_pPointer )
+          if ( v52->m_pParkourHandle.m_pPointer )
           {
-            v69 = v54->m_fDistToLeft;
-            v70 = v54->m_fDistToRight;
-            v71 = UFG::ParkourHandle::GetHalfLength(v54->m_pParkourHandle.m_pPointer);
-            v54 = v1->mpCoverPosition;
-            v72 = v71 + v54->m_fParkourTVal;
-            v73 = (float)((float)(v71 * 2.0) - v72) - v70;
-            v74 = v70 + v69;
-            retaddr = v72 - v69;
-            vars0 = v73;
-            if ( v74 < 0.0 )
+            m_fDistToLeft = v52->m_fDistToLeft;
+            m_fDistToRight = v52->m_fDistToRight;
+            v68 = UFG::ParkourHandle::GetHalfLength(v52->m_pParkourHandle.m_pPointer);
+            v52 = this->mpCoverPosition;
+            v69 = v68 + v52->m_fParkourTVal;
+            v70 = (float)((float)(v68 * 2.0) - v69) - m_fDistToRight;
+            v71 = m_fDistToRight + m_fDistToLeft;
+            *(float *)&retaddr = v69 - m_fDistToLeft;
+            vars0 = v70;
+            if ( v71 < 0.0 )
             {
-              v75 = v74 * 0.5;
-              retaddr = (float)(v72 - v69) + v75;
-              vars0 = v73 + v75;
+              v72 = v71 * 0.5;
+              *(float *)&retaddr = (float)(v69 - m_fDistToLeft) + v72;
+              vars0 = v70 + v72;
             }
           }
-          v77 = v15;
-          v76 = (float)(v14 * UFG::qVector3::msDirUp.z) - (float)(v15.m128_f32[0] * UFG::qVector3::msDirUp.y);
-          v77.m128_f32[0] = (float)(v15.m128_f32[0] * UFG::qVector3::msDirUp.x)
-                          - (float)(v13 * UFG::qVector3::msDirUp.z);
-          v80 = v77;
-          v78 = (float)(v13 * UFG::qVector3::msDirUp.y) - (float)(v14 * UFG::qVector3::msDirUp.x);
-          v79 = v76 * v76;
-          v80.m128_f32[0] = (float)((float)(v77.m128_f32[0] * v77.m128_f32[0]) + (float)(v76 * v76))
-                          + (float)(v78 * v78);
-          if ( v80.m128_f32[0] == 0.0 )
-          {
-            v81 = 0.0;
-          }
+          v74 = v15;
+          v73 = (float)(y * UFG::qVector3::msDirUp.z) - (float)(v15.m128_f32[0] * UFG::qVector3::msDirUp.y);
+          v74.m128_f32[0] = (float)(v15.m128_f32[0] * UFG::qVector3::msDirUp.x) - (float)(x * UFG::qVector3::msDirUp.z);
+          v76 = v74;
+          v75 = (float)(x * UFG::qVector3::msDirUp.y) - (float)(y * UFG::qVector3::msDirUp.x);
+          v76.m128_f32[0] = (float)((float)(v74.m128_f32[0] * v74.m128_f32[0]) + (float)(v73 * v73))
+                          + (float)(v75 * v75);
+          if ( v76.m128_f32[0] == 0.0 )
+            v77 = 0.0;
           else
-          {
-            LODWORD(v79) = (unsigned __int128)_mm_sqrt_ps(v80);
-            v81 = 1.0 / v79;
-          }
-          v82 = UFG::CoverObjectBase::GetFrontOffset((UFG::CoverObjectBase *)&v54->vfptr, v79);
-          syncPlanar = v1->mSyncPlanar;
-          v83 = (float)(v76 * v81) * v82;
-          syncClosestEndPoint = v1->mSyncToClosestEndpoint;
-          syncForward = v1->mSyncXForward;
-          v84 = v1->mSyncPositionOnly;
-          result.z = v140 + (float)(v82 * (float)(v78 * v81));
-          LODWORD(p1.x) = LODWORD(v13) ^ _xmm[0];
-          v85 = v139 + (float)(v82 * (float)(v77.m128_f32[0] * v81));
-          syncPositionOnly = v84;
+            v77 = 1.0 / _mm_sqrt_ps(v76).m128_f32[0];
+          v78 = UFG::CoverObjectBase::GetFrontOffset(v52);
+          syncPlanar = this->mSyncPlanar;
+          v79 = (float)(v73 * v77) * v78;
+          syncClosestEndPoint = this->mSyncToClosestEndpoint;
+          syncForward = this->mSyncXForward;
+          mSyncPositionOnly = this->mSyncPositionOnly;
+          result.z = v133 + (float)(v78 * (float)(v75 * v77));
+          LODWORD(p1.x) = LODWORD(x) ^ _xmm[0];
+          v81 = v132 + (float)(v78 * (float)(v74.m128_f32[0] * v77));
+          syncPositionOnly = mSyncPositionOnly;
           LODWORD(p1.z) = v15.m128_i32[0] ^ _xmm[0];
-          LODWORD(p1.y) = LODWORD(v14) ^ _xmm[0];
-          fRightConstraint = vars0;
-          v68 = result.x;
-          fLeftConstraint = retaddr;
-          result.x = v51 + v83;
-          result.y = v85;
+          LODWORD(p1.y) = LODWORD(y) ^ _xmm[0];
+          fRightConstraint = LOBYTE(vars0);
+          v65 = result.x;
+          fLeftConstraint = *(float *)&retaddr;
+          result.x = v49 + v79;
+          result.y = v81;
         }
-        v86 = v1->mSyncBoneIndex;
-        v131 = 1.0;
+        mSyncBoneIndex = this->mSyncBoneIndex;
+        result.w = 1.0;
         UFG::WorldContextComponent::ConstrainSyncBoneWorldAnchorToLine(
-          &v1->mWorldAnchor,
-          v12,
-          v86,
-          (UFG::qVector4 *)&result,
+          &this->mWorldAnchor,
+          mCreature,
+          mSyncBoneIndex,
+          &result,
           &p1,
-          v68,
+          v65,
           fLeftConstraint,
           fRightConstraint,
           syncPositionOnly,
@@ -2286,65 +2231,73 @@ LABEL_79:
     }
     else
     {
-      if ( !v1->mSyncPositionLocked )
+      if ( !this->mSyncPositionLocked )
       {
-        if ( v1->mLockSyncPosition == 1 )
-          v1->mSyncPositionLocked = 1;
+        if ( this->mLockSyncPosition )
+          this->mSyncPositionLocked = 1;
         getParkourEdgeConstraints(
-          v35,
-          v1->mSyncLeftEdge,
-          v1->mSyncRightEdge,
-          v1->mDistanceFromEdge,
-          v1->mDistanceFromEdge,
-          &retaddr,
+          m_pPointer,
+          this->mSyncLeftEdge,
+          this->mSyncRightEdge,
+          this->mDistanceFromEdge,
+          this->mDistanceFromEdge,
+          (float *)&retaddr,
           &vars0);
-        v87 = v1->mSyncPlanar;
-        result.x = v51;
-        v88 = v1->mSyncBoneIndex;
-        v89 = v87;
-        v90 = v1->mSyncToClosestEndpoint;
-        result.y = v49;
-        result.z = v50;
-        LODWORD(p1.x) = LODWORD(v13) ^ _xmm[0];
-        LODWORD(p1.y) = LODWORD(v14) ^ _xmm[0];
-        v91 = v90;
-        v92 = v1->mSyncXForward;
+        mSyncPlanar = this->mSyncPlanar;
+        result.x = v49;
+        v84 = this->mSyncBoneIndex;
+        syncPlanara = mSyncPlanar;
+        mSyncToClosestEndpoint = this->mSyncToClosestEndpoint;
+        result.y = v47;
+        result.z = v48;
+        LODWORD(p1.x) = LODWORD(x) ^ _xmm[0];
+        LODWORD(p1.y) = LODWORD(y) ^ _xmm[0];
+        syncClosestEndPointa = mSyncToClosestEndpoint;
+        mSyncXForward = this->mSyncXForward;
         LODWORD(p1.z) = v15.m128_i32[0] ^ _xmm[0];
-        v93 = v1->mSyncPositionOnly;
-        v131 = 1.0;
+        syncPositionOnlya = this->mSyncPositionOnly;
+        result.w = 1.0;
         UFG::WorldContextComponent::ConstrainSyncBoneWorldAnchorToLine(
-          &v1->mWorldAnchor,
-          v12,
-          v88,
-          (UFG::qVector4 *)&result,
+          &this->mWorldAnchor,
+          mCreature,
+          v84,
+          &result,
           &p1,
-          v53,
-          retaddr,
-          vars0,
-          v93,
-          v92,
-          v91,
-          v89);
+          v51,
+          *(float *)&retaddr,
+          SLOBYTE(vars0),
+          syncPositionOnlya,
+          mSyncXForward,
+          syncClosestEndPointa,
+          syncPlanara);
       }
       if ( UFG::WorldContextComponent::s_DrawParkourSensing )
       {
-        Creature::GetTransform(v12, v1->mSyncBoneIndex, &outMatrix);
-        fSegmentLength = v1->mSyncToClosestEndpoint;
-        v133 = LODWORD(v13) ^ _xmm[0];
-        p1 = *(UFG::qVector3 *)&outMatrix.v3.x;
-        v135 = v15.m128_i32[0] ^ _xmm[0];
-        v134 = LODWORD(v14) ^ _xmm[0];
-        v131 = v49;
-        v132 = v50;
-        result = *(UFG::qVector3 *)&outMatrix.v3.x;
-        constrainPos(&p1, &result, (UFG::qVector3 *)((char *)&result + 8), (UFG::qVector3 *)&v133, v53, fSegmentLength);
-        v95 = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 2u);
-        v96 = Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 1u);
-        result = *(UFG::qVector3 *)&outMatrix.v3.x;
-        v97 = (Render::DebugDrawContext *)v96;
+        Creature::GetTransform(mCreature, this->mSyncBoneIndex, &outMatrix);
+        fSegmentLength = this->mSyncToClosestEndpoint;
+        LODWORD(v128.x) = LODWORD(x) ^ _xmm[0];
+        p1.x = outMatrix.v3.x;
+        p1.y = outMatrix.v3.y;
+        p1.z = outMatrix.v3.z;
+        LODWORD(v128.z) = v15.m128_i32[0] ^ _xmm[0];
+        LODWORD(v128.y) = LODWORD(y) ^ _xmm[0];
+        result.w = v47;
+        v127 = v48;
+        result.x = outMatrix.v3.x;
+        result.y = outMatrix.v3.y;
+        result.z = outMatrix.v3.z;
+        constrainPos(&p1, (UFG::qVector3 *)&result, (UFG::qVector3 *)&result.z, &v128, v51, fSegmentLength);
+        Context = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(
+                                                Render::DebugDrawManager::mInstance,
+                                                2u);
+        v88 = Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 1u);
+        result.x = outMatrix.v3.x;
+        result.y = outMatrix.v3.y;
+        result.z = outMatrix.v3.z;
+        v89 = (Render::DebugDrawContext *)v88;
         Render::DebugDrawContext::DrawLine(
-          v95,
-          &result,
+          Context,
+          (UFG::qVector3 *)&result,
           &p1,
           &UFG::qColour::Orange,
           &UFG::qMatrix44::msIdentity,
@@ -2354,406 +2307,445 @@ LABEL_79:
         result.y = p1.y;
         result.z = sToTextOffsetZ + p1.z;
         Render::DebugDrawContext::DrawLine(
-          v95,
+          Context,
           &p1,
-          &result,
+          (UFG::qVector3 *)&result,
           &UFG::qColour::Orange,
           &UFG::qMatrix44::msIdentity,
           0i64,
           0);
-        v98 = "N";
+        v90 = "N";
         result.x = p1.x;
         result.y = p1.y;
         result.z = sToTextOffsetZ + p1.z;
-        if ( v1->mSyncPlanar )
-          v98 = "P";
-        Render::DebugDrawContext::DrawText(v97, &result, &UFG::qColour::Orange, "Syncing:%s", v98);
+        if ( this->mSyncPlanar )
+          v90 = "P";
+        Render::DebugDrawContext::DrawText(v89, (UFG::qVector3 *)&result, &UFG::qColour::Orange, "Syncing:%s", v90);
       }
     }
-    goto LABEL_78;
+    goto LABEL_79;
   }
-LABEL_80:
-  v99 = v1->mCharacterPhysicsComponent.m_pSimComponent;
-  v100 = 0;
-  if ( v99 && v99[9].m_TypeUID )
+LABEL_81:
+  m_pSimComponent = this->mCharacterPhysicsComponent.m_pSimComponent;
+  v92 = 0;
+  if ( m_pSimComponent && m_pSimComponent[9].m_TypeUID )
   {
-    v100 = 1;
+    v92 = 1;
   }
-  else if ( !v1->mSyncFeet )
+  else if ( !this->mSyncFeet )
   {
-    goto LABEL_141;
+    goto LABEL_142;
   }
-  v101 = (UFG::SimObjectProp *)v1->m_pSimObject;
-  if ( !v101 )
-    goto LABEL_141;
-  v102 = v101->m_Flags;
-  if ( (v102 >> 14) & 1 )
+  v93 = (UFG::SimObjectProp *)this->m_pSimObject;
+  if ( !v93 )
+    goto LABEL_142;
+  v94 = v93->m_Flags;
+  if ( (v94 & 0x4000) != 0 )
   {
-    v103 = (UFG::CharacterAnimationComponent *)v101->m_Components.p[9].m_pComponent;
-    if ( !v103 || ((unsigned int)v5 ^ v103->m_TypeUID) & 0xFE000000 || (unsigned int)v5 & ~v103->m_TypeUID & 0x1FFFFFF )
-      goto LABEL_89;
-    goto LABEL_107;
-  }
-  if ( (v102 & 0x8000u) != 0 )
-  {
-    v103 = (UFG::CharacterAnimationComponent *)v101->m_Components.p[9].m_pComponent;
-    if ( !v103 || ((unsigned int)v5 ^ v103->m_TypeUID) & 0xFE000000 )
-      goto LABEL_89;
-    if ( (unsigned int)v5 & ~v103->m_TypeUID & 0x1FFFFFF )
-      v103 = 0i64;
-    goto LABEL_107;
-  }
-  if ( (v102 >> 13) & 1 )
-  {
-    v104 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>(v101);
-LABEL_106:
-    v103 = v104;
-    goto LABEL_107;
-  }
-  if ( !((v102 >> 12) & 1) )
-  {
-    v104 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v101->vfptr, v5);
-    goto LABEL_106;
-  }
-  v105 = v101->mComponentTableEntryCount;
-  v106 = v101->m_Components.size;
-  if ( v105 >= v106 )
-  {
-LABEL_89:
-    v103 = 0i64;
-    goto LABEL_107;
-  }
-  v107 = (signed __int64)&v101->m_Components.p[v105];
-  while ( (*(_DWORD *)(v107 + 8) & 0xFE000000) != (v5 & 0xFE000000)
-       || (unsigned int)v5 & ~*(_DWORD *)(v107 + 8) & 0x1FFFFFF )
-  {
-    ++v105;
-    v107 += 16i64;
-    if ( v105 >= v106 )
+    v95 = (UFG::CharacterAnimationComponent *)v93->m_Components.p[9].m_pComponent;
+    if ( !v95
+      || (((unsigned int)v5 ^ v95->m_TypeUID) & 0xFE000000) != 0
+      || ((unsigned int)v5 & ~v95->m_TypeUID & 0x1FFFFFF) != 0 )
     {
-      v103 = 0i64;
-      goto LABEL_107;
+      goto LABEL_90;
     }
+    goto LABEL_108;
   }
-  v103 = *(UFG::CharacterAnimationComponent **)v107;
+  if ( v94 < 0 )
+  {
+    v95 = (UFG::CharacterAnimationComponent *)v93->m_Components.p[9].m_pComponent;
+    if ( !v95 || (((unsigned int)v5 ^ v95->m_TypeUID) & 0xFE000000) != 0 )
+      goto LABEL_90;
+    if ( ((unsigned int)v5 & ~v95->m_TypeUID & 0x1FFFFFF) != 0 )
+      v95 = 0i64;
+    goto LABEL_108;
+  }
+  if ( (v94 & 0x2000) != 0 )
+  {
+    v96 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>(v93);
 LABEL_107:
-  if ( v103 )
+    v95 = v96;
+    goto LABEL_108;
+  }
+  if ( (v94 & 0x1000) == 0 )
   {
-    v108 = v103->mCreature;
-    if ( v108 )
+    v96 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(v93, v5);
+    goto LABEL_107;
+  }
+  v97 = v93->mComponentTableEntryCount;
+  v98 = v93->m_Components.size;
+  if ( v97 >= v98 )
+  {
+LABEL_90:
+    v95 = 0i64;
+    goto LABEL_108;
+  }
+  v99 = (__int64)&v93->m_Components.p[v97];
+  while ( (*(_DWORD *)(v99 + 8) & 0xFE000000) != (v5 & 0xFE000000)
+       || ((unsigned int)v5 & ~*(_DWORD *)(v99 + 8) & 0x1FFFFFF) != 0 )
+  {
+    ++v97;
+    v99 += 16i64;
+    if ( v97 >= v98 )
     {
-      v109 = v1->m_pSimObject;
-      if ( !v109 )
-        goto LABEL_137;
-      v110 = v109->m_Flags;
-      if ( (v110 >> 14) & 1 )
+      v95 = 0i64;
+      goto LABEL_108;
+    }
+  }
+  v95 = *(UFG::CharacterAnimationComponent **)v99;
+LABEL_108:
+  if ( v95 )
+  {
+    v100 = v95->mCreature;
+    if ( v100 )
+    {
+      v101 = this->m_pSimObject;
+      if ( !v101 )
+        goto LABEL_138;
+      v102 = v101->m_Flags;
+      if ( (v102 & 0x4000) != 0 )
       {
-        v2 = v109->m_Components.p[44].m_pComponent;
-        goto LABEL_135;
+        v2 = v101->m_Components.p[44].m_pComponent;
+        goto LABEL_136;
       }
-      if ( (v110 & 0x8000u) != 0 )
+      if ( v102 < 0 )
       {
-        v111 = (unsigned int)v109[1].vfptr;
-        v112 = v109->m_Components.size;
-        if ( v111 >= v112 )
-          goto LABEL_135;
-        v113 = (signed __int64)&v109->m_Components.p[v111];
-        while ( (*(_DWORD *)(v113 + 8) & 0xFE000000) != (UFG::CharacterOccupantComponent::_TypeUID & 0xFE000000)
-             || UFG::CharacterOccupantComponent::_TypeUID & ~*(_DWORD *)(v113 + 8) & 0x1FFFFFF )
+        vfptr = (unsigned int)v101[1].vfptr;
+        v104 = v101->m_Components.size;
+        if ( vfptr >= v104 )
+          goto LABEL_136;
+        v105 = (__int64)&v101->m_Components.p[vfptr];
+        while ( (*(_DWORD *)(v105 + 8) & 0xFE000000) != (UFG::CharacterOccupantComponent::_TypeUID & 0xFE000000)
+             || (UFG::CharacterOccupantComponent::_TypeUID & ~*(_DWORD *)(v105 + 8) & 0x1FFFFFF) != 0 )
         {
-          ++v111;
-          v113 += 16i64;
-          if ( v111 >= v112 )
-            goto LABEL_135;
+          ++vfptr;
+          v105 += 16i64;
+          if ( vfptr >= v104 )
+            goto LABEL_136;
         }
-        goto LABEL_119;
+        goto LABEL_120;
       }
-      if ( (v110 >> 13) & 1 )
+      if ( (v102 & 0x2000) != 0 )
       {
-        v114 = (unsigned int)v109[1].vfptr;
-        v115 = v109->m_Components.size;
-        if ( v114 < v115 )
+        v106 = (unsigned int)v101[1].vfptr;
+        v107 = v101->m_Components.size;
+        if ( v106 < v107 )
         {
-          v113 = (signed __int64)&v109->m_Components.p[v114];
-          while ( (*(_DWORD *)(v113 + 8) & 0xFE000000) != (UFG::CharacterOccupantComponent::_TypeUID & 0xFE000000)
-               || UFG::CharacterOccupantComponent::_TypeUID & ~*(_DWORD *)(v113 + 8) & 0x1FFFFFF )
+          v105 = (__int64)&v101->m_Components.p[v106];
+          while ( (*(_DWORD *)(v105 + 8) & 0xFE000000) != (UFG::CharacterOccupantComponent::_TypeUID & 0xFE000000)
+               || (UFG::CharacterOccupantComponent::_TypeUID & ~*(_DWORD *)(v105 + 8) & 0x1FFFFFF) != 0 )
           {
-            ++v114;
-            v113 += 16i64;
-            if ( v114 >= v115 )
-              goto LABEL_135;
+            ++v106;
+            v105 += 16i64;
+            if ( v106 >= v107 )
+              goto LABEL_136;
           }
-LABEL_119:
-          v2 = *(UFG::SimComponent **)v113;
-          goto LABEL_135;
+LABEL_120:
+          v2 = *(UFG::SimComponent **)v105;
         }
       }
-      else if ( (v110 >> 12) & 1 )
+      else if ( (v102 & 0x1000) != 0 )
       {
-        v116 = (unsigned int)v109[1].vfptr;
-        v117 = v109->m_Components.size;
-        if ( v116 < v117 )
+        v108 = (unsigned int)v101[1].vfptr;
+        v109 = v101->m_Components.size;
+        if ( v108 < v109 )
         {
-          v113 = (signed __int64)&v109->m_Components.p[v116];
-          while ( (*(_DWORD *)(v113 + 8) & 0xFE000000) != (UFG::CharacterOccupantComponent::_TypeUID & 0xFE000000)
-               || UFG::CharacterOccupantComponent::_TypeUID & ~*(_DWORD *)(v113 + 8) & 0x1FFFFFF )
+          v105 = (__int64)&v101->m_Components.p[v108];
+          while ( (*(_DWORD *)(v105 + 8) & 0xFE000000) != (UFG::CharacterOccupantComponent::_TypeUID & 0xFE000000)
+               || (UFG::CharacterOccupantComponent::_TypeUID & ~*(_DWORD *)(v105 + 8) & 0x1FFFFFF) != 0 )
           {
-            ++v116;
-            v113 += 16i64;
-            if ( v116 >= v117 )
-              goto LABEL_135;
+            ++v108;
+            v105 += 16i64;
+            if ( v108 >= v109 )
+              goto LABEL_136;
           }
-          goto LABEL_119;
+          goto LABEL_120;
         }
       }
       else
       {
-        v2 = UFG::SimObject::GetComponentOfType(v109, UFG::CharacterOccupantComponent::_TypeUID);
+        v2 = UFG::SimObject::GetComponentOfType(v101, UFG::CharacterOccupantComponent::_TypeUID);
       }
-LABEL_135:
+LABEL_136:
       if ( v2 )
       {
-        v118 = sUpLegVehicle;
-        v119 = 14;
-LABEL_140:
-        UFG::syncFeet(v108, v119, v118);
-        goto LABEL_141;
+        v110 = sUpLegVehicle;
+        v111 = USER_RAYCAST_LAYER_3;
+LABEL_141:
+        UFG::syncFeet(v100, v111, v110);
+        goto LABEL_142;
       }
-LABEL_137:
-      v119 = 12;
-      if ( v100 )
-        v118 = sUpLegGrapple;
+LABEL_138:
+      v111 = USER_RAYCAST_LAYER_1;
+      if ( v92 )
+        v110 = sUpLegGrapple;
       else
-        v118 = sUpLeg;
-      goto LABEL_140;
+        v110 = sUpLeg;
+      goto LABEL_141;
     }
   }
-LABEL_141:
-  v120 = v1->mAttachments.mNode.mNext;
-  v121 = (signed __int64)&v1->mbSyncingCoverParkour;
-  for ( i = &v120[-1].mNext; i != (UFG::qNode<Attachment,Attachment> **)v121; i = &i[2][-1].mNext )
-    ((void (__fastcall *)(UFG::qNode<Attachment,Attachment> **, __int64))(*i)[1].mPrev)(i, v5);
-}
+LABEL_142:
+  mNext = this->mAttachments.mNode.mNext;
+  p_mbSyncingCoverParkour = &this->mbSyncingCoverParkour;
+  for ( i = (bool *)&mNext[-1].mNext; i != p_mbSyncingCoverParkour; i = (bool *)(*((_QWORD *)i + 2) - 8i64) )
+    (*(void (__fastcall **)(bool *, __int64))(*(_QWORD *)i + 16i64))(i, v5);
+}ent::_TypeUID);
+      }
+LABEL_136:
+      if ( v2 )
+      {
+        v110 = sUpLegVehicle;
+        v111 = USER_RAYCAST_LAYER_3;
+LABEL_141:
+        UFG::syncFeet(v100, v111, v110);
+        goto LABEL_142;
+      }
+LABEL_138:
+      v111 = USER_RAYCAST_LAYER_1;
+      if ( v92 )
+        v110 = sUpLegGrapple;
+      else
+        v110 = sUpLeg;
+      goto LABEL_141;
+    }
+  }
+LABEL_142:
+  mNext = thi
 
 // File Line: 1324
 // RVA: 0x523640
-void __fastcall UFG::WorldContextComponent::ConstrainSyncBoneWorldAnchorToLine(UFG::qMatrix44 *newWorldAnchor, Creature *pCreature, int syncBoneIndex, UFG::qVector4 *vHandleOrigin, UFG::qVector3 *vHandleAxis, float fSegmentLength, float fLeftConstraint, float fRightConstraint, bool syncPositionOnly, bool syncForward, bool syncClosestEndPoint, bool syncPlanar)
+void __fastcall UFG::WorldContextComponent::ConstrainSyncBoneWorldAnchorToLine(
+        UFG::qMatrix44 *newWorldAnchor,
+        Creature *pCreature,
+        int syncBoneIndex,
+        UFG::qVector4 *vHandleOrigin,
+        UFG::qVector3 *vHandleAxis,
+        float fSegmentLength,
+        float fLeftConstraint,
+        char fRightConstraint,
+        bool syncPositionOnly,
+        bool syncForward,
+        bool syncClosestEndPoint,
+        bool syncPlanar)
 {
-  UFG::qMatrix44 *v12; // rdi
-  Creature *v13; // rbx
-  UFG::qVector4 *v14; // r14
   UFG::qVector3 *v15; // rbx
-  __m128 v16; // xmm6
-  float v17; // xmm15_4
-  float v18; // xmm3_4
-  __m128 v19; // xmm2
-  float v20; // xmm1_4
-  float v21; // xmm6_4
-  float v22; // xmm15_4
-  float v23; // xmm7_4
-  UFG::qVector4 v24; // xmm9
-  UFG::qVector4 v25; // xmm14
-  float v26; // xmm10_4
-  float v27; // xmm12_4
-  float v28; // xmm13_4
-  __m128 v29; // xmm5
-  __m128 v30; // xmm6
-  __m128 v31; // xmm4
-  __m128 v32; // xmm11
-  __m128 v33; // xmm4
-  float v34; // xmm4_4
-  float v35; // xmm5_4
-  float v36; // xmm8_4
-  float v37; // xmm9_4
-  __m128 v38; // xmm3
-  __m128 v39; // xmm2
-  float v40; // xmm10_4
-  float v41; // xmm3_4
-  UFG::qVector4 vSyncPosition; // [rsp+50h] [rbp-A8h]
-  __m128 v43; // [rsp+60h] [rbp-98h]
-  __m128 v44; // [rsp+70h] [rbp-88h]
-  float v45; // [rsp+80h] [rbp-78h]
-  int v46; // [rsp+84h] [rbp-74h]
-  UFG::qVector4 v47; // [rsp+88h] [rbp-70h]
-  UFG::qVector4 result; // [rsp+98h] [rbp-60h]
-  UFG::qMatrix44 transform; // [rsp+A8h] [rbp-50h]
-  UFG::qVector4 v50; // [rsp+E8h] [rbp-10h]
-  UFG::qMatrix44 d; // [rsp+F8h] [rbp+0h]
-  UFG::qMatrix44 v52; // [rsp+138h] [rbp+40h]
-  float retaddr; // [rsp+228h] [rbp+130h]
-  UFG::qVector3 *v54; // [rsp+248h] [rbp+150h]
-  float v55; // [rsp+248h] [rbp+150h]
+  float v16; // xmm1_4
+  __m128 y_low; // xmm6
+  float v18; // xmm15_4
+  float v19; // xmm3_4
+  __m128 v20; // xmm2
+  float v21; // xmm1_4
+  float v22; // xmm6_4
+  float v23; // xmm15_4
+  float v24; // xmm7_4
+  UFG::qVector4 v25; // xmm9
+  UFG::qVector4 v26; // xmm14
+  float x; // xmm10_4
+  float y; // xmm12_4
+  float z; // xmm13_4
+  __m128 v30; // xmm5
+  __m128 v31; // xmm6
+  __m128 v32; // xmm4
+  __m128 v33; // xmm11
+  __m128 v34; // xmm4
+  float v35; // xmm4_4
+  float v36; // xmm5_4
+  float v37; // xmm8_4
+  float v38; // xmm9_4
+  __m128 v39; // xmm3
+  __m128 v40; // xmm2
+  float v41; // xmm10_4
+  float v42; // xmm3_4
+  UFG::qVector4 vSyncPosition; // [rsp+50h] [rbp-A8h] BYREF
+  __m128 v44; // [rsp+60h] [rbp-98h]
+  _BYTE v45[24]; // [rsp+70h] [rbp-88h]
+  __int128 v46; // [rsp+88h] [rbp-70h]
+  UFG::qVector4 result; // [rsp+98h] [rbp-60h] BYREF
+  UFG::qMatrix44 transform; // [rsp+A8h] [rbp-50h] BYREF
+  __m128 v49; // [rsp+E8h] [rbp-10h]
+  UFG::qMatrix44 d; // [rsp+F8h] [rbp+0h] BYREF
+  UFG::qMatrix44 v51; // [rsp+138h] [rbp+40h] BYREF
+  void *retaddr; // [rsp+228h] [rbp+130h]
+  UFG::qVector3 *v53; // [rsp+248h] [rbp+150h]
+  float v54; // [rsp+248h] [rbp+150h]
 
-  v12 = newWorldAnchor;
-  v13 = pCreature;
-  v14 = vHandleOrigin;
   Creature::GetTransform(pCreature, syncBoneIndex, &transform);
-  Creature::GetTransform(v13, 2, &v52);
-  v15 = v54;
-  v16 = (__m128)LODWORD(v54->y);
-  v16.m128_f32[0] = (float)(v16.m128_f32[0] * UFG::qVector3::msDirUp.z) - (float)(v54->z * UFG::qVector3::msDirUp.y);
-  v19 = v16;
-  v17 = (float)(v54->x * UFG::qVector3::msDirUp.y) - (float)(v54->y * UFG::qVector3::msDirUp.x);
-  v18 = (float)(v54->z * UFG::qVector3::msDirUp.x) - (float)(v54->x * UFG::qVector3::msDirUp.z);
-  v19.m128_f32[0] = (float)((float)(v16.m128_f32[0] * v16.m128_f32[0]) + (float)(v18 * v18)) + (float)(v17 * v17);
-  if ( v19.m128_f32[0] == 0.0 )
-    v20 = 0.0;
+  Creature::GetTransform(pCreature, 2, &v51);
+  v15 = v53;
+  y_low = (__m128)LODWORD(v53->y);
+  v16 = y_low.m128_f32[0] * UFG::qVector3::msDirUp.x;
+  y_low.m128_f32[0] = (float)(y_low.m128_f32[0] * UFG::qVector3::msDirUp.z) - (float)(v53->z * UFG::qVector3::msDirUp.y);
+  v20 = y_low;
+  v18 = (float)(v53->x * UFG::qVector3::msDirUp.y) - v16;
+  v19 = (float)(v53->z * UFG::qVector3::msDirUp.x) - (float)(v53->x * UFG::qVector3::msDirUp.z);
+  v20.m128_f32[0] = (float)((float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(v19 * v19)) + (float)(v18 * v18);
+  if ( v20.m128_f32[0] == 0.0 )
+    v21 = 0.0;
   else
-    v20 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v19));
-  v21 = v16.m128_f32[0] * v20;
-  v22 = v17 * v20;
-  v44.m128_u64[1] = LODWORD(UFG::qVector3::msDirUp.x);
-  v45 = UFG::qVector3::msDirUp.z;
-  v46 = 0;
-  v23 = v20 * v18;
-  v43.m128_f32[0] = v21;
-  v43.m128_u64[1] = LODWORD(v22);
-  v55 = v21;
-  v24 = *(UFG::qVector4 *)((char *)&v44 + 8);
-  v43.m128_f32[1] = v20 * v18;
-  retaddr = v20 * v18;
-  v44.m128_f32[0] = (float)(v22 * UFG::qVector3::msDirUp.y) - (float)((float)(v20 * v18) * UFG::qVector3::msDirUp.z);
-  v44.m128_f32[1] = (float)(v21 * UFG::qVector3::msDirUp.z) - (float)(v22 * UFG::qVector3::msDirUp.x);
-  v47 = (UFG::qVector4)_xmm;
-  v44.m128_f32[2] = (float)((float)(v20 * v18) * UFG::qVector3::msDirUp.x) - (float)(v21 * UFG::qVector3::msDirUp.y);
-  v25 = (UFG::qVector4)v44;
-  v50 = (UFG::qVector4)v43;
-  if ( LOBYTE(fRightConstraint) )
+    v21 = 1.0 / _mm_sqrt_ps(v20).m128_f32[0];
+  v22 = y_low.m128_f32[0] * v21;
+  v23 = v18 * v21;
+  *(_QWORD *)&v45[8] = LODWORD(UFG::qVector3::msDirUp.x);
+  *(float *)&v45[16] = UFG::qVector3::msDirUp.z;
+  *(_DWORD *)&v45[20] = 0;
+  v24 = v21 * v19;
+  v44.m128_f32[0] = v22;
+  v44.m128_u64[1] = LODWORD(v23);
+  v54 = v22;
+  v25 = *(UFG::qVector4 *)&v45[8];
+  v44.m128_f32[1] = v21 * v19;
+  *(float *)&retaddr = v21 * v19;
+  *(float *)v45 = (float)(v23 * UFG::qVector3::msDirUp.y) - (float)((float)(v21 * v19) * UFG::qVector3::msDirUp.z);
+  *(float *)&v45[4] = (float)(v22 * UFG::qVector3::msDirUp.z) - (float)(v23 * UFG::qVector3::msDirUp.x);
+  v46 = _xmm;
+  *(float *)&v45[8] = (float)((float)(v21 * v19) * UFG::qVector3::msDirUp.x) - (float)(v22 * UFG::qVector3::msDirUp.y);
+  v26 = *(UFG::qVector4 *)v45;
+  v49 = v44;
+  if ( fRightConstraint )
   {
-    v26 = transform.v3.x;
-    v27 = transform.v3.y;
-    v28 = transform.v3.z;
+    x = transform.v3.x;
+    y = transform.v3.y;
+    z = transform.v3.z;
     vSyncPosition = transform.v3;
   }
   else
   {
     UFG::qInverseAffine(&d, &transform);
-    v29 = _mm_add_ps(
-            _mm_add_ps(
-              _mm_add_ps(
-                _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps((__m128)v52.v0, (__m128)v52.v0, 0), (__m128)d.v0), (__m128)0i64),
-                _mm_mul_ps(_mm_shuffle_ps((__m128)v52.v0, (__m128)v52.v0, 85), (__m128)d.v1)),
-              _mm_mul_ps(_mm_shuffle_ps((__m128)v52.v0, (__m128)v52.v0, 170), (__m128)d.v2)),
-            _mm_mul_ps(_mm_shuffle_ps((__m128)v52.v0, (__m128)v52.v0, 255), (__m128)d.v3));
     v30 = _mm_add_ps(
             _mm_add_ps(
               _mm_add_ps(
-                _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps((__m128)v52.v1, (__m128)v52.v1, 0), (__m128)d.v0), (__m128)0i64),
-                _mm_mul_ps(_mm_shuffle_ps((__m128)v52.v1, (__m128)v52.v1, 85), (__m128)d.v1)),
-              _mm_mul_ps(_mm_shuffle_ps((__m128)v52.v1, (__m128)v52.v1, 170), (__m128)d.v2)),
-            _mm_mul_ps(_mm_shuffle_ps((__m128)v52.v1, (__m128)v52.v1, 255), (__m128)d.v3));
+                _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps((__m128)v51.v0, (__m128)v51.v0, 0), (__m128)d.v0), (__m128)0i64),
+                _mm_mul_ps(_mm_shuffle_ps((__m128)v51.v0, (__m128)v51.v0, 85), (__m128)d.v1)),
+              _mm_mul_ps(_mm_shuffle_ps((__m128)v51.v0, (__m128)v51.v0, 170), (__m128)d.v2)),
+            _mm_mul_ps(_mm_shuffle_ps((__m128)v51.v0, (__m128)v51.v0, 255), (__m128)d.v3));
     v31 = _mm_add_ps(
             _mm_add_ps(
               _mm_add_ps(
-                _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps((__m128)v52.v2, (__m128)v52.v2, 0), (__m128)d.v0), (__m128)0i64),
-                _mm_mul_ps(_mm_shuffle_ps((__m128)v52.v2, (__m128)v52.v2, 85), (__m128)d.v1)),
-              _mm_mul_ps(_mm_shuffle_ps((__m128)v52.v2, (__m128)v52.v2, 170), (__m128)d.v2)),
-            _mm_mul_ps(_mm_shuffle_ps((__m128)v52.v2, (__m128)v52.v2, 255), (__m128)d.v3));
-    v24 = *(UFG::qVector4 *)((char *)&v44 + 8);
+                _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps((__m128)v51.v1, (__m128)v51.v1, 0), (__m128)d.v0), (__m128)0i64),
+                _mm_mul_ps(_mm_shuffle_ps((__m128)v51.v1, (__m128)v51.v1, 85), (__m128)d.v1)),
+              _mm_mul_ps(_mm_shuffle_ps((__m128)v51.v1, (__m128)v51.v1, 170), (__m128)d.v2)),
+            _mm_mul_ps(_mm_shuffle_ps((__m128)v51.v1, (__m128)v51.v1, 255), (__m128)d.v3));
     v32 = _mm_add_ps(
-            _mm_mul_ps((__m128)d.v3, _mm_shuffle_ps((__m128)v52.v3, (__m128)v52.v3, 255)),
             _mm_add_ps(
               _mm_add_ps(
-                _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps((__m128)v52.v3, (__m128)v52.v3, 0), (__m128)d.v0), (__m128)0i64),
-                _mm_mul_ps(_mm_shuffle_ps((__m128)v52.v3, (__m128)v52.v3, 85), (__m128)d.v1)),
-              _mm_mul_ps(_mm_shuffle_ps((__m128)v52.v3, (__m128)v52.v3, 170), (__m128)d.v2)));
-    v27 = transform.v3.y;
+                _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps((__m128)v51.v2, (__m128)v51.v2, 0), (__m128)d.v0), (__m128)0i64),
+                _mm_mul_ps(_mm_shuffle_ps((__m128)v51.v2, (__m128)v51.v2, 85), (__m128)d.v1)),
+              _mm_mul_ps(_mm_shuffle_ps((__m128)v51.v2, (__m128)v51.v2, 170), (__m128)d.v2)),
+            _mm_mul_ps(_mm_shuffle_ps((__m128)v51.v2, (__m128)v51.v2, 255), (__m128)d.v3));
+    v25 = *(UFG::qVector4 *)&v45[8];
+    v33 = _mm_add_ps(
+            _mm_mul_ps((__m128)d.v3, _mm_shuffle_ps((__m128)v51.v3, (__m128)v51.v3, 255)),
+            _mm_add_ps(
+              _mm_add_ps(
+                _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps((__m128)v51.v3, (__m128)v51.v3, 0), (__m128)d.v0), (__m128)0i64),
+                _mm_mul_ps(_mm_shuffle_ps((__m128)v51.v3, (__m128)v51.v3, 85), (__m128)d.v1)),
+              _mm_mul_ps(_mm_shuffle_ps((__m128)v51.v3, (__m128)v51.v3, 170), (__m128)d.v2)));
+    y = transform.v3.y;
     d.v0 = (UFG::qVector4)_mm_add_ps(
                             _mm_add_ps(
                               _mm_add_ps(
-                                _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v29, v29, 0), v43), (__m128)0i64),
-                                _mm_mul_ps(_mm_shuffle_ps(v29, v29, 85), v44)),
-                              _mm_mul_ps(_mm_shuffle_ps(v29, v29, 170), *(__m128 *)((char *)&v44 + 8))),
-                            _mm_mul_ps(_mm_shuffle_ps(v29, v29, 255), (__m128)_xmm));
+                                _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v30, v30, 0), v44), (__m128)0i64),
+                                _mm_mul_ps(_mm_shuffle_ps(v30, v30, 85), *(__m128 *)v45)),
+                              _mm_mul_ps(_mm_shuffle_ps(v30, v30, 170), *(__m128 *)&v45[8])),
+                            _mm_mul_ps(_mm_shuffle_ps(v30, v30, 255), (__m128)_xmm));
     d.v2 = (UFG::qVector4)_mm_add_ps(
                             _mm_add_ps(
                               _mm_add_ps(
-                                _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v31, v31, 0), v43), (__m128)0i64),
-                                _mm_mul_ps(_mm_shuffle_ps(v31, v31, 85), v44)),
-                              _mm_mul_ps(_mm_shuffle_ps(v31, v31, 170), *(__m128 *)((char *)&v44 + 8))),
-                            _mm_mul_ps(_mm_shuffle_ps(v31, v31, 255), (__m128)_xmm));
-    v28 = transform.v3.z;
-    v26 = transform.v3.x;
+                                _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v32, v32, 0), v44), (__m128)0i64),
+                                _mm_mul_ps(_mm_shuffle_ps(v32, v32, 85), *(__m128 *)v45)),
+                              _mm_mul_ps(_mm_shuffle_ps(v32, v32, 170), *(__m128 *)&v45[8])),
+                            _mm_mul_ps(_mm_shuffle_ps(v32, v32, 255), (__m128)_xmm));
+    z = transform.v3.z;
+    x = transform.v3.x;
     d.v1 = (UFG::qVector4)_mm_add_ps(
                             _mm_add_ps(
                               _mm_add_ps(
-                                _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v30, v30, 0), v43), (__m128)0i64),
-                                _mm_mul_ps(_mm_shuffle_ps(v30, v30, 85), v44)),
-                              _mm_mul_ps(_mm_shuffle_ps(v30, v30, 170), *(__m128 *)((char *)&v44 + 8))),
-                            _mm_mul_ps(_mm_shuffle_ps(v30, v30, 255), (__m128)_xmm));
-    v33 = _mm_add_ps(
+                                _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v31, v31, 0), v44), (__m128)0i64),
+                                _mm_mul_ps(_mm_shuffle_ps(v31, v31, 85), *(__m128 *)v45)),
+                              _mm_mul_ps(_mm_shuffle_ps(v31, v31, 170), *(__m128 *)&v45[8])),
+                            _mm_mul_ps(_mm_shuffle_ps(v31, v31, 255), (__m128)_xmm));
+    v34 = _mm_add_ps(
             _mm_add_ps(
               _mm_add_ps(
-                _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v32, v32, 0), v43), (__m128)0i64),
-                _mm_mul_ps(_mm_shuffle_ps(v32, v32, 85), v44)),
-              _mm_mul_ps(_mm_shuffle_ps(v32, v32, 170), *(__m128 *)((char *)&v44 + 8))),
-            _mm_mul_ps(_mm_shuffle_ps(v32, v32, 255), (__m128)_xmm));
-    vSyncPosition.x = v52.v3.x - v33.m128_f32[0];
-    vSyncPosition.y = COERCE_FLOAT(_mm_shuffle_ps((__m128)v52.v3, (__m128)v52.v3, 85))
-                    - COERCE_FLOAT(_mm_shuffle_ps(v33, v33, 85));
-    vSyncPosition.w = v52.v3.w - COERCE_FLOAT(_mm_shuffle_ps(v33, v33, 255));
-    vSyncPosition.z = COERCE_FLOAT(_mm_shuffle_ps((__m128)v52.v3, (__m128)v52.v3, 170))
-                    - COERCE_FLOAT(_mm_shuffle_ps(v33, v33, 170));
-    v21 = v55;
-    v23 = retaddr;
-    v25 = (UFG::qVector4)v44;
+                _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v33, v33, 0), v44), (__m128)0i64),
+                _mm_mul_ps(_mm_shuffle_ps(v33, v33, 85), *(__m128 *)v45)),
+              _mm_mul_ps(_mm_shuffle_ps(v33, v33, 170), *(__m128 *)&v45[8])),
+            _mm_mul_ps(_mm_shuffle_ps(v33, v33, 255), (__m128)_xmm));
+    vSyncPosition.x = v51.v3.x - v34.m128_f32[0];
+    vSyncPosition.y = _mm_shuffle_ps((__m128)v51.v3, (__m128)v51.v3, 85).m128_f32[0]
+                    - _mm_shuffle_ps(v34, v34, 85).m128_f32[0];
+    vSyncPosition.w = v51.v3.w - _mm_shuffle_ps(v34, v34, 255).m128_f32[0];
+    vSyncPosition.z = _mm_shuffle_ps((__m128)v51.v3, (__m128)v51.v3, 170).m128_f32[0]
+                    - _mm_shuffle_ps(v34, v34, 170).m128_f32[0];
+    v22 = v54;
+    v24 = *(float *)&retaddr;
+    v26 = *(UFG::qVector4 *)v45;
   }
   UFG::WorldContextComponent::GetClosestAnchorOnLine(
     &result,
     &vSyncPosition,
-    v14,
+    vHandleOrigin,
     v15,
     *(float *)&vHandleAxis,
     fSegmentLength,
     fLeftConstraint,
     syncForward,
     syncClosestEndPoint);
-  v34 = result.x;
-  v35 = result.y;
-  v36 = result.z;
-  v47 = result;
-  if ( LOBYTE(fRightConstraint) )
+  v35 = result.x;
+  v36 = result.y;
+  v37 = result.z;
+  v46 = (__int128)result;
+  if ( fRightConstraint )
   {
     if ( syncPositionOnly )
     {
-      v38 = (__m128)LODWORD(result.y);
-      v37 = result.x - v26;
-      v38.m128_f32[0] = result.y - v27;
-      v39 = v38;
-      v40 = result.z - v28;
-      v39.m128_f32[0] = (float)((float)(v38.m128_f32[0] * v38.m128_f32[0]) + (float)(v37 * v37)) + (float)(v40 * v40);
-      if ( COERCE_FLOAT(_mm_sqrt_ps(v39)) >= 0.000099999997 )
+      v39 = (__m128)LODWORD(result.y);
+      v38 = result.x - x;
+      v39.m128_f32[0] = result.y - y;
+      v40 = v39;
+      v41 = result.z - z;
+      v40.m128_f32[0] = (float)((float)(v39.m128_f32[0] * v39.m128_f32[0]) + (float)(v38 * v38)) + (float)(v41 * v41);
+      if ( _mm_sqrt_ps(v40).m128_f32[0] >= 0.000099999997 )
       {
-        v41 = (float)((float)(v38.m128_f32[0] * v23) + (float)(v37 * v21)) + (float)(v40 * v22);
-        if ( v41 < 0.0 )
+        v42 = (float)((float)(v39.m128_f32[0] * v24) + (float)(v38 * v22)) + (float)(v41 * v23);
+        if ( v42 < 0.0 )
         {
-          v34 = result.x - (float)(v21 * v41);
-          v35 = result.y - (float)(v23 * v41);
-          v36 = result.z - (float)(v22 * v41);
+          v35 = result.x - (float)(v22 * v42);
+          v36 = result.y - (float)(v24 * v42);
+          v37 = result.z - (float)(v23 * v42);
         }
       }
     }
-    v25 = transform.v1;
-    v24 = transform.v2;
-    v50 = transform.v0;
-    *(_QWORD *)&v47.x = __PAIR__(LODWORD(v35), LODWORD(v34));
-    *(_QWORD *)&v47.z = __PAIR__(1065353216, LODWORD(v36));
+    v26 = transform.v1;
+    v25 = transform.v2;
+    v49 = (__m128)transform.v0;
+    *(_QWORD *)&v46 = __PAIR64__(LODWORD(v36), LODWORD(v35));
+    *((_QWORD *)&v46 + 1) = LODWORD(v37) | 0x3F80000000000000i64;
   }
-  v12->v0 = v50;
-  v12->v1 = v25;
-  v12->v2 = v24;
-  v12->v3 = v47;
+  newWorldAnchor->v0 = (UFG::qVector4)v49;
+  newWorldAnchor->v1 = v26;
+  newWorldAnchor->v2 = v25;
+  newWorldAnchor->v3 = (UFG::qVector4)v46;
 }
 
 // File Line: 1425
 // RVA: 0x52B2E0
-UFG::qVector4 *__fastcall UFG::WorldContextComponent::GetClosestAnchorOnLine(UFG::qVector4 *result, UFG::qVector4 *vSyncPosition, UFG::qVector4 *vHandleOrigin, UFG::qVector3 *vHandleAxis, float fSegmentLength, float fLeftConstraint, float fRightConstraint, bool syncToClosestEndpoint, bool syncPlanar)
+UFG::qVector4 *__fastcall UFG::WorldContextComponent::GetClosestAnchorOnLine(
+        UFG::qVector4 *result,
+        UFG::qVector4 *vSyncPosition,
+        UFG::qVector4 *vHandleOrigin,
+        UFG::qVector3 *vHandleAxis,
+        float fSegmentLength,
+        float fLeftConstraint,
+        float fRightConstraint,
+        bool syncToClosestEndpoint,
+        bool syncPlanar)
 {
-  float v9; // xmm8_4
-  float v10; // xmm9_4
+  float z; // xmm8_4
+  float x; // xmm9_4
   float v11; // xmm6_4
-  __m128 v12; // xmm10
-  float v13; // xmm7_4
+  __m128 y_low; // xmm10
+  float y; // xmm7_4
   __m128 v14; // xmm0
   float v15; // xmm11_4
   float v16; // xmm1_4
@@ -2768,21 +2760,21 @@ UFG::qVector4 *__fastcall UFG::WorldContextComponent::GetClosestAnchorOnLine(UFG
   float v25; // xmm11_4
   float v26; // xmm2_4
 
-  v9 = vHandleAxis->z;
-  v10 = vHandleAxis->x;
+  z = vHandleAxis->z;
+  x = vHandleAxis->x;
   v11 = vHandleOrigin->x;
-  v12 = (__m128)LODWORD(vHandleAxis->y);
-  v13 = vHandleOrigin->y;
-  v17 = v12;
+  y_low = (__m128)LODWORD(vHandleAxis->y);
+  y = vHandleOrigin->y;
+  v17 = y_low;
   v14 = (__m128)(unsigned int)FLOAT_1_0;
-  v14.m128_f32[0] = 1.0 - (float)(v9 * v9);
-  v15 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v14));
+  v14.m128_f32[0] = 1.0 - (float)(z * z);
+  v15 = 1.0 / _mm_sqrt_ps(v14).m128_f32[0];
   v16 = 0.0;
-  v17.m128_f32[0] = (float)(v12.m128_f32[0] * v12.m128_f32[0]) + (float)(v10 * v10);
+  v17.m128_f32[0] = (float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(x * x);
   if ( v17.m128_f32[0] != 0.0 )
-    v16 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v17));
-  v18 = (float)((float)((float)(v12.m128_f32[0] * v16) * (float)(vSyncPosition->y - v13))
-              + (float)((float)(v10 * v16) * (float)(vSyncPosition->x - vHandleOrigin->x)))
+    v16 = 1.0 / _mm_sqrt_ps(v17).m128_f32[0];
+  v18 = (float)((float)((float)(y_low.m128_f32[0] * v16) * (float)(vSyncPosition->y - y))
+              + (float)((float)(x * v16) * (float)(vSyncPosition->x - vHandleOrigin->x)))
       * v15;
   if ( syncToClosestEndpoint )
   {
@@ -2790,16 +2782,16 @@ UFG::qVector4 *__fastcall UFG::WorldContextComponent::GetClosestAnchorOnLine(UFG
     {
       v20 = vHandleOrigin->z;
       result->x = v11;
-      result->y = v13;
+      result->y = y;
       result->z = v20;
       result->w = vHandleOrigin->w;
     }
     else
     {
       v19 = vHandleOrigin->w + 1.0;
-      result->z = (float)(v9 * fSegmentLength) + vHandleOrigin->z;
-      result->x = v11 + (float)(v10 * fSegmentLength);
-      result->y = v13 + (float)(v12.m128_f32[0] * fSegmentLength);
+      result->z = (float)(z * fSegmentLength) + vHandleOrigin->z;
+      result->x = v11 + (float)(x * fSegmentLength);
+      result->y = y + (float)(y_low.m128_f32[0] * fSegmentLength);
       result->w = v19;
     }
   }
@@ -2808,23 +2800,23 @@ UFG::qVector4 *__fastcall UFG::WorldContextComponent::GetClosestAnchorOnLine(UFG
     v21 = vHandleOrigin->z;
     v22 = vHandleOrigin->w + 1.0;
     result->w = v22;
-    result->x = v11 + (float)(v10 * v18);
-    result->z = v21 + (float)(v9 * v18);
-    result->y = v13 + (float)(v12.m128_f32[0] * v18);
+    result->x = v11 + (float)(x * v18);
+    result->z = v21 + (float)(z * v18);
+    result->y = y + (float)(y_low.m128_f32[0] * v18);
     if ( v18 >= fRightConstraint )
     {
       v26 = fSegmentLength - fLeftConstraint;
       if ( v18 <= (float)(fSegmentLength - fLeftConstraint) )
         goto LABEL_12;
-      v25 = v21 + (float)(v26 * v9);
-      v23 = v11 + (float)(v26 * v10);
-      v24 = v13 + (float)(v26 * v12.m128_f32[0]);
+      v25 = v21 + (float)(v26 * z);
+      v23 = v11 + (float)(v26 * x);
+      v24 = y + (float)(v26 * y_low.m128_f32[0]);
     }
     else
     {
-      v23 = v11 + (float)(v10 * fRightConstraint);
-      v24 = v13 + (float)(v12.m128_f32[0] * fRightConstraint);
-      v25 = v21 + (float)(v9 * fRightConstraint);
+      v23 = v11 + (float)(x * fRightConstraint);
+      v24 = y + (float)(y_low.m128_f32[0] * fRightConstraint);
+      v25 = v21 + (float)(z * fRightConstraint);
     }
     result->w = v22;
     result->z = v25;
@@ -2842,177 +2834,177 @@ LABEL_12:
 // RVA: 0x5528C0
 void __fastcall UFG::WorldContextComponent::StopSync(UFG::WorldContextComponent *this)
 {
-  UFG::SimObjectProp *v1; // rcx
-  __int64 v2; // rdx
-  UFG::CharacterAnimationComponent *v3; // rcx
-  UFG::CharacterAnimationComponent *v4; // rax
-  unsigned int v5; // er8
-  unsigned int v6; // er9
-  Creature *v7; // rcx
+  UFG::SimObjectProp *m_pSimObject; // rcx
+  __int16 m_Flags; // dx
+  UFG::CharacterAnimationComponent *m_pComponent; // rcx
+  unsigned int m_TypeUID; // edx
+  unsigned int v5; // edx
+  UFG::CharacterAnimationComponent *ComponentOfType; // rax
+  unsigned int mComponentTableEntryCount; // r8d
+  unsigned int size; // r9d
+  __int64 v9; // rdx
+  Creature *mCreature; // rcx
 
   this->mSyncLatchedHandle = 0;
   *(_WORD *)&this->mbSyncingCoverLCorner = 0;
   this->mbSyncingCoverParkour = 0;
-  v1 = (UFG::SimObjectProp *)this->m_pSimObject;
-  if ( !v1 )
+  m_pSimObject = (UFG::SimObjectProp *)this->m_pSimObject;
+  if ( !m_pSimObject )
     return;
-  v2 = v1->m_Flags;
-  if ( ((unsigned __int16)v2 >> 14) & 1 )
+  m_Flags = m_pSimObject->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 )
   {
-    v3 = (UFG::CharacterAnimationComponent *)v1->m_Components.p[9].m_pComponent;
-    if ( !v3
-      || (v2 = v3->m_TypeUID, ((unsigned int)v2 ^ UFG::CharacterAnimationComponent::_TypeUID) & 0xFE000000)
-      || (v2 = UFG::CharacterAnimationComponent::_TypeUID & ~(_DWORD)v2, v2 & 0x1FFFFFF) )
+    m_pComponent = (UFG::CharacterAnimationComponent *)m_pSimObject->m_Components.p[9].m_pComponent;
+    if ( !m_pComponent
+      || (m_TypeUID = m_pComponent->m_TypeUID,
+          ((m_TypeUID ^ UFG::CharacterAnimationComponent::_TypeUID) & 0xFE000000) != 0)
+      || (UFG::CharacterAnimationComponent::_TypeUID & ~m_TypeUID & 0x1FFFFFF) != 0 )
     {
 LABEL_6:
-      v3 = 0i64;
-      goto LABEL_24;
+      m_pComponent = 0i64;
     }
   }
   else
   {
-    if ( (v2 & 0x8000u) != 0i64 )
+    if ( m_Flags < 0 )
     {
-      v3 = (UFG::CharacterAnimationComponent *)v1->m_Components.p[9].m_pComponent;
-      if ( v3 )
+      m_pComponent = (UFG::CharacterAnimationComponent *)m_pSimObject->m_Components.p[9].m_pComponent;
+      if ( m_pComponent )
       {
-        v2 = v3->m_TypeUID;
-        if ( !(((unsigned int)v2 ^ UFG::CharacterAnimationComponent::_TypeUID) & 0xFE000000) )
+        v5 = m_pComponent->m_TypeUID;
+        if ( ((v5 ^ UFG::CharacterAnimationComponent::_TypeUID) & 0xFE000000) == 0 )
         {
-          v2 = UFG::CharacterAnimationComponent::_TypeUID & ~(_DWORD)v2;
-          if ( v2 & 0x1FFFFFF )
-            v3 = 0i64;
+          if ( (UFG::CharacterAnimationComponent::_TypeUID & ~v5 & 0x1FFFFFF) != 0 )
+            m_pComponent = 0i64;
           goto LABEL_24;
         }
       }
       goto LABEL_6;
     }
-    if ( ((unsigned __int16)v2 >> 13) & 1 )
+    if ( (m_Flags & 0x2000) != 0 )
     {
-      v4 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>(v1);
+      ComponentOfType = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>(m_pSimObject);
     }
     else
     {
-      if ( ((unsigned __int16)v2 >> 12) & 1 )
+      if ( (m_Flags & 0x1000) != 0 )
       {
-        v5 = v1->mComponentTableEntryCount;
-        v6 = v1->m_Components.size;
-        v2 = v5;
-        if ( v5 < v6 )
+        mComponentTableEntryCount = m_pSimObject->mComponentTableEntryCount;
+        size = m_pSimObject->m_Components.size;
+        if ( mComponentTableEntryCount < size )
         {
-          v2 = (__int64)&v1->m_Components.p[v5];
-          while ( (*(_DWORD *)(v2 + 8) & 0xFE000000) != (UFG::CharacterAnimationComponent::_TypeUID & 0xFE000000)
-               || UFG::CharacterAnimationComponent::_TypeUID & ~*(_DWORD *)(v2 + 8) & 0x1FFFFFF )
+          v9 = (__int64)&m_pSimObject->m_Components.p[mComponentTableEntryCount];
+          while ( (*(_DWORD *)(v9 + 8) & 0xFE000000) != (UFG::CharacterAnimationComponent::_TypeUID & 0xFE000000)
+               || (UFG::CharacterAnimationComponent::_TypeUID & ~*(_DWORD *)(v9 + 8) & 0x1FFFFFF) != 0 )
           {
-            ++v5;
-            v2 += 16i64;
-            if ( v5 >= v6 )
+            ++mComponentTableEntryCount;
+            v9 += 16i64;
+            if ( mComponentTableEntryCount >= size )
               goto LABEL_6;
           }
-          v3 = *(UFG::CharacterAnimationComponent **)v2;
+          m_pComponent = *(UFG::CharacterAnimationComponent **)v9;
           goto LABEL_24;
         }
         goto LABEL_6;
       }
-      v4 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                 (UFG::SimObject *)&v1->vfptr,
-                                                 UFG::CharacterAnimationComponent::_TypeUID);
+      ComponentOfType = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                              m_pSimObject,
+                                                              UFG::CharacterAnimationComponent::_TypeUID);
     }
-    v3 = v4;
+    m_pComponent = ComponentOfType;
   }
 LABEL_24:
-  if ( v3 )
+  if ( m_pComponent )
   {
-    v7 = v3->mCreature;
-    if ( v7 )
-      Creature::MakeUpright(v7, 0.0, v2);
+    mCreature = m_pComponent->mCreature;
+    if ( mCreature )
+      Creature::MakeUpright(mCreature, 0.0);
   }
 }
 
 // File Line: 1503
 // RVA: 0x5224E0
-void __fastcall UFG::WorldContextComponent::AttachTo(UFG::WorldContextComponent *this, UFG::SimObject *simObject, UFG::TransformNodeComponent *transformNodeComponent, int attachmentBoneID, float blendIn, bool positionOnly, bool positionXY, bool useRubberBand)
+void __fastcall UFG::WorldContextComponent::AttachTo(
+        UFG::WorldContextComponent *this,
+        UFG::SimObject *simObject,
+        UFG::TransformNodeComponent *transformNodeComponent,
+        int attachmentBoneID,
+        float blendIn,
+        bool positionOnly,
+        bool positionXY,
+        bool useRubberBand)
 {
-  int v8; // er12
-  UFG::TransformNodeComponent *v9; // r15
-  UFG::SimObject *v10; // rbp
-  UFG::WorldContextComponent *v11; // r14
-  bool *v12; // rax
-  UFG::SimObjectProp *v13; // rbx
-  unsigned __int16 v14; // cx
-  UFG::RigidBody *v15; // rdi
-  UFG::CharacterAnimationComponent *v16; // rsi
-  unsigned int v17; // ecx
+  bool *p_mNext; // rax
+  UFG::SimObjectProp *m_pSimObject; // rbx
+  __int16 m_Flags; // cx
+  UFG::RigidBody *ComponentOfType; // rdi
+  UFG::CharacterAnimationComponent *m_pComponent; // rsi
+  unsigned int m_TypeUID; // ecx
   unsigned int v18; // edx
   unsigned int v19; // eax
   UFG::CharacterAnimationComponent *v20; // rax
   unsigned int v21; // ecx
-  unsigned int v22; // er8
+  unsigned int v22; // r8d
   UFG::SimComponentHolder *v23; // r11
   UFG::allocator::free_link *v24; // rax
   __int64 v25; // rax
   __int64 v26; // r8
-  UFG::qNode<Attachment,Attachment> **v27; // rcx
-  UFG::qNode<Attachment,Attachment> *v28; // rax
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v29; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v30; // rcx
+  UFG::qNode<Attachment,Attachment> *mPrev; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v28; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v29; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v30; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v31; // rax
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v32; // rax
-  __int64 *v33; // rdx
-  __int64 v34; // rcx
-  _QWORD *v35; // rax
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v36; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v37; // rcx
+  __int64 *v32; // rdx
+  __int64 v33; // rcx
+  _QWORD *v34; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v35; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v36; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v37; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v38; // rax
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v39; // rax
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v40; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v41; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v39; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v40; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v41; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v42; // rax
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v43; // rax
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v44; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v45; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v43; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v44; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v45; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v46; // rax
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v47; // rax
-  unsigned __int16 v48; // cx
-  unsigned int v49; // er8
-  unsigned int v50; // er9
-  UFG::SimComponentHolder *v51; // rbx
-  signed __int64 v52; // rdx
-  unsigned int v53; // er8
-  unsigned int v54; // er9
-  unsigned int v55; // er8
-  unsigned int v56; // er9
-  unsigned int v57; // er8
-  unsigned int v58; // er9
+  __int16 v47; // cx
+  unsigned int mComponentTableEntryCount; // r8d
+  unsigned int size; // r9d
+  UFG::SimComponentHolder *p; // rbx
+  __int64 v51; // rdx
+  unsigned int v52; // r8d
+  unsigned int v53; // r9d
+  unsigned int v54; // r8d
+  unsigned int v55; // r9d
+  unsigned int v56; // r8d
+  unsigned int v57; // r9d
 
   if ( attachmentBoneID == -1 )
     return;
-  v8 = attachmentBoneID;
-  v9 = transformNodeComponent;
-  v10 = simObject;
-  v11 = this;
-  v12 = (bool *)&this->mAttachments.mNode.mNext[-1].mNext;
-  if ( v12 == &this->mbSyncingCoverParkour )
+  p_mNext = (bool *)&this->mAttachments.mNode.mNext[-1].mNext;
+  if ( p_mNext == &this->mbSyncingCoverParkour )
   {
 LABEL_5:
-    v13 = (UFG::SimObjectProp *)this->m_pSimObject;
-    if ( !v13 )
+    m_pSimObject = (UFG::SimObjectProp *)this->m_pSimObject;
+    if ( !m_pSimObject )
       return;
-    v14 = v13->m_Flags;
-    v15 = 0i64;
-    if ( (v14 >> 14) & 1 )
+    m_Flags = m_pSimObject->m_Flags;
+    ComponentOfType = 0i64;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v16 = (UFG::CharacterAnimationComponent *)v13->m_Components.p[9].m_pComponent;
-      if ( v16 )
+      m_pComponent = (UFG::CharacterAnimationComponent *)m_pSimObject->m_Components.p[9].m_pComponent;
+      if ( m_pComponent )
       {
-        v17 = v16->m_TypeUID;
+        m_TypeUID = m_pComponent->m_TypeUID;
         v18 = UFG::CharacterAnimationComponent::_TypeUID;
-        v19 = v17 ^ UFG::CharacterAnimationComponent::_TypeUID;
+        v19 = m_TypeUID ^ UFG::CharacterAnimationComponent::_TypeUID;
 LABEL_9:
-        if ( v19 & 0xFE000000 || v18 & ~v17 & 0x1FFFFFF )
+        if ( (v19 & 0xFE000000) != 0 || (v18 & ~m_TypeUID & 0x1FFFFFF) != 0 )
           goto LABEL_11;
 LABEL_27:
-        if ( !v16 )
+        if ( !m_pComponent )
           return;
         v24 = UFG::qMalloc(0x110ui64, "WorldContextComponent.Attachment", 0i64);
         if ( v24 )
@@ -3024,59 +3016,58 @@ LABEL_27:
         {
           v26 = 0i64;
         }
-        v27 = (UFG::qNode<Attachment,Attachment> **)(v26 + 8);
-        v28 = v11->mAttachments.mNode.mPrev;
-        v28->mNext = (UFG::qNode<Attachment,Attachment> *)(v26 + 8);
-        *v27 = v28;
-        v27[1] = &v11->mAttachments.mNode;
-        v11->mAttachments.mNode.mPrev = (UFG::qNode<Attachment,Attachment> *)(v26 + 8);
+        mPrev = this->mAttachments.mNode.mPrev;
+        mPrev->mNext = (UFG::qNode<Attachment,Attachment> *)(v26 + 8);
+        *(_QWORD *)(v26 + 8) = mPrev;
+        *(_QWORD *)(v26 + 16) = &this->mAttachments;
+        this->mAttachments.mNode.mPrev = (UFG::qNode<Attachment,Attachment> *)(v26 + 8);
         *(_DWORD *)(v26 + 32) = 0;
-        v29 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)(v26 + 40);
+        v28 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)(v26 + 40);
         if ( *(_QWORD *)(v26 + 56) )
         {
-          v30 = v29->mPrev;
-          v31 = *(UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> **)(v26 + 48);
-          v30->mNext = v31;
-          v31->mPrev = v30;
-          v29->mPrev = v29;
+          v29 = v28->mPrev;
+          v30 = *(UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> **)(v26 + 48);
+          v29->mNext = v30;
+          v30->mPrev = v29;
+          v28->mPrev = v28;
           *(_QWORD *)(v26 + 48) = v26 + 40;
         }
-        *(_QWORD *)(v26 + 56) = v10;
-        if ( v10 )
+        *(_QWORD *)(v26 + 56) = simObject;
+        if ( simObject )
         {
-          v32 = v10->m_SafePointerList.mNode.mPrev;
-          v32->mNext = v29;
-          v29->mPrev = v32;
-          *(_QWORD *)(v26 + 48) = (char *)v10 + 8;
-          v10->m_SafePointerList.mNode.mPrev = v29;
+          v31 = simObject->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+          v31->mNext = v28;
+          v28->mPrev = v31;
+          *(_QWORD *)(v26 + 48) = &simObject->m_SafePointerList;
+          simObject->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = v28;
         }
-        v33 = (__int64 *)(v26 + 64);
+        v32 = (__int64 *)(v26 + 64);
         if ( *(_QWORD *)(v26 + 80) )
         {
-          v34 = *v33;
-          v35 = *(_QWORD **)(v26 + 72);
-          *(_QWORD *)(v34 + 8) = v35;
-          *v35 = v34;
-          *v33 = (__int64)v33;
+          v33 = *v32;
+          v34 = *(_QWORD **)(v26 + 72);
+          *(_QWORD *)(v33 + 8) = v34;
+          *v34 = v33;
+          *v32 = (__int64)v32;
           *(_QWORD *)(v26 + 72) = v26 + 64;
         }
         *(_QWORD *)(v26 + 80) = 0i64;
-        v36 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)(v26 + 88);
+        v35 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)(v26 + 88);
         if ( *(_QWORD *)(v26 + 104) )
         {
-          v37 = v36->mPrev;
-          v38 = *(UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> **)(v26 + 96);
-          v37->mNext = v38;
-          v38->mPrev = v37;
-          v36->mPrev = v36;
+          v36 = v35->mPrev;
+          v37 = *(UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> **)(v26 + 96);
+          v36->mNext = v37;
+          v37->mPrev = v36;
+          v35->mPrev = v35;
           *(_QWORD *)(v26 + 96) = v26 + 88;
         }
-        *(_QWORD *)(v26 + 104) = v13;
-        v39 = v13->m_SafePointerList.mNode.mPrev;
-        v39->mNext = v36;
-        v36->mPrev = v39;
-        *(_QWORD *)(v26 + 96) = (char *)v13 + 8;
-        v13->m_SafePointerList.mNode.mPrev = v36;
+        *(_QWORD *)(v26 + 104) = m_pSimObject;
+        v38 = m_pSimObject->m_SafePointerList.UFG::SimObjectGame::UFG::SimObject::UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+        v38->mNext = v35;
+        v35->mPrev = v38;
+        *(_QWORD *)(v26 + 96) = &m_pSimObject->m_SafePointerList;
+        m_pSimObject->m_SafePointerList.UFG::SimObjectGame::UFG::SimObject::UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = v35;
         *(_BYTE *)(v26 + 26) = 0;
         if ( blendIn > 0.0 )
         {
@@ -3088,231 +3079,231 @@ LABEL_27:
           *(_DWORD *)(v26 + 188) = 1065353216;
           *(_DWORD *)(v26 + 192) = 1065353216;
         }
-        v40 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)(v26 + 208);
+        v39 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)(v26 + 208);
         if ( *(_QWORD *)(v26 + 224) )
         {
-          v41 = v40->mPrev;
-          v42 = *(UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> **)(v26 + 216);
-          v41->mNext = v42;
-          v42->mPrev = v41;
-          v40->mPrev = v40;
+          v40 = v39->mPrev;
+          v41 = *(UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> **)(v26 + 216);
+          v40->mNext = v41;
+          v41->mPrev = v40;
+          v39->mPrev = v39;
           *(_QWORD *)(v26 + 216) = v26 + 208;
         }
-        *(_QWORD *)(v26 + 224) = v9;
-        if ( v9 )
+        *(_QWORD *)(v26 + 224) = transformNodeComponent;
+        if ( transformNodeComponent )
         {
-          v43 = v9->m_SafePointerList.mNode.mPrev;
-          v43->mNext = v40;
-          v40->mPrev = v43;
-          *(_QWORD *)(v26 + 216) = (char *)v9 + 8;
-          v9->m_SafePointerList.mNode.mPrev = v40;
+          v42 = transformNodeComponent->m_SafePointerList.mNode.UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mPrev;
+          v42->mNext = v39;
+          v39->mPrev = v42;
+          *(_QWORD *)(v26 + 216) = &transformNodeComponent->m_SafePointerList;
+          transformNodeComponent->m_SafePointerList.mNode.UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mPrev = v39;
         }
-        *(_DWORD *)(v26 + 232) = v8;
-        v44 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)(v26 + 240);
+        *(_DWORD *)(v26 + 232) = attachmentBoneID;
+        v43 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)(v26 + 240);
         if ( *(_QWORD *)(v26 + 256) )
         {
-          v45 = v44->mPrev;
-          v46 = *(UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> **)(v26 + 248);
-          v45->mNext = v46;
-          v46->mPrev = v45;
-          v44->mPrev = v44;
+          v44 = v43->mPrev;
+          v45 = *(UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> **)(v26 + 248);
+          v44->mNext = v45;
+          v45->mPrev = v44;
+          v43->mPrev = v43;
           *(_QWORD *)(v26 + 248) = v26 + 240;
         }
-        *(_QWORD *)(v26 + 256) = v16;
-        v47 = v16->m_SafePointerList.mNode.mPrev;
-        v47->mNext = v44;
-        v44->mPrev = v47;
-        *(_QWORD *)(v26 + 248) = (char *)v16 + 8;
-        v16->m_SafePointerList.mNode.mPrev = v44;
+        *(_QWORD *)(v26 + 256) = m_pComponent;
+        v46 = m_pComponent->m_SafePointerList.mNode.UFG::BaseAnimationComponent::UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mPrev;
+        v46->mNext = v43;
+        v43->mPrev = v46;
+        *(_QWORD *)(v26 + 248) = &m_pComponent->m_SafePointerList;
+        m_pComponent->m_SafePointerList.mNode.UFG::BaseAnimationComponent::UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mPrev = v43;
         *(_BYTE *)(v26 + 24) = positionOnly;
         *(_BYTE *)(v26 + 25) = positionXY;
         *(_BYTE *)(v26 + 28) = useRubberBand;
-        v48 = v13->m_Flags;
-        if ( (v48 >> 14) & 1 )
+        v47 = m_pSimObject->m_Flags;
+        if ( (v47 & 0x4000) != 0 )
         {
-          v49 = v13->mComponentTableEntryCount;
-          v50 = v13->m_Components.size;
-          if ( v49 >= v50 )
+          mComponentTableEntryCount = m_pSimObject->mComponentTableEntryCount;
+          size = m_pSimObject->m_Components.size;
+          if ( mComponentTableEntryCount >= size )
             goto LABEL_78;
-          v51 = v13->m_Components.p;
+          p = m_pSimObject->m_Components.p;
           while ( 1 )
           {
-            v52 = v49;
-            if ( (v51[v49].m_TypeUID & 0xFE000000) == (UFG::RigidBodyComponent::_TypeUID & 0xFE000000)
-              && !(UFG::RigidBodyComponent::_TypeUID & ~v51[v49].m_TypeUID & 0x1FFFFFF) )
+            v51 = mComponentTableEntryCount;
+            if ( (p[mComponentTableEntryCount].m_TypeUID & 0xFE000000) == (UFG::RigidBodyComponent::_TypeUID & 0xFE000000)
+              && (UFG::RigidBodyComponent::_TypeUID & ~p[mComponentTableEntryCount].m_TypeUID & 0x1FFFFFF) == 0 )
             {
               goto LABEL_55;
             }
-            if ( ++v49 >= v50 )
+            if ( ++mComponentTableEntryCount >= size )
               goto LABEL_78;
           }
         }
-        if ( (v48 & 0x8000u) == 0 )
+        if ( v47 >= 0 )
         {
-          if ( (v48 >> 13) & 1 )
+          if ( (v47 & 0x2000) != 0 )
           {
-            v55 = v13->mComponentTableEntryCount;
-            v56 = v13->m_Components.size;
-            if ( v55 < v56 )
+            v54 = m_pSimObject->mComponentTableEntryCount;
+            v55 = m_pSimObject->m_Components.size;
+            if ( v54 < v55 )
             {
-              v51 = v13->m_Components.p;
+              p = m_pSimObject->m_Components.p;
               do
               {
-                v52 = v55;
-                if ( (v51[v55].m_TypeUID & 0xFE000000) == (UFG::RigidBodyComponent::_TypeUID & 0xFE000000)
-                  && !(UFG::RigidBodyComponent::_TypeUID & ~v51[v55].m_TypeUID & 0x1FFFFFF) )
+                v51 = v54;
+                if ( (p[v54].m_TypeUID & 0xFE000000) == (UFG::RigidBodyComponent::_TypeUID & 0xFE000000)
+                  && (UFG::RigidBodyComponent::_TypeUID & ~p[v54].m_TypeUID & 0x1FFFFFF) == 0 )
                 {
                   goto LABEL_55;
                 }
               }
-              while ( ++v55 < v56 );
+              while ( ++v54 < v55 );
             }
           }
-          else if ( (v48 >> 12) & 1 )
+          else if ( (v47 & 0x1000) != 0 )
           {
-            v57 = v13->mComponentTableEntryCount;
-            v58 = v13->m_Components.size;
-            if ( v57 < v58 )
+            v56 = m_pSimObject->mComponentTableEntryCount;
+            v57 = m_pSimObject->m_Components.size;
+            if ( v56 < v57 )
             {
-              v51 = v13->m_Components.p;
+              p = m_pSimObject->m_Components.p;
               do
               {
-                v52 = v57;
-                if ( (v51[v57].m_TypeUID & 0xFE000000) == (UFG::RigidBodyComponent::_TypeUID & 0xFE000000)
-                  && !(UFG::RigidBodyComponent::_TypeUID & ~v51[v57].m_TypeUID & 0x1FFFFFF) )
+                v51 = v56;
+                if ( (p[v56].m_TypeUID & 0xFE000000) == (UFG::RigidBodyComponent::_TypeUID & 0xFE000000)
+                  && (UFG::RigidBodyComponent::_TypeUID & ~p[v56].m_TypeUID & 0x1FFFFFF) == 0 )
                 {
                   goto LABEL_55;
                 }
               }
-              while ( ++v57 < v58 );
+              while ( ++v56 < v57 );
             }
           }
           else
           {
-            v15 = (UFG::RigidBody *)UFG::SimObject::GetComponentOfType(
-                                      (UFG::SimObject *)&v13->vfptr,
-                                      UFG::RigidBodyComponent::_TypeUID);
+            ComponentOfType = (UFG::RigidBody *)UFG::SimObject::GetComponentOfType(
+                                                  m_pSimObject,
+                                                  UFG::RigidBodyComponent::_TypeUID);
           }
         }
         else
         {
-          v53 = v13->mComponentTableEntryCount;
-          v54 = v13->m_Components.size;
-          if ( v53 < v54 )
+          v52 = m_pSimObject->mComponentTableEntryCount;
+          v53 = m_pSimObject->m_Components.size;
+          if ( v52 < v53 )
           {
-            v51 = v13->m_Components.p;
+            p = m_pSimObject->m_Components.p;
             while ( 1 )
             {
-              v52 = v53;
-              if ( (v51[v53].m_TypeUID & 0xFE000000) == (UFG::RigidBodyComponent::_TypeUID & 0xFE000000)
-                && !(UFG::RigidBodyComponent::_TypeUID & ~v51[v53].m_TypeUID & 0x1FFFFFF) )
+              v51 = v52;
+              if ( (p[v52].m_TypeUID & 0xFE000000) == (UFG::RigidBodyComponent::_TypeUID & 0xFE000000)
+                && (UFG::RigidBodyComponent::_TypeUID & ~p[v52].m_TypeUID & 0x1FFFFFF) == 0 )
               {
                 break;
               }
-              if ( ++v53 >= v54 )
+              if ( ++v52 >= v53 )
                 goto LABEL_78;
             }
 LABEL_55:
-            v15 = (UFG::RigidBody *)v51[v52].m_pComponent;
-            goto LABEL_78;
+            ComponentOfType = (UFG::RigidBody *)p[v51].m_pComponent;
           }
         }
 LABEL_78:
-        if ( v15 )
-          UFG::RigidBody::SetMotionType(v15, 0x100u);
+        if ( ComponentOfType )
+          UFG::RigidBody::SetMotionType(ComponentOfType, 0x100u);
         return;
       }
     }
     else
     {
-      if ( (v14 & 0x8000u) == 0 )
+      if ( m_Flags >= 0 )
       {
-        if ( (v14 >> 13) & 1 )
+        if ( (m_Flags & 0x2000) != 0 )
         {
-          v20 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>(v13);
+          v20 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>(m_pSimObject);
         }
         else
         {
-          if ( (v14 >> 12) & 1 )
+          if ( (m_Flags & 0x1000) != 0 )
           {
-            v21 = v13->mComponentTableEntryCount;
-            v22 = v13->m_Components.size;
+            v21 = m_pSimObject->mComponentTableEntryCount;
+            v22 = m_pSimObject->m_Components.size;
             if ( v21 < v22 )
             {
-              v23 = v13->m_Components.p;
+              v23 = m_pSimObject->m_Components.p;
               while ( (v23[v21].m_TypeUID & 0xFE000000) != (UFG::CharacterAnimationComponent::_TypeUID & 0xFE000000)
-                   || UFG::CharacterAnimationComponent::_TypeUID & ~v23[v21].m_TypeUID & 0x1FFFFFF )
+                   || (UFG::CharacterAnimationComponent::_TypeUID & ~v23[v21].m_TypeUID & 0x1FFFFFF) != 0 )
               {
                 if ( ++v21 >= v22 )
                   goto LABEL_11;
               }
-              v16 = (UFG::CharacterAnimationComponent *)v23[v21].m_pComponent;
+              m_pComponent = (UFG::CharacterAnimationComponent *)v23[v21].m_pComponent;
               goto LABEL_27;
             }
             goto LABEL_11;
           }
           v20 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                      (UFG::SimObject *)&v13->vfptr,
+                                                      m_pSimObject,
                                                       UFG::CharacterAnimationComponent::_TypeUID);
         }
-        v16 = v20;
+        m_pComponent = v20;
         goto LABEL_27;
       }
-      v16 = (UFG::CharacterAnimationComponent *)v13->m_Components.p[9].m_pComponent;
-      if ( v16 )
+      m_pComponent = (UFG::CharacterAnimationComponent *)m_pSimObject->m_Components.p[9].m_pComponent;
+      if ( m_pComponent )
       {
-        v17 = v16->m_TypeUID;
+        m_TypeUID = m_pComponent->m_TypeUID;
         v18 = UFG::CharacterAnimationComponent::_TypeUID;
-        v19 = UFG::CharacterAnimationComponent::_TypeUID ^ v16->m_TypeUID;
+        v19 = UFG::CharacterAnimationComponent::_TypeUID ^ m_TypeUID;
         goto LABEL_9;
       }
     }
 LABEL_11:
-    v16 = 0i64;
+    m_pComponent = 0i64;
     goto LABEL_27;
   }
-  while ( *((UFG::SimObject **)v12 + 7) != simObject )
+  while ( *((UFG::SimObject **)p_mNext + 7) != simObject )
   {
-    v12 = (bool *)(*((_QWORD *)v12 + 2) - 8i64);
-    if ( v12 == &this->mbSyncingCoverParkour )
+    p_mNext = (bool *)(*((_QWORD *)p_mNext + 2) - 8i64);
+    if ( p_mNext == &this->mbSyncingCoverParkour )
       goto LABEL_5;
   }
 }
 
 // File Line: 1559
 // RVA: 0x525A30
-void __fastcall UFG::WorldContextComponent::DetachFrom(UFG::WorldContextComponent *this, UFG::SimObject *simObject, UFG::TransformNodeComponent *transformNodeComponent)
+void __fastcall UFG::WorldContextComponent::DetachFrom(
+        UFG::WorldContextComponent *this,
+        UFG::SimObject *simObject,
+        UFG::TransformNodeComponent *transformNodeComponent)
 {
-  UFG::qNode<Attachment,Attachment> *v3; // rbx
-  Attachment *v4; // rcx
-  Attachment *v5; // rbx
-  UFG::qNode<Attachment,Attachment> *v6; // rcx
+  UFG::qNode<Attachment,Attachment> *mNext; // rbx
+  bool *p_mbSyncingCoverParkour; // rcx
+  Attachment *p_mNext; // rbx
+  UFG::qNode<Attachment,Attachment> *mPrev; // rcx
   UFG::qNode<Attachment,Attachment> *v7; // rax
-  UFG::qNode<Attachment,Attachment> *v8; // rdx
 
-  v3 = this->mAttachments.mNode.mNext;
-  v4 = (Attachment *)&this->mbSyncingCoverParkour;
-  v5 = (Attachment *)&v3[-1].mNext;
-  if ( v5 != v4 )
+  mNext = this->mAttachments.mNode.mNext;
+  p_mbSyncingCoverParkour = &this->mbSyncingCoverParkour;
+  p_mNext = (Attachment *)&mNext[-1].mNext;
+  if ( p_mNext != (Attachment *)p_mbSyncingCoverParkour )
   {
-    while ( v5->mRootSimObject.m_pPointer != simObject )
+    while ( p_mNext->mRootSimObject.m_pPointer != simObject )
     {
-      v5 = (Attachment *)&v5->mNext[-1].mNext;
-      if ( v5 == v4 )
+      p_mNext = (Attachment *)&p_mNext->mNext[-1].mNext;
+      if ( p_mNext == (Attachment *)p_mbSyncingCoverParkour )
         return;
     }
-    ((void (__fastcall *)(Attachment *, UFG::SimObject *, UFG::TransformNodeComponent *))v5->vfptr->OnRemove)(
-      v5,
+    ((void (__fastcall *)(Attachment *, UFG::SimObject *, UFG::TransformNodeComponent *))p_mNext->vfptr->OnRemove)(
+      p_mNext,
       simObject,
       transformNodeComponent);
-    v6 = v5->mPrev;
-    v7 = v5->mNext;
-    v8 = (UFG::qNode<Attachment,Attachment> *)&v5->mPrev;
-    v6->mNext = v7;
-    v7->mPrev = v6;
-    v8->mPrev = v8;
-    v8->mNext = v8;
-    v5->vfptr->__vecDelDtor(v5, 1u);
+    mPrev = p_mNext->mPrev;
+    v7 = p_mNext->mNext;
+    mPrev->mNext = v7;
+    v7->mPrev = mPrev;
+    p_mNext->mPrev = &p_mNext->UFG::qNode<Attachment,Attachment>;
+    p_mNext->mNext = &p_mNext->UFG::qNode<Attachment,Attachment>;
+    p_mNext->vfptr->__vecDelDtor(p_mNext, 1i64);
   }
 }
 
@@ -3320,54 +3311,46 @@ void __fastcall UFG::WorldContextComponent::DetachFrom(UFG::WorldContextComponen
 // RVA: 0x5259A0
 void __fastcall UFG::WorldContextComponent::DetachAll(UFG::WorldContextComponent *this)
 {
-  bool *v1; // rsi
-  UFG::WorldContextComponent *v2; // rdi
-  UFG::qNode<Attachment,Attachment> *v3; // rbx
-  UFG::qNode<Attachment,Attachment> *v4; // rdx
+  bool *p_mbSyncingCoverParkour; // rsi
+  UFG::qNode<Attachment,Attachment> *mNext; // rbx
+  UFG::qNode<Attachment,Attachment> *mPrev; // rdx
   UFG::qNode<Attachment,Attachment> *v5; // rax
 
-  v1 = &this->mbSyncingCoverParkour;
-  v2 = this;
-  if ( (bool *)&this->mAttachments.mNode.mNext[-1].mNext != &this->mbSyncingCoverParkour )
+  p_mbSyncingCoverParkour = &this->mbSyncingCoverParkour;
+  while ( (bool *)&this->mAttachments.mNode.mNext[-1].mNext != p_mbSyncingCoverParkour )
   {
-    do
-    {
-      v3 = v2->mAttachments.mNode.mNext;
-      ((void (__fastcall *)(UFG::qNode<Attachment,Attachment> **))v3[-1].mNext[4].mNext)(&v3[-1].mNext);
-      v4 = v3->mPrev;
-      v5 = v3->mNext;
-      v4->mNext = v5;
-      v5->mPrev = v4;
-      v3->mPrev = v3;
-      v3->mNext = v3;
-      ((void (__fastcall *)(UFG::qNode<Attachment,Attachment> **, signed __int64))v3[-1].mNext->mPrev)(
-        &v3[-1].mNext,
-        1i64);
-    }
-    while ( (bool *)&v2->mAttachments.mNode.mNext[-1].mNext != v1 );
+    mNext = this->mAttachments.mNode.mNext;
+    ((void (__fastcall *)(UFG::qNode<Attachment,Attachment> **))mNext[-1].mNext[4].mNext)(&mNext[-1].mNext);
+    mPrev = mNext->mPrev;
+    v5 = mNext->mNext;
+    mPrev->mNext = v5;
+    v5->mPrev = mPrev;
+    mNext->mPrev = mNext;
+    mNext->mNext = mNext;
+    ((void (__fastcall *)(UFG::qNode<Attachment,Attachment> **, __int64))mNext[-1].mNext->mPrev)(&mNext[-1].mNext, 1i64);
   }
 }
 
 // File Line: 1596
 // RVA: 0x5215D0
-void __fastcall UFG::WorldContextComponent::AdvanceParkourNeighbor(UFG::WorldContextComponent *this, const bool bAdvanceRightNeighbor)
+void __fastcall UFG::WorldContextComponent::AdvanceParkourNeighbor(
+        UFG::WorldContextComponent *this,
+        const bool bAdvanceRightNeighbor)
 {
-  UFG::ParkourHandle *v2; // rbx
-  UFG::WorldContextComponent *v3; // rdi
+  UFG::ParkourHandle *m_pPointer; // rbx
   UFG::ParkourHandle *v4; // rbx
 
-  v2 = this->mParkourHandle.m_pPointer;
-  v3 = this;
-  if ( v2 )
+  m_pPointer = this->mParkourHandle.m_pPointer;
+  if ( m_pPointer )
   {
     if ( bAdvanceRightNeighbor )
-      v4 = v2->mCachedRightNeighbor.m_pPointer;
+      v4 = m_pPointer->mCachedRightNeighbor.m_pPointer;
     else
-      v4 = v2->mCachedLeftNeighbor.m_pPointer;
+      v4 = m_pPointer->mCachedLeftNeighbor.m_pPointer;
     if ( v4 )
     {
       UFG::WorldContextComponent::ClearLatchedParkourHandle(this);
-      UFG::WorldContextComponent::LatchParkourHandle(v3, v4);
+      UFG::WorldContextComponent::LatchParkourHandle(this, v4);
     }
   }
 }

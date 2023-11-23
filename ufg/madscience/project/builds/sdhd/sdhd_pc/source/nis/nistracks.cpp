@@ -31,7 +31,7 @@ const char *dynamic_initializer_for__sNISTrackFactoryListAction__()
 __int64 dynamic_initializer_for__gNISTrackFactoryAction__()
 {
   Expression::MemberMapFactory::MemberMapFactory(&gNISTrackFactoryAction, sNISTrackFactoryListAction, 18);
-  return atexit(dynamic_atexit_destructor_for__gNISTrackFactoryAction__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gNISTrackFactoryAction__);
 }
 
 // File Line: 84
@@ -71,15 +71,12 @@ __int64 dynamic_initializer_for__CurtainShowTrack::sClassNameUID__()
 // RVA: 0x3DFBE0
 void __fastcall CurtainShowTrack::CurtainShowTrack(CurtainShowTrack *this)
 {
-  CurtainShowTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, CurtainShowTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CurtainShowTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CurtainShowTrack::`vftable;
-  *(_WORD *)&v1->mFadeIn = 257;
-  v1->mFadeInTime = 1.0;
-  v1->mFadeOutTime = 1.0;
+  ITrack::ITrack(this, CurtainShowTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<CurtainShowTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&CurtainShowTrack::`vftable;
+  *(_WORD *)&this->mFadeIn = 257;
+  this->mFadeInTime = 1.0;
+  this->mFadeOutTime = 1.0;
 }
 
 // File Line: 174
@@ -130,18 +127,15 @@ __int64 dynamic_initializer_for__NISShadowCascadeTrack::sClassNameUID__()
 // RVA: 0x3E05F0
 void __fastcall NISShadowCascadeTrack::NISShadowCascadeTrack(NISShadowCascadeTrack *this)
 {
-  NISShadowCascadeTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, NISShadowCascadeTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<NISShadowCascadeTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&NISShadowCascadeTrack::`vftable;
-  v1->mCascade0 = -1.0;
-  v1->mCascade1 = -1.0;
-  v1->mCascade2 = -1.0;
-  v1->mBias0 = -1.0;
-  v1->mBias1 = -1.0;
-  v1->mBias2 = -1.0;
+  ITrack::ITrack(this, NISShadowCascadeTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<NISShadowCascadeTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&NISShadowCascadeTrack::`vftable;
+  this->mCascade0 = -1.0;
+  this->mCascade1 = -1.0;
+  this->mCascade2 = -1.0;
+  this->mBias0 = -1.0;
+  this->mBias1 = -1.0;
+  this->mBias2 = -1.0;
 }
 
 // File Line: 415
@@ -159,19 +153,17 @@ __int64 dynamic_initializer_for__ActorAttachTrack::sClassNameUID__()
 // RVA: 0x3DFAC0
 void __fastcall ActorAttachTrack::ActorAttachTrack(ActorAttachTrack *this)
 {
-  ActorAttachTrack *v1; // rbx
-  UFG::qSymbolUC result; // [rsp+48h] [rbp+10h]
+  UFG::qSymbolUC result; // [rsp+48h] [rbp+10h] BYREF
 
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, ActorAttachTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ActorAttachTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ActorAttachTrack::`vftable;
-  v1->mActorID.mUID = -1;
-  v1->mAttachToActor = 0;
-  v1->mBlendInTime = 0.0;
-  *(_QWORD *)&v1->mAttachJointName.mUID = -1i64;
-  v1->mAttachJointName = (UFG::qSymbolUC)UFG::qSymbolUC::create_from_string(&result, "none")->mUID;
-  v1->mActorAttachJointName = (UFG::qSymbolUC)UFG::qSymbolUC::create_from_string(&result, "none")->mUID;
+  ITrack::ITrack(this, ActorAttachTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<ActorAttachTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ActorAttachTrack::`vftable;
+  this->mActorID.mUID = -1;
+  this->mAttachToActor = 0;
+  this->mBlendInTime = 0.0;
+  *(_QWORD *)&this->mAttachJointName.mUID = -1i64;
+  this->mAttachJointName = (UFG::qSymbolUC)UFG::qSymbolUC::create_from_string(&result, "none")->mUID;
+  this->mActorAttachJointName = (UFG::qSymbolUC)UFG::qSymbolUC::create_from_string(&result, "none")->mUID;
 }
 
 // File Line: 446
@@ -189,19 +181,17 @@ __int64 dynamic_initializer_for__ActorDetachTrack::sClassNameUID__()
 // RVA: 0x3DFB50
 void __fastcall ActorDetachTrack::ActorDetachTrack(ActorDetachTrack *this)
 {
-  ActorDetachTrack *v1; // rbx
-  UFG::qSymbolUC result; // [rsp+48h] [rbp+10h]
+  UFG::qSymbolUC result; // [rsp+48h] [rbp+10h] BYREF
 
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, ActorDetachTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ActorDetachTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ActorDetachTrack::`vftable;
-  v1->mActorID.mUID = -1;
-  *(_WORD *)&v1->mDetachFromActor = 256;
-  v1->mBlendOutTime = 0.0;
-  *(_QWORD *)&v1->mAttachJointName.mUID = -1i64;
-  v1->mAttachJointName = (UFG::qSymbolUC)UFG::qSymbolUC::create_from_string(&result, "none")->mUID;
-  v1->mActorAttachJointName = (UFG::qSymbolUC)UFG::qSymbolUC::create_from_string(&result, "none")->mUID;
+  ITrack::ITrack(this, ActorDetachTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<ActorDetachTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ActorDetachTrack::`vftable;
+  this->mActorID.mUID = -1;
+  *(_WORD *)&this->mDetachFromActor = 256;
+  this->mBlendOutTime = 0.0;
+  *(_QWORD *)&this->mAttachJointName.mUID = -1i64;
+  this->mAttachJointName = (UFG::qSymbolUC)UFG::qSymbolUC::create_from_string(&result, "none")->mUID;
+  this->mActorAttachJointName = (UFG::qSymbolUC)UFG::qSymbolUC::create_from_string(&result, "none")->mUID;
 }
 
 // File Line: 481
@@ -209,7 +199,7 @@ void __fastcall ActorDetachTrack::ActorDetachTrack(ActorDetachTrack *this)
 __int64 dynamic_initializer_for__gLGAPlayModeEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&gLGAPlayModeEnum, gLGAPlayModeStringList, 3, 0i64);
-  return atexit(dynamic_atexit_destructor_for__gLGAPlayModeEnum__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gLGAPlayModeEnum__);
 }
 
 // File Line: 483
@@ -227,24 +217,19 @@ __int64 dynamic_initializer_for__NISLightGroupAnimationTrack::sClassNameUID__()
 // RVA: 0x3E0B40
 void __fastcall NISLightGroupAnimationTrack::~NISLightGroupAnimationTrack(NISLightGroupAnimationTrack *this)
 {
-  NISLightGroupAnimationTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&NISLightGroupAnimationTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 511
@@ -262,15 +247,12 @@ __int64 dynamic_initializer_for__NISPlayMovieTrack::sClassNameUID__()
 // RVA: 0x3E0590
 void __fastcall NISPlayMovieTrack::NISPlayMovieTrack(NISPlayMovieTrack *this)
 {
-  NISPlayMovieTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, NISPlayMovieTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<NISPlayMovieTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&NISPlayMovieTrack::`vftable;
-  v1->mMovieFilename.mOffset = 1i64;
-  BinString::Set(&v1->mMovieFilename, &customWorldMapCaption);
-  *(_WORD *)&v1->mPauseSound = 1;
+  ITrack::ITrack(this, NISPlayMovieTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<NISPlayMovieTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&NISPlayMovieTrack::`vftable;
+  this->mMovieFilename.mOffset = 1i64;
+  BinString::Set(&this->mMovieFilename, &customCaption);
+  *(_WORD *)&this->mPauseSound = 1;
 }
 
 // File Line: 540
@@ -288,92 +270,90 @@ __int64 dynamic_initializer_for__NISAllowPlayerControlTrack::sClassNameUID__()
 // RVA: 0x3E2010
 void __fastcall SubtitleTask::Begin(SubtitleTask *this, ActionContext *context)
 {
-  SubtitleTask *v2; // rbx
-  ITrack *v3; // rdx
-  const char *v4; // rdx
-  float v5; // xmm6_4
-  UFG::allocator::free_link *v6; // rax
-  UFG::UISubtitleMessage *v7; // rax
-  UFG::UISubtitleMessage *v8; // rbx
-  UFG::UIHKTextOverlay *v9; // rax
-  UFG::qString v10; // [rsp+28h] [rbp-70h]
-  UFG::qString v11; // [rsp+50h] [rbp-48h]
+  ITrack *m_Track; // rdx
+  float v4; // xmm6_4
+  UFG::allocator::free_link *v5; // rax
+  UFG::UISubtitleMessage *v6; // rax
+  UFG::UISubtitleMessage *v7; // rbx
+  UFG::UIHKTextOverlay *Instance; // rax
+  UFG::qString v9; // [rsp+28h] [rbp-70h] BYREF
+  UFG::qString v10; // [rsp+50h] [rbp-48h] BYREF
 
-  v2 = this;
-  v3 = this->m_Track;
-  if ( (_QWORD)v3[1].vfptr & 0xFFFFFFFFFFFFFFFEui64 )
-    v4 = (char *)&v3[1] + ((_QWORD)v3[1].vfptr & 0xFFFFFFFFFFFFFFFEui64);
+  m_Track = this->m_Track;
+  if ( ((unsigned __int64)m_Track[1].vfptr & 0xFFFFFFFFFFFFFFFEui64) != 0 )
+    UFG::qString::qString(
+      &v10,
+      (const char *)&m_Track[1] + ((unsigned __int64)m_Track[1].vfptr & 0xFFFFFFFFFFFFFFFEui64));
   else
-    v4 = BinString::sEmptyString;
-  UFG::qString::qString(&v11, v4);
-  v5 = v2->m_Track->mTimeEnd - v2->m_Track->mTimeBegin;
-  UFG::qString::qString(&v10, "Red");
-  if ( v5 < 0.0 )
-    v5 = FLOAT_120_0;
-  v6 = UFG::qMalloc(0xD0ui64, "UISubtitleMessage", 0i64);
-  if ( v6 )
+    UFG::qString::qString(&v10, BinString::sEmptyString);
+  v4 = this->m_Track->mTimeEnd - this->m_Track->mTimeBegin;
+  UFG::qString::qString(&v9, "Red");
+  if ( v4 < 0.0 )
+    v4 = FLOAT_120_0;
+  v5 = UFG::qMalloc(0xD0ui64, "UISubtitleMessage", 0i64);
+  if ( v5 )
   {
-    UFG::UISubtitleMessage::UISubtitleMessage((UFG::UISubtitleMessage *)v6, 0, v11.mData, 0i64);
-    v8 = v7;
+    UFG::UISubtitleMessage::UISubtitleMessage((UFG::UISubtitleMessage *)v5, TYPE_SUBTITLE_TEXT, v10.mData, 0i64);
+    v7 = v6;
   }
   else
   {
-    v8 = 0i64;
+    v7 = 0i64;
   }
-  v8->lifetime = v5;
-  UFG::qString::Set(&v8->color, v10.mData);
-  v9 = UFG::UIHKTextOverlay::getInstance();
-  if ( v9 )
-    UFG::UIHKTextOverlay::QueueMessage(v9, v8);
+  v7->lifetime = v4;
+  UFG::qString::Set(&v7->color, v9.mData);
+  Instance = UFG::UIHKTextOverlay::getInstance();
+  if ( Instance )
+    UFG::UIHKTextOverlay::QueueMessage(Instance, v7);
+  UFG::qString::~qString(&v9);
   UFG::qString::~qString(&v10);
-  UFG::qString::~qString(&v11);
 }
 
 // File Line: 600
 // RVA: 0x3E1FC0
 void __fastcall SubtitleGroupTask::Begin(SubtitleGroupTask *this, ActionContext *context)
 {
-  ITrack *v2; // rdx
-  const char *v3; // rdx
-  UFG::qString v4; // [rsp+28h] [rbp-30h]
+  ITrack *m_Track; // rdx
+  UFG::qString v3; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = this->m_Track;
-  if ( (_QWORD)v2[1].vfptr & 0xFFFFFFFFFFFFFFFEui64 )
-    v3 = (char *)&v2[1] + ((_QWORD)v2[1].vfptr & 0xFFFFFFFFFFFFFFFEui64);
+  m_Track = this->m_Track;
+  if ( ((unsigned __int64)m_Track[1].vfptr & 0xFFFFFFFFFFFFFFFEui64) != 0 )
+    UFG::qString::qString(
+      &v3,
+      (const char *)&m_Track[1] + ((unsigned __int64)m_Track[1].vfptr & 0xFFFFFFFFFFFFFFFEui64));
   else
-    v3 = BinString::sEmptyString;
-  UFG::qString::qString(&v4, v3);
-  UFG::qString::~qString(&v4);
+    UFG::qString::qString(&v3, BinString::sEmptyString);
+  UFG::qString::~qString(&v3);
 }
 
 // File Line: 614
 // RVA: 0x3E28C0
 void __fastcall SubtitleGroupTask::End(SubtitleTask *this)
 {
-  UFG::UIHKTextOverlay *v1; // rax
+  UFG::UIHKTextOverlay *Instance; // rax
 
-  v1 = UFG::UIHKTextOverlay::getInstance();
-  if ( v1 )
-    UFG::UIHKTextOverlay::StopAllSubtitles(v1, 1);
+  Instance = UFG::UIHKTextOverlay::getInstance();
+  if ( Instance )
+    UFG::UIHKTextOverlay::StopAllSubtitles(Instance, 1);
 }
 
 // File Line: 627
 // RVA: 0x3E1AE0
 void __fastcall CurtainShowTask::Begin(CurtainShowTask *this, ActionContext *context)
 {
-  ITrack *v2; // r8
+  ITrack *m_Track; // r8
   bool v3; // dl
   bool v4; // zf
 
-  v2 = this->m_Track;
-  this->mDuration = v2->mTimeEnd - v2->mTimeBegin;
-  v3 = LOBYTE(v2[1].vfptr) != 0;
+  m_Track = this->m_Track;
+  this->mDuration = m_Track->mTimeEnd - m_Track->mTimeBegin;
+  v3 = LOBYTE(m_Track[1].vfptr) != 0;
   this->mFadeIn = v3;
-  v4 = BYTE1(v2[1].vfptr) == 0;
+  v4 = BYTE1(m_Track[1].vfptr) == 0;
   this->mTimeRemaining = 0.0;
   this->mFadeOut = !v4;
   if ( v3 )
-    UFG::UIHK_NISOverlay::ShowCurtains(*((float *)&v2[1].vfptr + 1), 0);
+    UFG::UIHK_NISOverlay::ShowCurtains(*((float *)&m_Track[1].vfptr + 1), 0);
   else
     UFG::UIHK_NISOverlay::ShowCurtains(0.0, 0);
 }
@@ -382,18 +362,16 @@ void __fastcall CurtainShowTask::Begin(CurtainShowTask *this, ActionContext *con
 // RVA: 0x3E6650
 bool __fastcall CurtainShowTask::Update(FastCurtainShowTask *this, float timeDelta)
 {
-  FastCurtainShowTask *v2; // rbx
   float v3; // xmm2_4
   bool result; // al
 
-  v2 = this;
   result = 0;
   if ( UFG::UIHK_NISOverlay::IsCurtainStable() )
   {
-    v3 = v2->mTimeRemaining - timeDelta;
-    v2->mTimeRemaining = v3;
+    v3 = this->mTimeRemaining - timeDelta;
+    this->mTimeRemaining = v3;
     if ( v3 <= 0.0 )
-      result = 1;
+      return 1;
   }
   return result;
 }
@@ -417,15 +395,15 @@ void __fastcall CurtainShowTask::End(CurtainShowTask *this)
 // RVA: 0x3E1B30
 void __fastcall FastCurtainShowTask::Begin(FastCurtainShowTask *this, ActionContext *context)
 {
-  ITrack *v2; // rax
+  ITrack *m_Track; // rax
   bool v3; // dl
   bool v4; // zf
 
-  v2 = this->m_Track;
-  this->mDuration = v2->mTimeEnd - v2->mTimeBegin;
-  v3 = LOBYTE(v2[1].vfptr) != 0;
+  m_Track = this->m_Track;
+  this->mDuration = m_Track->mTimeEnd - m_Track->mTimeBegin;
+  v3 = LOBYTE(m_Track[1].vfptr) != 0;
   this->mFadeIn = v3;
-  v4 = BYTE1(v2[1].vfptr) == 0;
+  v4 = BYTE1(m_Track[1].vfptr) == 0;
   this->mTimeRemaining = 0.0;
   this->mFadeOut = !v4;
   if ( v3 )
@@ -454,7 +432,7 @@ void __fastcall FastCurtainShowTask::End(FastCurtainShowTask *this)
 void __fastcall AudioTaskNIS::Begin(AudioTaskNIS *this, ActionContext *context)
 {
   UFG::NISAudio *v2; // rax
-  unsigned int v3; // edx
+  unsigned int mResourceOwner; // edx
 
   this->mContext = context;
   v2 = UFG::NISAudio::m_instance;
@@ -462,35 +440,35 @@ void __fastcall AudioTaskNIS::Begin(AudioTaskNIS *this, ActionContext *context)
   this->m_nisAudio = v2;
   this->m_lastElapsedTime = 0.0;
   this->m_playDelay = 0.0;
-  v3 = (unsigned int)this->m_Track[1].mResourceOwner;
-  if ( v3 )
-    UFG::NISAudio::Play(this->m_nisAudio, v3, 0i64);
+  mResourceOwner = (unsigned int)this->m_Track[1].mResourceOwner;
+  if ( mResourceOwner )
+    UFG::NISAudio::Play(this->m_nisAudio, mResourceOwner, 0i64);
 }
 
 // File Line: 717
 // RVA: 0x3E65F0
-char __fastcall AudioTaskNIS::Update(AudioTaskNIS *this, float timeDelta)
+bool __fastcall AudioTaskNIS::Update(AudioTaskNIS *this, float timeDelta)
 {
-  UFG::AudioEventController *v2; // rax
-  char result; // al
-  float v4; // xmm0_4
+  UFG::AudioEventController *p_m_controller; // rax
+  bool result; // al
+  float m_playDelay; // xmm0_4
 
-  v2 = &this->m_nisAudio->m_controller;
-  if ( v2->m_pEvent )
-    result = (*((_BYTE *)v2->m_pEvent + 144) >> 6) & 1;
+  p_m_controller = &this->m_nisAudio->m_controller;
+  if ( p_m_controller->m_pEvent )
+    result = (*((_BYTE *)p_m_controller->m_pEvent + 144) & 0x40) != 0;
   else
     result = 0;
   if ( !this->m_hasStarted )
   {
-    if ( result || (v4 = this->m_playDelay, v4 >= 0.75) )
+    if ( result || (m_playDelay = this->m_playDelay, m_playDelay >= 0.75) )
     {
       if ( this->m_playDelay > 0.75 )
-        result = 0;
+        return 0;
     }
     else
     {
       result = 1;
-      this->m_playDelay = v4 + timeDelta;
+      this->m_playDelay = m_playDelay + timeDelta;
     }
   }
   return result;
@@ -500,30 +478,28 @@ char __fastcall AudioTaskNIS::Update(AudioTaskNIS *this, float timeDelta)
 // RVA: 0x3E26C0
 void __fastcall AudioTaskNIS::End(AudioTaskNIS *this)
 {
-  AudioTaskNIS *v1; // rbx
-  UFG::NISAudio *v2; // rcx
-  UFG::AudioEvent *v3; // rax
+  UFG::NISAudio *m_nisAudio; // rcx
+  UFG::AudioEvent *m_pEvent; // rax
   UFG::AudioEvent *v4; // rcx
-  UFG::OneShotHandle pHandle; // [rsp+40h] [rbp+8h]
+  UFG::OneShotHandle pHandle; // [rsp+40h] [rbp+8h] BYREF
 
-  v1 = this;
-  v2 = this->m_nisAudio;
-  v3 = v2->m_controller.m_pEvent;
-  if ( v3 )
+  m_nisAudio = this->m_nisAudio;
+  m_pEvent = m_nisAudio->m_controller.m_pEvent;
+  if ( m_pEvent )
   {
-    if ( (*((_BYTE *)v3 + 144) >> 6) & 1 )
+    if ( (*((_BYTE *)m_pEvent + 144) & 0x40) != 0 )
     {
-      v4 = v2->m_controller.m_pEvent;
+      v4 = m_nisAudio->m_controller.m_pEvent;
       if ( v4 )
-        UFG::AudioEvent::StopAndForget(v4, 0x64u);
+        UFG::AudioEvent::StopAndForget(v4, 100);
     }
   }
-  if ( HIDWORD(v1->m_Track[1].mResourceOwner) )
+  if ( HIDWORD(this->m_Track[1].mResourceOwner) )
   {
     pHandle.m_pOneShot = 0i64;
     UFG::OneShotPool::GetOneShotHandle(&pHandle, &UFG::qMatrix44::msIdentity);
     if ( UFG::OneShotHandle::IsValid(&pHandle) )
-      UFG::OneShot::Play(pHandle.m_pOneShot, HIDWORD(v1->m_Track[1].mResourceOwner));
+      UFG::OneShot::Play(pHandle.m_pOneShot, HIDWORD(this->m_Track[1].mResourceOwner));
     UFG::OneShotHandle::Release(&pHandle);
   }
 }
@@ -532,21 +508,19 @@ void __fastcall AudioTaskNIS::End(AudioTaskNIS *this)
 // RVA: 0x3E2CC0
 float __fastcall AudioTaskNIS::GetElapsedTime(AudioTaskNIS *this)
 {
-  AudioTaskNIS *v1; // rbx
-  UFG::AudioEvent *v2; // rcx
+  UFG::AudioEvent *m_pEvent; // rcx
   float result; // xmm0_4
 
-  v1 = this;
-  v2 = this->m_nisAudio->m_controller.m_pEvent;
-  if ( !v2 )
-    return v1->m_lastElapsedTime;
-  if ( !((*((_BYTE *)v2 + 144) >> 6) & 1) )
-    return v1->m_lastElapsedTime;
-  result = UFG::AudioEvent::GetElapsedTime(v2);
+  m_pEvent = this->m_nisAudio->m_controller.m_pEvent;
+  if ( !m_pEvent )
+    return this->m_lastElapsedTime;
+  if ( (*((_BYTE *)m_pEvent + 144) & 0x40) == 0 )
+    return this->m_lastElapsedTime;
+  result = UFG::AudioEvent::GetElapsedTime(m_pEvent);
   if ( result <= 0.0 )
-    return v1->m_lastElapsedTime;
-  v1->m_lastElapsedTime = result;
-  v1->m_hasStarted = 1;
+    return this->m_lastElapsedTime;
+  this->m_lastElapsedTime = result;
+  this->m_hasStarted = 1;
   return result;
 }
 
@@ -554,28 +528,24 @@ float __fastcall AudioTaskNIS::GetElapsedTime(AudioTaskNIS *this)
 // RVA: 0x3E1BA0
 void __fastcall NISFadeOutTask::Begin(NISFadeOutTask *this, ActionContext *context)
 {
-  ITrack *v2; // rax
-  unsigned int v3; // ebx
-  bool v4; // cl
-  float v5; // xmm0_4
-  UFG::OneShotHandle pHandle; // [rsp+40h] [rbp+8h]
+  ITrack *m_Track; // rax
+  unsigned int mResourceOwner; // ebx
+  float v4; // xmm0_4
+  UFG::OneShotHandle pHandle; // [rsp+40h] [rbp+8h] BYREF
 
-  v2 = this->m_Track;
-  v3 = (unsigned int)v2[1].mResourceOwner;
-  v4 = 1;
-  if ( v3 )
-    v4 = 0;
-  if ( LOBYTE(v2[1].vfptr) )
-    v5 = 0.0;
+  m_Track = this->m_Track;
+  mResourceOwner = (unsigned int)m_Track[1].mResourceOwner;
+  if ( LOBYTE(m_Track[1].vfptr) )
+    v4 = 0.0;
   else
-    v5 = FLOAT_0_33000001;
-  UFG::UIHK_NISOverlay::ShowCurtains(v5, v4);
-  if ( v3 )
+    v4 = FLOAT_0_33000001;
+  UFG::UIHK_NISOverlay::ShowCurtains(v4, mResourceOwner == 0);
+  if ( mResourceOwner )
   {
     pHandle.m_pOneShot = 0i64;
     UFG::OneShotPool::GetOneShotHandle(&pHandle, &UFG::qMatrix44::msIdentity);
     if ( UFG::OneShotHandle::IsValid(&pHandle) )
-      UFG::OneShot::Play(pHandle.m_pOneShot, v3);
+      UFG::OneShot::Play(pHandle.m_pOneShot, mResourceOwner);
     UFG::OneShotHandle::Release(&pHandle);
   }
 }
@@ -584,20 +554,15 @@ void __fastcall NISFadeOutTask::Begin(NISFadeOutTask *this, ActionContext *conte
 // RVA: 0x3E6770
 bool __fastcall NISFadeOutTask::Update(NISFadeOutTask *this, float timeDelta)
 {
-  bool result; // al
-
-  if ( LOBYTE(this->m_Track[1].vfptr) )
-    result = 0;
-  else
-    result = UFG::UIHK_NISOverlay::IsCurtainHidden();
-  return result;
+  return !LOBYTE(this->m_Track[1].vfptr) && UFG::UIHK_NISOverlay::IsCurtainHidden();
 }
 
 // File Line: 837
 // RVA: 0x3E27D0
 void __fastcall NISFadeOutTask::End(NISFadeOutTask *this)
 {
-  JUMPOUT(BYTE1(this->m_Track[1].vfptr), 0, UFG::UIHK_NISOverlay::HideLetterBox);
+  if ( BYTE1(this->m_Track[1].vfptr) )
+    UFG::UIHK_NISOverlay::HideLetterBox();
 }
 
 // File Line: 884
@@ -611,76 +576,65 @@ void __fastcall SequenceTask::Begin(SequenceTask *this, ActionContext *context)
 // RVA: 0x3E63F0
 char __fastcall ActorAttachTask::Update(ActorAttachTask *this, float timeDelta)
 {
-  ActorAttachTask *v2; // r13
-  UFG::SimObjectCVBase *v3; // rbp
+  UFG::SimObjectCVBase *m_pPointer; // rbp
   UFG::qSymbol *v4; // rax
-  UFG::qBaseNodeRB *v5; // rax
-  ITrack *v6; // rcx
-  unsigned int v7; // ebx
-  unsigned int v8; // edi
+  UFG::qBaseNodeRB *SimObject; // rax
+  ITrack *m_Track; // rcx
+  unsigned int m_TrackClassNameUID; // ebx
+  unsigned int mResourceOwner_high; // edi
   UFG::SimObjectCVBase *v9; // r14
   UFG::CharacterAnimationComponent *v10; // rsi
   UFG::CharacterAnimationComponent *v11; // r15
-  unsigned __int16 v12; // cx
+  __int16 m_Flags; // cx
   UFG::CharacterAnimationComponent *v13; // rax
-  unsigned __int16 v14; // cx
-  UFG::CharacterAnimationComponent *v15; // rax
-  Creature *v16; // r15
+  __int16 v14; // cx
+  UFG::CharacterAnimationComponent *ComponentOfTypeHK; // rax
+  Creature *mCreature; // r15
   Creature *v17; // rsi
-  int attachmentBoneID; // er12
-  int v19; // ebx
-  UFG::qWiseSymbol result; // [rsp+70h] [rbp+8h]
+  int attachmentBoneID; // r12d
+  int BoneID; // ebx
+  UFG::qWiseSymbol result; // [rsp+70h] [rbp+8h] BYREF
 
-  v2 = this;
-  v3 = (UFG::SimObjectCVBase *)this->mContext->mSimObject.m_pPointer;
+  m_pPointer = (UFG::SimObjectCVBase *)this->mContext->mSimObject.m_pPointer;
   v4 = (UFG::qSymbol *)UFG::qSymbol::qSymbol(&result, (unsigned int)this->m_Track[1].vfptr);
-  v5 = UFG::Simulation::GetSimObject(&UFG::gSim, v4);
-  if ( !v5 )
+  SimObject = UFG::Simulation::GetSimObject(&UFG::gSim, v4);
+  if ( !SimObject )
     return 1;
-  v6 = v2->m_Track;
-  if ( BYTE4(v6[1].vfptr) )
+  m_Track = this->m_Track;
+  if ( BYTE4(m_Track[1].vfptr) )
   {
-    v7 = v6[1].m_TrackClassNameUID;
-    v8 = HIDWORD(v6[1].mResourceOwner);
-    v9 = (UFG::SimObjectCVBase *)v5;
+    m_TrackClassNameUID = m_Track[1].m_TrackClassNameUID;
+    mResourceOwner_high = HIDWORD(m_Track[1].mResourceOwner);
+    v9 = (UFG::SimObjectCVBase *)SimObject;
   }
   else
   {
-    v7 = HIDWORD(v6[1].mResourceOwner);
-    v8 = v6[1].m_TrackClassNameUID;
-    v9 = v3;
-    v3 = (UFG::SimObjectCVBase *)v5;
+    m_TrackClassNameUID = HIDWORD(m_Track[1].mResourceOwner);
+    mResourceOwner_high = m_Track[1].m_TrackClassNameUID;
+    v9 = m_pPointer;
+    m_pPointer = (UFG::SimObjectCVBase *)SimObject;
   }
   v10 = 0i64;
   if ( v9 )
   {
-    v12 = v9->m_Flags;
-    if ( (v12 >> 14) & 1 )
+    m_Flags = v9->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
     {
       v13 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v9);
     }
-    else if ( (v12 & 0x8000u) == 0 )
+    else if ( (m_Flags & 0x2000) != 0 )
     {
-      if ( (v12 >> 13) & 1 )
-      {
-        v13 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v9);
-      }
-      else if ( (v12 >> 12) & 1 )
-      {
-        v13 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                    (UFG::SimObjectGame *)&v9->vfptr,
-                                                    UFG::CharacterAnimationComponent::_TypeUID);
-      }
-      else
-      {
-        v13 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                    (UFG::SimObject *)&v9->vfptr,
-                                                    UFG::CharacterAnimationComponent::_TypeUID);
-      }
+      v13 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v9);
     }
     else
     {
-      v13 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v9);
+      v13 = (UFG::CharacterAnimationComponent *)((m_Flags & 0x1000) != 0
+                                               ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                   v9,
+                                                   UFG::CharacterAnimationComponent::_TypeUID)
+                                               : UFG::SimObject::GetComponentOfType(
+                                                   v9,
+                                                   UFG::CharacterAnimationComponent::_TypeUID));
     }
     v11 = v13;
   }
@@ -688,61 +642,54 @@ char __fastcall ActorAttachTask::Update(ActorAttachTask *this, float timeDelta)
   {
     v11 = 0i64;
   }
-  if ( v3 )
+  if ( m_pPointer )
   {
-    v14 = v3->m_Flags;
-    if ( (v14 >> 14) & 1 )
+    v14 = m_pPointer->m_Flags;
+    if ( (v14 & 0x4000) != 0 || v14 < 0 )
     {
-      v15 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v3);
+      ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(m_pPointer);
     }
-    else if ( (v14 & 0x8000u) == 0 )
+    else if ( (v14 & 0x2000) != 0 )
     {
-      if ( (v14 >> 13) & 1 )
-      {
-        v15 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v3);
-      }
-      else if ( (v14 >> 12) & 1 )
-      {
-        v15 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                    (UFG::SimObjectGame *)&v3->vfptr,
-                                                    UFG::CharacterAnimationComponent::_TypeUID);
-      }
-      else
-      {
-        v15 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                    (UFG::SimObject *)&v3->vfptr,
-                                                    UFG::CharacterAnimationComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)m_pPointer);
+    }
+    else if ( (v14 & 0x1000) != 0 )
+    {
+      ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                m_pPointer,
+                                                                UFG::CharacterAnimationComponent::_TypeUID);
     }
     else
     {
-      v15 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v3);
+      ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                m_pPointer,
+                                                                UFG::CharacterAnimationComponent::_TypeUID);
     }
-    v10 = v15;
+    v10 = ComponentOfTypeHK;
   }
   if ( !v11 )
     return 1;
   if ( !v10 )
     return 1;
-  v16 = v11->mCreature;
+  mCreature = v11->mCreature;
   v17 = v10->mCreature;
-  if ( !v16 || !v17 )
+  if ( !mCreature || !v17 )
     return 1;
   attachmentBoneID = -1;
-  if ( v16->mPose.mRigHandle.mData )
-    v19 = Skeleton::GetBoneID(v16->mPose.mRigHandle.mUFGSkeleton, v7);
+  if ( mCreature->mPose.mRigHandle.mData )
+    BoneID = Skeleton::GetBoneID(mCreature->mPose.mRigHandle.mUFGSkeleton, m_TrackClassNameUID);
   else
-    v19 = -1;
+    BoneID = -1;
   if ( v17->mPose.mRigHandle.mData )
-    attachmentBoneID = Skeleton::GetBoneID(v17->mPose.mRigHandle.mUFGSkeleton, v8);
+    attachmentBoneID = Skeleton::GetBoneID(v17->mPose.mRigHandle.mUFGSkeleton, mResourceOwner_high);
   Creature::AddAttachment(
-    v16,
-    (UFG::SimObject *)&v9->vfptr,
-    v19,
-    (UFG::SimObject *)&v3->vfptr,
+    mCreature,
+    v9,
+    BoneID,
+    m_pPointer,
     attachmentBoneID,
     0,
-    *(float *)&v2->m_Track[1].mResourceOwner);
+    *(float *)&this->m_Track[1].mResourceOwner);
   return 0;
 }
 
@@ -750,130 +697,113 @@ char __fastcall ActorAttachTask::Update(ActorAttachTask *this, float timeDelta)
 // RVA: 0x3E18D0
 void __fastcall ActorDetachTask::Begin(ActorDetachTask *this, ActionContext *context)
 {
-  UFG::SimObjectCVBase *v2; // rsi
-  ActorDetachTask *v3; // r15
+  UFG::SimObjectCVBase *m_pPointer; // rsi
   UFG::qSymbol *v4; // rax
-  UFG::qBaseNodeRB *v5; // rax
-  ITrack *v6; // rcx
-  unsigned int v7; // ebx
+  UFG::qBaseNodeRB *SimObject; // rax
+  ITrack *m_Track; // rcx
+  unsigned int m_TrackClassNameUID; // ebx
   UFG::SimObjectCVBase *v8; // rbp
   UFG::CharacterAnimationComponent *v9; // rdi
   UFG::CharacterAnimationComponent *v10; // r14
-  unsigned __int16 v11; // cx
-  UFG::CharacterAnimationComponent *v12; // rax
-  unsigned __int16 v13; // cx
-  UFG::CharacterAnimationComponent *v14; // rax
-  Creature *v15; // r14
+  __int16 m_Flags; // cx
+  UFG::CharacterAnimationComponent *ComponentOfTypeHK; // rax
+  __int16 v13; // cx
+  UFG::CharacterAnimationComponent *ComponentOfType; // rax
+  Creature *mCreature; // r14
   Creature *v16; // rdi
-  int v17; // eax
-  __int64 v18; // rdx
-  UFG::qWiseSymbol result; // [rsp+40h] [rbp+8h]
+  int BoneID; // eax
+  UFG::qWiseSymbol result; // [rsp+40h] [rbp+8h] BYREF
 
-  v2 = (UFG::SimObjectCVBase *)context->mSimObject.m_pPointer;
-  v3 = this;
+  m_pPointer = (UFG::SimObjectCVBase *)context->mSimObject.m_pPointer;
   v4 = (UFG::qSymbol *)UFG::qSymbol::qSymbol(&result, (unsigned int)this->m_Track[1].vfptr);
-  v5 = UFG::Simulation::GetSimObject(&UFG::gSim, v4);
-  if ( v5 )
+  SimObject = UFG::Simulation::GetSimObject(&UFG::gSim, v4);
+  if ( SimObject )
   {
-    v6 = v3->m_Track;
-    if ( BYTE4(v6[1].vfptr) )
+    m_Track = this->m_Track;
+    if ( BYTE4(m_Track[1].vfptr) )
     {
-      v7 = v6[1].m_TrackClassNameUID;
-      v8 = (UFG::SimObjectCVBase *)v5;
+      m_TrackClassNameUID = m_Track[1].m_TrackClassNameUID;
+      v8 = (UFG::SimObjectCVBase *)SimObject;
     }
     else
     {
-      v7 = HIDWORD(v6[1].mResourceOwner);
-      v8 = v2;
-      v2 = (UFG::SimObjectCVBase *)v5;
+      m_TrackClassNameUID = HIDWORD(m_Track[1].mResourceOwner);
+      v8 = m_pPointer;
+      m_pPointer = (UFG::SimObjectCVBase *)SimObject;
     }
     v9 = 0i64;
     if ( v8 )
     {
-      v11 = v8->m_Flags;
-      if ( (v11 >> 14) & 1 )
+      m_Flags = v8->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
       {
-        v12 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v8);
+        ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v8);
       }
-      else if ( (v11 & 0x8000u) == 0 )
+      else if ( (m_Flags & 0x2000) != 0 )
       {
-        if ( (v11 >> 13) & 1 )
-        {
-          v12 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v8);
-        }
-        else if ( (v11 >> 12) & 1 )
-        {
-          v12 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                      (UFG::SimObjectGame *)&v8->vfptr,
-                                                      UFG::CharacterAnimationComponent::_TypeUID);
-        }
-        else
-        {
-          v12 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                      (UFG::SimObject *)&v8->vfptr,
-                                                      UFG::CharacterAnimationComponent::_TypeUID);
-        }
+        ComponentOfTypeHK = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v8);
+      }
+      else if ( (m_Flags & 0x1000) != 0 )
+      {
+        ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                  v8,
+                                                                  UFG::CharacterAnimationComponent::_TypeUID);
       }
       else
       {
-        v12 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v8);
+        ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                  v8,
+                                                                  UFG::CharacterAnimationComponent::_TypeUID);
       }
-      v10 = v12;
+      v10 = ComponentOfTypeHK;
     }
     else
     {
       v10 = 0i64;
     }
-    if ( v2 )
+    if ( m_pPointer )
     {
-      v13 = v2->m_Flags;
-      if ( (v13 >> 14) & 1 )
+      v13 = m_pPointer->m_Flags;
+      if ( (v13 & 0x4000) != 0 || v13 < 0 )
       {
-        v14 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v2);
+        ComponentOfType = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(m_pPointer);
       }
-      else if ( (v13 & 0x8000u) == 0 )
+      else if ( (v13 & 0x2000) != 0 )
       {
-        if ( (v13 >> 13) & 1 )
-        {
-          v14 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v2);
-        }
-        else if ( (v13 >> 12) & 1 )
-        {
-          v14 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                      (UFG::SimObjectGame *)&v2->vfptr,
-                                                      UFG::CharacterAnimationComponent::_TypeUID);
-        }
-        else
-        {
-          v14 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                      (UFG::SimObject *)&v2->vfptr,
-                                                      UFG::CharacterAnimationComponent::_TypeUID);
-        }
+        ComponentOfType = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)m_pPointer);
+      }
+      else if ( (v13 & 0x1000) != 0 )
+      {
+        ComponentOfType = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                m_pPointer,
+                                                                UFG::CharacterAnimationComponent::_TypeUID);
       }
       else
       {
-        v14 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v2);
+        ComponentOfType = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                m_pPointer,
+                                                                UFG::CharacterAnimationComponent::_TypeUID);
       }
-      v9 = v14;
+      v9 = ComponentOfType;
     }
     if ( v10 )
     {
       if ( v9 )
       {
-        v15 = v10->mCreature;
+        mCreature = v10->mCreature;
         v16 = v9->mCreature;
-        if ( v15 )
+        if ( mCreature )
         {
           if ( v16 )
           {
-            if ( v15->mPose.mRigHandle.mData )
-              v17 = Skeleton::GetBoneID(v15->mPose.mRigHandle.mUFGSkeleton, v7);
+            if ( mCreature->mPose.mRigHandle.mData )
+              BoneID = Skeleton::GetBoneID(mCreature->mPose.mRigHandle.mUFGSkeleton, m_TrackClassNameUID);
             else
-              v17 = -1;
-            if ( Creature::RemoveAttachment(v15, (UFG::SimObject *)&v8->vfptr, v17, (UFG::SimObject *)&v2->vfptr) )
+              BoneID = -1;
+            if ( Creature::RemoveAttachment(mCreature, v8, BoneID, m_pPointer) )
             {
-              if ( BYTE5(v3->m_Track[1].vfptr) )
-                Creature::MakeUpright(v16, 0.0, v18);
+              if ( BYTE5(this->m_Track[1].vfptr) )
+                Creature::MakeUpright(v16, 0.0);
             }
           }
         }
@@ -886,18 +816,13 @@ void __fastcall ActorDetachTask::Begin(ActorDetachTask *this, ActionContext *con
 // RVA: 0x3E0160
 void __fastcall NISLightGroupAnimationTask::NISLightGroupAnimationTask(NISLightGroupAnimationTask *this)
 {
-  UFG::qNode<ITask,ITask> *v1; // rax
-  UFG::qSafePointer<PoseNode,PoseNode> *v2; // [rsp+28h] [rbp+10h]
-
-  v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
-  v1->mPrev = v1;
-  v1->mNext = v1;
+  this->mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->mNext = &this->UFG::qNode<ITask,ITask>;
   this->vfptr = (ITaskVtbl *)&ITask::`vftable;
   this->vfptr = (ITaskVtbl *)&Task<NISLightGroupAnimationTrack>::`vftable;
   this->vfptr = (ITaskVtbl *)&NISLightGroupAnimationTask::`vftable;
-  v2 = &this->mController;
-  v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v2->mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
+  this->mController.mPrev = &this->mController;
+  this->mController.mNext = &this->mController;
   this->mController.m_pPointer = 0i64;
 }
 
@@ -905,130 +830,124 @@ void __fastcall NISLightGroupAnimationTask::NISLightGroupAnimationTask(NISLightG
 // RVA: 0x3E0AB0
 void __fastcall NISLightGroupAnimationTask::~NISLightGroupAnimationTask(NISLightGroupAnimationTask *this)
 {
-  NISLightGroupAnimationTask *v1; // r8
-  UFG::qSafePointer<PoseNode,PoseNode> *v2; // rdx
-  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *v3; // rcx
-  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *v4; // rax
+  UFG::qSafePointer<PoseNode,PoseNode> *p_mController; // rdx
+  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *v5; // rcx
   UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *v6; // rax
-  UFG::qNode<ITask,ITask> *v7; // rdx
-  UFG::qNode<ITask,ITask> *v8; // rcx
-  UFG::qNode<ITask,ITask> *v9; // rax
+  UFG::qNode<ITask,ITask> *v7; // rcx
+  UFG::qNode<ITask,ITask> *v8; // rax
 
-  v1 = this;
   this->vfptr = (ITaskVtbl *)&NISLightGroupAnimationTask::`vftable;
-  v2 = &this->mController;
+  p_mController = &this->mController;
   if ( this->mController.m_pPointer )
   {
-    v3 = v2->mPrev;
-    v4 = v2->mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-    v2->mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
+    mPrev = p_mController->mPrev;
+    mNext = p_mController->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mController->mPrev = p_mController;
+    p_mController->mNext = p_mController;
   }
-  v2->m_pPointer = 0i64;
-  v5 = v2->mPrev;
-  v6 = v2->mNext;
+  p_mController->m_pPointer = 0i64;
+  v5 = p_mController->mPrev;
+  v6 = p_mController->mNext;
   v5->mNext = v6;
   v6->mPrev = v5;
-  v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v2->mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
-  v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
-  v8 = v1->mPrev;
-  v9 = v1->mNext;
-  v8->mNext = v9;
-  v9->mPrev = v8;
-  v7->mPrev = v7;
-  v7->mNext = v7;
+  p_mController->mPrev = p_mController;
+  p_mController->mNext = p_mController;
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  v7 = this->mPrev;
+  v8 = this->mNext;
+  v7->mNext = v8;
+  v8->mPrev = v7;
+  this->mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->mNext = &this->UFG::qNode<ITask,ITask>;
 }
 
 // File Line: 1013
 // RVA: 0x3E1C30
 void __fastcall NISLightGroupAnimationTask::Begin(NISLightGroupAnimationTask *this, ActionContext *context)
 {
-  NISLightGroupAnimationTask *v2; // rdi
-  NISInstance *v3; // rbx
-  UFG::SimObject *v4; // rcx
-  UFG::SimComponent *v5; // rsi
+  NISInstance *m_pPointer; // rbx
+  UFG::SimObject *m_pSimObject; // rcx
+  UFG::SimComponent *ComponentOfType; // rsi
   const char *v6; // r8
   Creature *v7; // rcx
   PoseNode *v8; // rax
-  UFG::qSafePointer<PoseNode,PoseNode> *v9; // r8
-  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *v10; // rdx
-  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *v11; // rcx
-  UFG::qList<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList,1,0> *v12; // rcx
+  UFG::qSafePointer<PoseNode,PoseNode> *p_mController; // r8
+  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *mPrev; // rdx
+  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *mNext; // rcx
+  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *p_mNode; // rcx
   UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *v13; // rax
   UFG::qSafePointer<PoseNode,PoseNode> *v14; // rdx
   UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *v15; // rcx
   UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *v16; // rax
   PoseNode *v17; // rcx
-  UFG::qString v18; // [rsp+48h] [rbp-30h]
-  int returnCode; // [rsp+90h] [rbp+18h]
-  UFG::qSymbolUC result; // [rsp+98h] [rbp+20h]
+  UFG::qString v18; // [rsp+48h] [rbp-30h] BYREF
+  int returnCode; // [rsp+90h] [rbp+18h] BYREF
+  UFG::qSymbolUC result; // [rsp+98h] [rbp+20h] BYREF
 
-  v2 = this;
-  v3 = NISManager::sInstance->mpActiveInstance.m_pPointer;
-  if ( v3 )
-    v3 = (NISInstance *)v3->mpNISNode;
-  v4 = v3->mFacialAnimGroupHandle.m_pReferenceInfo[1].m_pSimObject;
-  if ( v4 )
+  m_pPointer = NISManager::sInstance->mpActiveInstance.m_pPointer;
+  if ( m_pPointer )
+    m_pPointer = (NISInstance *)m_pPointer->mpNISNode;
+  m_pSimObject = m_pPointer->mFacialAnimGroupHandle.m_pReferenceInfo[1].m_pSimObject;
+  if ( m_pSimObject )
   {
-    v5 = UFG::SimObject::GetComponentOfType(v4, UFG::LightGroupAnimationComponent::_TypeUID);
-    if ( v5 )
+    ComponentOfType = UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::LightGroupAnimationComponent::_TypeUID);
+    if ( ComponentOfType )
     {
       UFG::qString::qString(&v18);
-      if ( (_QWORD)v3->mFacialAnimGroupHandle.m_AnimationGroup.m_pPointer & 0xFFFFFFFFFFFFFFFEui64 )
-        v6 = (char *)&v3->mFacialAnimGroupHandle.m_AnimationGroup.m_pPointer
-           + ((_QWORD)v3->mFacialAnimGroupHandle.m_AnimationGroup.m_pPointer & 0xFFFFFFFFFFFFFFFEui64);
+      if ( ((unsigned __int64)m_pPointer->mFacialAnimGroupHandle.m_AnimationGroup.m_pPointer & 0xFFFFFFFFFFFFFFFEui64) != 0 )
+        v6 = (char *)&m_pPointer->mFacialAnimGroupHandle.m_AnimationGroup.m_pPointer
+           + ((unsigned __int64)m_pPointer->mFacialAnimGroupHandle.m_AnimationGroup.m_pPointer & 0xFFFFFFFFFFFFFFFEui64);
       else
         v6 = BinString::sEmptyString;
       UFG::qString::Format(&v18, "NIS_%s_LIGHT", v6);
       UFG::qSymbolUC::create_from_string(&result, v18.mData);
       returnCode = 0;
-      v7 = *(Creature **)&v5[2].m_TypeUID;
+      v7 = *(Creature **)&ComponentOfType[2].m_TypeUID;
       if ( v7 )
       {
         v8 = Creature::PlayAnimation(v7, &result, APM_CYCLIC, 0.0, -1.0, 0.0, 0, &returnCode);
-        v9 = &v2->mController;
-        if ( v2->mController.m_pPointer )
+        p_mController = &this->mController;
+        if ( this->mController.m_pPointer )
         {
-          v10 = v9->mPrev;
-          v11 = v2->mController.mNext;
-          v10->mNext = v11;
-          v11->mPrev = v10;
-          v9->mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v9->mPrev;
-          v2->mController.mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mController.mPrev;
+          mPrev = p_mController->mPrev;
+          mNext = this->mController.mNext;
+          mPrev->mNext = mNext;
+          mNext->mPrev = mPrev;
+          p_mController->mPrev = p_mController;
+          this->mController.mNext = &this->mController;
         }
-        v2->mController.m_pPointer = v8;
+        this->mController.m_pPointer = v8;
         if ( v8 )
         {
-          v12 = &v8->m_SafePointerList;
-          v13 = v8->m_SafePointerList.mNode.mPrev;
-          v13->mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v9->mPrev;
-          v9->mPrev = v13;
-          v2->mController.mNext = &v12->mNode;
-          v12->mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v9->mPrev;
+          p_mNode = &v8->m_SafePointerList.mNode;
+          v13 = v8->m_SafePointerList.mNode.UFG::qSafePointerNode<PoseNode>::mPrev;
+          v13->mNext = p_mController;
+          p_mController->mPrev = v13;
+          this->mController.mNext = p_mNode;
+          p_mNode->mPrev = p_mController;
         }
       }
       else
       {
-        v14 = &v2->mController;
-        if ( v2->mController.m_pPointer )
+        v14 = &this->mController;
+        if ( this->mController.m_pPointer )
         {
           v15 = v14->mPrev;
-          v16 = v2->mController.mNext;
+          v16 = this->mController.mNext;
           v15->mNext = v16;
           v16->mPrev = v15;
-          v14->mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v14->mPrev;
-          v2->mController.mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mController.mPrev;
+          v14->mPrev = v14;
+          this->mController.mNext = &this->mController;
         }
-        v2->mController.m_pPointer = 0i64;
+        this->mController.m_pPointer = 0i64;
       }
-      v17 = v2->mController.m_pPointer;
+      v17 = this->mController.m_pPointer;
       if ( v17 )
-        v17->vfptr[2].FindWithOldPath((Expression::IMemberMap *)&v17->vfptr, (const char *)LOBYTE(v2->m_Track[1].vfptr));
+        v17->Expression::IMemberMap::vfptr[2].FindWithOldPath(v17, (const char *)LOBYTE(this->m_Track[1].vfptr));
       UFG::qString::~qString(&v18);
     }
   }
@@ -1038,24 +957,22 @@ void __fastcall NISLightGroupAnimationTask::Begin(NISLightGroupAnimationTask *th
 // RVA: 0x3E6790
 bool __fastcall NISLightGroupAnimationTask::Update(NISLightGroupAnimationTask *this, float timeDelta)
 {
-  NISLightGroupAnimationTask *v2; // rdi
-  PoseNode *v3; // rcx
-  int v4; // ebx
+  PoseNode *m_pPointer; // rcx
+  int vfptr_low; // ebx
   bool result; // al
 
-  v2 = this;
-  v3 = this->mController.m_pPointer;
-  if ( !v3 )
+  m_pPointer = this->mController.m_pPointer;
+  if ( !m_pPointer )
     return 0;
-  v4 = LOBYTE(v2->m_Track[1].vfptr);
+  vfptr_low = LOBYTE(this->m_Track[1].vfptr);
   result = 1;
-  if ( v4 != 1 && v4 != 6 )
+  if ( vfptr_low != 1 && vfptr_low != 6 )
   {
-    if ( ((unsigned __int8 (*)(void))v3->vfptr[1].SetResourceOwner)() )
+    if ( ((unsigned __int8 (__fastcall *)(PoseNode *))m_pPointer->Expression::IMemberMap::vfptr[1].SetResourceOwner)(m_pPointer) )
     {
-      ((void (*)(void))v2->mController.m_pPointer->vfptr[1].GetResourceOwner)();
-      if ( v4 != 2 )
-        result = 0;
+      this->mController.m_pPointer->vfptr[1].GetResourceOwner(this->mController.m_pPointer);
+      if ( vfptr_low != 2 )
+        return 0;
     }
   }
   return result;
@@ -1065,11 +982,8 @@ bool __fastcall NISLightGroupAnimationTask::Update(NISLightGroupAnimationTask *t
 // RVA: 0x3E0540
 void __fastcall NISPlayMovieTask::NISPlayMovieTask(NISPlayMovieTask *this)
 {
-  UFG::qNode<ITask,ITask> *v1; // rax
-
-  v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
-  v1->mPrev = v1;
-  v1->mNext = v1;
+  this->mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->mNext = &this->UFG::qNode<ITask,ITask>;
   this->vfptr = (ITaskVtbl *)&ITask::`vftable;
   this->vfptr = (ITaskVtbl *)&Task<NISPlayMovieTrack>::`vftable;
   this->vfptr = (ITaskVtbl *)&NISPlayMovieTask::`vftable;
@@ -1080,8 +994,7 @@ void __fastcall NISPlayMovieTask::NISPlayMovieTask(NISPlayMovieTask *this)
 // RVA: 0x3E1DD0
 void __fastcall NISPlayMovieTask::Begin(NISPlayMovieTask *this, ActionContext *context)
 {
-  NISPlayMovieTask *v2; // rsi
-  ITrack *v3; // rdx
+  ITrack *m_Track; // rdx
   const char *v4; // rdi
   UFG::GameStatTracker *v5; // rax
   float v6; // xmm6_4
@@ -1092,27 +1005,26 @@ void __fastcall NISPlayMovieTask::Begin(NISPlayMovieTask *this, ActionContext *c
   UFG::MoviePlayer *v11; // rax
   NISManager *v12; // rbx
 
-  v2 = this;
-  v3 = this->m_Track;
-  if ( (_QWORD)v3[1].vfptr & 0xFFFFFFFFFFFFFFFEui64 )
-    v4 = (char *)&v3[1] + ((_QWORD)v3[1].vfptr & 0xFFFFFFFFFFFFFFFEui64);
+  m_Track = this->m_Track;
+  if ( ((unsigned __int64)m_Track[1].vfptr & 0xFFFFFFFFFFFFFFFEui64) != 0 )
+    v4 = (char *)&m_Track[1] + ((unsigned __int64)m_Track[1].vfptr & 0xFFFFFFFFFFFFFFFEui64);
   else
     v4 = BinString::sEmptyString;
   if ( v4 && (unsigned int)UFG::qStringLength(v4) )
   {
     v5 = UFG::GameStatTracker::Instance();
-    v6 = (float)(signed int)UFG::GameStatTracker::GetStat(v5, VolumeSFX) * 2000.0;
-    v7 = v2->m_Track;
+    v6 = (float)(int)UFG::GameStatTracker::GetStat(v5, VolumeSFX) * 2000.0;
+    v7 = this->m_Track;
     if ( BYTE1(v7[1].mResourceOwner) )
     {
       UFG::qMutex::Lock(&stru_142042A80);
       for ( i = off_142042A68; i != (UFG::MoviePlayer *)&UFG::TheMovieHandler; i = (UFG::MoviePlayer *)i->mNext )
       {
-        if ( i->mFlags & 0x10 && !(unsigned int)UFG::qStringCompareInsensitive(v4, i->mFilename, -1) )
+        if ( (i->mFlags & 0x10) != 0 && !(unsigned int)UFG::qStringCompareInsensitive(v4, i->mFilename, -1) )
         {
-          v2->mPlayer = i;
+          this->mPlayer = i;
           UFG::MoviePlayer::PlayFromStart(i, 0);
-          UFG::MoviePlayer::SetAudioVolume(v2->mPlayer, 0, (signed int)v6);
+          UFG::MoviePlayer::SetAudioVolume(this->mPlayer, 0, (int)v6);
           break;
         }
       }
@@ -1123,18 +1035,13 @@ void __fastcall NISPlayMovieTask::Begin(NISPlayMovieTask *this, ActionContext *c
       v9 = 0i64;
       if ( LOBYTE(v7[1].mResourceOwner) )
       {
-        if ( !(_S8_9 & 1) )
+        if ( (_S8_9 & 1) == 0 )
         {
           _S8_9 |= 1u;
           UFG::qWiseSymbol::create_from_string(&insta_pause, "insta_pause");
           atexit(NISPlayMovieTask::Begin_::_18_::_dynamic_atexit_destructor_for__insta_pause__);
         }
-        UFG::AudioEntity::CreateAndPlayEvent(
-          (UFG::AudioEntity *)&UFG::AmbienceAudio::m_instance->vfptr,
-          insta_pause.mUID,
-          0i64,
-          0,
-          0i64);
+        UFG::AudioEntity::CreateAndPlayEvent(UFG::AmbienceAudio::m_instance, insta_pause.mUID, 0i64, 0, 0i64);
       }
       UFG::RenderWorld::SetRenderWorld(0);
       v10 = UFG::qMalloc(0x58ui64, "NISPlayMovieTask.mPlayer", 0i64);
@@ -1143,9 +1050,9 @@ void __fastcall NISPlayMovieTask::Begin(NISPlayMovieTask *this, ActionContext *c
         UFG::MoviePlayer::MoviePlayer((UFG::MoviePlayer *)v10);
         v9 = v11;
       }
-      v2->mPlayer = v9;
+      this->mPlayer = v9;
       UFG::MoviePlayer::Init(v9, v4, 0i64, 0);
-      UFG::MoviePlayer::SetAudioVolume(v2->mPlayer, 0, (signed int)v6);
+      UFG::MoviePlayer::SetAudioVolume(this->mPlayer, 0, (int)v6);
       v12 = NISManager::sInstance;
       if ( !NISManager::sInstance->mHudDisableCount )
         UFG::UIHK_NISOverlay::ShowLetterBox();
@@ -1158,21 +1065,19 @@ void __fastcall NISPlayMovieTask::Begin(NISPlayMovieTask *this, ActionContext *c
 // RVA: 0x3E6920
 bool __fastcall NISPlayMovieTask::Update(NISPlayMovieTask *this, float timeDelta)
 {
-  UFG::MoviePlayer *v2; // rax
+  UFG::MoviePlayer *mPlayer; // rax
 
-  v2 = this->mPlayer;
-  return v2 && !(v2->mFlags & 1);
+  mPlayer = this->mPlayer;
+  return mPlayer && (mPlayer->mFlags & 1) == 0;
 }
 
 // File Line: 1134
 // RVA: 0x3E27E0
 void __fastcall NISPlayMovieTask::End(NISPlayMovieTask *this)
 {
-  NISPlayMovieTask *v1; // rbx
   NISManager *v2; // rax
-  UFG::MoviePlayer *v3; // rdi
+  UFG::MoviePlayer *mPlayer; // rdi
 
-  v1 = this;
   if ( BYTE1(this->m_Track[1].mResourceOwner) || !this->mPlayer )
   {
     this->mPlayer = 0i64;
@@ -1180,31 +1085,27 @@ void __fastcall NISPlayMovieTask::End(NISPlayMovieTask *this)
   else
   {
     v2 = NISManager::sInstance;
-    if ( !--v2->mHudDisableCount )
+    --NISManager::sInstance->mHudDisableCount;
+    if ( !v2->mHudDisableCount )
       UFG::UIHK_NISOverlay::HideLetterBox();
-    v3 = v1->mPlayer;
-    if ( v3 )
+    mPlayer = this->mPlayer;
+    if ( mPlayer )
     {
-      UFG::MoviePlayer::~MoviePlayer(v1->mPlayer);
-      operator delete[](v3);
+      UFG::MoviePlayer::~MoviePlayer(this->mPlayer);
+      operator delete[](mPlayer);
     }
-    if ( LOBYTE(v1->m_Track[1].mResourceOwner) )
+    if ( LOBYTE(this->m_Track[1].mResourceOwner) )
     {
-      if ( !(_S9_9 & 1) )
+      if ( (_S9_9 & 1) == 0 )
       {
         _S9_9 |= 1u;
         UFG::qWiseSymbol::create_from_string(&insta_resume, "insta_resume");
         atexit(NISPlayMovieTask::End_::_11_::_dynamic_atexit_destructor_for__insta_resume__);
       }
-      UFG::AudioEntity::CreateAndPlayEvent(
-        (UFG::AudioEntity *)&UFG::AmbienceAudio::m_instance->vfptr,
-        insta_resume.mUID,
-        0i64,
-        0,
-        0i64);
+      UFG::AudioEntity::CreateAndPlayEvent(UFG::AmbienceAudio::m_instance, insta_resume.mUID, 0i64, 0, 0i64);
     }
     UFG::RenderWorld::SetRenderWorld(1);
-    v1->mPlayer = 0i64;
+    this->mPlayer = 0i64;
   }
 }
 
@@ -1212,11 +1113,8 @@ void __fastcall NISPlayMovieTask::End(NISPlayMovieTask *this)
 // RVA: 0x3DFE60
 void __fastcall NISAllowPlayerControlTask::NISAllowPlayerControlTask(NISAllowPlayerControlTask *this)
 {
-  UFG::qNode<ITask,ITask> *v1; // rax
-
-  v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
-  v1->mPrev = v1;
-  v1->mNext = v1;
+  this->mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->mNext = &this->UFG::qNode<ITask,ITask>;
   this->vfptr = (ITaskVtbl *)&ITask::`vftable;
   this->vfptr = (ITaskVtbl *)&Task<NISAllowPlayerControlTrack>::`vftable;
   this->vfptr = (ITaskVtbl *)&NISAllowPlayerControlTask::`vftable;
@@ -1226,21 +1124,21 @@ void __fastcall NISAllowPlayerControlTask::NISAllowPlayerControlTask(NISAllowPla
 // RVA: 0x3E1B80
 void __fastcall NISAllowPlayerControlTask::Begin(NISAllowPlayerControlTask *this, ActionContext *context)
 {
-  NISInstance *v2; // rdx
+  NISInstance *m_pPointer; // rdx
 
-  v2 = NISManager::sInstance->mpActiveInstance.m_pPointer;
-  if ( v2 )
-    v2->mpNISAllowPlayerControlTask = this;
+  m_pPointer = NISManager::sInstance->mpActiveInstance.m_pPointer;
+  if ( m_pPointer )
+    m_pPointer->mpNISAllowPlayerControlTask = this;
 }
 
 // File Line: 1175
 // RVA: 0x3E27B0
 void __fastcall NISAllowPlayerControlTask::End(NISAllowPlayerControlTask *this)
 {
-  NISInstance *v1; // rcx
+  NISInstance *m_pPointer; // rcx
 
-  v1 = NISManager::sInstance->mpActiveInstance.m_pPointer;
-  if ( v1 )
-    v1->mpNISAllowPlayerControlTask = 0i64;
+  m_pPointer = NISManager::sInstance->mpActiveInstance.m_pPointer;
+  if ( m_pPointer )
+    m_pPointer->mpNISAllowPlayerControlTask = 0i64;
 }
 

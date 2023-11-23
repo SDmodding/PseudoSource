@@ -2,14 +2,11 @@
 // RVA: 0xE59D30
 void __fastcall LOCALNAMESPACE::hkNativeResource::callDestructors(LOCALNAMESPACE::hkNativeResource *this)
 {
-  LOCALNAMESPACE::hkNativeResource *v1; // rbx
-
-  v1 = this;
   if ( this->m_contents )
   {
-    hkNativePackfileUtils::unload(this->m_data.m_data, this->m_data.m_size);
-    v1->m_contents = 0i64;
-    v1->m_contentsTypeName = 0i64;
+    hkNativePackfileUtils::unload((_QWORD *)this->m_data.m_data, this->m_data.m_size);
+    this->m_contents = 0i64;
+    this->m_contentsTypeName = 0i64;
   }
 }
 
@@ -17,27 +14,25 @@ void __fastcall LOCALNAMESPACE::hkNativeResource::callDestructors(LOCALNAMESPACE
 // RVA: 0xE59C50
 void __fastcall LOCALNAMESPACE::hkNativeResource::~hkNativeResource(LOCALNAMESPACE::hkNativeResource *this)
 {
-  LOCALNAMESPACE::hkNativeResource *v1; // rbx
-  int v2; // er8
+  int m_capacityAndFlags; // r8d
 
-  v1 = this;
   this->vfptr = (hkBaseObjectVtbl *)&LOCALNAMESPACE::hkNativeResource::`vftable;
   if ( this->m_contents )
   {
-    hkNativePackfileUtils::unload(this->m_data.m_data, this->m_data.m_size);
-    v1->m_contents = 0i64;
-    v1->m_contentsTypeName = 0i64;
+    hkNativePackfileUtils::unload((_QWORD *)this->m_data.m_data, this->m_data.m_size);
+    this->m_contents = 0i64;
+    this->m_contentsTypeName = 0i64;
   }
-  v2 = v1->m_data.m_capacityAndFlags;
-  v1->m_data.m_size = 0;
-  if ( v2 >= 0 )
+  m_capacityAndFlags = this->m_data.m_capacityAndFlags;
+  this->m_data.m_size = 0;
+  if ( m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_data.m_data,
-      v2 & 0x3FFFFFFF);
-  v1->m_data.m_data = 0i64;
-  v1->m_data.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_data.m_data,
+      m_capacityAndFlags & 0x3FFFFFFF);
+  this->m_data.m_data = 0i64;
+  this->m_data.m_capacityAndFlags = 0x80000000;
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 87
@@ -49,18 +44,16 @@ const char *__fastcall LOCALNAMESPACE::hkNativeResource::getName(LOCALNAMESPACE:
 
 // File Line: 91
 // RVA: 0xE59D60
-void *__fastcall LOCALNAMESPACE::hkNativeResource::getContentsPointer(LOCALNAMESPACE::hkNativeResource *this, const char *typeName, hkTypeInfoRegistry *ignoredBecauseAlreadyDone)
+void *__fastcall LOCALNAMESPACE::hkNativeResource::getContentsPointer(
+        LOCALNAMESPACE::hkNativeResource *this,
+        const char *typeName,
+        hkTypeInfoRegistry *ignoredBecauseAlreadyDone)
 {
-  const char *v3; // rsi
-  LOCALNAMESPACE::hkNativeResource *v4; // rdi
   __int64 v5; // rbx
   hkClass *v6; // rbp
   hkClass *v7; // rax
-  void *v8; // rax
-  hkBool result; // [rsp+38h] [rbp+10h]
+  hkBool result; // [rsp+38h] [rbp+10h] BYREF
 
-  v3 = typeName;
-  v4 = this;
   if ( typeName
     && (v5 = ((__int64 (__fastcall *)(hkBuiltinTypeRegistry *, const char *, hkTypeInfoRegistry *))hkSingleton<hkBuiltinTypeRegistry>::s_instance->vfptr[2].__vecDelDtor)(
                hkSingleton<hkBuiltinTypeRegistry>::s_instance,
@@ -68,149 +61,141 @@ void *__fastcall LOCALNAMESPACE::hkNativeResource::getContentsPointer(LOCALNAMES
                ignoredBecauseAlreadyDone),
         v6 = (hkClass *)(*(__int64 (__fastcall **)(__int64, const char *))(*(_QWORD *)v5 + 32i64))(
                           v5,
-                          v4->m_contentsTypeName),
-        v7 = (hkClass *)(*(__int64 (__fastcall **)(__int64, const char *))(*(_QWORD *)v5 + 32i64))(v5, v3),
+                          this->m_contentsTypeName),
+        v7 = (hkClass *)(*(__int64 (__fastcall **)(__int64, const char *))(*(_QWORD *)v5 + 32i64))(v5, typeName),
         v6)
     && v7
     && !hkClass::isSuperClass(v7, &result, v6)->m_bool )
   {
-    v8 = 0i64;
+    return 0i64;
   }
   else
   {
-    v8 = v4->m_contents;
+    return this->m_contents;
   }
-  return v8;
 }
 
 // File Line: 111
 // RVA: 0xE59E00
-void __fastcall LOCALNAMESPACE::hkNativeResource::getImportsExports(LOCALNAMESPACE::hkNativeResource *this, hkArray<hkResource::Import,hkContainerHeapAllocator> *impOut, hkArray<hkResource::Export,hkContainerHeapAllocator> *expOut)
+void __fastcall LOCALNAMESPACE::hkNativeResource::getImportsExports(
+        LOCALNAMESPACE::hkNativeResource *this,
+        hkArray<hkResource::Import,hkContainerHeapAllocator> *impOut,
+        hkArray<hkResource::Export,hkContainerHeapAllocator> *expOut)
 {
-  hkNativePackfileUtils::getImportsExports(this->m_data.m_data, expOut, impOut);
+  hkNativePackfileUtils::getImportsExports((_QWORD *)this->m_data.m_data, expOut, impOut);
 }
 
 // File Line: 129
 // RVA: 0xE588C0
-hkResource *__fastcall hkNativePackfileUtils::load(const void *packfileData, int dataSize, hkTypeInfoRegistry *userRegistry)
+hkResource *__fastcall hkNativePackfileUtils::load(
+        const void *packfileData,
+        int dataSize,
+        hkTypeInfoRegistry *userRegistry)
 {
-  hkTypeInfoRegistry *v3; // rbp
-  int v4; // edi
-  const void *v5; // rsi
-  int v6; // eax
+  int RequiredBufferSize; // eax
   int v7; // ebx
-  int v8; // er9
-  void *v9; // rdi
-  _QWORD **v10; // rax
-  __int64 v11; // rbx
-  __int64 v12; // rax
-  signed __int64 v13; // rcx
-  _QWORD **array; // [rsp+30h] [rbp-28h]
-  int v16; // [rsp+38h] [rbp-20h]
-  int v17; // [rsp+3Ch] [rbp-1Ch]
-  hkResult result; // [rsp+78h] [rbp+20h]
+  void *v8; // rdi
+  _QWORD **Value; // rax
+  __int64 v10; // rbx
+  __int64 v11; // rax
+  hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> array[2]; // [rsp+30h] [rbp-28h] BYREF
+  hkResult result; // [rsp+78h] [rbp+20h] BYREF
 
-  v3 = userRegistry;
-  v4 = dataSize;
-  v5 = packfileData;
-  v17 = 2147483648;
-  array = 0i64;
-  v16 = 0;
-  v6 = hkNativePackfileUtils::getRequiredBufferSize(packfileData, dataSize);
-  v7 = v6;
-  if ( v6 > 0 )
+  array[0].m_capacityAndFlags = 0x80000000;
+  array[0].m_data = 0i64;
+  array[0].m_size = 0;
+  RequiredBufferSize = hkNativePackfileUtils::getRequiredBufferSize(packfileData, dataSize);
+  v7 = RequiredBufferSize;
+  if ( RequiredBufferSize > 0 )
+    hkArrayUtil::_reserve(
+      &result,
+      &hkContainerHeapAllocator::s_alloc,
+      (const void **)&array[0].m_data,
+      RequiredBufferSize,
+      1);
+  array[0].m_size = v7;
+  v8 = hkNativePackfileUtils::load(packfileData, dataSize, array[0].m_data, v7, userRegistry);
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v10 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 48i64);
+  if ( v10 )
   {
-    v8 = v6;
-    if ( v6 < 0 )
-      v8 = 0;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, v8, 1);
-  }
-  v16 = v7;
-  v9 = hkNativePackfileUtils::load(v5, v4, array, v7, v3);
-  v10 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v11 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v10[11] + 8i64))(v10[11], 48i64);
-  if ( v11 )
-  {
-    v12 = *array[5];
-    *(_QWORD *)v11 = &LOCALNAMESPACE::hkNativeResource::`vftable;
-    v13 = v11 + 16;
-    *(_DWORD *)(v11 + 8) = 0x1FFFF;
-    *(_QWORD *)v13 = 0i64;
-    *(_DWORD *)(v13 + 8) = 0;
-    *(_DWORD *)(v13 + 12) = 2147483648;
-    *(_QWORD *)(v11 + 32) = v9;
-    *(_QWORD *)(v11 + 40) = v12;
+    v11 = *(_QWORD *)array[0].m_data[2].m_identifier;
+    *(_QWORD *)v10 = &LOCALNAMESPACE::hkNativeResource::`vftable;
+    *(_DWORD *)(v10 + 8) = 0x1FFFF;
+    *(_QWORD *)(v10 + 16) = 0i64;
+    *(_DWORD *)(v10 + 24) = 0;
+    *(_DWORD *)(v10 + 28) = 0x80000000;
+    *(_QWORD *)(v10 + 32) = v8;
+    *(_QWORD *)(v10 + 40) = v11;
     hkArray<hkpTreeBroadPhase32::Handle,hkContainerHeapAllocator>::swap(
-      (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)(v11 + 16),
-      (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&array);
+      (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)(v10 + 16),
+      array);
   }
   else
   {
-    v11 = 0i64;
+    v10 = 0i64;
   }
-  v16 = 0;
-  if ( v17 >= 0 )
+  array[0].m_size = 0;
+  if ( array[0].m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      array,
-      v17 & 0x3FFFFFFF);
-  return (hkResource *)v11;
+      &hkContainerHeapAllocator::s_alloc,
+      array[0].m_data,
+      array[0].m_capacityAndFlags & 0x3FFFFFFF);
+  return (hkResource *)v10;
 }
 
 // File Line: 139
 // RVA: 0xE596E0
-char *__fastcall getSectionDataByIndex(void *base, hkArrayBase<hkPackfileSectionHeader *> *sections, int sectionIndex, int offset)
+char *__fastcall getSectionDataByIndex(
+        char *base,
+        hkArrayBase<hkPackfileSectionHeader *> *sections,
+        int sectionIndex,
+        int offset)
 {
   hkPackfileSectionHeader *v4; // rdx
-  char *result; // rax
 
   v4 = sections->m_data[sectionIndex];
   if ( v4->m_localFixupsOffset )
-    result = (char *)base + offset + v4->m_absoluteDataStart;
+    return &base[offset + v4->m_absoluteDataStart];
   else
-    result = 0i64;
-  return result;
+    return 0i64;
 }
 
 // File Line: 151
 // RVA: 0xE59540
-hkResult *__fastcall hkNativePackfileUtils::validatePackfileHeader(hkResult *result, const void *packfileData, const char **errOut)
+hkResult *__fastcall hkNativePackfileUtils::validatePackfileHeader(
+        hkResult *result,
+        const char *packfileData,
+        const char **errOut)
 {
-  const char **v3; // rdi
-  const char *v4; // rsi
-  hkResult *v5; // rbx
   bool v7; // zf
   const char *v8; // rax
-  const char *v9; // rax
-  int dst; // [rsp+20h] [rbp-48h]
-  int v11; // [rsp+24h] [rbp-44h]
-  char v12; // [rsp+48h] [rbp-20h]
-  __int64 v13; // [rsp+58h] [rbp-10h]
+  const char *CurrentVersion; // rax
+  int dst[10]; // [rsp+20h] [rbp-48h] BYREF
+  char v11; // [rsp+48h] [rbp-20h]
+  __int64 v12; // [rsp+58h] [rbp-10h]
 
-  v3 = errOut;
-  v4 = (const char *)packfileData;
-  v5 = result;
   if ( packfileData )
   {
-    hkString::memSet(&dst, -1, 64);
-    v7 = *(_DWORD *)v4 == 1474355287;
-    dst = 1474355287;
-    v11 = 281067536;
-    v12 = 0;
-    v13 = 0i64;
-    if ( v7 && *((_DWORD *)v4 + 1) == 281067536 )
+    hkString::memSet(dst, -1, 0x40u);
+    v7 = *(_DWORD *)packfileData == 1474355287;
+    dst[0] = 1474355287;
+    dst[1] = 281067536;
+    v11 = 0;
+    v12 = 0i64;
+    if ( v7 && *((_DWORD *)packfileData + 1) == 281067536 )
     {
-      if ( v4[16] == hkStructureLayout::HostLayoutRules.m_bytesInPointer )
+      if ( packfileData[16] == hkStructureLayout::HostLayoutRules.m_bytesInPointer )
       {
-        if ( v4[17] == hkStructureLayout::HostLayoutRules.m_littleEndian )
+        if ( packfileData[17] == hkStructureLayout::HostLayoutRules.m_littleEndian )
         {
-          if ( v4[18] == hkStructureLayout::HostLayoutRules.m_reusePaddingOptimization )
+          if ( packfileData[18] == hkStructureLayout::HostLayoutRules.m_reusePaddingOptimization )
           {
-            if ( v4[19] == hkStructureLayout::HostLayoutRules.m_emptyBaseClassOptimization )
+            if ( packfileData[19] == hkStructureLayout::HostLayoutRules.m_emptyBaseClassOptimization )
             {
-              if ( (unsigned __int8)v4 & 3 )
+              if ( ((unsigned __int8)packfileData & 3) != 0 )
               {
-                if ( v3 )
+                if ( errOut )
                 {
                   v8 = "Packfile data source needs to be 4 byte aligned";
                   goto LABEL_31;
@@ -218,154 +203,151 @@ hkResult *__fastcall hkNativePackfileUtils::validatePackfileHeader(hkResult *res
               }
               else
               {
-                if ( v4[40] != -1 )
+                if ( packfileData[40] != -1 )
                 {
-                  v9 = hkVersionUtil::getCurrentVersion();
-                  if ( !(unsigned int)hkString::strCmp(v4 + 40, v9) )
+                  CurrentVersion = hkVersionUtil::getCurrentVersion();
+                  if ( !(unsigned int)hkString::strCmp(packfileData + 40, CurrentVersion) )
                   {
-                    v5->m_enum = 0;
-                    return v5;
+                    result->m_enum = HK_SUCCESS;
+                    return result;
                   }
-                  if ( !v3 )
+                  if ( !errOut )
                     goto LABEL_32;
                   v8 = "Packfile contents are not up to date";
                   goto LABEL_31;
                 }
-                if ( v3 )
+                if ( errOut )
                 {
                   v8 = "Packfile file format is too old";
                   goto LABEL_31;
                 }
               }
             }
-            else if ( v3 )
+            else if ( errOut )
             {
               v8 = "Trying to process a binary file with a different empty base class optimization than this platform.";
               goto LABEL_31;
             }
           }
-          else if ( v3 )
+          else if ( errOut )
           {
             v8 = "Trying to process a binary file with a different padding optimization than this platform.";
             goto LABEL_31;
           }
         }
-        else if ( v3 )
+        else if ( errOut )
         {
           v8 = "Trying to process a binary file with a different endian than this platform.";
           goto LABEL_31;
         }
       }
-      else if ( v3 )
+      else if ( errOut )
       {
         v8 = "Trying to process a binary file with a different pointer size than this platform.";
 LABEL_31:
-        *v3 = v8;
-        goto LABEL_32;
+        *errOut = v8;
       }
     }
-    else if ( v3 )
+    else if ( errOut )
     {
       v8 = "Missing packfile magic header. Is this from a binary file?";
       goto LABEL_31;
     }
 LABEL_32:
-    v5->m_enum = 1;
-    return v5;
+    result->m_enum = HK_FAILURE;
+    return result;
   }
   if ( errOut )
     *errOut = "Pointer is null";
-  result->m_enum = 1;
+  result->m_enum = HK_FAILURE;
   return result;
 }
 
 // File Line: 170
 // RVA: 0xE58A10
-signed __int64 __fastcall hkNativePackfileUtils::getRequiredBufferSize(const void *packfileData, int packfileSize)
+__int64 __fastcall hkNativePackfileUtils::getRequiredBufferSize(hkPackfileHeader *packfileData, int packfileSize)
 {
   unsigned int v2; // ebx
-  hkPackfileHeader *v3; // rdi
   unsigned int v4; // ebp
-  int v5; // esi
-  hkPackfileSectionHeader *v6; // rax
-  signed __int64 v7; // kr00_8
+  int i; // esi
+  hkPackfileSectionHeader *SectionHeader; // rax
 
   v2 = 0;
-  v3 = (hkPackfileHeader *)packfileData;
   v4 = 0;
-  v5 = 0;
-  if ( *((_DWORD *)packfileData + 5) > 0 )
+  for ( i = 0;
+        i < packfileData->m_numSections;
+        v2 += SectionHeader->m_localFixupsOffset + SectionHeader->m_endOffset - SectionHeader->m_exportsOffset )
   {
-    do
-    {
-      v6 = hkPackfileHeader::getSectionHeader(v3, v3, v5++);
-      v7 = 715827883i64 * (v6->m_exportsOffset - v6->m_virtualFixupsOffset);
-      v4 += (HIDWORD(v7) >> 31) + (SHIDWORD(v7) >> 1);
-      v2 += v6->m_localFixupsOffset + v6->m_endOffset - v6->m_exportsOffset;
-    }
-    while ( v5 < v3->m_numSections );
+    SectionHeader = hkPackfileHeader::getSectionHeader(packfileData, packfileData, i++);
+    v4 += (SectionHeader->m_exportsOffset - SectionHeader->m_virtualFixupsOffset) / 12;
   }
-  return v2 + 16 * (v4 + 4i64 * (unsigned int)v3->m_numSections + 3);
+  return v2 + 16 * (v4 + 4i64 * (unsigned int)packfileData->m_numSections + 3);
 }
 
 // File Line: 199
 // RVA: 0xE59710
-void __fastcall copySection(hkPackfileSectionHeader *inSection, hkPackfileSectionHeader *outSection, int outCurOffset, const void *packfileData, void *outBuffer, int packfileSize, int outBufferSize)
+void __fastcall copySection(
+        hkPackfileSectionHeader *inSection,
+        hkPackfileSectionHeader *outSection,
+        int outCurOffset,
+        char *packfileData,
+        char *outBuffer,
+        int packfileSize,
+        int outBufferSize)
 {
-  hkPackfileSectionHeader *v7; // r14
   __int64 v8; // rsi
-  hkPackfileSectionHeader *v9; // rbp
-  char *v10; // rbx
   char *v11; // rdi
 
-  v7 = outSection;
   v8 = outCurOffset;
-  v9 = inSection;
-  v10 = (char *)packfileData;
-  hkString::memCpy(outSection, inSection, 19);
-  v7->m_nullByte = v9->m_nullByte;
-  v7->m_absoluteDataStart = v8;
-  v7->m_localFixupsOffset = v9->m_localFixupsOffset;
-  v7->m_globalFixupsOffset = v9->m_localFixupsOffset;
-  v7->m_virtualFixupsOffset = v9->m_localFixupsOffset;
-  v7->m_exportsOffset = v9->m_localFixupsOffset;
-  v7->m_importsOffset = v9->m_importsOffset + v9->m_localFixupsOffset - v9->m_exportsOffset;
-  v7->m_endOffset = v9->m_endOffset + v9->m_localFixupsOffset - v9->m_exportsOffset;
-  v11 = &v10[v9->m_absoluteDataStart];
-  hkString::memCpy((char *)outBuffer + v8, v11, v9->m_localFixupsOffset);
+  hkString::memCpy(outSection, inSection, 0x13u);
+  outSection->m_nullByte = inSection->m_nullByte;
+  outSection->m_absoluteDataStart = v8;
+  outSection->m_localFixupsOffset = inSection->m_localFixupsOffset;
+  outSection->m_globalFixupsOffset = inSection->m_localFixupsOffset;
+  outSection->m_virtualFixupsOffset = inSection->m_localFixupsOffset;
+  outSection->m_exportsOffset = inSection->m_localFixupsOffset;
+  outSection->m_importsOffset = inSection->m_importsOffset + inSection->m_localFixupsOffset - inSection->m_exportsOffset;
+  outSection->m_endOffset = inSection->m_endOffset + inSection->m_localFixupsOffset - inSection->m_exportsOffset;
+  v11 = &packfileData[inSection->m_absoluteDataStart];
+  hkString::memCpy(&outBuffer[v8], v11, inSection->m_localFixupsOffset);
   hkString::memCpy(
-    (char *)outBuffer + v8 + v7->m_exportsOffset,
-    &v11[v9->m_exportsOffset],
-    v9->m_importsOffset - v9->m_exportsOffset);
+    &outBuffer[v8 + outSection->m_exportsOffset],
+    &v11[inSection->m_exportsOffset],
+    inSection->m_importsOffset - inSection->m_exportsOffset);
   hkString::memCpy(
-    (char *)outBuffer + v8 + v7->m_importsOffset,
-    &v11[v9->m_importsOffset],
-    v9->m_endOffset - v9->m_importsOffset);
+    &outBuffer[v8 + outSection->m_importsOffset],
+    &v11[inSection->m_importsOffset],
+    inSection->m_endOffset - inSection->m_importsOffset);
 }
 
 // File Line: 231
 // RVA: 0xE59800
-void __fastcall applyLocalFixups(hkPackfileSectionHeader *inSection, hkPackfileSectionHeader *outSection, int outCurOffset, const void *packfileData, void *outBuffer)
+void __fastcall applyLocalFixups(
+        hkPackfileSectionHeader *inSection,
+        hkPackfileSectionHeader *outSection,
+        int outCurOffset,
+        char *packfileData,
+        char *outBuffer)
 {
-  __int64 v5; // rdx
+  __int64 m_localFixupsOffset; // rdx
   char *v6; // r10
   char *v7; // r8
-  int v8; // er9
+  int v8; // r9d
   char *v9; // r8
   __int64 v10; // rax
 
-  v5 = inSection->m_localFixupsOffset;
-  v6 = (char *)outBuffer + outCurOffset;
-  v7 = (char *)packfileData + inSection->m_absoluteDataStart;
+  m_localFixupsOffset = inSection->m_localFixupsOffset;
+  v6 = &outBuffer[outCurOffset];
+  v7 = &packfileData[inSection->m_absoluteDataStart];
   v8 = 0;
-  v9 = &v7[v5];
-  if ( (inSection->m_globalFixupsOffset - (signed int)v5) / 4 > 0 )
+  v9 = &v7[m_localFixupsOffset];
+  if ( (inSection->m_globalFixupsOffset - (int)m_localFixupsOffset) / 4 > 0 )
   {
     do
     {
-      v10 = *(signed int *)v9;
+      v10 = *(int *)v9;
       if ( (_DWORD)v10 != -1 )
-        *(_QWORD *)&v6[v10] = &v6[*((signed int *)v9 + 1)];
+        *(_QWORD *)&v6[v10] = &v6[*((int *)v9 + 1)];
       v8 += 2;
       v9 += 8;
     }
@@ -375,53 +357,62 @@ void __fastcall applyLocalFixups(hkPackfileSectionHeader *inSection, hkPackfileS
 
 // File Line: 253
 // RVA: 0xE59870
-void __fastcall applyGlobalFixups(hkPackfileSectionHeader *inSection, hkPackfileSectionHeader *outSection, const void *packfileData, void *outBuffer, hkArrayBase<hkPackfileSectionHeader *> *outSectionAddresses)
+void __fastcall applyGlobalFixups(
+        hkPackfileSectionHeader *inSection,
+        hkPackfileSectionHeader *outSection,
+        char *packfileData,
+        char *outBuffer,
+        hkArrayBase<hkPackfileSectionHeader *> *outSectionAddresses)
 {
-  hkPackfileSectionHeader *v5; // r11
-  int v6; // er10
+  int v6; // r10d
   char *v7; // rdi
-  char *v8; // rsi
-  signed __int64 v9; // rcx
-  _DWORD *v10; // r8
+  __int64 v9; // rcx
+  char *v10; // r8
   __int64 v11; // rdx
   hkPackfileSectionHeader *v12; // r9
   char *v13; // rax
 
-  v5 = inSection;
   v6 = 0;
-  v7 = (char *)outBuffer + outSection->m_absoluteDataStart;
-  v8 = (char *)outBuffer;
+  v7 = &outBuffer[outSection->m_absoluteDataStart];
   v9 = inSection->m_globalFixupsOffset + inSection->m_absoluteDataStart + 8i64;
-  if ( (v5->m_virtualFixupsOffset - v5->m_globalFixupsOffset) / 4 > 0 )
+  if ( (inSection->m_virtualFixupsOffset - inSection->m_globalFixupsOffset) / 4 > 0 )
   {
-    v10 = (char *)packfileData + v9;
+    v10 = &packfileData[v9];
     do
     {
-      v11 = (signed int)*(v10 - 2);
+      v11 = *((int *)v10 - 2);
       if ( (_DWORD)v11 != -1 )
       {
-        v12 = outSectionAddresses->m_data[*(v10 - 1)];
+        v12 = outSectionAddresses->m_data[*((int *)v10 - 1)];
         if ( v12->m_localFixupsOffset )
-          v13 = &v8[*v10 + v12->m_absoluteDataStart];
+          v13 = &outBuffer[*(_DWORD *)v10 + v12->m_absoluteDataStart];
         else
           v13 = 0i64;
         *(_QWORD *)&v7[v11] = v13;
       }
       v6 += 3;
-      v10 += 3;
+      v10 += 12;
     }
-    while ( v6 < (v5->m_virtualFixupsOffset - v5->m_globalFixupsOffset) / 4 );
+    while ( v6 < (inSection->m_virtualFixupsOffset - inSection->m_globalFixupsOffset) / 4 );
   }
 }
 
 // File Line: 279
 // RVA: 0xE59920
-void __fastcall applyVirtualFixups(hkPackfileSectionHeader *inSection, hkPackfileSectionHeader *outSection, const void *packfileData, void *outBuffer, hkArrayBase<hkPackfileSectionHeader *> *outSectionAddresses, hkArray<LOCALNAMESPACE::TrackedObjectsArray_Element,hkContainerHeapAllocator> *map, hkTypeInfoRegistry *finishRegistry, hkClassNameRegistry *classNameRegistry, hkArray<hkVariant,hkContainerHeapAllocator> *postFinishObjects)
+void __fastcall applyVirtualFixups(
+        hkPackfileSectionHeader *inSection,
+        hkPackfileSectionHeader *outSection,
+        char *packfileData,
+        _QWORD *outBuffer,
+        hkArrayBase<hkPackfileSectionHeader *> *outSectionAddresses,
+        hkArray<LOCALNAMESPACE::TrackedObjectsArray_Element,hkContainerHeapAllocator> *map,
+        hkTypeInfoRegistry *finishRegistry,
+        hkClassNameRegistry *classNameRegistry,
+        hkArray<hkVariant,hkContainerHeapAllocator> *postFinishObjects)
 {
-  _QWORD *v9; // r13
   char *v10; // r11
-  signed __int64 v11; // r9
-  int v12; // er10
+  __int64 v11; // r9
+  int v12; // r10d
   _DWORD *v13; // r14
   __int64 v14; // rdi
   hkPackfileSectionHeader *v15; // rdx
@@ -434,37 +425,33 @@ void __fastcall applyVirtualFixups(hkPackfileSectionHeader *inSection, hkPackfil
   hkClass *v22; // rax
   hkClass *v23; // rbx
   hkVariant *v24; // rax
-  char *v25; // [rsp+20h] [rbp-78h]
-  signed __int64 v26; // [rsp+28h] [rbp-70h]
-  signed __int64 v27; // [rsp+30h] [rbp-68h]
-  __int64 v28; // [rsp+40h] [rbp-58h]
-  hkPackfileSectionHeader *v29; // [rsp+A0h] [rbp+8h]
-  hkPackfileSectionHeader *v30; // [rsp+A8h] [rbp+10h]
-  int v31; // [rsp+B0h] [rbp+18h]
-  char *v32; // [rsp+B8h] [rbp+20h]
+  __int64 v25; // kr00_8
+  char *v26; // [rsp+20h] [rbp-78h]
+  __int64 v27; // [rsp+28h] [rbp-70h]
+  __int64 v28; // [rsp+30h] [rbp-68h]
+  __int64 v29; // [rsp+40h] [rbp-58h]
+  int v32; // [rsp+B0h] [rbp+18h]
+  char *v33; // [rsp+B8h] [rbp+20h]
 
-  v30 = outSection;
-  v29 = inSection;
-  v9 = outBuffer;
   v10 = (char *)outBuffer + outSection->m_absoluteDataStart;
-  v31 = 0;
-  v32 = (char *)outBuffer + outSection->m_absoluteDataStart;
-  v11 = (signed __int64)packfileData + inSection->m_virtualFixupsOffset + inSection->m_absoluteDataStart;
-  v25 = (char *)v9 + *((signed int *)v9 + 1);
+  v32 = 0;
+  v33 = v10;
+  v11 = (__int64)&packfileData[inSection->m_virtualFixupsOffset + inSection->m_absoluteDataStart];
+  v26 = (char *)outBuffer + *((int *)outBuffer + 1);
   if ( (inSection->m_exportsOffset - inSection->m_virtualFixupsOffset) / 4 > 0 )
   {
     v12 = 0;
     v13 = (_DWORD *)(v11 + 8);
-    v27 = -v11;
-    v26 = -4 - v11;
+    v28 = -v11;
+    v27 = -4 - v11;
     do
     {
-      v14 = (signed int)*(v13 - 2);
+      v14 = (int)*(v13 - 2);
       if ( (_DWORD)v14 != -1 )
       {
         v15 = outSectionAddresses->m_data[*(v13 - 1)];
         if ( v15->m_localFixupsOffset )
-          v16 = (char *)v9 + *v13 + v15->m_absoluteDataStart;
+          v16 = (char *)outBuffer + *v13 + v15->m_absoluteDataStart;
         else
           v16 = 0i64;
         v17 = &v10[v14];
@@ -477,30 +464,28 @@ void __fastcall applyVirtualFixups(hkPackfileSectionHeader *inSection, hkPackfil
         {
           if ( map )
           {
-            LODWORD(v28) = v14 + v30->m_absoluteDataStart;
+            LODWORD(v29) = v14 + outSection->m_absoluteDataStart;
             if ( map->m_size == (map->m_capacityAndFlags & 0x3FFFFFFF) )
-              hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, map, 16);
+              hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&map->m_data, 16);
             v20 = &map->m_data[map->m_size];
             if ( v20 )
             {
               v20->m_typeInfo = v19;
-              *(_QWORD *)&v20->m_offset = v28;
+              *(_QWORD *)&v20->m_offset = v29;
             }
             ++map->m_size;
-            if ( v17 == v25 )
-              v9[5] = v19;
+            if ( v17 == v26 )
+              outBuffer[5] = v19;
           }
           else
           {
-            v21 = (char *)v9 + v30->m_absoluteDataStart + v30->m_virtualFixupsOffset;
-            *(_DWORD *)&v21[(_QWORD)v13 + v26] = HIDWORD(v18);
-            *(_DWORD *)&v21[(_QWORD)v13 + v27] = v18;
+            v21 = (char *)outBuffer + outSection->m_absoluteDataStart + outSection->m_virtualFixupsOffset;
+            *(_DWORD *)&v21[(_QWORD)v13 + v27] = HIDWORD(v18);
+            *(_DWORD *)&v21[(_QWORD)v13 + v28] = v18;
           }
           if ( classNameRegistry )
           {
-            v22 = (hkClass *)classNameRegistry->vfptr[2].__vecDelDtor(
-                               (hkBaseObject *)classNameRegistry,
-                               (unsigned int)v19->m_typeName);
+            v22 = (hkClass *)classNameRegistry->vfptr[2].__vecDelDtor(classNameRegistry, v19->m_typeName);
             v23 = v22;
             if ( v22 )
             {
@@ -508,8 +493,8 @@ void __fastcall applyVirtualFixups(hkPackfileSectionHeader *inSection, hkPackfil
               {
                 if ( postFinishObjects->m_size == (postFinishObjects->m_capacityAndFlags & 0x3FFFFFFF) )
                   hkArrayUtil::_reserveMore(
-                    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-                    postFinishObjects,
+                    &hkContainerHeapAllocator::s_alloc,
+                    (const void **)&postFinishObjects->m_data,
                     16);
                 v24 = &postFinishObjects->m_data[postFinishObjects->m_size];
                 if ( v24 )
@@ -522,212 +507,202 @@ void __fastcall applyVirtualFixups(hkPackfileSectionHeader *inSection, hkPackfil
             }
           }
         }
-        v12 = v31;
-        v10 = v32;
+        v12 = v32;
+        v10 = v33;
       }
       v12 += 3;
       v13 += 3;
-      v31 = v12;
+      v32 = v12;
+      v25 = inSection->m_exportsOffset - inSection->m_virtualFixupsOffset;
     }
-    while ( v12 < (v29->m_exportsOffset - v29->m_virtualFixupsOffset) / 4 );
+    while ( v12 < ((BYTE4(v25) & 3) + (int)v25) >> 2 );
   }
-}
+}ortsOffset - inSection->m_vi
 
 // File Line: 354
 // RVA: 0xE58AB0
-char *__fastcall hkNativePackfileUtils::load(const void *packfileData, int packfileSize, void *outBuffer, int outBufferSize, hkTypeInfoRegistry *userRegistry)
+char *__fastcall hkNativePackfileUtils::load(
+        hkPackfileHeader *packfileData,
+        int packfileSize,
+        char *outBuffer,
+        int outBufferSize,
+        hkTypeInfoRegistry *userRegistry)
 {
   char *v5; // r12
-  char *v6; // rsi
-  hkPackfileHeader *v7; // rbx
-  int v8; // er10
+  int m_numSections; // r10d
   int v9; // edi
-  int v10; // ecx
-  int v11; // er15
-  hkLifoAllocator *v12; // rax
-  int v13; // edx
-  char *v14; // rcx
-  void *v15; // rax
-  unsigned int v16; // edi
-  bool v17; // zf
-  bool v18; // sf
-  int v19; // er13
-  signed __int64 v20; // r14
+  int m_size; // ecx
+  int v11; // r15d
+  hkLifoAllocator *Value; // rax
+  hkPackfileSectionHeader **m_cur; // r8
+  int v14; // edx
+  char *v15; // rcx
+  hkPackfileSectionHeader **v16; // rax
+  int m_capacityAndFlags; // edi
+  bool v18; // cc
+  int v19; // r13d
+  hkPackfileSectionHeader *v20; // r14
   int v21; // edi
   __int64 v22; // r13
-  hkPackfileSectionHeader *v23; // rax
+  hkPackfileSectionHeader *SectionHeader; // rax
   hkPackfileSectionHeader *v24; // r14
   int i; // edi
   hkPackfileSectionHeader *v26; // rax
   hkTypeInfoRegistry *v27; // r15
   __int64 v28; // rax
-  int v29; // er8
+  int v29; // r8d
   hkClassNameRegistry *classNameRegistry; // r13
   int v31; // ecx
   int v32; // edi
   hkPackfileSectionHeader *v33; // rax
-  int v34; // er14
+  int v34; // r14d
   __int64 v35; // rdi
-  void *v36; // rbx
-  hkVariant *v37; // rax
+  void *m_object; // rbx
+  hkVariant *Attribute; // rax
   __int64 v38; // r14
   char *v39; // r14
   int v40; // eax
   char *v41; // rdi
   signed int v42; // ebx
   hkLifoAllocator *v43; // rax
-  int v44; // er8
-  hkArray<hkVariant,hkContainerHeapAllocator> postFinishObjects; // [rsp+50h] [rbp-30h]
-  void *array; // [rsp+60h] [rbp-20h]
-  int v48; // [rsp+68h] [rbp-18h]
-  int v49; // [rsp+6Ch] [rbp-14h]
+  int v44; // r8d
+  hkArray<hkVariant,hkContainerHeapAllocator> postFinishObjects; // [rsp+50h] [rbp-30h] BYREF
+  hkArrayBase<hkPackfileSectionHeader *> array; // [rsp+60h] [rbp-20h] BYREF
   void *p; // [rsp+70h] [rbp-10h]
-  int v51; // [rsp+78h] [rbp-8h]
+  int v49; // [rsp+78h] [rbp-8h]
   hkPackfileSectionHeader *inSection; // [rsp+C0h] [rbp+40h]
-  int v53; // [rsp+C8h] [rbp+48h]
-  int v54; // [rsp+D8h] [rbp+58h]
 
-  v54 = outBufferSize;
-  v53 = packfileSize;
-  v5 = (char *)outBuffer + 24;
-  v6 = (char *)outBuffer;
-  v7 = (hkPackfileHeader *)packfileData;
+  v5 = outBuffer + 24;
   *(_DWORD *)outBuffer = -720334526;
-  if ( outBuffer != (void *)-24i64 )
+  if ( outBuffer != (char *)-24i64 )
   {
-    v8 = *((_DWORD *)packfileData + 5);
-    *((_DWORD *)outBuffer + 8) = v8;
-    *(_QWORD *)v5 = (char *)outBuffer + 48;
-    *((_DWORD *)outBuffer + 9) = v8 | 0x80000000;
+    m_numSections = packfileData->m_numSections;
+    *((_DWORD *)outBuffer + 8) = m_numSections;
+    *(_QWORD *)v5 = outBuffer + 48;
+    *((_DWORD *)outBuffer + 9) = m_numSections | 0x80000000;
   }
-  v9 = *((_DWORD *)packfileData + 5);
-  v49 = 2147483648;
-  array = 0i64;
-  v10 = 0;
-  v48 = 0;
-  v51 = v9;
+  v9 = packfileData->m_numSections;
+  array.m_capacityAndFlags = 0x80000000;
+  array.m_data = 0i64;
+  m_size = 0;
+  array.m_size = 0;
+  v49 = v9;
   v11 = (v9 << 6) + 48;
   if ( v9 )
   {
-    v12 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    outBuffer = v12->m_cur;
-    v13 = (8 * v9 + 127) & 0xFFFFFF80;
-    v14 = (char *)outBuffer + v13;
-    if ( v13 > v12->m_slabSize || v14 > v12->m_end )
+    Value = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    m_cur = (hkPackfileSectionHeader **)Value->m_cur;
+    v14 = (8 * v9 + 127) & 0xFFFFFF80;
+    v15 = (char *)m_cur + v14;
+    if ( v14 > Value->m_slabSize || v15 > Value->m_end )
     {
-      v15 = hkLifoAllocator::allocateFromNewSlab(v12, v13);
-      v10 = v48;
-      outBuffer = v15;
-      array = v15;
+      v16 = (hkPackfileSectionHeader **)hkLifoAllocator::allocateFromNewSlab(Value, v14);
+      m_size = array.m_size;
+      array.m_data = v16;
     }
     else
     {
-      v12->m_cur = v14;
-      v10 = v48;
-      array = outBuffer;
+      Value->m_cur = v15;
+      m_size = array.m_size;
+      array.m_data = m_cur;
     }
   }
   else
   {
-    array = 0i64;
+    array.m_data = 0i64;
   }
-  v16 = v9 | 0x80000000;
-  v17 = *((_DWORD *)v5 + 2) == 0;
-  v18 = *((_DWORD *)v5 + 2) < 0;
-  v49 = v16;
+  m_capacityAndFlags = v9 | 0x80000000;
+  v18 = *((_DWORD *)v5 + 2) <= 0;
+  array.m_capacityAndFlags = m_capacityAndFlags;
   v19 = 0;
-  p = array;
-  if ( !v18 && !v17 )
+  p = array.m_data;
+  if ( !v18 )
   {
     while ( 1 )
     {
-      v20 = *(_QWORD *)v5 + ((signed __int64)v19 << 6);
-      if ( v10 == (v16 & 0x3FFFFFFF) )
+      v20 = (hkPackfileSectionHeader *)(*(_QWORD *)v5 + ((__int64)v19 << 6));
+      if ( m_size == (m_capacityAndFlags & 0x3FFFFFFF) )
       {
-        hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, 8);
-        v10 = v48;
+        hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&array.m_data, 8);
+        m_size = array.m_size;
       }
       ++v19;
-      *((_QWORD *)array + v10) = v20;
-      v10 = v48++ + 1;
+      array.m_data[m_size] = v20;
+      m_size = ++array.m_size;
       if ( v19 >= *((_DWORD *)v5 + 2) )
         break;
-      v16 = v49;
+      m_capacityAndFlags = array.m_capacityAndFlags;
     }
   }
   v21 = 0;
-  if ( v7->m_numSections > 0 )
+  if ( packfileData->m_numSections > 0 )
   {
     v22 = 0i64;
     do
     {
-      v23 = hkPackfileHeader::getSectionHeader(v7, v7, v21);
+      SectionHeader = hkPackfileHeader::getSectionHeader(packfileData, packfileData, v21);
       v24 = (hkPackfileSectionHeader *)(v22 + *(_QWORD *)v5);
-      inSection = v23;
-      copySection(v23, (hkPackfileSectionHeader *)(v22 + *(_QWORD *)v5), v11, v7, v6, v53, v54);
-      if ( v21 == v7->m_contentsSectionIndex )
-        *((_DWORD *)v6 + 1) = v11 + v7->m_contentsSectionOffset;
-      applyLocalFixups(inSection, v24, v11, v7, v6);
+      inSection = SectionHeader;
+      copySection(SectionHeader, v24, v11, packfileData, outBuffer, packfileSize, outBufferSize);
+      if ( v21 == packfileData->m_contentsSectionIndex )
+        *((_DWORD *)outBuffer + 1) = v11 + packfileData->m_contentsSectionOffset;
+      applyLocalFixups(inSection, v24, v11, packfileData, outBuffer);
       v11 += v24->m_endOffset;
       ++v21;
       v22 += 64i64;
     }
-    while ( v21 < v7->m_numSections );
+    while ( v21 < packfileData->m_numSections );
   }
-  for ( i = 0; i < v7->m_numSections; ++i )
+  for ( i = 0; i < packfileData->m_numSections; ++i )
   {
-    v26 = hkPackfileHeader::getSectionHeader(v7, v7, i);
+    v26 = hkPackfileHeader::getSectionHeader(packfileData, packfileData, i);
     if ( v26->m_virtualFixupsOffset != v26->m_globalFixupsOffset )
       applyGlobalFixups(
         v26,
-        (hkPackfileSectionHeader *)(*(_QWORD *)v5 + ((signed __int64)i << 6)),
-        v7,
-        v6,
-        (hkArrayBase<hkPackfileSectionHeader *> *)&array);
+        (hkPackfileSectionHeader *)(*(_QWORD *)v5 + ((__int64)i << 6)),
+        packfileData,
+        outBuffer,
+        &array);
   }
-  if ( v6 != (char *)-8i64 )
+  if ( outBuffer != (char *)-8i64 )
   {
-    *((_DWORD *)v6 + 4) = 0;
-    *((_QWORD *)v6 + 1) = &v6[v11];
-    *((_DWORD *)v6 + 5) = (v54 - v11) | 0x80000000;
+    *((_DWORD *)outBuffer + 4) = 0;
+    *((_QWORD *)outBuffer + 1) = &outBuffer[v11];
+    *((_DWORD *)outBuffer + 5) = (outBufferSize - v11) | 0x80000000;
   }
   v27 = userRegistry;
   if ( !userRegistry )
-    v27 = (hkTypeInfoRegistry *)((__int64 (__fastcall *)(hkBuiltinTypeRegistry *, _QWORD, void *))hkSingleton<hkBuiltinTypeRegistry>::s_instance->vfptr[1].__first_virtual_table_function__)(
+    v27 = (hkTypeInfoRegistry *)((__int64 (__fastcall *)(hkBuiltinTypeRegistry *, _QWORD))hkSingleton<hkBuiltinTypeRegistry>::s_instance->vfptr[1].__first_virtual_table_function__)(
                                   hkSingleton<hkBuiltinTypeRegistry>::s_instance,
-                                  0i64,
-                                  outBuffer);
-  v28 = ((__int64 (__fastcall *)(hkBuiltinTypeRegistry *, hkBaseObjectVtbl *, void *))hkSingleton<hkBuiltinTypeRegistry>::s_instance->vfptr[2].__vecDelDtor)(
-          hkSingleton<hkBuiltinTypeRegistry>::s_instance,
-          hkSingleton<hkBuiltinTypeRegistry>::s_instance->vfptr,
-          outBuffer);
-  v29 = 2147483648;
-  *((_QWORD *)v6 + 5) = 0i64;
+                                  0i64);
+  v28 = ((__int64 (__fastcall *)(hkBuiltinTypeRegistry *))hkSingleton<hkBuiltinTypeRegistry>::s_instance->vfptr[2].__vecDelDtor)(hkSingleton<hkBuiltinTypeRegistry>::s_instance);
+  v29 = 0x80000000;
+  *((_QWORD *)outBuffer + 5) = 0i64;
   classNameRegistry = (hkClassNameRegistry *)v28;
   postFinishObjects.m_data = 0i64;
   v31 = 0;
   postFinishObjects.m_size = 0;
-  postFinishObjects.m_capacityAndFlags = 2147483648;
+  postFinishObjects.m_capacityAndFlags = 0x80000000;
   v32 = 0;
-  if ( v7->m_numSections > 0 )
+  if ( packfileData->m_numSections > 0 )
   {
     do
     {
-      v33 = hkPackfileHeader::getSectionHeader(v7, v7, v32);
+      v33 = hkPackfileHeader::getSectionHeader(packfileData, packfileData, v32);
       if ( v33->m_exportsOffset != v33->m_virtualFixupsOffset )
         applyVirtualFixups(
           v33,
-          (hkPackfileSectionHeader *)(*(_QWORD *)v5 + ((signed __int64)v32 << 6)),
-          v7,
-          v6,
-          (hkArrayBase<hkPackfileSectionHeader *> *)&array,
-          (hkArray<LOCALNAMESPACE::TrackedObjectsArray_Element,hkContainerHeapAllocator> *)(v6 + 8),
+          (hkPackfileSectionHeader *)(*(_QWORD *)v5 + ((__int64)v32 << 6)),
+          packfileData,
+          outBuffer,
+          &array,
+          (hkArray<LOCALNAMESPACE::TrackedObjectsArray_Element,hkContainerHeapAllocator> *)(outBuffer + 8),
           v27,
           classNameRegistry,
           &postFinishObjects);
       ++v32;
     }
-    while ( v32 < v7->m_numSections );
+    while ( v32 < packfileData->m_numSections );
     v29 = postFinishObjects.m_capacityAndFlags;
     v31 = postFinishObjects.m_size;
   }
@@ -737,452 +712,395 @@ char *__fastcall hkNativePackfileUtils::load(const void *packfileData, int packf
     v35 = 0i64;
     do
     {
-      v36 = postFinishObjects.m_data[v35].m_object;
-      v37 = hkClass::getAttribute(postFinishObjects.m_data[v35].m_class, "hk.PostFinish");
-      (*(void (__fastcall **)(void *))v37->m_object)(v36);
+      m_object = postFinishObjects.m_data[v35].m_object;
+      Attribute = hkClass::getAttribute(postFinishObjects.m_data[v35].m_class, "hk.PostFinish");
+      (*(void (__fastcall **)(void *))Attribute->m_object)(m_object);
       ++v34;
       ++v35;
     }
     while ( v34 < postFinishObjects.m_size );
     v29 = postFinishObjects.m_capacityAndFlags;
   }
-  v38 = *((signed int *)v6 + 1);
+  v38 = *((int *)outBuffer + 1);
   postFinishObjects.m_size = 0;
-  v39 = &v6[v38];
+  v39 = &outBuffer[v38];
   if ( v29 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       postFinishObjects.m_data,
       16 * v29);
-  v40 = v48;
+  v40 = array.m_size;
   v41 = (char *)p;
   postFinishObjects.m_data = 0i64;
-  postFinishObjects.m_capacityAndFlags = 2147483648;
-  if ( p == array )
+  postFinishObjects.m_capacityAndFlags = 0x80000000;
+  if ( p == array.m_data )
     v40 = 0;
-  v48 = v40;
-  v42 = (8 * v51 + 127) & 0xFFFFFF80;
+  array.m_size = v40;
+  v42 = (8 * v49 + 127) & 0xFFFFFF80;
   v43 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   v44 = (v42 + 15) & 0xFFFFFFF0;
   if ( v42 > v43->m_slabSize || &v41[v44] != v43->m_cur || v43->m_firstNonLifoEnd == v41 )
     hkLifoAllocator::slowBlockFree(v43, v41, v44);
   else
     v43->m_cur = v41;
-  v48 = 0;
-  if ( v49 >= 0 )
+  array.m_size = 0;
+  if ( array.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      array,
-      8 * v49);
+      &hkContainerHeapAllocator::s_alloc,
+      array.m_data,
+      8 * array.m_capacityAndFlags);
   return v39;
 }
 
 // File Line: 455
 // RVA: 0xE58EC0
-char *__fastcall hkNativePackfileUtils::loadInPlace(void *packfileData, int dataSize, hkTypeInfoRegistry *userRegistry, const char **errOut)
+char *__fastcall hkNativePackfileUtils::loadInPlace(
+        hkPackfileHeader *packfileData,
+        int dataSize,
+        hkTypeInfoRegistry *userRegistry,
+        const char **errOut)
 {
   __int64 v4; // r15
-  hkTypeInfoRegistry *finishRegistry; // r12
-  hkPackfileHeader *outBuffer; // rdi
-  __int64 v7; // rdx
-  char *v8; // r8
-  int v10; // eax
-  int v11; // ebx
-  int v12; // er13
-  hkLifoAllocator *v13; // rax
+  int m_flags; // eax
+  int m_numSections; // ebx
+  int v10; // r13d
+  hkLifoAllocator *Value; // rax
+  hkPackfileSectionHeader **m_cur; // r8
+  int v13; // edx
   char *v14; // rcx
   int v15; // ebx
-  hkPackfileSectionHeader *v16; // rax
-  hkPackfileSectionHeader *v17; // rsi
-  int v18; // esi
-  hkPackfileSectionHeader *v19; // rbx
-  int v20; // er14
-  int v21; // ebx
-  __int64 v22; // rsi
-  hkPackfileSectionHeader *v23; // rcx
-  __int64 v24; // rax
-  bool v25; // zf
-  bool v26; // sf
+  hkPackfileSectionHeader *SectionHeader; // rax
+  int m_size; // edx
+  hkPackfileSectionHeader *v18; // rsi
+  int i; // esi
+  hkPackfileSectionHeader *v20; // rbx
+  int m_absoluteDataStart; // r14d
+  int v22; // ebx
+  __int64 v23; // rsi
+  hkPackfileSectionHeader *v24; // rcx
+  __int64 v25; // rax
+  bool v26; // cc
   int v27; // ecx
-  int v28; // er8
+  int m_capacityAndFlags; // r8d
   hkClassNameRegistry *classNameRegistry; // r14
   int v30; // esi
   __int64 v31; // rbx
   hkPackfileSectionHeader *v32; // rcx
-  int v33; // er14
+  int v33; // r14d
   __int64 v34; // rsi
-  void *v35; // rbx
-  hkVariant *v36; // rax
+  void *m_object; // rbx
+  hkVariant *Attribute; // rax
   char *v37; // rsi
-  unsigned int v38; // eax
+  int v38; // eax
   char *v39; // rdi
   signed int v40; // ebx
   hkLifoAllocator *v41; // rax
-  int v42; // er8
-  hkArray<hkVariant,hkContainerHeapAllocator> postFinishObjects; // [rsp+50h] [rbp+7h]
-  char *array; // [rsp+60h] [rbp+17h]
-  unsigned int v45; // [rsp+68h] [rbp+1Fh]
-  int v46; // [rsp+6Ch] [rbp+23h]
+  int v42; // r8d
+  hkArray<hkVariant,hkContainerHeapAllocator> postFinishObjects; // [rsp+50h] [rbp+7h] BYREF
+  hkArrayBase<hkPackfileSectionHeader *> array; // [rsp+60h] [rbp+17h] BYREF
   void *p; // [rsp+70h] [rbp+27h]
-  int v48; // [rsp+78h] [rbp+2Fh]
-  hkResult result; // [rsp+C8h] [rbp+7Fh]
+  int v46; // [rsp+78h] [rbp+2Fh]
+  hkResult result; // [rsp+C8h] [rbp+7Fh] BYREF
 
   v4 = 0i64;
-  finishRegistry = userRegistry;
-  outBuffer = (hkPackfileHeader *)packfileData;
   if ( errOut )
     *errOut = 0i64;
   if ( hkNativePackfileUtils::validatePackfileHeader(&result, packfileData, errOut)->m_enum )
     return 0i64;
-  v10 = outBuffer->m_flags;
-  if ( v10 & 1 )
+  m_flags = packfileData->m_flags;
+  if ( (m_flags & 1) != 0 )
     return 0i64;
-  v11 = outBuffer->m_numSections;
-  v12 = -1;
-  array = 0i64;
-  v45 = 0;
-  v46 = 2147483648;
-  outBuffer->m_flags = v10 | 1;
-  v48 = v11;
-  if ( v11 )
+  m_numSections = packfileData->m_numSections;
+  v10 = -1;
+  array.m_data = 0i64;
+  array.m_size = 0;
+  array.m_capacityAndFlags = 0x80000000;
+  packfileData->m_flags = m_flags | 1;
+  v46 = m_numSections;
+  if ( m_numSections )
   {
-    v13 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v8 = (char *)v13->m_cur;
-    v7 = (8 * v11 + 127) & 0xFFFFFF80;
-    v14 = &v8[(signed int)v7];
-    if ( (signed int)v7 > v13->m_slabSize || v14 > v13->m_end )
+    Value = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    m_cur = (hkPackfileSectionHeader **)Value->m_cur;
+    v13 = (8 * m_numSections + 127) & 0xFFFFFF80;
+    v14 = (char *)m_cur + v13;
+    if ( v13 > Value->m_slabSize || v14 > Value->m_end )
     {
-      v8 = (char *)hkLifoAllocator::allocateFromNewSlab(v13, v7);
-      array = v8;
+      array.m_data = (hkPackfileSectionHeader **)hkLifoAllocator::allocateFromNewSlab(Value, v13);
     }
     else
     {
-      v13->m_cur = v14;
-      array = v8;
+      Value->m_cur = v14;
+      array.m_data = m_cur;
     }
   }
   else
   {
-    array = 0i64;
+    array.m_data = 0i64;
   }
-  v46 = v11 | 0x80000000;
+  array.m_capacityAndFlags = m_numSections | 0x80000000;
   v15 = 0;
-  for ( p = array; v15 < outBuffer->m_numSections; ++v45 )
+  for ( p = array.m_data; v15 < packfileData->m_numSections; ++array.m_size )
   {
-    v16 = hkPackfileHeader::getSectionHeader(outBuffer, outBuffer, v15);
-    v7 = v45;
-    v17 = v16;
-    if ( v45 == (v46 & 0x3FFFFFFF) )
+    SectionHeader = hkPackfileHeader::getSectionHeader(packfileData, packfileData, v15);
+    m_size = array.m_size;
+    v18 = SectionHeader;
+    if ( array.m_size == (array.m_capacityAndFlags & 0x3FFFFFFF) )
     {
-      hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, 8);
-      v7 = v45;
+      hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&array.m_data, 8);
+      m_size = array.m_size;
     }
     ++v15;
-    *(_QWORD *)&array[8 * (signed int)v7] = v17;
+    array.m_data[m_size] = v18;
   }
-  v18 = 0;
-  if ( outBuffer->m_numSections > 0 )
+  for ( i = 0; i < packfileData->m_numSections; ++v4 )
   {
+    v20 = array.m_data[v4];
+    m_absoluteDataStart = v20->m_absoluteDataStart;
+    hkString::strCmp(v20->m_sectionTag, "__types__");
+    if ( i == packfileData->m_contentsSectionIndex )
+      v10 = m_absoluteDataStart + packfileData->m_contentsSectionOffset;
+    applyLocalFixups(v20, v20, m_absoluteDataStart, packfileData, packfileData);
+    ++i;
+  }
+  v22 = 0;
+  if ( packfileData->m_numSections > 0 )
+  {
+    v23 = 0i64;
     do
     {
-      v19 = *(hkPackfileSectionHeader **)&array[v4];
-      v20 = v19->m_absoluteDataStart;
-      hkString::strCmp(v19->m_sectionTag, "__types__");
-      if ( v18 == outBuffer->m_contentsSectionIndex )
-        v12 = v20 + outBuffer->m_contentsSectionOffset;
-      applyLocalFixups(v19, v19, v20, outBuffer, outBuffer);
-      ++v18;
-      v4 += 8i64;
+      v24 = array.m_data[v23];
+      if ( v24->m_virtualFixupsOffset != v24->m_globalFixupsOffset )
+        applyGlobalFixups(v24, array.m_data[v23], packfileData, packfileData, &array);
+      ++v22;
+      ++v23;
     }
-    while ( v18 < outBuffer->m_numSections );
-    LODWORD(v4) = 0;
+    while ( v22 < packfileData->m_numSections );
   }
-  v21 = v4;
-  if ( outBuffer->m_numSections > 0 )
-  {
-    v22 = 0i64;
-    do
-    {
-      v23 = *(hkPackfileSectionHeader **)&array[v22];
-      if ( v23->m_virtualFixupsOffset != v23->m_globalFixupsOffset )
-        applyGlobalFixups(
-          v23,
-          *(hkPackfileSectionHeader **)&array[v22],
-          outBuffer,
-          outBuffer,
-          (hkArrayBase<hkPackfileSectionHeader *> *)&array);
-      ++v21;
-      v22 += 8i64;
-    }
-    while ( v21 < outBuffer->m_numSections );
-  }
-  if ( !finishRegistry )
-    finishRegistry = (hkTypeInfoRegistry *)((__int64 (__fastcall *)(hkBuiltinTypeRegistry *, __int64, char *))hkSingleton<hkBuiltinTypeRegistry>::s_instance->vfptr[1].__first_virtual_table_function__)(
-                                             hkSingleton<hkBuiltinTypeRegistry>::s_instance,
-                                             v7,
-                                             v8);
-  v24 = ((__int64 (__fastcall *)(hkBuiltinTypeRegistry *, hkBaseObjectVtbl *, char *))hkSingleton<hkBuiltinTypeRegistry>::s_instance->vfptr[2].__vecDelDtor)(
-          hkSingleton<hkBuiltinTypeRegistry>::s_instance,
-          hkSingleton<hkBuiltinTypeRegistry>::s_instance->vfptr,
-          v8);
-  v25 = outBuffer->m_numSections == 0;
-  v26 = outBuffer->m_numSections < 0;
+  if ( !userRegistry )
+    userRegistry = (hkTypeInfoRegistry *)((__int64 (__fastcall *)(hkBuiltinTypeRegistry *))hkSingleton<hkBuiltinTypeRegistry>::s_instance->vfptr[1].__first_virtual_table_function__)(hkSingleton<hkBuiltinTypeRegistry>::s_instance);
+  v25 = ((__int64 (__fastcall *)(hkBuiltinTypeRegistry *))hkSingleton<hkBuiltinTypeRegistry>::s_instance->vfptr[2].__vecDelDtor)(hkSingleton<hkBuiltinTypeRegistry>::s_instance);
+  v26 = packfileData->m_numSections <= 0;
   v27 = 0;
-  v28 = 2147483648;
+  m_capacityAndFlags = 0x80000000;
   postFinishObjects.m_data = 0i64;
   postFinishObjects.m_size = 0;
-  classNameRegistry = (hkClassNameRegistry *)v24;
+  classNameRegistry = (hkClassNameRegistry *)v25;
   v30 = 0;
-  postFinishObjects.m_capacityAndFlags = 2147483648;
-  if ( !v26 && !v25 )
+  postFinishObjects.m_capacityAndFlags = 0x80000000;
+  if ( !v26 )
   {
     v31 = 0i64;
     do
     {
-      v32 = *(hkPackfileSectionHeader **)&array[v31];
+      v32 = array.m_data[v31];
       if ( v32->m_exportsOffset != v32->m_virtualFixupsOffset )
         applyVirtualFixups(
           v32,
           v32,
-          outBuffer,
-          outBuffer,
-          (hkArrayBase<hkPackfileSectionHeader *> *)&array,
+          packfileData,
+          packfileData,
+          &array,
           0i64,
-          finishRegistry,
+          userRegistry,
           classNameRegistry,
           &postFinishObjects);
       ++v30;
-      v31 += 8i64;
+      ++v31;
     }
-    while ( v30 < outBuffer->m_numSections );
-    v28 = postFinishObjects.m_capacityAndFlags;
+    while ( v30 < packfileData->m_numSections );
+    m_capacityAndFlags = postFinishObjects.m_capacityAndFlags;
     v27 = postFinishObjects.m_size;
   }
-  v33 = v4;
+  v33 = 0;
   if ( v27 > 0 )
   {
     v34 = 0i64;
     do
     {
-      v35 = postFinishObjects.m_data[v34].m_object;
-      v36 = hkClass::getAttribute(postFinishObjects.m_data[v34].m_class, "hk.PostFinish");
-      (*(void (__fastcall **)(void *))v36->m_object)(v35);
+      m_object = postFinishObjects.m_data[v34].m_object;
+      Attribute = hkClass::getAttribute(postFinishObjects.m_data[v34].m_class, "hk.PostFinish");
+      (*(void (__fastcall **)(void *))Attribute->m_object)(m_object);
       ++v33;
       ++v34;
     }
     while ( v33 < postFinishObjects.m_size );
-    v28 = postFinishObjects.m_capacityAndFlags;
+    m_capacityAndFlags = postFinishObjects.m_capacityAndFlags;
   }
-  v37 = (char *)outBuffer + v12;
-  postFinishObjects.m_size = v4;
-  if ( v28 >= 0 )
+  v37 = (char *)packfileData + v10;
+  postFinishObjects.m_size = 0;
+  if ( m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       postFinishObjects.m_data,
-      16 * v28);
-  v38 = v45;
+      16 * m_capacityAndFlags);
+  v38 = array.m_size;
   v39 = (char *)p;
   postFinishObjects.m_data = 0i64;
-  postFinishObjects.m_capacityAndFlags = 2147483648;
-  if ( p == array )
-    v38 = v4;
-  v45 = v38;
-  v40 = (8 * v48 + 127) & 0xFFFFFF80;
+  postFinishObjects.m_capacityAndFlags = 0x80000000;
+  if ( p == array.m_data )
+    v38 = 0;
+  array.m_size = v38;
+  v40 = (8 * v46 + 127) & 0xFFFFFF80;
   v41 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   v42 = (v40 + 15) & 0xFFFFFFF0;
   if ( v40 > v41->m_slabSize || &v39[v42] != v41->m_cur || v41->m_firstNonLifoEnd == v39 )
     hkLifoAllocator::slowBlockFree(v41, v39, v42);
   else
     v41->m_cur = v39;
-  v45 = v4;
-  if ( v46 >= 0 )
+  array.m_size = 0;
+  if ( array.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      array,
-      8 * v46);
+      &hkContainerHeapAllocator::s_alloc,
+      array.m_data,
+      8 * array.m_capacityAndFlags);
   return v37;
 }
 
 // File Line: 553
 // RVA: 0xE59290
-const char *__fastcall hkNativePackfileUtils::getContentsClassName(const void *packfileData, int dataSize)
+const char *__fastcall hkNativePackfileUtils::getContentsClassName(_DWORD *packfileData, int dataSize)
 {
-  int v2; // er8
   int v3; // eax
   int v4; // edx
-  const char *result; // rax
 
-  v2 = dataSize;
   if ( packfileData
     && dataSize >= 64
-    && *(_QWORD *)packfileData == 1207175876561657943i64
-    && (v3 = *((_DWORD *)packfileData + 5), v3 > 0)
+    && *packfileData == 1474355287
+    && packfileData[1] == 281067536
+    && (v3 = packfileData[5], v3 > 0)
     && dataSize >= (v3 + 1) << 6
-    && (v4 = *((_DWORD *)packfileData + 9)
-           + *((_DWORD *)packfileData + 16 * (signed __int64)*((signed int *)packfileData + 8) + 21),
-        v4 <= v2) )
+    && (v4 = packfileData[9] + packfileData[16 * (__int64)(int)packfileData[8] + 21], v4 <= dataSize) )
   {
-    result = (char *)packfileData + v4;
+    return (char *)packfileData + v4;
   }
   else
   {
-    result = 0i64;
+    return 0i64;
   }
-  return result;
 }
 
 // File Line: 578
 // RVA: 0xE59380
-void __fastcall hkNativePackfileUtils::unload(void *buffer, int bufferSize)
+void __fastcall hkNativePackfileUtils::unload(_QWORD *buffer, int bufferSize)
 {
-  _QWORD *v2; // rbx
   unsigned __int64 v3; // rdi
-  int v4; // er8
-  int v5; // er8
+  int v4; // r8d
+  int v5; // r8d
 
-  v2 = buffer;
   *(_DWORD *)buffer = 0;
-  v3 = *((_QWORD *)buffer + 1);
-  if ( v3 < v3 + 16i64 * *((signed int *)buffer + 4) )
+  v3 = buffer[1];
+  if ( v3 < v3 + 16i64 * *((int *)buffer + 4) )
   {
     do
     {
-      hkTypeInfo::cleanupLoadedObject(*(hkTypeInfo **)v3, (char *)v2 + *(signed int *)(v3 + 8));
+      hkTypeInfo::cleanupLoadedObject(*(hkTypeInfo **)v3, (char *)buffer + *(int *)(v3 + 8));
       v3 += 16i64;
     }
-    while ( v3 < v2[1] + 16i64 * *((signed int *)v2 + 4) );
+    while ( v3 < buffer[1] + 16i64 * *((int *)buffer + 4) );
   }
-  v4 = *((_DWORD *)v2 + 9);
-  *((_DWORD *)v2 + 8) = 0;
+  v4 = *((_DWORD *)buffer + 9);
+  *((_DWORD *)buffer + 8) = 0;
   if ( v4 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      (void *)v2[3],
-      v4 << 6);
-  v2[3] = 0i64;
-  *((_DWORD *)v2 + 9) = 2147483648;
-  v5 = *((_DWORD *)v2 + 5);
-  *((_DWORD *)v2 + 4) = 0;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, (void *)buffer[3], v4 << 6);
+  buffer[3] = 0i64;
+  *((_DWORD *)buffer + 9) = 0x80000000;
+  v5 = *((_DWORD *)buffer + 5);
+  *((_DWORD *)buffer + 4) = 0;
   if ( v5 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      (void *)v2[1],
-      16 * v5);
-  v2[1] = 0i64;
-  *((_DWORD *)v2 + 5) = 2147483648;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, (void *)buffer[1], 16 * v5);
+  buffer[1] = 0i64;
+  *((_DWORD *)buffer + 5) = 0x80000000;
 }
 
 // File Line: 597
 // RVA: 0xE59460
-void __fastcall hkNativePackfileUtils::unloadInPlace(void *buffer, int bufferSize)
+void __fastcall hkNativePackfileUtils::unloadInPlace(hkPackfileHeader *buffer, int bufferSize)
 {
-  int v2; // ebp
-  hkPackfileHeader *v3; // r14
-  hkPackfileSectionHeader *v4; // rax
-  hkPackfileSectionHeader *v5; // rdi
-  int v6; // edx
-  int v7; // eax
-  int v8; // esi
-  unsigned int *v9; // rbx
-  __int64 v10; // rdx
-  hkTypeInfo *v11; // rcx
+  int i; // ebp
+  hkPackfileSectionHeader *SectionHeader; // rdi
+  int m_virtualFixupsOffset; // edx
+  int v6; // eax
+  int v7; // esi
+  unsigned int *v8; // rbx
+  __int64 v9; // rdx
+  hkTypeInfo *v10; // rcx
 
-  v2 = 0;
-  v3 = (hkPackfileHeader *)buffer;
-  if ( *((_DWORD *)buffer + 5) > 0 )
+  for ( i = 0; i < buffer->m_numSections; ++i )
   {
-    do
+    SectionHeader = hkPackfileHeader::getSectionHeader(buffer, buffer, i);
+    m_virtualFixupsOffset = SectionHeader->m_virtualFixupsOffset;
+    v6 = SectionHeader->m_exportsOffset - m_virtualFixupsOffset;
+    if ( v6 )
     {
-      v4 = hkPackfileHeader::getSectionHeader(v3, v3, v2);
-      v5 = v4;
-      v6 = v4->m_virtualFixupsOffset;
-      v7 = v4->m_exportsOffset - v6;
-      if ( v7 )
+      v7 = 0;
+      if ( v6 / 4 > 0 )
       {
-        v8 = 0;
-        if ( v7 / 4 > 0 )
+        v8 = (unsigned int *)((char *)&buffer->m_magic[2] + SectionHeader->m_absoluteDataStart + m_virtualFixupsOffset);
+        do
         {
-          v9 = (unsigned int *)((char *)&v3->m_userTag + v5->m_absoluteDataStart + v6);
-          do
+          v9 = (int)*(v8 - 2);
+          if ( (_DWORD)v9 != -1 )
           {
-            v10 = (signed int)*(v9 - 2);
-            if ( (_DWORD)v10 != -1 )
-            {
-              v11 = (hkTypeInfo *)(*v9 | (unsigned __int64)((signed __int64)(signed int)*(v9 - 1) << 32));
-              if ( v11 )
-                hkTypeInfo::cleanupLoadedObject(v11, (char *)v3 + v10 + v5->m_absoluteDataStart);
-            }
-            v8 += 3;
-            v9 += 3;
+            v10 = (hkTypeInfo *)(*v8 | (unsigned __int64)((__int64)(int)*(v8 - 1) << 32));
+            if ( v10 )
+              hkTypeInfo::cleanupLoadedObject(v10, (char *)buffer + v9 + SectionHeader->m_absoluteDataStart);
           }
-          while ( v8 < (v5->m_exportsOffset - v5->m_virtualFixupsOffset) / 4 );
+          v7 += 3;
+          v8 += 3;
         }
+        while ( v7 < (SectionHeader->m_exportsOffset - SectionHeader->m_virtualFixupsOffset) / 4 );
       }
-      ++v2;
     }
-    while ( v2 < v3->m_numSections );
   }
 }
 
 // File Line: 632
 // RVA: 0xE592F0
-void __fastcall hkNativePackfileUtils::getImportsExports(const void *loadedBuffer, hkArray<hkResource::Export,hkContainerHeapAllocator> *expOut, hkArray<hkResource::Import,hkContainerHeapAllocator> *impOut)
+void __fastcall hkNativePackfileUtils::getImportsExports(
+        _QWORD *loadedBuffer,
+        hkArray<hkResource::Export,hkContainerHeapAllocator> *expOut,
+        hkArray<hkResource::Import,hkContainerHeapAllocator> *impOut)
 {
   int v3; // esi
-  hkArray<hkResource::Import,hkContainerHeapAllocator> *v4; // r15
-  hkArray<hkResource::Export,hkContainerHeapAllocator> *v5; // r12
-  _QWORD *v6; // rbp
   __int64 v7; // r14
   hkPackfileSectionHeader *v8; // rdi
   char *v9; // rbx
 
   v3 = 0;
-  v4 = impOut;
-  v5 = expOut;
-  v6 = loadedBuffer;
-  if ( *((_DWORD *)loadedBuffer + 8) > 0 )
+  if ( *((int *)loadedBuffer + 8) > 0 )
   {
     v7 = 0i64;
     do
     {
-      v8 = (hkPackfileSectionHeader *)(v7 + v6[3]);
-      v9 = (char *)v6 + v8->m_absoluteDataStart;
-      hkPackfileSectionHeader::getExports(v8, (char *)v6 + v8->m_absoluteDataStart, v5);
-      hkPackfileSectionHeader::getImports(v8, v9, v4);
+      v8 = (hkPackfileSectionHeader *)(v7 + loadedBuffer[3]);
+      v9 = (char *)loadedBuffer + v8->m_absoluteDataStart;
+      hkPackfileSectionHeader::getExports(v8, v9, expOut);
+      hkPackfileSectionHeader::getImports(v8, v9, impOut);
       ++v3;
       v7 += 64i64;
     }
-    while ( v3 < *((_DWORD *)v6 + 8) );
+    while ( v3 < *((_DWORD *)loadedBuffer + 8) );
   }
 }
 
 // File Line: 646
 // RVA: 0xE59BC0
-void __fastcall getImportsExportsInPlace(const void *loadedBuffer, hkArray<hkResource::Export,hkContainerHeapAllocator> *expOut, hkArray<hkResource::Import,hkContainerHeapAllocator> *impOut)
+void __fastcall getImportsExportsInPlace(
+        hkPackfileSectionHeader *loadedBuffer,
+        hkArray<hkResource::Export,hkContainerHeapAllocator> *expOut,
+        hkArray<hkResource::Import,hkContainerHeapAllocator> *impOut)
 {
   int v3; // esi
-  hkArray<hkResource::Import,hkContainerHeapAllocator> *v4; // r14
-  hkArray<hkResource::Export,hkContainerHeapAllocator> *v5; // r15
-  _DWORD *v6; // rbp
-  hkPackfileSectionHeader *v7; // rbx
+  hkPackfileSectionHeader *i; // rbx
   char *v8; // rdi
 
   v3 = 0;
-  v4 = impOut;
-  v5 = expOut;
-  v6 = loadedBuffer;
-  v7 = (hkPackfileSectionHeader *)((char *)loadedBuffer + 64);
-  if ( *((_DWORD *)loadedBuffer + 5) > 0 )
+  for ( i = loadedBuffer + 1; v3 < loadedBuffer->m_absoluteDataStart; ++i )
   {
-    do
-    {
-      v8 = (char *)v6 + v7->m_absoluteDataStart;
-      hkPackfileSectionHeader::getExports(v7, (char *)v6 + v7->m_absoluteDataStart, v5);
-      hkPackfileSectionHeader::getImports(v7, v8, v4);
-      ++v3;
-      ++v7;
-    }
-    while ( v3 < v6[5] );
+    v8 = &loadedBuffer->m_sectionTag[i->m_absoluteDataStart];
+    hkPackfileSectionHeader::getExports(i, v8, expOut);
+    hkPackfileSectionHeader::getImports(i, v8, impOut);
+    ++v3;
   }
 }
 

@@ -28,33 +28,31 @@ hkClass *__fastcall hkpAngularDashpotAction::staticClass()
 
 // File Line: 64
 // RVA: 0xE09FC0
-void __fastcall finishLoadedObjecthkpAngularDashpotAction(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpAngularDashpotAction(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
-  _QWORD *v2; // rbx
   hkStringPtr *v3; // rcx
 
   if ( p )
   {
-    v2 = p;
-    v3 = (hkStringPtr *)((char *)p + 40);
+    v3 = p + 5;
     v3[-5].m_stringAndFlag = (const char *)&hkpAction::`vftable;
-    hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpAngularDashpotAction::`vftable;
+    hkStringPtr::hkStringPtr(v3, finishing);
+    p->m_stringAndFlag = (const char *)&hkpAngularDashpotAction::`vftable;
   }
 }
 
 // File Line: 70
 // RVA: 0xE0A000
-void __fastcall cleanupLoadedObjecthkpAngularDashpotAction(void *p)
+void __fastcall cleanupLoadedObjecthkpAngularDashpotAction(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 74
 // RVA: 0xE0A010
 void **__fastcall getVtablehkpAngularDashpotAction()
 {
-  hkStringPtr v1; // [rsp+48h] [rbp-40h]
+  hkStringPtr v1; // [rsp+48h] [rbp-40h] BYREF
 
   hkStringPtr::hkStringPtr(&v1, 0);
   return &hkpAngularDashpotAction::`vftable;
@@ -71,8 +69,8 @@ void **dynamic_initializer_for__hkpAngularDashpotActionTypeInfo__()
   hkpAngularDashpotActionTypeInfo.m_typeName = "hkpAngularDashpotAction";
   hkpAngularDashpotActionTypeInfo.m_vtable = result;
   hkpAngularDashpotActionTypeInfo.m_scopedName = "!hkpAngularDashpotAction";
-  hkpAngularDashpotActionTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpAngularDashpotAction;
-  hkpAngularDashpotActionTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpAngularDashpotAction;
+  hkpAngularDashpotActionTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpAngularDashpotAction;
+  hkpAngularDashpotActionTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpAngularDashpotAction;
   return result;
 }
 

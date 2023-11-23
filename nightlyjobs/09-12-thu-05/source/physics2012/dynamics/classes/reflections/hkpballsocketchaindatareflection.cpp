@@ -51,7 +51,7 @@ void dynamic_initializer_for__hkpBallSocketChainDataClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 111
@@ -63,23 +63,24 @@ hkClass *__fastcall hkpBallSocketChainData::staticClass()
 
 // File Line: 118
 // RVA: 0xD50060
-void __fastcall finishLoadedObjecthkpBallSocketChainData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpBallSocketChainData(hkpBallSocketChainData *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpBallSocketChainData::hkpBallSocketChainData);
+  if ( p )
+    hkpBallSocketChainData::hkpBallSocketChainData(p, finishing);
 }
 
 // File Line: 124
 // RVA: 0xD50080
-void __fastcall cleanupLoadedObjecthkpBallSocketChainData(void *p)
+void __fastcall cleanupLoadedObjecthkpBallSocketChainData(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 128
 // RVA: 0xD50090
 hkBaseObjectVtbl *__fastcall getVtablehkpBallSocketChainData()
 {
-  hkpBallSocketChainData v1; // [rsp+20h] [rbp-78h]
+  hkpBallSocketChainData v1; // [rsp+20h] [rbp-78h] BYREF
 
   hkpBallSocketChainData::hkpBallSocketChainData(&v1, 0);
   return v1.vfptr;
@@ -96,8 +97,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpBallSocketChainDataTypeInfo__()
   hkpBallSocketChainDataTypeInfo.m_typeName = "hkpBallSocketChainData";
   hkpBallSocketChainDataTypeInfo.m_vtable = result;
   hkpBallSocketChainDataTypeInfo.m_scopedName = "!hkpBallSocketChainData";
-  hkpBallSocketChainDataTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpBallSocketChainData;
-  hkpBallSocketChainDataTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpBallSocketChainData;
+  hkpBallSocketChainDataTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpBallSocketChainData;
+  hkpBallSocketChainDataTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpBallSocketChainData;
   return result;
 }
 

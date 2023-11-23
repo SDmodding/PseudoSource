@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkxMeshSectionClass__()
     0i64,
     0i64,
     0,
-    4u);
+    4);
 }
 
 // File Line: 66
@@ -28,17 +28,17 @@ hkClass *__fastcall hkxMeshSection::staticClass()
 
 // File Line: 73
 // RVA: 0xE32750
-void __fastcall finishLoadedObjecthkxMeshSection(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxMeshSection(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxMeshSection::`vftable;
+    *p = &hkxMeshSection::`vftable;
 }
 
 // File Line: 79
 // RVA: 0xE32770
-void __fastcall cleanupLoadedObjecthkxMeshSection(void *p)
+void __fastcall cleanupLoadedObjecthkxMeshSection(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 83
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkxMeshSectionTypeInfo__()
   hkxMeshSectionTypeInfo.m_typeName = "hkxMeshSection";
   hkxMeshSectionTypeInfo.m_vtable = result;
   hkxMeshSectionTypeInfo.m_scopedName = "!hkxMeshSection";
-  hkxMeshSectionTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxMeshSection;
-  hkxMeshSectionTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxMeshSection;
+  hkxMeshSectionTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxMeshSection;
+  hkxMeshSectionTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxMeshSection;
   return result;
 }
 

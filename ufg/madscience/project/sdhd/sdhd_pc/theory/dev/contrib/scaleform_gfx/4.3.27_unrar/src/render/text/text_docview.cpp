@@ -1,23 +1,19 @@
 // File Line: 46
 // RVA: 0x93B120
-void __fastcall Scaleform::Render::Text::DocView::DocView(Scaleform::Render::Text::DocView *this, Scaleform::Render::Text::Allocator *pallocator, Scaleform::Render::Text::FontManagerBase *pfontMgr, Scaleform::Log *plog)
+void __fastcall Scaleform::Render::Text::DocView::DocView(
+        Scaleform::Render::Text::DocView *this,
+        Scaleform::Render::Text::Allocator *pallocator,
+        Scaleform::Render::Text::FontManagerBase *pfontMgr,
+        Scaleform::Log *plog)
 {
-  Scaleform::Log *v4; // rdi
-  Scaleform::Render::Text::Allocator *v5; // rsi
-  Scaleform::Render::Text::DocView *v6; // rbx
-  Scaleform::Render::Text::LineBuffer *v7; // rax
-  Scaleform::Render::Text::StyledText *v8; // rax
-  Scaleform::Render::Text::DocView::DocumentText *v9; // rdi
-  Scaleform::Render::Text::DocView::DocumentText *v10; // rcx
-  bool v11; // zf
-  Scaleform::Render::Text::LineBuffer *v12; // [rsp+28h] [rbp-40h]
-  Scaleform::Render::Text::LineBuffer *v13; // [rsp+30h] [rbp-38h]
-  int v14; // [rsp+80h] [rbp+18h]
-  Scaleform::Render::Text::StyledText *v15; // [rsp+88h] [rbp+20h]
+  Scaleform::Render::Text::StyledText *v7; // rax
+  Scaleform::Render::Text::DocView::DocumentText *v8; // rdi
+  Scaleform::Render::Text::DocView::DocumentText *pObject; // rcx
+  Scaleform::Render::Text::LineBuffer *v11; // [rsp+28h] [rbp-40h]
+  Scaleform::Render::Text::LineBuffer *v12; // [rsp+30h] [rbp-38h]
+  int v13; // [rsp+80h] [rbp+18h] BYREF
+  Scaleform::Render::Text::LineBuffer *p_mLineBuffer; // [rsp+88h] [rbp+20h]
 
-  v4 = plog;
-  v5 = pallocator;
-  v6 = this;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
@@ -30,13 +26,12 @@ void __fastcall Scaleform::Render::Text::DocView::DocView(Scaleform::Render::Tex
   this->pFontManager.pObject = pfontMgr;
   this->pDocumentListener.pObject = 0i64;
   this->pHighlight = 0i64;
-  v7 = &this->mLineBuffer;
-  v15 = (Scaleform::Render::Text::StyledText *)v7;
+  p_mLineBuffer = &this->mLineBuffer;
+  v11 = &this->mLineBuffer;
   v12 = &this->mLineBuffer;
-  v13 = &this->mLineBuffer;
-  v7->Lines.Data.Data = 0i64;
-  v7->Lines.Data.Size = 0i64;
-  v7->Lines.Data.Policy.Capacity = 0i64;
+  this->mLineBuffer.Lines.Data.Data = 0i64;
+  this->mLineBuffer.Lines.Data.Size = 0i64;
+  this->mLineBuffer.Lines.Data.Policy.Capacity = 0i64;
   this->mLineBuffer.Geom.FirstVisibleLinePos = 0;
   *(_QWORD *)&this->mLineBuffer.Geom.VisibleRect.x2 = 0i64;
   *(_QWORD *)&this->mLineBuffer.Geom.VisibleRect.y2 = 0i64;
@@ -49,63 +44,61 @@ void __fastcall Scaleform::Render::Text::DocView::DocView(Scaleform::Render::Tex
   this->MaxVScroll.FormatCounter = 0;
   this->pEditorKit.pObject = 0i64;
   Scaleform::Render::Text::TextFilter::TextFilter(&this->Filter);
-  if ( v4 )
-    _InterlockedExchangeAdd(&v4->RefCount, 1u);
-  v6->pLog.pObject = v4;
-  *(_QWORD *)&v6->BorderColor = 0i64;
-  v14 = 74;
-  v8 = (Scaleform::Render::Text::StyledText *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, Scaleform::Render::Text::DocView *, signed __int64, int *, signed __int64, Scaleform::Render::Text::LineBuffer *, Scaleform::Render::Text::LineBuffer *))Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap)(
+  if ( plog )
+    _InterlockedExchangeAdd(&plog->RefCount, 1u);
+  this->pLog.pObject = plog;
+  *(_QWORD *)&this->BorderColor = 0i64;
+  v13 = 74;
+  v7 = (Scaleform::Render::Text::StyledText *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, Scaleform::Render::Text::DocView *, __int64, int *, __int64, Scaleform::Render::Text::LineBuffer *, Scaleform::Render::Text::LineBuffer *))Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap)(
                                                 Scaleform::Memory::pGlobalHeap,
-                                                v6,
+                                                this,
                                                 80i64,
-                                                &v14,
+                                                &v13,
                                                 -2i64,
-                                                v12,
-                                                v13);
-  v9 = (Scaleform::Render::Text::DocView::DocumentText *)v8;
-  v15 = v8;
-  if ( v8 )
+                                                v11,
+                                                v12);
+  v8 = (Scaleform::Render::Text::DocView::DocumentText *)v7;
+  p_mLineBuffer = (Scaleform::Render::Text::LineBuffer *)v7;
+  if ( v7 )
   {
-    Scaleform::Render::Text::StyledText::StyledText(v8, v5);
-    v9->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::Text::DocView::DocumentText::`vftable;
-    v9->pDocument = v6;
+    Scaleform::Render::Text::StyledText::StyledText(v7, pallocator);
+    v8->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::Render::Text::DocView::DocumentText::`vftable;
+    v8->pDocument = this;
   }
   else
   {
-    v9 = 0i64;
+    v8 = 0i64;
   }
-  v10 = v6->pDocument.pObject;
-  if ( v10 )
+  pObject = this->pDocument.pObject;
+  if ( pObject )
   {
-    v11 = v10->RefCount-- == 1;
-    if ( v11 )
-      v10->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v10->vfptr, 1u);
+    if ( pObject->RefCount-- == 1 )
+      pObject->vfptr->__vecDelDtor(pObject, 1u);
   }
-  v6->pDocument.pObject = v9;
-  *(_QWORD *)&v6->FormatCounter = 1310721i64;
-  v6->EndSelection = -1i64;
-  v6->BeginSelection = -1i64;
-  v6->AlignProps &= 0xC0u;
-  *(_WORD *)&v6->FlagsEx = 0;
-  v6->Flags = 0;
-  *(_QWORD *)&v6->ViewRect.x1 = 0i64;
-  *(_QWORD *)&v6->ViewRect.x2 = 0i64;
-  v6->pImageSubstitutor = 0i64;
-  v6->RTFlags &= 0xFBu;
-  v6->MaxLength = 0;
-  v6->Flags |= 0x80u;
-  Scaleform::Render::Text::DocView::SetDefaultShadow(v6);
-  *(_QWORD *)&v6->TextWidth = 0i64;
+  this->pDocument.pObject = v8;
+  *(_QWORD *)&this->FormatCounter = 1310721i64;
+  this->EndSelection = -1i64;
+  this->BeginSelection = -1i64;
+  this->AlignProps &= 0xC0u;
+  *(_WORD *)&this->FlagsEx = 0;
+  this->Flags = 0;
+  *(_QWORD *)&this->ViewRect.x1 = 0i64;
+  *(_QWORD *)&this->ViewRect.x2 = 0i64;
+  this->pImageSubstitutor = 0i64;
+  this->RTFlags &= ~4u;
+  this->MaxLength = 0;
+  this->Flags |= 0x80u;
+  Scaleform::Render::Text::DocView::SetDefaultShadow(this);
+  *(_QWORD *)&this->TextWidth = 0i64;
 }
 
 // File Line: 66
 // RVA: 0x949A00
 void __fastcall Scaleform::Render::Text::DocView::~DocView(Scaleform::Render::Text::DocView *this)
 {
-  Scaleform::Render::Text::DocView *v1; // rsi
-  Scaleform::ArrayDataBase<Scaleform::Render::Text::DocView::ImageSubstitutor::Element,Scaleform::AllocatorLH<Scaleform::Render::Text::DocView::ImageSubstitutor::Element,2>,Scaleform::ArrayDefaultPolicy> *v2; // rbx
-  void **v3; // rbx
-  Scaleform::Log *v4; // rcx
+  Scaleform::Render::Text::DocView::ImageSubstitutor *pImageSubstitutor; // rbx
+  Scaleform::Render::Text::DocView::HighlightDescLoc *pHighlight; // rbx
+  Scaleform::Log *pObject; // rcx
   Scaleform::Render::GradientData *v5; // rcx
   Scaleform::Render::Text::EditorKitBase *v6; // rcx
   Scaleform::Render::Text::DocView::DocumentListener *v7; // rcx
@@ -113,106 +106,105 @@ void __fastcall Scaleform::Render::Text::DocView::~DocView(Scaleform::Render::Te
   Scaleform::Render::Text::FontManagerBase *v9; // rcx
   Scaleform::Render::Text::DocView::DocumentText *v10; // rcx
 
-  v1 = this;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Text::DocView::`vftable;
   Scaleform::Render::Text::DocView::Close(this);
-  v2 = (Scaleform::ArrayDataBase<Scaleform::Render::Text::DocView::ImageSubstitutor::Element,Scaleform::AllocatorLH<Scaleform::Render::Text::DocView::ImageSubstitutor::Element,2>,Scaleform::ArrayDefaultPolicy> *)&v1->pImageSubstitutor->Elements.Data.Data;
-  if ( v2 )
+  pImageSubstitutor = this->pImageSubstitutor;
+  if ( pImageSubstitutor )
   {
-    Scaleform::ArrayDataBase<Scaleform::Render::Text::DocView::ImageSubstitutor::Element,Scaleform::AllocatorLH<Scaleform::Render::Text::DocView::ImageSubstitutor::Element,2>,Scaleform::ArrayDefaultPolicy>::~ArrayDataBase<Scaleform::Render::Text::DocView::ImageSubstitutor::Element,Scaleform::AllocatorLH<Scaleform::Render::Text::DocView::ImageSubstitutor::Element,2>,Scaleform::ArrayDefaultPolicy>(v2);
-    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v2);
+    Scaleform::ArrayDataBase<Scaleform::Render::Text::DocView::ImageSubstitutor::Element,Scaleform::AllocatorLH<Scaleform::Render::Text::DocView::ImageSubstitutor::Element,2>,Scaleform::ArrayDefaultPolicy>::~ArrayDataBase<Scaleform::Render::Text::DocView::ImageSubstitutor::Element,Scaleform::AllocatorLH<Scaleform::Render::Text::DocView::ImageSubstitutor::Element,2>,Scaleform::ArrayDefaultPolicy>(&pImageSubstitutor->Elements.Data);
+    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, pImageSubstitutor);
   }
-  v1->pImageSubstitutor = 0i64;
-  v3 = (void **)&v1->pHighlight->HighlightManager.Highlighters.Data.Data;
-  if ( v3 )
+  this->pImageSubstitutor = 0i64;
+  pHighlight = this->pHighlight;
+  if ( pHighlight )
   {
-    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, *v3);
-    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v3);
+    Scaleform::Memory::pGlobalHeap->vfptr->Free(
+      Scaleform::Memory::pGlobalHeap,
+      pHighlight->HighlightManager.Highlighters.Data.Data);
+    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, pHighlight);
   }
-  v4 = v1->pLog.pObject;
-  if ( v4 && !_InterlockedDecrement(&v4->RefCount) && v4 )
-    v4->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v4->vfptr, 1u);
-  v5 = v1->Filter.ShadowParams.Gradient.pObject;
-  if ( v5 && !_InterlockedDecrement(&v5->RefCount) && v5 )
-    v5->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v5->vfptr, 1u);
-  v1->Filter.vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
-  v6 = v1->pEditorKit.pObject;
-  if ( v6 && !_InterlockedDecrement(&v6->RefCount) && v6 )
-    v6->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v6->vfptr, 1u);
-  v1->mLineBuffer.Geom.Flags |= 1u;
-  Scaleform::Render::Text::LineBuffer::RemoveLines(&v1->mLineBuffer, 0, v1->mLineBuffer.Lines.Data.Size);
-  Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->mLineBuffer.Lines.Data.Data);
-  v7 = v1->pDocumentListener.pObject;
+  pObject = this->pLog.pObject;
+  if ( pObject && !_InterlockedDecrement(&pObject->RefCount) )
+    pObject->vfptr->__vecDelDtor(pObject, 1u);
+  v5 = this->Filter.ShadowParams.Gradient.pObject;
+  if ( v5 && !_InterlockedDecrement(&v5->RefCount) )
+    v5->vfptr->__vecDelDtor(v5, 1u);
+  this->Filter.vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::RefCountNTSImplCore::`vftable;
+  v6 = this->pEditorKit.pObject;
+  if ( v6 && !_InterlockedDecrement(&v6->RefCount) )
+    v6->vfptr->__vecDelDtor(v6, 1u);
+  this->mLineBuffer.Geom.Flags |= 1u;
+  Scaleform::Render::Text::LineBuffer::RemoveLines(&this->mLineBuffer, 0, this->mLineBuffer.Lines.Data.Size);
+  Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, this->mLineBuffer.Lines.Data.Data);
+  v7 = this->pDocumentListener.pObject;
   if ( v7 )
   {
     v8 = v7->RefCount-- == 1;
     if ( v8 )
-      v7->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v7->vfptr, 1u);
+      v7->vfptr->__vecDelDtor(v7, 1u);
   }
-  v9 = v1->pFontManager.pObject;
-  if ( v9 && !_InterlockedDecrement(&v9->RefCount) && v9 )
-    v9->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v9->vfptr, 1u);
-  v10 = v1->pDocument.pObject;
+  v9 = this->pFontManager.pObject;
+  if ( v9 && !_InterlockedDecrement(&v9->RefCount) )
+    v9->vfptr->__vecDelDtor(v9, 1u);
+  v10 = this->pDocument.pObject;
   if ( v10 )
   {
     v8 = v10->RefCount-- == 1;
     if ( v8 )
-      v10->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v10->vfptr, 1u);
+      v10->vfptr->__vecDelDtor(v10, 1u);
   }
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
 }
 
 // File Line: 117
 // RVA: 0x954430
-void __fastcall Scaleform::Render::Text::DocView::ImageSubstitutor::AddImageDesc(Scaleform::Render::Text::DocView::ImageSubstitutor *this, Scaleform::Render::Text::DocView::ImageSubstitutor::Element *elem)
+void __fastcall Scaleform::Render::Text::DocView::ImageSubstitutor::AddImageDesc(
+        Scaleform::Render::Text::DocView::ImageSubstitutor *this,
+        Scaleform::Render::Text::DocView::ImageSubstitutor::Element *elem)
 {
-  Scaleform::Render::Text::DocView::ImageSubstitutor::Element *v2; // r15
-  Scaleform::Render::Text::DocView::ImageSubstitutor *v3; // r12
-  signed __int64 v4; // r10
+  __int64 Size; // r10
   unsigned __int64 v5; // rsi
-  __int64 v6; // r9
+  __int64 SubStringLen; // r9
   Scaleform::Render::Text::DocView::ImageSubstitutor::Element *v7; // rcx
   __int64 v8; // rdx
   int v9; // edi
-  signed __int64 v10; // r11
+  char *v10; // r11
   int v11; // eax
-  int v12; // er8
+  int v12; // r8d
   int v13; // eax
 
-  v2 = elem;
-  v3 = this;
   if ( !Scaleform::Render::Text::DocView::ImageSubstitutor::FindImageDesc(
           this,
           elem->SubString,
           (unsigned __int8)elem->SubStringLen,
           0i64) )
   {
-    v4 = v3->Elements.Data.Size;
+    Size = this->Elements.Data.Size;
     v5 = 0i64;
-    while ( v4 > 0 )
+    while ( Size > 0 )
     {
-      v6 = (unsigned __int8)v2->SubStringLen;
-      v7 = &v3->Elements.Data.Data[(v4 >> 1) + v5];
+      SubStringLen = (unsigned __int8)elem->SubStringLen;
+      v7 = &this->Elements.Data.Data[(Size >> 1) + v5];
       v8 = (unsigned __int8)v7->SubStringLen;
-      if ( v2->SubStringLen )
+      if ( elem->SubStringLen )
       {
         v9 = (unsigned __int8)v7->SubStringLen;
-        v10 = (char *)v2 - (char *)v7;
+        v10 = (char *)((char *)elem - (char *)v7);
         do
         {
-          v11 = *(wchar_t *)((char *)v7->SubString + v10);
+          v11 = *(unsigned __int16 *)((char *)v7->SubString + (_QWORD)v10);
           v12 = v7->SubString[0];
           v7 = (Scaleform::Render::Text::DocView::ImageSubstitutor::Element *)((char *)v7 + 2);
-          if ( !--v6 || !v11 )
+          if ( !--SubStringLen || !v11 )
             break;
           if ( v11 != v12 )
             goto LABEL_13;
           --v8;
         }
         while ( v8 );
-        if ( v11 == v12 && v8 && v6 )
+        if ( v11 == v12 && v8 && SubStringLen )
         {
-          v13 = (unsigned __int8)v2->SubStringLen - v9;
+          v13 = (unsigned __int8)elem->SubStringLen - v9;
           goto LABEL_15;
         }
 LABEL_13:
@@ -220,93 +212,89 @@ LABEL_13:
       }
       else
       {
-        v13 = -(signed int)v8;
+        v13 = -(int)v8;
       }
 LABEL_15:
-      if ( -v13 >= 0 )
+      if ( v13 <= 0 )
       {
-        v4 >>= 1;
+        Size >>= 1;
       }
       else
       {
-        v5 += (v4 >> 1) + 1;
-        v4 += -1 - (v4 >> 1);
+        v5 += (Size >> 1) + 1;
+        Size += -1 - (Size >> 1);
       }
     }
     Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::DocView::ImageSubstitutor::Element,Scaleform::AllocatorLH<Scaleform::Render::Text::DocView::ImageSubstitutor::Element,2>,Scaleform::ArrayDefaultPolicy>>::InsertAt(
-      (Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::DocView::ImageSubstitutor::Element,Scaleform::AllocatorLH<Scaleform::Render::Text::DocView::ImageSubstitutor::Element,2>,Scaleform::ArrayDefaultPolicy> > *)&v3->Elements.Data,
+      &this->Elements,
       v5,
-      v2);
+      elem);
   }
 }
 
 // File Line: 131
 // RVA: 0x97A200
-Scaleform::Render::Text::ImageDesc *__fastcall Scaleform::Render::Text::DocView::ImageSubstitutor::FindImageDesc(Scaleform::Render::Text::DocView::ImageSubstitutor *this, const wchar_t *pstr, unsigned __int64 maxlen, unsigned __int64 *ptextLen)
+Scaleform::Render::Text::ImageDesc *__fastcall Scaleform::Render::Text::DocView::ImageSubstitutor::FindImageDesc(
+        Scaleform::Render::Text::DocView::ImageSubstitutor *this,
+        const wchar_t *pstr,
+        unsigned __int64 maxlen,
+        unsigned __int64 *ptextLen)
 {
-  signed __int64 v4; // r10
+  __int64 Size; // r10
   unsigned __int64 v5; // r14
-  unsigned __int64 v6; // rdi
   unsigned __int64 *v7; // rbx
-  const wchar_t *v8; // r15
   Scaleform::Render::Text::DocView::ImageSubstitutor *v9; // r8
-  Scaleform::Render::Text::DocView::ImageSubstitutor::Element *v10; // r12
+  Scaleform::Render::Text::DocView::ImageSubstitutor::Element *Data; // r12
   unsigned __int64 v11; // r9
   Scaleform::Render::Text::DocView::ImageSubstitutor::Element *v12; // rcx
-  __int64 v13; // r8
+  __int64 SubStringLen; // r8
   int v14; // esi
-  signed __int64 v15; // r11
+  char *v15; // r11
   int v16; // eax
   int v17; // edx
   int v18; // eax
-  signed __int64 v19; // r14
+  __int64 v19; // r14
   unsigned __int64 v20; // r9
   Scaleform::Render::Text::DocView::ImageSubstitutor::Element *v21; // r10
   Scaleform::Render::Text::DocView::ImageSubstitutor::Element *v22; // rcx
   __int64 v23; // rdx
   char *v24; // r15
   int v25; // eax
-  int v26; // er8
+  int v26; // r8d
   int v27; // edi
   int v28; // eax
-  Scaleform::Render::Text::DocView::ImageSubstitutor *v30; // [rsp+30h] [rbp+8h]
-  unsigned __int64 *v31; // [rsp+48h] [rbp+20h]
 
-  v31 = ptextLen;
-  v30 = this;
-  v4 = this->Elements.Data.Size;
+  Size = this->Elements.Data.Size;
   v5 = 0i64;
-  v6 = maxlen;
   v7 = ptextLen;
-  v8 = pstr;
   v9 = this;
-  if ( v4 > 0 )
+  if ( Size > 0 )
   {
-    v10 = this->Elements.Data.Data;
+    Data = this->Elements.Data.Data;
     do
     {
-      v11 = v6;
-      v12 = &v10[(v4 >> 1) + v5];
-      v13 = (unsigned __int8)v12->SubStringLen;
-      if ( v6 )
+      v11 = maxlen;
+      v12 = &Data[(Size >> 1) + v5];
+      SubStringLen = (unsigned __int8)v12->SubStringLen;
+      if ( maxlen )
       {
         v14 = (unsigned __int8)v12->SubStringLen;
-        v15 = (char *)v8 - (char *)v12;
+        v15 = (char *)((char *)pstr - (char *)v12);
         do
         {
-          v16 = *(wchar_t *)((char *)v12->SubString + v15);
+          v16 = *(unsigned __int16 *)((char *)v12->SubString + (_QWORD)v15);
           v17 = v12->SubString[0];
           v12 = (Scaleform::Render::Text::DocView::ImageSubstitutor::Element *)((char *)v12 + 2);
           if ( !--v11 || !v16 )
             break;
           if ( v16 != v17 )
             goto LABEL_12;
-          --v13;
+          --SubStringLen;
         }
-        while ( v13 );
-        if ( v16 == v17 && v13 )
+        while ( SubStringLen );
+        if ( v16 == v17 && SubStringLen )
         {
-          v18 = v6 - v14;
+          v18 = maxlen - v14;
           goto LABEL_14;
         }
 LABEL_12:
@@ -314,36 +302,36 @@ LABEL_12:
       }
       else
       {
-        v18 = -(signed int)v13;
+        v18 = -(int)SubStringLen;
       }
 LABEL_14:
-      if ( -v18 >= 0 )
+      if ( v18 <= 0 )
       {
-        v4 >>= 1;
+        Size >>= 1;
       }
       else
       {
-        v5 += (v4 >> 1) + 1;
-        v4 += -1 - (v4 >> 1);
+        v5 += (Size >> 1) + 1;
+        Size += -1 - (Size >> 1);
       }
     }
-    while ( v4 > 0 );
-    v9 = v30;
-    v7 = v31;
+    while ( Size > 0 );
+    v9 = this;
+    v7 = ptextLen;
   }
   if ( v5 >= v9->Elements.Data.Size )
     return 0i64;
   v19 = v5;
-  v20 = v6;
+  v20 = maxlen;
   v21 = &v9->Elements.Data.Data[v19];
   v22 = v21;
   v23 = (unsigned __int8)v21->SubStringLen;
-  if ( v6 )
+  if ( maxlen )
   {
-    v24 = (char *)((char *)v8 - (char *)v21);
+    v24 = (char *)((char *)pstr - (char *)v21);
     do
     {
-      v25 = *(wchar_t *)((char *)v22->SubString + (_QWORD)v24);
+      v25 = *(unsigned __int16 *)((char *)v22->SubString + (_QWORD)v24);
       v26 = v22->SubString[0];
       v22 = (Scaleform::Render::Text::DocView::ImageSubstitutor::Element *)((char *)v22 + 2);
       if ( !--v20 || !v25 )
@@ -355,18 +343,18 @@ LABEL_14:
     while ( v23 );
     if ( v25 == v26 && v23 )
     {
-      v9 = v30;
-      v27 = v6 - (unsigned __int8)v21->SubStringLen;
+      v9 = this;
+      v27 = maxlen - (unsigned __int8)v21->SubStringLen;
       goto LABEL_31;
     }
 LABEL_29:
     v28 = v25 - v26;
-    v9 = v30;
+    v9 = this;
     v27 = v28;
   }
   else
   {
-    v27 = -(signed int)v23;
+    v27 = -(int)v23;
   }
 LABEL_31:
   if ( v27 )
@@ -378,45 +366,44 @@ LABEL_31:
 
 // File Line: 143
 // RVA: 0x9A9DB0
-void __fastcall Scaleform::Render::Text::DocView::ImageSubstitutor::RemoveImageDesc(Scaleform::Render::Text::DocView::ImageSubstitutor *this, Scaleform::Render::Text::ImageDesc *pimgDesc)
+void __fastcall Scaleform::Render::Text::DocView::ImageSubstitutor::RemoveImageDesc(
+        Scaleform::Render::Text::DocView::ImageSubstitutor *this,
+        Scaleform::Render::Text::ImageDesc *pimgDesc)
 {
-  Scaleform::Render::Text::ImageDesc *v2; // rbp
-  Scaleform::Render::Text::DocView::ImageSubstitutor *v3; // rbx
   unsigned __int64 v4; // rdi
   __int64 v5; // rsi
   Scaleform::Render::Text::DocView::ImageSubstitutor::Element *v6; // rcx
-  Scaleform::Render::Text::ImageDesc *v7; // rcx
-  bool v8; // zf
+  Scaleform::Render::Text::ImageDesc *pObject; // rcx
 
-  v2 = pimgDesc;
-  v3 = this;
   v4 = 0i64;
   if ( this->Elements.Data.Size )
   {
     v5 = 0i64;
     do
     {
-      v6 = &v3->Elements.Data.Data[v5];
-      if ( v6->pImageDesc.pObject == v2 )
+      v6 = &this->Elements.Data.Data[v5];
+      if ( v6->pImageDesc.pObject == pimgDesc )
       {
-        if ( v3->Elements.Data.Size == 1 )
+        if ( this->Elements.Data.Size == 1 )
         {
           Scaleform::ArrayDataBase<Scaleform::Render::Text::DocView::ImageSubstitutor::Element,Scaleform::AllocatorLH<Scaleform::Render::Text::DocView::ImageSubstitutor::Element,2>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
-            (Scaleform::ArrayDataBase<Scaleform::Render::Text::DocView::ImageSubstitutor::Element,Scaleform::AllocatorLH<Scaleform::Render::Text::DocView::ImageSubstitutor::Element,2>,Scaleform::ArrayDefaultPolicy> *)&v3->Elements.Data.Data,
-            v3,
+            &this->Elements.Data,
+            this,
             0i64);
         }
         else
         {
-          v7 = v6->pImageDesc.pObject;
-          if ( v7 )
+          pObject = v6->pImageDesc.pObject;
+          if ( pObject )
           {
-            v8 = v7->RefCount-- == 1;
-            if ( v8 )
-              v7->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v7->vfptr, 1u);
+            if ( pObject->RefCount-- == 1 )
+              pObject->vfptr->__vecDelDtor(pObject, 1u);
           }
-          memmove(&v3->Elements.Data.Data[v5], &v3->Elements.Data.Data[v5 + 1], 56 * (v3->Elements.Data.Size - v4 - 1));
-          --v3->Elements.Data.Size;
+          memmove(
+            &this->Elements.Data.Data[v5],
+            &this->Elements.Data.Data[v5 + 1],
+            56 * (this->Elements.Data.Size - v4 - 1));
+          --this->Elements.Data.Size;
         }
       }
       else
@@ -425,101 +412,94 @@ void __fastcall Scaleform::Render::Text::DocView::ImageSubstitutor::RemoveImageD
         ++v5;
       }
     }
-    while ( v4 < v3->Elements.Data.Size );
+    while ( v4 < this->Elements.Data.Size );
   }
 }
 
 // File Line: 154
 // RVA: 0x9B4160
-void __fastcall Scaleform::Render::Text::DocView::SetText(Scaleform::Render::Text::DocView *this, const char *putf8String, unsigned __int64 stringSize)
+void __fastcall Scaleform::Render::Text::DocView::SetText(
+        Scaleform::Render::Text::DocView *this,
+        char *putf8String,
+        unsigned __int64 stringSize)
 {
-  Scaleform::Render::Text::DocView::DocumentText *v3; // rbx
-  Scaleform::Render::Text::DocView *v4; // r14
-  unsigned __int64 v5; // rdi
-  const char *v6; // rsi
+  Scaleform::Render::Text::DocView::DocumentText *pObject; // rbx
 
-  v3 = this->pDocument.pObject;
-  v4 = this;
-  v5 = stringSize;
-  v6 = putf8String;
-  Scaleform::Render::Text::StyledText::Clear((Scaleform::Render::Text::StyledText *)&this->pDocument.pObject->vfptr);
+  pObject = this->pDocument.pObject;
+  Scaleform::Render::Text::StyledText::Clear(pObject);
   Scaleform::Render::Text::StyledText::AppendString(
-    (Scaleform::Render::Text::StyledText *)&v3->vfptr,
-    v6,
-    v5,
+    pObject,
+    putf8String,
+    stringSize,
     NLP_ReplaceCRLF,
-    v3->pDefaultTextFormat.pObject,
-    v3->pDefaultParagraphFormat.pObject);
-  v4->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v4->vfptr, 262u);
+    pObject->pDefaultTextFormat.pObject,
+    pObject->pDefaultParagraphFormat.pObject);
+  this->vfptr[1].__vecDelDtor(this, 262u);
 }
 
 // File Line: 160
 // RVA: 0x9B41E0
-void __fastcall Scaleform::Render::Text::DocView::SetText(Scaleform::Render::Text::DocView *this, const wchar_t *pstring, unsigned __int64 length)
+void __fastcall Scaleform::Render::Text::DocView::SetText(
+        Scaleform::Render::Text::DocView *this,
+        const wchar_t *pstring,
+        unsigned __int64 length)
 {
-  Scaleform::Render::Text::DocView::DocumentText *v3; // rbx
-  Scaleform::Render::Text::DocView *v4; // r14
-  unsigned __int64 v5; // rdi
-  const wchar_t *v6; // rsi
+  Scaleform::Render::Text::DocView::DocumentText *pObject; // rbx
 
-  v3 = this->pDocument.pObject;
-  v4 = this;
-  v5 = length;
-  v6 = pstring;
-  Scaleform::Render::Text::StyledText::Clear((Scaleform::Render::Text::StyledText *)&this->pDocument.pObject->vfptr);
+  pObject = this->pDocument.pObject;
+  Scaleform::Render::Text::StyledText::Clear(pObject);
   Scaleform::Render::Text::StyledText::AppendString(
-    (Scaleform::Render::Text::StyledText *)&v3->vfptr,
-    v6,
-    v5,
+    pObject,
+    pstring,
+    length,
     NLP_ReplaceCRLF,
-    v3->pDefaultTextFormat.pObject,
-    v3->pDefaultParagraphFormat.pObject);
-  v4->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v4->vfptr, 262u);
+    pObject->pDefaultTextFormat.pObject,
+    pObject->pDefaultParagraphFormat.pObject);
+  this->vfptr[1].__vecDelDtor(this, 262u);
 }
 
 // File Line: 166
 // RVA: 0x9B43C0
-void __fastcall Scaleform::Render::Text::DocView::SetTextFormat(Scaleform::Render::Text::DocView *this, Scaleform::Render::Text::TextFormat *fmt, unsigned __int64 startPos, unsigned __int64 endPos)
+void __fastcall Scaleform::Render::Text::DocView::SetTextFormat(
+        Scaleform::Render::Text::DocView *this,
+        Scaleform::Render::Text::TextFormat *fmt,
+        unsigned __int64 startPos,
+        unsigned __int64 endPos)
 {
-  Scaleform::Render::Text::DocView *v4; // rbx
-
-  this->RTFlags &= 0xEFu;
-  v4 = this;
-  Scaleform::Render::Text::StyledText::SetTextFormat(
-    (Scaleform::Render::Text::StyledText *)&this->pDocument.pObject->vfptr,
-    fmt,
-    startPos,
-    endPos);
-  v4->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v4->vfptr, 1u);
+  this->RTFlags &= ~0x10u;
+  Scaleform::Render::Text::StyledText::SetTextFormat(this->pDocument.pObject, fmt, startPos, endPos);
+  this->vfptr[1].__vecDelDtor(this, 1u);
 }
 
 // File Line: 173
 // RVA: 0x9B2540
-void __fastcall Scaleform::Render::Text::DocView::SetParagraphFormat(Scaleform::Render::Text::DocView *this, Scaleform::Render::Text::ParagraphFormat *fmt, unsigned __int64 startPos, unsigned __int64 endPos)
+void __fastcall Scaleform::Render::Text::DocView::SetParagraphFormat(
+        Scaleform::Render::Text::DocView *this,
+        Scaleform::Render::Text::ParagraphFormat *fmt,
+        unsigned __int64 startPos,
+        unsigned __int64 endPos)
 {
-  Scaleform::Render::Text::DocView *v4; // rbx
-
-  v4 = this;
-  Scaleform::Render::Text::StyledText::SetParagraphFormat(
-    (Scaleform::Render::Text::StyledText *)&this->pDocument.pObject->vfptr,
-    fmt,
-    startPos,
-    endPos);
-  v4->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v4->vfptr, 1u);
+  Scaleform::Render::Text::StyledText::SetParagraphFormat(this->pDocument.pObject, fmt, startPos, endPos);
+  this->vfptr[1].__vecDelDtor(this, 1u);
 }
 
 // File Line: 179
 // RVA: 0x99CC10
-void __fastcall Scaleform::Render::Text::DocView::DocumentText::OnParagraphRemoving(Scaleform::Render::Text::DocView::DocumentText *this, Scaleform::Render::Text::Paragraph *para)
+void __fastcall Scaleform::Render::Text::DocView::DocumentText::OnParagraphRemoving(
+        Scaleform::Render::Text::DocView::DocumentText *this,
+        Scaleform::Render::Text::Paragraph *para)
 {
-  this->pDocument->vfptr[2].__vecDelDtor((Scaleform::RefCountImplCore *)this->pDocument, (unsigned int)para);
+  this->pDocument->vfptr[2].__vecDelDtor(this->pDocument, (unsigned int)para);
 }
 
 // File Line: 190
 // RVA: 0x99CD50
-void __fastcall Scaleform::Render::Text::DocView::DocumentText::OnTextInserting(Scaleform::Render::Text::DocView::DocumentText *this, unsigned __int64 startPos, unsigned __int64 length)
+void __fastcall Scaleform::Render::Text::DocView::DocumentText::OnTextInserting(
+        Scaleform::Render::Text::DocView::DocumentText *this,
+        unsigned __int64 startPos,
+        unsigned __int64 length)
 {
-  ((void (__fastcall *)(Scaleform::Render::Text::DocView *, signed __int64, unsigned __int64))this->pDocument->vfptr[1].__vecDelDtor)(
+  ((void (__fastcall *)(Scaleform::Render::Text::DocView *, __int64, unsigned __int64))this->pDocument->vfptr[1].__vecDelDtor)(
     this->pDocument,
     2i64,
     length);
@@ -527,16 +507,17 @@ void __fastcall Scaleform::Render::Text::DocView::DocumentText::OnTextInserting(
 
 // File Line: 202
 // RVA: 0x96F510
-unsigned __int64 __fastcall Scaleform::Render::Text::DocView::EditCommand(Scaleform::Render::Text::DocView *this, Scaleform::Render::Text::DocView::CommandType cmdId, const void *command)
+unsigned __int64 __fastcall Scaleform::Render::Text::DocView::EditCommand(
+        Scaleform::Render::Text::DocView *this,
+        Scaleform::Render::Text::DocView::CommandType cmdId,
+        const wchar_t *command)
 {
-  const wchar_t *v3; // r14
-  Scaleform::Render::Text::DocView *v4; // rdi
   unsigned __int64 newLinePolicy; // rsi
-  unsigned __int64 v6; // rbx
-  unsigned __int64 v7; // rsi
+  unsigned __int64 inserted; // rbx
+  unsigned __int64 MaxLength; // rsi
   unsigned __int64 v8; // rbx
-  Scaleform::Render::Text::DocView::DocumentText *v9; // r13
-  unsigned __int64 v10; // rax
+  Scaleform::Render::Text::DocView::DocumentText *pObject; // r13
+  unsigned __int64 Length; // rax
   unsigned int v11; // ecx
   unsigned __int64 v12; // rbx
   unsigned __int64 v13; // rsi
@@ -547,7 +528,7 @@ unsigned __int64 __fastcall Scaleform::Render::Text::DocView::EditCommand(Scalef
   unsigned __int64 v18; // rax
   unsigned __int64 v19; // rdx
   unsigned __int64 v20; // rcx
-  Scaleform::Render::Text::StyledText::NewLinePolicy v21; // er9
+  Scaleform::Render::Text::StyledText::NewLinePolicy v21; // r9d
   unsigned __int64 v22; // rdx
   unsigned __int64 v23; // r8
   unsigned __int64 v24; // r12
@@ -558,7 +539,7 @@ unsigned __int64 __fastcall Scaleform::Render::Text::DocView::EditCommand(Scalef
   unsigned __int64 v29; // rdx
   unsigned __int64 v30; // rcx
   unsigned __int64 v31; // rax
-  Scaleform::Render::Text::StyledText::NewLinePolicy v32; // er10
+  Scaleform::Render::Text::StyledText::NewLinePolicy v32; // r10d
   unsigned __int64 v33; // r15
   unsigned __int64 v34; // r13
   unsigned __int64 v35; // rbx
@@ -570,14 +551,14 @@ unsigned __int64 __fastcall Scaleform::Render::Text::DocView::EditCommand(Scalef
   unsigned __int64 v41; // rcx
   unsigned __int64 v42; // r8
   char v43; // r15
-  Scaleform::Render::Text::Paragraph *v44; // r13
+  Scaleform::Render::Text::Paragraph *pPara; // r13
   Scaleform::Render::Text::ParagraphFormat *v45; // rcx
-  unsigned __int16 v46; // dx
-  unsigned int *v47; // r14
-  Scaleform::MemoryHeapVtbl *v48; // rax
+  signed __int16 PresentMask; // dx
+  unsigned int *pTabStops; // r14
+  Scaleform::MemoryHeapVtbl *vfptr; // rax
   unsigned int v49; // ebx
-  Scaleform::Render::Text::Allocator *v50; // rax
-  __int16 v51; // r8
+  Scaleform::Render::Text::Allocator *Allocator; // rax
+  __int16 Indent; // r8
   unsigned int *v52; // r14
   Scaleform::MemoryHeapVtbl *v53; // rax
   unsigned int v54; // ebx
@@ -587,80 +568,75 @@ unsigned __int64 __fastcall Scaleform::Render::Text::DocView::EditCommand(Scalef
   unsigned __int64 v58; // r8
   unsigned __int64 v59; // rbx
   unsigned __int64 v60; // r14
-  Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator result; // [rsp+48h] [rbp-38h]
-  Scaleform::Render::Text::ParagraphFormat fmt; // [rsp+58h] [rbp-28h]
-  unsigned __int64 pindexInParagraph; // [rsp+D8h] [rbp+58h]
+  Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator result; // [rsp+48h] [rbp-38h] BYREF
+  Scaleform::Render::Text::ParagraphFormat fmt; // [rsp+58h] [rbp-28h] BYREF
+  unsigned __int64 pindexInParagraph; // [rsp+D8h] [rbp+58h] BYREF
 
-  v3 = (const wchar_t *)command;
-  v4 = this;
   newLinePolicy = 0i64;
-  v6 = 0i64;
+  inserted = 0i64;
   switch ( cmdId )
   {
-    case 0:
-      v7 = this->MaxLength;
-      if ( !(_DWORD)v7
-        || Scaleform::Render::Text::StyledText::GetLength((Scaleform::Render::Text::StyledText *)&this->pDocument.pObject->vfptr)
-         + 1 <= v7 )
+    case Cmd_InsertChar:
+      MaxLength = this->MaxLength;
+      if ( !(_DWORD)MaxLength
+        || Scaleform::Render::Text::StyledText::GetLength(this->pDocument.pObject) + 1 <= MaxLength )
       {
-        v6 = Scaleform::Render::Text::StyledText::InsertString(
-               (Scaleform::Render::Text::StyledText *)&v4->pDocument.pObject->vfptr,
-               v3 + 4,
-               *(_QWORD *)v3,
-               1ui64,
-               NLP_ReplaceCRLF,
-               v4->pDocument.pObject->pDefaultTextFormat.pObject,
-               v4->pDocument.pObject->pDefaultParagraphFormat.pObject);
-        v4->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v4->vfptr, 2u);
+        inserted = Scaleform::Render::Text::StyledText::InsertString(
+                     this->pDocument.pObject,
+                     command + 4,
+                     *(_QWORD *)command,
+                     1ui64,
+                     NLP_ReplaceCRLF,
+                     this->pDocument.pObject->pDefaultTextFormat.pObject,
+                     this->pDocument.pObject->pDefaultParagraphFormat.pObject);
+        this->vfptr[1].__vecDelDtor(this, 2u);
       }
-      return v6;
-    case 1:
+      return inserted;
+    case Cmd_InsertPlainText:
       v8 = *((_QWORD *)command + 2);
-      v9 = this->pDocument.pObject;
-      v10 = Scaleform::Render::Text::StyledText::GetLength((Scaleform::Render::Text::StyledText *)&this->pDocument.pObject->vfptr);
-      v11 = v4->MaxLength;
-      if ( v11 && v10 + v8 > v11 )
-        v8 = v11 - v10;
-      if ( !(((unsigned __int8)v4->Flags >> 2) & 1) )
+      pObject = this->pDocument.pObject;
+      Length = Scaleform::Render::Text::StyledText::GetLength(pObject);
+      v11 = this->MaxLength;
+      if ( v11 && Length + v8 > v11 )
+        v8 = v11 - Length;
+      if ( (this->Flags & 4) == 0 )
         LODWORD(newLinePolicy) = 2;
-      v6 = Scaleform::Render::Text::StyledText::InsertString(
-             (Scaleform::Render::Text::StyledText *)&v9->vfptr,
-             *((const wchar_t **)v3 + 1),
-             *(_QWORD *)v3,
-             v8,
-             (Scaleform::Render::Text::StyledText::NewLinePolicy)newLinePolicy,
-             v9->pDefaultTextFormat.pObject,
-             v9->pDefaultParagraphFormat.pObject);
-      goto LABEL_92;
-    case 2:
+      inserted = Scaleform::Render::Text::StyledText::InsertString(
+                   pObject,
+                   *((const wchar_t **)command + 1),
+                   *(_QWORD *)command,
+                   v8,
+                   (Scaleform::Render::Text::StyledText::NewLinePolicy)newLinePolicy,
+                   pObject->pDefaultTextFormat.pObject,
+                   pObject->pDefaultParagraphFormat.pObject);
+      goto LABEL_91;
+    case Cmd_InsertStyledText:
       v12 = -1i64;
       v13 = this->MaxLength;
       if ( (_DWORD)v13 )
       {
-        v14 = Scaleform::Render::Text::StyledText::GetLength((Scaleform::Render::Text::StyledText *)&this->pDocument.pObject->vfptr);
-        if ( v14 + Scaleform::Render::Text::StyledText::GetLength(*((Scaleform::Render::Text::StyledText **)v3 + 1)) > v13 )
+        v14 = Scaleform::Render::Text::StyledText::GetLength(this->pDocument.pObject);
+        if ( v14
+           + Scaleform::Render::Text::StyledText::GetLength(*((Scaleform::Render::Text::StyledText **)command + 1)) > v13 )
           v12 = (unsigned int)v13 - v14;
       }
-      v6 = Scaleform::Render::Text::StyledText::InsertStyledText(
-             (Scaleform::Render::Text::StyledText *)&v4->pDocument.pObject->vfptr,
-             *((Scaleform::Render::Text::StyledText **)v3 + 1),
-             *(_QWORD *)v3,
-             v12);
-      goto LABEL_92;
-    case 3:
+      inserted = Scaleform::Render::Text::StyledText::InsertStyledText(
+                   this->pDocument.pObject,
+                   *((Scaleform::Render::Text::StyledText **)command + 1),
+                   *(_QWORD *)command,
+                   v12);
+      goto LABEL_91;
+    case Cmd_DeleteChar:
       v56 = *(_QWORD *)command;
       v57 = *(_QWORD *)command + 1i64;
       if ( v57 < v56 )
         v58 = 0i64;
       else
         v58 = v57 - v56;
-      Scaleform::Render::Text::StyledText::Remove(
-        (Scaleform::Render::Text::StyledText *)&this->pDocument.pObject->vfptr,
-        v56,
-        v58);
-      v6 = 1i64;
-      goto LABEL_92;
-    case 4:
+      Scaleform::Render::Text::StyledText::Remove(this->pDocument.pObject, v56, v58);
+      inserted = 1i64;
+      goto LABEL_91;
+    case Cmd_DeleteText:
       v59 = *(_QWORD *)command;
       if ( *(_QWORD *)command <= *((_QWORD *)command + 1) )
       {
@@ -673,13 +649,10 @@ unsigned __int64 __fastcall Scaleform::Render::Text::DocView::EditCommand(Scalef
       }
       if ( v59 >= v60 )
         newLinePolicy = v59 - v60;
-      Scaleform::Render::Text::StyledText::Remove(
-        (Scaleform::Render::Text::StyledText *)&this->pDocument.pObject->vfptr,
-        v60,
-        newLinePolicy);
-      v6 = v59 - v60;
-      goto LABEL_92;
-    case 5:
+      Scaleform::Render::Text::StyledText::Remove(this->pDocument.pObject, v60, newLinePolicy);
+      inserted = v59 - v60;
+      goto LABEL_91;
+    case Cmd_ReplaceTextByChar:
       v15 = *(_QWORD *)command;
       if ( *(_QWORD *)command <= *((_QWORD *)command + 1) )
       {
@@ -693,7 +666,7 @@ unsigned __int64 __fastcall Scaleform::Render::Text::DocView::EditCommand(Scalef
       v17 = this->MaxLength;
       if ( (_DWORD)v17 )
       {
-        v18 = Scaleform::Render::Text::StyledText::GetLength((Scaleform::Render::Text::StyledText *)&this->pDocument.pObject->vfptr);
+        v18 = Scaleform::Render::Text::StyledText::GetLength(this->pDocument.pObject);
         v19 = v18;
         if ( v15 < v18 )
           v19 = v15;
@@ -701,25 +674,27 @@ unsigned __int64 __fastcall Scaleform::Render::Text::DocView::EditCommand(Scalef
         if ( v16 < v18 )
           v20 = v16;
         if ( v18 + v20 - v19 + 1 > v17 )
-          return v6;
+          return inserted;
       }
-      v21 = 0;
-      if ( !(((unsigned __int8)v4->Flags >> 2) & 1) )
-        v21 = 2;
-      v6 = Scaleform::Render::Text::StyledText::InsertString(
-             (Scaleform::Render::Text::StyledText *)&v4->pDocument.pObject->vfptr,
-             v3 + 8,
-             v16,
-             1ui64,
-             v21,
-             v4->pDocument.pObject->pDefaultTextFormat.pObject,
-             v4->pDocument.pObject->pDefaultParagraphFormat.pObject);
+      v21 = NLP_CompressCRLF;
+      if ( (this->Flags & 4) == 0 )
+        v21 = NLP_IgnoreCRLF;
+      inserted = Scaleform::Render::Text::StyledText::InsertString(
+                   this->pDocument.pObject,
+                   command + 8,
+                   v16,
+                   1ui64,
+                   v21,
+                   this->pDocument.pObject->pDefaultTextFormat.pObject,
+                   this->pDocument.pObject->pDefaultParagraphFormat.pObject);
       v22 = v16 + 1;
       if ( v15 + 1 < v16 + 1 )
-        goto LABEL_28;
-      v23 = v15 - v16;
+LABEL_28:
+        v23 = 0i64;
+      else
+        v23 = v15 - v16;
       goto LABEL_29;
-    case 6:
+    case Cmd_ReplaceTextByPlainText:
       v24 = *(_QWORD *)command;
       if ( *(_QWORD *)command <= *((_QWORD *)command + 1) )
       {
@@ -734,7 +709,7 @@ unsigned __int64 __fastcall Scaleform::Render::Text::DocView::EditCommand(Scalef
       v27 = this->MaxLength;
       if ( (_DWORD)v27 )
       {
-        v28 = Scaleform::Render::Text::StyledText::GetLength((Scaleform::Render::Text::StyledText *)&this->pDocument.pObject->vfptr);
+        v28 = Scaleform::Render::Text::StyledText::GetLength(this->pDocument.pObject);
         v29 = v28;
         if ( v24 < v28 )
           v29 = v24;
@@ -745,30 +720,25 @@ unsigned __int64 __fastcall Scaleform::Render::Text::DocView::EditCommand(Scalef
         if ( v26 + v31 > v27 )
           v26 = (unsigned int)v27 - v31;
       }
-      v32 = 0;
-      if ( !(((unsigned __int8)v4->Flags >> 2) & 1) )
-        v32 = 2;
-      v6 = Scaleform::Render::Text::StyledText::InsertString(
-             (Scaleform::Render::Text::StyledText *)&v4->pDocument.pObject->vfptr,
-             *((const wchar_t **)v3 + 2),
-             v25,
-             v26,
-             v32,
-             v4->pDocument.pObject->pDefaultTextFormat.pObject,
-             v4->pDocument.pObject->pDefaultParagraphFormat.pObject);
-      v22 = v6 + v25;
-      if ( v24 + v6 < v6 + v25 )
-LABEL_28:
-        v23 = 0i64;
-      else
-        v23 = v24 - v25;
+      v32 = NLP_CompressCRLF;
+      if ( (this->Flags & 4) == 0 )
+        v32 = NLP_IgnoreCRLF;
+      inserted = Scaleform::Render::Text::StyledText::InsertString(
+                   this->pDocument.pObject,
+                   *((const wchar_t **)command + 2),
+                   v25,
+                   v26,
+                   v32,
+                   this->pDocument.pObject->pDefaultTextFormat.pObject,
+                   this->pDocument.pObject->pDefaultParagraphFormat.pObject);
+      v22 = inserted + v25;
+      if ( v24 + inserted < inserted + v25 )
+        goto LABEL_28;
+      v23 = v24 - v25;
 LABEL_29:
-      Scaleform::Render::Text::StyledText::Remove(
-        (Scaleform::Render::Text::StyledText *)&v4->pDocument.pObject->vfptr,
-        v22,
-        v23);
-      goto LABEL_92;
-    case 7:
+      Scaleform::Render::Text::StyledText::Remove(this->pDocument.pObject, v22, v23);
+      goto LABEL_91;
+    case Cmd_ReplaceTextByStyledText:
       v33 = *(_QWORD *)command;
       if ( *(_QWORD *)command <= *((_QWORD *)command + 1) )
       {
@@ -782,7 +752,7 @@ LABEL_29:
       v35 = -1i64;
       if ( this->MaxLength )
       {
-        v36 = Scaleform::Render::Text::StyledText::GetLength((Scaleform::Render::Text::StyledText *)&this->pDocument.pObject->vfptr);
+        v36 = Scaleform::Render::Text::StyledText::GetLength(this->pDocument.pObject);
         v37 = v36;
         if ( v33 < v36 )
           v37 = v33;
@@ -790,48 +760,45 @@ LABEL_29:
         if ( v34 < v36 )
           v38 = v34;
         v39 = v36 + v38 - v37;
-        v40 = Scaleform::Render::Text::StyledText::GetLength(*((Scaleform::Render::Text::StyledText **)v3 + 2));
-        v41 = v4->MaxLength;
+        v40 = Scaleform::Render::Text::StyledText::GetLength(*((Scaleform::Render::Text::StyledText **)command + 2));
+        v41 = this->MaxLength;
         if ( v39 + v40 > v41 )
           v35 = (unsigned int)v41 - v39;
       }
-      v6 = Scaleform::Render::Text::StyledText::InsertStyledText(
-             (Scaleform::Render::Text::StyledText *)&v4->pDocument.pObject->vfptr,
-             *((Scaleform::Render::Text::StyledText **)v3 + 2),
-             v34,
-             v35);
-      if ( v33 + v6 < v6 + v34 )
+      inserted = Scaleform::Render::Text::StyledText::InsertStyledText(
+                   this->pDocument.pObject,
+                   *((Scaleform::Render::Text::StyledText **)command + 2),
+                   v34,
+                   v35);
+      if ( v33 + inserted < inserted + v34 )
         v42 = 0i64;
       else
         v42 = v33 - v34;
-      Scaleform::Render::Text::StyledText::Remove(
-        (Scaleform::Render::Text::StyledText *)&v4->pDocument.pObject->vfptr,
-        v6 + v34,
-        v42);
-      goto LABEL_92;
-    case 8:
-      v6 = 1i64;
+      Scaleform::Render::Text::StyledText::Remove(this->pDocument.pObject, inserted + v34, v42);
+      goto LABEL_91;
+    case Cmd_BackspaceChar:
+      inserted = 1i64;
       v43 = 0;
       pindexInParagraph = 0i64;
       Scaleform::Render::Text::StyledText::GetParagraphByIndex(
-        (Scaleform::Render::Text::StyledText *)&this->pDocument.pObject->vfptr,
+        this->pDocument.pObject,
         &result,
         *(_QWORD *)command,
         &pindexInParagraph);
       if ( !result.pArray )
-        goto LABEL_78;
+        goto LABEL_77;
       if ( result.CurIndex < 0 )
-        goto LABEL_78;
+        goto LABEL_77;
       if ( result.CurIndex >= SLODWORD(result.pArray->Data.Size) )
-        goto LABEL_78;
+        goto LABEL_77;
       if ( pindexInParagraph )
-        goto LABEL_78;
-      v44 = result.pArray->Data.Data[result.CurIndex].pPara;
-      v45 = v44->pFormat.pObject;
+        goto LABEL_77;
+      pPara = result.pArray->Data.Data[result.CurIndex].pPara;
+      v45 = pPara->pFormat.pObject;
       if ( !v45 )
-        goto LABEL_78;
-      v46 = v45->PresentMask;
-      if ( (v46 & 0x80u) != 0 && (v46 & 0x8000u) != 0 )
+        goto LABEL_77;
+      PresentMask = v45->PresentMask;
+      if ( (PresentMask & 0x80u) != 0 && PresentMask < 0 )
       {
         fmt.pAllocator = 0i64;
         fmt.RefCount = 1;
@@ -841,54 +808,55 @@ LABEL_29:
         fmt.Leading = v45->Leading;
         fmt.LeftMargin = v45->LeftMargin;
         fmt.RightMargin = v45->RightMargin;
-        fmt.PresentMask = v46;
-        v47 = v45->pTabStops;
-        v48 = Scaleform::Memory::pGlobalHeap->vfptr;
-        if ( v47 )
+        fmt.PresentMask = PresentMask;
+        pTabStops = v45->pTabStops;
+        vfptr = Scaleform::Memory::pGlobalHeap->vfptr;
+        if ( pTabStops )
         {
-          v49 = *v47;
-          v48->Free(Scaleform::Memory::pGlobalHeap, 0i64);
+          v49 = *pTabStops;
+          vfptr->Free(Scaleform::Memory::pGlobalHeap, 0i64);
           fmt.pTabStops = 0i64;
           fmt.pTabStops = (unsigned int *)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(
                                             Scaleform::Memory::pGlobalHeap,
                                             4i64 * (v49 + 1),
                                             0i64);
           *fmt.pTabStops = v49;
-          memmove(fmt.pTabStops + 1, v47 + 1, 4i64 * v49);
+          memmove(fmt.pTabStops + 1, pTabStops + 1, 4i64 * v49);
         }
         else
         {
-          v48->Free(Scaleform::Memory::pGlobalHeap, 0i64);
+          vfptr->Free(Scaleform::Memory::pGlobalHeap, 0i64);
           fmt.pTabStops = 0i64;
         }
-        fmt.PresentMask = fmt.PresentMask & 0x7FFF | 0x80;
-        v50 = Scaleform::Render::Text::StyledText::GetAllocator((Scaleform::Render::Text::StyledText *)&v4->pDocument.pObject->vfptr);
-        Scaleform::Render::Text::Paragraph::SetFormat(v44, v50, &fmt);
+        fmt.PresentMask &= ~0x8000u;
+        fmt.PresentMask |= 0x80u;
+        Allocator = Scaleform::Render::Text::StyledText::GetAllocator(this->pDocument.pObject);
+        Scaleform::Render::Text::Paragraph::SetFormat(pPara, Allocator, &fmt);
         v43 = 1;
 LABEL_69:
         if ( fmt.pAllocator )
         {
           pindexInParagraph = (unsigned __int64)&fmt;
           Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor>>::RemoveAlt<Scaleform::Render::Text::ParagraphFormat *>(
-            (Scaleform::HashSetBase<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::Render::Text::ParagraphFormat::HashFunctor,Scaleform::AllocatorLH<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,74>,Scaleform::HashsetCachedEntry<Scaleform::Render::Text::PtrCompare<Scaleform::Render::Text::ParagraphFormat *>,Scaleform::Render::Text::ParagraphFormat::HashFunctor> > *)&fmt.pAllocator->ParagraphFormatStorage.pTable,
-            (Scaleform::Render::Text::ParagraphFormat *const *)&pindexInParagraph);
+            &fmt.pAllocator->ParagraphFormatStorage,
+            (Scaleform::Render::Text::ParagraphFormat **)&pindexInParagraph);
         }
         Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, fmt.pTabStops);
         fmt.pTabStops = 0i64;
-        goto LABEL_80;
+        goto LABEL_79;
       }
-      v51 = v45->Indent;
-      if ( v51 || v45->BlockIndent )
+      Indent = v45->Indent;
+      if ( *(_DWORD *)&v45->BlockIndent )
       {
         fmt.pAllocator = 0i64;
         fmt.RefCount = 1;
         fmt.pTabStops = 0i64;
         fmt.BlockIndent = v45->BlockIndent;
-        fmt.Indent = v51;
+        fmt.Indent = Indent;
         fmt.Leading = v45->Leading;
         fmt.LeftMargin = v45->LeftMargin;
         fmt.RightMargin = v45->RightMargin;
-        fmt.PresentMask = v46;
+        fmt.PresentMask = PresentMask;
         v52 = v45->pTabStops;
         v53 = Scaleform::Memory::pGlobalHeap->vfptr;
         if ( v52 )
@@ -910,177 +878,73 @@ LABEL_69:
         }
         *(_DWORD *)&fmt.BlockIndent = 0;
         fmt.PresentMask |= 6u;
-        v55 = Scaleform::Render::Text::StyledText::GetAllocator((Scaleform::Render::Text::StyledText *)&v4->pDocument.pObject->vfptr);
-        Scaleform::Render::Text::Paragraph::SetFormat(v44, v55, &fmt);
+        v55 = Scaleform::Render::Text::StyledText::GetAllocator(this->pDocument.pObject);
+        Scaleform::Render::Text::Paragraph::SetFormat(pPara, v55, &fmt);
         v43 = 1;
         goto LABEL_69;
       }
-LABEL_78:
-      if ( *(_QWORD *)v3 )
+LABEL_77:
+      if ( *(_QWORD *)command )
       {
         Scaleform::Render::Text::StyledText::Remove(
-          (Scaleform::Render::Text::StyledText *)&v4->pDocument.pObject->vfptr,
-          *(_QWORD *)v3 - 1i64,
-          *(_QWORD *)v3 >= (unsigned __int64)(*(_QWORD *)v3 - 1i64));
-        return v6;
+          this->pDocument.pObject,
+          *(_QWORD *)command - 1i64,
+          *(_QWORD *)command >= (unsigned __int64)(*(_QWORD *)command - 1i64));
+        return inserted;
       }
-LABEL_80:
-      v6 = 0i64;
+LABEL_79:
+      inserted = 0i64;
       if ( v43 )
-LABEL_92:
-        v4->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v4->vfptr, 2u);
-      return v6;
+LABEL_91:
+        this->vfptr[1].__vecDelDtor(this, 2u);
+      return inserted;
     default:
-      return v6;
+      return inserted;
   }
 }
 
 // File Line: 438
 // RVA: 0x98C650
-Scaleform::String *__fastcall Scaleform::Render::Text::DocView::GetText(Scaleform::Render::Text::DocView *this, Scaleform::String *result)
+Scaleform::String *__fastcall Scaleform::Render::Text::DocView::GetText(
+        Scaleform::Render::Text::DocView *this,
+        Scaleform::String *result)
 {
-  Scaleform::String *v2; // rbx
-
-  v2 = result;
-  Scaleform::Render::Text::StyledText::GetText(
-    (Scaleform::Render::Text::StyledText *)&this->pDocument.pObject->vfptr,
-    result);
-  return v2;
+  Scaleform::Render::Text::StyledText::GetText(this->pDocument.pObject, result);
+  return result;
 }
 
 // File Line: 443
 // RVA: 0x98C690
-Scaleform::String *__fastcall Scaleform::Render::Text::DocView::GetText(Scaleform::Render::Text::DocView *this, Scaleform::String *retStr)
+Scaleform::String *__fastcall Scaleform::Render::Text::DocView::GetText(
+        Scaleform::Render::Text::DocView *this,
+        Scaleform::String *retStr)
 {
-  return Scaleform::Render::Text::StyledText::GetText(
-           (Scaleform::Render::Text::StyledText *)&this->pDocument.pObject->vfptr,
-           retStr);
+  return Scaleform::Render::Text::StyledText::GetText(this->pDocument.pObject, retStr);
 }
 
 // File Line: 448
 // RVA: 0x985440
-Scaleform::String *__fastcall Scaleform::Render::Text::DocView::GetHtml(Scaleform::Render::Text::DocView *this, Scaleform::String *result)
+Scaleform::String *__fastcall Scaleform::Render::Text::DocView::GetHtml(
+        Scaleform::Render::Text::DocView *this,
+        Scaleform::String *result)
 {
-  Scaleform::String *v2; // rbx
-
-  v2 = result;
-  Scaleform::Render::Text::StyledText::GetHtml(
-    (Scaleform::Render::Text::StyledText *)&this->pDocument.pObject->vfptr,
-    result);
-  return v2;
+  Scaleform::Render::Text::StyledText::GetHtml(this->pDocument.pObject, result);
+  return result;
 }
 
 // File Line: 466
 // RVA: 0x99E590
-void __fastcall Scaleform::Render::Text::DocView::ParseHtml(Scaleform::Render::Text::DocView *this, const char *putf8Str, unsigned __int64 utf8Len, bool condenseWhite, Scaleform::ArrayDH<Scaleform::Render::Text::StyledText::HTMLImageTagInfo,2,Scaleform::ArrayDefaultPolicy> *pimgInfoArr, Scaleform::Render::Text::StyleManagerBase *pstyleMgr, Scaleform::Render::Text::TextFormat *txtFmt, Scaleform::Render::Text::ParagraphFormat *paraFmt)
+void __fastcall Scaleform::Render::Text::DocView::ParseHtml(
+        Scaleform::Render::Text::DocView *this,
+        const char *putf8Str,
+        unsigned __int64 utf8Len,
+        bool condenseWhite,
+        Scaleform::ArrayDH<Scaleform::Render::Text::StyledText::HTMLImageTagInfo,2,Scaleform::ArrayDefaultPolicy> *pimgInfoArr,
+        Scaleform::Render::Text::StyleManagerBase *pstyleMgr,
+        Scaleform::Render::Text::TextFormat *txtFmt,
+        Scaleform::Render::Text::ParagraphFormat *paraFmt)
 {
-  Scaleform::Render::Text::DocView *v8; // rsi
-  bool v9; // bp
-  unsigned __int64 v10; // rbx
-  const char *v11; // rdi
-
-  v8 = this;
-  v9 = condenseWhite;
-  v10 = utf8Len;
-  v11 = putf8Str;
-  Scaleform::Render::Text::StyledText::Clear((Scaleform::Render::Text::StyledText *)&this->pDocument.pObject->vfptr);
-  if ( v10 == -1i64 )
-  {
-    do
-      ++v10;
-    while ( v11[v10] );
-  }
-  Scaleform::Render::Text::StyledText::ParseHtml(
-    (Scaleform::Render::Text::StyledText *)&v8->pDocument.pObject->vfptr,
-    v11,
-    v10,
-    pimgInfoArr,
-    ((unsigned __int8)v8->Flags >> 2) & 1,
-    v9,
-    pstyleMgr,
-    txtFmt,
-    paraFmt);
-  v8->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v8->vfptr, 262u);
-}
-
-// File Line: 478
-// RVA: 0x99E650
-void __fastcall Scaleform::Render::Text::DocView::ParseHtml(Scaleform::Render::Text::DocView *this, const wchar_t *pwStr, unsigned __int64 strLen, bool condenseWhite, Scaleform::ArrayDH<Scaleform::Render::Text::StyledText::HTMLImageTagInfo,2,Scaleform::ArrayDefaultPolicy> *pimgInfoArr, Scaleform::Render::Text::StyleManagerBase *pstyleMgr, Scaleform::Render::Text::TextFormat *txtFmt, Scaleform::Render::Text::ParagraphFormat *paraFmt)
-{
-  Scaleform::Render::Text::DocView *v8; // rsi
-  unsigned __int64 v9; // rbx
-  const wchar_t *v10; // rdi
-  bool multiline; // ST20_1
-
-  v8 = this;
-  v9 = strLen;
-  v10 = pwStr;
-  Scaleform::Render::Text::StyledText::Clear((Scaleform::Render::Text::StyledText *)&this->pDocument.pObject->vfptr);
-  if ( v9 == -1i64 )
-  {
-    do
-      ++v9;
-    while ( v10[v9] );
-  }
-  multiline = ((unsigned __int8)v8->Flags >> 2) & 1;
-  Scaleform::Render::Text::StyledText::ParseHtmlImpl<wchar_t>(
-    (Scaleform::Render::Text::StyledText *)&v8->pDocument.pObject->vfptr,
-    v10,
-    v9,
-    pimgInfoArr);
-  v8->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v8->vfptr, 262u);
-}
-
-// File Line: 499
-// RVA: 0x959D20
-void __fastcall Scaleform::Render::Text::DocView::AppendText(Scaleform::Render::Text::DocView *this, const char *putf8Str, unsigned __int64 utf8Len)
-{
-  Scaleform::Render::Text::DocView *v3; // rbx
-  unsigned __int64 v4; // rsi
-  const char *v5; // rbp
-  unsigned __int64 v6; // rax
-  Scaleform::Render::Text::ParagraphFormat *ppdestParaFmt; // [rsp+40h] [rbp+8h]
-  Scaleform::Render::Text::TextFormat *ppdestTextFmt; // [rsp+58h] [rbp+20h]
-
-  v3 = this;
-  v4 = utf8Len;
-  v5 = putf8Str;
-  v6 = Scaleform::Render::Text::StyledText::GetLength((Scaleform::Render::Text::StyledText *)&this->pDocument.pObject->vfptr);
-  if ( v6
-    && Scaleform::Render::Text::StyledText::GetTextAndParagraphFormat(
-         (Scaleform::Render::Text::StyledText *)&v3->pDocument.pObject->vfptr,
-         &ppdestTextFmt,
-         &ppdestParaFmt,
-         v6 - 1) )
-  {
-    Scaleform::Render::Text::StyledText::AppendString(
-      (Scaleform::Render::Text::StyledText *)&v3->pDocument.pObject->vfptr,
-      v5,
-      v4,
-      (Scaleform::Render::Text::StyledText::NewLinePolicy)(~((unsigned __int8)v3->RTFlags >> 3) & 1),
-      ppdestTextFmt,
-      ppdestParaFmt);
-  }
-  else
-  {
-    Scaleform::Render::Text::StyledText::AppendString(
-      (Scaleform::Render::Text::StyledText *)&v3->pDocument.pObject->vfptr,
-      v5,
-      v4,
-      (Scaleform::Render::Text::StyledText::NewLinePolicy)(~((unsigned __int8)v3->RTFlags >> 3) & 1),
-      v3->pDocument.pObject->pDefaultTextFormat.pObject,
-      v3->pDocument.pObject->pDefaultParagraphFormat.pObject);
-  }
-  v3->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v3->vfptr, 6u);
-}
-
-// File Line: 519
-// RVA: 0x958F90
-void __fastcall Scaleform::Render::Text::DocView::AppendHtml(Scaleform::Render::Text::DocView *this, const char *putf8Str, unsigned __int64 utf8Len, bool condenseWhite, Scaleform::ArrayDH<Scaleform::Render::Text::StyledText::HTMLImageTagInfo,2,Scaleform::ArrayDefaultPolicy> *pimgInfoArr)
-{
-  Scaleform::Render::Text::DocView *v5; // rbx
-
-  v5 = this;
+  Scaleform::Render::Text::StyledText::Clear(this->pDocument.pObject);
   if ( utf8Len == -1i64 )
   {
     do
@@ -1088,83 +952,168 @@ void __fastcall Scaleform::Render::Text::DocView::AppendHtml(Scaleform::Render::
     while ( putf8Str[utf8Len] );
   }
   Scaleform::Render::Text::StyledText::ParseHtml(
-    (Scaleform::Render::Text::StyledText *)&this->pDocument.pObject->vfptr,
+    this->pDocument.pObject,
     putf8Str,
     utf8Len,
     pimgInfoArr,
-    ((unsigned __int8)this->Flags >> 2) & 1,
+    (this->Flags & 4) != 0,
+    condenseWhite,
+    pstyleMgr,
+    txtFmt,
+    paraFmt);
+  this->vfptr[1].__vecDelDtor(this, 262u);
+}
+
+// File Line: 478
+// RVA: 0x99E650
+void __fastcall Scaleform::Render::Text::DocView::ParseHtml(
+        Scaleform::Render::Text::DocView *this,
+        const wchar_t *pwStr,
+        unsigned __int64 strLen,
+        bool condenseWhite,
+        Scaleform::ArrayDH<Scaleform::Render::Text::StyledText::HTMLImageTagInfo,2,Scaleform::ArrayDefaultPolicy> *pimgInfoArr,
+        Scaleform::Render::Text::StyleManagerBase *pstyleMgr,
+        Scaleform::Render::Text::TextFormat *txtFmt,
+        Scaleform::Render::Text::ParagraphFormat *paraFmt)
+{
+  Scaleform::Render::Text::StyledText::Clear(this->pDocument.pObject);
+  if ( strLen == -1i64 )
+  {
+    do
+      ++strLen;
+    while ( pwStr[strLen] );
+  }
+  Scaleform::Render::Text::StyledText::ParseHtmlImpl<wchar_t>(this->pDocument.pObject, pwStr, strLen, pimgInfoArr);
+  this->vfptr[1].__vecDelDtor(this, 262u);
+}
+
+// File Line: 499
+// RVA: 0x959D20
+void __fastcall Scaleform::Render::Text::DocView::AppendText(
+        Scaleform::Render::Text::DocView *this,
+        char *putf8Str,
+        unsigned __int64 utf8Len)
+{
+  unsigned __int64 Length; // rax
+  Scaleform::Render::Text::ParagraphFormat *ppdestParaFmt; // [rsp+40h] [rbp+8h] BYREF
+  Scaleform::Render::Text::TextFormat *ppdestTextFmt; // [rsp+58h] [rbp+20h] BYREF
+
+  Length = Scaleform::Render::Text::StyledText::GetLength(this->pDocument.pObject);
+  if ( Length
+    && Scaleform::Render::Text::StyledText::GetTextAndParagraphFormat(
+         this->pDocument.pObject,
+         &ppdestTextFmt,
+         &ppdestParaFmt,
+         Length - 1) )
+  {
+    Scaleform::Render::Text::StyledText::AppendString(
+      this->pDocument.pObject,
+      putf8Str,
+      utf8Len,
+      (Scaleform::Render::Text::StyledText::NewLinePolicy)((this->RTFlags & 8) == 0),
+      ppdestTextFmt,
+      ppdestParaFmt);
+  }
+  else
+  {
+    Scaleform::Render::Text::StyledText::AppendString(
+      this->pDocument.pObject,
+      putf8Str,
+      utf8Len,
+      (Scaleform::Render::Text::StyledText::NewLinePolicy)((this->RTFlags & 8) == 0),
+      this->pDocument.pObject->pDefaultTextFormat.pObject,
+      this->pDocument.pObject->pDefaultParagraphFormat.pObject);
+  }
+  this->vfptr[1].__vecDelDtor(this, 6u);
+}
+
+// File Line: 519
+// RVA: 0x958F90
+void __fastcall Scaleform::Render::Text::DocView::AppendHtml(
+        Scaleform::Render::Text::DocView *this,
+        const char *putf8Str,
+        unsigned __int64 utf8Len,
+        bool condenseWhite,
+        Scaleform::ArrayDH<Scaleform::Render::Text::StyledText::HTMLImageTagInfo,2,Scaleform::ArrayDefaultPolicy> *pimgInfoArr)
+{
+  if ( utf8Len == -1i64 )
+  {
+    do
+      ++utf8Len;
+    while ( putf8Str[utf8Len] );
+  }
+  Scaleform::Render::Text::StyledText::ParseHtml(
+    this->pDocument.pObject,
+    putf8Str,
+    utf8Len,
+    pimgInfoArr,
+    (this->Flags & 4) != 0,
     condenseWhite,
     0i64,
     0i64,
     0i64);
-  v5->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v5->vfptr, 6u);
+  this->vfptr[1].__vecDelDtor(this, 6u);
 }
 
 // File Line: 532
 // RVA: 0x9AA880
-__int64 __fastcall Scaleform::Render::Text::DocView::ReplaceText(Scaleform::Render::Text::DocView *this, const wchar_t *pstr, unsigned __int64 startPos, unsigned __int64 endPos, unsigned __int64 strLen)
+__int64 __fastcall Scaleform::Render::Text::DocView::ReplaceText(
+        Scaleform::Render::Text::DocView *this,
+        const wchar_t *pstr,
+        unsigned __int64 startPos,
+        unsigned __int64 endPos,
+        unsigned __int64 strLen)
 {
-  unsigned __int64 v5; // rbx
-  const wchar_t *v6; // rsi
-  Scaleform::Render::Text::DocView *v7; // rdi
   unsigned __int64 v8; // r9
 
-  v5 = startPos;
-  v6 = pstr;
-  v7 = this;
   if ( endPos < startPos )
     v8 = 0i64;
   else
     v8 = endPos - startPos;
-  Scaleform::Render::Text::StyledText::Remove(
-    (Scaleform::Render::Text::StyledText *)&this->pDocument.pObject->vfptr,
-    startPos,
-    v8);
+  Scaleform::Render::Text::StyledText::Remove(this->pDocument.pObject, startPos, v8);
   return Scaleform::Render::Text::StyledText::InsertString(
-           (Scaleform::Render::Text::StyledText *)&v7->pDocument.pObject->vfptr,
-           v6,
-           v5,
+           this->pDocument.pObject,
+           pstr,
+           startPos,
            strLen,
            NLP_ReplaceCRLF,
-           v7->pDocument.pObject->pDefaultTextFormat.pObject,
-           v7->pDocument.pObject->pDefaultParagraphFormat.pObject);
+           this->pDocument.pObject->pDefaultTextFormat.pObject,
+           this->pDocument.pObject->pDefaultParagraphFormat.pObject);
 }
 
 // File Line: 540
 // RVA: 0x9611E0
 void __fastcall Scaleform::Render::Text::DocView::Close(Scaleform::Render::Text::DocView *this)
 {
-  Scaleform::Render::Text::DocView *v1; // rbx
-  Scaleform::Render::Text::DocView::DocumentText *v2; // rcx
+  Scaleform::Render::Text::DocView::DocumentText *pObject; // rcx
   bool v3; // zf
   Scaleform::Render::Text::DocView::DocumentListener *v4; // rcx
   Scaleform::Render::Text::EditorKitBase *v5; // rcx
 
-  v1 = this;
-  v2 = this->pDocument.pObject;
-  if ( v2 )
+  pObject = this->pDocument.pObject;
+  if ( pObject )
   {
-    v3 = v2->RefCount-- == 1;
+    v3 = pObject->RefCount-- == 1;
     if ( v3 )
-      v2->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v2->vfptr, 1u);
-    v1->pDocument.pObject = 0i64;
-    v4 = v1->pDocumentListener.pObject;
+      pObject->vfptr->__vecDelDtor(pObject, 1u);
+    this->pDocument.pObject = 0i64;
+    v4 = this->pDocumentListener.pObject;
     if ( v4 )
     {
       v3 = v4->RefCount-- == 1;
       if ( v3 )
-        v4->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v4->vfptr, 1u);
+        v4->vfptr->__vecDelDtor(v4, 1u);
     }
-    v1->pDocumentListener.pObject = 0i64;
-    v5 = v1->pEditorKit.pObject;
-    if ( v5 && !_InterlockedDecrement(&v5->RefCount) )
+    this->pDocumentListener.pObject = 0i64;
+    v5 = this->pEditorKit.pObject;
+    if ( v5 )
     {
-      if ( v5 )
-        v5->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v5->vfptr, 1u);
+      if ( !_InterlockedDecrement(&v5->RefCount) )
+        v5->vfptr->__vecDelDtor(v5, 1u);
     }
-    v1->pEditorKit.pObject = 0i64;
-    v1->mLineBuffer.Geom.Flags |= 1u;
-    Scaleform::Render::Text::LineBuffer::RemoveLines(&v1->mLineBuffer, 0, v1->mLineBuffer.Lines.Data.Size);
+    this->pEditorKit.pObject = 0i64;
+    this->mLineBuffer.Geom.Flags |= 1u;
+    Scaleform::Render::Text::LineBuffer::RemoveLines(&this->mLineBuffer, 0, this->mLineBuffer.Lines.Data.Size);
   }
 }
 
@@ -1172,32 +1121,19 @@ void __fastcall Scaleform::Render::Text::DocView::Close(Scaleform::Render::Text:
 // RVA: 0x962AB0
 char __fastcall Scaleform::Render::Text::DocView::ContainsNonLeftAlignment(Scaleform::Render::Text::DocView *this)
 {
-  Scaleform::Render::Text::DocView::DocumentText *v1; // r8
-  unsigned int v2; // eax
-  unsigned int v3; // er9
-  __int64 v4; // rdx
-  Scaleform::Render::Text::Paragraph *v5; // rcx
+  Scaleform::Render::Text::DocView::DocumentText *pObject; // r8
+  int v2; // eax
+  unsigned int Size; // r9d
+  __int64 i; // rdx
 
-  v1 = this->pDocument.pObject;
+  pObject = this->pDocument.pObject;
   v2 = 0;
-  v3 = v1->Paragraphs.Data.Size;
-  if ( !v3 )
+  Size = pObject->Paragraphs.Data.Size;
+  if ( !Size )
     return 0;
-  v4 = 0i64;
-  if ( v3 <= 0 )
+  for ( i = 0i64; (pObject->Paragraphs.Data.Data[i].pPara->pFormat.pObject->PresentMask & 0x600) == 0; ++i )
   {
-    v5 = 0i64;
-    goto LABEL_5;
-  }
-  while ( 1 )
-  {
-    v5 = v1->Paragraphs.Data.Data[v4].pPara;
-LABEL_5:
-    if ( v5->pFormat.pObject->PresentMask & 0x600 )
-      break;
-    ++v2;
-    ++v4;
-    if ( v2 >= v3 )
+    if ( ++v2 >= Size )
       return 0;
   }
   return 1;
@@ -1205,83 +1141,84 @@ LABEL_5:
 
 // File Line: 564
 // RVA: 0x9B5A70
-void __fastcall Scaleform::Render::Text::DocView::SetViewRect(Scaleform::Render::Text::DocView *this, Scaleform::Render::Rect<float> *rect, Scaleform::Render::Text::DocView::UseType ut)
+void __fastcall Scaleform::Render::Text::DocView::SetViewRect(
+        Scaleform::Render::Text::DocView *this,
+        Scaleform::Render::Rect<float> *rect,
+        Scaleform::Render::Text::DocView::UseType ut)
 {
-  float v3; // xmm2_4
-  Scaleform::Render::Text::DocView *v4; // rbx
-  float v5; // xmm4_4
-  float v6; // xmm3_4
+  float x1; // xmm2_4
+  float y2; // xmm4_4
+  float x2; // xmm3_4
   float v7; // xmm0_4
-  float v8; // xmm2_4
+  float y1; // xmm2_4
   unsigned int v9; // ecx
   float v10; // xmm0_4
-  char v11; // di
+  char AlignProps; // di
   unsigned int v12; // eax
   unsigned int v13; // esi
-  unsigned int v14; // eax
-  unsigned int v15; // edi
+  unsigned int MaxHScroll; // eax
+  unsigned int MaxVScroll; // edi
   unsigned int v16; // eax
-  Scaleform::Render::Text::DocView::DocumentListener *v17; // rcx
+  Scaleform::Render::Text::DocView::DocumentListener *pObject; // rcx
 
-  v3 = this->ViewRect.x1;
-  v4 = this;
-  if ( rect->x1 != v3 || this->ViewRect.x2 != rect->x2 || this->ViewRect.y1 != rect->y1 || this->ViewRect.y2 != rect->y2 )
+  x1 = this->ViewRect.x1;
+  if ( rect->x1 != x1 || this->ViewRect.x2 != rect->x2 || this->ViewRect.y1 != rect->y1 || this->ViewRect.y2 != rect->y2 )
   {
-    v5 = rect->y2;
-    v6 = rect->x2;
-    v7 = this->ViewRect.x2 - v3;
-    v8 = rect->y1;
-    v9 = (signed int)v7;
-    v10 = v4->ViewRect.y2 - v4->ViewRect.y1;
-    v4->ViewRect.x1 = rect->x1;
-    v4->ViewRect.y1 = v8;
-    v4->ViewRect.x2 = v6;
-    v4->ViewRect.y2 = v5;
-    v4->mLineBuffer.Geom.VisibleRect.x1 = v4->ViewRect.x1 + 40.0;
-    v4->mLineBuffer.Geom.VisibleRect.y1 = v8 + 40.0;
-    v4->mLineBuffer.Geom.VisibleRect.x2 = v6 - 40.0;
-    v4->mLineBuffer.Geom.VisibleRect.y2 = v5 - 40.0;
-    if ( ut == 1 )
+    y2 = rect->y2;
+    x2 = rect->x2;
+    v7 = this->ViewRect.x2 - x1;
+    y1 = rect->y1;
+    v9 = (int)v7;
+    v10 = this->ViewRect.y2 - this->ViewRect.y1;
+    this->ViewRect.x1 = rect->x1;
+    this->ViewRect.y1 = y1;
+    this->ViewRect.x2 = x2;
+    this->ViewRect.y2 = y2;
+    this->mLineBuffer.Geom.VisibleRect.x1 = this->ViewRect.x1 + 40.0;
+    this->mLineBuffer.Geom.VisibleRect.y1 = y1 + 40.0;
+    this->mLineBuffer.Geom.VisibleRect.x2 = x2 - 40.0;
+    this->mLineBuffer.Geom.VisibleRect.y2 = y2 - 40.0;
+    if ( ut == UseExternally )
     {
-      v11 = v4->AlignProps;
-      v12 = (signed int)(float)(v4->ViewRect.x2 - v4->ViewRect.x1);
-      v13 = (signed int)(float)(v4->ViewRect.y2 - v4->ViewRect.y1);
-      if ( v11 & 0x30
+      AlignProps = this->AlignProps;
+      v12 = (int)(float)(this->ViewRect.x2 - this->ViewRect.x1);
+      v13 = (int)(float)(this->ViewRect.y2 - this->ViewRect.y1);
+      if ( (AlignProps & 0x30) != 0
         || v9 != v12
-        && (v4->Flags & 8
-         || v12 < v9 && v4->mLineBuffer.Geom.Flags & 0x20
-         || v11 & 3
-         || Scaleform::Render::Text::DocView::ContainsNonLeftAlignment(v4))
-        || v13 < (signed int)v10 && v4->mLineBuffer.Geom.Flags & 0x20
-        || (v11 & 0xCu) > 4 )
+        && ((this->Flags & 8) != 0
+         || v12 < v9 && (this->mLineBuffer.Geom.Flags & 0x20) != 0
+         || (AlignProps & 3) != 0
+         || Scaleform::Render::Text::DocView::ContainsNonLeftAlignment(this))
+        || v13 < (int)v10 && (this->mLineBuffer.Geom.Flags & 0x20) != 0
+        || (AlignProps & 0xCu) > 4 )
       {
-        v4->RTFlags |= 2u;
+        this->RTFlags |= 2u;
       }
       else
       {
-        ++v4->FormatCounter;
-        v14 = Scaleform::Render::Text::DocView::GetMaxHScroll(v4);
-        if ( v4->mLineBuffer.Geom.HScrollOffset > v14 )
-          Scaleform::Render::Text::DocView::SetHScrollOffset(v4, v14);
-        v15 = Scaleform::Render::Text::DocView::GetMaxVScroll(v4);
-        if ( v4->mLineBuffer.Geom.FirstVisibleLinePos > v15 )
+        ++this->FormatCounter;
+        MaxHScroll = Scaleform::Render::Text::DocView::GetMaxHScroll(this);
+        if ( this->mLineBuffer.Geom.HScrollOffset > MaxHScroll )
+          Scaleform::Render::Text::DocView::SetHScrollOffset(this, MaxHScroll);
+        MaxVScroll = Scaleform::Render::Text::DocView::GetMaxVScroll(this);
+        if ( this->mLineBuffer.Geom.FirstVisibleLinePos > MaxVScroll )
         {
-          v16 = Scaleform::Render::Text::DocView::GetMaxVScroll(v4);
-          if ( v15 > v16 )
-            v15 = v16;
-          if ( v4->mLineBuffer.Geom.FirstVisibleLinePos != v15 )
+          v16 = Scaleform::Render::Text::DocView::GetMaxVScroll(this);
+          if ( MaxVScroll > v16 )
+            MaxVScroll = v16;
+          if ( this->mLineBuffer.Geom.FirstVisibleLinePos != MaxVScroll )
           {
-            v4->mLineBuffer.Geom.FirstVisibleLinePos = v15;
-            v4->mLineBuffer.Geom.Flags |= 1u;
-            v17 = v4->pDocumentListener.pObject;
-            if ( v17 )
-              ((void (__fastcall *)(Scaleform::Render::Text::DocView::DocumentListener *, Scaleform::Render::Text::DocView *, _QWORD))v17->vfptr[4].__vecDelDtor)(
-                v17,
-                v4,
-                v15);
+            this->mLineBuffer.Geom.FirstVisibleLinePos = MaxVScroll;
+            this->mLineBuffer.Geom.Flags |= 1u;
+            pObject = this->pDocumentListener.pObject;
+            if ( pObject )
+              ((void (__fastcall *)(Scaleform::Render::Text::DocView::DocumentListener *, Scaleform::Render::Text::DocView *, _QWORD))pObject->vfptr[4].__vecDelDtor)(
+                pObject,
+                this,
+                MaxVScroll);
           }
         }
-        v4->mLineBuffer.Geom.Flags |= 1u;
+        this->mLineBuffer.Geom.Flags |= 1u;
       }
     }
   }
@@ -1289,9 +1226,11 @@ void __fastcall Scaleform::Render::Text::DocView::SetViewRect(Scaleform::Render:
 
 // File Line: 619
 // RVA: 0x99CA00
-void __fastcall Scaleform::Render::Text::DocView::OnDocumentChanged(Scaleform::Render::Text::DocView *this, unsigned int notifyMask)
+void __fastcall Scaleform::Render::Text::DocView::OnDocumentChanged(
+        Scaleform::Render::Text::DocView *this,
+        __int16 notifyMask)
 {
-  if ( _bittest((const signed int *)&notifyMask, 8u) )
+  if ( (notifyMask & 0x100) != 0 )
     this->RTFlags |= 2u;
   else
     this->RTFlags |= 1u;
@@ -1299,73 +1238,76 @@ void __fastcall Scaleform::Render::Text::DocView::OnDocumentChanged(Scaleform::R
 
 // File Line: 627
 // RVA: 0x99CA20
-void __fastcall Scaleform::Render::Text::DocView::OnDocumentParagraphRemoving(Scaleform::Render::Text::DocView *this, Scaleform::Render::Text::Paragraph *para)
+void __fastcall Scaleform::Render::Text::DocView::OnDocumentParagraphRemoving(
+        Scaleform::Render::Text::DocView *this,
+        Scaleform::Render::Text::Paragraph *para)
 {
   __int64 v2; // r8
-  Scaleform::Render::Text::DocView *v3; // r10
   char v4; // bl
-  Scaleform::Render::Text::LineBuffer *v5; // r9
-  Scaleform::Render::Text::LineBuffer::Line *v6; // rcx
-  unsigned int v7; // er11
+  Scaleform::Render::Text::LineBuffer *p_mLineBuffer; // r9
+  int *v6; // rcx
+  int v7; // r11d
 
   v2 = 0i64;
-  v3 = this;
   v4 = 0;
-  v5 = &this->mLineBuffer;
-  while ( v5 && (unsigned int)v2 < v5->Lines.Data.Size && (signed int)v2 >= 0 )
+  p_mLineBuffer = &this->mLineBuffer;
+  while ( p_mLineBuffer && (unsigned int)v2 < p_mLineBuffer->Lines.Data.Size && (int)v2 >= 0 )
   {
-    v6 = v5->Lines.Data.Data[v2];
-    if ( (v6->MemSize & 0x80000000) == 0 )
-      v7 = v6->Data32.ParagraphId;
+    v6 = (int *)p_mLineBuffer->Lines.Data.Data[v2];
+    if ( *v6 >= 0 )
+      v7 = v6[7];
     else
-      v7 = v6->Data32.GlyphsCount;
+      v7 = v6[1];
     if ( para->UniqueId == v7 )
     {
       v4 = 1;
-      if ( (v6->MemSize & 0x80000000) == 0 )
-        v6->Data32.TextPos = -1;
+      if ( *v6 >= 0 )
+        v6[2] = -1;
       else
-        v6->Data32.TextPos |= 0xFFFFFFu;
+        v6[2] |= 0xFFFFFFu;
     }
     else if ( v4 )
     {
       break;
     }
-    if ( (unsigned int)v2 < v5->Lines.Data.Size )
+    if ( (unsigned int)v2 < p_mLineBuffer->Lines.Data.Size )
       v2 = (unsigned int)(v2 + 1);
   }
-  v3->RTFlags |= 1u;
+  this->RTFlags |= 1u;
 }
 
 // File Line: 645
 // RVA: 0x979820
-Scaleform::Render::Text::FontHandle *__fastcall Scaleform::Render::Text::DocView::FindFont(Scaleform::Render::Text::DocView *this, Scaleform::Render::Text::DocView::FindFontInfo *pfontInfo, bool quietMode)
+Scaleform::Render::Text::FontHandle *__fastcall Scaleform::Render::Text::DocView::FindFont(
+        Scaleform::Render::Text::DocView *this,
+        Scaleform::Render::Text::DocView::FindFontInfo *pfontInfo,
+        bool quietMode)
 {
   Scaleform::Render::Text::DocView::FindFontInfo *v3; // r15
   Scaleform::Render::Text::DocView *v4; // rdi
-  Scaleform::Ptr<Scaleform::Render::Text::FontHandle> *v5; // r12
-  Scaleform::Render::Text::TextFormat *v6; // rdx
-  Scaleform::Render::Text::TextFormat **v7; // r13
-  Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >::NodeHashF,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >::NodeAltHashF,Scaleform::AllocatorDH<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >,74>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >::NodeHashF> > *v8; // rcx
+  Scaleform::Ptr<Scaleform::Render::Text::FontHandle> *p_pCurrentFont; // r12
+  Scaleform::Render::Text::TextFormat *pPrevFormat; // rdx
+  Scaleform::Render::Text::TextFormat **p_pCurrentFormat; // r13
+  Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >::NodeHashF,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >::NodeAltHashF,Scaleform::AllocatorDH<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >,74>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >::NodeHashF> > *p_mHash; // rcx
   Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >::NodeHashF,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >::NodeAltHashF,Scaleform::AllocatorDH<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >,74>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >::NodeHashF> > v9; // rbx
-  signed __int64 v10; // rax
-  signed __int64 v11; // rsi
-  signed __int64 v12; // rsi
+  __int64 v10; // rax
+  unsigned __int64 *v11; // rsi
+  Scaleform::Render::Text::FontHandle **v12; // rsi
   Scaleform::Ptr<Scaleform::Render::Text::FontHandle> v13; // rcx
-  Scaleform::Render::Text::TextFormat *v14; // rdx
-  unsigned __int16 v15; // cx
-  Scaleform::Render::RenderBuffer *v16; // rax
+  Scaleform::Render::Text::TextFormat *pCurrentFormat; // rdx
+  unsigned __int16 PresentMask; // cx
+  Scaleform::Render::RenderBuffer *FontHandle; // rax
   __int64 v17; // rdi
   __int16 v18; // cx
-  char v19; // r14
+  bool v19; // r14
   char v20; // si
   char v21; // di
-  Scaleform::StringDH *v22; // rax
+  Scaleform::StringDH *FontList; // rax
   __int64 v23; // r9
   __int64 v24; // rdi
   Scaleform::Render::Text::FontHandle *v25; // rcx
   __int16 v26; // r15
-  char v27; // r14
+  bool v27; // r14
   char v28; // si
   char v29; // di
   Scaleform::StringDH *v30; // rax
@@ -1374,17 +1316,17 @@ Scaleform::Render::Text::FontHandle *__fastcall Scaleform::Render::Text::DocView
   Scaleform::Render::Text::DocView::DocumentListener *v33; // rcx
   Scaleform::String *v34; // rax
   char v35; // di
-  char *v36; // rsi
-  volatile signed __int32 *v37; // rdi
+  const char *v36; // rsi
+  unsigned __int64 v37; // rdi
   Scaleform::StringDH *v38; // rax
   Scaleform::Render::Text::FontHandle *v39; // rcx
   Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >::NodeHashF,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >::NodeAltHashF,Scaleform::AllocatorDH<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >,74>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >::NodeHashF> > *v40; // rcx
-  Scaleform::Render::Text::FontManagerBase *v42; // [rsp+38h] [rbp-61h]
-  Scaleform::String v43; // [rsp+40h] [rbp-59h]
-  __int64 v44; // [rsp+48h] [rbp-51h]
-  Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >::NodeRef key; // [rsp+50h] [rbp-49h]
-  int v46; // [rsp+60h] [rbp-39h]
-  char *v47; // [rsp+68h] [rbp-31h]
+  Scaleform::Render::Text::FontManagerBase *pObject; // [rsp+38h] [rbp-61h]
+  Scaleform::String v43; // [rsp+40h] [rbp-59h] BYREF
+  __int64 v44; // [rsp+48h] [rbp-51h] BYREF
+  Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >::NodeRef key; // [rsp+50h] [rbp-49h] BYREF
+  int v46; // [rsp+60h] [rbp-39h] BYREF
+  const char *v47; // [rsp+68h] [rbp-31h]
   __int64 v48; // [rsp+70h] [rbp-29h]
   __int64 v49; // [rsp+78h] [rbp-21h]
   __int64 v50; // [rsp+80h] [rbp-19h]
@@ -1392,99 +1334,93 @@ Scaleform::Render::Text::FontHandle *__fastcall Scaleform::Render::Text::DocView
   Scaleform::MemoryHeap *v52; // [rsp+90h] [rbp-9h]
   __int64 v53; // [rsp+98h] [rbp-1h]
   __int64 v54; // [rsp+A0h] [rbp+7h]
-  Scaleform::Render::Text::DocView *v55; // [rsp+100h] [rbp+67h]
-  Scaleform::Render::Text::DocView::FindFontInfo *v56; // [rsp+108h] [rbp+6Fh]
-  bool v57; // [rsp+110h] [rbp+77h]
-  unsigned __int64 v58; // [rsp+118h] [rbp+7Fh]
+  unsigned __int64 v58; // [rsp+118h] [rbp+7Fh] BYREF
 
-  v57 = quietMode;
-  v56 = pfontInfo;
-  v55 = this;
   v54 = -2i64;
   v3 = pfontInfo;
   v4 = this;
-  v5 = &pfontInfo->pCurrentFont;
+  p_pCurrentFont = &pfontInfo->pCurrentFont;
   if ( pfontInfo->pCurrentFont.pObject )
   {
-    v6 = pfontInfo->pPrevFormat;
-    if ( v6 )
+    pPrevFormat = pfontInfo->pPrevFormat;
+    if ( pPrevFormat )
     {
-      v7 = &v3->pCurrentFormat;
-      if ( Scaleform::Render::Text::TextFormat::IsFontSame(v3->pCurrentFormat, v6) )
+      p_pCurrentFormat = &v3->pCurrentFormat;
+      if ( Scaleform::Render::Text::TextFormat::IsFontSame(v3->pCurrentFormat, pPrevFormat) )
         goto LABEL_57;
     }
   }
-  v8 = (Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >::NodeHashF,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >::NodeAltHashF,Scaleform::AllocatorDH<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >,74>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextF)&v3->pFontCache->mHash.pTable;
+  p_mHash = &v3->pFontCache->mHash;
   if ( v3->pFontCache )
   {
-    v7 = &v3->pCurrentFormat;
-    v9.pTable = v8->pTable;
-    if ( v8->pTable )
+    p_pCurrentFormat = &v3->pCurrentFormat;
+    v9.pTable = p_mHash->pTable;
+    if ( p_mHash->pTable )
     {
       v10 = Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>::NodeHashF,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>::NodeAltHashF,Scaleform::AllocatorDH<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>,74>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>::NodeHashF>>::findIndexCore<Scaleform::Render::Text::TextFormat const *>(
-              v8,
+              p_mHash,
               &v3->pCurrentFormat,
-              (unsigned __int64)*v7 & v9.pTable->SizeMask);
+              (unsigned __int64)*p_pCurrentFormat & v9.pTable->SizeMask);
       if ( v10 >= 0 )
       {
-        v11 = (signed __int64)v9.pTable + 8 * (3 * v10 + 3);
+        v11 = &v9.pTable[1].SizeMask + 3 * v10;
         if ( v11 )
         {
-          v12 = v11 + 8;
+          v12 = (Scaleform::Render::Text::FontHandle **)(v11 + 1);
           if ( v12 )
           {
-            if ( *(_QWORD *)v12 )
-              _InterlockedExchangeAdd((volatile signed __int32 *)(*(_QWORD *)v12 + 8i64), 1u);
-            v13.pObject = v5->pObject;
-            if ( v5->pObject && !_InterlockedDecrement(&v13.pObject->RefCount) && v13.pObject )
-              ((void (__fastcall *)(Scaleform::Ptr<Scaleform::Render::Text::FontHandle>, signed __int64))v13.pObject->vfptr->__vecDelDtor)(
+            if ( *v12 )
+              _InterlockedExchangeAdd(&(*v12)->RefCount, 1u);
+            v13.pObject = p_pCurrentFont->pObject;
+            if ( p_pCurrentFont->pObject && !_InterlockedDecrement(&v13.pObject->RefCount) && v13.pObject )
+              ((void (__fastcall *)(Scaleform::Ptr<Scaleform::Render::Text::FontHandle>, __int64))v13.pObject->vfptr->__vecDelDtor)(
                 v13,
                 1i64);
-            v5->pObject = *(Scaleform::Render::Text::FontHandle **)v12;
+            p_pCurrentFont->pObject = *v12;
             goto LABEL_57;
           }
         }
       }
     }
   }
-  v7 = &v3->pCurrentFormat;
-  v14 = v3->pCurrentFormat;
-  v15 = v14->PresentMask;
-  if ( (v15 >> 11) & 1 )
+  p_pCurrentFormat = &v3->pCurrentFormat;
+  pCurrentFormat = v3->pCurrentFormat;
+  PresentMask = pCurrentFormat->PresentMask;
+  if ( (PresentMask & 0x800) != 0 )
   {
-    v16 = Scaleform::Render::Text::TextFormat::GetFontHandle(v3->pCurrentFormat);
-    v17 = (__int64)v16;
-    if ( v16 )
-      _InterlockedExchangeAdd(&v16->RefCount, 1u);
+    FontHandle = Scaleform::Render::Text::TextFormat::GetFontHandle(v3->pCurrentFormat);
+    v17 = (__int64)FontHandle;
+    if ( FontHandle )
+      _InterlockedExchangeAdd(&FontHandle->RefCount, 1u);
   }
   else
   {
-    v42 = v4->pFontManager.pObject;
-    if ( ((unsigned __int8)v15 >> 2) & 1 )
+    pObject = v4->pFontManager.pObject;
+    if ( (PresentMask & 4) != 0 )
     {
-      v18 = v15 >> 12;
+      v18 = PresentMask >> 12;
       LOBYTE(v18) = v18 & 1;
       LOWORD(v58) = v18;
-      v19 = ((unsigned __int8)v4->Flags >> 5) & 1;
-      v20 = (unsigned __int8)v14->FormatFlags >> 1;
-      v21 = v14->FormatFlags & 1;
-      v22 = Scaleform::Render::Text::TextFormat::GetFontList(v14);
+      v19 = (v4->Flags & 0x20) != 0;
+      v20 = (unsigned __int8)pCurrentFormat->FormatFlags >> 1;
+      v21 = pCurrentFormat->FormatFlags & 1;
+      FontList = Scaleform::Render::Text::TextFormat::GetFontList(pCurrentFormat);
       LOBYTE(v23) = (_BYTE)v58 == 0;
-      v24 = ((__int64 (__fastcall *)(Scaleform::Render::Text::FontManagerBase *, unsigned __int64, _QWORD, __int64, _QWORD))v42->vfptr[1].__vecDelDtor)(
-              v42,
-              (v22->HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12,
-              (v19 != 0 ? 0x10 : 0) | ((v20 & 1) != 0) | (v21 != 0 ? 2 : 0),
+      v24 = ((__int64 (__fastcall *)(Scaleform::Render::Text::FontManagerBase *, unsigned __int64, _QWORD, __int64, _QWORD))pObject->vfptr[1].__vecDelDtor)(
+              pObject,
+              (FontList->HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12,
+              (v19 ? 0x10 : 0) | ((v20 & 1) != 0) | (v21 != 0 ? 2 : 0),
               v23,
               0i64);
-      v25 = v5->pObject;
-      if ( v5->pObject && !_InterlockedDecrement(&v25->RefCount) && v25 )
-        v25->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v25->vfptr, 1u);
-      v5->pObject = (Scaleform::Render::Text::FontHandle *)v24;
-      v4 = v55;
+      v25 = p_pCurrentFont->pObject;
+      if ( p_pCurrentFont->pObject && !_InterlockedDecrement(&v25->RefCount) && v25 )
+        v25->vfptr->__vecDelDtor(v25, 1u);
+      p_pCurrentFont->pObject = (Scaleform::Render::Text::FontHandle *)v24;
+      v4 = this;
     }
-    if ( v5->pObject )
+    if ( p_pCurrentFont->pObject )
       goto LABEL_55;
-    if ( !v57 && !(v4->RTFlags & 0x10) && v4->pLog.pObject )
+    if ( !quietMode && (v4->RTFlags & 0x10) == 0 && v4->pLog.pObject )
     {
       v46 = 1;
       v47 = 0i64;
@@ -1493,25 +1429,23 @@ Scaleform::Render::Text::FontHandle *__fastcall Scaleform::Render::Text::DocView
       v50 = 512i64;
       v51 = 0;
       v52 = Scaleform::Memory::pGlobalHeap;
-      v26 = (*v7)->PresentMask >> 12;
-      v27 = ((unsigned __int8)v4->Flags >> 5) & 1;
-      v28 = (unsigned __int8)(*v7)->FormatFlags >> 1;
-      v29 = (*v7)->FormatFlags & 1;
-      v30 = Scaleform::Render::Text::TextFormat::GetFontList(*v7);
+      v26 = (*p_pCurrentFormat)->PresentMask >> 12;
+      v27 = (v4->Flags & 0x20) != 0;
+      v28 = (unsigned __int8)(*p_pCurrentFormat)->FormatFlags >> 1;
+      v29 = (*p_pCurrentFormat)->FormatFlags & 1;
+      v30 = Scaleform::Render::Text::TextFormat::GetFontList(*p_pCurrentFormat);
       LOBYTE(v31) = (v26 & 1) == 0;
-      v32 = ((__int64 (__fastcall *)(Scaleform::Render::Text::FontManagerBase *, unsigned __int64, _QWORD, __int64, int *))v42->vfptr[1].__vecDelDtor)(
-              v42,
+      v32 = ((__int64 (__fastcall *)(Scaleform::Render::Text::FontManagerBase *, unsigned __int64, _QWORD, __int64, int *))pObject->vfptr[1].__vecDelDtor)(
+              pObject,
               (v30->HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12,
-              (v27 != 0 ? 0x10 : 0) | ((v28 & 1) != 0) | (v29 != 0 ? 2 : 0),
+              (v27 ? 0x10 : 0) | ((v28 & 1) != 0) | (v29 != 0 ? 2 : 0),
               v31,
               &v46);
       v53 = v32;
-      v33 = v55->pDocumentListener.pObject;
+      v33 = this->pDocumentListener.pObject;
       if ( v33 )
       {
-        v34 = (Scaleform::String *)v33->vfptr[14].__vecDelDtor(
-                                     (Scaleform::RefCountNTSImplCore *)&v33->vfptr,
-                                     (unsigned int)&v44);
+        v34 = (Scaleform::String *)v33->vfptr[14].__vecDelDtor(v33, (unsigned int)&v44);
         v35 = 1;
       }
       else
@@ -1522,54 +1456,54 @@ Scaleform::Render::Text::FontHandle *__fastcall Scaleform::Render::Text::DocView
         v35 = 2;
       }
       Scaleform::String::String(&v43, v34);
-      if ( v35 & 2 )
+      if ( (v35 & 2) != 0 )
       {
         if ( !_InterlockedDecrement((volatile signed __int32 *)((v58 & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-          ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-        v35 &= 0xFDu;
+          ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+        v35 &= ~2u;
       }
-      if ( v35 & 1 && !_InterlockedDecrement((volatile signed __int32 *)((v44 & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-        ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-      v36 = &customWorldMapCaption;
+      if ( (v35 & 1) != 0 && !_InterlockedDecrement((volatile signed __int32 *)((v44 & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
+        ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+      v36 = &customCaption;
       if ( v47 )
         v36 = v47;
-      v37 = (volatile signed __int32 *)(v43.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64);
-      v38 = Scaleform::Render::Text::TextFormat::GetFontList(*v7);
+      v37 = v43.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64;
+      v38 = Scaleform::Render::Text::TextFormat::GetFontList(*p_pCurrentFormat);
       Scaleform::Log::LogError(
-        v55->pLog.pObject,
+        this->pLog.pObject,
         "Missing font \"%s\" in \"%s\". Search log:\n%s",
-        (v38->HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12,
-        v37 + 3,
+        (const char *)((v38->HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12),
+        (const char *)(v37 + 12),
         v36);
-      v55->RTFlags |= 0x10u;
-      if ( !_InterlockedDecrement(v37 + 2) )
+      this->RTFlags |= 0x10u;
+      if ( !_InterlockedDecrement((volatile signed __int32 *)(v37 + 8)) )
         Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, (void *)v37);
       if ( v32 && !_InterlockedDecrement((volatile signed __int32 *)(v32 + 8)) )
-        (**(void (__fastcall ***)(__int64, signed __int64))v32)(v32, 1i64);
+        (**(void (__fastcall ***)(__int64, __int64))v32)(v32, 1i64);
       if ( v47 )
-        ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-      v3 = v56;
+        ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+      v3 = pfontInfo;
     }
-    v17 = ((__int64 (*)(void))v42->vfptr[2].__vecDelDtor)();
+    v17 = ((__int64 (__fastcall *)(Scaleform::Render::Text::FontManagerBase *))pObject->vfptr[2].__vecDelDtor)(pObject);
   }
-  v39 = v5->pObject;
-  if ( v5->pObject && !_InterlockedDecrement(&v39->RefCount) && v39 )
-    v39->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v39->vfptr, 1u);
-  v5->pObject = (Scaleform::Render::Text::FontHandle *)v17;
+  v39 = p_pCurrentFont->pObject;
+  if ( p_pCurrentFont->pObject && !_InterlockedDecrement(&v39->RefCount) && v39 )
+    v39->vfptr->__vecDelDtor(v39, 1u);
+  p_pCurrentFont->pObject = (Scaleform::Render::Text::FontHandle *)v17;
 LABEL_55:
-  v40 = (Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >::NodeHashF,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >::NodeAltHashF,Scaleform::AllocatorDH<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >,74>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextF)&v3->pFontCache->mHash.pTable;
+  v40 = &v3->pFontCache->mHash;
   if ( v3->pFontCache )
   {
-    key.pFirst = v7;
-    key.pSecond = v5;
+    key.pFirst = p_pCurrentFormat;
+    key.pSecond = p_pCurrentFont;
     Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>::NodeHashF,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>::NodeAltHashF,Scaleform::AllocatorDH<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>,74>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>::NodeHashF>>::Set<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>::NodeRef>(
       v40,
       v40[1].pTable,
       &key);
   }
 LABEL_57:
-  v3->pPrevFormat = *v7;
-  return v5->pObject;
+  v3->pPrevFormat = *p_pCurrentFormat;
+  return p_pCurrentFont->pObject;
 }
 
 // File Line: 869
@@ -1614,11 +1548,11 @@ void __fastcall Scaleform::Render::Text::GFxLineCursor::GFxLineCursor(Scaleform:
 
 // File Line: 884
 // RVA: 0x93C160
-void __fastcall Scaleform::Render::Text::GFxLineCursor::GFxLineCursor(Scaleform::Render::Text::GFxLineCursor *this, Scaleform::Render::Text::DocView *pview, Scaleform::Render::Text::Paragraph *ppara)
+void __fastcall Scaleform::Render::Text::GFxLineCursor::GFxLineCursor(
+        Scaleform::Render::Text::GFxLineCursor *this,
+        Scaleform::Render::Text::DocView *pview,
+        Scaleform::Render::Text::Paragraph *ppara)
 {
-  Scaleform::Render::Text::GFxLineCursor *v3; // rbx
-
-  v3 = this;
   this->pPrevGrec = 0i64;
   this->pLastFont.pObject = 0i64;
   *(_QWORD *)&this->LastCharCode = 0i64;
@@ -1633,43 +1567,41 @@ void __fastcall Scaleform::Render::Text::GFxLineCursor::GFxLineCursor(Scaleform:
   *(_QWORD *)&this->LineLength = 0i64;
   *(_QWORD *)&this->MaxFontDescent = 0i64;
   Scaleform::Render::Text::Paragraph::GetCharactersIterator(ppara, &this->CharIter, 0i64);
-  v3->CharInfoHolder.pFormat.pObject = 0i64;
-  v3->CharInfoHolder.Index = 0i64;
-  v3->CharInfoHolder.Character = 0;
-  *(_QWORD *)&v3->Indent = 0i64;
-  v3->RightMargin = 0;
-  v3->GlyphIns.pGlyphs = 0i64;
-  v3->GlyphIns.pNextFormatData = 0i64;
-  *(_QWORD *)&v3->GlyphIns.GlyphIndex = 0i64;
-  v3->GlyphIns.FormatDataIndex = 0;
-  *(_QWORD *)&v3->NumOfSpaces = 0i64;
-  v3->FontScaleFactor = 1.0;
-  *(_WORD *)&v3->LastKerning = 0;
-  v3->NumChars = 0i64;
+  this->CharInfoHolder.pFormat.pObject = 0i64;
+  this->CharInfoHolder.Index = 0i64;
+  this->CharInfoHolder.Character = 0;
+  *(_QWORD *)&this->Indent = 0i64;
+  this->RightMargin = 0;
+  this->GlyphIns.pGlyphs = 0i64;
+  this->GlyphIns.pNextFormatData = 0i64;
+  *(_QWORD *)&this->GlyphIns.GlyphIndex = 0i64;
+  this->GlyphIns.FormatDataIndex = 0;
+  *(_QWORD *)&this->NumOfSpaces = 0i64;
+  this->FontScaleFactor = 1.0;
+  *(_WORD *)&this->LastKerning = 0;
+  this->NumChars = 0i64;
 }
 
 // File Line: 890
 // RVA: 0x94A5E0
 void __fastcall Scaleform::Render::Text::GFxLineCursor::~GFxLineCursor(Scaleform::Render::Text::GFxLineCursor *this)
 {
-  Scaleform::Render::Text::GFxLineCursor *v1; // rdi
-  Scaleform::Render::Text::TextFormat *v2; // rbx
+  Scaleform::Render::Text::TextFormat *pObject; // rbx
   bool v3; // zf
   Scaleform::Render::Text::TextFormat *v4; // rbx
   Scaleform::Render::Text::FontHandle *v5; // rcx
 
-  v1 = this;
-  v2 = this->CharInfoHolder.pFormat.pObject;
-  if ( v2 )
+  pObject = this->CharInfoHolder.pFormat.pObject;
+  if ( pObject )
   {
-    v3 = v2->RefCount-- == 1;
+    v3 = pObject->RefCount-- == 1;
     if ( v3 )
     {
-      Scaleform::Render::Text::TextFormat::~TextFormat(v2);
-      Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v2);
+      Scaleform::Render::Text::TextFormat::~TextFormat(pObject);
+      Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, pObject);
     }
   }
-  v4 = v1->CharIter.PlaceHolder.pFormat.pObject;
+  v4 = this->CharIter.PlaceHolder.pFormat.pObject;
   if ( v4 )
   {
     v3 = v4->RefCount-- == 1;
@@ -1679,291 +1611,229 @@ void __fastcall Scaleform::Render::Text::GFxLineCursor::~GFxLineCursor(Scaleform
       Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v4);
     }
   }
-  v5 = v1->pLastFont.pObject;
-  if ( v5 && !_InterlockedDecrement(&v5->RefCount) )
+  v5 = this->pLastFont.pObject;
+  if ( v5 )
   {
-    if ( v5 )
-      v5->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v5->vfptr, 1u);
+    if ( !_InterlockedDecrement(&v5->RefCount) )
+      v5->vfptr->__vecDelDtor(v5, 1u);
   }
 }
 
 // File Line: 967
 // RVA: 0x94EDA0
-Scaleform::Render::Text::Paragraph::CharacterInfo *__fastcall Scaleform::Render::Text::GFxLineCursor::operator*(Scaleform::Render::Text::GFxLineCursor *this)
+Scaleform::Render::Text::Paragraph::CharacterInfo *__fastcall Scaleform::Render::Text::GFxLineCursor::operator*(
+        Scaleform::Render::Text::GFxLineCursor *this)
 {
-  Scaleform::Render::Text::GFxLineCursor *v1; // rsi
   Scaleform::Render::Text::Paragraph::CharactersIterator *v2; // rax
 
-  v1 = this;
   this->CharInfoHolder.Index = Scaleform::Render::Text::Paragraph::CharactersIterator::operator*(&this->CharIter)->PlaceHolder.Index;
-  v2 = Scaleform::Render::Text::Paragraph::CharactersIterator::operator*(&v1->CharIter);
-  Scaleform::Render::Text::Paragraph::CharacterInfo::operator=(&v1->CharInfoHolder, &v2->PlaceHolder);
-  if ( v1->pDocView->Flags & 0x10 && v1->CharInfoHolder.Character )
-    v1->CharInfoHolder.Character = 42;
-  return &v1->CharInfoHolder;
+  v2 = Scaleform::Render::Text::Paragraph::CharactersIterator::operator*(&this->CharIter);
+  Scaleform::Render::Text::Paragraph::CharacterInfo::operator=(&this->CharInfoHolder, &v2->PlaceHolder);
+  if ( (this->pDocView->Flags & 0x10) != 0 && this->CharInfoHolder.Character )
+    this->CharInfoHolder.Character = 42;
+  return &this->CharInfoHolder;
 }
 
 // File Line: 1033
 // RVA: 0x9BA4D0
-void __fastcall Scaleform::Render::Text::GFxLineCursor::TrackFontParams(Scaleform::Render::Text::GFxLineCursor *this, Scaleform::Render::Font *pfont, float scale)
+void __fastcall Scaleform::Render::Text::GFxLineCursor::TrackFontParams(
+        Scaleform::Render::Text::GFxLineCursor *this,
+        Scaleform::Render::Font *pfont,
+        float scale)
 {
-  float v3; // xmm0_4
-  float v4; // xmm1_4
-  float v5; // xmm3_4
+  float Ascent; // xmm0_4
+  float Descent; // xmm1_4
+  float MaxFontAscent; // xmm3_4
   float v6; // xmm0_4
-  float v7; // xmm0_4
+  float MaxFontDescent; // xmm0_4
   float v8; // xmm1_4
   float v9; // xmm2_4
-  float v10; // xmm0_4
+  float MaxFontLeading; // xmm0_4
 
-  v3 = pfont->Ascent;
-  v4 = pfont->Descent;
-  if ( v3 == 0.0 )
-    v3 = FLOAT_960_0;
-  if ( v4 == 0.0 )
-    v4 = FLOAT_64_0;
-  v5 = this->MaxFontAscent;
-  v6 = v3 * scale;
-  if ( v6 >= v5 )
-    v5 = v6;
-  v7 = this->MaxFontDescent;
-  v8 = v4 * scale;
-  this->MaxFontAscent = v5;
-  if ( v8 >= v7 )
-    v7 = v8;
-  this->MaxFontDescent = v7;
+  Ascent = pfont->Ascent;
+  Descent = pfont->Descent;
+  if ( Ascent == 0.0 )
+    Ascent = FLOAT_960_0;
+  if ( Descent == 0.0 )
+    Descent = FLOAT_64_0;
+  MaxFontAscent = this->MaxFontAscent;
+  v6 = Ascent * scale;
+  if ( v6 >= MaxFontAscent )
+    MaxFontAscent = v6;
+  MaxFontDescent = this->MaxFontDescent;
+  v8 = Descent * scale;
+  this->MaxFontAscent = MaxFontAscent;
+  if ( v8 >= MaxFontDescent )
+    MaxFontDescent = v8;
+  this->MaxFontDescent = MaxFontDescent;
   v9 = scale * pfont->Leading;
-  v10 = this->MaxFontLeading;
-  if ( v9 >= v10 )
+  MaxFontLeading = this->MaxFontLeading;
+  if ( v9 >= MaxFontLeading )
     this->MaxFontLeading = v9;
   else
-    this->MaxFontLeading = v10;
+    this->MaxFontLeading = MaxFontLeading;
 }
 
 // File Line: 1137
 // RVA: 0x9406C0
-void __fastcall Scaleform::Render::Text::ParagraphFormatter::ParagraphFormatter(Scaleform::Render::Text::ParagraphFormatter *this, Scaleform::Render::Text::DocView *pdoc, Scaleform::Log *plog)
+void __fastcall Scaleform::Render::Text::ParagraphFormatter::ParagraphFormatter(
+        Scaleform::Render::Text::ParagraphFormatter *this,
+        Scaleform::Render::Text::DocView *pdoc,
+        Scaleform::Log *plog)
 {
-  Scaleform::Log *v3; // rsi
-  Scaleform::Render::Text::DocView *v4; // rbx
-  Scaleform::Render::Text::ParagraphFormatter *v5; // rdi
-  Scaleform::Render::Text::Allocator *v6; // rcx
-  __int64 v7; // rcx
+  Scaleform::Render::Text::Allocator *pObject; // rcx
+  Scaleform::MemoryHeap *pHeap; // rcx
   Scaleform::Render::Text::FontHandle *v8; // rcx
-  Scaleform::Render::Text::DocView::FindFontInfo *v9; // [rsp+58h] [rbp+10h]
 
-  v3 = plog;
-  v4 = pdoc;
-  v5 = this;
   this->pDocView = pdoc;
   this->pParagraph = 0i64;
   this->pParaFormat = 0i64;
   this->pTempLine = 0i64;
   Scaleform::Render::Text::GFxLineCursor::GFxLineCursor(&this->LineCursor);
-  v6 = v4->pDocument.pObject->pTextAllocator.pObject;
-  if ( v6 )
-    v7 = (__int64)v6->pHeap;
+  pObject = pdoc->pDocument.pObject->pTextAllocator.pObject;
+  if ( pObject )
+    pHeap = pObject->pHeap;
   else
-    v7 = ((__int64 (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->GetAllocHeap)(Scaleform::Memory::pGlobalHeap);
-  v5->FontCache.mHash.pTable = 0i64;
-  v5->FontCache.mHash.pHeap = (void *)v7;
-  v9 = &v5->FindFontInfo;
-  v9->pFontCache = &v5->FontCache;
-  v9->pCurrentFont.pObject = 0i64;
-  v5->FindFontInfo.pPrevFormat = 0i64;
-  v5->FindFontInfo.pCurrentFormat = 0i64;
-  v8 = v5->FindFontInfo.pCurrentFont.pObject;
-  if ( v8 && !_InterlockedDecrement(&v8->RefCount) && v8 )
-    v8->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v8->vfptr, 1u);
-  v5->FindFontInfo.pCurrentFont.pObject = 0i64;
-  Scaleform::Render::Text::GFxLineCursor::GFxLineCursor(&v5->StartPoint);
-  Scaleform::Render::Text::GFxLineCursor::GFxLineCursor(&v5->HalfPoint);
-  Scaleform::Render::Text::GFxLineCursor::GFxLineCursor(&v5->WordWrapPoint);
-  v5->pFontHandle.pObject = 0i64;
-  v5->pDynLine = 0i64;
-  *(_QWORD *)&v5->NextOffsetY = 0i64;
-  *(_WORD *)&v5->NeedRecenterLines = 0;
-  v5->pLog = v3;
-  *(_QWORD *)&v5->NewLen = 0i64;
-  v5->NewParaText = 0i64;
-  v5->IndexMap = 0i64;
-  v5->MirroredBits = 0i64;
+    pHeap = (Scaleform::MemoryHeap *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->GetAllocHeap)(Scaleform::Memory::pGlobalHeap);
+  this->FontCache.mHash.pTable = 0i64;
+  this->FontCache.mHash.pHeap = pHeap;
+  this->FindFontInfo.pFontCache = &this->FontCache;
+  this->FindFontInfo.pCurrentFont.pObject = 0i64;
+  this->FindFontInfo.pPrevFormat = 0i64;
+  this->FindFontInfo.pCurrentFormat = 0i64;
+  v8 = this->FindFontInfo.pCurrentFont.pObject;
+  if ( v8 && !_InterlockedDecrement(&v8->RefCount) )
+    v8->vfptr->__vecDelDtor(v8, 1u);
+  this->FindFontInfo.pCurrentFont.pObject = 0i64;
+  Scaleform::Render::Text::GFxLineCursor::GFxLineCursor(&this->StartPoint);
+  Scaleform::Render::Text::GFxLineCursor::GFxLineCursor(&this->HalfPoint);
+  Scaleform::Render::Text::GFxLineCursor::GFxLineCursor(&this->WordWrapPoint);
+  this->pFontHandle.pObject = 0i64;
+  this->pDynLine = 0i64;
+  *(_QWORD *)&this->NextOffsetY = 0i64;
+  *(_WORD *)&this->NeedRecenterLines = 0;
+  this->pLog = plog;
+  *(_QWORD *)&this->NewLen = 0i64;
+  this->NewParaText = 0i64;
+  this->IndexMap = 0i64;
+  this->MirroredBits = 0i64;
 }
 
 // File Line: 1151
 // RVA: 0x94BC50
-void __fastcall Scaleform::Render::Text::ParagraphFormatter::~ParagraphFormatter(Scaleform::Render::Text::ParagraphFormatter *this)
+void __fastcall Scaleform::Render::Text::ParagraphFormatter::~ParagraphFormatter(
+        Scaleform::Render::Text::ParagraphFormatter *this)
 {
-  Scaleform::Render::Text::ParagraphFormatter *v1; // rdi
-  Scaleform::Render::Text::LineBuffer::Line *v2; // rbx
-  Scaleform::Render::Text::FontHandle *v3; // rcx
+  Scaleform::Render::Text::LineBuffer::Line *pDynLine; // rbx
+  Scaleform::Render::Text::FontHandle *pObject; // rcx
   Scaleform::Render::Text::FontHandle *v4; // rcx
 
-  v1 = this;
-  v2 = this->pDynLine;
-  if ( v2 )
+  pDynLine = this->pDynLine;
+  if ( pDynLine )
   {
     Scaleform::Render::Text::LineBuffer::Line::Release(this->pDynLine);
-    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v2);
+    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, pDynLine);
   }
-  Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->NewParaText);
-  Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->IndexMap);
-  Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->MirroredBits);
-  v3 = v1->pFontHandle.pObject;
-  if ( v3 && !_InterlockedDecrement(&v3->RefCount) && v3 )
-    v3->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v3->vfptr, 1u);
-  Scaleform::Render::Text::GFxLineCursor::~GFxLineCursor(&v1->WordWrapPoint);
-  Scaleform::Render::Text::GFxLineCursor::~GFxLineCursor(&v1->HalfPoint);
-  Scaleform::Render::Text::GFxLineCursor::~GFxLineCursor(&v1->StartPoint);
-  v4 = v1->FindFontInfo.pCurrentFont.pObject;
-  if ( v4 && !_InterlockedDecrement(&v4->RefCount) && v4 )
-    v4->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v4->vfptr, 1u);
-  Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>::NodeHashF,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>::NodeAltHashF,Scaleform::AllocatorDH<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>,74>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>::NodeHashF>>::~HashSetBase<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>::NodeHashF,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>::NodeAltHashF,Scaleform::AllocatorDH<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>,74>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>::NodeHashF>>((Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >::NodeHashF,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >::NodeAltHashF,Scaleform::AllocatorDH<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *> >,74>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextF)&v1->FontCache.mHash.pTable);
-  Scaleform::Render::Text::GFxLineCursor::~GFxLineCursor(&v1->LineCursor);
+  Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, this->NewParaText);
+  Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, this->IndexMap);
+  Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, this->MirroredBits);
+  pObject = this->pFontHandle.pObject;
+  if ( pObject && !_InterlockedDecrement(&pObject->RefCount) )
+    pObject->vfptr->__vecDelDtor(pObject, 1u);
+  Scaleform::Render::Text::GFxLineCursor::~GFxLineCursor(&this->WordWrapPoint);
+  Scaleform::Render::Text::GFxLineCursor::~GFxLineCursor(&this->HalfPoint);
+  Scaleform::Render::Text::GFxLineCursor::~GFxLineCursor(&this->StartPoint);
+  v4 = this->FindFontInfo.pCurrentFont.pObject;
+  if ( v4 && !_InterlockedDecrement(&v4->RefCount) )
+    v4->vfptr->__vecDelDtor(v4, 1u);
+  Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>::NodeHashF,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>::NodeAltHashF,Scaleform::AllocatorDH<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>,74>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>::NodeHashF>>::~HashSetBase<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>::NodeHashF,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>::NodeAltHashF,Scaleform::AllocatorDH<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>,74>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>,Scaleform::HashNode<Scaleform::Render::Text::TextFormat const *,Scaleform::Ptr<Scaleform::Render::Text::FontHandle>,Scaleform::IdentityHash<Scaleform::Render::Text::TextFormat const *>>::NodeHashF>>(&this->FontCache.mHash);
+  Scaleform::Render::Text::GFxLineCursor::~GFxLineCursor(&this->LineCursor);
 }
 
 // File Line: 1160
 // RVA: 0x9939A0
-void __fastcall Scaleform::Render::Text::ParagraphFormatter::InitParagraph(Scaleform::Render::Text::ParagraphFormatter *this, Scaleform::Render::Text::Paragraph *paragraph)
+void __fastcall Scaleform::Render::Text::ParagraphFormatter::InitParagraph(
+        Scaleform::Render::Text::ParagraphFormatter *this,
+        Scaleform::Render::Text::Paragraph *paragraph)
 {
-  Scaleform::Render::Text::Paragraph *v2; // r15
-  Scaleform::Render::Text::ParagraphFormatter *v3; // rdi
   Scaleform::Render::Text::GFxLineCursor *v4; // rax
   Scaleform::Render::Text::GFxLineCursor *v5; // rax
   Scaleform::Render::Text::GFxLineCursor *v6; // rax
-  __int64 v7; // rdx
-  __int64 v8; // r8
-  __int64 v9; // r9
-  Scaleform::Render::Text::DocView *v10; // rcx
-  Scaleform::Render::Text::EditorKitBase *v11; // rcx
-  unsigned __int64 v12; // rsi
-  unsigned __int16 v13; // cx
+  Scaleform::Render::Text::DocView *pDocView; // rcx
+  Scaleform::Render::Text::EditorKitBase *pObject; // rcx
+  unsigned __int64 v9; // rsi
+  signed __int16 PresentMask; // cx
+  unsigned int v11; // ebx
+  Scaleform::Render::Text::LineBuffer::Line *TempLineBuff; // rax
+  Scaleform::Render::Text::LineBuffer::Line *pDynLine; // r14
   unsigned int v14; // ebx
-  char *v15; // rax
-  Scaleform::Render::Text::LineBuffer::Line *v16; // r14
+  __int64 v15; // rax
+  Scaleform::Render::Text::LineBuffer::Line *v16; // rax
   unsigned int v17; // ebx
-  __int64 v18; // rax
-  __int64 v19; // rax
-  unsigned int v20; // ebx
-  Scaleform::Render::Text::LineBuffer::Line *v21; // rcx
+  Scaleform::Render::Text::LineBuffer::Line *pTempLine; // rcx
+  Scaleform::Render::Text::LineBuffer::Line *v19; // rcx
+  unsigned __int64 StartIndex; // rdx
+  Scaleform::Render::Text::EditorKitBase *v21; // rcx
   Scaleform::Render::Text::LineBuffer::Line *v22; // rcx
-  unsigned __int64 v23; // rdx
-  Scaleform::Render::Text::EditorKitBase *v24; // rcx
-  Scaleform::Render::Text::LineBuffer::Line *v25; // rcx
-  Scaleform::Render::Text::LineBuffer::Line *v26; // rcx
-  signed __int64 v27; // rdx
-  __int64 v28; // rax
-  unsigned int v29; // er9
-  signed __int64 v30; // rcx
-  Scaleform::Render::Text::GFxLineCursor __that; // [rsp+20h] [rbp-E0h]
-  __int64 v32; // [rsp+128h] [rbp+28h]
-  Scaleform::Render::Text::GFxLineCursor v33; // [rsp+130h] [rbp+30h]
+  Scaleform::Render::Text::LineBuffer::Line *v23; // rcx
+  char *v24; // rdx
+  __int64 GlyphsCount; // rax
+  unsigned int v26; // r9d
+  Scaleform::Render::Text::LineBuffer::GlyphEntry *v27; // rcx
+  Scaleform::Render::Text::GFxLineCursor __that; // [rsp+20h] [rbp-E0h] BYREF
+  __int64 v29; // [rsp+128h] [rbp+28h]
+  Scaleform::Render::Text::GFxLineCursor v30; // [rsp+130h] [rbp+30h] BYREF
 
-  v32 = -2i64;
-  v2 = paragraph;
-  v3 = this;
+  v29 = -2i64;
   this->pParagraph = paragraph;
   this->pParaFormat = paragraph->pFormat.pObject;
-  Scaleform::Render::Text::GFxLineCursor::GFxLineCursor(&v33, this->pDocView, paragraph);
-  Scaleform::Render::Text::GFxLineCursor::operator=(&v3->LineCursor, v4);
-  Scaleform::Render::Text::GFxLineCursor::~GFxLineCursor(&v33);
-  __that.pPrevGrec = 0i64;
-  __that.pLastFont.pObject = 0i64;
-  *(_QWORD *)&__that.LastCharCode = 0i64;
-  *(_QWORD *)&__that.LastAdvance = 0i64;
-  *(_QWORD *)&__that.FirstGlyphWidth = 0i64;
+  Scaleform::Render::Text::GFxLineCursor::GFxLineCursor(&v30, this->pDocView, paragraph);
+  Scaleform::Render::Text::GFxLineCursor::operator=(&this->LineCursor, v4);
+  Scaleform::Render::Text::GFxLineCursor::~GFxLineCursor(&v30);
+  memset(&__that, 0, 40);
   __that.ComposStrPosition = -1i64;
-  __that.ComposStrLength = 0i64;
-  __that.ComposStrCurPos = 0i64;
-  __that.pDocView = 0i64;
-  __that.pParagraph = 0i64;
-  *(_QWORD *)&__that.LineWidth = 0i64;
-  *(_QWORD *)&__that.LineLength = 0i64;
-  *(_QWORD *)&__that.MaxFontDescent = 0i64;
-  __that.CharIter.PlaceHolder.pFormat.pObject = 0i64;
-  __that.CharIter.PlaceHolder.Index = 0i64;
-  __that.CharIter.PlaceHolder.Character = 0;
+  memset(&__that.ComposStrLength, 0, 74);
   __that.CharIter.pFormatInfo = 0i64;
   __that.CharIter.FormatIterator.pArray = 0i64;
   __that.CharIter.FormatIterator.Index = -1i64;
-  __that.CharIter.pText = 0i64;
-  __that.CharIter.CurTextIndex = 0i64;
-  __that.CharInfoHolder.pFormat.pObject = 0i64;
-  __that.CharInfoHolder.Index = 0i64;
-  __that.CharInfoHolder.Character = 0;
+  memset(&__that.CharIter.pText, 0, 34);
   *(_QWORD *)&__that.Indent = 0i64;
   __that.RightMargin = 0;
-  __that.GlyphIns.pGlyphs = 0i64;
-  __that.GlyphIns.pNextFormatData = 0i64;
-  *(_QWORD *)&__that.GlyphIns.GlyphIndex = 0i64;
-  __that.GlyphIns.FormatDataIndex = 0;
+  memset(&__that.GlyphIns, 0, 28);
   *(_QWORD *)&__that.NumOfSpaces = 0i64;
   LODWORD(__that.FontScaleFactor) = (_DWORD)FLOAT_1_0;
   *(_WORD *)&__that.LastKerning = 0;
   __that.NumChars = 0i64;
-  v5 = Scaleform::Render::Text::GFxLineCursor::operator=(&v3->WordWrapPoint, &__that);
-  v6 = Scaleform::Render::Text::GFxLineCursor::operator=(&v3->HalfPoint, v5);
-  Scaleform::Render::Text::GFxLineCursor::operator=(&v3->StartPoint, v6);
+  v5 = Scaleform::Render::Text::GFxLineCursor::operator=(&this->WordWrapPoint, &__that);
+  v6 = Scaleform::Render::Text::GFxLineCursor::operator=(&this->HalfPoint, v5);
+  Scaleform::Render::Text::GFxLineCursor::operator=(&this->StartPoint, v6);
   Scaleform::Render::Text::GFxLineCursor::~GFxLineCursor(&__that);
-  v10 = v3->pDocView;
-  v3->LineCursor.FontScaleFactor = (float)v3->pDocView->FontScaleFactor * 0.050000001;
-  v11 = v10->pEditorKit.pObject;
-  if ( v11 )
-    ((void (__cdecl *)(Scaleform::Render::Text::EditorKitBase *, __int64, __int64, __int64, Scaleform::Render::Text::LineBuffer::GlyphEntry *, Scaleform::Render::Text::FontHandle *, _QWORD, _QWORD, _QWORD, unsigned __int64, unsigned __int64, unsigned __int64, Scaleform::Render::Text::DocView *, Scaleform::Render::Text::Paragraph *, _QWORD, _QWORD, _QWORD, Scaleform::Render::Text::TextFormat *, unsigned __int64, _QWORD, Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *, Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *, __int64, Scaleform::Render::Text::Paragraph::TextBuffer *, unsigned __int64, Scaleform::Render::Text::TextFormat *, unsigned __int64, _QWORD, _QWORD, _QWORD, Scaleform::Render::Text::L)v11->vfptr[3].__vecDelDtor)(
-      v11,
-      v7,
-      v8,
-      v9,
-      __that.pPrevGrec,
-      __that.pLastFont.pObject,
-      *(_QWORD *)&__that.LastCharCode,
-      *(_QWORD *)&__that.LastAdvance,
-      *(_QWORD *)&__that.FirstGlyphWidth,
-      __that.ComposStrPosition,
-      __that.ComposStrLength,
-      __that.ComposStrCurPos,
-      __that.pDocView,
-      __that.pParagraph,
-      *(_QWORD *)&__that.LineWidth,
-      *(_QWORD *)&__that.LineLength,
-      *(_QWORD *)&__that.MaxFontDescent,
-      __that.CharIter.PlaceHolder.pFormat.pObject,
-      __that.CharIter.PlaceHolder.Index,
-      *(_QWORD *)&__that.CharIter.PlaceHolder.Character,
-      __that.CharIter.pFormatInfo,
-      __that.CharIter.FormatIterator.pArray,
-      __that.CharIter.FormatIterator.Index,
-      __that.CharIter.pText,
-      __that.CharIter.CurTextIndex,
-      __that.CharInfoHolder.pFormat.pObject,
-      __that.CharInfoHolder.Index,
-      *(_QWORD *)&__that.CharInfoHolder.Character,
-      *(_QWORD *)&__that.Indent,
-      *(_QWORD *)&__that.RightMargin,
-      __that.GlyphIns.pGlyphs,
-      __that.GlyphIns.pNextFormatData,
-      *(_QWORD *)&__that.GlyphIns.GlyphIndex);
-  Scaleform::Render::Text::ParagraphFormatter::InitCustomWordWrapping(v3);
-  v3->pDocView->RTFlags &= 0xBFu;
-  v12 = v2->Text.Size + v3->LineCursor.ComposStrLength;
-  v13 = v3->pParaFormat->PresentMask;
-  if ( (v13 & 0x80u) != 0 && (v13 & 0x8000u) != 0 )
-    LODWORD(v12) = v12 + 1;
-  v14 = ((8 * v12 + 49) & 0xFFFFFFF8) + 16 * v12;
-  if ( v14 >= 0x400 )
+  pDocView = this->pDocView;
+  this->LineCursor.FontScaleFactor = (float)this->pDocView->FontScaleFactor * 0.050000001;
+  pObject = pDocView->pEditorKit.pObject;
+  if ( pObject )
+    ((void (__fastcall *)(Scaleform::Render::Text::EditorKitBase *))pObject->vfptr[3].__vecDelDtor)(pObject);
+  Scaleform::Render::Text::ParagraphFormatter::InitCustomWordWrapping(this);
+  this->pDocView->RTFlags &= ~0x40u;
+  v9 = paragraph->Text.Size + this->LineCursor.ComposStrLength;
+  PresentMask = this->pParaFormat->PresentMask;
+  if ( (PresentMask & 0x80u) != 0 && PresentMask < 0 )
+    LODWORD(v9) = v9 + 1;
+  v11 = ((8 * v9 + 49) & 0xFFFFFFF8) + 16 * v9;
+  if ( v11 >= 0x400 )
   {
-    v16 = v3->pDynLine;
-    if ( v16 )
+    pDynLine = this->pDynLine;
+    if ( pDynLine )
     {
-      if ( v14 >= (v16->MemSize & 0x7FFFFFF) )
+      if ( v11 >= (pDynLine->MemSize & 0x7FFFFFF) )
       {
-        Scaleform::Render::Text::LineBuffer::Line::Release(v3->pDynLine);
-        Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v16);
-        v17 = v14 + 100;
-        v18 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, Scaleform::Render::Text::LineBuffer::TextLineAllocator *, _QWORD, _QWORD, Scaleform::Render::Text::LineBuffer::GlyphEntry *, Scaleform::Render::Text::FontHandle *, _QWORD, _QWORD, _QWORD, unsigned __int64, unsigned __int64, unsigned __int64, Scaleform::Render::Text::DocView *, Scaleform::Render::Text::Paragraph *, _QWORD, _QWORD, _QWORD, Scaleform::Render::Text::TextFormat *, unsigned __int64, _QWORD, Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *, Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *, __int64, Scaleform::Render::Text::Paragraph::TextBuffer *, unsigned __int64, Scaleform::Render::Text::TextFormat *, unsigned __int64, _QWORD, _QWORD)Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap)(
+        Scaleform::Render::Text::LineBuffer::Line::Release(this->pDynLine);
+        Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, pDynLine);
+        v14 = v11 + 100;
+        v15 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, Scaleform::Render::Text::LineBuffer::TextLineAllocator *, _QWORD, _QWORD, Scaleform::Render::Text::LineBuffer::GlyphEntry *, Scaleform::Render::Text::FontHandle *, _QWORD, _QWORD, _QWORD, unsigned __int64, unsigned __int64, unsigned __int64, Scaleform::Render::Text::DocView *, Scaleform::Render::Text::Paragraph *, _QWORD, _QWORD, _QWORD, Scaleform::Render::Text::TextFormat *, unsigned __int64, _DWORD, Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *, Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *, __int64, Scaleform::Render::Text::Paragraph::TextBuffer *, unsigned __int64, Scaleform::Render::Text::TextFormat *, unsigned __int64, _DWORD, _QWORD, int, Scaleform::Render::Text::LineBuffer::GlyphEntry *, Scaleform::Render::Text::LineBuffer::FormatDataEntry *, _QWORD, unsigned int, _QWORD, _QWORD, unsigned __int64))Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap)(
                 Scaleform::Memory::pGlobalHeap,
-                &v3->pDocView->mLineBuffer.LineAllocator,
-                v17,
+                &this->pDocView->mLineBuffer.LineAllocator,
+                v14,
                 0i64,
                 __that.pPrevGrec,
                 __that.pLastFont.pObject,
@@ -1980,7 +1850,7 @@ void __fastcall Scaleform::Render::Text::ParagraphFormatter::InitParagraph(Scale
                 *(_QWORD *)&__that.MaxFontDescent,
                 __that.CharIter.PlaceHolder.pFormat.pObject,
                 __that.CharIter.PlaceHolder.Index,
-                *(_QWORD *)&__that.CharIter.PlaceHolder.Character,
+                *(_DWORD *)&__that.CharIter.PlaceHolder.Character,
                 __that.CharIter.pFormatInfo,
                 __that.CharIter.FormatIterator.pArray,
                 __that.CharIter.FormatIterator.Index,
@@ -1988,163 +1858,164 @@ void __fastcall Scaleform::Render::Text::ParagraphFormatter::InitParagraph(Scale
                 __that.CharIter.CurTextIndex,
                 __that.CharInfoHolder.pFormat.pObject,
                 __that.CharInfoHolder.Index,
-                *(_QWORD *)&__that.CharInfoHolder.Character,
+                *(_DWORD *)&__that.CharInfoHolder.Character,
                 *(_QWORD *)&__that.Indent,
-                *(_QWORD *)&__that.RightMargin,
+                __that.RightMargin,
                 __that.GlyphIns.pGlyphs,
                 __that.GlyphIns.pNextFormatData,
                 *(_QWORD *)&__that.GlyphIns.GlyphIndex,
-                *(_QWORD *)&__that.GlyphIns.FormatDataIndex,
+                __that.GlyphIns.FormatDataIndex,
                 *(_QWORD *)&__that.NumOfSpaces,
                 *(_QWORD *)&__that.FontScaleFactor,
                 __that.NumChars);
-        *(_DWORD *)v18 = v17 & 0x7FFFFFF | 0x40000000;
-        *(_QWORD *)(v18 + 4) = 0i64;
-        *(_DWORD *)(v18 + 38) = 0;
-        *(_QWORD *)(v18 + 12) = 0i64;
-        *(_QWORD *)(v18 + 20) = 0i64;
-        *(_DWORD *)(v18 + 32) = 0;
-        v3->pDynLine = (Scaleform::Render::Text::LineBuffer::Line *)v18;
+        *(_DWORD *)v15 = v14 & 0x7FFFFFF | 0x40000000;
+        *(_QWORD *)(v15 + 4) = 0i64;
+        *(_DWORD *)(v15 + 38) = 0;
+        *(_QWORD *)(v15 + 12) = 0i64;
+        *(_QWORD *)(v15 + 20) = 0i64;
+        *(_DWORD *)(v15 + 32) = 0;
+        this->pDynLine = (Scaleform::Render::Text::LineBuffer::Line *)v15;
       }
-      v19 = (__int64)v3->pDynLine;
+      v16 = this->pDynLine;
     }
     else
     {
-      v20 = v14 + 100;
-      v19 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, Scaleform::Render::Text::LineBuffer::TextLineAllocator *, _QWORD, _QWORD, Scaleform::Render::Text::LineBuffer::GlyphEntry *, Scaleform::Render::Text::FontHandle *, _QWORD, _QWORD, _QWORD, unsigned __int64, unsigned __int64, unsigned __int64, Scaleform::Render::Text::DocView *, Scaleform::Render::Text::Paragraph *, _QWORD, _QWORD, _QWORD, Scaleform::Render::Text::TextFormat *, unsigned __int64, _QWORD, Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *, Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *, __int64, Scaleform::Render::Text::Paragraph::TextBuffer *, unsigned __int64, Scaleform::Render::Text::TextFormat *, unsigned __int64, _QWORD, _QWORD)Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap)(
-              Scaleform::Memory::pGlobalHeap,
-              &v3->pDocView->mLineBuffer.LineAllocator,
-              v20,
-              0i64,
-              __that.pPrevGrec,
-              __that.pLastFont.pObject,
-              *(_QWORD *)&__that.LastCharCode,
-              *(_QWORD *)&__that.LastAdvance,
-              *(_QWORD *)&__that.FirstGlyphWidth,
-              __that.ComposStrPosition,
-              __that.ComposStrLength,
-              __that.ComposStrCurPos,
-              __that.pDocView,
-              __that.pParagraph,
-              *(_QWORD *)&__that.LineWidth,
-              *(_QWORD *)&__that.LineLength,
-              *(_QWORD *)&__that.MaxFontDescent,
-              __that.CharIter.PlaceHolder.pFormat.pObject,
-              __that.CharIter.PlaceHolder.Index,
-              *(_QWORD *)&__that.CharIter.PlaceHolder.Character,
-              __that.CharIter.pFormatInfo,
-              __that.CharIter.FormatIterator.pArray,
-              __that.CharIter.FormatIterator.Index,
-              __that.CharIter.pText,
-              __that.CharIter.CurTextIndex,
-              __that.CharInfoHolder.pFormat.pObject,
-              __that.CharInfoHolder.Index,
-              *(_QWORD *)&__that.CharInfoHolder.Character,
-              *(_QWORD *)&__that.Indent,
-              *(_QWORD *)&__that.RightMargin,
-              __that.GlyphIns.pGlyphs,
-              __that.GlyphIns.pNextFormatData,
-              *(_QWORD *)&__that.GlyphIns.GlyphIndex,
-              *(_QWORD *)&__that.GlyphIns.FormatDataIndex,
-              *(_QWORD *)&__that.NumOfSpaces,
-              *(_QWORD *)&__that.FontScaleFactor,
-              __that.NumChars);
-      *(_DWORD *)v19 = v20 & 0x7FFFFFF | 0x40000000;
-      *(_QWORD *)(v19 + 4) = 0i64;
-      *(_DWORD *)(v19 + 38) = 0;
-      *(_QWORD *)(v19 + 12) = 0i64;
-      *(_QWORD *)(v19 + 20) = 0i64;
-      *(_DWORD *)(v19 + 32) = 0;
-      v3->pDynLine = (Scaleform::Render::Text::LineBuffer::Line *)v19;
+      v17 = v11 + 100;
+      v16 = (Scaleform::Render::Text::LineBuffer::Line *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, Scaleform::Render::Text::LineBuffer::TextLineAllocator *, _QWORD, _QWORD, Scaleform::Render::Text::LineBuffer::GlyphEntry *, Scaleform::Render::Text::FontHandle *, _QWORD, _QWORD, _QWORD, unsigned __int64, unsigned __int64, unsigned __int64, Scaleform::Render::Text::DocView *, Scaleform::Render::Text::Paragraph *, _QWORD, _QWORD, _QWORD, Scaleform::Render::Text::TextFormat *, unsigned __int64, _DWORD, Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *, Scaleform::RangeDataArray<Scaleform::Ptr<Scaleform::Render::Text::TextFormat>,Scaleform::ArrayLH<Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> >,2,Scaleform::ArrayDefaultPolicy> > *, __int64, Scaleform::Render::Text::Paragraph::TextBuffer *, unsigned __int64, Scaleform::Render::Text::TextFormat *, unsigned __int64, _DWORD, _QWORD, int, Scaleform::Render::Text::LineBuffer::GlyphEntry *, Scaleform::Render::Text::LineBuffer::FormatDataEntry *, _QWORD, unsigned int, _QWORD, _QWORD, unsigned __int64))Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap)(
+                                                           Scaleform::Memory::pGlobalHeap,
+                                                           &this->pDocView->mLineBuffer.LineAllocator,
+                                                           v17,
+                                                           0i64,
+                                                           __that.pPrevGrec,
+                                                           __that.pLastFont.pObject,
+                                                           *(_QWORD *)&__that.LastCharCode,
+                                                           *(_QWORD *)&__that.LastAdvance,
+                                                           *(_QWORD *)&__that.FirstGlyphWidth,
+                                                           __that.ComposStrPosition,
+                                                           __that.ComposStrLength,
+                                                           __that.ComposStrCurPos,
+                                                           __that.pDocView,
+                                                           __that.pParagraph,
+                                                           *(_QWORD *)&__that.LineWidth,
+                                                           *(_QWORD *)&__that.LineLength,
+                                                           *(_QWORD *)&__that.MaxFontDescent,
+                                                           __that.CharIter.PlaceHolder.pFormat.pObject,
+                                                           __that.CharIter.PlaceHolder.Index,
+                                                           *(_DWORD *)&__that.CharIter.PlaceHolder.Character,
+                                                           __that.CharIter.pFormatInfo,
+                                                           __that.CharIter.FormatIterator.pArray,
+                                                           __that.CharIter.FormatIterator.Index,
+                                                           __that.CharIter.pText,
+                                                           __that.CharIter.CurTextIndex,
+                                                           __that.CharInfoHolder.pFormat.pObject,
+                                                           __that.CharInfoHolder.Index,
+                                                           *(_DWORD *)&__that.CharInfoHolder.Character,
+                                                           *(_QWORD *)&__that.Indent,
+                                                           __that.RightMargin,
+                                                           __that.GlyphIns.pGlyphs,
+                                                           __that.GlyphIns.pNextFormatData,
+                                                           *(_QWORD *)&__that.GlyphIns.GlyphIndex,
+                                                           __that.GlyphIns.FormatDataIndex,
+                                                           *(_QWORD *)&__that.NumOfSpaces,
+                                                           *(_QWORD *)&__that.FontScaleFactor,
+                                                           __that.NumChars);
+      v16->MemSize = v17 & 0x7FFFFFF | 0x40000000;
+      *(_QWORD *)&v16->Data32.GlyphsCount = 0i64;
+      *(_DWORD *)((char *)&v16->Data8 + 34) = 0;
+      *(_QWORD *)&v16->Data8.OffsetX = 0i64;
+      *(_QWORD *)&v16->Data8.Width = 0i64;
+      v16->Data32.TextLength = 0;
+      this->pDynLine = v16;
     }
-    v3->pTempLine = (Scaleform::Render::Text::LineBuffer::Line *)v19;
+    this->pTempLine = v16;
   }
   else
   {
-    v15 = v3->TempLineBuff;
-    if ( v3 == (Scaleform::Render::Text::ParagraphFormatter *)-1792i64 )
-      v15 = 0i64;
+    TempLineBuff = (Scaleform::Render::Text::LineBuffer::Line *)this->TempLineBuff;
+    if ( this == (Scaleform::Render::Text::ParagraphFormatter *)-1792i64 )
+      TempLineBuff = 0i64;
     else
-      *(_DWORD *)v15 = 0;
-    v3->pTempLine = (Scaleform::Render::Text::LineBuffer::Line *)v15;
-    *(_DWORD *)v15 &= 0xF8000000;
-    *(_DWORD *)v15 |= v14 & 0x7FFFFFF;
+      TempLineBuff->MemSize = 0;
+    this->pTempLine = TempLineBuff;
+    TempLineBuff->MemSize &= 0xF8000000;
+    TempLineBuff->MemSize |= v11 & 0x7FFFFFF;
   }
-  v21 = v3->pTempLine;
-  v21->MemSize = v21->MemSize & 0x7FFFFFF | 0x40000000;
-  *(_QWORD *)&v21->Data32.GlyphsCount = 0i64;
-  *(_DWORD *)((char *)&v21->Data8 + 34) = 0;
-  *(_QWORD *)&v21->Data8.OffsetX = 0i64;
-  *(_QWORD *)&v21->Data8.Width = 0i64;
-  v21->Data32.TextLength = 0;
-  v3->pTempLine->MemSize &= 0xBFFFFFFF;
-  v22 = v3->pTempLine;
+  pTempLine = this->pTempLine;
+  pTempLine->MemSize = pTempLine->MemSize & 0x7FFFFFF | 0x40000000;
+  *(_QWORD *)&pTempLine->Data32.GlyphsCount = 0i64;
+  *(_DWORD *)((char *)&pTempLine->Data8 + 34) = 0;
+  *(_QWORD *)&pTempLine->Data8.OffsetX = 0i64;
+  *(_QWORD *)&pTempLine->Data8.Width = 0i64;
+  pTempLine->Data32.TextLength = 0;
+  this->pTempLine->MemSize &= ~0x40000000u;
+  v19 = this->pTempLine;
+  if ( (v19->MemSize & 0x80000000) == 0 )
+    v19->Data32.GlyphsCount = v9;
+  else
+    v19->Data8.GlyphsCount = v9;
+  StartIndex = paragraph->StartIndex;
+  v21 = this->pDocView->pEditorKit.pObject;
+  if ( v21 )
+    LODWORD(StartIndex) = v21->vfptr[4].__vecDelDtor(v21, StartIndex);
+  v22 = this->pTempLine;
   if ( (v22->MemSize & 0x80000000) == 0 )
-    v22->Data32.GlyphsCount = v12;
-  else
-    v22->Data8.GlyphsCount = v12;
-  v23 = v2->StartIndex;
-  v24 = v3->pDocView->pEditorKit.pObject;
-  if ( v24 )
-    LODWORD(v23) = (__int64)v24->vfptr[4].__vecDelDtor((Scaleform::RefCountImplCore *)&v24->vfptr, v23);
-  v25 = v3->pTempLine;
-  if ( (v25->MemSize & 0x80000000) == 0 )
   {
-    v25->Data32.TextPos = v23;
+    v22->Data32.TextPos = StartIndex;
   }
   else
   {
-    v25->Data32.TextPos &= 0xFF000000;
-    v25->Data32.TextPos |= v23 & 0xFFFFFF;
+    v22->Data32.TextPos &= 0xFF000000;
+    v22->Data32.TextPos |= StartIndex & 0xFFFFFF;
   }
-  v26 = v3->pTempLine;
-  v27 = (signed __int64)(&v26->Data8.Leading + 1);
-  if ( (v26->MemSize & 0x80000000) == 0 )
-    v27 = (signed __int64)&v26->Data8 + 38;
-  if ( (v26->MemSize & 0x80000000) == 0 )
-    v28 = v26->Data32.GlyphsCount;
+  v23 = this->pTempLine;
+  v24 = &v23->Data8.Leading + 1;
+  if ( (v23->MemSize & 0x80000000) == 0 )
+    v24 = (char *)&v23->Data8 + 38;
+  if ( (v23->MemSize & 0x80000000) == 0 )
+    GlyphsCount = v23->Data32.GlyphsCount;
   else
-    v28 = (unsigned __int8)v26->Data8.GlyphsCount;
-  if ( (v26->MemSize & 0x80000000) == 0 )
-    v29 = v26->Data32.GlyphsCount;
+    GlyphsCount = (unsigned __int8)v23->Data8.GlyphsCount;
+  if ( (v23->MemSize & 0x80000000) == 0 )
+    v26 = v23->Data32.GlyphsCount;
   else
-    v29 = (unsigned __int8)v26->Data8.GlyphsCount;
-  if ( (v26->MemSize & 0x80000000) == 0 )
-    v30 = (signed __int64)&v26->Data8 + 38;
+    v26 = (unsigned __int8)v23->Data8.GlyphsCount;
+  if ( (v23->MemSize & 0x80000000) == 0 )
+    v27 = (Scaleform::Render::Text::LineBuffer::GlyphEntry *)((char *)&v23->Data8 + 38);
   else
-    v30 = (signed __int64)(&v26->Data8.Leading + 1);
-  v3->LineCursor.GlyphIns.pGlyphs = (Scaleform::Render::Text::LineBuffer::GlyphEntry *)v30;
-  v3->LineCursor.GlyphIns.pNextFormatData = (Scaleform::Render::Text::LineBuffer::FormatDataEntry *)((v27 + 8 * v28 + 7) & 0xFFFFFFFFFFFFFFF8ui64);
-  v3->LineCursor.GlyphIns.GlyphIndex = 0;
-  v3->LineCursor.GlyphIns.GlyphsCount = v29;
-  v3->LineCursor.GlyphIns.FormatDataIndex = 0;
-  *(_QWORD *)&v3->ParaWidth = 0i64;
-  v3->ParaLines = 0;
-  v3->DeltaText = 1;
-  v3->Pass = 1;
-  v3->HyphenationRequested = 0;
-  v3->RequestedWordWrapPos = 0;
-  v3->isSpace = 0;
-  v3->TextRectWidth = v3->pDocView->mLineBuffer.Geom.VisibleRect.x2 - v3->pDocView->mLineBuffer.Geom.VisibleRect.x1;
-  *(_QWORD *)&v3->TabStopsNum = 0i64;
+    v27 = (Scaleform::Render::Text::LineBuffer::GlyphEntry *)(&v23->Data8.Leading + 1);
+  this->LineCursor.GlyphIns.pGlyphs = v27;
+  this->LineCursor.GlyphIns.pNextFormatData = (Scaleform::Render::Text::LineBuffer::FormatDataEntry *)((unsigned __int64)&v24[8 * GlyphsCount + 7] & 0xFFFFFFFFFFFFFFF8ui64);
+  this->LineCursor.GlyphIns.GlyphIndex = 0;
+  this->LineCursor.GlyphIns.GlyphsCount = v26;
+  this->LineCursor.GlyphIns.FormatDataIndex = 0;
+  *(_QWORD *)&this->ParaWidth = 0i64;
+  this->ParaLines = 0;
+  this->DeltaText = 1;
+  this->Pass = 1;
+  this->HyphenationRequested = 0;
+  this->RequestedWordWrapPos = 0;
+  this->isSpace = 0;
+  this->TextRectWidth = this->pDocView->mLineBuffer.Geom.VisibleRect.x2
+                      - this->pDocView->mLineBuffer.Geom.VisibleRect.x1;
+  *(_QWORD *)&this->TabStopsNum = 0i64;
 }
 
 // File Line: 1271
 // RVA: 0x992FE0
-void __fastcall Scaleform::Render::Text::ParagraphFormatter::InitCustomWordWrapping(Scaleform::Render::Text::ParagraphFormatter *this)
+void __fastcall Scaleform::Render::Text::ParagraphFormatter::InitCustomWordWrapping(
+        Scaleform::Render::Text::ParagraphFormatter *this)
 {
-  Scaleform::Render::Text::DocView *v1; // r11
-  Scaleform::Render::Text::ParagraphFormatter *v2; // rdi
-  Scaleform::Render::Text::DocView::DocumentListener *v3; // rax
+  Scaleform::Render::Text::DocView *pDocView; // r11
+  Scaleform::Render::Text::DocView::DocumentListener *pObject; // rax
   bool v4; // zf
   bool v5; // al
-  Scaleform::Render::Text::Paragraph *v6; // rdx
-  unsigned __int64 v7; // rbx
+  Scaleform::Render::Text::Paragraph *pParagraph; // rdx
+  unsigned __int64 Size; // rbx
   unsigned __int64 v8; // rax
   bool v9; // cf
   wchar_t *v10; // rax
-  unsigned __int64 v11; // r8
-  unsigned __int64 v12; // r9
+  unsigned __int64 ComposStrPosition; // r8
+  unsigned __int64 StartIndex; // r9
   unsigned __int64 v13; // rax
   unsigned __int64 v14; // rcx
   wchar_t *v15; // rcx
@@ -2152,397 +2023,401 @@ void __fastcall Scaleform::Render::Text::ParagraphFormatter::InitCustomWordWrapp
   char v17; // bp
   unsigned __int64 v18; // rax
   wchar_t *v19; // rax
-  wchar_t *v20; // rsi
-  Scaleform::Render::Text::Allocator *v21; // rax
+  wchar_t *TextBufForCustomFormat; // rsi
+  Scaleform::Render::Text::Allocator *Allocator; // rax
 
-  v1 = this->pDocView;
-  v2 = this;
-  v3 = this->pDocView->pDocumentListener.pObject;
-  if ( !v3 || (v4 = (v3->HandlersMask & 1) == 0, v5 = 1, v4) )
+  pDocView = this->pDocView;
+  pObject = this->pDocView->pDocumentListener.pObject;
+  if ( !pObject || (v4 = (pObject->HandlersMask & 1) == 0, v5 = 1, v4) )
     v5 = 0;
   this->HasLineFormatHandler = v5;
   this->pTextBufForCustomFormat = 0i64;
   if ( v5 )
   {
-    v6 = this->pParagraph;
-    v7 = v6->Text.Size;
-    if ( v7 )
+    pParagraph = this->pParagraph;
+    Size = pParagraph->Text.Size;
+    if ( Size )
     {
-      v8 = v7 - 1;
-      if ( !v6->Text.pText || (v9 = v8 < v7, v10 = &v6->Text.pText[v8], !v9) )
+      v8 = Size - 1;
+      if ( !pParagraph->Text.pText || (v9 = v8 < Size, v10 = &pParagraph->Text.pText[v8], !v9) )
         v10 = 0i64;
       if ( !*v10 )
-        --v7;
+        --Size;
     }
-    v11 = this->LineCursor.ComposStrPosition;
-    v12 = v6->StartIndex;
-    if ( v11 < v12 )
-      goto LABEL_36;
-    v13 = v6->Text.Size;
+    ComposStrPosition = this->LineCursor.ComposStrPosition;
+    StartIndex = pParagraph->StartIndex;
+    if ( ComposStrPosition < StartIndex )
+      goto LABEL_26;
+    v13 = pParagraph->Text.Size;
     if ( v13 )
     {
       v14 = v13 - 1;
-      if ( !v6->Text.pText || (v9 = v14 < v13, v15 = &v6->Text.pText[v14], !v9) )
+      if ( !pParagraph->Text.pText || (v9 = v14 < v13, v15 = &pParagraph->Text.pText[v14], !v9) )
         v15 = 0i64;
       if ( !*v15 )
         --v13;
     }
-    if ( v11 > v12 + v13 )
+    if ( ComposStrPosition > StartIndex + v13 )
     {
-LABEL_36:
+LABEL_26:
       v17 = 0;
     }
     else
     {
-      v16 = v6->Text.Size;
+      v16 = pParagraph->Text.Size;
       v17 = 1;
       if ( v16 )
       {
         v18 = v16 - 1;
-        if ( !v6->Text.pText || (v9 = v18 < v16, v19 = &v6->Text.pText[v18], !v9) )
+        if ( !pParagraph->Text.pText || (v9 = v18 < v16, v19 = &pParagraph->Text.pText[v18], !v9) )
           v19 = 0i64;
         if ( !*v19 )
           --v16;
       }
-      v7 = v16 + v2->LineCursor.ComposStrLength;
+      Size = v16 + this->LineCursor.ComposStrLength;
     }
-    if ( v7 >= 0x100 )
+    if ( Size >= 0x100 )
     {
-      v21 = Scaleform::Render::Text::StyledText::GetAllocator((Scaleform::Render::Text::StyledText *)&v1->pDocument.pObject->vfptr);
-      v20 = (wchar_t *)v21->pHeap->vfptr->Alloc(v21->pHeap, 2 * v7 + 2, 0i64);
+      Allocator = Scaleform::Render::Text::StyledText::GetAllocator(pDocView->pDocument.pObject);
+      TextBufForCustomFormat = (wchar_t *)Allocator->pHeap->vfptr->Alloc(Allocator->pHeap, 2 * Size + 2, 0i64);
     }
     else
     {
-      v20 = v2->TextBufForCustomFormat;
+      TextBufForCustomFormat = this->TextBufForCustomFormat;
     }
-    if ( !v17 || v2->LineCursor.ComposStrLength <= 0 )
-      memmove(v20, v2->pParagraph->Text.pText, 2 * v7);
-    v20[v7] = 0;
-    v2->pTextBufForCustomFormat = v20;
-    v2->TextBufLen = v7;
+    if ( !v17 || !this->LineCursor.ComposStrLength )
+      memmove(TextBufForCustomFormat, this->pParagraph->Text.pText, 2 * Size);
+    TextBufForCustomFormat[Size] = 0;
+    this->pTextBufForCustomFormat = TextBufForCustomFormat;
+    this->TextBufLen = Size;
   }
 }
 
 // File Line: 1318
 // RVA: 0x97FC70
-float __fastcall Scaleform::Render::Text::ParagraphFormatter::GetActualFontSize(Scaleform::Render::Text::ParagraphFormatter *this)
+float __fastcall Scaleform::Render::Text::ParagraphFormatter::GetActualFontSize(
+        Scaleform::Render::Text::ParagraphFormatter *this)
 {
-  float v1; // xmm1_4
+  float FontScaleFactor; // xmm1_4
   float result; // xmm0_4
 
-  v1 = this->FindFontInfo.pCurrentFont.pObject->FontScaleFactor;
+  FontScaleFactor = this->FindFontInfo.pCurrentFont.pObject->FontScaleFactor;
   result = (float)this->FindFontInfo.pCurrentFormat->FontSize * 0.050000001;
-  if ( v1 != 1.0 )
-    result = result * v1;
-  if ( this->pDocView->RTFlags & 4 )
-    result = result * (float)((float)this->pDocView->FontScaleFactor * 0.050000001);
+  if ( FontScaleFactor != 1.0 )
+    result = result * FontScaleFactor;
+  if ( (this->pDocView->RTFlags & 4) != 0 )
+    return result * (float)((float)this->pDocView->FontScaleFactor * 0.050000001);
   return result;
 }
 
 // File Line: 1405
 // RVA: 0x978070
-void __fastcall Scaleform::Render::Text::ParagraphFormatter::FinalizeLine(Scaleform::Render::Text::ParagraphFormatter *this)
+void __fastcall Scaleform::Render::Text::ParagraphFormatter::FinalizeLine(
+        Scaleform::Render::Text::ParagraphFormatter *this)
 {
-  Scaleform::Render::Text::ParagraphFormatter *v1; // rdi
-  float v2; // xmm0_4
+  float LastAdvance; // xmm0_4
   float v3; // xmm0_4
-  signed int v4; // er8
-  Scaleform::Render::Text::LineBuffer::GlyphEntry *v5; // rcx
-  Scaleform::Render::Text::ParagraphFormat *v6; // rcx
-  int v7; // eax
-  float v8; // xmm0_4
+  int v4; // r8d
+  Scaleform::Render::Text::LineBuffer::GlyphEntry *pPrevGrec; // rcx
+  Scaleform::Render::Text::ParagraphFormat *pParaFormat; // rcx
+  int RightMargin; // eax
+  float MaxFontLeading; // xmm0_4
   float v9; // xmm1_4
   float v10; // xmm1_4
-  unsigned int v11; // er12
+  unsigned int v11; // r12d
   float v12; // xmm0_4
-  signed int v13; // er13
-  unsigned int v14; // ecx
-  int v15; // eax
-  __int64 v16; // rbp
-  __int64 v17; // r15
-  Scaleform::Render::Text::LineBuffer::Iterator *v18; // rbx
+  int v13; // r13d
+  int LineWidth; // ecx
+  int LineWidthWithoutTrailingSpaces; // eax
+  __int64 GlyphIndex; // rbp
+  __int64 FormatDataIndex; // r15
+  Scaleform::Render::Text::LineBuffer::Iterator *pLinesIter; // rbx
   unsigned __int64 v19; // rax
-  Scaleform::Render::Text::LineBuffer::Line *v20; // rax
-  unsigned __int64 v21; // rax
+  Scaleform::Render::Text::LineBuffer::Line *inserted; // rax
+  unsigned __int64 Size; // rax
   Scaleform::Render::Text::LineBuffer::Line *v22; // rsi
-  unsigned int v23; // edx
+  unsigned int UniqueId; // edx
   bool v24; // cl
-  unsigned __int16 v25; // dx
-  Scaleform::Render::Text::LineBuffer::Line *v26; // rdx
+  unsigned __int16 ModCounter; // dx
+  Scaleform::Render::Text::LineBuffer::Line *pTempLine; // rdx
   const void *v27; // rdx
   bool v28; // zf
   void *v29; // rcx
   Scaleform::Render::Text::LineBuffer::Line *v30; // rax
-  signed __int64 v31; // rdx
-  unsigned int v32; // ecx
-  signed __int64 v33; // r9
-  signed __int64 v34; // rcx
+  char *v31; // rdx
+  unsigned int GlyphsCount; // ecx
+  char *v33; // r9
+  char *v34; // rcx
   __int64 v35; // rax
   Scaleform::Render::Text::LineBuffer::Line *v36; // rcx
   unsigned int v37; // eax
-  signed int v38; // ecx
-  unsigned int v39; // ecx
-  signed int v40; // eax
-  Scaleform::Render::Text::ParagraphFormat *v41; // rax
-  int v42; // ebp
-  unsigned int v43; // er14
-  Scaleform::Render::Text::LineBuffer::GlyphEntry *v44; // rcx
-  unsigned __int16 v45; // dx
-  int v46; // eax
-  int v47; // eax
-  Scaleform::Render::Text::ImageDesc *v48; // rcx
-  Scaleform::Render::Text::FontHandle *v49; // rcx
-  int v50; // er8
-  int v51; // ecx
-  unsigned int v52; // et1
-  unsigned int v53; // ecx
+  int TextPos; // ecx
+  unsigned int LineLength; // ecx
+  int MaxFontAscent; // eax
+  unsigned int v41; // ecx
+  Scaleform::Render::Text::ParagraphFormat *v42; // rax
+  int v43; // ebp
+  int v44; // r14d
+  Scaleform::Render::Text::LineBuffer::GlyphEntry *pGlyphs; // rcx
+  unsigned __int16 Flags; // dx
+  int Advance; // eax
+  int v48; // eax
+  Scaleform::Render::Text::ImageDesc *pObject; // rcx
+  Scaleform::Render::Text::FontHandle *v50; // rcx
+  int v51; // r8d
+  int NextOffsetY; // ecx
+  unsigned int MemSize; // ecx
   signed int v54; // ecx
   int v55; // eax
   signed int v56; // ecx
   int v57; // eax
-  int v58; // ecx
+  int LeftMargin; // ecx
   float v59; // xmm1_4
   float v60; // xmm1_4
   bool v61; // sf
   int v62; // eax
   signed int v63; // ecx
   int v64; // eax
-  float v65; // xmm0_4
+  float TextRectWidth; // xmm0_4
   float v66; // xmm0_4
-  int v67; // ecx
+  int ParaWidth; // ecx
   int v68; // ecx
   double v69; // xmm1_8
   double v70; // xmm1_8
   Scaleform::Render::Text::FontHandle *v71; // rcx
-  Scaleform::Render::Text::LineBuffer::GlyphIterator result; // [rsp+40h] [rbp-E8h]
+  Scaleform::Render::Text::LineBuffer::GlyphIterator result; // [rsp+40h] [rbp-E8h] BYREF
 
-  v1 = this;
-  v2 = this->LineCursor.LastAdvance;
-  if ( v2 <= 0.0 )
-    v3 = v2 - 0.5;
+  LastAdvance = this->LineCursor.LastAdvance;
+  if ( LastAdvance <= 0.0 )
+    v3 = LastAdvance - 0.5;
   else
-    v3 = v2 + 0.5;
-  v4 = (signed int)v3;
-  v5 = this->LineCursor.pPrevGrec;
-  if ( v5 )
+    v3 = LastAdvance + 0.5;
+  v4 = (int)v3;
+  pPrevGrec = this->LineCursor.pPrevGrec;
+  if ( pPrevGrec )
   {
     if ( v4 < 0 )
     {
-      v5->Advance = abs(v4);
-      v5->Flags |= 0x40u;
+      pPrevGrec->Advance = abs32(v4);
+      pPrevGrec->Flags |= 0x40u;
     }
     else
     {
-      v5->Advance = v4;
-      v5->Flags &= 0xFFBFu;
+      pPrevGrec->Advance = v4;
+      pPrevGrec->Flags &= ~0x40u;
     }
   }
-  if ( v1->LineCursor.pLastFont.pObject )
-    v1->LineCursor.LineWidth += v1->LineCursor.LastGlyphWidth;
+  if ( this->LineCursor.pLastFont.pObject )
+    this->LineCursor.LineWidth += this->LineCursor.LastGlyphWidth;
   else
-    v1->LineCursor.LineWidth += v4;
-  v6 = v1->pParaFormat;
-  if ( v6->PresentMask & 1
-    && ((v6->PresentMask & 0x600) == 512 || v6->PresentMask & 1 && (v6->PresentMask & 0x600) == 1536) )
+    this->LineCursor.LineWidth += v4;
+  pParaFormat = this->pParaFormat;
+  if ( (pParaFormat->PresentMask & 1) != 0
+    && ((pParaFormat->PresentMask & 0x600) == 512
+     || (pParaFormat->PresentMask & 1) != 0 && (pParaFormat->PresentMask & 0x600) == 1536) )
   {
-    v7 = v1->LineCursor.RightMargin;
-    v1->LineCursor.LineWidth += v7;
-    v1->LineCursor.LineWidthWithoutTrailingSpaces += v7;
+    RightMargin = this->LineCursor.RightMargin;
+    this->LineCursor.LineWidth += RightMargin;
+    this->LineCursor.LineWidthWithoutTrailingSpaces += RightMargin;
   }
-  if ( (LOBYTE(v6->PresentMask) >> 3) & 1 )
-    v8 = (float)v6->Leading * 20.0;
+  if ( (pParaFormat->PresentMask & 8) != 0 )
+    MaxFontLeading = (float)pParaFormat->Leading * 20.0;
   else
-    v8 = v1->LineCursor.MaxFontLeading;
-  v9 = v1->LineCursor.MaxFontDescent + v1->LineCursor.MaxFontAscent;
+    MaxFontLeading = this->LineCursor.MaxFontLeading;
+  v9 = this->LineCursor.MaxFontDescent + this->LineCursor.MaxFontAscent;
   if ( v9 <= 0.0 )
     v10 = v9 - 0.5;
   else
     v10 = v9 + 0.5;
-  v11 = (signed int)v10;
-  if ( v8 <= 0.0 )
-    v12 = v8 - 0.5;
+  v11 = (int)v10;
+  if ( MaxFontLeading <= 0.0 )
+    v12 = MaxFontLeading - 0.5;
   else
-    v12 = v8 + 0.5;
-  v13 = (signed int)v12;
-  v14 = v1->LineCursor.LineWidth;
-  if ( (v14 & 0x80000000) != 0 )
-    v14 = 0;
-  v1->LineCursor.LineWidth = v14;
-  v15 = v1->LineCursor.LineWidthWithoutTrailingSpaces;
-  if ( v15 < 0 )
-    v15 = 0;
-  v1->LineCursor.LineWidthWithoutTrailingSpaces = v15;
-  v16 = v1->LineCursor.GlyphIns.GlyphIndex;
-  v17 = v1->LineCursor.GlyphIns.FormatDataIndex;
-  if ( v1->pDocView->AlignProps & 0x30
-    || v1->LineCursor.LineLength > 0xFF
-    || (unsigned int)v16 > 0xFF
+    v12 = MaxFontLeading + 0.5;
+  v13 = (int)v12;
+  LineWidth = this->LineCursor.LineWidth;
+  if ( LineWidth < 0 )
+    LineWidth = 0;
+  this->LineCursor.LineWidth = LineWidth;
+  LineWidthWithoutTrailingSpaces = this->LineCursor.LineWidthWithoutTrailingSpaces;
+  if ( LineWidthWithoutTrailingSpaces < 0 )
+    LineWidthWithoutTrailingSpaces = 0;
+  this->LineCursor.LineWidthWithoutTrailingSpaces = LineWidthWithoutTrailingSpaces;
+  GlyphIndex = this->LineCursor.GlyphIns.GlyphIndex;
+  FormatDataIndex = this->LineCursor.GlyphIns.FormatDataIndex;
+  if ( (this->pDocView->AlignProps & 0x30) != 0
+    || this->LineCursor.LineLength > 0xFF
+    || (unsigned int)GlyphIndex > 0xFF
     || (unsigned int)(v13 + 128) > 0xFF
     || v11 > 0xFFFF
-    || v14 > 0xFFFF )
+    || (unsigned int)LineWidth > 0xFFFF )
   {
-    v18 = v1->pLinesIter;
-    LODWORD(v21) = v18->CurrentPos;
-    if ( (v21 & 0x80000000) != 0i64 || (_DWORD)v21 == -1 )
-      v21 = v18->pLineBuffer->Lines.Data.Size;
-    v20 = Scaleform::Render::Text::LineBuffer::InsertNewLine(v18->pLineBuffer, v21, v16, v17, Line32);
+    pLinesIter = this->pLinesIter;
+    LODWORD(Size) = pLinesIter->CurrentPos;
+    if ( (Size & 0x80000000) != 0i64 )
+      Size = pLinesIter->pLineBuffer->Lines.Data.Size;
+    inserted = Scaleform::Render::Text::LineBuffer::InsertNewLine(
+                 pLinesIter->pLineBuffer,
+                 Size,
+                 GlyphIndex,
+                 FormatDataIndex,
+                 Line32);
   }
   else
   {
-    v18 = v1->pLinesIter;
-    LODWORD(v19) = v18->CurrentPos;
-    if ( (v19 & 0x80000000) != 0i64 || (_DWORD)v19 == -1 )
-      v19 = v18->pLineBuffer->Lines.Data.Size;
-    v20 = Scaleform::Render::Text::LineBuffer::InsertNewLine(v18->pLineBuffer, v19, v16, v17, 0);
+    pLinesIter = this->pLinesIter;
+    LODWORD(v19) = pLinesIter->CurrentPos;
+    if ( (v19 & 0x80000000) != 0i64 )
+      v19 = pLinesIter->pLineBuffer->Lines.Data.Size;
+    inserted = Scaleform::Render::Text::LineBuffer::InsertNewLine(
+                 pLinesIter->pLineBuffer,
+                 v19,
+                 GlyphIndex,
+                 FormatDataIndex,
+                 Line8);
   }
-  ++v18->CurrentPos;
-  v22 = v20;
-  v23 = v1->LineCursor.pParagraph->UniqueId;
-  v24 = (v20->MemSize & 0x80000000) != 0;
-  if ( (v20->MemSize & 0x80000000) == 0 )
-    v20->Data32.ParagraphId = v23;
+  ++pLinesIter->CurrentPos;
+  v22 = inserted;
+  UniqueId = this->LineCursor.pParagraph->UniqueId;
+  v24 = (inserted->MemSize & 0x80000000) != 0;
+  if ( (inserted->MemSize & 0x80000000) == 0 )
+    inserted->Data32.ParagraphId = UniqueId;
   else
-    v20->Data32.GlyphsCount = v23;
-  v25 = v1->LineCursor.pParagraph->ModCounter;
+    inserted->Data32.GlyphsCount = UniqueId;
+  ModCounter = this->LineCursor.pParagraph->ModCounter;
   if ( v24 )
-    v20->Data8.ParagraphModId = v25;
+    inserted->Data8.ParagraphModId = ModCounter;
   else
-    v20->Data32.ParagraphModId = v25;
-  v26 = v1->pTempLine;
-  if ( (v26->MemSize & 0x80000000) == 0 )
-    v27 = (char *)&v26->Data8 + 38;
+    inserted->Data32.ParagraphModId = ModCounter;
+  pTempLine = this->pTempLine;
+  if ( (pTempLine->MemSize & 0x80000000) == 0 )
+    v27 = (char *)&pTempLine->Data8 + 38;
   else
-    v27 = &v26->Data8.Leading + 1;
-  v28 = v24 == 0;
-  v29 = &v20->Data8.Leading + 1;
+    v27 = &pTempLine->Data8.Leading + 1;
+  v28 = !v24;
+  v29 = &inserted->Data8.Leading + 1;
   if ( v28 )
-    v29 = (char *)&v20->Data8 + 38;
-  memmove(v29, v27, 8 * v16);
-  v30 = v1->pTempLine;
-  v31 = (signed __int64)(&v30->Data8.Leading + 1);
+    v29 = (char *)&inserted->Data8 + 38;
+  memmove(v29, v27, 8 * GlyphIndex);
+  v30 = this->pTempLine;
+  v31 = &v30->Data8.Leading + 1;
   if ( (v30->MemSize & 0x80000000) == 0 )
-    v31 = (signed __int64)&v30->Data8 + 38;
+    v31 = (char *)&v30->Data8 + 38;
   if ( (v30->MemSize & 0x80000000) == 0 )
-    v32 = v30->Data32.GlyphsCount;
+    GlyphsCount = v30->Data32.GlyphsCount;
   else
-    v32 = (unsigned __int8)v30->Data8.GlyphsCount;
-  v33 = v31 + 8i64 * v32;
-  v34 = (signed __int64)(&v22->Data8.Leading + 1);
+    GlyphsCount = (unsigned __int8)v30->Data8.GlyphsCount;
+  v33 = &v31[8 * GlyphsCount];
+  v34 = &v22->Data8.Leading + 1;
   if ( (v22->MemSize & 0x80000000) == 0 )
-    v34 = (signed __int64)&v22->Data8 + 38;
+    v34 = (char *)&v22->Data8 + 38;
   if ( (v22->MemSize & 0x80000000) == 0 )
     v35 = v22->Data32.GlyphsCount;
   else
     v35 = (unsigned __int8)v22->Data8.GlyphsCount;
   memmove(
-    (void *)((v34 + 8 * v35 + 7) & 0xFFFFFFFFFFFFFFF8ui64),
-    (const void *)((v33 + 7) & 0xFFFFFFFFFFFFFFF8ui64),
-    8 * v17);
-  v36 = v1->pTempLine;
+    (void *)((unsigned __int64)&v34[8 * v35 + 7] & 0xFFFFFFFFFFFFFFF8ui64),
+    (const void *)((unsigned __int64)(v33 + 7) & 0xFFFFFFFFFFFFFFF8ui64),
+    8 * FormatDataIndex);
+  v36 = this->pTempLine;
   v37 = v36->MemSize >> 31;
-  v38 = v36->Data32.TextPos;
-  if ( v37 & 1 )
+  TextPos = v36->Data32.TextPos;
+  if ( (v37 & 1) != 0 )
   {
-    v38 &= 0xFFFFFFu;
-    if ( v38 == 0xFFFFFF )
-      v38 = -1;
+    TextPos &= 0xFFFFFFu;
+    if ( TextPos == 0xFFFFFF )
+      TextPos = -1;
   }
   if ( (v22->MemSize & 0x80000000) == 0 )
   {
-    v22->Data32.TextPos = v38;
+    v22->Data32.TextPos = TextPos;
   }
   else
   {
     v22->Data32.TextPos &= 0xFF000000;
-    v22->Data32.TextPos |= v38 & 0xFFFFFF;
+    v22->Data32.TextPos |= TextPos & 0xFFFFFF;
   }
-  v39 = v1->LineCursor.LineLength;
+  LineLength = this->LineCursor.LineLength;
   if ( (v22->MemSize & 0x80000000) == 0 )
-    v22->Data32.TextLength = v39;
+    v22->Data32.TextLength = LineLength;
   else
-    HIBYTE(v22->Data8.TextPosAndLength) = v39;
-  v40 = (signed int)v1->LineCursor.MaxFontAscent;
+    HIBYTE(v22->Data8.TextPosAndLength) = LineLength;
+  MaxFontAscent = (int)this->LineCursor.MaxFontAscent;
   if ( (v22->MemSize & 0x80000000) == 0 )
-    v22->Data32.BaseLineOffset = v40;
+    v22->Data32.BaseLineOffset = MaxFontAscent;
   else
-    v22->Data8.BaseLineOffset = v40;
-  if ( !v1->LineCursor.LineHasNewLine )
+    v22->Data8.BaseLineOffset = MaxFontAscent;
+  if ( !this->LineCursor.LineHasNewLine && (this->pDocView->Flags & 8) != 0 )
   {
-    if ( v1->pDocView->Flags & 8 )
+    v41 = this->LineCursor.NumOfSpaces - this->LineCursor.NumOfTrailingSpaces;
+    if ( v41 )
     {
-      if ( v1->LineCursor.NumOfSpaces != v1->LineCursor.NumOfTrailingSpaces )
+      v42 = this->pParaFormat;
+      if ( (v42->PresentMask & 1) != 0 && (v42->PresentMask & 0x600) == 1024 )
       {
-        v41 = v1->pParaFormat;
-        if ( v41->PresentMask & 1 )
+        v43 = (int)(float)(this->TextRectWidth - 30.0)
+            - this->LineCursor.RightMargin
+            - this->LineCursor.LeftMargin
+            - this->LineCursor.Indent
+            - this->LineCursor.LineWidthWithoutTrailingSpaces;
+        if ( v43 > 0 )
         {
-          if ( (v41->PresentMask & 0x600) == 1024 )
+          v44 = v43 / v41;
+          Scaleform::Render::Text::LineBuffer::Line::Begin(v22, &result);
+          while ( 1 )
           {
-            v42 = (signed int)(float)(v1->TextRectWidth - 30.0)
-                - v1->LineCursor.RightMargin
-                - v1->LineCursor.LeftMargin
-                - v1->LineCursor.Indent
-                - v1->LineCursor.LineWidthWithoutTrailingSpaces;
-            if ( v42 > 0 )
+            pGlyphs = result.pGlyphs;
+            if ( !result.pGlyphs || result.pGlyphs >= result.pEndGlyphs )
+              break;
+            Flags = result.pGlyphs->Flags;
+            if ( (Flags & 2) != 0 )
             {
-              v43 = v42 / (v1->LineCursor.NumOfSpaces - v1->LineCursor.NumOfTrailingSpaces);
-              Scaleform::Render::Text::LineBuffer::Line::Begin(v22, &result);
-              while ( 1 )
+              Advance = result.pGlyphs->Advance;
+              if ( (Flags & 0x40) != 0 )
+                Advance = -Advance;
+              v48 = v44 + Advance;
+              if ( v48 < 0 )
               {
-                v44 = result.pGlyphs;
-                if ( !result.pGlyphs || result.pGlyphs >= result.pEndGlyphs )
-                  break;
-                v45 = result.pGlyphs->Flags;
-                if ( ((unsigned __int8)v45 >> 1) & 1 )
-                {
-                  v46 = result.pGlyphs->Advance;
-                  if ( ((unsigned __int8)v45 >> 6) & 1 )
-                    v46 = -v46;
-                  v47 = v43 + v46;
-                  if ( v47 < 0 )
-                  {
-                    LOWORD(v47) = abs(v47);
-                    result.pGlyphs->Flags |= 0x40u;
-                  }
-                  else
-                  {
-                    result.pGlyphs->Flags &= 0xFFBFu;
-                  }
-                  v44->Advance = v47;
-                }
-                Scaleform::Render::Text::LineBuffer::GlyphIterator::operator++(&result);
+                LOWORD(v48) = abs32(v48);
+                result.pGlyphs->Flags |= 0x40u;
               }
-              v1->LineCursor.LineWidth += v42;
-              v48 = result.pImage.pObject;
-              if ( result.pImage.pObject )
+              else
               {
-                --result.pImage.pObject->RefCount;
-                if ( !v48->RefCount )
-                  v48->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v48->vfptr, 1u);
+                result.pGlyphs->Flags &= ~0x40u;
               }
-              v49 = result.pFontHandle.pObject;
-              if ( result.pFontHandle.pObject && !_InterlockedDecrement(&result.pFontHandle.pObject->RefCount) && v49 )
-                v49->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v49->vfptr, 1u);
+              pGlyphs->Advance = v48;
             }
+            Scaleform::Render::Text::LineBuffer::GlyphIterator::operator++(&result);
           }
+          this->LineCursor.LineWidth += v43;
+          pObject = result.pImage.pObject;
+          if ( result.pImage.pObject )
+          {
+            --result.pImage.pObject->RefCount;
+            if ( !pObject->RefCount )
+              pObject->vfptr->__vecDelDtor(pObject, 1u);
+          }
+          v50 = result.pFontHandle.pObject;
+          if ( result.pFontHandle.pObject && !_InterlockedDecrement(&result.pFontHandle.pObject->RefCount) && v50 )
+            v50->vfptr->__vecDelDtor(v50, 1u);
         }
       }
     }
   }
-  v50 = v1->LineCursor.Indent + v1->LineCursor.LeftMargin;
-  v51 = v1->NextOffsetY;
-  v52 = v22->MemSize;
-  v22->Data32.OffsetX = v50;
-  v22->Data32.OffsetY = v51;
-  v53 = v22->MemSize;
+  v51 = this->LineCursor.Indent + this->LineCursor.LeftMargin;
+  NextOffsetY = this->NextOffsetY;
+  v22->Data32.OffsetX = v51;
+  v22->Data32.OffsetY = NextOffsetY;
+  MemSize = v22->MemSize;
   if ( (v22->MemSize & 0x80000000) == 0 )
     v22->Data32.Leading = v13;
   else
     v22->Data8.Leading = v13;
-  if ( (((unsigned int)v1->pParaFormat->PresentMask >> 9) & 3) == 1 )
+  if ( ((this->pParaFormat->PresentMask >> 9) & 3) == 1 )
   {
-    v63 = v53 & 0xEFFFFFFF | 0x8000000;
+    v63 = MemSize & 0xE7FFFFFF | 0x8000000;
     v22->MemSize = v63;
-    v64 = v1->LineCursor.LineWidthWithoutTrailingSpaces;
+    v64 = this->LineCursor.LineWidthWithoutTrailingSpaces;
     if ( v63 >= 0 )
     {
       v22->Data32.Width = v64;
@@ -2553,21 +2428,21 @@ void __fastcall Scaleform::Render::Text::ParagraphFormatter::FinalizeLine(Scalef
       v22->Data8.Width = v64;
       v22->Data8.Height = v11;
     }
-    v65 = v1->TextRectWidth;
-    if ( v65 <= 0.0 )
-      v66 = v65 - 0.5;
+    TextRectWidth = this->TextRectWidth;
+    if ( TextRectWidth <= 0.0 )
+      v66 = TextRectWidth - 0.5;
     else
-      v66 = v65 + 0.5;
-    v61 = (signed int)v66 - v1->LineCursor.LineWidthWithoutTrailingSpaces < 0;
-    v62 = (signed int)v66 - v1->LineCursor.LineWidthWithoutTrailingSpaces;
+      v66 = TextRectWidth + 0.5;
+    v61 = (int)v66 - this->LineCursor.LineWidthWithoutTrailingSpaces < 0;
+    v62 = (int)v66 - this->LineCursor.LineWidthWithoutTrailingSpaces;
   }
   else
   {
-    if ( (((unsigned int)v1->pParaFormat->PresentMask >> 9) & 3) != 3 )
+    if ( ((this->pParaFormat->PresentMask >> 9) & 3) != 3 )
     {
-      v54 = v53 & 0xE7FFFFFF;
+      v54 = MemSize & 0xE7FFFFFF;
       v22->MemSize = v54;
-      v55 = v1->LineCursor.LineWidth;
+      v55 = this->LineCursor.LineWidth;
       if ( v54 >= 0 )
       {
         v22->Data32.Width = v55;
@@ -2578,11 +2453,11 @@ void __fastcall Scaleform::Render::Text::ParagraphFormatter::FinalizeLine(Scalef
         v22->Data8.Width = v55;
         v22->Data8.Height = v11;
       }
-      goto LABEL_127;
+      goto LABEL_125;
     }
-    v56 = v53 & 0xF7FFFFFF | 0x10000000;
+    v56 = MemSize & 0xE7FFFFFF | 0x10000000;
     v22->MemSize = v56;
-    v57 = v1->LineCursor.LineWidthWithoutTrailingSpaces;
+    v57 = this->LineCursor.LineWidthWithoutTrailingSpaces;
     if ( v56 >= 0 )
     {
       v22->Data32.Width = v57;
@@ -2593,175 +2468,163 @@ void __fastcall Scaleform::Render::Text::ParagraphFormatter::FinalizeLine(Scalef
       v22->Data8.Width = v57;
       v22->Data8.Height = v11;
     }
-    v58 = v1->LineCursor.LeftMargin;
-    v59 = (float)((float)(v1->TextRectWidth - (float)v1->LineCursor.LeftMargin) * 0.5)
-        - (float)(v1->LineCursor.LineWidthWithoutTrailingSpaces / 2);
+    LeftMargin = this->LineCursor.LeftMargin;
+    v59 = (float)((float)(this->TextRectWidth - (float)LeftMargin) * 0.5)
+        - (float)(this->LineCursor.LineWidthWithoutTrailingSpaces / 2);
     if ( v59 <= 0.0 )
       v60 = v59 - 0.5;
     else
       v60 = v59 + 0.5;
-    v61 = v58 + (signed int)v60 < 0;
-    v62 = v58 + (signed int)v60;
+    v61 = LeftMargin + (int)v60 < 0;
+    v62 = LeftMargin + (int)v60;
   }
   if ( v61 )
     v62 = 0;
   v22->Data32.OffsetX = v62;
-  if ( v1->pDocView->Flags & 1 || v1->pDocView->AlignProps & 0x30 )
-    v1->NeedRecenterLines = 1;
-LABEL_127:
-  v67 = v50 + v1->LineCursor.LineWidth;
-  if ( v67 < v1->ParaWidth )
-    v67 = v1->ParaWidth;
-  v1->ParaWidth = v67;
-  v68 = v1->NextOffsetY;
-  v1->ParaHeight = v11 + v1->NextOffsetY - v1->ParaYOffset;
-  v69 = (double)(signed int)(v11 + v13);
+  if ( (this->pDocView->Flags & 1) != 0 || (this->pDocView->AlignProps & 0x30) != 0 )
+    this->NeedRecenterLines = 1;
+LABEL_125:
+  ParaWidth = v51 + this->LineCursor.LineWidth;
+  if ( ParaWidth < this->ParaWidth )
+    ParaWidth = this->ParaWidth;
+  this->ParaWidth = ParaWidth;
+  v68 = this->NextOffsetY;
+  this->ParaHeight = v11 + v68 - this->ParaYOffset;
+  v69 = (double)(int)(v11 + v13);
   if ( v69 <= 0.0 )
     v70 = v69 - 0.5;
   else
     v70 = v69 + 0.5;
-  v1->NextOffsetY = v68 + (signed int)v70;
-  v1->LineCursor.Indent = 0;
-  v1->LineCursor.GlyphIns.FormatDataIndex = 0;
-  v1->LineCursor.GlyphIns.GlyphIndex = 0;
-  v1->LineCursor.LastColor = 0;
-  v71 = v1->LineCursor.pLastFont.pObject;
-  if ( v71 && !_InterlockedDecrement(&v71->RefCount) && v71 )
-    v71->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v71->vfptr, 1u);
-  v1->LineCursor.pLastFont.pObject = 0i64;
-}0;
-  v1->LineCursor.Indent = 0;
-  v1->LineCursor.GlyphIns.FormatDataIndex = 0;
-  v1->LineCursor.GlyphIns.GlyphIndex = 0;
-  v1->LineCursor.LastColor = 0;
-  v71 = v1->LineCursor.pLastFont.pObject;
-  if ( v71 && !_InterlockedDecrement(&v71->RefCount) && v71 )
-    v71->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v71->vfptr, 1u);
-  v1->LineCursor.pLastFont.pObjec
+  this->NextOffsetY = v68 + (int)v70;
+  this->LineCursor.Indent = 0;
+  this->LineCursor.GlyphIns.FormatDataIndex = 0;
+  this->LineCursor.GlyphIns.GlyphIndex = 0;
+  this->LineCursor.LastColor = 0;
+  v71 = this->LineCursor.pLastFont.pObject;
+  if ( v71 && !_InterlockedDecrement(&v71->RefCount) )
+    v71->vfptr->__vecDelDtor(v71, 1u);
+  this->LineCursor.pLastFont.pObject = 0i64;
+}
 
 // File Line: 1567
 // RVA: 0x990920
-char __fastcall Scaleform::Render::Text::ParagraphFormatter::HandleCustomWordWrap(Scaleform::Render::Text::ParagraphFormatter *this)
+char __fastcall Scaleform::Render::Text::ParagraphFormatter::HandleCustomWordWrap(
+        Scaleform::Render::Text::ParagraphFormatter *this)
 {
-  Scaleform::Render::Text::ParagraphFormatter *v1; // rbx
-  Scaleform::Render::Text::FontHandle *v2; // rdi
-  int v3; // eax
-  Scaleform::Render::Text::Paragraph::TextBuffer *v4; // rax
+  Scaleform::Render::Text::FontHandle *pObject; // rdi
+  int Pass; // eax
+  Scaleform::Render::Text::Paragraph::TextBuffer *pText; // rax
   __m128i v5; // xmm2
   Scaleform::Render::Font *v6; // rdi
-  unsigned __int64 *v7; // rsi
-  int v8; // xmm2_4
-  Scaleform::Render::Text::LineBuffer::Line *v9; // rcx
-  signed __int64 v10; // rcx
-  unsigned int v11; // ecx
+  unsigned __int64 *NumChars; // rsi
+  unsigned int v8; // xmm2_4
+  Scaleform::Render::Text::LineBuffer::Line *pTempLine; // rcx
+  __int64 TextPos; // rcx
+  int v11; // ecx
   int v12; // ecx
   int v13; // ecx
-  float v14; // xmm0_4
-  signed int v15; // eax
-  char *v16; // r13
-  Scaleform::Render::Text::Allocator *v17; // rax
-  unsigned int v18; // er10
-  unsigned int v19; // edi
-  Scaleform::Render::Text::LineBuffer::GlyphEntry *v20; // rsi
-  float v21; // xmm2_4
-  signed __int64 v22; // r9
-  unsigned __int16 *v23; // rcx
-  unsigned __int16 *v24; // rdx
-  unsigned __int16 *v25; // r8
+  int v14; // eax
+  char *v15; // r13
+  Scaleform::Render::Text::Allocator *Allocator; // rax
+  unsigned int v17; // r10d
+  unsigned int GlyphIndex; // edi
+  Scaleform::Render::Text::LineBuffer::GlyphEntry *pGlyphs; // rsi
+  float v20; // xmm2_4
+  __int64 v21; // r9
+  unsigned __int16 *v22; // rcx
+  unsigned __int16 *p_Flags; // rdx
+  unsigned __int16 *p_LenAndFontSize; // r8
+  int v25; // eax
   int v26; // eax
   int v27; // eax
   int v28; // eax
-  int v29; // eax
-  unsigned __int16 *v30; // rcx
-  int v31; // eax
-  float v32; // xmm1_4
-  signed __int64 v33; // r11
-  __int64 v34; // rdi
-  float *v35; // rcx
-  int v36; // eax
-  unsigned int v37; // er10
-  signed __int64 v38; // rdx
-  __int64 v39; // r8
-  char v40; // r15
-  unsigned __int64 v41; // rdx
-  Scaleform::Render::Text::Paragraph::TextBuffer *v42; // rax
-  Scaleform::Render::Text::GFxLineCursor *v43; // rdx
-  Scaleform::Render::Text::Paragraph::TextBuffer *v44; // rax
-  __int64 v45; // rdx
-  unsigned int v46; // er9
-  Scaleform::Render::Text::GFxLineCursor *v47; // rax
-  Scaleform::Render::Text::TextFormat *v48; // rdi
-  bool v49; // zf
-  Scaleform::Render::Text::TextFormat *v50; // rdi
-  Scaleform::Render::Text::FontHandle *v51; // rcx
-  Scaleform::Render::Text::GFxLineCursor *v53; // rax
-  signed __int64 v54; // rdi
+  unsigned __int16 *p_Advance; // rcx
+  int v30; // eax
+  float v31; // xmm1_4
+  __int64 v32; // r11
+  __int64 v33; // rdi
+  float *v34; // rcx
+  int v35; // eax
+  unsigned int v36; // r10d
+  __int64 v37; // rdx
+  __int64 v38; // r8
+  char v39; // r15
+  unsigned __int64 v40; // rdx
+  Scaleform::Render::Text::Paragraph::TextBuffer *v41; // rax
+  Scaleform::Render::Text::GFxLineCursor *p_WordWrapPoint; // rdx
+  Scaleform::Render::Text::Paragraph::TextBuffer *v43; // rax
+  __int64 v44; // rdx
+  unsigned int v45; // r9d
+  Scaleform::Render::Text::GFxLineCursor *v46; // rax
+  Scaleform::Render::Text::TextFormat *Index; // rdi
+  bool v48; // zf
+  Scaleform::Render::Text::TextFormat *ComposStrLength; // rdi
+  Scaleform::Render::Text::FontHandle *v50; // rcx
+  Scaleform::Render::Text::GFxLineCursor *v52; // rax
+  Scaleform::Render::Text::LineBuffer::GlyphEntry *v53; // rdi
+  float LastAdvance; // xmm0_4
   float v55; // xmm0_4
-  float v56; // xmm0_4
-  signed int v57; // eax
-  Scaleform::Render::Text::LineBuffer::GlyphEntry *v58; // rcx
-  unsigned int v59; // esi
-  __int16 v60; // dx
-  float v61; // xmm1_4
-  signed int v62; // ecx
+  int v56; // eax
+  Scaleform::Render::Text::LineBuffer::GlyphEntry *pPrevGrec; // rcx
+  unsigned int v58; // esi
+  unsigned __int16 LenAndFontSize; // dx
+  float FontSize; // xmm1_4
+  int v61; // ecx
+  double v62; // xmm0_8
   float v63; // xmm7_4
   float v64; // xmm1_4
   float v65; // xmm1_4
   unsigned int v66; // eax
-  wchar_t *v67; // [rsp+20h] [rbp-A8h]
-  unsigned __int64 v68; // [rsp+28h] [rbp-A0h]
-  char *v69; // [rsp+30h] [rbp-98h]
-  unsigned __int64 v70; // [rsp+38h] [rbp-90h]
-  unsigned __int64 v71; // [rsp+40h] [rbp-88h]
-  __int64 v72; // [rsp+48h] [rbp-80h]
-  __int64 v73; // [rsp+50h] [rbp-78h]
-  __int64 v74; // [rsp+58h] [rbp-70h]
-  __int64 v75; // [rsp+60h] [rbp-68h]
-  _BOOL8 v76; // [rsp+68h] [rbp-60h]
-  Scaleform::Render::Text::GFxLineCursor __that; // [rsp+70h] [rbp-58h]
-  char v78; // [rsp+268h] [rbp+1A0h]
-  unsigned __int64 *v79; // [rsp+6D8h] [rbp+610h]
-  unsigned __int64 *v80; // [rsp+6E0h] [rbp+618h]
+  __int64 v67[4]; // [rsp+20h] [rbp-A8h] BYREF
+  unsigned __int64 v68; // [rsp+40h] [rbp-88h]
+  __int64 v69; // [rsp+48h] [rbp-80h]
+  __int64 v70; // [rsp+50h] [rbp-78h]
+  __int64 v71; // [rsp+58h] [rbp-70h]
+  __int64 v72; // [rsp+60h] [rbp-68h]
+  _BOOL8 v73; // [rsp+68h] [rbp-60h]
+  Scaleform::Render::Text::GFxLineCursor __that; // [rsp+70h] [rbp-58h] BYREF
+  char v75[1128]; // [rsp+268h] [rbp+1A0h] BYREF
+  unsigned __int64 *p_Index; // [rsp+6D8h] [rbp+610h]
+  unsigned __int64 *p_ComposStrLength; // [rsp+6E0h] [rbp+618h]
 
   *(_QWORD *)&__that.GlyphIns.FormatDataIndex = -2i64;
-  v1 = this;
-  v2 = this->LineCursor.pLastFont.pObject;
-  if ( v2 )
+  pObject = this->LineCursor.pLastFont.pObject;
+  if ( pObject )
   {
-    v3 = this->Pass;
-    if ( v3 == 1 && this->HasLineFormatHandler )
+    Pass = this->Pass;
+    if ( Pass == 1 && this->HasLineFormatHandler )
     {
-      v4 = this->WordWrapPoint.CharIter.pText;
-      if ( v4 && this->WordWrapPoint.CharIter.CurTextIndex < v4->Size )
+      pText = this->WordWrapPoint.CharIter.pText;
+      if ( pText && this->WordWrapPoint.CharIter.CurTextIndex < pText->Size )
       {
         v5 = _mm_cvtsi32_si128(this->WordWrapPoint.LineWidth);
         v6 = this->WordWrapPoint.pLastFont.pObject->pFont.pObject;
-        v7 = (unsigned __int64 *)this->WordWrapPoint.NumChars;
+        NumChars = (unsigned __int64 *)this->WordWrapPoint.NumChars;
       }
       else
       {
         v5 = _mm_cvtsi32_si128(this->LineCursor.LineWidth);
-        v6 = v2->pFont.pObject;
-        v7 = (unsigned __int64 *)this->LineCursor.NumChars;
+        v6 = pObject->pFont.pObject;
+        NumChars = (unsigned __int64 *)this->LineCursor.NumChars;
       }
-      v79 = v7;
-      v8 = (unsigned __int128)_mm_cvtepi32_ps(v5);
-      v67 = this->pTextBufForCustomFormat;
-      v68 = this->TextBufLen;
-      v9 = this->pTempLine;
-      if ( (v9->MemSize & 0x80000000) == 0 )
+      p_Index = NumChars;
+      v8 = _mm_cvtepi32_ps(v5).m128_u32[0];
+      v67[0] = (__int64)this->pTextBufForCustomFormat;
+      v67[1] = this->TextBufLen;
+      pTempLine = this->pTempLine;
+      if ( (pTempLine->MemSize & 0x80000000) == 0 )
       {
-        v10 = v9->Data32.TextPos;
+        TextPos = pTempLine->Data32.TextPos;
       }
       else
       {
-        v10 = v9->Data32.TextPos & 0xFFFFFF;
-        if ( (_DWORD)v10 == 0xFFFFFF )
-          v10 = 0xFFFFFFFFi64;
+        TextPos = pTempLine->Data32.TextPos & 0xFFFFFF;
+        if ( (_DWORD)TextPos == 0xFFFFFF )
+          TextPos = 0xFFFFFFFFi64;
       }
-      v70 = v10 - v1->pParagraph->StartIndex;
-      v71 = v1->LineCursor.NumChars;
-      v11 = ((unsigned int)v1->pParaFormat->PresentMask >> 9) & 3;
+      v67[3] = TextPos - this->pParagraph->StartIndex;
+      v68 = this->LineCursor.NumChars;
+      v11 = (this->pParaFormat->PresentMask >> 9) & 3;
       if ( v11 )
       {
         v12 = v11 - 1;
@@ -2771,343 +2634,323 @@ char __fastcall Scaleform::Render::Text::ParagraphFormatter::HandleCustomWordWra
           if ( v13 )
           {
             if ( v13 == 1 )
-              LOBYTE(v74) = 2;
+              LOBYTE(v71) = 2;
           }
           else
           {
-            LOBYTE(v74) = 3;
+            LOBYTE(v71) = 3;
           }
         }
         else
         {
-          LOBYTE(v74) = 1;
+          LOBYTE(v71) = 1;
         }
       }
       else
       {
-        LOBYTE(v74) = 0;
+        LOBYTE(v71) = 0;
       }
-      v14 = v1->TextRectWidth;
-      *(float *)&v72 = v1->TextRectWidth;
-      *((float *)&v72 + 1) = (float)v1->LineCursor.LineWidth;
-      LODWORD(v73) = v8;
-      v15 = (__int64)v6->vfptr[2].__vecDelDtor((Scaleform::RefCountImplCore *)&v6->vfptr, 45u);
-      if ( v15 > 0 )
+      *(float *)&v69 = this->TextRectWidth;
+      *((float *)&v69 + 1) = (float)this->LineCursor.LineWidth;
+      LODWORD(v70) = v8;
+      v14 = (int)v6->vfptr[2].__vecDelDtor(v6, 45u);
+      if ( v14 > 0 )
+        HIDWORD(v70) = ((float (__fastcall *)(Scaleform::Render::Font *, _QWORD))v6->vfptr[5].__vecDelDtor)(
+                         v6,
+                         (unsigned int)v14);
+      v72 = (__int64)NumChars;
+      v15 = v75;
+      if ( v68 + 1 > 0x100 )
       {
-        v6->vfptr[5].__vecDelDtor((Scaleform::RefCountImplCore *)&v6->vfptr, v15);
-        *((float *)&v73 + 1) = v14;
+        Allocator = Scaleform::Render::Text::StyledText::GetAllocator(this->pDocView->pDocument.pObject);
+        v15 = (char *)Allocator->pHeap->vfptr->Alloc(Allocator->pHeap, 4 * v68 + 4, 0i64);
       }
-      v75 = (__int64)v7;
-      v16 = &v78;
-      if ( v71 + 1 > 0x100 )
-      {
-        v17 = Scaleform::Render::Text::StyledText::GetAllocator((Scaleform::Render::Text::StyledText *)&v1->pDocView->pDocument.pObject->vfptr);
-        v16 = (char *)v17->pHeap->vfptr->Alloc(v17->pHeap, 4 * v71 + 4, 0i64);
-      }
-      v18 = 0;
-      v19 = v1->LineCursor.GlyphIns.GlyphIndex;
-      v20 = v1->LineCursor.GlyphIns.pGlyphs;
-      v21 = 0.0;
-      v22 = 0i64;
-      if ( (signed int)v19 < 4 )
+      v17 = 0;
+      GlyphIndex = this->LineCursor.GlyphIns.GlyphIndex;
+      pGlyphs = this->LineCursor.GlyphIns.pGlyphs;
+      v20 = 0.0;
+      v21 = 0i64;
+      if ( (int)GlyphIndex < 4 )
       {
 LABEL_44:
-        if ( v18 < v19 )
+        if ( v17 < GlyphIndex )
         {
-          v30 = &v20[v22].Advance;
+          p_Advance = &pGlyphs[v21].Advance;
           do
           {
-            if ( v30[1] & 0xF000 )
+            if ( (p_Advance[1] & 0xF000) != 0 )
               break;
-            v31 = *v30;
-            if ( (*((_BYTE *)v30 + 4) >> 6) & 1 )
-              v31 = -v31;
-            v21 = v21 + (float)v31;
-            v30 += 4;
-            ++v18;
+            v30 = *p_Advance;
+            if ( (p_Advance[2] & 0x40) != 0 )
+              v30 = -v30;
+            v20 = v20 + (float)v30;
+            p_Advance += 4;
+            ++v17;
           }
-          while ( v18 < v19 );
+          while ( v17 < GlyphIndex );
         }
       }
       else
       {
-        v23 = &v20->Advance;
-        v24 = &v20->Flags;
-        v25 = &v20->LenAndFontSize;
-        while ( !(*v25 & 0xF000) )
+        v22 = &pGlyphs->Advance;
+        p_Flags = &pGlyphs->Flags;
+        p_LenAndFontSize = &pGlyphs->LenAndFontSize;
+        while ( (*p_LenAndFontSize & 0xF000) == 0 )
         {
-          v26 = *v23;
-          if ( (*(_BYTE *)v24 >> 6) & 1 )
+          v25 = *v22;
+          if ( (*(_BYTE *)p_Flags & 0x40) != 0 )
+            v25 = -v25;
+          v20 = v20 + (float)v25;
+          if ( (p_LenAndFontSize[4] & 0xF000) != 0 )
+          {
+            ++v17;
+            break;
+          }
+          v26 = v22[4];
+          if ( (p_Flags[4] & 0x40) != 0 )
             v26 = -v26;
-          v21 = v21 + (float)v26;
-          if ( v25[4] & 0xF000 )
+          v20 = v20 + (float)v26;
+          if ( (p_LenAndFontSize[8] & 0xF000) != 0 )
           {
-            ++v18;
+            v17 += 2;
             break;
           }
-          v27 = v23[4];
-          if ( (*((_BYTE *)v24 + 8) >> 6) & 1 )
+          v27 = v22[8];
+          if ( (p_Flags[8] & 0x40) != 0 )
             v27 = -v27;
-          v21 = v21 + (float)v27;
-          if ( v25[8] & 0xF000 )
+          v20 = v20 + (float)v27;
+          if ( (p_LenAndFontSize[12] & 0xF000) != 0 )
           {
-            v18 += 2;
+            v17 += 3;
             break;
           }
-          v28 = v23[8];
-          if ( (*((_BYTE *)v24 + 16) >> 6) & 1 )
+          v28 = v22[12];
+          if ( (p_Flags[12] & 0x40) != 0 )
             v28 = -v28;
-          v21 = v21 + (float)v28;
-          if ( v25[12] & 0xF000 )
-          {
-            v18 += 3;
-            break;
-          }
-          v29 = v23[12];
-          if ( (*((_BYTE *)v24 + 24) >> 6) & 1 )
-            v29 = -v29;
-          v21 = v21 + (float)v29;
-          v22 += 4i64;
-          v25 += 16;
-          v24 += 16;
-          v23 += 16;
-          v18 += 4;
-          if ( v18 >= v19 - 3 )
+          v20 = v20 + (float)v28;
+          v21 += 4i64;
+          p_LenAndFontSize += 16;
+          p_Flags += 16;
+          v22 += 16;
+          v17 += 4;
+          if ( v17 >= GlyphIndex - 3 )
             goto LABEL_44;
         }
       }
-      v69 = v16;
-      *(float *)&v72 = *(float *)&v72 - v21;
-      *((float *)&v72 + 1) = *((float *)&v72 + 1) - v21;
-      *(float *)&v73 = *(float *)&v73 - v21;
-      v32 = 0.0;
-      v33 = 0i64;
-      if ( v18 < v19 )
+      v67[2] = (__int64)v15;
+      *(float *)&v69 = *(float *)&v69 - v20;
+      *((float *)&v69 + 1) = *((float *)&v69 + 1) - v20;
+      *(float *)&v70 = *(float *)&v70 - v20;
+      v31 = 0.0;
+      v32 = 0i64;
+      if ( v17 < GlyphIndex )
       {
-        v22 = (signed __int64)&v20[v18].Advance;
-        v34 = v19 - v18;
+        v21 = (__int64)&pGlyphs[v17].Advance;
+        v33 = GlyphIndex - v17;
         do
         {
-          v35 = (float *)&v16[4 * v33];
-          *v35 = v32;
-          v36 = *(unsigned __int16 *)v22;
-          if ( (*(_BYTE *)(v22 + 4) >> 6) & 1 )
-            v36 = -v36;
-          v32 = v32 + (float)v36;
-          v37 = (unsigned int)*(unsigned __int16 *)(v22 + 2) >> 12;
-          if ( v37 >= 2 )
+          v34 = (float *)&v15[4 * v32];
+          *v34 = v31;
+          v35 = *(unsigned __int16 *)v21;
+          if ( (*(_BYTE *)(v21 + 4) & 0x40) != 0 )
+            v35 = -v35;
+          v31 = v31 + (float)v35;
+          v36 = *(unsigned __int16 *)(v21 + 2) >> 12;
+          if ( v36 >= 2 )
           {
-            v38 = v33;
-            v39 = v37;
+            v37 = v32;
+            v38 = v36;
             do
             {
-              v1->pTextBufForCustomFormat[v38] = 160;
-              *v35 = 0.0;
-              ++v38;
-              ++v35;
-              --v39;
+              this->pTextBufForCustomFormat[v37] = 160;
+              *v34 = 0.0;
+              ++v37;
+              ++v34;
+              --v38;
             }
-            while ( v39 );
+            while ( v38 );
           }
-          v33 += v37;
-          v22 += 8i64;
-          --v34;
+          v32 += v36;
+          v21 += 8i64;
+          --v33;
         }
-        while ( v34 );
+        while ( v33 );
       }
-      *(float *)&v16[4 * v33] = v32;
-      LOBYTE(v76) = 0;
-      v40 = ((__int64 (__fastcall *)(Scaleform::Render::Text::DocView::DocumentListener *, Scaleform::Render::Text::DocView *, wchar_t **, signed __int64, wchar_t *, unsigned __int64, char *, unsigned __int64))v1->pDocView->pDocumentListener.pObject->vfptr[1].__vecDelDtor)(
-              v1->pDocView->pDocumentListener.pObject,
-              v1->pDocView,
-              &v67,
-              v22,
+      *(float *)&v15[4 * v32] = v31;
+      LOBYTE(v73) = 0;
+      v39 = ((__int64 (__fastcall *)(Scaleform::Render::Text::DocView::DocumentListener *, Scaleform::Render::Text::DocView *, __int64 *, __int64))this->pDocView->pDocumentListener.pObject->vfptr[1].__vecDelDtor)(
+              this->pDocView->pDocumentListener.pObject,
+              this->pDocView,
               v67,
-              v68,
-              v69,
-              v70);
-      if ( v40 )
+              v21);
+      if ( v39 )
       {
-        v1->HyphenationRequested = v76;
-        v41 = v75;
-        if ( !v75 )
-          v41 = 1i64;
-        v75 = v41;
-        if ( (unsigned __int64 *)v41 != v79 )
+        this->HyphenationRequested = v73;
+        v40 = v72;
+        if ( !v72 )
+          v40 = 1i64;
+        v72 = v40;
+        if ( (unsigned __int64 *)v40 != p_Index )
         {
-          v42 = v1->WordWrapPoint.CharIter.pText;
-          if ( v42 && v1->WordWrapPoint.CharIter.CurTextIndex < v42->Size && v41 > v1->WordWrapPoint.NumChars )
+          v41 = this->WordWrapPoint.CharIter.pText;
+          if ( v41 && this->WordWrapPoint.CharIter.CurTextIndex < v41->Size && v40 > this->WordWrapPoint.NumChars )
           {
             Scaleform::Render::Text::LineBuffer::GlyphInserter::ResetTo(
-              &v1->LineCursor.GlyphIns,
-              &v1->WordWrapPoint.GlyphIns);
-            v43 = &v1->WordWrapPoint;
+              &this->LineCursor.GlyphIns,
+              &this->WordWrapPoint.GlyphIns);
+            p_WordWrapPoint = &this->WordWrapPoint;
           }
           else
           {
-            v44 = v1->HalfPoint.CharIter.pText;
-            if ( v44 && v1->HalfPoint.CharIter.CurTextIndex < v44->Size && v41 > v1->HalfPoint.NumChars )
+            v43 = this->HalfPoint.CharIter.pText;
+            if ( v43 && this->HalfPoint.CharIter.CurTextIndex < v43->Size && v40 > this->HalfPoint.NumChars )
             {
               Scaleform::Render::Text::LineBuffer::GlyphInserter::ResetTo(
-                &v1->LineCursor.GlyphIns,
-                &v1->HalfPoint.GlyphIns);
-              v43 = &v1->HalfPoint;
+                &this->LineCursor.GlyphIns,
+                &this->HalfPoint.GlyphIns);
+              p_WordWrapPoint = &this->HalfPoint;
             }
             else
             {
-              v45 = v1->StartPoint.GlyphIns.GlyphIndex;
-              v46 = v1->LineCursor.GlyphIns.GlyphIndex;
-              if ( (unsigned int)v45 < v46 && v1->LineCursor.GlyphIns.GlyphsCount )
+              v44 = this->StartPoint.GlyphIns.GlyphIndex;
+              v45 = this->LineCursor.GlyphIns.GlyphIndex;
+              if ( (unsigned int)v44 < v45 && this->LineCursor.GlyphIns.GlyphsCount )
                 Scaleform::Render::Text::LineBuffer::ReleasePartOfLine(
-                  &v1->StartPoint.GlyphIns.pGlyphs[v45],
-                  v46 - v45,
-                  &v1->StartPoint.GlyphIns.pNextFormatData[v1->StartPoint.GlyphIns.FormatDataIndex]);
-              v1->LineCursor.GlyphIns.pGlyphs = v1->StartPoint.GlyphIns.pGlyphs;
-              v1->LineCursor.GlyphIns.pNextFormatData = v1->StartPoint.GlyphIns.pNextFormatData;
-              v1->LineCursor.GlyphIns.GlyphIndex = v1->StartPoint.GlyphIns.GlyphIndex;
-              v1->LineCursor.GlyphIns.GlyphsCount = v1->StartPoint.GlyphIns.GlyphsCount;
-              v1->LineCursor.GlyphIns.FormatDataIndex = v1->StartPoint.GlyphIns.FormatDataIndex;
-              v43 = &v1->StartPoint;
+                  &this->StartPoint.GlyphIns.pGlyphs[v44],
+                  v45 - v44,
+                  &this->StartPoint.GlyphIns.pNextFormatData[this->StartPoint.GlyphIns.FormatDataIndex]);
+              this->LineCursor.GlyphIns.pGlyphs = this->StartPoint.GlyphIns.pGlyphs;
+              this->LineCursor.GlyphIns.pNextFormatData = this->StartPoint.GlyphIns.pNextFormatData;
+              this->LineCursor.GlyphIns.GlyphIndex = this->StartPoint.GlyphIns.GlyphIndex;
+              this->LineCursor.GlyphIns.GlyphsCount = this->StartPoint.GlyphIns.GlyphsCount;
+              this->LineCursor.GlyphIns.FormatDataIndex = this->StartPoint.GlyphIns.FormatDataIndex;
+              p_WordWrapPoint = &this->StartPoint;
             }
           }
-          Scaleform::Render::Text::GFxLineCursor::operator=(&v1->LineCursor, v43);
-          v1->Pass = 2;
-          v1->RequestedWordWrapPos = v75;
-          v1->DeltaText = 0;
+          Scaleform::Render::Text::GFxLineCursor::operator=(&this->LineCursor, p_WordWrapPoint);
+          this->Pass = 2;
+          this->RequestedWordWrapPos = v72;
+          this->DeltaText = 0;
         }
       }
-      if ( v16 != &v78 )
+      if ( v15 != v75 )
       {
-        Scaleform::Render::Text::StyledText::GetAllocator((Scaleform::Render::Text::StyledText *)&v1->pDocView->pDocument.pObject->vfptr);
-        Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v16);
+        Scaleform::Render::Text::StyledText::GetAllocator(this->pDocView->pDocument.pObject);
+        Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v15);
       }
-      v72 = 0i64;
+      v69 = 0i64;
+      v70 = 0i64;
+      v71 = 0i64;
+      v72 = -1i64;
       v73 = 0i64;
-      v74 = 0i64;
-      v75 = -1i64;
-      v76 = 0i64;
-      __that.pPrevGrec = 0i64;
-      __that.pLastFont.pObject = 0i64;
-      *(_QWORD *)&__that.LastCharCode = 0i64;
-      *(_QWORD *)&__that.LastAdvance = 0i64;
-      *(_QWORD *)&__that.FirstGlyphWidth = 0i64;
-      __that.ComposStrPosition = 0i64;
-      v80 = &__that.ComposStrLength;
-      __that.ComposStrLength = 0i64;
-      __that.ComposStrCurPos = 0i64;
-      LOWORD(__that.pDocView) = 0;
+      memset(&__that, 0, 66);
+      p_ComposStrLength = &__that.ComposStrLength;
       __that.pParagraph = 0i64;
       *(_QWORD *)&__that.LineWidth = 0i64;
       *(_QWORD *)&__that.LineLength = -1i64;
-      *(_QWORD *)&__that.MaxFontDescent = 0i64;
-      __that.CharIter.PlaceHolder.pFormat.pObject = 0i64;
-      v79 = &__that.CharIter.PlaceHolder.Index;
-      *(_OWORD *)&__that.CharIter.PlaceHolder.Index = 0ui64;
-      LOWORD(__that.CharIter.pFormatInfo) = 0;
+      memset(&__that.MaxFontDescent, 0, 34);
+      p_Index = &__that.CharIter.PlaceHolder.Index;
       __that.CharIter.FormatIterator.pArray = 0i64;
       LODWORD(__that.CharIter.FormatIterator.Index) = 0;
-      __that.CharIter.pText = 0i64;
-      __that.CharIter.CurTextIndex = 0i64;
-      __that.CharInfoHolder.pFormat.pObject = 0i64;
-      LODWORD(__that.CharInfoHolder.Index) = 0;
+      memset(&__that.CharIter.pText, 0, 28);
       *(_QWORD *)&__that.CharInfoHolder.Character = 0i64;
-      __that.Indent = (signed int)FLOAT_1_0;
+      __that.Indent = (int)FLOAT_1_0;
       LOWORD(__that.LeftMargin) = 0;
       *(_QWORD *)&__that.RightMargin = 0i64;
-      v47 = Scaleform::Render::Text::GFxLineCursor::operator=(&v1->HalfPoint, &__that);
-      Scaleform::Render::Text::GFxLineCursor::operator=(&v1->StartPoint, v47);
-      v79 = &__that.CharIter.PlaceHolder.Index;
-      v48 = (Scaleform::Render::Text::TextFormat *)__that.CharIter.PlaceHolder.Index;
+      v46 = Scaleform::Render::Text::GFxLineCursor::operator=(&this->HalfPoint, &__that);
+      Scaleform::Render::Text::GFxLineCursor::operator=(&this->StartPoint, v46);
+      p_Index = &__that.CharIter.PlaceHolder.Index;
+      Index = (Scaleform::Render::Text::TextFormat *)__that.CharIter.PlaceHolder.Index;
       if ( __that.CharIter.PlaceHolder.Index )
       {
-        v49 = (*(_DWORD *)(__that.CharIter.PlaceHolder.Index + 8))-- == 1;
-        if ( v49 )
+        v48 = (*(_DWORD *)(__that.CharIter.PlaceHolder.Index + 8))-- == 1;
+        if ( v48 )
         {
-          Scaleform::Render::Text::TextFormat::~TextFormat(v48);
-          Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v48);
+          Scaleform::Render::Text::TextFormat::~TextFormat(Index);
+          Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, Index);
         }
       }
-      v79 = &__that.ComposStrLength;
-      v50 = (Scaleform::Render::Text::TextFormat *)__that.ComposStrLength;
+      p_Index = &__that.ComposStrLength;
+      ComposStrLength = (Scaleform::Render::Text::TextFormat *)__that.ComposStrLength;
       if ( __that.ComposStrLength )
       {
-        v49 = (*(_DWORD *)(__that.ComposStrLength + 8))-- == 1;
-        if ( v49 )
+        v48 = (*(_DWORD *)(__that.ComposStrLength + 8))-- == 1;
+        if ( v48 )
         {
-          Scaleform::Render::Text::TextFormat::~TextFormat(v50);
-          Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v50);
+          Scaleform::Render::Text::TextFormat::~TextFormat(ComposStrLength);
+          Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, ComposStrLength);
         }
       }
-      v51 = __that.pLastFont.pObject;
+      v50 = __that.pLastFont.pObject;
       if ( __that.pLastFont.pObject
         && _InterlockedExchangeAdd(&__that.pLastFont.pObject->RefCount, 0xFFFFFFFF) == 1
-        && v51 )
+        && v50 )
       {
-        v51->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v51->vfptr, 1u);
+        v50->vfptr->__vecDelDtor(v50, 1u);
       }
-      if ( v40 && v1->Pass == 2 )
+      if ( v39 && this->Pass == 2 )
         return 1;
     }
-    else if ( v3 == 2 )
+    else if ( Pass == 2 )
     {
-      Scaleform::Render::Text::GFxLineCursor::GFxLineCursor((Scaleform::Render::Text::GFxLineCursor *)((char *)&__that + 240));
-      Scaleform::Render::Text::GFxLineCursor::operator=(&v1->WordWrapPoint, v53);
-      Scaleform::Render::Text::GFxLineCursor::~GFxLineCursor((Scaleform::Render::Text::GFxLineCursor *)((char *)&__that + 240));
-      v1->Pass = 1;
+      Scaleform::Render::Text::GFxLineCursor::GFxLineCursor((Scaleform::Render::Text::GFxLineCursor *)&__that.NumOfSpaces);
+      Scaleform::Render::Text::GFxLineCursor::operator=(&this->WordWrapPoint, v52);
+      Scaleform::Render::Text::GFxLineCursor::~GFxLineCursor((Scaleform::Render::Text::GFxLineCursor *)&__that.NumOfSpaces);
+      this->Pass = 1;
     }
-    if ( v1->HyphenationRequested )
+    if ( this->HyphenationRequested )
     {
-      v54 = (signed __int64)&v1->LineCursor.GlyphIns.pGlyphs[v1->LineCursor.GlyphIns.GlyphIndex];
-      *(_QWORD *)v54 = 0i64;
-      v55 = v1->LineCursor.LastAdvance;
-      if ( v55 <= 0.0 )
-        v56 = v55 - 0.5;
+      v53 = &this->LineCursor.GlyphIns.pGlyphs[this->LineCursor.GlyphIns.GlyphIndex];
+      *v53 = 0i64;
+      LastAdvance = this->LineCursor.LastAdvance;
+      if ( LastAdvance <= 0.0 )
+        v55 = LastAdvance - 0.5;
       else
-        v56 = v55 + 0.5;
-      v57 = (signed int)v56;
-      v58 = v1->LineCursor.pPrevGrec;
-      if ( v58 )
+        v55 = LastAdvance + 0.5;
+      v56 = (int)v55;
+      pPrevGrec = this->LineCursor.pPrevGrec;
+      if ( pPrevGrec )
       {
-        if ( v57 < 0 )
+        if ( v56 < 0 )
         {
-          v58->Advance = abs(v57);
-          v58->Flags |= 0x40u;
+          pPrevGrec->Advance = abs32(v56);
+          pPrevGrec->Flags |= 0x40u;
         }
         else
         {
-          v58->Advance = v57;
-          v58->Flags &= 0xFFBFu;
+          pPrevGrec->Advance = v56;
+          pPrevGrec->Flags &= ~0x40u;
         }
       }
-      v59 = (__int64)v1->LineCursor.pLastFont.pObject->pFont.pObject->vfptr[2].__vecDelDtor(
-                       (Scaleform::RefCountImplCore *)&v1->LineCursor.pLastFont.pObject->pFont.pObject->vfptr,
-                       45u);
-      *(_WORD *)v54 = v59;
-      *(_WORD *)(v54 + 4) &= 0xFFFu;
-      v60 = *(_WORD *)(v54 + 4);
-      v61 = v1->FontSize;
-      if ( v61 < 256.0 && (v56 = v61 * 16.0, v62 = (signed int)(float)(v61 * 16.0), v62 & 0xF) )
+      v58 = (unsigned int)this->LineCursor.pLastFont.pObject->pFont.pObject->vfptr[2].__vecDelDtor(
+                            this->LineCursor.pLastFont.pObject->pFont.pObject,
+                            45i64);
+      v53->Index = v58;
+      v53->LenAndFontSize &= 0xFFFu;
+      LenAndFontSize = v53->LenAndFontSize;
+      FontSize = this->FontSize;
+      if ( FontSize < 256.0 && (v61 = (int)(float)(FontSize * 16.0), (v61 & 0xF) != 0) )
       {
-        *(_WORD *)(v54 + 6) |= 0x10u;
-        *(_WORD *)(v54 + 4) = v60 ^ (v60 ^ v62) & 0xFFF;
+        v53->Flags |= 0x10u;
+        v53->LenAndFontSize = LenAndFontSize ^ (LenAndFontSize ^ v61) & 0xFFF;
       }
       else
       {
-        *(_WORD *)(v54 + 6) &= 0xFFEFu;
-        *(_WORD *)(v54 + 4) = v60 ^ (v60 ^ (signed int)v61) & 0xFFF;
+        v53->Flags &= ~0x10u;
+        v53->LenAndFontSize = LenAndFontSize ^ (LenAndFontSize ^ (int)FontSize) & 0xFFF;
       }
-      v1->LineCursor.LineWidth = v1->NewLineWidth;
-      v1->LineCursor.pLastFont.pObject->pFont.pObject->vfptr[3].__vecDelDtor(
-        (Scaleform::RefCountImplCore *)v1->LineCursor.pLastFont.pObject->pFont.pObject,
-        v59);
-      v63 = v56 * v1->Scale;
+      this->LineCursor.LineWidth = this->NewLineWidth;
+      v62 = ((double (__fastcall *)(Scaleform::Render::Font *, _QWORD))this->LineCursor.pLastFont.pObject->pFont.pObject->vfptr[3].__vecDelDtor)(
+              this->LineCursor.pLastFont.pObject->pFont.pObject,
+              v58);
+      v63 = *(float *)&v62 * this->Scale;
       *(_OWORD *)&__that.GlyphIns.pNextFormatData = 0i64;
-      v64 = (float)(*(float *)(((__int64 (__fastcall *)(Scaleform::Render::Font *, _QWORD, Scaleform::Render::Text::LineBuffer::FormatDataEntry **))v1->pFont->vfptr[7].__vecDelDtor)(
-                                 v1->pFont,
-                                 v59,
+      v64 = (float)(*(float *)(((__int64 (__fastcall *)(Scaleform::Render::Font *, _QWORD, Scaleform::Render::Text::LineBuffer::FormatDataEntry **))this->pFont->vfptr[7].__vecDelDtor)(
+                                 this->pFont,
+                                 v58,
                                  &__that.GlyphIns.pNextFormatData)
                              + 8)
-                  * v1->Scale)
+                  * this->Scale)
           + 20.0;
       if ( v63 >= v64 )
         v64 = v63;
@@ -3115,18 +2958,18 @@ LABEL_44:
         v65 = v64 - 0.5;
       else
         v65 = v64 + 0.5;
-      v1->LineCursor.LastAdvance = (float)(signed int)v65;
-      v1->LineCursor.LastGlyphWidth = (signed int)v65;
-      v1->LineCursor.LastGlyphIndex = v59;
-      v1->LineCursor.NumOfTrailingSpaces = 0;
-      v1->LineCursor.LineWidthWithoutTrailingSpaces = v1->NewLineWidth + (signed int)v65;
-      v1->HyphenationRequested = 0;
-      v1->LineCursor.pPrevGrec = (Scaleform::Render::Text::LineBuffer::GlyphEntry *)v54;
-      if ( v1->LineCursor.GlyphIns.pGlyphs )
+      this->LineCursor.LastAdvance = (float)(int)v65;
+      this->LineCursor.LastGlyphWidth = (int)v65;
+      this->LineCursor.LastGlyphIndex = v58;
+      this->LineCursor.NumOfTrailingSpaces = 0;
+      this->LineCursor.LineWidthWithoutTrailingSpaces = this->NewLineWidth + (int)v65;
+      this->HyphenationRequested = 0;
+      this->LineCursor.pPrevGrec = v53;
+      if ( this->LineCursor.GlyphIns.pGlyphs )
       {
-        v66 = v1->LineCursor.GlyphIns.GlyphIndex;
-        if ( v66 < v1->LineCursor.GlyphIns.GlyphsCount )
-          v1->LineCursor.GlyphIns.GlyphIndex = v66 + 1;
+        v66 = this->LineCursor.GlyphIns.GlyphIndex;
+        if ( v66 < this->LineCursor.GlyphIns.GlyphsCount )
+          this->LineCursor.GlyphIns.GlyphIndex = v66 + 1;
       }
     }
   }
@@ -3135,92 +2978,94 @@ LABEL_44:
 
 // File Line: 1749
 // RVA: 0x95EB30
-char __fastcall Scaleform::Render::Text::ParagraphFormatter::CheckWordWrap(Scaleform::Render::Text::ParagraphFormatter *this)
+char __fastcall Scaleform::Render::Text::ParagraphFormatter::CheckWordWrap(
+        Scaleform::Render::Text::ParagraphFormatter *this)
 {
-  Scaleform::Render::Text::ParagraphFormatter *v1; // rdi
-  int v2; // ecx
+  int Pass; // ecx
   char v3; // bp
-  Scaleform::Render::Text::Paragraph::TextBuffer *v4; // rax
-  Scaleform::Render::Text::LineBuffer::GlyphEntry *v5; // rsi
-  Scaleform::Render::Text::LineBuffer::FormatDataEntry *v6; // r14
-  __int64 v7; // rbx
-  unsigned int v8; // er15
-  __int64 v9; // rbp
+  Scaleform::Render::Text::Paragraph::TextBuffer *pText; // rax
+  Scaleform::Render::Text::LineBuffer::GlyphEntry *pGlyphs; // rsi
+  Scaleform::Render::Text::LineBuffer::FormatDataEntry *pNextFormatData; // r14
+  __int64 GlyphIndex; // rbx
+  unsigned int GlyphsCount; // r15d
+  __int64 FormatDataIndex; // rbp
   unsigned int v10; // edx
   Scaleform::Render::Text::GFxLineCursor *v11; // rax
-  unsigned __int64 v12; // rbx
+  unsigned __int64 StartIndex; // rbx
   unsigned __int64 v13; // rbx
-  Scaleform::Render::Text::LineBuffer::GlyphEntry *v14; // rax
-  Scaleform::Render::Text::LineBuffer::Line *v15; // rcx
-  Scaleform::Render::Text::GFxLineCursor v17; // [rsp+28h] [rbp-120h]
+  Scaleform::Render::Text::LineBuffer::GlyphEntry *pPrevGrec; // rax
+  Scaleform::Render::Text::LineBuffer::Line *pTempLine; // rcx
+  Scaleform::Render::Text::GFxLineCursor v17; // [rsp+28h] [rbp-120h] BYREF
 
-  v1 = this;
-  v2 = this->Pass;
-  if ( v2 == 1
-    && v1->pDocView->Flags & 8
-    && !v1->isSpace
-    && (float)(v1->LineCursor.Indent + v1->LineCursor.LeftMargin + v1->AdjLineWidth + v1->NewLineWidth) > (float)(v1->TextRectWidth - (float)v1->LineCursor.RightMargin)
-    || v2 == 2 && v1->LineCursor.NumChars == v1->RequestedWordWrapPos )
+  Pass = this->Pass;
+  if ( Pass == 1
+    && (this->pDocView->Flags & 8) != 0
+    && !this->isSpace
+    && (float)(this->LineCursor.Indent + this->LineCursor.LeftMargin + this->AdjLineWidth + this->NewLineWidth) > (float)(this->TextRectWidth - (float)this->LineCursor.RightMargin)
+    || Pass == 2 && this->LineCursor.NumChars == this->RequestedWordWrapPos )
   {
-    if ( Scaleform::Render::Text::ParagraphFormatter::HandleCustomWordWrap(v1) )
+    if ( Scaleform::Render::Text::ParagraphFormatter::HandleCustomWordWrap(this) )
       return 1;
-    v1->NewLineWidth = 0;
+    this->NewLineWidth = 0;
     v3 = 0;
-    v4 = v1->WordWrapPoint.CharIter.pText;
-    if ( v4 && v1->WordWrapPoint.CharIter.CurTextIndex < v4->Size )
+    pText = this->WordWrapPoint.CharIter.pText;
+    if ( pText && this->WordWrapPoint.CharIter.CurTextIndex < pText->Size )
     {
-      v5 = v1->WordWrapPoint.GlyphIns.pGlyphs;
-      v6 = v1->WordWrapPoint.GlyphIns.pNextFormatData;
-      v7 = v1->WordWrapPoint.GlyphIns.GlyphIndex;
-      v8 = v1->WordWrapPoint.GlyphIns.GlyphsCount;
-      v9 = v1->WordWrapPoint.GlyphIns.FormatDataIndex;
-      v10 = v1->LineCursor.GlyphIns.GlyphIndex;
-      if ( (unsigned int)v7 < v10 && v1->LineCursor.GlyphIns.GlyphsCount > 0 )
-        Scaleform::Render::Text::LineBuffer::ReleasePartOfLine(&v5[v7], v10 - v7, &v6[v9]);
-      v1->LineCursor.GlyphIns.pGlyphs = v5;
-      v1->LineCursor.GlyphIns.pNextFormatData = v6;
-      v1->LineCursor.GlyphIns.GlyphIndex = v7;
-      v1->LineCursor.GlyphIns.GlyphsCount = v8;
-      v1->LineCursor.GlyphIns.FormatDataIndex = v9;
-      Scaleform::Render::Text::GFxLineCursor::operator=(&v1->LineCursor, &v1->WordWrapPoint);
-      v1->isSpace = 0;
+      pGlyphs = this->WordWrapPoint.GlyphIns.pGlyphs;
+      pNextFormatData = this->WordWrapPoint.GlyphIns.pNextFormatData;
+      GlyphIndex = this->WordWrapPoint.GlyphIns.GlyphIndex;
+      GlyphsCount = this->WordWrapPoint.GlyphIns.GlyphsCount;
+      FormatDataIndex = this->WordWrapPoint.GlyphIns.FormatDataIndex;
+      v10 = this->LineCursor.GlyphIns.GlyphIndex;
+      if ( (unsigned int)GlyphIndex < v10 && this->LineCursor.GlyphIns.GlyphsCount )
+        Scaleform::Render::Text::LineBuffer::ReleasePartOfLine(
+          &pGlyphs[GlyphIndex],
+          v10 - GlyphIndex,
+          &pNextFormatData[FormatDataIndex]);
+      this->LineCursor.GlyphIns.pGlyphs = pGlyphs;
+      this->LineCursor.GlyphIns.pNextFormatData = pNextFormatData;
+      this->LineCursor.GlyphIns.GlyphIndex = GlyphIndex;
+      this->LineCursor.GlyphIns.GlyphsCount = GlyphsCount;
+      this->LineCursor.GlyphIns.FormatDataIndex = FormatDataIndex;
+      Scaleform::Render::Text::GFxLineCursor::operator=(&this->LineCursor, &this->WordWrapPoint);
+      this->isSpace = 0;
       v3 = 1;
-      v1->DeltaText = 0;
+      this->DeltaText = 0;
     }
     Scaleform::Render::Text::GFxLineCursor::GFxLineCursor(&v17);
-    Scaleform::Render::Text::GFxLineCursor::operator=(&v1->WordWrapPoint, v11);
+    Scaleform::Render::Text::GFxLineCursor::operator=(&this->WordWrapPoint, v11);
     Scaleform::Render::Text::GFxLineCursor::~GFxLineCursor(&v17);
-    v12 = v1->pParagraph->StartIndex;
-    v13 = Scaleform::Render::Text::GFxLineCursor::operator*(&v1->LineCursor)->Index + v12;
-    v14 = v1->LineCursor.pPrevGrec;
-    if ( v14 )
-      v14->Flags |= 8u;
-    *(_QWORD *)&v1->LineCursor.LastAdvance = 0i64;
-    v1->LineCursor.pPrevGrec = 0i64;
-    Scaleform::Render::Text::ParagraphFormatter::FinalizeLine(v1);
-    v1->LineCursor.pPrevGrec = 0i64;
-    *(_QWORD *)&v1->LineCursor.MaxFontDescent = 0i64;
-    *(_QWORD *)&v1->LineCursor.LineLength = 0i64;
-    v1->LineCursor.LastAdvance = 0.0;
-    *(_WORD *)&v1->LineCursor.LastKerning = 0;
-    v1->LineCursor.LineWidthWithoutTrailingSpaces = 0;
-    *(_QWORD *)&v1->LineCursor.NumOfSpaces = 0i64;
-    v1->LineCursor.NumChars = 0i64;
-    v1->LineCursor.LastCharCode = 0;
-    v1->TabStopsIndex = 0;
-    v15 = v1->pTempLine;
-    if ( (v15->MemSize & 0x80000000) == 0 )
+    StartIndex = this->pParagraph->StartIndex;
+    v13 = Scaleform::Render::Text::GFxLineCursor::operator*(&this->LineCursor)->Index + StartIndex;
+    pPrevGrec = this->LineCursor.pPrevGrec;
+    if ( pPrevGrec )
+      pPrevGrec->Flags |= 8u;
+    *(_QWORD *)&this->LineCursor.LastAdvance = 0i64;
+    this->LineCursor.pPrevGrec = 0i64;
+    Scaleform::Render::Text::ParagraphFormatter::FinalizeLine(this);
+    this->LineCursor.pPrevGrec = 0i64;
+    *(_QWORD *)&this->LineCursor.MaxFontDescent = 0i64;
+    *(_QWORD *)&this->LineCursor.LineLength = 0i64;
+    this->LineCursor.LastAdvance = 0.0;
+    *(_WORD *)&this->LineCursor.LastKerning = 0;
+    this->LineCursor.LineWidthWithoutTrailingSpaces = 0;
+    *(_QWORD *)&this->LineCursor.NumOfSpaces = 0i64;
+    this->LineCursor.NumChars = 0i64;
+    this->LineCursor.LastCharCode = 0;
+    this->TabStopsIndex = 0;
+    pTempLine = this->pTempLine;
+    if ( (pTempLine->MemSize & 0x80000000) == 0 )
     {
-      v15->Data32.TextPos = v13;
+      pTempLine->Data32.TextPos = v13;
     }
     else
     {
-      v15->Data32.TextPos &= 0xFF000000;
-      v15->Data32.TextPos |= v13 & 0xFFFFFF;
+      pTempLine->Data32.TextPos &= 0xFF000000;
+      pTempLine->Data32.TextPos |= v13 & 0xFFFFFF;
     }
     if ( v3 )
     {
-      v1->LineCursor.LineWidth = 0;
+      this->LineCursor.LineWidth = 0;
       return 1;
     }
   }
@@ -3229,874 +3074,874 @@ char __fastcall Scaleform::Render::Text::ParagraphFormatter::CheckWordWrap(Scale
 
 // File Line: 1813
 // RVA: 0x97BF20
-void __fastcall Scaleform::Render::Text::ParagraphFormatter::Format(Scaleform::Render::Text::ParagraphFormatter *this, Scaleform::Render::Text::Paragraph *paragraph)
+void __fastcall Scaleform::Render::Text::ParagraphFormatter::Format(
+        Scaleform::Render::Text::ParagraphFormatter *this,
+        Scaleform::Render::Text::Paragraph *paragraph)
 {
-  Scaleform::Render::Text::ParagraphFormatter *v2; // r15
-  Scaleform::Render::Text::ParagraphFormat *v3; // rdx
-  unsigned __int16 v4; // cx
-  __int64 v5; // rbx
-  Scaleform::Render::Text::LineBuffer::GlyphEntry *v6; // rdi
+  Scaleform::Render::Text::ParagraphFormat *pParaFormat; // rdx
+  __int16 PresentMask; // cx
+  __int64 GlyphIndex; // rbx
+  Scaleform::Render::Text::LineBuffer::GlyphEntry *pGlyphs; // rdi
   Scaleform::Render::Text::Paragraph::CharacterInfo *v7; // rax
-  Scaleform::Render::Text::TextFormat *v8; // rcx
-  Scaleform::Render::Text::FontHandle *v9; // rax
+  Scaleform::Render::Text::TextFormat *pObject; // rcx
+  Scaleform::Render::Text::FontHandle *Font; // rax
   Scaleform::Render::Text::FontHandle *v10; // rsi
-  unsigned __int16 v11; // r14
+  unsigned __int16 Flags; // r14
   float v12; // xmm0_4
-  signed int v13; // eax
+  int v13; // eax
   unsigned __int16 v14; // r14
-  unsigned int v15; // ebx
+  unsigned int ColorV; // ebx
   unsigned int v16; // eax
   Scaleform::Render::Text::FontHandle *v17; // rcx
   Scaleform::Render::Text::ParagraphFormat *v18; // rdx
-  unsigned int *v19; // r12
-  unsigned int *v20; // rax
-  Scaleform::Render::Text::ImageDesc *v21; // rbx
-  Scaleform::Render::Text::Paragraph::TextBuffer *v22; // rax
-  Scaleform::Render::Text::Paragraph::CharactersIterator *v23; // r14
-  Scaleform::Render::Text::Paragraph::CharactersIterator *v24; // rax
-  Scaleform::Render::Text::Paragraph::CharactersIterator *v25; // rsi
-  Scaleform::Render::Text::TextFormat *v26; // rax
-  Scaleform::Render::Text::TextFormat *v27; // rdi
-  bool v28; // zf
-  float v29; // xmm6_4
-  Scaleform::Render::Text::DocView::ImageSubstitutor *v30; // r10
-  Scaleform::Render::Text::Paragraph::TextBuffer *v31; // rax
+  unsigned int *p_TabStopsNum; // r12
+  unsigned int *pTabStops; // rax
+  Scaleform::Render::Text::LineBuffer::FormatDataEntry v21; // rbx
+  Scaleform::Render::Text::Paragraph::TextBuffer *pText; // rax
+  Scaleform::Render::Text::Paragraph::CharactersIterator *p_CharIter; // r14
+  Scaleform::Render::Text::Paragraph::CharactersIterator *v24; // rsi
+  Scaleform::Render::Text::TextFormat *v25; // rdi
+  bool v26; // zf
+  float TextRectWidth; // xmm6_4
+  Scaleform::Render::Text::DocView::ImageSubstitutor *pImageSubstitutor; // r10
+  Scaleform::Render::Text::Paragraph::TextBuffer *v29; // rax
+  unsigned __int64 Size; // r8
+  unsigned __int64 CurTextIndex; // rcx
   unsigned __int64 v32; // r8
-  unsigned __int64 v33; // rcx
-  unsigned __int64 v34; // r8
-  const wchar_t *v35; // rdx
-  Scaleform::Render::Text::ImageDesc *v36; // rax
-  Scaleform::Render::Text::TextFormat *v37; // rcx
-  Scaleform::Render::Text::HTMLImageTagDesc *v38; // rax
-  Scaleform::Render::Text::HTMLImageTagDesc *v39; // rdi
-  bool v40; // al
-  wchar_t v41; // cx
-  unsigned __int64 v42; // rax
-  int v43; // er8
-  int v44; // eax
-  bool v45; // al
-  Scaleform::Render::Text::FontHandle *v46; // rcx
-  Scaleform::Render::Text::FontHandle *v47; // rcx
-  Scaleform::Render::Text::FontHandle *v48; // rax
-  Scaleform::Render::Text::FontHandle *v49; // rdi
-  Scaleform::Render::Text::FontHandle *v50; // rcx
-  Scaleform::Render::Font *v51; // rdi
-  float v52; // xmm0_4
-  float v53; // xmm0_4
-  wchar_t v54; // dx
-  unsigned __int8 v55; // al
-  int v56; // eax
-  Scaleform::Render::Text::TextFormat *v57; // rcx
-  __int16 v58; // r14
-  char v59; // si
-  char v60; // di
-  char v61; // bl
-  Scaleform::StringDH *v62; // rax
-  __int64 v63; // r9
-  __int64 v64; // r12
-  Scaleform::Render::Text::DocView::DocumentListener *v65; // rcx
-  Scaleform::String *v66; // rax
-  int v67; // er14
-  char *v68; // rsi
-  unsigned __int64 v69; // rbx
-  volatile signed __int32 *v70; // rdi
-  Scaleform::StringDH *v71; // rax
-  wchar_t v72; // cx
-  unsigned __int64 v73; // rax
-  int v74; // er8
-  int v75; // eax
-  unsigned int v76; // eax
-  float v77; // xmm0_4
+  const wchar_t *v33; // rdx
+  Scaleform::Render::Text::ImageDesc *ImageDesc; // rax
+  Scaleform::Render::Text::TextFormat *v35; // rcx
+  Scaleform::Render::Text::HTMLImageTagDesc *v36; // rax
+  Scaleform::Render::Text::HTMLImageTagDesc *v37; // rdi
+  bool v38; // al
+  wchar_t Character; // cx
+  unsigned __int64 v40; // rax
+  int v41; // r8d
+  int v42; // eax
+  bool v43; // al
+  Scaleform::Render::Text::FontHandle *v44; // rcx
+  Scaleform::Render::Text::FontHandle *v45; // rcx
+  Scaleform::Render::Text::FontHandle *v46; // rax
+  Scaleform::Render::Text::FontHandle *v47; // rdi
+  Scaleform::Render::Text::FontHandle *v48; // rcx
+  Scaleform::Render::Font *v49; // rdi
+  float ActualFontSize; // xmm0_4
+  wchar_t v51; // dx
+  unsigned __int8 v52; // al
+  int v53; // eax
+  Scaleform::Render::Text::TextFormat *pCurrentFormat; // rcx
+  __int16 v55; // r14
+  bool v56; // si
+  char v57; // di
+  char v58; // bl
+  Scaleform::StringDH *FontList; // rax
+  __int64 v60; // r9
+  __int64 v61; // r12
+  Scaleform::Render::Text::DocView::DocumentListener *v62; // rcx
+  Scaleform::String *v63; // rax
+  int v64; // r14d
+  const char *v65; // rsi
+  unsigned __int64 v66; // rbx
+  unsigned __int64 v67; // rdi
+  Scaleform::StringDH *v68; // rax
+  wchar_t v69; // cx
+  unsigned __int64 v70; // rax
+  int v71; // r8d
+  int v72; // eax
+  unsigned int v73; // eax
+  float v74; // xmm0_4
+  float v75; // xmm0_4
+  float v76; // xmm0_4
+  float GlyphAdvance; // xmm0_4
   float v78; // xmm0_4
-  float v79; // xmm0_4
+  int v79; // eax
   float v80; // xmm0_4
   float v81; // xmm0_4
-  signed int v82; // eax
-  float v83; // xmm0_4
-  float v84; // xmm0_4
-  float v85; // xmm1_4
-  float v86; // xmm1_4
-  int v87; // edx
-  Scaleform::Render::Text::LineBuffer::GlyphEntry *v88; // rcx
-  signed __int64 v89; // rdi
-  float v90; // xmm1_4
-  float v91; // xmm0_4
-  float v92; // xmm0_4
-  float v93; // xmm1_4
-  Scaleform::Render::Text::TextFormat *v94; // rcx
-  unsigned int v95; // esi
-  float v96; // xmm1_4
-  signed int v97; // eax
-  __int16 v98; // ax
-  Scaleform::Render::Text::FontHandle *v99; // rdx
-  wchar_t v100; // dx
-  unsigned __int8 v101; // al
-  __int64 v102; // rdx
-  Scaleform::Render::Text::TextFormat *v103; // rcx
-  Scaleform::Render::Text::FontHandle *v104; // rcx
-  Scaleform::Render::Text::FontHandle *v105; // rcx
-  __int64 v106; // r8
-  int v107; // edx
-  int v108; // eax
-  __m128 v109; // xmm1
-  signed int v110; // ecx
-  float v111; // xmm1_4
-  __m128 v112; // xmm3
-  __m128 v113; // xmm2
-  signed int v114; // ecx
-  float v115; // xmm1_4
-  Scaleform::Render::Text::TextFormat *v116; // rcx
-  int v117; // eax
-  unsigned int v118; // eax
-  unsigned int v119; // eax
-  __int64 v120; // rdi
-  Scaleform::Render::Text::ParagraphFormatter *v121; // rcx
-  int *v122; // [rsp+20h] [rbp-E0h]
-  __int64 v123; // [rsp+30h] [rbp-D0h]
-  int v124; // [rsp+50h] [rbp-B0h]
-  signed __int64 v125; // [rsp+58h] [rbp-A8h]
-  __int128 v126; // [rsp+60h] [rbp-A0h]
-  Scaleform::String v127; // [rsp+70h] [rbp-90h]
-  unsigned __int64 v128; // [rsp+78h] [rbp-88h]
-  __int64 v129; // [rsp+80h] [rbp-80h]
-  unsigned __int64 ptextLen; // [rsp+88h] [rbp-78h]
-  int v131; // [rsp+90h] [rbp-70h]
-  char *v132; // [rsp+98h] [rbp-68h]
-  __int64 v133; // [rsp+A0h] [rbp-60h]
-  __int64 v134; // [rsp+A8h] [rbp-58h]
-  __int64 v135; // [rsp+B0h] [rbp-50h]
-  char v136; // [rsp+B8h] [rbp-48h]
-  Scaleform::MemoryHeap *v137; // [rsp+C0h] [rbp-40h]
-  Scaleform::Render::Text::FontHandle *v138; // [rsp+C8h] [rbp-38h]
-  __int64 v139; // [rsp+D0h] [rbp-30h]
-  __int64 v140; // [rsp+D8h] [rbp-28h]
-  Scaleform::Render::Text::ImageDesc *v141; // [rsp+1C0h] [rbp+C0h]
-  unsigned __int64 v142; // [rsp+1D0h] [rbp+D0h]
-  __int64 v143; // [rsp+1D8h] [rbp+D8h]
+  float LastAdvance; // xmm1_4
+  float v83; // xmm1_4
+  int v84; // edx
+  Scaleform::Render::Text::LineBuffer::GlyphEntry *pPrevGrec; // rcx
+  Scaleform::Render::Text::LineBuffer::GlyphEntry *v86; // rdi
+  float v87; // xmm1_4
+  float MaxFontAscent; // xmm0_4
+  float v89; // xmm0_4
+  float MaxFontDescent; // xmm1_4
+  Scaleform::Render::Text::TextFormat *v91; // rcx
+  unsigned int v92; // esi
+  float FontSize; // xmm1_4
+  int v94; // eax
+  unsigned __int16 v95; // ax
+  Scaleform::Render::Text::FontHandle *v96; // rdx
+  wchar_t v97; // dx
+  unsigned __int8 v98; // al
+  __int64 v99; // rdx
+  Scaleform::Render::Text::TextFormat *v100; // rcx
+  Scaleform::Render::Text::FontHandle *v101; // rcx
+  Scaleform::Render::Text::FontHandle *v102; // rcx
+  __int64 TabStopsIndex; // r8
+  int v104; // edx
+  int NewLineWidth; // eax
+  __m128 FontSize_low; // xmm1
+  int v107; // ecx
+  float v108; // xmm1_4
+  __m128 v109; // xmm3
+  __m128 v110; // xmm2
+  int v111; // ecx
+  float v112; // xmm1_4
+  Scaleform::Render::Text::TextFormat *v113; // rcx
+  int GlyphWidth; // eax
+  unsigned int v115; // eax
+  unsigned int DeltaText; // eax
+  __int64 v117; // rdi
+  Scaleform::Render::Text::ParagraphFormatter *pTextBufForCustomFormat; // rcx
+  __int64 v119; // [rsp+20h] [rbp-E0h]
+  __int64 v120; // [rsp+30h] [rbp-D0h]
+  int v121; // [rsp+50h] [rbp-B0h]
+  __int64 v122; // [rsp+58h] [rbp-A8h]
+  __int128 v123; // [rsp+60h] [rbp-A0h] BYREF
+  Scaleform::String v124; // [rsp+70h] [rbp-90h] BYREF
+  unsigned __int64 v125; // [rsp+78h] [rbp-88h]
+  __int64 v126; // [rsp+80h] [rbp-80h] BYREF
+  unsigned __int64 ptextLen; // [rsp+88h] [rbp-78h] BYREF
+  int v128; // [rsp+90h] [rbp-70h] BYREF
+  const char *v129; // [rsp+98h] [rbp-68h]
+  __int64 v130; // [rsp+A0h] [rbp-60h]
+  __int64 v131; // [rsp+A8h] [rbp-58h]
+  __int64 v132; // [rsp+B0h] [rbp-50h]
+  char v133; // [rsp+B8h] [rbp-48h]
+  Scaleform::MemoryHeap *v134; // [rsp+C0h] [rbp-40h]
+  Scaleform::Render::Text::FontHandle *v135; // [rsp+C8h] [rbp-38h]
+  __int64 v136; // [rsp+D0h] [rbp-30h]
+  __int64 v137; // [rsp+D8h] [rbp-28h]
+  Scaleform::Render::Text::ImageDesc *v138; // [rsp+1C0h] [rbp+C0h]
+  unsigned __int64 v139; // [rsp+1D0h] [rbp+D0h] BYREF
+  __int64 v140; // [rsp+1D8h] [rbp+D8h] BYREF
 
-  v139 = -2i64;
-  v2 = this;
-  v124 = 0;
-  this->pDocView->RTFlags &= 0xBFu;
+  v136 = -2i64;
+  v121 = 0;
+  this->pDocView->RTFlags &= ~0x40u;
   Scaleform::Render::Text::ParagraphFormatter::InitParagraph(this, paragraph);
-  v2->LineCursor.LeftMargin = 0;
-  v3 = v2->pParaFormat;
-  v4 = v3->PresentMask;
-  if ( (v4 & 0x80u) == 0 || (v4 & 0x8000u) == 0 )
+  this->LineCursor.LeftMargin = 0;
+  pParaFormat = this->pParaFormat;
+  PresentMask = pParaFormat->PresentMask;
+  if ( (PresentMask & 0x80u) == 0 || PresentMask >= 0 )
   {
-    v2->LineCursor.Indent = 20 * v3->Indent;
+    this->LineCursor.Indent = 20 * pParaFormat->Indent;
   }
   else
   {
-    v5 = v2->LineCursor.GlyphIns.GlyphIndex;
-    v6 = v2->LineCursor.GlyphIns.pGlyphs;
-    v6[v5] = 0i64;
-    v7 = Scaleform::Render::Text::GFxLineCursor::operator*(&v2->LineCursor);
-    v8 = v7->pFormat.pObject;
-    v2->FindFontInfo.pCurrentFormat = v7->pFormat.pObject;
-    if ( v8 )
+    GlyphIndex = this->LineCursor.GlyphIns.GlyphIndex;
+    pGlyphs = this->LineCursor.GlyphIns.pGlyphs;
+    pGlyphs[GlyphIndex] = 0i64;
+    v7 = Scaleform::Render::Text::GFxLineCursor::operator*(&this->LineCursor);
+    pObject = v7->pFormat.pObject;
+    this->FindFontInfo.pCurrentFormat = v7->pFormat.pObject;
+    if ( pObject )
     {
-      v9 = Scaleform::Render::Text::DocView::FindFont(v2->pDocView, &v2->FindFontInfo, 0);
-      v10 = v9;
-      if ( v9 )
-        _InterlockedExchangeAdd(&v9->RefCount, 1u);
-      v138 = v9;
-      v6[v5].Index = (__int64)v9->pFont.pObject->vfptr[2].__vecDelDtor(
-                                (Scaleform::RefCountImplCore *)&v9->pFont.pObject->vfptr,
-                                8226u);
-      v6[v5].Advance = 300;
-      v6[v5].Flags &= 0xFFBFu;
-      v11 = v6[v5].Flags;
-      v12 = (float)(Scaleform::Render::Text::ParagraphFormatter::GetActualFontSize(v2) * 2.0) * 0.33333334;
-      if ( v12 < 256.0 && (v13 = (signed int)(float)(v12 * 16.0), v13 & 0xF) )
+      Font = Scaleform::Render::Text::DocView::FindFont(this->pDocView, &this->FindFontInfo, 0);
+      v10 = Font;
+      if ( Font )
+        _InterlockedExchangeAdd(&Font->RefCount, 1u);
+      v135 = Font;
+      pGlyphs[GlyphIndex].Index = (unsigned __int16)Font->pFont.pObject->vfptr[2].__vecDelDtor(
+                                                      Font->pFont.pObject,
+                                                      8226u);
+      pGlyphs[GlyphIndex].Advance = 300;
+      pGlyphs[GlyphIndex].Flags &= ~0x40u;
+      Flags = pGlyphs[GlyphIndex].Flags;
+      v12 = (float)(Scaleform::Render::Text::ParagraphFormatter::GetActualFontSize(this) * 2.0) * 0.33333334;
+      if ( v12 < 256.0 && (v13 = (int)(float)(v12 * 16.0), (v13 & 0xF) != 0) )
       {
-        v14 = v11 | 0x10;
+        v14 = Flags | 0x10;
       }
       else
       {
-        v14 = v11 & 0xFFEF;
-        v13 = (signed int)v12;
+        v14 = Flags & 0xFFEF;
+        v13 = (int)v12;
       }
-      v6[v5].LenAndFontSize &= 0xF000u;
-      v6[v5].LenAndFontSize |= v13 & 0xFFF;
-      v6[v5].Flags = v14;
-      v6[v5].LenAndFontSize &= 0xFFFu;
-      v15 = v2->FindFontInfo.pCurrentFormat->ColorV;
-      v2->LineCursor.GlyphIns.pGlyphs[v2->LineCursor.GlyphIns.GlyphIndex].Flags |= 0x4000u;
-      v2->LineCursor.GlyphIns.pGlyphs[v2->LineCursor.GlyphIns.GlyphIndex].Flags |= 0x2000u;
-      v2->LineCursor.GlyphIns.pNextFormatData[v2->LineCursor.GlyphIns.FormatDataIndex++].pFont = v10;
+      pGlyphs[GlyphIndex].LenAndFontSize &= 0xF000u;
+      pGlyphs[GlyphIndex].LenAndFontSize |= v13 & 0xFFF;
+      pGlyphs[GlyphIndex].Flags = v14;
+      pGlyphs[GlyphIndex].LenAndFontSize &= 0xFFFu;
+      ColorV = this->FindFontInfo.pCurrentFormat->ColorV;
+      this->LineCursor.GlyphIns.pGlyphs[this->LineCursor.GlyphIns.GlyphIndex].Flags |= 0x4000u;
+      this->LineCursor.GlyphIns.pGlyphs[this->LineCursor.GlyphIns.GlyphIndex].Flags |= 0x2000u;
+      this->LineCursor.GlyphIns.pNextFormatData[this->LineCursor.GlyphIns.FormatDataIndex++].pFont = v10;
       _InterlockedExchangeAdd(&v10->RefCount, 1u);
-      v2->LineCursor.GlyphIns.pGlyphs[v2->LineCursor.GlyphIns.GlyphIndex].Flags |= 0x4000u;
-      v2->LineCursor.GlyphIns.pGlyphs[v2->LineCursor.GlyphIns.GlyphIndex].Flags |= 0x1000u;
-      v2->LineCursor.GlyphIns.pNextFormatData[v2->LineCursor.GlyphIns.FormatDataIndex++].ColorV = v15;
-      if ( v2->LineCursor.GlyphIns.pGlyphs )
+      this->LineCursor.GlyphIns.pGlyphs[this->LineCursor.GlyphIns.GlyphIndex].Flags |= 0x4000u;
+      this->LineCursor.GlyphIns.pGlyphs[this->LineCursor.GlyphIns.GlyphIndex].Flags |= 0x1000u;
+      this->LineCursor.GlyphIns.pNextFormatData[this->LineCursor.GlyphIns.FormatDataIndex++].ColorV = ColorV;
+      if ( this->LineCursor.GlyphIns.pGlyphs )
       {
-        v16 = v2->LineCursor.GlyphIns.GlyphIndex;
-        if ( v16 < v2->LineCursor.GlyphIns.GlyphsCount )
-          v2->LineCursor.GlyphIns.GlyphIndex = v16 + 1;
+        v16 = this->LineCursor.GlyphIns.GlyphIndex;
+        if ( v16 < this->LineCursor.GlyphIns.GlyphsCount )
+          this->LineCursor.GlyphIns.GlyphIndex = v16 + 1;
       }
       _InterlockedExchangeAdd(&v10->RefCount, 1u);
-      v17 = v2->LineCursor.pLastFont.pObject;
-      if ( v17 && !_InterlockedDecrement(&v17->RefCount) && v17 )
-        v17->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v17->vfptr, 1u);
-      v2->LineCursor.pLastFont.pObject = v10;
-      v2->LineCursor.LastColor = v15;
+      v17 = this->LineCursor.pLastFont.pObject;
+      if ( v17 && !_InterlockedDecrement(&v17->RefCount) )
+        v17->vfptr->__vecDelDtor(v17, 1u);
+      this->LineCursor.pLastFont.pObject = v10;
+      this->LineCursor.LastColor = ColorV;
       if ( !_InterlockedDecrement(&v10->RefCount) )
-        v10->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v10->vfptr, 1u);
+        v10->vfptr->__vecDelDtor(v10, 1u);
     }
-    v2->LineCursor.LeftMargin = 700;
-    v2->LineCursor.LineWidth = 700;
-    v2->LineCursor.Indent = -300;
+    this->LineCursor.LeftMargin = 700;
+    this->LineCursor.LineWidth = 700;
+    this->LineCursor.Indent = -300;
   }
-  v18 = v2->pParaFormat;
-  v2->LineCursor.LeftMargin += 20 * (v18->BlockIndent + v18->LeftMargin);
-  v2->LineCursor.RightMargin = 20 * v18->RightMargin;
-  v19 = &v2->TabStopsNum;
-  v20 = v18->pTabStops;
-  if ( v20 )
+  v18 = this->pParaFormat;
+  this->LineCursor.LeftMargin += 20 * (v18->BlockIndent + v18->LeftMargin);
+  this->LineCursor.RightMargin = 20 * v18->RightMargin;
+  p_TabStopsNum = &this->TabStopsNum;
+  pTabStops = v18->pTabStops;
+  if ( pTabStops )
   {
-    if ( v2 != (Scaleform::Render::Text::ParagraphFormatter *)-1140i64 )
-      *v19 = *v20;
-    v125 = (signed __int64)(v18->pTabStops + 1);
+    if ( this != (Scaleform::Render::Text::ParagraphFormatter *)-1140i64 )
+      *p_TabStopsNum = *pTabStops;
+    v122 = (__int64)(v18->pTabStops + 1);
   }
   else
   {
-    v125 = 0i64;
+    v122 = 0i64;
   }
-  v21 = 0i64;
+  v21.pFont = 0i64;
   while ( 1 )
   {
-    v22 = v2->LineCursor.CharIter.pText;
-    if ( !v22 || v2->LineCursor.CharIter.CurTextIndex >= v22->Size )
+    pText = this->LineCursor.CharIter.pText;
+    if ( !pText || this->LineCursor.CharIter.CurTextIndex >= pText->Size )
       break;
-    v23 = &v2->LineCursor.CharIter;
-    v2->LineCursor.CharInfoHolder.Index = Scaleform::Render::Text::Paragraph::CharactersIterator::operator*(&v2->LineCursor.CharIter)->PlaceHolder.Index;
-    v24 = Scaleform::Render::Text::Paragraph::CharactersIterator::operator*(&v2->LineCursor.CharIter);
-    v25 = v24;
-    v26 = v24->PlaceHolder.pFormat.pObject;
-    if ( v26 )
-      ++v26->RefCount;
-    v27 = v2->LineCursor.CharInfoHolder.pFormat.pObject;
-    if ( v27 )
+    p_CharIter = &this->LineCursor.CharIter;
+    this->LineCursor.CharInfoHolder.Index = Scaleform::Render::Text::Paragraph::CharactersIterator::operator*(&this->LineCursor.CharIter)->PlaceHolder.Index;
+    v24 = Scaleform::Render::Text::Paragraph::CharactersIterator::operator*(&this->LineCursor.CharIter);
+    if ( v24->PlaceHolder.pFormat.pObject )
+      ++v24->PlaceHolder.pFormat.pObject->RefCount;
+    v25 = this->LineCursor.CharInfoHolder.pFormat.pObject;
+    if ( v25 )
     {
-      v28 = v27->RefCount-- == 1;
-      if ( v28 )
+      v26 = v25->RefCount-- == 1;
+      if ( v26 )
       {
-        Scaleform::Render::Text::TextFormat::~TextFormat(v27);
-        Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v27);
+        Scaleform::Render::Text::TextFormat::~TextFormat(v25);
+        Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v25);
       }
     }
-    v2->LineCursor.CharInfoHolder.pFormat.pObject = v25->PlaceHolder.pFormat.pObject;
-    v2->LineCursor.CharInfoHolder.Index = v25->PlaceHolder.Index;
-    v2->LineCursor.CharInfoHolder.Character = v25->PlaceHolder.Character;
-    if ( v2->LineCursor.pDocView->Flags & 0x10 && v2->LineCursor.CharInfoHolder.Character )
-      v2->LineCursor.CharInfoHolder.Character = 42;
-    if ( v2->Pass == 1 )
+    this->LineCursor.CharInfoHolder.pFormat.pObject = v24->PlaceHolder.pFormat.pObject;
+    this->LineCursor.CharInfoHolder.Index = v24->PlaceHolder.Index;
+    this->LineCursor.CharInfoHolder.Character = v24->PlaceHolder.Character;
+    if ( (this->LineCursor.pDocView->Flags & 0x10) != 0 && this->LineCursor.CharInfoHolder.Character )
+      this->LineCursor.CharInfoHolder.Character = 42;
+    if ( this->Pass == 1 )
     {
-      if ( v2->pDocView->Flags & 8
-        && !v21
+      if ( (this->pDocView->Flags & 8) != 0
+        && !v21.pFont
         && Scaleform::Render::Text::WordWrapHelper::IsLineBreakOpportunityAt(
              7u,
-             v2->LineCursor.LastCharCode,
-             v2->LineCursor.CharInfoHolder.Character) )
+             this->LineCursor.LastCharCode,
+             this->LineCursor.CharInfoHolder.Character) )
       {
-        Scaleform::Render::Text::GFxLineCursor::operator=(&v2->WordWrapPoint, &v2->LineCursor);
+        Scaleform::Render::Text::GFxLineCursor::operator=(&this->WordWrapPoint, &this->LineCursor);
       }
-      if ( v2->Pass == 1 && v2->HasLineFormatHandler )
+      if ( this->Pass == 1 && this->HasLineFormatHandler )
       {
-        v29 = v2->TextRectWidth;
-        if ( !v2->LineCursor.LineWidth && !v2->StartPoint.pDocView )
-          Scaleform::Render::Text::GFxLineCursor::operator=(&v2->StartPoint, &v2->LineCursor);
-        if ( (float)v2->LineCursor.LineWidth > (float)(v29 * 0.5) && !v2->HalfPoint.pDocView )
-          Scaleform::Render::Text::GFxLineCursor::operator=(&v2->HalfPoint, &v2->LineCursor);
+        TextRectWidth = this->TextRectWidth;
+        if ( !this->LineCursor.LineWidth && !this->StartPoint.pDocView )
+          Scaleform::Render::Text::GFxLineCursor::operator=(&this->StartPoint, &this->LineCursor);
+        if ( (float)this->LineCursor.LineWidth > (float)(TextRectWidth * 0.5) && !this->HalfPoint.pDocView )
+          Scaleform::Render::Text::GFxLineCursor::operator=(&this->HalfPoint, &this->LineCursor);
       }
     }
-    v2->DeltaText = 1;
-    if ( v21 )
+    this->DeltaText = 1;
+    if ( v21.pFont )
     {
-      v28 = v21->RefCount-- == 1;
-      if ( v28 )
-        v21->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v21->vfptr, 1u);
+      v26 = v21.pFont->RefCount-- == 1;
+      if ( v26 )
+        ((void (__fastcall *)(Scaleform::Render::Text::LineBuffer::FormatDataEntry, __int64))v21.pFont->vfptr->__vecDelDtor)(
+          v21,
+          1i64);
     }
-    v21 = 0i64;
-    v141 = 0i64;
-    v30 = v2->pDocView->pImageSubstitutor;
-    if ( !v30 )
-      goto LABEL_245;
-    v31 = v2->LineCursor.CharIter.pText;
-    if ( v31 && (v32 = v31->Size, v33 = v2->LineCursor.CharIter.CurTextIndex, v33 < v32) )
+    v21.pFont = 0i64;
+    v138 = 0i64;
+    pImageSubstitutor = this->pDocView->pImageSubstitutor;
+    if ( !pImageSubstitutor )
+      goto LABEL_61;
+    v29 = this->LineCursor.CharIter.pText;
+    if ( v29 && (Size = v29->Size, CurTextIndex = this->LineCursor.CharIter.CurTextIndex, CurTextIndex < Size) )
     {
-      v34 = v32 - v33;
-      v128 = v34;
-      v35 = &v31->pText[v33];
+      v32 = Size - CurTextIndex;
+      v125 = v32;
+      v33 = &v29->pText[CurTextIndex];
     }
     else
     {
-      v34 = 0i64;
-      v128 = 0i64;
-      v35 = 0i64;
+      v32 = 0i64;
+      v125 = 0i64;
+      v33 = 0i64;
     }
-    v36 = Scaleform::Render::Text::DocView::ImageSubstitutor::FindImageDesc(v30, v35, v34, &ptextLen);
-    v21 = v36;
-    if ( v36 )
-      ++v36->RefCount;
-    v141 = v36;
-    if ( v36 )
+    ImageDesc = Scaleform::Render::Text::DocView::ImageSubstitutor::FindImageDesc(
+                  pImageSubstitutor,
+                  v33,
+                  v32,
+                  &ptextLen);
+    v21.pFont = (Scaleform::Render::Text::FontHandle *)ImageDesc;
+    if ( ImageDesc )
+      ++ImageDesc->RefCount;
+    v138 = ImageDesc;
+    if ( ImageDesc )
     {
-      v2->DeltaText = ptextLen;
+      this->DeltaText = ptextLen;
     }
     else
     {
-LABEL_245:
-      v37 = v2->LineCursor.CharInfoHolder.pFormat.pObject;
-      if ( v37 && (v37->PresentMask >> 9) & 1 && v2->LineCursor.CharInfoHolder.Character )
+LABEL_61:
+      v35 = this->LineCursor.CharInfoHolder.pFormat.pObject;
+      if ( v35 && (v35->PresentMask & 0x200) != 0 && this->LineCursor.CharInfoHolder.Character )
       {
-        v38 = Scaleform::Render::Text::TextFormat::GetImageDesc(v37);
-        v39 = v38;
-        if ( v38 )
-          ++v38->RefCount;
-        if ( v21 )
+        v36 = Scaleform::Render::Text::TextFormat::GetImageDesc(v35);
+        v37 = v36;
+        if ( v36 )
+          ++v36->RefCount;
+        if ( v21.pFont )
         {
-          v28 = v21->RefCount-- == 1;
-          if ( v28 )
-            v21->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v21->vfptr, 1u);
+          v26 = v21.pFont->RefCount-- == 1;
+          if ( v26 )
+            ((void (__fastcall *)(Scaleform::Render::Text::LineBuffer::FormatDataEntry, __int64))v21.pFont->vfptr->__vecDelDtor)(
+              v21,
+              1i64);
         }
-        v21 = (Scaleform::Render::Text::ImageDesc *)&v39->vfptr;
-        v141 = (Scaleform::Render::Text::ImageDesc *)&v39->vfptr;
+        v21.pFont = (Scaleform::Render::Text::FontHandle *)v37;
+        v138 = v37;
       }
     }
-    v2->pFont = 0i64;
-    v2->Scale = 1.0;
-    v2->FontSize = -1.0;
-    if ( v21 )
+    this->pFont = 0i64;
+    this->Scale = 1.0;
+    this->FontSize = -1.0;
+    if ( v21.pFont )
     {
-      v2->FindFontInfo.pCurrentFormat = v2->LineCursor.CharInfoHolder.pFormat.pObject;
-      v83 = v21->ScreenWidth;
-      if ( v83 <= 0.0 )
-        v84 = v83 - 0.5;
+      this->FindFontInfo.pCurrentFormat = this->LineCursor.CharInfoHolder.pFormat.pObject;
+      v80 = *(float *)&v21.pFont->FontName.pData;
+      if ( v80 <= 0.0 )
+        v81 = v80 - 0.5;
       else
-        v84 = v83 + 0.5;
-      v82 = (signed int)v84;
-      v2->GlyphWidth = (signed int)v84;
-      v2->GlyphAdvance = (float)(signed int)v84 + 40.0;
-      v85 = v2->LineCursor.LastAdvance;
-      if ( v85 <= 0.0 )
-        v86 = v85 - 0.5;
+        v81 = v80 + 0.5;
+      v79 = (int)v81;
+      this->GlyphWidth = (int)v81;
+      this->GlyphAdvance = (float)(int)v81 + 40.0;
+      LastAdvance = this->LineCursor.LastAdvance;
+      if ( LastAdvance <= 0.0 )
+        v83 = LastAdvance - 0.5;
       else
-        v86 = v85 + 0.5;
-      v2->LastAdvance = (signed int)v86;
-      v2->GlyphIndex = -1;
-      *(_WORD *)&v2->isSpace = 0;
-      goto LABEL_156;
+        v83 = LastAdvance + 0.5;
+      this->LastAdvance = (int)v83;
+      this->GlyphIndex = -1;
+      *(_WORD *)&this->isSpace = 0;
+      goto LABEL_151;
     }
-    v40 = v2->LineCursor.CharInfoHolder.Character == 160;
-    v2->isNbsp = v40;
-    v41 = v2->LineCursor.CharInfoHolder.Character;
-    v45 = 1;
-    if ( v41 )
+    v38 = this->LineCursor.CharInfoHolder.Character == 160;
+    this->isNbsp = v38;
+    Character = this->LineCursor.CharInfoHolder.Character;
+    v43 = 1;
+    if ( Character )
     {
-      if ( v40
-        || (v42 = (unsigned __int64)v41 >> 8, (v43 = Scaleform::UnicodeSpaceBits[v42]) == 0)
-        || v43 != 1
-        && (v44 = Scaleform::UnicodeSpaceBits[v43 + (((unsigned int)v41 >> 4) & 0xF)], !_bittest(&v44, v41 & 0xF)) )
+      if ( v38
+        || (v40 = (unsigned __int64)Character >> 8, (v41 = Scaleform::UnicodeSpaceBits[v40]) == 0)
+        || v41 != 1
+        && (v42 = Scaleform::UnicodeSpaceBits[v41 + ((Character >> 4) & 0xF)], !_bittest(&v42, Character & 0xF)) )
       {
-        v45 = 0;
+        v43 = 0;
       }
     }
-    v2->isSpace = v45;
-    v46 = v2->FindFontInfo.pCurrentFont.pObject;
-    if ( v46 && v2->FindFontInfo.pCurrentFormat == v2->LineCursor.CharInfoHolder.pFormat.pObject )
+    this->isSpace = v43;
+    v44 = this->FindFontInfo.pCurrentFont.pObject;
+    if ( v44 && this->FindFontInfo.pCurrentFormat == this->LineCursor.CharInfoHolder.pFormat.pObject )
     {
+      _InterlockedExchangeAdd(&v44->RefCount, 1u);
+      v21.pFont = (Scaleform::Render::Text::FontHandle *)v138;
+      v45 = this->pFontHandle.pObject;
+      if ( v45 )
+      {
+        if ( !_InterlockedDecrement(&v45->RefCount) )
+          v45->vfptr->__vecDelDtor(v45, 1u);
+        v21.pFont = (Scaleform::Render::Text::FontHandle *)v138;
+      }
+      this->pFontHandle.pObject = this->FindFontInfo.pCurrentFont.pObject;
+    }
+    else
+    {
+      this->FindFontInfo.pCurrentFormat = this->LineCursor.CharInfoHolder.pFormat.pObject;
+      v46 = Scaleform::Render::Text::DocView::FindFont(
+              this->pDocView,
+              &this->FindFontInfo,
+              this->LineCursor.CharInfoHolder.Character == 0);
+      v47 = v46;
       if ( v46 )
       {
         _InterlockedExchangeAdd(&v46->RefCount, 1u);
-        v21 = v141;
+        v21.pFont = (Scaleform::Render::Text::FontHandle *)v138;
       }
-      v47 = v2->pFontHandle.pObject;
-      if ( v47 )
-      {
-        if ( !_InterlockedDecrement(&v47->RefCount) && v47 )
-          v47->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v47->vfptr, 1u);
-        v21 = v141;
-      }
-      v2->pFontHandle.pObject = v2->FindFontInfo.pCurrentFont.pObject;
-    }
-    else
-    {
-      v2->FindFontInfo.pCurrentFormat = v2->LineCursor.CharInfoHolder.pFormat.pObject;
-      v48 = Scaleform::Render::Text::DocView::FindFont(
-              v2->pDocView,
-              &v2->FindFontInfo,
-              v2->LineCursor.CharInfoHolder.Character == 0);
-      v49 = v48;
+      v48 = this->pFontHandle.pObject;
       if ( v48 )
       {
-        _InterlockedExchangeAdd(&v48->RefCount, 1u);
-        v21 = v141;
+        if ( !_InterlockedDecrement(&v48->RefCount) )
+          v48->vfptr->__vecDelDtor(v48, 1u);
+        v21.pFont = (Scaleform::Render::Text::FontHandle *)v138;
       }
-      v50 = v2->pFontHandle.pObject;
-      if ( v50 )
-      {
-        if ( !_InterlockedDecrement(&v50->RefCount) && v50 )
-          v50->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v50->vfptr, 1u);
-        v21 = v141;
-      }
-      v2->pFontHandle.pObject = v49;
-      if ( !v49 )
-        goto LABEL_233;
+      this->pFontHandle.pObject = v47;
+      if ( !v47 )
+        goto LABEL_227;
     }
-    v51 = v2->pFontHandle.pObject->pFont.pObject;
-    v2->pFont = v51;
-    v52 = Scaleform::Render::Text::ParagraphFormatter::GetActualFontSize(v2);
-    v2->FontSize = v52;
-    v53 = (float)(v52 * 20.0) * 0.0009765625;
-    v2->Scale = v53;
-    v54 = v2->LineCursor.CharInfoHolder.Character;
-    v55 = 10;
-    if ( v2->pDocView->pDocument.pObject->RTFlags & 2 )
-      v55 = 13;
-    if ( v54 != v55 && v54 )
+    v49 = this->pFontHandle.pObject->pFont.pObject;
+    this->pFont = v49;
+    ActualFontSize = Scaleform::Render::Text::ParagraphFormatter::GetActualFontSize(this);
+    this->FontSize = ActualFontSize;
+    this->Scale = (float)(ActualFontSize * 20.0) * 0.0009765625;
+    v51 = this->LineCursor.CharInfoHolder.Character;
+    v52 = 10;
+    if ( (this->pDocView->pDocument.pObject->RTFlags & 2) != 0 )
+      v52 = 13;
+    if ( v51 == v52 || !v51 )
     {
-      if ( v54 == 9 )
+      v73 = (unsigned int)v49->vfptr[2].__vecDelDtor(v49, 32u);
+      this->GlyphIndex = v73;
+      this->GlyphAdvance = (float)(((float (__fastcall *)(Scaleform::Render::Font *, _QWORD))this->pFont->vfptr[3].__vecDelDtor)(
+                                     this->pFont,
+                                     v73)
+                                 * 0.5)
+                         * this->Scale;
+    }
+    else if ( v51 == 9 )
+    {
+      this->GlyphIndex = -1;
+      this->GlyphAdvance = 0.0;
+    }
+    else
+    {
+      v53 = ((__int64 (__fastcall *)(Scaleform::Render::Font *))v49->vfptr[2].__vecDelDtor)(v49);
+      this->GlyphIndex = v53;
+      if ( v53 == -1 )
       {
-        v2->GlyphIndex = -1;
-        v2->GlyphAdvance = 0.0;
-      }
-      else
-      {
-        v56 = ((__int64 (__fastcall *)(Scaleform::Render::Font *))v51->vfptr[2].__vecDelDtor)(v51);
-        v2->GlyphIndex = v56;
-        if ( v56 == -1 )
+        if ( this->isNbsp )
+          this->GlyphIndex = (int)this->pFont->vfptr[2].__vecDelDtor(this->pFont, 32i64);
+        if ( this->GlyphIndex == -1 && this->pLog && (this->pDocView->RTFlags & 0x10) == 0 )
         {
-          if ( v2->isNbsp )
-            v2->GlyphIndex = (__int64)v2->pFont->vfptr[2].__vecDelDtor(
-                                        (Scaleform::RefCountImplCore *)&v2->pFont->vfptr,
-                                        32u);
-          if ( v2->GlyphIndex == -1 && v2->pLog && !(v2->pDocView->RTFlags & 0x10) )
+          v128 = 1;
+          v129 = 0i64;
+          v130 = 0i64;
+          v131 = 0i64;
+          v132 = 512i64;
+          v133 = 0;
+          v134 = Scaleform::Memory::pGlobalHeap;
+          pCurrentFormat = this->FindFontInfo.pCurrentFormat;
+          v55 = pCurrentFormat->PresentMask >> 12;
+          v56 = (this->pDocView->Flags & 0x20) != 0;
+          v57 = (unsigned __int8)pCurrentFormat->FormatFlags >> 1;
+          v58 = pCurrentFormat->FormatFlags & 1;
+          FontList = Scaleform::Render::Text::TextFormat::GetFontList(pCurrentFormat);
+          LOBYTE(v60) = (v55 & 1) == 0;
+          v61 = ((__int64 (__fastcall *)(Scaleform::Render::Text::FontManagerBase *, unsigned __int64, _QWORD, __int64, int *))this->pDocView->pFontManager.pObject->vfptr[1].__vecDelDtor)(
+                  this->pDocView->pFontManager.pObject,
+                  (FontList->HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12,
+                  (v56 ? 0x10 : 0) | ((v57 & 1) != 0) | (v58 != 0 ? 2 : 0),
+                  v60,
+                  &v128);
+          v137 = v61;
+          v62 = this->pDocView->pDocumentListener.pObject;
+          if ( v62 )
           {
-            v131 = 1;
-            v132 = 0i64;
-            v133 = 0i64;
-            v134 = 0i64;
-            v135 = 512i64;
-            v136 = 0;
-            v137 = Scaleform::Memory::pGlobalHeap;
-            v57 = v2->FindFontInfo.pCurrentFormat;
-            v58 = v57->PresentMask >> 12;
-            v59 = ((unsigned __int8)v2->pDocView->Flags >> 5) & 1;
-            v60 = (unsigned __int8)v57->FormatFlags >> 1;
-            v61 = v57->FormatFlags & 1;
-            v62 = Scaleform::Render::Text::TextFormat::GetFontList(v57);
-            LOBYTE(v63) = (v58 & 1) == 0;
-            v122 = &v131;
-            v64 = ((__int64 (__fastcall *)(Scaleform::Render::Text::FontManagerBase *, unsigned __int64, _QWORD, __int64))v2->pDocView->pFontManager.pObject->vfptr[1].__vecDelDtor)(
-                    v2->pDocView->pFontManager.pObject,
-                    (v62->HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12,
-                    (v59 != 0 ? 0x10 : 0) | ((v60 & 1) != 0) | (v61 != 0 ? 2 : 0),
-                    v63);
-            v140 = v64;
-            v65 = v2->pDocView->pDocumentListener.pObject;
-            if ( v65 )
-            {
-              v66 = (Scaleform::String *)v65->vfptr[14].__vecDelDtor(
-                                           (Scaleform::RefCountNTSImplCore *)&v65->vfptr,
-                                           (unsigned int)&v129);
-              v124 |= 1u;
-            }
-            else
-            {
-              v142 = (unsigned __int64)&Scaleform::String::NullData;
-              _InterlockedExchangeAdd(&Scaleform::String::NullData.RefCount, 1u);
-              v66 = (Scaleform::String *)&v142;
-              v124 |= 2u;
-            }
-            Scaleform::String::String(&v127, v66);
-            if ( v124 & 2 )
-            {
-              v124 &= 0xFFFFFFFD;
-              if ( !_InterlockedDecrement((volatile signed __int32 *)((v142 & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-                ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-            }
-            if ( v124 & 1 )
-            {
-              v124 &= 0xFFFFFFFE;
-              if ( !_InterlockedDecrement((volatile signed __int32 *)((v129 & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-                ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-            }
-            v2->pFont->vfptr[20].__vecDelDtor((Scaleform::RefCountImplCore *)&v2->pFont->vfptr, (unsigned int)&v143);
-            v67 = ((__int64 (*)(void))v2->pFont->vfptr[18].__vecDelDtor)();
-            v68 = &customWorldMapCaption;
-            if ( v132 )
-              v68 = v132;
-            v69 = v143 & 0xFFFFFFFFFFFFFFFCui64;
-            v70 = (volatile signed __int32 *)(v127.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64);
-            v71 = Scaleform::Render::Text::TextFormat::GetFontList(v2->FindFontInfo.pCurrentFormat);
-            LODWORD(v123) = v67;
-            LODWORD(v122) = v2->LineCursor.CharInfoHolder.Character;
-            Scaleform::Log::LogError(
-              v2->pLog,
-              "Missing \"%s\" glyph %c (0x%x) in \"%s\".\nFont has %u glyphs, ranges %s.\nSearch log: \n%s",
-              (v71->HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12,
-              (unsigned int)SLOBYTE(v2->LineCursor.CharInfoHolder.Character),
-              v122,
-              v70 + 3,
-              v123,
-              v69 + 12,
-              v68);
-            v2->pDocView->RTFlags |= 0x10u;
-            if ( !_InterlockedDecrement((volatile signed __int32 *)((v143 & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-              ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-            if ( !_InterlockedDecrement(v70 + 2) )
-              Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, (void *)v70);
-            if ( v64 && !_InterlockedDecrement((volatile signed __int32 *)(v64 + 8)) )
-              (**(void (__fastcall ***)(__int64, signed __int64))v64)(v64, 1i64);
-            if ( v132 )
-              ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-            v19 = &v2->TabStopsNum;
-            v23 = &v2->LineCursor.CharIter;
-            v21 = v141;
+            v63 = (Scaleform::String *)v62->vfptr[14].__vecDelDtor(v62, (unsigned int)&v126);
+            v121 |= 1u;
           }
+          else
+          {
+            v139 = (unsigned __int64)&Scaleform::String::NullData;
+            _InterlockedExchangeAdd(&Scaleform::String::NullData.RefCount, 1u);
+            v63 = (Scaleform::String *)&v139;
+            v121 |= 2u;
+          }
+          Scaleform::String::String(&v124, v63);
+          if ( (v121 & 2) != 0 )
+          {
+            v121 &= ~2u;
+            if ( !_InterlockedDecrement((volatile signed __int32 *)((v139 & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
+              ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+          }
+          if ( (v121 & 1) != 0 )
+          {
+            v121 &= ~1u;
+            if ( !_InterlockedDecrement((volatile signed __int32 *)((v126 & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
+              ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+          }
+          this->pFont->vfptr[20].__vecDelDtor(this->pFont, (unsigned int)&v140);
+          v64 = ((__int64 (__fastcall *)(Scaleform::Render::Font *))this->pFont->vfptr[18].__vecDelDtor)(this->pFont);
+          v65 = &customCaption;
+          if ( v129 )
+            v65 = v129;
+          v66 = v140 & 0xFFFFFFFFFFFFFFFCui64;
+          v67 = v124.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64;
+          v68 = Scaleform::Render::Text::TextFormat::GetFontList(this->FindFontInfo.pCurrentFormat);
+          LODWORD(v120) = v64;
+          LODWORD(v119) = this->LineCursor.CharInfoHolder.Character;
+          Scaleform::Log::LogError(
+            this->pLog,
+            "Missing \"%s\" glyph %c (0x%x) in \"%s\".\nFont has %u glyphs, ranges %s.\nSearch log: \n%s",
+            (const char *)((v68->HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12),
+            (unsigned int)SLOBYTE(this->LineCursor.CharInfoHolder.Character),
+            v119,
+            (const char *)(v67 + 12),
+            v120,
+            (const char *)(v66 + 12),
+            v65);
+          this->pDocView->RTFlags |= 0x10u;
+          if ( !_InterlockedDecrement((volatile signed __int32 *)((v140 & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
+            ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+          if ( !_InterlockedDecrement((volatile signed __int32 *)(v67 + 8)) )
+            Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, (void *)v67);
+          if ( v61 && !_InterlockedDecrement((volatile signed __int32 *)(v61 + 8)) )
+            (**(void (__fastcall ***)(__int64, __int64))v61)(v61, 1i64);
+          if ( v129 )
+            ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+          p_TabStopsNum = &this->TabStopsNum;
+          p_CharIter = &this->LineCursor.CharIter;
+          v21.pFont = (Scaleform::Render::Text::FontHandle *)v138;
         }
-        v2->pFont->vfptr[3].__vecDelDtor((Scaleform::RefCountImplCore *)v2->pFont, v2->GlyphIndex);
-        v2->GlyphAdvance = v53 * v2->Scale;
-        v72 = v2->LineCursor.CharInfoHolder.Character;
-        v73 = (unsigned __int64)v2->LineCursor.CharInfoHolder.Character >> 8;
-        v74 = Scaleform::UnicodeNonSpacingMarksBits[v73];
-        if ( Scaleform::UnicodeNonSpacingMarksBits[v73] )
+      }
+      this->GlyphAdvance = ((float (__fastcall *)(Scaleform::Render::Font *, _QWORD))this->pFont->vfptr[3].__vecDelDtor)(
+                             this->pFont,
+                             (unsigned int)this->GlyphIndex)
+                         * this->Scale;
+      v69 = this->LineCursor.CharInfoHolder.Character;
+      v70 = (unsigned __int64)v69 >> 8;
+      v71 = Scaleform::UnicodeNonSpacingMarksBits[v70];
+      if ( Scaleform::UnicodeNonSpacingMarksBits[v70] )
+      {
+        if ( v71 == 1
+          || (v72 = Scaleform::UnicodeNonSpacingMarksBits[v71 + ((v69 >> 4) & 0xF)], _bittest(&v72, v69 & 0xF)) )
         {
-          if ( v74 == 1
-            || (v75 = Scaleform::UnicodeNonSpacingMarksBits[v74 + (((unsigned int)v72 >> 4) & 0xF)],
-                _bittest(&v75, v72 & 0xF)) )
-          {
-            v2->GlyphAdvance = 0.0;
-          }
+          this->GlyphAdvance = 0.0;
         }
       }
     }
-    else
+    if ( this->LineCursor.pPrevGrec )
     {
-      v76 = (__int64)v51->vfptr[2].__vecDelDtor((Scaleform::RefCountImplCore *)&v51->vfptr, 32u);
-      v2->GlyphIndex = v76;
-      v2->pFont->vfptr[3].__vecDelDtor((Scaleform::RefCountImplCore *)v2->pFont, v76);
-      v2->GlyphAdvance = (float)(v53 * 0.5) * v2->Scale;
-    }
-    if ( v2->LineCursor.pPrevGrec )
-    {
-      v77 = 0.0;
-      if ( v2->LineCursor.LastKerning )
+      v74 = 0.0;
+      if ( this->LineCursor.LastKerning )
+        v74 = ((float (__fastcall *)(Scaleform::Render::Font *, _QWORD, _QWORD))this->LineCursor.pLastFont.pObject->pFont.pObject->vfptr[4].__vecDelDtor)(
+                this->LineCursor.pLastFont.pObject->pFont.pObject,
+                this->LineCursor.LastCharCode,
+                this->LineCursor.CharInfoHolder.Character)
+            * this->Scale;
+      v75 = v74 + this->LineCursor.LastAdvance;
+      if ( v75 > 0.0 )
       {
-        ((void (__fastcall *)(Scaleform::Render::Font *, _QWORD, _QWORD))v2->LineCursor.pLastFont.pObject->pFont.pObject->vfptr[4].__vecDelDtor)(
-          v2->LineCursor.pLastFont.pObject->pFont.pObject,
-          v2->LineCursor.LastCharCode,
-          v2->LineCursor.CharInfoHolder.Character);
-        v77 = 0.0 * v2->Scale;
-      }
-      v78 = v77 + v2->LineCursor.LastAdvance;
-      if ( v78 > 0.0 )
-      {
-        v79 = v78 + 0.5;
-        goto LABEL_143;
+        v76 = v75 + 0.5;
+        goto LABEL_138;
       }
     }
     else
     {
-      v78 = v2->LineCursor.LastAdvance;
-      if ( v78 > 0.0 )
+      v75 = this->LineCursor.LastAdvance;
+      if ( v75 > 0.0 )
       {
-        v79 = v78 + 0.5;
-        goto LABEL_143;
+        v76 = v75 + 0.5;
+        goto LABEL_138;
       }
     }
-    v79 = v78 - 0.5;
-LABEL_143:
-    v2->LastAdvance = (signed int)v79;
-    v80 = v2->GlyphAdvance;
-    if ( v80 <= 0.0 )
-      v81 = v80 - 0.5;
+    v76 = v75 - 0.5;
+LABEL_138:
+    this->LastAdvance = (int)v76;
+    GlyphAdvance = this->GlyphAdvance;
+    if ( GlyphAdvance <= 0.0 )
+      v78 = GlyphAdvance - 0.5;
     else
-      v81 = v80 + 0.5;
-    v82 = (signed int)v81;
-    v2->GlyphWidth = (signed int)v81;
-    if ( v2->isSpace )
-      v82 = 0;
-LABEL_156:
-    v2->AdjLineWidth = v82;
-    v87 = v2->LastAdvance;
-    v2->NewLineWidth = v87 + v2->LineCursor.LineWidth;
-    v88 = v2->LineCursor.pPrevGrec;
-    if ( v88 )
+      v78 = GlyphAdvance + 0.5;
+    v79 = (int)v78;
+    this->GlyphWidth = (int)v78;
+    if ( this->isSpace )
+      v79 = 0;
+LABEL_151:
+    this->AdjLineWidth = v79;
+    v84 = this->LastAdvance;
+    this->NewLineWidth = v84 + this->LineCursor.LineWidth;
+    pPrevGrec = this->LineCursor.pPrevGrec;
+    if ( pPrevGrec )
     {
-      if ( v87 < 0 )
+      if ( v84 < 0 )
       {
-        v88->Advance = abs((_WORD)v87);
-        v88->Flags |= 0x40u;
+        pPrevGrec->Advance = abs32(v84);
+        pPrevGrec->Flags |= 0x40u;
       }
       else
       {
-        v88->Advance = v87;
-        v88->Flags &= 0xFFBFu;
+        pPrevGrec->Advance = v84;
+        pPrevGrec->Flags &= ~0x40u;
       }
     }
-    if ( !Scaleform::Render::Text::ParagraphFormatter::CheckWordWrap(v2) )
+    if ( !Scaleform::Render::Text::ParagraphFormatter::CheckWordWrap(this) )
     {
-      v89 = (signed __int64)&v2->LineCursor.GlyphIns.pGlyphs[v2->LineCursor.GlyphIns.GlyphIndex];
-      *(_QWORD *)v89 = 0i64;
-      *(_WORD *)v89 = v2->GlyphIndex;
-      if ( v21 )
+      v86 = &this->LineCursor.GlyphIns.pGlyphs[this->LineCursor.GlyphIns.GlyphIndex];
+      *v86 = 0i64;
+      v86->Index = this->GlyphIndex;
+      if ( v21.pFont )
       {
-        v2->LineCursor.GlyphIns.pGlyphs[v2->LineCursor.GlyphIns.GlyphIndex].Flags |= 0x4000u;
-        v2->LineCursor.GlyphIns.pGlyphs[v2->LineCursor.GlyphIns.GlyphIndex].Flags |= 0x800u;
-        v2->LineCursor.GlyphIns.pNextFormatData[v2->LineCursor.GlyphIns.FormatDataIndex++].pFont = (Scaleform::Render::Text::FontHandle *)v21;
-        ++v21->RefCount;
-        *(_WORD *)(v89 + 4) = (LOWORD(v2->DeltaText) << 12) | *(_WORD *)(v89 + 4) & 0xFFF;
-        v2->LineCursor.LastKerning = 0;
-        LODWORD(v90) = COERCE_UNSIGNED_INT((float)((float)(v21->Matrix.M[1][1] + v21->Matrix.M[1][0]) * 0.0) + v21->Matrix.M[1][3]) ^ _xmm[0];
-        v91 = v2->LineCursor.MaxFontAscent;
-        if ( v90 >= v91 )
-          LODWORD(v91) = COERCE_UNSIGNED_INT((float)((float)(v21->Matrix.M[1][1] + v21->Matrix.M[1][0]) * 0.0) + v21->Matrix.M[1][3]) ^ _xmm[0];
-        v2->LineCursor.MaxFontAscent = v91;
-        v92 = v21->ScreenHeight - v90;
-        v93 = v2->LineCursor.MaxFontDescent;
-        if ( v92 >= v93 )
-          v93 = v92;
-        v2->LineCursor.MaxFontDescent = v93;
-        v2->LineCursor.NumOfTrailingSpaces = 0;
-        v2->LineCursor.LineWidthWithoutTrailingSpaces = v2->AdjLineWidth + v2->NewLineWidth;
-        v94 = v2->FindFontInfo.pCurrentFormat;
-        if ( v94->PresentMask & 0x100 && Scaleform::String::GetLength((Scaleform::String *)&v94->Url.0) )
-          *(_WORD *)(v89 + 6) |= 0x80u;
+        this->LineCursor.GlyphIns.pGlyphs[this->LineCursor.GlyphIns.GlyphIndex].Flags |= 0x4000u;
+        this->LineCursor.GlyphIns.pGlyphs[this->LineCursor.GlyphIns.GlyphIndex].Flags |= 0x800u;
+        this->LineCursor.GlyphIns.pNextFormatData[this->LineCursor.GlyphIns.FormatDataIndex++] = v21;
+        ++v21.pFont->RefCount;
+        v86->LenAndFontSize = (LOWORD(this->DeltaText) << 12) | v86->LenAndFontSize & 0xFFF;
+        this->LineCursor.LastKerning = 0;
+        LODWORD(v87) = COERCE_UNSIGNED_INT(
+                         (float)((float)(*((float *)&v21.pFont[1].RefCount + 1) + *(float *)&v21.pFont[1].RefCount) * 0.0)
+                       + *((float *)&v21.pFont[1].pFontManager + 1)) ^ _xmm[0];
+        MaxFontAscent = this->LineCursor.MaxFontAscent;
+        if ( v87 >= MaxFontAscent )
+          LODWORD(MaxFontAscent) = COERCE_UNSIGNED_INT(
+                                     (float)((float)(*((float *)&v21.pFont[1].RefCount + 1)
+                                                   + *(float *)&v21.pFont[1].RefCount)
+                                           * 0.0)
+                                   + *((float *)&v21.pFont[1].pFontManager + 1)) ^ _xmm[0];
+        this->LineCursor.MaxFontAscent = MaxFontAscent;
+        v89 = *((float *)&v21.pFont->FontName.HeapTypeBits + 1) - v87;
+        MaxFontDescent = this->LineCursor.MaxFontDescent;
+        if ( v89 >= MaxFontDescent )
+          MaxFontDescent = v89;
+        this->LineCursor.MaxFontDescent = MaxFontDescent;
+        this->LineCursor.NumOfTrailingSpaces = 0;
+        this->LineCursor.LineWidthWithoutTrailingSpaces = this->AdjLineWidth + this->NewLineWidth;
+        v91 = this->FindFontInfo.pCurrentFormat;
+        if ( (v91->PresentMask & 0x100) != 0 && Scaleform::String::GetLength(&v91->Url) )
+          v86->Flags |= 0x80u;
         else
-          *(_WORD *)(v89 + 6) &= 0xFF7Fu;
-LABEL_215:
-        if ( v2->LineCursor.CharInfoHolder.Character == 9 )
+          v86->Flags &= ~0x80u;
+LABEL_209:
+        if ( this->LineCursor.CharInfoHolder.Character == 9 )
         {
-          v106 = v2->TabStopsIndex;
-          if ( (unsigned int)v106 >= *v19 )
+          TabStopsIndex = this->TabStopsIndex;
+          if ( (unsigned int)TabStopsIndex >= *p_TabStopsNum )
           {
-            v109 = (__m128)LODWORD(v2->FontSize);
-            v109.m128_f32[0] = (float)((float)(v109.m128_f32[0] * 2.0) + 8.0) * 0.125;
-            v110 = (signed int)v109.m128_f32[0];
-            if ( (signed int)v109.m128_f32[0] != 0x80000000 && (float)v110 != v109.m128_f32[0] )
-              v109.m128_f32[0] = (float)(v110 - (_mm_movemask_ps(_mm_unpacklo_ps(v109, v109)) & 1));
-            v111 = (float)(v109.m128_f32[0] * 8.0) * 20.0;
-            v112 = (__m128)COERCE_UNSIGNED_INT((float)v2->NewLineWidth);
-            v113 = v112;
-            v113.m128_f32[0] = (float)(v112.m128_f32[0] + v111) / v111;
-            v114 = (signed int)v113.m128_f32[0];
-            if ( (signed int)v113.m128_f32[0] != 0x80000000 && (float)v114 != v113.m128_f32[0] )
-              v113.m128_f32[0] = (float)(v114 - (_mm_movemask_ps(_mm_unpacklo_ps(v113, v113)) & 1));
-            v2->GlyphAdvance = (float)(v113.m128_f32[0] * v111) - v112.m128_f32[0];
+            FontSize_low = (__m128)LODWORD(this->FontSize);
+            FontSize_low.m128_f32[0] = (float)((float)(FontSize_low.m128_f32[0] * 2.0) + 8.0) * 0.125;
+            v107 = (int)FontSize_low.m128_f32[0];
+            if ( (int)FontSize_low.m128_f32[0] != 0x80000000 && (float)v107 != FontSize_low.m128_f32[0] )
+              FontSize_low.m128_f32[0] = (float)(v107
+                                               - (_mm_movemask_ps(_mm_unpacklo_ps(FontSize_low, FontSize_low)) & 1));
+            v108 = (float)(FontSize_low.m128_f32[0] * 8.0) * 20.0;
+            v109 = (__m128)COERCE_UNSIGNED_INT((float)this->NewLineWidth);
+            v110 = v109;
+            v110.m128_f32[0] = (float)(v109.m128_f32[0] + v108) / v108;
+            v111 = (int)v110.m128_f32[0];
+            if ( (int)v110.m128_f32[0] != 0x80000000 && (float)v111 != v110.m128_f32[0] )
+              v110.m128_f32[0] = (float)(v111 - (_mm_movemask_ps(_mm_unpacklo_ps(v110, v110)) & 1));
+            this->GlyphAdvance = (float)(v110.m128_f32[0] * v108) - v109.m128_f32[0];
           }
           else
           {
-            v107 = 20 * *(_DWORD *)(v125 + 4 * v106);
-            v2->TabStopsIndex = v106 + 1;
-            v108 = v2->NewLineWidth;
-            if ( v107 > v108 )
-              v2->GlyphAdvance = (float)(v107 - v108);
+            v104 = 20 * *(_DWORD *)(v122 + 4 * TabStopsIndex);
+            this->TabStopsIndex = TabStopsIndex + 1;
+            NewLineWidth = this->NewLineWidth;
+            if ( v104 > NewLineWidth )
+              this->GlyphAdvance = (float)(v104 - NewLineWidth);
           }
         }
-        v2->LineCursor.LineLength += (unsigned int)*(unsigned __int16 *)(v89 + 4) >> 12;
-        v2->LineCursor.pPrevGrec = (Scaleform::Render::Text::LineBuffer::GlyphEntry *)v89;
-        v2->LineCursor.LastCharCode = v2->LineCursor.CharInfoHolder.Character;
-        v2->LineCursor.LineWidth = v2->NewLineWidth;
-        v2->LineCursor.LastGlyphIndex = v2->GlyphIndex;
-        v115 = v2->GlyphAdvance;
-        v2->LineCursor.LastAdvance = v115;
-        v116 = v2->FindFontInfo.pCurrentFormat;
-        if ( (LOBYTE(v116->PresentMask) >> 1) & 1 )
-          v2->LineCursor.LastAdvance = (float)((float)(v116->LetterSpacing * 0.050000001) * 20.0) + v115;
-        v117 = v2->GlyphWidth;
-        v2->LineCursor.LastGlyphWidth = v117;
-        if ( !v2->LineCursor.GlyphIns.GlyphIndex )
-          v2->LineCursor.FirstGlyphWidth = v117;
-        if ( v2->LineCursor.GlyphIns.pGlyphs )
+        this->LineCursor.LineLength += v86->LenAndFontSize >> 12;
+        this->LineCursor.pPrevGrec = v86;
+        this->LineCursor.LastCharCode = this->LineCursor.CharInfoHolder.Character;
+        this->LineCursor.LineWidth = this->NewLineWidth;
+        this->LineCursor.LastGlyphIndex = this->GlyphIndex;
+        v112 = this->GlyphAdvance;
+        this->LineCursor.LastAdvance = v112;
+        v113 = this->FindFontInfo.pCurrentFormat;
+        if ( (v113->PresentMask & 2) != 0 )
+          this->LineCursor.LastAdvance = (float)((float)(v113->LetterSpacing * 0.050000001) * 20.0) + v112;
+        GlyphWidth = this->GlyphWidth;
+        this->LineCursor.LastGlyphWidth = GlyphWidth;
+        if ( !this->LineCursor.GlyphIns.GlyphIndex )
+          this->LineCursor.FirstGlyphWidth = GlyphWidth;
+        if ( this->LineCursor.GlyphIns.pGlyphs )
         {
-          v118 = v2->LineCursor.GlyphIns.GlyphIndex;
-          if ( v118 < v2->LineCursor.GlyphIns.GlyphsCount )
-            v2->LineCursor.GlyphIns.GlyphIndex = v118 + 1;
+          v115 = this->LineCursor.GlyphIns.GlyphIndex;
+          if ( v115 < this->LineCursor.GlyphIns.GlyphsCount )
+            this->LineCursor.GlyphIns.GlyphIndex = v115 + 1;
         }
-        goto LABEL_233;
+        goto LABEL_227;
       }
-      v95 = v2->FindFontInfo.pCurrentFormat->ColorV;
-      v96 = v2->FontSize;
-      if ( v96 < 256.0 && (v97 = (signed int)(float)(v96 * 16.0), v97 & 0xF) )
+      v92 = this->FindFontInfo.pCurrentFormat->ColorV;
+      FontSize = this->FontSize;
+      if ( FontSize < 256.0 && (v94 = (int)(float)(FontSize * 16.0), (v94 & 0xF) != 0) )
       {
-        *(_WORD *)(v89 + 6) = 16;
-        v98 = v97 & 0xFFF;
+        v86->Flags = 16;
+        v95 = v94 & 0xFFF;
       }
       else
       {
-        *(_WORD *)(v89 + 6) = 0;
-        v98 = (signed int)v96 & 0xFFF;
+        v86->Flags = 0;
+        v95 = (int)FontSize & 0xFFF;
       }
-      *(_WORD *)(v89 + 4) = v98;
-      v99 = v2->pFontHandle.pObject;
-      if ( v99 != v2->LineCursor.pLastFont.pObject )
+      v86->LenAndFontSize = v95;
+      v96 = this->pFontHandle.pObject;
+      if ( v96 != this->LineCursor.pLastFont.pObject )
       {
-        v2->LineCursor.GlyphIns.pGlyphs[v2->LineCursor.GlyphIns.GlyphIndex].Flags |= 0x4000u;
-        v2->LineCursor.GlyphIns.pGlyphs[v2->LineCursor.GlyphIns.GlyphIndex].Flags |= 0x2000u;
-        v2->LineCursor.GlyphIns.pNextFormatData[v2->LineCursor.GlyphIns.FormatDataIndex++].pFont = v99;
-        _InterlockedExchangeAdd(&v99->RefCount, 1u);
-        v21 = v141;
+        this->LineCursor.GlyphIns.pGlyphs[this->LineCursor.GlyphIns.GlyphIndex].Flags |= 0x4000u;
+        this->LineCursor.GlyphIns.pGlyphs[this->LineCursor.GlyphIns.GlyphIndex].Flags |= 0x2000u;
+        this->LineCursor.GlyphIns.pNextFormatData[this->LineCursor.GlyphIns.FormatDataIndex++].pFont = v96;
+        _InterlockedExchangeAdd(&v96->RefCount, 1u);
+        v21.pFont = (Scaleform::Render::Text::FontHandle *)v138;
       }
-      if ( v95 != v2->LineCursor.LastColor )
+      if ( v92 != this->LineCursor.LastColor )
       {
-        v2->LineCursor.GlyphIns.pGlyphs[v2->LineCursor.GlyphIns.GlyphIndex].Flags |= 0x4000u;
-        v2->LineCursor.GlyphIns.pGlyphs[v2->LineCursor.GlyphIns.GlyphIndex].Flags |= 0x1000u;
-        v2->LineCursor.GlyphIns.pNextFormatData[v2->LineCursor.GlyphIns.FormatDataIndex++].ColorV = v95;
+        this->LineCursor.GlyphIns.pGlyphs[this->LineCursor.GlyphIns.GlyphIndex].Flags |= 0x4000u;
+        this->LineCursor.GlyphIns.pGlyphs[this->LineCursor.GlyphIns.GlyphIndex].Flags |= 0x1000u;
+        this->LineCursor.GlyphIns.pNextFormatData[this->LineCursor.GlyphIns.FormatDataIndex++].ColorV = v92;
       }
-      v100 = v2->LineCursor.CharInfoHolder.Character;
-      v101 = 10;
-      if ( v2->pDocView->pDocument.pObject->RTFlags & 2 )
-        v101 = 13;
-      if ( v100 == v101 )
+      v97 = this->LineCursor.CharInfoHolder.Character;
+      v98 = 10;
+      if ( (this->pDocView->pDocument.pObject->RTFlags & 2) != 0 )
+        v98 = 13;
+      if ( v97 == v98 )
       {
-        if ( !v100 )
-          goto LABEL_196;
-        *(_WORD *)(v89 + 4) &= 0xFFFu;
-        *(_WORD *)(v89 + 4) |= 0x1000u;
+        if ( !v97 )
+          goto LABEL_191;
+        v86->LenAndFontSize &= 0xFFFu;
+        v86->LenAndFontSize |= 0x1000u;
       }
       else
       {
-        if ( v100 )
+        if ( v97 )
         {
-          if ( !v2->isSpace && !v2->isNbsp )
+          if ( !this->isSpace && !this->isNbsp )
           {
-            v2->LineCursor.NumOfTrailingSpaces = 0;
-            goto LABEL_193;
+            this->LineCursor.NumOfTrailingSpaces = 0;
+            goto LABEL_188;
           }
-          *(_WORD *)(v89 + 6) |= 2u;
-          v102 = (unsigned int)v2->GlyphIndex;
-          if ( (signed int)v102 >= 0 )
+          v86->Flags |= 2u;
+          v99 = (unsigned int)this->GlyphIndex;
+          if ( (int)v99 >= 0 )
           {
-            v126 = 0i64;
-            ((void (__fastcall *)(Scaleform::Render::Font *, __int64, __int128 *))v2->pFont->vfptr[7].__vecDelDtor)(
-              v2->pFont,
-              v102,
-              &v126);
-            if ( *(float *)&v126 >= *((float *)&v126 + 2) || *((float *)&v126 + 1) >= *((float *)&v126 + 3) )
-              *(_WORD *)(v89 + 6) |= 0x200u;
-          }
-          else
-          {
-            *(_WORD *)(v89 + 6) |= 0x200u;
-          }
-          ++v2->LineCursor.NumOfSpaces;
-          if ( v2->isSpace )
-          {
-            ++v2->LineCursor.NumOfTrailingSpaces;
+            v123 = 0i64;
+            ((void (__fastcall *)(Scaleform::Render::Font *, __int64, __int128 *))this->pFont->vfptr[7].__vecDelDtor)(
+              this->pFont,
+              v99,
+              &v123);
+            if ( *(float *)&v123 >= *((float *)&v123 + 2) || *((float *)&v123 + 1) >= *((float *)&v123 + 3) )
+              v86->Flags |= 0x200u;
           }
           else
           {
-            v2->LineCursor.NumOfTrailingSpaces = 0;
-LABEL_193:
-            v2->LineCursor.LineWidthWithoutTrailingSpaces = v2->AdjLineWidth + v2->NewLineWidth;
+            v86->Flags |= 0x200u;
           }
-          *(_WORD *)(v89 + 4) &= 0xFFFu;
-          *(_WORD *)(v89 + 4) |= 0x1000u;
-LABEL_199:
-          Scaleform::Render::Text::GFxLineCursor::TrackFontParams(&v2->LineCursor, v2->pFont, v2->Scale);
-LABEL_200:
-          if ( v2->FindFontInfo.pCurrentFormat->FormatFlags & 4 )
-            *(_WORD *)(v89 + 6) |= 0x400u;
-          else
-            *(_WORD *)(v89 + 6) &= 0xFBFFu;
-          v103 = v2->FindFontInfo.pCurrentFormat;
-          if ( v103->PresentMask & 0x100 && Scaleform::String::GetLength((Scaleform::String *)&v103->Url.0) )
-            *(_WORD *)(v89 + 6) |= 0x80u;
-          else
-            *(_WORD *)(v89 + 6) &= 0xFF7Fu;
-          v104 = v2->pFontHandle.pObject;
-          if ( v104 )
+          ++this->LineCursor.NumOfSpaces;
+          if ( this->isSpace )
           {
-            _InterlockedExchangeAdd(&v104->RefCount, 1u);
-            v21 = v141;
+            ++this->LineCursor.NumOfTrailingSpaces;
           }
-          v105 = v2->LineCursor.pLastFont.pObject;
-          if ( v105 )
+          else
           {
-            if ( !_InterlockedDecrement(&v105->RefCount) && v105 )
-              v105->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v105->vfptr, 1u);
-            v21 = v141;
+            this->LineCursor.NumOfTrailingSpaces = 0;
+LABEL_188:
+            this->LineCursor.LineWidthWithoutTrailingSpaces = this->AdjLineWidth + this->NewLineWidth;
           }
-          v2->LineCursor.pLastFont.pObject = v2->pFontHandle.pObject;
-          v2->LineCursor.LastColor = v95;
-          v2->LineCursor.LastKerning = ((unsigned __int8)v2->FindFontInfo.pCurrentFormat->FormatFlags >> 3) & 1;
-          goto LABEL_215;
+          v86->LenAndFontSize &= 0xFFFu;
+          v86->LenAndFontSize |= 0x1000u;
+LABEL_194:
+          Scaleform::Render::Text::GFxLineCursor::TrackFontParams(&this->LineCursor, this->pFont, this->Scale);
+LABEL_195:
+          if ( (this->FindFontInfo.pCurrentFormat->FormatFlags & 4) != 0 )
+            v86->Flags |= 0x400u;
+          else
+            v86->Flags &= ~0x400u;
+          v100 = this->FindFontInfo.pCurrentFormat;
+          if ( (v100->PresentMask & 0x100) != 0 && Scaleform::String::GetLength(&v100->Url) )
+            v86->Flags |= 0x80u;
+          else
+            v86->Flags &= ~0x80u;
+          v101 = this->pFontHandle.pObject;
+          if ( v101 )
+          {
+            _InterlockedExchangeAdd(&v101->RefCount, 1u);
+            v21.pFont = (Scaleform::Render::Text::FontHandle *)v138;
+          }
+          v102 = this->LineCursor.pLastFont.pObject;
+          if ( v102 )
+          {
+            if ( !_InterlockedDecrement(&v102->RefCount) )
+              v102->vfptr->__vecDelDtor(v102, 1u);
+            v21.pFont = (Scaleform::Render::Text::FontHandle *)v138;
+          }
+          this->LineCursor.pLastFont.pObject = this->pFontHandle.pObject;
+          this->LineCursor.LastColor = v92;
+          this->LineCursor.LastKerning = (this->FindFontInfo.pCurrentFormat->FormatFlags & 8) != 0;
+          goto LABEL_209;
         }
-LABEL_196:
-        *(_WORD *)(v89 + 4) &= 0xFFFu;
+LABEL_191:
+        v86->LenAndFontSize &= 0xFFFu;
       }
-      *(_WORD *)(v89 + 6) |= 0x300u;
-      v2->GlyphWidth = 0;
-      v2->LineCursor.LineHasNewLine = 1;
-      if ( !v2->LineCursor.CharInfoHolder.Index )
-        goto LABEL_199;
-      goto LABEL_200;
+      v86->Flags |= 0x300u;
+      this->GlyphWidth = 0;
+      this->LineCursor.LineHasNewLine = 1;
+      if ( !this->LineCursor.CharInfoHolder.Index )
+        goto LABEL_194;
+      goto LABEL_195;
     }
-LABEL_233:
-    v119 = v2->DeltaText;
-    if ( v119 )
+LABEL_227:
+    DeltaText = this->DeltaText;
+    if ( DeltaText )
     {
-      v120 = v119;
-      Scaleform::Render::Text::Paragraph::CharactersIterator::operator+=(v23, v119);
-      v2->LineCursor.NumChars += v120;
+      v117 = DeltaText;
+      Scaleform::Render::Text::Paragraph::CharactersIterator::operator+=(p_CharIter, DeltaText);
+      this->LineCursor.NumChars += v117;
     }
   }
-  if ( v2->pTempLine )
-    Scaleform::Render::Text::ParagraphFormatter::FinalizeLine(v2);
-  v121 = (Scaleform::Render::Text::ParagraphFormatter *)v2->pTextBufForCustomFormat;
-  if ( v121 && v121 != (Scaleform::Render::Text::ParagraphFormatter *)v2->TextBufForCustomFormat )
+  if ( this->pTempLine )
+    Scaleform::Render::Text::ParagraphFormatter::FinalizeLine(this);
+  pTextBufForCustomFormat = (Scaleform::Render::Text::ParagraphFormatter *)this->pTextBufForCustomFormat;
+  if ( pTextBufForCustomFormat
+    && pTextBufForCustomFormat != (Scaleform::Render::Text::ParagraphFormatter *)this->TextBufForCustomFormat )
   {
-    Scaleform::Render::Text::StyledText::GetAllocator((Scaleform::Render::Text::StyledText *)&v2->pDocView->pDocument.pObject->vfptr);
-    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v2->pTextBufForCustomFormat);
+    Scaleform::Render::Text::StyledText::GetAllocator(this->pDocView->pDocument.pObject);
+    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, this->pTextBufForCustomFormat);
   }
-  if ( v21 )
+  if ( v21.pFont )
   {
-    v28 = v21->RefCount-- == 1;
-    if ( v28 )
-      v21->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v21->vfptr, 1u);
+    v26 = v21.pFont->RefCount-- == 1;
+    if ( v26 )
+      ((void (__fastcall *)(Scaleform::Render::Text::LineBuffer::FormatDataEntry, __int64))v21.pFont->vfptr->__vecDelDtor)(
+        v21,
+        1i64);
   }
-}v28 )
-      v21->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v21->vfptr, 1u);
-  }
 }
 
 // File Line: 2217
 // RVA: 0x97AEE0
 void __fastcall Scaleform::Render::Text::DocView::Format(Scaleform::Render::Text::DocView *this)
 {
-  Scaleform::Render::Text::DocView *v1; // rsi
   float v2; // xmm2_4
   float v3; // xmm1_4
   float v4; // xmm3_4
-  Scaleform::Render::Text::DocView::DocumentText *v5; // rbx
-  _QWORD *v6; // rdi
-  signed __int64 v7; // rbx
+  Scaleform::Render::Text::DocView::DocumentText *pObject; // rbx
+  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *p_Paragraphs; // rdi
+  __int64 v7; // rbx
   float v8; // xmm13_4
-  signed int v9; // er11
+  signed int v9; // r11d
   Scaleform::Render::Text::LineBuffer *v10; // r10
   unsigned int v11; // edx
-  Scaleform::Render::Text::Paragraph *v12; // r9
-  unsigned __int64 v13; // rbx
-  Scaleform::Render::Text::LineBuffer::Line **v14; // rdi
+  Scaleform::Render::Text::Paragraph *pPara; // r9
+  unsigned __int64 Size; // rbx
+  Scaleform::Render::Text::LineBuffer::Line **Data; // rdi
   Scaleform::Render::Text::LineBuffer::Line *v15; // rax
-  unsigned int v16; // er8
+  unsigned int v16; // r8d
   unsigned __int16 v17; // cx
-  Scaleform::Render::Text::ParagraphFormat *v18; // r8
+  Scaleform::Render::Text::ParagraphFormat *StartIndex; // r8
   Scaleform::Render::Text::EditorKitBase *v19; // rcx
   Scaleform::Render::Text::LineBuffer::Line *v20; // rbx
-  unsigned int v21; // ecx
-  int v22; // edi
+  unsigned int ParagraphId; // ecx
+  int OffsetX; // edi
   bool v23; // cl
-  __int64 v24; // rax
-  int v25; // eax
+  __int64 TextLength; // rax
+  int Width; // eax
   Scaleform::Render::Text::EditorKitBase *v26; // rcx
-  unsigned int v27; // ecx
+  unsigned int Height; // ecx
   unsigned int v28; // ecx
-  int v29; // eax
-  signed int v30; // edx
+  int Leading; // eax
+  int MemSize; // edx
   float v31; // xmm0_4
   float v32; // xmm0_4
   signed int v33; // eax
@@ -4105,133 +3950,129 @@ void __fastcall Scaleform::Render::Text::DocView::Format(Scaleform::Render::Text
   float v36; // xmm0_4
   unsigned int v37; // ecx
   int v38; // eax
-  __int64 v39; // rax
-  signed int v40; // ecx
-  unsigned int v41; // er9
-  unsigned int v42; // er11
-  unsigned int j; // er8
-  Scaleform::Render::Text::LineBuffer::Line *v44; // rcx
-  unsigned int v45; // eax
-  unsigned int v46; // er11
-  unsigned int v47; // ecx
-  unsigned __int16 v48; // cx
-  unsigned int v49; // er9
-  unsigned int i; // er8
-  Scaleform::Render::Text::LineBuffer::Line *v51; // rcx
-  unsigned int v52; // eax
-  int v53; // eax
-  unsigned __int64 v54; // rax
-  unsigned __int64 v55; // rcx
-  wchar_t *v56; // rcx
-  Scaleform::Render::Text::EditorKitBase *v57; // rcx
-  unsigned __int64 v58; // r8
-  signed int v59; // er9
-  char v60; // si
-  Scaleform::Render::Text::DocView *v61; // rbx
-  unsigned int v62; // edi
-  char v63; // dl
-  float v64; // xmm8_4
-  float v65; // xmm9_4
-  float v66; // xmm10_4
-  float v67; // xmm11_4
-  float v68; // xmm6_4
-  float v69; // xmm2_4
-  float v70; // xmm4_4
-  float v71; // xmm3_4
-  float v72; // xmm5_4
-  float v73; // xmm1_4
-  unsigned int v74; // eax
-  float v75; // xmm5_4
-  float v76; // xmm3_4
-  float v77; // xmm7_4
-  float v78; // xmm4_4
-  float v79; // xmm0_4
-  float v80; // xmm1_4
-  float v81; // xmm3_4
-  float v82; // xmm4_4
-  float v83; // xmm2_4
-  Scaleform::Render::Text::LineBuffer *v84; // rdx
-  __int64 v85; // rdx
-  signed int v86; // er8
-  unsigned __int64 v87; // r10
-  Scaleform::Render::Text::LineBuffer::Line *v88; // rcx
-  signed int v89; // eax
-  unsigned int v90; // ebx
-  unsigned int v91; // eax
-  Scaleform::Render::Text::DocView *v92; // rdx
-  Scaleform::Render::Text::LineBuffer *v93; // r11
-  Scaleform::Render::Text::DocView::DocumentListener *v94; // rcx
-  signed int v95; // eax
-  bool v96; // zf
-  Scaleform::Render::Text::DocView *v97; // rsi
-  float v98; // xmm10_4
-  float v99; // xmm11_4
-  float v100; // xmm8_4
-  float v101; // xmm9_4
-  float v102; // xmm4_4
-  float v103; // xmm3_4
-  float v104; // xmm0_4
-  float v105; // xmm2_4
-  float v106; // xmm1_4
-  float v107; // xmm7_4
+  int TextPos; // ecx
+  unsigned int v40; // r9d
+  unsigned int v41; // r11d
+  int j; // r8d
+  int *v43; // rcx
+  int v44; // eax
+  unsigned int UniqueId; // r11d
+  unsigned int GlyphsCount; // ecx
+  unsigned __int16 v47; // cx
+  unsigned int v48; // r9d
+  int i; // r8d
+  int *v50; // rcx
+  int v51; // eax
+  int ParaWidth; // eax
+  unsigned __int64 v53; // rax
+  unsigned __int64 v54; // rcx
+  wchar_t *v55; // rcx
+  Scaleform::Render::Text::EditorKitBase *v56; // rcx
+  unsigned __int64 v57; // r8
+  int v58; // r9d
+  char v59; // si
+  Scaleform::Render::Text::DocView *v60; // rbx
+  int v61; // edi
+  char Flags; // dl
+  float y2; // xmm8_4
+  float x2; // xmm9_4
+  float y1; // xmm10_4
+  float x1; // xmm11_4
+  float v67; // xmm6_4
+  float v68; // xmm2_4
+  float v69; // xmm4_4
+  float v70; // xmm3_4
+  float v71; // xmm5_4
+  float v72; // xmm1_4
+  int v73; // eax
+  float v74; // xmm5_4
+  float v75; // xmm3_4
+  float v76; // xmm7_4
+  float v77; // xmm4_4
+  float v78; // xmm0_4
+  float v79; // xmm1_4
+  float v80; // xmm3_4
+  float v81; // xmm4_4
+  float v82; // xmm2_4
+  Scaleform::Render::Text::LineBuffer *v83; // rdx
+  __int64 v84; // rdx
+  int v85; // r8d
+  unsigned __int64 v86; // r10
+  Scaleform::Render::Text::LineBuffer::Line *v87; // rcx
+  int v88; // eax
+  unsigned int MaxVScroll; // ebx
+  unsigned int v90; // eax
+  Scaleform::Render::Text::DocView *v91; // rdx
+  Scaleform::Render::Text::LineBuffer *v92; // r11
+  Scaleform::Render::Text::DocView::DocumentListener *v93; // rcx
+  int v94; // eax
+  bool v95; // zf
+  Scaleform::Render::Text::DocView *v96; // rsi
+  float v97; // xmm10_4
+  float v98; // xmm11_4
+  float v99; // xmm8_4
+  float v100; // xmm9_4
+  float v101; // xmm4_4
+  float v102; // xmm3_4
+  float v103; // xmm0_4
+  float v104; // xmm2_4
+  float TextHeight; // xmm1_4
+  float v106; // xmm7_4
+  int v107; // edi
   int v108; // edi
-  int v109; // edi
-  float v110; // xmm6_4
-  unsigned int v111; // er8
-  int v112; // er9
-  Scaleform::Render::Text::LineBuffer::Line *v113; // rcx
-  signed int v114; // edx
-  int v115; // eax
-  unsigned int v116; // ebx
-  unsigned int v117; // er10
-  Scaleform::Render::Text::LineBuffer::Line *v118; // r8
-  signed int v119; // ecx
+  float v109; // xmm6_4
+  int BottomVScroll; // r8d
+  int v111; // r9d
+  Scaleform::Render::Text::LineBuffer::Line *v112; // rcx
+  int v113; // edx
+  int v114; // eax
+  unsigned int v115; // ebx
+  unsigned int v116; // r10d
+  Scaleform::Render::Text::LineBuffer::Line *v117; // r8
+  int v118; // ecx
+  float v119; // xmm0_4
   float v120; // xmm0_4
-  float v121; // xmm0_4
-  signed int v122; // eax
-  int v123; // er9
+  signed int v121; // eax
+  int v122; // r9d
+  float v123; // xmm0_4
   float v124; // xmm0_4
-  float v125; // xmm0_4
-  unsigned int v126; // ecx
-  int v127; // eax
-  signed int v128; // edi
-  Scaleform::Render::Text::EditorKitBase *v129; // rcx
-  char v130; // al
-  signed int v131; // ecx
-  signed int v132; // eax
+  unsigned int v125; // ecx
+  int v126; // eax
+  int v127; // edi
+  Scaleform::Render::Text::EditorKitBase *v128; // rcx
+  char v129; // al
+  int v130; // ecx
+  int TextWidth; // eax
+  float v132; // xmm1_4
   float v133; // xmm1_4
-  float v134; // xmm1_4
-  unsigned int v135; // eax
-  Scaleform::Render::Text::EditorKitBase *v136; // rcx
-  signed int v137; // eax
+  unsigned int v134; // eax
+  Scaleform::Render::Text::EditorKitBase *v135; // rcx
+  int v136; // eax
+  float v137; // xmm1_4
   float v138; // xmm1_4
-  float v139; // xmm1_4
-  Scaleform::Render::Text::DocView::DocumentListener *v140; // rcx
-  char v141; // al
+  Scaleform::Render::Text::DocView::DocumentListener *v139; // rcx
+  char v140; // al
+  Scaleform::Render::Text::DocView::DocumentListener *v141; // rcx
   Scaleform::Render::Text::DocView::DocumentListener *v142; // rcx
-  Scaleform::Render::Text::DocView::DocumentListener *v143; // rcx
+  Scaleform::Render::Text::EditorKitBase *v143; // rcx
   Scaleform::Render::Text::EditorKitBase *v144; // rcx
-  Scaleform::Render::Text::EditorKitBase *v145; // rcx
-  Scaleform::Render::Text::CompositionStringBase *v146; // rax
-  Scaleform::Render::Text::LineBuffer::Line *v147; // rcx
-  unsigned int v148; // eax
-  Scaleform::Render::Text::FontHandle *v149; // rax
-  signed __int64 v150; // [rsp+20h] [rbp-C0h]
-  signed __int64 v151; // [rsp+28h] [rbp-B8h]
-  Scaleform::Render::Text::Paragraph *v152; // [rsp+30h] [rbp-B0h]
-  int v153; // [rsp+38h] [rbp-A8h]
-  Scaleform::Render::Text::LineBuffer *v154; // [rsp+40h] [rbp-A0h]
-  Scaleform::Render::Text::LineBuffer *v155; // [rsp+48h] [rbp-98h]
-  __int64 v156; // [rsp+50h] [rbp-90h]
+  Scaleform::Render::Text::CompositionStringBase *v145; // rax
+  Scaleform::Render::Text::LineBuffer::Line *v146; // rcx
+  Scaleform::Render::Text::FontHandle *FirstFontInfo; // rax
+  __int64 v149; // [rsp+20h] [rbp-C0h]
+  Scaleform::ArrayLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2,Scaleform::ArrayDefaultPolicy> *v150; // [rsp+28h] [rbp-B8h]
+  Scaleform::Render::Text::Paragraph *v151; // [rsp+30h] [rbp-B0h]
+  int OffsetY; // [rsp+38h] [rbp-A8h]
+  Scaleform::Render::Text::LineBuffer *p_mLineBuffer; // [rsp+40h] [rbp-A0h]
+  Scaleform::Render::Text::LineBuffer *v154[2]; // [rsp+48h] [rbp-98h] BYREF
   unsigned int lineIdx[2]; // [rsp+58h] [rbp-88h]
-  Scaleform::Render::Text::ParagraphFormatter v158; // [rsp+60h] [rbp-80h]
+  Scaleform::Render::Text::ParagraphFormatter v156; // [rsp+60h] [rbp-80h] BYREF
   Scaleform::Render::Text::DocView *pdoc; // [rsp+C50h] [rbp+B70h]
-  int v160; // [rsp+C58h] [rbp+B78h]
+  int v158; // [rsp+C58h] [rbp+B78h]
   int vars0; // [rsp+C60h] [rbp+B80h]
-  int retaddr; // [rsp+C68h] [rbp+B88h]
+  void *retaddr; // [rsp+C68h] [rbp+B88h]
 
-  v158.pTempLine = (Scaleform::Render::Text::LineBuffer::Line *)-2i64;
-  v1 = this;
+  v156.pTempLine = (Scaleform::Render::Text::LineBuffer::Line *)-2i64;
   v2 = this->ViewRect.x2 - 40.0;
   v3 = this->ViewRect.y1 + 40.0;
   v4 = this->ViewRect.y2 - 40.0;
@@ -4239,59 +4080,59 @@ void __fastcall Scaleform::Render::Text::DocView::Format(Scaleform::Render::Text
   this->mLineBuffer.Geom.VisibleRect.y1 = v3;
   this->mLineBuffer.Geom.VisibleRect.x2 = v2;
   this->mLineBuffer.Geom.VisibleRect.y2 = v4;
-  v5 = this->pDocument.pObject;
-  if ( !v5 )
+  pObject = this->pDocument.pObject;
+  if ( !pObject )
     return;
-  HIDWORD(v158.pParagraph) = Scaleform::Render::Text::DocView::GetMaxHScrollValue(this);
-  LODWORD(v158.pParagraph) = v1->MaxVScroll.Value;
-  if ( v1->AlignProps & 0x30 )
-    v1->RTFlags |= 2u;
-  v6 = &v5->Paragraphs.Data.Data;
-  v151 = (signed __int64)&v5->Paragraphs;
+  HIDWORD(v156.pParagraph) = Scaleform::Render::Text::DocView::GetMaxHScrollValue(this);
+  LODWORD(v156.pParagraph) = this->MaxVScroll.Value;
+  if ( (this->AlignProps & 0x30) != 0 )
+    this->RTFlags |= 2u;
+  p_Paragraphs = &pObject->Paragraphs;
+  v150 = &pObject->Paragraphs;
   v7 = 0i64;
-  v150 = 0i64;
-  v154 = &v1->mLineBuffer;
-  v155 = &v1->mLineBuffer;
-  v156 = 0i64;
+  v149 = 0i64;
+  p_mLineBuffer = &this->mLineBuffer;
+  v154[0] = &this->mLineBuffer;
+  v154[1] = 0i64;
   *(_QWORD *)lineIdx = 0i64;
   v8 = 0.0;
-  LOBYTE(v158.pDocView) = ((unsigned __int8)v1->mLineBuffer.Geom.Flags >> 2) & 1;
-  Scaleform::Render::Text::ParagraphFormatter::ParagraphFormatter(&v158, v1, v1->pLog.pObject);
+  LOBYTE(v156.pDocView) = (this->mLineBuffer.Geom.Flags & 4) != 0;
+  Scaleform::Render::Text::ParagraphFormatter::ParagraphFormatter(&v156, this, this->pLog.pObject);
   v9 = 0;
   vars0 = 0;
-  retaddr = 0;
+  LODWORD(retaddr) = 0;
 LABEL_5:
-  v10 = v155;
+  v10 = v154[0];
   v11 = lineIdx[0];
-  while ( v6 && v7 >= 0 && v7 < *((signed int *)v6 + 2) )
+  while ( p_Paragraphs && v7 >= 0 && v7 < SLODWORD(p_Paragraphs->Data.Size) )
   {
-    v12 = *(Scaleform::Render::Text::Paragraph **)(*v6 + 8 * v7);
-    v152 = *(Scaleform::Render::Text::Paragraph **)(*v6 + 8 * v7);
+    pPara = p_Paragraphs->Data.Data[v7].pPara;
+    v151 = pPara;
     if ( v10 )
     {
-      v13 = v10->Lines.Data.Size;
-      if ( v11 >= v13 || (v11 & 0x80000000) != 0 )
+      Size = v10->Lines.Data.Size;
+      if ( v11 >= Size || (v11 & 0x80000000) != 0 )
         goto LABEL_119;
-      v14 = v10->Lines.Data.Data;
+      Data = v10->Lines.Data.Data;
       v15 = v10->Lines.Data.Data[v11];
-      if ( !(v1->RTFlags & 2) )
+      if ( (this->RTFlags & 2) == 0 )
       {
         v16 = (v15->MemSize & 0x80000000) == 0 ? v15->Data32.ParagraphId : v15->Data32.GlyphsCount;
-        if ( v12->UniqueId == v16 )
+        if ( pPara->UniqueId == v16 )
         {
           v17 = (v15->MemSize & 0x80000000) == 0 ? v15->Data32.ParagraphModId : v15->Data8.ParagraphModId;
-          if ( v12->ModCounter == v17 )
+          if ( pPara->ModCounter == v17 )
           {
-            v18 = (Scaleform::Render::Text::ParagraphFormat *)v12->StartIndex;
-            v19 = v1->pEditorKit.pObject;
+            StartIndex = (Scaleform::Render::Text::ParagraphFormat *)pPara->StartIndex;
+            v19 = this->pEditorKit.pObject;
             if ( v19 )
             {
-              v18 = (Scaleform::Render::Text::ParagraphFormat *)v19->vfptr[4].__vecDelDtor(
-                                                                  (Scaleform::RefCountImplCore *)&v19->vfptr,
-                                                                  v12->StartIndex);
+              StartIndex = (Scaleform::Render::Text::ParagraphFormat *)v19->vfptr[4].__vecDelDtor(
+                                                                         v19,
+                                                                         pPara->StartIndex);
               v11 = lineIdx[0];
-              v10 = v155;
-              v12 = v152;
+              v10 = v154[0];
+              pPara = v151;
               v9 = vars0;
             }
             while ( 2 )
@@ -4299,168 +4140,170 @@ LABEL_5:
               if ( !v10
                 || v11 >= v10->Lines.Data.Size
                 || (v11 & 0x80000000) != 0
-                || ((v20 = v10->Lines.Data.Data[v11], (v20->MemSize & 0x80000000) == 0) ? (v21 = v20->Data32.ParagraphId) : (v21 = v20->Data32.GlyphsCount),
-                    v12->UniqueId != v21) )
+                || ((v20 = v10->Lines.Data.Data[v11], (v20->MemSize & 0x80000000) == 0)
+                  ? (ParagraphId = v20->Data32.ParagraphId)
+                  : (ParagraphId = v20->Data32.GlyphsCount),
+                    pPara->UniqueId != ParagraphId) )
               {
-                v7 = v150;
-                v6 = (_QWORD *)v151;
+                v7 = v149;
+                p_Paragraphs = v150;
                 goto LABEL_82;
               }
               if ( (v20->MemSize & 0x80000000) == 0 )
               {
-                v20->Data32.TextPos = (unsigned int)v18;
+                v20->Data32.TextPos = (unsigned int)StartIndex;
               }
               else
               {
                 v20->Data32.TextPos &= 0xFF000000;
-                v20->Data32.TextPos |= (unsigned int)v18 & 0xFFFFFF;
+                v20->Data32.TextPos |= (unsigned int)StartIndex & 0xFFFFFF;
               }
-              v22 = v20->Data32.OffsetX;
+              OffsetX = v20->Data32.OffsetX;
               v23 = (v20->MemSize & 0x80000000) != 0;
-              v153 = v20->Data32.OffsetY;
+              OffsetY = v20->Data32.OffsetY;
               if ( (v20->MemSize & 0x80000000) == 0 )
-                v24 = v20->Data32.TextLength;
+                TextLength = v20->Data32.TextLength;
               else
-                v24 = HIBYTE(v20->Data8.TextPosAndLength);
-              v158.pParaFormat = (Scaleform::Render::Text::ParagraphFormat *)((char *)v18 + v24);
-              v20->Data32.OffsetY = v158.NextOffsetY;
+                TextLength = HIBYTE(v20->Data8.TextPosAndLength);
+              v156.pParaFormat = (Scaleform::Render::Text::ParagraphFormat *)((char *)StartIndex + TextLength);
+              v20->Data32.OffsetY = v156.NextOffsetY;
               if ( v23 )
-                v25 = v20->Data8.Width;
+                Width = v20->Data8.Width;
               else
-                v25 = v20->Data32.Width;
-              if ( v25 < v9 )
-                v25 = v9;
-              vars0 = v25;
-              if ( Scaleform::Render::Text::Paragraph::GetLength(v12)
-                || (v26 = v1->pEditorKit.pObject) != 0i64 && !((unsigned __int8 (*)(void))v26->vfptr[2].__vecDelDtor)() )
+                Width = v20->Data32.Width;
+              if ( Width < v9 )
+                Width = v9;
+              vars0 = Width;
+              if ( Scaleform::Render::Text::Paragraph::GetLength(pPara)
+                || (v26 = this->pEditorKit.pObject) != 0i64
+                && !((unsigned __int8 (__fastcall *)(Scaleform::Render::Text::EditorKitBase *))v26->vfptr[2].__vecDelDtor)(v26) )
               {
                 if ( (v20->MemSize & 0x80000000) == 0 )
-                  v27 = v20->Data32.Height;
+                  Height = v20->Data32.Height;
                 else
-                  v27 = v20->Data8.Height;
-                retaddr = v27 + v158.NextOffsetY;
+                  Height = v20->Data8.Height;
+                LODWORD(retaddr) = Height + v156.NextOffsetY;
               }
               if ( (v20->MemSize & 0x80000000) == 0 )
                 v28 = v20->Data32.Height;
               else
                 v28 = v20->Data8.Height;
               if ( (v20->MemSize & 0x80000000) == 0 )
-                v29 = v20->Data32.Leading;
+                Leading = v20->Data32.Leading;
               else
-                v29 = v20->Data8.Leading;
-              v158.NextOffsetY += v28 + v29;
-              if ( v1->Flags & 1 )
+                Leading = v20->Data8.Leading;
+              v156.NextOffsetY += v28 + Leading;
+              if ( (this->Flags & 1) != 0 )
               {
-                v30 = v20->MemSize;
+                MemSize = v20->MemSize;
                 if ( ((v20->MemSize >> 27) & 3) == 1 )
                 {
-                  v35 = v1->mLineBuffer.Geom.VisibleRect.x2 - v1->mLineBuffer.Geom.VisibleRect.x1;
+                  v35 = this->mLineBuffer.Geom.VisibleRect.x2 - this->mLineBuffer.Geom.VisibleRect.x1;
                   if ( v35 <= 0.0 )
                     v36 = v35 - 0.5;
                   else
                     v36 = v35 + 0.5;
-                  if ( v30 >= 0 )
+                  if ( MemSize >= 0 )
                     v37 = v20->Data32.Width;
                   else
                     v37 = v20->Data8.Width;
-                  v38 = (signed int)v36 - v37;
+                  v38 = (int)v36 - v37;
                   if ( v38 < 0 )
                     v38 = 0;
                   v20->Data32.OffsetX = v38;
 LABEL_75:
-                  v158.NeedRecenterLines = 1;
+                  v156.NeedRecenterLines = 1;
                 }
                 else if ( ((v20->MemSize >> 27) & 3) == 2 )
                 {
-                  v31 = (float)(v1->mLineBuffer.Geom.VisibleRect.x2 - v1->mLineBuffer.Geom.VisibleRect.x1) * 0.5;
+                  v31 = (float)(this->mLineBuffer.Geom.VisibleRect.x2 - this->mLineBuffer.Geom.VisibleRect.x1) * 0.5;
                   if ( v31 <= 0.0 )
                     v32 = v31 - 0.5;
                   else
                     v32 = v31 + 0.5;
-                  if ( v30 >= 0 )
+                  if ( MemSize >= 0 )
                     v33 = v20->Data32.Width;
                   else
                     v33 = v20->Data8.Width;
-                  v34 = (signed int)v32 - v33 / 2;
+                  v34 = (int)v32 - v33 / 2;
                   if ( v34 < 0 )
                     v34 = 0;
                   v20->Data32.OffsetX = v34;
                   goto LABEL_75;
                 }
               }
-              v39 = v20->MemSize >> 31;
-              if ( v22 != v20->Data32.OffsetX || v153 != v20->Data32.OffsetY )
-                v1->mLineBuffer.Geom.Flags |= 1u;
+              if ( OffsetX != v20->Data32.OffsetX || OffsetY != v20->Data32.OffsetY )
+                this->mLineBuffer.Geom.Flags |= 1u;
               v11 = lineIdx[0];
-              v10 = v155;
-              v18 = v158.pParaFormat;
-              v12 = v152;
+              v10 = v154[0];
+              StartIndex = v156.pParaFormat;
+              pPara = v151;
               v9 = vars0;
-              if ( lineIdx[0] < v155->Lines.Data.Size )
-                v11 = lineIdx[0]++ + 1;
+              if ( lineIdx[0] < v154[0]->Lines.Data.Size )
+                v11 = ++lineIdx[0];
               continue;
             }
           }
         }
       }
-      v40 = v15->Data32.TextPos;
+      TextPos = v15->Data32.TextPos;
       if ( (v15->MemSize & 0x80000000) != 0 )
       {
-        v40 &= 0xFFFFFFu;
-        if ( v40 == 0xFFFFFF )
-          v40 = -1;
+        TextPos &= 0xFFFFFFu;
+        if ( TextPos == 0xFFFFFF )
+          TextPos = -1;
       }
-      if ( v40 != -1 )
+      if ( TextPos != -1 )
       {
-        v46 = v12->UniqueId;
+        UniqueId = pPara->UniqueId;
         if ( (v15->MemSize & 0x80000000) == 0 )
-          v47 = v15->Data32.ParagraphId;
+          GlyphsCount = v15->Data32.ParagraphId;
         else
-          v47 = v15->Data32.GlyphsCount;
-        if ( v46 == v47 )
+          GlyphsCount = v15->Data32.GlyphsCount;
+        if ( UniqueId == GlyphsCount )
         {
-          v48 = (v15->MemSize & 0x80000000) == 0 ? v15->Data32.ParagraphModId : v15->Data8.ParagraphModId;
-          if ( v12->ModCounter != v48 )
+          v47 = (v15->MemSize & 0x80000000) == 0 ? v15->Data32.ParagraphModId : v15->Data8.ParagraphModId;
+          if ( pPara->ModCounter != v47 )
           {
-            v49 = 0;
-            for ( i = v11; i < v13 && (i & 0x80000000) == 0; ++i )
+            v48 = 0;
+            for ( i = v11; (unsigned int)i < Size && i >= 0; ++i )
             {
-              v51 = v14[i];
-              v52 = (v51->MemSize & 0x80000000) == 0 ? v51->Data32.ParagraphId : v51->Data32.GlyphsCount;
-              if ( v52 != v46 )
+              v50 = (int *)Data[i];
+              v51 = *v50 >= 0 ? v50[7] : v50[1];
+              if ( v51 != UniqueId )
                 break;
-              ++v49;
+              ++v48;
             }
-            Scaleform::Render::Text::LineBuffer::RemoveLines(v10, v11, v49);
-            v1->mLineBuffer.Geom.Flags |= 1u;
-            v12 = v152;
+            Scaleform::Render::Text::LineBuffer::RemoveLines(v10, v11, v48);
+            this->mLineBuffer.Geom.Flags |= 1u;
+            pPara = v151;
           }
         }
-        v6 = (_QWORD *)v151;
+        p_Paragraphs = v150;
 LABEL_119:
-        v7 = v150;
+        v7 = v149;
         goto LABEL_120;
       }
-      v41 = 0;
+      v40 = 0;
       if ( (v15->MemSize & 0x80000000) == 0 )
-        v42 = v15->Data32.ParagraphId;
+        v41 = v15->Data32.ParagraphId;
       else
-        v42 = v15->Data32.GlyphsCount;
-      for ( j = v11; j < v13 && (j & 0x80000000) == 0; ++j )
+        v41 = v15->Data32.GlyphsCount;
+      for ( j = v11; (unsigned int)j < Size && j >= 0; ++j )
       {
-        v44 = v14[j];
-        v45 = (v44->MemSize & 0x80000000) == 0 ? v44->Data32.ParagraphId : v44->Data32.GlyphsCount;
-        if ( v45 != v42 )
+        v43 = (int *)Data[j];
+        v44 = *v43 >= 0 ? v43[7] : v43[1];
+        if ( v44 != v41 )
           break;
-        ++v41;
+        ++v40;
       }
-      v7 = v150;
-      v6 = (_QWORD *)v151;
+      v7 = v149;
+      p_Paragraphs = v150;
       v9 = vars0;
-      if ( v41 )
+      if ( v40 )
       {
-        Scaleform::Render::Text::LineBuffer::RemoveLines(v10, v11, v41);
-        v1->mLineBuffer.Geom.Flags |= 1u;
+        Scaleform::Render::Text::LineBuffer::RemoveLines(v10, v11, v40);
+        this->mLineBuffer.Geom.Flags |= 1u;
         v9 = vars0;
         goto LABEL_5;
       }
@@ -4468,526 +4311,537 @@ LABEL_119:
     else
     {
 LABEL_120:
-      v158.pLinesIter = (Scaleform::Render::Text::LineBuffer::Iterator *)&v155;
-      v158.ParaYOffset = v158.NextOffsetY;
-      Scaleform::Render::Text::ParagraphFormatter::Format(&v158, v12);
-      v1->mLineBuffer.Geom.Flags |= 1u;
-      v53 = v158.ParaWidth;
-      if ( v158.ParaWidth < vars0 )
-        v53 = vars0;
-      vars0 = v53;
-      v54 = v152->Text.Size;
-      if ( v54 )
+      v156.pLinesIter = (Scaleform::Render::Text::LineBuffer::Iterator *)v154;
+      v156.ParaYOffset = v156.NextOffsetY;
+      Scaleform::Render::Text::ParagraphFormatter::Format(&v156, pPara);
+      this->mLineBuffer.Geom.Flags |= 1u;
+      ParaWidth = v156.ParaWidth;
+      if ( v156.ParaWidth < vars0 )
+        ParaWidth = vars0;
+      vars0 = ParaWidth;
+      v53 = v151->Text.Size;
+      if ( v53 )
       {
-        v55 = v54 - 1;
-        if ( v152->Text.pText && v55 < v54 )
-          v56 = &v152->Text.pText[v55];
+        v54 = v53 - 1;
+        if ( v151->Text.pText && v54 < v53 )
+          v55 = &v151->Text.pText[v54];
         else
-          v56 = 0i64;
-        if ( !*v56 )
-          --v54;
-        if ( v54 )
-          goto LABEL_335;
+          v55 = 0i64;
+        if ( !*v55 )
+          --v53;
+        if ( v53 )
+          goto LABEL_132;
       }
-      v57 = v1->pEditorKit.pObject;
-      if ( v57 )
+      v56 = this->pEditorKit.pObject;
+      if ( v56 )
       {
-        if ( !((unsigned __int8 (*)(void))v57->vfptr[2].__vecDelDtor)() )
-LABEL_335:
-          retaddr = v158.ParaYOffset + v158.ParaHeight;
+        if ( !((unsigned __int8 (__fastcall *)(Scaleform::Render::Text::EditorKitBase *))v56->vfptr[2].__vecDelDtor)(v56) )
+LABEL_132:
+          LODWORD(retaddr) = v156.ParaYOffset + v156.ParaHeight;
       }
       v11 = lineIdx[0];
-      v10 = v155;
+      v10 = v154[0];
       v9 = vars0;
 LABEL_82:
-      if ( v7 < v6[1] )
-        v150 = ++v7;
+      if ( v7 < (signed __int64)p_Paragraphs->Data.Size )
+        v149 = ++v7;
     }
   }
   if ( v10 )
   {
-    v58 = v10->Lines.Data.Size;
-    if ( v11 < v58 && (v11 & 0x80000000) == 0 )
+    v57 = v10->Lines.Data.Size;
+    if ( v11 < v57 && (v11 & 0x80000000) == 0 )
     {
-      if ( v11 < v58 )
+      if ( v11 < v57 )
       {
-        Scaleform::Render::Text::LineBuffer::RemoveLines(v10, v11, v1->mLineBuffer.Lines.Data.Size - v11);
+        Scaleform::Render::Text::LineBuffer::RemoveLines(v10, v11, this->mLineBuffer.Lines.Data.Size - v11);
         v9 = vars0;
       }
-      v1->mLineBuffer.Geom.Flags |= 1u;
+      this->mLineBuffer.Geom.Flags |= 1u;
     }
   }
-  v1->TextWidth = v9;
-  v59 = retaddr;
-  v1->TextHeight = retaddr;
-  ++v1->FormatCounter;
-  v1->RTFlags &= 0xFCu;
-  v60 = 0;
-  v61 = pdoc;
-  v62 = ((unsigned int)(unsigned __int8)pdoc->AlignProps >> 2) & 3;
-  v63 = pdoc->Flags;
-  if ( v63 & 1 || v63 & 2 || v158.ForceVerticalCenterAutoSize )
+  this->TextWidth = v9;
+  v58 = (int)retaddr;
+  this->TextHeight = (unsigned int)retaddr;
+  ++this->FormatCounter;
+  this->RTFlags &= 0xFCu;
+  v59 = 0;
+  v60 = pdoc;
+  v61 = ((unsigned __int8)pdoc->AlignProps >> 2) & 3;
+  Flags = pdoc->Flags;
+  if ( (Flags & 1) != 0 || (Flags & 2) != 0 || v156.ForceVerticalCenterAutoSize )
   {
-    v64 = pdoc->ViewRect.y2;
-    v65 = pdoc->ViewRect.x2;
-    v66 = pdoc->ViewRect.y1;
-    v67 = pdoc->ViewRect.x1;
-    v68 = pdoc->ViewRect.x1;
-    v69 = pdoc->ViewRect.y1;
-    v70 = pdoc->ViewRect.x2;
-    v71 = pdoc->ViewRect.y2;
-    if ( v63 & 1 )
+    y2 = pdoc->ViewRect.y2;
+    x2 = pdoc->ViewRect.x2;
+    y1 = pdoc->ViewRect.y1;
+    x1 = pdoc->ViewRect.x1;
+    v67 = x1;
+    v68 = y1;
+    v69 = x2;
+    v70 = y2;
+    if ( (Flags & 1) != 0 )
     {
-      v72 = (float)v9 + 80.0;
+      v71 = (float)v9 + 80.0;
       if ( (pdoc->AlignProps & 3) == 1 )
       {
-        v68 = v65 - v72;
+        v67 = x2 - v71;
       }
       else if ( (pdoc->AlignProps & 3) == 2 )
       {
-        v68 = v68 + (float)((float)((float)(v65 - v68) * 0.5) - (float)(v72 * 0.5));
+        v67 = x1 + (float)((float)((float)(x2 - x1) * 0.5) - (float)(v71 * 0.5));
       }
-      v70 = v68 + v72;
+      v69 = v67 + v71;
     }
-    if ( v63 & 2 || v158.ForceVerticalCenterAutoSize )
+    if ( (Flags & 2) != 0 || v156.ForceVerticalCenterAutoSize )
     {
-      v73 = (float)retaddr + 80.0;
-      switch ( v62 )
+      v72 = (float)(int)retaddr + 80.0;
+      switch ( v61 )
       {
-        case 0u:
-          if ( !v158.ForceVerticalCenterAutoSize )
+        case 0:
+          if ( !v156.ForceVerticalCenterAutoSize )
             break;
 LABEL_155:
-          v69 = (float)((float)((float)(v64 - v66) * 0.5) - (float)(v73 * 0.5)) + v66;
+          v68 = (float)((float)((float)(y2 - y1) * 0.5) - (float)(v72 * 0.5)) + y1;
           break;
-        case 3u:
+        case 3:
           goto LABEL_155;
-        case 2u:
-          v69 = v64 - v73;
+        case 2:
+          v68 = y2 - v72;
           break;
       }
-      v71 = v69 + v73;
-      v60 = 1;
+      v70 = v68 + v72;
+      v59 = 1;
     }
-    if ( v68 != v67
-      || (v70 != v65 || v69 != v66 || v71 != v64) && (v68 != v67 || v70 != v65 || v69 != v66 || v71 != v64) )
+    if ( v67 != x1 || (v69 != x2 || v68 != y1 || v70 != y2) && (v67 != x1 || v69 != x2 || v68 != y1 || v70 != y2) )
     {
-      pdoc->ViewRect.x1 = v68;
-      v61->ViewRect.y1 = v69;
-      v61->ViewRect.x2 = v70;
-      v61->ViewRect.y2 = v71;
-      v61->mLineBuffer.Geom.VisibleRect.x1 = v61->ViewRect.x1 + 40.0;
-      v61->mLineBuffer.Geom.VisibleRect.y1 = v69 + 40.0;
-      v61->mLineBuffer.Geom.VisibleRect.x2 = v70 - 40.0;
-      v61->mLineBuffer.Geom.VisibleRect.y2 = v71 - 40.0;
+      pdoc->ViewRect.x1 = v67;
+      v60->ViewRect.y1 = v68;
+      v60->ViewRect.x2 = v69;
+      v60->ViewRect.y2 = v70;
+      v60->mLineBuffer.Geom.VisibleRect.x1 = v60->ViewRect.x1 + 40.0;
+      v60->mLineBuffer.Geom.VisibleRect.y1 = v68 + 40.0;
+      v60->mLineBuffer.Geom.VisibleRect.x2 = v69 - 40.0;
+      v60->mLineBuffer.Geom.VisibleRect.y2 = v70 - 40.0;
     }
   }
-  v74 = ((unsigned int)(unsigned __int8)v61->AlignProps >> 4) & 3;
-  if ( v74 )
+  v73 = ((unsigned __int8)v60->AlignProps >> 4) & 3;
+  if ( v73 )
   {
-    v75 = v61->ViewRect.x1 + 40.0;
-    v76 = v61->ViewRect.x2 - 40.0;
-    v77 = v61->ViewRect.y1 + 40.0;
-    v78 = v61->ViewRect.y2 - 40.0;
-    if ( !(v61->Flags & 4) && !v62 )
-      v62 = 3;
+    v74 = v60->ViewRect.x1 + 40.0;
+    v75 = v60->ViewRect.x2 - 40.0;
+    v76 = v60->ViewRect.y1 + 40.0;
+    v77 = v60->ViewRect.y2 - 40.0;
+    if ( (v60->Flags & 4) == 0 && !v61 )
+      v61 = 3;
+    v78 = *(float *)&FLOAT_1_0;
     v79 = *(float *)&FLOAT_1_0;
-    v80 = *(float *)&FLOAT_1_0;
-    if ( v74 == 1 )
+    if ( v73 == 1 )
     {
-      v81 = v76 - v75;
-      if ( (float)v9 > v81 )
-        v79 = v81 / (float)v9;
-      v82 = v78 - v77;
-      if ( (float)retaddr > v82 )
-        v80 = v82 / (float)retaddr;
-      if ( v80 >= v79 )
-        v80 = v79;
+      v80 = v75 - v74;
+      if ( (float)v9 > v80 )
+        v78 = v80 / (float)v9;
+      v81 = v77 - v76;
+      if ( (float)(int)retaddr > v81 )
+        v79 = v81 / (float)(int)retaddr;
+      if ( v79 >= v78 )
+        v79 = v78;
       goto LABEL_187;
     }
-    if ( v74 == 2 )
+    if ( v73 == 2 )
     {
-      v80 = FLOAT_3_4028235e38;
-      v83 = FLOAT_3_4028235e38;
+      v79 = FLOAT_3_4028235e38;
+      v82 = FLOAT_3_4028235e38;
       if ( v9 >= 20 )
-        v83 = (float)(v76 - v75) / (float)v9;
-      if ( retaddr >= 20 )
-        v80 = (float)(v78 - v77) / (float)retaddr;
-      if ( v80 >= v83 )
-        v80 = v83;
-      if ( v80 != 3.4028235e38 )
+        v82 = (float)(v75 - v74) / (float)v9;
+      if ( (int)retaddr >= 20 )
+        v79 = (float)(v77 - v76) / (float)(int)retaddr;
+      if ( v79 >= v82 )
+        v79 = v82;
+      if ( v79 != 3.4028235e38 )
       {
 LABEL_187:
-        if ( v80 != 1.0 )
+        if ( v79 != 1.0 )
         {
-          v84 = &v61->mLineBuffer;
-          if ( LODWORD(v61->mLineBuffer.Lines.Data.Size) )
+          v83 = &v60->mLineBuffer;
+          if ( LODWORD(v60->mLineBuffer.Lines.Data.Size) )
           {
-            v85 = 0i64;
-            v86 = 0x7FFFFFFF;
-            while ( v154 )
+            v84 = 0i64;
+            v85 = 0x7FFFFFFF;
+            while ( p_mLineBuffer )
             {
-              v87 = v154->Lines.Data.Size;
-              if ( (unsigned int)v85 >= v87 || (signed int)v85 < 0 )
+              v86 = p_mLineBuffer->Lines.Data.Size;
+              if ( (unsigned int)v84 >= v86 || (int)v84 < 0 )
                 break;
-              v88 = v154->Lines.Data.Data[v85];
-              if ( (v88->MemSize & 0x80000000) == 0 )
-                v89 = v88->Data32.Height;
+              v87 = p_mLineBuffer->Lines.Data.Data[v84];
+              if ( (v87->MemSize & 0x80000000) == 0 )
+                v88 = v87->Data32.Height;
               else
-                v89 = v88->Data8.Height;
-              if ( v89 < v86 )
-                v86 = v89;
-              if ( (unsigned int)v85 < v87 )
-                v85 = (unsigned int)(v85 + 1);
+                v88 = v87->Data8.Height;
+              if ( v88 < v85 )
+                v85 = v88;
+              if ( (unsigned int)v84 < v86 )
+                v84 = (unsigned int)(v84 + 1);
             }
-            v61 = pdoc;
-            v59 = retaddr;
-            v84 = &pdoc->mLineBuffer;
-            if ( v86 > 0 && (float)((float)v86 * v80) < 120.0 )
-              v80 = 120.0 / (float)v86;
+            v60 = pdoc;
+            v58 = (int)retaddr;
+            v83 = &pdoc->mLineBuffer;
+            if ( v85 > 0 && (float)((float)v85 * v79) < 120.0 )
+              v79 = 120.0 / (float)v85;
           }
-          v61->TextWidth = (signed int)(float)((float)v9 * v80);
-          v61->TextHeight = (signed int)(float)((float)v59 * v80);
-          Scaleform::Render::Text::LineBuffer::Scale(v84, v80);
+          v60->TextWidth = (int)(float)((float)v9 * v79);
+          v60->TextHeight = (int)(float)((float)v58 * v79);
+          Scaleform::Render::Text::LineBuffer::Scale(v83, v79);
         }
       }
     }
   }
-  LOBYTE(v160) = 0;
-  v90 = Scaleform::Render::Text::DocView::GetMaxVScroll(v61);
-  if ( pdoc->mLineBuffer.Geom.FirstVisibleLinePos <= v90 )
+  LOBYTE(v158) = 0;
+  MaxVScroll = Scaleform::Render::Text::DocView::GetMaxVScroll(v60);
+  if ( pdoc->mLineBuffer.Geom.FirstVisibleLinePos <= MaxVScroll )
   {
-    v95 = (unsigned __int8)v160;
-    if ( v90 != LODWORD(v158.pParagraph) )
-      v95 = 1;
-    v160 = v95;
+    v94 = (unsigned __int8)v158;
+    if ( MaxVScroll != LODWORD(v156.pParagraph) )
+      v94 = 1;
+    v158 = v94;
     goto LABEL_213;
   }
-  v91 = Scaleform::Render::Text::DocView::GetMaxVScroll(pdoc);
-  if ( v90 > v91 )
-    v90 = v91;
-  v92 = pdoc;
-  if ( pdoc->mLineBuffer.Geom.FirstVisibleLinePos == v90 )
+  v90 = Scaleform::Render::Text::DocView::GetMaxVScroll(pdoc);
+  if ( MaxVScroll > v90 )
+    MaxVScroll = v90;
+  v91 = pdoc;
+  if ( pdoc->mLineBuffer.Geom.FirstVisibleLinePos == MaxVScroll )
   {
 LABEL_213:
-    v93 = v154;
+    v92 = p_mLineBuffer;
     goto LABEL_214;
   }
-  v93 = &pdoc->mLineBuffer;
-  v93->Geom.FirstVisibleLinePos = v90;
-  v93->Geom.Flags |= 1u;
-  v94 = v92->pDocumentListener.pObject;
-  if ( v94 )
+  v92 = &pdoc->mLineBuffer;
+  pdoc->mLineBuffer.Geom.FirstVisibleLinePos = MaxVScroll;
+  v91->mLineBuffer.Geom.Flags |= 1u;
+  v93 = v91->pDocumentListener.pObject;
+  if ( v93 )
   {
-    ((void (__fastcall *)(Scaleform::Render::Text::DocView::DocumentListener *, Scaleform::Render::Text::DocView *, _QWORD))v94->vfptr[4].__vecDelDtor)(
-      v94,
-      v92,
-      v90);
+    ((void (__fastcall *)(Scaleform::Render::Text::DocView::DocumentListener *, Scaleform::Render::Text::DocView *, _QWORD))v93->vfptr[4].__vecDelDtor)(
+      v93,
+      v91,
+      MaxVScroll);
     goto LABEL_213;
   }
 LABEL_214:
-  v96 = v60 == 0;
-  v97 = pdoc;
-  if ( v96 && v62 && !(pdoc->Flags & 2) )
+  v95 = v59 == 0;
+  v96 = pdoc;
+  if ( v95 && v61 && (pdoc->Flags & 2) == 0 )
   {
-    v98 = pdoc->ViewRect.x1 + 40.0;
-    v99 = pdoc->ViewRect.x2 - 40.0;
-    v100 = pdoc->ViewRect.y1 + 40.0;
-    v101 = pdoc->ViewRect.y2 - 40.0;
-    v102 = pdoc->mLineBuffer.Geom.VisibleRect.y2;
-    v103 = pdoc->mLineBuffer.Geom.VisibleRect.x2;
-    v104 = pdoc->mLineBuffer.Geom.VisibleRect.y1;
-    v105 = pdoc->mLineBuffer.Geom.VisibleRect.x1;
-    v106 = (float)(signed int)pdoc->TextHeight;
-    v107 = v101 - v100;
-    if ( v106 >= (float)(v101 - v100) )
+    v97 = pdoc->ViewRect.x1 + 40.0;
+    v98 = pdoc->ViewRect.x2 - 40.0;
+    v99 = pdoc->ViewRect.y1 + 40.0;
+    v100 = pdoc->ViewRect.y2 - 40.0;
+    v101 = pdoc->mLineBuffer.Geom.VisibleRect.y2;
+    v102 = pdoc->mLineBuffer.Geom.VisibleRect.x2;
+    v103 = pdoc->mLineBuffer.Geom.VisibleRect.y1;
+    v104 = pdoc->mLineBuffer.Geom.VisibleRect.x1;
+    TextHeight = (float)(int)pdoc->TextHeight;
+    v106 = v100 - v99;
+    if ( TextHeight >= (float)(v100 - v99) )
     {
-      if ( v62 - 2 <= 1 )
+      if ( (unsigned int)(v61 - 2) <= 1 )
       {
-        v110 = 0.0;
-        v111 = Scaleform::Render::Text::DocView::GetBottomVScroll(pdoc);
-        v112 = 0;
-        v93 = &v97->mLineBuffer;
-        while ( v97 != (Scaleform::Render::Text::DocView *)-80i64
-             && v111 < v97->mLineBuffer.Lines.Data.Size
-             && (v111 & 0x80000000) == 0 )
+        v109 = 0.0;
+        BottomVScroll = Scaleform::Render::Text::DocView::GetBottomVScroll(pdoc);
+        v111 = 0;
+        v92 = &v96->mLineBuffer;
+        while ( v96 != (Scaleform::Render::Text::DocView *)-80i64
+             && (unsigned int)BottomVScroll < v96->mLineBuffer.Lines.Data.Size
+             && BottomVScroll >= 0 )
         {
-          v113 = v93->Lines.Data.Data[v111];
-          if ( (v113->MemSize & 0x80000000) == 0 )
-            v114 = v113->Data32.Height;
+          v112 = v92->Lines.Data.Data[BottomVScroll];
+          if ( (v112->MemSize & 0x80000000) == 0 )
+            v113 = v112->Data32.Height;
           else
-            v114 = v113->Data8.Height;
-          if ( v112 )
+            v113 = v112->Data8.Height;
+          if ( v111 )
           {
-            if ( (v113->MemSize & 0x80000000) == 0 )
-              v115 = v113->Data32.Leading;
+            if ( (v112->MemSize & 0x80000000) == 0 )
+              v114 = v112->Data32.Leading;
             else
-              v115 = v113->Data8.Leading;
-            v114 += v115;
+              v114 = v112->Data8.Leading;
+            v113 += v114;
           }
-          if ( (float)((float)v114 + v110) > v107 )
+          if ( (float)((float)v113 + v109) > v106 )
             break;
-          v110 = (float)v114 + v110;
-          --v111;
-          ++v112;
+          v109 = (float)v113 + v109;
+          --BottomVScroll;
+          ++v111;
         }
-        if ( v62 == 2 )
-          v100 = v101 - v110;
+        if ( v61 == 2 )
+          v99 = v100 - v109;
         else
-          v100 = (float)((float)(v107 * 0.5) - (float)(v110 * 0.5)) + v100;
+          v99 = (float)((float)(v106 * 0.5) - (float)(v109 * 0.5)) + v99;
       }
-      v97->mLineBuffer.Geom.VisibleRect.x1 = v98;
-      v97->mLineBuffer.Geom.VisibleRect.y1 = v100;
-      v97->mLineBuffer.Geom.VisibleRect.x2 = v99;
-      v97->mLineBuffer.Geom.VisibleRect.y2 = v101;
+      v96->mLineBuffer.Geom.VisibleRect.x1 = v97;
+      v96->mLineBuffer.Geom.VisibleRect.y1 = v99;
+      v96->mLineBuffer.Geom.VisibleRect.x2 = v98;
+      v96->mLineBuffer.Geom.VisibleRect.y2 = v100;
     }
     else
     {
-      v108 = v62 - 1;
-      if ( v108 )
+      v107 = v61 - 1;
+      if ( v107 )
       {
-        v109 = v108 - 1;
-        if ( v109 )
+        v108 = v107 - 1;
+        if ( v108 )
         {
-          if ( v109 == 1 )
-            v104 = (float)((float)(v107 * 0.5) - (float)(v106 * 0.5)) + v100;
+          if ( v108 == 1 )
+            v103 = (float)((float)(v106 * 0.5) - (float)(TextHeight * 0.5)) + v99;
         }
         else
         {
-          v104 = v101 - v106;
+          v103 = v100 - TextHeight;
         }
       }
       else
       {
-        v105 = pdoc->ViewRect.x1 + 40.0;
-        v104 = pdoc->ViewRect.y1 + 40.0;
-        v103 = pdoc->ViewRect.x2 - 40.0;
-        v102 = pdoc->ViewRect.y2 - 40.0;
+        v104 = pdoc->ViewRect.x1 + 40.0;
+        v103 = pdoc->ViewRect.y1 + 40.0;
+        v102 = pdoc->ViewRect.x2 - 40.0;
+        v101 = pdoc->ViewRect.y2 - 40.0;
       }
-      pdoc->mLineBuffer.Geom.VisibleRect.x1 = v105;
-      v97->mLineBuffer.Geom.VisibleRect.y1 = v104;
-      v97->mLineBuffer.Geom.VisibleRect.x2 = v103;
-      v97->mLineBuffer.Geom.VisibleRect.y2 = v102;
+      pdoc->mLineBuffer.Geom.VisibleRect.x1 = v104;
+      v96->mLineBuffer.Geom.VisibleRect.y1 = v103;
+      v96->mLineBuffer.Geom.VisibleRect.x2 = v102;
+      v96->mLineBuffer.Geom.VisibleRect.y2 = v101;
     }
   }
-  v116 = 0;
-  if ( v158.NeedRecenterLines )
+  v115 = 0;
+  if ( v156.NeedRecenterLines )
   {
-    v117 = 0;
-    while ( v93 && v117 < v97->mLineBuffer.Lines.Data.Size && (v117 & 0x80000000) == 0 )
+    v116 = 0;
+    while ( v92 && v116 < v96->mLineBuffer.Lines.Data.Size && (v116 & 0x80000000) == 0 )
     {
-      v118 = v97->mLineBuffer.Lines.Data.Data[v117];
-      v119 = v118->MemSize;
-      if ( ((v118->MemSize >> 27) & 3) == 1 )
+      v117 = v96->mLineBuffer.Lines.Data.Data[v116];
+      v118 = v117->MemSize;
+      if ( ((v117->MemSize >> 27) & 3) == 1 )
       {
-        v124 = v97->mLineBuffer.Geom.VisibleRect.x2 - v97->mLineBuffer.Geom.VisibleRect.x1;
-        if ( v124 <= 0.0 )
-          v125 = v124 - 0.5;
+        v123 = v96->mLineBuffer.Geom.VisibleRect.x2 - v96->mLineBuffer.Geom.VisibleRect.x1;
+        if ( v123 <= 0.0 )
+          v124 = v123 - 0.5;
         else
-          v125 = v124 + 0.5;
-        if ( v119 >= 0 )
-          v126 = v118->Data32.Width;
+          v124 = v123 + 0.5;
+        if ( v118 >= 0 )
+          v125 = v117->Data32.Width;
         else
-          v126 = v118->Data8.Width;
-        v127 = (signed int)v125 - v126;
-        if ( v127 < 0 )
-          v127 = 0;
-        v118->Data32.OffsetX = v127;
+          v125 = v117->Data8.Width;
+        v126 = (int)v124 - v125;
+        if ( v126 < 0 )
+          v126 = 0;
+        v117->Data32.OffsetX = v126;
       }
-      else if ( ((v118->MemSize >> 27) & 3) == 2 )
+      else if ( ((v117->MemSize >> 27) & 3) == 2 )
       {
-        v120 = (float)(v97->mLineBuffer.Geom.VisibleRect.x2 - v97->mLineBuffer.Geom.VisibleRect.x1) * 0.5;
-        if ( v120 <= 0.0 )
-          v121 = v120 - 0.5;
+        v119 = (float)(v96->mLineBuffer.Geom.VisibleRect.x2 - v96->mLineBuffer.Geom.VisibleRect.x1) * 0.5;
+        if ( v119 <= 0.0 )
+          v120 = v119 - 0.5;
         else
-          v121 = v120 + 0.5;
-        if ( v119 >= 0 )
-          v122 = v118->Data32.Width;
+          v120 = v119 + 0.5;
+        if ( v118 >= 0 )
+          v121 = v117->Data32.Width;
         else
-          v122 = v118->Data8.Width;
-        v123 = (signed int)v121 - v122 / 2;
-        if ( v123 < 0 )
-          v123 = 0;
-        v118->Data32.OffsetX = v123;
+          v121 = v117->Data8.Width;
+        v122 = (int)v120 - v121 / 2;
+        if ( v122 < 0 )
+          v122 = 0;
+        v117->Data32.OffsetX = v122;
       }
-      v93 = &v97->mLineBuffer;
-      if ( v117 < v97->mLineBuffer.Lines.Data.Size )
+      v92 = &v96->mLineBuffer;
+      if ( v116 < v96->mLineBuffer.Lines.Data.Size )
       {
-        ++v117;
-        v93 = &v97->mLineBuffer;
+        ++v116;
+        v92 = &v96->mLineBuffer;
       }
     }
   }
-  if ( v97->RTFlags & 3 )
+  if ( (v96->RTFlags & 3) != 0 )
   {
-    Scaleform::Render::Text::DocView::Format(v97);
-    v97->RTFlags &= 0xFCu;
+    Scaleform::Render::Text::DocView::Format(v96);
+    v96->RTFlags &= 0xFCu;
   }
-  v128 = 1200;
-  if ( !(v97->Flags & 8) )
+  v127 = 1200;
+  if ( (v96->Flags & 8) == 0 )
   {
-    v129 = v97->pEditorKit.pObject;
-    if ( !v129 || (v130 = ((__int64 (*)(void))v129->vfptr[2].__vecDelDtor)(), v131 = 1200, v130) )
-      v131 = 0;
-    v132 = v97->TextWidth;
-    if ( v132 )
-      v133 = (float)v132;
+    v128 = v96->pEditorKit.pObject;
+    if ( !v128
+      || (v129 = ((__int64 (__fastcall *)(Scaleform::Render::Text::EditorKitBase *))v128->vfptr[2].__vecDelDtor)(v128),
+          v130 = 1200,
+          v129) )
+    {
+      v130 = 0;
+    }
+    TextWidth = v96->TextWidth;
+    if ( TextWidth )
+      v132 = (float)TextWidth;
     else
+      v132 = 0.0;
+    v133 = (float)(v132 - (float)(v96->mLineBuffer.Geom.VisibleRect.x2 - v96->mLineBuffer.Geom.VisibleRect.x1))
+         + (float)v130;
+    if ( v133 < 0.0 )
       v133 = 0.0;
-    v134 = (float)(v133 - (float)(v97->mLineBuffer.Geom.VisibleRect.x2 - v97->mLineBuffer.Geom.VisibleRect.x1))
-         + (float)v131;
-    if ( v134 < 0.0 )
-      v134 = 0.0;
-    v116 = (signed int)v134;
+    v115 = (int)v133;
   }
-  if ( v97->mLineBuffer.Geom.HScrollOffset <= v116 )
+  if ( v96->mLineBuffer.Geom.HScrollOffset <= v115 )
   {
-    v141 = v160;
-    if ( v116 != HIDWORD(v158.pParagraph) )
-      v141 = 1;
+    v140 = v158;
+    if ( v115 != HIDWORD(v156.pParagraph) )
+      v140 = 1;
   }
   else
   {
-    if ( v97->RTFlags & 3 )
+    if ( (v96->RTFlags & 3) != 0 )
     {
-      Scaleform::Render::Text::DocView::Format(v97);
-      v97->RTFlags &= 0xFCu;
+      Scaleform::Render::Text::DocView::Format(v96);
+      v96->RTFlags &= 0xFCu;
     }
-    if ( v97->Flags & 8 )
+    if ( (v96->Flags & 8) != 0 )
     {
-      v135 = 0;
+      v134 = 0;
     }
     else
     {
-      v136 = v97->pEditorKit.pObject;
-      if ( !v136 || ((unsigned __int8 (*)(void))v136->vfptr[2].__vecDelDtor)() )
-        v128 = 0;
-      v137 = v97->TextWidth;
-      if ( v137 )
-        v138 = (float)v137;
-      else
-        v138 = 0.0;
-      v139 = (float)(v138 - (float)(v97->mLineBuffer.Geom.VisibleRect.x2 - v97->mLineBuffer.Geom.VisibleRect.x1))
-           + (float)v128;
-      if ( v139 >= 0.0 )
-        v8 = v139;
-      v135 = (signed int)v8;
-    }
-    if ( v116 > v135 )
-      v116 = v135;
-    if ( v97->mLineBuffer.Geom.HScrollOffset != v116 )
-    {
-      v97->mLineBuffer.Geom.HScrollOffset = v116;
-      v140 = v97->pDocumentListener.pObject;
-      if ( v140 )
-        ((void (__fastcall *)(Scaleform::Render::Text::DocView::DocumentListener *, Scaleform::Render::Text::DocView *, _QWORD))v140->vfptr[3].__vecDelDtor)(
-          v140,
-          v97,
-          v116);
-    }
-    v141 = v160;
-  }
-  v142 = v97->pDocumentListener.pObject;
-  if ( v142 )
-  {
-    if ( v141 && v142->HandlersMask & 4 )
-      v142->vfptr[5].__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v142->vfptr, (unsigned int)v97);
-    v143 = v97->pDocumentListener.pObject;
-    if ( v143->HandlersMask & 8 )
-      v143->vfptr[6].__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v143->vfptr, (unsigned int)v97);
-  }
-  v144 = v97->pEditorKit.pObject;
-  if ( v144 && !((unsigned __int8 (*)(void))v144->vfptr[2].__vecDelDtor)()
-    || (float)(signed int)v97->TextWidth > (float)(v97->ViewRect.x2 - v97->ViewRect.x1)
-    || (float)(signed int)v97->TextHeight > (float)(v97->ViewRect.y2 - v97->ViewRect.y1)
-    || v97->mLineBuffer.Geom.HScrollOffset )
-  {
-    v97->mLineBuffer.Geom.Flags &= 0xDFu;
-  }
-  else
-  {
-    v97->mLineBuffer.Geom.Flags |= 0x20u;
-  }
-  if ( v97->pHighlight )
-  {
-    v145 = v97->pEditorKit.pObject;
-    if ( v145 )
-      v146 = (Scaleform::Render::Text::CompositionStringBase *)((__int64 (*)(void))v145->vfptr[7].__vecDelDtor)();
-    else
-      v146 = 0i64;
-    Scaleform::Render::Text::Highlighter::UpdateGlyphIndices(&v97->pHighlight->HighlightManager, v146);
-  }
-  v97->RTFlags &= 0xDFu;
-  if ( v97->mLineBuffer.Lines.Data.Size )
-  {
-    v147 = *v97->mLineBuffer.Lines.Data.Data;
-    v148 = (v147->MemSize & 0x80000000) == 0 ? v147->Data32.GlyphsCount : (unsigned __int8)v147->Data8.GlyphsCount;
-    if ( v148 )
-    {
-      v149 = Scaleform::Render::Text::LineBuffer::FindFirstFontInfo(&v97->mLineBuffer);
-      if ( v149 )
+      v135 = v96->pEditorKit.pObject;
+      if ( !v135
+        || ((unsigned __int8 (__fastcall *)(Scaleform::Render::Text::EditorKitBase *))v135->vfptr[2].__vecDelDtor)(v135) )
       {
-        if ( (v149->pFont.pObject->Flags >> 15) & 1 )
-          v97->RTFlags |= 0x20u;
+        v127 = 0;
+      }
+      v136 = v96->TextWidth;
+      if ( v136 )
+        v137 = (float)v136;
+      else
+        v137 = 0.0;
+      v138 = (float)(v137 - (float)(v96->mLineBuffer.Geom.VisibleRect.x2 - v96->mLineBuffer.Geom.VisibleRect.x1))
+           + (float)v127;
+      if ( v138 >= 0.0 )
+        v8 = v138;
+      v134 = (int)v8;
+    }
+    if ( v115 > v134 )
+      v115 = v134;
+    if ( v96->mLineBuffer.Geom.HScrollOffset != v115 )
+    {
+      v96->mLineBuffer.Geom.HScrollOffset = v115;
+      v139 = v96->pDocumentListener.pObject;
+      if ( v139 )
+        ((void (__fastcall *)(Scaleform::Render::Text::DocView::DocumentListener *, Scaleform::Render::Text::DocView *, _QWORD))v139->vfptr[3].__vecDelDtor)(
+          v139,
+          v96,
+          v115);
+    }
+    v140 = v158;
+  }
+  v141 = v96->pDocumentListener.pObject;
+  if ( v141 )
+  {
+    if ( v140 && (v141->HandlersMask & 4) != 0 )
+      v141->vfptr[5].__vecDelDtor(v141, (unsigned int)v96);
+    v142 = v96->pDocumentListener.pObject;
+    if ( (v142->HandlersMask & 8) != 0 )
+      v142->vfptr[6].__vecDelDtor(v142, (unsigned int)v96);
+  }
+  v143 = v96->pEditorKit.pObject;
+  if ( v143
+    && !((unsigned __int8 (__fastcall *)(Scaleform::Render::Text::EditorKitBase *))v143->vfptr[2].__vecDelDtor)(v143)
+    || (float)(int)v96->TextWidth > (float)(v96->ViewRect.x2 - v96->ViewRect.x1)
+    || (float)(int)v96->TextHeight > (float)(v96->ViewRect.y2 - v96->ViewRect.y1)
+    || v96->mLineBuffer.Geom.HScrollOffset )
+  {
+    v96->mLineBuffer.Geom.Flags &= ~0x20u;
+  }
+  else
+  {
+    v96->mLineBuffer.Geom.Flags |= 0x20u;
+  }
+  if ( v96->pHighlight )
+  {
+    v144 = v96->pEditorKit.pObject;
+    if ( v144 )
+      v145 = (Scaleform::Render::Text::CompositionStringBase *)((__int64 (__fastcall *)(Scaleform::Render::Text::EditorKitBase *))v144->vfptr[7].__vecDelDtor)(v144);
+    else
+      v145 = 0i64;
+    Scaleform::Render::Text::Highlighter::UpdateGlyphIndices(&v96->pHighlight->HighlightManager, v145);
+  }
+  v96->RTFlags &= ~0x20u;
+  if ( v96->mLineBuffer.Lines.Data.Size )
+  {
+    v146 = *v96->mLineBuffer.Lines.Data.Data;
+    if ( (v146->MemSize & 0x80000000) == 0 ? v146->Data32.GlyphsCount : (unsigned __int8)v146->Data8.GlyphsCount )
+    {
+      FirstFontInfo = Scaleform::Render::Text::LineBuffer::FindFirstFontInfo(&v96->mLineBuffer);
+      if ( FirstFontInfo )
+      {
+        if ( (FirstFontInfo->pFont.pObject->Flags & 0x8000) != 0 )
+          v96->RTFlags |= 0x20u;
       }
     }
   }
-  Scaleform::Render::Text::ParagraphFormatter::~ParagraphFormatter(&v158);
-}7->RTFlags |= 0x20u;
-      }
-    }
+  Scaleform::Render::Text::ParagraphFormatter::~ParagraphFormatter(&v156);
+}caleform::Render::Text::CompositionStringBase *)((__int64 (__fastcall *)(Scaleform::Render::Text::EditorKitBase *))v144->vfptr[7].__vecDelDtor)(v144);
+    else
+      v145 = 0i64;
+    Scaleform::Render::Text::Highlighter::UpdateGlyphIndices(&v96->pHighlight->HighlightManager, v145);
   }
-  Scaleform::Render::Text::ParagraphFormatter::~ParagraphFormatter(&v158);
-}
+  v96->RTFlags &= ~0x20u;
+  if ( v96->mLineBuffer.Lines.Data.Size )
+  {
+    v146 = *v96->mLineBuffer.Lines.Data.Data;
+    if ( (v146->MemSize & 0x80000000) == 0 ? v146->Data32.GlyphsCount : (unsigned __int8)v146->Data8.GlyphsCount )
+    {
+      FirstFontInfo = Scaleform::Render::Text
 
 // File Line: 2630
 // RVA: 0x969900
-void __fastcall Scaleform::Render::Text::DocView::CreateVisibleTextLayout(Scaleform::Render::Text::DocView *this, Scaleform::Render::TextLayout::Builder *bld)
+void __fastcall Scaleform::Render::Text::DocView::CreateVisibleTextLayout(
+        Scaleform::Render::Text::DocView *this,
+        Scaleform::Render::TextLayout::Builder *bld)
 {
-  Scaleform::Render::TextLayout::Builder *v2; // r14
-  Scaleform::Render::Text::DocView *v3; // rbx
-  Scaleform::Render::Text::DocView::HighlightDescLoc *v4; // rax
-  Scaleform::Render::Text::EditorKitBase *v5; // rcx
+  Scaleform::Render::Text::DocView::HighlightDescLoc *pHighlight; // rax
+  Scaleform::Render::Text::EditorKitBase *pObject; // rcx
   Scaleform::Render::Text::CompositionStringBase *v6; // rax
-  char v7; // dl
+  char Flags; // dl
   __int16 v8; // cx
   __int16 v9; // ax
-  char v10; // dl
-  signed __int16 v11; // ax
+  char RTFlags; // dl
+  __int16 v11; // ax
   __int16 v12; // cx
-  char v13; // al
+  char FlagsEx; // al
   __int16 v14; // cx
   __int16 v15; // cx
-  Scaleform::Render::Text::Highlighter *v16; // r8
-  int v17; // ecx
-  int v18; // eax
+  Scaleform::Render::Text::DocView::HighlightDescLoc *v16; // r8
+  unsigned int BorderColor; // ecx
+  unsigned int BackgroundColor; // eax
   char *v19; // rdi
-  signed int v20; // esi
+  int v20; // esi
   Scaleform::Render::Text::EditorKitBase *v21; // rcx
-  float v22; // eax
-  float v23; // xmm2_4
-  float v24; // xmm0_4
-  char val[4]; // [rsp+20h] [rbp-50h]
-  int v26; // [rsp+24h] [rbp-4Ch]
-  int v27; // [rsp+28h] [rbp-48h]
-  Scaleform::Render::TextFieldParam params; // [rsp+30h] [rbp-40h]
+  float x1; // eax
+  float y2; // xmm2_4
+  float y1; // xmm0_4
+  char val[4]; // [rsp+20h] [rbp-50h] BYREF
+  unsigned int v26; // [rsp+24h] [rbp-4Ch]
+  unsigned int v27; // [rsp+28h] [rbp-48h]
+  Scaleform::Render::TextFieldParam params; // [rsp+30h] [rbp-40h] BYREF
 
-  v2 = bld;
-  v3 = this;
-  if ( !(this->RTFlags & 0x40) )
+  if ( (this->RTFlags & 0x40) == 0 )
   {
-    v4 = this->pHighlight;
-    if ( v4 )
+    pHighlight = this->pHighlight;
+    if ( pHighlight )
     {
-      if ( !v4->HighlightManager.Valid )
+      if ( !pHighlight->HighlightManager.Valid )
       {
-        v5 = this->pEditorKit.pObject;
-        if ( v5 )
-          v6 = (Scaleform::Render::Text::CompositionStringBase *)((__int64 (*)(void))v5->vfptr[7].__vecDelDtor)();
+        pObject = this->pEditorKit.pObject;
+        if ( pObject )
+          v6 = (Scaleform::Render::Text::CompositionStringBase *)((__int64 (__fastcall *)(Scaleform::Render::Text::EditorKitBase *))pObject->vfptr[7].__vecDelDtor)(pObject);
         else
           v6 = 0i64;
-        Scaleform::Render::Text::Highlighter::UpdateGlyphIndices(&v3->pHighlight->HighlightManager, v6);
-        v3->pHighlight->HighlightManager.Valid = 1;
+        Scaleform::Render::Text::Highlighter::UpdateGlyphIndices(&this->pHighlight->HighlightManager, v6);
+        this->pHighlight->HighlightManager.Valid = 1;
       }
     }
   }
@@ -4999,25 +4853,25 @@ void __fastcall Scaleform::Render::Text::DocView::CreateVisibleTextLayout(Scalef
   *(_DWORD *)&params.ShadowParam.BlurY = 0x100000;
   *(_QWORD *)&params.ShadowColor = 0i64;
   params.ShadowOffsetY = 0.0;
-  Scaleform::Render::Text::LoadTextFieldParamFromTextFilter(&params, &v3->Filter);
-  v7 = v3->Flags;
+  Scaleform::Render::Text::LoadTextFieldParamFromTextFilter(&params, &this->Filter);
+  Flags = this->Flags;
   v8 = params.TextParam.Flags;
   v9 = params.ShadowParam.Flags;
-  if ( v7 & 0x40 )
+  if ( (Flags & 0x40) != 0 )
   {
     v8 = params.TextParam.Flags | 1;
     v9 = params.ShadowParam.Flags | 1;
     params.ShadowParam.Flags |= 1u;
   }
-  if ( v7 < 0 )
+  if ( Flags < 0 )
   {
     v8 |= 2u;
     params.ShadowParam.Flags = v9 | 2;
   }
-  v10 = v3->RTFlags;
-  if ( v10 & 0x20 )
+  RTFlags = this->RTFlags;
+  if ( (RTFlags & 0x20) != 0 )
   {
-    v8 = (v8 | 0x101) & 0xFFFD;
+    v8 = v8 & 0xFEFC | 0x101;
     v11 = -5;
   }
   else
@@ -5025,108 +4879,104 @@ void __fastcall Scaleform::Render::Text::DocView::CreateVisibleTextLayout(Scalef
     v11 = -257;
   }
   v12 = v11 & v8;
-  v13 = v3->FlagsEx;
-  if ( v13 & 1 )
+  FlagsEx = this->FlagsEx;
+  if ( (FlagsEx & 1) != 0 )
     v14 = v12 | 8;
   else
     v14 = v12 & 0xFFF7;
-  if ( v13 & 2 )
+  if ( (FlagsEx & 2) != 0 )
     v15 = v14 | 0x10;
   else
     v15 = v14 & 0xFFEF;
-  v16 = &v3->pHighlight->HighlightManager;
-  params.TextParam.Flags = v15 & 0xFFF | ((unsigned __int16)(signed int)v3->Outline << 12);
-  if ( !v16 || v10 & 0x40 )
+  v16 = this->pHighlight;
+  params.TextParam.Flags = v15 & 0xFFF | ((unsigned __int16)(int)this->Outline << 12);
+  if ( !v16 || (RTFlags & 0x40) != 0 )
     v16 = 0i64;
-  Scaleform::Render::Text::LineBuffer::CreateVisibleTextLayout(&v3->mLineBuffer, v2, v16, &params);
-  v17 = v3->BorderColor;
-  if ( v3->BorderColor >> 24 || v3->BackgroundColor >> 24 )
+  Scaleform::Render::Text::LineBuffer::CreateVisibleTextLayout(&this->mLineBuffer, bld, &v16->HighlightManager, &params);
+  BorderColor = this->BorderColor;
+  if ( HIBYTE(BorderColor) || HIBYTE(this->BackgroundColor) )
   {
-    v18 = v3->BackgroundColor;
+    BackgroundColor = this->BackgroundColor;
     *(_DWORD *)val = 2;
-    v27 = v17;
+    v27 = BorderColor;
     v19 = val;
-    v26 = v18;
+    v26 = BackgroundColor;
     v20 = 12;
     do
     {
-      Scaleform::ArrayStaticBuffPOD<unsigned char,1024,2>::PushBack(&v2->Data, v19++);
+      Scaleform::ArrayStaticBuffPOD<unsigned char,1024,2>::PushBack(&bld->Data, v19++);
       --v20;
     }
     while ( v20 );
   }
-  v21 = v3->pEditorKit.pObject;
+  v21 = this->pEditorKit.pObject;
   if ( v21 )
-    v21->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v21->vfptr, (unsigned int)v2);
-  if ( v3->RTFlags & 3 )
+    v21->vfptr[1].__vecDelDtor(v21, (unsigned int)bld);
+  if ( (this->RTFlags & 3) != 0 )
   {
-    Scaleform::Render::Text::DocView::Format(v3);
-    v3->RTFlags &= 0xFCu;
+    Scaleform::Render::Text::DocView::Format(this);
+    this->RTFlags &= 0xFCu;
   }
-  v22 = v3->ViewRect.x1;
-  v23 = v3->ViewRect.y2;
-  v24 = v3->ViewRect.y1;
-  v2->Bounds.x2 = v3->ViewRect.x2;
-  v2->Bounds.y2 = v23;
-  v2->Bounds.x1 = v22;
-  v2->Bounds.y1 = v24;
+  x1 = this->ViewRect.x1;
+  y2 = this->ViewRect.y2;
+  y1 = this->ViewRect.y1;
+  bld->Bounds.x2 = this->ViewRect.x2;
+  bld->Bounds.y2 = y2;
+  bld->Bounds.x1 = x1;
+  bld->Bounds.y1 = y1;
 }
 
 // File Line: 2673
 // RVA: 0x9B09E0
-char __fastcall Scaleform::Render::Text::DocView::SetHScrollOffset(Scaleform::Render::Text::DocView *this, unsigned int hscroll)
+char __fastcall Scaleform::Render::Text::DocView::SetHScrollOffset(
+        Scaleform::Render::Text::DocView *this,
+        unsigned int hscroll)
 {
-  unsigned int v2; // edi
-  Scaleform::Render::Text::DocView *v3; // rbx
-  unsigned int v4; // eax
-  Scaleform::Render::Text::DocView::DocumentListener *v5; // rcx
+  unsigned int MaxHScrollValue; // eax
+  Scaleform::Render::Text::DocView::DocumentListener *pObject; // rcx
 
-  v2 = hscroll;
-  v3 = this;
-  if ( this->RTFlags & 3 )
+  if ( (this->RTFlags & 3) != 0 )
   {
     Scaleform::Render::Text::DocView::Format(this);
-    v3->RTFlags &= 0xFCu;
+    this->RTFlags &= 0xFCu;
   }
-  v4 = Scaleform::Render::Text::DocView::GetMaxHScrollValue(v3);
-  if ( v2 > v4 )
-    v2 = v4;
-  if ( v3->mLineBuffer.Geom.HScrollOffset == v2 )
+  MaxHScrollValue = Scaleform::Render::Text::DocView::GetMaxHScrollValue(this);
+  if ( hscroll > MaxHScrollValue )
+    hscroll = MaxHScrollValue;
+  if ( this->mLineBuffer.Geom.HScrollOffset == hscroll )
     return 0;
-  v5 = v3->pDocumentListener.pObject;
-  v3->mLineBuffer.Geom.HScrollOffset = v2;
-  if ( v5 )
-    ((void (__fastcall *)(Scaleform::Render::Text::DocView::DocumentListener *, Scaleform::Render::Text::DocView *, _QWORD))v5->vfptr[3].__vecDelDtor)(
-      v5,
-      v3,
-      v2);
+  pObject = this->pDocumentListener.pObject;
+  this->mLineBuffer.Geom.HScrollOffset = hscroll;
+  if ( pObject )
+    ((void (__fastcall *)(Scaleform::Render::Text::DocView::DocumentListener *, Scaleform::Render::Text::DocView *, _QWORD))pObject->vfptr[3].__vecDelDtor)(
+      pObject,
+      this,
+      hscroll);
   return 1;
 }
 
 // File Line: 2691
 // RVA: 0x9B5690
-char __fastcall Scaleform::Render::Text::DocView::SetVScrollOffset(Scaleform::Render::Text::DocView *this, unsigned int vscroll)
+char __fastcall Scaleform::Render::Text::DocView::SetVScrollOffset(
+        Scaleform::Render::Text::DocView *this,
+        unsigned int vscroll)
 {
-  unsigned int v2; // edi
-  Scaleform::Render::Text::DocView *v3; // rbx
-  unsigned int v4; // eax
-  Scaleform::Render::Text::DocView::DocumentListener *v5; // rcx
+  unsigned int MaxVScroll; // eax
+  Scaleform::Render::Text::DocView::DocumentListener *pObject; // rcx
 
-  v2 = vscroll;
-  v3 = this;
-  v4 = Scaleform::Render::Text::DocView::GetMaxVScroll(this);
-  if ( v2 > v4 )
-    v2 = v4;
-  if ( v3->mLineBuffer.Geom.FirstVisibleLinePos == v2 )
+  MaxVScroll = Scaleform::Render::Text::DocView::GetMaxVScroll(this);
+  if ( vscroll > MaxVScroll )
+    vscroll = MaxVScroll;
+  if ( this->mLineBuffer.Geom.FirstVisibleLinePos == vscroll )
     return 0;
-  v3->mLineBuffer.Geom.FirstVisibleLinePos = v2;
-  v3->mLineBuffer.Geom.Flags |= 1u;
-  v5 = v3->pDocumentListener.pObject;
-  if ( v5 )
-    ((void (__fastcall *)(Scaleform::Render::Text::DocView::DocumentListener *, Scaleform::Render::Text::DocView *, _QWORD))v5->vfptr[4].__vecDelDtor)(
-      v5,
-      v3,
-      v2);
+  this->mLineBuffer.Geom.FirstVisibleLinePos = vscroll;
+  this->mLineBuffer.Geom.Flags |= 1u;
+  pObject = this->pDocumentListener.pObject;
+  if ( pObject )
+    ((void (__fastcall *)(Scaleform::Render::Text::DocView::DocumentListener *, Scaleform::Render::Text::DocView *, _QWORD))pObject->vfptr[4].__vecDelDtor)(
+      pObject,
+      this,
+      vscroll);
   return 1;
 }
 
@@ -5134,48 +4984,40 @@ char __fastcall Scaleform::Render::Text::DocView::SetVScrollOffset(Scaleform::Re
 // RVA: 0x985240
 __int64 __fastcall Scaleform::Render::Text::DocView::GetHScrollOffset(Scaleform::Render::Text::DocView *this)
 {
-  Scaleform::Render::Text::DocView *v1; // rbx
-
-  v1 = this;
-  if ( !(this->RTFlags & 3) )
+  if ( (this->RTFlags & 3) == 0 )
     return this->mLineBuffer.Geom.HScrollOffset;
   Scaleform::Render::Text::DocView::Format(this);
-  v1->RTFlags &= 0xFCu;
-  return v1->mLineBuffer.Geom.HScrollOffset;
+  this->RTFlags &= 0xFCu;
+  return this->mLineBuffer.Geom.HScrollOffset;
 }
 
 // File Line: 2720
 // RVA: 0x98EB50
 __int64 __fastcall Scaleform::Render::Text::DocView::GetVScrollOffset(Scaleform::Render::Text::DocView *this)
 {
-  Scaleform::Render::Text::DocView *v1; // rbx
-
-  v1 = this;
-  if ( !(this->RTFlags & 3) )
+  if ( (this->RTFlags & 3) == 0 )
     return this->mLineBuffer.Geom.FirstVisibleLinePos;
   Scaleform::Render::Text::DocView::Format(this);
-  v1->RTFlags &= 0xFCu;
-  return v1->mLineBuffer.Geom.FirstVisibleLinePos;
+  this->RTFlags &= 0xFCu;
+  return this->mLineBuffer.Geom.FirstVisibleLinePos;
 }
 
 // File Line: 2731
 // RVA: 0x98D8D0
 float __fastcall Scaleform::Render::Text::DocView::GetTextWidth(Scaleform::Render::Text::DocView *this)
 {
-  Scaleform::Render::Text::DocView *v1; // rbx
-  signed int v2; // eax
+  signed int TextWidth; // eax
   float result; // xmm0_4
 
-  v1 = this;
-  if ( this->RTFlags & 3 )
+  if ( (this->RTFlags & 3) != 0 )
   {
     Scaleform::Render::Text::DocView::Format(this);
-    v1->RTFlags &= 0xFCu;
+    this->RTFlags &= 0xFCu;
   }
-  v2 = v1->TextWidth;
+  TextWidth = this->TextWidth;
   result = 0.0;
-  if ( v2 )
-    result = (float)v2;
+  if ( TextWidth )
+    return (float)TextWidth;
   return result;
 }
 
@@ -5183,20 +5025,18 @@ float __fastcall Scaleform::Render::Text::DocView::GetTextWidth(Scaleform::Rende
 // RVA: 0x98D890
 float __fastcall Scaleform::Render::Text::DocView::GetTextHeight(Scaleform::Render::Text::DocView *this)
 {
-  Scaleform::Render::Text::DocView *v1; // rbx
-  signed int v2; // eax
+  signed int TextHeight; // eax
   float result; // xmm0_4
 
-  v1 = this;
-  if ( this->RTFlags & 3 )
+  if ( (this->RTFlags & 3) != 0 )
   {
     Scaleform::Render::Text::DocView::Format(this);
-    v1->RTFlags &= 0xFCu;
+    this->RTFlags &= 0xFCu;
   }
-  v2 = v1->TextHeight;
+  TextHeight = this->TextHeight;
   result = 0.0;
-  if ( v2 )
-    result = (float)v2;
+  if ( TextHeight )
+    return (float)TextHeight;
   return result;
 }
 
@@ -5204,145 +5044,129 @@ float __fastcall Scaleform::Render::Text::DocView::GetTextHeight(Scaleform::Rend
 // RVA: 0x988B60
 __int64 __fastcall Scaleform::Render::Text::DocView::GetLinesCount(Scaleform::Render::Text::DocView *this)
 {
-  Scaleform::Render::Text::DocView *v1; // rbx
-
-  v1 = this;
-  if ( !(this->RTFlags & 3) )
+  if ( (this->RTFlags & 3) == 0 )
     return LODWORD(this->mLineBuffer.Lines.Data.Size);
   Scaleform::Render::Text::DocView::Format(this);
-  v1->RTFlags &= 0xFCu;
-  return LODWORD(v1->mLineBuffer.Lines.Data.Size);
+  this->RTFlags &= 0xFCu;
+  return LODWORD(this->mLineBuffer.Lines.Data.Size);
 }
 
 // File Line: 2767
 // RVA: 0x988FA0
 __int64 __fastcall Scaleform::Render::Text::DocView::GetMaxHScrollValue(Scaleform::Render::Text::DocView *this)
 {
-  Scaleform::Render::Text::DocView *v1; // rbx
-  Scaleform::Render::Text::EditorKitBase *v3; // rcx
-  signed int v4; // ecx
-  signed int v5; // eax
+  Scaleform::Render::Text::EditorKitBase *pObject; // rcx
+  int v4; // ecx
+  signed int TextWidth; // eax
   float v6; // xmm2_4
   float v7; // xmm1_4
   float v8; // xmm1_4
 
-  v1 = this;
-  if ( this->Flags & 8 )
+  if ( (this->Flags & 8) != 0 )
     return 0i64;
-  v3 = this->pEditorKit.pObject;
-  if ( !v3 || ((unsigned __int8 (*)(void))v3->vfptr[2].__vecDelDtor)() )
+  pObject = this->pEditorKit.pObject;
+  if ( !pObject
+    || ((unsigned __int8 (__fastcall *)(Scaleform::Render::Text::EditorKitBase *))pObject->vfptr[2].__vecDelDtor)(pObject) )
+  {
     v4 = 0;
+  }
   else
+  {
     v4 = 1200;
-  v5 = v1->TextWidth;
+  }
+  TextWidth = this->TextWidth;
   v6 = 0.0;
-  if ( v5 )
-    v7 = (float)v5;
+  if ( TextWidth )
+    v7 = (float)TextWidth;
   else
     v7 = 0.0;
-  v8 = (float)(v7 - (float)(v1->mLineBuffer.Geom.VisibleRect.x2 - v1->mLineBuffer.Geom.VisibleRect.x1)) + (float)v4;
+  v8 = (float)(v7 - (float)(this->mLineBuffer.Geom.VisibleRect.x2 - this->mLineBuffer.Geom.VisibleRect.x1)) + (float)v4;
   if ( v8 >= 0.0 )
     v6 = v8;
-  return (unsigned int)(signed int)v6;
+  return (unsigned int)(int)v6;
 }
 
 // File Line: 2782
 // RVA: 0x988F70
 __int64 __fastcall Scaleform::Render::Text::DocView::GetMaxHScroll(Scaleform::Render::Text::DocView *this)
 {
-  Scaleform::Render::Text::DocView *v1; // rbx
-
-  v1 = this;
-  if ( this->RTFlags & 3 )
+  if ( (this->RTFlags & 3) != 0 )
   {
     Scaleform::Render::Text::DocView::Format(this);
-    v1->RTFlags &= 0xFCu;
+    this->RTFlags &= 0xFCu;
   }
-  return Scaleform::Render::Text::DocView::GetMaxHScrollValue(v1);
+  return Scaleform::Render::Text::DocView::GetMaxHScrollValue(this);
 }
 
 // File Line: 2793
 // RVA: 0x989070
 __int64 __fastcall Scaleform::Render::Text::DocView::GetMaxVScroll(Scaleform::Render::Text::DocView *this)
 {
-  Scaleform::Render::Text::DocView *v1; // rbx
-  unsigned __int16 v2; // ax
+  unsigned __int16 FormatCounter; // ax
   __int64 result; // rax
-  Scaleform::Render::Text::EditorKitBase *v4; // rcx
-  signed int v5; // esi
+  Scaleform::Render::Text::EditorKitBase *pObject; // rcx
+  int v5; // esi
   __int64 v6; // rdi
   Scaleform::Render::Text::LineBuffer::Line *v7; // r14
-  unsigned int v8; // eax
-  unsigned __int64 v9; // r8
-  Scaleform::Render::Text::LineBuffer::Line **v10; // r9
+  unsigned __int64 Size; // r8
+  Scaleform::Render::Text::LineBuffer::Line **Data; // r9
   Scaleform::Render::Text::LineBuffer::Line *v11; // rax
-  unsigned int v12; // edx
-  Scaleform::Render::Text::LineBuffer::Line *v13; // rcx
-  unsigned int v14; // et1
+  unsigned int Height; // edx
 
-  v1 = this;
-  if ( this->RTFlags & 3 )
+  if ( (this->RTFlags & 3) != 0 )
   {
     Scaleform::Render::Text::DocView::Format(this);
-    v1->RTFlags &= 0xFCu;
+    this->RTFlags &= 0xFCu;
   }
-  v2 = v1->FormatCounter;
-  if ( v1->MaxVScroll.FormatCounter == v2 )
-    return v1->MaxVScroll.Value;
-  if ( !LODWORD(v1->mLineBuffer.Lines.Data.Size) )
+  FormatCounter = this->FormatCounter;
+  if ( this->MaxVScroll.FormatCounter == FormatCounter )
+    return this->MaxVScroll.Value;
+  if ( !LODWORD(this->mLineBuffer.Lines.Data.Size) )
   {
-    v1->MaxVScroll.Value = 0;
-    v1->MaxVScroll.FormatCounter = v2;
-    return v1->MaxVScroll.Value;
+    this->MaxVScroll.Value = 0;
+    this->MaxVScroll.FormatCounter = FormatCounter;
+    return this->MaxVScroll.Value;
   }
-  v4 = v1->pEditorKit.pObject;
+  pObject = this->pEditorKit.pObject;
   v5 = 0;
-  v6 = (unsigned int)(LODWORD(v1->mLineBuffer.Lines.Data.Size) - 1);
-  v7 = v1->mLineBuffer.Lines.Data.Data[(unsigned int)v6];
-  if ( !v4 || ((unsigned __int8 (*)(void))v4->vfptr[2].__vecDelDtor)() )
+  v6 = (unsigned int)(LODWORD(this->mLineBuffer.Lines.Data.Size) - 1);
+  v7 = this->mLineBuffer.Lines.Data.Data[(unsigned int)v6];
+  if ( (!pObject
+     || ((unsigned __int8 (__fastcall *)(Scaleform::Render::Text::EditorKitBase *))pObject->vfptr[2].__vecDelDtor)(pObject))
+    && !((v7->MemSize & 0x80000000) == 0 ? v7->Data32.TextLength : HIBYTE(v7->Data8.TextPosAndLength)) )
   {
-    v8 = (v7->MemSize & 0x80000000) == 0 ? v7->Data32.TextLength : HIBYTE(v7->Data8.TextPosAndLength);
-    if ( !v8 )
-    {
-      if ( (signed int)v6 >= 0 )
-        v6 = (unsigned int)(v6 - 1);
-      v5 = 1;
-    }
+    if ( (int)v6 >= 0 )
+      v6 = (unsigned int)(v6 - 1);
+    v5 = 1;
   }
-  v9 = v1->mLineBuffer.Lines.Data.Size;
-  if ( (unsigned int)v6 >= v9 || (signed int)v6 < 0 )
+  Size = this->mLineBuffer.Lines.Data.Size;
+  if ( (unsigned int)v6 >= Size || (int)v6 < 0 )
   {
-    v1->MaxVScroll.FormatCounter = v1->FormatCounter;
-    v1->MaxVScroll.Value = 0;
-    result = v1->MaxVScroll.Value;
+    this->MaxVScroll.FormatCounter = this->FormatCounter;
+    this->MaxVScroll.Value = 0;
+    return this->MaxVScroll.Value;
   }
   else
   {
-    v10 = v1->mLineBuffer.Lines.Data.Data;
-    v11 = v10[v6];
+    Data = this->mLineBuffer.Lines.Data.Data;
+    v11 = Data[v6];
     if ( (v11->MemSize & 0x80000000) == 0 )
-      v12 = v11->Data32.Height;
+      Height = v11->Data32.Height;
     else
-      v12 = v11->Data8.Height;
-    while ( (unsigned int)v6 < v9 )
+      Height = v11->Data8.Height;
+    while ( (unsigned int)v6 < Size
+         && (int)v6 >= 0
+         && (!v5
+          || (float)Data[v6]->Data32.OffsetY >= (float)((float)((float)(int)(v11->Data32.OffsetY + Height)
+                                                              - this->mLineBuffer.Geom.VisibleRect.y2)
+                                                      + this->mLineBuffer.Geom.VisibleRect.y1)) )
     {
-      if ( (signed int)v6 < 0 )
-        break;
-      v13 = v10[v6];
-      if ( v5 )
-      {
-        v14 = v13->MemSize;
-        if ( (float)v13->Data32.OffsetY < (float)((float)((float)(signed int)(v11->Data32.OffsetY + v12)
-                                                        - v1->mLineBuffer.Geom.VisibleRect.y2)
-                                                + v1->mLineBuffer.Geom.VisibleRect.y1) )
-          break;
-      }
       v6 = (unsigned int)(v6 - 1);
       ++v5;
     }
-    result = (unsigned int)(v9 - v5);
-    v1->MaxVScroll.FormatCounter = v1->FormatCounter;
-    v1->MaxVScroll.Value = result;
+    result = (unsigned int)(Size - v5);
+    this->MaxVScroll.FormatCounter = this->FormatCounter;
+    this->MaxVScroll.Value = result;
   }
   return result;
 }
@@ -5351,13 +5175,13 @@ __int64 __fastcall Scaleform::Render::Text::DocView::GetMaxVScroll(Scaleform::Re
 // RVA: 0x9AE2D0
 void __fastcall Scaleform::Render::Text::DocView::SetAutoSizeX(Scaleform::Render::Text::DocView *this)
 {
-  char v1; // al
+  char Flags; // al
 
-  v1 = this->Flags;
-  if ( !(v1 & 1) )
+  Flags = this->Flags;
+  if ( (Flags & 1) == 0 )
   {
     this->RTFlags |= 2u;
-    this->Flags = v1 | 1;
+    this->Flags = Flags | 1;
   }
 }
 
@@ -5365,13 +5189,13 @@ void __fastcall Scaleform::Render::Text::DocView::SetAutoSizeX(Scaleform::Render
 // RVA: 0x9AE2F0
 void __fastcall Scaleform::Render::Text::DocView::SetAutoSizeY(Scaleform::Render::Text::DocView *this)
 {
-  char v1; // al
+  char Flags; // al
 
-  v1 = this->Flags;
-  if ( !(v1 & 2) )
+  Flags = this->Flags;
+  if ( (Flags & 2) == 0 )
   {
     this->RTFlags |= 2u;
-    this->Flags = v1 | 2;
+    this->Flags = Flags | 2;
   }
 }
 
@@ -5379,13 +5203,13 @@ void __fastcall Scaleform::Render::Text::DocView::SetAutoSizeY(Scaleform::Render
 // RVA: 0x9B5F20
 void __fastcall Scaleform::Render::Text::DocView::SetWordWrap(Scaleform::Render::Text::DocView *this)
 {
-  char v1; // al
+  char Flags; // al
 
-  v1 = this->Flags;
-  if ( !(v1 & 8) )
+  Flags = this->Flags;
+  if ( (Flags & 8) == 0 )
   {
     this->RTFlags |= 2u;
-    this->Flags = v1 | 8;
+    this->Flags = Flags | 8;
   }
 }
 
@@ -5393,13 +5217,13 @@ void __fastcall Scaleform::Render::Text::DocView::SetWordWrap(Scaleform::Render:
 // RVA: 0x960630
 void __fastcall Scaleform::Render::Text::DocView::ClearWordWrap(Scaleform::Render::Text::DocView *this)
 {
-  char v1; // al
+  char Flags; // al
 
-  v1 = this->Flags;
-  if ( v1 & 8 )
+  Flags = this->Flags;
+  if ( (Flags & 8) != 0 )
   {
     this->RTFlags |= 2u;
-    this->Flags = v1 & 0xF7;
+    this->Flags = Flags & 0xF7;
   }
 }
 
@@ -5407,581 +5231,530 @@ void __fastcall Scaleform::Render::Text::DocView::ClearWordWrap(Scaleform::Rende
 // RVA: 0x97AE90
 char __fastcall Scaleform::Render::Text::DocView::ForceReformat(Scaleform::Render::Text::DocView *this)
 {
-  Scaleform::Render::Text::DocView *v1; // rbx
-
-  v1 = this;
-  if ( !(this->RTFlags & 3) )
+  if ( (this->RTFlags & 3) == 0 )
     return 0;
   Scaleform::Render::Text::DocView::Format(this);
-  v1->RTFlags &= 0xFCu;
+  this->RTFlags &= 0xFCu;
   return 1;
 }
 
 // File Line: 2894
 // RVA: 0x98FC00
-Scaleform::Render::Rect<float> *__fastcall Scaleform::Render::Text::DocView::GetViewRect(Scaleform::Render::Text::DocView *this)
+Scaleform::Render::Rect<float> *__fastcall Scaleform::Render::Text::DocView::GetViewRect(
+        Scaleform::Render::Text::DocView *this)
 {
-  Scaleform::Render::Text::DocView *v1; // rbx
-
-  v1 = this;
-  if ( !(this->RTFlags & 3) )
+  if ( (this->RTFlags & 3) == 0 )
     return &this->ViewRect;
   Scaleform::Render::Text::DocView::Format(this);
-  v1->RTFlags &= 0xFCu;
-  return &v1->ViewRect;
+  this->RTFlags &= 0xFCu;
+  return &this->ViewRect;
 }
 
 // File Line: 2900
 // RVA: 0x981320
-__int64 __fastcall Scaleform::Render::Text::DocView::GetCharIndexAtPoint(Scaleform::Render::Text::DocView *this, float x, float y)
+__int64 __fastcall Scaleform::Render::Text::DocView::GetCharIndexAtPoint(
+        Scaleform::Render::Text::DocView *this,
+        float x,
+        float y)
 {
-  Scaleform::Render::Text::DocView *v3; // rbx
   float v4; // xmm6_4
-  Scaleform::Render::Text::LineBuffer *v5; // rcx
+  Scaleform::Render::Text::LineBuffer *p_mLineBuffer; // rcx
   int v6; // edx
-  unsigned __int64 v7; // rax
-  Scaleform::Render::Text::LineBuffer::Line *v8; // rdx
-  unsigned int v9; // et1
-  Scaleform::Render::Text::LineBuffer::Line *v10; // r8
-  unsigned int v11; // et1
-  Scaleform::Render::Text::LineBuffer::Line *v12; // rdi
-  float v13; // xmm1_4
-  signed int v14; // eax
-  float v15; // xmm6_4
-  signed int v16; // ebx
-  int v17; // esi
-  int v18; // eax
-  unsigned int v19; // eax
-  unsigned int v20; // edx
-  signed int v21; // eax
-  __int64 v22; // rbx
-  Scaleform::Render::Text::ImageDesc *v23; // rcx
-  Scaleform::Render::Text::FontHandle *v24; // rcx
-  Scaleform::Render::Text::LineBuffer::Iterator result; // [rsp+28h] [rbp-F0h]
-  Scaleform::Render::Text::LineBuffer::GlyphIterator v27; // [rsp+50h] [rbp-C8h]
+  unsigned __int64 FirstVisibleLinePos; // rax
+  Scaleform::Render::Text::LineBuffer::Line *v8; // rdi
+  float OffsetX; // xmm1_4
+  int v10; // eax
+  float v11; // xmm6_4
+  int v12; // ebx
+  int v13; // esi
+  int Advance; // eax
+  unsigned int Delta; // edx
+  int TextPos; // eax
+  __int64 v17; // rbx
+  Scaleform::Render::Text::ImageDesc *pObject; // rcx
+  Scaleform::Render::Text::FontHandle *v19; // rcx
+  Scaleform::Render::Text::LineBuffer::Iterator result; // [rsp+28h] [rbp-F0h] BYREF
+  Scaleform::Render::Text::LineBuffer::GlyphIterator v22; // [rsp+50h] [rbp-C8h] BYREF
 
-  v3 = this;
-  if ( this->RTFlags & 3 )
+  if ( (this->RTFlags & 3) != 0 )
   {
     Scaleform::Render::Text::DocView::Format(this);
-    v3->RTFlags &= 0xFCu;
+    this->RTFlags &= 0xFCu;
   }
-  v4 = x - (float)(v3->mLineBuffer.Geom.VisibleRect.x1 - v3->ViewRect.x1);
-  v5 = &v3->mLineBuffer;
+  v4 = x - (float)(this->mLineBuffer.Geom.VisibleRect.x1 - this->ViewRect.x1);
+  p_mLineBuffer = &this->mLineBuffer;
   v6 = 0;
-  v7 = v3->mLineBuffer.Geom.FirstVisibleLinePos;
-  if ( (_DWORD)v7
-    && v3 != (Scaleform::Render::Text::DocView *)-80i64
-    && v7 < v3->mLineBuffer.Lines.Data.Size
-    && (v7 & 0x80000000) == 0i64
-    && v3 != (Scaleform::Render::Text::DocView *)-80i64
-    && v3->mLineBuffer.Lines.Data.Size > 0 )
+  FirstVisibleLinePos = this->mLineBuffer.Geom.FirstVisibleLinePos;
+  if ( (_DWORD)FirstVisibleLinePos
+    && this != (Scaleform::Render::Text::DocView *)-80i64
+    && FirstVisibleLinePos < this->mLineBuffer.Lines.Data.Size
+    && (FirstVisibleLinePos & 0x80000000) == 0i64
+    && this->mLineBuffer.Lines.Data.Size )
   {
-    v8 = v5->Lines.Data.Data[(unsigned int)v7];
-    v9 = v8->MemSize;
-    v10 = *v5->Lines.Data.Data;
-    v11 = v10->MemSize;
-    v6 = v8->Data32.OffsetY - v10->Data32.OffsetY;
+    v6 = p_mLineBuffer->Lines.Data.Data[(unsigned int)FirstVisibleLinePos]->Data32.OffsetY
+       - (*p_mLineBuffer->Lines.Data.Data)->Data32.OffsetY;
   }
   Scaleform::Render::Text::LineBuffer::FindLineAtYOffset(
-    v5,
+    p_mLineBuffer,
     &result,
-    (float)v6 + (float)(y - (float)(v3->mLineBuffer.Geom.VisibleRect.y1 - v3->ViewRect.y1)));
+    (float)v6 + (float)(y - (float)(this->mLineBuffer.Geom.VisibleRect.y1 - this->ViewRect.y1)));
   if ( !result.pLineBuffer )
     return -1i64;
   if ( result.CurrentPos >= result.pLineBuffer->Lines.Data.Size )
     return -1i64;
   if ( (result.CurrentPos & 0x80000000) != 0 )
     return -1i64;
-  v12 = result.pLineBuffer->Lines.Data.Data[result.CurrentPos];
-  v13 = (float)result.pLineBuffer->Lines.Data.Data[result.CurrentPos]->Data32.OffsetX;
-  if ( v4 < v13 )
+  v8 = result.pLineBuffer->Lines.Data.Data[result.CurrentPos];
+  OffsetX = (float)v8->Data32.OffsetX;
+  if ( v4 < OffsetX )
     return -1i64;
-  v14 = (v12->MemSize & 0x80000000) == 0 ? v12->Data32.Width : v12->Data8.Width;
-  if ( v4 > (float)((float)v14 + v13) )
+  v10 = (v8->MemSize & 0x80000000) == 0 ? v8->Data32.Width : v8->Data8.Width;
+  if ( v4 > (float)((float)v10 + OffsetX) )
     return -1i64;
-  v15 = v4 - v13;
-  v16 = 0;
-  Scaleform::Render::Text::LineBuffer::Line::Begin(v12, &v27);
-  v17 = 0;
-  while ( v27.pGlyphs && v27.pGlyphs < v27.pEndGlyphs )
+  v11 = v4 - OffsetX;
+  v12 = 0;
+  Scaleform::Render::Text::LineBuffer::Line::Begin(v8, &v22);
+  v13 = 0;
+  while ( v22.pGlyphs && v22.pGlyphs < v22.pEndGlyphs )
   {
-    v18 = v27.pGlyphs->Advance;
-    if ( (LOBYTE(v27.pGlyphs->Flags) >> 6) & 1 )
-      v18 = -v18;
-    v16 += v18;
-    if ( (float)v16 > v15 )
+    Advance = v22.pGlyphs->Advance;
+    if ( (v22.pGlyphs->Flags & 0x40) != 0 )
+      Advance = -Advance;
+    v12 += Advance;
+    if ( (float)v12 > v11 )
       break;
-    v19 = (unsigned int)v27.pGlyphs->LenAndFontSize >> 12;
-    v17 += v19;
-    v20 = v27.Delta;
-    if ( !v27.Delta )
-      v20 = (unsigned int)v27.pGlyphs->LenAndFontSize >> 12;
-    v27.Delta = v20;
-    ++v27.pGlyphs;
-    if ( v27.pGlyphs->LenAndFontSize & 0xF000
-      && v20
-      && v27.HighlighterIter.CurAdjStartPos < v27.HighlighterIter.NumGlyphs )
+    v13 += v22.pGlyphs->LenAndFontSize >> 12;
+    Delta = v22.Delta;
+    if ( !v22.Delta )
+      Delta = v22.pGlyphs->LenAndFontSize >> 12;
+    v22.Delta = Delta;
+    ++v22.pGlyphs;
+    if ( (v22.pGlyphs->LenAndFontSize & 0xF000) != 0
+      && Delta
+      && v22.HighlighterIter.CurAdjStartPos < v22.HighlighterIter.NumGlyphs )
     {
-      if ( v20 )
-      {
-        v27.HighlighterIter.CurAdjStartPos += v20;
-        Scaleform::Render::Text::HighlighterPosIterator::InitCurDesc(&v27.HighlighterIter);
-      }
-      v27.Delta = 0;
+      v22.HighlighterIter.CurAdjStartPos += Delta;
+      Scaleform::Render::Text::HighlighterPosIterator::InitCurDesc(&v22.HighlighterIter);
+      v22.Delta = 0;
     }
-    Scaleform::Render::Text::LineBuffer::GlyphIterator::UpdateDesc(&v27);
+    Scaleform::Render::Text::LineBuffer::GlyphIterator::UpdateDesc(&v22);
   }
-  v21 = v12->Data32.TextPos;
-  if ( (v12->MemSize & 0x80000000) != 0 )
+  TextPos = v8->Data32.TextPos;
+  if ( (v8->MemSize & 0x80000000) != 0 )
   {
-    v21 &= 0xFFFFFFu;
-    if ( v21 == 0xFFFFFF )
-      v21 = -1;
+    TextPos &= 0xFFFFFFu;
+    if ( TextPos == 0xFFFFFF )
+      TextPos = -1;
   }
-  v22 = (unsigned int)(v17 + v21);
-  v23 = v27.pImage.pObject;
-  if ( v27.pImage.pObject )
+  v17 = (unsigned int)(v13 + TextPos);
+  pObject = v22.pImage.pObject;
+  if ( v22.pImage.pObject )
   {
-    --v27.pImage.pObject->RefCount;
-    if ( !v23->RefCount )
-      v23->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v23->vfptr, 1u);
+    --v22.pImage.pObject->RefCount;
+    if ( !pObject->RefCount )
+      pObject->vfptr->__vecDelDtor(pObject, 1u);
   }
-  v24 = v27.pFontHandle.pObject;
-  if ( v27.pFontHandle.pObject && !_InterlockedDecrement(&v27.pFontHandle.pObject->RefCount) && v24 )
-    v24->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v24->vfptr, 1u);
-  return v22;
-}t->RefCount) && v24 )
-    v24->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v
+  v19 = v22.pFontHandle.pObject;
+  if ( v22.pFontHandle.pObject && !_InterlockedDecrement(&v22.pFontHandle.pObject->RefCount) && v19 )
+    v19->vfptr->__vecDelDtor(v19, 1u);
+  return v17;
+}
 
 // File Line: 2936
 // RVA: 0x981CA0
-unsigned __int64 __fastcall Scaleform::Render::Text::DocView::GetCursorPosInLine(Scaleform::Render::Text::DocView *this, unsigned int lineIndex, float x)
+unsigned __int64 __fastcall Scaleform::Render::Text::DocView::GetCursorPosInLine(
+        Scaleform::Render::Text::DocView *this,
+        unsigned int lineIndex,
+        float x)
 {
-  unsigned int v3; // edi
-  Scaleform::Render::Text::DocView *v4; // rbx
-
-  v3 = lineIndex;
-  v4 = this;
   if ( lineIndex >= LODWORD(this->mLineBuffer.Lines.Data.Size) )
     return -1i64;
-  if ( this->RTFlags & 3 )
+  if ( (this->RTFlags & 3) != 0 )
   {
     Scaleform::Render::Text::DocView::Format(this);
-    v4->RTFlags &= 0xFCu;
+    this->RTFlags &= 0xFCu;
   }
-  return Scaleform::Render::Text::DocView::GetCursorPosInLineByOffset(v4, v3, x);
+  return Scaleform::Render::Text::DocView::GetCursorPosInLineByOffset(this, lineIndex, x);
 }
 
 // File Line: 2945
 // RVA: 0x981D10
-unsigned __int64 __fastcall Scaleform::Render::Text::DocView::GetCursorPosInLineByOffset(Scaleform::Render::Text::DocView *this, unsigned int lineIndex, float relativeOffsetX)
+unsigned __int64 __fastcall Scaleform::Render::Text::DocView::GetCursorPosInLineByOffset(
+        Scaleform::Render::Text::DocView *this,
+        unsigned int lineIndex,
+        float relativeOffsetX)
 {
   Scaleform::Render::Text::LineBuffer::Line *v4; // rdi
-  unsigned int v5; // et1
-  float v6; // xmm6_4
-  signed int v7; // esi
-  int v8; // ebx
-  unsigned __int16 v9; // r8
-  unsigned int v10; // edx
-  unsigned int v11; // eax
-  signed int v12; // eax
-  __int64 v13; // rbx
-  Scaleform::Render::Text::ImageDesc *v14; // rcx
-  Scaleform::Render::Text::FontHandle *v15; // rcx
-  Scaleform::Render::Text::LineBuffer::GlyphIterator result; // [rsp+30h] [rbp-B8h]
+  float v5; // xmm6_4
+  int v6; // esi
+  int v7; // ebx
+  unsigned __int16 Flags; // r8
+  unsigned int Advance; // edx
+  unsigned int Delta; // eax
+  int TextPos; // eax
+  __int64 v12; // rbx
+  Scaleform::Render::Text::ImageDesc *pObject; // rcx
+  Scaleform::Render::Text::FontHandle *v14; // rcx
+  Scaleform::Render::Text::LineBuffer::GlyphIterator result; // [rsp+30h] [rbp-B8h] BYREF
 
   if ( lineIndex >= LODWORD(this->mLineBuffer.Lines.Data.Size) )
     return -1i64;
   v4 = this->mLineBuffer.Lines.Data.Data[lineIndex];
-  v5 = v4->MemSize;
-  v6 = (float)(relativeOffsetX - (float)this->mLineBuffer.Lines.Data.Data[lineIndex]->Data32.OffsetX)
-     + (float)(signed int)this->mLineBuffer.Geom.HScrollOffset;
-  v7 = 0;
+  v5 = (float)(relativeOffsetX - (float)v4->Data32.OffsetX) + (float)(int)this->mLineBuffer.Geom.HScrollOffset;
+  v6 = 0;
   Scaleform::Render::Text::LineBuffer::Line::Begin(v4, &result);
-  v8 = 0;
+  v7 = 0;
   while ( result.pGlyphs && result.pGlyphs < result.pEndGlyphs )
   {
-    v9 = result.pGlyphs->Flags;
-    v10 = result.pGlyphs->Advance;
-    if ( ((unsigned __int8)v9 >> 6) & 1 )
-      v10 = -v10;
-    if ( (float)(signed int)(v10 + v7) > v6 )
+    Flags = result.pGlyphs->Flags;
+    Advance = result.pGlyphs->Advance;
+    if ( (Flags & 0x40) != 0 )
+      Advance = -Advance;
+    if ( (float)(int)(Advance + v6) > v5 )
     {
-      if ( (float)(v6 - (float)v7) > (float)(v10 >> 1) )
-        v8 += (unsigned int)result.pGlyphs->LenAndFontSize >> 12;
+      if ( (float)(v5 - (float)v6) > (float)(Advance >> 1) )
+        v7 += result.pGlyphs->LenAndFontSize >> 12;
       break;
     }
-    v7 += v10;
-    if ( !(v9 & 0x100) )
-      v8 += (unsigned int)result.pGlyphs->LenAndFontSize >> 12;
-    v11 = result.Delta;
+    v6 += Advance;
+    if ( (Flags & 0x100) == 0 )
+      v7 += result.pGlyphs->LenAndFontSize >> 12;
+    Delta = result.Delta;
     if ( !result.Delta )
     {
-      v11 = (unsigned int)result.pGlyphs->LenAndFontSize >> 12;
-      result.Delta = (unsigned int)result.pGlyphs->LenAndFontSize >> 12;
+      Delta = result.pGlyphs->LenAndFontSize >> 12;
+      result.Delta = Delta;
     }
     ++result.pGlyphs;
-    if ( result.pGlyphs->LenAndFontSize & 0xF000
-      && v11
+    if ( (result.pGlyphs->LenAndFontSize & 0xF000) != 0
+      && Delta
       && result.HighlighterIter.CurAdjStartPos < result.HighlighterIter.NumGlyphs )
     {
-      if ( v11 )
-      {
-        result.HighlighterIter.CurAdjStartPos += v11;
-        Scaleform::Render::Text::HighlighterPosIterator::InitCurDesc(&result.HighlighterIter);
-      }
+      result.HighlighterIter.CurAdjStartPos += Delta;
+      Scaleform::Render::Text::HighlighterPosIterator::InitCurDesc(&result.HighlighterIter);
       result.Delta = 0;
     }
     Scaleform::Render::Text::LineBuffer::GlyphIterator::UpdateDesc(&result);
   }
-  v12 = v4->Data32.TextPos;
+  TextPos = v4->Data32.TextPos;
   if ( (v4->MemSize & 0x80000000) != 0 )
   {
-    v12 &= 0xFFFFFFu;
-    if ( v12 == 0xFFFFFF )
-      v12 = -1;
+    TextPos &= 0xFFFFFFu;
+    if ( TextPos == 0xFFFFFF )
+      TextPos = -1;
   }
-  v13 = (unsigned int)(v12 + v8);
-  v14 = result.pImage.pObject;
+  v12 = (unsigned int)(TextPos + v7);
+  pObject = result.pImage.pObject;
   if ( result.pImage.pObject )
   {
     --result.pImage.pObject->RefCount;
-    if ( !v14->RefCount )
-      v14->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v14->vfptr, 1u);
+    if ( !pObject->RefCount )
+      pObject->vfptr->__vecDelDtor(pObject, 1u);
   }
-  v15 = result.pFontHandle.pObject;
-  if ( result.pFontHandle.pObject && !_InterlockedDecrement(&result.pFontHandle.pObject->RefCount) && v15 )
-    v15->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v15->vfptr, 1u);
-  return v13;
+  v14 = result.pFontHandle.pObject;
+  if ( result.pFontHandle.pObject && !_InterlockedDecrement(&result.pFontHandle.pObject->RefCount) && v14 )
+    v14->vfptr->__vecDelDtor(v14, 1u);
+  return v12;
 }
 
 // File Line: 2983
 // RVA: 0x981B30
-signed __int64 __fastcall Scaleform::Render::Text::DocView::GetCursorPosAtPoint(Scaleform::Render::Text::DocView *this, float x, float y)
+__int64 __fastcall Scaleform::Render::Text::DocView::GetCursorPosAtPoint(
+        Scaleform::Render::Text::DocView *this,
+        float x,
+        float y)
 {
-  Scaleform::Render::Text::DocView *v3; // rbx
-  unsigned __int64 v4; // rax
-  Scaleform::Render::Text::LineBuffer *v5; // rdi
-  int v6; // ecx
-  float v7; // xmm7_4
-  float v8; // xmm6_4
-  Scaleform::Render::Text::LineBuffer::Line *v9; // rcx
-  unsigned int v10; // et1
-  Scaleform::Render::Text::LineBuffer::Line *v11; // rdx
-  unsigned int v12; // et1
-  Scaleform::Render::Text::LineBuffer *v13; // rdx
-  unsigned int v14; // ecx
-  signed __int64 v15; // rax
-  Scaleform::Render::Text::LineBuffer::Iterator result; // [rsp+20h] [rbp-68h]
-  __int64 v17; // [rsp+50h] [rbp-38h]
-  __int64 v18; // [rsp+58h] [rbp-30h]
+  unsigned __int64 FirstVisibleLinePos; // rax
+  int v5; // ecx
+  float v6; // xmm7_4
+  float v7; // xmm6_4
+  Scaleform::Render::Text::LineBuffer *pLineBuffer; // rdx
+  int CurrentPos; // ecx
+  Scaleform::Render::Text::LineBuffer::Iterator result; // [rsp+20h] [rbp-68h] BYREF
+  __int64 v12; // [rsp+50h] [rbp-38h]
+  __int64 v13; // [rsp+58h] [rbp-30h]
 
-  v3 = this;
-  if ( this->RTFlags & 3 )
+  if ( (this->RTFlags & 3) != 0 )
   {
     Scaleform::Render::Text::DocView::Format(this);
-    v3->RTFlags &= 0xFCu;
+    this->RTFlags &= 0xFCu;
   }
-  v4 = v3->mLineBuffer.Geom.FirstVisibleLinePos;
-  v5 = &v3->mLineBuffer;
-  v6 = 0;
-  v7 = x - (float)(v3->mLineBuffer.Geom.VisibleRect.x1 - v3->ViewRect.x1);
-  v8 = y - (float)(v3->mLineBuffer.Geom.VisibleRect.y1 - v3->ViewRect.y1);
-  if ( (_DWORD)v4
-    && v3 != (Scaleform::Render::Text::DocView *)-80i64
-    && v4 < v3->mLineBuffer.Lines.Data.Size
-    && (v4 & 0x80000000) == 0i64
-    && v3 != (Scaleform::Render::Text::DocView *)-80i64
-    && v3->mLineBuffer.Lines.Data.Size > 0 )
+  FirstVisibleLinePos = this->mLineBuffer.Geom.FirstVisibleLinePos;
+  v5 = 0;
+  v6 = x - (float)(this->mLineBuffer.Geom.VisibleRect.x1 - this->ViewRect.x1);
+  v7 = y - (float)(this->mLineBuffer.Geom.VisibleRect.y1 - this->ViewRect.y1);
+  if ( (_DWORD)FirstVisibleLinePos
+    && this != (Scaleform::Render::Text::DocView *)-80i64
+    && FirstVisibleLinePos < this->mLineBuffer.Lines.Data.Size
+    && (FirstVisibleLinePos & 0x80000000) == 0i64
+    && this->mLineBuffer.Lines.Data.Size )
   {
-    v9 = v5->Lines.Data.Data[(unsigned int)v4];
-    v10 = v9->MemSize;
-    v11 = *v5->Lines.Data.Data;
-    v12 = v11->MemSize;
-    v6 = v9->Data32.OffsetY - v11->Data32.OffsetY;
+    v5 = this->mLineBuffer.Lines.Data.Data[(unsigned int)FirstVisibleLinePos]->Data32.OffsetY
+       - (*this->mLineBuffer.Lines.Data.Data)->Data32.OffsetY;
   }
-  Scaleform::Render::Text::LineBuffer::FindLineAtYOffset(&v3->mLineBuffer, &result, (float)v6 + v8);
-  v13 = result.pLineBuffer;
+  Scaleform::Render::Text::LineBuffer::FindLineAtYOffset(&this->mLineBuffer, &result, (float)v5 + v7);
+  pLineBuffer = result.pLineBuffer;
   if ( !result.pLineBuffer
-    || (v14 = result.CurrentPos, result.CurrentPos >= result.pLineBuffer->Lines.Data.Size)
+    || (CurrentPos = result.CurrentPos, result.CurrentPos >= result.pLineBuffer->Lines.Data.Size)
     || (result.CurrentPos & 0x80000000) != 0 )
   {
-    v13 = &v3->mLineBuffer;
+    pLineBuffer = &this->mLineBuffer;
     result.pHighlight = 0i64;
-    if ( v8 > 0.0 )
-      v17 = (unsigned int)(LODWORD(v3->mLineBuffer.Lines.Data.Size) - 1);
+    if ( v7 > 0.0 )
+      v12 = (unsigned int)(LODWORD(this->mLineBuffer.Lines.Data.Size) - 1);
     else
-      v17 = 0i64;
-    v14 = v17;
-    LOBYTE(v18) = ((unsigned __int8)v3->mLineBuffer.Geom.Flags >> 2) & 1;
-    *(_QWORD *)&result.StaticText = v18;
+      v12 = 0i64;
+    CurrentPos = v12;
+    LOBYTE(v13) = (this->mLineBuffer.Geom.Flags & 4) != 0;
+    *(_QWORD *)&result.StaticText = v13;
   }
-  if ( v13 && v14 < v13->Lines.Data.Size && (v14 & 0x80000000) == 0 )
-    v15 = Scaleform::Render::Text::DocView::GetCursorPosInLineByOffset(v3, v14, v7);
+  if ( pLineBuffer && (unsigned int)CurrentPos < pLineBuffer->Lines.Data.Size && CurrentPos >= 0 )
+    return Scaleform::Render::Text::DocView::GetCursorPosInLineByOffset(this, CurrentPos, v6);
   else
-    v15 = -(signed __int64)(LODWORD(v3->mLineBuffer.Lines.Data.Size) != 0);
-  return v15;
+    return -(__int64)(LODWORD(this->mLineBuffer.Lines.Data.Size) != 0);
 }
 
 // File Line: 3005
 // RVA: 0x997EE0
-__int64 __fastcall Scaleform::Render::Text::DocView::IsUrlAtPoint(Scaleform::Render::Text::DocView *this, float x, float y, Scaleform::Range *purlPosRange)
+__int64 __fastcall Scaleform::Render::Text::DocView::IsUrlAtPoint(
+        Scaleform::Render::Text::DocView *this,
+        float x,
+        float y,
+        Scaleform::Range *purlPosRange)
 {
-  Scaleform::Range *v4; // rbx
-  Scaleform::Render::Text::DocView *v5; // rsi
   float v6; // xmm6_4
-  Scaleform::Render::Text::LineBuffer *v7; // rcx
+  Scaleform::Render::Text::LineBuffer *p_mLineBuffer; // rcx
   int v8; // edx
-  unsigned __int64 v9; // rax
-  Scaleform::Render::Text::LineBuffer::Line *v10; // rdx
-  unsigned int v11; // et1
-  Scaleform::Render::Text::LineBuffer::Line *v12; // r8
-  unsigned int v13; // et1
-  unsigned __int8 v14; // r12
-  Scaleform::Render::Text::LineBuffer::Line *v15; // r14
-  float v16; // xmm1_4
-  signed int v17; // eax
-  float v18; // xmm6_4
-  signed int v19; // edi
-  int v20; // er15
-  signed __int64 v21; // r8
-  int v22; // eax
-  unsigned int v23; // eax
-  unsigned int v24; // edx
-  signed int v25; // eax
-  unsigned __int64 v26; // r14
-  Scaleform::Render::Text::Paragraph *v27; // rsi
-  Scaleform::Render::Text::TextFormat *v28; // rax
-  unsigned __int64 v29; // rdi
-  Scaleform::Render::Text::TextFormat *v30; // rcx
-  unsigned __int8 *v31; // rax
-  unsigned __int64 v32; // r8
-  int v33; // ecx
-  int v34; // edx
-  Scaleform::RangeData<Scaleform::Ptr<Scaleform::Render::Text::TextFormat> > *v35; // r11
-  unsigned __int64 v36; // rax
-  Scaleform::Render::Text::TextFormat *v37; // rbx
-  bool v38; // zf
-  Scaleform::Render::Text::ImageDesc *v39; // rcx
-  Scaleform::Render::Text::FontHandle *v40; // rcx
-  Scaleform::Render::Text::Paragraph::FormatRunIterator v42; // [rsp+20h] [rbp-B8h]
-  Scaleform::Render::Text::LineBuffer::Iterator result; // [rsp+68h] [rbp-70h]
-  Scaleform::Render::Text::LineBuffer::GlyphIterator v44; // [rsp+88h] [rbp-50h]
-  Scaleform::Render::Text::TextFormat v45; // [rsp+128h] [rbp+50h]
-  Scaleform::Render::Text::TextFormat v46; // [rsp+178h] [rbp+A0h]
-  unsigned __int64 pindexInParagraph; // [rsp+218h] [rbp+140h]
+  unsigned __int64 FirstVisibleLinePos; // rax
+  unsigned __int8 v10; // r12
+  Scaleform::Render::Text::LineBuffer::Line *v11; // r14
+  float OffsetX; // xmm1_4
+  int v13; // eax
+  float v14; // xmm6_4
+  int v15; // edi
+  int v16; // r15d
+  __int64 v17; // r8
+  int Advance; // eax
+  unsigned int Delta; // edx
+  int TextPos; // eax
+  unsigned __int64 v21; // r14
+  Scaleform::Render::Text::Paragraph *v22; // rsi
+  Scaleform::Render::Text::TextFormat *TextFormat; // rax
+  unsigned __int64 v24; // rdi
+  Scaleform::Render::Text::TextFormat *pObject; // rcx
+  unsigned __int8 *v26; // rax
+  unsigned __int64 v27; // r8
+  int v28; // ecx
+  int v29; // edx
+  unsigned __int64 Size; // rax
+  Scaleform::Render::Text::TextFormat *v31; // rbx
+  Scaleform::Render::Text::ImageDesc *v33; // rcx
+  Scaleform::Render::Text::FontHandle *v34; // rcx
+  Scaleform::Render::Text::Paragraph::FormatRunIterator v36; // [rsp+20h] [rbp-B8h] BYREF
+  Scaleform::Render::Text::LineBuffer::Iterator result; // [rsp+68h] [rbp-70h] BYREF
+  Scaleform::Render::Text::LineBuffer::GlyphIterator v38; // [rsp+88h] [rbp-50h] BYREF
+  Scaleform::Render::Text::TextFormat v39; // [rsp+128h] [rbp+50h] BYREF
+  Scaleform::Render::Text::TextFormat v40; // [rsp+178h] [rbp+A0h] BYREF
+  unsigned __int64 pindexInParagraph[3]; // [rsp+218h] [rbp+140h] BYREF
 
-  v42.CurTextIndex = -2i64;
-  v4 = purlPosRange;
-  v5 = this;
-  if ( this->RTFlags & 3 )
+  v36.CurTextIndex = -2i64;
+  if ( (this->RTFlags & 3) != 0 )
   {
     Scaleform::Render::Text::DocView::Format(this);
-    v5->RTFlags &= 0xFCu;
+    this->RTFlags &= 0xFCu;
   }
-  v6 = x - (float)(v5->mLineBuffer.Geom.VisibleRect.x1 - v5->ViewRect.x1);
-  v7 = &v5->mLineBuffer;
+  v6 = x - (float)(this->mLineBuffer.Geom.VisibleRect.x1 - this->ViewRect.x1);
+  p_mLineBuffer = &this->mLineBuffer;
   v8 = 0;
-  v9 = v5->mLineBuffer.Geom.FirstVisibleLinePos;
-  if ( (_DWORD)v9
-    && v5 != (Scaleform::Render::Text::DocView *)-80i64
-    && v9 < v5->mLineBuffer.Lines.Data.Size
-    && (v9 & 0x80000000) == 0i64
-    && v5 != (Scaleform::Render::Text::DocView *)-80i64
-    && v5->mLineBuffer.Lines.Data.Size > 0 )
+  FirstVisibleLinePos = this->mLineBuffer.Geom.FirstVisibleLinePos;
+  if ( (_DWORD)FirstVisibleLinePos
+    && this != (Scaleform::Render::Text::DocView *)-80i64
+    && FirstVisibleLinePos < this->mLineBuffer.Lines.Data.Size
+    && (FirstVisibleLinePos & 0x80000000) == 0i64
+    && this->mLineBuffer.Lines.Data.Size )
   {
-    v10 = v7->Lines.Data.Data[(unsigned int)v9];
-    v11 = v10->MemSize;
-    v12 = *v7->Lines.Data.Data;
-    v13 = v12->MemSize;
-    v8 = v10->Data32.OffsetY - v12->Data32.OffsetY;
+    v8 = p_mLineBuffer->Lines.Data.Data[(unsigned int)FirstVisibleLinePos]->Data32.OffsetY
+       - (*p_mLineBuffer->Lines.Data.Data)->Data32.OffsetY;
   }
   Scaleform::Render::Text::LineBuffer::FindLineAtYOffset(
-    v7,
+    p_mLineBuffer,
     &result,
-    (float)v8 + (float)(y - (float)(v5->mLineBuffer.Geom.VisibleRect.y1 - v5->ViewRect.y1)));
-  v14 = 0;
+    (float)v8 + (float)(y - (float)(this->mLineBuffer.Geom.VisibleRect.y1 - this->ViewRect.y1)));
+  v10 = 0;
   if ( result.pLineBuffer )
   {
     if ( result.CurrentPos < result.pLineBuffer->Lines.Data.Size && (result.CurrentPos & 0x80000000) == 0 )
     {
-      v15 = result.pLineBuffer->Lines.Data.Data[result.CurrentPos];
-      v16 = (float)result.pLineBuffer->Lines.Data.Data[result.CurrentPos]->Data32.OffsetX;
-      if ( v6 >= v16 )
+      v11 = result.pLineBuffer->Lines.Data.Data[result.CurrentPos];
+      OffsetX = (float)v11->Data32.OffsetX;
+      if ( v6 >= OffsetX )
       {
-        v17 = (v15->MemSize & 0x80000000) == 0 ? v15->Data32.Width : v15->Data8.Width;
-        if ( v6 <= (float)((float)v17 + v16) )
+        v13 = (v11->MemSize & 0x80000000) == 0 ? v11->Data32.Width : v11->Data8.Width;
+        if ( v6 <= (float)((float)v13 + OffsetX) )
         {
-          v18 = (float)(v6 - v16) + (float)(signed int)v5->mLineBuffer.Geom.HScrollOffset;
-          v19 = 0;
-          Scaleform::Render::Text::LineBuffer::Line::Begin(v15, &v44);
-          v20 = 0;
+          v14 = (float)(v6 - OffsetX) + (float)(int)this->mLineBuffer.Geom.HScrollOffset;
+          v15 = 0;
+          Scaleform::Render::Text::LineBuffer::Line::Begin(v11, &v38);
+          v16 = 0;
           while ( 1 )
           {
-            v21 = 61440i64;
-            if ( !v44.pGlyphs || v44.pGlyphs >= v44.pEndGlyphs )
-              goto LABEL_67;
-            v22 = v44.pGlyphs->Advance;
-            if ( (LOBYTE(v44.pGlyphs->Flags) >> 6) & 1 )
-              v22 = -v22;
-            v19 += v22;
-            if ( (float)v19 > v18 )
+            v17 = 61440i64;
+            if ( !v38.pGlyphs || v38.pGlyphs >= v38.pEndGlyphs )
+              goto LABEL_64;
+            Advance = v38.pGlyphs->Advance;
+            if ( (v38.pGlyphs->Flags & 0x40) != 0 )
+              Advance = -Advance;
+            v15 += Advance;
+            if ( (float)v15 > v14 )
               break;
-            v23 = (unsigned int)v44.pGlyphs->LenAndFontSize >> 12;
-            v20 += v23;
-            v24 = v44.Delta;
-            if ( !v44.Delta )
-              v24 = (unsigned int)v44.pGlyphs->LenAndFontSize >> 12;
-            v44.Delta = v24;
-            ++v44.pGlyphs;
-            if ( v44.pGlyphs->LenAndFontSize & 0xF000
-              && v24
-              && v44.HighlighterIter.CurAdjStartPos < v44.HighlighterIter.NumGlyphs )
+            v16 += v38.pGlyphs->LenAndFontSize >> 12;
+            Delta = v38.Delta;
+            if ( !v38.Delta )
+              Delta = v38.pGlyphs->LenAndFontSize >> 12;
+            v38.Delta = Delta;
+            ++v38.pGlyphs;
+            if ( (v38.pGlyphs->LenAndFontSize & 0xF000) != 0
+              && Delta
+              && v38.HighlighterIter.CurAdjStartPos < v38.HighlighterIter.NumGlyphs )
             {
-              if ( v24 )
-              {
-                v44.HighlighterIter.CurAdjStartPos += v24;
-                Scaleform::Render::Text::HighlighterPosIterator::InitCurDesc(&v44.HighlighterIter);
-              }
-              v44.Delta = 0;
+              v38.HighlighterIter.CurAdjStartPos += Delta;
+              Scaleform::Render::Text::HighlighterPosIterator::InitCurDesc(&v38.HighlighterIter);
+              v38.Delta = 0;
             }
-            Scaleform::Render::Text::LineBuffer::GlyphIterator::UpdateDesc(&v44);
+            Scaleform::Render::Text::LineBuffer::GlyphIterator::UpdateDesc(&v38);
           }
-          v14 = LOBYTE(v44.pGlyphs->Flags) >> 7;
-          if ( SLOBYTE(v44.pGlyphs->Flags) < 0 && v4 )
+          v10 = LOBYTE(v38.pGlyphs->Flags) >> 7;
+          if ( SLOBYTE(v38.pGlyphs->Flags) < 0 && purlPosRange )
           {
-            v4->Index = 0i64;
-            v4->Length = 0i64;
-            v25 = v15->Data32.TextPos;
-            if ( (v15->MemSize & 0x80000000) != 0 )
+            purlPosRange->Index = 0i64;
+            purlPosRange->Length = 0i64;
+            TextPos = v11->Data32.TextPos;
+            if ( (v11->MemSize & 0x80000000) != 0 )
             {
-              v25 &= 0xFFFFFFu;
-              if ( v25 == 0xFFFFFF )
-                v25 = -1;
+              TextPos &= 0xFFFFFFu;
+              if ( TextPos == 0xFFFFFF )
+                TextPos = -1;
             }
-            v26 = (unsigned int)(v20 + v25);
-            pindexInParagraph = 0i64;
+            v21 = (unsigned int)(v16 + TextPos);
+            pindexInParagraph[0] = 0i64;
             Scaleform::Render::Text::StyledText::GetParagraphByIndex(
-              (Scaleform::Render::Text::StyledText *)&v5->pDocument.pObject->vfptr,
+              this->pDocument.pObject,
               (Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator *)&result.pHighlight,
-              v26,
-              &pindexInParagraph);
+              v21,
+              pindexInParagraph);
             if ( result.pHighlight )
             {
-              if ( *(_QWORD *)&result.CurrentPos >= 0i64
-                && *(_QWORD *)&result.CurrentPos < (signed __int64)SLODWORD(result.pHighlight->Highlighters.Data.Size) )
+              if ( *(__int64 *)&result.CurrentPos >= 0
+                && *(__int64 *)&result.CurrentPos < SLODWORD(result.pHighlight->Highlighters.Data.Size) )
               {
-                v27 = (Scaleform::Render::Text::Paragraph *)*(&result.pHighlight->Highlighters.Data.Data->StartPos
+                v22 = (Scaleform::Render::Text::Paragraph *)*(&result.pHighlight->Highlighters.Data.Data->StartPos
                                                             + *(_QWORD *)&result.CurrentPos);
-                v28 = Scaleform::Render::Text::Paragraph::GetTextFormat(
-                        *((Scaleform::Render::Text::Paragraph **)&result.pHighlight->Highlighters.Data.Data->StartPos
-                        + *(_QWORD *)&result.CurrentPos),
-                        &v46,
-                        pindexInParagraph,
-                        pindexInParagraph + 1);
-                Scaleform::Render::Text::TextFormat::TextFormat(&v45, v28, 0i64);
-                Scaleform::Render::Text::TextFormat::~TextFormat(&v46);
-                Scaleform::Render::Text::Paragraph::GetIterator(v27, &v42);
-                if ( v42.CurTextIndex < v42.pText->Size )
+                TextFormat = Scaleform::Render::Text::Paragraph::GetTextFormat(
+                               v22,
+                               &v40,
+                               pindexInParagraph[0],
+                               pindexInParagraph[0] + 1);
+                Scaleform::Render::Text::TextFormat::TextFormat(&v39, TextFormat, 0i64);
+                Scaleform::Render::Text::TextFormat::~TextFormat(&v40);
+                Scaleform::Render::Text::Paragraph::GetIterator(v22, &v36);
+                if ( v36.CurTextIndex < v36.pText->Size )
                 {
                   do
                   {
-                    v29 = Scaleform::Render::Text::Paragraph::FormatRunIterator::operator*(&v42)->PlaceHolder.Index
-                        + v27->StartIndex;
-                    v30 = Scaleform::Render::Text::Paragraph::FormatRunIterator::operator*(&v42)->PlaceHolder.pFormat.pObject;
-                    if ( !(v30->PresentMask & 0x100) || !Scaleform::String::GetLength((Scaleform::String *)&v30->Url.0) )
-                      goto LABEL_77;
-                    v31 = (unsigned __int8 *)((Scaleform::Render::Text::Paragraph::FormatRunIterator::operator*(&v42)->PlaceHolder.pFormat.pObject->Url.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64)
+                    v24 = Scaleform::Render::Text::Paragraph::FormatRunIterator::operator*(&v36)->PlaceHolder.Index
+                        + v22->StartIndex;
+                    pObject = Scaleform::Render::Text::Paragraph::FormatRunIterator::operator*(&v36)->PlaceHolder.pFormat.pObject;
+                    if ( (pObject->PresentMask & 0x100) == 0 || !Scaleform::String::GetLength(&pObject->Url) )
+                      goto LABEL_49;
+                    v26 = (unsigned __int8 *)((Scaleform::Render::Text::Paragraph::FormatRunIterator::operator*(&v36)->PlaceHolder.pFormat.pObject->Url.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64)
                                             + 12);
-                    v32 = (v45.Url.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12 - (_QWORD)v31;
+                    v27 = (v39.Url.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12 - (_QWORD)v26;
                     do
                     {
-                      v33 = v31[v32];
-                      v34 = *v31 - v33;
-                      if ( *v31 != v33 )
+                      v28 = v26[v27];
+                      v29 = *v26 - v28;
+                      if ( v29 )
                         break;
-                      ++v31;
+                      ++v26;
                     }
-                    while ( v33 );
-                    if ( !v34 )
+                    while ( v28 );
+                    if ( !v29 )
                     {
-                      if ( v4->Index + v4->Length >= v29 )
+                      if ( purlPosRange->Index + purlPosRange->Length >= v24 )
                       {
-                        v4->Length += Scaleform::Render::Text::Paragraph::FormatRunIterator::operator*(&v42)->PlaceHolder.Length;
+                        purlPosRange->Length += Scaleform::Render::Text::Paragraph::FormatRunIterator::operator*(&v36)->PlaceHolder.Length;
                       }
                       else
                       {
-                        if ( v29 > v26 )
+                        if ( v24 > v21 )
                           break;
-                        v4->Index = v29;
-                        v4->Length = Scaleform::Render::Text::Paragraph::FormatRunIterator::operator*(&v42)->PlaceHolder.Length;
+                        purlPosRange->Index = v24;
+                        purlPosRange->Length = Scaleform::Render::Text::Paragraph::FormatRunIterator::operator*(&v36)->PlaceHolder.Length;
                       }
                     }
                     else
                     {
-LABEL_77:
-                      if ( v29 > v26 )
+LABEL_49:
+                      if ( v24 > v21 )
                         break;
-                      v4->Index = 0i64;
-                      v4->Length = 0i64;
+                      purlPosRange->Index = 0i64;
+                      purlPosRange->Length = 0i64;
                     }
-                    if ( v42.FormatIterator.Index < 0
-                      || v42.FormatIterator.Index >= v42.FormatIterator.pArray->Ranges.Data.Size )
+                    if ( v36.FormatIterator.Index < 0
+                      || v36.FormatIterator.Index >= v36.FormatIterator.pArray->Ranges.Data.Size )
                     {
-                      v36 = v42.pText->Size;
+                      Size = v36.pText->Size;
                     }
                     else
                     {
-                      v35 = v42.FormatIterator.pArray->Ranges.Data.Data;
-                      if ( v42.CurTextIndex >= v42.FormatIterator.pArray->Ranges.Data.Data[v42.FormatIterator.Index].Index )
+                      if ( v36.CurTextIndex >= v36.FormatIterator.pArray->Ranges.Data.Data[v36.FormatIterator.Index].Index )
                       {
-                        v36 = v35[v42.FormatIterator.Index].Length + v42.CurTextIndex;
-                        v42.CurTextIndex += v35[v42.FormatIterator.Index].Length;
-                        if ( v42.FormatIterator.Index < (signed __int64)v42.FormatIterator.pArray->Ranges.Data.Size )
-                          ++v42.FormatIterator.Index;
+                        Size = v36.FormatIterator.pArray->Ranges.Data.Data[v36.FormatIterator.Index].Length
+                             + v36.CurTextIndex;
+                        v36.CurTextIndex = Size;
+                        if ( v36.FormatIterator.Index < (signed __int64)v36.FormatIterator.pArray->Ranges.Data.Size )
+                          ++v36.FormatIterator.Index;
                         continue;
                       }
-                      v36 = v42.FormatIterator.pArray->Ranges.Data.Data[v42.FormatIterator.Index].Index;
+                      Size = v36.FormatIterator.pArray->Ranges.Data.Data[v36.FormatIterator.Index].Index;
                     }
-                    v42.CurTextIndex = v36;
+                    v36.CurTextIndex = Size;
                   }
-                  while ( v36 < v42.pText->Size );
+                  while ( Size < v36.pText->Size );
                 }
-                v42.pText = (Scaleform::Render::Text::Paragraph::TextBuffer *)&v42;
-                v37 = v42.PlaceHolder.pFormat.pObject;
-                if ( v42.PlaceHolder.pFormat.pObject )
+                v36.pText = (Scaleform::Render::Text::Paragraph::TextBuffer *)&v36;
+                v31 = v36.PlaceHolder.pFormat.pObject;
+                if ( v36.PlaceHolder.pFormat.pObject )
                 {
-                  v38 = v42.PlaceHolder.pFormat.pObject->RefCount-- == 1;
-                  if ( v38 )
+                  if ( v36.PlaceHolder.pFormat.pObject->RefCount-- == 1 )
                   {
-                    Scaleform::Render::Text::TextFormat::~TextFormat(v37);
-                    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v37);
+                    Scaleform::Render::Text::TextFormat::~TextFormat(v31);
+                    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v31);
                   }
                 }
-                Scaleform::Render::Text::TextFormat::~TextFormat(&v45);
+                Scaleform::Render::Text::TextFormat::~TextFormat(&v39);
               }
             }
           }
-LABEL_67:
-          v39 = v44.pImage.pObject;
-          if ( v44.pImage.pObject )
+LABEL_64:
+          v33 = v38.pImage.pObject;
+          if ( v38.pImage.pObject )
           {
-            --v44.pImage.pObject->RefCount;
-            if ( !v39->RefCount )
-              ((void (__fastcall *)(Scaleform::Render::Text::ImageDesc *, signed __int64, signed __int64))v39->vfptr->__vecDelDtor)(
-                v39,
+            --v38.pImage.pObject->RefCount;
+            if ( !v33->RefCount )
+              ((void (__fastcall *)(Scaleform::Render::Text::ImageDesc *, __int64, __int64))v33->vfptr->__vecDelDtor)(
+                v33,
                 1i64,
-                v21);
+                v17);
           }
-          v40 = v44.pFontHandle.pObject;
-          if ( v44.pFontHandle.pObject && !_InterlockedDecrement(&v44.pFontHandle.pObject->RefCount) && v40 )
-            v40->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v40->vfptr, 1u);
+          v34 = v38.pFontHandle.pObject;
+          if ( v38.pFontHandle.pObject && !_InterlockedDecrement(&v38.pFontHandle.pObject->RefCount) && v34 )
+            v34->vfptr->__vecDelDtor(v34, 1u);
         }
       }
     }
   }
-  return v14;
+  return v10;
 }
 
 // File Line: 3087
@@ -5990,307 +5763,285 @@ void __fastcall Scaleform::Render::Text::DocView::SetFontScaleFactor(Scaleform::
 {
   if ( f == 1.0 )
   {
-    this->RTFlags &= 0xFBu;
+    this->RTFlags &= ~4u;
     this->FontScaleFactor = 20;
   }
   else
   {
     this->RTFlags |= 4u;
-    this->FontScaleFactor = (signed int)(float)(f * 20.0);
+    this->FontScaleFactor = (int)(float)(f * 20.0);
   }
 }
 
 // File Line: 3102
 // RVA: 0x988680
-signed __int64 __fastcall Scaleform::Render::Text::DocView::GetLineIndexAtPoint(Scaleform::Render::Text::DocView *this, float x, float y)
+__int64 __fastcall Scaleform::Render::Text::DocView::GetLineIndexAtPoint(
+        Scaleform::Render::Text::DocView *this,
+        float x,
+        float y)
 {
-  Scaleform::Render::Text::DocView *v3; // rbx
-  unsigned __int64 v4; // rax
-  Scaleform::Render::Text::LineBuffer *v5; // rcx
+  unsigned __int64 FirstVisibleLinePos; // rax
+  Scaleform::Render::Text::LineBuffer *p_mLineBuffer; // rcx
   int v6; // edx
-  Scaleform::Render::Text::LineBuffer::Line *v7; // rdx
-  unsigned int v8; // et1
-  Scaleform::Render::Text::LineBuffer::Line *v9; // r8
-  unsigned int v10; // et1
-  signed __int64 v11; // rax
-  Scaleform::Render::Text::LineBuffer::Iterator result; // [rsp+20h] [rbp-38h]
+  __int64 CurrentPos; // rax
+  Scaleform::Render::Text::LineBuffer::Iterator result; // [rsp+20h] [rbp-38h] BYREF
 
-  v3 = this;
-  if ( this->RTFlags & 3 )
+  if ( (this->RTFlags & 3) != 0 )
   {
     Scaleform::Render::Text::DocView::Format(this);
-    v3->RTFlags &= 0xFCu;
+    this->RTFlags &= 0xFCu;
   }
-  v4 = v3->mLineBuffer.Geom.FirstVisibleLinePos;
-  v5 = &v3->mLineBuffer;
+  FirstVisibleLinePos = this->mLineBuffer.Geom.FirstVisibleLinePos;
+  p_mLineBuffer = &this->mLineBuffer;
   v6 = 0;
-  if ( (_DWORD)v4
-    && v3 != (Scaleform::Render::Text::DocView *)-80i64
-    && v4 < v3->mLineBuffer.Lines.Data.Size
-    && (v4 & 0x80000000) == 0i64
-    && v3 != (Scaleform::Render::Text::DocView *)-80i64
-    && v3->mLineBuffer.Lines.Data.Size > 0 )
+  if ( (_DWORD)FirstVisibleLinePos
+    && this != (Scaleform::Render::Text::DocView *)-80i64
+    && FirstVisibleLinePos < this->mLineBuffer.Lines.Data.Size
+    && (FirstVisibleLinePos & 0x80000000) == 0i64
+    && this->mLineBuffer.Lines.Data.Size )
   {
-    v7 = v5->Lines.Data.Data[(unsigned int)v4];
-    v8 = v7->MemSize;
-    v9 = *v5->Lines.Data.Data;
-    v10 = v9->MemSize;
-    v6 = v7->Data32.OffsetY - v9->Data32.OffsetY;
+    v6 = p_mLineBuffer->Lines.Data.Data[(unsigned int)FirstVisibleLinePos]->Data32.OffsetY
+       - (*p_mLineBuffer->Lines.Data.Data)->Data32.OffsetY;
   }
-  Scaleform::Render::Text::LineBuffer::FindLineAtYOffset(v5, &result, (float)v6 + y);
-  if ( !result.pLineBuffer
-    || (v11 = result.CurrentPos, result.CurrentPos >= result.pLineBuffer->Lines.Data.Size)
-    || (signed int)v11 < 0 )
-  {
-    v11 = 0xFFFFFFFFi64;
-  }
-  return v11;
+  Scaleform::Render::Text::LineBuffer::FindLineAtYOffset(p_mLineBuffer, &result, (float)v6 + y);
+  if ( !result.pLineBuffer )
+    return 0xFFFFFFFFi64;
+  CurrentPos = result.CurrentPos;
+  if ( result.CurrentPos >= result.pLineBuffer->Lines.Data.Size || (result.CurrentPos & 0x80000000) != 0 )
+    return 0xFFFFFFFFi64;
+  return CurrentPos;
 }
 
 // File Line: 3115
 // RVA: 0x988740
-signed __int64 __fastcall Scaleform::Render::Text::DocView::GetLineIndexOfChar(Scaleform::Render::Text::DocView *this, unsigned __int64 indexOfChar)
+__int64 __fastcall Scaleform::Render::Text::DocView::GetLineIndexOfChar(
+        Scaleform::Render::Text::DocView *this,
+        unsigned __int64 indexOfChar)
 {
-  unsigned __int64 v2; // rdi
-  Scaleform::Render::Text::DocView *v3; // rbx
-  signed __int64 v4; // rax
-  Scaleform::Render::Text::LineBuffer::Iterator result; // [rsp+20h] [rbp-28h]
+  __int64 CurrentPos; // rax
+  Scaleform::Render::Text::LineBuffer::Iterator result; // [rsp+20h] [rbp-28h] BYREF
 
-  v2 = indexOfChar;
-  v3 = this;
-  if ( this->RTFlags & 3 )
+  if ( (this->RTFlags & 3) != 0 )
   {
     Scaleform::Render::Text::DocView::Format(this);
-    v3->RTFlags &= 0xFCu;
+    this->RTFlags &= 0xFCu;
   }
-  Scaleform::Render::Text::LineBuffer::FindLineByTextPos(&v3->mLineBuffer, &result, v2);
-  if ( !result.pLineBuffer
-    || (v4 = result.CurrentPos, result.CurrentPos >= result.pLineBuffer->Lines.Data.Size)
-    || (signed int)v4 < 0 )
-  {
-    v4 = 0xFFFFFFFFi64;
-  }
-  return v4;
+  Scaleform::Render::Text::LineBuffer::FindLineByTextPos(&this->mLineBuffer, &result, indexOfChar);
+  if ( !result.pLineBuffer )
+    return 0xFFFFFFFFi64;
+  CurrentPos = result.CurrentPos;
+  if ( result.CurrentPos >= result.pLineBuffer->Lines.Data.Size || (result.CurrentPos & 0x80000000) != 0 )
+    return 0xFFFFFFFFi64;
+  return CurrentPos;
 }
 
 // File Line: 3127
 // RVA: 0x9889C0
-unsigned __int64 __fastcall Scaleform::Render::Text::DocView::GetLineOffset(Scaleform::Render::Text::DocView *this, unsigned int lineIndex)
+unsigned __int64 __fastcall Scaleform::Render::Text::DocView::GetLineOffset(
+        Scaleform::Render::Text::DocView *this,
+        unsigned int lineIndex)
 {
   unsigned __int64 v2; // rdi
-  Scaleform::Render::Text::DocView *v3; // rbx
   Scaleform::Render::Text::LineBuffer::Line *v4; // rcx
   unsigned __int64 result; // rax
 
   v2 = lineIndex;
-  v3 = this;
-  if ( this->RTFlags & 3 )
+  if ( (this->RTFlags & 3) != 0 )
   {
     Scaleform::Render::Text::DocView::Format(this);
-    v3->RTFlags &= 0xFCu;
+    this->RTFlags &= 0xFCu;
   }
-  if ( v3 == (Scaleform::Render::Text::DocView *)-80i64
-    || v2 >= v3->mLineBuffer.Lines.Data.Size
+  if ( this == (Scaleform::Render::Text::DocView *)-80i64
+    || v2 >= this->mLineBuffer.Lines.Data.Size
     || (v2 & 0x80000000) != 0i64 )
   {
     return -1i64;
   }
-  v4 = v3->mLineBuffer.Lines.Data.Data[v2];
+  v4 = this->mLineBuffer.Lines.Data.Data[v2];
   if ( (v4->MemSize & 0x80000000) == 0 )
     return v4->Data32.TextPos;
   result = v4->Data32.TextPos & 0xFFFFFF;
   if ( (_DWORD)result == 0xFFFFFF )
-    result = 0xFFFFFFFFi64;
+    return 0xFFFFFFFFi64;
   return result;
 }
 
 // File Line: 3139
 // RVA: 0x9887A0
-unsigned __int64 __fastcall Scaleform::Render::Text::DocView::GetLineLength(Scaleform::Render::Text::DocView *this, unsigned int lineIndex, bool *phasNewLine)
+unsigned __int64 __fastcall Scaleform::Render::Text::DocView::GetLineLength(
+        Scaleform::Render::Text::DocView *this,
+        unsigned int lineIndex,
+        bool *phasNewLine)
 {
-  bool *v3; // rdi
   unsigned __int64 v4; // rsi
-  Scaleform::Render::Text::DocView *v5; // rbx
-  Scaleform::Render::Text::LineBuffer *v6; // rbx
+  Scaleform::Render::Text::LineBuffer *p_mLineBuffer; // rbx
   Scaleform::Render::Text::LineBuffer::Line *v7; // rcx
-  unsigned int v8; // edx
-  signed __int64 v9; // rcx
+  unsigned int GlyphsCount; // edx
+  __int64 v9; // rcx
   __int64 v10; // rax
-  __int64 v11; // rdx
-  bool v12; // al
-  Scaleform::Render::Text::LineBuffer::Line *v13; // rcx
-  unsigned __int64 result; // rax
+  bool v11; // al
+  Scaleform::Render::Text::LineBuffer::Line *v12; // rcx
 
-  v3 = phasNewLine;
   v4 = lineIndex;
-  v5 = this;
-  if ( this->RTFlags & 3 )
+  if ( (this->RTFlags & 3) != 0 )
   {
     Scaleform::Render::Text::DocView::Format(this);
-    v5->RTFlags &= 0xFCu;
+    this->RTFlags &= 0xFCu;
   }
-  v6 = &v5->mLineBuffer;
-  if ( v6 && v4 < v6->Lines.Data.Size && (v4 & 0x80000000) == 0i64 )
+  p_mLineBuffer = &this->mLineBuffer;
+  if ( p_mLineBuffer && v4 < p_mLineBuffer->Lines.Data.Size && (v4 & 0x80000000) == 0i64 )
   {
-    if ( v3 )
+    if ( phasNewLine )
     {
-      v7 = v6->Lines.Data.Data[v4];
+      v7 = p_mLineBuffer->Lines.Data.Data[v4];
       if ( (v7->MemSize & 0x80000000) == 0 )
-        v8 = v7->Data32.GlyphsCount;
+        GlyphsCount = v7->Data32.GlyphsCount;
       else
-        v8 = (unsigned __int8)v7->Data8.GlyphsCount;
-      v12 = 0;
-      if ( v8 )
+        GlyphsCount = (unsigned __int8)v7->Data8.GlyphsCount;
+      v11 = 0;
+      if ( GlyphsCount )
       {
-        v9 = (signed __int64)((v7->MemSize & 0x80000000) == 0 ? (Scaleform::Render::Text::LineBuffer::LineData8 *)((char *)&v7->Data8 + 38) : &v7->Data8.Leading + 1);
-        v10 = v8 - 1;
-        v11 = v8 - 1;
-        if ( *(_BYTE *)(v9 + 8 * v10 + 7) & 1 )
-        {
-          if ( *(_WORD *)(v9 + 8 * v11 + 4) & 0xF000 )
-            v12 = 1;
-        }
+        v9 = (v7->MemSize & 0x80000000) == 0 ? (__int64)&v7->Data8 + 38 : (__int64)(&v7->Data8.Leading + 1);
+        v10 = GlyphsCount - 1;
+        if ( (*(_BYTE *)(v9 + 8 * v10 + 7) & 1) != 0 && (*(_WORD *)(v9 + 8 * v10 + 4) & 0xF000) != 0 )
+          v11 = 1;
       }
-      *v3 = v12;
+      *phasNewLine = v11;
     }
-    v13 = v6->Lines.Data.Data[v4];
-    if ( (v13->MemSize & 0x80000000) == 0 )
-      result = v13->Data32.TextLength;
+    v12 = p_mLineBuffer->Lines.Data.Data[v4];
+    if ( (v12->MemSize & 0x80000000) == 0 )
+      return v12->Data32.TextLength;
     else
-      result = HIBYTE(v13->Data8.TextPosAndLength);
+      return HIBYTE(v12->Data8.TextPosAndLength);
   }
   else
   {
-    if ( v3 )
-      *v3 = 0;
-    result = -1i64;
+    if ( phasNewLine )
+      *phasNewLine = 0;
+    return -1i64;
   }
-  return result;
 }
 
 // File Line: 3155
 // RVA: 0x988A50
-wchar_t *__fastcall Scaleform::Render::Text::DocView::GetLineText(Scaleform::Render::Text::DocView *this, unsigned int lineIndex, unsigned __int64 *plen)
+wchar_t *__fastcall Scaleform::Render::Text::DocView::GetLineText(
+        Scaleform::Render::Text::DocView *this,
+        unsigned int lineIndex,
+        unsigned __int64 *plen)
 {
-  unsigned __int64 *v3; // r14
   unsigned __int64 v4; // rsi
-  Scaleform::Render::Text::DocView *v5; // rbx
-  Scaleform::Render::Text::LineBuffer *v7; // rdi
-  Scaleform::Render::Text::LineBuffer::Line *v8; // rcx
+  Scaleform::Render::Text::LineBuffer *p_mLineBuffer; // rdi
+  int *v8; // rcx
   unsigned int v9; // eax
-  Scaleform::Render::Text::StyledText *v10; // rcx
-  Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> > *v11; // r8
-  __int64 v12; // rdx
+  Scaleform::Render::Text::DocView::DocumentText *pObject; // rcx
+  Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> > *pArray; // r8
+  __int64 CurIndex; // rdx
   Scaleform::Render::Text::LineBuffer::Line *v13; // rcx
-  unsigned __int64 v14; // rax
-  Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator result; // [rsp+20h] [rbp-28h]
-  unsigned __int64 pindexInParagraph; // [rsp+60h] [rbp+18h]
+  unsigned __int64 TextLength; // rax
+  Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,Scaleform::AllocatorLH<Scaleform::Render::Text::StyledText::ParagraphPtrWrapper,2>,Scaleform::ArrayDefaultPolicy> >::Iterator result; // [rsp+20h] [rbp-28h] BYREF
+  unsigned __int64 pindexInParagraph; // [rsp+60h] [rbp+18h] BYREF
 
-  v3 = plen;
   v4 = lineIndex;
-  v5 = this;
   if ( !plen )
     return 0i64;
-  if ( this->RTFlags & 3 )
+  if ( (this->RTFlags & 3) != 0 )
   {
     Scaleform::Render::Text::DocView::Format(this);
-    v5->RTFlags &= 0xFCu;
+    this->RTFlags &= 0xFCu;
   }
-  v7 = &v5->mLineBuffer;
-  if ( v5 == (Scaleform::Render::Text::DocView *)-80i64
-    || v4 >= v5->mLineBuffer.Lines.Data.Size
+  p_mLineBuffer = &this->mLineBuffer;
+  if ( this == (Scaleform::Render::Text::DocView *)-80i64
+    || v4 >= this->mLineBuffer.Lines.Data.Size
     || (v4 & 0x80000000) != 0i64 )
   {
     return 0i64;
   }
-  v8 = v7->Lines.Data.Data[v4];
-  v9 = v8->Data32.TextPos;
-  if ( (v8->MemSize & 0x80000000) != 0 )
+  v8 = (int *)p_mLineBuffer->Lines.Data.Data[v4];
+  v9 = v8[2];
+  if ( *v8 < 0 )
   {
     v9 &= 0xFFFFFFu;
     if ( v9 == 0xFFFFFF )
       v9 = -1;
   }
-  v10 = (Scaleform::Render::Text::StyledText *)&v5->pDocument.pObject->vfptr;
+  pObject = this->pDocument.pObject;
   pindexInParagraph = 0i64;
-  Scaleform::Render::Text::StyledText::GetParagraphByIndex(v10, &result, v9, &pindexInParagraph);
-  v11 = result.pArray;
+  Scaleform::Render::Text::StyledText::GetParagraphByIndex(pObject, &result, v9, &pindexInParagraph);
+  pArray = result.pArray;
   if ( !result.pArray )
     return 0i64;
-  v12 = result.CurIndex;
+  CurIndex = result.CurIndex;
   if ( result.CurIndex < 0 || result.CurIndex >= SLODWORD(result.pArray->Data.Size) )
     return 0i64;
-  v13 = v7->Lines.Data.Data[v4];
+  v13 = p_mLineBuffer->Lines.Data.Data[v4];
   if ( (v13->MemSize & 0x80000000) == 0 )
-    v14 = v13->Data32.TextLength;
+    TextLength = v13->Data32.TextLength;
   else
-    v14 = HIBYTE(v13->Data8.TextPosAndLength);
-  *v3 = v14;
-  return &v11->Data.Data[v12].pPara->Text.pText[pindexInParagraph];
+    TextLength = HIBYTE(v13->Data8.TextPosAndLength);
+  *plen = TextLength;
+  return &pArray->Data.Data[CurIndex].pPara->Text.pText[pindexInParagraph];
 }
 
 // File Line: 3176
 // RVA: 0x98A390
-unsigned __int64 __fastcall Scaleform::Render::Text::DocView::GetParagraphLength(Scaleform::Render::Text::DocView *this, unsigned __int64 charIndex)
+unsigned __int64 __fastcall Scaleform::Render::Text::DocView::GetParagraphLength(
+        Scaleform::Render::Text::DocView *this,
+        unsigned __int64 charIndex)
 {
-  unsigned __int64 v2; // rbx
-  Scaleform::Render::Text::DocView *v3; // rdi
-  Scaleform::Render::Text::DocView::DocumentText *v4; // rdi
+  Scaleform::Render::Text::DocView::DocumentText *pObject; // rdi
   wchar_t *v5; // rsi
-  signed __int64 v6; // rdx
+  __int64 Size; // rdx
   unsigned __int64 v7; // r10
   unsigned __int64 v8; // r11
-  Scaleform::Render::Text::Paragraph *v9; // rax
-  unsigned __int64 v10; // r9
+  Scaleform::Render::Text::Paragraph *pPara; // rax
+  unsigned __int64 StartIndex; // r9
   Scaleform::Render::Text::Paragraph *v11; // rax
   unsigned __int64 v12; // rdx
   Scaleform::Render::Text::Paragraph *v13; // rdx
   unsigned __int64 result; // rax
-  wchar_t *v15; // rdx
+  wchar_t *pText; // rdx
   unsigned __int64 v16; // rcx
 
-  v2 = charIndex;
-  v3 = this;
-  if ( this->RTFlags & 3 )
+  if ( (this->RTFlags & 3) != 0 )
   {
     Scaleform::Render::Text::DocView::Format(this);
-    v3->RTFlags &= 0xFCu;
+    this->RTFlags &= 0xFCu;
   }
-  v4 = v3->pDocument.pObject;
+  pObject = this->pDocument.pObject;
   v5 = 0i64;
-  v6 = v4->Paragraphs.Data.Size;
+  Size = pObject->Paragraphs.Data.Size;
   v7 = 0i64;
-  while ( v6 > 0 )
+  while ( Size > 0 )
   {
-    v8 = (v6 >> 1) + v7;
-    v9 = v4->Paragraphs.Data.Data[v8].pPara;
-    v10 = v9->StartIndex;
-    if ( v2 >= v10 && v2 < v10 + v9->Text.Size || (signed int)v10 - (signed int)v2 >= 0 )
+    v8 = (Size >> 1) + v7;
+    pPara = pObject->Paragraphs.Data.Data[v8].pPara;
+    StartIndex = pPara->StartIndex;
+    if ( charIndex >= StartIndex && charIndex < StartIndex + pPara->Text.Size || (int)StartIndex - (int)charIndex >= 0 )
     {
-      v6 >>= 1;
+      Size >>= 1;
     }
     else
     {
       v7 = v8 + 1;
-      v6 += -1 - (v6 >> 1);
+      Size += -1 - (Size >> 1);
     }
   }
-  if ( v7 >= v4->Paragraphs.Data.Size )
+  if ( v7 >= pObject->Paragraphs.Data.Size )
     return -1i64;
-  v11 = v4->Paragraphs.Data.Data[v7].pPara;
+  v11 = pObject->Paragraphs.Data.Data[v7].pPara;
   v12 = v11->StartIndex;
-  if ( (v2 < v12 || v2 >= v12 + v11->Text.Size) && (_DWORD)v12 != (_DWORD)v2 )
+  if ( (charIndex < v12 || charIndex >= v12 + v11->Text.Size) && (_DWORD)v12 != (_DWORD)charIndex )
     return -1i64;
-  if ( (v7 & 0x80000000) != 0i64 || (signed int)v7 >= (signed __int64)SLODWORD(v4->Paragraphs.Data.Size) )
+  if ( (v7 & 0x80000000) != 0i64 || (int)v7 >= (__int64)SLODWORD(pObject->Paragraphs.Data.Size) )
     return -1i64;
-  v13 = v4->Paragraphs.Data.Data[(signed int)v7].pPara;
+  v13 = pObject->Paragraphs.Data.Data[(int)v7].pPara;
   result = v13->Text.Size;
   if ( result )
   {
-    v15 = v13->Text.pText;
+    pText = v13->Text.pText;
     v16 = result - 1;
-    if ( v15 && v16 < result )
-      v5 = &v15[v16];
+    if ( pText && v16 < result )
+      v5 = &pText[v16];
     if ( !*v5 )
       --result;
   }
@@ -6299,113 +6050,102 @@ unsigned __int64 __fastcall Scaleform::Render::Text::DocView::GetParagraphLength
 
 // File Line: 3189
 // RVA: 0x988890
-char __fastcall Scaleform::Render::Text::DocView::GetLineMetrics(Scaleform::Render::Text::DocView *this, unsigned int lineIndex, Scaleform::Render::Text::DocView::LineMetrics *pmetrics)
+char __fastcall Scaleform::Render::Text::DocView::GetLineMetrics(
+        Scaleform::Render::Text::DocView *this,
+        unsigned int lineIndex,
+        Scaleform::Render::Text::DocView::LineMetrics *pmetrics)
 {
-  Scaleform::Render::Text::DocView::LineMetrics *v3; // rbx
   unsigned __int64 v4; // rsi
-  Scaleform::Render::Text::DocView *v5; // rdi
   Scaleform::Render::Text::LineBuffer::Line *v6; // rcx
-  signed int v7; // eax
-  signed int v8; // edx
-  signed int v9; // eax
-  unsigned int v10; // eax
+  int BaseLineOffset; // eax
+  int Height; // edx
+  int v9; // eax
+  unsigned int Width; // eax
   unsigned int v11; // eax
-  int v12; // eax
-  bool v13; // zf
+  int Leading; // eax
 
-  v3 = pmetrics;
   v4 = lineIndex;
-  v5 = this;
   if ( !pmetrics )
     return 0;
-  if ( this->RTFlags & 3 )
+  if ( (this->RTFlags & 3) != 0 )
   {
     Scaleform::Render::Text::DocView::Format(this);
-    v5->RTFlags &= 0xFCu;
+    this->RTFlags &= 0xFCu;
   }
-  if ( v5 == (Scaleform::Render::Text::DocView *)-80i64
-    || v4 >= v5->mLineBuffer.Lines.Data.Size
+  if ( this == (Scaleform::Render::Text::DocView *)-80i64
+    || v4 >= this->mLineBuffer.Lines.Data.Size
     || (v4 & 0x80000000) != 0i64 )
   {
     return 0;
   }
-  v6 = v5->mLineBuffer.Lines.Data.Data[v4];
+  v6 = this->mLineBuffer.Lines.Data.Data[v4];
   if ( (v6->MemSize & 0x80000000) == 0 )
-    v7 = v6->Data32.BaseLineOffset;
+    BaseLineOffset = v6->Data32.BaseLineOffset;
   else
-    v7 = v6->Data8.BaseLineOffset;
-  v3->Ascent = (signed int)(float)v7;
+    BaseLineOffset = v6->Data8.BaseLineOffset;
+  pmetrics->Ascent = (int)(float)BaseLineOffset;
   if ( (v6->MemSize & 0x80000000) == 0 )
-    v8 = v6->Data32.Height;
+    Height = v6->Data32.Height;
   else
-    v8 = v6->Data8.Height;
+    Height = v6->Data8.Height;
   if ( (v6->MemSize & 0x80000000) == 0 )
     v9 = v6->Data32.BaseLineOffset;
   else
     v9 = v6->Data8.BaseLineOffset;
-  v3->Descent = (signed int)(float)((float)v8 - (float)v9);
+  pmetrics->Descent = (int)(float)((float)Height - (float)v9);
   if ( (v6->MemSize & 0x80000000) == 0 )
-    v10 = v6->Data32.Width;
+    Width = v6->Data32.Width;
   else
-    v10 = v6->Data8.Width;
-  v3->Width = v10;
+    Width = v6->Data8.Width;
+  pmetrics->Width = Width;
   if ( (v6->MemSize & 0x80000000) == 0 )
     v11 = v6->Data32.Height;
   else
     v11 = v6->Data8.Height;
-  v3->Height = v11;
+  pmetrics->Height = v11;
   if ( (v6->MemSize & 0x80000000) == 0 )
-    v12 = v6->Data32.Leading;
+    Leading = v6->Data32.Leading;
   else
-    v12 = v6->Data8.Leading;
-  v3->Leading = v12;
-  v13 = (v6->MemSize & 0x80000000) == 0;
-  v3->FirstCharXOff = v6->Data32.OffsetX;
+    Leading = v6->Data8.Leading;
+  pmetrics->Leading = Leading;
+  pmetrics->FirstCharXOff = v6->Data32.OffsetX;
   return 1;
 }
 
 // File Line: 3212
 // RVA: 0x981080
-char __fastcall Scaleform::Render::Text::DocView::GetCharBoundaries(Scaleform::Render::Text::DocView *this, Scaleform::Render::Rect<float> *pCharRect, unsigned __int64 indexOfChar)
+char __fastcall Scaleform::Render::Text::DocView::GetCharBoundaries(
+        Scaleform::Render::Text::DocView *this,
+        Scaleform::Render::Rect<float> *pCharRect,
+        unsigned __int64 indexOfChar)
 {
-  unsigned __int64 v3; // rbp
-  Scaleform::Render::Rect<float> *v4; // r14
-  Scaleform::Render::Text::DocView *v5; // rbx
   char v6; // r15
   Scaleform::Render::Text::LineBuffer::Line *v7; // rdi
-  signed __int64 v8; // rax
-  unsigned __int64 v9; // rbp
-  __int64 v10; // rax
-  signed int v11; // esi
+  __int64 TextPos; // rax
+  __int64 v9; // rbp
+  int OffsetX; // esi
   int i; // ebx
-  Scaleform::Render::Text::LineBuffer::GlyphEntry *v13; // rcx
-  int v14; // eax
-  unsigned int v15; // eax
-  int v16; // eax
-  float v17; // xmm3_4
-  signed int v18; // eax
-  bool v19; // zf
-  float v20; // xmm0_4
-  float v21; // xmm2_4
-  Scaleform::Render::Text::ImageDesc *v22; // rcx
-  Scaleform::Render::Text::FontHandle *v23; // rcx
-  Scaleform::Render::Text::LineBuffer::Iterator result; // [rsp+28h] [rbp-F0h]
-  Scaleform::Render::Text::LineBuffer::GlyphIterator v26; // [rsp+50h] [rbp-C8h]
+  Scaleform::Render::Text::LineBuffer::GlyphEntry *pGlyphs; // rcx
+  int v13; // eax
+  unsigned int Delta; // eax
+  int Advance; // eax
+  float v16; // xmm3_4
+  int Height; // eax
+  float v18; // xmm0_4
+  float OffsetY; // xmm2_4
+  Scaleform::Render::Text::ImageDesc *pObject; // rcx
+  Scaleform::Render::Text::FontHandle *v21; // rcx
+  Scaleform::Render::Text::LineBuffer::Iterator result; // [rsp+28h] [rbp-F0h] BYREF
+  Scaleform::Render::Text::LineBuffer::GlyphIterator v24; // [rsp+50h] [rbp-C8h] BYREF
 
-  v3 = indexOfChar;
-  v4 = pCharRect;
-  v5 = this;
-  if ( !pCharRect
-    || indexOfChar >= Scaleform::Render::Text::StyledText::GetLength((Scaleform::Render::Text::StyledText *)&this->pDocument.pObject->vfptr) )
-  {
+  if ( !pCharRect || indexOfChar >= Scaleform::Render::Text::StyledText::GetLength(this->pDocument.pObject) )
     return 0;
-  }
-  if ( v5->RTFlags & 3 )
+  if ( (this->RTFlags & 3) != 0 )
   {
-    Scaleform::Render::Text::DocView::Format(v5);
-    v5->RTFlags &= 0xFCu;
+    Scaleform::Render::Text::DocView::Format(this);
+    this->RTFlags &= 0xFCu;
   }
-  Scaleform::Render::Text::LineBuffer::FindLineByTextPos(&v5->mLineBuffer, &result, v3);
+  Scaleform::Render::Text::LineBuffer::FindLineByTextPos(&this->mLineBuffer, &result, indexOfChar);
   v6 = 0;
   if ( result.pLineBuffer
     && result.CurrentPos < result.pLineBuffer->Lines.Data.Size
@@ -6414,144 +6154,135 @@ char __fastcall Scaleform::Render::Text::DocView::GetCharBoundaries(Scaleform::R
     v7 = result.pLineBuffer->Lines.Data.Data[result.CurrentPos];
     if ( (v7->MemSize & 0x80000000) == 0 )
     {
-      v8 = v7->Data32.TextPos;
+      TextPos = v7->Data32.TextPos;
     }
     else
     {
-      v8 = v7->Data32.TextPos & 0xFFFFFF;
-      if ( (_DWORD)v8 == 0xFFFFFF )
-        v8 = 0xFFFFFFFFi64;
+      TextPos = v7->Data32.TextPos & 0xFFFFFF;
+      if ( (_DWORD)TextPos == 0xFFFFFF )
+        TextPos = 0xFFFFFFFFi64;
     }
-    v9 = v3 - v8;
-    Scaleform::Render::Text::LineBuffer::Line::Begin(v7, &v26);
-    v10 = v7->MemSize >> 31;
-    v11 = v7->Data32.OffsetX;
+    v9 = indexOfChar - TextPos;
+    Scaleform::Render::Text::LineBuffer::Line::Begin(v7, &v24);
+    OffsetX = v7->Data32.OffsetX;
     for ( i = 0; ; ++i )
     {
-      v13 = v26.pGlyphs;
-      if ( !v26.pGlyphs || v26.pGlyphs >= v26.pEndGlyphs )
+      pGlyphs = v24.pGlyphs;
+      if ( !v24.pGlyphs || v24.pGlyphs >= v24.pEndGlyphs )
         break;
       if ( i == v9 )
       {
-        if ( !(v26.pGlyphs->Flags & 0x100) )
+        if ( (v24.pGlyphs->Flags & 0x100) == 0 )
         {
           v6 = 1;
-          *(_QWORD *)&v4->x1 = 0i64;
-          *(_QWORD *)&v4->x2 = 0i64;
-          v16 = v13->Advance;
-          if ( (LOBYTE(v13->Flags) >> 6) & 1 )
-            v16 = -v16;
-          v17 = (float)v16;
-          v4->x2 = (float)v16;
-          v4->y1 = 40.0;
+          *(_QWORD *)&pCharRect->x1 = 0i64;
+          *(_QWORD *)&pCharRect->x2 = 0i64;
+          Advance = pGlyphs->Advance;
+          if ( (pGlyphs->Flags & 0x40) != 0 )
+            Advance = -Advance;
+          v16 = (float)Advance;
+          pCharRect->x2 = (float)Advance;
+          pCharRect->y1 = 40.0;
           if ( (v7->MemSize & 0x80000000) == 0 )
-            v18 = v7->Data32.Height;
+            Height = v7->Data32.Height;
           else
-            v18 = v7->Data8.Height;
-          v4->y2 = (float)v18;
-          v19 = (v7->MemSize & 0x80000000) == 0;
-          v20 = (float)v11 + 40.0;
-          v21 = (float)v7->Data32.OffsetY;
-          v4->x1 = v20;
-          v4->x2 = v17 + v20;
-          v4->y1 = v21 + 40.0;
-          v4->y2 = v21 + (float)v18;
+            Height = v7->Data8.Height;
+          pCharRect->y2 = (float)Height;
+          v18 = (float)OffsetX + 40.0;
+          OffsetY = (float)v7->Data32.OffsetY;
+          pCharRect->x1 = v18;
+          pCharRect->x2 = v16 + v18;
+          pCharRect->y1 = OffsetY + 40.0;
+          pCharRect->y2 = OffsetY + (float)Height;
         }
         break;
       }
-      v14 = v26.pGlyphs->Advance;
-      if ( (LOBYTE(v26.pGlyphs->Flags) >> 6) & 1 )
-        v14 = -v14;
-      v11 += v14;
-      v15 = v26.Delta;
-      if ( !v26.Delta )
+      v13 = v24.pGlyphs->Advance;
+      if ( (v24.pGlyphs->Flags & 0x40) != 0 )
+        v13 = -v13;
+      OffsetX += v13;
+      Delta = v24.Delta;
+      if ( !v24.Delta )
       {
-        v15 = (unsigned int)v26.pGlyphs->LenAndFontSize >> 12;
-        v26.Delta = (unsigned int)v26.pGlyphs->LenAndFontSize >> 12;
+        Delta = v24.pGlyphs->LenAndFontSize >> 12;
+        v24.Delta = Delta;
       }
-      ++v26.pGlyphs;
-      if ( v26.pGlyphs->LenAndFontSize & 0xF000
-        && v15
-        && v26.HighlighterIter.CurAdjStartPos < v26.HighlighterIter.NumGlyphs )
+      ++v24.pGlyphs;
+      if ( (v24.pGlyphs->LenAndFontSize & 0xF000) != 0
+        && Delta
+        && v24.HighlighterIter.CurAdjStartPos < v24.HighlighterIter.NumGlyphs )
       {
-        if ( v15 )
-        {
-          v26.HighlighterIter.CurAdjStartPos += v15;
-          Scaleform::Render::Text::HighlighterPosIterator::InitCurDesc(&v26.HighlighterIter);
-        }
-        v26.Delta = 0;
+        v24.HighlighterIter.CurAdjStartPos += Delta;
+        Scaleform::Render::Text::HighlighterPosIterator::InitCurDesc(&v24.HighlighterIter);
+        v24.Delta = 0;
       }
-      Scaleform::Render::Text::LineBuffer::GlyphIterator::UpdateDesc(&v26);
+      Scaleform::Render::Text::LineBuffer::GlyphIterator::UpdateDesc(&v24);
     }
-    v22 = v26.pImage.pObject;
-    if ( v26.pImage.pObject )
+    pObject = v24.pImage.pObject;
+    if ( v24.pImage.pObject )
     {
-      --v26.pImage.pObject->RefCount;
-      if ( !v22->RefCount )
-        v22->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v22->vfptr, 1u);
+      --v24.pImage.pObject->RefCount;
+      if ( !pObject->RefCount )
+        pObject->vfptr->__vecDelDtor(pObject, 1u);
     }
-    v23 = v26.pFontHandle.pObject;
-    if ( v26.pFontHandle.pObject && !_InterlockedDecrement(&v26.pFontHandle.pObject->RefCount) && v23 )
-      v23->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v23->vfptr, 1u);
+    v21 = v24.pFontHandle.pObject;
+    if ( v24.pFontHandle.pObject && !_InterlockedDecrement(&v24.pFontHandle.pObject->RefCount) && v21 )
+      v21->vfptr->__vecDelDtor(v21, 1u);
   }
   return v6;
 }
 
 // File Line: 3251
 // RVA: 0x982F10
-char __fastcall Scaleform::Render::Text::DocView::GetExactCharBoundaries(Scaleform::Render::Text::DocView *this, Scaleform::Render::Rect<float> *pCharRect, unsigned __int64 indexOfChar)
+char __fastcall Scaleform::Render::Text::DocView::GetExactCharBoundaries(
+        Scaleform::Render::Text::DocView *this,
+        Scaleform::Render::Rect<float> *pCharRect,
+        unsigned __int64 indexOfChar)
 {
-  unsigned __int64 v3; // rbp
-  Scaleform::Render::Rect<float> *v4; // rsi
-  Scaleform::Render::Text::DocView *v5; // rbx
-  unsigned __int64 v6; // rax
+  unsigned __int64 Length; // rax
   char v7; // r13
   Scaleform::Render::Text::LineBuffer::Line *v8; // r14
-  unsigned int v9; // er12
-  signed __int64 v10; // rax
-  unsigned __int64 v11; // rbp
-  signed int v12; // er15
+  unsigned int v9; // r12d
+  __int64 TextPos; // rax
+  __int64 v11; // rbp
+  int v12; // r15d
   int i; // edi
-  Scaleform::Render::Text::LineBuffer::GlyphEntry *v14; // rbx
+  Scaleform::Render::Text::LineBuffer::GlyphEntry *pGlyphs; // rbx
   int v15; // eax
-  unsigned int v16; // eax
-  unsigned __int16 v17; // cx
+  unsigned int Delta; // eax
+  unsigned __int16 Flags; // cx
   float *v18; // rdi
   float v19; // xmm6_4
   float v20; // xmm6_4
-  unsigned __int16 v21; // cx
+  unsigned __int16 Index; // cx
   unsigned __int16 v22; // ax
-  int v23; // eax
+  int Advance; // eax
   float v24; // xmm1_4
   float v25; // xmm4_4
   float v26; // xmm5_4
-  signed int v27; // eax
+  int BaseLineOffset; // eax
   float v28; // xmm3_4
   float v29; // xmm6_4
-  bool v30; // zf
-  float v31; // xmm1_4
-  float v32; // xmm2_4
-  float v33; // xmm0_4
-  Scaleform::Render::Text::ImageDesc *v34; // rax
-  float v35; // xmm3_4
-  float v36; // xmm4_4
-  Scaleform::Render::Text::ImageDesc *v37; // rcx
-  Scaleform::Render::Text::FontHandle *v38; // rcx
-  Scaleform::Render::Text::LineBuffer::GlyphIterator v40; // [rsp+30h] [rbp-F8h]
-  Scaleform::Render::Text::LineBuffer::Iterator result; // [rsp+D0h] [rbp-58h]
+  float v30; // xmm1_4
+  float OffsetY; // xmm2_4
+  float v32; // xmm0_4
+  Scaleform::Render::Text::ImageDesc *pObject; // rax
+  float v34; // xmm3_4
+  float v35; // xmm4_4
+  Scaleform::Render::Text::ImageDesc *v36; // rcx
+  Scaleform::Render::Text::FontHandle *v37; // rcx
+  Scaleform::Render::Text::LineBuffer::GlyphIterator v39; // [rsp+30h] [rbp-F8h] BYREF
+  Scaleform::Render::Text::LineBuffer::Iterator result; // [rsp+D0h] [rbp-58h] BYREF
 
-  v3 = indexOfChar;
-  v4 = pCharRect;
-  v5 = this;
-  v6 = Scaleform::Render::Text::StyledText::GetLength((Scaleform::Render::Text::StyledText *)&this->pDocument.pObject->vfptr);
-  if ( !v4 || v3 > v6 )
+  Length = Scaleform::Render::Text::StyledText::GetLength(this->pDocument.pObject);
+  if ( !pCharRect || indexOfChar > Length )
     return 0;
-  if ( v5->RTFlags & 3 )
+  if ( (this->RTFlags & 3) != 0 )
   {
-    Scaleform::Render::Text::DocView::Format(v5);
-    v5->RTFlags &= 0xFCu;
+    Scaleform::Render::Text::DocView::Format(this);
+    this->RTFlags &= 0xFCu;
   }
-  Scaleform::Render::Text::LineBuffer::FindLineByTextPos(&v5->mLineBuffer, &result, v3);
+  Scaleform::Render::Text::LineBuffer::FindLineByTextPos(&this->mLineBuffer, &result, indexOfChar);
   v7 = 0;
   if ( result.pLineBuffer
     && result.CurrentPos < result.pLineBuffer->Lines.Data.Size
@@ -6561,336 +6292,321 @@ char __fastcall Scaleform::Render::Text::DocView::GetExactCharBoundaries(Scalefo
     v9 = -1;
     if ( (v8->MemSize & 0x80000000) == 0 )
     {
-      v10 = v8->Data32.TextPos;
+      TextPos = v8->Data32.TextPos;
     }
     else
     {
-      v10 = v8->Data32.TextPos & 0xFFFFFF;
-      if ( (_DWORD)v10 == 0xFFFFFF )
-        v10 = 0xFFFFFFFFi64;
+      TextPos = v8->Data32.TextPos & 0xFFFFFF;
+      if ( (_DWORD)TextPos == 0xFFFFFF )
+        TextPos = 0xFFFFFFFFi64;
     }
-    v11 = v3 - v10;
-    Scaleform::Render::Text::LineBuffer::Line::Begin(v8, &v40);
+    v11 = indexOfChar - TextPos;
+    Scaleform::Render::Text::LineBuffer::Line::Begin(v8, &v39);
     v12 = 0;
     for ( i = 0; ; ++i )
     {
-      v14 = v40.pGlyphs;
-      if ( !v40.pGlyphs || v40.pGlyphs >= v40.pEndGlyphs )
+      pGlyphs = v39.pGlyphs;
+      if ( !v39.pGlyphs || v39.pGlyphs >= v39.pEndGlyphs )
         break;
       if ( i == v11 )
       {
-        v17 = v40.pGlyphs->Flags;
+        Flags = v39.pGlyphs->Flags;
         v7 = 1;
-        if ( (v17 >> 11) & 1 )
+        if ( (Flags & 0x800) != 0 )
         {
-          v34 = v40.pImage.pObject;
-          LODWORD(v35) = LODWORD(v40.pImage.pObject->BaseLineX) ^ _xmm[0];
-          v4->x1 = v35;
-          LODWORD(v36) = LODWORD(v34->BaseLineY) ^ _xmm[0];
-          v4->y1 = v36;
-          v26 = v35 + v34->ScreenWidth;
-          v4->x2 = v26;
-          v29 = v36 + v34->ScreenHeight;
-          v4->y2 = v29;
-          v30 = (v8->MemSize & 0x80000000) == 0;
-          v31 = (float)v12 + 40.0;
-          v32 = (float)v8->Data32.OffsetY + 40.0;
-          v4->x1 = v35 + v31;
-          v33 = v32 + v36;
+          pObject = v39.pImage.pObject;
+          LODWORD(v34) = LODWORD(v39.pImage.pObject->BaseLineX) ^ _xmm[0];
+          pCharRect->x1 = v34;
+          LODWORD(v35) = LODWORD(pObject->BaseLineY) ^ _xmm[0];
+          pCharRect->y1 = v35;
+          v26 = v34 + pObject->ScreenWidth;
+          pCharRect->x2 = v26;
+          v29 = v35 + pObject->ScreenHeight;
+          pCharRect->y2 = v29;
+          v30 = (float)v12 + 40.0;
+          OffsetY = (float)v8->Data32.OffsetY + 40.0;
+          pCharRect->x1 = v34 + v30;
+          v32 = OffsetY + v35;
         }
         else
         {
-          v18 = (float *)v40.pFontHandle.pObject;
-          if ( v40.pFontHandle.pObject )
-            v18 = (float *)v40.pFontHandle.pObject->pFont.pObject;
-          v19 = (float)(v40.pGlyphs->LenAndFontSize & 0xFFF);
-          if ( v17 & 0x10 )
+          v18 = (float *)v39.pFontHandle.pObject;
+          if ( v39.pFontHandle.pObject )
+            v18 = (float *)v39.pFontHandle.pObject->pFont.pObject;
+          v19 = (float)(v39.pGlyphs->LenAndFontSize & 0xFFF);
+          if ( (Flags & 0x10) != 0 )
             v19 = v19 * 0.0625;
           v20 = (float)(v19 * 20.0) * 0.0009765625;
-          v21 = v40.pGlyphs->Index;
-          v22 = v40.pGlyphs->Index;
-          if ( v40.pGlyphs->Index >= 0xFFFFu )
+          Index = v39.pGlyphs->Index;
+          v22 = v39.pGlyphs->Index;
+          if ( v39.pGlyphs->Index == 0xFFFF )
             v22 = -1;
           if ( v22 == 0xFFFF )
           {
-            v4->x1 = 0.0;
-            v23 = v14->Advance;
-            if ( (LOBYTE(v14->Flags) >> 6) & 1 )
-              v23 = -v23;
-            v4->x2 = (float)v23;
+            pCharRect->x1 = 0.0;
+            Advance = pGlyphs->Advance;
+            if ( (pGlyphs->Flags & 0x40) != 0 )
+              Advance = -Advance;
+            pCharRect->x2 = (float)Advance;
           }
           else
           {
-            if ( v21 < 0xFFFFu )
-              v9 = v21;
+            if ( Index != 0xFFFF )
+              v9 = Index;
             (*(void (__fastcall **)(float *, _QWORD, Scaleform::Render::Rect<float> *))(*(_QWORD *)v18 + 56i64))(
               v18,
               v9,
-              v4);
+              pCharRect);
           }
-          if ( v14->Flags & 0x100 )
-            v4->x2 = v4->x1 + (float)((float)(v4->x2 - v4->x1) * 0.33333334);
+          if ( (pGlyphs->Flags & 0x100) != 0 )
+            pCharRect->x2 = pCharRect->x1 + (float)((float)(pCharRect->x2 - pCharRect->x1) * 0.33333334);
           v24 = (float)(v18[5] + v18[4]) * v20;
-          v25 = v20 * v4->x1;
-          v4->x1 = v25;
-          v26 = v20 * v4->x2;
-          v4->x2 = v26;
+          v25 = v20 * pCharRect->x1;
+          pCharRect->x1 = v25;
+          v26 = v20 * pCharRect->x2;
+          pCharRect->x2 = v26;
           if ( (v8->MemSize & 0x80000000) == 0 )
-            v27 = v8->Data32.BaseLineOffset;
+            BaseLineOffset = v8->Data32.BaseLineOffset;
           else
-            v27 = v8->Data8.BaseLineOffset;
-          v28 = (float)((float)v27 - (float)(v18[4] * v20)) + 40.0;
-          v4->y1 = v28;
+            BaseLineOffset = v8->Data8.BaseLineOffset;
+          v28 = (float)((float)BaseLineOffset - (float)(v18[4] * v20)) + 40.0;
+          pCharRect->y1 = v28;
           v29 = v28 + v24;
-          v4->y2 = v28 + v24;
-          v30 = (v8->MemSize & 0x80000000) == 0;
-          v31 = (float)v12 + 40.0;
-          v32 = (float)v8->Data32.OffsetY;
-          v4->x1 = v31 + v25;
-          v33 = v32 + v28;
+          pCharRect->y2 = v28 + v24;
+          v30 = (float)v12 + 40.0;
+          OffsetY = (float)v8->Data32.OffsetY;
+          pCharRect->x1 = v30 + v25;
+          v32 = OffsetY + v28;
         }
-        v4->y2 = v32 + v29;
-        v4->y1 = v33;
-        v4->x2 = v31 + v26;
+        pCharRect->y2 = OffsetY + v29;
+        pCharRect->y1 = v32;
+        pCharRect->x2 = v30 + v26;
         break;
       }
-      v15 = v40.pGlyphs->Advance;
-      if ( (LOBYTE(v40.pGlyphs->Flags) >> 6) & 1 )
+      v15 = v39.pGlyphs->Advance;
+      if ( (v39.pGlyphs->Flags & 0x40) != 0 )
         v15 = -v15;
       v12 += v15;
-      v16 = v40.Delta;
-      if ( !v40.Delta )
+      Delta = v39.Delta;
+      if ( !v39.Delta )
       {
-        v16 = (unsigned int)v40.pGlyphs->LenAndFontSize >> 12;
-        v40.Delta = (unsigned int)v40.pGlyphs->LenAndFontSize >> 12;
+        Delta = v39.pGlyphs->LenAndFontSize >> 12;
+        v39.Delta = Delta;
       }
-      ++v40.pGlyphs;
-      if ( v40.pGlyphs->LenAndFontSize & 0xF000
-        && v16
-        && v40.HighlighterIter.CurAdjStartPos < v40.HighlighterIter.NumGlyphs )
+      ++v39.pGlyphs;
+      if ( (v39.pGlyphs->LenAndFontSize & 0xF000) != 0
+        && Delta
+        && v39.HighlighterIter.CurAdjStartPos < v39.HighlighterIter.NumGlyphs )
       {
-        if ( v16 )
-        {
-          v40.HighlighterIter.CurAdjStartPos += v16;
-          Scaleform::Render::Text::HighlighterPosIterator::InitCurDesc(&v40.HighlighterIter);
-        }
-        v40.Delta = 0;
+        v39.HighlighterIter.CurAdjStartPos += Delta;
+        Scaleform::Render::Text::HighlighterPosIterator::InitCurDesc(&v39.HighlighterIter);
+        v39.Delta = 0;
       }
-      Scaleform::Render::Text::LineBuffer::GlyphIterator::UpdateDesc(&v40);
+      Scaleform::Render::Text::LineBuffer::GlyphIterator::UpdateDesc(&v39);
     }
-    v37 = v40.pImage.pObject;
-    if ( v40.pImage.pObject )
+    v36 = v39.pImage.pObject;
+    if ( v39.pImage.pObject )
     {
-      --v40.pImage.pObject->RefCount;
-      if ( !v37->RefCount )
-        v37->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v37->vfptr, 1u);
+      --v39.pImage.pObject->RefCount;
+      if ( !v36->RefCount )
+        v36->vfptr->__vecDelDtor(v36, 1u);
     }
-    v38 = v40.pFontHandle.pObject;
-    if ( v40.pFontHandle.pObject && !_InterlockedDecrement(&v40.pFontHandle.pObject->RefCount) && v38 )
-      v38->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v38->vfptr, 1u);
+    v37 = v39.pFontHandle.pObject;
+    if ( v39.pFontHandle.pObject && !_InterlockedDecrement(&v39.pFontHandle.pObject->RefCount) && v37 )
+      v37->vfptr->__vecDelDtor(v37, 1u);
   }
   return v7;
 }
 
 // File Line: 3318
 // RVA: 0x984770
-unsigned __int64 __fastcall Scaleform::Render::Text::DocView::GetFirstCharInParagraph(Scaleform::Render::Text::DocView *this, unsigned __int64 indexOfChar)
+unsigned __int64 __fastcall Scaleform::Render::Text::DocView::GetFirstCharInParagraph(
+        Scaleform::Render::Text::DocView *this,
+        unsigned __int64 indexOfChar)
 {
-  Scaleform::Render::Text::DocView::DocumentText *v2; // rdi
+  Scaleform::Render::Text::DocView::DocumentText *pObject; // rdi
   unsigned __int64 v3; // r11
-  unsigned __int64 v4; // r9
-  signed __int64 v5; // r8
+  __int64 Size; // r8
   unsigned __int64 v6; // rbx
-  Scaleform::Render::Text::Paragraph *v7; // rax
-  unsigned __int64 v8; // r10
+  Scaleform::Render::Text::Paragraph *pPara; // rax
+  unsigned __int64 StartIndex; // r10
   Scaleform::Render::Text::Paragraph *v9; // rax
   unsigned __int64 v10; // rdx
-  unsigned __int64 result; // rax
 
-  v2 = this->pDocument.pObject;
+  pObject = this->pDocument.pObject;
   v3 = 0i64;
-  v4 = indexOfChar;
-  v5 = v2->Paragraphs.Data.Size;
-  while ( v5 > 0 )
+  Size = pObject->Paragraphs.Data.Size;
+  while ( Size > 0 )
   {
-    v6 = (v5 >> 1) + v3;
-    v7 = v2->Paragraphs.Data.Data[v6].pPara;
-    v8 = v7->StartIndex;
-    if ( indexOfChar >= v8 && indexOfChar < v8 + v7->Text.Size || (signed int)v8 - (signed int)indexOfChar >= 0 )
+    v6 = (Size >> 1) + v3;
+    pPara = pObject->Paragraphs.Data.Data[v6].pPara;
+    StartIndex = pPara->StartIndex;
+    if ( indexOfChar >= StartIndex && indexOfChar < StartIndex + pPara->Text.Size
+      || (int)StartIndex - (int)indexOfChar >= 0 )
     {
-      v5 >>= 1;
+      Size >>= 1;
     }
     else
     {
       v3 = v6 + 1;
-      v5 += -1 - (v5 >> 1);
+      Size += -1 - (Size >> 1);
     }
   }
-  if ( v3 >= v2->Paragraphs.Data.Size
-    || ((v9 = v2->Paragraphs.Data.Data[v3].pPara, v10 = v9->StartIndex, v4 < v10) || v4 >= v10 + v9->Text.Size)
-    && (_DWORD)v10 != (_DWORD)v4
-    || (v3 & 0x80000000) != 0i64
-    || (signed int)v3 >= (signed __int64)SLODWORD(v2->Paragraphs.Data.Size) )
+  if ( v3 < pObject->Paragraphs.Data.Size
+    && ((v9 = pObject->Paragraphs.Data.Data[v3].pPara, v10 = v9->StartIndex, indexOfChar >= v10)
+     && indexOfChar < v10 + v9->Text.Size
+     || (_DWORD)v10 == (_DWORD)indexOfChar)
+    && (v3 & 0x80000000) == 0i64
+    && (int)v3 < (__int64)SLODWORD(pObject->Paragraphs.Data.Size) )
   {
-    result = -1i64;
+    return pObject->Paragraphs.Data.Data[(int)v3].pPara->StartIndex;
   }
   else
   {
-    result = v2->Paragraphs.Data.Data[(signed int)v3].pPara->StartIndex;
+    return -1i64;
   }
-  return result;
 }
 
 // File Line: 3329
 // RVA: 0x980260
 __int64 __fastcall Scaleform::Render::Text::DocView::GetBottomVScroll(Scaleform::Render::Text::DocView *this)
 {
-  Scaleform::Render::Text::DocView *v1; // rdi
-  unsigned __int64 v2; // rbx
-  Scaleform::Render::Text::LineBuffer *v3; // rdi
+  unsigned __int64 FirstVisibleLinePos; // rbx
+  Scaleform::Render::Text::LineBuffer *p_mLineBuffer; // rdi
   unsigned int v4; // esi
   int v5; // ecx
-  Scaleform::Render::Text::LineBuffer::Line *v6; // rcx
-  unsigned int v7; // et1
-  Scaleform::Render::Text::LineBuffer::Line *v8; // rdx
-  unsigned int v9; // et1
-  char v10; // bp
-  float v11; // xmm6_4
+  bool v6; // bp
+  float v7; // xmm6_4
 
-  v1 = this;
   Scaleform::Render::Text::DocView::ForceReformat(this);
-  v2 = v1->mLineBuffer.Geom.FirstVisibleLinePos;
-  v3 = &v1->mLineBuffer;
+  FirstVisibleLinePos = this->mLineBuffer.Geom.FirstVisibleLinePos;
+  p_mLineBuffer = &this->mLineBuffer;
   v4 = 0;
   v5 = 0;
-  if ( (_DWORD)v2 && v3 && v2 < v3->Lines.Data.Size && (v2 & 0x80000000) == 0i64 && v3 && v3->Lines.Data.Size > 0 )
+  if ( (_DWORD)FirstVisibleLinePos
+    && p_mLineBuffer
+    && FirstVisibleLinePos < p_mLineBuffer->Lines.Data.Size
+    && (FirstVisibleLinePos & 0x80000000) == 0i64
+    && p_mLineBuffer->Lines.Data.Size )
   {
-    v6 = v3->Lines.Data.Data[v2];
-    v7 = v6->MemSize;
-    v8 = *v3->Lines.Data.Data;
-    v9 = v8->MemSize;
-    v5 = v6->Data32.OffsetY - v8->Data32.OffsetY;
+    v5 = p_mLineBuffer->Lines.Data.Data[FirstVisibleLinePos]->Data32.OffsetY
+       - (*p_mLineBuffer->Lines.Data.Data)->Data32.OffsetY;
   }
-  v10 = ((unsigned __int8)v3->Geom.Flags >> 2) & 1;
-  LODWORD(v11) = COERCE_UNSIGNED_INT((float)v5) ^ _xmm[0];
-  while ( v3
-       && (unsigned int)v2 < v3->Lines.Data.Size
-       && (v2 & 0x80000000) == 0i64
-       && (v10 || Scaleform::Render::Text::LineBuffer::IsLineVisible(v3, v2, v11)) )
+  v6 = (p_mLineBuffer->Geom.Flags & 4) != 0;
+  LODWORD(v7) = COERCE_UNSIGNED_INT((float)v5) ^ _xmm[0];
+  while ( p_mLineBuffer
+       && (unsigned int)FirstVisibleLinePos < p_mLineBuffer->Lines.Data.Size
+       && (FirstVisibleLinePos & 0x80000000) == 0i64
+       && (v6 || Scaleform::Render::Text::LineBuffer::IsLineVisible(p_mLineBuffer, FirstVisibleLinePos, v7)) )
   {
-    v4 = v2;
-    LODWORD(v2) = v2 + 1;
+    v4 = FirstVisibleLinePos;
+    LODWORD(FirstVisibleLinePos) = FirstVisibleLinePos + 1;
   }
   return v4;
 }
 
 // File Line: 3341
 // RVA: 0x9AE5A0
-char __fastcall Scaleform::Render::Text::DocView::SetBottomVScroll(Scaleform::Render::Text::DocView *this, unsigned int newBottomMostLine)
+char __fastcall Scaleform::Render::Text::DocView::SetBottomVScroll(
+        Scaleform::Render::Text::DocView *this,
+        int newBottomMostLine)
 {
-  unsigned int v2; // eax
-  Scaleform::Render::Text::DocView *v3; // rsi
-  Scaleform::Render::Text::LineBuffer *v4; // r14
+  unsigned int Size; // eax
+  Scaleform::Render::Text::LineBuffer *p_mLineBuffer; // r14
   __int64 v5; // r8
   unsigned __int64 v6; // rdi
-  Scaleform::Render::Text::LineBuffer::Line **v7; // r15
-  Scaleform::Render::Text::LineBuffer::Line *v8; // rax
-  unsigned int v9; // er10
-  int v10; // ecx
-  unsigned int v11; // ebx
-  unsigned int v12; // et1
-  char v13; // di
-  unsigned int v14; // eax
-  Scaleform::Render::Text::DocView::DocumentListener *v15; // rcx
+  Scaleform::Render::Text::LineBuffer::Line *v7; // rax
+  unsigned int Height; // r10d
+  int v9; // ecx
+  unsigned int v10; // ebx
+  char v11; // di
+  unsigned int MaxVScroll; // eax
+  Scaleform::Render::Text::DocView::DocumentListener *pObject; // rcx
 
-  v2 = this->mLineBuffer.Lines.Data.Size;
-  v3 = this;
-  if ( newBottomMostLine >= v2 )
-    newBottomMostLine = v2 - 1;
-  v4 = &this->mLineBuffer;
-  v5 = newBottomMostLine;
+  Size = this->mLineBuffer.Lines.Data.Size;
+  if ( newBottomMostLine >= Size )
+    newBottomMostLine = Size - 1;
+  p_mLineBuffer = &this->mLineBuffer;
+  v5 = (unsigned int)newBottomMostLine;
   if ( this == (Scaleform::Render::Text::DocView *)-80i64 )
     return 0;
   v6 = this->mLineBuffer.Lines.Data.Size;
-  if ( newBottomMostLine >= v6 || (newBottomMostLine & 0x80000000) != 0 )
+  if ( (unsigned int)newBottomMostLine >= v6 || newBottomMostLine < 0 )
     return 0;
-  v7 = v4->Lines.Data.Data;
-  v8 = v4->Lines.Data.Data[newBottomMostLine];
-  if ( (v8->MemSize & 0x80000000) == 0 )
-    v9 = v8->Data32.Height;
+  v7 = p_mLineBuffer->Lines.Data.Data[newBottomMostLine];
+  if ( (v7->MemSize & 0x80000000) == 0 )
+    Height = v7->Data32.Height;
   else
-    v9 = v8->Data8.Height;
-  if ( (v8->MemSize & 0x80000000) == 0 )
+    Height = v7->Data8.Height;
+  if ( (v7->MemSize & 0x80000000) == 0 )
   {
-    LOWORD(v10) = v8->Data32.Leading;
-    if ( (signed __int16)v10 > 0 )
+    LOWORD(v9) = v7->Data32.Leading;
+    if ( (__int16)v9 > 0 )
     {
-      v10 = (signed __int16)v10;
+      v9 = (__int16)v9;
       goto LABEL_15;
     }
   }
   else
   {
-    LOBYTE(v10) = v8->Data8.Leading;
-    if ( (char)v10 > 0 )
+    LOBYTE(v9) = v7->Data8.Leading;
+    if ( (char)v9 > 0 )
     {
-      v10 = (char)v10;
+      v9 = (char)v9;
       goto LABEL_15;
     }
   }
-  v10 = 0;
+  v9 = 0;
 LABEL_15:
-  v11 = newBottomMostLine;
+  v10 = newBottomMostLine;
   do
   {
-    if ( newBottomMostLine >= v6 )
+    if ( (unsigned int)newBottomMostLine >= v6 )
       break;
-    if ( (newBottomMostLine & 0x80000000) != 0 )
+    if ( newBottomMostLine < 0 )
       break;
-    v12 = v7[newBottomMostLine]->MemSize;
-    if ( (float)v7[newBottomMostLine]->Data32.OffsetY < (float)((float)((float)(signed int)(v8->Data32.OffsetY + v10 + v9)
-                                                                      - v3->mLineBuffer.Geom.VisibleRect.y2)
-                                                              + v3->mLineBuffer.Geom.VisibleRect.y1) )
+    if ( (float)p_mLineBuffer->Lines.Data.Data[newBottomMostLine]->Data32.OffsetY < (float)((float)((float)(int)(v7->Data32.OffsetY + v9 + Height)
+                                                                                                  - this->mLineBuffer.Geom.VisibleRect.y2)
+                                                                                          + this->mLineBuffer.Geom.VisibleRect.y1) )
       break;
-    v11 = v5;
+    v10 = v5;
     --newBottomMostLine;
     --v5;
   }
   while ( v5 >= 0 );
-  v13 = 0;
-  v14 = Scaleform::Render::Text::DocView::GetMaxVScroll(v3);
-  if ( v11 > v14 )
-    v11 = v14;
-  if ( v3->mLineBuffer.Geom.FirstVisibleLinePos != v11 )
+  v11 = 0;
+  MaxVScroll = Scaleform::Render::Text::DocView::GetMaxVScroll(this);
+  if ( v10 > MaxVScroll )
+    v10 = MaxVScroll;
+  if ( this->mLineBuffer.Geom.FirstVisibleLinePos != v10 )
   {
-    v4->Geom.FirstVisibleLinePos = v11;
-    v4->Geom.Flags |= 1u;
-    v15 = v3->pDocumentListener.pObject;
-    if ( v15 )
-      ((void (__fastcall *)(Scaleform::Render::Text::DocView::DocumentListener *, Scaleform::Render::Text::DocView *, _QWORD))v15->vfptr[4].__vecDelDtor)(
-        v15,
-        v3,
-        v11);
-    v13 = 1;
+    p_mLineBuffer->Geom.FirstVisibleLinePos = v10;
+    p_mLineBuffer->Geom.Flags |= 1u;
+    pObject = this->pDocumentListener.pObject;
+    if ( pObject )
+      ((void (__fastcall *)(Scaleform::Render::Text::DocView::DocumentListener *, Scaleform::Render::Text::DocView *, _QWORD))pObject->vfptr[4].__vecDelDtor)(
+        pObject,
+        this,
+        v10);
+    return 1;
   }
-  return v13;
+  return v11;
 }
 
 // File Line: 3368
 // RVA: 0x967860
-Scaleform::Render::Text::DocView::HighlightDescLoc *__fastcall Scaleform::Render::Text::DocView::CreateHighlighterManager(Scaleform::Render::Text::DocView *this)
+Scaleform::Render::Text::DocView::HighlightDescLoc *__fastcall Scaleform::Render::Text::DocView::CreateHighlighterManager(
+        Scaleform::Render::Text::DocView *this)
 {
-  Scaleform::Render::Text::DocView *v1; // rbx
   Scaleform::Render::Text::DocView::HighlightDescLoc *result; // rax
-  int v3; // [rsp+58h] [rbp+10h]
+  int v3; // [rsp+58h] [rbp+10h] BYREF
   Scaleform::Render::Text::DocView::HighlightDescLoc *v4; // [rsp+60h] [rbp+18h]
   Scaleform::Render::Text::DocView::HighlightDescLoc *v5; // [rsp+68h] [rbp+20h]
 
-  v1 = this;
   if ( this->pHighlight )
     return this->pHighlight;
   v3 = 74;
-  result = (Scaleform::Render::Text::DocView::HighlightDescLoc *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, Scaleform::Render::Text::DocView *, signed __int64, int *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap)(
+  result = (Scaleform::Render::Text::DocView::HighlightDescLoc *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, Scaleform::Render::Text::DocView *, __int64, int *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap)(
                                                                    Scaleform::Memory::pGlobalHeap,
                                                                    this,
                                                                    72i64,
@@ -6915,34 +6631,37 @@ Scaleform::Render::Text::DocView::HighlightDescLoc *__fastcall Scaleform::Render
   {
     result = 0i64;
   }
-  v1->pHighlight = result;
+  this->pHighlight = result;
   return result;
 }
 
 // File Line: 3389
 // RVA: 0x9BE550
-void __fastcall Scaleform::Render::Text::DocView::UpdateHighlight(Scaleform::Render::Text::DocView *this, Scaleform::Render::Text::HighlightDesc *desc)
+void __fastcall Scaleform::Render::Text::DocView::UpdateHighlight(
+        Scaleform::Render::Text::DocView *this,
+        Scaleform::Render::Text::HighlightDesc *desc)
 {
-  Scaleform::Render::Text::DocView::HighlightDescLoc *v2; // rax
+  Scaleform::Render::Text::DocView::HighlightDescLoc *pHighlight; // rax
 
-  v2 = this->pHighlight;
-  if ( v2 )
+  pHighlight = this->pHighlight;
+  if ( pHighlight )
   {
-    if ( !(this->RTFlags & 0x40) )
-      *(_WORD *)&v2->HighlightManager.Valid = 0;
+    if ( (this->RTFlags & 0x40) == 0 )
+      *(_WORD *)&pHighlight->HighlightManager.Valid = 0;
   }
 }
 
 // File Line: 3397
 // RVA: 0x98B550
-Scaleform::Render::Text::HighlightDesc *__fastcall Scaleform::Render::Text::DocView::GetSelectionHighlighterDesc(Scaleform::Render::Text::DocView *this)
+Scaleform::Render::Text::HighlightDesc *__fastcall Scaleform::Render::Text::DocView::GetSelectionHighlighterDesc(
+        Scaleform::Render::Text::DocView *this)
 {
-  Scaleform::Render::Text::DocView::HighlightDescLoc *v1; // rbx
+  Scaleform::Render::Text::DocView::HighlightDescLoc *pHighlight; // rbx
   Scaleform::Render::Text::HighlightDesc *result; // rax
-  Scaleform::Render::Text::HighlightDesc desc; // [rsp+20h] [rbp-48h]
+  Scaleform::Render::Text::HighlightDesc desc; // [rsp+20h] [rbp-48h] BYREF
 
-  v1 = this->pHighlight;
-  if ( !v1 || this->RTFlags & 0x40 )
+  pHighlight = this->pHighlight;
+  if ( !pHighlight || (this->RTFlags & 0x40) != 0 )
     return 0i64;
   result = Scaleform::Render::Text::Highlighter::GetHighlighterPtr(&this->pHighlight->HighlightManager, 0x7FFFFFFFu);
   if ( !result )
@@ -6956,28 +6675,27 @@ Scaleform::Render::Text::HighlightDesc *__fastcall Scaleform::Render::Text::DocV
     desc.Id = 0x7FFFFFFF;
     *(_QWORD *)&desc.Info.BackgroundColor.Channels.Blue = -16777216i64;
     desc.Info.Flags = 24;
-    result = Scaleform::Render::Text::Highlighter::CreateHighlighter(&v1->HighlightManager, &desc);
+    return Scaleform::Render::Text::Highlighter::CreateHighlighter(&pHighlight->HighlightManager, &desc);
   }
   return result;
 }
 
 // File Line: 3416
 // RVA: 0x98B490
-Scaleform::Render::Text::HighlightDesc *__fastcall Scaleform::Render::Text::DocView::GetSelectionHighlighterDesc(Scaleform::Render::Text::DocView *this)
+Scaleform::Render::Text::HighlightDesc *__fastcall Scaleform::Render::Text::DocView::GetSelectionHighlighterDesc(
+        Scaleform::Render::Text::DocView *this)
 {
-  Scaleform::Render::Text::DocView *v1; // rbx
   __int64 v3; // rax
-  int v4; // [rsp+58h] [rbp+10h]
+  int v4; // [rsp+58h] [rbp+10h] BYREF
   __int64 v5; // [rsp+60h] [rbp+18h]
   __int64 v6; // [rsp+68h] [rbp+20h]
 
-  v1 = this;
-  if ( this->RTFlags & 0x40 )
+  if ( (this->RTFlags & 0x40) != 0 )
     return 0i64;
   if ( !this->pHighlight )
   {
     v4 = 74;
-    v3 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, Scaleform::Render::Text::DocView *, signed __int64, int *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap)(
+    v3 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, Scaleform::Render::Text::DocView *, __int64, int *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap)(
            Scaleform::Memory::pGlobalHeap,
            this,
            72i64,
@@ -7002,27 +6720,29 @@ Scaleform::Render::Text::HighlightDesc *__fastcall Scaleform::Render::Text::DocV
     {
       v3 = 0i64;
     }
-    v1->pHighlight = (Scaleform::Render::Text::DocView::HighlightDescLoc *)v3;
+    this->pHighlight = (Scaleform::Render::Text::DocView::HighlightDescLoc *)v3;
   }
-  return Scaleform::Render::Text::DocView::GetSelectionHighlighterDesc(v1);
+  return Scaleform::Render::Text::DocView::GetSelectionHighlighterDesc(this);
 }
 
 // File Line: 3425
 // RVA: 0x9B3AE0
-void __fastcall Scaleform::Render::Text::DocView::SetSelection(Scaleform::Render::Text::DocView *this, unsigned __int64 startPos, unsigned __int64 endPos, bool highlightSelection)
+void __fastcall Scaleform::Render::Text::DocView::SetSelection(
+        Scaleform::Render::Text::DocView *this,
+        unsigned __int64 startPos,
+        unsigned __int64 endPos,
+        bool highlightSelection)
 {
   unsigned __int64 v4; // rdi
   unsigned __int64 v5; // rsi
-  Scaleform::Render::Text::DocView *v6; // rbx
   __int64 v7; // rax
   unsigned __int64 v8; // rax
-  Scaleform::Render::Text::HighlightDesc *v9; // rax
+  Scaleform::Render::Text::HighlightDesc *SelectionHighlighterDesc; // rax
   unsigned __int64 v10; // rdi
-  int v11; // [rsp+78h] [rbp+20h]
+  int v11; // [rsp+78h] [rbp+20h] BYREF
 
   v4 = endPos;
   v5 = startPos;
-  v6 = this;
   this->BeginSelection = startPos;
   this->EndSelection = endPos;
   if ( highlightSelection )
@@ -7030,7 +6750,7 @@ void __fastcall Scaleform::Render::Text::DocView::SetSelection(Scaleform::Render
     if ( !this->pHighlight )
     {
       v11 = 74;
-      v7 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, Scaleform::Render::Text::DocView *, signed __int64, int *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap)(
+      v7 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, Scaleform::Render::Text::DocView *, __int64, int *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap)(
              Scaleform::Memory::pGlobalHeap,
              this,
              72i64,
@@ -7053,7 +6773,7 @@ void __fastcall Scaleform::Render::Text::DocView::SetSelection(Scaleform::Render
       {
         v7 = 0i64;
       }
-      v6->pHighlight = (Scaleform::Render::Text::DocView::HighlightDescLoc *)v7;
+      this->pHighlight = (Scaleform::Render::Text::DocView::HighlightDescLoc *)v7;
     }
     if ( v4 < v5 )
     {
@@ -7061,15 +6781,15 @@ void __fastcall Scaleform::Render::Text::DocView::SetSelection(Scaleform::Render
       v4 = v5;
       v5 = v8;
     }
-    if ( !(v6->RTFlags & 0x40) )
+    if ( (this->RTFlags & 0x40) == 0 )
     {
-      v9 = Scaleform::Render::Text::DocView::GetSelectionHighlighterDesc(v6);
+      SelectionHighlighterDesc = Scaleform::Render::Text::DocView::GetSelectionHighlighterDesc(this);
       v10 = v4 - v5;
-      if ( v9->StartPos != v5 || v9->Length != v10 )
+      if ( SelectionHighlighterDesc->StartPos != v5 || SelectionHighlighterDesc->Length != v10 )
       {
-        v9->StartPos = v5;
-        v9->Length = v10;
-        *(_WORD *)&v6->pHighlight->HighlightManager.Valid = 0;
+        SelectionHighlighterDesc->StartPos = v5;
+        SelectionHighlighterDesc->Length = v10;
+        *(_WORD *)&this->pHighlight->HighlightManager.Valid = 0;
       }
     }
   }
@@ -7077,117 +6797,97 @@ void __fastcall Scaleform::Render::Text::DocView::SetSelection(Scaleform::Render
 
 // File Line: 3474
 // RVA: 0x9B3BD0
-void __fastcall Scaleform::Render::Text::DocView::SetSelectionBackgroundColor(Scaleform::Render::Text::DocView *this, unsigned int color)
+void __fastcall Scaleform::Render::Text::DocView::SetSelectionBackgroundColor(
+        Scaleform::Render::Text::DocView *this,
+        unsigned int color)
 {
-  unsigned int v2; // edi
-  Scaleform::Render::Text::DocView *v3; // rbx
-  Scaleform::Render::Text::HighlightDesc *v4; // rax
-  char v5; // r8
-  unsigned int v6; // [rsp+30h] [rbp+8h]
+  Scaleform::Render::Text::HighlightDesc *SelectionHighlighterDesc; // rax
+  char Flags; // r8
+  unsigned int Raw; // [rsp+30h] [rbp+8h]
 
-  v2 = color;
-  v3 = this;
-  if ( !(this->RTFlags & 0x40) )
+  if ( (this->RTFlags & 0x40) == 0 )
   {
-    v4 = Scaleform::Render::Text::DocView::GetSelectionHighlighterDesc(this);
-    v5 = v4->Info.Flags;
-    if ( v5 & 8 )
-    {
-      v6 = v4->Info.BackgroundColor.Raw;
-    }
+    SelectionHighlighterDesc = Scaleform::Render::Text::DocView::GetSelectionHighlighterDesc(this);
+    Flags = SelectionHighlighterDesc->Info.Flags;
+    if ( (Flags & 8) != 0 )
+      Raw = SelectionHighlighterDesc->Info.BackgroundColor.Raw;
     else
+      Raw = 0;
+    if ( Raw != color )
     {
-      *(_WORD *)((char *)&v6 + 1) = 0;
-      LOBYTE(v6) = 0;
-      HIBYTE(v6) = 0;
-    }
-    if ( v6 != v2 )
-    {
-      v4->Info.Flags = v5 | 8;
-      v4->Info.BackgroundColor.Raw = v2;
-      *(_WORD *)&v3->pHighlight->HighlightManager.Valid = 0;
+      SelectionHighlighterDesc->Info.Flags = Flags | 8;
+      SelectionHighlighterDesc->Info.BackgroundColor.Raw = color;
+      *(_WORD *)&this->pHighlight->HighlightManager.Valid = 0;
     }
   }
 }
 
 // File Line: 3487
 // RVA: 0x9B3C40
-void __fastcall Scaleform::Render::Text::DocView::SetSelectionTextColor(Scaleform::Render::Text::DocView *this, unsigned int color)
+void __fastcall Scaleform::Render::Text::DocView::SetSelectionTextColor(
+        Scaleform::Render::Text::DocView *this,
+        unsigned int color)
 {
-  unsigned int v2; // edi
-  Scaleform::Render::Text::DocView *v3; // rbx
-  Scaleform::Render::Text::HighlightDesc *v4; // rax
-  char v5; // r8
-  unsigned int v6; // [rsp+30h] [rbp+8h]
+  Scaleform::Render::Text::HighlightDesc *SelectionHighlighterDesc; // rax
+  char Flags; // r8
+  unsigned int Raw; // [rsp+30h] [rbp+8h]
 
-  v2 = color;
-  v3 = this;
-  if ( !(this->RTFlags & 0x40) )
+  if ( (this->RTFlags & 0x40) == 0 )
   {
-    v4 = Scaleform::Render::Text::DocView::GetSelectionHighlighterDesc(this);
-    v5 = v4->Info.Flags;
-    if ( v5 & 0x10 )
-    {
-      v6 = v4->Info.TextColor.Raw;
-    }
+    SelectionHighlighterDesc = Scaleform::Render::Text::DocView::GetSelectionHighlighterDesc(this);
+    Flags = SelectionHighlighterDesc->Info.Flags;
+    if ( (Flags & 0x10) != 0 )
+      Raw = SelectionHighlighterDesc->Info.TextColor.Raw;
     else
+      Raw = 0;
+    if ( Raw != color )
     {
-      *(_WORD *)((char *)&v6 + 1) = 0;
-      LOBYTE(v6) = 0;
-      HIBYTE(v6) = 0;
-    }
-    if ( v6 != v2 )
-    {
-      v4->Info.Flags = v5 | 0x10;
-      v4->Info.TextColor.Raw = v2;
-      *(_WORD *)&v3->pHighlight->HighlightManager.Valid = 0;
+      SelectionHighlighterDesc->Info.Flags = Flags | 0x10;
+      SelectionHighlighterDesc->Info.TextColor.Raw = color;
+      *(_WORD *)&this->pHighlight->HighlightManager.Valid = 0;
     }
   }
 }
 
 // File Line: 3516
 // RVA: 0x9AEFB0
-void __fastcall Scaleform::Render::Text::DocView::SetDefaultTextAndParaFormat(Scaleform::Render::Text::DocView *this, unsigned __int64 cursorPos)
+void __fastcall Scaleform::Render::Text::DocView::SetDefaultTextAndParaFormat(
+        Scaleform::Render::Text::DocView *this,
+        unsigned __int64 cursorPos)
 {
-  unsigned __int64 v2; // rbx
-  Scaleform::Render::Text::DocView *v3; // rsi
-  unsigned __int64 v4; // rax
+  unsigned __int64 FirstCharInParagraph; // rax
   unsigned __int64 v5; // r9
-  Scaleform::Render::Text::DocView::DocumentText *v6; // rbx
+  Scaleform::Render::Text::DocView::DocumentText *pObject; // rbx
   Scaleform::Render::Text::ParagraphFormat *v7; // rdi
   Scaleform::Render::Text::ParagraphFormat *v8; // rcx
   Scaleform::Render::Text::TextFormat *v9; // rdx
-  Scaleform::Render::Text::ParagraphFormat *ppdestParaFmt; // [rsp+40h] [rbp+18h]
-  Scaleform::Render::Text::TextFormat *ppdestTextFmt; // [rsp+48h] [rbp+20h]
+  Scaleform::Render::Text::ParagraphFormat *ppdestParaFmt; // [rsp+40h] [rbp+18h] BYREF
+  Scaleform::Render::Text::TextFormat *ppdestTextFmt; // [rsp+48h] [rbp+20h] BYREF
 
-  v2 = cursorPos;
-  v3 = this;
   ppdestParaFmt = 0i64;
   ppdestTextFmt = 0i64;
-  v4 = Scaleform::Render::Text::DocView::GetFirstCharInParagraph(this, cursorPos);
-  if ( v4 != -1i64 )
+  FirstCharInParagraph = Scaleform::Render::Text::DocView::GetFirstCharInParagraph(this, cursorPos);
+  if ( FirstCharInParagraph != -1i64 )
   {
-    v5 = v2 - 1;
-    if ( v4 == v2 )
-      v5 = v2;
+    v5 = cursorPos - 1;
+    if ( FirstCharInParagraph == cursorPos )
+      v5 = cursorPos;
     if ( (unsigned __int8)Scaleform::Render::Text::StyledText::GetTextAndParagraphFormat(
-                            (Scaleform::Render::Text::StyledText *)&v3->pDocument.pObject->vfptr,
+                            this->pDocument.pObject,
                             &ppdestTextFmt,
                             &ppdestParaFmt,
                             v5) )
     {
-      v6 = v3->pDocument.pObject;
+      pObject = this->pDocument.pObject;
       v7 = ppdestParaFmt;
       if ( ppdestParaFmt )
         ++ppdestParaFmt->RefCount;
-      v8 = v6->pDefaultParagraphFormat.pObject;
+      v8 = pObject->pDefaultParagraphFormat.pObject;
       if ( v8 )
         Scaleform::Render::Text::ParagraphFormat::Release(v8);
       v9 = ppdestTextFmt;
-      v6->pDefaultParagraphFormat.pObject = v7;
-      Scaleform::Render::Text::StyledText::SetDefaultTextFormat(
-        (Scaleform::Render::Text::StyledText *)&v3->pDocument.pObject->vfptr,
-        v9);
+      pObject->pDefaultParagraphFormat.pObject = v7;
+      Scaleform::Render::Text::StyledText::SetDefaultTextFormat(this->pDocument.pObject, v9);
     }
   }
 }

@@ -28,23 +28,26 @@ hkClass *__fastcall hkpStorageMeshShape::SubpartStorage::staticClass()
 
 // File Line: 71
 // RVA: 0xCECCD0
-void __fastcall finishLoadedObjecthkpStorageMeshShapeSubpartStorage(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpStorageMeshShapeSubpartStorage(
+        hkpStorageMeshShape::SubpartStorage *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpStorageMeshShape::SubpartStorage::SubpartStorage);
+  if ( p )
+    hkpStorageMeshShape::SubpartStorage::SubpartStorage(p, finishing);
 }
 
 // File Line: 77
 // RVA: 0xCECCF0
-void __fastcall cleanupLoadedObjecthkpStorageMeshShapeSubpartStorage(void *p)
+void __fastcall cleanupLoadedObjecthkpStorageMeshShapeSubpartStorage(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 81
 // RVA: 0xCECD00
 hkBaseObjectVtbl *__fastcall getVtablehkpStorageMeshShapeSubpartStorage()
 {
-  hkpStorageMeshShape::SubpartStorage v1; // [rsp+20h] [rbp-78h]
+  hkpStorageMeshShape::SubpartStorage v1; // [rsp+20h] [rbp-78h] BYREF
 
   hkpStorageMeshShape::SubpartStorage::SubpartStorage(&v1, 0);
   return v1.vfptr;
@@ -61,8 +64,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpStorageMeshShapeSubpartStorageType
   hkpStorageMeshShapeSubpartStorageTypeInfo.m_typeName = "hkpStorageMeshShapeSubpartStorage";
   hkpStorageMeshShapeSubpartStorageTypeInfo.m_vtable = result;
   hkpStorageMeshShapeSubpartStorageTypeInfo.m_scopedName = "!hkpStorageMeshShape::SubpartStorage";
-  hkpStorageMeshShapeSubpartStorageTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpStorageMeshShapeSubpartStorage;
-  hkpStorageMeshShapeSubpartStorageTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpStorageMeshShapeSubpartStorage;
+  hkpStorageMeshShapeSubpartStorageTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpStorageMeshShapeSubpartStorage;
+  hkpStorageMeshShapeSubpartStorageTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpStorageMeshShapeSubpartStorage;
   return result;
 }
 
@@ -96,26 +99,27 @@ hkClass *__fastcall hkpStorageMeshShape::staticClass()
 
 // File Line: 141
 // RVA: 0xCECD30
-void __fastcall finishLoadedObjecthkpStorageMeshShape(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpStorageMeshShape(hkpStorageMeshShape *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpStorageMeshShape::hkpStorageMeshShape);
+  if ( p )
+    hkpStorageMeshShape::hkpStorageMeshShape(p, finishing);
 }
 
 // File Line: 147
 // RVA: 0xCECD50
-void __fastcall cleanupLoadedObjecthkpStorageMeshShape(void *p)
+void __fastcall cleanupLoadedObjecthkpStorageMeshShape(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 151
 // RVA: 0xCECD60
 hkBaseObjectVtbl *__fastcall getVtablehkpStorageMeshShape()
 {
-  hkpStorageMeshShape v1; // [rsp+20h] [rbp-98h]
+  hkpStorageMeshShape v1; // [rsp+20h] [rbp-98h] BYREF
 
   hkpStorageMeshShape::hkpStorageMeshShape(&v1, 0);
-  return v1.vfptr;
+  return v1.hkpMeshShape::hkpShapeCollection::hkpShape::hkpShapeBase::hkcdShape::hkReferencedObject::hkBaseObject::vfptr;
 }
 
 // File Line: 173
@@ -129,8 +133,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpStorageMeshShapeTypeInfo__()
   hkpStorageMeshShapeTypeInfo.m_typeName = "hkpStorageMeshShape";
   hkpStorageMeshShapeTypeInfo.m_vtable = result;
   hkpStorageMeshShapeTypeInfo.m_scopedName = "!hkpStorageMeshShape";
-  hkpStorageMeshShapeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpStorageMeshShape;
-  hkpStorageMeshShapeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpStorageMeshShape;
+  hkpStorageMeshShapeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpStorageMeshShape;
+  hkpStorageMeshShapeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpStorageMeshShape;
   return result;
 }
 

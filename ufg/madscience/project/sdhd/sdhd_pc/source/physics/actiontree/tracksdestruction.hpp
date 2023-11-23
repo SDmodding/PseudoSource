@@ -97,7 +97,8 @@ __int64 __fastcall DestructionStiffSpringConstraintTrack::GetClassNameUID(Destru
 
 // File Line: 671
 // RVA: 0x2C1020
-const char *__fastcall DestructionBallAndSocketConstraintTrack::GetClassname(DestructionBallAndSocketConstraintTrack *this)
+const char *__fastcall DestructionBallAndSocketConstraintTrack::GetClassname(
+        DestructionBallAndSocketConstraintTrack *this)
 {
   return DestructionBallAndSocketConstraintTrack::sClassName;
 }

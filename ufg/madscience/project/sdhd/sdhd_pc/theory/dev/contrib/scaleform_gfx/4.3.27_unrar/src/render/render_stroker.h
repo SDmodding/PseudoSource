@@ -16,7 +16,7 @@ float __fastcall Scaleform::Render::Stroker::GetLastY(Scaleform::Render::Stroker
 // RVA: 0x954F50
 void __fastcall Scaleform::Render::Stroker::AddVertex(Scaleform::Render::Stroker *this, float x, float y)
 {
-  Scaleform::Render::StrokeVertex v; // [rsp+20h] [rbp-18h]
+  Scaleform::Render::StrokeVertex v; // [rsp+20h] [rbp-18h] BYREF
 
   v.x = x;
   v.y = y;
@@ -42,14 +42,9 @@ float __fastcall Scaleform::Render::StrokeScaler::GetLastY(Scaleform::Render::St
 // RVA: 0x954E80
 void __fastcall Scaleform::Render::StrokeScaler::AddVertex(Scaleform::Render::StrokeScaler *this, float x, float y)
 {
-  float v3; // xmm2_4
-  float v4; // xmm1_4
-
   this->LastX = x;
   this->LastY = y;
-  v3 = y * this->ScaleY;
-  v4 = x * this->ScaleX;
-  ((void (*)(void))this->Str->vfptr->AddVertex)();
+  ((void (__fastcall *)(Scaleform::Render::Stroker *))this->Str->vfptr->AddVertex)(this->Str);
 }
 
 // File Line: 346
@@ -68,14 +63,13 @@ float __fastcall Scaleform::Render::StrokeSorter::GetLastY(Scaleform::Render::St
 
 // File Line: 398
 // RVA: 0x9D62E0
-bool __fastcall Scaleform::Render::StrokeSorter::cmpPaths(Scaleform::Render::StrokeSorter::SortedPathType *a, Scaleform::Render::StrokeSorter::SortedPathType *b)
+bool __fastcall Scaleform::Render::StrokeSorter::cmpPaths(
+        Scaleform::Render::StrokeSorter::SortedPathType *a,
+        Scaleform::Render::StrokeSorter::SortedPathType *b)
 {
-  bool result; // al
-
   if ( a->x == b->x )
-    result = a->y < b->y;
+    return a->y < b->y;
   else
-    result = b->x > a->x;
-  return result;
+    return b->x > a->x;
 }
 

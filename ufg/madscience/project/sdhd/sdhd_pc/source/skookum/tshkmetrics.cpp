@@ -23,42 +23,40 @@ void __fastcall UFG::TSHKMetrics::MthdC_set_sequence_time(SSInvokedMethod *pScop
 // RVA: 0x4E88F0
 void __fastcall UFG::TSHKMetrics::MthdC_get_sequence_position(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance **v2; // rdi
-  UFG::qVector3 *v3; // rbx
+  UFG::qVector3 *SequencePos; // rbx
   UFG::allocator::free_link *v4; // rax
-  float v5; // xmm1_4
-  float v6; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
 
-  v2 = ppResult;
-  v3 = UFG::HKMetrics::GetSequencePos();
+  SequencePos = UFG::HKMetrics::GetSequencePos();
   v4 = UFG::qMalloc(0xCui64, "Skookum.qVector3", 0i64);
   if ( v4 )
   {
-    v5 = v3->y;
-    v6 = v3->z;
-    *(float *)&v4->mNext = v3->x;
-    *((float *)&v4->mNext + 1) = v5;
-    *(float *)&v4[1].mNext = v6;
+    y = SequencePos->y;
+    z = SequencePos->z;
+    *(float *)&v4->mNext = SequencePos->x;
+    *((float *)&v4->mNext + 1) = y;
+    *(float *)&v4[1].mNext = z;
   }
-  *v2 = SSInstance::pool_new(UFG::SkookumMgr::mspVector3Class, (unsigned __int64)v4);
+  *ppResult = SSInstance::pool_new(UFG::SkookumMgr::mspVector3Class, (unsigned __int64)v4);
 }
 
 // File Line: 116
 // RVA: 0x4EEE60
 void __fastcall UFG::TSHKMetrics::MthdC_set_sequence_position(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSData **v2; // rdx
-  SSInstance *v3; // rcx
+  SSData **i_array_p; // rdx
+  SSInstance *i_data_p; // rcx
   SSData *v4; // rax
   float v5; // xmm0_4
   SSInstance *v6; // rcx
-  UFG::qVector3 position; // [rsp+20h] [rbp-18h]
+  UFG::qVector3 position; // [rsp+20h] [rbp-18h] BYREF
 
-  v2 = pScope->i_data.i_array_p;
-  v3 = v2[1]->i_data_p;
-  v4 = v2[2];
-  position.x = *(float *)&(*v2)->i_data_p->i_user_data;
-  v5 = *(float *)&v3->i_user_data;
+  i_array_p = pScope->i_data.i_array_p;
+  i_data_p = i_array_p[1]->i_data_p;
+  v4 = i_array_p[2];
+  position.x = *(float *)&(*i_array_p)->i_data_p->i_user_data;
+  v5 = *(float *)&i_data_p->i_user_data;
   v6 = v4->i_data_p;
   position.y = v5;
   position.z = *(float *)&v6->i_user_data;
@@ -67,6 +65,7 @@ void __fastcall UFG::TSHKMetrics::MthdC_set_sequence_position(SSInvokedMethod *p
 
 // File Line: 125
 // RVA: 0x4E42A0
+// attributes: thunk
 void __fastcall UFG::TSHKMetrics::MthdC_capture_perf_metrics(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
   UFG::HKMetrics::LogPerfStats((UFG::HKMetrics *)pScope);
@@ -76,7 +75,7 @@ void __fastcall UFG::TSHKMetrics::MthdC_capture_perf_metrics(SSInvokedMethod *pS
 // RVA: 0x4E4290
 void __fastcall UFG::TSHKMetrics::MthdC_capture_memory_summary_metrics(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  UFG::HKMetrics::LogMemStats(0);
+  UFG::HKMetrics::LogMemStats(MEM_LOG_DETAIL_SUMMARY);
 }
 
 // File Line: 135
@@ -84,7 +83,7 @@ void __fastcall UFG::TSHKMetrics::MthdC_capture_memory_summary_metrics(SSInvoked
 void __fastcall UFG::TSHKMetrics::MthdC_capture_summary_metrics(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
   UFG::HKMetrics::LogPerfStats((UFG::HKMetrics *)pScope);
-  UFG::HKMetrics::LogMemStats(0);
+  UFG::HKMetrics::LogMemStats(MEM_LOG_DETAIL_SUMMARY);
 }
 
 // File Line: 141
@@ -92,26 +91,49 @@ void __fastcall UFG::TSHKMetrics::MthdC_capture_summary_metrics(SSInvokedMethod 
 void UFG::TSHKMetrics::BindAtomics(void)
 {
   SSClass *v0; // rbx
+  ASymbol rebind; // [rsp+20h] [rbp-18h]
+  ASymbol rebinda; // [rsp+20h] [rbp-18h]
+  ASymbol rebindb; // [rsp+20h] [rbp-18h]
+  ASymbol rebindc; // [rsp+20h] [rbp-18h]
+  ASymbol rebindd; // [rsp+20h] [rbp-18h]
+  ASymbol rebinde; // [rsp+20h] [rbp-18h]
+  ASymbol rebindf; // [rsp+20h] [rbp-18h]
+  ASymbol rebindg; // [rsp+20h] [rbp-18h]
+  ASymbol rebindh; // [rsp+20h] [rbp-18h]
 
+  LOBYTE(rebind.i_uid) = 0;
   v0 = SSBrain::get_class("HKMetrics");
   SSClass::register_method_func(
     v0,
     "prepare_for_census",
     (void (__fastcall *)(SSInvokedMethod *, SSInstance **))_,
     1,
-    0);
-  SSClass::register_method_func(v0, "set_session_id", UFG::TSHKMetrics::MthdC_set_session_id, 1, 0);
-  SSClass::register_method_func(v0, "set_sequence_id", UFG::TSHKMetrics::MthdC_set_sequence_id, 1, 0);
-  SSClass::register_method_func(v0, "set_sequence_time", UFG::TSHKMetrics::MthdC_set_sequence_time, 1, 0);
-  SSClass::register_method_func(v0, "set_sequence_position", UFG::TSHKMetrics::MthdC_set_sequence_position, 1, 0);
-  SSClass::register_method_func(v0, "get_sequence_position", UFG::TSHKMetrics::MthdC_get_sequence_position, 1, 0);
-  SSClass::register_method_func(v0, "capture_perf_metrics", UFG::TSHKMetrics::MthdC_capture_perf_metrics, 1, 0);
+    rebind);
+  LOBYTE(rebinda.i_uid) = 0;
+  SSClass::register_method_func(v0, "set_session_id", UFG::TSHKMetrics::MthdC_set_session_id, 1, rebinda);
+  LOBYTE(rebindb.i_uid) = 0;
+  SSClass::register_method_func(v0, "set_sequence_id", UFG::TSHKMetrics::MthdC_set_sequence_id, 1, rebindb);
+  LOBYTE(rebindc.i_uid) = 0;
+  SSClass::register_method_func(v0, "set_sequence_time", UFG::TSHKMetrics::MthdC_set_sequence_time, 1, rebindc);
+  LOBYTE(rebindd.i_uid) = 0;
+  SSClass::register_method_func(v0, "set_sequence_position", UFG::TSHKMetrics::MthdC_set_sequence_position, 1, rebindd);
+  LOBYTE(rebinde.i_uid) = 0;
+  SSClass::register_method_func(v0, "get_sequence_position", UFG::TSHKMetrics::MthdC_get_sequence_position, 1, rebinde);
+  LOBYTE(rebindf.i_uid) = 0;
+  SSClass::register_method_func(v0, "capture_perf_metrics", UFG::TSHKMetrics::MthdC_capture_perf_metrics, 1, rebindf);
+  LOBYTE(rebindg.i_uid) = 0;
   SSClass::register_method_func(
     v0,
     "capture_memory_summary_metrics",
     UFG::TSHKMetrics::MthdC_capture_memory_summary_metrics,
     1,
-    0);
-  SSClass::register_method_func(v0, "capture_summary_metrics", UFG::TSHKMetrics::MthdC_capture_summary_metrics, 1, 0);
+    rebindg);
+  LOBYTE(rebindh.i_uid) = 0;
+  SSClass::register_method_func(
+    v0,
+    "capture_summary_metrics",
+    UFG::TSHKMetrics::MthdC_capture_summary_metrics,
+    1,
+    rebindh);
 }
 

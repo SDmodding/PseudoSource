@@ -4,7 +4,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SCREEN_FADE_IN_COMPLETE__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SCREEN_FADE_IN_COMPLETE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SCREEN_FADE_IN_COMPLETE", -1);
   UI_HASH_SCREEN_FADE_IN_COMPLETE = result;
   return result;
 }
@@ -15,7 +15,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SCREEN_FADE_OUT_COMPLETE__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SCREEN_FADE_OUT_COMPLETE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SCREEN_FADE_OUT_COMPLETE", -1);
   UI_HASH_SCREEN_FADE_OUT_COMPLETE = result;
   return result;
 }
@@ -29,7 +29,7 @@ void UFG::UIHK_NISOverlay::FadeToLight(void)
   {
     UFG::UIHK_NISOverlay::HideElement(
       &UFG::UIHKScreenGlobalOverlay::mThis->NISOverlay,
-      (UFG::UIScreen *)&UFG::UIHKScreenGlobalOverlay::mThis->vfptr,
+      UFG::UIHKScreenGlobalOverlay::mThis,
       &UFG::UIHK_NISOverlay::m_curtains,
       0.0,
       0);

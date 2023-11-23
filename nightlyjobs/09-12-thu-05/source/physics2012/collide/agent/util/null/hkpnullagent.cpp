@@ -3,7 +3,7 @@
 __int64 dynamic_initializer_for__hkNullAgentInstance__()
 {
   hkpNullAgent::hkpNullAgent(&hkNullAgentInstance);
-  return atexit(dynamic_atexit_destructor_for__hkNullAgentInstance__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__hkNullAgentInstance__);
 }
 
 // File Line: 21
@@ -17,28 +17,44 @@ void __fastcall hkpNullAgent::hkpNullAgent(hkpNullAgent *this)
 
 // File Line: 25
 // RVA: 0xD09620
-void __fastcall hkpNullAgent::staticGetClosestPoints(hkpCdBody *bodyA, hkpCdBody *bodyB, hkpCollisionInput *input, hkpCdPointCollector *collector)
+void __fastcall hkpNullAgent::staticGetClosestPoints(
+        hkpCdBody *bodyA,
+        hkpCdBody *bodyB,
+        hkpCollisionInput *input,
+        hkpCdPointCollector *collector)
 {
   ;
 }
 
 // File Line: 33
 // RVA: 0xD09630
-void __fastcall hkpNullAgent::staticGetPenetrations(hkpCdBody *bodyA, hkpCdBody *bodyB, hkpCollisionInput *input, hkpCdBodyPairCollector *collector)
+void __fastcall hkpNullAgent::staticGetPenetrations(
+        hkpCdBody *bodyA,
+        hkpCdBody *bodyB,
+        hkpCollisionInput *input,
+        hkpCdBodyPairCollector *collector)
 {
   ;
 }
 
 // File Line: 41
 // RVA: 0xD09640
-void __fastcall hkpNullAgent::staticLinearCast(hkpCdBody *bodyA, hkpCdBody *bodyB, hkpLinearCastCollisionInput *input, hkpCdPointCollector *collector)
+void __fastcall hkpNullAgent::staticLinearCast(
+        hkpCdBody *bodyA,
+        hkpCdBody *bodyB,
+        hkpLinearCastCollisionInput *input,
+        hkpCdPointCollector *collector)
 {
   ;
 }
 
 // File Line: 50
 // RVA: 0xD09650
-hkpNullAgent *__fastcall hkpNullAgent::createNullAgent(hkpCdBody *bodyA, hkpCdBody *bodyB, hkpCollisionInput *input, hkpContactMgr *mgr)
+hkpNullAgent *__fastcall hkpNullAgent::createNullAgent(
+        hkpCdBody *bodyA,
+        hkpCdBody *bodyB,
+        hkpCollisionInput *input,
+        hkpContactMgr *mgr)
 {
   return &hkNullAgentInstance;
 }

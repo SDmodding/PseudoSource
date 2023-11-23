@@ -3,6 +3,6 @@
 void __fastcall Scaleform::GFx::DrawText::~DrawText(Scaleform::GFx::DrawText *this)
 {
   this->vfptr = (Scaleform::RefCountNTSImplCoreVtbl *)&Scaleform::GFx::DrawText::`vftable;
-  Scaleform::RefCountNTSImplCore::~RefCountNTSImplCore((Scaleform::RefCountNTSImplCore *)&this->vfptr);
+  Scaleform::RefCountNTSImplCore::~RefCountNTSImplCore(this);
 }
 

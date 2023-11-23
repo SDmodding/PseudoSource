@@ -1,44 +1,48 @@
 // File Line: 24
 // RVA: 0xEDC18C
-OSuite::fastdelegate::FastDelegate1<OSuite::IHttpRequest *,bool> *__fastcall OSuite::ZHttpRequestBase::GetOnStartedCB(OSuite::ZHttpRequestBase *this, OSuite::fastdelegate::FastDelegate1<OSuite::IHttpRequest *,bool> *result)
+OSuite::fastdelegate::FastDelegate1<OSuite::IHttpRequest *,bool> *__fastcall OSuite::ZHttpRequestBase::GetOnStartedCB(
+        OSuite::ZHttpRequestBase *this,
+        OSuite::fastdelegate::FastDelegate1<OSuite::IHttpRequest *,bool> *result)
 {
   result->m_Closure.m_pthis = 0i64;
   result->m_Closure.m_pFunction = 0i64;
-  result->m_Closure.m_pFunction = this->m_OnStartedCB.m_Closure.m_pFunction;
-  result->m_Closure.m_pthis = this->m_OnStartedCB.m_Closure.m_pthis;
+  *result = this->m_OnStartedCB;
   return result;
 }
 
 // File Line: 25
 // RVA: 0xEDC138
-OSuite::fastdelegate::FastDelegate2<OSuite::IHttpRequest *,OSuite::IBufferedReader *,bool> *__fastcall OSuite::ZHttpRequestBase::GetOnDataAvailableCB(OSuite::ZHttpRequestBase *this, OSuite::fastdelegate::FastDelegate2<OSuite::IHttpRequest *,OSuite::IBufferedReader *,bool> *result)
+OSuite::fastdelegate::FastDelegate2<OSuite::IHttpRequest *,OSuite::IBufferedReader *,bool> *__fastcall OSuite::ZHttpRequestBase::GetOnDataAvailableCB(
+        OSuite::ZHttpRequestBase *this,
+        OSuite::fastdelegate::FastDelegate2<OSuite::IHttpRequest *,OSuite::IBufferedReader *,bool> *result)
 {
   result->m_Closure.m_pthis = 0i64;
   result->m_Closure.m_pFunction = 0i64;
-  result->m_Closure.m_pFunction = this->m_OnDataAvailableCB.m_Closure.m_pFunction;
-  result->m_Closure.m_pthis = this->m_OnDataAvailableCB.m_Closure.m_pthis;
+  *result = this->m_OnDataAvailableCB;
   return result;
 }
 
 // File Line: 26
 // RVA: 0xEDC154
-OSuite::fastdelegate::FastDelegate2<OSuite::IHttpRequest *,unsigned __int64,bool> *__fastcall OSuite::ZHttpRequestBase::GetOnDataNeededCB(OSuite::ZHttpRequestBase *this, OSuite::fastdelegate::FastDelegate2<OSuite::IHttpRequest *,unsigned __int64,bool> *result)
+OSuite::fastdelegate::FastDelegate2<OSuite::IHttpRequest *,unsigned __int64,bool> *__fastcall OSuite::ZHttpRequestBase::GetOnDataNeededCB(
+        OSuite::ZHttpRequestBase *this,
+        OSuite::fastdelegate::FastDelegate2<OSuite::IHttpRequest *,unsigned __int64,bool> *result)
 {
   result->m_Closure.m_pthis = 0i64;
   result->m_Closure.m_pFunction = 0i64;
-  result->m_Closure.m_pFunction = this->m_OnDataNeededCB.m_Closure.m_pFunction;
-  result->m_Closure.m_pthis = this->m_OnDataNeededCB.m_Closure.m_pthis;
+  *result = this->m_OnDataNeededCB;
   return result;
 }
 
 // File Line: 27
 // RVA: 0xEDC170
-OSuite::fastdelegate::FastDelegate2<OSuite::IHttpRequest *,enum OSuite::ZHttp::EError,bool> *__fastcall OSuite::ZHttpRequestBase::GetOnFinishedCB(OSuite::ZHttpRequestBase *this, OSuite::fastdelegate::FastDelegate2<OSuite::IHttpRequest *,enum OSuite::ZHttp::EError,bool> *result)
+OSuite::fastdelegate::FastDelegate2<OSuite::IHttpRequest *,enum OSuite::ZHttp::EError,bool> *__fastcall OSuite::ZHttpRequestBase::GetOnFinishedCB(
+        OSuite::ZHttpRequestBase *this,
+        OSuite::fastdelegate::FastDelegate2<OSuite::IHttpRequest *,enum OSuite::ZHttp::EError,bool> *result)
 {
   result->m_Closure.m_pthis = 0i64;
   result->m_Closure.m_pFunction = 0i64;
-  result->m_Closure.m_pFunction = this->m_OnFinishedCB.m_Closure.m_pFunction;
-  result->m_Closure.m_pthis = this->m_OnFinishedCB.m_Closure.m_pthis;
+  *result = this->m_OnFinishedCB;
   return result;
 }
 
@@ -65,7 +69,8 @@ __int64 __fastcall OSuite::ZHttpRequestBase::GetAsynchState(OSuite::ZHttpRequest
 
 // File Line: 41
 // RVA: 0xEDC0D4
-OSuite::TOrderedMap<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString> > *__fastcall OSuite::ZHttpRequestBase::GetHeaders(OSuite::ZHttpRequestBase *this)
+OSuite::TOrderedMap<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString> > *__fastcall OSuite::ZHttpRequestBase::GetHeaders(
+        OSuite::ZHttpRequestBase *this)
 {
   return &this->m_clientHeaders;
 }
@@ -116,11 +121,8 @@ bool __fastcall OSuite::ZHttpRequestBase::GetRecordUsage(OSuite::ZHttpRequestBas
 // RVA: 0xEDCA44
 void __fastcall OSuite::ZHttpRequestBase::SetAcceptType(OSuite::ZHttpRequestBase *this, OSuite::ZString *pAcceptType)
 {
-  OSuite::ZString *v2; // rbx
-
-  v2 = pAcceptType;
   OSuite::ZString::operator=(&this->m_acceptType, pAcceptType);
-  OSuite::ZString::~ZString(v2);
+  OSuite::ZString::~ZString(pAcceptType);
 }
 
 // File Line: 51
@@ -141,16 +143,15 @@ void __fastcall OSuite::ZHttpRequestBase::SetRecordUsage(OSuite::ZHttpRequestBas
 // RVA: 0xEDCA70
 void __fastcall OSuite::ZHttpRequestBase::SetContentType(OSuite::ZHttpRequestBase *this, OSuite::ZString *pContentType)
 {
-  OSuite::ZString *v2; // rbx
-
-  v2 = pContentType;
   OSuite::ZString::operator=(&this->m_contentType, pContentType);
-  OSuite::ZString::~ZString(v2);
+  OSuite::ZString::~ZString(pContentType);
 }
 
 // File Line: 54
 // RVA: 0xEDCA94
-void __fastcall OSuite::ZHttpRequestBase::SetLengthToSend(OSuite::ZHttpRequestBase *this, unsigned __int64 nLengthToSend)
+void __fastcall OSuite::ZHttpRequestBase::SetLengthToSend(
+        OSuite::ZHttpRequestBase *this,
+        unsigned __int64 nLengthToSend)
 {
   this->m_nLengthToSend = nLengthToSend;
 }
@@ -166,11 +167,8 @@ void __fastcall OSuite::ZHttpRequestBase::SetLinkedObject(OSuite::ZHttpRequestBa
 // RVA: 0xEDCAA4
 void __fastcall OSuite::ZHttpRequestBase::SetMethod(OSuite::ZHttpRequestBase *this, OSuite::ZString *pMethod)
 {
-  OSuite::ZString *v2; // rbx
-
-  v2 = pMethod;
   OSuite::ZString::operator=(&this->m_method, pMethod);
-  OSuite::ZString::~ZString(v2);
+  OSuite::ZString::~ZString(pMethod);
 }
 
 // File Line: 57
@@ -182,7 +180,9 @@ void __fastcall OSuite::ZHttpRequestBase::SetUrl(OSuite::ZHttpRequestBase *this,
 
 // File Line: 58
 // RVA: 0xEDCB94
-void __fastcall OSuite::ZHttpRequestBase::ThrottleBandwidth(OSuite::ZHttpRequestBase *this, unsigned __int64 nBytesPerSecond)
+void __fastcall OSuite::ZHttpRequestBase::ThrottleBandwidth(
+        OSuite::ZHttpRequestBase *this,
+        unsigned __int64 nBytesPerSecond)
 {
   this->m_nMaxBytesPerSecond = nBytesPerSecond;
 }
@@ -191,28 +191,24 @@ void __fastcall OSuite::ZHttpRequestBase::ThrottleBandwidth(OSuite::ZHttpRequest
 // RVA: 0xEDBDA8
 void __fastcall OSuite::ZHttpRequestBase::~ZHttpRequestBase(OSuite::ZHttpRequestBase *this)
 {
-  OSuite::ZHttpRequestBase *v1; // rbx
-  OSuite::ZRedBlackTreeBase *v2; // rcx
-  OSuite::TOrderedMap<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString> > *v3; // rcx
+  OSuite::TOrderedMap<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString> > *p_m_clientHeaders; // rcx
 
-  v1 = this;
   this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpRequestBase::`vftable;
-  v2 = (OSuite::ZRedBlackTreeBase *)&this->m_clientHeaders.vfptr;
-  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TRedBlackTree<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>,1,OSuite::TKeyValueElementComparer<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString>>>::`vftable;
-  v2[1].vfptr = (OSuite::ZObjectVtbl *)&OSuite::TOperatorComparer<OSuite::ZString>::`vftable{for `OSuite::IComparer<OSuite::ZString>};
-  v2[1].m_pTop = (OSuite::ZRedBlackTreeBase::ZElementBase *)&OSuite::TOperatorComparer<OSuite::ZString>::`vftable{for `OSuite::ZObject};
-  OSuite::ZRedBlackTreeBase::~ZRedBlackTreeBase(v2);
-  v3 = &v1->m_headers;
-  v3->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TRedBlackTree<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>,1,OSuite::TKeyValueElementComparer<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString>>>::`vftable;
-  v3->m_Comparer.vfptr = (OSuite::IComparer<OSuite::ZString>Vtbl *)&OSuite::TOperatorComparer<OSuite::ZString>::`vftable{for `OSuite::IComparer<OSuite::ZString>};
-  v3->m_Comparer.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TOperatorComparer<OSuite::ZString>::`vftable{for `OSuite::ZObject};
-  OSuite::ZRedBlackTreeBase::~ZRedBlackTreeBase((OSuite::ZRedBlackTreeBase *)&v1->m_headers.vfptr);
-  OSuite::ZString::~ZString(&v1->m_contentType);
-  OSuite::ZString::~ZString(&v1->m_acceptType);
-  OSuite::ZString::~ZString(&v1->m_method);
-  OSuite::ZMemoryBufferChain::~ZMemoryBufferChain(&v1->m_bufferChain);
-  OSuite::ZMutex::~ZMutex(&v1->m_StateMutex);
-  OSuite::ZUrl::~ZUrl(&v1->m_url);
-  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::IHttpRequest::`vftable;
+  p_m_clientHeaders = &this->m_clientHeaders;
+  p_m_clientHeaders->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TRedBlackTree<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>,1,OSuite::TKeyValueElementComparer<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString>>>::`vftable;
+  p_m_clientHeaders->m_Comparer.OSuite::TRedBlackTree<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>,1,OSuite::TKeyValueElementComparer<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString> > >::vfptr = (OSuite::IComparer<OSuite::ZString>Vtbl *)&OSuite::TOperatorComparer<OSuite::ZString>::`vftable{for `OSuite::IComparer<OSuite::ZString>};
+  p_m_clientHeaders->m_Comparer.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TOperatorComparer<OSuite::ZString>::`vftable{for `OSuite::ZObject};
+  OSuite::ZRedBlackTreeBase::~ZRedBlackTreeBase(p_m_clientHeaders);
+  this->m_headers.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TRedBlackTree<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZString>,1,OSuite::TKeyValueElementComparer<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString>>>::`vftable;
+  this->m_headers.m_Comparer.vfptr = (OSuite::IComparer<OSuite::ZString>Vtbl *)&OSuite::TOperatorComparer<OSuite::ZString>::`vftable{for `OSuite::IComparer<OSuite::ZString>};
+  this->m_headers.m_Comparer.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TOperatorComparer<OSuite::ZString>::`vftable{for `OSuite::ZObject};
+  OSuite::ZRedBlackTreeBase::~ZRedBlackTreeBase(&this->m_headers);
+  OSuite::ZString::~ZString(&this->m_contentType);
+  OSuite::ZString::~ZString(&this->m_acceptType);
+  OSuite::ZString::~ZString(&this->m_method);
+  OSuite::ZMemoryBufferChain::~ZMemoryBufferChain(&this->m_bufferChain);
+  OSuite::ZMutex::~ZMutex(&this->m_StateMutex);
+  OSuite::ZUrl::~ZUrl(&this->m_url);
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::IHttpRequest::`vftable;
 }
 

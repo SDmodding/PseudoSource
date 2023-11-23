@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkpBreakableShapeClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 60
@@ -28,17 +28,17 @@ hkClass *__fastcall hkpBreakableShape::staticClass()
 
 // File Line: 67
 // RVA: 0xD50190
-void __fastcall finishLoadedObjecthkpBreakableShape(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpBreakableShape(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpBreakableShape::`vftable;
+    *p = &hkpBreakableShape::`vftable;
 }
 
 // File Line: 73
 // RVA: 0xD501B0
-void __fastcall cleanupLoadedObjecthkpBreakableShape(void *p)
+void __fastcall cleanupLoadedObjecthkpBreakableShape(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 77
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkpBreakableShapeTypeInfo__()
   hkpBreakableShapeTypeInfo.m_typeName = "hkpBreakableShape";
   hkpBreakableShapeTypeInfo.m_vtable = result;
   hkpBreakableShapeTypeInfo.m_scopedName = "!hkpBreakableShape";
-  hkpBreakableShapeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpBreakableShape;
-  hkpBreakableShapeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpBreakableShape;
+  hkpBreakableShapeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpBreakableShape;
+  hkpBreakableShapeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpBreakableShape;
   return result;
 }
 

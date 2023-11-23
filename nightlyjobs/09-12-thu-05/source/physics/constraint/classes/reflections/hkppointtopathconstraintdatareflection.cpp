@@ -39,34 +39,29 @@ hkClass *__fastcall hkpPointToPathConstraintData::staticClass()
 
 // File Line: 88
 // RVA: 0xD43E80
-void __fastcall finishLoadedObjecthkpPointToPathConstraintData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpPointToPathConstraintData(void *p, hkFinishLoadedObjectFlag finishing)
 {
-  int v2; // edi
-  hkpBridgeConstraintAtom *v3; // rbx
-
   if ( p )
   {
-    v2 = finishing;
-    v3 = (hkpBridgeConstraintAtom *)p;
-    hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    *(_QWORD *)&v3->m_type.m_storage = &hkpPointToPathConstraintData::`vftable;
-    if ( v2 )
-      hkpBridgeConstraintAtom::init(v3 + 1, v3[1].m_constraintData);
+    hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, finishing);
+    *(_QWORD *)p = &hkpPointToPathConstraintData::`vftable;
+    if ( finishing.m_finishing )
+      hkpBridgeConstraintAtom::init((hkpBridgeConstraintAtom *)p + 1, *((hkpConstraintData **)p + 6));
   }
 }
 
 // File Line: 94
 // RVA: 0xD43ED0
-void __fastcall cleanupLoadedObjecthkpPointToPathConstraintData(void *p)
+void __fastcall cleanupLoadedObjecthkpPointToPathConstraintData(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 98
 // RVA: 0xD43EE0
 void **__fastcall getVtablehkpPointToPathConstraintData()
 {
-  hkpConstraintData v1; // [rsp+20h] [rbp-D8h]
+  hkpConstraintData v1; // [rsp+20h] [rbp-D8h] BYREF
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
   return &hkpPointToPathConstraintData::`vftable;
@@ -83,8 +78,8 @@ void **dynamic_initializer_for__hkpPointToPathConstraintDataTypeInfo__()
   hkpPointToPathConstraintDataTypeInfo.m_typeName = "hkpPointToPathConstraintData";
   hkpPointToPathConstraintDataTypeInfo.m_vtable = result;
   hkpPointToPathConstraintDataTypeInfo.m_scopedName = "!hkpPointToPathConstraintData";
-  hkpPointToPathConstraintDataTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpPointToPathConstraintData;
-  hkpPointToPathConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpPointToPathConstraintData;
+  hkpPointToPathConstraintDataTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpPointToPathConstraintData;
+  hkpPointToPathConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpPointToPathConstraintData;
   return result;
 }
 

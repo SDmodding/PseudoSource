@@ -1,40 +1,36 @@
 // File Line: 48
 // RVA: 0x25EE70
-ANTLR3_PARSER_struct *__fastcall antlr3ParserNewStreamDbg(unsigned int sizeHint, ANTLR3_TOKEN_STREAM_struct *tstream, ANTLR3_DEBUG_EVENT_LISTENER_struct *dbg, ANTLR3_RECOGNIZER_SHARED_STATE_struct *state)
+ANTLR3_PARSER_struct *__fastcall antlr3ParserNewStreamDbg(
+        unsigned int sizeHint,
+        ANTLR3_TOKEN_STREAM_struct *tstream,
+        ANTLR3_DEBUG_EVENT_LISTENER_struct *dbg,
+        UFG::allocator::free_link *state)
 {
-  ANTLR3_TOKEN_STREAM_struct *v4; // rsi
-  ANTLR3_DEBUG_EVENT_LISTENER_struct *v5; // rdi
   ANTLR3_PARSER_struct *result; // rax
   ANTLR3_PARSER_struct *v7; // rbx
 
-  v4 = tstream;
-  v5 = dbg;
   result = (ANTLR3_PARSER_struct *)antlr3ParserNew(sizeHint, state);
   v7 = result;
   if ( result )
   {
-    result->setTokenStream(result, v4);
-    v7->setDebugListener(v7, v5);
-    result = v7;
+    result->setTokenStream(result, tstream);
+    v7->setDebugListener(v7, dbg);
+    return v7;
   }
   return result;
 }
 
 // File Line: 65
 // RVA: 0x25ED80
-UFG::allocator::free_link *__fastcall antlr3ParserNew(unsigned int sizeHint, ANTLR3_RECOGNIZER_SHARED_STATE_struct *state)
+UFG::allocator::free_link *__fastcall antlr3ParserNew(unsigned int sizeHint, UFG::allocator::free_link *state)
 {
-  unsigned int v2; // esi
-  ANTLR3_RECOGNIZER_SHARED_STATE_struct *v3; // rdi
   UFG::allocator::free_link *v4; // rbx
   UFG::allocator::free_link *v5; // rax
 
-  v2 = sizeHint;
-  v3 = state;
   v4 = antlrMalloc(0x38ui64);
   if ( !v4 )
     return 0i64;
-  v5 = antlr3BaseRecognizerNew(2u, v2, v3);
+  v5 = antlr3BaseRecognizerNew(2u, sizeHint, state);
   v4[1].mNext = v5;
   if ( !v5 )
   {
@@ -52,19 +48,20 @@ UFG::allocator::free_link *__fastcall antlr3ParserNew(unsigned int sizeHint, ANT
 
 // File Line: 106
 // RVA: 0x25EE30
-ANTLR3_PARSER_struct *__fastcall antlr3ParserNewStream(unsigned int sizeHint, ANTLR3_TOKEN_STREAM_struct *tstream, ANTLR3_RECOGNIZER_SHARED_STATE_struct *state)
+ANTLR3_PARSER_struct *__fastcall antlr3ParserNewStream(
+        unsigned int sizeHint,
+        ANTLR3_TOKEN_STREAM_struct *tstream,
+        UFG::allocator::free_link *state)
 {
-  ANTLR3_TOKEN_STREAM_struct *v3; // rdi
   ANTLR3_PARSER_struct *result; // rax
   ANTLR3_PARSER_struct *v5; // rbx
 
-  v3 = tstream;
   result = (ANTLR3_PARSER_struct *)antlr3ParserNew(sizeHint, state);
   v5 = result;
   if ( result )
   {
-    result->setTokenStream(result, v3);
-    result = v5;
+    result->setTokenStream(result, tstream);
+    return v5;
   }
   return result;
 }
@@ -73,22 +70,22 @@ ANTLR3_PARSER_struct *__fastcall antlr3ParserNewStream(unsigned int sizeHint, AN
 // RVA: 0x25ED40
 void __fastcall setDebugListener(ANTLR3_PARSER_struct *parser, ANTLR3_DEBUG_EVENT_LISTENER_struct *dbg)
 {
-  ANTLR3_TOKEN_STREAM_struct *v2; // rax
+  ANTLR3_TOKEN_STREAM_struct *tstream; // rax
 
   parser->rec->debugger = dbg;
-  v2 = parser->tstream;
-  if ( v2 )
-    ((void (__fastcall *)(ANTLR3_TOKEN_STREAM_struct *))v2->setDebugListener)(parser->tstream);
+  tstream = parser->tstream;
+  if ( tstream )
+    ((void (__fastcall *)(ANTLR3_TOKEN_STREAM_struct *))tstream->setDebugListener)(parser->tstream);
 }
 
 // File Line: 173
 // RVA: 0x25ED60
 void __fastcall setTokenStream(ANTLR3_PARSER_struct *parser, ANTLR3_TOKEN_STREAM_struct *tstream)
 {
-  ANTLR3_BASE_RECOGNIZER_struct *v2; // rax
+  ANTLR3_BASE_RECOGNIZER_struct *rec; // rax
 
-  v2 = parser->rec;
+  rec = parser->rec;
   parser->tstream = tstream;
-  v2->reset(v2);
+  rec->reset(rec);
 }
 

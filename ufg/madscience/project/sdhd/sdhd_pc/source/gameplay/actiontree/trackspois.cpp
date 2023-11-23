@@ -33,14 +33,12 @@ __int64 dynamic_initializer_for__POIDisableSelfTrack::sClassNameUID__()
 
 // File Line: 56
 // RVA: 0x2DFC00
-void __fastcall InteractionPointInteractWithBestTrack::InteractionPointInteractWithBestTrack(InteractionPointInteractWithBestTrack *this)
+void __fastcall InteractionPointInteractWithBestTrack::InteractionPointInteractWithBestTrack(
+        InteractionPointInteractWithBestTrack *this)
 {
-  InteractionPointInteractWithBestTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, InteractionPointInteractWithBestTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<InteractionPointInteractWithBestTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&InteractionPointInteractWithBestTrack::`vftable;
+  ITrack::ITrack(this, InteractionPointInteractWithBestTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<InteractionPointInteractWithBestTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&InteractionPointInteractWithBestTrack::`vftable;
 }
 
 // File Line: 59
@@ -58,17 +56,14 @@ __int64 dynamic_initializer_for__InteractionPointInteractWithBestTrack::sClassNa
 // RVA: 0x2DFC40
 void __fastcall InteractionPointSetupTrack::InteractionPointSetupTrack(InteractionPointSetupTrack *this)
 {
-  InteractionPointSetupTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, InteractionPointSetupTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<InteractionPointSetupTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&InteractionPointSetupTrack::`vftable;
-  *(_WORD *)&v1->m_eTargetType.mValue = 325;
-  v1->m_eInteractionUpdate.mValue = 0;
-  v1->m_fDistance = 0.0;
-  v1->m_BoneName.mUID = -1;
-  v1->m_bDeactivateOnEnd = 0;
+  ITrack::ITrack(this, InteractionPointSetupTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<InteractionPointSetupTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&InteractionPointSetupTrack::`vftable;
+  *(_WORD *)&this->m_eTargetType.mValue = 325;
+  this->m_eInteractionUpdate.mValue = 0;
+  this->m_fDistance = 0.0;
+  this->m_BoneName.mUID = -1;
+  this->m_bDeactivateOnEnd = 0;
 }
 
 // File Line: 84
@@ -86,13 +81,10 @@ __int64 dynamic_initializer_for__InteractionPointSetupTrack::sClassNameUID__()
 // RVA: 0x2DFB60
 void __fastcall InteractionPointActivateTrack::InteractionPointActivateTrack(InteractionPointActivateTrack *this)
 {
-  InteractionPointActivateTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, InteractionPointActivateTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<InteractionPointActivateTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&InteractionPointActivateTrack::`vftable;
-  *(_WORD *)&v1->m_eTargetType.mValue = 70;
+  ITrack::ITrack(this, InteractionPointActivateTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<InteractionPointActivateTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&InteractionPointActivateTrack::`vftable;
+  *(_WORD *)&this->m_eTargetType.mValue = 70;
 }
 
 // File Line: 116
@@ -110,13 +102,10 @@ __int64 dynamic_initializer_for__InteractionPointActivateTrack::sClassNameUID__(
 // RVA: 0x2DFBB0
 void __fastcall InteractionPointDeactivateTrack::InteractionPointDeactivateTrack(InteractionPointDeactivateTrack *this)
 {
-  InteractionPointDeactivateTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, InteractionPointDeactivateTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<InteractionPointDeactivateTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&InteractionPointDeactivateTrack::`vftable;
-  v1->m_eTargetType.mValue = 70;
+  ITrack::ITrack(this, InteractionPointDeactivateTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<InteractionPointDeactivateTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&InteractionPointDeactivateTrack::`vftable;
+  this->m_eTargetType.mValue = 70;
 }
 
 // File Line: 140
@@ -145,15 +134,12 @@ __int64 dynamic_initializer_for__POIEnableChildTrack::sClassNameUID__()
 // RVA: 0x2DFFF0
 void __fastcall POIEnableChildTrack::POIEnableChildTrack(POIEnableChildTrack *this)
 {
-  POIEnableChildTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, POIEnableChildTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<POIEnableChildTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&POIEnableChildTrack::`vftable;
-  v1->m_ChildName.mOffset = 1i64;
-  BinString::Set(&v1->m_ChildName, &customWorldMapCaption);
-  v1->m_Index = 0;
-  v1->m_Active = 0;
+  ITrack::ITrack(this, POIEnableChildTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<POIEnableChildTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&POIEnableChildTrack::`vftable;
+  this->m_ChildName.mOffset = 1i64;
+  BinString::Set(&this->m_ChildName, &customCaption);
+  this->m_Index = 0;
+  this->m_Active = 0;
 }
 

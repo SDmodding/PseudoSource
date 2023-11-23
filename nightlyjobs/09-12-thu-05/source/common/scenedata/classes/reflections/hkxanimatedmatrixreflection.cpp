@@ -27,7 +27,7 @@ void dynamic_initializer_for__hkxAnimatedMatrixClass__()
     0i64,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 59
@@ -39,17 +39,17 @@ hkClass *__fastcall hkxAnimatedMatrix::staticClass()
 
 // File Line: 66
 // RVA: 0xE31700
-void __fastcall finishLoadedObjecthkxAnimatedMatrix(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxAnimatedMatrix(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxAnimatedMatrix::`vftable;
+    *p = &hkxAnimatedMatrix::`vftable;
 }
 
 // File Line: 72
 // RVA: 0xE31720
-void __fastcall cleanupLoadedObjecthkxAnimatedMatrix(void *p)
+void __fastcall cleanupLoadedObjecthkxAnimatedMatrix(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 76
@@ -70,8 +70,8 @@ void **dynamic_initializer_for__hkxAnimatedMatrixTypeInfo__()
   hkxAnimatedMatrixTypeInfo.m_typeName = "hkxAnimatedMatrix";
   hkxAnimatedMatrixTypeInfo.m_vtable = result;
   hkxAnimatedMatrixTypeInfo.m_scopedName = "!hkxAnimatedMatrix";
-  hkxAnimatedMatrixTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxAnimatedMatrix;
-  hkxAnimatedMatrixTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxAnimatedMatrix;
+  hkxAnimatedMatrixTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxAnimatedMatrix;
+  hkxAnimatedMatrixTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxAnimatedMatrix;
   return result;
 }
 

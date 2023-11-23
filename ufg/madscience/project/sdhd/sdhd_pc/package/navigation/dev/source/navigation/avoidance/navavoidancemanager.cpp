@@ -24,7 +24,7 @@ void UFG::NavAvoidanceManager::DeleteInstance(void)
   {
     UFG::NavAvoidanceManager::mspAvoidanceManager->vfptr->__vecDelDtor(
       UFG::NavAvoidanceManager::mspAvoidanceManager,
-      1u);
+      1i64);
     UFG::NavAvoidanceManager::mspAvoidanceManager = 0i64;
   }
 }

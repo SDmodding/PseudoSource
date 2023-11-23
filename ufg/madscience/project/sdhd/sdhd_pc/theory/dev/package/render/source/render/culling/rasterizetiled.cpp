@@ -1,195 +1,176 @@
 // File Line: 220
 // RVA: 0x6A45C0
-void __fastcall Render::RasterizeZ::DrawAABB(Render::RasterizeZ *this, UFG::qVector3 *vmin, UFG::qVector3 *vmax, UFG::qMatrix44 *local_world)
+void __fastcall Render::RasterizeZ::DrawAABB(
+        Render::RasterizeZ *this,
+        UFG::qVector3 *vmin,
+        UFG::qVector3 *vmax,
+        UFG::qMatrix44 *local_world)
 {
-  Render::RasterizeZ *v4; // rbx
-  float v5; // xmm0_4
+  float y; // xmm0_4
   float v6; // xmm12_4
   float v7; // xmm14_4
   float v8; // xmm13_4
-  float v9; // ST24_4
-  float v10; // xmm6_4
-  float v11; // xmm15_4
-  float v12; // ST4C_4
-  float v13; // ST40_4
-  float v14; // ST38_4
-  float v15; // ST30_4
-  float v16; // ST2C_4
-  float v17; // ST20_4
-  float v18; // ST28_4
-  float v19; // ST58_4
-  float v20; // ST24_4
-  float v21; // xmm8_4
-  float v22; // xmm12_4
-  float v23; // ST34_4
-  float v24; // xmm11_4
-  float v25; // xmm7_4
-  float v26; // xmm3_4
-  float v27; // xmm0_4
-  float v28; // xmm2_4
-  float v29; // xmm1_4
-  float v30; // xmm6_4
-  float v31; // xmm10_4
-  float v32; // ST3C_4
-  float v33; // xmm6_4
-  float v34; // xmm13_4
-  float v35; // ST38_4
-  float v36; // ST48_4
-  float v37; // ST40_4
-  float v38; // ST4C_4
-  float v39; // xmm11_4
-  float v40; // xmm5_4
-  float v41; // xmm5_4
-  float v42; // ST44_4
-  float v43; // ST5C_4
-  float v44; // ST3C_4
-  float v45; // xmm15_4
-  int v46; // xmm8_4
-  float v47; // xmm2_4
-  float v48; // xmm12_4
-  float v49; // xmm1_4
-  float v50; // xmm3_4
-  __int16 v51; // r8
-  UFG::qVector4 v52; // [rsp+60h] [rbp-98h]
-  UFG::qVector4 v0; // [rsp+70h] [rbp-88h]
-  float v54; // [rsp+80h] [rbp-78h]
-  float v55; // [rsp+84h] [rbp-74h]
-  UFG::qVector4 v56; // [rsp+88h] [rbp-70h]
-  float v57; // [rsp+98h] [rbp-60h]
-  unsigned int v58; // [rsp+9Ch] [rbp-5Ch]
-  UFG::qVector4 v59; // [rsp+A0h] [rbp-58h]
-  float v60; // [rsp+B0h] [rbp-48h]
-  UFG::qVector4 v1; // [rsp+B8h] [rbp-40h]
-  float v62; // [rsp+C8h] [rbp-30h]
-  UFG::qVector4 v2; // [rsp+D0h] [rbp-28h]
-  float v64; // [rsp+E0h] [rbp-18h]
-  UFG::qVector4 v65; // [rsp+E8h] [rbp-10h]
-  float v66; // [rsp+F8h] [rbp+0h]
-  UFG::qMatrix44 result; // [rsp+108h] [rbp+10h]
-  float retaddr; // [rsp+1F8h] [rbp+100h]
-  float v69; // [rsp+200h] [rbp+108h]
-  float v70; // [rsp+200h] [rbp+108h]
+  float v9; // xmm6_4
+  float v10; // xmm8_4
+  float v11; // xmm12_4
+  float v12; // xmm11_4
+  float v13; // xmm5_4
+  float v14; // xmm10_4
+  float v15; // xmm13_4
+  float v16; // xmm4_4
+  float v17; // xmm15_4
+  int v18; // xmm8_4
+  float v19; // xmm12_4
+  int v20; // xmm3_4
+  unsigned __int8 v21; // r8
+  float v22; // [rsp+20h] [rbp-D8h]
+  float v23; // [rsp+24h] [rbp-D4h]
+  float v24; // [rsp+24h] [rbp-D4h]
+  float v25; // [rsp+28h] [rbp-D0h]
+  float v26; // [rsp+2Ch] [rbp-CCh]
+  float v27; // [rsp+30h] [rbp-C8h]
+  float v28; // [rsp+34h] [rbp-C4h]
+  float v29; // [rsp+38h] [rbp-C0h]
+  float v30; // [rsp+3Ch] [rbp-BCh]
+  float v31; // [rsp+3Ch] [rbp-BCh]
+  float v32; // [rsp+40h] [rbp-B8h]
+  float v33; // [rsp+44h] [rbp-B4h]
+  float v34; // [rsp+44h] [rbp-B4h]
+  float v35; // [rsp+4Ch] [rbp-ACh]
+  float v36; // [rsp+50h] [rbp-A8h]
+  float v37; // [rsp+58h] [rbp-A0h]
+  UFG::qVector4 v38; // [rsp+60h] [rbp-98h] BYREF
+  UFG::qVector4 v0; // [rsp+70h] [rbp-88h] BYREF
+  float v40; // [rsp+80h] [rbp-78h]
+  float v41; // [rsp+84h] [rbp-74h]
+  UFG::qVector4 v42; // [rsp+88h] [rbp-70h] BYREF
+  float v43; // [rsp+98h] [rbp-60h]
+  int v44; // [rsp+9Ch] [rbp-5Ch]
+  UFG::qVector4 v45; // [rsp+A0h] [rbp-58h] BYREF
+  float v46; // [rsp+B0h] [rbp-48h]
+  UFG::qVector4 v1; // [rsp+B8h] [rbp-40h] BYREF
+  float v48; // [rsp+C8h] [rbp-30h]
+  UFG::qVector4 v2; // [rsp+D0h] [rbp-28h] BYREF
+  float v50; // [rsp+E0h] [rbp-18h]
+  UFG::qVector4 v51; // [rsp+E8h] [rbp-10h] BYREF
+  float v52; // [rsp+F8h] [rbp+0h]
+  UFG::qMatrix44 result; // [rsp+108h] [rbp+10h] BYREF
+  void *retaddr; // [rsp+1F8h] [rbp+100h]
+  float v55; // [rsp+208h] [rbp+110h]
 
-  v4 = this;
-  v5 = vmax->y;
-  v6 = (float)(v5 - vmin->y) * 0.5;
+  y = vmax->y;
+  v6 = (float)(y - vmin->y) * 0.5;
   v7 = (float)(vmax->x + vmin->x) * 0.5;
   v8 = (float)(vmax->z + vmin->z) * 0.5;
-  retaddr = (float)(v5 + vmin->y) * 0.5;
-  v9 = (float)(vmax->z - vmin->z) * 0.5;
-  v10 = (float)(vmax->x - vmin->x) * 0.5;
-  UFG::qMatrix44::operator*(local_world, (UFG::qMatrix44 *)((char *)&result + 8), this->mWorldViewProjection);
-  v69 = result.v0.x * v10;
-  v11 = result.v0.z * v10;
-  v12 = result.v0.y * v10;
-  v13 = result.v1.x * v6;
-  v14 = result.v1.y * v6;
-  v15 = result.v1.z * v6;
-  v16 = v6 * result.v1.w;
-  v17 = result.v2.x * v9;
-  v18 = result.v2.y * v9;
-  v19 = result.v2.z * v9;
-  v20 = v9 * result.v2.w;
-  v21 = result.v1.x * v6;
-  v22 = (float)((float)((float)(retaddr * result.v1.x) + (float)(v7 * result.v0.x)) + (float)(v8 * result.v2.x))
+  *(float *)&retaddr = (float)(y + vmin->y) * 0.5;
+  v23 = (float)(vmax->z - vmin->z) * 0.5;
+  v9 = (float)(vmax->x - vmin->x) * 0.5;
+  UFG::qMatrix44::operator*(local_world, (UFG::qMatrix44 *)&result.v0.z, this->mWorldViewProjection);
+  v32 = result.v1.x * v6;
+  v29 = result.v1.y * v6;
+  v27 = result.v1.z * v6;
+  v26 = v6 * result.v1.w;
+  v22 = result.v2.x * v23;
+  v25 = result.v2.y * v23;
+  v37 = result.v2.z * v23;
+  v24 = v23 * result.v2.w;
+  v10 = result.v1.x * v6;
+  v11 = (float)((float)((float)(*(float *)&retaddr * result.v1.x) + (float)(v7 * result.v0.x))
+              + (float)(v8 * result.v2.x))
       + result.v3.x;
-  v23 = v22 - (float)(result.v0.x * v10);
-  v24 = (float)((float)((float)(retaddr * result.v1.y) + (float)(v7 * result.v0.y)) + (float)(v8 * result.v2.y))
+  v28 = v11 - (float)(result.v0.x * v9);
+  v12 = (float)((float)((float)(*(float *)&retaddr * result.v1.y) + (float)(v7 * result.v0.y))
+              + (float)(v8 * result.v2.y))
       + result.v3.y;
-  v25 = v22 - (float)(result.v0.x * v10);
-  v26 = v14;
-  v27 = result.v0.y * v10;
-  v28 = (float)((float)((float)(retaddr * result.v1.z) + (float)(v7 * result.v0.z)) + (float)(v8 * result.v2.z))
+  v13 = (float)((float)(*(float *)&retaddr * result.v1.w) + (float)(v7 * result.v0.w)) + (float)(v8 * result.v2.w);
+  v14 = (float)((float)((float)((float)(*(float *)&retaddr * result.v1.z) + (float)(v7 * result.v0.z))
+                      + (float)(v8 * result.v2.z))
+              + result.v3.z)
+      - (float)(result.v0.z * v9);
+  v33 = (float)((float)((float)(*(float *)&retaddr * result.v1.z) + (float)(v7 * result.v0.z))
+              + (float)(v8 * result.v2.z))
       + result.v3.z;
-  v29 = v10 * result.v0.w;
-  retaddr = (float)((float)((float)(retaddr * result.v1.w) + (float)(v7 * result.v0.w)) + (float)(v8 * result.v2.w))
-          + result.v3.w;
-  v30 = retaddr - (float)(v10 * result.v0.w);
-  v31 = v28 - v11;
-  v32 = v30;
-  v33 = v30 - v16;
-  v34 = v24 - v12;
-  v35 = (float)(v28 - v11) - v15;
-  v64 = v35 + v19;
-  v36 = v25 - v13;
-  v37 = (float)(v24 - v12) - v26;
-  v38 = v33 + v20;
-  v39 = v24 + v27;
-  v57 = v36 + v17;
-  v0.x = v36 + v17;
-  v70 = v69 + v22;
-  v62 = v37 + v18;
-  v0.y = v62;
-  v40 = retaddr + v29;
-  retaddr = v40;
-  v41 = v40 - v16;
-  v42 = v28 + v11;
-  v43 = (float)(v28 + v11) - v15;
-  v44 = v32 + v16;
-  v60 = (float)(v70 + v21) + v17;
-  v56.x = v60;
-  v66 = (float)(v39 + v26) + v18;
-  v56.y = (float)(v39 + v26) + v18;
-  v45 = (float)(retaddr + v16) + v20;
-  v56.z = (float)(v42 + v15) + v19;
-  v1.x = (float)(v70 - v21) + v17;
-  v1.y = (float)(v39 - v26) + v18;
-  v1.z = v43 + v19;
-  v1.w = v41 + v20;
-  v2.x = (float)(v23 + v21) + v17;
-  v2.y = (float)(v34 + v26) + v18;
-  v2.z = (float)(v31 + v15) + v19;
-  v2.w = v44 + v20;
-  v56.w = (float)(retaddr + v16) + v20;
-  v52.x = (float)(v70 - v21) - v17;
-  v52.y = (float)(v39 - v26) - v18;
-  v65.z = (float)(v42 + v15) - v19;
-  v52.z = v43 - v19;
-  v52.w = v41 - v20;
-  v59.x = v36 - v17;
-  v59.y = v37 - v18;
-  v59.z = v35 - v19;
-  v59.w = v33 - v20;
-  v65.x = (float)(v70 + v21) - v17;
-  v65.y = (float)(v39 + v26) - v18;
-  v65.w = (float)(retaddr + v16) - v20;
-  v0.w = (float)(v34 + v26) - v18;
-  v0.z = (float)(v23 + v21) - v17;
-  v46 = LODWORD(v45) ^ _xmm[0];
-  LODWORD(v47) = COERCE_UNSIGNED_INT(v44 + v20) ^ _xmm[0];
-  LODWORD(v48) = COERCE_UNSIGNED_INT(v33 - v20) ^ _xmm[0];
-  v54 = (float)(v31 + v15) - v19;
-  v49 = v44 - v20;
-  v55 = v44 - v20;
-  v58 = COERCE_UNSIGNED_INT(v33 + v20) ^ _xmm[0];
-  LODWORD(v50) = COERCE_UNSIGNED_INT(v41 - v20) ^ _xmm[0];
-  v51 = ((v48 > v59.x) | (unsigned __int16)(2
-                                          * ((v59.x > v59.w) | (unsigned __int16)(2
-                                                                                * ((v48 > v59.y) | (unsigned __int16)(2 * ((v59.y > v59.w) | (unsigned __int16)(2 * ((v59.z < 0.0) | (unsigned __int16)(2 * (v59.z > v59.w))))))))))) & ((*(float *)&v46 > v60) | (unsigned __int16)(2 * ((v60 > v45) | (unsigned __int16)(2 * ((*(float *)&v46 > v66) | (unsigned __int16)(2 * ((v66 > v45) | (unsigned __int16)(2 * ((v56.z < 0.0) | (unsigned __int16)(2 * (v56.z > v45))))))))))) & ((v50 > v52.x) | (unsigned __int16)(2 * ((v52.x > v52.w) | (unsigned __int16)(2 * ((v50 > v52.y) | (unsigned __int16)(2 * ((v52.y > v52.w) | (unsigned __int16)(2 * ((v52.z < 0.0) | (unsigned __int16)(2 * (v52.z > v52.w))))))))))) & ((v47 > v2.x) | (unsigned __int16)(2 * ((v2.x > v2.w) | (unsigned __int16)(2 * ((v47 > v2.y) | (unsigned __int16)(2 * ((v2.y > v2.w) | (unsigned __int16)(2 * ((v2.z < 0.0) | (unsigned __int16)(2 * (v2.z > v2.w))))))))))) & ((COERCE_FLOAT(LODWORD(v1.w) ^ _xmm[0]) > v1.x) | (unsigned __int16)(2 * ((v1.x > v1.w) | (unsigned __int16)(2 * ((COERCE_FLOAT(LODWORD(v1.w) ^ _xmm[0]) > v1.y) | (unsigned __int16)(2 * ((v1.y > v1.w) | (unsigned __int16)(2 * ((v1.z < 0.0) | (unsigned __int16)(2 * (v1.z > v1.w)))))))))));
-  if ( !((unsigned __int16)(((COERCE_FLOAT(LODWORD(v49) ^ _xmm[0]) > v0.z) | (unsigned __int16)(2
-                                                                                              * ((v0.z > v49) | (unsigned __int16)(2 * ((COERCE_FLOAT(LODWORD(v49) ^ _xmm[0]) > v0.w) | (unsigned __int16)(2 * ((v0.w > v49) | (unsigned __int16)(2 * ((v54 < 0.0) | (unsigned __int16)(2 * (v54 > v49))))))))))) & ((COERCE_FLOAT(LODWORD(v65.w) ^ _xmm[0]) > v65.x) | (unsigned __int16)(2 * ((v65.x > v65.w) | (unsigned __int16)(2 * ((COERCE_FLOAT(LODWORD(v65.w) ^ _xmm[0]) > v65.y) | (unsigned __int16)(2 * ((v65.y > v65.w) | (unsigned __int16)(2 * ((v65.z < 0.0) | (unsigned __int16)(2 * (v65.z > v65.w))))))))))) & v51) & (unsigned __int16)((COERCE_FLOAT(LODWORD(v38) ^ _xmm[0]) > (float)(v36 + v17)) | (unsigned __int16)(2 * (((float)(v36 + v17) > (float)(v33 + v20)) | (unsigned __int16)(2 * ((COERCE_FLOAT(LODWORD(v38) ^ _xmm[0]) > v62) | (unsigned __int16)(2 * ((v62 > v38) | (unsigned __int16)(2 * ((v64 < 0.0) | (unsigned __int16)(2 * (v64 > v38)))))))))))) )
+  v30 = (float)(v13 + result.v3.w) - (float)(v9 * result.v0.w);
+  v15 = v12 - (float)(result.v0.y * v9);
+  v50 = (float)(v14 - v27) + v37;
+  v35 = (float)(v30 - v26) + v24;
+  v36 = v30 - v26;
+  v16 = (float)(result.v0.x * v9) + v11;
+  v43 = (float)(v28 - v32) + v22;
+  v0.x = v43;
+  v48 = (float)(v15 - v29) + v25;
+  v0.y = v48;
+  v55 = v12 + (float)(result.v0.y * v9);
+  *(float *)&retaddr = (float)(v13 + result.v3.w) + (float)(v9 * result.v0.w);
+  v34 = v33 + (float)(result.v0.z * v9);
+  v31 = v30 + v26;
+  v46 = (float)(v16 + v10) + v22;
+  v42.x = v46;
+  v52 = (float)(v55 + v29) + v25;
+  v42.y = v52;
+  v17 = (float)(*(float *)&retaddr + v26) + v24;
+  v42.z = (float)(v34 + v27) + v37;
+  v1.x = (float)(v16 - v10) + v22;
+  v1.y = (float)(v55 - v29) + v25;
+  v1.z = (float)(v34 - v27) + v37;
+  v1.w = (float)(*(float *)&retaddr - v26) + v24;
+  v2.x = (float)(v28 + v10) + v22;
+  v2.y = (float)(v15 + v29) + v25;
+  v2.z = (float)(v14 + v27) + v37;
+  v2.w = v31 + v24;
+  v42.w = v17;
+  v38.x = (float)(v16 - v10) - v22;
+  v38.y = (float)(v55 - v29) - v25;
+  v51.z = (float)(v34 + v27) - v37;
+  v38.z = (float)(v34 - v27) - v37;
+  v38.w = (float)(*(float *)&retaddr - v26) - v24;
+  v45.x = (float)(v28 - v32) - v22;
+  v45.y = (float)(v15 - v29) - v25;
+  v45.z = (float)(v14 - v27) - v37;
+  v45.w = v36 - v24;
+  v51.x = (float)(v16 + v10) - v22;
+  v51.y = (float)(v55 + v29) - v25;
+  v51.w = (float)(*(float *)&retaddr + v26) - v24;
+  v0.w = (float)(v15 + v29) - v25;
+  v0.z = (float)(v28 + v10) - v22;
+  v18 = LODWORD(v17) ^ _xmm[0];
+  LODWORD(v19) = COERCE_UNSIGNED_INT(v36 - v24) ^ _xmm[0];
+  v40 = (float)(v14 + v27) - v37;
+  v41 = v31 - v24;
+  v44 = LODWORD(v35) ^ _xmm[0];
+  v20 = LODWORD(v38.w) ^ _xmm[0];
+  v21 = ((COERCE_FLOAT(LODWORD(v41) ^ _xmm[0]) > v0.z) | (2
+                                                        * ((v0.z > v41) | (2
+                                                                         * ((COERCE_FLOAT(LODWORD(v41) ^ _xmm[0]) > v0.w) | (2 * ((v0.w > v41) | (2 * ((v40 < 0.0) | (2 * (v40 > v41))))))))))) & ((COERCE_FLOAT(LODWORD(v51.w) ^ _xmm[0]) > v51.x) | (2 * ((v51.x > v51.w) | (2 * ((COERCE_FLOAT(LODWORD(v51.w) ^ _xmm[0]) > v51.y) | (2 * ((v51.y > v51.w) | (2 * ((v51.z < 0.0) | (2 * (v51.z > v51.w))))))))))) & ((v19 > v45.x) | (2 * ((v45.x > v45.w) | (2 * ((v19 > v45.y) | (2 * ((v45.y > v45.w) | (2 * ((v45.z < 0.0) | (2 * (v45.z > v45.w))))))))))) & ((*(float *)&v18 > v46) | (2 * ((v46 > v17) | (2 * ((*(float *)&v18 > v52) | (2 * ((v52 > v17) | (2 * ((v42.z < 0.0) | (2 * (v42.z > v17))))))))))) & ((*(float *)&v20 > v38.x) | (2 * ((v38.x > v38.w) | (2 * ((*(float *)&v20 > v38.y) | (2 * ((v38.y > v38.w) | (2 * ((v38.z < 0.0) | (2 * (v38.z > v38.w))))))))))) & ((COERCE_FLOAT(LODWORD(v2.w) ^ _xmm[0]) > v2.x) | (2 * ((v2.x > v2.w) | (2 * ((COERCE_FLOAT(LODWORD(v2.w) ^ _xmm[0]) > v2.y) | (2 * ((v2.y > v2.w) | (2 * ((v2.z < 0.0) | (2 * (v2.z > v2.w))))))))))) & ((COERCE_FLOAT(LODWORD(v1.w) ^ _xmm[0]) > v1.x) | (2 * ((v1.x > v1.w) | (2 * ((COERCE_FLOAT(LODWORD(v1.w) ^ _xmm[0]) > v1.y) | (2 * ((v1.y > v1.w) | (2 * ((v1.z < 0.0) | (2 * (v1.z > v1.w)))))))))));
+  if ( (v21 & (unsigned __int8)((COERCE_FLOAT(LODWORD(v35) ^ _xmm[0]) > v43) | (2
+                                                                              * ((v43 > v35) | (2
+                                                                                              * ((COERCE_FLOAT(LODWORD(v35) ^ _xmm[0]) > v48) | (2 * ((v48 > v35) | (2 * ((v50 < 0.0) | (2 * (v50 > v35)))))))))))) == 0 )
   {
-    Render::RasterizeZ::Draw2DH(v4, &v0, &v1, &v2);
-    Render::RasterizeZ::Draw2DH(v4, &v2, &v1, &v56);
-    Render::RasterizeZ::Draw2DH(v4, &v1, &v52, &v56);
-    Render::RasterizeZ::Draw2DH(v4, &v56, &v52, &v65);
-    Render::RasterizeZ::Draw2DH(v4, &v52, &v59, &v65);
-    Render::RasterizeZ::Draw2DH(v4, &v65, &v59, (UFG::qVector4 *)((char *)&v0 + 8));
-    Render::RasterizeZ::Draw2DH(v4, &v59, &v0, (UFG::qVector4 *)((char *)&v0 + 8));
-    Render::RasterizeZ::Draw2DH(v4, (UFG::qVector4 *)((char *)&v0 + 8), &v0, &v2);
-    Render::RasterizeZ::Draw2DH(v4, &v59, &v52, &v0);
-    Render::RasterizeZ::Draw2DH(v4, &v0, &v52, &v1);
-    Render::RasterizeZ::Draw2DH(v4, &v2, &v56, (UFG::qVector4 *)((char *)&v0 + 8));
-    Render::RasterizeZ::Draw2DH(v4, (UFG::qVector4 *)((char *)&v0 + 8), &v56, &v65);
+    Render::RasterizeZ::Draw2DH(this, &v0, &v1, &v2);
+    Render::RasterizeZ::Draw2DH(this, &v2, &v1, &v42);
+    Render::RasterizeZ::Draw2DH(this, &v1, &v38, &v42);
+    Render::RasterizeZ::Draw2DH(this, &v42, &v38, &v51);
+    Render::RasterizeZ::Draw2DH(this, &v38, &v45, &v51);
+    Render::RasterizeZ::Draw2DH(this, &v51, &v45, (UFG::qVector4 *)&v0.z);
+    Render::RasterizeZ::Draw2DH(this, &v45, &v0, (UFG::qVector4 *)&v0.z);
+    Render::RasterizeZ::Draw2DH(this, (UFG::qVector4 *)&v0.z, &v0, &v2);
+    Render::RasterizeZ::Draw2DH(this, &v45, &v38, &v0);
+    Render::RasterizeZ::Draw2DH(this, &v0, &v38, &v1);
+    Render::RasterizeZ::Draw2DH(this, &v2, &v42, (UFG::qVector4 *)&v0.z);
+    Render::RasterizeZ::Draw2DH(this, (UFG::qVector4 *)&v0.z, &v42, &v51);
   }
 }
 
 // File Line: 733
 // RVA: 0x6A2D40
-void __fastcall Render::RasterizeZ::Draw2DH(Render::RasterizeZ *this, UFG::qVector4 *v0, UFG::qVector4 *v1, UFG::qVector4 *v2)
+void __fastcall Render::RasterizeZ::Draw2DH(
+        Render::RasterizeZ *this,
+        UFG::qVector4 *v0,
+        UFG::qVector4 *v1,
+        UFG::qVector4 *v2)
 {
-  float v4; // xmm6_4
-  float v5; // xmm3_4
+  float w; // xmm6_4
+  float y; // xmm3_4
   float v6; // xmm5_4
   float v7; // xmm8_4
   float v8; // xmm4_4
@@ -210,319 +191,320 @@ void __fastcall Render::RasterizeZ::Draw2DH(Render::RasterizeZ *this, UFG::qVect
   float v23; // xmm8_4
   float v24; // xmm12_4
   float v25; // xmm8_4
-  float v26; // xmm4_4
-  float v27; // xmm5_4
-  float v28; // xmm9_4
-  float v29; // xmm10_4
-  float v30; // xmm11_4
-  float v31; // xmm9_4
-  float v32; // xmm4_4
-  float v33; // xmm0_4
-  float v34; // xmm14_4
-  float v35; // xmm15_4
-  float v36; // xmm13_4
-  float v37; // xmm10_4
-  float v38; // xmm4_4
-  float v39; // xmm2_4
-  float v40; // xmm3_4
-  float v41; // xmm12_4
-  float v42; // xmm15_4
-  float v43; // xmm8_4
-  float v44; // xmm13_4
-  float v45; // xmm0_4
-  float v46; // xmm10_4
-  float v47; // xmm9_4
-  float v48; // xmm3_4
-  float v49; // xmm2_4
-  float v50; // xmm11_4
-  float v51; // xmm14_4
-  float v52; // xmm4_4
-  int v53; // ecx
-  int v54; // edx
-  int v55; // er8
-  signed int v56; // esi
-  signed int v57; // er9
-  signed int v58; // edi
-  signed int v59; // ebx
-  signed int v60; // er10
-  signed int v61; // er13
-  signed int v62; // er11
-  signed int v63; // er14
-  int v64; // ebp
-  signed int v65; // er12
-  signed int v66; // er15
-  signed int v67; // er14
-  int v68; // eax
-  unsigned int v69; // er8
-  unsigned int v70; // ecx
-  int v71; // edx
-  unsigned int v72; // er14
-  int v73; // er15
-  int v74; // edx
-  int v75; // er12
-  int v76; // edx
-  unsigned int v77; // esi
-  int v78; // edx
-  __m128i v79; // xmm5
-  __m128i v80; // xmm15
-  __m128i v81; // xmm8
-  __m128i v82; // xmm0
-  __m128i v83; // xmm8
-  __m128i v84; // xmm4
-  __m128i v85; // xmm6
+  float v26; // xmm5_4
+  float v27; // xmm9_4
+  float v28; // xmm10_4
+  float v29; // xmm11_4
+  float v30; // xmm9_4
+  float v31; // xmm4_4
+  float v32; // xmm0_4
+  float v33; // xmm14_4
+  float v34; // xmm15_4
+  float v35; // xmm13_4
+  float v36; // xmm10_4
+  float v37; // xmm4_4
+  float v38; // xmm2_4
+  float v39; // xmm3_4
+  float v40; // xmm12_4
+  float v41; // xmm15_4
+  float v42; // xmm8_4
+  float v43; // xmm13_4
+  float v44; // xmm0_4
+  float v45; // xmm10_4
+  float v46; // xmm9_4
+  float v47; // xmm3_4
+  float v48; // xmm2_4
+  float v49; // xmm11_4
+  float v50; // xmm14_4
+  float v51; // xmm4_4
+  int v52; // ecx
+  int v53; // edx
+  int v54; // r8d
+  int v55; // esi
+  signed int v56; // r9d
+  unsigned int v57; // edi
+  signed int v58; // ebx
+  signed int v59; // r10d
+  signed int v60; // r13d
+  signed int v61; // r11d
+  int v62; // r14d
+  int v63; // ebp
+  int v64; // r12d
+  int v65; // r15d
+  int v66; // r14d
+  int v67; // eax
+  unsigned int v68; // r8d
+  unsigned int v69; // ecx
+  int v70; // edx
+  unsigned int v71; // r14d
+  int v72; // r15d
+  int v73; // edx
+  int v74; // r12d
+  int v75; // edx
+  unsigned int v76; // esi
+  int v77; // edx
+  __m128i v78; // xmm5
+  __m128i v79; // xmm15
+  __m128i v80; // xmm8
+  __m128i v81; // xmm4
+  __m128i v82; // xmm3
+  __m128i v83; // xmm0
+  __m128i v84; // xmm1
+  __m128i v85; // xmm3
   __m128i v86; // xmm2
-  _OWORD *v87; // rdx
-  _OWORD *v88; // r10
-  __m128i v89; // xmm3
+  __m128i v87; // xmm3
+  __m128i v88; // xmm0
+  __m128i v89; // xmm6
   __m128i v90; // xmm0
   __m128i v91; // xmm1
-  __m128i v92; // xmm2
-  __m128i v93; // xmm3
-  __m128i v94; // xmm2
-  __m128i v95; // xmm3
-  __m128i v96; // xmm0
-  __m128i v97; // xmm6
-  __m128i v98; // xmm0
-  __m128i v99; // xmm1
-  __m128i v100; // xmm5
-  __m128i v101; // xmm0
-  __m128i v102; // xmm15
-  __m128i v103; // xmm4
-  __m128i v104; // xmm0
-  __m128i v105; // xmm3
-  __m128i v106; // xmm1
-  __m128i v107; // xmm2
-  __m128i v108; // xmm6
-  __m128i v109; // xmm5
-  __m128i v110; // xmm7
-  __m128i v111; // xmm8
-  __m128i v112; // xmm9
-  __m128i v113; // xmm10
-  __m128i v114; // xmm11
-  __m128 v115; // xmm12
-  __m128 v116; // xmm13
-  __m128 v117; // xmm14
-  __m128 v118; // xmm15
-  int v119; // er14
-  unsigned int i; // er15
-  bool v121; // zf
-  int v122; // eax
-  int v123; // ecx
-  __m128i v124; // xmm15
-  __m128i v125; // xmm4
-  int v126; // er14
-  __m128i v127; // xmm2
-  __m128i v128; // xmm0
-  __m128i v129; // xmm1
+  __m128i v92; // xmm5
+  int v93; // r14d
+  unsigned int i; // r15d
+  bool v95; // zf
+  int v96; // eax
+  int v97; // ecx
+  __m128i v98; // xmm15
+  __m128i v99; // xmm4
+  int v100; // r14d
+  int v101; // r9d
+  unsigned int v102; // edx
+  __m128i v103; // xmm7
+  int v104; // eax
+  int v105; // ecx
+  __m128i v106; // xmm0
+  int v107; // r9d
+  char *mZBuffer; // rcx
+  unsigned __int64 v109; // r8
+  __m128i v110; // xmm5
+  __m128i v111; // xmm1
+  __m128i v112; // xmm4
+  __m128i v113; // xmm3
+  __m128i v114; // xmm8
+  __m128i v115; // xmm11
+  BOOL v116; // r11d
+  __m128i v117; // xmm1
+  BOOL v118; // ebx
+  __m128i v119; // xmm2
+  __m128i v120; // xmm5
+  BOOL v121; // edi
+  __m128i v122; // xmm10
+  __m128i v123; // xmm3
+  __m128i v124; // xmm6
+  __m128i si128; // xmm0
+  __m128i v126; // xmm12
+  __m128i v127; // xmm9
+  __m128i v128; // xmm1
+  __m128i v129; // xmm9
   __m128i v130; // xmm3
-  __m128i v131; // xmm5
-  __m128i v132; // xmm6
-  __m128i v133; // xmm4
-  __m128i v134; // xmm7
-  __m128i v135; // xmm9
-  __m128i v136; // xmm10
+  __m128i v131; // xmm7
+  __m128i v132; // xmm2
+  __m128i v133; // xmm15
+  __m128i v134; // xmm10
+  __m128i v135; // xmm4
+  __m128i v136; // xmm11
   __m128i v137; // xmm8
-  __m128i v138; // xmm11
-  __m128 v139; // xmm12
-  __m128 v140; // xmm13
-  __m128 v141; // xmm14
-  __m128 v142; // xmm15
-  int v143; // er9
-  unsigned int v144; // edx
-  __m128i v145; // xmm7
-  int v146; // eax
-  int v147; // ecx
-  __m128i v148; // xmm0
-  int v149; // er9
-  char *v150; // rcx
-  __m128i v151; // xmm5
-  __m128i v152; // xmm1
-  __m128i v153; // xmm4
-  __m128i v154; // xmm3
-  __m128i v155; // xmm2
-  __m128i v156; // xmm8
-  __m128i v157; // xmm11
-  BOOL v158; // er11
-  __m128i v159; // xmm1
-  BOOL v160; // ebx
-  __m128i v161; // xmm2
-  __m128i v162; // xmm5
-  BOOL v163; // edi
-  __m128i v164; // xmm10
-  __m128i v165; // xmm3
-  __m128i v166; // xmm6
-  __m128i v167; // xmm12
-  __m128i v168; // xmm6
-  __m128i v169; // xmm9
-  __m128i v170; // xmm1
-  __m128i v171; // xmm9
-  __m128i v172; // xmm3
-  __m128i v173; // xmm7
-  __m128i v174; // xmm2
-  __m128i v175; // xmm15
-  __m128i v176; // xmm10
-  __m128i v177; // xmm4
-  __m128i v178; // xmm11
-  __m128i v179; // xmm8
-  __m128i v180; // xmm5
-  __m128i v181; // xmm14
-  __m128i v182; // xmm13
-  __m128 v183; // xmm12
-  __m128 v184; // xmm0
-  __m128i v185; // xmm9
-  __m128 v186; // xmm1
-  __m128 v187; // xmm6
-  __m128 v188; // xmm0
-  __m128i v189; // xmm4
-  __m128 v190; // xmm3
-  __m128 v191; // xmm2
-  __m128i v192; // xmm5
-  __m128 v193; // xmm9
-  __m128 v194; // xmm4
-  __m128 v195; // xmm0
-  __m128 v196; // xmm2
-  __m128 v197; // xmm1
-  __m128 v198; // xmm0
-  __m128 v199; // xmm12
-  __m128 v200; // xmm0
-  __m128i v201; // xmm12
-  __m128i v202; // xmm9
-  __m128i v203; // xmm3
-  __m128i v204; // xmm6
-  __m128i v205; // xmm9
-  __m128i v206; // xmm3
-  __m128i v207; // xmm2
-  __m128i v208; // xmm15
-  __m128i v209; // xmm8
-  __m128i v210; // xmm4
-  __m128i v211; // xmm14
-  __m128i v212; // xmm5
-  __m128i v213; // xmm13
-  __m128 v214; // xmm12
-  __m128 v215; // xmm6
-  __m128 v216; // xmm3
-  __m128 v217; // xmm2
-  __m128 v218; // xmm1
-  __m128 v219; // xmm1
-  __m128 v220; // xmm2
-  __m128i v221; // xmm6
-  __m128i v222; // xmm0
-  __m128i v223; // xmm12
+  __m128i v138; // xmm5
+  __m128i v139; // xmm14
+  __m128i v140; // xmm13
+  __m128 v141; // xmm12
+  __m128 v142; // xmm0
+  __m128i v143; // xmm9
+  __m128 v144; // xmm1
+  __m128 v145; // xmm6
+  __m128 v146; // xmm0
+  __m128i v147; // xmm4
+  __m128 v148; // xmm3
+  __m128 v149; // xmm2
+  __m128i v150; // xmm5
+  __m128 v151; // xmm9
+  __m128 v152; // xmm4
+  __m128 v153; // xmm0
+  __m128 v154; // xmm2
+  __m128 v155; // xmm1
+  __m128 v156; // xmm0
+  __m128 v157; // xmm12
+  __m128 v158; // xmm0
+  __m128i v159; // xmm0
+  __m128i v160; // xmm12
+  __m128i v161; // xmm1
+  __m128i v162; // xmm9
+  __m128i v163; // xmm3
+  __m128i v164; // xmm6
+  __m128i v165; // xmm9
+  __m128i v166; // xmm3
+  __m128i v167; // xmm7
+  __m128i v168; // xmm2
+  __m128i v169; // xmm15
+  __m128i v170; // xmm10
+  __m128i v171; // xmm8
+  __m128i v172; // xmm4
+  __m128i v173; // xmm14
+  __m128i v174; // xmm5
+  __m128i v175; // xmm13
+  __m128 v176; // xmm12
+  __m128 v177; // xmm6
+  __m128 v178; // xmm1
+  __m128 v179; // xmm3
+  __m128 v180; // xmm2
+  __m128 v181; // xmm1
+  __m128 v182; // xmm1
+  __m128 v183; // xmm1
+  __m128 v184; // xmm2
+  __m128i v185; // xmm6
+  __m128i v186; // xmm0
+  __m128i v187; // xmm12
+  __m128i v188; // xmm1
+  __m128i v189; // xmm9
+  __m128i v190; // xmm2
+  __m128i v191; // xmm3
+  __m128i v192; // xmm15
+  __m128i v193; // xmm4
+  __m128i v194; // xmm10
+  __m128i v195; // xmm7
+  __m128i v196; // xmm5
+  __m128i v197; // xmm11
+  __m128i v198; // xmm8
+  __m128i v199; // xmm14
+  __m128i v200; // xmm13
+  __m128 v201; // xmm12
+  __m128 v202; // xmm0
+  __m128i v203; // xmm9
+  __m128 v204; // xmm1
+  __m128 v205; // xmm6
+  __m128 v206; // xmm0
+  __m128i v207; // xmm4
+  __m128 v208; // xmm3
+  __m128 v209; // xmm2
+  __m128i v210; // xmm5
+  __m128 v211; // xmm2
+  __m128 v212; // xmm0
+  __m128 v213; // xmm12
+  __m128i v214; // xmm12
+  __m128i v215; // xmm1
+  __m128i v216; // xmm6
+  __m128i v217; // xmm3
+  __m128i v218; // xmm9
+  __m128i v219; // xmm2
+  __m128i v220; // xmm15
+  __m128i v221; // xmm15
+  __m128i v222; // xmm2
+  __m128i v223; // xmm0
   __m128i v224; // xmm1
-  __m128i v225; // xmm9
-  __m128i v226; // xmm2
-  __m128i v227; // xmm3
-  __m128i v228; // xmm15
-  __m128i v229; // xmm4
-  __m128i v230; // xmm10
-  __m128i v231; // xmm7
+  __m128i v225; // xmm3
+  __m128i v226; // xmm0
+  __m128i v227; // xmm9
+  __m128i v228; // xmm7
+  __m128i v229; // xmm10
+  __m128i v230; // xmm4
+  __m128i v231; // xmm8
   __m128i v232; // xmm5
-  __m128i v233; // xmm11
-  __m128i v234; // xmm8
-  __m128i v235; // xmm14
-  __m128i v236; // xmm13
-  __m128 v237; // xmm12
-  __m128 v238; // xmm0
-  __m128i v239; // xmm9
-  __m128 v240; // xmm1
-  __m128 v241; // xmm6
-  __m128 v242; // xmm0
-  __m128i v243; // xmm4
-  __m128 v244; // xmm3
-  __m128 v245; // xmm2
-  __m128i v246; // xmm5
-  __m128 v247; // xmm2
-  __m128 v248; // xmm0
-  __m128 v249; // xmm12
-  __m128i v250; // xmm12
-  __m128i v251; // xmm1
-  __m128i v252; // xmm6
-  __m128i v253; // xmm3
-  __m128i v254; // xmm9
-  __m128i v255; // xmm2
-  __m128i v256; // xmm15
-  __m128i v257; // xmm15
-  __m128i v258; // xmm2
-  __m128i v259; // xmm0
-  __m128i v260; // xmm3
-  __m128i v261; // xmm9
-  __m128i v262; // xmm8
-  __m128 v263; // xmm12
-  __m128 v264; // xmm6
-  __m128 v265; // xmm3
-  __m128 v266; // xmm2
-  __m128 v267; // xmm0
-  __m128 v268; // xmm12
-  unsigned int v269; // [rsp+0h] [rbp-598h]
-  unsigned int v270; // [rsp+8h] [rbp-590h]
-  __m128i v271; // [rsp+10h] [rbp-588h]
-  __int128 v272; // [rsp+20h] [rbp-578h]
-  __int128 v273; // [rsp+30h] [rbp-568h]
-  __m128i v274; // [rsp+40h] [rbp-558h]
-  __int128 v275; // [rsp+50h] [rbp-548h]
-  __m128i v276; // [rsp+60h] [rbp-538h]
-  __m128i v277; // [rsp+70h] [rbp-528h]
-  __m128i v278; // [rsp+80h] [rbp-518h]
-  __m128i v279; // [rsp+90h] [rbp-508h]
-  __m128i v280; // [rsp+A0h] [rbp-4F8h]
-  __m128i v281; // [rsp+B0h] [rbp-4E8h]
-  __m128i v282; // [rsp+C0h] [rbp-4D8h]
-  __m128i v283; // [rsp+D0h] [rbp-4C8h]
-  __m128i v284; // [rsp+E0h] [rbp-4B8h]
-  __m128i v285; // [rsp+F0h] [rbp-4A8h]
-  __m128i v286; // [rsp+100h] [rbp-498h]
-  __m128i v287; // [rsp+110h] [rbp-488h]
-  __m128i v288; // [rsp+120h] [rbp-478h]
-  __m128i v289; // [rsp+130h] [rbp-468h]
-  __m128i v290; // [rsp+140h] [rbp-458h]
-  __m128i v291; // [rsp+150h] [rbp-448h]
-  __m128i v292; // [rsp+160h] [rbp-438h]
-  __m128i v293; // [rsp+170h] [rbp-428h]
-  __m128i v294; // [rsp+180h] [rbp-418h]
-  __m128i v295; // [rsp+190h] [rbp-408h]
-  __m128i v296; // [rsp+1A0h] [rbp-3F8h]
-  __m128i v297; // [rsp+1B0h] [rbp-3E8h]
-  __m128i v298; // [rsp+1C0h] [rbp-3D8h]
-  __m128i v299; // [rsp+1D0h] [rbp-3C8h]
-  __m128i v300; // [rsp+1E0h] [rbp-3B8h]
-  __m128i v301; // [rsp+1F0h] [rbp-3A8h]
-  __int128 v302; // [rsp+200h] [rbp-398h]
-  __m128i v303; // [rsp+210h] [rbp-388h]
-  __m128i v304; // [rsp+220h] [rbp-378h]
-  __m128i v305; // [rsp+230h] [rbp-368h]
-  __m128i v306; // [rsp+240h] [rbp-358h]
-  __m128i v307; // [rsp+250h] [rbp-348h]
-  __int128 v308; // [rsp+260h] [rbp-338h]
-  __m128i v309; // [rsp+270h] [rbp-328h]
-  __m128i v310; // [rsp+280h] [rbp-318h]
-  char v311; // [rsp+29Fh] [rbp-2F9h]
-  char v312; // [rsp+3AFh] [rbp-1E9h]
-  Render::RasterizeZ *v313; // [rsp+5A0h] [rbp+8h]
-  float v314; // [rsp+5A8h] [rbp+10h]
-  int v315; // [rsp+5A8h] [rbp+10h]
-  float v316; // [rsp+5B0h] [rbp+18h]
-  float v317; // [rsp+5B0h] [rbp+18h]
-  float v318; // [rsp+5B8h] [rbp+20h]
-  unsigned __int64 v319; // [rsp+5B8h] [rbp+20h]
+  __m128i v233; // xmm14
+  __m128i v234; // xmm13
+  __m128 v235; // xmm12
+  __m128 v236; // xmm1
+  __m128 v237; // xmm6
+  __m128 v238; // xmm3
+  __m128 v239; // xmm4
+  __m128 v240; // xmm2
+  __m128 v241; // xmm0
+  __m128 v242; // xmm12
+  unsigned int v243; // [rsp+0h] [rbp-598h]
+  unsigned int v244; // [rsp+8h] [rbp-590h]
+  __m128i v245; // [rsp+10h] [rbp-588h] BYREF
+  __m128 v246; // [rsp+20h] [rbp-578h] BYREF
+  __m128 v247; // [rsp+30h] [rbp-568h] BYREF
+  __m128i v248; // [rsp+40h] [rbp-558h] BYREF
+  __m128 v249; // [rsp+50h] [rbp-548h] BYREF
+  __m128i v250; // [rsp+60h] [rbp-538h] BYREF
+  __m128i v251; // [rsp+70h] [rbp-528h] BYREF
+  __m128i v252; // [rsp+80h] [rbp-518h] BYREF
+  __m128i v253; // [rsp+90h] [rbp-508h] BYREF
+  __m128i v254; // [rsp+A0h] [rbp-4F8h]
+  __m128i v255; // [rsp+B0h] [rbp-4E8h]
+  __m128i v256; // [rsp+C0h] [rbp-4D8h]
+  __m128i v257; // [rsp+D0h] [rbp-4C8h]
+  __m128i v258; // [rsp+E0h] [rbp-4B8h]
+  __m128i v259; // [rsp+F0h] [rbp-4A8h] BYREF
+  __m128i v260; // [rsp+100h] [rbp-498h] BYREF
+  __m128i v261; // [rsp+110h] [rbp-488h] BYREF
+  __m128i v262; // [rsp+120h] [rbp-478h] BYREF
+  __m128i v263; // [rsp+130h] [rbp-468h] BYREF
+  __m128i v264; // [rsp+140h] [rbp-458h] BYREF
+  __m128i v265; // [rsp+150h] [rbp-448h] BYREF
+  __m128i v266; // [rsp+160h] [rbp-438h] BYREF
+  __m128i v267; // [rsp+170h] [rbp-428h] BYREF
+  __m128i v268; // [rsp+180h] [rbp-418h]
+  __m128i v269; // [rsp+190h] [rbp-408h]
+  __m128i v270; // [rsp+1A0h] [rbp-3F8h]
+  __m128i v271; // [rsp+1B0h] [rbp-3E8h]
+  __m128i v272; // [rsp+1C0h] [rbp-3D8h]
+  __m128i v273; // [rsp+1D0h] [rbp-3C8h]
+  __m128i v274; // [rsp+1E0h] [rbp-3B8h]
+  __m128i v275; // [rsp+1F0h] [rbp-3A8h]
+  __m128i v276; // [rsp+200h] [rbp-398h] BYREF
+  __m128i v277; // [rsp+210h] [rbp-388h]
+  __m128i v278; // [rsp+220h] [rbp-378h]
+  __m128i v279; // [rsp+230h] [rbp-368h]
+  __m128i v280; // [rsp+240h] [rbp-358h]
+  __m128i v281; // [rsp+250h] [rbp-348h]
+  __m128i v282; // [rsp+260h] [rbp-338h] BYREF
+  __m128i v283; // [rsp+270h] [rbp-328h]
+  __m128i v284; // [rsp+280h] [rbp-318h]
+  __m128i v285; // [rsp+290h] [rbp-308h]
+  __m128i v286; // [rsp+2A0h] [rbp-2F8h]
+  __m128i v287; // [rsp+2B0h] [rbp-2E8h]
+  __m128i v288; // [rsp+2C0h] [rbp-2D8h]
+  __m128i v289; // [rsp+2D0h] [rbp-2C8h]
+  __m128i v290; // [rsp+2E0h] [rbp-2B8h]
+  __m128i v291; // [rsp+2F0h] [rbp-2A8h]
+  __m128i v292; // [rsp+300h] [rbp-298h]
+  __m128i v293; // [rsp+310h] [rbp-288h]
+  __m128i v294; // [rsp+320h] [rbp-278h]
+  __m128i v295; // [rsp+330h] [rbp-268h]
+  __m128i v296; // [rsp+340h] [rbp-258h]
+  __m128 v297; // [rsp+350h] [rbp-248h]
+  __m128 v298; // [rsp+360h] [rbp-238h]
+  __m128 v299; // [rsp+370h] [rbp-228h]
+  __m128 v300; // [rsp+380h] [rbp-218h]
+  __m128i v301; // [rsp+3A0h] [rbp-1F8h]
+  __m128i v302; // [rsp+3B0h] [rbp-1E8h]
+  __m128i v303; // [rsp+3C0h] [rbp-1D8h]
+  __m128i v304; // [rsp+3D0h] [rbp-1C8h]
+  __m128i v305; // [rsp+3E0h] [rbp-1B8h]
+  __m128i v306; // [rsp+3F0h] [rbp-1A8h]
+  __m128i v307; // [rsp+400h] [rbp-198h]
+  __m128i v308; // [rsp+410h] [rbp-188h]
+  __m128i v309; // [rsp+420h] [rbp-178h]
+  __m128i v310; // [rsp+430h] [rbp-168h]
+  __m128i v311; // [rsp+440h] [rbp-158h]
+  __m128i v312; // [rsp+450h] [rbp-148h]
+  __m128 v313; // [rsp+460h] [rbp-138h]
+  __m128 v314; // [rsp+470h] [rbp-128h]
+  __m128 v315; // [rsp+480h] [rbp-118h]
+  __m128 v316; // [rsp+490h] [rbp-108h]
+  float v318; // [rsp+5A8h] [rbp+10h]
+  int v319; // [rsp+5A8h] [rbp+10h]
+  float v320; // [rsp+5B0h] [rbp+18h]
+  float v321; // [rsp+5B0h] [rbp+18h]
+  float v322; // [rsp+5B8h] [rbp+20h]
 
-  v313 = this;
-  v4 = v1->w;
-  v5 = v1->y;
+  w = v1->w;
+  y = v1->y;
   v6 = v0->w;
   v7 = v2->w;
   v8 = v0->y;
   v9 = v2->y;
-  v10 = (float)(v1->w * v8) - (float)(v1->y * v6);
-  v11 = (float)(v2->w * v5) - (float)(v2->y * v4);
-  v12 = (float)(v2->y * v6) - (float)(v2->w * v8);
-  v13 = (float)(v1->x * v6) - (float)(v0->x * v4);
-  v14 = (float)(v2->x * v4) - (float)(v1->x * v7);
+  v10 = (float)(w * v8) - (float)(y * v6);
+  v11 = (float)(v7 * y) - (float)(v9 * w);
+  v12 = (float)(v9 * v6) - (float)(v7 * v8);
+  v13 = (float)(v1->x * v6) - (float)(v0->x * w);
+  v14 = (float)(v2->x * w) - (float)(v1->x * v7);
   v15 = (float)(v0->x * v7) - (float)(v2->x * v6);
-  v316 = (float)(v0->x * v7) - (float)(v2->x * v6);
-  v16 = (float)(v0->x * v5) - (float)(v1->x * v8);
-  v17 = (float)(v1->x * v9) - (float)(v2->x * v5);
+  v320 = v15;
+  v16 = (float)(v0->x * y) - (float)(v1->x * v8);
+  v17 = (float)(v1->x * v9) - (float)(v2->x * y);
   v18 = (float)(v2->x * v8) - (float)(v0->x * v9);
-  v19 = (float)((float)(v7 * v16) + (float)(v6 * v17)) + (float)(v4 * v18);
+  v19 = (float)((float)(v7 * v16) + (float)(v6 * v17)) + (float)(w * v18);
   if ( v19 < 1.0 )
     return;
   v20 = 1.0 / v19;
@@ -531,711 +513,563 @@ void __fastcall Render::RasterizeZ::Draw2DH(Render::RasterizeZ *this, UFG::qVect
   v23 = v11 * -1.0;
   v24 = v11 * 0.015625;
   v25 = v23 + v17;
-  v26 = (float)(v22 + v12) * v20;
-  v27 = (float)((float)(v14 + v13) + v15) * v20;
-  v28 = (float)(v10 * -1.0) + v16;
-  v318 = v26;
-  v29 = (float)(v12 * -1.0) + v18;
-  v30 = v10 * 0.015625;
-  v31 = v28 + (float)(v13 * -1.0);
-  v32 = (float)(v26 * -1.0) + (float)((float)(v21 + v18) * v20);
-  v33 = v14 * -1.0;
-  v34 = v13 * 0.015625;
-  v35 = v14 * 0.015625;
-  v36 = v12 * 0.015625;
-  v37 = v29 + (float)(v316 * -1.0);
-  v317 = v316 * 0.015625;
-  v314 = v32 + (float)(v27 * -1.0);
-  v38 = (float)(1.0 / (float)(COERCE_FLOAT(LODWORD(v30) & _xmm) + COERCE_FLOAT(LODWORD(v34) & _xmm))) * 65536.0;
-  v39 = (float)(1.0 / (float)(COERCE_FLOAT(LODWORD(v24) & _xmm) + COERCE_FLOAT(LODWORD(v35) & _xmm))) * 65536.0;
-  v40 = (float)(1.0 / (float)(COERCE_FLOAT(LODWORD(v36) & _xmm) + COERCE_FLOAT(LODWORD(v317) & _xmm))) * 65536.0;
-  v41 = v24 * v39;
-  v42 = v35 * v39;
-  v43 = (float)(v25 + v33) * v39;
-  v44 = v36 * v40;
-  v45 = v317 * v40;
-  v46 = v37 * v40;
-  v47 = v31 * v38;
-  v48 = v314 * 65536.0;
-  v49 = (float)(v27 * 0.015625) * 65536.0;
-  v50 = v30 * v38;
-  v51 = v34 * v38;
-  v52 = FLOAT_1_6777216e7;
-  if ( v47 <= -16777216.0 )
-  {
-    v47 = FLOAT_N1_6777216e7;
-  }
-  else if ( v47 >= 16777216.0 )
-  {
-    v47 = FLOAT_1_6777216e7;
-  }
-  if ( v43 <= -16777216.0 )
-  {
-    v43 = FLOAT_N1_6777216e7;
-  }
-  else if ( v43 >= 16777216.0 )
-  {
-    v43 = FLOAT_1_6777216e7;
-  }
+  v26 = (float)((float)(v14 + v13) + v15) * v20;
+  v27 = (float)(v10 * -1.0) + v16;
+  v322 = (float)(v22 + v12) * v20;
+  v28 = (float)(v12 * -1.0) + v18;
+  v29 = v10 * 0.015625;
+  v30 = v27 + (float)(v13 * -1.0);
+  v31 = (float)(v322 * -1.0) + (float)((float)(v21 + v18) * v20);
+  v32 = v14 * -1.0;
+  v33 = v13 * 0.015625;
+  v34 = v14 * 0.015625;
+  v35 = v12 * 0.015625;
+  v36 = v28 + (float)(v320 * -1.0);
+  v321 = v320 * 0.015625;
+  v318 = v31 + (float)(v26 * -1.0);
+  v37 = (float)(1.0 / (float)(COERCE_FLOAT(LODWORD(v29) & _xmm) + COERCE_FLOAT(LODWORD(v33) & _xmm))) * 65536.0;
+  v38 = (float)(1.0 / (float)(COERCE_FLOAT(LODWORD(v24) & _xmm) + COERCE_FLOAT(LODWORD(v34) & _xmm))) * 65536.0;
+  v39 = (float)(1.0 / (float)(COERCE_FLOAT(LODWORD(v35) & _xmm) + COERCE_FLOAT(LODWORD(v321) & _xmm))) * 65536.0;
+  v40 = v24 * v38;
+  v41 = v34 * v38;
+  v42 = (float)(v25 + v32) * v38;
+  v43 = v35 * v39;
+  v44 = v321 * v39;
+  v45 = v36 * v39;
+  v46 = v30 * v37;
+  v47 = v318 * 65536.0;
+  v48 = (float)(v26 * 0.015625) * 65536.0;
+  v49 = v29 * v37;
+  v50 = v33 * v37;
+  v51 = FLOAT_1_6777216e7;
   if ( v46 <= -16777216.0 )
   {
     v46 = FLOAT_N1_6777216e7;
   }
   else if ( v46 >= 16777216.0 )
   {
+    v46 = FLOAT_1_6777216e7;
+  }
+  if ( v42 <= -16777216.0 )
+  {
+    v42 = FLOAT_N1_6777216e7;
+  }
+  else if ( v42 >= 16777216.0 )
+  {
+    v42 = FLOAT_1_6777216e7;
+  }
+  if ( v45 <= -16777216.0 )
+  {
+    v45 = FLOAT_N1_6777216e7;
+  }
+  else if ( v45 >= 16777216.0 )
+  {
     goto LABEL_15;
   }
-  v52 = v46;
+  v51 = v45;
 LABEL_15:
+  v52 = 0;
   v53 = 0;
   v54 = 0;
   v55 = 0;
-  v56 = 0;
-  v57 = -(signed int)(float)((float)(v318 * 0.015625) * 65536.0);
-  v58 = -(signed int)v49;
-  v59 = (signed int)v50;
-  v60 = (signed int)v41;
-  v61 = (signed int)v42;
-  v315 = (signed int)v52;
-  v62 = (signed int)v44;
-  v63 = (signed int)v45;
-  v64 = 0x10000 - (signed int)v48;
-  if ( (signed int)v51 < 0 )
-    v53 = -(signed int)v51;
+  v56 = -(int)(float)((float)(v322 * 0.015625) * 65536.0);
+  v57 = -(int)v48;
+  v58 = (int)v49;
+  v59 = (int)v40;
+  v60 = (int)v41;
+  v319 = (int)v51;
+  v61 = (int)v43;
+  v62 = (int)v44;
+  v63 = 0x10000 - (int)v47;
+  if ( (int)v50 < 0 )
+    v52 = -(int)v50;
+  v64 = 0;
+  if ( v58 > 0 )
+    v64 = (int)v49;
+  if ( v60 < 0 )
+    v53 = -v60;
   v65 = 0;
   if ( v59 > 0 )
-    v65 = (signed int)v50;
-  if ( v61 < 0 )
-    v54 = -v61;
-  v66 = 0;
-  if ( v60 > 0 )
-    v66 = (signed int)v41;
-  if ( v63 < 0 )
-    v55 = -v63;
-  v67 = 0;
-  if ( v62 > 0 )
-    v67 = (signed int)v44;
-  if ( v58 < 0 )
-    v56 = (signed int)v49;
-  v68 = 0;
-  if ( (signed int)(float)((float)(v318 * 0.015625) * 65536.0) < 0 )
-    v68 = -(signed int)(float)((float)(v318 * 0.015625) * 65536.0);
-  v69 = v67 + v55;
-  v270 = v65 + v53;
-  v70 = v54 + v66;
-  v71 = (signed int)v50;
-  v269 = v56 + v68;
-  if ( v59 < 0 )
-    v71 = -v59;
-  v72 = (signed int)v51;
-  if ( v59 < 0 || v71 < 256 && (signed int)v51 > 0 )
-    v73 = (signed int)v47 + 1;
-  else
-    v73 = (signed int)v47;
-  v74 = (signed int)v41;
-  if ( v60 < 0 )
-    v74 = -v60;
-  if ( v60 < 0 || v74 < 256 && v61 > 0 )
-    v75 = (signed int)v43 + 1;
-  else
-    v75 = (signed int)v43;
-  v76 = (signed int)v44;
+    v65 = (int)v40;
   if ( v62 < 0 )
-    v76 = -v62;
-  v77 = (signed int)v45;
-  if ( v62 < 0 || v76 < 256 && (signed int)v45 > 0 )
-    v315 = (signed int)v52 + 1;
-  v78 = -(signed int)(float)((float)(v318 * 0.015625) * 65536.0);
-  if ( v57 < 0 )
-    v78 = (signed int)(float)((float)(v318 * 0.015625) * 65536.0);
-  if ( v57 < 0 || v78 < 256 && (signed int)v49 < 0 )
-    ++v64;
+    v54 = -v62;
+  v66 = 0;
+  if ( v61 > 0 )
+    v66 = (int)v43;
+  if ( (int)v48 > 0 )
+    v55 = (int)v48;
+  v67 = 0;
+  if ( (int)(float)((float)(v322 * 0.015625) * 65536.0) < 0 )
+    v67 = -(int)(float)((float)(v322 * 0.015625) * 65536.0);
+  v68 = v66 + v54;
+  v244 = v64 + v52;
+  v69 = v53 + v65;
+  v70 = (int)v49;
+  v243 = v55 + v67;
+  if ( v58 < 0 )
+    v70 = -v58;
+  v71 = (int)v50;
+  if ( v58 < 0 || v70 < 256 && (int)v50 > 0 )
+    v72 = (int)v46 + 1;
+  else
+    v72 = (int)v46;
+  v73 = (int)v40;
+  if ( v59 < 0 )
+    v73 = -v59;
+  if ( v59 < 0 || v73 < 256 && v60 > 0 )
+    v74 = (int)v42 + 1;
+  else
+    v74 = (int)v42;
+  v75 = (int)v43;
+  if ( v61 < 0 )
+    v75 = -v61;
+  v76 = (int)v44;
+  if ( v61 < 0 || v75 < 256 && (int)v44 > 0 )
+    v319 = (int)v51 + 1;
+  v77 = -(int)(float)((float)(v322 * 0.015625) * 65536.0);
+  if ( (int)(float)((float)(v322 * 0.015625) * 65536.0) > 0 )
+    v77 = (int)(float)((float)(v322 * 0.015625) * 65536.0);
+  if ( v56 < 0 || v77 < 256 && (int)v48 < 0 )
+    ++v63;
+  v78 = _mm_unpacklo_epi32(
+          _mm_unpacklo_epi32(_mm_cvtsi32_si128(v58), _mm_cvtsi32_si128(v61)),
+          _mm_unpacklo_epi32(_mm_cvtsi32_si128(v59), _mm_cvtsi32_si128(v56)));
   v79 = _mm_unpacklo_epi32(
-          _mm_unpacklo_epi32(_mm_cvtsi32_si128(v59), _mm_cvtsi32_si128(v62)),
+          _mm_unpacklo_epi32(_mm_cvtsi32_si128(v71), _mm_cvtsi32_si128(v76)),
           _mm_unpacklo_epi32(_mm_cvtsi32_si128(v60), _mm_cvtsi32_si128(v57)));
+  v283 = _mm_slli_epi32((__m128i)_mm_shuffle_ps((__m128)v78, (__m128)v78, 0), 2u);
+  v270 = _mm_slli_epi32((__m128i)_mm_shuffle_ps((__m128)v79, (__m128)v79, 85), 2u);
+  v275 = _mm_slli_epi32((__m128i)_mm_shuffle_ps((__m128)v78, (__m128)v78, 85), 2u);
+  v274 = _mm_slli_epi32((__m128i)_mm_shuffle_ps((__m128)v79, (__m128)v79, 255), 2u);
+  v246 = _mm_shuffle_ps((__m128)v79, (__m128)v79, 85);
+  v281 = _mm_slli_epi32((__m128i)_mm_shuffle_ps((__m128)v78, (__m128)v78, 170), 2u);
+  v245 = (__m128i)_mm_shuffle_ps((__m128)v79, (__m128)v79, 255);
+  v277 = _mm_slli_epi32((__m128i)_mm_shuffle_ps((__m128)v78, (__m128)v78, 255), 2u);
+  v269 = _mm_slli_epi32((__m128i)_mm_shuffle_ps((__m128)v79, (__m128)v79, 0), 2u);
+  v272 = _mm_slli_epi32((__m128i)_mm_shuffle_ps((__m128)v79, (__m128)v79, 170), 2u);
   v80 = _mm_unpacklo_epi32(
-          _mm_unpacklo_epi32(_mm_cvtsi32_si128(v72), _mm_cvtsi32_si128(v77)),
-          _mm_unpacklo_epi32(_mm_cvtsi32_si128(v61), _mm_cvtsi32_si128(v58)));
-  _mm_store_si128(&v309, _mm_slli_epi32((__m128i)_mm_shuffle_ps((__m128)v79, (__m128)v79, 0), 2u));
-  _mm_store_si128(&v296, _mm_slli_epi32((__m128i)_mm_shuffle_ps((__m128)v80, (__m128)v80, 85), 2u));
-  _mm_store_si128(&v301, _mm_slli_epi32((__m128i)_mm_shuffle_ps((__m128)v79, (__m128)v79, 85), 2u));
-  _mm_store_si128(&v300, _mm_slli_epi32((__m128i)_mm_shuffle_ps((__m128)v80, (__m128)v80, 255), 2u));
-  _mm_store_si128((__m128i *)&v272, (__m128i)_mm_shuffle_ps((__m128)v80, (__m128)v80, 85));
-  _mm_store_si128(&v307, _mm_slli_epi32((__m128i)_mm_shuffle_ps((__m128)v79, (__m128)v79, 170), 2u));
-  _mm_store_si128(&v271, (__m128i)_mm_shuffle_ps((__m128)v80, (__m128)v80, 255));
-  _mm_store_si128(&v303, _mm_slli_epi32((__m128i)_mm_shuffle_ps((__m128)v79, (__m128)v79, 255), 2u));
-  _mm_store_si128(&v295, _mm_slli_epi32((__m128i)_mm_shuffle_ps((__m128)v80, (__m128)v80, 0), 2u));
-  _mm_store_si128(&v298, _mm_slli_epi32((__m128i)_mm_shuffle_ps((__m128)v80, (__m128)v80, 170), 2u));
+          _mm_unpacklo_epi32(_mm_cvtsi32_si128(v244), _mm_cvtsi32_si128(v68)),
+          _mm_unpacklo_epi32(_mm_cvtsi32_si128(v69), _mm_cvtsi32_si128(v243)));
+  v282 = _mm_slli_epi32(v80, 2u);
+  v258 = _mm_slli_epi32(v80, 3u);
+  v268 = _mm_slli_epi32(v80, 5u);
+  v249 = _mm_shuffle_ps((__m128)v79, (__m128)v79, 0);
+  v247 = _mm_shuffle_ps((__m128)v79, (__m128)v79, 170);
   v81 = _mm_unpacklo_epi32(
-          _mm_unpacklo_epi32(_mm_cvtsi32_si128(v270), _mm_cvtsi32_si128(v69)),
-          _mm_unpacklo_epi32(_mm_cvtsi32_si128(v70), _mm_cvtsi32_si128(v269)));
-  _mm_store_si128((__m128i *)&v308, _mm_slli_epi32(v81, 2u));
-  v82 = v81;
-  v83 = _mm_slli_epi32(v81, 5u);
-  _mm_store_si128(&v284, _mm_slli_epi32(v82, 3u));
-  _mm_store_si128(&v294, v83);
-  _mm_store_si128((__m128i *)&v275, (__m128i)_mm_shuffle_ps((__m128)v80, (__m128)v80, 0));
-  _mm_store_si128((__m128i *)&v273, (__m128i)_mm_shuffle_ps((__m128)v80, (__m128)v80, 170));
-  v84 = _mm_unpacklo_epi32(
-          _mm_unpacklo_epi32(_mm_cvtsi32_si128(2 * v59), _mm_cvtsi32_si128(2 * v62)),
+          _mm_unpacklo_epi32(_mm_cvtsi32_si128(2 * v58), _mm_cvtsi32_si128(2 * v61)),
           _mm_unpacklo_epi32(
-            _mm_cvtsi32_si128(2 * v60),
-            _mm_cvtsi32_si128(-2 * (signed int)(float)((float)(v318 * 0.015625) * 65536.0))));
-  v85 = _mm_unpackhi_epi32((__m128i)0i64, v84);
-  v86 = _mm_cvtsi32_si128(3 * v60);
-  v87 = (_OWORD *)((unsigned __int64)&v311 & 0xFFFFFFFFFFFFFFF0ui64);
-  v88 = (_OWORD *)((unsigned __int64)&v312 & 0xFFFFFFFFFFFFFFF0ui64);
-  v89 = _mm_unpacklo_epi32(
-          _mm_unpacklo_epi32(_mm_cvtsi32_si128(3 * v59), _mm_cvtsi32_si128(3 * v62)),
-          _mm_unpacklo_epi32(v86, _mm_cvtsi32_si128(-3 * (signed int)(float)((float)(v318 * 0.015625) * 65536.0))));
-  v319 = (unsigned __int64)&v311 & 0xFFFFFFFFFFFFFFF0ui64;
-  v90 = _mm_unpacklo_epi32(v79, v89);
-  v91 = _mm_unpackhi_epi32(v79, v89);
-  v92 = _mm_unpacklo_epi32((__m128i)0i64, v84);
-  v93 = v92;
-  v94 = _mm_unpackhi_epi32(v92, v90);
-  v95 = _mm_unpacklo_epi32(v93, v90);
-  v96 = v85;
-  _mm_store_si128(&v297, v94);
-  v97 = _mm_unpackhi_epi32(v85, v91);
-  _mm_store_si128(&v305, _mm_unpacklo_epi32(v96, v91));
-  v98 = v79;
-  v99 = v79;
-  v100 = _mm_slli_epi32(v79, 5u);
-  _mm_store_si128(&v304, _mm_slli_epi32(v98, 2u));
-  _mm_store_si128((__m128i *)&v302, _mm_slli_epi32(v99, 3u));
-  _mm_store_si128(&v306, _mm_slli_epi32(v80, 2u));
-  v101 = v80;
-  v102 = _mm_slli_epi32(v80, 5u);
-  _mm_store_si128(&v285, _mm_slli_epi32(v101, 3u));
-  _mm_store_si128(&v310, v95);
-  v103 = _mm_add_epi32(
+            _mm_cvtsi32_si128(2 * v59),
+            _mm_cvtsi32_si128(-2 * (int)(float)((float)(v322 * 0.015625) * 65536.0))));
+  v82 = _mm_unpacklo_epi32(
+          _mm_unpacklo_epi32(_mm_cvtsi32_si128(3 * v58), _mm_cvtsi32_si128(3 * v61)),
+          _mm_unpacklo_epi32(
+            _mm_cvtsi32_si128(3 * v59),
+            _mm_cvtsi32_si128(-3 * (int)(float)((float)(v322 * 0.015625) * 65536.0))));
+  v83 = _mm_unpacklo_epi32(v78, v82);
+  v84 = _mm_unpackhi_epi32(v78, v82);
+  v85 = _mm_unpacklo_epi32((__m128i)0i64, v81);
+  v86 = _mm_unpackhi_epi32(v85, v83);
+  v87 = _mm_unpacklo_epi32(v85, v83);
+  v88 = _mm_unpackhi_epi32((__m128i)0i64, v81);
+  v271 = v86;
+  v89 = _mm_unpackhi_epi32(v88, v84);
+  v279 = _mm_unpacklo_epi32(v88, v84);
+  v90 = v78;
+  v91 = v78;
+  v92 = _mm_slli_epi32(v78, 5u);
+  v278 = _mm_slli_epi32(v90, 2u);
+  v276 = _mm_slli_epi32(v91, 3u);
+  v280 = _mm_slli_epi32(v79, 2u);
+  v259 = _mm_slli_epi32(v79, 3u);
+  v284 = v87;
+  v273 = v89;
+  v252 = _mm_slli_epi32(v79, 5u);
+  v285 = _mm_add_epi32(
            _mm_unpacklo_epi32(
-             _mm_unpacklo_epi32(_mm_cvtsi32_si128(v73 + 127 * v72), _mm_cvtsi32_si128(v315 + 127 * v77)),
-             _mm_unpacklo_epi32(_mm_cvtsi32_si128(v75 + 127 * v61), _mm_cvtsi32_si128(v64 + 127 * v58))),
-           v83);
-  _mm_store_si128(&v299, v97);
-  _mm_store_si128(&v278, v102);
-  v104 = _mm_add_epi32(v103, v100);
-  v105 = _mm_sub_epi32(v103, v102);
-  v106 = _mm_add_epi32(v104, v100);
-  v107 = _mm_add_epi32(v106, v100);
-  v108 = _mm_sub_epi32(v106, v102);
-  v109 = _mm_sub_epi32(v104, v102);
-  *v87 = v103;
-  v87[1] = v104;
-  v110 = _mm_sub_epi32(v107, v102);
-  v87[2] = v106;
-  v87[3] = v107;
-  v87[4] = v105;
-  v87[5] = v109;
-  v87[6] = v108;
-  v87[7] = v110;
-  v111 = _mm_sub_epi32(v105, v102);
-  v112 = _mm_sub_epi32(v109, v102);
-  v87[8] = v111;
-  v87[9] = v112;
-  v113 = _mm_sub_epi32(v108, v102);
-  v114 = _mm_sub_epi32(v110, v102);
-  v87[10] = v113;
-  v87[11] = v114;
-  v115 = (__m128)_mm_sub_epi32(v111, v102);
-  v87[12] = v115;
-  v116 = (__m128)_mm_sub_epi32(v112, v102);
-  v87[13] = v116;
-  v117 = (__m128)_mm_sub_epi32(v113, v102);
-  v118 = (__m128)_mm_sub_epi32(v114, v278);
-  v87[14] = v117;
-  v87[15] = v118;
-  v119 = 0;
-  for ( i = ((_mm_movemask_ps(v118) == 0) | 2
-                                          * ((_mm_movemask_ps(v117) == 0) | 2
-                                                                          * ((_mm_movemask_ps(v116) == 0) | 2 * ((_mm_movemask_ps(v115) == 0) | 2 * ((_mm_movemask_ps((__m128)v114) == 0) | 2 * ((_mm_movemask_ps((__m128)v113) == 0) | 2 * ((_mm_movemask_ps((__m128)v112) == 0) | 2 * ((_mm_movemask_ps((__m128)v111) == 0) | 2 * ((_mm_movemask_ps((__m128)v110) == 0) | 2 * ((_mm_movemask_ps((__m128)v108) == 0) | 2 * ((_mm_movemask_ps((__m128)v109) == 0) | 2 * ((_mm_movemask_ps((__m128)v105) == 0) | 2 * ((_mm_movemask_ps((__m128)v107) == 0) | 2 * ((_mm_movemask_ps((__m128)v106) == 0) | 2 * ((_mm_movemask_ps((__m128)v104) == 0) | 2 * (_mm_movemask_ps((__m128)v103) == 0)))))))))))))))) << 16;
+             _mm_unpacklo_epi32(_mm_cvtsi32_si128(v72 + 127 * v71), _mm_cvtsi32_si128(v319 + 127 * v76)),
+             _mm_unpacklo_epi32(_mm_cvtsi32_si128(v74 + 127 * v60), _mm_cvtsi32_si128(v63 + 127 * v57))),
+           v268);
+  v286 = _mm_add_epi32(v285, v92);
+  v287 = _mm_add_epi32(v286, v92);
+  v288 = _mm_add_epi32(v287, v92);
+  v289 = _mm_sub_epi32(v285, v252);
+  v290 = _mm_sub_epi32(v286, v252);
+  v291 = _mm_sub_epi32(v287, v252);
+  v292 = _mm_sub_epi32(v288, v252);
+  v293 = _mm_sub_epi32(v289, v252);
+  v294 = _mm_sub_epi32(v290, v252);
+  v295 = _mm_sub_epi32(v291, v252);
+  v296 = _mm_sub_epi32(v292, v252);
+  v297 = (__m128)_mm_sub_epi32(v293, v252);
+  v298 = (__m128)_mm_sub_epi32(v294, v252);
+  v299 = (__m128)_mm_sub_epi32(v295, v252);
+  v300 = (__m128)_mm_sub_epi32(v296, v252);
+  v93 = 0;
+  for ( i = ((_mm_movemask_ps(v300) == 0) | (2
+                                           * ((_mm_movemask_ps(v299) == 0) | (2
+                                                                            * ((_mm_movemask_ps(v298) == 0) | (2 * ((_mm_movemask_ps(v297) == 0) | (2 * ((_mm_movemask_ps((__m128)v296) == 0) | (2 * ((_mm_movemask_ps((__m128)v295) == 0) | (2 * ((_mm_movemask_ps((__m128)v294) == 0) | (2 * ((_mm_movemask_ps((__m128)v293) == 0) | (2 * ((_mm_movemask_ps((__m128)v292) == 0) | (2 * ((_mm_movemask_ps((__m128)v291) == 0) | (2 * ((_mm_movemask_ps((__m128)v290) == 0) | (2 * ((_mm_movemask_ps((__m128)v289) == 0) | (2 * ((_mm_movemask_ps((__m128)v288) == 0) | (2 * ((_mm_movemask_ps((__m128)v287) == 0) | (2 * ((_mm_movemask_ps((__m128)v286) == 0) | (2 * (_mm_movemask_ps((__m128)v285) == 0))))))))))))))))))))))))))))))) << 16;
         i;
-        v119 = v126 + 1 )
+        v93 = v100 + 1 )
   {
-    v121 = !_BitScanReverse((unsigned int *)&v122, i);
-    if ( v121 )
-      v123 = 0;
+    v95 = !_BitScanReverse((unsigned int *)&v96, i);
+    if ( v95 )
+      v97 = 0;
     else
-      v123 = 31 - v122;
-    v124 = _mm_load_si128(&v285);
-    v125 = _mm_load_si128((const __m128i *)&v302);
-    v126 = v123 + v119;
-    i <<= v123 + 1;
-    v127 = _mm_add_epi32(_mm_sub_epi32((__m128i)v87[v126], v294), v284);
-    *v88 = v127;
-    v128 = _mm_add_epi32(v127, v125);
-    *(__m128i *)(((unsigned __int64)&v312 & 0xFFFFFFFFFFFFFFF0ui64) + 0x10) = v128;
-    v129 = _mm_add_epi32(v128, v125);
-    *(__m128i *)(((unsigned __int64)&v312 & 0xFFFFFFFFFFFFFFF0ui64) + 0x20) = v129;
-    v130 = _mm_add_epi32(v129, v125);
-    v131 = _mm_sub_epi32(v128, v124);
-    *(__m128i *)(((unsigned __int64)&v312 & 0xFFFFFFFFFFFFFFF0ui64) + 0x30) = v130;
-    v132 = _mm_sub_epi32(v129, v124);
-    v133 = _mm_sub_epi32(v127, v124);
-    v134 = _mm_sub_epi32(v130, v124);
-    v135 = _mm_sub_epi32(v131, v124);
-    v136 = _mm_sub_epi32(v132, v124);
-    *(__m128i *)(((unsigned __int64)&v312 & 0xFFFFFFFFFFFFFFF0ui64) + 0x40) = v133;
-    *(__m128i *)(((unsigned __int64)&v312 & 0xFFFFFFFFFFFFFFF0ui64) + 0x50) = v131;
-    *(__m128i *)(((unsigned __int64)&v312 & 0xFFFFFFFFFFFFFFF0ui64) + 0x60) = v132;
-    *(__m128i *)(((unsigned __int64)&v312 & 0xFFFFFFFFFFFFFFF0ui64) + 0x70) = v134;
-    v137 = _mm_sub_epi32(v133, v124);
-    v138 = _mm_sub_epi32(v134, v124);
-    *(__m128i *)(((unsigned __int64)&v312 & 0xFFFFFFFFFFFFFFF0ui64) + 0x80) = v137;
-    *(__m128i *)(((unsigned __int64)&v312 & 0xFFFFFFFFFFFFFFF0ui64) + 0x90) = v135;
-    *(__m128i *)(((unsigned __int64)&v312 & 0xFFFFFFFFFFFFFFF0ui64) + 0xA0) = v136;
-    *(__m128i *)(((unsigned __int64)&v312 & 0xFFFFFFFFFFFFFFF0ui64) + 0xB0) = v138;
-    v139 = (__m128)_mm_sub_epi32(v137, v124);
-    v140 = (__m128)_mm_sub_epi32(v135, v124);
-    *(__m128 *)(((unsigned __int64)&v312 & 0xFFFFFFFFFFFFFFF0ui64) + 0xC0) = v139;
-    *(__m128 *)(((unsigned __int64)&v312 & 0xFFFFFFFFFFFFFFF0ui64) + 0xD0) = v140;
-    v141 = (__m128)_mm_sub_epi32(v136, v124);
-    *(__m128 *)(((unsigned __int64)&v312 & 0xFFFFFFFFFFFFFFF0ui64) + 0xE0) = v141;
-    v142 = (__m128)_mm_sub_epi32(v138, v285);
-    *(__m128 *)(((unsigned __int64)&v312 & 0xFFFFFFFFFFFFFFF0ui64) + 0xF0) = v142;
-    v143 = 0;
-    v144 = ((_mm_movemask_ps(v142) == 0) | 2
-                                         * ((_mm_movemask_ps(v141) == 0) | 2
-                                                                         * ((_mm_movemask_ps(v140) == 0) | 2 * ((_mm_movemask_ps(v139) == 0) | 2 * ((_mm_movemask_ps((__m128)v138) == 0) | 2 * ((_mm_movemask_ps((__m128)v136) == 0) | 2 * ((_mm_movemask_ps((__m128)v135) == 0) | 2 * ((_mm_movemask_ps((__m128)v137) == 0) | 2 * ((_mm_movemask_ps((__m128)v134) == 0) | 2 * ((_mm_movemask_ps((__m128)v132) == 0) | 2 * ((_mm_movemask_ps((__m128)v131) == 0) | 2 * ((_mm_movemask_ps((__m128)v133) == 0) | 2 * ((_mm_movemask_ps((__m128)v130) == 0) | 2 * ((_mm_movemask_ps((__m128)v129) == 0) | 2 * ((_mm_movemask_ps((__m128)v128) == 0) | 2 * (_mm_movemask_ps((__m128)v127) == 0)))))))))))))))) << 16;
-    if ( v144 )
+      v97 = 31 - v96;
+    v98 = _mm_load_si128(&v259);
+    v99 = _mm_load_si128(&v276);
+    v100 = v97 + v93;
+    i <<= v97 + 1;
+    v301 = _mm_add_epi32(_mm_sub_epi32(*(&v285 + v100), v268), v258);
+    v302 = _mm_add_epi32(v301, v99);
+    v303 = _mm_add_epi32(v302, v99);
+    v304 = _mm_add_epi32(v303, v99);
+    v305 = _mm_sub_epi32(v301, v98);
+    v306 = _mm_sub_epi32(v302, v98);
+    v307 = _mm_sub_epi32(v303, v98);
+    v308 = _mm_sub_epi32(v304, v98);
+    v309 = _mm_sub_epi32(v305, v98);
+    v310 = _mm_sub_epi32(v306, v98);
+    v311 = _mm_sub_epi32(v307, v98);
+    v312 = _mm_sub_epi32(v308, v98);
+    v313 = (__m128)_mm_sub_epi32(v309, v98);
+    v314 = (__m128)_mm_sub_epi32(v310, v98);
+    v315 = (__m128)_mm_sub_epi32(v311, v98);
+    v316 = (__m128)_mm_sub_epi32(v312, v259);
+    v101 = 0;
+    v102 = ((_mm_movemask_ps(v316) == 0) | (2
+                                          * ((_mm_movemask_ps(v315) == 0) | (2
+                                                                           * ((_mm_movemask_ps(v314) == 0) | (2 * ((_mm_movemask_ps(v313) == 0) | (2 * ((_mm_movemask_ps((__m128)v312) == 0) | (2 * ((_mm_movemask_ps((__m128)v311) == 0) | (2 * ((_mm_movemask_ps((__m128)v310) == 0) | (2 * ((_mm_movemask_ps((__m128)v309) == 0) | (2 * ((_mm_movemask_ps((__m128)v308) == 0) | (2 * ((_mm_movemask_ps((__m128)v307) == 0) | (2 * ((_mm_movemask_ps((__m128)v306) == 0) | (2 * ((_mm_movemask_ps((__m128)v305) == 0) | (2 * ((_mm_movemask_ps((__m128)v304) == 0) | (2 * ((_mm_movemask_ps((__m128)v303) == 0) | (2 * ((_mm_movemask_ps((__m128)v302) == 0) | (2 * (_mm_movemask_ps((__m128)v301) == 0))))))))))))))))))))))))))))))) << 16;
+    if ( v102 )
     {
-      v145 = 0i64;
+      v103 = 0i64;
       do
       {
-        v121 = !_BitScanReverse((unsigned int *)&v146, v144);
-        if ( v121 )
-          v147 = 0;
+        v95 = !_BitScanReverse((unsigned int *)&v104, v102);
+        if ( v95 )
+          v105 = 0;
         else
-          v147 = 31 - v146;
-        v148 = _mm_load_si128((const __m128i *)&v308);
-        v149 = v147 + v143;
-        v144 <<= v147 + 1;
-        v150 = (char *)v313->mZBuffer;
-        v151 = _mm_sub_epi32((__m128i)v88[v149], v284);
-        v152 = _mm_add_epi32(v151, v304);
-        v153 = _mm_add_epi32(v151, v148);
-        v154 = _mm_sub_epi32(v152, v306);
-        v155 = _mm_add_epi32(_mm_sub_epi32(v151, v306), v148);
-        v156 = _mm_add_epi32((__m128i)_mm_shuffle_ps((__m128)v151, (__m128)v151, 170), v305);
-        _mm_store_si128(&v281, v156);
-        v157 = _mm_add_epi32(v156, v307);
-        v158 = _mm_movemask_epi8(_mm_cmpgt_epi32(v145, _mm_add_epi32(v152, v148))) != 0;
-        _mm_store_si128(&v287, v157);
-        v159 = _mm_add_epi32((__m128i)_mm_shuffle_ps((__m128)v151, (__m128)v151, 0), v310);
-        v160 = _mm_movemask_epi8(_mm_cmpgt_epi32(v145, v155)) != 0;
-        _mm_store_si128(&v282, v159);
-        v161 = _mm_add_epi32((__m128i)_mm_shuffle_ps((__m128)v151, (__m128)v151, 85), v297);
-        v162 = _mm_add_epi32((__m128i)_mm_shuffle_ps((__m128)v151, (__m128)v151, 255), v299);
-        v163 = _mm_movemask_epi8(_mm_cmpgt_epi32(v145, _mm_add_epi32(v154, v148))) != 0;
-        _mm_store_si128(&v283, v161);
-        v164 = _mm_add_epi32(v162, v303);
-        v165 = _mm_add_epi32(v159, v309);
-        _mm_store_si128(&v290, _mm_sub_epi32(v159, v295));
-        _mm_store_si128(&v279, v162);
-        _mm_store_si128(&v277, v164);
-        v166 = _mm_add_epi32(v161, v301);
-        _mm_store_si128(&v291, v165);
-        _mm_store_si128(&v289, v166);
-        _mm_store_si128(&v286, _mm_sub_epi32(v161, v296));
-        _mm_store_si128(&v293, _mm_sub_epi32(v156, v298));
-        _mm_store_si128(&v276, _mm_sub_epi32(v162, v300));
-        _mm_store_si128(&v278, _mm_sub_epi32(v165, v295));
-        _mm_store_si128(&v292, _mm_sub_epi32(v166, v296));
-        _mm_store_si128(&v288, _mm_sub_epi32(v157, v298));
-        _mm_store_si128(&v274, _mm_sub_epi32(v164, v300));
-        if ( !_mm_movemask_epi8(_mm_cmpgt_epi32(v145, v153)) )
+          v105 = 31 - v104;
+        v106 = _mm_load_si128(&v282);
+        v107 = v105 + v101;
+        v102 <<= v105 + 1;
+        mZBuffer = (char *)this->mZBuffer;
+        v109 = ((4 * (v100 & 0xFFFFFFFC) + (v107 & 0xFFFFFFFC)) << 8)
+             + (unsigned __int64)(16 * ((8 * (4 * (v100 & 3) + (v107 & 3u))) >> 2));
+        v110 = _mm_sub_epi32(*(&v301 + v107), v258);
+        v111 = _mm_add_epi32(v110, v278);
+        v112 = _mm_add_epi32(v110, v106);
+        v113 = _mm_sub_epi32(v111, v280);
+        v114 = _mm_add_epi32((__m128i)_mm_shuffle_ps((__m128)v110, (__m128)v110, 170), v279);
+        v255 = v114;
+        v115 = _mm_add_epi32(v114, v281);
+        v116 = _mm_movemask_epi8(_mm_cmpgt_epi32(v103, _mm_add_epi32(v111, v106))) != 0;
+        v261 = v115;
+        v117 = _mm_add_epi32((__m128i)_mm_shuffle_ps((__m128)v110, (__m128)v110, 0), v284);
+        v118 = _mm_movemask_epi8(_mm_cmpgt_epi32(v103, _mm_add_epi32(_mm_sub_epi32(v110, v280), v106))) != 0;
+        v256 = v117;
+        v119 = _mm_add_epi32((__m128i)_mm_shuffle_ps((__m128)v110, (__m128)v110, 85), v271);
+        v120 = _mm_add_epi32((__m128i)_mm_shuffle_ps((__m128)v110, (__m128)v110, 255), v273);
+        v121 = _mm_movemask_epi8(_mm_cmpgt_epi32(v103, _mm_add_epi32(v113, v106))) != 0;
+        v257 = v119;
+        v122 = _mm_add_epi32(v120, v277);
+        v123 = _mm_add_epi32(v117, v283);
+        v264 = _mm_sub_epi32(v117, v269);
+        v253 = v120;
+        v251 = v122;
+        v124 = _mm_add_epi32(v119, v275);
+        v265 = v123;
+        v263 = v124;
+        v260 = _mm_sub_epi32(v119, v270);
+        v267 = _mm_sub_epi32(v114, v272);
+        v250 = _mm_sub_epi32(v120, v274);
+        v252 = _mm_sub_epi32(v123, v269);
+        v266 = _mm_sub_epi32(v124, v270);
+        v262 = _mm_sub_epi32(v115, v272);
+        v248 = _mm_sub_epi32(v122, v274);
+        if ( !_mm_movemask_epi8(_mm_cmpgt_epi32(v103, v112)) )
         {
-          v167 = _mm_load_si128((const __m128i *)&v273);
-          v168 = *(__m128i *)&v150[4
-                                 * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                                  + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))];
-          v169 = v159;
-          v170 = _mm_load_si128((const __m128i *)&v272);
-          v171 = _mm_sub_epi32(v169, _mm_load_si128((const __m128i *)&v275));
-          v172 = _mm_sub_epi32(v161, v170);
-          v280 = v168;
-          v173 = _mm_sub_epi32(v172, v170);
-          v174 = _mm_sub_epi32(v156, v167);
-          v175 = _mm_sub_epi32(v162, v271);
-          v176 = v171;
-          v177 = _mm_sub_epi32(v174, v167);
-          v178 = v171;
-          v179 = _mm_sub_epi32(v173, v170);
-          v180 = _mm_sub_epi32(v177, v167);
-          v181 = _mm_sub_epi32(v175, v271);
-          v182 = _mm_sub_epi32(v181, v271);
-          v183 = _mm_or_ps(
+          si128 = _mm_load_si128((const __m128i *)&v249);
+          v126 = _mm_load_si128((const __m128i *)&v247);
+          v127 = v117;
+          v128 = _mm_load_si128((const __m128i *)&v246);
+          v129 = _mm_sub_epi32(v127, si128);
+          v130 = _mm_sub_epi32(v119, v128);
+          v254 = *(__m128i *)&mZBuffer[4 * v109];
+          v131 = _mm_sub_epi32(v130, v128);
+          v132 = _mm_sub_epi32(v114, v126);
+          v133 = _mm_sub_epi32(v120, v245);
+          v134 = _mm_sub_epi32(v129, si128);
+          v135 = _mm_sub_epi32(v132, v126);
+          v136 = _mm_sub_epi32(v134, si128);
+          v137 = _mm_sub_epi32(v131, v128);
+          v138 = _mm_sub_epi32(v135, v126);
+          v139 = _mm_sub_epi32(v133, v245);
+          v140 = _mm_sub_epi32(v139, v245);
+          v141 = _mm_or_ps(
                    _mm_or_ps(
                      _mm_or_ps(
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v279),
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v281)),
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v253),
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v255)),
                      _mm_or_ps(
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v283),
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v282))),
-                   (__m128)_mm_cmpgt_epi32(_mm_load_si128(&v279), v168));
-          v184 = (__m128)_mm_cmpgt_epi32((__m128i)0i64, v171);
-          v185 = *(__m128i *)&v150[4
-                                 * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                                  + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                                 + 16];
-          v186 = (__m128)_mm_cmpgt_epi32((__m128i)0i64, v173);
-          v145 = 0i64;
-          v187 = _mm_or_ps(
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v257),
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v256))),
+                   (__m128)_mm_cmpgt_epi32(_mm_load_si128(&v253), v254));
+          v142 = (__m128)_mm_cmpgt_epi32((__m128i)0i64, v129);
+          v143 = *(__m128i *)&mZBuffer[4 * v109 + 16];
+          v144 = (__m128)_mm_cmpgt_epi32((__m128i)0i64, v131);
+          v103 = 0i64;
+          v145 = _mm_or_ps(
+                   _mm_or_ps(
+                     _mm_or_ps(
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v133),
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v132)),
+                     _mm_or_ps((__m128)_mm_cmpgt_epi32((__m128i)0i64, v130), v142)),
+                   (__m128)_mm_cmpgt_epi32(v133, v143));
+          v146 = (__m128)_mm_cmpgt_epi32((__m128i)0i64, v135);
+          v147 = *(__m128i *)&mZBuffer[4 * v109 + 32];
+          v148 = _mm_or_ps(
+                   _mm_or_ps(
+                     _mm_or_ps((__m128)_mm_cmpgt_epi32((__m128i)0i64, v139), v146),
+                     _mm_or_ps(v144, (__m128)_mm_cmpgt_epi32((__m128i)0i64, v134))),
+                   (__m128)_mm_cmpgt_epi32(v139, v147));
+          v149 = _mm_or_ps((__m128)_mm_cmpgt_epi32((__m128i)0i64, v140), (__m128)_mm_cmpgt_epi32((__m128i)0i64, v138));
+          v150 = *(__m128i *)&mZBuffer[4 * v109 + 48];
+          v122 = _mm_load_si128(&v251);
+          v151 = _mm_and_ps((__m128)v143, v145);
+          v152 = _mm_and_ps((__m128)v147, v148);
+          v153 = (__m128)_mm_cmpgt_epi32((__m128i)0i64, v136);
+          v115 = _mm_load_si128(&v261);
+          v154 = _mm_or_ps(
+                   _mm_or_ps(v149, _mm_or_ps((__m128)_mm_cmpgt_epi32((__m128i)0i64, v137), v153)),
+                   (__m128)_mm_cmpgt_epi32(v140, v150));
+          v155 = v148;
+          v123 = _mm_load_si128(&v265);
+          v156 = _mm_and_ps((__m128)v254, v141);
+          v157 = _mm_andnot_ps(v141, (__m128)v253);
+          *(__m128 *)&mZBuffer[4 * v109 + 32] = _mm_or_ps(_mm_andnot_ps(v155, (__m128)v139), v152);
+          *(__m128 *)&mZBuffer[4 * v109] = _mm_or_ps(v156, v157);
+          v158 = v145;
+          v124 = _mm_load_si128(&v263);
+          *(__m128 *)&mZBuffer[4 * v109 + 16] = _mm_or_ps(_mm_andnot_ps(v158, (__m128)v133), v151);
+          *(__m128 *)&mZBuffer[4 * v109 + 48] = _mm_or_ps(
+                                                  _mm_andnot_ps(v154, (__m128)v140),
+                                                  _mm_and_ps((__m128)v150, v154));
+        }
+        if ( !v116 )
+        {
+          v159 = _mm_load_si128((const __m128i *)&v249);
+          v160 = _mm_load_si128(&v245);
+          v161 = _mm_load_si128((const __m128i *)&v246);
+          v162 = v123;
+          v163 = v124;
+          v164 = _mm_load_si128((const __m128i *)&v247);
+          v165 = _mm_sub_epi32(v162, v159);
+          v166 = _mm_sub_epi32(v163, v161);
+          v167 = _mm_sub_epi32(v166, v161);
+          v168 = _mm_sub_epi32(v115, v164);
+          v169 = _mm_sub_epi32(v122, v160);
+          v170 = _mm_sub_epi32(v165, v159);
+          v171 = _mm_sub_epi32(v167, v161);
+          v172 = _mm_sub_epi32(v168, v164);
+          v173 = _mm_sub_epi32(v169, v160);
+          v174 = _mm_sub_epi32(v172, v164);
+          v175 = _mm_sub_epi32(v173, v160);
+          v176 = _mm_or_ps(
+                   _mm_or_ps(
+                     _mm_or_ps(
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v251),
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v261)),
+                     _mm_or_ps(
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v263),
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v265))),
+                   (__m128)_mm_cmpgt_epi32(_mm_load_si128(&v251), *(__m128i *)&mZBuffer[4 * v109 + 64]));
+          v177 = _mm_or_ps(
+                   _mm_or_ps((__m128)_mm_cmpgt_epi32((__m128i)0i64, v169), (__m128)_mm_cmpgt_epi32((__m128i)0i64, v168)),
+                   _mm_or_ps((__m128)_mm_cmpgt_epi32((__m128i)0i64, v166), (__m128)_mm_cmpgt_epi32((__m128i)0i64, v165)));
+          v178 = (__m128)_mm_cmpgt_epi32((__m128i)0i64, v167);
+          v103 = 0i64;
+          v179 = _mm_or_ps(
+                   _mm_or_ps(
+                     _mm_or_ps(
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v173),
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v172)),
+                     _mm_or_ps(v178, (__m128)_mm_cmpgt_epi32((__m128i)0i64, v170))),
+                   (__m128)_mm_cmpgt_epi32(v173, *(__m128i *)&mZBuffer[4 * v109 + 96]));
+          v180 = _mm_or_ps(
                    _mm_or_ps(
                      _mm_or_ps(
                        (__m128)_mm_cmpgt_epi32((__m128i)0i64, v175),
                        (__m128)_mm_cmpgt_epi32((__m128i)0i64, v174)),
-                     _mm_or_ps((__m128)_mm_cmpgt_epi32((__m128i)0i64, v172), v184)),
-                   (__m128)_mm_cmpgt_epi32(v175, v185));
-          v188 = (__m128)_mm_cmpgt_epi32((__m128i)0i64, v177);
-          v189 = *(__m128i *)&v150[4
-                                 * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                                  + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                                 + 32];
-          v190 = _mm_or_ps(
-                   _mm_or_ps(
-                     _mm_or_ps((__m128)_mm_cmpgt_epi32((__m128i)0i64, v181), v188),
-                     _mm_or_ps(v186, (__m128)_mm_cmpgt_epi32((__m128i)0i64, v176))),
-                   (__m128)_mm_cmpgt_epi32(v181, v189));
-          v191 = _mm_or_ps((__m128)_mm_cmpgt_epi32((__m128i)0i64, v182), (__m128)_mm_cmpgt_epi32((__m128i)0i64, v180));
-          v192 = *(__m128i *)&v150[4
-                                 * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                                  + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                                 + 48];
-          v164 = _mm_load_si128(&v277);
-          v193 = _mm_and_ps((__m128)v185, v187);
-          v194 = _mm_and_ps((__m128)v189, v190);
-          v195 = (__m128)_mm_cmpgt_epi32((__m128i)0i64, v178);
-          v157 = _mm_load_si128(&v287);
-          v196 = _mm_or_ps(
-                   _mm_or_ps(v191, _mm_or_ps((__m128)_mm_cmpgt_epi32((__m128i)0i64, v179), v195)),
-                   (__m128)_mm_cmpgt_epi32(v182, v192));
-          v197 = v190;
-          v165 = _mm_load_si128(&v291);
-          v198 = _mm_and_ps((__m128)v280, v183);
-          v199 = _mm_andnot_ps(v183, (__m128)v279);
-          *(__m128 *)&v150[4
-                         * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                          + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                         + 32] = _mm_or_ps(_mm_andnot_ps(v197, (__m128)v181), v194);
-          *(__m128 *)&v150[4
-                         * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                          + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))] = _mm_or_ps(v198, v199);
-          v200 = v187;
-          v166 = _mm_load_si128(&v289);
-          *(__m128 *)&v150[4
-                         * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                          + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                         + 16] = _mm_or_ps(_mm_andnot_ps(v200, (__m128)v175), v193);
-          *(__m128 *)&v150[4
-                         * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                          + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                         + 48] = _mm_or_ps(_mm_andnot_ps(v196, (__m128)v182), _mm_and_ps((__m128)v192, v196));
+                     _mm_or_ps(
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v171),
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, _mm_sub_epi32(v170, v159)))),
+                   (__m128)_mm_cmpgt_epi32(v175, *(__m128i *)&mZBuffer[4 * v109 + 112]));
+          v181 = _mm_or_ps(v177, (__m128)_mm_cmpgt_epi32(v169, *(__m128i *)&mZBuffer[4 * v109 + 80]));
+          v182 = _mm_or_ps(_mm_andnot_ps(v181, (__m128)v169), _mm_and_ps(v181, *(__m128 *)&mZBuffer[4 * v109 + 80]));
+          *(__m128 *)&mZBuffer[4 * v109 + 64] = _mm_or_ps(
+                                                  _mm_and_ps(v176, *(__m128 *)&mZBuffer[4 * v109 + 64]),
+                                                  _mm_andnot_ps(v176, (__m128)v251));
+          *(__m128 *)&mZBuffer[4 * v109 + 80] = v182;
+          v183 = v180;
+          v184 = _mm_and_ps(v180, *(__m128 *)&mZBuffer[4 * v109 + 112]);
+          *(__m128 *)&mZBuffer[4 * v109 + 96] = _mm_or_ps(
+                                                  _mm_andnot_ps(v179, (__m128)v173),
+                                                  _mm_and_ps(v179, *(__m128 *)&mZBuffer[4 * v109 + 96]));
+          *(__m128 *)&mZBuffer[4 * v109 + 112] = _mm_or_ps(_mm_andnot_ps(v183, (__m128)v175), v184);
         }
-        if ( !v158 )
+        if ( !v118 )
         {
-          v201 = _mm_load_si128(&v271);
-          v202 = v165;
-          v203 = v166;
-          v204 = _mm_load_si128((const __m128i *)&v273);
-          v205 = _mm_sub_epi32(v202, _mm_load_si128((const __m128i *)&v275));
-          v206 = _mm_sub_epi32(v203, _mm_load_si128((const __m128i *)&v272));
-          v207 = _mm_sub_epi32(v157, v204);
-          v208 = _mm_sub_epi32(v164, v201);
-          v209 = v206;
-          v210 = _mm_sub_epi32(v207, v204);
-          v211 = _mm_sub_epi32(v208, v201);
-          v212 = _mm_sub_epi32(v210, v204);
-          v213 = _mm_sub_epi32(v211, v201);
-          v214 = _mm_or_ps(
+          v185 = _mm_load_si128((const __m128i *)&v247);
+          v186 = _mm_load_si128((const __m128i *)&v249);
+          v187 = _mm_load_si128(&v245);
+          v188 = _mm_load_si128((const __m128i *)&v246);
+          v189 = _mm_sub_epi32(_mm_load_si128(&v264), v186);
+          v190 = _mm_sub_epi32(_mm_load_si128(&v267), v185);
+          v191 = _mm_sub_epi32(_mm_load_si128(&v260), v188);
+          v192 = _mm_sub_epi32(_mm_load_si128(&v250), v187);
+          v193 = _mm_sub_epi32(v190, v185);
+          v194 = _mm_sub_epi32(v189, v186);
+          v195 = _mm_sub_epi32(v191, v188);
+          v196 = _mm_sub_epi32(v193, v185);
+          v197 = _mm_sub_epi32(v194, v186);
+          v198 = _mm_sub_epi32(v195, v188);
+          v199 = _mm_sub_epi32(v192, v187);
+          v200 = _mm_sub_epi32(v199, v187);
+          v201 = _mm_or_ps(
                    _mm_or_ps(
                      _mm_or_ps(
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v277),
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v287)),
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v250),
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v267)),
                      _mm_or_ps(
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v289),
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v291))),
-                   (__m128)_mm_cmpgt_epi32(
-                             _mm_load_si128(&v277),
-                             *(__m128i *)&v150[4
-                                             * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                                              + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                                             + 64]));
-          v215 = _mm_or_ps(
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v260),
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v264))),
+                   (__m128)_mm_cmpgt_epi32(_mm_load_si128(&v250), *(__m128i *)&mZBuffer[4 * v109 + 2048]));
+          v202 = (__m128)_mm_cmpgt_epi32((__m128i)0i64, v189);
+          v203 = *(__m128i *)&mZBuffer[4 * v109 + 2064];
+          v204 = (__m128)_mm_cmpgt_epi32((__m128i)0i64, v195);
+          v103 = 0i64;
+          v205 = _mm_or_ps(
                    _mm_or_ps(
                      _mm_or_ps(
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v208),
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v207)),
-                     _mm_or_ps(
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v206),
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v205))),
-                   (__m128)_mm_cmpgt_epi32(
-                             v208,
-                             *(__m128i *)&v150[4
-                                             * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                                              + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                                             + 80]));
-          v145 = 0i64;
-          v216 = _mm_or_ps(
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v192),
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v190)),
+                     _mm_or_ps((__m128)_mm_cmpgt_epi32((__m128i)0i64, v191), v202)),
+                   (__m128)_mm_cmpgt_epi32(v192, v203));
+          v206 = (__m128)_mm_cmpgt_epi32((__m128i)0i64, v193);
+          v207 = *(__m128i *)&mZBuffer[4 * v109 + 2080];
+          v208 = _mm_or_ps(
                    _mm_or_ps(
-                     _mm_or_ps(
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v211),
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v210)),
-                     _mm_or_ps(
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v206),
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v205))),
-                   (__m128)_mm_cmpgt_epi32(
-                             v211,
-                             *(__m128i *)&v150[4
-                                             * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                                              + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                                             + 96]));
-          v217 = _mm_or_ps(
+                     _mm_or_ps((__m128)_mm_cmpgt_epi32((__m128i)0i64, v199), v206),
+                     _mm_or_ps(v204, (__m128)_mm_cmpgt_epi32((__m128i)0i64, v194))),
+                   (__m128)_mm_cmpgt_epi32(v199, v207));
+          v209 = _mm_or_ps((__m128)_mm_cmpgt_epi32((__m128i)0i64, v200), (__m128)_mm_cmpgt_epi32((__m128i)0i64, v196));
+          v210 = *(__m128i *)&mZBuffer[4 * v109 + 2096];
+          v211 = _mm_or_ps(
                    _mm_or_ps(
+                     v209,
                      _mm_or_ps(
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v213),
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v212)),
-                     _mm_or_ps(
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v209),
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v205))),
-                   (__m128)_mm_cmpgt_epi32(
-                             v213,
-                             *(__m128i *)&v150[4
-                                             * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                                              + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                                             + 112]));
-          v218 = _mm_or_ps(
-                   _mm_andnot_ps(v215, (__m128)v208),
-                   _mm_and_ps(
-                     v215,
-                     *(__m128 *)&v150[4
-                                    * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                                     + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                                    + 80]));
-          *(__m128 *)&v150[4
-                         * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                          + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                         + 64] = _mm_or_ps(
-                                   _mm_and_ps(
-                                     v214,
-                                     *(__m128 *)&v150[4
-                                                    * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                                                     + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                                                    + 64]),
-                                   _mm_andnot_ps(v214, (__m128)v277));
-          *(__m128 *)&v150[4
-                         * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                          + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                         + 80] = v218;
-          v219 = v217;
-          v220 = _mm_and_ps(
-                   v217,
-                   *(__m128 *)&v150[4
-                                  * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                                   + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                                  + 112]);
-          *(__m128 *)&v150[4
-                         * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                          + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                         + 96] = _mm_or_ps(
-                                   _mm_andnot_ps(v216, (__m128)v211),
-                                   _mm_and_ps(
-                                     v216,
-                                     *(__m128 *)&v150[4
-                                                    * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                                                     + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                                                    + 96]));
-          *(__m128 *)&v150[4
-                         * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                          + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                         + 112] = _mm_or_ps(_mm_andnot_ps(v219, (__m128)v213), v220);
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v198),
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v197))),
+                   (__m128)_mm_cmpgt_epi32(v200, v210));
+          v212 = _mm_and_ps(v201, *(__m128 *)&mZBuffer[4 * v109 + 2048]);
+          v213 = _mm_andnot_ps(v201, (__m128)v250);
+          *(__m128 *)&mZBuffer[4 * v109 + 2064] = _mm_or_ps(
+                                                    _mm_andnot_ps(v205, (__m128)v192),
+                                                    _mm_and_ps(v205, (__m128)v203));
+          *(__m128 *)&mZBuffer[4 * v109 + 2048] = _mm_or_ps(v212, v213);
+          *(__m128 *)&mZBuffer[4 * v109 + 2096] = _mm_or_ps(
+                                                    _mm_andnot_ps(v211, (__m128)v200),
+                                                    _mm_and_ps(v211, (__m128)v210));
+          *(__m128 *)&mZBuffer[4 * v109 + 2080] = _mm_or_ps(
+                                                    _mm_andnot_ps(v208, (__m128)v199),
+                                                    _mm_and_ps(v208, (__m128)v207));
         }
-        if ( !v160 )
+        if ( !v121 )
         {
-          v221 = _mm_load_si128((const __m128i *)&v273);
-          v222 = _mm_load_si128((const __m128i *)&v275);
-          v223 = _mm_load_si128(&v271);
-          v224 = _mm_load_si128((const __m128i *)&v272);
-          v225 = _mm_sub_epi32(_mm_load_si128(&v290), v222);
-          v226 = _mm_sub_epi32(_mm_load_si128(&v293), v221);
-          v227 = _mm_sub_epi32(_mm_load_si128(&v286), v224);
-          v228 = _mm_sub_epi32(_mm_load_si128(&v276), v223);
-          v229 = _mm_sub_epi32(v226, v221);
-          v230 = _mm_sub_epi32(v225, v222);
-          v231 = _mm_sub_epi32(v227, v224);
-          v232 = _mm_sub_epi32(v229, v221);
-          v233 = _mm_sub_epi32(v230, v222);
-          v234 = _mm_sub_epi32(v231, v224);
-          v235 = _mm_sub_epi32(v228, v223);
-          v236 = _mm_sub_epi32(v235, v223);
+          v214 = _mm_load_si128((const __m128i *)&v247);
+          v215 = *(__m128i *)&mZBuffer[4 * v109 + 2144];
+          v216 = *(__m128i *)&mZBuffer[4 * v109 + 2112];
+          v217 = _mm_load_si128(&v266);
+          v218 = _mm_load_si128(&v252);
+          v219 = _mm_load_si128(&v262);
+          v220 = _mm_load_si128(&v248);
+          v254 = *(__m128i *)&mZBuffer[4 * v109 + 2128];
+          v221 = _mm_sub_epi32(v220, v245);
+          v222 = _mm_sub_epi32(v219, v214);
+          v223 = *(__m128i *)&mZBuffer[4 * v109 + 2160];
+          v256 = v215;
+          v224 = _mm_load_si128((const __m128i *)&v246);
+          v225 = _mm_sub_epi32(v217, v224);
+          v257 = v223;
+          v226 = _mm_load_si128((const __m128i *)&v249);
+          v227 = _mm_sub_epi32(v218, v226);
+          v228 = _mm_sub_epi32(v225, v224);
+          v255 = v216;
+          v229 = _mm_sub_epi32(v227, v226);
+          v230 = _mm_sub_epi32(v222, v214);
+          v231 = _mm_sub_epi32(v228, v224);
+          v232 = _mm_sub_epi32(v230, v214);
+          v233 = _mm_sub_epi32(v221, v245);
+          v234 = _mm_sub_epi32(v233, v245);
+          v235 = _mm_or_ps(
+                   _mm_or_ps(
+                     _mm_or_ps(
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v248),
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v262)),
+                     _mm_or_ps(
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v266),
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v252))),
+                   (__m128)_mm_cmpgt_epi32(_mm_load_si128(&v248), v216));
+          v236 = (__m128)_mm_cmpgt_epi32((__m128i)0i64, v228);
+          v103 = 0i64;
           v237 = _mm_or_ps(
                    _mm_or_ps(
                      _mm_or_ps(
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v276),
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v293)),
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v221),
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v222)),
                      _mm_or_ps(
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v286),
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v290))),
-                   (__m128)_mm_cmpgt_epi32(
-                             _mm_load_si128(&v276),
-                             *(__m128i *)&v150[4
-                                             * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                                              + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                                             + 2048]));
-          v238 = (__m128)_mm_cmpgt_epi32((__m128i)0i64, v225);
-          v239 = *(__m128i *)&v150[4
-                                 * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                                  + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                                 + 2064];
-          v240 = (__m128)_mm_cmpgt_epi32((__m128i)0i64, v231);
-          v145 = 0i64;
-          v241 = _mm_or_ps(
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v225),
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v227))),
+                   (__m128)_mm_cmpgt_epi32(v221, v254));
+          v238 = _mm_or_ps(
                    _mm_or_ps(
                      _mm_or_ps(
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v228),
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v226)),
-                     _mm_or_ps((__m128)_mm_cmpgt_epi32((__m128i)0i64, v227), v238)),
-                   (__m128)_mm_cmpgt_epi32(v228, v239));
-          v242 = (__m128)_mm_cmpgt_epi32((__m128i)0i64, v229);
-          v243 = *(__m128i *)&v150[4
-                                 * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                                  + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                                 + 2080];
-          v244 = _mm_or_ps(
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v233),
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v230)),
+                     _mm_or_ps(v236, (__m128)_mm_cmpgt_epi32((__m128i)0i64, v229))),
+                   (__m128)_mm_cmpgt_epi32(v233, v256));
+          v239 = _mm_and_ps((__m128)v256, v238);
+          *(__m128 *)&mZBuffer[4 * v109 + 2128] = _mm_or_ps(
+                                                    _mm_and_ps((__m128)v254, v237),
+                                                    _mm_andnot_ps(v237, (__m128)v221));
+          *(__m128 *)&mZBuffer[4 * v109 + 2144] = _mm_or_ps(v239, _mm_andnot_ps(v238, (__m128)v233));
+          v240 = _mm_or_ps(
                    _mm_or_ps(
-                     _mm_or_ps((__m128)_mm_cmpgt_epi32((__m128i)0i64, v235), v242),
-                     _mm_or_ps(v240, (__m128)_mm_cmpgt_epi32((__m128i)0i64, v230))),
-                   (__m128)_mm_cmpgt_epi32(v235, v243));
-          v245 = _mm_or_ps((__m128)_mm_cmpgt_epi32((__m128i)0i64, v236), (__m128)_mm_cmpgt_epi32((__m128i)0i64, v232));
-          v246 = *(__m128i *)&v150[4
-                                 * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                                  + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                                 + 2096];
-          v247 = _mm_or_ps(
-                   _mm_or_ps(
-                     v245,
                      _mm_or_ps(
                        (__m128)_mm_cmpgt_epi32((__m128i)0i64, v234),
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v233))),
-                   (__m128)_mm_cmpgt_epi32(v236, v246));
-          v248 = _mm_and_ps(
-                   v237,
-                   *(__m128 *)&v150[4
-                                  * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                                   + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                                  + 2048]);
-          v249 = _mm_andnot_ps(v237, (__m128)v276);
-          *(__m128 *)&v150[4
-                         * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                          + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                         + 2064] = _mm_or_ps(_mm_andnot_ps(v241, (__m128)v228), _mm_and_ps(v241, (__m128)v239));
-          *(__m128 *)&v150[4
-                         * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                          + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                         + 2048] = _mm_or_ps(v248, v249);
-          *(__m128 *)&v150[4
-                         * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                          + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                         + 2096] = _mm_or_ps(_mm_andnot_ps(v247, (__m128)v236), _mm_and_ps(v247, (__m128)v246));
-          *(__m128 *)&v150[4
-                         * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                          + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                         + 2080] = _mm_or_ps(_mm_andnot_ps(v244, (__m128)v235), _mm_and_ps(v244, (__m128)v243));
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v232)),
+                     _mm_or_ps(
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v231),
+                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, _mm_sub_epi32(v229, v226)))),
+                   (__m128)_mm_cmpgt_epi32(v234, v257));
+          v241 = _mm_and_ps((__m128)v255, v235);
+          v242 = _mm_andnot_ps(v235, (__m128)v248);
+          *(__m128 *)&mZBuffer[4 * v109 + 2160] = _mm_or_ps(
+                                                    _mm_and_ps((__m128)v257, v240),
+                                                    _mm_andnot_ps(v240, (__m128)v234));
+          *(__m128 *)&mZBuffer[4 * v109 + 2112] = _mm_or_ps(v241, v242);
         }
-        if ( !v163 )
-        {
-          v250 = _mm_load_si128((const __m128i *)&v273);
-          v251 = *(__m128i *)&v150[4
-                                 * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                                  + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                                 + 2144];
-          v252 = *(__m128i *)&v150[4
-                                 * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                                  + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                                 + 2112];
-          v253 = _mm_load_si128(&v292);
-          v254 = _mm_load_si128(&v278);
-          v255 = _mm_load_si128(&v288);
-          v256 = _mm_load_si128(&v274);
-          v280 = *(__m128i *)&v150[4
-                                 * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                                  + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                                 + 2128];
-          v257 = _mm_sub_epi32(v256, v271);
-          v258 = _mm_sub_epi32(v255, v250);
-          v259 = *(__m128i *)&v150[4
-                                 * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                                  + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                                 + 2160];
-          v282 = v251;
-          v260 = _mm_sub_epi32(v253, _mm_load_si128((const __m128i *)&v272));
-          v283 = v259;
-          v261 = _mm_sub_epi32(v254, _mm_load_si128((const __m128i *)&v275));
-          v281 = v252;
-          v262 = v260;
-          v263 = _mm_or_ps(
-                   _mm_or_ps(
-                     _mm_or_ps(
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v274),
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v288)),
-                     _mm_or_ps(
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v292),
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v278))),
-                   (__m128)_mm_cmpgt_epi32(_mm_load_si128(&v274), v252));
-          v145 = 0i64;
-          v264 = _mm_or_ps(
-                   _mm_or_ps(
-                     _mm_or_ps(
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v257),
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v258)),
-                     _mm_or_ps(
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v260),
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v261))),
-                   (__m128)_mm_cmpgt_epi32(v257, v280));
-          v265 = _mm_or_ps(
-                   _mm_or_ps(
-                     _mm_or_ps(
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v257),
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v258)),
-                     _mm_or_ps(
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v260),
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v261))),
-                   (__m128)_mm_cmpgt_epi32(v257, v251));
-          *(__m128 *)&v150[4
-                         * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                          + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                         + 2128] = _mm_or_ps(_mm_and_ps((__m128)v280, v264), _mm_andnot_ps(v264, (__m128)v257));
-          *(__m128 *)&v150[4
-                         * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                          + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                         + 2144] = _mm_or_ps(_mm_and_ps((__m128)v251, v265), _mm_andnot_ps(v265, (__m128)v257));
-          v266 = _mm_or_ps(
-                   _mm_or_ps(
-                     _mm_or_ps(
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v257),
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v258)),
-                     _mm_or_ps(
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v262),
-                       (__m128)_mm_cmpgt_epi32((__m128i)0i64, v261))),
-                   (__m128)_mm_cmpgt_epi32(v257, v283));
-          v267 = _mm_and_ps((__m128)v281, v263);
-          v268 = _mm_andnot_ps(v263, (__m128)v274);
-          *(__m128 *)&v150[4
-                         * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                          + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                         + 2160] = _mm_or_ps(_mm_and_ps((__m128)v283, v266), _mm_andnot_ps(v266, (__m128)v257));
-          *(__m128 *)&v150[4
-                         * (((4 * (v126 & 0xFFFFFFFC) + (v149 & 0xFFFFFFFC)) << 8)
-                          + (unsigned __int64)(16 * (8 * (4 * (v126 & 3) + (v149 & 3u)) >> 2)))
-                         + 2112] = _mm_or_ps(v267, v268);
-        }
-        v143 = v149 + 1;
+        v101 = v107 + 1;
       }
-      while ( v144 );
+      while ( v102 );
     }
-    v87 = (_OWORD *)v319;
   }
+}   }
+        v101 = v107 + 1;
+      }
+      while ( v102 );
+    }
+  }
 }
 

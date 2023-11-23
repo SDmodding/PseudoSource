@@ -28,26 +28,27 @@ hkClass *__fastcall hkpConvexListShape::staticClass()
 
 // File Line: 88
 // RVA: 0xCEB5E0
-void __fastcall finishLoadedObjecthkpConvexListShape(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpConvexListShape(hkpConvexListShape *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpConvexListShape::hkpConvexListShape);
+  if ( p )
+    hkpConvexListShape::hkpConvexListShape(p, finishing);
 }
 
 // File Line: 94
 // RVA: 0xCEB600
-void __fastcall cleanupLoadedObjecthkpConvexListShape(void *p)
+void __fastcall cleanupLoadedObjecthkpConvexListShape(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 98
 // RVA: 0xCEB610
 hkBaseObjectVtbl *__fastcall getVtablehkpConvexListShape()
 {
-  hkpConvexListShape v1; // [rsp+20h] [rbp-88h]
+  hkpConvexListShape v1; // [rsp+20h] [rbp-88h] BYREF
 
   hkpConvexListShape::hkpConvexListShape(&v1, 0);
-  return v1.vfptr;
+  return v1.hkpConvexShape::hkpSphereRepShape::hkpShape::hkpShapeBase::hkcdShape::hkReferencedObject::hkBaseObject::vfptr;
 }
 
 // File Line: 120
@@ -61,8 +62,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpConvexListShapeTypeInfo__()
   hkpConvexListShapeTypeInfo.m_typeName = "hkpConvexListShape";
   hkpConvexListShapeTypeInfo.m_vtable = result;
   hkpConvexListShapeTypeInfo.m_scopedName = "!hkpConvexListShape";
-  hkpConvexListShapeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpConvexListShape;
-  hkpConvexListShapeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpConvexListShape;
+  hkpConvexListShapeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpConvexListShape;
+  hkpConvexListShapeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpConvexListShape;
   return result;
 }
 

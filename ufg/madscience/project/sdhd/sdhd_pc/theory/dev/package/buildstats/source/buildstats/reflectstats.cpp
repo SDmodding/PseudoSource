@@ -8,7 +8,7 @@ void dynamic_initializer_for__UFG::qReflectObjectType_UFG::tStatistics_UFG::qRef
   UFG::SerializeOperation::SerializeOperation(
     &UFG::qReflectObjectType<UFG::tStatistics,UFG::qReflectObject>::sDeserializeOp,
     v0,
-    UFG::OnLoadClass<UFG::tStatistics>,
+    (void (__fastcall *)(char *))UFG::OnLoadClass<UFG::tStatistics>,
     (void (__fastcall *)(char *))UFG::OnUnloadClass<UITest::HandleArrayTest>);
 }
 

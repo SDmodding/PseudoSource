@@ -24,146 +24,131 @@ __int64 dynamic_initializer_for__UEL::FragmentInvocationExpression::sClassNameUI
 // RVA: 0x24E640
 void __fastcall UEL::FragmentExpression::~FragmentExpression(UEL::FragmentExpression *this)
 {
-  UEL::FragmentExpression *v1; // rdi
-  __int64 v2; // rax
+  __int64 mOffset; // rax
   _QWORD *v3; // rcx
-  unsigned int v4; // ebx
-  UEL::ExpressionVtbl **v5; // rcx
+  unsigned int i; // ebx
+  UFG::qOffset64<UEL::ArgumentExpression *> *v5; // rcx
   _QWORD *v6; // rcx
 
-  v1 = this;
   this->vfptr = (UEL::ExpressionVtbl *)&UEL::FragmentExpression::`vftable;
-  v2 = this->mExpression.mOffset;
-  if ( v2 )
+  mOffset = this->mExpression.mOffset;
+  if ( mOffset )
   {
-    v3 = (__int64 *)((char *)&this->mExpression.mOffset + v2);
+    v3 = (__int64 *)((char *)&this->mExpression.mOffset + mOffset);
     if ( v3 )
     {
       *v3 = &UEL::Expression::`vftable;
       operator delete[](v3);
     }
   }
-  v4 = 0;
-  if ( v1->mNumArguments )
+  for ( i = 0; i < this->mNumArguments; ++i )
   {
-    do
+    v5 = &this->mArguments[i];
+    if ( v5->mOffset )
+      v6 = (__int64 *)((char *)&v5->mOffset + v5->mOffset);
+    else
+      v6 = 0i64;
+    if ( v6 )
     {
-      v5 = &v1->vfptr + v4 + 3i64;
-      if ( *v5 )
-        v6 = (UEL::ExpressionVtbl **)((char *)v5 + (_QWORD)*v5);
-      else
-        v6 = 0i64;
-      if ( v6 )
-      {
-        *v6 = &UEL::Expression::`vftable;
-        operator delete[](v6);
-      }
-      ++v4;
+      *v6 = &UEL::Expression::`vftable;
+      operator delete[](v6);
     }
-    while ( v4 < v1->mNumArguments );
   }
-  v1->vfptr = (UEL::ExpressionVtbl *)&UEL::Expression::`vftable;
+  this->vfptr = (UEL::ExpressionVtbl *)&UEL::Expression::`vftable;
 }
 
 // File Line: 38
 // RVA: 0x252A90
 bool __fastcall UEL::FragmentExpression::Resolve(UEL::FragmentExpression *this, UEL::Runtime *instance)
 {
-  UEL::FragmentExpression *v2; // rbp
-  UEL::Runtime *v3; // r15
-  __int64 v4; // rsi
-  __int64 v5; // rax
-  signed __int64 v6; // rdi
-  signed __int64 v7; // rcx
-  __int64 v8; // r14
+  __int64 i; // rsi
+  __int64 mOffset; // rax
+  UFG::qOffset64<UEL::ArgumentExpression *> *v6; // rdi
+  char *v7; // rcx
+  __int64 size; // r14
   unsigned int v9; // ebx
   unsigned int v10; // edx
-  UEL::Expression *v11; // rax
+  __int64 v11; // rax
   UEL::NameExpressionPair *v12; // rcx
   UEL::Expression *v13; // rax
   __int64 v14; // rax
-  signed __int64 v15; // rcx
-  UEL::Expression **v16; // rbx
+  char *v15; // rcx
+  UEL::Expression **p_expr; // rbx
 
-  v2 = this;
-  v3 = instance;
   UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&this->mName);
-  v4 = 0i64;
-  if ( v2->mNumArguments )
+  for ( i = 0i64; (unsigned int)i < this->mNumArguments; v12->expr = v13 )
   {
-    do
+    mOffset = this->mArguments[i].mOffset;
+    v6 = &this->mArguments[i];
+    if ( mOffset )
+      v7 = (char *)v6 + mOffset;
+    else
+      v7 = 0i64;
+    (*(void (__fastcall **)(char *, UEL::Runtime *))(*(_QWORD *)v7 + 16i64))(v7, instance);
+    size = UEL::ArgumentUsageExpression::msActiveResolveArguments.size;
+    v9 = UEL::ArgumentUsageExpression::msActiveResolveArguments.size + 1;
+    if ( UEL::ArgumentUsageExpression::msActiveResolveArguments.size + 1 > UEL::ArgumentUsageExpression::msActiveResolveArguments.capacity )
     {
-      v5 = v2->mArguments[v4].mOffset;
-      v6 = (signed __int64)&v2->mArguments[v4];
-      if ( v5 )
-        v7 = v5 + v6;
+      if ( UEL::ArgumentUsageExpression::msActiveResolveArguments.capacity )
+        v10 = 2 * UEL::ArgumentUsageExpression::msActiveResolveArguments.capacity;
       else
-        v7 = 0i64;
-      (*(void (__fastcall **)(signed __int64, UEL::Runtime *))(*(_QWORD *)v7 + 16i64))(v7, v3);
-      v8 = UEL::ArgumentUsageExpression::msActiveResolveArguments.size;
-      v9 = UEL::ArgumentUsageExpression::msActiveResolveArguments.size + 1;
-      if ( UEL::ArgumentUsageExpression::msActiveResolveArguments.size + 1 > UEL::ArgumentUsageExpression::msActiveResolveArguments.capacity )
-      {
-        if ( UEL::ArgumentUsageExpression::msActiveResolveArguments.capacity )
-          v10 = 2 * UEL::ArgumentUsageExpression::msActiveResolveArguments.capacity;
-        else
-          v10 = 1;
-        for ( ; v10 < v9; v10 *= 2 )
-          ;
-        if ( v10 - v9 > 0x10000 )
-          v10 = UEL::ArgumentUsageExpression::msActiveResolveArguments.size + 65537;
-        UFG::qArray<UEL::NameExpressionPair,0>::Reallocate(
-          &UEL::ArgumentUsageExpression::msActiveResolveArguments,
-          v10,
-          "qArray.Add");
-      }
-      UEL::ArgumentUsageExpression::msActiveResolveArguments.size = v9;
-      v11 = *(UEL::Expression **)v6;
-      v12 = &UEL::ArgumentUsageExpression::msActiveResolveArguments.p[v8];
-      if ( *(_QWORD *)v6 )
-        v11 = (UEL::Expression *)((char *)v11 + v6);
-      v12->name.mUID = (unsigned int)v11[1].vfptr;
-      v13 = *(UEL::Expression **)v6;
-      if ( *(_QWORD *)v6 )
-        v13 = (UEL::Expression *)((char *)v13 + v6);
-      v4 = (unsigned int)(v4 + 1);
-      v12->expr = v13;
+        v10 = 1;
+      for ( ; v10 < v9; v10 *= 2 )
+        ;
+      if ( v10 - v9 > 0x10000 )
+        v10 = UEL::ArgumentUsageExpression::msActiveResolveArguments.size + 65537;
+      UFG::qArray<UEL::NameExpressionPair,0>::Reallocate(
+        &UEL::ArgumentUsageExpression::msActiveResolveArguments,
+        v10,
+        "qArray.Add");
     }
-    while ( (unsigned int)v4 < v2->mNumArguments );
+    UEL::ArgumentUsageExpression::msActiveResolveArguments.size = v9;
+    v11 = v6->mOffset;
+    v12 = &UEL::ArgumentUsageExpression::msActiveResolveArguments.p[size];
+    if ( v6->mOffset )
+      v11 += (__int64)v6;
+    v12->name.mUID = *(_DWORD *)(v11 + 24);
+    v13 = (UEL::Expression *)v6->mOffset;
+    if ( v6->mOffset )
+      v13 = (UEL::Expression *)((char *)v13 + (_QWORD)v6);
+    i = (unsigned int)(i + 1);
   }
-  v14 = v2->mExpression.mOffset;
+  v14 = this->mExpression.mOffset;
   if ( v14 )
-    v15 = (signed __int64)&v2->mExpression + v14;
+    v15 = (char *)&this->mExpression + v14;
   else
     v15 = 0i64;
-  v2->mResolved = (*(unsigned __int8 (__fastcall **)(signed __int64, UEL::Runtime *))(*(_QWORD *)v15 + 16i64))(v15, v3);
+  this->mResolved = (*(unsigned __int8 (__fastcall **)(char *, UEL::Runtime *))(*(_QWORD *)v15 + 16i64))(v15, instance);
   if ( UEL::ArgumentUsageExpression::msActiveResolveArguments.p )
   {
-    v16 = &UEL::ArgumentUsageExpression::msActiveResolveArguments.p[-1].expr;
+    p_expr = &UEL::ArgumentUsageExpression::msActiveResolveArguments.p[-1].expr;
     `eh vector destructor iterator(
       UEL::ArgumentUsageExpression::msActiveResolveArguments.p,
       0x10ui64,
       (int)UEL::ArgumentUsageExpression::msActiveResolveArguments.p[-1].expr,
       (void (__fastcall *)(void *))_);
-    operator delete[](v16);
+    operator delete[](p_expr);
   }
   UEL::ArgumentUsageExpression::msActiveResolveArguments.p = 0i64;
   *(_QWORD *)&UEL::ArgumentUsageExpression::msActiveResolveArguments.size = 0i64;
-  return v2->mResolved != 0;
+  return this->mResolved != 0;
 }
 
 // File Line: 55
 // RVA: 0x250DF0
-UEL::Value *__fastcall UEL::FragmentExpression::Eval(UEL::FragmentExpression *this, UEL::Value *result, UEL::ParametersBase *parameters, UFG::qArray<UEL::Value,0> *args, UFG::qStringBuilder *debugStringBuilder)
+UEL::Value *__fastcall UEL::FragmentExpression::Eval(
+        UEL::FragmentExpression *this,
+        UEL::Value *result,
+        UEL::ParametersBase *parameters,
+        UFG::qArray<UEL::Value,0> *args,
+        UFG::qStringBuilder *debugStringBuilder)
 {
-  __int64 v5; // rax
-  UEL::Value *v6; // rbx
+  __int64 mOffset; // rax
   char *v7; // rcx
 
-  v5 = this->mExpression.mOffset;
-  v6 = result;
-  if ( v5 )
-    v7 = (char *)&this->mExpression + v5;
+  mOffset = this->mExpression.mOffset;
+  if ( mOffset )
+    v7 = (char *)&this->mExpression + mOffset;
   else
     v7 = 0i64;
   (*(void (__fastcall **)(char *, UEL::Value *, UEL::ParametersBase *, UFG::qArray<UEL::Value,0> *, UFG::qStringBuilder *))(*(_QWORD *)v7 + 24i64))(
@@ -172,25 +157,25 @@ UEL::Value *__fastcall UEL::FragmentExpression::Eval(UEL::FragmentExpression *th
     parameters,
     args,
     debugStringBuilder);
-  return v6;
+  return result;
 }
 
 // File Line: 64
 // RVA: 0x24E260
-void __fastcall UEL::FragmentInvocationExpression::FragmentInvocationExpression(UEL::FragmentInvocationExpression *this, const char *name, int numArgs, UEL::Expression **args)
+void __fastcall UEL::FragmentInvocationExpression::FragmentInvocationExpression(
+        UEL::FragmentInvocationExpression *this,
+        const char *name,
+        int numArgs,
+        UEL::Expression **args)
 {
-  UEL::Expression **v4; // rdi
-  signed __int64 v5; // rbx
-  UEL::FragmentInvocationExpression *v6; // rsi
-  signed __int64 v7; // rdx
-  UFG::qOffset64<UEL::Expression *> *v8; // rax
+  __int64 v5; // rbx
+  __int64 v7; // rdx
+  UFG::qOffset64<UEL::Expression *> *mArguments; // rax
   signed __int64 v9; // rdi
   __int64 v10; // rcx
   __int64 v11; // rcx
 
-  v4 = args;
   v5 = numArgs;
-  v6 = this;
   this->vfptr = (UEL::ExpressionVtbl *)&UEL::Expression::`vftable;
   this->mType.mValue = 7;
   this->mValueType.mBaseType.mValue = 0;
@@ -199,81 +184,75 @@ void __fastcall UEL::FragmentInvocationExpression::FragmentInvocationExpression(
   this->vfptr = (UEL::ExpressionVtbl *)&UEL::FragmentInvocationExpression::`vftable;
   this->mFragmentTableIndex = -1;
   UFG::qSymbol::create_from_string(&this->mName, name);
-  v6->mNumArguments = v5;
+  this->mNumArguments = v5;
   v7 = 0i64;
-  v8 = v6->mArguments;
-  v9 = (char *)v4 - (char *)v6;
+  mArguments = this->mArguments;
+  v9 = (char *)args - (char *)this;
   do
   {
     if ( v7 >= v5 )
     {
-      v8->mOffset = 0i64;
+      mArguments->mOffset = 0i64;
     }
     else
     {
-      v10 = *(__int64 *)((char *)&v8[-3].mOffset + v9);
+      v10 = *(__int64 *)((char *)&mArguments[-3].mOffset + v9);
       if ( v10 )
-        v11 = v10 - (_QWORD)v8;
+        v11 = v10 - (_QWORD)mArguments;
       else
         v11 = 0i64;
-      v8->mOffset = v11;
+      mArguments->mOffset = v11;
     }
     ++v7;
-    ++v8;
+    ++mArguments;
   }
   while ( v7 < 8 );
 }
 
 // File Line: 77
 // RVA: 0x252C10
-char __fastcall UEL::FragmentInvocationExpression::Resolve(UEL::FragmentInvocationExpression *this, UEL::Runtime *instance)
+bool __fastcall UEL::FragmentInvocationExpression::Resolve(
+        UEL::FragmentInvocationExpression *this,
+        UEL::Runtime *instance)
 {
   UFG::qBaseTreeRB *v2; // rsi
-  UFG::qBaseTreeRB **v3; // r14
-  UEL::FragmentInvocationExpression *v4; // rdi
-  unsigned int v5; // ebx
-  signed __int64 v6; // rax
-  signed __int64 v7; // rcx
-  __int64 v8; // rax
-  signed __int64 v9; // rcx
-  unsigned int v10; // edx
-  char result; // al
+  int v5; // ebx
+  UFG::qOffset64<UEL::Expression *> *v6; // rcx
+  char *v7; // rcx
+  unsigned int mUID; // edx
+  bool result; // al
 
   v2 = 0i64;
-  v3 = (UFG::qBaseTreeRB **)instance;
-  v4 = this;
   v5 = 0;
   if ( this->mNumArguments )
   {
     while ( 1 )
     {
-      v6 = v5 + 3i64;
-      v7 = (signed __int64)v4 + 8 * v6;
-      v8 = *((_QWORD *)&v4->vfptr + v6);
-      v9 = v8 ? v8 + v7 : 0i64;
-      if ( !(*(unsigned __int8 (__fastcall **)(signed __int64, UFG::qBaseTreeRB **))(*(_QWORD *)v9 + 16i64))(v9, v3) )
+      v6 = &this->mArguments[v5];
+      v7 = v6->mOffset ? (char *)v6 + v6->mOffset : 0i64;
+      if ( !(*(unsigned __int8 (__fastcall **)(char *, UEL::Runtime *))(*(_QWORD *)v7 + 16i64))(v7, instance) )
         break;
-      if ( ++v5 >= v4->mNumArguments )
+      if ( ++v5 >= this->mNumArguments )
         goto LABEL_7;
     }
   }
   else
   {
 LABEL_7:
-    v10 = v4->mName.mUID;
-    if ( v10 )
-      v2 = UFG::qBaseTreeRB::Get(*v3, v10);
-    UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v4->mName);
+    mUID = this->mName.mUID;
+    if ( mUID )
+      v2 = UFG::qBaseTreeRB::Get(&instance->mFragmentBindings->mTree, mUID);
+    UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&this->mName);
     if ( v2 )
     {
-      UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v4->mName);
-      if ( v4->mNumArguments == BYTE4(v2->mNULL.mParent) )
+      UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&this->mName);
+      if ( this->mNumArguments == BYTE4(v2->mNULL.mParent) )
       {
-        v4->mValueType.mBaseType.mValue = WORD2(v2->mNULL.mChild[0]);
-        v4->mValueType.mDetailedType.mUID = (unsigned int)v2->mNULL.mChild[1];
-        v4->mFragmentTableIndex = (unsigned int)v2->mNULL.mChild[0];
+        this->mValueType.mBaseType.mValue = WORD2(v2->mNULL.mChild[0]);
+        this->mValueType.mDetailedType.mUID = (unsigned int)v2->mNULL.mChild[1];
+        this->mFragmentTableIndex = (unsigned int)v2->mNULL.mChild[0];
         result = 1;
-        v4->mResolved = 1;
+        this->mResolved = 1;
         return result;
       }
     }
@@ -283,55 +262,52 @@ LABEL_7:
 
 // File Line: 102
 // RVA: 0x250E30
-UEL::Value *__fastcall UEL::FragmentInvocationExpression::Eval(UEL::FragmentInvocationExpression *this, UEL::Value *result, UEL::ParametersBase *parameters, UFG::qArray<UEL::Value,0> *args, UFG::qStringBuilder *debugStringBuilder)
+UEL::Value *__fastcall UEL::FragmentInvocationExpression::Eval(
+        UEL::FragmentInvocationExpression *this,
+        UEL::Value *result,
+        UEL::ParametersBase *parameters,
+        UFG::qArray<UEL::Value,0> *args,
+        UFG::qStringBuilder *debugStringBuilder)
 {
-  UEL::ParametersBase *v5; // r12
   UEL::Value *v6; // r15
-  UEL::FragmentInvocationExpression *v7; // rsi
   unsigned int v8; // edi
-  UEL::ExpressionVtbl **v9; // rcx
+  UFG::qOffset64<UEL::Expression *> *v9; // rcx
   char *v10; // rcx
   UEL::Value *v11; // r14
-  __int64 v12; // rbp
+  __int64 size; // rbp
   unsigned int v13; // ebx
   unsigned int v14; // edx
   char *v15; // rcx
   char *v16; // rdx
   char *v17; // rcx
   UFG::qString *v18; // rax
-  UFG::qSymbol *v19; // rbx
-  UFG::qArray<UEL::Value,0> v21; // [rsp+38h] [rbp-A0h]
-  UFG::qString resulta; // [rsp+48h] [rbp-90h]
-  UFG::qString v23; // [rsp+70h] [rbp-68h]
-  UEL::Value *v24; // [rsp+E8h] [rbp+10h]
-  UFG::qArray<UEL::Value,0> *v25; // [rsp+F8h] [rbp+20h]
+  UFG::qSymbol *p_mDetailedType; // rbx
+  UFG::qArray<UEL::Value,0> v21; // [rsp+38h] [rbp-A0h] BYREF
+  UFG::qString resulta; // [rsp+48h] [rbp-90h] BYREF
+  UFG::qString v23; // [rsp+70h] [rbp-68h] BYREF
 
-  v25 = args;
-  v24 = result;
-  v5 = parameters;
   v6 = result;
-  v7 = this;
   UFG::qString::FormatEx(&resulta, "(FragmentInvocation ");
   UFG::qString::~qString(&resulta);
   v21.p = 0i64;
   *(_QWORD *)&v21.size = 0i64;
   v8 = 0;
-  if ( v7->mNumArguments )
+  if ( this->mNumArguments )
   {
     do
     {
-      v9 = &v7->vfptr + v8 + 3i64;
-      if ( *v9 )
-        v10 = (char *)v9 + (_QWORD)*v9;
+      v9 = &this->mArguments[v8];
+      if ( v9->mOffset )
+        v10 = (char *)v9 + v9->mOffset;
       else
         v10 = 0i64;
       v11 = (UEL::Value *)(*(__int64 (__fastcall **)(char *, UFG::qString *, UEL::ParametersBase *, UFG::qArray<UEL::Value,0> *, UFG::qStringBuilder *))(*(_QWORD *)v10 + 24i64))(
                             v10,
                             &resulta,
-                            v5,
-                            v25,
+                            parameters,
+                            args,
                             debugStringBuilder);
-      v12 = v21.size;
+      size = v21.size;
       v13 = v21.size + 1;
       if ( v21.size + 1 > v21.capacity )
       {
@@ -346,17 +322,17 @@ UEL::Value *__fastcall UEL::FragmentInvocationExpression::Eval(UEL::FragmentInvo
         UFG::qArray<UEL::Value,0>::Reallocate(&v21, v14, "qArray.Add");
       }
       v21.size = v13;
-      UEL::Value::operator=(&v21.p[v12], v11);
+      UEL::Value::operator=(&v21.p[size], v11);
       ++v8;
     }
-    while ( v8 < v7->mNumArguments );
-    v6 = v24;
+    while ( v8 < this->mNumArguments );
+    v6 = result;
   }
   if ( UEL::ParametersBase::FragmentTable.mOffset )
     v15 = (char *)&UEL::ParametersBase::FragmentTable + UEL::ParametersBase::FragmentTable.mOffset;
   else
     v15 = 0i64;
-  v16 = &v15[8 * v7->mFragmentTableIndex];
+  v16 = &v15[8 * this->mFragmentTableIndex];
   if ( *(_QWORD *)v16 )
     v17 = &v16[*(_QWORD *)v16];
   else
@@ -364,7 +340,7 @@ UEL::Value *__fastcall UEL::FragmentInvocationExpression::Eval(UEL::FragmentInvo
   (*(void (__fastcall **)(char *, UEL::Value *, UEL::ParametersBase *, UFG::qArray<UEL::Value,0> *, UFG::qStringBuilder *))(*(_QWORD *)v17 + 24i64))(
     v17,
     v6,
-    v5,
+    parameters,
     &v21,
     debugStringBuilder);
   v18 = UEL::Value::ToString(v6, &v23);
@@ -373,9 +349,9 @@ UEL::Value *__fastcall UEL::FragmentInvocationExpression::Eval(UEL::FragmentInvo
   UFG::qString::~qString(&v23);
   if ( v21.p )
   {
-    v19 = &v21.p[-1].type.mDetailedType;
+    p_mDetailedType = &v21.p[-1].type.mDetailedType;
     `eh vector destructor iterator(v21.p, 0x20ui64, v21.p[-1].type.mDetailedType.mUID, (void (__fastcall *)(void *))_);
-    operator delete[](v19);
+    operator delete[](p_mDetailedType);
   }
   return v6;
 }

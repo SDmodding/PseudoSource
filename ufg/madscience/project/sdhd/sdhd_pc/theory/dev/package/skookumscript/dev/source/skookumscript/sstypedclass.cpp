@@ -2,156 +2,138 @@
 // RVA: 0x14615B0
 __int64 dynamic_initializer_for__SSTypedClass::c_typed_classes__()
 {
-  return atexit(dynamic_atexit_destructor_for__SSTypedClass::c_typed_classes__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__SSTypedClass::c_typed_classes__);
 }
 
 // File Line: 179
 // RVA: 0x11EE00
 __int64 __fastcall SSTypedClass::is_generic(SSTypedClass *this)
 {
-  return ((__int64 (*)(void))this->i_item_type_p->vfptr->is_generic)();
+  return ((__int64 (__fastcall *)(SSClassDescBase *))this->i_item_type_p->vfptr->is_generic)(this->i_item_type_p);
 }
 
 // File Line: 192
 // RVA: 0x10F040
 SSTypedClass *__fastcall SSTypedClass::as_finalized_generic(SSTypedClass *this, SSClassDescBase *scope_type)
 {
-  SSClassDescBase *v2; // rbx
-  SSTypedClass *v3; // rdi
+  SSClassDescBase *i_item_type_p; // rbx
   SSClassDescBase *v4; // rax
-  SSTypedClass *result; // rax
 
-  v2 = this->i_item_type_p;
-  v3 = this;
-  v4 = v2->vfptr->as_finalized_generic(this->i_item_type_p, scope_type);
-  if ( v4 == v2 )
-    result = v3;
+  i_item_type_p = this->i_item_type_p;
+  v4 = i_item_type_p->vfptr->as_finalized_generic(i_item_type_p, scope_type);
+  if ( v4 == i_item_type_p )
+    return this;
   else
-    result = SSTypedClass::get_or_create(v3->i_class_p, v4);
-  return result;
+    return SSTypedClass::get_or_create(this->i_class_p, v4);
 }
 
 // File Line: 210
 // RVA: 0x1150C0
-SSClass *__fastcall SSTypedClass::find_common_type(SSTypedClass *this, SSClassDescBase *cls)
+SSMetaClass *__fastcall SSTypedClass::find_common_type(SSTypedClass *this, SSMetaClass *cls)
 {
-  SSTypedClass *v2; // rsi
   __int64 v3; // rbp
-  SSClassDescBase *v4; // rdi
   SSClass *v5; // rbx
   eSSClassType v6; // eax
-  int v7; // eax
-  int v8; // eax
-  int v9; // eax
-  SSClassDescBaseVtbl *v10; // rbx
-  __int64 v11; // rax
-  SSClassDescBase *v13; // rbx
-  SSClass *v14; // rax
-  SSClass *v15; // rdi
-  SSClass *v16; // rcx
+  __int32 v7; // eax
+  __int32 v8; // eax
+  __int32 v9; // eax
+  SSClassDescBaseVtbl *vfptr; // rbx
+  SSClassUnaryBase *v11; // rax
+  SSClassUnaryBase *v13; // rbx
+  SSClass *common_class; // rax
+  SSClass *i_class_p; // rdi
+  SSClass *i_superclass_p; // rcx
 
-  v2 = this;
   v3 = 0i64;
-  v4 = cls;
   v5 = 0i64;
-  v6 = (unsigned int)cls->vfptr->get_class_type(cls);
+  v6 = cls->SSClassUnaryBase::SSClassDescBase::vfptr->get_class_type(cls);
   if ( v6 )
   {
     v7 = v6 - 1;
     if ( !v7 )
-      return SSMetaClass::find_common_class((SSMetaClass *)v4, v2->i_class_p);
+      return SSMetaClass::find_common_class(cls, this->i_class_p);
     v8 = v7 - 1;
     if ( !v8 )
     {
-      v13 = (SSClassDescBase *)v2->i_item_type_p->vfptr->find_common_type(
-                                 v2->i_item_type_p,
-                                 (SSClassDescBase *)v4[3].vfptr);
-      v14 = SSClass::find_common_class(v2->i_class_p, (SSClass *)v4[2].vfptr);
-      return (SSClass *)SSTypedClass::get_or_create(v14, v13);
+      v13 = this->i_item_type_p->vfptr->find_common_type(this->i_item_type_p, *(_QWORD *)&cls->i_ref_count);
+      common_class = SSClass::find_common_class(this->i_class_p, *(SSClass **)&cls->i_ptr_id);
+      return (SSMetaClass *)SSTypedClass::get_or_create(common_class, v13);
     }
     v9 = v8 - 1;
     if ( v9 )
     {
       if ( v9 == 1 )
       {
-        v10 = v2->vfptr;
-        v11 = (__int64)v4->vfptr->as_unary_class(v4);
-        return (SSClass *)v10->find_common_type((SSClassDescBase *)&v2->vfptr, (SSClassDescBase *)v11);
+        vfptr = this->vfptr;
+        v11 = cls->SSClassUnaryBase::SSClassDescBase::vfptr->as_unary_class(cls);
+        return (SSMetaClass *)vfptr->find_common_type(this, v11);
       }
     }
     else
     {
-      v5 = v4->vfptr->get_key_class(v4);
+      v5 = cls->SSClassUnaryBase::SSClassDescBase::vfptr->get_key_class(cls);
     }
   }
   else
   {
-    v5 = (SSClass *)v4;
+    v5 = (SSClass *)cls;
   }
-  v15 = v2->i_class_p;
-  while ( v5 != v15 )
+  i_class_p = this->i_class_p;
+  while ( v5 != i_class_p )
   {
-    v16 = v15->i_superclass_p;
-    if ( v16 )
+    i_superclass_p = i_class_p->i_superclass_p;
+    if ( i_superclass_p )
     {
-      if ( SSClass::is_class(v16, v5) )
+      if ( SSClass::is_class(i_superclass_p, v5) )
         break;
     }
     v5 = v5->i_superclass_p;
     if ( !v5 )
-      return (SSClass *)v3;
+      return (SSMetaClass *)v3;
   }
-  return v5;
+  return (SSMetaClass *)v5;
 }
 
 // File Line: 273
 // RVA: 0x11EA80
-bool __fastcall SSTypedClass::is_class_type(SSTypedClass *this, SSClassDescBase *type_p)
+bool __fastcall SSTypedClass::is_class_type(SSTypedClass *this, SSClass *type_p)
 {
-  SSTypedClass *v2; // rdi
-  SSClassDescBase *v3; // rbx
   eSSClassType v4; // eax
-  bool result; // al
   SSClass *v6; // rdx
   SSClass *v7; // rax
   SSClass *v8; // rcx
-  SSClass *v9; // rax
-  SSClass *v10; // rcx
+  SSClass *i_class_p; // rax
+  SSClass *i_superclass_p; // rcx
 
-  v2 = this;
-  v3 = type_p;
-  v4 = (unsigned int)type_p->vfptr->get_class_type(type_p);
-  switch ( v4 )
+  v4 = type_p->vfptr->get_class_type(type_p);
+  if ( v4 == SSClassType_class )
   {
-    case 0:
-      if ( v3 == (SSClassDescBase *)SSBrain::c_object_class_p )
+    if ( type_p == SSBrain::c_object_class_p )
+      return 1;
+    i_class_p = this->i_class_p;
+    if ( type_p == i_class_p )
+      return 1;
+    i_superclass_p = i_class_p->i_superclass_p;
+    if ( i_superclass_p )
+    {
+      if ( SSClass::is_class(i_superclass_p, type_p) )
         return 1;
-      v9 = v2->i_class_p;
-      if ( v3 == (SSClassDescBase *)v9 )
-        return 1;
-      v10 = v9->i_superclass_p;
-      if ( v10 )
-      {
-        if ( SSClass::is_class(v10, (SSClass *)v3) )
-          return 1;
-      }
-      return 0;
-    case 2:
-      v6 = (SSClass *)v3[2].vfptr;
-      v7 = v2->i_class_p;
-      if ( v6 == v7 || (v8 = v7->i_superclass_p) != 0i64 && SSClass::is_class(v8, v6) )
-      {
-        if ( v2->i_item_type_p->vfptr->is_class_type(v2->i_item_type_p, (SSClassDescBase *)v3[3].vfptr) )
-          return 1;
-      }
-      return 0;
-    case 4:
-      result = SSClassUnion::is_valid_param_for((SSClassUnion *)v3, (SSClassDescBase *)&v2->vfptr);
-      break;
-    default:
-      result = 0;
-      break;
+    }
+    return 0;
   }
-  return result;
+  if ( v4 == SSClassType_typed_class )
+  {
+    v6 = type_p->i_superclass_p;
+    v7 = this->i_class_p;
+    if ( (v6 == v7 || (v8 = v7->i_superclass_p) != 0i64 && SSClass::is_class(v8, v6))
+      && this->i_item_type_p->vfptr->is_class_type(
+           this->i_item_type_p,
+           *(SSClassDescBase **)&type_p->i_subclasses.i_count) )
+    {
+      return 1;
+    }
+    return 0;
+  }
+  return v4 == SSClassType_class_union && SSClassUnion::is_valid_param_for((SSClassUnion *)type_p, this);
 }
 

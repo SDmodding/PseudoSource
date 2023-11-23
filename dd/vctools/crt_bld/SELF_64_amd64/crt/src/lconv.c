@@ -5,7 +5,7 @@ lconv *__fastcall localeconv()
   _tiddata *v0; // rax
 
   v0 = getptd();
-  if ( v0->ptlocinfo != _ptlocinfo && !(v0->_ownlocale & _globallocalestatus) )
+  if ( v0->ptlocinfo != _ptlocinfo && (v0->_ownlocale & _globallocalestatus) == 0 )
     _updatetlocinfo();
   return _lconv;
 }

@@ -2,102 +2,97 @@
 // RVA: 0xA15BA0
 void __fastcall Illusion::TargetPlat::TargetPlat(Illusion::TargetPlat *this)
 {
-  Illusion::TargetPlat *v1; // rdx
-  ID3D11RenderTargetView *(*v2)[4]; // r8
-  signed __int64 v3; // r9
+  ID3D11RenderTargetView *(*mRenderTargetView)[4]; // r8
+  __int64 v3; // r9
   ID3D11RenderTargetView *(*v4)[4]; // rax
-  signed __int64 v5; // rcx
+  __int64 v5; // rcx
 
-  v1 = this;
   *(_WORD *)&this->mHasDepthSurface = 0;
   this->mResolveDepthSurface = 0;
   this->mInvertedDepth = 0;
-  v2 = this->mRenderTargetView;
+  mRenderTargetView = this->mRenderTargetView;
   v3 = 4i64;
   this->mNumMips = 0;
   this->mDepthStencilView = 0i64;
   do
   {
-    v4 = v2;
+    v4 = mRenderTargetView;
     v5 = 32i64;
     do
     {
-      (*v4)[0] = 0i64;
-      ++v4;
+      (*v4++)[0] = 0i64;
       --v5;
     }
     while ( v5 );
-    v2 = (ID3D11RenderTargetView *(*)[4])((char *)v2 + 8);
+    mRenderTargetView = (ID3D11RenderTargetView *(*)[4])((char *)mRenderTargetView + 8);
     --v3;
   }
   while ( v3 );
-  v1->mMSAATargetTexture[0] = 0i64;
-  v1->mMSAATargetTexture[1] = 0i64;
-  v1->mMSAATargetTexture[2] = 0i64;
-  v1->mMSAATargetTexture[3] = 0i64;
-  v1->mMSAADepthTexture = 0i64;
+  this->mMSAATargetTexture[0] = 0i64;
+  this->mMSAATargetTexture[1] = 0i64;
+  this->mMSAATargetTexture[2] = 0i64;
+  this->mMSAATargetTexture[3] = 0i64;
+  this->mMSAADepthTexture = 0i64;
 }
 
 // File Line: 72
 // RVA: 0xA16950
 void __fastcall Illusion::TargetPlat::~TargetPlat(Illusion::TargetPlat *this)
 {
-  Illusion::TargetPlat *v1; // r15
-  ID3D11DepthStencilView *v2; // rcx
-  signed __int64 v3; // rbp
-  signed __int64 v4; // rsi
-  signed __int64 v5; // r14
-  signed __int64 v6; // rbx
-  signed __int64 v7; // rdi
-  Illusion::Texture **v8; // rbx
-  Illusion::Texture *v9; // rcx
+  ID3D11DepthStencilView *mDepthStencilView; // rcx
+  __int64 v3; // rbp
+  ID3D11RenderTargetView *(*mRenderTargetView)[4]; // rsi
+  __int64 v5; // r14
+  ID3D11RenderTargetView *(*v6)[4]; // rbx
+  __int64 v7; // rdi
+  Illusion::Texture **mMSAATargetTexture; // rbx
+  Illusion::Texture *mMSAADepthTexture; // rcx
 
-  v1 = this;
-  v2 = this->mDepthStencilView;
-  if ( v2 )
+  mDepthStencilView = this->mDepthStencilView;
+  if ( mDepthStencilView )
   {
-    ((void (*)(void))v2->vfptr->Release)();
-    v1->mDepthStencilView = 0i64;
+    mDepthStencilView->vfptr->Release(mDepthStencilView);
+    this->mDepthStencilView = 0i64;
   }
   v3 = 4i64;
-  v4 = (signed __int64)v1->mRenderTargetView;
+  mRenderTargetView = this->mRenderTargetView;
   v5 = 4i64;
   do
   {
-    v6 = v4;
+    v6 = mRenderTargetView;
     v7 = 32i64;
     do
     {
-      if ( *(_QWORD *)v6 )
+      if ( (*v6)[0] )
       {
-        (*(void (**)(void))(**(_QWORD **)v6 + 16i64))();
-        *(_QWORD *)v6 = 0i64;
+        (*v6)[0]->vfptr->Release((*v6)[0]);
+        (*v6)[0] = 0i64;
       }
-      v6 += 32i64;
+      ++v6;
       --v7;
     }
     while ( v7 );
-    v4 += 8i64;
+    mRenderTargetView = (ID3D11RenderTargetView *(*)[4])((char *)mRenderTargetView + 8);
     --v5;
   }
   while ( v5 );
-  v8 = v1->mMSAATargetTexture;
+  mMSAATargetTexture = this->mMSAATargetTexture;
   do
   {
-    if ( *v8 )
+    if ( *mMSAATargetTexture )
     {
-      Illusion::DeleteTexture(*v8, 1);
-      *v8 = 0i64;
+      Illusion::DeleteTexture((AMD_HD3D *)*mMSAATargetTexture, 1);
+      *mMSAATargetTexture = 0i64;
     }
-    ++v8;
+    ++mMSAATargetTexture;
     --v3;
   }
   while ( v3 );
-  v9 = v1->mMSAADepthTexture;
-  if ( v9 )
+  mMSAADepthTexture = this->mMSAADepthTexture;
+  if ( mMSAADepthTexture )
   {
-    Illusion::DeleteTexture(v9, 1);
-    v1->mMSAADepthTexture = 0i64;
+    Illusion::DeleteTexture((AMD_HD3D *)mMSAADepthTexture, 1);
+    this->mMSAADepthTexture = 0i64;
   }
 }
 

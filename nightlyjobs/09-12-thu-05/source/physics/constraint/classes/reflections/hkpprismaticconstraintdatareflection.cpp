@@ -28,9 +28,12 @@ hkClass *__fastcall hkpPrismaticConstraintData::Atoms::staticClass()
 
 // File Line: 88
 // RVA: 0xD43FE0
-void __fastcall finishLoadedObjecthkpPrismaticConstraintDataAtoms(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpPrismaticConstraintDataAtoms(
+        hkpPrismaticConstraintData::Atoms *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpPrismaticConstraintData::Atoms::Atoms);
+  if ( p )
+    hkpPrismaticConstraintData::Atoms::Atoms(p, finishing);
 }
 
 // File Line: 94
@@ -70,36 +73,29 @@ hkClass *__fastcall hkpPrismaticConstraintData::staticClass()
 
 // File Line: 142
 // RVA: 0xD44010
-void __fastcall finishLoadedObjecthkpPrismaticConstraintData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpPrismaticConstraintData(char *p, hkFinishLoadedObjectFlag finishing)
 {
-  int v2; // edi
-  char *v3; // rbx
-
   if ( p )
   {
-    v2 = finishing;
-    v3 = (char *)p;
-    hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    *(_QWORD *)v3 = &hkpPrismaticConstraintData::`vftable;
-    hkpPrismaticConstraintData::Atoms::Atoms(
-      (hkpPrismaticConstraintData::Atoms *)(v3 + 32),
-      (hkFinishLoadedObjectFlag)v2);
+    hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, finishing);
+    *(_QWORD *)p = &hkpPrismaticConstraintData::`vftable;
+    hkpPrismaticConstraintData::Atoms::Atoms((hkpPrismaticConstraintData::Atoms *)(p + 32), finishing);
   }
 }
 
 // File Line: 148
 // RVA: 0xD44050
-void __fastcall cleanupLoadedObjecthkpPrismaticConstraintData(void *p)
+void __fastcall cleanupLoadedObjecthkpPrismaticConstraintData(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 152
 // RVA: 0xD44060
 hkBaseObjectVtbl *__fastcall getVtablehkpPrismaticConstraintData()
 {
-  hkpConstraintData v1; // [rsp+20h] [rbp-128h]
-  hkpPrismaticConstraintData::Atoms v2; // [rsp+40h] [rbp-108h]
+  hkpConstraintData v1; // [rsp+20h] [rbp-128h] BYREF
+  hkpPrismaticConstraintData::Atoms v2; // [rsp+40h] [rbp-108h] BYREF
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
   v1.vfptr = (hkBaseObjectVtbl *)&hkpPrismaticConstraintData::`vftable;
@@ -118,8 +114,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpPrismaticConstraintDataTypeInfo__(
   hkpPrismaticConstraintDataTypeInfo.m_typeName = "hkpPrismaticConstraintData";
   hkpPrismaticConstraintDataTypeInfo.m_vtable = result;
   hkpPrismaticConstraintDataTypeInfo.m_scopedName = "!hkpPrismaticConstraintData";
-  hkpPrismaticConstraintDataTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpPrismaticConstraintData;
-  hkpPrismaticConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpPrismaticConstraintData;
+  hkpPrismaticConstraintDataTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpPrismaticConstraintData;
+  hkpPrismaticConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpPrismaticConstraintData;
   return result;
 }
 

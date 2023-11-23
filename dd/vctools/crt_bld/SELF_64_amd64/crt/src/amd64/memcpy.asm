@@ -3,9 +3,10 @@
 void *__cdecl memmove(void *Dst, const void *Src, size_t Size)
 {
   bool v3; // cf
-  unsigned __int8 v4; // zf
+  char v4; // zf
   void *v5; // r11
   const void *v6; // r10
+  unsigned __int64 v7; // rdx
   void *result; // rax
   size_t v9; // r9
   size_t v10; // r9
@@ -35,26 +36,27 @@ void *__cdecl memmove(void *Dst, const void *Src, size_t Size)
   __int64 v34; // rax
   __int64 v35; // r10
   __int64 v36; // r10
-  signed int v37; // eax
-  signed int v38; // eax
+  int v37; // eax
+  int v38; // eax
   __int64 v39; // r10
   __int64 v40; // r10
   __int64 v41; // r9
   __int64 v42; // r10
   __int64 v43; // r10
+  int *v44; // rcx
   size_t v45; // r9
   size_t v46; // r9
   __int64 v47; // rax
   __int64 v48; // r10
   __int64 v49; // r10
-  signed int v50; // eax
-  signed int v51; // eax
+  int v50; // eax
+  int v51; // eax
   __int64 v52; // r10
   __int64 v53; // r10
   __int64 v54; // r9
   __int64 v55; // r10
   __int64 v56; // r10
-  void *retaddr; // [rsp+0h] [rbp+0h]
+  void *retaddr; // [rsp+0h] [rbp+0h] BYREF
 
   v5 = Dst;
   v6 = Src;
@@ -65,32 +67,32 @@ void *__cdecl memmove(void *Dst, const void *Src, size_t Size)
   else
   {
     v3 = Src < Dst;
-    _RDX = (_BYTE *)Src - (_BYTE *)Dst;
-    if ( !v3 || (signed __int64)Dst >= (signed __int64)((signed __int64)v6 + Size) )
+    v7 = (_BYTE *)Src - (_BYTE *)Dst;
+    if ( !v3 || (__int64)Dst >= (__int64)((__int64)v6 + Size) )
     {
       qmemcpy(Dst, v6, Size);
       return Dst;
     }
-    _RCX = (int *)((char *)Dst + Size);
-    if ( (unsigned __int8)_RCX & 7 )
+    v44 = (int *)((char *)Dst + Size);
+    if ( ((unsigned __int8)v44 & 7) != 0 )
     {
-      if ( (unsigned __int8)_RCX & 1 )
+      if ( ((unsigned __int8)v44 & 1) != 0 )
       {
-        _RCX = (int *)((char *)_RCX - 1);
+        v44 = (int *)((char *)v44 - 1);
         --Size;
-        *(_BYTE *)_RCX = *((_BYTE *)_RCX + _RDX);
+        *(_BYTE *)v44 = *((_BYTE *)v44 + v7);
       }
-      if ( (unsigned __int8)_RCX & 2 )
+      if ( ((unsigned __int8)v44 & 2) != 0 )
       {
-        _RCX = (int *)((char *)_RCX - 2);
+        v44 = (int *)((char *)v44 - 2);
         Size -= 2i64;
-        *(_WORD *)_RCX = *(_WORD *)((char *)_RCX + _RDX);
+        *(_WORD *)v44 = *(_WORD *)((char *)v44 + v7);
       }
-      if ( (unsigned __int8)_RCX & 4 )
+      if ( ((unsigned __int8)v44 & 4) != 0 )
       {
-        --_RCX;
+        --v44;
         Size -= 4i64;
-        *_RCX = *(int *)((char *)_RCX + _RDX);
+        *v44 = *(int *)((char *)v44 + v7);
       }
     }
     while ( 1 )
@@ -98,19 +100,19 @@ void *__cdecl memmove(void *Dst, const void *Src, size_t Size)
       v45 = Size >> 5;
       if ( !(Size >> 5) )
         break;
-      if ( v45 < 0x2000 || _RDX > 0xFFFFFFFFFFFFF000ui64 )
+      if ( v45 < 0x2000 || v7 > 0xFFFFFFFFFFFFF000ui64 )
       {
         do
         {
-          v47 = *(_QWORD *)((char *)_RCX + _RDX - 8);
-          v48 = *(_QWORD *)((char *)_RCX + _RDX - 16);
-          _RCX -= 8;
-          *((_QWORD *)_RCX + 3) = v47;
-          *((_QWORD *)_RCX + 2) = v48;
-          v49 = *(_QWORD *)((char *)_RCX + _RDX);
+          v47 = *(_QWORD *)((char *)v44 + v7 - 8);
+          v48 = *(_QWORD *)((char *)v44 + v7 - 16);
+          v44 -= 8;
+          *((_QWORD *)v44 + 3) = v47;
+          *((_QWORD *)v44 + 2) = v48;
+          v49 = *(_QWORD *)((char *)v44 + v7);
           --v45;
-          *((_QWORD *)_RCX + 1) = *(_QWORD *)((char *)_RCX + _RDX + 8);
-          *(_QWORD *)_RCX = v49;
+          *((_QWORD *)v44 + 1) = *(_QWORD *)((char *)v44 + v7 + 8);
+          *(_QWORD *)v44 = v49;
         }
         while ( v45 );
         Size &= 0x1Fu;
@@ -121,34 +123,31 @@ void *__cdecl memmove(void *Dst, const void *Src, size_t Size)
         v50 = 32;
         do
         {
-          _RCX -= 32;
-          __asm
-          {
-            prefetchnta byte ptr [rdx+rcx]; Prefetch to L1 cache
-            prefetchnta byte ptr [rdx+rcx+40h]; Prefetch to L1 cache
-          }
+          v44 -= 32;
+          _mm_prefetch((const char *)v44 + v7, 0);
+          _mm_prefetch((const char *)v44 + v7 + 64, 0);
           --v50;
         }
         while ( v50 );
-        _RCX += 1024;
+        v44 += 1024;
         v51 = 64;
         do
         {
-          v52 = *(_QWORD *)((char *)_RCX + _RDX - 16);
-          _mm_stream_si32(_RCX - 2, *(_QWORD *)((char *)_RCX + _RDX - 8));
-          _mm_stream_si32(_RCX - 4, v52);
-          v53 = *(_QWORD *)((char *)_RCX + _RDX - 32);
-          _mm_stream_si32(_RCX - 6, *(_QWORD *)((char *)_RCX + _RDX - 24));
-          _mm_stream_si32(_RCX - 8, v53);
-          v54 = *(_QWORD *)((char *)_RCX + _RDX - 40);
-          v55 = *(_QWORD *)((char *)_RCX + _RDX - 48);
-          _RCX -= 16;
-          _mm_stream_si32(_RCX + 6, v54);
-          _mm_stream_si32(_RCX + 4, v55);
-          v56 = *(_QWORD *)((char *)_RCX + _RDX);
+          v52 = *(_QWORD *)((char *)v44 + v7 - 16);
+          _mm_stream_si32(v44 - 2, *(_QWORD *)((char *)v44 + v7 - 8));
+          _mm_stream_si32(v44 - 4, v52);
+          v53 = *(_QWORD *)((char *)v44 + v7 - 32);
+          _mm_stream_si32(v44 - 6, *(_QWORD *)((char *)v44 + v7 - 24));
+          _mm_stream_si32(v44 - 8, v53);
+          v54 = *(_QWORD *)((char *)v44 + v7 - 40);
+          v55 = *(_QWORD *)((char *)v44 + v7 - 48);
+          v44 -= 16;
+          _mm_stream_si32(v44 + 6, v54);
+          _mm_stream_si32(v44 + 4, v55);
+          v56 = *(_QWORD *)((char *)v44 + v7);
           --v51;
-          _mm_stream_si32(_RCX + 2, *(_QWORD *)((char *)_RCX + _RDX + 8));
-          _mm_stream_si32(_RCX, v56);
+          _mm_stream_si32(v44 + 2, *(_QWORD *)((char *)v44 + v7 + 8));
+          _mm_stream_si32(v44, v56);
         }
         while ( v51 );
         Size -= 4096i64;
@@ -161,18 +160,18 @@ void *__cdecl memmove(void *Dst, const void *Src, size_t Size)
     {
       do
       {
-        _RCX -= 2;
+        v44 -= 2;
         --v46;
-        *(_QWORD *)_RCX = *(_QWORD *)((char *)_RCX + _RDX);
+        *(_QWORD *)v44 = *(_QWORD *)((char *)v44 + v7);
       }
       while ( v46 );
       Size &= 7u;
     }
     if ( !Size )
       return v5;
-    Dst = (char *)_RCX - Size;
+    Dst = (char *)v44 - Size;
     v11 = (char *)Dst;
-    Src = (char *)Dst + _RDX;
+    Src = (char *)Dst + v7;
   }
   while ( 2 )
   {
@@ -281,21 +280,21 @@ void *__cdecl memmove(void *Dst, const void *Src, size_t Size)
         result = v5;
         break;
       default:
-        if ( (unsigned __int8)Dst & 7 )
+        if ( ((unsigned __int8)Dst & 7) != 0 )
         {
-          if ( (unsigned __int8)Dst & 1 )
+          if ( ((unsigned __int8)Dst & 1) != 0 )
           {
             --Size;
             *(_BYTE *)Dst = *((_BYTE *)Dst + (_QWORD)Src);
             Dst = (char *)Dst + 1;
           }
-          if ( (unsigned __int8)Dst & 2 )
+          if ( ((unsigned __int8)Dst & 2) != 0 )
           {
             Size -= 2i64;
             *(_WORD *)Dst = *(_WORD *)((char *)Dst + (_QWORD)Src);
             Dst = (char *)Dst + 2;
           }
-          if ( (unsigned __int8)Dst & 4 )
+          if ( ((unsigned __int8)Dst & 4) != 0 )
           {
             Size -= 4i64;
             *(_DWORD *)Dst = *(_DWORD *)((char *)Dst + (_QWORD)Src);
@@ -330,11 +329,8 @@ void *__cdecl memmove(void *Dst, const void *Src, size_t Size)
             v37 = 32;
             do
             {
-              __asm
-              {
-                prefetchnta byte ptr [rdx+rcx]; Prefetch to L1 cache
-                prefetchnta byte ptr [rdx+rcx+40h]; Prefetch to L1 cache
-              }
+              _mm_prefetch((const char *)Dst + (_QWORD)Src, 0);
+              _mm_prefetch((const char *)Dst + (_QWORD)Src + 64, 0);
               Dst = (char *)Dst + 128;
               --v37;
             }

@@ -2,35 +2,40 @@
 // RVA: 0x2057B0
 void __fastcall UFG::Editor::TSEditor::BindAtomics(UFG::Editor::TSEditor *this)
 {
+  ASymbol rebind; // [rsp+20h] [rbp-18h]
+  ASymbol rebinda; // [rsp+20h] [rbp-18h]
+
+  LOBYTE(rebind.i_uid) = 0;
   sEditorClass = SSBrain::get_class("Editor");
-  SSClass::register_method_func(sEditorClass, "select", UFG::Editor::TSEditor::Mthd_select, 1, 0);
+  SSClass::register_method_func(sEditorClass, "select", UFG::Editor::TSEditor::Mthd_select, 1, rebind);
+  LOBYTE(rebinda.i_uid) = 0;
   SSClass::register_method_func(
     sEditorClass,
     "set_world_transform",
     UFG::Editor::TSEditor::Mthd_set_world_transform,
     1,
-    0);
+    rebinda);
 }
 
 // File Line: 42
 // RVA: 0x20E080
 void __fastcall UFG::Editor::TSEditor::Mthd_select(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  UFG::Editor::SelectionSet *v2; // rbx
-  SSInstance *v3; // rax
+  UFG::Editor::SelectionSet *mNext; // rbx
+  SSInstance *i_data_p; // rax
   UFG::Editor::SelectionSet *v4; // rcx
-  UFG::Editor::DAGPath *v5; // rsi
+  UFG::Editor::DAGPath *i_user_data; // rsi
 
-  v2 = (UFG::Editor::SelectionSet *)UFG::Editor::SelectionManager::mSelectionSets.mNode.mNext;
-  v3 = (*pScope->i_data.i_array_p)->i_data_p;
+  mNext = (UFG::Editor::SelectionSet *)UFG::Editor::SelectionManager::mSelectionSets.mNode.mNext;
+  i_data_p = (*pScope->i_data.i_array_p)->i_data_p;
   v4 = (UFG::Editor::SelectionSet *)UFG::Editor::SelectionManager::mSelectionSets.mNode.mNext;
-  v5 = (UFG::Editor::DAGPath *)v3->i_user_data;
+  i_user_data = (UFG::Editor::DAGPath *)i_data_p->i_user_data;
   LODWORD(UFG::Editor::SelectionManager::mSelectionSets.mNode.mNext[3].mNext) = 0;
   UFG::Editor::SelectionSet::DispatchChangedEvent(v4);
-  if ( (signed int)UFG::qArray<UFG::Editor::DAGPath,0>::Find(&v2->mDAGPaths, v5) <= -1 )
+  if ( (int)UFG::qArray<UFG::Editor::DAGPath,0>::Find(&mNext->mDAGPaths, i_user_data) <= -1 )
   {
-    UFG::qArray<UFG::Editor::DAGPath,0>::Add(&v2->mDAGPaths, v5, "qArray.Add");
-    UFG::Editor::SelectionSet::DispatchChangedEvent(v2);
+    UFG::qArray<UFG::Editor::DAGPath,0>::Add(&mNext->mDAGPaths, i_user_data, "qArray.Add");
+    UFG::Editor::SelectionSet::DispatchChangedEvent(mNext);
   }
 }
 
@@ -38,38 +43,37 @@ void __fastcall UFG::Editor::TSEditor::Mthd_select(SSInvokedMethod *pScope, SSIn
 // RVA: 0x20E0F0
 void __fastcall UFG::Editor::TSEditor::Mthd_set_world_transform(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSData **v2; // rdx
-  unsigned __int64 v3; // rdi
-  UFG::Editor::SmartHandleObject *v4; // rax
-  unsigned int v5; // er8
-  unsigned int v6; // ecx
-  UFG::qBaseNodeRB *v7; // rdx
-  UFG::qBaseNodeRB *v8; // rbx
+  SSData **i_array_p; // rdx
+  unsigned __int64 i_user_data; // rdi
+  UFG::Editor::FnObject *FnObject; // rax
+  unsigned int size; // r8d
+  int v6; // ecx
+  UFG::Editor::FnModifier **i; // rdx
+  UFG::Editor::FnModifier *v8; // rbx
 
-  v2 = pScope->i_data.i_array_p;
-  v3 = v2[1]->i_data_p->i_user_data;
-  v4 = UFG::Editor::DAGPath::GetFnObject((UFG::Editor::DAGPath *)(*v2)->i_data_p->i_user_data);
-  if ( v4 )
+  i_array_p = pScope->i_data.i_array_p;
+  i_user_data = i_array_p[1]->i_data_p->i_user_data;
+  FnObject = UFG::Editor::DAGPath::GetFnObject((UFG::Editor::DAGPath *)(*i_array_p)->i_data_p->i_user_data);
+  if ( FnObject )
   {
-    v5 = (unsigned int)v4[1].vfptr;
+    size = FnObject->mFnModifiers.size;
     v6 = 0;
-    if ( v5 )
+    if ( size )
     {
-      v7 = v4[1].mNode.mParent;
-      while ( 1 )
+      for ( i = FnObject->mFnModifiers.p; ; ++i )
       {
-        v8 = v7->mParent;
-        if ( LODWORD(v7->mParent->mChild[0]) == 1864359155 )
+        v8 = *i;
+        if ( (*i)->mTypeID == 1864359155 )
           break;
-        ++v6;
-        v7 = (UFG::qBaseNodeRB *)((char *)v7 + 8);
-        if ( v6 >= v5 )
+        if ( ++v6 >= size )
           return;
       }
       if ( v8 )
       {
-        ((void (__fastcall *)(UFG::Editor::SmartHandleObject *))v4->vfptr[4].__vecDelDtor)(v4);
-        ((void (__fastcall *)(UFG::qBaseNodeRB *, unsigned __int64))v8->mParent[2].mParent)(v8, v3);
+        ((void (__fastcall *)(UFG::Editor::FnObject *))FnObject->vfptr[4].__vecDelDtor)(FnObject);
+        ((void (__fastcall *)(UFG::Editor::FnModifier *, unsigned __int64))v8->vfptr[1].DrawGizmoHandles)(
+          v8,
+          i_user_data);
       }
     }
   }

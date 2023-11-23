@@ -28,22 +28,29 @@ hkpJacobianSchema *__fastcall hkJacobianPoweredChainSchema_getLinearJacobians(hk
 
 // File Line: 20
 // RVA: 0x132A9E0
-hkpJacobianSchema *__fastcall hkJacobianPoweredChainSchema_getAngularJacobians(hkpJacobianSchema *schema, int numConstraints)
+hkpJacobianSchema *__fastcall hkJacobianPoweredChainSchema_getAngularJacobians(
+        hkpJacobianSchema *schema,
+        int numConstraints)
 {
   return &schema[144 * numConstraints + 32];
 }
 
 // File Line: 24
 // RVA: 0x132A930
-hkpJacobianSchema *__fastcall hkJacobianStabilizedBallSocketChainSchema_init(hkpJacobianSchema *sIn, int numConstraints, hkpVelocityAccumulatorOffset *accumulatorsIn, float tau, float damping, float cfm, float virtualMassFactor)
+hkpJacobianSchema *__fastcall hkJacobianStabilizedBallSocketChainSchema_init(
+        hkpJacobianSchema *sIn,
+        int numConstraints,
+        hkpVelocityAccumulatorOffset *accumulatorsIn,
+        float tau,
+        float damping,
+        float cfm,
+        float virtualMassFactor)
 {
-  hkpJacobianSchema *v7; // r11
-  int v8; // er10
-  signed __int64 v9; // r9
+  int v8; // r10d
+  __int64 v9; // r9
   __int64 v10; // rcx
-  unsigned int v11; // eax
+  unsigned int m_offset; // eax
 
-  v7 = sIn;
   *(_WORD *)&sIn[4] = numConstraints;
   v8 = (unsigned __int16)numConstraints + 1;
   *(float *)&sIn[16] = damping;
@@ -57,13 +64,12 @@ hkpJacobianSchema *__fastcall hkJacobianStabilizedBallSocketChainSchema_init(hkp
     v10 = (unsigned int)(numConstraints + 1);
     do
     {
-      v11 = accumulatorsIn->m_offset;
-      ++accumulatorsIn;
-      *(_DWORD *)&v7[v9 - 4 + (_QWORD)accumulatorsIn] = v11;
+      m_offset = accumulatorsIn->m_offset;
+      *(_DWORD *)&sIn[v9 - 4 + (_QWORD)++accumulatorsIn] = m_offset;
       --v10;
     }
     while ( v10 );
   }
-  return v7 + 32;
+  return sIn + 32;
 }
 

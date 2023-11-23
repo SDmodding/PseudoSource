@@ -13,74 +13,71 @@ SSExpressionBase *dynamic_initializer_for__SSDebugInfo::c_expr_p__()
 // RVA: 0x1461500
 __int64 dynamic_initializer_for__SSDebug::c_print_mem_ext_p__()
 {
-  return atexit(dynamic_atexit_destructor_for__SSDebug::c_print_mem_ext_p__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__SSDebug::c_print_mem_ext_p__);
 }
 
 // File Line: 1085
 // RVA: 0x11A260
 void SSDebug::info(void)
 {
-  AStringRef *v0; // rbx
-  bool v1; // zf
-  AObjReusePool<AStringRef> *v2; // rax
-  AObjBlock<AStringRef> *v3; // rcx
-  unsigned __int64 v4; // rdx
+  AStringRef *i_str_ref_p; // rbx
+  AObjReusePool<AStringRef> *pool; // rax
+  AObjBlock<AStringRef> *i_block_p; // rcx
+  unsigned __int64 i_objects_a; // rdx
   bool v5; // cf
-  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *v6; // rcx
-  AString str; // [rsp+40h] [rbp+8h]
+  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *p_i_exp_pool; // rcx
+  AString str; // [rsp+40h] [rbp+8h] BYREF
 
   str.i_str_ref_p = AStringRef::get_empty();
   ++str.i_str_ref_p->i_ref_count;
   AString::append(&str, "\n[Skookum call stack not available.]\n", 0x25u);
   ADebug::print(&str, 1);
-  v0 = str.i_str_ref_p;
-  v1 = str.i_str_ref_p->i_ref_count == 1;
-  --v0->i_ref_count;
-  if ( v1 )
+  i_str_ref_p = str.i_str_ref_p;
+  if ( str.i_str_ref_p->i_ref_count-- == 1 )
   {
-    if ( v0->i_deallocate )
-      AMemory::c_free_func(v0->i_cstr_p);
-    v2 = AStringRef::get_pool();
-    v3 = v2->i_block_p;
-    v4 = (unsigned __int64)v3->i_objects_a;
-    if ( (unsigned __int64)v0 < v4 || (v5 = (unsigned __int64)v0 < v4 + 24i64 * v3->i_size, v6 = &v2->i_pool, !v5) )
-      v6 = &v2->i_exp_pool;
-    APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(v6, v0);
+    if ( i_str_ref_p->i_deallocate )
+      AMemory::c_free_func(i_str_ref_p->i_cstr_p);
+    pool = AStringRef::get_pool();
+    i_block_p = pool->i_block_p;
+    i_objects_a = (unsigned __int64)i_block_p->i_objects_a;
+    if ( (unsigned __int64)i_str_ref_p < i_objects_a
+      || (v5 = (unsigned __int64)i_str_ref_p < i_objects_a + 24i64 * i_block_p->i_size, p_i_exp_pool = &pool->i_pool,
+                                                                                        !v5) )
+    {
+      p_i_exp_pool = &pool->i_exp_pool;
+    }
+    APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(p_i_exp_pool, i_str_ref_p);
   }
 }
 
 // File Line: 1229
 // RVA: 0x1316E0
-void __fastcall SSDebug::print_error(AString *err_msg, eAErrLevel level)
+void __fastcall SSDebug::print_error(AString *err_msg, int level)
 {
-  eAErrLevel v2; // ebx
-  const void ***v3; // r14
-  signed int v4; // esi
-  int v5; // ebx
-  AStringRef *v6; // rax
+  int v4; // esi
+  unsigned int i_length; // ebx
+  AStringRef *i_str_ref_p; // rax
   unsigned int v7; // edi
   AStringRef *v8; // rbx
   bool v9; // zf
-  AObjReusePool<AStringRef> *v10; // rax
-  AObjBlock<AStringRef> *v11; // rcx
-  unsigned __int64 v12; // rdx
+  AObjReusePool<AStringRef> *pool; // rax
+  AObjBlock<AStringRef> *i_block_p; // rcx
+  unsigned __int64 i_objects_a; // rdx
   AStringRef *v13; // rbx
   AObjReusePool<AStringRef> *v14; // rax
   AObjBlock<AStringRef> *v15; // rcx
   unsigned __int64 v16; // rdx
   bool v17; // cf
-  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *v18; // rcx
-  AStringRef *elem; // [rsp+30h] [rbp-828h]
+  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *p_i_exp_pool; // rcx
+  AStringRef *elem; // [rsp+30h] [rbp-828h] BYREF
   int v20; // [rsp+38h] [rbp-820h]
   __int64 v21; // [rsp+40h] [rbp-818h]
-  char buffer_p; // [rsp+50h] [rbp-808h]
-  AString str; // [rsp+860h] [rbp+8h]
+  char buffer_p[2048]; // [rsp+50h] [rbp-808h] BYREF
+  AString str; // [rsp+860h] [rbp+8h] BYREF
 
   v21 = -2i64;
-  v2 = level;
-  v3 = (const void ***)err_msg;
-  AString::AString(&str, &buffer_p, 0x800u, 0, 0);
-  if ( (signed int)v2 < 3 )
+  AString::AString(&str, buffer_p, 0x800u, 0, 0);
+  if ( level < 3 )
   {
     AString::append(&str, "\nWARNING (Skookum): ", 0x14u);
     v4 = 3;
@@ -90,40 +87,39 @@ void __fastcall SSDebug::print_error(AString *err_msg, eAErrLevel level)
     AString::append(&str, "\nERROR (Skookum): ", 0x12u);
     v4 = 2;
   }
-  v5 = *((_DWORD *)*v3 + 2);
-  if ( v5 )
+  i_length = err_msg->i_str_ref_p->i_length;
+  if ( i_length )
   {
-    v6 = str.i_str_ref_p;
-    v7 = v5 + str.i_str_ref_p->i_length;
+    i_str_ref_p = str.i_str_ref_p;
+    v7 = i_length + str.i_str_ref_p->i_length;
     if ( v7 >= str.i_str_ref_p->i_size || str.i_str_ref_p->i_ref_count + str.i_str_ref_p->i_read_only != 1 )
     {
       AString::set_size(&str, v7);
-      v6 = str.i_str_ref_p;
+      i_str_ref_p = str.i_str_ref_p;
     }
-    memmove(&v6->i_cstr_p[v6->i_length], **v3, (unsigned int)(v5 + 1));
+    memmove(&i_str_ref_p->i_cstr_p[i_str_ref_p->i_length], err_msg->i_str_ref_p->i_cstr_p, i_length + 1);
     str.i_str_ref_p->i_length = v7;
   }
   AString::append(&str, "\n\n", 2u);
   if ( SSDebug::c_log_func_p )
   {
     elem = str.i_str_ref_p;
-    ++elem->i_ref_count;
+    ++str.i_str_ref_p->i_ref_count;
     v20 = v4;
     SSDebug::c_log_func_p->vfptr->invoke(SSDebug::c_log_func_p, (SSPrintInfo *)&elem);
     v8 = elem;
-    v9 = elem->i_ref_count == 1;
-    --v8->i_ref_count;
+    v9 = elem->i_ref_count-- == 1;
     if ( v9 )
     {
       if ( v8->i_deallocate )
         AMemory::c_free_func(v8->i_cstr_p);
-      v10 = AStringRef::get_pool();
-      v11 = v10->i_block_p;
-      v12 = (unsigned __int64)v11->i_objects_a;
-      if ( (unsigned __int64)v8 < v12 || (unsigned __int64)v8 >= v12 + 24i64 * v11->i_size )
-        APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(&v10->i_exp_pool, v8);
+      pool = AStringRef::get_pool();
+      i_block_p = pool->i_block_p;
+      i_objects_a = (unsigned __int64)i_block_p->i_objects_a;
+      if ( (unsigned __int64)v8 < i_objects_a || (unsigned __int64)v8 >= i_objects_a + 24i64 * i_block_p->i_size )
+        APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(&pool->i_exp_pool, v8);
       else
-        APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(&v10->i_pool, v8);
+        APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(&pool->i_pool, v8);
     }
   }
   else
@@ -131,8 +127,7 @@ void __fastcall SSDebug::print_error(AString *err_msg, eAErrLevel level)
     ADebug::print(&str, 0);
   }
   v13 = str.i_str_ref_p;
-  v9 = str.i_str_ref_p->i_ref_count == 1;
-  --v13->i_ref_count;
+  v9 = str.i_str_ref_p->i_ref_count-- == 1;
   if ( v9 )
   {
     if ( v13->i_deallocate )
@@ -141,46 +136,48 @@ void __fastcall SSDebug::print_error(AString *err_msg, eAErrLevel level)
     v15 = v14->i_block_p;
     v16 = (unsigned __int64)v15->i_objects_a;
     if ( (unsigned __int64)v13 < v16
-      || (v17 = (unsigned __int64)v13 < v16 + 24i64 * v15->i_size, v18 = &v14->i_pool, !v17) )
+      || (v17 = (unsigned __int64)v13 < v16 + 24i64 * v15->i_size, p_i_exp_pool = &v14->i_pool, !v17) )
     {
-      v18 = &v14->i_exp_pool;
+      p_i_exp_pool = &v14->i_exp_pool;
     }
-    APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(v18, v13);
+    APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(p_i_exp_pool, v13);
   }
 }
 
 // File Line: 1311
 // RVA: 0x1318E0
-void __fastcall SSDebug::print_error(SSParser::eResult result, AString *path, AString *code_p, unsigned int result_pos, unsigned int result_start, unsigned int start_pos)
+void __fastcall SSDebug::print_error(
+        SSParser::eResult result,
+        AString *path,
+        AString *code_p,
+        unsigned int result_pos,
+        unsigned int result_start,
+        unsigned int start_pos)
 {
-  unsigned int v6; // er14
-  AString *v7; // r13
-  const void ***v8; // r12
-  SSParser::eResult v9; // ebx
-  unsigned int v10; // er15
-  const void ***v11; // rsi
-  int v12; // edi
-  AStringRef *v13; // rcx
+  unsigned int v10; // r15d
+  AString *result_context_string; // rsi
+  unsigned int i_length; // edi
+  AStringRef *i_str_ref_p; // rcx
   unsigned int v14; // ebx
   AStringRef *v15; // rbx
   bool v16; // zf
-  AObjReusePool<AStringRef> *v17; // rax
-  AObjBlock<AStringRef> *v18; // rcx
-  unsigned __int64 v19; // rdx
+  AObjReusePool<AStringRef> *pool; // rax
+  AObjBlock<AStringRef> *i_block_p; // rcx
+  unsigned __int64 i_objects_a; // rdx
   bool v20; // cf
-  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *v21; // rcx
+  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *p_i_exp_pool; // rcx
   AStringRef *v22; // rax
   __int64 v23; // rbx
-  const void ***v24; // rsi
-  int v25; // edi
+  AString *result_string; // rsi
+  unsigned int v25; // edi
   AStringRef *v26; // rcx
   unsigned int v27; // ebx
   AStringRef *v28; // rbx
   AObjReusePool<AStringRef> *v29; // rax
   AObjBlock<AStringRef> *v30; // rcx
   unsigned __int64 v31; // rdx
-  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *v32; // rcx
-  int v33; // edi
+  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *p_i_pool; // rcx
+  unsigned int v33; // edi
   AStringRef *v34; // rax
   unsigned int v35; // ebx
   AStringRef *v36; // rbx
@@ -192,55 +189,54 @@ void __fastcall SSDebug::print_error(SSParser::eResult result, AString *path, AS
   AObjBlock<AStringRef> *v42; // rcx
   unsigned __int64 v43; // rdx
   APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *v44; // rcx
-  AStringRef *elem; // [rsp+30h] [rbp-D0h]
+  AStringRef *elem; // [rsp+30h] [rbp-D0h] BYREF
   int v46; // [rsp+38h] [rbp-C8h]
   __int64 v47; // [rsp+40h] [rbp-C0h]
-  char buffer_p; // [rsp+50h] [rbp-B0h]
-  SSParser::eResult v49; // [rsp+890h] [rbp+790h]
-  AString str; // [rsp+898h] [rbp+798h]
-  AString resulta; // [rsp+8A0h] [rbp+7A0h]
+  char buffer_p[2096]; // [rsp+50h] [rbp-B0h] BYREF
+  AString str; // [rsp+898h] [rbp+798h] BYREF
+  AString resulta; // [rsp+8A0h] [rbp+7A0h] BYREF
 
-  v49 = result;
   v47 = -2i64;
-  v6 = result_pos;
-  v7 = code_p;
-  v8 = (const void ***)path;
-  v9 = result;
-  AString::AString(&str, &buffer_p, 0x800u, 0, 0);
+  AString::AString(&str, buffer_p, 0x800u, 0, 0);
   AString::append(&str, "\n\n", 0xFFFFFFFF);
   v10 = result_start;
-  if ( v7 )
+  if ( code_p )
   {
-    v11 = (const void ***)SSParser::get_result_context_string(&resulta, v7, v9, v6, result_start, start_pos);
-    v12 = *((_DWORD *)*v11 + 2);
-    if ( v12 )
+    result_context_string = SSParser::get_result_context_string(
+                              &resulta,
+                              code_p,
+                              result,
+                              result_pos,
+                              result_start,
+                              start_pos);
+    i_length = result_context_string->i_str_ref_p->i_length;
+    if ( i_length )
     {
-      v13 = str.i_str_ref_p;
-      v14 = v12 + str.i_str_ref_p->i_length;
+      i_str_ref_p = str.i_str_ref_p;
+      v14 = i_length + str.i_str_ref_p->i_length;
       if ( v14 >= str.i_str_ref_p->i_size || str.i_str_ref_p->i_ref_count + str.i_str_ref_p->i_read_only != 1 )
       {
         AString::set_size(&str, v14);
-        v13 = str.i_str_ref_p;
+        i_str_ref_p = str.i_str_ref_p;
       }
-      memmove(&v13->i_cstr_p[v13->i_length], **v11, (unsigned int)(v12 + 1));
+      memmove(&i_str_ref_p->i_cstr_p[i_str_ref_p->i_length], result_context_string->i_str_ref_p->i_cstr_p, i_length + 1);
       str.i_str_ref_p->i_length = v14;
     }
     v15 = resulta.i_str_ref_p;
-    v16 = resulta.i_str_ref_p->i_ref_count == 1;
-    --v15->i_ref_count;
+    v16 = resulta.i_str_ref_p->i_ref_count-- == 1;
     if ( v16 )
     {
       if ( v15->i_deallocate )
         AMemory::c_free_func(v15->i_cstr_p);
-      v17 = AStringRef::get_pool();
-      v18 = v17->i_block_p;
-      v19 = (unsigned __int64)v18->i_objects_a;
-      if ( (unsigned __int64)v15 < v19
-        || (v20 = (unsigned __int64)v15 < v19 + 24i64 * v18->i_size, v21 = &v17->i_pool, !v20) )
+      pool = AStringRef::get_pool();
+      i_block_p = pool->i_block_p;
+      i_objects_a = (unsigned __int64)i_block_p->i_objects_a;
+      if ( (unsigned __int64)v15 < i_objects_a
+        || (v20 = (unsigned __int64)v15 < i_objects_a + 24i64 * i_block_p->i_size, p_i_exp_pool = &pool->i_pool, !v20) )
       {
-        v21 = &v17->i_exp_pool;
+        p_i_exp_pool = &pool->i_exp_pool;
       }
-      APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(v21, v15);
+      APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(p_i_exp_pool, v15);
     }
     v22 = str.i_str_ref_p;
     v23 = str.i_str_ref_p->i_length + 1;
@@ -257,8 +253,8 @@ void __fastcall SSDebug::print_error(SSParser::eResult result, AString *path, AS
   else
   {
     AString::append(&str, "\nERROR: ", 0xFFFFFFFF);
-    v24 = (const void ***)SSParser::get_result_string(&resulta, v9);
-    v25 = *((_DWORD *)*v24 + 2);
+    result_string = SSParser::get_result_string(&resulta, (unsigned int)result);
+    v25 = result_string->i_str_ref_p->i_length;
     if ( v25 )
     {
       v26 = str.i_str_ref_p;
@@ -268,12 +264,11 @@ void __fastcall SSDebug::print_error(SSParser::eResult result, AString *path, AS
         AString::set_size(&str, v27);
         v26 = str.i_str_ref_p;
       }
-      memmove(&v26->i_cstr_p[v26->i_length], **v24, (unsigned int)(v25 + 1));
+      memmove(&v26->i_cstr_p[v26->i_length], result_string->i_str_ref_p->i_cstr_p, v25 + 1);
       str.i_str_ref_p->i_length = v27;
     }
     v28 = resulta.i_str_ref_p;
-    v16 = resulta.i_str_ref_p->i_ref_count == 1;
-    --v28->i_ref_count;
+    v16 = resulta.i_str_ref_p->i_ref_count-- == 1;
     if ( v16 )
     {
       if ( v28->i_deallocate )
@@ -282,18 +277,18 @@ void __fastcall SSDebug::print_error(SSParser::eResult result, AString *path, AS
       v30 = v29->i_block_p;
       v31 = (unsigned __int64)v30->i_objects_a;
       if ( (unsigned __int64)v28 < v31
-        || (v20 = (unsigned __int64)v28 < v31 + 24i64 * v30->i_size, v32 = &v29->i_pool, !v20) )
+        || (v20 = (unsigned __int64)v28 < v31 + 24i64 * v30->i_size, p_i_pool = &v29->i_pool, !v20) )
       {
-        v32 = &v29->i_exp_pool;
+        p_i_pool = &v29->i_exp_pool;
       }
-      APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(v32, v28);
+      APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(p_i_pool, v28);
     }
     AString::append(&str, "\n\n", 2u);
   }
-  if ( *((_DWORD *)*v8 + 2) )
+  if ( path->i_str_ref_p->i_length )
   {
     AString::append(&str, "File: ", 6u);
-    v33 = *((_DWORD *)*v8 + 2);
+    v33 = path->i_str_ref_p->i_length;
     if ( v33 )
     {
       v34 = str.i_str_ref_p;
@@ -303,33 +298,32 @@ void __fastcall SSDebug::print_error(SSParser::eResult result, AString *path, AS
         AString::set_size(&str, v35);
         v34 = str.i_str_ref_p;
       }
-      memmove(&v34->i_cstr_p[v34->i_length], **v8, (unsigned int)(v33 + 1));
+      memmove(&v34->i_cstr_p[v34->i_length], path->i_str_ref_p->i_cstr_p, v33 + 1);
       str.i_str_ref_p->i_length = v35;
     }
   }
   else
   {
-    if ( !v7 )
+    if ( !code_p )
       goto LABEL_46;
     AString::append(&str, "Script code index: ", 0x13u);
   }
-  if ( v7 && (!*((_DWORD *)*v8 + 2) || v6) )
+  if ( code_p && (!path->i_str_ref_p->i_length || result_pos) )
   {
-    if ( v10 == -1 || v6 == v10 )
-      AString::append_format(&str, "[%u]\n", v6);
+    if ( v10 == -1 || result_pos == v10 )
+      AString::append_format(&str, "[%u]\n", result_pos);
     else
-      AString::append_format(&str, "[%u-%u]\n", v10, v6);
+      AString::append_format(&str, "[%u-%u]\n", v10, result_pos);
   }
 LABEL_46:
   if ( SSDebug::c_log_func_p )
   {
     elem = str.i_str_ref_p;
-    ++elem->i_ref_count;
-    v46 = ((signed int)v49 < 8) + 2;
+    ++str.i_str_ref_p->i_ref_count;
+    v46 = (result < Result_err__start) + 2;
     SSDebug::c_log_func_p->vfptr->invoke(SSDebug::c_log_func_p, (SSPrintInfo *)&elem);
     v36 = elem;
-    v16 = elem->i_ref_count == 1;
-    --v36->i_ref_count;
+    v16 = elem->i_ref_count-- == 1;
     if ( v16 )
     {
       if ( v36->i_deallocate )
@@ -348,8 +342,7 @@ LABEL_46:
     ADebug::print(&str, 0);
   }
   v40 = str.i_str_ref_p;
-  v16 = str.i_str_ref_p->i_ref_count == 1;
-  --v40->i_ref_count;
+  v16 = str.i_str_ref_p->i_ref_count-- == 1;
   if ( v16 )
   {
     if ( v40->i_deallocate )
@@ -370,41 +363,38 @@ LABEL_46:
 // RVA: 0x126010
 void __fastcall SSDebug::mthdc_get_hook_names(SSInvokedMethod *scope_p, SSInstance **result_pp)
 {
-  SSInstance **v2; // rdi
-  AStringRef *v3; // rax
-  AStringRef *v4; // rbx
-  SSInstance *v5; // rax
-  bool v6; // zf
-  AObjReusePool<AStringRef> *v7; // rax
-  AObjBlock<AStringRef> *v8; // rcx
-  unsigned __int64 v9; // r8
-  bool v10; // cf
-  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *v11; // rcx
+  AStringRef *empty; // rbx
+  SSInstance *v4; // rax
+  AObjReusePool<AStringRef> *pool; // rax
+  AObjBlock<AStringRef> *i_block_p; // rcx
+  unsigned __int64 i_objects_a; // r8
+  bool v9; // cf
+  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *p_i_exp_pool; // rcx
 
   if ( result_pp )
   {
-    v2 = result_pp;
-    v3 = AStringRef::get_empty();
-    v4 = v3;
-    ++v3->i_ref_count;
-    v5 = SSInstance::pool_new(SSBrain::c_string_class_p);
-    if ( v5 != (SSInstance *)-32i64 )
+    empty = AStringRef::get_empty();
+    ++empty->i_ref_count;
+    v4 = SSInstance::pool_new(SSBrain::c_string_class_p);
+    if ( v4 != (SSInstance *)-32i64 )
     {
-      v5->i_user_data = (unsigned __int64)v4;
-      ++v4->i_ref_count;
+      v4->i_user_data = (unsigned __int64)empty;
+      ++empty->i_ref_count;
     }
-    *v2 = v5;
-    v6 = v4->i_ref_count-- == 1;
-    if ( v6 )
+    *result_pp = v4;
+    if ( empty->i_ref_count-- == 1 )
     {
-      if ( v4->i_deallocate )
-        AMemory::c_free_func(v4->i_cstr_p);
-      v7 = AStringRef::get_pool();
-      v8 = v7->i_block_p;
-      v9 = (unsigned __int64)v8->i_objects_a;
-      if ( (unsigned __int64)v4 < v9 || (v10 = (unsigned __int64)v4 < v9 + 24i64 * v8->i_size, v11 = &v7->i_pool, !v10) )
-        v11 = &v7->i_exp_pool;
-      APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(v11, v4);
+      if ( empty->i_deallocate )
+        AMemory::c_free_func(empty->i_cstr_p);
+      pool = AStringRef::get_pool();
+      i_block_p = pool->i_block_p;
+      i_objects_a = (unsigned __int64)i_block_p->i_objects_a;
+      if ( (unsigned __int64)empty < i_objects_a
+        || (v9 = (unsigned __int64)empty < i_objects_a + 24i64 * i_block_p->i_size, p_i_exp_pool = &pool->i_pool, !v9) )
+      {
+        p_i_exp_pool = &pool->i_exp_pool;
+      }
+      APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(p_i_exp_pool, empty);
     }
   }
 }
@@ -414,58 +404,53 @@ void __fastcall SSDebug::mthdc_get_hook_names(SSInvokedMethod *scope_p, SSInstan
 void __fastcall SSDebug::mthdc_is_engine_present(SSInvokedMethod *scope_p, SSInstance **result_pp)
 {
   if ( result_pp )
-    *result_pp = (SSInstance *)SSBoolean::pool_new(SSDebug::c_engine_present_b);
+    *result_pp = SSBoolean::pool_new(SSDebug::c_engine_present_b);
 }
 
 // File Line: 2950
 // RVA: 0x126770
 void __fastcall SSDebug::mthdc_sym_to_str(SSInvokedMethod *scope_p, SSInstance **result_pp)
 {
-  SSInstance **v2; // rbx
   AString *v3; // rdi
   SSInstance *v4; // rax
-  AStringRef *v5; // rcx
+  AStringRef *i_str_ref_p; // rcx
   AStringRef *v6; // rbx
-  bool v7; // zf
-  AObjReusePool<AStringRef> *v8; // rax
-  AObjBlock<AStringRef> *v9; // rcx
-  unsigned __int64 v10; // rdx
+  AObjReusePool<AStringRef> *pool; // rax
+  AObjBlock<AStringRef> *i_block_p; // rcx
+  unsigned __int64 i_objects_a; // rdx
   bool v11; // cf
-  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *v12; // rcx
-  AString result; // [rsp+48h] [rbp+10h]
+  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *p_i_exp_pool; // rcx
+  AString result; // [rsp+48h] [rbp+10h] BYREF
   SSInstance *v14; // [rsp+50h] [rbp+18h]
-  unsigned __int64 *v15; // [rsp+58h] [rbp+20h]
+  unsigned __int64 *p_i_user_data; // [rsp+58h] [rbp+20h]
 
   if ( result_pp )
   {
-    v2 = result_pp;
     v3 = ASymbol::as_str_dbg((ASymbol *)&(*scope_p->i_data.i_array_p)->i_data_p->i_user_data, &result);
     v4 = SSInstance::pool_new(SSBrain::c_string_class_p);
     v14 = v4;
-    v15 = &v4->i_user_data;
+    p_i_user_data = &v4->i_user_data;
     if ( v4 != (SSInstance *)-32i64 )
     {
-      v5 = v3->i_str_ref_p;
+      i_str_ref_p = v3->i_str_ref_p;
       v4->i_user_data = (unsigned __int64)v3->i_str_ref_p;
-      ++v5->i_ref_count;
+      ++i_str_ref_p->i_ref_count;
     }
-    *v2 = v4;
+    *result_pp = v4;
     v6 = result.i_str_ref_p;
-    v7 = result.i_str_ref_p->i_ref_count == 1;
-    --v6->i_ref_count;
-    if ( v7 )
+    if ( result.i_str_ref_p->i_ref_count-- == 1 )
     {
       if ( v6->i_deallocate )
         AMemory::c_free_func(v6->i_cstr_p);
-      v8 = AStringRef::get_pool();
-      v9 = v8->i_block_p;
-      v10 = (unsigned __int64)v9->i_objects_a;
-      if ( (unsigned __int64)v6 < v10
-        || (v11 = (unsigned __int64)v6 < v10 + 24i64 * v9->i_size, v12 = &v8->i_pool, !v11) )
+      pool = AStringRef::get_pool();
+      i_block_p = pool->i_block_p;
+      i_objects_a = (unsigned __int64)i_block_p->i_objects_a;
+      if ( (unsigned __int64)v6 < i_objects_a
+        || (v11 = (unsigned __int64)v6 < i_objects_a + 24i64 * i_block_p->i_size, p_i_exp_pool = &pool->i_pool, !v11) )
       {
-        v12 = &v8->i_exp_pool;
+        p_i_exp_pool = &pool->i_exp_pool;
       }
-      APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(v12, v6);
+      APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(p_i_exp_pool, v6);
     }
   }
 }
@@ -502,7 +487,7 @@ void SSDebug::register_atomic(void)
   ASymbol *v25; // rax
   SSClass *v26; // rbx
   ASymbol *v27; // rax
-  ASymbol result; // [rsp+30h] [rbp+8h]
+  ASymbol result; // [rsp+30h] [rbp+8h] BYREF
 
   v0 = SSBrain::create_class(&ASymbol_Debug, SSBrain::c_object_class_p, 0xFFFFFFFF, 0);
   SSBrain::c_debug_class_p = v0;

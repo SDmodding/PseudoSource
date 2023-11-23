@@ -2,50 +2,43 @@
 // RVA: 0x94D9C0
 void __fastcall Scaleform::Render::VectorGlyphShape::~VectorGlyphShape(Scaleform::Render::VectorGlyphShape *this)
 {
-  Scaleform::Render::VectorGlyphShape *v1; // rbx
-  Scaleform::Render::GlyphRaster *v2; // rcx
-  bool v3; // zf
+  Scaleform::Render::GlyphRaster *pObject; // rcx
   Scaleform::Render::GlyphShape *v4; // rcx
 
-  v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::VectorGlyphShape::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>};
-  this->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::VectorGlyphShape::`vftable{for `Scaleform::Render::MeshProvider};
-  v2 = this->pRaster.pObject;
-  if ( v2 )
+  this->Scaleform::Render::MeshProvider_KeySupport::Scaleform::Render::MeshProvider_RCImpl::Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::VectorGlyphShape::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>};
+  this->Scaleform::Render::MeshProvider_KeySupport::Scaleform::Render::MeshProvider_RCImpl::Scaleform::Render::MeshProvider::vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::VectorGlyphShape::`vftable{for `Scaleform::Render::MeshProvider};
+  pObject = this->pRaster.pObject;
+  if ( pObject )
   {
-    v3 = v2->RefCount-- == 1;
-    if ( v3 )
-      v2->vfptr->__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v2->vfptr, 1u);
+    if ( pObject->RefCount-- == 1 )
+      pObject->vfptr->__vecDelDtor(pObject, 1u);
   }
-  v4 = v1->pShape.pObject;
-  if ( v4 && !_InterlockedDecrement(&v4->RefCount) && v4 )
-    v4->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v4->vfptr, 1u);
-  Scaleform::Render::MeshProvider_KeySupport::~MeshProvider_KeySupport((Scaleform::Render::MeshProvider_KeySupport *)&v1->vfptr);
+  v4 = this->pShape.pObject;
+  if ( v4 && !_InterlockedDecrement(&v4->RefCount) )
+    v4->vfptr->__vecDelDtor(v4, 1u);
+  Scaleform::Render::MeshProvider_KeySupport::~MeshProvider_KeySupport(this);
 }
 
 // File Line: 104
 // RVA: 0x946D90
-void __fastcall Scaleform::Render::VectorGlyphShape::VectorGlyphShape(Scaleform::Render::VectorGlyphShape *this, Scaleform::Render::GlyphCache *cache)
+void __fastcall Scaleform::Render::VectorGlyphShape::VectorGlyphShape(
+        Scaleform::Render::VectorGlyphShape *this,
+        Scaleform::Render::GlyphCache *cache)
 {
-  Scaleform::Render::MeshKeyManager *volatile v2; // rt1
-  Scaleform::Render::MeshKeyManager *volatile v3; // rax
-
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
+  this->Scaleform::Render::MeshProvider_KeySupport::Scaleform::Render::MeshProvider_RCImpl::Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>::`vftable;
-  this->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::MeshProvider::`vftable;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::MeshProvider_RCImpl::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>};
-  this->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::MeshProvider_RCImpl::`vftable{for `Scaleform::Render::MeshProvider};
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::MeshProvider_KeySupport::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>};
-  this->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::MeshProvider_KeySupport::`vftable{for `Scaleform::Render::MeshProvider};
-  v2 = this->hKeySet.pManager.Value;
+  this->Scaleform::Render::MeshProvider_KeySupport::Scaleform::Render::MeshProvider_RCImpl::Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->Scaleform::Render::MeshProvider_KeySupport::Scaleform::Render::MeshProvider_RCImpl::Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::`vftable;
+  this->Scaleform::Render::MeshProvider_KeySupport::Scaleform::Render::MeshProvider_RCImpl::Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>::`vftable;
+  this->Scaleform::Render::MeshProvider_KeySupport::Scaleform::Render::MeshProvider_RCImpl::Scaleform::Render::MeshProvider::vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::MeshProvider::`vftable;
+  this->Scaleform::Render::MeshProvider_KeySupport::Scaleform::Render::MeshProvider_RCImpl::Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::MeshProvider_RCImpl::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>};
+  this->Scaleform::Render::MeshProvider_KeySupport::Scaleform::Render::MeshProvider_RCImpl::Scaleform::Render::MeshProvider::vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::MeshProvider_RCImpl::`vftable{for `Scaleform::Render::MeshProvider};
+  this->Scaleform::Render::MeshProvider_KeySupport::Scaleform::Render::MeshProvider_RCImpl::Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::MeshProvider_KeySupport::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>};
+  this->Scaleform::Render::MeshProvider_KeySupport::Scaleform::Render::MeshProvider_RCImpl::Scaleform::Render::MeshProvider::vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::MeshProvider_KeySupport::`vftable{for `Scaleform::Render::MeshProvider};
   this->hKeySet.pManager.Value = 0i64;
-  v3 = this->hKeySet.pManager.Value;
   this->hKeySet.pKeySet = 0i64;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::VectorGlyphShape::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>};
-  this->vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::VectorGlyphShape::`vftable{for `Scaleform::Render::MeshProvider};
+  this->Scaleform::Render::MeshProvider_KeySupport::Scaleform::Render::MeshProvider_RCImpl::Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::VectorGlyphShape::`vftable{for `Scaleform::RefCountBase<Scaleform::Render::MeshProvider_RCImpl,2>};
+  this->Scaleform::Render::MeshProvider_KeySupport::Scaleform::Render::MeshProvider_RCImpl::Scaleform::Render::MeshProvider::vfptr = (Scaleform::Render::MeshProviderVtbl *)&Scaleform::Render::VectorGlyphShape::`vftable{for `Scaleform::Render::MeshProvider};
   this->Key.pFont = 0i64;
   this->Key.GlyphIndex = 0;
   *(_DWORD *)&this->Key.HintedVector = 0;
@@ -66,7 +59,11 @@ __int64 __fastcall Scaleform::Render::StrokerAA::GetMeshVertexCount(Scaleform::R
 
 // File Line: 394
 // RVA: 0x983D00
-void __fastcall Scaleform::Render::VectorGlyphShape::GetFillMatrix(Scaleform::Render::VectorGlyphShape *this, Scaleform::Render::MeshBase *mesh, Scaleform::Render::Matrix2x4<float> *matrix, unsigned int layer)
+void __fastcall Scaleform::Render::VectorGlyphShape::GetFillMatrix(
+        Scaleform::Render::VectorGlyphShape *this,
+        Scaleform::Render::MeshBase *mesh,
+        Scaleform::Render::Matrix2x4<float> *matrix,
+        unsigned int layer)
 {
   *(_QWORD *)&matrix->M[0][0] = 1065353216i64;
   *(_QWORD *)&matrix->M[1][1] = 1065353216i64;

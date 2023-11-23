@@ -13,24 +13,36 @@ void dynamic_initializer_for__hkOptionalComponent_hkpSampledHeightField_AllCasts
   hkOptionalComponent::hkOptionalComponent(
     &hkOptionalComponent_hkpSampledHeightField_AllCasts,
     "hkpSampledHeightField_AllCasts",
-    (void (__fastcall *)())hkpSampledHeightField_registerAllRayCastFunctions);
+    hkpSampledHeightField_registerAllRayCastFunctions);
 }
 
 // File Line: 28
 // RVA: 0xD07210
-void __fastcall hkpSampledHeightFieldShape::castRayDefault(hkpSampledHeightFieldShape *this, hkpShapeRayCastInput *input, hkpCdBody *cdBody, hkpRayHitCollector *collector)
+void __fastcall hkpSampledHeightFieldShape::castRayDefault(
+        hkpSampledHeightFieldShape *this,
+        hkpShapeRayCastInput *input,
+        hkpCdBody *cdBody,
+        hkpRayHitCollector *collector)
 {
   hkOptionalComponent_hkpSampledHeightField_AllCasts.m_isUsed.m_bool = 1;
-  JUMPOUT(this->m_coarseness, 0, hkpSampledHeightFieldShape::castRayCoarseTree);
-  hkpSampledHeightFieldShape::castRayDda(this, input, cdBody, collector);
+  if ( this->m_coarseness > 0 )
+    hkpSampledHeightFieldShape::castRayCoarseTree(this, input, cdBody, collector);
+  else
+    hkpSampledHeightFieldShape::castRayDda(this, input, cdBody, collector);
 }
 
 // File Line: 41
 // RVA: 0xD07230
-void __fastcall hkpSampledHeightFieldShape::castSphereDefault(hkpSampledHeightFieldShape *this, hkpHeightFieldShape::hkpSphereCastInput *input, hkpCdBody *cdBody, hkpRayHitCollector *collector)
+void __fastcall hkpSampledHeightFieldShape::castSphereDefault(
+        hkpSampledHeightFieldShape *this,
+        hkpHeightFieldShape::hkpSphereCastInput *input,
+        hkpCdBody *cdBody,
+        hkpRayHitCollector *collector)
 {
   hkOptionalComponent_hkpSampledHeightField_AllCasts.m_isUsed.m_bool = 1;
-  JUMPOUT(this->m_coarseness, 0, hkpSampledHeightFieldShape::castSphereCoarseTree);
-  hkpSampledHeightFieldShape::castSphereDda(this, input, cdBody, collector);
+  if ( this->m_coarseness > 0 )
+    hkpSampledHeightFieldShape::castSphereCoarseTree(this, input, cdBody, collector);
+  else
+    hkpSampledHeightFieldShape::castSphereDda(this, input, cdBody, collector);
 }
 

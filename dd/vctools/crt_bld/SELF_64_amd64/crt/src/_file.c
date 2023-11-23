@@ -7,11 +7,11 @@ _iobuf *__fastcall _iob_func()
 
 // File Line: 109
 // RVA: 0x12B39D8
-signed __int64 __fastcall _initstdio()
+__int64 __fastcall _initstdio()
 {
-  signed int v0; // eax
+  int v0; // eax
   __int64 v1; // rbx
-  signed __int64 v2; // rdi
+  __int64 v2; // rdi
   void **v3; // rax
   _iobuf *v5; // rcx
 
@@ -41,9 +41,7 @@ signed __int64 __fastcall _initstdio()
   v5 = iob;
   while ( 1 )
   {
-    v3[v1] = v5;
-    ++v5;
-    ++v1;
+    v3[v1++] = v5++;
     if ( !--v2 )
       break;
     v3 = _piob;
@@ -66,37 +64,32 @@ void _endstdio()
 // RVA: 0x12B3AA8
 void __fastcall lock_file(_iobuf *pf)
 {
-  _iobuf *v1; // rbx
   unsigned __int64 v2; // rdx
 
-  v1 = pf;
   if ( pf < iob || pf > &iob[19] )
   {
     EnterCriticalSection((LPCRITICAL_SECTION)&pf[1]);
   }
   else
   {
-    v2 = (signed __int64)((unsigned __int128)(((char *)pf - (char *)iob) * (signed __int128)3074457345618258603i64) >> 64) >> 3;
+    v2 = (__int64)((unsigned __int128)(((char *)pf - (char *)iob) * (__int128)0x2AAAAAAAAAAAAAABi64) >> 64) >> 3;
     lock(v2 + (v2 >> 63) + 16);
-    v1->_flag |= 0x8000u;
+    pf->_flag |= 0x8000u;
   }
 }
 
 // File Line: 246
 // RVA: 0x12B3B10
-void __fastcall lock_file2(int i, void *s)
+void __fastcall lock_file2(int i, char *s)
 {
-  _DWORD *v2; // rbx
-
-  v2 = s;
   if ( i >= 20 )
   {
-    EnterCriticalSection((LPCRITICAL_SECTION)((char *)s + 48));
+    EnterCriticalSection((LPCRITICAL_SECTION)(s + 48));
   }
   else
   {
     lock(i + 16);
-    v2[6] |= 0x8000u;
+    *((_DWORD *)s + 6) |= 0x8000u;
   }
 }
 
@@ -112,23 +105,23 @@ void __fastcall unlock_file(_iobuf *pf)
   }
   else
   {
-    pf->_flag &= 0xFFFF7FFF;
-    v1 = (signed __int64)((unsigned __int128)(((char *)pf - (char *)iob) * (signed __int128)3074457345618258603i64) >> 64) >> 3;
+    pf->_flag &= ~0x8000u;
+    v1 = (__int64)((unsigned __int128)(((char *)pf - (char *)iob) * (__int128)0x2AAAAAAAAAAAAAABi64) >> 64) >> 3;
     unlock(v1 + (v1 >> 63) + 16);
   }
 }
 
 // File Line: 331
 // RVA: 0x12B3B94
-void __fastcall unlock_file2(int i, void *s)
+void __fastcall unlock_file2(int i, char *s)
 {
   if ( i >= 20 )
   {
-    LeaveCriticalSection((LPCRITICAL_SECTION)((char *)s + 48));
+    LeaveCriticalSection((LPCRITICAL_SECTION)(s + 48));
   }
   else
   {
-    *((_DWORD *)s + 6) &= 0xFFFF7FFF;
+    *((_DWORD *)s + 6) &= ~0x8000u;
     unlock(i + 16);
   }
 }

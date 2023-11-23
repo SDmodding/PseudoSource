@@ -28,17 +28,17 @@ hkClass *__fastcall hkpCharacterControllerCinfo::staticClass()
 
 // File Line: 58
 // RVA: 0xE0A560
-void __fastcall finishLoadedObjecthkpCharacterControllerCinfo(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpCharacterControllerCinfo(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpCharacterControllerCinfo::`vftable;
+    *p = &hkpCharacterControllerCinfo::`vftable;
 }
 
 // File Line: 64
 // RVA: 0xE0A580
-void __fastcall cleanupLoadedObjecthkpCharacterControllerCinfo(void *p)
+void __fastcall cleanupLoadedObjecthkpCharacterControllerCinfo(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 68
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkpCharacterControllerCinfoTypeInfo__()
   hkpCharacterControllerCinfoTypeInfo.m_typeName = "hkpCharacterControllerCinfo";
   hkpCharacterControllerCinfoTypeInfo.m_vtable = result;
   hkpCharacterControllerCinfoTypeInfo.m_scopedName = "!hkpCharacterControllerCinfo";
-  hkpCharacterControllerCinfoTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpCharacterControllerCinfo;
-  hkpCharacterControllerCinfoTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpCharacterControllerCinfo;
+  hkpCharacterControllerCinfoTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpCharacterControllerCinfo;
+  hkpCharacterControllerCinfoTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpCharacterControllerCinfo;
   return result;
 }
 

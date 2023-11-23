@@ -4,7 +4,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_ARRAYSCROLLER_PAGE_CHANGED__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("ARRAYSCROLLER_PAGE_CHANGED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("ARRAYSCROLLER_PAGE_CHANGED", -1);
   UI_HASH_ARRAYSCROLLER_PAGE_CHANGED = result;
   return result;
 }
@@ -15,7 +15,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_ARRAYSCROLLER_ACTIVATED_ITEMS_CHA
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("ARRAYSCROLLER_ACTIVATED_ITEMS_CHANGED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("ARRAYSCROLLER_ACTIVATED_ITEMS_CHANGED", -1);
   UI_HASH_ARRAYSCROLLER_ACTIVATED_ITEMS_CHANGED = result;
   return result;
 }
@@ -26,7 +26,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_ARRAYSCROLLER_HIGHLIGHT_CHANGED__
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("ARRAYSCROLLER_HIGHLIGHT_CHANGED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("ARRAYSCROLLER_HIGHLIGHT_CHANGED", -1);
   UI_HASH_ARRAYSCROLLER_HIGHLIGHT_CHANGED = result;
   return result;
 }
@@ -37,7 +37,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_ARRAYSCROLLER_INFOBOX_SHOW_SECOND
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("ARRAYSCROLLER_INFOBOX_SHOW_SECONDARY", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("ARRAYSCROLLER_INFOBOX_SHOW_SECONDARY", -1);
   UI_HASH_ARRAYSCROLLER_INFOBOX_SHOW_SECONDARY = result;
   return result;
 }
@@ -48,7 +48,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_ARRAYSCROLLER_AUTOSCROLL_COMPLETE
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("ARRAYSCROLLER_AUTOSCROLL_COMPLETE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("ARRAYSCROLLER_AUTOSCROLL_COMPLETE", -1);
   UI_HASH_ARRAYSCROLLER_AUTOSCROLL_COMPLETE = result;
   return result;
 }
@@ -59,7 +59,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_ARRAYSCROLLER_PURCHASE_DLC__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("ARRAYSCROLLER_PURCHASE_DLC", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("ARRAYSCROLLER_PURCHASE_DLC", -1);
   UI_HASH_ARRAYSCROLLER_PURCHASE_DLC = result;
   return result;
 }
@@ -70,7 +70,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_ARRAYSCROLLER_PREVIEW_DLC__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("ARRAYSCROLLER_PREVIEW_DLC", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("ARRAYSCROLLER_PREVIEW_DLC", -1);
   UI_HASH_ARRAYSCROLLER_PREVIEW_DLC = result;
   return result;
 }
@@ -81,7 +81,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_ARRAYSCROLLER_REDOWNLOAD_DLC__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("ARRAYSCROLLER_REDOWNLOAD_DLC", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("ARRAYSCROLLER_REDOWNLOAD_DLC", -1);
   UI_HASH_ARRAYSCROLLER_REDOWNLOAD_DLC = result;
   return result;
 }
@@ -92,7 +92,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_REFRESH_WIDGET_ARRAY__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("REFRESH_WIDGET_ARRAY", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("REFRESH_WIDGET_ARRAY", -1);
   UI_HASH_REFRESH_WIDGET_ARRAY = result;
   return result;
 }
@@ -103,7 +103,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_UPDATE_INFO_BOX__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("UPDATE_INFO_BOX", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("UPDATE_INFO_BOX", -1);
   UI_HASH_UPDATE_INFO_BOX = result;
   return result;
 }
@@ -114,7 +114,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_ACTIVATE_ITEM__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("ACTIVATE_ITEM", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("ACTIVATE_ITEM", -1);
   UI_HASH_ACTIVATE_ITEM = result;
   return result;
 }
@@ -125,7 +125,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_REFRESH_ACTIVE_ITEMS__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("REFRESH_ACTIVE_ITEMS", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("REFRESH_ACTIVE_ITEMS", -1);
   UI_HASH_REFRESH_ACTIVE_ITEMS = result;
   return result;
 }

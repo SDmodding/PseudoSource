@@ -7,6 +7,7 @@ void __fastcall Mtxinit(_RTL_CRITICAL_SECTION *_Mtx)
 
 // File Line: 32
 // RVA: 0x12DF178
+// attributes: thunk
 void __stdcall Mtxdst(LPCRITICAL_SECTION lpCriticalSection)
 {
   DeleteCriticalSection(lpCriticalSection);
@@ -14,6 +15,7 @@ void __stdcall Mtxdst(LPCRITICAL_SECTION lpCriticalSection)
 
 // File Line: 38
 // RVA: 0x12DF190
+// attributes: thunk
 void __stdcall Mtxlock(LPCRITICAL_SECTION lpCriticalSection)
 {
   EnterCriticalSection(lpCriticalSection);
@@ -21,6 +23,7 @@ void __stdcall Mtxlock(LPCRITICAL_SECTION lpCriticalSection)
 
 // File Line: 47
 // RVA: 0x12DF198
+// attributes: thunk
 void __stdcall Mtxunlock(LPCRITICAL_SECTION lpCriticalSection)
 {
   LeaveCriticalSection(lpCriticalSection);

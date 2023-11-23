@@ -5,14 +5,14 @@ __int64 UFG::OnlineManagerPlat::_dynamic_initializer_for__nOnlineId__()
   UFG::OnlineManagerPlat::nOnlineId.m_SteamId.m_steamid.m_unAll64Bits &= 0xFF0FFFFF00000000ui64;
   HIBYTE(UFG::OnlineManagerPlat::nOnlineId.m_SteamId.m_steamid.m_unAll64Bits) = 0;
   *((_DWORD *)&UFG::OnlineManagerPlat::nOnlineId.m_SteamId.m_steamid.m_comp + 1) &= 0xFFF00000;
-  return atexit(UFG::OnlineManagerPlat::_dynamic_atexit_destructor_for__nOnlineId__);
+  return atexit((int (__fastcall *)())UFG::OnlineManagerPlat::_dynamic_atexit_destructor_for__nOnlineId__);
 }
 
 // File Line: 14
 // RVA: 0x15B5710
 __int64 UFG::OnlineManagerPlat::_dynamic_initializer_for__nOnlineHash__()
 {
-  return atexit(UFG::OnlineManagerPlat::_dynamic_atexit_destructor_for__nOnlineHash__);
+  return atexit((int (__fastcall *)())UFG::OnlineManagerPlat::_dynamic_atexit_destructor_for__nOnlineHash__);
 }
 
 // File Line: 15
@@ -20,7 +20,7 @@ __int64 UFG::OnlineManagerPlat::_dynamic_initializer_for__nOnlineHash__()
 __int64 UFG::OnlineManagerPlat::_dynamic_initializer_for__nOnlineName__()
 {
   UFG::qString::qString(&UFG::OnlineManagerPlat::nOnlineName);
-  return atexit(UFG::OnlineManagerPlat::_dynamic_atexit_destructor_for__nOnlineName__);
+  return atexit((int (__fastcall *)())UFG::OnlineManagerPlat::_dynamic_atexit_destructor_for__nOnlineName__);
 }
 
 // File Line: 23
@@ -43,7 +43,8 @@ void __fastcall UFG::OnlineManager::Shutdown(UFG::OnlineManager *this)
 // RVA: 0xA40DB0
 void __fastcall UFG::OnlineManager::Update(UFG::OnlineManager *this, float realTimeDelta)
 {
-  JUMPOUT(this->m_bInitialized, 0, UFG::OnlineManager::UpdateObservers);
+  if ( this->m_bInitialized )
+    UFG::OnlineManager::UpdateObservers(this);
 }
 
 // File Line: 56
@@ -57,7 +58,6 @@ _BOOL8 __fastcall UFG::OnlineManager::IsNetworkAvailable(UFG::OnlineManager *thi
 // RVA: 0xA40C40
 void __fastcall UFG::OnlineManager::SignInNetwork(UFG::OnlineManager *this)
 {
-  UFG::OnlineManager *v1; // rsi
   __int64 v2; // rdx
   __int64 v3; // rcx
   __int64 v4; // rdi
@@ -74,11 +74,10 @@ void __fastcall UFG::OnlineManager::SignInNetwork(UFG::OnlineManager *this)
   __int64 v15; // rcx
   __int64 v16; // rax
   const char *v17; // rax
-  bool *i; // rbx
-  UFG::qString result; // [rsp+28h] [rbp-30h]
-  UFG::qSymbol v20; // [rsp+68h] [rbp+10h]
+  UFG::OnlineManager *i; // rbx
+  UFG::qString result; // [rsp+28h] [rbp-30h] BYREF
+  UFG::qSymbol v20; // [rsp+68h] [rbp+10h] BYREF
 
-  v1 = this;
   if ( !UFG::OnlineManagerPlat::nSignedIn && (unsigned __int8)SteamAPI_IsSteamRunning(this) )
   {
     v4 = SteamUserStats(v3, v2);
@@ -95,12 +94,12 @@ void __fastcall UFG::OnlineManager::SignInNetwork(UFG::OnlineManager *this)
           UFG::OnlineManagerPlat::nSignedIn = 1;
           v11 = SteamUser(v9, v8);
           v12 = (_QWORD *)(*(__int64 (__fastcall **)(__int64, UFG::qSymbol *))(*(_QWORD *)v11 + 16i64))(v11, &v20);
-          result.mPrev = (UFG::qNode<UFG::qString,UFG::qString> *)&result;
-          result.mNext = (UFG::qNode<UFG::qString,UFG::qString> *)&result;
+          result.mPrev = &result;
+          result.mNext = &result;
           *(_QWORD *)&result.mMagic = *v12;
           UFG::OnlineManagerPlat::nOnlineId.m_SteamId.m_steamid.m_unAll64Bits = *(_QWORD *)&result.mMagic;
-          result.mPrev = (UFG::qNode<UFG::qString,UFG::qString> *)&result;
-          result.mNext = (UFG::qNode<UFG::qString,UFG::qString> *)&result;
+          result.mPrev = &result;
+          result.mNext = &result;
           v13 = UFG::OnlineId::ToString(&UFG::OnlineManagerPlat::nOnlineId, &result);
           UFG::OnlineManagerPlat::nOnlineHash.mUID = UFG::qSymbol::create_from_string(&v20, v13->mData)->mUID;
           UFG::qString::~qString(&result);
@@ -109,11 +108,11 @@ void __fastcall UFG::OnlineManager::SignInNetwork(UFG::OnlineManager *this)
                                 v16,
                                 UFG::OnlineManagerPlat::nOnlineId.m_SteamId.m_steamid);
           UFG::qString::Set(&UFG::OnlineManagerPlat::nOnlineName, v17);
-          for ( i = (bool *)&v1->m_lObservers.mNode.mNext[-1].mNext;
-                i != &v1->m_bInitialized;
-                i = (bool *)(*((_QWORD *)i + 2) - 8i64) )
+          for ( i = (UFG::OnlineManager *)&this->m_lObservers.mNode.mNext[-1].mNext;
+                i != (UFG::OnlineManager *)&this->m_bInitialized;
+                i = (UFG::OnlineManager *)&i->m_lObservers.mNode.mPrev[-1].mNext )
           {
-            (*(void (__fastcall **)(bool *))(*(_QWORD *)i + 8i64))(i);
+            i->vfptr->~OnlineManager(i);
           }
         }
       }
@@ -125,8 +124,6 @@ void __fastcall UFG::OnlineManager::SignInNetwork(UFG::OnlineManager *this)
 // RVA: 0xA40A70
 void __fastcall UFG::OnlineManager::RetreivePlayerDisplayImage(UFG::OnlineManager *this, UFG::OnlineId *onlineId)
 {
-  UFG::OnlineId *v2; // rsi
-  UFG::OnlineManager *v3; // r14
   __int64 v4; // rdx
   __int64 v5; // rcx
   __int64 v6; // rax
@@ -137,20 +134,20 @@ void __fastcall UFG::OnlineManager::RetreivePlayerDisplayImage(UFG::OnlineManage
   UFG::allocator::free_link *v11; // rdi
   __int64 v12; // rcx
   __int64 v13; // rax
-  UFG::qResourceData *v14; // rbx
-  UFG::qNode<UFG::OnlineId,UFG::OnlineId> *v15; // rcx
-  UFG::qNode<UFG::OnlineId,UFG::OnlineId> *v16; // rax
-  Illusion::TextureLockInfo info; // [rsp+48h] [rbp-80h]
-  char dest; // [rsp+60h] [rbp-68h]
-  int height; // [rsp+E0h] [rbp+18h]
-  int width; // [rsp+E8h] [rbp+20h]
+  UFG::qResourceData *Texture; // rbx
+  UFG::qNode<UFG::OnlineId,UFG::OnlineId> *mPrev; // rcx
+  UFG::qNode<UFG::OnlineId,UFG::OnlineId> *mNext; // rax
+  Illusion::TextureLockInfo info; // [rsp+48h] [rbp-80h] BYREF
+  char dest[104]; // [rsp+60h] [rbp-68h] BYREF
+  int height; // [rsp+E0h] [rbp+18h] BYREF
+  int width; // [rsp+E8h] [rbp+20h] BYREF
 
-  v2 = onlineId;
-  v3 = this;
   if ( (unsigned __int8)SteamAPI_IsSteamRunning(this) )
   {
     v6 = SteamFriends(v5, v4);
-    v8 = (*(__int64 (__fastcall **)(__int64, CSteamID::SteamID_t))(*(_QWORD *)v6 + 224i64))(v6, v2->m_SteamId.m_steamid);
+    v8 = (*(__int64 (__fastcall **)(__int64, CSteamID::SteamID_t))(*(_QWORD *)v6 + 224i64))(
+           v6,
+           onlineId->m_SteamId.m_steamid);
     if ( v8 )
     {
       v9 = SteamUtils(v7);
@@ -167,36 +164,36 @@ void __fastcall UFG::OnlineManager::RetreivePlayerDisplayImage(UFG::OnlineManage
             v8,
             v11,
             (unsigned int)(4 * height * width));
-          v14 = Illusion::CreateTexture("userIcon", width, height, 0, 0x440500u, 1, 0, 0);
-          Illusion::ITexturePlat::Lock((Illusion::ITexturePlat *)v14, LOCK_MODIFY, &info, 0, 0);
+          Texture = Illusion::CreateTexture("userIcon", width, height, FORMAT_A8R8G8B8, 0x440500u, 1, 0, 0);
+          Illusion::ITexturePlat::Lock((Illusion::ITexturePlat *)Texture, LOCK_MODIFY, &info, 0, 0);
           UFG::qMemCopy(info.mData, v11, v10);
-          Illusion::ITexturePlat::Unlock((Illusion::ITexturePlat *)v14);
-          UFG::qSPrintf(&dest, 64, "img://%u", v14->mNode.mUID);
-          UFG::qString::Set(&v3->mRetreivedDisplayImage, &dest);
+          Illusion::ITexturePlat::Unlock((Illusion::ITexturePlat *)Texture);
+          UFG::qSPrintf(dest, 64, "img://%u", Texture->mNode.mUID);
+          UFG::qString::Set(&this->mRetreivedDisplayImage, dest);
           operator delete[](v11);
         }
       }
     }
     UFG::UIScreenManagerBase::queueMessage(
-      (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
+      UFG::UIScreenManager::s_instance,
       UI_HASH_DISPLAY_IMAGE_LOADED_23,
       0xFFFFFFFF);
   }
-  v15 = v2->mPrev;
-  v16 = v2->mNext;
-  v15->mNext = v16;
-  v16->mPrev = v15;
-  v2->mNext = (UFG::qNode<UFG::OnlineId,UFG::OnlineId> *)&v2->mPrev;
-  v2->mPrev = (UFG::qNode<UFG::OnlineId,UFG::OnlineId> *)&v2->mPrev;
+  mPrev = onlineId->mPrev;
+  mNext = onlineId->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  onlineId->mNext = onlineId;
+  onlineId->mPrev = onlineId;
 }
 
 // File Line: 123
 // RVA: 0xA409B0
 UFG::OnlineId *__fastcall UFG::OnlineManager::GetOnlineId(UFG::OnlineManager *this, UFG::OnlineId *result)
 {
-  result->mPrev = (UFG::qNode<UFG::OnlineId,UFG::OnlineId> *)&result->mPrev;
-  result->mNext = (UFG::qNode<UFG::OnlineId,UFG::OnlineId> *)&result->mPrev;
-  result->m_SteamId.m_steamid.m_comp = 0;
+  result->mPrev = result;
+  result->mNext = result;
+  *(_DWORD *)&result->m_SteamId.m_steamid.m_comp = 0;
   *((_DWORD *)&result->m_SteamId.m_steamid.m_comp + 1) &= 0xFF0FFFFF;
   HIBYTE(result->m_SteamId.m_steamid.m_unAll64Bits) = 0;
   *((_DWORD *)&result->m_SteamId.m_steamid.m_comp + 1) &= 0xFFF00000;
@@ -215,10 +212,7 @@ __int64 __fastcall UFG::OnlineManager::GetOnlineIdStringHash32(UFG::OnlineManage
 // RVA: 0xA40A10
 UFG::qString *__fastcall UFG::OnlineManager::GetOnlineName(UFG::OnlineManager *this, UFG::qString *result)
 {
-  UFG::qString *v2; // rbx
-
-  v2 = result;
   UFG::qString::qString(result, &UFG::OnlineManagerPlat::nOnlineName);
-  return v2;
+  return result;
 }
 

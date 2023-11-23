@@ -1,10 +1,11 @@
 // File Line: 75
 // RVA: 0x12AE2D0
-unsigned __int64 __usercall alloca_probe@<rax>(unsigned __int64 result@<rax>)
+unsigned __int64 __fastcall alloca_probe()
 {
+  unsigned __int64 result; // rax
   char *v1; // r10
   char *v2; // r11
-  char v3; // [rsp+18h] [rbp+8h]
+  char v3; // [rsp+18h] [rbp+8h] BYREF
 
   v1 = &v3 - result;
   if ( (unsigned __int64)&v3 < result )

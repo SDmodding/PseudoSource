@@ -1,6 +1,9 @@
 // File Line: 22
 // RVA: 0xC656E0
-void __fastcall hkOptionalComponent::hkOptionalComponent(hkOptionalComponent *this, const char *name, void (__fastcall *onLink)())
+void __fastcall hkOptionalComponent::hkOptionalComponent(
+        hkOptionalComponent *this,
+        const char *name,
+        void (__fastcall *onLink)())
 {
   hkOptionalComponent *v3; // rax
 
@@ -16,7 +19,11 @@ void __fastcall hkOptionalComponent::hkOptionalComponent(hkOptionalComponent *th
 
 // File Line: 34
 // RVA: 0xC656A0
-void __fastcall hkOptionalComponent::hkOptionalComponent(hkOptionalComponent *this, const char *name, void **funcPtr, void *func)
+void __fastcall hkOptionalComponent::hkOptionalComponent(
+        hkOptionalComponent *this,
+        const char *name,
+        void **funcPtr,
+        void *func)
 {
   hkOptionalComponent *v4; // rax
 
@@ -41,31 +48,27 @@ hkOptionalComponent *__fastcall hkOptionalComponent::getFirstComponent()
 // RVA: 0xC65810
 void __fastcall hkOptionalComponent::request(hkOptionalComponent *this)
 {
-  void (*v1)(void); // rax
-  hkOptionalComponent *v2; // rbx
-  void **v3; // rcx
+  void (*m_onLink)(void); // rax
+  void **m_funcPtr; // rcx
 
   this->m_isRequested.m_bool = 1;
-  v1 = (void (*)(void))this->m_onLink;
-  v2 = this;
-  if ( v1 )
-    v1();
-  v3 = v2->m_funcPtr;
-  if ( v3 )
-    *v3 = v2->m_func;
+  m_onLink = this->m_onLink;
+  if ( m_onLink )
+    m_onLink();
+  m_funcPtr = this->m_funcPtr;
+  if ( m_funcPtr )
+    *m_funcPtr = this->m_func;
 }
 
 // File Line: 62
 // RVA: 0xC65730
 void __fastcall hkOptionalComponent::writeReport(hkOstream *os)
 {
-  hkOstream *v1; // rdi
   int v2; // ebp
   const char **v3; // r14
   char v4; // si
   hkOptionalComponent *i; // rbx
 
-  v1 = os;
   v2 = 0;
   v3 = header;
   do
@@ -73,21 +76,21 @@ void __fastcall hkOptionalComponent::writeReport(hkOstream *os)
     v4 = 0;
     for ( i = hkOptionalComponent::getFirstComponent(); i; i = i->m_next )
     {
-      if ( ((i->m_isRequested.m_bool != 0) | 2 * (i->m_isUsed.m_bool != 0)) == v2 )
+      if ( ((i->m_isRequested.m_bool != 0) | (2 * (i->m_isUsed.m_bool != 0))) == v2 )
       {
         if ( !v4 )
         {
           v4 = 1;
-          hkOstream::printf(v1, "\n\n========================================================\n");
-          hkOstream::printf(v1, "%s\n", *v3);
-          hkOstream::printf(v1, "--------------------------------------------------------\n");
+          hkOstream::printf(os, "\n\n========================================================\n");
+          hkOstream::printf(os, "%s\n", *v3);
+          hkOstream::printf(os, "--------------------------------------------------------\n");
         }
-        hkOstream::printf(v1, "%s\n", i->m_name);
+        hkOstream::printf(os, "%s\n", i->m_name);
       }
     }
     ++v3;
     ++v2;
   }
-  while ( (signed __int64)v3 < (signed __int64)&hkThreadPool `RTTI Type Descriptor );
+  while ( (__int64)v3 < (__int64)&hkThreadPool `RTTI Type Descriptor );
 }
 

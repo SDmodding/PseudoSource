@@ -4,7 +4,7 @@ __int64 dynamic_initializer_for__uEffectPropertyUID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("EffectProperty", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("EffectProperty", -1);
   uEffectPropertyUID = result;
   return result;
 }
@@ -21,19 +21,21 @@ void __fastcall SetBittenTask::Begin(SetBittenTask *this, ActionContext *__forma
 // RVA: 0x2FA4A0
 void __fastcall UpdateStatAwardWithIntegerTask::Begin(UpdateStatAwardWithIntegerTask *this, ActionContext *__formal)
 {
-  ITrack *v2; // rbx
-  UpdateStatAwardWithIntegerTask *v3; // rdi
+  ITrack *m_Track; // rbx
   UFG::OSuiteLeaderboardManager *v4; // rax
-  UFG::OSuiteLeaderboardData *v5; // rax
+  UFG::OSuiteLeaderboardData *LeaderboardDataUsingLeaderboardName; // rax
 
-  v2 = this->m_Track;
-  v3 = this;
+  m_Track = this->m_Track;
   v4 = UFG::OSuiteLeaderboardManager::Instance();
-  v5 = UFG::OSuiteLeaderboardManager::GetLeaderboardDataUsingLeaderboardName(v4, (UFG::qSymbol *)&v2[1]);
-  if ( v5 )
+  LeaderboardDataUsingLeaderboardName = UFG::OSuiteLeaderboardManager::GetLeaderboardDataUsingLeaderboardName(
+                                          v4,
+                                          (UFG::qSymbol *)&m_Track[1]);
+  if ( LeaderboardDataUsingLeaderboardName )
   {
-    if ( v5->mCategory == LeaderboardCategory_StatAward )
-      UFG::DataSynchronizer::ApplyDeltaToGlobalSnapshot(v5, HIDWORD(v3->m_Track[1].vfptr));
+    if ( LeaderboardDataUsingLeaderboardName->mCategory == LeaderboardCategory_StatAward )
+      UFG::DataSynchronizer::ApplyDeltaToGlobalSnapshot(
+        LeaderboardDataUsingLeaderboardName,
+        HIDWORD(this->m_Track[1].vfptr));
   }
 }
 
@@ -41,19 +43,21 @@ void __fastcall UpdateStatAwardWithIntegerTask::Begin(UpdateStatAwardWithInteger
 // RVA: 0x2FA450
 void __fastcall UpdateStatAwardWithFloatTask::Begin(UpdateStatAwardWithFloatTask *this, ActionContext *__formal)
 {
-  ITrack *v2; // rbx
-  UpdateStatAwardWithFloatTask *v3; // rdi
+  ITrack *m_Track; // rbx
   UFG::OSuiteLeaderboardManager *v4; // rax
-  UFG::OSuiteLeaderboardData *v5; // rax
+  UFG::OSuiteLeaderboardData *LeaderboardDataUsingLeaderboardName; // rax
 
-  v2 = this->m_Track;
-  v3 = this;
+  m_Track = this->m_Track;
   v4 = UFG::OSuiteLeaderboardManager::Instance();
-  v5 = UFG::OSuiteLeaderboardManager::GetLeaderboardDataUsingLeaderboardName(v4, (UFG::qSymbol *)&v2[1]);
-  if ( v5 )
+  LeaderboardDataUsingLeaderboardName = UFG::OSuiteLeaderboardManager::GetLeaderboardDataUsingLeaderboardName(
+                                          v4,
+                                          (UFG::qSymbol *)&m_Track[1]);
+  if ( LeaderboardDataUsingLeaderboardName )
   {
-    if ( v5->mCategory == LeaderboardCategory_StatAward )
-      UFG::DataSynchronizer::ApplyDeltaToGlobalSnapshot(v5, *((float *)&v3->m_Track[1].vfptr + 1));
+    if ( LeaderboardDataUsingLeaderboardName->mCategory == LeaderboardCategory_StatAward )
+      UFG::DataSynchronizer::ApplyDeltaToGlobalSnapshot(
+        LeaderboardDataUsingLeaderboardName,
+        *((float *)&this->m_Track[1].vfptr + 1));
   }
 }
 
@@ -61,17 +65,19 @@ void __fastcall UpdateStatAwardWithFloatTask::Begin(UpdateStatAwardWithFloatTask
 // RVA: 0x2EE000
 void __fastcall EndStatGameTask::Begin(EndStatGameTask *this, ActionContext *__formal)
 {
-  ITrack *v2; // rbx
+  ITrack *m_Track; // rbx
   UFG::OSuiteLeaderboardManager *v3; // rax
-  UFG::OSuiteLeaderboardData *v4; // rax
+  UFG::OSuiteLeaderboardData *LeaderboardDataUsingLeaderboardName; // rax
 
-  v2 = this->m_Track;
+  m_Track = this->m_Track;
   v3 = UFG::OSuiteLeaderboardManager::Instance();
-  v4 = UFG::OSuiteLeaderboardManager::GetLeaderboardDataUsingLeaderboardName(v3, (UFG::qSymbol *)&v2[1]);
-  if ( v4 )
+  LeaderboardDataUsingLeaderboardName = UFG::OSuiteLeaderboardManager::GetLeaderboardDataUsingLeaderboardName(
+                                          v3,
+                                          (UFG::qSymbol *)&m_Track[1]);
+  if ( LeaderboardDataUsingLeaderboardName )
   {
-    if ( v4->mCategory == 1 )
-      UFG::StatGameManager::EndStatGame(v4);
+    if ( LeaderboardDataUsingLeaderboardName->mCategory == LeaderboardCategory_StatGame )
+      UFG::StatGameManager::EndStatGame(LeaderboardDataUsingLeaderboardName);
   }
 }
 
@@ -79,19 +85,22 @@ void __fastcall EndStatGameTask::Begin(EndStatGameTask *this, ActionContext *__f
 // RVA: 0x2FA550
 void __fastcall UpdateStatGameWithIntegerTask::Begin(UpdateStatGameWithIntegerTask *this, ActionContext *__formal)
 {
-  ITrack *v2; // rbx
-  UpdateStatGameWithIntegerTask *v3; // rdi
+  ITrack *m_Track; // rbx
   UFG::OSuiteLeaderboardManager *v4; // rax
-  UFG::OSuiteLeaderboardData *v5; // rax
+  UFG::OSuiteLeaderboardData *LeaderboardDataUsingLeaderboardName; // rax
 
-  v2 = this->m_Track;
-  v3 = this;
+  m_Track = this->m_Track;
   v4 = UFG::OSuiteLeaderboardManager::Instance();
-  v5 = UFG::OSuiteLeaderboardManager::GetLeaderboardDataUsingLeaderboardName(v4, (UFG::qSymbol *)&v2[1]);
-  if ( v5 )
+  LeaderboardDataUsingLeaderboardName = UFG::OSuiteLeaderboardManager::GetLeaderboardDataUsingLeaderboardName(
+                                          v4,
+                                          (UFG::qSymbol *)&m_Track[1]);
+  if ( LeaderboardDataUsingLeaderboardName )
   {
-    if ( v5->mCategory == 1 )
-      UFG::StatGameManager::UpdateScore(v5, HIDWORD(v3->m_Track[1].vfptr), LOBYTE(v3->m_Track[1].mResourceOwner) != 0);
+    if ( LeaderboardDataUsingLeaderboardName->mCategory == LeaderboardCategory_StatGame )
+      UFG::StatGameManager::UpdateScore(
+        LeaderboardDataUsingLeaderboardName,
+        HIDWORD(this->m_Track[1].vfptr),
+        LOBYTE(this->m_Track[1].mResourceOwner) != 0);
   }
 }
 
@@ -99,57 +108,61 @@ void __fastcall UpdateStatGameWithIntegerTask::Begin(UpdateStatGameWithIntegerTa
 // RVA: 0x2FA4F0
 void __fastcall UpdateStatGameWithFloatTask::Begin(UpdateStatGameWithFloatTask *this, ActionContext *__formal)
 {
-  ITrack *v2; // rbx
-  UpdateStatGameWithFloatTask *v3; // rdi
+  ITrack *m_Track; // rbx
   UFG::OSuiteLeaderboardManager *v4; // rax
-  UFG::OSuiteLeaderboardData *v5; // rax
+  UFG::OSuiteLeaderboardData *LeaderboardDataUsingLeaderboardName; // rax
 
-  v2 = this->m_Track;
-  v3 = this;
+  m_Track = this->m_Track;
   v4 = UFG::OSuiteLeaderboardManager::Instance();
-  v5 = UFG::OSuiteLeaderboardManager::GetLeaderboardDataUsingLeaderboardName(v4, (UFG::qSymbol *)&v2[1]);
-  if ( v5 )
+  LeaderboardDataUsingLeaderboardName = UFG::OSuiteLeaderboardManager::GetLeaderboardDataUsingLeaderboardName(
+                                          v4,
+                                          (UFG::qSymbol *)&m_Track[1]);
+  if ( LeaderboardDataUsingLeaderboardName )
   {
-    if ( v5->mCategory == 1 )
+    if ( LeaderboardDataUsingLeaderboardName->mCategory == LeaderboardCategory_StatGame )
       UFG::StatGameManager::UpdateScore(
-        v5,
-        *((float *)&v3->m_Track[1].vfptr + 1),
-        LOBYTE(v3->m_Track[1].mResourceOwner) != 0);
+        LeaderboardDataUsingLeaderboardName,
+        *((float *)&this->m_Track[1].vfptr + 1),
+        LOBYTE(this->m_Track[1].mResourceOwner) != 0);
   }
 }
 
 // File Line: 308
 // RVA: 0x2FA5A0
-void __fastcall UpdateStatGameWithUpdateTimeTask::Begin(UpdateStatGameWithUpdateTimeTask *this, ActionContext *__formal)
+void __fastcall UpdateStatGameWithUpdateTimeTask::Begin(
+        UpdateStatGameWithUpdateTimeTask *this,
+        ActionContext *__formal)
 {
-  ITrack *v2; // rbx
-  UpdateStatGameWithUpdateTimeTask *v3; // rdi
+  ITrack *m_Track; // rbx
   UFG::OSuiteLeaderboardManager *v4; // rax
-  UFG::OSuiteLeaderboardData *v5; // rax
+  UFG::OSuiteLeaderboardData *LeaderboardDataUsingLeaderboardName; // rax
 
-  v2 = this->m_Track;
-  v3 = this;
+  m_Track = this->m_Track;
   v4 = UFG::OSuiteLeaderboardManager::Instance();
-  v5 = UFG::OSuiteLeaderboardManager::GetLeaderboardDataUsingLeaderboardName(v4, (UFG::qSymbol *)&v2[1]);
-  v3->m_pLBD = v5;
-  if ( v5 )
+  LeaderboardDataUsingLeaderboardName = UFG::OSuiteLeaderboardManager::GetLeaderboardDataUsingLeaderboardName(
+                                          v4,
+                                          (UFG::qSymbol *)&m_Track[1]);
+  this->m_pLBD = LeaderboardDataUsingLeaderboardName;
+  if ( LeaderboardDataUsingLeaderboardName )
   {
-    if ( v5->mCategory != 1 )
-      v3->m_pLBD = 0i64;
+    if ( LeaderboardDataUsingLeaderboardName->mCategory != LeaderboardCategory_StatGame )
+      this->m_pLBD = 0i64;
   }
 }
 
 // File Line: 317
 // RVA: 0x30B6E0
-char __fastcall UpdateStatGameWithUpdateTimeTask::Update(UpdateStatGameWithUpdateTimeTask *this, float deltaTime)
+UpdateStatGameWithUpdateTimeTask *__fastcall UpdateStatGameWithUpdateTimeTask::Update(
+        UpdateStatGameWithUpdateTimeTask *this,
+        float deltaTime)
 {
-  UFG::OSuiteLeaderboardData *v2; // rcx
+  UFG::OSuiteLeaderboardData *m_pLBD; // rcx
 
-  v2 = this->m_pLBD;
-  if ( !v2 )
+  m_pLBD = this->m_pLBD;
+  if ( !m_pLBD )
     return 0;
-  UFG::StatGameManager::UpdateScore(v2, deltaTime, 1);
-  return 1;
+  UFG::StatGameManager::UpdateScore(m_pLBD, deltaTime, 1);
+  return (UpdateStatGameWithUpdateTimeTask *)1;
 }
 
 // File Line: 352
@@ -158,9 +171,9 @@ __int64 dynamic_initializer_for__symBip01Neck__()
 {
   unsigned int v0; // eax
 
-  v0 = UFG::qStringHashUpper32("Bip01 Neck", 0xFFFFFFFF);
+  v0 = UFG::qStringHashUpper32("Bip01 Neck", -1);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&symBip01Neck, v0);
-  return atexit(dynamic_atexit_destructor_for__symBip01Neck__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__symBip01Neck__);
 }
 
 // File Line: 354
@@ -169,18 +182,15 @@ __int64 dynamic_initializer_for__AudioAttackMaterialProperty__()
 {
   AudioAttackMaterialProperty.mUID = UFG::qWiseSymbolUIDFromString("AudioAttackMaterialProperty", 0x811C9DC5);
   _((AMD_HD3D *)AudioAttackMaterialProperty.mUID);
-  return atexit(dynamic_atexit_destructor_for__AudioAttackMaterialProperty__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__AudioAttackMaterialProperty__);
 }
 
 // File Line: 368
 // RVA: 0x2DF320
 void __fastcall DoorStateTask::DoorStateTask(DoorStateTask *this)
 {
-  UFG::qNode<ITask,ITask> *v1; // rax
-
-  v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
-  v1->mPrev = v1;
-  v1->mNext = v1;
+  this->mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->mNext = &this->UFG::qNode<ITask,ITask>;
   this->vfptr = (ITaskVtbl *)&ITask::`vftable;
   this->vfptr = (ITaskVtbl *)&Task<DoorStateTrack>::`vftable;
   this->vfptr = (ITaskVtbl *)&DoorStateTask::`vftable;
@@ -190,62 +200,48 @@ void __fastcall DoorStateTask::DoorStateTask(DoorStateTask *this)
 // RVA: 0x2EDE80
 void __fastcall DoorStateTask::Begin(DoorStateTask *this, ActionContext *context)
 {
-  ITrack *v2; // rax
-  UFG::SimObjectGame *v3; // rcx
+  ITrack *m_Track; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
   bool v4; // bl
-  unsigned __int16 v5; // dx
-  UFG::DoorComponent *v6; // rax
+  __int16 m_Flags; // dx
+  UFG::DoorComponent *ComponentOfTypeHK; // rax
 
-  v2 = this->m_Track;
-  v3 = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
-  v4 = LOBYTE(v2[1].vfptr) != 0;
-  if ( v3 )
+  m_Track = this->m_Track;
+  m_pPointer = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
+  v4 = LOBYTE(m_Track[1].vfptr) != 0;
+  if ( m_pPointer )
   {
-    v5 = v3->m_Flags;
-    if ( (v5 >> 14) & 1 )
-    {
-      v6 = (UFG::DoorComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::DoorComponent::_TypeUID);
-    }
-    else if ( (v5 & 0x8000u) == 0 )
-    {
-      if ( (v5 >> 13) & 1 )
-      {
-        v6 = (UFG::DoorComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::DoorComponent::_TypeUID);
-      }
-      else if ( (v5 >> 12) & 1 )
-      {
-        v6 = (UFG::DoorComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::DoorComponent::_TypeUID);
-      }
-      else
-      {
-        v6 = (UFG::DoorComponent *)UFG::SimObject::GetComponentOfType(
-                                     (UFG::SimObject *)&v3->vfptr,
-                                     UFG::DoorComponent::_TypeUID);
-      }
-    }
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+      ComponentOfTypeHK = (UFG::DoorComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                  m_pPointer,
+                                                  UFG::DoorComponent::_TypeUID);
     else
-    {
-      v6 = (UFG::DoorComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::DoorComponent::_TypeUID);
-    }
-    if ( v6 )
-      UFG::DoorComponent::SetOpen(v6, v4);
+      ComponentOfTypeHK = (UFG::DoorComponent *)UFG::SimObject::GetComponentOfType(
+                                                  m_pPointer,
+                                                  UFG::DoorComponent::_TypeUID);
+    if ( ComponentOfTypeHK )
+      UFG::DoorComponent::SetOpen(ComponentOfTypeHK, v4);
   }
 }
 
 // File Line: 409
 // RVA: 0x30D0F0
-__int64 __fastcall findAttackMaterialUIDForAttacker(ActionContext *pContext, UFG::SimObject *pAttacker, const unsigned int uSourceAttackMaterialUID)
+__int64 __fastcall findAttackMaterialUIDForAttacker(
+        ActionContext *pContext,
+        UFG::SimObject *pAttacker,
+        const unsigned int uSourceAttackMaterialUID)
 {
-  UFG::SimObjectGame *v3; // rax
-  unsigned __int16 v4; // dx
-  UFG::SimComponent *v5; // rax
+  UFG::SimObjectGame *Target; // rax
+  __int16 m_Flags; // dx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   UFG::SimComponent *v6; // rbx
   UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject> *v7; // rcx
-  const char *v8; // rax
+  const char *TypeName; // rax
   __int64 v9; // rdx
-  char *v10; // rax
+  char *Name; // rax
   unsigned int v11; // ebx
-  UFG::qReflectHandleBase v13; // [rsp+28h] [rbp-30h]
+  UFG::qReflectHandleBase v13; // [rsp+28h] [rbp-30h] BYREF
 
   if ( uSourceAttackMaterialUID == gAttackMaterialNone.m_EnumSymbol.mUID )
     return 0i64;
@@ -253,36 +249,25 @@ __int64 __fastcall findAttackMaterialUIDForAttacker(ActionContext *pContext, UFG
     return uSourceAttackMaterialUID;
   if ( !pAttacker )
     return 0i64;
-  v3 = (UFG::SimObjectGame *)UFG::getTarget(pAttacker, eTARGET_TYPE_EQUIPPED);
-  if ( !v3 )
+  Target = (UFG::SimObjectGame *)UFG::getTarget(pAttacker, eTARGET_TYPE_EQUIPPED);
+  if ( !Target )
     return 0i64;
-  v4 = v3->m_Flags;
-  if ( (v4 >> 14) & 1 )
-  {
-    v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::RigidBodyComponent::_TypeUID);
-  }
-  else if ( (v4 & 0x8000u) == 0 )
-  {
-    if ( (v4 >> 13) & 1 )
-      v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::RigidBodyComponent::_TypeUID);
-    else
-      v5 = (v4 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::RigidBodyComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::RigidBodyComponent::_TypeUID);
-  }
+  m_Flags = Target->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+    ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(Target, UFG::RigidBodyComponent::_TypeUID);
   else
-  {
-    v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::RigidBodyComponent::_TypeUID);
-  }
-  v6 = v5;
-  if ( !v5 )
+    ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(Target, UFG::RigidBodyComponent::_TypeUID);
+  v6 = ComponentOfTypeHK;
+  if ( !ComponentOfTypeHK )
     return 0i64;
   UFG::qReflectHandleBase::qReflectHandleBase(&v13);
-  v8 = UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject>::GetTypeName(v7);
-  v13.mTypeUID = UFG::qStringHash64(v8, 0xFFFFFFFFFFFFFFFFui64);
+  TypeName = UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject>::GetTypeName(v7);
+  v13.mTypeUID = UFG::qStringHash64(TypeName, 0xFFFFFFFFFFFFFFFFui64);
   v9 = *(_QWORD *)&v6[2].m_Flags;
   if ( v9 )
     UFG::qReflectHandleBase::operator=(&v13, (UFG::qReflectHandleBase *)(v9 + 224));
-  v10 = UFG::qReflectObject::GetName(v13.mData);
-  v11 = UFG::qStringHashUpper32(v10, 0xFFFFFFFF);
+  Name = UFG::qReflectObject::GetName(v13.mData);
+  v11 = UFG::qStringHashUpper32(Name, -1);
   UFG::qReflectHandleBase::~qReflectHandleBase(&v13);
   return v11;
 }
@@ -291,102 +276,82 @@ __int64 __fastcall findAttackMaterialUIDForAttacker(ActionContext *pContext, UFG
 // RVA: 0x305950
 char __fastcall MotionIntentionCOMTask::Update(MotionIntentionCOMTask *this, float timeDelta)
 {
-  MotionIntentionCOMTask *v2; // rbx
-  Render::DebugDrawManager *v3; // rax
-  UFG::SimObjectCVBase *v4; // rbx
+  Render::DebugDrawManager *Context; // rax
+  UFG::SimObjectCVBase *m_pPointer; // rbx
   Render::DebugDrawContext *v5; // rsi
   UFG::CharacterAnimationComponent *v6; // rdi
-  UFG::SimComponent *v7; // rax
-  unsigned __int16 v8; // cx
-  UFG::CharacterAnimationComponent *v9; // rax
-  unsigned __int16 v10; // cx
-  float *v11; // rax
+  UFG::SimComponent *m_pComponent; // rax
+  __int16 m_Flags; // cx
+  UFG::CharacterAnimationComponent *ComponentOfTypeHK; // rax
+  __int16 v10; // cx
+  float *mPrev; // rax
   float v12; // xmm1_4
   float v13; // xmm2_4
-  unsigned __int16 v14; // cx
+  __int16 v14; // cx
   UFG::AICharacterControllerBaseComponent *v15; // rax
   UFG::AICharacterControllerBaseComponent *v16; // rbx
-  Creature *v17; // rcx
+  Creature *mCreature; // rcx
   float v18; // xmm6_4
-  __m128 v19; // xmm7
+  __m128 y_low; // xmm7
   __m128 v20; // xmm1
   float v21; // xmm2_4
-  UFG::qVector3 centre; // [rsp+40h] [rbp-39h]
-  UFG::qVector3 p1; // [rsp+50h] [rbp-29h]
-  UFG::qVector3 p0; // [rsp+5Ch] [rbp-1Dh]
-  UFG::qMatrix44 transform; // [rsp+70h] [rbp-9h]
+  UFG::qVector3 centre; // [rsp+40h] [rbp-39h] BYREF
+  UFG::qVector3 p1; // [rsp+50h] [rbp-29h] BYREF
+  UFG::qVector3 p0; // [rsp+5Ch] [rbp-1Dh] BYREF
+  UFG::qMatrix44 transform; // [rsp+70h] [rbp-9h] BYREF
 
-  v2 = this;
-  v3 = Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 1u);
-  v4 = (UFG::SimObjectCVBase *)v2->mContext->mSimObject.m_pPointer;
-  v5 = (Render::DebugDrawContext *)v3;
-  if ( v4 )
+  Context = Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 1u);
+  m_pPointer = (UFG::SimObjectCVBase *)this->mContext->mSimObject.m_pPointer;
+  v5 = (Render::DebugDrawContext *)Context;
+  if ( m_pPointer )
   {
-    v8 = v4->m_Flags;
-    if ( (v8 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
     {
-      v9 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v4);
+      ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(m_pPointer);
     }
-    else if ( (v8 & 0x8000u) == 0 )
+    else if ( (m_Flags & 0x2000) != 0 )
     {
-      if ( (v8 >> 13) & 1 )
-      {
-        v9 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v4);
-      }
-      else if ( (v8 >> 12) & 1 )
-      {
-        v9 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                   (UFG::SimObjectGame *)&v4->vfptr,
-                                                   UFG::CharacterAnimationComponent::_TypeUID);
-      }
-      else
-      {
-        v9 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                   (UFG::SimObject *)&v4->vfptr,
-                                                   UFG::CharacterAnimationComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)m_pPointer);
+    }
+    else if ( (m_Flags & 0x1000) != 0 )
+    {
+      ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                m_pPointer,
+                                                                UFG::CharacterAnimationComponent::_TypeUID);
     }
     else
     {
-      v9 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v4);
+      ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                m_pPointer,
+                                                                UFG::CharacterAnimationComponent::_TypeUID);
     }
-    v10 = v4->m_Flags;
-    v6 = v9;
-    if ( (v10 >> 14) & 1 )
+    v10 = m_pPointer->m_Flags;
+    v6 = ComponentOfTypeHK;
+    if ( (v10 & 0x4000) != 0 )
     {
-      v7 = v4->m_Components.p[42].m_pComponent;
+      m_pComponent = m_pPointer->m_Components.p[42].m_pComponent;
     }
-    else if ( (v10 & 0x8000u) == 0 )
+    else if ( v10 < 0 || (v10 & 0x2000) != 0 || (v10 & 0x1000) != 0 )
     {
-      if ( (v10 >> 13) & 1 )
-      {
-        v7 = UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)&v4->vfptr, UFG::RagdollComponent::_TypeUID);
-      }
-      else if ( (v10 >> 12) & 1 )
-      {
-        v7 = UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)&v4->vfptr, UFG::RagdollComponent::_TypeUID);
-      }
-      else
-      {
-        v7 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v4->vfptr, UFG::RagdollComponent::_TypeUID);
-      }
+      m_pComponent = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::RagdollComponent::_TypeUID);
     }
     else
     {
-      v7 = UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)&v4->vfptr, UFG::RagdollComponent::_TypeUID);
+      m_pComponent = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::RagdollComponent::_TypeUID);
     }
   }
   else
   {
     v6 = 0i64;
-    v7 = 0i64;
+    m_pComponent = 0i64;
   }
-  if ( !sMoveMotionIntention || !v6 || !v7 )
+  if ( !sMoveMotionIntention || !v6 || !m_pComponent )
     return 1;
-  v11 = (float *)v7[1].m_BoundComponentHandles.mNode.mPrev;
-  v12 = v11[17];
-  v13 = v11[18];
-  centre.x = v11[16];
+  mPrev = (float *)m_pComponent[1].m_BoundComponentHandles.mNode.mPrev;
+  v12 = mPrev[17];
+  v13 = mPrev[18];
+  centre.x = mPrev[16];
   centre.y = v12;
   centre.z = v13;
   if ( sDebugDrawCOM )
@@ -410,57 +375,50 @@ char __fastcall MotionIntentionCOMTask::Update(MotionIntentionCOMTask *this, flo
       0i64,
       0);
   }
-  if ( !v4 )
+  if ( !m_pPointer )
     return 1;
-  v14 = v4->m_Flags;
-  if ( (v14 >> 14) & 1 )
-  {
-    v15 = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerBaseComponent>(v4);
-  }
-  else if ( (v14 & 0x8000u) == 0 )
-  {
-    if ( (v14 >> 13) & 1 )
-      v15 = (UFG::AICharacterControllerBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                         (UFG::SimObjectGame *)&v4->vfptr,
-                                                         UFG::AICharacterControllerBaseComponent::_TypeUID);
-    else
-      v15 = (UFG::AICharacterControllerBaseComponent *)((v14 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                            (UFG::SimObjectGame *)&v4->vfptr,
-                                                                            UFG::AICharacterControllerBaseComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v4->vfptr, UFG::AICharacterControllerBaseComponent::_TypeUID));
-  }
+  v14 = m_pPointer->m_Flags;
+  if ( (v14 & 0x4000) != 0 || v14 < 0 )
+    v15 = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerBaseComponent>(m_pPointer);
   else
-  {
-    v15 = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerBaseComponent>(v4);
-  }
+    v15 = (UFG::AICharacterControllerBaseComponent *)((v14 & 0x2000) != 0 || (v14 & 0x1000) != 0
+                                                    ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                        m_pPointer,
+                                                        UFG::AICharacterControllerBaseComponent::_TypeUID)
+                                                    : UFG::SimObject::GetComponentOfType(
+                                                        m_pPointer,
+                                                        UFG::AICharacterControllerBaseComponent::_TypeUID));
   v16 = v15;
   if ( !v15 )
     return 1;
-  v17 = v6->mCreature;
-  if ( !v17 )
+  mCreature = v6->mCreature;
+  if ( !mCreature )
     return 1;
-  Creature::GetTransform(v17, 0, &transform);
-  v19 = (__m128)LODWORD(centre.y);
+  Creature::GetTransform(mCreature, 0, &transform);
+  y_low = (__m128)LODWORD(centre.y);
   v18 = centre.x - transform.v3.x;
-  v19.m128_f32[0] = centre.y - transform.v3.y;
+  y_low.m128_f32[0] = centre.y - transform.v3.y;
   if ( sDebugDrawCOM )
   {
     p1.x = v18 + transform.v3.x;
-    p1.y = v19.m128_f32[0] + transform.v3.y;
+    p1.y = y_low.m128_f32[0] + transform.v3.y;
     p1.z = transform.v3.z;
-    p0 = *(UFG::qVector3 *)&transform.v3.x;
+    p0.x = transform.v3.x;
+    p0.y = transform.v3.y;
+    p0.z = transform.v3.z;
     Render::DebugDrawContext::DrawArrow(v5, &p0, &p1, &UFG::qColour::ForestGreen, &UFG::qMatrix44::msIdentity, 0i64);
   }
-  v20 = v19;
-  v20.m128_f32[0] = (float)(v19.m128_f32[0] * v19.m128_f32[0]) + (float)(v18 * v18);
-  if ( COERCE_FLOAT(_mm_sqrt_ps(v20)) > sIntentionLength )
+  v20 = y_low;
+  v20.m128_f32[0] = (float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(v18 * v18);
+  if ( _mm_sqrt_ps(v20).m128_f32[0] > sIntentionLength )
   {
     if ( v20.m128_f32[0] == 0.0 )
       v21 = 0.0;
     else
-      v21 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v20));
+      v21 = 1.0 / _mm_sqrt_ps(v20).m128_f32[0];
     v16->m_Intention.mMotionIntentionDirection.z = v21 * 0.0;
     v16->m_Intention.mMotionIntentionDirection.x = v18 * v21;
-    v16->m_Intention.mMotionIntentionDirection.y = v19.m128_f32[0] * v21;
+    v16->m_Intention.mMotionIntentionDirection.y = y_low.m128_f32[0] * v21;
     v16->m_Intention.mMotionIntentionSpeed = 1.0;
     Intention::Set(&v16->m_Intention, gActionRequest_Walk.m_EnumValue, 0.0);
     v16->m_IntentionUpdated = 1;
@@ -479,23 +437,22 @@ void __fastcall UFG::OSuiteDBLogger::Init(MinimumDistanceTask *this)
 // RVA: 0x3055A0
 char __fastcall MinimumDistanceTask::Update(MinimumDistanceTask *this, float timeDelta)
 {
-  MinimumDistanceTask *v2; // rsi
-  ActionContext *v3; // rcx
-  UFG::SimObjectGame *v5; // rcx
+  ActionContext *mContext; // rcx
+  UFG::SimObjectGame *m_pPointer; // rcx
   __int64 v6; // rbx
-  UFG::TransformNodeComponent *v7; // rdi
-  __int64 v8; // rbp
-  unsigned __int16 v9; // dx
-  UFG::SimComponent *v10; // rax
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rdi
+  __int64 vfptr_low; // rbp
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rax
   UFG::SimObjectGame *v11; // rcx
   UFG::SimComponent *v12; // rcx
-  unsigned __int16 v13; // dx
+  __int16 v13; // dx
   UFG::SimComponent *v14; // rax
   __int64 v15; // rax
   __int64 v16; // rcx
-  float *v17; // rax
+  float *m_Track; // rax
   float v18; // xmm8_4
-  __m128 v19; // xmm2
+  __m128 y_low; // xmm2
   __m128 v20; // xmm9
   float v21; // xmm10_4
   float v22; // xmm11_4
@@ -511,56 +468,49 @@ char __fastcall MinimumDistanceTask::Update(MinimumDistanceTask *this, float tim
   float v32; // xmm9_4
   float distanceToAdjust; // xmm11_4
   float v34; // xmm10_4
-  UFG::qVector3 normalizeDistance; // [rsp+30h] [rbp-98h]
+  UFG::qVector3 normalizeDistance; // [rsp+30h] [rbp-98h] BYREF
 
-  v2 = this;
-  v3 = this->mContext;
-  if ( !v3 )
+  mContext = this->mContext;
+  if ( !mContext )
     return 0;
-  v5 = (UFG::SimObjectGame *)v3->mSimObject.m_pPointer;
+  m_pPointer = (UFG::SimObjectGame *)mContext->mSimObject.m_pPointer;
   v6 = 0i64;
-  v7 = 0i64;
-  if ( v5 )
-    v7 = v5->m_pTransformNodeComponent;
-  v8 = LODWORD(v2->m_Track[1].vfptr);
-  if ( v5 )
+  m_pTransformNodeComponent = 0i64;
+  if ( m_pPointer )
+    m_pTransformNodeComponent = m_pPointer->m_pTransformNodeComponent;
+  vfptr_low = LODWORD(this->m_Track[1].vfptr);
+  if ( m_pPointer )
   {
-    v9 = v5->m_Flags;
-    if ( (v9 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v10 = v5->m_Components.p[20].m_pComponent;
+      m_pComponent = m_pPointer->m_Components.p[20].m_pComponent;
     }
-    else if ( (v9 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v9 >> 13) & 1 )
-        v10 = UFG::SimObjectGame::GetComponentOfTypeHK(v5, UFG::TargetingSystemBaseComponent::_TypeUID);
-      else
-        v10 = (v9 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v5, UFG::TargetingSystemBaseComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v5->vfptr, UFG::TargetingSystemBaseComponent::_TypeUID);
+      m_pComponent = (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+                   ? UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::TargetingSystemBaseComponent::_TypeUID)
+                   : UFG::SimObject::GetComponentOfType(m_pPointer, UFG::TargetingSystemBaseComponent::_TypeUID);
     }
     else
     {
-      v10 = v5->m_Components.p[20].m_pComponent;
+      m_pComponent = m_pPointer->m_Components.p[20].m_pComponent;
     }
-    if ( v10 )
+    if ( m_pComponent )
     {
-      v11 = (UFG::SimObjectGame *)v2->mContext->mSimObject.m_pPointer;
+      v11 = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
       if ( v11 )
       {
         v13 = v11->m_Flags;
-        if ( (v13 >> 14) & 1 )
+        if ( (v13 & 0x4000) != 0 )
         {
           v12 = v11->m_Components.p[20].m_pComponent;
         }
-        else if ( (v13 & 0x8000u) == 0 )
+        else if ( v13 >= 0 )
         {
-          if ( (v13 >> 13) & 1 )
-            v14 = UFG::SimObjectGame::GetComponentOfTypeHK(v11, UFG::TargetingSystemBaseComponent::_TypeUID);
-          else
-            v14 = (v13 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                      v11,
-                                      UFG::TargetingSystemBaseComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(
-                                                                                       (UFG::SimObject *)&v11->vfptr,
-                                                                                       UFG::TargetingSystemBaseComponent::_TypeUID);
+          v14 = (v13 & 0x2000) != 0 || (v13 & 0x1000) != 0
+              ? UFG::SimObjectGame::GetComponentOfTypeHK(v11, UFG::TargetingSystemBaseComponent::_TypeUID)
+              : UFG::SimObject::GetComponentOfType(v11, UFG::TargetingSystemBaseComponent::_TypeUID);
           v12 = v14;
         }
         else
@@ -572,44 +522,48 @@ char __fastcall MinimumDistanceTask::Update(MinimumDistanceTask *this, float tim
       {
         v12 = 0i64;
       }
-      v15 = ((__int64 (*)(void))v12->vfptr[15].__vecDelDtor)();
+      v15 = ((__int64 (__fastcall *)(UFG::SimComponent *))v12->vfptr[15].__vecDelDtor)(v12);
       if ( v15 )
       {
-        v16 = *(_QWORD *)(56i64 * *(unsigned __int8 *)(*(_QWORD *)(v15 + 96) + v8 + 8) + *(_QWORD *)(v15 + 88) + 40);
+        v16 = *(_QWORD *)(56i64 * *(unsigned __int8 *)(*(_QWORD *)(v15 + 96) + vfptr_low + 8)
+                        + *(_QWORD *)(v15 + 88)
+                        + 40);
         if ( v16 )
           v6 = *(_QWORD *)(v16 + 88);
       }
     }
   }
-  if ( !v7 || !v6 )
+  if ( !m_pTransformNodeComponent || !v6 )
     return 0;
-  UFG::TransformNodeComponent::UpdateWorldTransform(v7);
+  UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
   UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v6);
-  v17 = (float *)v2->m_Track;
+  m_Track = (float *)this->m_Track;
   v18 = *(float *)(v6 + 176);
-  v19 = (__m128)LODWORD(v7->mWorldTransform.v3.y);
+  y_low = (__m128)LODWORD(m_pTransformNodeComponent->mWorldTransform.v3.y);
   v20 = (__m128)*(unsigned int *)(v6 + 180);
   v21 = *(float *)(v6 + 184);
-  v22 = v17[15];
-  v19.m128_f32[0] = (float)((float)((float)(v19.m128_f32[0] - v20.m128_f32[0])
-                                  * (float)(v19.m128_f32[0] - v20.m128_f32[0]))
-                          + (float)((float)(v7->mWorldTransform.v3.x - v18) * (float)(v7->mWorldTransform.v3.x - v18)))
-                  + (float)((float)(v7->mWorldTransform.v3.z - v21) * (float)(v7->mWorldTransform.v3.z - v21));
-  LODWORD(v23) = (unsigned __int128)_mm_sqrt_ps(v19);
+  v22 = m_Track[15];
+  y_low.m128_f32[0] = (float)((float)((float)(y_low.m128_f32[0] - v20.m128_f32[0])
+                                    * (float)(y_low.m128_f32[0] - v20.m128_f32[0]))
+                            + (float)((float)(m_pTransformNodeComponent->mWorldTransform.v3.x - v18)
+                                    * (float)(m_pTransformNodeComponent->mWorldTransform.v3.x - v18)))
+                    + (float)((float)(m_pTransformNodeComponent->mWorldTransform.v3.z - v21)
+                            * (float)(m_pTransformNodeComponent->mWorldTransform.v3.z - v21));
+  v23 = _mm_sqrt_ps(y_low).m128_f32[0];
   if ( v23 < v22 )
   {
-    v24 = v17[16];
+    v24 = m_Track[16];
     v25 = 0.0;
-    v26 = v17[17];
+    v26 = m_Track[17];
     if ( v24 == 0.0 || (v27 = timeDelta / v24, (float)(timeDelta / v24) > 1.0) )
       v27 = *(float *)&FLOAT_1_0;
-    v28 = v18 - v7->mWorldTransform.v3.x;
-    v20.m128_f32[0] = v20.m128_f32[0] - v7->mWorldTransform.v3.y;
-    v29 = v21 - v7->mWorldTransform.v3.z;
+    v28 = v18 - m_pTransformNodeComponent->mWorldTransform.v3.x;
+    v20.m128_f32[0] = v20.m128_f32[0] - m_pTransformNodeComponent->mWorldTransform.v3.y;
+    v29 = v21 - m_pTransformNodeComponent->mWorldTransform.v3.z;
     v30 = v20;
     v30.m128_f32[0] = (float)((float)(v20.m128_f32[0] * v20.m128_f32[0]) + (float)(v28 * v28)) + (float)(v29 * v29);
     if ( v30.m128_f32[0] != 0.0 )
-      v25 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v30));
+      v25 = 1.0 / _mm_sqrt_ps(v30).m128_f32[0];
     v31 = v28 * v25;
     v32 = v20.m128_f32[0] * v25;
     distanceToAdjust = v22 - v23;
@@ -618,7 +572,7 @@ char __fastcall MinimumDistanceTask::Update(MinimumDistanceTask *this, float tim
     v34 = v29 * v25;
     normalizeDistance.z = v34;
     MinimumDistanceTask::AdjustDistance(
-      v2,
+      this,
       (UFG::TransformNodeComponent *)v6,
       &normalizeDistance,
       v27 * v26,
@@ -626,26 +580,34 @@ char __fastcall MinimumDistanceTask::Update(MinimumDistanceTask *this, float tim
     normalizeDistance.x = v31 * -1.0;
     normalizeDistance.y = v32 * -1.0;
     normalizeDistance.z = v34 * -1.0;
-    MinimumDistanceTask::AdjustDistance(v2, v7, &normalizeDistance, (float)(1.0 - v26) * v27, distanceToAdjust);
+    MinimumDistanceTask::AdjustDistance(
+      this,
+      m_pTransformNodeComponent,
+      &normalizeDistance,
+      (float)(1.0 - v26) * v27,
+      distanceToAdjust);
   }
   return 1;
 }
 
 // File Line: 629
 // RVA: 0x2E7AE0
-void __fastcall MinimumDistanceTask::AdjustDistance(MinimumDistanceTask *this, UFG::TransformNodeComponent *transformNodeComponent, UFG::qVector3 *normalizeDistance, float ratio, float distanceToAdjust)
+void __fastcall MinimumDistanceTask::AdjustDistance(
+        MinimumDistanceTask *this,
+        UFG::TransformNodeComponent *transformNodeComponent,
+        UFG::qVector3 *normalizeDistance,
+        float ratio,
+        float distanceToAdjust)
 {
-  UFG::SimObjectGame *v5; // rcx
-  UFG::qVector3 *v6; // rbx
-  UFG::TransformNodeComponent *v7; // rdi
-  unsigned __int16 v8; // r9
-  UFG::SimComponent *v9; // rax
-  float v10; // xmm1_4
-  float v11; // xmm0_4
-  float v12; // xmm1_4
+  UFG::SimObjectGame *m_pSimObject; // rcx
+  __int16 m_Flags; // r9
+  UFG::SimComponent *m_pComponent; // rax
+  float y; // xmm1_4
+  float z; // xmm0_4
+  float w; // xmm1_4
   float v13; // xmm0_4
   float v14; // xmm1_4
-  float v15; // xmm0_4
+  float x; // xmm0_4
   float v16; // xmm1_4
   float v17; // xmm0_4
   float v18; // xmm1_4
@@ -654,105 +616,87 @@ void __fastcall MinimumDistanceTask::AdjustDistance(MinimumDistanceTask *this, U
   float v21; // xmm6_4
   float v22; // xmm6_4
   UFG::SimObjectCVBase *v23; // rcx
-  unsigned __int16 v24; // dx
-  UFG::CharacterAnimationComponent *v25; // rax
-  Creature *v26; // rbx
-  UFG::qMatrix44 m; // [rsp+20h] [rbp-68h]
+  __int16 v24; // dx
+  UFG::CharacterAnimationComponent *ComponentOfTypeHK; // rax
+  Creature *mCreature; // rbx
+  UFG::qMatrix44 m; // [rsp+20h] [rbp-68h] BYREF
 
-  v5 = (UFG::SimObjectGame *)transformNodeComponent->m_pSimObject;
-  v6 = normalizeDistance;
-  v7 = transformNodeComponent;
-  if ( v5 )
+  m_pSimObject = (UFG::SimObjectGame *)transformNodeComponent->m_pSimObject;
+  if ( m_pSimObject )
   {
-    v8 = v5->m_Flags;
-    if ( (v8 >> 14) & 1 )
-    {
-      v9 = v5->m_Components.p[27].m_pComponent;
-    }
-    else if ( (v8 & 0x8000u) == 0 )
-    {
-      if ( (v8 >> 13) & 1 )
-        v9 = UFG::SimObjectGame::GetComponentOfTypeHK(v5, UFG::CharacterPhysicsComponent::_TypeUID);
-      else
-        v9 = (v8 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v5, UFG::CharacterPhysicsComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v5->vfptr, UFG::CharacterPhysicsComponent::_TypeUID);
-    }
+    m_Flags = m_pSimObject->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
+      m_pComponent = m_pSimObject->m_Components.p[27].m_pComponent;
     else
-    {
-      v9 = UFG::SimObjectGame::GetComponentOfTypeHK(v5, UFG::CharacterPhysicsComponent::_TypeUID);
-    }
-    if ( v9 )
+      m_pComponent = m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+                   ? UFG::SimObjectGame::GetComponentOfTypeHK(m_pSimObject, UFG::CharacterPhysicsComponent::_TypeUID)
+                   : UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::CharacterPhysicsComponent::_TypeUID);
+    if ( m_pComponent )
     {
       if ( ratio != 0.0 && distanceToAdjust != 0.0 )
       {
-        UFG::TransformNodeComponent::UpdateWorldTransform(v7);
-        v10 = v7->mWorldTransform.v0.y;
-        m.v0.x = v7->mWorldTransform.v0.x;
-        v11 = v7->mWorldTransform.v0.z;
-        m.v0.y = v10;
-        v12 = v7->mWorldTransform.v0.w;
-        m.v0.z = v11;
-        m.v1.x = v7->mWorldTransform.v1.x;
-        v13 = v7->mWorldTransform.v1.z;
-        m.v0.w = v12;
-        v14 = v7->mWorldTransform.v1.y;
+        UFG::TransformNodeComponent::UpdateWorldTransform(transformNodeComponent);
+        y = transformNodeComponent->mWorldTransform.v0.y;
+        m.v0.x = transformNodeComponent->mWorldTransform.v0.x;
+        z = transformNodeComponent->mWorldTransform.v0.z;
+        m.v0.y = y;
+        w = transformNodeComponent->mWorldTransform.v0.w;
+        m.v0.z = z;
+        m.v1.x = transformNodeComponent->mWorldTransform.v1.x;
+        v13 = transformNodeComponent->mWorldTransform.v1.z;
+        m.v0.w = w;
+        v14 = transformNodeComponent->mWorldTransform.v1.y;
         m.v1.z = v13;
-        v15 = v7->mWorldTransform.v2.x;
+        x = transformNodeComponent->mWorldTransform.v2.x;
         m.v1.y = v14;
-        v16 = v7->mWorldTransform.v1.w;
-        m.v2.x = v15;
-        v17 = v7->mWorldTransform.v2.z;
+        v16 = transformNodeComponent->mWorldTransform.v1.w;
+        m.v2.x = x;
+        v17 = transformNodeComponent->mWorldTransform.v2.z;
         m.v1.w = v16;
-        v18 = v7->mWorldTransform.v2.y;
+        v18 = transformNodeComponent->mWorldTransform.v2.y;
         m.v2.z = v17;
         m.v2.y = v18;
-        v19 = ratio * v6->y;
-        m.v2.w = v7->mWorldTransform.v2.w;
-        v20 = ratio * v6->x;
-        v21 = ratio * v6->z;
-        m.v3.y = (float)(v19 * distanceToAdjust) + v7->mWorldTransform.v3.y;
+        v19 = ratio * normalizeDistance->y;
+        m.v2.w = transformNodeComponent->mWorldTransform.v2.w;
+        v20 = ratio * normalizeDistance->x;
+        v21 = ratio * normalizeDistance->z;
+        m.v3.y = (float)(v19 * distanceToAdjust) + transformNodeComponent->mWorldTransform.v3.y;
         LODWORD(m.v3.w) = (_DWORD)FLOAT_1_0;
-        v22 = (float)(v21 * distanceToAdjust) + v7->mWorldTransform.v3.z;
-        m.v3.x = (float)(v20 * distanceToAdjust) + v7->mWorldTransform.v3.x;
+        v22 = (float)(v21 * distanceToAdjust) + transformNodeComponent->mWorldTransform.v3.z;
+        m.v3.x = (float)(v20 * distanceToAdjust) + transformNodeComponent->mWorldTransform.v3.x;
         m.v3.z = v22;
-        UFG::TransformNodeComponent::SetWorldTransform(v7, &m);
-        v23 = (UFG::SimObjectCVBase *)v7->m_pSimObject;
+        UFG::TransformNodeComponent::SetWorldTransform(transformNodeComponent, &m);
+        v23 = (UFG::SimObjectCVBase *)transformNodeComponent->m_pSimObject;
         if ( v23 )
         {
           v24 = v23->m_Flags;
-          if ( (v24 >> 14) & 1 )
+          if ( (v24 & 0x4000) != 0 || v24 < 0 )
           {
-            v25 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v23);
+            ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v23);
           }
-          else if ( (v24 & 0x8000u) == 0 )
+          else if ( (v24 & 0x2000) != 0 )
           {
-            if ( (v24 >> 13) & 1 )
-            {
-              v25 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v23);
-            }
-            else if ( (v24 >> 12) & 1 )
-            {
-              v25 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                          (UFG::SimObjectGame *)&v23->vfptr,
-                                                          UFG::CharacterAnimationComponent::_TypeUID);
-            }
-            else
-            {
-              v25 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                          (UFG::SimObject *)&v23->vfptr,
-                                                          UFG::CharacterAnimationComponent::_TypeUID);
-            }
+            ComponentOfTypeHK = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v23);
+          }
+          else if ( (v24 & 0x1000) != 0 )
+          {
+            ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                      v23,
+                                                                      UFG::CharacterAnimationComponent::_TypeUID);
           }
           else
           {
-            v25 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v23);
+            ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                      v23,
+                                                                      UFG::CharacterAnimationComponent::_TypeUID);
           }
-          if ( v25 )
+          if ( ComponentOfTypeHK )
           {
-            v26 = v25->mCreature;
-            if ( v26 )
+            mCreature = ComponentOfTypeHK->mCreature;
+            if ( mCreature )
             {
-              UFG::TransformNodeComponent::UpdateWorldTransform(v7);
-              Creature::SetTransform(v26, &v7->mWorldTransform);
+              UFG::TransformNodeComponent::UpdateWorldTransform(transformNodeComponent);
+              Creature::SetTransform(mCreature, &transformNodeComponent->mWorldTransform);
             }
           }
         }
@@ -765,158 +709,149 @@ void __fastcall MinimumDistanceTask::AdjustDistance(MinimumDistanceTask *this, U
 // RVA: 0x2DDB00
 void __fastcall AttackCollisionTask::AttackCollisionTask(AttackCollisionTask *this)
 {
-  AttackCollisionTask *v1; // rdx
-  UFG::qNode<ITask,ITask> *v2; // rax
-  PostAnimUpdateTask *v3; // rcx
-  UFG::qNode<PostAnimUpdateTask,PostAnimUpdateTaskList> *v4; // rax
-  UFG::SimObject **v5; // rax
-  signed __int64 v6; // rcx
+  UFG::SimObject **mHitDudes; // rax
+  __int64 v2; // rcx
 
-  v1 = this;
-  v2 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
-  v2->mPrev = v2;
-  v2->mNext = v2;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
-  this->vfptr = (ITaskVtbl *)&Task<AttackCollisionTrack>::`vftable;
-  v3 = (PostAnimUpdateTask *)&this->vfptr;
-  v4 = (UFG::qNode<PostAnimUpdateTask,PostAnimUpdateTaskList> *)&v3->mPrev;
-  v4->mPrev = v4;
-  v4->mNext = v4;
-  v3->vfptr = (PostAnimUpdateTaskVtbl *)&PostAnimUpdateTask::`vftable;
-  v1->vfptr = (ITaskVtbl *)&AttackCollisionTask::`vftable{for `Task<AttackCollisionTrack>};
-  v3->vfptr = (PostAnimUpdateTaskVtbl *)&AttackCollisionTask::`vftable{for `PostAnimUpdateTask};
-  v1->mAttackBoneIndex = -1;
-  *(_DWORD *)&v1->mHitPhysical = 0;
-  *(_WORD *)&v1->mBlockedLastFrame = 0;
-  v1->mHitCount = 0;
-  v5 = v1->mHitDudes;
-  v6 = 4i64;
+  this->Task<AttackCollisionTrack>::ITask::UFG::qNode<ITask,ITask>::mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->Task<AttackCollisionTrack>::ITask::UFG::qNode<ITask,ITask>::mNext = &this->UFG::qNode<ITask,ITask>;
+  this->Task<AttackCollisionTrack>::ITask::vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->Task<AttackCollisionTrack>::ITask::vfptr = (ITaskVtbl *)&Task<AttackCollisionTrack>::`vftable;
+  this->PostAnimUpdateTask::UFG::qNode<PostAnimUpdateTask,PostAnimUpdateTaskList>::mPrev = &this->UFG::qNode<PostAnimUpdateTask,PostAnimUpdateTaskList>;
+  this->PostAnimUpdateTask::UFG::qNode<PostAnimUpdateTask,PostAnimUpdateTaskList>::mNext = &this->UFG::qNode<PostAnimUpdateTask,PostAnimUpdateTaskList>;
+  this->PostAnimUpdateTask::vfptr = (PostAnimUpdateTaskVtbl *)&PostAnimUpdateTask::`vftable;
+  this->Task<AttackCollisionTrack>::ITask::vfptr = (ITaskVtbl *)&AttackCollisionTask::`vftable{for `Task<AttackCollisionTrack>};
+  this->PostAnimUpdateTask::vfptr = (PostAnimUpdateTaskVtbl *)&AttackCollisionTask::`vftable{for `PostAnimUpdateTask};
+  this->mAttackBoneIndex = -1;
+  *(_DWORD *)&this->mHitPhysical = 0;
+  *(_WORD *)&this->mBlockedLastFrame = 0;
+  this->mHitCount = 0;
+  mHitDudes = this->mHitDudes;
+  v2 = 4i64;
   do
   {
-    *v5 = 0i64;
-    v5[1] = 0i64;
-    v5[2] = 0i64;
-    v5 += 8;
-    *(v5 - 5) = 0i64;
-    *(v5 - 4) = 0i64;
-    *(v5 - 3) = 0i64;
-    *(v5 - 2) = 0i64;
-    *(v5 - 1) = 0i64;
-    --v6;
+    *mHitDudes = 0i64;
+    mHitDudes[1] = 0i64;
+    mHitDudes[2] = 0i64;
+    mHitDudes += 8;
+    *(mHitDudes - 5) = 0i64;
+    *(mHitDudes - 4) = 0i64;
+    *(mHitDudes - 3) = 0i64;
+    *(mHitDudes - 2) = 0i64;
+    *(mHitDudes - 1) = 0i64;
+    --v2;
   }
-  while ( v6 );
+  while ( v2 );
 }
 
 // File Line: 677
 // RVA: 0x2E8C40
 void __fastcall AttackCollisionTask::Begin(AttackCollisionTask *this, ActionContext *context)
 {
-  AttackCollisionTask *v2; // rbx
-  UFG::CharacterAnimationComponent *v3; // rax
-  Creature *v4; // rdi
-  int v5; // eax
-  float v6; // xmm2_4
-  float v7; // xmm1_4
-  float v8; // xmm0_4
-  UFG::SimObjectGame *v9; // rcx
-  unsigned __int16 v10; // dx
-  UFG::SimComponent *v11; // rax
+  UFG::CharacterAnimationComponent *CharacterAnimationComponent; // rax
+  Creature *mCreature; // rdi
+  int BoneID; // eax
+  float x; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm0_4
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rax
   UFG::GameStatTracker *v12; // rax
-  float v13; // xmm0_4
+  float Stat; // xmm0_4
   char v14; // al
   UFG::SimObjectGame *v15; // rcx
-  unsigned __int16 v16; // dx
+  __int16 v16; // dx
   UFG::ActionTreeComponent *v17; // rcx
-  UFG::ActionTreeComponent *v18; // rax
-  UFG::qMatrix44 transform; // [rsp+20h] [rbp-48h]
+  UFG::ActionTreeComponent *ComponentOfTypeHK; // rax
+  UFG::qMatrix44 transform; // [rsp+20h] [rbp-48h] BYREF
 
-  v2 = this;
   this->mContext = context;
-  v3 = AttackCollisionTask::GetCharacterAnimationComponent(this);
-  if ( v3 )
+  CharacterAnimationComponent = AttackCollisionTask::GetCharacterAnimationComponent(this);
+  if ( CharacterAnimationComponent )
   {
-    v4 = v3->mCreature;
-    if ( !v4 )
+    mCreature = CharacterAnimationComponent->mCreature;
+    if ( !mCreature )
       return;
-    if ( v4->mPose.mRigHandle.mData )
-      v5 = Skeleton::GetBoneID(v4->mPose.mRigHandle.mUFGSkeleton, v2->m_Track[2].mMasterRate.expression.mOffset);
+    if ( mCreature->mPose.mRigHandle.mData )
+      BoneID = Skeleton::GetBoneID(
+                 mCreature->mPose.mRigHandle.mUFGSkeleton,
+                 this->m_Track[2].mMasterRate.expression.mOffset);
     else
-      v5 = -1;
-    if ( v5 < 0 )
-      v5 = 0;
-    v2->mAttackBoneIndex = v5;
-    Creature::GetTransform(v4, v5, &transform);
-    v6 = transform.v3.x;
-    v7 = transform.v3.y;
-    v8 = transform.v3.z;
-    v2->mAttackPosition0.x = transform.v3.x;
-    v2->mAttackPosition0.y = v7;
-    v2->mAttackPosition0.z = v8;
-    v2->mAttackPosition1.x = v6;
-    v2->mAttackPosition1.y = v7;
-    v2->mAttackPosition1.z = v8;
+      BoneID = -1;
+    if ( BoneID < 0 )
+      BoneID = 0;
+    this->mAttackBoneIndex = BoneID;
+    Creature::GetTransform(mCreature, BoneID, &transform);
+    x = transform.v3.x;
+    y = transform.v3.y;
+    z = transform.v3.z;
+    this->mAttackPosition0.x = transform.v3.x;
+    this->mAttackPosition0.y = y;
+    this->mAttackPosition0.z = z;
+    this->mAttackPosition1.x = x;
+    this->mAttackPosition1.y = y;
+    this->mAttackPosition1.z = z;
   }
-  if ( LOBYTE(v2->m_Track[3].mMasterRate.text.mOffset) )
+  if ( LOBYTE(this->m_Track[3].mMasterRate.text.mOffset) )
   {
-    v9 = (UFG::SimObjectGame *)v2->mContext->mSimObject.m_pPointer;
-    if ( v9 )
+    m_pPointer = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      v10 = v9->m_Flags;
-      if ( (v10 >> 14) & 1 )
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
       {
-        v11 = v9->m_Components.p[15].m_pComponent;
+        m_pComponent = m_pPointer->m_Components.p[15].m_pComponent;
       }
-      else if ( (v10 & 0x8000u) == 0 )
+      else if ( m_Flags >= 0 )
       {
-        if ( (v10 >> 13) & 1 )
-          v11 = UFG::SimObjectGame::GetComponentOfTypeHK(v9, UFG::HitReactionComponent::_TypeUID);
-        else
-          v11 = (v10 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v9, UFG::HitReactionComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v9->vfptr, UFG::HitReactionComponent::_TypeUID);
+        m_pComponent = (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+                     ? UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::HitReactionComponent::_TypeUID)
+                     : UFG::SimObject::GetComponentOfType(m_pPointer, UFG::HitReactionComponent::_TypeUID);
       }
       else
       {
-        v11 = v9->m_Components.p[15].m_pComponent;
+        m_pComponent = m_pPointer->m_Components.p[15].m_pComponent;
       }
-      if ( v11 )
+      if ( m_pComponent )
       {
-        *(_QWORD *)&v11[1].m_TypeUID = 0i64;
-        if ( UFG::IsAnyLocalPlayer(v2->mContext->mSimObject.m_pPointer) )
+        *(_QWORD *)&m_pComponent[1].m_TypeUID = 0i64;
+        if ( UFG::IsAnyLocalPlayer(this->mContext->mSimObject.m_pPointer) )
         {
           v12 = UFG::GameStatTracker::Instance();
-          v13 = UFG::GameStatTracker::GetStat(v12, Berserk_Activated);
+          Stat = UFG::GameStatTracker::GetStat(v12, Berserk_Activated);
           v14 = UFG::HitReactionComponent::msBerserkAttackValidFlag;
-          if ( v13 > 0.0 )
+          if ( Stat > 0.0 )
             v14 = 1;
           UFG::HitReactionComponent::msBerserkAttackValidFlag = v14;
         }
       }
     }
   }
-  v15 = (UFG::SimObjectGame *)v2->mContext->mSimObject.m_pPointer;
+  v15 = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
   if ( v15 )
   {
     v16 = v15->m_Flags;
-    if ( (v16 >> 14) & 1 )
+    if ( (v16 & 0x4000) != 0 )
     {
       v17 = (UFG::ActionTreeComponent *)v15->m_Components.p[7].m_pComponent;
     }
-    else if ( (v16 & 0x8000u) == 0 )
+    else if ( v16 >= 0 )
     {
-      if ( (v16 >> 13) & 1 )
+      if ( (v16 & 0x2000) != 0 )
       {
         v17 = (UFG::ActionTreeComponent *)v15->m_Components.p[6].m_pComponent;
       }
       else
       {
-        if ( (v16 >> 12) & 1 )
-          v18 = (UFG::ActionTreeComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                              v15,
-                                              UFG::ActionTreeComponent::_TypeUID);
+        if ( (v16 & 0x1000) != 0 )
+          ComponentOfTypeHK = (UFG::ActionTreeComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                            v15,
+                                                            UFG::ActionTreeComponent::_TypeUID);
         else
-          v18 = (UFG::ActionTreeComponent *)UFG::SimObject::GetComponentOfType(
-                                              (UFG::SimObject *)&v15->vfptr,
-                                              UFG::ActionTreeComponent::_TypeUID);
-        v17 = v18;
+          ComponentOfTypeHK = (UFG::ActionTreeComponent *)UFG::SimObject::GetComponentOfType(
+                                                            v15,
+                                                            UFG::ActionTreeComponent::_TypeUID);
+        v17 = ComponentOfTypeHK;
       }
     }
     else
@@ -924,29 +859,33 @@ void __fastcall AttackCollisionTask::Begin(AttackCollisionTask *this, ActionCont
       v17 = (UFG::ActionTreeComponent *)v15->m_Components.p[7].m_pComponent;
     }
     if ( v17 )
-      v17->vfptr[16].__vecDelDtor((UFG::qSafePointerNode<UFG::SimComponent> *)v17, (unsigned int)&v2->vfptr);
+      v17->UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr[16].__vecDelDtor(
+        v17,
+        (unsigned int)&this->PostAnimUpdateTask);
   }
 }
 
 // File Line: 755
 // RVA: 0x30E1C0
-void __fastcall AttackCollisionTask::setupHitRecord(AttackCollisionTask *this, UFG::HitRecord *outHitRecord, UFG::TransformNodeComponent *pOpponentsTransformNodeC, UFG::eSimObjectTypeEnum eOpponentSimObjectType, const float fTime)
+void __fastcall AttackCollisionTask::setupHitRecord(
+        AttackCollisionTask *this,
+        UFG::HitRecord *outHitRecord,
+        UFG::TransformNodeComponent *pOpponentsTransformNodeC,
+        UFG::eSimObjectTypeEnum eOpponentSimObjectType,
+        float fTime)
 {
-  UFG::TransformNodeComponent *v5; // rbx
-  UFG::HitRecord *v6; // rbp
-  AttackCollisionTask *v7; // rsi
-  UFG::SimObject *v8; // rdi
-  UFG::TransformNodeComponent *v9; // rdi
-  float v10; // xmm2_4
-  float v11; // xmm5_4
+  UFG::SimObject *m_pPointer; // rdi
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rdi
+  float y; // xmm2_4
+  float x; // xmm5_4
   float v12; // xmm4_4
   float v13; // xmm3_4
-  char v14; // r15
-  signed int v15; // edi
-  float v16; // xmm3_4
+  bool v14; // r15
+  int mTimeEnd_low; // edi
+  float z; // xmm3_4
   float v17; // xmm4_4
   float v18; // xmm2_4
-  __m128 v19; // xmm5
+  __m128 y_low; // xmm5
   float v20; // xmm1_4
   float v21; // xmm11_4
   __m128 v22; // xmm14
@@ -961,191 +900,191 @@ void __fastcall AttackCollisionTask::setupHitRecord(AttackCollisionTask *this, U
   __m128 v31; // xmm1
   float v32; // xmm1_4
   float v33; // xmm8_4
-  int v34; // er14
-  UFG::SimObjectGame *v35; // rbx
-  UFG::SimComponent *v36; // rax
-  unsigned __int16 v37; // cx
+  int v34; // r14d
+  UFG::SimObjectGame *m_pSimObject; // rbx
+  UFG::SimComponent *m_pComponent; // rax
+  __int16 m_Flags; // cx
   Creature *v38; // rcx
-  unsigned __int16 v39; // cx
-  UFG::SimComponent *v40; // rax
-  ExpressionParameterInt *v41; // rcx
-  signed int v42; // ebx
+  __int16 v39; // cx
+  UFG::SimComponent *ComponentOfType; // rax
+  ExpressionParameterInt *p_expression; // rcx
+  int v42; // ebx
   UFG::SimObjectGame *v43; // rcx
-  unsigned __int16 v44; // dx
+  __int16 v44; // dx
   UFG::SimComponent *v45; // rax
   UFG::SimObjectGame *v46; // rcx
   UFG::SimComponent *v47; // rcx
-  unsigned __int16 v48; // dx
+  __int16 v48; // dx
   UFG::SimComponent *v49; // rax
   __int64 v50; // rax
   UFG::SimObjectProp *v51; // rcx
-  unsigned __int16 v52; // dx
-  UFG::SimObjectWeaponPropertiesComponent *v53; // rax
+  __int16 v52; // dx
+  UFG::SimObjectWeaponPropertiesComponent *ComponentOfTypeHK; // rax
   UFG::SimObject *v54; // r8
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v55; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v56; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v57; // rax
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mAttacker; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v58; // rax
-  ITrack *v59; // rdx
-  unsigned int v60; // er14
+  ITrack *m_Track; // rdx
+  unsigned int v60; // r14d
   __int64 v61; // rax
   unsigned int v62; // ebx
   __int64 v63; // rcx
   unsigned int v64; // eax
-  int v65; // edx
-  UFG::qVector3 vHitPosition; // [rsp+38h] [rbp-140h]
-  UFG::qVector3 outBoneOffset; // [rsp+48h] [rbp-130h]
-  ActionPath result; // [rsp+58h] [rbp-120h]
-  UFG::qMatrix44 transform; // [rsp+70h] [rbp-108h]
+  int vfptr; // edx
+  UFG::qVector3 vHitPosition; // [rsp+38h] [rbp-140h] BYREF
+  UFG::qVector3 outBoneOffset; // [rsp+48h] [rbp-130h] BYREF
+  ActionPath result; // [rsp+58h] [rbp-120h] BYREF
+  UFG::qMatrix44 transform; // [rsp+70h] [rbp-108h] BYREF
   float v70; // [rsp+180h] [rbp+8h]
 
-  v5 = pOpponentsTransformNodeC;
-  v6 = outHitRecord;
-  v7 = this;
   UFG::TransformNodeComponent::UpdateWorldTransform(pOpponentsTransformNodeC);
-  UFG::TransformNodeComponent::UpdateWorldTransform(v5);
-  v8 = v7->mContext->mSimObject.m_pPointer;
-  if ( v8 )
-    v9 = v8->m_pTransformNodeComponent;
+  UFG::TransformNodeComponent::UpdateWorldTransform(pOpponentsTransformNodeC);
+  m_pPointer = this->mContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
+    m_pTransformNodeComponent = m_pPointer->m_pTransformNodeComponent;
   else
-    v9 = 0i64;
-  UFG::TransformNodeComponent::UpdateWorldTransform(v9);
-  v10 = v5->mWorldTransform.v0.y;
-  v11 = v5->mWorldTransform.v0.x;
-  v12 = v5->mWorldTransform.v3.y - v9->mWorldTransform.v3.y;
-  v13 = v5->mWorldTransform.v3.x - v9->mWorldTransform.v3.x;
+    m_pTransformNodeComponent = 0i64;
+  UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+  y = pOpponentsTransformNodeC->mWorldTransform.v0.y;
+  x = pOpponentsTransformNodeC->mWorldTransform.v0.x;
+  v12 = pOpponentsTransformNodeC->mWorldTransform.v3.y - m_pTransformNodeComponent->mWorldTransform.v3.y;
+  v13 = pOpponentsTransformNodeC->mWorldTransform.v3.x - m_pTransformNodeComponent->mWorldTransform.v3.x;
   v14 = 0;
-  v15 = LODWORD(v7->m_Track[2].mTimeEnd);
-  if ( (float)((float)(v11 * v11) + (float)(v10 * v10)) > 0.001
+  mTimeEnd_low = LODWORD(this->m_Track[2].mTimeEnd);
+  if ( (float)((float)(x * x) + (float)(y * y)) > 0.001
     && (float)((float)(v12 * v12) + (float)(v13 * v13)) > 0.001
-    && (float)((float)((float)(v10 * v12) + (float)(v13 * v11)) + (float)(v5->mWorldTransform.v0.z * 0.0)) > 0.0 )
+    && (float)((float)((float)(y * v12) + (float)(v13 * x))
+             + (float)(pOpponentsTransformNodeC->mWorldTransform.v0.z * 0.0)) > 0.0 )
   {
-    if ( v15 )
+    if ( mTimeEnd_low )
     {
-      switch ( v15 )
+      switch ( mTimeEnd_low )
       {
         case 1:
-          v15 = 2;
+          mTimeEnd_low = 2;
           break;
         case 2:
-          v15 = 1;
+          mTimeEnd_low = 1;
           break;
         case 3:
-          v15 = 0;
+          mTimeEnd_low = 0;
           break;
       }
     }
     else
     {
-      v15 = 3;
+      mTimeEnd_low = 3;
     }
     v14 = 1;
   }
-  v16 = v7->mAttackPosition0.z;
-  v17 = v7->mAttackPosition1.z - v16;
-  v18 = v7->mAttackPosition0.y;
-  v19 = (__m128)LODWORD(v7->mAttackPosition1.y);
-  v19.m128_f32[0] = v19.m128_f32[0] - v18;
-  v20 = v7->mAttackPosition0.x;
-  v21 = v7->mAttackPosition1.x - v20;
-  v22 = v19;
-  v70 = (float)(v17 * fTime) + v16;
-  v22.m128_f32[0] = (float)(v19.m128_f32[0] * fTime) + v18;
+  z = this->mAttackPosition0.z;
+  v17 = this->mAttackPosition1.z - z;
+  v18 = this->mAttackPosition0.y;
+  y_low = (__m128)LODWORD(this->mAttackPosition1.y);
+  y_low.m128_f32[0] = y_low.m128_f32[0] - v18;
+  v20 = this->mAttackPosition0.x;
+  v21 = this->mAttackPosition1.x - v20;
+  v22 = y_low;
+  v70 = (float)(v17 * fTime) + z;
+  v22.m128_f32[0] = (float)(y_low.m128_f32[0] * fTime) + v18;
   v23 = (float)(v21 * fTime) + v20;
-  vHitPosition.x = (float)(v21 * fTime) + v20;
-  vHitPosition.y = (float)(v19.m128_f32[0] * fTime) + v18;
-  vHitPosition.z = (float)(v17 * fTime) + v16;
-  v24 = v19;
-  v24.m128_f32[0] = (float)((float)(v19.m128_f32[0] * v19.m128_f32[0]) + (float)(v21 * v21)) + (float)(v17 * v17);
+  vHitPosition.x = v23;
+  vHitPosition.y = v22.m128_f32[0];
+  vHitPosition.z = v70;
+  v24 = y_low;
+  v24.m128_f32[0] = (float)((float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(v21 * v21)) + (float)(v17 * v17);
   if ( v24.m128_f32[0] == 0.0 )
     v25 = 0.0;
   else
-    v25 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v24));
+    v25 = 1.0 / _mm_sqrt_ps(v24).m128_f32[0];
   v26 = v25 * v17;
-  v27 = v25 * v19.m128_f32[0];
+  v27 = v25 * y_low.m128_f32[0];
   v28 = v21 * v25;
-  UFG::TransformNodeComponent::UpdateWorldTransform(v5);
+  UFG::TransformNodeComponent::UpdateWorldTransform(pOpponentsTransformNodeC);
   v29 = v22;
-  v29.m128_f32[0] = v22.m128_f32[0] - v5->mWorldTransform.v3.y;
-  v30 = v23 - v5->mWorldTransform.v3.x;
+  v29.m128_f32[0] = v22.m128_f32[0] - pOpponentsTransformNodeC->mWorldTransform.v3.y;
+  v30 = v23 - pOpponentsTransformNodeC->mWorldTransform.v3.x;
   v31 = v29;
   v31.m128_f32[0] = (float)(v29.m128_f32[0] * v29.m128_f32[0]) + (float)(v30 * v30);
   if ( v31.m128_f32[0] == 0.0 )
     v32 = 0.0;
   else
-    v32 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v31));
+    v32 = 1.0 / _mm_sqrt_ps(v31).m128_f32[0];
   v33 = v30 * v32;
   v34 = 0;
   fTime = 0.0;
-  if ( (float)(signed int)ExpressionParameterInt::operator long((ExpressionParameterInt *)&v7->m_Track[1].mResourceOwner) > 0.0 )
+  if ( (float)(int)ExpressionParameterInt::operator long((ExpressionParameterInt *)&this->m_Track[1].mResourceOwner) > 0.0 )
   {
-    AttackCollisionTask::projectHitPositionOntoSkeleton(v7, &vHitPosition, v5, (int *)&fTime, &outBoneOffset);
+    AttackCollisionTask::projectHitPositionOntoSkeleton(
+      this,
+      &vHitPosition,
+      pOpponentsTransformNodeC,
+      (int *)&fTime,
+      &outBoneOffset);
     v34 = LODWORD(fTime);
   }
-  v35 = (UFG::SimObjectGame *)v5->m_pSimObject;
-  if ( v35 )
+  m_pSimObject = (UFG::SimObjectGame *)pOpponentsTransformNodeC->m_pSimObject;
+  if ( m_pSimObject )
   {
-    v37 = v35->m_Flags;
-    if ( (v37 >> 14) & 1 )
+    m_Flags = m_pSimObject->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v36 = v35->m_Components.p[9].m_pComponent;
+      m_pComponent = m_pSimObject->m_Components.p[9].m_pComponent;
     }
-    else if ( (v37 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v37 >> 13) & 1 )
+      if ( (m_Flags & 0x2000) != 0 )
       {
-        v36 = v35->m_Components.p[8].m_pComponent;
+        m_pComponent = m_pSimObject->m_Components.p[8].m_pComponent;
       }
-      else if ( (v37 >> 12) & 1 )
+      else if ( (m_Flags & 0x1000) != 0 )
       {
-        v36 = UFG::SimObjectGame::GetComponentOfTypeHK(v35, UFG::BaseAnimationComponent::_TypeUID);
+        m_pComponent = UFG::SimObjectGame::GetComponentOfTypeHK(m_pSimObject, UFG::BaseAnimationComponent::_TypeUID);
       }
       else
       {
-        v36 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v35->vfptr, UFG::BaseAnimationComponent::_TypeUID);
+        m_pComponent = UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::BaseAnimationComponent::_TypeUID);
       }
     }
     else
     {
-      v36 = v35->m_Components.p[9].m_pComponent;
+      m_pComponent = m_pSimObject->m_Components.p[9].m_pComponent;
     }
   }
   else
   {
-    v36 = 0i64;
+    m_pComponent = 0i64;
   }
-  v38 = *(Creature **)&v36[2].m_TypeUID;
+  v38 = *(Creature **)&m_pComponent[2].m_TypeUID;
   if ( v38 )
     Creature::GetTransform(v38, v34, &transform);
-  if ( v35
-    && ((v39 = v35->m_Flags, !((v39 >> 14) & 1)) ? ((v39 & 0x8000u) == 0 ? (!((v39 >> 13) & 1) ? (!((v39 >> 12) & 1) ? (v40 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v35->vfptr, UFG::RigidBodyComponent::_TypeUID)) : (v40 = UFG::SimObjectGame::GetComponentOfTypeHK(v35, UFG::RigidBodyComponent::_TypeUID))) : (v40 = UFG::SimObjectGame::GetComponentOfTypeHK(v35, UFG::RigidBodyComponent::_TypeUID))) : (v40 = UFG::SimObjectGame::GetComponentOfTypeHK(v35, UFG::RigidBodyComponent::_TypeUID))) : (v40 = UFG::SimObjectGame::GetComponentOfTypeHK(v35, UFG::RigidBodyComponent::_TypeUID)),
-        v40) )
+  if ( m_pSimObject
+    && ((v39 = m_pSimObject->m_Flags, (v39 & 0x4000) == 0) && v39 >= 0 && (v39 & 0x2000) == 0 && (v39 & 0x1000) == 0
+      ? (ComponentOfType = UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::RigidBodyComponent::_TypeUID))
+      : (ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(m_pSimObject, UFG::RigidBodyComponent::_TypeUID)),
+        ComponentOfType) )
   {
-    v41 = (ExpressionParameterInt *)&v7->m_Track[1].mMasterRate.expression;
+    p_expression = (ExpressionParameterInt *)&this->m_Track[1].mMasterRate.expression;
   }
   else
   {
-    v41 = (ExpressionParameterInt *)&v7->m_Track[1].mResourceOwner;
+    p_expression = (ExpressionParameterInt *)&this->m_Track[1].mResourceOwner;
   }
-  v42 = ExpressionParameterInt::operator long(v41);
-  v43 = (UFG::SimObjectGame *)v7->mContext->mSimObject.m_pPointer;
+  v42 = ExpressionParameterInt::operator long(p_expression);
+  v43 = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
   if ( v43 )
   {
     v44 = v43->m_Flags;
-    if ( (v44 >> 14) & 1 )
+    if ( (v44 & 0x4000) != 0 )
     {
       v45 = v43->m_Components.p[20].m_pComponent;
     }
-    else if ( (v44 & 0x8000u) == 0 )
+    else if ( v44 >= 0 )
     {
-      if ( (v44 >> 13) & 1 )
-        v45 = UFG::SimObjectGame::GetComponentOfTypeHK(v43, UFG::TargetingSystemBaseComponent::_TypeUID);
-      else
-        v45 = (v44 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                  v43,
-                                  UFG::TargetingSystemBaseComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(
-                                                                                   (UFG::SimObject *)&v43->vfptr,
-                                                                                   UFG::TargetingSystemBaseComponent::_TypeUID);
+      v45 = (v44 & 0x2000) != 0 || (v44 & 0x1000) != 0
+          ? UFG::SimObjectGame::GetComponentOfTypeHK(v43, UFG::TargetingSystemBaseComponent::_TypeUID)
+          : UFG::SimObject::GetComponentOfType(v43, UFG::TargetingSystemBaseComponent::_TypeUID);
     }
     else
     {
@@ -1153,24 +1092,19 @@ void __fastcall AttackCollisionTask::setupHitRecord(AttackCollisionTask *this, U
     }
     if ( v45 )
     {
-      v46 = (UFG::SimObjectGame *)v7->mContext->mSimObject.m_pPointer;
+      v46 = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
       if ( v46 )
       {
         v48 = v46->m_Flags;
-        if ( (v48 >> 14) & 1 )
+        if ( (v48 & 0x4000) != 0 )
         {
           v47 = v46->m_Components.p[20].m_pComponent;
         }
-        else if ( (v48 & 0x8000u) == 0 )
+        else if ( v48 >= 0 )
         {
-          if ( (v48 >> 13) & 1 )
-            v49 = UFG::SimObjectGame::GetComponentOfTypeHK(v46, UFG::TargetingSystemBaseComponent::_TypeUID);
-          else
-            v49 = (v48 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                      v46,
-                                      UFG::TargetingSystemBaseComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(
-                                                                                       (UFG::SimObject *)&v46->vfptr,
-                                                                                       UFG::TargetingSystemBaseComponent::_TypeUID);
+          v49 = (v48 & 0x2000) != 0 || (v48 & 0x1000) != 0
+              ? UFG::SimObjectGame::GetComponentOfTypeHK(v46, UFG::TargetingSystemBaseComponent::_TypeUID)
+              : UFG::SimObject::GetComponentOfType(v46, UFG::TargetingSystemBaseComponent::_TypeUID);
           v47 = v49;
         }
         else
@@ -1182,7 +1116,7 @@ void __fastcall AttackCollisionTask::setupHitRecord(AttackCollisionTask *this, U
       {
         v47 = 0i64;
       }
-      v50 = ((__int64 (*)(void))v47->vfptr[15].__vecDelDtor)();
+      v50 = ((__int64 (__fastcall *)(UFG::SimComponent *))v47->vfptr[15].__vecDelDtor)(v47);
       if ( v50 )
       {
         v51 = *(UFG::SimObjectProp **)(56i64 * *(unsigned __int8 *)(*(_QWORD *)(v50 + 96) + 25i64)
@@ -1191,92 +1125,87 @@ void __fastcall AttackCollisionTask::setupHitRecord(AttackCollisionTask *this, U
         if ( v51 )
         {
           v52 = v51->m_Flags;
-          if ( (v52 >> 14) & 1 )
+          if ( (v52 & 0x4000) != 0 || v52 < 0 )
+            goto LABEL_77;
+          if ( (v52 & 0x2000) != 0 )
           {
-            v53 = (UFG::SimObjectWeaponPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                               (UFG::SimObjectGame *)&v51->vfptr,
-                                                               UFG::SimObjectWeaponPropertiesComponent::_TypeUID);
+            ComponentOfTypeHK = UFG::SimObjectProp::GetComponent<UFG::SimObjectWeaponPropertiesComponent>(v51);
+            goto LABEL_79;
           }
-          else if ( (v52 & 0x8000u) == 0 )
-          {
-            if ( (v52 >> 13) & 1 )
-              v53 = UFG::SimObjectProp::GetComponent<UFG::SimObjectWeaponPropertiesComponent>(v51);
-            else
-              v53 = (UFG::SimObjectWeaponPropertiesComponent *)((v52 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                                    (UFG::SimObjectGame *)&v51->vfptr,
-                                                                                    UFG::SimObjectWeaponPropertiesComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v51->vfptr, UFG::SimObjectWeaponPropertiesComponent::_TypeUID));
-          }
+          if ( (v52 & 0x1000) != 0 )
+LABEL_77:
+            ComponentOfTypeHK = (UFG::SimObjectWeaponPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                             v51,
+                                                                             UFG::SimObjectWeaponPropertiesComponent::_TypeUID);
           else
-          {
-            v53 = (UFG::SimObjectWeaponPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                               (UFG::SimObjectGame *)&v51->vfptr,
-                                                               UFG::SimObjectWeaponPropertiesComponent::_TypeUID);
-          }
-          if ( v53 )
-            v42 = (signed int)(float)((float)v42 * v53->mWeaponTypeInfo->mFireModes[v53->mFireMode]->mDamageMultiplier);
+            ComponentOfTypeHK = (UFG::SimObjectWeaponPropertiesComponent *)UFG::SimObject::GetComponentOfType(
+                                                                             v51,
+                                                                             UFG::SimObjectWeaponPropertiesComponent::_TypeUID);
+LABEL_79:
+          if ( ComponentOfTypeHK )
+            v42 = (int)(float)((float)v42
+                             * ComponentOfTypeHK->mWeaponTypeInfo->mFireModes[ComponentOfTypeHK->mFireMode]->mDamageMultiplier);
         }
       }
     }
   }
-  if ( UFG::IsAnyLocalPlayer(v7->mContext->mSimObject.m_pPointer) )
-    v42 = (signed int)(float)((float)v42 * (float)(UFG::PlayerBuffTracker::GetMeleeDamageMultiplier() + 1.0));
-  ActionController::GetPlayingFullPath(v7->mContext->mActionController, &result);
-  v54 = v7->mContext->mSimObject.m_pPointer;
-  v6->mAttackTypeID = LODWORD(v7->m_Track[2].mTimeBegin);
-  v6->mDamage = v42;
-  v55 = &v6->mAttacker;
-  if ( v6->mAttacker.m_pPointer )
+  if ( UFG::IsAnyLocalPlayer(this->mContext->mSimObject.m_pPointer) )
+    v42 = (int)(float)((float)v42 * (float)(UFG::PlayerBuffTracker::GetMeleeDamageMultiplier() + 1.0));
+  ActionController::GetPlayingFullPath(this->mContext->mActionController, &result);
+  v54 = this->mContext->mSimObject.m_pPointer;
+  outHitRecord->mAttackTypeID = LODWORD(this->m_Track[2].mTimeBegin);
+  outHitRecord->mDamage = v42;
+  p_mAttacker = &outHitRecord->mAttacker;
+  if ( outHitRecord->mAttacker.m_pPointer )
   {
-    v56 = v55->mPrev;
-    v57 = v6->mAttacker.mNext;
-    v56->mNext = v57;
-    v57->mPrev = v56;
-    v55->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v55->mPrev;
-    v6->mAttacker.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v6->mAttacker.mPrev;
+    mPrev = p_mAttacker->mPrev;
+    mNext = outHitRecord->mAttacker.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mAttacker->mPrev = p_mAttacker;
+    outHitRecord->mAttacker.mNext = &outHitRecord->mAttacker;
   }
-  v6->mAttacker.m_pPointer = v54;
+  outHitRecord->mAttacker.m_pPointer = v54;
   if ( v54 )
   {
-    v58 = v54->m_SafePointerList.mNode.mPrev;
-    v58->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v55->mPrev;
-    v55->mPrev = v58;
-    v6->mAttacker.mNext = &v54->m_SafePointerList.mNode;
-    v54->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v55->mPrev;
+    v58 = v54->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+    v58->mNext = p_mAttacker;
+    p_mAttacker->mPrev = v58;
+    outHitRecord->mAttacker.mNext = &v54->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+    v54->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = p_mAttacker;
   }
-  *(_QWORD *)&v6->mTimeSinceHit = 0i64;
-  v6->mEffectBone = v34;
-  v6->mEffectOffset.x = outBoneOffset.x;
-  v6->mEffectOffset.y = outBoneOffset.y;
-  v6->mEffectOffset.z = outBoneOffset.z;
-  v59 = v7->m_Track;
-  v60 = *((_DWORD *)&v59[2].mMasterRate.value + 1);
-  if ( (signed int)audioEnum.m_enumLists.size <= 0 )
+  *(_QWORD *)&outHitRecord->mTimeSinceHit = 0i64;
+  outHitRecord->mEffectBone = v34;
+  outHitRecord->mEffectOffset = outBoneOffset;
+  m_Track = this->m_Track;
+  v60 = *((_DWORD *)&m_Track[2].mMasterRate.value + 1);
+  if ( (int)audioEnum.m_enumLists.size <= 0 )
     v61 = 0i64;
   else
     v61 = *((_QWORD *)audioEnum.m_enumLists.p + 4);
-  v62 = *(_DWORD *)(*(_QWORD *)(v61 + 48) + 4i64 * *(unsigned int *)&v59[3].mBreakPoint);
-  if ( (signed int)gAttackCollisionEnum.m_enumLists.size <= 0 )
+  v62 = *(_DWORD *)(*(_QWORD *)(v61 + 48) + 4i64 * *(unsigned int *)&m_Track[3].mBreakPoint);
+  if ( (int)gAttackCollisionEnum.m_enumLists.size <= 0 )
     v63 = 0i64;
   else
     v63 = *((_QWORD *)gAttackCollisionEnum.m_enumLists.p + 5);
-  v64 = UFG::qStringHash32(*(const char **)(*(_QWORD *)(v63 + 16) + 8i64 * v59[3].m_TrackClassNameUID), 0xFFFFFFFF);
-  v65 = (int)v7->m_Track[3].vfptr;
-  v6->mMeleeInfo.mAttackLocationLateralID = v15;
-  v6->mMeleeInfo.mAttackLocationHorizontalID = v65;
-  v6->mMeleeInfo.mAttackFromBehind = v14;
-  v6->mMeleeInfo.mAttackMaterialUID = v64;
-  v6->mMeleeInfo.mAudioIntensityUID = v62;
-  v6->mMeleeInfo.mAttackIntensityUID = v60;
-  v6->mMeleeInfo.mHitPosition.x = v23;
-  LODWORD(v6->mMeleeInfo.mHitPosition.y) = v22.m128_i32[0];
-  v6->mMeleeInfo.mHitPosition.z = v70;
-  v6->mMeleeInfo.mHitDirection.x = v28;
-  v6->mMeleeInfo.mHitDirection.y = v27;
-  v6->mMeleeInfo.mHitDirection.z = v26;
-  v6->mMeleeInfo.mHitNormal.x = v33;
-  v6->mMeleeInfo.mHitNormal.y = v32 * v29.m128_f32[0];
-  v6->mMeleeInfo.mHitNormal.z = v32 * 0.0;
-  BinArray<ActionID,0>::Clone(&result.mPath, &v6->mMeleeInfo.mActionPath.mPath);
+  v64 = UFG::qStringHash32(*(const char **)(*(_QWORD *)(v63 + 16) + 8i64 * m_Track[3].m_TrackClassNameUID), 0xFFFFFFFF);
+  vfptr = (int)this->m_Track[3].vfptr;
+  outHitRecord->mMeleeInfo.mAttackLocationLateralID = mTimeEnd_low;
+  outHitRecord->mMeleeInfo.mAttackLocationHorizontalID = vfptr;
+  outHitRecord->mMeleeInfo.mAttackFromBehind = v14;
+  outHitRecord->mMeleeInfo.mAttackMaterialUID = v64;
+  outHitRecord->mMeleeInfo.mAudioIntensityUID = v62;
+  outHitRecord->mMeleeInfo.mAttackIntensityUID = v60;
+  outHitRecord->mMeleeInfo.mHitPosition.x = v23;
+  LODWORD(outHitRecord->mMeleeInfo.mHitPosition.y) = v22.m128_i32[0];
+  outHitRecord->mMeleeInfo.mHitPosition.z = v70;
+  outHitRecord->mMeleeInfo.mHitDirection.x = v28;
+  outHitRecord->mMeleeInfo.mHitDirection.y = v27;
+  outHitRecord->mMeleeInfo.mHitDirection.z = v26;
+  outHitRecord->mMeleeInfo.mHitNormal.x = v33;
+  outHitRecord->mMeleeInfo.mHitNormal.y = v32 * v29.m128_f32[0];
+  outHitRecord->mMeleeInfo.mHitNormal.z = v32 * 0.0;
+  BinArray<ActionID,0>::Clone(&result.mPath, &outHitRecord->mMeleeInfo.mActionPath.mPath);
   if ( result.mPath.mCount >= 0 && result.mPath.mData.mOffset )
   {
     if ( (UFG::qOffset64<ActionID *> *)((char *)&result.mPath.mData + result.mPath.mData.mOffset) )
@@ -1286,161 +1215,158 @@ void __fastcall AttackCollisionTask::setupHitRecord(AttackCollisionTask *this, U
 
 // File Line: 893
 // RVA: 0x30DDB0
-char __fastcall AttackCollisionTask::projectHitPositionOntoSkeleton(AttackCollisionTask *this, UFG::qVector3 *vHitPosition, UFG::TransformNodeComponent *pOpponentsTransformNodeC, int *outBoneID, UFG::qVector3 *outBoneOffset)
+char __fastcall AttackCollisionTask::projectHitPositionOntoSkeleton(
+        AttackCollisionTask *this,
+        UFG::qVector3 *vHitPosition,
+        UFG::TransformNodeComponent *pOpponentsTransformNodeC,
+        int *outBoneID,
+        UFG::qVector3 *outBoneOffset)
 {
-  UFG::SimObjectCVBase *v5; // rbx
-  int *v6; // r12
-  UFG::qVector3 *v7; // r14
-  UFG::SimComponent *v8; // rsi
+  UFG::SimObjectCVBase *m_pSimObject; // rbx
+  UFG::SimComponent *m_pComponent; // rsi
   UFG::CharacterAnimationComponent *v9; // r15
-  unsigned __int16 v10; // cx
+  __int16 m_Flags; // cx
   bool v11; // zf
   UFG::SimObjectGame *v12; // rcx
-  UFG::SimComponent *v13; // rax
-  unsigned __int16 v14; // cx
-  UFG::CharacterAnimationComponent *v15; // rax
+  UFG::SimComponent *ComponentOfType; // rax
+  __int16 v14; // cx
+  UFG::CharacterAnimationComponent *ComponentOfTypeHK; // rax
   Creature *v16; // rsi
   float v18; // xmm6_4
-  const unsigned int *v19; // rbx
-  int v20; // eax
+  unsigned int *v19; // rbx
+  int BoneID; // eax
   int v21; // edi
-  float v22; // xmm2_4
-  __int128 v23; // xmm4
+  __int128 x_low; // xmm4
+  float y; // xmm0_4
   float v24; // xmm5_4
   float v25; // xmm6_4
   __m128 v26; // xmm2
   float v27; // xmm0_4
   float v28; // xmm5_4
-  float v29; // xmm4_4
-  float v30; // xmm2_4
+  float x; // xmm4_4
+  float z; // xmm2_4
   float v31; // xmm3_4
-  UFG::qVector4 hitPositionWS; // [rsp+30h] [rbp-81h]
-  UFG::qVector4 invHitNormal; // [rsp+40h] [rbp-71h]
-  UFG::qMatrix44 d; // [rsp+50h] [rbp-61h]
-  UFG::qMatrix44 transform; // [rsp+90h] [rbp-21h]
+  UFG::qVector4 hitPositionWS; // [rsp+30h] [rbp-81h] BYREF
+  UFG::qVector4 invHitNormal; // [rsp+40h] [rbp-71h] BYREF
+  UFG::qMatrix44 d; // [rsp+50h] [rbp-61h] BYREF
+  UFG::qMatrix44 transform; // [rsp+90h] [rbp-21h] BYREF
 
-  v5 = (UFG::SimObjectCVBase *)pOpponentsTransformNodeC->m_pSimObject;
-  v6 = outBoneID;
-  v7 = vHitPosition;
-  if ( v5 )
+  m_pSimObject = (UFG::SimObjectCVBase *)pOpponentsTransformNodeC->m_pSimObject;
+  if ( m_pSimObject )
   {
-    v10 = v5->m_Flags;
-    if ( (v10 >> 14) & 1 )
+    m_Flags = m_pSimObject->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v8 = v5->m_Components.p[9].m_pComponent;
+      m_pComponent = m_pSimObject->m_Components.p[9].m_pComponent;
     }
-    else if ( (v10 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v10 >> 13) & 1 )
+      if ( (m_Flags & 0x2000) != 0 )
       {
-        v8 = v5->m_Components.p[8].m_pComponent;
+        m_pComponent = m_pSimObject->m_Components.p[8].m_pComponent;
       }
       else
       {
-        v11 = ((v10 >> 12) & 1) == 0;
+        v11 = (m_Flags & 0x1000) == 0;
         v12 = (UFG::SimObjectGame *)pOpponentsTransformNodeC->m_pSimObject;
         if ( v11 )
-          v13 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v12->vfptr, UFG::BaseAnimationComponent::_TypeUID);
+          ComponentOfType = UFG::SimObject::GetComponentOfType(v12, UFG::BaseAnimationComponent::_TypeUID);
         else
-          v13 = UFG::SimObjectGame::GetComponentOfTypeHK(v12, UFG::BaseAnimationComponent::_TypeUID);
-        v8 = v13;
+          ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(v12, UFG::BaseAnimationComponent::_TypeUID);
+        m_pComponent = ComponentOfType;
       }
     }
     else
     {
-      v8 = v5->m_Components.p[9].m_pComponent;
+      m_pComponent = m_pSimObject->m_Components.p[9].m_pComponent;
     }
-    v14 = v5->m_Flags;
-    if ( (v14 >> 14) & 1 )
+    v14 = m_pSimObject->m_Flags;
+    if ( (v14 & 0x4000) != 0 || v14 < 0 )
     {
-      v15 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v5);
+      ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(m_pSimObject);
     }
-    else if ( (v14 & 0x8000u) == 0 )
+    else if ( (v14 & 0x2000) != 0 )
     {
-      if ( (v14 >> 13) & 1 )
-      {
-        v15 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v5);
-      }
-      else if ( (v14 >> 12) & 1 )
-      {
-        v15 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                    (UFG::SimObjectGame *)&v5->vfptr,
-                                                    UFG::CharacterAnimationComponent::_TypeUID);
-      }
-      else
-      {
-        v15 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                    (UFG::SimObject *)&v5->vfptr,
-                                                    UFG::CharacterAnimationComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)m_pSimObject);
+    }
+    else if ( (v14 & 0x1000) != 0 )
+    {
+      ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                m_pSimObject,
+                                                                UFG::CharacterAnimationComponent::_TypeUID);
     }
     else
     {
-      v15 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v5);
+      ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                m_pSimObject,
+                                                                UFG::CharacterAnimationComponent::_TypeUID);
     }
-    v9 = v15;
+    v9 = ComponentOfTypeHK;
   }
   else
   {
-    v8 = 0i64;
+    m_pComponent = 0i64;
     v9 = 0i64;
   }
-  v16 = *(Creature **)&v8[2].m_TypeUID;
+  v16 = *(Creature **)&m_pComponent[2].m_TypeUID;
   if ( !v16 )
     return 0;
   v18 = FLOAT_3_4028235e38;
-  *v6 = 0;
+  *outBoneID = 0;
   v19 = BoneUIDs;
   do
   {
     if ( v16->mPose.mRigHandle.mData )
     {
-      v20 = Skeleton::GetBoneID(v16->mPose.mRigHandle.mUFGSkeleton, *v19);
-      v21 = v20;
-      if ( v20 >= 0 )
+      BoneID = Skeleton::GetBoneID(v16->mPose.mRigHandle.mUFGSkeleton, *v19);
+      v21 = BoneID;
+      if ( BoneID >= 0 )
       {
-        Creature::GetTransform(v16, v20, &transform);
-        if ( (float)((float)((float)((float)(transform.v3.y - v7->y) * (float)(transform.v3.y - v7->y))
-                           + (float)((float)(transform.v3.x - v7->x) * (float)(transform.v3.x - v7->x)))
-                   + (float)((float)(transform.v3.z - v7->z) * (float)(transform.v3.z - v7->z))) < v18 )
+        Creature::GetTransform(v16, BoneID, &transform);
+        if ( (float)((float)((float)((float)(transform.v3.y - vHitPosition->y)
+                                   * (float)(transform.v3.y - vHitPosition->y))
+                           + (float)((float)(transform.v3.x - vHitPosition->x)
+                                   * (float)(transform.v3.x - vHitPosition->x)))
+                   + (float)((float)(transform.v3.z - vHitPosition->z) * (float)(transform.v3.z - vHitPosition->z))) < v18 )
         {
-          v18 = (float)((float)((float)(transform.v3.y - v7->y) * (float)(transform.v3.y - v7->y))
-                      + (float)((float)(transform.v3.x - v7->x) * (float)(transform.v3.x - v7->x)))
-              + (float)((float)(transform.v3.z - v7->z) * (float)(transform.v3.z - v7->z));
-          *v6 = v21;
+          v18 = (float)((float)((float)(transform.v3.y - vHitPosition->y) * (float)(transform.v3.y - vHitPosition->y))
+                      + (float)((float)(transform.v3.x - vHitPosition->x) * (float)(transform.v3.x - vHitPosition->x)))
+              + (float)((float)(transform.v3.z - vHitPosition->z) * (float)(transform.v3.z - vHitPosition->z));
+          *outBoneID = v21;
         }
       }
     }
     ++v19;
   }
-  while ( (signed __int64)v19 < (signed __int64)&fDesiredDist );
-  Creature::GetTransform(v16, *v6, &transform);
+  while ( (__int64)v19 < (__int64)&fDesiredDist );
+  Creature::GetTransform(v16, *outBoneID, &transform);
   UFG::qInverse(&d, &transform);
-  v22 = v7->y;
-  v23 = LODWORD(v7->x);
-  v24 = (float)((float)(v7->x * d.v0.x) + (float)(v7->y * d.v1.x)) + (float)(v7->z * d.v2.x);
-  v25 = (float)((float)(v7->x * d.v0.z) + (float)(v22 * d.v1.z)) + (float)(v7->z * d.v2.z);
-  *(float *)&v23 = (float)((float)(*(float *)&v23 * d.v0.y) + (float)(v22 * d.v1.y)) + (float)(v7->z * d.v2.y);
-  v26 = (__m128)v23;
-  v26.m128_f32[0] = (float)((float)(*(float *)&v23 * *(float *)&v23) + (float)(v24 * v24)) + (float)(v25 * v25);
-  LODWORD(v27) = (unsigned __int128)_mm_sqrt_ps(v26);
+  x_low = LODWORD(vHitPosition->x);
+  y = vHitPosition->y;
+  v24 = (float)((float)(vHitPosition->x * d.v0.x) + (float)(y * d.v1.x)) + (float)(vHitPosition->z * d.v2.x);
+  v25 = (float)((float)(vHitPosition->x * d.v0.z) + (float)(y * d.v1.z)) + (float)(vHitPosition->z * d.v2.z);
+  *(float *)&x_low = (float)((float)(*(float *)&x_low * d.v0.y) + (float)(y * d.v1.y))
+                   + (float)(vHitPosition->z * d.v2.y);
+  v26 = (__m128)x_low;
+  v26.m128_f32[0] = (float)((float)(*(float *)&x_low * *(float *)&x_low) + (float)(v24 * v24)) + (float)(v25 * v25);
+  v27 = _mm_sqrt_ps(v26).m128_f32[0];
   v28 = v24 * (float)(fDesiredDist / v27);
-  *(float *)&v23 = *(float *)&v23 * (float)(fDesiredDist / v27);
+  *(float *)&x_low = *(float *)&x_low * (float)(fDesiredDist / v27);
   outBoneOffset->z = v25 * (float)(fDesiredDist / v27);
   outBoneOffset->x = v28;
-  LODWORD(outBoneOffset->y) = v23;
+  LODWORD(outBoneOffset->y) = x_low;
   if ( v9 )
   {
-    v29 = v7->x;
-    v30 = v7->z;
+    x = vHitPosition->x;
+    z = vHitPosition->z;
     hitPositionWS.w = 1.0;
-    v31 = v7->y;
-    invHitNormal.x = transform.v3.x - v29;
+    v31 = vHitPosition->y;
+    invHitNormal.x = transform.v3.x - x;
     invHitNormal.y = transform.v3.y - v31;
-    hitPositionWS.x = v29;
-    invHitNormal.z = transform.v3.z - v30;
+    hitPositionWS.x = x;
+    invHitNormal.z = transform.v3.z - z;
     hitPositionWS.y = v31;
-    hitPositionWS.z = v30;
+    hitPositionWS.z = z;
     invHitNormal.w = 0.0;
     UFG::CharacterAnimationComponent::ApplyBluntForceDamage(v9, v16, &hitPositionWS, &invHitNormal, 1.0);
   }
@@ -1449,220 +1375,208 @@ char __fastcall AttackCollisionTask::projectHitPositionOntoSkeleton(AttackCollis
 
 // File Line: 965
 // RVA: 0x30D5D0
-char __fastcall AttackCollisionTask::handleHit(AttackCollisionTask *this, UFG::HitReactionComponent *opponentHitComp, bool foundBlocker, float blockDist2)
+char __fastcall AttackCollisionTask::handleHit(
+        AttackCollisionTask *this,
+        UFG::HitReactionComponent *opponentHitComp,
+        bool foundBlocker,
+        float blockDist2)
 {
-  float v4; // xmm7_4
-  UFG::HitReactionComponent *v5; // r13
-  AttackCollisionTask *v6; // rdi
-  UFG::SimObjectGame *v7; // rbx
-  int v8; // er9
-  signed __int64 v9; // rcx
-  UFG::SimObject **v10; // rax
-  UFG::CharacterPhysicsComponent *v11; // rsi
-  unsigned __int16 v12; // cx
-  UFG::SimComponent *v13; // rax
-  UFG::TransformNodeComponent *v14; // r14
-  int v15; // xmm2_4
-  int v16; // xmm3_4
+  UFG::SimObjectGame *m_pSimObject; // rbx
+  int mHitCount; // r9d
+  __int64 v9; // rcx
+  UFG::SimObject **mHitDudes; // rax
+  UFG::CharacterPhysicsComponent *m_pComponent; // rsi
+  __int16 m_Flags; // cx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // r14
+  float y; // xmm2_4
+  float z; // xmm3_4
   char v17; // si
-  UFG::eSimObjectTypeEnum v18; // er15
-  unsigned __int16 v19; // cx
-  UFG::SimComponent *v20; // rax
+  UFG::eSimObjectTypeEnum mNext; // r15d
+  __int16 v19; // cx
+  UFG::SimComponent *ComponentOfType; // rax
   UFG::GameStatTracker *v21; // rax
-  int v22; // eax
+  int Faction; // eax
   UFG::eStimulusType v23; // edx
-  ITrack *v24; // rcx
-  UFG::eStimulusType v25; // edx
-  UFG::SimObject *v26; // r9
-  UFG::StimulusParameters stimulus_parameters; // [rsp+40h] [rbp-88h]
-  float v29; // [rsp+58h] [rbp-70h]
-  int v30; // [rsp+5Ch] [rbp-6Ch]
+  ITrack *m_Track; // rcx
+  UFG::eStimulusType value_low; // edx
+  UFG::SimObject *m_pPointer; // r9
+  UFG::StimulusParameters stimulus_parameters; // [rsp+40h] [rbp-88h] BYREF
+  float x; // [rsp+58h] [rbp-70h]
+  float v30; // [rsp+5Ch] [rbp-6Ch]
   float v31; // [rsp+60h] [rbp-68h]
-  float v32; // [rsp+68h] [rbp-60h]
-  int v33; // [rsp+6Ch] [rbp-5Ch]
-  int v34; // [rsp+70h] [rbp-58h]
-  __int64 v35; // [rsp+78h] [rbp-50h]
+  UFG::qVector3 v32; // [rsp+68h] [rbp-60h] BYREF
+  __int64 v33; // [rsp+78h] [rbp-50h]
   float fTime; // [rsp+1D8h] [rbp+110h]
-  char v37; // [rsp+1E8h] [rbp+120h]
+  char v35; // [rsp+1E8h] [rbp+120h]
 
-  v35 = -2i64;
-  v4 = blockDist2;
-  v5 = opponentHitComp;
-  v6 = this;
-  v7 = (UFG::SimObjectGame *)opponentHitComp->m_pSimObject;
-  v8 = 32;
+  v33 = -2i64;
+  m_pSimObject = (UFG::SimObjectGame *)opponentHitComp->m_pSimObject;
+  mHitCount = 32;
   if ( this->mHitCount < 32 )
-    v8 = this->mHitCount;
+    mHitCount = this->mHitCount;
   v9 = 0i64;
-  if ( v8 > 0 )
+  if ( mHitCount > 0 )
   {
-    v10 = v6->mHitDudes;
-    while ( v7 != (UFG::SimObjectGame *)*v10 )
+    mHitDudes = this->mHitDudes;
+    while ( m_pSimObject != *mHitDudes )
     {
       ++v9;
-      ++v10;
-      if ( v9 >= v8 )
+      ++mHitDudes;
+      if ( v9 >= mHitCount )
         goto LABEL_7;
     }
     return 0;
   }
 LABEL_7:
-  if ( v7 )
+  if ( m_pSimObject )
   {
-    v12 = v7->m_Flags;
-    if ( (v12 >> 14) & 1 )
+    m_Flags = m_pSimObject->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v11 = (UFG::CharacterPhysicsComponent *)v7->m_Components.p[27].m_pComponent;
+      m_pComponent = (UFG::CharacterPhysicsComponent *)m_pSimObject->m_Components.p[27].m_pComponent;
     }
     else
     {
-      if ( (v12 & 0x8000u) == 0 )
-      {
-        if ( (v12 >> 13) & 1 )
-        {
-          v13 = UFG::SimObjectGame::GetComponentOfTypeHK(v7, UFG::CharacterPhysicsComponent::_TypeUID);
-        }
-        else if ( (v12 >> 12) & 1 )
-        {
-          v13 = UFG::SimObjectGame::GetComponentOfTypeHK(v7, UFG::CharacterPhysicsComponent::_TypeUID);
-        }
-        else
-        {
-          v13 = UFG::SimObject::GetComponentOfType(
-                  (UFG::SimObject *)&v7->vfptr,
-                  UFG::CharacterPhysicsComponent::_TypeUID);
-        }
-      }
+      if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                              m_pSimObject,
+                              UFG::CharacterPhysicsComponent::_TypeUID);
       else
-      {
-        v13 = UFG::SimObjectGame::GetComponentOfTypeHK(v7, UFG::CharacterPhysicsComponent::_TypeUID);
-      }
-      v11 = (UFG::CharacterPhysicsComponent *)v13;
+        ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::CharacterPhysicsComponent::_TypeUID);
+      m_pComponent = (UFG::CharacterPhysicsComponent *)ComponentOfTypeHK;
     }
   }
   else
   {
-    v11 = 0i64;
+    m_pComponent = 0i64;
   }
-  v14 = v7->m_pTransformNodeComponent;
-  if ( !v11 )
+  m_pTransformNodeComponent = m_pSimObject->m_pTransformNodeComponent;
+  if ( !m_pComponent )
     return 0;
-  if ( !v14 )
+  if ( !m_pTransformNodeComponent )
     return 0;
-  UFG::CharacterPhysicsComponent::GetRadius(v11);
-  UFG::TransformNodeComponent::UpdateWorldTransform(v14);
-  v15 = LODWORD(v14->mWorldTransform.v3.y);
-  v16 = SLODWORD(v14->mWorldTransform.v3.z);
-  v32 = v14->mWorldTransform.v3.x;
-  v33 = v15;
-  v34 = v16;
-  v29 = v32;
-  v30 = v15;
-  v31 = *(float *)&v16;
-  v31 = *(float *)&v16 + UFG::CharacterPhysicsComponent::GetHeight(v11, v11->mCollisionModelType);
+  UFG::CharacterPhysicsComponent::GetRadius(m_pComponent);
+  UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+  y = m_pTransformNodeComponent->mWorldTransform.v3.y;
+  z = m_pTransformNodeComponent->mWorldTransform.v3.z;
+  v32.x = m_pTransformNodeComponent->mWorldTransform.v3.x;
+  v32.y = y;
+  v32.z = z;
+  x = v32.x;
+  v30 = y;
+  v31 = z;
+  v31 = z + UFG::CharacterPhysicsComponent::GetHeight(m_pComponent, m_pComponent->mCollisionModelType);
   v17 = UFG::SweptSphereCapsuleQuery(
-          *((float *)&v6->m_Track[2].mMasterRate.expression.mOffset + 1),
-          &v6->mAttackPosition0,
-          &v6->mAttackPosition1,
-          (UFG::qVector3 *)&v32);
-  if ( v37 )
+          *((float *)&this->m_Track[2].mMasterRate.expression.mOffset + 1),
+          &this->mAttackPosition0,
+          &this->mAttackPosition1,
+          &v32);
+  if ( v35 )
   {
-    if ( (float)((float)((float)((float)((float)(v6->mAttackPosition1.y - v6->mAttackPosition0.y) * fTime)
-                               * (float)((float)(v6->mAttackPosition1.y - v6->mAttackPosition0.y) * fTime))
-                       + (float)((float)((float)(v6->mAttackPosition1.x - v6->mAttackPosition0.x) * fTime)
-                               * (float)((float)(v6->mAttackPosition1.x - v6->mAttackPosition0.x) * fTime)))
-               + (float)((float)((float)(v6->mAttackPosition1.z - v6->mAttackPosition0.z) * fTime)
-                       * (float)((float)(v6->mAttackPosition1.z - v6->mAttackPosition0.z) * fTime))) > v4 )
+    if ( (float)((float)((float)((float)((float)(this->mAttackPosition1.y - this->mAttackPosition0.y) * fTime)
+                               * (float)((float)(this->mAttackPosition1.y - this->mAttackPosition0.y) * fTime))
+                       + (float)((float)((float)(this->mAttackPosition1.x - this->mAttackPosition0.x) * fTime)
+                               * (float)((float)(this->mAttackPosition1.x - this->mAttackPosition0.x) * fTime)))
+               + (float)((float)((float)(this->mAttackPosition1.z - this->mAttackPosition0.z) * fTime)
+                       * (float)((float)(this->mAttackPosition1.z - this->mAttackPosition0.z) * fTime))) > blockDist2 )
       return 0;
   }
   if ( v17 )
   {
-    v6->mHitDudes[v6->mHitCount++ % 32] = (UFG::SimObject *)&v7->vfptr;
-    v18 = 0;
-    v19 = v7->m_Flags;
-    if ( (v19 >> 14) & 1 )
+    this->mHitDudes[this->mHitCount++ % 32] = m_pSimObject;
+    mNext = eSIM_OBJ_TYPE_INVALID;
+    v19 = m_pSimObject->m_Flags;
+    if ( (v19 & 0x4000) != 0 )
     {
-      v20 = v7->m_Components.p[3].m_pComponent;
+      ComponentOfType = m_pSimObject->m_Components.p[3].m_pComponent;
     }
-    else if ( (v19 & 0x8000u) == 0 )
+    else if ( v19 >= 0 )
     {
-      if ( (v19 >> 13) & 1 )
+      if ( (v19 & 0x2000) != 0 )
       {
-        v20 = v7->m_Components.p[4].m_pComponent;
+        ComponentOfType = m_pSimObject->m_Components.p[4].m_pComponent;
       }
-      else if ( (v19 >> 12) & 1 )
+      else if ( (v19 & 0x1000) != 0 )
       {
-        v20 = UFG::SimObjectGame::GetComponentOfTypeHK(v7, UFG::SimObjectPropertiesComponent::_TypeUID);
+        ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(
+                            m_pSimObject,
+                            UFG::SimObjectPropertiesComponent::_TypeUID);
       }
       else
       {
-        v20 = UFG::SimObject::GetComponentOfType(
-                (UFG::SimObject *)&v7->vfptr,
-                UFG::SimObjectPropertiesComponent::_TypeUID);
+        ComponentOfType = UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::SimObjectPropertiesComponent::_TypeUID);
       }
     }
     else
     {
-      v20 = v7->m_Components.p[3].m_pComponent;
+      ComponentOfType = m_pSimObject->m_Components.p[3].m_pComponent;
     }
-    if ( v20 )
-      v18 = (UFG::eSimObjectTypeEnum)v20[1].m_SafePointerList.mNode.mNext;
+    if ( ComponentOfType )
+      mNext = (UFG::eSimObjectTypeEnum)ComponentOfType[1].m_SafePointerList.mNode.mNext;
     UFG::HitRecord::HitRecord((UFG::HitRecord *)&stimulus_parameters.m_StimulusProducerOffset.z);
     AttackCollisionTask::setupHitRecord(
-      v6,
+      this,
       (UFG::HitRecord *)&stimulus_parameters.m_StimulusProducerOffset.z,
-      v14,
-      v18,
+      m_pTransformNodeComponent,
+      mNext,
       fTime);
-    UFG::HitReactionComponent::HandleHitReaction(v5, (UFG::HitRecord *)&stimulus_parameters.m_StimulusProducerOffset.z);
-    if ( LOBYTE(v6->m_Track[3].mMasterRate.text.mOffset) )
+    UFG::HitReactionComponent::HandleHitReaction(
+      opponentHitComp,
+      (UFG::HitRecord *)&stimulus_parameters.m_StimulusProducerOffset.z);
+    if ( LOBYTE(this->m_Track[3].mMasterRate.text.mOffset) )
     {
       stimulus_parameters.m_MaxStimulusDuration = -1.0;
       stimulus_parameters.m_EmitUntilSpeedLessThan = -1.0;
-      stimulus_parameters.m_StimulusEmissionType = 0;
+      stimulus_parameters.m_StimulusEmissionType = eSTIMULUS_EMISSION_ONE_OFF;
       stimulus_parameters.m_StimulusProducerOffset = UFG::qVector3::msZero;
       UFG::StimulusManager::BeginStimulus(
         UFG::StimulusManager::s_pInstance,
         eSTIMULUS_MELEE_ATTACK,
         &stimulus_parameters,
-        v6->mContext->mSimObject.m_pPointer,
-        (UFG::SimObject *)&v7->vfptr);
+        this->mContext->mSimObject.m_pPointer,
+        m_pSimObject);
       UFG::StimulusManager::BeginStimulus(
         UFG::StimulusManager::s_pInstance,
         eSTIMULUS_MELEE_ATTACK_NEAR_YOU,
         &stimulus_parameters,
-        v6->mContext->mSimObject.m_pPointer,
-        0);
+        this->mContext->mSimObject.m_pPointer,
+        eTARGET_TYPE_INVALID);
       v21 = UFG::FactionInterface::Get();
-      v22 = UFG::FactionInterface::GetFaction(&v21->mFactionInterface, (UFG::SimObject *)&v7->vfptr);
-      v23 = 10;
-      if ( v22 != 17 )
-        v23 = 9;
+      Faction = UFG::FactionInterface::GetFaction(&v21->mFactionInterface, m_pSimObject);
+      v23 = eSTIMULUS_MELEE_FIGHT_VS_INNOCENT;
+      if ( Faction != 17 )
+        v23 = eSTIMULUS_MELEE_FIGHT_VS_COMBATANT;
       UFG::StimulusManager::BeginStimulus(
         UFG::StimulusManager::s_pInstance,
         v23,
         &stimulus_parameters,
-        v6->mContext->mSimObject.m_pPointer,
-        0);
+        this->mContext->mSimObject.m_pPointer,
+        eTARGET_TYPE_INVALID);
     }
-    v24 = v6->m_Track;
-    if ( LODWORD(v24[2].mMasterRate.value) )
+    m_Track = this->m_Track;
+    if ( LODWORD(m_Track[2].mMasterRate.value) )
     {
       stimulus_parameters.m_MaxStimulusDuration = -1.0;
       stimulus_parameters.m_EmitUntilSpeedLessThan = -1.0;
-      stimulus_parameters.m_StimulusEmissionType = 0;
+      stimulus_parameters.m_StimulusEmissionType = eSTIMULUS_EMISSION_ONE_OFF;
       stimulus_parameters.m_StimulusProducerOffset = UFG::qVector3::msZero;
-      v25 = LODWORD(v24[2].mMasterRate.value);
-      v26 = v6->mContext->mSimObject.m_pPointer;
-      if ( BYTE5(v24[3].mMasterRate.text.mOffset) )
+      value_low = LODWORD(m_Track[2].mMasterRate.value);
+      m_pPointer = this->mContext->mSimObject.m_pPointer;
+      if ( BYTE5(m_Track[3].mMasterRate.text.mOffset) )
         UFG::StimulusManager::BeginStimulus(
           UFG::StimulusManager::s_pInstance,
-          v25,
+          value_low,
           &stimulus_parameters,
-          v26,
-          (UFG::SimObject *)&v7->vfptr);
+          m_pPointer,
+          m_pSimObject);
       else
-        UFG::StimulusManager::BeginStimulus(UFG::StimulusManager::s_pInstance, v25, &stimulus_parameters, v26, 0);
+        UFG::StimulusManager::BeginStimulus(
+          UFG::StimulusManager::s_pInstance,
+          value_low,
+          &stimulus_parameters,
+          m_pPointer,
+          eTARGET_TYPE_INVALID);
     }
     UFG::HitRecord::~HitRecord((UFG::HitRecord *)&stimulus_parameters.m_StimulusProducerOffset.z);
   }
@@ -1671,141 +1585,138 @@ LABEL_7:
 
 // File Line: 1104
 // RVA: 0x30DA50
-char __fastcall AttackCollisionTask::handleIncomingAttack(AttackCollisionTask *this, UFG::eAttackPhaseEnum eAttackPhase, UFG::SimObject *pClosePedSimObject)
+char __fastcall AttackCollisionTask::handleIncomingAttack(
+        AttackCollisionTask *this,
+        UFG::eAttackPhaseEnum eAttackPhase,
+        UFG::SimObjectGame *pClosePedSimObject)
 {
-  UFG::SimObjectGame *v3; // rbx
-  UFG::eAttackPhaseEnum v4; // er15
-  AttackCollisionTask *v5; // r14
-  UFG::SimObject *v6; // rsi
-  UFG::TransformNodeComponent *v7; // rsi
+  UFG::SimObject *m_pPointer; // rsi
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rsi
   UFG::TransformNodeComponent *v8; // rdi
-  unsigned __int16 v9; // cx
-  UFG::HitReactionComponent *v10; // r8
+  signed __int16 m_Flags; // cx
+  UFG::HitReactionComponent *m_pComponent; // r8
   UFG::SimComponent *v11; // rax
-  ITrack *v12; // rcx
-  int v13; // er9
-  int v14; // er10
+  ITrack *m_Track; // rcx
+  int vfptr; // r9d
+  int mTimeEnd_low; // r10d
   UFG::SimObject *v15; // rdx
-  int v16; // eax
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v19; // rax
+  int mTimeBegin_low; // eax
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v18; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v20; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v21; // rax
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v22; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v23; // rax
-  UFG::IncomingAttackInfo incomingAttackInfo; // [rsp+28h] [rbp-38h]
+  UFG::IncomingAttackInfo incomingAttackInfo; // [rsp+28h] [rbp-38h] BYREF
 
-  v3 = (UFG::SimObjectGame *)pClosePedSimObject;
-  v4 = eAttackPhase;
-  v5 = this;
-  if ( !(_S16 & 1) )
+  if ( (_S16 & 1) == 0 )
   {
     _S16 |= 1u;
     s_fMaxHorizontalDistanceSquared = FLOAT_9_0;
   }
-  v6 = this->mContext->mSimObject.m_pPointer;
-  if ( v6 )
-    v7 = v6->m_pTransformNodeComponent;
+  m_pPointer = this->mContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
+    m_pTransformNodeComponent = m_pPointer->m_pTransformNodeComponent;
   else
-    v7 = 0i64;
+    m_pTransformNodeComponent = 0i64;
   v8 = 0i64;
   if ( pClosePedSimObject )
     v8 = pClosePedSimObject->m_pTransformNodeComponent;
-  if ( !v7 )
+  if ( !m_pTransformNodeComponent )
     return 0;
   if ( !v8 )
     return 0;
   UFG::TransformNodeComponent::UpdateWorldTransform(v8);
-  UFG::TransformNodeComponent::UpdateWorldTransform(v7);
-  if ( (float)((float)((float)((float)(v8->mWorldTransform.v3.x - v7->mWorldTransform.v3.x)
-                             * (float)(v8->mWorldTransform.v3.x - v7->mWorldTransform.v3.x))
-                     + (float)((float)(v8->mWorldTransform.v3.y - v7->mWorldTransform.v3.y)
-                             * (float)(v8->mWorldTransform.v3.y - v7->mWorldTransform.v3.y)))
-             + (float)((float)(v8->mWorldTransform.v3.z - v7->mWorldTransform.v3.z)
-                     * (float)(v8->mWorldTransform.v3.z - v7->mWorldTransform.v3.z))) >= s_fMaxHorizontalDistanceSquared
-    || !v3 )
+  UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+  if ( (float)((float)((float)((float)(v8->mWorldTransform.v3.x - m_pTransformNodeComponent->mWorldTransform.v3.x)
+                             * (float)(v8->mWorldTransform.v3.x - m_pTransformNodeComponent->mWorldTransform.v3.x))
+                     + (float)((float)(v8->mWorldTransform.v3.y - m_pTransformNodeComponent->mWorldTransform.v3.y)
+                             * (float)(v8->mWorldTransform.v3.y - m_pTransformNodeComponent->mWorldTransform.v3.y)))
+             + (float)((float)(v8->mWorldTransform.v3.z - m_pTransformNodeComponent->mWorldTransform.v3.z)
+                     * (float)(v8->mWorldTransform.v3.z - m_pTransformNodeComponent->mWorldTransform.v3.z))) >= s_fMaxHorizontalDistanceSquared
+    || !pClosePedSimObject )
   {
     return 0;
   }
-  v9 = v3->m_Flags;
-  if ( (v9 >> 14) & 1 )
+  m_Flags = pClosePedSimObject->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 )
   {
-    v10 = (UFG::HitReactionComponent *)v3->m_Components.p[15].m_pComponent;
+    m_pComponent = (UFG::HitReactionComponent *)pClosePedSimObject->m_Components.p[15].m_pComponent;
   }
-  else if ( (v9 & 0x8000u) == 0 )
+  else if ( m_Flags >= 0 )
   {
-    if ( (v9 >> 13) & 1 )
-      v11 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::HitReactionComponent::_TypeUID);
-    else
-      v11 = (v9 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::HitReactionComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::HitReactionComponent::_TypeUID);
-    v10 = (UFG::HitReactionComponent *)v11;
+    v11 = (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+        ? UFG::SimObjectGame::GetComponentOfTypeHK(pClosePedSimObject, UFG::HitReactionComponent::_TypeUID)
+        : UFG::SimObject::GetComponentOfType(pClosePedSimObject, UFG::HitReactionComponent::_TypeUID);
+    m_pComponent = (UFG::HitReactionComponent *)v11;
   }
   else
   {
-    v10 = (UFG::HitReactionComponent *)v3->m_Components.p[15].m_pComponent;
+    m_pComponent = (UFG::HitReactionComponent *)pClosePedSimObject->m_Components.p[15].m_pComponent;
   }
-  if ( !v10 )
+  if ( !m_pComponent )
     return 0;
   *(_QWORD *)&incomingAttackInfo.mAttackPhaseEnum = 0i64;
-  incomingAttackInfo.mAttacker.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&incomingAttackInfo.mAttacker.mPrev;
-  incomingAttackInfo.mAttacker.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&incomingAttackInfo.mAttacker.mPrev;
+  incomingAttackInfo.mAttacker.mPrev = &incomingAttackInfo.mAttacker;
+  incomingAttackInfo.mAttacker.mNext = &incomingAttackInfo.mAttacker;
   incomingAttackInfo.mAttacker.m_pPointer = 0i64;
   *(_QWORD *)&incomingAttackInfo.mAttackLocationLateralID = 0i64;
   incomingAttackInfo.mTimeSinceUpdated = 1000;
-  v12 = v5->m_Track;
-  v13 = (int)v12[3].vfptr;
-  v14 = LODWORD(v12[2].mTimeEnd);
-  v15 = v5->mContext->mSimObject.m_pPointer;
-  v16 = LODWORD(v12[2].mTimeBegin);
-  incomingAttackInfo.mAttackPhaseEnum = v4;
-  incomingAttackInfo.mAttackTypeID = v16;
+  m_Track = this->m_Track;
+  vfptr = (int)m_Track[3].vfptr;
+  mTimeEnd_low = LODWORD(m_Track[2].mTimeEnd);
+  v15 = this->mContext->mSimObject.m_pPointer;
+  mTimeBegin_low = LODWORD(m_Track[2].mTimeBegin);
+  incomingAttackInfo.mAttackPhaseEnum = eAttackPhase;
+  incomingAttackInfo.mAttackTypeID = mTimeBegin_low;
   incomingAttackInfo.mAttacker.m_pPointer = v15;
   if ( v15 )
   {
-    v19 = v15->m_SafePointerList.mNode.mPrev;
-    v19->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&incomingAttackInfo.mAttacker.mPrev;
-    incomingAttackInfo.mAttacker.mPrev = v19;
-    incomingAttackInfo.mAttacker.mNext = &v15->m_SafePointerList.mNode;
-    v15->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&incomingAttackInfo.mAttacker.mPrev;
+    mPrev = v15->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+    mPrev->mNext = &incomingAttackInfo.mAttacker;
+    incomingAttackInfo.mAttacker.mPrev = mPrev;
+    incomingAttackInfo.mAttacker.mNext = &v15->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+    v15->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = &incomingAttackInfo.mAttacker;
   }
-  incomingAttackInfo.mAttackLocationLateralID = v14;
-  incomingAttackInfo.mAttackLocationHorizontalID = v13;
+  incomingAttackInfo.mAttackLocationLateralID = mTimeEnd_low;
+  incomingAttackInfo.mAttackLocationHorizontalID = vfptr;
   incomingAttackInfo.mTimeSinceUpdated = 0;
-  UFG::HitReactionComponent::HandleIncomingAttack(v10, &incomingAttackInfo);
+  UFG::HitReactionComponent::HandleIncomingAttack(m_pComponent, &incomingAttackInfo);
   if ( incomingAttackInfo.mAttacker.m_pPointer )
   {
-    v20 = incomingAttackInfo.mAttacker.mPrev;
-    v21 = incomingAttackInfo.mAttacker.mNext;
+    v18 = incomingAttackInfo.mAttacker.mPrev;
+    mNext = incomingAttackInfo.mAttacker.mNext;
     incomingAttackInfo.mAttacker.mPrev->mNext = incomingAttackInfo.mAttacker.mNext;
-    v21->mPrev = v20;
-    incomingAttackInfo.mAttacker.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&incomingAttackInfo.mAttacker.mPrev;
-    incomingAttackInfo.mAttacker.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&incomingAttackInfo.mAttacker.mPrev;
+    mNext->mPrev = v18;
+    incomingAttackInfo.mAttacker.mPrev = &incomingAttackInfo.mAttacker;
+    incomingAttackInfo.mAttacker.mNext = &incomingAttackInfo.mAttacker;
   }
   incomingAttackInfo.mAttacker.m_pPointer = 0i64;
-  v22 = incomingAttackInfo.mAttacker.mPrev;
-  v23 = incomingAttackInfo.mAttacker.mNext;
+  v20 = incomingAttackInfo.mAttacker.mPrev;
+  v21 = incomingAttackInfo.mAttacker.mNext;
   incomingAttackInfo.mAttacker.mPrev->mNext = incomingAttackInfo.mAttacker.mNext;
-  v23->mPrev = v22;
-  incomingAttackInfo.mAttacker.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&incomingAttackInfo.mAttacker.mPrev;
-  incomingAttackInfo.mAttacker.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&incomingAttackInfo.mAttacker.mPrev;
+  v21->mPrev = v20;
+  incomingAttackInfo.mAttacker.mPrev = &incomingAttackInfo.mAttacker;
+  incomingAttackInfo.mAttacker.mNext = &incomingAttackInfo.mAttacker;
   return 1;
 }
 
 // File Line: 1138
 // RVA: 0x30BB20
-void __fastcall AttackCollisionTask::applyAttackDamage(AttackCollisionTask *this, UFG::ShapeCasterCollector *caster, UFG::qVector3 *startPosition, UFG::qVector3 *dir)
+void __fastcall AttackCollisionTask::applyAttackDamage(
+        AttackCollisionTask *this,
+        UFG::ShapeCasterCollector *caster,
+        UFG::qVector3 *startPosition,
+        UFG::qVector3 *dir)
 {
-  UFG::qVector3 *v4; // rdi
-  UFG::ShapeCasterCollector *v5; // rbx
-  AttackCollisionTask *v6; // r13
-  Render::DebugDrawContext *v7; // r15
+  Render::DebugDrawContext *Context; // r15
   __int64 v8; // rax
   float v9; // xmm1_4
   float v10; // xmm2_4
   UFG::qReflectObjectType<UFG::PhysicsSurfaceProperties,UFG::qReflectObject> *v11; // rcx
-  const char *v12; // rax
+  const char *TypeName; // rax
   UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject> *v13; // rcx
   const char *v14; // rax
-  UFG::qNode<UFG::ShapeCasterCollector::HitInfo,UFG::ShapeCasterCollector::HitInfo> *v15; // r14
+  UFG::qNode<UFG::ShapeCasterCollector::HitInfo,UFG::ShapeCasterCollector::HitInfo> *mNext; // r14
   float v16; // xmm10_4
   bool v17; // bl
   float v18; // xmm2_4
@@ -1815,45 +1726,45 @@ void __fastcall AttackCollisionTask::applyAttackDamage(AttackCollisionTask *this
   unsigned __int64 v22; // rdi
   UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject> *v23; // rcx
   const char *v24; // rax
-  unsigned __int64 v25; // rdi
+  unsigned __int64 mPrev; // rdi
   UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject> *v26; // rcx
   const char *v27; // rax
-  ITrack *v28; // rbx
+  ITrack *m_Track; // rbx
   __int64 v29; // rax
-  signed __int64 v30; // rcx
-  signed int v31; // eax
+  char *v30; // rcx
+  int x_low; // eax
   float v32; // xmm6_4
-  UFG::SimObjectGame *v33; // rcx
-  unsigned __int16 v34; // dx
-  UFG::SimComponent *v35; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rax
   UFG::SimObjectGame *v36; // rcx
   UFG::SimComponent *v37; // rcx
-  unsigned __int16 v38; // dx
+  __int16 v38; // dx
   UFG::SimComponent *v39; // rax
   __int64 v40; // rax
   UFG::SimObjectProp *v41; // rcx
-  unsigned __int16 v42; // dx
+  __int16 v42; // dx
   UFG::SimObjectWeaponPropertiesComponent *v43; // rax
   UFG::qNode<UFG::ShapeCasterCollector::HitInfo,UFG::ShapeCasterCollector::HitInfo> *v44; // rdi
   UFG::SimComponent *v45; // rdi
-  UFG::SimObjectCharacter *v46; // rax
-  UFG::SimObjectCharacter *v47; // rdx
+  UFG::SimObjectCharacter *LocalPlayer; // rax
+  UFG::SimObject *m_pSimObject; // rdx
   bool v48; // zf
   UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject> *v49; // rcx
   const char *v50; // rax
-  unsigned __int64 v51; // rbx
-  const char *v52; // rax
+  unsigned __int64 DnaUid; // rbx
+  const char *StaticTypeName; // rax
   unsigned __int64 v53; // rax
-  UFG::StateMachineComponent *v54; // rcx
+  UFG::StateMachineComponent *vfptr; // rcx
   UFG::SimObjectGame *v55; // rcx
   UFG::VehicleEffectsComponent *v56; // rdi
-  unsigned __int16 v57; // dx
-  UFG::SimComponent *v58; // rax
+  __int16 v57; // dx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   float v59; // xmm1_4
   float v60; // xmm2_4
   UFG::CopSystem *v61; // rax
   UFG::qNode<UFG::ShapeCasterCollector::HitInfo,UFG::ShapeCasterCollector::HitInfo> *v62; // r8
-  unsigned __int16 v63; // cx
+  __int16 v63; // cx
   UFG::HitReactionComponent *v64; // rbx
   UFG::SimComponent *v65; // rax
   UFG::SimObjectGame *v66; // rcx
@@ -1862,47 +1773,47 @@ void __fastcall AttackCollisionTask::applyAttackDamage(AttackCollisionTask *this
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v69; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v70; // rax
   UFG::SimObjectGame *v71; // rcx
-  unsigned __int16 v72; // dx
-  UFG::SimComponent *v73; // rax
-  hkSimpleLocalFrame *v74; // rbx
-  UFG::SimObject *v75; // rbx
+  __int16 v72; // dx
+  hkSimpleLocalFrame *v73; // rbx
+  UFG::SimComponent *ComponentOfType; // rax
+  UFG::SimObject *Texture; // rbx
   UFG::GameStatTracker *v76; // rax
-  int v77; // eax
+  int Faction; // eax
   UFG::eStimulusType v78; // edx
   __int64 v79; // rcx
   unsigned int v80; // eax
-  unsigned int v81; // er12
+  unsigned int AttackMaterialUIDForAttacker; // r12d
   UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject> *v82; // rcx
   const char *v83; // rax
   unsigned int v84; // esi
-  unsigned int v85; // er15
+  unsigned int v85; // r15d
   unsigned __int64 v86; // r8
-  UFG::qReflectObject *v87; // rax
+  UFG::qReflectObject *mData; // rax
   UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject> *v88; // rcx
   const char *v89; // rax
   unsigned __int64 v90; // r8
   float v91; // ebx
   UFG::SimObjectCharacter *v92; // rcx
-  unsigned __int16 v93; // dx
+  __int16 v93; // dx
   UFG::ActorAudioComponent *v94; // rax
   UFG::ActorAudioComponent *v95; // rdi
-  unsigned int v96; // er14
+  unsigned int AudioIntensityUID; // r14d
   float v97; // xmm2_4
   float v98; // xmm1_4
   UFG::qNode<UFG::ShapeCasterCollector::HitInfo,UFG::ShapeCasterCollector::HitInfo> *v99; // [rsp+48h] [rbp-80h]
-  UFG::StimulusParameters stimulus_parameters; // [rsp+50h] [rbp-78h]
+  UFG::StimulusParameters stimulus_parameters; // [rsp+50h] [rbp-78h] BYREF
   float v101; // [rsp+68h] [rbp-60h]
-  UFG::qVector3 centre; // [rsp+70h] [rbp-58h]
-  UFG::qReflectHandleBase v103; // [rsp+80h] [rbp-48h]
-  UFG::qReflectHandleBase v104; // [rsp+A8h] [rbp-20h]
-  UFG::qReflectHandleBase v105; // [rsp+D0h] [rbp+8h]
-  UFG::qReflectHandleBase v106; // [rsp+F8h] [rbp+30h]
-  UFG::qReflectHandleBase v107; // [rsp+120h] [rbp+58h]
-  UFG::qReflectHandleBase v108; // [rsp+148h] [rbp+80h]
-  UFG::qReflectHandleBase v109; // [rsp+170h] [rbp+A8h]
+  UFG::qVector3 centre; // [rsp+70h] [rbp-58h] BYREF
+  UFG::qReflectHandleBase v103; // [rsp+80h] [rbp-48h] BYREF
+  UFG::qReflectHandleBase v104; // [rsp+A8h] [rbp-20h] BYREF
+  UFG::qReflectHandleBase v105; // [rsp+D0h] [rbp+8h] BYREF
+  UFG::qReflectHandleBase v106; // [rsp+F8h] [rbp+30h] BYREF
+  UFG::qReflectHandleBase v107; // [rsp+120h] [rbp+58h] BYREF
+  UFG::qReflectHandleBase v108; // [rsp+148h] [rbp+80h] BYREF
+  UFG::qReflectHandleBase v109; // [rsp+170h] [rbp+A8h] BYREF
   __int64 v110; // [rsp+198h] [rbp+D0h]
-  UFG::qReflectHandleBase v111; // [rsp+1A0h] [rbp+D8h]
-  UFG::HitRecord hitrecord; // [rsp+1C8h] [rbp+100h]
+  UFG::qReflectHandleBase v111; // [rsp+1A0h] [rbp+D8h] BYREF
+  UFG::HitRecord hitrecord; // [rsp+1C8h] [rbp+100h] BYREF
   char v113; // [rsp+3A0h] [rbp+2D8h]
   UFG::qVector3 *v114; // [rsp+3A8h] [rbp+2E0h]
   char v115; // [rsp+3B8h] [rbp+2F0h]
@@ -1910,37 +1821,34 @@ void __fastcall AttackCollisionTask::applyAttackDamage(AttackCollisionTask *this
   void *retaddr; // [rsp+3C8h] [rbp+300h]
 
   v110 = -2i64;
-  v4 = startPosition;
-  v5 = caster;
-  v6 = this;
-  v7 = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 1u);
-  *(_QWORD *)&centre.x = v7;
+  Context = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 1u);
+  *(_QWORD *)&centre.x = Context;
   if ( gAttackCollisionDebug )
   {
-    v8 = ((__int64 (*)(void))v5->mPhantom->vfptr[2].__first_virtual_table_function__)();
+    v8 = ((__int64 (__fastcall *)(hkpShapePhantom *))caster->mPhantom->vfptr[2].__first_virtual_table_function__)(caster->mPhantom);
     v9 = *(float *)(v8 + 52);
     v10 = *(float *)(v8 + 56);
     centre.x = *(float *)(v8 + 48);
     centre.y = v9;
     centre.z = v10;
     Render::DebugDrawContext::DrawSphere(
-      v7,
+      Context,
       &centre,
-      v5->mRadius,
+      caster->mRadius,
       &UFG::qColour::Red,
       &UFG::qMatrix44::msIdentity,
       0i64);
   }
   UFG::qReflectHandleBase::qReflectHandleBase(&v103);
-  v12 = UFG::qReflectObjectType<UFG::PhysicsSurfaceProperties,UFG::qReflectObject>::GetTypeName(v11);
-  v103.mTypeUID = UFG::qStringHash64(v12, 0xFFFFFFFFFFFFFFFFui64);
+  TypeName = UFG::qReflectObjectType<UFG::PhysicsSurfaceProperties,UFG::qReflectObject>::GetTypeName(v11);
+  v103.mTypeUID = UFG::qStringHash64(TypeName, 0xFFFFFFFFFFFFFFFFui64);
   UFG::qReflectHandleBase::qReflectHandleBase(&v107);
   v14 = UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject>::GetTypeName(v13);
   v107.mTypeUID = UFG::qStringHash64(v14, 0xFFFFFFFFFFFFFFFFui64);
-  v15 = v5->mHitList.mNode.mNext;
-  v99 = v15;
-  *(_QWORD *)&centre.x = (char *)v5 + 8;
-  if ( v15 != (UFG::qNode<UFG::ShapeCasterCollector::HitInfo,UFG::ShapeCasterCollector::HitInfo> *)&v5->mHitList )
+  mNext = caster->mHitList.mNode.mNext;
+  v99 = mNext;
+  *(_QWORD *)&centre.x = &caster->mHitList;
+  if ( mNext != (UFG::qNode<UFG::ShapeCasterCollector::HitInfo,UFG::ShapeCasterCollector::HitInfo> *)&caster->mHitList )
   {
     v16 = vars0;
     do
@@ -1948,16 +1856,19 @@ void __fastcall AttackCollisionTask::applyAttackDamage(AttackCollisionTask *this
       v17 = 0;
       if ( v115 )
       {
-        v18 = (float)((float)(*(float *)&retaddr * *((float *)&v15[2].mPrev + 1)) + *(float *)&v15[1].mNext) - v4->z;
-        v19 = (float)((float)(*(float *)&retaddr * *(float *)&v15[2].mPrev) + *((float *)&v15[1].mPrev + 1)) - v4->y;
-        v20 = (float)((float)(*(float *)&retaddr * *((float *)&v15[1].mNext + 1)) + *(float *)&v15[1].mPrev) - v4->x;
+        v18 = (float)((float)(*(float *)&retaddr * *((float *)&mNext[2].mPrev + 1)) + *(float *)&mNext[1].mNext)
+            - startPosition->z;
+        v19 = (float)((float)(*(float *)&retaddr * *(float *)&mNext[2].mPrev) + *((float *)&mNext[1].mPrev + 1))
+            - startPosition->y;
+        v20 = (float)((float)(*(float *)&retaddr * *((float *)&mNext[1].mNext + 1)) + *(float *)&mNext[1].mPrev)
+            - startPosition->x;
         v17 = (float)((float)((float)(v20 * v20) + (float)(v19 * v19)) + (float)(v18 * v18)) > v16;
       }
       v21 = 0;
-      if ( BYTE4(v6->m_Track[3].mMasterRate.text.mOffset) )
+      if ( BYTE4(this->m_Track[3].mMasterRate.text.mOffset) )
       {
         v17 = 1;
-        v22 = (unsigned __int64)v15[5].mNext;
+        v22 = (unsigned __int64)mNext[5].mNext;
         if ( v22 )
         {
           UFG::qReflectHandleBase::qReflectHandleBase(&v108);
@@ -1965,22 +1876,18 @@ void __fastcall AttackCollisionTask::applyAttackDamage(AttackCollisionTask *this
           v108.mTypeUID = UFG::qStringHash64(v24, 0xFFFFFFFFFFFFFFFFui64);
           UFG::qReflectHandleBase::Init(&v108, v108.mTypeUID, v22);
           if ( v108.mData )
-          {
-            v17 = 1;
-            if ( LOBYTE(v108.mData[2].vfptr) )
-              v17 = 0;
-          }
+            v17 = LOBYTE(v108.mData[2].vfptr) == 0;
           UFG::qReflectHandleBase::~qReflectHandleBase(&v108);
         }
-        v25 = (unsigned __int64)v15[6].mPrev;
+        mPrev = (unsigned __int64)mNext[6].mPrev;
         if ( !v17 )
         {
-LABEL_20:
-          v28 = v6->m_Track;
-          v29 = *(_QWORD *)&v28[1].mMasterRate.value;
+LABEL_19:
+          m_Track = this->m_Track;
+          v29 = *(_QWORD *)&m_Track[1].mMasterRate.value;
           if ( v29
-            && (v30 = (signed __int64)&v28[1].mMasterRate.value + v29) != 0
-            && ((*(void (__fastcall **)(signed __int64, UFG::StimulusParameters *, UEL::ParametersBase *, _QWORD, UFG::qStringBuilder *))(*(_QWORD *)v30 + 24i64))(
+            && (v30 = (char *)&m_Track[1].mMasterRate.value + v29) != 0i64
+            && ((*(void (__fastcall **)(char *, UFG::StimulusParameters *, UEL::ParametersBase *, _QWORD, UFG::qStringBuilder *))(*(_QWORD *)v30 + 24i64))(
                   v30,
                   &stimulus_parameters,
                   UEL::gCurrentParameters,
@@ -1989,496 +1896,455 @@ LABEL_20:
                 LOWORD(stimulus_parameters.m_EmitUntilSpeedLessThan)) )
           {
             if ( LOWORD(stimulus_parameters.m_EmitUntilSpeedLessThan) == 1 )
-              v31 = LODWORD(stimulus_parameters.m_StimulusProducerOffset.x);
+              x_low = LODWORD(stimulus_parameters.m_StimulusProducerOffset.x);
             else
-              v31 = (signed int)stimulus_parameters.m_StimulusProducerOffset.x;
+              x_low = (int)stimulus_parameters.m_StimulusProducerOffset.x;
           }
           else
           {
-            v31 = LODWORD(v28[1].mTimeBegin);
+            x_low = LODWORD(m_Track[1].mTimeBegin);
           }
-          v32 = (float)v31 * 0.0099999998;
-          v33 = (UFG::SimObjectGame *)v6->mContext->mSimObject.m_pPointer;
-          if ( v33 )
+          v32 = (float)x_low * 0.0099999998;
+          m_pPointer = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
+          if ( !m_pPointer )
+            goto LABEL_59;
+          m_Flags = m_pPointer->m_Flags;
+          if ( (m_Flags & 0x4000) != 0 )
           {
-            v34 = v33->m_Flags;
-            if ( (v34 >> 14) & 1 )
+            m_pComponent = m_pPointer->m_Components.p[20].m_pComponent;
+          }
+          else if ( m_Flags >= 0 )
+          {
+            m_pComponent = (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+                         ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                             m_pPointer,
+                             UFG::TargetingSystemBaseComponent::_TypeUID)
+                         : UFG::SimObject::GetComponentOfType(m_pPointer, UFG::TargetingSystemBaseComponent::_TypeUID);
+          }
+          else
+          {
+            m_pComponent = m_pPointer->m_Components.p[20].m_pComponent;
+          }
+          if ( !m_pComponent )
+            goto LABEL_59;
+          v36 = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
+          if ( v36 )
+          {
+            v38 = v36->m_Flags;
+            if ( (v38 & 0x4000) != 0 )
             {
-              v35 = v33->m_Components.p[20].m_pComponent;
+              v37 = v36->m_Components.p[20].m_pComponent;
             }
-            else if ( (v34 & 0x8000u) == 0 )
+            else if ( v38 >= 0 )
             {
-              if ( (v34 >> 13) & 1 )
-                v35 = UFG::SimObjectGame::GetComponentOfTypeHK(v33, UFG::TargetingSystemBaseComponent::_TypeUID);
-              else
-                v35 = (v34 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                          v33,
-                                          UFG::TargetingSystemBaseComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(
-                                                                                           (UFG::SimObject *)&v33->vfptr,
-                                                                                           UFG::TargetingSystemBaseComponent::_TypeUID);
+              v39 = (v38 & 0x2000) != 0 || (v38 & 0x1000) != 0
+                  ? UFG::SimObjectGame::GetComponentOfTypeHK(v36, UFG::TargetingSystemBaseComponent::_TypeUID)
+                  : UFG::SimObject::GetComponentOfType(v36, UFG::TargetingSystemBaseComponent::_TypeUID);
+              v37 = v39;
             }
             else
             {
-              v35 = v33->m_Components.p[20].m_pComponent;
-            }
-            if ( v35 )
-            {
-              v36 = (UFG::SimObjectGame *)v6->mContext->mSimObject.m_pPointer;
-              if ( v36 )
-              {
-                v38 = v36->m_Flags;
-                if ( (v38 >> 14) & 1 )
-                {
-                  v37 = v36->m_Components.p[20].m_pComponent;
-                }
-                else if ( (v38 & 0x8000u) == 0 )
-                {
-                  if ( (v38 >> 13) & 1 )
-                    v39 = UFG::SimObjectGame::GetComponentOfTypeHK(v36, UFG::TargetingSystemBaseComponent::_TypeUID);
-                  else
-                    v39 = (v38 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                              v36,
-                                              UFG::TargetingSystemBaseComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(
-                                                                                               (UFG::SimObject *)&v36->vfptr,
-                                                                                               UFG::TargetingSystemBaseComponent::_TypeUID);
-                  v37 = v39;
-                }
-                else
-                {
-                  v37 = v36->m_Components.p[20].m_pComponent;
-                }
-              }
-              else
-              {
-                v37 = 0i64;
-              }
-              v40 = ((__int64 (*)(void))v37->vfptr[15].__vecDelDtor)();
-              if ( v40 )
-              {
-                v41 = *(UFG::SimObjectProp **)(56i64 * *(unsigned __int8 *)(*(_QWORD *)(v40 + 96) + 25i64)
-                                             + *(_QWORD *)(v40 + 88)
-                                             + 40);
-                if ( v41 )
-                {
-                  v42 = v41->m_Flags;
-                  if ( (v42 >> 14) & 1 )
-                  {
-                    v43 = (UFG::SimObjectWeaponPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                       (UFG::SimObjectGame *)&v41->vfptr,
-                                                                       UFG::SimObjectWeaponPropertiesComponent::_TypeUID);
-                  }
-                  else if ( (v42 & 0x8000u) == 0 )
-                  {
-                    if ( (v42 >> 13) & 1 )
-                      v43 = UFG::SimObjectProp::GetComponent<UFG::SimObjectWeaponPropertiesComponent>(v41);
-                    else
-                      v43 = (UFG::SimObjectWeaponPropertiesComponent *)((v42 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                                            (UFG::SimObjectGame *)&v41->vfptr,
-                                                                                            UFG::SimObjectWeaponPropertiesComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v41->vfptr, UFG::SimObjectWeaponPropertiesComponent::_TypeUID));
-                  }
-                  else
-                  {
-                    v43 = (UFG::SimObjectWeaponPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                       (UFG::SimObjectGame *)&v41->vfptr,
-                                                                       UFG::SimObjectWeaponPropertiesComponent::_TypeUID);
-                  }
-                  if ( v43 )
-                    v32 = v32 * v43->mWeaponTypeInfo->mFireModes[v43->mFireMode]->mDamageMultiplier;
-                }
-              }
+              v37 = v36->m_Components.p[20].m_pComponent;
             }
           }
-          v113 = 0;
-          v44 = v15[2].mNext[1].mNext;
-          if ( !v21 )
+          else
           {
-            if ( v44 )
+            v37 = 0i64;
+          }
+          v40 = ((__int64 (__fastcall *)(UFG::SimComponent *))v37->vfptr[15].__vecDelDtor)(v37);
+          if ( !v40 )
+            goto LABEL_59;
+          v41 = *(UFG::SimObjectProp **)(56i64 * *(unsigned __int8 *)(*(_QWORD *)(v40 + 96) + 25i64)
+                                       + *(_QWORD *)(v40 + 88)
+                                       + 40);
+          if ( !v41 )
+            goto LABEL_59;
+          v42 = v41->m_Flags;
+          if ( (v42 & 0x4000) == 0 && v42 >= 0 )
+          {
+            if ( (v42 & 0x2000) != 0 )
             {
-              v45 = (UFG::SimComponent *)v44[1].mNext;
-              if ( v45 )
+              v43 = UFG::SimObjectProp::GetComponent<UFG::SimObjectWeaponPropertiesComponent>(v41);
+LABEL_57:
+              if ( v43 )
+                v32 = v32 * v43->mWeaponTypeInfo->mFireModes[v43->mFireMode]->mDamageMultiplier;
+LABEL_59:
+              v113 = 0;
+              v44 = mNext[2].mNext[1].mNext;
+              if ( !v21 )
               {
-                v46 = UFG::GetLocalPlayer();
-                v47 = (UFG::SimObjectCharacter *)v45->m_pSimObject;
-                if ( v46 == v47
-                  || (v48 = v46 == (UFG::SimObjectCharacter *)v6->mContext->mSimObject.m_pPointer, v113 = 0, v48) )
+                if ( v44 )
                 {
-                  v113 = 1;
-                }
-                if ( v47 == (UFG::SimObjectCharacter *)v6->mContext->mSimObject.m_pPointer )
-                  goto LABEL_174;
-                if ( UFG::SimComponent::IsType(v45, UFG::RigidBodyComponent::_RigidBodyComponentTypeUID) )
-                {
-                  UFG::qReflectHandleBase::qReflectHandleBase(&v106);
-                  v50 = UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject>::GetTypeName(v49);
-                  v106.mTypeUID = UFG::qStringHash64(v50, 0xFFFFFFFFFFFFFFFFui64);
-                  UFG::qReflectHandleBase::Init(&v106, v106.mTypeUID, (unsigned __int64)v15[5].mNext);
-                  if ( v106.mData )
+                  v45 = (UFG::SimComponent *)v44[1].mNext;
+                  if ( v45 )
                   {
-                    v51 = UFG::StateMachineDefinition::GetDnaUid(HIDWORD(v106.mData[4].mBaseNode.mParent));
-                    UFG::qReflectHandleBase::qReflectHandleBase(&v111);
-                    v52 = UFG::qReflectObjectType<UFG::StateMachineDefinition,UFG::qReflectObject>::GetStaticTypeName();
-                    v53 = UFG::qStringHash64(v52, 0xFFFFFFFFFFFFFFFFui64);
-                    UFG::qReflectHandleBase::Init(&v111, v53, v51);
-                    if ( v111.mData )
+                    LocalPlayer = UFG::GetLocalPlayer();
+                    m_pSimObject = v45->m_pSimObject;
+                    if ( LocalPlayer == m_pSimObject
+                      || (v48 = LocalPlayer == this->mContext->mSimObject.m_pPointer, v113 = 0, v48) )
                     {
-                      if ( *((float *)&v111.mData[1].mBaseNode.mChildren[1] + 1) > 0.0 )
-                      {
-                        v54 = (UFG::StateMachineComponent *)v45[6].vfptr;
-                        if ( v54 )
-                          UFG::StateMachineComponent::ApplyDamage(
-                            v54,
-                            v32,
-                            ATTACK_DAMAGE,
-                            v6->mContext->mSimObject.m_pPointer);
-                      }
+                      v113 = 1;
                     }
-                    UFG::qReflectHandleBase::~qReflectHandleBase(&v111);
+                    if ( m_pSimObject == this->mContext->mSimObject.m_pPointer )
+                      goto LABEL_167;
+                    if ( UFG::SimComponent::IsType(v45, UFG::RigidBodyComponent::_RigidBodyComponentTypeUID) )
+                    {
+                      UFG::qReflectHandleBase::qReflectHandleBase(&v106);
+                      v50 = UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject>::GetTypeName(v49);
+                      v106.mTypeUID = UFG::qStringHash64(v50, 0xFFFFFFFFFFFFFFFFui64);
+                      UFG::qReflectHandleBase::Init(&v106, v106.mTypeUID, (unsigned __int64)mNext[5].mNext);
+                      if ( v106.mData )
+                      {
+                        DnaUid = UFG::StateMachineDefinition::GetDnaUid(HIDWORD(v106.mData[4].mBaseNode.mParent));
+                        UFG::qReflectHandleBase::qReflectHandleBase(&v111);
+                        StaticTypeName = UFG::qReflectObjectType<UFG::StateMachineDefinition,UFG::qReflectObject>::GetStaticTypeName();
+                        v53 = UFG::qStringHash64(StaticTypeName, 0xFFFFFFFFFFFFFFFFui64);
+                        UFG::qReflectHandleBase::Init(&v111, v53, DnaUid);
+                        if ( v111.mData )
+                        {
+                          if ( *((float *)&v111.mData[1].mBaseNode.mChildren[1] + 1) > 0.0 )
+                          {
+                            vfptr = (UFG::StateMachineComponent *)v45[6].vfptr;
+                            if ( vfptr )
+                              UFG::StateMachineComponent::ApplyDamage(
+                                vfptr,
+                                v32,
+                                ATTACK_DAMAGE,
+                                this->mContext->mSimObject.m_pPointer);
+                          }
+                        }
+                        UFG::qReflectHandleBase::~qReflectHandleBase(&v111);
+                      }
+                      UFG::qReflectHandleBase::~qReflectHandleBase(&v106);
+                    }
                   }
-                  UFG::qReflectHandleBase::~qReflectHandleBase(&v106);
                 }
               }
-            }
-          }
-          if ( gAttackCollisionDebug )
-            Render::DebugDrawContext::DrawSphere(
-              v7,
-              (UFG::qVector3 *)&v15[1],
-              0.0099999998,
-              &UFG::qColour::Red,
-              &UFG::qMatrix44::msIdentity,
-              0i64);
-          v55 = (UFG::SimObjectGame *)v15[5].mPrev;
-          if ( !v55 )
-          {
-            v56 = 0i64;
-            goto LABEL_92;
-          }
-          v57 = v55->m_Flags;
-          if ( (v57 >> 14) & 1 )
-          {
-            v58 = UFG::SimObjectGame::GetComponentOfTypeHK(v55, UFG::VehicleEffectsComponent::_TypeUID);
-            goto LABEL_91;
-          }
-          if ( (v57 & 0x8000u) == 0 )
-          {
-            if ( (v57 >> 13) & 1 )
-            {
-              v58 = UFG::SimObjectGame::GetComponentOfTypeHK(v55, UFG::VehicleEffectsComponent::_TypeUID);
-            }
-            else if ( (v57 >> 12) & 1 )
-            {
-              v58 = UFG::SimObjectGame::GetComponentOfTypeHK(v55, UFG::VehicleEffectsComponent::_TypeUID);
-            }
-            else
-            {
-              v58 = UFG::SimObject::GetComponentOfType(
-                      (UFG::SimObject *)&v55->vfptr,
-                      UFG::VehicleEffectsComponent::_TypeUID);
-            }
-LABEL_91:
-            v56 = (UFG::VehicleEffectsComponent *)v58;
-          }
-          else
-          {
-            v56 = (UFG::VehicleEffectsComponent *)v55->m_Components.p[32].m_pComponent;
-          }
-LABEL_92:
-          if ( !v21 )
-          {
-            if ( v56 )
-            {
-              stimulus_parameters.m_StimulusProducerOffset = UFG::qVector3::msZero;
-              stimulus_parameters.m_MaxStimulusDuration = -1.0;
-              stimulus_parameters.m_EmitUntilSpeedLessThan = -1.0;
-              stimulus_parameters.m_StimulusEmissionType = 0;
-              UFG::StimulusManager::BeginStimulus(
-                UFG::StimulusManager::s_pInstance,
-                eSTIMULUS_VEHICLE_DAMAGED_BY_MELEE,
-                &stimulus_parameters,
-                (UFG::SimObject *)v15[5].mPrev);
-              v59 = *((float *)&v15[1].mPrev + 1);
-              v60 = *(float *)&v15[1].mNext;
-              stimulus_parameters.m_StimulusProducerOffset.x = *(float *)&v15[1].mPrev;
-              stimulus_parameters.m_StimulusProducerOffset.y = v59;
-              stimulus_parameters.m_StimulusProducerOffset.z = v60;
-              UFG::VehicleEffectsComponent::MeleeBasedDamage(
-                v56,
-                &stimulus_parameters.m_StimulusProducerOffset,
-                v32 * 5.0,
-                v32);
-              v61 = UFG::CopSystem::Instance();
-              ((void (__fastcall *)(UFG::CopSystem *, UFG::SimObject *, UFG::qNode<UFG::ShapeCasterCollector::HitInfo,UFG::ShapeCasterCollector::HitInfo> *))v61->vfptr[96].__vecDelDtor)(
-                v61,
-                v6->mContext->mSimObject.m_pPointer,
-                v15[5].mPrev);
-              v62 = v15[5].mPrev;
-              if ( v62 )
+              if ( gAttackCollisionDebug )
+                Render::DebugDrawContext::DrawSphere(
+                  Context,
+                  (UFG::qVector3 *)&mNext[1],
+                  0.0099999998,
+                  &UFG::qColour::Red,
+                  &UFG::qMatrix44::msIdentity,
+                  0i64);
+              v55 = (UFG::SimObjectGame *)mNext[5].mPrev;
+              if ( !v55 )
               {
-                v63 = WORD2(v62[4].mNext);
-                if ( (v63 >> 14) & 1 )
-                {
-                  v64 = (UFG::HitReactionComponent *)v62[6].mNext[15].mPrev;
-                }
-                else if ( (v63 & 0x8000u) == 0 )
-                {
-                  if ( (v63 >> 13) & 1 )
-                  {
-                    v65 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                            (UFG::SimObjectGame *)v15[5].mPrev,
-                            UFG::HitReactionComponent::_TypeUID);
-                  }
-                  else
-                  {
-                    v48 = ((v63 >> 12) & 1) == 0;
-                    v66 = (UFG::SimObjectGame *)v15[5].mPrev;
-                    v65 = v48 ? UFG::SimObject::GetComponentOfType(
-                                  (UFG::SimObject *)&v66->vfptr,
-                                  UFG::HitReactionComponent::_TypeUID) : UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                           v66,
-                                                                           UFG::HitReactionComponent::_TypeUID);
-                  }
-                  v64 = (UFG::HitReactionComponent *)v65;
-                }
-                else
-                {
-                  v64 = (UFG::HitReactionComponent *)v62[6].mNext[15].mPrev;
-                }
-                if ( v64 )
-                {
-                  UFG::HitRecord::HitRecord(&hitrecord);
-                  v67 = v6->mContext->mSimObject.m_pPointer;
-                  if ( hitrecord.mAttacker.m_pPointer )
-                  {
-                    v68 = hitrecord.mAttacker.mPrev;
-                    v69 = hitrecord.mAttacker.mNext;
-                    hitrecord.mAttacker.mPrev->mNext = hitrecord.mAttacker.mNext;
-                    v69->mPrev = v68;
-                    hitrecord.mAttacker.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&hitrecord.mAttacker.mPrev;
-                    hitrecord.mAttacker.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&hitrecord.mAttacker.mPrev;
-                  }
-                  hitrecord.mAttacker.m_pPointer = v67;
-                  if ( v67 )
-                  {
-                    v70 = v67->m_SafePointerList.mNode.mPrev;
-                    v70->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&hitrecord.mAttacker.mPrev;
-                    hitrecord.mAttacker.mPrev = v70;
-                    hitrecord.mAttacker.mNext = &v67->m_SafePointerList.mNode;
-                    v67->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&hitrecord.mAttacker.mPrev;
-                  }
-                  UFG::HitReactionComponent::SetHitRecord(v64, &hitrecord);
-                  UFG::HitRecord::~HitRecord(&hitrecord);
-                }
+                v56 = 0i64;
+                goto LABEL_87;
               }
-            }
-          }
-          if ( LOBYTE(v6->m_Track[3].mMasterRate.text.mOffset) )
-          {
-            v71 = (UFG::SimObjectGame *)v15[5].mPrev;
-            if ( v71 )
-            {
-              v72 = v71->m_Flags;
-              if ( (v72 >> 14) & 1 )
+              v57 = v55->m_Flags;
+              if ( (v57 & 0x4000) != 0 )
               {
-                v73 = UFG::SimObjectGame::GetComponentOfTypeHK(v71, UFG::VehicleOccupantComponent::_TypeUID);
-                goto LABEL_122;
+LABEL_84:
+                ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                      v55,
+                                      UFG::VehicleEffectsComponent::_TypeUID);
+                goto LABEL_86;
               }
-              if ( (v72 & 0x8000u) == 0 )
+              if ( v57 >= 0 )
               {
-                if ( (v72 >> 13) & 1 )
-                {
-                  v73 = UFG::SimObjectGame::GetComponentOfTypeHK(v71, UFG::VehicleOccupantComponent::_TypeUID);
-                }
-                else if ( (v72 >> 12) & 1 )
-                {
-                  v73 = UFG::SimObjectGame::GetComponentOfTypeHK(v71, UFG::VehicleOccupantComponent::_TypeUID);
-                }
-                else
-                {
-                  v73 = UFG::SimObject::GetComponentOfType(
-                          (UFG::SimObject *)&v71->vfptr,
-                          UFG::VehicleOccupantComponent::_TypeUID);
-                }
-LABEL_122:
-                v74 = (hkSimpleLocalFrame *)v73;
+                if ( (v57 & 0x2000) != 0 || (v57 & 0x1000) != 0 )
+                  goto LABEL_84;
+                ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(v55, UFG::VehicleEffectsComponent::_TypeUID);
+LABEL_86:
+                v56 = (UFG::VehicleEffectsComponent *)ComponentOfTypeHK;
               }
               else
               {
-                v74 = (hkSimpleLocalFrame *)v71->m_Components.p[30].m_pComponent;
+                v56 = (UFG::VehicleEffectsComponent *)v55->m_Components.p[32].m_pComponent;
               }
-              if ( v74 )
+LABEL_87:
+              if ( !v21 )
               {
-                stimulus_parameters.m_MaxStimulusDuration = -1.0;
-                stimulus_parameters.m_EmitUntilSpeedLessThan = -1.0;
-                stimulus_parameters.m_StimulusEmissionType = 0;
-                stimulus_parameters.m_StimulusProducerOffset = UFG::qVector3::msZero;
-                UFG::StimulusManager::BeginStimulus(
-                  UFG::StimulusManager::s_pInstance,
-                  eSTIMULUS_MELEE_ATTACK_NEAR_YOU,
-                  &stimulus_parameters,
-                  v6->mContext->mSimObject.m_pPointer,
-                  0);
-                v75 = (UFG::SimObject *)Scaleform::Render::RBGenericImpl::RenderTarget::GetTexture(v74);
-                if ( v75 )
+                if ( v56 )
                 {
-                  v76 = UFG::FactionInterface::Get();
-                  v77 = UFG::FactionInterface::GetFaction(&v76->mFactionInterface, v75);
-                  v78 = 10;
-                  if ( v77 != 17 )
-                    v78 = 9;
+                  stimulus_parameters.m_StimulusProducerOffset = UFG::qVector3::msZero;
+                  stimulus_parameters.m_MaxStimulusDuration = -1.0;
+                  stimulus_parameters.m_EmitUntilSpeedLessThan = -1.0;
+                  stimulus_parameters.m_StimulusEmissionType = eSTIMULUS_EMISSION_ONE_OFF;
                   UFG::StimulusManager::BeginStimulus(
                     UFG::StimulusManager::s_pInstance,
-                    v78,
+                    eSTIMULUS_VEHICLE_DAMAGED_BY_MELEE,
                     &stimulus_parameters,
-                    v6->mContext->mSimObject.m_pPointer,
-                    0);
+                    (UFG::SimObject *)mNext[5].mPrev);
+                  v59 = *((float *)&mNext[1].mPrev + 1);
+                  v60 = *(float *)&mNext[1].mNext;
+                  stimulus_parameters.m_StimulusProducerOffset.x = *(float *)&mNext[1].mPrev;
+                  stimulus_parameters.m_StimulusProducerOffset.y = v59;
+                  stimulus_parameters.m_StimulusProducerOffset.z = v60;
+                  UFG::VehicleEffectsComponent::MeleeBasedDamage(
+                    v56,
+                    &stimulus_parameters.m_StimulusProducerOffset,
+                    v32 * 5.0,
+                    v32);
+                  v61 = UFG::CopSystem::Instance();
+                  ((void (__fastcall *)(UFG::CopSystem *, UFG::SimObject *, UFG::qNode<UFG::ShapeCasterCollector::HitInfo,UFG::ShapeCasterCollector::HitInfo> *))v61->vfptr[96].__vecDelDtor)(
+                    v61,
+                    this->mContext->mSimObject.m_pPointer,
+                    mNext[5].mPrev);
+                  v62 = mNext[5].mPrev;
+                  if ( v62 )
+                  {
+                    v63 = WORD2(v62[4].mNext);
+                    if ( (v63 & 0x4000) != 0 )
+                    {
+                      v64 = (UFG::HitReactionComponent *)v62[6].mNext[15].mPrev;
+                    }
+                    else if ( v63 >= 0 )
+                    {
+                      if ( (v63 & 0x2000) != 0 )
+                      {
+                        v65 = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                (UFG::SimObjectGame *)mNext[5].mPrev,
+                                UFG::HitReactionComponent::_TypeUID);
+                      }
+                      else
+                      {
+                        v48 = (v63 & 0x1000) == 0;
+                        v66 = (UFG::SimObjectGame *)mNext[5].mPrev;
+                        v65 = v48
+                            ? UFG::SimObject::GetComponentOfType(v66, UFG::HitReactionComponent::_TypeUID)
+                            : UFG::SimObjectGame::GetComponentOfTypeHK(v66, UFG::HitReactionComponent::_TypeUID);
+                      }
+                      v64 = (UFG::HitReactionComponent *)v65;
+                    }
+                    else
+                    {
+                      v64 = (UFG::HitReactionComponent *)v62[6].mNext[15].mPrev;
+                    }
+                    if ( v64 )
+                    {
+                      UFG::HitRecord::HitRecord(&hitrecord);
+                      v67 = this->mContext->mSimObject.m_pPointer;
+                      if ( hitrecord.mAttacker.m_pPointer )
+                      {
+                        v68 = hitrecord.mAttacker.mPrev;
+                        v69 = hitrecord.mAttacker.mNext;
+                        hitrecord.mAttacker.mPrev->mNext = hitrecord.mAttacker.mNext;
+                        v69->mPrev = v68;
+                        hitrecord.mAttacker.mPrev = &hitrecord.mAttacker;
+                        hitrecord.mAttacker.mNext = &hitrecord.mAttacker;
+                      }
+                      hitrecord.mAttacker.m_pPointer = v67;
+                      if ( v67 )
+                      {
+                        v70 = v67->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+                        v70->mNext = &hitrecord.mAttacker;
+                        hitrecord.mAttacker.mPrev = v70;
+                        hitrecord.mAttacker.mNext = &v67->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+                        v67->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = &hitrecord.mAttacker;
+                      }
+                      UFG::HitReactionComponent::SetHitRecord(v64, &hitrecord);
+                      UFG::HitRecord::~HitRecord(&hitrecord);
+                    }
+                  }
                 }
               }
-            }
-          }
-          if ( (signed int)gAttackCollisionEnum.m_enumLists.size <= 0 )
-            v79 = 0i64;
-          else
-            v79 = *((_QWORD *)gAttackCollisionEnum.m_enumLists.p + 5);
-          v80 = UFG::qStringHash32(
-                  *(const char **)(*(_QWORD *)(v79 + 16) + 8i64 * v6->m_Track[3].m_TrackClassNameUID),
-                  0xFFFFFFFF);
-          v81 = findAttackMaterialUIDForAttacker(v6->mContext, v6->mContext->mSimObject.m_pPointer, v80);
-          if ( !v81 )
-            goto LABEL_174;
-          UFG::qReflectHandleBase::qReflectHandleBase(&v104);
-          v83 = UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject>::GetTypeName(v82);
-          v104.mTypeUID = UFG::qStringHash64(v83, 0xFFFFFFFFFFFFFFFFui64);
-          UFG::PhysicsPropertyManager::GetObjectProperties(
-            (UFG::qReflectHandle<UFG::PhysicsObjectProperties> *)&v104,
-            v81,
-            1);
-          if ( !v104.mData )
-            goto LABEL_173;
-          v84 = -1;
-          v85 = -1;
-          v86 = (unsigned __int64)v15[6].mPrev;
-          if ( !v86 )
-            goto LABEL_178;
-          v87 = v103.mData;
-          if ( v103.mData || (UFG::qReflectHandleBase::Init(&v103, v103.mTypeUID, v86), (v87 = v103.mData) != 0i64) )
-          {
-            v84 = (unsigned int)v87[1].mBaseNode.mChildren[0];
-            v85 = HIDWORD(v87[1].mBaseNode.mChildren[0]);
-          }
-          if ( !(_S17_0 & 1) )
-          {
-            _S17_0 |= 1u;
-            glassUid = UFG::qStringHashUpper32("Glass_Vehicle", 0xFFFFFFFF);
-          }
-          UFG::qReflectHandleBase::qReflectHandleBase(&v105);
-          v89 = UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject>::GetTypeName(v88);
-          v105.mTypeUID = UFG::qStringHash64(v89, 0xFFFFFFFFFFFFFFFFui64);
-          UFG::qReflectHandleBase::Init(&v105, v105.mTypeUID, (unsigned __int64)v15[6].mPrev);
-          if ( v56 && v105.mData && HIDWORD(v105.mData[4].mBaseNode.mParent) == glassUid )
-          {
-            if ( !UFG::VehicleEffectsComponent::IsGlassBroken(v56, (UFG::qVector3 *)&v15[1]) )
-            {
-              UFG::VehicleEffectsComponent::BreakGlass(v56, (UFG::qVector3 *)&v15[1]);
-              goto LABEL_146;
-            }
-            if ( !BYTE4(v6->m_Track[3].mMasterRate.text.mOffset) )
-              goto LABEL_146;
-            UFG::qReflectHandleBase::~qReflectHandleBase(&v105);
-LABEL_173:
-            UFG::qReflectHandleBase::~qReflectHandleBase(&v104);
-            goto LABEL_174;
-          }
-LABEL_146:
-          UFG::qReflectHandleBase::~qReflectHandleBase(&v105);
-          if ( v84 == -1 || v85 == -1 )
-          {
-LABEL_178:
-            v90 = (unsigned __int64)v15[5].mNext;
-            if ( v90 )
-            {
-              UFG::qReflectHandleBase::Init(&v107, v107.mTypeUID, v90);
-              if ( v107.mData )
+              if ( LOBYTE(this->m_Track[3].mMasterRate.text.mOffset) )
               {
-                if ( v84 == -1 )
-                  v84 = *(_DWORD *)(v107.mData[4].mBaseNode.mUID + 104);
-                if ( v85 == -1 )
-                  v85 = *(_DWORD *)(v107.mData[4].mBaseNode.mUID + 108);
-              }
-            }
-          }
-          if ( v84 != -1 )
-          {
-            v91 = *(float *)&UFG::PhysicsObjectProperties::GetAudioProperty(
-                               (UFG::PhysicsObjectProperties *)v104.mData,
-                               (UFG::qWiseSymbol *)&AudioAttackMaterialProperty.mUID)->mUID;
-            centre.z = v91;
-            _((AMD_HD3D *)LODWORD(v91));
-            if ( v91 != 0.0 )
-            {
-              v92 = (UFG::SimObjectCharacter *)v6->mContext->mSimObject.m_pPointer;
-              if ( v92 )
-              {
-                v93 = v92->m_Flags;
-                if ( (v93 >> 14) & 1 )
+                v71 = (UFG::SimObjectGame *)mNext[5].mPrev;
+                if ( v71 )
                 {
-                  v94 = UFG::SimObjectCharacter::GetComponent<UFG::ActorAudioComponent>(v92);
-                }
-                else if ( (v93 & 0x8000u) == 0 )
-                {
-                  if ( (v93 >> 13) & 1 )
-                    v94 = (UFG::ActorAudioComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                        (UFG::SimObjectGame *)&v92->vfptr,
-                                                        UFG::ActorAudioComponent::_TypeUID);
+                  v72 = v71->m_Flags;
+                  if ( (v72 & 0x4000) != 0 )
+                    goto LABEL_114;
+                  if ( v72 >= 0 )
+                  {
+                    if ( (v72 & 0x2000) != 0 || (v72 & 0x1000) != 0 )
+LABEL_114:
+                      ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                          v71,
+                                          UFG::VehicleOccupantComponent::_TypeUID);
+                    else
+                      ComponentOfType = UFG::SimObject::GetComponentOfType(v71, UFG::VehicleOccupantComponent::_TypeUID);
+                    v73 = (hkSimpleLocalFrame *)ComponentOfType;
+                  }
                   else
-                    v94 = (UFG::ActorAudioComponent *)((v93 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                           (UFG::SimObjectGame *)&v92->vfptr,
-                                                                           UFG::ActorAudioComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v92->vfptr, UFG::ActorAudioComponent::_TypeUID));
-                }
-                else
-                {
-                  v94 = (UFG::ActorAudioComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                      (UFG::SimObjectGame *)&v92->vfptr,
-                                                      UFG::ActorAudioComponent::_TypeUID);
-                }
-                v95 = v94;
-                if ( v94 )
-                {
-                  v96 = AttackCollisionTrack::GetAudioIntensityUID((AttackCollisionTrack *)v6->m_Track);
-                  UFG::ActorAudioComponent::PlayFightImpact(v95, LODWORD(v91), v84, v96);
-                  if ( v113 )
-                    UFG::ActorAudioComponent::PlayFightRumble(v95, LODWORD(v91), v84, v96);
-                  v15 = v99;
+                  {
+                    v73 = (hkSimpleLocalFrame *)v71->m_Components.p[30].m_pComponent;
+                  }
+                  if ( v73 )
+                  {
+                    stimulus_parameters.m_MaxStimulusDuration = -1.0;
+                    stimulus_parameters.m_EmitUntilSpeedLessThan = -1.0;
+                    stimulus_parameters.m_StimulusEmissionType = eSTIMULUS_EMISSION_ONE_OFF;
+                    stimulus_parameters.m_StimulusProducerOffset = UFG::qVector3::msZero;
+                    UFG::StimulusManager::BeginStimulus(
+                      UFG::StimulusManager::s_pInstance,
+                      eSTIMULUS_MELEE_ATTACK_NEAR_YOU,
+                      &stimulus_parameters,
+                      this->mContext->mSimObject.m_pPointer,
+                      eTARGET_TYPE_INVALID);
+                    Texture = (UFG::SimObject *)Scaleform::Render::RBGenericImpl::RenderTarget::GetTexture(v73);
+                    if ( Texture )
+                    {
+                      v76 = UFG::FactionInterface::Get();
+                      Faction = UFG::FactionInterface::GetFaction(&v76->mFactionInterface, Texture);
+                      v78 = eSTIMULUS_MELEE_FIGHT_VS_INNOCENT;
+                      if ( Faction != 17 )
+                        v78 = eSTIMULUS_MELEE_FIGHT_VS_COMBATANT;
+                      UFG::StimulusManager::BeginStimulus(
+                        UFG::StimulusManager::s_pInstance,
+                        v78,
+                        &stimulus_parameters,
+                        this->mContext->mSimObject.m_pPointer,
+                        eTARGET_TYPE_INVALID);
+                    }
+                  }
                 }
               }
+              if ( (int)gAttackCollisionEnum.m_enumLists.size <= 0 )
+                v79 = 0i64;
+              else
+                v79 = *((_QWORD *)gAttackCollisionEnum.m_enumLists.p + 5);
+              v80 = UFG::qStringHash32(
+                      *(const char **)(*(_QWORD *)(v79 + 16) + 8i64 * this->m_Track[3].m_TrackClassNameUID),
+                      0xFFFFFFFF);
+              AttackMaterialUIDForAttacker = findAttackMaterialUIDForAttacker(
+                                               this->mContext,
+                                               this->mContext->mSimObject.m_pPointer,
+                                               v80);
+              if ( !AttackMaterialUIDForAttacker )
+                goto LABEL_167;
+              UFG::qReflectHandleBase::qReflectHandleBase(&v104);
+              v83 = UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject>::GetTypeName(v82);
+              v104.mTypeUID = UFG::qStringHash64(v83, 0xFFFFFFFFFFFFFFFFui64);
+              UFG::PhysicsPropertyManager::GetObjectProperties(
+                (UFG::qReflectHandle<UFG::PhysicsObjectProperties> *)&v104,
+                AttackMaterialUIDForAttacker,
+                1);
+              if ( !v104.mData )
+                goto LABEL_166;
+              v84 = -1;
+              v85 = -1;
+              v86 = (unsigned __int64)mNext[6].mPrev;
+              if ( !v86 )
+                goto LABEL_142;
+              mData = v103.mData;
+              if ( v103.mData
+                || (UFG::qReflectHandleBase::Init(&v103, v103.mTypeUID, v86), (mData = v103.mData) != 0i64) )
+              {
+                v84 = (unsigned int)mData[1].mBaseNode.mChildren[0];
+                v85 = HIDWORD(mData[1].mBaseNode.mChildren[0]);
+              }
+              if ( (_S17_0 & 1) == 0 )
+              {
+                _S17_0 |= 1u;
+                glassUid = UFG::qStringHashUpper32("Glass_Vehicle", -1);
+              }
+              UFG::qReflectHandleBase::qReflectHandleBase(&v105);
+              v89 = UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject>::GetTypeName(v88);
+              v105.mTypeUID = UFG::qStringHash64(v89, 0xFFFFFFFFFFFFFFFFui64);
+              UFG::qReflectHandleBase::Init(&v105, v105.mTypeUID, (unsigned __int64)mNext[6].mPrev);
+              if ( v56 && v105.mData && HIDWORD(v105.mData[4].mBaseNode.mParent) == glassUid )
+              {
+                if ( !UFG::VehicleEffectsComponent::IsGlassBroken(v56, (UFG::qVector3 *)&mNext[1]) )
+                {
+                  UFG::VehicleEffectsComponent::BreakGlass(v56, (UFG::qVector3 *)&mNext[1]);
+                  goto LABEL_140;
+                }
+                if ( !BYTE4(this->m_Track[3].mMasterRate.text.mOffset) )
+                  goto LABEL_140;
+                UFG::qReflectHandleBase::~qReflectHandleBase(&v105);
+LABEL_166:
+                UFG::qReflectHandleBase::~qReflectHandleBase(&v104);
+                goto LABEL_167;
+              }
+LABEL_140:
+              UFG::qReflectHandleBase::~qReflectHandleBase(&v105);
+              if ( v84 == -1 || v85 == -1 )
+              {
+LABEL_142:
+                v90 = (unsigned __int64)mNext[5].mNext;
+                if ( v90 )
+                {
+                  UFG::qReflectHandleBase::Init(&v107, v107.mTypeUID, v90);
+                  if ( v107.mData )
+                  {
+                    if ( v84 == -1 )
+                      v84 = *(_DWORD *)(v107.mData[4].mBaseNode.mUID + 104);
+                    if ( v85 == -1 )
+                      v85 = *(_DWORD *)(v107.mData[4].mBaseNode.mUID + 108);
+                  }
+                }
+              }
+              if ( v84 != -1 )
+              {
+                v91 = *(float *)&UFG::PhysicsObjectProperties::GetAudioProperty(
+                                   (UFG::PhysicsObjectProperties *)v104.mData,
+                                   &AudioAttackMaterialProperty)->mUID;
+                centre.z = v91;
+                _((AMD_HD3D *)LODWORD(v91));
+                if ( v91 != 0.0 )
+                {
+                  v92 = (UFG::SimObjectCharacter *)this->mContext->mSimObject.m_pPointer;
+                  if ( v92 )
+                  {
+                    v93 = v92->m_Flags;
+                    if ( (v93 & 0x4000) != 0 )
+                      v94 = UFG::SimObjectCharacter::GetComponent<UFG::ActorAudioComponent>(v92);
+                    else
+                      v94 = (UFG::ActorAudioComponent *)(v93 < 0 || (v93 & 0x2000) != 0 || (v93 & 0x1000) != 0
+                                                       ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                           v92,
+                                                           UFG::ActorAudioComponent::_TypeUID)
+                                                       : UFG::SimObject::GetComponentOfType(
+                                                           v92,
+                                                           UFG::ActorAudioComponent::_TypeUID));
+                    v95 = v94;
+                    if ( v94 )
+                    {
+                      AudioIntensityUID = AttackCollisionTrack::GetAudioIntensityUID((AttackCollisionTrack *)this->m_Track);
+                      UFG::ActorAudioComponent::PlayFightImpact(v95, LODWORD(v91), v84, AudioIntensityUID);
+                      if ( v113 )
+                        UFG::ActorAudioComponent::PlayFightRumble(v95, LODWORD(v91), v84, AudioIntensityUID);
+                      mNext = v99;
+                    }
+                  }
+                }
+                _((AMD_HD3D *)LODWORD(v91));
+              }
+              if ( v85 != -1 )
+              {
+                v97 = this->mAttackPosition0.z - this->mAttackPosition1.z;
+                v98 = this->mAttackPosition0.y - this->mAttackPosition1.y;
+                stimulus_parameters.m_MaxStimulusDuration = this->mAttackPosition0.x - this->mAttackPosition1.x;
+                stimulus_parameters.m_EmitUntilSpeedLessThan = v98;
+                v101 = v97;
+                Render::ImpactManager::HandleImpactEvent(
+                  &Render::gImpactManager,
+                  AttackMaterialUIDForAttacker,
+                  v85,
+                  (UFG::qVector3 *)&mNext[1],
+                  (UFG::qVector3 *)&stimulus_parameters.m_MaxStimulusDuration,
+                  (UFG::qVector3 *)((char *)&mNext[1].mNext + 4),
+                  0i64,
+                  0,
+                  0i64);
+              }
+              goto LABEL_166;
             }
-            _((AMD_HD3D *)LODWORD(v91));
+            if ( (v42 & 0x1000) == 0 )
+            {
+              v43 = (UFG::SimObjectWeaponPropertiesComponent *)UFG::SimObject::GetComponentOfType(
+                                                                 v41,
+                                                                 UFG::SimObjectWeaponPropertiesComponent::_TypeUID);
+              goto LABEL_57;
+            }
           }
-          if ( v85 != -1 )
-          {
-            v97 = v6->mAttackPosition0.z - v6->mAttackPosition1.z;
-            v98 = v6->mAttackPosition0.y - v6->mAttackPosition1.y;
-            stimulus_parameters.m_MaxStimulusDuration = v6->mAttackPosition0.x - v6->mAttackPosition1.x;
-            stimulus_parameters.m_EmitUntilSpeedLessThan = v98;
-            v101 = v97;
-            Render::ImpactManager::HandleImpactEvent(
-              &Render::gImpactManager,
-              v81,
-              v85,
-              (UFG::qVector3 *)&v15[1],
-              (UFG::qVector3 *)&stimulus_parameters.m_MaxStimulusDuration,
-              (UFG::qVector3 *)((char *)&v15[1].mNext + 4),
-              0i64,
-              0,
-              0i64);
-          }
-          goto LABEL_173;
+          v43 = (UFG::SimObjectWeaponPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                             v41,
+                                                             UFG::SimObjectWeaponPropertiesComponent::_TypeUID);
+          goto LABEL_57;
         }
-        if ( v25 )
+        if ( mPrev )
         {
           UFG::qReflectHandleBase::qReflectHandleBase(&v109);
           v27 = UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject>::GetTypeName(v26);
           v109.mTypeUID = UFG::qStringHash64(v27, 0xFFFFFFFFFFFFFFFFui64);
-          UFG::qReflectHandleBase::Init(&v109, v109.mTypeUID, v25);
+          UFG::qReflectHandleBase::Init(&v109, v109.mTypeUID, mPrev);
           if ( v103.mData && BYTE2(v103.mData[1].mBaseNode.mParent) )
           {
             v21 = 1;
@@ -2488,77 +2354,67 @@ LABEL_178:
         }
       }
       if ( !v17 )
-        goto LABEL_20;
-LABEL_174:
-      v15 = v15->mNext;
-      v99 = v15;
-      v7 = *(Render::DebugDrawContext **)&centre.x;
-      v4 = v114;
+        goto LABEL_19;
+LABEL_167:
+      mNext = mNext->mNext;
+      v99 = mNext;
+      Context = *(Render::DebugDrawContext **)&centre.x;
+      startPosition = v114;
     }
-    while ( v15 != *(UFG::qNode<UFG::ShapeCasterCollector::HitInfo,UFG::ShapeCasterCollector::HitInfo> **)&centre.x );
+    while ( mNext != *(UFG::qNode<UFG::ShapeCasterCollector::HitInfo,UFG::ShapeCasterCollector::HitInfo> **)&centre.x );
   }
   UFG::qReflectHandleBase::~qReflectHandleBase(&v107);
   UFG::qReflectHandleBase::~qReflectHandleBase(&v103);
-}andleBase(&v107);
-  UFG::qReflectHandleBase::~qReflectHandleBase(&v103);
 }
 
 // File Line: 1428
 // RVA: 0x30C890
 void __fastcall AttackCollisionTask::applyWeaponDamage(AttackCollisionTask *this)
 {
-  AttackCollisionTask *v1; // rdi
-  UFG::SimObjectGame *v2; // rcx
-  unsigned __int16 v3; // dx
-  UFG::SimComponent *v4; // rcx
-  UFG::SimComponent *v5; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rcx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   __int64 v6; // rax
   UFG::SimObjectGame *v7; // rcx
-  unsigned __int16 v8; // dx
-  UFG::SimComponent *v9; // rax
-  UFG::StateMachineComponent *v10; // rsi
+  __int16 v8; // dx
+  UFG::SimComponent *ComponentOfType; // rax
+  UFG::StateMachineComponent *vfptr; // rsi
   UFG::SimObject *v11; // rbx
   float v12; // xmm0_4
 
-  v1 = this;
   if ( !this->mIsWeaponDamageApplied )
   {
     this->mIsWeaponDamageApplied = 1;
     if ( ExpressionParameterFloat::operator float((ExpressionParameterFloat *)&this->m_Track[2]) > 0.0 )
     {
-      v2 = (UFG::SimObjectGame *)v1->mContext->mSimObject.m_pPointer;
-      if ( v2 )
+      m_pPointer = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
+      if ( m_pPointer )
       {
-        v3 = v2->m_Flags;
-        if ( (v3 >> 14) & 1 )
+        m_Flags = m_pPointer->m_Flags;
+        if ( (m_Flags & 0x4000) != 0 )
         {
-          v4 = v2->m_Components.p[20].m_pComponent;
+          m_pComponent = m_pPointer->m_Components.p[20].m_pComponent;
         }
-        else if ( (v3 & 0x8000u) == 0 )
+        else if ( m_Flags >= 0 )
         {
-          if ( (v3 >> 13) & 1 )
-          {
-            v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::TargetingSystemBaseComponent::_TypeUID);
-          }
-          else if ( (v3 >> 12) & 1 )
-          {
-            v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::TargetingSystemBaseComponent::_TypeUID);
-          }
+          if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+            ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                  m_pPointer,
+                                  UFG::TargetingSystemBaseComponent::_TypeUID);
           else
-          {
-            v5 = UFG::SimObject::GetComponentOfType(
-                   (UFG::SimObject *)&v2->vfptr,
-                   UFG::TargetingSystemBaseComponent::_TypeUID);
-          }
-          v4 = v5;
+            ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(
+                                  m_pPointer,
+                                  UFG::TargetingSystemBaseComponent::_TypeUID);
+          m_pComponent = ComponentOfTypeHK;
         }
         else
         {
-          v4 = v2->m_Components.p[20].m_pComponent;
+          m_pComponent = m_pPointer->m_Components.p[20].m_pComponent;
         }
-        if ( v4 )
+        if ( m_pComponent )
         {
-          v6 = ((__int64 (*)(void))v4->vfptr[15].__vecDelDtor)();
+          v6 = ((__int64 (__fastcall *)(UFG::SimComponent *))m_pComponent->vfptr[15].__vecDelDtor)(m_pComponent);
           if ( v6 )
           {
             v7 = *(UFG::SimObjectGame **)(56i64 * *(unsigned __int8 *)(*(_QWORD *)(v6 + 96) + 25i64)
@@ -2567,39 +2423,18 @@ void __fastcall AttackCollisionTask::applyWeaponDamage(AttackCollisionTask *this
             if ( v7 )
             {
               v8 = v7->m_Flags;
-              if ( (v8 >> 14) & 1 )
-              {
-                v9 = UFG::SimObjectGame::GetComponentOfTypeHK(v7, UFG::RigidBodyComponent::_TypeUID);
-              }
-              else if ( (v8 & 0x8000u) == 0 )
-              {
-                if ( (v8 >> 13) & 1 )
-                {
-                  v9 = UFG::SimObjectGame::GetComponentOfTypeHK(v7, UFG::RigidBodyComponent::_TypeUID);
-                }
-                else if ( (v8 >> 12) & 1 )
-                {
-                  v9 = UFG::SimObjectGame::GetComponentOfTypeHK(v7, UFG::RigidBodyComponent::_TypeUID);
-                }
-                else
-                {
-                  v9 = UFG::SimObject::GetComponentOfType(
-                         (UFG::SimObject *)&v7->vfptr,
-                         UFG::RigidBodyComponent::_TypeUID);
-                }
-              }
+              if ( (v8 & 0x4000) != 0 || v8 < 0 || (v8 & 0x2000) != 0 || (v8 & 0x1000) != 0 )
+                ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(v7, UFG::RigidBodyComponent::_TypeUID);
               else
+                ComponentOfType = UFG::SimObject::GetComponentOfType(v7, UFG::RigidBodyComponent::_TypeUID);
+              if ( ComponentOfType )
               {
-                v9 = UFG::SimObjectGame::GetComponentOfTypeHK(v7, UFG::RigidBodyComponent::_TypeUID);
-              }
-              if ( v9 )
-              {
-                v10 = (UFG::StateMachineComponent *)v9[6].vfptr;
-                if ( v10 )
+                vfptr = (UFG::StateMachineComponent *)ComponentOfType[6].vfptr;
+                if ( vfptr )
                 {
-                  v11 = v1->mContext->mSimObject.m_pPointer;
-                  v12 = ExpressionParameterFloat::operator float((ExpressionParameterFloat *)&v1->m_Track[2]);
-                  UFG::StateMachineComponent::ApplyDamage(v10, v12, ABSOLUTE_DAMAGE, v11);
+                  v11 = this->mContext->mSimObject.m_pPointer;
+                  v12 = ExpressionParameterFloat::operator float((ExpressionParameterFloat *)&this->m_Track[2]);
+                  UFG::StateMachineComponent::ApplyDamage(vfptr, v12, ABSOLUTE_DAMAGE, v11);
                 }
               }
             }
@@ -2614,7 +2449,6 @@ void __fastcall AttackCollisionTask::applyWeaponDamage(AttackCollisionTask *this
 // RVA: 0x302BE0
 char __fastcall AttackCollisionTask::PostAnimUpdate(AttackCollisionTask *this, float timeDelta)
 {
-  AttackCollisionTask *v2; // rbx
   __int64 v3; // rdx
   float v4; // xmm6_4
   float v5; // xmm0_4
@@ -2623,93 +2457,90 @@ char __fastcall AttackCollisionTask::PostAnimUpdate(AttackCollisionTask *this, f
   __int64 v8; // r13
   UFG::SimObjectGame *v9; // rcx
   char *v10; // rdi
-  unsigned __int16 v11; // dx
-  UFG::SimComponent *v12; // rcx
-  UFG::SimComponent *v13; // rax
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rcx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   __int64 v14; // r14
-  char v15; // si
+  bool v15; // si
   __int64 v16; // r15
   UFG::TransformNodeComponent *v17; // r15
-  float v18; // xmm1_4
+  float y; // xmm1_4
   float v19; // xmm1_4
   float v20; // xmm2_4
-  UFG::eAttackPhaseEnum v21; // er12
-  UFG::CharacterAnimationComponent *v22; // rax
+  UFG::eAttackPhaseEnum v21; // r12d
+  UFG::CharacterAnimationComponent *CharacterAnimationComponent; // rax
   float *v23; // rsi
-  UFG::SimObject **v24; // r15
-  unsigned int v25; // xmm1_4
-  unsigned int v26; // xmm2_4
-  int v27; // edx
-  float v28; // xmm9_4
-  float v29; // xmm10_4
-  float v30; // xmm11_4
-  __int64 v31; // rax
-  float v32; // xmm6_4
-  float v33; // xmm0_4
-  __m128 v34; // xmm1
-  float v35; // xmm8_4
-  UFG::allocator::free_link *v36; // rax
-  UFG::ShapeCasterCollector *v37; // rax
-  UFG::ShapeCasterCollector *v38; // r12
-  __int64 v39; // rcx
-  UFG::TransformNodeComponent *v40; // r15
-  UFG::allocator::free_link *v41; // rax
-  UFG::ShapeCasterCollector *v42; // rax
-  bool v43; // al
-  signed int v44; // ecx
-  _BYTE *v45; // rax
-  bool v46; // zf
-  __int64 v47; // rax
-  UFG::SimObjectGame *v48; // rcx
-  unsigned __int16 v49; // dx
-  UFG::HitReactionComponent *v50; // rax
-  AttackCollisionTask *v51; // r14
-  char v52; // si
-  signed __int64 v53; // rcx
-  __int64 v54; // rax
-  __int64 v55; // rax
-  unsigned int v56; // er13
-  unsigned int v57; // er15
-  UFG::SimObjectGame **v58; // rsi
-  char v59; // di
-  UFG::SimObjectGame *v60; // rcx
-  unsigned __int16 v61; // dx
-  UFG::HitReactionComponent *v62; // rax
-  _QWORD *v63; // rax
-  __int64 v64; // rax
-  ActionNode *v65; // rdx
-  UFG::SimObjectCVBase *v66; // rcx
-  unsigned __int16 v67; // dx
-  UFG::TargetingSystemPedBaseComponent *v68; // rax
-  unsigned int v69; // er14
-  UFG::SimObject **v70; // rsi
-  UFG::CharacterAnimationComponent *v71; // rax
-  int v72; // xmm2_4
-  int v73; // xmm1_4
-  float v74; // xmm0_4
-  UFG::SimObjectGame *v75; // rcx
-  unsigned __int16 v76; // dx
-  UFG::SimComponent *v77; // rax
-  UFG::qVector3 rayStart; // [rsp+40h] [rbp-88h]
-  UFG::qVector3 rayEnd; // [rsp+50h] [rbp-78h]
-  __int64 v81; // [rsp+60h] [rbp-68h]
-  int v82; // [rsp+68h] [rbp-60h]
-  int v83; // [rsp+6Ch] [rbp-5Ch]
-  UFG::qMatrix44 transform; // [rsp+70h] [rbp-58h]
-  int v85; // [rsp+B8h] [rbp-10h]
-  int v86; // [rsp+BCh] [rbp-Ch]
-  int v87; // [rsp+C8h] [rbp+0h]
-  int v88; // [rsp+E8h] [rbp+20h]
-  __int64 v89; // [rsp+F8h] [rbp+30h]
-  const char *v90; // [rsp+108h] [rbp+40h]
-  int v91; // [rsp+110h] [rbp+48h]
-  char v92; // [rsp+1F8h] [rbp+130h]
-  int v93; // [rsp+208h] [rbp+140h]
-  __int64 v94; // [rsp+210h] [rbp+148h]
+  int v24; // xmm1_4
+  int v25; // xmm2_4
+  int m_TimeBegin_low; // edx
+  float v27; // xmm9_4
+  float v28; // xmm10_4
+  float v29; // xmm11_4
+  float v30; // xmm6_4
+  float v31; // xmm0_4
+  __m128 v32; // xmm1
+  float v33; // xmm8_4
+  UFG::allocator::free_link *v34; // rax
+  UFG::ShapeCasterCollector *v35; // rax
+  UFG::ShapeCasterCollector *v36; // r12
+  __int64 v37; // rcx
+  UFG::TransformNodeComponent *v38; // r15
+  UFG::allocator::free_link *v39; // rax
+  UFG::ShapeCasterCollector *v40; // rax
+  bool v41; // al
+  int v42; // ecx
+  _BYTE *v43; // rax
+  bool v44; // zf
+  __int64 v45; // rax
+  UFG::SimObjectGame *v46; // rcx
+  __int16 v47; // dx
+  UFG::HitReactionComponent *v48; // rax
+  AttackCollisionTask *v49; // r14
+  char v50; // si
+  __int64 v51; // rcx
+  __int64 v52; // rax
+  __int64 v53; // rax
+  unsigned int v54; // r13d
+  unsigned int v55; // r15d
+  UFG::SimObjectGame **v56; // rsi
+  char v57; // di
+  UFG::SimObjectGame *v58; // rcx
+  __int16 v59; // dx
+  UFG::HitReactionComponent *ComponentOfType; // rax
+  _QWORD *v61; // rax
+  __int64 v62; // rax
+  ActionNode *v63; // rdx
+  UFG::SimObjectCVBase *v64; // rcx
+  __int16 v65; // dx
+  UFG::TargetingSystemPedBaseComponent *v66; // rax
+  unsigned int size; // r14d
+  UFG::SimObject **p_m_pPointer; // rsi
+  UFG::CharacterAnimationComponent *v69; // rax
+  int v70; // xmm2_4
+  int v71; // xmm1_4
+  float x; // xmm0_4
+  UFG::SimObjectGame *v73; // rcx
+  __int16 v74; // dx
+  UFG::SimComponent *v75; // rax
+  UFG::qVector3 rayStart; // [rsp+40h] [rbp-88h] BYREF
+  UFG::qVector3 rayEnd; // [rsp+50h] [rbp-78h] BYREF
+  __int64 v79; // [rsp+60h] [rbp-68h]
+  int v80; // [rsp+68h] [rbp-60h]
+  int v81; // [rsp+6Ch] [rbp-5Ch]
+  UFG::qMatrix44 transform; // [rsp+70h] [rbp-58h] BYREF
+  int v83; // [rsp+B8h] [rbp-10h]
+  int v84; // [rsp+BCh] [rbp-Ch]
+  int v85; // [rsp+C8h] [rbp+0h]
+  int v86; // [rsp+E8h] [rbp+20h]
+  __int64 v87; // [rsp+F8h] [rbp+30h]
+  const char *v88; // [rsp+108h] [rbp+40h]
+  int v89; // [rsp+110h] [rbp+48h]
+  char v90; // [rsp+1F8h] [rbp+130h]
+  int v91; // [rsp+208h] [rbp+140h]
+  __int64 v92; // [rsp+210h] [rbp+148h]
 
-  v81 = -2i64;
-  v2 = this;
-  v92 = 0;
+  v79 = -2i64;
+  v90 = 0;
   v3 = *(_QWORD *)&this[-1].mAttackPosition0.z;
   v4 = *(float *)(v3 + 136);
   v5 = *(float *)(v3 + 140);
@@ -2719,11 +2550,17 @@ char __fastcall AttackCollisionTask::PostAnimUpdate(AttackCollisionTask *this, f
   v9 = *(UFG::SimObjectGame **)&this->m_Track->m_TrackClassNameUID;
   v10 = 0i64;
   if ( v9
-    && ((v11 = v9->m_Flags, !((v11 >> 14) & 1)) ? ((v11 & 0x8000u) == 0 ? (!((v11 >> 13) & 1) ? (!((v11 >> 12) & 1) ? (v13 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v9->vfptr, UFG::TargetingSystemBaseComponent::_TypeUID)) : (v13 = UFG::SimObjectGame::GetComponentOfTypeHK(v9, UFG::TargetingSystemBaseComponent::_TypeUID))) : (v13 = UFG::SimObjectGame::GetComponentOfTypeHK(v9, UFG::TargetingSystemBaseComponent::_TypeUID)),
-                                                                           v12 = v13) : (v12 = v9->m_Components.p[20].m_pComponent)) : (v12 = v9->m_Components.p[20].m_pComponent),
-        v12) )
+    && ((m_Flags = v9->m_Flags, (m_Flags & 0x4000) == 0)
+      ? (m_Flags >= 0
+       ? ((m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+        ? (ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(v9, UFG::TargetingSystemBaseComponent::_TypeUID))
+        : (ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(v9, UFG::TargetingSystemBaseComponent::_TypeUID)),
+          m_pComponent = ComponentOfTypeHK)
+       : (m_pComponent = v9->m_Components.p[20].m_pComponent))
+      : (m_pComponent = v9->m_Components.p[20].m_pComponent),
+        m_pComponent) )
   {
-    v14 = ((__int64 (*)(void))v12->vfptr[15].__vecDelDtor)();
+    v14 = ((__int64 (__fastcall *)(UFG::SimComponent *))m_pComponent->vfptr[15].__vecDelDtor)(m_pComponent);
   }
   else
   {
@@ -2732,380 +2569,354 @@ char __fastcall AttackCollisionTask::PostAnimUpdate(AttackCollisionTask *this, f
   v15 = 0;
   if ( v6 )
   {
-    v16 = *(_QWORD *)&v2->m_Track->m_TrackClassNameUID;
+    v16 = *(_QWORD *)&this->m_Track->m_TrackClassNameUID;
     if ( v16 )
     {
       v17 = *(UFG::TransformNodeComponent **)(v16 + 88);
       if ( v17 )
       {
         UFG::TransformNodeComponent::UpdateWorldTransform(v17);
-        v18 = v17->mWorldTransform.v3.y;
+        y = v17->mWorldTransform.v3.y;
         rayStart.x = v17->mWorldTransform.v3.x;
-        rayStart.y = v18;
-        v19 = *((float *)&v2->mHitDudes[28] + 1);
-        v20 = *(float *)&v2->mHitDudes[29];
-        rayEnd.x = *(float *)&v2->mHitDudes[28];
+        rayStart.y = y;
+        v19 = *((float *)&this->mHitDudes[28] + 1);
+        v20 = *(float *)&this->mHitDudes[29];
+        rayEnd.x = *(float *)&this->mHitDudes[28];
         rayEnd.y = v19;
         rayEnd.z = v20;
         rayStart.z = v20;
         LOBYTE(transform.v2.z) = 0;
         transform.v2.w = 0.0;
         *(_QWORD *)&transform.v3.x = 0i64;
-        v85 = (signed int)FLOAT_1_0;
-        v86 = -1;
-        v88 = 0;
-        v87 = -1;
-        v89 = 0i64;
-        v90 = "AttackCollisionTask";
-        v91 = -1;
+        v83 = (int)FLOAT_1_0;
+        v84 = -1;
+        v86 = 0;
+        v85 = -1;
+        v87 = 0i64;
+        v88 = "AttackCollisionTask";
+        v89 = -1;
         UFG::RayCastData::Init((UFG::RayCastData *)&transform.v0.z, &rayStart, &rayEnd, 0x10u);
-        v15 = 0;
-        if ( UFG::BasePhysicsSystem::CastRay(UFG::BasePhysicsSystem::mInstance, (UFG::RayCastData *)&transform.v0.z) )
-          v15 = 1;
+        v15 = UFG::BasePhysicsSystem::CastRay(UFG::BasePhysicsSystem::mInstance, (UFG::RayCastData *)&transform.v0.z) != 0;
       }
     }
     if ( !v7 && !v15 )
     {
-      v21 = 2;
-      v22 = AttackCollisionTask::GetCharacterAnimationComponent((AttackCollisionTask *)((char *)v2 - 40));
-      if ( !v22 )
-        goto LABEL_124;
-      v23 = (float *)((char *)&v2->mHitDudes[29] + 4);
-      v24 = &v2->mHitDudes[28];
-      v25 = (unsigned int)v2->mHitDudes[30];
-      v26 = HIDWORD(v2->mHitDudes[30]);
-      *(_DWORD *)v24 = HIDWORD(v2->mHitDudes[29]);
-      *((_DWORD *)v24 + 1) = v25;
-      *((_DWORD *)v24 + 2) = v26;
-      v27 = LODWORD(v2->m_TimeBegin);
-      if ( v27 != -1 )
+      v21 = eATTACK_PHASE_COLLISION;
+      CharacterAnimationComponent = AttackCollisionTask::GetCharacterAnimationComponent((AttackCollisionTask *)((char *)this - 40));
+      if ( !CharacterAnimationComponent )
+        goto LABEL_118;
+      v23 = (float *)&this->mHitDudes[29] + 1;
+      v24 = (int)this->mHitDudes[30];
+      v25 = HIDWORD(this->mHitDudes[30]);
+      LODWORD(this->mHitDudes[28]) = HIDWORD(this->mHitDudes[29]);
+      HIDWORD(this->mHitDudes[28]) = v24;
+      LODWORD(this->mHitDudes[29]) = v25;
+      m_TimeBegin_low = LODWORD(this->m_TimeBegin);
+      if ( m_TimeBegin_low != -1 )
       {
-        Creature::GetTransform(v22->mCreature, v27, &transform);
-        *(_DWORD *)v23 = v82;
-        LODWORD(v2->mHitDudes[30]) = v83;
-        HIDWORD(v2->mHitDudes[30]) = LODWORD(transform.v0.x);
+        Creature::GetTransform(CharacterAnimationComponent->mCreature, m_TimeBegin_low, &transform);
+        *(_DWORD *)v23 = v80;
+        LODWORD(this->mHitDudes[30]) = v81;
+        HIDWORD(this->mHitDudes[30]) = LODWORD(transform.v0.x);
       }
+      v27 = 0.0;
       v28 = 0.0;
       v29 = 0.0;
-      v30 = 0.0;
-      LOBYTE(v93) = 0;
-      v31 = *(_QWORD *)&v2[-1].mAttackPosition0.z;
-      v32 = *(float *)(v31 + 148);
-      v33 = *((float *)&v2->mHitDudes[28] + 1) - *(float *)&v2->mHitDudes[30];
-      v34 = (__m128)*(unsigned int *)v24;
-      v34.m128_f32[0] = (float)((float)((float)(v34.m128_f32[0] - *v23) * (float)(v34.m128_f32[0] - *v23))
-                              + (float)(v33 * v33))
-                      + (float)((float)(*(float *)&v2->mHitDudes[29] - *((float *)&v2->mHitDudes[30] + 1))
-                              * (float)(*(float *)&v2->mHitDudes[29] - *((float *)&v2->mHitDudes[30] + 1)));
-      if ( notMovingHackDist <= COERCE_FLOAT(_mm_sqrt_ps(v34)) )
+      LOBYTE(v91) = 0;
+      v30 = *(float *)(*(_QWORD *)&this[-1].mAttackPosition0.z + 148i64);
+      v31 = *((float *)&this->mHitDudes[28] + 1) - *(float *)&this->mHitDudes[30];
+      v32 = (__m128)LODWORD(this->mHitDudes[28]);
+      v32.m128_f32[0] = (float)((float)((float)(v32.m128_f32[0] - *v23) * (float)(v32.m128_f32[0] - *v23))
+                              + (float)(v31 * v31))
+                      + (float)((float)(*(float *)&this->mHitDudes[29] - *((float *)&this->mHitDudes[30] + 1))
+                              * (float)(*(float *)&this->mHitDudes[29] - *((float *)&this->mHitDudes[30] + 1)));
+      if ( notMovingHackDist <= _mm_sqrt_ps(v32).m128_f32[0] )
       {
-        v41 = UFG::qMemoryPool::Allocate(&gPhysicsMemoryPool, 0x30ui64, "ShapeCasterCollector", 0i64, 1u);
-        v94 = (__int64)v41;
-        if ( v41 )
+        v39 = UFG::qMemoryPool::Allocate(&gPhysicsMemoryPool, 0x30ui64, "ShapeCasterCollector", 0i64, 1u);
+        v92 = (__int64)v39;
+        if ( v39 )
         {
-          UFG::ShapeCasterCollector::ShapeCasterCollector((UFG::ShapeCasterCollector *)v41, v32, 0x10u, 0);
-          v38 = v42;
+          UFG::ShapeCasterCollector::ShapeCasterCollector(
+            (UFG::ShapeCasterCollector *)v39,
+            v30,
+            0x10u,
+            PhantomBehaviour_Simple);
+          v36 = v40;
         }
         else
         {
-          v38 = 0i64;
+          v36 = 0i64;
         }
-        v43 = UFG::BasePhysicsSystem::CastShape(
+        v41 = UFG::BasePhysicsSystem::CastShape(
                 UFG::BasePhysicsSystem::mInstance,
-                v38,
-                (UFG::qVector3 *)&v2->mHitDudes[28],
-                (UFG::qVector3 *)((char *)&v2->mHitDudes[29] + 4));
-        v44 = (unsigned __int8)v93;
-        if ( v43 )
-          v44 = 1;
-        v93 = v44;
+                v36,
+                (UFG::qVector3 *)&this->mHitDudes[28],
+                (UFG::qVector3 *)((char *)&this->mHitDudes[29] + 4));
+        v42 = (unsigned __int8)v91;
+        if ( v41 )
+          v42 = 1;
+        v91 = v42;
       }
       else
       {
-        v35 = *(float *)(v31 + 148) * 0.5;
-        v36 = UFG::qMemoryPool::Allocate(&gPhysicsMemoryPool, 0x30ui64, "ShapeCasterCollector", 0i64, 1u);
-        v94 = (__int64)v36;
-        if ( v36 )
+        v33 = *(float *)(*(_QWORD *)&this[-1].mAttackPosition0.z + 148i64) * 0.5;
+        v34 = UFG::qMemoryPool::Allocate(&gPhysicsMemoryPool, 0x30ui64, "ShapeCasterCollector", 0i64, 1u);
+        v92 = (__int64)v34;
+        if ( v34 )
         {
-          UFG::ShapeCasterCollector::ShapeCasterCollector((UFG::ShapeCasterCollector *)v36, v35, 0x10u, 0);
-          v38 = v37;
+          UFG::ShapeCasterCollector::ShapeCasterCollector(
+            (UFG::ShapeCasterCollector *)v34,
+            v33,
+            0x10u,
+            PhantomBehaviour_Simple);
+          v36 = v35;
         }
         else
         {
-          v38 = 0i64;
+          v36 = 0i64;
         }
-        v39 = *(_QWORD *)&v2->m_Track->m_TrackClassNameUID;
-        v40 = 0i64;
-        if ( v39 )
-          v40 = *(UFG::TransformNodeComponent **)(v39 + 88);
-        UFG::TransformNodeComponent::UpdateWorldTransform(v40);
-        v28 = v32 * v40->mWorldTransform.v0.x;
-        v29 = v32 * v40->mWorldTransform.v0.y;
-        v30 = v32 * v40->mWorldTransform.v0.z;
-        rayStart.x = (float)(v32 * v40->mWorldTransform.v0.x) + *v23;
-        rayStart.y = v29 + *(float *)&v2->mHitDudes[30];
-        rayStart.z = v30 + *((float *)&v2->mHitDudes[30] + 1);
-        rayEnd.x = *(float *)&v2->mHitDudes[28] - v28;
-        rayEnd.y = *((float *)&v2->mHitDudes[28] + 1) - v29;
-        rayEnd.z = *(float *)&v2->mHitDudes[29] - v30;
-        if ( UFG::BasePhysicsSystem::CastShape(UFG::BasePhysicsSystem::mInstance, v38, &rayEnd, &rayStart) )
-          LOBYTE(v93) = 1;
+        v37 = *(_QWORD *)&this->m_Track->m_TrackClassNameUID;
+        v38 = 0i64;
+        if ( v37 )
+          v38 = *(UFG::TransformNodeComponent **)(v37 + 88);
+        UFG::TransformNodeComponent::UpdateWorldTransform(v38);
+        v27 = v30 * v38->mWorldTransform.v0.x;
+        v28 = v30 * v38->mWorldTransform.v0.y;
+        v29 = v30 * v38->mWorldTransform.v0.z;
+        rayStart.x = v27 + *v23;
+        rayStart.y = v28 + *(float *)&this->mHitDudes[30];
+        rayStart.z = v29 + *((float *)&this->mHitDudes[30] + 1);
+        rayEnd.x = *(float *)&this->mHitDudes[28] - v27;
+        rayEnd.y = *((float *)&this->mHitDudes[28] + 1) - v28;
+        rayEnd.z = *(float *)&this->mHitDudes[29] - v29;
+        if ( UFG::BasePhysicsSystem::CastShape(UFG::BasePhysicsSystem::mInstance, v36, &rayEnd, &rayStart) )
+          LOBYTE(v91) = 1;
       }
-      v45 = *(_BYTE **)&v2[-1].mAttackPosition0.z;
-      if ( !v45[196] && v14 && (!BYTE2(v2->m_TimeEnd) || !v45[195]) )
+      v43 = *(_BYTE **)&this[-1].mAttackPosition0.z;
+      if ( !v43[196] && v14 && (!BYTE2(this->m_TimeEnd) || !v43[195]) )
       {
-        v46 = v45[193] == 0;
-        v47 = *(_QWORD *)(v14 + 96);
-        if ( v46 )
+        v44 = v43[193] == 0;
+        v45 = *(_QWORD *)(v14 + 96);
+        if ( v44 )
         {
-          v53 = 56i64 * *(unsigned __int8 *)(v47 + 31);
-          v54 = *(_QWORD *)(v14 + 88);
-          if ( *(_QWORD *)(v53 + v54 + 40) && *(_BYTE *)(v53 + v54 + 49) )
-            v55 = *(_QWORD *)(v53 + v54 + 40);
+          v51 = 56i64 * *(unsigned __int8 *)(v45 + 31);
+          v52 = *(_QWORD *)(v14 + 88);
+          if ( *(_QWORD *)(v51 + v52 + 40) && *(_BYTE *)(v51 + v52 + 49) )
+            v53 = *(_QWORD *)(v51 + v52 + 40);
           else
-            v55 = 0i64;
-          v94 = v55;
-          v56 = *(_DWORD *)(v14 + 584);
-          v57 = 0;
-          if ( v56 )
+            v53 = 0i64;
+          v92 = v53;
+          v54 = *(_DWORD *)(v14 + 584);
+          v55 = 0;
+          if ( v54 )
           {
-            v58 = (UFG::SimObjectGame **)(v14 + 608);
-            v59 = 0;
-            v51 = (AttackCollisionTask *)((char *)v2 - 40);
+            v56 = (UFG::SimObjectGame **)(v14 + 608);
+            v57 = 0;
+            v49 = (AttackCollisionTask *)((char *)this - 40);
             while ( 1 )
             {
-              v60 = *v58;
-              if ( *v58 != (UFG::SimObjectGame *)v55 && v60 )
+              v58 = *v56;
+              if ( *v56 != (UFG::SimObjectGame *)v53 && v58 )
               {
-                v61 = v60->m_Flags;
-                if ( (v61 >> 14) & 1 )
+                v59 = v58->m_Flags;
+                if ( (v59 & 0x4000) != 0 )
                 {
-                  v62 = (UFG::HitReactionComponent *)v60->m_Components.p[15].m_pComponent;
+                  ComponentOfType = (UFG::HitReactionComponent *)v58->m_Components.p[15].m_pComponent;
                 }
-                else if ( (v61 & 0x8000u) == 0 )
+                else if ( v59 >= 0 )
                 {
-                  if ( (v61 >> 13) & 1 )
-                  {
-                    v62 = (UFG::HitReactionComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                         v60,
-                                                         UFG::HitReactionComponent::_TypeUID);
-                  }
-                  else if ( (v61 >> 12) & 1 )
-                  {
-                    v62 = (UFG::HitReactionComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                         v60,
-                                                         UFG::HitReactionComponent::_TypeUID);
-                  }
+                  if ( (v59 & 0x2000) != 0 || (v59 & 0x1000) != 0 )
+                    ComponentOfType = (UFG::HitReactionComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                     v58,
+                                                                     UFG::HitReactionComponent::_TypeUID);
                   else
-                  {
-                    v62 = (UFG::HitReactionComponent *)UFG::SimObject::GetComponentOfType(
-                                                         (UFG::SimObject *)&v60->vfptr,
-                                                         UFG::HitReactionComponent::_TypeUID);
-                  }
+                    ComponentOfType = (UFG::HitReactionComponent *)UFG::SimObject::GetComponentOfType(
+                                                                     v58,
+                                                                     UFG::HitReactionComponent::_TypeUID);
                 }
                 else
                 {
-                  v62 = (UFG::HitReactionComponent *)v60->m_Components.p[15].m_pComponent;
+                  ComponentOfType = (UFG::HitReactionComponent *)v58->m_Components.p[15].m_pComponent;
                 }
-                if ( v62 )
+                if ( ComponentOfType )
                 {
-                  v59 |= AttackCollisionTask::handleHit((AttackCollisionTask *)((char *)v2 - 40), v62, 0, 100000000.0);
-                  v92 = v59;
-                  if ( v59 )
+                  v57 |= AttackCollisionTask::handleHit(
+                           (AttackCollisionTask *)((char *)this - 40),
+                           ComponentOfType,
+                           0,
+                           100000000.0);
+                  v90 = v57;
+                  if ( v57 )
                   {
-                    if ( *(_BYTE *)(*(_QWORD *)&v2[-1].mAttackPosition0.z + 195i64) )
+                    if ( *(_BYTE *)(*(_QWORD *)&this[-1].mAttackPosition0.z + 195i64) )
                     {
-LABEL_86:
+LABEL_82:
                       v10 = 0i64;
-                      v52 = v92;
-                      goto LABEL_89;
+                      v50 = v90;
+                      goto LABEL_85;
                     }
                   }
                 }
-                v55 = v94;
+                v53 = v92;
               }
-              ++v57;
-              v58 += 3;
-              if ( v57 >= v56 )
-                goto LABEL_86;
+              ++v55;
+              v56 += 3;
+              if ( v55 >= v54 )
+                goto LABEL_82;
             }
           }
         }
         else
         {
-          v48 = *(UFG::SimObjectGame **)(56i64 * *(unsigned __int8 *)(v47 + v8 + 8) + *(_QWORD *)(v14 + 88) + 40);
-          if ( v48 )
+          v46 = *(UFG::SimObjectGame **)(56i64 * *(unsigned __int8 *)(v45 + v8 + 8) + *(_QWORD *)(v14 + 88) + 40);
+          if ( v46 )
           {
-            v49 = v48->m_Flags;
-            if ( (v49 >> 14) & 1 )
+            v47 = v46->m_Flags;
+            if ( (v47 & 0x4000) != 0 )
             {
-              v50 = (UFG::HitReactionComponent *)v48->m_Components.p[15].m_pComponent;
+              v48 = (UFG::HitReactionComponent *)v46->m_Components.p[15].m_pComponent;
             }
-            else if ( (v49 & 0x8000u) == 0 )
+            else if ( v47 >= 0 )
             {
-              if ( (v49 >> 13) & 1 )
-              {
-                v50 = (UFG::HitReactionComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                     v48,
+              if ( (v47 & 0x2000) != 0 || (v47 & 0x1000) != 0 )
+                v48 = (UFG::HitReactionComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                     v46,
                                                      UFG::HitReactionComponent::_TypeUID);
-              }
-              else if ( (v49 >> 12) & 1 )
-              {
-                v50 = (UFG::HitReactionComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                     v48,
-                                                     UFG::HitReactionComponent::_TypeUID);
-              }
               else
-              {
-                v50 = (UFG::HitReactionComponent *)UFG::SimObject::GetComponentOfType(
-                                                     (UFG::SimObject *)&v48->vfptr,
+                v48 = (UFG::HitReactionComponent *)UFG::SimObject::GetComponentOfType(
+                                                     v46,
                                                      UFG::HitReactionComponent::_TypeUID);
-              }
             }
             else
             {
-              v50 = (UFG::HitReactionComponent *)v48->m_Components.p[15].m_pComponent;
+              v48 = (UFG::HitReactionComponent *)v46->m_Components.p[15].m_pComponent;
             }
-            v51 = (AttackCollisionTask *)((char *)v2 - 40);
-            if ( v50 )
+            v49 = (AttackCollisionTask *)((char *)this - 40);
+            if ( v48 )
             {
-              v52 = AttackCollisionTask::handleHit((AttackCollisionTask *)((char *)v2 - 40), v50, 0, 100000000.0);
-              goto LABEL_89;
+              v50 = AttackCollisionTask::handleHit((AttackCollisionTask *)((char *)this - 40), v48, 0, 100000000.0);
+              goto LABEL_85;
             }
-            goto LABEL_88;
+            goto LABEL_84;
           }
         }
       }
-      v51 = (AttackCollisionTask *)((char *)v2 - 40);
-LABEL_88:
-      v52 = 0;
-LABEL_89:
-      if ( *(_BYTE *)(*(_QWORD *)&v2[-1].mAttackPosition0.z + 194i64) )
+      v49 = (AttackCollisionTask *)((char *)this - 40);
+LABEL_84:
+      v50 = 0;
+LABEL_85:
+      if ( *(_BYTE *)(*(_QWORD *)&this[-1].mAttackPosition0.z + 194i64) )
       {
-        if ( LOBYTE(v2->m_TimeEnd) )
-          goto LABEL_94;
-        LOBYTE(v2->m_TimeEnd) = v93;
-        rayStart.x = *(float *)&v2->mHitDudes[28] - v28;
-        rayStart.y = *((float *)&v2->mHitDudes[28] + 1) - v29;
-        rayStart.z = *(float *)&v2->mHitDudes[29] - v30;
-        AttackCollisionTask::applyAttackDamage(v51, v38, &rayStart, &rayEnd);
+        if ( LOBYTE(this->m_TimeEnd) )
+          goto LABEL_90;
+        LOBYTE(this->m_TimeEnd) = v91;
+        rayStart.x = *(float *)&this->mHitDudes[28] - v27;
+        rayStart.y = *((float *)&this->mHitDudes[28] + 1) - v28;
+        rayStart.z = *(float *)&this->mHitDudes[29] - v29;
+        AttackCollisionTask::applyAttackDamage(v49, v36, &rayStart, &rayEnd);
       }
-      if ( !LOBYTE(v2->m_TimeEnd) && !v52 )
+      if ( !LOBYTE(this->m_TimeEnd) && !v50 )
       {
-LABEL_101:
-        if ( v38 )
-          v38->vfptr->__vecDelDtor(v38, 1u);
-        v21 = 2;
-        goto LABEL_124;
+LABEL_97:
+        if ( v36 )
+          v36->vfptr->__vecDelDtor(v36, 1u);
+        v21 = eATTACK_PHASE_COLLISION;
+        goto LABEL_118;
       }
-LABEL_94:
-      BYTE2(v2->m_TimeEnd) = 1;
-      AttackCollisionTask::applyWeaponDamage(v51);
-      if ( v52 && !HIBYTE(v2->m_TimeEnd) )
+LABEL_90:
+      BYTE2(this->m_TimeEnd) = 1;
+      AttackCollisionTask::applyWeaponDamage(v49);
+      if ( v50 && !HIBYTE(this->m_TimeEnd) )
       {
-        v63 = (_QWORD *)(*(_QWORD *)&v2[-1].mAttackPosition0.z + 56i64);
-        if ( *v63 )
-          v10 = (char *)v63 + *v63;
-        v64 = *((_QWORD *)v10 + 9);
-        if ( v64 )
+        v61 = (_QWORD *)(*(_QWORD *)&this[-1].mAttackPosition0.z + 56i64);
+        if ( *v61 )
+          v10 = (char *)v61 + *v61;
+        v62 = *((_QWORD *)v10 + 9);
+        if ( v62 )
         {
-          v65 = (ActionNode *)&v10[v64 + 72];
-          if ( v65 )
+          v63 = (ActionNode *)&v10[v62 + 72];
+          if ( v63 )
           {
-            ActionController::PlayTracks((ActionController *)v2->m_Track->mMasterRate.expression.mOffset, v65, 0, 0.0);
-            HIBYTE(v2->m_TimeEnd) = 1;
+            ActionController::PlayTracks((ActionController *)this->m_Track->mMasterRate.expression.mOffset, v63, 0, 0.0);
+            HIBYTE(this->m_TimeEnd) = 1;
           }
         }
       }
-      goto LABEL_101;
+      goto LABEL_97;
     }
   }
-  if ( v4 < 0.0 || (v21 = 1, v4 <= *(float *)(v2->m_Track->mMasterRate.expression.mOffset + 32)) )
-    v21 = 3;
-  v66 = *(UFG::SimObjectCVBase **)&v2->m_Track->m_TrackClassNameUID;
-  if ( v66 )
+  if ( v4 < 0.0 || (v21 = eATTACK_PHASE_EXECUTION, v4 <= *(float *)(this->m_Track->mMasterRate.expression.mOffset + 32)) )
+    v21 = eATTACK_PHASE_RECOVERY;
+  v64 = *(UFG::SimObjectCVBase **)&this->m_Track->m_TrackClassNameUID;
+  if ( v64 )
   {
-    v67 = v66->m_Flags;
-    if ( (v67 >> 14) & 1 )
-    {
-      v68 = UFG::SimObjectCVBase::GetComponent<UFG::TargetingSystemPedBaseComponent>(v66);
-    }
-    else if ( (v67 & 0x8000u) == 0 )
-    {
-      if ( (v67 >> 13) & 1 )
-        v68 = (UFG::TargetingSystemPedBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                        (UFG::SimObjectGame *)&v66->vfptr,
-                                                        UFG::TargetingSystemPedBaseComponent::_TypeUID);
-      else
-        v68 = (UFG::TargetingSystemPedBaseComponent *)((v67 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                           (UFG::SimObjectGame *)&v66->vfptr,
-                                                                           UFG::TargetingSystemPedBaseComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v66->vfptr, UFG::TargetingSystemPedBaseComponent::_TypeUID));
-    }
+    v65 = v64->m_Flags;
+    if ( (v65 & 0x4000) != 0 || v65 < 0 )
+      v66 = UFG::SimObjectCVBase::GetComponent<UFG::TargetingSystemPedBaseComponent>(v64);
     else
+      v66 = (UFG::TargetingSystemPedBaseComponent *)((v65 & 0x2000) != 0 || (v65 & 0x1000) != 0
+                                                   ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                       v64,
+                                                       UFG::TargetingSystemPedBaseComponent::_TypeUID)
+                                                   : UFG::SimObject::GetComponentOfType(
+                                                       v64,
+                                                       UFG::TargetingSystemPedBaseComponent::_TypeUID));
+    if ( v66 )
     {
-      v68 = UFG::SimObjectCVBase::GetComponent<UFG::TargetingSystemPedBaseComponent>(v66);
-    }
-    if ( v68 )
-    {
-      v69 = v68->m_CachedPedsList.size;
-      if ( v69 )
+      size = v66->m_CachedPedsList.size;
+      if ( size )
       {
-        v70 = &v68->m_CachedPedsList.p[0].m_pPointer;
+        p_m_pPointer = &v66->m_CachedPedsList.p[0].m_pPointer;
         do
         {
-          if ( !AttackCollisionTask::handleIncomingAttack((AttackCollisionTask *)((char *)v2 - 40), v21, *v70) )
+          if ( !AttackCollisionTask::handleIncomingAttack(
+                  (AttackCollisionTask *)((char *)this - 40),
+                  v21,
+                  *p_m_pPointer) )
             break;
           LODWORD(v10) = (_DWORD)v10 + 1;
-          v70 += 3;
+          p_m_pPointer += 3;
         }
-        while ( (unsigned int)v10 < v69 );
+        while ( (unsigned int)v10 < size );
       }
     }
   }
-  v71 = AttackCollisionTask::GetCharacterAnimationComponent((AttackCollisionTask *)((char *)v2 - 40));
-  if ( v71 )
+  v69 = AttackCollisionTask::GetCharacterAnimationComponent((AttackCollisionTask *)((char *)this - 40));
+  if ( v69 )
   {
-    Creature::GetTransform(v71->mCreature, LODWORD(v2->m_TimeBegin), &transform);
-    v72 = v82;
-    LODWORD(v2->mHitDudes[28]) = v82;
-    v73 = v83;
-    HIDWORD(v2->mHitDudes[28]) = v83;
-    v74 = transform.v0.x;
-    *(float *)&v2->mHitDudes[29] = transform.v0.x;
-    HIDWORD(v2->mHitDudes[29]) = v72;
-    LODWORD(v2->mHitDudes[30]) = v73;
-    *((float *)&v2->mHitDudes[30] + 1) = v74;
+    Creature::GetTransform(v69->mCreature, LODWORD(this->m_TimeBegin), &transform);
+    v70 = v80;
+    LODWORD(this->mHitDudes[28]) = v80;
+    v71 = v81;
+    HIDWORD(this->mHitDudes[28]) = v81;
+    x = transform.v0.x;
+    *(float *)&this->mHitDudes[29] = transform.v0.x;
+    HIDWORD(this->mHitDudes[29]) = v70;
+    LODWORD(this->mHitDudes[30]) = v71;
+    *((float *)&this->mHitDudes[30] + 1) = x;
   }
-LABEL_124:
-  v75 = *(UFG::SimObjectGame **)&v2->m_Track->m_TrackClassNameUID;
-  if ( v75 )
+LABEL_118:
+  v73 = *(UFG::SimObjectGame **)&this->m_Track->m_TrackClassNameUID;
+  if ( v73 )
   {
-    v76 = v75->m_Flags;
-    if ( (v76 >> 14) & 1 )
+    v74 = v73->m_Flags;
+    if ( (v74 & 0x4000) != 0 )
     {
-      v77 = v75->m_Components.p[15].m_pComponent;
+      v75 = v73->m_Components.p[15].m_pComponent;
     }
-    else if ( (v76 & 0x8000u) == 0 )
+    else if ( v74 >= 0 )
     {
-      if ( (v76 >> 13) & 1 )
-      {
-        v77 = UFG::SimObjectGame::GetComponentOfTypeHK(v75, UFG::HitReactionComponent::_TypeUID);
-      }
-      else if ( (v76 >> 12) & 1 )
-      {
-        v77 = UFG::SimObjectGame::GetComponentOfTypeHK(v75, UFG::HitReactionComponent::_TypeUID);
-      }
+      if ( (v74 & 0x2000) != 0 || (v74 & 0x1000) != 0 )
+        v75 = UFG::SimObjectGame::GetComponentOfTypeHK(v73, UFG::HitReactionComponent::_TypeUID);
       else
-      {
-        v77 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v75->vfptr, UFG::HitReactionComponent::_TypeUID);
-      }
+        v75 = UFG::SimObject::GetComponentOfType(v73, UFG::HitReactionComponent::_TypeUID);
     }
     else
     {
-      v77 = v75->m_Components.p[15].m_pComponent;
+      v75 = v73->m_Components.p[15].m_pComponent;
     }
-    if ( v77 )
-      v77[1].m_NameUID = v21;
+    if ( v75 )
+      v75[1].m_NameUID = v21;
   }
   return 1;
 }
@@ -3114,151 +2925,131 @@ LABEL_124:
 // RVA: 0x2FDE10
 void __fastcall AttackCollisionTask::End(AttackCollisionTask *this)
 {
-  AttackCollisionTask *v1; // rbx
-  UFG::SimObject *v2; // r9
+  UFG::SimObject *m_pPointer; // r9
   bool v3; // al
   UFG::SimObjectGame *v4; // rcx
-  unsigned __int16 v5; // dx
-  UFG::SimComponent *v6; // rax
-  UFG::qNode<PostAnimUpdateTask,PostAnimUpdateTaskList> *v7; // rcx
-  UFG::qNode<PostAnimUpdateTask,PostAnimUpdateTaskList> *v8; // rax
-  UFG::qNode<PostAnimUpdateTask,PostAnimUpdateTaskList> *v9; // rdx
-  UFG::StimulusParameters stimulus_parameters; // [rsp+30h] [rbp-28h]
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rax
+  UFG::qNode<PostAnimUpdateTask,PostAnimUpdateTaskList> *mPrev; // rcx
+  UFG::qNode<PostAnimUpdateTask,PostAnimUpdateTaskList> *mNext; // rax
+  UFG::StimulusParameters stimulus_parameters; // [rsp+30h] [rbp-28h] BYREF
 
-  v1 = this;
-  v2 = this->mContext->mSimObject.m_pPointer;
-  v3 = v2 && (LOBYTE(v2->m_Flags) >> 1) & 1;
+  m_pPointer = this->mContext->mSimObject.m_pPointer;
+  v3 = m_pPointer && (m_pPointer->m_Flags & 2) != 0;
   if ( !this->mHasHitAnyTarget && !v3 && LODWORD(this->m_Track[2].mMasterRate.value) != 43 )
   {
     stimulus_parameters.m_MaxStimulusDuration = -1.0;
     stimulus_parameters.m_StimulusProducerOffset = UFG::qVector3::msZero;
     stimulus_parameters.m_EmitUntilSpeedLessThan = -1.0;
-    stimulus_parameters.m_StimulusEmissionType = 0;
+    stimulus_parameters.m_StimulusEmissionType = eSTIMULUS_EMISSION_ONE_OFF;
     UFG::StimulusManager::BeginStimulus(
       UFG::StimulusManager::s_pInstance,
       eSTIMULUS_MELEE_ATTACK_NO_HIT,
       &stimulus_parameters,
-      v2,
-      0);
+      m_pPointer,
+      eTARGET_TYPE_INVALID);
   }
-  v4 = (UFG::SimObjectGame *)v1->mContext->mSimObject.m_pPointer;
+  v4 = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
   if ( v4 )
   {
-    v5 = v4->m_Flags;
-    if ( (v5 >> 14) & 1 )
+    m_Flags = v4->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v6 = v4->m_Components.p[15].m_pComponent;
+      m_pComponent = v4->m_Components.p[15].m_pComponent;
     }
-    else if ( (v5 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v5 >> 13) & 1 )
-      {
-        v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::HitReactionComponent::_TypeUID);
-      }
-      else if ( (v5 >> 12) & 1 )
-      {
-        v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::HitReactionComponent::_TypeUID);
-      }
+      if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        m_pComponent = UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::HitReactionComponent::_TypeUID);
       else
-      {
-        v6 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v4->vfptr, UFG::HitReactionComponent::_TypeUID);
-      }
+        m_pComponent = UFG::SimObject::GetComponentOfType(v4, UFG::HitReactionComponent::_TypeUID);
     }
     else
     {
-      v6 = v4->m_Components.p[15].m_pComponent;
+      m_pComponent = v4->m_Components.p[15].m_pComponent;
     }
-    if ( v6 )
-      v6[1].m_NameUID = 0;
+    if ( m_pComponent )
+      m_pComponent[1].m_NameUID = 0;
   }
-  v7 = v1->mPrev;
-  v8 = v1->mNext;
-  v9 = (UFG::qNode<PostAnimUpdateTask,PostAnimUpdateTaskList> *)&v1->mPrev;
-  v7->mNext = v8;
-  v8->mPrev = v7;
-  v9->mPrev = v9;
-  v9->mNext = v9;
+  mPrev = this->PostAnimUpdateTask::UFG::qNode<PostAnimUpdateTask,PostAnimUpdateTaskList>::mPrev;
+  mNext = this->PostAnimUpdateTask::UFG::qNode<PostAnimUpdateTask,PostAnimUpdateTaskList>::mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->PostAnimUpdateTask::UFG::qNode<PostAnimUpdateTask,PostAnimUpdateTaskList>::mPrev = &this->UFG::qNode<PostAnimUpdateTask,PostAnimUpdateTaskList>;
+  this->PostAnimUpdateTask::UFG::qNode<PostAnimUpdateTask,PostAnimUpdateTaskList>::mNext = &this->UFG::qNode<PostAnimUpdateTask,PostAnimUpdateTaskList>;
 }
 
 // File Line: 1778
 // RVA: 0x301D00
-UFG::CharacterAnimationComponent *__fastcall AttackCollisionTask::GetCharacterAnimationComponent(AttackCollisionTask *this)
+UFG::CharacterAnimationComponent *__fastcall AttackCollisionTask::GetCharacterAnimationComponent(
+        AttackCollisionTask *this)
 {
-  ITrack *v1; // rax
-  AttackCollisionTask *v2; // rbx
-  UFG::SimObjectCVBase *v3; // rcx
-  unsigned __int16 v4; // dx
-  unsigned __int16 v6; // dx
-  UFG::SimComponent *v7; // rcx
+  ITrack *m_Track; // rax
+  UFG::SimObjectCVBase *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  __int16 v6; // dx
+  UFG::SimComponent *m_pComponent; // rcx
   UFG::SimComponent *v8; // rax
   __int64 v9; // rax
 
-  v1 = this->m_Track;
-  v2 = this;
-  v3 = (UFG::SimObjectCVBase *)this->mContext->mSimObject.m_pPointer;
-  if ( !LODWORD(v1[3].mResourceOwner) )
+  m_Track = this->m_Track;
+  m_pPointer = (UFG::SimObjectCVBase *)this->mContext->mSimObject.m_pPointer;
+  if ( !LODWORD(m_Track[3].mResourceOwner) )
   {
-    if ( v3 )
+    if ( m_pPointer )
     {
-      v4 = v3->m_Flags;
-      if ( (v4 >> 14) & 1 )
-        return UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v3);
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
+        return UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(m_pPointer);
       goto LABEL_5;
     }
     return 0i64;
   }
-  if ( !v3 )
+  if ( !m_pPointer )
     return 0i64;
-  v6 = v3->m_Flags;
-  if ( (v6 >> 14) & 1 )
+  v6 = m_pPointer->m_Flags;
+  if ( (v6 & 0x4000) != 0 )
   {
-    v7 = v3->m_Components.p[20].m_pComponent;
+    m_pComponent = m_pPointer->m_Components.p[20].m_pComponent;
   }
-  else if ( (v6 & 0x8000u) == 0 )
+  else if ( v6 >= 0 )
   {
-    if ( (v6 >> 13) & 1 )
-      v8 = UFG::SimObjectGame::GetComponentOfTypeHK(
-             (UFG::SimObjectGame *)&v3->vfptr,
-             UFG::TargetingSystemBaseComponent::_TypeUID);
-    else
-      v8 = (v6 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                              (UFG::SimObjectGame *)&v3->vfptr,
-                              UFG::TargetingSystemBaseComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(
-                                                                               (UFG::SimObject *)&v3->vfptr,
-                                                                               UFG::TargetingSystemBaseComponent::_TypeUID);
-    v7 = v8;
+    v8 = (v6 & 0x2000) != 0 || (v6 & 0x1000) != 0
+       ? UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::TargetingSystemBaseComponent::_TypeUID)
+       : UFG::SimObject::GetComponentOfType(m_pPointer, UFG::TargetingSystemBaseComponent::_TypeUID);
+    m_pComponent = v8;
   }
   else
   {
-    v7 = v3->m_Components.p[20].m_pComponent;
+    m_pComponent = m_pPointer->m_Components.p[20].m_pComponent;
   }
-  if ( !v7 )
+  if ( !m_pComponent )
     return 0i64;
-  v9 = ((__int64 (*)(void))v7->vfptr[15].__vecDelDtor)();
+  v9 = ((__int64 (__fastcall *)(UFG::SimComponent *))m_pComponent->vfptr[15].__vecDelDtor)(m_pComponent);
   if ( !v9 )
     return 0i64;
-  v3 = *(UFG::SimObjectCVBase **)(56i64
-                                * *(unsigned __int8 *)(LODWORD(v2->m_Track[3].mResourceOwner)
-                                                     + *(_QWORD *)(v9 + 96)
-                                                     + 8i64)
-                                + *(_QWORD *)(v9 + 88)
-                                + 40);
-  if ( !v3 )
+  m_pPointer = *(UFG::SimObjectCVBase **)(56i64
+                                        * *(unsigned __int8 *)(LODWORD(this->m_Track[3].mResourceOwner)
+                                                             + *(_QWORD *)(v9 + 96)
+                                                             + 8i64)
+                                        + *(_QWORD *)(v9 + 88)
+                                        + 40);
+  if ( !m_pPointer )
     return 0i64;
-  v4 = v3->m_Flags;
-  if ( (v4 >> 14) & 1 )
-    return UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v3);
+  m_Flags = m_pPointer->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 )
+    return UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(m_pPointer);
 LABEL_5:
-  if ( (v4 & 0x8000u) != 0 )
-    return UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v3);
-  if ( (v4 >> 13) & 1 )
-    return UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v3);
-  if ( (v4 >> 12) & 1 )
+  if ( m_Flags < 0 )
+    return UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(m_pPointer);
+  if ( (m_Flags & 0x2000) != 0 )
+    return UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)m_pPointer);
+  if ( (m_Flags & 0x1000) != 0 )
     return (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                 (UFG::SimObjectGame *)&v3->vfptr,
+                                                 m_pPointer,
                                                  UFG::CharacterAnimationComponent::_TypeUID);
   return (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                               (UFG::SimObject *)&v3->vfptr,
+                                               m_pPointer,
                                                UFG::CharacterAnimationComponent::_TypeUID);
 }
 
@@ -3266,49 +3057,37 @@ LABEL_5:
 // RVA: 0x2E9020
 void __fastcall AttackTimerTask::Begin(AttackTimerTask *this, ActionContext *context)
 {
-  AttackTimerTask *v2; // rdi
-  UFG::SimObjectGame *v3; // rcx
-  ActionContext *v4; // rbx
-  unsigned __int16 v5; // r8
-  UFG::SimComponent *v6; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // r8
+  UFG::SimComponent *m_pComponent; // rax
 
-  v2 = this;
   this->mContext = context;
-  v3 = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
-  v4 = context;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v5 = v3->m_Flags;
-    if ( (v5 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v6 = v3->m_Components.p[15].m_pComponent;
+      m_pComponent = m_pPointer->m_Components.p[15].m_pComponent;
     }
-    else if ( (v5 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v5 >> 13) & 1 )
-      {
-        v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::HitReactionComponent::_TypeUID);
-      }
-      else if ( (v5 >> 12) & 1 )
-      {
-        v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::HitReactionComponent::_TypeUID);
-      }
+      if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        m_pComponent = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::HitReactionComponent::_TypeUID);
       else
-      {
-        v6 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::HitReactionComponent::_TypeUID);
-      }
+        m_pComponent = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::HitReactionComponent::_TypeUID);
     }
     else
     {
-      v6 = v3->m_Components.p[15].m_pComponent;
+      m_pComponent = m_pPointer->m_Components.p[15].m_pComponent;
     }
-    if ( v6 )
-      v6[1].m_TypeUID = 0;
-    v2->mContext = v4;
+    if ( m_pComponent )
+      m_pComponent[1].m_TypeUID = 0;
+    this->mContext = context;
   }
   else
   {
-    v2->mContext = context;
+    this->mContext = context;
   }
 }
 
@@ -3316,41 +3095,33 @@ void __fastcall AttackTimerTask::Begin(AttackTimerTask *this, ActionContext *con
 // RVA: 0x303A80
 char __fastcall AttackTimerTask::Update(AttackTimerTask *this, float timeDelta)
 {
-  UFG::SimObjectGame *v2; // rcx
-  unsigned __int16 v3; // dx
-  UFG::SimComponent *v4; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rax
 
   if ( LOBYTE(this->m_Track[1].vfptr) )
   {
-    v2 = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
-    if ( v2 )
+    m_pPointer = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      v3 = v2->m_Flags;
-      if ( (v3 >> 14) & 1 )
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
       {
-        v4 = v2->m_Components.p[15].m_pComponent;
+        m_pComponent = m_pPointer->m_Components.p[15].m_pComponent;
       }
-      else if ( (v3 & 0x8000u) == 0 )
+      else if ( m_Flags >= 0 )
       {
-        if ( (v3 >> 13) & 1 )
-        {
-          v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::HitReactionComponent::_TypeUID);
-        }
-        else if ( (v3 >> 12) & 1 )
-        {
-          v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::HitReactionComponent::_TypeUID);
-        }
+        if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+          m_pComponent = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::HitReactionComponent::_TypeUID);
         else
-        {
-          v4 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::HitReactionComponent::_TypeUID);
-        }
+          m_pComponent = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::HitReactionComponent::_TypeUID);
       }
       else
       {
-        v4 = v2->m_Components.p[15].m_pComponent;
+        m_pComponent = m_pPointer->m_Components.p[15].m_pComponent;
       }
-      if ( v4 )
-        v4[1].m_TypeUID = 0;
+      if ( m_pComponent )
+        m_pComponent[1].m_TypeUID = 0;
     }
   }
   return 1;
@@ -3360,35 +3131,33 @@ char __fastcall AttackTimerTask::Update(AttackTimerTask *this, float timeDelta)
 // RVA: 0x2F36B0
 void __fastcall SetEngineDamageTask::Begin(SetEngineDamageTask *this, ActionContext *context)
 {
-  SetEngineDamageTask *v2; // rbx
-  UFG::SimObjectGame *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::PhysicsMoverInterface *v5; // rcx
-  UFG::SimComponent *v6; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::PhysicsMoverInterface *m_pComponent; // rcx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
 
-  v2 = this;
-  v3 = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v4 = v3->m_Flags;
-    if ( !((v4 >> 14) & 1) )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) == 0 )
     {
-      if ( (v4 & 0x8000u) == 0 )
+      if ( m_Flags >= 0 )
       {
-        if ( (v4 >> 13) & 1 )
+        if ( (m_Flags & 0x2000) != 0 )
           return;
-        if ( (v4 >> 12) & 1 )
-          v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::PhysicsMoverInterface::_TypeUID);
+        if ( (m_Flags & 0x1000) != 0 )
+          ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::PhysicsMoverInterface::_TypeUID);
         else
-          v6 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::PhysicsMoverInterface::_TypeUID);
-        v5 = (UFG::PhysicsMoverInterface *)v6;
+          ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::PhysicsMoverInterface::_TypeUID);
+        m_pComponent = (UFG::PhysicsMoverInterface *)ComponentOfTypeHK;
       }
       else
       {
-        v5 = (UFG::PhysicsMoverInterface *)v3->m_Components.p[34].m_pComponent;
+        m_pComponent = (UFG::PhysicsMoverInterface *)m_pPointer->m_Components.p[34].m_pComponent;
       }
-      if ( v5 )
-        UFG::PhysicsMoverInterface::SetDamageStateEngineDamage(v5, *(float *)&v2->m_Track[1].vfptr);
+      if ( m_pComponent )
+        UFG::PhysicsMoverInterface::SetDamageStateEngineDamage(m_pComponent, *(float *)&this->m_Track[1].vfptr);
     }
   }
 }
@@ -3397,52 +3166,42 @@ void __fastcall SetEngineDamageTask::Begin(SetEngineDamageTask *this, ActionCont
 // RVA: 0x2F0E70
 void __fastcall OverrideDesiredFocusModeTask::Begin(OverrideDesiredFocusModeTask *this, ActionContext *pContext)
 {
-  OverrideDesiredFocusModeTask *v2; // rbx
-  UFG::SimObjectGame *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::SimComponent *v5; // rcx
-  UFG::SimComponent *v6; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rcx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   UFG::TargetingSystemPedPlayerComponent *v7; // rax
 
-  v2 = this;
   this->m_pContext = pContext;
-  v3 = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v4 = v3->m_Flags;
-    if ( (v4 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v5 = v3->m_Components.p[20].m_pComponent;
+      m_pComponent = m_pPointer->m_Components.p[20].m_pComponent;
     }
-    else if ( (v4 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v4 >> 13) & 1 )
-      {
-        v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
-      else if ( (v4 >> 12) & 1 )
-      {
-        v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
+      if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                              m_pPointer,
+                              UFG::TargetingSystemBaseComponent::_TypeUID);
       else
-      {
-        v6 = UFG::SimObject::GetComponentOfType(
-               (UFG::SimObject *)&v3->vfptr,
-               UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
-      v5 = v6;
+        ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::TargetingSystemBaseComponent::_TypeUID);
+      m_pComponent = ComponentOfTypeHK;
     }
     else
     {
-      v5 = v3->m_Components.p[20].m_pComponent;
+      m_pComponent = m_pPointer->m_Components.p[20].m_pComponent;
     }
-    if ( v5 )
+    if ( m_pComponent )
     {
-      v7 = (UFG::TargetingSystemPedPlayerComponent *)((__int64 (*)(void))v5->vfptr[19].__vecDelDtor)();
+      v7 = (UFG::TargetingSystemPedPlayerComponent *)((__int64 (__fastcall *)(UFG::SimComponent *))m_pComponent->vfptr[19].__vecDelDtor)(m_pComponent);
       if ( v7 )
         UFG::TargetingSystemPedPlayerComponent::SetOverrideDesiredFocusMode(
           v7,
-          (UFG::eFocusModeEnum)v2->m_Track[1].vfptr);
+          (UFG::eFocusModeEnum)this->m_Track[1].vfptr);
     }
   }
 }
@@ -3451,51 +3210,47 @@ void __fastcall OverrideDesiredFocusModeTask::Begin(OverrideDesiredFocusModeTask
 // RVA: 0x2FF270
 void __fastcall OverrideDesiredFocusModeTask::End(OverrideDesiredFocusModeTask *this)
 {
-  UFG::SimObjectGame *v1; // rcx
-  unsigned __int16 v2; // dx
-  UFG::SimComponent *v3; // rcx
-  UFG::SimComponent *v4; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rcx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   __int64 v5; // rax
 
   if ( BYTE4(this->m_Track[1].vfptr) )
   {
-    v1 = (UFG::SimObjectGame *)this->m_pContext->mSimObject.m_pPointer;
-    if ( v1 )
+    m_pPointer = (UFG::SimObjectGame *)this->m_pContext->mSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      v2 = v1->m_Flags;
-      if ( (v2 >> 14) & 1 )
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
       {
-        v3 = v1->m_Components.p[20].m_pComponent;
+        m_pComponent = m_pPointer->m_Components.p[20].m_pComponent;
       }
-      else if ( (v2 & 0x8000u) == 0 )
+      else if ( m_Flags >= 0 )
       {
-        if ( (v2 >> 13) & 1 )
-        {
-          v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v1, UFG::TargetingSystemBaseComponent::_TypeUID);
-        }
-        else if ( (v2 >> 12) & 1 )
-        {
-          v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v1, UFG::TargetingSystemBaseComponent::_TypeUID);
-        }
+        if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+          ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                m_pPointer,
+                                UFG::TargetingSystemBaseComponent::_TypeUID);
         else
-        {
-          v4 = UFG::SimObject::GetComponentOfType(
-                 (UFG::SimObject *)&v1->vfptr,
-                 UFG::TargetingSystemBaseComponent::_TypeUID);
-        }
-        v3 = v4;
+          ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(
+                                m_pPointer,
+                                UFG::TargetingSystemBaseComponent::_TypeUID);
+        m_pComponent = ComponentOfTypeHK;
       }
       else
       {
-        v3 = v1->m_Components.p[20].m_pComponent;
+        m_pComponent = m_pPointer->m_Components.p[20].m_pComponent;
       }
-      if ( v3 )
+      if ( m_pComponent )
       {
-        v5 = ((__int64 (*)(void))v3->vfptr[19].__vecDelDtor)();
+        v5 = ((__int64 (__fastcall *)(UFG::SimComponent *))m_pComponent->vfptr[19].__vecDelDtor)(m_pComponent);
         if ( v5 )
         {
           *(_DWORD *)(v5 + 3424) = 0;
-          UFG::TargetingSystemPedPlayerComponent::SetFocusMode((UFG::TargetingSystemPedPlayerComponent *)v5, 0);
+          UFG::TargetingSystemPedPlayerComponent::SetFocusMode(
+            (UFG::TargetingSystemPedPlayerComponent *)v5,
+            eFOCUS_MODE_NONE);
         }
       }
     }
@@ -3506,211 +3261,187 @@ void __fastcall OverrideDesiredFocusModeTask::End(OverrideDesiredFocusModeTask *
 // RVA: 0x2F1CE0
 void __fastcall ParkourSyncPositionTask::Begin(ParkourSyncPositionTask *this, ActionContext *context)
 {
-  ParkourSyncPositionTask *v2; // rbx
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v3; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v4; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v5; // rax
-  UFG::SimObjectGame *v6; // rcx
-  unsigned __int16 v7; // dx
-  UFG::WorldContextComponent *v8; // rax
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mParkourSimObject; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::WorldContextComponent *m_pComponent; // rax
 
   this->mSyncStarted = 0;
   this->mContext = context;
-  v2 = this;
-  v3 = &this->mParkourSimObject;
-  if ( v3->m_pPointer )
+  p_mParkourSimObject = &this->mParkourSimObject;
+  if ( p_mParkourSimObject->m_pPointer )
   {
-    v4 = v3->mPrev;
-    v5 = v3->mNext;
-    v4->mNext = v5;
-    v5->mPrev = v4;
-    v3->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v3->mPrev;
-    v3->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v3->mPrev;
+    mPrev = p_mParkourSimObject->mPrev;
+    mNext = p_mParkourSimObject->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mParkourSimObject->mPrev = p_mParkourSimObject;
+    p_mParkourSimObject->mNext = p_mParkourSimObject;
   }
-  v3->m_pPointer = 0i64;
-  v2->mSyncBoneIndex = 0;
-  v6 = (UFG::SimObjectGame *)v2->mContext->mSimObject.m_pPointer;
-  if ( v6 )
+  p_mParkourSimObject->m_pPointer = 0i64;
+  this->mSyncBoneIndex = 0;
+  m_pPointer = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v7 = v6->m_Flags;
-    if ( (v7 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v8 = (UFG::WorldContextComponent *)v6->m_Components.p[28].m_pComponent;
+      m_pComponent = (UFG::WorldContextComponent *)m_pPointer->m_Components.p[28].m_pComponent;
     }
-    else if ( (v7 & 0x8000u) == 0 )
+    else if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v7 >> 13) & 1 )
-      {
-        v8 = (UFG::WorldContextComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                             v6,
-                                             UFG::WorldContextComponent::_TypeUID);
-      }
-      else if ( (v7 >> 12) & 1 )
-      {
-        v8 = (UFG::WorldContextComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                             v6,
-                                             UFG::WorldContextComponent::_TypeUID);
-      }
-      else
-      {
-        v8 = (UFG::WorldContextComponent *)UFG::SimObject::GetComponentOfType(
-                                             (UFG::SimObject *)&v6->vfptr,
-                                             UFG::WorldContextComponent::_TypeUID);
-      }
+      m_pComponent = (UFG::WorldContextComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                     m_pPointer,
+                                                     UFG::WorldContextComponent::_TypeUID);
     }
     else
     {
-      v8 = (UFG::WorldContextComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                           v6,
-                                           UFG::WorldContextComponent::_TypeUID);
+      m_pComponent = (UFG::WorldContextComponent *)UFG::SimObject::GetComponentOfType(
+                                                     m_pPointer,
+                                                     UFG::WorldContextComponent::_TypeUID);
     }
-    if ( v8 )
-      UFG::WorldContextComponent::LatchFocusParkourHandle(v8);
+    if ( m_pComponent )
+      UFG::WorldContextComponent::LatchFocusParkourHandle(m_pComponent);
   }
-  ((void (__fastcall *)(ParkourSyncPositionTask *))v2->vfptr->Update)(v2);
+  ((void (__fastcall *)(ParkourSyncPositionTask *))this->vfptr->Update)(this);
 }
 
 // File Line: 1905
 // RVA: 0x30E9A0
 void __fastcall ParkourSyncPositionTask::startSync(ParkourSyncPositionTask *this)
 {
-  ParkourSyncPositionTask *v1; // rbx
-  UFG::SimObjectGame *v2; // rcx
-  unsigned __int16 v3; // dx
-  UFG::WorldContextComponent *v4; // rdi
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::WorldContextComponent *m_pComponent; // rdi
   UFG::SimComponent *v5; // rax
-  Creature *v6; // rsi
+  Creature *mCreature; // rsi
   UFG::SimObjectCVBase *v7; // rcx
-  unsigned __int16 v8; // dx
+  __int16 v8; // dx
   UFG::CharacterAnimationComponent *v9; // rax
-  signed int v10; // eax
-  ITrack *v11; // r11
+  int BoneID; // eax
+  ITrack *m_Track; // r11
   UFG::ParkourHandle *v12; // rbp
   UFG::SimObject *v13; // rdi
-  unsigned __int16 v14; // cx
-  UFG::SimComponent *v15; // rax
+  __int16 v14; // cx
+  UFG::SimComponent *ComponentOfType; // rax
   bool v16; // zf
   UFG::SimObjectGame *v17; // rcx
 
-  v1 = this;
-  v2 = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
-  if ( v2 )
+  m_pPointer = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v3 = v2->m_Flags;
-    if ( (v3 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v4 = (UFG::WorldContextComponent *)v2->m_Components.p[28].m_pComponent;
+      m_pComponent = (UFG::WorldContextComponent *)m_pPointer->m_Components.p[28].m_pComponent;
     }
     else
     {
-      if ( (v3 & 0x8000u) == 0 )
-      {
-        if ( (v3 >> 13) & 1 )
-          v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::WorldContextComponent::_TypeUID);
-        else
-          v5 = (v3 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::WorldContextComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::WorldContextComponent::_TypeUID);
-      }
-      else
-      {
-        v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::WorldContextComponent::_TypeUID);
-      }
-      v4 = (UFG::WorldContextComponent *)v5;
+      v5 = m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+         ? UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::WorldContextComponent::_TypeUID)
+         : UFG::SimObject::GetComponentOfType(m_pPointer, UFG::WorldContextComponent::_TypeUID);
+      m_pComponent = (UFG::WorldContextComponent *)v5;
     }
-    if ( v4 )
+    if ( m_pComponent )
     {
-      v6 = 0i64;
-      v7 = (UFG::SimObjectCVBase *)v1->mContext->mSimObject.m_pPointer;
+      mCreature = 0i64;
+      v7 = (UFG::SimObjectCVBase *)this->mContext->mSimObject.m_pPointer;
       if ( v7 )
       {
         v8 = v7->m_Flags;
-        if ( (v8 >> 14) & 1 )
+        if ( (v8 & 0x4000) != 0 || v8 < 0 )
         {
           v9 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v7);
         }
-        else if ( (v8 & 0x8000u) == 0 )
+        else if ( (v8 & 0x2000) != 0 )
         {
-          if ( (v8 >> 13) & 1 )
-            v9 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v7);
-          else
-            v9 = (UFG::CharacterAnimationComponent *)((v8 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                         (UFG::SimObjectGame *)&v7->vfptr,
-                                                                         UFG::CharacterAnimationComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v7->vfptr, UFG::CharacterAnimationComponent::_TypeUID));
+          v9 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v7);
         }
         else
         {
-          v9 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v7);
+          v9 = (UFG::CharacterAnimationComponent *)((v8 & 0x1000) != 0
+                                                  ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                      v7,
+                                                      UFG::CharacterAnimationComponent::_TypeUID)
+                                                  : UFG::SimObject::GetComponentOfType(
+                                                      v7,
+                                                      UFG::CharacterAnimationComponent::_TypeUID));
         }
         if ( v9 )
         {
-          v6 = v9->mCreature;
-          if ( v6->mPose.mRigHandle.mData )
-            v10 = Skeleton::GetBoneID(v6->mPose.mRigHandle.mUFGSkeleton, HIDWORD(v1->m_Track[1].mResourceOwner));
+          mCreature = v9->mCreature;
+          if ( mCreature->mPose.mRigHandle.mData )
+            BoneID = Skeleton::GetBoneID(
+                       mCreature->mPose.mRigHandle.mUFGSkeleton,
+                       HIDWORD(this->m_Track[1].mResourceOwner));
           else
-            v10 = -1;
-          v1->mSyncBoneIndex = v10;
+            BoneID = -1;
+          this->mSyncBoneIndex = BoneID;
         }
       }
-      v11 = v1->m_Track;
+      m_Track = this->m_Track;
       UFG::WorldContextComponent::StartSyncHandle(
-        v4,
-        v1->mSyncBoneIndex,
-        LOBYTE(v11[1].m_TrackClassNameUID) != 0,
-        HIBYTE(v11[1].m_TrackClassNameUID) != 0,
-        BYTE1(v11[1].m_TrackClassNameUID) != 0,
-        BYTE2(v11[1].m_TrackClassNameUID) != 0,
-        v11[1].mDisable != 0,
-        v11[1].mMaster != 0,
-        *(float *)&v11[1].mMasterRate.text.mOffset,
-        *(float *)&v11[1].mResourceOwner);
-      if ( v1->m_Track[1].mBreakPoint )
+        m_pComponent,
+        this->mSyncBoneIndex,
+        LOBYTE(m_Track[1].m_TrackClassNameUID) != 0,
+        HIBYTE(m_Track[1].m_TrackClassNameUID) != 0,
+        BYTE1(m_Track[1].m_TrackClassNameUID) != 0,
+        BYTE2(m_Track[1].m_TrackClassNameUID) != 0,
+        m_Track[1].mDisable != 0,
+        m_Track[1].mMaster != 0,
+        *(float *)&m_Track[1].mMasterRate.text.mOffset,
+        *(float *)&m_Track[1].mResourceOwner);
+      if ( this->m_Track[1].mBreakPoint )
       {
-        if ( v6 )
+        if ( mCreature )
         {
-          v12 = v4->mParkourHandle.m_pPointer;
+          v12 = m_pComponent->mParkourHandle.m_pPointer;
           if ( v12 )
           {
             v13 = v12->mSimObject.m_pPointer;
             if ( v13 )
             {
               v14 = v13->m_Flags;
-              if ( (v14 >> 14) & 1 )
+              if ( (v14 & 0x4000) != 0 )
               {
-                v15 = v13->m_Components.p[9].m_pComponent;
+                ComponentOfType = v13->m_Components.p[9].m_pComponent;
               }
-              else if ( (v14 & 0x8000u) == 0 )
+              else if ( v14 >= 0 )
               {
-                if ( (v14 >> 13) & 1 )
+                if ( (v14 & 0x2000) != 0 )
                 {
-                  v15 = v13->m_Components.p[8].m_pComponent;
+                  ComponentOfType = v13->m_Components.p[8].m_pComponent;
                 }
                 else
                 {
-                  v16 = ((v14 >> 12) & 1) == 0;
+                  v16 = (v14 & 0x1000) == 0;
                   v17 = (UFG::SimObjectGame *)v12->mSimObject.m_pPointer;
                   if ( v16 )
-                    v15 = UFG::SimObject::GetComponentOfType(
-                            (UFG::SimObject *)&v17->vfptr,
-                            UFG::BaseAnimationComponent::_TypeUID);
+                    ComponentOfType = UFG::SimObject::GetComponentOfType(v17, UFG::BaseAnimationComponent::_TypeUID);
                   else
-                    v15 = UFG::SimObjectGame::GetComponentOfTypeHK(v17, UFG::BaseAnimationComponent::_TypeUID);
+                    ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                        v17,
+                                        UFG::BaseAnimationComponent::_TypeUID);
                 }
               }
               else
               {
-                v15 = v13->m_Components.p[9].m_pComponent;
+                ComponentOfType = v13->m_Components.p[9].m_pComponent;
               }
-              if ( v15 && *(_QWORD *)&v15[2].m_TypeUID )
+              if ( ComponentOfType && *(_QWORD *)&ComponentOfType[2].m_TypeUID )
               {
                 UFG::qSafePointer<Creature,Creature>::operator=(
-                  (UFG::qSafePointer<UFG::SimComponent,UFG::SimComponent> *)&v1->mParkourSimObject,
+                  (UFG::qSafePointer<UFG::SimComponent,UFG::SimComponent> *)&this->mParkourSimObject,
                   (UFG::SimComponent *)v13);
                 Creature::AddAttachmentParkour(
-                  v6,
-                  v1->mParkourSimObject.m_pPointer,
-                  v1->mSyncBoneIndex,
-                  v1->mContext->mSimObject.m_pPointer,
+                  mCreature,
+                  this->mParkourSimObject.m_pPointer,
+                  this->mSyncBoneIndex,
+                  this->mContext->mSimObject.m_pPointer,
                   v12,
-                  *(float *)&v1->m_Track[1].mResourceOwner);
+                  *(float *)&this->m_Track[1].mResourceOwner);
               }
             }
           }
@@ -3718,124 +3449,96 @@ void __fastcall ParkourSyncPositionTask::startSync(ParkourSyncPositionTask *this
       }
     }
   }
-  v1->mSyncStarted = 1;
+  this->mSyncStarted = 1;
 }
 
 // File Line: 1957
 // RVA: 0x305F60
-signed __int64 __fastcall ParkourSyncPositionTask::Update(ParkourSyncPositionTask *this, float timeDelta)
+_BOOL8 __fastcall ParkourSyncPositionTask::Update(ParkourSyncPositionTask *this, float timeDelta)
 {
-  ParkourSyncPositionTask *v2; // rbx
-  float v3; // xmm6_4
+  float m_ActionNodePlayTime; // xmm6_4
   float v4; // xmm0_4
   float v5; // xmm0_4
-  signed __int64 result; // rax
 
-  v2 = this;
-  v3 = this->mContext->mActionController->m_ActionNodePlayTime;
+  m_ActionNodePlayTime = this->mContext->mActionController->m_ActionNodePlayTime;
   if ( !this->mSyncStarted )
   {
     v4 = *(float *)&this->m_Track[1].vfptr;
-    if ( v4 >= 0.0 && v3 >= v4 )
+    if ( v4 >= 0.0 && m_ActionNodePlayTime >= v4 )
       ParkourSyncPositionTask::startSync(this);
   }
-  if ( v2->mSyncStarted != 1 )
+  if ( this->mSyncStarted && (v5 = *((float *)&this->m_Track[1].vfptr + 1), v5 >= 0.0) )
+    return m_ActionNodePlayTime < v5;
+  else
     return 1i64;
-  v5 = *((float *)&v2->m_Track[1].vfptr + 1);
-  if ( v5 < 0.0 )
-    return 1i64;
-  result = 1i64;
-  if ( v3 >= v5 )
-    result = 0i64;
-  return result;
 }
 
 // File Line: 1995
 // RVA: 0x2FF8A0
 void __fastcall ParkourSyncPositionTask::End(ParkourSyncPositionTask *this)
 {
-  ParkourSyncPositionTask *v1; // rbx
-  UFG::SimObjectGame *v2; // rcx
-  unsigned __int16 v3; // dx
-  UFG::WorldContextComponent *v4; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::WorldContextComponent *m_pComponent; // rax
   UFG::SimObjectCVBase *v5; // rcx
-  unsigned __int16 v6; // dx
-  UFG::CharacterAnimationComponent *v7; // rax
-  Creature *v8; // rcx
+  __int16 v6; // dx
+  UFG::CharacterAnimationComponent *ComponentOfTypeHK; // rax
+  Creature *mCreature; // rcx
 
-  v1 = this;
-  v2 = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
-  if ( v2 )
+  m_pPointer = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v3 = v2->m_Flags;
-    if ( (v3 >> 14) & 1 )
-    {
-      v4 = (UFG::WorldContextComponent *)v2->m_Components.p[28].m_pComponent;
-    }
-    else if ( (v3 & 0x8000u) == 0 )
-    {
-      if ( (v3 >> 13) & 1 )
-        v4 = (UFG::WorldContextComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                             v2,
-                                             UFG::WorldContextComponent::_TypeUID);
-      else
-        v4 = (UFG::WorldContextComponent *)((v3 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                               v2,
-                                                               UFG::WorldContextComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::WorldContextComponent::_TypeUID));
-    }
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
+      m_pComponent = (UFG::WorldContextComponent *)m_pPointer->m_Components.p[28].m_pComponent;
     else
-    {
-      v4 = (UFG::WorldContextComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                           v2,
-                                           UFG::WorldContextComponent::_TypeUID);
-    }
-    if ( v4 )
-      UFG::WorldContextComponent::StopSync(v4);
+      m_pComponent = (UFG::WorldContextComponent *)(m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+                                                  ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                      m_pPointer,
+                                                      UFG::WorldContextComponent::_TypeUID)
+                                                  : UFG::SimObject::GetComponentOfType(
+                                                      m_pPointer,
+                                                      UFG::WorldContextComponent::_TypeUID));
+    if ( m_pComponent )
+      UFG::WorldContextComponent::StopSync(m_pComponent);
   }
-  if ( v1->m_Track[1].mBreakPoint )
+  if ( this->m_Track[1].mBreakPoint )
   {
-    if ( v1->mParkourSimObject.m_pPointer )
+    if ( this->mParkourSimObject.m_pPointer )
     {
-      v5 = (UFG::SimObjectCVBase *)v1->mContext->mSimObject.m_pPointer;
+      v5 = (UFG::SimObjectCVBase *)this->mContext->mSimObject.m_pPointer;
       if ( v5 )
       {
         v6 = v5->m_Flags;
-        if ( (v6 >> 14) & 1 )
+        if ( (v6 & 0x4000) != 0 || v6 < 0 )
         {
-          v7 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v5);
+          ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v5);
         }
-        else if ( (v6 & 0x8000u) == 0 )
+        else if ( (v6 & 0x2000) != 0 )
         {
-          if ( (v6 >> 13) & 1 )
-          {
-            v7 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v5);
-          }
-          else if ( (v6 >> 12) & 1 )
-          {
-            v7 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                       (UFG::SimObjectGame *)&v5->vfptr,
-                                                       UFG::CharacterAnimationComponent::_TypeUID);
-          }
-          else
-          {
-            v7 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                       (UFG::SimObject *)&v5->vfptr,
-                                                       UFG::CharacterAnimationComponent::_TypeUID);
-          }
+          ComponentOfTypeHK = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v5);
+        }
+        else if ( (v6 & 0x1000) != 0 )
+        {
+          ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                    v5,
+                                                                    UFG::CharacterAnimationComponent::_TypeUID);
         }
         else
         {
-          v7 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v5);
+          ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                    v5,
+                                                                    UFG::CharacterAnimationComponent::_TypeUID);
         }
-        if ( v7 )
+        if ( ComponentOfTypeHK )
         {
-          v8 = v7->mCreature;
-          if ( v8 )
+          mCreature = ComponentOfTypeHK->mCreature;
+          if ( mCreature )
             Creature::RemoveAttachment(
-              v8,
-              v1->mParkourSimObject.m_pPointer,
-              v1->mSyncBoneIndex,
-              v1->mContext->mSimObject.m_pPointer);
+              mCreature,
+              this->mParkourSimObject.m_pPointer,
+              this->mSyncBoneIndex,
+              this->mContext->mSimObject.m_pPointer);
         }
       }
     }
@@ -3846,46 +3549,29 @@ void __fastcall ParkourSyncPositionTask::End(ParkourSyncPositionTask *this)
 // RVA: 0x2F1C40
 void __fastcall ParkourNeighborAdvanceTask::Begin(ParkourNeighborAdvanceTask *this, ActionContext *context)
 {
-  ParkourNeighborAdvanceTask *v2; // rbx
-  UFG::SimObjectGame *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::WorldContextComponent *v5; // rcx
-  UFG::SimComponent *v6; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::WorldContextComponent *m_pComponent; // rcx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
 
-  v2 = this;
-  v3 = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v4 = v3->m_Flags;
-    if ( (v4 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v5 = (UFG::WorldContextComponent *)v3->m_Components.p[28].m_pComponent;
+      m_pComponent = (UFG::WorldContextComponent *)m_pPointer->m_Components.p[28].m_pComponent;
     }
     else
     {
-      if ( (v4 & 0x8000u) == 0 )
-      {
-        if ( (v4 >> 13) & 1 )
-        {
-          v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::WorldContextComponent::_TypeUID);
-        }
-        else if ( (v4 >> 12) & 1 )
-        {
-          v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::WorldContextComponent::_TypeUID);
-        }
-        else
-        {
-          v6 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::WorldContextComponent::_TypeUID);
-        }
-      }
+      if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::WorldContextComponent::_TypeUID);
       else
-      {
-        v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::WorldContextComponent::_TypeUID);
-      }
-      v5 = (UFG::WorldContextComponent *)v6;
+        ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::WorldContextComponent::_TypeUID);
+      m_pComponent = (UFG::WorldContextComponent *)ComponentOfTypeHK;
     }
-    if ( v5 )
-      UFG::WorldContextComponent::AdvanceParkourNeighbor(v5, LOBYTE(v2->m_Track[1].vfptr) != 0);
+    if ( m_pComponent )
+      UFG::WorldContextComponent::AdvanceParkourNeighbor(m_pComponent, LOBYTE(this->m_Track[1].vfptr) != 0);
   }
 }
 
@@ -3893,157 +3579,154 @@ void __fastcall ParkourNeighborAdvanceTask::Begin(ParkourNeighborAdvanceTask *th
 // RVA: 0x2F1750
 void __fastcall ParkourConstrainTask::Begin(ParkourConstrainTask *this, ActionContext *context)
 {
-  ParkourConstrainTask *v2; // rbx
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v3; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v4; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v5; // rax
-  UFG::RagdollComponent *v6; // rsi
-  ActionContext *v7; // rax
-  UFG::SimObjectGame *v8; // rcx
-  unsigned __int16 v9; // dx
-  UFG::WorldContextComponent *v10; // rdi
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mParkourSimObject; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
+  UFG::RagdollComponent *ComponentOfType; // rsi
+  ActionContext *mContext; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::WorldContextComponent *m_pComponent; // rdi
   UFG::SimComponent *v11; // rax
   UFG::SimObjectCVBase *v12; // rcx
-  unsigned __int16 v13; // dx
+  __int16 v13; // dx
   UFG::CharacterAnimationComponent *v14; // rax
-  Creature *v15; // r14
-  signed int v16; // eax
+  Creature *mCreature; // r14
+  int BoneID; // eax
   UFG::SimObject *v17; // rcx
   UFG::ParkourHandle *v18; // rdi
-  UFG::Ragdoll *v19; // rcx
-  hkpRigidBody *v20; // r15
-  UFG::qVector3 *v21; // rax
-  float v22; // xmm9_4
-  __m128 v23; // xmm8
-  float v24; // xmm10_4
+  UFG::Ragdoll *mRagdoll; // rcx
+  hkpRigidBody *RigidBody; // r15
+  UFG::qVector3 *Axis; // rax
+  float y; // xmm9_4
+  __m128 x_low; // xmm8
+  float z; // xmm10_4
   __m128 v25; // xmm2
   float v26; // xmm1_4
   float v27; // xmm8_4
   float v28; // xmm9_4
   float v29; // xmm10_4
-  float v30; // xmm4_4
+  float HalfLength; // xmm4_4
   float v31; // xmm6_4
   UFG::Constraint *v32; // rax
-  UFG::qVector3 v33; // [rsp+50h] [rbp-B0h]
-  UFG::qVector3 result; // [rsp+60h] [rbp-A0h]
-  UFG::qVector3 vHandleAxis; // [rsp+70h] [rbp-90h]
-  UFG::qVector4 vHandleOrigin; // [rsp+7Ch] [rbp-84h]
-  UFG::qVector4 vSyncPosition; // [rsp+8Ch] [rbp-74h]
-  UFG::qVector4 v38; // [rsp+A0h] [rbp-60h]
-  float fRightConstraint; // [rsp+130h] [rbp+30h]
-  float fLeftConstraint; // [rsp+138h] [rbp+38h]
+  UFG::qVector3 v33; // [rsp+50h] [rbp-B0h] BYREF
+  UFG::qVector3 result; // [rsp+60h] [rbp-A0h] BYREF
+  UFG::qVector3 vHandleAxis; // [rsp+70h] [rbp-90h] BYREF
+  UFG::qVector4 vHandleOrigin; // [rsp+7Ch] [rbp-84h] BYREF
+  UFG::qVector4 vSyncPosition; // [rsp+8Ch] [rbp-74h] BYREF
+  UFG::qVector4 v38; // [rsp+A0h] [rbp-60h] BYREF
+  float fRightConstraint; // [rsp+130h] [rbp+30h] BYREF
+  float fLeftConstraint; // [rsp+138h] [rbp+38h] BYREF
 
   this->mSyncSuccess = 0;
   this->mContext = context;
-  v2 = this;
-  v3 = &this->mParkourSimObject;
-  if ( v3->m_pPointer )
+  p_mParkourSimObject = &this->mParkourSimObject;
+  if ( p_mParkourSimObject->m_pPointer )
   {
-    v4 = v3->mPrev;
-    v5 = v3->mNext;
-    v4->mNext = v5;
-    v5->mPrev = v4;
-    v3->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v3->mPrev;
-    v3->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v3->mPrev;
+    mPrev = p_mParkourSimObject->mPrev;
+    mNext = p_mParkourSimObject->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mParkourSimObject->mPrev = p_mParkourSimObject;
+    p_mParkourSimObject->mNext = p_mParkourSimObject;
   }
-  v6 = 0i64;
-  v3->m_pPointer = 0i64;
-  v7 = v2->mContext;
-  v2->mSyncBoneIndex = 0;
-  v8 = (UFG::SimObjectGame *)v7->mSimObject.m_pPointer;
-  if ( v8 )
+  ComponentOfType = 0i64;
+  p_mParkourSimObject->m_pPointer = 0i64;
+  mContext = this->mContext;
+  this->mSyncBoneIndex = 0;
+  m_pPointer = (UFG::SimObjectGame *)mContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v9 = v8->m_Flags;
-    if ( (v9 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v10 = (UFG::WorldContextComponent *)v8->m_Components.p[28].m_pComponent;
+      m_pComponent = (UFG::WorldContextComponent *)m_pPointer->m_Components.p[28].m_pComponent;
     }
     else
     {
-      if ( (v9 & 0x8000u) == 0 )
-      {
-        if ( (v9 >> 13) & 1 )
-          v11 = UFG::SimObjectGame::GetComponentOfTypeHK(v8, UFG::WorldContextComponent::_TypeUID);
-        else
-          v11 = (v9 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v8, UFG::WorldContextComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v8->vfptr, UFG::WorldContextComponent::_TypeUID);
-      }
-      else
-      {
-        v11 = UFG::SimObjectGame::GetComponentOfTypeHK(v8, UFG::WorldContextComponent::_TypeUID);
-      }
-      v10 = (UFG::WorldContextComponent *)v11;
+      v11 = m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+          ? UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::WorldContextComponent::_TypeUID)
+          : UFG::SimObject::GetComponentOfType(m_pPointer, UFG::WorldContextComponent::_TypeUID);
+      m_pComponent = (UFG::WorldContextComponent *)v11;
     }
-    if ( v10 )
+    if ( m_pComponent )
     {
-      UFG::WorldContextComponent::LatchFocusParkourHandle(v10);
-      v12 = (UFG::SimObjectCVBase *)v2->mContext->mSimObject.m_pPointer;
+      UFG::WorldContextComponent::LatchFocusParkourHandle(m_pComponent);
+      v12 = (UFG::SimObjectCVBase *)this->mContext->mSimObject.m_pPointer;
       if ( v12 )
       {
         v13 = v12->m_Flags;
-        if ( (v13 >> 14) & 1 )
+        if ( (v13 & 0x4000) != 0 || v13 < 0 )
         {
           v14 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v12);
         }
-        else if ( (v13 & 0x8000u) == 0 )
+        else if ( (v13 & 0x2000) != 0 )
         {
-          if ( (v13 >> 13) & 1 )
-            v14 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v12);
-          else
-            v14 = (UFG::CharacterAnimationComponent *)((v13 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                           (UFG::SimObjectGame *)&v12->vfptr,
-                                                                           UFG::CharacterAnimationComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v12->vfptr, UFG::CharacterAnimationComponent::_TypeUID));
+          v14 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v12);
         }
         else
         {
-          v14 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v12);
+          v14 = (UFG::CharacterAnimationComponent *)((v13 & 0x1000) != 0
+                                                   ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                       v12,
+                                                       UFG::CharacterAnimationComponent::_TypeUID)
+                                                   : UFG::SimObject::GetComponentOfType(
+                                                       v12,
+                                                       UFG::CharacterAnimationComponent::_TypeUID));
         }
         if ( v14 )
         {
-          v15 = v14->mCreature;
-          if ( v15->mPose.mRigHandle.mData )
-            v16 = Skeleton::GetBoneID(v15->mPose.mRigHandle.mUFGSkeleton, HIDWORD(v2->m_Track[1].mResourceOwner));
+          mCreature = v14->mCreature;
+          if ( mCreature->mPose.mRigHandle.mData )
+            BoneID = Skeleton::GetBoneID(
+                       mCreature->mPose.mRigHandle.mUFGSkeleton,
+                       HIDWORD(this->m_Track[1].mResourceOwner));
           else
-            v16 = -1;
-          v2->mSyncBoneIndex = v16;
-          v17 = v2->mContext->mSimObject.m_pPointer;
+            BoneID = -1;
+          this->mSyncBoneIndex = BoneID;
+          v17 = this->mContext->mSimObject.m_pPointer;
           if ( v17 )
-            v6 = (UFG::RagdollComponent *)UFG::SimObject::GetComponentOfType(v17, UFG::RagdollComponent::_TypeUID);
-          v18 = v10->mParkourHandle.m_pPointer;
-          if ( v6 )
+            ComponentOfType = (UFG::RagdollComponent *)UFG::SimObject::GetComponentOfType(
+                                                         v17,
+                                                         UFG::RagdollComponent::_TypeUID);
+          v18 = m_pComponent->mParkourHandle.m_pPointer;
+          if ( ComponentOfType )
           {
             if ( v18 )
             {
-              v19 = v6->mRagdoll;
-              if ( v19 )
+              mRagdoll = ComponentOfType->mRagdoll;
+              if ( mRagdoll )
               {
-                v20 = UFG::Ragdoll::GetRigidBody(v19, v2->mSyncBoneIndex);
-                if ( v20 )
+                RigidBody = UFG::Ragdoll::GetRigidBody(mRagdoll, this->mSyncBoneIndex);
+                if ( RigidBody )
                 {
-                  Creature::GetTranslation(v15, &result, v2->mSyncBoneIndex);
+                  Creature::GetTranslation(mCreature, &result, this->mSyncBoneIndex);
                   UFG::ParkourHandle::GetPosition(v18, &v33);
-                  v21 = UFG::ParkourHandle::GetAxis(v18, &vHandleAxis);
-                  v22 = v21->y;
-                  v23 = (__m128)LODWORD(v21->x);
-                  v24 = v21->z;
-                  v25 = v23;
-                  v25.m128_f32[0] = (float)((float)(v23.m128_f32[0] * v23.m128_f32[0]) + (float)(v22 * v22))
-                                  + (float)(v24 * v24);
+                  Axis = UFG::ParkourHandle::GetAxis(v18, &vHandleAxis);
+                  y = Axis->y;
+                  x_low = (__m128)LODWORD(Axis->x);
+                  z = Axis->z;
+                  v25 = x_low;
+                  v25.m128_f32[0] = (float)((float)(x_low.m128_f32[0] * x_low.m128_f32[0]) + (float)(y * y))
+                                  + (float)(z * z);
                   if ( v25.m128_f32[0] == 0.0 )
                     v26 = 0.0;
                   else
-                    v26 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v25));
-                  v27 = v23.m128_f32[0] * v26;
-                  v28 = v22 * v26;
-                  v29 = v24 * v26;
-                  v30 = UFG::ParkourHandle::GetHalfLength(v18);
-                  v33.x = v33.x + (float)(v27 * v30);
-                  v33.y = v33.y + (float)(v28 * v30);
-                  v33.z = v33.z + (float)(v30 * v29);
+                    v26 = 1.0 / _mm_sqrt_ps(v25).m128_f32[0];
+                  v27 = x_low.m128_f32[0] * v26;
+                  v28 = y * v26;
+                  v29 = z * v26;
+                  HalfLength = UFG::ParkourHandle::GetHalfLength(v18);
+                  v33.x = v33.x + (float)(v27 * HalfLength);
+                  v33.y = v33.y + (float)(v28 * HalfLength);
+                  v33.z = v33.z + (float)(HalfLength * v29);
                   v31 = UFG::ParkourHandle::GetHalfLength(v18) * 2.0;
                   fLeftConstraint = 0.0;
                   fRightConstraint = 0.0;
                   getParkourEdgeConstraints(v18, 1, 1, 0.0, 0.0, &fLeftConstraint, &fRightConstraint);
-                  *(UFG::qVector3 *)&vHandleOrigin.x = v33;
+                  vHandleOrigin.x = v33.x;
+                  vHandleOrigin.y = v33.y;
+                  vHandleOrigin.z = v33.z;
                   vHandleOrigin.w = 1.0;
                   vSyncPosition.y = result.y;
                   vSyncPosition.x = result.x;
@@ -4062,9 +3745,9 @@ void __fastcall ParkourConstrainTask::Begin(ParkourConstrainTask *this, ActionCo
                     fRightConstraint,
                     0,
                     0);
-                  v32 = UFG::CreateConstraint_Util(v20, 0i64, &result);
-                  UFG::RagdollComponent::AddConstraint(v6, v32);
-                  v2->mSyncSuccess = 1;
+                  v32 = UFG::CreateConstraint_Util(RigidBody, 0i64, &result);
+                  UFG::RagdollComponent::AddConstraint(ComponentOfType, v32);
+                  this->mSyncSuccess = 1;
                 }
               }
             }
@@ -4086,47 +3769,32 @@ _BOOL8 __fastcall ParkourConstrainTask::Update(ParkourConstrainTask *this, float
 // RVA: 0x2FF810
 void __fastcall ParkourConstrainTask::End(ParkourConstrainTask *this)
 {
-  UFG::SimObjectGame *v1; // rcx
-  unsigned __int16 v2; // dx
-  UFG::WorldContextComponent *v3; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::WorldContextComponent *m_pComponent; // rax
 
-  v1 = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
-  if ( v1 )
+  m_pPointer = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v2 = v1->m_Flags;
-    if ( (v2 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v3 = (UFG::WorldContextComponent *)v1->m_Components.p[28].m_pComponent;
+      m_pComponent = (UFG::WorldContextComponent *)m_pPointer->m_Components.p[28].m_pComponent;
     }
-    else if ( (v2 & 0x8000u) == 0 )
+    else if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v2 >> 13) & 1 )
-      {
-        v3 = (UFG::WorldContextComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                             v1,
-                                             UFG::WorldContextComponent::_TypeUID);
-      }
-      else if ( (v2 >> 12) & 1 )
-      {
-        v3 = (UFG::WorldContextComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                             v1,
-                                             UFG::WorldContextComponent::_TypeUID);
-      }
-      else
-      {
-        v3 = (UFG::WorldContextComponent *)UFG::SimObject::GetComponentOfType(
-                                             (UFG::SimObject *)&v1->vfptr,
-                                             UFG::WorldContextComponent::_TypeUID);
-      }
+      m_pComponent = (UFG::WorldContextComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                     m_pPointer,
+                                                     UFG::WorldContextComponent::_TypeUID);
     }
     else
     {
-      v3 = (UFG::WorldContextComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                           v1,
-                                           UFG::WorldContextComponent::_TypeUID);
+      m_pComponent = (UFG::WorldContextComponent *)UFG::SimObject::GetComponentOfType(
+                                                     m_pPointer,
+                                                     UFG::WorldContextComponent::_TypeUID);
     }
-    if ( v3 )
-      UFG::WorldContextComponent::LatchParkourHandle(v3, 0i64);
+    if ( m_pComponent )
+      UFG::WorldContextComponent::LatchParkourHandle(m_pComponent, 0i64);
   }
 }
 
@@ -4134,97 +3802,80 @@ void __fastcall ParkourConstrainTask::End(ParkourConstrainTask *this)
 // RVA: 0x2EB490
 void __fastcall CoverSyncPositionTask::Begin(CoverSyncPositionTask *this, ActionContext *context)
 {
-  CoverSyncPositionTask *v2; // rsi
-  UFG::SimObjectGame *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::WorldContextComponent *v5; // rbx
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::WorldContextComponent *m_pComponent; // rbx
   UFG::SimComponent *v6; // rax
-  int v7; // edi
+  int BoneID; // edi
   UFG::SimObjectCVBase *v8; // rcx
-  unsigned __int16 v9; // dx
-  UFG::CharacterAnimationComponent *v10; // rax
-  Creature *v11; // rcx
-  ITrack *v12; // rax
-  float blendIn; // ST48_4
-  bool v14; // cl
-  bool v15; // zf
+  __int16 v9; // dx
+  UFG::CharacterAnimationComponent *ComponentOfTypeHK; // rax
+  Creature *mCreature; // rcx
+  ITrack *m_Track; // rax
+  bool v13; // cl
+  bool v14; // zf
+  float blendIn; // [rsp+48h] [rbp-10h]
 
-  v2 = this;
   this->mContext = context;
-  v3 = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v4 = v3->m_Flags;
-    if ( (v4 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v5 = (UFG::WorldContextComponent *)v3->m_Components.p[28].m_pComponent;
+      m_pComponent = (UFG::WorldContextComponent *)m_pPointer->m_Components.p[28].m_pComponent;
     }
     else
     {
-      if ( (v4 & 0x8000u) == 0 )
-      {
-        if ( (v4 >> 13) & 1 )
-          v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::WorldContextComponent::_TypeUID);
-        else
-          v6 = (v4 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::WorldContextComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::WorldContextComponent::_TypeUID);
-      }
-      else
-      {
-        v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::WorldContextComponent::_TypeUID);
-      }
-      v5 = (UFG::WorldContextComponent *)v6;
+      v6 = m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+         ? UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::WorldContextComponent::_TypeUID)
+         : UFG::SimObject::GetComponentOfType(m_pPointer, UFG::WorldContextComponent::_TypeUID);
+      m_pComponent = (UFG::WorldContextComponent *)v6;
     }
-    if ( v5 )
+    if ( m_pComponent )
     {
-      v7 = 0;
-      v8 = (UFG::SimObjectCVBase *)v2->mContext->mSimObject.m_pPointer;
+      BoneID = 0;
+      v8 = (UFG::SimObjectCVBase *)this->mContext->mSimObject.m_pPointer;
       if ( v8 )
       {
         v9 = v8->m_Flags;
-        if ( (v9 >> 14) & 1 )
+        if ( (v9 & 0x4000) != 0 || v9 < 0 )
         {
-          v10 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v8);
+          ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v8);
         }
-        else if ( (v9 & 0x8000u) == 0 )
+        else if ( (v9 & 0x2000) != 0 )
         {
-          if ( (v9 >> 13) & 1 )
-          {
-            v10 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v8);
-          }
-          else if ( (v9 >> 12) & 1 )
-          {
-            v10 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                        (UFG::SimObjectGame *)&v8->vfptr,
-                                                        UFG::CharacterAnimationComponent::_TypeUID);
-          }
-          else
-          {
-            v10 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                        (UFG::SimObject *)&v8->vfptr,
-                                                        UFG::CharacterAnimationComponent::_TypeUID);
-          }
+          ComponentOfTypeHK = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v8);
+        }
+        else if ( (v9 & 0x1000) != 0 )
+        {
+          ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                    v8,
+                                                                    UFG::CharacterAnimationComponent::_TypeUID);
         }
         else
         {
-          v10 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v8);
+          ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                    v8,
+                                                                    UFG::CharacterAnimationComponent::_TypeUID);
         }
-        if ( v10 )
+        if ( ComponentOfTypeHK )
         {
-          v11 = v10->mCreature;
-          if ( v11->mPose.mRigHandle.mData )
-            v7 = Skeleton::GetBoneID(v11->mPose.mRigHandle.mUFGSkeleton, HIDWORD(v2->m_Track[1].vfptr));
+          mCreature = ComponentOfTypeHK->mCreature;
+          if ( mCreature->mPose.mRigHandle.mData )
+            BoneID = Skeleton::GetBoneID(mCreature->mPose.mRigHandle.mUFGSkeleton, HIDWORD(this->m_Track[1].vfptr));
           else
-            v7 = -1;
+            BoneID = -1;
         }
       }
-      v12 = v2->m_Track;
-      blendIn = *(float *)&v12[1].vfptr;
-      v14 = BYTE1(v12[1].mResourceOwner) != 0;
-      v15 = LOBYTE(v12[1].mResourceOwner) == 0;
-      v5->mbSyncingCoverRCorner = BYTE2(v12[1].mResourceOwner) != 0;
-      v5->mbSyncingCoverLCorner = v14;
-      v5->mbSyncingCoverParkour = !v15;
-      UFG::WorldContextComponent::StartSync(v5, v7, 0, 0, 1, 0, 0, 0, 0.0, blendIn);
+      m_Track = this->m_Track;
+      blendIn = *(float *)&m_Track[1].vfptr;
+      v13 = BYTE1(m_Track[1].mResourceOwner) != 0;
+      v14 = LOBYTE(m_Track[1].mResourceOwner) == 0;
+      m_pComponent->mbSyncingCoverRCorner = BYTE2(m_Track[1].mResourceOwner) != 0;
+      m_pComponent->mbSyncingCoverLCorner = v13;
+      m_pComponent->mbSyncingCoverParkour = !v14;
+      UFG::WorldContextComponent::StartSync(m_pComponent, BoneID, 0, 0, 1, 0, 0, 0, 0.0, blendIn);
     }
   }
 }
@@ -4233,47 +3884,32 @@ void __fastcall CoverSyncPositionTask::Begin(CoverSyncPositionTask *this, Action
 // RVA: 0x2FE830
 void __fastcall CoverSyncPositionTask::End(CoverSyncPositionTask *this)
 {
-  UFG::SimObjectGame *v1; // rcx
-  unsigned __int16 v2; // dx
-  UFG::WorldContextComponent *v3; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::WorldContextComponent *m_pComponent; // rax
 
-  v1 = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
-  if ( v1 )
+  m_pPointer = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v2 = v1->m_Flags;
-    if ( (v2 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v3 = (UFG::WorldContextComponent *)v1->m_Components.p[28].m_pComponent;
+      m_pComponent = (UFG::WorldContextComponent *)m_pPointer->m_Components.p[28].m_pComponent;
     }
-    else if ( (v2 & 0x8000u) == 0 )
+    else if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v2 >> 13) & 1 )
-      {
-        v3 = (UFG::WorldContextComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                             v1,
-                                             UFG::WorldContextComponent::_TypeUID);
-      }
-      else if ( (v2 >> 12) & 1 )
-      {
-        v3 = (UFG::WorldContextComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                             v1,
-                                             UFG::WorldContextComponent::_TypeUID);
-      }
-      else
-      {
-        v3 = (UFG::WorldContextComponent *)UFG::SimObject::GetComponentOfType(
-                                             (UFG::SimObject *)&v1->vfptr,
-                                             UFG::WorldContextComponent::_TypeUID);
-      }
+      m_pComponent = (UFG::WorldContextComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                     m_pPointer,
+                                                     UFG::WorldContextComponent::_TypeUID);
     }
     else
     {
-      v3 = (UFG::WorldContextComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                           v1,
-                                           UFG::WorldContextComponent::_TypeUID);
+      m_pComponent = (UFG::WorldContextComponent *)UFG::SimObject::GetComponentOfType(
+                                                     m_pPointer,
+                                                     UFG::WorldContextComponent::_TypeUID);
     }
-    if ( v3 )
-      UFG::WorldContextComponent::StopSync(v3);
+    if ( m_pComponent )
+      UFG::WorldContextComponent::StopSync(m_pComponent);
   }
 }
 
@@ -4281,49 +3917,28 @@ void __fastcall CoverSyncPositionTask::End(CoverSyncPositionTask *this)
 // RVA: 0x2EB350
 void __fastcall CoverHoldPositionTask::Begin(CoverHoldPositionTask *this, ActionContext *context)
 {
-  CoverHoldPositionTask *v2; // rbx
-  UFG::SimObjectGame *v3; // rcx
+  UFG::SimObjectGame *m_pPointer; // rcx
   UFG::SimComponent *v4; // rdx
-  unsigned __int16 v5; // dx
-  UFG::SimComponent *v6; // rax
+  __int16 m_Flags; // dx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
 
-  v2 = this;
   this->mContext = context;
-  v3 = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v5 = v3->m_Flags;
-    if ( (v5 >> 14) & 1 )
-    {
-      v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::AICoverComponent::_TypeUID);
-    }
-    else if ( (v5 & 0x8000u) == 0 )
-    {
-      if ( (v5 >> 13) & 1 )
-      {
-        v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::AICoverComponent::_TypeUID);
-      }
-      else if ( (v5 >> 12) & 1 )
-      {
-        v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::AICoverComponent::_TypeUID);
-      }
-      else
-      {
-        v6 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::AICoverComponent::_TypeUID);
-      }
-    }
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+      ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::AICoverComponent::_TypeUID);
     else
-    {
-      v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::AICoverComponent::_TypeUID);
-    }
-    v4 = v6;
+      ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::AICoverComponent::_TypeUID);
+    v4 = ComponentOfTypeHK;
   }
   else
   {
     v4 = 0i64;
   }
   ++LODWORD(v4[2].m_BoundComponentHandles.mNode.mNext);
-  if ( LOBYTE(v2->m_Track[1].vfptr) )
+  if ( LOBYTE(this->m_Track[1].vfptr) )
     ++HIDWORD(v4[2].m_BoundComponentHandles.mNode.mNext);
 }
 
@@ -4331,48 +3946,27 @@ void __fastcall CoverHoldPositionTask::Begin(CoverHoldPositionTask *this, Action
 // RVA: 0x2FE670
 void __fastcall CoverHoldPositionTask::End(CoverHoldPositionTask *this)
 {
-  CoverHoldPositionTask *v1; // rbx
-  UFG::SimObjectGame *v2; // rcx
+  UFG::SimObjectGame *m_pPointer; // rcx
   UFG::SimComponent *v3; // rdx
-  unsigned __int16 v4; // dx
-  UFG::SimComponent *v5; // rax
+  __int16 m_Flags; // dx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
 
-  v1 = this;
-  v2 = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
-  if ( v2 )
+  m_pPointer = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v4 = v2->m_Flags;
-    if ( (v4 >> 14) & 1 )
-    {
-      v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::AICoverComponent::_TypeUID);
-    }
-    else if ( (v4 & 0x8000u) == 0 )
-    {
-      if ( (v4 >> 13) & 1 )
-      {
-        v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::AICoverComponent::_TypeUID);
-      }
-      else if ( (v4 >> 12) & 1 )
-      {
-        v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::AICoverComponent::_TypeUID);
-      }
-      else
-      {
-        v5 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::AICoverComponent::_TypeUID);
-      }
-    }
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+      ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::AICoverComponent::_TypeUID);
     else
-    {
-      v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::AICoverComponent::_TypeUID);
-    }
-    v3 = v5;
+      ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::AICoverComponent::_TypeUID);
+    v3 = ComponentOfTypeHK;
   }
   else
   {
     v3 = 0i64;
   }
   --LODWORD(v3[2].m_BoundComponentHandles.mNode.mNext);
-  if ( LOBYTE(v1->m_Track[1].vfptr) )
+  if ( LOBYTE(this->m_Track[1].vfptr) )
     --HIDWORD(v3[2].m_BoundComponentHandles.mNode.mNext);
 }
 
@@ -4380,41 +3974,22 @@ void __fastcall CoverHoldPositionTask::End(CoverHoldPositionTask *this)
 // RVA: 0x2FE7A0
 void __fastcall CoverProbeForwardAndLatchTask::End(CoverProbeForwardAndLatchTask *this)
 {
-  UFG::SimObjectGame *v1; // rcx
-  unsigned __int16 v2; // dx
-  UFG::SimComponent *v3; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
 
   if ( this->m_bLatched )
   {
-    v1 = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
-    if ( v1 )
+    m_pPointer = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      v2 = v1->m_Flags;
-      if ( (v2 >> 14) & 1 )
-      {
-        v3 = UFG::SimObjectGame::GetComponentOfTypeHK(v1, UFG::AICoverComponent::_TypeUID);
-      }
-      else if ( (v2 & 0x8000u) == 0 )
-      {
-        if ( (v2 >> 13) & 1 )
-        {
-          v3 = UFG::SimObjectGame::GetComponentOfTypeHK(v1, UFG::AICoverComponent::_TypeUID);
-        }
-        else if ( (v2 >> 12) & 1 )
-        {
-          v3 = UFG::SimObjectGame::GetComponentOfTypeHK(v1, UFG::AICoverComponent::_TypeUID);
-        }
-        else
-        {
-          v3 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v1->vfptr, UFG::AICoverComponent::_TypeUID);
-        }
-      }
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::AICoverComponent::_TypeUID);
       else
-      {
-        v3 = UFG::SimObjectGame::GetComponentOfTypeHK(v1, UFG::AICoverComponent::_TypeUID);
-      }
-      if ( v3 )
-        --LODWORD(v3[2].m_BoundComponentHandles.mNode.mNext);
+        ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::AICoverComponent::_TypeUID);
+      if ( ComponentOfTypeHK )
+        --LODWORD(ComponentOfTypeHK[2].m_BoundComponentHandles.mNode.mNext);
     }
   }
 }
@@ -4431,92 +4006,74 @@ void __fastcall CoverProbeForwardAndLatchTask::Begin(CoverProbeForwardAndLatchTa
 // RVA: 0x303EA0
 bool __fastcall CoverProbeAndLatchTask::Update(CoverProbeForwardAndLatchTask *this, float timeDelta)
 {
-  CoverProbeForwardAndLatchTask *v2; // rdi
-  UFG::SimObjectGame *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::SimComponent *v5; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   UFG::SimComponent *v6; // rbx
   UFG::SimObject *v7; // rcx
-  UFG::TransformNodeComponent *v8; // rsi
-  ITrack *v9; // rax
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rsi
+  ITrack *m_Track; // rax
   __int64 v10; // r8
   float v11; // xmm0_4
   float v12; // xmm2_4
-  UFG::qSafePointerNode<UFG::SimComponent>Vtbl *v13; // rax
+  UFG::qSafePointerNode<UFG::SimComponent>Vtbl *vfptr; // rax
   float v14; // xmm4_4
   float v15; // xmm5_4
-  unsigned int v16; // xmm0_4
-  unsigned int v17; // xmm1_4
-  float v18; // xmm2_4
+  float v16; // xmm0_4
+  int v17; // xmm1_4
+  int v18; // xmm2_4
   bool v19; // zf
   bool result; // al
-  unsigned __int64 v21; // [rsp+20h] [rbp-18h]
-  float v22; // [rsp+28h] [rbp-10h]
+  int v21[6]; // [rsp+20h] [rbp-18h] BYREF
 
-  v2 = this;
   if ( this->m_bLatched )
     return 1;
-  v3 = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
-  if ( !v3 )
+  m_pPointer = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
+  if ( !m_pPointer )
     return 1;
-  v4 = v3->m_Flags;
-  if ( (v4 >> 14) & 1 )
-  {
-    v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::AICoverComponent::_TypeUID);
-  }
-  else if ( (v4 & 0x8000u) == 0 )
-  {
-    if ( (v4 >> 13) & 1 )
-    {
-      v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::AICoverComponent::_TypeUID);
-    }
-    else if ( (v4 >> 12) & 1 )
-    {
-      v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::AICoverComponent::_TypeUID);
-    }
-    else
-    {
-      v5 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::AICoverComponent::_TypeUID);
-    }
-  }
+  m_Flags = m_pPointer->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+    ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::AICoverComponent::_TypeUID);
   else
-  {
-    v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::AICoverComponent::_TypeUID);
-  }
-  v6 = v5;
-  if ( !v5 )
+    ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::AICoverComponent::_TypeUID);
+  v6 = ComponentOfTypeHK;
+  if ( !ComponentOfTypeHK )
     return 1;
-  v7 = v2->mContext->mSimObject.m_pPointer;
+  v7 = this->mContext->mSimObject.m_pPointer;
   if ( v7 )
-    v8 = v7->m_pTransformNodeComponent;
+    m_pTransformNodeComponent = v7->m_pTransformNodeComponent;
   else
-    v8 = 0i64;
-  UFG::TransformNodeComponent::UpdateWorldTransform(v8);
-  UFG::TransformNodeComponent::UpdateWorldTransform(v8);
-  v9 = v2->m_Track;
+    m_pTransformNodeComponent = 0i64;
+  UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+  UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+  m_Track = this->m_Track;
   LOBYTE(v10) = 1;
-  v11 = *((float *)&v9[1].vfptr + 1);
-  v12 = *(float *)&v9[1].vfptr;
-  v13 = v6->vfptr;
+  v11 = *((float *)&m_Track[1].vfptr + 1);
+  v12 = *(float *)&m_Track[1].vfptr;
+  vfptr = v6->vfptr;
   v14 = UFG::qVector3::msAxisZ.y * v11;
   v15 = UFG::qVector3::msAxisZ.z * v11;
-  *(float *)&v16 = (float)((float)(v12 * v8->mWorldTransform.v0.x) + v8->mWorldTransform.v3.x)
-                 + (float)(UFG::qVector3::msAxisZ.x * v11);
-  *(float *)&v17 = (float)((float)(v12 * v8->mWorldTransform.v0.y) + v8->mWorldTransform.v3.y) + v14;
-  v18 = (float)((float)(v12 * v8->mWorldTransform.v0.z) + v8->mWorldTransform.v3.z) + v15;
-  v21 = __PAIR__(v17, v16);
-  v22 = v18;
-  v19 = ((unsigned __int8 (__fastcall *)(UFG::SimComponent *, unsigned __int64 *, __int64, _QWORD, unsigned __int64, _QWORD))v13[17].__vecDelDtor)(
+  v16 = (float)((float)(v12 * m_pTransformNodeComponent->mWorldTransform.v0.x)
+              + m_pTransformNodeComponent->mWorldTransform.v3.x)
+      + (float)(UFG::qVector3::msAxisZ.x * v11);
+  *(float *)&v17 = (float)((float)(v12 * m_pTransformNodeComponent->mWorldTransform.v0.y)
+                         + m_pTransformNodeComponent->mWorldTransform.v3.y)
+                 + v14;
+  *(float *)&v18 = (float)((float)(v12 * m_pTransformNodeComponent->mWorldTransform.v0.z)
+                         + m_pTransformNodeComponent->mWorldTransform.v3.z)
+                 + v15;
+  *(float *)v21 = v16;
+  v21[1] = v17;
+  v21[2] = v18;
+  v19 = ((unsigned __int8 (__fastcall *)(UFG::SimComponent *, int *, __int64, _QWORD))vfptr[17].__vecDelDtor)(
           v6,
-          &v21,
+          v21,
           v10,
-          0i64,
-          __PAIR__(v17, v16),
-          *(_QWORD *)&v22) == 0;
+          0i64) == 0;
   result = 1;
   if ( !v19 )
   {
-    v2->m_bLatched = 1;
+    this->m_bLatched = 1;
     ++LODWORD(v6[2].m_BoundComponentHandles.mNode.mNext);
   }
   return result;
@@ -4526,39 +4083,20 @@ bool __fastcall CoverProbeAndLatchTask::Update(CoverProbeForwardAndLatchTask *th
 // RVA: 0x2FE710
 void __fastcall CoverProbeAndLatchTask::End(CoverProbeAndLatchTask *this)
 {
-  UFG::SimObjectGame *v1; // rcx
-  unsigned __int16 v2; // dx
-  UFG::SimComponent *v3; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
 
-  v1 = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
-  if ( v1 )
+  m_pPointer = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v2 = v1->m_Flags;
-    if ( (v2 >> 14) & 1 )
-    {
-      v3 = UFG::SimObjectGame::GetComponentOfTypeHK(v1, UFG::AICoverComponent::_TypeUID);
-    }
-    else if ( (v2 & 0x8000u) == 0 )
-    {
-      if ( (v2 >> 13) & 1 )
-      {
-        v3 = UFG::SimObjectGame::GetComponentOfTypeHK(v1, UFG::AICoverComponent::_TypeUID);
-      }
-      else if ( (v2 >> 12) & 1 )
-      {
-        v3 = UFG::SimObjectGame::GetComponentOfTypeHK(v1, UFG::AICoverComponent::_TypeUID);
-      }
-      else
-      {
-        v3 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v1->vfptr, UFG::AICoverComponent::_TypeUID);
-      }
-    }
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+      ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::AICoverComponent::_TypeUID);
     else
-    {
-      v3 = UFG::SimObjectGame::GetComponentOfTypeHK(v1, UFG::AICoverComponent::_TypeUID);
-    }
-    if ( v3 )
-      --LODWORD(v3[2].m_BoundComponentHandles.mNode.mNext);
+      ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::AICoverComponent::_TypeUID);
+    if ( ComponentOfTypeHK )
+      --LODWORD(ComponentOfTypeHK[2].m_BoundComponentHandles.mNode.mNext);
   }
 }
 
@@ -4566,92 +4104,82 @@ void __fastcall CoverProbeAndLatchTask::End(CoverProbeAndLatchTask *this)
 // RVA: 0x2EB400
 void __fastcall CoverSetPopoutSideTask::Begin(CoverSetPopoutSideTask *this, ActionContext *context)
 {
-  CoverSetPopoutSideTask *v2; // rbx
-  UFG::SimObjectGame *v3; // rcx
-  unsigned __int16 v4; // dx
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
   unsigned int v5; // edx
-  UFG::SimComponent *v6; // rax
+  UFG::SimComponent *ComponentOfType; // rax
   bool v7; // zf
 
-  v2 = this;
   this->mContext = context;
-  v3 = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
-  if ( !v3 )
+  m_pPointer = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
+  if ( !m_pPointer )
   {
-    MEMORY[0x80] = v2->m_Track[1].vfptr;
+    MEMORY[0x80] = this->m_Track[1].vfptr;
     return;
   }
-  v4 = v3->m_Flags;
-  if ( (v4 >> 14) & 1 || (v4 & 0x8000u) != 0 || (v4 >> 13) & 1 )
+  m_Flags = m_pPointer->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 || (m_Flags & 0x2000) != 0 )
   {
     v5 = UFG::AICoverComponent::_TypeUID;
   }
   else
   {
-    v7 = ((v4 >> 12) & 1) == 0;
+    v7 = (m_Flags & 0x1000) == 0;
     v5 = UFG::AICoverComponent::_TypeUID;
     if ( v7 )
     {
-      v6 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::AICoverComponent::_TypeUID);
+      ComponentOfType = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::AICoverComponent::_TypeUID);
       goto LABEL_10;
     }
   }
-  v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, v5);
+  ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, v5);
 LABEL_10:
-  LODWORD(v6[2].vfptr) = v2->m_Track[1].vfptr;
+  LODWORD(ComponentOfType[2].vfptr) = this->m_Track[1].vfptr;
 }
 
 // File Line: 2320
 // RVA: 0x2EDF20
 void __fastcall DynamicWallHandleTask::Begin(DynamicWallHandleTask *this, ActionContext *context)
 {
-  DynamicWallHandleTask *v2; // rbx
-  UFG::SimObjectGame *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::SensorComponent *v5; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SensorComponent *m_pComponent; // rax
   UFG::WallRunningRequest *v6; // rax
 
-  v2 = this;
   this->mContext = context;
-  v3 = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v4 = v3->m_Flags;
-    if ( (v4 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v5 = (UFG::SensorComponent *)v3->m_Components.p[26].m_pComponent;
+      m_pComponent = (UFG::SensorComponent *)m_pPointer->m_Components.p[26].m_pComponent;
     }
-    else if ( (v4 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v4 >> 13) & 1 )
-      {
-        v5 = (UFG::SensorComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::SensorComponent::_TypeUID);
-      }
-      else if ( (v4 >> 12) & 1 )
-      {
-        v5 = (UFG::SensorComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::SensorComponent::_TypeUID);
-      }
+      if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        m_pComponent = (UFG::SensorComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                 m_pPointer,
+                                                 UFG::SensorComponent::_TypeUID);
       else
-      {
-        v5 = (UFG::SensorComponent *)UFG::SimObject::GetComponentOfType(
-                                       (UFG::SimObject *)&v3->vfptr,
-                                       UFG::SensorComponent::_TypeUID);
-      }
+        m_pComponent = (UFG::SensorComponent *)UFG::SimObject::GetComponentOfType(
+                                                 m_pPointer,
+                                                 UFG::SensorComponent::_TypeUID);
     }
     else
     {
-      v5 = (UFG::SensorComponent *)v3->m_Components.p[26].m_pComponent;
+      m_pComponent = (UFG::SensorComponent *)m_pPointer->m_Components.p[26].m_pComponent;
     }
-    if ( v5 )
+    if ( m_pComponent )
     {
-      v6 = UFG::SensorComponent::BeginWallRunningTest(v5);
-      v2->mWallRunningRequest = v6;
+      v6 = UFG::SensorComponent::BeginWallRunningTest(m_pComponent);
+      this->mWallRunningRequest = v6;
       if ( v6 )
       {
-        v6->relativeAngle = *(float *)&v2->m_Track[1].vfptr;
-        v2->mWallRunningRequest->firstRayHeight = *((float *)&v2->m_Track[1].vfptr + 1);
-        v2->mWallRunningRequest->raySpacing = *(float *)&v2->m_Track[1].mResourceOwner;
-        v2->mWallRunningRequest->rayLength = *((float *)&v2->m_Track[1].mResourceOwner + 1);
+        v6->relativeAngle = *(float *)&this->m_Track[1].vfptr;
+        this->mWallRunningRequest->firstRayHeight = *((float *)&this->m_Track[1].vfptr + 1);
+        this->mWallRunningRequest->raySpacing = *(float *)&this->m_Track[1].mResourceOwner;
+        this->mWallRunningRequest->rayLength = *((float *)&this->m_Track[1].mResourceOwner + 1);
       }
     }
   }
@@ -4661,49 +4189,41 @@ void __fastcall DynamicWallHandleTask::Begin(DynamicWallHandleTask *this, Action
 // RVA: 0x2FEBA0
 void __fastcall DynamicWallHandleTask::End(DynamicWallHandleTask *this)
 {
-  DynamicWallHandleTask *v1; // rbx
-  UFG::SimObjectGame *v2; // rcx
-  unsigned __int16 v3; // dx
-  UFG::SensorComponent *v4; // rax
-  UFG::WallRunningRequest *v5; // rdx
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SensorComponent *m_pComponent; // rax
+  UFG::WallRunningRequest *mWallRunningRequest; // rdx
 
-  v1 = this;
-  v2 = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
-  if ( v2 )
+  m_pPointer = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v3 = v2->m_Flags;
-    if ( (v3 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v4 = (UFG::SensorComponent *)v2->m_Components.p[26].m_pComponent;
+      m_pComponent = (UFG::SensorComponent *)m_pPointer->m_Components.p[26].m_pComponent;
     }
-    else if ( (v3 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v3 >> 13) & 1 )
-      {
-        v4 = (UFG::SensorComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::SensorComponent::_TypeUID);
-      }
-      else if ( (v3 >> 12) & 1 )
-      {
-        v4 = (UFG::SensorComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::SensorComponent::_TypeUID);
-      }
+      if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        m_pComponent = (UFG::SensorComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                 m_pPointer,
+                                                 UFG::SensorComponent::_TypeUID);
       else
-      {
-        v4 = (UFG::SensorComponent *)UFG::SimObject::GetComponentOfType(
-                                       (UFG::SimObject *)&v2->vfptr,
-                                       UFG::SensorComponent::_TypeUID);
-      }
+        m_pComponent = (UFG::SensorComponent *)UFG::SimObject::GetComponentOfType(
+                                                 m_pPointer,
+                                                 UFG::SensorComponent::_TypeUID);
     }
     else
     {
-      v4 = (UFG::SensorComponent *)v2->m_Components.p[26].m_pComponent;
+      m_pComponent = (UFG::SensorComponent *)m_pPointer->m_Components.p[26].m_pComponent;
     }
-    if ( v4 )
+    if ( m_pComponent )
     {
-      v5 = v1->mWallRunningRequest;
-      if ( v5 )
+      mWallRunningRequest = this->mWallRunningRequest;
+      if ( mWallRunningRequest )
       {
-        UFG::SensorComponent::EndWallRunningTest(v4, v5);
-        v1->mWallRunningRequest = 0i64;
+        UFG::SensorComponent::EndWallRunningTest(m_pComponent, mWallRunningRequest);
+        this->mWallRunningRequest = 0i64;
       }
     }
   }
@@ -4713,23 +4233,19 @@ void __fastcall DynamicWallHandleTask::End(DynamicWallHandleTask *this)
 // RVA: 0x2EE040
 void __fastcall EventTask::Begin(EventTask *this, ActionContext *context)
 {
-  ActionContext *v2; // rdi
-  EventTask *v3; // rbx
   UFG::allocator::free_link *v4; // rax
   ITrack *v5; // rdx
   const char *v6; // rdx
 
-  v2 = context;
-  v3 = this;
   v4 = UFG::qMalloc(0x50ui64, "EventTask::Begin", 0i64);
   if ( v4 )
   {
-    v5 = v3->m_Track + 1;
-    if ( (_QWORD)v5->vfptr & 0xFFFFFFFFFFFFFFFEui64 )
-      v6 = (char *)v5 + ((_QWORD)v5->vfptr & 0xFFFFFFFFFFFFFFFEui64);
+    v5 = this->m_Track + 1;
+    if ( ((unsigned __int64)v5->vfptr & 0xFFFFFFFFFFFFFFFEui64) != 0 )
+      v6 = (char *)v5 + ((unsigned __int64)v5->vfptr & 0xFFFFFFFFFFFFFFFEui64);
     else
       v6 = BinString::sEmptyString;
-    UFG::AnimatedEvent::AnimatedEvent((UFG::AnimatedEvent *)v4, v6, &v2->mSimObject);
+    UFG::AnimatedEvent::AnimatedEvent((UFG::AnimatedEvent *)v4, v6, &context->mSimObject);
   }
   UFG::EventDispatcher::QueueEvent(&UFG::EventDispatcher::mInstance, (UFG::Event *)v4);
 }
@@ -4738,69 +4254,85 @@ void __fastcall EventTask::Begin(EventTask *this, ActionContext *context)
 // RVA: 0x2E8950
 void __fastcall ApplyStimulusEmitterToTargetTask::Begin(ApplyStimulusEmitterToTargetTask *this, ActionContext *context)
 {
-  ITrack *v2; // r9
+  ITrack *m_Track; // r9
   char v3; // bl
-  ApplyStimulusEmitterToTargetTask *v4; // rdi
-  int v5; // er8
-  UFG::SimObjectGame *v6; // r8
+  int vfptr; // r8d
+  UFG::SimObjectGame *m_pPointer; // r8
   float v7; // xmm1_4
-  __int64 v8; // rsi
-  unsigned __int16 v9; // cx
-  UFG::SimComponent *v10; // r8
-  UFG::SimComponent *v11; // rax
+  __int64 vfptr_high; // rsi
+  __int16 m_Flags; // cx
+  UFG::SimComponent *m_pComponent; // r8
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   UFG::SimObject *v12; // r8
-  UFG::eStimulusType v13; // edx
-  char *v14; // rax
-  UFG::StimulusParameters stimulus_parameters; // [rsp+30h] [rbp-48h]
-  UFG::qString v16; // [rsp+48h] [rbp-30h]
+  UFG::eStimulusType mOffset; // edx
+  char *String_DBG; // rax
+  UFG::StimulusParameters stimulus_parameters; // [rsp+30h] [rbp-48h] BYREF
+  UFG::qString v16; // [rsp+48h] [rbp-30h] BYREF
 
-  v2 = this->m_Track;
+  m_Track = this->m_Track;
   v3 = 0;
-  v4 = this;
-  v5 = (int)v2[1].vfptr;
-  stimulus_parameters.m_StimulusEmissionType = -1;
+  vfptr = (int)m_Track[1].vfptr;
+  stimulus_parameters.m_StimulusEmissionType = eSTIMULUS_EMISSION_NONE;
   stimulus_parameters.m_MaxStimulusDuration = -1.0;
   stimulus_parameters.m_StimulusProducerOffset = UFG::qVector3::msZero;
   stimulus_parameters.m_EmitUntilSpeedLessThan = -1.0;
-  if ( !v5 )
+  if ( !vfptr )
   {
-    stimulus_parameters.m_StimulusEmissionType = 1;
+    stimulus_parameters.m_StimulusEmissionType = eSTIMULUS_EMISSION_CONTINUOUS;
     goto LABEL_5;
   }
-  if ( v5 == 1 )
+  if ( vfptr == 1 )
   {
-    stimulus_parameters.m_StimulusEmissionType = 0;
+    stimulus_parameters.m_StimulusEmissionType = eSTIMULUS_EMISSION_ONE_OFF;
 LABEL_5:
     v3 = 1;
   }
-  v6 = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
-  stimulus_parameters.m_MaxStimulusDuration = *(float *)&v2[1].mResourceOwner;
-  v7 = *((float *)&v2[1].mResourceOwner + 1);
+  m_pPointer = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
+  stimulus_parameters.m_MaxStimulusDuration = *(float *)&m_Track[1].mResourceOwner;
+  v7 = *((float *)&m_Track[1].mResourceOwner + 1);
   stimulus_parameters.m_StimulusProducerOffset = UFG::qVector3::msZero;
   stimulus_parameters.m_EmitUntilSpeedLessThan = v7;
-  v8 = SHIDWORD(v2[1].vfptr);
-  if ( v6
-    && ((v9 = v6->m_Flags, !((v9 >> 14) & 1)) ? ((v9 & 0x8000u) == 0 ? (!((v9 >> 13) & 1) ? (!((v9 >> 12) & 1) ? (v11 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v6->vfptr, UFG::TargetingSystemBaseComponent::_TypeUID)) : (v11 = UFG::SimObjectGame::GetComponentOfTypeHK(v6, UFG::TargetingSystemBaseComponent::_TypeUID))) : (v11 = UFG::SimObjectGame::GetComponentOfTypeHK(v6, UFG::TargetingSystemBaseComponent::_TypeUID)),
-                                                                        v10 = v11) : (v10 = v6->m_Components.p[20].m_pComponent)) : (v10 = v6->m_Components.p[20].m_pComponent),
-        v10
-     && (v12 = *(UFG::SimObject **)(56i64 * *(unsigned __int8 *)(*(_QWORD *)&v10[1].m_Flags + (unsigned int)v8 + 8i64)
-                                  + *(_QWORD *)&v10[1].m_TypeUID
+  vfptr_high = SHIDWORD(m_Track[1].vfptr);
+  if ( m_pPointer
+    && ((m_Flags = m_pPointer->m_Flags, (m_Flags & 0x4000) == 0)
+      ? (m_Flags >= 0
+       ? ((m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+        ? (ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                 m_pPointer,
+                                 UFG::TargetingSystemBaseComponent::_TypeUID))
+        : (ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(
+                                 m_pPointer,
+                                 UFG::TargetingSystemBaseComponent::_TypeUID)),
+          m_pComponent = ComponentOfTypeHK)
+       : (m_pComponent = m_pPointer->m_Components.p[20].m_pComponent))
+      : (m_pComponent = m_pPointer->m_Components.p[20].m_pComponent),
+        m_pComponent
+     && (v12 = *(UFG::SimObject **)(56i64
+                                  * *(unsigned __int8 *)(*(_QWORD *)&m_pComponent[1].m_Flags
+                                                       + (unsigned int)vfptr_high
+                                                       + 8i64)
+                                  + *(_QWORD *)&m_pComponent[1].m_TypeUID
                                   + 40)) != 0i64) )
   {
-    v13 = v4->m_Track[1].mMasterRate.expression.mOffset;
+    mOffset = this->m_Track[1].mMasterRate.expression.mOffset;
     if ( v3 )
-      UFG::StimulusManager::BeginStimulus(UFG::StimulusManager::s_pInstance, v13, &stimulus_parameters, v12, 0);
+      UFG::StimulusManager::BeginStimulus(
+        UFG::StimulusManager::s_pInstance,
+        mOffset,
+        &stimulus_parameters,
+        v12,
+        eTARGET_TYPE_INVALID);
     else
-      UFG::StimulusManager::EndStimulus(UFG::StimulusManager::s_pInstance, v13, v12);
+      UFG::StimulusManager::EndStimulus(UFG::StimulusManager::s_pInstance, mOffset, v12);
   }
   else
   {
-    v14 = ActionPath::GetString_DBG((ActionPath *)&v4->m_Track[1].m_TrackClassNameUID);
+    String_DBG = ActionPath::GetString_DBG((ActionPath *)&this->m_Track[1].m_TrackClassNameUID);
     UFG::qString::qString(
       &v16,
       "ERROR: ApplyStimulusEmitterToTargetTrack in %s: invalid target %s",
-      v14,
-      UFG::TargetTypeEnumNames[v8]);
+      String_DBG,
+      UFG::TargetTypeEnumNames[vfptr_high]);
     UFG::qString::~qString(&v16);
   }
 }
@@ -4809,18 +4341,13 @@ LABEL_5:
 // RVA: 0x2DDD00
 void __fastcall AttackRightsTask::AttackRightsTask(AttackRightsTask *this)
 {
-  UFG::qNode<ITask,ITask> *v1; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::AttackRightsComponent> *v2; // [rsp+28h] [rbp+10h]
-
-  v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
-  v1->mPrev = v1;
-  v1->mNext = v1;
+  this->mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->mNext = &this->UFG::qNode<ITask,ITask>;
   this->vfptr = (ITaskVtbl *)&ITask::`vftable;
   this->vfptr = (ITaskVtbl *)&Task<AttackRightsTrack>::`vftable;
   this->vfptr = (ITaskVtbl *)&AttackRightsTask::`vftable;
-  v2 = &this->mAttackRightsComponent;
-  v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
+  this->mAttackRightsComponent.mPrev = &this->mAttackRightsComponent;
+  this->mAttackRightsComponent.mNext = &this->mAttackRightsComponent;
   this->mAttackRightsComponent.m_pPointer = 0i64;
   this->mPreviousAttackRights = 0;
   this->mpContext = 0i64;
@@ -4830,107 +4357,85 @@ void __fastcall AttackRightsTask::AttackRightsTask(AttackRightsTask *this)
 // RVA: 0x2E8E60
 void __fastcall AttackRightsTask::Begin(AttackRightsTask *this, ActionContext *context)
 {
-  ActionContext *v2; // r15
-  AttackRightsTask *v3; // rsi
-  bool v4; // bp
-  UFG::SimObjectGame *v5; // rdi
-  UFG::TransformNodeComponent *v6; // r14
-  UFG::SimComponent *v7; // rbx
-  unsigned __int16 v8; // cx
-  UFG::SimComponent *v9; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::AttackRightsComponent> *v10; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v11; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v12; // rax
+  char v4; // bp
+  UFG::SimObjectGame *m_pPointer; // rdi
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // r14
+  UFG::SimComponent *m_pComponent; // rbx
+  __int16 m_Flags; // cx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
+  UFG::qSafePointer<UFG::SimComponent,UFG::AttackRightsComponent> *p_mAttackRightsComponent; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v13; // rax
-  bool v14; // al
+  char v14; // al
   const char *v15; // r8
   int v16; // eax
-  UFG::qString result; // [rsp+28h] [rbp-40h]
+  UFG::qString result; // [rsp+28h] [rbp-40h] BYREF
 
-  v2 = context;
-  v3 = this;
   v4 = LOBYTE(this->m_Track[1].vfptr) != 0;
-  v5 = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
-  v6 = 0i64;
-  if ( v5 )
+  m_pPointer = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
+  m_pTransformNodeComponent = 0i64;
+  if ( m_pPointer )
   {
-    v8 = v5->m_Flags;
-    if ( (v8 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v7 = v5->m_Components.p[46].m_pComponent;
+      m_pComponent = m_pPointer->m_Components.p[46].m_pComponent;
     }
     else
     {
-      if ( (v8 & 0x8000u) == 0 )
-      {
-        if ( (v8 >> 13) & 1 )
-        {
-          v9 = UFG::SimObjectGame::GetComponentOfTypeHK(v5, UFG::AttackRightsComponent::_TypeUID);
-        }
-        else if ( (v8 >> 12) & 1 )
-        {
-          v9 = UFG::SimObjectGame::GetComponentOfTypeHK(v5, UFG::AttackRightsComponent::_TypeUID);
-        }
-        else
-        {
-          v9 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v5->vfptr, UFG::AttackRightsComponent::_TypeUID);
-        }
-      }
+      if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::AttackRightsComponent::_TypeUID);
       else
-      {
-        v9 = UFG::SimObjectGame::GetComponentOfTypeHK(v5, UFG::AttackRightsComponent::_TypeUID);
-      }
-      v7 = v9;
+        ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::AttackRightsComponent::_TypeUID);
+      m_pComponent = ComponentOfTypeHK;
     }
   }
   else
   {
-    v7 = 0i64;
+    m_pComponent = 0i64;
   }
-  v10 = &v3->mAttackRightsComponent;
-  if ( v3->mAttackRightsComponent.m_pPointer )
+  p_mAttackRightsComponent = &this->mAttackRightsComponent;
+  if ( this->mAttackRightsComponent.m_pPointer )
   {
-    v11 = v10->mPrev;
-    v12 = v3->mAttackRightsComponent.mNext;
-    v11->mNext = v12;
-    v12->mPrev = v11;
-    v10->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v10->mPrev;
-    v3->mAttackRightsComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v3->mAttackRightsComponent.mPrev;
+    mPrev = p_mAttackRightsComponent->mPrev;
+    mNext = this->mAttackRightsComponent.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mAttackRightsComponent->mPrev = p_mAttackRightsComponent;
+    this->mAttackRightsComponent.mNext = &this->mAttackRightsComponent;
   }
-  v3->mAttackRightsComponent.m_pPointer = v7;
-  if ( v7 )
+  this->mAttackRightsComponent.m_pPointer = m_pComponent;
+  if ( m_pComponent )
   {
-    v13 = v7->m_SafePointerList.mNode.mPrev;
-    v13->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v10->mPrev;
-    v10->mPrev = v13;
-    v3->mAttackRightsComponent.mNext = &v7->m_SafePointerList.mNode;
-    v7->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v10->mPrev;
+    v13 = m_pComponent->m_SafePointerList.mNode.mPrev;
+    v13->mNext = p_mAttackRightsComponent;
+    p_mAttackRightsComponent->mPrev = v13;
+    this->mAttackRightsComponent.mNext = &m_pComponent->m_SafePointerList.mNode;
+    m_pComponent->m_SafePointerList.mNode.mPrev = p_mAttackRightsComponent;
   }
-  v3->mpContext = v2;
-  if ( v7 )
+  this->mpContext = context;
+  if ( m_pComponent )
   {
-    v14 = LOBYTE(v7[149].vfptr) && BYTE1(v7[149].vfptr) && BYTE2(v7[149].vfptr);
-    v3->mPreviousAttackRights = v14;
+    v14 = LOBYTE(m_pComponent[149].vfptr) && BYTE1(m_pComponent[149].vfptr) && BYTE2(m_pComponent[149].vfptr);
+    this->mPreviousAttackRights = v14;
     if ( v14 == v4 )
     {
-      if ( v5 )
-        v6 = v5->m_pTransformNodeComponent;
+      if ( m_pPointer )
+        m_pTransformNodeComponent = m_pPointer->m_pTransformNodeComponent;
       v15 = "false";
       if ( v4 )
         v15 = "true";
-      v16 = (unsigned __int64)UFG::qString::FormatEx(
-                                &result,
-                                "AttackRightsTrack: Already set attacking enabled to %s",
-                                v15);
-      UFG::DrawDebugText(v6, &UFG::qColour::White, result.mData, v16, -2i64);
+      v16 = (unsigned int)UFG::qString::FormatEx(&result, "AttackRightsTrack: Already set attacking enabled to %s", v15);
+      UFG::DrawDebugText(m_pTransformNodeComponent, &UFG::qColour::White, result.mData, v16, -2i64);
     }
     else
     {
       UFG::qString::qString(&result);
-      LOBYTE(v7[149].vfptr) = v4;
-      BYTE1(v7[149].vfptr) = v4;
-      BYTE2(v7[149].vfptr) = v4;
-      UFG::qString::Set((UFG::qString *)&v7[161].m_TypeUID, result.mData);
+      LOBYTE(m_pComponent[149].vfptr) = v4;
+      BYTE1(m_pComponent[149].vfptr) = v4;
+      BYTE2(m_pComponent[149].vfptr) = v4;
+      UFG::qString::Set((UFG::qString *)&m_pComponent[161].m_TypeUID, result.mData);
     }
     UFG::qString::~qString(&result);
   }
@@ -4940,31 +4445,29 @@ void __fastcall AttackRightsTask::Begin(AttackRightsTask *this, ActionContext *c
 // RVA: 0x2FDF50
 void __fastcall AttackRightsTask::End(AttackRightsTask *this)
 {
-  AttackRightsTask *v1; // rbx
-  UFG::SimComponent *v2; // rax
+  UFG::SimComponent *m_pPointer; // rax
   bool v3; // al
-  char *v4; // rdx
+  char *mData; // rdx
   UFG::SimComponent *v5; // rcx
-  bool v6; // al
-  UFG::qString v7; // [rsp+28h] [rbp-30h]
+  bool mPreviousAttackRights; // al
+  UFG::qString v7; // [rsp+28h] [rbp-30h] BYREF
 
-  v1 = this;
   if ( BYTE1(this->m_Track[1].vfptr) )
   {
-    v2 = this->mAttackRightsComponent.m_pPointer;
-    if ( v2 )
+    m_pPointer = this->mAttackRightsComponent.m_pPointer;
+    if ( m_pPointer )
     {
-      v3 = LOBYTE(v2[149].vfptr) && BYTE1(v2[149].vfptr) && BYTE2(v2[149].vfptr);
+      v3 = LOBYTE(m_pPointer[149].vfptr) && BYTE1(m_pPointer[149].vfptr) && BYTE2(m_pPointer[149].vfptr);
       if ( this->mPreviousAttackRights != v3 )
       {
         UFG::qString::qString(&v7);
-        v4 = v7.mData;
-        v5 = v1->mAttackRightsComponent.m_pPointer;
-        v6 = v1->mPreviousAttackRights;
-        LOBYTE(v5[149].vfptr) = v6;
-        BYTE1(v5[149].vfptr) = v6;
-        BYTE2(v5[149].vfptr) = v6;
-        UFG::qString::Set((UFG::qString *)&v5[161].m_TypeUID, v4);
+        mData = v7.mData;
+        v5 = this->mAttackRightsComponent.m_pPointer;
+        mPreviousAttackRights = this->mPreviousAttackRights;
+        LOBYTE(v5[149].vfptr) = mPreviousAttackRights;
+        BYTE1(v5[149].vfptr) = mPreviousAttackRights;
+        BYTE2(v5[149].vfptr) = mPreviousAttackRights;
+        UFG::qString::Set((UFG::qString *)&v5[161].m_TypeUID, mData);
         UFG::qString::~qString(&v7);
       }
     }
@@ -4975,44 +4478,50 @@ void __fastcall AttackRightsTask::End(AttackRightsTask *this)
 // RVA: 0x2F4350
 void __fastcall SkookumTask::Begin(SkookumTask *this, ActionContext *pContext)
 {
-  ActionContext *v2; // rbx
-  SkookumTask *v3; // rdi
-  UFG::SimObject *v4; // rax
-  SSCode *v5; // rbp
+  UFG::SimObject *m_pPointer; // rax
+  SSCode *ScriptCode; // rbp
   UFG::SimObject *v6; // r8
-  unsigned __int16 v7; // dx
-  UFG::TSActorComponent *v8; // rax
-  UFG::TSActor *v9; // rax
+  __int16 m_Flags; // dx
+  UFG::TSActorComponent *ComponentOfType; // rax
+  UFG::TSActor *Actor; // rax
 
-  v2 = pContext;
-  v3 = this;
   this->mMethodFinished = 0;
   this->mpMethodWrapper = 0i64;
   if ( pContext )
   {
-    v4 = pContext->mSimObject.m_pPointer;
-    if ( !v4 || !((LOBYTE(v4->m_Flags) >> 1) & 1) )
+    m_pPointer = pContext->mSimObject.m_pPointer;
+    if ( !m_pPointer || (m_pPointer->m_Flags & 2) == 0 )
     {
-      v5 = UFG::ScriptCache::GetScriptCode(*(UFG::ScriptCache::Script **)&this->m_Track[1].m_TrackClassNameUID);
-      if ( v5 )
+      ScriptCode = UFG::ScriptCache::GetScriptCode(*(UFG::ScriptCache::Script **)&this->m_Track[1].m_TrackClassNameUID);
+      if ( ScriptCode )
       {
-        v6 = v2->mSimObject.m_pPointer;
+        v6 = pContext->mSimObject.m_pPointer;
         if ( v6
-          && ((v7 = v6->m_Flags, !((v7 >> 14) & 1)) ? ((v7 & 0x8000u) == 0 ? (!((v7 >> 13) & 1) ? (!((v7 >> 12) & 1) ? (v8 = (UFG::TSActorComponent *)UFG::SimObject::GetComponentOfType(v2->mSimObject.m_pPointer, UFG::TSActorComponent::_TypeUID)) : (v8 = (UFG::TSActorComponent *)v6->m_Components.p[2].m_pComponent)) : (v8 = (UFG::TSActorComponent *)v6->m_Components.p[3].m_pComponent)) : (v8 = (UFG::TSActorComponent *)v6->m_Components.p[4].m_pComponent)) : (v8 = (UFG::TSActorComponent *)v6->m_Components.p[4].m_pComponent),
-              v8) )
+          && ((m_Flags = v6->m_Flags, (m_Flags & 0x4000) == 0)
+            ? (m_Flags >= 0
+             ? ((m_Flags & 0x2000) == 0
+              ? ((m_Flags & 0x1000) == 0
+               ? (ComponentOfType = (UFG::TSActorComponent *)UFG::SimObject::GetComponentOfType(
+                                                               pContext->mSimObject.m_pPointer,
+                                                               UFG::TSActorComponent::_TypeUID))
+               : (ComponentOfType = (UFG::TSActorComponent *)v6->m_Components.p[2].m_pComponent))
+              : (ComponentOfType = (UFG::TSActorComponent *)v6->m_Components.p[3].m_pComponent))
+             : (ComponentOfType = (UFG::TSActorComponent *)v6->m_Components.p[4].m_pComponent))
+            : (ComponentOfType = (UFG::TSActorComponent *)v6->m_Components.p[4].m_pComponent),
+              ComponentOfType) )
         {
-          v9 = UFG::TSActorComponent::GetActor(v8);
+          Actor = UFG::TSActorComponent::GetActor(ComponentOfType);
         }
         else
         {
-          v9 = (UFG::TSActor *)SkookumScript::c_world_p;
+          Actor = (UFG::TSActor *)SkookumScript::c_world_p;
         }
-        v3->mpMethodWrapper = (SSIExternalMethodCallWrapper *)UFG::SkookumMgr::RunExternalCodeBlock(
-                                                                v5,
-                                                                v9->i_class_p,
-                                                                (SSInstance *)&v9->vfptr,
-                                                                &v3->mMethodFinished,
-                                                                0i64);
+        this->mpMethodWrapper = (SSIExternalMethodCallWrapper *)UFG::SkookumMgr::RunExternalCodeBlock(
+                                                                  ScriptCode,
+                                                                  Actor->i_class_p,
+                                                                  Actor,
+                                                                  &this->mMethodFinished,
+                                                                  0i64);
       }
     }
   }
@@ -5022,20 +4531,20 @@ void __fastcall SkookumTask::Begin(SkookumTask *this, ActionContext *pContext)
 // RVA: 0x30A050
 _BOOL8 __fastcall SkookumTask::Update(SkookumTask *this, float timeDelta)
 {
-  return this->mMethodFinished == 0;
+  return !this->mMethodFinished;
 }
 
 // File Line: 2607
 // RVA: 0x300250
 void __fastcall SkookumTask::End(SkookumTask *this)
 {
-  SSIExternalMethodCallWrapper *v1; // rdx
+  SSIExternalMethodCallWrapper *mpMethodWrapper; // rdx
 
   if ( !this->mMethodFinished )
   {
-    v1 = this->mpMethodWrapper;
-    if ( v1 )
-      v1->i_finished_p = 0i64;
+    mpMethodWrapper = this->mpMethodWrapper;
+    if ( mpMethodWrapper )
+      mpMethodWrapper->i_finished_p = 0i64;
   }
   this->mpMethodWrapper = 0i64;
   this->mMethodFinished = 0;
@@ -5045,37 +4554,35 @@ void __fastcall SkookumTask::End(SkookumTask *this)
 // RVA: 0x2F3A20
 void __fastcall ShootTask::Begin(ShootTask *this, ActionContext *context)
 {
-  ShootTask *v2; // r13
-  UFG::SimObjectGame *v3; // rcx
-  ActionContext *v4; // r15
+  UFG::SimObjectGame *m_pPointer; // rcx
   UFG::SubTargetingLocation *pSubTargetingLocation; // r12
-  int v6; // er14
-  unsigned __int16 v7; // dx
-  UFG::SimComponent *v8; // rax
+  int v6; // r14d
+  __int16 m_Flags; // dx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   UFG::GunComponent *v9; // rbp
   UFG::SimObjectGame *v10; // r8
-  unsigned __int16 v11; // cx
-  UFG::InventoryItemComponent *v12; // rbx
+  __int16 v11; // cx
+  UFG::InventoryItemComponent *m_pComponent; // rbx
   UFG::SimComponent *v13; // rax
-  UFG::SimObjectGame *v14; // rdi
+  UFG::SimObjectGame *OwnerSimObject; // rdi
   UFG::SimComponent *v15; // rax
   bool v16; // bl
-  unsigned __int16 v17; // cx
+  __int16 v17; // cx
   UFG::SimComponent *v18; // rbx
   UFG::SimComponent *v19; // rax
-  unsigned __int16 v20; // cx
+  __int16 v20; // cx
   UFG::AimingBaseComponent *v21; // rsi
-  UFG::SimComponent *v22; // rax
-  unsigned __int16 v23; // cx
+  UFG::SimComponent *ComponentOfType; // rax
+  __int16 v23; // cx
   UFG::SimComponent *v24; // rax
   __int64 v25; // rax
-  ITrack *v26; // rax
+  ITrack *m_Track; // rax
   unsigned __int64 v27; // rcx
   const char *v28; // rdx
   UFG::SimObject *pShootOriginSimObject; // rbx
   UFG::qSymbolUC *originBoneId; // rax
   UFG::SimObjectGame *v31; // rcx
-  unsigned __int16 v32; // dx
+  __int16 v32; // dx
   UFG::SimComponent *v33; // rdx
   UFG::SimComponent *v34; // rax
   UFG::SimObject *v35; // rdi
@@ -5084,154 +4591,113 @@ void __fastcall ShootTask::Begin(ShootTask *this, ActionContext *context)
   const char *v38; // rdx
   UFG::SimObject *v39; // rbx
   UFG::qSymbolUC *v40; // rax
-  UFG::qSymbolUC result; // [rsp+78h] [rbp+10h]
+  UFG::qSymbolUC result; // [rsp+78h] [rbp+10h] BYREF
 
-  v2 = this;
-  v3 = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
-  v4 = context;
-  if ( !((v3->m_Flags >> 10) & 1) )
+  m_pPointer = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
+  if ( (m_pPointer->m_Flags & 0x400) == 0 )
   {
     pSubTargetingLocation = 0i64;
-    v6 = (LOBYTE(v2->m_Track[1].mResourceOwner) != 0 ? 2 : 0) | (BYTE1(v2->m_Track[1].mResourceOwner) != 0);
-    if ( v3 )
+    v6 = (LOBYTE(this->m_Track[1].mResourceOwner) != 0 ? 2 : 0) | (BYTE1(this->m_Track[1].mResourceOwner) != 0);
+    if ( m_pPointer )
     {
-      v7 = v3->m_Flags;
-      if ( (v7 >> 14) & 1 )
-      {
-        v8 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::GunComponent::_TypeUID);
-      }
-      else if ( (v7 & 0x8000u) == 0 )
-      {
-        if ( (v7 >> 13) & 1 )
-          v8 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::GunComponent::_TypeUID);
-        else
-          v8 = (v7 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::GunComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::GunComponent::_TypeUID);
-      }
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::GunComponent::_TypeUID);
       else
+        ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::GunComponent::_TypeUID);
+      v9 = (UFG::GunComponent *)ComponentOfTypeHK;
+      if ( ComponentOfTypeHK )
       {
-        v8 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::GunComponent::_TypeUID);
-      }
-      v9 = (UFG::GunComponent *)v8;
-      if ( v8 )
-      {
-        v10 = (UFG::SimObjectGame *)v4->mSimObject.m_pPointer;
+        v10 = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
         if ( !v10 )
-          goto LABEL_87;
+          goto LABEL_63;
         v11 = v10->m_Flags;
-        if ( (v11 >> 14) & 1 || (v11 & 0x8000u) != 0 )
-          goto LABEL_87;
-        if ( (v11 >> 13) & 1 )
+        if ( (v11 & 0x4000) != 0 || v11 < 0 )
+          goto LABEL_63;
+        if ( (v11 & 0x2000) != 0 )
         {
-          v12 = (UFG::InventoryItemComponent *)v10->m_Components.p[11].m_pComponent;
+          m_pComponent = (UFG::InventoryItemComponent *)v10->m_Components.p[11].m_pComponent;
         }
         else
         {
-          v13 = (v11 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v10, UFG::InventoryItemComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v10->vfptr, UFG::InventoryItemComponent::_TypeUID);
-          v12 = (UFG::InventoryItemComponent *)v13;
+          v13 = (v11 & 0x1000) != 0
+              ? UFG::SimObjectGame::GetComponentOfTypeHK(v10, UFG::InventoryItemComponent::_TypeUID)
+              : UFG::SimObject::GetComponentOfType(v10, UFG::InventoryItemComponent::_TypeUID);
+          m_pComponent = (UFG::InventoryItemComponent *)v13;
         }
-        if ( !v12 )
-          goto LABEL_87;
-        v14 = (UFG::SimObjectGame *)UFG::InventoryItemComponent::GetOwnerSimObject(v12);
-        if ( !v14 )
-          goto LABEL_87;
-        v15 = v12->m_pOwnerInventoryComponent.m_pPointer;
+        if ( !m_pComponent )
+          goto LABEL_63;
+        OwnerSimObject = (UFG::SimObjectGame *)UFG::InventoryItemComponent::GetOwnerSimObject(m_pComponent);
+        if ( !OwnerSimObject )
+          goto LABEL_63;
+        v15 = m_pComponent->m_pOwnerInventoryComponent.m_pPointer;
         v16 = v15 && BYTE1(v15[14].m_pSimObject);
-        if ( UFG::IsAnyLocalPlayer((UFG::SimObject *)&v14->vfptr) && v16 )
-          v6 &= 0xFFFFFFFE;
-        v17 = v14->m_Flags;
-        if ( (v17 >> 14) & 1 )
+        if ( UFG::IsAnyLocalPlayer(OwnerSimObject) && v16 )
+          v6 &= ~1u;
+        v17 = OwnerSimObject->m_Flags;
+        if ( (v17 & 0x4000) != 0 )
         {
-          v18 = v14->m_Components.p[20].m_pComponent;
+          v18 = OwnerSimObject->m_Components.p[20].m_pComponent;
         }
-        else if ( (v17 & 0x8000u) == 0 )
+        else if ( v17 >= 0 )
         {
-          if ( (v17 >> 13) & 1 )
-            v19 = UFG::SimObjectGame::GetComponentOfTypeHK(v14, UFG::TargetingSystemBaseComponent::_TypeUID);
-          else
-            v19 = (v17 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                      v14,
-                                      UFG::TargetingSystemBaseComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(
-                                                                                       (UFG::SimObject *)&v14->vfptr,
-                                                                                       UFG::TargetingSystemBaseComponent::_TypeUID);
+          v19 = (v17 & 0x2000) != 0 || (v17 & 0x1000) != 0
+              ? UFG::SimObjectGame::GetComponentOfTypeHK(OwnerSimObject, UFG::TargetingSystemBaseComponent::_TypeUID)
+              : UFG::SimObject::GetComponentOfType(OwnerSimObject, UFG::TargetingSystemBaseComponent::_TypeUID);
           v18 = v19;
         }
         else
         {
-          v18 = v14->m_Components.p[20].m_pComponent;
+          v18 = OwnerSimObject->m_Components.p[20].m_pComponent;
         }
         if ( v18 )
         {
-          v20 = v14->m_Flags;
-          if ( (v20 >> 14) & 1 )
+          v20 = OwnerSimObject->m_Flags;
+          if ( (v20 & 0x4000) != 0 )
           {
-            v21 = (UFG::AimingBaseComponent *)v14->m_Components.p[47].m_pComponent;
+            v21 = (UFG::AimingBaseComponent *)OwnerSimObject->m_Components.p[47].m_pComponent;
           }
           else
           {
-            if ( (v20 & 0x8000u) == 0 )
-            {
-              if ( (v20 >> 13) & 1 )
-              {
-                v22 = UFG::SimObjectGame::GetComponentOfTypeHK(v14, UFG::AimingBaseComponent::_TypeUID);
-              }
-              else if ( (v20 >> 12) & 1 )
-              {
-                v22 = UFG::SimObjectGame::GetComponentOfTypeHK(v14, UFG::AimingBaseComponent::_TypeUID);
-              }
-              else
-              {
-                v22 = UFG::SimObject::GetComponentOfType(
-                        (UFG::SimObject *)&v14->vfptr,
-                        UFG::AimingBaseComponent::_TypeUID);
-              }
-            }
+            if ( v20 < 0 || (v20 & 0x2000) != 0 || (v20 & 0x1000) != 0 )
+              ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                  OwnerSimObject,
+                                  UFG::AimingBaseComponent::_TypeUID);
             else
-            {
-              v22 = UFG::SimObjectGame::GetComponentOfTypeHK(v14, UFG::AimingBaseComponent::_TypeUID);
-            }
-            v21 = (UFG::AimingBaseComponent *)v22;
+              ComponentOfType = UFG::SimObject::GetComponentOfType(OwnerSimObject, UFG::AimingBaseComponent::_TypeUID);
+            v21 = (UFG::AimingBaseComponent *)ComponentOfType;
           }
-          v23 = v14->m_Flags;
-          if ( (v23 >> 14) & 1 )
+          v23 = OwnerSimObject->m_Flags;
+          if ( (v23 & 0x4000) != 0 )
           {
-            v24 = v14->m_Components.p[15].m_pComponent;
+            v24 = OwnerSimObject->m_Components.p[15].m_pComponent;
           }
-          else if ( (v23 & 0x8000u) == 0 )
+          else if ( v23 >= 0 )
           {
-            if ( (v23 >> 13) & 1 )
-            {
-              v24 = UFG::SimObjectGame::GetComponentOfTypeHK(v14, UFG::HitReactionComponent::_TypeUID);
-            }
-            else if ( (v23 >> 12) & 1 )
-            {
-              v24 = UFG::SimObjectGame::GetComponentOfTypeHK(v14, UFG::HitReactionComponent::_TypeUID);
-            }
+            if ( (v23 & 0x2000) != 0 || (v23 & 0x1000) != 0 )
+              v24 = UFG::SimObjectGame::GetComponentOfTypeHK(OwnerSimObject, UFG::HitReactionComponent::_TypeUID);
             else
-            {
-              v24 = UFG::SimObject::GetComponentOfType(
-                      (UFG::SimObject *)&v14->vfptr,
-                      UFG::HitReactionComponent::_TypeUID);
-            }
+              v24 = UFG::SimObject::GetComponentOfType(OwnerSimObject, UFG::HitReactionComponent::_TypeUID);
           }
           else
           {
-            v24 = v14->m_Components.p[15].m_pComponent;
+            v24 = OwnerSimObject->m_Components.p[15].m_pComponent;
           }
           if ( v24 )
             v24[1].m_TypeUID = 0;
           v25 = ((__int64 (__fastcall *)(UFG::SimComponent *))v18->vfptr[19].__vecDelDtor)(v18);
           if ( v25 )
             pSubTargetingLocation = *(UFG::SubTargetingLocation **)(v25 + 2736);
-          v26 = v2->m_Track;
-          v27 = (_QWORD)v26[1].vfptr & 0xFFFFFFFFFFFFFFFEui64;
-          v28 = (char *)&v26[1] + v27;
+          m_Track = this->m_Track;
+          v27 = (unsigned __int64)m_Track[1].vfptr & 0xFFFFFFFFFFFFFFFEui64;
+          v28 = (char *)&m_Track[1] + v27;
           if ( !v27 )
             v28 = BinString::sEmptyString;
-          pShootOriginSimObject = v4->mSimObject.m_pPointer;
+          pShootOriginSimObject = context->mSimObject.m_pPointer;
           originBoneId = UFG::qSymbolUC::create_from_string(&result, v28);
           UFG::GunComponent::Shoot(
             v9,
-            (UFG::SimObject *)&v14->vfptr,
+            OwnerSimObject,
             v21,
             v6,
             pSubTargetingLocation,
@@ -5240,22 +4706,28 @@ void __fastcall ShootTask::Begin(ShootTask *this, ActionContext *context)
         }
         else
         {
-LABEL_87:
-          v31 = (UFG::SimObjectGame *)v4->mSimObject.m_pPointer;
+LABEL_63:
+          v31 = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
           if ( v31
-            && ((v32 = v31->m_Flags, !((v32 >> 14) & 1)) ? ((v32 & 0x8000u) == 0 ? (!((v32 >> 13) & 1) ? (!((v32 >> 12) & 1) ? (v34 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v31->vfptr, UFG::TargetingSystemBaseComponent::_TypeUID)) : (v34 = UFG::SimObjectGame::GetComponentOfTypeHK(v31, UFG::TargetingSystemBaseComponent::_TypeUID))) : (v34 = UFG::SimObjectGame::GetComponentOfTypeHK(v31, UFG::TargetingSystemBaseComponent::_TypeUID)),
-                                                                                    v33 = v34) : (v33 = v31->m_Components.p[20].m_pComponent)) : (v33 = v31->m_Components.p[20].m_pComponent),
+            && ((v32 = v31->m_Flags, (v32 & 0x4000) == 0)
+              ? (v32 >= 0
+               ? ((v32 & 0x2000) != 0 || (v32 & 0x1000) != 0
+                ? (v34 = UFG::SimObjectGame::GetComponentOfTypeHK(v31, UFG::TargetingSystemBaseComponent::_TypeUID))
+                : (v34 = UFG::SimObject::GetComponentOfType(v31, UFG::TargetingSystemBaseComponent::_TypeUID)),
+                  v33 = v34)
+               : (v33 = v31->m_Components.p[20].m_pComponent))
+              : (v33 = v31->m_Components.p[20].m_pComponent),
                 v33
              && (v35 = *(UFG::SimObject **)(56i64 * *(unsigned __int8 *)(*(_QWORD *)&v33[1].m_Flags + 62i64)
                                           + *(_QWORD *)&v33[1].m_TypeUID
                                           + 40)) != 0i64) )
           {
-            v36 = v2->m_Track;
-            v37 = (_QWORD)v36[1].vfptr & 0xFFFFFFFFFFFFFFFEui64;
+            v36 = this->m_Track;
+            v37 = (unsigned __int64)v36[1].vfptr & 0xFFFFFFFFFFFFFFFEui64;
             v38 = (char *)&v36[1] + v37;
             if ( !v37 )
               v38 = BinString::sEmptyString;
-            v39 = v4->mSimObject.m_pPointer;
+            v39 = context->mSimObject.m_pPointer;
             v40 = UFG::qSymbolUC::create_from_string(&result, v38);
             UFG::GunComponent::Shoot(v9, v35, 0i64, v6, 0i64, v39, v40);
           }
@@ -5274,247 +4746,192 @@ LABEL_87:
 void __fastcall ShootTaskTU::Begin(ShootTaskTU *this, ActionContext *context)
 {
   UFG::SimObjectGame *pShootOriginSimObject; // r15
-  ActionContext *v3; // rdi
-  ShootTaskTU *v4; // r13
-  ITrack *v5; // r8
+  ITrack *m_Track; // r8
   UFG::AimingBaseComponent *v6; // rbp
   bool v7; // zf
   char v8; // al
-  int v9; // er14
-  UFG::SimObjectGame *v10; // rbx
-  int v11; // er12
-  UFG::SimComponent *v12; // rsi
-  unsigned __int16 v13; // cx
-  UFG::SimComponent *v14; // rax
+  int vfptr; // r14d
+  UFG::SimObjectGame *OwnerSimObject; // rbx
+  int v11; // r12d
+  UFG::SimComponent *m_pComponent; // rsi
+  __int16 m_Flags; // cx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   __int64 v15; // rdx
   __int64 v16; // r8
-  UFG::SimObjectGame *v17; // rcx
-  unsigned __int16 v18; // dx
-  UFG::SimComponent *v19; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 v18; // dx
+  UFG::SimComponent *ComponentOfType; // rax
   UFG::GunComponent *v20; // r14
   UFG::SimObject *v21; // r8
-  unsigned __int16 v22; // cx
+  __int16 v22; // cx
   UFG::InventoryItemComponent *v23; // rdi
   UFG::SimObjectGame *v24; // rcx
   UFG::SimComponent *v25; // rax
   UFG::SimComponent *v26; // rax
   bool v27; // di
-  unsigned __int16 v28; // cx
+  __int16 v28; // cx
   UFG::SimComponent *v29; // rax
   __int64 v30; // rax
-  unsigned __int16 v31; // cx
+  __int16 v31; // cx
   UFG::SimComponent *v32; // rax
   ITrack *v33; // rax
   unsigned __int64 v34; // rcx
   const char *v35; // rdx
   UFG::qSymbolUC *originBoneId; // rax
-  UFG::qSymbolUC result; // [rsp+88h] [rbp+10h]
+  UFG::qSymbolUC result; // [rsp+88h] [rbp+10h] BYREF
   UFG::SubTargetingLocation *pSubTargetingLocation; // [rsp+90h] [rbp+18h]
 
   pShootOriginSimObject = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
-  v3 = context;
-  v4 = this;
-  if ( !((pShootOriginSimObject->m_Flags >> 10) & 1) )
+  if ( (pShootOriginSimObject->m_Flags & 0x400) == 0 )
   {
-    v5 = this->m_Track;
+    m_Track = this->m_Track;
     v6 = 0i64;
-    v7 = BYTE1(v5[1].m_TrackClassNameUID) == 0;
-    v8 = -LOBYTE(v5[1].m_TrackClassNameUID);
-    v9 = (int)v5[1].vfptr;
-    v10 = 0i64;
+    v7 = BYTE1(m_Track[1].m_TrackClassNameUID) == 0;
+    v8 = -LOBYTE(m_Track[1].m_TrackClassNameUID);
+    vfptr = (int)m_Track[1].vfptr;
+    OwnerSimObject = 0i64;
     pSubTargetingLocation = 0i64;
     v11 = (v8 != 0 ? 2 : 0) | !v7;
     if ( pShootOriginSimObject )
     {
-      v13 = pShootOriginSimObject->m_Flags;
-      if ( (v13 >> 14) & 1 )
+      m_Flags = pShootOriginSimObject->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
       {
-        v12 = pShootOriginSimObject->m_Components.p[20].m_pComponent;
+        m_pComponent = pShootOriginSimObject->m_Components.p[20].m_pComponent;
       }
-      else if ( (v13 & 0x8000u) == 0 )
+      else if ( m_Flags >= 0 )
       {
-        if ( (v13 >> 13) & 1 )
-        {
-          v14 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                  pShootOriginSimObject,
-                  UFG::TargetingSystemBaseComponent::_TypeUID);
-        }
-        else if ( (v13 >> 12) & 1 )
-        {
-          v14 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                  pShootOriginSimObject,
-                  UFG::TargetingSystemBaseComponent::_TypeUID);
-        }
+        if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+          ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                pShootOriginSimObject,
+                                UFG::TargetingSystemBaseComponent::_TypeUID);
         else
-        {
-          v14 = UFG::SimObject::GetComponentOfType(
-                  (UFG::SimObject *)&pShootOriginSimObject->vfptr,
-                  UFG::TargetingSystemBaseComponent::_TypeUID);
-        }
-        v12 = v14;
+          ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(
+                                pShootOriginSimObject,
+                                UFG::TargetingSystemBaseComponent::_TypeUID);
+        m_pComponent = ComponentOfTypeHK;
       }
       else
       {
-        v12 = pShootOriginSimObject->m_Components.p[20].m_pComponent;
+        m_pComponent = pShootOriginSimObject->m_Components.p[20].m_pComponent;
       }
     }
     else
     {
-      v12 = 0i64;
+      m_pComponent = 0i64;
     }
-    if ( v9 && v12 )
+    if ( vfptr && m_pComponent )
     {
-      v15 = *(_QWORD *)&v12[1].m_Flags;
-      v16 = *(_QWORD *)&v12[1].m_TypeUID;
+      v15 = *(_QWORD *)&m_pComponent[1].m_Flags;
+      v16 = *(_QWORD *)&m_pComponent[1].m_TypeUID;
       pShootOriginSimObject = *(UFG::SimObjectGame **)(56i64
-                                                     * *(unsigned __int8 *)(LODWORD(v4->m_Track[1].vfptr) + v15 + 8)
+                                                     * *(unsigned __int8 *)(LODWORD(this->m_Track[1].vfptr) + v15 + 8)
                                                      + v16
                                                      + 40);
-      v10 = *(UFG::SimObjectGame **)(56i64 * *(unsigned __int8 *)(v15 + 62) + v16 + 40);
+      OwnerSimObject = *(UFG::SimObjectGame **)(56i64 * *(unsigned __int8 *)(v15 + 62) + v16 + 40);
     }
-    v17 = (UFG::SimObjectGame *)v3->mSimObject.m_pPointer;
-    if ( v17 )
+    m_pPointer = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      v18 = v17->m_Flags;
-      if ( (v18 >> 14) & 1 )
-      {
-        v19 = UFG::SimObjectGame::GetComponentOfTypeHK(v17, UFG::GunComponent::_TypeUID);
-      }
-      else if ( (v18 & 0x8000u) == 0 )
-      {
-        if ( (v18 >> 13) & 1 )
-          v19 = UFG::SimObjectGame::GetComponentOfTypeHK(v17, UFG::GunComponent::_TypeUID);
-        else
-          v19 = (v18 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v17, UFG::GunComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v17->vfptr, UFG::GunComponent::_TypeUID);
-      }
+      v18 = m_pPointer->m_Flags;
+      if ( (v18 & 0x4000) != 0 || v18 < 0 || (v18 & 0x2000) != 0 || (v18 & 0x1000) != 0 )
+        ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::GunComponent::_TypeUID);
       else
+        ComponentOfType = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::GunComponent::_TypeUID);
+      v20 = (UFG::GunComponent *)ComponentOfType;
+      if ( ComponentOfType )
       {
-        v19 = UFG::SimObjectGame::GetComponentOfTypeHK(v17, UFG::GunComponent::_TypeUID);
-      }
-      v20 = (UFG::GunComponent *)v19;
-      if ( v19 )
-      {
-        v21 = v3->mSimObject.m_pPointer;
+        v21 = context->mSimObject.m_pPointer;
         if ( v21 )
         {
           v22 = v21->m_Flags;
-          if ( !((v22 >> 14) & 1) && (v22 & 0x8000u) == 0 )
+          if ( (v22 & 0x4000) == 0 && v22 >= 0 )
           {
-            if ( (v22 >> 13) & 1 )
+            if ( (v22 & 0x2000) != 0 )
             {
               v23 = (UFG::InventoryItemComponent *)v21->m_Components.p[11].m_pComponent;
             }
             else
             {
-              v7 = ((v22 >> 12) & 1) == 0;
-              v24 = (UFG::SimObjectGame *)v3->mSimObject.m_pPointer;
-              v25 = v7 ? UFG::SimObject::GetComponentOfType(
-                           (UFG::SimObject *)&v24->vfptr,
-                           UFG::InventoryItemComponent::_TypeUID) : UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                      v24,
-                                                                      UFG::InventoryItemComponent::_TypeUID);
+              v7 = (v22 & 0x1000) == 0;
+              v24 = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
+              v25 = v7
+                  ? UFG::SimObject::GetComponentOfType(v24, UFG::InventoryItemComponent::_TypeUID)
+                  : UFG::SimObjectGame::GetComponentOfTypeHK(v24, UFG::InventoryItemComponent::_TypeUID);
               v23 = (UFG::InventoryItemComponent *)v25;
             }
             if ( v23 )
             {
-              v10 = (UFG::SimObjectGame *)UFG::InventoryItemComponent::GetOwnerSimObject(v23);
-              if ( !v10 )
-                goto LABEL_75;
+              OwnerSimObject = (UFG::SimObjectGame *)UFG::InventoryItemComponent::GetOwnerSimObject(v23);
+              if ( !OwnerSimObject )
+                goto LABEL_70;
               v26 = v23->m_pOwnerInventoryComponent.m_pPointer;
               v27 = v26 && BYTE1(v26[14].m_pSimObject);
-              if ( UFG::IsAnyLocalPlayer((UFG::SimObject *)&v10->vfptr) && v27 )
-                v11 &= 0xFFFFFFFE;
-              v28 = v10->m_Flags;
-              if ( (v28 >> 14) & 1 )
+              if ( UFG::IsAnyLocalPlayer(OwnerSimObject) && v27 )
+                v11 &= ~1u;
+              v28 = OwnerSimObject->m_Flags;
+              if ( (v28 & 0x4000) != 0 )
               {
-                v29 = v10->m_Components.p[15].m_pComponent;
+                v29 = OwnerSimObject->m_Components.p[15].m_pComponent;
               }
-              else if ( (v28 & 0x8000u) == 0 )
+              else if ( v28 >= 0 )
               {
-                if ( (v28 >> 13) & 1 )
-                {
-                  v29 = UFG::SimObjectGame::GetComponentOfTypeHK(v10, UFG::HitReactionComponent::_TypeUID);
-                }
-                else if ( (v28 >> 12) & 1 )
-                {
-                  v29 = UFG::SimObjectGame::GetComponentOfTypeHK(v10, UFG::HitReactionComponent::_TypeUID);
-                }
+                if ( (v28 & 0x2000) != 0 || (v28 & 0x1000) != 0 )
+                  v29 = UFG::SimObjectGame::GetComponentOfTypeHK(OwnerSimObject, UFG::HitReactionComponent::_TypeUID);
                 else
-                {
-                  v29 = UFG::SimObject::GetComponentOfType(
-                          (UFG::SimObject *)&v10->vfptr,
-                          UFG::HitReactionComponent::_TypeUID);
-                }
+                  v29 = UFG::SimObject::GetComponentOfType(OwnerSimObject, UFG::HitReactionComponent::_TypeUID);
               }
               else
               {
-                v29 = v10->m_Components.p[15].m_pComponent;
+                v29 = OwnerSimObject->m_Components.p[15].m_pComponent;
               }
               if ( v29 )
                 v29[1].m_TypeUID = 0;
-              if ( BYTE2(v4->m_Track[1].m_TrackClassNameUID) )
+              if ( BYTE2(this->m_Track[1].m_TrackClassNameUID) )
               {
-                if ( v12 )
+                if ( m_pComponent )
                 {
-                  v30 = ((__int64 (__fastcall *)(UFG::SimComponent *))v12->vfptr[19].__vecDelDtor)(v12);
+                  v30 = ((__int64 (__fastcall *)(UFG::SimComponent *))m_pComponent->vfptr[19].__vecDelDtor)(m_pComponent);
                   if ( v30 )
                     pSubTargetingLocation = *(UFG::SubTargetingLocation **)(v30 + 2736);
                 }
-                v31 = v10->m_Flags;
-                if ( (v31 >> 14) & 1 )
+                v31 = OwnerSimObject->m_Flags;
+                if ( (v31 & 0x4000) != 0 )
                 {
-                  v6 = (UFG::AimingBaseComponent *)v10->m_Components.p[47].m_pComponent;
+                  v6 = (UFG::AimingBaseComponent *)OwnerSimObject->m_Components.p[47].m_pComponent;
                 }
                 else
                 {
-                  if ( (v31 & 0x8000u) == 0 )
-                  {
-                    if ( (v31 >> 13) & 1 )
-                    {
-                      v32 = UFG::SimObjectGame::GetComponentOfTypeHK(v10, UFG::AimingBaseComponent::_TypeUID);
-                    }
-                    else if ( (v31 >> 12) & 1 )
-                    {
-                      v32 = UFG::SimObjectGame::GetComponentOfTypeHK(v10, UFG::AimingBaseComponent::_TypeUID);
-                    }
-                    else
-                    {
-                      v32 = UFG::SimObject::GetComponentOfType(
-                              (UFG::SimObject *)&v10->vfptr,
-                              UFG::AimingBaseComponent::_TypeUID);
-                    }
-                  }
+                  if ( v31 < 0 || (v31 & 0x2000) != 0 || (v31 & 0x1000) != 0 )
+                    v32 = UFG::SimObjectGame::GetComponentOfTypeHK(OwnerSimObject, UFG::AimingBaseComponent::_TypeUID);
                   else
-                  {
-                    v32 = UFG::SimObjectGame::GetComponentOfTypeHK(v10, UFG::AimingBaseComponent::_TypeUID);
-                  }
+                    v32 = UFG::SimObject::GetComponentOfType(OwnerSimObject, UFG::AimingBaseComponent::_TypeUID);
                   v6 = (UFG::AimingBaseComponent *)v32;
                 }
               }
             }
           }
         }
-        if ( v10 )
+        if ( OwnerSimObject )
         {
-          v33 = v4->m_Track;
-          v34 = (_QWORD)v33[1].mResourceOwner & 0xFFFFFFFFFFFFFFFEui64;
+          v33 = this->m_Track;
+          v34 = (unsigned __int64)v33[1].mResourceOwner & 0xFFFFFFFFFFFFFFFEui64;
           v35 = (char *)&v33[1].mResourceOwner + v34;
           if ( !v34 )
             v35 = BinString::sEmptyString;
           originBoneId = UFG::qSymbolUC::create_from_string(&result, v35);
           UFG::GunComponent::Shoot(
             v20,
-            (UFG::SimObject *)&v10->vfptr,
+            OwnerSimObject,
             v6,
             v11,
             pSubTargetingLocation,
-            (UFG::SimObject *)&pShootOriginSimObject->vfptr,
+            pShootOriginSimObject,
             originBoneId);
           return;
         }
-LABEL_75:
+LABEL_70:
         UFG::GunComponent::Shoot(v20, v11);
-        return;
       }
     }
   }
@@ -5524,43 +4941,42 @@ LABEL_75:
 // RVA: 0x2EA8E0
 void __fastcall CharacterSetVisualDamageTask::Begin(CharacterSetVisualDamageTask *this, ActionContext *pContext)
 {
-  CharacterSetVisualDamageTask *v2; // rbx
-  UFG::SimObjectCVBase *v3; // rcx
-  unsigned __int16 v4; // dx
+  UFG::SimObjectCVBase *m_pPointer; // rcx
+  __int16 m_Flags; // dx
   UFG::CharacterAnimationComponent *v5; // rax
   UFG::CharacterAnimationComponent *v6; // rdi
-  ITrack *v7; // rax
+  ITrack *m_Track; // rax
   unsigned int v8; // ebx
   float v9; // xmm6_4
 
-  v2 = this;
-  v3 = (UFG::SimObjectCVBase *)pContext->mSimObject.m_pPointer;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectCVBase *)pContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v4 = v3->m_Flags;
-    if ( (v4 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
     {
-      v5 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v3);
+      v5 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(m_pPointer);
     }
-    else if ( (v4 & 0x8000u) == 0 )
+    else if ( (m_Flags & 0x2000) != 0 )
     {
-      if ( (v4 >> 13) & 1 )
-        v5 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v3);
-      else
-        v5 = (UFG::CharacterAnimationComponent *)((v4 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                     (UFG::SimObjectGame *)&v3->vfptr,
-                                                                     UFG::CharacterAnimationComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::CharacterAnimationComponent::_TypeUID));
+      v5 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)m_pPointer);
     }
     else
     {
-      v5 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v3);
+      v5 = (UFG::CharacterAnimationComponent *)((m_Flags & 0x1000) != 0
+                                              ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                  m_pPointer,
+                                                  UFG::CharacterAnimationComponent::_TypeUID)
+                                              : UFG::SimObject::GetComponentOfType(
+                                                  m_pPointer,
+                                                  UFG::CharacterAnimationComponent::_TypeUID));
     }
     v6 = v5;
     if ( v5 )
     {
-      v7 = v2->m_Track;
+      m_Track = this->m_Track;
       v8 = 0;
-      v9 = *(float *)&v7[1].vfptr;
+      v9 = *(float *)&m_Track[1].vfptr;
       do
       {
         UFG::CharacterAnimationComponent::SetVisualDamage(v6, v8, v9, 0.0);
@@ -5577,44 +4993,31 @@ void __fastcall CharacterSetVisualDamageTask::Begin(CharacterSetVisualDamageTask
 // RVA: 0x2F3170
 void __fastcall ReloadGunTask::Begin(ReloadGunTask *this, ActionContext *context)
 {
-  ReloadGunTask *v2; // rbx
-  UFG::SimObjectGame *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::GunComponent *v5; // rax
-  ITrack *v6; // rcx
-  int v7; // edx
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::GunComponent *ComponentOfTypeHK; // rax
+  ITrack *m_Track; // rcx
+  int vfptr_high; // edx
 
-  v2 = this;
-  v3 = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
-  if ( !((v3->m_Flags >> 10) & 1) && v3 )
+  m_pPointer = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
+  if ( (m_pPointer->m_Flags & 0x400) == 0 && m_pPointer )
   {
-    v4 = v3->m_Flags;
-    if ( (v4 >> 14) & 1 )
-    {
-      v5 = (UFG::GunComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::GunComponent::_TypeUID);
-    }
-    else if ( (v4 & 0x8000u) == 0 )
-    {
-      if ( (v4 >> 13) & 1 )
-        v5 = (UFG::GunComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::GunComponent::_TypeUID);
-      else
-        v5 = (UFG::GunComponent *)((v4 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                      v3,
-                                                      UFG::GunComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(
-                                                                                       (UFG::SimObject *)&v3->vfptr,
-                                                                                       UFG::GunComponent::_TypeUID));
-    }
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+      ComponentOfTypeHK = (UFG::GunComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                 m_pPointer,
+                                                 UFG::GunComponent::_TypeUID);
     else
+      ComponentOfTypeHK = (UFG::GunComponent *)UFG::SimObject::GetComponentOfType(
+                                                 m_pPointer,
+                                                 UFG::GunComponent::_TypeUID);
+    if ( ComponentOfTypeHK )
     {
-      v5 = (UFG::GunComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::GunComponent::_TypeUID);
-    }
-    if ( v5 )
-    {
-      v6 = v2->m_Track;
-      v7 = -1;
-      if ( LOBYTE(v6[1].vfptr) )
-        v7 = HIDWORD(v6[1].vfptr);
-      UFG::GunComponent::Reload(v5, v7);
+      m_Track = this->m_Track;
+      vfptr_high = -1;
+      if ( LOBYTE(m_Track[1].vfptr) )
+        vfptr_high = HIDWORD(m_Track[1].vfptr);
+      UFG::GunComponent::Reload(ComponentOfTypeHK, vfptr_high);
     }
   }
 }
@@ -5623,63 +5026,56 @@ void __fastcall ReloadGunTask::Begin(ReloadGunTask *this, ActionContext *context
 // RVA: 0x2F0060
 void __fastcall MissionFailTriggerTask::Begin(MissionFailTriggerTask *this, ActionContext *pContext)
 {
-  ITrack *v2; // rax
-  ActionContext *v3; // rbx
-  MissionFailTriggerTask *v4; // rdi
-  UFG::SimObjectGame *v5; // rcx
-  unsigned __int16 v6; // r8
-  UFG::SimComponent *v7; // r8
-  UFG::SimComponent *v8; // rax
+  ITrack *m_Track; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // r8
+  UFG::SimComponent *m_pComponent; // r8
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   __int64 v9; // rdi
   UFG::CopSystem *v10; // rax
 
-  v2 = this->m_Track;
+  m_Track = this->m_Track;
   this->m_pContext = pContext;
-  v3 = pContext;
-  v4 = this;
-  if ( !HIDWORD(v2[1].vfptr) )
+  if ( !HIDWORD(m_Track[1].vfptr) )
   {
-    v5 = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
-    if ( v5 )
+    m_pPointer = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      v6 = v5->m_Flags;
-      if ( (v6 >> 14) & 1 )
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
       {
-        v7 = v5->m_Components.p[20].m_pComponent;
+        m_pComponent = m_pPointer->m_Components.p[20].m_pComponent;
       }
-      else if ( (v6 & 0x8000u) == 0 )
+      else if ( m_Flags >= 0 )
       {
-        if ( (v6 >> 13) & 1 )
-        {
-          v8 = UFG::SimObjectGame::GetComponentOfTypeHK(v5, UFG::TargetingSystemBaseComponent::_TypeUID);
-        }
-        else if ( (v6 >> 12) & 1 )
-        {
-          v8 = UFG::SimObjectGame::GetComponentOfTypeHK(v5, UFG::TargetingSystemBaseComponent::_TypeUID);
-        }
+        if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+          ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                m_pPointer,
+                                UFG::TargetingSystemBaseComponent::_TypeUID);
         else
-        {
-          v8 = UFG::SimObject::GetComponentOfType(
-                 (UFG::SimObject *)&v5->vfptr,
-                 UFG::TargetingSystemBaseComponent::_TypeUID);
-        }
-        v7 = v8;
+          ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(
+                                m_pPointer,
+                                UFG::TargetingSystemBaseComponent::_TypeUID);
+        m_pComponent = ComponentOfTypeHK;
       }
       else
       {
-        v7 = v5->m_Components.p[20].m_pComponent;
+        m_pComponent = m_pPointer->m_Components.p[20].m_pComponent;
       }
-      if ( v7 )
+      if ( m_pComponent )
       {
-        v9 = *(_QWORD *)(56i64 * *(unsigned __int8 *)(LODWORD(v4->m_Track[1].vfptr) + *(_QWORD *)&v7[1].m_Flags + 8i64)
-                       + *(_QWORD *)&v7[1].m_TypeUID
+        v9 = *(_QWORD *)(56i64
+                       * *(unsigned __int8 *)(LODWORD(this->m_Track[1].vfptr)
+                                            + *(_QWORD *)&m_pComponent[1].m_Flags
+                                            + 8i64)
+                       + *(_QWORD *)&m_pComponent[1].m_TypeUID
                        + 40);
         if ( v9 )
         {
           v10 = UFG::CopSystem::Instance();
           ((void (__fastcall *)(UFG::CopSystem *, UFG::SimObject *, __int64))v10->vfptr[94].__vecDelDtor)(
             v10,
-            v3->mSimObject.m_pPointer,
+            pContext->mSimObject.m_pPointer,
             v9);
         }
       }
@@ -5691,46 +5087,31 @@ void __fastcall MissionFailTriggerTask::Begin(MissionFailTriggerTask *this, Acti
 // RVA: 0x2E8760
 void __fastcall AimingFreeAimIntentionResetTask::Begin(AimingFreeAimIntentionResetTask *this, ActionContext *pContext)
 {
-  UFG::SimObjectGame *v2; // rcx
-  unsigned __int16 v3; // dx
-  UFG::SimComponent *v4; // rcx
-  UFG::SimComponent *v5; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rcx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   UFG::AimingPlayerComponent *v6; // rax
 
-  v2 = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
-  if ( v2 )
+  m_pPointer = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v3 = v2->m_Flags;
-    if ( (v3 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v4 = v2->m_Components.p[47].m_pComponent;
+      m_pComponent = m_pPointer->m_Components.p[47].m_pComponent;
     }
     else
     {
-      if ( (v3 & 0x8000u) == 0 )
-      {
-        if ( (v3 >> 13) & 1 )
-        {
-          v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::AimingBaseComponent::_TypeUID);
-        }
-        else if ( (v3 >> 12) & 1 )
-        {
-          v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::AimingBaseComponent::_TypeUID);
-        }
-        else
-        {
-          v5 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::AimingBaseComponent::_TypeUID);
-        }
-      }
+      if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::AimingBaseComponent::_TypeUID);
       else
-      {
-        v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::AimingBaseComponent::_TypeUID);
-      }
-      v4 = v5;
+        ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::AimingBaseComponent::_TypeUID);
+      m_pComponent = ComponentOfTypeHK;
     }
-    if ( v4 )
+    if ( m_pComponent )
     {
-      v6 = (UFG::AimingPlayerComponent *)((__int64 (*)(void))v4->vfptr[16].__vecDelDtor)();
+      v6 = (UFG::AimingPlayerComponent *)((__int64 (__fastcall *)(UFG::SimComponent *))m_pComponent->vfptr[16].__vecDelDtor)(m_pComponent);
       if ( v6 )
         UFG::AimingPlayerComponent::ResetFreeAimIntention(v6);
     }
@@ -5741,17 +5122,12 @@ void __fastcall AimingFreeAimIntentionResetTask::Begin(AimingFreeAimIntentionRes
 // RVA: 0x2DD8B0
 void __fastcall AimingSoftLockTask::AimingSoftLockTask(AimingSoftLockTask *this)
 {
-  UFG::qNode<ITask,ITask> *v1; // rax
-  UFG::qNode<AimingSoftLockTask,AimingSoftLockList> *v2; // rax
-
-  v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
-  v1->mPrev = v1;
-  v1->mNext = v1;
+  this->Task<AimingSoftLockTrack>::ITask::UFG::qNode<ITask,ITask>::mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->Task<AimingSoftLockTrack>::ITask::UFG::qNode<ITask,ITask>::mNext = &this->UFG::qNode<ITask,ITask>;
   this->vfptr = (ITaskVtbl *)&ITask::`vftable;
   this->vfptr = (ITaskVtbl *)&Task<AimingSoftLockTrack>::`vftable;
-  v2 = (UFG::qNode<AimingSoftLockTask,AimingSoftLockList> *)&this->mPrev;
-  v2->mPrev = v2;
-  v2->mNext = v2;
+  this->UFG::qNode<AimingSoftLockTask,AimingSoftLockList>::mPrev = &this->UFG::qNode<AimingSoftLockTask,AimingSoftLockList>;
+  this->UFG::qNode<AimingSoftLockTask,AimingSoftLockList>::mNext = &this->UFG::qNode<AimingSoftLockTask,AimingSoftLockList>;
   this->vfptr = (ITaskVtbl *)&AimingSoftLockTask::`vftable;
 }
 
@@ -5759,66 +5135,44 @@ void __fastcall AimingSoftLockTask::AimingSoftLockTask(AimingSoftLockTask *this)
 // RVA: 0x2E88A0
 void __fastcall AimingSoftLockTask::Begin(AimingSoftLockTask *this, ActionContext *pActionContext)
 {
-  AimingSoftLockTask *v2; // rbx
-  UFG::SimObjectGame *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::SimComponent *v5; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   UFG::AimingPlayerComponent *v6; // rax
 
-  v2 = this;
   this->m_pActionContext = pActionContext;
-  v3 = (UFG::SimObjectGame *)pActionContext->mSimObject.m_pPointer;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectGame *)pActionContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v4 = v3->m_Flags;
-    if ( (v4 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v3 = (UFG::SimObjectGame *)v3->m_Components.p[47].m_pComponent;
+      m_pPointer = (UFG::SimObjectGame *)m_pPointer->m_Components.p[47].m_pComponent;
     }
     else
     {
-      if ( (v4 & 0x8000u) == 0 )
-      {
-        if ( (v4 >> 13) & 1 )
-        {
-          v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::AimingBaseComponent::_TypeUID);
-        }
-        else if ( (v4 >> 12) & 1 )
-        {
-          v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::AimingBaseComponent::_TypeUID);
-        }
-        else
-        {
-          v5 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::AimingBaseComponent::_TypeUID);
-        }
-      }
+      if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::AimingBaseComponent::_TypeUID);
       else
-      {
-        v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::AimingBaseComponent::_TypeUID);
-      }
-      v3 = (UFG::SimObjectGame *)v5;
+        ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::AimingBaseComponent::_TypeUID);
+      m_pPointer = (UFG::SimObjectGame *)ComponentOfTypeHK;
     }
   }
-  v6 = (UFG::AimingPlayerComponent *)((__int64 (*)(void))v3->vfptr[16].__vecDelDtor)();
+  v6 = (UFG::AimingPlayerComponent *)((__int64 (__fastcall *)(UFG::SimObjectGame *))m_pPointer->vfptr[16].__vecDelDtor)(m_pPointer);
   if ( v6 )
-    UFG::AimingPlayerComponent::AddAimingSoftLockTask(v6, v2);
+    UFG::AimingPlayerComponent::AddAimingSoftLockTask(v6, this);
 }
 
 // File Line: 2911
 // RVA: 0x2DD820
 void __fastcall AimingSoftLockDisableTask::AimingSoftLockDisableTask(AimingSoftLockDisableTask *this)
 {
-  UFG::qNode<ITask,ITask> *v1; // rax
-  UFG::qNode<AimingSoftLockDisableTask,AimingSoftLockDisableList> *v2; // rax
-
-  v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
-  v1->mPrev = v1;
-  v1->mNext = v1;
+  this->Task<AimingSoftLockDisableTrack>::ITask::UFG::qNode<ITask,ITask>::mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->Task<AimingSoftLockDisableTrack>::ITask::UFG::qNode<ITask,ITask>::mNext = &this->UFG::qNode<ITask,ITask>;
   this->vfptr = (ITaskVtbl *)&ITask::`vftable;
   this->vfptr = (ITaskVtbl *)&Task<AimingSoftLockDisableTrack>::`vftable;
-  v2 = (UFG::qNode<AimingSoftLockDisableTask,AimingSoftLockDisableList> *)&this->mPrev;
-  v2->mPrev = v2;
-  v2->mNext = v2;
+  this->UFG::qNode<AimingSoftLockDisableTask,AimingSoftLockDisableList>::mPrev = &this->UFG::qNode<AimingSoftLockDisableTask,AimingSoftLockDisableList>;
+  this->UFG::qNode<AimingSoftLockDisableTask,AimingSoftLockDisableList>::mNext = &this->UFG::qNode<AimingSoftLockDisableTask,AimingSoftLockDisableList>;
   this->vfptr = (ITaskVtbl *)&AimingSoftLockDisableTask::`vftable;
 }
 
@@ -5826,48 +5180,33 @@ void __fastcall AimingSoftLockDisableTask::AimingSoftLockDisableTask(AimingSoftL
 // RVA: 0x2E8800
 void __fastcall AimingSoftLockDisableTask::Begin(AimingSoftLockDisableTask *this, ActionContext *pActionContext)
 {
-  AimingSoftLockDisableTask *v2; // rbx
-  UFG::SimObjectGame *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::AimingBaseComponent *v5; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::AimingBaseComponent *m_pComponent; // rax
 
-  v2 = this;
   this->m_pActionContext = pActionContext;
-  v3 = (UFG::SimObjectGame *)pActionContext->mSimObject.m_pPointer;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectGame *)pActionContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v4 = v3->m_Flags;
-    if ( (v4 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v5 = (UFG::AimingBaseComponent *)v3->m_Components.p[47].m_pComponent;
+      m_pComponent = (UFG::AimingBaseComponent *)m_pPointer->m_Components.p[47].m_pComponent;
     }
-    else if ( (v4 & 0x8000u) == 0 )
+    else if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v4 >> 13) & 1 )
-      {
-        v5 = (UFG::AimingBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                           v3,
-                                           UFG::AimingBaseComponent::_TypeUID);
-      }
-      else if ( (v4 >> 12) & 1 )
-      {
-        v5 = (UFG::AimingBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                           v3,
-                                           UFG::AimingBaseComponent::_TypeUID);
-      }
-      else
-      {
-        v5 = (UFG::AimingBaseComponent *)UFG::SimObject::GetComponentOfType(
-                                           (UFG::SimObject *)&v3->vfptr,
-                                           UFG::AimingBaseComponent::_TypeUID);
-      }
+      m_pComponent = (UFG::AimingBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                   m_pPointer,
+                                                   UFG::AimingBaseComponent::_TypeUID);
     }
     else
     {
-      v5 = (UFG::AimingBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::AimingBaseComponent::_TypeUID);
+      m_pComponent = (UFG::AimingBaseComponent *)UFG::SimObject::GetComponentOfType(
+                                                   m_pPointer,
+                                                   UFG::AimingBaseComponent::_TypeUID);
     }
-    if ( v5 )
-      UFG::AimingBaseComponent::AddAimingSoftLockDisableTask(v5, v2);
+    if ( m_pComponent )
+      UFG::AimingBaseComponent::AddAimingSoftLockDisableTask(m_pComponent, this);
   }
 }
 
@@ -5875,17 +5214,12 @@ void __fastcall AimingSoftLockDisableTask::Begin(AimingSoftLockDisableTask *this
 // RVA: 0x2DD750
 void __fastcall AimingFreeAimConeClampTask::AimingFreeAimConeClampTask(AimingFreeAimConeClampTask *this)
 {
-  UFG::qNode<ITask,ITask> *v1; // rax
-  UFG::qNode<AimingFreeAimConeClampTask,AimingFreeAimConeClampList> *v2; // rax
-
-  v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
-  v1->mPrev = v1;
-  v1->mNext = v1;
+  this->Task<AimingFreeAimConeClampTrack>::ITask::UFG::qNode<ITask,ITask>::mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->Task<AimingFreeAimConeClampTrack>::ITask::UFG::qNode<ITask,ITask>::mNext = &this->UFG::qNode<ITask,ITask>;
   this->vfptr = (ITaskVtbl *)&ITask::`vftable;
   this->vfptr = (ITaskVtbl *)&Task<AimingFreeAimConeClampTrack>::`vftable;
-  v2 = (UFG::qNode<AimingFreeAimConeClampTask,AimingFreeAimConeClampList> *)&this->mPrev;
-  v2->mPrev = v2;
-  v2->mNext = v2;
+  this->UFG::qNode<AimingFreeAimConeClampTask,AimingFreeAimConeClampList>::mPrev = &this->UFG::qNode<AimingFreeAimConeClampTask,AimingFreeAimConeClampList>;
+  this->UFG::qNode<AimingFreeAimConeClampTask,AimingFreeAimConeClampList>::mNext = &this->UFG::qNode<AimingFreeAimConeClampTask,AimingFreeAimConeClampList>;
   this->vfptr = (ITaskVtbl *)&AimingFreeAimConeClampTask::`vftable;
 }
 
@@ -5893,60 +5227,41 @@ void __fastcall AimingFreeAimConeClampTask::AimingFreeAimConeClampTask(AimingFre
 // RVA: 0x2E86B0
 void __fastcall AimingFreeAimConeClampTask::Begin(AimingFreeAimConeClampTask *this, ActionContext *pActionContext)
 {
-  AimingFreeAimConeClampTask *v2; // rbx
-  UFG::SimObjectGame *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::SimComponent *v5; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   UFG::AimingPlayerComponent *v6; // rax
 
-  v2 = this;
   this->m_pActionContext = pActionContext;
-  v3 = (UFG::SimObjectGame *)pActionContext->mSimObject.m_pPointer;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectGame *)pActionContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v4 = v3->m_Flags;
-    if ( (v4 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v3 = (UFG::SimObjectGame *)v3->m_Components.p[47].m_pComponent;
+      m_pPointer = (UFG::SimObjectGame *)m_pPointer->m_Components.p[47].m_pComponent;
     }
     else
     {
-      if ( (v4 & 0x8000u) == 0 )
-      {
-        if ( (v4 >> 13) & 1 )
-        {
-          v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::AimingBaseComponent::_TypeUID);
-        }
-        else if ( (v4 >> 12) & 1 )
-        {
-          v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::AimingBaseComponent::_TypeUID);
-        }
-        else
-        {
-          v5 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::AimingBaseComponent::_TypeUID);
-        }
-      }
+      if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::AimingBaseComponent::_TypeUID);
       else
-      {
-        v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::AimingBaseComponent::_TypeUID);
-      }
-      v3 = (UFG::SimObjectGame *)v5;
+        ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::AimingBaseComponent::_TypeUID);
+      m_pPointer = (UFG::SimObjectGame *)ComponentOfTypeHK;
     }
   }
-  v6 = (UFG::AimingPlayerComponent *)((__int64 (*)(void))v3->vfptr[16].__vecDelDtor)();
+  v6 = (UFG::AimingPlayerComponent *)((__int64 (__fastcall *)(UFG::SimObjectGame *))m_pPointer->vfptr[16].__vecDelDtor)(m_pPointer);
   if ( v6 )
-    UFG::AimingPlayerComponent::AddAimingFreeAimConeClampTask(v6, v2);
+    UFG::AimingPlayerComponent::AddAimingFreeAimConeClampTask(v6, this);
 }
 
 // File Line: 2976
 // RVA: 0x2E0390
-void __fastcall PowerManagementSuspendPermanentlyTask::PowerManagementSuspendPermanentlyTask(PowerManagementSuspendPermanentlyTask *this)
+void __fastcall PowerManagementSuspendPermanentlyTask::PowerManagementSuspendPermanentlyTask(
+        PowerManagementSuspendPermanentlyTask *this)
 {
-  UFG::qNode<ITask,ITask> *v1; // rax
-
-  v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
-  v1->mPrev = v1;
-  v1->mNext = v1;
+  this->mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->mNext = &this->UFG::qNode<ITask,ITask>;
   this->vfptr = (ITaskVtbl *)&ITask::`vftable;
   this->vfptr = (ITaskVtbl *)&Task<PowerManagementSuspendPermanentlyTrack>::`vftable;
   this->vfptr = (ITaskVtbl *)&PowerManagementSuspendPermanentlyTask::`vftable;
@@ -5954,51 +5269,28 @@ void __fastcall PowerManagementSuspendPermanentlyTask::PowerManagementSuspendPer
 
 // File Line: 2986
 // RVA: 0x2F2190
-void __fastcall PowerManagementSuspendPermanentlyTask::Begin(PowerManagementSuspendPermanentlyTask *this, ActionContext *pActionContext)
+void __fastcall PowerManagementSuspendPermanentlyTask::Begin(
+        PowerManagementSuspendPermanentlyTask *this,
+        ActionContext *pActionContext)
 {
-  UFG::SimObjectGame *v2; // rcx
-  unsigned __int16 v3; // dx
-  UFG::PowerManagementComponent *v4; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::PowerManagementComponent *ComponentOfTypeHK; // rax
 
-  v2 = (UFG::SimObjectGame *)pActionContext->mSimObject.m_pPointer;
-  if ( v2 )
+  m_pPointer = (UFG::SimObjectGame *)pActionContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v3 = v2->m_Flags;
-    if ( (v3 >> 14) & 1 )
-    {
-      v4 = (UFG::PowerManagementComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                              v2,
-                                              UFG::PowerManagementComponent::_TypeUID);
-    }
-    else if ( (v3 & 0x8000u) == 0 )
-    {
-      if ( (v3 >> 13) & 1 )
-      {
-        v4 = (UFG::PowerManagementComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                v2,
-                                                UFG::PowerManagementComponent::_TypeUID);
-      }
-      else if ( (v3 >> 12) & 1 )
-      {
-        v4 = (UFG::PowerManagementComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                v2,
-                                                UFG::PowerManagementComponent::_TypeUID);
-      }
-      else
-      {
-        v4 = (UFG::PowerManagementComponent *)UFG::SimObject::GetComponentOfType(
-                                                (UFG::SimObject *)&v2->vfptr,
-                                                UFG::PowerManagementComponent::_TypeUID);
-      }
-    }
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+      ComponentOfTypeHK = (UFG::PowerManagementComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                             m_pPointer,
+                                                             UFG::PowerManagementComponent::_TypeUID);
     else
-    {
-      v4 = (UFG::PowerManagementComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                              v2,
-                                              UFG::PowerManagementComponent::_TypeUID);
-    }
-    if ( v4 )
-      UFG::PowerManagementComponent::PermanentlySuspend(v4);
+      ComponentOfTypeHK = (UFG::PowerManagementComponent *)UFG::SimObject::GetComponentOfType(
+                                                             m_pPointer,
+                                                             UFG::PowerManagementComponent::_TypeUID);
+    if ( ComponentOfTypeHK )
+      UFG::PowerManagementComponent::PermanentlySuspend(ComponentOfTypeHK);
   }
 }
 
@@ -6006,45 +5298,32 @@ void __fastcall PowerManagementSuspendPermanentlyTask::Begin(PowerManagementSusp
 // RVA: 0x2F0560
 void __fastcall MotionIntentionHoldTask::Begin(MotionIntentionHoldTask *this, ActionContext *pContext)
 {
-  UFG::SimObjectCVBase *v2; // rcx
-  unsigned __int16 v3; // dx
-  UFG::AICharacterControllerBaseComponent *v4; // rax
+  UFG::SimObjectCVBase *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::AICharacterControllerBaseComponent *ComponentOfTypeHK; // rax
 
-  v2 = (UFG::SimObjectCVBase *)pContext->mSimObject.m_pPointer;
-  if ( v2 )
+  m_pPointer = (UFG::SimObjectCVBase *)pContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v3 = v2->m_Flags;
-    if ( (v3 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
     {
-      v4 = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerBaseComponent>(v2);
+      ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerBaseComponent>(m_pPointer);
     }
-    else if ( (v3 & 0x8000u) == 0 )
+    else if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v3 >> 13) & 1 )
-      {
-        v4 = (UFG::AICharacterControllerBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                          (UFG::SimObjectGame *)&v2->vfptr,
-                                                          UFG::AICharacterControllerBaseComponent::_TypeUID);
-      }
-      else if ( (v3 >> 12) & 1 )
-      {
-        v4 = (UFG::AICharacterControllerBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                          (UFG::SimObjectGame *)&v2->vfptr,
-                                                          UFG::AICharacterControllerBaseComponent::_TypeUID);
-      }
-      else
-      {
-        v4 = (UFG::AICharacterControllerBaseComponent *)UFG::SimObject::GetComponentOfType(
-                                                          (UFG::SimObject *)&v2->vfptr,
-                                                          UFG::AICharacterControllerBaseComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = (UFG::AICharacterControllerBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                       m_pPointer,
+                                                                       UFG::AICharacterControllerBaseComponent::_TypeUID);
     }
     else
     {
-      v4 = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerBaseComponent>(v2);
+      ComponentOfTypeHK = (UFG::AICharacterControllerBaseComponent *)UFG::SimObject::GetComponentOfType(
+                                                                       m_pPointer,
+                                                                       UFG::AICharacterControllerBaseComponent::_TypeUID);
     }
-    if ( v4 )
-      UFG::AICharacterControllerBaseComponent::HoldCurrentMotionIntention(v4);
+    if ( ComponentOfTypeHK )
+      UFG::AICharacterControllerBaseComponent::HoldCurrentMotionIntention(ComponentOfTypeHK);
   }
 }
 
@@ -6052,82 +5331,85 @@ void __fastcall MotionIntentionHoldTask::Begin(MotionIntentionHoldTask *this, Ac
 // RVA: 0x2E8B30
 void __fastcall AttachmentTransferTask::Begin(AttachmentTransferTask *this, ActionContext *pContext)
 {
-  AttachmentTransferTask *v2; // rbp
-  UFG::SimObjectProp *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::CharacterAnimationComponent *v5; // rax
-  Creature *v6; // rbx
+  UFG::SimObjectCVBase *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::CharacterAnimationComponent *ComponentOfType; // rax
+  Creature *mCreature; // rbx
   int v7; // edi
-  int v8; // esi
+  int BoneID; // esi
 
-  v2 = this;
-  v3 = (UFG::SimObjectProp *)pContext->mSimObject.m_pPointer;
-  if ( v3
-    && ((v4 = v3->m_Flags, !((v4 >> 14) & 1)) ? ((v4 & 0x8000u) == 0 ? (!((v4 >> 13) & 1) ? (!((v4 >> 12) & 1) ? (v5 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::CharacterAnimationComponent::_TypeUID)) : (v5 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)&v3->vfptr, UFG::CharacterAnimationComponent::_TypeUID))) : (v5 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>(v3))) : (v5 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectCVBase *)v3))) : (v5 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectCVBase *)v3)),
-        v5) )
+  m_pPointer = (UFG::SimObjectCVBase *)pContext->mSimObject.m_pPointer;
+  if ( m_pPointer
+    && ((m_Flags = m_pPointer->m_Flags, (m_Flags & 0x4000) != 0) || m_Flags < 0
+      ? (ComponentOfType = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(m_pPointer))
+      : (m_Flags & 0x2000) == 0
+      ? ((m_Flags & 0x1000) == 0
+       ? (ComponentOfType = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                  m_pPointer,
+                                                                  UFG::CharacterAnimationComponent::_TypeUID))
+       : (ComponentOfType = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                  m_pPointer,
+                                                                  UFG::CharacterAnimationComponent::_TypeUID)))
+      : (ComponentOfType = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)m_pPointer)),
+        ComponentOfType) )
   {
-    v6 = v5->mCreature;
+    mCreature = ComponentOfType->mCreature;
   }
   else
   {
-    v6 = 0i64;
+    mCreature = 0i64;
   }
-  if ( v6 )
+  if ( mCreature )
   {
     v7 = -1;
-    if ( v6->mPose.mRigHandle.mData )
-      v8 = Skeleton::GetBoneID(v6->mPose.mRigHandle.mUFGSkeleton, (const unsigned int)v2->m_Track[1].vfptr);
+    if ( mCreature->mPose.mRigHandle.mData )
+      BoneID = Skeleton::GetBoneID(mCreature->mPose.mRigHandle.mUFGSkeleton, (unsigned int)this->m_Track[1].vfptr);
     else
-      v8 = -1;
-    if ( v6->mPose.mRigHandle.mData )
-      v7 = Skeleton::GetBoneID(v6->mPose.mRigHandle.mUFGSkeleton, HIDWORD(v2->m_Track[1].vfptr));
-    if ( v8 >= 0 && v7 >= 0 )
-      Creature::TransferAttachment(v6, v8, v7, (UFG::qSymbolUC *)&v2->m_Track[1].mResourceOwner);
+      BoneID = -1;
+    if ( mCreature->mPose.mRigHandle.mData )
+      v7 = Skeleton::GetBoneID(mCreature->mPose.mRigHandle.mUFGSkeleton, HIDWORD(this->m_Track[1].vfptr));
+    if ( BoneID >= 0 && v7 >= 0 )
+      Creature::TransferAttachment(mCreature, BoneID, v7, (UFG::qSymbolUC *)&this->m_Track[1].mResourceOwner);
   }
 }
 
 // File Line: 3038
 // RVA: 0x2F1F10
-void __fastcall PlaybackSpeedModifierEnabledTask::Begin(PlaybackSpeedModifierEnabledTask *this, ActionContext *pContext)
+void __fastcall PlaybackSpeedModifierEnabledTask::Begin(
+        PlaybackSpeedModifierEnabledTask *this,
+        ActionContext *pContext)
 {
-  UFG::SimObjectCVBase *v2; // rcx
-  unsigned __int16 v3; // dx
-  UFG::CharacterAnimationComponent *v4; // rax
+  UFG::SimObjectCVBase *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::CharacterAnimationComponent *ComponentOfTypeHK; // rax
 
   this->mContext = pContext;
-  v2 = (UFG::SimObjectCVBase *)pContext->mSimObject.m_pPointer;
-  if ( v2 )
+  m_pPointer = (UFG::SimObjectCVBase *)pContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v3 = v2->m_Flags;
-    if ( (v3 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
     {
-      v4 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v2);
+      ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(m_pPointer);
     }
-    else if ( (v3 & 0x8000u) == 0 )
+    else if ( (m_Flags & 0x2000) != 0 )
     {
-      if ( (v3 >> 13) & 1 )
-      {
-        v4 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v2);
-      }
-      else if ( (v3 >> 12) & 1 )
-      {
-        v4 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                   (UFG::SimObjectGame *)&v2->vfptr,
-                                                   UFG::CharacterAnimationComponent::_TypeUID);
-      }
-      else
-      {
-        v4 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                   (UFG::SimObject *)&v2->vfptr,
-                                                   UFG::CharacterAnimationComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)m_pPointer);
+    }
+    else if ( (m_Flags & 0x1000) != 0 )
+    {
+      ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                m_pPointer,
+                                                                UFG::CharacterAnimationComponent::_TypeUID);
     }
     else
     {
-      v4 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v2);
+      ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                m_pPointer,
+                                                                UFG::CharacterAnimationComponent::_TypeUID);
     }
-    if ( v4 )
-      v4->mCreature->mPlaybackSpeedEnabled = 1;
+    if ( ComponentOfTypeHK )
+      ComponentOfTypeHK->mCreature->mPlaybackSpeedEnabled = 1;
   }
 }
 
@@ -6135,43 +5417,36 @@ void __fastcall PlaybackSpeedModifierEnabledTask::Begin(PlaybackSpeedModifierEna
 // RVA: 0x2FF9E0
 void __fastcall PlaybackSpeedModifierEnabledTask::End(PlaybackSpeedModifierEnabledTask *this)
 {
-  UFG::SimObjectCVBase *v1; // rcx
-  unsigned __int16 v2; // dx
-  UFG::CharacterAnimationComponent *v3; // rax
+  UFG::SimObjectCVBase *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::CharacterAnimationComponent *ComponentOfTypeHK; // rax
 
-  v1 = (UFG::SimObjectCVBase *)this->mContext->mSimObject.m_pPointer;
-  if ( v1 )
+  m_pPointer = (UFG::SimObjectCVBase *)this->mContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v2 = v1->m_Flags;
-    if ( (v2 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
     {
-      v3 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v1);
+      ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(m_pPointer);
     }
-    else if ( (v2 & 0x8000u) == 0 )
+    else if ( (m_Flags & 0x2000) != 0 )
     {
-      if ( (v2 >> 13) & 1 )
-      {
-        v3 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v1);
-      }
-      else if ( (v2 >> 12) & 1 )
-      {
-        v3 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                   (UFG::SimObjectGame *)&v1->vfptr,
-                                                   UFG::CharacterAnimationComponent::_TypeUID);
-      }
-      else
-      {
-        v3 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                   (UFG::SimObject *)&v1->vfptr,
-                                                   UFG::CharacterAnimationComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)m_pPointer);
+    }
+    else if ( (m_Flags & 0x1000) != 0 )
+    {
+      ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                m_pPointer,
+                                                                UFG::CharacterAnimationComponent::_TypeUID);
     }
     else
     {
-      v3 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v1);
+      ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                m_pPointer,
+                                                                UFG::CharacterAnimationComponent::_TypeUID);
     }
-    if ( v3 )
-      v3->mCreature->mPlaybackSpeedEnabled = 0;
+    if ( ComponentOfTypeHK )
+      ComponentOfTypeHK->mCreature->mPlaybackSpeedEnabled = 0;
   }
 }
 
@@ -6179,81 +5454,66 @@ void __fastcall PlaybackSpeedModifierEnabledTask::End(PlaybackSpeedModifierEnabl
 // RVA: 0x2EF480
 void __fastcall HealthSetPercentageTask::Begin(HealthSetPercentageTask *this, ActionContext *pContext)
 {
-  HealthSetPercentageTask *v2; // rdi
-  UFG::SimObjectGame *v3; // rcx
-  ActionContext *v4; // rbp
-  unsigned __int16 v5; // r8
-  UFG::HealthComponent *v6; // rbx
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // r8
+  UFG::HealthComponent *m_pComponent; // rbx
   UFG::SimComponent *v7; // rax
   UFG::SimObjectGame *v8; // rcx
-  unsigned __int16 v9; // dx
+  __int16 v9; // dx
   UFG::SimComponent *v10; // rdi
-  UFG::SimComponent *v11; // rax
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   UFG::SimObjectGame *v12; // rsi
   UFG::CopSystem *v13; // rax
-  char v14; // ST28_1
-  unsigned __int16 v15; // cx
-  UFG::SimComponent *v16; // rax
-  UFG::FaceMeterComponent *v17; // rcx
-  bool v18; // zf
-  UFG::SimObject *v19; // rax
-  UFG::FaceEventParameters parameters; // [rsp+30h] [rbp-28h]
+  __int16 v14; // cx
+  UFG::SimComponent *ComponentOfType; // rax
+  UFG::FaceMeterComponent *v16; // rcx
+  bool v17; // zf
+  UFG::SimObject *v18; // rax
+  char v19; // [rsp+28h] [rbp-30h]
+  UFG::FaceEventParameters parameters; // [rsp+30h] [rbp-28h] BYREF
 
-  v2 = this;
-  v3 = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
-  v4 = pContext;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v5 = v3->m_Flags;
-    if ( (v5 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v6 = (UFG::HealthComponent *)v3->m_Components.p[6].m_pComponent;
+      m_pComponent = (UFG::HealthComponent *)m_pPointer->m_Components.p[6].m_pComponent;
     }
-    else if ( (v5 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v5 >> 13) & 1 )
-        v7 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::HealthComponent::_TypeUID);
-      else
-        v7 = (v5 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::HealthComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::HealthComponent::_TypeUID);
-      v6 = (UFG::HealthComponent *)v7;
+      v7 = (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+         ? UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::HealthComponent::_TypeUID)
+         : UFG::SimObject::GetComponentOfType(m_pPointer, UFG::HealthComponent::_TypeUID);
+      m_pComponent = (UFG::HealthComponent *)v7;
     }
     else
     {
-      v6 = (UFG::HealthComponent *)v3->m_Components.p[6].m_pComponent;
+      m_pComponent = (UFG::HealthComponent *)m_pPointer->m_Components.p[6].m_pComponent;
     }
-    if ( v6 )
+    if ( m_pComponent )
     {
       if ( UFG::HealthComponent::SetHealth(
-             v6,
-             (signed int)(float)((float)(*(float *)&v2->m_Track[1].vfptr * 0.0099999998)
-                               * (float)(signed int)v6->m_fMaxHealth),
+             m_pComponent,
+             (int)(float)((float)(*(float *)&this->m_Track[1].vfptr * 0.0099999998)
+                        * (float)(int)m_pComponent->m_fMaxHealth),
              0i64) )
       {
-        v8 = (UFG::SimObjectGame *)v4->mSimObject.m_pPointer;
+        v8 = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
         if ( v8 )
         {
           v9 = v8->m_Flags;
-          if ( (v9 >> 14) & 1 )
+          if ( (v9 & 0x4000) != 0 )
           {
             v10 = v8->m_Components.p[15].m_pComponent;
           }
-          else if ( (v9 & 0x8000u) == 0 )
+          else if ( v9 >= 0 )
           {
-            if ( (v9 >> 13) & 1 )
-            {
-              v11 = UFG::SimObjectGame::GetComponentOfTypeHK(v8, UFG::HitReactionComponent::_TypeUID);
-            }
-            else if ( (v9 >> 12) & 1 )
-            {
-              v11 = UFG::SimObjectGame::GetComponentOfTypeHK(v8, UFG::HitReactionComponent::_TypeUID);
-            }
+            if ( (v9 & 0x2000) != 0 || (v9 & 0x1000) != 0 )
+              ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(v8, UFG::HitReactionComponent::_TypeUID);
             else
-            {
-              v11 = UFG::SimObject::GetComponentOfType(
-                      (UFG::SimObject *)&v8->vfptr,
-                      UFG::HitReactionComponent::_TypeUID);
-            }
-            v10 = v11;
+              ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(v8, UFG::HitReactionComponent::_TypeUID);
+            v10 = ComponentOfTypeHK;
           }
           else
           {
@@ -6263,48 +5523,33 @@ void __fastcall HealthSetPercentageTask::Begin(HealthSetPercentageTask *this, Ac
           {
             v12 = *(UFG::SimObjectGame **)&v10[3].m_TypeUID;
             v13 = UFG::CopSystem::Instance();
-            v14 = 1;
+            v19 = 1;
             ((void (__fastcall *)(UFG::CopSystem *, UFG::SimObjectGame *, UFG::SimObject *, UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> **, UFG::HealthComponent *, char))v13->vfptr[95].__vecDelDtor)(
               v13,
               v12,
-              v4->mSimObject.m_pPointer,
+              pContext->mSimObject.m_pPointer,
               &v10[2].m_BoundComponentHandles.mNode.mNext,
-              v6,
-              v14);
+              m_pComponent,
+              v19);
             if ( v12 )
             {
-              v15 = v12->m_Flags;
-              if ( (v15 >> 14) & 1 )
-              {
-                v16 = UFG::SimObjectGame::GetComponentOfTypeHK(v12, UFG::FaceMeterComponent::_TypeUID);
-              }
-              else if ( (v15 & 0x8000u) == 0 )
-              {
-                if ( (v15 >> 13) & 1 )
-                  v16 = UFG::SimObjectGame::GetComponentOfTypeHK(v12, UFG::FaceMeterComponent::_TypeUID);
-                else
-                  v16 = (v15 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                            v12,
-                                            UFG::FaceMeterComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(
-                                                                                   (UFG::SimObject *)&v12->vfptr,
-                                                                                   UFG::FaceMeterComponent::_TypeUID);
-              }
+              v14 = v12->m_Flags;
+              if ( (v14 & 0x4000) != 0 || v14 < 0 || (v14 & 0x2000) != 0 || (v14 & 0x1000) != 0 )
+                ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(v12, UFG::FaceMeterComponent::_TypeUID);
               else
+                ComponentOfType = UFG::SimObject::GetComponentOfType(v12, UFG::FaceMeterComponent::_TypeUID);
+              v16 = (UFG::FaceMeterComponent *)ComponentOfType;
+              if ( ComponentOfType )
               {
-                v16 = UFG::SimObjectGame::GetComponentOfTypeHK(v12, UFG::FaceMeterComponent::_TypeUID);
-              }
-              v17 = (UFG::FaceMeterComponent *)v16;
-              if ( v16 )
-              {
-                v18 = v6->m_bIsKnockedOut == 0;
-                v19 = v4->mSimObject.m_pPointer;
+                v17 = !m_pComponent->m_bIsKnockedOut;
+                v18 = pContext->mSimObject.m_pPointer;
                 parameters.mpPropertySet = 0i64;
-                parameters.mpSimObject = v19;
+                parameters.mpSimObject = v18;
                 parameters.mIsApply = 1;
                 parameters.mType = 109;
-                if ( v18 )
+                if ( v17 )
                   parameters.mType = 108;
-                UFG::FaceMeterComponent::ApplyEvent(v17, &parameters);
+                UFG::FaceMeterComponent::ApplyEvent(v16, &parameters);
               }
             }
           }
@@ -6312,55 +5557,43 @@ void __fastcall HealthSetPercentageTask::Begin(HealthSetPercentageTask *this, Ac
       }
     }
   }
-}
+}yEvent(v16, &parameters);
+              }
+          
 
 // File Line: 3111
 // RVA: 0x2EA9C0
 void __fastcall CharacterStatModifyTask::Begin(CharacterStatModifyTask *this, ActionContext *pContext)
 {
-  CharacterStatModifyTask *v2; // rbx
-  UFG::SimObjectCVBase *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::SimObjectCharacterPropertiesComponent *v5; // rax
+  UFG::SimObjectCVBase *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimObjectCharacterPropertiesComponent *ComponentOfTypeHK; // rax
 
-  v2 = this;
   this->m_pContext = pContext;
-  v3 = (UFG::SimObjectCVBase *)pContext->mSimObject.m_pPointer;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectCVBase *)pContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v4 = v3->m_Flags;
-    if ( (v4 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
     {
-      v5 = UFG::SimObjectCVBase::GetComponent<UFG::SimObjectCharacterPropertiesComponent>(v3);
+      ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::SimObjectCharacterPropertiesComponent>(m_pPointer);
     }
-    else if ( (v4 & 0x8000u) == 0 )
+    else if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v4 >> 13) & 1 )
-      {
-        v5 = (UFG::SimObjectCharacterPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                             (UFG::SimObjectGame *)&v3->vfptr,
-                                                             UFG::SimObjectCharacterPropertiesComponent::_TypeUID);
-      }
-      else if ( (v4 >> 12) & 1 )
-      {
-        v5 = (UFG::SimObjectCharacterPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                             (UFG::SimObjectGame *)&v3->vfptr,
-                                                             UFG::SimObjectCharacterPropertiesComponent::_TypeUID);
-      }
-      else
-      {
-        v5 = (UFG::SimObjectCharacterPropertiesComponent *)UFG::SimObject::GetComponentOfType(
-                                                             (UFG::SimObject *)&v3->vfptr,
-                                                             UFG::SimObjectCharacterPropertiesComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = (UFG::SimObjectCharacterPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                          m_pPointer,
+                                                                          UFG::SimObjectCharacterPropertiesComponent::_TypeUID);
     }
     else
     {
-      v5 = UFG::SimObjectCVBase::GetComponent<UFG::SimObjectCharacterPropertiesComponent>(v3);
+      ComponentOfTypeHK = (UFG::SimObjectCharacterPropertiesComponent *)UFG::SimObject::GetComponentOfType(
+                                                                          m_pPointer,
+                                                                          UFG::SimObjectCharacterPropertiesComponent::_TypeUID);
     }
-    if ( v5 )
-      v5->m_CharacterStats[SLODWORD(v2->m_Track[1].vfptr)].m_fStat = *((float *)&v2->m_Track[1].vfptr + 1)
-                                                                   + v5->m_CharacterStats[SLODWORD(v2->m_Track[1].vfptr)].m_fStat;
+    if ( ComponentOfTypeHK )
+      ComponentOfTypeHK->m_CharacterStats[SLODWORD(this->m_Track[1].vfptr)].m_fStat = *((float *)&this->m_Track[1].vfptr
+                                                                                      + 1)
+                                                                                    + ComponentOfTypeHK->m_CharacterStats[SLODWORD(this->m_Track[1].vfptr)].m_fStat;
   }
 }
 
@@ -6368,48 +5601,34 @@ void __fastcall CharacterStatModifyTask::Begin(CharacterStatModifyTask *this, Ac
 // RVA: 0x2FE5A0
 void __fastcall CharacterStatModifyTask::End(CharacterStatModifyTask *this)
 {
-  CharacterStatModifyTask *v1; // rbx
-  UFG::SimObjectCVBase *v2; // rcx
-  unsigned __int16 v3; // dx
-  UFG::SimObjectCharacterPropertiesComponent *v4; // rax
+  UFG::SimObjectCVBase *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimObjectCharacterPropertiesComponent *ComponentOfTypeHK; // rax
 
-  v1 = this;
-  v2 = (UFG::SimObjectCVBase *)this->m_pContext->mSimObject.m_pPointer;
-  if ( v2 )
+  m_pPointer = (UFG::SimObjectCVBase *)this->m_pContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v3 = v2->m_Flags;
-    if ( (v3 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
     {
-      v4 = UFG::SimObjectCVBase::GetComponent<UFG::SimObjectCharacterPropertiesComponent>(v2);
+      ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::SimObjectCharacterPropertiesComponent>(m_pPointer);
     }
-    else if ( (v3 & 0x8000u) == 0 )
+    else if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v3 >> 13) & 1 )
-      {
-        v4 = (UFG::SimObjectCharacterPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                             (UFG::SimObjectGame *)&v2->vfptr,
-                                                             UFG::SimObjectCharacterPropertiesComponent::_TypeUID);
-      }
-      else if ( (v3 >> 12) & 1 )
-      {
-        v4 = (UFG::SimObjectCharacterPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                             (UFG::SimObjectGame *)&v2->vfptr,
-                                                             UFG::SimObjectCharacterPropertiesComponent::_TypeUID);
-      }
-      else
-      {
-        v4 = (UFG::SimObjectCharacterPropertiesComponent *)UFG::SimObject::GetComponentOfType(
-                                                             (UFG::SimObject *)&v2->vfptr,
-                                                             UFG::SimObjectCharacterPropertiesComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = (UFG::SimObjectCharacterPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                          m_pPointer,
+                                                                          UFG::SimObjectCharacterPropertiesComponent::_TypeUID);
     }
     else
     {
-      v4 = UFG::SimObjectCVBase::GetComponent<UFG::SimObjectCharacterPropertiesComponent>(v2);
+      ComponentOfTypeHK = (UFG::SimObjectCharacterPropertiesComponent *)UFG::SimObject::GetComponentOfType(
+                                                                          m_pPointer,
+                                                                          UFG::SimObjectCharacterPropertiesComponent::_TypeUID);
     }
-    if ( v4 )
-      v4->m_CharacterStats[SLODWORD(v1->m_Track[1].vfptr)].m_fStat = v4->m_CharacterStats[SLODWORD(v1->m_Track[1].vfptr)].m_fStat
-                                                                   - *((float *)&v1->m_Track[1].vfptr + 1);
+    if ( ComponentOfTypeHK )
+      ComponentOfTypeHK->m_CharacterStats[SLODWORD(this->m_Track[1].vfptr)].m_fStat = ComponentOfTypeHK->m_CharacterStats[SLODWORD(this->m_Track[1].vfptr)].m_fStat
+                                                                                    - *((float *)&this->m_Track[1].vfptr
+                                                                                      + 1);
   }
 }
 
@@ -6417,62 +5636,58 @@ void __fastcall CharacterStatModifyTask::End(CharacterStatModifyTask *this)
 // RVA: 0x2F0D60
 void __fastcall ObjectReferenceTask::Begin(ObjectReferenceTask *this, ActionContext *pContext)
 {
-  ActionContext *v2; // rdi
-  ObjectReferenceTask *v3; // rsi
-  UFG::qPropertySet *v4; // rbp
-  unsigned int v5; // ebx
-  UFG::SimObject *v6; // r8
-  unsigned __int16 v7; // dx
-  UFG::StreamedResourceComponent *v8; // rax
+  UFG::qPropertySet *PropertySet; // rbp
+  unsigned int mUID; // ebx
+  UFG::SimObject *m_pPointer; // r8
+  __int16 m_Flags; // dx
+  UFG::StreamedResourceComponent *m_pComponent; // rax
   UFG::SimObjectGame *v9; // rcx
-  UFG::qSymbol priority; // [rsp+50h] [rbp+8h]
-  UFG::qSymbol *v11; // [rsp+60h] [rbp+18h]
+  UFG::qSymbol priority; // [rsp+50h] [rbp+8h] BYREF
+  UFG::qSymbol *p_priority; // [rsp+60h] [rbp+18h]
 
-  v2 = pContext;
-  v3 = this;
-  v4 = UFG::PropertySetManager::GetPropertySet((UFG::qSymbol *)&this->m_Track[1]);
-  if ( v4 )
+  PropertySet = UFG::PropertySetManager::GetPropertySet((UFG::qSymbol *)&this->m_Track[1]);
+  if ( PropertySet )
   {
-    v5 = qSymbol_Critical.mUID;
-    v6 = v2->mSimObject.m_pPointer;
-    if ( v6 )
+    mUID = qSymbol_Critical.mUID;
+    m_pPointer = pContext->mSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      v7 = v6->m_Flags;
-      if ( (v7 >> 14) & 1 )
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
       {
-        v8 = (UFG::StreamedResourceComponent *)v6->m_Components.p[10].m_pComponent;
+        m_pComponent = (UFG::StreamedResourceComponent *)m_pPointer->m_Components.p[10].m_pComponent;
       }
-      else if ( (v7 & 0x8000u) == 0 )
+      else if ( m_Flags >= 0 )
       {
-        if ( (v7 >> 13) & 1 )
+        if ( (m_Flags & 0x2000) != 0 )
         {
-          v8 = (UFG::StreamedResourceComponent *)v6->m_Components.p[7].m_pComponent;
+          m_pComponent = (UFG::StreamedResourceComponent *)m_pPointer->m_Components.p[7].m_pComponent;
         }
         else
         {
-          v9 = (UFG::SimObjectGame *)v2->mSimObject.m_pPointer;
-          if ( (v7 >> 12) & 1 )
-            v8 = (UFG::StreamedResourceComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                     v9,
-                                                     UFG::StreamedResourceComponent::_TypeUID);
+          v9 = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
+          if ( (m_Flags & 0x1000) != 0 )
+            m_pComponent = (UFG::StreamedResourceComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                               v9,
+                                                               UFG::StreamedResourceComponent::_TypeUID);
           else
-            v8 = (UFG::StreamedResourceComponent *)UFG::SimObject::GetComponentOfType(
-                                                     (UFG::SimObject *)&v9->vfptr,
-                                                     UFG::StreamedResourceComponent::_TypeUID);
+            m_pComponent = (UFG::StreamedResourceComponent *)UFG::SimObject::GetComponentOfType(
+                                                               v9,
+                                                               UFG::StreamedResourceComponent::_TypeUID);
         }
       }
       else
       {
-        v8 = (UFG::StreamedResourceComponent *)v6->m_Components.p[10].m_pComponent;
+        m_pComponent = (UFG::StreamedResourceComponent *)m_pPointer->m_Components.p[10].m_pComponent;
       }
-      if ( v8 )
-        v5 = UFG::StreamedResourceComponent::GetSpawnPriority(v8, 0i64)->mUID;
+      if ( m_pComponent )
+        mUID = UFG::StreamedResourceComponent::GetSpawnPriority(m_pComponent, 0i64)->mUID;
     }
-    v11 = &priority;
-    priority.mUID = v5;
-    UFG::MeshResourceLoader::Init(&v3->mMeshLoader, v4, (UFG::qSymbol)&priority, 0);
-    UFG::MeshResourceLoader::PopulateTrueCrowdInstanceFromPropertySet(&v3->mMeshLoader, 1);
-    UFG::MeshResourceLoader::QueueLoad(&v3->mMeshLoader);
+    p_priority = &priority;
+    priority.mUID = mUID;
+    UFG::MeshResourceLoader::Init(&this->mMeshLoader, PropertySet, (UFG::qSymbol)&priority, 0);
+    UFG::MeshResourceLoader::PopulateTrueCrowdInstanceFromPropertySet(&this->mMeshLoader, 1);
+    UFG::MeshResourceLoader::QueueLoad(&this->mMeshLoader);
   }
 }
 
@@ -6487,53 +5702,46 @@ void __fastcall ObjectReferenceTask::End(ObjectReferenceTask *this)
 // RVA: 0x2F3790
 void __fastcall SetOutOfFightTask::Begin(SetOutOfFightTask *this, ActionContext *pContext)
 {
-  SetOutOfFightTask *v2; // rdi
-  UFG::SimObjectGame *v3; // rcx
-  ActionContext *v4; // rbx
-  unsigned __int16 v5; // r8
-  UFG::SimComponent *v6; // rcx
-  UFG::SimComponent *v7; // rax
-  UFG::ObjectiveTracker *v8; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // r8
+  UFG::SimComponent *m_pComponent; // rcx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
+  UFG::ObjectiveTracker *p_mObjectiveTracker; // rax
 
-  v2 = this;
-  v3 = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
-  v4 = pContext;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v5 = v3->m_Flags;
-    if ( (v5 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v6 = v3->m_Components.p[5].m_pComponent;
+      m_pComponent = m_pPointer->m_Components.p[5].m_pComponent;
     }
-    else if ( (v5 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v5 >> 13) & 1 )
-      {
-        v7 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::AIScriptInterfaceComponent::_TypeUID);
-      }
-      else if ( (v5 >> 12) & 1 )
-      {
-        v7 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::AIScriptInterfaceComponent::_TypeUID);
-      }
+      if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                              m_pPointer,
+                              UFG::AIScriptInterfaceComponent::_TypeUID);
       else
-      {
-        v7 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::AIScriptInterfaceComponent::_TypeUID);
-      }
-      v6 = v7;
+        ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::AIScriptInterfaceComponent::_TypeUID);
+      m_pComponent = ComponentOfTypeHK;
     }
     else
     {
-      v6 = v3->m_Components.p[5].m_pComponent;
+      m_pComponent = m_pPointer->m_Components.p[5].m_pComponent;
     }
-    if ( v6 )
+    if ( m_pComponent )
     {
-      LOBYTE(v6[32].m_BoundComponentHandles.mNode.mPrev) ^= (LOBYTE(v6[32].m_BoundComponentHandles.mNode.mPrev) ^ 32 * (LOBYTE(v2->m_Track[1].vfptr) != 0)) & 0x20;
-      if ( LOBYTE(v2->m_Track[1].vfptr) )
+      LOBYTE(m_pComponent[32].m_BoundComponentHandles.mNode.mPrev) ^= (LOBYTE(m_pComponent[32].m_BoundComponentHandles.mNode.mPrev) ^ (32 * (LOBYTE(this->m_Track[1].vfptr) != 0))) & 0x20;
+      if ( LOBYTE(this->m_Track[1].vfptr) )
       {
-        UFG::SimObjectUtility::DetachHudSymbol(v4->mSimObject.m_pPointer);
-        v8 = &UFG::ProgressionTracker::Instance()->mObjectiveTracker;
-        if ( v8 )
-          UFG::ObjectiveTracker::EnableObjectiveIndicatorCorona(v8, &v4->mSimObject.m_pPointer->m_Name, 0);
+        UFG::SimObjectUtility::DetachHudSymbol(pContext->mSimObject.m_pPointer);
+        p_mObjectiveTracker = &UFG::ProgressionTracker::Instance()->mObjectiveTracker;
+        if ( p_mObjectiveTracker )
+          UFG::ObjectiveTracker::EnableObjectiveIndicatorCorona(
+            p_mObjectiveTracker,
+            &pContext->mSimObject.m_pPointer->m_Name,
+            0);
       }
     }
   }
@@ -6570,42 +5778,23 @@ void __fastcall PlayerGrappleTask::End(PlayerGrappleTask *this)
 // RVA: 0x2F4CA0
 void __fastcall StruggleTask::Begin(StruggleTask *this, ActionContext *context)
 {
-  UFG::SimObjectGame *v2; // rcx
-  unsigned __int16 v3; // dx
-  UFG::SimComponent *v4; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
 
   this->mContext = context;
-  v2 = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
-  if ( v2 )
+  m_pPointer = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v3 = v2->m_Flags;
-    if ( (v3 >> 14) & 1 )
-    {
-      v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::SimObjectSignalMemoryComponent::_TypeUID);
-    }
-    else if ( (v3 & 0x8000u) == 0 )
-    {
-      if ( (v3 >> 13) & 1 )
-      {
-        v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::SimObjectSignalMemoryComponent::_TypeUID);
-      }
-      else if ( (v3 >> 12) & 1 )
-      {
-        v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::SimObjectSignalMemoryComponent::_TypeUID);
-      }
-      else
-      {
-        v4 = UFG::SimObject::GetComponentOfType(
-               (UFG::SimObject *)&v2->vfptr,
-               UFG::SimObjectSignalMemoryComponent::_TypeUID);
-      }
-    }
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+      ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                            m_pPointer,
+                            UFG::SimObjectSignalMemoryComponent::_TypeUID);
     else
-    {
-      v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::SimObjectSignalMemoryComponent::_TypeUID);
-    }
-    if ( v4 )
-      v4[1].m_TypeUID = 1056964608;
+      ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::SimObjectSignalMemoryComponent::_TypeUID);
+    if ( ComponentOfTypeHK )
+      ComponentOfTypeHK[1].m_TypeUID = 1056964608;
   }
 }
 
@@ -6613,77 +5802,70 @@ void __fastcall StruggleTask::Begin(StruggleTask *this, ActionContext *context)
 // RVA: 0x30A3D0
 char __fastcall StruggleTask::Update(StruggleTask *this, float timeDelta)
 {
-  StruggleTask *v2; // rdi
   bool v3; // zf
-  UFG::SimObjectGame *v4; // rcx
+  UFG::SimObjectGame *m_pPointer; // rcx
   bool v5; // si
-  unsigned __int16 v6; // dx
-  UFG::SimComponent *v7; // rax
+  __int16 m_Flags; // dx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   UFG::SimComponent *v8; // rbx
   UFG::SimObjectCVBase *v9; // rcx
-  unsigned __int16 v10; // dx
-  UFG::AICharacterControllerBaseComponent *v11; // rax
+  __int16 v10; // dx
+  UFG::AICharacterControllerBaseComponent *ComponentOfType; // rax
   UFG::AICharacterControllerBaseComponent *v12; // rdx
   unsigned __int64 v13; // rax
   float v14; // xmm1_4
   float v15; // xmm0_4
   float v16; // xmm1_4
 
-  v2 = this;
   v3 = BYTE4(this->m_Track[1].vfptr) == 0;
-  v4 = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
+  m_pPointer = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
   v5 = !v3;
-  if ( v4 )
+  if ( m_pPointer )
   {
-    v6 = v4->m_Flags;
-    if ( (v6 >> 14) & 1 )
-    {
-      v7 = UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::SimObjectSignalMemoryComponent::_TypeUID);
-    }
-    else if ( (v6 & 0x8000u) == 0 )
-    {
-      if ( (v6 >> 13) & 1 )
-        v7 = UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::SimObjectSignalMemoryComponent::_TypeUID);
-      else
-        v7 = (v6 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                v4,
-                                UFG::SimObjectSignalMemoryComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(
-                                                                                   (UFG::SimObject *)&v4->vfptr,
-                                                                                   UFG::SimObjectSignalMemoryComponent::_TypeUID);
-    }
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+      ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                            m_pPointer,
+                            UFG::SimObjectSignalMemoryComponent::_TypeUID);
     else
+      ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::SimObjectSignalMemoryComponent::_TypeUID);
+    v8 = ComponentOfTypeHK;
+    if ( ComponentOfTypeHK )
     {
-      v7 = UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::SimObjectSignalMemoryComponent::_TypeUID);
-    }
-    v8 = v7;
-    if ( v7 )
-    {
-      v9 = (UFG::SimObjectCVBase *)v2->mContext->mSimObject.m_pPointer;
+      v9 = (UFG::SimObjectCVBase *)this->mContext->mSimObject.m_pPointer;
       if ( v9
-        && ((v10 = v9->m_Flags, !((v10 >> 14) & 1)) ? ((v10 & 0x8000u) == 0 ? (!((v10 >> 13) & 1) ? (!((v10 >> 12) & 1) ? (v11 = (UFG::AICharacterControllerBaseComponent *)UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v9->vfptr, UFG::AICharacterControllerBaseComponent::_TypeUID)) : (v11 = (UFG::AICharacterControllerBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)&v9->vfptr, UFG::AICharacterControllerBaseComponent::_TypeUID))) : (v11 = (UFG::AICharacterControllerBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)&v9->vfptr, UFG::AICharacterControllerBaseComponent::_TypeUID))) : (v11 = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerBaseComponent>(v9))) : (v11 = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerBaseComponent>(v9)),
-            (v12 = v11) != 0i64
-         && (v13 = v11->m_Intention.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_Action.m_EnumValue >> 6],
-             _bittest64((const signed __int64 *)&v13, gActionRequest_Action.m_EnumValue & 0x3F))
+        && ((v10 = v9->m_Flags, (v10 & 0x4000) != 0) || v10 < 0
+          ? (ComponentOfType = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerBaseComponent>(v9))
+          : (v10 & 0x2000) != 0 || (v10 & 0x1000) != 0
+          ? (ComponentOfType = (UFG::AICharacterControllerBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                            v9,
+                                                                            UFG::AICharacterControllerBaseComponent::_TypeUID))
+          : (ComponentOfType = (UFG::AICharacterControllerBaseComponent *)UFG::SimObject::GetComponentOfType(
+                                                                            v9,
+                                                                            UFG::AICharacterControllerBaseComponent::_TypeUID)),
+            (v12 = ComponentOfType) != 0i64
+         && (v13 = ComponentOfType->m_Intention.mActionRequests.mBits[(__int64)(int)gActionRequest_Action.m_EnumValue >> 6],
+             _bittest64((const __int64 *)&v13, gActionRequest_Action.m_EnumValue & 0x3F))
          && !v12->m_Intention.mActionRequestChargeTimes[gActionRequest_Action.m_EnumValue]) )
       {
-        v14 = sStruggleIncFact * *(float *)&v2->m_Track[1].vfptr;
+        v14 = sStruggleIncFact * *(float *)&this->m_Track[1].vfptr;
         if ( !v5 )
         {
           *(float *)&v8[1].m_TypeUID = v14 + *(float *)&v8[1].m_TypeUID;
-          goto LABEL_30;
+          goto LABEL_26;
         }
       }
       else
       {
-        v14 = sStruggleDecFact * *(float *)&v2->m_Track[1].vfptr;
+        v14 = sStruggleDecFact * *(float *)&this->m_Track[1].vfptr;
         if ( v5 )
         {
           *(float *)&v8[1].m_TypeUID = v14 + *(float *)&v8[1].m_TypeUID;
-          goto LABEL_30;
+          goto LABEL_26;
         }
       }
       *(float *)&v8[1].m_TypeUID = *(float *)&v8[1].m_TypeUID - v14;
-LABEL_30:
+LABEL_26:
       v15 = *(float *)&v8[1].m_TypeUID;
       if ( v15 <= 0.0 )
       {
@@ -6693,12 +5875,11 @@ LABEL_30:
       {
         v16 = *(float *)&FLOAT_1_0;
         if ( v15 >= 1.0 )
-          goto LABEL_35;
+          goto LABEL_31;
       }
       v16 = v15;
-LABEL_35:
+LABEL_31:
       *(float *)&v8[1].m_TypeUID = v16;
-      return 1;
     }
   }
   return 1;
@@ -6708,157 +5889,126 @@ LABEL_35:
 // RVA: 0x2F4C60
 void __fastcall Struggle2Task::Begin(Struggle2Task *this, ActionContext *context)
 {
-  ITrack *v2; // rax
+  ITrack *m_Track; // rax
   float v3; // xmm0_4
-  ITaskVtbl *v4; // rax
+  ITaskVtbl *vfptr; // rax
 
-  v2 = this->m_Track;
+  m_Track = this->m_Track;
   this->mContext = context;
   this->mValueCurrentTime = -1.0;
   this->mValueLastTime = -1.0;
-  v3 = (float)(*(float *)&v2[1].mResourceOwner * 0.5) + *((float *)&v2[1].vfptr + 1);
-  v4 = this->vfptr;
+  v3 = (float)(*(float *)&m_Track[1].mResourceOwner * 0.5) + *((float *)&m_Track[1].vfptr + 1);
+  vfptr = this->vfptr;
   this->mCurrentStruggle = v3;
-  ((void (*)(void))v4->Update)();
+  ((void (*)(void))vfptr->Update)();
 }
 
 // File Line: 3315
 // RVA: 0x30A190
 char __fastcall Struggle2Task::Update(Struggle2Task *this, float timeDelta)
 {
-  Struggle2Task *v2; // rbx
-  UFG::SimObjectGame *v3; // rcx
-  float v4; // xmm6_4
-  unsigned __int16 v5; // dx
-  UFG::SimComponent *v6; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   UFG::SimComponent *v7; // rdi
   UFG::SimObjectCVBase *v8; // rcx
-  unsigned __int16 v9; // dx
+  __int16 v9; // dx
   UFG::AICharacterControllerBaseComponent *v10; // rax
   UFG::AICharacterControllerBaseComponent *v11; // rdx
-  ITrack *v12; // r9
+  ITrack *m_Track; // r9
   unsigned __int64 v13; // rax
   float v14; // eax
-  float v15; // xmm0_4
+  float mValueCurrentTime; // xmm0_4
   float v16; // xmm1_4
-  float v17; // xmm0_4
-  float v18; // xmm4_4
+  float mValueLastTime; // xmm0_4
+  float mCurrentStruggle; // xmm4_4
   float v19; // xmm1_4
   float v20; // xmm5_4
   float v21; // xmm2_4
   float v22; // xmm1_4
 
-  v2 = this;
-  v3 = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
-  v4 = timeDelta;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectGame *)this->mContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v5 = v3->m_Flags;
-    if ( (v5 >> 14) & 1 )
-    {
-      v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::SimObjectSignalMemoryComponent::_TypeUID);
-    }
-    else if ( (v5 & 0x8000u) == 0 )
-    {
-      if ( (v5 >> 13) & 1 )
-      {
-        v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::SimObjectSignalMemoryComponent::_TypeUID);
-      }
-      else if ( (v5 >> 12) & 1 )
-      {
-        v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::SimObjectSignalMemoryComponent::_TypeUID);
-      }
-      else
-      {
-        v6 = UFG::SimObject::GetComponentOfType(
-               (UFG::SimObject *)&v3->vfptr,
-               UFG::SimObjectSignalMemoryComponent::_TypeUID);
-      }
-    }
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+      ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                            m_pPointer,
+                            UFG::SimObjectSignalMemoryComponent::_TypeUID);
     else
-    {
-      v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::SimObjectSignalMemoryComponent::_TypeUID);
-    }
-    v7 = v6;
-    if ( !v6 )
+      ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::SimObjectSignalMemoryComponent::_TypeUID);
+    v7 = ComponentOfTypeHK;
+    if ( !ComponentOfTypeHK )
       return 1;
-    v8 = (UFG::SimObjectCVBase *)v2->mContext->mSimObject.m_pPointer;
+    v8 = (UFG::SimObjectCVBase *)this->mContext->mSimObject.m_pPointer;
     if ( !v8 )
       return 1;
     v9 = v8->m_Flags;
-    if ( (v9 >> 14) & 1 )
-    {
+    if ( (v9 & 0x4000) != 0 || v9 < 0 )
       v10 = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerBaseComponent>(v8);
-    }
-    else if ( (v9 & 0x8000u) == 0 )
-    {
-      if ( (v9 >> 13) & 1 )
-        v10 = (UFG::AICharacterControllerBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                           (UFG::SimObjectGame *)&v8->vfptr,
-                                                           UFG::AICharacterControllerBaseComponent::_TypeUID);
-      else
-        v10 = (UFG::AICharacterControllerBaseComponent *)((v9 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                             (UFG::SimObjectGame *)&v8->vfptr,
-                                                                             UFG::AICharacterControllerBaseComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v8->vfptr, UFG::AICharacterControllerBaseComponent::_TypeUID));
-    }
     else
-    {
-      v10 = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerBaseComponent>(v8);
-    }
+      v10 = (UFG::AICharacterControllerBaseComponent *)((v9 & 0x2000) != 0 || (v9 & 0x1000) != 0
+                                                      ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                          v8,
+                                                          UFG::AICharacterControllerBaseComponent::_TypeUID)
+                                                      : UFG::SimObject::GetComponentOfType(
+                                                          v8,
+                                                          UFG::AICharacterControllerBaseComponent::_TypeUID));
     v11 = v10;
     if ( !v10 )
       return 1;
-    v12 = v2->m_Track;
-    v13 = v10->m_Intention.mActionRequests.mBits[(signed __int64)SLOWORD(v12[1].vfptr) >> 6];
-    if ( !_bittest64((const signed __int64 *)&v13, (_QWORD)v12[1].vfptr & 0x3F)
-      || v11->m_Intention.mActionRequestChargeTimes[SLOWORD(v12[1].vfptr)] )
+    m_Track = this->m_Track;
+    v13 = v10->m_Intention.mActionRequests.mBits[(__int64)SLOWORD(m_Track[1].vfptr) >> 6];
+    if ( !_bittest64((const __int64 *)&v13, (__int64)m_Track[1].vfptr & 0x3F)
+      || v11->m_Intention.mActionRequestChargeTimes[SLOWORD(m_Track[1].vfptr)] )
     {
-      v15 = v2->mValueCurrentTime;
-      if ( v15 >= 0.0 )
-        v2->mValueCurrentTime = v15 + timeDelta;
+      mValueCurrentTime = this->mValueCurrentTime;
+      if ( mValueCurrentTime >= 0.0 )
+        this->mValueCurrentTime = mValueCurrentTime + timeDelta;
     }
     else
     {
-      v14 = v2->mValueCurrentTime;
-      v2->mValueCurrentTime = timeDelta;
-      v2->mValueLastTime = v14;
+      v14 = this->mValueCurrentTime;
+      this->mValueCurrentTime = timeDelta;
+      this->mValueLastTime = v14;
     }
-    v16 = v2->mValueCurrentTime;
+    v16 = this->mValueCurrentTime;
     if ( v16 > 0.0 )
     {
-      v17 = v2->mValueLastTime;
-      if ( v17 > 0.0 )
+      mValueLastTime = this->mValueLastTime;
+      if ( mValueLastTime > 0.0 )
       {
-        v2->mCurrentStruggle = (float)(v17 + v16) * 0.5;
-LABEL_34:
-        v18 = v2->mCurrentStruggle;
-        if ( v18 <= 0.0
-          || ((v19 = *(float *)&v12[1].mResourceOwner,
-               v20 = *((float *)&v12[1].vfptr + 1),
+        this->mCurrentStruggle = (float)(mValueLastTime + v16) * 0.5;
+LABEL_30:
+        mCurrentStruggle = this->mCurrentStruggle;
+        if ( mCurrentStruggle <= 0.0
+          || ((v19 = *(float *)&m_Track[1].mResourceOwner,
+               v20 = *((float *)&m_Track[1].vfptr + 1),
                v21 = *(float *)&FLOAT_1_0,
-               v19 <= 0.0) ? (v22 = v20 / v18) : (v22 = (float)((float)(v19 + v20) * (float)(1.0 / v19))
-                                                      - (float)((float)(1.0 / v19) * v18)),
+               v19 <= 0.0)
+            ? (v22 = v20 / mCurrentStruggle)
+            : (v22 = (float)((float)(v19 + v20) * (float)(1.0 / v19)) - (float)((float)(1.0 / v19) * mCurrentStruggle)),
               v22 <= 0.0) )
         {
           v22 = 0.0;
         }
         else if ( v22 >= 1.0 )
         {
-          goto LABEL_43;
+          goto LABEL_39;
         }
         v21 = v22;
-LABEL_43:
+LABEL_39:
         *(float *)&v7[1].m_TypeUID = (float)(v21 - 0.5) * 2.0;
         return 1;
       }
       if ( v16 > 0.0 )
       {
-        v2->mCurrentStruggle = v16;
-        goto LABEL_34;
+        this->mCurrentStruggle = v16;
+        goto LABEL_30;
       }
     }
-    v2->mCurrentStruggle = v4 + v2->mCurrentStruggle;
-    goto LABEL_34;
+    this->mCurrentStruggle = timeDelta + this->mCurrentStruggle;
+    goto LABEL_30;
   }
   return 1;
 }
@@ -6867,11 +6017,8 @@ LABEL_43:
 // RVA: 0x2DD6B0
 void __fastcall ActorStateCounterTask::ActorStateCounterTask(ActorStateCounterTask *this)
 {
-  UFG::qNode<ITask,ITask> *v1; // rax
-
-  v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
-  v1->mPrev = v1;
-  v1->mNext = v1;
+  this->mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->mNext = &this->UFG::qNode<ITask,ITask>;
   this->vfptr = (ITaskVtbl *)&ITask::`vftable;
   this->vfptr = (ITaskVtbl *)&Task<ActorStateCounterTrack>::`vftable;
   this->vfptr = (ITaskVtbl *)&ActorStateCounterTask::`vftable;
@@ -6882,32 +6029,30 @@ void __fastcall ActorStateCounterTask::ActorStateCounterTask(ActorStateCounterTa
 // RVA: 0x2E8080
 void __fastcall ActorStateCounterTask::Begin(ActorStateCounterTask *this, ActionContext *action_context)
 {
-  ITrack *v2; // rax
+  ITrack *m_Track; // rax
 
-  v2 = this->m_Track;
+  m_Track = this->m_Track;
   this->m_pActionContext = action_context;
-  UFG::AudioGameState::sm_counters[LOBYTE(v2[1].vfptr)] = UFG::AudioGameState::sm_counters[LOBYTE(v2[1].vfptr)] + 1.0;
+  UFG::AudioGameState::sm_counters[LOBYTE(m_Track[1].vfptr)] = UFG::AudioGameState::sm_counters[LOBYTE(m_Track[1].vfptr)]
+                                                             + 1.0;
 }
 
 // File Line: 3426
 // RVA: 0x2FDDE0
 void __fastcall ActorStateCounterTask::End(ActorStateCounterTask *this)
 {
-  __int64 v1; // rax
+  __int64 vfptr_low; // rax
 
-  v1 = LOBYTE(this->m_Track[1].vfptr);
-  UFG::AudioGameState::sm_counters[v1] = UFG::AudioGameState::sm_counters[v1] - 1.0;
+  vfptr_low = LOBYTE(this->m_Track[1].vfptr);
+  UFG::AudioGameState::sm_counters[vfptr_low] = UFG::AudioGameState::sm_counters[vfptr_low] - 1.0;
 }
 
 // File Line: 3436
 // RVA: 0x2DF560
 void __fastcall GameStatEventTask::GameStatEventTask(GameStatEventTask *this)
 {
-  UFG::qNode<ITask,ITask> *v1; // rax
-
-  v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
-  v1->mPrev = v1;
-  v1->mNext = v1;
+  this->mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->mNext = &this->UFG::qNode<ITask,ITask>;
   this->vfptr = (ITaskVtbl *)&ITask::`vftable;
   this->vfptr = (ITaskVtbl *)&Task<GameStatEventTrack>::`vftable;
   this->vfptr = (ITaskVtbl *)&GameStatEventTask::`vftable;
@@ -6917,37 +6062,35 @@ void __fastcall GameStatEventTask::GameStatEventTask(GameStatEventTask *this)
 // RVA: 0x2EE3B0
 void __fastcall GameStatEventTask::Begin(GameStatEventTask *this, ActionContext *action_context)
 {
-  ActionContext *v2; // rbx
-  ITrack *v3; // rdx
-  int v4; // edi
+  ITrack *m_Track; // rdx
+  int vfptr; // edi
   UFG::allocator::free_link *v5; // rax
   UFG::allocator::free_link *v6; // r9
-  UFG::SimObject *v7; // r8
-  const char *v8; // rdx
-  unsigned int v9; // ecx
+  UFG::SimObject *m_pPointer; // r8
+  const char *mName; // rdx
+  unsigned int mUID; // ecx
   UFG::allocator::free_link *v10; // rax
 
-  v2 = action_context;
-  v3 = this->m_Track;
-  if ( !BYTE4(v3[1].vfptr) || LocalPlayer == (UFG::SimObjectCharacter *)v2->mSimObject.m_pPointer )
+  m_Track = this->m_Track;
+  if ( !BYTE4(m_Track[1].vfptr) || LocalPlayer == action_context->mSimObject.m_pPointer )
   {
-    v4 = (int)v3[1].vfptr;
+    vfptr = (int)m_Track[1].vfptr;
     v5 = UFG::qMalloc(0x48ui64, "GameStatEventTask", 0i64);
     v6 = v5;
     if ( v5 )
     {
-      v7 = v2->mSimObject.m_pPointer;
-      v8 = UFG::gGameStatEventChannel.mName;
-      v9 = UFG::gGameStatEventChannel.mUID;
+      m_pPointer = action_context->mSimObject.m_pPointer;
+      mName = UFG::gGameStatEventChannel.mName;
+      mUID = UFG::gGameStatEventChannel.mUID;
       v10 = v5 + 1;
       v10->mNext = v10;
       v10[1].mNext = v10;
       v6->mNext = (UFG::allocator::free_link *)&UFG::Event::`vftable;
-      LODWORD(v6[3].mNext) = v9;
-      v6[4].mNext = (UFG::allocator::free_link *)v8;
+      LODWORD(v6[3].mNext) = mUID;
+      v6[4].mNext = (UFG::allocator::free_link *)mName;
       v6->mNext = (UFG::allocator::free_link *)&UFG::GameStatEvent::`vftable;
-      LODWORD(v6[7].mNext) = v4;
-      v6[8].mNext = (UFG::allocator::free_link *)v7;
+      LODWORD(v6[7].mNext) = vfptr;
+      v6[8].mNext = (UFG::allocator::free_link *)m_pPointer;
     }
     else
     {
@@ -6961,28 +6104,24 @@ void __fastcall GameStatEventTask::Begin(GameStatEventTask *this, ActionContext 
 // RVA: 0x304590
 char __fastcall GameStatDistanceTask::Update(GameStatDistanceTask *this, float timestep)
 {
-  float v2; // xmm7_4
-  UFG::SimObject *v4; // rcx
-  UFG::TransformNodeComponent *v5; // rbx
-  __m128 v6; // xmm1
+  UFG::SimObject *m_pPointer; // rcx
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rbx
+  __m128 y_low; // xmm1
   UFG::GameStatTracker *v7; // rax
 
-  v2 = timestep;
-  if ( LOBYTE(this->m_Track[1].vfptr)
-    && LocalPlayer != (UFG::SimObjectCharacter *)this->m_pActionContext->mSimObject.m_pPointer )
-  {
+  if ( LOBYTE(this->m_Track[1].vfptr) && LocalPlayer != this->m_pActionContext->mSimObject.m_pPointer )
     return 0;
-  }
-  v4 = this->m_pActionContext->mSimObject.m_pPointer;
-  if ( v4 )
-    v5 = v4->m_pTransformNodeComponent;
+  m_pPointer = this->m_pActionContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
+    m_pTransformNodeComponent = m_pPointer->m_pTransformNodeComponent;
   else
-    v5 = 0i64;
-  UFG::TransformNodeComponent::UpdateWorldTransform(v5);
-  v6 = (__m128)LODWORD(v5->mWorldVelocity.y);
-  v6.m128_f32[0] = (float)(v6.m128_f32[0] * v6.m128_f32[0]) + (float)(v5->mWorldVelocity.x * v5->mWorldVelocity.x);
+    m_pTransformNodeComponent = 0i64;
+  UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+  y_low = (__m128)LODWORD(m_pTransformNodeComponent->mWorldVelocity.y);
+  y_low.m128_f32[0] = (float)(y_low.m128_f32[0] * y_low.m128_f32[0])
+                    + (float)(m_pTransformNodeComponent->mWorldVelocity.x * m_pTransformNodeComponent->mWorldVelocity.x);
   v7 = UFG::GameStatTracker::Instance();
-  UFG::GameStatTracker::ApplyDelta(v7, TotalDistanceWalked, (float)(COERCE_FLOAT(_mm_sqrt_ps(v6)) * v2) * 0.001);
+  UFG::GameStatTracker::ApplyDelta(v7, TotalDistanceWalked, (float)(_mm_sqrt_ps(y_low).m128_f32[0] * timestep) * 0.001);
   return 1;
 }
 
@@ -6990,15 +6129,14 @@ char __fastcall GameStatDistanceTask::Update(GameStatDistanceTask *this, float t
 // RVA: 0x2EE460
 void __fastcall GameStatSpecialMoveTask::Begin(GameStatSpecialMoveTask *this, ActionContext *action_context)
 {
-  ActionContext *v2; // rsi
-  ActionNodePlayable *v3; // rcx
+  ActionNodePlayable *m_currentNode; // rcx
   __int64 v4; // rax
   UFG::OSuiteLeaderboardManager *v5; // rax
-  UFG::OSuiteLeaderboardData *v6; // rax
-  UFG::SimObjectGame *v7; // rbx
-  unsigned __int16 v8; // cx
-  UFG::HealthComponent *v9; // rdi
-  UFG::SimComponent *v10; // rax
+  UFG::OSuiteLeaderboardData *LeaderboardDataUsingLeaderboardName; // rax
+  UFG::SimObjectGame *Target; // rbx
+  __int16 m_Flags; // cx
+  UFG::HealthComponent *m_pComponent; // rdi
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   UFG::allocator::free_link *v11; // rax
   UFG::allocator::free_link *v12; // r9
   UFG::SimObject *v13; // r8
@@ -7008,101 +6146,89 @@ void __fastcall GameStatSpecialMoveTask::Begin(GameStatSpecialMoveTask *this, Ac
   UFG::CopSystem *v17; // rax
   UFG::allocator::free_link *v18; // rax
   UFG::allocator::free_link *v19; // r9
-  UFG::SimObject *v20; // r8
-  const char *v21; // rdx
-  unsigned int v22; // ecx
+  UFG::SimObject *m_pPointer; // r8
+  const char *mName; // rdx
+  unsigned int mUID; // ecx
   UFG::allocator::free_link *v23; // rax
   UFG::CopSystem *v24; // rax
   UFG::CopSystem *v25; // rax
-  UFG::qSymbol path; // [rsp+50h] [rbp+8h]
-  UFG::qSymbol *pIsCop; // [rsp+60h] [rbp+18h]
-  UFG::qWiseSymbol result; // [rsp+68h] [rbp+20h]
+  UFG::qSymbol path; // [rsp+50h] [rbp+8h] BYREF
+  UFG::qSymbol *pIsCop; // [rsp+60h] [rbp+18h] BYREF
+  UFG::qWiseSymbol result; // [rsp+68h] [rbp+20h] BYREF
 
-  v2 = action_context;
-  if ( !LOBYTE(this->m_Track[1].vfptr)
-    || LocalPlayer == (UFG::SimObjectCharacter *)action_context->mSimObject.m_pPointer )
+  if ( !LOBYTE(this->m_Track[1].vfptr) || LocalPlayer == action_context->mSimObject.m_pPointer )
   {
-    v3 = action_context->mActionController->m_currentNode;
-    if ( v3 )
+    m_currentNode = action_context->mActionController->m_currentNode;
+    if ( m_currentNode )
     {
-      v4 = ((__int64 (__cdecl *)(ActionNodePlayable *))v3->vfptr[1].SetResourceOwner)(v3);
+      v4 = ((__int64 (__fastcall *)(ActionNodePlayable *))m_currentNode->vfptr[1].SetResourceOwner)(m_currentNode);
       if ( v4 )
       {
-        if ( (UFG::SimObjectCharacter *)v2->mSimObject.m_pPointer != LocalPlayer )
+        if ( action_context->mSimObject.m_pPointer != LocalPlayer )
         {
           UFG::qSymbol::qSymbol(&result, *(_DWORD *)(v4 + 40));
           pIsCop = &path;
           path.mUID = result.mUID;
           UFG::GameStatAction::Player::RecordSpecialMove((UFG::qSymbol)&path);
           v5 = UFG::OSuiteLeaderboardManager::Instance();
-          v6 = UFG::OSuiteLeaderboardManager::GetLeaderboardDataUsingLeaderboardName(v5, "StatAwardsEnvironmentalist");
-          UFG::DataSynchronizer::ApplyDeltaToGlobalSnapshot(v6, 1);
-          v7 = (UFG::SimObjectGame *)UFG::getTarget((UFG::SimObject *)&LocalPlayer->vfptr, eTARGET_TYPE_LAST_GRAPPLE);
-          if ( v7
-            || (v7 = (UFG::SimObjectGame *)UFG::getTarget((UFG::SimObject *)&LocalPlayer->vfptr, eTARGET_TYPE_GRAPPLE)) != 0i64 )
+          LeaderboardDataUsingLeaderboardName = UFG::OSuiteLeaderboardManager::GetLeaderboardDataUsingLeaderboardName(
+                                                  v5,
+                                                  "StatAwardsEnvironmentalist");
+          UFG::DataSynchronizer::ApplyDeltaToGlobalSnapshot(LeaderboardDataUsingLeaderboardName, 1);
+          Target = (UFG::SimObjectGame *)UFG::getTarget(LocalPlayer, eTARGET_TYPE_LAST_GRAPPLE);
+          if ( Target || (Target = (UFG::SimObjectGame *)UFG::getTarget(LocalPlayer, eTARGET_TYPE_GRAPPLE)) != 0i64 )
           {
-            v8 = v7->m_Flags;
-            if ( (v8 >> 14) & 1 )
+            m_Flags = Target->m_Flags;
+            if ( (m_Flags & 0x4000) != 0 )
             {
-              v9 = (UFG::HealthComponent *)v7->m_Components.p[6].m_pComponent;
+              m_pComponent = (UFG::HealthComponent *)Target->m_Components.p[6].m_pComponent;
             }
-            else if ( (v8 & 0x8000u) == 0 )
+            else if ( m_Flags >= 0 )
             {
-              if ( (v8 >> 13) & 1 )
-              {
-                v10 = UFG::SimObjectGame::GetComponentOfTypeHK(v7, UFG::HealthComponent::_TypeUID);
-              }
-              else if ( (v8 >> 12) & 1 )
-              {
-                v10 = UFG::SimObjectGame::GetComponentOfTypeHK(v7, UFG::HealthComponent::_TypeUID);
-              }
+              if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+                ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(Target, UFG::HealthComponent::_TypeUID);
               else
-              {
-                v10 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v7->vfptr, UFG::HealthComponent::_TypeUID);
-              }
-              v9 = (UFG::HealthComponent *)v10;
+                ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(Target, UFG::HealthComponent::_TypeUID);
+              m_pComponent = (UFG::HealthComponent *)ComponentOfTypeHK;
             }
             else
             {
-              v9 = (UFG::HealthComponent *)v7->m_Components.p[6].m_pComponent;
+              m_pComponent = (UFG::HealthComponent *)Target->m_Components.p[6].m_pComponent;
             }
             LOBYTE(pIsCop) = 0;
             LOBYTE(path.mUID) = 0;
-            UFG::GameStatAction::MissionScoring::DeduceFaction(
-              (UFG::SimObject *)&v7->vfptr,
-              (bool *)&pIsCop,
-              (bool *)&path);
+            UFG::GameStatAction::MissionScoring::DeduceFaction(Target, (bool *)&pIsCop, (bool *)&path);
             if ( LOBYTE(path.mUID) )
             {
-              if ( v9 )
+              if ( m_pComponent )
               {
-                if ( v9->m_bIsKnockedOut || UFG::HealthComponent::GetIsKilled(v9) )
+                if ( m_pComponent->m_bIsKnockedOut || UFG::HealthComponent::GetIsKilled(m_pComponent) )
                 {
                   v18 = UFG::qMalloc(0x48ui64, "GameStatEventTask", 0i64);
                   v19 = v18;
                   if ( v18 )
                   {
-                    v20 = v2->mSimObject.m_pPointer;
-                    v21 = UFG::gGameStatEventChannel.mName;
-                    v22 = UFG::gGameStatEventChannel.mUID;
+                    m_pPointer = action_context->mSimObject.m_pPointer;
+                    mName = UFG::gGameStatEventChannel.mName;
+                    mUID = UFG::gGameStatEventChannel.mUID;
                     v23 = v18 + 1;
                     v23->mNext = v23;
                     v23[1].mNext = v23;
                     v19->mNext = (UFG::allocator::free_link *)&UFG::Event::`vftable;
-                    LODWORD(v19[3].mNext) = v22;
-                    v19[4].mNext = (UFG::allocator::free_link *)v21;
+                    LODWORD(v19[3].mNext) = mUID;
+                    v19[4].mNext = (UFG::allocator::free_link *)mName;
                     v19->mNext = (UFG::allocator::free_link *)&UFG::GameStatEvent::`vftable;
                     LODWORD(v19[7].mNext) = 59;
-                    v19[8].mNext = (UFG::allocator::free_link *)v20;
+                    v19[8].mNext = (UFG::allocator::free_link *)m_pPointer;
                   }
                   else
                   {
                     v19 = 0i64;
                   }
                   UFG::EventDispatcher::DispatchEvent(&UFG::EventDispatcher::mInstance, (UFG::Event *)v19);
-                  UFG::GameStatAction::MissionScoring::LogCopEvent(COP_PEDESTRIAN_KILL, 0, &customWorldMapCaption);
+                  UFG::GameStatAction::MissionScoring::LogCopEvent(COP_PEDESTRIAN_KILL, 0, &customCaption);
                   v24 = UFG::CopSystem::Instance();
-                  v24->vfptr[111].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)&v24->vfptr, 6u);
+                  v24->vfptr[111].__vecDelDtor(v24, 6u);
                 }
                 else
                 {
@@ -7110,7 +6236,7 @@ void __fastcall GameStatSpecialMoveTask::Begin(GameStatSpecialMoveTask *this, Ac
                   v12 = v11;
                   if ( v11 )
                   {
-                    v13 = v2->mSimObject.m_pPointer;
+                    v13 = action_context->mSimObject.m_pPointer;
                     v14 = UFG::gGameStatEventChannel.mName;
                     v15 = UFG::gGameStatEventChannel.mUID;
                     v16 = v11 + 1;
@@ -7128,21 +6254,21 @@ void __fastcall GameStatSpecialMoveTask::Begin(GameStatSpecialMoveTask *this, Ac
                     v12 = 0i64;
                   }
                   UFG::EventDispatcher::DispatchEvent(&UFG::EventDispatcher::mInstance, (UFG::Event *)v12);
-                  UFG::GameStatAction::MissionScoring::LogCopEvent(COP_PEDESTRIAN_HIT, 0, &customWorldMapCaption);
+                  UFG::GameStatAction::MissionScoring::LogCopEvent(COP_PEDESTRIAN_HIT, 0, &customCaption);
                   v17 = UFG::CopSystem::Instance();
-                  v17->vfptr[111].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)&v17->vfptr, 2u);
+                  v17->vfptr[111].__vecDelDtor(v17, 2u);
                 }
               }
             }
             else if ( (_BYTE)pIsCop )
             {
-              UFG::GameStatAction::MissionScoring::LogCopEvent(0, 0, &customWorldMapCaption);
+              UFG::GameStatAction::MissionScoring::LogCopEvent(COP_KILL, 0, &customCaption);
               v25 = UFG::CopSystem::Instance();
-              v25->vfptr[111].__vecDelDtor((UFG::qSafePointerNode<UFG::EncounterBase> *)&v25->vfptr, 7u);
+              v25->vfptr[111].__vecDelDtor(v25, 7u);
             }
             else
             {
-              UFG::GameStatAction::MissionScoring::LogTriadEvent(TRIAD_KILL_ENVIRONMENTAL, 0, &customWorldMapCaption);
+              UFG::GameStatAction::MissionScoring::LogTriadEvent(TRIAD_KILL_ENVIRONMENTAL, 0, &customCaption);
             }
           }
         }
@@ -7155,57 +6281,47 @@ void __fastcall GameStatSpecialMoveTask::Begin(GameStatSpecialMoveTask *this, Ac
 // RVA: 0x2F2B80
 void __fastcall CarOccupantsActionTask::Begin(TargetFocusOverrideTask *this, ActionContext *pContext)
 {
-  ITaskVtbl *v2; // rax
+  ITaskVtbl *vfptr; // rax
 
-  v2 = this->vfptr;
+  vfptr = this->vfptr;
   this->m_pContext = pContext;
-  ((void (*)(void))v2->Update)();
+  ((void (*)(void))vfptr->Update)();
 }
 
 // File Line: 3573
 // RVA: 0x3039C0
 char __fastcall AccuracyOverrideTask::Update(AccuracyOverrideTask *this, float timeDelta)
 {
-  AccuracyOverrideTask *v2; // rbx
-  UFG::SimObjectGame *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::SimComponent *v5; // rcx
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rcx
   UFG::SimComponent *v6; // rax
-  ITrack *v7; // rax
+  ITrack *m_Track; // rax
 
-  v2 = this;
-  v3 = (UFG::SimObjectGame *)this->m_pContext->mSimObject.m_pPointer;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectGame *)this->m_pContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v4 = v3->m_Flags;
-    if ( (v4 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v5 = v3->m_Components.p[47].m_pComponent;
+      m_pComponent = m_pPointer->m_Components.p[47].m_pComponent;
     }
     else
     {
-      if ( (v4 & 0x8000u) == 0 )
-      {
-        if ( (v4 >> 13) & 1 )
-          v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::AimingBaseComponent::_TypeUID);
-        else
-          v6 = (v4 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::AimingBaseComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::AimingBaseComponent::_TypeUID);
-      }
-      else
-      {
-        v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::AimingBaseComponent::_TypeUID);
-      }
-      v5 = v6;
+      v6 = m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+         ? UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::AimingBaseComponent::_TypeUID)
+         : UFG::SimObject::GetComponentOfType(m_pPointer, UFG::AimingBaseComponent::_TypeUID);
+      m_pComponent = v6;
     }
-    if ( v5 )
+    if ( m_pComponent )
     {
-      v7 = v2->m_Track;
-      if ( BYTE4(v7[1].vfptr) )
+      m_Track = this->m_Track;
+      if ( BYTE4(m_Track[1].vfptr) )
       {
-        HIDWORD(v5[2].m_BoundComponentHandles.mNode.mPrev) = 1056964608;
+        HIDWORD(m_pComponent[2].m_BoundComponentHandles.mNode.mPrev) = 1056964608;
         return 1;
       }
-      HIDWORD(v5[2].m_BoundComponentHandles.mNode.mPrev) = v7[1].vfptr;
+      HIDWORD(m_pComponent[2].m_BoundComponentHandles.mNode.mPrev) = m_Track[1].vfptr;
     }
   }
   return 1;
@@ -7215,39 +6331,28 @@ char __fastcall AccuracyOverrideTask::Update(AccuracyOverrideTask *this, float t
 // RVA: 0x2FDD50
 void __fastcall AccuracyOverrideTask::End(AccuracyOverrideTask *this)
 {
-  UFG::SimObjectGame *v1; // rcx
-  unsigned __int16 v2; // dx
-  UFG::SimComponent *v3; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rax
 
-  v1 = (UFG::SimObjectGame *)this->m_pContext->mSimObject.m_pPointer;
-  if ( v1 )
+  m_pPointer = (UFG::SimObjectGame *)this->m_pContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v2 = v1->m_Flags;
-    if ( (v2 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v3 = v1->m_Components.p[47].m_pComponent;
+      m_pComponent = m_pPointer->m_Components.p[47].m_pComponent;
     }
-    else if ( (v2 & 0x8000u) == 0 )
+    else if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v2 >> 13) & 1 )
-      {
-        v3 = UFG::SimObjectGame::GetComponentOfTypeHK(v1, UFG::AimingBaseComponent::_TypeUID);
-      }
-      else if ( (v2 >> 12) & 1 )
-      {
-        v3 = UFG::SimObjectGame::GetComponentOfTypeHK(v1, UFG::AimingBaseComponent::_TypeUID);
-      }
-      else
-      {
-        v3 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v1->vfptr, UFG::AimingBaseComponent::_TypeUID);
-      }
+      m_pComponent = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::AimingBaseComponent::_TypeUID);
     }
     else
     {
-      v3 = UFG::SimObjectGame::GetComponentOfTypeHK(v1, UFG::AimingBaseComponent::_TypeUID);
+      m_pComponent = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::AimingBaseComponent::_TypeUID);
     }
-    if ( v3 )
-      HIDWORD(v3[2].m_BoundComponentHandles.mNode.mPrev) = -1082130432;
+    if ( m_pComponent )
+      HIDWORD(m_pComponent[2].m_BoundComponentHandles.mNode.mPrev) = -1082130432;
   }
 }
 
@@ -7255,40 +6360,29 @@ void __fastcall AccuracyOverrideTask::End(AccuracyOverrideTask *this)
 // RVA: 0x2E7F50
 void __fastcall AccuracyEnsureMissTask::Begin(AccuracyEnsureMissTask *this, ActionContext *pContext)
 {
-  UFG::SimObjectGame *v2; // r8
-  unsigned __int16 v3; // cx
-  UFG::SimComponent *v4; // rax
+  UFG::SimObjectGame *m_pPointer; // r8
+  __int16 m_Flags; // cx
+  UFG::SimComponent *m_pComponent; // rax
 
   this->m_pContext = pContext;
-  v2 = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
-  if ( v2 )
+  m_pPointer = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v3 = v2->m_Flags;
-    if ( (v3 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v4 = v2->m_Components.p[47].m_pComponent;
+      m_pComponent = m_pPointer->m_Components.p[47].m_pComponent;
     }
-    else if ( (v3 & 0x8000u) == 0 )
+    else if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v3 >> 13) & 1 )
-      {
-        v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::AimingBaseComponent::_TypeUID);
-      }
-      else if ( (v3 >> 12) & 1 )
-      {
-        v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::AimingBaseComponent::_TypeUID);
-      }
-      else
-      {
-        v4 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::AimingBaseComponent::_TypeUID);
-      }
+      m_pComponent = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::AimingBaseComponent::_TypeUID);
     }
     else
     {
-      v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::AimingBaseComponent::_TypeUID);
+      m_pComponent = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::AimingBaseComponent::_TypeUID);
     }
-    if ( v4 )
-      LOBYTE(v4[2].m_BoundComponentHandles.mNode.mNext) = 1;
+    if ( m_pComponent )
+      LOBYTE(m_pComponent[2].m_BoundComponentHandles.mNode.mNext) = 1;
   }
 }
 
@@ -7296,39 +6390,28 @@ void __fastcall AccuracyEnsureMissTask::Begin(AccuracyEnsureMissTask *this, Acti
 // RVA: 0x2FDCC0
 void __fastcall AccuracyEnsureMissTask::End(AccuracyEnsureMissTask *this)
 {
-  UFG::SimObjectGame *v1; // rcx
-  unsigned __int16 v2; // dx
-  UFG::SimComponent *v3; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rax
 
-  v1 = (UFG::SimObjectGame *)this->m_pContext->mSimObject.m_pPointer;
-  if ( v1 )
+  m_pPointer = (UFG::SimObjectGame *)this->m_pContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v2 = v1->m_Flags;
-    if ( (v2 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v3 = v1->m_Components.p[47].m_pComponent;
+      m_pComponent = m_pPointer->m_Components.p[47].m_pComponent;
     }
-    else if ( (v2 & 0x8000u) == 0 )
+    else if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v2 >> 13) & 1 )
-      {
-        v3 = UFG::SimObjectGame::GetComponentOfTypeHK(v1, UFG::AimingBaseComponent::_TypeUID);
-      }
-      else if ( (v2 >> 12) & 1 )
-      {
-        v3 = UFG::SimObjectGame::GetComponentOfTypeHK(v1, UFG::AimingBaseComponent::_TypeUID);
-      }
-      else
-      {
-        v3 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v1->vfptr, UFG::AimingBaseComponent::_TypeUID);
-      }
+      m_pComponent = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::AimingBaseComponent::_TypeUID);
     }
     else
     {
-      v3 = UFG::SimObjectGame::GetComponentOfTypeHK(v1, UFG::AimingBaseComponent::_TypeUID);
+      m_pComponent = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::AimingBaseComponent::_TypeUID);
     }
-    if ( v3 )
-      LOBYTE(v3[2].m_BoundComponentHandles.mNode.mNext) = 0;
+    if ( m_pComponent )
+      LOBYTE(m_pComponent[2].m_BoundComponentHandles.mNode.mNext) = 0;
   }
 }
 
@@ -7336,160 +6419,130 @@ void __fastcall AccuracyEnsureMissTask::End(AccuracyEnsureMissTask *this)
 // RVA: 0x2F3320
 void __fastcall ReticleSizeOverrideTask::Begin(ReticleSizeOverrideTask *this, ActionContext *pContext)
 {
-  ReticleSizeOverrideTask *v2; // rbx
-  UFG::SimObjectCharacter *v3; // rcx
-  UFG::AimingPlayerComponent *v4; // r8
-  unsigned __int16 v5; // dx
-  UFG::AimingPlayerComponent *v6; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::AimingPlayerComponent> *v7; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v8; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v9; // rax
+  UFG::SimObjectCharacter *m_pPointer; // rcx
+  UFG::SimComponent *v4; // r8
+  __int16 m_Flags; // dx
+  UFG::AimingPlayerComponent *ComponentOfTypeHK; // rax
+  UFG::qSafePointer<UFG::SimComponent,UFG::AimingPlayerComponent> *p_m_AimingPlayerComponent; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v10; // rax
   UFG::SimComponent *v11; // rdx
 
-  v2 = this;
-  v3 = (UFG::SimObjectCharacter *)pContext->mSimObject.m_pPointer;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectCharacter *)pContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v5 = v3->m_Flags;
-    if ( (v5 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v6 = UFG::SimObjectCharacter::GetComponent<UFG::AimingPlayerComponent>(v3);
+      ComponentOfTypeHK = UFG::SimObjectCharacter::GetComponent<UFG::AimingPlayerComponent>(m_pPointer);
     }
-    else if ( (v5 & 0x8000u) == 0 )
+    else if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v5 >> 13) & 1 )
-      {
-        v6 = (UFG::AimingPlayerComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                             (UFG::SimObjectGame *)&v3->vfptr,
-                                             UFG::AimingPlayerComponent::_TypeUID);
-      }
-      else if ( (v5 >> 12) & 1 )
-      {
-        v6 = (UFG::AimingPlayerComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                             (UFG::SimObjectGame *)&v3->vfptr,
-                                             UFG::AimingPlayerComponent::_TypeUID);
-      }
-      else
-      {
-        v6 = (UFG::AimingPlayerComponent *)UFG::SimObject::GetComponentOfType(
-                                             (UFG::SimObject *)&v3->vfptr,
-                                             UFG::AimingPlayerComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = (UFG::AimingPlayerComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                          m_pPointer,
+                                                          UFG::AimingPlayerComponent::_TypeUID);
     }
     else
     {
-      v6 = (UFG::AimingPlayerComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                           (UFG::SimObjectGame *)&v3->vfptr,
-                                           UFG::AimingPlayerComponent::_TypeUID);
+      ComponentOfTypeHK = (UFG::AimingPlayerComponent *)UFG::SimObject::GetComponentOfType(
+                                                          m_pPointer,
+                                                          UFG::AimingPlayerComponent::_TypeUID);
     }
-    v4 = v6;
+    v4 = ComponentOfTypeHK;
   }
   else
   {
     v4 = 0i64;
   }
-  v7 = &v2->m_AimingPlayerComponent;
-  if ( v2->m_AimingPlayerComponent.m_pPointer )
+  p_m_AimingPlayerComponent = &this->m_AimingPlayerComponent;
+  if ( this->m_AimingPlayerComponent.m_pPointer )
   {
-    v8 = v7->mPrev;
-    v9 = v2->m_AimingPlayerComponent.mNext;
-    v8->mNext = v9;
-    v9->mPrev = v8;
-    v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v7->mPrev;
-    v2->m_AimingPlayerComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->m_AimingPlayerComponent.mPrev;
+    mPrev = p_m_AimingPlayerComponent->mPrev;
+    mNext = this->m_AimingPlayerComponent.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_m_AimingPlayerComponent->mPrev = p_m_AimingPlayerComponent;
+    this->m_AimingPlayerComponent.mNext = &this->m_AimingPlayerComponent;
   }
-  v2->m_AimingPlayerComponent.m_pPointer = (UFG::SimComponent *)&v4->vfptr;
+  this->m_AimingPlayerComponent.m_pPointer = v4;
   if ( v4 )
   {
     v10 = v4->m_SafePointerList.mNode.mPrev;
-    v10->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v7->mPrev;
-    v7->mPrev = v10;
-    v2->m_AimingPlayerComponent.mNext = &v4->m_SafePointerList.mNode;
-    v4->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v7->mPrev;
+    v10->mNext = p_m_AimingPlayerComponent;
+    p_m_AimingPlayerComponent->mPrev = v10;
+    this->m_AimingPlayerComponent.mNext = &v4->m_SafePointerList.mNode;
+    v4->m_SafePointerList.mNode.mPrev = p_m_AimingPlayerComponent;
   }
-  v11 = v2->m_AimingPlayerComponent.m_pPointer;
+  v11 = this->m_AimingPlayerComponent.m_pPointer;
   if ( v11 )
-    LODWORD(v11[7].m_BoundComponentHandles.mNode.mPrev) = v2->m_Track[1].vfptr;
+    LODWORD(v11[7].m_BoundComponentHandles.mNode.mPrev) = this->m_Track[1].vfptr;
 }
 
 // File Line: 3640
 // RVA: 0x300100
 void __fastcall ReticleSizeOverrideTask::End(ReticleSizeOverrideTask *this)
 {
-  UFG::SimComponent *v1; // rax
+  UFG::SimComponent *m_pPointer; // rax
 
-  v1 = this->m_AimingPlayerComponent.m_pPointer;
-  if ( v1 )
-    LODWORD(v1[7].m_BoundComponentHandles.mNode.mPrev) = -1082130432;
+  m_pPointer = this->m_AimingPlayerComponent.m_pPointer;
+  if ( m_pPointer )
+    LODWORD(m_pPointer[7].m_BoundComponentHandles.mNode.mPrev) = -1082130432;
 }
 
 // File Line: 3662
 // RVA: 0x2FE4A0
 void __fastcall CharacterStatModifyIntTask::End(CharacterStatModifyIntTask *this)
 {
-  CharacterStatModifyIntTask *v1; // rbx
-  UFG::SimObjectCVBase *v2; // rcx
-  unsigned __int16 v3; // dx
-  UFG::SimObjectCharacterPropertiesComponent *v4; // rax
-  signed int *v5; // rdx
-  signed int v6; // er8
-  int v7; // er8
+  UFG::SimObjectCVBase *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimObjectCharacterPropertiesComponent *ComponentOfTypeHK; // rax
+  int *m_Track; // rdx
+  int v6; // r8d
+  int v7; // r8d
 
-  v1 = this;
-  v2 = (UFG::SimObjectCVBase *)this->m_pContext->mSimObject.m_pPointer;
-  if ( v2 )
+  m_pPointer = (UFG::SimObjectCVBase *)this->m_pContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v3 = v2->m_Flags;
-    if ( (v3 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
     {
-      v4 = UFG::SimObjectCVBase::GetComponent<UFG::SimObjectCharacterPropertiesComponent>(v2);
+      ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::SimObjectCharacterPropertiesComponent>(m_pPointer);
     }
-    else if ( (v3 & 0x8000u) == 0 )
+    else if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v3 >> 13) & 1 )
-      {
-        v4 = (UFG::SimObjectCharacterPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                             (UFG::SimObjectGame *)&v2->vfptr,
-                                                             UFG::SimObjectCharacterPropertiesComponent::_TypeUID);
-      }
-      else if ( (v3 >> 12) & 1 )
-      {
-        v4 = (UFG::SimObjectCharacterPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                             (UFG::SimObjectGame *)&v2->vfptr,
-                                                             UFG::SimObjectCharacterPropertiesComponent::_TypeUID);
-      }
-      else
-      {
-        v4 = (UFG::SimObjectCharacterPropertiesComponent *)UFG::SimObject::GetComponentOfType(
-                                                             (UFG::SimObject *)&v2->vfptr,
-                                                             UFG::SimObjectCharacterPropertiesComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = (UFG::SimObjectCharacterPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                          m_pPointer,
+                                                                          UFG::SimObjectCharacterPropertiesComponent::_TypeUID);
     }
     else
     {
-      v4 = UFG::SimObjectCVBase::GetComponent<UFG::SimObjectCharacterPropertiesComponent>(v2);
+      ComponentOfTypeHK = (UFG::SimObjectCharacterPropertiesComponent *)UFG::SimObject::GetComponentOfType(
+                                                                          m_pPointer,
+                                                                          UFG::SimObjectCharacterPropertiesComponent::_TypeUID);
     }
-    if ( v4 )
+    if ( ComponentOfTypeHK )
     {
-      v5 = (signed int *)v1->m_Track;
-      v6 = v5[15];
+      m_Track = (int *)this->m_Track;
+      v6 = m_Track[15];
       if ( v6 )
       {
         v7 = v6 - 1;
         if ( v7 )
         {
           if ( v7 == 1 )
-            v4->m_CharacterStats[v5[14]].m_fStat = (float)v5[16];
+            ComponentOfTypeHK->m_CharacterStats[m_Track[14]].m_fStat = (float)m_Track[16];
         }
         else
         {
-          v4->m_CharacterStats[v5[14]].m_fStat = (float)v5[16] * v4->m_CharacterStats[v5[14]].m_fStat;
+          ComponentOfTypeHK->m_CharacterStats[m_Track[14]].m_fStat = (float)m_Track[16]
+                                                                   * ComponentOfTypeHK->m_CharacterStats[m_Track[14]].m_fStat;
         }
       }
       else
       {
-        v4->m_CharacterStats[v5[14]].m_fStat = (float)v5[16] + v4->m_CharacterStats[v5[14]].m_fStat;
+        ComponentOfTypeHK->m_CharacterStats[m_Track[14]].m_fStat = (float)m_Track[16]
+                                                                 + ComponentOfTypeHK->m_CharacterStats[m_Track[14]].m_fStat;
       }
     }
   }
@@ -7497,49 +6550,36 @@ void __fastcall CharacterStatModifyIntTask::End(CharacterStatModifyIntTask *this
 
 // File Line: 3693
 // RVA: 0x2F05E0
-void __fastcall MotionIntentionSetRelativeToPlayerTask::Begin(MotionIntentionSetRelativeToPlayerTask *this, ActionContext *action_context)
+void __fastcall MotionIntentionSetRelativeToPlayerTask::Begin(
+        MotionIntentionSetRelativeToPlayerTask *this,
+        ActionContext *action_context)
 {
-  MotionIntentionSetRelativeToPlayerTask *v2; // rbx
-  UFG::SimObjectCVBase *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::AICharacterControllerComponent *v5; // rax
+  UFG::SimObjectCVBase *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::AICharacterControllerComponent *ComponentOfTypeHK; // rax
 
-  v2 = this;
-  v3 = (UFG::SimObjectCVBase *)action_context->mSimObject.m_pPointer;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectCVBase *)action_context->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v4 = v3->m_Flags;
-    if ( (v4 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
     {
-      v5 = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerComponent>(v3);
+      ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerComponent>(m_pPointer);
     }
-    else if ( (v4 & 0x8000u) == 0 )
+    else if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v4 >> 13) & 1 )
-      {
-        v5 = (UFG::AICharacterControllerComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                      (UFG::SimObjectGame *)&v3->vfptr,
-                                                      UFG::AICharacterControllerComponent::_TypeUID);
-      }
-      else if ( (v4 >> 12) & 1 )
-      {
-        v5 = (UFG::AICharacterControllerComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                      (UFG::SimObjectGame *)&v3->vfptr,
-                                                      UFG::AICharacterControllerComponent::_TypeUID);
-      }
-      else
-      {
-        v5 = (UFG::AICharacterControllerComponent *)UFG::SimObject::GetComponentOfType(
-                                                      (UFG::SimObject *)&v3->vfptr,
-                                                      UFG::AICharacterControllerComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = (UFG::AICharacterControllerComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                   m_pPointer,
+                                                                   UFG::AICharacterControllerComponent::_TypeUID);
     }
     else
     {
-      v5 = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerComponent>(v3);
+      ComponentOfTypeHK = (UFG::AICharacterControllerComponent *)UFG::SimObject::GetComponentOfType(
+                                                                   m_pPointer,
+                                                                   UFG::AICharacterControllerComponent::_TypeUID);
     }
-    if ( v5 )
-      v5->m_PlayerRelativeMotionIntention = LOBYTE(v2->m_Track[1].vfptr) != 0;
+    if ( ComponentOfTypeHK )
+      ComponentOfTypeHK->m_PlayerRelativeMotionIntention = LOBYTE(this->m_Track[1].vfptr) != 0;
   }
 }
 
@@ -7547,48 +6587,29 @@ void __fastcall MotionIntentionSetRelativeToPlayerTask::Begin(MotionIntentionSet
 // RVA: 0x2EE860
 void __fastcall GunConsumeAmmoTask::Begin(GunConsumeAmmoTask *this, ActionContext *context)
 {
-  GunConsumeAmmoTask *v2; // rdi
-  UFG::SimObjectGame *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::GunComponent *v5; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::GunComponent *ComponentOfTypeHK; // rax
   UFG::GunComponent *v6; // rbx
-  int v7; // eax
+  int ClipAmmo; // eax
 
-  v2 = this;
-  v3 = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v4 = v3->m_Flags;
-    if ( (v4 >> 14) & 1 )
-    {
-      v5 = (UFG::GunComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::GunComponent::_TypeUID);
-    }
-    else if ( (v4 & 0x8000u) == 0 )
-    {
-      if ( (v4 >> 13) & 1 )
-      {
-        v5 = (UFG::GunComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::GunComponent::_TypeUID);
-      }
-      else if ( (v4 >> 12) & 1 )
-      {
-        v5 = (UFG::GunComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::GunComponent::_TypeUID);
-      }
-      else
-      {
-        v5 = (UFG::GunComponent *)UFG::SimObject::GetComponentOfType(
-                                    (UFG::SimObject *)&v3->vfptr,
-                                    UFG::GunComponent::_TypeUID);
-      }
-    }
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+      ComponentOfTypeHK = (UFG::GunComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                 m_pPointer,
+                                                 UFG::GunComponent::_TypeUID);
     else
+      ComponentOfTypeHK = (UFG::GunComponent *)UFG::SimObject::GetComponentOfType(
+                                                 m_pPointer,
+                                                 UFG::GunComponent::_TypeUID);
+    v6 = ComponentOfTypeHK;
+    if ( ComponentOfTypeHK )
     {
-      v5 = (UFG::GunComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::GunComponent::_TypeUID);
-    }
-    v6 = v5;
-    if ( v5 )
-    {
-      v7 = UFG::GunComponent::GetClipAmmo(v5);
-      UFG::GunComponent::SetClipAmmo(v6, v7 - LODWORD(v2->m_Track[1].vfptr));
+      ClipAmmo = UFG::GunComponent::GetClipAmmo(ComponentOfTypeHK);
+      UFG::GunComponent::SetClipAmmo(v6, ClipAmmo - LODWORD(this->m_Track[1].vfptr));
     }
   }
 }
@@ -7597,80 +6618,78 @@ void __fastcall GunConsumeAmmoTask::Begin(GunConsumeAmmoTask *this, ActionContex
 // RVA: 0x2F3900
 void __fastcall SetStateFlagTask::Begin(SetStateFlagTask *this, ActionContext *context)
 {
-  UFG::qSafePointer<UFG::SimComponent,UFG::SimObjectCharacterPropertiesComponent> *v2; // rbx
-  ActionContext *v3; // rsi
-  SetStateFlagTask *v4; // rdi
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v5; // r8
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v6; // rax
-  UFG::SimObjectGame *v7; // rcx
-  unsigned __int16 v8; // dx
-  UFG::SimComponent *v9; // rdx
+  UFG::qSafePointer<UFG::SimComponent,UFG::SimObjectCharacterPropertiesComponent> *p_m_pSOCPC; // rbx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // r8
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rdx
   UFG::SimComponent *v10; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v11; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v12; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v13; // rax
   UFG::SimComponent *v14; // rdx
 
-  v2 = &this->m_pSOCPC;
-  v3 = context;
-  v4 = this;
+  p_m_pSOCPC = &this->m_pSOCPC;
   if ( this->m_pSOCPC.m_pPointer )
   {
-    v5 = v2->mPrev;
-    v6 = this->m_pSOCPC.mNext;
-    v5->mNext = v6;
-    v6->mPrev = v5;
-    v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-    this->m_pSOCPC.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&this->m_pSOCPC.mPrev;
+    mPrev = p_m_pSOCPC->mPrev;
+    mNext = this->m_pSOCPC.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_m_pSOCPC->mPrev = p_m_pSOCPC;
+    this->m_pSOCPC.mNext = &this->m_pSOCPC;
   }
   this->m_pSOCPC.m_pPointer = 0i64;
   this->m_pContext = context;
-  v7 = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
-  if ( v7 )
+  m_pPointer = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v8 = v7->m_Flags;
-    if ( (v8 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v9 = v7->m_Components.p[3].m_pComponent;
+      m_pComponent = m_pPointer->m_Components.p[3].m_pComponent;
     }
-    else if ( (v8 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v8 >> 13) & 1 )
+      if ( (m_Flags & 0x2000) != 0 )
       {
-        v9 = v7->m_Components.p[4].m_pComponent;
+        m_pComponent = m_pPointer->m_Components.p[4].m_pComponent;
       }
       else
       {
-        v10 = (v8 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v7, UFG::SimObjectPropertiesComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v7->vfptr, UFG::SimObjectPropertiesComponent::_TypeUID);
-        v9 = v10;
+        v10 = (m_Flags & 0x1000) != 0
+            ? UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::SimObjectPropertiesComponent::_TypeUID)
+            : UFG::SimObject::GetComponentOfType(m_pPointer, UFG::SimObjectPropertiesComponent::_TypeUID);
+        m_pComponent = v10;
       }
     }
     else
     {
-      v9 = v7->m_Components.p[3].m_pComponent;
+      m_pComponent = m_pPointer->m_Components.p[3].m_pComponent;
     }
-    if ( v9 && LODWORD(v9[1].m_SafePointerList.mNode.mNext) == 1 )
+    if ( m_pComponent && LODWORD(m_pComponent[1].m_SafePointerList.mNode.mNext) == 1 )
     {
-      if ( v2->m_pPointer )
+      if ( p_m_pSOCPC->m_pPointer )
       {
-        v11 = v2->mPrev;
-        v12 = v2->mNext;
+        v11 = p_m_pSOCPC->mPrev;
+        v12 = p_m_pSOCPC->mNext;
         v11->mNext = v12;
         v12->mPrev = v11;
-        v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-        v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
+        p_m_pSOCPC->mPrev = p_m_pSOCPC;
+        p_m_pSOCPC->mNext = p_m_pSOCPC;
       }
-      v2->m_pPointer = v9;
-      v13 = v9->m_SafePointerList.mNode.mPrev;
-      v13->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-      v2->mPrev = v13;
-      v2->mNext = &v9->m_SafePointerList.mNode;
-      v9->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-      v14 = v4->m_pSOCPC.m_pPointer;
+      p_m_pSOCPC->m_pPointer = m_pComponent;
+      v13 = m_pComponent->m_SafePointerList.mNode.mPrev;
+      v13->mNext = p_m_pSOCPC;
+      p_m_pSOCPC->mPrev = v13;
+      p_m_pSOCPC->mNext = &m_pComponent->m_SafePointerList.mNode;
+      m_pComponent->m_SafePointerList.mNode.mPrev = p_m_pSOCPC;
+      v14 = this->m_pSOCPC.m_pPointer;
       if ( v14 )
       {
-        if ( v3->mActionController )
-          *((_BYTE *)&v14[2].m_BoundComponentHandles.mNode.mPrev + SLODWORD(v4->m_Track[1].vfptr) + 1) = 1;
+        if ( context->mActionController )
+          *((_BYTE *)&v14[2].m_BoundComponentHandles.mNode.mPrev + SLODWORD(this->m_Track[1].vfptr) + 1) = 1;
       }
     }
   }
@@ -7680,55 +6699,45 @@ void __fastcall SetStateFlagTask::Begin(SetStateFlagTask *this, ActionContext *c
 // RVA: 0x300230
 void __fastcall SetStateFlagTask::End(SetStateFlagTask *this)
 {
-  UFG::SimComponent *v1; // rdx
+  UFG::SimComponent *m_pPointer; // rdx
 
-  v1 = this->m_pSOCPC.m_pPointer;
-  if ( v1 )
-    *((_BYTE *)&v1[2].m_BoundComponentHandles.mNode.mPrev + SLODWORD(this->m_Track[1].vfptr) + 1) = 0;
+  m_pPointer = this->m_pSOCPC.m_pPointer;
+  if ( m_pPointer )
+    *((_BYTE *)&m_pPointer[2].m_BoundComponentHandles.mNode.mPrev + SLODWORD(this->m_Track[1].vfptr) + 1) = 0;
 }
 
 // File Line: 3776
 // RVA: 0x30CE80
 void __fastcall drawStickDValue(float *values, int valueCount, UFG::qColour *colour)
 {
-  UFG::qColour *v3; // rbp
-  float *v4; // rdi
   __int64 v5; // rbx
   float v6; // xmm6_4
   float v7; // xmm8_4
   float v8; // xmm7_4
   __int64 v9; // rsi
-  float v10; // xmm9_4
+  float i; // xmm9_4
   float v11; // xmm1_4
-  Render::DebugDrawContext *v12; // rax
-  UFG::qVector3 p1; // [rsp+40h] [rbp-68h]
-  UFG::qVector3 p0; // [rsp+50h] [rbp-58h]
+  Render::DebugDrawContext *Context; // rax
+  UFG::qVector3 p1; // [rsp+40h] [rbp-68h] BYREF
+  UFG::qVector3 p0; // [rsp+50h] [rbp-58h] BYREF
 
-  v3 = colour;
-  v4 = values;
   v5 = 0i64;
   v6 = sDrawDebugH * 0.5;
   v7 = sDrawDebugOrgX;
   v8 = sDrawDebugOrgY + (float)(sDrawDebugH * 0.5);
   v9 = valueCount - 1;
-  v10 = sDrawDebugW * 0.0099999998;
-  if ( valueCount - 1 > 0 )
+  for ( i = sDrawDebugW * 0.0099999998; v5 < v9; ++v5 )
   {
-    do
-    {
-      p0.x = v7;
-      p0.z = 0.0;
-      p1.z = 0.0;
-      v11 = (float)(v6 * v4[v5 + 1]) + v8;
-      p0.y = (float)(v6 * v4[v5]) + v8;
-      p1.y = v11;
-      v7 = v10 + v7;
-      p1.x = v7;
-      v12 = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 1u);
-      Render::DebugDrawContext::DrawLine(v12, &p0, &p1, v3, 0i64, 0i64, 0);
-      ++v5;
-    }
-    while ( v5 < v9 );
+    p0.x = v7;
+    p0.z = 0.0;
+    p1.z = 0.0;
+    v11 = (float)(v6 * values[v5 + 1]) + v8;
+    p0.y = (float)(v6 * values[v5]) + v8;
+    p1.y = v11;
+    v7 = i + v7;
+    p1.x = v7;
+    Context = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 1u);
+    Render::DebugDrawContext::DrawLine(Context, &p0, &p1, colour, 0i64, 0i64, 0);
   }
 }
 
@@ -7736,13 +6745,13 @@ void __fastcall drawStickDValue(float *values, int valueCount, UFG::qColour *col
 // RVA: 0x30CFC0
 void drawStickValues(void)
 {
-  UFG::qColour v0; // [rsp+30h] [rbp-78h]
-  UFG::qColour v1; // [rsp+40h] [rbp-68h]
-  UFG::qColour v2; // [rsp+50h] [rbp-58h]
-  UFG::qColour v3; // [rsp+60h] [rbp-48h]
-  UFG::qColour v4; // [rsp+70h] [rbp-38h]
-  UFG::qColour v5; // [rsp+80h] [rbp-28h]
-  UFG::qColour v6; // [rsp+90h] [rbp-18h]
+  UFG::qColour v0; // [rsp+30h] [rbp-78h] BYREF
+  UFG::qColour v1; // [rsp+40h] [rbp-68h] BYREF
+  UFG::qColour v2; // [rsp+50h] [rbp-58h] BYREF
+  UFG::qColour v3; // [rsp+60h] [rbp-48h] BYREF
+  UFG::qColour v4; // [rsp+70h] [rbp-38h] BYREF
+  UFG::qColour v5; // [rsp+80h] [rbp-28h] BYREF
+  UFG::qColour v6; // [rsp+90h] [rbp-18h] BYREF
 
   if ( sDrawDebug )
   {
@@ -7789,324 +6798,267 @@ __int64 dynamic_initializer_for__sWalkActionReq__()
 // RVA: 0x2E0B80
 void __fastcall ReadControllerInputTask::ReadControllerInputTask(ReadControllerInputTask *this)
 {
-  UFG::qNode<ITask,ITask> *v1; // rax
-  float v2; // xmm1_4
-  UFG::qSafePointer<UFG::SimComponent,UFG::AICharacterControllerComponent> *v3; // [rsp+28h] [rbp+10h]
-  UFG::qSafePointer<UFG::SimComponent,UFG::AimingBaseComponent> *v4; // [rsp+28h] [rbp+10h]
-  UFG::qSafePointer<UFG::SimComponent,UFG::TargetingSystemPedPlayerComponent> *v5; // [rsp+28h] [rbp+10h]
+  float y; // xmm1_4
 
-  v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
-  v1->mPrev = v1;
-  v1->mNext = v1;
+  this->mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->mNext = &this->UFG::qNode<ITask,ITask>;
   this->vfptr = (ITaskVtbl *)&ITask::`vftable;
   this->vfptr = (ITaskVtbl *)&Task<ReadControllerInputTrack>::`vftable;
   this->vfptr = (ITaskVtbl *)&ReadControllerInputTask::`vftable;
-  v3 = &this->m_pAICharacterControllerComponent;
-  v3->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v3->mPrev;
-  v3->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v3->mPrev;
+  this->m_pAICharacterControllerComponent.mPrev = &this->m_pAICharacterControllerComponent;
+  this->m_pAICharacterControllerComponent.mNext = &this->m_pAICharacterControllerComponent;
   this->m_pAICharacterControllerComponent.m_pPointer = 0i64;
-  v4 = &this->m_pAimingBaseComponent;
-  v4->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v4->mPrev;
-  v4->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v4->mPrev;
+  this->m_pAimingBaseComponent.mPrev = &this->m_pAimingBaseComponent;
+  this->m_pAimingBaseComponent.mNext = &this->m_pAimingBaseComponent;
   this->m_pAimingBaseComponent.m_pPointer = 0i64;
-  v5 = &this->m_pTargetingSystemPedPlayerComponent;
-  v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v5->mPrev;
-  v5->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v5->mPrev;
+  this->m_pTargetingSystemPedPlayerComponent.mPrev = &this->m_pTargetingSystemPedPlayerComponent;
+  this->m_pTargetingSystemPedPlayerComponent.mNext = &this->m_pTargetingSystemPedPlayerComponent;
   this->m_pTargetingSystemPedPlayerComponent.m_pPointer = 0i64;
   this->m_pContext = 0i64;
-  v2 = UFG::qVector2::msZero.y;
+  y = UFG::qVector2::msZero.y;
   this->mLockedPadModified.x = UFG::qVector2::msZero.x;
-  this->mLockedPadModified.y = v2;
+  this->mLockedPadModified.y = y;
 }
 
 // File Line: 3824
 // RVA: 0x2E4C90
 void __fastcall ReadControllerInputTask::~ReadControllerInputTask(ReadControllerInputTask *this)
 {
-  ReadControllerInputTask *v1; // r8
-  UFG::qSafePointer<UFG::SimComponent,UFG::TargetingSystemPedPlayerComponent> *v2; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v3; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v4; // rax
+  UFG::qSafePointer<UFG::SimComponent,UFG::TargetingSystemPedPlayerComponent> *p_m_pTargetingSystemPedPlayerComponent; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v5; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v6; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::AimingBaseComponent> *v7; // rdx
+  UFG::qSafePointer<UFG::SimComponent,UFG::AimingBaseComponent> *p_m_pAimingBaseComponent; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v8; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v9; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v10; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v11; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::AICharacterControllerComponent> *v12; // rdx
+  UFG::qSafePointer<UFG::SimComponent,UFG::AICharacterControllerComponent> *p_m_pAICharacterControllerComponent; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v13; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v14; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v15; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v16; // rax
-  UFG::qNode<ITask,ITask> *v17; // rdx
-  UFG::qNode<ITask,ITask> *v18; // rcx
-  UFG::qNode<ITask,ITask> *v19; // rax
+  UFG::qNode<ITask,ITask> *v17; // rcx
+  UFG::qNode<ITask,ITask> *v18; // rax
 
-  v1 = this;
   this->vfptr = (ITaskVtbl *)&ReadControllerInputTask::`vftable;
-  v2 = &this->m_pTargetingSystemPedPlayerComponent;
+  p_m_pTargetingSystemPedPlayerComponent = &this->m_pTargetingSystemPedPlayerComponent;
   if ( this->m_pTargetingSystemPedPlayerComponent.m_pPointer )
   {
-    v3 = v2->mPrev;
-    v4 = v2->mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-    v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
+    mPrev = p_m_pTargetingSystemPedPlayerComponent->mPrev;
+    mNext = p_m_pTargetingSystemPedPlayerComponent->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_m_pTargetingSystemPedPlayerComponent->mPrev = p_m_pTargetingSystemPedPlayerComponent;
+    p_m_pTargetingSystemPedPlayerComponent->mNext = p_m_pTargetingSystemPedPlayerComponent;
   }
-  v2->m_pPointer = 0i64;
-  v5 = v2->mPrev;
-  v6 = v2->mNext;
+  p_m_pTargetingSystemPedPlayerComponent->m_pPointer = 0i64;
+  v5 = p_m_pTargetingSystemPedPlayerComponent->mPrev;
+  v6 = p_m_pTargetingSystemPedPlayerComponent->mNext;
   v5->mNext = v6;
   v6->mPrev = v5;
-  v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v7 = &v1->m_pAimingBaseComponent;
-  if ( v1->m_pAimingBaseComponent.m_pPointer )
+  p_m_pTargetingSystemPedPlayerComponent->mPrev = p_m_pTargetingSystemPedPlayerComponent;
+  p_m_pTargetingSystemPedPlayerComponent->mNext = p_m_pTargetingSystemPedPlayerComponent;
+  p_m_pAimingBaseComponent = &this->m_pAimingBaseComponent;
+  if ( this->m_pAimingBaseComponent.m_pPointer )
   {
-    v8 = v7->mPrev;
-    v9 = v1->m_pAimingBaseComponent.mNext;
+    v8 = p_m_pAimingBaseComponent->mPrev;
+    v9 = this->m_pAimingBaseComponent.mNext;
     v8->mNext = v9;
     v9->mPrev = v8;
-    v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v7->mPrev;
-    v1->m_pAimingBaseComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->m_pAimingBaseComponent.mPrev;
+    p_m_pAimingBaseComponent->mPrev = p_m_pAimingBaseComponent;
+    this->m_pAimingBaseComponent.mNext = &this->m_pAimingBaseComponent;
   }
-  v1->m_pAimingBaseComponent.m_pPointer = 0i64;
-  v10 = v7->mPrev;
-  v11 = v1->m_pAimingBaseComponent.mNext;
+  this->m_pAimingBaseComponent.m_pPointer = 0i64;
+  v10 = p_m_pAimingBaseComponent->mPrev;
+  v11 = this->m_pAimingBaseComponent.mNext;
   v10->mNext = v11;
   v11->mPrev = v10;
-  v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v7->mPrev;
-  v1->m_pAimingBaseComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->m_pAimingBaseComponent.mPrev;
-  v12 = &v1->m_pAICharacterControllerComponent;
-  if ( v1->m_pAICharacterControllerComponent.m_pPointer )
+  p_m_pAimingBaseComponent->mPrev = p_m_pAimingBaseComponent;
+  this->m_pAimingBaseComponent.mNext = &this->m_pAimingBaseComponent;
+  p_m_pAICharacterControllerComponent = &this->m_pAICharacterControllerComponent;
+  if ( this->m_pAICharacterControllerComponent.m_pPointer )
   {
-    v13 = v12->mPrev;
-    v14 = v1->m_pAICharacterControllerComponent.mNext;
+    v13 = p_m_pAICharacterControllerComponent->mPrev;
+    v14 = this->m_pAICharacterControllerComponent.mNext;
     v13->mNext = v14;
     v14->mPrev = v13;
-    v12->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v12->mPrev;
-    v1->m_pAICharacterControllerComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->m_pAICharacterControllerComponent.mPrev;
+    p_m_pAICharacterControllerComponent->mPrev = p_m_pAICharacterControllerComponent;
+    this->m_pAICharacterControllerComponent.mNext = &this->m_pAICharacterControllerComponent;
   }
-  v1->m_pAICharacterControllerComponent.m_pPointer = 0i64;
-  v15 = v12->mPrev;
-  v16 = v1->m_pAICharacterControllerComponent.mNext;
+  this->m_pAICharacterControllerComponent.m_pPointer = 0i64;
+  v15 = p_m_pAICharacterControllerComponent->mPrev;
+  v16 = this->m_pAICharacterControllerComponent.mNext;
   v15->mNext = v16;
   v16->mPrev = v15;
-  v12->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v12->mPrev;
-  v1->m_pAICharacterControllerComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->m_pAICharacterControllerComponent.mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
-  v17 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
-  v18 = v1->mPrev;
-  v19 = v1->mNext;
-  v18->mNext = v19;
-  v19->mPrev = v18;
-  v17->mPrev = v17;
-  v17->mNext = v17;
+  p_m_pAICharacterControllerComponent->mPrev = p_m_pAICharacterControllerComponent;
+  this->m_pAICharacterControllerComponent.mNext = &this->m_pAICharacterControllerComponent;
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  v17 = this->mPrev;
+  v18 = this->mNext;
+  v17->mNext = v18;
+  v18->mPrev = v17;
+  this->mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->mNext = &this->UFG::qNode<ITask,ITask>;
 }
 
 // File Line: 3829
 // RVA: 0x2F2F30
 void __fastcall ReadControllerInputTask::Begin(ReadControllerInputTask *this, ActionContext *context)
 {
-  ReadControllerInputTask *v2; // rsi
-  UFG::SimObjectCVBase *v3; // rcx
-  UFG::SimComponent *v4; // rbx
-  ActionContext *v5; // rdi
-  UFG::AICharacterControllerComponent *v6; // r8
-  unsigned __int16 v7; // dx
-  UFG::AICharacterControllerComponent *v8; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::AICharacterControllerComponent> *v9; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v10; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v11; // rax
+  UFG::SimObjectCVBase *m_pPointer; // rcx
+  UFG::SimComponent *m_pComponent; // rbx
+  UFG::SimComponent *v6; // r8
+  __int16 m_Flags; // dx
+  UFG::AICharacterControllerComponent *ComponentOfTypeHK; // rax
+  UFG::qSafePointer<UFG::SimComponent,UFG::AICharacterControllerComponent> *p_m_pAICharacterControllerComponent; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v12; // rax
   UFG::SimObjectCVBase *v13; // rcx
-  UFG::TargetingSystemPedPlayerComponent *v14; // r8
-  unsigned __int16 v15; // dx
-  UFG::TargetingSystemPedPlayerComponent *v16; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::TargetingSystemPedPlayerComponent> *v17; // rdx
+  UFG::SimComponent *v14; // r8
+  __int16 v15; // dx
+  UFG::TargetingSystemPedPlayerComponent *ComponentOfType; // rax
+  UFG::qSafePointer<UFG::SimComponent,UFG::TargetingSystemPedPlayerComponent> *p_m_pTargetingSystemPedPlayerComponent; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v18; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v19; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v20; // rax
   UFG::SimObjectGame *v21; // rcx
-  unsigned __int16 v22; // dx
+  __int16 v22; // dx
   UFG::SimComponent *v23; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::AimingBaseComponent> *v24; // rdx
+  UFG::qSafePointer<UFG::SimComponent,UFG::AimingBaseComponent> *p_m_pAimingBaseComponent; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v25; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v26; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v27; // rax
 
-  v2 = this;
   this->m_pContext = context;
-  v3 = (UFG::SimObjectCVBase *)context->mSimObject.m_pPointer;
-  v4 = 0i64;
-  v5 = context;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectCVBase *)context->mSimObject.m_pPointer;
+  m_pComponent = 0i64;
+  if ( m_pPointer )
   {
-    v7 = v3->m_Flags;
-    if ( (v7 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
     {
-      v8 = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerComponent>(v3);
+      ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerComponent>(m_pPointer);
     }
-    else if ( (v7 & 0x8000u) == 0 )
+    else if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v7 >> 13) & 1 )
-      {
-        v8 = (UFG::AICharacterControllerComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                      (UFG::SimObjectGame *)&v3->vfptr,
-                                                      UFG::AICharacterControllerComponent::_TypeUID);
-      }
-      else if ( (v7 >> 12) & 1 )
-      {
-        v8 = (UFG::AICharacterControllerComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                      (UFG::SimObjectGame *)&v3->vfptr,
-                                                      UFG::AICharacterControllerComponent::_TypeUID);
-      }
-      else
-      {
-        v8 = (UFG::AICharacterControllerComponent *)UFG::SimObject::GetComponentOfType(
-                                                      (UFG::SimObject *)&v3->vfptr,
-                                                      UFG::AICharacterControllerComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = (UFG::AICharacterControllerComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                   m_pPointer,
+                                                                   UFG::AICharacterControllerComponent::_TypeUID);
     }
     else
     {
-      v8 = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerComponent>(v3);
+      ComponentOfTypeHK = (UFG::AICharacterControllerComponent *)UFG::SimObject::GetComponentOfType(
+                                                                   m_pPointer,
+                                                                   UFG::AICharacterControllerComponent::_TypeUID);
     }
-    v6 = v8;
+    v6 = ComponentOfTypeHK;
   }
   else
   {
     v6 = 0i64;
   }
-  v9 = &v2->m_pAICharacterControllerComponent;
-  if ( v2->m_pAICharacterControllerComponent.m_pPointer )
+  p_m_pAICharacterControllerComponent = &this->m_pAICharacterControllerComponent;
+  if ( this->m_pAICharacterControllerComponent.m_pPointer )
   {
-    v10 = v9->mPrev;
-    v11 = v2->m_pAICharacterControllerComponent.mNext;
-    v10->mNext = v11;
-    v11->mPrev = v10;
-    v9->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v9->mPrev;
-    v2->m_pAICharacterControllerComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->m_pAICharacterControllerComponent.mPrev;
+    mPrev = p_m_pAICharacterControllerComponent->mPrev;
+    mNext = this->m_pAICharacterControllerComponent.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_m_pAICharacterControllerComponent->mPrev = p_m_pAICharacterControllerComponent;
+    this->m_pAICharacterControllerComponent.mNext = &this->m_pAICharacterControllerComponent;
   }
-  v2->m_pAICharacterControllerComponent.m_pPointer = (UFG::SimComponent *)&v6->vfptr;
+  this->m_pAICharacterControllerComponent.m_pPointer = v6;
   if ( v6 )
   {
     v12 = v6->m_SafePointerList.mNode.mPrev;
-    v12->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v9->mPrev;
-    v9->mPrev = v12;
-    v2->m_pAICharacterControllerComponent.mNext = &v6->m_SafePointerList.mNode;
-    v6->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v9->mPrev;
+    v12->mNext = p_m_pAICharacterControllerComponent;
+    p_m_pAICharacterControllerComponent->mPrev = v12;
+    this->m_pAICharacterControllerComponent.mNext = &v6->m_SafePointerList.mNode;
+    v6->m_SafePointerList.mNode.mPrev = p_m_pAICharacterControllerComponent;
   }
-  v13 = (UFG::SimObjectCVBase *)v5->mSimObject.m_pPointer;
+  v13 = (UFG::SimObjectCVBase *)context->mSimObject.m_pPointer;
   if ( v13 )
   {
     v15 = v13->m_Flags;
-    if ( (v15 >> 14) & 1 )
+    if ( (v15 & 0x4000) != 0 || v15 < 0 )
     {
-      v16 = UFG::SimObjectCVBase::GetComponent<UFG::TargetingSystemPedPlayerComponent>(v13);
+      ComponentOfType = UFG::SimObjectCVBase::GetComponent<UFG::TargetingSystemPedPlayerComponent>(v13);
     }
-    else if ( (v15 & 0x8000u) == 0 )
+    else if ( (v15 & 0x2000) != 0 || (v15 & 0x1000) != 0 )
     {
-      if ( (v15 >> 13) & 1 )
-      {
-        v16 = (UFG::TargetingSystemPedPlayerComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                          (UFG::SimObjectGame *)&v13->vfptr,
-                                                          UFG::TargetingSystemPedPlayerComponent::_TypeUID);
-      }
-      else if ( (v15 >> 12) & 1 )
-      {
-        v16 = (UFG::TargetingSystemPedPlayerComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                          (UFG::SimObjectGame *)&v13->vfptr,
-                                                          UFG::TargetingSystemPedPlayerComponent::_TypeUID);
-      }
-      else
-      {
-        v16 = (UFG::TargetingSystemPedPlayerComponent *)UFG::SimObject::GetComponentOfType(
-                                                          (UFG::SimObject *)&v13->vfptr,
-                                                          UFG::TargetingSystemPedPlayerComponent::_TypeUID);
-      }
+      ComponentOfType = (UFG::TargetingSystemPedPlayerComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                    v13,
+                                                                    UFG::TargetingSystemPedPlayerComponent::_TypeUID);
     }
     else
     {
-      v16 = UFG::SimObjectCVBase::GetComponent<UFG::TargetingSystemPedPlayerComponent>(v13);
+      ComponentOfType = (UFG::TargetingSystemPedPlayerComponent *)UFG::SimObject::GetComponentOfType(
+                                                                    v13,
+                                                                    UFG::TargetingSystemPedPlayerComponent::_TypeUID);
     }
-    v14 = v16;
+    v14 = ComponentOfType;
   }
   else
   {
     v14 = 0i64;
   }
-  v17 = &v2->m_pTargetingSystemPedPlayerComponent;
-  if ( v2->m_pTargetingSystemPedPlayerComponent.m_pPointer )
+  p_m_pTargetingSystemPedPlayerComponent = &this->m_pTargetingSystemPedPlayerComponent;
+  if ( this->m_pTargetingSystemPedPlayerComponent.m_pPointer )
   {
-    v18 = v17->mPrev;
-    v19 = v2->m_pTargetingSystemPedPlayerComponent.mNext;
+    v18 = p_m_pTargetingSystemPedPlayerComponent->mPrev;
+    v19 = this->m_pTargetingSystemPedPlayerComponent.mNext;
     v18->mNext = v19;
     v19->mPrev = v18;
-    v17->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v17->mPrev;
-    v2->m_pTargetingSystemPedPlayerComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->m_pTargetingSystemPedPlayerComponent.mPrev;
+    p_m_pTargetingSystemPedPlayerComponent->mPrev = p_m_pTargetingSystemPedPlayerComponent;
+    this->m_pTargetingSystemPedPlayerComponent.mNext = &this->m_pTargetingSystemPedPlayerComponent;
   }
-  v2->m_pTargetingSystemPedPlayerComponent.m_pPointer = (UFG::SimComponent *)&v14->vfptr;
+  this->m_pTargetingSystemPedPlayerComponent.m_pPointer = v14;
   if ( v14 )
   {
     v20 = v14->m_SafePointerList.mNode.mPrev;
-    v20->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v17->mPrev;
-    v17->mPrev = v20;
-    v2->m_pTargetingSystemPedPlayerComponent.mNext = &v14->m_SafePointerList.mNode;
-    v14->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v17->mPrev;
+    v20->mNext = p_m_pTargetingSystemPedPlayerComponent;
+    p_m_pTargetingSystemPedPlayerComponent->mPrev = v20;
+    this->m_pTargetingSystemPedPlayerComponent.mNext = &v14->m_SafePointerList.mNode;
+    v14->m_SafePointerList.mNode.mPrev = p_m_pTargetingSystemPedPlayerComponent;
   }
-  v21 = (UFG::SimObjectGame *)v5->mSimObject.m_pPointer;
+  v21 = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
   if ( v21 )
   {
     v22 = v21->m_Flags;
-    if ( (v22 >> 14) & 1 )
+    if ( (v22 & 0x4000) != 0 )
     {
-      v4 = v21->m_Components.p[47].m_pComponent;
+      m_pComponent = v21->m_Components.p[47].m_pComponent;
     }
     else
     {
-      if ( (v22 & 0x8000u) == 0 )
-      {
-        if ( (v22 >> 13) & 1 )
-        {
-          v23 = UFG::SimObjectGame::GetComponentOfTypeHK(v21, UFG::AimingBaseComponent::_TypeUID);
-        }
-        else if ( (v22 >> 12) & 1 )
-        {
-          v23 = UFG::SimObjectGame::GetComponentOfTypeHK(v21, UFG::AimingBaseComponent::_TypeUID);
-        }
-        else
-        {
-          v23 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v21->vfptr, UFG::AimingBaseComponent::_TypeUID);
-        }
-      }
-      else
-      {
+      if ( v22 < 0 || (v22 & 0x2000) != 0 || (v22 & 0x1000) != 0 )
         v23 = UFG::SimObjectGame::GetComponentOfTypeHK(v21, UFG::AimingBaseComponent::_TypeUID);
-      }
-      v4 = v23;
+      else
+        v23 = UFG::SimObject::GetComponentOfType(v21, UFG::AimingBaseComponent::_TypeUID);
+      m_pComponent = v23;
     }
   }
-  v24 = &v2->m_pAimingBaseComponent;
-  if ( v2->m_pAimingBaseComponent.m_pPointer )
+  p_m_pAimingBaseComponent = &this->m_pAimingBaseComponent;
+  if ( this->m_pAimingBaseComponent.m_pPointer )
   {
-    v25 = v24->mPrev;
-    v26 = v2->m_pAimingBaseComponent.mNext;
+    v25 = p_m_pAimingBaseComponent->mPrev;
+    v26 = this->m_pAimingBaseComponent.mNext;
     v25->mNext = v26;
     v26->mPrev = v25;
-    v24->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v24->mPrev;
-    v2->m_pAimingBaseComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->m_pAimingBaseComponent.mPrev;
+    p_m_pAimingBaseComponent->mPrev = p_m_pAimingBaseComponent;
+    this->m_pAimingBaseComponent.mNext = &this->m_pAimingBaseComponent;
   }
-  v2->m_pAimingBaseComponent.m_pPointer = v4;
-  if ( v4 )
+  this->m_pAimingBaseComponent.m_pPointer = m_pComponent;
+  if ( m_pComponent )
   {
-    v27 = v4->m_SafePointerList.mNode.mPrev;
-    v27->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v24->mPrev;
-    v24->mPrev = v27;
-    v2->m_pAimingBaseComponent.mNext = &v4->m_SafePointerList.mNode;
-    v4->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v24->mPrev;
+    v27 = m_pComponent->m_SafePointerList.mNode.mPrev;
+    v27->mNext = p_m_pAimingBaseComponent;
+    p_m_pAimingBaseComponent->mPrev = v27;
+    this->m_pAimingBaseComponent.mNext = &m_pComponent->m_SafePointerList.mNode;
+    m_pComponent->m_SafePointerList.mNode.mPrev = p_m_pAimingBaseComponent;
   }
 }
 
@@ -8114,43 +7066,42 @@ void __fastcall ReadControllerInputTask::Begin(ReadControllerInputTask *this, Ac
 // RVA: 0x307EC0
 char __fastcall ReadControllerInputTask::Update(ReadControllerInputTask *this, float timeDelta)
 {
-  ActionContext *v2; // rax
-  ReadControllerInputTask *v3; // r14
+  ActionContext *m_pContext; // rax
   float v4; // xmm12_4
   UFG::ActiveAIEntityComponent *v5; // r13
-  Intention *v6; // r15
-  UFG::AICharacterControllerComponent *v7; // rax
-  __int64 v8; // rbx
+  Intention *p_m_Intention; // r15
+  UFG::AICharacterControllerComponent *m_pPointer; // rax
+  int m_ControllerID; // ebx
   UFG::Controller *v9; // rax
-  char v10; // r12
+  bool m_IsKeyboardController; // r12
   UFG::InputActionData *v11; // rax
-  float v12; // xmm0_4
-  __int64 v13; // r8
-  signed __int64 v14; // rdx
+  float mOnSeconds; // xmm0_4
+  __int64 m_EnumValue; // r8
+  __int64 v14; // rdx
   float v15; // xmm1_4
   UFG::InputActionData *v16; // rax
   float v17; // xmm0_4
   __int64 v18; // r8
-  signed __int64 v19; // rdx
+  __int64 v19; // rdx
   float v20; // xmm1_4
   UFG::InputActionData *v21; // rax
   UFG::InputActionDef *v22; // rdi
   __int64 v23; // r8
-  signed __int64 v24; // rdx
+  __int64 v24; // rdx
   float v25; // xmm1_4
   UFG::InputActionData *v26; // rcx
-  float v27; // xmm7_4
+  float AxisVelX; // xmm7_4
   UFG::InputActionData *v28; // rcx
-  float v29; // xmm0_4
+  float AxisVelY; // xmm0_4
   UFG::InputActionData *v30; // rax
   float v31; // xmm8_4
-  float v32; // xmm10_4
+  float mAxisPositionY; // xmm10_4
   float v33; // xmm10_4
-  __int128 v34; // xmm11
+  __int128 mAxisPositionX_low; // xmm11
   float v35; // xmm15_4
   float v36; // xmm7_4
-  float v37; // xmm4_4
-  __m128 v38; // xmm3
+  float x; // xmm4_4
+  __m128 y_low; // xmm3
   float v39; // xmm2_4
   float v40; // xmm5_4
   float v41; // xmm1_4
@@ -8160,11 +7111,11 @@ char __fastcall ReadControllerInputTask::Update(ReadControllerInputTask *this, f
   __m128 v45; // xmm1
   float v46; // xmm1_4
   __m128 v47; // xmm1
-  int v48; // er8
+  int v48; // r8d
   _DWORD *v49; // rcx
   int v50; // eax
   _DWORD *v51; // rdx
-  float v52; // xmm2_4
+  float y; // xmm2_4
   float v53; // xmm3_4
   _DWORD *v54; // rcx
   int v55; // eax
@@ -8177,15 +7128,15 @@ char __fastcall ReadControllerInputTask::Update(ReadControllerInputTask *this, f
   _DWORD *v62; // rdx
   float v63; // xmm1_4
   __int64 v64; // r8
-  signed __int64 v65; // rdx
+  __int64 v65; // rdx
   float v66; // xmm2_4
   __int64 v67; // r8
-  signed __int64 v68; // rdx
+  __int64 v68; // rdx
   float v69; // xmm1_4
   UFG::InputActionData *v70; // rax
   float v71; // xmm0_4
   __int64 v72; // r8
-  signed __int64 v73; // rdx
+  __int64 v73; // rdx
   float v74; // xmm1_4
   UFG::InputActionData *v75; // rdx
   __int64 v76; // r9
@@ -8193,154 +7144,154 @@ char __fastcall ReadControllerInputTask::Update(ReadControllerInputTask *this, f
   float v78; // xmm0_4
   float v79; // xmm1_4
   __int64 v80; // r8
-  float v81; // ST20_4
-  signed __int64 v82; // rdx
-  float v83; // xmm1_4
-  UFG::InputActionData *v84; // rax
-  float v85; // xmm0_4
-  __int64 v86; // r8
-  signed __int64 v87; // rdx
-  float v88; // xmm1_4
-  UFG::InputActionData *v89; // rax
-  float v90; // xmm0_4
-  __int64 v91; // r8
-  signed __int64 v92; // rdx
-  float v93; // xmm1_4
-  UFG::InputActionData *v94; // rax
-  UFG::SimObjectGame *v95; // rcx
-  UFG::TargetingSystemBaseComponent *v96; // rax
-  unsigned __int16 v97; // dx
-  bool v98; // zf
-  UFG::InputActionData *v99; // rax
-  float v100; // xmm0_4
-  __int64 v101; // rdx
-  signed __int64 v102; // r8
-  float v103; // xmm1_4
-  UFG::SimObjectGame *v104; // rcx
-  UFG::TargetingSystemBaseComponent *v105; // rax
-  unsigned __int16 v106; // dx
-  float v107; // xmm0_4
-  __int64 v108; // r8
-  signed __int64 v109; // rdx
-  float v110; // xmm1_4
-  UFG::InputActionData *v111; // rax
-  float v112; // xmm0_4
-  __int64 v113; // r9
-  signed __int64 v114; // r8
-  float v115; // xmm1_4
-  UFG::InputActionData *v116; // rax
-  float v117; // xmm0_4
-  __int64 v118; // r9
-  signed __int64 v119; // r8
-  float v120; // xmm1_4
-  UFG::InputActionData *v121; // rax
-  float v122; // xmm0_4
-  __int64 v123; // r9
+  __int64 v81; // rdx
+  float v82; // xmm1_4
+  UFG::InputActionData *v83; // rax
+  float v84; // xmm0_4
+  __int64 v85; // r8
+  __int64 v86; // rdx
+  float v87; // xmm1_4
+  UFG::InputActionData *v88; // rax
+  float v89; // xmm0_4
+  __int64 v90; // r8
+  __int64 v91; // rdx
+  float v92; // xmm1_4
+  UFG::InputActionData *v93; // rax
+  UFG::SimObjectGame *v94; // rcx
+  UFG::TargetingSystemBaseComponent *ComponentOfTypeHK; // rax
+  __int16 v96; // dx
+  bool v97; // zf
+  UFG::InputActionData *v98; // rax
+  float v99; // xmm0_4
+  __int64 v100; // rdx
+  __int64 v101; // r8
+  float v102; // xmm1_4
+  UFG::SimObjectGame *v103; // rcx
+  UFG::TargetingSystemBaseComponent *m_pComponent; // rax
+  __int16 m_Flags; // dx
+  float v106; // xmm0_4
+  __int64 v107; // r8
+  __int64 v108; // rdx
+  float v109; // xmm1_4
+  UFG::InputActionData *v110; // rax
+  float v111; // xmm0_4
+  __int64 v112; // r9
+  __int64 v113; // r8
+  float v114; // xmm1_4
+  UFG::InputActionData *v115; // rax
+  float v116; // xmm0_4
+  __int64 v117; // r9
+  __int64 v118; // r8
+  float v119; // xmm1_4
+  UFG::InputActionData *v120; // rax
+  float mAxisPositionX; // xmm0_4
+  __int64 v122; // r9
+  UFG::InputActionData *v123; // rax
   UFG::InputActionData *v124; // rax
-  UFG::InputActionData *v125; // rax
-  signed __int64 v126; // r8
-  float v127; // xmm1_4
-  UFG::InputActionData *v128; // rax
-  float v129; // xmm0_4
+  __int64 v125; // r8
+  float v126; // xmm1_4
+  UFG::InputActionData *v127; // rax
+  float v128; // xmm0_4
+  UFG::InputActionData *v129; // rax
   UFG::InputActionData *v130; // rax
-  UFG::InputActionData *v131; // rax
-  UFG::SimObjectGame *v132; // rcx
-  UFG::TargetingSystemBaseComponent *v133; // rax
-  unsigned __int16 v134; // dx
-  UFG::InputActionData *v135; // rax
-  float v136; // xmm1_4
-  UFG::InputActionData *v137; // rax
-  float v138; // xmm0_4
-  signed __int64 v139; // r8
-  float v140; // xmm1_4
-  UFG::InputActionData *v141; // rax
-  __int64 v142; // r8
-  signed __int64 v143; // rdx
-  float v144; // xmm1_4
-  UFG::InputActionData *v145; // rax
-  float v146; // xmm0_4
-  __int64 v147; // r8
-  signed __int64 v148; // rdx
-  float v149; // xmm1_4
-  UFG::InputActionData *v150; // rax
+  UFG::SimObjectGame *v131; // rcx
+  UFG::TargetingSystemBaseComponent *ComponentOfType; // rax
+  __int16 v133; // dx
+  UFG::InputActionData *v134; // rax
+  float v135; // xmm1_4
+  UFG::InputActionData *v136; // rax
+  float v137; // xmm0_4
+  __int64 v138; // r8
+  float v139; // xmm1_4
+  UFG::InputActionData *v140; // rax
+  __int64 v141; // r8
+  __int64 v142; // rdx
+  float v143; // xmm1_4
+  UFG::InputActionData *v144; // rax
+  float v145; // xmm0_4
+  __int64 v146; // r8
+  __int64 v147; // rdx
+  float v148; // xmm1_4
+  UFG::InputActionData *v149; // rax
+  UFG::InputActionData *v150; // rcx
   UFG::InputActionData *v151; // rcx
-  UFG::InputActionData *v152; // rcx
-  float v153; // xmm0_4
-  __int64 v154; // r8
-  signed __int64 v155; // rdx
-  float v156; // xmm1_4
+  float v152; // xmm0_4
+  __int64 v153; // r8
+  __int64 v154; // rdx
+  float v155; // xmm1_4
+  UFG::InputActionData *v156; // rax
   UFG::InputActionData *v157; // rax
   UFG::InputActionData *v158; // rax
-  UFG::InputActionData *v159; // rax
-  __int64 v160; // r8
-  signed __int64 v161; // rdx
-  float v162; // xmm1_4
-  UFG::InputActionData *v163; // rax
-  float v164; // xmm0_4
-  __int64 v165; // r8
-  signed __int64 v166; // rdx
-  float v167; // xmm1_4
-  UFG::InputActionData *v168; // rax
-  float v169; // xmm0_4
-  __int64 v170; // r8
-  signed __int64 v171; // rdx
-  float v172; // xmm1_4
-  UFG::InputActionData *v173; // rdx
-  __int64 v174; // r9
-  char v175; // cl
-  float v176; // xmm0_4
-  float v177; // xmm1_4
-  __int64 v178; // r8
-  signed __int64 v179; // rdx
-  float v180; // xmm1_4
+  __int64 v159; // r8
+  __int64 v160; // rdx
+  float v161; // xmm1_4
+  UFG::InputActionData *v162; // rax
+  float v163; // xmm0_4
+  __int64 v164; // r8
+  __int64 v165; // rdx
+  float v166; // xmm1_4
+  UFG::InputActionData *v167; // rax
+  float v168; // xmm0_4
+  __int64 v169; // r8
+  __int64 v170; // rdx
+  float v171; // xmm1_4
+  UFG::InputActionData *v172; // rdx
+  __int64 v173; // r9
+  char v174; // cl
+  float v175; // xmm0_4
+  float v176; // xmm1_4
+  __int64 v177; // r8
+  __int64 v178; // rdx
+  float v179; // xmm1_4
+  UFG::InputActionData *v180; // rax
   UFG::InputActionData *v181; // rax
   UFG::InputActionData *v182; // rax
-  UFG::InputActionData *v183; // rax
+  float v183; // xmm0_4
   float v184; // xmm1_4
   UFG::InputActionData *v185; // rax
   float v186; // xmm0_4
   __int64 v187; // r8
-  signed __int64 v188; // rdx
+  __int64 v188; // rdx
   float v189; // xmm1_4
   UFG::InputActionData *v190; // rax
   UFG::InputActionData *v191; // rax
   UFG::InputActionData *v192; // rax
   UFG::InputActionData *v193; // rax
   __int64 v194; // r8
-  signed __int64 v195; // rdx
+  __int64 v195; // rdx
   float v196; // xmm1_4
   UFG::InputActionData *v197; // rax
   __int64 v198; // r8
-  signed __int64 v199; // rdx
+  __int64 v199; // rdx
   float v200; // xmm1_4
   UFG::InputActionData *v201; // rax
   float v202; // xmm0_4
   __int64 v203; // r8
-  signed __int64 v204; // rdx
+  __int64 v204; // rdx
   float v205; // xmm1_4
   UFG::InputActionData *v206; // rax
   UFG::InputActionData *v207; // rax
   __int64 v208; // r8
-  signed __int64 v209; // rdx
+  __int64 v209; // rdx
   float v210; // xmm1_4
   UFG::InputActionData *v211; // rax
   UFG::InputActionData *v212; // rax
   __int64 v213; // r8
-  signed __int64 v214; // rdx
+  __int64 v214; // rdx
   float v215; // xmm1_4
   UFG::InputActionData *v216; // rax
   __int64 v217; // r8
-  signed __int64 v218; // rdx
+  __int64 v218; // rdx
   float v219; // xmm1_4
   UFG::InputActionData *v220; // rax
   float v221; // xmm0_4
   __int64 v222; // r8
-  signed __int64 v223; // rdx
+  __int64 v223; // rdx
   float v224; // xmm1_4
   UFG::InputActionData *v225; // rax
   __int64 v226; // rdx
   float v227; // xmm0_4
-  signed __int64 v228; // rsi
+  __int64 v228; // rsi
   float v229; // xmm1_4
   UFG::InputActionData *v230; // rax
   UFG::InputActionData *v231; // rax
@@ -8351,192 +7302,187 @@ char __fastcall ReadControllerInputTask::Update(ReadControllerInputTask *this, f
   float v236; // xmm11_4
   float v237; // xmm9_4
   float v238; // xmm8_4
-  UFG::BaseCameraComponent *v239; // rcx
-  UFG::GameCameraComponent *v240; // rax
+  UFG::BaseCameraComponent *mCurrentCamera; // rcx
+  UFG::GameCameraComponent *CurrentGameCamera; // rax
   UFG::GameCameraComponent *v241; // rdi
-  signed __int64 v242; // rcx
+  UFG::Camera *p_mCamera; // rcx
   UFG::BaseCameraComponent *v243; // rcx
-  int v244; // xmm9_4
+  int x_low; // xmm9_4
   int v245; // xmm10_4
-  int v246; // xmm8_4
+  int z_low; // xmm8_4
   float v247; // xmm13_4
   float v248; // xmm14_4
-  float v249; // xmm15_4
-  float v250; // xmm11_4
-  char v251; // di
-  UFG::qNode<UFG::Editor::View,UFG::Editor::View> **v252; // rax
-  UFG::qVector3 *v253; // rax
-  UFG::qNode<UFG::Editor::View,UFG::Editor::View> **v254; // rax
-  UFG::qVector3 *v255; // rax
-  UFG::SimComponent *v256; // rax
-  UFG::SimObject *v257; // rdi
-  UFG::TransformNodeComponent *v258; // rdi
-  int v259; // xmm4_4
-  float v260; // xmm7_4
-  int v261; // xmm6_4
-  UFG::SimObject *v262; // rdi
-  UFG::TransformNodeComponent *v263; // rdi
-  float v264; // xmm3_4
-  float v265; // xmm6_4
-  float v266; // xmm1_4
-  float v267; // xmm2_4
-  float v268; // xmm8_4
-  float v269; // xmm2_4
-  float v270; // xmm8_4
-  float v271; // xmm9_4
-  UFG::SimObjectCVBase *v272; // rcx
-  unsigned __int16 v273; // dx
-  UFG::ActiveAIEntityComponent *v274; // rax
-  char v275; // cl
-  float v276; // xmm1_4
-  float v277; // xmm2_4
-  float v278; // xmm1_4
-  float v279; // xmm2_4
-  float v280; // xmm1_4
-  float v281; // xmm6_4
+  float z; // xmm15_4
+  double v250; // xmm0_8
+  float v251; // xmm11_4
+  char v252; // di
+  UFG::qNode<UFG::Editor::View,UFG::Editor::View> **ActiveView; // rax
+  UFG::qVector3 *DirForward; // rax
+  UFG::qNode<UFG::Editor::View,UFG::Editor::View> **v255; // rax
+  UFG::qVector3 *Position; // rax
+  UFG::SimComponent *v257; // rax
+  UFG::SimObject *v258; // rdi
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rdi
+  int v260; // xmm4_4
+  float v261; // xmm7_4
+  int v262; // xmm6_4
+  UFG::SimObject *v263; // rdi
+  UFG::TransformNodeComponent *v264; // rdi
+  float v265; // xmm3_4
+  float v266; // xmm6_4
+  float v267; // xmm1_4
+  float v268; // xmm2_4
+  float v269; // xmm8_4
+  float v270; // xmm2_4
+  float v271; // xmm8_4
+  float v272; // xmm9_4
+  UFG::SimObjectCVBase *v273; // rcx
+  __int16 v274; // dx
+  UFG::ActiveAIEntityComponent *v275; // rax
+  char v276; // cl
+  float v277; // xmm1_4
+  float v278; // xmm2_4
+  float v279; // xmm1_4
+  float v280; // xmm2_4
+  float v281; // xmm1_4
   float v282; // xmm6_4
-  float v283; // xmm2_4
-  UFG::SimObjectCVBase *v284; // rcx
-  unsigned __int16 v285; // dx
-  UFG::CharacterAnimationComponent *v286; // rax
-  UFG::CharacterAnimationComponent *v287; // rdi
-  Creature *v288; // rcx
-  int v289; // eax
-  UFG::qVector3 *v290; // rax
-  float v291; // xmm1_4
-  float v292; // xmm2_4
-  float v293; // xmm0_4
-  UFG::SimComponent *v294; // rax
-  UFG::SimObject *v295; // rdi
-  UFG::TransformNodeComponent *v296; // rdi
-  float v297; // xmm1_4
-  float v298; // xmm2_4
-  float v299; // xmm0_4
-  float v300; // xmm1_4
-  float v301; // xmm7_4
-  float v302; // xmm2_4
-  float v303; // xmm1_4
-  float v304; // xmm0_4
-  float v305; // xmm2_4
-  UFG::SimObjectGame *v306; // rcx
-  unsigned __int16 v307; // dx
-  UFG::SimComponent *v308; // rax
-  float v309; // xmm1_4
-  float v310; // xmm0_4
-  float v311; // xmm15_4
-  UFG::InputActionData *v312; // rax
-  UFG::AICharacterControllerComponent *v313; // rbx
-  float v315; // [rsp+24h] [rbp-DCh]
-  float v316; // [rsp+28h] [rbp-D8h]
-  float v317; // [rsp+2Ch] [rbp-D4h]
-  Intention other; // [rsp+30h] [rbp-D0h]
-  UFG::qVector3 result; // [rsp+380h] [rbp+280h]
-  UFG::qMatrix44 dest; // [rsp+390h] [rbp+290h]
-  float v321; // [rsp+4C0h] [rbp+3C0h]
-  float fDeltaS; // [rsp+4C8h] [rbp+3C8h]
-  float v323; // [rsp+4D0h] [rbp+3D0h]
-  float v324; // [rsp+4D8h] [rbp+3D8h]
+  float v283; // xmm6_4
+  float v284; // xmm2_4
+  UFG::SimObjectCVBase *v285; // rcx
+  __int16 v286; // dx
+  UFG::CharacterAnimationComponent *v287; // rax
+  UFG::CharacterAnimationComponent *v288; // rdi
+  Creature *mCreature; // rcx
+  int BoneID; // eax
+  UFG::qVector3 *Translation; // rax
+  float v292; // xmm1_4
+  float v293; // xmm2_4
+  float v294; // xmm0_4
+  UFG::SimComponent *v295; // rax
+  UFG::SimObject *v296; // rdi
+  UFG::TransformNodeComponent *v297; // rdi
+  float v298; // xmm1_4
+  float v299; // xmm2_4
+  float v300; // xmm0_4
+  float v301; // xmm1_4
+  float v302; // xmm7_4
+  float v303; // xmm2_4
+  float v304; // xmm1_4
+  float v305; // xmm0_4
+  float v306; // xmm2_4
+  UFG::SimObjectGame *v307; // rcx
+  __int16 v308; // dx
+  UFG::SimComponent *v309; // rax
+  float v310; // xmm1_4
+  float v311; // xmm0_4
+  float v312; // xmm15_4
+  UFG::InputActionData *v313; // rax
+  UFG::AICharacterControllerComponent *v314; // rbx
+  float v316; // [rsp+20h] [rbp-E0h]
+  float v317; // [rsp+20h] [rbp-E0h]
+  float v318; // [rsp+24h] [rbp-DCh]
+  float v319; // [rsp+28h] [rbp-D8h]
+  float v320; // [rsp+2Ch] [rbp-D4h]
+  Intention other; // [rsp+30h] [rbp-D0h] BYREF
+  UFG::qVector3 v322; // [rsp+380h] [rbp+280h] BYREF
+  UFG::qMatrix44 dest; // [rsp+390h] [rbp+290h] BYREF
+  float v324; // [rsp+4C0h] [rbp+3C0h]
+  float v326; // [rsp+4D0h] [rbp+3D0h]
+  float v327; // [rsp+4D8h] [rbp+3D8h]
 
-  fDeltaS = timeDelta;
-  v2 = this->m_pContext;
-  v3 = this;
-  if ( v2 && (v2->mSimObject.m_pPointer->m_Flags >> 10) & 1 )
+  m_pContext = this->m_pContext;
+  if ( m_pContext && (m_pContext->mSimObject.m_pPointer->m_Flags & 0x400) != 0 )
     return 1;
   v4 = 0.0;
-  v323 = 0.0;
-  v321 = 0.0;
+  v326 = 0.0;
+  v324 = 0.0;
   Intention::Intention(&other);
   v5 = 0i64;
-  v6 = 0i64;
+  p_m_Intention = 0i64;
   Intention::Clear(&other);
-  v7 = (UFG::AICharacterControllerComponent *)v3->m_pAICharacterControllerComponent.m_pPointer;
-  LODWORD(v8) = 0;
-  if ( v7 )
+  m_pPointer = (UFG::AICharacterControllerComponent *)this->m_pAICharacterControllerComponent.m_pPointer;
+  m_ControllerID = 0;
+  if ( m_pPointer )
   {
-    LODWORD(v8) = v7->m_ControllerID;
-    v6 = &v7->m_Intention;
+    m_ControllerID = m_pPointer->m_ControllerID;
+    p_m_Intention = &m_pPointer->m_Intention;
   }
-  v9 = UFG::InputSystem::AcquireController(UFG::gInputSystem, v8);
-  v10 = 0;
+  v9 = UFG::InputSystem::AcquireController(UFG::gInputSystem, m_ControllerID);
+  m_IsKeyboardController = 0;
   if ( v9 )
-  {
-    v10 = 0;
-    if ( v9->m_IsKeyboardController )
-      v10 = 1;
-  }
-  v8 = (signed int)v8;
-  v11 = UFG::ActionDef_UIAcceptPressed.mDataPerController[(signed int)v8];
+    m_IsKeyboardController = v9->m_IsKeyboardController;
+  v11 = UFG::ActionDef_UIAcceptPressed.mDataPerController[m_ControllerID];
   if ( v11 && v11->mActionTrue )
   {
-    v12 = v11->mOnSeconds;
-    v13 = gActionRequest_Accept.m_EnumValue;
+    mOnSeconds = v11->mOnSeconds;
+    m_EnumValue = gActionRequest_Accept.m_EnumValue;
     v14 = 1i64 << (gActionRequest_Accept.m_EnumValue & 0x3F);
-    other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_Accept.m_EnumValue >> 6] |= v14;
-    v15 = (float)(signed int)(float)(v12 * 60.0);
+    other.mActionRequests.mBits[(__int64)(int)gActionRequest_Accept.m_EnumValue >> 6] |= v14;
+    v15 = (float)(int)(float)(mOnSeconds * 60.0);
     if ( v15 >= 255.0 )
       v15 = FLOAT_255_0;
-    other.mActionRequestChargeTimes[v13] = (signed int)v15;
+    other.mActionRequestChargeTimes[m_EnumValue] = (int)v15;
     other.mSignals |= v14;
   }
-  v16 = UFG::ActionDef_UIBackPressed.mDataPerController[v8];
+  v16 = UFG::ActionDef_UIBackPressed.mDataPerController[m_ControllerID];
   if ( v16 && v16->mActionTrue )
   {
     v17 = v16->mOnSeconds;
     v18 = gActionRequest_Cancel.m_EnumValue;
     v19 = 1i64 << (gActionRequest_Cancel.m_EnumValue & 0x3F);
-    other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_Cancel.m_EnumValue >> 6] |= v19;
-    v20 = (float)(signed int)(float)(v17 * 60.0);
+    other.mActionRequests.mBits[(__int64)(int)gActionRequest_Cancel.m_EnumValue >> 6] |= v19;
+    v20 = (float)(int)(float)(v17 * 60.0);
     if ( v20 >= 255.0 )
       v20 = FLOAT_255_0;
-    other.mActionRequestChargeTimes[v18] = (signed int)v20;
+    other.mActionRequestChargeTimes[v18] = (int)v20;
     other.mSignals |= v19;
   }
-  v21 = UFG::ActionDef_VehicleRamReload.mDataPerController[v8];
+  v21 = UFG::ActionDef_VehicleRamReload.mDataPerController[m_ControllerID];
   v22 = &UFG::ActionDef_MoveFwdBack;
   if ( v21 && v21->mActionTrue )
   {
     v23 = gActionRequest_VehicleRam.m_EnumValue;
     v24 = 1i64 << (gActionRequest_VehicleRam.m_EnumValue & 0x3F);
-    other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_VehicleRam.m_EnumValue >> 6] |= v24;
-    v25 = (float)(signed int)0.0;
+    other.mActionRequests.mBits[(__int64)(int)gActionRequest_VehicleRam.m_EnumValue >> 6] |= v24;
+    v25 = (float)(int)0.0;
     if ( v25 >= 255.0 )
       v25 = FLOAT_255_0;
     v22 = &UFG::ActionDef_Steer;
-    other.mActionRequestChargeTimes[v23] = (signed int)v25;
+    other.mActionRequestChargeTimes[v23] = (int)v25;
     other.mSignals |= v24;
   }
-  v26 = v22->mDataPerController[v8];
+  v26 = v22->mDataPerController[m_ControllerID];
   if ( v26 )
-    v27 = UFG::InputActionData::GetAxisVelX(v26);
+    AxisVelX = UFG::InputActionData::GetAxisVelX(v26);
   else
-    v27 = 0.0;
-  v28 = v22->mDataPerController[v8];
+    AxisVelX = 0.0;
+  v28 = v22->mDataPerController[m_ControllerID];
   if ( v28 )
-    v29 = UFG::InputActionData::GetAxisVelY(v28);
+    AxisVelY = UFG::InputActionData::GetAxisVelY(v28);
   else
-    v29 = 0.0;
-  v30 = v22->mDataPerController[v8];
-  v31 = fsqrt((float)(v29 * v29) + (float)(v27 * v27));
+    AxisVelY = 0.0;
+  v30 = v22->mDataPerController[m_ControllerID];
+  v31 = fsqrt((float)(AxisVelY * AxisVelY) + (float)(AxisVelX * AxisVelX));
   if ( v30 )
-    v32 = v30->mAxisPositionY;
+    mAxisPositionY = v30->mAxisPositionY;
   else
-    v32 = 0.0;
-  LODWORD(v33) = LODWORD(v32) ^ _xmm[0];
-  v316 = v33;
+    mAxisPositionY = 0.0;
+  LODWORD(v33) = LODWORD(mAxisPositionY) ^ _xmm[0];
+  v319 = v33;
   if ( v30 )
-    v34 = LODWORD(v30->mAxisPositionX);
+    mAxisPositionX_low = LODWORD(v30->mAxisPositionX);
   else
-    v34 = 0i64;
+    mAxisPositionX_low = 0i64;
   v35 = *(float *)&FLOAT_1_0;
-  v324 = *(float *)&v34;
+  v327 = *(float *)&mAxisPositionX_low;
   v36 = 0.0;
   if ( v31 > sSettleVel )
   {
-    v37 = v3->mLockedPadModified.x;
-    v38 = (__m128)LODWORD(v3->mLockedPadModified.y);
+    x = this->mLockedPadModified.x;
+    y_low = (__m128)LODWORD(this->mLockedPadModified.y);
     v36 = FLOAT_0_89999998;
-    v39 = *(float *)&v34 - v37;
-    v40 = v33 - v38.m128_f32[0];
+    v39 = *(float *)&mAxisPositionX_low - x;
+    v40 = v33 - y_low.m128_f32[0];
     v41 = (float)(v40 * v40) + (float)(v39 * v39);
     if ( v41 == 0.0 )
       v42 = 0.0;
@@ -8544,19 +7490,19 @@ char __fastcall ReadControllerInputTask::Update(ReadControllerInputTask *this, f
       v42 = 1.0 / fsqrt(v41);
     v43 = v39 * v42;
     v44 = v40 * v42;
-    v45 = (__m128)LODWORD(v3->mLockedPadModified.y);
-    v45.m128_f32[0] = (float)(v38.m128_f32[0] * v38.m128_f32[0]) + (float)(v37 * v37);
+    v45 = (__m128)LODWORD(this->mLockedPadModified.y);
+    v45.m128_f32[0] = (float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(x * x);
     if ( v45.m128_f32[0] == 0.0 )
       v46 = 0.0;
     else
-      v46 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v45));
-    if ( (float)((float)((float)(v46 * v38.m128_f32[0]) * v44) + (float)((float)(v46 * v37) * v43)) < sStickDirChangeThreshold )
+      v46 = 1.0 / _mm_sqrt_ps(v45).m128_f32[0];
+    if ( (float)((float)((float)(v46 * y_low.m128_f32[0]) * v44) + (float)((float)(v46 * x) * v43)) < sStickDirChangeThreshold )
     {
-      v47 = (__m128)v34;
-      v47.m128_f32[0] = (float)(*(float *)&v34 * *(float *)&v34) + (float)(v33 * v33);
-      v38.m128_f32[0] = (float)(v38.m128_f32[0] * v38.m128_f32[0]) + (float)(v37 * v37);
-      if ( COERCE_FLOAT(_mm_sqrt_ps(v47)) < COERCE_FLOAT(_mm_sqrt_ps(v38)) )
-        goto LABEL_47;
+      v47 = (__m128)mAxisPositionX_low;
+      v47.m128_f32[0] = (float)(*(float *)&mAxisPositionX_low * *(float *)&mAxisPositionX_low) + (float)(v33 * v33);
+      y_low.m128_f32[0] = (float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(x * x);
+      if ( _mm_sqrt_ps(v47).m128_f32[0] < _mm_sqrt_ps(y_low).m128_f32[0] )
+        goto LABEL_46;
       v36 = FLOAT_0_60000002;
     }
     else
@@ -8564,9 +7510,9 @@ char __fastcall ReadControllerInputTask::Update(ReadControllerInputTask *this, f
       v36 = FLOAT_0_40000001;
     }
   }
-  LODWORD(v3->mLockedPadModified.x) = v34;
-  v3->mLockedPadModified.y = v33;
-LABEL_47:
+  LODWORD(this->mLockedPadModified.x) = mAxisPositionX_low;
+  this->mLockedPadModified.y = v33;
+LABEL_46:
   v48 = sDrawDebug;
   if ( sDrawDebug )
   {
@@ -8580,20 +7526,20 @@ LABEL_47:
       v49[4] = v49[3];
       v49[3] = v49[2];
     }
-    while ( (signed __int64)v49 > (signed __int64)&unk_1423B61B4 );
+    while ( (__int64)v49 > (__int64)&unk_1423B61B4 );
     v51 = &unk_1423B61BC;
     do
     {
       *v51 = *(v51 - 1);
       --v51;
     }
-    while ( (signed __int64)v51 > (signed __int64)gValues5 );
+    while ( (__int64)v51 > (__int64)gValues5 );
     gValues5[0] = v36;
   }
-  v52 = v3->mLockedPadModified.y;
-  v53 = v3->mLockedPadModified.x;
-  v317 = v3->mLockedPadModified.y;
-  v315 = v3->mLockedPadModified.x;
+  y = this->mLockedPadModified.y;
+  v53 = this->mLockedPadModified.x;
+  v320 = y;
+  v318 = v53;
   if ( v48 )
   {
     v54 = &unk_1423B5B64;
@@ -8606,14 +7552,14 @@ LABEL_47:
       v54[4] = v54[3];
       v54[3] = v54[2];
     }
-    while ( (signed __int64)v54 > (signed __int64)&unk_1423B59E4 );
+    while ( (__int64)v54 > (__int64)&unk_1423B59E4 );
     v56 = &unk_1423B59EC;
     do
     {
       *v56 = *(v56 - 1);
       --v56;
     }
-    while ( (signed __int64)v56 > (signed __int64)gValues0 );
+    while ( (__int64)v56 > (__int64)gValues0 );
     gValues0[0] = v31;
     v57 = &unk_1423B5CF4;
     do
@@ -8625,14 +7571,14 @@ LABEL_47:
       v57[4] = v57[3];
       v57[3] = v57[2];
     }
-    while ( (signed __int64)v57 > (signed __int64)&unk_1423B5B74 );
+    while ( (__int64)v57 > (__int64)&unk_1423B5B74 );
     v59 = &unk_1423B5B7C;
     do
     {
       *v59 = *(v59 - 1);
       --v59;
     }
-    while ( (signed __int64)v59 > (signed __int64)gValues1 );
+    while ( (__int64)v59 > (__int64)gValues1 );
     gValues1[0] = v33;
     v60 = &unk_1423B5E84;
     do
@@ -8644,21 +7590,21 @@ LABEL_47:
       v60[4] = v60[3];
       v60[3] = v60[2];
     }
-    while ( (signed __int64)v60 > (signed __int64)&unk_1423B5D04 );
+    while ( (__int64)v60 > (__int64)&unk_1423B5D04 );
     v62 = &unk_1423B5D0C;
     do
     {
       *v62 = *(v62 - 1);
       --v62;
     }
-    while ( (signed __int64)v62 > (signed __int64)gValues2 );
-    LODWORD(gValues2[0]) = v34;
+    while ( (__int64)v62 > (__int64)gValues2 );
+    LODWORD(gValues2[0]) = mAxisPositionX_low;
   }
   v63 = digitalMoveThreshold;
-  if ( v52 <= digitalMoveThreshold )
+  if ( y <= digitalMoveThreshold )
   {
-    if ( v52 >= COERCE_FLOAT(LODWORD(digitalMoveThreshold) ^ _xmm[0]) )
-      goto LABEL_74;
+    if ( y >= COERCE_FLOAT(LODWORD(digitalMoveThreshold) ^ _xmm[0]) )
+      goto LABEL_73;
     v64 = gActionRequest_MoveBackward.m_EnumValue;
   }
   else
@@ -8666,17 +7612,17 @@ LABEL_47:
     v64 = gActionRequest_MoveForward.m_EnumValue;
   }
   v65 = 1i64 << (v64 & 0x3F);
-  other.mActionRequests.mBits[(signed __int64)(signed int)v64 >> 6] |= v65;
-  v66 = (float)(signed int)0.0;
+  other.mActionRequests.mBits[(__int64)(int)v64 >> 6] |= v65;
+  v66 = (float)(int)0.0;
   if ( v66 >= 255.0 )
     v66 = FLOAT_255_0;
-  other.mActionRequestChargeTimes[v64] = (signed int)v66;
+  other.mActionRequestChargeTimes[v64] = (int)v66;
   other.mSignals |= v65;
-LABEL_74:
+LABEL_73:
   if ( v53 <= v63 )
   {
     if ( v53 >= COERCE_FLOAT(LODWORD(v63) ^ _xmm[0]) )
-      goto LABEL_81;
+      goto LABEL_80;
     v67 = gActionRequest_MoveLeft.m_EnumValue;
   }
   else
@@ -8684,493 +7630,463 @@ LABEL_74:
     v67 = gActionRequest_MoveRight.m_EnumValue;
   }
   v68 = 1i64 << (v67 & 0x3F);
-  other.mActionRequests.mBits[(signed __int64)(signed int)v67 >> 6] |= v68;
-  v69 = (float)(signed int)0.0;
+  other.mActionRequests.mBits[(__int64)(int)v67 >> 6] |= v68;
+  v69 = (float)(int)0.0;
   if ( v69 >= 255.0 )
     v69 = FLOAT_255_0;
-  other.mActionRequestChargeTimes[v67] = (signed int)v69;
+  other.mActionRequestChargeTimes[v67] = (int)v69;
   other.mSignals |= v68;
-LABEL_81:
-  v70 = UFG::ActionDef_Jump.mDataPerController[v8];
+LABEL_80:
+  v70 = UFG::ActionDef_Jump.mDataPerController[m_ControllerID];
   if ( v70 && v70->mActionTrue )
   {
     v71 = v70->mOnSeconds;
     v72 = gActionRequest_Jump.m_EnumValue;
     v73 = 1i64 << (gActionRequest_Jump.m_EnumValue & 0x3F);
-    other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_Jump.m_EnumValue >> 6] |= v73;
-    v74 = (float)(signed int)(float)(v71 * 60.0);
+    other.mActionRequests.mBits[(__int64)(int)gActionRequest_Jump.m_EnumValue >> 6] |= v73;
+    v74 = (float)(int)(float)(v71 * 60.0);
     if ( v74 >= 255.0 )
       v74 = FLOAT_255_0;
-    other.mActionRequestChargeTimes[v72] = (signed int)v74;
+    other.mActionRequestChargeTimes[v72] = (int)v74;
     other.mSignals |= v73;
   }
-  v75 = UFG::ActionDef_Action.mDataPerController[v8];
+  v75 = UFG::ActionDef_Action.mDataPerController[m_ControllerID];
   if ( v75 && v75->mActionTrue )
   {
     v76 = gActionRequest_Action.m_EnumValue;
     v77 = gActionRequest_Action.m_EnumValue & 0x3F;
     v78 = v75->mOnSeconds * 60.0;
-    other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_Action.m_EnumValue >> 6] |= 1i64 << (gActionRequest_Action.m_EnumValue & 0x3F);
-    v79 = (float)(signed int)v78;
+    other.mActionRequests.mBits[(__int64)(int)gActionRequest_Action.m_EnumValue >> 6] |= 1i64 << (gActionRequest_Action.m_EnumValue & 0x3F);
+    v79 = (float)(int)v78;
     if ( v79 >= 255.0 )
       v79 = FLOAT_255_0;
-    other.mActionRequestChargeTimes[v76] = (signed int)v79;
+    other.mActionRequestChargeTimes[v76] = (int)v79;
     other.mSignals |= 1i64 << v77;
     v80 = gActionRequest_POI_Use.m_EnumValue;
-    v81 = v75->mOnSeconds * 60.0;
-    v82 = 1i64 << (gActionRequest_POI_Use.m_EnumValue & 0x3F);
-    other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_POI_Use.m_EnumValue >> 6] |= v82;
-    v83 = (float)(signed int)v81;
-    if ( v83 >= 255.0 )
-      v83 = FLOAT_255_0;
-    other.mActionRequestChargeTimes[v80] = (signed int)v83;
-    other.mSignals |= v82;
+    v316 = v75->mOnSeconds * 60.0;
+    v81 = 1i64 << (gActionRequest_POI_Use.m_EnumValue & 0x3F);
+    other.mActionRequests.mBits[(__int64)(int)gActionRequest_POI_Use.m_EnumValue >> 6] |= v81;
+    v82 = (float)(int)v316;
+    if ( v82 >= 255.0 )
+      v82 = FLOAT_255_0;
+    other.mActionRequestChargeTimes[v80] = (int)v82;
+    other.mSignals |= v81;
   }
-  v84 = UFG::ActionDef_Grab.mDataPerController[v8];
-  if ( v84 && v84->mActionTrue )
+  v83 = UFG::ActionDef_Grab.mDataPerController[m_ControllerID];
+  if ( v83 && v83->mActionTrue )
   {
-    v85 = v84->mOnSeconds;
-    v86 = gActionRequest_Grab.m_EnumValue;
-    v87 = 1i64 << (gActionRequest_Grab.m_EnumValue & 0x3F);
-    other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_Grab.m_EnumValue >> 6] |= v87;
-    v88 = (float)(signed int)(float)(v85 * 60.0);
-    if ( v88 >= 255.0 )
-      v88 = FLOAT_255_0;
-    other.mActionRequestChargeTimes[v86] = (signed int)v88;
-    other.mSignals |= v87;
+    v84 = v83->mOnSeconds;
+    v85 = gActionRequest_Grab.m_EnumValue;
+    v86 = 1i64 << (gActionRequest_Grab.m_EnumValue & 0x3F);
+    other.mActionRequests.mBits[(__int64)(int)gActionRequest_Grab.m_EnumValue >> 6] |= v86;
+    v87 = (float)(int)(float)(v84 * 60.0);
+    if ( v87 >= 255.0 )
+      v87 = FLOAT_255_0;
+    other.mActionRequestChargeTimes[v85] = (int)v87;
+    other.mSignals |= v86;
   }
-  v89 = UFG::ActionDef_Weapon.mDataPerController[v8];
-  if ( v89 && v89->mActionTrue )
+  v88 = UFG::ActionDef_Weapon.mDataPerController[m_ControllerID];
+  if ( v88 && v88->mActionTrue )
   {
-    v90 = v89->mOnSeconds;
-    v91 = gActionRequest_Weapon.m_EnumValue;
-    v92 = 1i64 << (gActionRequest_Weapon.m_EnumValue & 0x3F);
-    other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_Weapon.m_EnumValue >> 6] |= v92;
-    v93 = (float)(signed int)(float)(v90 * 60.0);
-    if ( v93 >= 255.0 )
-      v93 = FLOAT_255_0;
-    other.mActionRequestChargeTimes[v91] = (signed int)v93;
-    other.mSignals |= v92;
+    v89 = v88->mOnSeconds;
+    v90 = gActionRequest_Weapon.m_EnumValue;
+    v91 = 1i64 << (gActionRequest_Weapon.m_EnumValue & 0x3F);
+    other.mActionRequests.mBits[(__int64)(int)gActionRequest_Weapon.m_EnumValue >> 6] |= v91;
+    v92 = (float)(int)(float)(v89 * 60.0);
+    if ( v92 >= 255.0 )
+      v92 = FLOAT_255_0;
+    other.mActionRequestChargeTimes[v90] = (int)v92;
+    other.mSignals |= v91;
   }
-  v94 = UFG::ActionDef_MeleeAttack.mDataPerController[v8];
-  if ( !v94 || !v94->mActionTrue )
+  v93 = UFG::ActionDef_MeleeAttack.mDataPerController[m_ControllerID];
+  if ( !v93 || !v93->mActionTrue )
   {
-    v99 = UFG::ActionDef_Attack.mDataPerController[v8];
-    if ( !v99 || !v99->mActionTrue )
-      goto LABEL_145;
-    if ( v10 != 1 )
-      goto LABEL_141;
-    v104 = (UFG::SimObjectGame *)v3->m_pContext->mSimObject.m_pPointer;
-    if ( v104 )
+    v98 = UFG::ActionDef_Attack.mDataPerController[m_ControllerID];
+    if ( !v98 || !v98->mActionTrue )
+      goto LABEL_142;
+    if ( !m_IsKeyboardController )
+      goto LABEL_138;
+    v103 = (UFG::SimObjectGame *)this->m_pContext->mSimObject.m_pPointer;
+    if ( v103 )
     {
-      v106 = v104->m_Flags;
-      if ( (v106 >> 14) & 1 )
+      m_Flags = v103->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
       {
-        v105 = (UFG::TargetingSystemBaseComponent *)v104->m_Components.p[20].m_pComponent;
+        m_pComponent = (UFG::TargetingSystemBaseComponent *)v103->m_Components.p[20].m_pComponent;
       }
-      else if ( (v106 & 0x8000u) == 0 )
+      else if ( m_Flags >= 0 )
       {
-        if ( (v106 >> 13) & 1 )
-          v105 = (UFG::TargetingSystemBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                        v104,
-                                                        UFG::TargetingSystemBaseComponent::_TypeUID);
-        else
-          v105 = (UFG::TargetingSystemBaseComponent *)((v106 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                            v104,
-                                                                            UFG::TargetingSystemBaseComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v104->vfptr, UFG::TargetingSystemBaseComponent::_TypeUID));
+        m_pComponent = (UFG::TargetingSystemBaseComponent *)((m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+                                                           ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                               v103,
+                                                               UFG::TargetingSystemBaseComponent::_TypeUID)
+                                                           : UFG::SimObject::GetComponentOfType(
+                                                               v103,
+                                                               UFG::TargetingSystemBaseComponent::_TypeUID));
       }
       else
       {
-        v105 = (UFG::TargetingSystemBaseComponent *)v104->m_Components.p[20].m_pComponent;
+        m_pComponent = (UFG::TargetingSystemBaseComponent *)v103->m_Components.p[20].m_pComponent;
       }
     }
     else
     {
-      v105 = 0i64;
+      m_pComponent = 0i64;
     }
-    if ( UFG::HasRangedWeaponEquippedWithAmmo(v105) )
+    if ( UFG::HasRangedWeaponEquippedWithAmmo(m_pComponent) )
     {
-LABEL_145:
-      LODWORD(v101) = gActionRequest_Fire.m_EnumValue;
-      goto LABEL_146;
-    }
-    v99 = UFG::ActionDef_Attack.mDataPerController[v8];
-LABEL_139:
-    if ( !v99 )
-    {
-      v107 = 0.0;
 LABEL_142:
-      v108 = gActionRequest_Attack.m_EnumValue;
-      v109 = 1i64 << (gActionRequest_Attack.m_EnumValue & 0x3F);
-      other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_Attack.m_EnumValue >> 6] |= v109;
-      v110 = (float)(signed int)(float)(v107 * 60.0);
-      if ( v110 >= 255.0 )
-        v110 = FLOAT_255_0;
-      other.mActionRequestChargeTimes[v108] = (signed int)v110;
-      other.mSignals |= v109;
-      goto LABEL_145;
+      LODWORD(v100) = gActionRequest_Fire.m_EnumValue;
+      goto LABEL_143;
     }
-LABEL_141:
-    v107 = v99->mOnSeconds;
-    goto LABEL_142;
-  }
-  v95 = (UFG::SimObjectGame *)v3->m_pContext->mSimObject.m_pPointer;
-  if ( v95 )
-  {
-    v97 = v95->m_Flags;
-    if ( (v97 >> 14) & 1 )
+    v98 = UFG::ActionDef_Attack.mDataPerController[m_ControllerID];
+LABEL_136:
+    if ( !v98 )
     {
-      v96 = (UFG::TargetingSystemBaseComponent *)v95->m_Components.p[20].m_pComponent;
+      v106 = 0.0;
+LABEL_139:
+      v107 = gActionRequest_Attack.m_EnumValue;
+      v108 = 1i64 << (gActionRequest_Attack.m_EnumValue & 0x3F);
+      other.mActionRequests.mBits[(__int64)(int)gActionRequest_Attack.m_EnumValue >> 6] |= v108;
+      v109 = (float)(int)(float)(v106 * 60.0);
+      if ( v109 >= 255.0 )
+        v109 = FLOAT_255_0;
+      other.mActionRequestChargeTimes[v107] = (int)v109;
+      other.mSignals |= v108;
+      goto LABEL_142;
     }
-    else if ( (v97 & 0x8000u) == 0 )
-    {
-      if ( (v97 >> 13) & 1 )
-      {
-        v96 = (UFG::TargetingSystemBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                     v95,
-                                                     UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
-      else if ( (v97 >> 12) & 1 )
-      {
-        v96 = (UFG::TargetingSystemBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                     v95,
-                                                     UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
-      else
-      {
-        v96 = (UFG::TargetingSystemBaseComponent *)UFG::SimObject::GetComponentOfType(
-                                                     (UFG::SimObject *)&v95->vfptr,
-                                                     UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
-    }
-    else
-    {
-      v96 = (UFG::TargetingSystemBaseComponent *)v95->m_Components.p[20].m_pComponent;
-    }
-  }
-  else
-  {
-    v96 = 0i64;
-  }
-  v98 = UFG::HasRangedWeapon(v96) == 0;
-  v99 = UFG::ActionDef_MeleeAttack.mDataPerController[v8];
-  if ( !v98 )
+LABEL_138:
+    v106 = v98->mOnSeconds;
     goto LABEL_139;
-  if ( v99 )
-    v100 = v99->mOnSeconds;
-  else
-    v100 = 0.0;
-  v101 = gActionRequest_Fire.m_EnumValue;
-  v102 = 1i64 << (gActionRequest_Fire.m_EnumValue & 0x3F);
-  other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_Fire.m_EnumValue >> 6] |= v102;
-  v103 = (float)(signed int)(float)(v100 * 60.0);
-  if ( v103 >= 255.0 )
-    v103 = FLOAT_255_0;
-  other.mActionRequestChargeTimes[v101] = (signed int)v103;
-  other.mSignals |= v102;
-LABEL_146:
-  v111 = UFG::ActionDef_Sprint.mDataPerController[v8];
-  if ( v111 && v111->mActionTrue )
-  {
-    v112 = v111->mOnSeconds;
-    v113 = gActionRequest_Sprint.m_EnumValue;
-    v114 = 1i64 << (gActionRequest_Sprint.m_EnumValue & 0x3F);
-    other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_Sprint.m_EnumValue >> 6] |= v114;
-    v115 = (float)(signed int)(float)(v112 * 60.0);
-    if ( v115 >= 255.0 )
-      v115 = FLOAT_255_0;
-    other.mActionRequestChargeTimes[v113] = (signed int)v115;
-    other.mSignals |= v114;
   }
-  v116 = UFG::ActionDef_CoverToggle.mDataPerController[v8];
-  if ( v116 && v116->mActionTrue )
+  v94 = (UFG::SimObjectGame *)this->m_pContext->mSimObject.m_pPointer;
+  if ( v94 )
   {
-    v117 = v116->mOnSeconds;
-    v118 = gActionRequest_CoverToggle.m_EnumValue;
-    v119 = 1i64 << (gActionRequest_CoverToggle.m_EnumValue & 0x3F);
-    other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_CoverToggle.m_EnumValue >> 6] |= v119;
-    v120 = (float)(signed int)(float)(v117 * 60.0);
-    if ( v120 >= 255.0 )
-      v120 = FLOAT_255_0;
-    other.mActionRequestChargeTimes[v118] = (signed int)v120;
-    other.mSignals |= v119;
-  }
-  v121 = UFG::ActionDef_Steer.mDataPerController[v8];
-  if ( v121 && v121->mActionTrue )
-  {
-    v122 = v121->mAxisPositionX;
-    if ( v122 >= -0.5 )
+    v96 = v94->m_Flags;
+    if ( (v96 & 0x4000) != 0 )
     {
-      if ( v122 <= 0.5 )
-        goto LABEL_171;
-      v123 = gActionRequest_SteerRight.m_EnumValue;
+      ComponentOfTypeHK = (UFG::TargetingSystemBaseComponent *)v94->m_Components.p[20].m_pComponent;
+    }
+    else if ( v96 >= 0 )
+    {
+      if ( (v96 & 0x2000) != 0 || (v96 & 0x1000) != 0 )
+        ComponentOfTypeHK = (UFG::TargetingSystemBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                   v94,
+                                                                   UFG::TargetingSystemBaseComponent::_TypeUID);
+      else
+        ComponentOfTypeHK = (UFG::TargetingSystemBaseComponent *)UFG::SimObject::GetComponentOfType(
+                                                                   v94,
+                                                                   UFG::TargetingSystemBaseComponent::_TypeUID);
     }
     else
     {
-      v123 = gActionRequest_SteerLeft.m_EnumValue;
+      ComponentOfTypeHK = (UFG::TargetingSystemBaseComponent *)v94->m_Components.p[20].m_pComponent;
     }
   }
   else
   {
-    v124 = UFG::ActionDef_Left.mDataPerController[v8];
-    if ( v124 && v124->mActionTrue )
+    ComponentOfTypeHK = 0i64;
+  }
+  v97 = !UFG::HasRangedWeapon(ComponentOfTypeHK);
+  v98 = UFG::ActionDef_MeleeAttack.mDataPerController[m_ControllerID];
+  if ( !v97 )
+    goto LABEL_136;
+  if ( v98 )
+    v99 = v98->mOnSeconds;
+  else
+    v99 = 0.0;
+  v100 = gActionRequest_Fire.m_EnumValue;
+  v101 = 1i64 << (gActionRequest_Fire.m_EnumValue & 0x3F);
+  other.mActionRequests.mBits[(__int64)(int)gActionRequest_Fire.m_EnumValue >> 6] |= v101;
+  v102 = (float)(int)(float)(v99 * 60.0);
+  if ( v102 >= 255.0 )
+    v102 = FLOAT_255_0;
+  other.mActionRequestChargeTimes[v100] = (int)v102;
+  other.mSignals |= v101;
+LABEL_143:
+  v110 = UFG::ActionDef_Sprint.mDataPerController[m_ControllerID];
+  if ( v110 && v110->mActionTrue )
+  {
+    v111 = v110->mOnSeconds;
+    v112 = gActionRequest_Sprint.m_EnumValue;
+    v113 = 1i64 << (gActionRequest_Sprint.m_EnumValue & 0x3F);
+    other.mActionRequests.mBits[(__int64)(int)gActionRequest_Sprint.m_EnumValue >> 6] |= v113;
+    v114 = (float)(int)(float)(v111 * 60.0);
+    if ( v114 >= 255.0 )
+      v114 = FLOAT_255_0;
+    other.mActionRequestChargeTimes[v112] = (int)v114;
+    other.mSignals |= v113;
+  }
+  v115 = UFG::ActionDef_CoverToggle.mDataPerController[m_ControllerID];
+  if ( v115 && v115->mActionTrue )
+  {
+    v116 = v115->mOnSeconds;
+    v117 = gActionRequest_CoverToggle.m_EnumValue;
+    v118 = 1i64 << (gActionRequest_CoverToggle.m_EnumValue & 0x3F);
+    other.mActionRequests.mBits[(__int64)(int)gActionRequest_CoverToggle.m_EnumValue >> 6] |= v118;
+    v119 = (float)(int)(float)(v116 * 60.0);
+    if ( v119 >= 255.0 )
+      v119 = FLOAT_255_0;
+    other.mActionRequestChargeTimes[v117] = (int)v119;
+    other.mSignals |= v118;
+  }
+  v120 = UFG::ActionDef_Steer.mDataPerController[m_ControllerID];
+  if ( v120 && v120->mActionTrue )
+  {
+    mAxisPositionX = v120->mAxisPositionX;
+    if ( mAxisPositionX >= -0.5 )
     {
-      v123 = gActionRequest_SteerLeft.m_EnumValue;
+      if ( mAxisPositionX <= 0.5 )
+        goto LABEL_168;
+      v122 = gActionRequest_SteerRight.m_EnumValue;
     }
     else
     {
-      v125 = UFG::ActionDef_Right.mDataPerController[v8];
-      if ( !v125 || (v123 = gActionRequest_SteerRight.m_EnumValue, !v125->mActionTrue) )
-        v123 = gActionRequest_SteerNeutral.m_EnumValue;
+      v122 = gActionRequest_SteerLeft.m_EnumValue;
     }
-  }
-  v126 = 1i64 << (v123 & 0x3F);
-  v122 = 0.0;
-  other.mActionRequests.mBits[(signed __int64)(signed int)v123 >> 6] |= v126;
-  v127 = (float)(signed int)0.0;
-  if ( v127 >= 255.0 )
-    v127 = FLOAT_255_0;
-  other.mActionRequestChargeTimes[v123] = (signed int)v127;
-  other.mSignals |= v126;
-LABEL_171:
-  if ( UFG::TargetingSystemPedPlayerComponent::ms_eTargetCycleAndLocationTargetingModeEnum == 2 )
-  {
-    v128 = UFG::ActionDef_FireFull.mDataPerController[v8];
-    if ( !v128 || !v128->mActionTrue )
-      goto LABEL_203;
-    v129 = v128->mOnSeconds;
   }
   else
   {
-    v130 = UFG::ActionDef_Fire.mDataPerController[v8];
-    if ( !v130 || !v130->mActionTrue )
+    v123 = UFG::ActionDef_Left.mDataPerController[m_ControllerID];
+    if ( v123 && v123->mActionTrue )
     {
-      v131 = UFG::ActionDef_VehicleFire.mDataPerController[v8];
-      if ( !v131 || !v131->mActionTrue )
-        goto LABEL_203;
+      v122 = gActionRequest_SteerLeft.m_EnumValue;
     }
-    if ( v10 )
+    else
     {
-      v132 = (UFG::SimObjectGame *)v3->m_pContext->mSimObject.m_pPointer;
-      if ( v132 )
+      v124 = UFG::ActionDef_Right.mDataPerController[m_ControllerID];
+      if ( !v124 || (v122 = gActionRequest_SteerRight.m_EnumValue, !v124->mActionTrue) )
+        v122 = gActionRequest_SteerNeutral.m_EnumValue;
+    }
+  }
+  v125 = 1i64 << (v122 & 0x3F);
+  other.mActionRequests.mBits[(__int64)(int)v122 >> 6] |= v125;
+  v126 = (float)(int)0.0;
+  if ( v126 >= 255.0 )
+    v126 = FLOAT_255_0;
+  other.mActionRequestChargeTimes[v122] = (int)v126;
+  other.mSignals |= v125;
+LABEL_168:
+  if ( UFG::TargetingSystemPedPlayerComponent::ms_eTargetCycleAndLocationTargetingModeEnum == TCALTM_SLIGHTLY_PRESS_FIRE )
+  {
+    v127 = UFG::ActionDef_FireFull.mDataPerController[m_ControllerID];
+    if ( !v127 || !v127->mActionTrue )
+      goto LABEL_199;
+    v128 = v127->mOnSeconds;
+  }
+  else
+  {
+    v129 = UFG::ActionDef_Fire.mDataPerController[m_ControllerID];
+    if ( !v129 || !v129->mActionTrue )
+    {
+      v130 = UFG::ActionDef_VehicleFire.mDataPerController[m_ControllerID];
+      if ( !v130 || !v130->mActionTrue )
+        goto LABEL_199;
+    }
+    if ( m_IsKeyboardController )
+    {
+      v131 = (UFG::SimObjectGame *)this->m_pContext->mSimObject.m_pPointer;
+      if ( v131 )
       {
-        v134 = v132->m_Flags;
-        if ( (v134 >> 14) & 1 )
+        v133 = v131->m_Flags;
+        if ( (v133 & 0x4000) != 0 )
         {
-          v133 = (UFG::TargetingSystemBaseComponent *)v132->m_Components.p[20].m_pComponent;
+          ComponentOfType = (UFG::TargetingSystemBaseComponent *)v131->m_Components.p[20].m_pComponent;
         }
-        else if ( (v134 & 0x8000u) == 0 )
+        else if ( v133 >= 0 )
         {
-          if ( (v134 >> 13) & 1 )
-          {
-            v133 = (UFG::TargetingSystemBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                          v132,
-                                                          UFG::TargetingSystemBaseComponent::_TypeUID);
-          }
-          else if ( (v134 >> 12) & 1 )
-          {
-            v133 = (UFG::TargetingSystemBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                          v132,
-                                                          UFG::TargetingSystemBaseComponent::_TypeUID);
-          }
+          if ( (v133 & 0x2000) != 0 || (v133 & 0x1000) != 0 )
+            ComponentOfType = (UFG::TargetingSystemBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                     v131,
+                                                                     UFG::TargetingSystemBaseComponent::_TypeUID);
           else
-          {
-            v133 = (UFG::TargetingSystemBaseComponent *)UFG::SimObject::GetComponentOfType(
-                                                          (UFG::SimObject *)&v132->vfptr,
-                                                          UFG::TargetingSystemBaseComponent::_TypeUID);
-          }
+            ComponentOfType = (UFG::TargetingSystemBaseComponent *)UFG::SimObject::GetComponentOfType(
+                                                                     v131,
+                                                                     UFG::TargetingSystemBaseComponent::_TypeUID);
         }
         else
         {
-          v133 = (UFG::TargetingSystemBaseComponent *)v132->m_Components.p[20].m_pComponent;
+          ComponentOfType = (UFG::TargetingSystemBaseComponent *)v131->m_Components.p[20].m_pComponent;
         }
       }
       else
       {
-        v133 = 0i64;
+        ComponentOfType = 0i64;
       }
-      if ( !UFG::HasRangedWeapon(v133) )
-        goto LABEL_203;
-      LODWORD(v101) = gActionRequest_Fire.m_EnumValue;
+      if ( !UFG::HasRangedWeapon(ComponentOfType) )
+        goto LABEL_199;
+      LODWORD(v100) = gActionRequest_Fire.m_EnumValue;
     }
-    v135 = UFG::ActionDef_Fire.mDataPerController[v8];
-    if ( v135 )
-      v136 = v135->mOnSeconds;
+    v134 = UFG::ActionDef_Fire.mDataPerController[m_ControllerID];
+    if ( v134 )
+      v135 = v134->mOnSeconds;
     else
-      v136 = 0.0;
-    v137 = UFG::ActionDef_VehicleFire.mDataPerController[v8];
-    if ( v137 )
-      v138 = v137->mOnSeconds;
+      v135 = 0.0;
+    v136 = UFG::ActionDef_VehicleFire.mDataPerController[m_ControllerID];
+    if ( v136 )
+      v137 = v136->mOnSeconds;
     else
-      v138 = 0.0;
-    v129 = v138 + v136;
+      v137 = 0.0;
+    v128 = v137 + v135;
   }
-  v139 = 1i64 << (v101 & 0x3F);
-  other.mActionRequests.mBits[(signed __int64)(signed int)v101 >> 6] |= v139;
-  v122 = v129 * 60.0;
-  v140 = (float)(signed int)v122;
-  if ( v140 >= 255.0 )
-    v140 = FLOAT_255_0;
-  other.mActionRequestChargeTimes[(unsigned int)v101] = (signed int)v140;
-  other.mSignals |= v139;
-LABEL_203:
-  v141 = UFG::ActionDef_FirePartial.mDataPerController[v8];
-  if ( v141 && v141->mActionTrue )
+  v138 = 1i64 << (v100 & 0x3F);
+  other.mActionRequests.mBits[(__int64)(int)v100 >> 6] |= v138;
+  v139 = (float)(int)(float)(v128 * 60.0);
+  if ( v139 >= 255.0 )
+    v139 = FLOAT_255_0;
+  other.mActionRequestChargeTimes[(unsigned int)v100] = (int)v139;
+  other.mSignals |= v138;
+LABEL_199:
+  v140 = UFG::ActionDef_FirePartial.mDataPerController[m_ControllerID];
+  if ( v140 && v140->mActionTrue )
   {
-    v142 = gActionRequest_FirePartial.m_EnumValue;
-    v122 = 0.0;
-    v143 = 1i64 << (gActionRequest_FirePartial.m_EnumValue & 0x3F);
-    other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_FirePartial.m_EnumValue >> 6] |= v143;
-    v144 = (float)(signed int)0.0;
-    if ( v144 >= 255.0 )
-      v144 = FLOAT_255_0;
-    other.mActionRequestChargeTimes[v142] = (signed int)v144;
-    other.mSignals |= v143;
+    v141 = gActionRequest_FirePartial.m_EnumValue;
+    v142 = 1i64 << (gActionRequest_FirePartial.m_EnumValue & 0x3F);
+    other.mActionRequests.mBits[(__int64)(int)gActionRequest_FirePartial.m_EnumValue >> 6] |= v142;
+    v143 = (float)(int)0.0;
+    if ( v143 >= 255.0 )
+      v143 = FLOAT_255_0;
+    other.mActionRequestChargeTimes[v141] = (int)v143;
+    other.mSignals |= v142;
   }
-  v145 = UFG::ActionDef_Reload.mDataPerController[v8];
-  if ( v145 && v145->mActionTrue )
+  v144 = UFG::ActionDef_Reload.mDataPerController[m_ControllerID];
+  if ( v144 && v144->mActionTrue )
   {
-    v146 = v145->mOnSeconds;
-    v147 = gActionRequest_Reload.m_EnumValue;
-    v148 = 1i64 << (gActionRequest_Reload.m_EnumValue & 0x3F);
-    other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_Reload.m_EnumValue >> 6] |= v148;
-    v122 = v146 * 60.0;
-    v149 = (float)(signed int)v122;
-    if ( v149 >= 255.0 )
-      v149 = FLOAT_255_0;
-    other.mActionRequestChargeTimes[v147] = (signed int)v149;
-    other.mSignals |= v148;
+    v145 = v144->mOnSeconds;
+    v146 = gActionRequest_Reload.m_EnumValue;
+    v147 = 1i64 << (gActionRequest_Reload.m_EnumValue & 0x3F);
+    other.mActionRequests.mBits[(__int64)(int)gActionRequest_Reload.m_EnumValue >> 6] |= v147;
+    v148 = (float)(int)(float)(v145 * 60.0);
+    if ( v148 >= 255.0 )
+      v148 = FLOAT_255_0;
+    other.mActionRequestChargeTimes[v146] = (int)v148;
+    other.mSignals |= v147;
   }
-  v150 = UFG::ActionDef_Inventory.mDataPerController[v8];
-  if ( v150 )
+  v149 = UFG::ActionDef_Inventory.mDataPerController[m_ControllerID];
+  if ( v149 )
   {
-    if ( v150->mActionTrue )
+    if ( v149->mActionTrue )
     {
-      v151 = UFG::ActionDef_PrevRadioStationHold.mDataPerController[v8];
-      if ( !v151 || !v151->mActionTrue )
+      v150 = UFG::ActionDef_PrevRadioStationHold.mDataPerController[m_ControllerID];
+      if ( !v150 || !v150->mActionTrue )
       {
-        v152 = UFG::ActionDef_NextRadioStationHold.mDataPerController[v8];
-        if ( !v152 || !v152->mActionTrue )
+        v151 = UFG::ActionDef_NextRadioStationHold.mDataPerController[m_ControllerID];
+        if ( !v151 || !v151->mActionTrue )
         {
-          v153 = v150->mOnSeconds;
-          v154 = gActionRequest_Inventory.m_EnumValue;
-          v155 = 1i64 << (gActionRequest_Inventory.m_EnumValue & 0x3F);
-          other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_Inventory.m_EnumValue >> 6] |= v155;
-          v122 = v153 * 60.0;
-          v156 = (float)(signed int)v122;
-          if ( v156 >= 255.0 )
-            v156 = FLOAT_255_0;
-          other.mActionRequestChargeTimes[v154] = (signed int)v156;
-          other.mSignals |= v155;
+          v152 = v149->mOnSeconds;
+          v153 = gActionRequest_Inventory.m_EnumValue;
+          v154 = 1i64 << (gActionRequest_Inventory.m_EnumValue & 0x3F);
+          other.mActionRequests.mBits[(__int64)(int)gActionRequest_Inventory.m_EnumValue >> 6] |= v154;
+          v155 = (float)(int)(float)(v152 * 60.0);
+          if ( v155 >= 255.0 )
+            v155 = FLOAT_255_0;
+          other.mActionRequestChargeTimes[v153] = (int)v155;
+          other.mSignals |= v154;
         }
       }
     }
   }
-  v157 = UFG::ActionDef_EquipUP.mDataPerController[v8];
-  if ( v157 )
+  v156 = UFG::ActionDef_EquipUP.mDataPerController[m_ControllerID];
+  if ( v156 )
   {
-    if ( v157->mActionTrue )
+    if ( v156->mActionTrue )
     {
-      v158 = UFG::ActionDef_PrevRadioStationHold.mDataPerController[v8];
-      if ( !v158 || !v158->mActionTrue )
+      v157 = UFG::ActionDef_PrevRadioStationHold.mDataPerController[m_ControllerID];
+      if ( !v157 || !v157->mActionTrue )
       {
-        v159 = UFG::ActionDef_NextRadioStationHold.mDataPerController[v8];
-        if ( !v159 || !v159->mActionTrue )
+        v158 = UFG::ActionDef_NextRadioStationHold.mDataPerController[m_ControllerID];
+        if ( !v158 || !v158->mActionTrue )
         {
-          v160 = gActionRequest_EquipUP.m_EnumValue;
-          v122 = 0.0;
-          v161 = 1i64 << (gActionRequest_EquipUP.m_EnumValue & 0x3F);
-          other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_EquipUP.m_EnumValue >> 6] |= v161;
-          v162 = (float)(signed int)0.0;
-          if ( v162 >= 255.0 )
-            v162 = FLOAT_255_0;
-          other.mActionRequestChargeTimes[v160] = (signed int)v162;
-          other.mSignals |= v161;
+          v159 = gActionRequest_EquipUP.m_EnumValue;
+          v160 = 1i64 << (gActionRequest_EquipUP.m_EnumValue & 0x3F);
+          other.mActionRequests.mBits[(__int64)(int)gActionRequest_EquipUP.m_EnumValue >> 6] |= v160;
+          v161 = (float)(int)0.0;
+          if ( v161 >= 255.0 )
+            v161 = FLOAT_255_0;
+          other.mActionRequestChargeTimes[v159] = (int)v161;
+          other.mSignals |= v160;
         }
       }
     }
   }
-  v163 = UFG::ActionDef_Raw_Focus.mDataPerController[v8];
-  if ( v163 && v163->mActionTrue )
+  v162 = UFG::ActionDef_Raw_Focus.mDataPerController[m_ControllerID];
+  if ( v162 && v162->mActionTrue )
   {
-    v164 = v163->mOnSeconds;
-    v165 = gActionRequest_Raw_Focus.m_EnumValue;
-    v166 = 1i64 << (gActionRequest_Raw_Focus.m_EnumValue & 0x3F);
-    other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_Raw_Focus.m_EnumValue >> 6] |= v166;
-    v122 = v164 * 60.0;
-    v167 = (float)(signed int)v122;
-    if ( v167 >= 255.0 )
-      v167 = FLOAT_255_0;
-    other.mActionRequestChargeTimes[v165] = (signed int)v167;
-    other.mSignals |= v166;
+    v163 = v162->mOnSeconds;
+    v164 = gActionRequest_Raw_Focus.m_EnumValue;
+    v165 = 1i64 << (gActionRequest_Raw_Focus.m_EnumValue & 0x3F);
+    other.mActionRequests.mBits[(__int64)(int)gActionRequest_Raw_Focus.m_EnumValue >> 6] |= v165;
+    v166 = (float)(int)(float)(v163 * 60.0);
+    if ( v166 >= 255.0 )
+      v166 = FLOAT_255_0;
+    other.mActionRequestChargeTimes[v164] = (int)v166;
+    other.mSignals |= v165;
   }
-  v168 = UFG::ActionDef_Raw_Focus_Full.mDataPerController[v8];
-  if ( v168 && v168->mActionTrue )
+  v167 = UFG::ActionDef_Raw_Focus_Full.mDataPerController[m_ControllerID];
+  if ( v167 && v167->mActionTrue )
   {
-    v169 = v168->mOnSeconds;
-    v170 = gActionRequest_Raw_Focus_Full.m_EnumValue;
-    v171 = 1i64 << (gActionRequest_Raw_Focus_Full.m_EnumValue & 0x3F);
-    other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_Raw_Focus_Full.m_EnumValue >> 6] |= v171;
-    v122 = v169 * 60.0;
-    v172 = (float)(signed int)v122;
-    if ( v172 >= 255.0 )
-      v172 = FLOAT_255_0;
-    other.mActionRequestChargeTimes[v170] = (signed int)v172;
-    other.mSignals |= v171;
+    v168 = v167->mOnSeconds;
+    v169 = gActionRequest_Raw_Focus_Full.m_EnumValue;
+    v170 = 1i64 << (gActionRequest_Raw_Focus_Full.m_EnumValue & 0x3F);
+    other.mActionRequests.mBits[(__int64)(int)gActionRequest_Raw_Focus_Full.m_EnumValue >> 6] |= v170;
+    v171 = (float)(int)(float)(v168 * 60.0);
+    if ( v171 >= 255.0 )
+      v171 = FLOAT_255_0;
+    other.mActionRequestChargeTimes[v169] = (int)v171;
+    other.mSignals |= v170;
   }
-  v173 = UFG::ActionDef_Raw_Focus_Lock.mDataPerController[v8];
-  if ( v173 && v173->mActionTrue )
+  v172 = UFG::ActionDef_Raw_Focus_Lock.mDataPerController[m_ControllerID];
+  if ( v172 && v172->mActionTrue )
   {
-    v174 = gActionRequest_Raw_Focus_Lock.m_EnumValue;
-    v175 = gActionRequest_Raw_Focus_Lock.m_EnumValue & 0x3F;
-    v176 = v173->mOnSeconds * 60.0;
-    other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_Raw_Focus_Lock.m_EnumValue >> 6] |= 1i64 << (gActionRequest_Raw_Focus_Lock.m_EnumValue & 0x3F);
-    v177 = (float)(signed int)v176;
-    if ( v177 >= 255.0 )
-      v177 = FLOAT_255_0;
-    other.mActionRequestChargeTimes[v174] = (signed int)v177;
-    other.mSignals |= 1i64 << v175;
-    v178 = gActionRequest_WeaponMode.m_EnumValue;
-    v122 = v173->mOnSeconds * 60.0;
-    v179 = 1i64 << (gActionRequest_WeaponMode.m_EnumValue & 0x3F);
-    other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_WeaponMode.m_EnumValue >> 6] |= v179;
-    v180 = (float)(signed int)v122;
-    if ( v180 >= 255.0 )
-      v180 = FLOAT_255_0;
-    other.mActionRequestChargeTimes[v178] = (signed int)v180;
-    other.mSignals |= v179;
+    v173 = gActionRequest_Raw_Focus_Lock.m_EnumValue;
+    v174 = gActionRequest_Raw_Focus_Lock.m_EnumValue & 0x3F;
+    v175 = v172->mOnSeconds * 60.0;
+    other.mActionRequests.mBits[(__int64)(int)gActionRequest_Raw_Focus_Lock.m_EnumValue >> 6] |= 1i64 << (gActionRequest_Raw_Focus_Lock.m_EnumValue & 0x3F);
+    v176 = (float)(int)v175;
+    if ( v176 >= 255.0 )
+      v176 = FLOAT_255_0;
+    other.mActionRequestChargeTimes[v173] = (int)v176;
+    other.mSignals |= 1i64 << v174;
+    v177 = gActionRequest_WeaponMode.m_EnumValue;
+    v317 = v172->mOnSeconds * 60.0;
+    v178 = 1i64 << (gActionRequest_WeaponMode.m_EnumValue & 0x3F);
+    other.mActionRequests.mBits[(__int64)(int)gActionRequest_WeaponMode.m_EnumValue >> 6] |= v178;
+    v179 = (float)(int)v317;
+    if ( v179 >= 255.0 )
+      v179 = FLOAT_255_0;
+    other.mActionRequestChargeTimes[v177] = (int)v179;
+    other.mSignals |= v178;
   }
-  v181 = UFG::ActionDef_Focus.mDataPerController[v8];
-  if ( v181 && v181->mActionTrue )
+  v180 = UFG::ActionDef_Focus.mDataPerController[m_ControllerID];
+  if ( v180 && v180->mActionTrue )
   {
-    if ( v10 )
+    if ( m_IsKeyboardController )
     {
-      v183 = UFG::ActionDef_Mouse.mDataPerController[v8];
-      if ( v183 )
+      v182 = UFG::ActionDef_Mouse.mDataPerController[m_ControllerID];
+      if ( v182 )
       {
-        v122 = v183->mAxisPositionX;
-        v184 = v183->mAxisPositionY;
+        v183 = v182->mAxisPositionX;
+        v184 = v182->mAxisPositionY;
       }
       else
       {
-        v122 = 0.0;
+        v183 = 0.0;
         v184 = 0.0;
       }
-      v321 = UFG::FollowCameraComponent::rMouseSpeedScaleVMin * v184;
-      v323 = UFG::FollowCameraComponent::rMouseSpeedScaleHMin * v122;
+      v324 = UFG::FollowCameraComponent::rMouseSpeedScaleVMin * v184;
+      v326 = UFG::FollowCameraComponent::rMouseSpeedScaleHMin * v183;
     }
     else
     {
-      v182 = UFG::ActionDef_CamMoveHorizVert.mDataPerController[v8];
-      if ( v182 && v182->mActionTrue )
+      v181 = UFG::ActionDef_CamMoveHorizVert.mDataPerController[m_ControllerID];
+      if ( v181 && v181->mActionTrue )
       {
-        v122 = v182->mAxisPositionX;
-        v323 = v182->mAxisPositionX;
-        LODWORD(v321) = LODWORD(v182->mAxisPositionY) ^ _xmm[0];
+        v326 = v181->mAxisPositionX;
+        LODWORD(v324) = LODWORD(v181->mAxisPositionY) ^ _xmm[0];
       }
     }
   }
-  v185 = UFG::ActionDef_Freerun.mDataPerController[v8];
+  v185 = UFG::ActionDef_Freerun.mDataPerController[m_ControllerID];
   if ( v185 && v185->mActionTrue || lock_freerun_button )
   {
     if ( v185 )
@@ -9178,153 +8094,144 @@ LABEL_203:
     else
       v186 = 0.0;
     v187 = gActionRequest_Freerun.m_EnumValue;
-    v122 = v186 * 60.0;
     v188 = 1i64 << (gActionRequest_Freerun.m_EnumValue & 0x3F);
-    other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_Freerun.m_EnumValue >> 6] |= v188;
-    v189 = (float)(signed int)v122;
+    other.mActionRequests.mBits[(__int64)(int)gActionRequest_Freerun.m_EnumValue >> 6] |= v188;
+    v189 = (float)(int)(float)(v186 * 60.0);
     if ( v189 >= 255.0 )
       v189 = FLOAT_255_0;
-    other.mActionRequestChargeTimes[v187] = (signed int)v189;
+    other.mActionRequestChargeTimes[v187] = (int)v189;
     other.mSignals |= v188;
   }
-  v190 = UFG::MultiAction_ForwardKeyDoubleTap.mDataPerController[v8];
+  v190 = UFG::MultiAction_ForwardKeyDoubleTap.mDataPerController[m_ControllerID];
   if ( v190 && v190->mActionTrue )
   {
     lock_freerun_button = 1;
   }
   else
   {
-    v191 = UFG::ActionDef_ForwardKey.mDataPerController[v8];
+    v191 = UFG::ActionDef_ForwardKey.mDataPerController[m_ControllerID];
     if ( !v191 || !v191->mActionTrue )
       lock_freerun_button = 0;
   }
-  v192 = UFG::ActionDef_VehicleFocus.mDataPerController[v8];
+  v192 = UFG::ActionDef_VehicleFocus.mDataPerController[m_ControllerID];
   if ( v192 && v192->mActionTrue
-    || (v193 = UFG::ActionDef_VehicleFocus_Alt.mDataPerController[v8]) != 0i64 && v193->mActionTrue )
+    || (v193 = UFG::ActionDef_VehicleFocus_Alt.mDataPerController[m_ControllerID]) != 0i64 && v193->mActionTrue )
   {
     v194 = gActionRequest_VehicleFocus.m_EnumValue;
-    v122 = 0.0;
     v195 = 1i64 << (gActionRequest_VehicleFocus.m_EnumValue & 0x3F);
-    other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_VehicleFocus.m_EnumValue >> 6] |= v195;
-    v196 = (float)(signed int)0.0;
+    other.mActionRequests.mBits[(__int64)(int)gActionRequest_VehicleFocus.m_EnumValue >> 6] |= v195;
+    v196 = (float)(int)0.0;
     if ( v196 >= 255.0 )
       v196 = FLOAT_255_0;
-    other.mActionRequestChargeTimes[v194] = (signed int)v196;
+    other.mActionRequestChargeTimes[v194] = (int)v196;
     other.mSignals |= v195;
   }
-  v197 = UFG::ActionDef_VehicleActionHijack.mDataPerController[v8];
+  v197 = UFG::ActionDef_VehicleActionHijack.mDataPerController[m_ControllerID];
   if ( v197 && v197->mActionTrue )
   {
     v198 = gActionRequest_VehicleActionHijackDesired.m_EnumValue;
-    v122 = 0.0;
     v199 = 1i64 << (gActionRequest_VehicleActionHijackDesired.m_EnumValue & 0x3F);
-    other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_VehicleActionHijackDesired.m_EnumValue >> 6] |= v199;
-    v200 = (float)(signed int)0.0;
+    other.mActionRequests.mBits[(__int64)(int)gActionRequest_VehicleActionHijackDesired.m_EnumValue >> 6] |= v199;
+    v200 = (float)(int)0.0;
     if ( v200 >= 255.0 )
       v200 = FLOAT_255_0;
-    other.mActionRequestChargeTimes[v198] = (signed int)v200;
+    other.mActionRequestChargeTimes[v198] = (int)v200;
     other.mSignals |= v199;
   }
-  v201 = UFG::ActionDef_Accelerate.mDataPerController[v8];
+  v201 = UFG::ActionDef_Accelerate.mDataPerController[m_ControllerID];
   if ( v201 && v201->mActionTrue )
   {
     v202 = v201->mOnSeconds;
     v203 = gActionRequest_VehicleGas.m_EnumValue;
     v204 = 1i64 << (gActionRequest_VehicleGas.m_EnumValue & 0x3F);
-    other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_VehicleGas.m_EnumValue >> 6] |= v204;
-    v122 = v202 * 60.0;
-    v205 = (float)(signed int)v122;
+    other.mActionRequests.mBits[(__int64)(int)gActionRequest_VehicleGas.m_EnumValue >> 6] |= v204;
+    v205 = (float)(int)(float)(v202 * 60.0);
     if ( v205 >= 255.0 )
       v205 = FLOAT_255_0;
-    other.mActionRequestChargeTimes[v203] = (signed int)v205;
+    other.mActionRequestChargeTimes[v203] = (int)v205;
     other.mSignals |= v204;
   }
   else
   {
-    v206 = UFG::ActionDef_AccelerateButton.mDataPerController[v8];
+    v206 = UFG::ActionDef_AccelerateButton.mDataPerController[m_ControllerID];
     if ( v206 && v206->mActionTrue )
       Intention::Set(&other, gActionRequest_VehicleGas.m_EnumValue, v206->mOnSeconds);
   }
-  v207 = UFG::ActionDef_Brake.mDataPerController[v8];
+  v207 = UFG::ActionDef_Brake.mDataPerController[m_ControllerID];
   if ( v207 && v207->mActionTrue )
   {
     v208 = gActionRequest_VehicleReverse.m_EnumValue;
-    v122 = 0.0;
     v209 = 1i64 << (gActionRequest_VehicleReverse.m_EnumValue & 0x3F);
-    other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_VehicleReverse.m_EnumValue >> 6] |= v209;
-    v210 = (float)(signed int)0.0;
+    other.mActionRequests.mBits[(__int64)(int)gActionRequest_VehicleReverse.m_EnumValue >> 6] |= v209;
+    v210 = (float)(int)0.0;
     if ( v210 >= 255.0 )
       v210 = FLOAT_255_0;
-    other.mActionRequestChargeTimes[v208] = (signed int)v210;
+    other.mActionRequestChargeTimes[v208] = (int)v210;
     other.mSignals |= v209;
   }
   else
   {
-    v211 = UFG::ActionDef_BrakeButton.mDataPerController[v8];
+    v211 = UFG::ActionDef_BrakeButton.mDataPerController[m_ControllerID];
     if ( v211 && v211->mActionTrue )
       Intention::Set(&other, gActionRequest_VehicleReverse.m_EnumValue, 0.0);
   }
-  v212 = UFG::ActionDef_HandBrake.mDataPerController[v8];
+  v212 = UFG::ActionDef_HandBrake.mDataPerController[m_ControllerID];
   if ( v212 && v212->mActionTrue )
   {
     v213 = gActionRequest_VehicleHandBrake.m_EnumValue;
-    v122 = 0.0;
     v214 = 1i64 << (gActionRequest_VehicleHandBrake.m_EnumValue & 0x3F);
-    other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_VehicleHandBrake.m_EnumValue >> 6] |= v214;
-    v215 = (float)(signed int)0.0;
+    other.mActionRequests.mBits[(__int64)(int)gActionRequest_VehicleHandBrake.m_EnumValue >> 6] |= v214;
+    v215 = (float)(int)0.0;
     if ( v215 >= 255.0 )
       v215 = FLOAT_255_0;
-    other.mActionRequestChargeTimes[v213] = (signed int)v215;
+    other.mActionRequestChargeTimes[v213] = (int)v215;
     other.mSignals |= v214;
   }
-  v216 = UFG::ActionDef_LookBack.mDataPerController[v8];
+  v216 = UFG::ActionDef_LookBack.mDataPerController[m_ControllerID];
   if ( v216 && v216->mActionTrue )
   {
     v217 = gActionRequest_VehicleLookBack.m_EnumValue;
-    v122 = 0.0;
     v218 = 1i64 << (gActionRequest_VehicleLookBack.m_EnumValue & 0x3F);
-    other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_VehicleLookBack.m_EnumValue >> 6] |= v218;
-    v219 = (float)(signed int)0.0;
+    other.mActionRequests.mBits[(__int64)(int)gActionRequest_VehicleLookBack.m_EnumValue >> 6] |= v218;
+    v219 = (float)(int)0.0;
     if ( v219 >= 255.0 )
       v219 = FLOAT_255_0;
-    other.mActionRequestChargeTimes[v217] = (signed int)v219;
+    other.mActionRequestChargeTimes[v217] = (int)v219;
     other.mSignals |= v218;
   }
-  v220 = UFG::ActionDef_Pickup.mDataPerController[v8];
+  v220 = UFG::ActionDef_Pickup.mDataPerController[m_ControllerID];
   if ( v220 && v220->mActionTrue )
   {
     v221 = v220->mOnSeconds;
     v222 = gActionRequest_Pickup.m_EnumValue;
     v223 = 1i64 << (gActionRequest_Pickup.m_EnumValue & 0x3F);
-    other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_Pickup.m_EnumValue >> 6] |= v223;
-    v122 = v221 * 60.0;
-    v224 = (float)(signed int)v122;
+    other.mActionRequests.mBits[(__int64)(int)gActionRequest_Pickup.m_EnumValue >> 6] |= v223;
+    v224 = (float)(int)(float)(v221 * 60.0);
     if ( v224 >= 255.0 )
       v224 = FLOAT_255_0;
-    other.mActionRequestChargeTimes[v222] = (signed int)v224;
+    other.mActionRequestChargeTimes[v222] = (int)v224;
     other.mSignals |= v223;
   }
-  v225 = UFG::ActionDef_UIL1Repeat.mDataPerController[v8];
+  v225 = UFG::ActionDef_UIL1Repeat.mDataPerController[m_ControllerID];
   v226 = gActionRequest_RotateLeft.m_EnumValue;
   if ( v225 && v225->mActionTrue )
   {
     v227 = v225->mOnSeconds;
     v228 = 1i64 << (gActionRequest_RotateLeft.m_EnumValue & 0x3F);
-    other.mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_RotateLeft.m_EnumValue >> 6] |= v228;
-    v122 = v227 * 60.0;
-    v229 = (float)(signed int)v122;
+    other.mActionRequests.mBits[(__int64)(int)gActionRequest_RotateLeft.m_EnumValue >> 6] |= v228;
+    v229 = (float)(int)(float)(v227 * 60.0);
     if ( v229 >= 255.0 )
       v229 = FLOAT_255_0;
-    other.mActionRequestChargeTimes[v226] = (signed int)v229;
+    other.mActionRequestChargeTimes[v226] = (int)v229;
     other.mSignals |= v228;
   }
-  v230 = UFG::ActionDef_UILeftRepeat.mDataPerController[v8];
+  v230 = UFG::ActionDef_UILeftRepeat.mDataPerController[m_ControllerID];
   if ( v230 && v230->mActionTrue )
     Intention::Set(&other, v226, v230->mOnSeconds);
-  v231 = UFG::ActionDef_UIR1Repeat.mDataPerController[v8];
+  v231 = UFG::ActionDef_UIR1Repeat.mDataPerController[m_ControllerID];
   if ( v231 && v231->mActionTrue )
     Intention::Set(&other, gActionRequest_RotateRight.m_EnumValue, v231->mOnSeconds);
-  v232 = UFG::ActionDef_UIRightRepeat.mDataPerController[v8];
+  v232 = UFG::ActionDef_UIRightRepeat.mDataPerController[m_ControllerID];
   if ( v232 && v232->mActionTrue )
     Intention::Set(&other, gActionRequest_RotateRight.m_EnumValue, v232->mOnSeconds);
   v233 = 0.0;
@@ -9333,408 +8240,394 @@ LABEL_203:
   v236 = 0.0;
   v237 = 0.0;
   v238 = 0.0;
-  v239 = UFG::Director::Get()->mCurrentCamera;
-  if ( v239 && v239->m_pSimObject )
+  mCurrentCamera = UFG::Director::Get()->mCurrentCamera;
+  if ( mCurrentCamera && mCurrentCamera->m_pSimObject )
   {
-    v240 = UFG::GetCurrentGameCamera();
-    v241 = v240;
-    if ( v240 )
+    CurrentGameCamera = UFG::GetCurrentGameCamera();
+    v241 = CurrentGameCamera;
+    if ( CurrentGameCamera )
     {
-      v242 = (signed __int64)&v240->mCamera;
+      p_mCamera = &CurrentGameCamera->mCamera;
     }
     else
     {
       if ( !UFG::bCameraSecondController )
-        goto LABEL_361;
+        goto LABEL_357;
       v243 = UFG::Director::Get()->mCurrentCamera;
       if ( !v243 )
-        goto LABEL_361;
-      v242 = (signed __int64)&v243->mCamera;
+        goto LABEL_357;
+      p_mCamera = &v243->mCamera;
     }
-    if ( !v242 )
-      goto LABEL_361;
-    v244 = *(int *)(v242 + 160);
-    v245 = *(int *)(v242 + 164);
-    v246 = *(int *)(v242 + 168);
-    v247 = *(float *)(v242 + 176);
-    v248 = *(float *)(v242 + 180);
-    v249 = *(float *)(v242 + 184);
+    if ( !p_mCamera )
+      goto LABEL_357;
+    x_low = SLODWORD(p_mCamera->mTransformation.v2.x);
+    v245 = SLODWORD(p_mCamera->mTransformation.v2.y);
+    z_low = SLODWORD(p_mCamera->mTransformation.v2.z);
+    v247 = p_mCamera->mTransformation.v3.x;
+    v248 = p_mCamera->mTransformation.v3.y;
+    z = p_mCamera->mTransformation.v3.z;
     if ( v241 )
     {
-      ((void (__fastcall *)(UFG::GameCameraComponent *))v241->vfptr[39].__vecDelDtor)(v241);
-      v250 = v122;
-      v251 = ((__int64 (__fastcall *)(UFG::GameCameraComponent *))v241->vfptr[38].__vecDelDtor)(v241);
+      v250 = ((double (__fastcall *)(UFG::GameCameraComponent *))v241->vfptr[39].__vecDelDtor)(v241);
+      v251 = *(float *)&v250;
+      v252 = ((__int64 (__fastcall *)(UFG::GameCameraComponent *))v241->vfptr[38].__vecDelDtor)(v241);
     }
     else
     {
-      v250 = 0.0;
-      v251 = 0;
+      v251 = 0.0;
+      v252 = 0;
     }
-    if ( (unsigned __int8)UFG::Editor::IsActive() )
+    if ( UFG::Editor::IsActive() )
     {
-      v252 = UFG::Editor::GetActiveView();
-      v253 = UFG::Editor::Camera::GetDirForward((UFG::Editor::Camera *)v252[10], &result);
-      v244 = LODWORD(v253->x) ^ _xmm[0];
-      v245 = LODWORD(v253->y) ^ _xmm[0];
-      v246 = LODWORD(v253->z) ^ _xmm[0];
-      v254 = UFG::Editor::GetActiveView();
-      v255 = UFG::Editor::Camera::GetPosition((UFG::Editor::Camera *)v254[10], &result);
-      v247 = v255->x;
-      v248 = v255->y;
-      v249 = v255->z;
+      ActiveView = UFG::Editor::GetActiveView();
+      DirForward = UFG::Editor::Camera::GetDirForward((UFG::Editor::Camera *)ActiveView[10], &v322);
+      x_low = LODWORD(DirForward->x) ^ _xmm[0];
+      v245 = LODWORD(DirForward->y) ^ _xmm[0];
+      z_low = LODWORD(DirForward->z) ^ _xmm[0];
+      v255 = UFG::Editor::GetActiveView();
+      Position = UFG::Editor::Camera::GetPosition((UFG::Editor::Camera *)v255[10], &v322);
+      v247 = Position->x;
+      v248 = Position->y;
+      z = Position->z;
     }
-    v256 = v3->m_pAICharacterControllerComponent.m_pPointer;
-    if ( v256 && BYTE6(v256[17].m_SafePointerList.mNode.mPrev) )
+    v257 = this->m_pAICharacterControllerComponent.m_pPointer;
+    if ( v257 && BYTE6(v257[17].m_SafePointerList.mNode.mPrev) )
     {
-      v257 = v3->m_pContext->mSimObject.m_pPointer;
-      if ( v257 )
+      v258 = this->m_pContext->mSimObject.m_pPointer;
+      if ( v258 )
       {
-        v258 = v257->m_pTransformNodeComponent;
-        if ( v258 )
+        m_pTransformNodeComponent = v258->m_pTransformNodeComponent;
+        if ( m_pTransformNodeComponent )
         {
-          UFG::TransformNodeComponent::UpdateWorldTransform(v258);
-          v259 = _xmm[0];
-          LODWORD(v260) = LODWORD(v258->mWorldTransform.v0.x) ^ _xmm[0];
-          v261 = LODWORD(v258->mWorldTransform.v0.y) ^ _xmm[0];
-LABEL_357:
+          UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+          v260 = _xmm[0];
+          LODWORD(v261) = LODWORD(m_pTransformNodeComponent->mWorldTransform.v0.x) ^ _xmm[0];
+          v262 = LODWORD(m_pTransformNodeComponent->mWorldTransform.v0.y) ^ _xmm[0];
+LABEL_353:
           v35 = *(float *)&FLOAT_1_0;
-          v266 = (float)((float)(*(float *)&v261 * *(float *)&v261) + (float)(v260 * v260)) + 0.0000000099999991;
-          if ( v266 == 0.0 )
-            v267 = 0.0;
+          v267 = (float)((float)(*(float *)&v262 * *(float *)&v262) + (float)(v261 * v261)) + 0.0000000099999991;
+          if ( v267 == 0.0 )
+            v268 = 0.0;
           else
-            v267 = 1.0 / fsqrt(v266);
-          v268 = v267;
-          v269 = v267 * *(float *)&v261;
-          v270 = v268 * v260;
-          v271 = v270 * v321;
-          v233 = COERCE_FLOAT(COERCE_UNSIGNED_INT(v270 * v316) ^ v259) - (float)(v269 * v324);
-          v234 = (float)(v270 * v324) - (float)(v269 * v316);
-          v235 = COERCE_FLOAT(COERCE_UNSIGNED_INT(v270 * v317) ^ v259) - (float)(v269 * v315);
-          v236 = (float)(v270 * v315) - (float)(v269 * v317);
-          v238 = (float)(v270 * v323) - (float)(v269 * v321);
-          v237 = COERCE_FLOAT(LODWORD(v271) ^ v259) - (float)(v269 * v323);
-          goto LABEL_361;
+            v268 = 1.0 / fsqrt(v267);
+          v269 = v268;
+          v270 = v268 * *(float *)&v262;
+          v271 = v269 * v261;
+          v272 = v271 * v324;
+          v233 = COERCE_FLOAT(COERCE_UNSIGNED_INT(v271 * v319) ^ v260) - (float)(v270 * v327);
+          v234 = (float)(v271 * v327) - (float)(v270 * v319);
+          v235 = COERCE_FLOAT(COERCE_UNSIGNED_INT(v271 * v320) ^ v260) - (float)(v270 * v318);
+          v236 = (float)(v271 * v318) - (float)(v270 * v320);
+          v238 = (float)(v271 * v326) - (float)(v270 * v324);
+          v237 = COERCE_FLOAT(LODWORD(v272) ^ v260) - (float)(v270 * v326);
+          goto LABEL_357;
         }
       }
     }
     else
     {
-      v260 = *(float *)&v244;
-      v261 = v245;
-      if ( !v251 )
+      v261 = *(float *)&x_low;
+      v262 = v245;
+      if ( !v252 )
       {
-LABEL_356:
-        v259 = _xmm[0];
-        goto LABEL_357;
+LABEL_352:
+        v260 = _xmm[0];
+        goto LABEL_353;
       }
-      v262 = v3->m_pContext->mSimObject.m_pPointer;
-      if ( v262 )
+      v263 = this->m_pContext->mSimObject.m_pPointer;
+      if ( v263 )
       {
-        v263 = v262->m_pTransformNodeComponent;
-        if ( v263 )
+        v264 = v263->m_pTransformNodeComponent;
+        if ( v264 )
         {
-          UFG::TransformNodeComponent::UpdateWorldTransform(v263);
-          v260 = v247 - v263->mWorldTransform.v3.x;
-          *(float *)&v261 = v248 - v263->mWorldTransform.v3.y;
-          *(float *)&v246 = v249 - v263->mWorldTransform.v3.z;
+          UFG::TransformNodeComponent::UpdateWorldTransform(v264);
+          v261 = v247 - v264->mWorldTransform.v3.x;
+          *(float *)&v262 = v248 - v264->mWorldTransform.v3.y;
+          *(float *)&z_low = z - v264->mWorldTransform.v3.z;
         }
       }
-      if ( fsqrt((float)(*(float *)&v261 * *(float *)&v261) + (float)(v260 * v260)) >= 0.0099999998 )
+      if ( fsqrt((float)(*(float *)&v262 * *(float *)&v262) + (float)(v261 * v261)) >= 0.0099999998 )
       {
-        if ( v250 != 0.0 )
+        if ( v251 != 0.0 )
         {
-          UFG::qRotationMatrixZ(&dest, v250 * fDeltaS);
-          v264 = (float)((float)(dest.v1.x * *(float *)&v261) + (float)(dest.v0.x * v260))
-               + (float)(dest.v2.x * *(float *)&v246);
-          v265 = (float)(dest.v1.y * *(float *)&v261) + (float)(dest.v0.y * v260);
-          v260 = v264;
-          *(float *)&v261 = v265 + (float)(dest.v2.y * *(float *)&v246);
+          UFG::qRotationMatrixZ(&dest, v251 * timeDelta);
+          v265 = (float)((float)(dest.v1.x * *(float *)&v262) + (float)(dest.v0.x * v261))
+               + (float)(dest.v2.x * *(float *)&z_low);
+          v266 = (float)(dest.v1.y * *(float *)&v262) + (float)(dest.v0.y * v261);
+          v261 = v265;
+          *(float *)&v262 = v266 + (float)(dest.v2.y * *(float *)&z_low);
         }
-        goto LABEL_356;
+        goto LABEL_352;
       }
     }
-    v260 = *(float *)&v244;
-    v261 = v245;
-    goto LABEL_356;
+    v261 = *(float *)&x_low;
+    v262 = v245;
+    goto LABEL_352;
   }
-LABEL_361:
-  v272 = (UFG::SimObjectCVBase *)v3->m_pContext->mSimObject.m_pPointer;
-  if ( v272 )
+LABEL_357:
+  v273 = (UFG::SimObjectCVBase *)this->m_pContext->mSimObject.m_pPointer;
+  if ( v273 )
   {
-    v273 = v272->m_Flags;
-    if ( (v273 >> 14) & 1 )
+    v274 = v273->m_Flags;
+    if ( (v274 & 0x4000) != 0 || v274 < 0 )
     {
-      v274 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v272);
+      v275 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v273);
     }
-    else if ( (v273 & 0x8000u) == 0 )
+    else if ( (v274 & 0x2000) != 0 || (v274 & 0x1000) != 0 )
     {
-      if ( (v273 >> 13) & 1 )
-      {
-        v274 = (UFG::ActiveAIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                 (UFG::SimObjectGame *)&v272->vfptr,
-                                                 UFG::ActiveAIEntityComponent::_TypeUID);
-      }
-      else if ( (v273 >> 12) & 1 )
-      {
-        v274 = (UFG::ActiveAIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                 (UFG::SimObjectGame *)&v272->vfptr,
-                                                 UFG::ActiveAIEntityComponent::_TypeUID);
-      }
-      else
-      {
-        v274 = (UFG::ActiveAIEntityComponent *)UFG::SimObject::GetComponentOfType(
-                                                 (UFG::SimObject *)&v272->vfptr,
-                                                 UFG::ActiveAIEntityComponent::_TypeUID);
-      }
+      v275 = (UFG::ActiveAIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                               v273,
+                                               UFG::ActiveAIEntityComponent::_TypeUID);
     }
     else
     {
-      v274 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v272);
+      v275 = (UFG::ActiveAIEntityComponent *)UFG::SimObject::GetComponentOfType(
+                                               v273,
+                                               UFG::ActiveAIEntityComponent::_TypeUID);
     }
-    v5 = v274;
+    v5 = v275;
   }
-  if ( v6 && v3->m_pAICharacterControllerComponent.m_pPointer && v5 && v5->m_HeadTrackingTarget.m_Type != -1 )
+  if ( p_m_Intention
+    && this->m_pAICharacterControllerComponent.m_pPointer
+    && v5
+    && v5->m_HeadTrackingTarget.m_Type != eHEAD_TRACK_TYPE_NONE )
   {
-    v275 = 1;
-    other.mDesireToLookAtPoint = v6->mDesireToLookAtPoint;
-    v276 = v6->mDesiredLookAtPoint.y;
-    v277 = v6->mDesiredLookAtPoint.z;
-    other.mDesiredLookAtPoint.x = v6->mDesiredLookAtPoint.x;
-    other.mDesiredLookAtPoint.y = v276;
-    other.mDesiredLookAtPoint.z = v277;
-    other.mDesireToLookAtPointEye = v6->mDesireToLookAtPointEye;
-    v278 = v6->mDesiredLookAtPointEye.y;
-    v279 = v6->mDesiredLookAtPointEye.z;
-    other.mDesiredLookAtPointEye.x = v6->mDesiredLookAtPointEye.x;
-    other.mDesiredLookAtPointEye.y = v278;
-    other.mDesiredLookAtPointEye.z = v279;
+    v276 = 1;
+    other.mDesireToLookAtPoint = p_m_Intention->mDesireToLookAtPoint;
+    v277 = p_m_Intention->mDesiredLookAtPoint.y;
+    v278 = p_m_Intention->mDesiredLookAtPoint.z;
+    other.mDesiredLookAtPoint.x = p_m_Intention->mDesiredLookAtPoint.x;
+    other.mDesiredLookAtPoint.y = v277;
+    other.mDesiredLookAtPoint.z = v278;
+    other.mDesireToLookAtPointEye = p_m_Intention->mDesireToLookAtPointEye;
+    v279 = p_m_Intention->mDesiredLookAtPointEye.y;
+    v280 = p_m_Intention->mDesiredLookAtPointEye.z;
+    other.mDesiredLookAtPointEye.x = p_m_Intention->mDesiredLookAtPointEye.x;
+    other.mDesiredLookAtPointEye.y = v279;
+    other.mDesiredLookAtPointEye.z = v280;
   }
   else
   {
-    v275 = 0;
+    v276 = 0;
   }
-  *(_DWORD *)&other.mAwarenessIntention.mEnableHeadTrack = *(_DWORD *)&v6->mAwarenessIntention.mEnableHeadTrack;
-  other.mAwarenessIntention.mHeadTrackLimitX = v6->mAwarenessIntention.mHeadTrackLimitX;
-  other.mAwarenessIntention.mHeadTrackLimitY = v6->mAwarenessIntention.mHeadTrackLimitY;
-  other.mAwarenessIntention.mHeadTrackLimitZ = v6->mAwarenessIntention.mHeadTrackLimitZ;
-  other.mAwarenessIntention.mEyeTrackLimitX = v6->mAwarenessIntention.mEyeTrackLimitX;
-  other.mAwarenessIntention.mEyeTrackLimitY = v6->mAwarenessIntention.mEyeTrackLimitY;
-  other.mAwarenessIntention.mEyeTrackLimitZ = v6->mAwarenessIntention.mEyeTrackLimitZ;
-  other.mAwarenessIntention.mSpineTrackLimitX = v6->mAwarenessIntention.mSpineTrackLimitX;
-  other.mAwarenessIntention.mSpineTrackLimitY = v6->mAwarenessIntention.mSpineTrackLimitY;
-  other.mAwarenessIntention.mSpineTrackLimitZ = v6->mAwarenessIntention.mSpineTrackLimitZ;
-  other.mAwarenessIntention.mHeadTrackGain = v6->mAwarenessIntention.mHeadTrackGain;
-  other.mAwarenessIntention.mEyeTrackGain = v6->mAwarenessIntention.mEyeTrackGain;
-  other.mAwarenessIntention.mSpineTrackGain = v6->mAwarenessIntention.mSpineTrackGain;
-  v280 = (float)(v236 * v236) + (float)(v235 * v235);
-  v281 = fsqrt(v280) - motionIntentionSpeedDeadZone;
-  if ( v281 < 0.0 )
-    v281 = 0.0;
-  v282 = v281 / (float)(v35 - motionIntentionSpeedDeadZone);
-  if ( v282 <= 0.001 )
+  other.mAwarenessIntention = p_m_Intention->mAwarenessIntention;
+  v281 = (float)(v236 * v236) + (float)(v235 * v235);
+  v282 = fsqrt(v281) - motionIntentionSpeedDeadZone;
+  if ( v282 < 0.0 )
+    v282 = 0.0;
+  v283 = v282 / (float)(v35 - motionIntentionSpeedDeadZone);
+  if ( v283 <= 0.001 )
   {
-    v294 = v3->m_pAICharacterControllerComponent.m_pPointer;
-    if ( !v294 )
-      goto LABEL_406;
-    if ( BYTE5(v294[17].m_SafePointerList.mNode.mPrev) )
+    v295 = this->m_pAICharacterControllerComponent.m_pPointer;
+    if ( !v295 )
+      goto LABEL_399;
+    if ( BYTE5(v295[17].m_SafePointerList.mNode.mPrev) )
     {
-      v295 = v3->m_pContext->mSimObject.m_pPointer;
-      if ( !v295 )
-        goto LABEL_406;
-      v296 = v295->m_pTransformNodeComponent;
+      v296 = this->m_pContext->mSimObject.m_pPointer;
       if ( !v296 )
-        goto LABEL_406;
-      UFG::TransformNodeComponent::UpdateWorldTransform(v296);
-      v297 = v296->mWorldTransform.v0.y;
-      v298 = v296->mWorldTransform.v0.z;
-      v299 = v296->mWorldTransform.v0.x;
+        goto LABEL_399;
+      v297 = v296->m_pTransformNodeComponent;
+      if ( !v297 )
+        goto LABEL_399;
+      UFG::TransformNodeComponent::UpdateWorldTransform(v297);
+      v298 = v297->mWorldTransform.v0.y;
+      v299 = v297->mWorldTransform.v0.z;
+      v300 = v297->mWorldTransform.v0.x;
     }
     else
     {
-      v297 = v6->mMotionIntentionDirection.y;
-      v298 = v6->mMotionIntentionDirection.z;
-      v299 = v6->mMotionIntentionDirection.x;
+      v298 = p_m_Intention->mMotionIntentionDirection.y;
+      v299 = p_m_Intention->mMotionIntentionDirection.z;
+      v300 = p_m_Intention->mMotionIntentionDirection.x;
     }
-    other.mMotionIntentionDirection.z = v298;
-    other.mMotionIntentionDirection.y = v297;
-    other.mMotionIntentionDirection.x = v299;
-    goto LABEL_406;
+    other.mMotionIntentionDirection.z = v299;
+    other.mMotionIntentionDirection.y = v298;
+    other.mMotionIntentionDirection.x = v300;
+    goto LABEL_399;
   }
-  if ( v280 == 0.0 )
-    v283 = 0.0;
+  if ( v281 == 0.0 )
+    v284 = 0.0;
   else
-    v283 = v35 / fsqrt(v280);
-  other.mMotionIntentionDirection.z = v283 * 0.0;
-  other.mMotionIntentionDirection.x = v283 * v235;
-  other.mMotionIntentionDirection.y = v283 * v236;
-  if ( !v275 )
+    v284 = v35 / fsqrt(v281);
+  other.mMotionIntentionDirection.z = v284 * 0.0;
+  other.mMotionIntentionDirection.x = v284 * v235;
+  other.mMotionIntentionDirection.y = v284 * v236;
+  if ( !v276 )
   {
-    v284 = (UFG::SimObjectCVBase *)v3->m_pContext->mSimObject.m_pPointer;
-    if ( v284 )
+    v285 = (UFG::SimObjectCVBase *)this->m_pContext->mSimObject.m_pPointer;
+    if ( v285 )
     {
-      v285 = v284->m_Flags;
-      if ( (v285 >> 14) & 1 )
+      v286 = v285->m_Flags;
+      if ( (v286 & 0x4000) != 0 || v286 < 0 )
       {
-        v286 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v284);
+        v287 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v285);
       }
-      else if ( (v285 & 0x8000u) == 0 )
+      else if ( (v286 & 0x2000) != 0 )
       {
-        if ( (v285 >> 13) & 1 )
-          v286 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v284);
-        else
-          v286 = (UFG::CharacterAnimationComponent *)((v285 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                           (UFG::SimObjectGame *)&v284->vfptr,
-                                                                           UFG::CharacterAnimationComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v284->vfptr, UFG::CharacterAnimationComponent::_TypeUID));
+        v287 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v285);
       }
       else
       {
-        v286 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v284);
+        v287 = (UFG::CharacterAnimationComponent *)((v286 & 0x1000) != 0
+                                                  ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                      v285,
+                                                      UFG::CharacterAnimationComponent::_TypeUID)
+                                                  : UFG::SimObject::GetComponentOfType(
+                                                      v285,
+                                                      UFG::CharacterAnimationComponent::_TypeUID));
       }
-      v287 = v286;
-      if ( v286 )
+      v288 = v287;
+      if ( v287 )
       {
-        v288 = v286->mCreature;
-        if ( v288->mPose.mRigHandle.mData )
+        mCreature = v287->mCreature;
+        if ( mCreature->mPose.mRigHandle.mData )
         {
-          v289 = Skeleton::GetBoneID(v288->mPose.mRigHandle.mUFGSkeleton, symBip01Neck.mUID);
-          if ( v289 >= 0 )
+          BoneID = Skeleton::GetBoneID(mCreature->mPose.mRigHandle.mUFGSkeleton, symBip01Neck.mUID);
+          if ( BoneID >= 0 )
           {
-            v290 = Creature::GetTranslation(v287->mCreature, &result, v289);
-            v291 = v290->y;
-            v292 = v290->z;
+            Translation = Creature::GetTranslation(v288->mCreature, &v322, BoneID);
+            v292 = Translation->y;
+            v293 = Translation->z;
             other.mDesiredLookAtPoint.x = other.mMotionIntentionDirection.x;
-            v293 = other.mMotionIntentionDirection.x + v290->x;
+            v294 = other.mMotionIntentionDirection.x + Translation->x;
             other.mDesireToLookAtPoint = 1;
-            other.mDesiredLookAtPoint.x = v293;
-            other.mDesiredLookAtPoint.y = other.mMotionIntentionDirection.y + v291;
-            other.mDesiredLookAtPoint.z = other.mMotionIntentionDirection.z + v292;
+            other.mDesiredLookAtPoint.x = v294;
+            other.mDesiredLookAtPoint.y = other.mMotionIntentionDirection.y + v292;
+            other.mDesiredLookAtPoint.z = other.mMotionIntentionDirection.z + v293;
           }
         }
       }
     }
   }
-LABEL_406:
-  other.mMotionIntentionSpeed = v282;
-  v300 = (float)(v234 * v234) + (float)(v233 * v233);
-  v301 = fsqrt(v300);
-  if ( v301 <= 0.001 )
+LABEL_399:
+  other.mMotionIntentionSpeed = v283;
+  v301 = (float)(v234 * v234) + (float)(v233 * v233);
+  v302 = fsqrt(v301);
+  if ( v302 <= 0.001 )
   {
-    v306 = (UFG::SimObjectGame *)v3->m_pContext->mSimObject.m_pPointer;
-    if ( !v306 )
-      goto LABEL_424;
-    v307 = v306->m_Flags;
-    if ( (v307 >> 14) & 1 )
+    v307 = (UFG::SimObjectGame *)this->m_pContext->mSimObject.m_pPointer;
+    if ( !v307 )
+      goto LABEL_417;
+    v308 = v307->m_Flags;
+    if ( (v308 & 0x4000) != 0 )
     {
-      v308 = v306->m_Components.p[7].m_pComponent;
+      v309 = v307->m_Components.p[7].m_pComponent;
     }
-    else if ( (v307 & 0x8000u) == 0 )
+    else if ( v308 >= 0 )
     {
-      if ( (v307 >> 13) & 1 )
-        v308 = v306->m_Components.p[6].m_pComponent;
+      if ( (v308 & 0x2000) != 0 )
+        v309 = v307->m_Components.p[6].m_pComponent;
       else
-        v308 = (v307 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v306, UFG::ActionTreeComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v306->vfptr, UFG::ActionTreeComponent::_TypeUID);
+        v309 = (v308 & 0x1000) != 0
+             ? UFG::SimObjectGame::GetComponentOfTypeHK(v307, UFG::ActionTreeComponent::_TypeUID)
+             : UFG::SimObject::GetComponentOfType(v307, UFG::ActionTreeComponent::_TypeUID);
     }
     else
     {
-      v308 = v306->m_Components.p[7].m_pComponent;
+      v309 = v307->m_Components.p[7].m_pComponent;
     }
-    if ( !v308 )
-      goto LABEL_424;
-    v309 = v6->mMotionIntentionDirectionRaw.y;
-    v305 = v6->mMotionIntentionDirectionRaw.z;
-    other.mMotionIntentionDirectionRaw.x = v6->mMotionIntentionDirectionRaw.x;
-    other.mMotionIntentionDirectionRaw.y = v309;
+    if ( !v309 )
+      goto LABEL_417;
+    v310 = p_m_Intention->mMotionIntentionDirectionRaw.y;
+    v306 = p_m_Intention->mMotionIntentionDirectionRaw.z;
+    other.mMotionIntentionDirectionRaw.x = p_m_Intention->mMotionIntentionDirectionRaw.x;
+    other.mMotionIntentionDirectionRaw.y = v310;
   }
   else
   {
-    if ( v300 == 0.0 )
-      v302 = 0.0;
+    if ( v301 == 0.0 )
+      v303 = 0.0;
     else
-      v302 = v35 / fsqrt(v300);
-    v303 = v302;
-    v304 = v302;
-    v305 = v302 * 0.0;
-    other.mMotionIntentionDirectionRaw.x = v303 * v233;
-    other.mMotionIntentionDirectionRaw.y = v304 * v234;
+      v303 = v35 / fsqrt(v301);
+    v304 = v303;
+    v305 = v303;
+    v306 = v303 * 0.0;
+    other.mMotionIntentionDirectionRaw.x = v304 * v233;
+    other.mMotionIntentionDirectionRaw.y = v305 * v234;
   }
-  other.mMotionIntentionDirectionRaw.z = v305;
-LABEL_424:
-  other.mMotionIntentionSpeedRaw = v301;
-  v310 = fsqrt((float)(v238 * v238) + (float)(v237 * v237));
-  if ( v310 == 0.0 )
+  other.mMotionIntentionDirectionRaw.z = v306;
+LABEL_417:
+  other.mMotionIntentionSpeedRaw = v302;
+  v311 = fsqrt((float)(v238 * v238) + (float)(v237 * v237));
+  if ( v311 == 0.0 )
   {
     *(_QWORD *)&other.mFacingIntentionDirection.x = 0i64;
     other.mFacingIntentionDirection.z = 0.0;
   }
   else
   {
-    v311 = v35 / v310;
-    other.mFacingIntentionDirection.x = other.mFacingIntentionDirection.x * v311;
-    other.mFacingIntentionDirection.y = other.mFacingIntentionDirection.y * v311;
-    other.mFacingIntentionDirection.z = other.mFacingIntentionDirection.z * v311;
+    v312 = v35 / v311;
+    other.mFacingIntentionDirection.x = other.mFacingIntentionDirection.x * v312;
+    other.mFacingIntentionDirection.y = other.mFacingIntentionDirection.y * v312;
+    other.mFacingIntentionDirection.z = other.mFacingIntentionDirection.z * v312;
   }
-  if ( v282 > 0.0 )
+  if ( v283 > 0.0 )
   {
-    v312 = UFG::ActionDef_Jog.mDataPerController[v8];
-    if ( v312 )
-      v4 = v312->mOnSeconds;
+    v313 = UFG::ActionDef_Jog.mDataPerController[m_ControllerID];
+    if ( v313 )
+      v4 = v313->mOnSeconds;
     Intention::Set(&other, gActionRequest_Jog.m_EnumValue, v4);
   }
   drawStickValues();
-  v313 = (UFG::AICharacterControllerComponent *)v3->m_pAICharacterControllerComponent.m_pPointer;
-  if ( v313 )
+  v314 = (UFG::AICharacterControllerComponent *)this->m_pAICharacterControllerComponent.m_pPointer;
+  if ( v314 )
   {
-    Intention::Set(&other, &v313->m_Intention.mActionRequests);
-    Intention::operator=(&v313->m_Intention, &other);
+    Intention::Set(&other, &v314->m_Intention.mActionRequests);
+    Intention::operator=(&v314->m_Intention, &other);
     UFG::AICharacterControllerBaseComponent::UpdateHoldMotionIntention(
-      (UFG::AICharacterControllerBaseComponent *)v3->m_pAICharacterControllerComponent.m_pPointer,
-      fDeltaS);
-    LOBYTE(v3->m_pAICharacterControllerComponent.m_pPointer[15].m_SafePointerList.mNode.mPrev) = 1;
+      (UFG::AICharacterControllerBaseComponent *)this->m_pAICharacterControllerComponent.m_pPointer,
+      timeDelta);
+    LOBYTE(this->m_pAICharacterControllerComponent.m_pPointer[15].m_SafePointerList.mNode.mPrev) = 1;
   }
   return 1;
+}s->m_pAICharacterControllerComponent.m_pPointer[15].m_SafePointerList.mNode.mPrev) = 1;
+  }
+  return 1;
 }
 
 // File Line: 4551
 // RVA: 0x2EF750
-void __fastcall HitRecordSetBerserkAttackFlagTask::Begin(HitRecordSetBerserkAttackFlagTask *this, ActionContext *context)
+void __fastcall HitRecordSetBerserkAttackFlagTask::Begin(
+        HitRecordSetBerserkAttackFlagTask *this,
+        ActionContext *context)
 {
-  UFG::SimObjectGame *v2; // rcx
-  unsigned __int16 v3; // dx
-  UFG::SimComponent *v4; // rcx
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rcx
   unsigned int v5; // edx
-  UFG::SimComponent *v6; // rax
+  UFG::SimComponent *ComponentOfType; // rax
   bool v7; // zf
   char v8; // al
 
-  v2 = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
-  if ( !v2 )
+  m_pPointer = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
+  if ( !m_pPointer )
     return;
-  v3 = v2->m_Flags;
-  if ( !((v3 >> 14) & 1) && (v3 & 0x8000u) == 0 )
+  m_Flags = m_pPointer->m_Flags;
+  if ( (m_Flags & 0x4000) == 0 && m_Flags >= 0 )
   {
-    if ( (v3 >> 13) & 1 )
+    if ( (m_Flags & 0x2000) != 0 )
     {
       v5 = UFG::HitReactionComponent::_TypeUID;
     }
     else
     {
-      v7 = ((v3 >> 12) & 1) == 0;
+      v7 = (m_Flags & 0x1000) == 0;
       v5 = UFG::HitReactionComponent::_TypeUID;
       if ( v7 )
       {
-        v6 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::HitReactionComponent::_TypeUID);
+        ComponentOfType = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::HitReactionComponent::_TypeUID);
         goto LABEL_10;
       }
     }
-    v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, v5);
+    ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, v5);
 LABEL_10:
-    v4 = v6;
+    m_pComponent = ComponentOfType;
     goto LABEL_11;
   }
-  v4 = v2->m_Components.p[15].m_pComponent;
+  m_pComponent = m_pPointer->m_Components.p[15].m_pComponent;
 LABEL_11:
   v8 = UFG::HitReactionComponent::msBerserkAttackValidFlag;
-  if ( v4 )
+  if ( m_pComponent )
     v8 = 1;
   UFG::HitReactionComponent::msBerserkAttackValidFlag = v8;
 }
@@ -9744,121 +8637,115 @@ LABEL_11:
 __int64 dynamic_initializer_for__qwsFaceMeterImpact__()
 {
   UFG::qWiseSymbol::create_from_string(&qwsFaceMeterImpact, "Play_face_meter_impact");
-  return atexit(dynamic_atexit_destructor_for__qwsFaceMeterImpact__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__qwsFaceMeterImpact__);
 }
 
 // File Line: 4568
 // RVA: 0x2F1F90
 void __fastcall PlayerBuffActivateTask::Begin(PlayerBuffActivateTask *this, ActionContext *context)
 {
-  UFG::ePlayerBuffEnum v2; // ebx
+  UFG::ePlayerBuffEnum vfptr; // ebx
 
-  v2 = (UFG::ePlayerBuffEnum)this->m_Track[1].vfptr;
+  vfptr = (UFG::ePlayerBuffEnum)this->m_Track[1].vfptr;
   if ( UFG::IsAnyLocalPlayer(context->mSimObject.m_pPointer) )
-    UFG::PlayerBuffTracker::ActivateBuff(v2);
+    UFG::PlayerBuffTracker::ActivateBuff(vfptr);
 }
 
 // File Line: 4581
 // RVA: 0x2F0150
 void __fastcall MoneyDropTask::Begin(MoneyDropTask *this, ActionContext *context)
 {
-  UFG::SimObjectGame *v2; // rcx
-  ActionContext *v3; // r14
-  UFG::SceneObjectProperties *v4; // rbx
-  UFG::TransformNodeComponent *v5; // rdi
-  unsigned __int16 v6; // dx
-  UFG::SimComponent *v7; // rax
-  char v8; // cl
-  int v9; // esi
+  UFG::SimObjectGame *m_pPointer; // rcx
+  UFG::SceneObjectProperties *m_pSceneObj; // rbx
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rdi
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rax
+  char m_pSimObject; // cl
+  int m_pSimObject_high; // esi
   UFG::qSymbol *v10; // rbx
-  float v11; // xmm1_4
-  float v12; // xmm0_4
+  float y; // xmm1_4
+  float z; // xmm0_4
   UFG::SimObjectGame *v13; // rax
-  unsigned __int16 v14; // dx
-  UFG::InventoryItemComponent *v15; // rax
-  UFG::qVector3 out; // [rsp+20h] [rbp-60h]
-  UFG::qVector3 position; // [rsp+30h] [rbp-50h]
-  UFG::qMatrix44 xform; // [rsp+40h] [rbp-40h]
-  UFG::SpawnInfoInterface::SpawnPriority pOverridePriority; // [rsp+A8h] [rbp+28h]
+  __int16 v14; // dx
+  UFG::InventoryItemComponent *ComponentOfTypeHK; // rax
+  UFG::qVector3 out; // [rsp+20h] [rbp-60h] BYREF
+  UFG::qVector3 position; // [rsp+30h] [rbp-50h] BYREF
+  UFG::qMatrix44 xform; // [rsp+40h] [rbp-40h] BYREF
+  UFG::SpawnInfoInterface::SpawnPriority pOverridePriority; // [rsp+A8h] [rbp+28h] BYREF
 
-  v2 = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
-  v3 = context;
-  if ( v2 )
-    v4 = v2->m_pSceneObj;
+  m_pPointer = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
+  if ( m_pPointer )
+    m_pSceneObj = m_pPointer->m_pSceneObj;
   else
-    v4 = 0i64;
-  if ( v2 )
-    v5 = v2->m_pTransformNodeComponent;
+    m_pSceneObj = 0i64;
+  if ( m_pPointer )
+    m_pTransformNodeComponent = m_pPointer->m_pTransformNodeComponent;
   else
-    v5 = 0i64;
-  if ( v4 && v5 && v2 )
+    m_pTransformNodeComponent = 0i64;
+  if ( m_pSceneObj && m_pTransformNodeComponent && m_pPointer )
   {
-    v6 = v2->m_Flags;
-    if ( (v6 >> 14) & 1 )
-    {
-      v7 = v2->m_Components.p[39].m_pComponent;
-    }
-    else if ( (v6 & 0x8000u) == 0 )
-    {
-      if ( (v6 >> 13) & 1 )
-        v7 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::InventoryComponent::_TypeUID);
-      else
-        v7 = (v6 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::InventoryComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::InventoryComponent::_TypeUID);
-    }
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
+      m_pComponent = m_pPointer->m_Components.p[39].m_pComponent;
     else
+      m_pComponent = m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+                   ? UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::InventoryComponent::_TypeUID)
+                   : UFG::SimObject::GetComponentOfType(m_pPointer, UFG::InventoryComponent::_TypeUID);
+    if ( m_pComponent )
     {
-      v7 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::InventoryComponent::_TypeUID);
-    }
-    if ( v7 )
-    {
-      if ( (v8 = (char)v7[14].m_pSimObject) != 0 && *(_DWORD *)&v7[14].m_Flags == 68 || SHIDWORD(v7[5].m_pSimObject) > 0 )
+      if ( (m_pSimObject = (char)m_pComponent[14].m_pSimObject) != 0 && *(_DWORD *)&m_pComponent[14].m_Flags == 68
+        || SHIDWORD(m_pComponent[5].m_pSimObject) > 0 )
       {
-        if ( !v8 || (v9 = 1, *(_DWORD *)&v7[14].m_Flags != 68) )
-          v9 = HIDWORD(v7[5].m_pSimObject);
-        HIDWORD(v7[5].m_pSimObject) = 0;
-        UFG::InventoryComponent::UpdateGameStat((UFG::InventoryComponent *)v7, eINVENTORY_ITEM_MONEY);
-        v10 = (UFG::qSymbol *)PropertyUtils::Get<UFG::qSymbol>(v4, (UFG::qSymbol *)&qSymbol_DropMoney.mUID);
+        if ( !m_pSimObject || (m_pSimObject_high = 1, *(_DWORD *)&m_pComponent[14].m_Flags != 68) )
+          m_pSimObject_high = HIDWORD(m_pComponent[5].m_pSimObject);
+        HIDWORD(m_pComponent[5].m_pSimObject) = 0;
+        UFG::InventoryComponent::UpdateGameStat((UFG::InventoryComponent *)m_pComponent, eINVENTORY_ITEM_MONEY);
+        v10 = (UFG::qSymbol *)PropertyUtils::Get<UFG::qSymbol>(
+                                m_pSceneObj,
+                                (UFG::qArray<unsigned long,0> *)&qSymbol_DropMoney);
         if ( v10 )
         {
-          pOverridePriority = 3;
+          pOverridePriority = High;
           xform = UFG::qMatrix44::msIdentity;
-          UFG::TransformNodeComponent::UpdateWorldTransform(v5);
-          v11 = v5->mWorldTransform.v3.y;
-          v12 = v5->mWorldTransform.v3.z;
-          position.x = v5->mWorldTransform.v3.x;
+          UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+          y = m_pTransformNodeComponent->mWorldTransform.v3.y;
+          z = m_pTransformNodeComponent->mWorldTransform.v3.z;
+          position.x = m_pTransformNodeComponent->mWorldTransform.v3.x;
           out.x = position.x;
-          position.y = v11;
-          position.z = v12;
-          out.y = v11;
-          out.z = v12;
+          position.y = y;
+          position.z = z;
+          out.y = y;
+          out.z = z;
           if ( UFG::PlaceOnGround(&out, &position, 0.0, 0.0) )
           {
-            *(UFG::qVector3 *)&xform.v3.x = out;
+            xform.v3.x = out.x;
+            xform.v3.y = out.y;
+            xform.v3.z = out.z;
             LODWORD(xform.v3.w) = (_DWORD)FLOAT_1_0;
-            v13 = (UFG::SimObjectGame *)UFG::CreateObject(v3, v10, &xform, &pOverridePriority);
+            v13 = (UFG::SimObjectGame *)UFG::CreateObject(context, v10, &xform, &pOverridePriority);
             if ( v13 )
             {
               v14 = v13->m_Flags;
-              if ( !((v14 >> 14) & 1) && (v14 & 0x8000u) == 0 )
+              if ( (v14 & 0x4000) == 0 && v14 >= 0 )
               {
-                if ( (v14 >> 13) & 1 )
+                if ( (v14 & 0x2000) != 0 )
                 {
-                  v15 = (UFG::InventoryItemComponent *)v13->m_Components.p[11].m_pComponent;
+                  ComponentOfTypeHK = (UFG::InventoryItemComponent *)v13->m_Components.p[11].m_pComponent;
                 }
-                else if ( (v14 >> 12) & 1 )
+                else if ( (v14 & 0x1000) != 0 )
                 {
-                  v15 = (UFG::InventoryItemComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                         v13,
-                                                         UFG::InventoryItemComponent::_TypeUID);
+                  ComponentOfTypeHK = (UFG::InventoryItemComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                       v13,
+                                                                       UFG::InventoryItemComponent::_TypeUID);
                 }
                 else
                 {
-                  v15 = (UFG::InventoryItemComponent *)UFG::SimObject::GetComponentOfType(
-                                                         (UFG::SimObject *)&v13->vfptr,
-                                                         UFG::InventoryItemComponent::_TypeUID);
+                  ComponentOfTypeHK = (UFG::InventoryItemComponent *)UFG::SimObject::GetComponentOfType(
+                                                                       v13,
+                                                                       UFG::InventoryItemComponent::_TypeUID);
                 }
-                if ( v15 )
-                  UFG::InventoryItemComponent::SetQuantity(v15, v9);
+                if ( ComponentOfTypeHK )
+                  UFG::InventoryItemComponent::SetQuantity(ComponentOfTypeHK, m_pSimObject_high);
               }
             }
           }
@@ -9872,80 +8759,84 @@ void __fastcall MoneyDropTask::Begin(MoneyDropTask *this, ActionContext *context
 // RVA: 0x2F03E0
 void __fastcall MoneyPickupTask::Begin(MoneyPickupTask *this, ActionContext *context)
 {
-  UFG::SimObjectGame *v2; // rax
+  UFG::SimObjectGame *Target; // rax
   UFG::SimObject *v3; // rdi
-  unsigned __int16 v4; // dx
-  UFG::SimComponent *v5; // rsi
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rsi
   UFG::SimComponent *v6; // rax
-  int v7; // ebx
+  int mPrev; // ebx
   UFG::GameStatTracker *v8; // rax
   int v9; // ebx
   UFG::GameStatTracker *v10; // rax
   int v11; // ebx
   UFG::OSuiteLeaderboardManager *v12; // rax
-  UFG::OSuiteLeaderboardData *v13; // rax
-  UFG::SceneObjectProperties *v14; // rax
-  UFG::qPropertySet *v15; // rcx
+  UFG::OSuiteLeaderboardData *LeaderboardDataUsingLeaderboardName; // rax
+  UFG::SceneObjectProperties *m_pSceneObj; // rax
+  UFG::qPropertySet *mpWritableProperties; // rcx
   bool *v16; // rax
   int v17; // ebx
   UFG::OSuiteLeaderboardManager *v18; // rax
   UFG::OSuiteLeaderboardData *v19; // rax
-  UFG::qSymbol result; // [rsp+48h] [rbp+20h]
+  UFG::qSymbol result; // [rsp+48h] [rbp+20h] BYREF
 
-  v2 = (UFG::SimObjectGame *)UFG::getTarget(context, eTARGET_TYPE_PICKUP_ITEM);
-  v3 = (UFG::SimObject *)&v2->vfptr;
-  if ( v2 )
+  Target = (UFG::SimObjectGame *)UFG::getTarget(context, eTARGET_TYPE_PICKUP_ITEM);
+  v3 = Target;
+  if ( Target )
   {
-    v4 = v2->m_Flags;
-    if ( (v4 >> 14) & 1 || (v4 & 0x8000u) != 0 )
+    m_Flags = Target->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
       goto LABEL_20;
-    if ( (v4 >> 13) & 1 )
+    if ( (m_Flags & 0x2000) != 0 )
     {
-      v5 = v2->m_Components.p[11].m_pComponent;
+      m_pComponent = Target->m_Components.p[11].m_pComponent;
     }
     else
     {
-      v6 = (v4 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::InventoryItemComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::InventoryItemComponent::_TypeUID);
-      v5 = v6;
+      v6 = (m_Flags & 0x1000) != 0
+         ? UFG::SimObjectGame::GetComponentOfTypeHK(Target, UFG::InventoryItemComponent::_TypeUID)
+         : UFG::SimObject::GetComponentOfType(Target, UFG::InventoryItemComponent::_TypeUID);
+      m_pComponent = v6;
     }
-    if ( !v5 || LODWORD(v5[1].m_pSimObject) != 68 )
+    if ( !m_pComponent || LODWORD(m_pComponent[1].m_pSimObject) != 68 )
       goto LABEL_20;
-    v7 = (int)v5[1].m_BoundComponentHandles.mNode.mPrev;
+    mPrev = (int)m_pComponent[1].m_BoundComponentHandles.mNode.mPrev;
     v8 = UFG::GameStatTracker::Instance();
-    UFG::GameStatTracker::ApplyDelta(v8, Money, v7);
-    v9 = (int)v5[1].m_BoundComponentHandles.mNode.mPrev;
+    UFG::GameStatTracker::ApplyDelta(v8, Money, mPrev);
+    v9 = (int)m_pComponent[1].m_BoundComponentHandles.mNode.mPrev;
     v10 = UFG::GameStatTracker::Instance();
     UFG::GameStatTracker::ApplyDelta(v10, TotalCashEarned, v9);
-    v11 = (int)v5[1].m_BoundComponentHandles.mNode.mPrev;
+    v11 = (int)m_pComponent[1].m_BoundComponentHandles.mNode.mPrev;
     v12 = UFG::OSuiteLeaderboardManager::Instance();
-    v13 = UFG::OSuiteLeaderboardManager::GetLeaderboardDataUsingLeaderboardName(v12, "StatAwardsMogul");
-    UFG::DataSynchronizer::ApplyDeltaToGlobalSnapshot(v13, v11);
+    LeaderboardDataUsingLeaderboardName = UFG::OSuiteLeaderboardManager::GetLeaderboardDataUsingLeaderboardName(
+                                            v12,
+                                            "StatAwardsMogul");
+    UFG::DataSynchronizer::ApplyDeltaToGlobalSnapshot(LeaderboardDataUsingLeaderboardName, v11);
     UFG::qSymbol::create_from_string(&result, "ParkingMeterDrop");
-    v14 = v3->m_pSceneObj;
-    if ( v14 )
+    m_pSceneObj = v3->m_pSceneObj;
+    if ( m_pSceneObj )
     {
-      v15 = v14->mpWritableProperties;
-      if ( v15 )
+      mpWritableProperties = m_pSceneObj->mpWritableProperties;
+      if ( mpWritableProperties )
         goto LABEL_17;
-      v15 = v14->mpConstProperties;
+      mpWritableProperties = m_pSceneObj->mpConstProperties;
     }
     else
     {
-      v15 = 0i64;
+      mpWritableProperties = 0i64;
     }
-    if ( !v15 )
+    if ( !mpWritableProperties )
     {
 LABEL_20:
       UFG::SimObject::Destroy(v3);
       return;
     }
 LABEL_17:
-    v16 = UFG::qPropertySet::Get<bool>(v15, &result, DEPTH_RECURSE);
+    v16 = UFG::qPropertySet::Get<bool>(mpWritableProperties, (UFG::qArray<unsigned long,0> *)&result, DEPTH_RECURSE);
     if ( v16 )
     {
       if ( *v16 )
       {
-        v17 = (int)v5[1].m_BoundComponentHandles.mNode.mPrev;
+        v17 = (int)m_pComponent[1].m_BoundComponentHandles.mNode.mPrev;
         v18 = UFG::OSuiteLeaderboardManager::Instance();
         v19 = UFG::OSuiteLeaderboardManager::GetLeaderboardDataUsingLeaderboardName(v18, "StatGamesCoinsCollected");
         UFG::StatGameManager::UpdateScore(v19, v17, 1);
@@ -9959,61 +8850,60 @@ LABEL_17:
 // RVA: 0x2EFBE0
 void __fastcall ItemPickupTask::Begin(ItemPickupTask *this, ActionContext *context)
 {
-  UFG::SimObjectGame *v2; // rax
+  UFG::SimObjectGame *Target; // rax
   UFG::SimObject *v3; // rbx
-  unsigned __int16 v4; // dx
-  UFG::SimComponent *v5; // rdi
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rdi
   UFG::SimComponent *v6; // rax
   UFG::ProgressionTracker *v7; // rax
-  UFG::GameSlice *v8; // rax
+  UFG::GameSlice *ActiveMaster; // rax
   UFG::GameSlice *v9; // rsi
   SSInstance *v10; // rax
-  unsigned __int64 v11; // rdx
+  unsigned __int64 mPrev_low; // rdx
   SSInstance *v12; // rax
-  signed __int64 v13; // rcx
-  SSInstance *v14; // [rsp+30h] [rbp-18h]
-  SSInstance *v15; // [rsp+38h] [rbp-10h]
+  __int64 v13; // rcx
+  __int64 v14[3]; // [rsp+30h] [rbp-18h] BYREF
 
-  v2 = (UFG::SimObjectGame *)UFG::getTarget(context, eTARGET_TYPE_PICKUP_ITEM);
-  v3 = (UFG::SimObject *)&v2->vfptr;
-  if ( v2 )
+  Target = (UFG::SimObjectGame *)UFG::getTarget(context, eTARGET_TYPE_PICKUP_ITEM);
+  v3 = Target;
+  if ( Target )
   {
-    v4 = v2->m_Flags;
-    if ( !((v4 >> 14) & 1) && (v4 & 0x8000u) == 0 )
+    m_Flags = Target->m_Flags;
+    if ( (m_Flags & 0x4000) == 0 && m_Flags >= 0 )
     {
-      if ( (v4 >> 13) & 1 )
+      if ( (m_Flags & 0x2000) != 0 )
       {
-        v5 = v2->m_Components.p[11].m_pComponent;
+        m_pComponent = Target->m_Components.p[11].m_pComponent;
       }
       else
       {
-        v6 = (v4 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::InventoryItemComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::InventoryItemComponent::_TypeUID);
-        v5 = v6;
+        v6 = (m_Flags & 0x1000) != 0
+           ? UFG::SimObjectGame::GetComponentOfTypeHK(Target, UFG::InventoryItemComponent::_TypeUID)
+           : UFG::SimObject::GetComponentOfType(Target, UFG::InventoryItemComponent::_TypeUID);
+        m_pComponent = v6;
       }
-      if ( v5 )
+      if ( m_pComponent )
       {
         v7 = UFG::ProgressionTracker::Instance();
-        v8 = UFG::ProgressionTracker::GetActiveMaster(v7);
-        v9 = v8;
-        if ( v8 )
+        ActiveMaster = UFG::ProgressionTracker::GetActiveMaster(v7);
+        v9 = ActiveMaster;
+        if ( ActiveMaster )
         {
-          if ( v8->mState == 4 )
+          if ( ActiveMaster->mState == STATE_STARTED )
           {
-            v10 = SSSymbol::as_instance((ASymbol *)&UFG::InventoryItemEnumSymbols[SLODWORD(v5[1].m_pSimObject)]);
-            v11 = LODWORD(v5[1].m_BoundComponentHandles.mNode.mPrev);
-            v14 = v10;
-            v12 = SSInstance::pool_new(SSBrain::c_integer_class_p, v11);
-            v13 = (signed __int64)&v9->mScript->vfptr;
-            v15 = v12;
-            (*(void (__fastcall **)(signed __int64, UFG::qStaticSymbol *, SSInstance **, signed __int64, _QWORD, _QWORD, SSInstance *, SSInstance *))(*(_QWORD *)v13 + 104i64))(
+            v10 = SSSymbol::as_instance((ASymbol *)&UFG::InventoryItemEnumSymbols[SLODWORD(m_pComponent[1].m_pSimObject)]);
+            mPrev_low = LODWORD(m_pComponent[1].m_BoundComponentHandles.mNode.mPrev);
+            v14[0] = (__int64)v10;
+            v12 = SSInstance::pool_new(SSBrain::c_integer_class_p, mPrev_low);
+            v13 = (__int64)&v9->mScript->SSActor;
+            v14[1] = (__int64)v12;
+            (*(void (__fastcall **)(__int64, UFG::qStaticSymbol *, __int64 *, __int64, _QWORD, _QWORD))(*(_QWORD *)v13 + 104i64))(
               v13,
               &qSymbol_on_pickup,
-              &v14,
+              v14,
               2i64,
               0i64,
-              0i64,
-              v14,
-              v12);
+              0i64);
           }
         }
         UFG::SimObject::Destroy(v3);
@@ -10026,41 +8916,24 @@ void __fastcall ItemPickupTask::Begin(ItemPickupTask *this, ActionContext *conte
 // RVA: 0x2EE320
 void __fastcall FaceMeterActivateTask::Begin(FaceMeterActivateTask *this, ActionContext *pContext)
 {
-  UFG::SimObjectGame *v2; // rcx
-  unsigned __int16 v3; // dx
-  UFG::FaceMeterComponent *v4; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::FaceMeterComponent *ComponentOfTypeHK; // rax
 
-  v2 = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
-  if ( v2 )
+  m_pPointer = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v3 = v2->m_Flags;
-    if ( (v3 >> 14) & 1 )
-    {
-      v4 = (UFG::FaceMeterComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::FaceMeterComponent::_TypeUID);
-    }
-    else if ( (v3 & 0x8000u) == 0 )
-    {
-      if ( (v3 >> 13) & 1 )
-      {
-        v4 = (UFG::FaceMeterComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::FaceMeterComponent::_TypeUID);
-      }
-      else if ( (v3 >> 12) & 1 )
-      {
-        v4 = (UFG::FaceMeterComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::FaceMeterComponent::_TypeUID);
-      }
-      else
-      {
-        v4 = (UFG::FaceMeterComponent *)UFG::SimObject::GetComponentOfType(
-                                          (UFG::SimObject *)&v2->vfptr,
-                                          UFG::FaceMeterComponent::_TypeUID);
-      }
-    }
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+      ComponentOfTypeHK = (UFG::FaceMeterComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                       m_pPointer,
+                                                       UFG::FaceMeterComponent::_TypeUID);
     else
-    {
-      v4 = (UFG::FaceMeterComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::FaceMeterComponent::_TypeUID);
-    }
-    if ( v4 )
-      UFG::FaceMeterComponent::SetFaceMeterActivated(v4, 1);
+      ComponentOfTypeHK = (UFG::FaceMeterComponent *)UFG::SimObject::GetComponentOfType(
+                                                       m_pPointer,
+                                                       UFG::FaceMeterComponent::_TypeUID);
+    if ( ComponentOfTypeHK )
+      UFG::FaceMeterComponent::SetFaceMeterActivated(ComponentOfTypeHK, 1);
   }
 }
 
@@ -10068,43 +8941,30 @@ void __fastcall FaceMeterActivateTask::Begin(FaceMeterActivateTask *this, Action
 // RVA: 0x2EE270
 void __fastcall FaceInteractionResultSetTask::Begin(FaceInteractionResultSetTask *this, ActionContext *context)
 {
-  FaceInteractionResultSetTask *v2; // rbx
-  UFG::SimObjectGame *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::SimComponent *v5; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rax
 
-  v2 = this;
-  v3 = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v4 = v3->m_Flags;
-    if ( (v4 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v5 = v3->m_Components.p[45].m_pComponent;
+      m_pComponent = m_pPointer->m_Components.p[45].m_pComponent;
     }
-    else if ( (v4 & 0x8000u) == 0 )
+    else if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v4 >> 13) & 1 )
-      {
-        v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::FaceActionComponent::_TypeUID);
-      }
-      else if ( (v4 >> 12) & 1 )
-      {
-        v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::FaceActionComponent::_TypeUID);
-      }
-      else
-      {
-        v5 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::FaceActionComponent::_TypeUID);
-      }
+      m_pComponent = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::FaceActionComponent::_TypeUID);
     }
     else
     {
-      v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::FaceActionComponent::_TypeUID);
+      m_pComponent = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::FaceActionComponent::_TypeUID);
     }
-    if ( v5 )
+    if ( m_pComponent )
     {
-      if ( LOBYTE(v5[1].m_SafePointerList.mNode.mNext) )
-        ((void (*)(void))v2->m_Track[1].mResourceOwner->vfptr[1].__vecDelDtor)();
+      if ( LOBYTE(m_pComponent[1].m_SafePointerList.mNode.mNext) )
+        ((void (__fastcall *)(Expression::IMemberMap *))this->m_Track[1].mResourceOwner->Expression::IMemberMap::vfptr[1].__vecDelDtor)(this->m_Track[1].mResourceOwner);
     }
   }
 }
@@ -10113,53 +8973,41 @@ void __fastcall FaceInteractionResultSetTask::Begin(FaceInteractionResultSetTask
 // RVA: 0x2EF250
 void __fastcall HealthRegenRateTask::Begin(HealthRegenRateTask *this, ActionContext *pContext)
 {
-  ITrack *v2; // rax
-  ActionContext *v3; // rbx
-  HealthRegenRateTask *v4; // rdi
-  UFG::SimObjectGame *v5; // rcx
-  unsigned __int16 v6; // dx
-  UFG::SimComponent *v7; // rdx
-  UFG::SimComponent *v8; // rax
+  ITrack *m_Track; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rdx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
 
-  v2 = this->m_Track;
+  m_Track = this->m_Track;
   this->m_pContext = pContext;
   this->m_fPreviousRate = -1.0;
-  v3 = pContext;
-  v4 = this;
-  if ( !LOBYTE(v2[1].vfptr) || UFG::IsAnyLocalPlayer(pContext->mSimObject.m_pPointer) )
+  if ( !LOBYTE(m_Track[1].vfptr) || UFG::IsAnyLocalPlayer(pContext->mSimObject.m_pPointer) )
   {
-    v5 = (UFG::SimObjectGame *)v3->mSimObject.m_pPointer;
-    if ( v5 )
+    m_pPointer = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      v6 = v5->m_Flags;
-      if ( (v6 >> 14) & 1 )
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
       {
-        v7 = v5->m_Components.p[6].m_pComponent;
+        m_pComponent = m_pPointer->m_Components.p[6].m_pComponent;
       }
-      else if ( (v6 & 0x8000u) == 0 )
+      else if ( m_Flags >= 0 )
       {
-        if ( (v6 >> 13) & 1 )
-        {
-          v8 = UFG::SimObjectGame::GetComponentOfTypeHK(v5, UFG::HealthComponent::_TypeUID);
-        }
-        else if ( (v6 >> 12) & 1 )
-        {
-          v8 = UFG::SimObjectGame::GetComponentOfTypeHK(v5, UFG::HealthComponent::_TypeUID);
-        }
+        if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+          ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::HealthComponent::_TypeUID);
         else
-        {
-          v8 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v5->vfptr, UFG::HealthComponent::_TypeUID);
-        }
-        v7 = v8;
+          ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::HealthComponent::_TypeUID);
+        m_pComponent = ComponentOfTypeHK;
       }
       else
       {
-        v7 = v5->m_Components.p[6].m_pComponent;
+        m_pComponent = m_pPointer->m_Components.p[6].m_pComponent;
       }
-      if ( v7 )
+      if ( m_pComponent )
       {
-        v4->m_fPreviousRate = *((float *)&v7[1].m_BoundComponentHandles.mNode.mNext + 1);
-        HIDWORD(v7[1].m_BoundComponentHandles.mNode.mNext) = HIDWORD(v4->m_Track[1].vfptr);
+        this->m_fPreviousRate = *((float *)&m_pComponent[1].m_BoundComponentHandles.mNode.mNext + 1);
+        HIDWORD(m_pComponent[1].m_BoundComponentHandles.mNode.mNext) = HIDWORD(this->m_Track[1].vfptr);
       }
     }
   }
@@ -10176,45 +9024,35 @@ bool __fastcall HealthRegenRateTask::Update(HealthRegenRateTask *this, float tim
 // RVA: 0x2FEC50
 void __fastcall HealthRegenRateTask::End(HealthRegenRateTask *this)
 {
-  HealthRegenRateTask *v1; // rbx
-  UFG::SimObjectGame *v2; // rcx
-  unsigned __int16 v3; // dx
-  UFG::SimComponent *v4; // rcx
-  UFG::SimComponent *v5; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rcx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
 
-  v1 = this;
   if ( this->m_fPreviousRate >= 0.0 )
   {
-    v2 = (UFG::SimObjectGame *)this->m_pContext->mSimObject.m_pPointer;
-    if ( v2 )
+    m_pPointer = (UFG::SimObjectGame *)this->m_pContext->mSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      v3 = v2->m_Flags;
-      if ( (v3 >> 14) & 1 )
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
       {
-        v4 = v2->m_Components.p[6].m_pComponent;
+        m_pComponent = m_pPointer->m_Components.p[6].m_pComponent;
       }
-      else if ( (v3 & 0x8000u) == 0 )
+      else if ( m_Flags >= 0 )
       {
-        if ( (v3 >> 13) & 1 )
-        {
-          v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::HealthComponent::_TypeUID);
-        }
-        else if ( (v3 >> 12) & 1 )
-        {
-          v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::HealthComponent::_TypeUID);
-        }
+        if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+          ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::HealthComponent::_TypeUID);
         else
-        {
-          v5 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::HealthComponent::_TypeUID);
-        }
-        v4 = v5;
+          ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::HealthComponent::_TypeUID);
+        m_pComponent = ComponentOfTypeHK;
       }
       else
       {
-        v4 = v2->m_Components.p[6].m_pComponent;
+        m_pComponent = m_pPointer->m_Components.p[6].m_pComponent;
       }
-      if ( v4 )
-        HIDWORD(v4[1].m_BoundComponentHandles.mNode.mNext) = LODWORD(v1->m_fPreviousRate);
+      if ( m_pComponent )
+        HIDWORD(m_pComponent[1].m_BoundComponentHandles.mNode.mNext) = LODWORD(this->m_fPreviousRate);
     }
   }
 }
@@ -10223,47 +9061,37 @@ void __fastcall HealthRegenRateTask::End(HealthRegenRateTask *this)
 // RVA: 0x2EF320
 void __fastcall HealthRegenerateTask::Begin(HealthRegenerateTask *this, ActionContext *pContext)
 {
-  ActionContext *v2; // rbx
-  HealthRegenerateTask *v3; // rdi
-  UFG::SimObjectGame *v4; // rcx
-  unsigned __int16 v5; // dx
-  UFG::HealthComponent *v6; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::HealthComponent *m_pComponent; // rax
 
-  v2 = pContext;
-  v3 = this;
   if ( !LOBYTE(this->m_Track[1].vfptr) || UFG::IsAnyLocalPlayer(pContext->mSimObject.m_pPointer) )
   {
-    v4 = (UFG::SimObjectGame *)v2->mSimObject.m_pPointer;
-    if ( v4 )
+    m_pPointer = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      v5 = v4->m_Flags;
-      if ( (v5 >> 14) & 1 )
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
       {
-        v6 = (UFG::HealthComponent *)v4->m_Components.p[6].m_pComponent;
+        m_pComponent = (UFG::HealthComponent *)m_pPointer->m_Components.p[6].m_pComponent;
       }
-      else if ( (v5 & 0x8000u) == 0 )
+      else if ( m_Flags >= 0 )
       {
-        if ( (v5 >> 13) & 1 )
-        {
-          v6 = (UFG::HealthComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::HealthComponent::_TypeUID);
-        }
-        else if ( (v5 >> 12) & 1 )
-        {
-          v6 = (UFG::HealthComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::HealthComponent::_TypeUID);
-        }
+        if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+          m_pComponent = (UFG::HealthComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                   m_pPointer,
+                                                   UFG::HealthComponent::_TypeUID);
         else
-        {
-          v6 = (UFG::HealthComponent *)UFG::SimObject::GetComponentOfType(
-                                         (UFG::SimObject *)&v4->vfptr,
-                                         UFG::HealthComponent::_TypeUID);
-        }
+          m_pComponent = (UFG::HealthComponent *)UFG::SimObject::GetComponentOfType(
+                                                   m_pPointer,
+                                                   UFG::HealthComponent::_TypeUID);
       }
       else
       {
-        v6 = (UFG::HealthComponent *)v4->m_Components.p[6].m_pComponent;
+        m_pComponent = (UFG::HealthComponent *)m_pPointer->m_Components.p[6].m_pComponent;
       }
-      if ( v6 )
-        UFG::HealthComponent::AddHealthRegenerateTask(v6, v3);
+      if ( m_pComponent )
+        UFG::HealthComponent::AddHealthRegenerateTask(m_pComponent, this);
     }
   }
 }
@@ -10272,45 +9100,37 @@ void __fastcall HealthRegenerateTask::Begin(HealthRegenerateTask *this, ActionCo
 // RVA: 0x2EF3D0
 void __fastcall HealthReplenishInstantTask::Begin(HealthReplenishInstantTask *this, ActionContext *pContext)
 {
-  ActionContext *v2; // rbx
-  UFG::SimObjectGame *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::HealthComponent *v5; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::HealthComponent *m_pComponent; // rax
 
-  v2 = pContext;
   if ( !LOBYTE(this->m_Track[1].vfptr) || UFG::IsAnyLocalPlayer(pContext->mSimObject.m_pPointer) )
   {
-    v3 = (UFG::SimObjectGame *)v2->mSimObject.m_pPointer;
-    if ( v3 )
+    m_pPointer = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      v4 = v3->m_Flags;
-      if ( (v4 >> 14) & 1 )
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
       {
-        v5 = (UFG::HealthComponent *)v3->m_Components.p[6].m_pComponent;
+        m_pComponent = (UFG::HealthComponent *)m_pPointer->m_Components.p[6].m_pComponent;
       }
-      else if ( (v4 & 0x8000u) == 0 )
+      else if ( m_Flags >= 0 )
       {
-        if ( (v4 >> 13) & 1 )
-        {
-          v5 = (UFG::HealthComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::HealthComponent::_TypeUID);
-        }
-        else if ( (v4 >> 12) & 1 )
-        {
-          v5 = (UFG::HealthComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::HealthComponent::_TypeUID);
-        }
+        if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+          m_pComponent = (UFG::HealthComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                   m_pPointer,
+                                                   UFG::HealthComponent::_TypeUID);
         else
-        {
-          v5 = (UFG::HealthComponent *)UFG::SimObject::GetComponentOfType(
-                                         (UFG::SimObject *)&v3->vfptr,
-                                         UFG::HealthComponent::_TypeUID);
-        }
+          m_pComponent = (UFG::HealthComponent *)UFG::SimObject::GetComponentOfType(
+                                                   m_pPointer,
+                                                   UFG::HealthComponent::_TypeUID);
       }
       else
       {
-        v5 = (UFG::HealthComponent *)v3->m_Components.p[6].m_pComponent;
+        m_pComponent = (UFG::HealthComponent *)m_pPointer->m_Components.p[6].m_pComponent;
       }
-      if ( v5 )
-        UFG::HealthComponent::ReplenishHealth(v5);
+      if ( m_pComponent )
+        UFG::HealthComponent::ReplenishHealth(m_pComponent);
     }
   }
 }
@@ -10319,15 +9139,15 @@ void __fastcall HealthReplenishInstantTask::Begin(HealthReplenishInstantTask *th
 // RVA: 0x2F1BA0
 void __fastcall ParkourHandleTask::Begin(ParkourHandleTask *this, ActionContext *pContext)
 {
-  ITrack *v2; // rax
-  int v3; // ebx
+  ITrack *m_Track; // rax
+  int vfptr_high; // ebx
   bool v4; // di
   UFG::TransformNodeComponent *i; // r10
-  UFG::SimObject *v6; // rax
+  UFG::SimObject *m_pSimObject; // rax
 
-  v2 = this->m_Track;
-  v3 = HIDWORD(v2[1].vfptr);
-  v4 = LOBYTE(v2[1].vfptr) != 0;
+  m_Track = this->m_Track;
+  vfptr_high = HIDWORD(m_Track[1].vfptr);
+  v4 = LOBYTE(m_Track[1].vfptr) != 0;
   for ( i = (UFG::TransformNodeComponent *)UFG::SimObject::GetComponentOfType(
                                              pContext->mSimObject.m_pPointer,
                                              UFG::RigidBodyComponent::_TypeUID);
@@ -10336,17 +9156,17 @@ void __fastcall ParkourHandleTask::Begin(ParkourHandleTask *this, ActionContext 
               i->m_pSimObject,
               UFG::RigidBodyComponent::_RigidBodyComponentTypeUID,
               0,
-              (UFG::SimComponent *)&i->vfptr) )
+              i) )
   {
-    if ( v3 == -1 || *(_DWORD *)(*(_QWORD *)&i->mWorldTransform.v2.x + 216i64) == v3 )
+    if ( vfptr_high == -1 || *(_DWORD *)(*(_QWORD *)&i->mWorldTransform.v2.x + 216i64) == vfptr_high )
     {
-      v6 = i[1].m_pSimObject;
-      if ( v6 )
+      m_pSimObject = i[1].m_pSimObject;
+      if ( m_pSimObject )
       {
-        if ( v4 == 1 )
-          LODWORD(v6[1].mNode.mChild[1]) &= 0xFFFFFFF7;
+        if ( v4 )
+          LODWORD(m_pSimObject[1].mNode.mChild[1]) &= ~8u;
         else
-          LODWORD(v6[1].mNode.mChild[1]) |= 8u;
+          LODWORD(m_pSimObject[1].mNode.mChild[1]) |= 8u;
       }
     }
   }
@@ -10356,42 +9176,34 @@ void __fastcall ParkourHandleTask::Begin(ParkourHandleTask *this, ActionContext 
 // RVA: 0x2EFB50
 void __fastcall InvulnerableTask::Begin(InvulnerableTask *this, ActionContext *pContext)
 {
-  UFG::SimObjectGame *v2; // rcx
-  unsigned __int16 v3; // dx
-  UFG::SimComponent *v4; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rax
 
   if ( pContext )
   {
     this->m_pContext = pContext;
-    v2 = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
-    if ( v2 )
+    m_pPointer = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      v3 = v2->m_Flags;
-      if ( (v3 >> 14) & 1 )
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
       {
-        v4 = v2->m_Components.p[6].m_pComponent;
+        m_pComponent = m_pPointer->m_Components.p[6].m_pComponent;
       }
-      else if ( (v3 & 0x8000u) == 0 )
+      else if ( m_Flags >= 0 )
       {
-        if ( (v3 >> 13) & 1 )
-        {
-          v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::HealthComponent::_TypeUID);
-        }
-        else if ( (v3 >> 12) & 1 )
-        {
-          v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::HealthComponent::_TypeUID);
-        }
+        if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+          m_pComponent = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::HealthComponent::_TypeUID);
         else
-        {
-          v4 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::HealthComponent::_TypeUID);
-        }
+          m_pComponent = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::HealthComponent::_TypeUID);
       }
       else
       {
-        v4 = v2->m_Components.p[6].m_pComponent;
+        m_pComponent = m_pPointer->m_Components.p[6].m_pComponent;
       }
-      if ( v4 )
-        BYTE5(v4[1].m_BoundComponentHandles.mNode.mPrev) = 1;
+      if ( m_pComponent )
+        BYTE5(m_pComponent[1].m_BoundComponentHandles.mNode.mPrev) = 1;
     }
   }
 }
@@ -10400,43 +9212,35 @@ void __fastcall InvulnerableTask::Begin(InvulnerableTask *this, ActionContext *p
 // RVA: 0x2FEF20
 void __fastcall InvulnerableTask::End(InvulnerableTask *this)
 {
-  ActionContext *v1; // rcx
-  UFG::SimObjectGame *v2; // rcx
-  unsigned __int16 v3; // dx
-  UFG::SimComponent *v4; // rax
+  ActionContext *m_pContext; // rcx
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rax
 
-  v1 = this->m_pContext;
-  if ( v1 )
+  m_pContext = this->m_pContext;
+  if ( m_pContext )
   {
-    v2 = (UFG::SimObjectGame *)v1->mSimObject.m_pPointer;
-    if ( v2 )
+    m_pPointer = (UFG::SimObjectGame *)m_pContext->mSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      v3 = v2->m_Flags;
-      if ( (v3 >> 14) & 1 )
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
       {
-        v4 = v2->m_Components.p[6].m_pComponent;
+        m_pComponent = m_pPointer->m_Components.p[6].m_pComponent;
       }
-      else if ( (v3 & 0x8000u) == 0 )
+      else if ( m_Flags >= 0 )
       {
-        if ( (v3 >> 13) & 1 )
-        {
-          v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::HealthComponent::_TypeUID);
-        }
-        else if ( (v3 >> 12) & 1 )
-        {
-          v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::HealthComponent::_TypeUID);
-        }
+        if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+          m_pComponent = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::HealthComponent::_TypeUID);
         else
-        {
-          v4 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::HealthComponent::_TypeUID);
-        }
+          m_pComponent = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::HealthComponent::_TypeUID);
       }
       else
       {
-        v4 = v2->m_Components.p[6].m_pComponent;
+        m_pComponent = m_pPointer->m_Components.p[6].m_pComponent;
       }
-      if ( v4 )
-        BYTE5(v4[1].m_BoundComponentHandles.mNode.mPrev) = 0;
+      if ( m_pComponent )
+        BYTE5(m_pComponent[1].m_BoundComponentHandles.mNode.mPrev) = 0;
     }
   }
 }
@@ -10445,48 +9249,31 @@ void __fastcall InvulnerableTask::End(InvulnerableTask *this)
 // RVA: 0x2F46C0
 void __fastcall SocialSetEnabledTask::Begin(SocialSetEnabledTask *this, ActionContext *pContext)
 {
-  SocialSetEnabledTask *v2; // rbx
-  UFG::SimObjectGame *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::SimComponent *v5; // rcx
-  UFG::SimComponent *v6; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rcx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
 
   if ( pContext )
   {
-    v2 = this;
-    v3 = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
-    if ( v3 )
+    m_pPointer = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      v4 = v3->m_Flags;
-      if ( (v4 >> 14) & 1 )
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
       {
-        v5 = v3->m_Components.p[45].m_pComponent;
+        m_pComponent = m_pPointer->m_Components.p[45].m_pComponent;
       }
       else
       {
-        if ( (v4 & 0x8000u) == 0 )
-        {
-          if ( (v4 >> 13) & 1 )
-          {
-            v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::FaceActionComponent::_TypeUID);
-          }
-          else if ( (v4 >> 12) & 1 )
-          {
-            v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::FaceActionComponent::_TypeUID);
-          }
-          else
-          {
-            v6 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::FaceActionComponent::_TypeUID);
-          }
-        }
+        if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+          ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::FaceActionComponent::_TypeUID);
         else
-        {
-          v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::FaceActionComponent::_TypeUID);
-        }
-        v5 = v6;
+          ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::FaceActionComponent::_TypeUID);
+        m_pComponent = ComponentOfTypeHK;
       }
-      if ( v5 )
-        *((_BYTE *)&v5[3].m_SimObjIndex + 4) = LOBYTE(v2->m_Track[1].vfptr) == 0;
+      if ( m_pComponent )
+        *((_BYTE *)&m_pComponent[3].m_SimObjIndex + 4) = LOBYTE(this->m_Track[1].vfptr) == 0;
     }
   }
 }
@@ -10495,48 +9282,31 @@ void __fastcall SocialSetEnabledTask::Begin(SocialSetEnabledTask *this, ActionCo
 // RVA: 0x2F4770
 void __fastcall SocialSetFaceActionStateTask::Begin(SocialSetFaceActionStateTask *this, ActionContext *pContext)
 {
-  SocialSetFaceActionStateTask *v2; // rbx
-  UFG::SimObjectGame *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::FaceActionComponent *v5; // rcx
-  UFG::SimComponent *v6; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::FaceActionComponent *m_pComponent; // rcx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
 
   if ( pContext )
   {
-    v2 = this;
-    v3 = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
-    if ( v3 )
+    m_pPointer = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      v4 = v3->m_Flags;
-      if ( (v4 >> 14) & 1 )
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
       {
-        v5 = (UFG::FaceActionComponent *)v3->m_Components.p[45].m_pComponent;
+        m_pComponent = (UFG::FaceActionComponent *)m_pPointer->m_Components.p[45].m_pComponent;
       }
       else
       {
-        if ( (v4 & 0x8000u) == 0 )
-        {
-          if ( (v4 >> 13) & 1 )
-          {
-            v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::FaceActionComponent::_TypeUID);
-          }
-          else if ( (v4 >> 12) & 1 )
-          {
-            v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::FaceActionComponent::_TypeUID);
-          }
-          else
-          {
-            v6 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::FaceActionComponent::_TypeUID);
-          }
-        }
+        if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+          ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::FaceActionComponent::_TypeUID);
         else
-        {
-          v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::FaceActionComponent::_TypeUID);
-        }
-        v5 = (UFG::FaceActionComponent *)v6;
+          ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::FaceActionComponent::_TypeUID);
+        m_pComponent = (UFG::FaceActionComponent *)ComponentOfTypeHK;
       }
-      if ( v5 )
-        UFG::FaceActionComponent::SetState(v5, (UFG::eFaceActionState)LOBYTE(v2->m_Track[1].vfptr));
+      if ( m_pComponent )
+        UFG::FaceActionComponent::SetState(m_pComponent, (UFG::eFaceActionState)LOBYTE(this->m_Track[1].vfptr));
     }
   }
 }
@@ -10545,120 +9315,91 @@ void __fastcall SocialSetFaceActionStateTask::Begin(SocialSetFaceActionStateTask
 // RVA: 0x2F4810
 void __fastcall SocialSetFastTalkSuccessTask::Begin(SocialSetFastTalkSuccessTask *this, ActionContext *pContext)
 {
-  ActionContext *v2; // rdi
-  SocialSetFastTalkSuccessTask *v3; // rsi
-  UFG::SimObjectGame *v4; // rcx
-  UFG::SimComponent *v5; // rbx
-  unsigned __int16 v6; // dx
-  UFG::SimComponent *v7; // rax
-  UFG::SimObjectGame *v8; // rcx
-  unsigned __int16 v9; // dx
-  UFG::SimComponent *v10; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  UFG::SimComponent *m_pComponent; // rbx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
+  UFG::SimObject *v8; // rcx
+  __int16 v9; // dx
+  UFG::SimComponent *ComponentOfType; // rax
   bool v11; // dl
   UFG::allocator::free_link *v12; // rsi
-  const char *v13; // rdi
-  unsigned int v14; // ebx
-  UFG::SimObjectCharacter *v15; // rax
-  UFG::allocator::free_link *v16; // rcx
+  const char *mName; // rdi
+  unsigned int mUID; // ebx
+  UFG::SimObjectCharacter *LocalPlayer; // rax
 
   if ( pContext )
   {
-    v2 = pContext;
-    v3 = this;
-    v4 = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
-    if ( v4 )
+    m_pPointer = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      v6 = v4->m_Flags;
-      if ( (v6 >> 14) & 1 )
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
       {
-        v5 = v4->m_Components.p[45].m_pComponent;
+        m_pComponent = m_pPointer->m_Components.p[45].m_pComponent;
       }
       else
       {
-        if ( (v6 & 0x8000u) == 0 )
-        {
-          if ( (v6 >> 13) & 1 )
-          {
-            v7 = UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::FaceActionComponent::_TypeUID);
-          }
-          else if ( (v6 >> 12) & 1 )
-          {
-            v7 = UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::FaceActionComponent::_TypeUID);
-          }
-          else
-          {
-            v7 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v4->vfptr, UFG::FaceActionComponent::_TypeUID);
-          }
-        }
+        if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+          ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::FaceActionComponent::_TypeUID);
         else
-        {
-          v7 = UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::FaceActionComponent::_TypeUID);
-        }
-        v5 = v7;
+          ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::FaceActionComponent::_TypeUID);
+        m_pComponent = ComponentOfTypeHK;
       }
     }
     else
     {
-      v5 = 0i64;
+      m_pComponent = 0i64;
     }
-    v8 = (UFG::SimObjectGame *)v2->mSimObject.m_pPointer;
+    v8 = pContext->mSimObject.m_pPointer;
     if ( v8 )
     {
       v9 = v8->m_Flags;
-      if ( (v9 >> 14) & 1 )
+      if ( (v9 & 0x4000) != 0 )
       {
-        v8 = (UFG::SimObjectGame *)v8->m_Components.p[5].m_pComponent;
+        v8 = (UFG::SimObject *)v8->m_Components.p[5].m_pComponent;
       }
-      else if ( (v9 & 0x8000u) == 0 )
+      else if ( v9 >= 0 )
       {
-        if ( (v9 >> 13) & 1 )
-        {
-          v10 = UFG::SimObjectGame::GetComponentOfTypeHK(v8, UFG::AIScriptInterfaceComponent::_TypeUID);
-        }
-        else if ( (v9 >> 12) & 1 )
-        {
-          v10 = UFG::SimObjectGame::GetComponentOfTypeHK(v8, UFG::AIScriptInterfaceComponent::_TypeUID);
-        }
+        if ( (v9 & 0x2000) != 0 || (v9 & 0x1000) != 0 )
+          ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(
+                              (UFG::SimObjectGame *)v8,
+                              UFG::AIScriptInterfaceComponent::_TypeUID);
         else
-        {
-          v10 = UFG::SimObject::GetComponentOfType(
-                  (UFG::SimObject *)&v8->vfptr,
-                  UFG::AIScriptInterfaceComponent::_TypeUID);
-        }
-        v8 = (UFG::SimObjectGame *)v10;
+          ComponentOfType = UFG::SimObject::GetComponentOfType(v8, UFG::AIScriptInterfaceComponent::_TypeUID);
+        v8 = (UFG::SimObject *)ComponentOfType;
       }
       else
       {
-        v8 = (UFG::SimObjectGame *)v8->m_Components.p[5].m_pComponent;
+        v8 = (UFG::SimObject *)v8->m_Components.p[5].m_pComponent;
       }
     }
-    v11 = LOBYTE(v3->m_Track[1].vfptr) != 0;
-    if ( v5 )
+    v11 = LOBYTE(this->m_Track[1].vfptr) != 0;
+    if ( m_pComponent )
     {
-      BYTE5(v5[3].m_SafePointerList.mNode.mPrev) = (LOBYTE(v3->m_Track[1].vfptr) != 0) | BYTE5(v5[3].m_SafePointerList.mNode.mPrev) & 0xFE | 2;
+      BYTE5(m_pComponent[3].m_SafePointerList.mNode.mPrev) = (LOBYTE(this->m_Track[1].vfptr) != 0) | BYTE5(m_pComponent[3].m_SafePointerList.mNode.mPrev) & 0xFE | 2;
     }
     else if ( v8 )
     {
-      BYTE2(v8[14].m_pSceneObj) &= 0xFDu;
-      BYTE2(v8[14].m_pSceneObj) |= 2 * v11;
+      BYTE2(v8[16].mNode.mChild[0]) &= ~2u;
+      BYTE2(v8[16].mNode.mChild[0]) |= 2 * v11;
     }
     if ( v11 )
     {
       v12 = UFG::qMalloc(0x48ui64, "GameStatEventTask", 0i64);
       if ( v12 )
       {
-        v13 = UFG::gGameStatEventChannel.mName;
-        v14 = UFG::gGameStatEventChannel.mUID;
-        v15 = UFG::GetLocalPlayer();
-        v16 = v12 + 1;
-        v16->mNext = v16;
-        v16[1].mNext = v16;
+        mName = UFG::gGameStatEventChannel.mName;
+        mUID = UFG::gGameStatEventChannel.mUID;
+        LocalPlayer = UFG::GetLocalPlayer();
+        v12[1].mNext = v12 + 1;
+        v12[2].mNext = v12 + 1;
         v12->mNext = (UFG::allocator::free_link *)&UFG::Event::`vftable;
-        LODWORD(v12[3].mNext) = v14;
-        v12[4].mNext = (UFG::allocator::free_link *)v13;
+        LODWORD(v12[3].mNext) = mUID;
+        v12[4].mNext = (UFG::allocator::free_link *)mName;
         v12->mNext = (UFG::allocator::free_link *)&UFG::GameStatEvent::`vftable;
         LODWORD(v12[7].mNext) = 41;
-        v12[8].mNext = (UFG::allocator::free_link *)v15;
+        v12[8].mNext = (UFG::allocator::free_link *)LocalPlayer;
       }
       else
       {
@@ -10671,126 +9412,124 @@ void __fastcall SocialSetFastTalkSuccessTask::Begin(SocialSetFastTalkSuccessTask
 
 // File Line: 4944
 // RVA: 0x2F45A0
-void __fastcall SocialFaceActionDisplayConfirmationDialogTask::Begin(SocialFaceActionDisplayConfirmationDialogTask *this, ActionContext *pContext)
+void __fastcall SocialFaceActionDisplayConfirmationDialogTask::Begin(
+        SocialFaceActionDisplayConfirmationDialogTask *this,
+        ActionContext *pContext)
 {
-  UFG::SimObjectGame *v2; // rcx
-  UFG::SimComponent *v3; // rdx
-  unsigned __int16 v4; // dx
-  UFG::SimComponent *v5; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  UFG::SimComponent *m_pComponent; // rdx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   UFG::SimObjectGame *v6; // r8
-  unsigned __int16 v7; // cx
-  UFG::FaceActionComponent *v8; // rax
+  __int16 v7; // cx
+  UFG::FaceActionComponent *ComponentOfType; // rax
 
   if ( pContext )
   {
     this->m_pContext = pContext;
-    v2 = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
-    if ( v2 )
+    m_pPointer = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      v4 = v2->m_Flags;
-      if ( (v4 >> 14) & 1 )
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
       {
-        v3 = v2->m_Components.p[20].m_pComponent;
+        m_pComponent = m_pPointer->m_Components.p[20].m_pComponent;
       }
-      else if ( (v4 & 0x8000u) == 0 )
+      else if ( m_Flags >= 0 )
       {
-        if ( (v4 >> 13) & 1 )
-        {
-          v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::TargetingSystemBaseComponent::_TypeUID);
-        }
-        else if ( (v4 >> 12) & 1 )
-        {
-          v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::TargetingSystemBaseComponent::_TypeUID);
-        }
+        if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+          ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                m_pPointer,
+                                UFG::TargetingSystemBaseComponent::_TypeUID);
         else
-        {
-          v5 = UFG::SimObject::GetComponentOfType(
-                 (UFG::SimObject *)&v2->vfptr,
-                 UFG::TargetingSystemBaseComponent::_TypeUID);
-        }
-        v3 = v5;
+          ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(
+                                m_pPointer,
+                                UFG::TargetingSystemBaseComponent::_TypeUID);
+        m_pComponent = ComponentOfTypeHK;
       }
       else
       {
-        v3 = v2->m_Components.p[20].m_pComponent;
+        m_pComponent = m_pPointer->m_Components.p[20].m_pComponent;
       }
     }
     else
     {
-      v3 = 0i64;
+      m_pComponent = 0i64;
     }
-    v6 = *(UFG::SimObjectGame **)(56i64 * *(unsigned __int8 *)(*(_QWORD *)&v3[1].m_Flags + 58i64)
-                                + *(_QWORD *)&v3[1].m_TypeUID
+    v6 = *(UFG::SimObjectGame **)(56i64 * *(unsigned __int8 *)(*(_QWORD *)&m_pComponent[1].m_Flags + 58i64)
+                                + *(_QWORD *)&m_pComponent[1].m_TypeUID
                                 + 40);
     if ( v6 )
     {
       v7 = v6->m_Flags;
-      if ( (v7 >> 14) & 1 )
+      if ( (v7 & 0x4000) != 0 )
       {
-        v8 = (UFG::FaceActionComponent *)v6->m_Components.p[45].m_pComponent;
+        ComponentOfType = (UFG::FaceActionComponent *)v6->m_Components.p[45].m_pComponent;
       }
-      else if ( (v7 & 0x8000u) == 0 )
+      else if ( v7 < 0 || (v7 & 0x2000) != 0 || (v7 & 0x1000) != 0 )
       {
-        if ( (v7 >> 13) & 1 )
-        {
-          v8 = (UFG::FaceActionComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                             v6,
-                                             UFG::FaceActionComponent::_TypeUID);
-        }
-        else if ( (v7 >> 12) & 1 )
-        {
-          v8 = (UFG::FaceActionComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                             v6,
-                                             UFG::FaceActionComponent::_TypeUID);
-        }
-        else
-        {
-          v8 = (UFG::FaceActionComponent *)UFG::SimObject::GetComponentOfType(
-                                             (UFG::SimObject *)&v6->vfptr,
-                                             UFG::FaceActionComponent::_TypeUID);
-        }
+        ComponentOfType = (UFG::FaceActionComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                        v6,
+                                                        UFG::FaceActionComponent::_TypeUID);
       }
       else
       {
-        v8 = (UFG::FaceActionComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                           v6,
-                                           UFG::FaceActionComponent::_TypeUID);
+        ComponentOfType = (UFG::FaceActionComponent *)UFG::SimObject::GetComponentOfType(
+                                                        v6,
+                                                        UFG::FaceActionComponent::_TypeUID);
       }
-      if ( v8 )
-        UFG::FaceActionComponent::OpenConfirmationDialog(v8);
+      if ( ComponentOfType )
+        UFG::FaceActionComponent::OpenConfirmationDialog(ComponentOfType);
     }
   }
 }
 
 // File Line: 4960
 // RVA: 0x30A060
-bool __fastcall SocialFaceActionDisplayConfirmationDialogTask::Update(SocialFaceActionDisplayConfirmationDialogTask *this, float __formal)
+bool __fastcall SocialFaceActionDisplayConfirmationDialogTask::Update(
+        SocialFaceActionDisplayConfirmationDialogTask *this,
+        float __formal)
 {
-  ActionContext *v2; // rcx
-  UFG::SimObjectGame *v3; // rcx
-  UFG::SimComponent *v4; // rdx
-  unsigned __int16 v5; // dx
-  UFG::SimComponent *v6; // rax
+  ActionContext *m_pContext; // rcx
+  UFG::SimObjectGame *m_pPointer; // rcx
+  UFG::SimComponent *m_pComponent; // rdx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   UFG::SimObjectGame *v7; // r8
-  unsigned __int16 v8; // cx
-  UFG::FaceActionComponent *v9; // rax
+  __int16 v8; // cx
+  UFG::FaceActionComponent *ComponentOfType; // rax
   bool result; // al
 
-  v2 = this->m_pContext;
-  if ( v2
-    && ((v3 = (UFG::SimObjectGame *)v2->mSimObject.m_pPointer) != 0i64 ? ((v5 = v3->m_Flags, !((v5 >> 14) & 1)) ? ((v5 & 0x8000u) == 0 ? (!((v5 >> 13) & 1) ? (!((v5 >> 12) & 1) ? (v6 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::TargetingSystemBaseComponent::_TypeUID)) : (v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::TargetingSystemBaseComponent::_TypeUID))) : (v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::TargetingSystemBaseComponent::_TypeUID)), v4 = v6) : (v4 = v3->m_Components.p[20].m_pComponent)) : (v4 = v3->m_Components.p[20].m_pComponent)) : (v4 = 0i64),
-        (v7 = *(UFG::SimObjectGame **)(56i64 * *(unsigned __int8 *)(*(_QWORD *)&v4[1].m_Flags + 58i64)
-                                     + *(_QWORD *)&v4[1].m_TypeUID
-                                     + 40)) != 0i64
-     && ((v8 = v7->m_Flags, !((v8 >> 14) & 1)) ? ((v8 & 0x8000u) == 0 ? (!((v8 >> 13) & 1) ? (!((v8 >> 12) & 1) ? (v9 = (UFG::FaceActionComponent *)UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v7->vfptr, UFG::FaceActionComponent::_TypeUID)) : (v9 = (UFG::FaceActionComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v7, UFG::FaceActionComponent::_TypeUID))) : (v9 = (UFG::FaceActionComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v7, UFG::FaceActionComponent::_TypeUID))) : (v9 = (UFG::FaceActionComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v7, UFG::FaceActionComponent::_TypeUID))) : (v9 = (UFG::FaceActionComponent *)v7->m_Components.p[45].m_pComponent),
-         v9)) )
-  {
-    result = UFG::FaceActionComponent::IsConfirmationDialogComplete(v9) == 0;
-  }
-  else
-  {
-    result = 1;
-  }
+  m_pContext = this->m_pContext;
+  result = !m_pContext
+        || ((m_pPointer = (UFG::SimObjectGame *)m_pContext->mSimObject.m_pPointer) != 0i64
+          ? ((m_Flags = m_pPointer->m_Flags, (m_Flags & 0x4000) == 0)
+           ? (m_Flags >= 0
+            ? ((m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+             ? (ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                      m_pPointer,
+                                      UFG::TargetingSystemBaseComponent::_TypeUID))
+             : (ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(
+                                      m_pPointer,
+                                      UFG::TargetingSystemBaseComponent::_TypeUID)),
+               m_pComponent = ComponentOfTypeHK)
+            : (m_pComponent = m_pPointer->m_Components.p[20].m_pComponent))
+           : (m_pComponent = m_pPointer->m_Components.p[20].m_pComponent))
+          : (m_pComponent = 0i64),
+            (v7 = *(UFG::SimObjectGame **)(56i64 * *(unsigned __int8 *)(*(_QWORD *)&m_pComponent[1].m_Flags + 58i64)
+                                         + *(_QWORD *)&m_pComponent[1].m_TypeUID
+                                         + 40)) == 0i64
+         || ((v8 = v7->m_Flags, (v8 & 0x4000) == 0)
+           ? (v8 >= 0 && (v8 & 0x2000) == 0 && (v8 & 0x1000) == 0
+            ? (ComponentOfType = (UFG::FaceActionComponent *)UFG::SimObject::GetComponentOfType(
+                                                               v7,
+                                                               UFG::FaceActionComponent::_TypeUID))
+            : (ComponentOfType = (UFG::FaceActionComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                               v7,
+                                                               UFG::FaceActionComponent::_TypeUID)))
+           : (ComponentOfType = (UFG::FaceActionComponent *)v7->m_Components.p[45].m_pComponent),
+             !ComponentOfType))
+        || !UFG::FaceActionComponent::IsConfirmationDialogComplete(ComponentOfType);
   return result;
 }
 
@@ -10798,32 +9537,28 @@ bool __fastcall SocialFaceActionDisplayConfirmationDialogTask::Update(SocialFace
 // RVA: 0x2F9F50
 void __fastcall TriggerRecoilPostEffectTask::Begin(TriggerRecoilPostEffectTask *this, ActionContext *context)
 {
-  ActionContext *v2; // rbx
-  TriggerRecoilPostEffectTask *v3; // rdi
-  UFG::GameCameraComponent *v4; // rax
+  UFG::GameCameraComponent *CurrentGameCamera; // rax
   __int64 v5; // rax
-  ITrack *v6; // rax
+  ITrack *m_Track; // rax
   float v7; // xmm6_4
   float v8; // xmm0_4
 
   if ( context )
   {
-    v2 = context;
-    v3 = this;
-    v4 = UFG::GetCurrentGameCamera();
-    if ( v4 )
+    CurrentGameCamera = UFG::GetCurrentGameCamera();
+    if ( CurrentGameCamera )
     {
-      v5 = ((__int64 (__fastcall *)(UFG::GameCameraComponent *))v4->vfptr[41].__vecDelDtor)(v4);
+      v5 = ((__int64 (__fastcall *)(UFG::GameCameraComponent *))CurrentGameCamera->vfptr[41].__vecDelDtor)(CurrentGameCamera);
       if ( v5 )
       {
-        if ( *(UFG::SimObject **)(56i64 * *(unsigned __int8 *)(*(_QWORD *)(v5 + 96) + 25i64) + *(_QWORD *)(v5 + 88) + 40) == v2->mSimObject.m_pPointer )
+        if ( *(UFG::SimObject **)(56i64 * *(unsigned __int8 *)(*(_QWORD *)(v5 + 96) + 25i64) + *(_QWORD *)(v5 + 88) + 40) == context->mSimObject.m_pPointer )
         {
-          v6 = v3->m_Track;
-          v7 = *(float *)&v6[1].vfptr;
-          v8 = *((float *)&v6[1].vfptr + 1);
+          m_Track = this->m_Track;
+          v7 = *(float *)&m_Track[1].vfptr;
+          v8 = *((float *)&m_Track[1].vfptr + 1);
           if ( v8 >= v7 )
-            v7 = UFG::qRandom(v8 - v7, &UFG::qDefaultSeed) + v7;
-          UFG::RenderWorld::GunRecoilPostEffect_TriggerRecoil(v7, *(float *)&v3->m_Track[1].mResourceOwner);
+            v7 = UFG::qRandom(v8 - v7, (unsigned int *)&UFG::qDefaultSeed) + v7;
+          UFG::RenderWorld::GunRecoilPostEffect_TriggerRecoil(v7, *(float *)&this->m_Track[1].mResourceOwner);
         }
       }
     }
@@ -10834,67 +9569,47 @@ void __fastcall TriggerRecoilPostEffectTask::Begin(TriggerRecoilPostEffectTask *
 // RVA: 0x2DD570
 void __fastcall AccuracyModifierTask::AccuracyModifierTask(AccuracyModifierTask *this)
 {
-  UFG::qNode<ITask,ITask> *v1; // rax
-  UFG::qNode<AccuracyModifierTask,AimingSystemAccuracyModifierList> *v2; // rax
-
-  v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
-  v1->mPrev = v1;
-  v1->mNext = v1;
+  this->Task<AccuracyModifierTrack>::ITask::UFG::qNode<ITask,ITask>::mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->Task<AccuracyModifierTrack>::ITask::UFG::qNode<ITask,ITask>::mNext = &this->UFG::qNode<ITask,ITask>;
   this->vfptr = (ITaskVtbl *)&ITask::`vftable;
   this->vfptr = (ITaskVtbl *)&Task<AccuracyModifierTrack>::`vftable;
-  v2 = (UFG::qNode<AccuracyModifierTask,AimingSystemAccuracyModifierList> *)&this->mPrev;
-  v2->mPrev = v2;
-  v2->mNext = v2;
+  this->UFG::qNode<AccuracyModifierTask,AimingSystemAccuracyModifierList>::mPrev = &this->UFG::qNode<AccuracyModifierTask,AimingSystemAccuracyModifierList>;
+  this->UFG::qNode<AccuracyModifierTask,AimingSystemAccuracyModifierList>::mNext = &this->UFG::qNode<AccuracyModifierTask,AimingSystemAccuracyModifierList>;
   this->vfptr = (ITaskVtbl *)&AccuracyModifierTask::`vftable;
-  *((_BYTE *)this + 64) = *((_BYTE *)this + 64) & 0xFD | 1;
+  *((_BYTE *)this + 64) = *((_BYTE *)this + 64) & 0xFC | 1;
 }
 
 // File Line: 5018
 // RVA: 0x2E7FE0
 void __fastcall AccuracyModifierTask::Begin(AccuracyModifierTask *this, ActionContext *action_context)
 {
-  AccuracyModifierTask *v2; // rbx
-  UFG::SimObjectGame *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::AimingBaseComponent *v5; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::AimingBaseComponent *m_pComponent; // rax
 
-  v2 = this;
   this->m_pActionContext = action_context;
-  v3 = (UFG::SimObjectGame *)action_context->mSimObject.m_pPointer;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectGame *)action_context->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v4 = v3->m_Flags;
-    if ( (v4 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v5 = (UFG::AimingBaseComponent *)v3->m_Components.p[47].m_pComponent;
+      m_pComponent = (UFG::AimingBaseComponent *)m_pPointer->m_Components.p[47].m_pComponent;
     }
-    else if ( (v4 & 0x8000u) == 0 )
+    else if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v4 >> 13) & 1 )
-      {
-        v5 = (UFG::AimingBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                           v3,
-                                           UFG::AimingBaseComponent::_TypeUID);
-      }
-      else if ( (v4 >> 12) & 1 )
-      {
-        v5 = (UFG::AimingBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                           v3,
-                                           UFG::AimingBaseComponent::_TypeUID);
-      }
-      else
-      {
-        v5 = (UFG::AimingBaseComponent *)UFG::SimObject::GetComponentOfType(
-                                           (UFG::SimObject *)&v3->vfptr,
-                                           UFG::AimingBaseComponent::_TypeUID);
-      }
+      m_pComponent = (UFG::AimingBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                   m_pPointer,
+                                                   UFG::AimingBaseComponent::_TypeUID);
     }
     else
     {
-      v5 = (UFG::AimingBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::AimingBaseComponent::_TypeUID);
+      m_pComponent = (UFG::AimingBaseComponent *)UFG::SimObject::GetComponentOfType(
+                                                   m_pPointer,
+                                                   UFG::AimingBaseComponent::_TypeUID);
     }
-    if ( v5 )
-      UFG::AimingBaseComponent::AddAccuracyModifierTask(v5, v2);
+    if ( m_pComponent )
+      UFG::AimingBaseComponent::AddAccuracyModifierTask(m_pComponent, this);
   }
 }
 
@@ -10907,7 +9622,7 @@ char __fastcall AccuracyModifierTask::Update(AccuracyModifierTask *this, float t
   if ( LOBYTE(this->m_Track[1].mMasterRate.text.mOffset) )
     return 1;
   v2 = *((_BYTE *)this + 64);
-  if ( !(v2 & 2) )
+  if ( (v2 & 2) == 0 )
     return 1;
   *((_BYTE *)this + 64) = v2 & 0xFE;
   return 0;
@@ -10917,15 +9632,15 @@ char __fastcall AccuracyModifierTask::Update(AccuracyModifierTask *this, float t
 // RVA: 0x2FECF0
 void __fastcall AimingSoftLockTask::End(TargetSteerToTask *this)
 {
-  UFG::qNode<TargetSteerToTask,TargetingSystemTargetSteerToList> *v1; // rax
+  UFG::qNode<TargetSteerToTask,TargetingSystemTargetSteerToList> *mNext; // rax
   UFG::qNode<TargetSteerToTask,TargetingSystemTargetSteerToList> *v2; // rdx
-  UFG::qNode<TargetSteerToTask,TargetingSystemTargetSteerToList> *v3; // rcx
+  UFG::qNode<TargetSteerToTask,TargetingSystemTargetSteerToList> *mPrev; // rcx
 
-  v1 = this->mNext;
-  v2 = (UFG::qNode<TargetSteerToTask,TargetingSystemTargetSteerToList> *)&this->mPrev;
-  v3 = this->mPrev;
-  v3->mNext = v1;
-  v1->mPrev = v3;
+  mNext = this->UFG::qNode<TargetSteerToTask,TargetingSystemTargetSteerToList>::mNext;
+  v2 = &this->UFG::qNode<TargetSteerToTask,TargetingSystemTargetSteerToList>;
+  mPrev = this->UFG::qNode<TargetSteerToTask,TargetingSystemTargetSteerToList>::mPrev;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
 }
@@ -10934,11 +9649,8 @@ void __fastcall AimingSoftLockTask::End(TargetSteerToTask *this)
 // RVA: 0x2DE670
 void __fastcall CollectibleCollectTask::CollectibleCollectTask(CollectibleCollectTask *this)
 {
-  UFG::qNode<ITask,ITask> *v1; // rax
-
-  v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
-  v1->mPrev = v1;
-  v1->mNext = v1;
+  this->mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->mNext = &this->UFG::qNode<ITask,ITask>;
   this->vfptr = (ITaskVtbl *)&ITask::`vftable;
   this->vfptr = (ITaskVtbl *)&Task<CollectibleCollectTrack>::`vftable;
   this->vfptr = (ITaskVtbl *)&CollectibleCollectTask::`vftable;
@@ -10948,114 +9660,84 @@ void __fastcall CollectibleCollectTask::CollectibleCollectTask(CollectibleCollec
 // RVA: 0x2EAA70
 void __fastcall CollectibleCollectTask::Begin(CollectibleCollectTask *this, ActionContext *action_context)
 {
-  UFG::SimObjectGame *v2; // r8
-  ActionContext *v3; // rbx
-  __int64 v4; // rdi
-  unsigned __int16 v5; // cx
-  UFG::SimComponent *v6; // rax
+  UFG::SimObjectGame *m_pPointer; // r8
+  __int64 vfptr_high; // rdi
+  __int16 m_Flags; // cx
+  UFG::SimComponent *m_pComponent; // rax
   UFG::SimObjectGame *v7; // rcx
-  unsigned __int16 v8; // dx
-  UFG::SimComponent *v9; // rax
+  __int16 v8; // dx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   __int64 v10; // rax
   __int64 v11; // rax
   UFG::SimObjectGame *v12; // rcx
-  unsigned __int16 v13; // dx
-  UFG::SimComponent *v14; // rax
+  __int16 v13; // dx
+  UFG::SimComponent *ComponentOfType; // rax
   __int64 v15; // rdx
 
-  v2 = (UFG::SimObjectGame *)action_context->mSimObject.m_pPointer;
-  v3 = action_context;
-  v4 = HIDWORD(this->m_Track[1].vfptr);
-  if ( v2 )
+  m_pPointer = (UFG::SimObjectGame *)action_context->mSimObject.m_pPointer;
+  vfptr_high = HIDWORD(this->m_Track[1].vfptr);
+  if ( m_pPointer )
   {
-    v5 = v2->m_Flags;
-    if ( (v5 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v6 = v2->m_Components.p[20].m_pComponent;
+      m_pComponent = m_pPointer->m_Components.p[20].m_pComponent;
     }
-    else if ( (v5 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v5 >> 13) & 1 )
-        v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::TargetingSystemBaseComponent::_TypeUID);
-      else
-        v6 = (v5 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::TargetingSystemBaseComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::TargetingSystemBaseComponent::_TypeUID);
+      m_pComponent = (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+                   ? UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::TargetingSystemBaseComponent::_TypeUID)
+                   : UFG::SimObject::GetComponentOfType(m_pPointer, UFG::TargetingSystemBaseComponent::_TypeUID);
     }
     else
     {
-      v6 = v2->m_Components.p[20].m_pComponent;
+      m_pComponent = m_pPointer->m_Components.p[20].m_pComponent;
     }
-    if ( v6 )
+    if ( m_pComponent )
     {
-      v7 = (UFG::SimObjectGame *)v3->mSimObject.m_pPointer;
+      v7 = (UFG::SimObjectGame *)action_context->mSimObject.m_pPointer;
       if ( v7 )
       {
         v8 = v7->m_Flags;
-        if ( (v8 >> 14) & 1 )
+        if ( (v8 & 0x4000) != 0 )
         {
           v7 = (UFG::SimObjectGame *)v7->m_Components.p[20].m_pComponent;
         }
-        else if ( (v8 & 0x8000u) == 0 )
+        else if ( v8 >= 0 )
         {
-          if ( (v8 >> 13) & 1 )
-          {
-            v9 = UFG::SimObjectGame::GetComponentOfTypeHK(v7, UFG::TargetingSystemBaseComponent::_TypeUID);
-          }
-          else if ( (v8 >> 12) & 1 )
-          {
-            v9 = UFG::SimObjectGame::GetComponentOfTypeHK(v7, UFG::TargetingSystemBaseComponent::_TypeUID);
-          }
+          if ( (v8 & 0x2000) != 0 || (v8 & 0x1000) != 0 )
+            ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                  v7,
+                                  UFG::TargetingSystemBaseComponent::_TypeUID);
           else
-          {
-            v9 = UFG::SimObject::GetComponentOfType(
-                   (UFG::SimObject *)&v7->vfptr,
-                   UFG::TargetingSystemBaseComponent::_TypeUID);
-          }
-          v7 = (UFG::SimObjectGame *)v9;
+            ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(v7, UFG::TargetingSystemBaseComponent::_TypeUID);
+          v7 = (UFG::SimObjectGame *)ComponentOfTypeHK;
         }
         else
         {
           v7 = (UFG::SimObjectGame *)v7->m_Components.p[20].m_pComponent;
         }
       }
-      v10 = ((__int64 (*)(void))v7->vfptr[15].__vecDelDtor)();
+      v10 = ((__int64 (__fastcall *)(UFG::SimObjectGame *))v7->vfptr[15].__vecDelDtor)(v7);
       if ( v10 )
       {
-        v11 = *(_QWORD *)(56i64 * *(unsigned __int8 *)(*(_QWORD *)(v10 + 96) + v4 + 8) + *(_QWORD *)(v10 + 88) + 40);
+        v11 = *(_QWORD *)(56i64 * *(unsigned __int8 *)(*(_QWORD *)(v10 + 96) + vfptr_high + 8)
+                        + *(_QWORD *)(v10 + 88)
+                        + 40);
         if ( v11 )
         {
           v12 = *(UFG::SimObjectGame **)(*(_QWORD *)(v11 + 80) + 96i64);
           if ( v12 )
           {
             v13 = v12->m_Flags;
-            if ( (v13 >> 14) & 1 )
-            {
-              v14 = UFG::SimObjectGame::GetComponentOfTypeHK(v12, UFG::CollectibleComponent::_TypeUID);
-            }
-            else if ( (v13 & 0x8000u) == 0 )
-            {
-              if ( (v13 >> 13) & 1 )
-              {
-                v14 = UFG::SimObjectGame::GetComponentOfTypeHK(v12, UFG::CollectibleComponent::_TypeUID);
-              }
-              else if ( (v13 >> 12) & 1 )
-              {
-                v14 = UFG::SimObjectGame::GetComponentOfTypeHK(v12, UFG::CollectibleComponent::_TypeUID);
-              }
-              else
-              {
-                v14 = UFG::SimObject::GetComponentOfType(
-                        (UFG::SimObject *)&v12->vfptr,
-                        UFG::CollectibleComponent::_TypeUID);
-              }
-            }
+            if ( (v13 & 0x4000) != 0 || v13 < 0 || (v13 & 0x2000) != 0 || (v13 & 0x1000) != 0 )
+              ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(v12, UFG::CollectibleComponent::_TypeUID);
             else
-            {
-              v14 = UFG::SimObjectGame::GetComponentOfTypeHK(v12, UFG::CollectibleComponent::_TypeUID);
-            }
-            if ( v14 )
+              ComponentOfType = UFG::SimObject::GetComponentOfType(v12, UFG::CollectibleComponent::_TypeUID);
+            if ( ComponentOfType )
             {
               LOBYTE(v15) = 1;
-              v14->vfptr[24].__vecDelDtor((UFG::qSafePointerNode<UFG::SimComponent> *)&v14->vfptr, v15);
+              ComponentOfType->vfptr[24].__vecDelDtor(ComponentOfType, v15);
             }
           }
         }
@@ -11068,49 +9750,35 @@ void __fastcall CollectibleCollectTask::Begin(CollectibleCollectTask *this, Acti
 // RVA: 0x2E7EA0
 void __fastcall AIOutlineActivateTask::Begin(AIOutlineActivateTask *this, ActionContext *action_context)
 {
-  AIOutlineActivateTask *v2; // rbx
-  UFG::SimObjectGame *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::SimComponent *v5; // rax
-  UFG::AIOutlineComponent *v6; // rcx
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::AIOutlineComponent *m_pComponent; // rcx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
 
-  v2 = this;
-  v3 = (UFG::SimObjectGame *)action_context->mSimObject.m_pPointer;
-  if ( !v3 )
+  m_pPointer = (UFG::SimObjectGame *)action_context->mSimObject.m_pPointer;
+  if ( !m_pPointer )
     return;
-  v4 = v3->m_Flags;
-  if ( (v4 >> 14) & 1 )
+  m_Flags = m_pPointer->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 )
+    goto LABEL_8;
+  if ( m_Flags < 0 )
   {
-    v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::AIOutlineComponent::_TypeUID);
+    m_pComponent = (UFG::AIOutlineComponent *)m_pPointer->m_Components.p[27].m_pComponent;
+    goto LABEL_11;
   }
+  if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+LABEL_8:
+    ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::AIOutlineComponent::_TypeUID);
   else
+    ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::AIOutlineComponent::_TypeUID);
+  m_pComponent = (UFG::AIOutlineComponent *)ComponentOfTypeHK;
+LABEL_11:
+  if ( m_pComponent )
   {
-    if ( (v4 & 0x8000u) != 0 )
-    {
-      v6 = (UFG::AIOutlineComponent *)v3->m_Components.p[27].m_pComponent;
-      goto LABEL_12;
-    }
-    if ( (v4 >> 13) & 1 )
-    {
-      v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::AIOutlineComponent::_TypeUID);
-    }
-    else if ( (v4 >> 12) & 1 )
-    {
-      v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::AIOutlineComponent::_TypeUID);
-    }
+    if ( LOBYTE(this->m_Track[1].vfptr) )
+      UFG::AIOutlineComponent::ActivateOutline(m_pComponent);
     else
-    {
-      v5 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::AIOutlineComponent::_TypeUID);
-    }
-  }
-  v6 = (UFG::AIOutlineComponent *)v5;
-LABEL_12:
-  if ( v6 )
-  {
-    if ( LOBYTE(v2->m_Track[1].vfptr) )
-      UFG::AIOutlineComponent::ActivateOutline(v6);
-    else
-      UFG::AIOutlineComponent::DeactivateOutline(v6);
+      UFG::AIOutlineComponent::DeactivateOutline(m_pComponent);
   }
 }
 
@@ -11118,22 +9786,15 @@ LABEL_12:
 // RVA: 0x2E0F20
 void __fastcall SimObjectFlagSetTask::SimObjectFlagSetTask(SimObjectFlagSetTask *this)
 {
-  UFG::qNode<ITask,ITask> *v1; // rax
-  UFG::qNode<SimObjectFlagSetTask,SimObjectFlagSetList> *v2; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::SimObjectPropertiesComponent> *v3; // [rsp+28h] [rbp+10h]
-
-  v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
-  v1->mPrev = v1;
-  v1->mNext = v1;
+  this->Task<SimObjectFlagSetTrack>::ITask::UFG::qNode<ITask,ITask>::mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->Task<SimObjectFlagSetTrack>::ITask::UFG::qNode<ITask,ITask>::mNext = &this->UFG::qNode<ITask,ITask>;
   this->vfptr = (ITaskVtbl *)&ITask::`vftable;
   this->vfptr = (ITaskVtbl *)&Task<SimObjectFlagSetTrack>::`vftable;
-  v2 = (UFG::qNode<SimObjectFlagSetTask,SimObjectFlagSetList> *)&this->mPrev;
-  v2->mPrev = v2;
-  v2->mNext = v2;
+  this->UFG::qNode<SimObjectFlagSetTask,SimObjectFlagSetList>::mPrev = &this->UFG::qNode<SimObjectFlagSetTask,SimObjectFlagSetList>;
+  this->UFG::qNode<SimObjectFlagSetTask,SimObjectFlagSetList>::mNext = &this->UFG::qNode<SimObjectFlagSetTask,SimObjectFlagSetList>;
   this->vfptr = (ITaskVtbl *)&SimObjectFlagSetTask::`vftable;
-  v3 = &this->m_SimObjectPropertiesComponent;
-  v3->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v3->mPrev;
-  v3->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v3->mPrev;
+  this->m_SimObjectPropertiesComponent.mPrev = &this->m_SimObjectPropertiesComponent;
+  this->m_SimObjectPropertiesComponent.mNext = &this->m_SimObjectPropertiesComponent;
   this->m_SimObjectPropertiesComponent.m_pPointer = 0i64;
 }
 
@@ -11141,123 +9802,120 @@ void __fastcall SimObjectFlagSetTask::SimObjectFlagSetTask(SimObjectFlagSetTask 
 // RVA: 0x2E4F20
 void __fastcall SimObjectFlagSetTask::~SimObjectFlagSetTask(SimObjectFlagSetTask *this)
 {
-  SimObjectFlagSetTask *v1; // rbx
-  UFG::SimObjectPropertiesComponent *v2; // rcx
-  UFG::qSafePointer<UFG::SimComponent,UFG::SimObjectPropertiesComponent> *v3; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v4; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v5; // rax
+  UFG::SimObjectPropertiesComponent *m_pPointer; // rcx
+  UFG::qSafePointer<UFG::SimComponent,UFG::SimObjectPropertiesComponent> *p_m_SimObjectPropertiesComponent; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v6; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v7; // rax
-  UFG::qNode<SimObjectFlagSetTask,SimObjectFlagSetList> *v8; // rdx
-  UFG::qNode<SimObjectFlagSetTask,SimObjectFlagSetList> *v9; // rcx
-  UFG::qNode<SimObjectFlagSetTask,SimObjectFlagSetList> *v10; // rax
-  UFG::qNode<ITask,ITask> *v11; // rdx
-  UFG::qNode<ITask,ITask> *v12; // rcx
-  UFG::qNode<ITask,ITask> *v13; // rax
+  UFG::qNode<SimObjectFlagSetTask,SimObjectFlagSetList> *v8; // rcx
+  UFG::qNode<SimObjectFlagSetTask,SimObjectFlagSetList> *v9; // rax
+  UFG::qNode<ITask,ITask> *v10; // rcx
+  UFG::qNode<ITask,ITask> *v11; // rax
 
-  v1 = this;
   this->vfptr = (ITaskVtbl *)&SimObjectFlagSetTask::`vftable;
-  v2 = (UFG::SimObjectPropertiesComponent *)this->m_SimObjectPropertiesComponent.m_pPointer;
-  if ( v2 )
-    UFG::SimObjectPropertiesComponent::UpdateCachedValues(v2);
-  v3 = &v1->m_SimObjectPropertiesComponent;
-  if ( v1->m_SimObjectPropertiesComponent.m_pPointer )
+  m_pPointer = (UFG::SimObjectPropertiesComponent *)this->m_SimObjectPropertiesComponent.m_pPointer;
+  if ( m_pPointer )
+    UFG::SimObjectPropertiesComponent::UpdateCachedValues(m_pPointer);
+  p_m_SimObjectPropertiesComponent = &this->m_SimObjectPropertiesComponent;
+  if ( this->m_SimObjectPropertiesComponent.m_pPointer )
   {
-    v4 = v3->mPrev;
-    v5 = v1->m_SimObjectPropertiesComponent.mNext;
-    v4->mNext = v5;
-    v5->mPrev = v4;
-    v3->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v3->mPrev;
-    v1->m_SimObjectPropertiesComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->m_SimObjectPropertiesComponent.mPrev;
+    mPrev = p_m_SimObjectPropertiesComponent->mPrev;
+    mNext = this->m_SimObjectPropertiesComponent.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_m_SimObjectPropertiesComponent->mPrev = p_m_SimObjectPropertiesComponent;
+    this->m_SimObjectPropertiesComponent.mNext = &this->m_SimObjectPropertiesComponent;
   }
-  v1->m_SimObjectPropertiesComponent.m_pPointer = 0i64;
-  v6 = v3->mPrev;
-  v7 = v1->m_SimObjectPropertiesComponent.mNext;
+  this->m_SimObjectPropertiesComponent.m_pPointer = 0i64;
+  v6 = p_m_SimObjectPropertiesComponent->mPrev;
+  v7 = this->m_SimObjectPropertiesComponent.mNext;
   v6->mNext = v7;
   v7->mPrev = v6;
-  v3->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v3->mPrev;
-  v1->m_SimObjectPropertiesComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->m_SimObjectPropertiesComponent.mPrev;
-  v8 = (UFG::qNode<SimObjectFlagSetTask,SimObjectFlagSetList> *)&v1->mPrev;
-  v9 = v1->mPrev;
-  v10 = v1->mNext;
-  v9->mNext = v10;
-  v10->mPrev = v9;
-  v8->mPrev = v8;
-  v8->mNext = v8;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
-  v11 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
-  v12 = v1->mPrev;
-  v13 = v1->mNext;
-  v12->mNext = v13;
-  v13->mPrev = v12;
-  v11->mPrev = v11;
-  v11->mNext = v11;
+  p_m_SimObjectPropertiesComponent->mPrev = p_m_SimObjectPropertiesComponent;
+  this->m_SimObjectPropertiesComponent.mNext = &this->m_SimObjectPropertiesComponent;
+  v8 = this->UFG::qNode<SimObjectFlagSetTask,SimObjectFlagSetList>::mPrev;
+  v9 = this->UFG::qNode<SimObjectFlagSetTask,SimObjectFlagSetList>::mNext;
+  v8->mNext = v9;
+  v9->mPrev = v8;
+  this->UFG::qNode<SimObjectFlagSetTask,SimObjectFlagSetList>::mPrev = &this->UFG::qNode<SimObjectFlagSetTask,SimObjectFlagSetList>;
+  this->UFG::qNode<SimObjectFlagSetTask,SimObjectFlagSetList>::mNext = &this->UFG::qNode<SimObjectFlagSetTask,SimObjectFlagSetList>;
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  v10 = this->Task<SimObjectFlagSetTrack>::ITask::UFG::qNode<ITask,ITask>::mPrev;
+  v11 = this->Task<SimObjectFlagSetTrack>::ITask::UFG::qNode<ITask,ITask>::mNext;
+  v10->mNext = v11;
+  v11->mPrev = v10;
+  this->Task<SimObjectFlagSetTrack>::ITask::UFG::qNode<ITask,ITask>::mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->Task<SimObjectFlagSetTrack>::ITask::UFG::qNode<ITask,ITask>::mNext = &this->UFG::qNode<ITask,ITask>;
 }
 
 // File Line: 5142
 // RVA: 0x2F4270
 void __fastcall SimObjectFlagSetTask::Begin(SimObjectFlagSetTask *this, ActionContext *pActionContext)
 {
-  SimObjectFlagSetTask *v2; // rbx
-  UFG::SimObjectGame *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::SimObjectPropertiesComponent *v5; // r9
-  UFG::SimComponent *v6; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::SimObjectPropertiesComponent> *v7; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v8; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v9; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimObjectPropertiesComponent *m_pComponent; // r9
+  UFG::SimComponent *ComponentOfTypeHK; // rax
+  UFG::qSafePointer<UFG::SimComponent,UFG::SimObjectPropertiesComponent> *p_m_SimObjectPropertiesComponent; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v10; // rax
 
-  v2 = this;
   this->m_pActionContext = pActionContext;
-  v3 = (UFG::SimObjectGame *)pActionContext->mSimObject.m_pPointer;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectGame *)pActionContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v4 = v3->m_Flags;
-    if ( (v4 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v5 = (UFG::SimObjectPropertiesComponent *)v3->m_Components.p[3].m_pComponent;
+      m_pComponent = (UFG::SimObjectPropertiesComponent *)m_pPointer->m_Components.p[3].m_pComponent;
     }
-    else if ( (v4 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v4 >> 13) & 1 )
+      if ( (m_Flags & 0x2000) != 0 )
       {
-        v5 = (UFG::SimObjectPropertiesComponent *)v3->m_Components.p[4].m_pComponent;
+        m_pComponent = (UFG::SimObjectPropertiesComponent *)m_pPointer->m_Components.p[4].m_pComponent;
       }
       else
       {
-        if ( (v4 >> 12) & 1 )
-          v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::SimObjectPropertiesComponent::_TypeUID);
+        if ( (m_Flags & 0x1000) != 0 )
+          ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                m_pPointer,
+                                UFG::SimObjectPropertiesComponent::_TypeUID);
         else
-          v6 = UFG::SimObject::GetComponentOfType(
-                 (UFG::SimObject *)&v3->vfptr,
-                 UFG::SimObjectPropertiesComponent::_TypeUID);
-        v5 = (UFG::SimObjectPropertiesComponent *)v6;
+          ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(
+                                m_pPointer,
+                                UFG::SimObjectPropertiesComponent::_TypeUID);
+        m_pComponent = (UFG::SimObjectPropertiesComponent *)ComponentOfTypeHK;
       }
     }
     else
     {
-      v5 = (UFG::SimObjectPropertiesComponent *)v3->m_Components.p[3].m_pComponent;
+      m_pComponent = (UFG::SimObjectPropertiesComponent *)m_pPointer->m_Components.p[3].m_pComponent;
     }
-    if ( v5 )
+    if ( m_pComponent )
     {
-      v7 = &v2->m_SimObjectPropertiesComponent;
-      if ( v2->m_SimObjectPropertiesComponent.m_pPointer )
+      p_m_SimObjectPropertiesComponent = &this->m_SimObjectPropertiesComponent;
+      if ( this->m_SimObjectPropertiesComponent.m_pPointer )
       {
-        v8 = v7->mPrev;
-        v9 = v2->m_SimObjectPropertiesComponent.mNext;
-        v8->mNext = v9;
-        v9->mPrev = v8;
-        v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v7->mPrev;
-        v2->m_SimObjectPropertiesComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->m_SimObjectPropertiesComponent.mPrev;
+        mPrev = p_m_SimObjectPropertiesComponent->mPrev;
+        mNext = this->m_SimObjectPropertiesComponent.mNext;
+        mPrev->mNext = mNext;
+        mNext->mPrev = mPrev;
+        p_m_SimObjectPropertiesComponent->mPrev = p_m_SimObjectPropertiesComponent;
+        this->m_SimObjectPropertiesComponent.mNext = &this->m_SimObjectPropertiesComponent;
       }
-      v2->m_SimObjectPropertiesComponent.m_pPointer = (UFG::SimComponent *)&v5->vfptr;
-      v10 = v5->m_SafePointerList.mNode.mPrev;
-      v10->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v7->mPrev;
-      v2->m_SimObjectPropertiesComponent.mNext = &v5->m_SafePointerList.mNode;
-      v7->mPrev = v10;
-      v5->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v7->mPrev;
-      UFG::SimObjectPropertiesComponent::AddSimObjectFlagSetTask(v5, (UFG::eSimObjectFlagEnum)v2->m_Track[1].vfptr, v2);
+      this->m_SimObjectPropertiesComponent.m_pPointer = m_pComponent;
+      v10 = m_pComponent->m_SafePointerList.mNode.UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mPrev;
+      v10->mNext = p_m_SimObjectPropertiesComponent;
+      this->m_SimObjectPropertiesComponent.mNext = &m_pComponent->m_SafePointerList.mNode;
+      p_m_SimObjectPropertiesComponent->mPrev = v10;
+      m_pComponent->m_SafePointerList.mNode.UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mPrev = p_m_SimObjectPropertiesComponent;
+      UFG::SimObjectPropertiesComponent::AddSimObjectFlagSetTask(
+        m_pComponent,
+        (UFG::eSimObjectFlagEnum)this->m_Track[1].vfptr,
+        this);
     }
   }
 }
@@ -11266,39 +9924,37 @@ void __fastcall SimObjectFlagSetTask::Begin(SimObjectFlagSetTask *this, ActionCo
 // RVA: 0x2F3870
 void __fastcall SetRollStabilityTask::Begin(SetRollStabilityTask *this, ActionContext *pContext)
 {
-  SetRollStabilityTask *v2; // rbx
-  UFG::SimObjectGame *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::SimComponent *v5; // rax
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v6; // rdx
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rdx
 
-  v2 = this;
-  v3 = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v4 = v3->m_Flags;
-    if ( !((v4 >> 14) & 1) )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) == 0 )
     {
-      if ( (v4 & 0x8000u) == 0 )
+      if ( m_Flags >= 0 )
       {
-        if ( (v4 >> 13) & 1 )
+        if ( (m_Flags & 0x2000) != 0 )
           return;
-        if ( (v4 >> 12) & 1 )
-          v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::PhysicsMoverInterface::_TypeUID);
+        if ( (m_Flags & 0x1000) != 0 )
+          ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::PhysicsMoverInterface::_TypeUID);
         else
-          v5 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::PhysicsMoverInterface::_TypeUID);
+          ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::PhysicsMoverInterface::_TypeUID);
       }
       else
       {
-        v5 = v3->m_Components.p[34].m_pComponent;
+        ComponentOfTypeHK = m_pPointer->m_Components.p[34].m_pComponent;
       }
-      if ( v5 )
+      if ( ComponentOfTypeHK )
       {
-        v6 = v5[10].m_SafePointerList.mNode.mPrev;
-        if ( v6 )
+        mPrev = ComponentOfTypeHK[10].m_SafePointerList.mNode.mPrev;
+        if ( mPrev )
         {
-          if ( (HIDWORD(v6[37].mNext) & 7) == 4 )
-            LODWORD(v6[36].mNext) = v2->m_Track[1].vfptr;
+          if ( (HIDWORD(mPrev[37].mNext) & 7) == 4 )
+            LODWORD(mPrev[36].mNext) = this->m_Track[1].vfptr;
         }
       }
     }
@@ -11309,198 +9965,142 @@ void __fastcall SetRollStabilityTask::Begin(SetRollStabilityTask *this, ActionCo
 // RVA: 0x2F3620
 void __fastcall SetCharacterOnFireTask::Begin(SetCharacterOnFireTask *this, ActionContext *pContext)
 {
-  UFG::SimObjectGame *v2; // rcx
-  unsigned __int16 v3; // dx
-  UFG::CharacterEffectsComponent *v4; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::CharacterEffectsComponent *m_pComponent; // rax
 
-  v2 = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
-  if ( v2 )
+  m_pPointer = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v3 = v2->m_Flags;
-    if ( (v3 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v4 = (UFG::CharacterEffectsComponent *)v2->m_Components.p[38].m_pComponent;
+      m_pComponent = (UFG::CharacterEffectsComponent *)m_pPointer->m_Components.p[38].m_pComponent;
     }
-    else if ( (v3 & 0x8000u) == 0 )
+    else if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v3 >> 13) & 1 )
-      {
-        v4 = (UFG::CharacterEffectsComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                 v2,
-                                                 UFG::CharacterEffectsComponent::_TypeUID);
-      }
-      else if ( (v3 >> 12) & 1 )
-      {
-        v4 = (UFG::CharacterEffectsComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                 v2,
-                                                 UFG::CharacterEffectsComponent::_TypeUID);
-      }
-      else
-      {
-        v4 = (UFG::CharacterEffectsComponent *)UFG::SimObject::GetComponentOfType(
-                                                 (UFG::SimObject *)&v2->vfptr,
-                                                 UFG::CharacterEffectsComponent::_TypeUID);
-      }
+      m_pComponent = (UFG::CharacterEffectsComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                         m_pPointer,
+                                                         UFG::CharacterEffectsComponent::_TypeUID);
     }
     else
     {
-      v4 = (UFG::CharacterEffectsComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                               v2,
-                                               UFG::CharacterEffectsComponent::_TypeUID);
+      m_pComponent = (UFG::CharacterEffectsComponent *)UFG::SimObject::GetComponentOfType(
+                                                         m_pPointer,
+                                                         UFG::CharacterEffectsComponent::_TypeUID);
     }
-    if ( v4 )
-      UFG::CharacterEffectsComponent::ForceIgniteFire(v4);
+    if ( m_pComponent )
+      UFG::CharacterEffectsComponent::ForceIgniteFire(m_pComponent);
   }
 }
 
 // File Line: 5198
 // RVA: 0x2F3590
-void __fastcall SetCharacterInvulnerableToFireTask::Begin(SetCharacterInvulnerableToFireTask *this, ActionContext *pContext)
+void __fastcall SetCharacterInvulnerableToFireTask::Begin(
+        SetCharacterInvulnerableToFireTask *this,
+        ActionContext *pContext)
 {
-  SetCharacterInvulnerableToFireTask *v2; // rbx
-  UFG::SimObjectGame *v3; // rcx
-  UFG::SimComponent *v4; // rax
-  unsigned __int16 v5; // dx
+  UFG::SimObjectGame *m_pPointer; // rcx
+  UFG::CharacterEffectsComponent *m_pComponent; // rax
+  __int16 m_Flags; // dx
 
-  v2 = this;
-  v3 = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v5 = v3->m_Flags;
-    if ( (v5 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v4 = v3->m_Components.p[38].m_pComponent;
+      m_pComponent = (UFG::CharacterEffectsComponent *)m_pPointer->m_Components.p[38].m_pComponent;
     }
-    else if ( (v5 & 0x8000u) == 0 )
+    else if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v5 >> 13) & 1 )
-      {
-        v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::CharacterEffectsComponent::_TypeUID);
-      }
-      else if ( (v5 >> 12) & 1 )
-      {
-        v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::CharacterEffectsComponent::_TypeUID);
-      }
-      else
-      {
-        v4 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::CharacterEffectsComponent::_TypeUID);
-      }
+      m_pComponent = (UFG::CharacterEffectsComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                         m_pPointer,
+                                                         UFG::CharacterEffectsComponent::_TypeUID);
     }
     else
     {
-      v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::CharacterEffectsComponent::_TypeUID);
+      m_pComponent = (UFG::CharacterEffectsComponent *)UFG::SimObject::GetComponentOfType(
+                                                         m_pPointer,
+                                                         UFG::CharacterEffectsComponent::_TypeUID);
     }
   }
   else
   {
-    v4 = 0i64;
+    m_pComponent = 0i64;
   }
-  v2->mCharacterEffectsComponent = (UFG::CharacterEffectsComponent *)v4;
-  if ( v4 )
-    LOBYTE(v4[1].m_SafePointerList.mNode.mNext) = 1;
+  this->mCharacterEffectsComponent = m_pComponent;
+  if ( m_pComponent )
+    m_pComponent->InvulnerableToFire = 1;
 }
 
 // File Line: 5208
 // RVA: 0x300220
 void __fastcall SetCharacterInvulnerableToFireTask::End(SetCharacterInvulnerableToFireTask *this)
 {
-  UFG::CharacterEffectsComponent *v1; // rax
+  UFG::CharacterEffectsComponent *mCharacterEffectsComponent; // rax
 
-  v1 = this->mCharacterEffectsComponent;
-  if ( v1 )
-    v1->InvulnerableToFire = 0;
+  mCharacterEffectsComponent = this->mCharacterEffectsComponent;
+  if ( mCharacterEffectsComponent )
+    mCharacterEffectsComponent->InvulnerableToFire = 0;
 }
 
 // File Line: 5220
 // RVA: 0x2EDD40
 void __fastcall DisableSelfIlluminationTask::Begin(DisableSelfIlluminationTask *this, ActionContext *pContext)
 {
-  DisableSelfIlluminationTask *v2; // rdi
-  UFG::SimObjectGame *v3; // rcx
-  ActionContext *v4; // rbx
-  UFG::SimComponent *v5; // rax
-  unsigned __int16 v6; // dx
+  UFG::SimObjectGame *m_pPointer; // rcx
+  UFG::CharacterLookComponent *ComponentOfTypeHK; // rax
+  __int16 m_Flags; // dx
   UFG::SimObjectGame *v7; // rcx
-  UFG::SimComponent *v8; // rax
-  unsigned __int16 v9; // dx
-  UFG::CharacterLookComponent *v10; // rcx
+  UFG::CompositeLookComponent *ComponentOfType; // rax
+  __int16 v9; // dx
+  UFG::CharacterLookComponent *mCharacterLookComponent; // rcx
 
-  v2 = this;
-  v3 = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
-  v4 = pContext;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v6 = v3->m_Flags;
-    if ( (v6 >> 14) & 1 )
-    {
-      v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::CharacterLookComponent::_TypeUID);
-    }
-    else if ( (v6 & 0x8000u) == 0 )
-    {
-      if ( (v6 >> 13) & 1 )
-      {
-        v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::CharacterLookComponent::_TypeUID);
-      }
-      else if ( (v6 >> 12) & 1 )
-      {
-        v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::CharacterLookComponent::_TypeUID);
-      }
-      else
-      {
-        v5 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::CharacterLookComponent::_TypeUID);
-      }
-    }
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+      ComponentOfTypeHK = (UFG::CharacterLookComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                           m_pPointer,
+                                                           UFG::CharacterLookComponent::_TypeUID);
     else
-    {
-      v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::CharacterLookComponent::_TypeUID);
-    }
+      ComponentOfTypeHK = (UFG::CharacterLookComponent *)UFG::SimObject::GetComponentOfType(
+                                                           m_pPointer,
+                                                           UFG::CharacterLookComponent::_TypeUID);
   }
   else
   {
-    v5 = 0i64;
+    ComponentOfTypeHK = 0i64;
   }
-  v2->mCharacterLookComponent = (UFG::CharacterLookComponent *)v5;
-  v7 = (UFG::SimObjectGame *)v4->mSimObject.m_pPointer;
+  this->mCharacterLookComponent = ComponentOfTypeHK;
+  v7 = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
   if ( v7 )
   {
     v9 = v7->m_Flags;
-    if ( (v9 >> 14) & 1 )
-    {
-      v8 = UFG::SimObjectGame::GetComponentOfTypeHK(v7, UFG::CompositeLookComponent::_TypeUID);
-    }
-    else if ( (v9 & 0x8000u) == 0 )
-    {
-      if ( (v9 >> 13) & 1 )
-      {
-        v8 = UFG::SimObjectGame::GetComponentOfTypeHK(v7, UFG::CompositeLookComponent::_TypeUID);
-      }
-      else if ( (v9 >> 12) & 1 )
-      {
-        v8 = UFG::SimObjectGame::GetComponentOfTypeHK(v7, UFG::CompositeLookComponent::_TypeUID);
-      }
-      else
-      {
-        v8 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v7->vfptr, UFG::CompositeLookComponent::_TypeUID);
-      }
-    }
+    if ( (v9 & 0x4000) != 0 || v9 < 0 || (v9 & 0x2000) != 0 || (v9 & 0x1000) != 0 )
+      ComponentOfType = (UFG::CompositeLookComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                         v7,
+                                                         UFG::CompositeLookComponent::_TypeUID);
     else
-    {
-      v8 = UFG::SimObjectGame::GetComponentOfTypeHK(v7, UFG::CompositeLookComponent::_TypeUID);
-    }
+      ComponentOfType = (UFG::CompositeLookComponent *)UFG::SimObject::GetComponentOfType(
+                                                         v7,
+                                                         UFG::CompositeLookComponent::_TypeUID);
   }
   else
   {
-    v8 = 0i64;
+    ComponentOfType = 0i64;
   }
-  v10 = v2->mCharacterLookComponent;
-  v2->mCompositeLookComponent = (UFG::CompositeLookComponent *)v8;
-  if ( v10 )
+  mCharacterLookComponent = this->mCharacterLookComponent;
+  this->mCompositeLookComponent = ComponentOfType;
+  if ( mCharacterLookComponent )
   {
-    v10->mSceneryInstance->SIColourTint[3] = 0.0;
+    mCharacterLookComponent->mSceneryInstance->SIColourTint[3] = 0.0;
   }
-  else if ( v8 )
+  else if ( ComponentOfType )
   {
-    HIDWORD(v8[1].m_BoundComponentHandles.mNode.mNext[1].mNext) = 0;
+    ComponentOfType->mSceneryInstance->SIColourTint[3] = 0.0;
   }
 }
 
@@ -11508,59 +10108,63 @@ void __fastcall DisableSelfIlluminationTask::Begin(DisableSelfIlluminationTask *
 // RVA: 0x2FEB80
 void __fastcall DisableSelfIlluminationTask::End(DisableSelfIlluminationTask *this)
 {
-  UFG::CharacterLookComponent *v1; // rax
+  UFG::CharacterLookComponent *mCharacterLookComponent; // rax
 
-  v1 = this->mCharacterLookComponent;
-  if ( v1 || (v1 = (UFG::CharacterLookComponent *)this->mCompositeLookComponent) != 0i64 )
-    v1->mSceneryInstance->SIColourTint[3] = 1.0;
+  mCharacterLookComponent = this->mCharacterLookComponent;
+  if ( mCharacterLookComponent
+    || (mCharacterLookComponent = (UFG::CharacterLookComponent *)this->mCompositeLookComponent) != 0i64 )
+  {
+    mCharacterLookComponent->mSceneryInstance->SIColourTint[3] = 1.0;
+  }
 }
 
 // File Line: 5252
 // RVA: 0x2F1FC0
-void __fastcall PlayerGainHealthBasedOnActiveBuffTask::Begin(PlayerGainHealthBasedOnActiveBuffTask *this, ActionContext *pContext)
+void __fastcall PlayerGainHealthBasedOnActiveBuffTask::Begin(
+        PlayerGainHealthBasedOnActiveBuffTask *this,
+        ActionContext *pContext)
 {
-  UFG::SimObjectGame *v2; // rcx
-  unsigned __int16 v3; // dx
-  UFG::HealthComponent *v4; // rsi
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::HealthComponent *m_pComponent; // rsi
   UFG::SimComponent *v5; // rax
-  signed int v6; // ebx
-  int v7; // edi
+  int m_fHealth; // ebx
+  int m_fMaxHealth; // edi
   UFG::GameStatTracker *v8; // rax
   int v9; // ebx
   int v10; // eax
 
-  v2 = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
-  if ( v2 )
+  m_pPointer = (UFG::SimObjectGame *)pContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v3 = v2->m_Flags;
-    if ( (v3 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v4 = (UFG::HealthComponent *)v2->m_Components.p[6].m_pComponent;
+      m_pComponent = (UFG::HealthComponent *)m_pPointer->m_Components.p[6].m_pComponent;
     }
-    else if ( (v3 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v3 >> 13) & 1 )
-        v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::HealthComponent::_TypeUID);
-      else
-        v5 = (v3 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::HealthComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::HealthComponent::_TypeUID);
-      v4 = (UFG::HealthComponent *)v5;
+      v5 = (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+         ? UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::HealthComponent::_TypeUID)
+         : UFG::SimObject::GetComponentOfType(m_pPointer, UFG::HealthComponent::_TypeUID);
+      m_pComponent = (UFG::HealthComponent *)v5;
     }
     else
     {
-      v4 = (UFG::HealthComponent *)v2->m_Components.p[6].m_pComponent;
+      m_pComponent = (UFG::HealthComponent *)m_pPointer->m_Components.p[6].m_pComponent;
     }
-    if ( v4 )
+    if ( m_pComponent )
     {
-      v6 = (signed int)v4->m_fHealth;
-      v7 = (signed int)v4->m_fMaxHealth;
+      m_fHealth = (int)m_pComponent->m_fHealth;
+      m_fMaxHealth = (int)m_pComponent->m_fMaxHealth;
       v8 = UFG::GameStatTracker::Instance();
-      v9 = (signed int)UFG::GameStatTracker::GetStat(v8, PlayerFaceMeterBuff_HealthPerHitGainedAtLevel2) + v6;
+      v9 = (int)UFG::GameStatTracker::GetStat(v8, PlayerFaceMeterBuff_HealthPerHitGainedAtLevel2) + m_fHealth;
       v10 = 0;
       if ( v9 > 0 )
         v10 = v9;
-      if ( v10 < v7 )
-        v7 = v10;
-      UFG::HealthComponent::SetHealth(v4, v7, 0i64);
+      if ( v10 < m_fMaxHealth )
+        m_fMaxHealth = v10;
+      UFG::HealthComponent::SetHealth(m_pComponent, m_fMaxHealth, 0i64);
     }
   }
 }
@@ -11569,84 +10173,72 @@ void __fastcall PlayerGainHealthBasedOnActiveBuffTask::Begin(PlayerGainHealthBas
 // RVA: 0x2E0CB0
 void __fastcall ResourceOpportunityTask::ResourceOpportunityTask(ResourceOpportunityTask *this)
 {
-  ResourceOpportunityTask *v1; // rdx
-  UFG::qNode<ITask,ITask> *v2; // rax
-  UFG::PowerManagedResource *v3; // rcx
-  UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList> *v4; // rax
-  AnimationGroupHandleContainer *v5; // [rsp+28h] [rbp+10h]
+  UFG::PowerManagedResource *v2; // rcx
 
-  v1 = this;
-  v2 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
-  v2->mPrev = v2;
-  v2->mNext = v2;
-  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
-  this->vfptr = (ITaskVtbl *)&Task<ResourceOpportunityTrack>::`vftable;
-  v3 = (UFG::PowerManagedResource *)&this->vfptr;
-  v4 = (UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList> *)&v3->mPrev;
-  v4->mPrev = v4;
-  v4->mNext = v4;
-  v3->vfptr = (UFG::PowerManagedResourceVtbl *)&UFG::PowerManagedResource::`vftable;
-  v1->vfptr = (ITaskVtbl *)&ResourceOpportunityTask::`vftable{for `Task<ResourceOpportunityTrack>};
-  v3->vfptr = (UFG::PowerManagedResourceVtbl *)&ResourceOpportunityTask::`vftable{for `UFG::PowerManagedResource};
-  v1->mContext = 0i64;
-  v1->mLatchedNode = 0i64;
-  v1->mNameUID = 0;
-  v1->mLatchedNodeResourcesGathered = 0;
-  v5 = &v1->mAnimationGroupHandleContainer;
-  v5->m_AnimationGroupHandleList.mNode.mPrev = &v5->m_AnimationGroupHandleList.mNode;
-  v5->m_AnimationGroupHandleList.mNode.mNext = &v5->m_AnimationGroupHandleList.mNode;
-  v1->mAnimationGroupHandleContainer.m_bHasBeenBound = 0;
+  this->Task<ResourceOpportunityTrack>::ITask::UFG::qNode<ITask,ITask>::mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->Task<ResourceOpportunityTrack>::ITask::UFG::qNode<ITask,ITask>::mNext = &this->UFG::qNode<ITask,ITask>;
+  this->Task<ResourceOpportunityTrack>::ITask::vfptr = (ITaskVtbl *)&ITask::`vftable;
+  this->Task<ResourceOpportunityTrack>::ITask::vfptr = (ITaskVtbl *)&Task<ResourceOpportunityTrack>::`vftable;
+  v2 = &this->UFG::PowerManagedResource;
+  v2->mPrev = &v2->UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList>;
+  v2->mNext = &v2->UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList>;
+  v2->vfptr = (UFG::PowerManagedResourceVtbl *)&UFG::PowerManagedResource::`vftable;
+  this->Task<ResourceOpportunityTrack>::ITask::vfptr = (ITaskVtbl *)&ResourceOpportunityTask::`vftable{for `Task<ResourceOpportunityTrack>};
+  v2->vfptr = (UFG::PowerManagedResourceVtbl *)&ResourceOpportunityTask::`vftable{for `UFG::PowerManagedResource};
+  this->mContext = 0i64;
+  this->mLatchedNode = 0i64;
+  this->mNameUID = 0;
+  this->mLatchedNodeResourcesGathered = 0;
+  this->mAnimationGroupHandleContainer.m_AnimationGroupHandleList.mNode.mPrev = &this->mAnimationGroupHandleContainer.m_AnimationGroupHandleList.mNode;
+  this->mAnimationGroupHandleContainer.m_AnimationGroupHandleList.mNode.mNext = &this->mAnimationGroupHandleContainer.m_AnimationGroupHandleList.mNode;
+  this->mAnimationGroupHandleContainer.m_bHasBeenBound = 0;
 }
 
 // File Line: 5285
 // RVA: 0x2F3230
 void __fastcall ResourceOpportunityTask::Begin(ResourceOpportunityTask *this, ActionContext *context)
 {
-  UFG::SimObject *v2; // rax
-  ActionContext *v3; // rbx
-  ResourceOpportunityTask *v4; // rsi
-  ResourceOpportunityTrack *v5; // rdx
-  signed __int64 v6; // rdi
-  __int64 v7; // rax
-  signed __int64 v8; // rax
+  UFG::SimObject *m_pPointer; // rax
+  ResourceOpportunityTrack *m_Track; // rdx
+  ActionNode *m_OpeningBranch; // rdi
+  __int64 mOffset; // rax
+  char *v8; // rax
   __int64 v9; // rcx
-  ActionPath *v10; // rax
-  __int64 v11; // rbp
+  ActionPath *ActionPath; // rax
+  Expression::IMemberMap *v11; // rbp
   ActionNodeRoot *v12; // rax
-  __int64 v13; // r8
+  __int64 mValue; // r8
   ActionNodeRoot *v14; // rdi
   UFG::ActionTreeComponentBase *v15; // rcx
 
   this->mContext = context;
-  v2 = context->mSimObject.m_pPointer;
-  v3 = context;
-  v4 = this;
-  if ( v2 )
-    this->mNameUID = v2->mNode.mUID;
-  v5 = (ResourceOpportunityTrack *)this->m_Track;
-  v6 = 0i64;
-  v7 = v5->mActionNodeReference.mOffset;
-  if ( v7 )
-    v8 = (signed __int64)&v5->mActionNodeReference + v7;
+  m_pPointer = context->mSimObject.m_pPointer;
+  if ( m_pPointer )
+    this->mNameUID = m_pPointer->mNode.mUID;
+  m_Track = (ResourceOpportunityTrack *)this->m_Track;
+  m_OpeningBranch = 0i64;
+  mOffset = m_Track->mActionNodeReference.mOffset;
+  if ( mOffset )
+    v8 = (char *)&m_Track->mActionNodeReference + mOffset;
   else
     v8 = 0i64;
-  v9 = *(_QWORD *)(v8 + 72);
+  v9 = *((_QWORD *)v8 + 9);
   if ( v9 )
-    v6 = v9 + v8 + 72;
-  v10 = ResourceOpportunityTrack::GetActionPath(v5);
-  if ( !v6 && !(v10->mPath.mCount & 0x7FFFFFFF) )
-    v6 = (signed __int64)v4->mContext->m_OpeningBranch;
-  v11 = ((__int64 (*)(void))v3->m_OpeningBranch->vfptr[1].GetResourceOwner)();
-  v12 = (ActionNodeRoot *)(*(__int64 (__fastcall **)(signed __int64))(*(_QWORD *)v6 + 152i64))(v6);
-  v13 = v12->mActionTreeType.mValue;
+    m_OpeningBranch = (ActionNode *)&v8[v9 + 72];
+  ActionPath = ResourceOpportunityTrack::GetActionPath(m_Track);
+  if ( !m_OpeningBranch && (ActionPath->mPath.mCount & 0x7FFFFFFF) == 0 )
+    m_OpeningBranch = this->mContext->m_OpeningBranch;
+  v11 = context->m_OpeningBranch->vfptr[1].GetResourceOwner(context->m_OpeningBranch);
+  v12 = (ActionNodeRoot *)m_OpeningBranch->vfptr[1].GetResourceOwner(m_OpeningBranch);
+  mValue = v12->mActionTreeType.mValue;
   v14 = v12;
-  if ( (v3->mActionTreeComponentBase[v13] || v3->mActionTreeComponentBase[1]) && (ActionNodeRoot *)v11 != v12 )
+  if ( (context->mActionTreeComponentBase[mValue] || context->mActionTreeComponentBase[1]) && v11 != v12 )
   {
-    v15 = v3->mActionTreeComponentBase[v13];
+    v15 = context->mActionTreeComponentBase[mValue];
     if ( !v15 )
-      v15 = v3->mActionTreeComponentBase[1];
+      v15 = context->mActionTreeComponentBase[1];
     if ( UFG::ActionTreeComponentBase::AllocateFor(v15, v12) )
-      ActionNodeRoot::Init(v14, v4->mContext);
+      ActionNodeRoot::Init(v14, this->mContext);
   }
 }
 
@@ -11654,90 +10246,81 @@ void __fastcall ResourceOpportunityTask::Begin(ResourceOpportunityTask *this, Ac
 // RVA: 0x309F00
 bool __fastcall ResourceOpportunityTask::Update(ResourceOpportunityTask *this, float timeDelta)
 {
-  ResourceOpportunityTask *v2; // rbx
-  bool result; // al
-  ResourceOpportunityTrack *v4; // rcx
-  signed __int64 v5; // rdi
-  __int64 v6; // rax
-  signed __int64 v7; // rax
+  ResourceOpportunityTrack *m_Track; // rcx
+  ActionNode *m_OpeningBranch; // rdi
+  __int64 mOffset; // rax
+  char *v7; // rax
   __int64 v8; // rdx
-  ActionPath *v9; // rax
+  ActionPath *ActionPath; // rax
   __int64 v10; // rax
-  __int64 v11; // rax
+  ActionNodePlayable *v11; // rax
   float v12; // xmm1_4
   bool v13; // di
   bool v14; // al
 
-  v2 = this;
   if ( !this->mLatchedNode
     && (UFG::Metrics::msInstance.mSimFrameCount + this->mNameUID) % SHIWORD(this->m_Track[1].m_TrackClassNameUID) )
   {
     return 1;
   }
-  v4 = (ResourceOpportunityTrack *)this->m_Track;
-  v5 = 0i64;
-  v6 = v4->mActionNodeReference.mOffset;
-  if ( v6 )
-    v7 = (signed __int64)&v4->mActionNodeReference + v6;
+  m_Track = (ResourceOpportunityTrack *)this->m_Track;
+  m_OpeningBranch = 0i64;
+  mOffset = m_Track->mActionNodeReference.mOffset;
+  if ( mOffset )
+    v7 = (char *)&m_Track->mActionNodeReference + mOffset;
   else
     v7 = 0i64;
-  v8 = *(_QWORD *)(v7 + 72);
+  v8 = *((_QWORD *)v7 + 9);
   if ( v8 )
-    v5 = v8 + v7 + 72;
-  v9 = ResourceOpportunityTrack::GetActionPath(v4);
-  if ( !v5 )
+    m_OpeningBranch = (ActionNode *)&v7[v8 + 72];
+  ActionPath = ResourceOpportunityTrack::GetActionPath(m_Track);
+  if ( !m_OpeningBranch )
   {
-    if ( v9->mPath.mCount & 0x7FFFFFFF )
-      goto LABEL_31;
-    v5 = (signed __int64)v2->mContext->m_OpeningBranch;
-    if ( !v5 )
-      goto LABEL_31;
+    if ( (ActionPath->mPath.mCount & 0x7FFFFFFF) != 0 )
+      return 0;
+    m_OpeningBranch = this->mContext->m_OpeningBranch;
+    if ( !m_OpeningBranch )
+      return 0;
   }
-  if ( !v2->mLatchedNode )
+  if ( !this->mLatchedNode )
   {
-    v10 = ((__int64 (*)(void))v2->m_Track->vfptr[2].__vecDelDtor)();
+    v10 = ((__int64 (__fastcall *)(ITrack *))this->m_Track->Task<ResourceOpportunityTrack>::ITask::vfptr[2].__vecDelDtor)(this->m_Track);
     if ( !v10
-      || (*(unsigned __int8 (__fastcall **)(__int64, ActionContext *))(*(_QWORD *)v10 + 80i64))(v10, v2->mContext) )
+      || (*(unsigned __int8 (__fastcall **)(__int64, ActionContext *))(*(_QWORD *)v10 + 80i64))(v10, this->mContext) )
     {
-      v11 = (*(__int64 (__fastcall **)(signed __int64, ActionContext *))(*(_QWORD *)v5 + 200i64))(v5, v2->mContext);
+      v11 = (ActionNodePlayable *)((__int64 (__fastcall *)(ActionNode *, ActionContext *))m_OpeningBranch->vfptr[2].GetClassNameUID)(
+                                    m_OpeningBranch,
+                                    this->mContext);
       if ( v11 )
       {
-        if ( BYTE1(v2->m_Track[1].m_TrackClassNameUID) )
+        if ( BYTE1(this->m_Track[1].m_TrackClassNameUID) )
         {
-          v2->mLatchedNode = (ActionNodePlayable *)v11;
+          this->mLatchedNode = v11;
         }
-        else if ( v2->mContext->mActionController->m_currentNode != (ActionNodePlayable *)v11 )
+        else if ( this->mContext->mActionController->m_currentNode != v11 )
         {
-          v2->mLatchedNode = (ActionNodePlayable *)v11;
+          this->mLatchedNode = v11;
         }
       }
     }
-    if ( !v2->mLatchedNode )
-      goto LABEL_32;
+    if ( !this->mLatchedNode )
+      return 1;
   }
-  v12 = *(float *)&v2->m_Track[1].mBreakPoint;
-  v13 = v12 >= 0.0 && v12 <= v2->mContext->mActionController->m_ActionNodePlayTime;
-  v14 = ResourceOpportunityTask::areResourcesStreamedIn(v2);
-  if ( v13 && v14 )
-LABEL_31:
-    result = 0;
-  else
-LABEL_32:
-    result = 1;
-  return result;
+  v12 = *(float *)&this->m_Track[1].mBreakPoint;
+  v13 = v12 >= 0.0 && v12 <= this->mContext->mActionController->m_ActionNodePlayTime;
+  v14 = ResourceOpportunityTask::areResourcesStreamedIn(this);
+  return !v13 || !v14;
 }
 
 // File Line: 5411
 // RVA: 0x303940
 void __fastcall ResourceOpportunityTask::UnbindResources(ResourceOpportunityTask *this)
 {
-  AnimationGroupHandle *v1; // rsi
-  ResourceOpportunityTask *v2; // rdi
+  float *p_m_TimeBegin; // rsi
   AnimationGroupHandle *v3; // rbx
 
-  v1 = (AnimationGroupHandle *)&this->m_TimeBegin;
-  v2 = this;
-  v3 = (AnimationGroupHandle *)&this->mNext[-1];
+  p_m_TimeBegin = &this->m_TimeBegin;
+  v3 = (AnimationGroupHandle *)&this->UFG::PowerManagedResource::UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList>::mNext[-1];
   if ( v3 == (AnimationGroupHandle *)&this->m_TimeBegin )
   {
     LOBYTE(this->mContext) = 0;
@@ -11747,10 +10330,10 @@ void __fastcall ResourceOpportunityTask::UnbindResources(ResourceOpportunityTask
     do
     {
       AnimationGroupHandle::Unbind(v3);
-      v3 = (AnimationGroupHandle *)&v3->mNext[-1];
+      v3 = (AnimationGroupHandle *)&v3->UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer>::mNext[-1];
     }
-    while ( v3 != v1 );
-    LOBYTE(v2->mContext) = 0;
+    while ( v3 != (AnimationGroupHandle *)p_m_TimeBegin );
+    LOBYTE(this->mContext) = 0;
   }
 }
 
@@ -11758,20 +10341,20 @@ void __fastcall ResourceOpportunityTask::UnbindResources(ResourceOpportunityTask
 // RVA: 0x3035B0
 void __fastcall ResourceOpportunityTask::RebindResources(ResourceOpportunityTask *this)
 {
-  AnimationGroupHandle *v1; // rdi
+  float *p_m_TimeBegin; // rdi
   AnimationGroupHandle *v2; // rbx
 
-  v1 = (AnimationGroupHandle *)&this->m_TimeBegin;
-  v2 = (AnimationGroupHandle *)&this->mNext[-1];
+  p_m_TimeBegin = &this->m_TimeBegin;
+  v2 = (AnimationGroupHandle *)&this->UFG::PowerManagedResource::UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList>::mNext[-1];
   if ( v2 != (AnimationGroupHandle *)&this->m_TimeBegin )
   {
     do
     {
       if ( !v2->m_AnimationGroup.m_pPointer )
         AnimationGroupHandle::Bind(v2);
-      v2 = (AnimationGroupHandle *)&v2->mNext[-1];
+      v2 = (AnimationGroupHandle *)&v2->UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer>::mNext[-1];
     }
-    while ( v2 != v1 );
+    while ( v2 != (AnimationGroupHandle *)p_m_TimeBegin );
   }
 }
 
@@ -11779,21 +10362,21 @@ void __fastcall ResourceOpportunityTask::RebindResources(ResourceOpportunityTask
 // RVA: 0x2E7D30
 char __fastcall ResourceOpportunityTask::AreResourcesAvailable(ResourceOpportunityTask *this)
 {
-  ResourceOpportunityTask *v1; // rdi
-  ResourceOpportunityTask *v2; // rbx
-  AnimationGroup *v3; // rcx
+  float *p_m_TimeBegin; // rdi
+  ResourceOpportunityTask *p_value; // rbx
+  AnimationGroup *mNext; // rcx
 
-  v1 = (ResourceOpportunityTask *)((char *)this + 32);
-  v2 = (ResourceOpportunityTask *)&this->mNext[-1];
-  if ( v2 == (ResourceOpportunityTask *)&this->m_TimeBegin )
+  p_m_TimeBegin = &this->m_TimeBegin;
+  p_value = (ResourceOpportunityTask *)&this->UFG::PowerManagedResource::UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList>::mNext[-1];
+  if ( p_value == (ResourceOpportunityTask *)&this->m_TimeBegin )
     return 1;
   while ( 1 )
   {
-    v3 = (AnimationGroup *)v2->mNext;
-    if ( !v3 || !AnimationGroup::IsStreamedIn(v3) )
+    mNext = (AnimationGroup *)p_value->UFG::PowerManagedResource::UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList>::mNext;
+    if ( !mNext || !AnimationGroup::IsStreamedIn(mNext) )
       break;
-    v2 = (ResourceOpportunityTask *)&v2->m_Track[-1].mMasterRate.value;
-    if ( v2 == v1 )
+    p_value = (ResourceOpportunityTask *)&p_value->m_Track[-1].mMasterRate.value;
+    if ( p_value == (ResourceOpportunityTask *)p_m_TimeBegin )
       return 1;
   }
   return 0;
@@ -11803,30 +10386,30 @@ char __fastcall ResourceOpportunityTask::AreResourcesAvailable(ResourceOpportuni
 // RVA: 0x30BAB0
 void __fastcall ResourceOpportunityVisitor::Visit(ResourceOpportunityVisitor *this, AnimationNode *node)
 {
-  SkeletalAnimation *v2; // rdi
-  ResourceOpportunityTask *v3; // rbx
+  SkeletalAnimation *m_pPointer; // rdi
+  ResourceOpportunityTask *m_pResourceOpportunityTask; // rbx
   bool v4; // zf
-  ITrack *v5; // rax
-  UFG::eAnimationPriorityEnum v6; // er8
-  __int64 v7; // rax
+  ITrack *m_Track; // rax
+  UFG::eAnimationPriorityEnum v6; // r8d
+  __int64 mOffset; // rax
   UFG::qSymbolUC *v8; // rdx
 
-  v2 = node->mSkeletalAnimationHandle.m_SkeletalAnimation.m_pPointer;
-  v3 = this->m_pResourceOpportunityTask;
-  if ( v2 )
+  m_pPointer = node->mSkeletalAnimationHandle.m_SkeletalAnimation.m_pPointer;
+  m_pResourceOpportunityTask = this->m_pResourceOpportunityTask;
+  if ( m_pPointer )
   {
-    v4 = UFG::IsAnyLocalPlayer(v3->mContext->mSimObject.m_pPointer) == 0;
-    v5 = v3->m_Track;
+    v4 = !UFG::IsAnyLocalPlayer(m_pResourceOpportunityTask->mContext->mSimObject.m_pPointer);
+    m_Track = m_pResourceOpportunityTask->m_Track;
     if ( v4 )
-      v6 = BYTE5(v5[1].mMasterRate.text.mOffset);
+      v6 = BYTE5(m_Track[1].mMasterRate.text.mOffset);
     else
-      v6 = BYTE4(v5[1].mMasterRate.text.mOffset);
-    v7 = v2->m_pAnimationGroup.mOffset;
-    if ( v7 )
-      v8 = (UFG::qSymbolUC *)((char *)&v2->m_pAnimationGroup + v7);
+      v6 = BYTE4(m_Track[1].mMasterRate.text.mOffset);
+    mOffset = m_pPointer->m_pAnimationGroup.mOffset;
+    if ( mOffset )
+      v8 = (UFG::qSymbolUC *)((char *)&m_pPointer->m_pAnimationGroup + mOffset);
     else
       v8 = 0i64;
-    AnimationGroupHandleContainer::Add(&v3->mAnimationGroupHandleContainer, v8 + 43, v6);
+    AnimationGroupHandleContainer::Add(&m_pResourceOpportunityTask->mAnimationGroupHandleContainer, v8 + 43, v6);
   }
 }
 
@@ -11834,30 +10417,26 @@ void __fastcall ResourceOpportunityVisitor::Visit(ResourceOpportunityVisitor *th
 // RVA: 0x2E7A70
 void __fastcall ResourceOpportunityTask::AddAnimation(ResourceOpportunityTask *this, SkeletalAnimation *pSA)
 {
-  ResourceOpportunityTask *v2; // rbx
-  SkeletalAnimation *v3; // rdi
   bool v4; // zf
-  ITrack *v5; // rax
-  UFG::eAnimationPriorityEnum v6; // er8
-  __int64 v7; // rax
+  ITrack *m_Track; // rax
+  UFG::eAnimationPriorityEnum v6; // r8d
+  __int64 mOffset; // rax
   UFG::qSymbolUC *v8; // rdx
 
   if ( pSA )
   {
-    v2 = this;
-    v3 = pSA;
-    v4 = UFG::IsAnyLocalPlayer(this->mContext->mSimObject.m_pPointer) == 0;
-    v5 = v2->m_Track;
+    v4 = !UFG::IsAnyLocalPlayer(this->mContext->mSimObject.m_pPointer);
+    m_Track = this->m_Track;
     if ( v4 )
-      v6 = BYTE5(v5[1].mMasterRate.text.mOffset);
+      v6 = BYTE5(m_Track[1].mMasterRate.text.mOffset);
     else
-      v6 = BYTE4(v5[1].mMasterRate.text.mOffset);
-    v7 = v3->m_pAnimationGroup.mOffset;
-    if ( v7 )
-      v8 = (UFG::qSymbolUC *)((char *)&v3->m_pAnimationGroup + v7);
+      v6 = BYTE4(m_Track[1].mMasterRate.text.mOffset);
+    mOffset = pSA->m_pAnimationGroup.mOffset;
+    if ( mOffset )
+      v8 = (UFG::qSymbolUC *)((char *)&pSA->m_pAnimationGroup + mOffset);
     else
       v8 = 0i64;
-    AnimationGroupHandleContainer::Add(&v2->mAnimationGroupHandleContainer, v8 + 43, v6);
+    AnimationGroupHandleContainer::Add(&this->mAnimationGroupHandleContainer, v8 + 43, v6);
   }
 }
 
@@ -11865,35 +10444,33 @@ void __fastcall ResourceOpportunityTask::AddAnimation(ResourceOpportunityTask *t
 // RVA: 0x30D230
 void __fastcall ResourceOpportunityTask::gatherResources(ResourceOpportunityTask *this)
 {
-  ResourceOpportunityTask *v1; // r14
-  ActionNodePlayable *v2; // rcx
+  ActionNodePlayable *mLatchedNode; // rcx
   __int64 v3; // rax
   __int64 v4; // rbp
-  signed __int64 v5; // r15
+  __int64 v5; // r15
   __int64 v6; // rsi
   UFG::qSymbolUC *v7; // rbx
   bool v8; // zf
   __int64 v9; // rax
   SkeletalAnimation *v10; // rax
-  BlendTreeDataBase *v11; // rax
-  PoseNode *v12; // rax
-  Expression::IMemberMapVtbl *v13; // r8
-  void **v14; // [rsp+20h] [rbp-38h]
+  BlendTreeDataBase *Instance; // rax
+  PoseNode *BlendTree; // rax
+  Expression::IMemberMapVtbl *vfptr; // r8
+  void **v14; // [rsp+20h] [rbp-38h] BYREF
   char v15; // [rsp+28h] [rbp-30h]
   UFG::qSymbolUC *v16; // [rsp+30h] [rbp-28h]
   ResourceOpportunityTask *v17; // [rsp+38h] [rbp-20h]
 
-  v1 = this;
-  v2 = this->mLatchedNode;
-  if ( v2 )
+  mLatchedNode = this->mLatchedNode;
+  if ( mLatchedNode )
   {
-    v3 = ((__int64 (*)(void))v2->vfptr[3].GetClassNameUID)();
+    v3 = ((__int64 (*)(void))mLatchedNode->vfptr[3].GetClassNameUID)();
     v4 = v3;
     if ( v3 )
     {
       v5 = *(_QWORD *)(v3 + 24) + v3 + 24;
       v6 = 0i64;
-      if ( *(_DWORD *)(v3 + 16) & 0x7FFFFFFF )
+      if ( (*(_DWORD *)(v3 + 16) & 0x7FFFFFFF) != 0 )
       {
         do
         {
@@ -11903,20 +10480,20 @@ void __fastcall ResourceOpportunityTask::gatherResources(ResourceOpportunityTask
           if ( v8 )
           {
             v10 = (SkeletalAnimation *)(*(__int64 (__fastcall **)(UFG::qSymbolUC *))(v9 + 128))(v7);
-            ResourceOpportunityTask::AddAnimation(v1, v10);
+            ResourceOpportunityTask::AddAnimation(this, v10);
           }
           else if ( (*(unsigned int (__fastcall **)(UFG::qSymbolUC *))(v9 + 40))(v7) == BlendTreeTrack::sClassNameUID )
           {
-            v11 = BlendTreeDataBase::GetInstance();
-            v12 = BlendTreeDataBase::FindBlendTree(v11, v7 + 16);
-            if ( v12 )
+            Instance = BlendTreeDataBase::GetInstance();
+            BlendTree = BlendTreeDataBase::FindBlendTree(Instance, v7 + 16);
+            if ( BlendTree )
             {
-              v13 = v12->vfptr;
+              vfptr = BlendTree->Expression::IMemberMap::vfptr;
               v15 = 1;
               v14 = &ResourceOpportunityVisitor::`vftable;
               v16 = v7;
-              v17 = v1;
-              v13[1].FindWithOldPath((Expression::IMemberMap *)&v12->vfptr, (const char *)&v14);
+              v17 = this;
+              vfptr[1].FindWithOldPath(BlendTree, (const char *)&v14);
             }
           }
           v6 = (unsigned int)(v6 + 1);
@@ -11931,68 +10508,41 @@ void __fastcall ResourceOpportunityTask::gatherResources(ResourceOpportunityTask
 // RVA: 0x30CA30
 char __fastcall ResourceOpportunityTask::areResourcesStreamedIn(ResourceOpportunityTask *this)
 {
-  ResourceOpportunityTask *v1; // rdi
-  ActionContext *v2; // rax
-  UFG::SimObjectGame *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::PowerManagementComponent *v5; // rax
-  UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *v6; // rax
-  signed __int64 v7; // rdi
-  signed __int64 v8; // rbx
+  ActionContext *mContext; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::PowerManagementComponent *ComponentOfTypeHK; // rax
+  UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *mNext; // rax
+  ActionNodePlayable **p_mLatchedNode; // rdi
+  __int64 v8; // rbx
   AnimationGroup *v9; // rcx
 
-  v1 = this;
   if ( !this->mLatchedNodeResourcesGathered )
   {
     ResourceOpportunityTask::gatherResources(this);
-    AnimationGroupHandleContainer::Bind(&v1->mAnimationGroupHandleContainer);
-    v2 = v1->mContext;
-    v1->mLatchedNodeResourcesGathered = 1;
-    v3 = (UFG::SimObjectGame *)v2->mSimObject.m_pPointer;
-    if ( v3 )
+    AnimationGroupHandleContainer::Bind(&this->mAnimationGroupHandleContainer);
+    mContext = this->mContext;
+    this->mLatchedNodeResourcesGathered = 1;
+    m_pPointer = (UFG::SimObjectGame *)mContext->mSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      v4 = v3->m_Flags;
-      if ( (v4 >> 14) & 1 )
-      {
-        v5 = (UFG::PowerManagementComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                v3,
-                                                UFG::PowerManagementComponent::_TypeUID);
-      }
-      else if ( (v4 & 0x8000u) == 0 )
-      {
-        if ( (v4 >> 13) & 1 )
-        {
-          v5 = (UFG::PowerManagementComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                  v3,
-                                                  UFG::PowerManagementComponent::_TypeUID);
-        }
-        else if ( (v4 >> 12) & 1 )
-        {
-          v5 = (UFG::PowerManagementComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                  v3,
-                                                  UFG::PowerManagementComponent::_TypeUID);
-        }
-        else
-        {
-          v5 = (UFG::PowerManagementComponent *)UFG::SimObject::GetComponentOfType(
-                                                  (UFG::SimObject *)&v3->vfptr,
-                                                  UFG::PowerManagementComponent::_TypeUID);
-        }
-      }
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        ComponentOfTypeHK = (UFG::PowerManagementComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                               m_pPointer,
+                                                               UFG::PowerManagementComponent::_TypeUID);
       else
-      {
-        v5 = (UFG::PowerManagementComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                v3,
-                                                UFG::PowerManagementComponent::_TypeUID);
-      }
-      if ( v5 )
-        UFG::PowerManagementComponent::AddPowerManagedResource(v5, (UFG::PowerManagedResource *)&v1->vfptr);
+        ComponentOfTypeHK = (UFG::PowerManagementComponent *)UFG::SimObject::GetComponentOfType(
+                                                               m_pPointer,
+                                                               UFG::PowerManagementComponent::_TypeUID);
+      if ( ComponentOfTypeHK )
+        UFG::PowerManagementComponent::AddPowerManagedResource(ComponentOfTypeHK, &this->UFG::PowerManagedResource);
     }
   }
-  v6 = v1->mAnimationGroupHandleContainer.m_AnimationGroupHandleList.mNode.mNext;
-  v7 = (signed __int64)&v1->mLatchedNode;
-  v8 = (signed __int64)&v6[-1];
-  if ( &v6[-1] == (UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *)v7 )
+  mNext = this->mAnimationGroupHandleContainer.m_AnimationGroupHandleList.mNode.mNext;
+  p_mLatchedNode = &this->mLatchedNode;
+  v8 = (__int64)&mNext[-1];
+  if ( &mNext[-1] == (UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *)p_mLatchedNode )
     return 1;
   while ( 1 )
   {
@@ -12000,7 +10550,7 @@ char __fastcall ResourceOpportunityTask::areResourcesStreamedIn(ResourceOpportun
     if ( !v9 || !AnimationGroup::IsStreamedIn(v9) )
       break;
     v8 = *(_QWORD *)(v8 + 24) - 16i64;
-    if ( v8 == v7 )
+    if ( (ActionNodePlayable **)v8 == p_mLatchedNode )
       return 1;
   }
   return 0;
@@ -12010,87 +10560,71 @@ char __fastcall ResourceOpportunityTask::areResourcesStreamedIn(ResourceOpportun
 // RVA: 0x2FFF00
 void __fastcall ResourceOpportunityTask::End(ResourceOpportunityTask *this)
 {
-  ResourceOpportunityTask *v1; // rdi
   bool v2; // zf
-  ITrack *v3; // rax
-  UFG::eAnimationPriorityEnum priority; // er14
-  UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList> *v5; // rdx
-  UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList> *v6; // rcx
-  UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList> *v7; // rax
-  ActionContext *v8; // rcx
-  UFG::SimObjectGame *v9; // rcx
-  unsigned __int16 v10; // dx
-  UFG::ActionTreeResourcesComponent *v11; // rsi
-  UFG::SimComponent *v12; // rax
-  signed __int64 i; // rbx
-  int v14; // edx
-  ActionPath pathToPopulate; // [rsp+48h] [rbp-30h]
+  ITrack *m_Track; // rax
+  UFG::eAnimationPriorityEnum priority; // r14d
+  UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList> *mPrev; // rcx
+  UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList> *mNext; // rax
+  ActionContext *mContext; // rcx
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::ActionTreeResourcesComponent *m_pComponent; // rsi
+  UFG::SimComponent *v11; // rax
+  UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *i; // rbx
+  int mCount; // edx
+  ActionPath pathToPopulate; // [rsp+48h] [rbp-30h] BYREF
 
-  v1 = this;
-  v2 = UFG::IsAnyLocalPlayer(this->mContext->mSimObject.m_pPointer) == 0;
-  v3 = v1->m_Track;
+  v2 = !UFG::IsAnyLocalPlayer(this->mContext->mSimObject.m_pPointer);
+  m_Track = this->m_Track;
   if ( v2 )
-    priority = BYTE5(v3[1].mMasterRate.text.mOffset);
+    priority = BYTE5(m_Track[1].mMasterRate.text.mOffset);
   else
-    priority = BYTE4(v3[1].mMasterRate.text.mOffset);
-  v5 = (UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList> *)&v1->mPrev;
-  v6 = v1->mPrev;
-  v7 = v1->mNext;
-  v6->mNext = v7;
-  v7->mPrev = v6;
-  v5->mPrev = v5;
-  v5->mNext = v5;
-  if ( v1->mLatchedNode )
+    priority = BYTE4(m_Track[1].mMasterRate.text.mOffset);
+  mPrev = this->UFG::PowerManagedResource::UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList>::mPrev;
+  mNext = this->UFG::PowerManagedResource::UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList>::mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->UFG::PowerManagedResource::UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList>::mPrev = &this->UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList>;
+  this->UFG::PowerManagedResource::UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList>::mNext = &this->UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList>;
+  if ( this->mLatchedNode )
   {
-    if ( ResourceOpportunityTask::areResourcesStreamedIn(v1) )
+    if ( ResourceOpportunityTask::areResourcesStreamedIn(this) )
     {
-      v8 = v1->mContext;
-      if ( v8 )
+      mContext = this->mContext;
+      if ( mContext )
       {
-        v9 = (UFG::SimObjectGame *)v8->mSimObject.m_pPointer;
-        if ( v9 )
+        m_pPointer = (UFG::SimObjectGame *)mContext->mSimObject.m_pPointer;
+        if ( m_pPointer )
         {
-          v10 = v9->m_Flags;
-          if ( (v10 >> 14) & 1 )
+          m_Flags = m_pPointer->m_Flags;
+          if ( (m_Flags & 0x4000) != 0 )
           {
-            v11 = (UFG::ActionTreeResourcesComponent *)v9->m_Components.p[30].m_pComponent;
+            m_pComponent = (UFG::ActionTreeResourcesComponent *)m_pPointer->m_Components.p[30].m_pComponent;
           }
           else
           {
-            if ( (v10 & 0x8000u) == 0 )
-            {
-              if ( (v10 >> 13) & 1 )
-                v12 = UFG::SimObjectGame::GetComponentOfTypeHK(v9, UFG::ActionTreeResourcesComponent::_TypeUID);
-              else
-                v12 = (v10 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                          v9,
-                                          UFG::ActionTreeResourcesComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(
-                                                                                           (UFG::SimObject *)&v9->vfptr,
-                                                                                           UFG::ActionTreeResourcesComponent::_TypeUID);
-            }
-            else
-            {
-              v12 = UFG::SimObjectGame::GetComponentOfTypeHK(v9, UFG::ActionTreeResourcesComponent::_TypeUID);
-            }
-            v11 = (UFG::ActionTreeResourcesComponent *)v12;
+            v11 = m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+                ? UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::ActionTreeResourcesComponent::_TypeUID)
+                : UFG::SimObject::GetComponentOfType(m_pPointer, UFG::ActionTreeResourcesComponent::_TypeUID);
+            m_pComponent = (UFG::ActionTreeResourcesComponent *)v11;
           }
-          if ( v11 )
+          if ( m_pComponent )
           {
-            for ( i = (signed __int64)&v1->mAnimationGroupHandleContainer.m_AnimationGroupHandleList.mNode.mNext[-1];
-                  (ActionNodePlayable **)i != &v1->mLatchedNode;
-                  i = *(_QWORD *)(i + 24) - 16i64 )
+            for ( i = this->mAnimationGroupHandleContainer.m_AnimationGroupHandleList.mNode.mNext - 1;
+                  i != (UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *)&this->mLatchedNode;
+                  i = i[1].mNext - 1 )
             {
               pathToPopulate.mPath.mCount = 0;
               pathToPopulate.mPath.mData.mOffset = 0i64;
-              ActionNode::GetNameFullPath((ActionNode *)&v1->mLatchedNode->vfptr, &pathToPopulate);
+              ActionNode::GetNameFullPath(this->mLatchedNode, &pathToPopulate);
               UFG::ActionTreeResourcesComponent::RequestAnimationBank(
-                v11,
+                m_pComponent,
                 &pathToPopulate,
-                (ActionNode *)&v1->mLatchedNode->vfptr,
+                this->mLatchedNode,
                 1,
-                (UFG::qSymbolUC *)(i + 32),
+                (UFG::qSymbolUC *)&i[2],
                 priority);
-              v14 = pathToPopulate.mPath.mCount;
+              mCount = pathToPopulate.mPath.mCount;
               if ( pathToPopulate.mPath.mCount >= 0 )
               {
                 if ( pathToPopulate.mPath.mData.mOffset )
@@ -12099,19 +10633,19 @@ void __fastcall ResourceOpportunityTask::End(ResourceOpportunityTask *this)
                                                     + pathToPopulate.mPath.mData.mOffset) )
                   {
                     operator delete[]((char *)&pathToPopulate.mPath.mData + pathToPopulate.mPath.mData.mOffset);
-                    v14 = pathToPopulate.mPath.mCount;
+                    mCount = pathToPopulate.mPath.mCount;
                   }
                 }
                 pathToPopulate.mPath.mData.mOffset = 0i64;
-                pathToPopulate.mPath.mCount = v14 & 0x80000000;
+                pathToPopulate.mPath.mCount = mCount & 0x80000000;
               }
             }
           }
         }
         ActionController::Sequence(
-          v1->mContext->mActionController,
-          v1->mLatchedNode,
-          SLOBYTE(v1->m_Track[1].m_TrackClassNameUID),
+          this->mContext->mActionController,
+          this->mLatchedNode,
+          SLOBYTE(this->m_Track[1].m_TrackClassNameUID),
           1);
       }
     }

@@ -28,33 +28,31 @@ hkClass *__fastcall hkpDashpotAction::staticClass()
 
 // File Line: 65
 // RVA: 0xE0A7E0
-void __fastcall finishLoadedObjecthkpDashpotAction(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpDashpotAction(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
-  _QWORD *v2; // rbx
   hkStringPtr *v3; // rcx
 
   if ( p )
   {
-    v2 = p;
-    v3 = (hkStringPtr *)((char *)p + 40);
+    v3 = p + 5;
     v3[-5].m_stringAndFlag = (const char *)&hkpAction::`vftable;
-    hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpDashpotAction::`vftable;
+    hkStringPtr::hkStringPtr(v3, finishing);
+    p->m_stringAndFlag = (const char *)&hkpDashpotAction::`vftable;
   }
 }
 
 // File Line: 71
 // RVA: 0xE0A820
-void __fastcall cleanupLoadedObjecthkpDashpotAction(void *p)
+void __fastcall cleanupLoadedObjecthkpDashpotAction(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 75
 // RVA: 0xE0A830
 void **__fastcall getVtablehkpDashpotAction()
 {
-  hkStringPtr v1; // [rsp+48h] [rbp-60h]
+  hkStringPtr v1; // [rsp+48h] [rbp-60h] BYREF
 
   hkStringPtr::hkStringPtr(&v1, 0);
   return &hkpDashpotAction::`vftable;
@@ -71,8 +69,8 @@ void **dynamic_initializer_for__hkpDashpotActionTypeInfo__()
   hkpDashpotActionTypeInfo.m_typeName = "hkpDashpotAction";
   hkpDashpotActionTypeInfo.m_vtable = result;
   hkpDashpotActionTypeInfo.m_scopedName = "!hkpDashpotAction";
-  hkpDashpotActionTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpDashpotAction;
-  hkpDashpotActionTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpDashpotAction;
+  hkpDashpotActionTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpDashpotAction;
+  hkpDashpotActionTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpDashpotAction;
   return result;
 }
 

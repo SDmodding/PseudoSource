@@ -1,76 +1,75 @@
 // File Line: 45
 // RVA: 0x9994F0
-char __fastcall Scaleform::HeapPT::PageTable::MapRange(Scaleform::HeapPT::PageTable *this, void *mem, unsigned __int64 size)
+char __fastcall Scaleform::HeapPT::PageTable::MapRange(
+        Scaleform::HeapPT::PageTable *this,
+        unsigned __int64 mem,
+        unsigned __int64 size)
 {
-  Scaleform::HeapPT::Granulator **v3; // r12
   unsigned __int64 v4; // rbp
   unsigned __int64 v5; // r14
   unsigned __int64 v6; // rsi
   unsigned __int64 v7; // rcx
   unsigned __int64 v8; // r15
-  Scaleform::HeapPT::Granulator **v9; // r13
+  Scaleform::HeapPT::HeapHeader<Scaleform::HeapPT::HeapHeader<Scaleform::HeapPT::HeapHeader<Scaleform::HeapPT::HeapHeader<Scaleform::HeapPT::HeapHeader1,256>,256>,4096>,4096> *v9; // r13
   Scaleform::HeapPT::DualTNode *v10; // rax
   unsigned __int64 v11; // rdi
   unsigned __int64 v12; // rdx
-  signed __int64 v13; // rcx
+  __int64 v13; // rcx
   Scaleform::HeapPT::DualTNode **v14; // rbx
   Scaleform::HeapPT::DualTNode *v15; // rax
   unsigned __int64 v16; // rcx
   unsigned __int64 v17; // rbp
   unsigned __int64 v18; // rsi
-  signed __int64 v19; // r13
+  __int64 v19; // r13
   Scaleform::HeapPT::DualTNode **v20; // r14
   Scaleform::HeapPT::DualTNode *v21; // rax
   unsigned __int64 v22; // rdi
   unsigned __int64 v23; // r15
-  signed __int64 v24; // rsi
+  __int64 v24; // rsi
   Scaleform::HeapPT::DualTNode *v25; // rbx
   Scaleform::HeapPT::DualTNode *v26; // rax
   unsigned __int64 v28; // [rsp+20h] [rbp-98h]
   unsigned __int64 v29; // [rsp+28h] [rbp-90h]
-  signed __int64 v30; // [rsp+30h] [rbp-88h]
-  signed __int64 v31; // [rsp+38h] [rbp-80h]
-  signed __int64 v32; // [rsp+40h] [rbp-78h]
-  signed __int64 v33; // [rsp+48h] [rbp-70h]
+  __int64 v30; // [rsp+30h] [rbp-88h]
+  __int64 v31; // [rsp+38h] [rbp-80h]
+  __int64 v32; // [rsp+40h] [rbp-78h]
+  Scaleform::HeapPT::HeapHeader<Scaleform::HeapPT::HeapHeader<Scaleform::HeapPT::HeapHeader<Scaleform::HeapPT::HeapHeader<Scaleform::HeapPT::HeapHeader1,256>,256>,4096>,4096> *v33; // [rsp+48h] [rbp-70h]
   unsigned __int64 v34; // [rsp+50h] [rbp-68h]
   unsigned __int64 v35; // [rsp+58h] [rbp-60h]
   unsigned __int64 v36; // [rsp+60h] [rbp-58h]
   Scaleform::HeapPT::DualTNode **v37; // [rsp+68h] [rbp-50h]
   unsigned __int64 v38; // [rsp+70h] [rbp-48h]
-  unsigned __int64 mema; // [rsp+C8h] [rbp+10h]
   unsigned __int64 v40; // [rsp+D0h] [rbp+18h]
-  signed __int64 v41; // [rsp+D8h] [rbp+20h]
+  unsigned __int64 v41; // [rsp+D8h] [rbp+20h]
 
-  mema = (unsigned __int64)mem;
-  v3 = (Scaleform::HeapPT::Granulator **)this;
-  v4 = (unsigned __int64)mem >> 52;
-  v5 = (unsigned __int64)mem + size - 1;
-  v6 = (unsigned __int64)mem;
-  v29 = (unsigned __int64)mem >> 52;
-  v36 = (unsigned __int64)mem + size - 1;
+  v4 = mem >> 52;
+  v5 = mem + size - 1;
+  v6 = mem;
+  v29 = mem >> 52;
+  v36 = v5;
   v7 = v5 >> 52;
-  v8 = (unsigned __int64)mem >> 52;
-  v40 = (unsigned __int64)mem >> 52;
+  v8 = mem >> 52;
+  v40 = mem >> 52;
   v35 = v5 >> 52;
-  if ( (unsigned __int64)mem >> 52 > v5 >> 52 )
+  if ( mem >> 52 > v5 >> 52 )
     return 1;
-  v9 = &v3[2 * v4 + 1];
-  v33 = (signed __int64)&v3[2 * v4 + 1];
+  v9 = &this->RootTable[v4];
+  v33 = v9;
   while ( 1 )
   {
-    if ( !*v9 )
+    if ( !v9->pTable )
     {
-      v10 = Scaleform::HeapPT::Granulator::Alloc(*v3, 0x10000ui64, 0x8000ui64);
-      *v9 = (Scaleform::HeapPT::Granulator *)v10;
+      v10 = Scaleform::HeapPT::Granulator::Alloc(&this->pStarter->Allocator, 0x10000ui64, 0x8000ui64);
+      v9->pTable = (Scaleform::HeapPT::HeapHeader<Scaleform::HeapPT::HeapHeader<Scaleform::HeapPT::HeapHeader<Scaleform::HeapPT::HeapHeader1,256>,256>,4096> *)v10;
       if ( !v10 )
       {
-        Scaleform::HeapPT::PageTable::UnmapRange((Scaleform::HeapPT::PageTable *)v3, (void *)v6, (v8 - v4) << 52);
+        Scaleform::HeapPT::PageTable::UnmapRange(this, (void *)v6, (v8 - v4) << 52);
         return 0;
       }
       memset(v10, 0, 0x10000ui64);
       v7 = v35;
     }
-    v9[1] = (Scaleform::HeapPT::Granulator *)((char *)v9[1] + 1);
+    ++v9->RefCount;
     v11 = 0i64;
     v12 = 4095i64;
     v41 = 0i64;
@@ -78,21 +77,21 @@ char __fastcall Scaleform::HeapPT::PageTable::MapRange(Scaleform::HeapPT::PageTa
     if ( v8 == v4 )
     {
       v11 = (v6 >> 40) & 0xFFF;
-      v41 = (v6 >> 40) & 0xFFF;
+      v41 = v11;
     }
     if ( v8 == v7 )
     {
       v12 = (v5 >> 40) & 0xFFF;
-      v31 = (v5 >> 40) & 0xFFF;
+      v31 = v12;
     }
     v28 = v11;
     if ( v11 <= v12 )
       break;
 LABEL_39:
     ++v8;
-    v9 += 2;
+    ++v9;
     v40 = v8;
-    v33 = (signed __int64)v9;
+    v33 = v9;
     if ( v8 > v7 )
       return 1;
   }
@@ -100,18 +99,15 @@ LABEL_39:
   v32 = 16 * v11;
   while ( 1 )
   {
-    v14 = (Scaleform::HeapPT::DualTNode **)((char *)*v9 + v13);
-    v37 = (Scaleform::HeapPT::DualTNode **)((char *)*v9 + v13);
-    if ( !*(Scaleform::SysAllocPaged **)((char *)&(*v9)->pSysAlloc + v13) )
+    v14 = (Scaleform::HeapPT::DualTNode **)((char *)v9->pTable + v13);
+    v37 = v14;
+    if ( !*v14 )
     {
-      v15 = Scaleform::HeapPT::Granulator::Alloc(*v3, 0x10000ui64, 0x8000ui64);
+      v15 = Scaleform::HeapPT::Granulator::Alloc(&this->pStarter->Allocator, 0x10000ui64, 0x8000ui64);
       *v14 = v15;
       if ( !v15 )
       {
-        Scaleform::HeapPT::PageTable::UnmapRange(
-          (Scaleform::HeapPT::PageTable *)v3,
-          (void *)v6,
-          (v11 + ((v40 - v29) << 12) - v28) << 40);
+        Scaleform::HeapPT::PageTable::UnmapRange(this, (void *)v6, (v11 + ((v40 - v29) << 12) - v28) << 40);
         return 0;
       }
       memset(v15, 0, 0x10000ui64);
@@ -126,14 +122,14 @@ LABEL_39:
     if ( v11 == v12 )
     {
       v16 = (v5 >> 28) & 0xFFF;
-      v30 = (v5 >> 28) & 0xFFF;
+      v30 = v16;
     }
     v18 = v17;
     v34 = v17;
     if ( v17 <= v16 )
       break;
 LABEL_37:
-    v6 = mema;
+    v6 = mem;
     ++v11;
     v13 = v32 + 16;
     v41 = v11;
@@ -152,13 +148,13 @@ LABEL_37:
     v20 = (Scaleform::HeapPT::DualTNode **)((char *)&(*v14)->pPrev + v19);
     if ( !*v20 )
     {
-      v21 = Scaleform::HeapPT::Granulator::Alloc(*v3, 0x1000ui64, 0x800ui64);
+      v21 = Scaleform::HeapPT::Granulator::Alloc(&this->pStarter->Allocator, 0x1000ui64, 0x800ui64);
       *v20 = v21;
       if ( !v21 )
       {
         Scaleform::HeapPT::PageTable::UnmapRange(
-          (Scaleform::HeapPT::PageTable *)v3,
-          (void *)mema,
+          this,
+          (void *)mem,
           (v17 + ((v41 + ((v40 - v29) << 12) - v28) << 12) - v18) << 28);
         return 0;
       }
@@ -169,7 +165,7 @@ LABEL_37:
     v22 = 0i64;
     v23 = 255i64;
     if ( v17 == v18 )
-      v22 = (unsigned __int8)(mema >> 20);
+      v22 = (unsigned __int8)(mem >> 20);
     if ( v17 == v16 )
       v23 = (unsigned __int8)(v36 >> 20);
     v38 = v22;
@@ -183,7 +179,7 @@ LABEL_35:
       v11 = v41;
       v5 = v36;
       v12 = v31;
-      v9 = (Scaleform::HeapPT::Granulator **)v33;
+      v9 = v33;
       goto LABEL_37;
     }
   }
@@ -205,7 +201,7 @@ LABEL_33:
       goto LABEL_35;
     }
   }
-  v26 = Scaleform::HeapPT::Granulator::Alloc(*v3, 0x800ui64, 0x800ui64);
+  v26 = Scaleform::HeapPT::Granulator::Alloc(&this->pStarter->Allocator, 0x800ui64, 0x800ui64);
   *(Scaleform::HeapPT::DualTNode **)((char *)&v25->pPrev + v24) = v26;
   if ( v26 )
   {
@@ -213,15 +209,18 @@ LABEL_33:
     goto LABEL_33;
   }
   Scaleform::HeapPT::PageTable::UnmapRange(
-    (Scaleform::HeapPT::PageTable *)v3,
-    (void *)mema,
+    this,
+    (void *)mem,
     (v22 + ((v17 + ((v41 + ((v40 - v29) << 12) - v28) << 12) - v34) << 8) - v38) << 20);
   return 0;
 }
 
 // File Line: 173
 // RVA: 0x9BB690
-void __fastcall Scaleform::HeapPT::PageTable::UnmapRange(Scaleform::HeapPT::PageTable *this, void *mem, unsigned __int64 size)
+void __fastcall Scaleform::HeapPT::PageTable::UnmapRange(
+        Scaleform::HeapPT::PageTable *this,
+        unsigned __int64 mem,
+        unsigned __int64 size)
 {
   unsigned __int64 v3; // r9
   Scaleform::HeapPT::PageTable *v4; // rdx
@@ -229,56 +228,52 @@ void __fastcall Scaleform::HeapPT::PageTable::UnmapRange(Scaleform::HeapPT::Page
   unsigned __int64 v6; // rcx
   unsigned __int64 v7; // r13
   unsigned __int64 v8; // rbp
-  unsigned __int64 *v9; // r14
+  __int64 v9; // r14
   unsigned __int64 v10; // r15
   unsigned __int64 v11; // r12
   unsigned __int64 v12; // r8
-  signed __int64 v13; // rcx
-  unsigned __int64 v14; // rbp
+  __int64 v13; // rcx
+  char *v14; // rbp
   unsigned __int64 v15; // r14
   unsigned __int64 v16; // r13
-  unsigned __int64 *v17; // rbp
+  char *v17; // rbp
   unsigned __int64 v18; // r8
-  signed __int64 v19; // r15
-  unsigned __int64 v20; // r12
+  __int64 v19; // r15
+  char *v20; // r12
   unsigned __int64 v21; // rcx
   unsigned __int64 v22; // rbp
-  unsigned __int64 *v23; // r12
-  signed __int64 v24; // rsi
-  signed __int64 v25; // rbp
-  unsigned __int64 v26; // rbx
-  Scaleform::HeapPT::Granulator *v27; // r14
+  char *v23; // r12
+  __int64 v24; // rsi
+  __int64 v25; // rbp
+  char *v26; // rbx
+  Scaleform::HeapPT::Granulator *p_Allocator; // r14
   bool v28; // zf
-  Scaleform::HeapPT::TreeSeg *v29; // r15
+  Scaleform::HeapPT::TreeSeg *LeEq; // r15
   Scaleform::HeapPT::Granulator *v30; // rdi
   Scaleform::HeapPT::TreeSeg *v31; // rsi
   Scaleform::HeapPT::Granulator *v32; // rsi
   Scaleform::HeapPT::TreeSeg *v33; // rdi
   Scaleform::HeapPT::Granulator *v34; // rsi
   Scaleform::HeapPT::TreeSeg *v35; // rdi
-  signed __int64 v36; // [rsp+30h] [rbp-A8h]
-  unsigned __int64 v37; // [rsp+38h] [rbp-A0h]
-  signed __int64 v38; // [rsp+40h] [rbp-98h]
+  __int64 v36; // [rsp+30h] [rbp-A8h]
+  char *v37; // [rsp+38h] [rbp-A0h]
+  __int64 v38; // [rsp+40h] [rbp-98h]
   unsigned __int64 v39; // [rsp+48h] [rbp-90h]
-  signed __int64 v40; // [rsp+50h] [rbp-88h]
-  unsigned __int64 *v41; // [rsp+58h] [rbp-80h]
-  signed __int64 v42; // [rsp+60h] [rbp-78h]
+  __int64 v40; // [rsp+50h] [rbp-88h]
+  char *v41; // [rsp+58h] [rbp-80h]
+  __int64 v42; // [rsp+60h] [rbp-78h]
   unsigned __int64 v43; // [rsp+68h] [rbp-70h]
   unsigned __int64 v44; // [rsp+70h] [rbp-68h]
   unsigned __int64 v45; // [rsp+78h] [rbp-60h]
   unsigned __int64 v46; // [rsp+80h] [rbp-58h]
-  Scaleform::HeapPT::PageTable *v47; // [rsp+E0h] [rbp+8h]
-  void *v48; // [rsp+E8h] [rbp+10h]
-  signed __int64 v49; // [rsp+F0h] [rbp+18h]
-  signed __int64 v50; // [rsp+F8h] [rbp+20h]
+  unsigned __int64 v49; // [rsp+F0h] [rbp+18h]
+  __int64 v50; // [rsp+F8h] [rbp+20h]
 
-  v48 = mem;
-  v47 = this;
-  v3 = (unsigned __int64)mem;
+  v3 = mem;
   v4 = this;
   v5 = v3 + size - 1;
   v6 = v3 >> 52;
-  v37 = v3 + size - 1;
+  v37 = (char *)v5;
   v7 = v5 >> 52;
   v46 = v3 >> 52;
   v8 = v3 >> 52;
@@ -286,8 +281,8 @@ void __fastcall Scaleform::HeapPT::PageTable::UnmapRange(Scaleform::HeapPT::Page
   v39 = v3 >> 52;
   if ( v3 >> 52 <= v5 >> 52 )
   {
-    v9 = (unsigned __int64 *)&v4->RootTable[v6];
-    v36 = (signed __int64)&v4->RootTable[v6];
+    v9 = (__int64)&v4->RootTable[v6];
+    v36 = v9;
     do
     {
       v10 = 0i64;
@@ -297,12 +292,12 @@ void __fastcall Scaleform::HeapPT::PageTable::UnmapRange(Scaleform::HeapPT::Page
       if ( v8 == v6 )
       {
         v10 = (v3 >> 40) & 0xFFF;
-        v49 = (v3 >> 40) & 0xFFF;
+        v49 = v10;
       }
       if ( v8 == v7 )
       {
         v11 = (v5 >> 40) & 0xFFF;
-        v38 = (v5 >> 40) & 0xFFF;
+        v38 = v11;
       }
       v12 = v10;
       v45 = v10;
@@ -312,10 +307,10 @@ void __fastcall Scaleform::HeapPT::PageTable::UnmapRange(Scaleform::HeapPT::Page
         v50 = 16 * v10;
         do
         {
-          v14 = *v9;
+          v14 = *(char **)v9;
           v15 = 4095i64;
           v16 = 0i64;
-          v17 = (unsigned __int64 *)(v13 + v14);
+          v17 = &v14[v13];
           v40 = 4095i64;
           v41 = v17;
           if ( v10 == v12 )
@@ -323,7 +318,7 @@ void __fastcall Scaleform::HeapPT::PageTable::UnmapRange(Scaleform::HeapPT::Page
           if ( v10 == v11 )
           {
             v15 = (v5 >> 28) & 0xFFF;
-            v40 = (v5 >> 28) & 0xFFF;
+            v40 = v15;
           }
           v18 = v16;
           v43 = v16;
@@ -333,10 +328,10 @@ void __fastcall Scaleform::HeapPT::PageTable::UnmapRange(Scaleform::HeapPT::Page
             v42 = 16 * v16;
             do
             {
-              v20 = *v17;
+              v20 = *(char **)v17;
               v21 = 0i64;
               v22 = 255i64;
-              v23 = (unsigned __int64 *)(v19 + v20);
+              v23 = &v20[v19];
               if ( v16 == v18 )
                 v21 = (unsigned __int8)(v3 >> 20);
               if ( v16 == v15 )
@@ -347,26 +342,25 @@ void __fastcall Scaleform::HeapPT::PageTable::UnmapRange(Scaleform::HeapPT::Page
                 v25 = v22 - v21 + 1;
                 do
                 {
-                  v26 = *v23;
-                  v27 = &v4->pStarter->Allocator;
-                  v28 = *(_QWORD *)(v24 + *v23 + 8) == 1i64;
-                  --*(_QWORD *)(v24 + v26 + 8);
+                  v26 = *(char **)v23;
+                  p_Allocator = &v4->pStarter->Allocator;
+                  v28 = (*(_QWORD *)(v24 + *(_QWORD *)v23 + 8))-- == 1i64;
                   if ( v28 )
                   {
-                    v29 = Scaleform::RadixTree<Scaleform::HeapPT::TreeSeg,Scaleform::HeapPT::Granulator::SegTreeAccessor>::FindLeEq(
-                            &v27->UsedSeg,
-                            *(_QWORD *)(v24 + v26));
+                    LeEq = Scaleform::RadixTree<Scaleform::HeapPT::TreeSeg,Scaleform::HeapPT::Granulator::SegTreeAccessor>::FindLeEq(
+                             &p_Allocator->UsedSeg,
+                             *(char **)&v26[v24]);
                     Scaleform::HeapPT::AllocLite::Free(
-                      &v27->Allocator,
-                      v29,
-                      *(void **)(v24 + v26),
+                      &p_Allocator->Allocator,
+                      LeEq,
+                      *(Scaleform::HeapPT::DualTNode **)&v26[v24],
                       0x800ui64,
                       0x800ui64);
-                    v28 = v29->UseCount-- == 1;
+                    v28 = LeEq->UseCount-- == 1;
                     if ( v28 )
-                      Scaleform::HeapPT::Granulator::freeSegment(v27, v29);
-                    v4 = v47;
-                    *(_QWORD *)(v24 + v26) = 0i64;
+                      Scaleform::HeapPT::Granulator::freeSegment(p_Allocator, LeEq);
+                    v4 = this;
+                    *(_QWORD *)&v26[v24] = 0i64;
                   }
                   v24 += 16i64;
                   --v25;
@@ -376,23 +370,28 @@ void __fastcall Scaleform::HeapPT::PageTable::UnmapRange(Scaleform::HeapPT::Page
                 v19 = v42;
               }
               v30 = &v4->pStarter->Allocator;
-              v28 = v23[1]-- == 1;
+              v28 = (*((_QWORD *)v23 + 1))-- == 1i64;
               if ( v28 )
               {
                 v31 = Scaleform::RadixTree<Scaleform::HeapPT::TreeSeg,Scaleform::HeapPT::Granulator::SegTreeAccessor>::FindLeEq(
                         &v30->UsedSeg,
-                        *v23);
-                Scaleform::HeapPT::AllocLite::Free(&v30->Allocator, v31, (void *)*v23, 0x1000ui64, 0x800ui64);
+                        *(char **)v23);
+                Scaleform::HeapPT::AllocLite::Free(
+                  &v30->Allocator,
+                  v31,
+                  *(Scaleform::HeapPT::DualTNode **)v23,
+                  0x1000ui64,
+                  0x800ui64);
                 v28 = v31->UseCount-- == 1;
                 if ( v28 )
                   Scaleform::HeapPT::Granulator::freeSegment(v30, v31);
-                v4 = v47;
-                *v23 = 0i64;
+                v4 = this;
+                *(_QWORD *)v23 = 0i64;
               }
               v17 = v41;
               v18 = v43;
-              v3 = (unsigned __int64)v48;
-              v5 = v37;
+              v3 = mem;
+              v5 = (unsigned __int64)v37;
               v19 += 16i64;
               ++v16;
               v42 = v19;
@@ -403,23 +402,28 @@ void __fastcall Scaleform::HeapPT::PageTable::UnmapRange(Scaleform::HeapPT::Page
             v13 = v50;
           }
           v32 = &v4->pStarter->Allocator;
-          v28 = v17[1]-- == 1;
+          v28 = (*((_QWORD *)v17 + 1))-- == 1i64;
           if ( v28 )
           {
             v33 = Scaleform::RadixTree<Scaleform::HeapPT::TreeSeg,Scaleform::HeapPT::Granulator::SegTreeAccessor>::FindLeEq(
                     &v32->UsedSeg,
-                    *v17);
-            Scaleform::HeapPT::AllocLite::Free(&v32->Allocator, v33, (void *)*v17, 0x10000ui64, 0x8000ui64);
+                    *(char **)v17);
+            Scaleform::HeapPT::AllocLite::Free(
+              &v32->Allocator,
+              v33,
+              *(Scaleform::HeapPT::DualTNode **)v17,
+              0x10000ui64,
+              0x8000ui64);
             v28 = v33->UseCount-- == 1;
             if ( v28 )
               Scaleform::HeapPT::Granulator::freeSegment(v32, v33);
-            v4 = v47;
+            v4 = this;
             v13 = v50;
-            *v17 = 0i64;
+            *(_QWORD *)v17 = 0i64;
           }
-          v3 = (unsigned __int64)v48;
-          v5 = v37;
-          v9 = (unsigned __int64 *)v36;
+          v3 = mem;
+          v5 = (unsigned __int64)v37;
+          v9 = v36;
           v12 = v45;
           ++v10;
           v13 += 16i64;
@@ -431,26 +435,31 @@ void __fastcall Scaleform::HeapPT::PageTable::UnmapRange(Scaleform::HeapPT::Page
         v7 = v44;
       }
       v34 = &v4->pStarter->Allocator;
-      v28 = v9[1]-- == 1;
+      v28 = (*(_QWORD *)(v9 + 8))-- == 1i64;
       if ( v28 )
       {
         v35 = Scaleform::RadixTree<Scaleform::HeapPT::TreeSeg,Scaleform::HeapPT::Granulator::SegTreeAccessor>::FindLeEq(
                 &v34->UsedSeg,
-                *v9);
-        Scaleform::HeapPT::AllocLite::Free(&v34->Allocator, v35, (void *)*v9, 0x10000ui64, 0x8000ui64);
+                *(char **)v9);
+        Scaleform::HeapPT::AllocLite::Free(
+          &v34->Allocator,
+          v35,
+          *(Scaleform::HeapPT::DualTNode **)v9,
+          0x10000ui64,
+          0x8000ui64);
         v28 = v35->UseCount-- == 1;
         if ( v28 )
           Scaleform::HeapPT::Granulator::freeSegment(v34, v35);
-        v4 = v47;
-        *v9 = 0i64;
+        v4 = this;
+        *(_QWORD *)v9 = 0i64;
       }
-      v3 = (unsigned __int64)v48;
-      v5 = v37;
+      v3 = mem;
+      v5 = (unsigned __int64)v37;
       v6 = v46;
       ++v8;
-      v9 += 2;
+      v9 += 16i64;
       v39 = v8;
-      v36 = (signed __int64)v9;
+      v36 = v9;
     }
     while ( v8 <= v7 );
   }
@@ -458,43 +467,44 @@ void __fastcall Scaleform::HeapPT::PageTable::UnmapRange(Scaleform::HeapPT::Page
 
 // File Line: 255
 // RVA: 0x9A8480
-char __fastcall Scaleform::HeapPT::PageTable::RemapRange(Scaleform::HeapPT::PageTable *this, void *mem, unsigned __int64 newSize, unsigned __int64 oldSize)
+char __fastcall Scaleform::HeapPT::PageTable::RemapRange(
+        Scaleform::HeapPT::PageTable *this,
+        unsigned __int64 mem,
+        unsigned __int64 newSize,
+        unsigned __int64 oldSize)
 {
   unsigned __int64 v4; // rbx
-  unsigned __int64 v5; // rbp
-  void *v6; // rdi
-  Scaleform::HeapPT::PageTable *v7; // rsi
   char v9; // r14
-  Scaleform::Heap::HeapSegment *v10; // r15
+  Scaleform::Heap::HeapSegment *pSegment; // r15
 
   v4 = oldSize;
-  v5 = newSize;
-  v6 = mem;
-  v7 = this;
   if ( newSize == oldSize )
     return 1;
   v9 = 0;
-  v10 = this->RootTable[(unsigned __int64)mem >> 52].pTable[((unsigned __int64)mem >> 40) & 0xFFF].pTable[((unsigned __int64)mem >> 28) & 0xFFF].pTable[(unsigned __int8)((unsigned __int64)mem >> 20)].pTable[(unsigned __int8)((unsigned __int64)mem >> 12)].pSegment;
-  Scaleform::HeapPT::PageTable::UnmapRange(this, mem, oldSize);
-  if ( Scaleform::HeapPT::PageTable::MapRange(v7, v6, v5) )
+  pSegment = this->RootTable[mem >> 52].pTable[(mem >> 40) & 0xFFF].pTable[(mem >> 28) & 0xFFF].pTable[(unsigned __int8)(mem >> 20)].pTable[(unsigned __int8)(mem >> 12)].pSegment;
+  Scaleform::HeapPT::PageTable::UnmapRange(this, (void *)mem, oldSize);
+  if ( Scaleform::HeapPT::PageTable::MapRange(this, mem, newSize) )
   {
-    v4 = v5;
+    v4 = newSize;
     v9 = 1;
   }
   else
   {
-    Scaleform::HeapPT::PageTable::MapRange(v7, v6, v4);
+    Scaleform::HeapPT::PageTable::MapRange(this, mem, v4);
   }
-  Scaleform::HeapPT::PageTable::SetSegmentInRange(v7, (unsigned __int64)v6, v4, v10);
+  Scaleform::HeapPT::PageTable::SetSegmentInRange(this, mem, v4, pSegment);
   return v9;
 }
 
 // File Line: 321
 // RVA: 0x9B3830
-void __fastcall Scaleform::HeapPT::PageTable::SetSegmentInRange(Scaleform::HeapPT::PageTable *this, unsigned __int64 address, unsigned __int64 size, Scaleform::Heap::HeapSegment *seg)
+void __fastcall Scaleform::HeapPT::PageTable::SetSegmentInRange(
+        Scaleform::HeapPT::PageTable *this,
+        unsigned __int64 address,
+        unsigned __int64 size,
+        Scaleform::Heap::HeapSegment *seg)
 {
   unsigned __int64 v4; // r10
-  Scaleform::Heap::HeapSegment *v5; // rdi
   unsigned __int64 v6; // rdx
   unsigned __int64 v7; // r9
   unsigned __int64 v8; // r8
@@ -503,33 +513,30 @@ void __fastcall Scaleform::HeapPT::PageTable::SetSegmentInRange(Scaleform::HeapP
   unsigned __int64 v11; // rcx
   unsigned __int64 v12; // r13
   unsigned __int64 v13; // rsi
-  signed __int64 v14; // r11
+  __int64 v14; // r11
   unsigned __int64 v15; // r12
   unsigned __int64 v16; // r15
   _QWORD *v17; // rax
   unsigned __int64 v18; // r11
-  signed __int64 v19; // rdx
+  __int64 v19; // rdx
   unsigned __int64 v20; // r14
   unsigned __int64 v21; // rbx
   unsigned __int64 v22; // r8
-  signed __int64 v23; // r10
+  __int64 v23; // r10
   unsigned __int64 v24; // rdx
   __int64 v25; // r9
   unsigned __int64 v26; // rax
   unsigned __int64 v27; // [rsp+0h] [rbp-78h]
   unsigned __int64 v28; // [rsp+8h] [rbp-70h]
   unsigned __int64 v29; // [rsp+10h] [rbp-68h]
-  signed __int64 v30; // [rsp+18h] [rbp-60h]
-  signed __int64 v31; // [rsp+20h] [rbp-58h]
+  __int64 v30; // [rsp+18h] [rbp-60h]
+  __int64 v31; // [rsp+20h] [rbp-58h]
   Scaleform::HeapPT::HeapHeader<Scaleform::HeapPT::HeapHeader<Scaleform::HeapPT::HeapHeader<Scaleform::HeapPT::HeapHeader<Scaleform::HeapPT::HeapHeader1,256>,256>,4096>,4096> *v32; // [rsp+28h] [rbp-50h]
   __int64 *v33; // [rsp+30h] [rbp-48h]
   _QWORD *v34; // [rsp+38h] [rbp-40h]
-  unsigned __int64 v35; // [rsp+88h] [rbp+10h]
-  signed __int64 v36; // [rsp+90h] [rbp+18h]
+  unsigned __int64 v36; // [rsp+90h] [rbp+18h]
 
-  v35 = address;
   v4 = address;
-  v5 = seg;
   v6 = address + size - 1;
   v7 = v4 >> 52;
   v28 = v6;
@@ -540,7 +547,7 @@ void __fastcall Scaleform::HeapPT::PageTable::SetSegmentInRange(Scaleform::HeapP
   if ( v4 >> 52 <= v6 >> 52 )
   {
     v10 = &this->RootTable[v7];
-    v32 = &this->RootTable[v7];
+    v32 = v10;
     do
     {
       v11 = 0i64;
@@ -549,7 +556,7 @@ void __fastcall Scaleform::HeapPT::PageTable::SetSegmentInRange(Scaleform::HeapP
       if ( v9 == v7 )
       {
         v11 = (v4 >> 40) & 0xFFF;
-        v36 = (v4 >> 40) & 0xFFF;
+        v36 = v11;
       }
       if ( v9 == v8 )
         v12 = (v6 >> 40) & 0xFFF;
@@ -563,7 +570,7 @@ void __fastcall Scaleform::HeapPT::PageTable::SetSegmentInRange(Scaleform::HeapP
           v15 = 0i64;
           v16 = 4095i64;
           v17 = (Scaleform::HeapPT::HeapHeader<Scaleform::HeapPT::HeapHeader<Scaleform::HeapPT::HeapHeader1,256>,256> **)((char *)&v10->pTable->pTable + v14);
-          v34 = (Scaleform::HeapPT::HeapHeader<Scaleform::HeapPT::HeapHeader<Scaleform::HeapPT::HeapHeader1,256>,256> **)((char *)&v10->pTable->pTable + v14);
+          v34 = v17;
           if ( v13 == v11 && v9 == v7 )
             v15 = (v4 >> 28) & 0xFFF;
           if ( v13 == v12 && v9 == v8 )
@@ -592,10 +599,10 @@ void __fastcall Scaleform::HeapPT::PageTable::SetSegmentInRange(Scaleform::HeapP
                   v25 = *v33;
                   v26 = 0i64;
                   if ( v22 == v20 && v18 == v15 && v13 == v11 && v9 == v29 )
-                    v26 = (unsigned __int8)(v35 >> 12);
+                    v26 = (unsigned __int8)(address >> 12);
                   if ( v22 == v21 && v18 == v16 && v13 == v12 && v9 == v27 )
                     v24 = (unsigned __int8)(v28 >> 12);
-                  for ( ; v26 <= v24; *(_QWORD *)(*(_QWORD *)(v25 + v23) + 8 * v26 - 8) = v5 )
+                  for ( ; v26 <= v24; *(_QWORD *)(*(_QWORD *)(v25 + v23) + 8 * v26 - 8) = seg )
                     ++v26;
                   v11 = v36;
                   ++v22;
@@ -604,7 +611,7 @@ void __fastcall Scaleform::HeapPT::PageTable::SetSegmentInRange(Scaleform::HeapP
                 while ( v22 <= v21 );
                 v19 = v30;
                 v7 = v29;
-                v4 = v35;
+                v4 = address;
               }
               v8 = v27;
               v17 = v34;

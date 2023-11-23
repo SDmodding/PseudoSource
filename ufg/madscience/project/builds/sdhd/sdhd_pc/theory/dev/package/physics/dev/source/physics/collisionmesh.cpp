@@ -2,73 +2,67 @@
 // RVA: 0x1458480
 __int64 dynamic_initializer_for__UFG::CollisionMeshData::mDeferredBreakableList__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::CollisionMeshData::mDeferredBreakableList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::CollisionMeshData::mDeferredBreakableList__);
 }
 
 // File Line: 70
 // RVA: 0x97710
 void __fastcall UFG::CollisionMeshBundle::CollisionMeshBundle(UFG::CollisionMeshBundle *this)
 {
-  UFG::CollisionMeshBundle *v1; // rsi
-  __int64 v2; // rdx
-  signed __int64 v3; // rax
-  signed __int64 v4; // rdi
-  signed __int64 v5; // rbx
+  __int64 mNumMeshes; // rdx
+  UFG::CollisionMeshData **v3; // rax
+  UFG::CollisionMeshData **v4; // rdi
+  __int64 v5; // rbx
   char v6; // dl
-  __int64 v7; // rax
-  char v8; // cl
-  char *v9; // rdi
-  UFG::NativePackfileUtils::Fixups *v10; // rax
-  char v11; // al
-  char *v12; // rdi
+  char v7; // cl
+  char *v8; // rdi
+  char *v9; // rax
+  char v10; // al
+  char *v11; // rdi
   unsigned int i; // ebx
-  UFG::CollisionMeshData *v14; // rdi
-  UFG::CollisionMeshData *v15; // rax
-  UFG::CollisionMeshData *v16; // rcx
+  UFG::CollisionMeshData *v13; // rdi
+  UFG::CollisionMeshData *v14; // rax
+  UFG::CollisionMeshData *v15; // rcx
 
-  v1 = this;
-  UFG::qResourceData::qResourceData((UFG::qResourceData *)&this->mNode);
-  v1->mMeshIndices = (unsigned __int16 *)&v1[1];
-  v2 = v1->mNumMeshes;
-  v3 = (signed __int64)&v1[1] + 2 * v2;
-  v1->mCollisionMeshData = (UFG::CollisionMeshData **)v3;
-  v4 = v3 + 8 * v2;
+  UFG::qResourceData::qResourceData(this);
+  this->mMeshIndices = (unsigned __int16 *)&this[1];
+  mNumMeshes = this->mNumMeshes;
+  v3 = (UFG::CollisionMeshData **)((char *)&this[1] + 2 * mNumMeshes);
+  this->mCollisionMeshData = v3;
+  v4 = &v3[mNumMeshes];
   v5 = *((_QWORD *)NtCurrentTeb()->Reserved1[11] + tls_index) + 16i64;
   v6 = ++*(_BYTE *)(v5 + 80);
-  v7 = v6;
-  *(_DWORD *)(v5 + 4 * v7) = 3;
-  *(_QWORD *)(v5 + 8 * v7 + 16) = "CollisionPackfile";
-  *(_QWORD *)(v5 + 8 * v7 + 48) = 0i64;
-  v8 = *(_BYTE *)(v5 + 81);
-  if ( v6 > v8 )
-    v8 = v6;
-  *(_BYTE *)(v5 + 81) = v8;
-  v9 = (char *)((v4 + 15) & 0xFFFFFFFFFFFFFFF0ui64);
-  v10 = (UFG::NativePackfileUtils::Fixups *)UFG::qMemoryPool::Allocate(
-                                              &gPhysicsMemoryPool,
-                                              0x20ui64,
-                                              "NativePackfileUtils::Fixups",
-                                              0i64,
-                                              1u);
-  if ( v10 )
+  *(_DWORD *)(v5 + 4i64 * v6) = 3;
+  *(_QWORD *)(v5 + 8i64 * v6 + 16) = "CollisionPackfile";
+  *(_QWORD *)(v5 + 8i64 * v6 + 48) = 0i64;
+  v7 = *(_BYTE *)(v5 + 81);
+  if ( v6 > v7 )
+    v7 = v6;
+  *(_BYTE *)(v5 + 81) = v7;
+  v8 = (char *)(((unsigned __int64)v4 + 15) & 0xFFFFFFFFFFFFFFF0ui64);
+  v9 = UFG::qMemoryPool::Allocate(&gPhysicsMemoryPool, 0x20ui64, "NativePackfileUtils::Fixups", 0i64, 1u);
+  if ( v9 )
   {
-    v10->nonZeroFixups.m_data = 0i64;
-    v10->nonZeroFixups.m_size = 0;
-    v10->nonZeroFixups.m_capacityAndFlags = 2147483648;
-    v10->zeroFixups.m_data = 0i64;
-    v10->zeroFixups.m_size = 0;
-    v10->zeroFixups.m_capacityAndFlags = 2147483648;
+    *(_QWORD *)v9 = 0i64;
+    *((_DWORD *)v9 + 2) = 0;
+    *((_DWORD *)v9 + 3) = 0x80000000;
+    *((_QWORD *)v9 + 2) = 0i64;
+    *((_DWORD *)v9 + 6) = 0;
+    *((_DWORD *)v9 + 7) = 0x80000000;
   }
   else
   {
-    v10 = 0i64;
+    v9 = 0i64;
   }
-  v1->mHavokPackfile = (char *)v10;
-  v1->mListShape = (hkpListShape *)UFG::NativePackfileUtils::loadInPlace(v9, v1->mHavokPackfileSize, v10);
-  v11 = *(_BYTE *)(v5 + 80);
-  if ( v11 > 0 )
+  this->mHavokPackfile = v9;
+  this->mListShape = (hkpListShape *)UFG::NativePackfileUtils::loadInPlace(
+                                       v8,
+                                       this->mHavokPackfileSize,
+                                       (UFG::NativePackfileUtils::Fixups *)v9);
+  v10 = *(_BYTE *)(v5 + 80);
+  if ( v10 > 0 )
   {
-    *(_BYTE *)(v5 + 80) = v11 - 1;
+    *(_BYTE *)(v5 + 80) = v10 - 1;
   }
   else
   {
@@ -77,21 +71,24 @@ void __fastcall UFG::CollisionMeshBundle::CollisionMeshBundle(UFG::CollisionMesh
     *(_QWORD *)(v5 + 16) = 0i64;
     *(_QWORD *)(v5 + 48) = 0i64;
   }
-  v12 = &v9[v1->mHavokPackfileSize];
-  for ( i = 0; i < v1->mNumMeshes; ++i )
+  v11 = &v8[this->mHavokPackfileSize];
+  for ( i = 0; i < this->mNumMeshes; ++i )
   {
-    v14 = (UFG::CollisionMeshData *)((unsigned __int64)(v12 + 15) & 0xFFFFFFFFFFFFFFF0ui64);
-    if ( v14 )
+    v13 = (UFG::CollisionMeshData *)((unsigned __int64)(v11 + 15) & 0xFFFFFFFFFFFFFFF0ui64);
+    if ( v13 )
     {
-      UFG::CollisionMeshData::CollisionMeshData(v14, 0, v1->mListShape->m_childInfo.m_data[v1->mMeshIndices[i]].m_shape);
-      v16 = v15;
+      UFG::CollisionMeshData::CollisionMeshData(
+        v13,
+        0,
+        this->mListShape->m_childInfo.m_data[this->mMeshIndices[i]].m_shape);
+      v15 = v14;
     }
     else
     {
-      v16 = 0i64;
+      v15 = 0i64;
     }
-    v1->mCollisionMeshData[i] = v16;
-    v12 = (char *)v14 + v1->mCollisionMeshData[i]->mSize;
+    this->mCollisionMeshData[i] = v15;
+    v11 = (char *)v13 + this->mCollisionMeshData[i]->mSize;
   }
 }
 
@@ -99,101 +96,93 @@ void __fastcall UFG::CollisionMeshBundle::CollisionMeshBundle(UFG::CollisionMesh
 // RVA: 0x9BC90
 void __fastcall UFG::CollisionMeshBundle::~CollisionMeshBundle(UFG::CollisionMeshBundle *this)
 {
-  UFG::CollisionMeshBundle *v1; // rbp
   int v2; // edi
-  unsigned int v3; // ebx
+  unsigned int i; // ebx
   UFG::CollisionMeshData *v4; // rsi
-  hkReferencedObject *v5; // rcx
+  hkReferencedObject *mShape; // rcx
   unsigned __int64 v6; // rdx
-  UFG::NativePackfileUtils::Fixups *v7; // rbx
-  int v8; // er8
+  UFG::NativePackfileUtils::Fixups *mHavokPackfile; // rbx
+  int v8; // r8d
   __int64 v9; // rdx
   __int64 v10; // rdx
-  UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0> *v11; // rdi
-  UFG::qResourceHandle *v12; // rbx
-  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v13; // rdx
+  UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0> *p_mResourceHandles; // rdi
+  UFG::qResourceHandle *mNext; // rbx
+  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *mPrev; // rdx
   UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v14; // rax
   UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v15; // rcx
   UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v16; // rax
 
-  v1 = this;
   v2 = 0;
-  v3 = 0;
-  if ( this->mNumMeshes )
+  for ( i = 0; i < this->mNumMeshes; ++i )
   {
-    do
-    {
-      v4 = v1->mCollisionMeshData[v3];
-      UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
-        (UFG::qBaseTreeVariableRB<unsigned __int64> *)&UFG::BasePhysicsSystem::mInstance->mCollisionModels,
-        (UFG::qBaseNodeVariableRB<unsigned __int64> *)v4);
-      v5 = (hkReferencedObject *)&v4->mShape->vfptr;
-      if ( v5 )
-        hkReferencedObject::removeReference(v5);
-      UFG::qReflectHandleBase::~qReflectHandleBase((UFG::qReflectHandleBase *)&v4->mObjectProperties.mPrev);
-      ++v3;
-    }
-    while ( v3 < v1->mNumMeshes );
+    v4 = this->mCollisionMeshData[i];
+    UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
+      (UFG::qBaseTreeVariableRB<unsigned __int64> *)&UFG::BasePhysicsSystem::mInstance->mCollisionModels,
+      (UFG::qBaseNodeVariableRB<unsigned __int64> *)v4);
+    mShape = v4->mShape;
+    if ( mShape )
+      hkReferencedObject::removeReference(mShape);
+    UFG::qReflectHandleBase::~qReflectHandleBase(&v4->mObjectProperties);
   }
-  v6 = ((unsigned __int64)&v1[1].mNode.mChild[v1->mNumMeshes] + 2 * v1->mNumMeshes + 7) & 0xFFFFFFFFFFFFFFF0ui64;
-  v7 = (UFG::NativePackfileUtils::Fixups *)v1->mHavokPackfile;
-  *(_DWORD *)(v6 + 0x38) &= 0xFFFFFFFE;
+  v6 = ((unsigned __int64)&this[1].mNode.mChild[this->mNumMeshes] + 2 * this->mNumMeshes + 7) & 0xFFFFFFFFFFFFFFF0ui64;
+  mHavokPackfile = (UFG::NativePackfileUtils::Fixups *)this->mHavokPackfile;
+  *(_DWORD *)(v6 + 0x38) &= ~1u;
   v8 = 0;
-  if ( v7->zeroFixups.m_size > 0 )
+  if ( mHavokPackfile->zeroFixups.m_size > 0 )
   {
     v9 = 0i64;
     do
     {
-      *(_DWORD *)v7->zeroFixups.m_data[v9] = 0;
+      *(_DWORD *)mHavokPackfile->zeroFixups.m_data[v9] = 0;
       ++v8;
       ++v9;
     }
-    while ( v8 < v7->zeroFixups.m_size );
+    while ( v8 < mHavokPackfile->zeroFixups.m_size );
   }
-  if ( v7->nonZeroFixups.m_size > 0 )
+  if ( mHavokPackfile->nonZeroFixups.m_size > 0 )
   {
     v10 = 0i64;
     do
     {
-      *(_DWORD *)v7->nonZeroFixups.m_data[v10].addr = v7->nonZeroFixups.m_data[v10].val;
+      *(_DWORD *)mHavokPackfile->nonZeroFixups.m_data[v10].addr = mHavokPackfile->nonZeroFixups.m_data[v10].val;
       ++v2;
       ++v10;
     }
-    while ( v2 < v7->nonZeroFixups.m_size );
+    while ( v2 < mHavokPackfile->nonZeroFixups.m_size );
   }
-  UFG::NativePackfileUtils::Fixups::~Fixups(v7);
-  UFG::qMemoryPool::Free(&gPhysicsMemoryPool, v7);
-  v11 = &v1->mResourceHandles;
-  v12 = (UFG::qResourceHandle *)v1->mResourceHandles.mNode.mNext;
-  if ( v12 != (UFG::qResourceHandle *)&v1->mResourceHandles )
+  UFG::NativePackfileUtils::Fixups::~Fixups(mHavokPackfile);
+  UFG::qMemoryPool::Free(&gPhysicsMemoryPool, mHavokPackfile);
+  p_mResourceHandles = &this->mResourceHandles;
+  mNext = (UFG::qResourceHandle *)this->mResourceHandles.UFG::qResourceData::mNode.mNext;
+  if ( mNext != (UFG::qResourceHandle *)&this->mResourceHandles )
   {
     do
     {
-      v13 = v12->mPrev;
-      v14 = v12->mNext;
-      v13->mNext = v14;
-      v14->mPrev = v13;
-      v12->mPrev = (UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *)&v12->mPrev;
-      v12->mNext = (UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *)&v12->mPrev;
-      UFG::qResourceHandle::~qResourceHandle(v12);
-      operator delete[](v12);
-      v12 = (UFG::qResourceHandle *)v1->mResourceHandles.mNode.mNext;
+      mPrev = mNext->mPrev;
+      v14 = mNext->mNext;
+      mPrev->mNext = v14;
+      v14->mPrev = mPrev;
+      mNext->mPrev = mNext;
+      mNext->mNext = mNext;
+      UFG::qResourceHandle::~qResourceHandle(mNext);
+      operator delete[](mNext);
+      mNext = (UFG::qResourceHandle *)this->mResourceHandles.UFG::qResourceData::mNode.mNext;
     }
-    while ( v12 != (UFG::qResourceHandle *)v11 );
+    while ( mNext != (UFG::qResourceHandle *)p_mResourceHandles );
   }
-  v15 = v11->mNode.mPrev;
-  v16 = v1->mResourceHandles.mNode.mNext;
+  v15 = p_mResourceHandles->mNode.mPrev;
+  v16 = this->mResourceHandles.UFG::qResourceData::mNode.mNext;
   v15->mNext = v16;
   v16->mPrev = v15;
-  v11->mNode.mPrev = &v11->mNode;
-  v1->mResourceHandles.mNode.mNext = &v1->mResourceHandles.mNode;
+  p_mResourceHandles->mNode.mPrev = &p_mResourceHandles->mNode;
+  this->mResourceHandles.UFG::qResourceData::mNode.mNext = &this->mResourceHandles.UFG::qResourceData::mNode;
 }
 
 // File Line: 139
 // RVA: 0x97AD0
 void __fastcall UFG::CollisionMeshData::CollisionMeshData(UFG::CollisionMeshData *this)
 {
-  UFG::qReflectHandle<UFG::PhysicsObjectProperties> *v1; // rbx
+  UFG::qReflectHandle<UFG::PhysicsObjectProperties> *p_mObjectProperties; // rbx
 
   this->mNode.mParent = 0i64;
   this->mNode.mChild[0] = 0i64;
@@ -201,95 +190,96 @@ void __fastcall UFG::CollisionMeshData::CollisionMeshData(UFG::CollisionMeshData
   *(_QWORD *)&this->mSceneNodeName.mUID = -1i64;
   this->mFlags = 0;
   this->mName.mUID = -1;
-  v1 = &this->mObjectProperties;
-  UFG::qReflectHandleBase::qReflectHandleBase((UFG::qReflectHandleBase *)&this->mObjectProperties.mPrev);
-  v1->mTypeUID = UFG::qStringHash64("UFG::PhysicsObjectProperties", 0xFFFFFFFFFFFFFFFFui64);
+  p_mObjectProperties = &this->mObjectProperties;
+  UFG::qReflectHandleBase::qReflectHandleBase(&this->mObjectProperties);
+  p_mObjectProperties->mTypeUID = UFG::qStringHash64("UFG::PhysicsObjectProperties", 0xFFFFFFFFFFFFFFFFui64);
 }
 
 // File Line: 150
 // RVA: 0x978C0
-void __fastcall UFG::CollisionMeshData::CollisionMeshData(UFG::CollisionMeshData *this, MemImageLoadFlag f, hkpShape *shape)
+void __fastcall UFG::CollisionMeshData::CollisionMeshData(
+        UFG::CollisionMeshData *this,
+        MemImageLoadFlag f,
+        hkpShape *shape)
 {
-  UFG::CollisionMeshData *v3; // rbx
-  UFG::qReflectHandle<UFG::PhysicsObjectProperties> *v4; // rdi
-  unsigned __int64 v5; // rdi
-  unsigned int v6; // er11
+  UFG::qReflectHandle<UFG::PhysicsObjectProperties> *p_mObjectProperties; // rdi
+  unsigned __int64 m_userData; // rdi
+  unsigned int v6; // r11d
   __int64 v7; // rdx
   __int64 v8; // r8
-  __int64 v9; // rax
-  signed __int64 v10; // r9
+  __int64 mOffset; // rax
+  char *v10; // r9
   __int64 v11; // rax
-  signed __int64 v12; // rcx
-  signed __int64 v13; // r10
+  char *v12; // rcx
+  __int64 v13; // r10
   __int64 v14; // rax
-  signed __int64 v15; // r9
+  char *v15; // r9
   __int64 v16; // rax
-  signed __int64 v17; // rcx
+  char *v17; // rcx
   __int64 v18; // rax
-  signed __int64 v19; // rax
+  char *v19; // rax
   char *v20; // rax
   UFG::FractureConnectivity *v21; // rdi
 
-  v3 = this;
   this->mNode.mParent = 0i64;
   this->mNode.mChild[0] = 0i64;
   this->mNode.mChild[1] = 0i64;
   this->mShape = shape;
   this->mRemoveTerminalsMoppModifierList = 0i64;
-  v4 = &this->mObjectProperties;
-  UFG::qReflectHandleBase::qReflectHandleBase((UFG::qReflectHandleBase *)&this->mObjectProperties.mPrev);
-  v4->mTypeUID = UFG::qStringHash64("UFG::PhysicsObjectProperties", 0xFFFFFFFFFFFFFFFFui64);
-  UFG::qReflectHandleBase::Init((UFG::qReflectHandleBase *)&v4->mPrev, v4->mTypeUID, v3->mPropertiesHandleGuid);
-  if ( !v3->mObjectProperties.mData )
-    UFG::PhysicsPropertyManager::GetDefaultObjectProperties(v4);
-  if ( !v3->mGeometryType )
+  p_mObjectProperties = &this->mObjectProperties;
+  UFG::qReflectHandleBase::qReflectHandleBase(&this->mObjectProperties);
+  p_mObjectProperties->mTypeUID = UFG::qStringHash64("UFG::PhysicsObjectProperties", 0xFFFFFFFFFFFFFFFFui64);
+  UFG::qReflectHandleBase::Init(p_mObjectProperties, p_mObjectProperties->mTypeUID, this->mPropertiesHandleGuid);
+  if ( !this->mObjectProperties.mData )
+    UFG::PhysicsPropertyManager::GetDefaultObjectProperties(p_mObjectProperties);
+  if ( !this->mGeometryType )
   {
-    v5 = v3->mShape[2].m_userData;
+    m_userData = this->mShape[2].m_userData;
     v6 = 0;
-    if ( v3->mNumParts > 0 )
+    if ( this->mNumParts )
     {
       v7 = 0i64;
       do
       {
-        v8 = *(_QWORD *)(v5 + 240);
-        v9 = v3->mVertexBuffer.mOffset;
-        if ( v9 )
-          v10 = (signed __int64)&v3->mVertexBuffer + v9;
+        v8 = *(_QWORD *)(m_userData + 240);
+        mOffset = this->mVertexBuffer.mOffset;
+        if ( mOffset )
+          v10 = (char *)&this->mVertexBuffer + mOffset;
         else
           v10 = 0i64;
-        v11 = v3->mParts.mOffset;
+        v11 = this->mParts.mOffset;
         if ( v11 )
-          v12 = (signed __int64)&v3->mParts + v11;
+          v12 = (char *)&this->mParts + v11;
         else
           v12 = 0i64;
         v13 = 48i64 * v6;
-        *(_QWORD *)(v7 + v8 + 40) = v10 + 12i64 * *(unsigned int *)(v13 + v12 + 32);
-        v14 = v3->mIndexBuffer.mOffset;
+        *(_QWORD *)(v7 + v8 + 40) = &v10[12 * *(unsigned int *)&v12[v13 + 32]];
+        v14 = this->mIndexBuffer.mOffset;
         if ( v14 )
-          v15 = (signed __int64)&v3->mIndexBuffer + v14;
+          v15 = (char *)&this->mIndexBuffer + v14;
         else
           v15 = 0i64;
-        v16 = v3->mParts.mOffset;
+        v16 = this->mParts.mOffset;
         if ( v16 )
-          v17 = (signed __int64)&v3->mParts + v16;
+          v17 = (char *)&this->mParts + v16;
         else
           v17 = 0i64;
-        *(_QWORD *)(v7 + v8 + 56) = v15 + 2i64 * *(unsigned int *)(v13 + v17 + 36);
+        *(_QWORD *)(v7 + v8 + 56) = &v15[2 * *(unsigned int *)&v17[v13 + 36]];
         *(_WORD *)(v7 + v8) &= 7u;
         *(_WORD *)(v7 + v8) |= 8u;
-        v18 = v3->mParts.mOffset;
+        v18 = this->mParts.mOffset;
         if ( v18 )
-          v19 = (signed __int64)&v3->mParts + v18;
+          v19 = (char *)&this->mParts + v18;
         else
           v19 = 0i64;
-        *(_QWORD *)(v7 + v8 + 16) = v13 + v19;
+        *(_QWORD *)(v7 + v8 + 16) = &v19[v13];
         ++v6;
         v7 += 144i64;
       }
-      while ( v6 < v3->mNumParts );
+      while ( v6 < this->mNumParts );
     }
   }
-  if ( HIDWORD(v3->mObjectProperties.mData[2].mBaseNode.mNeighbours[1]) == 1 )
+  if ( HIDWORD(this->mObjectProperties.mData[2].mBaseNode.mNeighbours[1]) == 1 )
   {
     v20 = UFG::qMalloc(0x18ui64, UFG::gGlobalNewName, 0i64);
     v21 = (UFG::FractureConnectivity *)v20;
@@ -304,20 +294,24 @@ void __fastcall UFG::CollisionMeshData::CollisionMeshData(UFG::CollisionMeshData
     {
       v21 = 0i64;
     }
-    UFG::FractureConnectivity::Build(v21, v3);
-    v3->mFractureConnectivity = v21;
+    UFG::FractureConnectivity::Build(v21, this);
+    this->mFractureConnectivity = v21;
   }
-  UFG::qBaseTreeRB::Add(&UFG::BasePhysicsSystem::mInstance->mCollisionModels.mTree, &v3->mNode);
+  UFG::qBaseTreeRB::Add(&UFG::BasePhysicsSystem::mInstance->mCollisionModels.mTree, &this->mNode);
 }
 
 // File Line: 242
 // RVA: 0xAA240
-void __usercall UFG::CollisionMeshData::GetInertiaTensor(UFG::CollisionMeshData *this@<rcx>, hkMatrix3f *I@<rdx>, const float massFudgeFactor@<xmm2>, __m128 a4@<xmm10>)
+void __fastcall UFG::CollisionMeshData::GetInertiaTensor(
+        UFG::CollisionMeshData *this,
+        hkMatrix3f *I,
+        float massFudgeFactor)
 {
-  __m128 v4; // xmm4
+  __m128 v3; // xmm10
+  __m128 z_low; // xmm4
   __m128 v5; // xmm7
-  __m128 v6; // xmm6
-  __m128 v7; // xmm8
+  __m128 x_low; // xmm6
+  __m128 y_low; // xmm8
   __m128 v8; // xmm9
   __m128 v9; // xmm10
   __m128 v10; // xmm2
@@ -327,13 +321,13 @@ void __usercall UFG::CollisionMeshData::GetInertiaTensor(UFG::CollisionMeshData 
   hkVector4f v14; // xmm2
   hkVector4f v15; // xmm0
 
-  v4 = (__m128)LODWORD(this->mInertiaTensorRow1.z);
+  z_low = (__m128)LODWORD(this->mInertiaTensorRow1.z);
   v5 = (__m128)LODWORD(this->mInertiaTensorRow2.z);
-  v6 = (__m128)LODWORD(this->mInertiaTensorRow1.x);
-  v7 = (__m128)LODWORD(this->mInertiaTensorRow2.y);
+  x_low = (__m128)LODWORD(this->mInertiaTensorRow1.x);
+  y_low = (__m128)LODWORD(this->mInertiaTensorRow2.y);
   v8 = (__m128)LODWORD(this->mInertiaTensorRow2.x);
-  a4.m128_f32[0] = massFudgeFactor;
-  v9 = _mm_shuffle_ps(a4, a4, 0);
+  v3.m128_f32[0] = massFudgeFactor;
+  v9 = _mm_shuffle_ps(v3, v3, 0);
   v10 = _mm_unpacklo_ps((__m128)LODWORD(this->mInertiaTensorRow1.y), (__m128)0i64);
   I->m_col0.m_quad = _mm_mul_ps(
                        _mm_unpacklo_ps(
@@ -342,9 +336,9 @@ void __usercall UFG::CollisionMeshData::GetInertiaTensor(UFG::CollisionMeshData 
                            (__m128)LODWORD(this->mInertiaTensorRow0.z)),
                          _mm_unpacklo_ps((__m128)LODWORD(this->mInertiaTensorRow0.y), (__m128)0i64)),
                        v9);
-  v11 = _mm_mul_ps(_mm_unpacklo_ps(_mm_unpacklo_ps(v6, v4), v10), v9);
+  v11 = _mm_mul_ps(_mm_unpacklo_ps(_mm_unpacklo_ps(x_low, z_low), v10), v9);
   v12 = _mm_unpacklo_ps(I->m_col0.m_quad, v11);
-  v13 = _mm_mul_ps(_mm_unpacklo_ps(_mm_unpacklo_ps(v8, v5), _mm_unpacklo_ps(v7, (__m128)0i64)), v9);
+  v13 = _mm_mul_ps(_mm_unpacklo_ps(_mm_unpacklo_ps(v8, v5), _mm_unpacklo_ps(y_low, (__m128)0i64)), v9);
   v14.m_quad = _mm_shuffle_ps(_mm_unpackhi_ps(I->m_col0.m_quad, v11), v13, 228);
   v15.m_quad = _mm_movelh_ps(v12, v13);
   I->m_col0 = (hkVector4f)v15.m_quad;
@@ -363,29 +357,27 @@ void __fastcall UFG::CollisionMeshData::GetCentreOfMass(UFG::CollisionMeshData *
 
 // File Line: 264
 // RVA: 0xAD170
-void __fastcall UFG::CollisionMeshData::MarkBreakableParts(UFG::CollisionMeshData *this, UFG::RigidBody *body, float timeDelay)
+void __fastcall UFG::CollisionMeshData::MarkBreakableParts(
+        UFG::CollisionMeshData *this,
+        UFG::RigidBody *body,
+        float timeDelay)
 {
-  UFG::RigidBody *v3; // rsi
-  UFG::CollisionMeshData *v4; // rdi
-  __int64 v5; // rax
+  __int64 mOffset; // rax
   UFG::Destruction *v6; // rbp
-  unsigned int v7; // ebx
+  unsigned int i; // ebx
   __int64 v8; // rax
-  signed __int64 v9; // rcx
-  signed __int64 v10; // rdx
+  char *v9; // rcx
+  __int64 v10; // rdx
   char *v11; // rax
   char *v12; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v13; // r8
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v14; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v15; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v16; // rax
   UFG::qNode<UFG::CollisionMeshData::DeferredBreakablePartsMark,UFG::CollisionMeshData::DeferredBreakablePartsMark> *v17; // rax
-  _QWORD *v18; // [rsp+88h] [rbp+20h]
 
-  v3 = body;
-  v4 = this;
-  v5 = this->mPartDetails.mOffset;
-  if ( v5 && (UFG::qOffset64<UFG::CollisionMeshData::PartDetails *> *)((char *)&this->mPartDetails + v5) )
+  mOffset = this->mPartDetails.mOffset;
+  if ( mOffset && (UFG::qOffset64<UFG::CollisionMeshData::PartDetails *> *)((char *)&this->mPartDetails + mOffset) )
   {
     if ( timeDelay > 0.0 )
     {
@@ -395,9 +387,8 @@ void __fastcall UFG::CollisionMeshData::MarkBreakableParts(UFG::CollisionMeshDat
       {
         *(_QWORD *)v11 = v11;
         *((_QWORD *)v11 + 1) = v11;
-        v18 = v11 + 16;
-        *v18 = v18;
-        v18[1] = v18;
+        *((_QWORD *)v11 + 2) = v11 + 16;
+        *((_QWORD *)v11 + 3) = v11 + 16;
         *((_QWORD *)v11 + 4) = 0i64;
       }
       else
@@ -407,21 +398,21 @@ void __fastcall UFG::CollisionMeshData::MarkBreakableParts(UFG::CollisionMeshDat
       v13 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)(v12 + 16);
       if ( *((_QWORD *)v12 + 4) )
       {
-        v14 = v13->mPrev;
+        mPrev = v13->mPrev;
         v15 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)*((_QWORD *)v12 + 3);
-        v14->mNext = v15;
-        v15->mPrev = v14;
+        mPrev->mNext = v15;
+        v15->mPrev = mPrev;
         v13->mPrev = v13;
         *((_QWORD *)v12 + 3) = v12 + 16;
       }
-      *((_QWORD *)v12 + 4) = v3;
-      if ( v3 )
+      *((_QWORD *)v12 + 4) = body;
+      if ( body )
       {
-        v16 = v3->m_SafePointerList.mNode.mPrev;
+        v16 = body->m_SafePointerList.mNode.mPrev;
         v16->mNext = v13;
         v13->mPrev = v16;
-        *((_QWORD *)v12 + 3) = (char *)v3 + 8;
-        v3->m_SafePointerList.mNode.mPrev = v13;
+        *((_QWORD *)v12 + 3) = &body->m_SafePointerList;
+        body->m_SafePointerList.mNode.mPrev = v13;
       }
       *((float *)v12 + 10) = timeDelay;
       v17 = UFG::CollisionMeshData::mDeferredBreakableList.mNode.mPrev;
@@ -433,29 +424,19 @@ void __fastcall UFG::CollisionMeshData::MarkBreakableParts(UFG::CollisionMeshDat
     else
     {
       v6 = UFG::Destruction::mInstance;
-      v7 = 0;
-      if ( this->mNumParts )
+      for ( i = 0; i < this->mNumParts; ++i )
       {
-        do
+        v8 = this->mPartDetails.mOffset;
+        if ( v8 )
         {
-          v8 = v4->mPartDetails.mOffset;
-          if ( v8 )
+          v9 = (char *)&this->mPartDetails + v8;
+          if ( v9 )
           {
-            v9 = (signed __int64)&v4->mPartDetails + v8;
-            if ( v9 )
-            {
-              v10 = 96i64 * v7;
-              if ( *(float *)(v10 + v9 + 68) > 0.0 && *(_DWORD *)(v10 + v9 + 76) != -1 )
-                hkpBreakOffPartsUtil::markPieceBreakable(
-                  v6->mBreakOffPartsUtil,
-                  (hkpEntity *)&v3->mBody->vfptr,
-                  v7,
-                  *(float *)(v10 + v9 + 68));
-            }
+            v10 = 96i64 * i;
+            if ( *(float *)&v9[v10 + 68] > 0.0 && *(_DWORD *)&v9[v10 + 76] != -1 )
+              hkpBreakOffPartsUtil::markPieceBreakable(v6->mBreakOffPartsUtil, body->mBody, i, *(float *)&v9[v10 + 68]);
           }
-          ++v7;
         }
-        while ( v7 < v4->mNumParts );
       }
     }
   }
@@ -465,40 +446,30 @@ void __fastcall UFG::CollisionMeshData::MarkBreakableParts(UFG::CollisionMeshDat
 // RVA: 0xB4400
 void __fastcall UFG::CollisionMeshData::UnmarkBreakableParts(UFG::CollisionMeshData *this, hkpEntity *entity)
 {
-  __int64 v2; // rax
-  hkpEntity *v3; // rbp
-  UFG::CollisionMeshData *v4; // rdi
+  __int64 mOffset; // rax
   __int64 v5; // rbx
-  UFG::Destruction *v6; // rsi
+  UFG::Destruction *i; // rsi
   __int64 v7; // rax
-  signed __int64 v8; // rdx
+  char *v8; // rdx
 
-  v2 = this->mPartDetails.mOffset;
-  v3 = entity;
-  v4 = this;
-  if ( v2 )
+  mOffset = this->mPartDetails.mOffset;
+  if ( mOffset )
   {
-    if ( (UFG::qOffset64<UFG::CollisionMeshData::PartDetails *> *)((char *)&this->mPartDetails + v2) )
+    if ( (UFG::qOffset64<UFG::CollisionMeshData::PartDetails *> *)((char *)&this->mPartDetails + mOffset) )
     {
       v5 = 0i64;
-      v6 = UFG::Destruction::mInstance;
-      if ( this->mNumParts )
+      for ( i = UFG::Destruction::mInstance; (unsigned int)v5 < this->mNumParts; v5 = (unsigned int)(v5 + 1) )
       {
-        do
+        v7 = this->mPartDetails.mOffset;
+        if ( v7 )
         {
-          v7 = v4->mPartDetails.mOffset;
-          if ( v7 )
+          v8 = (char *)&this->mPartDetails + v7;
+          if ( v8 )
           {
-            v8 = (signed __int64)&v4->mPartDetails + v7;
-            if ( v8 )
-            {
-              if ( *(float *)(96 * v5 + v8 + 68) > 0.0 )
-                hkpBreakOffPartsUtil::unmarkPieceBreakable(v6->mBreakOffPartsUtil, v3, v5);
-            }
+            if ( *(float *)&v8[96 * v5 + 68] > 0.0 )
+              hkpBreakOffPartsUtil::unmarkPieceBreakable(i->mBreakOffPartsUtil, entity, v5);
           }
-          v5 = (unsigned int)(v5 + 1);
         }
-        while ( (unsigned int)v5 < v4->mNumParts );
       }
     }
   }
@@ -508,46 +479,38 @@ void __fastcall UFG::CollisionMeshData::UnmarkBreakableParts(UFG::CollisionMeshD
 // RVA: 0xAFE30
 void __fastcall UFG::CollisionMeshData::ResetFracture(UFG::CollisionMeshData *this)
 {
-  UFG::CollisionMeshData *v1; // rsi
-  __int64 v2; // rax
-  hkpListShape *v3; // rdi
+  __int64 mOffset; // rax
+  hkpListShape *mShape; // rdi
   unsigned int v4; // ecx
-  unsigned int v5; // ebx
-  UFG::qList<UFG::qReflectField,UFG::qReflectField,1,0> *v6; // rdi
+  unsigned int i; // ebx
+  UFG::qList<UFG::qReflectField,UFG::qReflectField,1,0> *mRemoveTerminalsMoppModifierList; // rdi
   hkpShape *v7; // rbp
-  UFG::qNode<UFG::qReflectField,UFG::qReflectField> *v8; // rbx
+  UFG::qNode<UFG::qReflectField,UFG::qReflectField> *mPrev; // rbx
   UFG::qNode<UFG::qReflectField,UFG::qReflectField> *v9; // rcx
-  UFG::qNode<UFG::qReflectField,UFG::qReflectField> *v10; // rax
+  UFG::qNode<UFG::qReflectField,UFG::qReflectField> *mNext; // rax
   UFG::qNode<UFG::qReflectField,UFG::qReflectField> *v11; // rdx
   UFG::qNode<UFG::qReflectField,UFG::qReflectField> *v12; // rax
   UFG::qNode<UFG::qReflectField,UFG::qReflectField> *v13; // rdx
   UFG::qNode<UFG::qReflectField,UFG::qReflectField> *v14; // rax
-  UFG::FractureConnectivity *v15; // rbx
-  UFG::FractureConnectivity::Node **v16; // rcx
+  UFG::FractureConnectivity *mFractureConnectivity; // rbx
+  UFG::FractureConnectivity::Node **p; // rcx
   UFG::FractureConnectivity *v17; // rax
 
-  v1 = this;
-  v2 = this->mPartDetails.mOffset;
-  if ( !v2 || !(UFG::qOffset64<UFG::CollisionMeshData::PartDetails *> *)((char *)&this->mPartDetails + v2) )
+  mOffset = this->mPartDetails.mOffset;
+  if ( !mOffset || !(UFG::qOffset64<UFG::CollisionMeshData::PartDetails *> *)((char *)&this->mPartDetails + mOffset) )
     goto LABEL_17;
-  v3 = (hkpListShape *)this->mShape;
+  mShape = (hkpListShape *)this->mShape;
   v4 = this->mGeometryType - 3;
   if ( !v4 )
   {
-    v3 = (hkpListShape *)v3->m_aabbHalfExtents.m_quad.m128_u64[1];
+    mShape = (hkpListShape *)mShape->m_aabbHalfExtents.m_quad.m128_u64[1];
 LABEL_7:
-    if ( v3 )
+    if ( mShape )
     {
-      v5 = 0;
-      if ( v3->m_childInfo.m_size > 0 )
+      for ( i = 0; (signed int)i < mShape->m_childInfo.m_size; ++i )
       {
-        do
-        {
-          if ( v5 < 0x100 && !(v3->m_enabledChildren[(unsigned __int64)v5 >> 5] & (1 << (v5 & 0x1F))) )
-            hkpListShape::enableChild(v3, v5);
-          ++v5;
-        }
-        while ( (signed int)v5 < v3->m_childInfo.m_size );
+        if ( i < 0x100 && (mShape->m_enabledChildren[(unsigned __int64)i >> 5] & (1 << (i & 0x1F))) == 0 )
+          hkpListShape::enableChild(mShape, i);
       }
     }
     goto LABEL_13;
@@ -555,53 +518,53 @@ LABEL_7:
   if ( v4 == 1 )
     goto LABEL_7;
 LABEL_13:
-  v6 = (UFG::qList<UFG::qReflectField,UFG::qReflectField,1,0> *)v1->mRemoveTerminalsMoppModifierList;
-  if ( v6 )
+  mRemoveTerminalsMoppModifierList = (UFG::qList<UFG::qReflectField,UFG::qReflectField,1,0> *)this->mRemoveTerminalsMoppModifierList;
+  if ( mRemoveTerminalsMoppModifierList )
   {
-    v7 = v1->mShape;
-    while ( (UFG::qList<UFG::qReflectField,UFG::qReflectField,1,0> *)v6->mNode.mNext != v6 )
+    v7 = this->mShape;
+    while ( (UFG::qList<UFG::qReflectField,UFG::qReflectField,1,0> *)mRemoveTerminalsMoppModifierList->mNode.mNext != mRemoveTerminalsMoppModifierList )
     {
-      v8 = v6->mNode.mPrev;
-      v9 = v6->mNode.mPrev->mPrev;
-      v10 = v6->mNode.mPrev->mNext;
-      v9->mNext = v10;
-      v10->mPrev = v9;
-      v8->mPrev = v8;
-      v8->mNext = v8;
+      mPrev = mRemoveTerminalsMoppModifierList->mNode.mPrev;
+      v9 = mRemoveTerminalsMoppModifierList->mNode.mPrev->mPrev;
+      mNext = mRemoveTerminalsMoppModifierList->mNode.mPrev->mNext;
+      v9->mNext = mNext;
+      mNext->mPrev = v9;
+      mPrev->mPrev = mPrev;
+      mPrev->mNext = mPrev;
       hkpRemoveTerminalsMoppModifier::undoRemoveTerminals(
-        (hkpRemoveTerminalsMoppModifier *)v8[1].mPrev,
+        (hkpRemoveTerminalsMoppModifier *)mPrev[1].mPrev,
         *(hkpMoppCode **)&v7[1].m_memSizeAndFlags);
-      hkReferencedObject::removeReference((hkReferencedObject *)v8[1].mPrev);
-      v11 = v8->mPrev;
-      v12 = v8->mNext;
+      hkReferencedObject::removeReference((hkReferencedObject *)mPrev[1].mPrev);
+      v11 = mPrev->mPrev;
+      v12 = mPrev->mNext;
       v11->mNext = v12;
       v12->mPrev = v11;
-      v8->mPrev = v8;
-      v8->mNext = v8;
-      operator delete[](v8);
+      mPrev->mPrev = mPrev;
+      mPrev->mNext = mPrev;
+      operator delete[](mPrev);
     }
-    UFG::qList<UFG::FractureConnectivity::Connection,UFG::FractureConnectivity::Connection,1,0>::DeleteNodes(v6);
-    v13 = v6->mNode.mPrev;
-    v14 = v6->mNode.mNext;
+    UFG::qList<UFG::FractureConnectivity::Connection,UFG::FractureConnectivity::Connection,1,0>::DeleteNodes(mRemoveTerminalsMoppModifierList);
+    v13 = mRemoveTerminalsMoppModifierList->mNode.mPrev;
+    v14 = mRemoveTerminalsMoppModifierList->mNode.mNext;
     v13->mNext = v14;
     v14->mPrev = v13;
-    v6->mNode.mPrev = &v6->mNode;
-    v6->mNode.mNext = &v6->mNode;
-    operator delete[](v6);
-    v1->mRemoveTerminalsMoppModifierList = 0i64;
+    mRemoveTerminalsMoppModifierList->mNode.mPrev = &mRemoveTerminalsMoppModifierList->mNode;
+    mRemoveTerminalsMoppModifierList->mNode.mNext = &mRemoveTerminalsMoppModifierList->mNode;
+    operator delete[](mRemoveTerminalsMoppModifierList);
+    this->mRemoveTerminalsMoppModifierList = 0i64;
   }
 LABEL_17:
-  if ( HIDWORD(v1->mObjectProperties.mData[2].mBaseNode.mNeighbours[1]) == 1 )
+  if ( HIDWORD(this->mObjectProperties.mData[2].mBaseNode.mNeighbours[1]) == 1 )
   {
-    v15 = v1->mFractureConnectivity;
-    if ( v15 )
+    mFractureConnectivity = this->mFractureConnectivity;
+    if ( mFractureConnectivity )
     {
-      v16 = v15->mNodes.p;
-      if ( v16 )
-        operator delete[](v16);
-      v15->mNodes.p = 0i64;
-      *(_QWORD *)&v15->mNodes.size = 0i64;
-      operator delete[](v15);
+      p = mFractureConnectivity->mNodes.p;
+      if ( p )
+        operator delete[](p);
+      mFractureConnectivity->mNodes.p = 0i64;
+      *(_QWORD *)&mFractureConnectivity->mNodes.size = 0i64;
+      operator delete[](mFractureConnectivity);
     }
     v17 = (UFG::FractureConnectivity *)UFG::qMalloc(0x18ui64, UFG::gGlobalNewName, 0i64);
     if ( v17 )
@@ -615,25 +578,23 @@ LABEL_17:
     {
       v17 = 0i64;
     }
-    v1->mFractureConnectivity = v17;
-    UFG::FractureConnectivity::Build(v17, v1);
+    this->mFractureConnectivity = v17;
+    UFG::FractureConnectivity::Build(v17, this);
   }
 }
 
 // File Line: 422
 // RVA: 0xA0940
-void __fastcall UFG::CollisionMeshData::AddMoppTerminalModifier(UFG::CollisionMeshData *this, hkpRemoveTerminalsMoppModifier *modifier)
+void __fastcall UFG::CollisionMeshData::AddMoppTerminalModifier(
+        UFG::CollisionMeshData *this,
+        hkpRemoveTerminalsMoppModifier *modifier)
 {
-  hkpRemoveTerminalsMoppModifier *v2; // rsi
-  UFG::CollisionMeshData *v3; // rdi
   char *v4; // rax
-  __int64 *v5; // rdi
+  __int64 *mRemoveTerminalsMoppModifierList; // rdi
   char *v6; // rax
   char *v7; // rbx
   __int64 v8; // rax
 
-  v2 = modifier;
-  v3 = this;
   if ( !this->mRemoveTerminalsMoppModifierList )
   {
     v4 = UFG::qMalloc(0x10ui64, UFG::gGlobalNewName, 0i64);
@@ -642,9 +603,9 @@ void __fastcall UFG::CollisionMeshData::AddMoppTerminalModifier(UFG::CollisionMe
       *(_QWORD *)v4 = v4;
       *((_QWORD *)v4 + 1) = v4;
     }
-    v3->mRemoveTerminalsMoppModifierList = v4;
+    this->mRemoveTerminalsMoppModifierList = v4;
   }
-  v5 = (__int64 *)v3->mRemoveTerminalsMoppModifierList;
+  mRemoveTerminalsMoppModifierList = (__int64 *)this->mRemoveTerminalsMoppModifierList;
   v6 = UFG::qMalloc(0x18ui64, "CollisionMeshData", 0i64);
   v7 = v6;
   if ( v6 )
@@ -656,108 +617,105 @@ void __fastcall UFG::CollisionMeshData::AddMoppTerminalModifier(UFG::CollisionMe
   {
     v7 = 0i64;
   }
-  *((_QWORD *)v7 + 2) = v2;
-  hkReferencedObject::addReference((hkReferencedObject *)&v2->vfptr);
-  v8 = *v5;
+  *((_QWORD *)v7 + 2) = modifier;
+  hkReferencedObject::addReference(modifier);
+  v8 = *mRemoveTerminalsMoppModifierList;
   *(_QWORD *)(v8 + 8) = v7;
   *(_QWORD *)v7 = v8;
-  *((_QWORD *)v7 + 1) = v5;
-  *v5 = (__int64)v7;
+  *((_QWORD *)v7 + 1) = mRemoveTerminalsMoppModifierList;
+  *mRemoveTerminalsMoppModifierList = (__int64)v7;
 }
 
 // File Line: 452
 // RVA: 0xB2D80
-UFG::CollisionMeshData *__fastcall UFG::CollisionMeshData::SplitMeshUsingConnectivity(UFG::FractureConnectivity *graph, UFG::CollisionMeshData *parent, hkTransformf *transform)
+UFG::CollisionMeshData *__fastcall UFG::CollisionMeshData::SplitMeshUsingConnectivity(
+        UFG::FractureConnectivity *graph,
+        UFG::CollisionMeshData *parent,
+        hkTransformf *transform)
 {
   hkTransformf *v3; // r13
-  UFG::CollisionMeshData *v4; // rsi
-  UFG::FractureConnectivity *v5; // r14
-  unsigned int v6; // ebx
+  unsigned int size; // ebx
   char *v7; // rax
   __int64 v8; // rax
   __int64 v9; // rdi
   UFG::FractureConnectivity *v10; // rax
-  hkpShape *v11; // rax
-  char v12; // cl
-  hkpShape *v13; // r15
-  hkLifoAllocator *v14; // rax
-  hkLifoAllocator *v15; // r8
-  int v16; // edx
-  hkpShape **v17; // rax
-  char *v18; // rcx
-  unsigned int v19; // ebx
-  int v20; // er8
-  hkpShape *v21; // r12
-  int v22; // er15
-  __int64 v23; // rbx
-  hkpShape *v24; // r13
-  _QWORD **v25; // rax
-  hkpConvexTransformShape *v26; // rax
-  hkpShape *v27; // rax
-  hkpShape *v28; // rcx
-  _QWORD **v29; // rax
-  hkpListShape *v30; // rax
-  hkpShape *v31; // rax
-  signed __int64 v32; // rbx
-  signed __int64 *v33; // r9
-  signed __int64 v34; // rax
-  unsigned int v35; // er8
-  __int64 v36; // rax
-  signed __int64 v37; // rdx
-  signed __int64 v38; // rcx
-  signed __int64 v39; // rdx
-  char *v40; // r8
-  unsigned __int64 v41; // r8
-  signed __int64 *v42; // rcx
-  signed __int64 v43; // rax
-  unsigned int v44; // er8
-  __int64 v45; // rax
-  signed __int64 v46; // rdx
-  signed __int64 v47; // rcx
-  signed __int64 v48; // rdx
-  __m128 v49; // xmm1
-  __m128 v50; // xmm4
-  __m128 v51; // xmm2
-  __m128 v52; // xmm3
-  __int64 v53; // kr00_8
+  hkpShape *mShape; // rax
+  char m_storage; // cl
+  hkpShape *m_userData; // r15
+  hkLifoAllocator *Value; // r8
+  int v15; // edx
+  hkpShape **m_cur; // rax
+  char *v17; // rcx
+  unsigned int v18; // ebx
+  int v19; // r8d
+  hkpShape *v20; // r12
+  int v21; // r15d
+  __int64 v22; // rbx
+  hkpShape *v23; // r13
+  _QWORD **v24; // rax
+  hkpConvexTransformShape *v25; // rax
+  hkpShape *v26; // rax
+  hkpShape *v27; // rcx
+  _QWORD **v28; // rax
+  hkpListShape *v29; // rax
+  hkpShape *v30; // rax
+  __int64 v31; // rbx
+  __int64 *v32; // r9
+  __int64 v33; // rax
+  unsigned int i; // r8d
+  __int64 mOffset; // rax
+  char *v36; // rdx
+  char *v37; // rcx
+  __int64 v38; // rdx
+  char *v39; // r8
+  unsigned __int64 v40; // r8
+  __int64 *v41; // rcx
+  __int64 v42; // rax
+  unsigned int j; // r8d
+  __int64 v44; // rax
+  char *v45; // rdx
+  char *v46; // rcx
+  __int64 v47; // rdx
+  __m128 v48; // xmm1
+  __m128 v49; // xmm4
+  __m128 v50; // xmm2
+  __m128 v51; // xmm3
+  float y; // xmm1_4
+  float z; // xmm2_4
   float v54; // xmm1_4
   float v55; // xmm2_4
   float v56; // xmm1_4
   float v57; // xmm2_4
   float v58; // xmm1_4
   float v59; // xmm2_4
-  float v60; // xmm1_4
-  float v61; // xmm2_4
-  char *v62; // rsi
-  int v63; // ecx
-  int v64; // ebx
-  hkLifoAllocator *v65; // rax
-  signed int v66; // ebx
-  int v67; // er8
-  hkpShape **array; // [rsp+30h] [rbp-D0h]
+  char *v60; // rsi
+  int v61; // ecx
+  int v62; // ebx
+  hkLifoAllocator *v63; // rax
+  signed int v64; // ebx
+  int v65; // r8d
+  hkpShape **array; // [rsp+30h] [rbp-D0h] BYREF
   int numShapes; // [rsp+38h] [rbp-C8h]
-  int v71; // [rsp+3Ch] [rbp-C4h]
+  int v69; // [rsp+3Ch] [rbp-C4h]
   void *p; // [rsp+40h] [rbp-C0h]
-  int v73; // [rsp+48h] [rbp-B8h]
-  hkMassProperties massProperties; // [rsp+50h] [rbp-B0h]
-  __int64 v75; // [rsp+A0h] [rbp-60h]
-  hkTransformf v76; // [rsp+B0h] [rbp-50h]
-  hkTransformf bTc; // [rsp+F0h] [rbp-10h]
-  hkTransformf transformOut; // [rsp+130h] [rbp+30h]
-  hkTransformf aTb; // [rsp+170h] [rbp+70h]
-  __int64 result; // [rsp+1F0h] [rbp+F0h]
-  char *v81; // [rsp+1F8h] [rbp+F8h]
-  hkTransformf *v82; // [rsp+200h] [rbp+100h]
+  int v71; // [rsp+48h] [rbp-B8h]
+  hkMassProperties massProperties; // [rsp+50h] [rbp-B0h] BYREF
+  __int64 v73; // [rsp+A0h] [rbp-60h]
+  hkTransformf v74; // [rsp+B0h] [rbp-50h] BYREF
+  hkTransformf bTc; // [rsp+F0h] [rbp-10h] BYREF
+  hkTransformf transformOut; // [rsp+130h] [rbp+30h] BYREF
+  hkTransformf aTb; // [rsp+170h] [rbp+70h] BYREF
+  __int64 result; // [rsp+1F0h] [rbp+F0h] BYREF
+  char *v79; // [rsp+1F8h] [rbp+F8h]
+  hkTransformf *v80; // [rsp+200h] [rbp+100h]
 
-  v82 = transform;
-  v75 = -2i64;
+  v80 = transform;
+  v73 = -2i64;
   v3 = transform;
-  v4 = parent;
-  v5 = graph;
-  v6 = graph->mNodes.size;
+  size = graph->mNodes.size;
   v7 = UFG::qMemoryPool::Allocate(&gPhysicsMemoryPool, 144 * graph->mNodes.size + 272, "CollisionMeshData1", 0i64, 1u);
   result = (__int64)v7;
-  v81 = v7;
+  v79 = v7;
   if ( v7 )
   {
     UFG::CollisionMeshData::CollisionMeshData((UFG::CollisionMeshData *)v7);
@@ -767,10 +725,10 @@ UFG::CollisionMeshData *__fastcall UFG::CollisionMeshData::SplitMeshUsingConnect
   {
     v9 = 0i64;
   }
-  *(_DWORD *)(v9 + 40) = v4->mBundleGuid;
-  *(_DWORD *)(v9 + 48) = v4->mNumVertices;
-  *(_DWORD *)(v9 + 52) = v4->mNumIndices;
-  *(_DWORD *)(v9 + 76) = v4->mRenderModelGuid;
+  *(_DWORD *)(v9 + 40) = parent->mBundleGuid;
+  *(_DWORD *)(v9 + 48) = parent->mNumVertices;
+  *(_DWORD *)(v9 + 52) = parent->mNumIndices;
+  *(_DWORD *)(v9 + 76) = parent->mRenderModelGuid;
   *(_DWORD *)(v9 + 44) = 4;
   *(_QWORD *)(v9 + 80) = 0i64;
   *(_QWORD *)(v9 + 200) = 0i64;
@@ -781,320 +739,296 @@ UFG::CollisionMeshData *__fastcall UFG::CollisionMeshData::SplitMeshUsingConnect
                                                 (UFG::qSymbol *)&result,
                                                 "SplitMeshUsingConnectivity")->mUID;
   v10 = 0i64;
-  if ( v6 > 1 )
-    v10 = v5;
+  if ( size > 1 )
+    v10 = graph;
   *(_QWORD *)(v9 + 208) = v10;
-  *(_DWORD *)(v9 + 56) = v6;
+  *(_DWORD *)(v9 + 56) = size;
   *(_DWORD *)(v9 + 60) = 0;
-  v11 = v4->mShape;
-  v12 = v11->m_type.m_storage;
-  if ( v12 == 9 )
+  mShape = parent->mShape;
+  m_storage = mShape->m_type.m_storage;
+  if ( m_storage == 9 )
   {
-    v13 = (hkpShape *)v11[2].m_userData;
+    m_userData = (hkpShape *)mShape[2].m_userData;
   }
   else
   {
-    v13 = 0i64;
-    if ( v12 == 8 )
-      v13 = v4->mShape;
+    m_userData = 0i64;
+    if ( m_storage == 8 )
+      m_userData = parent->mShape;
   }
   array = 0i64;
   numShapes = 0;
-  v71 = 2147483648;
-  v73 = v6;
-  if ( v6 )
+  v69 = 0x80000000;
+  v71 = size;
+  if ( size )
   {
-    v14 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v15 = v14;
-    v16 = (((8 * v6 + 127) & 0xFFFFFF80) + 15) & 0xFFFFFFF0;
-    v17 = (hkpShape **)v14->m_cur;
-    v18 = (char *)v17 + v16;
-    if ( v16 > v15->m_slabSize || v18 > v15->m_end )
-      v17 = (hkpShape **)hkLifoAllocator::allocateFromNewSlab(v15, v16);
+    Value = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    v15 = (((8 * size + 127) & 0xFFFFFF80) + 15) & 0xFFFFFFF0;
+    m_cur = (hkpShape **)Value->m_cur;
+    v17 = (char *)m_cur + v15;
+    if ( v15 > Value->m_slabSize || v17 > Value->m_end )
+      m_cur = (hkpShape **)hkLifoAllocator::allocateFromNewSlab(Value, v15);
     else
-      v15->m_cur = v18;
+      Value->m_cur = v17;
   }
   else
   {
-    v17 = 0i64;
+    m_cur = 0i64;
   }
-  array = v17;
-  v71 = v6 | 0x80000000;
-  p = v17;
-  v19 = 0;
-  if ( v5->mNodes.size > 0 )
+  array = m_cur;
+  v69 = size | 0x80000000;
+  p = m_cur;
+  v18 = 0;
+  if ( graph->mNodes.size )
   {
-    v20 = numShapes;
+    v19 = numShapes;
     do
     {
-      v21 = *(hkpShape **)(32i64 * v5->mNodes.p[v19]->partIdx + *(_QWORD *)&v13[1].m_type.m_storage);
-      if ( v20 == (v71 & 0x3FFFFFFF) )
+      v20 = *(hkpShape **)(32i64 * graph->mNodes.p[v18]->partIdx + *(_QWORD *)&m_userData[1].m_type.m_storage);
+      if ( v19 == (v69 & 0x3FFFFFFF) )
       {
-        hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, 8);
-        v20 = numShapes;
+        hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &array, 8);
+        v19 = numShapes;
       }
-      array[v20] = v21;
-      v20 = numShapes++ + 1;
-      ++v19;
+      array[v19] = v20;
+      v19 = ++numShapes;
+      ++v18;
     }
-    while ( v19 < v5->mNodes.size );
+    while ( v18 < graph->mNodes.size );
   }
   hkQsTransformf::copyToTransformNoScale((hkQsTransformf *)&(*array)[2], &transformOut);
-  hkTransformf::setMul(&v76, v3, &transformOut);
+  hkTransformf::setMul(&v74, v3, &transformOut);
   hkTransformf::setInverse(&aTb, &transformOut);
-  v22 = 0;
+  v21 = 0;
   if ( numShapes > 0 )
   {
-    v23 = 0i64;
+    v22 = 0i64;
     do
     {
-      v24 = array[v23];
-      hkQsTransformf::copyToTransformNoScale((hkQsTransformf *)&v24[2], &bTc);
+      v23 = array[v22];
+      hkQsTransformf::copyToTransformNoScale((hkQsTransformf *)&v23[2], &bTc);
       hkTransformf::setMul(&bTc, &aTb, &bTc);
-      v25 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v26 = (hkpConvexTransformShape *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v25[11] + 8i64))(
-                                         v25[11],
-                                         128i64);
-      result = (__int64)v26;
-      if ( v26 )
+      v24 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+      v25 = (hkpConvexTransformShape *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v24[11] + 8i64))(v24[11], 128i64);
+      result = (__int64)v25;
+      if ( v25 )
       {
         hkpConvexTransformShape::hkpConvexTransformShape(
-          v26,
-          *(hkpConvexShape **)&v24[1].m_type.m_storage,
+          v25,
+          *(hkpConvexShape **)&v23[1].m_type.m_storage,
           &bTc,
           REFERENCE_POLICY_INCREMENT);
-        v28 = v27;
+        v27 = v26;
       }
       else
       {
-        v28 = 0i64;
+        v27 = 0i64;
       }
-      array[v23] = v28;
+      array[v22] = v27;
+      ++v21;
       ++v22;
-      ++v23;
     }
-    while ( v22 < numShapes );
-    v3 = v82;
+    while ( v21 < numShapes );
+    v3 = v80;
   }
-  v29 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v30 = (hkpListShape *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v29[11] + 8i64))(v29[11], 144i64);
-  v82 = (hkTransformf *)v30;
-  if ( v30 )
-    hkpListShape::hkpListShape(v30, array, numShapes, REFERENCE_POLICY_INCREMENT);
+  v28 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v29 = (hkpListShape *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v28[11] + 8i64))(v28[11], 144i64);
+  v80 = (hkTransformf *)v29;
+  if ( v29 )
+    hkpListShape::hkpListShape(v29, array, numShapes, REFERENCE_POLICY_INCREMENT);
   else
-    v31 = 0i64;
-  *(_QWORD *)(v9 + 192) = v31;
-  *(_DWORD *)(v9 + 64) = (unsigned __int8)hkpShapeDepthUtil::getShapeDepth(v31);
-  v32 = v9 + 272;
-  v82 = (hkTransformf *)(v9 + 272);
-  v33 = (signed __int64 *)(v9 + 152);
+    v30 = 0i64;
+  *(_QWORD *)(v9 + 192) = v30;
+  *(_DWORD *)(v9 + 64) = (unsigned __int8)hkpShapeDepthUtil::getShapeDepth(v30);
+  v31 = v9 + 272;
+  v80 = (hkTransformf *)(v9 + 272);
+  v32 = (__int64 *)(v9 + 152);
   if ( v9 == -272 )
-    v34 = 0i64;
+    v33 = 0i64;
   else
-    v34 = v32 - (_QWORD)v33;
-  *v33 = v34;
-  v35 = 0;
-  if ( v5->mNodes.size )
+    v33 = v31 - (_QWORD)v32;
+  *v32 = v33;
+  for ( i = 0; i < graph->mNodes.size; ++i )
   {
-    do
+    mOffset = parent->mParts.mOffset;
+    if ( mOffset )
+      v36 = (char *)&parent->mParts + mOffset;
+    else
+      v36 = 0i64;
+    v37 = &v36[48 * graph->mNodes.p[i]->partIdx];
+    result = v31;
+    if ( v31 )
     {
-      v36 = v4->mParts.mOffset;
-      if ( v36 )
-        v37 = (signed __int64)&v4->mParts + v36;
-      else
-        v37 = 0i64;
-      v38 = v37 + 48i64 * v5->mNodes.p[v35]->partIdx;
-      result = v32;
-      if ( v32 )
-      {
-        *(_DWORD *)v32 = 0;
-        v39 = v32;
-      }
-      else
-      {
-        v39 = 0i64;
-      }
-      *(_DWORD *)v39 = *(_DWORD *)v38;
-      *(_DWORD *)(v39 + 4) = *(_DWORD *)(v38 + 4);
-      *(_QWORD *)(v39 + 8) = *(_QWORD *)(v38 + 8);
-      *(_QWORD *)(v39 + 16) = *(_QWORD *)(v38 + 16);
-      *(_DWORD *)(v39 + 24) = *(_DWORD *)(v38 + 24);
-      *(_DWORD *)(v39 + 28) = *(_DWORD *)(v38 + 28);
-      *(_DWORD *)(v39 + 36) = *(_DWORD *)(v38 + 36);
-      *(_DWORD *)(v39 + 32) = *(_DWORD *)(v38 + 32);
-      v32 += 48i64;
-      v82 = (hkTransformf *)v32;
-      ++v35;
+      *(_DWORD *)v31 = 0;
+      v38 = v31;
     }
-    while ( v35 < v5->mNodes.size );
+    else
+    {
+      v38 = 0i64;
+    }
+    *(_DWORD *)v38 = *(_DWORD *)v37;
+    *(_DWORD *)(v38 + 4) = *((_DWORD *)v37 + 1);
+    *(_QWORD *)(v38 + 8) = *((_QWORD *)v37 + 1);
+    *(_QWORD *)(v38 + 16) = *((_QWORD *)v37 + 2);
+    *(_DWORD *)(v38 + 24) = *((_DWORD *)v37 + 6);
+    *(_DWORD *)(v38 + 28) = *((_DWORD *)v37 + 7);
+    *(_DWORD *)(v38 + 36) = *((_DWORD *)v37 + 9);
+    *(_DWORD *)(v38 + 32) = *((_DWORD *)v37 + 8);
+    v31 += 48i64;
+    v80 = (hkTransformf *)v31;
   }
-  v40 = (char *)v33 + *v33;
-  if ( !*v33 )
-    v40 = 0i64;
-  v41 = *((_QWORD *)v40 + 2);
-  *(_QWORD *)(v9 + 32) = v41;
-  UFG::qReflectHandleBase::Init((UFG::qReflectHandleBase *)(v9 + 224), *(_QWORD *)(v9 + 240), v41);
-  v42 = (signed __int64 *)(v9 + 160);
-  if ( v32 )
-    v43 = v32 - (_QWORD)v42;
+  v39 = (char *)v32 + *v32;
+  if ( !*v32 )
+    v39 = 0i64;
+  v40 = *((_QWORD *)v39 + 2);
+  *(_QWORD *)(v9 + 32) = v40;
+  UFG::qReflectHandleBase::Init((UFG::qReflectHandleBase *)(v9 + 224), *(_QWORD *)(v9 + 240), v40);
+  v41 = (__int64 *)(v9 + 160);
+  if ( v31 )
+    v42 = v31 - (_QWORD)v41;
   else
-    v43 = 0i64;
-  *v42 = v43;
-  v44 = 0;
-  if ( v5->mNodes.size )
+    v42 = 0i64;
+  *v41 = v42;
+  for ( j = 0; j < graph->mNodes.size; ++j )
   {
-    do
+    v44 = parent->mPartDetails.mOffset;
+    if ( v44 )
+      v45 = (char *)&parent->mPartDetails + v44;
+    else
+      v45 = 0i64;
+    v46 = &v45[96 * graph->mNodes.p[j]->partIdx];
+    result = v31;
+    if ( v31 )
     {
-      v45 = v4->mPartDetails.mOffset;
-      if ( v45 )
-        v46 = (signed __int64)&v4->mPartDetails + v45;
-      else
-        v46 = 0i64;
-      v47 = v46 + 96i64 * v5->mNodes.p[v44]->partIdx;
-      result = v32;
-      if ( v32 )
-      {
-        *(_DWORD *)(v32 + 72) = -1;
-        *(_QWORD *)(v32 + 84) = -1i64;
-        v48 = v32;
-      }
-      else
-      {
-        v48 = 0i64;
-      }
-      *(_DWORD *)(v48 + 84) = *(_DWORD *)(v47 + 84);
-      *(_DWORD *)(v48 + 88) = *(_DWORD *)(v47 + 88);
-      *(_DWORD *)(v48 + 76) = *(_DWORD *)(v47 + 76);
-      *(_DWORD *)(v48 + 72) = *(_DWORD *)(v47 + 72);
-      *(_DWORD *)(v48 + 80) = *(_DWORD *)(v47 + 80);
-      *(_DWORD *)(v48 + 68) = *(_DWORD *)(v47 + 68);
-      *(_OWORD *)v48 = *(_OWORD *)v47;
-      *(_OWORD *)(v48 + 16) = *(_OWORD *)(v47 + 16);
-      *(_OWORD *)(v48 + 32) = *(_OWORD *)(v47 + 32);
-      *(_OWORD *)(v48 + 48) = *(_OWORD *)(v47 + 48);
-      *(_DWORD *)(v48 + 64) = *(_DWORD *)(v47 + 64);
-      v32 += 96i64;
-      v82 = (hkTransformf *)v32;
-      ++v44;
+      *(_DWORD *)(v31 + 72) = -1;
+      *(_QWORD *)(v31 + 84) = -1i64;
+      v47 = v31;
     }
-    while ( v44 < v5->mNodes.size );
+    else
+    {
+      v47 = 0i64;
+    }
+    *(_DWORD *)(v47 + 84) = *((_DWORD *)v46 + 21);
+    *(_DWORD *)(v47 + 88) = *((_DWORD *)v46 + 22);
+    *(_DWORD *)(v47 + 76) = *((_DWORD *)v46 + 19);
+    *(_DWORD *)(v47 + 72) = *((_DWORD *)v46 + 18);
+    *(_DWORD *)(v47 + 80) = *((_DWORD *)v46 + 20);
+    *(_DWORD *)(v47 + 68) = *((_DWORD *)v46 + 17);
+    *(_OWORD *)v47 = *(_OWORD *)v46;
+    *(_OWORD *)(v47 + 16) = *((_OWORD *)v46 + 1);
+    *(_OWORD *)(v47 + 32) = *((_OWORD *)v46 + 2);
+    *(_OWORD *)(v47 + 48) = *((_OWORD *)v46 + 3);
+    *(_DWORD *)(v47 + 64) = *((_DWORD *)v46 + 16);
+    v31 += 96i64;
+    v80 = (hkTransformf *)v31;
   }
   *(_QWORD *)&massProperties.m_volume = 0i64;
-  massProperties.m_centerOfMass = 0i64;
-  massProperties.m_inertiaTensor.m_col0 = 0i64;
-  massProperties.m_inertiaTensor.m_col1 = 0i64;
-  massProperties.m_inertiaTensor.m_col2 = 0i64;
+  memset(&massProperties.m_centerOfMass, 0, 64);
   if ( UFG::CollisionMeshData::ComputeMassProperties((UFG::CollisionMeshData *)v9, &massProperties, 0i64) )
   {
     *(float *)(v9 + 144) = massProperties.m_mass;
-    v49 = _mm_unpacklo_ps(massProperties.m_inertiaTensor.m_col0.m_quad, massProperties.m_inertiaTensor.m_col1.m_quad);
-    v50 = _mm_shuffle_ps(
+    v48 = _mm_unpacklo_ps(massProperties.m_inertiaTensor.m_col0.m_quad, massProperties.m_inertiaTensor.m_col1.m_quad);
+    v49 = _mm_shuffle_ps(
             _mm_unpackhi_ps(massProperties.m_inertiaTensor.m_col0.m_quad, massProperties.m_inertiaTensor.m_col1.m_quad),
             massProperties.m_inertiaTensor.m_col2.m_quad,
             228);
-    v51 = _mm_movelh_ps(v49, massProperties.m_inertiaTensor.m_col2.m_quad);
-    v52 = _mm_shuffle_ps(_mm_movehl_ps(v51, v49), massProperties.m_inertiaTensor.m_col2.m_quad, 212);
-    *(_DWORD *)(v9 + 108) = v51.m128_i32[0];
-    *(_DWORD *)(v9 + 112) = (unsigned __int128)_mm_shuffle_ps(v51, v51, 85);
-    *(_DWORD *)(v9 + 116) = (unsigned __int128)_mm_shuffle_ps(v51, v51, 170);
-    *(_DWORD *)(v9 + 120) = v52.m128_i32[0];
-    *(_DWORD *)(v9 + 124) = (unsigned __int128)_mm_shuffle_ps(v52, v52, 85);
-    *(_DWORD *)(v9 + 128) = (unsigned __int128)_mm_shuffle_ps(v52, v52, 170);
-    *(_DWORD *)(v9 + 132) = v50.m128_i32[0];
-    *(_DWORD *)(v9 + 136) = (unsigned __int128)_mm_shuffle_ps(v50, v50, 85);
-    *(_DWORD *)(v9 + 140) = (unsigned __int128)_mm_shuffle_ps(v50, v50, 170);
-    v53 = *(__int64 *)((char *)massProperties.m_centerOfMass.m_quad.m128_i64 + 4);
-    *(float *)(v9 + 96) = massProperties.m_centerOfMass.m_quad.m128_f32[0];
-    *(_QWORD *)(v9 + 100) = v53;
+    v50 = _mm_movelh_ps(v48, massProperties.m_inertiaTensor.m_col2.m_quad);
+    v51 = _mm_shuffle_ps(_mm_movehl_ps(v50, v48), massProperties.m_inertiaTensor.m_col2.m_quad, 212);
+    *(_DWORD *)(v9 + 108) = v50.m128_i32[0];
+    *(_DWORD *)(v9 + 112) = _mm_shuffle_ps(v50, v50, 85).m128_u32[0];
+    *(_DWORD *)(v9 + 116) = _mm_shuffle_ps(v50, v50, 170).m128_u32[0];
+    *(_DWORD *)(v9 + 120) = v51.m128_i32[0];
+    *(_DWORD *)(v9 + 124) = _mm_shuffle_ps(v51, v51, 85).m128_u32[0];
+    *(_DWORD *)(v9 + 128) = _mm_shuffle_ps(v51, v51, 170).m128_u32[0];
+    *(_DWORD *)(v9 + 132) = v49.m128_i32[0];
+    *(_DWORD *)(v9 + 136) = _mm_shuffle_ps(v49, v49, 85).m128_u32[0];
+    *(_DWORD *)(v9 + 140) = _mm_shuffle_ps(v49, v49, 170).m128_u32[0];
+    v48.m128_i32[0] = massProperties.m_centerOfMass.m_quad.m128_i32[1];
+    v50.m128_i32[0] = massProperties.m_centerOfMass.m_quad.m128_i32[2];
+    *(_DWORD *)(v9 + 96) = massProperties.m_centerOfMass.m_quad.m128_i32[0];
+    *(_DWORD *)(v9 + 100) = v48.m128_i32[0];
+    *(_DWORD *)(v9 + 104) = v50.m128_i32[0];
   }
   else
   {
-    *(float *)(v9 + 144) = v4->mMass;
-    v54 = v4->mCentreOfMass.y;
-    v55 = v4->mCentreOfMass.z;
-    *(float *)(v9 + 96) = v4->mCentreOfMass.x;
-    *(float *)(v9 + 100) = v54;
-    *(float *)(v9 + 104) = v55;
-    v56 = v4->mInertiaTensorRow0.y;
-    v57 = v4->mInertiaTensorRow0.z;
-    *(float *)(v9 + 108) = v4->mInertiaTensorRow0.x;
-    *(float *)(v9 + 112) = v56;
-    *(float *)(v9 + 116) = v57;
-    v58 = v4->mInertiaTensorRow1.y;
-    v59 = v4->mInertiaTensorRow1.z;
-    *(float *)(v9 + 120) = v4->mInertiaTensorRow1.x;
-    *(float *)(v9 + 124) = v58;
-    *(float *)(v9 + 128) = v59;
-    v60 = v4->mInertiaTensorRow2.y;
-    v61 = v4->mInertiaTensorRow2.z;
-    *(float *)(v9 + 132) = v4->mInertiaTensorRow2.x;
-    *(float *)(v9 + 136) = v60;
-    *(float *)(v9 + 140) = v61;
+    *(float *)(v9 + 144) = parent->mMass;
+    y = parent->mCentreOfMass.y;
+    z = parent->mCentreOfMass.z;
+    *(float *)(v9 + 96) = parent->mCentreOfMass.x;
+    *(float *)(v9 + 100) = y;
+    *(float *)(v9 + 104) = z;
+    v54 = parent->mInertiaTensorRow0.y;
+    v55 = parent->mInertiaTensorRow0.z;
+    *(float *)(v9 + 108) = parent->mInertiaTensorRow0.x;
+    *(float *)(v9 + 112) = v54;
+    *(float *)(v9 + 116) = v55;
+    v56 = parent->mInertiaTensorRow1.y;
+    v57 = parent->mInertiaTensorRow1.z;
+    *(float *)(v9 + 120) = parent->mInertiaTensorRow1.x;
+    *(float *)(v9 + 124) = v56;
+    *(float *)(v9 + 128) = v57;
+    v58 = parent->mInertiaTensorRow2.y;
+    v59 = parent->mInertiaTensorRow2.z;
+    *(float *)(v9 + 132) = parent->mInertiaTensorRow2.x;
+    *(float *)(v9 + 136) = v58;
+    *(float *)(v9 + 140) = v59;
   }
-  v3->m_rotation.m_col0 = v76.m_rotation.m_col0;
-  v3->m_rotation.m_col1 = v76.m_rotation.m_col1;
-  v3->m_rotation.m_col2 = v76.m_rotation.m_col2;
-  v3->m_translation = v76.m_translation;
-  v62 = (char *)p;
-  v63 = numShapes;
+  *v3 = v74;
+  v60 = (char *)p;
+  v61 = numShapes;
   if ( p == array )
-    v63 = 0;
-  numShapes = v63;
-  v64 = v73;
-  v65 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v66 = (8 * v64 + 127) & 0xFFFFFF80;
-  v67 = (v66 + 15) & 0xFFFFFFF0;
-  if ( v66 > v65->m_slabSize || &v62[v67] != v65->m_cur || v65->m_firstNonLifoEnd == v62 )
-    hkLifoAllocator::slowBlockFree(v65, v62, v67);
+    v61 = 0;
+  numShapes = v61;
+  v62 = v71;
+  v63 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v64 = (8 * v62 + 127) & 0xFFFFFF80;
+  v65 = (v64 + 15) & 0xFFFFFFF0;
+  if ( v64 > v63->m_slabSize || &v60[v65] != v63->m_cur || v63->m_firstNonLifoEnd == v60 )
+    hkLifoAllocator::slowBlockFree(v63, v60, v65);
   else
-    v65->m_cur = v62;
+    v63->m_cur = v60;
   numShapes = 0;
-  if ( v71 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      array,
-      8 * v71);
+  if ( v69 >= 0 )
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, array, 8 * v69);
   return (UFG::CollisionMeshData *)v9;
-}5->m_slabSize || &v62[v67] != v65->m_cur || v65->m_firstNonLifoEnd == v62 )
-    hkLifoAllocator
+}
 
 // File Line: 612
 // RVA: 0xA2260
 UFG::CollisionMeshData *__fastcall UFG::CollisionMeshData::Clone(UFG::CollisionMeshData *this)
 {
-  UFG::CollisionMeshData *v1; // rsi
   char *v2; // rax
   UFG::CollisionMeshData *v3; // rax
   UFG::CollisionMeshData *v4; // rdi
-  float v5; // xmm1_4
-  float v6; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
   float v7; // xmm1_4
   float v8; // xmm2_4
   float v9; // xmm1_4
   float v10; // xmm2_4
   float v11; // xmm1_4
   float v12; // xmm2_4
-  signed __int64 *v13; // rcx
-  __int64 v14; // rax
-  signed __int64 v15; // rax
-  signed __int64 v16; // rax
-  signed __int64 *v17; // rcx
+  char *p_mParts; // rcx
+  __int64 mOffset; // rax
+  char *v15; // rax
+  __int64 v16; // rax
+  char *p_mPartDetails; // rcx
   __int64 v18; // rax
-  signed __int64 v19; // rax
-  signed __int64 v20; // rax
-  signed __int64 *v21; // rcx
+  char *v19; // rax
+  __int64 v20; // rax
+  char *p_mIndexBuffer; // rcx
   __int64 v22; // rax
-  signed __int64 v23; // rax
-  signed __int64 v24; // rax
-  signed __int64 *v25; // rcx
+  char *v23; // rax
+  __int64 v24; // rax
+  char *p_mVertexBuffer; // rcx
   __int64 v26; // rax
-  signed __int64 v27; // rax
-  signed __int64 v28; // rax
-  hkpShape *v29; // r13
-  __int64 v30; // r12
-  hkLifoAllocator *v31; // rax
+  char *v27; // rax
+  __int64 v28; // rax
+  hkpShape *mShape; // r13
+  __int64 m_userData_low; // r12
+  hkLifoAllocator *Value; // rax
   int v32; // edx
-  hkpShape **v33; // rcx
+  hkpShape **m_cur; // rcx
   char *v34; // r8
   __int64 v35; // r14
   __int64 v36; // rbx
@@ -1108,19 +1042,18 @@ UFG::CollisionMeshData *__fastcall UFG::CollisionMeshData::Clone(UFG::CollisionM
   int v44; // ebx
   hkLifoAllocator *v45; // rax
   signed int v46; // ebx
-  int v47; // er8
-  signed __int64 *v48; // rcx
+  int v47; // r8d
+  char *p_mFractureConnections; // rcx
   __int64 v49; // rax
-  signed __int64 v50; // rax
-  signed __int64 v51; // rax
+  char *v50; // rax
+  __int64 v51; // rax
   UFG::FractureConnectivity *v52; // rax
-  hkpShape **array; // [rsp+28h] [rbp-28h]
+  hkpShape **array; // [rsp+28h] [rbp-28h] BYREF
   int v55; // [rsp+30h] [rbp-20h]
   int v56; // [rsp+34h] [rbp-1Ch]
   void *p; // [rsp+38h] [rbp-18h]
   int v58; // [rsp+40h] [rbp-10h]
 
-  v1 = this;
   v2 = UFG::qMalloc(0x110ui64, UFG::gGlobalNewName, 0i64);
   if ( v2 )
   {
@@ -1131,126 +1064,124 @@ UFG::CollisionMeshData *__fastcall UFG::CollisionMeshData::Clone(UFG::CollisionM
   {
     v4 = 0i64;
   }
-  v4->mPropertiesHandleGuid = v1->mPropertiesHandleGuid;
-  v4->mBundleGuid = v1->mBundleGuid;
-  v4->mGeometryType = v1->mGeometryType;
-  v4->mNumVertices = v1->mNumVertices;
-  v4->mNumIndices = v1->mNumIndices;
-  v4->mNumParts = v1->mNumParts;
-  v4->mShapeKeyDepth = v1->mShapeKeyDepth;
-  v4->mSceneNodeName.mUID = v1->mSceneNodeName.mUID;
-  v4->mSceneNodeNameUC.mUID = v1->mSceneNodeNameUC.mUID;
-  v4->mRenderModelGuid = v1->mRenderModelGuid;
-  v4->mParkourGuid = v1->mParkourGuid;
-  v4->mCoverGuid = v1->mCoverGuid;
-  v4->mFlags = v1->mFlags | 2;
-  v4->mCustomDataSlotIndex = v1->mCustomDataSlotIndex;
-  v5 = v1->mCentreOfMass.y;
-  v6 = v1->mCentreOfMass.z;
-  v4->mCentreOfMass.x = v1->mCentreOfMass.x;
-  v4->mCentreOfMass.y = v5;
-  v4->mCentreOfMass.z = v6;
-  v7 = v1->mInertiaTensorRow0.y;
-  v8 = v1->mInertiaTensorRow0.z;
-  v4->mInertiaTensorRow0.x = v1->mInertiaTensorRow0.x;
+  v4->mPropertiesHandleGuid = this->mPropertiesHandleGuid;
+  v4->mBundleGuid = this->mBundleGuid;
+  v4->mGeometryType = this->mGeometryType;
+  v4->mNumVertices = this->mNumVertices;
+  v4->mNumIndices = this->mNumIndices;
+  v4->mNumParts = this->mNumParts;
+  v4->mShapeKeyDepth = this->mShapeKeyDepth;
+  v4->mSceneNodeName.mUID = this->mSceneNodeName.mUID;
+  v4->mSceneNodeNameUC.mUID = this->mSceneNodeNameUC.mUID;
+  v4->mRenderModelGuid = this->mRenderModelGuid;
+  v4->mParkourGuid = this->mParkourGuid;
+  v4->mCoverGuid = this->mCoverGuid;
+  v4->mFlags = this->mFlags | 2;
+  v4->mCustomDataSlotIndex = this->mCustomDataSlotIndex;
+  y = this->mCentreOfMass.y;
+  z = this->mCentreOfMass.z;
+  v4->mCentreOfMass.x = this->mCentreOfMass.x;
+  v4->mCentreOfMass.y = y;
+  v4->mCentreOfMass.z = z;
+  v7 = this->mInertiaTensorRow0.y;
+  v8 = this->mInertiaTensorRow0.z;
+  v4->mInertiaTensorRow0.x = this->mInertiaTensorRow0.x;
   v4->mInertiaTensorRow0.y = v7;
   v4->mInertiaTensorRow0.z = v8;
-  v9 = v1->mInertiaTensorRow1.y;
-  v10 = v1->mInertiaTensorRow1.z;
-  v4->mInertiaTensorRow1.x = v1->mInertiaTensorRow1.x;
+  v9 = this->mInertiaTensorRow1.y;
+  v10 = this->mInertiaTensorRow1.z;
+  v4->mInertiaTensorRow1.x = this->mInertiaTensorRow1.x;
   v4->mInertiaTensorRow1.y = v9;
   v4->mInertiaTensorRow1.z = v10;
-  v11 = v1->mInertiaTensorRow2.y;
-  v12 = v1->mInertiaTensorRow2.z;
-  v4->mInertiaTensorRow2.x = v1->mInertiaTensorRow2.x;
+  v11 = this->mInertiaTensorRow2.y;
+  v12 = this->mInertiaTensorRow2.z;
+  v4->mInertiaTensorRow2.x = this->mInertiaTensorRow2.x;
   v4->mInertiaTensorRow2.y = v11;
   v4->mInertiaTensorRow2.z = v12;
-  v4->mMass = v1->mMass;
-  v13 = &v4->mParts.mOffset;
-  v14 = v1->mParts.mOffset;
-  if ( v14 && (v15 = (signed __int64)&v1->mParts + v14) != 0 )
-    v16 = v15 - (_QWORD)v13;
+  v4->mMass = this->mMass;
+  p_mParts = (char *)&v4->mParts;
+  mOffset = this->mParts.mOffset;
+  if ( mOffset && (v15 = (char *)&this->mParts + mOffset) != 0i64 )
+    v16 = v15 - p_mParts;
   else
     v16 = 0i64;
-  *v13 = v16;
-  v17 = &v4->mPartDetails.mOffset;
-  v18 = v1->mPartDetails.mOffset;
-  if ( v18 && (v19 = (signed __int64)&v1->mPartDetails + v18) != 0 )
-    v20 = v19 - (_QWORD)v17;
+  *(_QWORD *)p_mParts = v16;
+  p_mPartDetails = (char *)&v4->mPartDetails;
+  v18 = this->mPartDetails.mOffset;
+  if ( v18 && (v19 = (char *)&this->mPartDetails + v18) != 0i64 )
+    v20 = v19 - p_mPartDetails;
   else
     v20 = 0i64;
-  *v17 = v20;
-  v21 = &v4->mIndexBuffer.mOffset;
-  v22 = v1->mIndexBuffer.mOffset;
-  if ( v22 && (v23 = (signed __int64)&v1->mIndexBuffer + v22) != 0 )
-    v24 = v23 - (_QWORD)v21;
+  *(_QWORD *)p_mPartDetails = v20;
+  p_mIndexBuffer = (char *)&v4->mIndexBuffer;
+  v22 = this->mIndexBuffer.mOffset;
+  if ( v22 && (v23 = (char *)&this->mIndexBuffer + v22) != 0i64 )
+    v24 = v23 - p_mIndexBuffer;
   else
     v24 = 0i64;
-  *v21 = v24;
-  v25 = &v4->mVertexBuffer.mOffset;
-  v26 = v1->mVertexBuffer.mOffset;
-  if ( v26 && (v27 = (signed __int64)&v1->mVertexBuffer + v26) != 0 )
-    v28 = v27 - (_QWORD)v25;
+  *(_QWORD *)p_mIndexBuffer = v24;
+  p_mVertexBuffer = (char *)&v4->mVertexBuffer;
+  v26 = this->mVertexBuffer.mOffset;
+  if ( v26 && (v27 = (char *)&this->mVertexBuffer + v26) != 0i64 )
+    v28 = v27 - p_mVertexBuffer;
   else
     v28 = 0i64;
-  *v25 = v28;
+  *(_QWORD *)p_mVertexBuffer = v28;
   v4->mRemoveTerminalsMoppModifierList = 0i64;
   v4->mFractureConnectivity = 0i64;
-  v4->mName.mUID = v1->mName.mUID;
-  v4->mSize = v1->mSize;
-  UFG::qReflectHandleBase::operator=(
-    (UFG::qReflectHandleBase *)&v4->mObjectProperties.mPrev,
-    (UFG::qReflectHandleBase *)&v1->mObjectProperties.mPrev);
-  v29 = v1->mShape;
-  if ( v29->m_type.m_storage == 8 )
+  v4->mName.mUID = this->mName.mUID;
+  v4->mSize = this->mSize;
+  UFG::qReflectHandleBase::operator=(&v4->mObjectProperties, &this->mObjectProperties);
+  mShape = this->mShape;
+  if ( mShape->m_type.m_storage == 8 )
   {
-    v30 = SLODWORD(v29[1].m_userData);
+    m_userData_low = SLODWORD(mShape[1].m_userData);
     array = 0i64;
     v55 = 0;
-    v56 = 2147483648;
-    v58 = v30;
-    if ( (_DWORD)v30 )
+    v56 = 0x80000000;
+    v58 = m_userData_low;
+    if ( (_DWORD)m_userData_low )
     {
-      v31 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v32 = (((8 * v30 + 127) & 0xFFFFFF80) + 15) & 0xFFFFFFF0;
-      v33 = (hkpShape **)v31->m_cur;
-      v34 = (char *)v33 + v32;
-      if ( v32 > v31->m_slabSize || v34 > v31->m_end )
-        v33 = (hkpShape **)hkLifoAllocator::allocateFromNewSlab(v31, v32);
+      Value = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+      v32 = (((8 * m_userData_low + 127) & 0xFFFFFF80) + 15) & 0xFFFFFFF0;
+      m_cur = (hkpShape **)Value->m_cur;
+      v34 = (char *)m_cur + v32;
+      if ( v32 > Value->m_slabSize || v34 > Value->m_end )
+        m_cur = (hkpShape **)hkLifoAllocator::allocateFromNewSlab(Value, v32);
       else
-        v31->m_cur = v34;
+        Value->m_cur = v34;
     }
     else
     {
-      v33 = 0i64;
+      m_cur = 0i64;
     }
-    array = v33;
-    v56 = v30 | 0x80000000;
-    p = v33;
-    v35 = v30;
-    if ( (signed int)v30 > 0 )
+    array = m_cur;
+    v56 = m_userData_low | 0x80000000;
+    p = m_cur;
+    v35 = m_userData_low;
+    if ( (int)m_userData_low > 0 )
     {
       v36 = 0i64;
       v37 = v55;
       do
       {
-        v38 = *(hkpShape **)(v36 + *(_QWORD *)&v29[1].m_type.m_storage);
+        v38 = *(hkpShape **)(v36 + *(_QWORD *)&mShape[1].m_type.m_storage);
         if ( v37 == (v56 & 0x3FFFFFFF) )
         {
-          hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, 8);
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &array, 8);
           v37 = v55;
         }
         array[v37] = v38;
-        v37 = v55++ + 1;
+        v37 = ++v55;
         v36 += 32i64;
         --v35;
       }
       while ( v35 );
     }
     v39 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v40 = (hkpListShape *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v39[11] + 8i64))(v39[11], 144i64);
+    v40 = (hkpListShape *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v39[11] + 8i64))(v39[11], 144i64);
     if ( v40 )
-      hkpListShape::hkpListShape(v40, array, v30, REFERENCE_POLICY_INCREMENT);
+      hkpListShape::hkpListShape(v40, array, m_userData_low, REFERENCE_POLICY_INCREMENT);
     else
       v41 = 0i64;
     v4->mShape = v41;
@@ -1269,25 +1200,22 @@ UFG::CollisionMeshData *__fastcall UFG::CollisionMeshData::Clone(UFG::CollisionM
       v45->m_cur = v42;
     v55 = 0;
     if ( v56 >= 0 )
-      hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-        array,
-        8 * v56);
+      hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, array, 8 * v56);
     array = 0i64;
-    v56 = 2147483648;
+    v56 = 0x80000000;
   }
   else
   {
-    v1->mShape = 0i64;
+    this->mShape = 0i64;
   }
-  v4->mNumFractureConnections = v1->mNumFractureConnections;
-  v48 = &v4->mFractureConnections.mOffset;
-  v49 = v1->mFractureConnections.mOffset;
-  if ( v49 && (v50 = (signed __int64)&v1->mFractureConnections + v49) != 0 )
-    v51 = v50 - (_QWORD)v48;
+  v4->mNumFractureConnections = this->mNumFractureConnections;
+  p_mFractureConnections = (char *)&v4->mFractureConnections;
+  v49 = this->mFractureConnections.mOffset;
+  if ( v49 && (v50 = (char *)&this->mFractureConnections + v49) != 0i64 )
+    v51 = v50 - p_mFractureConnections;
   else
     v51 = 0i64;
-  *v48 = v51;
+  *(_QWORD *)p_mFractureConnections = v51;
   if ( HIDWORD(v4->mObjectProperties.mData[2].mBaseNode.mNeighbours[1]) == 1 )
   {
     v52 = (UFG::FractureConnectivity *)UFG::qMalloc(0x18ui64, UFG::gGlobalNewName, 0i64);
@@ -1310,219 +1238,203 @@ UFG::CollisionMeshData *__fastcall UFG::CollisionMeshData::Clone(UFG::CollisionM
 
 // File Line: 682
 // RVA: 0xA3BF0
-bool __fastcall UFG::CollisionMeshData::ComputeMassProperties(UFG::CollisionMeshData *this, hkMassProperties *massProperties, BitArray256 *fractureState)
+bool __fastcall UFG::CollisionMeshData::ComputeMassProperties(
+        UFG::CollisionMeshData *this,
+        hkMassProperties *massProperties,
+        BitArray256 *fractureState)
 {
-  UFG::CollisionMeshData *v3; // rsi
-  hkResultEnum v4; // ebx
-  unsigned int v5; // er12
-  signed int v6; // er14
+  hkResultEnum m_enum; // ebx
+  unsigned int v5; // r12d
+  int v6; // r14d
   __int64 v7; // r13
   __int64 v8; // r15
-  hkpShape *v9; // rbx
-  __int64 v10; // rax
-  signed __int64 v11; // rcx
-  signed __int64 v12; // r8
-  signed __int64 v13; // rdx
-  signed __int64 v14; // rcx
+  hkpShape *mShape; // rbx
+  __int64 mOffset; // rax
+  char *v11; // rcx
+  char *v12; // r8
+  char *v13; // rdx
+  char *v14; // rcx
   __m128 v15; // xmm2
   __m128 v16; // xmm1
   __m128 v17; // xmm3
-  signed __int64 v18; // rcx
-  int v19; // ecx
-  signed __int64 v20; // rcx
+  char *v18; // rcx
+  int m_size; // ecx
+  __int64 v20; // rcx
   bool v21; // zf
-  __int64 v22; // rcx
+  hkMassElement *v22; // rcx
   hkVector4f v23; // xmm2
   hkVector4f v24; // xmm1
   hkVector4f v25; // xmm3
-  char *array; // [rsp+20h] [rbp-99h]
-  int v28; // [rsp+28h] [rbp-91h]
-  int v29; // [rsp+2Ch] [rbp-8Dh]
-  __int64 v30; // [rsp+30h] [rbp-89h]
-  __int128 v31; // [rsp+40h] [rbp-79h]
-  __m128 v32; // [rsp+50h] [rbp-69h]
-  __m128 v33; // [rsp+60h] [rbp-59h]
-  __m128 v34; // [rsp+70h] [rbp-49h]
-  hkTransformf transformOut; // [rsp+80h] [rbp-39h]
-  __int64 v36; // [rsp+C0h] [rbp+7h]
-  __int64 result; // [rsp+120h] [rbp+67h]
-  hkMassProperties *v38; // [rsp+128h] [rbp+6Fh]
-  BitArray256 *v39; // [rsp+130h] [rbp+77h]
-  __int64 v40; // [rsp+138h] [rbp+7Fh]
+  hkArray<hkMassElement,hkContainerHeapAllocator> array; // [rsp+20h] [rbp-99h] BYREF
+  __int64 v28; // [rsp+30h] [rbp-89h]
+  hkVector4f v29; // [rsp+40h] [rbp-79h]
+  __m128 v30; // [rsp+50h] [rbp-69h]
+  __m128 v31; // [rsp+60h] [rbp-59h]
+  __m128 v32; // [rsp+70h] [rbp-49h]
+  hkTransformf transformOut; // [rsp+80h] [rbp-39h] BYREF
+  __int64 v34; // [rsp+C0h] [rbp+7h]
+  hkMassElement *result; // [rsp+120h] [rbp+67h] BYREF
+  hkMassProperties *v36; // [rsp+128h] [rbp+6Fh]
+  BitArray256 *v37; // [rsp+130h] [rbp+77h]
+  hkMassElement *v38; // [rsp+138h] [rbp+7Fh]
 
-  v39 = fractureState;
-  v38 = massProperties;
-  v36 = -2i64;
-  v3 = this;
-  v4 = 1;
+  v37 = fractureState;
+  v36 = massProperties;
+  v34 = -2i64;
+  m_enum = HK_FAILURE;
   if ( this->mShape->m_type.m_storage == 8 )
   {
-    array = 0i64;
-    v28 = 0;
-    v29 = 2147483648;
+    array.m_data = 0i64;
+    array.m_size = 0;
+    array.m_capacityAndFlags = 0x80000000;
     v5 = 0;
     v6 = 1;
     if ( SLODWORD(this->mShape[1].m_userData) > 0 )
     {
       v7 = 0i64;
       v8 = 0i64;
-      v9 = this->mShape;
+      mShape = this->mShape;
       do
       {
-        if ( !fractureState || !(v6 & fractureState->mBits[v5 >> 5]) )
+        if ( !fractureState || (v6 & fractureState->mBits[v5 >> 5]) == 0 )
         {
+          v28 = 0i64;
+          v29.m_quad = 0i64;
           v30 = 0i64;
           v31 = 0i64;
           v32 = 0i64;
-          v33 = 0i64;
-          v34 = 0i64;
           transformOut.m_rotation.m_col0 = (hkVector4f)transform.m_quad;
           transformOut.m_rotation.m_col1 = (hkVector4f)direction.m_quad;
           transformOut.m_rotation.m_col2 = (hkVector4f)stru_141A71280.m_quad;
           transformOut.m_translation = 0i64;
-          v10 = v3->mPartDetails.mOffset;
-          if ( v10 )
-            v11 = (signed __int64)&v3->mPartDetails + v10;
+          mOffset = this->mPartDetails.mOffset;
+          if ( mOffset )
+            v11 = (char *)&this->mPartDetails + mOffset;
           else
             v11 = 0i64;
-          HIDWORD(v30) = *(_DWORD *)(v11 + v8 + 64);
-          LODWORD(v30) = 1065353216;
-          if ( v10 )
-            v12 = (signed __int64)&v3->mPartDetails + v10;
+          HIDWORD(v28) = *(_DWORD *)&v11[v8 + 64];
+          LODWORD(v28) = 1065353216;
+          if ( mOffset )
+            v12 = (char *)&this->mPartDetails + mOffset;
           else
             v12 = 0i64;
-          if ( v10 )
-            v13 = (signed __int64)&v3->mPartDetails + v10;
+          if ( mOffset )
+            v13 = (char *)&this->mPartDetails + mOffset;
           else
             v13 = 0i64;
-          if ( v10 )
-            v14 = (signed __int64)&v3->mPartDetails + v10;
+          if ( mOffset )
+            v14 = (char *)&this->mPartDetails + mOffset;
           else
             v14 = 0i64;
-          v32 = *(__m128 *)(v14 + v8 + 16);
-          v33 = *(__m128 *)(v13 + v8 + 32);
-          v15 = *(__m128 *)(v12 + v8 + 48);
-          v16 = _mm_unpacklo_ps(v32, v33);
-          v17 = _mm_shuffle_ps(_mm_unpackhi_ps(v32, v33), v15, 228);
-          v32 = _mm_movelh_ps(v16, v15);
-          v33 = _mm_shuffle_ps(_mm_movehl_ps(v32, v16), v15, 212);
-          v34 = v17;
-          if ( v10 )
-            v18 = (signed __int64)&v3->mPartDetails + v10;
+          v30 = *(__m128 *)&v14[v8 + 16];
+          v31 = *(__m128 *)&v13[v8 + 32];
+          v15 = *(__m128 *)&v12[v8 + 48];
+          v16 = _mm_unpacklo_ps(v30, v31);
+          v17 = _mm_shuffle_ps(_mm_unpackhi_ps(v30, v31), v15, 228);
+          v30 = _mm_movelh_ps(v16, v15);
+          v31 = _mm_shuffle_ps(_mm_movehl_ps(v30, v16), v15, 212);
+          v32 = v17;
+          if ( mOffset )
+            v18 = (char *)&this->mPartDetails + mOffset;
           else
             v18 = 0i64;
-          v31 = *(_OWORD *)(v18 + v8);
+          v29.m_quad = *(__m128 *)&v18[v8];
           hkQsTransformf::copyToTransformNoScale(
-            (hkQsTransformf *)(*(_QWORD *)(v7 + *(_QWORD *)&v9[1].m_type.m_storage) + 64i64),
+            (hkQsTransformf *)(*(_QWORD *)(v7 + *(_QWORD *)&mShape[1].m_type.m_storage) + 64i64),
             &transformOut);
-          v19 = v28;
-          if ( v28 == (v29 & 0x3FFFFFFF) )
+          m_size = array.m_size;
+          if ( array.m_size == (array.m_capacityAndFlags & 0x3FFFFFFF) )
           {
-            hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, 144);
-            v19 = v28;
+            hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &array, 144);
+            m_size = array.m_size;
           }
-          v20 = 144i64 * v19;
-          v21 = &array[v20] == 0i64;
-          v22 = (__int64)&array[v20];
+          v20 = m_size;
+          v21 = &array.m_data[v20] == 0;
+          v22 = &array.m_data[v20];
           result = v22;
-          v40 = v22;
+          v38 = v22;
           if ( !v21 )
           {
-            *(_QWORD *)v22 = v30;
-            *(_OWORD *)(v22 + 16) = v31;
-            *(__m128 *)(v22 + 32) = v32;
-            *(__m128 *)(v22 + 48) = v33;
-            *(__m128 *)(v22 + 64) = v34;
+            *(_QWORD *)&v22->m_properties.m_volume = v28;
+            v22->m_properties.m_centerOfMass = (hkVector4f)v29.m_quad;
+            v22->m_properties.m_inertiaTensor.m_col0.m_quad = v30;
+            v22->m_properties.m_inertiaTensor.m_col1.m_quad = v31;
+            v22->m_properties.m_inertiaTensor.m_col2.m_quad = v32;
             v23.m_quad = (__m128)transformOut.m_rotation.m_col1;
             v24.m_quad = (__m128)transformOut.m_rotation.m_col2;
             v25.m_quad = (__m128)transformOut.m_translation;
-            *(hkVector4f *)(v22 + 80) = transformOut.m_rotation.m_col0;
-            *(hkVector4f *)(v22 + 96) = (hkVector4f)v23.m_quad;
-            *(hkVector4f *)(v22 + 112) = (hkVector4f)v24.m_quad;
-            *(hkVector4f *)(v22 + 128) = (hkVector4f)v25.m_quad;
+            v22->m_transform.m_rotation.m_col0 = transformOut.m_rotation.m_col0;
+            v22->m_transform.m_rotation.m_col1 = (hkVector4f)v23.m_quad;
+            v22->m_transform.m_rotation.m_col2 = (hkVector4f)v24.m_quad;
+            v22->m_transform.m_translation = (hkVector4f)v25.m_quad;
           }
-          ++v28;
-          fractureState = v39;
+          ++array.m_size;
+          fractureState = v37;
         }
         ++v5;
         v6 = __ROL4__(v6, 1);
         v8 += 96i64;
         v7 += 32i64;
       }
-      while ( (signed int)v5 < SLODWORD(v9[1].m_userData) );
-      v4 = 1;
-      massProperties = v38;
+      while ( (signed int)v5 < SLODWORD(mShape[1].m_userData) );
+      m_enum = HK_FAILURE;
+      massProperties = v36;
     }
-    if ( v28 )
-      v4 = hkInertiaTensorComputer::combineMassProperties(
-             (hkResult *)&result,
-             (hkArray<hkMassElement,hkContainerHeapAllocator> *)&array,
-             massProperties)->m_enum;
-    v28 = 0;
-    if ( v29 >= 0 )
+    if ( array.m_size )
+      m_enum = hkInertiaTensorComputer::combineMassProperties((hkResult *)&result, &array, massProperties)->m_enum;
+    array.m_size = 0;
+    if ( array.m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-        array,
-        144 * (v29 & 0x3FFFFFFF));
-    array = 0i64;
-    v29 = 2147483648;
+        &hkContainerHeapAllocator::s_alloc,
+        array.m_data,
+        144 * (array.m_capacityAndFlags & 0x3FFFFFFF));
+    array.m_data = 0i64;
+    array.m_capacityAndFlags = 0x80000000;
   }
-  return v4 == 0;
+  return m_enum == HK_SUCCESS;
 }
 
 // File Line: 811
 // RVA: 0x97630
 void __fastcall UFG::CollisionInstanceResource::CollisionInstanceResource(UFG::CollisionInstanceResource *this)
 {
-  UFG::CollisionInstanceResource *v1; // rbx
-  unsigned __int64 v2; // rdx
-  __int64 v3; // rax
-  signed __int64 v4; // r9
-  signed __int64 v5; // r10
-  unsigned __int64 v6; // r9
-  signed __int64 v7; // r8
-  signed __int64 v8; // r9
-  UFG::CollisionInstanceData *v9; // rcx
-  signed __int64 v10; // rax
-  unsigned int v11; // eax
-  UFG::CollisionInstanceData::Part *v12; // rcx
+  UFG::CollisionInstanceData **v2; // rdx
+  __int64 mNumInstances; // rax
+  __int64 v4; // r9
+  __int64 v5; // r10
+  UFG::CollisionInstanceData *v6; // rcx
+  UFG::CollisionInstanceData::Part *v7; // rax
+  unsigned int i; // eax
+  UFG::CollisionInstanceData::Part *v9; // rcx
+  UFG::CollisionInstanceData *v10; // [rsp+50h] [rbp+18h]
 
-  v1 = this;
-  UFG::qResourceData::qResourceData((UFG::qResourceData *)&this->mNode);
-  v2 = ((unsigned __int64)v1[1].mNode.mChild + 7) & 0xFFFFFFFFFFFFFFF0ui64;
-  v1->mData = (UFG::CollisionInstanceData **)v2;
-  v3 = v1->mNumInstances;
-  v4 = v2 + 8 * v3;
+  UFG::qResourceData::qResourceData(this);
+  v2 = (UFG::CollisionInstanceData **)(((unsigned __int64)this[1].mNode.mChild + 7) & 0xFFFFFFFFFFFFFFF0ui64);
+  this->mData = v2;
+  mNumInstances = this->mNumInstances;
+  v4 = (__int64)&v2[mNumInstances];
   v5 = 0i64;
-  if ( (_DWORD)v3 )
+  if ( (_DWORD)mNumInstances )
   {
     do
     {
-      v6 = (v4 + 15) & 0xFFFFFFFFFFFFFFF0ui64;
-      v7 = v5;
-      v1->mData[v5] = (UFG::CollisionInstanceData *)v6;
-      v8 = v6 + 112;
-      v9 = v1->mData[v5];
-      v10 = 0i64;
-      if ( v9->mNumParts )
-        v10 = v8;
-      v9->mParts = (UFG::CollisionInstanceData::Part *)v10;
-      v11 = 0;
-      if ( v1->mData[v7]->mNumParts )
+      v10 = (UFG::CollisionInstanceData *)((v4 + 15) & 0xFFFFFFFFFFFFFFF0ui64);
+      this->mData[v5] = v10;
+      v6 = this->mData[v5];
+      v7 = 0i64;
+      if ( v6->mNumParts )
+        v7 = (UFG::CollisionInstanceData::Part *)&v10[1];
+      v6->mParts = v7;
+      for ( i = 0; i < this->mData[v5]->mNumParts; ++i )
       {
-        do
-        {
-          v12 = &v1->mData[v7]->mParts[v11];
-          v12->mSimObject.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v12->mSimObject.mPrev;
-          v12->mSimObject.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v12->mSimObject.mPrev;
-          ++v11;
-        }
-        while ( v11 < v1->mData[v7]->mNumParts );
+        v9 = &this->mData[v5]->mParts[i];
+        v9->mSimObject.mPrev = &v9->mSimObject;
+        v9->mSimObject.mNext = &v9->mSimObject;
       }
-      v4 = 32i64 * v1->mData[v7]->mNumParts + v8;
+      v4 = (__int64)&v10[1] + 32 * this->mData[v5]->mNumParts;
       v5 = (unsigned int)(v5 + 1);
     }
-    while ( (unsigned int)v5 < v1->mNumInstances );
+    while ( (unsigned int)v5 < this->mNumInstances );
   }
 }
 
@@ -1544,19 +1456,26 @@ void __fastcall UFG::CollisionInstanceData::CollisionInstanceData(UFG::Collision
 
 // File Line: 888
 // RVA: 0xB0540
-void __fastcall UFG::CollisionInstanceData::Set(UFG::CollisionInstanceData *this, unsigned int guid, unsigned int flags, __int64 name, hkVector4f *pos, hkQuaternionf *orient, unsigned int collisionModelGuid)
+void __fastcall UFG::CollisionInstanceData::Set(
+        UFG::CollisionInstanceData *this,
+        unsigned int guid,
+        unsigned int flags,
+        unsigned int *name,
+        hkVector4f *pos,
+        hkQuaternionf *orient,
+        unsigned int collisionModelGuid)
 {
-  __m128 v7; // xmm0
+  __m128 m_quad; // xmm0
   __m128 v8; // xmm1
 
   this->mPhysicsComponent = 0i64;
   this->mFlags = flags;
   this->mCollisionModelGuid = collisionModelGuid;
   this->mInstanceGuid = guid;
-  this->mSimObjectName.mUID = *(_DWORD *)name;
-  v7 = pos->m_quad;
+  this->mSimObjectName.mUID = *name;
+  m_quad = pos->m_quad;
   this->mPosition = (hkVector4f)pos->m_quad;
-  this->mInitialPosition.m_quad = v7;
+  this->mInitialPosition.m_quad = m_quad;
   v8 = orient->m_vec.m_quad;
   this->mOrientation = (hkQuaternionf)orient->m_vec.m_quad;
   this->mInitialOrientation.m_vec.m_quad = v8;
@@ -1564,38 +1483,35 @@ void __fastcall UFG::CollisionInstanceData::Set(UFG::CollisionInstanceData *this
 
 // File Line: 904
 // RVA: 0xB2B70
-UFG::CollisionInstanceData *__fastcall UFG::CollisionInstanceData::SplitInstanceUsingConnectivity(UFG::FractureConnectivity *graph, UFG::CollisionInstanceData *parent, hkTransformf *transform)
+UFG::CollisionInstanceData *__fastcall UFG::CollisionInstanceData::SplitInstanceUsingConnectivity(
+        UFG::FractureConnectivity *graph,
+        UFG::CollisionInstanceData *parent,
+        hkTransformf *transform)
 {
-  hkTransformf *v3; // rsi
-  UFG::CollisionInstanceData *v4; // rbp
-  UFG::FractureConnectivity *v5; // r14
-  unsigned int v6; // edi
+  unsigned int size; // edi
   char *v7; // rax
   char *v8; // rbx
   hkVector4f v9; // xmm6
-  signed __int64 v10; // r8
+  __int64 v10; // r8
   __int64 v11; // r10
   __int64 v12; // r11
-  signed __int64 v13; // rcx
-  __int64 v14; // r9
+  UFG::CollisionInstanceData::Part *v13; // rcx
+  UFG::SimObject *m_pPointer; // r9
   __int64 v15; // rdx
   _QWORD *v16; // rax
-  __int64 v17; // rax
-  __int64 v18; // rdx
-  _QWORD *v19; // rax
-  hkQuaternionf v21; // [rsp+40h] [rbp-48h]
-  char *result; // [rsp+98h] [rbp+10h]
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v18; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
+  hkQuaternionf v21; // [rsp+40h] [rbp-48h] BYREF
+  char *result; // [rsp+98h] [rbp+10h] BYREF
   __int64 v23; // [rsp+A0h] [rbp+18h]
   __int64 v24; // [rsp+A8h] [rbp+20h]
 
-  v3 = transform;
-  v4 = parent;
-  v5 = graph;
   if ( parent->mNumParts )
-    v6 = graph->mNodes.size;
+    size = graph->mNodes.size;
   else
-    v6 = 0;
-  v7 = UFG::qMemoryPool::Allocate(&gPhysicsMemoryPool, 32 * v6 + 112, "CollisionInstanceData1", 0i64, 1u);
+    size = 0;
+  v7 = UFG::qMemoryPool::Allocate(&gPhysicsMemoryPool, 32 * size + 112, "CollisionInstanceData1", 0i64, 1u);
   v8 = v7;
   result = v7;
   v23 = (__int64)v7;
@@ -1616,8 +1532,8 @@ UFG::CollisionInstanceData *__fastcall UFG::CollisionInstanceData::SplitInstance
   {
     v8 = 0i64;
   }
-  v9.m_quad = (__m128)v3->m_translation;
-  hkQuaternionf::set(&v21, &v3->m_rotation);
+  v9.m_quad = (__m128)transform->m_translation;
+  hkQuaternionf::set(&v21, &transform->m_rotation);
   *((hkVector4f *)v8 + 2) = (hkVector4f)v9.m_quad;
   *((hkVector4f *)v8 + 3) = (hkVector4f)v9.m_quad;
   *(hkQuaternionf *)v8 = (hkQuaternionf)v21.m_vec.m_quad;
@@ -1626,19 +1542,19 @@ UFG::CollisionInstanceData *__fastcall UFG::CollisionInstanceData::SplitInstance
   *((UFG::qSymbol *)v8 + 18) = (UFG::qSymbol)UFG::qSymbol::create_from_string(
                                                (UFG::qSymbol *)&result,
                                                "SplitInstanceUsingConnectivity")->mUID;
-  *((_DWORD *)v8 + 19) = v6;
+  *((_DWORD *)v8 + 19) = size;
   *((_QWORD *)v8 + 11) = 0i64;
   *((_QWORD *)v8 + 12) = 0i64;
-  v10 = (signed __int64)(v8 + 112);
+  v10 = (__int64)(v8 + 112);
   result = v8 + 112;
   *((_QWORD *)v8 + 10) = v8 + 112;
-  if ( v6 )
+  if ( size )
   {
     v11 = 0i64;
-    v12 = v6;
+    v12 = size;
     do
     {
-      v13 = (signed __int64)&v4->mParts[v5->mNodes.p[v11]->partIdx];
+      v13 = &parent->mParts[graph->mNodes.p[v11]->partIdx];
       v23 = v10;
       if ( v10 )
       {
@@ -1648,8 +1564,8 @@ UFG::CollisionInstanceData *__fastcall UFG::CollisionInstanceData::SplitInstance
         *(_QWORD *)(v10 + 16) = 0i64;
         *(_DWORD *)(v10 + 24) = -1;
       }
-      *(_DWORD *)(v10 + 28) = *(_DWORD *)(v13 + 28);
-      v14 = *(_QWORD *)(v13 + 16);
+      *(_DWORD *)(v10 + 28) = v13->mInstanceUid;
+      m_pPointer = v13->mSimObject.m_pPointer;
       if ( *(_QWORD *)(v10 + 16) )
       {
         v15 = *(_QWORD *)v10;
@@ -1659,26 +1575,26 @@ UFG::CollisionInstanceData *__fastcall UFG::CollisionInstanceData::SplitInstance
         *(_QWORD *)v10 = v10;
         *(_QWORD *)(v10 + 8) = v10;
       }
-      *(_QWORD *)(v10 + 16) = v14;
-      if ( v14 )
+      *(_QWORD *)(v10 + 16) = m_pPointer;
+      if ( m_pPointer )
       {
-        v17 = *(_QWORD *)(v14 + 8);
-        *(_QWORD *)(v17 + 8) = v10;
-        *(_QWORD *)v10 = v17;
-        *(_QWORD *)(v10 + 8) = v14 + 8;
-        *(_QWORD *)(v14 + 8) = v10;
+        mPrev = m_pPointer->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+        mPrev->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)v10;
+        *(_QWORD *)v10 = mPrev;
+        *(_QWORD *)(v10 + 8) = &m_pPointer->m_SafePointerList;
+        m_pPointer->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)v10;
       }
-      if ( *(_QWORD *)(v13 + 16) )
+      if ( v13->mSimObject.m_pPointer )
       {
-        v18 = *(_QWORD *)v13;
-        v19 = *(_QWORD **)(v13 + 8);
-        *(_QWORD *)(v18 + 8) = v19;
-        *v19 = v18;
-        *(_QWORD *)v13 = v13;
-        *(_QWORD *)(v13 + 8) = v13;
+        v18 = v13->mSimObject.mPrev;
+        mNext = v13->mSimObject.mNext;
+        v18->mNext = mNext;
+        mNext->mPrev = v18;
+        v13->mSimObject.mPrev = &v13->mSimObject;
+        v13->mSimObject.mNext = &v13->mSimObject;
       }
-      *(_QWORD *)(v13 + 16) = 0i64;
-      *(_DWORD *)(v10 + 24) = *(_DWORD *)(v13 + 24);
+      v13->mSimObject.m_pPointer = 0i64;
+      *(_DWORD *)(v10 + 24) = v13->mSimObjectGuid.mUID;
       v10 += 32i64;
       result = (char *)v10;
       ++v11;
@@ -1691,73 +1607,70 @@ UFG::CollisionInstanceData *__fastcall UFG::CollisionInstanceData::SplitInstance
 
 // File Line: 987
 // RVA: 0xA9680
-UFG::BaseProperty *__fastcall UFG::GetBaseProperty(hkpShape *shape, unsigned int key)
+UFG::BaseProperty *__fastcall UFG::GetBaseProperty(hkpShape *shape, int key)
 {
-  signed int v2; // er9
-  unsigned __int64 v3; // r8
+  unsigned __int64 m_userData; // r8
   signed int v4; // edx
-  UFG::BaseProperty *result; // rax
 
-  v2 = key;
   if ( key == -1 )
     return 0i64;
   if ( shape->m_type.m_storage != 9 )
     return 0i64;
-  v3 = shape[2].m_userData;
-  if ( !v3 || (*(_BYTE *)(v3 + 41) - 1) & 0xFD )
+  m_userData = shape[2].m_userData;
+  if ( !m_userData || ((*(_BYTE *)(m_userData + 41) - 1) & 0xFD) != 0 )
     return 0i64;
-  v4 = (key & 0x7FFFFFFF) >> (32 - *(_BYTE *)(v3 + 232));
-  if ( v2 < 0 )
-    result = *(UFG::BaseProperty **)(*(_QWORD *)(v3 + 256) + 80i64 * v4 + 16);
+  v4 = (key & 0x7FFFFFFFu) >> (32 - *(_BYTE *)(m_userData + 232));
+  if ( key < 0 )
+    return *(UFG::BaseProperty **)(*(_QWORD *)(m_userData + 256) + 80i64 * v4 + 16);
   else
-    result = *(UFG::BaseProperty **)(*(_QWORD *)(v3 + 240) + 144i64 * v4 + 16);
-  return result;
+    return *(UFG::BaseProperty **)(*(_QWORD *)(m_userData + 240) + 144i64 * v4 + 16);
 }
 
 // File Line: 1022
 // RVA: 0xAB6B0
-void __fastcall UFG::GetTransformFromShapeKey(hkTransformf *transformOut, hkpShape *shape, unsigned int key)
+void __fastcall UFG::GetTransformFromShapeKey(hkTransformf *transformOut, hkpShape *shape, int key)
 {
-  char v3; // al
+  char m_storage; // al
 
-  v3 = shape->m_type.m_storage;
-  if ( v3 == 9 )
+  m_storage = shape->m_type.m_storage;
+  if ( m_storage == 9 )
   {
     hkQsTransformf::copyToTransformNoScale(
-      (hkQsTransformf *)(*(_QWORD *)(*(_QWORD *)(shape[2].m_userData + 48) + 32i64 * (signed int)key) + 64i64),
+      (hkQsTransformf *)(*(_QWORD *)(*(_QWORD *)(shape[2].m_userData + 48) + 32i64 * key) + 64i64),
       transformOut);
   }
-  else if ( v3 == 8 )
+  else if ( m_storage == 8 )
   {
     hkQsTransformf::copyToTransformNoScale(
-      (hkQsTransformf *)(*(_QWORD *)(32i64 * (signed int)key + *(_QWORD *)&shape[1].m_type.m_storage) + 64i64),
+      (hkQsTransformf *)(*(_QWORD *)(32i64 * key + *(_QWORD *)&shape[1].m_type.m_storage) + 64i64),
       transformOut);
   }
 }
 
 // File Line: 1046
 // RVA: 0xA9500
-void __fastcall UFG::GetAabbFromShapeKey(hkAabb *aabbOut, hkTransformf *localToWorld, hkpShape *shape, unsigned int key)
+void __fastcall UFG::GetAabbFromShapeKey(hkAabb *aabbOut, hkTransformf *localToWorld, hkpShape *shape, int key)
 {
-  char v4; // al
+  char m_storage; // al
 
-  v4 = shape->m_type.m_storage;
-  if ( v4 == 9 )
+  m_storage = shape->m_type.m_storage;
+  if ( m_storage == 9 )
   {
-    (*(void (__fastcall **)(_QWORD, hkTransformf *, signed __int64, hkAabb *))(**(_QWORD **)(32i64 * (signed int)key
-                                                                                           + *(_QWORD *)(shape[2].m_userData + 48))
-                                                                             + 32i64))(
-      *(_QWORD *)(32i64 * (signed int)key + *(_QWORD *)(shape[2].m_userData + 48)),
+    (*(void (__fastcall **)(_QWORD, hkTransformf *, __int64, hkAabb *))(**(_QWORD **)(32i64 * key
+                                                                                    + *(_QWORD *)(shape[2].m_userData
+                                                                                                + 48))
+                                                                      + 32i64))(
+      *(_QWORD *)(32i64 * key + *(_QWORD *)(shape[2].m_userData + 48)),
       localToWorld,
-      32i64 * (signed int)key,
+      32i64 * key,
       aabbOut);
   }
-  else if ( v4 == 8 )
+  else if ( m_storage == 8 )
   {
-    (*(void (__fastcall **)(_QWORD, hkTransformf *, hkpShape *, hkAabb *))(**(_QWORD **)(32i64 * (signed int)key
+    (*(void (__fastcall **)(_QWORD, hkTransformf *, hkpShape *, hkAabb *))(**(_QWORD **)(32i64 * key
                                                                                        + *(_QWORD *)&shape[1].m_type.m_storage)
                                                                          + 32i64))(
-      *(_QWORD *)(32i64 * (signed int)key + *(_QWORD *)&shape[1].m_type.m_storage),
+      *(_QWORD *)(32i64 * key + *(_QWORD *)&shape[1].m_type.m_storage),
       localToWorld,
       shape,
       aabbOut);

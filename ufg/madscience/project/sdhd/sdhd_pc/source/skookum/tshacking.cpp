@@ -3,6 +3,6 @@
 void __fastcall UFG::TSHacking::MthdC_is_successful(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
   if ( ppResult )
-    *ppResult = (SSInstance *)SSBoolean::pool_new(UFG::UIHKScreenHackingMinigame::m_bWon);
+    *ppResult = SSBoolean::pool_new(UFG::UIHKScreenHackingMinigame::m_bWon);
 }
 

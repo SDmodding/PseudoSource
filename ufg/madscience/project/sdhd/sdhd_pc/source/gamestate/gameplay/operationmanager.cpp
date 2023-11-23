@@ -31,16 +31,16 @@ UFG::OperationManager *__fastcall UFG::OperationManager::Get()
 // RVA: 0x419680
 void __fastcall UFG::OperationManager::Update(UFG::OperationManager *this, float deltaSeconds)
 {
-  UFG::qBaseTreeRB *v2; // rbx
+  UFG::qTreeRB<UFG::GOperation,UFG::GOperation,1> *p_m_GOperations; // rbx
   UFG::qBaseTreeRB *i; // rax
-  signed __int64 v4; // rdx
+  __int64 v4; // rdx
 
-  v2 = &this->m_GOperations.mTree;
+  p_m_GOperations = &this->m_GOperations;
   for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&this->m_GOperations);
         ;
-        i = UFG::qBaseTreeRB::GetNext(v2, (UFG::qBaseNodeRB *)(v4 + 8)) )
+        i = UFG::qBaseTreeRB::GetNext(&p_m_GOperations->mTree, (UFG::qBaseNodeRB *)(v4 + 8)) )
   {
-    v4 = (signed __int64)(i ? &i[-1].mCount : 0i64);
+    v4 = i ? (__int64)&i[-1].mCount : 0i64;
     if ( !v4 )
       break;
   }

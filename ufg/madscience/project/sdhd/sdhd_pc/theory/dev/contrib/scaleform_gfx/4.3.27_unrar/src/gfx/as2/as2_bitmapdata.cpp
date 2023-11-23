@@ -1,73 +1,53 @@
 // File Line: 29
 // RVA: 0x6C79F0
-void __fastcall Scaleform::GFx::AS2::BitmapData::BitmapData(Scaleform::GFx::AS2::BitmapData *this, Scaleform::GFx::AS2::Environment *penv)
+void __fastcall Scaleform::GFx::AS2::BitmapData::BitmapData(
+        Scaleform::GFx::AS2::BitmapData *this,
+        Scaleform::GFx::AS2::Environment *penv)
 {
-  Scaleform::GFx::AS2::Environment *v2; // rbx
-  Scaleform::GFx::AS2::BitmapData *v3; // rdi
-
-  v2 = penv;
-  v3 = this;
-  Scaleform::GFx::AS2::Object::Object((Scaleform::GFx::AS2::Object *)&this->vfptr, penv);
-  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::BitmapData::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
-  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::BitmapData::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
-  v3->pImageRes.pObject = 0i64;
-  v3->pMovieDef.pObject = 0i64;
-  Scaleform::GFx::AS2::BitmapData::commonInit(v3, v2);
+  Scaleform::GFx::AS2::Object::Object(this, penv);
+  this->Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>::Scaleform::GFx::AS2::RefCountBaseGC<323>::vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::BitmapData::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  this->Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ObjectInterface::vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::BitmapData::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+  this->pImageRes.pObject = 0i64;
+  this->pMovieDef.pObject = 0i64;
+  Scaleform::GFx::AS2::BitmapData::commonInit(this, penv);
 }
 
 // File Line: 34
 // RVA: 0x724F50
-void __fastcall Scaleform::GFx::AS2::BitmapData::commonInit(Scaleform::GFx::AS2::BitmapData *this, Scaleform::GFx::AS2::Environment *penv)
+void __fastcall Scaleform::GFx::AS2::BitmapData::commonInit(
+        Scaleform::GFx::AS2::BitmapData *this,
+        Scaleform::GFx::AS2::Environment *penv)
 {
-  Scaleform::GFx::AS2::Environment *v2; // rsi
-  Scaleform::GFx::AS2::BitmapData *v3; // rbx
-  Scaleform::GFx::AS2::Object *v4; // rax
-  signed __int64 v5; // rbx
+  Scaleform::GFx::AS2::Object *Prototype; // rax
+  Scaleform::GFx::AS2::ObjectInterface *v5; // rbx
   Scaleform::GFx::ASString *v6; // rax
-  Scaleform::GFx::ASStringNode *v7; // rcx
+  Scaleform::GFx::ASStringNode *pNode; // rcx
   bool v8; // zf
   Scaleform::GFx::ASString *v9; // rax
   Scaleform::GFx::ASStringNode *v10; // rcx
-  Scaleform::GFx::AS2::Value v11; // [rsp+38h] [rbp-30h]
-  char v12; // [rsp+70h] [rbp+8h]
-  Scaleform::GFx::ASString result; // [rsp+78h] [rbp+10h]
+  Scaleform::GFx::AS2::Value v11; // [rsp+38h] [rbp-30h] BYREF
+  char v12; // [rsp+70h] [rbp+8h] BYREF
+  Scaleform::GFx::ASString result; // [rsp+78h] [rbp+10h] BYREF
 
-  v2 = penv;
-  v3 = this;
-  v4 = Scaleform::GFx::AS2::GlobalContext::GetPrototype(penv->StringContext.pContext, ASBuiltin_BitmapData);
-  v5 = (signed __int64)&v3->vfptr;
-  (*(void (__fastcall **)(signed __int64, Scaleform::GFx::AS2::ASStringContext *, Scaleform::GFx::AS2::Object *))(*(_QWORD *)v5 + 104i64))(
-    v5,
-    &v2->StringContext,
-    v4);
+  Prototype = Scaleform::GFx::AS2::GlobalContext::GetPrototype(penv->StringContext.pContext, ASBuiltin_BitmapData);
+  v5 = &this->Scaleform::GFx::AS2::ObjectInterface;
+  v5->vfptr->Set__proto__(v5, &penv->StringContext, Prototype);
   v12 = 4;
   v11.T.Type = 10;
-  v6 = Scaleform::GFx::AS2::Environment::CreateConstString(v2, &result, "width");
-  (*(void (__fastcall **)(signed __int64, Scaleform::GFx::AS2::ASStringContext *, Scaleform::GFx::ASString *, Scaleform::GFx::AS2::Value *, char *))(*(_QWORD *)v5 + 80i64))(
-    v5,
-    &v2->StringContext,
-    v6,
-    &v11,
-    &v12);
-  v7 = result.pNode;
-  v8 = result.pNode->RefCount == 1;
-  --v7->RefCount;
+  v6 = Scaleform::GFx::AS2::Environment::CreateConstString(penv, &result, "width");
+  v5->vfptr->SetMemberRaw(v5, &penv->StringContext, v6, &v11, (Scaleform::GFx::AS2::PropFlags *)&v12);
+  pNode = result.pNode;
+  v8 = result.pNode->RefCount-- == 1;
   if ( v8 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v7);
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
   if ( v11.T.Type >= 5u )
     Scaleform::GFx::AS2::Value::DropRefs(&v11);
   v12 = 4;
   v11.T.Type = 10;
-  v9 = Scaleform::GFx::AS2::Environment::CreateConstString(v2, &result, "height");
-  (*(void (__fastcall **)(signed __int64, Scaleform::GFx::AS2::ASStringContext *, Scaleform::GFx::ASString *, Scaleform::GFx::AS2::Value *, char *))(*(_QWORD *)v5 + 80i64))(
-    v5,
-    &v2->StringContext,
-    v9,
-    &v11,
-    &v12);
+  v9 = Scaleform::GFx::AS2::Environment::CreateConstString(penv, &result, "height");
+  v5->vfptr->SetMemberRaw(v5, &penv->StringContext, v9, &v11, (Scaleform::GFx::AS2::PropFlags *)&v12);
   v10 = result.pNode;
-  v8 = result.pNode->RefCount == 1;
-  --v10->RefCount;
+  v8 = result.pNode->RefCount-- == 1;
   if ( v8 )
     Scaleform::GFx::ASStringNode::ReleaseNode(v10);
   if ( v11.T.Type >= 5u )
@@ -76,13 +56,13 @@ void __fastcall Scaleform::GFx::AS2::BitmapData::commonInit(Scaleform::GFx::AS2:
 
 // File Line: 44
 // RVA: 0x6C12F0
-Scaleform::GFx::AS2::BitmapData *__fastcall Scaleform::GFx::AS2::GFx_LoadBitmap<Scaleform::GFx::ASString>(Scaleform::GFx::AS2::Environment *penv, Scaleform::GFx::ASString *linkageId)
+Scaleform::GFx::AS2::BitmapData *__fastcall Scaleform::GFx::AS2::GFx_LoadBitmap<Scaleform::GFx::ASString>(
+        Scaleform::GFx::AS2::Environment *penv,
+        Scaleform::GFx::ASString *linkageId)
 {
-  Scaleform::GFx::ASString *v2; // r14
-  Scaleform::GFx::AS2::Environment *v3; // rsi
-  Scaleform::GFx::InteractiveObject *v4; // rcx
-  const char *v5; // rbx
-  Scaleform::GFx::MovieImpl *v6; // rdi
+  Scaleform::GFx::InteractiveObject *Target; // rcx
+  const char *pData; // rbx
+  Scaleform::GFx::MovieImpl *pMovieImpl; // rdi
   Scaleform::GFx::MovieDefImpl *v7; // rax
   Scaleform::GFx::AS2::BitmapData *v8; // rbx
   Scaleform::GFx::Resource *v9; // rax
@@ -90,192 +70,181 @@ Scaleform::GFx::AS2::BitmapData *__fastcall Scaleform::GFx::AS2::GFx_LoadBitmap<
   Scaleform::GFx::MovieDef *v11; // rdi
   Scaleform::GFx::AS2::BitmapData *v12; // rax
   Scaleform::GFx::AS2::BitmapData *v13; // rax
-  Scaleform::Ptr<Scaleform::GFx::ImageResource> result; // [rsp+60h] [rbp+8h]
+  Scaleform::Ptr<Scaleform::GFx::ImageResource> result; // [rsp+60h] [rbp+8h] BYREF
   Scaleform::GFx::MovieDef *v16; // [rsp+68h] [rbp+10h]
-  Scaleform::MemoryHeap *v17; // [rsp+70h] [rbp+18h]
+  Scaleform::MemoryHeap *pHeap; // [rsp+70h] [rbp+18h]
   Scaleform::GFx::AS2::BitmapData *v18; // [rsp+78h] [rbp+20h]
 
-  v2 = linkageId;
-  v3 = penv;
-  v4 = penv->Target;
-  v5 = linkageId->pNode->pData;
-  v6 = v4->pASRoot->pMovieImpl;
-  v7 = (Scaleform::GFx::MovieDefImpl *)((__int64 (__cdecl *)(Scaleform::GFx::InteractiveObject *))v4->vfptr[66].__vecDelDtor)(v4);
-  Scaleform::GFx::MovieImpl::GetImageResourceByLinkageId(v6, &result, v7, v5);
+  Target = penv->Target;
+  pData = linkageId->pNode->pData;
+  pMovieImpl = Target->pASRoot->pMovieImpl;
+  v7 = (Scaleform::GFx::MovieDefImpl *)((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))Target->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[66].__vecDelDtor)(Target);
+  Scaleform::GFx::MovieImpl::GetImageResourceByLinkageId(pMovieImpl, &result, v7, pData);
   if ( result.pObject )
   {
-    v9 = (Scaleform::GFx::Resource *)((__int64 (*)(void))v3->Target->vfptr[66].__vecDelDtor)();
+    v9 = (Scaleform::GFx::Resource *)((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))penv->Target->vfptr[66].__vecDelDtor)(penv->Target);
     v11 = (Scaleform::GFx::MovieDef *)v9;
     if ( v9 )
       Scaleform::Render::RenderBuffer::AddRef(v9);
     v16 = v11;
     if ( v11 )
     {
-      v17 = v3->StringContext.pContext->pHeap;
-      v12 = (Scaleform::GFx::AS2::BitmapData *)((__int64 (__fastcall *)(__int64, signed __int64))v17->vfptr->Alloc)(
+      pHeap = penv->StringContext.pContext->pHeap;
+      v12 = (Scaleform::GFx::AS2::BitmapData *)((__int64 (__fastcall *)(__int64, __int64))pHeap->vfptr->Alloc)(
                                                  v10,
                                                  112i64);
       v18 = v12;
       if ( v12 )
       {
-        Scaleform::GFx::AS2::BitmapData::BitmapData(v12, v3);
+        Scaleform::GFx::AS2::BitmapData::BitmapData(v12, penv);
         v8 = v13;
       }
       else
       {
         v8 = 0i64;
       }
-      Scaleform::GFx::AS2::BitmapData::SetImage(v8, v3, result.pObject, v11);
+      Scaleform::GFx::AS2::BitmapData::SetImage(v8, penv, result.pObject, v11);
     }
     else
     {
       v8 = 0i64;
     }
     if ( v11 )
-      Scaleform::GFx::Resource::Release((Scaleform::GFx::Resource *)&v11->vfptr);
+      Scaleform::GFx::Resource::Release(v11);
   }
   else
   {
     Scaleform::GFx::AS2::Environment::LogScriptWarning(
-      v3,
+      penv,
       "BitmapData::LoadBitmap: LoadMovieImageCallback failed to load image \"%s\"",
-      v2->pNode->pData);
+      linkageId->pNode->pData);
     v8 = 0i64;
   }
   if ( result.pObject )
-    Scaleform::GFx::Resource::Release((Scaleform::GFx::Resource *)&result.pObject->vfptr);
+    Scaleform::GFx::Resource::Release(result.pObject);
   return v8;
 }
 
 // File Line: 70
 // RVA: 0x7148E0
-void __fastcall Scaleform::GFx::AS2::BitmapData::SetImage(Scaleform::GFx::AS2::BitmapData *this, Scaleform::GFx::AS2::Environment *penv, Scaleform::GFx::ImageResource *pimg, Scaleform::GFx::MovieDef *pmovieDef)
+void __fastcall Scaleform::GFx::AS2::BitmapData::SetImage(
+        Scaleform::GFx::AS2::BitmapData *this,
+        Scaleform::GFx::AS2::Environment *penv,
+        Scaleform::GFx::ImageResource *pimg,
+        Scaleform::GFx::MovieDef *pmovieDef)
 {
-  Scaleform::GFx::MovieDef *v4; // rdi
-  Scaleform::GFx::ImageResource *v5; // rbx
-  Scaleform::GFx::AS2::Environment *v6; // r15
-  Scaleform::GFx::AS2::BitmapData *v7; // rsi
-  Scaleform::GFx::Resource *v8; // rcx
-  Scaleform::GFx::Resource *v9; // rcx
+  Scaleform::GFx::ImageResource *pObject; // rcx
+  Scaleform::GFx::MovieDef *v9; // rcx
   Scaleform::GFx::AS2::RectangleObject *v10; // r14
   Scaleform::GFx::AS2::Value *v11; // rax
   Scaleform::GFx::AS2::Value *v12; // rbx
   Scaleform::GFx::ASString *v13; // rax
-  Scaleform::GFx::ASStringNode *v14; // rcx
-  bool v15; // zf
-  unsigned int v16; // eax
-  Scaleform::GFx::AS2::Value v; // [rsp+30h] [rbp-99h]
-  int v18; // [rsp+50h] [rbp-79h]
-  int v19; // [rsp+54h] [rbp-75h]
-  int v20; // [rsp+58h] [rbp-71h]
-  int v21; // [rsp+5Ch] [rbp-6Dh]
-  __int64 v22; // [rsp+60h] [rbp-69h]
-  char ptr; // [rsp+70h] [rbp-59h]
-  Scaleform::GFx::AS2::Value v24; // [rsp+90h] [rbp-39h]
-  Scaleform::GFx::AS2::Value v25; // [rsp+B0h] [rbp-19h]
-  Scaleform::GFx::AS2::Value v26; // [rsp+D0h] [rbp+7h]
-  char v27; // [rsp+130h] [rbp+67h]
-  Scaleform::GFx::ASString result; // [rsp+138h] [rbp+6Fh]
-  __int64 v29; // [rsp+140h] [rbp+77h]
-  Scaleform::GFx::AS2::RectangleObject *v30; // [rsp+148h] [rbp+7Fh]
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  unsigned int RefCount; // eax
+  Scaleform::GFx::AS2::Value v; // [rsp+30h] [rbp-99h] BYREF
+  int v18[4]; // [rsp+50h] [rbp-79h] BYREF
+  __int64 v19; // [rsp+60h] [rbp-69h]
+  Scaleform::GFx::AS2::Value ptr; // [rsp+70h] [rbp-59h] BYREF
+  Scaleform::GFx::AS2::Value v21; // [rsp+90h] [rbp-39h] BYREF
+  Scaleform::GFx::AS2::Value v22; // [rsp+B0h] [rbp-19h] BYREF
+  Scaleform::GFx::AS2::Value v23; // [rsp+D0h] [rbp+7h] BYREF
+  char v24; // [rsp+130h] [rbp+67h] BYREF
+  Scaleform::GFx::ASString result; // [rsp+138h] [rbp+6Fh] BYREF
+  __int64 v26; // [rsp+140h] [rbp+77h]
+  Scaleform::GFx::AS2::RectangleObject *v27; // [rsp+148h] [rbp+7Fh]
 
-  v22 = -2i64;
-  v4 = pmovieDef;
-  v5 = pimg;
-  v6 = penv;
-  v7 = this;
+  v19 = -2i64;
   if ( pimg )
-    Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)&pimg->vfptr);
-  v8 = (Scaleform::GFx::Resource *)&v7->pImageRes.pObject->vfptr;
-  if ( v8 )
-    Scaleform::GFx::Resource::Release(v8);
-  v7->pImageRes.pObject = v5;
-  if ( v4 )
-    Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)&v4->vfptr);
-  v9 = (Scaleform::GFx::Resource *)&v7->pMovieDef.pObject->vfptr;
+    Scaleform::Render::RenderBuffer::AddRef(pimg);
+  pObject = this->pImageRes.pObject;
+  if ( pObject )
+    Scaleform::GFx::Resource::Release(pObject);
+  this->pImageRes.pObject = pimg;
+  if ( pmovieDef )
+    Scaleform::Render::RenderBuffer::AddRef(pmovieDef);
+  v9 = this->pMovieDef.pObject;
   if ( v9 )
     Scaleform::GFx::Resource::Release(v9);
-  v7->pMovieDef.pObject = v4;
-  v29 = 0i64;
-  v5->pImage->vfptr[6].__vecDelDtor((Scaleform::RefCountImplCore *)&v5->pImage->vfptr, (unsigned int)&v18);
+  this->pMovieDef.pObject = pmovieDef;
+  v26 = 0i64;
+  pimg->pImage->vfptr[6].__vecDelDtor(pimg->pImage, (unsigned int)v18);
   `eh vector constructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::Value);
   v.T.Type = 4;
   v.NV.Int32Value = 0;
-  Scaleform::GFx::AS2::Value::operator=((Scaleform::GFx::AS2::Value *)&ptr, &v, 0i64);
+  Scaleform::GFx::AS2::Value::operator=(&ptr, &v);
   if ( v.T.Type >= 5u )
     Scaleform::GFx::AS2::Value::DropRefs(&v);
   v.T.Type = 4;
   v.NV.Int32Value = 0;
-  Scaleform::GFx::AS2::Value::operator=(&v24, &v, 0i64);
+  Scaleform::GFx::AS2::Value::operator=(&v21, &v);
   if ( v.T.Type >= 5u )
     Scaleform::GFx::AS2::Value::DropRefs(&v);
   v.T.Type = 3;
-  v.NV.NumberValue = (float)(v20 - v18);
-  Scaleform::GFx::AS2::Value::operator=(&v25, &v, 0i64);
+  v.NV.NumberValue = (float)(v18[2] - v18[0]);
+  Scaleform::GFx::AS2::Value::operator=(&v22, &v);
   if ( v.T.Type >= 5u )
     Scaleform::GFx::AS2::Value::DropRefs(&v);
   v.T.Type = 3;
-  v.NV.NumberValue = (float)(v21 - v19);
-  Scaleform::GFx::AS2::Value::operator=(&v26, &v, 0i64);
+  v.NV.NumberValue = (float)(v18[3] - v18[1]);
+  Scaleform::GFx::AS2::Value::operator=(&v23, &v);
   if ( v.T.Type >= 5u )
     Scaleform::GFx::AS2::Value::DropRefs(&v);
   v10 = (Scaleform::GFx::AS2::RectangleObject *)Scaleform::GFx::AS2::Environment::OperatorNew(
-                                                  v6,
-                                                  v6->StringContext.pContext->FlashGeomPackage,
-                                                  (Scaleform::GFx::ASString *)&v6->StringContext.pContext->pMovieRoot->pASMovieRoot.pObject[10].AVMVersion,
+                                                  penv,
+                                                  penv->StringContext.pContext->FlashGeomPackage,
+                                                  (Scaleform::GFx::ASString *)&penv->StringContext.pContext->pMovieRoot->pASMovieRoot.pObject[10].AVMVersion,
                                                   0,
                                                   -1);
-  v30 = v10;
-  Scaleform::GFx::AS2::RectangleObject::SetProperties(v10, &v6->StringContext, (Scaleform::GFx::AS2::Value *)&ptr);
-  v27 = 4;
-  Scaleform::GFx::AS2::Value::Value(&v, (Scaleform::GFx::AS2::Object *)&v10->vfptr);
+  v27 = v10;
+  Scaleform::GFx::AS2::RectangleObject::SetProperties(v10, &penv->StringContext, &ptr);
+  v24 = 4;
+  Scaleform::GFx::AS2::Value::Value(&v, (Scaleform::GFx::ASStringNode *)v10);
   v12 = v11;
-  v13 = Scaleform::GFx::AS2::Environment::CreateConstString(v6, &result, "rectangle");
-  v7->vfptr->SetMemberRaw(
-    (Scaleform::GFx::AS2::ObjectInterface *)&v7->vfptr,
-    &v6->StringContext,
+  v13 = Scaleform::GFx::AS2::Environment::CreateConstString(penv, &result, "rectangle");
+  this->Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ObjectInterface::vfptr->SetMemberRaw(
+    &this->Scaleform::GFx::AS2::ObjectInterface,
+    &penv->StringContext,
     v13,
     v12,
-    (Scaleform::GFx::AS2::PropFlags *)&v27);
-  v14 = result.pNode;
-  v15 = result.pNode->RefCount == 1;
-  --v14->RefCount;
-  if ( v15 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v14);
+    (Scaleform::GFx::AS2::PropFlags *)&v24);
+  pNode = result.pNode;
+  if ( result.pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
   if ( v.T.Type >= 5u )
     Scaleform::GFx::AS2::Value::DropRefs(&v);
   if ( v10 )
   {
-    v16 = v10->RefCount;
-    if ( v16 & 0x3FFFFFF )
+    RefCount = v10->RefCount;
+    if ( (RefCount & 0x3FFFFFF) != 0 )
     {
-      v10->RefCount = v16 - 1;
-      Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v10->vfptr);
+      v10->RefCount = RefCount - 1;
+      Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v10);
     }
   }
   `eh vector destructor iterator(&ptr, 0x20ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::AS2::Value::~Value);
-}
+}erator(&ptr, 0x20ui64, 4, (void 
 
 // File Line: 100
 // RVA: 0x7172E0
-bool __fastcall Scaleform::GFx::AS2::BitmapData::SetMember(Scaleform::GFx::AS2::BitmapData *this, Scaleform::GFx::AS2::Environment *penv, Scaleform::GFx::ASString *name, Scaleform::GFx::AS2::Value *val, Scaleform::GFx::AS2::PropFlags *flags)
+bool __fastcall Scaleform::GFx::AS2::BitmapData::SetMember(
+        Scaleform::GFx::AS2::BitmapData *this,
+        Scaleform::GFx::AS2::Environment *penv,
+        Scaleform::GFx::ASString *name,
+        Scaleform::GFx::AS2::Value *val,
+        Scaleform::GFx::AS2::PropFlags *flags)
 {
-  Scaleform::GFx::AS2::BitmapData *v5; // rdi
-  Scaleform::GFx::AS2::Value *v6; // rbx
-  const char *v7; // r11
+  const char *pData; // r11
   __int64 v8; // rax
   __int64 v9; // r10
   char v10; // r9
   char v12; // cl
 
-  v5 = this;
-  v6 = val;
-  v7 = name->pNode->pData;
+  pData = name->pNode->pData;
   v8 = 0i64;
   v9 = 0i64;
   while ( 1 )
   {
-    v10 = v7[v9++];
+    v10 = pData[v9++];
     if ( v10 != aWidth_2[v9 - 1] )
       break;
     if ( v9 == 6 )
@@ -283,24 +252,26 @@ bool __fastcall Scaleform::GFx::AS2::BitmapData::SetMember(Scaleform::GFx::AS2::
   }
   while ( 1 )
   {
-    v12 = v7[v8++];
+    v12 = pData[v8++];
     if ( v12 != aHeight_0[v8 - 1] )
       break;
     if ( v8 == 7 )
       return 1;
   }
-  return Scaleform::GFx::AS2::Object::SetMember((Scaleform::GFx::AS2::Object *)&v5->vfptr, penv, name, v6, flags);
+  return Scaleform::GFx::AS2::Object::SetMember(this, penv, name, val, flags);
 }
 
 // File Line: 107
 // RVA: 0x6F1870
-char __fastcall Scaleform::GFx::AS2::BitmapData::GetMember(Scaleform::GFx::AS2::BitmapData *this, Scaleform::GFx::AS2::Environment *penv, Scaleform::GFx::ASString *name, Scaleform::GFx::AS2::Value *val)
+char __fastcall Scaleform::GFx::AS2::BitmapData::GetMember(
+        Scaleform::GFx::AS2::BitmapData *this,
+        Scaleform::GFx::AS2::Environment *penv,
+        Scaleform::GFx::ASString *name,
+        Scaleform::GFx::AS2::Value *val)
 {
-  Scaleform::GFx::AS2::LocalFrame *v4; // r11
-  Scaleform::GFx::AS2::Value *v5; // rbx
-  Scaleform::GFx::AS2::BitmapData *v6; // rsi
-  signed int v7; // edi
-  const char *v8; // r9
+  Scaleform::GFx::AS2::LocalFrame *pLocalFrame; // r11
+  int v7; // edi
+  const char *pData; // r9
   __int64 v9; // r10
   char v10; // al
   __int64 v11; // rcx
@@ -308,113 +279,109 @@ char __fastcall Scaleform::GFx::AS2::BitmapData::GetMember(Scaleform::GFx::AS2::
   __int64 v13; // rcx
   char v14; // al
   __int64 v15; // rcx
-  char v16; // [rsp+30h] [rbp+8h]
+  char v16; // [rsp+30h] [rbp+8h] BYREF
 
-  v4 = this->ResolveHandler.pLocalFrame;
-  v5 = val;
-  v6 = this;
-  if ( v4 )
+  pLocalFrame = this->ResolveHandler.pLocalFrame;
+  if ( pLocalFrame )
   {
     v7 = 0;
-    v8 = name->pNode->pData;
+    pData = name->pNode->pData;
     v9 = 0i64;
     while ( 1 )
     {
-      v10 = v8[v9++];
+      v10 = pData[v9++];
       if ( v10 != aWidth_2[v9 - 1] )
         break;
       if ( v9 == 6 )
       {
-        v11 = *(_QWORD *)&v4->RefCount;
+        v11 = *(_QWORD *)&pLocalFrame->RefCount;
         if ( v11 )
           v7 = *(_DWORD *)(*(__int64 (__fastcall **)(__int64, char *))(*(_QWORD *)v11 + 40i64))(v11, &v16);
-        if ( v5->T.Type >= 5u )
-          Scaleform::GFx::AS2::Value::DropRefs(v5);
+        if ( val->T.Type >= 5u )
+          Scaleform::GFx::AS2::Value::DropRefs(val);
 LABEL_9:
-        v5->T.Type = 3;
+        val->T.Type = 3;
         result = 1;
-        v5->NV.NumberValue = (double)v7;
+        val->NV.NumberValue = (double)v7;
         return result;
       }
     }
     v13 = 0i64;
     while ( 1 )
     {
-      v14 = v8[v13++];
+      v14 = pData[v13++];
       if ( v14 != aHeight_0[v13 - 1] )
         break;
       if ( v13 == 7 )
       {
-        v15 = *(_QWORD *)&v4->RefCount;
+        v15 = *(_QWORD *)&pLocalFrame->RefCount;
         if ( v15 )
           v7 = *(_DWORD *)((*(__int64 (__fastcall **)(__int64, char *))(*(_QWORD *)v15 + 40i64))(v15, &v16) + 4);
-        if ( v5->T.Type >= 5u )
+        if ( val->T.Type >= 5u )
         {
-          Scaleform::GFx::AS2::Value::DropRefs(v5);
-          v5->T.Type = 3;
+          Scaleform::GFx::AS2::Value::DropRefs(val);
+          val->T.Type = 3;
           result = 1;
-          v5->NV.NumberValue = (double)v7;
+          val->NV.NumberValue = (double)v7;
           return result;
         }
         goto LABEL_9;
       }
     }
   }
-  return ((__int64 (__fastcall *)(Scaleform::GFx::AS2::BitmapData *, Scaleform::GFx::AS2::ASStringContext *, Scaleform::GFx::ASString *, Scaleform::GFx::AS2::Value *))v6->vfptr[3].~RefCountBaseGC<323>)(
-           v6,
+  return ((__int64 (__fastcall *)(Scaleform::GFx::AS2::BitmapData *, Scaleform::GFx::AS2::ASStringContext *, Scaleform::GFx::ASString *, Scaleform::GFx::AS2::Value *))this->Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>::Scaleform::GFx::AS2::RefCountBaseGC<323>::vfptr[3].~RefCountBaseGC<323>)(
+           this,
            &penv->StringContext,
            name,
-           v5);
+           val);
 }
 
 // File Line: 127
 // RVA: 0x6B8770
 void __fastcall Scaleform::GFx::AS2::GFx_StageFuncStub(Scaleform::GFx::AS2::FnCall *fn)
 {
-  Scaleform::GFx::AS2::Value *v1; // rbx
+  Scaleform::GFx::AS2::Value *Result; // rbx
 
-  v1 = fn->Result;
-  Scaleform::GFx::AS2::Value::DropRefs(fn->Result);
-  v1->T.Type = 0;
+  Result = fn->Result;
+  Scaleform::GFx::AS2::Value::DropRefs(Result);
+  Result->T.Type = 0;
 }
 
 // File Line: 159
 // RVA: 0x6F8D80
 void __fastcall Scaleform::GFx::AS2::BitmapDataCtorFunction::GlobalCtor(Scaleform::GFx::AS2::FnCall *fn)
 {
-  Scaleform::GFx::AS2::FnCall *v1; // rsi
   Scaleform::GFx::AS2::Object *v2; // rax
   Scaleform::GFx::AS2::BitmapData *v3; // rdi
-  Scaleform::GFx::AS2::Environment *v4; // rbx
-  unsigned int v5; // eax
+  Scaleform::GFx::AS2::Environment *Env; // rbx
+  unsigned int RefCount; // eax
 
-  v1 = fn;
-  v2 = (Scaleform::GFx::AS2::Object *)((__int64 (__fastcall *)(Scaleform::GFx::AS2::FnCall *, signed __int64))fn->Env->StringContext.pContext->pHeap->vfptr->Alloc)(
+  v2 = (Scaleform::GFx::AS2::Object *)((__int64 (__fastcall *)(Scaleform::GFx::AS2::FnCall *, __int64))fn->Env->StringContext.pContext->pHeap->vfptr->Alloc)(
                                         fn,
                                         112i64);
   v3 = (Scaleform::GFx::AS2::BitmapData *)v2;
   if ( v2 )
   {
-    v4 = v1->Env;
-    Scaleform::GFx::AS2::Object::Object(v2, v1->Env);
-    v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::BitmapData::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
-    v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::BitmapData::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+    Env = fn->Env;
+    Scaleform::GFx::AS2::Object::Object(v2, Env);
+    v3->Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>::Scaleform::GFx::AS2::RefCountBaseGC<323>::vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::BitmapData::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v3->Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ObjectInterface::vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::BitmapData::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
     v3->pImageRes.pObject = 0i64;
     v3->pMovieDef.pObject = 0i64;
-    Scaleform::GFx::AS2::BitmapData::commonInit(v3, v4);
+    Scaleform::GFx::AS2::BitmapData::commonInit(v3, Env);
   }
   else
   {
     v3 = 0i64;
   }
-  Scaleform::GFx::AS2::Value::SetAsObject(v1->Result, (Scaleform::GFx::AS2::Object *)&v3->vfptr);
+  Scaleform::GFx::AS2::Value::SetAsObject(fn->Result, v3);
   if ( v3 )
   {
-    v5 = v3->RefCount;
-    if ( v5 & 0x3FFFFFF )
+    RefCount = v3->RefCount;
+    if ( (RefCount & 0x3FFFFFF) != 0 )
     {
-      v3->RefCount = v5 - 1;
-      Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v3->vfptr);
+      v3->RefCount = RefCount - 1;
+      Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v3);
     }
   }
 }
@@ -423,127 +390,119 @@ void __fastcall Scaleform::GFx::AS2::BitmapDataCtorFunction::GlobalCtor(Scalefor
 // RVA: 0x6BC2B0
 void __fastcall Scaleform::GFx::AS2::BitmapDataCtorFunction::LoadBitmapA(Scaleform::GFx::AS2::FnCall *fn)
 {
-  Scaleform::GFx::AS2::FnCall *v1; // rdi
   Scaleform::GFx::AS2::Value *v2; // rbx
-  unsigned int v3; // er9
-  Scaleform::GFx::AS2::Environment *v4; // r8
+  unsigned int FirstArgBottomIndex; // r9d
+  Scaleform::GFx::AS2::Environment *Env; // r8
   Scaleform::GFx::AS2::Value *v5; // r10
   Scaleform::GFx::AS2::BitmapData *v6; // rax
   Scaleform::GFx::AS2::RefCountBaseGC<323> *v7; // rbx
-  unsigned int v8; // eax
-  Scaleform::GFx::ASStringNode *v9; // rcx
-  bool v10; // zf
-  Scaleform::GFx::ASString result; // [rsp+40h] [rbp+8h]
+  unsigned int RefCount; // eax
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  Scaleform::GFx::ASString result; // [rsp+40h] [rbp+8h] BYREF
   Scaleform::GFx::AS2::BitmapData *v12; // [rsp+48h] [rbp+10h]
 
-  v1 = fn;
   v2 = fn->Result;
-  Scaleform::GFx::AS2::Value::DropRefs(fn->Result);
+  Scaleform::GFx::AS2::Value::DropRefs(v2);
   v2->T.Type = 1;
-  if ( v1->NArgs >= 1 )
+  if ( fn->NArgs >= 1 )
   {
-    v3 = v1->FirstArgBottomIndex;
-    v4 = v1->Env;
+    FirstArgBottomIndex = fn->FirstArgBottomIndex;
+    Env = fn->Env;
     v5 = 0i64;
-    if ( v3 <= 32 * ((unsigned int)v4->Stack.Pages.Data.Size - 1)
-             + (unsigned int)((_QWORD)((char *)v4->Stack.pCurrent - (char *)v4->Stack.pPageStart) >> 5) )
-      v5 = &v4->Stack.Pages.Data.Data[v3 >> 5]->Values[v3 & 0x1F];
-    Scaleform::GFx::AS2::Value::ToString(v5, &result, v4, -1);
-    v6 = Scaleform::GFx::AS2::GFx_LoadBitmap<Scaleform::GFx::ASString>(v1->Env, &result);
-    v7 = (Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v6->vfptr;
+    if ( FirstArgBottomIndex <= 32 * ((unsigned int)Env->Stack.Pages.Data.Size - 1)
+                              + (unsigned int)(Env->Stack.pCurrent - Env->Stack.pPageStart) )
+      v5 = &Env->Stack.Pages.Data.Data[FirstArgBottomIndex >> 5]->Values[FirstArgBottomIndex & 0x1F];
+    Scaleform::GFx::AS2::Value::ToString(v5, &result, Env, -1);
+    v6 = Scaleform::GFx::AS2::GFx_LoadBitmap<Scaleform::GFx::ASString>(fn->Env, &result);
+    v7 = v6;
     v12 = v6;
     if ( v6 )
-      Scaleform::GFx::AS2::Value::SetAsObject(v1->Result, (Scaleform::GFx::AS2::Object *)&v6->vfptr);
+      Scaleform::GFx::AS2::Value::SetAsObject(fn->Result, v6);
     if ( v7 )
     {
-      v8 = v7->RefCount;
-      if ( v8 & 0x3FFFFFF )
+      RefCount = v7->RefCount;
+      if ( (RefCount & 0x3FFFFFF) != 0 )
       {
-        v7->RefCount = v8 - 1;
+        v7->RefCount = RefCount - 1;
         Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v7);
       }
     }
-    v9 = result.pNode;
-    v10 = result.pNode->RefCount == 1;
-    --v9->RefCount;
-    if ( v10 )
-      Scaleform::GFx::ASStringNode::ReleaseNode(v9);
+    pNode = result.pNode;
+    if ( result.pNode->RefCount-- == 1 )
+      Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
   }
 }
 
 // File Line: 179
 // RVA: 0x70C6D0
-Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::BitmapDataCtorFunction::Register(Scaleform::GFx::AS2::FunctionRef *result, Scaleform::GFx::AS2::GlobalContext *pgc)
+Scaleform::MemoryHeap *__fastcall Scaleform::GFx::AS2::BitmapDataCtorFunction::Register(
+        Scaleform::MemoryHeap *result,
+        Scaleform::GFx::AS2::GlobalContext *pgc)
 {
-  Scaleform::GFx::AS2::GlobalContext *v2; // r14
-  Scaleform::GFx::AS2::FunctionRef *v3; // rsi
   Scaleform::GFx::AS2::Object *v4; // rax
   __int64 v5; // rcx
-  Scaleform::GFx::AS2::ObjectInterface *v6; // rbx
-  Scaleform::GFx::AS2::Object *v7; // r15
-  Scaleform::GFx::AS2::RefCountBaseGC<323> *v8; // rcx
-  unsigned int v9; // eax
+  Scaleform::GFx::AS2::FunctionObject *v6; // rbx
+  Scaleform::GFx::AS2::Object *Prototype; // r15
+  Scaleform::GFx::AS2::RefCountBaseGC<323> *pObject; // rcx
+  unsigned int RefCount; // eax
   __int64 v10; // rdi
   Scaleform::GFx::AS2::Object *v11; // rbx
   Scaleform::GFx::AS2::RefCountBaseGC<323> *v12; // rcx
   unsigned int v13; // eax
-  Scaleform::MemoryHeap *v14; // rbx
-  Scaleform::GFx::ASStringNode *v15; // rax
-  Scaleform::GFx::AS2::LocalFrame *v16; // rdx
-  int v17; // eax
-  Scaleform::GFx::AS2::ASStringContext psc; // [rsp+48h] [rbp-38h]
-  Scaleform::GFx::AS2::Value v20; // [rsp+58h] [rbp-28h]
-  Scaleform::Ptr<Scaleform::GFx::AS2::Object> objproto; // [rsp+C8h] [rbp+48h]
-  Scaleform::MemoryHeap *flags; // [rsp+D0h] [rbp+50h]
-  Scaleform::Ptr<Scaleform::GFx::AS2::Object> *v23; // [rsp+D8h] [rbp+58h]
+  Scaleform::GFx::ASStringNode *vfptr; // rax
+  Scaleform::GFx::AS2::LocalFrame *pPrev; // rdx
+  int v16; // eax
+  Scaleform::GFx::AS2::ASStringContext psc; // [rsp+48h] [rbp-38h] BYREF
+  Scaleform::GFx::AS2::Value v19; // [rsp+58h] [rbp-28h] BYREF
+  Scaleform::Ptr<Scaleform::GFx::AS2::Object> objproto; // [rsp+C8h] [rbp+48h] BYREF
+  Scaleform::MemoryHeap *flags; // [rsp+D0h] [rbp+50h] BYREF
+  void *pHeap; // [rsp+D8h] [rbp+58h]
 
-  v2 = pgc;
-  v3 = result;
   psc.pContext = pgc;
   psc.SWFVersion = 8;
   flags = pgc->pHeap;
-  v4 = (Scaleform::GFx::AS2::Object *)flags->vfptr->Alloc((Scaleform::MemoryHeap *)result, 104ui64, 0i64);
-  v6 = (Scaleform::GFx::AS2::ObjectInterface *)v4;
-  v23 = (Scaleform::Ptr<Scaleform::GFx::AS2::Object> *)v4;
+  v4 = (Scaleform::GFx::AS2::Object *)flags->vfptr->Alloc(result, 104ui64, 0i64);
+  v6 = (Scaleform::GFx::AS2::FunctionObject *)v4;
+  pHeap = v4;
   if ( v4 )
   {
     Scaleform::GFx::AS2::Object::Object(v4, &psc);
-    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
-    v6[2].vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
-    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
-    v6[2].vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
-    v6[6].vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)Scaleform::GFx::AS2::BitmapDataCtorFunction::GlobalCtor;
-    v7 = Scaleform::GFx::AS2::GlobalContext::GetPrototype(psc.pContext, ASBuiltin_Function);
-    if ( !v6[2].pProto.pObject )
+    v6->Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>::Scaleform::GFx::AS2::RefCountBaseGC<323>::vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v6->Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ObjectInterface::vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+    v6->Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>::Scaleform::GFx::AS2::RefCountBaseGC<323>::vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v6->Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ObjectInterface::vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+    v6[1].Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>::Scaleform::GFx::AS2::RefCountBaseGC<323>::vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)Scaleform::GFx::AS2::BitmapDataCtorFunction::GlobalCtor;
+    Prototype = Scaleform::GFx::AS2::GlobalContext::GetPrototype(psc.pContext, ASBuiltin_Function);
+    if ( !v6->pProto.pObject )
     {
       LOBYTE(objproto.pObject) = 3;
-      v20.T.Type = 10;
-      v6[2].vfptr->SetMemberRaw(
-        v6 + 2,
+      v19.T.Type = 10;
+      v6->Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ObjectInterface::vfptr->SetMemberRaw(
+        &v6->Scaleform::GFx::AS2::ObjectInterface,
         &psc,
         (Scaleform::GFx::ASString *)&psc.pContext->pMovieRoot->pASMovieRoot.pObject[23].pMovieImpl,
-        &v20,
+        &v19,
         (Scaleform::GFx::AS2::PropFlags *)&objproto);
-      if ( v20.T.Type >= 5u )
-        Scaleform::GFx::AS2::Value::DropRefs(&v20);
+      if ( v19.T.Type >= 5u )
+        Scaleform::GFx::AS2::Value::DropRefs(&v19);
     }
-    if ( v7 )
-      v7->RefCount = (v7->RefCount + 1) & 0x8FFFFFFF;
-    v8 = (Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v6[2].pProto.pObject->vfptr;
-    if ( v8 )
+    if ( Prototype )
+      Prototype->RefCount = (Prototype->RefCount + 1) & 0x8FFFFFFF;
+    pObject = v6->pProto.pObject;
+    if ( pObject )
     {
-      v9 = v8->RefCount;
-      if ( v9 & 0x3FFFFFF )
+      RefCount = pObject->RefCount;
+      if ( (RefCount & 0x3FFFFFF) != 0 )
       {
-        v8->RefCount = v9 - 1;
-        Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v8);
+        pObject->RefCount = RefCount - 1;
+        Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(pObject);
       }
     }
-    v6[2].pProto.pObject = v7;
-    v6->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::BitmapDataCtorFunction::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
-    v6[2].vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::BitmapDataCtorFunction::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+    v6->pProto.pObject = Prototype;
+    v6->Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>::Scaleform::GFx::AS2::RefCountBaseGC<323>::vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::BitmapDataCtorFunction::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v6->Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ObjectInterface::vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::BitmapDataCtorFunction::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
     Scaleform::GFx::AS2::NameFunction::AddConstMembers(
-      v6 + 2,
+      &v6->Scaleform::GFx::AS2::ObjectInterface,
       &psc,
       Scaleform::GFx::AS2::BitmapDataCtorFunction::StaticFunctionTable,
       7);
@@ -552,14 +511,14 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::BitmapDataCtor
   {
     v6 = 0i64;
   }
-  v3->Flags = 0;
-  v3->Function = (Scaleform::GFx::AS2::FunctionObject *)v6;
-  v3->pLocalFrame = 0i64;
-  v23 = (Scaleform::Ptr<Scaleform::GFx::AS2::Object> *)v2->pHeap;
-  v10 = ((__int64 (__fastcall *)(__int64, signed __int64, _QWORD))v23->pObject->pWatchpoints)(v5, 176i64, 0i64);
+  LOBYTE(result->pNext) = 0;
+  result->vfptr = (Scaleform::MemoryHeapVtbl *)v6;
+  result->pPrev = 0i64;
+  pHeap = pgc->pHeap;
+  v10 = (*(__int64 (__fastcall **)(__int64, __int64, _QWORD))(*(_QWORD *)pHeap + 80i64))(v5, 176i64, 0i64);
   if ( v10 )
   {
-    v11 = Scaleform::GFx::AS2::GlobalContext::GetPrototype(v2, ASBuiltin_Object);
+    v11 = Scaleform::GFx::AS2::GlobalContext::GetPrototype(pgc, ASBuiltin_Object);
     Scaleform::GFx::AS2::Object::Object((Scaleform::GFx::AS2::Object *)v10, &psc);
     *(_QWORD *)v10 = &Scaleform::GFx::AS2::BitmapData::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
     *(_QWORD *)(v10 + 32) = &Scaleform::GFx::AS2::BitmapData::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
@@ -568,15 +527,15 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::BitmapDataCtor
     if ( !*(_QWORD *)(v10 + 40) )
     {
       LOBYTE(objproto.pObject) = 3;
-      v20.T.Type = 10;
+      v19.T.Type = 10;
       (*(void (__fastcall **)(__int64, Scaleform::GFx::AS2::ASStringContext *, Scaleform::GFx::MovieImpl **, Scaleform::GFx::AS2::Value *, Scaleform::Ptr<Scaleform::GFx::AS2::Object> *))(*(_QWORD *)(v10 + 32) + 80i64))(
         v10 + 32,
         &psc,
         &psc.pContext->pMovieRoot->pASMovieRoot.pObject[23].pMovieImpl,
-        &v20,
+        &v19,
         &objproto);
-      if ( v20.T.Type >= 5u )
-        Scaleform::GFx::AS2::Value::DropRefs(&v20);
+      if ( v19.T.Type >= 5u )
+        Scaleform::GFx::AS2::Value::DropRefs(&v19);
     }
     if ( v11 )
       v11->RefCount = (v11->RefCount + 1) & 0x8FFFFFFF;
@@ -584,34 +543,33 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::BitmapDataCtor
     if ( v12 )
     {
       v13 = v12->RefCount;
-      if ( v13 & 0x3FFFFFF )
+      if ( (v13 & 0x3FFFFFF) != 0 )
       {
         v12->RefCount = v13 - 1;
         Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v12);
       }
     }
     *(_QWORD *)(v10 + 40) = v11;
-    v14 = (Scaleform::MemoryHeap *)(v10 + 112);
-    flags = v14;
-    v14->vfptr = (Scaleform::MemoryHeapVtbl *)&Scaleform::GFx::AS2::GASPrototypeBase::`vftable;
-    LOBYTE(v14->SelfSize) = 0;
-    v14->pPrev = 0i64;
-    v14->pNext = 0i64;
+    flags = (Scaleform::MemoryHeap *)(v10 + 112);
+    *(_QWORD *)(v10 + 112) = &Scaleform::GFx::AS2::GASPrototypeBase::`vftable;
+    *(_BYTE *)(v10 + 136) = 0;
+    *(_QWORD *)(v10 + 120) = 0i64;
+    *(_QWORD *)(v10 + 128) = 0i64;
     *(_BYTE *)(v10 + 160) = 0;
     *(_QWORD *)(v10 + 144) = 0i64;
     *(_QWORD *)(v10 + 152) = 0i64;
     *(_QWORD *)(v10 + 168) = 0i64;
     *(_QWORD *)v10 = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::BitmapData,Scaleform::GFx::AS2::Environment>::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
     *(_QWORD *)(v10 + 32) = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::BitmapData,Scaleform::GFx::AS2::Environment>::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
-    v14->vfptr = (Scaleform::MemoryHeapVtbl *)&Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::BitmapData,Scaleform::GFx::AS2::Environment>::`vftable;
+    *(_QWORD *)(v10 + 112) = &Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::BitmapData,Scaleform::GFx::AS2::Environment>::`vftable;
     Scaleform::GFx::AS2::GASPrototypeBase::Init(
       (Scaleform::GFx::AS2::GASPrototypeBase *)(v10 + 112),
       (Scaleform::GFx::AS2::Object *)v10,
       &psc,
-      v3);
+      (Scaleform::GFx::AS2::FunctionRef *)result);
     *(_QWORD *)v10 = &Scaleform::GFx::AS2::BitmapDataProto::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
     *(_QWORD *)(v10 + 32) = &Scaleform::GFx::AS2::BitmapDataProto::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
-    v14->vfptr = (Scaleform::MemoryHeapVtbl *)&Scaleform::GFx::AS2::BitmapDataProto::`vftable;
+    *(_QWORD *)(v10 + 112) = &Scaleform::GFx::AS2::BitmapDataProto::`vftable;
     LOBYTE(flags) = 1;
     Scaleform::GFx::AS2::GASPrototypeBase::InitFunctionMembers(
       (Scaleform::GFx::AS2::GASPrototypeBase *)(v10 + 112),
@@ -625,48 +583,45 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::BitmapDataCtor
     v10 = 0i64;
   }
   flags = (Scaleform::MemoryHeap *)v10;
-  v23 = &objproto;
+  pHeap = &objproto;
   if ( v10 )
     *(_DWORD *)(v10 + 24) = (*(_DWORD *)(v10 + 24) + 1) & 0x8FFFFFFF;
   objproto.pObject = (Scaleform::GFx::AS2::Object *)v10;
   Scaleform::GFx::AS2::GlobalContext::SetPrototype(
-    v2,
+    pgc,
     ASBuiltin_BitmapData,
     (Scaleform::Ptr<Scaleform::GFx::AS2::Object>)&objproto);
-  v20.T.Type = 8;
-  v20.V.FunctionValue.Flags = 0;
-  v15 = (Scaleform::GFx::ASStringNode *)v3->Function;
-  v20.V.pStringNode = v15;
-  if ( v15 )
+  v19.T.Type = 8;
+  v19.V.FunctionValue.Flags = 0;
+  vfptr = (Scaleform::GFx::ASStringNode *)result->vfptr;
+  v19.V.pStringNode = vfptr;
+  if ( vfptr )
   {
-    ++v15->RefCount;
-    v15->RefCount &= 0x8FFFFFFF;
+    ++vfptr->RefCount;
+    vfptr->RefCount &= 0x8FFFFFFF;
   }
-  v20.V.FunctionValue.pLocalFrame = 0i64;
-  v16 = v3->pLocalFrame;
-  if ( v16 )
-    Scaleform::GFx::AS2::FunctionRefBase::SetLocalFrame(
-      (Scaleform::GFx::AS2::FunctionRefBase *)&v20.NV.8,
-      v16,
-      v3->Flags & 1);
+  v19.V.FunctionValue.pLocalFrame = 0i64;
+  pPrev = (Scaleform::GFx::AS2::LocalFrame *)result->pPrev;
+  if ( pPrev )
+    Scaleform::GFx::AS2::FunctionRefBase::SetLocalFrame(&v19.V.FunctionValue, pPrev, (__int64)result->pNext & 1);
   LOBYTE(objproto.pObject) = 0;
-  v2->FlashDisplayPackage->vfptr->SetMemberRaw(
-    (Scaleform::GFx::AS2::ObjectInterface *)&v2->FlashDisplayPackage->vfptr,
+  pgc->FlashDisplayPackage->vfptr->SetMemberRaw(
+    &pgc->FlashDisplayPackage->Scaleform::GFx::AS2::ObjectInterface,
     &psc,
-    (Scaleform::GFx::ASString *)&v2->pMovieRoot->pASMovieRoot.pObject[13].AVMVersion,
-    &v20,
+    (Scaleform::GFx::ASString *)&pgc->pMovieRoot->pASMovieRoot.pObject[13].AVMVersion,
+    &v19,
     (Scaleform::GFx::AS2::PropFlags *)&objproto);
-  if ( v20.T.Type >= 5u )
-    Scaleform::GFx::AS2::Value::DropRefs(&v20);
+  if ( v19.T.Type >= 5u )
+    Scaleform::GFx::AS2::Value::DropRefs(&v19);
   if ( v10 )
   {
-    v17 = *(_DWORD *)(v10 + 24);
-    if ( v17 & 0x3FFFFFF )
+    v16 = *(_DWORD *)(v10 + 24);
+    if ( (v16 & 0x3FFFFFF) != 0 )
     {
-      *(_DWORD *)(v10 + 24) = v17 - 1;
+      *(_DWORD *)(v10 + 24) = v16 - 1;
       Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)v10);
     }
   }
-  return v3;
+  return result;
 }
 

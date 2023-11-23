@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkaiEdgePathFollowingCornerInfoClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 72
@@ -62,7 +62,7 @@ void dynamic_initializer_for__hkaiEdgePathEdgeClass__()
     0i64,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 124
@@ -97,7 +97,7 @@ void dynamic_initializer_for__hkaiEdgePathClass__()
     &hkaiEdgePath_Default,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 197
@@ -109,23 +109,24 @@ hkClass *__fastcall hkaiEdgePath::staticClass()
 
 // File Line: 204
 // RVA: 0xBB67E0
-void __fastcall finishLoadedObjecthkaiEdgePath(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiEdgePath(hkaiEdgePath *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiEdgePath::hkaiEdgePath);
+  if ( p )
+    hkaiEdgePath::hkaiEdgePath(p, finishing);
 }
 
 // File Line: 210
 // RVA: 0xBB6800
-void __fastcall cleanupLoadedObjecthkaiEdgePath(void *p)
+void __fastcall cleanupLoadedObjecthkaiEdgePath(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 214
 // RVA: 0xBB6810
 hkBaseObjectVtbl *__fastcall getVtablehkaiEdgePath()
 {
-  hkaiEdgePath v1; // [rsp+20h] [rbp-48h]
+  hkaiEdgePath v1; // [rsp+20h] [rbp-48h] BYREF
 
   hkaiEdgePath::hkaiEdgePath(&v1, 0);
   return v1.vfptr;
@@ -142,8 +143,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiEdgePathTypeInfo__()
   hkaiEdgePathTypeInfo.m_typeName = "hkaiEdgePath";
   hkaiEdgePathTypeInfo.m_vtable = result;
   hkaiEdgePathTypeInfo.m_scopedName = "!hkaiEdgePath";
-  hkaiEdgePathTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiEdgePath;
-  hkaiEdgePathTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiEdgePath;
+  hkaiEdgePathTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiEdgePath;
+  hkaiEdgePathTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiEdgePath;
   return result;
 }
 

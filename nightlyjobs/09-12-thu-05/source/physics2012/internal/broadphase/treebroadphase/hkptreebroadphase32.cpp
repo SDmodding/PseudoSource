@@ -2,32 +2,31 @@
 // RVA: 0xDA6C80
 void __fastcall hkpTreeBroadPhase32_createTreeBroadPhase(hkpBroadPhase *childBroadPhase)
 {
-  hkpBroadPhase *v1; // rbx
-  _QWORD **v2; // rax
+  _QWORD **Value; // rax
   hkpTreeBroadPhase32 *v3; // rax
 
-  v1 = childBroadPhase;
-  v2 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v3 = (hkpTreeBroadPhase32 *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v2[11] + 8i64))(v2[11], 416i64);
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v3 = (hkpTreeBroadPhase32 *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 416i64);
   if ( v3 )
-    hkpTreeBroadPhase32::hkpTreeBroadPhase32(v3, v1);
+    hkpTreeBroadPhase32::hkpTreeBroadPhase32(v3, childBroadPhase);
 }
 
 // File Line: 22
 // RVA: 0xDAC9F0
-void __fastcall hkpTreeBroadPhase32_updateTreeBroadPhase(hkpBroadPhase *broadPhase, float physicsDeltaStep)
+// attributes: thunk
+void __fastcall hkpTreeBroadPhase32_updateTreeBroadPhase(hkpTreeBroadPhase32 *broadPhase, float physicsDeltaStep)
 {
-  hkpTreeBroadPhase32::update((hkpTreeBroadPhase32 *)broadPhase, physicsDeltaStep);
+  hkpTreeBroadPhase32::update(broadPhase, physicsDeltaStep);
 }
 
 // File Line: 28
 // RVA: 0xDACA00
-void (__fastcall *hkpTreeBroadPhase32_registerSelf())(hkpBroadPhase *broadPhase, float physicsDeltaStep)
+void (__fastcall *hkpTreeBroadPhase32_registerSelf())(hkpTreeBroadPhase32 *broadPhase, float physicsDeltaStep)
 {
-  void (__fastcall *result)(hkpBroadPhase *, float); // rax
+  void (__fastcall *result)(hkpTreeBroadPhase32 *, float); // rax
 
   result = hkpTreeBroadPhase32_updateTreeBroadPhase;
-  hkpBroadPhase::s_updateTreeBroadPhaseFunction32 = hkpTreeBroadPhase32_updateTreeBroadPhase;
+  hkpBroadPhase::s_updateTreeBroadPhaseFunction32 = (void (__fastcall *)(hkpBroadPhase *, float))hkpTreeBroadPhase32_updateTreeBroadPhase;
   return result;
 }
 

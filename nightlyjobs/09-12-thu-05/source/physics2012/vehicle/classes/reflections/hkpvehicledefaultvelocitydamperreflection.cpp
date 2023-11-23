@@ -28,17 +28,17 @@ hkClass *__fastcall hkpVehicleDefaultVelocityDamper::staticClass()
 
 // File Line: 64
 // RVA: 0xE258B0
-void __fastcall finishLoadedObjecthkpVehicleDefaultVelocityDamper(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpVehicleDefaultVelocityDamper(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleDefaultVelocityDamper::`vftable;
+    *p = &hkpVehicleDefaultVelocityDamper::`vftable;
 }
 
 // File Line: 70
 // RVA: 0xE258D0
-void __fastcall cleanupLoadedObjecthkpVehicleDefaultVelocityDamper(void *p)
+void __fastcall cleanupLoadedObjecthkpVehicleDefaultVelocityDamper(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 74
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkpVehicleDefaultVelocityDamperTypeInfo__()
   hkpVehicleDefaultVelocityDamperTypeInfo.m_typeName = "hkpVehicleDefaultVelocityDamper";
   hkpVehicleDefaultVelocityDamperTypeInfo.m_vtable = result;
   hkpVehicleDefaultVelocityDamperTypeInfo.m_scopedName = "!hkpVehicleDefaultVelocityDamper";
-  hkpVehicleDefaultVelocityDamperTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpVehicleDefaultVelocityDamper;
-  hkpVehicleDefaultVelocityDamperTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpVehicleDefaultVelocityDamper;
+  hkpVehicleDefaultVelocityDamperTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpVehicleDefaultVelocityDamper;
+  hkpVehicleDefaultVelocityDamperTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpVehicleDefaultVelocityDamper;
   return result;
 }
 

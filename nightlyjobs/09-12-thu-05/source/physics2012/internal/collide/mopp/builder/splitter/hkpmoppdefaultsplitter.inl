@@ -1,11 +1,12 @@
 // File Line: 70
 // RVA: 0xDFA0B0
-void __fastcall hkpMoppDefaultSplitter::hkpMoppMaxList::addElement(hkpMoppDefaultSplitter::hkpMoppMaxList *this, hkpMoppCompilerPrimitive *compPrimitive)
+void __fastcall hkpMoppDefaultSplitter::hkpMoppMaxList::addElement(
+        hkpMoppDefaultSplitter::hkpMoppMaxList *this,
+        hkpMoppCompilerPrimitive *compPrimitive)
 {
-  float v2; // xmm0_4
-  hkpMoppDefaultSplitter::hkpMoppMaxList *v3; // r10
-  int v4; // er9
-  signed __int64 v5; // r8
+  float m_max; // xmm0_4
+  int v4; // r9d
+  __int64 v5; // r8
   hkpMoppCompilerPrimitive **v6; // rcx
   hkpMoppCompilerPrimitive *v7; // rax
   hkpMoppCompilerPrimitive **v8; // rcx
@@ -14,11 +15,10 @@ void __fastcall hkpMoppDefaultSplitter::hkpMoppMaxList::addElement(hkpMoppDefaul
   hkpMoppCompilerPrimitive *v11; // rax
   hkpMoppCompilerPrimitive **v12; // rcx
   hkpMoppCompilerPrimitive *v13; // rax
-  hkpMoppCompilerPrimitive **v14; // rcx
+  hkpMoppCompilerPrimitive **buffer; // rcx
   hkpMoppCompilerPrimitive *v15; // rax
 
-  v2 = compPrimitive->m_extent.m_max;
-  v3 = this;
+  m_max = compPrimitive->m_extent.m_max;
   v4 = this->m_currentNumElements - 1;
   v5 = v4;
   if ( v4 >= 0 )
@@ -28,13 +28,13 @@ void __fastcall hkpMoppDefaultSplitter::hkpMoppMaxList::addElement(hkpMoppDefaul
 LABEL_12:
       while ( v5 >= 0 )
       {
-        v14 = v3->buffer;
-        v15 = v14[v5];
+        buffer = this->buffer;
+        v15 = buffer[v5];
         if ( !v15 )
           break;
-        if ( v2 <= v15->m_extent.m_max )
+        if ( m_max <= v15->m_extent.m_max )
           break;
-        v14[v5 + 1] = v15;
+        buffer[v5 + 1] = v15;
         --v4;
         --v5;
       }
@@ -43,35 +43,35 @@ LABEL_12:
     {
       while ( 1 )
       {
-        v6 = v3->buffer;
+        v6 = this->buffer;
         v7 = v6[v5];
-        if ( !v7 || v2 <= v7->m_extent.m_max )
+        if ( !v7 || m_max <= v7->m_extent.m_max )
           break;
         v6[v5 + 1] = v7;
-        v8 = v3->buffer;
+        v8 = this->buffer;
         v9 = v8[v5 - 1];
-        if ( !v9 || v2 <= v9->m_extent.m_max )
+        if ( !v9 || m_max <= v9->m_extent.m_max )
         {
-          v3->buffer[v4] = compPrimitive;
-          ++v3->m_currentNumElements;
+          this->buffer[v4] = compPrimitive;
+          ++this->m_currentNumElements;
           return;
         }
         v8[v5] = v9;
-        v10 = v3->buffer;
+        v10 = this->buffer;
         v11 = v10[v5 - 2];
-        if ( !v11 || v2 <= v11->m_extent.m_max )
+        if ( !v11 || m_max <= v11->m_extent.m_max )
         {
-          v3->buffer[v4 - 1] = compPrimitive;
-          ++v3->m_currentNumElements;
+          this->buffer[v4 - 1] = compPrimitive;
+          ++this->m_currentNumElements;
           return;
         }
         v10[v5 - 1] = v11;
-        v12 = v3->buffer;
+        v12 = this->buffer;
         v13 = v12[v5 - 3];
-        if ( !v13 || v2 <= v13->m_extent.m_max )
+        if ( !v13 || m_max <= v13->m_extent.m_max )
         {
-          v3->buffer[v4 - 2] = compPrimitive;
-          ++v3->m_currentNumElements;
+          this->buffer[v4 - 2] = compPrimitive;
+          ++this->m_currentNumElements;
           return;
         }
         v12[v5 - 2] = v13;
@@ -82,15 +82,17 @@ LABEL_12:
       }
     }
   }
-  v3->buffer[v4 + 1] = compPrimitive;
-  ++v3->m_currentNumElements;
+  this->buffer[v4 + 1] = compPrimitive;
+  ++this->m_currentNumElements;
 }
 
 // File Line: 113
 // RVA: 0xDFA560
-void __fastcall hkpMoppDefaultSplitter::hkpMoppMaxList::removeElementsLessThan(hkpMoppDefaultSplitter::hkpMoppMaxList *this, float position)
+void __fastcall hkpMoppDefaultSplitter::hkpMoppMaxList::removeElementsLessThan(
+        hkpMoppDefaultSplitter::hkpMoppMaxList *this,
+        float position)
 {
-  signed __int64 v2; // rdx
+  __int64 v2; // rdx
   hkpMoppCompilerPrimitive **v3; // r8
   hkpMoppCompilerPrimitive *v4; // rax
   hkpMoppCompilerPrimitive **v5; // r8
@@ -99,7 +101,7 @@ void __fastcall hkpMoppDefaultSplitter::hkpMoppMaxList::removeElementsLessThan(h
   hkpMoppCompilerPrimitive *v8; // rax
   hkpMoppCompilerPrimitive **v9; // r8
   hkpMoppCompilerPrimitive *v10; // rax
-  hkpMoppCompilerPrimitive **v11; // r8
+  hkpMoppCompilerPrimitive **buffer; // r8
   hkpMoppCompilerPrimitive *v12; // rax
 
   v2 = this->m_currentNumElements - 1;
@@ -110,14 +112,14 @@ void __fastcall hkpMoppDefaultSplitter::hkpMoppMaxList::removeElementsLessThan(h
 LABEL_12:
       while ( v2 >= 0 )
       {
-        v11 = this->buffer;
-        v12 = v11[v2];
+        buffer = this->buffer;
+        v12 = buffer[v2];
         if ( !v12 )
           break;
         if ( position <= v12->m_extent.m_max )
           break;
         this->lastRemovedElement = v12;
-        v11[v2] = 0i64;
+        buffer[v2] = 0i64;
         --this->m_currentNumElements;
         --v2;
       }

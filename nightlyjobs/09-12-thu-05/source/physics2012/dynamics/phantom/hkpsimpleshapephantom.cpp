@@ -1,45 +1,42 @@
 // File Line: 29
 // RVA: 0xD67710
-void __fastcall hkpSimpleShapePhantom::hkpSimpleShapePhantom(hkpSimpleShapePhantom *this, hkpShape *shape, hkTransformf *transform, unsigned int collisionFilterInfo)
+void __fastcall hkpSimpleShapePhantom::hkpSimpleShapePhantom(
+        hkpSimpleShapePhantom *this,
+        hkpShape *shape,
+        hkTransformf *transform,
+        unsigned int collisionFilterInfo)
 {
-  unsigned int v4; // edi
-  hkpSimpleShapePhantom *v5; // rbx
-
-  v4 = collisionFilterInfo;
-  v5 = this;
-  hkpShapePhantom::hkpShapePhantom((hkpShapePhantom *)&this->vfptr, shape, transform);
-  v5->vfptr = (hkBaseObjectVtbl *)&hkpSimpleShapePhantom::`vftable;
-  v5->m_collisionDetails.m_capacityAndFlags = 2147483648;
-  v5->m_collisionDetails.m_data = 0i64;
-  v5->m_collisionDetails.m_size = 0;
-  v5->m_orderDirty.m_bool = 0;
-  v5->m_collidable.m_broadPhaseHandle.m_collisionFilterInfo = v4;
+  hkpShapePhantom::hkpShapePhantom(this, shape, transform);
+  this->vfptr = (hkBaseObjectVtbl *)&hkpSimpleShapePhantom::`vftable;
+  this->m_collisionDetails.m_capacityAndFlags = 0x80000000;
+  this->m_collisionDetails.m_data = 0i64;
+  this->m_collisionDetails.m_size = 0;
+  this->m_orderDirty.m_bool = 0;
+  this->m_collidable.m_broadPhaseHandle.m_collisionFilterInfo = collisionFilterInfo;
 }
 
 // File Line: 70
 // RVA: 0xD67770
 void __fastcall hkpSimpleShapePhantom::~hkpSimpleShapePhantom(hkpSimpleShapePhantom *this)
 {
-  hkpSimpleShapePhantom *v1; // rbx
-  int v2; // er8
+  int m_capacityAndFlags; // r8d
 
-  v1 = this;
   this->vfptr = (hkBaseObjectVtbl *)&hkpSimpleShapePhantom::`vftable;
-  v2 = this->m_collisionDetails.m_capacityAndFlags;
+  m_capacityAndFlags = this->m_collisionDetails.m_capacityAndFlags;
   this->m_collisionDetails.m_size = 0;
-  if ( v2 >= 0 )
+  if ( m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       this->m_collisionDetails.m_data,
-      8 * v2);
-  v1->m_collisionDetails.m_data = 0i64;
-  v1->m_collisionDetails.m_capacityAndFlags = 2147483648;
-  hkpPhantom::~hkpPhantom((hkpPhantom *)&v1->vfptr);
+      8 * m_capacityAndFlags);
+  this->m_collisionDetails.m_data = 0i64;
+  this->m_collisionDetails.m_capacityAndFlags = 0x80000000;
+  hkpPhantom::~hkpPhantom(this);
 }
 
 // File Line: 75
 // RVA: 0xD677F0
-signed __int64 __fastcall hkpSimpleShapePhantom::getType(hkpSimpleShapePhantom *this)
+__int64 __fastcall hkpSimpleShapePhantom::getType(hkpSimpleShapePhantom *this)
 {
   return 1i64;
 }
@@ -48,12 +45,11 @@ signed __int64 __fastcall hkpSimpleShapePhantom::getType(hkpSimpleShapePhantom *
 // RVA: 0xD67C20
 hkpPhantom *__fastcall hkpSimpleShapePhantom::clone(hkpSimpleShapePhantom *this)
 {
-  hkpSimpleShapePhantom *v1; // rdi
-  _QWORD **v2; // rax
+  _QWORD **Value; // rax
   hkpSimpleShapePhantom *v3; // rax
   __int64 v4; // rax
   __int64 v5; // rbx
-  __int64 v6; // rax
+  __int64 m_size; // rax
   __int64 v7; // rcx
   __int64 v8; // rdx
   char *v9; // r8
@@ -63,44 +59,41 @@ hkpPhantom *__fastcall hkpSimpleShapePhantom::clone(hkpSimpleShapePhantom *this)
   __int64 v13; // rdx
   char *v14; // r8
   __int64 v15; // rax
-  int v17; // [rsp+30h] [rbp+8h]
+  int v17; // [rsp+30h] [rbp+8h] BYREF
 
-  v1 = this;
-  v2 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v3 = (hkpSimpleShapePhantom *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v2[11] + 8i64))(v2[11], 448i64);
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v3 = (hkpSimpleShapePhantom *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 448i64);
   if ( v3 )
   {
     hkpSimpleShapePhantom::hkpSimpleShapePhantom(
       v3,
-      v1->m_collidable.m_shape,
-      &v1->m_motionState.m_transform,
-      v1->m_collidable.m_broadPhaseHandle.m_collisionFilterInfo);
+      this->m_collidable.m_shape,
+      &this->m_motionState.m_transform,
+      this->m_collidable.m_broadPhaseHandle.m_collisionFilterInfo);
     v5 = v4;
   }
   else
   {
     v5 = 0i64;
   }
-  if ( (*(_DWORD *)(v5 + 212) & 0x3FFFFFFF) < v1->m_overlapListeners.m_size )
+  if ( (*(_DWORD *)(v5 + 212) & 0x3FFFFFFF) < this->m_overlapListeners.m_size )
   {
-    if ( *(_DWORD *)(v5 + 212) >= 0 )
+    if ( *(int *)(v5 + 212) >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+        &hkContainerHeapAllocator::s_alloc,
         *(void **)(v5 + 200),
         8 * *(_DWORD *)(v5 + 212));
-    v17 = 8 * v1->m_overlapListeners.m_size;
-    *(_QWORD *)(v5 + 200) = hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
-                              (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-                              &v17);
+    v17 = 8 * this->m_overlapListeners.m_size;
+    *(_QWORD *)(v5 + 200) = hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(&hkContainerHeapAllocator::s_alloc, &v17);
     *(_DWORD *)(v5 + 212) = v17 / 8;
   }
-  v6 = v1->m_overlapListeners.m_size;
+  m_size = this->m_overlapListeners.m_size;
   v7 = *(_QWORD *)(v5 + 200);
-  *(_DWORD *)(v5 + 208) = v6;
-  v8 = v6;
-  if ( (signed int)v6 > 0 )
+  *(_DWORD *)(v5 + 208) = m_size;
+  v8 = m_size;
+  if ( (int)m_size > 0 )
   {
-    v9 = (char *)v1->m_overlapListeners.m_data - v7;
+    v9 = (char *)this->m_overlapListeners.m_data - v7;
     do
     {
       v10 = *(_QWORD *)&v9[v7];
@@ -110,26 +103,24 @@ hkpPhantom *__fastcall hkpSimpleShapePhantom::clone(hkpSimpleShapePhantom *this)
     }
     while ( v8 );
   }
-  if ( (*(_DWORD *)(v5 + 228) & 0x3FFFFFFF) < v1->m_phantomListeners.m_size )
+  if ( (*(_DWORD *)(v5 + 228) & 0x3FFFFFFF) < this->m_phantomListeners.m_size )
   {
-    if ( *(_DWORD *)(v5 + 228) >= 0 )
+    if ( *(int *)(v5 + 228) >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+        &hkContainerHeapAllocator::s_alloc,
         *(void **)(v5 + 216),
         8 * *(_DWORD *)(v5 + 228));
-    v17 = 8 * v1->m_phantomListeners.m_size;
-    *(_QWORD *)(v5 + 216) = hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
-                              (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-                              &v17);
+    v17 = 8 * this->m_phantomListeners.m_size;
+    *(_QWORD *)(v5 + 216) = hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(&hkContainerHeapAllocator::s_alloc, &v17);
     *(_DWORD *)(v5 + 228) = v17 / 8;
   }
-  v11 = v1->m_phantomListeners.m_size;
+  v11 = this->m_phantomListeners.m_size;
   v12 = *(_QWORD *)(v5 + 216);
   *(_DWORD *)(v5 + 224) = v11;
   v13 = v11;
-  if ( (signed int)v11 > 0 )
+  if ( (int)v11 > 0 )
   {
-    v14 = (char *)v1->m_phantomListeners.m_data - v12;
+    v14 = (char *)this->m_phantomListeners.m_data - v12;
     do
     {
       v15 = *(_QWORD *)&v14[v12];
@@ -139,266 +130,247 @@ hkpPhantom *__fastcall hkpSimpleShapePhantom::clone(hkpSimpleShapePhantom *this)
     }
     while ( v13 );
   }
-  hkpWorldObject::copyProperties((hkpWorldObject *)v5, (hkpWorldObject *)&v1->vfptr);
+  hkpWorldObject::copyProperties((hkpWorldObject *)v5, this);
   return (hkpPhantom *)v5;
 }
 
 // File Line: 97
 // RVA: 0xD67800
-void __fastcall hkpSimpleShapePhantom::setPositionAndLinearCast(hkpSimpleShapePhantom *this, hkVector4f *position, hkpLinearCastInput *input, hkpCdPointCollector *castCollector, hkpCdPointCollector *startCollector)
+void __fastcall hkpSimpleShapePhantom::setPositionAndLinearCast(
+        hkpSimpleShapePhantom *this,
+        hkVector4f *position,
+        hkpLinearCastInput *input,
+        hkpCdPointCollector *castCollector,
+        hkpCdPointCollector *startCollector)
 {
-  hkpSimpleShapePhantom *v5; // r15
-  hkpCdPointCollector *v6; // r12
-  hkVector4f *v7; // rbx
-  __m128 *v8; // rdi
-  float v9; // xmm2_4
-  __m128 v10; // xmm7
-  hkpWorld *v11; // rdx
-  int v12; // xmm5_4
-  hkpProcessCollisionInput *v13; // rcx
-  __int64 v14; // rax
-  __m128 v15; // xmm7
-  __m128 v16; // xmm4
-  __m128 v17; // xmm1
-  float v18; // xmm0_4
-  __int64 v19; // rbx
+  __m128 v9; // xmm7
+  hkpWorld *m_world; // rdx
+  float m_startPointTolerance; // xmm5_4
+  hkpProcessCollisionInput *m_collisionInput; // rcx
+  __int64 m_config; // rax
+  __m128 v14; // xmm7
+  __m128 v15; // xmm4
+  __m128 v16; // xmm1
+  float m_maxExtraPenetration; // xmm0_4
+  __int64 v18; // rbx
   hkpCollisionDispatcher *i; // rdi
-  hkpCollidable *v21; // rdx
-  __m128 v22; // [rsp+28h] [rbp-71h]
-  hkpCollisionDispatcher *v23; // [rsp+38h] [rbp-61h]
-  __int64 v24; // [rsp+40h] [rbp-59h]
-  int v25; // [rsp+48h] [rbp-51h]
-  hkpCollisionFilter *v26; // [rsp+50h] [rbp-49h]
-  hkpConvexListFilter *v27; // [rsp+58h] [rbp-41h]
-  unsigned int v28; // [rsp+60h] [rbp-39h]
-  hkVector4f v29; // [rsp+68h] [rbp-31h]
-  hkVector4f v30; // [rsp+78h] [rbp-21h]
-  hkVector4f v31; // [rsp+88h] [rbp-11h]
-  __m128 v32; // [rsp+98h] [rbp-1h]
-  float v33; // [rsp+A8h] [rbp+Fh]
-  int v34; // [rsp+ACh] [rbp+13h]
-  __int64 v35; // [rsp+B0h] [rbp+17h]
-  hkpCdPointCollector *v36; // [rsp+118h] [rbp+7Fh]
+  hkpCollidable *m_collidable; // rdx
+  _BYTE v21[24]; // [rsp+28h] [rbp-71h] BYREF
+  _BYTE aabb_16[12]; // [rsp+40h] [rbp-59h]
+  hkpCollisionFilter *m_storage; // [rsp+50h] [rbp-49h]
+  hkpConvexListFilter *v24; // [rsp+58h] [rbp-41h]
+  unsigned int v25; // [rsp+60h] [rbp-39h]
+  hkpCollisionInput::Aabb32Info m_aabb32Info; // [rsp+68h] [rbp-31h]
+  __m128 v27; // [rsp+98h] [rbp-1h]
+  float v28; // [rsp+A8h] [rbp+Fh]
+  unsigned int v29; // [rsp+ACh] [rbp+13h]
+  __int64 v30; // [rsp+B0h] [rbp+17h]
+  hkpCdPointCollector *v31; // [rsp+118h] [rbp+7Fh]
 
-  v5 = this;
-  v6 = castCollector;
-  v7 = position;
-  v8 = &input->m_to.m_quad;
   this->m_motionState.m_transform.m_translation = (hkVector4f)position->m_quad;
-  v9 = (float)(this->m_world->m_collisionInput->m_tolerance.m_storage * 0.5) + input->m_startPointTolerance;
-  ((void (__fastcall *)(hkpShape *, hkMotionState *, hkpLinearCastInput *, unsigned __int16 *))this->m_collidable.m_shape->vfptr[2].__vecDelDtor)(
+  ((void (__fastcall *)(hkpShape *, hkMotionState *, hkpLinearCastInput *, _BYTE *))this->m_collidable.m_shape->hkpShapePhantom::hkpPhantom::hkpWorldObject::vfptr[2].__vecDelDtor)(
     this->m_collidable.m_shape,
     &this->m_motionState,
     input,
-    &v22.m128_u16[4]);
-  v10 = _mm_sub_ps(*v8, v7->m_quad);
-  *(__m128 *)((char *)&v22 + 8) = _mm_add_ps(*(__m128 *)((char *)&v22 + 8), _mm_min_ps((__m128)0i64, v10));
-  v22 = _mm_add_ps(v22, _mm_max_ps((__m128)0i64, v10));
-  hkpPhantom::updateBroadPhase((hkpPhantom *)&v5->vfptr, (hkAabb *)&v22.m128_u16[4]);
-  v11 = v5->m_world;
-  v12 = v8[1].m128_i32[1];
-  v33 = FLOAT_1_1920929eN7;
-  v13 = v11->m_collisionInput;
-  v23 = v13->m_dispatcher.m_storage;
-  v24 = v13->m_weldClosestPoints.m_storage;
-  *(__int64 *)((char *)&v24 + 4) = *(_QWORD *)&v13->m_forceAcceptContactPoints.m_storage;
-  v26 = v13->m_filter.m_storage;
-  v27 = v13->m_convexListFilter.m_storage;
-  v28 = v13->m_createPredictiveAgents.m_storage;
-  v29.m_quad = (__m128)v13->m_aabb32Info.m_bitOffsetLow;
-  v30.m_quad = (__m128)v13->m_aabb32Info.m_bitOffsetHigh;
-  v31.m_quad = (__m128)v13->m_aabb32Info.m_bitScale;
-  v14 = (__int64)v13->m_config;
-  v32 = v10;
-  v35 = v14;
-  v15 = _mm_mul_ps(v10, v10);
-  v16 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v15, v15, 85), _mm_shuffle_ps(v15, v15, 0)), _mm_shuffle_ps(v15, v15, 170));
-  v17 = _mm_rsqrt_ps(v16);
-  v18 = v8[1].m128_f32[0];
-  LODWORD(v14) = v5->m_collisionDetails.m_size - 1;
-  v25 = v12;
-  v33 = v18;
-  v19 = (signed int)v14;
-  v34 = (unsigned __int128)_mm_andnot_ps(
-                             _mm_cmpleps(v16, (__m128)0i64),
-                             _mm_mul_ps(
-                               _mm_mul_ps(
-                                 _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v17, v16), v17)),
-                                 _mm_mul_ps(*(__m128 *)_xmm, v17)),
-                               v16));
-  for ( i = v11->m_collisionDispatcher; v19 >= 0; --v19 )
+    &v21[8]);
+  v9 = _mm_sub_ps(input->m_to.m_quad, position->m_quad);
+  *(__m128 *)&v21[8] = _mm_add_ps(*(__m128 *)&v21[8], _mm_min_ps((__m128)0i64, v9));
+  *(__m128 *)v21 = _mm_add_ps(*(__m128 *)v21, _mm_max_ps((__m128)0i64, v9));
+  hkpPhantom::updateBroadPhase(this, (hkAabb *)&v21[8]);
+  m_world = this->m_world;
+  m_startPointTolerance = input->m_startPointTolerance;
+  v28 = FLOAT_1_1920929eN7;
+  m_collisionInput = m_world->m_collisionInput;
+  *(_QWORD *)&v21[16] = m_collisionInput->m_dispatcher.m_storage;
+  *(_QWORD *)aabb_16 = m_collisionInput->m_weldClosestPoints.m_storage;
+  *(_QWORD *)&aabb_16[4] = *(_QWORD *)&m_collisionInput->m_forceAcceptContactPoints.m_storage;
+  m_storage = m_collisionInput->m_filter.m_storage;
+  v24 = m_collisionInput->m_convexListFilter.m_storage;
+  v25 = m_collisionInput->m_createPredictiveAgents.m_storage;
+  m_aabb32Info = m_collisionInput->m_aabb32Info;
+  m_config = (__int64)m_collisionInput->m_config;
+  v27 = v9;
+  v30 = m_config;
+  v14 = _mm_mul_ps(v9, v9);
+  v15 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v14, v14, 85), _mm_shuffle_ps(v14, v14, 0)), _mm_shuffle_ps(v14, v14, 170));
+  v16 = _mm_rsqrt_ps(v15);
+  m_maxExtraPenetration = input->m_maxExtraPenetration;
+  LODWORD(m_config) = this->m_collisionDetails.m_size - 1;
+  *(float *)&aabb_16[8] = m_startPointTolerance;
+  v28 = m_maxExtraPenetration;
+  v18 = (int)m_config;
+  v29 = _mm_andnot_ps(
+          _mm_cmple_ps(v15, (__m128)0i64),
+          _mm_mul_ps(
+            _mm_mul_ps(
+              _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v16, v15), v16)),
+              _mm_mul_ps(*(__m128 *)_xmm, v16)),
+            v15)).m128_u32[0];
+  for ( i = m_world->m_collisionDispatcher; v18 >= 0; --v18 )
   {
-    v21 = v5->m_collisionDetails.m_data[v19].m_collidable;
-    i->m_agent2Func[(unsigned __int8)i->m_agent2Types[(unsigned __int8)v5->m_collidable.m_shape->m_type.m_storage][(unsigned __int8)v21->m_shape->m_type.m_storage]].m_linearCastFunc(
-      (hkpCdBody *)&v5->m_collidable.m_shape,
-      (hkpCdBody *)&v21->m_shape,
-      (hkpLinearCastCollisionInput *)&v23,
-      v6,
-      v36);
+    m_collidable = this->m_collisionDetails.m_data[v18].m_collidable;
+    i->m_agent2Func[(unsigned __int8)i->m_agent2Types[(unsigned __int8)this->m_collidable.m_shape->m_type.m_storage][(unsigned __int8)m_collidable->m_shape->m_type.m_storage]].m_linearCastFunc(
+      &this->m_collidable,
+      m_collidable,
+      (hkpLinearCastCollisionInput *)&v21[16],
+      castCollector,
+      v31);
   }
 }
 
 // File Line: 152
 // RVA: 0xD67A40
-void __fastcall hkpSimpleShapePhantom::setTransformAndLinearCast(hkpSimpleShapePhantom *this, hkTransformf *transform, hkpLinearCastInput *input, hkpCdPointCollector *castCollector, hkpCdPointCollector *startCollector)
+void __fastcall hkpSimpleShapePhantom::setTransformAndLinearCast(
+        hkpSimpleShapePhantom *this,
+        hkTransformf *transform,
+        hkpLinearCastInput *input,
+        hkpCdPointCollector *castCollector,
+        hkpCdPointCollector *startCollector)
 {
   hkVector4f v5; // xmm0
-  hkVector4f *v6; // rdx
+  hkVector4f *p_m_translation; // rdx
 
   v5.m_quad = (__m128)transform->m_rotation.m_col0;
-  v6 = &transform->m_translation;
+  p_m_translation = &transform->m_translation;
   this->m_motionState.m_transform.m_rotation.m_col0 = (hkVector4f)v5.m_quad;
-  this->m_motionState.m_transform.m_rotation.m_col1 = (hkVector4f)v6[-2].m_quad;
-  this->m_motionState.m_transform.m_rotation.m_col2 = (hkVector4f)v6[-1].m_quad;
-  hkpSimpleShapePhantom::setPositionAndLinearCast(this, v6, input, castCollector, startCollector);
+  this->m_motionState.m_transform.m_rotation.m_col1 = (hkVector4f)p_m_translation[-2].m_quad;
+  this->m_motionState.m_transform.m_rotation.m_col2 = (hkVector4f)p_m_translation[-1].m_quad;
+  hkpSimpleShapePhantom::setPositionAndLinearCast(this, p_m_translation, input, castCollector, startCollector);
 }
 
 // File Line: 163
 // RVA: 0xD67A70
-void __fastcall hkpSimpleShapePhantom::getClosestPoints(hkpSimpleShapePhantom *this, hkpCdPointCollector *collector, hkpCollisionInput *input)
+void __fastcall hkpSimpleShapePhantom::getClosestPoints(
+        hkpSimpleShapePhantom *this,
+        hkpCdPointCollector *collector,
+        hkpProcessCollisionInput *input)
 {
-  hkpProcessCollisionInput *v3; // rbx
-  hkpCdPointCollector *v4; // rbp
-  hkpSimpleShapePhantom *v5; // rdi
-  hkpCollisionDispatcher *v6; // r15
+  hkpProcessCollisionInput *m_collisionInput; // rbx
+  hkpCollisionDispatcher *m_storage; // r15
   int v7; // eax
   __int64 i; // rsi
-  hkpCollidable *v9; // rdx
+  hkpCollidable *m_collidable; // rdx
 
-  v3 = (hkpProcessCollisionInput *)input;
-  v4 = collector;
-  v5 = this;
+  m_collisionInput = input;
   if ( !input )
-    v3 = this->m_world->m_collisionInput;
-  v6 = v3->m_dispatcher.m_storage;
+    m_collisionInput = this->m_world->m_collisionInput;
+  m_storage = m_collisionInput->m_dispatcher.m_storage;
   v7 = this->m_collisionDetails.m_size - 1;
   for ( i = v7; i >= 0; --i )
   {
-    v9 = v5->m_collisionDetails.m_data[i].m_collidable;
-    (*((void (__fastcall **)(hkpLinkedCollidable *, hkpCollidable *, hkpProcessCollisionInput *, hkpCdPointCollector *))&v6->vfptr
-     + 5
-     * ((unsigned __int8)v6->m_agent2Types[(unsigned __int8)v5->m_collidable.m_shape->m_type.m_storage][(unsigned __int8)v9->m_shape->m_type.m_storage]
-      + 79i64)))(
-      &v5->m_collidable,
-      v9,
-      v3,
-      v4);
+    m_collidable = this->m_collisionDetails.m_data[i].m_collidable;
+    m_storage->m_agent2Func[(unsigned __int8)m_storage->m_agent2Types[(unsigned __int8)this->m_collidable.m_shape->m_type.m_storage][(unsigned __int8)m_collidable->m_shape->m_type.m_storage]].m_getClosestPointFunc(
+      &this->m_collidable,
+      m_collidable,
+      m_collisionInput,
+      collector);
   }
 }
 
 // File Line: 182
 // RVA: 0xD67B70
-void __fastcall hkpSimpleShapePhantom::getPenetrations(hkpSimpleShapePhantom *this, hkpCdBodyPairCollector *collector, hkpCollisionInput *input)
+void __fastcall hkpSimpleShapePhantom::getPenetrations(
+        hkpSimpleShapePhantom *this,
+        hkpCdBodyPairCollector *collector,
+        hkpProcessCollisionInput *input)
 {
-  hkpProcessCollisionInput *v3; // rdi
-  hkpCdBodyPairCollector *v4; // rbp
-  hkpSimpleShapePhantom *v5; // rsi
-  hkpCollisionDispatcher *v6; // r15
+  hkpProcessCollisionInput *m_collisionInput; // rdi
+  hkpCollisionDispatcher *m_storage; // r15
   int v7; // eax
   __int64 i; // rbx
-  hkpCollidable *v9; // rdx
+  hkpCollidable *m_collidable; // rdx
 
-  v3 = (hkpProcessCollisionInput *)input;
-  v4 = collector;
-  v5 = this;
+  m_collisionInput = input;
   if ( !input )
-    v3 = this->m_world->m_collisionInput;
-  v6 = v3->m_dispatcher.m_storage;
+    m_collisionInput = this->m_world->m_collisionInput;
+  m_storage = m_collisionInput->m_dispatcher.m_storage;
   v7 = this->m_collisionDetails.m_size - 1;
   for ( i = v7; i >= 0; --i )
   {
-    v9 = v5->m_collisionDetails.m_data[i].m_collidable;
-    v6->m_agent2Func[(unsigned __int8)v6->m_agent2Types[(unsigned __int8)v5->m_collidable.m_shape->m_type.m_storage][(unsigned __int8)v9->m_shape->m_type.m_storage]].m_getPenetrationsFunc(
-      (hkpCdBody *)&v5->m_collidable.m_shape,
-      (hkpCdBody *)&v9->m_shape,
-      (hkpCollisionInput *)&v3->m_dispatcher,
-      v4);
-    if ( v4->m_earlyOut.m_bool )
+    m_collidable = this->m_collisionDetails.m_data[i].m_collidable;
+    m_storage->m_agent2Func[(unsigned __int8)m_storage->m_agent2Types[(unsigned __int8)this->m_collidable.m_shape->m_type.m_storage][(unsigned __int8)m_collidable->m_shape->m_type.m_storage]].m_getPenetrationsFunc(
+      &this->m_collidable,
+      m_collidable,
+      m_collisionInput,
+      collector);
+    if ( collector->m_earlyOut.m_bool )
       break;
   }
 }
 
 // File Line: 208
 // RVA: 0xD67E70
-hkBool *__fastcall hkpSimpleShapePhantom::isOverlappingCollidableAdded(hkpSimpleShapePhantom *this, hkBool *result, hkpCollidable *collidable)
+hkBool *__fastcall hkpSimpleShapePhantom::isOverlappingCollidableAdded(
+        hkpSimpleShapePhantom *this,
+        hkBool *result,
+        hkpCollidable *collidable)
 {
-  __int64 v3; // r10
+  __int64 m_size; // r10
   __int64 v4; // r9
-  hkpSimpleShapePhantom::CollisionDetail *v5; // rax
-  hkBool *v6; // rax
+  hkpSimpleShapePhantom::CollisionDetail *m_data; // rax
 
-  v3 = this->m_collisionDetails.m_size;
+  m_size = this->m_collisionDetails.m_size;
   v4 = 0i64;
-  if ( v3 <= 0 )
+  if ( m_size <= 0 )
   {
 LABEL_5:
     result->m_bool = 0;
-    v6 = result;
+    return result;
   }
   else
   {
-    v5 = this->m_collisionDetails.m_data;
-    while ( v5->m_collidable != collidable )
+    m_data = this->m_collisionDetails.m_data;
+    while ( m_data->m_collidable != collidable )
     {
       ++v4;
-      ++v5;
-      if ( v4 >= v3 )
+      ++m_data;
+      if ( v4 >= m_size )
         goto LABEL_5;
     }
     result->m_bool = 1;
-    v6 = result;
+    return result;
   }
-  return v6;
 }
 
 // File Line: 221
 // RVA: 0xD67DF0
 void __fastcall hkpSimpleShapePhantom::addOverlappingCollidable(hkpSimpleShapePhantom *this, hkpCollidable *collidable)
 {
-  hkpCollidable *v2; // rdi
-  hkpSimpleShapePhantom *v3; // rsi
-  __int64 v4; // r8
+  __int64 m_size; // r8
   hkpSimpleShapePhantom::CollisionDetail *v5; // rdx
 
-  v2 = collidable;
-  v3 = this;
-  if ( collidable->m_shape && !(unsigned int)hkpPhantom::fireCollidableAdded((hkpPhantom *)&this->vfptr, collidable) )
+  if ( collidable->m_shape && !(unsigned int)hkpPhantom::fireCollidableAdded(this, collidable) )
   {
-    if ( v3->m_collisionDetails.m_size == (v3->m_collisionDetails.m_capacityAndFlags & 0x3FFFFFFF) )
-      hkArrayUtil::_reserveMore(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        &v3->m_collisionDetails,
-        8);
-    v4 = v3->m_collisionDetails.m_size;
-    v5 = &v3->m_collisionDetails.m_data[v4];
-    v3->m_collisionDetails.m_size = v4 + 1;
-    v5->m_collidable = v2;
-    v3->m_orderDirty.m_bool = 1;
+    if ( this->m_collisionDetails.m_size == (this->m_collisionDetails.m_capacityAndFlags & 0x3FFFFFFF) )
+      hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&this->m_collisionDetails.m_data, 8);
+    m_size = this->m_collisionDetails.m_size;
+    v5 = &this->m_collisionDetails.m_data[m_size];
+    this->m_collisionDetails.m_size = m_size + 1;
+    v5->m_collidable = collidable;
+    this->m_orderDirty.m_bool = 1;
   }
 }
 
 // File Line: 238
 // RVA: 0xD67EB0
-void __fastcall hkpSimpleShapePhantom::removeOverlappingCollidable(hkpSimpleShapePhantom *this, hkpCollidable *collidable)
+void __fastcall hkpSimpleShapePhantom::removeOverlappingCollidable(
+        hkpSimpleShapePhantom *this,
+        hkpCollidable *collidable)
 {
-  hkpCollidable *v2; // r8
-  hkpSimpleShapePhantom *v3; // rdi
   int v4; // esi
   __int64 v5; // rcx
   hkpSimpleShapePhantom::CollisionDetail *v6; // rdx
-  int v7; // eax
+  int m_size; // eax
   __int64 i; // rbx
   hkpPhantomOverlapListener *v9; // rcx
   int v10; // eax
   __int64 j; // rbx
   hkpPhantomOverlapListener *v12; // rcx
   __int64 v13; // rax
-  hkpSimpleShapePhantom *v14; // [rsp+20h] [rbp-28h]
+  hkpSimpleShapePhantom *v14; // [rsp+20h] [rbp-28h] BYREF
   hkpCollidable *v15; // [rsp+28h] [rbp-20h]
   char v16; // [rsp+30h] [rbp-18h]
 
-  v2 = collidable;
-  v3 = this;
   if ( collidable->m_shape )
   {
     v4 = this->m_collisionDetails.m_size - 1;
@@ -406,43 +378,43 @@ void __fastcall hkpSimpleShapePhantom::removeOverlappingCollidable(hkpSimpleShap
     if ( v4 < 0 )
     {
 LABEL_6:
-      v7 = v3->m_overlapListeners.m_size;
-      v15 = v2;
-      v14 = v3;
-      --v7;
+      m_size = this->m_overlapListeners.m_size;
+      v15 = collidable;
+      v14 = this;
+      --m_size;
       v16 = 0;
-      for ( i = v7; i >= 0; --i )
+      for ( i = m_size; i >= 0; --i )
       {
-        v9 = v3->m_overlapListeners.m_data[i];
+        v9 = this->m_overlapListeners.m_data[i];
         if ( v9 )
           v9->vfptr->collidableRemovedCallback(v9, (hkpCollidableRemovedEvent *)&v14);
       }
     }
     else
     {
-      v6 = &v3->m_collisionDetails.m_data[v4];
-      while ( v6->m_collidable != v2 )
+      v6 = &this->m_collisionDetails.m_data[v4];
+      while ( v6->m_collidable != collidable )
       {
         --v4;
         --v6;
         if ( --v5 < 0 )
           goto LABEL_6;
       }
-      v10 = v3->m_overlapListeners.m_size;
-      v15 = v2;
-      v14 = v3;
+      v10 = this->m_overlapListeners.m_size;
+      v15 = collidable;
+      v14 = this;
       --v10;
       v16 = 1;
       for ( j = v10; j >= 0; --j )
       {
-        v12 = v3->m_overlapListeners.m_data[j];
+        v12 = this->m_overlapListeners.m_data[j];
         if ( v12 )
           v12->vfptr->collidableRemovedCallback(v12, (hkpCollidableRemovedEvent *)&v14);
       }
-      v13 = --v3->m_collisionDetails.m_size;
+      v13 = --this->m_collisionDetails.m_size;
       if ( (_DWORD)v13 != v4 )
-        v3->m_collisionDetails.m_data[v4].m_collidable = v3->m_collisionDetails.m_data[v13].m_collidable;
-      v3->m_orderDirty.m_bool = 1;
+        this->m_collisionDetails.m_data[v4].m_collidable = this->m_collisionDetails.m_data[v13].m_collidable;
+      this->m_orderDirty.m_bool = 1;
     }
   }
 }
@@ -451,43 +423,39 @@ LABEL_6:
 // RVA: 0xD67FD0
 void __fastcall hkpSimpleShapePhantom::deallocateInternalArrays(hkpSimpleShapePhantom *this)
 {
-  hkpSimpleShapePhantom *v1; // rbx
-  int v2; // er8
+  int m_capacityAndFlags; // r8d
 
-  v1 = this;
   if ( !this->m_collisionDetails.m_size )
   {
-    v2 = this->m_collisionDetails.m_capacityAndFlags;
+    m_capacityAndFlags = this->m_collisionDetails.m_capacityAndFlags;
     this->m_collisionDetails.m_size = 0;
-    if ( v2 >= 0 )
+    if ( m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+        &hkContainerHeapAllocator::s_alloc,
         this->m_collisionDetails.m_data,
-        8 * v2);
-    v1->m_collisionDetails.m_data = 0i64;
-    v1->m_collisionDetails.m_capacityAndFlags = 2147483648;
+        8 * m_capacityAndFlags);
+    this->m_collisionDetails.m_data = 0i64;
+    this->m_collisionDetails.m_capacityAndFlags = 0x80000000;
   }
-  hkpShapePhantom::deallocateInternalArrays((hkpShapePhantom *)&v1->vfptr);
+  hkpShapePhantom::deallocateInternalArrays(this);
 }
 
 // File Line: 290
 // RVA: 0xD67B20
 void __fastcall hkpSimpleShapePhantom::ensureDeterministicOrder(hkpSimpleShapePhantom *this)
 {
-  hkpSimpleShapePhantom *v1; // rbx
-  int v2; // er8
+  int m_size; // r8d
 
-  v1 = this;
   if ( this->m_orderDirty.m_bool )
   {
-    v2 = this->m_collisionDetails.m_size;
-    if ( v2 > 1 )
+    m_size = this->m_collisionDetails.m_size;
+    if ( m_size > 1 )
       hkAlgorithm::quickSortRecursive<hkpSimpleShapePhantom::CollisionDetail,hkpSimpleShapePhantom::OrderByUid>(
         this->m_collisionDetails.m_data,
         0,
-        v2 - 1,
+        m_size - 1,
         0);
-    v1->m_orderDirty.m_bool = 0;
+    this->m_orderDirty.m_bool = 0;
   }
 }
 

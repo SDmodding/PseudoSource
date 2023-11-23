@@ -28,23 +28,26 @@ hkClass *__fastcall hkpExtendedMeshShapeBreakableMaterial::staticClass()
 
 // File Line: 58
 // RVA: 0xD50D80
-void __fastcall finishLoadedObjecthkpExtendedMeshShapeBreakableMaterial(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpExtendedMeshShapeBreakableMaterial(
+        hkpExtendedMeshShapeBreakableMaterial *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpExtendedMeshShapeBreakableMaterial::hkpExtendedMeshShapeBreakableMaterial);
+  if ( p )
+    hkpExtendedMeshShapeBreakableMaterial::hkpExtendedMeshShapeBreakableMaterial(p, finishing);
 }
 
 // File Line: 64
 // RVA: 0xD50DA0
-void __fastcall cleanupLoadedObjecthkpExtendedMeshShapeBreakableMaterial(void *p)
+void __fastcall cleanupLoadedObjecthkpExtendedMeshShapeBreakableMaterial(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 68
 // RVA: 0xD50DB0
 hkBaseObjectVtbl *__fastcall getVtablehkpExtendedMeshShapeBreakableMaterial()
 {
-  hkpExtendedMeshShapeBreakableMaterial v1; // [rsp+20h] [rbp-48h]
+  hkpExtendedMeshShapeBreakableMaterial v1; // [rsp+20h] [rbp-48h] BYREF
 
   hkpExtendedMeshShapeBreakableMaterial::hkpExtendedMeshShapeBreakableMaterial(&v1, 0);
   return v1.vfptr;
@@ -61,8 +64,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpExtendedMeshShapeBreakableMaterial
   hkpExtendedMeshShapeBreakableMaterialTypeInfo.m_typeName = "hkpExtendedMeshShapeBreakableMaterial";
   hkpExtendedMeshShapeBreakableMaterialTypeInfo.m_vtable = result;
   hkpExtendedMeshShapeBreakableMaterialTypeInfo.m_scopedName = "!hkpExtendedMeshShapeBreakableMaterial";
-  hkpExtendedMeshShapeBreakableMaterialTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpExtendedMeshShapeBreakableMaterial;
-  hkpExtendedMeshShapeBreakableMaterialTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpExtendedMeshShapeBreakableMaterial;
+  hkpExtendedMeshShapeBreakableMaterialTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpExtendedMeshShapeBreakableMaterial;
+  hkpExtendedMeshShapeBreakableMaterialTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpExtendedMeshShapeBreakableMaterial;
   return result;
 }
 

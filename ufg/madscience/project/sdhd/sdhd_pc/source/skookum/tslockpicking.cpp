@@ -10,6 +10,6 @@ void __fastcall UFG::TSLockpicking::MthdC_set_difficulty(SSInvokedMethod *pScope
 void __fastcall UFG::TSLockpicking::MthdC_is_successful(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
   if ( ppResult )
-    *ppResult = (SSInstance *)SSBoolean::pool_new(UFG::UIHKScreenPickLockMinigame::m_bWon);
+    *ppResult = SSBoolean::pool_new(UFG::UIHKScreenPickLockMinigame::m_bWon);
 }
 

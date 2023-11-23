@@ -2,14 +2,12 @@
 // RVA: 0x489B0
 void __fastcall UFG::ColourCubeMgr::Init(unsigned int colour_cube_uid)
 {
-  unsigned int v1; // ebx
   UFG::qResourceWarehouse *v2; // rax
-  UFG::qResourceInventory *v3; // rax
+  UFG::qResourceInventory *Inventory; // rax
 
-  v1 = colour_cube_uid;
   v2 = UFG::qResourceWarehouse::Instance();
-  v3 = UFG::qResourceWarehouse::GetInventory(v2, 0x8B43FABF);
-  UFG::ColourCubeMgr::mColourCubeBlend = (Illusion::Texture *)v3->vfptr->Get(v3, v1);
+  Inventory = UFG::qResourceWarehouse::GetInventory(v2, 0x8B43FABF);
+  UFG::ColourCubeMgr::mColourCubeBlend = (Illusion::Texture *)Inventory->vfptr->Get(Inventory, colour_cube_uid);
   UFG::ColourCubeMgr::mEnableBlending = 0;
   UFG::ColourCubeMgr::mActiveColourCubes.mNumEntries = 0;
 }
@@ -18,7 +16,7 @@ void __fastcall UFG::ColourCubeMgr::Init(unsigned int colour_cube_uid)
 // RVA: 0x48A00
 void __fastcall UFG::ColourCubeArray::Remove(UFG::ColourCubeArray *this, unsigned int colour_cube_uid)
 {
-  unsigned int v2; // er10
+  unsigned int v2; // r10d
   int v3; // eax
 
   v2 = 0;

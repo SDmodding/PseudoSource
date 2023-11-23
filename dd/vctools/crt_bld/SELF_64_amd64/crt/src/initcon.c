@@ -17,7 +17,7 @@ int _termconout()
 
   result = (_DWORD)confh + 2;
   if ( (unsigned __int64)confh + 2 > 1 )
-    result = CloseHandle(confh);
+    return CloseHandle(confh);
   return result;
 }
 

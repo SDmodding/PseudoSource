@@ -1,75 +1,56 @@
 // File Line: 93
 // RVA: 0x87930
-std::basic_string<char,std::char_traits<char>,std::allocator<char> > *__fastcall std::numpunct<char>::grouping(std::numpunct<char> *this, std::basic_string<char,std::char_traits<char>,std::allocator<char> > *result)
+std::string *__fastcall std::numpunct<char>::grouping(std::numpunct<char> *this, std::string *result)
 {
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v2; // rbx
-
-  v2 = result;
-  ((void (__cdecl *)(std::numpunct<char> *, std::basic_string<char,std::char_traits<char>,std::allocator<char> > *))this->vfptr[1]._Decref)(
-    this,
-    result);
-  return v2;
+  this->vfptr[1]._Decref(this);
+  return result;
 }
 
 // File Line: 98
 // RVA: 0x878F0
-std::basic_string<char,std::char_traits<char>,std::allocator<char> > *__fastcall std::numpunct<char>::falsename(std::numpunct<char> *this, std::basic_string<char,std::char_traits<char>,std::allocator<char> > *result)
+std::string *__fastcall std::numpunct<char>::falsename(std::numpunct<char> *this, std::string *result)
 {
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v2; // rbx
-
-  v2 = result;
-  ((void (__cdecl *)(std::numpunct<char> *, std::basic_string<char,std::char_traits<char>,std::allocator<char> > *))this->vfptr[2].__vecDelDtor)(
-    this,
-    result);
-  return v2;
+  ((void (__fastcall *)(std::numpunct<char> *))this->vfptr[2].__vecDelDtor)(this);
+  return result;
 }
 
 // File Line: 103
 // RVA: 0x87BC0
-std::basic_string<char,std::char_traits<char>,std::allocator<char> > *__fastcall std::numpunct<char>::truename(std::numpunct<char> *this, std::basic_string<char,std::char_traits<char>,std::allocator<char> > *result)
+std::string *__fastcall std::numpunct<char>::truename(std::numpunct<char> *this, std::string *result)
 {
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v2; // rbx
-
-  v2 = result;
-  ((void (__cdecl *)(std::numpunct<char> *, std::basic_string<char,std::char_traits<char>,std::allocator<char> > *))this->vfptr[2]._Incref)(
-    this,
-    result);
-  return v2;
+  this->vfptr[2]._Incref(this);
+  return result;
 }
 
 // File Line: 126
 // RVA: 0x86070
-unsigned __int64 __fastcall std::numpunct<char>::_Getcat(std::locale::facet **_Ppf, std::locale *_Ploc)
+unsigned __int64 __fastcall std::numpunct<char>::_Getcat(std::numpunct<char> **_Ppf, std::locale *_Ploc)
 {
-  std::locale *v2; // r14
-  std::locale::facet **v3; // rsi
   char v4; // bl
   std::numpunct<char> *v5; // rdi
-  std::locale::_Locimp *v6; // rax
-  const char *v7; // rdx
+  std::locale::_Locimp *Ptr; // rax
+  const char *Myptr; // rdx
   std::_Locinfo *v8; // rax
-  std::_Locinfo v10; // [rsp+30h] [rbp-78h]
+  std::_Locinfo v10; // [rsp+30h] [rbp-78h] BYREF
 
-  v2 = _Ploc;
-  v3 = _Ppf;
   v4 = 0;
   if ( _Ppf && !*_Ppf )
   {
     v5 = (std::numpunct<char> *)AMemory::malloc_default(0x30ui64);
     if ( v5 )
     {
-      v6 = v2->_Ptr;
-      if ( v2->_Ptr )
+      Ptr = _Ploc->_Ptr;
+      if ( _Ploc->_Ptr )
       {
-        v7 = v6->_Name._Myptr;
-        if ( !v7 )
-          v7 = &v6->_Name._Nul;
+        Myptr = Ptr->_Name._Myptr;
+        if ( !Myptr )
+          Myptr = &Ptr->_Name._Nul;
       }
       else
       {
-        v7 = &customWorldMapCaption;
+        Myptr = &customCaption;
       }
-      std::_Locinfo::_Locinfo(&v10, v7);
+      std::_Locinfo::_Locinfo(&v10, Myptr);
       v4 = 1;
       v5->vfptr = (std::_Facet_baseVtbl *)&std::_Facet_base::`vftable;
       v5->vfptr = (std::_Facet_baseVtbl *)&std::locale::facet::`vftable;
@@ -81,8 +62,8 @@ unsigned __int64 __fastcall std::numpunct<char>::_Getcat(std::locale::facet **_P
     {
       v5 = 0i64;
     }
-    *v3 = (std::locale::facet *)&v5->vfptr;
-    if ( v4 & 1 )
+    *_Ppf = v5;
+    if ( (v4 & 1) != 0 )
       std::_Locinfo::~_Locinfo(&v10);
   }
   return 4i64;
@@ -92,52 +73,46 @@ unsigned __int64 __fastcall std::numpunct<char>::_Getcat(std::locale::facet **_P
 // RVA: 0x861E0
 void __fastcall std::numpunct<char>::_Init(std::numpunct<char> *this, std::_Locinfo *_Lobj, bool _Isdef)
 {
-  bool v3; // r15
-  std::_Locinfo *v4; // rbx
-  std::numpunct<char> *v5; // rsi
   lconv *v6; // r14
-  char *v7; // rdi
-  signed __int64 v8; // rbx
+  char *grouping; // rdi
+  __int64 v8; // rbx
   unsigned __int64 v9; // rbx
   char *v10; // rax
-  void *v11; // rax
-  void *v12; // rax
-  _Cvtvec result; // [rsp+70h] [rbp-48h]
+  char *v11; // rax
+  char *v12; // rax
+  _Cvtvec result; // [rsp+70h] [rbp-48h] BYREF
 
-  v3 = _Isdef;
-  v4 = _Lobj;
-  v5 = this;
   v6 = localeconv();
   Getcvt(&result);
-  v5->_Grouping = 0i64;
-  v5->_Falsename = 0i64;
-  v5->_Truename = 0i64;
-  v7 = &customWorldMapCaption;
-  if ( !v3 )
-    v7 = v6->grouping;
-  std::_Locinfo::_Getcvt(v4, &result);
+  this->_Grouping = 0i64;
+  this->_Falsename = 0i64;
+  this->_Truename = 0i64;
+  grouping = &customCaption;
+  if ( !_Isdef )
+    grouping = v6->grouping;
+  std::_Locinfo::_Getcvt(_Lobj, &result);
   v8 = -1i64;
   do
     ++v8;
-  while ( v7[v8] );
+  while ( grouping[v8] );
   v9 = v8 + 1;
   v10 = (char *)AMemory::malloc_default(v9);
-  qmemcpy(v10, v7, v9);
-  v5->_Grouping = v10;
-  v11 = AMemory::malloc_default(6ui64);
+  qmemcpy(v10, grouping, v9);
+  this->_Grouping = v10;
+  v11 = (char *)AMemory::malloc_default(6ui64);
   strcpy(v11, "false");
-  v5->_Falsename = (const char *)v11;
-  v12 = AMemory::malloc_default(5ui64);
+  this->_Falsename = v11;
+  v12 = (char *)AMemory::malloc_default(5ui64);
   strcpy(v12, "true");
-  v5->_Truename = (const char *)v12;
-  if ( v3 )
+  this->_Truename = v12;
+  if ( _Isdef )
   {
-    *(_WORD *)&v5->_Dp = 11310;
+    *(_WORD *)&this->_Dp = 11310;
   }
   else
   {
-    v5->_Dp = *v6->decimal_point;
-    v5->_Kseparator = *v6->thousands_sep;
+    this->_Dp = *v6->decimal_point;
+    this->_Kseparator = *v6->thousands_sep;
   }
 }
 
@@ -154,135 +129,124 @@ __int64 __fastcall std::numpunct<char>::do_thousands_sep(std::numpunct<char> *th
 
 // File Line: 201
 // RVA: 0x86C20
-std::basic_string<char,std::char_traits<char>,std::allocator<char> > *__fastcall std::numpunct<char>::do_grouping(std::numpunct<char> *this, std::basic_string<char,std::char_traits<char>,std::allocator<char> > *result)
+std::string *__fastcall std::numpunct<char>::do_grouping(std::numpunct<char> *this, std::string *result)
 {
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v2; // rbx
   unsigned __int64 v3; // r8
-  const char *v4; // rdx
+  const char *Grouping; // rdx
 
-  v2 = result;
   v3 = 0i64;
-  v4 = this->_Grouping;
-  v2->_Myres = 15i64;
-  v2->_Mysize = 0i64;
-  v2->_Bx._Buf[0] = 0;
-  if ( *v4 )
+  Grouping = this->_Grouping;
+  result->_Myres = 15i64;
+  result->_Mysize = 0i64;
+  result->_Bx._Buf[0] = 0;
+  if ( *Grouping )
   {
     v3 = -1i64;
     do
       ++v3;
-    while ( v4[v3] );
+    while ( Grouping[v3] );
   }
-  std::basic_string<char,std::char_traits<char>,std::allocator<char>>::assign(v2, v4, v3);
-  return v2;
+  std::string::assign(result, Grouping, v3);
+  return result;
 }
 
 // File Line: 206
 // RVA: 0x86BB0
-std::basic_string<char,std::char_traits<char>,std::allocator<char> > *__fastcall std::numpunct<char>::do_falsename(std::numpunct<char> *this, std::basic_string<char,std::char_traits<char>,std::allocator<char> > *result)
+std::string *__fastcall std::numpunct<char>::do_falsename(std::numpunct<char> *this, std::string *result)
 {
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v2; // rbx
   unsigned __int64 v3; // r8
-  const char *v4; // rdx
+  const char *Falsename; // rdx
 
-  v2 = result;
   v3 = 0i64;
-  v4 = this->_Falsename;
-  v2->_Myres = 15i64;
-  v2->_Mysize = 0i64;
-  v2->_Bx._Buf[0] = 0;
-  if ( *v4 )
+  Falsename = this->_Falsename;
+  result->_Myres = 15i64;
+  result->_Mysize = 0i64;
+  result->_Bx._Buf[0] = 0;
+  if ( *Falsename )
   {
     v3 = -1i64;
     do
       ++v3;
-    while ( v4[v3] );
+    while ( Falsename[v3] );
   }
-  std::basic_string<char,std::char_traits<char>,std::allocator<char>>::assign(v2, v4, v3);
-  return v2;
+  std::string::assign(result, Falsename, v3);
+  return result;
 }
 
 // File Line: 211
 // RVA: 0x87880
-std::basic_string<char,std::char_traits<char>,std::allocator<char> > *__fastcall std::numpunct<char>::do_truename(std::numpunct<char> *this, std::basic_string<char,std::char_traits<char>,std::allocator<char> > *result)
+std::string *__fastcall std::numpunct<char>::do_truename(std::numpunct<char> *this, std::string *result)
 {
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v2; // rbx
   unsigned __int64 v3; // r8
-  const char *v4; // rdx
+  const char *Truename; // rdx
 
-  v2 = result;
   v3 = 0i64;
-  v4 = this->_Truename;
-  v2->_Myres = 15i64;
-  v2->_Mysize = 0i64;
-  v2->_Bx._Buf[0] = 0;
-  if ( *v4 )
+  Truename = this->_Truename;
+  result->_Myres = 15i64;
+  result->_Mysize = 0i64;
+  result->_Bx._Buf[0] = 0;
+  if ( *Truename )
   {
     v3 = -1i64;
     do
       ++v3;
-    while ( v4[v3] );
+    while ( Truename[v3] );
   }
-  std::basic_string<char,std::char_traits<char>,std::allocator<char>>::assign(v2, v4, v3);
-  return v2;
+  std::string::assign(result, Truename, v3);
+  return result;
 }
 
 // File Line: 217
 // RVA: 0x86A70
 void __fastcall std::numpunct<char>::_Tidy(std::numpunct<char> *this)
 {
-  std::numpunct<char> *v1; // rbx
-
-  v1 = this;
   Illusion::ShaderParam::operator delete((void *)this->_Grouping);
-  Illusion::ShaderParam::operator delete((void *)v1->_Falsename);
-  Illusion::ShaderParam::operator delete((void *)v1->_Truename);
+  Illusion::ShaderParam::operator delete((void *)this->_Falsename);
+  Illusion::ShaderParam::operator delete((void *)this->_Truename);
 }
 
 // File Line: 1092
 // RVA: 0x85F80
-unsigned __int64 __fastcall std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char>>>::_Getcat(std::locale::facet **_Ppf, std::locale *_Ploc)
+unsigned __int64 __fastcall std::num_put<char,std::ostreambuf_iterator<char>>::_Getcat(
+        std::locale::facet **_Ppf,
+        std::locale *_Ploc)
 {
-  std::locale *v2; // r14
-  std::locale::facet **v3; // rsi
   char v4; // bl
   std::locale::facet *v5; // rdi
-  std::locale::_Locimp *v6; // rax
-  const char *v7; // rdx
-  std::_Locinfo v9; // [rsp+30h] [rbp-78h]
+  std::locale::_Locimp *Ptr; // rax
+  const char *Myptr; // rdx
+  std::_Locinfo v9; // [rsp+30h] [rbp-78h] BYREF
 
-  v2 = _Ploc;
-  v3 = _Ppf;
   v4 = 0;
   if ( _Ppf && !*_Ppf )
   {
     v5 = (std::locale::facet *)AMemory::malloc_default(0x10ui64);
     if ( v5 )
     {
-      v6 = v2->_Ptr;
-      if ( v2->_Ptr )
+      Ptr = _Ploc->_Ptr;
+      if ( _Ploc->_Ptr )
       {
-        v7 = v6->_Name._Myptr;
-        if ( !v7 )
-          v7 = &v6->_Name._Nul;
+        Myptr = Ptr->_Name._Myptr;
+        if ( !Myptr )
+          Myptr = &Ptr->_Name._Nul;
       }
       else
       {
-        v7 = &customWorldMapCaption;
+        Myptr = &customCaption;
       }
-      std::_Locinfo::_Locinfo(&v9, v7);
+      std::_Locinfo::_Locinfo(&v9, Myptr);
       v4 = 1;
       v5->vfptr = (std::_Facet_baseVtbl *)&std::_Facet_base::`vftable;
       v5->vfptr = (std::_Facet_baseVtbl *)&std::locale::facet::`vftable;
       v5->_Refs = 0;
-      v5->vfptr = (std::_Facet_baseVtbl *)&std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char>>>::`vftable;
+      v5->vfptr = (std::_Facet_baseVtbl *)&std::num_put<char,std::ostreambuf_iterator<char>>::`vftable;
     }
     else
     {
       v5 = 0i64;
     }
-    *v3 = v5;
-    if ( v4 & 1 )
+    *_Ppf = v5;
+    if ( (v4 & 1) != 0 )
       std::_Locinfo::~_Locinfo(&v9);
   }
   return 4i64;
@@ -290,88 +254,80 @@ unsigned __int64 __fastcall std::num_put<char,std::ostreambuf_iterator<char,std:
 
 // File Line: 1181
 // RVA: 0x87570
-std::ostreambuf_iterator<char,std::char_traits<char> > *__fastcall std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char>>>::do_put(std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > *this, std::ostreambuf_iterator<char,std::char_traits<char> > *result, std::ostreambuf_iterator<char,std::char_traits<char> > *_Dest, std::ios_base *_Iosbase, char _Fill, bool _Val)
+std::ostreambuf_iterator<char> *__fastcall std::num_put<char,std::ostreambuf_iterator<char>>::do_put(
+        std::num_put<char,std::ostreambuf_iterator<char> > *this,
+        std::ostreambuf_iterator<char> *result,
+        std::_String_val<std::_Simple_types<char> >::_Bxty *_Dest,
+        std::ios_base *_Iosbase,
+        unsigned __int8 _Fill,
+        bool _Val)
 {
-  std::ios_base *v6; // r13
-  std::_String_val<std::_Simple_types<char> >::_Bxty *v7; // r12
-  std::ostreambuf_iterator<char,std::char_traits<char> > *v8; // rbx
+  std::ostreambuf_iterator<char> *v8; // rbx
   std::locale *v9; // rax
   std::numpunct<char> *v10; // rbx
-  void (__fastcall ***v11)(_QWORD, signed __int64); // rax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v12; // rbx
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v13; // rbx
-  unsigned __int64 v14; // r14
-  unsigned __int64 v15; // rdi
+  std::_Facet_base *v11; // rax
+  std::string *v12; // rbx
+  std::string *v13; // rbx
+  __int64 Wide; // r14
+  unsigned __int64 Mysize; // rdi
   unsigned __int64 v16; // r14
   unsigned __int8 v17; // r15
-  std::_String_val<std::_Simple_types<char> >::_Bxty v18; // xmm0
+  std::ostreambuf_iterator<char> Bx; // xmm0
   __int64 v19; // rbx
-  _DWORD *v20; // rcx
+  int *v20; // rcx
   unsigned __int8 **v21; // rcx
   unsigned __int8 *v22; // rdx
   int v23; // eax
-  std::_String_val<std::_Simple_types<char> >::_Bxty v24; // xmm0
-  unsigned __int8 *v25; // rsi
+  std::ostreambuf_iterator<char> v24; // xmm0
+  std::string *p_ptr; // rsi
   __int64 v26; // rbx
   unsigned __int8 v27; // r8
-  _DWORD *v28; // rcx
+  int *v28; // rcx
   unsigned __int8 **v29; // rcx
   unsigned __int8 *v30; // rdx
   int v31; // eax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > v33; // [rsp+40h] [rbp-40h]
-  void *ptr; // [rsp+60h] [rbp-20h]
-  unsigned __int64 v35; // [rsp+70h] [rbp-10h]
-  unsigned __int64 v36; // [rsp+78h] [rbp-8h]
-  std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > *v37; // [rsp+C0h] [rbp+40h]
-  std::ostreambuf_iterator<char,std::char_traits<char> > *v38; // [rsp+C8h] [rbp+48h]
-  std::locale resulta; // [rsp+D8h] [rbp+58h]
+  std::string v33; // [rsp+40h] [rbp-40h] BYREF
+  std::string ptr; // [rsp+60h] [rbp-20h] BYREF
+  std::locale resulta; // [rsp+D8h] [rbp+58h] BYREF
 
-  v38 = result;
-  v37 = this;
-  v6 = _Iosbase;
-  v7 = (std::_String_val<std::_Simple_types<char> >::_Bxty *)_Dest;
   v8 = result;
-  if ( _Iosbase->_Fmtfl & 0x4000 )
+  if ( (_Iosbase->_Fmtfl & 0x4000) != 0 )
   {
     v9 = std::ios_base::getloc(_Iosbase, &resulta);
-    v10 = (std::numpunct<char> *)std::use_facet<std::numpunct<char>>(v9);
+    v10 = std::use_facet<std::numpunct<char>>(v9);
     if ( resulta._Ptr )
     {
-      v11 = (void (__fastcall ***)(_QWORD, signed __int64))((__int64 (*)(void))resulta._Ptr->vfptr->_Decref)();
+      v11 = resulta._Ptr->vfptr->_Decref(resulta._Ptr);
       if ( v11 )
-        (**v11)(v11, 1i64);
+        v11->vfptr->__vecDelDtor(v11, 1u);
     }
-    v36 = 15i64;
-    v35 = 0i64;
-    LOBYTE(ptr) = 0;
+    ptr._Myres = 15i64;
+    ptr._Mysize = 0i64;
+    ptr._Bx._Buf[0] = 0;
     if ( _Val )
     {
       v12 = std::numpunct<char>::truename(v10, &v33);
-      if ( &ptr != (void **)v12 )
+      if ( &ptr != v12 )
       {
-        if ( v36 >= 0x10 )
-          Illusion::ShaderParam::operator delete(ptr);
-        v36 = 15i64;
-        v35 = 0i64;
-        LOBYTE(ptr) = 0;
-        std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Assign_rv(
-          (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)&ptr,
-          v12);
+        if ( ptr._Myres >= 0x10 )
+          Illusion::ShaderParam::operator delete(ptr._Bx._Ptr);
+        ptr._Myres = 15i64;
+        ptr._Mysize = 0i64;
+        ptr._Bx._Buf[0] = 0;
+        std::string::_Assign_rv(&ptr, v12);
       }
     }
     else
     {
       v13 = std::numpunct<char>::falsename(v10, &v33);
-      if ( &ptr != (void **)v13 )
+      if ( &ptr != v13 )
       {
-        if ( v36 >= 0x10 )
-          Illusion::ShaderParam::operator delete(ptr);
-        v36 = 15i64;
-        v35 = 0i64;
-        LOBYTE(ptr) = 0;
-        std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Assign_rv(
-          (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)&ptr,
-          v13);
+        if ( ptr._Myres >= 0x10 )
+          Illusion::ShaderParam::operator delete(ptr._Bx._Ptr);
+        ptr._Myres = 15i64;
+        ptr._Mysize = 0i64;
+        ptr._Bx._Buf[0] = 0;
+        std::string::_Assign_rv(&ptr, v13);
       }
     }
     if ( v33._Myres >= 0x10 )
@@ -379,26 +335,26 @@ std::ostreambuf_iterator<char,std::char_traits<char> > *__fastcall std::num_put<
     v33._Bx._Buf[0] = 0;
     v33._Mysize = 0i64;
     v33._Myres = 15i64;
-    v14 = v6->_Wide;
-    v15 = v35;
-    if ( (signed __int64)v14 <= 0 || v14 <= v35 )
+    Wide = _Iosbase->_Wide;
+    Mysize = ptr._Mysize;
+    if ( Wide <= 0 || Wide <= ptr._Mysize )
       v16 = 0i64;
     else
-      v16 = v14 - v35;
+      v16 = Wide - ptr._Mysize;
     v17 = _Fill;
-    if ( (v6->_Fmtfl & 0x1C0) != 64 )
+    if ( (_Iosbase->_Fmtfl & 0x1C0) != 64 )
     {
-      v18 = *v7;
-      v33._Bx = *v7;
+      Bx = (std::ostreambuf_iterator<char>)*_Dest;
+      v33._Bx = *_Dest;
       if ( v16 )
       {
         v19 = *(_QWORD *)&v33._Bx._Alias[8];
         do
         {
           if ( !v19
-            || (!**(_QWORD **)(v19 + 64) || (v20 = *(_DWORD **)(v19 + 88), *v20 <= 0) ? (v23 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)v19 + 24i64))(
-                                                                                                 v19,
-                                                                                                 v17)) : (--*v20, v21 = *(unsigned __int8 ***)(v19 + 64), v22 = *v21, ++*v21, *v22 = v17, v23 = v17),
+            || (!**(_QWORD **)(v19 + 64) || (v20 = *(int **)(v19 + 88), *v20 <= 0)
+              ? (v23 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)v19 + 24i64))(v19, v17))
+              : (--*v20, v21 = *(unsigned __int8 ***)(v19 + 64), v22 = *v21, ++*v21, *v22 = v17, v23 = v17),
                 v23 == -1) )
           {
             v33._Bx._Buf[0] = 1;
@@ -406,57 +362,57 @@ std::ostreambuf_iterator<char,std::char_traits<char> > *__fastcall std::num_put<
           --v16;
         }
         while ( v16 );
-        v15 = v35;
-        v18 = v33._Bx;
+        Mysize = ptr._Mysize;
+        Bx = (std::ostreambuf_iterator<char>)v33._Bx;
       }
-      *v7 = v18;
+      *(std::ostreambuf_iterator<char> *)_Dest = Bx;
       v16 = 0i64;
     }
-    v24 = *v7;
-    v33._Bx = *v7;
-    v25 = (unsigned __int8 *)&ptr;
-    if ( v36 >= 0x10 )
-      v25 = (unsigned __int8 *)ptr;
-    if ( v15 )
+    v24 = (std::ostreambuf_iterator<char>)*_Dest;
+    v33._Bx = *_Dest;
+    p_ptr = &ptr;
+    if ( ptr._Myres >= 0x10 )
+      p_ptr = (std::string *)ptr._Bx._Ptr;
+    if ( Mysize )
     {
       v26 = *(_QWORD *)&v33._Bx._Alias[8];
       do
       {
-        v27 = *v25;
+        v27 = p_ptr->_Bx._Buf[0];
         if ( !v26
-          || (!**(_QWORD **)(v26 + 64) || (v28 = *(_DWORD **)(v26 + 88), *v28 <= 0) ? (v31 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)v26 + 24i64))(
-                                                                                               v26,
-                                                                                               v27)) : (--*v28, v29 = *(unsigned __int8 ***)(v26 + 64), v30 = *v29, ++*v29, *v30 = v27, v31 = v27),
+          || (!**(_QWORD **)(v26 + 64) || (v28 = *(int **)(v26 + 88), *v28 <= 0)
+            ? (v31 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)v26 + 24i64))(v26, v27))
+            : (--*v28, v29 = *(unsigned __int8 ***)(v26 + 64), v30 = *v29, ++*v29, *v30 = v27, v31 = v27),
               v31 == -1) )
         {
           v33._Bx._Buf[0] = 1;
         }
-        ++v25;
-        --v15;
+        p_ptr = (std::string *)((char *)p_ptr + 1);
+        --Mysize;
       }
-      while ( v15 );
-      v24 = v33._Bx;
+      while ( Mysize );
+      v24 = (std::ostreambuf_iterator<char>)v33._Bx;
     }
-    *v7 = v24;
-    v6->_Wide = 0i64;
-    v33._Bx = *v7;
-    v8 = v38;
-    std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char>>>::_Rep(
-      v37,
-      v38,
-      (std::ostreambuf_iterator<char,std::char_traits<char> > *)&v33,
+    *(std::ostreambuf_iterator<char> *)_Dest = v24;
+    _Iosbase->_Wide = 0i64;
+    v33._Bx = *_Dest;
+    v8 = result;
+    std::num_put<char,std::ostreambuf_iterator<char>>::_Rep(
+      this,
+      result,
+      (std::ostreambuf_iterator<char> *)&v33,
       v17,
       v16);
-    if ( v36 >= 0x10 )
-      Illusion::ShaderParam::operator delete(ptr);
-    v36 = 15i64;
-    v35 = 0i64;
-    LOBYTE(ptr) = 0;
+    if ( ptr._Myres >= 0x10 )
+      Illusion::ShaderParam::operator delete(ptr._Bx._Ptr);
+    ptr._Myres = 15i64;
+    ptr._Mysize = 0i64;
+    ptr._Bx._Buf[0] = 0;
   }
   else
   {
-    v33._Bx = (std::_String_val<std::_Simple_types<char> >::_Bxty)*_Dest;
-    ((void (__fastcall *)(std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > *, std::ostreambuf_iterator<char,std::char_traits<char> > *, std::basic_string<char,std::char_traits<char>,std::allocator<char> > *))this->vfptr[3].__vecDelDtor)(
+    v33._Bx = *_Dest;
+    ((void (__fastcall *)(std::num_put<char,std::ostreambuf_iterator<char> > *, std::ostreambuf_iterator<char> *, std::string *))this->vfptr[3].__vecDelDtor)(
       this,
       result,
       &v33);
@@ -466,110 +422,105 @@ std::ostreambuf_iterator<char,std::char_traits<char> > *__fastcall std::num_put<
 
 // File Line: 1211
 // RVA: 0x86C90
-std::ostreambuf_iterator<char,std::char_traits<char> > *__fastcall std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char>>>::do_put(std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > *this, std::ostreambuf_iterator<char,std::char_traits<char> > *result, std::ostreambuf_iterator<char,std::char_traits<char> > *_Dest, std::ios_base *_Iosbase, char _Fill, int _Val)
+std::ostreambuf_iterator<char> *__fastcall std::num_put<char,std::ostreambuf_iterator<char>>::do_put(
+        std::num_put<char,std::ostreambuf_iterator<char> > *this,
+        std::ostreambuf_iterator<char> *result,
+        std::ostreambuf_iterator<char> *_Dest,
+        std::ios_base *_Iosbase,
+        unsigned __int8 _Fill,
+        unsigned int _Val)
 {
-  std::ostreambuf_iterator<char,std::char_traits<char> > v6; // xmm0
-  int v7; // eax
-  std::ios_base *v8; // rbx
-  std::ostreambuf_iterator<char,std::char_traits<char> > *v9; // rdi
-  std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > *v10; // rsi
-  _BYTE *v11; // r8
+  std::ostreambuf_iterator<char> v6; // xmm0
+  int Fmtfl; // eax
+  char *v11; // r8
   int v12; // ecx
   char v13; // al
   __int64 v14; // r9
   int v15; // eax
-  std::ostreambuf_iterator<char,std::char_traits<char> > v17; // [rsp+40h] [rbp-58h]
-  char string; // [rsp+50h] [rbp-48h]
-  char format; // [rsp+A8h] [rbp+10h]
-  _BYTE v20[7]; // [rsp+A9h] [rbp+11h]
+  std::ostreambuf_iterator<char> v17; // [rsp+40h] [rbp-58h] BYREF
+  char string[64]; // [rsp+50h] [rbp-48h] BYREF
+  char format; // [rsp+A8h] [rbp+10h] BYREF
+  char v20; // [rsp+A9h] [rbp+11h] BYREF
+  _BYTE v21[6]; // [rsp+AAh] [rbp+12h] BYREF
 
   v6 = *_Dest;
-  v7 = _Iosbase->_Fmtfl;
-  v8 = _Iosbase;
-  v9 = result;
-  v10 = this;
+  Fmtfl = _Iosbase->_Fmtfl;
   format = 37;
-  v11 = v20;
+  v11 = &v20;
   v17 = v6;
-  if ( v7 & 0x20 )
+  if ( (Fmtfl & 0x20) != 0 )
   {
-    v20[0] = 43;
-    v11 = &v20[1];
+    v20 = 43;
+    v11 = v21;
   }
-  if ( v7 & 8 )
+  if ( (Fmtfl & 8) != 0 )
     *v11++ = 35;
   *v11 = 108;
-  v12 = v7 & 0xE00;
+  v12 = Fmtfl & 0xE00;
   if ( v12 == 1024 )
   {
     v13 = 111;
   }
   else if ( v12 == 2048 )
   {
-    v13 = ~(8 * v7) & 0x20 | 0x58;
+    v13 = ~(8 * Fmtfl) & 0x20 | 0x58;
   }
   else
   {
     v13 = 100;
   }
-  v14 = (unsigned int)_Val;
+  v14 = _Val;
   v11[1] = v13;
   v11[2] = 0;
-  v15 = sprintf_s(&string, 0x40ui64, &format, v14);
-  std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char>>>::_Iput(
-    v10,
-    v9,
-    &v17,
-    v8,
-    _Fill,
-    &string,
-    v15);
-  return v9;
+  v15 = sprintf_s(string, 0x40ui64, &format, v14);
+  std::num_put<char,std::ostreambuf_iterator<char>>::_Iput(this, result, &v17, _Iosbase, _Fill, string, v15);
+  return result;
 }
 
 // File Line: 1221
 // RVA: 0x86D80
-std::ostreambuf_iterator<char,std::char_traits<char> > *__fastcall std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char>>>::do_put(std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > *this, std::ostreambuf_iterator<char,std::char_traits<char> > *result, std::ostreambuf_iterator<char,std::char_traits<char> > *_Dest, std::ios_base *_Iosbase, char _Fill, unsigned int _Val)
+std::ostreambuf_iterator<char> *__fastcall std::num_put<char,std::ostreambuf_iterator<char>>::do_put(
+        std::num_put<char,std::ostreambuf_iterator<char> > *this,
+        std::ostreambuf_iterator<char> *result,
+        std::ostreambuf_iterator<char> *_Dest,
+        std::ios_base *_Iosbase,
+        unsigned __int8 _Fill,
+        unsigned int _Val)
 {
-  std::ostreambuf_iterator<char,std::char_traits<char> > v6; // xmm0
-  int v7; // eax
-  std::ios_base *v8; // rbx
-  std::ostreambuf_iterator<char,std::char_traits<char> > *v9; // rdi
-  std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > *v10; // rsi
-  _BYTE *v11; // r8
+  std::ostreambuf_iterator<char> v6; // xmm0
+  int Fmtfl; // eax
+  char *v11; // r8
   int v12; // ecx
   char v13; // al
   __int64 v14; // r9
   int v15; // eax
-  std::ostreambuf_iterator<char,std::char_traits<char> > v17; // [rsp+40h] [rbp-58h]
-  char string; // [rsp+50h] [rbp-48h]
-  char format; // [rsp+A8h] [rbp+10h]
-  _BYTE v20[7]; // [rsp+A9h] [rbp+11h]
+  std::ostreambuf_iterator<char> v17; // [rsp+40h] [rbp-58h] BYREF
+  char string[64]; // [rsp+50h] [rbp-48h] BYREF
+  char format; // [rsp+A8h] [rbp+10h] BYREF
+  char v20; // [rsp+A9h] [rbp+11h] BYREF
+  _BYTE v21[6]; // [rsp+AAh] [rbp+12h] BYREF
 
   v6 = *_Dest;
-  v7 = _Iosbase->_Fmtfl;
-  v8 = _Iosbase;
-  v9 = result;
-  v10 = this;
+  Fmtfl = _Iosbase->_Fmtfl;
   format = 37;
-  v11 = v20;
+  v11 = &v20;
   v17 = v6;
-  if ( v7 & 0x20 )
+  if ( (Fmtfl & 0x20) != 0 )
   {
-    v20[0] = 43;
-    v11 = &v20[1];
+    v20 = 43;
+    v11 = v21;
   }
-  if ( v7 & 8 )
+  if ( (Fmtfl & 8) != 0 )
     *v11++ = 35;
   *v11 = 108;
-  v12 = v7 & 0xE00;
+  v12 = Fmtfl & 0xE00;
   if ( v12 == 1024 )
   {
     v13 = 111;
   }
   else if ( v12 == 2048 )
   {
-    v13 = ~(8 * v7) & 0x20 | 0x58;
+    v13 = ~(8 * Fmtfl) & 0x20 | 0x58;
   }
   else
   {
@@ -578,62 +529,56 @@ std::ostreambuf_iterator<char,std::char_traits<char> > *__fastcall std::num_put<
   v14 = _Val;
   v11[1] = v13;
   v11[2] = 0;
-  v15 = sprintf_s(&string, 0x40ui64, &format, v14);
-  std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char>>>::_Iput(
-    v10,
-    v9,
-    &v17,
-    v8,
-    _Fill,
-    &string,
-    v15);
-  return v9;
+  v15 = sprintf_s(string, 0x40ui64, &format, v14);
+  std::num_put<char,std::ostreambuf_iterator<char>>::_Iput(this, result, &v17, _Iosbase, _Fill, string, v15);
+  return result;
 }
 
 // File Line: 1232
 // RVA: 0x87370
-std::ostreambuf_iterator<char,std::char_traits<char> > *__fastcall std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char>>>::do_put(std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > *this, std::ostreambuf_iterator<char,std::char_traits<char> > *result, std::ostreambuf_iterator<char,std::char_traits<char> > *_Dest, std::ios_base *_Iosbase, char _Fill, __int64 _Val)
+std::ostreambuf_iterator<char> *__fastcall std::num_put<char,std::ostreambuf_iterator<char>>::do_put(
+        std::num_put<char,std::ostreambuf_iterator<char> > *this,
+        std::ostreambuf_iterator<char> *result,
+        std::ostreambuf_iterator<char> *_Dest,
+        std::ios_base *_Iosbase,
+        unsigned __int8 _Fill,
+        __int64 _Val)
 {
-  std::ostreambuf_iterator<char,std::char_traits<char> > v6; // xmm0
-  int v7; // er8
-  std::ios_base *v8; // rbx
-  std::ostreambuf_iterator<char,std::char_traits<char> > *v9; // rdi
-  std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > *v10; // rsi
-  _BYTE *v11; // rax
+  std::ostreambuf_iterator<char> v6; // xmm0
+  int Fmtfl; // r8d
+  char *v11; // rax
   int v12; // ecx
   char v13; // r8
   __int64 v14; // r9
   int v15; // eax
-  std::ostreambuf_iterator<char,std::char_traits<char> > v17; // [rsp+40h] [rbp-58h]
-  char string; // [rsp+50h] [rbp-48h]
-  char format; // [rsp+A8h] [rbp+10h]
-  _BYTE v20[7]; // [rsp+A9h] [rbp+11h]
+  std::ostreambuf_iterator<char> v17; // [rsp+40h] [rbp-58h] BYREF
+  char string[64]; // [rsp+50h] [rbp-48h] BYREF
+  char format; // [rsp+A8h] [rbp+10h] BYREF
+  char v20; // [rsp+A9h] [rbp+11h] BYREF
+  _BYTE v21[6]; // [rsp+AAh] [rbp+12h] BYREF
 
   v6 = *_Dest;
-  v7 = _Iosbase->_Fmtfl;
-  v8 = _Iosbase;
-  v9 = result;
-  v10 = this;
+  Fmtfl = _Iosbase->_Fmtfl;
   format = 37;
-  v11 = v20;
+  v11 = &v20;
   v17 = v6;
-  if ( v7 & 0x20 )
+  if ( (Fmtfl & 0x20) != 0 )
   {
-    v20[0] = 43;
-    v11 = &v20[1];
+    v20 = 43;
+    v11 = v21;
   }
-  if ( v7 & 8 )
+  if ( (Fmtfl & 8) != 0 )
     *v11++ = 35;
   *(_WORD *)v11 = 13897;
   v11[2] = 52;
-  v12 = v7 & 0xE00;
+  v12 = Fmtfl & 0xE00;
   if ( v12 == 1024 )
   {
     v13 = 111;
   }
   else if ( v12 == 2048 )
   {
-    v13 = ~(8 * v7) & 0x20 | 0x58;
+    v13 = ~(8 * Fmtfl) & 0x20 | 0x58;
   }
   else
   {
@@ -642,62 +587,56 @@ std::ostreambuf_iterator<char,std::char_traits<char> > *__fastcall std::num_put<
   v14 = _Val;
   v11[3] = v13;
   v11[4] = 0;
-  v15 = sprintf_s(&string, 0x40ui64, &format, v14);
-  std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char>>>::_Iput(
-    v10,
-    v9,
-    &v17,
-    v8,
-    _Fill,
-    &string,
-    v15);
-  return v9;
+  v15 = sprintf_s(string, 0x40ui64, &format, v14);
+  std::num_put<char,std::ostreambuf_iterator<char>>::_Iput(this, result, &v17, _Iosbase, _Fill, string, v15);
+  return result;
 }
 
 // File Line: 1242
 // RVA: 0x87470
-std::ostreambuf_iterator<char,std::char_traits<char> > *__fastcall std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char>>>::do_put(std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > *this, std::ostreambuf_iterator<char,std::char_traits<char> > *result, std::ostreambuf_iterator<char,std::char_traits<char> > *_Dest, std::ios_base *_Iosbase, char _Fill, unsigned __int64 _Val)
+std::ostreambuf_iterator<char> *__fastcall std::num_put<char,std::ostreambuf_iterator<char>>::do_put(
+        std::num_put<char,std::ostreambuf_iterator<char> > *this,
+        std::ostreambuf_iterator<char> *result,
+        std::ostreambuf_iterator<char> *_Dest,
+        std::ios_base *_Iosbase,
+        unsigned __int8 _Fill,
+        unsigned __int64 _Val)
 {
-  std::ostreambuf_iterator<char,std::char_traits<char> > v6; // xmm0
-  int v7; // er8
-  std::ios_base *v8; // rbx
-  std::ostreambuf_iterator<char,std::char_traits<char> > *v9; // rdi
-  std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > *v10; // rsi
-  _BYTE *v11; // rax
+  std::ostreambuf_iterator<char> v6; // xmm0
+  int Fmtfl; // r8d
+  char *v11; // rax
   int v12; // ecx
   char v13; // r8
   unsigned __int64 v14; // r9
   int v15; // eax
-  std::ostreambuf_iterator<char,std::char_traits<char> > v17; // [rsp+40h] [rbp-58h]
-  char string; // [rsp+50h] [rbp-48h]
-  char format; // [rsp+A8h] [rbp+10h]
-  _BYTE v20[7]; // [rsp+A9h] [rbp+11h]
+  std::ostreambuf_iterator<char> v17; // [rsp+40h] [rbp-58h] BYREF
+  char string[64]; // [rsp+50h] [rbp-48h] BYREF
+  char format; // [rsp+A8h] [rbp+10h] BYREF
+  char v20; // [rsp+A9h] [rbp+11h] BYREF
+  _BYTE v21[6]; // [rsp+AAh] [rbp+12h] BYREF
 
   v6 = *_Dest;
-  v7 = _Iosbase->_Fmtfl;
-  v8 = _Iosbase;
-  v9 = result;
-  v10 = this;
+  Fmtfl = _Iosbase->_Fmtfl;
   format = 37;
-  v11 = v20;
+  v11 = &v20;
   v17 = v6;
-  if ( v7 & 0x20 )
+  if ( (Fmtfl & 0x20) != 0 )
   {
-    v20[0] = 43;
-    v11 = &v20[1];
+    v20 = 43;
+    v11 = v21;
   }
-  if ( v7 & 8 )
+  if ( (Fmtfl & 8) != 0 )
     *v11++ = 35;
   *(_WORD *)v11 = 13897;
   v11[2] = 52;
-  v12 = v7 & 0xE00;
+  v12 = Fmtfl & 0xE00;
   if ( v12 == 1024 )
   {
     v13 = 111;
   }
   else if ( v12 == 2048 )
   {
-    v13 = ~(8 * v7) & 0x20 | 0x58;
+    v13 = ~(8 * Fmtfl) & 0x20 | 0x58;
   }
   else
   {
@@ -706,58 +645,51 @@ std::ostreambuf_iterator<char,std::char_traits<char> > *__fastcall std::num_put<
   v14 = _Val;
   v11[3] = v13;
   v11[4] = 0;
-  v15 = sprintf_s(&string, 0x40ui64, &format, v14);
-  std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char>>>::_Iput(
-    v10,
-    v9,
-    &v17,
-    v8,
-    _Fill,
-    &string,
-    v15);
-  return v9;
+  v15 = sprintf_s(string, 0x40ui64, &format, v14);
+  std::num_put<char,std::ostreambuf_iterator<char>>::_Iput(this, result, &v17, _Iosbase, _Fill, string, v15);
+  return result;
 }
 
 // File Line: 1253
 // RVA: 0x86E70
-std::ostreambuf_iterator<char,std::char_traits<char> > *__fastcall std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char>>>::do_put(std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > *this, std::ostreambuf_iterator<char,std::char_traits<char> > *result, std::ostreambuf_iterator<char,std::char_traits<char> > *_Dest, std::ios_base *_Iosbase, char _Fill, long double _Val)
+std::ostreambuf_iterator<char> *__fastcall std::num_put<char,std::ostreambuf_iterator<char>>::do_put(
+        std::num_put<char,std::ostreambuf_iterator<char> > *this,
+        std::ostreambuf_iterator<char> *result,
+        std::ostreambuf_iterator<char> *_Dest,
+        std::ios_base *_Iosbase,
+        char _Fill,
+        double _Val)
 {
-  __int64 v6; // rbx
-  std::ios_base *v7; // rbp
-  std::ostreambuf_iterator<char,std::char_traits<char> > *v8; // r14
-  std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > *v9; // r15
-  int v10; // edx
+  __int64 Prec; // rbx
+  int Fmtfl; // edx
   double v11; // xmm1_8
-  signed int v12; // er9
+  int v12; // r9d
   unsigned __int64 v13; // rsi
   unsigned __int64 v14; // rdi
-  signed __int64 v15; // rbx
-  std::ostreambuf_iterator<char,std::char_traits<char> > v16; // xmm0
+  __int64 v15; // rbx
+  std::ostreambuf_iterator<char> v16; // xmm0
   char *v17; // rax
   int v18; // ecx
   char v19; // dl
   char v20; // r8
-  std::ostreambuf_iterator<char,std::char_traits<char> > v22; // [rsp+50h] [rbp-98h]
-  char string; // [rsp+60h] [rbp-88h]
-  char format; // [rsp+F8h] [rbp+10h]
-  char v25; // [rsp+F9h] [rbp+11h]
-  char v26; // [rsp+FAh] [rbp+12h]
+  std::ostreambuf_iterator<char> v22; // [rsp+50h] [rbp-98h] BYREF
+  char string[112]; // [rsp+60h] [rbp-88h] BYREF
+  char format; // [rsp+F8h] [rbp+10h] BYREF
+  char v25; // [rsp+F9h] [rbp+11h] BYREF
+  char v26; // [rsp+FAh] [rbp+12h] BYREF
 
-  v6 = _Iosbase->_Prec;
-  v7 = _Iosbase;
-  v8 = result;
-  v9 = this;
-  if ( v6 <= 0 && !(_Iosbase->_Fmtfl & 0x2000) )
-    v6 = 6i64;
-  v10 = _Iosbase->_Fmtfl;
+  Prec = _Iosbase->_Prec;
+  if ( Prec <= 0 && (_Iosbase->_Fmtfl & 0x2000) == 0 )
+    Prec = 6i64;
+  Fmtfl = _Iosbase->_Fmtfl;
   v11 = _Val;
-  v12 = v6;
-  if ( v6 > 36 )
+  v12 = Prec;
+  if ( Prec > 36 )
     v12 = 36;
   v13 = 0i64;
   v14 = 0i64;
-  v15 = v6 - v12;
-  if ( (v10 & 0x3000) == 0x2000 && _Val * 0.5 != _Val )
+  v15 = Prec - v12;
+  if ( (Fmtfl & 0x3000) == 0x2000 && _Val * 0.5 != _Val )
   {
     if ( _Val < 0.0 )
       *(_QWORD *)&v11 = *(_QWORD *)&_Val ^ _xmm[0];
@@ -786,16 +718,16 @@ std::ostreambuf_iterator<char,std::char_traits<char> > *__fastcall std::num_put<
   format = 37;
   v17 = &v25;
   v22 = v16;
-  if ( v10 & 0x20 )
+  if ( (Fmtfl & 0x20) != 0 )
   {
     v25 = 43;
     v17 = &v26;
   }
-  if ( v10 & 0x10 )
+  if ( (Fmtfl & 0x10) != 0 )
     *v17++ = 35;
   *(_WORD *)v17 = 10798;
-  v18 = v10 & 0x3000;
-  if ( !(v10 & 4) )
+  v18 = Fmtfl & 0x3000;
+  if ( (Fmtfl & 4) == 0 )
   {
     if ( v18 != 0x2000 )
     {
@@ -827,51 +759,51 @@ LABEL_32:
 LABEL_34:
   v17[2] = v19;
   v17[3] = 0;
-  sprintf_s(&string, 0x6Cui64, &format);
-  std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char>>>::_Fput(v9, v8, &v22, v7);
-  return v8;
+  sprintf_s(string, 0x6Cui64, &format);
+  std::num_put<char,std::ostreambuf_iterator<char>>::_Fput(this, result, &v22, _Iosbase);
+  return result;
 }
 
 // File Line: 1295
 // RVA: 0x870B0
-std::ostreambuf_iterator<char,std::char_traits<char> > *__fastcall std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char>>>::do_put(std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > *this, std::ostreambuf_iterator<char,std::char_traits<char> > *result, std::ostreambuf_iterator<char,std::char_traits<char> > *_Dest, std::ios_base *_Iosbase, char _Fill, long double _Val)
+std::ostreambuf_iterator<char> *__fastcall std::num_put<char,std::ostreambuf_iterator<char>>::do_put(
+        std::num_put<char,std::ostreambuf_iterator<char> > *this,
+        std::ostreambuf_iterator<char> *result,
+        std::ostreambuf_iterator<char> *_Dest,
+        std::ios_base *_Iosbase,
+        char _Fill,
+        double _Val)
 {
-  __int64 v6; // rbx
-  std::ios_base *v7; // rbp
-  std::ostreambuf_iterator<char,std::char_traits<char> > *v8; // r14
-  std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > *v9; // r15
-  int v10; // edx
+  __int64 Prec; // rbx
+  int Fmtfl; // edx
   double v11; // xmm1_8
-  signed int v12; // er9
+  int v12; // r9d
   unsigned __int64 v13; // rsi
   unsigned __int64 v14; // rdi
-  signed __int64 v15; // rbx
-  std::ostreambuf_iterator<char,std::char_traits<char> > v16; // xmm0
+  __int64 v15; // rbx
+  std::ostreambuf_iterator<char> v16; // xmm0
   char *v17; // rax
   int v18; // ecx
   char v19; // dl
   char v20; // r8
-  std::ostreambuf_iterator<char,std::char_traits<char> > v22; // [rsp+50h] [rbp-98h]
-  char string; // [rsp+60h] [rbp-88h]
-  char format; // [rsp+F8h] [rbp+10h]
-  char v25; // [rsp+F9h] [rbp+11h]
-  char v26; // [rsp+FAh] [rbp+12h]
+  std::ostreambuf_iterator<char> v22; // [rsp+50h] [rbp-98h] BYREF
+  char string[112]; // [rsp+60h] [rbp-88h] BYREF
+  char format; // [rsp+F8h] [rbp+10h] BYREF
+  char v25; // [rsp+F9h] [rbp+11h] BYREF
+  char v26; // [rsp+FAh] [rbp+12h] BYREF
 
-  v6 = _Iosbase->_Prec;
-  v7 = _Iosbase;
-  v8 = result;
-  v9 = this;
-  if ( v6 <= 0 && !(_Iosbase->_Fmtfl & 0x2000) )
-    v6 = 6i64;
-  v10 = _Iosbase->_Fmtfl;
+  Prec = _Iosbase->_Prec;
+  if ( Prec <= 0 && (_Iosbase->_Fmtfl & 0x2000) == 0 )
+    Prec = 6i64;
+  Fmtfl = _Iosbase->_Fmtfl;
   v11 = _Val;
-  v12 = v6;
-  if ( v6 > 36 )
+  v12 = Prec;
+  if ( Prec > 36 )
     v12 = 36;
   v13 = 0i64;
   v14 = 0i64;
-  v15 = v6 - v12;
-  if ( (v10 & 0x3000) == 0x2000 )
+  v15 = Prec - v12;
+  if ( (Fmtfl & 0x3000) == 0x2000 )
   {
     if ( _Val < 0.0 )
       *(_QWORD *)&v11 = *(_QWORD *)&_Val ^ _xmm[0];
@@ -900,17 +832,17 @@ std::ostreambuf_iterator<char,std::char_traits<char> > *__fastcall std::num_put<
   format = 37;
   v17 = &v25;
   v22 = v16;
-  if ( v10 & 0x20 )
+  if ( (Fmtfl & 0x20) != 0 )
   {
     v25 = 43;
     v17 = &v26;
   }
-  if ( v10 & 0x10 )
+  if ( (Fmtfl & 0x10) != 0 )
     *v17++ = 35;
   *(_WORD *)v17 = 10798;
   v17[2] = 76;
-  v18 = v10 & 0x3000;
-  if ( !(v10 & 4) )
+  v18 = Fmtfl & 0x3000;
+  if ( (Fmtfl & 4) == 0 )
   {
     if ( v18 != 0x2000 )
     {
@@ -942,71 +874,74 @@ LABEL_31:
 LABEL_33:
   v17[3] = v19;
   v17[4] = 0;
-  sprintf_s(&string, 0x6Cui64, &format);
-  std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char>>>::_Fput(v9, v8, &v22, v7);
-  return v8;
+  sprintf_s(string, 0x6Cui64, &format);
+  std::num_put<char,std::ostreambuf_iterator<char>>::_Fput(this, result, &v22, _Iosbase);
+  return result;
 }
 
 // File Line: 1336
 // RVA: 0x872E0
-std::ostreambuf_iterator<char,std::char_traits<char> > *__fastcall std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char>>>::do_put(std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > *this, std::ostreambuf_iterator<char,std::char_traits<char> > *result, std::ostreambuf_iterator<char,std::char_traits<char> > *_Dest, std::ios_base *_Iosbase, char _Fill, const void *_Val)
+std::ostreambuf_iterator<char> *__fastcall std::num_put<char,std::ostreambuf_iterator<char>>::do_put(
+        std::num_put<char,std::ostreambuf_iterator<char> > *this,
+        std::ostreambuf_iterator<char> *result,
+        std::ostreambuf_iterator<char> *_Dest,
+        std::ios_base *_Iosbase,
+        unsigned __int8 _Fill,
+        const void *_Val)
 {
-  std::ios_base *v6; // rbx
-  std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > *v7; // rdi
-  std::ostreambuf_iterator<char,std::char_traits<char> > *v8; // rsi
   int v9; // eax
-  std::ostreambuf_iterator<char,std::char_traits<char> > v11; // [rsp+40h] [rbp-58h]
-  char string; // [rsp+50h] [rbp-48h]
+  std::ostreambuf_iterator<char> v11; // [rsp+40h] [rbp-58h] BYREF
+  char string[64]; // [rsp+50h] [rbp-48h] BYREF
 
-  v6 = _Iosbase;
-  v7 = this;
-  v8 = result;
   v11 = *_Dest;
-  v9 = sprintf_s(&string, 0x40ui64, "%p", _Val);
-  std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char>>>::_Iput(v7, v8, &v11, v6, _Fill, &string, v9);
-  return v8;
+  v9 = sprintf_s(string, 0x40ui64, "%p", _Val);
+  std::num_put<char,std::ostreambuf_iterator<char>>::_Iput(this, result, &v11, _Iosbase, _Fill, string, v9);
+  return result;
 }
 
 // File Line: 1377
 // RVA: 0x85820
-std::ostreambuf_iterator<char,std::char_traits<char> > *__fastcall std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char>>>::_Fput(std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > *this, std::ostreambuf_iterator<char,std::char_traits<char> > *result, std::ostreambuf_iterator<char,std::char_traits<char> > *_Dest, std::ios_base *_Iosbase)
+// bad sp value at call has been detected, the output may be wrong!
+std::ostreambuf_iterator<char> *__fastcall std::num_put<char,std::ostreambuf_iterator<char>>::_Fput(
+        std::num_put<char,std::ostreambuf_iterator<char> > *this,
+        std::ostreambuf_iterator<char> *result,
+        std::ostreambuf_iterator<char> *_Dest,
+        std::ios_base *_Iosbase)
 {
-  std::ios_base *v4; // r14
   char *v5; // rbx
-  std::ostreambuf_iterator<char,std::char_traits<char> > *v6; // rdi
   BOOL v7; // eax
-  signed __int64 v8; // r8
+  __int64 v8; // r8
   const char *v9; // rdx
   unsigned __int64 v10; // r15
-  unsigned __int64 v11; // r12
+  std::ostreambuf_iterator<char> *v11; // r12
   std::locale *v12; // rax
   __int64 v13; // rdx
-  std::locale::facet *v14; // rsi
-  void (__fastcall ***v15)(_QWORD, signed __int64); // rax
-  __int64 v16; // r13
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v17; // r9
+  std::ctype<char> *v14; // rsi
+  void (__fastcall ***v15)(_QWORD, __int64); // rax
+  char v16; // r13
+  std::string *Ptr; // r9
   std::locale *v18; // rax
   std::numpunct<char> *v19; // r14
-  void (__fastcall ***v20)(_QWORD, signed __int64); // rax
+  std::_Facet_base *v20; // rax
   char v21; // r9
   unsigned __int64 v22; // rdx
   unsigned __int64 v23; // r8
   char *v24; // rsi
   char v25; // al
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v26; // rcx
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v27; // r14
+  std::string *v26; // rcx
+  std::string *v27; // r14
   char v28; // al
-  unsigned __int64 v29; // rbx
+  unsigned __int64 Mysize; // rbx
   char v30; // r15
   unsigned __int64 v31; // rdi
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v32; // rax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v33; // r8
+  std::string *v32; // rax
+  std::string *v33; // r8
   char *v34; // rdx
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v35; // rcx
+  std::string *v35; // rcx
   size_t v36; // rbx
   char *v37; // rcx
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v38; // rax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v39; // rax
+  std::string *v38; // rax
+  std::string *v39; // rax
   __int64 v40; // rdi
   unsigned __int64 v41; // rdi
   int v42; // eax
@@ -1014,88 +949,84 @@ std::ostreambuf_iterator<char,std::char_traits<char> > *__fastcall std::num_put<
   _OWORD *v44; // r15
   __int128 v45; // xmm0
   std::locale::_Locimp *v46; // rsi
-  _DWORD *v47; // rcx
+  int *v47; // rcx
   unsigned __int8 **v48; // rcx
   unsigned __int8 *v49; // rdx
   int v50; // eax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v51; // r15
-  signed __int64 v52; // r12
+  std::string *v51; // r15
+  __int64 v52; // r12
   std::locale::_Locimp *v53; // rsi
   unsigned __int8 v54; // r8
-  _DWORD *v55; // rcx
+  int *v55; // rcx
   unsigned __int8 **v56; // rcx
   unsigned __int8 *v57; // rdx
   int v58; // eax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v59; // r15
-  signed __int64 v60; // r12
+  std::string *v59; // r15
+  __int64 v60; // r12
   std::locale::_Locimp *v61; // rsi
   unsigned __int8 v62; // r8
-  _DWORD *v63; // rcx
+  int *v63; // rcx
   unsigned __int8 **v64; // rcx
   unsigned __int8 *v65; // rdx
   int v66; // eax
   __int128 *v67; // r12
   std::locale::_Locimp *v68; // rsi
-  _DWORD *v69; // rcx
+  int *v69; // rcx
   unsigned __int8 **v70; // rcx
   unsigned __int8 *v71; // rdx
   int v72; // eax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v73; // r15
-  signed __int64 v74; // r12
+  std::string *v73; // r15
+  __int64 v74; // r12
   std::locale::_Locimp *v75; // rsi
   unsigned __int8 v76; // r8
-  _DWORD *v77; // rcx
+  int *v77; // rcx
   unsigned __int8 **v78; // rcx
   unsigned __int8 *v79; // rdx
   int v80; // eax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v81; // r15
+  std::string *v81; // r15
   unsigned __int64 v82; // rbx
   char *v83; // r15
   std::locale::_Locimp *v84; // rsi
   unsigned __int8 v85; // r8
-  _DWORD *v86; // rcx
+  int *v86; // rcx
   unsigned __int8 **v87; // rcx
   unsigned __int8 *v88; // rdx
   int v89; // eax
   __int128 v90; // xmm0
   std::locale::_Locimp *v91; // rbx
-  _DWORD *v92; // rcx
+  int *v92; // rcx
   unsigned __int8 **v93; // rcx
   unsigned __int8 *v94; // rdx
   int v95; // eax
   _OWORD *v96; // rbx
-  signed __int64 v98; // [rsp+0h] [rbp-69h]
-  std::locale resulta[2]; // [rsp+10h] [rbp-59h]
+  __int64 v98; // [rsp+0h] [rbp-69h]
+  std::locale resulta[2]; // [rsp+10h] [rbp-59h] BYREF
   __int64 v100; // [rsp+20h] [rbp-49h]
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > v101; // [rsp+28h] [rbp-41h]
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > v102; // [rsp+48h] [rbp-21h]
+  std::string v101; // [rsp+28h] [rbp-41h] BYREF
+  std::string v102; // [rsp+48h] [rbp-21h] BYREF
   _OWORD *v103; // [rsp+B8h] [rbp+4Fh]
   _OWORD *v104; // [rsp+C0h] [rbp+57h]
   __int64 v105; // [rsp+C8h] [rbp+5Fh]
   unsigned __int8 v106; // [rsp+D0h] [rbp+67h]
-  char *string; // [rsp+D8h] [rbp+6Fh]
+  char *string; // [rsp+D8h] [rbp+6Fh] BYREF
   char *retaddr; // [rsp+E0h] [rbp+77h]
   unsigned __int64 v109; // [rsp+E8h] [rbp+7Fh]
-  std::ostreambuf_iterator<char,std::char_traits<char> > *_Counta; // [rsp+F0h] [rbp+87h]
-  std::ostreambuf_iterator<char,std::char_traits<char> > *control; // [rsp+F8h] [rbp+8Fh]
+  std::ostreambuf_iterator<char> *control; // [rsp+F8h] [rbp+8Fh] BYREF
   std::ios_base *v112; // [rsp+100h] [rbp+97h]
 
   v112 = _Iosbase;
   control = _Dest;
-  _Counta = result;
   v100 = -2i64;
-  v4 = _Iosbase;
   v5 = string;
-  v6 = _Dest;
-  v7 = _Dest && !((*string - 43) & 0xFD);
+  v7 = _Dest && ((*string - 43) & 0xFD) == 0;
   v8 = v7;
   v98 = v7;
   if ( (_Iosbase->_Fmtfl & 0x3000) == 12288 )
   {
     v9 = "pP";
-    if ( v7 + 2i64 <= (unsigned __int64)v6 && string[v7] == 48 )
+    if ( v7 + 2i64 <= (unsigned __int64)_Dest && string[v7] == 48 )
     {
-      if ( !((string[v7 + 1] - 88) & 0xDF) )
+      if ( ((string[v7 + 1] - 88) & 0xDF) == 0 )
         v8 = v7 + 2i64;
       v98 = v8;
     }
@@ -1107,69 +1038,65 @@ std::ostreambuf_iterator<char,std::char_traits<char> > *__fastcall std::num_put<
   v10 = strcspn(string, v9);
   LOWORD(control) = 46;
   LOBYTE(control) = *localeconv()->decimal_point;
-  v11 = strcspn(v5, (const char *)&control);
-  v12 = std::ios_base::getloc(v4, (std::locale *)&string);
+  v11 = (std::ostreambuf_iterator<char> *)strcspn(v5, (const char *)&control);
+  v12 = std::ios_base::getloc(_Iosbase, (std::locale *)&string);
   v14 = std::use_facet<std::ctype<char>>(v12);
   if ( string )
   {
-    v15 = (void (__fastcall ***)(_QWORD, signed __int64))(*(__int64 (**)(void))(*(_QWORD *)string + 16i64))();
+    v15 = (void (__fastcall ***)(_QWORD, __int64))(*(__int64 (__fastcall **)(char *))(*(_QWORD *)string + 16i64))(string);
     if ( v15 )
       (**v15)(v15, 1i64);
   }
   LOBYTE(v13) = 48;
-  v16 = ((unsigned __int8 (__fastcall *)(std::locale::facet *, __int64))v14->vfptr[2]._Decref)(v14, v13);
+  v16 = ((__int64 (__fastcall *)(std::ctype<char> *, __int64))v14->vfptr[2]._Decref)(v14, v13);
   v101._Myres = 15i64;
   v101._Mysize = 0i64;
-  std::basic_string<char,std::char_traits<char>,std::allocator<char>>::assign(&v101, (unsigned __int64)v6, 0);
-  v17 = &v101;
+  std::string::assign(&v101, (unsigned __int64)_Dest, 0);
+  Ptr = &v101;
   if ( v101._Myres >= 0x10 )
-    v17 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v101._Bx._Ptr;
-  ((void (__fastcall *)(std::locale::facet *, char *, char *, std::basic_string<char,std::char_traits<char>,std::allocator<char> > *))v14->vfptr[2]._Incref)(
+    Ptr = (std::string *)v101._Bx._Ptr;
+  ((void (__fastcall *)(std::ctype<char> *, char *, char *, std::string *))v14->vfptr[2]._Incref)(
     v14,
     v5,
-    (char *)v6 + (_QWORD)v5,
-    v17);
-  v18 = std::ios_base::getloc(v4, resulta);
-  v19 = (std::numpunct<char> *)std::use_facet<std::numpunct<char>>(v18);
+    (char *)&_Dest->_Failed + (_QWORD)v5,
+    Ptr);
+  v18 = std::ios_base::getloc(_Iosbase, resulta);
+  v19 = std::use_facet<std::numpunct<char>>(v18);
   if ( resulta[0]._Ptr )
   {
-    v20 = (void (__fastcall ***)(_QWORD, signed __int64))((__int64 (*)(void))resulta[0]._Ptr->vfptr->_Decref)();
+    v20 = resulta[0]._Ptr->vfptr->_Decref(resulta[0]._Ptr);
     if ( v20 )
-      (**v20)(v20, 1i64);
+      v20->vfptr->__vecDelDtor(v20, 1u);
   }
   std::numpunct<char>::grouping(v19, &v102);
   LOBYTE(string) = ((__int64 (__fastcall *)(std::numpunct<char> *))v19->vfptr[1]._Incref)(v19);
   v21 = v16;
   v22 = v10;
-  if ( (std::ostreambuf_iterator<char,std::char_traits<char> > *)v11 == v6 )
+  if ( v11 == _Dest )
   {
     v23 = (unsigned __int64)retaddr;
     v24 = &retaddr[v10];
   }
   else
   {
-    v24 = &retaddr[v11];
-    std::basic_string<char,std::char_traits<char>,std::allocator<char>>::insert(
-      &v101,
-      v10,
-      (unsigned __int64)_Counta,
-      v16);
-    std::basic_string<char,std::char_traits<char>,std::allocator<char>>::insert(&v101, v11 + 1, v109, v16);
+    v24 = &retaddr[(_QWORD)v11];
+    std::string::insert(&v101, v10, (unsigned __int64)result, v16);
+    std::string::insert(&v101, (unsigned __int64)(&v11->_Failed + 1), v109, v16);
     v25 = ((__int64 (__fastcall *)(std::numpunct<char> *))v19->vfptr[1].__vecDelDtor)(v19);
     v26 = &v101;
     if ( v101._Myres >= 0x10 )
-      v26 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v101._Bx._Ptr;
-    v26->_Bx._Buf[v11] = v25;
+      v26 = (std::string *)v101._Bx._Ptr;
+    *(&v11->_Failed + (_QWORD)v26) = v25;
     v21 = v16;
     v23 = (unsigned __int64)retaddr;
-    v22 = v11;
+    v22 = (unsigned __int64)v11;
   }
-  std::basic_string<char,std::char_traits<char>,std::allocator<char>>::insert(&v101, v22, v23, v21);
+  std::string::insert(&v101, v22, v23, v21);
   v27 = &v102;
   if ( v102._Myres >= 0x10 )
-    v27 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v102._Bx._Ptr;
+    v27 = (std::string *)v102._Bx._Ptr;
   v28 = v27->_Bx._Buf[0];
-  v29 = v101._Mysize;
+  Mysize = v101._Mysize;
   if ( v27->_Bx._Buf[0] != 127 )
   {
     v30 = (char)string;
@@ -1178,40 +1105,40 @@ std::ostreambuf_iterator<char,std::char_traits<char> > *__fastcall std::num_put<
       if ( v28 <= 0 || v28 >= (unsigned __int64)&v24[-v98] )
         break;
       v24 -= v28;
-      if ( v29 < (unsigned __int64)v24 )
+      if ( Mysize < (unsigned __int64)v24 )
         std::_Xout_of_range("invalid string position");
-      if ( -1i64 - v29 <= 1 )
+      if ( Mysize == -1i64 || Mysize == -2i64 )
         std::_Xlength_error("string too long");
-      v31 = v29 + 1;
-      if ( v29 + 1 > 0xFFFFFFFFFFFFFFFEui64 )
+      v31 = Mysize + 1;
+      if ( Mysize == -2i64 )
         std::_Xlength_error("string too long");
       if ( v101._Myres >= v31 )
       {
-        if ( v29 != -1i64 )
+        if ( Mysize != -1i64 )
           goto LABEL_41;
         v101._Mysize = 0i64;
         v32 = &v101;
         if ( v101._Myres >= 0x10 )
-          v32 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v101._Bx._Ptr;
+          v32 = (std::string *)v101._Bx._Ptr;
         v32->_Bx._Buf[0] = 0;
       }
       else
       {
-        std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Copy(&v101, v29 + 1, v29);
+        std::string::_Copy(&v101, Mysize + 1, Mysize);
       }
-      v29 = v101._Mysize;
+      Mysize = v101._Mysize;
       if ( v31 )
       {
 LABEL_41:
         v33 = &v101;
         v34 = v101._Bx._Ptr;
         if ( v101._Myres >= 0x10 )
-          v33 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v101._Bx._Ptr;
+          v33 = (std::string *)v101._Bx._Ptr;
         v35 = &v101;
         if ( v101._Myres >= 0x10 )
-          v35 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v101._Bx._Ptr;
-        v36 = v29 - (_QWORD)v24;
-        v37 = &v24[(_QWORD)v35 + 1];
+          v35 = (std::string *)v101._Bx._Ptr;
+        v36 = Mysize - (_QWORD)v24;
+        v37 = &v35->_Bx._Buf[(_QWORD)v24 + 1];
         if ( v36 )
         {
           memmove(v37, &v24[(_QWORD)v33], v36);
@@ -1219,26 +1146,26 @@ LABEL_41:
         }
         v38 = &v101;
         if ( v101._Myres >= 0x10 )
-          v38 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v34;
+          v38 = (std::string *)v34;
         v24[(_QWORD)v38] = v30;
         v101._Mysize = v31;
         v39 = &v101;
         if ( v101._Myres >= 0x10 )
-          v39 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v101._Bx._Ptr;
+          v39 = (std::string *)v101._Bx._Ptr;
         v39->_Bx._Buf[v31] = 0;
-        v29 = v101._Mysize;
+        Mysize = v101._Mysize;
       }
       if ( v27->_Bx._Buf[1] > 0 )
-        v27 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)((char *)v27 + 1);
+        v27 = (std::string *)((char *)v27 + 1);
       v28 = v27->_Bx._Buf[0];
     }
     while ( v27->_Bx._Buf[0] != 127 );
   }
   v40 = *(_QWORD *)(v105 + 40);
-  if ( v40 <= 0 || v40 <= v29 )
+  if ( v40 <= 0 || v40 <= Mysize )
     v41 = 0i64;
   else
-    v41 = v40 - v29;
+    v41 = v40 - Mysize;
   v42 = *(_DWORD *)(v105 + 24) & 0x1C0;
   v43 = v106;
   v44 = v104;
@@ -1248,7 +1175,7 @@ LABEL_41:
   {
     v73 = &v101;
     if ( v101._Myres >= 0x10 )
-      v73 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v101._Bx._Ptr;
+      v73 = (std::string *)v101._Bx._Ptr;
     v74 = v98;
     if ( !v98 )
       goto LABEL_127;
@@ -1257,12 +1184,14 @@ LABEL_41:
     {
       v76 = v73->_Bx._Buf[0];
       if ( !v75
-        || (!**(_QWORD **)&v75[1]._Refs || (v77 = *(_DWORD **)&v75[1]._Catmask, *v77 <= 0) ? (v80 = (__int64)v75->vfptr[1].__vecDelDtor((std::_Facet_base *)&v75->vfptr, v76)) : (--*v77, v78 = *(unsigned __int8 ***)&v75[1]._Refs, v79 = *v78, ++*v78, *v79 = v76, v80 = v76),
+        || (!**(_QWORD **)&v75[1]._Refs || (v77 = *(int **)&v75[1]._Catmask, *v77 <= 0)
+          ? (v80 = (int)v75->vfptr[1].__vecDelDtor(v75, v76))
+          : (--*v77, v78 = *(unsigned __int8 ***)&v75[1]._Refs, v79 = *v78, ++*v78, *v79 = v76, v80 = v76),
             v80 == -1) )
       {
         LOBYTE(resulta[0]._Ptr) = 1;
       }
-      v73 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)((char *)v73 + 1);
+      v73 = (std::string *)((char *)v73 + 1);
       --v74;
     }
     while ( v74 );
@@ -1276,7 +1205,9 @@ LABEL_41:
       do
       {
         if ( !v46
-          || (!**(_QWORD **)&v46[1]._Refs || (v47 = *(_DWORD **)&v46[1]._Catmask, *v47 <= 0) ? (v50 = (__int64)v46->vfptr[1].__vecDelDtor((std::_Facet_base *)&v46->vfptr, v43)) : (--*v47, v48 = *(unsigned __int8 ***)&v46[1]._Refs, v49 = *v48, ++*v48, *v49 = v43, v50 = v43),
+          || (!**(_QWORD **)&v46[1]._Refs || (v47 = *(int **)&v46[1]._Catmask, *v47 <= 0)
+            ? (v50 = (int)v46->vfptr[1].__vecDelDtor(v46, v43))
+            : (--*v47, v48 = *(unsigned __int8 ***)&v46[1]._Refs, v49 = *v48, ++*v48, *v49 = v43, v50 = v43),
               v50 == -1) )
         {
           LOBYTE(resulta[0]._Ptr) = 1;
@@ -1291,7 +1222,7 @@ LABEL_41:
     *(_OWORD *)&resulta[0]._Ptr = v45;
     v51 = &v101;
     if ( v101._Myres >= 0x10 )
-      v51 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v101._Bx._Ptr;
+      v51 = (std::string *)v101._Bx._Ptr;
     v52 = v98;
     if ( !v98 )
       goto LABEL_127;
@@ -1300,12 +1231,14 @@ LABEL_41:
     {
       v54 = v51->_Bx._Buf[0];
       if ( !v53
-        || (!**(_QWORD **)&v53[1]._Refs || (v55 = *(_DWORD **)&v53[1]._Catmask, *v55 <= 0) ? (v58 = (__int64)v53->vfptr[1].__vecDelDtor((std::_Facet_base *)&v53->vfptr, v54)) : (--*v55, v56 = *(unsigned __int8 ***)&v53[1]._Refs, v57 = *v56, ++*v56, *v57 = v54, v58 = v54),
+        || (!**(_QWORD **)&v53[1]._Refs || (v55 = *(int **)&v53[1]._Catmask, *v55 <= 0)
+          ? (v58 = (int)v53->vfptr[1].__vecDelDtor(v53, v54))
+          : (--*v55, v56 = *(unsigned __int8 ***)&v53[1]._Refs, v57 = *v56, ++*v56, *v57 = v54, v58 = v54),
             v58 == -1) )
       {
         LOBYTE(resulta[0]._Ptr) = 1;
       }
-      v51 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)((char *)v51 + 1);
+      v51 = (std::string *)((char *)v51 + 1);
       --v52;
     }
     while ( v52 );
@@ -1317,7 +1250,7 @@ LABEL_127:
   }
   v59 = &v101;
   if ( v101._Myres >= 0x10 )
-    v59 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v101._Bx._Ptr;
+    v59 = (std::string *)v101._Bx._Ptr;
   v60 = v98;
   if ( v98 )
   {
@@ -1326,12 +1259,14 @@ LABEL_127:
     {
       v62 = v59->_Bx._Buf[0];
       if ( !v61
-        || (!**(_QWORD **)&v61[1]._Refs || (v63 = *(_DWORD **)&v61[1]._Catmask, *v63 <= 0) ? (v66 = (__int64)v61->vfptr[1].__vecDelDtor((std::_Facet_base *)&v61->vfptr, v62)) : (--*v63, v64 = *(unsigned __int8 ***)&v61[1]._Refs, v65 = *v64, ++*v64, *v65 = v62, v66 = v62),
+        || (!**(_QWORD **)&v61[1]._Refs || (v63 = *(int **)&v61[1]._Catmask, *v63 <= 0)
+          ? (v66 = (int)v61->vfptr[1].__vecDelDtor(v61, v62))
+          : (--*v63, v64 = *(unsigned __int8 ***)&v61[1]._Refs, v65 = *v64, ++*v64, *v65 = v62, v66 = v62),
             v66 == -1) )
       {
         LOBYTE(resulta[0]._Ptr) = 1;
       }
-      v59 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)((char *)v59 + 1);
+      v59 = (std::string *)((char *)v59 + 1);
       --v60;
     }
     while ( v60 );
@@ -1346,7 +1281,9 @@ LABEL_127:
     do
     {
       if ( !v68
-        || (!**(_QWORD **)&v68[1]._Refs || (v69 = *(_DWORD **)&v68[1]._Catmask, *v69 <= 0) ? (v72 = (__int64)v68->vfptr[1].__vecDelDtor((std::_Facet_base *)&v68->vfptr, v43)) : (--*v69, v70 = *(unsigned __int8 ***)&v68[1]._Refs, v71 = *v70, ++*v70, *v71 = v43, v72 = v43),
+        || (!**(_QWORD **)&v68[1]._Refs || (v69 = *(int **)&v68[1]._Catmask, *v69 <= 0)
+          ? (v72 = (int)v68->vfptr[1].__vecDelDtor(v68, v43))
+          : (--*v69, v70 = *(unsigned __int8 ***)&v68[1]._Refs, v71 = *v70, ++*v70, *v71 = v43, v72 = v43),
             v72 == -1) )
       {
         LOBYTE(resulta[0]._Ptr) = 1;
@@ -1362,8 +1299,8 @@ LABEL_128:
   *(_OWORD *)&resulta[0]._Ptr = v45;
   v81 = &v101;
   if ( v101._Myres >= 0x10 )
-    v81 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v101._Bx._Ptr;
-  v82 = v29 - v98;
+    v81 = (std::string *)v101._Bx._Ptr;
+  v82 = Mysize - v98;
   v83 = &v81->_Bx._Buf[v98];
   if ( v82 )
   {
@@ -1372,7 +1309,9 @@ LABEL_128:
     {
       v85 = *v83;
       if ( !v84
-        || (!**(_QWORD **)&v84[1]._Refs || (v86 = *(_DWORD **)&v84[1]._Catmask, *v86 <= 0) ? (v89 = (__int64)v84->vfptr[1].__vecDelDtor((std::_Facet_base *)&v84->vfptr, v85)) : (--*v86, v87 = *(unsigned __int8 ***)&v84[1]._Refs, v88 = *v87, ++*v87, *v88 = v85, v89 = v85),
+        || (!**(_QWORD **)&v84[1]._Refs || (v86 = *(int **)&v84[1]._Catmask, *v86 <= 0)
+          ? (v89 = (int)v84->vfptr[1].__vecDelDtor(v84, v85))
+          : (--*v86, v87 = *(unsigned __int8 ***)&v84[1]._Refs, v88 = *v87, ++*v87, *v88 = v85, v89 = v85),
             v89 == -1) )
       {
         LOBYTE(resulta[0]._Ptr) = 1;
@@ -1393,7 +1332,9 @@ LABEL_128:
     do
     {
       if ( !v91
-        || (!**(_QWORD **)&v91[1]._Refs || (v92 = *(_DWORD **)&v91[1]._Catmask, *v92 <= 0) ? (v95 = (__int64)v91->vfptr[1].__vecDelDtor((std::_Facet_base *)&v91->vfptr, v43)) : (--*v92, v93 = *(unsigned __int8 ***)&v91[1]._Refs, v94 = *v93, ++*v93, *v94 = v43, v95 = v43),
+        || (!**(_QWORD **)&v91[1]._Refs || (v92 = *(int **)&v91[1]._Catmask, *v92 <= 0)
+          ? (v95 = (int)v91->vfptr[1].__vecDelDtor(v91, v43))
+          : (--*v92, v93 = *(unsigned __int8 ***)&v91[1]._Refs, v94 = *v93, ++*v93, *v94 = v43, v95 = v43),
             v95 == -1) )
       {
         LOBYTE(resulta[0]._Ptr) = 1;
@@ -1412,159 +1353,161 @@ LABEL_128:
   v102._Bx._Buf[0] = 0;
   if ( v101._Myres >= 0x10 )
     Illusion::ShaderParam::operator delete(v101._Bx._Ptr);
-  return (std::ostreambuf_iterator<char,std::char_traits<char> > *)v96;
+  return (std::ostreambuf_iterator<char> *)v96;
 }
 
 // File Line: 1491
 // RVA: 0x86400
-std::ostreambuf_iterator<char,std::char_traits<char> > *__fastcall std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char>>>::_Iput(std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > *this, std::ostreambuf_iterator<char,std::char_traits<char> > *result, std::ostreambuf_iterator<char,std::char_traits<char> > *_Dest, std::ios_base *_Iosbase, char _Fill, char *_Buf, unsigned __int64 _Count)
+std::ostreambuf_iterator<char> *__fastcall std::num_put<char,std::ostreambuf_iterator<char>>::_Iput(
+        std::num_put<char,std::ostreambuf_iterator<char> > *this,
+        std::ostreambuf_iterator<char> *result,
+        std::ostreambuf_iterator<char> *_Dest,
+        std::ios_base *_Iosbase,
+        unsigned __int8 _Fill,
+        char *_Buf,
+        unsigned __int64 _Count)
 {
-  std::ios_base *v7; // r14
-  std::ostreambuf_iterator<char,std::char_traits<char> > *v8; // r15
   char *v9; // rbx
   unsigned __int64 v10; // rdi
-  signed int v11; // eax
-  signed __int64 v12; // r13
+  int v11; // eax
+  __int64 v12; // r13
   std::locale *v13; // rax
-  std::locale::facet *v14; // rsi
-  void (__fastcall ***v15)(_QWORD, signed __int64); // rax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v16; // r9
+  std::ctype<char> *v14; // rsi
+  void (__fastcall ***v15)(_QWORD, __int64); // rax
+  std::string *Ptr; // r9
   std::locale *v17; // rax
   std::numpunct<char> *v18; // rsi
-  void (__fastcall ***v19)(_QWORD, signed __int64); // rax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v20; // rbx
-  __int64 v21; // rsi
+  void (__fastcall ***v19)(_QWORD, __int64); // rax
+  std::string *v20; // rbx
+  char v21; // si
   char i; // dl
-  unsigned __int64 v23; // r12
-  __int64 v24; // rdi
+  unsigned __int64 Mysize; // r12
+  __int64 Wide; // rdi
   unsigned __int64 v25; // rdi
   int v26; // eax
-  std::ostreambuf_iterator<char,std::char_traits<char> > v27; // xmm0
+  std::ostreambuf_iterator<char> v27; // xmm0
   int *v28; // rcx
-  char **v29; // rcx
-  char *v30; // rdx
+  unsigned __int8 **v29; // rcx
+  unsigned __int8 *v30; // rdx
   int v31; // eax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v32; // rsi
-  signed __int64 v33; // r15
+  std::string *v32; // rsi
+  __int64 v33; // r15
   unsigned __int8 v34; // r8
   int *v35; // rcx
   char **v36; // rcx
-  unsigned __int8 *v37; // rdx
+  _BYTE *v37; // rdx
   int v38; // eax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v39; // rsi
-  signed __int64 v40; // r15
+  std::string *v39; // rsi
+  __int64 v40; // r15
   unsigned __int8 v41; // r8
   int *v42; // rcx
   char **v43; // rcx
   unsigned __int8 *v44; // rdx
   int v45; // eax
-  std::ostreambuf_iterator<char,std::char_traits<char> > *v46; // r15
+  std::ostreambuf_iterator<char> *v46; // r15
   int *v47; // rcx
   char **v48; // rcx
-  char *v49; // rdx
+  unsigned __int8 *v49; // rdx
   int v50; // eax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v51; // rsi
-  signed __int64 v52; // r15
+  std::string *v51; // rsi
+  __int64 v52; // r15
   unsigned __int8 v53; // r8
-  int *v54; // rcx
-  char **v55; // rcx
+  int *IPcount; // rcx
+  char **IPnext; // rcx
   unsigned __int8 *v56; // rdx
   int v57; // eax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v58; // rsi
+  std::string *v58; // rsi
   unsigned __int64 v59; // r12
   char *v60; // rsi
   unsigned __int8 v61; // r8
   int *v62; // rcx
   char **v63; // rcx
-  _BYTE *v64; // rdx
+  char *v64; // rdx
   int v65; // eax
-  std::ostreambuf_iterator<char,std::char_traits<char> > v66; // xmm0
+  std::ostreambuf_iterator<char> v66; // xmm0
   int *v67; // rcx
-  char **v68; // rcx
-  char *v69; // rdx
+  unsigned __int8 **v68; // rcx
+  unsigned __int8 *v69; // rdx
   int v70; // eax
-  std::ostreambuf_iterator<char,std::char_traits<char> > v72; // [rsp+30h] [rbp-50h]
-  std::ostreambuf_iterator<char,std::char_traits<char> > v73; // [rsp+30h] [rbp-50h]
-  std::ostreambuf_iterator<char,std::char_traits<char> > v74; // [rsp+30h] [rbp-50h]
-  std::ostreambuf_iterator<char,std::char_traits<char> > v75; // [rsp+30h] [rbp-50h]
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > v76; // [rsp+40h] [rbp-40h]
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > v77; // [rsp+60h] [rbp-20h]
-  std::ostreambuf_iterator<char,std::char_traits<char> > *v78; // [rsp+C8h] [rbp+48h]
-  std::ostreambuf_iterator<char,std::char_traits<char> > *v79; // [rsp+D0h] [rbp+50h]
-  std::ios_base *v80; // [rsp+D8h] [rbp+58h]
+  std::ostreambuf_iterator<char> v72; // [rsp+30h] [rbp-50h]
+  std::ostreambuf_iterator<char> v73; // [rsp+30h] [rbp-50h]
+  std::ostreambuf_iterator<char> v74; // [rsp+30h] [rbp-50h]
+  std::ostreambuf_iterator<char> v75; // [rsp+30h] [rbp-50h]
+  std::string v76; // [rsp+40h] [rbp-40h] BYREF
+  std::string v77; // [rsp+60h] [rbp-20h] BYREF
 
-  v80 = _Iosbase;
-  v79 = _Dest;
-  v78 = result;
-  v7 = _Iosbase;
-  v8 = _Dest;
   v9 = _Buf;
   v10 = _Count;
-  if ( !_Count || (v11 = 1, (*_Buf - 43) & 0xFD) )
+  if ( !_Count || (v11 = 1, ((*_Buf - 43) & 0xFD) != 0) )
     v11 = 0;
   v12 = v11;
-  if ( (_Iosbase->_Fmtfl & 0xE00) == 2048 && v11 + 2i64 <= _Count && _Buf[v11] == 48 && !((_Buf[v11 + 1] - 88) & 0xDF) )
+  if ( (_Iosbase->_Fmtfl & 0xE00) == 2048
+    && v11 + 2i64 <= _Count
+    && _Buf[v11] == 48
+    && ((_Buf[v11 + 1] - 88) & 0xDF) == 0 )
+  {
     v12 = v11 + 2i64;
+  }
   v13 = std::ios_base::getloc(_Iosbase, (std::locale *)&_Buf);
   v14 = std::use_facet<std::ctype<char>>(v13);
   if ( _Buf )
   {
-    v15 = (void (__fastcall ***)(_QWORD, signed __int64))(*(__int64 (__cdecl **)(char *))(*(_QWORD *)_Buf + 16i64))(_Buf);
+    v15 = (void (__fastcall ***)(_QWORD, __int64))(*(__int64 (__fastcall **)(char *))(*(_QWORD *)_Buf + 16i64))(_Buf);
     if ( v15 )
       (**v15)(v15, 1i64);
   }
   v76._Myres = 15i64;
   v76._Mysize = 0i64;
   v76._Bx._Buf[0] = 0;
-  std::basic_string<char,std::char_traits<char>,std::allocator<char>>::assign(&v76, v10, 0);
-  v16 = &v76;
+  std::string::assign(&v76, v10, 0);
+  Ptr = &v76;
   if ( v76._Myres >= 0x10 )
-    v16 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v76._Bx._Ptr;
-  ((void (__fastcall *)(std::locale::facet *, char *, char *, std::basic_string<char,std::char_traits<char>,std::allocator<char> > *, signed __int64))v14->vfptr[2]._Incref)(
+    Ptr = (std::string *)v76._Bx._Ptr;
+  ((void (__fastcall *)(std::ctype<char> *, char *, char *, std::string *, __int64))v14->vfptr[2]._Incref)(
     v14,
     v9,
     &v9[v10],
-    v16,
+    Ptr,
     -2i64);
-  v17 = std::ios_base::getloc(v7, (std::locale *)&_Buf);
-  v18 = (std::numpunct<char> *)std::use_facet<std::numpunct<char>>(v17);
+  v17 = std::ios_base::getloc(_Iosbase, (std::locale *)&_Buf);
+  v18 = std::use_facet<std::numpunct<char>>(v17);
   if ( _Buf )
   {
-    v19 = (void (__fastcall ***)(_QWORD, signed __int64))(*(__int64 (**)(void))(*(_QWORD *)_Buf + 16i64))();
+    v19 = (void (__fastcall ***)(_QWORD, __int64))(*(__int64 (__fastcall **)(char *))(*(_QWORD *)_Buf + 16i64))(_Buf);
     if ( v19 )
       (**v19)(v19, 1i64);
   }
   std::numpunct<char>::grouping(v18, &v77);
   v20 = &v77;
   if ( v77._Myres >= 0x10 )
-    v20 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v77._Bx._Ptr;
+    v20 = (std::string *)v77._Bx._Ptr;
   if ( (unsigned __int8)(v20->_Bx._Buf[0] - 1) <= 0x7Du )
   {
-    v21 = ((unsigned __int8 (__fastcall *)(std::numpunct<char> *))v18->vfptr[1]._Incref)(v18);
+    v21 = ((__int64 (__fastcall *)(std::numpunct<char> *))v18->vfptr[1]._Incref)(v18);
     for ( i = v20->_Bx._Buf[0]; v20->_Bx._Buf[0] != 127; i = v20->_Bx._Buf[0] )
     {
       if ( i <= 0 || i >= v10 - v12 )
         break;
       v10 -= i;
-      std::basic_string<char,std::char_traits<char>,std::allocator<char>>::insert(&v76, v10, 1ui64, v21);
+      std::string::insert(&v76, v10, 1ui64, v21);
       if ( v20->_Bx._Buf[1] > 0 )
-        v20 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)((char *)v20 + 1);
+        v20 = (std::string *)((char *)v20 + 1);
     }
   }
-  v23 = v76._Mysize;
-  v24 = v7->_Wide;
-  if ( v24 <= 0 || v24 <= v76._Mysize )
+  Mysize = v76._Mysize;
+  Wide = _Iosbase->_Wide;
+  if ( Wide <= 0 || Wide <= v76._Mysize )
     v25 = 0i64;
   else
-    v25 = v24 - v76._Mysize;
-  v26 = v7->_Fmtfl & 0x1C0;
-  v27 = *v8;
-  v72 = *v8;
+    v25 = Wide - v76._Mysize;
+  v26 = _Iosbase->_Fmtfl & 0x1C0;
+  v27 = *_Dest;
+  v72 = *_Dest;
   if ( v26 == 64 )
   {
     v51 = &v76;
     if ( v76._Myres >= 0x10 )
-      v51 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v76._Bx._Ptr;
+      v51 = (std::string *)v76._Bx._Ptr;
     v52 = v12;
     if ( !v12 )
       goto LABEL_89;
@@ -1572,19 +1515,19 @@ std::ostreambuf_iterator<char,std::char_traits<char> > *__fastcall std::num_put<
     {
       v53 = v51->_Bx._Buf[0];
       if ( !v72._Strbuf
-        || (!*v72._Strbuf->_IPnext || (v54 = v72._Strbuf->_IPcount, *v54 <= 0) ? (v57 = v72._Strbuf->vfptr->overflow(
-                                                                                          v72._Strbuf,
-                                                                                          v53)) : (--*v54,
-                                                                                                   v55 = v72._Strbuf->_IPnext,
-                                                                                                   v56 = (unsigned __int8 *)*v55,
-                                                                                                   ++*v55,
-                                                                                                   *v56 = v53,
-                                                                                                   v57 = v53),
+        || (!*v72._Strbuf->_IPnext || (IPcount = v72._Strbuf->_IPcount, *IPcount <= 0)
+          ? (v57 = v72._Strbuf->vfptr->overflow(v72._Strbuf, v53))
+          : (--*IPcount,
+             IPnext = v72._Strbuf->_IPnext,
+             v56 = (unsigned __int8 *)*IPnext,
+             ++*IPnext,
+             *v56 = v53,
+             v57 = v53),
             v57 == -1) )
       {
         v72._Failed = 1;
       }
-      v51 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)((char *)v51 + 1);
+      v51 = (std::string *)((char *)v51 + 1);
       --v52;
     }
     while ( v52 );
@@ -1597,9 +1540,9 @@ std::ostreambuf_iterator<char,std::char_traits<char> > *__fastcall std::num_put<
       do
       {
         if ( !v72._Strbuf
-          || (!*v72._Strbuf->_IPnext || (v28 = v72._Strbuf->_IPcount, *v28 <= 0) ? (v31 = v72._Strbuf->vfptr->overflow(
-                                                                                            v72._Strbuf,
-                                                                                            (unsigned __int8)_Fill)) : (--*v28, v29 = v72._Strbuf->_IPnext, v30 = *v29, ++*v29, *v30 = _Fill, v31 = (unsigned __int8)_Fill),
+          || (!*v72._Strbuf->_IPnext || (v28 = v72._Strbuf->_IPcount, *v28 <= 0)
+            ? (v31 = v72._Strbuf->vfptr->overflow(v72._Strbuf, _Fill))
+            : (--*v28, v29 = (unsigned __int8 **)v72._Strbuf->_IPnext, v30 = *v29, ++*v29, *v30 = _Fill, v31 = _Fill),
               v31 == -1) )
         {
           v72._Failed = 1;
@@ -1609,12 +1552,12 @@ std::ostreambuf_iterator<char,std::char_traits<char> > *__fastcall std::num_put<
       while ( v25 );
       v27 = v72;
     }
-    *v8 = v27;
+    *_Dest = v27;
     v25 = 0i64;
     v72 = v27;
     v32 = &v76;
     if ( v76._Myres >= 0x10 )
-      v32 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v76._Bx._Ptr;
+      v32 = (std::string *)v76._Bx._Ptr;
     v33 = v12;
     if ( !v12 )
       goto LABEL_89;
@@ -1622,31 +1565,26 @@ std::ostreambuf_iterator<char,std::char_traits<char> > *__fastcall std::num_put<
     {
       v34 = v32->_Bx._Buf[0];
       if ( !v27._Strbuf
-        || (!*v27._Strbuf->_IPnext || (v35 = v27._Strbuf->_IPcount, *v35 <= 0) ? (v38 = v27._Strbuf->vfptr->overflow(
-                                                                                          v27._Strbuf,
-                                                                                          v34)) : (--*v35,
-                                                                                                   v36 = v27._Strbuf->_IPnext,
-                                                                                                   v37 = (unsigned __int8 *)*v36,
-                                                                                                   ++*v36,
-                                                                                                   *v37 = v34,
-                                                                                                   v38 = v34),
+        || (!*v27._Strbuf->_IPnext || (v35 = v27._Strbuf->_IPcount, *v35 <= 0)
+          ? (v38 = v27._Strbuf->vfptr->overflow(v27._Strbuf, v34))
+          : (--*v35, v36 = v27._Strbuf->_IPnext, v37 = *v36, ++*v36, *v37 = v34, v38 = v34),
             v38 == -1) )
       {
         v72._Failed = 1;
       }
-      v32 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)((char *)v32 + 1);
+      v32 = (std::string *)((char *)v32 + 1);
       --v33;
     }
     while ( v33 );
 LABEL_88:
     v27 = v72;
 LABEL_89:
-    v46 = v79;
+    v46 = _Dest;
     goto LABEL_90;
   }
   v39 = &v76;
   if ( v76._Myres >= 0x10 )
-    v39 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v76._Bx._Ptr;
+    v39 = (std::string *)v76._Bx._Ptr;
   v40 = v12;
   if ( v12 )
   {
@@ -1654,35 +1592,30 @@ LABEL_89:
     {
       v41 = v39->_Bx._Buf[0];
       if ( !v72._Strbuf
-        || (!*v72._Strbuf->_IPnext || (v42 = v72._Strbuf->_IPcount, *v42 <= 0) ? (v45 = v72._Strbuf->vfptr->overflow(
-                                                                                          v72._Strbuf,
-                                                                                          v41)) : (--*v42,
-                                                                                                   v43 = v72._Strbuf->_IPnext,
-                                                                                                   v44 = (unsigned __int8 *)*v43,
-                                                                                                   ++*v43,
-                                                                                                   *v44 = v41,
-                                                                                                   v45 = v41),
+        || (!*v72._Strbuf->_IPnext || (v42 = v72._Strbuf->_IPcount, *v42 <= 0)
+          ? (v45 = v72._Strbuf->vfptr->overflow(v72._Strbuf, v41))
+          : (--*v42, v43 = v72._Strbuf->_IPnext, v44 = (unsigned __int8 *)*v43, ++*v43, *v44 = v41, v45 = v41),
             v45 == -1) )
       {
         v72._Failed = 1;
       }
-      v39 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)((char *)v39 + 1);
+      v39 = (std::string *)((char *)v39 + 1);
       --v40;
     }
     while ( v40 );
     v27 = v72;
   }
-  v46 = v79;
-  *v79 = v27;
+  v46 = _Dest;
+  *_Dest = v27;
   v73 = v27;
   if ( v25 )
   {
     do
     {
       if ( !v27._Strbuf
-        || (!*v27._Strbuf->_IPnext || (v47 = v27._Strbuf->_IPcount, *v47 <= 0) ? (v50 = v27._Strbuf->vfptr->overflow(
-                                                                                          v27._Strbuf,
-                                                                                          (unsigned __int8)_Fill)) : (--*v47, v48 = v27._Strbuf->_IPnext, v49 = *v48, ++*v48, *v49 = _Fill, v50 = (unsigned __int8)_Fill),
+        || (!*v27._Strbuf->_IPnext || (v47 = v27._Strbuf->_IPcount, *v47 <= 0)
+          ? (v50 = v27._Strbuf->vfptr->overflow(v27._Strbuf, _Fill))
+          : (--*v47, v48 = v27._Strbuf->_IPnext, v49 = (unsigned __int8 *)*v48, ++*v48, *v49 = _Fill, v50 = _Fill),
             v50 == -1) )
       {
         v73._Failed = 1;
@@ -1698,8 +1631,8 @@ LABEL_90:
   v74 = v27;
   v58 = &v76;
   if ( v76._Myres >= 0x10 )
-    v58 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v76._Bx._Ptr;
-  v59 = v23 - v12;
+    v58 = (std::string *)v76._Bx._Ptr;
+  v59 = Mysize - v12;
   v60 = &v58->_Bx._Buf[v12];
   if ( v59 )
   {
@@ -1707,14 +1640,9 @@ LABEL_90:
     {
       v61 = *v60;
       if ( !v27._Strbuf
-        || (!*v27._Strbuf->_IPnext || (v62 = v27._Strbuf->_IPcount, *v62 <= 0) ? (v65 = v27._Strbuf->vfptr->overflow(
-                                                                                          v27._Strbuf,
-                                                                                          v61)) : (--*v62,
-                                                                                                   v63 = v27._Strbuf->_IPnext,
-                                                                                                   v64 = *v63,
-                                                                                                   ++*v63,
-                                                                                                   *v64 = v61,
-                                                                                                   v65 = v61),
+        || (!*v27._Strbuf->_IPnext || (v62 = v27._Strbuf->_IPcount, *v62 <= 0)
+          ? (v65 = v27._Strbuf->vfptr->overflow(v27._Strbuf, v61))
+          : (--*v62, v63 = v27._Strbuf->_IPnext, v64 = *v63, ++*v63, *v64 = v61, v65 = v61),
             v65 == -1) )
       {
         v74._Failed = 1;
@@ -1726,7 +1654,7 @@ LABEL_90:
     v27 = v74;
   }
   *v46 = v27;
-  v80->_Wide = 0i64;
+  _Iosbase->_Wide = 0i64;
   v66 = *v46;
   v75 = *v46;
   if ( v25 )
@@ -1734,9 +1662,9 @@ LABEL_90:
     do
     {
       if ( !v75._Strbuf
-        || (!*v75._Strbuf->_IPnext || (v67 = v75._Strbuf->_IPcount, *v67 <= 0) ? (v70 = v75._Strbuf->vfptr->overflow(
-                                                                                          v75._Strbuf,
-                                                                                          (unsigned __int8)_Fill)) : (--*v67, v68 = v75._Strbuf->_IPnext, v69 = *v68, ++*v68, *v69 = _Fill, v70 = (unsigned __int8)_Fill),
+        || (!*v75._Strbuf->_IPnext || (v67 = v75._Strbuf->_IPcount, *v67 <= 0)
+          ? (v70 = v75._Strbuf->vfptr->overflow(v75._Strbuf, _Fill))
+          : (--*v67, v68 = (unsigned __int8 **)v75._Strbuf->_IPnext, v69 = *v68, ++*v68, *v69 = _Fill, v70 = _Fill),
             v70 == -1) )
       {
         v75._Failed = 1;
@@ -1746,7 +1674,7 @@ LABEL_90:
     while ( v25 );
     v66 = v75;
   }
-  *v78 = v66;
+  *result = v66;
   if ( v77._Myres >= 0x10 )
     Illusion::ShaderParam::operator delete(v77._Bx._Ptr);
   v77._Myres = 15i64;
@@ -1754,50 +1682,49 @@ LABEL_90:
   v77._Bx._Buf[0] = 0;
   if ( v76._Myres >= 0x10 )
     Illusion::ShaderParam::operator delete(v76._Bx._Ptr);
-  return v78;
+  return result;
 }
 
 // File Line: 1559
 // RVA: 0x869C0
-std::ostreambuf_iterator<char,std::char_traits<char> > *__fastcall std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char>>>::_Rep(std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > *this, std::ostreambuf_iterator<char,std::char_traits<char> > *result, std::ostreambuf_iterator<char,std::char_traits<char> > *_Dest, char _Ch, unsigned __int64 _Count)
+std::ostreambuf_iterator<char> *__fastcall std::num_put<char,std::ostreambuf_iterator<char>>::_Rep(
+        std::num_put<char,std::ostreambuf_iterator<char> > *this,
+        std::ostreambuf_iterator<char> *result,
+        std::ostreambuf_iterator<char> *_Dest,
+        unsigned __int8 _Ch,
+        unsigned __int64 _Count)
 {
-  unsigned __int64 v5; // rdi
-  unsigned __int8 v6; // si
-  std::ostreambuf_iterator<char,std::char_traits<char> > *v7; // rbx
-  std::ostreambuf_iterator<char,std::char_traits<char> > *i; // r14
-  std::basic_streambuf<char,std::char_traits<char> > *v9; // rcx
-  int *v10; // rdx
-  char **v11; // rdx
+  unsigned __int64 i; // rdi
+  std::streambuf *Strbuf; // rcx
+  int *IPcount; // rdx
+  char **IPnext; // rdx
   unsigned __int8 *v12; // rcx
   int v13; // eax
 
-  v5 = _Count;
-  v6 = _Ch;
-  v7 = _Dest;
-  for ( i = result; v5; --v5 )
+  for ( i = _Count; i; --i )
   {
-    v9 = v7->_Strbuf;
-    if ( v9 )
+    Strbuf = _Dest->_Strbuf;
+    if ( Strbuf )
     {
-      if ( *v9->_IPnext && (v10 = v9->_IPcount, *v10 > 0) )
+      if ( *Strbuf->_IPnext && (IPcount = Strbuf->_IPcount, *IPcount > 0) )
       {
-        --*v10;
-        v11 = v9->_IPnext;
-        v12 = (unsigned __int8 *)(*v11)++;
-        *v12 = v6;
-        v13 = v6;
+        --*IPcount;
+        IPnext = Strbuf->_IPnext;
+        v12 = (unsigned __int8 *)(*IPnext)++;
+        *v12 = _Ch;
+        v13 = _Ch;
       }
       else
       {
-        v13 = v9->vfptr->overflow(v9, v6);
+        v13 = Strbuf->vfptr->overflow(Strbuf, _Ch);
       }
       if ( v13 != -1 )
         continue;
     }
-    v7->_Failed = 1;
+    _Dest->_Failed = 1;
   }
-  *(_QWORD *)&i->_Failed = *(_QWORD *)&v7->_Failed;
-  i->_Strbuf = v7->_Strbuf;
-  return i;
+  *(_QWORD *)&result->_Failed = *(_QWORD *)&_Dest->_Failed;
+  result->_Strbuf = _Dest->_Strbuf;
+  return result;
 }
 

@@ -2,7 +2,7 @@
 // RVA: 0xE31B80
 const char *__fastcall hkxBlobMeshShape::getName(hkxBlobMeshShape *this)
 {
-  return (const char *)((_QWORD)this->m_name.m_stringAndFlag & 0xFFFFFFFFFFFFFFFEui64);
+  return (const char *)((unsigned __int64)this->m_name.m_stringAndFlag & 0xFFFFFFFFFFFFFFFEui64);
 }
 
 // File Line: 55

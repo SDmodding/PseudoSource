@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkContactPointMaterialClass__()
     &hkContactPointMaterial_Default,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 95

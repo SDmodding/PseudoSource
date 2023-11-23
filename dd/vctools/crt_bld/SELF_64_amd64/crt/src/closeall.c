@@ -3,7 +3,7 @@
 __int64 __fastcall fcloseall()
 {
   unsigned int v0; // edi
-  signed int i; // ebx
+  int i; // ebx
   _iobuf *v2; // rcx
 
   v0 = 0;
@@ -13,7 +13,7 @@ __int64 __fastcall fcloseall()
     v2 = (_iobuf *)_piob[i];
     if ( v2 )
     {
-      if ( v2->_flag & 0x83 && (unsigned int)fclose(v2) != -1 )
+      if ( (v2->_flag & 0x83) != 0 && (unsigned int)fclose(v2) != -1 )
         ++v0;
       if ( i >= 20 )
       {

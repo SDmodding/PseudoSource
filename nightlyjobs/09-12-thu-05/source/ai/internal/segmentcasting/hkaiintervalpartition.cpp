@@ -2,12 +2,12 @@
 // RVA: 0x12E0A40
 void __fastcall hkaiIntervalPartition::hkaiIntervalPartition(hkaiIntervalPartition *this)
 {
-  hkResult result; // [rsp+40h] [rbp+8h]
+  hkResult result; // [rsp+40h] [rbp+8h] BYREF
 
-  this->m_intervals.m_capacityAndFlags = 2147483648;
+  this->m_intervals.m_capacityAndFlags = 0x80000000;
   this->m_intervals.m_data = 0i64;
   this->m_intervals.m_size = 0;
-  hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, this, 16, 20);
+  hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&this->m_intervals.m_data, 16, 20);
 }
 
 // File Line: 21
@@ -16,7 +16,7 @@ void __fastcall hkaiIntervalPartition::reserve(hkaiIntervalPartition *this, int 
 {
   int v2; // eax
   int v3; // eax
-  hkResult result; // [rsp+48h] [rbp+10h]
+  hkResult result; // [rsp+48h] [rbp+10h] BYREF
 
   v2 = this->m_intervals.m_capacityAndFlags & 0x3FFFFFFF;
   if ( v2 < numIntervals )
@@ -26,8 +26,8 @@ void __fastcall hkaiIntervalPartition::reserve(hkaiIntervalPartition *this, int 
       numIntervals = v3;
     hkArrayUtil::_reserve(
       &result,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      this,
+      &hkContainerHeapAllocator::s_alloc,
+      (const void **)&this->m_intervals.m_data,
       numIntervals,
       20);
   }
@@ -37,37 +37,32 @@ void __fastcall hkaiIntervalPartition::reserve(hkaiIntervalPartition *this, int 
 // RVA: 0x12E0DF0
 char __fastcall hkaiIntervalPartition::isOk(hkaiIntervalPartition *this)
 {
-  int v1; // esi
-  signed __int64 v2; // rbx
-  hkaiIntervalPartition *v3; // r14
+  int m_size; // esi
+  __int64 v2; // rbx
   int v4; // edi
-  hkaiIntervalPartition::Interval *v5; // r15
-  float *v6; // rax
+  hkaiIntervalPartition::Interval *m_data; // r15
+  hkaiIntervalPartition::Interval *i; // rax
 
-  v1 = this->m_intervals.m_size;
+  m_size = this->m_intervals.m_size;
   v2 = 0i64;
-  v3 = this;
   v4 = 0;
-  if ( v1 <= 0 )
+  if ( m_size <= 0 )
   {
 LABEL_5:
-    if ( v1 - 1 <= 0 )
+    if ( m_size - 1 <= 0 )
       return 1;
-    v6 = &v3->m_intervals.m_data[1].m_leftX;
-    while ( *v6 >= *(v6 - 4) )
+    for ( i = this->m_intervals.m_data + 1; i->m_leftX >= i[-1].m_rightX; ++i )
     {
-      ++v2;
-      v6 += 5;
-      if ( v2 >= v1 - 1 )
+      if ( ++v2 >= m_size - 1 )
         return 1;
     }
   }
   else
   {
-    v5 = this->m_intervals.m_data;
-    while ( hkaiIntervalPartition::Interval::isOk(&v5[v4]) )
+    m_data = this->m_intervals.m_data;
+    while ( hkaiIntervalPartition::Interval::isOk(&m_data[v4]) )
     {
-      if ( ++v4 >= v1 )
+      if ( ++v4 >= m_size )
         goto LABEL_5;
     }
   }
@@ -76,86 +71,84 @@ LABEL_5:
 
 // File Line: 48
 // RVA: 0x12E2C10
-void __fastcall hkaiIntervalPartition::addRemovingDupes(hkArray<hkaiIntervalPartition::Interval,hkContainerHeapAllocator> *intervals, hkaiIntervalPartition::Interval *interval)
+void __fastcall hkaiIntervalPartition::addRemovingDupes(
+        hkArray<hkaiIntervalPartition::Interval,hkContainerHeapAllocator> *intervals,
+        hkaiIntervalPartition::Interval *interval)
 {
-  float v2; // xmm1_4
-  hkaiIntervalPartition::Interval *v3; // rdi
-  hkArray<hkaiIntervalPartition::Interval,hkContainerHeapAllocator> *v4; // rbx
-  int v5; // er8
+  float m_rightX; // xmm1_4
+  int m_size; // r8d
   hkArray<hkaiIntervalPartition::Interval,hkContainerHeapAllocator> *v6; // rdx
   int v7; // eax
-  hkaiIntervalPartition::Interval *v8; // rcx
+  hkaiIntervalPartition::Interval *m_data; // rcx
   hkaiIntervalPartition::Interval *v9; // rcx
-  signed __int64 v10; // rdx
+  __int64 v10; // rdx
 
-  v2 = interval->m_rightX;
-  v3 = interval;
-  v4 = intervals;
-  if ( interval->m_leftX != v2 )
+  m_rightX = interval->m_rightX;
+  if ( interval->m_leftX != m_rightX )
   {
-    v5 = intervals->m_size;
-    if ( v5 )
+    m_size = intervals->m_size;
+    if ( m_size )
     {
-      v7 = v5 - 1;
-      v8 = intervals->m_data;
-      if ( interval->m_slope == v4->m_data[v5 - 1].m_slope
-        && interval->m_offset == v8[v7].m_offset
-        && interval->m_leftX == v8[v7].m_rightX
-        && v8[v5 - 1].m_data == interval->m_data )
+      v7 = m_size - 1;
+      m_data = intervals->m_data;
+      if ( interval->m_slope == intervals->m_data[m_size - 1].m_slope
+        && interval->m_offset == m_data[v7].m_offset
+        && interval->m_leftX == m_data[v7].m_rightX
+        && m_data[m_size - 1].m_data == interval->m_data )
       {
-        v8[v5 - 1].m_rightX = v2;
+        m_data[m_size - 1].m_rightX = m_rightX;
         return;
       }
-      if ( v5 != (v4->m_capacityAndFlags & 0x3FFFFFFF) )
+      if ( m_size != (intervals->m_capacityAndFlags & 0x3FFFFFFF) )
         goto LABEL_13;
-      v6 = v4;
+      v6 = intervals;
     }
     else
     {
-      if ( intervals->m_capacityAndFlags & 0x3FFFFFFF )
+      if ( (intervals->m_capacityAndFlags & 0x3FFFFFFF) != 0 )
       {
 LABEL_13:
-        v9 = v4->m_data;
-        v10 = v4->m_size;
-        v9[v10].m_leftX = v3->m_leftX;
-        v9[v10].m_rightX = v3->m_rightX;
-        v9[v10].m_slope = v3->m_slope;
-        v9[v10].m_offset = v3->m_offset;
-        v9[v10].m_data = v3->m_data;
-        ++v4->m_size;
+        v9 = intervals->m_data;
+        v10 = intervals->m_size;
+        v9[v10].m_leftX = interval->m_leftX;
+        v9[v10].m_rightX = interval->m_rightX;
+        v9[v10].m_slope = interval->m_slope;
+        v9[v10].m_offset = interval->m_offset;
+        v9[v10].m_data = interval->m_data;
+        ++intervals->m_size;
         return;
       }
       v6 = intervals;
     }
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v6, 20);
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&v6->m_data, 20);
     goto LABEL_13;
   }
 }
 
 // File Line: 83
 // RVA: 0x12E3950
-void __fastcall hkaiIntervalPartition::unionOne<1>(hkaiIntervalPartition *this, hkaiIntervalPartition::Interval *interval)
+void __fastcall hkaiIntervalPartition::unionOne<1>(
+        hkaiIntervalPartition *this,
+        hkaiIntervalPartition::Interval *interval)
 {
-  hkaiIntervalPartition::Interval *v2; // rbx
-  hkaiIntervalPartition *v3; // r12
-  int v4; // eax
+  int RightInterval; // eax
   __int64 v5; // r13
-  int v6; // er14
+  int v6; // r14d
   __int64 v7; // r15
-  signed __int64 i; // rdi
-  hkaiIntervalPartition::Interval *v9; // rsi
-  float v10; // xmm2_4
+  unsigned __int64 i; // rdi
+  hkaiIntervalPartition::Interval *m_data; // rsi
+  float m_leftX; // xmm2_4
   float v11; // xmm3_4
   float v12; // xmm1_4
-  unsigned int v13; // xmm0_4
-  hkaiIntervalPartition::Interval *v14; // rdx
-  int v15; // xmm1_4
-  int v16; // xmm0_4
+  float v13; // xmm0_4
+  hkaiIntervalPartition::Interval *p_intervala; // rdx
+  float v15; // xmm1_4
+  unsigned int v16; // xmm0_4
   float v17; // xmm1_4
   float v18; // xmm0_4
   float v19; // xmm1_4
   unsigned int v20; // xmm0_4
-  float v21; // xmm1_4
+  float m_rightX; // xmm1_4
   float v22; // xmm0_4
   float v23; // xmm1_4
   unsigned int v24; // xmm0_4
@@ -174,8 +167,8 @@ void __fastcall hkaiIntervalPartition::unionOne<1>(hkaiIntervalPartition *this, 
   float v37; // xmm7_4
   hkaiIntervalPartition::Interval *v38; // rdx
   float v39; // xmm2_4
-  int v40; // ecx
-  int v41; // er8
+  int m_size; // ecx
+  int v41; // r8d
   unsigned __int64 v42; // rax
   hkaiIntervalPartition::Interval *v43; // rcx
   unsigned __int64 v44; // rdx
@@ -187,91 +180,89 @@ void __fastcall hkaiIntervalPartition::unionOne<1>(hkaiIntervalPartition *this, 
   float v50; // xmm1_4
   float v51; // xmm0_4
   float v52; // xmm1_4
-  float v53; // xmm0_4
-  float v54; // xmm1_4
+  float m_slope; // xmm0_4
+  float m_offset; // xmm1_4
   unsigned int v55; // xmm0_4
   float v56; // xmm1_4
-  hkArray<hkaiIntervalPartition::Interval,hkContainerHeapAllocator> intervals; // [rsp+30h] [rbp-D0h]
-  hkaiIntervalPartition::Interval v58; // [rsp+40h] [rbp-C0h]
-  hkaiIntervalPartition::Interval v59; // [rsp+58h] [rbp-A8h]
-  hkaiIntervalPartition::Interval v60; // [rsp+70h] [rbp-90h]
-  hkaiIntervalPartition::Interval intervala; // [rsp+88h] [rbp-78h]
-  hkaiIntervalPartition::Interval other; // [rsp+A0h] [rbp-60h]
-  int v63; // [rsp+B4h] [rbp-4Ch]
-  int v64; // [rsp+B8h] [rbp-48h]
+  hkArray<hkaiIntervalPartition::Interval,hkContainerHeapAllocator> intervals; // [rsp+30h] [rbp-D0h] BYREF
+  hkaiIntervalPartition::Interval v58; // [rsp+40h] [rbp-C0h] BYREF
+  hkaiIntervalPartition::Interval v59; // [rsp+58h] [rbp-A8h] BYREF
+  hkaiIntervalPartition::Interval v60; // [rsp+70h] [rbp-90h] BYREF
+  hkaiIntervalPartition::Interval intervala; // [rsp+88h] [rbp-78h] BYREF
+  hkaiIntervalPartition::Interval other; // [rsp+A0h] [rbp-60h] BYREF
+  float v63; // [rsp+B4h] [rbp-4Ch]
+  unsigned int v64; // [rsp+B8h] [rbp-48h]
   int index; // [rsp+150h] [rbp+50h]
 
-  v2 = interval;
-  v3 = this;
-  v4 = hkaiIntervalPartition::findRightInterval(this, interval->m_leftX);
-  index = v4;
-  if ( v4 == v3->m_intervals.m_size )
+  RightInterval = hkaiIntervalPartition::findRightInterval(this, interval->m_leftX);
+  index = RightInterval;
+  if ( RightInterval == this->m_intervals.m_size )
   {
-    hkaiIntervalPartition::addRemovingDupes(&v3->m_intervals, v2);
+    hkaiIntervalPartition::addRemovingDupes(&this->m_intervals, interval);
     return;
   }
-  v5 = v4;
-  intervals.m_capacityAndFlags = 2147483648;
-  v6 = v4;
-  v7 = v4;
+  v5 = RightInterval;
+  intervals.m_capacityAndFlags = 0x80000000;
+  v6 = RightInterval;
+  v7 = RightInterval;
   intervals.m_data = 0i64;
   intervals.m_size = 0;
-  for ( i = v4; ; ++i )
+  for ( i = RightInterval; ; ++i )
   {
-    v9 = v3->m_intervals.m_data;
-    v10 = v3->m_intervals.m_data[i].m_leftX;
+    m_data = this->m_intervals.m_data;
+    m_leftX = this->m_intervals.m_data[i].m_leftX;
     if ( v7 == v5 )
       break;
-    v21 = v2->m_rightX;
-    if ( v10 > v21 )
+    m_rightX = interval->m_rightX;
+    if ( m_leftX > m_rightX )
     {
-      v58.m_leftX = v2->m_leftX;
-      v53 = v2->m_slope;
-      v58.m_rightX = v21;
-      v54 = v2->m_offset;
-      v58.m_slope = v53;
-      v55 = v2->m_data;
-      v58.m_offset = v54;
-      v56 = *((float *)&v9[i] - 4);
+      v58.m_leftX = interval->m_leftX;
+      m_slope = interval->m_slope;
+      v58.m_rightX = m_rightX;
+      m_offset = interval->m_offset;
+      v58.m_slope = m_slope;
+      v55 = interval->m_data;
+      v58.m_offset = m_offset;
+      v56 = m_data[i - 1].m_rightX;
       v58.m_data = v55;
       v58.m_leftX = v56;
       hkaiIntervalPartition::addRemovingDupes(&intervals, &v58);
       goto LABEL_28;
     }
-    intervala.m_leftX = v2->m_leftX;
-    v22 = v2->m_slope;
-    intervala.m_rightX = v21;
-    v14 = &intervala;
-    v23 = v2->m_offset;
+    intervala.m_leftX = interval->m_leftX;
+    v22 = interval->m_slope;
+    intervala.m_rightX = m_rightX;
+    p_intervala = &intervala;
+    v23 = interval->m_offset;
     intervala.m_slope = v22;
-    v24 = v2->m_data;
+    v24 = interval->m_data;
     intervala.m_offset = v23;
-    v25 = *((float *)&v9[i] - 4);
+    v25 = m_data[i - 1].m_rightX;
     intervala.m_data = v24;
     intervala.m_leftX = v25;
-    intervala.m_rightX = v10;
+    intervala.m_rightX = m_leftX;
 LABEL_11:
-    hkaiIntervalPartition::addRemovingDupes(&intervals, v14);
-    v26 = v9[i].m_leftX;
-    v27 = v9[i].m_slope;
-    v28 = v2->m_slope;
-    v59.m_rightX = v9[i].m_rightX;
-    v29 = v9[i].m_data;
+    hkaiIntervalPartition::addRemovingDupes(&intervals, p_intervala);
+    v26 = m_data[i].m_leftX;
+    v27 = m_data[i].m_slope;
+    v28 = interval->m_slope;
+    v59.m_rightX = m_data[i].m_rightX;
+    v29 = m_data[i].m_data;
     v59.m_leftX = v26;
-    v30 = v9[i].m_offset;
+    v30 = m_data[i].m_offset;
     v59.m_data = v29;
-    v31 = v2->m_rightX;
+    v31 = interval->m_rightX;
     v59.m_offset = v30;
-    v32 = v2->m_leftX;
+    v32 = interval->m_leftX;
     v60.m_rightX = v31;
-    v33 = v2->m_data;
+    v33 = interval->m_data;
     v60.m_leftX = v32;
-    v34 = v2->m_offset;
+    v34 = interval->m_offset;
     v60.m_data = v33;
-    v35 = v9[i].m_leftX;
+    v35 = m_data[i].m_leftX;
     v60.m_offset = v34;
-    v36 = fmaxf(v35, v2->m_leftX);
-    v37 = fminf(v9[i].m_rightX, v2->m_rightX);
+    v36 = fmaxf(v35, interval->m_leftX);
+    v37 = fminf(m_data[i].m_rightX, interval->m_rightX);
     v59.m_slope = v27;
     v60.m_rightX = v37;
     v59.m_rightX = v37;
@@ -281,7 +272,7 @@ LABEL_11:
     if ( v27 == v28 )
     {
       v38 = &v60;
-      if ( v9[i].m_offset > v2->m_offset )
+      if ( m_data[i].m_offset > interval->m_offset )
         v38 = &v59;
     }
     else
@@ -304,17 +295,17 @@ LABEL_11:
       }
     }
     hkaiIntervalPartition::addRemovingDupes(&intervals, v38);
-    if ( v9[i].m_rightX > v2->m_rightX )
+    if ( m_data[i].m_rightX > interval->m_rightX )
     {
-      v50 = v9[i].m_rightX;
-      v58.m_leftX = v9[i].m_leftX;
-      v51 = v9[i].m_slope;
+      v50 = m_data[i].m_rightX;
+      v58.m_leftX = m_data[i].m_leftX;
+      v51 = m_data[i].m_slope;
       v58.m_rightX = v50;
-      v52 = v9[i].m_offset;
+      v52 = m_data[i].m_offset;
       v58.m_slope = v51;
-      v48 = v9[i].m_data;
+      v48 = m_data[i].m_data;
       v58.m_offset = v52;
-      v49 = v2->m_rightX;
+      v49 = interval->m_rightX;
 LABEL_25:
       v58.m_data = v48;
       v58.m_leftX = v49;
@@ -324,76 +315,76 @@ LABEL_28:
       v41 = index;
       goto LABEL_29;
     }
-    if ( v6 == v3->m_intervals.m_size - 1 )
+    if ( v6 == this->m_intervals.m_size - 1 )
     {
-      v45 = v2->m_rightX;
-      v58.m_leftX = v2->m_leftX;
-      v46 = v2->m_slope;
+      v45 = interval->m_rightX;
+      v58.m_leftX = interval->m_leftX;
+      v46 = interval->m_slope;
       v58.m_rightX = v45;
-      v47 = v2->m_offset;
+      v47 = interval->m_offset;
       v58.m_slope = v46;
-      v48 = v2->m_data;
+      v48 = interval->m_data;
       v58.m_offset = v47;
-      v49 = v9[i].m_rightX;
+      v49 = m_data[i].m_rightX;
       goto LABEL_25;
     }
     ++v6;
     ++v7;
   }
-  if ( v10 < v2->m_rightX )
+  if ( m_leftX < interval->m_rightX )
   {
-    v11 = v2->m_leftX;
-    if ( v2->m_leftX >= v10 )
+    v11 = interval->m_leftX;
+    if ( interval->m_leftX >= m_leftX )
     {
-      v17 = v9[i].m_rightX;
-      v18 = v9[i].m_slope;
-      v58.m_leftX = v3->m_intervals.m_data[i].m_leftX;
-      v14 = &v58;
+      v17 = m_data[i].m_rightX;
+      v18 = m_data[i].m_slope;
+      v58.m_leftX = this->m_intervals.m_data[i].m_leftX;
+      p_intervala = &v58;
       v58.m_rightX = v17;
-      v19 = v9[i].m_offset;
+      v19 = m_data[i].m_offset;
       v58.m_slope = v18;
-      v20 = v9[i].m_data;
+      v20 = m_data[i].m_data;
       v58.m_offset = v19;
       v58.m_rightX = v11;
       v58.m_data = v20;
     }
     else
     {
-      v12 = v2->m_rightX;
-      v13 = LODWORD(v2->m_slope);
-      other.m_slope = v2->m_leftX;
-      v14 = (hkaiIntervalPartition::Interval *)((char *)&other + 8);
+      v12 = interval->m_rightX;
+      v13 = interval->m_slope;
+      other.m_slope = interval->m_leftX;
+      p_intervala = (hkaiIntervalPartition::Interval *)&other.m_slope;
       other.m_offset = v12;
-      v15 = LODWORD(v2->m_offset);
-      other.m_data = v13;
-      v16 = v2->m_data;
+      v15 = interval->m_offset;
+      *(float *)&other.m_data = v13;
+      v16 = interval->m_data;
       v63 = v15;
-      other.m_offset = v10;
+      other.m_offset = m_leftX;
       v64 = v16;
     }
     goto LABEL_11;
   }
-  v40 = intervals.m_size;
+  m_size = intervals.m_size;
   if ( intervals.m_size == (intervals.m_capacityAndFlags & 0x3FFFFFFF) )
   {
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &intervals, 20);
-    v40 = intervals.m_size;
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&intervals.m_data, 20);
+    m_size = intervals.m_size;
   }
   v41 = index;
-  v42 = v40;
+  v42 = m_size;
   v43 = intervals.m_data;
   v44 = v42;
   v6 = index;
-  intervals.m_data[v44].m_leftX = v2->m_leftX;
-  v43[v44].m_rightX = v2->m_rightX;
-  v43[v44].m_slope = v2->m_slope;
-  v43[v44].m_offset = v2->m_offset;
-  v43[v44].m_data = v2->m_data;
+  intervals.m_data[v44].m_leftX = interval->m_leftX;
+  v43[v44].m_rightX = interval->m_rightX;
+  v43[v44].m_slope = interval->m_slope;
+  v43[v44].m_offset = interval->m_offset;
+  v43[v44].m_data = interval->m_data;
   ++intervals.m_size;
 LABEL_29:
   hkArrayBase<hkaiIntervalPartition::Interval>::_spliceInto(
-    (hkArrayBase<hkaiIntervalPartition::Interval> *)&v3->m_intervals.m_data,
-    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
+    &this->m_intervals,
+    &hkContainerHeapAllocator::s_alloc,
     v41,
     v6 - v41,
     intervals.m_data,
@@ -401,9 +392,13 @@ LABEL_29:
   intervals.m_size = 0;
   if ( intervals.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       intervals.m_data,
       20 * (intervals.m_capacityAndFlags & 0x3FFFFFFF));
+}tr->bufFree(
+      &hkContainerHeapAllocator::s_alloc,
+      intervals.m_data,
+      20 * (intervals.m_capacityAndFlags & 0x3FFFFFFF));
 }
 
 // File Line: 204
@@ -415,7 +410,9 @@ hkaiIntervalPartition::Interval *__fastcall hkaiIntervalPartition::getInterval(h
 
 // File Line: 209
 // RVA: 0x12E0DD0
-hkaiIntervalPartition::Interval *__fastcall hkaiIntervalPartition::accessInterval(hkaiIntervalPartition *this, int index)
+hkaiIntervalPartition::Interval *__fastcall hkaiIntervalPartition::accessInterval(
+        hkaiIntervalPartition *this,
+        int index)
 {
   return &this->m_intervals.m_data[index];
 }
@@ -429,14 +426,24 @@ float __fastcall hkaiIntervalPartition::Interval::evaluateAt(hkaiIntervalPartiti
 
 // File Line: 220
 // RVA: 0x12E0700
-void __fastcall hkaiIntervalPartition::Interval::setFromEndpoints(hkaiIntervalPartition::Interval *this, hkVector2f *left, hkVector2f *right, unsigned int data)
+void __fastcall hkaiIntervalPartition::Interval::setFromEndpoints(
+        hkaiIntervalPartition::Interval *this,
+        hkVector2f *left,
+        hkVector2f *right,
+        unsigned int data)
 {
   hkaiIntervalPartition::Interval::setFromEndpoints(this, left->x, left->y, right->x, right->y, data);
 }
 
 // File Line: 225
 // RVA: 0x12E0740
-void __fastcall hkaiIntervalPartition::Interval::setFromEndpoints(hkaiIntervalPartition::Interval *this, float leftX, float leftY, float rightX, float rightY, unsigned int data)
+void __fastcall hkaiIntervalPartition::Interval::setFromEndpoints(
+        hkaiIntervalPartition::Interval *this,
+        float leftX,
+        float leftY,
+        float rightX,
+        float rightY,
+        unsigned int data)
 {
   float v6; // xmm0_4
 
@@ -450,37 +457,37 @@ void __fastcall hkaiIntervalPartition::Interval::setFromEndpoints(hkaiIntervalPa
 
 // File Line: 238
 // RVA: 0x12E07D0
-hkVector2f __fastcall hkaiIntervalPartition::Interval::getLeftEndpoint(hkaiIntervalPartition::Interval *this, float *a2)
+hkVector2f __fastcall hkaiIntervalPartition::Interval::getLeftEndpoint(
+        hkaiIntervalPartition::Interval *this,
+        float *a2)
 {
-  float v2; // xmm1_4
-  hkVector2f v3; // rbx
+  float m_leftX; // xmm1_4
   float v4; // xmm0_4
   hkVector2f result; // rax
 
-  v2 = this->m_leftX;
-  v3 = (hkVector2f)a2;
+  m_leftX = this->m_leftX;
   *a2 = this->m_leftX;
-  v4 = hkaiIntervalPartition::Interval::evaluateAt(this, v2);
-  result = v3;
-  *(float *)(*(_QWORD *)&v3 + 4i64) = v4;
+  v4 = hkaiIntervalPartition::Interval::evaluateAt(this, m_leftX);
+  result = (hkVector2f)a2;
+  a2[1] = v4;
   return result;
 }
 
 // File Line: 247
 // RVA: 0x12E0800
-hkVector2f __fastcall hkaiIntervalPartition::Interval::getRightEndpoint(hkaiIntervalPartition::Interval *this, float *a2)
+hkVector2f __fastcall hkaiIntervalPartition::Interval::getRightEndpoint(
+        hkaiIntervalPartition::Interval *this,
+        hkVector2f a2)
 {
-  float v2; // xmm1_4
-  hkVector2f v3; // rbx
+  float m_rightX; // xmm1_4
   float v4; // xmm0_4
   hkVector2f result; // rax
 
-  v2 = this->m_rightX;
-  v3 = (hkVector2f)a2;
-  *a2 = v2;
-  v4 = hkaiIntervalPartition::Interval::evaluateAt(this, v2);
-  result = v3;
-  *(float *)(*(_QWORD *)&v3 + 4i64) = v4;
+  m_rightX = this->m_rightX;
+  **(float **)&a2 = m_rightX;
+  v4 = hkaiIntervalPartition::Interval::evaluateAt(this, m_rightX);
+  result = a2;
+  *(float *)(*(_QWORD *)&a2 + 4i64) = v4;
   return result;
 }
 
@@ -493,25 +500,28 @@ bool __fastcall hkaiIntervalPartition::Interval::isOk(hkaiIntervalPartition::Int
 
 // File Line: 261
 // RVA: 0x12E08C0
-hkaiIntervalPartition::Interval *__fastcall hkaiIntervalPartition::Interval::intersect(hkaiIntervalPartition::Interval *this, hkaiIntervalPartition::Interval *other, __int64 a3)
+hkVector2f __fastcall hkaiIntervalPartition::Interval::intersect(
+        hkaiIntervalPartition::Interval *this,
+        hkaiIntervalPartition::Interval *other,
+        __int64 a3)
 {
-  hkaiIntervalPartition::Interval *v3; // rbx
   float v4; // xmm1_4
   float v5; // xmm0_4
-  hkaiIntervalPartition::Interval *result; // rax
+  hkVector2f result; // rax
 
-  v3 = other;
   v4 = (float)(*(float *)(a3 + 12) - this->m_offset) / (float)(this->m_slope - *(float *)(a3 + 8));
   other->m_leftX = v4;
   v5 = hkaiIntervalPartition::Interval::evaluateAt(this, v4);
-  result = v3;
-  v3->m_rightX = v5;
+  result = (hkVector2f)other;
+  other->m_rightX = v5;
   return result;
 }
 
 // File Line: 272
 // RVA: 0x12E0850
-_BOOL8 __fastcall hkaiIntervalPartition::Interval::operator==(hkaiIntervalPartition::Interval *this, hkaiIntervalPartition::Interval *other)
+_BOOL8 __fastcall hkaiIntervalPartition::Interval::operator==(
+        hkaiIntervalPartition::Interval *this,
+        hkaiIntervalPartition::Interval *other)
 {
   return other->m_leftX == this->m_leftX
       && other->m_rightX == this->m_rightX
@@ -524,20 +534,16 @@ _BOOL8 __fastcall hkaiIntervalPartition::Interval::operator==(hkaiIntervalPartit
 // RVA: 0x12E0900
 void __fastcall hkaiIntervalPartition::Interval::shiftX(hkaiIntervalPartition::Interval *this, float shift)
 {
-  float v2; // xmm0_4
-  float v3; // xmm2_4
   float v4; // xmm1_4
   float v5; // xmm2_4
-  float v6; // xmm0_4
+  float m_offset; // xmm0_4
 
-  v2 = shift;
-  v3 = shift;
   v4 = shift * this->m_slope;
-  v5 = v3 + this->m_rightX;
-  this->m_leftX = v2 + this->m_leftX;
-  v6 = this->m_offset;
+  v5 = shift + this->m_rightX;
+  this->m_leftX = shift + this->m_leftX;
+  m_offset = this->m_offset;
   this->m_rightX = v5;
-  this->m_offset = v6 - v4;
+  this->m_offset = m_offset - v4;
 }
 
 // File Line: 288
@@ -549,118 +555,110 @@ void __fastcall hkaiIntervalPartition::Interval::shiftY(hkaiIntervalPartition::I
 
 // File Line: 293
 // RVA: 0x12E0960
-bool __fastcall hkaiIntervalPartition::Interval::clampY(hkaiIntervalPartition::Interval *this, float front, float back)
+_BOOL8 __fastcall hkaiIntervalPartition::Interval::clampY(
+        hkaiIntervalPartition::Interval *this,
+        float front,
+        float back)
 {
-  float v3; // xmm3_4
-  float v4; // xmm4_4
+  float m_slope; // xmm4_4
   float v5; // xmm1_4
   float v6; // xmm4_4
   float v7; // xmm4_4
-  float v8; // xmm2_4
-  float v9; // xmm3_4
-  float v10; // xmm2_4
-  bool result; // al
-  float v12; // xmm0_4
-  float v13; // [rsp+10h] [rbp+10h]
+  float v8; // xmm3_4
+  float v9; // xmm2_4
+  float m_offset; // xmm0_4
+  float m_rightX; // [rsp+10h] [rbp+10h]
+  float v13; // [rsp+20h] [rbp+20h]
 
-  v3 = front;
   if ( front >= back )
-    goto LABEL_13;
-  v4 = this->m_slope;
-  if ( v4 > 0.0 )
+    return 0i64;
+  m_slope = this->m_slope;
+  if ( m_slope > 0.0 )
   {
-    v5 = 1.0 / v4;
-    v6 = (float)(v3 - this->m_offset) * (float)(1.0 / v4);
+    v5 = 1.0 / m_slope;
+    v6 = (float)(front - this->m_offset) * (float)(1.0 / m_slope);
 LABEL_6:
-    v8 = (float)(back - this->m_offset) * v5;
-    v9 = fminf(fmaxf(this->m_leftX, v6), v8);
-    v13 = this->m_rightX;
-    this->m_leftX = v9;
-    v10 = fminf(fmaxf(v13, v6), v8);
-    this->m_rightX = v10;
-    return v10 > v9;
+    v13 = (float)(back - this->m_offset) * v5;
+    v8 = fminf(fmaxf(this->m_leftX, v6), v13);
+    m_rightX = this->m_rightX;
+    this->m_leftX = v8;
+    v9 = fminf(fmaxf(m_rightX, v6), v13);
+    this->m_rightX = v9;
+    return v9 > v8;
   }
-  if ( v4 < 0.0 )
+  if ( m_slope < 0.0 )
   {
-    v5 = 1.0 / v4;
+    v5 = 1.0 / m_slope;
     v7 = back;
-    back = v3;
+    back = front;
     v6 = (float)(v7 - this->m_offset) * v5;
     goto LABEL_6;
   }
-  v12 = this->m_offset;
-  if ( v12 < front || v12 >= back )
-LABEL_13:
-    result = 0;
-  else
-    result = 1;
-  return result;
+  m_offset = this->m_offset;
+  return m_offset >= front && m_offset < back;
 }
 
 // File Line: 323
 // RVA: 0x12E2D10
-_BOOL8 __fastcall hkaiIntervalPartition::Interval::clampFunc<0>(hkaiIntervalPartition::Interval *this, float slope, float offset)
+_BOOL8 __fastcall hkaiIntervalPartition::Interval::clampFunc<0>(
+        hkaiIntervalPartition::Interval *this,
+        float slope,
+        float offset)
 {
-  float v3; // xmm7_4
-  hkaiIntervalPartition::Interval *v4; // rbx
+  float m_leftX; // xmm7_4
   float v5; // xmm0_4
-  float v6; // xmm8_4
+  float m_rightX; // xmm8_4
   bool v7; // di
   float v9; // [rsp+80h] [rbp+18h]
 
-  v3 = this->m_leftX;
-  v4 = this;
+  m_leftX = this->m_leftX;
   v5 = hkaiIntervalPartition::Interval::evaluateAt(this, this->m_leftX);
-  v6 = v4->m_rightX;
-  v7 = v5 > (float)((float)(v3 * slope) + offset);
-  if ( v7 == hkaiIntervalPartition::Interval::evaluateAt(v4, v4->m_rightX) > (float)((float)(v6 * slope) + offset) )
+  m_rightX = this->m_rightX;
+  v7 = v5 > (float)((float)(m_leftX * slope) + offset);
+  if ( v7 == hkaiIntervalPartition::Interval::evaluateAt(this, m_rightX) > (float)((float)(m_rightX * slope) + offset) )
     return v7;
-  v9 = (float)(offset - v4->m_offset) / (float)(v4->m_slope - slope);
+  v9 = (float)(offset - this->m_offset) / (float)(this->m_slope - slope);
   if ( v7 )
-    v4->m_rightX = fminf(v6, v9);
+    this->m_rightX = fminf(m_rightX, v9);
   else
-    v4->m_leftX = fmaxf(v3, v9);
-  return v4->m_leftX < v4->m_rightX;
+    this->m_leftX = fmaxf(m_leftX, v9);
+  return this->m_leftX < this->m_rightX;
 }
 
 // File Line: 358
 // RVA: 0x12E0E90
-void __fastcall hkaiIntervalPartition::appendInterval(hkaiIntervalPartition *this, hkaiIntervalPartition::Interval *interval)
+void __fastcall hkaiIntervalPartition::appendInterval(
+        hkaiIntervalPartition *this,
+        hkaiIntervalPartition::Interval *interval)
 {
-  hkaiIntervalPartition::Interval *v2; // rdi
-  hkaiIntervalPartition *v3; // rbx
-  _DWORD *v4; // rdx
+  hkaiIntervalPartition::Interval *v4; // rdx
 
-  v2 = interval;
-  v3 = this;
   if ( this->m_intervals.m_size == (this->m_intervals.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, this, 20);
-  v4 = (_DWORD *)&v3->m_intervals.m_data[v3->m_intervals.m_size].m_leftX;
-  *v4 = LODWORD(v2->m_leftX);
-  v4[1] = LODWORD(v2->m_rightX);
-  v4[2] = LODWORD(v2->m_slope);
-  v4[3] = LODWORD(v2->m_offset);
-  v4[4] = v2->m_data;
-  ++v3->m_intervals.m_size;
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&this->m_intervals.m_data, 20);
+  v4 = &this->m_intervals.m_data[this->m_intervals.m_size];
+  v4->m_leftX = interval->m_leftX;
+  v4->m_rightX = interval->m_rightX;
+  v4->m_slope = interval->m_slope;
+  v4->m_offset = interval->m_offset;
+  v4->m_data = interval->m_data;
+  ++this->m_intervals.m_size;
 }
 
 // File Line: 365
 // RVA: 0x12E10B0
 __int64 __fastcall hkaiIntervalPartition::findLeftInterval(hkaiIntervalPartition *this, float x)
 {
-  int v2; // er9
-  int v3; // er8
-  __int64 v4; // rdx
+  int m_size; // r9d
+  int v3; // r8d
 
-  v2 = this->m_intervals.m_size;
+  m_size = this->m_intervals.m_size;
   v3 = -1;
-  while ( v3 < v2 - 1 )
+  while ( v3 < m_size - 1 )
   {
-    v4 = (v2 + v3) / 2;
-    if ( x < this->m_intervals.m_data[v4].m_leftX )
-      v2 = v4;
+    if ( x < this->m_intervals.m_data[(m_size + v3) / 2].m_leftX )
+      m_size = (m_size + v3) / 2;
     else
-      v3 = v4;
+      v3 = (m_size + v3) / 2;
   }
   return (unsigned int)v3;
 }
@@ -669,57 +667,53 @@ __int64 __fastcall hkaiIntervalPartition::findLeftInterval(hkaiIntervalPartition
 // RVA: 0x12E1100
 __int64 __fastcall hkaiIntervalPartition::findRightInterval(hkaiIntervalPartition *this, float x)
 {
-  unsigned int v2; // er8
-  int v3; // er9
-  __int64 v4; // rdx
+  unsigned int m_size; // r8d
+  int v3; // r9d
 
-  v2 = this->m_intervals.m_size;
+  m_size = this->m_intervals.m_size;
   v3 = -1;
-  while ( v3 < (signed int)(v2 - 1) )
+  while ( v3 < (int)(m_size - 1) )
   {
-    v4 = (signed int)(v2 + v3) / 2;
-    if ( x < this->m_intervals.m_data[v4].m_rightX )
-      v2 = v4;
+    if ( x < this->m_intervals.m_data[(int)(m_size + v3) / 2].m_rightX )
+      m_size = (int)(m_size + v3) / 2;
     else
-      v3 = v4;
+      v3 = (int)(m_size + v3) / 2;
   }
-  return v2;
+  return m_size;
 }
 
 // File Line: 411
 // RVA: 0x12E1070
 int __fastcall hkaiIntervalPartition::findInterval(hkaiIntervalPartition *this, float x)
 {
-  hkaiIntervalPartition *v2; // rbx
   int result; // eax
 
-  v2 = this;
   result = hkaiIntervalPartition::findLeftInterval(this, x);
-  if ( result < 0 || x >= v2->m_intervals.m_data[result].m_rightX )
-    result = -1;
+  if ( result < 0 || x >= this->m_intervals.m_data[result].m_rightX )
+    return -1;
   return result;
 }
 
 // File Line: 417
 // RVA: 0x12E1150
-signed __int64 __fastcall hkaiIntervalPartition::equals(hkaiIntervalPartition *this, hkaiIntervalPartition *other)
+__int64 __fastcall hkaiIntervalPartition::equals(hkaiIntervalPartition *this, hkaiIntervalPartition *other)
 {
-  int v2; // edi
+  int m_size; // edi
   int v4; // ebx
-  hkaiIntervalPartition::Interval *v5; // rsi
+  hkaiIntervalPartition::Interval *m_data; // rsi
   hkaiIntervalPartition::Interval *v6; // r14
 
-  v2 = this->m_intervals.m_size;
-  if ( v2 != other->m_intervals.m_size )
+  m_size = this->m_intervals.m_size;
+  if ( m_size != other->m_intervals.m_size )
     return 0i64;
   v4 = 0;
-  if ( v2 <= 0 )
+  if ( m_size <= 0 )
     return 1i64;
-  v5 = other->m_intervals.m_data;
+  m_data = other->m_intervals.m_data;
   v6 = this->m_intervals.m_data;
-  while ( (unsigned int)hkaiIntervalPartition::Interval::operator==(&v6[v4], &v5[v4]) )
+  while ( hkaiIntervalPartition::Interval::operator==(&v6[v4], &m_data[v4]) )
   {
-    if ( ++v4 >= v2 )
+    if ( ++v4 >= m_size )
       return 1i64;
   }
   return 0i64;
@@ -727,35 +721,36 @@ signed __int64 __fastcall hkaiIntervalPartition::equals(hkaiIntervalPartition *t
 
 // File Line: 435
 // RVA: 0x12E1020
-void __fastcall hkaiIntervalPartition::appendIntervalFromEndpoints(hkaiIntervalPartition *this, float leftX, float leftY, float rightX, float rightY, unsigned int data)
+void __fastcall hkaiIntervalPartition::appendIntervalFromEndpoints(
+        hkaiIntervalPartition *this,
+        float leftX,
+        float leftY,
+        float rightX,
+        float rightY,
+        unsigned int data)
 {
-  hkaiIntervalPartition *v6; // rbx
-  hkaiIntervalPartition::Interval interval; // [rsp+30h] [rbp-28h]
+  hkaiIntervalPartition::Interval interval; // [rsp+30h] [rbp-28h] BYREF
 
-  v6 = this;
   hkaiIntervalPartition::Interval::setFromEndpoints(&interval, leftX, leftY, rightX, rightY, data);
-  hkaiIntervalPartition::appendInterval(v6, &interval);
+  hkaiIntervalPartition::appendInterval(this, &interval);
 }
 
 // File Line: 443
 // RVA: 0x12E0AE0
 void __fastcall hkaiIntervalPartition::shiftX(hkaiIntervalPartition *this, float shift)
 {
-  int v2; // eax
-  hkaiIntervalPartition *v3; // rsi
+  int m_size; // eax
   __int64 v4; // rdi
   __int64 v5; // rbx
 
-  v2 = this->m_intervals.m_size;
-  v3 = this;
-  if ( v2 > 0 )
+  m_size = this->m_intervals.m_size;
+  if ( m_size > 0 )
   {
-    v4 = (unsigned int)v2;
+    v4 = (unsigned int)m_size;
     v5 = 0i64;
     do
     {
-      hkaiIntervalPartition::Interval::shiftX(&v3->m_intervals.m_data[v5], shift);
-      ++v5;
+      hkaiIntervalPartition::Interval::shiftX(&this->m_intervals.m_data[v5++], shift);
       --v4;
     }
     while ( v4 );
@@ -766,21 +761,18 @@ void __fastcall hkaiIntervalPartition::shiftX(hkaiIntervalPartition *this, float
 // RVA: 0x12E0B50
 void __fastcall hkaiIntervalPartition::shiftY(hkaiIntervalPartition *this, float shift)
 {
-  int v2; // eax
-  hkaiIntervalPartition *v3; // rsi
+  int m_size; // eax
   __int64 v4; // rdi
   __int64 v5; // rbx
 
-  v2 = this->m_intervals.m_size;
-  v3 = this;
-  if ( v2 > 0 )
+  m_size = this->m_intervals.m_size;
+  if ( m_size > 0 )
   {
-    v4 = (unsigned int)v2;
+    v4 = (unsigned int)m_size;
     v5 = 0i64;
     do
     {
-      hkaiIntervalPartition::Interval::shiftY(&v3->m_intervals.m_data[v5], shift);
-      ++v5;
+      hkaiIntervalPartition::Interval::shiftY(&this->m_intervals.m_data[v5++], shift);
       --v4;
     }
     while ( v4 );
@@ -798,80 +790,78 @@ void __fastcall hkaiIntervalPartition::clear(hkaiIntervalPartition *this)
 // RVA: 0x12E0BD0
 void __fastcall hkaiIntervalPartition::clipX(hkaiIntervalPartition *this, float left, float right)
 {
-  hkaiIntervalPartition *v3; // rdx
-  int v4; // er9
+  int v4; // r9d
   __int64 v5; // rcx
-  __int64 v6; // r11
-  float *v7; // r8
-  float *v8; // rax
-  int v9; // er11
-  signed __int64 v10; // r9
+  __int64 m_size; // r11
+  hkaiIntervalPartition::Interval *m_data; // r8
+  float *p_m_rightX; // rax
+  int v9; // r11d
+  hkaiIntervalPartition::Interval *v10; // r9
   signed __int64 v11; // r9
   __int64 v12; // rcx
-  int v13; // eax
+  unsigned int v13; // eax
   __int64 v14; // r8
   __int64 v15; // rax
 
-  v3 = this;
   v4 = 0;
   v5 = 0i64;
-  v6 = v3->m_intervals.m_size;
-  if ( (signed int)v6 <= 0 )
+  m_size = this->m_intervals.m_size;
+  if ( (int)m_size <= 0 )
     goto LABEL_5;
-  v7 = &v3->m_intervals.m_data->m_leftX;
-  v8 = &v3->m_intervals.m_data->m_rightX;
-  while ( left >= *v8 )
+  m_data = this->m_intervals.m_data;
+  p_m_rightX = &this->m_intervals.m_data->m_rightX;
+  while ( left >= *p_m_rightX )
   {
     ++v5;
     ++v4;
-    v8 += 5;
-    if ( v5 >= v6 )
+    p_m_rightX += 5;
+    if ( v5 >= m_size )
       goto LABEL_5;
   }
   if ( v4 < 0 )
   {
 LABEL_5:
-    v3->m_intervals.m_size = 0;
+    this->m_intervals.m_size = 0;
   }
   else
   {
     if ( v4 > 0 )
     {
-      v9 = v6 - v4;
-      v3->m_intervals.m_size = v9;
-      v10 = (signed __int64)&v7[5 * v4];
+      v9 = m_size - v4;
+      this->m_intervals.m_size = v9;
+      v10 = &m_data[v4];
       if ( 20 * v9 > 0 )
       {
-        v11 = v10 - (_QWORD)v7;
+        v11 = (char *)v10 - (char *)m_data;
         v12 = ((unsigned int)(20 * v9 - 1) >> 2) + 1;
         do
         {
-          v13 = *(_DWORD *)((char *)v7 + v11);
-          ++v7;
-          *((_DWORD *)v7 - 1) = v13;
+          v13 = *(_DWORD *)((char *)&m_data->m_leftX + v11);
+          m_data = (hkaiIntervalPartition::Interval *)((char *)m_data + 4);
+          m_data[-1].m_data = v13;
           --v12;
         }
         while ( v12 );
       }
     }
-    if ( v3->m_intervals.m_size )
+    if ( this->m_intervals.m_size )
     {
-      v3->m_intervals.m_data->m_leftX = fmaxf(left, v3->m_intervals.m_data->m_leftX);
-      if ( v3->m_intervals.m_size )
+      this->m_intervals.m_data->m_leftX = fmaxf(left, this->m_intervals.m_data->m_leftX);
+      if ( this->m_intervals.m_size )
       {
         do
         {
-          v14 = v3->m_intervals.m_size;
-          if ( right > v3->m_intervals.m_data[v14 - 1].m_leftX )
+          v14 = this->m_intervals.m_size;
+          if ( right > this->m_intervals.m_data[v14 - 1].m_leftX )
             break;
-          v3->m_intervals.m_size = v14 - 1;
+          this->m_intervals.m_size = v14 - 1;
         }
         while ( (_DWORD)v14 != 1 );
       }
     }
-    v15 = v3->m_intervals.m_size;
+    v15 = this->m_intervals.m_size;
     if ( (_DWORD)v15 )
-      *((float *)&v3->m_intervals.m_data[v15] - 4) = fminf(right, *((float *)&v3->m_intervals.m_data[v15] - 4));
+      this->m_intervals.m_data[v15 - 1].m_rightX = fminf(right, this->m_intervals.m_data[v15 - 1].m_rightX);
   }
 }
 
@@ -879,20 +869,17 @@ LABEL_5:
 // RVA: 0x12E0CE0
 void __fastcall hkaiIntervalPartition::clipY(hkaiIntervalPartition *this, float front, float back)
 {
-  __int64 v3; // r14
+  __int64 m_size; // r14
   int v4; // ebp
-  hkaiIntervalPartition *v5; // r15
   int v6; // esi
   __int64 v7; // rdi
   __int64 v8; // rbx
-  int v9; // eax
-  hkaiIntervalPartition::Interval *v10; // rcx
+  hkaiIntervalPartition::Interval *m_data; // rcx
 
-  v3 = this->m_intervals.m_size;
+  m_size = this->m_intervals.m_size;
   v4 = 0;
-  v5 = this;
   v6 = 0;
-  if ( v3 <= 0 )
+  if ( m_size <= 0 )
   {
     this->m_intervals.m_size = 0;
   }
@@ -902,24 +889,22 @@ void __fastcall hkaiIntervalPartition::clipY(hkaiIntervalPartition *this, float 
     v8 = 0i64;
     do
     {
-      LOBYTE(v9) = hkaiIntervalPartition::Interval::clampY(&v5->m_intervals.m_data[v6], front, back);
-      if ( v9 )
+      if ( hkaiIntervalPartition::Interval::clampY(&this->m_intervals.m_data[v6], front, back) )
       {
-        v10 = v5->m_intervals.m_data;
+        m_data = this->m_intervals.m_data;
         ++v4;
-        ++v7;
-        v10[v7 - 1].m_leftX = v5->m_intervals.m_data[v8].m_leftX;
-        *((_DWORD *)&v10[v7] - 4) = LODWORD(v10[v8].m_rightX);
-        *((_DWORD *)&v10[v7] - 3) = LODWORD(v10[v8].m_slope);
-        *((_DWORD *)&v10[v7] - 2) = LODWORD(v10[v8].m_offset);
-        *((_DWORD *)&v10[v7] - 1) = v10[v8].m_data;
+        m_data[v7++].m_leftX = this->m_intervals.m_data[v8].m_leftX;
+        m_data[v7 - 1].m_rightX = m_data[v8].m_rightX;
+        m_data[v7 - 1].m_slope = m_data[v8].m_slope;
+        m_data[v7 - 1].m_offset = m_data[v8].m_offset;
+        m_data[v7 - 1].m_data = m_data[v8].m_data;
       }
       ++v6;
       ++v8;
-      --v3;
+      --m_size;
     }
-    while ( v3 );
-    v5->m_intervals.m_size = v4;
+    while ( m_size );
+    this->m_intervals.m_size = v4;
   }
 }
 
@@ -927,19 +912,17 @@ void __fastcall hkaiIntervalPartition::clipY(hkaiIntervalPartition *this, float 
 // RVA: 0x12E2E10
 void __fastcall hkaiIntervalPartition::clipFunc<0>(hkaiIntervalPartition *this, float slope, float offset)
 {
-  __int64 v3; // r14
+  __int64 m_size; // r14
   int v4; // ebp
-  hkaiIntervalPartition *v5; // r15
   int v6; // esi
   __int64 v7; // rdi
   __int64 v8; // rbx
-  hkaiIntervalPartition::Interval *v9; // rcx
+  hkaiIntervalPartition::Interval *m_data; // rcx
 
-  v3 = this->m_intervals.m_size;
+  m_size = this->m_intervals.m_size;
   v4 = 0;
-  v5 = this;
   v6 = 0;
-  if ( v3 <= 0 )
+  if ( m_size <= 0 )
   {
     this->m_intervals.m_size = 0;
   }
@@ -949,23 +932,22 @@ void __fastcall hkaiIntervalPartition::clipFunc<0>(hkaiIntervalPartition *this, 
     v8 = 0i64;
     do
     {
-      if ( (unsigned int)hkaiIntervalPartition::Interval::clampFunc<0>(&v5->m_intervals.m_data[v6], slope, offset) )
+      if ( hkaiIntervalPartition::Interval::clampFunc<0>(&this->m_intervals.m_data[v6], slope, offset) )
       {
-        v9 = v5->m_intervals.m_data;
+        m_data = this->m_intervals.m_data;
         ++v4;
-        ++v7;
-        v9[v7 - 1].m_leftX = v5->m_intervals.m_data[v8].m_leftX;
-        *((_DWORD *)&v9[v7] - 4) = LODWORD(v9[v8].m_rightX);
-        *((_DWORD *)&v9[v7] - 3) = LODWORD(v9[v8].m_slope);
-        *((_DWORD *)&v9[v7] - 2) = LODWORD(v9[v8].m_offset);
-        *((_DWORD *)&v9[v7] - 1) = v9[v8].m_data;
+        m_data[v7++].m_leftX = this->m_intervals.m_data[v8].m_leftX;
+        m_data[v7 - 1].m_rightX = m_data[v8].m_rightX;
+        m_data[v7 - 1].m_slope = m_data[v8].m_slope;
+        m_data[v7 - 1].m_offset = m_data[v8].m_offset;
+        m_data[v7 - 1].m_data = m_data[v8].m_data;
       }
       ++v6;
       ++v8;
-      --v3;
+      --m_size;
     }
-    while ( v3 );
-    v5->m_intervals.m_size = v4;
+    while ( m_size );
+    this->m_intervals.m_size = v4;
   }
 }
 
@@ -973,21 +955,20 @@ void __fastcall hkaiIntervalPartition::clipFunc<0>(hkaiIntervalPartition *this, 
 // RVA: 0x12E2EE0
 void __fastcall hkaiIntervalPartition::combine<0,0>(hkaiIntervalPartition *this, hkaiIntervalPartition *other)
 {
-  int v2; // eax
-  hkaiIntervalPartition *v3; // rbx
+  int m_size; // eax
   hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *v4; // r13
-  int v5; // ecx
+  int m_capacityAndFlags; // ecx
   __int64 v6; // rax
-  char *v7; // rcx
+  char *m_data; // rcx
   __int64 v8; // r8
   signed __int64 v9; // rdx
   int v10; // eax
   __int64 v11; // rsi
   __int64 v12; // r15
-  int v13; // er9
-  int v14; // er14
+  int v13; // r9d
+  int v14; // r14d
   int v15; // edi
-  float *v16; // rax
+  float *p_m_fromOffset; // rax
   __int64 v17; // r12
   float v18; // xmm1_4
   __int128 v19; // xmm7
@@ -996,17 +977,17 @@ void __fastcall hkaiIntervalPartition::combine<0,0>(hkaiIntervalPartition *this,
   unsigned int *v22; // rax
   __int64 v23; // rbx
   __int64 v24; // rsi
-  __int128 v25; // xmm6
-  __int128 v26; // xmm8
+  __int128 m_leftX_low; // xmm6
+  __int128 m_rightX_low; // xmm8
   float v27; // xmm0_4
   float v28; // xmm1_4
   unsigned int v29; // xmm0_4
   hkRelocationInfo::Import *v30; // rax
   float v31; // xmm1_4
   hkaiIntervalPartition::Interval *v32; // rax
-  float v33; // xmm1_4
+  float m_offset; // xmm1_4
   char v34; // r13
-  float v35; // xmm10_4
+  float m_slope; // xmm10_4
   float v36; // xmm11_4
   hkaiIntervalPartition::Interval *v37; // rdx
   char v38; // cl
@@ -1016,65 +997,61 @@ void __fastcall hkaiIntervalPartition::combine<0,0>(hkaiIntervalPartition *this,
   hkaiIntervalPartition::Interval *v42; // rax
   float v43; // xmm1_4
   int v44; // ebx
-  int i; // er14
+  int i; // r14d
   int v46; // ebx
   int v47; // edi
   hkaiIntervalPartition *v48; // r13
-  void *array; // [rsp+30h] [rbp-D0h]
-  int v50; // [rsp+38h] [rbp-C8h]
-  int v51; // [rsp+3Ch] [rbp-C4h]
-  hkaiIntervalPartition::Interval interval; // [rsp+40h] [rbp-C0h]
-  hkaiIntervalPartition::Interval v53; // [rsp+58h] [rbp-A8h]
-  hkaiIntervalPartition::Interval v54; // [rsp+70h] [rbp-90h]
-  hkaiIntervalPartition::Interval v55; // [rsp+88h] [rbp-78h]
-  int v56; // [rsp+A0h] [rbp-60h]
-  __int64 v57; // [rsp+A8h] [rbp-58h]
-  hkaiIntervalPartition::Interval v58; // [rsp+B0h] [rbp-50h]
-  hkaiIntervalPartition::Interval othera; // [rsp+C8h] [rbp-38h]
-  unsigned int v60; // [rsp+E0h] [rbp-20h]
-  hkaiIntervalPartition *v61; // [rsp+1A0h] [rbp+A0h]
-  hkaiIntervalPartition *v62; // [rsp+1A8h] [rbp+A8h]
-  hkResult result; // [rsp+1B0h] [rbp+B0h]
-  int v64; // [rsp+1B8h] [rbp+B8h]
+  hkArrayBase<hkaiIntervalPartition::Interval> array; // [rsp+30h] [rbp-D0h] BYREF
+  hkaiIntervalPartition::Interval interval; // [rsp+40h] [rbp-C0h] BYREF
+  hkaiIntervalPartition::Interval v51; // [rsp+58h] [rbp-A8h] BYREF
+  hkaiIntervalPartition::Interval v52; // [rsp+70h] [rbp-90h] BYREF
+  hkaiIntervalPartition::Interval v53; // [rsp+88h] [rbp-78h] BYREF
+  int v54; // [rsp+A0h] [rbp-60h]
+  __int64 v55; // [rsp+A8h] [rbp-58h]
+  hkaiIntervalPartition::Interval v56; // [rsp+B0h] [rbp-50h] BYREF
+  hkaiIntervalPartition::Interval othera[2]; // [rsp+C8h] [rbp-38h] BYREF
+  hkaiIntervalPartition *v58; // [rsp+1A0h] [rbp+A0h] BYREF
+  hkaiIntervalPartition *v59; // [rsp+1A8h] [rbp+A8h]
+  hkResult result; // [rsp+1B0h] [rbp+B0h] BYREF
+  int v61; // [rsp+1B8h] [rbp+B8h]
 
-  v62 = other;
-  v61 = this;
-  v2 = this->m_intervals.m_size;
-  v3 = other;
+  v59 = other;
+  v58 = this;
+  m_size = this->m_intervals.m_size;
   v4 = (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)this;
-  v64 = v2;
-  if ( !v2 )
+  v61 = m_size;
+  if ( !m_size )
   {
-    v5 = this->m_intervals.m_capacityAndFlags;
-    if ( (v5 & 0x3FFFFFFF) < other->m_intervals.m_size )
+    m_capacityAndFlags = this->m_intervals.m_capacityAndFlags;
+    if ( (m_capacityAndFlags & 0x3FFFFFFF) < other->m_intervals.m_size )
     {
-      if ( v5 >= 0 )
+      if ( m_capacityAndFlags >= 0 )
         hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+          &hkContainerHeapAllocator::s_alloc,
           v4->m_data,
-          20 * (v5 & 0x3FFFFFFF));
-      LODWORD(v61) = 20 * v3->m_intervals.m_size;
+          20 * (m_capacityAndFlags & 0x3FFFFFFF));
+      LODWORD(v58) = 20 * other->m_intervals.m_size;
       v4->m_data = (hkRelocationInfo::Import *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
-                                                 (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-                                                 (int *)&v61);
-      v4->m_capacityAndFlags = (signed int)v61 / 20;
+                                                 &hkContainerHeapAllocator::s_alloc,
+                                                 &v58);
+      v4->m_capacityAndFlags = (int)v58 / 20;
     }
-    v6 = v3->m_intervals.m_size;
-    v7 = (char *)v4->m_data;
+    v6 = other->m_intervals.m_size;
+    m_data = (char *)v4->m_data;
     v4->m_size = v6;
     v8 = v6;
-    if ( (signed int)v6 > 0 )
+    if ( (int)v6 > 0 )
     {
-      v9 = (char *)v3->m_intervals.m_data - v7;
+      v9 = (char *)other->m_intervals.m_data - m_data;
       do
       {
-        v10 = *(_DWORD *)&v7[v9];
-        v7 += 20;
-        *((_DWORD *)v7 - 5) = v10;
-        *((_DWORD *)v7 - 4) = *(_DWORD *)&v7[v9 - 16];
-        *((_DWORD *)v7 - 3) = *(_DWORD *)&v7[v9 - 12];
-        *((_DWORD *)v7 - 2) = *(_DWORD *)&v7[v9 - 8];
-        *((_DWORD *)v7 - 1) = *(_DWORD *)&v7[v9 - 4];
+        v10 = *(_DWORD *)&m_data[v9];
+        m_data += 20;
+        *((_DWORD *)m_data - 5) = v10;
+        *((_DWORD *)m_data - 4) = *(_DWORD *)&m_data[v9 - 16];
+        *((_DWORD *)m_data - 3) = *(_DWORD *)&m_data[v9 - 12];
+        *((_DWORD *)m_data - 2) = *(_DWORD *)&m_data[v9 - 8];
+        *((_DWORD *)m_data - 1) = *(_DWORD *)&m_data[v9 - 4];
         --v8;
       }
       while ( v8 );
@@ -1082,179 +1059,179 @@ void __fastcall hkaiIntervalPartition::combine<0,0>(hkaiIntervalPartition *this,
     return;
   }
   v11 = other->m_intervals.m_size;
-  v56 = v11;
+  v54 = v11;
   if ( !(_DWORD)v11 )
     return;
   v12 = 0i64;
-  v13 = 2 * (v11 + v2);
-  v51 = 2147483648;
+  v13 = 2 * (v11 + m_size);
+  array.m_capacityAndFlags = 0x80000000;
   v14 = 0;
   v15 = 0;
-  array = 0i64;
-  v50 = 0;
+  array.m_data = 0i64;
+  array.m_size = 0;
   if ( v13 > 0 )
   {
-    if ( v13 < 0 )
+    if ( (((_DWORD)v11 + m_size) & 0x40000000) != 0 )
       v13 = 0;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, v13, 20);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&array.m_data, v13, 20);
   }
   hkArrayBase<hkaiIntervalPartition::Interval>::_append(
-    (hkArrayBase<hkaiIntervalPartition::Interval> *)&array,
-    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
+    &array,
+    &hkContainerHeapAllocator::s_alloc,
     (hkaiIntervalPartition::Interval *)v4->m_data,
     v4->m_size);
   hkArray<hkpTreeBroadPhase32::Handle,hkContainerHeapAllocator>::swap(
     (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&array,
     v4);
-  v16 = (float *)&v4->m_data->m_fromOffset;
-  v50 = 0;
-  v57 = v11;
+  p_m_fromOffset = (float *)&v4->m_data->m_fromOffset;
+  array.m_size = 0;
+  v55 = v11;
   v17 = 0i64;
-  v18 = v16[3];
-  v19 = *(unsigned int *)v16;
-  v20 = *((unsigned int *)v16 + 1);
-  interval.m_slope = v16[2];
-  v21 = *((_DWORD *)v16 + 4);
-  v22 = (unsigned int *)v3->m_intervals.m_data;
+  v18 = p_m_fromOffset[3];
+  v19 = *(unsigned int *)p_m_fromOffset;
+  v20 = *((unsigned int *)p_m_fromOffset + 1);
+  interval.m_slope = p_m_fromOffset[2];
+  v21 = *((_DWORD *)p_m_fromOffset + 4);
+  v22 = (unsigned int *)other->m_intervals.m_data;
   v23 = 0i64;
   v24 = 0i64;
-  v25 = *v22;
-  v26 = v22[1];
+  m_leftX_low = *v22;
+  m_rightX_low = v22[1];
   interval.m_data = v21;
   v27 = *((float *)v22 + 2);
   interval.m_offset = v18;
   v28 = *((float *)v22 + 3);
-  v53.m_slope = v27;
+  v51.m_slope = v27;
   v29 = v22[4];
-  LODWORD(v53.m_leftX) = v25;
-  v53.m_data = v29;
-  LODWORD(v53.m_rightX) = v26;
-  v53.m_offset = v28;
+  LODWORD(v51.m_leftX) = m_leftX_low;
+  v51.m_data = v29;
+  LODWORD(v51.m_rightX) = m_rightX_low;
+  v51.m_offset = v28;
   while ( 2 )
   {
     LODWORD(interval.m_rightX) = v20;
     LODWORD(interval.m_leftX) = v19;
     while ( 1 )
     {
-      while ( *(float *)&v19 >= *(float *)&v25 )
+      while ( *(float *)&v19 >= *(float *)&m_leftX_low )
       {
-        if ( *(float *)&v25 >= *(float *)&v19 )
+        if ( *(float *)&m_leftX_low >= *(float *)&v19 )
           goto LABEL_27;
-        if ( *(float *)&v26 >= *(float *)&v19 )
+        if ( *(float *)&m_rightX_low >= *(float *)&v19 )
         {
-          *(_QWORD *)&othera.m_slope = *(_QWORD *)&v53.m_leftX;
-          *(_QWORD *)&othera.m_data = *(_QWORD *)&v53.m_slope;
-          LODWORD(othera.m_offset) = v19;
-          v60 = v53.m_data;
+          othera[0].m_slope = v51.m_leftX;
+          *(_QWORD *)&othera[0].m_data = *(_QWORD *)&v51.m_slope;
+          LODWORD(othera[0].m_offset) = v19;
+          LODWORD(othera[1].m_rightX) = v51.m_data;
           hkaiIntervalPartition::addRemovingDupes(
             (hkArray<hkaiIntervalPartition::Interval,hkContainerHeapAllocator> *)&array,
-            (hkaiIntervalPartition::Interval *)((char *)&othera + 8));
-          v25 = v19;
-          LODWORD(v53.m_leftX) = v19;
+            (hkaiIntervalPartition::Interval *)&othera[0].m_slope);
+          m_leftX_low = v19;
+          LODWORD(v51.m_leftX) = v19;
           goto LABEL_27;
         }
         hkaiIntervalPartition::addRemovingDupes(
           (hkArray<hkaiIntervalPartition::Interval,hkContainerHeapAllocator> *)&array,
-          &v53);
+          &v51);
         ++v12;
         ++v15;
         ++v23;
-        if ( v12 == v57 )
+        if ( v12 == v55 )
           goto LABEL_55;
-        v32 = v62->m_intervals.m_data;
-        v25 = LODWORD(v62->m_intervals.m_data[v23].m_leftX);
-        v26 = LODWORD(v62->m_intervals.m_data[v23].m_rightX);
-        v33 = v62->m_intervals.m_data[v23].m_offset;
-        v53.m_slope = v62->m_intervals.m_data[v23].m_slope;
-        v53.m_data = v32[v23].m_data;
-        LODWORD(v53.m_leftX) = v25;
-        LODWORD(v53.m_rightX) = v26;
-        v53.m_offset = v33;
+        v32 = v59->m_intervals.m_data;
+        m_leftX_low = LODWORD(v59->m_intervals.m_data[v23].m_leftX);
+        m_rightX_low = LODWORD(v59->m_intervals.m_data[v23].m_rightX);
+        m_offset = v59->m_intervals.m_data[v23].m_offset;
+        v51.m_slope = v59->m_intervals.m_data[v23].m_slope;
+        v51.m_data = v32[v23].m_data;
+        LODWORD(v51.m_leftX) = m_leftX_low;
+        LODWORD(v51.m_rightX) = m_rightX_low;
+        v51.m_offset = m_offset;
       }
-      if ( *(float *)&v20 < *(float *)&v25 )
+      if ( *(float *)&v20 < *(float *)&m_leftX_low )
         break;
-      *(_QWORD *)&v58.m_leftX = *(_QWORD *)&interval.m_leftX;
-      *(_QWORD *)&v58.m_slope = *(_QWORD *)&interval.m_slope;
-      LODWORD(v58.m_rightX) = v25;
-      v58.m_data = interval.m_data;
+      v56.m_leftX = interval.m_leftX;
+      *(_QWORD *)&v56.m_slope = *(_QWORD *)&interval.m_slope;
+      LODWORD(v56.m_rightX) = m_leftX_low;
+      v56.m_data = interval.m_data;
       hkaiIntervalPartition::addRemovingDupes(
         (hkArray<hkaiIntervalPartition::Interval,hkContainerHeapAllocator> *)&array,
-        &v58);
-      v19 = v25;
-      LODWORD(interval.m_leftX) = v25;
+        &v56);
+      v19 = m_leftX_low;
+      LODWORD(interval.m_leftX) = m_leftX_low;
 LABEL_27:
       v34 = 0;
-      v54 = interval;
+      v52 = interval;
       LOBYTE(result.m_enum) = 0;
-      v55 = v53;
-      if ( *(float *)&v20 >= *(float *)&v26 )
+      v53 = v51;
+      if ( *(float *)&v20 >= *(float *)&m_rightX_low )
       {
-        if ( *(float *)&v26 >= *(float *)&v20 )
+        if ( *(float *)&m_rightX_low >= *(float *)&v20 )
         {
           v34 = 1;
           LOBYTE(result.m_enum) = 1;
         }
         else
         {
-          v19 = v26;
-          LODWORD(v54.m_rightX) = v26;
+          v19 = m_rightX_low;
+          LODWORD(v52.m_rightX) = m_rightX_low;
           LOBYTE(result.m_enum) = 1;
-          LODWORD(interval.m_leftX) = v26;
+          LODWORD(interval.m_leftX) = m_rightX_low;
         }
       }
       else
       {
-        v25 = v20;
-        LODWORD(v55.m_rightX) = v20;
+        m_leftX_low = v20;
+        LODWORD(v53.m_rightX) = v20;
         v34 = 1;
-        LODWORD(v53.m_leftX) = v20;
+        LODWORD(v51.m_leftX) = v20;
       }
-      v35 = v54.m_slope;
-      v36 = v55.m_slope;
-      if ( v54.m_slope == v55.m_slope )
+      m_slope = v52.m_slope;
+      v36 = v53.m_slope;
+      if ( v52.m_slope == v53.m_slope )
       {
-        v37 = &v54;
-        if ( v55.m_offset <= v54.m_offset )
-          v37 = &v55;
+        v37 = &v52;
+        if ( v53.m_offset <= v52.m_offset )
+          v37 = &v53;
       }
       else
       {
-        hkaiIntervalPartition::Interval::intersect(&v54, &othera, (__int64)&v55);
-        if ( othera.m_leftX >= v54.m_leftX )
+        hkaiIntervalPartition::Interval::intersect(&v52, othera, (__int64)&v53);
+        if ( othera[0].m_leftX >= v52.m_leftX )
         {
-          if ( othera.m_leftX <= v54.m_rightX )
+          if ( othera[0].m_leftX <= v52.m_rightX )
           {
-            if ( v35 >= v36 )
+            if ( m_slope >= v36 )
             {
-              v54.m_rightX = othera.m_leftX;
-              v55.m_leftX = othera.m_leftX;
+              v52.m_rightX = othera[0].m_leftX;
+              v53.m_leftX = othera[0].m_leftX;
               hkaiIntervalPartition::addRemovingDupes(
                 (hkArray<hkaiIntervalPartition::Interval,hkContainerHeapAllocator> *)&array,
-                &v54);
-              v37 = &v55;
+                &v52);
+              v37 = &v53;
             }
             else
             {
-              v54.m_leftX = othera.m_leftX;
-              v55.m_rightX = othera.m_leftX;
+              v52.m_leftX = othera[0].m_leftX;
+              v53.m_rightX = othera[0].m_leftX;
               hkaiIntervalPartition::addRemovingDupes(
                 (hkArray<hkaiIntervalPartition::Interval,hkContainerHeapAllocator> *)&array,
-                &v55);
-              v37 = &v54;
+                &v53);
+              v37 = &v52;
             }
           }
           else
           {
-            v37 = &v55;
-            if ( v36 <= v35 )
-              v37 = &v54;
+            v37 = &v53;
+            if ( v36 <= m_slope )
+              v37 = &v52;
           }
         }
         else
         {
-          v37 = &v54;
-          if ( v36 <= v35 )
-            v37 = &v55;
+          v37 = &v52;
+          if ( v36 <= m_slope )
+            v37 = &v53;
         }
       }
       hkaiIntervalPartition::addRemovingDupes(
@@ -1262,23 +1239,23 @@ LABEL_27:
         v37);
       v38 = 0;
       v39 = v34 == 0;
-      v4 = (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)v61;
+      v4 = (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)v58;
       if ( !v39 )
       {
         ++v17;
         ++v14;
         ++v24;
-        if ( v17 == v64 )
+        if ( v17 == v61 )
         {
           v38 = 1;
         }
         else
         {
-          v40 = v61->m_intervals.m_data;
-          v19 = LODWORD(v61->m_intervals.m_data[v24].m_leftX);
-          v20 = LODWORD(v61->m_intervals.m_data[v24].m_rightX);
-          v41 = v61->m_intervals.m_data[v24].m_offset;
-          interval.m_slope = v61->m_intervals.m_data[v24].m_slope;
+          v40 = v58->m_intervals.m_data;
+          v19 = LODWORD(v58->m_intervals.m_data[v24].m_leftX);
+          v20 = LODWORD(v58->m_intervals.m_data[v24].m_rightX);
+          v41 = v58->m_intervals.m_data[v24].m_offset;
+          interval.m_slope = v58->m_intervals.m_data[v24].m_slope;
           interval.m_data = v40[v24].m_data;
           LODWORD(interval.m_leftX) = v19;
           LODWORD(interval.m_rightX) = v20;
@@ -1290,17 +1267,17 @@ LABEL_27:
         ++v12;
         ++v15;
         ++v23;
-        if ( v12 == v57 )
+        if ( v12 == v55 )
           goto LABEL_55;
-        v42 = v62->m_intervals.m_data;
-        v25 = LODWORD(v62->m_intervals.m_data[v23].m_leftX);
-        v26 = LODWORD(v62->m_intervals.m_data[v23].m_rightX);
-        v43 = v62->m_intervals.m_data[v23].m_offset;
-        v53.m_slope = v62->m_intervals.m_data[v23].m_slope;
-        v53.m_data = v42[v23].m_data;
-        LODWORD(v53.m_leftX) = v25;
-        LODWORD(v53.m_rightX) = v26;
-        v53.m_offset = v43;
+        v42 = v59->m_intervals.m_data;
+        m_leftX_low = LODWORD(v59->m_intervals.m_data[v23].m_leftX);
+        m_rightX_low = LODWORD(v59->m_intervals.m_data[v23].m_rightX);
+        v43 = v59->m_intervals.m_data[v23].m_offset;
+        v51.m_slope = v59->m_intervals.m_data[v23].m_slope;
+        v51.m_data = v42[v23].m_data;
+        LODWORD(v51.m_leftX) = m_leftX_low;
+        LODWORD(v51.m_rightX) = m_rightX_low;
+        v51.m_offset = v43;
       }
       if ( v38 )
         goto LABEL_55;
@@ -1311,7 +1288,7 @@ LABEL_27:
     ++v17;
     ++v14;
     ++v24;
-    if ( v17 != v64 )
+    if ( v17 != v61 )
     {
       v30 = v4->m_data;
       v31 = *(float *)((char *)&v4->m_data->m_identifier + v24 * 20 + 4);
@@ -1325,8 +1302,8 @@ LABEL_27:
     break;
   }
 LABEL_55:
-  v44 = v64;
-  if ( v14 < v64 )
+  v44 = v61;
+  if ( v14 < v61 )
   {
     hkaiIntervalPartition::addRemovingDupes(
       (hkArray<hkaiIntervalPartition::Interval,hkContainerHeapAllocator> *)&array,
@@ -1336,53 +1313,53 @@ LABEL_55:
         (hkArray<hkaiIntervalPartition::Interval,hkContainerHeapAllocator> *)&array,
         (hkaiIntervalPartition::Interval *)v4->m_data + i);
   }
-  v46 = v56;
-  if ( v15 < v56 )
+  v46 = v54;
+  if ( v15 < v54 )
   {
     hkaiIntervalPartition::addRemovingDupes(
       (hkArray<hkaiIntervalPartition::Interval,hkContainerHeapAllocator> *)&array,
-      &v53);
+      &v51);
     v47 = v15 + 1;
     if ( v47 != v46 )
     {
-      v48 = v62;
+      v48 = v59;
       do
         hkaiIntervalPartition::addRemovingDupes(
           (hkArray<hkaiIntervalPartition::Interval,hkContainerHeapAllocator> *)&array,
           &v48->m_intervals.m_data[v47++]);
       while ( v47 != v46 );
-      v4 = (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)v61;
+      v4 = (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)v58;
     }
   }
   hkArray<hkpTreeBroadPhase32::Handle,hkContainerHeapAllocator>::swap(
     v4,
     (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&array);
-  v50 = 0;
-  if ( v51 >= 0 )
+  array.m_size = 0;
+  if ( array.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      array,
-      20 * (v51 & 0x3FFFFFFF));
-}erHeapAll
+      &hkContainerHeapAllocator::s_alloc,
+      array.m_data,
+      20 * (array.m_capacityAndFlags & 0x3FFFFFFF));
+}
 
 // File Line: 752
 // RVA: 0x12E11D0
 void __fastcall hkaiIntervalPartition::clipMin(hkaiIntervalPartition *this, hkaiIntervalPartition *other)
 {
-  __int64 v2; // r13
+  __int64 m_size; // r13
   hkaiIntervalPartition *v3; // r12
   hkaiIntervalPartition *v4; // rbx
   __int64 v5; // rdi
-  int v6; // er9
+  int v6; // r9d
   int v7; // esi
-  unsigned int *v8; // rax
+  unsigned int *m_data; // rax
   __int64 *v9; // rcx
   __int64 v10; // r15
   float v11; // xmm0_4
   float v12; // xmm1_4
-  __int128 v13; // xmm7
+  __int128 m_leftX_low; // xmm7
   hkaiIntervalPartition *v14; // r14
-  __int128 v15; // xmm9
+  __int128 m_rightX_low; // xmm9
   unsigned int v16; // xmm0_4
   _DWORD *v17; // rax
   __int128 v18; // xmm6
@@ -1404,152 +1381,143 @@ void __fastcall hkaiIntervalPartition::clipMin(hkaiIntervalPartition *this, hkai
   char v34; // cl
   bool v35; // zf
   hkaiIntervalPartition::Interval *v36; // rax
-  float v37; // xmm1_4
+  float m_offset; // xmm1_4
   __int64 v38; // rax
   unsigned int v39; // xmm1_4
   int i; // esi
-  hkaiIntervalPartition::Interval interval; // [rsp+30h] [rbp-B8h]
-  void *array; // [rsp+48h] [rbp-A0h]
-  int v43; // [rsp+50h] [rbp-98h]
-  int v44; // [rsp+54h] [rbp-94h]
-  unsigned __int64 v45; // [rsp+58h] [rbp-90h]
-  unsigned __int64 v46; // [rsp+60h] [rbp-88h]
-  unsigned int v47; // [rsp+68h] [rbp-80h]
-  hkaiIntervalPartition::Interval v48; // [rsp+70h] [rbp-78h]
-  float v49; // [rsp+84h] [rbp-64h]
-  unsigned int v50; // [rsp+88h] [rbp-60h]
-  hkaiIntervalPartition::Interval othera; // [rsp+90h] [rbp-58h]
-  unsigned int v52; // [rsp+A8h] [rbp-40h]
-  hkaiIntervalPartition *v53; // [rsp+168h] [rbp+80h]
+  hkaiIntervalPartition::Interval interval; // [rsp+30h] [rbp-B8h] BYREF
+  hkArrayBase<hkaiIntervalPartition::Interval> array; // [rsp+48h] [rbp-A0h] BYREF
+  unsigned __int64 v43; // [rsp+58h] [rbp-90h]
+  unsigned __int64 v44; // [rsp+60h] [rbp-88h]
+  unsigned int v45; // [rsp+68h] [rbp-80h]
+  char v46[24]; // [rsp+70h] [rbp-78h] BYREF
+  unsigned int v47; // [rsp+88h] [rbp-60h]
+  hkaiIntervalPartition::Interval othera[3]; // [rsp+90h] [rbp-58h] BYREF
+  hkaiIntervalPartition *v49; // [rsp+168h] [rbp+80h]
   unsigned int **vars0; // [rsp+170h] [rbp+88h]
-  int retaddr; // [rsp+178h] [rbp+90h]
-  hkaiIntervalPartition *result; // [rsp+180h] [rbp+98h]
-  hkaiIntervalPartition *v57; // [rsp+188h] [rbp+A0h]
+  void *retaddr; // [rsp+178h] [rbp+90h]
+  hkaiIntervalPartition *result; // [rsp+180h] [rbp+98h] BYREF
+  hkaiIntervalPartition *v53; // [rsp+188h] [rbp+A0h]
 
-  v57 = other;
+  v53 = other;
   result = this;
-  v2 = this->m_intervals.m_size;
+  m_size = this->m_intervals.m_size;
   v3 = this;
-  retaddr = v2;
-  if ( !(_DWORD)v2 )
+  LODWORD(retaddr) = m_size;
+  if ( !(_DWORD)m_size )
     return;
   v4 = (hkaiIntervalPartition *)other->m_intervals.m_size;
   if ( !(_DWORD)v4 )
     return;
   v5 = 0i64;
-  v6 = 2 * ((_DWORD)v4 + v2);
-  v44 = 2147483648;
+  v6 = 2 * ((_DWORD)v4 + m_size);
+  array.m_capacityAndFlags = 0x80000000;
   v7 = 0;
-  array = 0i64;
-  v43 = 0;
+  array.m_data = 0i64;
+  array.m_size = 0;
   if ( v6 > 0 )
   {
-    if ( v6 < 0 )
+    if ( (((_DWORD)v4 + (_DWORD)m_size) & 0x40000000) != 0 )
       v6 = 0;
-    hkArrayUtil::_reserve(
-      (hkResult *)&result,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &array,
-      v6,
-      20);
+    hkArrayUtil::_reserve((hkResult *)&result, &hkContainerHeapAllocator::s_alloc, (const void **)&array.m_data, v6, 20);
   }
   hkArrayBase<hkaiIntervalPartition::Interval>::_append(
-    (hkArrayBase<hkaiIntervalPartition::Interval> *)&array,
-    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
+    &array,
+    &hkContainerHeapAllocator::s_alloc,
     v3->m_intervals.m_data,
     v3->m_intervals.m_size);
   hkArray<hkpTreeBroadPhase32::Handle,hkContainerHeapAllocator>::swap(
     (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&array,
     (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)v3);
-  v8 = (unsigned int *)v3->m_intervals.m_data;
+  m_data = (unsigned int *)v3->m_intervals.m_data;
   v9 = (__int64 *)vars0;
-  v43 = 0;
+  array.m_size = 0;
   result = v4;
   v10 = 0i64;
-  v11 = *((float *)v8 + 2);
-  v12 = *((float *)v8 + 3);
-  v13 = *v8;
+  v11 = *((float *)m_data + 2);
+  v12 = *((float *)m_data + 3);
+  m_leftX_low = *m_data;
   v14 = 0i64;
-  *(_QWORD *)&v48.m_leftX = v2;
-  v15 = v8[1];
+  *(_QWORD *)v46 = m_size;
+  m_rightX_low = m_data[1];
   interval.m_slope = v11;
-  v16 = v8[4];
+  v16 = m_data[4];
   v17 = *vars0;
   v18 = **vars0;
   v19 = (*vars0)[1];
   interval.m_data = v16;
   v20 = v17[2];
   interval.m_offset = v12;
-  v46 = __PAIR__(v17[3], v20);
+  v44 = __PAIR64__(v17[3], v20);
   v21 = v17[4];
-  v45 = __PAIR__(v19, (unsigned int)v18);
+  v43 = __PAIR64__(v19, v18);
   v22 = v4;
   v23 = 0i64;
-  v47 = v21;
+  v45 = v21;
   while ( 2 )
   {
-    LODWORD(interval.m_rightX) = v15;
-    LODWORD(interval.m_leftX) = v13;
-    while ( *(float *)&v13 >= *(float *)&v18 )
+    LODWORD(interval.m_rightX) = m_rightX_low;
+    LODWORD(interval.m_leftX) = m_leftX_low;
+    while ( *(float *)&m_leftX_low >= *(float *)&v18 )
     {
-      if ( *(float *)&v18 >= *(float *)&v13 )
+      if ( *(float *)&v18 >= *(float *)&m_leftX_low )
         goto LABEL_19;
-      if ( *(float *)&v19 >= *(float *)&v13 )
+      if ( *(float *)&v19 >= *(float *)&m_leftX_low )
       {
-        v18 = v13;
-        LODWORD(v45) = v13;
+        v18 = m_leftX_low;
+        LODWORD(v43) = m_leftX_low;
 LABEL_19:
         v30 = 0;
         v31 = 0;
-        *(_QWORD *)&v48.m_leftX = *(_QWORD *)&interval.m_leftX;
+        *(_QWORD *)v46 = *(_QWORD *)&interval.m_leftX;
+        v45 = interval.m_data;
+        *(_QWORD *)&v46[8] = v43;
+        *(_QWORD *)&v46[16] = v44;
         v47 = interval.m_data;
-        *(_QWORD *)&v48.m_slope = v45;
-        *(_QWORD *)&v48.m_data = v46;
-        v50 = interval.m_data;
-        if ( *(float *)&v15 >= *(float *)&v19 )
+        if ( *(float *)&m_rightX_low >= *(float *)&v19 )
         {
-          if ( *(float *)&v19 >= *(float *)&v15 )
+          if ( *(float *)&v19 >= *(float *)&m_rightX_low )
           {
             v30 = 1;
             v31 = 1;
           }
           else
           {
-            v13 = v19;
-            LODWORD(v48.m_rightX) = v19;
+            m_leftX_low = v19;
+            *(_DWORD *)&v46[4] = v19;
             v31 = 1;
             LODWORD(interval.m_leftX) = v19;
           }
         }
         else
         {
-          v18 = v15;
-          LODWORD(v48.m_offset) = v15;
+          v18 = m_rightX_low;
+          *(_DWORD *)&v46[12] = m_rightX_low;
           v30 = 1;
-          LODWORD(v45) = v15;
+          LODWORD(v43) = m_rightX_low;
         }
-        v32 = v48.m_slope;
-        v33 = *(float *)&v48.m_data;
-        if ( v48.m_slope == *(float *)&v48.m_data )
+        v32 = *(float *)&v46[8];
+        v33 = *(float *)&v46[16];
+        if ( *(float *)&v46[8] == *(float *)&v46[16] )
         {
-          if ( v48.m_offset < v49 )
+          if ( *(float *)&v46[12] < *(float *)&v46[20] )
             goto LABEL_36;
         }
         else
         {
-          hkaiIntervalPartition::Interval::intersect(&v48, &othera, (__int64)&v48.m_slope);
-          if ( othera.m_leftX >= v48.m_leftX )
+          hkaiIntervalPartition::Interval::intersect((hkaiIntervalPartition::Interval *)v46, othera, (__int64)&v46[8]);
+          if ( othera[0].m_leftX >= *(float *)v46 )
           {
-            if ( othera.m_leftX <= v48.m_rightX )
+            if ( othera[0].m_leftX <= *(float *)&v46[4] )
             {
               if ( v32 >= v33 )
-                v48.m_rightX = othera.m_leftX;
+                *(float *)&v46[4] = othera[0].m_leftX;
               else
-                v48.m_leftX = othera.m_leftX;
+                *(float *)v46 = othera[0].m_leftX;
 LABEL_36:
               hkaiIntervalPartition::addRemovingDupes(
                 (hkArray<hkaiIntervalPartition::Interval,hkContainerHeapAllocator> *)&array,
-                &v48);
+                (hkaiIntervalPartition::Interval *)v46);
               goto LABEL_37;
             }
             if ( v32 > v33 )
@@ -1563,27 +1531,27 @@ LABEL_36:
 LABEL_37:
         v34 = 0;
         v35 = v30 == 0;
-        v3 = v53;
+        v3 = v49;
         if ( !v35 )
         {
           ++v10;
           ++v7;
           ++v5;
-          if ( v10 == *(_QWORD *)&v48.m_leftX )
+          if ( v10 == *(_QWORD *)v46 )
           {
             v34 = 1;
           }
           else
           {
-            v36 = v53->m_intervals.m_data;
-            v13 = LODWORD(v53->m_intervals.m_data[v5].m_leftX);
-            v15 = LODWORD(v53->m_intervals.m_data[v5].m_rightX);
-            v37 = v53->m_intervals.m_data[v5].m_offset;
-            interval.m_slope = v53->m_intervals.m_data[v5].m_slope;
+            v36 = v49->m_intervals.m_data;
+            m_leftX_low = LODWORD(v49->m_intervals.m_data[v5].m_leftX);
+            m_rightX_low = LODWORD(v49->m_intervals.m_data[v5].m_rightX);
+            m_offset = v49->m_intervals.m_data[v5].m_offset;
+            interval.m_slope = v49->m_intervals.m_data[v5].m_slope;
             interval.m_data = v36[v5].m_data;
-            LODWORD(interval.m_leftX) = v13;
-            LODWORD(interval.m_rightX) = v15;
-            interval.m_offset = v37;
+            LODWORD(interval.m_leftX) = m_leftX_low;
+            LODWORD(interval.m_rightX) = m_rightX_low;
+            interval.m_offset = m_offset;
           }
         }
         if ( v31 )
@@ -1596,13 +1564,13 @@ LABEL_37:
           v18 = (*vars0)[v23];
           v19 = (*vars0)[v23 + 1];
           v39 = (*vars0)[v23 + 3];
-          LODWORD(v46) = (*vars0)[v23 + 2];
-          v47 = *(_DWORD *)(v23 * 4 + v38 + 16);
-          v45 = __PAIR__(v19, (unsigned int)v18);
-          HIDWORD(v46) = v39;
+          LODWORD(v44) = (*vars0)[v23 + 2];
+          v45 = *(_DWORD *)(v23 * 4 + v38 + 16);
+          v43 = __PAIR64__(v19, v18);
+          HIDWORD(v44) = v39;
         }
         v22 = result;
-        v2 = *(_QWORD *)&v48.m_leftX;
+        m_size = *(_QWORD *)v46;
         v35 = v34 == 0;
         v9 = (__int64 *)vars0;
         if ( !v35 )
@@ -1618,24 +1586,24 @@ LABEL_37:
         v18 = *(unsigned int *)(v23 * 4 + *v9);
         v19 = *(unsigned int *)(v23 * 4 + *v9 + 4);
         v28 = *(_DWORD *)(v23 * 4 + *v9 + 12);
-        LODWORD(v46) = *(_DWORD *)(v23 * 4 + *v9 + 8);
+        LODWORD(v44) = *(_DWORD *)(v23 * 4 + *v9 + 8);
         v29 = *(_DWORD *)(v23 * 4 + v27 + 16);
         v22 = result;
-        v47 = v29;
-        v45 = __PAIR__(v19, (unsigned int)v18);
-        HIDWORD(v46) = v28;
+        v45 = v29;
+        v43 = __PAIR64__(v19, v18);
+        HIDWORD(v44) = v28;
       }
     }
-    if ( *(float *)&v15 >= *(float *)&v18 )
+    if ( *(float *)&m_rightX_low >= *(float *)&v18 )
     {
-      *(_QWORD *)&othera.m_slope = *(_QWORD *)&interval.m_leftX;
-      *(_QWORD *)&othera.m_data = *(_QWORD *)&interval.m_slope;
-      LODWORD(othera.m_offset) = v18;
-      v52 = interval.m_data;
+      othera[0].m_slope = interval.m_leftX;
+      *(_QWORD *)&othera[0].m_data = *(_QWORD *)&interval.m_slope;
+      LODWORD(othera[0].m_offset) = v18;
+      LODWORD(othera[1].m_rightX) = interval.m_data;
       hkaiIntervalPartition::addRemovingDupes(
         (hkArray<hkaiIntervalPartition::Interval,hkContainerHeapAllocator> *)&array,
-        (hkaiIntervalPartition::Interval *)((char *)&othera + 8));
-      v13 = v18;
+        (hkaiIntervalPartition::Interval *)&othera[0].m_slope);
+      m_leftX_low = v18;
       LODWORD(interval.m_leftX) = v18;
       goto LABEL_19;
     }
@@ -1645,13 +1613,13 @@ LABEL_37:
     ++v10;
     ++v7;
     ++v5;
-    if ( v10 != v2 )
+    if ( v10 != m_size )
     {
       v24 = v3->m_intervals.m_data;
       v9 = (__int64 *)vars0;
       v25 = v3->m_intervals.m_data[v5].m_offset;
-      v13 = LODWORD(v3->m_intervals.m_data[v5].m_leftX);
-      v15 = LODWORD(v3->m_intervals.m_data[v5].m_rightX);
+      m_leftX_low = LODWORD(v3->m_intervals.m_data[v5].m_leftX);
+      m_rightX_low = LODWORD(v3->m_intervals.m_data[v5].m_rightX);
       interval.m_slope = v3->m_intervals.m_data[v5].m_slope;
       v26 = v24[v5].m_data;
       v22 = result;
@@ -1662,12 +1630,12 @@ LABEL_37:
     break;
   }
 LABEL_45:
-  if ( v7 < retaddr )
+  if ( v7 < (int)retaddr )
   {
     hkaiIntervalPartition::addRemovingDupes(
       (hkArray<hkaiIntervalPartition::Interval,hkContainerHeapAllocator> *)&array,
       &interval);
-    for ( i = v7 + 1; i != retaddr; ++i )
+    for ( i = v7 + 1; i != (_DWORD)retaddr; ++i )
       hkaiIntervalPartition::addRemovingDupes(
         (hkArray<hkaiIntervalPartition::Interval,hkContainerHeapAllocator> *)&array,
         &v3->m_intervals.m_data[i]);
@@ -1675,134 +1643,128 @@ LABEL_45:
   hkArray<hkpTreeBroadPhase32::Handle,hkContainerHeapAllocator>::swap(
     (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)v3,
     (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&array);
-  v43 = 0;
-  if ( v44 >= 0 )
+  array.m_size = 0;
+  if ( array.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      array,
-      20 * (v44 & 0x3FFFFFFF));
+      &hkContainerHeapAllocator::s_alloc,
+      array.m_data,
+      20 * (array.m_capacityAndFlags & 0x3FFFFFFF));
 }
 
 // File Line: 1025
 // RVA: 0x12E1CA0
-void __fastcall hkaiIntervalPartition::swap(hkaiIntervalPartition *this, hkaiIntervalPartition *other)
+// attributes: thunk
+void __fastcall hkaiIntervalPartition::swap(
+        hkaiIntervalPartition *this,
+        hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *other)
 {
   hkArray<hkpTreeBroadPhase32::Handle,hkContainerHeapAllocator>::swap(
     (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)this,
-    (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)other);
+    other);
 }
 
 // File Line: 1030
 // RVA: 0x12E1CB0
 _BOOL8 __fastcall hkaiIntervalPartition::coversInterval(hkaiIntervalPartition *this, float left, float right)
 {
-  signed __int64 v3; // rax
-  hkaiIntervalPartition::Interval *v5; // r8
-  signed __int64 v6; // rcx
-  signed __int64 v7; // rdx
-  float *v8; // rax
+  __int64 m_size; // rax
+  hkaiIntervalPartition::Interval *m_data; // r8
+  __int64 v6; // rcx
+  __int64 v7; // rdx
+  float *i; // rax
 
-  v3 = this->m_intervals.m_size;
-  if ( !(_DWORD)v3 )
+  m_size = this->m_intervals.m_size;
+  if ( !(_DWORD)m_size )
     return 0i64;
-  v5 = this->m_intervals.m_data;
+  m_data = this->m_intervals.m_data;
   if ( left < this->m_intervals.m_data->m_leftX )
     return 0i64;
   v6 = 1i64;
-  v7 = v3;
-  if ( v3 > 1 )
+  v7 = m_size;
+  if ( m_size > 1 )
   {
-    v8 = &v5[1].m_leftX;
-    while ( *v8 <= *(v8 - 4) )
+    for ( i = &m_data[1].m_leftX; *i <= *(i - 4); i += 5 )
     {
-      ++v6;
-      v8 += 5;
-      if ( v6 >= v7 )
-        return right <= *((float *)&v5[v7] - 4);
+      if ( ++v6 >= v7 )
+        return right <= m_data[v7 - 1].m_rightX;
     }
     return 0i64;
   }
-  return right <= *((float *)&v5[v7] - 4);
+  return right <= m_data[v7 - 1].m_rightX;
 }
 
 // File Line: 1059
 // RVA: 0x12E1730
 void __fastcall hkaiIntervalPartition::clipDefined(hkaiIntervalPartition *this, hkaiIntervalPartition *other)
 {
-  __int64 v2; // rsi
-  hkaiIntervalPartition *v3; // r14
+  __int64 m_size; // rsi
   hkaiIntervalPartition *v4; // r15
-  signed __int64 v5; // rdi
-  hkaiIntervalPartition::Interval *v6; // rax
-  int v7; // er9
-  float v8; // xmm1_4
-  float v9; // xmm7_4
-  float v10; // xmm6_4
+  __int64 v5; // rdi
+  hkaiIntervalPartition::Interval *m_data; // rax
+  int v7; // r9d
+  float m_offset; // xmm1_4
+  float m_leftX; // xmm7_4
+  float m_rightX; // xmm6_4
   int v11; // xmm0_4
-  signed __int64 v12; // rbx
+  __int64 v12; // rbx
   __int64 v13; // r13
   __int64 v14; // rsi
   hkaiIntervalPartition::Interval *v15; // rax
   float v16; // xmm2_4
   float v17; // xmm8_4
   float v18; // xmm1_4
-  int v19; // xmm0_4
-  unsigned int v20; // er15
+  unsigned int v19; // xmm0_4
+  unsigned int v20; // r15d
   __int64 v21; // r12
-  signed __int64 v22; // rcx
+  __int64 v22; // rcx
   hkaiIntervalPartition::Interval *v23; // rax
-  int v24; // xmm1_4
-  void *array; // [rsp+10h] [rbp-69h]
-  int v26; // [rsp+18h] [rbp-61h]
-  int v27; // [rsp+1Ch] [rbp-5Dh]
-  int sizeElem[2]; // [rsp+20h] [rbp-59h]
-  __int64 v29; // [rsp+28h] [rbp-51h]
-  int v30; // [rsp+30h] [rbp-49h]
-  float v31; // [rsp+40h] [rbp-39h]
-  float v32; // [rsp+44h] [rbp-35h]
-  unsigned int v33; // [rsp+48h] [rbp-31h]
-  hkaiIntervalPartition::Interval interval; // [rsp+50h] [rbp-29h]
-  hkaiIntervalPartition *v35; // [rsp+E0h] [rbp+67h]
-  hkResult result; // [rsp+F0h] [rbp+77h]
+  float v24; // xmm1_4
+  hkArrayBase<hkaiIntervalPartition::Interval> array; // [rsp+10h] [rbp-69h] BYREF
+  hkaiIntervalPartition::Interval sizeElem; // [rsp+20h] [rbp-59h] BYREF
+  float m_slope; // [rsp+40h] [rbp-39h]
+  float v28; // [rsp+44h] [rbp-35h]
+  unsigned int v29; // [rsp+48h] [rbp-31h]
+  hkaiIntervalPartition::Interval interval; // [rsp+50h] [rbp-29h] BYREF
+  hkaiIntervalPartition *v31; // [rsp+E0h] [rbp+67h]
+  hkResult result; // [rsp+F0h] [rbp+77h] BYREF
 
-  v2 = this->m_intervals.m_size;
-  v3 = other;
+  m_size = this->m_intervals.m_size;
   v4 = this;
-  if ( (_DWORD)v2 )
+  if ( (_DWORD)m_size )
   {
     v5 = other->m_intervals.m_size;
     if ( (_DWORD)v5 )
     {
-      v6 = other->m_intervals.m_data;
-      v7 = 2 * (v5 + v2);
-      v8 = other->m_intervals.m_data->m_offset;
-      v9 = other->m_intervals.m_data->m_leftX;
-      v10 = other->m_intervals.m_data->m_rightX;
-      v31 = other->m_intervals.m_data->m_slope;
-      v11 = v6->m_data;
-      array = 0i64;
-      v26 = 0;
-      v27 = 2147483648;
-      v33 = v11;
-      v32 = v8;
+      m_data = other->m_intervals.m_data;
+      v7 = 2 * (v5 + m_size);
+      m_offset = other->m_intervals.m_data->m_offset;
+      m_leftX = other->m_intervals.m_data->m_leftX;
+      m_rightX = other->m_intervals.m_data->m_rightX;
+      m_slope = other->m_intervals.m_data->m_slope;
+      v11 = m_data->m_data;
+      array.m_data = 0i64;
+      array.m_size = 0;
+      array.m_capacityAndFlags = 0x80000000;
+      v29 = v11;
+      v28 = m_offset;
       if ( v7 > 0 )
       {
-        if ( v7 < 0 )
+        if ( (((_DWORD)v5 + (_DWORD)m_size) & 0x40000000) != 0 )
           v7 = 0;
-        hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, v7, 20);
+        hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&array.m_data, v7, 20);
       }
       hkArrayBase<hkaiIntervalPartition::Interval>::_append(
-        (hkArrayBase<hkaiIntervalPartition::Interval> *)&array,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
+        &array,
+        &hkContainerHeapAllocator::s_alloc,
         v4->m_intervals.m_data,
         v4->m_intervals.m_size);
       hkArray<hkpTreeBroadPhase32::Handle,hkContainerHeapAllocator>::swap(
         (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&array,
         (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)v4);
-      v26 = 0;
+      array.m_size = 0;
       v12 = 0i64;
-      v13 = v2;
-      if ( (signed int)v2 > 0 )
+      v13 = m_size;
+      if ( (int)m_size > 0 )
       {
         v14 = 0i64;
         do
@@ -1811,56 +1773,56 @@ void __fastcall hkaiIntervalPartition::clipDefined(hkaiIntervalPartition *this, 
           v16 = v4->m_intervals.m_data[v14].m_leftX;
           v17 = v4->m_intervals.m_data[v14].m_rightX;
           v18 = v4->m_intervals.m_data[v14].m_offset;
-          *(float *)&v29 = v4->m_intervals.m_data[v14].m_slope;
+          sizeElem.m_slope = v4->m_intervals.m_data[v14].m_slope;
           v19 = v15[v14].m_data;
-          *(float *)sizeElem = v16;
-          *(float *)&sizeElem[1] = v17;
-          v30 = v19;
-          *((float *)&v29 + 1) = v18;
+          sizeElem.m_leftX = v16;
+          sizeElem.m_rightX = v17;
+          sizeElem.m_data = v19;
+          sizeElem.m_offset = v18;
           if ( v16 < v17 )
           {
-            v20 = v30;
-            v21 = v29;
+            v20 = sizeElem.m_data;
+            v21 = *(_QWORD *)&sizeElem.m_slope;
             while ( v12 < v5 )
             {
               v22 = v12;
-              while ( v16 >= v10 )
+              while ( v16 >= m_rightX )
               {
                 ++v12;
                 ++v22;
                 if ( v12 >= v5 )
                   goto LABEL_21;
-                v23 = v3->m_intervals.m_data;
-                v24 = LODWORD(v3->m_intervals.m_data[v22].m_offset);
-                v9 = v3->m_intervals.m_data[v22].m_leftX;
-                v10 = v3->m_intervals.m_data[v22].m_rightX;
-                v31 = v3->m_intervals.m_data[v22].m_slope;
-                v33 = v23[v22].m_data;
-                v32 = *(float *)&v24;
+                v23 = other->m_intervals.m_data;
+                v24 = other->m_intervals.m_data[v22].m_offset;
+                m_leftX = other->m_intervals.m_data[v22].m_leftX;
+                m_rightX = other->m_intervals.m_data[v22].m_rightX;
+                m_slope = other->m_intervals.m_data[v22].m_slope;
+                v29 = v23[v22].m_data;
+                v28 = v24;
               }
-              if ( v17 <= v9 )
+              if ( v17 <= m_leftX )
                 break;
-              if ( v16 < v9 )
+              if ( v16 < m_leftX )
               {
-                *(_QWORD *)&interval.m_leftX = *(_QWORD *)sizeElem;
+                interval.m_leftX = sizeElem.m_leftX;
                 *(_QWORD *)&interval.m_slope = v21;
                 interval.m_data = v20;
-                interval.m_rightX = v9;
+                interval.m_rightX = m_leftX;
                 hkaiIntervalPartition::addRemovingDupes(
                   (hkArray<hkaiIntervalPartition::Interval,hkContainerHeapAllocator> *)&array,
                   &interval);
               }
-              v16 = v10;
-              *(float *)sizeElem = v10;
-              if ( v10 >= v17 )
+              v16 = m_rightX;
+              sizeElem.m_leftX = m_rightX;
+              if ( m_rightX >= v17 )
                 goto LABEL_22;
             }
 LABEL_21:
             hkaiIntervalPartition::addRemovingDupes(
               (hkArray<hkaiIntervalPartition::Interval,hkContainerHeapAllocator> *)&array,
-              (hkaiIntervalPartition::Interval *)sizeElem);
+              &sizeElem);
 LABEL_22:
-            v4 = v35;
+            v4 = v31;
           }
           ++v14;
           --v13;
@@ -1870,12 +1832,12 @@ LABEL_22:
       hkArray<hkpTreeBroadPhase32::Handle,hkContainerHeapAllocator>::swap(
         (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)v4,
         (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&array);
-      v26 = 0;
-      if ( v27 >= 0 )
+      array.m_size = 0;
+      if ( array.m_capacityAndFlags >= 0 )
         hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-          array,
-          20 * (v27 & 0x3FFFFFFF));
+          &hkContainerHeapAllocator::s_alloc,
+          array.m_data,
+          20 * (array.m_capacityAndFlags & 0x3FFFFFFF));
     }
   }
 }
@@ -1884,81 +1846,76 @@ LABEL_22:
 // RVA: 0x12E19C0
 void __fastcall hkaiIntervalPartition::clipNotDefined(hkaiIntervalPartition *this, hkaiIntervalPartition *other)
 {
-  __int64 v2; // rbx
-  hkaiIntervalPartition *v3; // rsi
+  __int64 m_size; // rbx
   hkaiIntervalPartition *v4; // r15
-  signed __int64 v5; // rdi
-  hkaiIntervalPartition::Interval *v6; // rax
-  float v7; // xmm1_4
+  __int64 v5; // rdi
+  hkaiIntervalPartition::Interval *m_data; // rax
+  float m_offset; // xmm1_4
   int v8; // xmm0_4
-  int v9; // er9
-  float v10; // xmm8_4
-  float v11; // xmm7_4
+  int v9; // r9d
+  float m_leftX; // xmm8_4
+  float m_rightX; // xmm7_4
   __int64 v12; // r13
   __int64 v13; // r14
-  signed __int64 i; // rbx
+  __int64 i; // rbx
   hkaiIntervalPartition::Interval *v15; // rax
   float v16; // xmm6_4
   float v17; // xmm9_4
   float v18; // xmm1_4
   int v19; // xmm0_4
-  unsigned int v20; // er15
+  unsigned int v20; // r15d
   __int64 v21; // r12
-  signed __int64 v22; // rcx
+  __int64 v22; // rcx
   hkaiIntervalPartition::Interval *v23; // rax
-  int v24; // xmm1_4
+  float v24; // xmm1_4
   float v25; // xmm2_4
-  void *array; // [rsp+30h] [rbp-79h]
-  int v27; // [rsp+38h] [rbp-71h]
-  int v28; // [rsp+3Ch] [rbp-6Dh]
-  unsigned __int64 v29; // [rsp+40h] [rbp-69h]
-  __int64 v30; // [rsp+48h] [rbp-61h]
-  int v31; // [rsp+50h] [rbp-59h]
-  hkaiIntervalPartition::Interval interval; // [rsp+58h] [rbp-51h]
-  float v33; // [rsp+78h] [rbp-31h]
-  float v34; // [rsp+7Ch] [rbp-2Dh]
-  unsigned int v35; // [rsp+80h] [rbp-29h]
-  hkaiIntervalPartition *v36; // [rsp+110h] [rbp+67h]
-  hkResult result; // [rsp+120h] [rbp+77h]
-  float v38; // [rsp+128h] [rbp+7Fh]
+  hkArrayBase<hkaiIntervalPartition::Interval> array; // [rsp+30h] [rbp-79h] BYREF
+  float v27; // [rsp+40h] [rbp-69h]
+  float v28; // [rsp+44h] [rbp-65h]
+  __int64 v29; // [rsp+48h] [rbp-61h]
+  int v30; // [rsp+50h] [rbp-59h]
+  hkaiIntervalPartition::Interval interval; // [rsp+58h] [rbp-51h] BYREF
+  float m_slope; // [rsp+78h] [rbp-31h]
+  float v33; // [rsp+7Ch] [rbp-2Dh]
+  unsigned int v34; // [rsp+80h] [rbp-29h]
+  hkResult result; // [rsp+120h] [rbp+77h] BYREF
+  float v37; // [rsp+128h] [rbp+7Fh]
 
-  v36 = this;
-  v2 = this->m_intervals.m_size;
-  v3 = other;
+  m_size = this->m_intervals.m_size;
   v4 = this;
-  if ( (_DWORD)v2 )
+  if ( (_DWORD)m_size )
   {
     v5 = other->m_intervals.m_size;
     if ( (_DWORD)v5 )
     {
-      v6 = other->m_intervals.m_data;
-      v7 = other->m_intervals.m_data->m_offset;
-      v33 = other->m_intervals.m_data->m_slope;
-      v8 = v6->m_data;
-      v34 = v7;
-      v9 = 2 * (v2 + v5);
-      v10 = v6->m_leftX;
-      v11 = v6->m_rightX;
-      v35 = v8;
-      array = 0i64;
-      v27 = 0;
-      v28 = 2147483648;
+      m_data = other->m_intervals.m_data;
+      m_offset = other->m_intervals.m_data->m_offset;
+      m_slope = other->m_intervals.m_data->m_slope;
+      v8 = m_data->m_data;
+      v33 = m_offset;
+      v9 = 2 * (m_size + v5);
+      m_leftX = m_data->m_leftX;
+      m_rightX = m_data->m_rightX;
+      v34 = v8;
+      array.m_data = 0i64;
+      array.m_size = 0;
+      array.m_capacityAndFlags = 0x80000000;
       if ( v9 > 0 )
       {
-        if ( v9 < 0 )
+        if ( (((_DWORD)m_size + (_DWORD)v5) & 0x40000000) != 0 )
           v9 = 0;
-        hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, v9, 20);
+        hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&array.m_data, v9, 20);
       }
       hkArrayBase<hkaiIntervalPartition::Interval>::_append(
-        (hkArrayBase<hkaiIntervalPartition::Interval> *)&array,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
+        &array,
+        &hkContainerHeapAllocator::s_alloc,
         v4->m_intervals.m_data,
         v4->m_intervals.m_size);
       hkArray<hkpTreeBroadPhase32::Handle,hkContainerHeapAllocator>::swap(
         (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&array,
         (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)v4);
-      v12 = v2;
-      v27 = 0;
+      v12 = m_size;
+      array.m_size = 0;
       v13 = 0i64;
       for ( i = 0i64; v13 < v12; ++v13 )
       {
@@ -1966,47 +1923,48 @@ void __fastcall hkaiIntervalPartition::clipNotDefined(hkaiIntervalPartition *thi
         v16 = v4->m_intervals.m_data[v13].m_leftX;
         v17 = v4->m_intervals.m_data[v13].m_rightX;
         v18 = v4->m_intervals.m_data[v13].m_offset;
-        *(float *)&v30 = v4->m_intervals.m_data[v13].m_slope;
+        *(float *)&v29 = v4->m_intervals.m_data[v13].m_slope;
         v19 = v15[v13].m_data;
-        v29 = __PAIR__(LODWORD(v17), LODWORD(v16));
-        v31 = v19;
-        *((float *)&v30 + 1) = v18;
+        v27 = v16;
+        v28 = v17;
+        v30 = v19;
+        *((float *)&v29 + 1) = v18;
         if ( v16 < v17 )
         {
-          v20 = v31;
-          v21 = v30;
+          v20 = v30;
+          v21 = v29;
           while ( i < v5 )
           {
             v22 = i;
-            while ( v16 >= v11 )
+            while ( v16 >= m_rightX )
             {
               ++i;
               ++v22;
               if ( i >= v5 )
                 goto LABEL_21;
-              v23 = v3->m_intervals.m_data;
-              v24 = LODWORD(v3->m_intervals.m_data[v22].m_offset);
-              v10 = v3->m_intervals.m_data[v22].m_leftX;
-              v11 = v3->m_intervals.m_data[v22].m_rightX;
-              v33 = v3->m_intervals.m_data[v22].m_slope;
-              v35 = v23[v22].m_data;
-              v34 = *(float *)&v24;
+              v23 = other->m_intervals.m_data;
+              v24 = other->m_intervals.m_data[v22].m_offset;
+              m_leftX = other->m_intervals.m_data[v22].m_leftX;
+              m_rightX = other->m_intervals.m_data[v22].m_rightX;
+              m_slope = other->m_intervals.m_data[v22].m_slope;
+              v34 = v23[v22].m_data;
+              v33 = v24;
             }
-            if ( v17 > v10 )
+            if ( v17 > m_leftX )
             {
               *(_QWORD *)&interval.m_slope = v21;
               interval.m_data = v20;
-              v25 = fmaxf(v16, v10);
-              result.m_enum = HIDWORD(v29);
-              v38 = v11;
-              v16 = fminf(*((float *)&v29 + 1), v11);
+              v25 = fmaxf(v16, m_leftX);
+              result.m_enum = LODWORD(v28);
+              v37 = m_rightX;
+              v16 = fminf(v28, m_rightX);
               interval.m_leftX = v25;
               interval.m_rightX = v16;
               if ( v16 > v25 )
                 hkaiIntervalPartition::addRemovingDupes(
                   (hkArray<hkaiIntervalPartition::Interval,hkContainerHeapAllocator> *)&array,
                   &interval);
-              *(float *)&v29 = v16;
+              v27 = v16;
               if ( v16 < v17 )
                 continue;
             }
@@ -2015,18 +1973,18 @@ void __fastcall hkaiIntervalPartition::clipNotDefined(hkaiIntervalPartition *thi
 LABEL_21:
           v13 = v12;
 LABEL_22:
-          v4 = v36;
+          v4 = this;
         }
       }
       hkArray<hkpTreeBroadPhase32::Handle,hkContainerHeapAllocator>::swap(
         (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)v4,
         (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&array);
-      v27 = 0;
-      if ( v28 >= 0 )
+      array.m_size = 0;
+      if ( array.m_capacityAndFlags >= 0 )
         hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-          array,
-          20 * (v28 & 0x3FFFFFFF));
+          &hkContainerHeapAllocator::s_alloc,
+          array.m_data,
+          20 * (array.m_capacityAndFlags & 0x3FFFFFFF));
     }
     else
     {
@@ -2037,24 +1995,20 @@ LABEL_22:
 
 // File Line: 1190
 // RVA: 0x12E1D10
-signed __int64 __fastcall hkaiIntervalPartition::tryEvaluateAt(hkaiIntervalPartition *this, float x, float *out)
+__int64 __fastcall hkaiIntervalPartition::tryEvaluateAt(hkaiIntervalPartition *this, float x, float *out)
 {
-  float *v3; // rdi
-  hkaiIntervalPartition *v4; // rbx
-  int v5; // eax
+  int Interval; // eax
   hkaiIntervalPartition::Interval *v6; // rax
   float v7; // xmm0_4
-  signed __int64 result; // rax
+  __int64 result; // rax
 
-  v3 = out;
-  v4 = this;
   if ( x < 0.0 )
     return 0i64;
-  v5 = hkaiIntervalPartition::findInterval(this, x);
-  v6 = hkaiIntervalPartition::getInterval(v4, v5);
+  Interval = hkaiIntervalPartition::findInterval(this, x);
+  v6 = hkaiIntervalPartition::getInterval(this, Interval);
   v7 = hkaiIntervalPartition::Interval::evaluateAt(v6, x);
   result = 1i64;
-  *v3 = v7;
+  *out = v7;
   return result;
 }
 
@@ -2062,7 +2016,7 @@ signed __int64 __fastcall hkaiIntervalPartition::tryEvaluateAt(hkaiIntervalParti
 // RVA: 0x12E1D80
 float __fastcall hkaiIntervalPartition::evaluateWithDefault(hkaiIntervalPartition *this, float x, float defaultY)
 {
-  float out; // [rsp+40h] [rbp+18h]
+  float out; // [rsp+40h] [rbp+18h] BYREF
 
   out = defaultY;
   hkaiIntervalPartition::tryEvaluateAt(this, x, &out);
@@ -2071,17 +2025,27 @@ float __fastcall hkaiIntervalPartition::evaluateWithDefault(hkaiIntervalPartitio
 
 // File Line: 1213
 // RVA: 0x12E38C0
-void __fastcall hkaiIntervalPartition::Interval::getExtremeY<0>(hkaiIntervalPartition::Interval *this)
+double __fastcall hkaiIntervalPartition::Interval::getExtremeY<0>(hkaiIntervalPartition::Interval *this)
 {
+  double result; // xmm0_8
+
+  HIDWORD(result) = 0;
   if ( this->m_slope <= 0.0 )
-    hkaiIntervalPartition::Interval::evaluateAt(this, this->m_rightX);
+    *(float *)&result = hkaiIntervalPartition::Interval::evaluateAt(this, this->m_rightX);
   else
-    hkaiIntervalPartition::Interval::evaluateAt(this, this->m_leftX);
+    *(float *)&result = hkaiIntervalPartition::Interval::evaluateAt(this, this->m_leftX);
+  return result;
 }
 
 // File Line: 1226
 // RVA: 0x12E0780
-void __fastcall hkaiIntervalPartition::Interval::interpolateParallelogram(hkaiIntervalPartition::Interval *this, hkVector4f *origin, hkVector4f *xVector, hkVector4f *yVector, hkVector4f *leftOut, hkVector4f *rightOut)
+void __fastcall hkaiIntervalPartition::Interval::interpolateParallelogram(
+        hkaiIntervalPartition::Interval *this,
+        hkVector4f *origin,
+        hkVector4f *xVector,
+        hkVector4f *yVector,
+        hkVector4f *leftOut,
+        hkVector4f *rightOut)
 {
   __m128 v6; // xmm3
   __m128 v7; // xmm2
@@ -2100,29 +2064,28 @@ void __fastcall hkaiIntervalPartition::Interval::interpolateParallelogram(hkaiIn
 
 // File Line: 1241
 // RVA: 0x12E38E0
-float __usercall hkaiIntervalPartition::getExtremeY<0>@<xmm0>(hkaiIntervalPartition *this@<rcx>, float a2@<xmm0>)
+float __fastcall hkaiIntervalPartition::getExtremeY<0>(hkaiIntervalPartition *this)
 {
-  hkaiIntervalPartition::Interval *v2; // rdi
-  hkaiIntervalPartition *v3; // rbx
-  signed int v4; // eax
+  hkaiIntervalPartition::Interval *m_data; // rdi
+  double Extreme; // xmm0_8
+  int m_size; // eax
   float v5; // xmm6_4
   hkaiIntervalPartition::Interval *v6; // rbx
   __int64 v7; // rdi
+  double v8; // xmm0_8
 
-  v2 = this->m_intervals.m_data;
-  v3 = this;
-  hkaiIntervalPartition::Interval::getExtremeY<0>(this->m_intervals.m_data);
-  v4 = v3->m_intervals.m_size;
-  v5 = a2;
-  if ( v4 > 1 )
+  m_data = this->m_intervals.m_data;
+  Extreme = hkaiIntervalPartition::Interval::getExtremeY<0>(this->m_intervals.m_data);
+  m_size = this->m_intervals.m_size;
+  v5 = *(float *)&Extreme;
+  if ( m_size > 1 )
   {
-    v6 = v2 + 1;
-    v7 = (unsigned int)(v4 - 1);
+    v6 = m_data + 1;
+    v7 = (unsigned int)(m_size - 1);
     do
     {
-      hkaiIntervalPartition::Interval::getExtremeY<0>(v6);
-      ++v6;
-      v5 = fminf(v5, a2);
+      v8 = hkaiIntervalPartition::Interval::getExtremeY<0>(v6++);
+      v5 = fminf(v5, *(float *)&v8);
       --v7;
     }
     while ( v7 );
@@ -2134,23 +2097,21 @@ float __usercall hkaiIntervalPartition::getExtremeY<0>@<xmm0>(hkaiIntervalPartit
 // RVA: 0x12E38A0
 float __fastcall hkaiIntervalPartition::getExtremeX<1>(hkaiIntervalPartition *this)
 {
-  return *((float *)&this->m_intervals.m_data[this->m_intervals.m_size] - 4);
+  return this->m_intervals.m_data[this->m_intervals.m_size - 1].m_rightX;
 }
 
 // File Line: 1283
 // RVA: 0x12E1DB0
 void __fastcall hkaiIntervalPartition::complement(hkaiIntervalPartition *this, float minX, float maxX)
 {
-  hkaiIntervalPartition *v3; // rbx
-  float v4; // xmm7_4
-  signed int v5; // edi
-  signed __int64 v6; // r11
-  float v7; // xmm0_4
-  float v8; // xmm6_4
-  signed __int64 v9; // r9
-  signed __int64 v10; // r8
-  signed __int64 v11; // rdx
-  signed __int64 v12; // rcx
+  int v5; // edi
+  __int64 v6; // r11
+  float m_leftX; // xmm0_4
+  float m_rightX; // xmm6_4
+  __int64 m_size; // r9
+  __int64 v10; // r8
+  __int64 v11; // rdx
+  __int64 v12; // rcx
   unsigned __int64 v13; // r10
   float v14; // xmm0_4
   float v15; // xmm1_4
@@ -2159,104 +2120,97 @@ void __fastcall hkaiIntervalPartition::complement(hkaiIntervalPartition *this, f
   float v18; // xmm0_4
   float v19; // xmm1_4
   float v20; // xmm0_4
-  signed __int64 v21; // rdx
-  signed __int64 v22; // rcx
-  signed __int64 v23; // r9
+  __int64 v21; // rdx
+  __int64 v22; // rcx
+  __int64 v23; // r9
   float v24; // xmm0_4
   float v25; // xmm1_4
   int v26; // eax
   int v27; // eax
-  int v28; // er9
-  hkaiIntervalPartition::Interval interval; // [rsp+30h] [rbp-48h]
-  hkResult result; // [rsp+80h] [rbp+8h]
+  int v28; // r9d
+  hkaiIntervalPartition::Interval interval; // [rsp+30h] [rbp-48h] BYREF
+  hkResult result; // [rsp+80h] [rbp+8h] BYREF
 
-  v3 = this;
-  v4 = maxX;
   if ( this->m_intervals.m_size )
   {
     v5 = 0;
     v6 = 1i64;
-    v7 = this->m_intervals.m_data->m_leftX;
-    v8 = this->m_intervals.m_data->m_rightX;
-    if ( v7 > minX )
+    m_leftX = this->m_intervals.m_data->m_leftX;
+    m_rightX = this->m_intervals.m_data->m_rightX;
+    if ( m_leftX > minX )
     {
-      this->m_intervals.m_data->m_rightX = v7;
+      this->m_intervals.m_data->m_rightX = m_leftX;
       v5 = 1;
       this->m_intervals.m_data->m_leftX = minX;
     }
-    v9 = this->m_intervals.m_size;
+    m_size = this->m_intervals.m_size;
     v10 = v5;
-    if ( v9 > 1 )
+    if ( m_size > 1 )
     {
-      if ( v9 - 1 >= 4 )
+      if ( m_size - 1 >= 4 )
       {
         v11 = 1i64;
         v12 = v5;
-        v13 = ((unsigned __int64)(v9 - 5) >> 2) + 1;
+        v13 = ((unsigned __int64)(m_size - 5) >> 2) + 1;
         v6 = 4 * v13 + 1;
         do
         {
-          v14 = v3->m_intervals.m_data[v11].m_leftX;
-          v15 = v3->m_intervals.m_data[v11].m_rightX;
-          if ( v8 < v14 )
+          v14 = this->m_intervals.m_data[v11].m_leftX;
+          v15 = this->m_intervals.m_data[v11].m_rightX;
+          if ( m_rightX < v14 )
           {
-            v3->m_intervals.m_data[v12].m_leftX = v8;
+            this->m_intervals.m_data[v12].m_leftX = m_rightX;
             ++v5;
             ++v10;
-            ++v12;
-            *((float *)&v3->m_intervals.m_data[v12] - 4) = v14;
+            this->m_intervals.m_data[v12++].m_rightX = v14;
           }
-          v16 = v3->m_intervals.m_data[v11 + 1].m_leftX;
-          v17 = v3->m_intervals.m_data[v11 + 1].m_rightX;
+          v16 = this->m_intervals.m_data[v11 + 1].m_leftX;
+          v17 = this->m_intervals.m_data[v11 + 1].m_rightX;
           if ( v15 < v16 )
           {
-            v3->m_intervals.m_data[v12].m_leftX = v15;
+            this->m_intervals.m_data[v12].m_leftX = v15;
             ++v5;
             ++v10;
-            ++v12;
-            *((float *)&v3->m_intervals.m_data[v12] - 4) = v16;
+            this->m_intervals.m_data[v12++].m_rightX = v16;
           }
-          v18 = v3->m_intervals.m_data[v11 + 2].m_leftX;
-          v19 = v3->m_intervals.m_data[v11 + 2].m_rightX;
+          v18 = this->m_intervals.m_data[v11 + 2].m_leftX;
+          v19 = this->m_intervals.m_data[v11 + 2].m_rightX;
           if ( v17 < v18 )
           {
-            v3->m_intervals.m_data[v12].m_leftX = v17;
+            this->m_intervals.m_data[v12].m_leftX = v17;
             ++v5;
             ++v10;
-            ++v12;
-            *((float *)&v3->m_intervals.m_data[v12] - 4) = v18;
+            this->m_intervals.m_data[v12++].m_rightX = v18;
           }
-          v20 = v3->m_intervals.m_data[v11 + 3].m_leftX;
-          v8 = v3->m_intervals.m_data[v11 + 3].m_rightX;
+          v20 = this->m_intervals.m_data[v11 + 3].m_leftX;
+          m_rightX = this->m_intervals.m_data[v11 + 3].m_rightX;
           if ( v19 < v20 )
           {
-            v3->m_intervals.m_data[v12].m_leftX = v19;
+            this->m_intervals.m_data[v12].m_leftX = v19;
             ++v5;
             ++v10;
-            ++v12;
-            *((float *)&v3->m_intervals.m_data[v12] - 4) = v20;
+            this->m_intervals.m_data[v12++].m_rightX = v20;
           }
           v11 += 4i64;
           --v13;
         }
         while ( v13 );
       }
-      if ( v6 < v9 )
+      if ( v6 < m_size )
       {
         v21 = v10;
         v22 = v6;
-        v23 = v9 - v6;
+        v23 = m_size - v6;
         do
         {
-          v24 = v8;
-          v25 = v3->m_intervals.m_data[v22].m_leftX;
-          v8 = v3->m_intervals.m_data[v22].m_rightX;
+          v24 = m_rightX;
+          v25 = this->m_intervals.m_data[v22].m_leftX;
+          m_rightX = this->m_intervals.m_data[v22].m_rightX;
           if ( v24 < v25 )
           {
-            v3->m_intervals.m_data[v21].m_leftX = v24;
+            this->m_intervals.m_data[v21].m_leftX = v24;
             ++v5;
-            ++v21;
-            *((float *)&v3->m_intervals.m_data[v21] - 4) = v25;
+            this->m_intervals.m_data[v21++].m_rightX = v25;
           }
           ++v22;
           --v23;
@@ -2264,23 +2218,28 @@ void __fastcall hkaiIntervalPartition::complement(hkaiIntervalPartition *this, f
         while ( v23 );
       }
     }
-    v26 = v3->m_intervals.m_capacityAndFlags & 0x3FFFFFFF;
+    v26 = this->m_intervals.m_capacityAndFlags & 0x3FFFFFFF;
     if ( v26 < v5 )
     {
       v27 = 2 * v26;
       v28 = v5;
       if ( v5 < v27 )
         v28 = v27;
-      hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v3, v28, 20);
+      hkArrayUtil::_reserve(
+        &result,
+        &hkContainerHeapAllocator::s_alloc,
+        (const void **)&this->m_intervals.m_data,
+        v28,
+        20);
     }
-    v3->m_intervals.m_size = v5;
-    if ( v8 < v4 )
+    this->m_intervals.m_size = v5;
+    if ( m_rightX < maxX )
     {
-      interval.m_leftX = v8;
-      interval.m_rightX = v4;
+      interval.m_leftX = m_rightX;
+      interval.m_rightX = maxX;
       *(_QWORD *)&interval.m_slope = 0i64;
       interval.m_data = -1;
-      hkaiIntervalPartition::appendInterval(v3, &interval);
+      hkaiIntervalPartition::appendInterval(this, &interval);
     }
   }
   else
@@ -2291,104 +2250,105 @@ void __fastcall hkaiIntervalPartition::complement(hkaiIntervalPartition *this, f
     interval.m_data = -1;
     hkaiIntervalPartition::appendInterval(this, &interval);
   }
-}
+}tX = maxX;
+    *(_QWORD *
 
 // File Line: 1328
 // RVA: 0x12E22F0
-void __fastcall hkaiIntervalPartition::remapX(hkaiIntervalPartition *this, float curX1, float curX2, float newX1, float newX2)
+void __fastcall hkaiIntervalPartition::remapX(
+        hkaiIntervalPartition *this,
+        float curX1,
+        float curX2,
+        float newX1,
+        float newX2)
 {
-  signed __int64 v5; // rax
-  hkaiIntervalPartition *v6; // r9
-  float v7; // xmm2_4
-  float v8; // xmm4_4
-  float v9; // xmm3_4
-  signed __int64 v10; // r10
-  float v11; // xmm5_4
-  signed __int64 v12; // rdx
-  __int64 v13; // rcx
-  unsigned __int64 v14; // r8
-  hkaiIntervalPartition::Interval *v15; // rax
-  float v16; // xmm2_4
-  hkaiIntervalPartition::Interval *v17; // rax
-  float v18; // xmm2_4
-  hkaiIntervalPartition::Interval *v19; // rax
-  float v20; // xmm2_4
-  hkaiIntervalPartition::Interval *v21; // rax
-  float v22; // xmm2_4
-  signed __int64 v23; // rcx
-  signed __int64 v24; // rdx
-  hkaiIntervalPartition::Interval *v25; // rax
-  float v26; // xmm2_4
-  float v27; // xmm0_4
-  float v28; // xmm1_4
+  __int64 m_size; // rax
+  float v7; // xmm4_4
+  float v8; // xmm3_4
+  __int64 v9; // r10
+  float v10; // xmm5_4
+  __int64 v11; // rdx
+  __int64 v12; // rcx
+  unsigned __int64 v13; // r8
+  hkaiIntervalPartition::Interval *m_data; // rax
+  float v15; // xmm2_4
+  hkaiIntervalPartition::Interval *v16; // rax
+  float v17; // xmm2_4
+  hkaiIntervalPartition::Interval *v18; // rax
+  float v19; // xmm2_4
+  hkaiIntervalPartition::Interval *v20; // rax
+  float v21; // xmm2_4
+  unsigned __int64 v22; // rcx
+  __int64 v23; // rdx
+  hkaiIntervalPartition::Interval *v24; // rax
+  float v25; // xmm2_4
+  float v26; // xmm0_4
+  float v27; // xmm1_4
 
-  v5 = this->m_intervals.m_size;
-  v6 = this;
-  if ( (_DWORD)v5 )
+  m_size = this->m_intervals.m_size;
+  if ( (_DWORD)m_size )
   {
-    v7 = curX2 - curX1;
-    v8 = (float)(newX2 - newX1) / v7;
-    v9 = newX1 - (float)(v8 * curX1);
-    if ( COERCE_FLOAT((unsigned int)(2 * COERCE_SIGNED_INT(1.0 - v8)) >> 1) >= 0.000099999997
-      || COERCE_FLOAT((unsigned int)(2 * LODWORD(v9)) >> 1) >= 0.0001 )
+    v7 = (float)(newX2 - newX1) / (float)(curX2 - curX1);
+    v8 = newX1 - (float)(v7 * curX1);
+    if ( COERCE_FLOAT((unsigned int)(2 * COERCE_INT(1.0 - v7)) >> 1) >= 0.000099999997
+      || COERCE_FLOAT((unsigned int)(2 * LODWORD(v8)) >> 1) >= 0.0001 )
     {
-      v10 = 0i64;
-      v11 = 1.0 / v8;
-      v12 = this->m_intervals.m_size;
-      if ( v5 >= 4 )
+      v9 = 0i64;
+      v10 = 1.0 / v7;
+      v11 = this->m_intervals.m_size;
+      if ( m_size >= 4 )
       {
-        v13 = 0i64;
-        v14 = ((unsigned __int64)(v5 - 4) >> 2) + 1;
-        v10 = 4 * v14;
+        v12 = 0i64;
+        v13 = ((unsigned __int64)(m_size - 4) >> 2) + 1;
+        v9 = 4 * v13;
         do
         {
-          v15 = v6->m_intervals.m_data;
-          v13 += 4i64;
-          v15[v13 - 4].m_leftX = (float)(v8 * v6->m_intervals.m_data[v13 - 4].m_leftX) + v9;
-          *((float *)&v15[v13 - 3] - 4) = (float)(v8 * *((float *)&v15[v13 - 3] - 4)) + v9;
-          v16 = v11 * *((float *)&v15[v13 - 3] - 3);
-          *((float *)&v15[v13 - 3] - 3) = v16;
-          *((float *)&v15[v13 - 3] - 2) = *((float *)&v15[v13 - 3] - 2) - (float)(v16 * v9);
-          v17 = v6->m_intervals.m_data;
-          v17[v13 - 3].m_leftX = (float)(v8 * v6->m_intervals.m_data[v13 - 3].m_leftX) + v9;
-          *((float *)&v17[v13 - 2] - 4) = (float)(v8 * *((float *)&v17[v13 - 2] - 4)) + v9;
-          v18 = v11 * *((float *)&v17[v13 - 2] - 3);
-          *((float *)&v17[v13 - 2] - 3) = v18;
-          *((float *)&v17[v13 - 2] - 2) = *((float *)&v17[v13 - 2] - 2) - (float)(v18 * v9);
-          v19 = v6->m_intervals.m_data;
-          v19[v13 - 2].m_leftX = (float)(v8 * v6->m_intervals.m_data[v13 - 2].m_leftX) + v9;
-          *((float *)&v19[v13 - 1] - 4) = (float)(v8 * *((float *)&v19[v13 - 1] - 4)) + v9;
-          v20 = v11 * *((float *)&v19[v13 - 1] - 3);
-          *((float *)&v19[v13 - 1] - 3) = v20;
-          *((float *)&v19[v13 - 1] - 2) = *((float *)&v19[v13 - 1] - 2) - (float)(v20 * v9);
-          v21 = v6->m_intervals.m_data;
-          v21[v13 - 1].m_leftX = (float)(v8 * v6->m_intervals.m_data[v13 - 1].m_leftX) + v9;
-          *((float *)&v21[v13] - 4) = (float)(v8 * *((float *)&v21[v13] - 4)) + v9;
-          v22 = v11 * *((float *)&v21[v13] - 3);
-          *((float *)&v21[v13] - 3) = v22;
-          *((float *)&v21[v13] - 2) = *((float *)&v21[v13] - 2) - (float)(v22 * v9);
-          --v14;
+          m_data = this->m_intervals.m_data;
+          v12 += 4i64;
+          m_data[v12 - 4].m_leftX = (float)(v7 * this->m_intervals.m_data[v12 - 4].m_leftX) + v8;
+          *((float *)&m_data[v12 - 3] - 4) = (float)(v7 * *((float *)&m_data[v12 - 3] - 4)) + v8;
+          v15 = v10 * *((float *)&m_data[v12 - 3] - 3);
+          *((float *)&m_data[v12 - 3] - 3) = v15;
+          *((float *)&m_data[v12 - 3] - 2) = *((float *)&m_data[v12 - 3] - 2) - (float)(v15 * v8);
+          v16 = this->m_intervals.m_data;
+          v16[v12 - 3].m_leftX = (float)(v7 * this->m_intervals.m_data[v12 - 3].m_leftX) + v8;
+          *((float *)&v16[v12 - 2] - 4) = (float)(v7 * *((float *)&v16[v12 - 2] - 4)) + v8;
+          v17 = v10 * *((float *)&v16[v12 - 2] - 3);
+          *((float *)&v16[v12 - 2] - 3) = v17;
+          *((float *)&v16[v12 - 2] - 2) = *((float *)&v16[v12 - 2] - 2) - (float)(v17 * v8);
+          v18 = this->m_intervals.m_data;
+          v18[v12 - 2].m_leftX = (float)(v7 * this->m_intervals.m_data[v12 - 2].m_leftX) + v8;
+          *((float *)&v18[v12 - 1] - 4) = (float)(v7 * *((float *)&v18[v12 - 1] - 4)) + v8;
+          v19 = v10 * *((float *)&v18[v12 - 1] - 3);
+          *((float *)&v18[v12 - 1] - 3) = v19;
+          *((float *)&v18[v12 - 1] - 2) = *((float *)&v18[v12 - 1] - 2) - (float)(v19 * v8);
+          v20 = this->m_intervals.m_data;
+          v20[v12 - 1].m_leftX = (float)(v7 * this->m_intervals.m_data[v12 - 1].m_leftX) + v8;
+          v20[v12 - 1].m_rightX = (float)(v7 * v20[v12 - 1].m_rightX) + v8;
+          v21 = v10 * v20[v12 - 1].m_slope;
+          v20[v12 - 1].m_slope = v21;
+          v20[v12 - 1].m_offset = v20[v12 - 1].m_offset - (float)(v21 * v8);
+          --v13;
         }
-        while ( v14 );
+        while ( v13 );
       }
-      if ( v10 < v12 )
+      if ( v9 < v11 )
       {
-        v23 = v10;
-        v24 = v12 - v10;
+        v22 = v9;
+        v23 = v11 - v9;
         do
         {
-          v25 = v6->m_intervals.m_data;
-          ++v23;
-          v26 = v11 * *((float *)&v6->m_intervals.m_data[v23] - 3);
-          v27 = (float)(v8 * v6->m_intervals.m_data[v23 - 1].m_leftX) + v9;
-          *((float *)&v25[v23] - 3) = v26;
-          v28 = v8 * *((float *)&v25[v23] - 4);
-          v25[v23 - 1].m_leftX = v27;
-          *((float *)&v25[v23] - 2) = *((float *)&v25[v23] - 2) - (float)(v26 * v9);
-          *((float *)&v25[v23] - 4) = v28 + v9;
-          --v24;
+          v24 = this->m_intervals.m_data;
+          v25 = v10 * this->m_intervals.m_data[v22++].m_slope;
+          v26 = (float)(v7 * this->m_intervals.m_data[v22 - 1].m_leftX) + v8;
+          v24[v22 - 1].m_slope = v25;
+          v27 = v7 * v24[v22 - 1].m_rightX;
+          v24[v22 - 1].m_leftX = v26;
+          v24[v22 - 1].m_offset = v24[v22 - 1].m_offset - (float)(v25 * v8);
+          v24[v22 - 1].m_rightX = v27 + v8;
+          --v23;
         }
-        while ( v24 );
+        while ( v23 );
       }
     }
   }
@@ -2396,76 +2356,76 @@ void __fastcall hkaiIntervalPartition::remapX(hkaiIntervalPartition *this, float
 
 // File Line: 1363
 // RVA: 0x12E2550
-void __fastcall hkaiIntervalPartition::remapY(hkaiIntervalPartition *this, float curY1, float curY2, float newY1, float newY2)
+void __fastcall hkaiIntervalPartition::remapY(
+        hkaiIntervalPartition *this,
+        float curY1,
+        float curY2,
+        float newY1,
+        float newY2)
 {
-  signed __int64 v5; // rax
-  hkaiIntervalPartition *v6; // r8
-  float v7; // xmm2_4
-  float v8; // xmm4_4
-  float v9; // xmm3_4
-  signed __int64 v10; // r10
-  signed __int64 v11; // rdx
-  __int64 v12; // rcx
-  unsigned __int64 v13; // r9
+  __int64 m_size; // rax
+  float v7; // xmm4_4
+  float v8; // xmm3_4
+  __int64 v9; // r10
+  __int64 v10; // rdx
+  __int64 v11; // rcx
+  unsigned __int64 v12; // r9
+  hkaiIntervalPartition::Interval *m_data; // rax
   hkaiIntervalPartition::Interval *v14; // rax
   hkaiIntervalPartition::Interval *v15; // rax
   hkaiIntervalPartition::Interval *v16; // rax
-  hkaiIntervalPartition::Interval *v17; // rax
-  signed __int64 v18; // rcx
-  signed __int64 v19; // rdx
-  hkaiIntervalPartition::Interval *v20; // rax
-  float v21; // xmm1_4
+  __int64 v17; // rcx
+  __int64 v18; // rdx
+  hkaiIntervalPartition::Interval *v19; // rax
+  float v20; // xmm1_4
 
-  v5 = this->m_intervals.m_size;
-  v6 = this;
-  if ( (_DWORD)v5 )
+  m_size = this->m_intervals.m_size;
+  if ( (_DWORD)m_size )
   {
-    v7 = curY2 - curY1;
-    v8 = (float)(newY2 - newY1) / v7;
-    v9 = newY1 - (float)(v8 * curY1);
-    if ( COERCE_FLOAT((unsigned int)(2 * COERCE_SIGNED_INT(1.0 - v9)) >> 1) >= 0.000099999997
-      || COERCE_FLOAT((unsigned int)(2 * LODWORD(v8)) >> 1) >= 0.0001 )
+    v7 = (float)(newY2 - newY1) / (float)(curY2 - curY1);
+    v8 = newY1 - (float)(v7 * curY1);
+    if ( COERCE_FLOAT((unsigned int)(2 * COERCE_INT(1.0 - v8)) >> 1) >= 0.000099999997
+      || COERCE_FLOAT((unsigned int)(2 * LODWORD(v7)) >> 1) >= 0.0001 )
     {
-      v10 = 0i64;
-      v11 = this->m_intervals.m_size;
-      if ( v5 >= 4 )
+      v9 = 0i64;
+      v10 = this->m_intervals.m_size;
+      if ( m_size >= 4 )
       {
-        v12 = 0i64;
-        v13 = ((unsigned __int64)(v5 - 4) >> 2) + 1;
-        v10 = 4 * v13;
+        v11 = 0i64;
+        v12 = ((unsigned __int64)(m_size - 4) >> 2) + 1;
+        v9 = 4 * v12;
         do
         {
-          v14 = v6->m_intervals.m_data;
-          v12 += 4i64;
-          *((float *)&v14[v12 - 3] - 3) = v8 * *((float *)&v6->m_intervals.m_data[v12 - 3] - 3);
-          *((float *)&v14[v12 - 3] - 2) = (float)(v8 * *((float *)&v14[v12 - 3] - 2)) + v9;
-          v15 = v6->m_intervals.m_data;
-          *((float *)&v15[v12 - 2] - 3) = v8 * *((float *)&v6->m_intervals.m_data[v12 - 2] - 3);
-          *((float *)&v15[v12 - 2] - 2) = (float)(v8 * *((float *)&v15[v12 - 2] - 2)) + v9;
-          v16 = v6->m_intervals.m_data;
-          *((float *)&v16[v12 - 1] - 3) = v8 * *((float *)&v6->m_intervals.m_data[v12 - 1] - 3);
-          *((float *)&v16[v12 - 1] - 2) = (float)(v8 * *((float *)&v16[v12 - 1] - 2)) + v9;
-          v17 = v6->m_intervals.m_data;
-          *((float *)&v17[v12] - 3) = v8 * *((float *)&v6->m_intervals.m_data[v12] - 3);
-          *((float *)&v17[v12] - 2) = (float)(v8 * *((float *)&v17[v12] - 2)) + v9;
-          --v13;
+          m_data = this->m_intervals.m_data;
+          v11 += 4i64;
+          *((float *)&m_data[v11 - 3] - 3) = v7 * *((float *)&this->m_intervals.m_data[v11 - 3] - 3);
+          *((float *)&m_data[v11 - 3] - 2) = (float)(v7 * *((float *)&m_data[v11 - 3] - 2)) + v8;
+          v14 = this->m_intervals.m_data;
+          *((float *)&v14[v11 - 2] - 3) = v7 * *((float *)&this->m_intervals.m_data[v11 - 2] - 3);
+          *((float *)&v14[v11 - 2] - 2) = (float)(v7 * *((float *)&v14[v11 - 2] - 2)) + v8;
+          v15 = this->m_intervals.m_data;
+          *((float *)&v15[v11 - 1] - 3) = v7 * *((float *)&this->m_intervals.m_data[v11 - 1] - 3);
+          *((float *)&v15[v11 - 1] - 2) = (float)(v7 * *((float *)&v15[v11 - 1] - 2)) + v8;
+          v16 = this->m_intervals.m_data;
+          v16[v11 - 1].m_slope = v7 * this->m_intervals.m_data[v11 - 1].m_slope;
+          v16[v11 - 1].m_offset = (float)(v7 * v16[v11 - 1].m_offset) + v8;
+          --v12;
         }
-        while ( v13 );
+        while ( v12 );
       }
-      if ( v10 < v11 )
+      if ( v9 < v10 )
       {
-        v18 = v10;
-        v19 = v11 - v10;
+        v17 = v9;
+        v18 = v10 - v9;
         do
         {
-          v20 = v6->m_intervals.m_data;
-          ++v18;
-          v21 = (float)(v8 * *((float *)&v6->m_intervals.m_data[v18] - 2)) + v9;
-          *((float *)&v20[v18] - 3) = v8 * *((float *)&v6->m_intervals.m_data[v18] - 3);
-          *((float *)&v20[v18] - 2) = v21;
-          --v19;
+          v19 = this->m_intervals.m_data;
+          v20 = (float)(v7 * this->m_intervals.m_data[v17++].m_offset) + v8;
+          v19[v17 - 1].m_slope = v7 * this->m_intervals.m_data[v17 - 1].m_slope;
+          v19[v17 - 1].m_offset = v20;
+          --v18;
         }
-        while ( v19 );
+        while ( v18 );
       }
     }
   }
@@ -2475,42 +2435,35 @@ void __fastcall hkaiIntervalPartition::remapY(hkaiIntervalPartition *this, float
 // RVA: 0x12E26F0
 void __fastcall hkaiIntervalPartition::spread(hkaiIntervalPartition *this, float maxSpread)
 {
-  float v2; // xmm3_4
-  hkaiIntervalPartition *v3; // rdx
-  signed __int64 v4; // rax
-  float v5; // xmm4_4
-  signed __int64 v6; // rcx
-  signed __int64 v7; // r8
-  hkaiIntervalPartition::Interval *v8; // rax
+  __int64 m_size; // rax
+  __int64 v6; // rcx
+  __int64 v7; // r8
+  hkaiIntervalPartition::Interval *m_data; // rax
   float v9; // xmm2_4
   float v10; // xmm1_4
-  signed __int64 v11; // rcx
+  __int64 v11; // rcx
 
-  v2 = maxSpread;
-  v3 = this;
   if ( this->m_intervals.m_size )
   {
     this->m_intervals.m_data->m_leftX = this->m_intervals.m_data->m_leftX - maxSpread;
-    v4 = this->m_intervals.m_size;
-    if ( v4 > 1 )
+    m_size = this->m_intervals.m_size;
+    if ( m_size > 1 )
     {
-      v5 = maxSpread;
       v6 = 1i64;
-      v7 = v4 - 1;
+      v7 = m_size - 1;
       do
       {
-        v8 = v3->m_intervals.m_data;
-        ++v6;
-        v9 = *((float *)&v3->m_intervals.m_data[v6 - 1] - 4);
-        v10 = fminf((float)(v3->m_intervals.m_data[v6 - 1].m_leftX - v9) * 0.5, v5);
-        *((float *)&v8[v6 - 1] - 4) = v9 + v10;
-        v8[v6 - 1].m_leftX = v8[v6 - 1].m_leftX - v10;
+        m_data = this->m_intervals.m_data;
+        v9 = *((float *)&this->m_intervals.m_data[v6++] - 4);
+        v10 = fminf((float)(this->m_intervals.m_data[v6 - 1].m_leftX - v9) * 0.5, maxSpread);
+        *((float *)&m_data[v6 - 1] - 4) = v9 + v10;
+        m_data[v6 - 1].m_leftX = m_data[v6 - 1].m_leftX - v10;
         --v7;
       }
       while ( v7 );
     }
-    v11 = v3->m_intervals.m_size - 1;
-    v3->m_intervals.m_data[v11].m_rightX = v2 + v3->m_intervals.m_data[v11].m_rightX;
+    v11 = this->m_intervals.m_size - 1;
+    this->m_intervals.m_data[v11].m_rightX = maxSpread + this->m_intervals.m_data[v11].m_rightX;
   }
 }
 
@@ -2518,7 +2471,7 @@ void __fastcall hkaiIntervalPartition::spread(hkaiIntervalPartition *this, float
 // RVA: 0x12E27B0
 void __fastcall hkaiIntervalPartition::contract(hkaiIntervalPartition *this, float maxContract)
 {
-  ContractFilter filter; // [rsp+38h] [rbp+10h]
+  ContractFilter filter; // [rsp+38h] [rbp+10h] BYREF
 
   filter.m_maxContract = maxContract;
   hkaiIntervalPartition::filterIntervals<`anonymous namespace::ContractFilter>(this, &filter);
@@ -2528,48 +2481,44 @@ void __fastcall hkaiIntervalPartition::contract(hkaiIntervalPartition *this, flo
 // RVA: 0x12E27D0
 void __fastcall hkaiIntervalPartition::copyFrom(hkaiIntervalPartition *this, hkaiIntervalPartition *other)
 {
-  hkaiIntervalPartition *v2; // rbx
-  int v3; // ecx
-  hkaiIntervalPartition *v4; // rdi
-  __int64 v5; // rcx
-  char *v6; // rax
+  int m_capacityAndFlags; // ecx
+  __int64 m_size; // rcx
+  hkaiIntervalPartition::Interval *m_data; // rax
   __int64 v7; // rdx
-  signed __int64 v8; // r8
-  int v9; // ecx
-  int v10; // [rsp+30h] [rbp+8h]
+  char *v8; // r8
+  float v9; // ecx
+  int v10; // [rsp+30h] [rbp+8h] BYREF
 
-  v2 = this;
-  v3 = this->m_intervals.m_capacityAndFlags;
-  v4 = other;
-  if ( (v3 & 0x3FFFFFFF) < other->m_intervals.m_size )
+  m_capacityAndFlags = this->m_intervals.m_capacityAndFlags;
+  if ( (m_capacityAndFlags & 0x3FFFFFFF) < other->m_intervals.m_size )
   {
-    if ( v3 >= 0 )
+    if ( m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-        v2->m_intervals.m_data,
-        20 * (v3 & 0x3FFFFFFF));
-    v10 = 20 * v4->m_intervals.m_size;
-    v2->m_intervals.m_data = (hkaiIntervalPartition::Interval *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
-                                                                  (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-                                                                  &v10);
-    v2->m_intervals.m_capacityAndFlags = v10 / 20;
+        &hkContainerHeapAllocator::s_alloc,
+        this->m_intervals.m_data,
+        20 * (m_capacityAndFlags & 0x3FFFFFFF));
+    v10 = 20 * other->m_intervals.m_size;
+    this->m_intervals.m_data = (hkaiIntervalPartition::Interval *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
+                                                                    &hkContainerHeapAllocator::s_alloc,
+                                                                    &v10);
+    this->m_intervals.m_capacityAndFlags = v10 / 20;
   }
-  v5 = v4->m_intervals.m_size;
-  v6 = (char *)v2->m_intervals.m_data;
-  v2->m_intervals.m_size = v5;
-  v7 = v5;
-  if ( (signed int)v5 > 0 )
+  m_size = other->m_intervals.m_size;
+  m_data = this->m_intervals.m_data;
+  this->m_intervals.m_size = m_size;
+  v7 = m_size;
+  if ( (int)m_size > 0 )
   {
-    v8 = (char *)v4->m_intervals.m_data - v6;
+    v8 = (char *)((char *)other->m_intervals.m_data - (char *)m_data);
     do
     {
-      v9 = *(_DWORD *)&v6[v8];
-      v6 += 20;
-      *((_DWORD *)v6 - 5) = v9;
-      *((_DWORD *)v6 - 4) = *(_DWORD *)&v6[v8 - 16];
-      *((_DWORD *)v6 - 3) = *(_DWORD *)&v6[v8 - 12];
-      *((_DWORD *)v6 - 2) = *(_DWORD *)&v6[v8 - 8];
-      *((_DWORD *)v6 - 1) = *(_DWORD *)&v6[v8 - 4];
+      v9 = *(float *)((char *)&m_data->m_leftX + (_QWORD)v8);
+      ++m_data;
+      m_data[-1].m_leftX = v9;
+      m_data[-1].m_rightX = *(float *)((char *)m_data + (_QWORD)v8 - 16);
+      m_data[-1].m_slope = *(float *)((char *)m_data + (_QWORD)v8 - 12);
+      m_data[-1].m_offset = *(float *)((char *)m_data + (_QWORD)v8 - 8);
+      m_data[-1].m_data = *(_DWORD *)((char *)m_data + (_QWORD)v8 - 4);
       --v7;
     }
     while ( v7 );
@@ -2580,62 +2529,58 @@ void __fastcall hkaiIntervalPartition::copyFrom(hkaiIntervalPartition *this, hka
 // RVA: 0x12E0F10
 void __fastcall hkaiIntervalPartition::appendPartition(hkaiIntervalPartition *this, hkaiIntervalPartition *other)
 {
-  int v2; // er9
-  hkaiIntervalPartition *v3; // rdi
-  hkaiIntervalPartition *v4; // rbx
-  int v5; // ecx
+  int m_size; // r9d
+  int m_capacityAndFlags; // ecx
   __int64 v6; // rcx
-  char *v7; // rax
+  hkaiIntervalPartition::Interval *m_data; // rax
   __int64 v8; // rdx
-  signed __int64 v9; // r8
-  int v10; // ecx
-  int v11; // [rsp+38h] [rbp+10h]
+  char *v9; // r8
+  float v10; // ecx
+  int v11; // [rsp+38h] [rbp+10h] BYREF
 
-  v2 = other->m_intervals.m_size;
-  v3 = other;
-  v4 = this;
-  if ( v2 )
+  m_size = other->m_intervals.m_size;
+  if ( m_size )
   {
     if ( this->m_intervals.m_size )
     {
       hkArrayBase<hkaiIntervalPartition::Interval>::_append(
-        (hkArrayBase<hkaiIntervalPartition::Interval> *)&this->m_intervals.m_data,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
+        &this->m_intervals,
+        &hkContainerHeapAllocator::s_alloc,
         other->m_intervals.m_data,
-        v2);
+        m_size);
     }
     else
     {
-      v5 = this->m_intervals.m_capacityAndFlags;
-      if ( (v5 & 0x3FFFFFFF) < v2 )
+      m_capacityAndFlags = this->m_intervals.m_capacityAndFlags;
+      if ( (m_capacityAndFlags & 0x3FFFFFFF) < m_size )
       {
-        if ( v5 >= 0 )
+        if ( m_capacityAndFlags >= 0 )
           hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-            (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-            v4->m_intervals.m_data,
-            20 * (v5 & 0x3FFFFFFF));
-        v11 = 20 * v3->m_intervals.m_size;
-        v4->m_intervals.m_data = (hkaiIntervalPartition::Interval *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
-                                                                      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-                                                                      &v11);
-        v4->m_intervals.m_capacityAndFlags = v11 / 20;
+            &hkContainerHeapAllocator::s_alloc,
+            this->m_intervals.m_data,
+            20 * (m_capacityAndFlags & 0x3FFFFFFF));
+        v11 = 20 * other->m_intervals.m_size;
+        this->m_intervals.m_data = (hkaiIntervalPartition::Interval *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
+                                                                        &hkContainerHeapAllocator::s_alloc,
+                                                                        &v11);
+        this->m_intervals.m_capacityAndFlags = v11 / 20;
       }
-      v6 = v3->m_intervals.m_size;
-      v7 = (char *)v4->m_intervals.m_data;
-      v4->m_intervals.m_size = v6;
+      v6 = other->m_intervals.m_size;
+      m_data = this->m_intervals.m_data;
+      this->m_intervals.m_size = v6;
       v8 = v6;
-      if ( (signed int)v6 > 0 )
+      if ( (int)v6 > 0 )
       {
-        v9 = (char *)v3->m_intervals.m_data - v7;
+        v9 = (char *)((char *)other->m_intervals.m_data - (char *)m_data);
         do
         {
-          v10 = *(_DWORD *)&v7[v9];
-          v7 += 20;
-          *((_DWORD *)v7 - 5) = v10;
-          *((_DWORD *)v7 - 4) = *(_DWORD *)&v7[v9 - 16];
-          *((_DWORD *)v7 - 3) = *(_DWORD *)&v7[v9 - 12];
-          *((_DWORD *)v7 - 2) = *(_DWORD *)&v7[v9 - 8];
-          *((_DWORD *)v7 - 1) = *(_DWORD *)&v7[v9 - 4];
+          v10 = *(float *)((char *)&m_data->m_leftX + (_QWORD)v9);
+          ++m_data;
+          m_data[-1].m_leftX = v10;
+          m_data[-1].m_rightX = *(float *)((char *)m_data + (_QWORD)v9 - 16);
+          m_data[-1].m_slope = *(float *)((char *)m_data + (_QWORD)v9 - 12);
+          m_data[-1].m_offset = *(float *)((char *)m_data + (_QWORD)v9 - 8);
+          m_data[-1].m_data = *(_DWORD *)((char *)m_data + (_QWORD)v9 - 4);
           --v8;
         }
         while ( v8 );
@@ -2646,105 +2591,99 @@ void __fastcall hkaiIntervalPartition::appendPartition(hkaiIntervalPartition *th
 
 // File Line: 1460
 // RVA: 0x12E28C0
-void __fastcall hkaiIntervalPartition::copyRegionFrom(hkaiIntervalPartition *this, hkaiIntervalPartition *other, float minX, float maxX)
+void __fastcall hkaiIntervalPartition::copyRegionFrom(
+        hkaiIntervalPartition *this,
+        hkaiIntervalPartition *other,
+        float minX,
+        float maxX)
 {
   int v4; // ebx
-  __int64 v5; // rbp
-  hkaiIntervalPartition *v6; // rsi
-  hkaiIntervalPartition *v7; // rdi
-  hkaiIntervalPartition::Interval *v8; // rax
-  float v9; // xmm8_4
-  float v10; // xmm9_4
-  float v11; // xmm10_4
-  unsigned int v12; // xmm11_4
+  __int64 m_size; // rbp
+  hkaiIntervalPartition::Interval *Interval; // rax
+  float m_rightX; // xmm8_4
+  float m_slope; // xmm9_4
+  float m_offset; // xmm10_4
+  unsigned int m_data; // xmm11_4
   float v13; // xmm6_4
-  signed __int64 v14; // rcx
+  __int64 v14; // rcx
   hkaiIntervalPartition::Interval *v15; // rax
-  int v16; // er14
-  bool v17; // zf
-  bool v18; // sf
-  unsigned __int8 v19; // of
-  float v20; // xmm8_4
-  float v21; // xmm9_4
-  float v22; // xmm10_4
-  unsigned int v23; // xmm11_4
-  float v24; // xmm6_4
-  signed __int64 v25; // rcx
-  hkaiIntervalPartition::Interval *v26; // rax
+  int RightInterval; // r14d
+  bool v17; // cc
+  float m_leftX; // xmm8_4
+  float v19; // xmm9_4
+  float v20; // xmm10_4
+  unsigned int v21; // xmm11_4
+  float v22; // xmm6_4
+  __int64 v23; // rcx
+  hkaiIntervalPartition::Interval *v24; // rax
 
   v4 = 0;
   this->m_intervals.m_size = 0;
-  v5 = other->m_intervals.m_size;
-  v6 = other;
-  v7 = this;
-  if ( (_DWORD)v5 )
+  m_size = other->m_intervals.m_size;
+  if ( (_DWORD)m_size )
   {
-    if ( minX > other->m_intervals.m_data->m_leftX || maxX < *((float *)&other->m_intervals.m_data[v5] - 4) )
+    if ( minX > other->m_intervals.m_data->m_leftX || maxX < other->m_intervals.m_data[m_size - 1].m_rightX )
     {
-      if ( (signed int)v5 > 0 )
+      if ( (int)m_size > 0 )
       {
         while ( 1 )
         {
-          v8 = hkaiIntervalPartition::getInterval(v6, v4);
-          if ( minX < v8->m_rightX )
+          Interval = hkaiIntervalPartition::getInterval(other, v4);
+          if ( minX < Interval->m_rightX )
             break;
-          if ( ++v4 >= (signed int)v5 )
+          if ( ++v4 >= (int)m_size )
             goto LABEL_12;
         }
-        v9 = v8->m_rightX;
-        v10 = v8->m_slope;
-        v11 = v8->m_offset;
-        v12 = v8->m_data;
-        v13 = fmaxf(v8->m_leftX, minX);
-        if ( !(v7->m_intervals.m_capacityAndFlags & 0x3FFFFFFF) )
-          hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v7, 20);
-        v14 = v7->m_intervals.m_size;
-        v15 = v7->m_intervals.m_data;
+        m_rightX = Interval->m_rightX;
+        m_slope = Interval->m_slope;
+        m_offset = Interval->m_offset;
+        m_data = Interval->m_data;
+        v13 = fmaxf(Interval->m_leftX, minX);
+        if ( (this->m_intervals.m_capacityAndFlags & 0x3FFFFFFF) == 0 )
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&this->m_intervals.m_data, 20);
+        v14 = this->m_intervals.m_size;
+        v15 = this->m_intervals.m_data;
         v15[v14].m_leftX = v13;
-        v15[v14].m_rightX = v9;
-        v15[v14].m_slope = v10;
-        v15[v14].m_offset = v11;
-        v15[v14].m_data = v12;
-        ++v7->m_intervals.m_size;
+        v15[v14].m_rightX = m_rightX;
+        v15[v14].m_slope = m_slope;
+        v15[v14].m_offset = m_offset;
+        v15[v14].m_data = m_data;
+        ++this->m_intervals.m_size;
         ++v4;
       }
 LABEL_12:
-      v16 = hkaiIntervalPartition::findRightInterval(v6, maxX);
-      if ( (signed int)v5 - 1 < v16 )
-        v16 = v5 - 1;
-      v19 = __OFSUB__(v4, v16);
-      v17 = v4 == v16;
-      v18 = v4 - v16 < 0;
-      if ( v4 < v16 )
+      RightInterval = hkaiIntervalPartition::findRightInterval(other, maxX);
+      if ( (int)m_size - 1 < RightInterval )
+        RightInterval = m_size - 1;
+      v17 = v4 <= RightInterval;
+      if ( v4 < RightInterval )
       {
         hkArrayBase<hkaiIntervalPartition::Interval>::_append(
-          (hkArrayBase<hkaiIntervalPartition::Interval> *)&v7->m_intervals.m_data,
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-          &v6->m_intervals.m_data[v4],
-          v16 - v4);
-        v19 = __OFSUB__(v4, v16);
-        v17 = v4 == v16;
-        v18 = v4 - v16 < 0;
+          &this->m_intervals,
+          &hkContainerHeapAllocator::s_alloc,
+          &other->m_intervals.m_data[v4],
+          RightInterval - v4);
+        v17 = v4 <= RightInterval;
       }
-      if ( (unsigned __int8)(v18 ^ v19) | v17 )
+      if ( v17 )
       {
-        v20 = v6->m_intervals.m_data[v16].m_leftX;
-        v21 = v6->m_intervals.m_data[v16].m_slope;
-        v22 = v6->m_intervals.m_data[v16].m_offset;
-        v23 = v6->m_intervals.m_data[v16].m_data;
-        if ( v20 < maxX )
+        m_leftX = other->m_intervals.m_data[RightInterval].m_leftX;
+        v19 = other->m_intervals.m_data[RightInterval].m_slope;
+        v20 = other->m_intervals.m_data[RightInterval].m_offset;
+        v21 = other->m_intervals.m_data[RightInterval].m_data;
+        if ( m_leftX < maxX )
         {
-          v24 = fminf(v6->m_intervals.m_data[v16].m_rightX, maxX);
-          if ( v7->m_intervals.m_size == (v7->m_intervals.m_capacityAndFlags & 0x3FFFFFFF) )
-            hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v7, 20);
-          v25 = v7->m_intervals.m_size;
-          v26 = v7->m_intervals.m_data;
-          v26[v25].m_leftX = v20;
-          v26[v25].m_rightX = v24;
-          v26[v25].m_slope = v21;
-          v26[v25].m_offset = v22;
-          v26[v25].m_data = v23;
-          ++v7->m_intervals.m_size;
+          v22 = fminf(other->m_intervals.m_data[RightInterval].m_rightX, maxX);
+          if ( this->m_intervals.m_size == (this->m_intervals.m_capacityAndFlags & 0x3FFFFFFF) )
+            hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&this->m_intervals.m_data, 20);
+          v23 = this->m_intervals.m_size;
+          v24 = this->m_intervals.m_data;
+          v24[v23].m_leftX = m_leftX;
+          v24[v23].m_rightX = v22;
+          v24[v23].m_slope = v19;
+          v24[v23].m_offset = v20;
+          v24[v23].m_data = v21;
+          ++this->m_intervals.m_size;
         }
       }
     }
@@ -2759,49 +2698,42 @@ LABEL_12:
 // RVA: 0x12E2B30
 void __fastcall hkaiIntervalPartition::discardRange(hkaiIntervalPartition *this)
 {
-  int v1; // eax
-  hkaiIntervalPartition *v2; // r10
-  int v3; // er11
-  signed int v4; // er9
-  __int64 v5; // rbx
-  signed __int64 v6; // r8
-  signed __int64 v7; // rdx
-  hkaiIntervalPartition::Interval *v8; // rcx
+  int v2; // r11d
+  int v3; // r9d
+  __int64 v4; // rbx
+  unsigned __int64 v5; // r8
+  unsigned __int64 v6; // rdx
+  hkaiIntervalPartition::Interval *m_data; // rcx
 
-  v1 = this->m_intervals.m_size;
-  v2 = this;
-  if ( v1 >= 2 )
+  if ( this->m_intervals.m_size >= 2 )
   {
-    v3 = 0;
-    v4 = 1;
+    v2 = 0;
+    v3 = 1;
+    v4 = 0i64;
     v5 = 0i64;
-    if ( v1 > 1 )
+    v6 = 1i64;
+    do
     {
-      v6 = 0i64;
-      v7 = 1i64;
-      do
+      m_data = this->m_intervals.m_data;
+      if ( this->m_intervals.m_data[v6].m_leftX == this->m_intervals.m_data[v5].m_rightX )
       {
-        v8 = v2->m_intervals.m_data;
-        if ( v2->m_intervals.m_data[v7].m_leftX == v2->m_intervals.m_data[v6].m_rightX )
-        {
-          v8[v6].m_rightX = v8[v7].m_rightX;
-        }
-        else
-        {
-          ++v3;
-          v6 = ++v5;
-          v8[v6].m_leftX = v8[v7].m_leftX;
-          v8[v6].m_rightX = v8[v7].m_rightX;
-          v8[v6].m_slope = v8[v7].m_slope;
-          v8[v6].m_offset = v8[v7].m_offset;
-          v8[v6].m_data = v8[v7].m_data;
-        }
-        ++v4;
-        ++v7;
+        m_data[v5].m_rightX = m_data[v6].m_rightX;
       }
-      while ( v4 < v2->m_intervals.m_size );
+      else
+      {
+        ++v2;
+        v5 = ++v4;
+        m_data[v5].m_leftX = m_data[v6].m_leftX;
+        m_data[v5].m_rightX = m_data[v6].m_rightX;
+        m_data[v5].m_slope = m_data[v6].m_slope;
+        m_data[v5].m_offset = m_data[v6].m_offset;
+        m_data[v5].m_data = m_data[v6].m_data;
+      }
+      ++v3;
+      ++v6;
     }
-    v2->m_intervals.m_size = v3 + 1;
+    while ( v3 < this->m_intervals.m_size );
+    this->m_intervals.m_size = v2 + 1;
   }
 }
 
@@ -2809,20 +2741,19 @@ void __fastcall hkaiIntervalPartition::discardRange(hkaiIntervalPartition *this)
 // RVA: 0x12E2BE0
 void __fastcall hkaiIntervalPartition::setAllData(hkaiIntervalPartition *this, unsigned int data)
 {
-  __int64 v2; // r9
+  __int64 m_size; // r9
   __int64 v3; // rax
 
-  v2 = this->m_intervals.m_size;
-  if ( v2 > 0 )
+  m_size = this->m_intervals.m_size;
+  if ( m_size > 0 )
   {
     v3 = 0i64;
     do
     {
-      ++v3;
-      *((_DWORD *)&this->m_intervals.m_data[v3] - 1) = data;
-      --v2;
+      this->m_intervals.m_data[v3++].m_data = data;
+      --m_size;
     }
-    while ( v2 );
+    while ( m_size );
   }
 }
 
@@ -2830,144 +2761,135 @@ void __fastcall hkaiIntervalPartition::setAllData(hkaiIntervalPartition *this, u
 // RVA: 0x12E2000
 void __fastcall hkaiIntervalPartition::reflectX(hkaiIntervalPartition *this, float mid)
 {
-  signed __int64 v2; // rax
-  signed __int64 v3; // r15
-  float v4; // xmm3_4
-  signed __int64 v5; // rsi
-  hkaiIntervalPartition *v6; // r14
-  __int64 v7; // rbp
-  signed __int64 v8; // rbx
-  __int64 v9; // rdi
-  hkaiIntervalPartition::Interval *v10; // r11
-  float v11; // ecx
-  float v12; // edx
-  float v13; // er8
-  float v14; // er9
-  unsigned int v15; // er10
-  __int64 v16; // rcx
-  unsigned __int64 v17; // rdx
-  float v18; // xmm2_4
-  hkaiIntervalPartition::Interval *v19; // rax
-  float v20; // xmm1_4
-  float v21; // xmm0_4
-  hkaiIntervalPartition::Interval *v22; // rax
-  float v23; // xmm1_4
-  float v24; // xmm0_4
-  hkaiIntervalPartition::Interval *v25; // rax
-  float v26; // xmm1_4
-  float v27; // xmm0_4
-  hkaiIntervalPartition::Interval *v28; // rax
-  float v29; // xmm1_4
-  float v30; // xmm0_4
-  float v31; // xmm3_4
-  signed __int64 v32; // rcx
-  signed __int64 v33; // rsi
-  hkaiIntervalPartition::Interval *v34; // rax
-  float v35; // xmm2_4
-  float v36; // xmm1_4
+  __int64 v2; // r15
+  __int64 m_size; // rsi
+  __int64 v6; // rbp
+  unsigned __int64 v7; // rbx
+  __int64 v8; // rdi
+  hkaiIntervalPartition::Interval *m_data; // r11
+  float m_leftX; // ecx
+  float m_rightX; // edx
+  float m_slope; // r8d
+  float m_offset; // r9d
+  unsigned int v14; // r10d
+  __int64 v15; // rcx
+  unsigned __int64 v16; // rdx
+  float v17; // xmm2_4
+  hkaiIntervalPartition::Interval *v18; // rax
+  float v19; // xmm1_4
+  float v20; // xmm0_4
+  hkaiIntervalPartition::Interval *v21; // rax
+  float v22; // xmm1_4
+  float v23; // xmm0_4
+  hkaiIntervalPartition::Interval *v24; // rax
+  float v25; // xmm1_4
+  float v26; // xmm0_4
+  hkaiIntervalPartition::Interval *v27; // rax
+  float v28; // xmm1_4
+  float v29; // xmm0_4
+  float v30; // xmm3_4
+  unsigned __int64 v31; // rcx
+  __int64 v32; // rsi
+  hkaiIntervalPartition::Interval *v33; // rax
+  float v34; // xmm2_4
+  float v35; // xmm1_4
 
-  v2 = this->m_intervals.m_size;
-  v3 = 0i64;
-  v4 = mid;
-  v5 = v2;
-  v6 = this;
-  LODWORD(v2) = (signed int)v2 / 2;
-  v7 = (signed int)v2;
-  if ( (signed int)v2 > 0 )
+  v2 = 0i64;
+  m_size = this->m_intervals.m_size;
+  v6 = (int)m_size / 2;
+  if ( (int)m_size / 2 > 0 )
   {
-    v8 = v5;
-    v9 = 0i64;
+    v7 = m_size;
+    v8 = 0i64;
     do
     {
-      v10 = v6->m_intervals.m_data;
-      --v8;
-      ++v9;
-      v11 = v6->m_intervals.m_data[v9 - 1].m_leftX;
-      v12 = *((float *)&v6->m_intervals.m_data[v9] - 4);
-      v13 = *((float *)&v6->m_intervals.m_data[v9] - 3);
-      v14 = *((float *)&v6->m_intervals.m_data[v9] - 2);
-      v15 = *((_DWORD *)&v6->m_intervals.m_data[v9] - 1);
-      v10[v9 - 1].m_leftX = v6->m_intervals.m_data[v8].m_leftX;
-      *((_DWORD *)&v10[v9] - 4) = LODWORD(v10[v8].m_rightX);
-      *((_DWORD *)&v10[v9] - 3) = LODWORD(v10[v8].m_slope);
-      *((_DWORD *)&v10[v9] - 2) = LODWORD(v10[v8].m_offset);
-      *((_DWORD *)&v10[v9] - 1) = v10[v8].m_data;
-      v10[v8].m_leftX = v11;
-      v10[v8].m_rightX = v12;
-      v10[v8].m_slope = v13;
-      v10[v8].m_offset = v14;
-      v10[v8].m_data = v15;
+      m_data = this->m_intervals.m_data;
       --v7;
+      m_leftX = this->m_intervals.m_data[v8++].m_leftX;
+      m_rightX = this->m_intervals.m_data[v8 - 1].m_rightX;
+      m_slope = this->m_intervals.m_data[v8 - 1].m_slope;
+      m_offset = this->m_intervals.m_data[v8 - 1].m_offset;
+      v14 = this->m_intervals.m_data[v8 - 1].m_data;
+      m_data[v8 - 1].m_leftX = this->m_intervals.m_data[v7].m_leftX;
+      m_data[v8 - 1].m_rightX = m_data[v7].m_rightX;
+      m_data[v8 - 1].m_slope = m_data[v7].m_slope;
+      m_data[v8 - 1].m_offset = m_data[v7].m_offset;
+      m_data[v8 - 1].m_data = m_data[v7].m_data;
+      m_data[v7].m_leftX = m_leftX;
+      m_data[v7].m_rightX = m_rightX;
+      m_data[v7].m_slope = m_slope;
+      m_data[v7].m_offset = m_offset;
+      m_data[v7].m_data = v14;
+      --v6;
     }
-    while ( v7 );
+    while ( v6 );
   }
-  if ( v5 >= 4 )
+  if ( m_size >= 4 )
   {
-    v16 = 0i64;
-    v17 = ((unsigned __int64)(v5 - 4) >> 2) + 1;
-    v18 = mid * 2.0;
-    v3 = 4 * v17;
+    v15 = 0i64;
+    v16 = ((unsigned __int64)(m_size - 4) >> 2) + 1;
+    v17 = mid * 2.0;
+    v2 = 4 * v16;
     do
     {
-      v19 = v6->m_intervals.m_data;
-      v16 += 4i64;
-      v19[v16 - 4].m_leftX = v18 - v6->m_intervals.m_data[v16 - 4].m_leftX;
-      v20 = v18 - *((float *)&v19[v16 - 3] - 4);
-      *((float *)&v19[v16 - 3] - 4) = v20;
-      v21 = v19[v16 - 4].m_leftX;
-      v19[v16 - 4].m_leftX = v20;
-      *((float *)&v19[v16 - 3] - 4) = v21;
-      *((float *)&v19[v16 - 3] - 2) = (float)(v18 * *((float *)&v19[v16 - 3] - 3)) + *((float *)&v19[v16 - 3] - 2);
-      *((_DWORD *)&v19[v16 - 3] - 3) ^= _xmm[0];
-      v22 = v6->m_intervals.m_data;
-      v22[v16 - 3].m_leftX = v18 - v6->m_intervals.m_data[v16 - 3].m_leftX;
-      v23 = v18 - *((float *)&v22[v16 - 2] - 4);
-      *((float *)&v22[v16 - 2] - 4) = v23;
-      v24 = v22[v16 - 3].m_leftX;
-      v22[v16 - 3].m_leftX = v23;
-      *((float *)&v22[v16 - 2] - 4) = v24;
-      *((float *)&v22[v16 - 2] - 2) = (float)(v18 * *((float *)&v22[v16 - 2] - 3)) + *((float *)&v22[v16 - 2] - 2);
-      *((_DWORD *)&v22[v16 - 2] - 3) ^= _xmm[0];
-      v25 = v6->m_intervals.m_data;
-      v25[v16 - 2].m_leftX = v18 - v6->m_intervals.m_data[v16 - 2].m_leftX;
-      v26 = v18 - *((float *)&v25[v16 - 1] - 4);
-      *((float *)&v25[v16 - 1] - 4) = v26;
-      v27 = v25[v16 - 2].m_leftX;
-      v25[v16 - 2].m_leftX = v26;
-      *((float *)&v25[v16 - 1] - 4) = v27;
-      *((float *)&v25[v16 - 1] - 2) = (float)(v18 * *((float *)&v25[v16 - 1] - 3)) + *((float *)&v25[v16 - 1] - 2);
-      *((_DWORD *)&v25[v16 - 1] - 3) ^= _xmm[0];
-      v28 = v6->m_intervals.m_data;
-      v28[v16 - 1].m_leftX = v18 - v6->m_intervals.m_data[v16 - 1].m_leftX;
-      v29 = v18 - *((float *)&v28[v16] - 4);
-      *((float *)&v28[v16] - 4) = v29;
-      v30 = v28[v16 - 1].m_leftX;
-      v28[v16 - 1].m_leftX = v29;
-      *((float *)&v28[v16] - 4) = v30;
-      *((float *)&v28[v16] - 2) = (float)(v18 * *((float *)&v28[v16] - 3)) + *((float *)&v28[v16] - 2);
-      *((_DWORD *)&v28[v16] - 3) ^= _xmm[0];
-      --v17;
+      v18 = this->m_intervals.m_data;
+      v15 += 4i64;
+      v18[v15 - 4].m_leftX = v17 - this->m_intervals.m_data[v15 - 4].m_leftX;
+      v19 = v17 - *((float *)&v18[v15 - 3] - 4);
+      *((float *)&v18[v15 - 3] - 4) = v19;
+      v20 = v18[v15 - 4].m_leftX;
+      v18[v15 - 4].m_leftX = v19;
+      *((float *)&v18[v15 - 3] - 4) = v20;
+      *((float *)&v18[v15 - 3] - 2) = (float)(v17 * *((float *)&v18[v15 - 3] - 3)) + *((float *)&v18[v15 - 3] - 2);
+      *((_DWORD *)&v18[v15 - 3] - 3) ^= _xmm[0];
+      v21 = this->m_intervals.m_data;
+      v21[v15 - 3].m_leftX = v17 - this->m_intervals.m_data[v15 - 3].m_leftX;
+      v22 = v17 - *((float *)&v21[v15 - 2] - 4);
+      *((float *)&v21[v15 - 2] - 4) = v22;
+      v23 = v21[v15 - 3].m_leftX;
+      v21[v15 - 3].m_leftX = v22;
+      *((float *)&v21[v15 - 2] - 4) = v23;
+      *((float *)&v21[v15 - 2] - 2) = (float)(v17 * *((float *)&v21[v15 - 2] - 3)) + *((float *)&v21[v15 - 2] - 2);
+      *((_DWORD *)&v21[v15 - 2] - 3) ^= _xmm[0];
+      v24 = this->m_intervals.m_data;
+      v24[v15 - 2].m_leftX = v17 - this->m_intervals.m_data[v15 - 2].m_leftX;
+      v25 = v17 - *((float *)&v24[v15 - 1] - 4);
+      *((float *)&v24[v15 - 1] - 4) = v25;
+      v26 = v24[v15 - 2].m_leftX;
+      v24[v15 - 2].m_leftX = v25;
+      *((float *)&v24[v15 - 1] - 4) = v26;
+      *((float *)&v24[v15 - 1] - 2) = (float)(v17 * *((float *)&v24[v15 - 1] - 3)) + *((float *)&v24[v15 - 1] - 2);
+      *((_DWORD *)&v24[v15 - 1] - 3) ^= _xmm[0];
+      v27 = this->m_intervals.m_data;
+      v27[v15 - 1].m_leftX = v17 - this->m_intervals.m_data[v15 - 1].m_leftX;
+      v28 = v17 - v27[v15 - 1].m_rightX;
+      v27[v15 - 1].m_rightX = v28;
+      v29 = v27[v15 - 1].m_leftX;
+      v27[v15 - 1].m_leftX = v28;
+      v27[v15 - 1].m_rightX = v29;
+      v27[v15 - 1].m_offset = (float)(v17 * v27[v15 - 1].m_slope) + v27[v15 - 1].m_offset;
+      LODWORD(v27[v15 - 1].m_slope) ^= _xmm[0];
+      --v16;
     }
-    while ( v17 );
+    while ( v16 );
   }
-  if ( v3 < v5 )
+  if ( v2 < m_size )
   {
-    v31 = v4 * 2.0;
-    v32 = v3;
-    v33 = v5 - v3;
+    v30 = mid * 2.0;
+    v31 = v2;
+    v32 = m_size - v2;
     do
     {
-      v34 = v6->m_intervals.m_data;
-      ++v32;
-      v35 = *((float *)&v6->m_intervals.m_data[v32] - 3);
-      v36 = v31 - v6->m_intervals.m_data[v32 - 1].m_leftX;
-      v34[v32 - 1].m_leftX = v31 - *((float *)&v6->m_intervals.m_data[v32] - 4);
-      *((float *)&v34[v32] - 4) = v36;
-      *((_DWORD *)&v34[v32] - 3) = LODWORD(v35) ^ _xmm[0];
-      *((float *)&v34[v32] - 2) = (float)(v35 * v31) + *((float *)&v34[v32] - 2);
-      --v33;
+      v33 = this->m_intervals.m_data;
+      v34 = this->m_intervals.m_data[v31++].m_slope;
+      v35 = v30 - this->m_intervals.m_data[v31 - 1].m_leftX;
+      v33[v31 - 1].m_leftX = v30 - this->m_intervals.m_data[v31 - 1].m_rightX;
+      v33[v31 - 1].m_rightX = v35;
+      LODWORD(v33[v31 - 1].m_slope) = LODWORD(v34) ^ _xmm[0];
+      v33[v31 - 1].m_offset = (float)(v34 * v30) + v33[v31 - 1].m_offset;
+      --v32;
     }
-    while ( v33 );
+    while ( v32 );
   }
 }
 

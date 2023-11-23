@@ -28,16 +28,14 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::AudioEventProperty
 
   v0 = UFG::qStringHash64("UFG::AudioEventPropertyData", 0xFFFFFFFFFFFFFFFFui64);
   UFG::qReflectInventoryBase::qReflectInventoryBase(
-    (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::AudioEventPropertyData,UFG::qReflectObject>::sInventory.vfptr,
+    &UFG::qReflectObjectType<UFG::AudioEventPropertyData,UFG::qReflectObject>::sInventory,
     "UFG::AudioEventPropertyData",
     v0);
   UFG::qReflectObjectType<UFG::AudioEventPropertyData,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::AudioEventPropertyData>::`vftable;
   UFG::qReflectInventory<UFG::AudioEventPropertyData>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::AudioEventPropertyData,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
-  UFG::qReflectWarehouse::Add(
-    v1,
-    (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::AudioEventPropertyData,UFG::qReflectObject>::sInventory.vfptr);
-  return atexit(dynamic_atexit_destructor_for__UFG::qReflectObjectType_UFG::AudioEventPropertyData_UFG::qReflectObject_::sInventory__);
+  UFG::qReflectWarehouse::Add(v1, &UFG::qReflectObjectType<UFG::AudioEventPropertyData,UFG::qReflectObject>::sInventory);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::qReflectObjectType_UFG::AudioEventPropertyData_UFG::qReflectObject_::sInventory__);
 }
 
 // File Line: 9
@@ -70,7 +68,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::AudioCategoryPrope
 
   v0 = UFG::qStringHash64("UFG::AudioCategoryPropertyData", 0xFFFFFFFFFFFFFFFFui64);
   UFG::qReflectInventoryBase::qReflectInventoryBase(
-    (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::AudioCategoryPropertyData,UFG::qReflectObject>::sInventory.vfptr,
+    &UFG::qReflectObjectType<UFG::AudioCategoryPropertyData,UFG::qReflectObject>::sInventory,
     "UFG::AudioCategoryPropertyData",
     v0);
   UFG::qReflectObjectType<UFG::AudioCategoryPropertyData,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::AudioCategoryPropertyData>::`vftable;
@@ -78,8 +76,8 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::AudioCategoryPrope
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
     v1,
-    (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::AudioCategoryPropertyData,UFG::qReflectObject>::sInventory.vfptr);
-  return atexit(dynamic_atexit_destructor_for__UFG::qReflectObjectType_UFG::AudioCategoryPropertyData_UFG::qReflectObject_::sInventory__);
+    &UFG::qReflectObjectType<UFG::AudioCategoryPropertyData,UFG::qReflectObject>::sInventory);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::qReflectObjectType_UFG::AudioCategoryPropertyData_UFG::qReflectObject_::sInventory__);
 }
 
 // File Line: 12
@@ -105,7 +103,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::SoundEngineDeviceS
 
   v0 = UFG::qStringHash64("UFG::SoundEngineDeviceSettingsReflect", 0xFFFFFFFFFFFFFFFFui64);
   UFG::qReflectInventoryBase::qReflectInventoryBase(
-    (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::SoundEngineDeviceSettingsReflect,UFG::qReflectObject>::sInventory.vfptr,
+    &UFG::qReflectObjectType<UFG::SoundEngineDeviceSettingsReflect,UFG::qReflectObject>::sInventory,
     "UFG::SoundEngineDeviceSettingsReflect",
     v0);
   UFG::qReflectObjectType<UFG::SoundEngineDeviceSettingsReflect,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::SoundEngineDeviceSettingsReflect>::`vftable;
@@ -113,8 +111,8 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::SoundEngineDeviceS
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
     v1,
-    (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::SoundEngineDeviceSettingsReflect,UFG::qReflectObject>::sInventory.vfptr);
-  return atexit(dynamic_atexit_destructor_for__UFG::qReflectObjectType_UFG::SoundEngineDeviceSettingsReflect_UFG::qReflectObject_::sInventory__);
+    &UFG::qReflectObjectType<UFG::SoundEngineDeviceSettingsReflect,UFG::qReflectObject>::sInventory);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::qReflectObjectType_UFG::SoundEngineDeviceSettingsReflect_UFG::qReflectObject_::sInventory__);
 }
 
 // File Line: 14

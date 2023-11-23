@@ -2,66 +2,58 @@
 // RVA: 0xA64060
 void __fastcall CAkFeedbackDeviceMgr::~CAkFeedbackDeviceMgr(CAkFeedbackDeviceMgr *this)
 {
-  CAkFeedbackDeviceMgr *v1; // r14
-  unsigned int v2; // ebx
+  unsigned int i; // ebx
   int v3; // esi
-  CAkSplitterBus *v4; // rdi
-  signed __int64 v5; // rbx
-  signed __int64 v6; // rbp
-  unsigned int i; // edi
-  __int64 v8; // rcx
-  void *v9; // rdx
+  CAkSplitterBus *item; // rdi
+  CAkKeyArray<unsigned long,CAkFeedbackDeviceMgr::DeviceBus,1> *m_aPlayers; // rbx
+  __int64 v6; // rbp
+  unsigned int j; // edi
+  IAkMotionMixBus *m_pFinalBus; // rcx
+  MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus> *m_pItems; // rdx
   MapStruct<unsigned long,CAkSplitterBus *> *v10; // rdx
 
-  v1 = this;
-  v2 = 0;
-  if ( this->m_aBusses.m_uLength )
+  for ( i = 0; i < this->m_aBusses.m_uLength; ++i )
   {
-    do
+    v3 = g_LEngineDefaultPoolId;
+    item = this->m_aBusses.m_pItems[i].item;
+    if ( item )
     {
-      v3 = g_LEngineDefaultPoolId;
-      v4 = v1->m_aBusses.m_pItems[v2].item;
-      if ( v4 )
-      {
-        CAkSplitterBus::~CAkSplitterBus(v1->m_aBusses.m_pItems[v2].item);
-        AK::MemoryMgr::Free(v3, v4);
-      }
-      ++v2;
+      CAkSplitterBus::~CAkSplitterBus(this->m_aBusses.m_pItems[i].item);
+      AK::MemoryMgr::Free(v3, item);
     }
-    while ( v2 < v1->m_aBusses.m_uLength );
   }
-  v5 = (signed __int64)v1->m_aPlayers;
+  m_aPlayers = this->m_aPlayers;
   v6 = 4i64;
   do
   {
-    for ( i = 0; i < *(_DWORD *)(v5 + 8); ++i )
+    for ( j = 0; j < m_aPlayers->m_uLength; ++j )
     {
-      v8 = *(_QWORD *)(*(_QWORD *)v5 + 16i64 * i + 8);
-      if ( v8 )
+      m_pFinalBus = m_aPlayers->m_pItems[j].item.m_pFinalBus;
+      if ( m_pFinalBus )
       {
-        (*(void (__fastcall **)(__int64, AkFXMemAlloc *))(*(_QWORD *)v8 + 8i64))(v8, &AkFXMemAlloc::m_instanceLower);
-        *(_QWORD *)(*(_QWORD *)v5 + 16i64 * i + 8) = 0i64;
+        m_pFinalBus->vfptr->Term(m_pFinalBus, &AkFXMemAlloc::m_instanceLower);
+        m_aPlayers->m_pItems[j].item.m_pFinalBus = 0i64;
       }
     }
-    v9 = *(void **)v5;
-    if ( *(_QWORD *)v5 )
+    m_pItems = m_aPlayers->m_pItems;
+    if ( m_aPlayers->m_pItems )
     {
-      *(_DWORD *)(v5 + 8) = 0;
-      AK::MemoryMgr::Free(g_DefaultPoolId, v9);
-      *(_QWORD *)v5 = 0i64;
-      *(_DWORD *)(v5 + 12) = 0;
+      m_aPlayers->m_uLength = 0;
+      AK::MemoryMgr::Free(g_DefaultPoolId, m_pItems);
+      m_aPlayers->m_pItems = 0i64;
+      m_aPlayers->m_ulReserved = 0;
     }
-    v5 += 16i64;
+    ++m_aPlayers;
     --v6;
   }
   while ( v6 );
-  v10 = v1->m_aBusses.m_pItems;
-  if ( v1->m_aBusses.m_pItems )
+  v10 = this->m_aBusses.m_pItems;
+  if ( this->m_aBusses.m_pItems )
   {
-    v1->m_aBusses.m_uLength = 0;
+    this->m_aBusses.m_uLength = 0;
     AK::MemoryMgr::Free(g_DefaultPoolId, v10);
-    v1->m_aBusses.m_pItems = 0i64;
-    v1->m_aBusses.m_ulReserved = 0;
+    this->m_aBusses.m_pItems = 0i64;
+    this->m_aBusses.m_ulReserved = 0;
   }
 }
 
@@ -95,7 +87,7 @@ CAkFeedbackDeviceMgr *__fastcall CAkFeedbackDeviceMgr::Create()
       *(_DWORD *)result->m_aPlayerToListener = 0;
       *(_QWORD *)result->m_aListenerToPlayer = 0i64;
       result->m_aListenerToPlayer[0] = 15;
-      result = CAkFeedbackDeviceMgr::s_pSingleton;
+      return CAkFeedbackDeviceMgr::s_pSingleton;
     }
   }
   return result;
@@ -120,58 +112,55 @@ void CAkFeedbackDeviceMgr::Destroy(void)
 
 // File Line: 104
 // RVA: 0xA641E0
-signed __int64 __fastcall CAkFeedbackDeviceMgr::AddPlayerFeedbackDevice(CAkFeedbackDeviceMgr *this, char in_iPlayerID, unsigned int in_iDeviceCompanyID, unsigned int in_iDevicePluginID, void *in_pDevice)
+__int64 __fastcall CAkFeedbackDeviceMgr::AddPlayerFeedbackDevice(
+        CAkFeedbackDeviceMgr *this,
+        unsigned __int8 in_iPlayerID,
+        unsigned int in_iDeviceCompanyID,
+        unsigned int in_iDevicePluginID,
+        void *in_pDevice)
 {
-  unsigned int v5; // er13
-  unsigned int v6; // edi
   __int64 v7; // r12
-  CAkFeedbackDeviceMgr *v8; // rsi
-  signed __int64 v9; // r15
-  _DWORD *v10; // rax
-  int v11; // ebx
-  signed __int64 v12; // rcx
-  IAkMotionMixBus **out_pMixNode; // r14
+  CAkKeyArray<unsigned long,CAkFeedbackDeviceMgr::DeviceBus,1> *v9; // r15
+  MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus> *m_pItems; // rax
+  unsigned int v11; // ebx
+  __int64 v12; // rcx
+  AK::IAkPlugin **out_pMixNode; // r14
   MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus> *v14; // rax
-  _DWORD *v16; // rdi
-  signed __int64 v17; // rax
+  MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus> *v16; // rdi
+  __int64 v17; // rax
   MapStruct<unsigned long,CAkSplitterBus *> *v18; // rdi
   AKRESULT v19; // ebp
   unsigned int v20; // eax
   unsigned __int8 v21; // cl
-  unsigned int *v22; // rdx
-  unsigned int in_iDeviceCompanyIDa; // [rsp+70h] [rbp+18h]
+  unsigned int *p_m_uLength; // rdx
 
-  in_iDeviceCompanyIDa = in_iDeviceCompanyID;
-  v5 = in_iDevicePluginID;
-  v6 = in_iDeviceCompanyID;
-  v7 = (unsigned __int8)in_iPlayerID;
-  v8 = this;
+  v7 = in_iPlayerID;
   CAkLEngine::EnableFeedbackPipeline();
-  v9 = (signed __int64)v8 + 16 * (v7 + 1);
-  v10 = *(_DWORD **)v9;
-  v11 = v6 | (v5 << 16);
-  v12 = *(_QWORD *)v9 + 16i64 * *(unsigned int *)(v9 + 8);
-  if ( *(_QWORD *)v9 != v12 )
+  v9 = &this->m_aPlayers[v7];
+  m_pItems = v9->m_pItems;
+  v11 = in_iDeviceCompanyID | (in_iDevicePluginID << 16);
+  v12 = (__int64)&v9->m_pItems[v9->m_uLength];
+  if ( v9->m_pItems != (MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus> *)v12 )
   {
     do
     {
-      if ( *v10 == v11 )
+      if ( m_pItems->key == v11 )
         break;
-      v10 += 4;
+      ++m_pItems;
     }
-    while ( v10 != (_DWORD *)v12 );
+    while ( m_pItems != (MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus> *)v12 );
   }
-  if ( v10 == (_DWORD *)v12 )
+  if ( m_pItems == (MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus> *)v12 )
   {
     out_pMixNode = 0i64;
   }
   else
   {
-    out_pMixNode = (IAkMotionMixBus **)(v10 + 2);
-    if ( v10 != (_DWORD *)-8i64 )
+    out_pMixNode = &m_pItems->item.m_pFinalBus;
+    if ( m_pItems != (MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus> *)-8i64 )
       goto LABEL_11;
   }
-  v14 = AkArray<MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus>,MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus> const &,ArrayPoolDefault,1,AkArrayAllocatorDefault>::AddLast((AkArray<MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus>,MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus> const &,ArrayPoolDefault,1,AkArrayAllocatorDefault> *)&(&v8->m_aBusses.m_pItems)[2 * (v7 + 1)]);
+  v14 = AkArray<MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus>,MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus> const &,ArrayPoolDefault,1,AkArrayAllocatorDefault>::AddLast(&this->m_aPlayers[v7]);
   if ( v14 )
   {
     v14->key = v11;
@@ -182,117 +171,124 @@ signed __int64 __fastcall CAkFeedbackDeviceMgr::AddPlayerFeedbackDevice(CAkFeedb
 LABEL_11:
   if ( *out_pMixNode )
     return 1i64;
-  if ( (unsigned int)CAkEffectsMgr::AllocFeedbackBus(v6, v5, &g_PDSettings, v7, out_pMixNode, in_pDevice) != 1 )
+  if ( (unsigned int)CAkEffectsMgr::AllocFeedbackBus(
+                       in_iDeviceCompanyID,
+                       in_iDevicePluginID,
+                       &g_PDSettings,
+                       v7,
+                       out_pMixNode,
+                       in_pDevice) != 1 )
   {
-    v16 = *(_DWORD **)v9;
-    v17 = *(_QWORD *)v9 + 16i64 * *(unsigned int *)(v9 + 8);
-    if ( *(_QWORD *)v9 != v17 )
+    v16 = v9->m_pItems;
+    v17 = (__int64)&v9->m_pItems[v9->m_uLength];
+    if ( v9->m_pItems != (MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus> *)v17 )
     {
       do
       {
-        if ( *v16 == v11 )
+        if ( v16->key == v11 )
           break;
-        v16 += 4;
+        ++v16;
       }
-      while ( v16 != (_DWORD *)v17 );
-      if ( v16 != (_DWORD *)v17 )
+      while ( v16 != (MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus> *)v17 );
+      if ( v16 != (MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus> *)v17 )
       {
         if ( (unsigned __int64)v16 < v17 - 16 )
           qmemcpy(
             v16,
-            v16 + 4,
+            &v16[1],
             8
           * (((((unsigned __int64)(v17 - 16 - (_QWORD)v16 - 1) >> 3) & 0xFFFFFFFFFFFFFFFEui64) + 2) & 0x1FFFFFFFFFFFFFFEi64));
-        --*(_DWORD *)(v9 + 8);
+        --v9->m_uLength;
       }
     }
     return 2i64;
   }
-  v18 = v8->m_aBusses.m_pItems;
-  v19 = 1;
-  if ( v18 != &v18[v8->m_aBusses.m_uLength] )
+  v18 = this->m_aBusses.m_pItems;
+  v19 = AK_Success;
+  if ( v18 != &v18[this->m_aBusses.m_uLength] )
   {
     while ( 1 )
     {
-      v20 = ((__int64 (*)(void))(*out_pMixNode)->vfptr[2].GetPluginInfo)();
+      v20 = ((__int64 (__fastcall *)(AK::IAkPlugin *))(*out_pMixNode)->vfptr[2].GetPluginInfo)(*out_pMixNode);
       v19 = CAkSplitterBus::AddBus(v18->item, v7, v11, v20);
-      if ( v19 != 1 )
+      if ( v19 != AK_Success )
         break;
-      ++v18;
-      if ( v18 == &v8->m_aBusses.m_pItems[v8->m_aBusses.m_uLength] )
+      if ( ++v18 == &this->m_aBusses.m_pItems[this->m_aBusses.m_uLength] )
         goto LABEL_27;
     }
-    CAkFeedbackDeviceMgr::RemovePlayerFeedbackDevice(v8, v7, in_iDeviceCompanyIDa, v5);
+    CAkFeedbackDeviceMgr::RemovePlayerFeedbackDevice(this, v7, in_iDeviceCompanyID, in_iDevicePluginID);
   }
 LABEL_27:
-  *(_WORD *)&v8->m_uPlayerMask = 0;
+  *(_WORD *)&this->m_uPlayerMask = 0;
   v21 = 0;
-  v22 = &v8->m_aPlayers[0].m_uLength;
+  p_m_uLength = &this->m_aPlayers[0].m_uLength;
   do
   {
-    if ( *v22 )
+    if ( *p_m_uLength )
     {
-      v8->m_uLastPlayerIndex = v21 + 1;
-      v8->m_uPlayerMask |= 1 << v21;
+      this->m_uLastPlayerIndex = v21 + 1;
+      this->m_uPlayerMask |= 1 << v21;
     }
     ++v21;
-    v22 += 4;
+    p_m_uLength += 4;
   }
   while ( v21 < 4u );
   CAkURenderer::InvalidateAllMotionPBIs();
   return (unsigned int)v19;
-}
+}  p_m_uLength += 4;
+  }
+  while ( v21 < 4u );
+  CAkURenderer::InvalidateAllMotionPBIs();
+  return (unsigned 
 
 // File Line: 150
 // RVA: 0xA64BE0
-void __fastcall CAkFeedbackDeviceMgr::RemovePlayerFeedbackDevice(CAkFeedbackDeviceMgr *this, char in_iPlayerID, unsigned int in_iDeviceCompanyID, unsigned int in_iDevicePluginID)
+void __fastcall CAkFeedbackDeviceMgr::RemovePlayerFeedbackDevice(
+        CAkFeedbackDeviceMgr *this,
+        unsigned __int8 in_iPlayerID,
+        unsigned int in_iDeviceCompanyID,
+        unsigned int in_iDevicePluginID)
 {
-  CAkFeedbackDeviceMgr *v4; // rbx
-  char v5; // bp
   unsigned int v6; // esi
-  MapStruct<unsigned long,CAkSplitterBus *> **v7; // r14
-  MapStruct<unsigned long,CAkSplitterBus *> *v8; // rax
-  signed __int64 v9; // rcx
-  CAkSplitterBus **v10; // r15
+  CAkKeyArray<unsigned long,CAkFeedbackDeviceMgr::DeviceBus,1> *v7; // r14
+  MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus> *m_pItems; // rax
+  __int64 v9; // rcx
+  CAkFeedbackDeviceMgr::DeviceBus *p_item; // r15
   MapStruct<unsigned long,CAkSplitterBus *> *i; // rdi
-  MapStruct<unsigned long,CAkSplitterBus *> *v12; // rdi
-  signed __int64 v13; // rax
+  MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus> *v12; // rdi
+  __int64 v13; // rax
   unsigned __int8 v14; // cl
-  unsigned int *v15; // rdx
+  unsigned int *p_m_uLength; // rdx
 
-  v4 = this;
-  v5 = in_iPlayerID;
   v6 = in_iDeviceCompanyID | (in_iDevicePluginID << 16);
-  v7 = &(&this->m_aBusses.m_pItems)[2 * ((unsigned __int8)in_iPlayerID + 1i64)];
-  v8 = *v7;
-  v9 = (signed __int64)&(*v7)[*((unsigned int *)v7 + 2)];
-  if ( *v7 != (MapStruct<unsigned long,CAkSplitterBus *> *)v9 )
+  v7 = &this->m_aPlayers[in_iPlayerID];
+  m_pItems = v7->m_pItems;
+  v9 = (__int64)&v7->m_pItems[v7->m_uLength];
+  if ( v7->m_pItems != (MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus> *)v9 )
   {
     do
     {
-      if ( v8->key == v6 )
+      if ( m_pItems->key == v6 )
         break;
-      ++v8;
+      ++m_pItems;
     }
-    while ( v8 != (MapStruct<unsigned long,CAkSplitterBus *> *)v9 );
-    if ( v8 != (MapStruct<unsigned long,CAkSplitterBus *> *)v9 )
+    while ( m_pItems != (MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus> *)v9 );
+    if ( m_pItems != (MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus> *)v9 )
     {
-      v10 = &v8->item;
-      if ( v8 != (MapStruct<unsigned long,CAkSplitterBus *> *)-8i64 )
+      p_item = &m_pItems->item;
+      if ( m_pItems != (MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus> *)-8i64 )
       {
-        for ( i = v4->m_aBusses.m_pItems; i != &v4->m_aBusses.m_pItems[v4->m_aBusses.m_uLength]; ++i )
-          CAkSplitterBus::RemoveBus(i->item, v5, v6);
-        if ( *v10 )
+        for ( i = this->m_aBusses.m_pItems; i != &this->m_aBusses.m_pItems[this->m_aBusses.m_uLength]; ++i )
+          CAkSplitterBus::RemoveBus(i->item, in_iPlayerID, v6);
+        if ( p_item->m_pFinalBus )
         {
-          (*(void (**)(void))&(*v10)->m_aBusses.m_pItems[3].m_DeviceID)();
-          ((void (__fastcall *)(CAkSplitterBus *, AkFXMemAlloc *))(*v10)->m_aBusses.m_pItems->m_pFeedbackMixBus)(
-            *v10,
-            &AkFXMemAlloc::m_instanceLower);
-          *v10 = 0i64;
+          ((void (__fastcall *)(IAkMotionMixBus *))p_item->m_pFinalBus->vfptr[1].RelocateMedia)(p_item->m_pFinalBus);
+          p_item->m_pFinalBus->vfptr->Term(p_item->m_pFinalBus, &AkFXMemAlloc::m_instanceLower);
+          p_item->m_pFinalBus = 0i64;
         }
-        v12 = *v7;
-        v13 = (signed __int64)&(*v7)[*((unsigned int *)v7 + 2)];
-        if ( *v7 != (MapStruct<unsigned long,CAkSplitterBus *> *)v13 )
+        v12 = v7->m_pItems;
+        v13 = (__int64)&v7->m_pItems[v7->m_uLength];
+        if ( v7->m_pItems != (MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus> *)v13 )
         {
           do
           {
@@ -300,8 +296,8 @@ void __fastcall CAkFeedbackDeviceMgr::RemovePlayerFeedbackDevice(CAkFeedbackDevi
               break;
             ++v12;
           }
-          while ( v12 != (MapStruct<unsigned long,CAkSplitterBus *> *)v13 );
-          if ( v12 != (MapStruct<unsigned long,CAkSplitterBus *> *)v13 )
+          while ( v12 != (MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus> *)v13 );
+          if ( v12 != (MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus> *)v13 )
           {
             if ( (unsigned __int64)v12 < v13 - 16 )
               qmemcpy(
@@ -309,21 +305,21 @@ void __fastcall CAkFeedbackDeviceMgr::RemovePlayerFeedbackDevice(CAkFeedbackDevi
                 &v12[1],
                 8
               * (((((unsigned __int64)(v13 - 16 - (_QWORD)v12 - 1) >> 3) & 0xFFFFFFFFFFFFFFFEui64) + 2) & 0x1FFFFFFFFFFFFFFEi64));
-            --*((_DWORD *)v7 + 2);
+            --v7->m_uLength;
           }
         }
-        *(_WORD *)&v4->m_uPlayerMask = 0;
+        *(_WORD *)&this->m_uPlayerMask = 0;
         v14 = 0;
-        v15 = &v4->m_aPlayers[0].m_uLength;
+        p_m_uLength = &this->m_aPlayers[0].m_uLength;
         do
         {
-          if ( *v15 )
+          if ( *p_m_uLength )
           {
-            v4->m_uLastPlayerIndex = v14 + 1;
-            v4->m_uPlayerMask |= 1 << v14;
+            this->m_uLastPlayerIndex = v14 + 1;
+            this->m_uPlayerMask |= 1 << v14;
           }
           ++v14;
-          v15 += 4;
+          p_m_uLength += 4;
         }
         while ( v14 < 4u );
         CAkURenderer::InvalidateAllMotionPBIs();
@@ -336,17 +332,13 @@ void __fastcall CAkFeedbackDeviceMgr::RemovePlayerFeedbackDevice(CAkFeedbackDevi
 // RVA: 0xA64AB0
 bool __fastcall CAkFeedbackDeviceMgr::PrepareAudioProcessing(CAkFeedbackDeviceMgr *this, AkRunningVPL *io_runningVPL)
 {
-  AkRunningVPL *v2; // rbx
-  CAkFeedbackDeviceMgr *v3; // rbp
   CAkVPLSrcNode *v4; // rdi
-  CAkVPLNode *v5; // rsi
-  unsigned __int16 v6; // bp
-  void *v7; // r14
+  CAkVPLNode *m_pInput; // rsi
+  unsigned __int16 uMaxFrames; // bp
+  void *pData; // r14
   AkPipelineBufferBase *v8; // rax
   AkFeedbackVPLData *v9; // rdi
 
-  v2 = io_runningVPL;
-  v3 = this;
   if ( io_runningVPL->bFeedbackVPL || !io_runningVPL->state.uValidFrames )
   {
     LOBYTE(v8) = 0;
@@ -356,24 +348,27 @@ bool __fastcall CAkFeedbackDeviceMgr::PrepareAudioProcessing(CAkFeedbackDeviceMg
     v4 = io_runningVPL->pCbx->m_pSources[0];
     if ( v4 )
       v4 = (CAkVPLSrcNode *)v4->m_pCtx;
-    if ( !(BYTE6(v4[9].m_pInput) & 0x40) )
+    if ( (BYTE6(v4[9].m_pInput) & 0x40) == 0 )
       CAkPBI::ValidateFeedbackParameters((CAkPBI *)v4);
-    v5 = v4[12].m_pInput;
-    if ( v5 && v3->m_uLastPlayerIndex && (unsigned int)CAkFeedbackDeviceMgr::GetActivePlayers(v3, (CAkPBI *)v4) )
+    m_pInput = v4[12].m_pInput;
+    if ( m_pInput
+      && this->m_uLastPlayerIndex
+      && (unsigned int)CAkFeedbackDeviceMgr::GetActivePlayers(this, (CAkPBI *)v4) )
     {
-      v6 = v2->state.uMaxFrames;
-      v7 = v2->state.pData;
+      uMaxFrames = io_runningVPL->state.uMaxFrames;
+      pData = io_runningVPL->state.pData;
       v8 = (AkPipelineBufferBase *)AK::MemoryMgr::Malloc(g_LEngineDefaultPoolId, 0x18ui64);
       v9 = (AkFeedbackVPLData *)v8;
       if ( v8 )
       {
         v8->pData = 0i64;
-        if ( *(float *)&v5[1].vfptr > 0.1 && AkPipelineBufferBase::GetCachedBuffer(v8, v6, WORD2(v5[3].vfptr)) == 1 )
+        if ( *(float *)&m_pInput[1].vfptr > 0.1
+          && AkPipelineBufferBase::GetCachedBuffer(v8, uMaxFrames, WORD2(m_pInput[3].vfptr)) == AK_Success )
         {
-          memmove(v9->LPFBuffer.pData, v7, 4 * v6 * (unsigned __int64)(HIWORD(v5[3].vfptr) & 0xF));
-          v9->LPFBuffer.uValidFrames = v2->state.uValidFrames;
+          memmove(v9->LPFBuffer.pData, pData, 4 * uMaxFrames * (unsigned __int64)(HIWORD(m_pInput[3].vfptr) & 0xF));
+          v9->LPFBuffer.uValidFrames = io_runningVPL->state.uValidFrames;
         }
-        v2->pFeedbackData = v9;
+        io_runningVPL->pFeedbackData = v9;
         LOBYTE(v8) = 1;
       }
     }
@@ -389,15 +384,13 @@ bool __fastcall CAkFeedbackDeviceMgr::PrepareAudioProcessing(CAkFeedbackDeviceMg
 // RVA: 0xA644A0
 void __fastcall CAkFeedbackDeviceMgr::CleanupAudioVPL(AkRunningVPL *io_runningVPL)
 {
-  AkRunningVPL *v1; // rbx
-  AkFeedbackVPLData *v2; // rcx
+  AkFeedbackVPLData *pFeedbackData; // rcx
 
-  v1 = io_runningVPL;
-  v2 = io_runningVPL->pFeedbackData;
-  if ( v2->LPFBuffer.pData )
-    AkPipelineBufferBase::ReleaseCachedBuffer(&v2->LPFBuffer);
-  AK::MemoryMgr::Free(g_LEngineDefaultPoolId, v1->pFeedbackData);
-  v1->pFeedbackData = 0i64;
+  pFeedbackData = io_runningVPL->pFeedbackData;
+  if ( pFeedbackData->LPFBuffer.pData )
+    AkPipelineBufferBase::ReleaseCachedBuffer(&pFeedbackData->LPFBuffer);
+  AK::MemoryMgr::Free(g_LEngineDefaultPoolId, io_runningVPL->pFeedbackData);
+  io_runningVPL->pFeedbackData = 0i64;
 }
 
 // File Line: 261
@@ -405,38 +398,36 @@ void __fastcall CAkFeedbackDeviceMgr::CleanupAudioVPL(AkRunningVPL *io_runningVP
 void __fastcall CAkFeedbackDeviceMgr::ApplyMotionLPF(AkRunningVPL *io_runningVPL)
 {
   char v1; // di
-  AkRunningVPL *v2; // rsi
   CAkVPLSrcNode *v3; // rbx
-  CAkPBI *v4; // rbx
-  AkFeedbackParams *v5; // rbx
-  float v6; // xmm0_4
-  CAkSrcLpFilter *v7; // rax
+  CAkPBI *m_pCtx; // rbx
+  AkFeedbackParams *m_pFeedbackInfo; // rbx
+  float m_LPF; // xmm0_4
+  CAkSrcLpFilter *m_pLPFilter; // rax
   float v8; // xmm1_4
 
   v1 = 0;
-  v2 = io_runningVPL;
   v3 = io_runningVPL->pCbx->m_pSources[0];
   if ( v3 )
-    v4 = v3->m_pCtx;
+    m_pCtx = v3->m_pCtx;
   else
-    v4 = 0i64;
-  if ( !(*((_BYTE *)v4 + 374) & 0x40) )
-    CAkPBI::ValidateFeedbackParameters(v4);
-  v5 = v4->m_pFeedbackInfo;
-  if ( v5->m_LPF > 0.1
-    && v2->pFeedbackData->LPFBuffer.pData
-    && (v5->m_pLPFilter || AkFeedbackParams::CreateLowPassFilter(v5)) )
+    m_pCtx = 0i64;
+  if ( (*((_BYTE *)m_pCtx + 374) & 0x40) == 0 )
+    CAkPBI::ValidateFeedbackParameters(m_pCtx);
+  m_pFeedbackInfo = m_pCtx->m_pFeedbackInfo;
+  if ( m_pFeedbackInfo->m_LPF > 0.1
+    && io_runningVPL->pFeedbackData->LPFBuffer.pData
+    && (m_pFeedbackInfo->m_pLPFilter || AkFeedbackParams::CreateLowPassFilter(m_pFeedbackInfo)) )
   {
-    v6 = v5->m_LPF;
-    v7 = v5->m_pLPFilter;
+    m_LPF = m_pFeedbackInfo->m_LPF;
+    m_pLPFilter = m_pFeedbackInfo->m_pLPFilter;
     v8 = 0.0;
-    if ( v6 < 0.0 || (v8 = FLOAT_100_0, v6 > 100.0) )
-      v6 = v8;
-    if ( v6 != v7->m_InternalLPFState.fTargetLPFPar )
+    if ( m_LPF < 0.0 || (v8 = FLOAT_100_0, m_LPF > 100.0) )
+      m_LPF = v8;
+    if ( m_LPF != m_pLPFilter->m_InternalLPFState.fTargetLPFPar )
       v1 = 1;
-    v7->m_InternalLPFState.bTargetDirty |= v1;
-    v7->m_InternalLPFState.fTargetLPFPar = v6;
-    CAkSrcLpFilter::Execute(v5->m_pLPFilter, (AkAudioBuffer *)&v2->pFeedbackData->LPFBuffer.pData);
+    m_pLPFilter->m_InternalLPFState.bTargetDirty |= v1;
+    m_pLPFilter->m_InternalLPFState.fTargetLPFPar = m_LPF;
+    CAkSrcLpFilter::Execute(m_pFeedbackInfo->m_pLPFilter, &io_runningVPL->pFeedbackData->LPFBuffer);
   }
 }
 
@@ -444,36 +435,32 @@ void __fastcall CAkFeedbackDeviceMgr::ApplyMotionLPF(AkRunningVPL *io_runningVPL
 // RVA: 0xA64560
 void __fastcall CAkFeedbackDeviceMgr::ConsumeVPL(CAkFeedbackDeviceMgr *this, AkRunningVPL *io_runningVPL)
 {
-  AkRunningVPL *v2; // rdi
-  CAkFeedbackDeviceMgr *v3; // rsi
   CAkVPLSrcNode *v4; // rbx
-  CAkVPLNode *v5; // rax
-  CAkSplitterBus *v6; // rbp
-  unsigned int v7; // eax
+  CAkVPLNode *m_pInput; // rax
+  CAkSplitterBus *Splitter; // rbp
+  unsigned int ActivePlayers; // eax
 
-  v2 = io_runningVPL;
-  v3 = this;
   v4 = io_runningVPL->pCbx->m_pSources[0];
   if ( v4 )
     v4 = (CAkVPLSrcNode *)v4->m_pCtx;
-  if ( !(BYTE6(v4[9].m_pInput) & 0x40) )
+  if ( (BYTE6(v4[9].m_pInput) & 0x40) == 0 )
     CAkPBI::ValidateFeedbackParameters((CAkPBI *)v4);
-  v5 = v4[12].m_pInput;
-  if ( v5 )
+  m_pInput = v4[12].m_pInput;
+  if ( m_pInput )
   {
-    if ( v3->m_uLastPlayerIndex )
+    if ( this->m_uLastPlayerIndex )
     {
-      v6 = CAkFeedbackDeviceMgr::GetSplitter(v3, (unsigned int)v5->vfptr->ReleaseBuffer);
-      if ( v6 )
+      Splitter = CAkFeedbackDeviceMgr::GetSplitter(this, (unsigned int)m_pInput->vfptr->ReleaseBuffer);
+      if ( Splitter )
       {
-        v7 = CAkFeedbackDeviceMgr::GetActivePlayers(v3, (CAkPBI *)v4);
-        if ( v2->bFeedbackVPL )
+        ActivePlayers = CAkFeedbackDeviceMgr::GetActivePlayers(this, (CAkPBI *)v4);
+        if ( io_runningVPL->bFeedbackVPL )
         {
-          CAkSplitterBus::MixFeedbackBuffer(v6, v2, v7);
+          CAkSplitterBus::MixFeedbackBuffer(Splitter, io_runningVPL, ActivePlayers);
         }
-        else if ( v2->pFeedbackData )
+        else if ( io_runningVPL->pFeedbackData )
         {
-          CAkSplitterBus::MixAudioBuffer(v6, v2, v7);
+          CAkSplitterBus::MixAudioBuffer(Splitter, io_runningVPL, ActivePlayers);
         }
       }
     }
@@ -484,41 +471,37 @@ void __fastcall CAkFeedbackDeviceMgr::ConsumeVPL(CAkFeedbackDeviceMgr *this, AkR
 // RVA: 0xA64740
 CAkSplitterBus *__fastcall CAkFeedbackDeviceMgr::GetSplitter(CAkFeedbackDeviceMgr *this, unsigned int in_idBus)
 {
-  MapStruct<unsigned long,CAkSplitterBus *> *v2; // rax
-  unsigned int v3; // ebx
-  CAkFeedbackDeviceMgr *v4; // r14
+  MapStruct<unsigned long,CAkSplitterBus *> *m_pItems; // rax
   MapStruct<unsigned long,CAkSplitterBus *> *v5; // r8
-  CAkSplitterBus **v6; // rax
+  CAkSplitterBus **p_item; // rax
   CAkSplitterBus *v7; // rbp
-  unsigned __int8 v8; // si
-  signed __int64 v9; // rdi
-  __int64 i; // rbx
+  unsigned __int8 i; // si
+  CAkKeyArray<unsigned long,CAkFeedbackDeviceMgr::DeviceBus,1> *v9; // rdi
+  MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus> *j; // rbx
   unsigned int v11; // eax
   CAkSplitterBus *v13; // rax
   int v14; // ebx
 
-  v2 = this->m_aBusses.m_pItems;
-  v3 = in_idBus;
-  v4 = this;
+  m_pItems = this->m_aBusses.m_pItems;
   v5 = &this->m_aBusses.m_pItems[this->m_aBusses.m_uLength];
   if ( this->m_aBusses.m_pItems != v5 )
   {
     do
     {
-      if ( v2->key == in_idBus )
+      if ( m_pItems->key == in_idBus )
         break;
-      ++v2;
+      ++m_pItems;
     }
-    while ( v2 != v5 );
+    while ( m_pItems != v5 );
   }
-  if ( v2 == v5 || (v6 = &v2->item) == 0i64 )
+  if ( m_pItems == v5 || (p_item = &m_pItems->item) == 0i64 )
   {
     v13 = (CAkSplitterBus *)AK::MemoryMgr::Malloc(g_LEngineDefaultPoolId, 0x18ui64);
     v7 = v13;
     if ( v13 )
     {
       CAkSplitterBus::CAkSplitterBus(v13);
-      if ( CAkKeyArray<unsigned long,AkStateGroupInfo *,4>::Set(&v4->m_aBusses, v3, v7) )
+      if ( CAkKeyArray<unsigned long,AkStateGroupInfo *,4>::Set(&this->m_aBusses, in_idBus, v7) )
         goto LABEL_7;
       v14 = g_LEngineDefaultPoolId;
       CAkSplitterBus::~CAkSplitterBus(v7);
@@ -526,22 +509,16 @@ CAkSplitterBus *__fastcall CAkFeedbackDeviceMgr::GetSplitter(CAkFeedbackDeviceMg
     }
     return 0i64;
   }
-  v7 = *v6;
+  v7 = *p_item;
 LABEL_7:
-  v8 = 0;
-  if ( v4->m_uLastPlayerIndex )
+  for ( i = 0; i < (unsigned int)this->m_uLastPlayerIndex; ++i )
   {
-    do
+    v9 = &this->m_aPlayers[i];
+    for ( j = v9->m_pItems; j != &v9->m_pItems[v9->m_uLength]; ++j )
     {
-      v9 = (signed __int64)v4 + 16 * (v8 + 1i64);
-      for ( i = *(_QWORD *)v9; i != *(_QWORD *)v9 + 16i64 * *(unsigned int *)(v9 + 8); i += 16i64 )
-      {
-        v11 = (*(__int64 (**)(void))(**(_QWORD **)(i + 8) + 120i64))();
-        CAkSplitterBus::AddBus(v7, v8, *(_DWORD *)i, v11);
-      }
-      ++v8;
+      v11 = ((__int64 (__fastcall *)(IAkMotionMixBus *))j->item.m_pFinalBus->vfptr[2].GetPluginInfo)(j->item.m_pFinalBus);
+      CAkSplitterBus::AddBus(v7, i, j->key, v11);
     }
-    while ( v8 < v4->m_uLastPlayerIndex );
   }
   return v7;
 }
@@ -551,61 +528,51 @@ LABEL_7:
 void __fastcall CAkFeedbackDeviceMgr::RenderData(CAkFeedbackDeviceMgr *this)
 {
   unsigned __int8 v1; // r12
-  unsigned int v2; // er13
-  CAkFeedbackDeviceMgr *v3; // rsi
-  unsigned int v4; // er15
-  signed __int64 v5; // r14
-  signed __int64 v6; // rbp
-  signed __int64 v7; // rdi
-  unsigned int i; // ebx
-  AkAudioBufferBus *out_pAudioBuffer; // [rsp+70h] [rbp+8h]
-  AkAudioBufferBus *out_pFeedbackBuffer; // [rsp+78h] [rbp+10h]
+  unsigned int i; // r13d
+  unsigned int v4; // r15d
+  CAkKeyArray<unsigned long,CAkFeedbackDeviceMgr::DeviceBus,1> *v5; // r14
+  __int64 v6; // rdi
+  unsigned int j; // ebx
+  AkAudioBufferBus *out_pAudioBuffer; // [rsp+70h] [rbp+8h] BYREF
+  AkAudioBufferBus *out_pFeedbackBuffer; // [rsp+78h] [rbp+10h] BYREF
 
   v1 = 0;
-  v2 = 0;
-  v3 = this;
-  if ( this->m_uLastPlayerIndex )
+  for ( i = 0; v1 < (unsigned int)this->m_uLastPlayerIndex; ++v1 )
   {
-    do
+    v4 = 0;
+    v5 = &this->m_aPlayers[v1];
+    if ( v5->m_uLength )
     {
-      v4 = 0;
-      v5 = (signed __int64)v3 + 16 * (v1 + 1i64);
-      if ( *(_DWORD *)(v5 + 8) > 0u )
+      do
       {
-        do
+        v6 = (__int64)&v5->m_pItems[v4];
+        if ( *(_QWORD *)(v6 + 8) )
         {
-          v6 = 16i64 * v4;
-          v7 = v6 + *(_QWORD *)v5;
-          if ( *(_QWORD *)(v7 + 8) )
+          for ( j = 0; j < this->m_aBusses.m_uLength; ++j )
           {
-            for ( i = 0; i < v3->m_aBusses.m_uLength; ++i )
-            {
-              CAkSplitterBus::GetBuffer(
-                v3->m_aBusses.m_pItems[i].item,
-                v1,
-                *(_DWORD *)(*(_QWORD *)v5 + v6),
-                &out_pAudioBuffer,
-                &out_pFeedbackBuffer);
-              if ( out_pAudioBuffer && out_pAudioBuffer->uValidFrames > 0u )
-                (*(void (**)(void))(**(_QWORD **)(v7 + 8) + 56i64))();
-              if ( out_pFeedbackBuffer && out_pFeedbackBuffer->uValidFrames > 0u )
-                (*(void (**)(void))(**(_QWORD **)(v7 + 8) + 64i64))();
-            }
-            (*(void (**)(void))(**(_QWORD **)(v7 + 8) + 72i64))();
+            CAkSplitterBus::GetBuffer(
+              this->m_aBusses.m_pItems[j].item,
+              v1,
+              v5->m_pItems[v4].key,
+              &out_pAudioBuffer,
+              &out_pFeedbackBuffer);
+            if ( out_pAudioBuffer && out_pAudioBuffer->uValidFrames )
+              (*(void (__fastcall **)(_QWORD))(**(_QWORD **)(v6 + 8) + 56i64))(*(_QWORD *)(v6 + 8));
+            if ( out_pFeedbackBuffer && out_pFeedbackBuffer->uValidFrames )
+              (*(void (__fastcall **)(_QWORD))(**(_QWORD **)(v6 + 8) + 64i64))(*(_QWORD *)(v6 + 8));
           }
-          ++v4;
+          (*(void (__fastcall **)(_QWORD))(**(_QWORD **)(v6 + 8) + 72i64))(*(_QWORD *)(v6 + 8));
         }
-        while ( v4 < *(_DWORD *)(v5 + 8) );
+        ++v4;
       }
-      ++v1;
+      while ( v4 < v5->m_uLength );
     }
-    while ( v1 < v3->m_uLastPlayerIndex );
   }
-  if ( v3->m_aBusses.m_uLength > 0 )
+  if ( this->m_aBusses.m_uLength )
   {
     do
-      CAkSplitterBus::ReleaseBuffers(v3->m_aBusses.m_pItems[v2++].item);
-    while ( v2 < v3->m_aBusses.m_uLength );
+      CAkSplitterBus::ReleaseBuffers(this->m_aBusses.m_pItems[i++].item);
+    while ( i < this->m_aBusses.m_uLength );
   }
 }
 
@@ -613,46 +580,38 @@ void __fastcall CAkFeedbackDeviceMgr::RenderData(CAkFeedbackDeviceMgr *this)
 // RVA: 0xA64930
 void __fastcall CAkFeedbackDeviceMgr::HandleStarvation(CAkFeedbackDeviceMgr *this)
 {
-  __int64 v1; // rdx
-  unsigned int v2; // esi
-  CAkFeedbackDeviceMgr *v3; // rbp
-  unsigned int v4; // ebx
-  CAkSplitterBus *v5; // rcx
-  unsigned int v6; // edx
-  unsigned int v7; // ecx
+  char v1; // dl
+  int v2; // esi
+  unsigned int i; // ebx
+  IAkMotionMixBus *m_pFinalBus; // rcx
+  unsigned int m_uLastStarvationTime; // edx
+  unsigned int m_uBufferTick; // ecx
 
-  LOBYTE(v1) = 0;
+  v1 = 0;
   v2 = 0;
-  v3 = this;
   if ( this->m_uLastPlayerIndex )
   {
-    while ( !(_BYTE)v1 )
+    while ( !v1 )
     {
-      v4 = 0;
-      if ( *(&v3->m_aBusses.m_uLength + 4 * (v2 + 1i64)) )
+      for ( i = 0; i < this->m_aPlayers[v2].m_uLength; ++i )
       {
-        do
-        {
-          if ( (_BYTE)v1 )
-            break;
-          v5 = (&v3->m_aBusses.m_pItems)[2 * (v2 + 1i64)][v4].item;
-          if ( v5 )
-            v1 = ((unsigned __int8 (*)(void))v5->m_aBusses.m_pItems[4].m_pFeedbackMixBus)();
-          ++v4;
-        }
-        while ( v4 < *(&v3->m_aBusses.m_uLength + 4 * (v2 + 1i64)) );
+        if ( v1 )
+          break;
+        m_pFinalBus = this->m_aPlayers[v2].m_pItems[i].item.m_pFinalBus;
+        if ( m_pFinalBus )
+          v1 = ((__int64 (__fastcall *)(IAkMotionMixBus *))m_pFinalBus->vfptr[2].Term)(m_pFinalBus);
       }
-      if ( ++v2 >= (unsigned __int8)v3->m_uLastPlayerIndex )
+      if ( ++v2 >= (unsigned int)(unsigned __int8)this->m_uLastPlayerIndex )
       {
-        if ( !(_BYTE)v1 )
+        if ( !v1 )
           return;
         break;
       }
     }
-    v6 = v3->m_uLastStarvationTime;
-    v7 = g_pAudioMgr->m_uBufferTick;
-    if ( !v6 || v7 - v6 > 8 )
-      v3->m_uLastStarvationTime = v7;
+    m_uLastStarvationTime = this->m_uLastStarvationTime;
+    m_uBufferTick = g_pAudioMgr->m_uBufferTick;
+    if ( !m_uLastStarvationTime || m_uBufferTick - m_uLastStarvationTime > 8 )
+      this->m_uLastStarvationTime = m_uBufferTick;
   }
 }
 
@@ -660,32 +619,18 @@ void __fastcall CAkFeedbackDeviceMgr::HandleStarvation(CAkFeedbackDeviceMgr *thi
 // RVA: 0xA644E0
 void __fastcall CAkFeedbackDeviceMgr::CommandTick(CAkFeedbackDeviceMgr *this)
 {
-  unsigned int v1; // esi
-  CAkFeedbackDeviceMgr *v2; // rbp
-  unsigned int v3; // ebx
-  CAkSplitterBus *v4; // rcx
+  unsigned int i; // esi
+  unsigned int j; // ebx
+  IAkMotionMixBus *m_pFinalBus; // rcx
 
-  v1 = 0;
-  v2 = this;
-  if ( this->m_uLastPlayerIndex )
+  for ( i = 0; i < (unsigned __int8)this->m_uLastPlayerIndex; ++i )
   {
-    do
+    for ( j = 0; j < this->m_aPlayers[i].m_uLength; ++j )
     {
-      v3 = 0;
-      if ( *(&v2->m_aBusses.m_uLength + 4 * (v1 + 1i64)) )
-      {
-        do
-        {
-          v4 = (&v2->m_aBusses.m_pItems)[2 * (v1 + 1i64)][v3].item;
-          if ( v4 )
-            ((void (*)(void))v4->m_aBusses.m_pItems[3].m_pFeedbackMixBus)();
-          ++v3;
-        }
-        while ( v3 < *(&v2->m_aBusses.m_uLength + 4 * (v1 + 1i64)) );
-      }
-      ++v1;
+      m_pFinalBus = this->m_aPlayers[i].m_pItems[j].item.m_pFinalBus;
+      if ( m_pFinalBus )
+        m_pFinalBus->vfptr[1].SupportMediaRelocation(m_pFinalBus);
     }
-    while ( v1 < (unsigned __int8)v2->m_uLastPlayerIndex );
   }
 }
 
@@ -693,16 +638,14 @@ void __fastcall CAkFeedbackDeviceMgr::CommandTick(CAkFeedbackDeviceMgr *this)
 // RVA: 0xA64A80
 char __fastcall CAkFeedbackDeviceMgr::IsFeedbackEnabled(CAkFeedbackDeviceMgr *this)
 {
-  signed int v1; // er8
-  unsigned __int8 v2; // dl
+  unsigned __int8 v1; // dl
 
-  v1 = (unsigned __int8)this->m_uLastPlayerIndex;
-  v2 = 0;
-  if ( v1 <= 0 )
+  v1 = 0;
+  if ( !this->m_uLastPlayerIndex )
     return 0;
-  while ( !this->m_aPlayers[v2].m_uLength )
+  while ( !this->m_aPlayers[v1].m_uLength )
   {
-    if ( ++v2 >= v1 )
+    if ( ++v1 >= (int)(unsigned __int8)this->m_uLastPlayerIndex )
       return 0;
   }
   return 1;
@@ -710,40 +653,41 @@ char __fastcall CAkFeedbackDeviceMgr::IsFeedbackEnabled(CAkFeedbackDeviceMgr *th
 
 // File Line: 458
 // RVA: 0xA649D0
-char __fastcall CAkFeedbackDeviceMgr::IsDeviceActive(CAkFeedbackDeviceMgr *this, unsigned int in_iDeviceCompanyID, unsigned int in_iDevicePluginID)
+char __fastcall CAkFeedbackDeviceMgr::IsDeviceActive(
+        CAkFeedbackDeviceMgr *this,
+        unsigned int in_iDeviceCompanyID,
+        unsigned int in_iDevicePluginID)
 {
-  unsigned int v3; // edi
-  CAkFeedbackDeviceMgr *v4; // rsi
+  int v3; // edi
   unsigned int v5; // ebx
-  MapStruct<unsigned long,CAkSplitterBus *> *v6; // rax
-  signed __int64 v7; // rcx
+  MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus> *m_pItems; // rax
+  MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus> *v7; // rcx
 
   v3 = 0;
-  v4 = this;
   v5 = in_iDeviceCompanyID | (in_iDevicePluginID << 16);
   if ( !this->m_uLastPlayerIndex )
     return 0;
   while ( 1 )
   {
-    v6 = (&v4->m_aBusses.m_pItems)[2 * (v3 + 1i64)];
-    v7 = (signed __int64)&v6[*(&v4->m_aBusses.m_uLength + 4 * (v3 + 1i64))];
-    if ( v6 != (MapStruct<unsigned long,CAkSplitterBus *> *)v7 )
+    m_pItems = this->m_aPlayers[v3].m_pItems;
+    v7 = &m_pItems[this->m_aPlayers[v3].m_uLength];
+    if ( m_pItems != v7 )
     {
       do
       {
-        if ( v6->key == v5 )
+        if ( m_pItems->key == v5 )
           break;
-        ++v6;
+        ++m_pItems;
       }
-      while ( v6 != (MapStruct<unsigned long,CAkSplitterBus *> *)v7 );
-      if ( v6 != (MapStruct<unsigned long,CAkSplitterBus *> *)v7
-        && v6 != (MapStruct<unsigned long,CAkSplitterBus *> *)-8i64
-        && (*(unsigned __int8 (**)(void))&v6->item->m_aBusses.m_pItems[4].m_DeviceID)() )
+      while ( m_pItems != v7 );
+      if ( m_pItems != v7
+        && m_pItems != (MapStruct<unsigned long,CAkFeedbackDeviceMgr::DeviceBus> *)-8i64
+        && (unsigned __int8)m_pItems->item.m_pFinalBus->vfptr[2].Reset(m_pItems->item.m_pFinalBus) )
       {
         break;
       }
     }
-    if ( ++v3 >= (unsigned __int8)v4->m_uLastPlayerIndex )
+    if ( ++v3 >= (unsigned int)(unsigned __int8)this->m_uLastPlayerIndex )
       return 0;
   }
   return 1;
@@ -753,32 +697,18 @@ char __fastcall CAkFeedbackDeviceMgr::IsDeviceActive(CAkFeedbackDeviceMgr *this,
 // RVA: 0xA64F60
 void __fastcall CAkFeedbackDeviceMgr::Stop(CAkFeedbackDeviceMgr *this)
 {
-  unsigned int v1; // esi
-  CAkFeedbackDeviceMgr *v2; // rbp
-  unsigned int v3; // ebx
-  CAkSplitterBus *v4; // rcx
+  unsigned int i; // esi
+  unsigned int j; // ebx
+  IAkMotionMixBus *m_pFinalBus; // rcx
 
-  v1 = 0;
-  v2 = this;
-  if ( this->m_uLastPlayerIndex )
+  for ( i = 0; i < (unsigned __int8)this->m_uLastPlayerIndex; ++i )
   {
-    do
+    for ( j = 0; j < this->m_aPlayers[i].m_uLength; ++j )
     {
-      v3 = 0;
-      if ( *(&v2->m_aBusses.m_uLength + 4 * (v1 + 1i64)) )
-      {
-        do
-        {
-          v4 = (&v2->m_aBusses.m_pItems)[2 * (v1 + 1i64)][v3].item;
-          if ( v4 )
-            (*(void (**)(void))&v4->m_aBusses.m_pItems[3].m_DeviceID)();
-          ++v3;
-        }
-        while ( v3 < *(&v2->m_aBusses.m_uLength + 4 * (v1 + 1i64)) );
-      }
-      ++v1;
+      m_pFinalBus = this->m_aPlayers[i].m_pItems[j].item.m_pFinalBus;
+      if ( m_pFinalBus )
+        ((void (__fastcall *)(IAkMotionMixBus *))m_pFinalBus->vfptr[1].RelocateMedia)(m_pFinalBus);
     }
-    while ( v1 < (unsigned __int8)v2->m_uLastPlayerIndex );
   }
 }
 
@@ -786,30 +716,28 @@ void __fastcall CAkFeedbackDeviceMgr::Stop(CAkFeedbackDeviceMgr *this)
 // RVA: 0xA646E0
 __int64 __fastcall CAkFeedbackDeviceMgr::GetActivePlayers(CAkFeedbackDeviceMgr *this, CAkPBI *pPBI)
 {
-  CAkRegisteredObj *v2; // rax
-  signed int v3; // er10
-  unsigned int v4; // er9
+  CAkRegisteredObj *m_pGameObj; // rax
+  int m_uLastPlayerIndex; // r10d
+  unsigned int v4; // r9d
   unsigned __int8 v5; // dl
-  CAkFeedbackDeviceMgr *v6; // rbx
-  unsigned int v7; // er11
+  unsigned int v7; // r11d
   char v8; // cl
 
-  v2 = pPBI->m_pGameObj;
-  v3 = (unsigned __int8)this->m_uLastPlayerIndex;
+  m_pGameObj = pPBI->m_pGameObj;
+  m_uLastPlayerIndex = (unsigned __int8)this->m_uLastPlayerIndex;
   v4 = 0;
   v5 = 0;
-  v6 = this;
-  if ( v3 > 0 )
+  if ( this->m_uLastPlayerIndex )
   {
     v8 = 0;
     do
     {
-      v7 = CAkListener::m_uFeedbackMask & v2->m_PosKeep.m_uListenerMask;
-      if ( _bittest((const signed int *)&v7, (unsigned __int8)v6->m_aPlayerToListener[v5]) )
+      v7 = CAkListener::m_uFeedbackMask & m_pGameObj->m_PosKeep.m_uListenerMask;
+      if ( _bittest((const int *)&v7, (unsigned __int8)this->m_aPlayerToListener[v5]) )
         v4 |= 1 << v8;
       v8 = ++v5;
     }
-    while ( v5 < v3 );
+    while ( v5 < m_uLastPlayerIndex );
   }
   return v4;
 }
@@ -818,34 +746,20 @@ __int64 __fastcall CAkFeedbackDeviceMgr::GetActivePlayers(CAkFeedbackDeviceMgr *
 // RVA: 0xA64EC0
 void __fastcall CAkFeedbackDeviceMgr::StartOutputCapture(CAkFeedbackDeviceMgr *this, const wchar_t *in_CaptureFileName)
 {
-  unsigned __int8 v2; // si
-  const wchar_t *v3; // rbp
-  CAkFeedbackDeviceMgr *v4; // r14
-  unsigned int v5; // ebx
-  CAkSplitterBus *v6; // rcx
+  unsigned __int8 i; // si
+  unsigned int j; // ebx
+  IAkMotionMixBus *m_pFinalBus; // rcx
 
-  v2 = 0;
-  v3 = in_CaptureFileName;
-  v4 = this;
-  if ( this->m_uLastPlayerIndex )
+  for ( i = 0; i < (unsigned int)this->m_uLastPlayerIndex; ++i )
   {
-    do
+    for ( j = 0; j < this->m_aPlayers[i].m_uLength; ++j )
     {
-      v5 = 0;
-      if ( *(&v4->m_aBusses.m_uLength + 4 * (v2 + 1i64)) )
-      {
-        do
-        {
-          v6 = (&v4->m_aBusses.m_pItems)[2 * (v2 + 1i64)][v5].item;
-          if ( v6 )
-            (*(void (__fastcall **)(CAkSplitterBus *, const wchar_t *))&v6->m_aBusses.m_pItems[5].m_DeviceID)(v6, v3);
-          ++v5;
-        }
-        while ( v5 < *(&v4->m_aBusses.m_uLength + 4 * (v2 + 1i64)) );
-      }
-      ++v2;
+      m_pFinalBus = this->m_aPlayers[i].m_pItems[j].item.m_pFinalBus;
+      if ( m_pFinalBus )
+        ((void (__fastcall *)(IAkMotionMixBus *, const wchar_t *))m_pFinalBus->vfptr[2].RelocateMedia)(
+          m_pFinalBus,
+          in_CaptureFileName);
     }
-    while ( v2 < v4->m_uLastPlayerIndex );
   }
 }
 
@@ -853,32 +767,18 @@ void __fastcall CAkFeedbackDeviceMgr::StartOutputCapture(CAkFeedbackDeviceMgr *t
 // RVA: 0xA64FE0
 void __fastcall CAkFeedbackDeviceMgr::StopOutputCapture(CAkFeedbackDeviceMgr *this)
 {
-  unsigned __int8 v1; // si
-  CAkFeedbackDeviceMgr *v2; // rbp
-  unsigned int v3; // ebx
-  CAkSplitterBus *v4; // rcx
+  unsigned __int8 i; // si
+  unsigned int j; // ebx
+  IAkMotionMixBus *m_pFinalBus; // rcx
 
-  v1 = 0;
-  v2 = this;
-  if ( this->m_uLastPlayerIndex )
+  for ( i = 0; i < (unsigned int)this->m_uLastPlayerIndex; ++i )
   {
-    do
+    for ( j = 0; j < this->m_aPlayers[i].m_uLength; ++j )
     {
-      v3 = 0;
-      if ( *(&v2->m_aBusses.m_uLength + 4 * (v1 + 1i64)) )
-      {
-        do
-        {
-          v4 = (&v2->m_aBusses.m_pItems)[2 * (v1 + 1i64)][v3].item;
-          if ( v4 )
-            ((void (*)(void))v4->m_aBusses.m_pItems[6].m_pAudioMixBus)();
-          ++v3;
-        }
-        while ( v3 < *(&v2->m_aBusses.m_uLength + 4 * (v1 + 1i64)) );
-      }
-      ++v1;
+      m_pFinalBus = this->m_aPlayers[i].m_pItems[j].item.m_pFinalBus;
+      if ( m_pFinalBus )
+        ((void (__fastcall *)(IAkMotionMixBus *))m_pFinalBus->vfptr[3].__vecDelDtor)(m_pFinalBus);
     }
-    while ( v1 < v2->m_uLastPlayerIndex );
   }
 }
 

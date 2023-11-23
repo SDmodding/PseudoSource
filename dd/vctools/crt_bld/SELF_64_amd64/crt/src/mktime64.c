@@ -9,124 +9,97 @@ __int64 __fastcall mktime64(tm *tb)
 // RVA: 0x12BBA50
 __int64 __fastcall make__time64_t(tm *tb, int ultflag)
 {
-  int v2; // edi
-  tm *v3; // rbx
-  __int64 v4; // r10
-  int v5; // ecx
+  __int64 tm_year; // r10
+  int tm_mon; // ecx
   int v6; // edx
   int v7; // ecx
   __int64 v8; // r11
-  signed __int64 v9; // rcx
-  signed __int64 v10; // r8
-  int v11; // eax
-  int v12; // eax
-  __int64 ptime; // [rsp+30h] [rbp-40h]
-  int _Daylight_savings_bias; // [rsp+38h] [rbp-38h]
-  int _Timezone; // [rsp+3Ch] [rbp-34h]
-  tm ptm; // [rsp+40h] [rbp-30h]
+  int tm_isdst; // eax
+  int v10; // eax
+  __int64 ptime; // [rsp+30h] [rbp-40h] BYREF
+  int _Daylight_savings_bias; // [rsp+38h] [rbp-38h] BYREF
+  int _Timezone; // [rsp+3Ch] [rbp-34h] BYREF
+  tm ptm; // [rsp+40h] [rbp-30h] BYREF
 
   _Daylight_savings_bias = 0;
   _Timezone = 0;
-  v2 = ultflag;
-  v3 = tb;
   if ( tb )
   {
-    v4 = tb->tm_year;
-    ptime = tb->tm_year;
-    if ( (unsigned __int64)(v4 - 69) > 0x408 )
+    tm_year = tb->tm_year;
+    ptime = tm_year;
+    if ( (unsigned __int64)(tm_year - 69) > 0x408 )
       goto $err_mktime;
-    v5 = tb->tm_mon;
-    if ( (unsigned int)v5 > 0xB )
+    tm_mon = tb->tm_mon;
+    if ( (unsigned int)tm_mon > 0xB )
     {
-      v6 = v5 / 12;
-      v7 = v5 % 12;
-      v4 += v6;
-      v3->tm_mon = v7;
-      ptime = v4;
+      v6 = tm_mon / 12;
+      v7 = tm_mon % 12;
+      tm_year += v6;
+      tb->tm_mon = v7;
+      ptime = tm_year;
       if ( v7 < 0 )
       {
-        --v4;
-        v3->tm_mon = v7 + 12;
-        ptime = v4;
+        --tm_year;
+        tb->tm_mon = v7 + 12;
+        ptime = tm_year;
       }
-      if ( (unsigned __int64)(v4 - 69) > 0x408 )
+      if ( (unsigned __int64)(tm_year - 69) > 0x408 )
         goto $err_mktime;
     }
-    v8 = days[v3->tm_mon];
-    if ( (((((v4 >> 63) & 3) + (_BYTE)v4) & 3) == ((v4 >> 63) & 3)
-       && v4 != 100
-              * (((unsigned __int64)(v4 + ((unsigned __int128)(v4 * (signed __int128)-6640827866535438581i64) >> 64)) >> 63)
-               + ((signed __int64)(v4 + ((unsigned __int128)(v4 * (signed __int128)-6640827866535438581i64) >> 64)) >> 6))
-       || v4 + 1900 == 400
-                     * (((unsigned __int64)(v4
-                                          + 1900
-                                          + ((unsigned __int128)((v4 + 1900) * (signed __int128)-6640827866535438581i64) >> 64)) >> 63)
-                      + ((signed __int64)(v4
-                                        + 1900
-                                        + ((unsigned __int128)((v4 + 1900) * (signed __int128)-6640827866535438581i64) >> 64)) >> 8)))
-      && v3->tm_mon > 1 )
+    v8 = days[tb->tm_mon];
+    if ( (((((tm_year >> 63) & 3) + (_BYTE)tm_year) & 3) == ((tm_year >> 63) & 3) && tm_year != 100 * (tm_year / 100)
+       || tm_year + 1900 == 400 * ((tm_year + 1900) / 400))
+      && tb->tm_mon > 1 )
     {
       ++v8;
     }
-    v9 = v4 + 299;
-    v10 = v4 - 1;
     ptime = 60
           * (60
            * (24
-            * (365 * v4
-             + v3->tm_mday
-             + ((unsigned __int64)(v9 + ((unsigned __int128)(v9 * (signed __int128)-6640827866535438581i64) >> 64)) >> 63)
-             + ((signed __int64)(v9 + ((unsigned __int128)(v9 * (signed __int128)-6640827866535438581i64) >> 64)) >> 8)
-             - (((unsigned __int64)(v10 + ((unsigned __int128)(v10 * (signed __int128)-6640827866535438581i64) >> 64)) >> 63)
-              + ((signed __int64)(v10 + ((unsigned __int128)(v10 * (signed __int128)-6640827866535438581i64) >> 64)) >> 6))
-             - 25567
-             + v8
-             + v10 / 4)
-            + v3->tm_hour)
-           + v3->tm_min)
-          + v3->tm_sec;
-    if ( v2 )
+            * (365 * tm_year + tb->tm_mday
+                             + (tm_year + 299) / 400
+                             - (tm_year - 1) / 100
+                             - 25567
+                             + v8
+                             + (tm_year - 1) / 4)
+            + tb->tm_hour)
+           + tb->tm_min)
+          + tb->tm_sec;
+    if ( ultflag )
     {
       _tzset();
-      if ( !get_dstbias(&_Daylight_savings_bias) )
+      if ( get_dstbias(&_Daylight_savings_bias) )
       {
-        if ( !get_timezone(&_Timezone) )
-        {
-          ptime += _Timezone;
-          if ( localtime64_s(&ptm, &ptime) )
-            goto $err_mktime;
-          v11 = v3->tm_isdst;
-          if ( v11 <= 0 && (v11 >= 0 || ptm.tm_isdst <= 0) )
-            goto LABEL_23;
-          ptime += _Daylight_savings_bias;
-          v12 = localtime64_s(&ptm, &ptime);
-LABEL_22:
-          if ( !v12 )
-          {
-LABEL_23:
-            v3->tm_sec = ptm.tm_sec;
-            v3->tm_min = ptm.tm_min;
-            v3->tm_hour = ptm.tm_hour;
-            v3->tm_mday = ptm.tm_mday;
-            v3->tm_mon = ptm.tm_mon;
-            v3->tm_year = ptm.tm_year;
-            v3->tm_wday = ptm.tm_wday;
-            v3->tm_yday = ptm.tm_yday;
-            v3->tm_isdst = ptm.tm_isdst;
-            return ptime;
-          }
-$err_mktime:
-          *errno() = 22;
-          return -1i64;
-        }
+        invoke_watson(0i64, 0i64, 0i64, 0, 0i64);
+        JUMPOUT(0x1412BBD25i64);
+      }
+      if ( get_timezone(&_Timezone) )
+      {
         invoke_watson(0i64, 0i64, 0i64, 0, 0i64);
         __debugbreak();
       }
-      invoke_watson(0i64, 0i64, 0i64, 0, 0i64);
-      JUMPOUT(*(_QWORD *)&byte_1412BBD25);
+      ptime += _Timezone;
+      if ( localtime64_s(&ptm, &ptime) )
+        goto $err_mktime;
+      tm_isdst = tb->tm_isdst;
+      if ( tm_isdst <= 0 && (tm_isdst >= 0 || ptm.tm_isdst <= 0) )
+        goto LABEL_23;
+      ptime += _Daylight_savings_bias;
+      v10 = localtime64_s(&ptm, &ptime);
     }
-    v12 = gmtime64_s(&ptm, &ptime);
-    goto LABEL_22;
+    else
+    {
+      v10 = gmtime64_s(&ptm, &ptime);
+    }
+    if ( !v10 )
+    {
+LABEL_23:
+      *tb = ptm;
+      return ptime;
+    }
+$err_mktime:
+    *errno() = 22;
+    return -1i64;
   }
   *errno() = 22;
   invalid_parameter_noinfo();

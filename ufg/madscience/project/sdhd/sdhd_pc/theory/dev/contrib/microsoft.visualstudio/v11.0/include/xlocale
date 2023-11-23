@@ -13,7 +13,7 @@ std::locale::facet *__fastcall std::locale::facet::_Decref(std::locale::facet *t
 
   result = 0i64;
   if ( !_InterlockedAdd((volatile signed __int32 *)&this->_Refs, 0xFFFFFFFF) )
-    result = this;
+    return this;
   return result;
 }
 
@@ -29,66 +29,64 @@ void __fastcall std::locale::facet::~facet(std::locale::facet *this)
 // RVA: 0x82DE0
 void __fastcall std::locale::~locale(std::locale *this)
 {
-  std::locale::_Locimp *v1; // rcx
-  void (__fastcall ***v2)(_QWORD, signed __int64); // rax
+  std::locale::_Locimp *Ptr; // rcx
+  std::_Facet_base *v2; // rax
 
-  v1 = this->_Ptr;
-  if ( v1 )
+  Ptr = this->_Ptr;
+  if ( Ptr )
   {
-    v2 = (void (__fastcall ***)(_QWORD, signed __int64))((__int64 (*)(void))v1->vfptr->_Decref)();
+    v2 = Ptr->vfptr->_Decref(Ptr);
     if ( v2 )
-      (**v2)(v2, 1i64);
+      v2->vfptr->__vecDelDtor(v2, 1u);
   }
 }
 
 // File Line: 543
 // RVA: 0x82700
-std::locale::facet *__fastcall std::use_facet<std::ctype<char>>(std::locale *_Loc)
+std::ctype<char> *__fastcall std::use_facet<std::ctype<char>>(std::locale *_Loc)
 {
-  std::locale *v1; // r14
   std::locale::facet *v2; // rsi
-  unsigned __int64 v3; // rdi
-  std::locale::_Locimp *v4; // rcx
+  unsigned __int64 Id; // rdi
+  std::locale::_Locimp *Ptr; // rcx
   std::locale::facet *v5; // rbx
   std::locale::_Locimp *v6; // rax
-  std::bad_cast pExceptionObject; // [rsp+28h] [rbp-30h]
-  std::_Lockit v9; // [rsp+60h] [rbp+8h]
-  std::_Lockit v10; // [rsp+68h] [rbp+10h]
-  std::locale::facet *_Ppf; // [rsp+70h] [rbp+18h]
+  std::bad_cast pExceptionObject; // [rsp+28h] [rbp-30h] BYREF
+  std::_Lockit v9; // [rsp+60h] [rbp+8h] BYREF
+  std::_Lockit v10; // [rsp+68h] [rbp+10h] BYREF
+  std::locale::facet *_Ppf; // [rsp+70h] [rbp+18h] BYREF
 
-  v1 = _Loc;
   std::_Lockit::_Lockit(&v10, 0);
   v2 = std::_Facetptr<std::ctype<char>>::_Psave;
   _Ppf = std::_Facetptr<std::ctype<char>>::_Psave;
-  v3 = std::ctype<char>::id._Id;
+  Id = std::ctype<char>::id._Id;
   if ( !std::ctype<char>::id._Id )
   {
     std::_Lockit::_Lockit(&v9, 0);
-    if ( std::ctype<char>::id._Id == v3 )
+    if ( std::ctype<char>::id._Id == Id )
       std::ctype<char>::id._Id = ++std::locale::id::_Id_cnt;
     std::_Lockit::~_Lockit(&v9);
-    v3 = std::ctype<char>::id._Id;
+    Id = std::ctype<char>::id._Id;
   }
-  v4 = v1->_Ptr;
-  if ( v3 >= v1->_Ptr->_Facetcount )
+  Ptr = _Loc->_Ptr;
+  if ( Id >= _Loc->_Ptr->_Facetcount )
   {
     v5 = 0i64;
   }
   else
   {
-    v5 = v4->_Facetvec[v3];
+    v5 = Ptr->_Facetvec[Id];
     if ( v5 )
-      goto LABEL_19;
+      goto LABEL_18;
   }
-  if ( !v4->_Xparent )
+  if ( !Ptr->_Xparent )
     goto LABEL_12;
   v6 = std::locale::_Getgloballocale();
-  if ( v3 < v6->_Facetcount )
+  if ( Id < v6->_Facetcount )
   {
-    v5 = v6->_Facetvec[v3];
+    v5 = v6->_Facetvec[Id];
 LABEL_12:
     if ( v5 )
-      goto LABEL_19;
+      goto LABEL_18;
   }
   if ( v2 )
   {
@@ -96,19 +94,19 @@ LABEL_12:
   }
   else
   {
-    if ( std::ctype<char>::_Getcat(&_Ppf, v1) == -1i64 )
+    if ( std::ctype<char>::_Getcat(&_Ppf, _Loc) == -1i64 )
     {
       std::bad_cast::bad_cast(&pExceptionObject, "bad cast");
       CxxThrowException(&pExceptionObject, &TI2_AVbad_cast_std__);
     }
     v5 = _Ppf;
     std::_Facetptr<std::ctype<char>>::_Psave = _Ppf;
-    _Ppf->vfptr->_Incref((std::_Facet_base *)_Ppf);
-    std::_Facet_Register((std::_Facet_base *)&v5->vfptr);
+    _Ppf->vfptr->_Incref(_Ppf);
+    std::_Facet_Register(v5);
   }
-LABEL_19:
+LABEL_18:
   std::_Lockit::~_Lockit(&v10);
-  return v5;
+  return (std::ctype<char> *)v5;
 }
 
 // File Line: 2089
@@ -124,57 +122,46 @@ void __fastcall std::ctype_base::~ctype_base(std::ctype_base *this)
 // RVA: 0x82840
 void __fastcall std::ctype<char>::ctype<char>(std::ctype<char> *this, std::_Locinfo *_Lobj, unsigned __int64 _Refs)
 {
-  std::ctype<char> *v3; // rbx
-  _Ctypevec *v4; // rax
-  _Ctypevec result; // [rsp+28h] [rbp-30h]
+  _Ctypevec result; // [rsp+28h] [rbp-30h] BYREF
 
-  v3 = this;
   this->vfptr = (std::_Facet_baseVtbl *)&std::_Facet_base::`vftable;
   this->vfptr = (std::_Facet_baseVtbl *)&std::locale::facet::`vftable;
   this->_Refs = _Refs;
   this->vfptr = (std::_Facet_baseVtbl *)&std::ctype_base::`vftable;
   this->vfptr = (std::_Facet_baseVtbl *)&std::ctype<char>::`vftable;
-  v4 = Getctype(&result, _Lobj);
-  *(_QWORD *)&v3->_Ctype._Page = *(_QWORD *)&v4->_Page;
-  v3->_Ctype._Table = v4->_Table;
-  *(_QWORD *)&v3->_Ctype._Delfl = *(_QWORD *)&v4->_Delfl;
-  v3->_Ctype._LocaleName = v4->_LocaleName;
+  this->_Ctype = *Getctype(&result, _Lobj);
 }
 
 // File Line: 2454
 // RVA: 0x832B0
 unsigned __int64 __fastcall std::ctype<char>::_Getcat(std::locale::facet **_Ppf, std::locale *_Ploc)
 {
-  std::locale *v2; // r14
-  std::locale::facet **v3; // rdi
   char v4; // bl
   std::ctype<char> *v5; // rsi
-  std::locale::_Locimp *v6; // rcx
-  const char *v7; // rdx
+  std::locale::_Locimp *Ptr; // rcx
+  const char *Myptr; // rdx
   std::_Locinfo *v8; // rax
   std::locale::facet *v9; // rax
-  std::_Locinfo v11; // [rsp+30h] [rbp-78h]
+  std::_Locinfo v11; // [rsp+30h] [rbp-78h] BYREF
 
-  v2 = _Ploc;
-  v3 = _Ppf;
   v4 = 0;
   if ( _Ppf && !*_Ppf )
   {
     v5 = (std::ctype<char> *)AMemory::malloc_default(0x30ui64);
     if ( v5 )
     {
-      v6 = v2->_Ptr;
-      if ( v2->_Ptr )
+      Ptr = _Ploc->_Ptr;
+      if ( _Ploc->_Ptr )
       {
-        v7 = v6->_Name._Myptr;
-        if ( !v7 )
-          v7 = &v6->_Name._Nul;
+        Myptr = Ptr->_Name._Myptr;
+        if ( !Myptr )
+          Myptr = &Ptr->_Name._Nul;
       }
       else
       {
-        v7 = &customWorldMapCaption;
+        Myptr = &customCaption;
       }
-      std::_Locinfo::_Locinfo(&v11, v7);
+      std::_Locinfo::_Locinfo(&v11, Myptr);
       v4 = 1;
       std::ctype<char>::ctype<char>(v5, v8, 0i64);
     }
@@ -182,8 +169,8 @@ unsigned __int64 __fastcall std::ctype<char>::_Getcat(std::locale::facet **_Ppf,
     {
       v9 = 0i64;
     }
-    *v3 = v9;
-    if ( v4 & 1 )
+    *_Ppf = v9;
+    if ( (v4 & 1) != 0 )
       std::_Locinfo::~_Locinfo(&v11);
   }
   return 2i64;
@@ -193,115 +180,112 @@ unsigned __int64 __fastcall std::ctype<char>::_Getcat(std::locale::facet **_Ppf,
 // RVA: 0x82BD0
 void __fastcall std::ctype<char>::~ctype<char>(std::ctype<char> *this)
 {
-  std::ctype<char> *v1; // rbx
-  int v2; // eax
+  int Delfl; // eax
 
-  v1 = this;
   this->vfptr = (std::_Facet_baseVtbl *)&std::ctype<char>::`vftable;
-  v2 = this->_Ctype._Delfl;
-  if ( v2 <= 0 )
+  Delfl = this->_Ctype._Delfl;
+  if ( Delfl <= 0 )
   {
-    if ( v2 < 0 )
+    if ( Delfl < 0 )
       Illusion::ShaderParam::operator delete((void *)this->_Ctype._Table);
   }
   else
   {
     free((void *)this->_Ctype._Table);
   }
-  free(v1->_Ctype._LocaleName);
-  v1->vfptr = (std::_Facet_baseVtbl *)&std::ctype_base::`vftable;
-  v1->vfptr = (std::_Facet_baseVtbl *)&std::locale::facet::`vftable;
-  v1->vfptr = (std::_Facet_baseVtbl *)&std::_Facet_base::`vftable;
+  free(this->_Ctype._LocaleName);
+  this->vfptr = (std::_Facet_baseVtbl *)&std::ctype_base::`vftable;
+  this->vfptr = (std::_Facet_baseVtbl *)&std::locale::facet::`vftable;
+  this->vfptr = (std::_Facet_baseVtbl *)&std::_Facet_base::`vftable;
 }
 
 // File Line: 2497
 // RVA: 0x83AD0
-int __fastcall std::ctype<char>::do_tolower(std::ctype<char> *this, char _Ch)
+int __fastcall std::ctype<char>::do_tolower(std::ctype<char> *this, unsigned __int8 _Ch)
 {
-  return Tolower((unsigned __int8)_Ch, &this->_Ctype);
+  return Tolower(_Ch, &this->_Ctype);
 }
 
 // File Line: 2503
 // RVA: 0x83AE0
-char *__fastcall std::ctype<char>::do_tolower(std::ctype<char> *this, char *_First, const char *_Last)
+const char *__fastcall std::ctype<char>::do_tolower(std::ctype<char> *this, char *_First, const char *_Last)
 {
-  const char *v3; // rdi
-  char *v4; // rbx
-  _Ctypevec *v5; // rsi
+  const char *v4; // rbx
+  _Ctypevec *p_Ctype; // rsi
   char v6; // al
 
-  v3 = _Last;
   v4 = _First;
   if ( _First != _Last )
   {
-    v5 = &this->_Ctype;
+    p_Ctype = &this->_Ctype;
     do
     {
-      v6 = Tolower((unsigned __int8)*v4++, v5);
-      *(v4 - 1) = v6;
+      v6 = Tolower(*(unsigned __int8 *)v4++, p_Ctype);
+      *((_BYTE *)v4 - 1) = v6;
     }
-    while ( v4 != v3 );
+    while ( v4 != _Last );
   }
   return v4;
 }
 
 // File Line: 2511
 // RVA: 0x83B30
-int __fastcall std::ctype<char>::do_toupper(std::ctype<char> *this, char _Ch)
+int __fastcall std::ctype<char>::do_toupper(std::ctype<char> *this, unsigned __int8 _Ch)
 {
-  return Toupper((unsigned __int8)_Ch, &this->_Ctype);
+  return Toupper(_Ch, &this->_Ctype);
 }
 
 // File Line: 2517
 // RVA: 0x83B40
-char *__fastcall std::ctype<char>::do_toupper(std::ctype<char> *this, char *_First, const char *_Last)
+const char *__fastcall std::ctype<char>::do_toupper(std::ctype<char> *this, char *_First, const char *_Last)
 {
-  const char *v3; // rdi
-  char *v4; // rbx
-  _Ctypevec *v5; // rsi
+  const char *v4; // rbx
+  _Ctypevec *p_Ctype; // rsi
   char v6; // al
 
-  v3 = _Last;
   v4 = _First;
   if ( _First != _Last )
   {
-    v5 = &this->_Ctype;
+    p_Ctype = &this->_Ctype;
     do
     {
-      v6 = Toupper((unsigned __int8)*v4++, v5);
-      *(v4 - 1) = v6;
+      v6 = Toupper(*(unsigned __int8 *)v4++, p_Ctype);
+      *((_BYTE *)v4 - 1) = v6;
     }
-    while ( v4 != v3 );
+    while ( v4 != _Last );
   }
   return v4;
 }
 
 // File Line: 2531
 // RVA: 0x83BA0
-const char *__fastcall std::ctype<char>::do_widen(std::ctype<char> *this, const char *_First, const char *_Last, char *_Dest)
+const char *__fastcall std::ctype<char>::do_widen(
+        std::ctype<char> *this,
+        const char *_First,
+        const char *_Last,
+        char *_Dest)
 {
-  const char *v4; // rbx
-
-  v4 = _Last;
   memmove(_Dest, _First, _Last - _First);
-  return v4;
+  return _Last;
 }
 
 // File Line: 2539
 // RVA: 0x83B90
-__int64 __fastcall std::ctype<char>::do_narrow(std::ctype<char> *this, char _Byte)
+__int64 __fastcall std::ctype<char>::do_narrow(std::ctype<char> *this, unsigned __int8 _Byte)
 {
-  return (unsigned __int8)_Byte;
+  return _Byte;
 }
 
 // File Line: 2545
 // RVA: 0x83AB0
-const char *__fastcall std::ctype<char>::do_narrow(std::ctype<char> *this, const char *_First, const char *_Last, char __formal, char *_Dest)
+const char *__fastcall std::ctype<char>::do_narrow(
+        std::ctype<char> *this,
+        const char *_First,
+        const char *_Last,
+        char __formal,
+        char *_Dest)
 {
-  const char *v5; // rbx
-
-  v5 = _Last;
   memmove(_Dest, _First, _Last - _First);
-  return v5;
+  return _Last;
 }
 

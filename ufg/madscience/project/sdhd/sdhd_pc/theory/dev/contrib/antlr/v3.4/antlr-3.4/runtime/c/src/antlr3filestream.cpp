@@ -2,33 +2,29 @@
 // RVA: 0x25CD00
 UFG::allocator::free_link *__fastcall antlr3FileStreamNew(char *fileName, unsigned int encoding)
 {
-  unsigned int v2; // ebp
-  char *v3; // rsi
   UFG::allocator::free_link *v4; // rax
   UFG::allocator::free_link *v5; // rdi
   unsigned int v6; // ebx
   UFG::allocator::free_link *result; // rax
 
-  v2 = encoding;
-  v3 = fileName;
   if ( !fileName )
     return 0i64;
   v4 = antlrCalloc(1u, 0xE0u);
   v5 = v4;
   if ( !v4 )
     return 0i64;
-  v6 = antlr3read8Bit((ANTLR3_INPUT_STREAM_struct *)v4, v3);
+  v6 = antlr3read8Bit((ANTLR3_INPUT_STREAM_struct *)v4, fileName);
   antlr3GenericSetupStream((ANTLR3_INPUT_STREAM_struct *)v5);
   if ( v6 )
   {
     ((void (__fastcall *)(UFG::allocator::free_link *))v5[12].mNext)(v5);
     return 0i64;
   }
-  LODWORD(v5[27].mNext) = v2;
+  LODWORD(v5[27].mNext) = encoding;
   setupInputStream((ANTLR3_INPUT_STREAM_struct *)v5);
   v5->mNext[1].mNext = (UFG::allocator::free_link *)((__int64 (__fastcall *)(UFG::allocator::free_link *, char *))v5[4].mNext[7].mNext)(
                                                       v5[4].mNext,
-                                                      v3);
+                                                      fileName);
   result = v5;
   v5[10].mNext = v5->mNext[1].mNext;
   return result;
@@ -36,33 +32,29 @@ UFG::allocator::free_link *__fastcall antlr3FileStreamNew(char *fileName, unsign
 
 // File Line: 93
 // RVA: 0x25CDE0
-ANTLR3_INPUT_STREAM_struct *__fastcall antlr3StringStreamNew(char *data, unsigned int encoding, unsigned int size, char *name)
+ANTLR3_INPUT_STREAM_struct *__fastcall antlr3StringStreamNew(
+        char *data,
+        unsigned int encoding,
+        unsigned int size,
+        char *name)
 {
-  char *v4; // rsi
-  unsigned int v5; // ebp
-  unsigned int v6; // er14
-  char *v7; // rdi
   ANTLR3_INPUT_STREAM_struct *v8; // rax
   ANTLR3_INPUT_STREAM_struct *v9; // rbx
   ANTLR3_INPUT_STREAM_struct *result; // rax
 
-  v4 = name;
-  v5 = size;
-  v6 = encoding;
-  v7 = data;
   if ( !data )
     return 0i64;
   v8 = (ANTLR3_INPUT_STREAM_struct *)antlrCalloc(1u, 0xE0u);
   v9 = v8;
   if ( !v8 )
     return 0i64;
-  v8->data = v7;
+  v8->data = data;
   v8->isAllocated = 0;
   antlr3GenericSetupStream(v8);
-  v9->sizeBuf = v5;
-  v9->encoding = v6;
+  v9->sizeBuf = size;
+  v9->encoding = encoding;
   setupInputStream(v9);
-  v9->istream->streamName = v9->strFactory->newStr8(v9->strFactory, v4);
+  v9->istream->streamName = v9->strFactory->newStr8(v9->strFactory, name);
   result = v9;
   v9->fileName = v9->istream->streamName;
   return result;
@@ -72,21 +64,21 @@ ANTLR3_INPUT_STREAM_struct *__fastcall antlr3StringStreamNew(char *data, unsigne
 // RVA: 0x25CBB0
 void __fastcall setupInputStream(ANTLR3_INPUT_STREAM_struct *input)
 {
-  _BYTE *v1; // rax
-  _BYTE *v2; // rax
-  _BYTE *v3; // rax
+  char *nextChar; // rax
+  char *v2; // rax
+  char *v3; // rax
 
   switch ( input->encoding )
   {
     case 8u:
-      v1 = input->nextChar;
-      if ( *v1 == -17 && v1[1] == -69 && v1[2] == -65 )
-        input->nextChar = v1 + 3;
+      nextChar = (char *)input->nextChar;
+      if ( *(_WORD *)nextChar == 0xBBEF && nextChar[2] == -65 )
+        input->nextChar = nextChar + 3;
       antlr3UTF8SetupStream(input);
       return;
     case 0x10u:
-      v2 = input->nextChar;
-      if ( *v2 == -2 && v2[1] == -1 )
+      v2 = (char *)input->nextChar;
+      if ( *(_WORD *)v2 == 0xFFFE )
       {
         input->nextChar = v2 + 2;
         goto $LN6_22;
@@ -103,15 +95,15 @@ $LN13_25:
       antlr3UTF16SetupStream(input, 0, 0);
       return;
     case 0x20u:
-      v3 = input->nextChar;
-      if ( *v3 || v3[1] || v3[2] != -2 || v3[3] != -1 )
+      v3 = (char *)input->nextChar;
+      if ( *(_WORD *)v3 || v3[2] != -2 || v3[3] != -1 )
         goto $LN10_23;
       input->nextChar = v3 + 4;
-      goto $LN4_22;
-    case 0x21u:
 $LN4_22:
       antlr3UTF32SetupStream(input, 0, 1);
       break;
+    case 0x21u:
+      goto $LN4_22;
     case 0x22u:
 $LN10_23:
       antlr3UTF32SetupStream(input, 0, 0);
@@ -127,22 +119,20 @@ $LN10_23:
 
 // File Line: 357
 // RVA: 0x25CE90
-signed __int64 __fastcall antlr3read8Bit(ANTLR3_INPUT_STREAM_struct *input, char *fileName)
+__int64 __fastcall antlr3read8Bit(ANTLR3_INPUT_STREAM_struct *input, char *fileName)
 {
-  ANTLR3_INPUT_STREAM_struct *v2; // rbx
   _iobuf *v3; // rdi
   UFG::allocator::free_link *v5; // rax
 
-  v2 = input;
   v3 = fopen(fileName, "rb");
   if ( !v3 )
     return 2i64;
   v5 = antlrMalloc(0i64);
-  v2->sizeBuf = 0;
-  v2->data = v5;
+  input->sizeBuf = 0;
+  input->data = v5;
   if ( !v5 )
     return 1i64;
-  v2->isAllocated = 1;
+  input->isAllocated = 1;
   fread(v5, 0i64, 1ui64, v3);
   fclose(v3);
   return 0i64;
@@ -150,6 +140,7 @@ signed __int64 __fastcall antlr3read8Bit(ANTLR3_INPUT_STREAM_struct *input, char
 
 // File Line: 408
 // RVA: 0x25CDB0
+// attributes: thunk
 _iobuf *__fastcall antlr3Fopen(char *filename, const char *mode)
 {
   return fopen(filename, mode);
@@ -157,6 +148,7 @@ _iobuf *__fastcall antlr3Fopen(char *filename, const char *mode)
 
 // File Line: 417
 // RVA: 0x25CCF0
+// attributes: thunk
 void __fastcall antlr3Fclose(_iobuf *fd)
 {
   fclose(fd);

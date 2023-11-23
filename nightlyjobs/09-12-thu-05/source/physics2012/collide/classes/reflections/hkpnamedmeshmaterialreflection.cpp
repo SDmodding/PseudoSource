@@ -28,16 +28,16 @@ hkClass *__fastcall hkpNamedMeshMaterial::staticClass()
 
 // File Line: 62
 // RVA: 0xCEC150
-void __fastcall finishLoadedObjecthkpNamedMeshMaterial(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpNamedMeshMaterial(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
   if ( p )
-    hkStringPtr::hkStringPtr((hkStringPtr *)p + 1, (hkFinishLoadedObjectFlag)finishing);
+    hkStringPtr::hkStringPtr(p + 1, finishing);
 }
 
 // File Line: 68
 // RVA: 0xCEC170
-void __fastcall cleanupLoadedObjecthkpNamedMeshMaterial(void *p)
+void __fastcall cleanupLoadedObjecthkpNamedMeshMaterial(hkStringPtr *p)
 {
-  hkStringPtr::~hkStringPtr((hkStringPtr *)p + 1);
+  hkStringPtr::~hkStringPtr(p + 1);
 }
 

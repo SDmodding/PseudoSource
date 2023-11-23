@@ -4,7 +4,7 @@ char *__cdecl strncat(char *Dest, const char *Source, size_t Count)
 {
   char *v3; // r11
   unsigned __int64 v4; // rax
-  signed __int64 v5; // r10
+  __int64 v5; // r10
   unsigned __int64 v6; // rax
   unsigned __int64 v7; // rax
   unsigned int v8; // eax
@@ -13,25 +13,25 @@ char *__cdecl strncat(char *Dest, const char *Source, size_t Count)
   unsigned __int64 v12; // rax
   bool v13; // cf
   size_t v14; // r8
-  signed __int64 v15; // r8
-  signed __int64 v16; // r8
+  size_t v15; // r8
+  size_t v16; // r8
   unsigned __int64 v17; // rax
-  signed __int64 v18; // r8
-  signed __int64 v19; // r8
+  size_t v18; // r8
+  size_t v19; // r8
   unsigned __int64 v20; // rax
-  signed __int64 v21; // r8
-  signed __int64 v22; // r8
+  size_t v21; // r8
+  size_t v22; // r8
   unsigned int v23; // eax
-  signed __int64 v24; // r8
+  size_t v24; // r8
 
   v3 = Dest;
   if ( !Count )
     return v3;
-  if ( (unsigned __int8)Dest & 7 )
+  if ( ((unsigned __int8)Dest & 7) != 0 )
   {
     while ( *Dest )
     {
-      if ( !((unsigned __int8)++Dest & 7) )
+      if ( ((unsigned __int8)++Dest & 7) == 0 )
         goto strncat_loop_begin;
     }
   }
@@ -43,10 +43,10 @@ char *__cdecl strncat(char *Dest, const char *Source, size_t Count)
       {
 strncat_loop_begin:
         v4 = *(_QWORD *)Dest;
-        v5 = (*(_QWORD *)Dest + 9151031864016699135i64) ^ ~*(_QWORD *)Dest;
+        v5 = (*(_QWORD *)Dest + 0x7EFEFEFEFEFEFEFFi64) ^ ~*(_QWORD *)Dest;
         Dest += 8;
       }
-      while ( !(v5 & 0x8101010101010100ui64) );
+      while ( (v5 & 0x8101010101010100ui64) == 0 );
       Dest -= 8;
       if ( !(_BYTE)v4 )
         break;
@@ -68,7 +68,7 @@ strncat_loop_begin:
       if ( !BYTE1(v7) )
         break;
       ++Dest;
-      v8 = (unsigned int)v7 >> 16;
+      v8 = WORD1(v7);
       if ( !(_BYTE)v8 )
         break;
       ++Dest;
@@ -78,7 +78,7 @@ strncat_loop_begin:
     }
   }
   v9 = Dest - Source;
-  if ( (unsigned __int8)Source & 7 )
+  if ( ((unsigned __int8)Source & 7) != 0 )
   {
     while ( 1 )
     {
@@ -92,7 +92,7 @@ strncat_loop_begin:
         Source[v9] = 0;
         return v3;
       }
-      if ( !((unsigned __int8)Source & 7) )
+      if ( ((unsigned __int8)Source & 7) == 0 )
         goto LABEL_23;
     }
   }
@@ -104,7 +104,7 @@ LABEL_23:
       v12 = *(_QWORD *)Source;
       v13 = Count < 8;
       Count -= 8i64;
-      if ( v13 || ((v12 + 9151031864016699135i64) ^ ~v12) & 0x8101010101010100ui64 )
+      if ( v13 || (((v12 + 0x7EFEFEFEFEFEFEFFi64) ^ ~v12) & 0x8101010101010100ui64) != 0 )
         break;
       *(_QWORD *)&Source[v9] = v12;
       Source += 8;
@@ -156,7 +156,7 @@ LABEL_23:
     v22 = v21 - 1;
     if ( !v22 )
       break;
-    v23 = (unsigned int)v20 >> 16;
+    v23 = WORD1(v20);
     Source[v9] = v23;
     if ( !(_BYTE)v23 )
       return v3;

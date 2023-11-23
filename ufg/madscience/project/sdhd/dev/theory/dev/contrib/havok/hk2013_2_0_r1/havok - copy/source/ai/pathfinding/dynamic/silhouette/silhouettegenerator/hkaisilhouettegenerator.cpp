@@ -1,6 +1,8 @@
 // File Line: 21
 // RVA: 0xC09D90
-void __fastcall hkaiSilhouetteGenerator::hkaiSilhouetteGenerator(hkaiSilhouetteGenerator *this, hkaiSilhouetteGenerator::GeneratorType type)
+void __fastcall hkaiSilhouetteGenerator::hkaiSilhouetteGenerator(
+        hkaiSilhouetteGenerator *this,
+        hkaiSilhouetteGenerator::GeneratorType type)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_lazyRecomputeDisplacementThreshold = 0.1;
@@ -16,7 +18,9 @@ void __fastcall hkaiSilhouetteGenerator::hkaiSilhouetteGenerator(hkaiSilhouetteG
 
 // File Line: 28
 // RVA: 0xC09DE0
-void __fastcall hkaiSilhouetteGenerator::hkaiSilhouetteGenerator(hkaiSilhouetteGenerator *this, hkFinishLoadedObjectFlag f)
+void __fastcall hkaiSilhouetteGenerator::hkaiSilhouetteGenerator(
+        hkaiSilhouetteGenerator *this,
+        hkFinishLoadedObjectFlag f)
 {
   this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteGenerator::`vftable;
 }
@@ -25,21 +29,22 @@ void __fastcall hkaiSilhouetteGenerator::hkaiSilhouetteGenerator(hkaiSilhouetteG
 // RVA: 0xC09E00
 void __fastcall hkaiSilhouetteGenerator::~hkaiSilhouetteGenerator(hkaiSilhouetteGenerator *this)
 {
-  hkaiSilhouetteGenerator *v1; // rbx
-  hkaiConvexSilhouetteSet *v2; // rcx
+  hkaiConvexSilhouetteSet *m_pntr; // rcx
 
-  v1 = this;
   this->vfptr = (hkBaseObjectVtbl *)&hkaiSilhouetteGenerator::`vftable;
-  v2 = this->m_cachedSilhouettes.m_pntr;
-  if ( v2 )
-    hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
-  v1->m_cachedSilhouettes.m_pntr = 0i64;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+  m_pntr = this->m_cachedSilhouettes.m_pntr;
+  if ( m_pntr )
+    hkReferencedObject::removeReference(m_pntr);
+  this->m_cachedSilhouettes.m_pntr = 0i64;
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 38
 // RVA: 0xC09E40
-char __fastcall hkaiSilhouetteGenerator::willGenerateSilhouettes(hkaiSilhouetteGenerator *this, hkaiNavMeshInstance *meshInstance, hkVector4f *up)
+char __fastcall hkaiSilhouetteGenerator::willGenerateSilhouettes(
+        hkaiSilhouetteGenerator *this,
+        hkaiNavMeshInstance *meshInstance,
+        hkVector4f *up)
 {
   return 1;
 }
@@ -53,31 +58,36 @@ void __fastcall hkaiSilhouetteGenerator::shiftWorldSpace(hkaiSilhouetteGenerator
 
 // File Line: 50
 // RVA: 0xC09E70
-_BOOL8 __usercall hkaiSilhouetteGenerator::canReuseCachedSilhouettes@<rax>(hkaiSilhouetteGenerator *this@<rcx>, hkQTransformf *localTransform@<rdx>, hkVector4f *referenceUp@<r8>, __m128 a4@<xmm0>)
+_BOOL8 __fastcall hkaiSilhouetteGenerator::canReuseCachedSilhouettes(
+        hkaiSilhouetteGenerator *this,
+        hkQTransformf *localTransform,
+        hkVector4f *referenceUp)
 {
-  hkQTransformf *v4; // r9
-  hkaiConvexSilhouetteSet *v5; // rdx
-  float v6; // xmm2_4
+  __m128 v3; // xmm0
+  hkaiConvexSilhouetteSet *m_pntr; // rdx
+  float m_lazyRecomputeDisplacementThreshold; // xmm2_4
   _BOOL8 result; // rax
 
-  v4 = localTransform;
-  v5 = this->m_cachedSilhouettes.m_pntr;
+  m_pntr = this->m_cachedSilhouettes.m_pntr;
   result = 0;
-  if ( v5 )
+  if ( m_pntr )
   {
-    if ( v5->m_silhouetteOffsets.m_size > 0 )
+    if ( m_pntr->m_silhouetteOffsets.m_size > 0 )
     {
-      v6 = this->m_lazyRecomputeDisplacementThreshold;
-      a4.m128_f32[0] = v6;
+      m_lazyRecomputeDisplacementThreshold = this->m_lazyRecomputeDisplacementThreshold;
+      v3.m128_f32[0] = m_lazyRecomputeDisplacementThreshold;
       if ( (_mm_movemask_ps(
-              _mm_cmpltps(
+              _mm_cmplt_ps(
                 (__m128)_mm_srli_epi32(
-                          _mm_slli_epi32((__m128i)_mm_sub_ps(referenceUp->m_quad, v5->m_cachedUp.m_quad), 1u),
+                          _mm_slli_epi32((__m128i)_mm_sub_ps(referenceUp->m_quad, m_pntr->m_cachedUp.m_quad), 1u),
                           1u),
-                _mm_shuffle_ps(a4, a4, 0))) & 7) == 7
-        && hkQTransformf::isApproximatelyEqual(v4, &v5->m_cachedTransform, v6) )
+                _mm_shuffle_ps(v3, v3, 0))) & 7) == 7
+        && hkQTransformf::isApproximatelyEqual(
+             localTransform,
+             &m_pntr->m_cachedTransform,
+             m_lazyRecomputeDisplacementThreshold) )
       {
-        result = 1;
+        return 1;
       }
     }
   }
@@ -86,7 +96,10 @@ _BOOL8 __usercall hkaiSilhouetteGenerator::canReuseCachedSilhouettes@<rax>(hkaiS
 
 // File Line: 58
 // RVA: 0xC0A180
-hkSimdFloat32 *__fastcall getTranslationalDisplacement(hkSimdFloat32 *result, hkQTransformf *prevTransform, hkQTransformf *currTransform)
+hkSimdFloat32 *__fastcall getTranslationalDisplacement(
+        hkSimdFloat32 *result,
+        hkQTransformf *prevTransform,
+        hkQTransformf *currTransform)
 {
   hkSimdFloat32 *v3; // rax
   __m128 v4; // xmm1
@@ -100,7 +113,7 @@ hkSimdFloat32 *__fastcall getTranslationalDisplacement(hkSimdFloat32 *result, hk
   v6 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v5, v5, 85), _mm_shuffle_ps(v5, v5, 0)), _mm_shuffle_ps(v5, v5, 170));
   v7 = _mm_rsqrt_ps(v6);
   result->m_real = _mm_andnot_ps(
-                     _mm_cmpleps(v6, (__m128)0i64),
+                     _mm_cmple_ps(v6, (__m128)0i64),
                      _mm_mul_ps(
                        _mm_mul_ps(
                          _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v7, v6), v7)),
@@ -111,9 +124,12 @@ hkSimdFloat32 *__fastcall getTranslationalDisplacement(hkSimdFloat32 *result, hk
 
 // File Line: 65
 // RVA: 0xC0A1F0
-hkSimdFloat32 *__fastcall getRotationalDisplacement(hkSimdFloat32 *result, hkaiSilhouetteGenerator *gen, hkQTransformf *prevTransform, hkQTransformf *currTransform)
+hkSimdFloat32 *__fastcall getRotationalDisplacement(
+        hkSimdFloat32 *result,
+        hkaiSilhouetteGenerator *gen,
+        hkQTransformf *prevTransform,
+        hkQTransformf *currTransform)
 {
-  hkSimdFloat32 *v4; // rbx
   __m128 v5; // xmm4
   __m128 v6; // xmm5
   __m128 v7; // xmm9
@@ -131,21 +147,23 @@ hkSimdFloat32 *__fastcall getRotationalDisplacement(hkSimdFloat32 *result, hkaiS
   __m128 v19; // xmm9
   __m128 v20; // xmm9
   __m128 v21; // xmm7
-  __m128 v22; // xmm6
-  __m128 v23; // xmm2
-  __m128 v24; // xmm5
-  __m128 v25; // xmm4
-  __m128 v26; // xmm3
-  __m128 v27; // xmm2
-  __m128 v28; // xmm1
-  hkSimdFloat32 *v29; // rax
-  __m128 v30; // xmm3
-  __m128 v31; // xmm4
-  __m128 v32; // xmm1
-  __m128 v33; // [rsp+20h] [rbp-88h]
-  __m128 v34; // [rsp+30h] [rbp-78h]
+  __m128 v22; // xmm2
+  __m128 v23; // xmm5
+  __m128 v24; // xmm4
+  __m128 v25; // xmm3
+  __m128 v26; // xmm2
+  __m128 v27; // xmm1
+  __m128 v28; // xmm5
+  __m128 v29; // xmm2
+  __m128 v30; // xmm1
+  hkSimdFloat32 *v31; // rax
+  __m128 v32; // xmm3
+  __m128 v33; // xmm4
+  __m128 v34; // xmm1
+  __m128 v35; // [rsp+20h] [rbp-88h] BYREF
+  __m128 v36; // [rsp+30h] [rbp-78h]
+  unsigned int v37; // [rsp+B0h] [rbp+8h]
 
-  v4 = result;
   v5 = _mm_shuffle_ps(currTransform->m_rotation.m_vec.m_quad, currTransform->m_rotation.m_vec.m_quad, 255);
   v6 = _mm_xor_ps(
          (__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 64),
@@ -180,12 +198,11 @@ hkSimdFloat32 *__fastcall getRotationalDisplacement(hkSimdFloat32 *result, hkaiS
           _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v18, v17), v18)), _mm_mul_ps(*(__m128 *)_xmm, v18)));
   v20 = (__m128)_mm_srli_epi32(_mm_slli_epi32((__m128i)_mm_shuffle_ps(v19, v19, 255), 1u), 1u);
   v21 = _mm_andnot_ps(*(__m128 *)_xmm, v20);
-  v22 = _mm_cmpltps(v21, *(__m128 *)_xmm);
-  v23 = _mm_mul_ps(_mm_sub_ps(*(__m128 *)_xmm, v21), *(__m128 *)_xmm);
-  v24 = _mm_cmpltps(*(__m128 *)_xmm, v21);
-  v25 = _mm_or_ps(_mm_and_ps(_mm_sqrt_ps(v23), v24), _mm_andnot_ps(v24, v21));
-  v26 = _mm_or_ps(_mm_andnot_ps(v24, _mm_mul_ps(v21, v21)), _mm_and_ps(v24, v23));
-  v27 = _mm_add_ps(
+  v22 = _mm_mul_ps(_mm_sub_ps(*(__m128 *)_xmm, v21), *(__m128 *)_xmm);
+  v23 = _mm_cmplt_ps(*(__m128 *)_xmm, v21);
+  v24 = _mm_or_ps(_mm_and_ps(_mm_sqrt_ps(v22), v23), _mm_andnot_ps(v23, v21));
+  v25 = _mm_or_ps(_mm_andnot_ps(v23, _mm_mul_ps(v21, v21)), _mm_and_ps(v23, v22));
+  v26 = _mm_add_ps(
           _mm_mul_ps(
             _mm_mul_ps(
               _mm_add_ps(
@@ -193,70 +210,72 @@ hkSimdFloat32 *__fastcall getRotationalDisplacement(hkSimdFloat32 *result, hkaiS
                   _mm_add_ps(
                     _mm_mul_ps(
                       _mm_add_ps(
-                        _mm_mul_ps(_mm_add_ps(_mm_mul_ps(v26, *(__m128 *)coeff4), *(__m128 *)coeff3), v26),
+                        _mm_mul_ps(_mm_add_ps(_mm_mul_ps(v25, *(__m128 *)coeff4), *(__m128 *)coeff3), v25),
                         *(__m128 *)coeff2),
-                      v26),
+                      v25),
                     *(__m128 *)coeff1),
-                  v26),
+                  v25),
                 *(__m128 *)coeff0),
-              v26),
-            v25),
-          v25);
-  v15.m128_f32[0] = (float)(1.5707964
-                          - COERCE_FLOAT((*(unsigned __int128 *)&_mm_andnot_ps(
-                                                                   v22,
-                                                                   _mm_or_ps(
-                                                                     _mm_and_ps(
-                                                                       _mm_sub_ps(*(__m128 *)_xmm, _mm_add_ps(v27, v27)),
-                                                                       v24),
-                                                                     _mm_andnot_ps(v24, v27))) | v22.m128_i32[0] & v21.m128_i32[0]) ^ v20.m128_i32[0] & _xmm[0]))
-                  * 2.0;
-  gen->vfptr[4].__vecDelDtor((hkBaseObject *)gen, (unsigned int)&v33);
-  v28 = _mm_mul_ps(v34, v34);
-  v29 = v4;
-  v30 = _mm_mul_ps(v33, v33);
-  v31 = _mm_max_ps(
+              v25),
+            v24),
+          v24);
+  v27 = _mm_and_ps(_mm_sub_ps(*(__m128 *)_xmm, _mm_add_ps(v26, v26)), v23);
+  v28 = _mm_andnot_ps(v23, v26);
+  v29 = _mm_cmplt_ps(v21, *(__m128 *)_xmm);
+  *(float *)&v37 = (float)(1.5707964
+                         - COERCE_FLOAT((_mm_andnot_ps(v29, _mm_or_ps(v27, v28)).m128_u32[0] | v29.m128_i32[0] & v21.m128_i32[0]) ^ v20.m128_i32[0] & _xmm[0]))
+                 * 2.0;
+  gen->vfptr[4].__vecDelDtor(gen, (unsigned int)&v35);
+  v30 = _mm_mul_ps(v36, v36);
+  v31 = result;
+  v32 = _mm_mul_ps(v35, v35);
+  v33 = _mm_max_ps(
+          _mm_add_ps(
+            _mm_add_ps(_mm_shuffle_ps(v32, v32, 85), _mm_shuffle_ps(v32, v32, 0)),
+            _mm_shuffle_ps(v32, v32, 170)),
           _mm_add_ps(
             _mm_add_ps(_mm_shuffle_ps(v30, v30, 85), _mm_shuffle_ps(v30, v30, 0)),
-            _mm_shuffle_ps(v30, v30, 170)),
-          _mm_add_ps(
-            _mm_add_ps(_mm_shuffle_ps(v28, v28, 85), _mm_shuffle_ps(v28, v28, 0)),
-            _mm_shuffle_ps(v28, v28, 170)));
-  v32 = _mm_rsqrt_ps(v31);
-  v4->m_real = _mm_mul_ps(
-                 _mm_andnot_ps(
-                   _mm_cmpleps(v31, (__m128)0i64),
-                   _mm_mul_ps(
-                     _mm_mul_ps(
-                       _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v31, v32), v32)),
-                       _mm_mul_ps(*(__m128 *)_xmm, v32)),
-                     v31)),
-                 _mm_shuffle_ps((__m128)v15.m128_u32[0], (__m128)v15.m128_u32[0], 0));
-  return v29;
+            _mm_shuffle_ps(v30, v30, 170)));
+  v34 = _mm_rsqrt_ps(v33);
+  result->m_real = _mm_mul_ps(
+                     _mm_andnot_ps(
+                       _mm_cmple_ps(v33, (__m128)0i64),
+                       _mm_mul_ps(
+                         _mm_mul_ps(
+                           _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v33, v34), v34)),
+                           _mm_mul_ps(*(__m128 *)_xmm, v34)),
+                         v33)),
+                     _mm_shuffle_ps((__m128)v37, (__m128)v37, 0));
+  return v31;
 }
 
 // File Line: 90
 // RVA: 0xC09EE0
-hkSimdFloat32 *__fastcall hkaiSilhouetteGenerator::getDisplacementRelativeToSection(hkaiSilhouetteGenerator *this, hkSimdFloat32 *result, hkQTransformf *prevTransform, hkQTransformf *currTransform)
+hkSimdFloat32 *__fastcall hkaiSilhouetteGenerator::getDisplacementRelativeToSection(
+        hkaiSilhouetteGenerator *this,
+        hkSimdFloat32 *result,
+        hkQTransformf *prevTransform,
+        hkQTransformf *currTransform)
 {
-  hkSimdFloat32 *v4; // rbx
   hkQTransformf *v5; // r9
   hkaiSilhouetteGenerator *v6; // r10
   hkQTransformf *v7; // r11
   hkSimdFloat32 *v8; // rax
-  hkSimdFloat32 resulta; // [rsp+20h] [rbp-18h]
+  hkSimdFloat32 resulta; // [rsp+20h] [rbp-18h] BYREF
 
-  v4 = result;
   getTranslationalDisplacement(result, prevTransform, currTransform);
   getRotationalDisplacement(&resulta, v6, v7, v5);
-  v8 = v4;
-  v4->m_real = _mm_add_ps(v4->m_real, resulta.m_real);
+  v8 = result;
+  result->m_real = _mm_add_ps(result->m_real, resulta.m_real);
   return v8;
 }
 
 // File Line: 100
 // RVA: 0xC09F30
-signed __int64 __fastcall hkaiSilhouetteGenerator::hasMovedAgainstSection(hkaiSilhouetteGenerator *this, hkQTransformf *prevTransform, hkQTransformf *currTransform)
+__int64 __fastcall hkaiSilhouetteGenerator::hasMovedAgainstSection(
+        hkaiSilhouetteGenerator *this,
+        hkQTransformf *prevTransform,
+        hkQTransformf *currTransform)
 {
   float v3; // xmm7_4
   hkQTransformf *v4; // rdx
@@ -264,34 +283,37 @@ signed __int64 __fastcall hkaiSilhouetteGenerator::hasMovedAgainstSection(hkaiSi
   hkaiSilhouetteGenerator *v6; // r10
   float v7; // xmm6_4
   unsigned int v8; // ebx
-  signed __int64 v9; // rax
-  hkSimdFloat32 result; // [rsp+20h] [rbp-38h]
+  __int64 v9; // rax
+  hkSimdFloat32 result; // [rsp+20h] [rbp-38h] BYREF
 
-  LODWORD(v3) = (unsigned __int128)_mm_shuffle_ps(
-                                     (__m128)LODWORD(this->m_lazyRecomputeDisplacementThreshold),
-                                     (__m128)LODWORD(this->m_lazyRecomputeDisplacementThreshold),
-                                     0);
+  v3 = _mm_shuffle_ps(
+         (__m128)LODWORD(this->m_lazyRecomputeDisplacementThreshold),
+         (__m128)LODWORD(this->m_lazyRecomputeDisplacementThreshold),
+         0).m128_f32[0];
   getTranslationalDisplacement(&result, prevTransform, currTransform);
   v7 = result.m_real.m128_f32[0];
   v8 = 0;
-  v9 = 0i64;
-  if ( result.m_real.m128_f32[0] >= v3 )
-    v9 = 1i64;
-  if ( !(_DWORD)v9 )
+  v9 = result.m_real.m128_f32[0] >= v3;
+  if ( result.m_real.m128_f32[0] < v3 )
   {
     getRotationalDisplacement(&result, v6, v4, v5);
     if ( (float)(v7 + result.m_real.m128_f32[0]) >= v3 )
-      v8 = 1;
-    v9 = v8;
+      return 1;
+    return v8;
   }
   return v9;
 }
 
 // File Line: 121
 // RVA: 0xC09FC0
-void __fastcall hkaiSilhouetteGenerator::expandAabb(hkAabb *aabbInOut, hkVector4f *up, hkSimdFloat32 *extrusion, hkSimdFloat32 *planarExpansion, unsigned int expansionFlags)
+void __fastcall hkaiSilhouetteGenerator::expandAabb(
+        hkAabb *aabbInOut,
+        hkVector4f *up,
+        hkSimdFloat32 *extrusion,
+        hkSimdFloat32 *planarExpansion,
+        char expansionFlags)
 {
-  __m128 v5; // xmm9
+  __m128 m_quad; // xmm9
   __m128 v6; // xmm10
   __m128 v7; // xmm11
   __m128 v8; // xmm0
@@ -309,20 +331,20 @@ void __fastcall hkaiSilhouetteGenerator::expandAabb(hkAabb *aabbInOut, hkVector4
   __m128 v20; // xmm3
   __m128 v21; // xmm2
   __m128 v22; // xmm0
-  __m128 v23; // xmm1
+  __m128 v23; // xmm0
 
-  v5 = aabbInOut->m_max.m_quad;
+  m_quad = aabbInOut->m_max.m_quad;
   v6 = aabbInOut->m_min.m_quad;
   v7 = _mm_shuffle_ps((__m128)LODWORD(FLOAT_1_45), (__m128)LODWORD(FLOAT_1_45), 0);
-  if ( expansionFlags & 4 )
+  if ( (expansionFlags & 4) != 0 )
   {
     v8 = _mm_max_ps(_mm_mul_ps(planarExpansion->m_real, v7), extrusion->m_real);
-    v5 = _mm_add_ps(v5, v8);
+    m_quad = _mm_add_ps(m_quad, v8);
     v6 = _mm_sub_ps(v6, v8);
   }
   else
   {
-    if ( expansionFlags & 2 )
+    if ( (expansionFlags & 2) != 0 )
     {
       v9 = _mm_shuffle_ps(up->m_quad, _mm_unpackhi_ps(up->m_quad, (__m128)0i64), 196);
       v10 = _mm_shuffle_ps(v9, v9, 241);
@@ -336,7 +358,7 @@ void __fastcall hkaiSilhouetteGenerator::expandAabb(hkAabb *aabbInOut, hkVector4
               _mm_add_ps(_mm_shuffle_ps(v14, v14, 85), _mm_shuffle_ps(v14, v14, 0)),
               _mm_shuffle_ps(v14, v14, 170));
       v16 = _mm_max_ps(v13, v15);
-      v17 = _mm_cmpltps(v13, v15);
+      v17 = _mm_cmplt_ps(v13, v15);
       v18 = _mm_rsqrt_ps(v16);
       v19 = _mm_xor_ps(
               _mm_or_ps(_mm_andnot_ps(v17, v10), _mm_and_ps(v11, v17)),
@@ -353,16 +375,16 @@ void __fastcall hkaiSilhouetteGenerator::expandAabb(hkAabb *aabbInOut, hkVector4
                 (__m128)_mm_srli_epi32(_mm_slli_epi32((__m128i)_mm_mul_ps(_mm_shuffle_ps(v20, v20, 201), v21), 1u), 1u),
                 (__m128)_mm_srli_epi32(_mm_slli_epi32((__m128i)_mm_mul_ps(v19, v21), 1u), 1u)));
       v6 = _mm_sub_ps(v6, v22);
-      v5 = _mm_add_ps(v5, v22);
+      m_quad = _mm_add_ps(m_quad, v22);
     }
-    if ( expansionFlags & 1 )
+    if ( (expansionFlags & 1) != 0 )
     {
       v23 = _mm_mul_ps(_mm_sub_ps((__m128)0i64, extrusion->m_real), up->m_quad);
-      v5 = _mm_max_ps(v5, _mm_add_ps(v23, v5));
+      m_quad = _mm_max_ps(m_quad, _mm_add_ps(v23, m_quad));
       v6 = _mm_min_ps(v6, _mm_add_ps(v23, v6));
     }
   }
   aabbInOut->m_min.m_quad = v6;
-  aabbInOut->m_max.m_quad = v5;
+  aabbInOut->m_max.m_quad = m_quad;
 }
 

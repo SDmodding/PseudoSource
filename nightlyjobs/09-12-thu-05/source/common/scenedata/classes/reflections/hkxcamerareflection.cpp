@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkxCameraClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 61
@@ -28,17 +28,17 @@ hkClass *__fastcall hkxCamera::staticClass()
 
 // File Line: 68
 // RVA: 0xE31BB0
-void __fastcall finishLoadedObjecthkxCamera(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxCamera(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxCamera::`vftable;
+    *p = &hkxCamera::`vftable;
 }
 
 // File Line: 74
 // RVA: 0xE31BD0
-void __fastcall cleanupLoadedObjecthkxCamera(void *p)
+void __fastcall cleanupLoadedObjecthkxCamera(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 78
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkxCameraTypeInfo__()
   hkxCameraTypeInfo.m_typeName = "hkxCamera";
   hkxCameraTypeInfo.m_vtable = result;
   hkxCameraTypeInfo.m_scopedName = "!hkxCamera";
-  hkxCameraTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxCamera;
-  hkxCameraTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxCamera;
+  hkxCameraTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxCamera;
+  hkxCameraTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxCamera;
   return result;
 }
 

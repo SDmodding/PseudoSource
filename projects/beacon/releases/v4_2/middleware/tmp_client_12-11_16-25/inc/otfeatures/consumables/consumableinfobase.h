@@ -17,6 +17,8 @@ __int64 __fastcall OSuite::ZConsumableInfoBase::GetQuantity(OSuite::ZConsumableI
 void __fastcall OSuite::ZConsumableInfoBase::Release(OSuite::ZConsumableInfoBase *this)
 {
   if ( this )
-    ((void (__fastcall *)(OSuite::ZConsumableInfoBase *, signed __int64))this->vfptr->~IConsumableInfo)(this, 1i64);
+    ((void (__fastcall *)(OSuite::ZConsumableInfoBase *, __int64))this->OSuite::IConsumableInfo::vfptr->~IConsumableInfo)(
+      this,
+      1i64);
 }
 

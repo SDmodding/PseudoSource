@@ -28,23 +28,24 @@ hkClass *__fastcall hkaRagdollInstance::staticClass()
 
 // File Line: 70
 // RVA: 0xC50110
-void __fastcall finishLoadedObjecthkaRagdollInstance(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaRagdollInstance(hkaRagdollInstance *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaRagdollInstance::hkaRagdollInstance);
+  if ( p )
+    hkaRagdollInstance::hkaRagdollInstance(p, finishing);
 }
 
 // File Line: 76
 // RVA: 0xC50130
-void __fastcall cleanupLoadedObjecthkaRagdollInstance(void *p)
+void __fastcall cleanupLoadedObjecthkaRagdollInstance(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 80
 // RVA: 0xC50140
 hkBaseObjectVtbl *__fastcall getVtablehkaRagdollInstance()
 {
-  hkaRagdollInstance v1; // [rsp+20h] [rbp-58h]
+  hkaRagdollInstance v1; // [rsp+20h] [rbp-58h] BYREF
 
   hkaRagdollInstance::hkaRagdollInstance(&v1, 0);
   return v1.vfptr;
@@ -61,8 +62,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaRagdollInstanceTypeInfo__()
   hkaRagdollInstanceTypeInfo.m_typeName = "hkaRagdollInstance";
   hkaRagdollInstanceTypeInfo.m_vtable = result;
   hkaRagdollInstanceTypeInfo.m_scopedName = "!hkaRagdollInstance";
-  hkaRagdollInstanceTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaRagdollInstance;
-  hkaRagdollInstanceTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaRagdollInstance;
+  hkaRagdollInstanceTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaRagdollInstance;
+  hkaRagdollInstanceTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaRagdollInstance;
   return result;
 }
 

@@ -28,23 +28,26 @@ hkClass *__fastcall hkaDirectionalReferenceFrame::staticClass()
 
 // File Line: 62
 // RVA: 0xB1D410
-void __fastcall finishLoadedObjecthkaDirectionalReferenceFrame(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaDirectionalReferenceFrame(
+        hkaDirectionalReferenceFrame *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaDirectionalReferenceFrame::hkaDirectionalReferenceFrame);
+  if ( p )
+    hkaDirectionalReferenceFrame::hkaDirectionalReferenceFrame(p, finishing);
 }
 
 // File Line: 68
 // RVA: 0xB1D430
-void __fastcall cleanupLoadedObjecthkaDirectionalReferenceFrame(void *p)
+void __fastcall cleanupLoadedObjecthkaDirectionalReferenceFrame(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 72
 // RVA: 0xB1D440
 hkBaseObjectVtbl *__fastcall getVtablehkaDirectionalReferenceFrame()
 {
-  hkaDirectionalReferenceFrame v1; // [rsp+20h] [rbp-78h]
+  hkaDirectionalReferenceFrame v1; // [rsp+20h] [rbp-78h] BYREF
 
   hkaDirectionalReferenceFrame::hkaDirectionalReferenceFrame(&v1, 0);
   return v1.vfptr;
@@ -61,8 +64,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaDirectionalReferenceFrameTypeInfo_
   hkaDirectionalReferenceFrameTypeInfo.m_typeName = "hkaDirectionalReferenceFrame";
   hkaDirectionalReferenceFrameTypeInfo.m_vtable = result;
   hkaDirectionalReferenceFrameTypeInfo.m_scopedName = "!hkaDirectionalReferenceFrame";
-  hkaDirectionalReferenceFrameTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaDirectionalReferenceFrame;
-  hkaDirectionalReferenceFrameTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaDirectionalReferenceFrame;
+  hkaDirectionalReferenceFrameTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaDirectionalReferenceFrame;
+  hkaDirectionalReferenceFrameTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaDirectionalReferenceFrame;
   return result;
 }
 

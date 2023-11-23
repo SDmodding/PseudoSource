@@ -1,8 +1,8 @@
 // File Line: 32
 // RVA: 0x12DD5B8
-signed __int64 __fastcall wchartodigit(wchar_t ch)
+__int64 __fastcall wchartodigit(wchar_t ch)
 {
-  signed int v1; // edx
+  int v1; // edx
   wchar_t v3; // ax
 
   v1 = 48;

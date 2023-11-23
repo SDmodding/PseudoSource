@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkxEdgeSelectionChannelClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 55
@@ -28,17 +28,17 @@ hkClass *__fastcall hkxEdgeSelectionChannel::staticClass()
 
 // File Line: 62
 // RVA: 0xE31C00
-void __fastcall finishLoadedObjecthkxEdgeSelectionChannel(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxEdgeSelectionChannel(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxEdgeSelectionChannel::`vftable;
+    *p = &hkxEdgeSelectionChannel::`vftable;
 }
 
 // File Line: 68
 // RVA: 0xE31C20
-void __fastcall cleanupLoadedObjecthkxEdgeSelectionChannel(void *p)
+void __fastcall cleanupLoadedObjecthkxEdgeSelectionChannel(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 72
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkxEdgeSelectionChannelTypeInfo__()
   hkxEdgeSelectionChannelTypeInfo.m_typeName = "hkxEdgeSelectionChannel";
   hkxEdgeSelectionChannelTypeInfo.m_vtable = result;
   hkxEdgeSelectionChannelTypeInfo.m_scopedName = "!hkxEdgeSelectionChannel";
-  hkxEdgeSelectionChannelTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxEdgeSelectionChannel;
-  hkxEdgeSelectionChannelTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxEdgeSelectionChannel;
+  hkxEdgeSelectionChannelTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxEdgeSelectionChannel;
+  hkxEdgeSelectionChannelTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxEdgeSelectionChannel;
   return result;
 }
 

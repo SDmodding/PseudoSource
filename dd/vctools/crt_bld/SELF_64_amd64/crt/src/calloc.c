@@ -3,7 +3,7 @@
 void *__fastcall calloc(unsigned __int64 num, unsigned __int64 size)
 {
   void *v2; // rbx
-  int errno_tmp; // [rsp+40h] [rbp+18h]
+  int errno_tmp; // [rsp+40h] [rbp+18h] BYREF
 
   errno_tmp = 0;
   v2 = calloc_impl(num, size, &errno_tmp);

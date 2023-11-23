@@ -2,15 +2,15 @@
 // RVA: 0xD89310
 void __fastcall hkpWorldOperationQueue::hkpWorldOperationQueue(hkpWorldOperationQueue *this, hkpWorld *world)
 {
-  this->m_pending.m_capacityAndFlags = 2147483648;
+  this->m_pending.m_capacityAndFlags = 0x80000000;
   this->m_pending.m_data = 0i64;
   this->m_pending.m_size = 0;
   this->m_islandMerges.m_data = 0i64;
   this->m_islandMerges.m_size = 0;
-  this->m_islandMerges.m_capacityAndFlags = 2147483648;
+  this->m_islandMerges.m_capacityAndFlags = 0x80000000;
   this->m_pendingBodyOperations.m_data = 0i64;
   this->m_pendingBodyOperations.m_size = 0;
-  this->m_pendingBodyOperations.m_capacityAndFlags = 2147483648;
+  this->m_pendingBodyOperations.m_capacityAndFlags = 0x80000000;
   this->m_world = world;
 }
 
@@ -18,43 +18,42 @@ void __fastcall hkpWorldOperationQueue::hkpWorldOperationQueue(hkpWorldOperation
 // RVA: 0xD89350
 void __fastcall hkpWorldOperationQueue::~hkpWorldOperationQueue(hkpWorldOperationQueue *this)
 {
-  int v1; // eax
-  hkpWorldOperationQueue *v2; // rbx
-  int v3; // er8
-  int v4; // er8
+  int m_capacityAndFlags; // eax
+  int v3; // r8d
+  int v4; // r8d
 
-  v1 = this->m_pendingBodyOperations.m_capacityAndFlags;
-  v2 = this;
+  m_capacityAndFlags = this->m_pendingBodyOperations.m_capacityAndFlags;
   this->m_pendingBodyOperations.m_size = 0;
-  if ( v1 >= 0 )
+  if ( m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       this->m_pendingBodyOperations.m_data,
-      24 * (v1 & 0x3FFFFFFF));
-  v2->m_pendingBodyOperations.m_data = 0i64;
-  v2->m_pendingBodyOperations.m_capacityAndFlags = 2147483648;
-  v3 = v2->m_islandMerges.m_capacityAndFlags;
-  v2->m_islandMerges.m_size = 0;
+      24 * (m_capacityAndFlags & 0x3FFFFFFF));
+  this->m_pendingBodyOperations.m_data = 0i64;
+  this->m_pendingBodyOperations.m_capacityAndFlags = 0x80000000;
+  v3 = this->m_islandMerges.m_capacityAndFlags;
+  this->m_islandMerges.m_size = 0;
   if ( v3 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_islandMerges.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_islandMerges.m_data,
       v3 << 6);
-  v2->m_islandMerges.m_data = 0i64;
-  v2->m_islandMerges.m_capacityAndFlags = 2147483648;
-  v4 = v2->m_pending.m_capacityAndFlags;
-  v2->m_pending.m_size = 0;
+  this->m_islandMerges.m_data = 0i64;
+  this->m_islandMerges.m_capacityAndFlags = 0x80000000;
+  v4 = this->m_pending.m_capacityAndFlags;
+  this->m_pending.m_size = 0;
   if ( v4 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_pending.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_pending.m_data,
       v4 << 6);
-  v2->m_pending.m_capacityAndFlags = 2147483648;
-  v2->m_pending.m_data = 0i64;
+  this->m_pending.m_capacityAndFlags = 0x80000000;
+  this->m_pending.m_data = 0i64;
 }
 
 // File Line: 44
 // RVA: 0xD8A3A0
+// attributes: thunk
 void __fastcall addReferenceTo(hkReferencedObject *obj)
 {
   hkReferencedObject::addReference(obj);
@@ -62,6 +61,7 @@ void __fastcall addReferenceTo(hkReferencedObject *obj)
 
 // File Line: 45
 // RVA: 0xD8A3B0
+// attributes: thunk
 void __fastcall removeReferenceFrom(hkReferencedObject *obj)
 {
   hkReferencedObject::removeReference(obj);
@@ -69,40 +69,40 @@ void __fastcall removeReferenceFrom(hkReferencedObject *obj)
 
 // File Line: 48
 // RVA: 0xD89420
-void __fastcall hkpWorldOperationQueue::queueOperation(hkpWorldOperationQueue *this, hkWorldOperation::BaseOperation *operation)
+void __fastcall hkpWorldOperationQueue::queueOperation(
+        hkpWorldOperationQueue *this,
+        hkWorldOperation::BaseOperation *operation)
 {
-  hkWorldOperation::BaseOperation *v2; // rsi
-  hkpWorldOperationQueue *v3; // rbx
   hkWorldOperation::BiggestOperation *v4; // rax
   hkWorldOperation::BaseOperation *v5; // rcx
-  signed __int64 v6; // rdx
+  __int64 v6; // rdx
   hkWorldOperation::BiggestOperation *v7; // rdi
   int v8; // eax
   hkReferencedObject *v9; // rcx
   int v10; // ebx
-  _QWORD **v11; // rax
+  _QWORD **Value; // rax
   void *v12; // rax
   hkReferencedObject **v13; // rbx
-  unsigned __int64 v14; // rdi
+  hkReferencedObject **v14; // rdi
   hkReferencedObject *v15; // rcx
   int v16; // ebx
   _QWORD **v17; // rax
   void *v18; // rax
   hkReferencedObject **v19; // rbx
-  unsigned __int64 v20; // rdi
+  hkReferencedObject **v20; // rdi
   hkReferencedObject *v21; // rcx
   hkWorldOperation::BiggestOperation *v22; // rcx
   int v23; // ebx
   _QWORD **v24; // rax
   void *v25; // rax
   hkReferencedObject **v26; // rbx
-  unsigned __int64 v27; // rdi
+  hkReferencedObject **v27; // rdi
   hkReferencedObject *v28; // rcx
   int v29; // ebx
   _QWORD **v30; // rax
   void *v31; // rax
   hkReferencedObject **v32; // rbx
-  unsigned __int64 v33; // rdi
+  hkReferencedObject **v33; // rdi
   hkReferencedObject *v34; // rcx
   _QWORD **v35; // rax
   _OWORD *v36; // rax
@@ -111,26 +111,24 @@ void __fastcall hkpWorldOperationQueue::queueOperation(hkpWorldOperationQueue *t
   _QWORD **v39; // rax
   void *v40; // rax
   hkReferencedObject **v41; // rbx
-  unsigned __int64 v42; // rdi
+  hkReferencedObject **v42; // rdi
   hkReferencedObject *v43; // rcx
 
-  v2 = operation;
-  v3 = this;
   hkReferencedObject::lockAll();
-  if ( v3->m_pending.m_size == (v3->m_pending.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v3, 64);
-  v4 = &v3->m_pending.m_data[(signed __int64)v3->m_pending.m_size];
+  if ( this->m_pending.m_size == (this->m_pending.m_capacityAndFlags & 0x3FFFFFFF) )
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&this->m_pending.m_data, 64);
+  v4 = &this->m_pending.m_data[(__int64)this->m_pending.m_size];
   if ( v4 )
     v4->m_type.m_storage = 0;
-  v5 = v2;
+  v5 = operation;
   v6 = 16i64;
-  v7 = &v3->m_pending.m_data[(signed __int64)v3->m_pending.m_size++];
-  ++v3->m_world->m_pendingOperationsCount;
+  v7 = &this->m_pending.m_data[(__int64)this->m_pending.m_size++];
+  ++this->m_world->m_pendingOperationsCount;
   do
   {
     v8 = *(_DWORD *)&v5->m_type.m_storage;
     v5 += 4;
-    *(_DWORD *)&v5[(char *)v7 - (char *)v2 - 4].m_type.m_storage = v8;
+    *(_DWORD *)&v5[(char *)v7 - (char *)operation - 4].m_type.m_storage = v8;
     --v6;
   }
   while ( v6 );
@@ -172,16 +170,20 @@ LABEL_33:
       break;
     case 7:
       v10 = LOWORD(v7->dummy[1]);
-      v11 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v12 = (void *)(*(__int64 (__fastcall **)(_QWORD *, _QWORD))(*v11[11] + 8i64))(v11[11], (unsigned int)(8 * v10));
+      Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+      v12 = (void *)(*(__int64 (__fastcall **)(_QWORD *, _QWORD))(*Value[11] + 8i64))(
+                      Value[11],
+                      (unsigned int)(8 * v10));
       v7->dummy[0] = (unsigned __int64)v12;
-      hkString::memCpy(v12, *(const void **)&v2[8].m_type.m_storage, 8 * *(unsigned __int16 *)&v2[16].m_type.m_storage);
+      hkString::memCpy(
+        v12,
+        *(const void **)&operation[8].m_type.m_storage,
+        8 * *(unsigned __int16 *)&operation[16].m_type.m_storage);
       v13 = (hkReferencedObject **)v7->dummy[0];
-      v14 = (unsigned __int64)&v13[LOWORD(v7->dummy[1])];
-      while ( (unsigned __int64)v13 < v14 )
+      v14 = &v13[LOWORD(v7->dummy[1])];
+      while ( v13 < v14 )
       {
-        v15 = *v13;
-        ++v13;
+        v15 = *v13++;
         hkReferencedObject::addReference(v15);
       }
       break;
@@ -190,25 +192,24 @@ LABEL_33:
       v17 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
       v18 = (void *)(*(__int64 (__fastcall **)(_QWORD *, _QWORD))(*v17[11] + 8i64))(v17[11], (unsigned int)(8 * v16));
       v7->dummy[0] = (unsigned __int64)v18;
-      hkString::memCpy(v18, *(const void **)&v2[8].m_type.m_storage, 8 * *(unsigned __int16 *)&v2[16].m_type.m_storage);
+      hkString::memCpy(
+        v18,
+        *(const void **)&operation[8].m_type.m_storage,
+        8 * *(unsigned __int16 *)&operation[16].m_type.m_storage);
       v19 = (hkReferencedObject **)v7->dummy[0];
-      v20 = (unsigned __int64)&v19[LOWORD(v7->dummy[1])];
-      while ( (unsigned __int64)v19 < v20 )
+      v20 = &v19[LOWORD(v7->dummy[1])];
+      while ( v19 < v20 )
       {
-        v21 = *v19;
-        ++v19;
+        v21 = *v19++;
         hkReferencedObject::addReference(v21);
       }
       break;
     case 0xD:
       hkReferencedObject::addReference((hkReferencedObject *)v7->dummy[0]);
       hkReferencedObject::addReference((hkReferencedObject *)v7->dummy[1]);
-      if ( v3->m_islandMerges.m_size == (v3->m_islandMerges.m_capacityAndFlags & 0x3FFFFFFF) )
-        hkArrayUtil::_reserveMore(
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-          &v3->m_islandMerges,
-          64);
-      v22 = &v3->m_islandMerges.m_data[(signed __int64)v3->m_islandMerges.m_size];
+      if ( this->m_islandMerges.m_size == (this->m_islandMerges.m_capacityAndFlags & 0x3FFFFFFF) )
+        hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&this->m_islandMerges.m_data, 64);
+      v22 = &this->m_islandMerges.m_data[(__int64)this->m_islandMerges.m_size];
       if ( v22 )
       {
         *(_QWORD *)&v22->m_type.m_storage = *(_QWORD *)&v7->m_type.m_storage;
@@ -220,21 +221,23 @@ LABEL_33:
         v22->dummy[5] = v7->dummy[5];
         v22->dummy[6] = v7->dummy[6];
       }
-      ++v3->m_islandMerges.m_size;
-      --v3->m_pending.m_size;
+      ++this->m_islandMerges.m_size;
+      --this->m_pending.m_size;
       break;
     case 0x10:
       v23 = LOWORD(v7->dummy[1]);
       v24 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
       v25 = (void *)(*(__int64 (__fastcall **)(_QWORD *, _QWORD))(*v24[11] + 8i64))(v24[11], (unsigned int)(8 * v23));
       v7->dummy[0] = (unsigned __int64)v25;
-      hkString::memCpy(v25, *(const void **)&v2[8].m_type.m_storage, 8 * *(unsigned __int16 *)&v2[16].m_type.m_storage);
+      hkString::memCpy(
+        v25,
+        *(const void **)&operation[8].m_type.m_storage,
+        8 * *(unsigned __int16 *)&operation[16].m_type.m_storage);
       v26 = (hkReferencedObject **)v7->dummy[0];
-      v27 = (unsigned __int64)&v26[LOWORD(v7->dummy[1])];
-      while ( (unsigned __int64)v26 < v27 )
+      v27 = &v26[LOWORD(v7->dummy[1])];
+      while ( v26 < v27 )
       {
-        v28 = *v26;
-        ++v26;
+        v28 = *v26++;
         hkReferencedObject::addReference(v28);
       }
       break;
@@ -243,22 +246,24 @@ LABEL_33:
       v30 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
       v31 = (void *)(*(__int64 (__fastcall **)(_QWORD *, _QWORD))(*v30[11] + 8i64))(v30[11], (unsigned int)(8 * v29));
       v7->dummy[0] = (unsigned __int64)v31;
-      hkString::memCpy(v31, *(const void **)&v2[8].m_type.m_storage, 8 * *(unsigned __int16 *)&v2[16].m_type.m_storage);
+      hkString::memCpy(
+        v31,
+        *(const void **)&operation[8].m_type.m_storage,
+        8 * *(unsigned __int16 *)&operation[16].m_type.m_storage);
       v32 = (hkReferencedObject **)v7->dummy[0];
-      v33 = (unsigned __int64)&v32[LOWORD(v7->dummy[1])];
-      while ( (unsigned __int64)v32 < v33 )
+      v33 = &v32[LOWORD(v7->dummy[1])];
+      while ( v32 < v33 )
       {
-        v34 = *v32;
-        ++v32;
+        v34 = *v32++;
         hkReferencedObject::addReference(v34);
       }
       break;
     case 0x12:
       hkReferencedObject::addReference((hkReferencedObject *)v7->dummy[0]);
       v35 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v36 = (_OWORD *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v35[11] + 8i64))(v35[11], 32i64);
+      v36 = (_OWORD *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v35[11] + 8i64))(v35[11], 32i64);
       v7->dummy[1] = (unsigned __int64)v36;
-      v37 = *(_OWORD **)&v2[16].m_type.m_storage;
+      v37 = *(_OWORD **)&operation[16].m_type.m_storage;
       *v36 = *v37;
       v36[1] = v37[1];
       break;
@@ -267,69 +272,62 @@ LABEL_33:
       v39 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
       v40 = (void *)(*(__int64 (__fastcall **)(_QWORD *, _QWORD))(*v39[11] + 8i64))(v39[11], (unsigned int)(8 * v38));
       v7->dummy[0] = (unsigned __int64)v40;
-      hkString::memCpy(v40, *(const void **)&v2[8].m_type.m_storage, 8 * *(unsigned __int16 *)&v2[16].m_type.m_storage);
+      hkString::memCpy(
+        v40,
+        *(const void **)&operation[8].m_type.m_storage,
+        8 * *(unsigned __int16 *)&operation[16].m_type.m_storage);
       v41 = (hkReferencedObject **)v7->dummy[0];
-      v42 = (unsigned __int64)&v41[LOWORD(v7->dummy[1])];
-      while ( (unsigned __int64)v41 < v42 )
+      v42 = &v41[LOWORD(v7->dummy[1])];
+      while ( v41 < v42 )
       {
-        v43 = *v41;
-        ++v41;
+        v43 = *v41++;
         hkReferencedObject::addReference(v43);
       }
       break;
     case 0x1F:
       hkReferencedObject::addReference((hkReferencedObject *)v7->dummy[0]);
-      --v3->m_pending.m_size;
-      --v3->m_world->m_pendingOperationsCount;
+      --this->m_pending.m_size;
+      --this->m_world->m_pendingOperationsCount;
       break;
     case 0x20:
       hkReferencedObject::removeReference((hkReferencedObject *)v7->dummy[0]);
-      --v3->m_pending.m_size;
-      --v3->m_world->m_pendingOperationsCount;
+      --this->m_pending.m_size;
+      --this->m_world->m_pendingOperationsCount;
       break;
     default:
       break;
   }
   hkReferencedObject::unlockAll();
-}nsCount;
-      break;
-    default:
-      break;
-  }
-  hkReferencedObject::unlockAll();
 }
 
 // File Line: 394
 // RVA: 0xD8A150
-void __fastcall hkpWorldOperationQueue::queueBodyOperation(hkpWorldOperationQueue *this, hkpEntity *entity, hkpBodyOperation *operation, int priority, hkpBodyOperation::ExecutionState hint)
+void __fastcall hkpWorldOperationQueue::queueBodyOperation(
+        hkpWorldOperationQueue *this,
+        hkpEntity *entity,
+        hkpBodyOperation *operation,
+        int priority,
+        hkpBodyOperation::ExecutionState hint)
 {
-  int v5; // ebp
-  hkpBodyOperation *v6; // rdi
-  hkpEntity *v7; // rsi
-  hkpWorldOperationQueue *v8; // rbx
-  __int64 v9; // rdx
-  signed __int64 v10; // r8
+  __int64 m_size; // rdx
+  hkpBodyOperationEntry *v10; // r8
 
-  v5 = priority;
-  v6 = operation;
-  v7 = entity;
-  v8 = this;
   hkReferencedObject::lockAll();
-  ++v8->m_world->m_pendingBodyOperationsCount;
-  if ( v8->m_pendingBodyOperations.m_size == (v8->m_pendingBodyOperations.m_capacityAndFlags & 0x3FFFFFFF) )
+  ++this->m_world->m_pendingBodyOperationsCount;
+  if ( this->m_pendingBodyOperations.m_size == (this->m_pendingBodyOperations.m_capacityAndFlags & 0x3FFFFFFF) )
     hkArrayUtil::_reserveMore(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &v8->m_pendingBodyOperations,
+      &hkContainerHeapAllocator::s_alloc,
+      (const void **)&this->m_pendingBodyOperations.m_data,
       24);
-  v9 = v8->m_pendingBodyOperations.m_size;
-  v10 = (signed __int64)&v8->m_pendingBodyOperations.m_data[v9];
-  v8->m_pendingBodyOperations.m_size = v9 + 1;
-  *(_QWORD *)v10 = v7;
-  *(_QWORD *)(v10 + 8) = v6;
-  *(_DWORD *)(v10 + 16) = v5;
-  *(_DWORD *)(v10 + 20) = hint;
-  hkReferencedObject::addReference((hkReferencedObject *)&v7->vfptr);
-  hkReferencedObject::addReference((hkReferencedObject *)&v6->vfptr);
+  m_size = this->m_pendingBodyOperations.m_size;
+  v10 = &this->m_pendingBodyOperations.m_data[m_size];
+  this->m_pendingBodyOperations.m_size = m_size + 1;
+  v10->m_entity = entity;
+  v10->m_operation = operation;
+  v10->m_priority = priority;
+  v10->m_hint = hint;
+  hkReferencedObject::addReference(entity);
+  hkReferencedObject::addReference(operation);
   hkReferencedObject::unlockAll();
 }
 
@@ -337,162 +335,152 @@ void __fastcall hkpWorldOperationQueue::queueBodyOperation(hkpWorldOperationQueu
 // RVA: 0xD8A3C0
 bool __fastcall hkpWorldBodyOperationQueueSortCmp(hkpBodyOperationEntry *a, hkpBodyOperationEntry *b)
 {
-  bool result; // al
-
   if ( a->m_entity == b->m_entity )
-    result = a->m_priority > (unsigned __int64)b->m_priority;
+    return a->m_priority > (unsigned __int64)b->m_priority;
   else
-    result = a->m_entity->m_uid < b->m_entity->m_uid;
-  return result;
+    return a->m_entity->m_uid < b->m_entity->m_uid;
 }
 
 // File Line: 425
 // RVA: 0xD8A200
 void __fastcall hkpWorldOperationQueue::executeAllPendingBodyOperations(hkpWorldOperationQueue *this)
 {
-  hkpWorldOperationQueue *i; // r14
-  int v2; // eax
-  int v3; // eax
-  int v4; // er9
-  __int64 v5; // rdi
-  hkRelocationInfo::Import *v6; // rbp
-  hkRelocationInfo::Import *v7; // rbx
+  int v2; // r9d
+  __int64 m_size; // rdi
+  hkRelocationInfo::Import *m_data; // rbp
+  hkRelocationInfo::Import *v5; // rbx
+  __int64 v6; // rsi
+  hkReferencedObject **v7; // rbx
   __int64 v8; // rsi
-  hkReferencedObject **v9; // rbx
-  __int64 v10; // rsi
-  hkReferencedObject *v11; // rdi
-  hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> v12; // [rsp+30h] [rbp-38h]
-  __int16 v13; // [rsp+70h] [rbp+8h]
-  hkResult result; // [rsp+78h] [rbp+10h]
+  hkReferencedObject *v9; // rdi
+  hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> v10; // [rsp+30h] [rbp-38h] BYREF
+  __int16 v11; // [rsp+70h] [rbp+8h] BYREF
+  hkResult result; // [rsp+78h] [rbp+10h] BYREF
 
-  for ( i = this; i->m_pendingBodyOperations.m_size; v12.m_capacityAndFlags = 2147483648 )
+  for ( ; this->m_pendingBodyOperations.m_size; v10.m_capacityAndFlags = 0x80000000 )
   {
-    v12.m_data = 0i64;
-    v12.m_size = 0;
-    v12.m_capacityAndFlags = 2147483648;
+    v10.m_data = 0i64;
+    v10.m_size = 0;
+    v10.m_capacityAndFlags = 0x80000000;
     hkArray<hkpTreeBroadPhase32::Handle,hkContainerHeapAllocator>::swap(
-      &v12,
-      (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&i->m_pendingBodyOperations);
-    i->m_world->m_pendingBodyOperationsCount = 0;
-    v2 = i->m_pendingBodyOperations.m_capacityAndFlags & 0x3FFFFFFF;
-    if ( v2 >= 16 )
+      &v10,
+      (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&this->m_pendingBodyOperations);
+    this->m_world->m_pendingBodyOperationsCount = 0;
+    if ( (this->m_pendingBodyOperations.m_capacityAndFlags & 0x3FFFFFFFu) >= 0x10 )
     {
-      result.m_enum = 0;
+      result.m_enum = HK_SUCCESS;
     }
     else
     {
-      v3 = 2 * v2;
-      v4 = 16;
-      if ( v3 > 16 )
-        v4 = v3;
+      v2 = 16;
+      if ( 2 * (this->m_pendingBodyOperations.m_capacityAndFlags & 0x3FFFFFFF) > 16 )
+        v2 = 2 * (this->m_pendingBodyOperations.m_capacityAndFlags & 0x3FFFFFFF);
       hkArrayUtil::_reserve(
         &result,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        &i->m_pendingBodyOperations,
-        v4,
+        &hkContainerHeapAllocator::s_alloc,
+        (const void **)&this->m_pendingBodyOperations.m_data,
+        v2,
         24);
     }
-    v5 = (unsigned int)v12.m_size;
-    v6 = v12.m_data;
-    if ( v12.m_size > 1 )
+    m_size = (unsigned int)v10.m_size;
+    m_data = v10.m_data;
+    if ( v10.m_size > 1 )
       hkAlgorithm::quickSortRecursive<hkpBodyOperationEntry,bool (*)(hkpBodyOperationEntry const &,hkpBodyOperationEntry const &)>(
-        (hkpBodyOperationEntry *)v12.m_data,
+        (hkpBodyOperationEntry *)v10.m_data,
         0,
-        v12.m_size - 1,
+        v10.m_size - 1,
         hkpWorldBodyOperationQueueSortCmp);
-    if ( (signed int)v5 > 0 )
+    if ( (int)m_size > 0 )
     {
-      v7 = v6;
-      v8 = v5;
+      v5 = m_data;
+      v6 = m_size;
       do
       {
-        v13 = 256;
-        (*(void (__fastcall **)(const char *, _QWORD, __int16 *))(*(_QWORD *)v7->m_identifier + 24i64))(
-          v7->m_identifier,
-          *(_QWORD *)&v7->m_fromOffset,
-          &v13);
-        v7 = (hkRelocationInfo::Import *)((char *)v7 + 24);
+        v11 = 256;
+        (*(void (__fastcall **)(const char *, _QWORD, __int16 *))(*(_QWORD *)v5->m_identifier + 24i64))(
+          v5->m_identifier,
+          *(_QWORD *)&v5->m_fromOffset,
+          &v11);
+        v5 = (hkRelocationInfo::Import *)((char *)v5 + 24);
+        --v6;
+      }
+      while ( v6 );
+    }
+    hkReferencedObject::lockAll();
+    if ( (int)m_size > 0 )
+    {
+      v7 = (hkReferencedObject **)m_data;
+      v8 = m_size;
+      do
+      {
+        v9 = v7[1];
+        hkReferencedObject::removeReferenceLockUnchecked(*v7);
+        hkReferencedObject::removeReferenceLockUnchecked(v9);
+        v7 += 3;
         --v8;
       }
       while ( v8 );
     }
-    hkReferencedObject::lockAll();
-    if ( (signed int)v5 > 0 )
-    {
-      v9 = (hkReferencedObject **)v6;
-      v10 = v5;
-      do
-      {
-        v11 = v9[1];
-        hkReferencedObject::removeReferenceLockUnchecked(*v9);
-        hkReferencedObject::removeReferenceLockUnchecked(v11);
-        v9 += 3;
-        --v10;
-      }
-      while ( v10 );
-    }
     hkReferencedObject::unlockAll();
-    v12.m_size = 0;
-    if ( v12.m_capacityAndFlags >= 0 )
+    v10.m_size = 0;
+    if ( v10.m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-        v6,
-        24 * (v12.m_capacityAndFlags & 0x3FFFFFFF));
-    v12.m_data = 0i64;
+        &hkContainerHeapAllocator::s_alloc,
+        m_data,
+        24 * (v10.m_capacityAndFlags & 0x3FFFFFFF));
+    v10.m_data = 0i64;
   }
 }
 
 // File Line: 466
 // RVA: 0xD8A400
-hkBool *__fastcall islandLess(hkBool *result, hkWorldOperation::BiggestOperation *a, hkWorldOperation::BiggestOperation *b)
+hkBool *__fastcall islandLess(
+        hkBool *result,
+        hkWorldOperation::BiggestOperation *a,
+        hkWorldOperation::BiggestOperation *b)
 {
-  hkBool *v3; // r10
   unsigned int v4; // ecx
   unsigned int v5; // eax
-  hkBool *v6; // rax
 
-  v3 = result;
   v4 = *(unsigned __int16 *)(*(_QWORD *)(a->dummy[0] + 296) + 44i64);
   v5 = *(unsigned __int16 *)(*(_QWORD *)(b->dummy[0] + 296) + 44i64);
   if ( v4 < v5
     || v4 == v5
     && *(_WORD *)(*(_QWORD *)(a->dummy[1] + 296) + 44i64) < *(_WORD *)(*(_QWORD *)(b->dummy[1] + 296) + 44i64) )
   {
-    v3->m_bool = 1;
-    v6 = v3;
+    result->m_bool = 1;
+    return result;
   }
   else
   {
-    v3->m_bool = 0;
-    v6 = v3;
+    result->m_bool = 0;
+    return result;
   }
-  return v6;
 }
 
 // File Line: 494
 // RVA: 0xD898A0
 void __fastcall hkpWorldOperationQueue::executeAllPending(hkpWorldOperationQueue *this)
 {
-  hkpWorldOperationQueue *v1; // rdi
   hkpWorldOperationQueue *v2; // r10
-  signed int v3; // er8
-  hkWorldOperation::BiggestOperation *v4; // rax
+  int m_size; // r8d
+  hkWorldOperation::BiggestOperation *m_data; // rax
   int v5; // edx
-  signed __int64 v6; // rcx
+  __int64 v6; // rcx
   __m128i v7; // xmm2
   __int128 v8; // xmm1
   hkpEntity *v9; // rbx
   __int128 v10; // xmm0
   hkpEntity *v11; // xmm2_8
-  hkpWorld *v12; // rax
+  hkpWorld *m_world; // rax
   hkpWorld *v13; // rcx
   __int64 v14; // rsi
-  hkpEntityActivation *v15; // rbx
+  const char **p_m_identifier; // rbx
   hkpWorld *v16; // rcx
   hkpEntity *v17; // rcx
   int v18; // edi
   hkpEntity *v19; // rsi
-  _QWORD **v20; // rax
+  _QWORD **Value; // rax
   hkpConstraintInstance *v21; // rdx
   hkpWorld *v22; // rcx
   hkpEntity *v23; // rax
@@ -508,7 +496,7 @@ void __fastcall hkpWorldOperationQueue::executeAllPending(hkpWorldOperationQueue
   hkpWorld *v33; // rcx
   hkpEntity *v34; // r8
   hkpWorld *v35; // rcx
-  __int64 v36; // rdi
+  const char *v36; // rdi
   _QWORD **v37; // rax
   hkpEntity *v38; // rdi
   hkpEntity *v39; // rcx
@@ -516,55 +504,53 @@ void __fastcall hkpWorldOperationQueue::executeAllPending(hkpWorldOperationQueue
   hkpEntity *v41; // rcx
   hkpEntity *v42; // rdi
   hkpEntity *v43; // rcx
-  __int64 v44; // rdi
+  const char *v44; // rdi
   _QWORD **v45; // rax
   hkpEntity *v46; // rdi
   hkpEntity *v47; // rcx
   __int64 v48; // r11
-  _QWORD *v49; // rdx
-  _QWORD *i; // rcx
+  const char *v49; // rdx
+  char *v50; // rcx
   __int64 v51; // r8
   __int64 v52; // rax
-  int v53; // ST20_4
-  hkpEntity *v54; // rdi
-  unsigned __int64 v55; // rsi
-  hkReferencedObject *v56; // rcx
-  void *v57; // [rsp+28h] [rbp-69h]
-  int v58; // [rsp+30h] [rbp-61h]
-  int v59; // [rsp+34h] [rbp-5Dh]
-  hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> v60; // [rsp+38h] [rbp-59h]
-  __m128 v61; // [rsp+48h] [rbp-49h]
-  __m128 v62; // [rsp+58h] [rbp-39h]
-  __m128 v63; // [rsp+68h] [rbp-29h]
-  __m128 v64; // [rsp+78h] [rbp-19h]
+  hkpEntity *v53; // rdi
+  unsigned __int64 v54; // rsi
+  hkReferencedObject *vfptr; // rcx
+  void *v56; // [rsp+28h] [rbp-69h] BYREF
+  int v57; // [rsp+30h] [rbp-61h]
+  int v58; // [rsp+34h] [rbp-5Dh]
+  hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> v59; // [rsp+38h] [rbp-59h] BYREF
+  __m128 v60; // [rsp+48h] [rbp-49h] BYREF
+  __m128 v61; // [rsp+58h] [rbp-39h] BYREF
+  __m128 v62; // [rsp+68h] [rbp-29h] BYREF
+  __m128 v63[2]; // [rsp+78h] [rbp-19h] BYREF
   hkpEntity *entityB[2]; // [rsp+98h] [rbp+7h]
-  __int128 v66; // [rsp+A8h] [rbp+17h]
-  __int128 v67; // [rsp+B8h] [rbp+27h]
+  __int128 v65; // [rsp+A8h] [rbp+17h]
+  __int128 v66; // [rsp+B8h] [rbp+27h]
   hkpWorldOperationQueue *retaddr; // [rsp+F8h] [rbp+67h]
-  hkpWorldOperationQueue *result; // [rsp+100h] [rbp+6Fh]
-  hkBool v70; // [rsp+108h] [rbp+77h]
-  __int64 v71; // [rsp+110h] [rbp+7Fh]
+  hkpWorldOperationQueue *result; // [rsp+100h] [rbp+6Fh] BYREF
+  hkBool v69; // [rsp+108h] [rbp+77h] BYREF
+  __int64 v70; // [rsp+110h] [rbp+7Fh]
 
   result = this;
-  v1 = this;
   hkReferencedObject::lockAll();
-  v60.m_data = 0i64;
-  v60.m_size = 0;
-  v60.m_capacityAndFlags = 2147483648;
+  v59.m_data = 0i64;
+  v59.m_size = 0;
+  v59.m_capacityAndFlags = 0x80000000;
   hkArray<hkpTreeBroadPhase32::Handle,hkContainerHeapAllocator>::swap(
-    &v60,
-    (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)v1);
+    &v59,
+    (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)this);
   v2 = retaddr;
   ++retaddr->m_world->m_pendingOperationQueueCount;
-  v3 = retaddr->m_islandMerges.m_size;
-  if ( v3 )
+  m_size = retaddr->m_islandMerges.m_size;
+  if ( m_size )
   {
-    if ( v3 > 1 )
+    if ( m_size > 1 )
     {
       hkAlgorithm::quickSortRecursive<hkWorldOperation::BiggestOperation,hkBool (*)(hkWorldOperation::BiggestOperation const &,hkWorldOperation::BiggestOperation const &)>(
         retaddr->m_islandMerges.m_data,
         0,
-        v3 - 1,
+        m_size - 1,
         islandLess);
       v2 = retaddr;
     }
@@ -572,355 +558,380 @@ void __fastcall hkpWorldOperationQueue::executeAllPending(hkpWorldOperationQueue
     {
       do
       {
-        v4 = v2->m_islandMerges.m_data;
+        m_data = v2->m_islandMerges.m_data;
         v5 = v2->m_islandMerges.m_size;
-        v6 = (signed __int64)v2->m_islandMerges.m_size << 6;
-        v7 = *(__m128i *)(&v4[-1].m_type.m_storage + v6);
-        v8 = *(_OWORD *)((char *)v4 + v6 - 32);
-        *(_OWORD *)entityB = *(_OWORD *)((char *)v4 + v6 - 48);
+        v6 = (__int64)v5 << 6;
+        v7 = *(__m128i *)(&m_data[-1].m_type.m_storage + v6);
+        v8 = *(_OWORD *)((char *)m_data + v6 - 32);
+        *(_OWORD *)entityB = *(_OWORD *)((char *)m_data + v6 - 48);
         v9 = entityB[0];
-        v66 = v8;
-        v10 = *(_OWORD *)((char *)v4 + v6 - 16);
-        v11 = (hkpEntity *)*(_OWORD *)&_mm_srli_si128(v7, 8);
+        v65 = v8;
+        v10 = *(_OWORD *)((char *)m_data + v6 - 16);
+        v11 = (hkpEntity *)_mm_srli_si128(v7, 8).m128i_u64[0];
         v2->m_islandMerges.m_size = v5 - 1;
-        v12 = v2->m_world;
-        v67 = v10;
+        m_world = v2->m_world;
+        v66 = v10;
         v13 = v11->m_world;
-        if ( v13 == v12
-          && v9->m_world == v12
+        if ( v13 == m_world
+          && v9->m_world == m_world
           && v11->m_motion.m_type.m_storage != 5
           && v9->m_motion.m_type.m_storage != 5
           && v11->m_simulationIsland != v9->m_simulationIsland )
         {
           hkpWorldOperationUtil::mergeIslands(v13, v11, v9);
         }
-        hkReferencedObject::removeReference((hkReferencedObject *)&v11->vfptr);
-        hkReferencedObject::removeReference((hkReferencedObject *)&v9->vfptr);
+        hkReferencedObject::removeReference(v11);
+        hkReferencedObject::removeReference(v9);
         v2 = retaddr;
       }
       while ( retaddr->m_islandMerges.m_size );
     }
   }
-  if ( v60.m_size > 0 )
+  if ( v59.m_size > 0 )
   {
-    v71 = (unsigned int)v60.m_size;
-    v14 = (unsigned int)v60.m_size;
-    v15 = (hkpEntityActivation *)&v60.m_data->m_identifier;
+    v70 = (unsigned int)v59.m_size;
+    v14 = (unsigned int)v59.m_size;
+    p_m_identifier = &v59.m_data->m_identifier;
     do
     {
-      switch ( *((unsigned __int8 *)v15 - 8) )
+      switch ( *((_BYTE *)p_m_identifier - 8) )
       {
-        case 1u:
-          if ( !*(_QWORD *)(*(_QWORD *)v15 + 16i64) )
-            hkpWorld::addEntity(v2->m_world, *(hkpEntity **)v15, v15[2]);
-          goto LABEL_90;
-        case 2u:
+        case 1:
+          if ( !*((_QWORD *)*p_m_identifier + 2) )
+            hkpWorld::addEntity(v2->m_world, (hkpEntity *)*p_m_identifier, *((hkpEntityActivation *)p_m_identifier + 2));
+          goto LABEL_89;
+        case 2:
           v16 = v2->m_world;
-          if ( *(hkpWorld **)(*(_QWORD *)v15 + 16i64) == v16 )
-            hkpWorld::removeEntity(v16, (hkBool *)&result, *(hkpEntity **)v15);
-          goto LABEL_90;
-        case 3u:
+          if ( *((hkpWorld **)*p_m_identifier + 2) == v16 )
+            hkpWorld::removeEntity(v16, (hkBool *)&result, (hkpEntity *)*p_m_identifier);
+          goto LABEL_89;
+        case 3:
           v29 = v2->m_world;
-          if ( *(hkpWorld **)(*(_QWORD *)v15 + 16i64) == v29 )
-            hkpWorldOperationUtil::updateEntityBP(v29, *(hkpEntity **)v15);
-          goto LABEL_90;
-        case 4u:
+          if ( *((hkpWorld **)*p_m_identifier + 2) == v29 )
+            hkpWorldOperationUtil::updateEntityBP(v29, (hkpEntity *)*p_m_identifier);
+          goto LABEL_89;
+        case 4:
           hkpRigidBody::setMotionType(
-            *(hkpRigidBody **)v15,
-            (hkpMotion::MotionType)*((unsigned __int8 *)v15 + 8),
-            (hkpEntityActivation)*((unsigned __int8 *)v15 + 9),
-            (hkpUpdateCollisionFilterOnEntityMode)*((unsigned __int8 *)v15 + 10));
-          goto LABEL_90;
-        case 5u:
-          (*(void (__fastcall **)(_QWORD, _QWORD))(**(_QWORD **)v15 + 24i64))(*(_QWORD *)v15, *((_QWORD *)v15 + 1));
+            (hkpRigidBody *)*p_m_identifier,
+            (hkpMotion::MotionType)*((unsigned __int8 *)p_m_identifier + 8),
+            (hkpEntityActivation)*((unsigned __int8 *)p_m_identifier + 9),
+            (hkpUpdateCollisionFilterOnEntityMode)*((unsigned __int8 *)p_m_identifier + 10));
+          goto LABEL_89;
+        case 5:
+          (*(void (__fastcall **)(const char *, const char *))(*(_QWORD *)*p_m_identifier + 24i64))(
+            *p_m_identifier,
+            p_m_identifier[1]);
           goto LABEL_21;
-        case 6u:
-          (*(void (__fastcall **)(_QWORD, _QWORD))(**(_QWORD **)v15 + 32i64))(*(_QWORD *)v15, *((_QWORD *)v15 + 1));
-          goto LABEL_90;
-        case 7u:
+        case 6:
+          (*(void (__fastcall **)(const char *, const char *))(*(_QWORD *)*p_m_identifier + 32i64))(
+            *p_m_identifier,
+            p_m_identifier[1]);
+          goto LABEL_89;
+        case 7:
           hkpWorld::addEntityBatch(
             v2->m_world,
-            *(hkpEntity *const **)v15,
-            *((unsigned __int16 *)v15 + 4),
-            (hkpEntityActivation)*((unsigned __int8 *)v15 + 10));
+            (hkpEntity *const *)*p_m_identifier,
+            *((unsigned __int16 *)p_m_identifier + 4),
+            (hkpEntityActivation)*((unsigned __int8 *)p_m_identifier + 10));
           goto LABEL_24;
-        case 8u:
-          hkpWorld::removeEntityBatch(v2->m_world, *(hkpEntity *const **)v15, *((unsigned __int16 *)v15 + 4));
+        case 8:
+          hkpWorld::removeEntityBatch(
+            v2->m_world,
+            (hkpEntity **)*p_m_identifier,
+            *((unsigned __int16 *)p_m_identifier + 4));
           goto LABEL_24;
-        case 9u:
-          v21 = *(hkpConstraintInstance **)v15;
-          if ( !*(_QWORD *)(*(_QWORD *)v15 + 16i64) )
+        case 9:
+          v21 = (hkpConstraintInstance *)*p_m_identifier;
+          if ( !*((_QWORD *)*p_m_identifier + 2) )
           {
             v22 = v2->m_world;
             if ( v21->m_entities[0]->m_world == v22 )
             {
               v23 = v21->m_entities[1];
-              if ( !v23 || v23->m_world == v22 || !v23 )
+              if ( !v23 || v23->m_world == v22 )
                 hkpWorld::addConstraint(v22, v21);
             }
           }
-          goto LABEL_90;
-        case 0xAu:
-          if ( *(_QWORD *)(*(_QWORD *)v15 + 16i64) )
-            hkpWorld::removeConstraint(v2->m_world, &v70, *(hkpConstraintInstance **)v15);
-          goto LABEL_90;
-        case 0xBu:
-          v24 = *(hkpEntity **)v15;
-          if ( *(_QWORD *)(*(_QWORD *)v15 + 16i64) )
-            goto LABEL_90;
-          v59 = 2147483648;
-          v57 = 0i64;
-          v58 = 0;
-          v24->vfptr[2].__vecDelDtor((hkBaseObject *)&v24->vfptr, (unsigned int)&v57);
+          goto LABEL_89;
+        case 0xA:
+          if ( *((_QWORD *)*p_m_identifier + 2) )
+            hkpWorld::removeConstraint(v2->m_world, &v69, (hkpConstraintInstance *)*p_m_identifier);
+          goto LABEL_89;
+        case 0xB:
+          v24 = (hkpEntity *)*p_m_identifier;
+          if ( *((_QWORD *)*p_m_identifier + 2) )
+            goto LABEL_89;
+          v58 = 0x80000000;
+          v56 = 0i64;
+          v57 = 0;
+          v24->vfptr[2].__vecDelDtor(v24, (unsigned int)&v56);
           v25 = 0;
-          if ( v58 <= 0 )
-            goto LABEL_40;
-          v26 = v57;
-          v27 = (__int64)v57;
+          if ( v57 <= 0 )
+            goto LABEL_39;
+          v26 = v56;
+          v27 = (__int64)v56;
           break;
-        case 0xCu:
-          if ( *(_QWORD *)(*(_QWORD *)v15 + 24i64) )
-            hkpWorld::removeAction(v2->m_world, *(hkpAction **)v15);
-          goto LABEL_90;
-        case 0xEu:
-          if ( !*(_QWORD *)(*(_QWORD *)v15 + 16i64) )
-            hkpWorld::addPhantom(v2->m_world, *(hkpPhantom **)v15);
-          goto LABEL_90;
-        case 0xFu:
+        case 0xC:
+          if ( *((_QWORD *)*p_m_identifier + 3) )
+            hkpWorld::removeAction(v2->m_world, (hkpAction *)*p_m_identifier);
+          goto LABEL_89;
+        case 0xE:
+          if ( !*((_QWORD *)*p_m_identifier + 2) )
+            hkpWorld::addPhantom(v2->m_world, (hkpPhantom *)*p_m_identifier);
+          goto LABEL_89;
+        case 0xF:
           v28 = v2->m_world;
-          if ( *(hkpWorld **)(*(_QWORD *)v15 + 16i64) == v28 )
-            hkpWorld::removePhantom(v28, *(hkpPhantom **)v15);
-          goto LABEL_90;
-        case 0x10u:
-          hkpWorld::addPhantomBatch(v2->m_world, *(hkpPhantom *const **)v15, *((unsigned __int16 *)v15 + 4));
+          if ( *((hkpWorld **)*p_m_identifier + 2) == v28 )
+            hkpWorld::removePhantom(v28, (hkpPhantom *)*p_m_identifier);
+          goto LABEL_89;
+        case 0x10:
+          hkpWorld::addPhantomBatch(
+            v2->m_world,
+            (hkpPhantom *const *)*p_m_identifier,
+            *((unsigned __int16 *)p_m_identifier + 4));
           goto LABEL_24;
-        case 0x11u:
-          hkpWorld::removePhantomBatch(v2->m_world, *(hkpPhantom *const **)v15, *((unsigned __int16 *)v15 + 4));
+        case 0x11:
+          hkpWorld::removePhantomBatch(
+            v2->m_world,
+            (hkpPhantom *const *)*p_m_identifier,
+            *((unsigned __int16 *)p_m_identifier + 4));
 LABEL_24:
-          hkReferencedObject::removeReferences(*(hkReferencedObject *const **)v15, *((unsigned __int16 *)v15 + 4), 8);
+          hkReferencedObject::removeReferences(
+            (hkReferencedObject **)*p_m_identifier,
+            *((unsigned __int16 *)p_m_identifier + 4),
+            8);
           goto LABEL_25;
-        case 0x12u:
-          if ( *(hkpWorld **)(*(_QWORD *)v15 + 16i64) == v2->m_world )
-            hkpPhantom::updateBroadPhase(*(hkpPhantom **)v15, *((hkAabb **)v15 + 1));
-          hkReferencedObject::removeReference(*(hkReferencedObject **)v15);
-          v30 = (hkpEntity *)*((_QWORD *)v15 + 1);
+        case 0x12:
+          if ( (hkpWorld *)*((_QWORD *)*p_m_identifier + 2) == v2->m_world )
+            hkpPhantom::updateBroadPhase((hkpPhantom *)*p_m_identifier, (hkAabb *)p_m_identifier[1]);
+          hkReferencedObject::removeReference((hkReferencedObject *)*p_m_identifier);
+          v30 = (hkpEntity *)p_m_identifier[1];
           if ( v30 )
-            goto LABEL_57;
-          goto LABEL_92;
-        case 0x13u:
+            goto LABEL_56;
+          goto LABEL_91;
+        case 0x13:
           v32 = v2->m_world;
-          if ( *(hkpWorld **)(*(_QWORD *)v15 + 16i64) == v32 )
+          if ( *((hkpWorld **)*p_m_identifier + 2) == v32 )
             hkpWorld::updateCollisionFilterOnEntity(
               v32,
-              *(hkpEntity **)v15,
-              (hkpUpdateCollisionFilterOnEntityMode)*((unsigned __int8 *)v15 + 8),
-              (hkpUpdateCollectionFilterMode)*((unsigned __int8 *)v15 + 9));
-          goto LABEL_90;
-        case 0x14u:
+              (hkpEntity *)*p_m_identifier,
+              (hkpUpdateCollisionFilterOnEntityMode)*((unsigned __int8 *)p_m_identifier + 8),
+              (hkpUpdateCollectionFilterMode)*((unsigned __int8 *)p_m_identifier + 9));
+          goto LABEL_89;
+        case 0x14:
           v33 = v2->m_world;
-          if ( *(hkpWorld **)(*(_QWORD *)v15 + 16i64) != v33
-            || (v34 = (hkpEntity *)*((_QWORD *)v15 + 1), v34->m_world != v33) )
+          if ( *((hkpWorld **)*p_m_identifier + 2) == v33 && (v34 = (hkpEntity *)p_m_identifier[1], v34->m_world == v33) )
           {
-LABEL_21:
-            hkReferencedObject::removeReference(*(hkReferencedObject **)v15);
-            v17 = (hkpEntity *)*((_QWORD *)v15 + 1);
+            hkpWorld::reenableCollisionBetweenEntityPair(v33, (hkpEntity *)*p_m_identifier, v34);
+            hkReferencedObject::removeReference((hkReferencedObject *)*p_m_identifier);
+            v17 = (hkpEntity *)p_m_identifier[1];
           }
           else
           {
-            hkpWorld::reenableCollisionBetweenEntityPair(v33, *(hkpEntity **)v15, v34);
-            hkReferencedObject::removeReference(*(hkReferencedObject **)v15);
-            v17 = (hkpEntity *)*((_QWORD *)v15 + 1);
+LABEL_21:
+            hkReferencedObject::removeReference((hkReferencedObject *)*p_m_identifier);
+            v17 = (hkpEntity *)p_m_identifier[1];
           }
-          goto LABEL_91;
-        case 0x15u:
+          goto LABEL_90;
+        case 0x15:
           v35 = v2->m_world;
-          if ( *(hkpWorld **)(*(_QWORD *)v15 + 16i64) == v35 )
+          if ( *((hkpWorld **)*p_m_identifier + 2) == v35 )
             hkpWorld::updateCollisionFilterOnPhantom(
               v35,
-              *(hkpPhantom **)v15,
-              (hkpUpdateCollectionFilterMode)*((unsigned __int8 *)v15 + 8));
-          goto LABEL_90;
-        case 0x16u:
+              (hkpPhantom *)*p_m_identifier,
+              (hkpUpdateCollectionFilterMode)*((unsigned __int8 *)p_m_identifier + 8));
+          goto LABEL_89;
+        case 0x16:
           hkpWorld::updateCollisionFilterOnWorld(
             v2->m_world,
-            (hkpUpdateCollisionFilterOnWorldMode)*((unsigned __int8 *)v15 - 7),
-            (hkpUpdateCollectionFilterMode)*((unsigned __int8 *)v15 - 6));
-          goto LABEL_92;
-        case 0x17u:
-          hkpRigidBody::updateBroadphaseAndResetCollisionInformationOfWarpedBody(*(hkpEntity **)v15);
-          goto LABEL_90;
-        case 0x18u:
-          v48 = *((unsigned __int16 *)v15 + 4);
-          v49 = (_QWORD *)(*(_QWORD *)v15 + 8 * (v48 - 1));
-          for ( i = v49; (unsigned __int64)i >= *(_QWORD *)v15; --i )
-          {
-            v51 = *i;
-            if ( *(hkpWorld **)(*i + 16i64) != v2->m_world )
-            {
-              v52 = *v49;
-              --v49;
-              LODWORD(v48) = v48 - 1;
-              *i = v52;
-              v49[1] = v51;
-            }
-          }
-          if ( (_DWORD)v48 )
-          {
-            v53 = *((unsigned __int8 *)v15 + 10);
-            ((void (__fastcall *)(hkpSimulation *, _QWORD, _QWORD))v2->m_world->m_simulation->vfptr[8].__vecDelDtor)(
-              v2->m_world->m_simulation,
-              *(_QWORD *)v15,
-              (unsigned int)v48);
-          }
-          v54 = *(hkpEntity **)v15;
-          v55 = *(_QWORD *)v15 + 8i64 * *((unsigned __int16 *)v15 + 4);
-          if ( *(_QWORD *)v15 < v55 )
+            (hkpUpdateCollisionFilterOnWorldMode)*((unsigned __int8 *)p_m_identifier - 7),
+            (hkpUpdateCollectionFilterMode)*((unsigned __int8 *)p_m_identifier - 6));
+          goto LABEL_91;
+        case 0x17:
+          hkpRigidBody::updateBroadphaseAndResetCollisionInformationOfWarpedBody((hkpEntity *)*p_m_identifier);
+          goto LABEL_89;
+        case 0x18:
+          v48 = *((unsigned __int16 *)p_m_identifier + 4);
+          v49 = &(*p_m_identifier)[8 * v48 - 8];
+          v50 = (char *)v49;
+          if ( v49 >= *p_m_identifier )
           {
             do
             {
-              v56 = (hkReferencedObject *)v54->vfptr;
-              v54 = (hkpEntity *)((char *)v54 + 8);
-              hkReferencedObject::removeReference(v56);
+              v51 = *(_QWORD *)v50;
+              if ( *(hkpWorld **)(*(_QWORD *)v50 + 16i64) != v2->m_world )
+              {
+                v52 = *(_QWORD *)v49;
+                v49 -= 8;
+                LODWORD(v48) = v48 - 1;
+                *(_QWORD *)v50 = v52;
+                *((_QWORD *)v49 + 1) = v51;
+              }
+              v50 -= 8;
             }
-            while ( (unsigned __int64)v54 < v55 );
+            while ( v50 >= *p_m_identifier );
+          }
+          if ( (_DWORD)v48 )
+            ((void (__fastcall *)(hkpSimulation *, const char *, _QWORD))v2->m_world->m_simulation->vfptr[8].__vecDelDtor)(
+              v2->m_world->m_simulation,
+              *p_m_identifier,
+              (unsigned int)v48);
+          v53 = (hkpEntity *)*p_m_identifier;
+          v54 = (unsigned __int64)&(*p_m_identifier)[8 * *((unsigned __int16 *)p_m_identifier + 4)];
+          if ( (unsigned __int64)*p_m_identifier < v54 )
+          {
+            do
+            {
+              vfptr = (hkReferencedObject *)v53->vfptr;
+              v53 = (hkpEntity *)((char *)v53 + 8);
+              hkReferencedObject::removeReference(vfptr);
+            }
+            while ( (unsigned __int64)v53 < v54 );
           }
 LABEL_25:
-          v18 = *((unsigned __int16 *)v15 + 4);
-          v19 = *(hkpEntity **)v15;
-          v20 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-          (*(void (__fastcall **)(_QWORD *, hkpEntity *, _QWORD))(*v20[11] + 16i64))(
-            v20[11],
+          v18 = *((unsigned __int16 *)p_m_identifier + 4);
+          v19 = (hkpEntity *)*p_m_identifier;
+          Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+          (*(void (__fastcall **)(_QWORD *, hkpEntity *, _QWORD))(*Value[11] + 16i64))(
+            Value[11],
             v19,
             (unsigned int)(8 * v18));
-          v14 = v71;
-          goto LABEL_92;
-        case 0x19u:
+          v14 = v70;
+          goto LABEL_91;
+        case 0x19:
           hkpRigidBody::setPositionAndRotation(
-            *(hkpRigidBody **)v15,
-            *((hkVector4f **)v15 + 1),
-            (hkQuaternionf *)(*((_QWORD *)v15 + 1) + 16i64));
-          v36 = *((_QWORD *)v15 + 1);
+            (hkpRigidBody *)*p_m_identifier,
+            (hkVector4f *)p_m_identifier[1],
+            (hkQuaternionf *)p_m_identifier[1] + 1);
+          v36 = p_m_identifier[1];
           v37 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-          (*(void (__fastcall **)(_QWORD *, __int64, signed __int64))(*v37[11] + 16i64))(v37[11], v36, 32i64);
-          goto LABEL_90;
-        case 0x1Au:
-          v38 = *(hkpEntity **)v15;
-          v39 = *(hkpEntity **)v15;
-          v64 = _mm_movelh_ps((__m128)*((unsigned __int64 *)v15 + 1), (__m128)*((unsigned int *)v15 + 4));
+          (*(void (__fastcall **)(_QWORD *, const char *, __int64))(*v37[11] + 16i64))(v37[11], v36, 32i64);
+          goto LABEL_89;
+        case 0x1A:
+          v38 = (hkpEntity *)*p_m_identifier;
+          v39 = (hkpEntity *)*p_m_identifier;
+          v63[0] = _mm_movelh_ps(
+                     (__m128)(unsigned __int64)p_m_identifier[1],
+                     (__m128)*((unsigned int *)p_m_identifier + 4));
           hkpEntity::activate(v39);
-          v38->m_motion.vfptr[9].__vecDelDtor((hkBaseObject *)&v38->m_motion.vfptr, (unsigned int)&v64);
-          goto LABEL_90;
-        case 0x1Bu:
-          v40 = *(hkpEntity **)v15;
-          v41 = *(hkpEntity **)v15;
-          v61 = _mm_movelh_ps((__m128)*((unsigned __int64 *)v15 + 1), (__m128)*((unsigned int *)v15 + 4));
+          v38->m_motion.vfptr[9].__vecDelDtor(&v38->m_motion, (unsigned int)v63);
+          goto LABEL_89;
+        case 0x1B:
+          v40 = (hkpEntity *)*p_m_identifier;
+          v41 = (hkpEntity *)*p_m_identifier;
+          v60 = _mm_movelh_ps(
+                  (__m128)(unsigned __int64)p_m_identifier[1],
+                  (__m128)*((unsigned int *)p_m_identifier + 4));
           hkpEntity::activate(v41);
           ((void (__fastcall *)(hkpMaxSizeMotion *, __m128 *))v40->m_motion.vfptr[9].__first_virtual_table_function__)(
             &v40->m_motion,
-            &v61);
-          goto LABEL_90;
-        case 0x1Cu:
-          v42 = *(hkpEntity **)v15;
-          v43 = *(hkpEntity **)v15;
-          v62 = _mm_movelh_ps((__m128)*((unsigned __int64 *)v15 + 1), (__m128)*((unsigned int *)v15 + 4));
+            &v60);
+          goto LABEL_89;
+        case 0x1C:
+          v42 = (hkpEntity *)*p_m_identifier;
+          v43 = (hkpEntity *)*p_m_identifier;
+          v61 = _mm_movelh_ps(
+                  (__m128)(unsigned __int64)p_m_identifier[1],
+                  (__m128)*((unsigned int *)p_m_identifier + 4));
           hkpEntity::activate(v43);
-          v42->m_motion.vfptr[11].__vecDelDtor((hkBaseObject *)&v42->m_motion.vfptr, (unsigned int)&v62);
-          goto LABEL_90;
-        case 0x1Du:
+          v42->m_motion.vfptr[11].__vecDelDtor(&v42->m_motion, (unsigned int)&v61);
+          goto LABEL_89;
+        case 0x1D:
           hkpRigidBody::applyPointImpulse(
-            *(hkpRigidBody **)v15,
-            (hkVector4f *)(*((_QWORD *)v15 + 1) + 16i64),
-            *((hkVector4f **)v15 + 1));
-          v44 = *((_QWORD *)v15 + 1);
+            (hkpRigidBody *)*p_m_identifier,
+            (hkVector4f *)p_m_identifier[1] + 1,
+            (hkVector4f *)p_m_identifier[1]);
+          v44 = p_m_identifier[1];
           v45 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-          (*(void (__fastcall **)(_QWORD *, __int64, signed __int64))(*v45[11] + 16i64))(v45[11], v44, 32i64);
-          goto LABEL_90;
-        case 0x1Eu:
-          v46 = *(hkpEntity **)v15;
-          v47 = *(hkpEntity **)v15;
-          v63 = _mm_movelh_ps((__m128)*((unsigned __int64 *)v15 + 1), (__m128)*((unsigned int *)v15 + 4));
+          (*(void (__fastcall **)(_QWORD *, const char *, __int64))(*v45[11] + 16i64))(v45[11], v44, 32i64);
+          goto LABEL_89;
+        case 0x1E:
+          v46 = (hkpEntity *)*p_m_identifier;
+          v47 = (hkpEntity *)*p_m_identifier;
+          v62 = _mm_movelh_ps(
+                  (__m128)(unsigned __int64)p_m_identifier[1],
+                  (__m128)*((unsigned int *)p_m_identifier + 4));
           hkpEntity::activate(v47);
-          v46->m_motion.vfptr[12].__vecDelDtor((hkBaseObject *)&v46->m_motion.vfptr, (unsigned int)&v63);
-          goto LABEL_90;
-        case 0x21u:
-          hkpWorld::activateRegion(v2->m_world, *(hkAabb **)v15);
-          v30 = *(hkpEntity **)v15;
-LABEL_57:
+          v46->m_motion.vfptr[12].__vecDelDtor(&v46->m_motion, (unsigned int)&v62);
+          goto LABEL_89;
+        case 0x21:
+          hkpWorld::activateRegion(v2->m_world, (hkAabb *)*p_m_identifier);
+          v30 = (hkpEntity *)*p_m_identifier;
+LABEL_56:
           v31 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-          (*(void (__fastcall **)(_QWORD *, hkpEntity *, signed __int64))(*v31[11] + 16i64))(v31[11], v30, 32i64);
-          goto LABEL_92;
-        case 0x22u:
-          hkpEntity::activate(*(hkpEntity **)v15);
-          goto LABEL_90;
-        case 0x23u:
-          if ( *(hkpWorld **)(*(_QWORD *)v15 + 16i64) == v2->m_world )
-            hkpEntity::requestDeactivation(*(hkpEntity **)v15);
-          goto LABEL_90;
-        case 0x24u:
-          if ( *(hkpWorld **)(*(_QWORD *)v15 + 16i64) == v2->m_world )
-            hkpEntity::deactivate(*(hkpEntity **)v15);
-          goto LABEL_90;
-        case 0x25u:
-          hkpConstraintCollisionFilter::_constraintBreakingCallbackImmediate(
-            *(hkpConstraintCollisionFilter **)v15,
-            *((hkpConstraintInstance **)v15 + 1),
-            (hkBool)*((char *)v15 + 16));
-          hkReferencedObject::removeReference(*(hkReferencedObject **)v15);
-          v17 = (hkpEntity *)*((_QWORD *)v15 + 1);
+          (*(void (__fastcall **)(_QWORD *, hkpEntity *, __int64))(*v31[11] + 16i64))(v31[11], v30, 32i64);
           goto LABEL_91;
-        case 0x26u:
-          (*(void (__fastcall **)(_QWORD, _QWORD))(**(_QWORD **)v15 + 24i64))(*(_QWORD *)v15, *((_QWORD *)v15 + 1));
+        case 0x22:
+          hkpEntity::activate((hkpEntity *)*p_m_identifier);
+          goto LABEL_89;
+        case 0x23:
+          if ( (hkpWorld *)*((_QWORD *)*p_m_identifier + 2) == v2->m_world )
+            hkpEntity::requestDeactivation((hkpEntity *)*p_m_identifier);
+          goto LABEL_89;
+        case 0x24:
+          if ( (hkpWorld *)*((_QWORD *)*p_m_identifier + 2) == v2->m_world )
+            hkpEntity::deactivate((hkpEntity *)*p_m_identifier);
+          goto LABEL_89;
+        case 0x25:
+          hkpConstraintCollisionFilter::_constraintBreakingCallbackImmediate(
+            (hkpConstraintCollisionFilter *)*p_m_identifier,
+            (hkpConstraintInstance *)p_m_identifier[1],
+            (hkBool)p_m_identifier[2]);
+          hkReferencedObject::removeReference((hkReferencedObject *)*p_m_identifier);
+          v17 = (hkpEntity *)p_m_identifier[1];
           goto LABEL_90;
+        case 0x26:
+          (*(void (__fastcall **)(const char *, const char *))(*(_QWORD *)*p_m_identifier + 24i64))(
+            *p_m_identifier,
+            p_m_identifier[1]);
+          goto LABEL_89;
         default:
-          goto LABEL_93;
+          goto LABEL_92;
       }
       while ( *(hkpWorld **)(*(_QWORD *)v27 + 16i64) == retaddr->m_world )
       {
         ++v25;
         v27 += 8i64;
-        if ( v25 >= v58 )
+        if ( v25 >= v57 )
         {
-LABEL_40:
-          hkpWorld::addAction(retaddr->m_world, *(hkpAction **)v15);
-          v26 = v57;
+LABEL_39:
+          hkpWorld::addAction(retaddr->m_world, (hkpAction *)*p_m_identifier);
+          v26 = v56;
           break;
         }
       }
-      v58 = 0;
-      if ( v59 >= 0 )
-        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-          v26,
-          8 * v59);
-      v57 = 0i64;
-      v59 = 2147483648;
+      v57 = 0;
+      if ( v58 >= 0 )
+        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v26, 8 * v58);
+      v56 = 0i64;
+      v58 = 0x80000000;
+LABEL_89:
+      v17 = (hkpEntity *)*p_m_identifier;
 LABEL_90:
-      v17 = *(hkpEntity **)v15;
+      hkReferencedObject::removeReference(v17);
 LABEL_91:
-      hkReferencedObject::removeReference((hkReferencedObject *)&v17->vfptr);
-LABEL_92:
       v2 = retaddr;
-LABEL_93:
+LABEL_92:
       if ( v2->m_pending.m_size )
       {
         hkpWorldOperationQueue::executeAllPending(v2);
         v2 = retaddr;
       }
-      v15 += 16;
-      v71 = --v14;
+      p_m_identifier += 8;
+      v70 = --v14;
     }
     while ( v14 );
   }
   hkArray<hkpTreeBroadPhase32::Handle,hkContainerHeapAllocator>::swap(
-    &v60,
+    &v59,
     (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)v2);
   retaddr->m_pending.m_size = 0;
   --retaddr->m_world->m_pendingOperationQueueCount;
   hkReferencedObject::unlockAll();
-  if ( v60.m_capacityAndFlags >= 0 )
+  if ( v59.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v60.m_data,
-      v60.m_capacityAndFlags << 6);
+      &hkContainerHeapAllocator::s_alloc,
+      v59.m_data,
+      v59.m_capacityAndFlags << 6);
 }
 

@@ -2,34 +2,30 @@
 // RVA: 0xEF4B74
 __int64 __fastcall get_asn1_length(const char *buf, int *offset)
 {
-  int *v2; // r9
   __int64 v3; // rdx
-  const char *v4; // r11
-  unsigned int v5; // er8
+  unsigned int v5; // r8d
   char v6; // al
-  int v7; // er10
+  int v7; // r10d
   __int64 v8; // rax
   __int64 v9; // rcx
   int v10; // edx
 
-  v2 = offset;
   v3 = *offset;
-  v4 = buf;
   LOBYTE(v5) = buf[v3];
   if ( (v5 & 0x80u) != 0 )
   {
     v6 = buf[v3];
     v7 = v3 + 1;
     v5 = 0;
-    *v2 = v3 + 1;
+    *offset = v3 + 1;
     v8 = v6 & 0x7F;
-    if ( (signed int)v8 > 0 )
+    if ( (_DWORD)v8 )
     {
       do
       {
         v9 = v7++;
-        v10 = (unsigned __int8)v4[v9];
-        *v2 = v7;
+        v10 = (unsigned __int8)buf[v9];
+        *offset = v7;
         v5 = v10 + (v5 << 8);
         --v8;
       }
@@ -39,7 +35,7 @@ __int64 __fastcall get_asn1_length(const char *buf, int *offset)
   else
   {
     v5 = (unsigned __int8)v5;
-    *v2 = v3 + 1;
+    *offset = v3 + 1;
   }
   return v5;
 }
@@ -59,17 +55,15 @@ int __fastcall asn1_next_obj(const char *buf, int *offset, int obj_type)
 
 // File Line: 109
 // RVA: 0xEF4AA8
-signed __int64 __fastcall asn1_skip_obj(const char *buf, int *offset, int obj_type)
+__int64 __fastcall asn1_skip_obj(const char *buf, int *offset, int obj_type)
 {
-  int *v3; // rbx
   __int64 v4; // rdx
 
-  v3 = offset;
   v4 = *offset;
   if ( (unsigned __int8)buf[v4] != obj_type )
     return 0xFFFFFFFFi64;
-  *v3 = v4 + 1;
-  *v3 += get_asn1_length(buf, v3);
+  *offset = v4 + 1;
+  *offset += get_asn1_length(buf, offset);
   return 0i64;
 }
 
@@ -77,41 +71,35 @@ signed __int64 __fastcall asn1_skip_obj(const char *buf, int *offset, int obj_ty
 // RVA: 0xEF4460
 char *__fastcall asn1_get_int(const char *buf, int *offset, char **object)
 {
-  const char *v3; // rsi
   __int64 v4; // rcx
-  char **v5; // r14
-  int *v6; // rdi
   unsigned int v7; // ebx
-  int v8; // eax
+  int asn1_length; // eax
   __int64 v9; // rax
   char *result; // rax
 
-  v3 = buf;
   v4 = *offset;
-  v5 = object;
-  v6 = offset;
-  if ( v3[v4] != 2 )
+  if ( buf[v4] != 2 )
     return (char *)(unsigned int)-1;
   *offset = v4 + 1;
-  v8 = get_asn1_length(v3, offset);
-  v7 = v8;
-  if ( v8 < 0 )
+  asn1_length = get_asn1_length(buf, offset);
+  v7 = asn1_length;
+  if ( asn1_length < 0 )
     return (char *)v7;
-  if ( v8 > 1 )
+  if ( asn1_length > 1 )
   {
-    v9 = *v6;
-    if ( !v3[v9] )
+    v9 = *offset;
+    if ( !buf[v9] )
     {
       --v7;
-      *v6 = v9 + 1;
+      *offset = v9 + 1;
     }
   }
-  result = (char *)ax_malloc((signed int)v7);
-  *v5 = result;
+  result = (char *)ax_malloc((int)v7);
+  *object = result;
   if ( result )
   {
-    memmove(result, &v3[*v6], (signed int)v7);
-    *v6 += v7;
+    memmove(result, &buf[*offset], (int)v7);
+    *offset += v7;
     return (char *)v7;
   }
   return result;
@@ -122,44 +110,35 @@ char *__fastcall asn1_get_int(const char *buf, int *offset, char **object)
 __int64 __fastcall asn1_get_utc_time(const char *buf, int *offset, __int64 *t)
 {
   __int64 v3; // r9
-  const char *v4; // rdi
   unsigned int v5; // ecx
   char v6; // r10
-  __int64 *v7; // r14
-  int *v8; // rsi
-  int v9; // eax
+  int asn1_length; // eax
   __int64 v10; // rbx
   int v11; // ebp
   int v12; // edx
   int v13; // eax
-  char Dst; // [rsp+20h] [rbp-58h]
-  int v16; // [rsp+2Ch] [rbp-4Ch]
-  int v17; // [rsp+30h] [rbp-48h]
-  int v18; // [rsp+34h] [rbp-44h]
+  tm Dst; // [rsp+20h] [rbp-58h] BYREF
 
   v3 = *offset;
-  v4 = buf;
   v5 = -1;
-  v6 = v4[v3];
-  v7 = t;
-  v8 = offset;
+  v6 = buf[v3];
   *offset = v3 + 1;
   if ( v6 == 23 )
   {
-    v9 = get_asn1_length(v4, offset);
-    v10 = *v8;
-    v11 = v9;
-    memset(&Dst, 0, 0x24ui64);
-    v12 = (unsigned __int8)v4[v10 + 1] + 2 * (5 * (unsigned __int8)v4[v10] - 264);
-    v18 = v12;
+    asn1_length = get_asn1_length(buf, offset);
+    v10 = *offset;
+    v11 = asn1_length;
+    memset(&Dst, 0, sizeof(Dst));
+    v12 = (unsigned __int8)buf[v10 + 1] + 2 * (5 * (unsigned __int8)buf[v10] - 264);
+    Dst.tm_year = v12;
     if ( v12 <= 50 )
-      v18 = v12 + 100;
-    v13 = (unsigned __int8)v4[v10 + 4];
-    v17 = (unsigned __int8)v4[v10 + 3] + 10 * (unsigned __int8)v4[v10 + 2] - 529;
-    v16 = (unsigned __int8)v4[v10 + 5] + 2 * (5 * v13 - 264);
-    *v7 = mktime64((tm *)&Dst);
-    *v8 += v11;
-    v5 = 0;
+      Dst.tm_year = v12 + 100;
+    v13 = (unsigned __int8)buf[v10 + 4];
+    Dst.tm_mon = (unsigned __int8)buf[v10 + 3] + 10 * (unsigned __int8)buf[v10 + 2] - 529;
+    Dst.tm_mday = (unsigned __int8)buf[v10 + 5] + 2 * (5 * v13 - 264);
+    *t = mktime64(&Dst);
+    *offset += v11;
+    return 0;
   }
   return v5;
 }
@@ -176,22 +155,19 @@ __int64 __fastcall asn1_version(const char *cert, int *offset, _x509_ctx *__form
 // RVA: 0xEF4ADC
 __int64 __fastcall asn1_validity(const char *cert, int *offset, _x509_ctx *x509_ctx)
 {
-  const char *v3; // rsi
   __int64 v4; // rcx
-  _x509_ctx *v5; // rbp
-  int *v6; // rdi
   unsigned int v7; // ebx
 
-  v3 = cert;
   v4 = *offset;
-  v5 = x509_ctx;
-  v6 = offset;
-  if ( v3[v4] != 48
-    || (*offset = v4 + 1, v7 = 0, get_asn1_length(v3, offset) < 0)
-    || (unsigned int)asn1_get_utc_time(v3, v6, &v5->not_before)
-    || (unsigned int)asn1_get_utc_time(v3, v6, &v5->not_after) )
+  if ( cert[v4] != 48 )
+    return 1;
+  *offset = v4 + 1;
+  v7 = 0;
+  if ( get_asn1_length(cert, offset) < 0
+    || (unsigned int)asn1_get_utc_time(cert, offset, &x509_ctx->not_before)
+    || (unsigned int)asn1_get_utc_time(cert, offset, &x509_ctx->not_after) )
   {
-    v7 = 1;
+    return 1;
   }
   return v7;
 }
@@ -200,71 +176,65 @@ __int64 __fastcall asn1_validity(const char *cert, int *offset, _x509_ctx *x509_
 // RVA: 0xEF44FC
 __int64 __fastcall asn1_get_printable_str(const char *buf, int *offset, char **str)
 {
-  const char *v3; // rbp
   __int64 v4; // rcx
   signed __int64 v5; // rdi
-  char **v6; // r14
-  int *v7; // rsi
-  signed int v8; // edx
-  int v9; // eax
+  int v8; // edx
+  int asn1_length; // eax
   int v10; // eax
   __int64 v11; // rbx
-  __int64 v12; // rax
-  int v13; // er11
+  char *v12; // rax
+  int v13; // r11d
   signed __int64 v14; // r10
   signed __int64 v15; // r8
   int v16; // kr00_4
   char *v17; // rax
 
-  v3 = buf;
   v4 = *offset;
   LODWORD(v5) = -1;
-  v6 = str;
-  v7 = offset;
-  if ( v3[v4] <= 0x1Eu )
+  if ( buf[v4] <= 0x1Eu )
   {
     v8 = 1079513088;
-    if ( _bittest(&v8, (unsigned __int8)v3[v4]) )
+    if ( _bittest(&v8, (unsigned __int8)buf[v4]) )
     {
-      *v7 = v4 + 1;
-      v9 = get_asn1_length(v3, v7);
-      v5 = v9;
-      if ( v3[*v7 - 1] == 30 )
+      *offset = v4 + 1;
+      asn1_length = get_asn1_length(buf, offset);
+      v5 = asn1_length;
+      if ( buf[*offset - 1] == 30 )
       {
-        v10 = v9 / 2;
+        v10 = asn1_length / 2;
         v11 = v10;
-        v12 = ax_malloc(v10 + 1);
-        *v6 = (char *)v12;
+        v12 = (char *)ax_malloc(v10 + 1);
+        *str = v12;
         if ( v12 )
         {
           v13 = 0;
           v14 = 0i64;
-          if ( (signed int)v5 > 0 )
+          if ( (int)v5 > 0 )
           {
             do
             {
-              v15 = v14 + *v7;
+              v15 = v14 + *offset;
               v14 += 2i64;
               v16 = v13;
               v13 += 2;
-              (*v6)[v16 / 2] = v3[v15 + 1];
+              (*str)[v16 / 2] = buf[v15 + 1];
             }
             while ( v14 < v5 );
           }
-          (*v6)[v11] = 0;
+          (*str)[v11] = 0;
         }
       }
       else
       {
-        v17 = (char *)ax_malloc(v9 + 1);
-        *v6 = v17;
+        v17 = (char *)ax_malloc(asn1_length + 1);
+        *str = v17;
         if ( v17 )
         {
-          memmove(v17, &v3[*v7], v5);
-          (*v6)[v5] = 0;
+          memmove(v17, &buf[*offset], v5);
+          (*str)[v5] = 0;
         }
       }
-      *v7 += v5;
+      *offset += v5;
     }
   }
   return (unsigned int)v5;
@@ -274,17 +244,14 @@ __int64 __fastcall asn1_get_printable_str(const char *buf, int *offset, char **s
 // RVA: 0xEF46E0
 __int64 __fastcall asn1_name(const char *cert, int *offset, char **dn)
 {
-  const char *v3; // rdi
   __int64 v4; // rcx
   unsigned int v5; // ebp
-  char **v6; // r14
-  int *v7; // rbx
   __int64 v8; // rcx
   __int64 v9; // rcx
   __int64 v10; // rcx
   int v11; // esi
-  int v12; // eax
-  int v13; // er9
+  int asn1_length; // eax
+  int v13; // r9d
   __int64 v14; // rdx
   char v15; // r8
   int v16; // edx
@@ -292,70 +259,71 @@ __int64 __fastcall asn1_name(const char *cert, int *offset, char **dn)
   int v18; // edx
   char v19; // cl
   __int64 v20; // rcx
-  char *str; // [rsp+40h] [rbp+8h]
+  char *str; // [rsp+40h] [rbp+8h] BYREF
 
   str = 0i64;
-  v3 = cert;
   v4 = *offset;
   v5 = -1;
-  v6 = dn;
-  v7 = offset;
-  if ( v3[v4] == 48 )
+  if ( cert[v4] == 48 )
   {
     *offset = v4 + 1;
-    if ( get_asn1_length(v3, offset) >= 0 )
+    if ( get_asn1_length(cert, offset) >= 0 )
     {
 LABEL_3:
       while ( 1 )
       {
-        v8 = *v7;
-        if ( v3[v8] != 49 )
-          break;
-        *v7 = v8 + 1;
-        if ( get_asn1_length(v3, v7) < 0 )
-          break;
-        v9 = *v7;
-        if ( v3[v9] != 48 )
+        v8 = *offset;
+        if ( cert[v8] != 49 )
+          return 0;
+        *offset = v8 + 1;
+        if ( get_asn1_length(cert, offset) < 0 )
+          return 0;
+        v9 = *offset;
+        if ( cert[v9] != 48 )
           return v5;
-        *v7 = v9 + 1;
-        if ( get_asn1_length(v3, v7) < 0 )
+        *offset = v9 + 1;
+        if ( get_asn1_length(cert, offset) < 0 )
           return v5;
-        v10 = *v7;
+        v10 = *offset;
         v11 = 0;
-        if ( v3[v10] == 6 )
+        if ( cert[v10] == 6 )
         {
-          *v7 = v10 + 1;
-          v12 = get_asn1_length(v3, v7);
-          v13 = v12;
-          if ( v12 >= 0 )
+          *offset = v10 + 1;
+          asn1_length = get_asn1_length(cert, offset);
+          v13 = asn1_length;
+          if ( asn1_length >= 0 )
           {
-            if ( v12 != 3 )
-              goto LABEL_27;
-            v14 = *v7;
-            v15 = v3[v14];
+            if ( asn1_length != 3 )
+              goto LABEL_13;
+            v14 = *offset;
+            v15 = cert[v14];
             v16 = v14 + 1;
-            *v7 = v16;
-            if ( v15 != 85 || (v17 = v16, v18 = v16 + 1, v19 = v3[v17], *v7 = v18, v19 != 4) )
+            *offset = v16;
+            if ( v15 != 85 )
+              goto LABEL_13;
+            v17 = v16;
+            v18 = v16 + 1;
+            v19 = cert[v17];
+            *offset = v18;
+            if ( v19 == 4 )
             {
-LABEL_27:
-              *v7 += v13;
+              v11 = (unsigned __int8)cert[v18];
+              *offset = v18 + 1;
             }
             else
             {
-              v11 = (unsigned __int8)v3[v18];
-              *v7 = v18 + 1;
+LABEL_13:
+              *offset += v13;
             }
-            if ( v11 < 0 )
-              return v5;
           }
         }
-        if ( (signed int)asn1_get_printable_str(v3, v7, &str) < 0 )
+        if ( (int)asn1_get_printable_str(cert, offset, &str) < 0 )
         {
           ax_free(str);
           return v5;
         }
         v20 = 0i64;
-        while ( v11 != (unsigned __int8)g_dn_types[v20] || v6[v20] )
+        while ( v11 != (unsigned __int8)g_dn_types[v20] || dn[v20] )
         {
           if ( ++v20 >= 3 )
           {
@@ -363,9 +331,8 @@ LABEL_27:
             goto LABEL_3;
           }
         }
-        v6[v20] = str;
+        dn[v20] = str;
       }
-      v5 = 0;
     }
   }
   return v5;
@@ -375,48 +342,42 @@ LABEL_27:
 // RVA: 0xEF4860
 __int64 __fastcall asn1_public_key(const char *cert, int *offset, _x509_ctx *x509_ctx)
 {
-  const char *v3; // rsi
   __int64 v4; // rcx
   unsigned int v5; // ebx
-  _x509_ctx *v6; // rbp
-  int *v7; // rdi
   __int64 v8; // rcx
   __int64 v9; // rcx
   int v10; // ebx
   int pub_len; // eax
-  char *object; // [rsp+50h] [rbp+8h]
-  char *pub_exp; // [rsp+58h] [rbp+10h]
+  char *object; // [rsp+50h] [rbp+8h] BYREF
+  char *pub_exp; // [rsp+58h] [rbp+10h] BYREF
 
   object = 0i64;
   pub_exp = 0i64;
-  v3 = cert;
   v4 = *offset;
   v5 = -1;
-  v6 = x509_ctx;
-  v7 = offset;
-  if ( v3[v4] == 48 )
+  if ( cert[v4] == 48 )
   {
     *offset = v4 + 1;
-    if ( get_asn1_length(v3, offset) >= 0 && !asn1_skip_obj(v3, v7, 48) )
+    if ( get_asn1_length(cert, offset) >= 0 && !asn1_skip_obj(cert, offset, 48) )
     {
-      v8 = *v7;
-      if ( v3[v8] == 3 )
+      v8 = *offset;
+      if ( cert[v8] == 3 )
       {
-        *v7 = v8 + 1;
-        if ( get_asn1_length(v3, v7) >= 0 )
+        *offset = v8 + 1;
+        if ( get_asn1_length(cert, offset) >= 0 )
         {
-          v9 = ++*v7;
-          if ( v3[v9] == 48 )
+          v9 = ++*offset;
+          if ( cert[v9] == 48 )
           {
-            *v7 = v9 + 1;
-            if ( get_asn1_length(v3, v7) >= 0 )
+            *offset = v9 + 1;
+            if ( get_asn1_length(cert, offset) >= 0 )
             {
-              v10 = (unsigned __int64)asn1_get_int(v3, v7, &object);
-              pub_len = (unsigned __int64)asn1_get_int(v3, v7, &pub_exp);
-              RSA_pub_key_new(&v6->rsa_ctx, object, v10, pub_exp, pub_len);
+              v10 = (unsigned int)asn1_get_int(cert, offset, &object);
+              pub_len = (unsigned int)asn1_get_int(cert, offset, &pub_exp);
+              RSA_pub_key_new(&x509_ctx->rsa_ctx, object, v10, pub_exp, pub_len);
               ax_free(object);
               ax_free(pub_exp);
-              v5 = 0;
+              return 0;
             }
           }
         }
@@ -432,30 +393,24 @@ __int64 __fastcall asn1_signature(const char *cert, int *offset, _x509_ctx *x509
 {
   __int64 v3; // r9
   unsigned int v4; // esi
-  _x509_ctx *v5; // rdi
   char v6; // r10
-  int *v7; // rbx
-  const char *v8; // rbp
   char *v9; // rax
 
   v3 = *offset;
   v4 = -1;
-  v5 = x509_ctx;
   v6 = cert[v3];
-  v7 = offset;
-  v8 = cert;
   *offset = v3 + 1;
   if ( v6 == 3 )
   {
     x509_ctx->sig_len = get_asn1_length(cert, offset) - 1;
-    ++*v7;
-    v9 = (char *)ax_malloc(v5->sig_len);
-    v5->signature = v9;
+    ++*offset;
+    v9 = (char *)ax_malloc(x509_ctx->sig_len);
+    x509_ctx->signature = v9;
     if ( v9 )
     {
-      memmove(v9, &v8[*v7], v5->sig_len);
-      *v7 += v5->sig_len;
-      v4 = 0;
+      memmove(v9, &cert[*offset], x509_ctx->sig_len);
+      *offset += x509_ctx->sig_len;
+      return 0;
     }
   }
   return v4;
@@ -465,13 +420,11 @@ __int64 __fastcall asn1_signature(const char *cert, int *offset, _x509_ctx *x509
 // RVA: 0xEF4BC8
 void __fastcall remove_ca_certs(CA_CERT_CTX *ca_cert_ctx)
 {
-  CA_CERT_CTX *v1; // rbx
-  signed int v2; // esi
+  int v2; // esi
   CA_CERT_CTX *v3; // rdi
 
   if ( ca_cert_ctx )
   {
-    v1 = ca_cert_ctx;
     v2 = 0;
     v3 = ca_cert_ctx;
     do
@@ -484,21 +437,21 @@ void __fastcall remove_ca_certs(CA_CERT_CTX *ca_cert_ctx)
       v3 = (CA_CERT_CTX *)((char *)v3 + 8);
     }
     while ( v2 < 512 );
-    ax_free(v1);
+    ax_free(ca_cert_ctx);
   }
 }
 
 // File Line: 484
 // RVA: 0xEF42D8
-int __fastcall asn1_compare_dn(char *const *dn1, char *const *dn2)
+int __fastcall asn1_compare_dn(const char **dn1, char *const *dn2)
 {
-  signed __int64 v2; // rdi
+  __int64 v2; // rdi
   const char **v3; // rbx
   signed __int64 v4; // rsi
   __int64 v5; // rax
 
   v2 = 0i64;
-  v3 = (const char **)dn1;
+  v3 = dn1;
   v4 = (char *)dn2 - (char *)dn1;
   while ( 1 )
   {
@@ -526,57 +479,48 @@ int __fastcall asn1_compare_dn(char *const *dn1, char *const *dn2)
 
 // File Line: 498
 // RVA: 0xEF433C
-signed __int64 __fastcall asn1_find_oid(const char *cert, int *offset, const char *oid, int oid_length)
+__int64 __fastcall asn1_find_oid(const char *cert, int *offset, const char *oid, int oid_length)
 {
-  const char *v4; // rsi
   __int64 v5; // rcx
   size_t v6; // rbp
-  const char *v7; // r12
-  int *v8; // rdi
-  int v9; // eax
-  int v10; // er14
-  bool i; // sf
-  unsigned __int8 v12; // of
-  __int64 v13; // rcx
-  int v14; // ebx
-  int v15; // er15
-  __int64 v16; // rcx
-  int v17; // ebx
-  int v18; // eax
+  int asn1_length; // eax
+  int v10; // r14d
+  bool i; // cc
+  __int64 v12; // rcx
+  int v13; // ebx
+  int v14; // r15d
+  __int64 v15; // rcx
+  int v16; // ebx
+  int v17; // eax
 
-  v4 = cert;
   v5 = *offset;
   v6 = oid_length;
-  v7 = oid;
-  v8 = offset;
-  if ( v4[v5] == 48 )
+  if ( cert[v5] == 48 )
   {
     *offset = v5 + 1;
-    v9 = get_asn1_length(v4, offset);
-    if ( v9 > 0 )
+    asn1_length = get_asn1_length(cert, offset);
+    if ( asn1_length > 0 )
     {
-      v10 = *v8 + v9;
-      v12 = __OFSUB__(*v8, v10);
-      for ( i = -v9 < 0; i ^ v12; i = v15 - v10 < 0 )
+      v10 = *offset + asn1_length;
+      for ( i = *offset < v10; i; i = v14 < v10 )
       {
-        v13 = *v8;
-        v14 = (unsigned __int8)v4[v13];
-        *v8 = v13 + 1;
-        v15 = get_asn1_length(v4, v8) + *v8;
-        if ( v14 == 48 )
+        v12 = *offset;
+        v13 = (unsigned __int8)cert[v12];
+        *offset = v12 + 1;
+        v14 = get_asn1_length(cert, offset) + *offset;
+        if ( v13 == 48 )
         {
-          v16 = *v8;
-          v17 = (unsigned __int8)v4[v16];
-          *v8 = v16 + 1;
-          v18 = get_asn1_length(v4, v8);
-          if ( v17 == 6 && v18 == (_DWORD)v6 && !memcmp(&v4[*v8], v7, v6) )
+          v15 = *offset;
+          v16 = (unsigned __int8)cert[v15];
+          *offset = v15 + 1;
+          v17 = get_asn1_length(cert, offset);
+          if ( v16 == 6 && v17 == (_DWORD)v6 && !memcmp(&cert[*offset], oid, v6) )
           {
-            *v8 += v6;
+            *offset += v6;
             return 1i64;
           }
         }
-        *v8 = v15;
-        v12 = __OFSUB__(v15, v10);
+        *offset = v14;
       }
     }
   }
@@ -587,12 +531,12 @@ signed __int64 __fastcall asn1_find_oid(const char *cert, int *offset, const cha
 // RVA: 0xEF4418
 __int64 __fastcall asn1_find_subjectaltname(const char *cert, int offset)
 {
-  int v2; // eax
-  int offseta; // [rsp+20h] [rbp-18h]
+  int oid; // eax
+  int offseta; // [rsp+20h] [rbp-18h] BYREF
 
   offseta = offset;
-  v2 = asn1_find_oid(cert, &offseta, sig_subject_alt_name, 3);
-  return offseta & (unsigned int)-(v2 != 0);
+  oid = asn1_find_oid(cert, &offseta, sig_subject_alt_name, 3);
+  return offseta & (unsigned int)-(oid != 0);
 }
 
 // File Line: 549
@@ -601,33 +545,27 @@ __int64 __fastcall asn1_signature_type(const char *cert, int *offset, _x509_ctx 
 {
   __int64 v3; // r9
   unsigned int v4; // esi
-  _x509_ctx *v5; // rbp
   char v6; // r10
-  int *v7; // rbx
-  const char *v8; // rdi
-  int v9; // er14
+  int asn1_length; // r14d
 
   v3 = *offset;
   v4 = -1;
-  v5 = x509_ctx;
   v6 = cert[v3];
-  v7 = offset;
-  v8 = cert;
   *offset = v3 + 1;
   if ( v6 == 6 )
   {
-    v9 = get_asn1_length(cert, offset);
-    if ( v9 == 5 && !memcmp(sig_iis6_oid, &v8[*v7], 5ui64) )
+    asn1_length = get_asn1_length(cert, offset);
+    if ( asn1_length == 5 && !memcmp(sig_iis6_oid, &cert[*offset], 5ui64) )
     {
-      v5->sig_type = 5;
+      x509_ctx->sig_type = 5;
 LABEL_7:
-      *v7 += v9;
-      asn1_skip_obj(v8, v7, 5);
+      *offset += asn1_length;
+      asn1_skip_obj(cert, offset, 5);
       return 0;
     }
-    if ( !memcmp(sig_oid_prefix, &v8[*v7], 8ui64) )
+    if ( !memcmp(sig_oid_prefix, &cert[*offset], 8ui64) )
     {
-      v5->sig_type = v8[*v7 + 8];
+      x509_ctx->sig_type = cert[*offset + 8];
       goto LABEL_7;
     }
   }

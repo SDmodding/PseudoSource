@@ -13,138 +13,134 @@ void __fastcall hkpWorld::hkpWorld(hkpWorld *this, hkFinishLoadedObjectFlag flag
   this->vfptr = (hkBaseObjectVtbl *)&hkpWorld::`vftable;
   this->m_activeSimulationIslands.m_data = 0i64;
   this->m_activeSimulationIslands.m_size = 0;
-  this->m_activeSimulationIslands.m_capacityAndFlags = 2147483648;
+  this->m_activeSimulationIslands.m_capacityAndFlags = 0x80000000;
   this->m_inactiveSimulationIslands.m_data = 0i64;
   this->m_inactiveSimulationIslands.m_size = 0;
-  this->m_inactiveSimulationIslands.m_capacityAndFlags = 2147483648;
+  this->m_inactiveSimulationIslands.m_capacityAndFlags = 0x80000000;
   this->m_dirtySimulationIslands.m_data = 0i64;
   this->m_dirtySimulationIslands.m_size = 0;
-  this->m_dirtySimulationIslands.m_capacityAndFlags = 2147483648;
+  this->m_dirtySimulationIslands.m_capacityAndFlags = 0x80000000;
   this->m_memoryWatchDog.m_pntr = 0i64;
   this->m_multiThreadCheck.m_threadId = -15;
-  this->m_multiThreadCheck.m_markCount = -32768;
+  this->m_multiThreadCheck.m_markCount = 0x8000;
   this->m_actionListeners.m_data = 0i64;
   this->m_actionListeners.m_size = 0;
-  this->m_actionListeners.m_capacityAndFlags = 2147483648;
+  this->m_actionListeners.m_capacityAndFlags = 0x80000000;
   this->m_entityListeners.m_data = 0i64;
   this->m_entityListeners.m_size = 0;
-  this->m_entityListeners.m_capacityAndFlags = 2147483648;
+  this->m_entityListeners.m_capacityAndFlags = 0x80000000;
   this->m_phantomListeners.m_data = 0i64;
   this->m_phantomListeners.m_size = 0;
-  this->m_phantomListeners.m_capacityAndFlags = 2147483648;
+  this->m_phantomListeners.m_capacityAndFlags = 0x80000000;
   this->m_constraintListeners.m_data = 0i64;
   this->m_constraintListeners.m_size = 0;
-  this->m_constraintListeners.m_capacityAndFlags = 2147483648;
+  this->m_constraintListeners.m_capacityAndFlags = 0x80000000;
   this->m_worldDeletionListeners.m_data = 0i64;
   this->m_worldDeletionListeners.m_size = 0;
-  this->m_worldDeletionListeners.m_capacityAndFlags = 2147483648;
+  this->m_worldDeletionListeners.m_capacityAndFlags = 0x80000000;
   this->m_islandActivationListeners.m_data = 0i64;
   this->m_islandActivationListeners.m_size = 0;
-  this->m_islandActivationListeners.m_capacityAndFlags = 2147483648;
+  this->m_islandActivationListeners.m_capacityAndFlags = 0x80000000;
   this->m_worldPostSimulationListeners.m_data = 0i64;
   this->m_worldPostSimulationListeners.m_size = 0;
-  this->m_worldPostSimulationListeners.m_capacityAndFlags = 2147483648;
+  this->m_worldPostSimulationListeners.m_capacityAndFlags = 0x80000000;
   this->m_worldPostIntegrateListeners.m_data = 0i64;
   this->m_worldPostIntegrateListeners.m_size = 0;
-  this->m_worldPostIntegrateListeners.m_capacityAndFlags = 2147483648;
+  this->m_worldPostIntegrateListeners.m_capacityAndFlags = 0x80000000;
   this->m_worldPostCollideListeners.m_data = 0i64;
   this->m_worldPostCollideListeners.m_size = 0;
-  this->m_worldPostCollideListeners.m_capacityAndFlags = 2147483648;
+  this->m_worldPostCollideListeners.m_capacityAndFlags = 0x80000000;
   this->m_islandPostIntegrateListeners.m_data = 0i64;
   this->m_islandPostIntegrateListeners.m_size = 0;
-  this->m_islandPostIntegrateListeners.m_capacityAndFlags = 2147483648;
+  this->m_islandPostIntegrateListeners.m_capacityAndFlags = 0x80000000;
   this->m_islandPostCollideListeners.m_data = 0i64;
   this->m_islandPostCollideListeners.m_size = 0;
-  this->m_islandPostCollideListeners.m_capacityAndFlags = 2147483648;
+  this->m_islandPostCollideListeners.m_capacityAndFlags = 0x80000000;
   this->m_contactListeners.m_data = 0i64;
   this->m_contactListeners.m_size = 0;
-  this->m_contactListeners.m_capacityAndFlags = 2147483648;
+  this->m_contactListeners.m_capacityAndFlags = 0x80000000;
   this->m_contactImpulseLimitBreachedListeners.m_data = 0i64;
   this->m_contactImpulseLimitBreachedListeners.m_size = 0;
-  this->m_contactImpulseLimitBreachedListeners.m_capacityAndFlags = 2147483648;
+  this->m_contactImpulseLimitBreachedListeners.m_capacityAndFlags = 0x80000000;
   this->m_worldExtensions.m_data = 0i64;
   this->m_worldExtensions.m_size = 0;
-  this->m_worldExtensions.m_capacityAndFlags = 2147483648;
+  this->m_worldExtensions.m_capacityAndFlags = 0x80000000;
 }
 
 // File Line: 141
 // RVA: 0xD5D3C0
 void __fastcall hkpWorld::removeAll(hkpWorld *this)
 {
-  hkpWorld *v1; // rbx
   int v2; // edi
   int v3; // esi
-  hkpSimulationIsland *v4; // rax
-  signed __int64 v5; // r10
-  int v6; // er9
-  signed __int64 v7; // r8
-  hkpSimulationIsland **v8; // rcx
+  hkpSimulationIsland *m_fixedIsland; // rax
+  __int64 m_size; // r10
+  int v6; // r9d
+  __int64 v7; // r8
+  hkpSimulationIsland **m_data; // rcx
   unsigned __int64 v9; // rdx
   hkpSimulationIsland *v10; // rax
   int v11; // eax
-  signed __int64 v12; // rdi
-  int v13; // er8
-  int v14; // er9
-  int v15; // er10
-  signed __int64 v16; // r11
+  __int64 v12; // rdi
+  int v13; // r8d
+  int v14; // r9d
+  int v15; // r10d
+  __int64 v16; // r11
   hkpSimulationIsland **v17; // rcx
   unsigned __int64 v18; // rdx
   hkpSimulationIsland *v19; // rax
-  int v20; // er9
+  int v20; // r9d
   int v21; // esi
   __int64 v22; // rdi
   int v23; // edi
   __int64 v24; // rsi
   hkpSimulationIsland *v25; // r10
-  signed int v26; // edi
+  int v26; // edi
   __int64 v27; // rdx
   __int64 v28; // rcx
   hkpRigidBody **v29; // rax
   int v30; // edi
-  int v31; // er8
+  int v31; // r8d
   hkpSimulationIsland *v32; // rcx
-  hkpEntity **array; // [rsp+30h] [rbp-18h]
-  int numEntities; // [rsp+38h] [rbp-10h]
-  int v35; // [rsp+3Ch] [rbp-Ch]
-  hkResult result; // [rsp+50h] [rbp+8h]
+  hkArrayBase<char *> array; // [rsp+30h] [rbp-18h] BYREF
+  hkResult result; // [rsp+50h] [rbp+8h] BYREF
 
-  v1 = this;
   v2 = 0;
   v3 = 0;
   hkpWorld::removePhantomBatch(this, this->m_phantoms.m_data, this->m_phantoms.m_size);
-  v4 = v1->m_fixedIsland;
-  v5 = v1->m_activeSimulationIslands.m_size;
-  array = 0i64;
-  numEntities = 0;
-  v35 = 2147483648;
-  v6 = v4->m_entities.m_size;
+  m_fixedIsland = this->m_fixedIsland;
+  m_size = this->m_activeSimulationIslands.m_size;
+  array.m_data = 0i64;
+  array.m_size = 0;
+  array.m_capacityAndFlags = 0x80000000;
+  v6 = m_fixedIsland->m_entities.m_size;
   v7 = 0i64;
-  if ( v5 >= 2 )
+  if ( m_size >= 2 )
   {
-    v8 = v1->m_activeSimulationIslands.m_data;
-    v9 = ((unsigned __int64)(v5 - 2) >> 1) + 1;
+    m_data = this->m_activeSimulationIslands.m_data;
+    v9 = ((unsigned __int64)(m_size - 2) >> 1) + 1;
     v7 = 2 * v9;
     do
     {
-      v10 = *v8;
-      v8 += 2;
+      v10 = *m_data;
+      m_data += 2;
       v2 += v10->m_entities.m_size;
-      v3 += (*(v8 - 1))->m_entities.m_size;
+      v3 += (*(m_data - 1))->m_entities.m_size;
       --v9;
     }
     while ( v9 );
   }
-  if ( v7 < v5 )
-    v6 += v1->m_activeSimulationIslands.m_data[v7]->m_entities.m_size;
+  if ( v7 < m_size )
+    v6 += this->m_activeSimulationIslands.m_data[v7]->m_entities.m_size;
   v11 = v2 + v3;
-  v12 = v1->m_inactiveSimulationIslands.m_size;
+  v12 = this->m_inactiveSimulationIslands.m_size;
   v13 = 0;
   v14 = v11 + v6;
   v15 = 0;
   v16 = 0i64;
   if ( v12 >= 2 )
   {
-    v17 = v1->m_inactiveSimulationIslands.m_data;
+    v17 = this->m_inactiveSimulationIslands.m_data;
     v18 = ((unsigned __int64)(v12 - 2) >> 1) + 1;
     v16 = 2 * v18;
     do
@@ -158,469 +154,475 @@ void __fastcall hkpWorld::removeAll(hkpWorld *this)
     while ( v18 );
   }
   if ( v16 < v12 )
-    v14 += v1->m_inactiveSimulationIslands.m_data[v16]->m_entities.m_size;
+    v14 += this->m_inactiveSimulationIslands.m_data[v16]->m_entities.m_size;
   v20 = v13 + v15 + v14;
   if ( v20 > 0 )
-  {
-    if ( v20 < 0 )
-      v20 = 0;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, &array, v20, 8);
-  }
+    hkArrayUtil::_reserve(&result, &hkContainerTempAllocator::s_alloc, (const void **)&array.m_data, v20, 8);
   v21 = 0;
-  if ( v1->m_activeSimulationIslands.m_size > 0 )
+  if ( this->m_activeSimulationIslands.m_size > 0 )
   {
     v22 = 0i64;
     do
     {
       hkArrayBase<unsigned __int64>::_append(
-        (hkArrayBase<char *> *)&array,
-        (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr,
-        (char *const *)v1->m_activeSimulationIslands.m_data[v22]->m_entities.m_data,
-        v1->m_activeSimulationIslands.m_data[v22]->m_entities.m_size);
+        &array,
+        &hkContainerTempAllocator::s_alloc,
+        (char *const *)this->m_activeSimulationIslands.m_data[v22]->m_entities.m_data,
+        this->m_activeSimulationIslands.m_data[v22]->m_entities.m_size);
       ++v21;
       ++v22;
     }
-    while ( v21 < v1->m_activeSimulationIslands.m_size );
+    while ( v21 < this->m_activeSimulationIslands.m_size );
   }
   v23 = 0;
-  if ( v1->m_inactiveSimulationIslands.m_size > 0 )
+  if ( this->m_inactiveSimulationIslands.m_size > 0 )
   {
     v24 = 0i64;
     do
     {
       hkArrayBase<unsigned __int64>::_append(
-        (hkArrayBase<char *> *)&array,
-        (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr,
-        (char *const *)v1->m_inactiveSimulationIslands.m_data[v24]->m_entities.m_data,
-        v1->m_inactiveSimulationIslands.m_data[v24]->m_entities.m_size);
+        &array,
+        &hkContainerTempAllocator::s_alloc,
+        (char *const *)this->m_inactiveSimulationIslands.m_data[v24]->m_entities.m_data,
+        this->m_inactiveSimulationIslands.m_data[v24]->m_entities.m_size);
       ++v23;
       ++v24;
     }
-    while ( v23 < v1->m_inactiveSimulationIslands.m_size );
+    while ( v23 < this->m_inactiveSimulationIslands.m_size );
   }
-  v25 = v1->m_fixedIsland;
+  v25 = this->m_fixedIsland;
   v26 = 0;
   v27 = v25->m_entities.m_size;
   v28 = 0i64;
   if ( v27 <= 0 )
   {
-LABEL_25:
+LABEL_23:
     v26 = -1;
   }
   else
   {
     v29 = (hkpRigidBody **)v25->m_entities.m_data;
-    while ( *v29 != v1->m_fixedRigidBody )
+    while ( *v29 != this->m_fixedRigidBody )
     {
       ++v28;
       ++v26;
       ++v29;
       if ( v28 >= v27 )
-        goto LABEL_25;
+        goto LABEL_23;
     }
   }
-  v30 = numEntities + v26;
+  v30 = array.m_size + v26;
   hkArrayBase<unsigned __int64>::_append(
-    (hkArrayBase<char *> *)&array,
-    (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr,
+    &array,
+    &hkContainerTempAllocator::s_alloc,
     (char *const *)v25->m_entities.m_data,
     v25->m_entities.m_size);
-  v31 = numEntities - 1;
-  numEntities = v31;
+  v31 = array.m_size - 1;
+  array.m_size = v31;
   if ( v31 != v30 )
   {
-    array[v30] = array[v31];
-    v31 = numEntities;
+    array.m_data[v30] = array.m_data[v31];
+    v31 = array.m_size;
   }
-  hkpWorld::removeEntityBatch(v1, array, v31);
-  numEntities = 0;
-  if ( v35 >= 0 )
+  hkpWorld::removeEntityBatch(this, (hkpEntity **)array.m_data, v31);
+  array.m_size = 0;
+  if ( array.m_capacityAndFlags >= 0 )
     hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-      array,
-      8 * v35);
-  if ( !v1->m_wantSimulationIslands.m_bool )
+      &hkContainerTempAllocator::s_alloc,
+      array.m_data,
+      8 * array.m_capacityAndFlags);
+  if ( !this->m_wantSimulationIslands.m_bool )
   {
     hkpWorldOperationUtil::removeIslandFromDirtyList(
-      v1,
-      v1->m_activeSimulationIslands.m_data[v1->m_activeSimulationIslands.m_size - 1]);
-    v32 = v1->m_activeSimulationIslands.m_data[v1->m_activeSimulationIslands.m_size - 1];
+      this,
+      this->m_activeSimulationIslands.m_data[this->m_activeSimulationIslands.m_size - 1]);
+    v32 = this->m_activeSimulationIslands.m_data[this->m_activeSimulationIslands.m_size - 1];
     if ( v32 )
-      v32->vfptr->__vecDelDtor((hkBaseObject *)&v32->vfptr, 1u);
-    --v1->m_activeSimulationIslands.m_size;
+      v32->vfptr->__vecDelDtor(v32, 1u);
+    --this->m_activeSimulationIslands.m_size;
   }
-  hkpWorldCallbackUtil::fireWorldRemoveAll(v1);
+  hkpWorldCallbackUtil::fireWorldRemoveAll(this);
 }
 
 // File Line: 212
 // RVA: 0xD5CB30
 void __fastcall hkpWorld::~hkpWorld(hkpWorld *this)
 {
-  hkpMtThreadStructure *v1; // rdi
-  hkpWorld *v2; // rbx
-  _QWORD **v3; // rax
+  hkpMtThreadStructure *m_multithreadedSimulationJobData; // rdi
+  _QWORD **Value; // rax
   _QWORD **v4; // rax
-  _RTL_CRITICAL_SECTION *v5; // rdi
+  hkCriticalSection *m_modifyConstraintCriticalSection; // rdi
   _QWORD **v6; // rax
-  hkCriticalSection *v7; // rdi
+  hkCriticalSection *m_propertyMasterLock; // rdi
   _QWORD **v8; // rax
-  hkReferencedObject *v9; // rcx
-  hkpSimulationIsland *v10; // rdx
+  hkWorldMemoryAvailableWatchDog *m_pntr; // rcx
+  hkpSimulationIsland *m_fixedIsland; // rdx
   hkpSimulationIsland *v11; // rcx
-  _RTL_CRITICAL_SECTION *v12; // rdi
+  hkCriticalSection *m_islandDirtyListCriticalSection; // rdi
   _QWORD **v13; // rax
-  __int64 v14; // rbp
+  __int64 m_size; // rbp
   __int64 i; // rsi
-  hkReferencedObject *v16; // rdi
-  hkReferencedObject *v17; // rcx
-  hkpTypedBroadPhaseDispatcher *v18; // rdi
+  hkpWorldExtension *v16; // rdi
+  hkpCollisionDispatcher *m_collisionDispatcher; // rcx
+  hkpTypedBroadPhaseDispatcher *m_broadPhaseDispatcher; // rdi
   _QWORD **v19; // rax
-  hkReferencedObject *v20; // rcx
-  hkpPhantomBroadPhaseListener *v21; // rcx
-  hkpEntityEntityBroadPhaseListener *v22; // rcx
-  hkpBroadPhaseBorderListener *v23; // rcx
-  hkpCollisionAgentConfig *v24; // rdi
+  hkpBroadPhaseBorder *m_broadPhaseBorder; // rcx
+  hkpPhantomBroadPhaseListener *m_phantomBroadPhaseListener; // rcx
+  hkpEntityEntityBroadPhaseListener *m_entityEntityBroadPhaseListener; // rcx
+  hkpBroadPhaseBorderListener *m_broadPhaseBorderListener; // rcx
+  hkpCollisionAgentConfig *m_config; // rdi
   _QWORD **v25; // rax
-  hkpProcessCollisionInput *v26; // rdi
+  hkpProcessCollisionInput *m_collisionInput; // rdi
   _QWORD **v27; // rax
   _QWORD **v28; // rax
-  hkpWorldOperationQueue *v29; // rdi
+  hkpWorldOperationQueue *m_pendingOperations; // rdi
   _QWORD **v30; // rax
-  hkpViolatedConstraintArray *v31; // rdi
+  hkpViolatedConstraintArray *m_violatedConstraintArray; // rdi
   _QWORD **v32; // rax
-  int v33; // er8
-  int v34; // er8
-  int v35; // er8
-  int v36; // er8
-  int v37; // er8
-  int v38; // er8
-  int v39; // er8
-  int v40; // er8
-  int v41; // er8
-  int v42; // er8
-  int v43; // er8
-  int v44; // er8
-  int v45; // er8
-  int v46; // er8
-  int v47; // er8
-  hkReferencedObject *v48; // rcx
-  int v49; // er8
-  int v50; // er8
-  int v51; // er8
-  hkBool result; // [rsp+40h] [rbp+8h]
+  int m_capacityAndFlags; // r8d
+  int v34; // r8d
+  int v35; // r8d
+  int v36; // r8d
+  int v37; // r8d
+  int v38; // r8d
+  int v39; // r8d
+  int v40; // r8d
+  int v41; // r8d
+  int v42; // r8d
+  int v43; // r8d
+  int v44; // r8d
+  int v45; // r8d
+  int v46; // r8d
+  int v47; // r8d
+  hkWorldMemoryAvailableWatchDog *v48; // rcx
+  int v49; // r8d
+  int v50; // r8d
+  int v51; // r8d
+  hkBool result; // [rsp+40h] [rbp+8h] BYREF
 
-  v1 = this->m_multithreadedSimulationJobData;
-  v2 = this;
+  m_multithreadedSimulationJobData = this->m_multithreadedSimulationJobData;
   this->vfptr = (hkBaseObjectVtbl *)&hkpWorld::`vftable;
-  if ( v1 )
+  if ( m_multithreadedSimulationJobData )
   {
-    if ( v1->m_collisionInput.m_spareAgentSector )
+    if ( m_multithreadedSimulationJobData->m_collisionInput.m_spareAgentSector )
     {
-      v3 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      (*(void (__fastcall **)(_QWORD *, hkpAgent1nSector *, signed __int64))(*v3[11] + 16i64))(
-        v3[11],
-        v1->m_collisionInput.m_spareAgentSector,
+      Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+      (*(void (__fastcall **)(_QWORD *, hkpAgent1nSector *, __int64))(*Value[11] + 16i64))(
+        Value[11],
+        m_multithreadedSimulationJobData->m_collisionInput.m_spareAgentSector,
         512i64);
     }
     v4 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    (*(void (__fastcall **)(_QWORD *, hkpMtThreadStructure *, signed __int64))(*v4[11] + 16i64))(v4[11], v1, 352i64);
+    (*(void (__fastcall **)(_QWORD *, hkpMtThreadStructure *, __int64))(*v4[11] + 16i64))(
+      v4[11],
+      m_multithreadedSimulationJobData,
+      352i64);
   }
-  hkReferencedObject::removeReference((hkReferencedObject *)&v2->m_maintenanceMgr->vfptr);
-  v5 = &v2->m_modifyConstraintCriticalSection->m_section;
-  v2->m_maintenanceMgr = 0i64;
-  if ( v5 )
+  hkReferencedObject::removeReference(this->m_maintenanceMgr);
+  m_modifyConstraintCriticalSection = this->m_modifyConstraintCriticalSection;
+  this->m_maintenanceMgr = 0i64;
+  if ( m_modifyConstraintCriticalSection )
   {
-    DeleteCriticalSection(v5);
+    DeleteCriticalSection(&m_modifyConstraintCriticalSection->m_section);
     v6 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    (*(void (__fastcall **)(_QWORD *, _RTL_CRITICAL_SECTION *, signed __int64))(*v6[11] + 16i64))(v6[11], v5, 40i64);
-    v2->m_modifyConstraintCriticalSection = 0i64;
+    (*(void (__fastcall **)(_QWORD *, hkCriticalSection *, __int64))(*v6[11] + 16i64))(
+      v6[11],
+      m_modifyConstraintCriticalSection,
+      40i64);
+    this->m_modifyConstraintCriticalSection = 0i64;
   }
-  v7 = v2->m_propertyMasterLock;
-  if ( v7 )
+  m_propertyMasterLock = this->m_propertyMasterLock;
+  if ( m_propertyMasterLock )
   {
-    DeleteCriticalSection(&v2->m_propertyMasterLock->m_section);
+    DeleteCriticalSection(&this->m_propertyMasterLock->m_section);
     v8 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    (*(void (__fastcall **)(_QWORD *, hkCriticalSection *, signed __int64))(*v8[11] + 16i64))(v8[11], v7, 40i64);
-    v2->m_propertyMasterLock = 0i64;
+    (*(void (__fastcall **)(_QWORD *, hkCriticalSection *, __int64))(*v8[11] + 16i64))(
+      v8[11],
+      m_propertyMasterLock,
+      40i64);
+    this->m_propertyMasterLock = 0i64;
   }
-  v9 = (hkReferencedObject *)&v2->m_memoryWatchDog.m_pntr->vfptr;
-  if ( v9 )
-    hkReferencedObject::removeReference(v9);
-  v2->m_memoryWatchDog.m_pntr = 0i64;
-  hkpWorld::removeAll(v2);
-  hkpWorld::removeEntity(v2, &result, (hkpEntity *)&v2->m_fixedRigidBody->vfptr);
-  v10 = v2->m_fixedIsland;
-  v2->m_fixedRigidBody = 0i64;
-  hkpWorldOperationUtil::removeIslandFromDirtyList(v2, v10);
-  v11 = v2->m_fixedIsland;
+  m_pntr = this->m_memoryWatchDog.m_pntr;
+  if ( m_pntr )
+    hkReferencedObject::removeReference(m_pntr);
+  this->m_memoryWatchDog.m_pntr = 0i64;
+  hkpWorld::removeAll(this);
+  hkpWorld::removeEntity(this, &result, this->m_fixedRigidBody);
+  m_fixedIsland = this->m_fixedIsland;
+  this->m_fixedRigidBody = 0i64;
+  hkpWorldOperationUtil::removeIslandFromDirtyList(this, m_fixedIsland);
+  v11 = this->m_fixedIsland;
   if ( v11 )
-    v11->vfptr->__vecDelDtor((hkBaseObject *)&v11->vfptr, 1u);
-  v12 = &v2->m_islandDirtyListCriticalSection->m_section;
-  v2->m_fixedIsland = 0i64;
-  if ( v12 )
+    v11->vfptr->__vecDelDtor(v11, 1u);
+  m_islandDirtyListCriticalSection = this->m_islandDirtyListCriticalSection;
+  this->m_fixedIsland = 0i64;
+  if ( m_islandDirtyListCriticalSection )
   {
-    DeleteCriticalSection(v12);
+    DeleteCriticalSection(&m_islandDirtyListCriticalSection->m_section);
     v13 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    (*(void (__fastcall **)(_QWORD *, _RTL_CRITICAL_SECTION *, signed __int64))(*v13[11] + 16i64))(v13[11], v12, 40i64);
-    v2->m_islandDirtyListCriticalSection = 0i64;
+    (*(void (__fastcall **)(_QWORD *, hkCriticalSection *, __int64))(*v13[11] + 16i64))(
+      v13[11],
+      m_islandDirtyListCriticalSection,
+      40i64);
+    this->m_islandDirtyListCriticalSection = 0i64;
   }
-  v14 = v2->m_worldExtensions.m_size;
-  for ( i = 0i64; i < v14; ++i )
+  m_size = this->m_worldExtensions.m_size;
+  for ( i = 0i64; i < m_size; ++i )
   {
-    v16 = (hkReferencedObject *)&v2->m_worldExtensions.m_data[i]->vfptr;
-    v16->vfptr[2].__vecDelDtor((hkBaseObject *)&v16->vfptr, (unsigned int)v2);
-    v16[1].vfptr = 0i64;
+    v16 = this->m_worldExtensions.m_data[i];
+    v16->vfptr[2].__vecDelDtor(v16, (unsigned int)this);
+    v16->m_world = 0i64;
     hkReferencedObject::removeReference(v16);
   }
-  hkpWorldCallbackUtil::fireWorldDeleted(v2);
-  hkReferencedObject::removeReference((hkReferencedObject *)&v2->m_broadPhase->vfptr);
-  v17 = (hkReferencedObject *)&v2->m_collisionDispatcher->vfptr;
-  v2->m_broadPhase = 0i64;
-  hkReferencedObject::removeReference(v17);
-  v18 = v2->m_broadPhaseDispatcher;
-  v2->m_collisionDispatcher = 0i64;
-  if ( v18 )
+  hkpWorldCallbackUtil::fireWorldDeleted(this);
+  hkReferencedObject::removeReference(this->m_broadPhase);
+  m_collisionDispatcher = this->m_collisionDispatcher;
+  this->m_broadPhase = 0i64;
+  hkReferencedObject::removeReference(m_collisionDispatcher);
+  m_broadPhaseDispatcher = this->m_broadPhaseDispatcher;
+  this->m_collisionDispatcher = 0i64;
+  if ( m_broadPhaseDispatcher )
   {
-    hkpTypedBroadPhaseDispatcher::~hkpTypedBroadPhaseDispatcher(v18);
+    hkpTypedBroadPhaseDispatcher::~hkpTypedBroadPhaseDispatcher(m_broadPhaseDispatcher);
     v19 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    (*(void (__fastcall **)(_QWORD *, hkpTypedBroadPhaseDispatcher *, signed __int64))(*v19[11] + 16i64))(
+    (*(void (__fastcall **)(_QWORD *, hkpTypedBroadPhaseDispatcher *, __int64))(*v19[11] + 16i64))(
       v19[11],
-      v18,
+      m_broadPhaseDispatcher,
       536i64);
   }
-  v20 = (hkReferencedObject *)&v2->m_broadPhaseBorder->vfptr;
-  if ( v20 )
-    hkReferencedObject::removeReference(v20);
-  v21 = v2->m_phantomBroadPhaseListener;
-  if ( v21 )
-    v21->vfptr->__vecDelDtor((hkBaseObject *)&v21->vfptr, 1u);
-  v22 = v2->m_entityEntityBroadPhaseListener;
-  if ( v22 )
-    v22->vfptr->__vecDelDtor((hkBaseObject *)&v22->vfptr, 1u);
-  v23 = v2->m_broadPhaseBorderListener;
-  if ( v23 )
-    v23->vfptr->__vecDelDtor((hkBaseObject *)&v23->vfptr, 1u);
-  hkReferencedObject::removeReference((hkReferencedObject *)&v2->m_collisionFilter->vfptr);
-  hkReferencedObject::removeReference((hkReferencedObject *)&v2->m_convexListFilter->vfptr);
-  v24 = v2->m_collisionInput->m_config;
-  if ( v24 )
+  m_broadPhaseBorder = this->m_broadPhaseBorder;
+  if ( m_broadPhaseBorder )
+    hkReferencedObject::removeReference(m_broadPhaseBorder);
+  m_phantomBroadPhaseListener = this->m_phantomBroadPhaseListener;
+  if ( m_phantomBroadPhaseListener )
+    m_phantomBroadPhaseListener->hkReferencedObject::hkBaseObject::vfptr->__vecDelDtor(m_phantomBroadPhaseListener, 1u);
+  m_entityEntityBroadPhaseListener = this->m_entityEntityBroadPhaseListener;
+  if ( m_entityEntityBroadPhaseListener )
+    m_entityEntityBroadPhaseListener->hkReferencedObject::hkBaseObject::vfptr->__vecDelDtor(
+      m_entityEntityBroadPhaseListener,
+      1u);
+  m_broadPhaseBorderListener = this->m_broadPhaseBorderListener;
+  if ( m_broadPhaseBorderListener )
+    m_broadPhaseBorderListener->hkReferencedObject::hkBaseObject::vfptr->__vecDelDtor(m_broadPhaseBorderListener, 1u);
+  hkReferencedObject::removeReference(this->m_collisionFilter);
+  hkReferencedObject::removeReference(this->m_convexListFilter);
+  m_config = this->m_collisionInput->m_config;
+  if ( m_config )
   {
     v25 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    (*(void (__fastcall **)(_QWORD *, hkpCollisionAgentConfig *, signed __int64))(*v25[11] + 16i64))(
-      v25[11],
-      v24,
-      16i64);
+    (*(void (__fastcall **)(_QWORD *, hkpCollisionAgentConfig *, __int64))(*v25[11] + 16i64))(v25[11], m_config, 16i64);
   }
-  v26 = v2->m_collisionInput;
-  if ( v26 )
+  m_collisionInput = this->m_collisionInput;
+  if ( m_collisionInput )
   {
-    if ( v26->m_spareAgentSector )
+    if ( m_collisionInput->m_spareAgentSector )
     {
       v27 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      (*(void (__fastcall **)(_QWORD *, hkpAgent1nSector *, signed __int64))(*v27[11] + 16i64))(
+      (*(void (__fastcall **)(_QWORD *, hkpAgent1nSector *, __int64))(*v27[11] + 16i64))(
         v27[11],
-        v26->m_spareAgentSector,
+        m_collisionInput->m_spareAgentSector,
         512i64);
     }
     v28 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    (*(void (__fastcall **)(_QWORD *, hkpProcessCollisionInput *, signed __int64))(*v28[11] + 16i64))(
+    (*(void (__fastcall **)(_QWORD *, hkpProcessCollisionInput *, __int64))(*v28[11] + 16i64))(
       v28[11],
-      v26,
+      m_collisionInput,
       160i64);
   }
-  hkReferencedObject::removeReference((hkReferencedObject *)&v2->m_simulation->vfptr);
-  v29 = v2->m_pendingOperations;
-  if ( v29 )
+  hkReferencedObject::removeReference(this->m_simulation);
+  m_pendingOperations = this->m_pendingOperations;
+  if ( m_pendingOperations )
   {
-    hkpWorldOperationQueue::~hkpWorldOperationQueue(v2->m_pendingOperations);
+    hkpWorldOperationQueue::~hkpWorldOperationQueue(this->m_pendingOperations);
     v30 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    (*(void (__fastcall **)(_QWORD *, hkpWorldOperationQueue *, signed __int64))(*v30[11] + 16i64))(v30[11], v29, 56i64);
+    (*(void (__fastcall **)(_QWORD *, hkpWorldOperationQueue *, __int64))(*v30[11] + 16i64))(
+      v30[11],
+      m_pendingOperations,
+      56i64);
   }
-  v31 = v2->m_violatedConstraintArray;
-  if ( v31 )
+  m_violatedConstraintArray = this->m_violatedConstraintArray;
+  if ( m_violatedConstraintArray )
   {
     v32 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    (*(void (__fastcall **)(_QWORD *, hkpViolatedConstraintArray *, signed __int64))(*v32[11] + 16i64))(
+    (*(void (__fastcall **)(_QWORD *, hkpViolatedConstraintArray *, __int64))(*v32[11] + 16i64))(
       v32[11],
-      v31,
+      m_violatedConstraintArray,
       1032i64);
   }
-  v33 = v2->m_worldExtensions.m_capacityAndFlags;
-  v2->m_worldExtensions.m_size = 0;
-  if ( v33 >= 0 )
+  m_capacityAndFlags = this->m_worldExtensions.m_capacityAndFlags;
+  this->m_worldExtensions.m_size = 0;
+  if ( m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_worldExtensions.m_data,
-      8 * v33);
-  v2->m_worldExtensions.m_data = 0i64;
-  v2->m_worldExtensions.m_capacityAndFlags = 2147483648;
-  v34 = v2->m_contactImpulseLimitBreachedListeners.m_capacityAndFlags;
-  v2->m_contactImpulseLimitBreachedListeners.m_size = 0;
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_worldExtensions.m_data,
+      8 * m_capacityAndFlags);
+  this->m_worldExtensions.m_data = 0i64;
+  this->m_worldExtensions.m_capacityAndFlags = 0x80000000;
+  v34 = this->m_contactImpulseLimitBreachedListeners.m_capacityAndFlags;
+  this->m_contactImpulseLimitBreachedListeners.m_size = 0;
   if ( v34 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_contactImpulseLimitBreachedListeners.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_contactImpulseLimitBreachedListeners.m_data,
       8 * v34);
-  v2->m_contactImpulseLimitBreachedListeners.m_data = 0i64;
-  v2->m_contactImpulseLimitBreachedListeners.m_capacityAndFlags = 2147483648;
-  v35 = v2->m_contactListeners.m_capacityAndFlags;
-  v2->m_contactListeners.m_size = 0;
+  this->m_contactImpulseLimitBreachedListeners.m_data = 0i64;
+  this->m_contactImpulseLimitBreachedListeners.m_capacityAndFlags = 0x80000000;
+  v35 = this->m_contactListeners.m_capacityAndFlags;
+  this->m_contactListeners.m_size = 0;
   if ( v35 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_contactListeners.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_contactListeners.m_data,
       8 * v35);
-  v2->m_contactListeners.m_data = 0i64;
-  v2->m_contactListeners.m_capacityAndFlags = 2147483648;
-  v36 = v2->m_islandPostCollideListeners.m_capacityAndFlags;
-  v2->m_islandPostCollideListeners.m_size = 0;
+  this->m_contactListeners.m_data = 0i64;
+  this->m_contactListeners.m_capacityAndFlags = 0x80000000;
+  v36 = this->m_islandPostCollideListeners.m_capacityAndFlags;
+  this->m_islandPostCollideListeners.m_size = 0;
   if ( v36 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_islandPostCollideListeners.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_islandPostCollideListeners.m_data,
       8 * v36);
-  v2->m_islandPostCollideListeners.m_data = 0i64;
-  v2->m_islandPostCollideListeners.m_capacityAndFlags = 2147483648;
-  v37 = v2->m_islandPostIntegrateListeners.m_capacityAndFlags;
-  v2->m_islandPostIntegrateListeners.m_size = 0;
+  this->m_islandPostCollideListeners.m_data = 0i64;
+  this->m_islandPostCollideListeners.m_capacityAndFlags = 0x80000000;
+  v37 = this->m_islandPostIntegrateListeners.m_capacityAndFlags;
+  this->m_islandPostIntegrateListeners.m_size = 0;
   if ( v37 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_islandPostIntegrateListeners.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_islandPostIntegrateListeners.m_data,
       8 * v37);
-  v2->m_islandPostIntegrateListeners.m_data = 0i64;
-  v2->m_islandPostIntegrateListeners.m_capacityAndFlags = 2147483648;
-  v38 = v2->m_worldPostCollideListeners.m_capacityAndFlags;
-  v2->m_worldPostCollideListeners.m_size = 0;
+  this->m_islandPostIntegrateListeners.m_data = 0i64;
+  this->m_islandPostIntegrateListeners.m_capacityAndFlags = 0x80000000;
+  v38 = this->m_worldPostCollideListeners.m_capacityAndFlags;
+  this->m_worldPostCollideListeners.m_size = 0;
   if ( v38 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_worldPostCollideListeners.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_worldPostCollideListeners.m_data,
       8 * v38);
-  v2->m_worldPostCollideListeners.m_data = 0i64;
-  v2->m_worldPostCollideListeners.m_capacityAndFlags = 2147483648;
-  v39 = v2->m_worldPostIntegrateListeners.m_capacityAndFlags;
-  v2->m_worldPostIntegrateListeners.m_size = 0;
+  this->m_worldPostCollideListeners.m_data = 0i64;
+  this->m_worldPostCollideListeners.m_capacityAndFlags = 0x80000000;
+  v39 = this->m_worldPostIntegrateListeners.m_capacityAndFlags;
+  this->m_worldPostIntegrateListeners.m_size = 0;
   if ( v39 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_worldPostIntegrateListeners.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_worldPostIntegrateListeners.m_data,
       8 * v39);
-  v2->m_worldPostIntegrateListeners.m_data = 0i64;
-  v2->m_worldPostIntegrateListeners.m_capacityAndFlags = 2147483648;
-  v40 = v2->m_worldPostSimulationListeners.m_capacityAndFlags;
-  v2->m_worldPostSimulationListeners.m_size = 0;
+  this->m_worldPostIntegrateListeners.m_data = 0i64;
+  this->m_worldPostIntegrateListeners.m_capacityAndFlags = 0x80000000;
+  v40 = this->m_worldPostSimulationListeners.m_capacityAndFlags;
+  this->m_worldPostSimulationListeners.m_size = 0;
   if ( v40 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_worldPostSimulationListeners.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_worldPostSimulationListeners.m_data,
       8 * v40);
-  v2->m_worldPostSimulationListeners.m_data = 0i64;
-  v2->m_worldPostSimulationListeners.m_capacityAndFlags = 2147483648;
-  v41 = v2->m_islandActivationListeners.m_capacityAndFlags;
-  v2->m_islandActivationListeners.m_size = 0;
+  this->m_worldPostSimulationListeners.m_data = 0i64;
+  this->m_worldPostSimulationListeners.m_capacityAndFlags = 0x80000000;
+  v41 = this->m_islandActivationListeners.m_capacityAndFlags;
+  this->m_islandActivationListeners.m_size = 0;
   if ( v41 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_islandActivationListeners.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_islandActivationListeners.m_data,
       8 * v41);
-  v2->m_islandActivationListeners.m_data = 0i64;
-  v2->m_islandActivationListeners.m_capacityAndFlags = 2147483648;
-  v42 = v2->m_worldDeletionListeners.m_capacityAndFlags;
-  v2->m_worldDeletionListeners.m_size = 0;
+  this->m_islandActivationListeners.m_data = 0i64;
+  this->m_islandActivationListeners.m_capacityAndFlags = 0x80000000;
+  v42 = this->m_worldDeletionListeners.m_capacityAndFlags;
+  this->m_worldDeletionListeners.m_size = 0;
   if ( v42 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_worldDeletionListeners.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_worldDeletionListeners.m_data,
       8 * v42);
-  v2->m_worldDeletionListeners.m_data = 0i64;
-  v2->m_worldDeletionListeners.m_capacityAndFlags = 2147483648;
-  v43 = v2->m_constraintListeners.m_capacityAndFlags;
-  v2->m_constraintListeners.m_size = 0;
+  this->m_worldDeletionListeners.m_data = 0i64;
+  this->m_worldDeletionListeners.m_capacityAndFlags = 0x80000000;
+  v43 = this->m_constraintListeners.m_capacityAndFlags;
+  this->m_constraintListeners.m_size = 0;
   if ( v43 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_constraintListeners.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_constraintListeners.m_data,
       8 * v43);
-  v2->m_constraintListeners.m_data = 0i64;
-  v2->m_constraintListeners.m_capacityAndFlags = 2147483648;
-  v44 = v2->m_phantomListeners.m_capacityAndFlags;
-  v2->m_phantomListeners.m_size = 0;
+  this->m_constraintListeners.m_data = 0i64;
+  this->m_constraintListeners.m_capacityAndFlags = 0x80000000;
+  v44 = this->m_phantomListeners.m_capacityAndFlags;
+  this->m_phantomListeners.m_size = 0;
   if ( v44 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_phantomListeners.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_phantomListeners.m_data,
       8 * v44);
-  v2->m_phantomListeners.m_data = 0i64;
-  v2->m_phantomListeners.m_capacityAndFlags = 2147483648;
-  v45 = v2->m_entityListeners.m_capacityAndFlags;
-  v2->m_entityListeners.m_size = 0;
+  this->m_phantomListeners.m_data = 0i64;
+  this->m_phantomListeners.m_capacityAndFlags = 0x80000000;
+  v45 = this->m_entityListeners.m_capacityAndFlags;
+  this->m_entityListeners.m_size = 0;
   if ( v45 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_entityListeners.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_entityListeners.m_data,
       8 * v45);
-  v2->m_entityListeners.m_data = 0i64;
-  v2->m_entityListeners.m_capacityAndFlags = 2147483648;
-  v46 = v2->m_actionListeners.m_capacityAndFlags;
-  v2->m_actionListeners.m_size = 0;
+  this->m_entityListeners.m_data = 0i64;
+  this->m_entityListeners.m_capacityAndFlags = 0x80000000;
+  v46 = this->m_actionListeners.m_capacityAndFlags;
+  this->m_actionListeners.m_size = 0;
   if ( v46 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_actionListeners.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_actionListeners.m_data,
       8 * v46);
-  v2->m_actionListeners.m_data = 0i64;
-  v2->m_actionListeners.m_capacityAndFlags = 2147483648;
-  v47 = v2->m_phantoms.m_capacityAndFlags;
-  v2->m_phantoms.m_size = 0;
+  this->m_actionListeners.m_data = 0i64;
+  this->m_actionListeners.m_capacityAndFlags = 0x80000000;
+  v47 = this->m_phantoms.m_capacityAndFlags;
+  this->m_phantoms.m_size = 0;
   if ( v47 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_phantoms.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_phantoms.m_data,
       8 * v47);
-  v2->m_phantoms.m_data = 0i64;
-  v2->m_phantoms.m_capacityAndFlags = 2147483648;
-  v48 = (hkReferencedObject *)&v2->m_memoryWatchDog.m_pntr->vfptr;
+  this->m_phantoms.m_data = 0i64;
+  this->m_phantoms.m_capacityAndFlags = 0x80000000;
+  v48 = this->m_memoryWatchDog.m_pntr;
   if ( v48 )
     hkReferencedObject::removeReference(v48);
-  v2->m_memoryWatchDog.m_pntr = 0i64;
-  v49 = v2->m_dirtySimulationIslands.m_capacityAndFlags;
-  v2->m_dirtySimulationIslands.m_size = 0;
+  this->m_memoryWatchDog.m_pntr = 0i64;
+  v49 = this->m_dirtySimulationIslands.m_capacityAndFlags;
+  this->m_dirtySimulationIslands.m_size = 0;
   if ( v49 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_dirtySimulationIslands.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_dirtySimulationIslands.m_data,
       8 * v49);
-  v2->m_dirtySimulationIslands.m_data = 0i64;
-  v2->m_dirtySimulationIslands.m_capacityAndFlags = 2147483648;
-  v50 = v2->m_inactiveSimulationIslands.m_capacityAndFlags;
-  v2->m_inactiveSimulationIslands.m_size = 0;
+  this->m_dirtySimulationIslands.m_data = 0i64;
+  this->m_dirtySimulationIslands.m_capacityAndFlags = 0x80000000;
+  v50 = this->m_inactiveSimulationIslands.m_capacityAndFlags;
+  this->m_inactiveSimulationIslands.m_size = 0;
   if ( v50 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_inactiveSimulationIslands.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_inactiveSimulationIslands.m_data,
       8 * v50);
-  v2->m_inactiveSimulationIslands.m_data = 0i64;
-  v2->m_inactiveSimulationIslands.m_capacityAndFlags = 2147483648;
-  v51 = v2->m_activeSimulationIslands.m_capacityAndFlags;
-  v2->m_activeSimulationIslands.m_size = 0;
+  this->m_inactiveSimulationIslands.m_data = 0i64;
+  this->m_inactiveSimulationIslands.m_capacityAndFlags = 0x80000000;
+  v51 = this->m_activeSimulationIslands.m_capacityAndFlags;
+  this->m_activeSimulationIslands.m_size = 0;
   if ( v51 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_activeSimulationIslands.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_activeSimulationIslands.m_data,
       8 * v51);
-  v2->m_activeSimulationIslands.m_data = 0i64;
-  v2->m_activeSimulationIslands.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+  this->m_activeSimulationIslands.m_data = 0i64;
+  this->m_activeSimulationIslands.m_capacityAndFlags = 0x80000000;
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 304
 // RVA: 0xD5DBC0
 void __fastcall hkWorld_setupContactMgrFactories(hkpWorld *world, hkpCollisionDispatcher *dis)
 {
-  hkpWorld *v2; // rbx
-  hkpCollisionDispatcher *v3; // rbp
-  _QWORD **v4; // rax
+  _QWORD **Value; // rax
   hkpSimpleConstraintContactMgr::Factory *v5; // rax
   hkpContactMgrFactory *v6; // rax
   hkpContactMgrFactory *v7; // rsi
@@ -632,15 +634,13 @@ void __fastcall hkWorld_setupContactMgrFactories(hkpWorld *world, hkpCollisionDi
   __int64 v13; // rax
   hkpContactMgrFactory *v14; // rbx
 
-  v2 = world;
-  v3 = dis;
-  v4 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v5 = (hkpSimpleConstraintContactMgr::Factory *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v4[11] + 8i64))(
-                                                   v4[11],
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v5 = (hkpSimpleConstraintContactMgr::Factory *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(
+                                                   Value[11],
                                                    24i64);
   if ( v5 )
   {
-    hkpSimpleConstraintContactMgr::Factory::Factory(v5, v2);
+    hkpSimpleConstraintContactMgr::Factory::Factory(v5, world);
     v7 = v6;
   }
   else
@@ -648,12 +648,10 @@ void __fastcall hkWorld_setupContactMgrFactories(hkpWorld *world, hkpCollisionDi
     v7 = 0i64;
   }
   v8 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v9 = (hkpReportContactMgr::Factory *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v8[11] + 8i64))(
-                                         v8[11],
-                                         24i64);
+  v9 = (hkpReportContactMgr::Factory *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v8[11] + 8i64))(v8[11], 24i64);
   if ( v9 )
   {
-    hkpReportContactMgr::Factory::Factory(v9, v2);
+    hkpReportContactMgr::Factory::Factory(v9, world);
     v11 = v10;
   }
   else
@@ -661,7 +659,7 @@ void __fastcall hkWorld_setupContactMgrFactories(hkpWorld *world, hkpCollisionDi
     v11 = 0i64;
   }
   v12 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v13 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v12[11] + 8i64))(v12[11], 40i64);
+  v13 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*v12[11] + 8i64))(v12[11], 40i64);
   v14 = (hkpContactMgrFactory *)v13;
   if ( v13 )
   {
@@ -675,115 +673,110 @@ void __fastcall hkWorld_setupContactMgrFactories(hkpWorld *world, hkpCollisionDi
   {
     v14 = 0i64;
   }
-  hkpCollisionDispatcher::registerContactMgrFactoryWithAll(v3, v7, 1);
-  hkpCollisionDispatcher::registerContactMgrFactoryWithAll(v3, v11, 2);
-  hkpCollisionDispatcher::registerContactMgrFactoryWithAll(v3, v14, 3);
-  hkReferencedObject::removeReference((hkReferencedObject *)&v7->vfptr);
-  hkReferencedObject::removeReference((hkReferencedObject *)&v11->vfptr);
-  hkReferencedObject::removeReference((hkReferencedObject *)&v14->vfptr);
+  hkpCollisionDispatcher::registerContactMgrFactoryWithAll(dis, v7, 1);
+  hkpCollisionDispatcher::registerContactMgrFactoryWithAll(dis, v11, 2);
+  hkpCollisionDispatcher::registerContactMgrFactoryWithAll(dis, v14, 3);
+  hkReferencedObject::removeReference(v7);
+  hkReferencedObject::removeReference(v11);
+  hkReferencedObject::removeReference(v14);
 }
 
 // File Line: 324
 // RVA: 0xD59E80
-void __fastcall hkpWorld::updateCollisionFilterOnWorld(hkpWorld *this, hkpUpdateCollisionFilterOnWorldMode updateMode, hkpUpdateCollectionFilterMode updateShapeCollectionFilter)
+void __fastcall hkpWorld::updateCollisionFilterOnWorld(
+        hkpWorld *this,
+        hkpUpdateCollisionFilterOnWorldMode updateMode,
+        hkpUpdateCollectionFilterMode updateShapeCollectionFilter)
 {
-  __int64 v3; // r12
-  hkpUpdateCollisionFilterOnWorldMode v4; // ebx
-  hkpWorld *v5; // r13
-  _QWORD *v6; // r8
+  _QWORD *Value; // r8
   _QWORD *v7; // rcx
   unsigned __int64 v8; // rax
-  signed __int64 v9; // rcx
+  _QWORD *v9; // rcx
   int v10; // edi
-  int v11; // er14
+  int v11; // r14d
   __int64 v12; // r15
   hkpSimulationIsland *v13; // rsi
   __int64 v14; // rbx
-  int v15; // er14
+  int v15; // r14d
   __int64 v16; // r15
   hkpSimulationIsland *v17; // rsi
   __int64 v18; // rbx
   __int64 v19; // rbx
   __int64 *v20; // rdi
-  signed __int64 v21; // rsi
+  __int64 v21; // rsi
   __int64 v22; // rax
-  signed __int64 v23; // rdx
+  __int64 v23; // rdx
   __int64 v24; // rdi
-  signed __int64 v25; // rax
+  __int64 i; // rax
   unsigned __int16 *v26; // r15
   int v27; // edx
   int v28; // eax
-  int v29; // er14
+  int v29; // r14d
   __int64 v30; // rcx
   hkpAgentNnEntry *v31; // rbx
-  unsigned __int64 v32; // rsi
-  hkpCollisionDispatcher *v33; // rax
-  signed __int64 v34; // rdx
+  hkpAgentNnEntry *v32; // rsi
+  hkpCollisionDispatcher *m_collisionDispatcher; // rax
+  __int64 v34; // rdx
   int v35; // ecx
   hkpAgentNnEntry *v36; // rcx
   bool v37; // zf
   _QWORD *v38; // r8
   _QWORD *v39; // rcx
   unsigned __int64 v40; // rax
-  signed __int64 v41; // rcx
-  signed __int64 v42; // [rsp+20h] [rbp-E0h]
+  _QWORD *v41; // rcx
+  __int64 v42; // [rsp+20h] [rbp-E0h]
   __int64 *v43; // [rsp+28h] [rbp-D8h]
   __int64 v44; // [rsp+30h] [rbp-D0h]
-  signed __int64 v45; // [rsp+38h] [rbp-C8h]
+  __int64 v45; // [rsp+38h] [rbp-C8h]
   __int64 v46; // [rsp+40h] [rbp-C0h]
-  __int64 v47; // [rsp+48h] [rbp-B8h]
-  __int64 v48; // [rsp+50h] [rbp-B0h]
-  hkArray<hkpSimulationIsland *,hkContainerHeapAllocator> *v49; // [rsp+58h] [rbp-A8h]
-  hkArray<hkpSimulationIsland *,hkContainerHeapAllocator> *v50; // [rsp+60h] [rbp-A0h]
-  char *array; // [rsp+70h] [rbp-90h]
-  int v52; // [rsp+78h] [rbp-88h]
-  int v53; // [rsp+7Ch] [rbp-84h]
-  char v54; // [rsp+80h] [rbp-80h]
-  hkWorldOperation::BaseOperation operation; // [rsp+1C0h] [rbp+C0h]
-  char v56; // [rsp+1C1h] [rbp+C1h]
-  char v57; // [rsp+1C2h] [rbp+C2h]
-  int v58; // [rsp+1D8h] [rbp+D8h]
+  __int64 v47[2]; // [rsp+48h] [rbp-B8h]
+  __int64 v48[3]; // [rsp+58h] [rbp-A8h] BYREF
+  char *array; // [rsp+70h] [rbp-90h] BYREF
+  int v50; // [rsp+78h] [rbp-88h]
+  int v51; // [rsp+7Ch] [rbp-84h]
+  char v52; // [rsp+80h] [rbp-80h] BYREF
+  hkWorldOperation::BaseOperation operation; // [rsp+1C0h] [rbp+C0h] BYREF
+  char v54; // [rsp+1C1h] [rbp+C1h]
+  char v55; // [rsp+1C2h] [rbp+C2h]
+  int v56; // [rsp+1D8h] [rbp+D8h]
 
-  v3 = (unsigned int)updateShapeCollectionFilter;
-  v4 = updateMode;
-  v5 = this;
   if ( this->m_criticalOperationsLockCount )
   {
-    v56 = updateMode;
+    v54 = updateMode;
     operation.m_type.m_storage = 22;
-    v57 = updateShapeCollectionFilter;
+    v55 = updateShapeCollectionFilter;
     hkpWorld::queueOperation(this, &operation);
   }
   else
   {
     this->m_blockExecutingPendingOperations.m_bool = 1;
-    v6 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-    v7 = (_QWORD *)v6[1];
-    if ( (unsigned __int64)v7 < v6[3] )
+    Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+    v7 = (_QWORD *)Value[1];
+    if ( (unsigned __int64)v7 < Value[3] )
     {
       *v7 = "TtUpdateFilterOnWorld";
       v8 = __rdtsc();
-      v9 = (signed __int64)(v7 + 2);
-      *(_DWORD *)(v9 - 8) = v8;
-      v6[1] = v9;
+      v9 = v7 + 2;
+      *((_DWORD *)v9 - 2) = v8;
+      Value[1] = v9;
     }
-    if ( v4 )
+    if ( updateMode )
     {
-      ++v5->m_criticalOperationsLockCount;
-      v20 = (__int64 *)&v49;
-      v49 = &v5->m_activeSimulationIslands;
+      ++this->m_criticalOperationsLockCount;
+      v20 = v48;
+      v48[0] = (__int64)&this->m_activeSimulationIslands;
       v21 = 2i64;
-      v43 = (__int64 *)&v49;
-      v50 = &v5->m_inactiveSimulationIslands;
+      v43 = v48;
+      v48[1] = (__int64)&this->m_inactiveSimulationIslands;
       v42 = 2i64;
       do
       {
-        v52 = 0;
-        v53 = -2147483616;
-        array = &v54;
+        v50 = 0;
+        v51 = -2147483616;
+        array = &v52;
         v22 = *v20;
-        v58 = 0;
-        if ( *(_DWORD *)(v22 + 8) > 0 )
+        v56 = 0;
+        if ( *(int *)(v22 + 8) > 0 )
         {
           v23 = 0i64;
           v44 = 0i64;
@@ -791,13 +784,12 @@ void __fastcall hkpWorld::updateCollisionFilterOnWorld(hkpWorld *this, hkpUpdate
           {
             v45 = 0i64;
             v24 = *(_QWORD *)(v23 + *(_QWORD *)v22);
-            v47 = v24 + 152;
-            v48 = v24 + 120;
-            v25 = 0i64;
-            do
+            v47[0] = v24 + 152;
+            v47[1] = v24 + 120;
+            for ( i = 0i64; i < 2; v45 = i )
             {
-              v26 = (unsigned __int16 *)*(&v47 + v25);
-              v52 = 0;
+              v26 = (unsigned __int16 *)v47[i];
+              v50 = 0;
               v27 = 0;
               v28 = *((_DWORD *)v26 + 4);
               v29 = 0;
@@ -811,114 +803,105 @@ void __fastcall hkpWorld::updateCollisionFilterOnWorld(hkpWorld *this, hkpUpdate
                   v31 = *(hkpAgentNnEntry **)(v30 + *((_QWORD *)v26 + 1) - 8);
                   v46 = v30;
                   if ( v29 == v28 )
-                    v32 = (unsigned __int64)v31 + *v26;
+                    v32 = (hkpAgentNnEntry *)((char *)v31 + *v26);
                   else
-                    v32 = (unsigned __int64)&v31[24];
-                  if ( (unsigned __int64)v31 < v32 )
+                    v32 = v31 + 24;
+                  if ( v31 < v32 )
                   {
                     do
                     {
-                      if ( *(_BYTE *)v5->m_collisionFilter->vfptr->isCollisionEnabled(
-                                       (hkpCollidableCollidableFilter *)&v5->m_collisionFilter->vfptr,
-                                       (hkBool *)&operation,
-                                       (hkpCollidable *)&v31->m_collidable[0]->m_shape,
-                                       (hkpCollidable *)&v31->m_collidable[1]->m_shape)
-                        && (v33 = v5->m_collisionDispatcher,
+                      if ( this->m_collisionFilter->vfptr->isCollisionEnabled(
+                             &this->m_collisionFilter->hkpCollidableCollidableFilter,
+                             &operation,
+                             v31->m_collidable[0],
+                             v31->m_collidable[1])->m_bool
+                        && (m_collisionDispatcher = this->m_collisionDispatcher,
                             v34 = v31->m_collidable[1]->m_broadPhaseHandle.m_objectQualityType
                                 + 10i64 * v31->m_collidable[0]->m_broadPhaseHandle.m_objectQualityType,
-                            v33->m_collisionQualityTable[0][v34])
-                        && v33->m_collisionQualityTable[0][v34] == (unsigned __int8)v31->m_collisionQualityIndex )
+                            m_collisionDispatcher->m_collisionQualityTable[0][v34])
+                        && m_collisionDispatcher->m_collisionQualityTable[0][v34] == (unsigned __int8)v31->m_collisionQualityIndex )
                       {
-                        if ( (_DWORD)v3 == 1 )
+                        if ( updateShapeCollectionFilter == HK_UPDATE_COLLECTION_FILTER_PROCESS_SHAPE_COLLECTIONS )
                           hkAgentNnMachine_UpdateShapeCollectionFilter(
                             v31,
-                            (hkpCollisionInput *)&v5->m_collisionInput->m_dispatcher,
-                            (hkpConstraintOwner *)v24,
-                            v3);
+                            this->m_collisionInput,
+                            (hkpConstraintOwner *)v24);
                       }
                       else
                       {
-                        v35 = v52;
-                        if ( v52 == (v53 & 0x3FFFFFFF) )
+                        v35 = v50;
+                        if ( v50 == (v51 & 0x3FFFFFFF) )
                         {
-                          hkArrayUtil::_reserveMore(
-                            (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-                            &array,
-                            8);
-                          v35 = v52;
+                          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&array, 8);
+                          v35 = v50;
                         }
                         *(_QWORD *)&array[8 * v35] = v31;
-                        ++v52;
-                        *(_BYTE *)(v24 + 49) &= 0xFDu;
+                        ++v50;
+                        *(_BYTE *)(v24 + 49) &= ~2u;
                         *(_BYTE *)(v24 + 49) |= 1u;
                       }
                       v31 = (hkpAgentNnEntry *)((char *)v31 + (unsigned __int8)v31->m_size);
                     }
-                    while ( (unsigned __int64)v31 < v32 );
-                    v27 = v52;
+                    while ( v31 < v32 );
+                    v27 = v50;
                     v30 = v46;
                   }
                   v28 = *((_DWORD *)v26 + 4);
                 }
                 while ( v29 < v28 );
               }
-              v25 = v45 + 1;
-              v45 = v25;
+              i = v45 + 1;
             }
-            while ( v25 < 2 );
             if ( v27 )
             {
               do
               {
                 v36 = *(hkpAgentNnEntry **)&array[8 * v27 - 8];
-                v52 = v27 - 1;
+                v50 = v27 - 1;
                 hkpWorldAgentUtil::removeAgentAndItsToiEvents(v36);
-                v27 = v52;
+                v27 = v50;
               }
-              while ( v52 );
+              while ( v50 );
             }
             v20 = v43;
             v22 = *v43;
             v23 = v44 + 8;
-            ++v58;
+            ++v56;
             v44 += 8i64;
           }
-          while ( v58 < *(_DWORD *)(v22 + 8) );
+          while ( v56 < *(_DWORD *)(v22 + 8) );
           v21 = v42;
         }
-        v52 = 0;
-        if ( v53 >= 0 )
-          hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-            (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-            array,
-            8 * v53);
+        v50 = 0;
+        if ( v51 >= 0 )
+          hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, array, 8 * v51);
         ++v20;
         v42 = --v21;
         v43 = v20;
       }
       while ( v21 );
-      --v5->m_criticalOperationsLockCount;
+      --this->m_criticalOperationsLockCount;
     }
     else
     {
       v10 = 0;
       v11 = 0;
-      if ( v5->m_activeSimulationIslands.m_size > 0 )
+      if ( this->m_activeSimulationIslands.m_size > 0 )
       {
         v12 = 0i64;
         do
         {
-          v13 = v5->m_activeSimulationIslands.m_data[v12];
+          v13 = this->m_activeSimulationIslands.m_data[v12];
           if ( v13->m_entities.m_size > 0 )
           {
             v14 = 0i64;
             do
             {
               hkpWorld::updateCollisionFilterOnEntity(
-                v5,
+                this,
                 v13->m_entities.m_data[v14],
-                0,
-                (hkpUpdateCollectionFilterMode)v3);
+                HK_UPDATE_FILTER_ON_ENTITY_FULL_CHECK,
+                updateShapeCollectionFilter);
               ++v10;
               ++v14;
             }
@@ -928,25 +911,25 @@ void __fastcall hkpWorld::updateCollisionFilterOnWorld(hkpWorld *this, hkpUpdate
           ++v12;
           v10 = 0;
         }
-        while ( v11 < v5->m_activeSimulationIslands.m_size );
+        while ( v11 < this->m_activeSimulationIslands.m_size );
       }
       v15 = 0;
-      if ( v5->m_inactiveSimulationIslands.m_size > 0 )
+      if ( this->m_inactiveSimulationIslands.m_size > 0 )
       {
         v16 = 0i64;
         do
         {
-          v17 = v5->m_inactiveSimulationIslands.m_data[v16];
+          v17 = this->m_inactiveSimulationIslands.m_data[v16];
           if ( v17->m_entities.m_size > 0 )
           {
             v18 = 0i64;
             do
             {
               hkpWorld::updateCollisionFilterOnEntity(
-                v5,
+                this,
                 v17->m_entities.m_data[v18],
-                0,
-                (hkpUpdateCollectionFilterMode)v3);
+                HK_UPDATE_FILTER_ON_ENTITY_FULL_CHECK,
+                updateShapeCollectionFilter);
               ++v10;
               ++v18;
             }
@@ -956,28 +939,28 @@ void __fastcall hkpWorld::updateCollisionFilterOnWorld(hkpWorld *this, hkpUpdate
           ++v16;
           v10 = 0;
         }
-        while ( v15 < v5->m_inactiveSimulationIslands.m_size );
+        while ( v15 < this->m_inactiveSimulationIslands.m_size );
       }
-      if ( v5->m_phantoms.m_size > 0 )
+      if ( this->m_phantoms.m_size > 0 )
       {
         v19 = 0i64;
         do
         {
-          hkpWorld::updateCollisionFilterOnPhantom(v5, v5->m_phantoms.m_data[v19], (hkpUpdateCollectionFilterMode)v3);
+          hkpWorld::updateCollisionFilterOnPhantom(this, this->m_phantoms.m_data[v19], updateShapeCollectionFilter);
           ++v10;
           ++v19;
         }
-        while ( v10 < v5->m_phantoms.m_size );
+        while ( v10 < this->m_phantoms.m_size );
       }
     }
-    v37 = v5->m_criticalOperationsLockCount == 0;
-    v5->m_blockExecutingPendingOperations.m_bool = 0;
+    v37 = this->m_criticalOperationsLockCount == 0;
+    this->m_blockExecutingPendingOperations.m_bool = 0;
     if ( v37 )
     {
-      if ( v5->m_pendingOperationsCount )
-        hkpWorld::internal_executePendingOperations(v5);
-      if ( v5->m_pendingOperationQueueCount == 1 && v5->m_pendingBodyOperationsCount )
-        hkpWorld::internal_executePendingBodyOperations(v5);
+      if ( this->m_pendingOperationsCount )
+        hkpWorld::internal_executePendingOperations(this);
+      if ( this->m_pendingOperationQueueCount == 1 && this->m_pendingBodyOperationsCount )
+        hkpWorld::internal_executePendingBodyOperations(this);
     }
     v38 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
     v39 = (_QWORD *)v38[1];
@@ -985,8 +968,8 @@ void __fastcall hkpWorld::updateCollisionFilterOnWorld(hkpWorld *this, hkpUpdate
     {
       *v39 = "Et";
       v40 = __rdtsc();
-      v41 = (signed __int64)(v39 + 2);
-      *(_DWORD *)(v41 - 8) = v40;
+      v41 = v39 + 2;
+      *((_DWORD *)v41 - 2) = v40;
       v38[1] = v41;
     }
   }
@@ -994,128 +977,123 @@ void __fastcall hkpWorld::updateCollisionFilterOnWorld(hkpWorld *this, hkpUpdate
 
 // File Line: 476
 // RVA: 0xD5DD00
-void __fastcall hkWorld_updateFilterOnSinglePhantom(hkpPhantom *phantom, hkpCollidable *collidable, hkpCollisionFilter *filter)
+void __fastcall hkWorld_updateFilterOnSinglePhantom(
+        hkpPhantom *phantom,
+        hkpCollidable *collidable,
+        hkpCollisionFilter *filter)
 {
-  hkpCollisionFilter *v3; // rbx
-  hkpCollidable *v4; // rdi
-  hkpPhantom *v5; // rsi
-  char v6; // [rsp+40h] [rbp+8h]
-  char v7; // [rsp+50h] [rbp+18h]
+  char v6; // [rsp+40h] [rbp+8h] BYREF
+  char v7; // [rsp+50h] [rbp+18h] BYREF
 
-  v3 = filter;
-  v4 = collidable;
-  v5 = phantom;
   ((void (__fastcall *)(hkpPhantom *, char *, hkpCollidable *))phantom->vfptr[4].__first_virtual_table_function__)(
     phantom,
     &v6,
     collidable);
-  if ( *(_BYTE *)v3->vfptr->isCollisionEnabled(
-                   (hkpCollidableCollidableFilter *)&v3->vfptr,
-                   (hkBool *)&v7,
-                   (hkpCollidable *)&v5->m_collidable.m_shape,
-                   v4) )
+  if ( filter->hkpCollidableCollidableFilter::vfptr->isCollisionEnabled(
+         &filter->hkpCollidableCollidableFilter,
+         &v7,
+         &phantom->m_collidable,
+         collidable)->m_bool )
   {
     if ( !v6 )
-      v5->vfptr[4].__vecDelDtor((hkBaseObject *)&v5->vfptr, (unsigned int)v4);
-    if ( v4->m_broadPhaseHandle.m_type == 2 )
+      phantom->vfptr[4].__vecDelDtor(phantom, (unsigned int)collidable);
+    if ( collidable->m_broadPhaseHandle.m_type == 2 )
     {
-      (*(void (__fastcall **)(char *, char *, hkpLinkedCollidable *))&(*(hkpShape **)((char *)&v4->m_shape
-                                                                                    + v4->m_ownerOffset))[2].m_memSizeAndFlags)(
-        (char *)v4 + v4->m_ownerOffset,
+      (*(void (__fastcall **)(char *, char *, hkpLinkedCollidable *))&(*(hkpShape **)((char *)&collidable->m_shape
+                                                                                    + collidable->m_ownerOffset))[2].m_memSizeAndFlags)(
+        (char *)collidable + collidable->m_ownerOffset,
         &v7,
-        &v5->m_collidable);
+        &phantom->m_collidable);
       if ( !v7 )
-        ((void (__fastcall *)(char *, hkpLinkedCollidable *))(*(hkpShape **)((char *)&v4->m_shape + v4->m_ownerOffset))[2].vfptr)(
-          (char *)v4 + v4->m_ownerOffset,
-          &v5->m_collidable);
+        ((void (__fastcall *)(char *, hkpLinkedCollidable *))(*(hkpShape **)((char *)&collidable->m_shape
+                                                                           + collidable->m_ownerOffset))[2].vfptr)(
+          (char *)collidable + collidable->m_ownerOffset,
+          &phantom->m_collidable);
     }
   }
   else
   {
     if ( v6 )
-      v5->vfptr[5].__vecDelDtor((hkBaseObject *)&v5->vfptr, (unsigned int)v4);
-    if ( v4->m_broadPhaseHandle.m_type == 2 )
+      phantom->vfptr[5].__vecDelDtor(phantom, (unsigned int)collidable);
+    if ( collidable->m_broadPhaseHandle.m_type == 2 )
     {
-      (*(void (__fastcall **)(char *, char *, hkpLinkedCollidable *))&(*(hkpShape **)((char *)&v4->m_shape
-                                                                                    + v4->m_ownerOffset))[2].m_memSizeAndFlags)(
-        (char *)v4 + v4->m_ownerOffset,
+      (*(void (__fastcall **)(char *, char *, hkpLinkedCollidable *))&(*(hkpShape **)((char *)&collidable->m_shape
+                                                                                    + collidable->m_ownerOffset))[2].m_memSizeAndFlags)(
+        (char *)collidable + collidable->m_ownerOffset,
         &v7,
-        &v5->m_collidable);
+        &phantom->m_collidable);
       if ( v7 )
-        (*(void (__fastcall **)(char *, hkpLinkedCollidable *))&(*(hkpShape **)((char *)&v4->m_shape + v4->m_ownerOffset))[2].m_type.m_storage)(
-          (char *)v4 + v4->m_ownerOffset,
-          &v5->m_collidable);
+        (*(void (__fastcall **)(char *, hkpLinkedCollidable *))&(*(hkpShape **)((char *)&collidable->m_shape
+                                                                              + collidable->m_ownerOffset))[2].m_type.m_storage)(
+          (char *)collidable + collidable->m_ownerOffset,
+          &phantom->m_collidable);
     }
   }
 }
 
 // File Line: 515
 // RVA: 0xD59B60
-void __fastcall hkpWorld::updateCollisionFilterOnPhantom(hkpWorld *this, hkpPhantom *phantom, hkpUpdateCollectionFilterMode updateShapeCollectionFilter)
+void __fastcall hkpWorld::updateCollisionFilterOnPhantom(
+        hkpWorld *this,
+        hkpPhantom *phantom,
+        hkpUpdateCollectionFilterMode updateShapeCollectionFilter)
 {
-  hkpUpdateCollectionFilterMode v3; // er12
-  hkpPhantom *v4; // r14
-  hkpWorld *v5; // rbx
-  _QWORD *v6; // rax
+  _QWORD *Value; // rax
   unsigned __int64 v7; // rcx
   _QWORD *v8; // r8
   unsigned __int64 v9; // rax
-  int v10; // edi
-  hkLifoAllocator *v11; // rax
-  hkLifoAllocator *v12; // rcx
-  char *v13; // rax
-  int v14; // edx
-  char *v15; // r8
-  hkpBroadPhase *v16; // rcx
-  _QWORD *v17; // r8
-  _QWORD *v18; // rcx
-  unsigned __int64 v19; // rax
-  signed __int64 v20; // rcx
-  int v21; // edx
-  int v22; // edi
-  __int64 v23; // rsi
-  __int64 v24; // rcx
-  unsigned __int64 v25; // rdx
-  _QWORD *v26; // r8
-  _QWORD *v27; // rcx
-  unsigned __int64 v28; // rax
-  signed __int64 v29; // rcx
-  bool v30; // zf
-  _QWORD *v31; // r8
-  _QWORD *v32; // rcx
-  unsigned __int64 v33; // rax
-  signed __int64 v34; // rcx
-  int v35; // eax
-  char *v36; // rdi
-  signed int v37; // ebx
-  hkLifoAllocator *v38; // rax
-  int v39; // er8
-  hkWorldOperation::BaseOperation operation; // [rsp+20h] [rbp-48h]
-  hkpPhantom *v41; // [rsp+28h] [rbp-40h]
-  char v42; // [rsp+30h] [rbp-38h]
-  char *v43; // [rsp+38h] [rbp-30h]
-  int v44; // [rsp+40h] [rbp-28h]
-  int v45; // [rsp+44h] [rbp-24h]
+  int m_broadPhaseQuerySize; // edi
+  hkLifoAllocator *v11; // rcx
+  char *m_cur; // rax
+  int v13; // edx
+  char *v14; // r8
+  hkpBroadPhase *m_broadPhase; // rcx
+  _QWORD *v16; // r8
+  _QWORD *v17; // rcx
+  unsigned __int64 v18; // rax
+  _QWORD *v19; // rcx
+  int v20; // edx
+  int v21; // edi
+  __int64 v22; // rsi
+  __int64 v23; // rcx
+  unsigned __int64 v24; // rdx
+  _QWORD *v25; // r8
+  _QWORD *v26; // rcx
+  unsigned __int64 v27; // rax
+  _QWORD *v28; // rcx
+  bool v29; // zf
+  _QWORD *v30; // r8
+  _QWORD *v31; // rcx
+  unsigned __int64 v32; // rax
+  _QWORD *v33; // rcx
+  int v34; // eax
+  char *v35; // rdi
+  signed int v36; // ebx
+  hkLifoAllocator *v37; // rax
+  int v38; // r8d
+  hkWorldOperation::BaseOperation operation; // [rsp+20h] [rbp-48h] BYREF
+  hkpPhantom *v40; // [rsp+28h] [rbp-40h]
+  char v41; // [rsp+30h] [rbp-38h]
+  char *v42; // [rsp+38h] [rbp-30h] BYREF
+  int v43; // [rsp+40h] [rbp-28h]
+  int v44; // [rsp+44h] [rbp-24h]
   void *p; // [rsp+48h] [rbp-20h]
-  int v47; // [rsp+50h] [rbp-18h]
+  int v46; // [rsp+50h] [rbp-18h]
 
-  v3 = updateShapeCollectionFilter;
-  v4 = phantom;
-  v5 = this;
   if ( this->m_criticalOperationsLockCount )
   {
-    v41 = phantom;
+    v40 = phantom;
     operation.m_type.m_storage = 21;
-    v42 = updateShapeCollectionFilter;
+    v41 = updateShapeCollectionFilter;
     hkpWorld::queueOperation(this, &operation);
   }
   else
   {
     this->m_criticalOperationsLockCount = 1;
-    v6 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-    v7 = v6[1];
-    v8 = v6;
-    if ( v7 < v6[3] )
+    Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+    v7 = Value[1];
+    v8 = Value;
+    if ( v7 < Value[3] )
     {
       *(_QWORD *)v7 = "LtUpdateFilterOnPhantom";
       *(_QWORD *)(v7 + 16) = "Stbroadphase";
@@ -1123,117 +1101,116 @@ void __fastcall hkpWorld::updateCollisionFilterOnPhantom(hkpWorld *this, hkpPhan
       *(_DWORD *)(v7 + 8) = v9;
       v8[1] = v7 + 24;
     }
-    v10 = v5->m_broadPhaseQuerySize;
-    v45 = 2147483648;
-    v43 = 0i64;
-    v44 = 0;
-    v47 = v10;
-    if ( v10 )
+    m_broadPhaseQuerySize = this->m_broadPhaseQuerySize;
+    v44 = 0x80000000;
+    v42 = 0i64;
+    v43 = 0;
+    v46 = m_broadPhaseQuerySize;
+    if ( m_broadPhaseQuerySize )
     {
       v11 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v12 = v11;
-      v13 = (char *)v11->m_cur;
-      v14 = (16 * v10 + 127) & 0xFFFFFF80;
-      v15 = &v13[v14];
-      if ( v14 > v12->m_slabSize || v15 > v12->m_end )
-        v13 = (char *)hkLifoAllocator::allocateFromNewSlab(v12, v14);
+      m_cur = (char *)v11->m_cur;
+      v13 = (16 * m_broadPhaseQuerySize + 127) & 0xFFFFFF80;
+      v14 = &m_cur[v13];
+      if ( v13 > v11->m_slabSize || v14 > v11->m_end )
+        m_cur = (char *)hkLifoAllocator::allocateFromNewSlab(v11, v13);
       else
-        v12->m_cur = v15;
+        v11->m_cur = v14;
     }
     else
     {
-      v13 = 0i64;
+      m_cur = 0i64;
     }
-    v16 = v5->m_broadPhase;
-    v43 = v13;
-    p = v13;
-    v45 = v10 | 0x80000000;
-    ((void (__fastcall *)(hkpBroadPhase *, hkpTypedBroadPhaseHandle *, char **))v16->vfptr[9].__first_virtual_table_function__)(
-      v16,
-      &v4->m_collidable.m_broadPhaseHandle,
-      &v43);
-    v17 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-    v18 = (_QWORD *)v17[1];
-    if ( (unsigned __int64)v18 < v17[3] )
+    m_broadPhase = this->m_broadPhase;
+    v42 = m_cur;
+    p = m_cur;
+    v44 = m_broadPhaseQuerySize | 0x80000000;
+    ((void (__fastcall *)(hkpBroadPhase *, hkpTypedBroadPhaseHandle *, char **))m_broadPhase->vfptr[9].__first_virtual_table_function__)(
+      m_broadPhase,
+      &phantom->m_collidable.m_broadPhaseHandle,
+      &v42);
+    v16 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+    v17 = (_QWORD *)v16[1];
+    if ( (unsigned __int64)v17 < v16[3] )
     {
-      *v18 = "StUpdateOverlaps";
-      v19 = __rdtsc();
-      v20 = (signed __int64)(v18 + 2);
-      *(_DWORD *)(v20 - 8) = v19;
-      v17[1] = v20;
+      *v17 = "StUpdateOverlaps";
+      v18 = __rdtsc();
+      v19 = v17 + 2;
+      *((_DWORD *)v19 - 2) = v18;
+      v16[1] = v19;
     }
-    v21 = v44;
-    v22 = 0;
-    if ( v44 > 0 )
+    v20 = v43;
+    v21 = 0;
+    if ( v43 > 0 )
     {
-      v23 = 0i64;
+      v22 = 0i64;
       do
       {
-        v24 = *(_QWORD *)&v43[v23 + 8];
-        if ( (hkpTypedBroadPhaseHandle *)v24 != &v4->m_collidable.m_broadPhaseHandle )
+        v23 = *(_QWORD *)&v42[v22 + 8];
+        if ( (hkpTypedBroadPhaseHandle *)v23 != &phantom->m_collidable.m_broadPhaseHandle )
         {
-          hkWorld_updateFilterOnSinglePhantom(v4, (hkpCollidable *)(v24 + *(char *)(v24 + 5)), v5->m_collisionFilter);
-          v21 = v44;
+          hkWorld_updateFilterOnSinglePhantom(
+            phantom,
+            (hkpCollidable *)(v23 + *(char *)(v23 + 5)),
+            this->m_collisionFilter);
+          v20 = v43;
         }
-        ++v22;
-        v23 += 16i64;
+        ++v21;
+        v22 += 16i64;
       }
-      while ( v22 < v21 );
+      while ( v21 < v20 );
     }
-    if ( v3 )
+    if ( updateShapeCollectionFilter )
     {
-      v26 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-      v27 = (_QWORD *)v26[1];
-      if ( (unsigned __int64)v27 < v26[3] )
+      v25 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+      v26 = (_QWORD *)v25[1];
+      if ( (unsigned __int64)v26 < v25[3] )
       {
-        *v27 = "StcollectionFilter";
-        v28 = __rdtsc();
-        v25 = (unsigned __int64)HIDWORD(v28) << 32;
-        v29 = (signed __int64)(v27 + 2);
-        *(_DWORD *)(v29 - 8) = v28;
-        v26[1] = v29;
+        *v26 = "StcollectionFilter";
+        v27 = __rdtsc();
+        v24 = (unsigned __int64)HIDWORD(v27) << 32;
+        v28 = v26 + 2;
+        *((_DWORD *)v28 - 2) = v27;
+        v25[1] = v28;
       }
-      ((void (__fastcall *)(hkpPhantom *, unsigned __int64, LPVOID))v4->vfptr[6].__first_virtual_table_function__)(
-        v4,
-        v25,
-        v26);
+      ((void (__fastcall *)(hkpPhantom *, unsigned __int64, _QWORD *))phantom->vfptr[6].__first_virtual_table_function__)(
+        phantom,
+        v24,
+        v25);
     }
-    v30 = v5->m_criticalOperationsLockCount-- == 1;
-    if ( v30 && !v5->m_blockExecutingPendingOperations.m_bool )
+    v29 = this->m_criticalOperationsLockCount-- == 1;
+    if ( v29 && !this->m_blockExecutingPendingOperations.m_bool )
     {
-      if ( v5->m_pendingOperationsCount )
-        hkpWorld::internal_executePendingOperations(v5);
-      if ( v5->m_pendingOperationQueueCount == 1 && v5->m_pendingBodyOperationsCount )
-        hkpWorld::internal_executePendingBodyOperations(v5);
+      if ( this->m_pendingOperationsCount )
+        hkpWorld::internal_executePendingOperations(this);
+      if ( this->m_pendingOperationQueueCount == 1 && this->m_pendingBodyOperationsCount )
+        hkpWorld::internal_executePendingBodyOperations(this);
     }
-    v31 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-    v32 = (_QWORD *)v31[1];
-    if ( (unsigned __int64)v32 < v31[3] )
+    v30 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+    v31 = (_QWORD *)v30[1];
+    if ( (unsigned __int64)v31 < v30[3] )
     {
-      *v32 = "lt";
-      v33 = __rdtsc();
-      v34 = (signed __int64)(v32 + 2);
-      *(_DWORD *)(v34 - 8) = v33;
-      v31[1] = v34;
+      *v31 = "lt";
+      v32 = __rdtsc();
+      v33 = v31 + 2;
+      *((_DWORD *)v33 - 2) = v32;
+      v30[1] = v33;
     }
-    v35 = v44;
-    v36 = (char *)p;
-    if ( p == v43 )
-      v35 = 0;
-    v44 = v35;
-    v37 = (16 * v47 + 127) & 0xFFFFFF80;
-    v38 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v39 = (v37 + 15) & 0xFFFFFFF0;
-    if ( v37 > v38->m_slabSize || &v36[v39] != v38->m_cur || v38->m_firstNonLifoEnd == v36 )
-      hkLifoAllocator::slowBlockFree(v38, v36, v39);
+    v34 = v43;
+    v35 = (char *)p;
+    if ( p == v42 )
+      v34 = 0;
+    v43 = v34;
+    v36 = (16 * v46 + 127) & 0xFFFFFF80;
+    v37 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    v38 = (v36 + 15) & 0xFFFFFFF0;
+    if ( v36 > v37->m_slabSize || &v35[v38] != v37->m_cur || v37->m_firstNonLifoEnd == v35 )
+      hkLifoAllocator::slowBlockFree(v37, v35, v38);
     else
-      v38->m_cur = v36;
-    v44 = 0;
-    if ( v45 >= 0 )
-      hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-        v43,
-        16 * v45);
+      v37->m_cur = v35;
+    v43 = 0;
+    if ( v44 >= 0 )
+      hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v42, 16 * v44);
   }
 }
 
@@ -1241,21 +1218,15 @@ void __fastcall hkpWorld::updateCollisionFilterOnPhantom(hkpWorld *this, hkpPhan
 // RVA: 0xD59A70
 void __fastcall hkpWorld::reenableCollisionBetweenEntityPair(hkpWorld *this, hkpEntity *entityA, hkpEntity *entityB)
 {
-  hkpEntity *v3; // rdi
-  hkpEntity *v4; // rsi
-  hkpWorld *v5; // rbx
-  hkpBroadPhaseHandle *v6; // rbp
-  hkpBroadPhaseHandle *v7; // r14
-  hkpCollidableCollidableFilter *v8; // r9
-  hkpTypedBroadPhaseHandlePair newPairs; // [rsp+20h] [rbp-48h]
-  hkWorldOperation::BaseOperation operation; // [rsp+30h] [rbp-38h]
+  hkpTypedBroadPhaseHandle *p_m_broadPhaseHandle; // rbp
+  hkpTypedBroadPhaseHandle *v7; // r14
+  hkpCollidableCollidableFilter *m_collisionFilter; // r9
+  hkpTypedBroadPhaseHandlePair newPairs; // [rsp+20h] [rbp-48h] BYREF
+  hkWorldOperation::BaseOperation operation; // [rsp+30h] [rbp-38h] BYREF
   hkpEntity *v11; // [rsp+38h] [rbp-30h]
   hkpEntity *v12; // [rsp+40h] [rbp-28h]
-  char v13; // [rsp+70h] [rbp+8h]
+  char v13; // [rsp+70h] [rbp+8h] BYREF
 
-  v3 = entityB;
-  v4 = entityA;
-  v5 = this;
   if ( this->m_criticalOperationsLockCount )
   {
     v11 = entityA;
@@ -1265,110 +1236,104 @@ void __fastcall hkpWorld::reenableCollisionBetweenEntityPair(hkpWorld *this, hkp
   }
   else
   {
-    v6 = (hkpBroadPhaseHandle *)&entityB->m_collidable.m_broadPhaseHandle.m_id;
-    v7 = (hkpBroadPhaseHandle *)&entityA->m_collidable.m_broadPhaseHandle.m_id;
+    p_m_broadPhaseHandle = &entityB->m_collidable.m_broadPhaseHandle;
+    v7 = &entityA->m_collidable.m_broadPhaseHandle;
     if ( ((unsigned __int8 (__fastcall *)(hkpBroadPhase *, hkpTypedBroadPhaseHandle *, hkpTypedBroadPhaseHandle *))this->m_broadPhase->vfptr[10].__first_virtual_table_function__)(
            this->m_broadPhase,
            &entityA->m_collidable.m_broadPhaseHandle,
            &entityB->m_collidable.m_broadPhaseHandle)
-      && *(_BYTE *)v5->m_collisionFilter->vfptr->isCollisionEnabled(
-                     (hkpCollidableCollidableFilter *)&v5->m_collisionFilter->vfptr,
-                     (hkBool *)&v13,
-                     (hkpCollidable *)&v4->m_collidable.m_shape,
-                     (hkpCollidable *)&v3->m_collidable.m_shape)
-      && !hkAgentNnMachine_FindAgent(&v4->m_collidable, &v3->m_collidable) )
+      && this->m_collisionFilter->vfptr->isCollisionEnabled(
+           &this->m_collisionFilter->hkpCollidableCollidableFilter,
+           &v13,
+           &entityA->m_collidable,
+           &entityB->m_collidable)->m_bool
+      && !hkAgentNnMachine_FindAgent(&entityA->m_collidable, &entityB->m_collidable) )
     {
-      v8 = (hkpCollidableCollidableFilter *)v5->m_collisionFilter;
+      m_collisionFilter = (hkpCollidableCollidableFilter *)this->m_collisionFilter;
       newPairs.m_a = v7;
-      newPairs.m_b = v6;
-      if ( v8 )
-        v8 += 2;
-      hkpTypedBroadPhaseDispatcher::addPairs(v5->m_broadPhaseDispatcher, &newPairs, 1, v8);
+      newPairs.m_b = p_m_broadPhaseHandle;
+      if ( m_collisionFilter )
+        m_collisionFilter += 2;
+      hkpTypedBroadPhaseDispatcher::addPairs(this->m_broadPhaseDispatcher, &newPairs, 1, m_collisionFilter);
     }
   }
 }
 
 // File Line: 612
 // RVA: 0xD59430
-void __fastcall hkpWorld::updateCollisionFilterOnEntity(hkpWorld *this, hkpEntity *entity, hkpUpdateCollisionFilterOnEntityMode updateMode, hkpUpdateCollectionFilterMode updateShapeCollectionFilter)
+void __fastcall hkpWorld::updateCollisionFilterOnEntity(
+        hkpWorld *this,
+        hkpEntity *entity,
+        hkpUpdateCollisionFilterOnEntityMode updateMode,
+        hkpUpdateCollectionFilterMode updateShapeCollectionFilter)
 {
-  hkpUpdateCollectionFilterMode v4; // er12
-  hkpUpdateCollisionFilterOnEntityMode v5; // ebx
-  hkpEntity *v6; // r13
-  hkpWorld *v7; // r14
-  _QWORD *v8; // r8
+  _QWORD *Value; // r8
   unsigned __int64 v9; // rcx
   unsigned __int64 v10; // rax
-  signed int v11; // er15
+  int m_capacityAndFlags; // r15d
   _QWORD *v12; // r8
   _QWORD *v13; // rcx
   unsigned __int64 v14; // rax
-  signed __int64 v15; // rcx
+  _QWORD *v15; // rcx
   _QWORD *v16; // r8
   _QWORD *v17; // rcx
   unsigned __int64 v18; // rax
-  signed __int64 v19; // rcx
-  int v20; // edx
+  _QWORD *v19; // rcx
+  int m_size; // edx
   int v21; // edi
   __int64 v22; // rsi
   char *v23; // rax
   hkpPhantom *v24; // rbx
   __int64 v25; // r8
-  signed __int64 v26; // rdx
+  __int64 v26; // rdx
   hkpBroadPhaseHandlePair *v27; // rcx
-  signed __int64 v28; // r8
+  __int64 v28; // r8
   hkpBroadPhaseHandle *v29; // rax
-  hkArray<hkpLinkedCollidable::CollisionEntry,hkContainerHeapAllocator> *v30; // rax
+  hkArray<hkpLinkedCollidable::CollisionEntry,hkContainerHeapAllocator> *CollisionEntriesDeterministicUnchecked; // rax
   int v31; // ecx
   hkArray<hkpLinkedCollidable::CollisionEntry,hkContainerHeapAllocator> *v32; // rdi
   int v33; // esi
   __int64 v34; // rbx
-  signed __int64 v35; // rdx
-  hkpAgentNnEntry *v36; // rcx
-  char *v37; // rdx
+  __int64 v35; // rdx
+  hkpAgentNnEntry *m_agentEntry; // rcx
+  hkpBroadPhaseHandlePair *v37; // rdx
   _QWORD *v38; // r8
   _QWORD *v39; // rcx
   unsigned __int64 v40; // rax
-  signed __int64 v41; // rcx
-  __int64 v42; // r12
+  _QWORD *v41; // rcx
+  __int64 m_objectQualityType; // r12
   int v43; // edi
   hkArray<hkpLinkedCollidable::CollisionEntry,hkContainerHeapAllocator> *v44; // r15
   __int64 v45; // rbx
   hkpLinkedCollidable::CollisionEntry *v46; // rsi
-  hkpLinkedCollidable *v47; // r8
-  signed __int64 v48; // rdx
-  hkpCollisionDispatcher *v49; // rax
+  hkpLinkedCollidable *m_partner; // r8
+  __int64 v48; // rdx
+  hkpCollisionDispatcher *m_collisionDispatcher; // rax
   int v50; // ecx
   hkpBroadPhaseHandlePair *v51; // rdx
   _QWORD *v52; // r8
   _QWORD *v53; // rcx
   unsigned __int64 v54; // rax
-  signed __int64 v55; // rcx
-  hkpCollisionFilter *v56; // rax
+  _QWORD *v55; // rcx
+  hkpCollisionFilter *m_collisionFilter; // rax
   hkpCollidableCollidableFilter *v57; // r9
   bool v58; // zf
   _QWORD *v59; // r8
   _QWORD *v60; // rcx
   unsigned __int64 v61; // rax
-  signed __int64 v62; // rcx
-  hkWorldOperation::BaseOperation operation; // [rsp+20h] [rbp-E0h]
+  _QWORD *v62; // rcx
+  hkWorldOperation::BaseOperation operation; // [rsp+20h] [rbp-E0h] BYREF
   hkpEntity *v64; // [rsp+28h] [rbp-D8h]
   char v65; // [rsp+30h] [rbp-D0h]
   char v66; // [rsp+31h] [rbp-CFh]
-  hkArray<hkpBroadPhaseHandlePair,hkContainerHeapAllocator> delPairs; // [rsp+40h] [rbp-C0h]
-  char v68; // [rsp+50h] [rbp-B0h]
-  char *array; // [rsp+850h] [rbp+750h]
-  int v70; // [rsp+858h] [rbp+758h]
-  int v71; // [rsp+85Ch] [rbp+75Ch]
-  char v72; // [rsp+860h] [rbp+760h]
-  char v73; // [rsp+10A0h] [rbp+FA0h]
-  hkpUpdateCollectionFilterMode v74; // [rsp+10B8h] [rbp+FB8h]
+  hkArray<hkpBroadPhaseHandlePair,hkContainerHeapAllocator> delPairs; // [rsp+40h] [rbp-C0h] BYREF
+  char v68; // [rsp+50h] [rbp-B0h] BYREF
+  hkArray<hkpBroadPhaseHandlePair,hkContainerHeapAllocator> array; // [rsp+850h] [rbp+750h] BYREF
+  char v70; // [rsp+860h] [rbp+760h] BYREF
+  char v71; // [rsp+10A0h] [rbp+FA0h] BYREF
+  hkpUpdateCollectionFilterMode v72; // [rsp+10B8h] [rbp+FB8h]
 
-  v74 = updateShapeCollectionFilter;
-  v4 = updateShapeCollectionFilter;
-  v5 = updateMode;
-  v6 = entity;
-  v7 = this;
+  v72 = updateShapeCollectionFilter;
   if ( this->m_criticalOperationsLockCount )
   {
     v64 = entity;
@@ -1378,24 +1343,24 @@ void __fastcall hkpWorld::updateCollisionFilterOnEntity(hkpWorld *this, hkpEntit
     hkpWorld::queueOperation(this, &operation);
     return;
   }
-  v8 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v9 = v8[1];
-  if ( v9 < v8[3] )
+  Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v9 = Value[1];
+  if ( v9 < Value[3] )
   {
     *(_QWORD *)v9 = "LtUpdateFilterOnEntity";
     *(_QWORD *)(v9 + 16) = "Stinit";
     v10 = __rdtsc();
     *(_DWORD *)(v9 + 8) = v10;
-    v8[1] = v9 + 24;
+    Value[1] = v9 + 24;
   }
-  ++v7->m_criticalOperationsLockCount;
-  if ( v6->m_motion.m_type.m_storage == 5 )
-    hkpLinkedCollidable::sortEntries(&v6->m_collidable);
-  v11 = -2147483520;
+  ++this->m_criticalOperationsLockCount;
+  if ( entity->m_motion.m_type.m_storage == 5 )
+    hkpLinkedCollidable::sortEntries(&entity->m_collidable);
+  m_capacityAndFlags = -2147483520;
   delPairs.m_size = 0;
   delPairs.m_data = (hkpBroadPhaseHandlePair *)&v68;
   delPairs.m_capacityAndFlags = -2147483520;
-  if ( v5 == HK_UPDATE_FILTER_ON_ENTITY_FULL_CHECK )
+  if ( updateMode == HK_UPDATE_FILTER_ON_ENTITY_FULL_CHECK )
   {
     v12 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
     v13 = (_QWORD *)v12[1];
@@ -1403,13 +1368,13 @@ void __fastcall hkpWorld::updateCollisionFilterOnEntity(hkpWorld *this, hkpEntit
     {
       *v13 = "Stbroadphase";
       v14 = __rdtsc();
-      v15 = (signed __int64)(v13 + 2);
-      *(_DWORD *)(v15 - 8) = v14;
+      v15 = v13 + 2;
+      *((_DWORD *)v15 - 2) = v14;
       v12[1] = v15;
     }
-    ((void (__fastcall *)(hkpBroadPhase *, hkpTypedBroadPhaseHandle *, hkArray<hkpBroadPhaseHandlePair,hkContainerHeapAllocator> *))v7->m_broadPhase->vfptr[9].__first_virtual_table_function__)(
-      v7->m_broadPhase,
-      &v6->m_collidable.m_broadPhaseHandle,
+    ((void (__fastcall *)(hkpBroadPhase *, hkpTypedBroadPhaseHandle *, hkArray<hkpBroadPhaseHandlePair,hkContainerHeapAllocator> *))this->m_broadPhase->vfptr[9].__first_virtual_table_function__)(
+      this->m_broadPhase,
+      &entity->m_collidable.m_broadPhaseHandle,
       &delPairs);
     v16 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
     v17 = (_QWORD *)v16[1];
@@ -1417,11 +1382,11 @@ void __fastcall hkpWorld::updateCollisionFilterOnEntity(hkpWorld *this, hkpEntit
     {
       *v17 = "Stphantom";
       v18 = __rdtsc();
-      v19 = (signed __int64)(v17 + 2);
-      *(_DWORD *)(v19 - 8) = v18;
+      v19 = v17 + 2;
+      *((_DWORD *)v19 - 2) = v18;
       v16[1] = v19;
     }
-    v20 = delPairs.m_size;
+    m_size = delPairs.m_size;
     v21 = 0;
     if ( delPairs.m_size > 0 )
     {
@@ -1434,14 +1399,14 @@ void __fastcall hkpWorld::updateCollisionFilterOnEntity(hkpWorld *this, hkpEntit
           v24 = (hkpPhantom *)&v23[v23[32]];
           if ( v24 )
           {
-            hkWorld_updateFilterOnSinglePhantom(v24, (hkpCollidable *)&v6->m_collidable.m_shape, v7->m_collisionFilter);
-            if ( v4 )
-              v24->vfptr[6].__first_virtual_table_function__((hkBaseObject *)&v24->vfptr);
-            v20 = delPairs.m_size - 1;
-            delPairs.m_size = v20;
-            if ( v20 != v21 )
+            hkWorld_updateFilterOnSinglePhantom(v24, &entity->m_collidable, this->m_collisionFilter);
+            if ( updateShapeCollectionFilter )
+              v24->vfptr[6].__first_virtual_table_function__(v24);
+            m_size = delPairs.m_size - 1;
+            delPairs.m_size = m_size;
+            if ( m_size != v21 )
             {
-              v25 = v20;
+              v25 = m_size;
               v26 = 2i64;
               v27 = &delPairs.m_data[v22];
               v28 = 16 * v25 - v22 * 16;
@@ -1453,7 +1418,7 @@ void __fastcall hkpWorld::updateCollisionFilterOnEntity(hkpWorld *this, hkpEntit
                 --v26;
               }
               while ( v26 );
-              v20 = delPairs.m_size;
+              m_size = delPairs.m_size;
             }
             --v21;
             --v22;
@@ -1462,48 +1427,46 @@ void __fastcall hkpWorld::updateCollisionFilterOnEntity(hkpWorld *this, hkpEntit
         ++v21;
         ++v22;
       }
-      while ( v21 < v20 );
+      while ( v21 < m_size );
     }
-    v30 = hkpLinkedCollidable::getCollisionEntriesDeterministicUnchecked(&v6->m_collidable);
+    CollisionEntriesDeterministicUnchecked = hkpLinkedCollidable::getCollisionEntriesDeterministicUnchecked(&entity->m_collidable);
     v31 = 0;
-    v71 = -2147483520;
-    v32 = v30;
-    v70 = 0;
-    array = &v72;
+    array.m_capacityAndFlags = -2147483520;
+    v32 = CollisionEntriesDeterministicUnchecked;
+    array.m_size = 0;
+    array.m_data = (hkpBroadPhaseHandlePair *)&v70;
     v33 = 0;
-    if ( v30->m_size > 0 )
+    if ( CollisionEntriesDeterministicUnchecked->m_size > 0 )
     {
       v34 = 0i64;
       while ( 1 )
       {
-        if ( v31 == (v11 & 0x3FFFFFFF) )
+        if ( v31 == (m_capacityAndFlags & 0x3FFFFFFF) )
         {
-          hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, 16);
-          v31 = v70;
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&array.m_data, 16);
+          v31 = array.m_size;
         }
         ++v33;
-        v70 = v31 + 1;
-        v35 = 16i64 * v31;
-        v36 = v32->m_data[v34].m_agentEntry;
-        v37 = &array[v35];
+        array.m_size = v31 + 1;
+        v35 = v31;
+        m_agentEntry = v32->m_data[v34].m_agentEntry;
+        v37 = &array.m_data[v35];
         ++v34;
-        *(_QWORD *)v37 = (char *)v36->m_collidable[0] + 36;
-        *((_QWORD *)v37 + 1) = (char *)v32->m_data[v34 - 1].m_agentEntry->m_collidable[1] + 36;
+        v37->m_a = &m_agentEntry->m_collidable[0]->m_broadPhaseHandle;
+        v37->m_b = &v32->m_data[v34 - 1].m_agentEntry->m_collidable[1]->m_broadPhaseHandle;
         if ( v33 >= v32->m_size )
           break;
-        v11 = v71;
-        v31 = v70;
+        m_capacityAndFlags = array.m_capacityAndFlags;
+        v31 = array.m_size;
       }
     }
-    hkpTypedBroadPhaseDispatcher::removeDuplicates(
-      (hkArray<hkpBroadPhaseHandlePair,hkContainerHeapAllocator> *)&array,
-      &delPairs);
-    v70 = 0;
-    if ( v71 >= 0 )
+    hkpTypedBroadPhaseDispatcher::removeDuplicates(&array, &delPairs);
+    array.m_size = 0;
+    if ( array.m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-        array,
-        16 * v71);
+        &hkContainerHeapAllocator::s_alloc,
+        array.m_data,
+        16 * array.m_capacityAndFlags);
   }
   v38 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
   v39 = (_QWORD *)v38[1];
@@ -1511,65 +1474,63 @@ void __fastcall hkpWorld::updateCollisionFilterOnEntity(hkpWorld *this, hkpEntit
   {
     *v39 = "StcheckAgts";
     v40 = __rdtsc();
-    v41 = (signed __int64)(v39 + 2);
-    *(_DWORD *)(v41 - 8) = v40;
+    v41 = v39 + 2;
+    *((_DWORD *)v41 - 2) = v40;
     v38[1] = v41;
   }
-  v42 = v6->m_collidable.m_broadPhaseHandle.m_objectQualityType;
+  m_objectQualityType = entity->m_collidable.m_broadPhaseHandle.m_objectQualityType;
   v43 = 0;
-  v44 = hkpLinkedCollidable::getCollisionEntriesDeterministicUnchecked(&v6->m_collidable);
+  v44 = hkpLinkedCollidable::getCollisionEntriesDeterministicUnchecked(&entity->m_collidable);
   if ( v44->m_size > 0 )
   {
     v45 = 0i64;
     do
     {
       v46 = &v44->m_data[v45];
-      if ( *(_BYTE *)v7->m_collisionFilter->vfptr->isCollisionEnabled(
-                       (hkpCollidableCollidableFilter *)&v7->m_collisionFilter->vfptr,
-                       (hkBool *)&v73,
-                       (hkpCollidable *)&v6->m_collidable.m_shape,
-                       (hkpCollidable *)&v46->m_partner->m_shape) )
+      if ( this->m_collisionFilter->vfptr->isCollisionEnabled(
+             &this->m_collisionFilter->hkpCollidableCollidableFilter,
+             &v71,
+             &entity->m_collidable,
+             v46->m_partner)->m_bool )
       {
-        v47 = v46->m_partner;
-        v48 = v47->m_broadPhaseHandle.m_objectQualityType + 10 * v42;
-        v49 = v7->m_collisionDispatcher;
-        if ( v49->m_collisionQualityTable[0][v48] )
+        m_partner = v46->m_partner;
+        v48 = m_partner->m_broadPhaseHandle.m_objectQualityType + 10 * m_objectQualityType;
+        m_collisionDispatcher = this->m_collisionDispatcher;
+        if ( m_collisionDispatcher->m_collisionQualityTable[0][v48] )
         {
-          if ( v49->m_collisionQualityTable[0][v48] == (unsigned __int8)v46->m_agentEntry->m_collisionQualityIndex )
+          if ( m_collisionDispatcher->m_collisionQualityTable[0][v48] == (unsigned __int8)v46->m_agentEntry->m_collisionQualityIndex )
           {
-            if ( v74 == 1 )
+            if ( v72 == HK_UPDATE_COLLECTION_FILTER_PROCESS_SHAPE_COLLECTIONS )
             {
-              if ( v6->m_motion.m_type.m_storage == 5 )
+              if ( entity->m_motion.m_type.m_storage == 5 )
                 hkAgentNnMachine_UpdateShapeCollectionFilter(
                   v46->m_agentEntry,
-                  (hkpCollisionInput *)&v7->m_collisionInput->m_dispatcher,
-                  *(hkpConstraintOwner **)(&v47[2].m_broadPhaseHandle.m_type + v47->m_ownerOffset),
-                  v42);
+                  this->m_collisionInput,
+                  *(hkpConstraintOwner **)(&m_partner[2].m_broadPhaseHandle.m_type + m_partner->m_ownerOffset));
               else
                 hkAgentNnMachine_UpdateShapeCollectionFilter(
                   v46->m_agentEntry,
-                  (hkpCollisionInput *)&v7->m_collisionInput->m_dispatcher,
-                  (hkpConstraintOwner *)&v6->m_simulationIsland->vfptr,
-                  v42);
+                  this->m_collisionInput,
+                  entity->m_simulationIsland);
             }
             goto LABEL_43;
           }
           v50 = delPairs.m_size;
           if ( delPairs.m_size == (delPairs.m_capacityAndFlags & 0x3FFFFFFF) )
           {
-            hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &delPairs, 16);
+            hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&delPairs.m_data, 16);
             v50 = delPairs.m_size;
           }
           delPairs.m_size = v50 + 1;
           v51 = &delPairs.m_data[v50];
-          v51->m_a = (hkpBroadPhaseHandle *)&v44->m_data[v45].m_agentEntry->m_collidable[0]->m_broadPhaseHandle.m_id;
-          v51->m_b = (hkpBroadPhaseHandle *)&v44->m_data[v45].m_agentEntry->m_collidable[1]->m_broadPhaseHandle.m_id;
+          v51->m_a = &v44->m_data[v45].m_agentEntry->m_collidable[0]->m_broadPhaseHandle;
+          v51->m_b = &v44->m_data[v45].m_agentEntry->m_collidable[1]->m_broadPhaseHandle;
         }
       }
       hkpWorldAgentUtil::removeAgentAndItsToiEvents(v46->m_agentEntry);
       --v43;
       --v45;
-      *((_BYTE *)v6->m_simulationIsland + 49) = *((_BYTE *)v6->m_simulationIsland + 49) & 0xFD | 1;
+      *((_BYTE *)entity->m_simulationIsland + 49) = *((_BYTE *)entity->m_simulationIsland + 49) & 0xFC | 1;
 LABEL_43:
       ++v43;
       ++v45;
@@ -1584,33 +1545,33 @@ LABEL_43:
     {
       *v53 = "StaddAgts";
       v54 = __rdtsc();
-      v55 = (signed __int64)(v53 + 2);
-      *(_DWORD *)(v55 - 8) = v54;
+      v55 = v53 + 2;
+      *((_DWORD *)v55 - 2) = v54;
       v52[1] = v55;
     }
-    v56 = v7->m_collisionFilter;
-    if ( v56 )
-      v57 = (hkpCollidableCollidableFilter *)&v56->vfptr;
+    m_collisionFilter = this->m_collisionFilter;
+    if ( m_collisionFilter )
+      v57 = &m_collisionFilter->hkpCollidableCollidableFilter;
     else
       v57 = 0i64;
     hkpTypedBroadPhaseDispatcher::addPairs(
-      v7->m_broadPhaseDispatcher,
+      this->m_broadPhaseDispatcher,
       (hkpTypedBroadPhaseHandlePair *)delPairs.m_data,
       delPairs.m_size,
       v57);
   }
-  v58 = v7->m_criticalOperationsLockCount-- == 1;
-  if ( v58 && !v7->m_blockExecutingPendingOperations.m_bool )
+  v58 = this->m_criticalOperationsLockCount-- == 1;
+  if ( v58 && !this->m_blockExecutingPendingOperations.m_bool )
   {
-    if ( v7->m_pendingOperationsCount )
-      hkpWorld::internal_executePendingOperations(v7);
-    if ( v7->m_pendingOperationQueueCount == 1 && v7->m_pendingBodyOperationsCount )
-      hkpWorld::internal_executePendingBodyOperations(v7);
+    if ( this->m_pendingOperationsCount )
+      hkpWorld::internal_executePendingOperations(this);
+    if ( this->m_pendingOperationQueueCount == 1 && this->m_pendingBodyOperationsCount )
+      hkpWorld::internal_executePendingBodyOperations(this);
   }
   delPairs.m_size = 0;
   if ( delPairs.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       delPairs.m_data,
       16 * delPairs.m_capacityAndFlags);
   v59 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
@@ -1619,499 +1580,468 @@ LABEL_43:
   {
     *v60 = "lt";
     v61 = __rdtsc();
-    v62 = (signed __int64)(v60 + 2);
-    *(_DWORD *)(v62 - 8) = v61;
+    v62 = v60 + 2;
+    *((_DWORD *)v62 - 2) = v61;
     v59[1] = v62;
   }
 }
 
 // File Line: 794
 // RVA: 0xD5A370
-void __fastcall hkpWorld::reintegrateAndRecollideEntities(hkpWorld *this, hkpEntity **entityBatch, __int64 numEntities, hkpWorld::ReintegrationRecollideMode mode)
+void __fastcall hkpWorld::reintegrateAndRecollideEntities(
+        hkpWorld *this,
+        hkpEntity **entityBatch,
+        __int64 numEntities,
+        hkpWorld::ReintegrationRecollideMode mode)
 {
-  hkpWorld::ReintegrationRecollideMode v4; // ST20_4
-  hkWorldOperation::BaseOperation operation; // [rsp+30h] [rbp-28h]
-  hkpEntity **v6; // [rsp+38h] [rbp-20h]
-  __int16 v7; // [rsp+40h] [rbp-18h]
-  char v8; // [rsp+42h] [rbp-16h]
+  hkWorldOperation::BaseOperation operation; // [rsp+30h] [rbp-28h] BYREF
+  hkpEntity **v5; // [rsp+38h] [rbp-20h]
+  __int16 v6; // [rsp+40h] [rbp-18h]
+  char v7; // [rsp+42h] [rbp-16h]
 
   if ( this->m_criticalOperationsLockCount )
   {
-    v6 = entityBatch;
+    v5 = entityBatch;
     operation.m_type.m_storage = 24;
-    v7 = numEntities;
-    v8 = mode;
+    v6 = numEntities;
+    v7 = mode;
     hkpWorld::queueOperation(this, &operation);
   }
   else
   {
-    v4 = mode;
-    ((void (__fastcall *)(hkpSimulation *, hkpEntity **, __int64, hkpWorld *, hkpWorld::ReintegrationRecollideMode))this->m_simulation->vfptr[8].__vecDelDtor)(
+    ((void (__fastcall *)(hkpSimulation *, hkpEntity **, __int64, hkpWorld *, _BYTE))this->m_simulation->vfptr[8].__vecDelDtor)(
       this->m_simulation,
       entityBatch,
       numEntities,
       this,
-      v4);
+      mode);
   }
 }
 
 // File Line: 813
 // RVA: 0xD56FC0
-hkpEntity *__fastcall hkpWorld::addEntity(hkpWorld *this, hkpEntity *entity, hkpEntityActivation initialActivationState)
+hkpEntity *__fastcall hkpWorld::addEntity(
+        hkpWorld *this,
+        hkpEntity *entity,
+        hkpEntityActivation initialActivationState)
 {
-  hkpEntityActivation v3; // esi
-  hkpEntity *v4; // rdi
-  hkpWorld *v5; // rbx
-  hkpEntity *result; // rax
   __int16 v7; // dx
   __int16 v8; // r8
   __int16 v9; // r8
   bool v10; // zf
-  hkSimdFloat32 startTime; // [rsp+20h] [rbp-38h]
-  hkWorldOperation::BaseOperation operation; // [rsp+30h] [rbp-28h]
+  hkSimdFloat32 startTime; // [rsp+20h] [rbp-38h] BYREF
+  hkWorldOperation::BaseOperation operation; // [rsp+30h] [rbp-28h] BYREF
   hkpEntity *v13; // [rsp+38h] [rbp-20h]
   hkpEntityActivation v14; // [rsp+40h] [rbp-18h]
 
-  v3 = initialActivationState;
-  v4 = entity;
-  v5 = this;
   if ( this->m_criticalOperationsLockCount )
   {
     v13 = entity;
     operation.m_type.m_storage = 1;
     v14 = initialActivationState;
     hkpWorld::queueOperation(this, &operation);
-    result = 0i64;
+    return 0i64;
   }
   else
   {
     hkpEntity::setCachedShapeData(entity, this, entity->m_collidable.m_shape);
-    if ( !v4->m_collidable.m_motion )
-      v4->m_collidable.m_motion = (const void *)((__int64 (__fastcall *)(hkpEntity *))v4->vfptr[2].__first_virtual_table_function__)(v4);
+    if ( !entity->m_collidable.m_motion )
+      entity->m_collidable.m_motion = (const void *)((__int64 (__fastcall *)(hkpEntity *))entity->vfptr[2].__first_virtual_table_function__)(entity);
     startTime.m_real = 0i64;
-    hkSweptTransformUtil::setTimeInformation(&startTime, &startTime, &v4->m_motion.m_motionState);
-    *(_DWORD *)v4->m_motion.m_deactivationNumInactiveFrames = 0;
-    ++v5->m_lastEntityUid;
-    v5->m_criticalOperationsAllowed.m_bool = 0;
-    v4->m_uid = v5->m_lastEntityUid;
-    hkReferencedObject::addReference((hkReferencedObject *)&v4->vfptr);
-    hkpWorldOperationUtil::addEntitySI(v5, v4, v3);
-    v7 = (unsigned __int8)v5->m_dynamicsStepInfo.m_solverInfo.m_deactivationNumInactiveFramesSelectFlag[1];
-    v8 = (unsigned __int8)v5->m_dynamicsStepInfo.m_solverInfo.m_deactivationNumInactiveFramesSelectFlag[0];
-    if ( (unsigned __int8)(v5->m_dynamicsStepInfo.m_solverInfo.m_deactivationIntegrateCounter & 3) < (unsigned __int8)(v4->m_motion.m_deactivationIntegrateCounter & 3) )
+    hkSweptTransformUtil::setTimeInformation(&startTime, &startTime, &entity->m_motion.m_motionState);
+    *(_DWORD *)entity->m_motion.m_deactivationNumInactiveFrames = 0;
+    ++this->m_lastEntityUid;
+    this->m_criticalOperationsAllowed.m_bool = 0;
+    entity->m_uid = this->m_lastEntityUid;
+    hkReferencedObject::addReference(entity);
+    hkpWorldOperationUtil::addEntitySI(this, entity, initialActivationState);
+    v7 = (unsigned __int8)this->m_dynamicsStepInfo.m_solverInfo.m_deactivationNumInactiveFramesSelectFlag[1];
+    v8 = (unsigned __int8)this->m_dynamicsStepInfo.m_solverInfo.m_deactivationNumInactiveFramesSelectFlag[0];
+    if ( (unsigned __int8)(this->m_dynamicsStepInfo.m_solverInfo.m_deactivationIntegrateCounter & 3) < (unsigned __int8)(entity->m_motion.m_deactivationIntegrateCounter & 3) )
       v8 = ~v8;
     v9 = v8 << 14;
-    if ( (unsigned __int8)v5->m_dynamicsStepInfo.m_solverInfo.m_deactivationIntegrateCounter < (signed int)(unsigned __int8)v4->m_motion.m_deactivationIntegrateCounter )
+    if ( (unsigned __int8)this->m_dynamicsStepInfo.m_solverInfo.m_deactivationIntegrateCounter < (int)(unsigned __int8)entity->m_motion.m_deactivationIntegrateCounter )
       v7 = ~v7;
-    v4->m_motion.m_deactivationNumInactiveFrames[1] &= 0x3FFFu;
-    v4->m_motion.m_deactivationNumInactiveFrames[1] |= v7 << 14;
-    v4->m_motion.m_deactivationNumInactiveFrames[0] &= 0x3FFFu;
-    v4->m_motion.m_deactivationNumInactiveFrames[0] |= v9;
-    ++v5->m_criticalOperationsLockCount;
-    v5->m_criticalOperationsAllowed.m_bool = 1;
-    hkpWorldOperationUtil::addEntityBP(v5, v4);
-    hkpWorldCallbackUtil::fireEntityAdded(v5, v4);
-    hkpEntityCallbackUtil::fireEntityAdded(v4);
-    v10 = v5->m_criticalOperationsLockCount-- == 1;
-    if ( v10 && !v5->m_blockExecutingPendingOperations.m_bool )
+    entity->m_motion.m_deactivationNumInactiveFrames[1] &= 0x3FFFu;
+    entity->m_motion.m_deactivationNumInactiveFrames[1] |= v7 << 14;
+    entity->m_motion.m_deactivationNumInactiveFrames[0] &= 0x3FFFu;
+    entity->m_motion.m_deactivationNumInactiveFrames[0] |= v9;
+    ++this->m_criticalOperationsLockCount;
+    this->m_criticalOperationsAllowed.m_bool = 1;
+    hkpWorldOperationUtil::addEntityBP(this, entity);
+    hkpWorldCallbackUtil::fireEntityAdded(this, entity);
+    hkpEntityCallbackUtil::fireEntityAdded(entity);
+    v10 = this->m_criticalOperationsLockCount-- == 1;
+    if ( v10 && !this->m_blockExecutingPendingOperations.m_bool )
     {
-      if ( v5->m_pendingOperationsCount )
-        hkpWorld::internal_executePendingOperations(v5);
-      if ( v5->m_pendingOperationQueueCount == 1 )
+      if ( this->m_pendingOperationsCount )
+        hkpWorld::internal_executePendingOperations(this);
+      if ( this->m_pendingOperationQueueCount == 1 )
       {
-        if ( v5->m_pendingBodyOperationsCount )
-          hkpWorld::internal_executePendingBodyOperations(v5);
+        if ( this->m_pendingBodyOperationsCount )
+          hkpWorld::internal_executePendingBodyOperations(this);
       }
     }
-    result = v4;
+    return entity;
   }
-  return result;
 }
 
 // File Line: 927
 // RVA: 0xD57280
-void __fastcall hkpWorld::addEntityBatch(hkpWorld *this, hkpEntity *const *entityBatch, int numEntities, hkpEntityActivation initialActivationState)
+void __fastcall hkpWorld::addEntityBatch(
+        hkpWorld *this,
+        hkpEntity *const *entityBatch,
+        unsigned int numEntities,
+        hkpEntityActivation initialActivationState)
 {
-  hkpEntityActivation v4; // er12
   __int64 v5; // r15
-  hkpEntity *const *v6; // r14
-  hkpWorld *v7; // rdi
-  _QWORD *v8; // r8
+  _QWORD *Value; // r8
   unsigned __int64 v9; // rcx
   unsigned __int64 v10; // rax
-  char v11; // bl
-  _QWORD **v12; // rax
+  _QWORD **v11; // rax
+  hkpSimulationIsland *v12; // rax
   hkpSimulationIsland *v13; // rax
-  hkInplaceArray<hkpEntity *,1,hkContainerHeapAllocator> *v14; // r8
-  hkpSimulationIsland *v15; // rax
-  hkpSimulationIsland *v16; // rsi
-  unsigned __int16 v17; // ax
+  hkpSimulationIsland *v14; // rsi
+  unsigned __int16 m_size; // ax
+  int v16; // eax
+  int v17; // r9d
   int v18; // eax
-  int v19; // er9
-  int v20; // eax
-  __int128 v21; // xmm6
-  hkpEntity *const *v22; // r12
-  __int64 v23; // r14
-  hkpEntity *v24; // rbx
-  hkpShape *v25; // r13
-  __int16 v26; // dx
-  __int16 v27; // r8
-  __int16 v28; // r8
-  hkpSimulationIsland *v29; // rcx
-  __int64 v30; // r9
-  hkArray<hkpSimulationIsland *,hkContainerHeapAllocator> *v31; // rbx
-  int v32; // ebx
-  LPVOID v33; // rax
-  hkLifoAllocator *v34; // rcx
-  hkpTypedBroadPhaseHandlePair *v35; // rax
-  int v36; // edx
-  char *v37; // r8
-  _QWORD *v38; // rax
-  _QWORD *v39; // rcx
-  _QWORD *v40; // r8
-  unsigned __int64 v41; // rax
-  signed __int64 v42; // rcx
-  _QWORD *v43; // r8
+  hkpEntity *const *v19; // r12
+  __int64 v20; // r14
+  hkpEntity *v21; // rbx
+  hkpShape *m_shape; // r13
+  __int16 v23; // dx
+  __int16 v24; // r8
+  __int16 v25; // r8
+  hkpSimulationIsland *m_fixedIsland; // rcx
+  __int64 v27; // r8
+  __int64 v28; // r9
+  hkpEntity *const *v29; // r14
+  hkArray<hkpSimulationIsland *,hkContainerHeapAllocator> *p_m_activeSimulationIslands; // rbx
+  int m_broadPhaseQuerySize; // ebx
+  hkLifoAllocator *v32; // rcx
+  hkpTypedBroadPhaseHandlePair *m_cur; // rax
+  int v34; // edx
+  char *v35; // r8
+  _QWORD *v36; // rax
+  _QWORD *v37; // rcx
+  _QWORD *v38; // r8
+  unsigned __int64 v39; // rax
+  _QWORD *v40; // rcx
+  _QWORD *v41; // r8
+  _QWORD *v42; // rcx
+  unsigned __int64 v43; // rax
   _QWORD *v44; // rcx
-  unsigned __int64 v45; // rax
-  signed __int64 v46; // rcx
-  hkpCollisionFilter *v47; // rax
-  hkpCollidableCollidableFilter *v48; // r9
-  _QWORD *v49; // r8
+  hkpCollisionFilter *m_collisionFilter; // rax
+  hkpCollidableCollidableFilter *v46; // r9
+  _QWORD *v47; // r8
+  _QWORD *v48; // rcx
+  unsigned __int64 v49; // rax
   _QWORD *v50; // rcx
-  unsigned __int64 v51; // rax
-  signed __int64 v52; // rcx
-  __int64 v53; // rsi
-  hkpEntity *v54; // rbx
-  bool v55; // zf
-  _QWORD *v56; // r8
+  __int64 v51; // rsi
+  hkpEntity *v52; // rbx
+  bool v53; // zf
+  _QWORD *v54; // r8
+  _QWORD *v55; // rcx
+  unsigned __int64 v56; // rax
   _QWORD *v57; // rcx
-  unsigned __int64 v58; // rax
-  signed __int64 v59; // rcx
-  int v60; // eax
-  char *v61; // rdi
-  signed int v62; // ebx
-  hkLifoAllocator *v63; // rax
-  int v64; // er8
-  char v65; // [rsp+30h] [rbp-59h]
-  hkResult result; // [rsp+34h] [rbp-55h]
-  void *v67; // [rsp+38h] [rbp-51h]
-  int v68; // [rsp+40h] [rbp-49h]
-  int v69; // [rsp+44h] [rbp-45h]
-  _QWORD *array; // [rsp+48h] [rbp-41h]
-  int v71; // [rsp+50h] [rbp-39h]
-  int v72; // [rsp+54h] [rbp-35h]
-  hkWorldOperation::BaseOperation operation[16]; // [rsp+60h] [rbp-29h]
-  __int16 v74; // [rsp+70h] [rbp-19h]
-  char v75; // [rsp+72h] [rbp-17h]
-  hkpTypedBroadPhaseHandlePair *newPairs; // [rsp+80h] [rbp-9h]
+  int v58; // eax
+  char *v59; // rdi
+  signed int v60; // ebx
+  hkLifoAllocator *v61; // rax
+  int v62; // r8d
+  char v63; // [rsp+30h] [rbp-59h]
+  hkResult result; // [rsp+34h] [rbp-55h] BYREF
+  char *v65; // [rsp+38h] [rbp-51h] BYREF
+  int v66; // [rsp+40h] [rbp-49h]
+  int v67; // [rsp+44h] [rbp-45h]
+  _QWORD *array; // [rsp+48h] [rbp-41h] BYREF
+  int v69; // [rsp+50h] [rbp-39h]
+  int v70; // [rsp+54h] [rbp-35h]
+  hkWorldOperation::BaseOperation operation[16]; // [rsp+60h] [rbp-29h] BYREF
+  __int16 v72; // [rsp+70h] [rbp-19h]
+  char v73; // [rsp+72h] [rbp-17h]
+  hkpTypedBroadPhaseHandlePair *newPairs; // [rsp+80h] [rbp-9h] BYREF
   int numNewPairs; // [rsp+88h] [rbp-1h]
-  int v78; // [rsp+8Ch] [rbp+3h]
+  int v76; // [rsp+8Ch] [rbp+3h]
   void *p; // [rsp+90h] [rbp+7h]
-  int v80; // [rsp+98h] [rbp+Fh]
-  hkpEntity *const *v81; // [rsp+F8h] [rbp+6Fh]
-  int v82; // [rsp+100h] [rbp+77h]
-  hkpEntityActivation v83; // [rsp+108h] [rbp+7Fh]
+  int v78; // [rsp+98h] [rbp+Fh]
 
-  if ( numEntities > 0 )
+  if ( (int)numEntities > 0 )
   {
-    v83 = initialActivationState;
-    v82 = numEntities;
-    v81 = entityBatch;
-    v4 = initialActivationState;
-    v5 = (unsigned int)numEntities;
-    v6 = entityBatch;
-    v7 = this;
+    v5 = numEntities;
     if ( this->m_criticalOperationsLockCount )
     {
       *(_QWORD *)&operation[8].m_type.m_storage = entityBatch;
       operation[0].m_type.m_storage = 7;
-      v74 = numEntities;
-      v75 = initialActivationState;
+      v72 = numEntities;
+      v73 = initialActivationState;
       hkpWorld::queueOperation(this, operation);
     }
     else
     {
-      v8 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-      v9 = v8[1];
-      if ( v9 < v8[3] )
+      Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+      v9 = Value[1];
+      if ( v9 < Value[3] )
       {
         *(_QWORD *)v9 = "LtAddEntities";
         *(_QWORD *)(v9 + 16) = "Stinit";
         v10 = __rdtsc();
         *(_DWORD *)(v9 + 8) = v10;
-        v8[1] = v9 + 24;
+        Value[1] = v9 + 24;
       }
-      ++v7->m_criticalOperationsLockCount;
-      v72 = 2147483648;
+      ++this->m_criticalOperationsLockCount;
+      v70 = 0x80000000;
       array = 0i64;
-      v71 = 0;
-      if ( (signed int)v5 > 0 )
-        hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, &array, v5, 8);
-      v67 = 0i64;
-      v68 = 0;
-      v69 = 2147483648;
-      if ( (signed int)v5 > 0 )
-        hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v67, v5, 32);
-      v11 = 0;
-      v65 = 0;
-      if ( v7->m_wantSimulationIslands.m_bool )
+      v69 = 0;
+      hkArrayUtil::_reserve(&result, &hkContainerTempAllocator::s_alloc, (const void **)&array, v5, 8);
+      v65 = 0i64;
+      v66 = 0;
+      v67 = 0x80000000;
+      hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&v65, v5, 32);
+      v63 = 0;
+      if ( this->m_wantSimulationIslands.m_bool )
       {
-        v12 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-        v13 = (hkpSimulationIsland *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v12[11] + 8i64))(
-                                       v12[11],
-                                       184i64);
-        if ( v13 )
+        v11 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+        v12 = (hkpSimulationIsland *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v11[11] + 8i64))(v11[11], 184i64);
+        if ( v12 )
         {
-          hkpSimulationIsland::hkpSimulationIsland(v13, v7);
-          v16 = v15;
+          hkpSimulationIsland::hkpSimulationIsland(v12, this);
+          v14 = v13;
         }
         else
         {
-          v16 = 0i64;
+          v14 = 0i64;
         }
-        *((_BYTE *)v16 + 49) &= 0xFDu;
-        *((_BYTE *)v16 + 49) |= 1u;
-        if ( v4 == 1 )
+        *((_BYTE *)v14 + 49) &= ~2u;
+        *((_BYTE *)v14 + 49) |= 1u;
+        if ( initialActivationState == HK_ENTITY_ACTIVATION_DO_ACTIVATE )
         {
-          v17 = v7->m_activeSimulationIslands.m_size;
-          *((_BYTE *)v16 + 50) &= 0xF5u;
-          *((_BYTE *)v16 + 50) |= 5u;
+          m_size = this->m_activeSimulationIslands.m_size;
+          *((_BYTE *)v14 + 50) &= 0xF5u;
+          *((_BYTE *)v14 + 50) |= 5u;
         }
         else
         {
-          v17 = v7->m_inactiveSimulationIslands.m_size;
-          *((_BYTE *)v16 + 50) &= 0xF0u;
+          m_size = this->m_inactiveSimulationIslands.m_size;
+          *((_BYTE *)v14 + 50) &= 0xF0u;
         }
-        v16->m_storageIndex = v17;
+        v14->m_storageIndex = m_size;
       }
       else
       {
-        v16 = *v7->m_activeSimulationIslands.m_data;
-        v14 = &v16->m_entities;
-        v18 = v16->m_entities.m_capacityAndFlags & 0x3FFFFFFF;
-        v19 = v5 + v16->m_entities.m_size;
-        if ( v18 < v19 )
+        v14 = *this->m_activeSimulationIslands.m_data;
+        v16 = v14->m_entities.m_capacityAndFlags & 0x3FFFFFFF;
+        v17 = v5 + v14->m_entities.m_size;
+        if ( v16 < v17 )
         {
-          v20 = 2 * v18;
-          if ( v19 < v20 )
-            v19 = v20;
-          hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v14, v19, 8);
+          v18 = 2 * v16;
+          if ( v17 < v18 )
+            v17 = v18;
+          hkArrayUtil::_reserve(
+            &result,
+            &hkContainerHeapAllocator::s_alloc,
+            (const void **)&v14->m_entities.m_data,
+            v17,
+            8);
         }
       }
-      v21 = LODWORD(v7->m_collisionInput->m_tolerance.m_storage);
       *(_OWORD *)&operation[0].m_type.m_storage = 0i64;
-      if ( (signed int)v5 > 0 )
+      v19 = entityBatch;
+      v20 = v5;
+      do
       {
-        v22 = v6;
-        v23 = v5;
-        do
+        v21 = *v19;
+        m_shape = (*v19)->m_collidable.m_shape;
+        v21->m_uid = ++this->m_lastEntityUid;
+        hkReferencedObject::addReference(v21);
+        if ( !v21->m_collidable.m_motion )
+          v21->m_collidable.m_motion = (const void *)((__int64 (__fastcall *)(hkpEntity *))v21->vfptr[2].__first_virtual_table_function__)(v21);
+        hkSweptTransformUtil::setTimeInformation(
+          (hkSimdFloat32 *)operation,
+          (hkSimdFloat32 *)operation,
+          &v21->m_motion.m_motionState);
+        *(_DWORD *)v21->m_motion.m_deactivationNumInactiveFrames = 0;
+        v21->m_world = this;
+        v23 = (unsigned __int8)this->m_dynamicsStepInfo.m_solverInfo.m_deactivationNumInactiveFramesSelectFlag[1];
+        v24 = (unsigned __int8)this->m_dynamicsStepInfo.m_solverInfo.m_deactivationNumInactiveFramesSelectFlag[0];
+        if ( (unsigned __int8)(this->m_dynamicsStepInfo.m_solverInfo.m_deactivationIntegrateCounter & 3) < (unsigned __int8)(v21->m_motion.m_deactivationIntegrateCounter & 3) )
+          v24 = ~v24;
+        v25 = v24 << 14;
+        if ( (unsigned __int8)this->m_dynamicsStepInfo.m_solverInfo.m_deactivationIntegrateCounter < (int)(unsigned __int8)v21->m_motion.m_deactivationIntegrateCounter )
+          v23 = ~v23;
+        v21->m_motion.m_deactivationNumInactiveFrames[0] &= 0x3FFFu;
+        v21->m_motion.m_deactivationNumInactiveFrames[1] &= 0x3FFFu;
+        v21->m_motion.m_deactivationNumInactiveFrames[1] |= v23 << 14;
+        v21->m_motion.m_deactivationNumInactiveFrames[0] |= v25;
+        if ( v21->m_motion.m_type.m_storage == 5 )
         {
-          v24 = *v22;
-          v25 = (*v22)->m_collidable.m_shape;
-          v24->m_uid = ++v7->m_lastEntityUid;
-          hkReferencedObject::addReference((hkReferencedObject *)&v24->vfptr);
-          if ( !v24->m_collidable.m_motion )
-            v24->m_collidable.m_motion = (const void *)((__int64 (__fastcall *)(hkpEntity *))v24->vfptr[2].__first_virtual_table_function__)(v24);
-          hkSweptTransformUtil::setTimeInformation(
-            (hkSimdFloat32 *)operation,
-            (hkSimdFloat32 *)operation,
-            &v24->m_motion.m_motionState);
-          *(_DWORD *)v24->m_motion.m_deactivationNumInactiveFrames = 0;
-          v24->m_world = v7;
-          v26 = (unsigned __int8)v7->m_dynamicsStepInfo.m_solverInfo.m_deactivationNumInactiveFramesSelectFlag[1];
-          v27 = (unsigned __int8)v7->m_dynamicsStepInfo.m_solverInfo.m_deactivationNumInactiveFramesSelectFlag[0];
-          if ( (unsigned __int8)(v7->m_dynamicsStepInfo.m_solverInfo.m_deactivationIntegrateCounter & 3) < (unsigned __int8)(v24->m_motion.m_deactivationIntegrateCounter & 3) )
-            v27 = ~v27;
-          v28 = v27 << 14;
-          if ( (unsigned __int8)v7->m_dynamicsStepInfo.m_solverInfo.m_deactivationIntegrateCounter < (signed int)(unsigned __int8)v24->m_motion.m_deactivationIntegrateCounter )
-            v26 = ~v26;
-          v24->m_motion.m_deactivationNumInactiveFrames[0] &= 0x3FFFu;
-          v24->m_motion.m_deactivationNumInactiveFrames[1] &= 0x3FFFu;
-          v24->m_motion.m_deactivationNumInactiveFrames[1] |= v26 << 14;
-          v24->m_motion.m_deactivationNumInactiveFrames[0] |= v28;
-          if ( v24->m_motion.m_type.m_storage == 5 )
-          {
-            v29 = v7->m_fixedIsland;
-          }
-          else
-          {
-            v65 = 1;
-            v29 = v16;
-          }
-          hkpSimulationIsland::internalAddEntity(v29, v24);
-          v24->m_collidable.m_boundingVolumeData.m_min[0] = 1;
-          v24->m_collidable.m_boundingVolumeData.m_max[0] = 0;
-          if ( v25 )
-          {
-            v30 = v68++;
-            ((void (__fastcall *)(hkpShape *, const void *, hkInplaceArray<hkpEntity *,1,hkContainerHeapAllocator> *, __int64))v24->m_collidable.m_shape->vfptr[2].__vecDelDtor)(
-              v24->m_collidable.m_shape,
-              v24->m_collidable.m_motion,
-              v14,
-              (__int64)v67 + 32 * v30);
-            array[v71++] = (char *)v24 + 68;
-            hkpEntity::setCachedShapeData(v24, v7, v25);
-          }
-          ++v22;
-          --v23;
-        }
-        while ( v23 );
-        v6 = v81;
-        LODWORD(v5) = v82;
-        v11 = v65;
-        v4 = v83;
-      }
-      if ( v7->m_wantSimulationIslands.m_bool )
-      {
-        if ( v11 )
-        {
-          v31 = &v7->m_activeSimulationIslands;
-          v16->m_splitCheckFrameCounter = (*v16->m_entities.m_data)->m_uid;
-          if ( v4 != 1 )
-            v31 = &v7->m_inactiveSimulationIslands;
-          if ( v31->m_size == (v31->m_capacityAndFlags & 0x3FFFFFFF) )
-            hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v31, 8);
-          v31->m_data[v31->m_size++] = v16;
+          m_fixedIsland = this->m_fixedIsland;
         }
         else
         {
-          ((void (__fastcall *)(hkpSimulationIsland *, signed __int64, hkInplaceArray<hkpEntity *,1,hkContainerHeapAllocator> *))v16->vfptr->__vecDelDtor)(
-            v16,
-            1i64,
-            v14);
+          v63 = 1;
+          m_fixedIsland = v14;
+        }
+        hkpSimulationIsland::internalAddEntity(m_fixedIsland, v21);
+        v21->m_collidable.m_boundingVolumeData.m_min[0] = 1;
+        v21->m_collidable.m_boundingVolumeData.m_max[0] = 0;
+        if ( m_shape )
+        {
+          v28 = v66++;
+          ((void (__fastcall *)(hkpShape *, const void *, __int64, char *))v21->m_collidable.m_shape->hkpWorldObject::vfptr[2].__vecDelDtor)(
+            v21->m_collidable.m_shape,
+            v21->m_collidable.m_motion,
+            v27,
+            &v65[32 * v28]);
+          array[v69++] = &v21->m_collidable.m_broadPhaseHandle;
+          hkpEntity::setCachedShapeData(v21, this, m_shape);
+        }
+        ++v19;
+        --v20;
+      }
+      while ( v20 );
+      v29 = entityBatch;
+      if ( this->m_wantSimulationIslands.m_bool )
+      {
+        if ( v63 )
+        {
+          p_m_activeSimulationIslands = &this->m_activeSimulationIslands;
+          v14->m_splitCheckFrameCounter = (*v14->m_entities.m_data)->m_uid;
+          if ( initialActivationState != HK_ENTITY_ACTIVATION_DO_ACTIVATE )
+            p_m_activeSimulationIslands = &this->m_inactiveSimulationIslands;
+          if ( p_m_activeSimulationIslands->m_size == (p_m_activeSimulationIslands->m_capacityAndFlags & 0x3FFFFFFF) )
+            hkArrayUtil::_reserveMore(
+              &hkContainerHeapAllocator::s_alloc,
+              (const void **)&p_m_activeSimulationIslands->m_data,
+              8);
+          p_m_activeSimulationIslands->m_data[p_m_activeSimulationIslands->m_size++] = v14;
+        }
+        else
+        {
+          ((void (__fastcall *)(hkpSimulationIsland *, __int64, __int64))v14->vfptr->__vecDelDtor)(v14, 1i64, v27);
         }
       }
-      v32 = v7->m_broadPhaseQuerySize;
+      m_broadPhaseQuerySize = this->m_broadPhaseQuerySize;
       newPairs = 0i64;
       numNewPairs = 0;
-      v78 = 2147483648;
-      v80 = v32;
-      if ( v32 )
+      v76 = 0x80000000;
+      v78 = m_broadPhaseQuerySize;
+      if ( m_broadPhaseQuerySize )
       {
-        v33 = TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-        v34 = (hkLifoAllocator *)v33;
-        v35 = (hkpTypedBroadPhaseHandlePair *)*((_QWORD *)v33 + 3);
-        v36 = (16 * v32 + 127) & 0xFFFFFF80;
-        v37 = (char *)v35 + v36;
-        if ( v36 > v34->m_slabSize || v37 > v34->m_end )
-          v35 = (hkpTypedBroadPhaseHandlePair *)hkLifoAllocator::allocateFromNewSlab(v34, v36);
+        v32 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+        m_cur = (hkpTypedBroadPhaseHandlePair *)v32->m_cur;
+        v34 = (16 * m_broadPhaseQuerySize + 127) & 0xFFFFFF80;
+        v35 = (char *)m_cur + v34;
+        if ( v34 > v32->m_slabSize || v35 > v32->m_end )
+          m_cur = (hkpTypedBroadPhaseHandlePair *)hkLifoAllocator::allocateFromNewSlab(v32, v34);
         else
-          v34->m_cur = v37;
+          v32->m_cur = v35;
       }
       else
       {
-        v35 = 0i64;
+        m_cur = 0i64;
       }
-      newPairs = v35;
-      v78 = v32 | 0x80000000;
-      p = v35;
-      v38 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-      v39 = (_QWORD *)v38[1];
-      v40 = v38;
-      if ( (unsigned __int64)v39 < v38[3] )
+      newPairs = m_cur;
+      v76 = m_broadPhaseQuerySize | 0x80000000;
+      p = m_cur;
+      v36 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+      v37 = (_QWORD *)v36[1];
+      v38 = v36;
+      if ( (unsigned __int64)v37 < v36[3] )
       {
-        *v39 = "StBroadphase";
-        v41 = __rdtsc();
-        v42 = (signed __int64)(v39 + 2);
-        *(_DWORD *)(v42 - 8) = v41;
-        v40[1] = v42;
+        *v37 = "StBroadphase";
+        v39 = __rdtsc();
+        v40 = v37 + 2;
+        *((_DWORD *)v40 - 2) = v39;
+        v38[1] = v40;
       }
-      ((void (__fastcall *)(hkpBroadPhase *, _QWORD **, void **, hkpTypedBroadPhaseHandlePair **))v7->m_broadPhase->vfptr[3].__first_virtual_table_function__)(
-        v7->m_broadPhase,
+      ((void (__fastcall *)(hkpBroadPhase *, _QWORD **, char **, hkpTypedBroadPhaseHandlePair **))this->m_broadPhase->vfptr[3].__first_virtual_table_function__)(
+        this->m_broadPhase,
         &array,
-        &v67,
+        &v65,
         &newPairs);
-      v43 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-      v44 = (_QWORD *)v43[1];
-      if ( (unsigned __int64)v44 < v43[3] )
+      v41 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+      v42 = (_QWORD *)v41[1];
+      if ( (unsigned __int64)v42 < v41[3] )
       {
-        *v44 = "StCreateAgents";
-        v45 = __rdtsc();
-        v46 = (signed __int64)(v44 + 2);
-        *(_DWORD *)(v46 - 8) = v45;
-        v43[1] = v46;
+        *v42 = "StCreateAgents";
+        v43 = __rdtsc();
+        v44 = v42 + 2;
+        *((_DWORD *)v44 - 2) = v43;
+        v41[1] = v44;
       }
-      v47 = v7->m_collisionFilter;
-      v48 = (hkpCollidableCollidableFilter *)&v47->vfptr;
-      if ( !v47 )
-        v48 = 0i64;
-      hkpTypedBroadPhaseDispatcher::addPairs(v7->m_broadPhaseDispatcher, newPairs, numNewPairs, v48);
-      v49 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-      v50 = (_QWORD *)v49[1];
-      if ( (unsigned __int64)v50 < v49[3] )
+      m_collisionFilter = this->m_collisionFilter;
+      v46 = &m_collisionFilter->hkpCollidableCollidableFilter;
+      if ( !m_collisionFilter )
+        v46 = 0i64;
+      hkpTypedBroadPhaseDispatcher::addPairs(this->m_broadPhaseDispatcher, newPairs, numNewPairs, v46);
+      v47 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+      v48 = (_QWORD *)v47[1];
+      if ( (unsigned __int64)v48 < v47[3] )
       {
-        *v50 = "StAddedCb";
-        v51 = __rdtsc();
-        v52 = (signed __int64)(v50 + 2);
-        *(_DWORD *)(v52 - 8) = v51;
-        v49[1] = v52;
+        *v48 = "StAddedCb";
+        v49 = __rdtsc();
+        v50 = v48 + 2;
+        *((_DWORD *)v50 - 2) = v49;
+        v47[1] = v50;
       }
-      if ( (signed int)v5 > 0 )
+      if ( (int)numEntities > 0 )
       {
-        v53 = (unsigned int)v5;
+        v51 = numEntities;
         do
         {
-          v54 = *v6;
-          hkpWorldCallbackUtil::fireEntityAdded(v7, *v6);
-          hkpEntityCallbackUtil::fireEntityAdded(v54);
-          ++v6;
-          --v53;
+          v52 = *v29;
+          hkpWorldCallbackUtil::fireEntityAdded(this, *v29);
+          hkpEntityCallbackUtil::fireEntityAdded(v52);
+          ++v29;
+          --v51;
         }
-        while ( v53 );
+        while ( v51 );
       }
-      v55 = v7->m_criticalOperationsLockCount-- == 1;
-      if ( v55 && !v7->m_blockExecutingPendingOperations.m_bool )
+      v53 = this->m_criticalOperationsLockCount-- == 1;
+      if ( v53 && !this->m_blockExecutingPendingOperations.m_bool )
       {
-        if ( v7->m_pendingOperationsCount )
-          hkpWorld::internal_executePendingOperations(v7);
-        if ( v7->m_pendingOperationQueueCount == 1 && v7->m_pendingBodyOperationsCount )
-          hkpWorld::internal_executePendingBodyOperations(v7);
+        if ( this->m_pendingOperationsCount )
+          hkpWorld::internal_executePendingOperations(this);
+        if ( this->m_pendingOperationQueueCount == 1 && this->m_pendingBodyOperationsCount )
+          hkpWorld::internal_executePendingBodyOperations(this);
       }
-      v56 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-      v57 = (_QWORD *)v56[1];
-      if ( (unsigned __int64)v57 < v56[3] )
+      v54 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+      v55 = (_QWORD *)v54[1];
+      if ( (unsigned __int64)v55 < v54[3] )
       {
-        *v57 = "lt";
-        v58 = __rdtsc();
-        v59 = (signed __int64)(v57 + 2);
-        *(_DWORD *)(v59 - 8) = v58;
-        v56[1] = v59;
+        *v55 = "lt";
+        v56 = __rdtsc();
+        v57 = v55 + 2;
+        *((_DWORD *)v57 - 2) = v56;
+        v54[1] = v57;
       }
-      v60 = numNewPairs;
-      v61 = (char *)p;
+      v58 = numNewPairs;
+      v59 = (char *)p;
       if ( p == newPairs )
-        v60 = 0;
-      numNewPairs = v60;
-      v62 = (16 * v80 + 127) & 0xFFFFFF80;
-      v63 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v64 = (v62 + 15) & 0xFFFFFFF0;
-      if ( v62 > v63->m_slabSize || &v61[v64] != v63->m_cur || v63->m_firstNonLifoEnd == v61 )
-        hkLifoAllocator::slowBlockFree(v63, v61, v64);
+        v58 = 0;
+      numNewPairs = v58;
+      v60 = (16 * v78 + 127) & 0xFFFFFF80;
+      v61 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+      v62 = (v60 + 15) & 0xFFFFFFF0;
+      if ( v60 > v61->m_slabSize || &v59[v62] != v61->m_cur || v61->m_firstNonLifoEnd == v59 )
+        hkLifoAllocator::slowBlockFree(v61, v59, v62);
       else
-        v63->m_cur = v61;
+        v61->m_cur = v59;
       numNewPairs = 0;
-      if ( v78 >= 0 )
-        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-          newPairs,
-          16 * v78);
+      if ( v76 >= 0 )
+        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, newPairs, 16 * v76);
       newPairs = 0i64;
-      v78 = 2147483648;
-      v68 = 0;
-      if ( v69 >= 0 )
-        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-          v67,
-          32 * v69);
-      v67 = 0i64;
-      v71 = 0;
-      v69 = 2147483648;
-      if ( v72 >= 0 )
-        hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-          array,
-          8 * v72);
+      v76 = 0x80000000;
+      v66 = 0;
+      if ( v67 >= 0 )
+        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v65, 32 * v67);
+      v65 = 0i64;
+      v69 = 0;
+      v67 = 0x80000000;
+      if ( v70 >= 0 )
+        hkContainerTempAllocator::s_alloc.vfptr->bufFree(&hkContainerTempAllocator::s_alloc, array, 8 * v70);
     }
   }
 }
@@ -2120,129 +2050,118 @@ void __fastcall hkpWorld::addEntityBatch(hkpWorld *this, hkpEntity *const *entit
 // RVA: 0xD57170
 hkBool *__fastcall hkpWorld::removeEntity(hkpWorld *this, hkBool *result, hkpEntity *entity)
 {
-  hkpEntity *v3; // rdi
-  hkBool *v4; // rsi
-  hkpWorld *v5; // rbx
-  hkBool *v6; // rax
   bool v7; // zf
-  hkWorldOperation::BaseOperation operation; // [rsp+20h] [rbp-18h]
+  hkWorldOperation::BaseOperation operation; // [rsp+20h] [rbp-18h] BYREF
   hkpEntity *v9; // [rsp+28h] [rbp-10h]
 
-  v3 = entity;
-  v4 = result;
-  v5 = this;
   if ( this->m_criticalOperationsLockCount )
   {
     operation.m_type.m_storage = 2;
     v9 = entity;
     hkpWorld::queueOperation(this, &operation);
-    v4->m_bool = 0;
-    v6 = v4;
+    result->m_bool = 0;
+    return result;
   }
   else
   {
     this->m_criticalOperationsLockCount = 1;
     hkpWorldOperationUtil::removeEntityBP(this, entity);
-    hkpWorldCallbackUtil::fireEntityRemoved(v5, v3);
-    hkpEntityCallbackUtil::fireEntityRemoved(v3);
-    v5->m_criticalOperationsAllowed.m_bool = 0;
-    hkpWorldOperationUtil::removeEntitySI(v5, v3);
-    if ( v3->m_collidable.m_boundingVolumeData.m_childShapeAabbs )
-      hkpCollidable::BoundingVolumeData::deallocate(&v3->m_collidable.m_boundingVolumeData);
-    if ( !v3->m_memSizeAndFlags )
-      ((void (__fastcall *)(hkpEntity *))v3->vfptr[3].__vecDelDtor)(v3);
-    hkReferencedObject::removeReference((hkReferencedObject *)&v3->vfptr);
-    v7 = v5->m_criticalOperationsLockCount-- == 1;
-    v5->m_criticalOperationsAllowed.m_bool = 1;
-    if ( v7 && !v5->m_blockExecutingPendingOperations.m_bool )
+    hkpWorldCallbackUtil::fireEntityRemoved(this, entity);
+    hkpEntityCallbackUtil::fireEntityRemoved(entity);
+    this->m_criticalOperationsAllowed.m_bool = 0;
+    hkpWorldOperationUtil::removeEntitySI(this, entity);
+    if ( entity->m_collidable.m_boundingVolumeData.m_childShapeAabbs )
+      hkpCollidable::BoundingVolumeData::deallocate(&entity->m_collidable.m_boundingVolumeData);
+    if ( !entity->m_memSizeAndFlags )
+      ((void (__fastcall *)(hkpEntity *))entity->vfptr[3].__vecDelDtor)(entity);
+    hkReferencedObject::removeReference(entity);
+    v7 = this->m_criticalOperationsLockCount-- == 1;
+    this->m_criticalOperationsAllowed.m_bool = 1;
+    if ( v7 && !this->m_blockExecutingPendingOperations.m_bool )
     {
-      if ( v5->m_pendingOperationsCount )
-        hkpWorld::internal_executePendingOperations(v5);
-      if ( v5->m_pendingOperationQueueCount == 1 )
+      if ( this->m_pendingOperationsCount )
+        hkpWorld::internal_executePendingOperations(this);
+      if ( this->m_pendingOperationQueueCount == 1 )
       {
-        if ( v5->m_pendingBodyOperationsCount )
-          hkpWorld::internal_executePendingBodyOperations(v5);
+        if ( this->m_pendingBodyOperationsCount )
+          hkpWorld::internal_executePendingBodyOperations(this);
       }
     }
-    v4->m_bool = 1;
-    v6 = v4;
+    result->m_bool = 1;
+    return result;
   }
-  return v6;
 }
 
 // File Line: 1174
 // RVA: 0xD57980
-void __fastcall hkpWorld::removeEntityBatch(hkpWorld *this, hkpEntity *const *entityBatch, int numEntities)
+void __fastcall hkpWorld::removeEntityBatch(hkpWorld *this, hkpEntity **entityBatch, int numEntities)
 {
   __int64 v3; // rdi
   hkpEntity **v4; // rbx
-  hkpWorld *v5; // rsi
-  _QWORD *v6; // rax
+  _QWORD *Value; // rax
   unsigned __int64 v7; // rcx
   _QWORD *v8; // r8
   unsigned __int64 v9; // rax
   int v10; // ecx
-  signed __int64 v11; // r14
+  hkpEntity **v11; // r14
   hkpEntity **i; // r8
   _QWORD *v13; // r8
   _QWORD *v14; // rcx
   unsigned __int64 v15; // rax
-  signed __int64 v16; // rcx
-  int v17; // edi
-  LPVOID v18; // rax
-  hkLifoAllocator *v19; // rcx
-  hkpTypedBroadPhaseHandlePair *v20; // rax
-  int v21; // edx
-  char *v22; // r8
-  hkpBroadPhase *v23; // rcx
-  _QWORD *v24; // r8
-  _QWORD *v25; // rcx
-  unsigned __int64 v26; // rax
-  signed __int64 v27; // rcx
-  int v28; // eax
-  char *v29; // r15
-  signed int v30; // edi
-  hkLifoAllocator *v31; // rax
-  int v32; // er8
-  _QWORD *v33; // r8
-  _QWORD *v34; // rcx
-  unsigned __int64 v35; // rax
-  signed __int64 v36; // rcx
-  _QWORD *v37; // rax
-  _QWORD *v38; // rcx
-  _QWORD *v39; // r8
-  unsigned __int64 v40; // rax
-  signed __int64 v41; // rcx
-  bool v42; // zf
-  hkWorldOperation::BaseOperation operation[8]; // [rsp+30h] [rbp-48h]
-  hkpEntity *const *v44; // [rsp+38h] [rbp-40h]
-  __int16 v45; // [rsp+40h] [rbp-38h]
-  hkpTypedBroadPhaseHandlePair *deletedPairs; // [rsp+48h] [rbp-30h]
+  _QWORD *v16; // rcx
+  int m_broadPhaseQuerySize; // edi
+  hkLifoAllocator *v18; // rcx
+  hkpTypedBroadPhaseHandlePair *m_cur; // rax
+  int v20; // edx
+  char *v21; // r8
+  hkpBroadPhase *m_broadPhase; // rcx
+  _QWORD *v23; // r8
+  _QWORD *v24; // rcx
+  unsigned __int64 v25; // rax
+  _QWORD *v26; // rcx
+  int v27; // eax
+  char *v28; // r15
+  signed int v29; // edi
+  hkLifoAllocator *v30; // rax
+  int v31; // r8d
+  _QWORD *v32; // r8
+  _QWORD *v33; // rcx
+  unsigned __int64 v34; // rax
+  _QWORD *v35; // rcx
+  _QWORD *v36; // rax
+  _QWORD *v37; // rcx
+  _QWORD *v38; // r8
+  unsigned __int64 v39; // rax
+  _QWORD *v40; // rcx
+  bool v41; // zf
+  hkWorldOperation::BaseOperation operation[8]; // [rsp+30h] [rbp-48h] BYREF
+  hkpEntity *const *v43; // [rsp+38h] [rbp-40h]
+  __int16 v44; // [rsp+40h] [rbp-38h]
+  hkpTypedBroadPhaseHandlePair *deletedPairs; // [rsp+48h] [rbp-30h] BYREF
   int numDeletedPairs; // [rsp+50h] [rbp-28h]
-  int v48; // [rsp+54h] [rbp-24h]
+  int v47; // [rsp+54h] [rbp-24h]
   void *p; // [rsp+58h] [rbp-20h]
-  int v50; // [rsp+60h] [rbp-18h]
-  hkResult result; // [rsp+B0h] [rbp+38h]
+  int v49; // [rsp+60h] [rbp-18h]
+  hkResult result; // [rsp+B0h] [rbp+38h] BYREF
 
   if ( numEntities > 0 )
   {
     v3 = numEntities;
-    v4 = (hkpEntity **)entityBatch;
-    v5 = this;
+    v4 = entityBatch;
     if ( this->m_criticalOperationsLockCount )
     {
-      v44 = entityBatch;
+      v43 = entityBatch;
       operation[0].m_type.m_storage = 8;
-      v45 = v3;
+      v44 = numEntities;
       hkpWorld::queueOperation(this, operation);
     }
     else
     {
       this->m_criticalOperationsLockCount = 1;
-      v6 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-      v7 = v6[1];
-      v8 = v6;
-      if ( v7 < v6[3] )
+      Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+      v7 = Value[1];
+      v8 = Value;
+      if ( v7 < Value[3] )
       {
         *(_QWORD *)v7 = "LtRemEntities";
         *(_QWORD *)(v7 + 16) = "StInit+CallBck";
@@ -2250,28 +2169,24 @@ void __fastcall hkpWorld::removeEntityBatch(hkpWorld *this, hkpEntity *const *en
         *(_DWORD *)(v7 + 8) = v9;
         v8[1] = v7 + 24;
       }
-      ((void (__fastcall *)(hkpSimulation *, hkpEntity **, _QWORD, hkpWorld *, signed int))v5->m_simulation->vfptr[6].__vecDelDtor)(
-        v5->m_simulation,
+      ((void (__fastcall *)(hkpSimulation *, hkpEntity **, _QWORD, hkpWorld *, int))this->m_simulation->vfptr[6].__vecDelDtor)(
+        this->m_simulation,
         v4,
         (unsigned int)v3,
-        v5,
+        this,
         1);
-      v10 = 0;
       *(_QWORD *)&operation[0].m_type.m_storage = 0i64;
-      v44 = (hkpEntity *const *)0x8000000000000000i64;
-      if ( (signed int)v3 > 0 )
-      {
-        hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, operation, v3, 8);
-        v10 = (signed int)v44;
-      }
-      v11 = (signed __int64)&v4[v3];
-      for ( i = v4; i != (hkpEntity **)v11; ++i )
+      v43 = (hkpEntity *const *)0x8000000000000000i64;
+      hkArrayUtil::_reserve(&result, &hkContainerTempAllocator::s_alloc, (const void **)operation, v3, 8);
+      v10 = (int)v43;
+      v11 = &v4[v3];
+      for ( i = v4; i != v11; ++i )
       {
         if ( (*i)->m_collidable.m_shape )
         {
-          *(_QWORD *)(*(_QWORD *)&operation[0].m_type.m_storage + 8i64 * v10) = (char *)*i + 68;
-          v10 = (_DWORD)v44 + 1;
-          LODWORD(v44) = (_DWORD)v44 + 1;
+          *(_QWORD *)(*(_QWORD *)&operation[0].m_type.m_storage + 8i64 * v10) = &(*i)->m_collidable.m_broadPhaseHandle;
+          v10 = (_DWORD)v43 + 1;
+          LODWORD(v43) = (_DWORD)v43 + 1;
         }
       }
       if ( v10 )
@@ -2282,116 +2197,112 @@ void __fastcall hkpWorld::removeEntityBatch(hkpWorld *this, hkpEntity *const *en
         {
           *v14 = "StBroadPhase";
           v15 = __rdtsc();
-          v16 = (signed __int64)(v14 + 2);
-          *(_DWORD *)(v16 - 8) = v15;
+          v16 = v14 + 2;
+          *((_DWORD *)v16 - 2) = v15;
           v13[1] = v16;
         }
-        v17 = v5->m_broadPhaseQuerySize;
+        m_broadPhaseQuerySize = this->m_broadPhaseQuerySize;
         deletedPairs = 0i64;
         numDeletedPairs = 0;
-        v48 = 2147483648;
-        v50 = v17;
-        if ( v17 )
+        v47 = 0x80000000;
+        v49 = m_broadPhaseQuerySize;
+        if ( m_broadPhaseQuerySize )
         {
-          v18 = TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-          v19 = (hkLifoAllocator *)v18;
-          v20 = (hkpTypedBroadPhaseHandlePair *)*((_QWORD *)v18 + 3);
-          v21 = (16 * v17 + 127) & 0xFFFFFF80;
-          v22 = (char *)v20 + v21;
-          if ( v21 > v19->m_slabSize || v22 > v19->m_end )
-            v20 = (hkpTypedBroadPhaseHandlePair *)hkLifoAllocator::allocateFromNewSlab(v19, v21);
+          v18 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+          m_cur = (hkpTypedBroadPhaseHandlePair *)v18->m_cur;
+          v20 = (16 * m_broadPhaseQuerySize + 127) & 0xFFFFFF80;
+          v21 = (char *)m_cur + v20;
+          if ( v20 > v18->m_slabSize || v21 > v18->m_end )
+            m_cur = (hkpTypedBroadPhaseHandlePair *)hkLifoAllocator::allocateFromNewSlab(v18, v20);
           else
-            v19->m_cur = v22;
+            v18->m_cur = v21;
         }
         else
         {
-          v20 = 0i64;
+          m_cur = 0i64;
         }
-        v23 = v5->m_broadPhase;
-        deletedPairs = v20;
-        p = v20;
-        v48 = v17 | 0x80000000;
-        ((void (__fastcall *)(hkpBroadPhase *, hkWorldOperation::BaseOperation *, hkpTypedBroadPhaseHandlePair **))v23->vfptr[4].__first_virtual_table_function__)(
-          v23,
+        m_broadPhase = this->m_broadPhase;
+        deletedPairs = m_cur;
+        p = m_cur;
+        v47 = m_broadPhaseQuerySize | 0x80000000;
+        ((void (__fastcall *)(hkpBroadPhase *, hkWorldOperation::BaseOperation *, hkpTypedBroadPhaseHandlePair **))m_broadPhase->vfptr[4].__first_virtual_table_function__)(
+          m_broadPhase,
           operation,
           &deletedPairs);
-        v24 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-        v25 = (_QWORD *)v24[1];
-        if ( (unsigned __int64)v25 < v24[3] )
+        v23 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+        v24 = (_QWORD *)v23[1];
+        if ( (unsigned __int64)v24 < v23[3] )
         {
-          *v25 = "StDelAgents";
-          v26 = __rdtsc();
-          v27 = (signed __int64)(v25 + 2);
-          *(_DWORD *)(v27 - 8) = v26;
-          v24[1] = v27;
+          *v24 = "StDelAgents";
+          v25 = __rdtsc();
+          v26 = v24 + 2;
+          *((_DWORD *)v26 - 2) = v25;
+          v23[1] = v26;
         }
-        hkpTypedBroadPhaseDispatcher::removePairs(v5->m_broadPhaseDispatcher, deletedPairs, numDeletedPairs);
-        v28 = numDeletedPairs;
-        v29 = (char *)p;
+        hkpTypedBroadPhaseDispatcher::removePairs(this->m_broadPhaseDispatcher, deletedPairs, numDeletedPairs);
+        v27 = numDeletedPairs;
+        v28 = (char *)p;
         if ( p == deletedPairs )
-          v28 = 0;
-        numDeletedPairs = v28;
-        v30 = (16 * v50 + 127) & 0xFFFFFF80;
-        v31 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-        v32 = (v30 + 15) & 0xFFFFFFF0;
-        if ( v30 > v31->m_slabSize || &v29[v32] != v31->m_cur || v31->m_firstNonLifoEnd == v29 )
-          hkLifoAllocator::slowBlockFree(v31, v29, v32);
+          v27 = 0;
+        numDeletedPairs = v27;
+        v29 = (16 * v49 + 127) & 0xFFFFFF80;
+        v30 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+        v31 = (v29 + 15) & 0xFFFFFFF0;
+        if ( v29 > v30->m_slabSize || &v28[v31] != v30->m_cur || v30->m_firstNonLifoEnd == v28 )
+          hkLifoAllocator::slowBlockFree(v30, v28, v31);
         else
-          v31->m_cur = v29;
+          v30->m_cur = v28;
         numDeletedPairs = 0;
-        if ( v48 >= 0 )
-          hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-            (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-            deletedPairs,
-            16 * v48);
+        if ( v47 >= 0 )
+          hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, deletedPairs, 16 * v47);
       }
-      LODWORD(v44) = 0;
-      if ( SHIDWORD(v44) >= 0 )
+      LODWORD(v43) = 0;
+      if ( SHIDWORD(v43) >= 0 )
         hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
+          &hkContainerTempAllocator::s_alloc,
           *(void **)&operation[0].m_type.m_storage,
-          8 * HIDWORD(v44));
-      v33 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-      v34 = (_QWORD *)v33[1];
-      if ( (unsigned __int64)v34 < v33[3] )
+          8 * HIDWORD(v43));
+      v32 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+      v33 = (_QWORD *)v32[1];
+      if ( (unsigned __int64)v33 < v32[3] )
       {
-        *v34 = "StRemoveCb";
-        v35 = __rdtsc();
-        v36 = (signed __int64)(v34 + 2);
-        *(_DWORD *)(v36 - 8) = v35;
-        v33[1] = v36;
+        *v33 = "StRemoveCb";
+        v34 = __rdtsc();
+        v35 = v33 + 2;
+        *((_DWORD *)v35 - 2) = v34;
+        v32[1] = v35;
       }
-      for ( ; v4 != (hkpEntity **)v11; ++v4 )
+      for ( ; v4 != v11; ++v4 )
       {
-        hkpWorldCallbackUtil::fireEntityRemoved(v5, *v4);
+        hkpWorldCallbackUtil::fireEntityRemoved(this, *v4);
         hkpEntityCallbackUtil::fireEntityRemoved(*v4);
-        hkpWorldOperationUtil::removeEntitySI(v5, *v4);
+        hkpWorldOperationUtil::removeEntitySI(this, *v4);
         if ( (*v4)->m_collidable.m_boundingVolumeData.m_childShapeAabbs )
           hkpCollidable::BoundingVolumeData::deallocate(&(*v4)->m_collidable.m_boundingVolumeData);
         if ( !(*v4)->m_memSizeAndFlags )
-          ((void (*)(void))(*v4)->vfptr[3].__vecDelDtor)();
-        hkReferencedObject::removeReference((hkReferencedObject *)&(*v4)->vfptr);
+          ((void (__fastcall *)(hkpEntity *))(*v4)->vfptr[3].__vecDelDtor)(*v4);
+        hkReferencedObject::removeReference(*v4);
       }
-      v37 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-      v38 = (_QWORD *)v37[1];
-      v39 = v37;
-      if ( (unsigned __int64)v38 < v37[3] )
+      v36 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+      v37 = (_QWORD *)v36[1];
+      v38 = v36;
+      if ( (unsigned __int64)v37 < v36[3] )
       {
-        *v38 = "lt";
-        v40 = __rdtsc();
-        v41 = (signed __int64)(v38 + 2);
-        *(_DWORD *)(v41 - 8) = v40;
-        v39[1] = v41;
+        *v37 = "lt";
+        v39 = __rdtsc();
+        v40 = v37 + 2;
+        *((_DWORD *)v40 - 2) = v39;
+        v38[1] = v40;
       }
-      v42 = v5->m_criticalOperationsLockCount-- == 1;
-      if ( v42 && !v5->m_blockExecutingPendingOperations.m_bool )
+      v41 = this->m_criticalOperationsLockCount-- == 1;
+      if ( v41 && !this->m_blockExecutingPendingOperations.m_bool )
       {
-        if ( v5->m_pendingOperationsCount )
-          hkpWorld::internal_executePendingOperations(v5);
-        if ( v5->m_pendingOperationQueueCount == 1 )
+        if ( this->m_pendingOperationsCount )
+          hkpWorld::internal_executePendingOperations(this);
+        if ( this->m_pendingOperationQueueCount == 1 )
         {
-          if ( v5->m_pendingBodyOperationsCount )
-            hkpWorld::internal_executePendingBodyOperations(v5);
+          if ( this->m_pendingBodyOperationsCount )
+            hkpWorld::internal_executePendingBodyOperations(this);
         }
       }
     }
@@ -2402,38 +2313,37 @@ void __fastcall hkpWorld::removeEntityBatch(hkpWorld *this, hkpEntity *const *en
 // RVA: 0xD58FB0
 void __fastcall hkpWorld::activateRegion(hkpWorld *this, hkAabb *aabb)
 {
-  hkAabb *v2; // rdi
-  hkpWorld *v3; // rbx
-  _QWORD **v4; // rax
-  hkpBroadPhase *v5; // rcx
+  _QWORD **Value; // rax
+  hkpBroadPhase *m_broadPhase; // rcx
   int v6; // edx
   int v7; // ebx
   __int64 v8; // rdi
   __int64 v9; // rax
   hkpEntity *v10; // rcx
-  char *v11; // [rsp+20h] [rbp-28h]
+  char *v11; // [rsp+20h] [rbp-28h] BYREF
   int v12; // [rsp+28h] [rbp-20h]
   int v13; // [rsp+2Ch] [rbp-1Ch]
-  hkWorldOperation::BaseOperation operation; // [rsp+30h] [rbp-18h]
+  hkWorldOperation::BaseOperation operation; // [rsp+30h] [rbp-18h] BYREF
   void *v15; // [rsp+38h] [rbp-10h]
 
-  v2 = aabb;
-  v3 = this;
   if ( this->m_criticalOperationsLockCount )
   {
     operation.m_type.m_storage = 33;
-    v4 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v15 = (void *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v4[11] + 8i64))(v4[11], 32i64);
-    hkString::memCpy(v15, v2, 32);
-    hkpWorld::queueOperation(v3, &operation);
+    Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    v15 = (void *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 32i64);
+    hkString::memCpy(v15, aabb, 0x20u);
+    hkpWorld::queueOperation(this, &operation);
   }
   else
   {
-    v5 = this->m_broadPhase;
+    m_broadPhase = this->m_broadPhase;
     v11 = 0i64;
     v12 = 0;
-    v13 = 2147483648;
-    ((void (__fastcall *)(hkpBroadPhase *, hkAabb *, char **))v5->vfptr[9].__vecDelDtor)(v5, aabb, &v11);
+    v13 = 0x80000000;
+    ((void (__fastcall *)(hkpBroadPhase *, hkAabb *, char **))m_broadPhase->vfptr[9].__vecDelDtor)(
+      m_broadPhase,
+      aabb,
+      &v11);
     v6 = v12;
     v7 = 0;
     if ( v12 > 0 )
@@ -2458,10 +2368,7 @@ void __fastcall hkpWorld::activateRegion(hkpWorld *this, hkAabb *aabb)
     }
     v12 = 0;
     if ( v13 >= 0 )
-      hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-        v11,
-        16 * v13);
+      hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v11, 16 * v13);
   }
 }
 
@@ -2469,97 +2376,87 @@ void __fastcall hkpWorld::activateRegion(hkpWorld *this, hkAabb *aabb)
 // RVA: 0xD57DA0
 hkpConstraintInstance *__fastcall hkpWorld::addConstraint(hkpWorld *this, hkpConstraintInstance *constraint)
 {
-  hkpConstraintInstance *v2; // rdi
-  hkpWorld *v3; // rbx
-  hkpConstraintInstance *result; // rax
   __int64 v5; // rdx
-  hkpConstraintData *v6; // rsi
+  hkpConstraintData *m_data; // rsi
   hkpConstraintInstance *v7; // rsi
-  hkpAction *v8; // rdx
+  hkpAction *m_owner; // rdx
   bool v9; // zf
-  hkWorldOperation::BaseOperation operation; // [rsp+20h] [rbp-18h]
+  hkWorldOperation::BaseOperation operation; // [rsp+20h] [rbp-18h] BYREF
   hkpConstraintInstance *v11; // [rsp+28h] [rbp-10h]
-  __int16 v12; // [rsp+40h] [rbp+8h]
+  __int16 v12; // [rsp+40h] [rbp+8h] BYREF
   __int16 v13; // [rsp+44h] [rbp+Ch]
 
-  v2 = constraint;
-  v3 = this;
   if ( this->m_criticalOperationsLockCount )
   {
     v11 = constraint;
     operation.m_type.m_storage = 9;
     hkpWorld::queueOperation(this, &operation);
-    result = 0i64;
+    return 0i64;
   }
   else
   {
-    if ( ((unsigned int (*)(void))constraint->m_data->vfptr[1].__first_virtual_table_function__)() == 12 )
+    if ( ((unsigned int (__fastcall *)(hkpConstraintData *))constraint->m_data->vfptr[1].__first_virtual_table_function__)(constraint->m_data) == 12 )
     {
-      v6 = v2->m_data;
-      if ( !LOWORD(v6[3].vfptr) )
+      m_data = constraint->m_data;
+      if ( !LOWORD(m_data[3].vfptr) )
       {
         LOBYTE(v5) = 1;
-        (*(void (__fastcall **)(unsigned __int64, __int64, __int16 *))(*(_QWORD *)v6[2].m_userData + 136i64))(
-          v6[2].m_userData,
+        (*(void (__fastcall **)(unsigned __int64, __int64, __int16 *))(*(_QWORD *)m_data[2].m_userData + 136i64))(
+          m_data[2].m_userData,
           v5,
           &v12);
-        LOWORD(v6[3].vfptr) = v12;
-        WORD1(v6[3].vfptr) = v13;
+        LOWORD(m_data[3].vfptr) = v12;
+        WORD1(m_data[3].vfptr) = v13;
       }
     }
-    v3->m_blockExecutingPendingOperations.m_bool = 1;
-    hkpConstraintInstance::pointNullsToFixedRigidBody(v2);
-    v2->m_uid = ++v3->m_lastConstraintUid;
-    v7 = hkpWorldOperationUtil::addConstraintImmediately(v3, v2, DO_FIRE_CALLBACKS);
-    if ( ((unsigned int (__fastcall *)(hkpConstraintInstance *))v2->vfptr[3].__vecDelDtor)(v2) == 1 )
+    this->m_blockExecutingPendingOperations.m_bool = 1;
+    hkpConstraintInstance::pointNullsToFixedRigidBody(constraint);
+    constraint->m_uid = ++this->m_lastConstraintUid;
+    v7 = hkpWorldOperationUtil::addConstraintImmediately(this, constraint, DO_FIRE_CALLBACKS);
+    if ( ((unsigned int (__fastcall *)(hkpConstraintInstance *))constraint->vfptr[3].__vecDelDtor)(constraint) == 1 )
     {
-      v8 = (hkpAction *)v2[1].m_owner;
-      if ( !v8->m_world )
-        hkpWorld::addAction(v3, v8);
-      ((void (*)(void))v2->m_data->vfptr[11].__first_virtual_table_function__)();
+      m_owner = (hkpAction *)constraint[1].m_owner;
+      if ( !m_owner->m_world )
+        hkpWorld::addAction(this, m_owner);
+      constraint->m_data->vfptr[11].__first_virtual_table_function__(constraint->m_data);
     }
-    v9 = v3->m_criticalOperationsLockCount == 0;
-    v3->m_blockExecutingPendingOperations.m_bool = 0;
+    v9 = this->m_criticalOperationsLockCount == 0;
+    this->m_blockExecutingPendingOperations.m_bool = 0;
     if ( v9 )
     {
-      if ( v3->m_pendingOperationsCount )
-        hkpWorld::internal_executePendingOperations(v3);
+      if ( this->m_pendingOperationsCount )
+        hkpWorld::internal_executePendingOperations(this);
     }
-    result = v7;
+    return v7;
   }
-  return result;
 }
 
 // File Line: 1519
 // RVA: 0xD57FC0
-hkpConstraintInstance *__fastcall hkpWorld::createAndAddConstraintInstance(hkpWorld *this, hkpRigidBody *bodyA, hkpRigidBody *bodyB, hkpConstraintData *constraintData)
+hkpConstraintInstance *__fastcall hkpWorld::createAndAddConstraintInstance(
+        hkpWorld *this,
+        hkpRigidBody *bodyA,
+        hkpRigidBody *bodyB,
+        hkpConstraintData *constraintData)
 {
-  hkpWorld *v4; // rsi
-  hkpConstraintData *v5; // rdi
-  hkpRigidBody *v6; // rbx
-  hkpRigidBody *v7; // rbp
-  _QWORD **v8; // rax
+  _QWORD **Value; // rax
   hkpConstraintInstance *v9; // rax
   hkpConstraintInstance *v10; // rax
   hkpConstraintInstance *v11; // rbx
 
-  v4 = this;
-  v5 = constraintData;
-  v6 = bodyB;
-  v7 = bodyA;
-  v8 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v9 = (hkpConstraintInstance *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v8[11] + 8i64))(v8[11], 112i64);
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v9 = (hkpConstraintInstance *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 112i64);
   if ( v9 )
   {
-    hkpConstraintInstance::hkpConstraintInstance(v9, (hkpEntity *)&v7->vfptr, (hkpEntity *)&v6->vfptr, v5, PRIORITY_PSI);
+    hkpConstraintInstance::hkpConstraintInstance(v9, bodyA, bodyB, constraintData, PRIORITY_PSI);
     v11 = v10;
   }
   else
   {
     v11 = 0i64;
   }
-  v11->m_userData = v5->m_userData;
-  hkpWorld::addConstraint(v4, v11);
+  v11->m_userData = constraintData->m_userData;
+  hkpWorld::addConstraint(this, v11);
   return v11;
 }
 
@@ -2567,121 +2464,108 @@ hkpConstraintInstance *__fastcall hkpWorld::createAndAddConstraintInstance(hkpWo
 // RVA: 0xD57EC0
 hkBool *__fastcall hkpWorld::removeConstraint(hkpWorld *this, hkBool *result, hkpConstraintInstance *constraint)
 {
-  hkpConstraintInstance *v3; // rdi
-  hkBool *v4; // rsi
-  hkpWorld *v5; // rbx
-  hkBool *v6; // rax
-  hkpAction *v7; // rdx
+  hkpAction *m_owner; // rdx
   bool v8; // zf
-  hkWorldOperation::BaseOperation operation; // [rsp+20h] [rbp-18h]
+  hkWorldOperation::BaseOperation operation; // [rsp+20h] [rbp-18h] BYREF
   hkpConstraintInstance *v10; // [rsp+28h] [rbp-10h]
 
-  v3 = constraint;
-  v4 = result;
-  v5 = this;
   if ( this->m_criticalOperationsLockCount )
   {
     operation.m_type.m_storage = 10;
     v10 = constraint;
     hkpWorld::queueOperation(this, &operation);
-    v4->m_bool = 0;
-    v6 = v4;
+    result->m_bool = 0;
+    return result;
   }
   else
   {
     this->m_criticalOperationsLockCount = 1;
     if ( ((unsigned int (__fastcall *)(hkpConstraintInstance *))constraint->vfptr[3].__vecDelDtor)(constraint) == 1 )
     {
-      v7 = (hkpAction *)v3[1].m_owner;
-      if ( v7->m_world == v5 )
-        hkpWorld::removeActionImmediately(v5, v7);
+      m_owner = (hkpAction *)constraint[1].m_owner;
+      if ( m_owner->m_world == this )
+        hkpWorld::removeActionImmediately(this, m_owner);
     }
-    hkReferencedObject::addReference((hkReferencedObject *)&v3->vfptr);
-    hkpWorldOperationUtil::removeConstraintImmediately(v5, v3, DO_FIRE_CALLBACKS);
-    hkpConstraintInstance::setFixedRigidBodyPointersToZero(v3, v5);
-    hkReferencedObject::removeReference((hkReferencedObject *)&v3->vfptr);
-    v8 = v5->m_criticalOperationsLockCount-- == 1;
-    if ( v8 && !v5->m_blockExecutingPendingOperations.m_bool )
+    hkReferencedObject::addReference(constraint);
+    hkpWorldOperationUtil::removeConstraintImmediately(this, constraint, DO_FIRE_CALLBACKS);
+    hkpConstraintInstance::setFixedRigidBodyPointersToZero(constraint, this);
+    hkReferencedObject::removeReference(constraint);
+    v8 = this->m_criticalOperationsLockCount-- == 1;
+    if ( v8 && !this->m_blockExecutingPendingOperations.m_bool )
     {
-      if ( v5->m_pendingOperationsCount )
-        hkpWorld::internal_executePendingOperations(v5);
-      if ( v5->m_pendingOperationQueueCount == 1 )
+      if ( this->m_pendingOperationsCount )
+        hkpWorld::internal_executePendingOperations(this);
+      if ( this->m_pendingOperationQueueCount == 1 )
       {
-        if ( v5->m_pendingBodyOperationsCount )
-          hkpWorld::internal_executePendingBodyOperations(v5);
+        if ( this->m_pendingBodyOperationsCount )
+          hkpWorld::internal_executePendingBodyOperations(this);
       }
     }
-    v4->m_bool = 1;
-    v6 = v4;
+    result->m_bool = 1;
+    return result;
   }
-  return v6;
 }
 
 // File Line: 1574
 // RVA: 0xD58060
 hkpAction *__fastcall hkpWorld::addAction(hkpWorld *this, hkpAction *action)
 {
-  hkpAction *v2; // r14
-  hkpWorld *v3; // rbx
-  hkpAction *result; // rax
-  hkBaseObjectVtbl *v5; // rax
+  hkBaseObjectVtbl *vfptr; // rax
   hkpEntity *v6; // rsi
   int v7; // ebp
   __int64 v8; // r15
-  signed __int64 v9; // rdi
+  __int64 v9; // rdi
   hkpEntity *v10; // r8
-  hkpSimulationIsland *v11; // rax
+  hkpSimulationIsland *m_simulationIsland; // rax
   bool v12; // zf
-  hkWorldOperation::BaseOperation operation; // [rsp+20h] [rbp-68h]
+  hkWorldOperation::BaseOperation operation; // [rsp+20h] [rbp-68h] BYREF
   hkpAction *v14; // [rsp+28h] [rbp-60h]
-  char *v15; // [rsp+30h] [rbp-58h]
+  char *v15; // [rsp+30h] [rbp-58h] BYREF
   int v16; // [rsp+38h] [rbp-50h]
   int v17; // [rsp+3Ch] [rbp-4Ch]
-  char v18; // [rsp+40h] [rbp-48h]
+  char v18; // [rsp+40h] [rbp-48h] BYREF
 
-  v2 = action;
-  v3 = this;
   if ( this->m_criticalOperationsLockCount )
   {
     v14 = action;
     operation.m_type.m_storage = 11;
     hkpWorld::queueOperation(this, &operation);
-    result = 0i64;
+    return 0i64;
   }
   else
   {
-    hkReferencedObject::addReference((hkReferencedObject *)&action->vfptr);
-    ++v3->m_criticalOperationsLockCount;
+    hkReferencedObject::addReference(action);
+    ++this->m_criticalOperationsLockCount;
     v15 = &v18;
-    v5 = v2->vfptr;
+    vfptr = action->vfptr;
     v16 = 0;
     v17 = -2147483644;
-    v5[2].__vecDelDtor((hkBaseObject *)&v2->vfptr, (unsigned int)&v15);
+    vfptr[2].__vecDelDtor(action, (unsigned int)&v15);
     v6 = 0i64;
-    v2->m_world = v3;
+    action->m_world = this;
     v7 = 0;
     if ( v16 <= 0 )
-      goto LABEL_27;
+      goto LABEL_14;
     v8 = 0i64;
     do
     {
       v9 = *(_QWORD *)&v15[v8] + 672i64;
       if ( *(_WORD *)(*(_QWORD *)&v15[v8] + 680i64) == (*(_WORD *)(*(_QWORD *)&v15[v8] + 682i64) & 0x3FFF) )
         hkSmallArrayUtil::_reserveMore((void *)(*(_QWORD *)&v15[v8] + 672i64), 8);
-      *(_QWORD *)(*(_QWORD *)v9 + 8i64 * (unsigned __int16)(*(_WORD *)(v9 + 8))++) = v2;
+      *(_QWORD *)(*(_QWORD *)v9 + 8i64 * (unsigned __int16)(*(_WORD *)(v9 + 8))++) = action;
       v10 = *(hkpEntity **)&v15[v8];
-      v11 = v10->m_simulationIsland;
-      if ( v11->m_storageIndex != -1 )
+      m_simulationIsland = v10->m_simulationIsland;
+      if ( m_simulationIsland->m_storageIndex != 0xFFFF )
       {
         if ( v6 )
         {
-          if ( v6->m_simulationIsland != v11 )
-            hkpWorldOperationUtil::mergeIslands(v3, v6, v10);
+          if ( v6->m_simulationIsland != m_simulationIsland )
+            hkpWorldOperationUtil::mergeIslands(this, v6, v10);
         }
         else
         {
           v6 = *(hkpEntity **)&v15[v8];
-          hkpSimulationIsland::addAction(v10->m_simulationIsland, v2);
+          hkpSimulationIsland::addAction(v10->m_simulationIsland, action);
         }
       }
       ++v7;
@@ -2689,33 +2573,29 @@ hkpAction *__fastcall hkpWorld::addAction(hkpWorld *this, hkpAction *action)
     }
     while ( v7 < v16 );
     if ( !v6 )
-LABEL_27:
-      hkpSimulationIsland::addAction(*(hkpSimulationIsland **)(*(_QWORD *)v15 + 296i64), v2);
-    v12 = v3->m_criticalOperationsLockCount-- == 1;
-    if ( v12 && !v3->m_blockExecutingPendingOperations.m_bool )
+LABEL_14:
+      hkpSimulationIsland::addAction(*(hkpSimulationIsland **)(*(_QWORD *)v15 + 296i64), action);
+    v12 = this->m_criticalOperationsLockCount-- == 1;
+    if ( v12 && !this->m_blockExecutingPendingOperations.m_bool )
     {
-      if ( v3->m_pendingOperationsCount )
-        hkpWorld::internal_executePendingOperations(v3);
-      if ( v3->m_pendingOperationQueueCount == 1 && v3->m_pendingBodyOperationsCount )
-        hkpWorld::internal_executePendingBodyOperations(v3);
+      if ( this->m_pendingOperationsCount )
+        hkpWorld::internal_executePendingOperations(this);
+      if ( this->m_pendingOperationQueueCount == 1 && this->m_pendingBodyOperationsCount )
+        hkpWorld::internal_executePendingBodyOperations(this);
     }
-    hkpWorldCallbackUtil::fireActionAdded(v3, v2);
+    hkpWorldCallbackUtil::fireActionAdded(this, action);
     v16 = 0;
     if ( v17 >= 0 )
-      hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-        v15,
-        8 * v17);
-    result = v2;
+      hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v15, 8 * v17);
+    return action;
   }
-  return result;
 }
 
 // File Line: 1644
 // RVA: 0xD58280
 void __fastcall hkpWorld::removeAction(hkpWorld *this, hkpAction *action)
 {
-  hkWorldOperation::BaseOperation operation; // [rsp+20h] [rbp-18h]
+  hkWorldOperation::BaseOperation operation; // [rsp+20h] [rbp-18h] BYREF
   hkpAction *v3; // [rsp+28h] [rbp-10h]
 
   if ( this->m_criticalOperationsLockCount )
@@ -2734,57 +2614,51 @@ void __fastcall hkpWorld::removeAction(hkpWorld *this, hkpAction *action)
 // RVA: 0xD582C0
 void __fastcall hkpWorld::removeActionImmediately(hkpWorld *this, hkpAction *action)
 {
-  hkpWorld *v2; // rdi
-  hkpAction *v3; // rbx
-  hkBaseObjectVtbl *v4; // rax
-  int v5; // er10
+  hkBaseObjectVtbl *vfptr; // rax
+  int v5; // r10d
   __int64 v6; // r9
   __int64 v7; // r8
-  signed __int64 v8; // rax
-  signed __int64 v9; // rdx
-  hkpAction **v10; // rcx
-  hkpSimulationIsland *v11; // rbp
-  hkpWorld *v12; // r14
-  bool v13; // zf
-  char *v14; // [rsp+20h] [rbp-38h]
-  int v15; // [rsp+28h] [rbp-30h]
-  int v16; // [rsp+2Ch] [rbp-2Ch]
-  char v17; // [rsp+30h] [rbp-28h]
+  __int64 v8; // rax
+  hkpAction **v9; // rcx
+  hkpSimulationIsland *m_island; // rbp
+  hkpWorld *m_world; // r14
+  bool v12; // zf
+  char *v13; // [rsp+20h] [rbp-38h] BYREF
+  int v14; // [rsp+28h] [rbp-30h]
+  int v15; // [rsp+2Ch] [rbp-2Ch]
+  char v16; // [rsp+30h] [rbp-28h] BYREF
 
-  v2 = this;
-  v3 = action;
-  hkReferencedObject::addReference((hkReferencedObject *)&action->vfptr);
-  ++v2->m_criticalOperationsLockCount;
-  hkpWorldCallbackUtil::fireActionRemoved(v2, v3);
-  v14 = &v17;
-  v4 = v3->vfptr;
-  v15 = 0;
-  v16 = -2147483644;
-  v4[2].__vecDelDtor((hkBaseObject *)&v3->vfptr, (unsigned int)&v14);
+  hkReferencedObject::addReference(action);
+  ++this->m_criticalOperationsLockCount;
+  hkpWorldCallbackUtil::fireActionRemoved(this, action);
+  v13 = &v16;
+  vfptr = action->vfptr;
+  v14 = 0;
+  v15 = -2147483644;
+  vfptr[2].__vecDelDtor(action, (unsigned int)&v13);
   v5 = 0;
-  if ( v15 > 0 )
+  if ( v14 > 0 )
   {
     v6 = 0i64;
     do
     {
-      v7 = *(_QWORD *)&v14[v6];
+      v7 = *(_QWORD *)&v13[v6];
       v8 = 0i64;
-      v9 = *(unsigned __int16 *)(v7 + 680);
-      if ( v9 <= 0 )
+      if ( *(_WORD *)(v7 + 680) )
       {
-LABEL_7:
-        v8 = -1i64;
+        v9 = *(hkpAction ***)(v7 + 672);
+        while ( *v9 != action )
+        {
+          ++v8;
+          ++v9;
+          if ( v8 >= *(unsigned __int16 *)(v7 + 680) )
+            goto LABEL_7;
+        }
       }
       else
       {
-        v10 = *(hkpAction ***)(v7 + 672);
-        while ( *v10 != v3 )
-        {
-          ++v8;
-          ++v10;
-          if ( v8 >= v9 )
-            goto LABEL_7;
-        }
+LABEL_7:
+        v8 = -1i64;
       }
       --*(_WORD *)(v7 + 680);
       ++v5;
@@ -2792,69 +2666,60 @@ LABEL_7:
       *(_QWORD *)(*(_QWORD *)(v7 + 672) + 8 * v8) = *(_QWORD *)(*(_QWORD *)(v7 + 672)
                                                               + 8i64 * *(unsigned __int16 *)(v7 + 680));
     }
-    while ( v5 < v15 );
+    while ( v5 < v14 );
   }
-  v11 = v3->m_island;
-  hkpSimulationIsland::removeAction(v3->m_island, v3);
-  v3->m_world = 0i64;
-  hkReferencedObject::removeReference((hkReferencedObject *)&v3->vfptr);
-  v12 = v11->m_world;
-  EnterCriticalSection(&v12->m_islandDirtyListCriticalSection->m_section);
-  if ( v11->m_dirtyListIndex == -1 )
+  m_island = action->m_island;
+  hkpSimulationIsland::removeAction(m_island, action);
+  action->m_world = 0i64;
+  hkReferencedObject::removeReference(action);
+  m_world = m_island->m_world;
+  EnterCriticalSection(&m_world->m_islandDirtyListCriticalSection->m_section);
+  if ( m_island->m_dirtyListIndex == 0xFFFF )
   {
-    v11->m_dirtyListIndex = v12->m_dirtySimulationIslands.m_size;
-    if ( v12->m_dirtySimulationIslands.m_size == (v12->m_dirtySimulationIslands.m_capacityAndFlags & 0x3FFFFFFF) )
+    m_island->m_dirtyListIndex = m_world->m_dirtySimulationIslands.m_size;
+    if ( m_world->m_dirtySimulationIslands.m_size == (m_world->m_dirtySimulationIslands.m_capacityAndFlags & 0x3FFFFFFF) )
       hkArrayUtil::_reserveMore(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        &v12->m_dirtySimulationIslands,
+        &hkContainerHeapAllocator::s_alloc,
+        (const void **)&m_world->m_dirtySimulationIslands.m_data,
         8);
-    v12->m_dirtySimulationIslands.m_data[v12->m_dirtySimulationIslands.m_size++] = v11;
+    m_world->m_dirtySimulationIslands.m_data[m_world->m_dirtySimulationIslands.m_size++] = m_island;
   }
-  LeaveCriticalSection(&v12->m_islandDirtyListCriticalSection->m_section);
-  v15 = 0;
-  if ( v16 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v14,
-      8 * v16);
-  v13 = v2->m_criticalOperationsLockCount-- == 1;
-  if ( v13 && !v2->m_blockExecutingPendingOperations.m_bool )
+  LeaveCriticalSection(&m_world->m_islandDirtyListCriticalSection->m_section);
+  v14 = 0;
+  if ( v15 >= 0 )
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v13, 8 * v15);
+  v12 = this->m_criticalOperationsLockCount-- == 1;
+  if ( v12 && !this->m_blockExecutingPendingOperations.m_bool )
   {
-    if ( v2->m_pendingOperationsCount )
-      hkpWorld::internal_executePendingOperations(v2);
-    if ( v2->m_pendingOperationQueueCount == 1 && v2->m_pendingBodyOperationsCount )
-      hkpWorld::internal_executePendingBodyOperations(v2);
+    if ( this->m_pendingOperationsCount )
+      hkpWorld::internal_executePendingOperations(this);
+    if ( this->m_pendingOperationQueueCount == 1 && this->m_pendingBodyOperationsCount )
+      hkpWorld::internal_executePendingBodyOperations(this);
   }
-  hkReferencedObject::removeReference((hkReferencedObject *)&v3->vfptr);
+  hkReferencedObject::removeReference(action);
 }
 
 // File Line: 1703
 // RVA: 0xD5D690
 void __fastcall hkpWorld::attachActionToEntity(hkpWorld *this, hkpAction *action, hkpEntity *entity)
 {
-  hkSmallArray<hkpAction *> *v3; // rdi
-  hkpWorld *v4; // rbp
-  hkpEntity *v5; // rbx
-  hkpAction *v6; // rsi
-  hkpSimulationIsland *v7; // r8
+  hkSmallArray<hkpAction *> *p_m_actions; // rdi
+  hkpSimulationIsland *m_island; // r8
 
-  v3 = &entity->m_actions;
-  v4 = this;
-  v5 = entity;
-  v6 = action;
+  p_m_actions = &entity->m_actions;
   if ( entity->m_actions.m_size == (entity->m_actions.m_capacityAndFlags & 0x3FFF) )
-    hkSmallArrayUtil::_reserveMore(v3, 8);
-  v3->m_data[v3->m_size++] = v6;
-  v7 = v6->m_island;
-  if ( v7->m_storageIndex != -1 || v5->m_motion.m_type.m_storage == 5 )
+    hkSmallArrayUtil::_reserveMore(p_m_actions, 8);
+  p_m_actions->m_data[p_m_actions->m_size++] = action;
+  m_island = action->m_island;
+  if ( m_island->m_storageIndex != 0xFFFF || entity->m_motion.m_type.m_storage == 5 )
   {
-    if ( v5->m_simulationIsland != v7 && v5->m_motion.m_type.m_storage != 5 )
-      hkpWorldOperationUtil::mergeIslands(v4, v5, *v7->m_entities.m_data);
+    if ( entity->m_simulationIsland != m_island && entity->m_motion.m_type.m_storage != 5 )
+      hkpWorldOperationUtil::mergeIslands(this, entity, *m_island->m_entities.m_data);
   }
   else
   {
-    hkpSimulationIsland::removeAction(v6->m_island, v6);
-    hkpSimulationIsland::addAction(v5->m_simulationIsland, v6);
+    hkpSimulationIsland::removeAction(action->m_island, action);
+    hkpSimulationIsland::addAction(entity->m_simulationIsland, action);
   }
 }
 
@@ -2862,55 +2727,51 @@ void __fastcall hkpWorld::attachActionToEntity(hkpWorld *this, hkpAction *action
 // RVA: 0xD5D760
 void __fastcall hkpWorld::detachActionFromEntity(hkpWorld *this, hkpAction *action, hkpEntity *entity)
 {
-  hkpAction *v3; // rdi
-  __int64 v4; // rdx
-  signed int v5; // er9
+  __int64 m_size; // rdx
+  int v5; // r9d
   __int64 v6; // rcx
-  hkpEntity *v7; // rsi
-  hkpAction **v8; // rax
+  hkpAction **m_data; // rax
   __int64 v9; // rax
-  hkBaseObjectVtbl *v10; // rax
+  hkBaseObjectVtbl *vfptr; // rax
   char *v11; // r9
   hkpSimulationIsland *v12; // rbx
   int v13; // edx
   __int64 v14; // rax
-  hkpSimulationIsland *v15; // rcx
-  char *v16; // [rsp+20h] [rbp-38h]
+  hkpSimulationIsland *m_island; // rcx
+  char *v16; // [rsp+20h] [rbp-38h] BYREF
   int v17; // [rsp+28h] [rbp-30h]
   int v18; // [rsp+2Ch] [rbp-2Ch]
-  char v19; // [rsp+30h] [rbp-28h]
+  char v19; // [rsp+30h] [rbp-28h] BYREF
 
-  v3 = action;
-  v4 = entity->m_actions.m_size;
+  m_size = entity->m_actions.m_size;
   v5 = 0;
   v6 = 0i64;
-  v7 = entity;
-  if ( v4 <= 0 )
+  if ( entity->m_actions.m_size )
+  {
+    m_data = entity->m_actions.m_data;
+    while ( *m_data != action )
+    {
+      ++v6;
+      ++v5;
+      ++m_data;
+      if ( v6 >= m_size )
+        goto LABEL_5;
+    }
+  }
+  else
   {
 LABEL_5:
     v5 = -1;
   }
-  else
-  {
-    v8 = entity->m_actions.m_data;
-    while ( *v8 != v3 )
-    {
-      ++v6;
-      ++v5;
-      ++v8;
-      if ( v6 >= v4 )
-        goto LABEL_5;
-    }
-  }
-  v9 = (unsigned __int16)(v4 - 1);
+  v9 = (unsigned __int16)(m_size - 1);
   entity->m_actions.m_size = v9;
   entity->m_actions.m_data[v5] = entity->m_actions.m_data[v9];
-  *((_BYTE *)entity->m_simulationIsland + 49) = *((_BYTE *)entity->m_simulationIsland + 49) & 0xFD | 1;
+  *((_BYTE *)entity->m_simulationIsland + 49) = *((_BYTE *)entity->m_simulationIsland + 49) & 0xFC | 1;
   v16 = &v19;
-  v10 = v3->vfptr;
+  vfptr = action->vfptr;
   v17 = 0;
   v18 = -2147483644;
-  v10[2].__vecDelDtor((hkBaseObject *)&v3->vfptr, (unsigned int)&v16);
+  vfptr[2].__vecDelDtor(action, (unsigned int)&v16);
   v11 = v16;
   v12 = 0i64;
   v13 = 0;
@@ -2919,10 +2780,10 @@ LABEL_5:
     v14 = (__int64)v16;
     do
     {
-      if ( *(hkpEntity **)v14 != v7 )
+      if ( *(hkpEntity **)v14 != entity )
       {
         v12 = *(hkpSimulationIsland **)(*(_QWORD *)v14 + 296i64);
-        if ( v12->m_storageIndex != -1 )
+        if ( v12->m_storageIndex != 0xFFFF )
           break;
       }
       ++v13;
@@ -2930,83 +2791,72 @@ LABEL_5:
     }
     while ( v13 < v17 );
   }
-  v15 = v3->m_island;
-  if ( v12 != v15 )
+  m_island = action->m_island;
+  if ( v12 != m_island )
   {
-    hkpSimulationIsland::removeAction(v15, v3);
-    hkpSimulationIsland::addAction(v12, v3);
+    hkpSimulationIsland::removeAction(m_island, action);
+    hkpSimulationIsland::addAction(v12, action);
     v11 = v16;
   }
   v17 = 0;
   if ( v18 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v11,
-      8 * v18);
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v11, 8 * v18);
 }
 
 // File Line: 1772
 // RVA: 0xD584B0
 hkpPhantom *__fastcall hkpWorld::addPhantom(hkpWorld *this, hkpPhantom *phantom)
 {
-  hkpWorld *v2; // rbx
-  int v3; // ecx
-  hkpPhantom *v4; // rdi
-  hkpPhantom *result; // rax
+  int m_criticalOperationsLockCount; // ecx
   bool v6; // zf
-  hkWorldOperation::BaseOperation operation; // [rsp+20h] [rbp-18h]
+  hkWorldOperation::BaseOperation operation; // [rsp+20h] [rbp-18h] BYREF
   hkpPhantom *v8; // [rsp+28h] [rbp-10h]
 
-  v2 = this;
-  v3 = this->m_criticalOperationsLockCount;
-  v4 = phantom;
-  if ( v3 + v2->m_criticalOperationsLockCountForPhantoms )
+  m_criticalOperationsLockCount = this->m_criticalOperationsLockCount;
+  if ( m_criticalOperationsLockCount + this->m_criticalOperationsLockCountForPhantoms )
   {
     v8 = phantom;
     operation.m_type.m_storage = 14;
-    hkpWorld::queueOperation(v2, &operation);
-    result = 0i64;
+    hkpWorld::queueOperation(this, &operation);
+    return 0i64;
   }
   else
   {
-    v2->m_criticalOperationsLockCount = v3 + 1;
+    this->m_criticalOperationsLockCount = m_criticalOperationsLockCount + 1;
     if ( !phantom->m_collidable.m_motion )
       phantom->m_collidable.m_motion = (const void *)((__int64 (__fastcall *)(hkpPhantom *))phantom->vfptr[2].__first_virtual_table_function__)(phantom);
-    v4->m_world = v2;
-    hkReferencedObject::addReference((hkReferencedObject *)&v4->vfptr);
-    if ( v2->m_phantoms.m_size == (v2->m_phantoms.m_capacityAndFlags & 0x3FFFFFFF) )
-      hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v2->m_phantoms, 8);
-    v2->m_phantoms.m_data[v2->m_phantoms.m_size++] = v4;
-    hkpWorldOperationUtil::addPhantomBP(v2, v4);
-    hkpWorldCallbackUtil::firePhantomAdded(v2, v4);
-    hkpPhantom::firePhantomAdded(v4);
-    v6 = v2->m_criticalOperationsLockCount-- == 1;
-    if ( v6 && !v2->m_blockExecutingPendingOperations.m_bool )
+    phantom->m_world = this;
+    hkReferencedObject::addReference(phantom);
+    if ( this->m_phantoms.m_size == (this->m_phantoms.m_capacityAndFlags & 0x3FFFFFFF) )
+      hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&this->m_phantoms.m_data, 8);
+    this->m_phantoms.m_data[this->m_phantoms.m_size++] = phantom;
+    hkpWorldOperationUtil::addPhantomBP(this, phantom);
+    hkpWorldCallbackUtil::firePhantomAdded(this, phantom);
+    hkpPhantom::firePhantomAdded(phantom);
+    v6 = this->m_criticalOperationsLockCount-- == 1;
+    if ( v6 && !this->m_blockExecutingPendingOperations.m_bool )
     {
-      if ( v2->m_pendingOperationsCount )
-        hkpWorld::internal_executePendingOperations(v2);
-      if ( v2->m_pendingOperationQueueCount == 1 )
+      if ( this->m_pendingOperationsCount )
+        hkpWorld::internal_executePendingOperations(this);
+      if ( this->m_pendingOperationQueueCount == 1 )
       {
-        if ( v2->m_pendingBodyOperationsCount )
-          hkpWorld::internal_executePendingBodyOperations(v2);
+        if ( this->m_pendingBodyOperationsCount )
+          hkpWorld::internal_executePendingBodyOperations(this);
       }
     }
-    result = v4;
+    return phantom;
   }
-  return result;
 }
 
 // File Line: 1823
 // RVA: 0xD585D0
-void __fastcall hkpWorld::addPhantomBatch(hkpWorld *this, hkpPhantom *const *phantomBatch, int numPhantoms)
+void __fastcall hkpWorld::addPhantomBatch(hkpWorld *this, hkpPhantom *const *phantomBatch, unsigned int numPhantoms)
 {
-  hkpWorld *v3; // rdi
-  int v4; // ecx
+  int m_criticalOperationsLockCount; // ecx
   __int64 v5; // rbx
-  hkpPhantom *const *v6; // r13
   __int64 v7; // r15
-  hkLifoAllocator *v8; // rax
-  char *v9; // r8
+  hkLifoAllocator *Value; // rax
+  char *m_cur; // r8
   int v10; // edx
   char *v11; // rcx
   hkLifoAllocator *v12; // rax
@@ -3016,86 +2866,83 @@ void __fastcall hkpWorld::addPhantomBatch(hkpWorld *this, hkpPhantom *const *pha
   __int64 v16; // r14
   __int64 v17; // r12
   hkpPhantom *v18; // rbx
-  int v19; // ebx
-  LPVOID v20; // rax
-  hkLifoAllocator *v21; // rcx
-  hkpTypedBroadPhaseHandlePair *v22; // rax
-  int v23; // edx
-  char *v24; // r8
-  hkpBroadPhase *v25; // rcx
-  hkpCollisionFilter *v26; // r9
-  hkpCollidableCollidableFilter *v27; // r9
-  bool v28; // zf
-  int v29; // eax
-  char *v30; // rdi
-  signed int v31; // ebx
-  hkLifoAllocator *v32; // rax
-  int v33; // er8
-  int v34; // eax
-  char *v35; // rdi
-  signed int v36; // ebx
-  hkLifoAllocator *v37; // rax
-  int v38; // er8
-  int v39; // eax
-  char *v40; // rdi
-  signed int v41; // ebx
-  hkLifoAllocator *v42; // rax
-  int v43; // er8
-  hkWorldOperation::BaseOperation operation; // [rsp+20h] [rbp-49h]
-  hkpPhantom *const *v45; // [rsp+28h] [rbp-41h]
-  __int16 v46; // [rsp+30h] [rbp-39h]
-  hkpTypedBroadPhaseHandlePair *newPairs; // [rsp+38h] [rbp-31h]
+  int m_broadPhaseQuerySize; // ebx
+  hkLifoAllocator *v20; // rcx
+  hkpTypedBroadPhaseHandlePair *v21; // rax
+  int v22; // edx
+  char *v23; // r8
+  hkpBroadPhase *m_broadPhase; // rcx
+  hkpCollisionFilter *m_collisionFilter; // r9
+  hkpCollidableCollidableFilter *v26; // r9
+  bool v27; // zf
+  int v28; // eax
+  char *v29; // rdi
+  signed int v30; // ebx
+  hkLifoAllocator *v31; // rax
+  int v32; // r8d
+  int v33; // eax
+  char *v34; // rdi
+  signed int v35; // ebx
+  hkLifoAllocator *v36; // rax
+  int v37; // r8d
+  int v38; // eax
+  char *v39; // rdi
+  signed int v40; // ebx
+  hkLifoAllocator *v41; // rax
+  int v42; // r8d
+  hkWorldOperation::BaseOperation operation; // [rsp+20h] [rbp-49h] BYREF
+  hkpPhantom *const *v44; // [rsp+28h] [rbp-41h]
+  __int16 v45; // [rsp+30h] [rbp-39h]
+  hkpTypedBroadPhaseHandlePair *newPairs; // [rsp+38h] [rbp-31h] BYREF
   int numNewPairs; // [rsp+40h] [rbp-29h]
-  int v49; // [rsp+44h] [rbp-25h]
+  int v48; // [rsp+44h] [rbp-25h]
   void *p; // [rsp+48h] [rbp-21h]
-  int v51; // [rsp+50h] [rbp-19h]
-  char *v52; // [rsp+58h] [rbp-11h]
-  int v53; // [rsp+60h] [rbp-9h]
-  int v54; // [rsp+64h] [rbp-5h]
-  void *v55; // [rsp+68h] [rbp-1h]
-  int v56; // [rsp+70h] [rbp+7h]
-  char *v57; // [rsp+78h] [rbp+Fh]
-  int v58; // [rsp+80h] [rbp+17h]
-  int v59; // [rsp+84h] [rbp+1Bh]
-  void *v60; // [rsp+88h] [rbp+1Fh]
-  int v61; // [rsp+90h] [rbp+27h]
+  int v50; // [rsp+50h] [rbp-19h]
+  char *v51; // [rsp+58h] [rbp-11h] BYREF
+  int v52; // [rsp+60h] [rbp-9h]
+  int v53; // [rsp+64h] [rbp-5h]
+  void *v54; // [rsp+68h] [rbp-1h]
+  int v55; // [rsp+70h] [rbp+7h]
+  char *v56; // [rsp+78h] [rbp+Fh] BYREF
+  int v57; // [rsp+80h] [rbp+17h]
+  int v58; // [rsp+84h] [rbp+1Bh]
+  void *v59; // [rsp+88h] [rbp+1Fh]
+  unsigned int v60; // [rsp+90h] [rbp+27h]
 
-  if ( numPhantoms > 0 )
+  if ( (int)numPhantoms > 0 )
   {
-    v3 = this;
-    v4 = this->m_criticalOperationsLockCount;
-    v5 = (unsigned int)numPhantoms;
-    v6 = phantomBatch;
-    if ( v4 + v3->m_criticalOperationsLockCountForPhantoms )
+    m_criticalOperationsLockCount = this->m_criticalOperationsLockCount;
+    v5 = numPhantoms;
+    if ( m_criticalOperationsLockCount + this->m_criticalOperationsLockCountForPhantoms )
     {
-      v45 = phantomBatch;
+      v44 = phantomBatch;
       operation.m_type.m_storage = 16;
-      v46 = numPhantoms;
-      hkpWorld::queueOperation(v3, &operation);
+      v45 = numPhantoms;
+      hkpWorld::queueOperation(this, &operation);
     }
     else
     {
-      v3->m_criticalOperationsLockCount = v4 + 1;
+      this->m_criticalOperationsLockCount = m_criticalOperationsLockCount + 1;
       v7 = 0i64;
-      v57 = 0i64;
-      v58 = 0;
-      v59 = 2147483648;
-      v61 = numPhantoms;
-      v8 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v9 = (char *)v8->m_cur;
+      v56 = 0i64;
+      v57 = 0;
+      v58 = 0x80000000;
+      v60 = numPhantoms;
+      Value = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+      m_cur = (char *)Value->m_cur;
       v10 = (8 * v5 + 127) & 0xFFFFFF80;
-      v11 = &v9[v10];
-      if ( v10 > v8->m_slabSize || v11 > v8->m_end )
-        v9 = (char *)hkLifoAllocator::allocateFromNewSlab(v8, v10);
+      v11 = &m_cur[v10];
+      if ( v10 > Value->m_slabSize || v11 > Value->m_end )
+        m_cur = (char *)hkLifoAllocator::allocateFromNewSlab(Value, v10);
       else
-        v8->m_cur = v11;
-      v57 = v9;
-      v60 = v9;
-      v52 = 0i64;
-      v53 = 0;
-      v54 = 2147483648;
-      v56 = v5;
-      v59 = v5 | 0x80000000;
+        Value->m_cur = v11;
+      v56 = m_cur;
+      v59 = m_cur;
+      v51 = 0i64;
+      v52 = 0;
+      v53 = 0x80000000;
+      v55 = v5;
+      v58 = v5 | 0x80000000;
       v12 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
       v13 = (char *)v12->m_cur;
       v14 = (32 * v5 + 127) & 0xFFFFFF80;
@@ -3104,213 +2951,197 @@ void __fastcall hkpWorld::addPhantomBatch(hkpWorld *this, hkpPhantom *const *pha
         v13 = (char *)hkLifoAllocator::allocateFromNewSlab(v12, v14);
       else
         v12->m_cur = v15;
-      v52 = v13;
-      v54 = v5 | 0x80000000;
-      v55 = v13;
-      v53 = v5;
-      v58 = v5;
-      if ( (signed int)v5 > 0 )
+      v51 = v13;
+      v53 = v5 | 0x80000000;
+      v54 = v13;
+      v52 = v5;
+      v57 = v5;
+      v16 = 0i64;
+      v17 = v5;
+      do
       {
-        v16 = 0i64;
-        v17 = v5;
-        do
-        {
-          v18 = v6[v16];
-          if ( !v18->m_collidable.m_motion )
-            v18->m_collidable.m_motion = (const void *)((__int64 (__fastcall *)(hkpPhantom *const ))v18->vfptr[2].__first_virtual_table_function__)(v6[v16]);
-          v18->m_world = v3;
-          *(_QWORD *)&v57[v16 * 8] = (char *)v18 + 68;
-          ((void (__fastcall *)(hkpPhantom *, char *))v18->vfptr[3].__first_virtual_table_function__)(v18, &v52[v7]);
-          hkpPhantom::setBoundingVolumeData(v18, (hkAabb *)&v52[v7]);
-          hkReferencedObject::addReference((hkReferencedObject *)&v18->vfptr);
-          if ( v3->m_phantoms.m_size == (v3->m_phantoms.m_capacityAndFlags & 0x3FFFFFFF) )
-            hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v3->m_phantoms, 8);
-          v3->m_phantoms.m_data[v3->m_phantoms.m_size++] = v18;
-          hkpWorldCallbackUtil::firePhantomAdded(v3, v18);
-          hkpPhantom::firePhantomAdded(v18);
-          v7 += 32i64;
-          ++v16;
-          --v17;
-        }
-        while ( v17 );
-        LODWORD(v7) = 0;
+        v18 = phantomBatch[v16];
+        if ( !v18->m_collidable.m_motion )
+          v18->m_collidable.m_motion = (const void *)((__int64 (__fastcall *)(hkpPhantom *const))v18->vfptr[2].__first_virtual_table_function__)(phantomBatch[v16]);
+        v18->m_world = this;
+        *(_QWORD *)&v56[v16 * 8] = &v18->m_collidable.m_broadPhaseHandle;
+        ((void (__fastcall *)(hkpPhantom *, char *))v18->vfptr[3].__first_virtual_table_function__)(v18, &v51[v7]);
+        hkpPhantom::setBoundingVolumeData(v18, (hkAabb *)&v51[v7]);
+        hkReferencedObject::addReference(v18);
+        if ( this->m_phantoms.m_size == (this->m_phantoms.m_capacityAndFlags & 0x3FFFFFFF) )
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&this->m_phantoms.m_data, 8);
+        this->m_phantoms.m_data[this->m_phantoms.m_size++] = v18;
+        hkpWorldCallbackUtil::firePhantomAdded(this, v18);
+        hkpPhantom::firePhantomAdded(v18);
+        v7 += 32i64;
+        ++v16;
+        --v17;
       }
-      v19 = v3->m_broadPhaseQuerySize;
+      while ( v17 );
+      m_broadPhaseQuerySize = this->m_broadPhaseQuerySize;
       newPairs = 0i64;
       numNewPairs = 0;
-      v49 = 2147483648;
-      v51 = v19;
-      if ( v19 )
+      v48 = 0x80000000;
+      v50 = m_broadPhaseQuerySize;
+      if ( m_broadPhaseQuerySize )
       {
-        v20 = TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-        v21 = (hkLifoAllocator *)v20;
-        v22 = (hkpTypedBroadPhaseHandlePair *)*((_QWORD *)v20 + 3);
-        v23 = (16 * v19 + 127) & 0xFFFFFF80;
-        v24 = (char *)v22 + v23;
-        if ( v23 > v21->m_slabSize || v24 > v21->m_end )
-          v22 = (hkpTypedBroadPhaseHandlePair *)hkLifoAllocator::allocateFromNewSlab(v21, v23);
+        v20 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+        v21 = (hkpTypedBroadPhaseHandlePair *)v20->m_cur;
+        v22 = (16 * m_broadPhaseQuerySize + 127) & 0xFFFFFF80;
+        v23 = (char *)v21 + v22;
+        if ( v22 > v20->m_slabSize || v23 > v20->m_end )
+          v21 = (hkpTypedBroadPhaseHandlePair *)hkLifoAllocator::allocateFromNewSlab(v20, v22);
         else
-          v21->m_cur = v24;
+          v20->m_cur = v23;
       }
       else
       {
-        v22 = 0i64;
+        v21 = 0i64;
       }
-      v25 = v3->m_broadPhase;
-      newPairs = v22;
-      p = v22;
-      v49 = v19 | 0x80000000;
-      ((void (__fastcall *)(hkpBroadPhase *, char **, char **, hkpTypedBroadPhaseHandlePair **))v25->vfptr[3].__first_virtual_table_function__)(
-        v25,
-        &v57,
-        &v52,
+      m_broadPhase = this->m_broadPhase;
+      newPairs = v21;
+      p = v21;
+      v48 = m_broadPhaseQuerySize | 0x80000000;
+      ((void (__fastcall *)(hkpBroadPhase *, char **, char **, hkpTypedBroadPhaseHandlePair **))m_broadPhase->vfptr[3].__first_virtual_table_function__)(
+        m_broadPhase,
+        &v56,
+        &v51,
         &newPairs);
-      v26 = v3->m_collisionFilter;
-      if ( v26 )
-        v27 = (hkpCollidableCollidableFilter *)&v26->vfptr;
+      m_collisionFilter = this->m_collisionFilter;
+      if ( m_collisionFilter )
+        v26 = &m_collisionFilter->hkpCollidableCollidableFilter;
       else
-        v27 = 0i64;
-      hkpTypedBroadPhaseDispatcher::addPairs(v3->m_broadPhaseDispatcher, newPairs, numNewPairs, v27);
-      v28 = v3->m_criticalOperationsLockCount-- == 1;
-      if ( v28 && !v3->m_blockExecutingPendingOperations.m_bool )
+        v26 = 0i64;
+      hkpTypedBroadPhaseDispatcher::addPairs(this->m_broadPhaseDispatcher, newPairs, numNewPairs, v26);
+      v27 = this->m_criticalOperationsLockCount-- == 1;
+      if ( v27 && !this->m_blockExecutingPendingOperations.m_bool )
       {
-        if ( v3->m_pendingOperationsCount )
-          hkpWorld::internal_executePendingOperations(v3);
-        if ( v3->m_pendingOperationQueueCount == 1 && v3->m_pendingBodyOperationsCount )
-          hkpWorld::internal_executePendingBodyOperations(v3);
+        if ( this->m_pendingOperationsCount )
+          hkpWorld::internal_executePendingOperations(this);
+        if ( this->m_pendingOperationQueueCount == 1 && this->m_pendingBodyOperationsCount )
+          hkpWorld::internal_executePendingBodyOperations(this);
       }
-      v29 = numNewPairs;
-      v30 = (char *)p;
+      v28 = numNewPairs;
+      v29 = (char *)p;
       if ( p == newPairs )
-        v29 = v7;
-      numNewPairs = v29;
-      v31 = (16 * v51 + 127) & 0xFFFFFF80;
-      v32 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v33 = (v31 + 15) & 0xFFFFFFF0;
-      if ( v31 > v32->m_slabSize || &v30[v33] != v32->m_cur || v32->m_firstNonLifoEnd == v30 )
-        hkLifoAllocator::slowBlockFree(v32, v30, v33);
+        v28 = 0;
+      numNewPairs = v28;
+      v30 = (16 * v50 + 127) & 0xFFFFFF80;
+      v31 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+      v32 = (v30 + 15) & 0xFFFFFFF0;
+      if ( v30 > v31->m_slabSize || &v29[v32] != v31->m_cur || v31->m_firstNonLifoEnd == v29 )
+        hkLifoAllocator::slowBlockFree(v31, v29, v32);
       else
-        v32->m_cur = v30;
-      numNewPairs = v7;
-      if ( v49 >= 0 )
-        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-          newPairs,
-          16 * v49);
-      v34 = v53;
-      v35 = (char *)v55;
+        v31->m_cur = v29;
+      numNewPairs = 0;
+      if ( v48 >= 0 )
+        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, newPairs, 16 * v48);
+      v33 = v52;
+      v34 = (char *)v54;
       newPairs = 0i64;
-      if ( v55 == v52 )
-        v34 = v7;
-      v49 = 2147483648;
-      v53 = v34;
-      v36 = (32 * v56 + 127) & 0xFFFFFF80;
-      v37 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v38 = (v36 + 15) & 0xFFFFFFF0;
-      if ( v36 > v37->m_slabSize || &v35[v38] != v37->m_cur || v37->m_firstNonLifoEnd == v35 )
-        hkLifoAllocator::slowBlockFree(v37, v35, v38);
+      if ( v54 == v51 )
+        v33 = 0;
+      v48 = 0x80000000;
+      v52 = v33;
+      v35 = (32 * v55 + 127) & 0xFFFFFF80;
+      v36 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+      v37 = (v35 + 15) & 0xFFFFFFF0;
+      if ( v35 > v36->m_slabSize || &v34[v37] != v36->m_cur || v36->m_firstNonLifoEnd == v34 )
+        hkLifoAllocator::slowBlockFree(v36, v34, v37);
       else
-        v37->m_cur = v35;
-      v53 = v7;
-      if ( v54 >= 0 )
-        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-          v52,
-          32 * v54);
-      v39 = v58;
-      v40 = (char *)v60;
-      v52 = 0i64;
-      v54 = 2147483648;
-      if ( v60 == v57 )
-        v39 = v7;
-      v58 = v39;
-      v41 = (8 * v61 + 127) & 0xFFFFFF80;
-      v42 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v43 = (v41 + 15) & 0xFFFFFFF0;
-      if ( v41 > v42->m_slabSize || &v40[v43] != v42->m_cur || v42->m_firstNonLifoEnd == v40 )
-        hkLifoAllocator::slowBlockFree(v42, v40, v43);
+        v36->m_cur = v34;
+      v52 = 0;
+      if ( v53 >= 0 )
+        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v51, 32 * v53);
+      v38 = v57;
+      v39 = (char *)v59;
+      v51 = 0i64;
+      v53 = 0x80000000;
+      if ( v59 == v56 )
+        v38 = 0;
+      v57 = v38;
+      v40 = (8 * v60 + 127) & 0xFFFFFF80;
+      v41 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+      v42 = (v40 + 15) & 0xFFFFFFF0;
+      if ( v40 > v41->m_slabSize || &v39[v42] != v41->m_cur || v41->m_firstNonLifoEnd == v39 )
+        hkLifoAllocator::slowBlockFree(v41, v39, v42);
       else
-        v42->m_cur = v40;
-      v58 = v7;
-      if ( v59 >= 0 )
-        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-          v57,
-          8 * v59);
+        v41->m_cur = v39;
+      v57 = 0;
+      if ( v58 >= 0 )
+        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v56, 8 * v58);
     }
   }
-}     v42->m_cur = v40;
-      v58 = v7;
-      if ( v59 >= 0 )
-        hkContainerHeapAllocator::s_alloc.vfptr->bufF
+}Free(v41, v39, v42);
+      else
+        v41->m_cur = v39;
+      v57 = 0;
+      if ( v58 >= 0 )
+        hkContainerHe
 
 // File Line: 1892
 // RVA: 0xD58AB0
 void __fastcall hkpWorld::removePhantom(hkpWorld *this, hkpPhantom *phantom)
 {
-  hkpWorld *v2; // rbx
-  hkpPhantom *v3; // rdi
-  int v4; // edx
-  __int64 v5; // r9
-  signed int v6; // er8
+  int m_criticalOperationsLockCount; // edx
+  __int64 m_size; // r9
+  int v6; // r8d
   __int64 v7; // rcx
-  hkpPhantom **v8; // rax
+  hkpPhantom **m_data; // rax
   bool v9; // zf
-  hkWorldOperation::BaseOperation operation; // [rsp+20h] [rbp-18h]
+  hkWorldOperation::BaseOperation operation; // [rsp+20h] [rbp-18h] BYREF
   hkpPhantom *v11; // [rsp+28h] [rbp-10h]
 
-  v2 = this;
-  v3 = phantom;
-  v4 = this->m_criticalOperationsLockCount;
-  if ( v4 + this->m_criticalOperationsLockCountForPhantoms )
+  m_criticalOperationsLockCount = this->m_criticalOperationsLockCount;
+  if ( m_criticalOperationsLockCount + this->m_criticalOperationsLockCountForPhantoms )
   {
     operation.m_type.m_storage = 15;
-    v11 = v3;
+    v11 = phantom;
     hkpWorld::queueOperation(this, &operation);
   }
   else
   {
-    this->m_criticalOperationsLockCount = v4 + 1;
-    hkpWorldCallbackUtil::firePhantomRemoved(this, v3);
-    hkpPhantom::firePhantomRemoved(v3);
-    hkpWorldOperationUtil::removePhantomBP(v2, v3);
-    v5 = v2->m_phantoms.m_size;
+    this->m_criticalOperationsLockCount = m_criticalOperationsLockCount + 1;
+    hkpWorldCallbackUtil::firePhantomRemoved(this, phantom);
+    hkpPhantom::firePhantomRemoved(phantom);
+    hkpWorldOperationUtil::removePhantomBP(this, phantom);
+    m_size = this->m_phantoms.m_size;
     v6 = 0;
     v7 = 0i64;
-    if ( (signed int)v5 <= 0 )
+    if ( (int)m_size <= 0 )
     {
 LABEL_7:
       v6 = -1;
     }
     else
     {
-      v8 = v2->m_phantoms.m_data;
-      while ( *v8 != v3 )
+      m_data = this->m_phantoms.m_data;
+      while ( *m_data != phantom )
       {
         ++v7;
         ++v6;
-        ++v8;
-        if ( v7 >= v5 )
+        ++m_data;
+        if ( v7 >= m_size )
           goto LABEL_7;
       }
     }
-    v2->m_phantoms.m_size = v5 - 1;
-    if ( (_DWORD)v5 - 1 != v6 )
-      v2->m_phantoms.m_data[v6] = v2->m_phantoms.m_data[(signed int)v5 - 1];
-    v9 = v3->m_memSizeAndFlags == 0;
-    v3->m_world = 0i64;
+    this->m_phantoms.m_size = m_size - 1;
+    if ( (_DWORD)m_size - 1 != v6 )
+      this->m_phantoms.m_data[v6] = this->m_phantoms.m_data[(int)m_size - 1];
+    v9 = phantom->m_memSizeAndFlags == 0;
+    phantom->m_world = 0i64;
     if ( v9 )
-      ((void (__fastcall *)(hkpPhantom *))v3->vfptr[7].__vecDelDtor)(v3);
-    hkReferencedObject::removeReference((hkReferencedObject *)&v3->vfptr);
-    v9 = v2->m_criticalOperationsLockCount-- == 1;
-    if ( v9 && !v2->m_blockExecutingPendingOperations.m_bool )
+      ((void (__fastcall *)(hkpPhantom *))phantom->vfptr[7].__vecDelDtor)(phantom);
+    hkReferencedObject::removeReference(phantom);
+    v9 = this->m_criticalOperationsLockCount-- == 1;
+    if ( v9 && !this->m_blockExecutingPendingOperations.m_bool )
     {
-      if ( v2->m_pendingOperationsCount )
-        hkpWorld::internal_executePendingOperations(v2);
-      if ( v2->m_pendingOperationQueueCount == 1 )
+      if ( this->m_pendingOperationsCount )
+        hkpWorld::internal_executePendingOperations(this);
+      if ( this->m_pendingOperationQueueCount == 1 )
       {
-        if ( v2->m_pendingBodyOperationsCount )
-          hkpWorld::internal_executePendingBodyOperations(v2);
+        if ( this->m_pendingBodyOperationsCount )
+          hkpWorld::internal_executePendingBodyOperations(this);
       }
     }
   }
@@ -3318,218 +3149,205 @@ LABEL_7:
 
 // File Line: 1941
 // RVA: 0xD58BE0
-void __fastcall hkpWorld::removePhantomBatch(hkpWorld *this, hkpPhantom *const *phantomBatch, int numPhantoms)
+void __fastcall hkpWorld::removePhantomBatch(hkpWorld *this, hkpPhantom *const *phantomBatch, unsigned int numPhantoms)
 {
-  hkpWorld *v3; // rdi
-  int v4; // ecx
+  int m_criticalOperationsLockCount; // ecx
   __int64 v5; // r14
   hkpPhantom *const *v6; // r12
-  hkLifoAllocator *v7; // rax
-  char *v8; // r8
+  hkLifoAllocator *Value; // rax
+  char *m_cur; // r8
   int v9; // edx
   char *v10; // rcx
   hkpPhantom **v11; // rsi
   __int64 v12; // r15
   hkpPhantom *v13; // rbx
-  int v14; // ebx
-  hkLifoAllocator *v15; // rax
-  hkLifoAllocator *v16; // rcx
-  char *v17; // rax
-  int v18; // edx
-  char *v19; // r8
-  hkpBroadPhase *v20; // rcx
-  int v21; // eax
-  char *v22; // rsi
-  signed int v23; // ebx
-  hkLifoAllocator *v24; // rax
-  int v25; // er8
-  __int64 v26; // rsi
-  hkReferencedObject *v27; // rbx
-  signed int v28; // edx
-  signed __int64 v29; // rax
-  signed __int64 v30; // r9
-  hkpPhantom **v31; // rcx
-  bool v32; // zf
-  int v33; // eax
-  char *v34; // rdi
-  signed int v35; // ebx
-  hkLifoAllocator *v36; // rax
-  int v37; // er8
-  hkWorldOperation::BaseOperation operation[8]; // [rsp+20h] [rbp-48h]
+  int m_broadPhaseQuerySize; // ebx
+  hkLifoAllocator *v15; // rcx
+  char *v16; // rax
+  int v17; // edx
+  char *v18; // r8
+  hkpBroadPhase *m_broadPhase; // rcx
+  int v20; // eax
+  char *v21; // rsi
+  signed int v22; // ebx
+  hkLifoAllocator *v23; // rax
+  int v24; // r8d
+  __int64 v25; // rsi
+  hkReferencedObject *v26; // rbx
+  int v27; // edx
+  __int64 v28; // rax
+  __int64 m_size; // r9
+  hkpPhantom **m_data; // rcx
+  bool v31; // zf
+  int v32; // eax
+  char *v33; // rdi
+  signed int v34; // ebx
+  hkLifoAllocator *v35; // rax
+  int v36; // r8d
+  hkWorldOperation::BaseOperation operation[8]; // [rsp+20h] [rbp-48h] BYREF
   int numDeletedPairs[2]; // [rsp+28h] [rbp-40h]
   void *p; // [rsp+30h] [rbp-38h]
-  int v41; // [rsp+38h] [rbp-30h]
-  _QWORD *v42; // [rsp+40h] [rbp-28h]
-  int v43; // [rsp+48h] [rbp-20h]
-  int v44; // [rsp+4Ch] [rbp-1Ch]
-  void *v45; // [rsp+50h] [rbp-18h]
-  int v46; // [rsp+58h] [rbp-10h]
+  int v40; // [rsp+38h] [rbp-30h]
+  _QWORD *v41; // [rsp+40h] [rbp-28h] BYREF
+  int v42; // [rsp+48h] [rbp-20h]
+  int v43; // [rsp+4Ch] [rbp-1Ch]
+  void *v44; // [rsp+50h] [rbp-18h]
+  unsigned int v45; // [rsp+58h] [rbp-10h]
 
-  if ( numPhantoms > 0 )
+  if ( (int)numPhantoms > 0 )
   {
-    v3 = this;
-    v4 = this->m_criticalOperationsLockCount;
-    v5 = (unsigned int)numPhantoms;
+    m_criticalOperationsLockCount = this->m_criticalOperationsLockCount;
+    v5 = numPhantoms;
     v6 = phantomBatch;
-    if ( v4 + v3->m_criticalOperationsLockCountForPhantoms )
+    if ( m_criticalOperationsLockCount + this->m_criticalOperationsLockCountForPhantoms )
     {
       *(_QWORD *)numDeletedPairs = phantomBatch;
       operation[0].m_type.m_storage = 17;
       LOWORD(p) = numPhantoms;
-      hkpWorld::queueOperation(v3, operation);
+      hkpWorld::queueOperation(this, operation);
     }
     else
     {
-      v3->m_criticalOperationsLockCount = v4 + 1;
-      v42 = 0i64;
-      v43 = 0;
-      v44 = 2147483648;
-      v46 = numPhantoms;
-      v7 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v8 = (char *)v7->m_cur;
+      this->m_criticalOperationsLockCount = m_criticalOperationsLockCount + 1;
+      v41 = 0i64;
+      v42 = 0;
+      v43 = 0x80000000;
+      v45 = numPhantoms;
+      Value = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+      m_cur = (char *)Value->m_cur;
       v9 = (8 * v5 + 127) & 0xFFFFFF80;
-      v10 = &v8[v9];
-      if ( v9 > v7->m_slabSize || v10 > v7->m_end )
-        v8 = (char *)hkLifoAllocator::allocateFromNewSlab(v7, v9);
+      v10 = &m_cur[v9];
+      if ( v9 > Value->m_slabSize || v10 > Value->m_end )
+        m_cur = (char *)hkLifoAllocator::allocateFromNewSlab(Value, v9);
       else
-        v7->m_cur = v10;
-      v42 = v8;
-      v45 = v8;
-      v44 = v5 | 0x80000000;
-      if ( (signed int)v5 > 0 )
+        Value->m_cur = v10;
+      v41 = m_cur;
+      v44 = m_cur;
+      v43 = v5 | 0x80000000;
+      v11 = (hkpPhantom **)v6;
+      v12 = v5;
+      do
       {
-        v11 = (hkpPhantom **)v6;
-        v12 = v5;
-        do
-        {
-          v13 = *v11;
-          v42[v43++] = (char *)*v11 + 68;
-          hkpWorldCallbackUtil::firePhantomRemoved(v3, v13);
-          hkpPhantom::firePhantomRemoved(v13);
-          ++v11;
-          --v12;
-        }
-        while ( v12 );
+        v13 = *v11;
+        v41[v42++] = &(*v11)->m_collidable.m_broadPhaseHandle;
+        hkpWorldCallbackUtil::firePhantomRemoved(this, v13);
+        hkpPhantom::firePhantomRemoved(v13);
+        ++v11;
+        --v12;
       }
-      if ( v43 )
+      while ( v12 );
+      if ( v42 )
       {
-        v14 = v3->m_broadPhaseQuerySize;
+        m_broadPhaseQuerySize = this->m_broadPhaseQuerySize;
         *(_QWORD *)&operation[0].m_type.m_storage = 0i64;
         numDeletedPairs[0] = 0;
-        numDeletedPairs[1] = 2147483648;
-        v41 = v14;
-        if ( v14 )
+        numDeletedPairs[1] = 0x80000000;
+        v40 = m_broadPhaseQuerySize;
+        if ( m_broadPhaseQuerySize )
         {
           v15 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-          v16 = v15;
-          v17 = (char *)v15->m_cur;
-          v18 = (16 * v14 + 127) & 0xFFFFFF80;
-          v19 = &v17[v18];
-          if ( v18 > v16->m_slabSize || v19 > v16->m_end )
-            v17 = (char *)hkLifoAllocator::allocateFromNewSlab(v16, v18);
+          v16 = (char *)v15->m_cur;
+          v17 = (16 * m_broadPhaseQuerySize + 127) & 0xFFFFFF80;
+          v18 = &v16[v17];
+          if ( v17 > v15->m_slabSize || v18 > v15->m_end )
+            v16 = (char *)hkLifoAllocator::allocateFromNewSlab(v15, v17);
           else
-            v16->m_cur = v19;
+            v15->m_cur = v18;
         }
         else
         {
-          v17 = 0i64;
+          v16 = 0i64;
         }
-        v20 = v3->m_broadPhase;
-        *(_QWORD *)&operation[0].m_type.m_storage = v17;
-        p = v17;
-        numDeletedPairs[1] = v14 | 0x80000000;
-        ((void (__fastcall *)(hkpBroadPhase *, _QWORD **, hkWorldOperation::BaseOperation *))v20->vfptr[4].__first_virtual_table_function__)(
-          v20,
-          &v42,
+        m_broadPhase = this->m_broadPhase;
+        *(_QWORD *)&operation[0].m_type.m_storage = v16;
+        p = v16;
+        numDeletedPairs[1] = m_broadPhaseQuerySize | 0x80000000;
+        ((void (__fastcall *)(hkpBroadPhase *, _QWORD **, hkWorldOperation::BaseOperation *))m_broadPhase->vfptr[4].__first_virtual_table_function__)(
+          m_broadPhase,
+          &v41,
           operation);
         hkpTypedBroadPhaseDispatcher::removePairs(
-          v3->m_broadPhaseDispatcher,
+          this->m_broadPhaseDispatcher,
           *(hkpTypedBroadPhaseHandlePair **)&operation[0].m_type.m_storage,
           numDeletedPairs[0]);
-        v21 = numDeletedPairs[0];
-        v22 = (char *)p;
+        v20 = numDeletedPairs[0];
+        v21 = (char *)p;
         if ( p == *(void **)&operation[0].m_type.m_storage )
-          v21 = 0;
-        numDeletedPairs[0] = v21;
-        v23 = (16 * v41 + 127) & 0xFFFFFF80;
-        v24 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-        v25 = (v23 + 15) & 0xFFFFFFF0;
-        if ( v23 > v24->m_slabSize || &v22[v25] != v24->m_cur || v24->m_firstNonLifoEnd == v22 )
-          hkLifoAllocator::slowBlockFree(v24, v22, v25);
+          v20 = 0;
+        numDeletedPairs[0] = v20;
+        v22 = (16 * v40 + 127) & 0xFFFFFF80;
+        v23 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+        v24 = (v22 + 15) & 0xFFFFFFF0;
+        if ( v22 > v23->m_slabSize || &v21[v24] != v23->m_cur || v23->m_firstNonLifoEnd == v21 )
+          hkLifoAllocator::slowBlockFree(v23, v21, v24);
         else
-          v24->m_cur = v22;
+          v23->m_cur = v21;
         numDeletedPairs[0] = 0;
         if ( numDeletedPairs[1] >= 0 )
           hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-            (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+            &hkContainerHeapAllocator::s_alloc,
             *(void **)&operation[0].m_type.m_storage,
             16 * numDeletedPairs[1]);
       }
-      if ( (signed int)v5 > 0 )
+      v25 = v5;
+      do
       {
-        v26 = v5;
-        do
+        v26 = *v6;
+        v27 = 0;
+        v28 = 0i64;
+        (*v6)->m_world = 0i64;
+        m_size = this->m_phantoms.m_size;
+        if ( (int)m_size <= 0 )
         {
-          v27 = (hkReferencedObject *)*v6;
-          v28 = 0;
-          v29 = 0i64;
-          (*v6)->m_world = 0i64;
-          v30 = v3->m_phantoms.m_size;
-          if ( (signed int)v30 <= 0 )
-          {
-LABEL_33:
-            v28 = -1;
-            v29 = -1i64;
-          }
-          else
-          {
-            v31 = v3->m_phantoms.m_data;
-            while ( *v31 != (hkpPhantom *)v27 )
-            {
-              ++v29;
-              ++v28;
-              ++v31;
-              if ( v29 >= v30 )
-                goto LABEL_33;
-            }
-          }
-          v3->m_phantoms.m_size = v30 - 1;
-          if ( (_DWORD)v30 - 1 != v28 )
-            v3->m_phantoms.m_data[v29] = v3->m_phantoms.m_data[(signed int)v30 - 1];
-          if ( !v27->m_memSizeAndFlags )
-            ((void (__fastcall *)(hkReferencedObject *))v27->vfptr[7].__vecDelDtor)(v27);
-          hkReferencedObject::removeReference(v27);
-          ++v6;
-          --v26;
+LABEL_31:
+          v27 = -1;
+          v28 = -1i64;
         }
-        while ( v26 );
+        else
+        {
+          m_data = this->m_phantoms.m_data;
+          while ( *m_data != v26 )
+          {
+            ++v28;
+            ++v27;
+            ++m_data;
+            if ( v28 >= m_size )
+              goto LABEL_31;
+          }
+        }
+        this->m_phantoms.m_size = m_size - 1;
+        if ( (_DWORD)m_size - 1 != v27 )
+          this->m_phantoms.m_data[v28] = this->m_phantoms.m_data[(int)m_size - 1];
+        if ( !v26->m_memSizeAndFlags )
+          ((void (__fastcall *)(hkReferencedObject *))v26->vfptr[7].__vecDelDtor)(v26);
+        hkReferencedObject::removeReference(v26);
+        ++v6;
+        --v25;
       }
-      v32 = v3->m_criticalOperationsLockCount-- == 1;
-      if ( v32 && !v3->m_blockExecutingPendingOperations.m_bool )
+      while ( v25 );
+      v31 = this->m_criticalOperationsLockCount-- == 1;
+      if ( v31 && !this->m_blockExecutingPendingOperations.m_bool )
       {
-        if ( v3->m_pendingOperationsCount )
-          hkpWorld::internal_executePendingOperations(v3);
-        if ( v3->m_pendingOperationQueueCount == 1 && v3->m_pendingBodyOperationsCount )
-          hkpWorld::internal_executePendingBodyOperations(v3);
+        if ( this->m_pendingOperationsCount )
+          hkpWorld::internal_executePendingOperations(this);
+        if ( this->m_pendingOperationQueueCount == 1 && this->m_pendingBodyOperationsCount )
+          hkpWorld::internal_executePendingBodyOperations(this);
       }
-      v33 = v43;
-      v34 = (char *)v45;
-      if ( v45 == v42 )
-        v33 = 0;
-      v43 = v33;
-      v35 = (8 * v46 + 127) & 0xFFFFFF80;
-      v36 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v37 = (v35 + 15) & 0xFFFFFFF0;
-      if ( v35 > v36->m_slabSize || &v34[v37] != v36->m_cur || v36->m_firstNonLifoEnd == v34 )
-        hkLifoAllocator::slowBlockFree(v36, v34, v37);
+      v32 = v42;
+      v33 = (char *)v44;
+      if ( v44 == v41 )
+        v32 = 0;
+      v42 = v32;
+      v34 = (8 * v45 + 127) & 0xFFFFFF80;
+      v35 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+      v36 = (v34 + 15) & 0xFFFFFFF0;
+      if ( v34 > v35->m_slabSize || &v33[v36] != v35->m_cur || v35->m_firstNonLifoEnd == v33 )
+        hkLifoAllocator::slowBlockFree(v35, v33, v36);
       else
-        v36->m_cur = v34;
-      v43 = 0;
-      if ( v44 >= 0 )
-        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-          v42,
-          8 * v44);
+        v35->m_cur = v33;
+      v42 = 0;
+      if ( v43 >= 0 )
+        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v41, 8 * v43);
     }
   }
 }
@@ -3538,17 +3356,15 @@ LABEL_33:
 // RVA: 0xD590D0
 void __fastcall hkpWorld::addPhysicsSystem(hkpWorld *this, hkpPhysicsSystem *sys)
 {
-  int v2; // er10
+  int m_size; // r10d
   int v3; // edi
-  hkpPhysicsSystem *v4; // rbx
-  hkpWorld *v5; // rbp
   __int64 v6; // rcx
-  int v7; // er8
+  int v7; // r8d
   __int64 v8; // rdx
-  hkpRigidBody **v9; // rax
-  int v10; // er9
+  hkpRigidBody **m_data; // rax
+  int v10; // r9d
   int v11; // edx
-  signed __int64 v12; // rcx
+  __int64 v12; // rcx
   hkpPhantom **v13; // rax
   int v14; // esi
   __int64 v15; // r14
@@ -3557,28 +3373,26 @@ void __fastcall hkpWorld::addPhysicsSystem(hkpWorld *this, hkpPhysicsSystem *sys
   hkpConstraintInstance *v18; // rdx
   int v19; // esi
   __int64 v20; // r14
-  hkpEntity *v21; // rdx
+  hkpRigidBody *v21; // rdx
   int v22; // esi
   __int64 v23; // r14
   hkpPhantom *v24; // rdx
 
-  v2 = sys->m_rigidBodies.m_size;
+  m_size = sys->m_rigidBodies.m_size;
   v3 = 0;
-  v4 = sys;
-  v5 = this;
-  if ( v2 > 0 )
+  if ( m_size > 0 )
   {
     v6 = sys->m_rigidBodies.m_size;
     v7 = 0;
     v8 = 0i64;
     if ( v6 <= 0 )
       goto LABEL_6;
-    v9 = v4->m_rigidBodies.m_data;
-    while ( *v9 )
+    m_data = sys->m_rigidBodies.m_data;
+    while ( *m_data )
     {
       ++v8;
       ++v7;
-      ++v9;
+      ++m_data;
       if ( v8 >= v6 )
         goto LABEL_6;
     }
@@ -3586,37 +3400,32 @@ void __fastcall hkpWorld::addPhysicsSystem(hkpWorld *this, hkpPhysicsSystem *sys
     {
 LABEL_6:
       hkpWorld::addEntityBatch(
-        v5,
-        (hkpEntity *const *)v4->m_rigidBodies.m_data,
-        v2,
-        (hkpEntityActivation)(v4->m_active.m_bool != 0));
+        this,
+        sys->m_rigidBodies.m_data,
+        m_size,
+        (hkpEntityActivation)(sys->m_active.m_bool != 0));
     }
     else
     {
       v19 = 0;
-      if ( v2 > 0 )
+      v20 = 0i64;
+      do
       {
-        v20 = 0i64;
-        do
-        {
-          v21 = (hkpEntity *)&v4->m_rigidBodies.m_data[v20]->vfptr;
-          if ( v21 )
-            hkpWorld::addEntity(v5, v21, (hkpEntityActivation)(v4->m_active.m_bool != 0));
-          ++v19;
-          ++v20;
-        }
-        while ( v19 < v4->m_rigidBodies.m_size );
+        v21 = sys->m_rigidBodies.m_data[v20];
+        if ( v21 )
+          hkpWorld::addEntity(this, v21, (hkpEntityActivation)(sys->m_active.m_bool != 0));
+        ++v19;
+        ++v20;
       }
+      while ( v19 < sys->m_rigidBodies.m_size );
     }
   }
-  v10 = v4->m_phantoms.m_size;
+  v10 = sys->m_phantoms.m_size;
   if ( v10 > 0 )
   {
     v11 = 0;
     v12 = 0i64;
-    if ( v10 <= 0i64 )
-      goto LABEL_12;
-    v13 = v4->m_phantoms.m_data;
+    v13 = sys->m_phantoms.m_data;
     while ( *v13 )
     {
       ++v12;
@@ -3628,52 +3437,48 @@ LABEL_6:
     if ( v11 == -1 )
     {
 LABEL_12:
-      hkpWorld::addPhantomBatch(v5, v4->m_phantoms.m_data, v10);
+      hkpWorld::addPhantomBatch(this, sys->m_phantoms.m_data, v10);
+      goto LABEL_13;
     }
-    else
+    v22 = 0;
+    v23 = 0i64;
+    do
     {
-      v22 = 0;
-      if ( v10 > 0 )
-      {
-        v23 = 0i64;
-        do
-        {
-          v24 = v4->m_phantoms.m_data[v23];
-          if ( v24 )
-            hkpWorld::addPhantom(v5, v24);
-          ++v22;
-          ++v23;
-        }
-        while ( v22 < v4->m_phantoms.m_size );
-      }
+      v24 = sys->m_phantoms.m_data[v23];
+      if ( v24 )
+        hkpWorld::addPhantom(this, v24);
+      ++v22;
+      ++v23;
     }
+    while ( v22 < sys->m_phantoms.m_size );
   }
+LABEL_13:
   v14 = 0;
-  if ( v4->m_actions.m_size > 0 )
+  if ( sys->m_actions.m_size > 0 )
   {
     v15 = 0i64;
     do
     {
-      v16 = v4->m_actions.m_data[v15];
+      v16 = sys->m_actions.m_data[v15];
       if ( v16 )
-        hkpWorld::addAction(v5, v16);
+        hkpWorld::addAction(this, v16);
       ++v14;
       ++v15;
     }
-    while ( v14 < v4->m_actions.m_size );
+    while ( v14 < sys->m_actions.m_size );
   }
-  if ( v4->m_constraints.m_size > 0 )
+  if ( sys->m_constraints.m_size > 0 )
   {
     v17 = 0i64;
     do
     {
-      v18 = v4->m_constraints.m_data[v17];
+      v18 = sys->m_constraints.m_data[v17];
       if ( v18 && (v18->m_entities[0] || v18->m_entities[1]) )
-        hkpWorld::addConstraint(v5, v18);
+        hkpWorld::addConstraint(this, v18);
       ++v3;
       ++v17;
     }
-    while ( v3 < v4->m_constraints.m_size );
+    while ( v3 < sys->m_constraints.m_size );
   }
 }
 
@@ -3682,102 +3487,98 @@ LABEL_12:
 void __fastcall hkpWorld::removePhysicsSystem(hkpWorld *this, hkpPhysicsSystem *sys)
 {
   int v2; // edi
-  hkpPhysicsSystem *v3; // rbx
-  hkpWorld *v4; // rbp
   int v5; // esi
   __int64 v6; // r14
   hkpConstraintInstance *v7; // r8
   int v8; // esi
   __int64 v9; // r14
   hkpAction *v10; // rdx
-  __int64 v11; // r8
+  __int64 m_size; // r8
   int v12; // edx
   __int64 v13; // rcx
-  hkpRigidBody **v14; // rax
+  hkpRigidBody **m_data; // rax
   __int64 v15; // r8
   int v16; // edx
   __int64 v17; // rcx
   hkpPhantom **v18; // rax
   int v19; // esi
   __int64 v20; // r14
-  hkpEntity *v21; // r8
+  hkpRigidBody *v21; // r8
   __int64 v22; // rsi
   hkpPhantom *v23; // rdx
-  hkBool result; // [rsp+48h] [rbp+10h]
+  hkBool result; // [rsp+48h] [rbp+10h] BYREF
 
   v2 = 0;
-  v3 = sys;
-  v4 = this;
   v5 = 0;
   if ( sys->m_constraints.m_size > 0 )
   {
     v6 = 0i64;
     do
     {
-      v7 = v3->m_constraints.m_data[v6];
+      v7 = sys->m_constraints.m_data[v6];
       if ( v7 && v7->m_owner )
-        hkpWorld::removeConstraint(v4, &result, v7);
+        hkpWorld::removeConstraint(this, &result, v7);
       ++v5;
       ++v6;
     }
-    while ( v5 < v3->m_constraints.m_size );
+    while ( v5 < sys->m_constraints.m_size );
   }
   v8 = 0;
-  if ( v3->m_actions.m_size > 0 )
+  if ( sys->m_actions.m_size > 0 )
   {
     v9 = 0i64;
     do
     {
-      v10 = v3->m_actions.m_data[v9];
+      v10 = sys->m_actions.m_data[v9];
       if ( v10 )
-        hkpWorld::removeAction(v4, v10);
+        hkpWorld::removeAction(this, v10);
       ++v8;
       ++v9;
     }
-    while ( v8 < v3->m_actions.m_size );
+    while ( v8 < sys->m_actions.m_size );
   }
-  v11 = v3->m_rigidBodies.m_size;
+  m_size = sys->m_rigidBodies.m_size;
   v12 = 0;
   v13 = 0i64;
-  if ( v11 <= 0 )
+  if ( m_size <= 0 )
     goto LABEL_16;
-  v14 = v3->m_rigidBodies.m_data;
-  while ( *v14 )
+  m_data = sys->m_rigidBodies.m_data;
+  while ( *m_data )
   {
     ++v13;
     ++v12;
-    ++v14;
-    if ( v13 >= v11 )
+    ++m_data;
+    if ( v13 >= m_size )
       goto LABEL_16;
   }
   if ( v12 == -1 )
   {
 LABEL_16:
-    hkpWorld::removeEntityBatch(v4, (hkpEntity *const *)v3->m_rigidBodies.m_data, v3->m_rigidBodies.m_size);
+    hkpWorld::removeEntityBatch(this, sys->m_rigidBodies.m_data, sys->m_rigidBodies.m_size);
   }
   else
   {
     v19 = 0;
-    if ( v3->m_rigidBodies.m_size > 0 )
+    if ( sys->m_rigidBodies.m_size > 0 )
     {
       v20 = 0i64;
       do
       {
-        v21 = (hkpEntity *)&v3->m_rigidBodies.m_data[v20]->vfptr;
+        v21 = sys->m_rigidBodies.m_data[v20];
         if ( v21 )
-          hkpWorld::removeEntity(v4, &result, v21);
+          hkpWorld::removeEntity(this, &result, v21);
         ++v19;
         ++v20;
       }
-      while ( v19 < v3->m_rigidBodies.m_size );
+      while ( v19 < sys->m_rigidBodies.m_size );
     }
   }
-  v15 = v3->m_phantoms.m_size;
+  v15 = sys->m_phantoms.m_size;
   v16 = 0;
   v17 = 0i64;
   if ( v15 <= 0 )
     goto LABEL_21;
-  v18 = v3->m_phantoms.m_data;
+  v18 = sys->m_phantoms.m_data;
   while ( *v18 )
   {
     ++v17;
@@ -3789,20 +3590,20 @@ LABEL_16:
   if ( v16 == -1 )
   {
 LABEL_21:
-    hkpWorld::removePhantomBatch(v4, v3->m_phantoms.m_data, v3->m_phantoms.m_size);
+    hkpWorld::removePhantomBatch(this, sys->m_phantoms.m_data, sys->m_phantoms.m_size);
   }
-  else if ( v3->m_phantoms.m_size > 0 )
+  else if ( sys->m_phantoms.m_size > 0 )
   {
     v22 = 0i64;
     do
     {
-      v23 = v3->m_phantoms.m_data[v22];
+      v23 = sys->m_phantoms.m_data[v22];
       if ( v23 )
-        hkpWorld::removePhantom(v4, v23);
+        hkpWorld::removePhantom(this, v23);
       ++v2;
       ++v22;
     }
-    while ( v2 < v3->m_phantoms.m_size );
+    while ( v2 < sys->m_phantoms.m_size );
   }
 }
 
@@ -3817,42 +3618,40 @@ void __fastcall hkpWorld::setGravity(hkpWorld *this, hkVector4f *gravity)
 // RVA: 0xD5A7A0
 void __fastcall hkpWorld::addActionListener(hkpWorld *this, hkpActionListener *worldListener)
 {
-  hkArray<hkpActionListener *,hkContainerHeapAllocator> *v2; // rbx
-  hkpActionListener *v3; // rdi
+  hkArray<hkpActionListener *,hkContainerHeapAllocator> *p_m_actionListeners; // rbx
 
-  v2 = &this->m_actionListeners;
-  v3 = worldListener;
+  p_m_actionListeners = &this->m_actionListeners;
   if ( this->m_actionListeners.m_size == (this->m_actionListeners.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v2, 8);
-  v2->m_data[v2->m_size++] = v3;
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&p_m_actionListeners->m_data, 8);
+  p_m_actionListeners->m_data[p_m_actionListeners->m_size++] = worldListener;
 }
 
 // File Line: 2179
 // RVA: 0xD5A800
 void __fastcall hkpWorld::removeActionListener(hkpWorld *this, hkpActionListener *worldListener)
 {
-  __int64 v2; // r10
-  signed int v3; // er9
+  __int64 m_size; // r10
+  int v3; // r9d
   __int64 v4; // r8
-  hkpActionListener **v5; // rax
+  hkpActionListener **m_data; // rax
 
-  v2 = this->m_actionListeners.m_size;
+  m_size = this->m_actionListeners.m_size;
   v3 = 0;
   v4 = 0i64;
-  if ( v2 <= 0 )
+  if ( m_size <= 0 )
   {
 LABEL_5:
     v3 = -1;
   }
   else
   {
-    v5 = this->m_actionListeners.m_data;
-    while ( *v5 != worldListener )
+    m_data = this->m_actionListeners.m_data;
+    while ( *m_data != worldListener )
     {
       ++v4;
       ++v3;
-      ++v5;
-      if ( v4 >= v2 )
+      ++m_data;
+      if ( v4 >= m_size )
         goto LABEL_5;
     }
   }
@@ -3863,42 +3662,40 @@ LABEL_5:
 // RVA: 0xD5A860
 void __fastcall hkpWorld::addConstraintListener(hkpWorld *this, hkpConstraintListener *worldListener)
 {
-  hkArray<hkpConstraintListener *,hkContainerHeapAllocator> *v2; // rbx
-  hkpConstraintListener *v3; // rdi
+  hkArray<hkpConstraintListener *,hkContainerHeapAllocator> *p_m_constraintListeners; // rbx
 
-  v2 = &this->m_constraintListeners;
-  v3 = worldListener;
+  p_m_constraintListeners = &this->m_constraintListeners;
   if ( this->m_constraintListeners.m_size == (this->m_constraintListeners.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v2, 8);
-  v2->m_data[v2->m_size++] = v3;
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&p_m_constraintListeners->m_data, 8);
+  p_m_constraintListeners->m_data[p_m_constraintListeners->m_size++] = worldListener;
 }
 
 // File Line: 2196
 // RVA: 0xD5A8C0
 void __fastcall hkpWorld::removeConstraintListener(hkpWorld *this, hkpConstraintListener *worldListener)
 {
-  __int64 v2; // r10
-  signed int v3; // er9
+  __int64 m_size; // r10
+  int v3; // r9d
   __int64 v4; // r8
-  hkpConstraintListener **v5; // rax
+  hkpConstraintListener **m_data; // rax
 
-  v2 = this->m_constraintListeners.m_size;
+  m_size = this->m_constraintListeners.m_size;
   v3 = 0;
   v4 = 0i64;
-  if ( v2 <= 0 )
+  if ( m_size <= 0 )
   {
 LABEL_5:
     v3 = -1;
   }
   else
   {
-    v5 = this->m_constraintListeners.m_data;
-    while ( *v5 != worldListener )
+    m_data = this->m_constraintListeners.m_data;
+    while ( *m_data != worldListener )
     {
       ++v4;
       ++v3;
-      ++v5;
-      if ( v4 >= v2 )
+      ++m_data;
+      if ( v4 >= m_size )
         goto LABEL_5;
     }
   }
@@ -3909,42 +3706,40 @@ LABEL_5:
 // RVA: 0xD5A920
 void __fastcall hkpWorld::addEntityListener(hkpWorld *this, hkpEntityListener *worldListener)
 {
-  hkArray<hkpEntityListener *,hkContainerHeapAllocator> *v2; // rbx
-  hkpEntityListener *v3; // rdi
+  hkArray<hkpEntityListener *,hkContainerHeapAllocator> *p_m_entityListeners; // rbx
 
-  v2 = &this->m_entityListeners;
-  v3 = worldListener;
+  p_m_entityListeners = &this->m_entityListeners;
   if ( this->m_entityListeners.m_size == (this->m_entityListeners.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v2, 8);
-  v2->m_data[v2->m_size++] = v3;
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&p_m_entityListeners->m_data, 8);
+  p_m_entityListeners->m_data[p_m_entityListeners->m_size++] = worldListener;
 }
 
 // File Line: 2211
 // RVA: 0xD5A980
 void __fastcall hkpWorld::removeEntityListener(hkpWorld *this, hkpEntityListener *worldListener)
 {
-  __int64 v2; // r10
-  signed int v3; // er9
+  __int64 m_size; // r10
+  int v3; // r9d
   __int64 v4; // r8
-  hkpEntityListener **v5; // rax
+  hkpEntityListener **m_data; // rax
 
-  v2 = this->m_entityListeners.m_size;
+  m_size = this->m_entityListeners.m_size;
   v3 = 0;
   v4 = 0i64;
-  if ( v2 <= 0 )
+  if ( m_size <= 0 )
   {
 LABEL_5:
     v3 = -1;
   }
   else
   {
-    v5 = this->m_entityListeners.m_data;
-    while ( *v5 != worldListener )
+    m_data = this->m_entityListeners.m_data;
+    while ( *m_data != worldListener )
     {
       ++v4;
       ++v3;
-      ++v5;
-      if ( v4 >= v2 )
+      ++m_data;
+      if ( v4 >= m_size )
         goto LABEL_5;
     }
   }
@@ -3955,42 +3750,40 @@ LABEL_5:
 // RVA: 0xD5A9E0
 void __fastcall hkpWorld::addPhantomListener(hkpWorld *this, hkpPhantomListener *worldListener)
 {
-  hkArray<hkpPhantomListener *,hkContainerHeapAllocator> *v2; // rbx
-  hkpPhantomListener *v3; // rdi
+  hkArray<hkpPhantomListener *,hkContainerHeapAllocator> *p_m_phantomListeners; // rbx
 
-  v2 = &this->m_phantomListeners;
-  v3 = worldListener;
+  p_m_phantomListeners = &this->m_phantomListeners;
   if ( this->m_phantomListeners.m_size == (this->m_phantomListeners.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v2, 8);
-  v2->m_data[v2->m_size++] = v3;
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&p_m_phantomListeners->m_data, 8);
+  p_m_phantomListeners->m_data[p_m_phantomListeners->m_size++] = worldListener;
 }
 
 // File Line: 2226
 // RVA: 0xD5AA40
 void __fastcall hkpWorld::removePhantomListener(hkpWorld *this, hkpPhantomListener *worldListener)
 {
-  __int64 v2; // r10
-  signed int v3; // er9
+  __int64 m_size; // r10
+  int v3; // r9d
   __int64 v4; // r8
-  hkpPhantomListener **v5; // rax
+  hkpPhantomListener **m_data; // rax
 
-  v2 = this->m_phantomListeners.m_size;
+  m_size = this->m_phantomListeners.m_size;
   v3 = 0;
   v4 = 0i64;
-  if ( v2 <= 0 )
+  if ( m_size <= 0 )
   {
 LABEL_5:
     v3 = -1;
   }
   else
   {
-    v5 = this->m_phantomListeners.m_data;
-    while ( *v5 != worldListener )
+    m_data = this->m_phantomListeners.m_data;
+    while ( *m_data != worldListener )
     {
       ++v4;
       ++v3;
-      ++v5;
-      if ( v4 >= v2 )
+      ++m_data;
+      if ( v4 >= m_size )
         goto LABEL_5;
     }
   }
@@ -4001,42 +3794,43 @@ LABEL_5:
 // RVA: 0xD5AAA0
 void __fastcall hkpWorld::addIslandActivationListener(hkpWorld *this, hkpIslandActivationListener *worldListener)
 {
-  hkArray<hkpIslandActivationListener *,hkContainerHeapAllocator> *v2; // rbx
-  hkpIslandActivationListener *v3; // rdi
+  hkArray<hkpIslandActivationListener *,hkContainerHeapAllocator> *p_m_islandActivationListeners; // rbx
 
-  v2 = &this->m_islandActivationListeners;
-  v3 = worldListener;
+  p_m_islandActivationListeners = &this->m_islandActivationListeners;
   if ( this->m_islandActivationListeners.m_size == (this->m_islandActivationListeners.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v2, 8);
-  v2->m_data[v2->m_size++] = v3;
+    hkArrayUtil::_reserveMore(
+      &hkContainerHeapAllocator::s_alloc,
+      (const void **)&p_m_islandActivationListeners->m_data,
+      8);
+  p_m_islandActivationListeners->m_data[p_m_islandActivationListeners->m_size++] = worldListener;
 }
 
 // File Line: 2241
 // RVA: 0xD5AB00
 void __fastcall hkpWorld::removeIslandActivationListener(hkpWorld *this, hkpIslandActivationListener *worldListener)
 {
-  __int64 v2; // r10
-  signed int v3; // er9
+  __int64 m_size; // r10
+  int v3; // r9d
   __int64 v4; // r8
-  hkpIslandActivationListener **v5; // rax
+  hkpIslandActivationListener **m_data; // rax
 
-  v2 = this->m_islandActivationListeners.m_size;
+  m_size = this->m_islandActivationListeners.m_size;
   v3 = 0;
   v4 = 0i64;
-  if ( v2 <= 0 )
+  if ( m_size <= 0 )
   {
 LABEL_5:
     v3 = -1;
   }
   else
   {
-    v5 = this->m_islandActivationListeners.m_data;
-    while ( *v5 != worldListener )
+    m_data = this->m_islandActivationListeners.m_data;
+    while ( *m_data != worldListener )
     {
       ++v4;
       ++v3;
-      ++v5;
-      if ( v4 >= v2 )
+      ++m_data;
+      if ( v4 >= m_size )
         goto LABEL_5;
     }
   }
@@ -4047,42 +3841,43 @@ LABEL_5:
 // RVA: 0xD5AB60
 void __fastcall hkpWorld::addWorldPostCollideListener(hkpWorld *this, hkpWorldPostCollideListener *worldListener)
 {
-  hkArray<hkpWorldPostCollideListener *,hkContainerHeapAllocator> *v2; // rbx
-  hkpWorldPostCollideListener *v3; // rdi
+  hkArray<hkpWorldPostCollideListener *,hkContainerHeapAllocator> *p_m_worldPostCollideListeners; // rbx
 
-  v2 = &this->m_worldPostCollideListeners;
-  v3 = worldListener;
+  p_m_worldPostCollideListeners = &this->m_worldPostCollideListeners;
   if ( this->m_worldPostCollideListeners.m_size == (this->m_worldPostCollideListeners.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v2, 8);
-  v2->m_data[v2->m_size++] = v3;
+    hkArrayUtil::_reserveMore(
+      &hkContainerHeapAllocator::s_alloc,
+      (const void **)&p_m_worldPostCollideListeners->m_data,
+      8);
+  p_m_worldPostCollideListeners->m_data[p_m_worldPostCollideListeners->m_size++] = worldListener;
 }
 
 // File Line: 2256
 // RVA: 0xD5ABC0
 void __fastcall hkpWorld::removeWorldPostCollideListener(hkpWorld *this, hkpWorldPostCollideListener *worldListener)
 {
-  __int64 v2; // r10
-  signed int v3; // er9
+  __int64 m_size; // r10
+  int v3; // r9d
   __int64 v4; // r8
-  hkpWorldPostCollideListener **v5; // rax
+  hkpWorldPostCollideListener **m_data; // rax
 
-  v2 = this->m_worldPostCollideListeners.m_size;
+  m_size = this->m_worldPostCollideListeners.m_size;
   v3 = 0;
   v4 = 0i64;
-  if ( v2 <= 0 )
+  if ( m_size <= 0 )
   {
 LABEL_5:
     v3 = -1;
   }
   else
   {
-    v5 = this->m_worldPostCollideListeners.m_data;
-    while ( *v5 != worldListener )
+    m_data = this->m_worldPostCollideListeners.m_data;
+    while ( *m_data != worldListener )
     {
       ++v4;
       ++v3;
-      ++v5;
-      if ( v4 >= v2 )
+      ++m_data;
+      if ( v4 >= m_size )
         goto LABEL_5;
     }
   }
@@ -4093,42 +3888,45 @@ LABEL_5:
 // RVA: 0xD5AC20
 void __fastcall hkpWorld::addWorldPostSimulationListener(hkpWorld *this, hkpWorldPostSimulationListener *worldListener)
 {
-  hkArray<hkpWorldPostSimulationListener *,hkContainerHeapAllocator> *v2; // rbx
-  hkpWorldPostSimulationListener *v3; // rdi
+  hkArray<hkpWorldPostSimulationListener *,hkContainerHeapAllocator> *p_m_worldPostSimulationListeners; // rbx
 
-  v2 = &this->m_worldPostSimulationListeners;
-  v3 = worldListener;
+  p_m_worldPostSimulationListeners = &this->m_worldPostSimulationListeners;
   if ( this->m_worldPostSimulationListeners.m_size == (this->m_worldPostSimulationListeners.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v2, 8);
-  v2->m_data[v2->m_size++] = v3;
+    hkArrayUtil::_reserveMore(
+      &hkContainerHeapAllocator::s_alloc,
+      (const void **)&p_m_worldPostSimulationListeners->m_data,
+      8);
+  p_m_worldPostSimulationListeners->m_data[p_m_worldPostSimulationListeners->m_size++] = worldListener;
 }
 
 // File Line: 2272
 // RVA: 0xD5AC80
-void __fastcall hkpWorld::removeWorldPostSimulationListener(hkpWorld *this, hkpWorldPostSimulationListener *worldListener)
+void __fastcall hkpWorld::removeWorldPostSimulationListener(
+        hkpWorld *this,
+        hkpWorldPostSimulationListener *worldListener)
 {
-  __int64 v2; // r10
-  signed int v3; // er9
+  __int64 m_size; // r10
+  int v3; // r9d
   __int64 v4; // r8
-  hkpWorldPostSimulationListener **v5; // rax
+  hkpWorldPostSimulationListener **m_data; // rax
 
-  v2 = this->m_worldPostSimulationListeners.m_size;
+  m_size = this->m_worldPostSimulationListeners.m_size;
   v3 = 0;
   v4 = 0i64;
-  if ( v2 <= 0 )
+  if ( m_size <= 0 )
   {
 LABEL_5:
     v3 = -1;
   }
   else
   {
-    v5 = this->m_worldPostSimulationListeners.m_data;
-    while ( *v5 != worldListener )
+    m_data = this->m_worldPostSimulationListeners.m_data;
+    while ( *m_data != worldListener )
     {
       ++v4;
       ++v3;
-      ++v5;
-      if ( v4 >= v2 )
+      ++m_data;
+      if ( v4 >= m_size )
         goto LABEL_5;
     }
   }
@@ -4139,42 +3937,45 @@ LABEL_5:
 // RVA: 0xD5ACE0
 void __fastcall hkpWorld::addWorldPostIntegrateListener(hkpWorld *this, hkpWorldPostIntegrateListener *worldListener)
 {
-  hkArray<hkpWorldPostIntegrateListener *,hkContainerHeapAllocator> *v2; // rbx
-  hkpWorldPostIntegrateListener *v3; // rdi
+  hkArray<hkpWorldPostIntegrateListener *,hkContainerHeapAllocator> *p_m_worldPostIntegrateListeners; // rbx
 
-  v2 = &this->m_worldPostIntegrateListeners;
-  v3 = worldListener;
+  p_m_worldPostIntegrateListeners = &this->m_worldPostIntegrateListeners;
   if ( this->m_worldPostIntegrateListeners.m_size == (this->m_worldPostIntegrateListeners.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v2, 8);
-  v2->m_data[v2->m_size++] = v3;
+    hkArrayUtil::_reserveMore(
+      &hkContainerHeapAllocator::s_alloc,
+      (const void **)&p_m_worldPostIntegrateListeners->m_data,
+      8);
+  p_m_worldPostIntegrateListeners->m_data[p_m_worldPostIntegrateListeners->m_size++] = worldListener;
 }
 
 // File Line: 2287
 // RVA: 0xD5AD40
-void __fastcall hkpWorld::removeWorldPostIntegrateListener(hkpWorld *this, hkpWorldPostIntegrateListener *worldListener)
+void __fastcall hkpWorld::removeWorldPostIntegrateListener(
+        hkpWorld *this,
+        hkpWorldPostIntegrateListener *worldListener)
 {
-  __int64 v2; // r10
-  signed int v3; // er9
+  __int64 m_size; // r10
+  int v3; // r9d
   __int64 v4; // r8
-  hkpWorldPostIntegrateListener **v5; // rax
+  hkpWorldPostIntegrateListener **m_data; // rax
 
-  v2 = this->m_worldPostIntegrateListeners.m_size;
+  m_size = this->m_worldPostIntegrateListeners.m_size;
   v3 = 0;
   v4 = 0i64;
-  if ( v2 <= 0 )
+  if ( m_size <= 0 )
   {
 LABEL_5:
     v3 = -1;
   }
   else
   {
-    v5 = this->m_worldPostIntegrateListeners.m_data;
-    while ( *v5 != worldListener )
+    m_data = this->m_worldPostIntegrateListeners.m_data;
+    while ( *m_data != worldListener )
     {
       ++v4;
       ++v3;
-      ++v5;
-      if ( v4 >= v2 )
+      ++m_data;
+      if ( v4 >= m_size )
         goto LABEL_5;
     }
   }
@@ -4185,42 +3986,43 @@ LABEL_5:
 // RVA: 0xD5ADA0
 void __fastcall hkpWorld::addIslandPostCollideListener(hkpWorld *this, hkpIslandPostCollideListener *islandListener)
 {
-  hkArray<hkpIslandPostCollideListener *,hkContainerHeapAllocator> *v2; // rbx
-  hkpIslandPostCollideListener *v3; // rdi
+  hkArray<hkpIslandPostCollideListener *,hkContainerHeapAllocator> *p_m_islandPostCollideListeners; // rbx
 
-  v2 = &this->m_islandPostCollideListeners;
-  v3 = islandListener;
+  p_m_islandPostCollideListeners = &this->m_islandPostCollideListeners;
   if ( this->m_islandPostCollideListeners.m_size == (this->m_islandPostCollideListeners.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v2, 8);
-  v2->m_data[v2->m_size++] = v3;
+    hkArrayUtil::_reserveMore(
+      &hkContainerHeapAllocator::s_alloc,
+      (const void **)&p_m_islandPostCollideListeners->m_data,
+      8);
+  p_m_islandPostCollideListeners->m_data[p_m_islandPostCollideListeners->m_size++] = islandListener;
 }
 
 // File Line: 2303
 // RVA: 0xD5AE00
 void __fastcall hkpWorld::removeIslandPostCollideListener(hkpWorld *this, hkpIslandPostCollideListener *islandListener)
 {
-  __int64 v2; // r10
-  signed int v3; // er9
+  __int64 m_size; // r10
+  int v3; // r9d
   __int64 v4; // r8
-  hkpIslandPostCollideListener **v5; // rax
+  hkpIslandPostCollideListener **m_data; // rax
 
-  v2 = this->m_islandPostCollideListeners.m_size;
+  m_size = this->m_islandPostCollideListeners.m_size;
   v3 = 0;
   v4 = 0i64;
-  if ( v2 <= 0 )
+  if ( m_size <= 0 )
   {
 LABEL_5:
     v3 = -1;
   }
   else
   {
-    v5 = this->m_islandPostCollideListeners.m_data;
-    while ( *v5 != islandListener )
+    m_data = this->m_islandPostCollideListeners.m_data;
+    while ( *m_data != islandListener )
     {
       ++v4;
       ++v3;
-      ++v5;
-      if ( v4 >= v2 )
+      ++m_data;
+      if ( v4 >= m_size )
         goto LABEL_5;
     }
   }
@@ -4229,44 +4031,49 @@ LABEL_5:
 
 // File Line: 2312
 // RVA: 0xD5AE60
-void __fastcall hkpWorld::addIslandPostIntegrateListener(hkpWorld *this, hkpIslandPostIntegrateListener *islandListener)
+void __fastcall hkpWorld::addIslandPostIntegrateListener(
+        hkpWorld *this,
+        hkpIslandPostIntegrateListener *islandListener)
 {
-  hkArray<hkpIslandPostIntegrateListener *,hkContainerHeapAllocator> *v2; // rbx
-  hkpIslandPostIntegrateListener *v3; // rdi
+  hkArray<hkpIslandPostIntegrateListener *,hkContainerHeapAllocator> *p_m_islandPostIntegrateListeners; // rbx
 
-  v2 = &this->m_islandPostIntegrateListeners;
-  v3 = islandListener;
+  p_m_islandPostIntegrateListeners = &this->m_islandPostIntegrateListeners;
   if ( this->m_islandPostIntegrateListeners.m_size == (this->m_islandPostIntegrateListeners.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v2, 8);
-  v2->m_data[v2->m_size++] = v3;
+    hkArrayUtil::_reserveMore(
+      &hkContainerHeapAllocator::s_alloc,
+      (const void **)&p_m_islandPostIntegrateListeners->m_data,
+      8);
+  p_m_islandPostIntegrateListeners->m_data[p_m_islandPostIntegrateListeners->m_size++] = islandListener;
 }
 
 // File Line: 2319
 // RVA: 0xD5AEC0
-void __fastcall hkpWorld::removeIslandPostIntegrateListener(hkpWorld *this, hkpIslandPostIntegrateListener *islandListener)
+void __fastcall hkpWorld::removeIslandPostIntegrateListener(
+        hkpWorld *this,
+        hkpIslandPostIntegrateListener *islandListener)
 {
-  __int64 v2; // r10
-  signed int v3; // er9
+  __int64 m_size; // r10
+  int v3; // r9d
   __int64 v4; // r8
-  hkpIslandPostIntegrateListener **v5; // rax
+  hkpIslandPostIntegrateListener **m_data; // rax
 
-  v2 = this->m_islandPostIntegrateListeners.m_size;
+  m_size = this->m_islandPostIntegrateListeners.m_size;
   v3 = 0;
   v4 = 0i64;
-  if ( v2 <= 0 )
+  if ( m_size <= 0 )
   {
 LABEL_5:
     v3 = -1;
   }
   else
   {
-    v5 = this->m_islandPostIntegrateListeners.m_data;
-    while ( *v5 != islandListener )
+    m_data = this->m_islandPostIntegrateListeners.m_data;
+    while ( *m_data != islandListener )
     {
       ++v4;
       ++v3;
-      ++v5;
-      if ( v4 >= v2 )
+      ++m_data;
+      if ( v4 >= m_size )
         goto LABEL_5;
     }
   }
@@ -4277,42 +4084,40 @@ LABEL_5:
 // RVA: 0xD5AF20
 void __fastcall hkpWorld::addContactListener(hkpWorld *this, hkpContactListener *collisionListener)
 {
-  hkArray<hkpContactListener *,hkContainerHeapAllocator> *v2; // rbx
-  hkpContactListener *v3; // rdi
+  hkArray<hkpContactListener *,hkContainerHeapAllocator> *p_m_contactListeners; // rbx
 
-  v2 = &this->m_contactListeners;
-  v3 = collisionListener;
+  p_m_contactListeners = &this->m_contactListeners;
   if ( this->m_contactListeners.m_size == (this->m_contactListeners.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v2, 8);
-  v2->m_data[v2->m_size++] = v3;
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&p_m_contactListeners->m_data, 8);
+  p_m_contactListeners->m_data[p_m_contactListeners->m_size++] = collisionListener;
 }
 
 // File Line: 2336
 // RVA: 0xD5AF80
 void __fastcall hkpWorld::removeContactListener(hkpWorld *this, hkpContactListener *collisionListener)
 {
-  __int64 v2; // r10
-  signed int v3; // er9
+  __int64 m_size; // r10
+  int v3; // r9d
   __int64 v4; // r8
-  hkpContactListener **v5; // rax
+  hkpContactListener **m_data; // rax
 
-  v2 = this->m_contactListeners.m_size;
+  m_size = this->m_contactListeners.m_size;
   v3 = 0;
   v4 = 0i64;
-  if ( v2 <= 0 )
+  if ( m_size <= 0 )
   {
 LABEL_5:
     v3 = -1;
   }
   else
   {
-    v5 = this->m_contactListeners.m_data;
-    while ( *v5 != collisionListener )
+    m_data = this->m_contactListeners.m_data;
+    while ( *m_data != collisionListener )
     {
       ++v4;
       ++v3;
-      ++v5;
-      if ( v4 >= v2 )
+      ++m_data;
+      if ( v4 >= m_size )
         goto LABEL_5;
     }
   }
@@ -4323,42 +4128,40 @@ LABEL_5:
 // RVA: 0xD5AFE0
 void __fastcall hkpWorld::addWorldDeletionListener(hkpWorld *this, hkpWorldDeletionListener *worldListener)
 {
-  hkArray<hkpWorldDeletionListener *,hkContainerHeapAllocator> *v2; // rbx
-  hkpWorldDeletionListener *v3; // rdi
+  hkArray<hkpWorldDeletionListener *,hkContainerHeapAllocator> *p_m_worldDeletionListeners; // rbx
 
-  v2 = &this->m_worldDeletionListeners;
-  v3 = worldListener;
+  p_m_worldDeletionListeners = &this->m_worldDeletionListeners;
   if ( this->m_worldDeletionListeners.m_size == (this->m_worldDeletionListeners.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v2, 8);
-  v2->m_data[v2->m_size++] = v3;
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&p_m_worldDeletionListeners->m_data, 8);
+  p_m_worldDeletionListeners->m_data[p_m_worldDeletionListeners->m_size++] = worldListener;
 }
 
 // File Line: 2352
 // RVA: 0xD5B040
 void __fastcall hkpWorld::removeWorldDeletionListener(hkpWorld *this, hkpWorldDeletionListener *worldListener)
 {
-  __int64 v2; // r10
-  signed int v3; // er9
+  __int64 m_size; // r10
+  int v3; // r9d
   __int64 v4; // r8
-  hkpWorldDeletionListener **v5; // rax
+  hkpWorldDeletionListener **m_data; // rax
 
-  v2 = this->m_worldDeletionListeners.m_size;
+  m_size = this->m_worldDeletionListeners.m_size;
   v3 = 0;
   v4 = 0i64;
-  if ( v2 <= 0 )
+  if ( m_size <= 0 )
   {
 LABEL_5:
     v3 = -1;
   }
   else
   {
-    v5 = this->m_worldDeletionListeners.m_data;
-    while ( *v5 != worldListener )
+    m_data = this->m_worldDeletionListeners.m_data;
+    while ( *m_data != worldListener )
     {
       ++v4;
       ++v3;
-      ++v5;
-      if ( v4 >= v2 )
+      ++m_data;
+      if ( v4 >= m_size )
         goto LABEL_5;
     }
   }
@@ -4367,44 +4170,49 @@ LABEL_5:
 
 // File Line: 2360
 // RVA: 0xD5B0A0
-void __fastcall hkpWorld::addContactImpulseLimitBreachedListener(hkpWorld *this, hkpContactImpulseLimitBreachedListener *listener)
+void __fastcall hkpWorld::addContactImpulseLimitBreachedListener(
+        hkpWorld *this,
+        hkpContactImpulseLimitBreachedListener *listener)
 {
-  hkArray<hkpContactImpulseLimitBreachedListener *,hkContainerHeapAllocator> *v2; // rbx
-  hkpContactImpulseLimitBreachedListener *v3; // rdi
+  hkArray<hkpContactImpulseLimitBreachedListener *,hkContainerHeapAllocator> *p_m_contactImpulseLimitBreachedListeners; // rbx
 
-  v2 = &this->m_contactImpulseLimitBreachedListeners;
-  v3 = listener;
+  p_m_contactImpulseLimitBreachedListeners = &this->m_contactImpulseLimitBreachedListeners;
   if ( this->m_contactImpulseLimitBreachedListeners.m_size == (this->m_contactImpulseLimitBreachedListeners.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v2, 8);
-  v2->m_data[v2->m_size++] = v3;
+    hkArrayUtil::_reserveMore(
+      &hkContainerHeapAllocator::s_alloc,
+      (const void **)&p_m_contactImpulseLimitBreachedListeners->m_data,
+      8);
+  p_m_contactImpulseLimitBreachedListeners->m_data[p_m_contactImpulseLimitBreachedListeners->m_size++] = listener;
 }
 
 // File Line: 2367
 // RVA: 0xD5B100
-void __fastcall hkpWorld::removeContactImpulseLimitBreachedListener(hkpWorld *this, hkpContactImpulseLimitBreachedListener *listener)
+void __fastcall hkpWorld::removeContactImpulseLimitBreachedListener(
+        hkpWorld *this,
+        hkpContactImpulseLimitBreachedListener *listener)
 {
-  __int64 v2; // r10
-  signed int v3; // er9
+  __int64 m_size; // r10
+  int v3; // r9d
   __int64 v4; // r8
-  hkpContactImpulseLimitBreachedListener **v5; // rax
+  hkpContactImpulseLimitBreachedListener **m_data; // rax
 
-  v2 = this->m_contactImpulseLimitBreachedListeners.m_size;
+  m_size = this->m_contactImpulseLimitBreachedListeners.m_size;
   v3 = 0;
   v4 = 0i64;
-  if ( v2 <= 0 )
+  if ( m_size <= 0 )
   {
 LABEL_5:
     v3 = -1;
   }
   else
   {
-    v5 = this->m_contactImpulseLimitBreachedListeners.m_data;
-    while ( *v5 != listener )
+    m_data = this->m_contactImpulseLimitBreachedListeners.m_data;
+    while ( *m_data != listener )
     {
       ++v4;
       ++v3;
-      ++v5;
-      if ( v4 >= v2 )
+      ++m_data;
+      if ( v4 >= m_size )
         goto LABEL_5;
     }
   }
@@ -4415,86 +4223,75 @@ LABEL_5:
 // RVA: 0xD5B160
 void __fastcall hkpWorld::addWorldExtension(hkpWorld *this, hkpWorldExtension *extension)
 {
-  hkArray<hkpWorldExtension *,hkContainerHeapAllocator> *v2; // rbx
-  hkpWorldExtension *v3; // rdi
-  hkpWorld *v4; // rsi
-  hkBaseObjectVtbl *v5; // rax
+  hkArray<hkpWorldExtension *,hkContainerHeapAllocator> *p_m_worldExtensions; // rbx
+  hkBaseObjectVtbl *vfptr; // rax
 
-  v2 = &this->m_worldExtensions;
-  v3 = extension;
-  v4 = this;
+  p_m_worldExtensions = &this->m_worldExtensions;
   if ( this->m_worldExtensions.m_size == (this->m_worldExtensions.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v2, 8);
-  v2->m_data[v2->m_size++] = v3;
-  hkReferencedObject::addReference((hkReferencedObject *)&v3->vfptr);
-  v5 = v3->vfptr;
-  v3->m_world = v4;
-  ((void (__fastcall *)(hkpWorldExtension *, hkpWorld *))v5[1].__first_virtual_table_function__)(v3, v4);
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&p_m_worldExtensions->m_data, 8);
+  p_m_worldExtensions->m_data[p_m_worldExtensions->m_size++] = extension;
+  hkReferencedObject::addReference(extension);
+  vfptr = extension->vfptr;
+  extension->m_world = this;
+  ((void (__fastcall *)(hkpWorldExtension *, hkpWorld *))vfptr[1].__first_virtual_table_function__)(extension, this);
 }
 
 // File Line: 2385
 // RVA: 0xD5B1E0
 void __fastcall hkpWorld::removeWorldExtension(hkpWorld *this, hkpWorldExtension *extension)
 {
-  hkpWorldExtension *v2; // rdi
-  __int64 v3; // rdx
-  signed int v4; // ebx
+  __int64 m_size; // rdx
+  int v4; // ebx
   __int64 v5; // r8
-  hkpWorld *v6; // rsi
-  hkpWorldExtension **v7; // rax
+  hkpWorldExtension **m_data; // rax
   __int64 v8; // rax
 
-  v2 = extension;
-  v3 = this->m_worldExtensions.m_size;
+  m_size = this->m_worldExtensions.m_size;
   v4 = 0;
   v5 = 0i64;
-  v6 = this;
-  if ( v3 <= 0 )
+  if ( m_size <= 0 )
   {
 LABEL_5:
     v4 = -1;
   }
   else
   {
-    v7 = this->m_worldExtensions.m_data;
-    while ( *v7 != v2 )
+    m_data = this->m_worldExtensions.m_data;
+    while ( *m_data != extension )
     {
       ++v5;
       ++v4;
-      ++v7;
-      if ( v5 >= v3 )
+      ++m_data;
+      if ( v5 >= m_size )
         goto LABEL_5;
     }
   }
-  ((void (__fastcall *)(hkpWorldExtension *, hkpWorld *, __int64))v2->vfptr[2].__vecDelDtor)(v2, this, v5);
-  v2->m_world = 0i64;
-  hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
-  v8 = --v6->m_worldExtensions.m_size;
+  ((void (__fastcall *)(hkpWorldExtension *, hkpWorld *, __int64))extension->vfptr[2].__vecDelDtor)(extension, this, v5);
+  extension->m_world = 0i64;
+  hkReferencedObject::removeReference(extension);
+  v8 = --this->m_worldExtensions.m_size;
   if ( (_DWORD)v8 != v4 )
-    v6->m_worldExtensions.m_data[v4] = v6->m_worldExtensions.m_data[v8];
+    this->m_worldExtensions.m_data[v4] = this->m_worldExtensions.m_data[v8];
 }
 
 // File Line: 2395
 // RVA: 0xD5B290
 hkpWorldExtension *__fastcall hkpWorld::findWorldExtension(hkpWorld *this, int id)
 {
-  __int64 v2; // r9
+  __int64 m_size; // r9
   __int64 v3; // r8
-  hkpWorldExtension **v4; // rax
+  hkpWorldExtension **i; // rax
 
-  v2 = this->m_worldExtensions.m_size;
+  m_size = this->m_worldExtensions.m_size;
   v3 = 0i64;
-  if ( v2 <= 0 )
+  if ( m_size <= 0 )
     return 0i64;
-  v4 = this->m_worldExtensions.m_data;
-  while ( (*v4)->m_id != id )
+  for ( i = this->m_worldExtensions.m_data; (*i)->m_id != id; ++i )
   {
-    ++v3;
-    ++v4;
-    if ( v3 >= v2 )
+    if ( ++v3 >= m_size )
       return 0i64;
   }
-  return *v4;
+  return *i;
 }
 
 // File Line: 2412
@@ -4515,26 +4312,24 @@ float __fastcall hkpWorld::getCurrentPsiTime(hkpWorld *this)
 // RVA: 0xD5C620
 __int64 __fastcall hkpWorld::stepDeltaTime(hkpWorld *this, float physicsDeltaTime)
 {
-  hkpWorld *v2; // rbx
   unsigned int v3; // edi
   int v4; // eax
-  hkpBroadPhase *v5; // rcx
+  hkpBroadPhase *m_broadPhase; // rcx
 
-  v2 = this;
   hkpWorld::lock(this);
-  hkpWorldMemoryUtil::watchHeapMemory(v2);
-  v3 = ((__int64 (*)(void))v2->m_simulation->vfptr[1].__first_virtual_table_function__)();
-  v4 = ((__int64 (*)(void))v2->m_broadPhase->vfptr[1].__first_virtual_table_function__)();
-  v5 = v2->m_broadPhase;
+  hkpWorldMemoryUtil::watchHeapMemory(this);
+  v3 = ((__int64 (__fastcall *)(hkpSimulation *))this->m_simulation->vfptr[1].__first_virtual_table_function__)(this->m_simulation);
+  v4 = ((__int64 (__fastcall *)(hkpBroadPhase *))this->m_broadPhase->vfptr[1].__first_virtual_table_function__)(this->m_broadPhase);
+  m_broadPhase = this->m_broadPhase;
   if ( v4 == 2 )
   {
-    hkpBroadPhase::s_updateTreeBroadPhaseFunction(v5, physicsDeltaTime);
+    hkpBroadPhase::s_updateTreeBroadPhaseFunction(m_broadPhase, physicsDeltaTime);
   }
-  else if ( ((unsigned int (*)(void))v5->vfptr[1].__first_virtual_table_function__)() == 3 )
+  else if ( ((unsigned int (__fastcall *)(hkpBroadPhase *))m_broadPhase->vfptr[1].__first_virtual_table_function__)(m_broadPhase) == 3 )
   {
-    hkpBroadPhase::s_updateTreeBroadPhaseFunction32(v2->m_broadPhase, physicsDeltaTime);
+    hkpBroadPhase::s_updateTreeBroadPhaseFunction32(this->m_broadPhase, physicsDeltaTime);
   }
-  hkpWorld::unlock(v2);
+  hkpWorld::unlock(this);
   return v3;
 }
 
@@ -4542,13 +4337,11 @@ __int64 __fastcall hkpWorld::stepDeltaTime(hkpWorld *this, float physicsDeltaTim
 // RVA: 0xD5C6B0
 __int64 __fastcall hkpWorld::integrate(hkpWorld *this, float physicsDeltaTime)
 {
-  hkpWorld *v2; // rdi
   unsigned int v3; // ebx
 
-  v2 = this;
   hkpWorld::lock(this);
-  v3 = ((__int64 (*)(void))v2->m_simulation->vfptr[2].__vecDelDtor)();
-  hkpWorld::unlock(v2);
+  v3 = ((__int64 (__fastcall *)(hkpSimulation *))this->m_simulation->vfptr[2].__vecDelDtor)(this->m_simulation);
+  hkpWorld::unlock(this);
   return v3;
 }
 
@@ -4556,13 +4349,11 @@ __int64 __fastcall hkpWorld::integrate(hkpWorld *this, float physicsDeltaTime)
 // RVA: 0xD5C700
 __int64 __fastcall hkpWorld::collide(hkpWorld *this)
 {
-  hkpWorld *v1; // rdi
   unsigned int v2; // ebx
 
-  v1 = this;
   hkpWorld::lock(this);
-  v2 = ((__int64 (*)(void))v1->m_simulation->vfptr[2].__first_virtual_table_function__)();
-  hkpWorld::unlock(v1);
+  v2 = ((__int64 (__fastcall *)(hkpSimulation *))this->m_simulation->vfptr[2].__first_virtual_table_function__)(this->m_simulation);
+  hkpWorld::unlock(this);
   return v2;
 }
 
@@ -4570,13 +4361,11 @@ __int64 __fastcall hkpWorld::collide(hkpWorld *this)
 // RVA: 0xD5C740
 __int64 __fastcall hkpWorld::advanceTime(hkpWorld *this)
 {
-  hkpWorld *v1; // rdi
   unsigned int v2; // ebx
 
-  v1 = this;
   hkpWorld::lock(this);
-  v2 = ((__int64 (*)(void))v1->m_simulation->vfptr[3].__vecDelDtor)();
-  hkpWorld::unlock(v1);
+  v2 = ((__int64 (__fastcall *)(hkpSimulation *))this->m_simulation->vfptr[3].__vecDelDtor)(this->m_simulation);
+  hkpWorld::unlock(this);
   return v2;
 }
 
@@ -4603,26 +4392,24 @@ bool __fastcall hkpWorld::isSimulationAtPsi(hkpWorld *this)
 
 // File Line: 2501
 // RVA: 0xD5C7B0
-hkpStepResult __fastcall hkpWorld::stepMultithreaded(hkpWorld *this, hkJobQueue *jobQueue, hkJobThreadPool *threadPool, float physicsDeltaTime)
+hkpStepResult __fastcall hkpWorld::stepMultithreaded(
+        hkpWorld *this,
+        hkJobQueue *jobQueue,
+        hkJobThreadPool *threadPool,
+        float physicsDeltaTime)
 {
-  hkJobThreadPool *v4; // rbx
-  hkJobQueue *v5; // rdi
-  hkpWorld *v6; // rsi
   hkpStepResult result; // eax
 
-  v4 = threadPool;
-  v5 = jobQueue;
-  v6 = this;
   result = hkpWorld::initMtStep(this, jobQueue, physicsDeltaTime);
   if ( result == HK_STEP_RESULT_SUCCESS )
   {
-    ((void (__fastcall *)(hkJobThreadPool *, hkJobQueue *, signed __int64))v4->vfptr[5].__first_virtual_table_function__)(
-      v4,
-      v5,
+    ((void (__fastcall *)(hkJobThreadPool *, hkJobQueue *, __int64))threadPool->vfptr[5].__first_virtual_table_function__)(
+      threadPool,
+      jobQueue,
       20i64);
-    hkJobQueue::processAllJobs(v5, 1);
-    ((void (__fastcall *)(hkJobThreadPool *))v4->vfptr[2].__vecDelDtor)(v4);
-    result = hkpWorld::finishMtStep(v6, v5, v4);
+    hkJobQueue::processAllJobs(jobQueue, 1);
+    ((void (__fastcall *)(hkJobThreadPool *))threadPool->vfptr[2].__vecDelDtor)(threadPool);
+    return hkpWorld::finishMtStep(this, jobQueue, threadPool);
   }
   return result;
 }
@@ -4631,50 +4418,43 @@ hkpStepResult __fastcall hkpWorld::stepMultithreaded(hkpWorld *this, hkJobQueue 
 // RVA: 0xD5C820
 __int64 __fastcall hkpWorld::initMtStep(hkpWorld *this, hkJobQueue *jobQueue, float physicsDeltaTime)
 {
-  hkJobQueue *v3; // rdi
-  hkpWorld *v4; // rbx
-
-  v3 = jobQueue;
-  v4 = this;
   if ( this->m_memoryWatchDog.m_pntr )
   {
     hkpWorld::lock(this);
-    hkpWorldMemoryUtil::watchHeapMemory(v4);
-    hkpWorld::unlock(v4);
+    hkpWorldMemoryUtil::watchHeapMemory(this);
+    hkpWorld::unlock(this);
   }
-  return ((__int64 (__fastcall *)(hkpSimulation *, hkJobQueue *))v4->m_simulation->vfptr[3].__first_virtual_table_function__)(
-           v4->m_simulation,
-           v3);
+  return ((__int64 (__fastcall *)(hkpSimulation *, hkJobQueue *))this->m_simulation->vfptr[3].__first_virtual_table_function__)(
+           this->m_simulation,
+           jobQueue);
 }
 
 // File Line: 2545
 // RVA: 0xD5C880
 __int64 __fastcall hkpWorld::finishMtStep(hkpWorld *this, hkJobQueue *jobQueue, hkJobThreadPool *threadPool)
 {
-  hkpWorld *v3; // rbx
   __int64 result; // rax
   int v5; // eax
-  hkpBroadPhase *v6; // rcx
+  hkpBroadPhase *m_broadPhase; // rcx
 
-  v3 = this;
   result = ((__int64 (__fastcall *)(hkpSimulation *, hkJobQueue *, hkJobThreadPool *))this->m_simulation->vfptr[4].__vecDelDtor)(
              this->m_simulation,
              jobQueue,
              threadPool);
   if ( !(_DWORD)result )
   {
-    v5 = ((__int64 (*)(void))v3->m_broadPhase->vfptr[1].__first_virtual_table_function__)();
-    v6 = v3->m_broadPhase;
+    v5 = ((__int64 (__fastcall *)(hkpBroadPhase *))this->m_broadPhase->vfptr[1].__first_virtual_table_function__)(this->m_broadPhase);
+    m_broadPhase = this->m_broadPhase;
     if ( v5 == 2 )
     {
-      hkpBroadPhase::s_updateTreeBroadPhaseFunction(v6, v3->m_simulation->m_physicsDeltaTime);
-      result = 0i64;
+      hkpBroadPhase::s_updateTreeBroadPhaseFunction(m_broadPhase, this->m_simulation->m_physicsDeltaTime);
+      return 0i64;
     }
     else
     {
-      if ( ((unsigned int (*)(void))v6->vfptr[1].__first_virtual_table_function__)() == 3 )
-        hkpBroadPhase::s_updateTreeBroadPhaseFunction32(v3->m_broadPhase, v3->m_simulation->m_physicsDeltaTime);
-      result = 0i64;
+      if ( ((unsigned int (__fastcall *)(hkpBroadPhase *))m_broadPhase->vfptr[1].__first_virtual_table_function__)(m_broadPhase) == 3 )
+        hkpBroadPhase::s_updateTreeBroadPhaseFunction32(this->m_broadPhase, this->m_simulation->m_physicsDeltaTime);
+      return 0i64;
     }
   }
   return result;
@@ -4717,104 +4497,99 @@ void __fastcall hkpWorld::checkDeterminism(hkpWorld *this)
 // RVA: 0xD56C40
 void __fastcall hkpWorld::getCinfo(hkpWorld *this, hkpWorldCinfo *info)
 {
-  hkpWorldCinfo *v2; // rbx
-  hkpWorld *v3; // rdi
-  hkpCollisionFilter *v4; // rsi
-  hkReferencedObject *v5; // rcx
-  hkpConvexListFilter *v6; // rsi
-  hkReferencedObject *v7; // rcx
-  hkpBroadPhaseBorder *v8; // rax
-  hkpWorldCinfo::BroadPhaseBorderBehaviour v9; // eax
+  hkpCollisionFilter *m_collisionFilter; // rsi
+  hkpCollisionFilter *m_pntr; // rcx
+  hkpConvexListFilter *m_convexListFilter; // rsi
+  hkpConvexListFilter *v7; // rcx
+  hkpBroadPhaseBorder *m_broadPhaseBorder; // rax
+  hkpWorldCinfo::BroadPhaseBorderBehaviour m_type; // eax
   hkpBroadPhaseBorder *v10; // rax
-  hkReferencedObject *v11; // rcx
-  hkReferencedObject *v12; // rcx
-  char v13; // [rsp+30h] [rbp+8h]
+  hkWorldMemoryAvailableWatchDog *v11; // rcx
+  hkWorldMemoryAvailableWatchDog *v12; // rcx
+  char m_bool; // [rsp+30h] [rbp+8h]
 
-  v2 = info;
-  v3 = this;
   info->m_gravity = this->m_gravity;
   info->m_broadPhaseQuerySize = this->m_broadPhaseQuerySize;
-  info->m_broadPhaseWorldAabb.m_min = this->m_broadPhaseExtents[0];
-  info->m_broadPhaseWorldAabb.m_max = this->m_broadPhaseExtents[1];
+  info->m_broadPhaseWorldAabb = *(hkAabb *)this->m_broadPhaseExtents[0].m_quad.m128_i8;
   info->m_collisionTolerance = this->m_collisionInput->m_tolerance.m_storage;
-  v4 = this->m_collisionFilter;
-  if ( v4 )
-    hkReferencedObject::addReference((hkReferencedObject *)&this->m_collisionFilter->vfptr);
-  v5 = (hkReferencedObject *)&v2->m_collisionFilter.m_pntr->vfptr;
-  if ( v5 )
-    hkReferencedObject::removeReference(v5);
-  v2->m_collisionFilter.m_pntr = v4;
-  v6 = v3->m_convexListFilter;
-  if ( v6 )
-    hkReferencedObject::addReference((hkReferencedObject *)&v3->m_convexListFilter->vfptr);
-  v7 = (hkReferencedObject *)&v2->m_convexListFilter.m_pntr->vfptr;
+  m_collisionFilter = this->m_collisionFilter;
+  if ( m_collisionFilter )
+    hkReferencedObject::addReference(this->m_collisionFilter);
+  m_pntr = info->m_collisionFilter.m_pntr;
+  if ( m_pntr )
+    hkReferencedObject::removeReference(m_pntr);
+  info->m_collisionFilter.m_pntr = m_collisionFilter;
+  m_convexListFilter = this->m_convexListFilter;
+  if ( m_convexListFilter )
+    hkReferencedObject::addReference(this->m_convexListFilter);
+  v7 = info->m_convexListFilter.m_pntr;
   if ( v7 )
     hkReferencedObject::removeReference(v7);
-  v2->m_convexListFilter.m_pntr = v6;
-  v2->m_broadPhaseType.m_storage = v3->m_broadPhaseType.m_storage;
-  v8 = v3->m_broadPhaseBorder;
-  if ( v8 )
-    v9 = v8->m_type;
+  info->m_convexListFilter.m_pntr = m_convexListFilter;
+  info->m_broadPhaseType.m_storage = this->m_broadPhaseType.m_storage;
+  m_broadPhaseBorder = this->m_broadPhaseBorder;
+  if ( m_broadPhaseBorder )
+    m_type = m_broadPhaseBorder->m_type;
   else
-    LOBYTE(v9) = 3;
-  v2->m_broadPhaseBorderBehaviour.m_storage = v9;
-  v10 = v3->m_broadPhaseBorder;
+    LOBYTE(m_type) = 3;
+  info->m_broadPhaseBorderBehaviour.m_storage = m_type;
+  v10 = this->m_broadPhaseBorder;
   if ( v10 )
-    v13 = v10->m_postponeAndSortCallbacks.m_bool;
+    m_bool = v10->m_postponeAndSortCallbacks.m_bool;
   else
-    v13 = 0;
-  v2->m_mtPostponeAndSortBroadPhaseBorderCallbacks.m_bool = v13;
-  v2->m_expectedMaxLinearVelocity = v3->m_collisionDispatcher->m_expectedMaxLinearVelocity;
-  v2->m_expectedMinPsiDeltaTime = v3->m_collisionDispatcher->m_expectedMinPsiDeltaTime;
-  v2->m_snapCollisionToConvexEdgeThreshold = v3->m_snapCollisionToConvexEdgeThreshold;
-  v2->m_snapCollisionToConvexEdgeThreshold = v3->m_snapCollisionToConcaveEdgeThreshold;
-  v2->m_enableToiWeldRejection.m_bool = v3->m_enableToiWeldRejection.m_bool;
-  v11 = (hkReferencedObject *)&v3->m_memoryWatchDog.m_pntr->vfptr;
+    m_bool = 0;
+  info->m_mtPostponeAndSortBroadPhaseBorderCallbacks.m_bool = m_bool;
+  info->m_expectedMaxLinearVelocity = this->m_collisionDispatcher->m_expectedMaxLinearVelocity;
+  info->m_expectedMinPsiDeltaTime = this->m_collisionDispatcher->m_expectedMinPsiDeltaTime;
+  info->m_snapCollisionToConvexEdgeThreshold = this->m_snapCollisionToConvexEdgeThreshold;
+  info->m_snapCollisionToConvexEdgeThreshold = this->m_snapCollisionToConcaveEdgeThreshold;
+  info->m_enableToiWeldRejection.m_bool = this->m_enableToiWeldRejection.m_bool;
+  v11 = this->m_memoryWatchDog.m_pntr;
   if ( v11 )
     hkReferencedObject::addReference(v11);
-  v12 = (hkReferencedObject *)&v2->m_memoryWatchDog.m_pntr->vfptr;
+  v12 = info->m_memoryWatchDog.m_pntr;
   if ( v12 )
     hkReferencedObject::removeReference(v12);
-  v2->m_memoryWatchDog.m_pntr = v3->m_memoryWatchDog.m_pntr;
-  v2->m_broadPhaseNumMarkers = v3->m_broadPhaseNumMarkers;
-  v2->m_sizeOfToiEventQueue = v3->m_sizeOfToiEventQueue;
-  v2->m_contactPointGeneration.m_storage = v3->m_contactPointGeneration.m_storage;
-  v2->m_allowToSkipConfirmedCallbacks.m_bool = v3->m_collisionInput->m_allowToSkipConfirmedCallbacks.m_bool;
-  v2->m_contactRestingVelocity = v3->m_dynamicsStepInfo.m_solverInfo.m_contactRestingVelocity;
-  v2->m_solverTau = v3->m_dynamicsStepInfo.m_solverInfo.m_tau;
-  v2->m_solverDamp = v3->m_dynamicsStepInfo.m_solverInfo.m_damping;
-  v2->m_solverIterations = v3->m_dynamicsStepInfo.m_solverInfo.m_numSteps;
-  v2->m_solverMicrosteps = v3->m_dynamicsStepInfo.m_solverInfo.m_numMicroSteps;
-  v2->m_maxConstraintViolation = fsqrt(v3->m_dynamicsStepInfo.m_solverInfo.m_maxConstraintViolationSqrd);
-  v2->m_forceCoherentConstraintOrderingInSolver.m_bool = v3->m_dynamicsStepInfo.m_solverInfo.m_forceCoherentConstraintOrderingInSolver.m_bool;
-  v2->m_deactivationNumInactiveFramesSelectFlag0 = v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationNumInactiveFramesSelectFlag[0];
-  v2->m_deactivationNumInactiveFramesSelectFlag1 = v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationNumInactiveFramesSelectFlag[1];
-  v2->m_deactivationIntegrateCounter = v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationIntegrateCounter;
-  v2->m_iterativeLinearCastEarlyOutDistance = v3->m_collisionInput->m_config->m_iterativeLinearCastEarlyOutDistance;
-  v2->m_iterativeLinearCastMaxIterations = v3->m_collisionInput->m_config->m_iterativeLinearCastMaxIterations;
-  v2->m_enableDeprecatedWelding.m_bool = v3->m_collisionInput->m_enableDeprecatedWelding.m_bool;
-  v2->m_shouldActivateOnRigidBodyTransformChange.m_bool = v3->m_shouldActivateOnRigidBodyTransformChange.m_bool;
-  v2->m_toiCollisionResponseRotateNormal = v3->m_toiCollisionResponseRotateNormal;
-  v2->m_useCompoundSpuElf.m_bool = v3->m_useCompoundSpuElf.m_bool;
-  v2->m_maxSectorsPerMidphaseCollideTask = v3->m_maxSectorsPerMidphaseCollideTask;
-  v2->m_maxSectorsPerNarrowphaseCollideTask = v3->m_maxSectorsPerNarrowphaseCollideTask;
-  v2->m_processToisMultithreaded.m_bool = v3->m_processToisMultithreaded.m_bool;
-  v2->m_maxEntriesPerToiMidphaseCollideTask = v3->m_maxEntriesPerToiMidphaseCollideTask;
-  v2->m_maxEntriesPerToiNarrowphaseCollideTask = v3->m_maxEntriesPerToiNarrowphaseCollideTask;
-  v2->m_maxNumToiCollisionPairsSinglethreaded = v3->m_maxNumToiCollisionPairsSinglethreaded;
-  v2->m_deactivationReferenceDistance = v3->m_deactivationReferenceDistance;
-  v2->m_numToisTillAllowedPenetrationSimplifiedToi = v3->m_numToisTillAllowedPenetrationSimplifiedToi;
-  v2->m_numToisTillAllowedPenetrationToi = v3->m_numToisTillAllowedPenetrationToi;
-  v2->m_numToisTillAllowedPenetrationToiHigher = v3->m_numToisTillAllowedPenetrationToiHigher;
-  v2->m_numToisTillAllowedPenetrationToiForced = v3->m_numToisTillAllowedPenetrationToiForced;
-  v2->m_enableDeactivation.m_bool = v3->m_wantDeactivation.m_bool;
-  v2->m_simulationType.m_storage = v3->m_simulationType.m_storage;
-  v2->m_frameMarkerPsiSnap = v3->m_simulation->m_frameMarkerPsiSnap;
-  v2->m_enableSimulationIslands.m_bool = v3->m_wantSimulationIslands.m_bool;
-  v2->m_processActionsInSingleThread.m_bool = v3->m_processActionsInSingleThread.m_bool;
-  v2->m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob.m_bool = v3->m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob.m_bool;
-  v2->m_minDesiredIslandSize = v3->m_minDesiredIslandSize;
-  v2->m_fireCollisionCallbacks.m_bool = hkpWorld::findWorldExtension(v3, 1001) != 0i64;
+  info->m_memoryWatchDog.m_pntr = this->m_memoryWatchDog.m_pntr;
+  info->m_broadPhaseNumMarkers = this->m_broadPhaseNumMarkers;
+  info->m_sizeOfToiEventQueue = this->m_sizeOfToiEventQueue;
+  info->m_contactPointGeneration.m_storage = this->m_contactPointGeneration.m_storage;
+  info->m_allowToSkipConfirmedCallbacks.m_bool = this->m_collisionInput->m_allowToSkipConfirmedCallbacks.m_bool;
+  info->m_contactRestingVelocity = this->m_dynamicsStepInfo.m_solverInfo.m_contactRestingVelocity;
+  info->m_solverTau = this->m_dynamicsStepInfo.m_solverInfo.m_tau;
+  info->m_solverDamp = this->m_dynamicsStepInfo.m_solverInfo.m_damping;
+  info->m_solverIterations = this->m_dynamicsStepInfo.m_solverInfo.m_numSteps;
+  info->m_solverMicrosteps = this->m_dynamicsStepInfo.m_solverInfo.m_numMicroSteps;
+  info->m_maxConstraintViolation = fsqrt(this->m_dynamicsStepInfo.m_solverInfo.m_maxConstraintViolationSqrd);
+  info->m_forceCoherentConstraintOrderingInSolver.m_bool = this->m_dynamicsStepInfo.m_solverInfo.m_forceCoherentConstraintOrderingInSolver.m_bool;
+  info->m_deactivationNumInactiveFramesSelectFlag0 = this->m_dynamicsStepInfo.m_solverInfo.m_deactivationNumInactiveFramesSelectFlag[0];
+  info->m_deactivationNumInactiveFramesSelectFlag1 = this->m_dynamicsStepInfo.m_solverInfo.m_deactivationNumInactiveFramesSelectFlag[1];
+  info->m_deactivationIntegrateCounter = this->m_dynamicsStepInfo.m_solverInfo.m_deactivationIntegrateCounter;
+  info->m_iterativeLinearCastEarlyOutDistance = this->m_collisionInput->m_config->m_iterativeLinearCastEarlyOutDistance;
+  info->m_iterativeLinearCastMaxIterations = this->m_collisionInput->m_config->m_iterativeLinearCastMaxIterations;
+  info->m_enableDeprecatedWelding.m_bool = this->m_collisionInput->m_enableDeprecatedWelding.m_bool;
+  info->m_shouldActivateOnRigidBodyTransformChange.m_bool = this->m_shouldActivateOnRigidBodyTransformChange.m_bool;
+  info->m_toiCollisionResponseRotateNormal = this->m_toiCollisionResponseRotateNormal;
+  info->m_useCompoundSpuElf.m_bool = this->m_useCompoundSpuElf.m_bool;
+  info->m_maxSectorsPerMidphaseCollideTask = this->m_maxSectorsPerMidphaseCollideTask;
+  info->m_maxSectorsPerNarrowphaseCollideTask = this->m_maxSectorsPerNarrowphaseCollideTask;
+  info->m_processToisMultithreaded.m_bool = this->m_processToisMultithreaded.m_bool;
+  info->m_maxEntriesPerToiMidphaseCollideTask = this->m_maxEntriesPerToiMidphaseCollideTask;
+  info->m_maxEntriesPerToiNarrowphaseCollideTask = this->m_maxEntriesPerToiNarrowphaseCollideTask;
+  info->m_maxNumToiCollisionPairsSinglethreaded = this->m_maxNumToiCollisionPairsSinglethreaded;
+  info->m_deactivationReferenceDistance = this->m_deactivationReferenceDistance;
+  info->m_numToisTillAllowedPenetrationSimplifiedToi = this->m_numToisTillAllowedPenetrationSimplifiedToi;
+  info->m_numToisTillAllowedPenetrationToi = this->m_numToisTillAllowedPenetrationToi;
+  info->m_numToisTillAllowedPenetrationToiHigher = this->m_numToisTillAllowedPenetrationToiHigher;
+  info->m_numToisTillAllowedPenetrationToiForced = this->m_numToisTillAllowedPenetrationToiForced;
+  info->m_enableDeactivation.m_bool = this->m_wantDeactivation.m_bool;
+  info->m_simulationType.m_storage = this->m_simulationType.m_storage;
+  info->m_frameMarkerPsiSnap = this->m_simulation->m_frameMarkerPsiSnap;
+  info->m_enableSimulationIslands.m_bool = this->m_wantSimulationIslands.m_bool;
+  info->m_processActionsInSingleThread.m_bool = this->m_processActionsInSingleThread.m_bool;
+  info->m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob.m_bool = this->m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob.m_bool;
+  info->m_minDesiredIslandSize = this->m_minDesiredIslandSize;
+  info->m_fireCollisionCallbacks.m_bool = hkpWorld::findWorldExtension(this, 1001) != 0i64;
 }
 
 // File Line: 2839
@@ -4828,37 +4603,31 @@ hkWorldMemoryAvailableWatchDog *__fastcall hkpWorld::getMemoryWatchDog(hkpWorld 
 // RVA: 0xD5A5F0
 void __fastcall hkpWorld::setMemoryWatchDog(hkpWorld *this, hkWorldMemoryAvailableWatchDog *watchDog)
 {
-  hkWorldMemoryAvailableWatchDog *v2; // rbx
-  hkpWorld *v3; // rdi
-  hkReferencedObject *v4; // rcx
+  hkWorldMemoryAvailableWatchDog *m_pntr; // rcx
 
-  v2 = watchDog;
-  v3 = this;
   if ( watchDog )
-    hkReferencedObject::addReference((hkReferencedObject *)&watchDog->vfptr);
-  v4 = (hkReferencedObject *)&v3->m_memoryWatchDog.m_pntr->vfptr;
-  if ( v4 )
-    hkReferencedObject::removeReference(v4);
-  v3->m_memoryWatchDog.m_pntr = v2;
+    hkReferencedObject::addReference(watchDog);
+  m_pntr = this->m_memoryWatchDog.m_pntr;
+  if ( m_pntr )
+    hkReferencedObject::removeReference(m_pntr);
+  this->m_memoryWatchDog.m_pntr = watchDog;
 }
 
 // File Line: 2852
 // RVA: 0xD55700
 void __fastcall hkpWorld::hkpWorld(hkpWorld *this, hkpWorldCinfo *infoBase, unsigned int sdkversion)
 {
-  hkpWorld *v3; // rsi
-  unsigned int v4; // edi
-  _QWORD **v5; // rax
+  _QWORD **Value; // rax
   hkpViolatedConstraintArray *v6; // rax
   _QWORD **v7; // rax
   hkpWorldOperationQueue *v8; // rax
   hkpWorldOperationQueue *v9; // rax
   __m128 v10; // xmm15
   __m128 v11; // xmm14
-  int v12; // er8
-  char v13; // al
-  hkReferencedObject *v14; // rbx
-  int v15; // eax
+  int m_pntr; // r8d
+  char m_storage; // al
+  hkpBroadPhase *m_broadPhase; // rbx
+  int m_broadPhaseQuerySize; // eax
   hkOstream *v16; // rax
   hkOstream *v17; // rax
   hkOstream *v18; // rax
@@ -4867,40 +4636,40 @@ void __fastcall hkpWorld::hkpWorld(hkpWorld *this, hkpWorldCinfo *infoBase, unsi
   hkVector4f v21; // xmm7
   float v22; // xmm1_4
   float v23; // xmm0_4
-  hkpConvexListFilter *v24; // kr00_8
-  char v25; // di
-  float v26; // xmm5_4
-  __m128 v27; // xmm4
-  int v28; // xmm0_4
-  float v29; // xmm13_4
-  char v30; // al
-  float v31; // xmm5_4
-  __int128 v32; // xmm1
-  int v33; // eax
-  float v34; // eax
-  __m128 v35; // xmm0
-  __m128i v36; // xmm0
-  int v37; // eax
-  __m128i v38; // xmm0
-  __m128 v39; // xmm7
-  __m128 v40; // xmm3
-  __m128 v41; // xmm2
-  float v42; // xmm10_4
-  float v43; // xmm0_4
-  float v44; // xmm2_4
-  float v45; // xmm7_4
-  float v46; // xmm6_4
-  float v47; // xmm5_4
-  float v48; // xmm13_4
-  float v49; // xmm1_4
+  float v24; // xmm3_4
+  float v25; // xmm2_4
+  char m_broadPhaseNumMarkers; // di
+  float v27; // xmm5_4
+  __m128 m_pntr_high; // xmm4
+  int m_solverMicrosteps; // xmm0_4
+  float v30; // xmm13_4
+  char m_maxConstraintViolation_low; // al
+  float v32; // xmm5_4
+  __int128 v33; // xmm1
+  int v34; // eax
+  unsigned int m_expectedMaxLinearVelocity_low; // eax
+  __m128 v36; // xmm0
+  __m128i v37; // xmm0
+  int m_sizeOfToiEventQueue; // eax
+  __m128i v39; // xmm0
+  __m128 v40; // xmm7
+  __m128 v41; // xmm3
+  __m128 v42; // xmm2
+  float v43; // xmm10_4
+  float m_invNumSteps; // xmm0_4
+  float v45; // xmm2_4
+  float v46; // xmm7_4
+  float v47; // xmm6_4
+  float v48; // xmm5_4
+  float v49; // xmm13_4
   float v50; // xmm2_4
-  hkReferencedObject *v51; // rbx
+  hkWorldMemoryAvailableWatchDog *v51; // rbx
   float v52; // xmm2_4
   float v53; // xmm2_4
   float v54; // xmm1_4
-  hkReferencedObject *v55; // rcx
+  hkWorldMemoryAvailableWatchDog *v55; // rcx
   char v56; // al
-  char v57; // cl
+  char m_maxSectorsPerMidphaseCollideTask; // cl
   _QWORD **v58; // rax
   hkpTypedBroadPhaseDispatcher *v59; // rax
   hkpTypedBroadPhaseDispatcher *v60; // rax
@@ -4911,24 +4680,24 @@ void __fastcall hkpWorld::hkpWorld(hkpWorld *this, hkpWorldCinfo *infoBase, unsi
   hkpEntityEntityBroadPhaseListener *v65; // rax
   _QWORD **v66; // rax
   __int64 v67; // rax
-  hkpPhantomBroadPhaseListener *v68; // rax
-  signed __int64 v69; // rcx
+  hkpPhantomBroadPhaseListener *m_phantomBroadPhaseListener; // rax
+  hkpBroadPhaseListener *v69; // rcx
   hkpPhantomBroadPhaseListener *v70; // rcx
-  signed __int64 v71; // rcx
+  hkpBroadPhaseListener *v71; // rcx
   hkpPhantomBroadPhaseListener *v72; // rcx
-  signed __int64 v73; // rcx
-  hkpEntityEntityBroadPhaseListener *v74; // rcx
-  signed __int64 v75; // rcx
-  hkpBroadPhaseBorderListener *v76; // rcx
-  signed __int64 v77; // rcx
+  hkpBroadPhaseListener *v73; // rcx
+  hkpEntityEntityBroadPhaseListener *m_entityEntityBroadPhaseListener; // rcx
+  hkpBroadPhaseListener *v75; // rcx
+  hkpBroadPhaseBorderListener *m_broadPhaseBorderListener; // rcx
+  hkpBroadPhaseListener *v77; // rcx
   hkpBroadPhaseBorderListener *v78; // rcx
-  signed __int64 v79; // rcx
+  hkpBroadPhaseListener *v79; // rcx
   hkpBroadPhaseBorderListener *v80; // rcx
-  signed __int64 v81; // rcx
+  hkpBroadPhaseListener *v81; // rcx
   hkpBroadPhaseBorderListener *v82; // rcx
-  signed __int64 v83; // rcx
+  hkpBroadPhaseListener *v83; // rcx
   hkpBroadPhaseBorderListener *v84; // rax
-  signed __int64 v85; // rcx
+  hkpBroadPhaseListener *v85; // rcx
   _QWORD **v86; // rax
   hkpSimpleConstraintContactMgr::Factory *v87; // rax
   hkpContactMgrFactory *v88; // rax
@@ -4947,7 +4716,7 @@ void __fastcall hkpWorld::hkpWorld(hkpWorld *this, hkpWorldCinfo *infoBase, unsi
   hkReferencedObject *v101; // rcx
   _QWORD **v102; // rax
   __int64 v103; // rax
-  __m128i *v104; // r14
+  __int64 v104; // r14
   int v105; // xmm0_4
   char v106; // bl
   char v107; // al
@@ -4957,380 +4726,364 @@ void __fastcall hkpWorld::hkpWorld(hkpWorld *this, hkpWorldCinfo *infoBase, unsi
   __m128 v111; // xmm14
   __m128 v112; // xmm1
   __int64 v113; // rax
-  __m128 *v114; // r9
-  _OWORD *v115; // rdx
-  __m128 v116; // xmm2
-  __m128 *v117; // r8
-  __m128 v118; // xmm2
-  bool v119; // zf
-  char v120; // r14
-  _QWORD **v121; // rax
-  hkCriticalSection *v122; // rax
+  __m128 v114; // xmm2
+  __m128 v115; // xmm2
+  bool v116; // zf
+  char v117; // r14
+  _QWORD **v118; // rax
+  hkCriticalSection *v119; // rax
+  _QWORD **v120; // rax
+  hkCriticalSection *v121; // rax
+  hkpSimulation *Discrete; // rax
   _QWORD **v123; // rax
   hkCriticalSection *v124; // rax
-  hkpSimulation *v125; // rax
-  _QWORD **v126; // rax
-  hkCriticalSection *v127; // rax
-  int v128; // xmm0_4
-  __m128 v129; // xmm1
-  __m128 v130; // xmm2
-  __m128 v131; // xmm1
-  float v132; // xmm6_4
-  unsigned int v133; // xmm5_4
-  float v134; // xmm4_4
-  float v135; // xmm3_4
-  hkpProcessCollisionInput *v136; // rax
-  hkpCollisionDispatcher *v137; // rcx
-  int v138; // xmm2_4
-  float v139; // xmm1_4
-  float v140; // xmm0_4
+  int m_maxEntriesPerToiMidphaseCollideTask; // xmm0_4
+  __m128 v126; // xmm1
+  __m128 v127; // xmm2
+  __m128 v128; // xmm1
+  float v129; // xmm6_4
+  float v130; // xmm5_4
+  float m_deactivationReferenceDistance; // xmm4_4
+  float m_toiCollisionResponseRotateNormal; // xmm3_4
+  hkpProcessCollisionInput *m_collisionInput; // rax
+  hkpCollisionDispatcher *m_collisionDispatcher; // rcx
+  float v135; // xmm2_4
+  float v136; // xmm1_4
+  float v137; // xmm0_4
+  _QWORD **v138; // rax
+  hkpSimulationIsland *v139; // rax
+  hkpSimulationIsland *v140; // rax
   _QWORD **v141; // rax
   hkpSimulationIsland *v142; // rax
   hkpSimulationIsland *v143; // rax
-  _QWORD **v144; // rax
-  hkpSimulationIsland *v145; // rax
-  hkpSimulationIsland *v146; // rax
-  hkpSimulationIsland *v147; // rbx
-  _QWORD **v148; // rax
-  hkpRigidBody *v149; // rax
-  hkpRigidBody *v150; // rax
-  char v151; // bl
-  _DWORD *v152; // rcx
-  _QWORD **v153; // rax
-  hkpBroadPhaseBorder *v154; // rax
-  hkpBroadPhaseBorder *v155; // rax
-  _QWORD **v156; // rax
-  hkpDefaultWorldMaintenanceMgr *v157; // rax
-  hkpWorldMaintenanceMgr *v158; // rax
-  hkpWorldMaintenanceMgr *v159; // rcx
-  hkpWorld *v160; // rdx
-  _QWORD **v161; // rax
-  __int64 v162; // rax
-  hkReferencedObject *v163; // rcx
-  hkErrStream v164; // [rsp+20h] [rbp-B8h]
-  float v165; // [rsp+38h] [rbp-A0h]
-  int v166; // [rsp+3Ch] [rbp-9Ch]
-  int v167; // [rsp+40h] [rbp-98h]
-  int v168; // [rsp+44h] [rbp-94h]
-  bool v169; // [rsp+48h] [rbp-90h]
-  bool v170; // [rsp+49h] [rbp-8Fh]
-  bool v171; // [rsp+4Ah] [rbp-8Eh]
-  char v172; // [rsp+4Bh] [rbp-8Dh]
-  hkpWorldCinfo v173; // [rsp+50h] [rbp-88h]
-  int v174; // [rsp+1B8h] [rbp+E0h]
-  char v175; // [rsp+1DCh] [rbp+104h]
-  char buf; // [rsp+208h] [rbp+130h]
-  float v177; // [rsp+4E8h] [rbp+410h]
+  hkpSimulationIsland *v144; // rbx
+  _QWORD **v145; // rax
+  hkpRigidBody *v146; // rax
+  hkpRigidBody *v147; // rax
+  char v148; // bl
+  _QWORD **v149; // rax
+  hkpBroadPhaseBorder *v150; // rax
+  hkpBroadPhaseBorder *v151; // rax
+  _QWORD **v152; // rax
+  hkpDefaultWorldMaintenanceMgr *v153; // rax
+  hkpWorldMaintenanceMgr *v154; // rax
+  hkpWorldMaintenanceMgr *v155; // rcx
+  hkpWorld *v156; // rdx
+  _QWORD **v157; // rax
+  hkpMtThreadStructure *v158; // rax
+  hkReferencedObject *v159; // rcx
+  hkpCollisionDispatcher::InitCollisionQualityInfo v160; // [rsp+20h] [rbp-B8h] BYREF
+  hkpWorldCinfo v161; // [rsp+50h] [rbp-88h] BYREF
+  int v162; // [rsp+1B8h] [rbp+E0h]
+  char v163; // [rsp+1DCh] [rbp+104h]
+  char buf[712]; // [rsp+208h] [rbp+130h] BYREF
+  float v165; // [rsp+4E8h] [rbp+410h]
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  v3 = this;
-  v4 = sdkversion;
   this->vfptr = (hkBaseObjectVtbl *)&hkpWorld::`vftable;
   this->m_activeSimulationIslands.m_data = 0i64;
   this->m_activeSimulationIslands.m_size = 0;
-  this->m_activeSimulationIslands.m_capacityAndFlags = 2147483648;
+  this->m_activeSimulationIslands.m_capacityAndFlags = 0x80000000;
   this->m_inactiveSimulationIslands.m_data = 0i64;
   this->m_inactiveSimulationIslands.m_size = 0;
-  this->m_inactiveSimulationIslands.m_capacityAndFlags = 2147483648;
+  this->m_inactiveSimulationIslands.m_capacityAndFlags = 0x80000000;
   this->m_dirtySimulationIslands.m_data = 0i64;
   this->m_dirtySimulationIslands.m_size = 0;
-  this->m_dirtySimulationIslands.m_capacityAndFlags = 2147483648;
+  this->m_dirtySimulationIslands.m_capacityAndFlags = 0x80000000;
   this->m_memoryWatchDog.m_pntr = 0i64;
   this->m_multiThreadCheck.m_threadId = -15;
-  this->m_multiThreadCheck.m_markCount = -32768;
+  this->m_multiThreadCheck.m_markCount = 0x8000;
   this->m_phantoms.m_data = 0i64;
   this->m_phantoms.m_size = 0;
-  this->m_phantoms.m_capacityAndFlags = 2147483648;
+  this->m_phantoms.m_capacityAndFlags = 0x80000000;
   this->m_actionListeners.m_data = 0i64;
   this->m_actionListeners.m_size = 0;
-  this->m_actionListeners.m_capacityAndFlags = 2147483648;
+  this->m_actionListeners.m_capacityAndFlags = 0x80000000;
   this->m_entityListeners.m_data = 0i64;
   this->m_entityListeners.m_size = 0;
-  this->m_entityListeners.m_capacityAndFlags = 2147483648;
+  this->m_entityListeners.m_capacityAndFlags = 0x80000000;
   this->m_phantomListeners.m_data = 0i64;
   this->m_phantomListeners.m_size = 0;
-  this->m_phantomListeners.m_capacityAndFlags = 2147483648;
+  this->m_phantomListeners.m_capacityAndFlags = 0x80000000;
   this->m_constraintListeners.m_data = 0i64;
   this->m_constraintListeners.m_size = 0;
-  this->m_constraintListeners.m_capacityAndFlags = 2147483648;
+  this->m_constraintListeners.m_capacityAndFlags = 0x80000000;
   this->m_worldDeletionListeners.m_data = 0i64;
   this->m_worldDeletionListeners.m_size = 0;
-  this->m_worldDeletionListeners.m_capacityAndFlags = 2147483648;
+  this->m_worldDeletionListeners.m_capacityAndFlags = 0x80000000;
   this->m_islandActivationListeners.m_data = 0i64;
   this->m_islandActivationListeners.m_size = 0;
-  this->m_islandActivationListeners.m_capacityAndFlags = 2147483648;
+  this->m_islandActivationListeners.m_capacityAndFlags = 0x80000000;
   this->m_worldPostSimulationListeners.m_data = 0i64;
   this->m_worldPostSimulationListeners.m_size = 0;
-  this->m_worldPostSimulationListeners.m_capacityAndFlags = 2147483648;
+  this->m_worldPostSimulationListeners.m_capacityAndFlags = 0x80000000;
   this->m_worldPostIntegrateListeners.m_data = 0i64;
   this->m_worldPostIntegrateListeners.m_size = 0;
-  this->m_worldPostIntegrateListeners.m_capacityAndFlags = 2147483648;
+  this->m_worldPostIntegrateListeners.m_capacityAndFlags = 0x80000000;
   this->m_worldPostCollideListeners.m_data = 0i64;
   this->m_worldPostCollideListeners.m_size = 0;
-  this->m_worldPostCollideListeners.m_capacityAndFlags = 2147483648;
+  this->m_worldPostCollideListeners.m_capacityAndFlags = 0x80000000;
   this->m_islandPostIntegrateListeners.m_data = 0i64;
   this->m_islandPostIntegrateListeners.m_size = 0;
-  this->m_islandPostIntegrateListeners.m_capacityAndFlags = 2147483648;
+  this->m_islandPostIntegrateListeners.m_capacityAndFlags = 0x80000000;
   this->m_islandPostCollideListeners.m_data = 0i64;
   this->m_islandPostCollideListeners.m_size = 0;
-  this->m_islandPostCollideListeners.m_capacityAndFlags = 2147483648;
+  this->m_islandPostCollideListeners.m_capacityAndFlags = 0x80000000;
   this->m_contactListeners.m_data = 0i64;
   this->m_contactListeners.m_size = 0;
-  this->m_contactListeners.m_capacityAndFlags = 2147483648;
+  this->m_contactListeners.m_capacityAndFlags = 0x80000000;
   this->m_contactImpulseLimitBreachedListeners.m_data = 0i64;
   this->m_contactImpulseLimitBreachedListeners.m_size = 0;
-  this->m_contactImpulseLimitBreachedListeners.m_capacityAndFlags = 2147483648;
+  this->m_contactImpulseLimitBreachedListeners.m_capacityAndFlags = 0x80000000;
   this->m_worldExtensions.m_data = 0i64;
   this->m_worldExtensions.m_size = 0;
-  this->m_worldExtensions.m_capacityAndFlags = 2147483648;
-  hkpWorldCinfo::hkpWorldCinfo(&v173, infoBase);
-  v3->m_lastEntityUid = -1;
-  v3->m_lastConstraintUid = -1;
-  v3->m_isLocked = 0;
-  v3->m_assertOnRunningOutOfSolverMemory.m_bool = 1;
-  v5 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v6 = (hkpViolatedConstraintArray *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v5[11] + 8i64))(
-                                       v5[11],
+  this->m_worldExtensions.m_capacityAndFlags = 0x80000000;
+  hkpWorldCinfo::hkpWorldCinfo(&v161, infoBase);
+  this->m_lastEntityUid = -1;
+  this->m_lastConstraintUid = -1;
+  this->m_isLocked = 0;
+  this->m_assertOnRunningOutOfSolverMemory.m_bool = 1;
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v6 = (hkpViolatedConstraintArray *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(
+                                       Value[11],
                                        1032i64);
   if ( v6 )
     v6->m_nextFreeElement = 0;
   else
     v6 = 0i64;
-  v3->m_violatedConstraintArray = v6;
+  this->m_violatedConstraintArray = v6;
   v7 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v8 = (hkpWorldOperationQueue *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v7[11] + 8i64))(v7[11], 56i64);
+  v8 = (hkpWorldOperationQueue *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v7[11] + 8i64))(v7[11], 56i64);
   if ( v8 )
-    hkpWorldOperationQueue::hkpWorldOperationQueue(v8, v3);
+    hkpWorldOperationQueue::hkpWorldOperationQueue(v8, this);
   else
     v9 = 0i64;
-  v10 = *(__m128 *)&v173.m_memSizeAndFlags;
-  v11 = *(__m128 *)((char *)&v173.m_gravity.m_quad + 8);
-  v12 = (int)v173.m_collisionFilter.m_pntr;
-  v3->m_pendingOperations = v9;
-  v13 = v173.m_broadPhaseType.m_storage;
-  v3->m_pendingOperationQueues = 0i64;
-  *(_QWORD *)&v3->m_pendingOperationsCount = 0i64;
-  *(_QWORD *)&v3->m_criticalOperationsLockCount = 0i64;
-  *(_WORD *)&v3->m_blockExecutingPendingOperations.m_bool = 256;
-  v3->m_modifyConstraintCriticalSection = 0i64;
-  v3->m_propertyMasterLock = 0i64;
-  v3->m_islandDirtyListCriticalSection = 0i64;
-  v3->m_pendingOperationQueueCount = 1;
-  v3->m_destructionWorld = 0i64;
-  v3->m_broadPhaseExtents[0].m_quad = v10;
-  v3->m_broadPhaseExtents[1].m_quad = v11;
-  v3->m_broadPhaseNumMarkers = v12;
-  v3->m_broadPhaseType.m_storage = v13;
-  v3->m_broadPhase = 0i64;
-  if ( v13 != 1 )
-    v3->m_broadPhase = hkpBroadPhase::s_createSweepAndPruneBroadPhaseFunction(
-                         v3->m_broadPhaseExtents,
-                         &v3->m_broadPhaseExtents[1],
-                         v12);
-  if ( (unsigned __int8)(v3->m_broadPhaseType.m_storage - 1) <= 1u )
+  v10 = *(__m128 *)&v161.m_memSizeAndFlags;
+  v11 = *(__m128 *)((char *)&v161.m_gravity.m_quad + 8);
+  m_pntr = (int)v161.m_collisionFilter.m_pntr;
+  this->m_pendingOperations = v9;
+  m_storage = v161.m_broadPhaseType.m_storage;
+  this->m_pendingOperationQueues = 0i64;
+  *(_QWORD *)&this->m_pendingOperationsCount = 0i64;
+  *(_QWORD *)&this->m_criticalOperationsLockCount = 0i64;
+  *(_WORD *)&this->m_blockExecutingPendingOperations.m_bool = 256;
+  this->m_modifyConstraintCriticalSection = 0i64;
+  this->m_propertyMasterLock = 0i64;
+  this->m_islandDirtyListCriticalSection = 0i64;
+  this->m_pendingOperationQueueCount = 1;
+  this->m_destructionWorld = 0i64;
+  this->m_broadPhaseExtents[0].m_quad = v10;
+  this->m_broadPhaseExtents[1].m_quad = v11;
+  this->m_broadPhaseNumMarkers = m_pntr;
+  this->m_broadPhaseType.m_storage = m_storage;
+  this->m_broadPhase = 0i64;
+  if ( m_storage != 1 )
+    this->m_broadPhase = hkpBroadPhase::s_createSweepAndPruneBroadPhaseFunction(
+                           this->m_broadPhaseExtents,
+                           &this->m_broadPhaseExtents[1],
+                           m_pntr);
+  if ( (unsigned __int8)(this->m_broadPhaseType.m_storage - 1) <= 1u )
   {
-    v14 = (hkReferencedObject *)&v3->m_broadPhase->vfptr;
-    v3->m_broadPhase = hkpBroadPhase::s_createTreeBroadPhaseFunction(v3->m_broadPhase);
-    if ( v14 )
-      hkReferencedObject::removeReference(v14);
+    m_broadPhase = this->m_broadPhase;
+    this->m_broadPhase = hkpBroadPhase::s_createTreeBroadPhaseFunction(m_broadPhase);
+    if ( m_broadPhase )
+      hkReferencedObject::removeReference(m_broadPhase);
   }
-  v15 = v173.m_broadPhaseQuerySize;
-  v3->m_broadPhaseQuerySize = v173.m_broadPhaseQuerySize;
-  v3->m_broadPhaseUpdateSize = v15 / 2;
-  v3->m_sizeOfToiEventQueue = v173.m_broadPhaseWorldAabb.m_max.m_quad.m128_i32[1];
-  if ( v4 != 20130200 )
+  m_broadPhaseQuerySize = v161.m_broadPhaseQuerySize;
+  this->m_broadPhaseQuerySize = v161.m_broadPhaseQuerySize;
+  this->m_broadPhaseUpdateSize = m_broadPhaseQuerySize / 2;
+  this->m_sizeOfToiEventQueue = v161.m_broadPhaseWorldAabb.m_max.m_quad.m128_i32[1];
+  if ( sdkversion != 20130200 )
   {
-    hkErrStream::hkErrStream(&v164, &buf, 512);
-    v16 = hkOstream::operator<<((hkOstream *)&v164.vfptr, "** Havok libs built with version [");
-    v17 = hkOstream::operator<<(v16, 20130200, (int)v16);
+    hkErrStream::hkErrStream((hkErrStream *)&v160, buf, 512);
+    v16 = hkOstream::operator<<((hkOstream *)&v160, "** Havok libs built with version [");
+    v17 = hkOstream::operator<<(v16, 0x1332998u);
     v18 = hkOstream::operator<<(v17, "], used with code built with [");
-    v19 = hkOstream::operator<<(v18, v4, (int)v18);
+    v19 = hkOstream::operator<<(v18, sdkversion);
     hkOstream::operator<<(v19, "]. **");
-    if ( (unsigned int)hkError::messageError(1405700930, &buf, "World\\hkpWorld.cpp", 2962) )
+    if ( (unsigned int)hkError::messageError(0x53C94B42u, buf, "World\\hkpWorld.cpp", 2962) )
       __debugbreak();
-    hkOstream::~hkOstream((hkOstream *)&v164.vfptr);
+    hkOstream::~hkOstream((hkOstream *)&v160);
   }
-  v20 = *(float *)&v173.m_memoryWatchDog.m_pntr;
-  v21.m_quad = (__m128)v173.m_gravity;
-  v22 = *((float *)&v173.m_memoryWatchDog.m_pntr + 1);
-  v23 = *(float *)&v173.m_memoryWatchDog.m_pntr;
-  v3->m_gravity = v173.m_gravity;
+  v20 = *(float *)&v161.m_memoryWatchDog.m_pntr;
+  v21.m_quad = (__m128)v161.m_gravity;
+  v22 = *((float *)&v161.m_memoryWatchDog.m_pntr + 1);
+  v23 = *(float *)&v161.m_memoryWatchDog.m_pntr;
+  this->m_gravity = v161.m_gravity;
   hkpWeldingUtility::initWeldingTable(v23, v22);
-  v24 = v173.m_convexListFilter.m_pntr;
-  v25 = v173.m_broadPhaseNumMarkers;
-  v26 = *(float *)&v173.m_convexListFilter.m_pntr;
-  v27 = (__m128)HIDWORD(v173.m_convexListFilter.m_pntr);
-  v28 = v173.m_solverMicrosteps;
-  v29 = *(float *)&v173.m_solverIterations;
-  v3->m_shouldActivateOnRigidBodyTransformChange.m_bool = HIBYTE(v173.m_solverDamp);
-  v30 = LOBYTE(v173.m_maxConstraintViolation);
-  v3->m_enableToiWeldRejection.m_bool = v25;
-  v31 = v26 * 0.5;
-  v27.m128_f32[0] = v27.m128_f32[0] / *(float *)&v24;
-  v32 = (unsigned int)FLOAT_1_0;
-  LODWORD(v3->m_toiCollisionResponseRotateNormal) = v28;
-  v3->m_snapCollisionToConvexEdgeThreshold = v20;
-  v3->m_snapCollisionToConcaveEdgeThreshold = v20;
-  v3->m_useCompoundSpuElf.m_bool = v30;
-  v33 = *(_DWORD *)&v173.m_forceCoherentConstraintOrderingInSolver.m_bool;
-  v3->m_deactivationReferenceDistance = v29;
-  *(float *)&v32 = 1.0 / *((float *)&v24 + 1);
-  v3->m_maxSectorsPerMidphaseCollideTask = v33;
-  v3->m_maxSectorsPerNarrowphaseCollideTask = LODWORD(v173.m_snapCollisionToConvexEdgeThreshold);
-  v3->m_processToisMultithreaded.m_bool = LOBYTE(v173.m_snapCollisionToConcaveEdgeThreshold);
-  v3->m_maxEntriesPerToiMidphaseCollideTask = *(_DWORD *)&v173.m_enableToiWeldRejection.m_bool;
-  v3->m_maxEntriesPerToiNarrowphaseCollideTask = LODWORD(v173.m_iterativeLinearCastEarlyOutDistance);
-  v3->m_maxNumToiCollisionPairsSinglethreaded = v173.m_iterativeLinearCastMaxIterations;
-  v34 = v173.m_expectedMaxLinearVelocity;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_dampDivFrictionTau = *((float *)&v24 + 1) / v31;
-  v35 = (__m128)v32;
-  v35.m128_f32[0] = (float)(1.0 / *((float *)&v24 + 1)) * *(float *)&v24;
-  *(float *)&v3->m_dynamicsStepInfo.m_solverInfo.m_numSteps = v34;
-  LODWORD(v3->m_dynamicsStepInfo.m_solverInfo.m_tau) = (_DWORD)v24;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_frictionTauDivDamp = (float)(1.0 / *((float *)&v24 + 1)) * v31;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_frictionTau = v31;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_damping = *((float *)&v24 + 1);
-  LODWORD(v3->m_dynamicsStepInfo.m_solverInfo.m_tauDivDamp) = v35.m128_i32[0];
-  LODWORD(v3->m_dynamicsStepInfo.m_solverInfo.m_dampDivTau) = v27.m128_i32[0];
-  v3->m_dynamicsStepInfo.m_solverInfo.m_invIntegrateVelocityFactor.m_quad = _mm_shuffle_ps(v27, v27, 0);
-  v3->m_dynamicsStepInfo.m_solverInfo.m_integrateVelocityFactor.m_quad = _mm_shuffle_ps(v35, v35, 0);
-  v3->m_dynamicsStepInfo.m_solverInfo.m_contactRestingVelocity = v173.m_contactRestingVelocity;
-  v36 = _mm_cvtsi32_si128(LODWORD(v34));
-  v37 = v173.m_sizeOfToiEventQueue;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_numMicroSteps = v173.m_sizeOfToiEventQueue;
-  *(float *)&v32 = 1.0 / COERCE_FLOAT(_mm_cvtepi32_ps(v36));
-  *(float *)v36.m128i_i32 = v173.m_expectedMinPsiDeltaTime * v173.m_expectedMinPsiDeltaTime;
-  LODWORD(v3->m_dynamicsStepInfo.m_solverInfo.m_invNumSteps) = v32;
-  LODWORD(v3->m_dynamicsStepInfo.m_solverInfo.m_maxConstraintViolationSqrd) = v36.m128i_i32[0];
-  v38 = _mm_cvtsi32_si128(v37);
-  v3->m_dynamicsStepInfo.m_solverInfo.m_forceCoherentConstraintOrderingInSolver.m_bool = *((_BYTE *)&v173.m_expectedMinPsiDeltaTime
-                                                                                         + 4);
-  LOBYTE(v37) = LOBYTE(v173.m_solverDamp);
-  v3->m_dynamicsStepInfo.m_solverInfo.m_invNumMicroSteps = 1.0 / COERCE_FLOAT(_mm_cvtepi32_ps(v38));
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationNumInactiveFramesSelectFlag[0] = v37;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationNumInactiveFramesSelectFlag[1] = BYTE1(v173.m_solverDamp);
-  v39 = _mm_mul_ps(v21.m_quad, v21.m_quad);
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationIntegrateCounter = BYTE2(v173.m_solverDamp);
-  *(_QWORD *)&v3->m_dynamicsStepInfo.m_solverInfo.m_deltaTime = 0i64;
-  v40 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v39, v39, 85), _mm_shuffle_ps(v39, v39, 0)), _mm_shuffle_ps(v39, v39, 170));
-  v41 = _mm_rsqrt_ps(v40);
-  LODWORD(v42) = (unsigned __int128)_mm_andnot_ps(
-                                      _mm_cmpleps(v40, (__m128)0i64),
-                                      _mm_mul_ps(
-                                        _mm_mul_ps(
-                                          _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v41, v40), v41)),
-                                          _mm_mul_ps(*(__m128 *)_xmm, v41)),
-                                        v40));
-  if ( v42 == 0.0 )
-    v42 = FLOAT_9_8100004;
-  v43 = v3->m_dynamicsStepInfo.m_solverInfo.m_invNumSteps;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[0].m_relativeSleepVelocityThreshold = 2.1267625e37;
-  v44 = 1.0 / (float)(v42 * 0.00000011920929);
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[0].m_linearVelocityThresholdInv = v44;
-  v45 = v29 * v29;
-  v46 = (float)(v29 * 4.0) * (float)(v29 * 4.0);
-  v47 = (float)(v29 * 2.0) * (float)(v29 * 2.0);
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[0].m_slowObjectVelocityMultiplier = 1.0
-                                                                                           - (float)((float)((float)(v42 * 0.0) * v44) * (float)(v43 * 0.016000001));
-  v48 = (float)(v29 * 8.0) * (float)(v29 * 8.0);
-  v49 = 1.0 / (float)(v42 * 0.00000011920929);
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[0].m_angularVelocityThresholdInv = 1.0
-                                                                                          / (float)((float)(v42 * 0.00000011920929)
-                                                                                                  * (float)(v42 * 0.1));
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[0].m_maxDistSqrd[0] = v45;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[0].m_maxDistSqrd[1] = v46;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[0].m_maxRotSqrd[0] = v47;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[0].m_maxRotSqrd[1] = v48;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[1].m_slowObjectVelocityMultiplier = 1.0
-                                                                                           - (float)((float)((float)(v42 * 0.0) * v49) * (float)(v3->m_dynamicsStepInfo.m_solverInfo.m_invNumSteps * 0.016000001));
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[1].m_linearVelocityThresholdInv = v49;
-  v50 = 1.0 / (float)(v42 * 0.0099999998);
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[1].m_angularVelocityThresholdInv = 1.0
-                                                                                          / (float)((float)(v42 * 0.00000011920929)
-                                                                                                  * (float)(v42 * 0.1));
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[1].m_relativeSleepVelocityThreshold = 2.1267625e37;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[1].m_maxDistSqrd[0] = v45;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[1].m_maxDistSqrd[1] = v46;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[1].m_maxRotSqrd[0] = v47;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[1].m_maxRotSqrd[1] = v48;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[2].m_slowObjectVelocityMultiplier = 1.0
-                                                                                           - (float)((float)((float)(v42 * 0.079999998) * v50) * (float)(v3->m_dynamicsStepInfo.m_solverInfo.m_invNumSteps * 0.016000001));
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[2].m_linearVelocityThresholdInv = v50;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[2].m_angularVelocityThresholdInv = 1.0
-                                                                                          / (float)((float)(v42 * 0.0099999998)
-                                                                                                  * (float)(v42 * 0.1));
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[2].m_relativeSleepVelocityThreshold = (float)(v3->m_dynamicsStepInfo.m_solverInfo.m_invNumSteps * 0.016000001)
-                                                                                             * 12.5;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[2].m_maxDistSqrd[0] = v45;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[2].m_maxDistSqrd[1] = v46;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[2].m_maxRotSqrd[0] = v47;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[2].m_maxRotSqrd[1] = v48;
-  v51 = *(hkReferencedObject **)&v173.m_collisionTolerance;
-  v52 = 1.0 / (float)(v42 * 0.017000001);
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[3].m_slowObjectVelocityMultiplier = 1.0
-                                                                                           - (float)((float)((float)(v42 * 0.2) * v52) * (float)(v3->m_dynamicsStepInfo.m_solverInfo.m_invNumSteps * 0.016000001));
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[3].m_linearVelocityThresholdInv = v52;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[3].m_angularVelocityThresholdInv = 1.0
-                                                                                          / (float)((float)(v42 * 0.017000001)
-                                                                                                  * (float)(v42 * 0.1));
-  v53 = 1.0 / (float)(v42 * 0.02);
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[3].m_relativeSleepVelocityThreshold = (float)(v3->m_dynamicsStepInfo.m_solverInfo.m_invNumSteps * 0.016000001)
-                                                                                             * 5.0;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[3].m_maxDistSqrd[0] = v45;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[3].m_maxDistSqrd[1] = v46;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[3].m_maxRotSqrd[0] = v47;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[3].m_maxRotSqrd[1] = v48;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[4].m_slowObjectVelocityMultiplier = 1.0
-                                                                                           - (float)((float)((float)(v42 * 0.30000001) * v53) * (float)(v3->m_dynamicsStepInfo.m_solverInfo.m_invNumSteps * 0.016000001));
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[4].m_linearVelocityThresholdInv = v53;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[4].m_angularVelocityThresholdInv = 1.0
-                                                                                          / (float)((float)(v42 * 0.02)
-                                                                                                  * (float)(v42 * 0.1));
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[4].m_relativeSleepVelocityThreshold = (float)(v3->m_dynamicsStepInfo.m_solverInfo.m_invNumSteps * 0.016000001)
-                                                                                             * 3.3333333;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[4].m_maxDistSqrd[0] = v45;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[4].m_maxDistSqrd[1] = v46;
-  v54 = 1.0 / (float)(v42 * 0.025);
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[4].m_maxRotSqrd[0] = v47;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[4].m_maxRotSqrd[1] = v48;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[5].m_slowObjectVelocityMultiplier = 1.0
-                                                                                           - (float)((float)((float)(v42 * 0.40000001) * v54) * (float)(v3->m_dynamicsStepInfo.m_solverInfo.m_invNumSteps * 0.016000001));
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[5].m_linearVelocityThresholdInv = v54;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[5].m_angularVelocityThresholdInv = 1.0
-                                                                                          / (float)((float)(v42 * 0.025)
-                                                                                                  * (float)(v42 * 0.1));
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[5].m_relativeSleepVelocityThreshold = (float)(v3->m_dynamicsStepInfo.m_solverInfo.m_invNumSteps * 0.016000001)
-                                                                                             * 2.5;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[5].m_maxDistSqrd[0] = v45;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[5].m_maxDistSqrd[1] = v46;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[5].m_maxRotSqrd[0] = v47;
-  v3->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[5].m_maxRotSqrd[1] = v48;
+  v24 = *(float *)&v161.m_convexListFilter.m_pntr;
+  v25 = *((float *)&v161.m_convexListFilter.m_pntr + 1);
+  m_broadPhaseNumMarkers = v161.m_broadPhaseNumMarkers;
+  v27 = *(float *)&v161.m_convexListFilter.m_pntr;
+  m_pntr_high = (__m128)HIDWORD(v161.m_convexListFilter.m_pntr);
+  m_solverMicrosteps = v161.m_solverMicrosteps;
+  v30 = *(float *)&v161.m_solverIterations;
+  this->m_shouldActivateOnRigidBodyTransformChange.m_bool = HIBYTE(v161.m_solverDamp);
+  m_maxConstraintViolation_low = LOBYTE(v161.m_maxConstraintViolation);
+  this->m_enableToiWeldRejection.m_bool = m_broadPhaseNumMarkers;
+  v32 = v27 * 0.5;
+  m_pntr_high.m128_f32[0] = m_pntr_high.m128_f32[0] / v24;
+  v33 = (unsigned int)FLOAT_1_0;
+  LODWORD(this->m_toiCollisionResponseRotateNormal) = m_solverMicrosteps;
+  this->m_snapCollisionToConvexEdgeThreshold = v20;
+  this->m_snapCollisionToConcaveEdgeThreshold = v20;
+  this->m_useCompoundSpuElf.m_bool = m_maxConstraintViolation_low;
+  v34 = *(_DWORD *)&v161.m_forceCoherentConstraintOrderingInSolver.m_bool;
+  this->m_deactivationReferenceDistance = v30;
+  *(float *)&v33 = 1.0 / v25;
+  this->m_maxSectorsPerMidphaseCollideTask = v34;
+  this->m_maxSectorsPerNarrowphaseCollideTask = LODWORD(v161.m_snapCollisionToConvexEdgeThreshold);
+  this->m_processToisMultithreaded.m_bool = LOBYTE(v161.m_snapCollisionToConcaveEdgeThreshold);
+  this->m_maxEntriesPerToiMidphaseCollideTask = *(_DWORD *)&v161.m_enableToiWeldRejection.m_bool;
+  this->m_maxEntriesPerToiNarrowphaseCollideTask = LODWORD(v161.m_iterativeLinearCastEarlyOutDistance);
+  this->m_maxNumToiCollisionPairsSinglethreaded = v161.m_iterativeLinearCastMaxIterations;
+  m_expectedMaxLinearVelocity_low = LODWORD(v161.m_expectedMaxLinearVelocity);
+  this->m_dynamicsStepInfo.m_solverInfo.m_dampDivFrictionTau = v25 / v32;
+  v36 = (__m128)v33;
+  v36.m128_f32[0] = (float)(1.0 / v25) * v24;
+  this->m_dynamicsStepInfo.m_solverInfo.m_numSteps = m_expectedMaxLinearVelocity_low;
+  this->m_dynamicsStepInfo.m_solverInfo.m_tau = v24;
+  this->m_dynamicsStepInfo.m_solverInfo.m_frictionTauDivDamp = (float)(1.0 / v25) * v32;
+  this->m_dynamicsStepInfo.m_solverInfo.m_frictionTau = v32;
+  this->m_dynamicsStepInfo.m_solverInfo.m_damping = v25;
+  LODWORD(this->m_dynamicsStepInfo.m_solverInfo.m_tauDivDamp) = v36.m128_i32[0];
+  LODWORD(this->m_dynamicsStepInfo.m_solverInfo.m_dampDivTau) = m_pntr_high.m128_i32[0];
+  this->m_dynamicsStepInfo.m_solverInfo.m_invIntegrateVelocityFactor.m_quad = _mm_shuffle_ps(
+                                                                                m_pntr_high,
+                                                                                m_pntr_high,
+                                                                                0);
+  this->m_dynamicsStepInfo.m_solverInfo.m_integrateVelocityFactor.m_quad = _mm_shuffle_ps(v36, v36, 0);
+  this->m_dynamicsStepInfo.m_solverInfo.m_contactRestingVelocity = v161.m_contactRestingVelocity;
+  v37 = _mm_cvtsi32_si128(m_expectedMaxLinearVelocity_low);
+  m_sizeOfToiEventQueue = v161.m_sizeOfToiEventQueue;
+  this->m_dynamicsStepInfo.m_solverInfo.m_numMicroSteps = v161.m_sizeOfToiEventQueue;
+  *(float *)&v33 = 1.0 / _mm_cvtepi32_ps(v37).m128_f32[0];
+  *(float *)v37.m128i_i32 = v161.m_expectedMinPsiDeltaTime * v161.m_expectedMinPsiDeltaTime;
+  LODWORD(this->m_dynamicsStepInfo.m_solverInfo.m_invNumSteps) = v33;
+  LODWORD(this->m_dynamicsStepInfo.m_solverInfo.m_maxConstraintViolationSqrd) = v37.m128i_i32[0];
+  v39 = _mm_cvtsi32_si128(m_sizeOfToiEventQueue);
+  this->m_dynamicsStepInfo.m_solverInfo.m_forceCoherentConstraintOrderingInSolver.m_bool = *((_BYTE *)&v161.m_expectedMinPsiDeltaTime
+                                                                                           + 4);
+  LOBYTE(m_sizeOfToiEventQueue) = LOBYTE(v161.m_solverDamp);
+  this->m_dynamicsStepInfo.m_solverInfo.m_invNumMicroSteps = 1.0 / _mm_cvtepi32_ps(v39).m128_f32[0];
+  *(_WORD *)this->m_dynamicsStepInfo.m_solverInfo.m_deactivationNumInactiveFramesSelectFlag = __PAIR16__(
+                                                                                                BYTE1(v161.m_solverDamp),
+                                                                                                m_sizeOfToiEventQueue);
+  v40 = _mm_mul_ps(v21.m_quad, v21.m_quad);
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationIntegrateCounter = BYTE2(v161.m_solverDamp);
+  *(_QWORD *)&this->m_dynamicsStepInfo.m_solverInfo.m_deltaTime = 0i64;
+  v41 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v40, v40, 85), _mm_shuffle_ps(v40, v40, 0)), _mm_shuffle_ps(v40, v40, 170));
+  v42 = _mm_rsqrt_ps(v41);
+  v43 = _mm_andnot_ps(
+          _mm_cmple_ps(v41, (__m128)0i64),
+          _mm_mul_ps(
+            _mm_mul_ps(
+              _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v42, v41), v42)),
+              _mm_mul_ps(*(__m128 *)_xmm, v42)),
+            v41)).m128_f32[0];
+  if ( v43 == 0.0 )
+    v43 = FLOAT_9_8100004;
+  m_invNumSteps = this->m_dynamicsStepInfo.m_solverInfo.m_invNumSteps;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[0].m_relativeSleepVelocityThreshold = 2.1267625e37;
+  v45 = 1.0 / (float)(v43 * 0.00000011920929);
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[0].m_linearVelocityThresholdInv = v45;
+  v46 = v30 * v30;
+  v47 = (float)(v30 * 4.0) * (float)(v30 * 4.0);
+  v48 = (float)(v30 * 2.0) * (float)(v30 * 2.0);
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[0].m_slowObjectVelocityMultiplier = 1.0
+                                                                                             - (float)((float)((float)(v43 * 0.0) * v45) * (float)(m_invNumSteps * 0.016000001));
+  v49 = (float)(v30 * 8.0) * (float)(v30 * 8.0);
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[0].m_angularVelocityThresholdInv = 1.0
+                                                                                            / (float)((float)(v43 * 0.00000011920929) * (float)(v43 * 0.1));
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[0].m_maxDistSqrd[0] = v46;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[0].m_maxDistSqrd[1] = v47;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[0].m_maxRotSqrd[0] = v48;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[0].m_maxRotSqrd[1] = v49;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[1].m_slowObjectVelocityMultiplier = 1.0
+                                                                                             - (float)((float)((float)(v43 * 0.0) * v45) * (float)(this->m_dynamicsStepInfo.m_solverInfo.m_invNumSteps * 0.016000001));
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[1].m_linearVelocityThresholdInv = v45;
+  v50 = 1.0 / (float)(v43 * 0.0099999998);
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[1].m_angularVelocityThresholdInv = 1.0
+                                                                                            / (float)((float)(v43 * 0.00000011920929) * (float)(v43 * 0.1));
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[1].m_relativeSleepVelocityThreshold = 2.1267625e37;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[1].m_maxDistSqrd[0] = v46;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[1].m_maxDistSqrd[1] = v47;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[1].m_maxRotSqrd[0] = v48;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[1].m_maxRotSqrd[1] = v49;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[2].m_slowObjectVelocityMultiplier = 1.0
+                                                                                             - (float)((float)((float)(v43 * 0.079999998) * v50) * (float)(this->m_dynamicsStepInfo.m_solverInfo.m_invNumSteps * 0.016000001));
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[2].m_linearVelocityThresholdInv = v50;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[2].m_angularVelocityThresholdInv = 1.0
+                                                                                            / (float)((float)(v43 * 0.0099999998) * (float)(v43 * 0.1));
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[2].m_relativeSleepVelocityThreshold = (float)(this->m_dynamicsStepInfo.m_solverInfo.m_invNumSteps * 0.016000001)
+                                                                                               * 12.5;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[2].m_maxDistSqrd[0] = v46;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[2].m_maxDistSqrd[1] = v47;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[2].m_maxRotSqrd[0] = v48;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[2].m_maxRotSqrd[1] = v49;
+  v51 = *(hkWorldMemoryAvailableWatchDog **)&v161.m_collisionTolerance;
+  v52 = 1.0 / (float)(v43 * 0.017000001);
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[3].m_slowObjectVelocityMultiplier = 1.0
+                                                                                             - (float)((float)((float)(v43 * 0.2) * v52) * (float)(this->m_dynamicsStepInfo.m_solverInfo.m_invNumSteps * 0.016000001));
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[3].m_linearVelocityThresholdInv = v52;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[3].m_angularVelocityThresholdInv = 1.0
+                                                                                            / (float)((float)(v43 * 0.017000001) * (float)(v43 * 0.1));
+  v53 = 1.0 / (float)(v43 * 0.02);
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[3].m_relativeSleepVelocityThreshold = (float)(this->m_dynamicsStepInfo.m_solverInfo.m_invNumSteps * 0.016000001)
+                                                                                               * 5.0;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[3].m_maxDistSqrd[0] = v46;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[3].m_maxDistSqrd[1] = v47;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[3].m_maxRotSqrd[0] = v48;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[3].m_maxRotSqrd[1] = v49;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[4].m_slowObjectVelocityMultiplier = 1.0
+                                                                                             - (float)((float)((float)(v43 * 0.30000001) * v53) * (float)(this->m_dynamicsStepInfo.m_solverInfo.m_invNumSteps * 0.016000001));
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[4].m_linearVelocityThresholdInv = v53;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[4].m_angularVelocityThresholdInv = 1.0
+                                                                                            / (float)((float)(v43 * 0.02) * (float)(v43 * 0.1));
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[4].m_relativeSleepVelocityThreshold = (float)(this->m_dynamicsStepInfo.m_solverInfo.m_invNumSteps * 0.016000001)
+                                                                                               * 3.3333333;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[4].m_maxDistSqrd[0] = v46;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[4].m_maxDistSqrd[1] = v47;
+  v54 = 1.0 / (float)(v43 * 0.025);
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[4].m_maxRotSqrd[0] = v48;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[4].m_maxRotSqrd[1] = v49;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[5].m_slowObjectVelocityMultiplier = 1.0
+                                                                                             - (float)((float)((float)(v43 * 0.40000001) * v54) * (float)(this->m_dynamicsStepInfo.m_solverInfo.m_invNumSteps * 0.016000001));
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[5].m_linearVelocityThresholdInv = v54;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[5].m_angularVelocityThresholdInv = 1.0
+                                                                                            / (float)((float)(v43 * 0.025) * (float)(v43 * 0.1));
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[5].m_relativeSleepVelocityThreshold = (float)(this->m_dynamicsStepInfo.m_solverInfo.m_invNumSteps * 0.016000001)
+                                                                                               * 2.5;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[5].m_maxDistSqrd[0] = v46;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[5].m_maxDistSqrd[1] = v47;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[5].m_maxRotSqrd[0] = v48;
+  this->m_dynamicsStepInfo.m_solverInfo.m_deactivationInfo[5].m_maxRotSqrd[1] = v49;
   if ( v51 )
     hkReferencedObject::addReference(v51);
-  v55 = (hkReferencedObject *)&v3->m_memoryWatchDog.m_pntr->vfptr;
+  v55 = this->m_memoryWatchDog.m_pntr;
   if ( v55 )
     hkReferencedObject::removeReference(v55);
-  v56 = BYTE2(v173.m_maxSectorsPerMidphaseCollideTask);
-  v57 = v173.m_maxSectorsPerMidphaseCollideTask;
-  v3->m_memoryWatchDog.m_pntr = (hkWorldMemoryAvailableWatchDog *)v51;
-  v3->m_wantSimulationIslands.m_bool = v56;
-  v3->m_wantDeactivation.m_bool = v57;
-  if ( !v56 && v57 )
-    v3->m_wantDeactivation.m_bool = 0;
-  v3->m_processActionsInSingleThread.m_bool = v173.m_processToisMultithreaded.m_bool;
-  v3->m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob.m_bool = *((_BYTE *)&v173.m_processToisMultithreaded
-                                                                           + 1);
+  v56 = BYTE2(v161.m_maxSectorsPerMidphaseCollideTask);
+  m_maxSectorsPerMidphaseCollideTask = v161.m_maxSectorsPerMidphaseCollideTask;
+  this->m_memoryWatchDog.m_pntr = v51;
+  this->m_wantSimulationIslands.m_bool = v56;
+  this->m_wantDeactivation.m_bool = m_maxSectorsPerMidphaseCollideTask;
+  if ( !v56 && m_maxSectorsPerMidphaseCollideTask )
+    this->m_wantDeactivation.m_bool = 0;
+  this->m_processActionsInSingleThread.m_bool = v161.m_processToisMultithreaded.m_bool;
+  this->m_allowIntegrationOfIslandsWithoutConstraintsInASeparateJob.m_bool = *((_BYTE *)&v161.m_processToisMultithreaded
+                                                                             + 1);
   v58 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v59 = (hkpTypedBroadPhaseDispatcher *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v58[11] + 8i64))(
+  v59 = (hkpTypedBroadPhaseDispatcher *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v58[11] + 8i64))(
                                           v58[11],
                                           536i64);
   if ( v59 )
     hkpTypedBroadPhaseDispatcher::hkpTypedBroadPhaseDispatcher(v59);
   else
     v60 = 0i64;
-  v3->m_broadPhaseDispatcher = v60;
+  this->m_broadPhaseDispatcher = v60;
   v61 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v62 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v61[11] + 8i64))(v61[11], 24i64);
+  v62 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*v61[11] + 8i64))(v61[11], 24i64);
   if ( v62 )
   {
     *(_DWORD *)(v62 + 8) = 0x1FFFF;
@@ -5341,18 +5094,18 @@ void __fastcall hkpWorld::hkpWorld(hkpWorld *this, hkpWorldCinfo *infoBase, unsi
   {
     v62 = 0i64;
   }
-  v3->m_phantomBroadPhaseListener = (hkpPhantomBroadPhaseListener *)v62;
+  this->m_phantomBroadPhaseListener = (hkpPhantomBroadPhaseListener *)v62;
   v63 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v64 = (hkpEntityEntityBroadPhaseListener *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v63[11] + 8i64))(
+  v64 = (hkpEntityEntityBroadPhaseListener *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v63[11] + 8i64))(
                                                v63[11],
                                                32i64);
   if ( v64 )
-    hkpEntityEntityBroadPhaseListener::hkpEntityEntityBroadPhaseListener(v64, v3);
+    hkpEntityEntityBroadPhaseListener::hkpEntityEntityBroadPhaseListener(v64, this);
   else
     v65 = 0i64;
-  v3->m_entityEntityBroadPhaseListener = v65;
+  this->m_entityEntityBroadPhaseListener = v65;
   v66 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v67 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v66[11] + 8i64))(v66[11], 24i64);
+  v67 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*v66[11] + 8i64))(v66[11], 24i64);
   if ( v67 )
   {
     *(_DWORD *)(v67 + 8) = 0x1FFFF;
@@ -5363,66 +5116,66 @@ void __fastcall hkpWorld::hkpWorld(hkpWorld *this, hkpWorldCinfo *infoBase, unsi
   {
     v67 = 0i64;
   }
-  v3->m_broadPhaseBorderListener = (hkpBroadPhaseBorderListener *)v67;
-  v68 = v3->m_phantomBroadPhaseListener;
-  v69 = (signed __int64)&v68->vfptr;
-  if ( !v68 )
+  this->m_broadPhaseBorderListener = (hkpBroadPhaseBorderListener *)v67;
+  m_phantomBroadPhaseListener = this->m_phantomBroadPhaseListener;
+  v69 = &m_phantomBroadPhaseListener->hkpBroadPhaseListener;
+  if ( !m_phantomBroadPhaseListener )
     v69 = 0i64;
-  v3->m_broadPhaseDispatcher->m_broadPhaseListeners[1][2] = (hkpBroadPhaseListener *)v69;
-  v70 = v3->m_phantomBroadPhaseListener;
+  this->m_broadPhaseDispatcher->m_broadPhaseListeners[1][2] = v69;
+  v70 = this->m_phantomBroadPhaseListener;
   if ( v70 )
-    v71 = (signed __int64)&v70->vfptr;
+    v71 = &v70->hkpBroadPhaseListener;
   else
     v71 = 0i64;
-  v3->m_broadPhaseDispatcher->m_broadPhaseListeners[2][1] = (hkpBroadPhaseListener *)v71;
-  v72 = v3->m_phantomBroadPhaseListener;
+  this->m_broadPhaseDispatcher->m_broadPhaseListeners[2][1] = v71;
+  v72 = this->m_phantomBroadPhaseListener;
   if ( v72 )
-    v73 = (signed __int64)&v72->vfptr;
+    v73 = &v72->hkpBroadPhaseListener;
   else
     v73 = 0i64;
-  v3->m_broadPhaseDispatcher->m_broadPhaseListeners[2][2] = (hkpBroadPhaseListener *)v73;
-  v74 = v3->m_entityEntityBroadPhaseListener;
-  if ( v74 )
-    v75 = (signed __int64)&v74->vfptr;
+  this->m_broadPhaseDispatcher->m_broadPhaseListeners[2][2] = v73;
+  m_entityEntityBroadPhaseListener = this->m_entityEntityBroadPhaseListener;
+  if ( m_entityEntityBroadPhaseListener )
+    v75 = &m_entityEntityBroadPhaseListener->hkpBroadPhaseListener;
   else
     v75 = 0i64;
-  v3->m_broadPhaseDispatcher->m_broadPhaseListeners[1][1] = (hkpBroadPhaseListener *)v75;
-  v76 = v3->m_broadPhaseBorderListener;
-  if ( v76 )
-    v77 = (signed __int64)&v76->vfptr;
+  this->m_broadPhaseDispatcher->m_broadPhaseListeners[1][1] = v75;
+  m_broadPhaseBorderListener = this->m_broadPhaseBorderListener;
+  if ( m_broadPhaseBorderListener )
+    v77 = &m_broadPhaseBorderListener->hkpBroadPhaseListener;
   else
     v77 = 0i64;
-  v3->m_broadPhaseDispatcher->m_broadPhaseListeners[1][3] = (hkpBroadPhaseListener *)v77;
-  v78 = v3->m_broadPhaseBorderListener;
+  this->m_broadPhaseDispatcher->m_broadPhaseListeners[1][3] = v77;
+  v78 = this->m_broadPhaseBorderListener;
   if ( v78 )
-    v79 = (signed __int64)&v78->vfptr;
+    v79 = &v78->hkpBroadPhaseListener;
   else
     v79 = 0i64;
-  v3->m_broadPhaseDispatcher->m_broadPhaseListeners[3][1] = (hkpBroadPhaseListener *)v79;
-  v80 = v3->m_broadPhaseBorderListener;
+  this->m_broadPhaseDispatcher->m_broadPhaseListeners[3][1] = v79;
+  v80 = this->m_broadPhaseBorderListener;
   if ( v80 )
-    v81 = (signed __int64)&v80->vfptr;
+    v81 = &v80->hkpBroadPhaseListener;
   else
     v81 = 0i64;
-  v3->m_broadPhaseDispatcher->m_broadPhaseListeners[2][3] = (hkpBroadPhaseListener *)v81;
-  v82 = v3->m_broadPhaseBorderListener;
+  this->m_broadPhaseDispatcher->m_broadPhaseListeners[2][3] = v81;
+  v82 = this->m_broadPhaseBorderListener;
   if ( v82 )
-    v83 = (signed __int64)&v82->vfptr;
+    v83 = &v82->hkpBroadPhaseListener;
   else
     v83 = 0i64;
-  v3->m_broadPhaseDispatcher->m_broadPhaseListeners[3][2] = (hkpBroadPhaseListener *)v83;
-  v84 = v3->m_broadPhaseBorderListener;
-  v85 = (signed __int64)&v84->vfptr;
+  this->m_broadPhaseDispatcher->m_broadPhaseListeners[3][2] = v83;
+  v84 = this->m_broadPhaseBorderListener;
+  v85 = &v84->hkpBroadPhaseListener;
   if ( !v84 )
     v85 = 0i64;
-  v3->m_broadPhaseDispatcher->m_broadPhaseListeners[3][3] = (hkpBroadPhaseListener *)v85;
+  this->m_broadPhaseDispatcher->m_broadPhaseListeners[3][3] = v85;
   v86 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v87 = (hkpSimpleConstraintContactMgr::Factory *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v86[11] + 8i64))(
+  v87 = (hkpSimpleConstraintContactMgr::Factory *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v86[11] + 8i64))(
                                                     v86[11],
                                                     24i64);
   if ( v87 )
   {
-    hkpSimpleConstraintContactMgr::Factory::Factory(v87, v3);
+    hkpSimpleConstraintContactMgr::Factory::Factory(v87, this);
     v89 = v88;
   }
   else
@@ -5430,9 +5183,7 @@ void __fastcall hkpWorld::hkpWorld(hkpWorld *this, hkpWorldCinfo *infoBase, unsi
     v89 = 0i64;
   }
   v90 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v91 = (hkpCollisionDispatcher *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v90[11] + 8i64))(
-                                    v90[11],
-                                    10880i64);
+  v91 = (hkpCollisionDispatcher *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v90[11] + 8i64))(v90[11], 10880i64);
   if ( v91 )
     hkpCollisionDispatcher::hkpCollisionDispatcher(
       v91,
@@ -5440,377 +5191,384 @@ void __fastcall hkpWorld::hkpWorld(hkpWorld *this, hkpWorldCinfo *infoBase, unsi
       v89);
   else
     v92 = 0i64;
-  v3->m_collisionDispatcher = v92;
-  hkReferencedObject::removeReference((hkReferencedObject *)&v89->vfptr);
-  v93 = (hkReferencedObject *)v173.m_broadPhaseWorldAabb.m_min.m_quad.m128_u64[0];
-  if ( v173.m_broadPhaseWorldAabb.m_min.m_quad.m128_u64[0] )
+  this->m_collisionDispatcher = v92;
+  hkReferencedObject::removeReference(v89);
+  v93 = (hkReferencedObject *)v161.m_broadPhaseWorldAabb.m_min.m_quad.m128_u64[0];
+  if ( v161.m_broadPhaseWorldAabb.m_min.m_quad.m128_u64[0] )
   {
-    v97 = (hkReferencedObject *)v173.m_broadPhaseWorldAabb.m_min.m_quad.m128_u64[0];
-    v3->m_collisionFilter = (hkpCollisionFilter *)v173.m_broadPhaseWorldAabb.m_min.m_quad.m128_u64[0];
+    v97 = (hkReferencedObject *)v161.m_broadPhaseWorldAabb.m_min.m_quad.m128_u64[0];
+    this->m_collisionFilter = (hkpCollisionFilter *)v161.m_broadPhaseWorldAabb.m_min.m_quad.m128_u64[0];
     hkReferencedObject::addReference(v97);
-    ((void (__fastcall *)(hkpCollisionFilter *, hkpWorld *))v3->m_collisionFilter->vfptr[1].__first_virtual_table_function__)(
-      v3->m_collisionFilter,
-      v3);
+    ((void (__fastcall *)(hkpCollisionFilter *, hkpWorld *))this->m_collisionFilter->vfptr[1].__first_virtual_table_function__)(
+      this->m_collisionFilter,
+      this);
   }
   else
   {
     v94 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v95 = (hkpCollisionFilter *)(*(__int64 (__fastcall **)(_QWORD *, _QWORD))(*v94[11] + 8i64))(
-                                  v94[11],
-                                  (unsigned int)((_DWORD)v93 + 72));
+    v95 = (hkpCollisionFilter *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v94[11] + 8i64))(v94[11], 72i64);
     v96 = v95;
     if ( v95 )
     {
       hkpCollisionFilter::hkpCollisionFilter(v95);
       v96->m_type.m_storage = 1;
-      v96->vfptr = (hkBaseObjectVtbl *)&hkpNullCollisionFilter::`vftable{for `hkReferencedObject};
-      v96->vfptr = (hkpCollidableCollidableFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpCollidableCollidableFilter};
-      v96->vfptr = (hkpShapeCollectionFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpShapeCollectionFilter};
-      v96->vfptr = (hkpRayShapeCollectionFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpRayShapeCollectionFilter};
-      v96->vfptr = (hkpRayCollidableFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpRayCollidableFilter};
-      v3->m_collisionFilter = v96;
+      v96->hkReferencedObject::hkBaseObject::vfptr = (hkBaseObjectVtbl *)&hkpNullCollisionFilter::`vftable{for `hkReferencedObject};
+      v96->hkpCollidableCollidableFilter::vfptr = (hkpCollidableCollidableFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpCollidableCollidableFilter};
+      v96->hkpShapeCollectionFilter::vfptr = (hkpShapeCollectionFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpShapeCollectionFilter};
+      v96->hkpRayShapeCollectionFilter::vfptr = (hkpRayShapeCollectionFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpRayShapeCollectionFilter};
+      v96->hkpRayCollidableFilter::vfptr = (hkpRayCollidableFilterVtbl *)&hkpNullCollisionFilter::`vftable{for `hkpRayCollidableFilter};
+      this->m_collisionFilter = v96;
     }
     else
     {
-      v3->m_collisionFilter = 0i64;
+      this->m_collisionFilter = 0i64;
     }
   }
-  v98 = (hkReferencedObject *)v173.m_broadPhaseWorldAabb.m_min.m_quad.m128_u64[1];
-  if ( v173.m_broadPhaseWorldAabb.m_min.m_quad.m128_u64[1] )
+  v98 = (hkReferencedObject *)v161.m_broadPhaseWorldAabb.m_min.m_quad.m128_u64[1];
+  if ( v161.m_broadPhaseWorldAabb.m_min.m_quad.m128_u64[1] )
   {
-    v101 = (hkReferencedObject *)v173.m_broadPhaseWorldAabb.m_min.m_quad.m128_u64[1];
-    v3->m_convexListFilter = (hkpConvexListFilter *)v173.m_broadPhaseWorldAabb.m_min.m_quad.m128_u64[1];
+    v101 = (hkReferencedObject *)v161.m_broadPhaseWorldAabb.m_min.m_quad.m128_u64[1];
+    this->m_convexListFilter = (hkpConvexListFilter *)v161.m_broadPhaseWorldAabb.m_min.m_quad.m128_u64[1];
     hkReferencedObject::addReference(v101);
   }
   else
   {
     v99 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v100 = (*(__int64 (__fastcall **)(_QWORD *, _QWORD))(*v99[11] + 8i64))(v99[11], (unsigned int)((_DWORD)v98 + 16));
+    v100 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*v99[11] + 8i64))(v99[11], 16i64);
     if ( v100 )
     {
       *(_DWORD *)(v100 + 8) = 0x1FFFF;
       *(_QWORD *)v100 = &hkpDefaultConvexListFilter::`vftable;
-      v3->m_convexListFilter = (hkpConvexListFilter *)v100;
+      this->m_convexListFilter = (hkpConvexListFilter *)v100;
     }
     else
     {
-      v3->m_convexListFilter = 0i64;
+      this->m_convexListFilter = 0i64;
     }
   }
   v102 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v103 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v102[11] + 8i64))(v102[11], 160i64);
-  v104 = (__m128i *)v103;
+  v103 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*v102[11] + 8i64))(v102[11], 160i64);
+  v104 = v103;
   if ( v103 )
   {
     LODWORD(v103) = 0;
-    HIDWORD(v104->m128i_i64[1]) = 0;
-    v104[7].m128i_i64[1] = 0i64;
+    *(_DWORD *)(v104 + 12) = 0;
+    *(_QWORD *)(v104 + 120) = 0i64;
   }
   else
   {
     v104 = 0i64;
   }
-  v105 = *(_DWORD *)&v173.m_broadPhaseType.m_storage;
-  v106 = BYTE4(v173.m_collisionFilter.m_pntr);
-  v3->m_collisionInput = (hkpProcessCollisionInput *)v104;
-  LODWORD(v104->m128i_i64[1]) = v103;
-  v104->m128i_i64[0] = (__int64)v3->m_collisionDispatcher;
-  v104[1].m128i_i32[0] = v105;
-  v104[1].m128i_i64[1] = (__int64)v3->m_collisionFilter;
-  v104[2].m128i_i64[0] = (__int64)v3->m_convexListFilter;
-  v107 = BYTE5(v173.m_collisionFilter.m_pntr);
-  v3->m_contactPointGeneration.m_storage = v106;
-  v104[8].m128i_i8[9] = v107;
+  v105 = *(_DWORD *)&v161.m_broadPhaseType.m_storage;
+  v106 = BYTE4(v161.m_collisionFilter.m_pntr);
+  this->m_collisionInput = (hkpProcessCollisionInput *)v104;
+  *(_DWORD *)(v104 + 8) = v103;
+  *(_QWORD *)v104 = this->m_collisionDispatcher;
+  *(_DWORD *)(v104 + 16) = v105;
+  *(_QWORD *)(v104 + 24) = this->m_collisionFilter;
+  *(_QWORD *)(v104 + 32) = this->m_convexListFilter;
+  v107 = BYTE5(v161.m_collisionFilter.m_pntr);
+  this->m_contactPointGeneration.m_storage = v106;
+  *(_BYTE *)(v104 + 137) = v107;
   v108 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v109 = (_DWORD *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v108[11] + 8i64))(v108[11], 16i64);
+  v109 = (_DWORD *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v108[11] + 8i64))(v108[11], 16i64);
   if ( v109 )
   {
     *v109 = 1008981770;
     v109[1] = 20;
   }
-  v110 = *(_DWORD *)&v173.m_contactPointGeneration.m_storage;
-  v104[9].m128i_i64[0] = (__int64)v109;
+  v110 = *(_DWORD *)&v161.m_contactPointGeneration.m_storage;
+  *(_QWORD *)(v104 + 144) = v109;
   *v109 = v110;
   v111 = _mm_sub_ps(v11, v10);
-  *(float *)(v104[9].m128i_i64[0] + 4) = v173.m_solverTau;
+  *(float *)(*(_QWORD *)(v104 + 144) + 4i64) = v161.m_solverTau;
   v112 = _mm_rcp_ps(v111);
-  v104[8].m128i_i8[8] = BYTE1(v173.m_broadPhaseNumMarkers);
-  v113 = v104->m128i_i64[0];
-  v104[2].m128i_i32[2] = 0;
-  v114 = (__m128 *)&v104[5];
-  v115 = v104[3].m128i_i8;
-  v116 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v111, v112)), v112);
-  v104[7].m128i_i64[0] = v113 + 10368;
-  v104[6].m128i_i64[0] = 0i64;
-  v104[6].m128i_i64[1] = 0i64;
-  v117 = (__m128 *)&v104[4];
-  *v114 = _mm_mul_ps(
-            _mm_shuffle_ps((__m128)LODWORD(FLOAT_2_1473526e9), (__m128)LODWORD(FLOAT_2_1473526e9), 0),
-            _mm_shuffle_ps(v116, _mm_unpackhi_ps(v116, query.m_quad), 196));
-  v177 = FLOAT_4_6568971eN10;
-  v118 = _mm_xor_ps((__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 0), v10);
-  *v115 = v118;
-  *v117 = _mm_add_ps(
-            _mm_mul_ps(
-              _mm_shuffle_ps((__m128)LODWORD(FLOAT_4_6568971eN10), (__m128)LODWORD(FLOAT_4_6568971eN10), 0),
-              v111),
-            v118);
-  *(__m128i *)v114 = _mm_srli_si128(_mm_slli_si128(_mm_load_si128(v104 + 5), 4), 4);
-  *v115 = _mm_srli_si128(_mm_slli_si128(_mm_load_si128(v104 + 3), 4), 4);
-  *(__m128i *)v117 = _mm_srli_si128(_mm_slli_si128(_mm_load_si128(v104 + 4), 4), 4);
-  ((void (*)(void))v3->m_broadPhase->vfptr[15].__vecDelDtor)();
-  hkWorld_setupContactMgrFactories(v3, v3->m_collisionDispatcher);
-  v119 = hkpWorld::m_forceMultithreadedSimulation.m_bool == 0;
-  v120 = BYTE1(v173.m_maxSectorsPerMidphaseCollideTask);
-  v3->m_minDesiredIslandSize = 0;
-  if ( !v119 )
-    v120 = 3;
-  v3->m_simulationType.m_storage = v120;
-  switch ( v120 )
+  *(_BYTE *)(v104 + 136) = BYTE1(v161.m_broadPhaseNumMarkers);
+  v113 = *(_QWORD *)v104;
+  *(_DWORD *)(v104 + 40) = 0;
+  v114 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v111, v112)), v112);
+  *(_QWORD *)(v104 + 112) = v113 + 10368;
+  *(_QWORD *)(v104 + 96) = 0i64;
+  *(_QWORD *)(v104 + 104) = 0i64;
+  *(__m128 *)(v104 + 80) = _mm_mul_ps(
+                             _mm_shuffle_ps((__m128)LODWORD(FLOAT_2_1473526e9), (__m128)LODWORD(FLOAT_2_1473526e9), 0),
+                             _mm_shuffle_ps(v114, _mm_unpackhi_ps(v114, query.m_quad), 196));
+  v165 = FLOAT_4_6568971eN10;
+  v115 = _mm_xor_ps((__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 0), v10);
+  *(__m128 *)(v104 + 48) = v115;
+  *(__m128 *)(v104 + 64) = _mm_add_ps(
+                             _mm_mul_ps(
+                               _mm_shuffle_ps(
+                                 (__m128)LODWORD(FLOAT_4_6568971eN10),
+                                 (__m128)LODWORD(FLOAT_4_6568971eN10),
+                                 0),
+                               v111),
+                             v115);
+  *(__m128i *)(v104 + 80) = _mm_srli_si128(_mm_slli_si128(_mm_load_si128((const __m128i *)(v104 + 80)), 4), 4);
+  *(__m128i *)(v104 + 48) = _mm_srli_si128(_mm_slli_si128(_mm_load_si128((const __m128i *)(v104 + 48)), 4), 4);
+  *(__m128i *)(v104 + 64) = _mm_srli_si128(_mm_slli_si128(_mm_load_si128((const __m128i *)(v104 + 64)), 4), 4);
+  ((void (__fastcall *)(hkpBroadPhase *))this->m_broadPhase->vfptr[15].__vecDelDtor)(this->m_broadPhase);
+  hkWorld_setupContactMgrFactories(this, this->m_collisionDispatcher);
+  v116 = hkpWorld::m_forceMultithreadedSimulation.m_bool == 0;
+  v117 = BYTE1(v161.m_maxSectorsPerMidphaseCollideTask);
+  this->m_minDesiredIslandSize = 0;
+  if ( !v116 )
+    v117 = 3;
+  this->m_simulationType.m_storage = v117;
+  switch ( v117 )
   {
     case 1:
-      v125 = hkpSimulation::createDiscrete(v3);
+      Discrete = hkpSimulation::createDiscrete(this);
       goto LABEL_95;
     case 2:
-      v125 = hkpSimulation::createContinuous(v3);
+      Discrete = hkpSimulation::createContinuous(this);
 LABEL_95:
-      v3->m_simulation = v125;
+      this->m_simulation = Discrete;
       break;
     case 3:
-      v121 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v122 = (hkCriticalSection *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v121[11] + 8i64))(
-                                    v121[11],
-                                    40i64);
-      if ( v122 )
-        hkCriticalSection::hkCriticalSection(v122, 4000);
-      v3->m_modifyConstraintCriticalSection = v122;
-      v123 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v124 = (hkCriticalSection *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v123[11] + 8i64))(
-                                    v123[11],
-                                    40i64);
-      if ( v124 )
-        hkCriticalSection::hkCriticalSection(v124, 4000);
-      v3->m_propertyMasterLock = v124;
-      v3->m_simulation = hkpSimulation::createMultithreaded(v3);
-      v3->m_minDesiredIslandSize = v173.m_maxSectorsPerNarrowphaseCollideTask;
+      v118 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+      v119 = (hkCriticalSection *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v118[11] + 8i64))(v118[11], 40i64);
+      if ( v119 )
+        hkCriticalSection::hkCriticalSection(v119, 0xFA0u);
+      this->m_modifyConstraintCriticalSection = v119;
+      v120 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+      v121 = (hkCriticalSection *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v120[11] + 8i64))(v120[11], 40i64);
+      if ( v121 )
+        hkCriticalSection::hkCriticalSection(v121, 0xFA0u);
+      this->m_propertyMasterLock = v121;
+      this->m_simulation = hkpSimulation::createMultithreaded(this);
+      this->m_minDesiredIslandSize = v161.m_maxSectorsPerNarrowphaseCollideTask;
       break;
   }
-  v126 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v127 = (hkCriticalSection *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v126[11] + 8i64))(v126[11], 40i64);
-  if ( v127 )
-    hkCriticalSection::hkCriticalSection(v127, 4000);
-  v128 = v173.m_maxEntriesPerToiMidphaseCollideTask;
-  v3->m_islandDirtyListCriticalSection = v127;
-  LODWORD(v3->m_simulation->m_frameMarkerPsiSnap) = v128;
-  v129 = _mm_mul_ps(v3->m_gravity.m_quad, v3->m_gravity.m_quad);
-  v130 = _mm_add_ps(
-           _mm_add_ps(_mm_shuffle_ps(v129, v129, 85), _mm_shuffle_ps(v129, v129, 0)),
-           _mm_shuffle_ps(v129, v129, 170));
-  v131 = _mm_rsqrt_ps(v130);
-  LODWORD(v132) = (unsigned __int128)_mm_andnot_ps(
-                                       _mm_cmpleps(v130, (__m128)0i64),
-                                       _mm_mul_ps(
-                                         _mm_mul_ps(
-                                           _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v131, v130), v131)),
-                                           _mm_mul_ps(*(__m128 *)_xmm, v131)),
-                                         v130));
-  if ( v132 == 0.0 )
-    v132 = FLOAT_9_8100004;
-  v133 = *(_DWORD *)&v173.m_deactivationNumInactiveFramesSelectFlag0;
-  v134 = v173.m_deactivationReferenceDistance;
-  v135 = v173.m_toiCollisionResponseRotateNormal;
-  v136 = v3->m_collisionInput;
-  v137 = v3->m_collisionDispatcher;
-  v138 = *(_DWORD *)&v173.m_useCompoundSpuElf.m_bool;
-  v139 = v173.m_broadPhaseWorldAabb.m_max.m_quad.m128_f32[2];
-  v3->m_numToisTillAllowedPenetrationSimplifiedToi = *(float *)&v173.m_deactivationNumInactiveFramesSelectFlag0;
-  v3->m_numToisTillAllowedPenetrationToi = v134;
-  v3->m_numToisTillAllowedPenetrationToiHigher = v135;
-  LODWORD(v3->m_numToisTillAllowedPenetrationToiForced) = v138;
-  *(float *)&v164.vfptr = v132;
-  v140 = v136->m_tolerance.m_storage;
-  *(float *)&v164.m_memSizeAndFlags = v139;
-  v169 = v120 >= 2;
-  v167 = 196609;
-  v170 = v106 == 2;
-  v168 = 327684;
-  *((float *)&v164.vfptr + 1) = v140;
-  v164.m_writer.m_pntr = (hkStreamWriter *)__PAIR__(LODWORD(v134), v133);
-  v172 = v25;
-  v171 = v106 >= 1;
-  *(float *)(&v164.m_referenceCount + 1) = v173.m_broadPhaseWorldAabb.m_max.m_quad.m128_f32[0];
-  v165 = v135;
-  v166 = v138;
-  hkpCollisionDispatcher::initCollisionQualityInfo(v137, (hkpCollisionDispatcher::InitCollisionQualityInfo *)&v164);
-  v3->m_collisionInput->m_collisionQualityInfo.m_storage = &v3->m_collisionDispatcher->m_collisionQualityInfo[1];
-  v141 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v142 = (hkpSimulationIsland *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v141[11] + 8i64))(
-                                  v141[11],
-                                  184i64);
-  if ( v142 )
-    hkpSimulationIsland::hkpSimulationIsland(v142, v3);
+  v123 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v124 = (hkCriticalSection *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v123[11] + 8i64))(v123[11], 40i64);
+  if ( v124 )
+    hkCriticalSection::hkCriticalSection(v124, 0xFA0u);
+  m_maxEntriesPerToiMidphaseCollideTask = v161.m_maxEntriesPerToiMidphaseCollideTask;
+  this->m_islandDirtyListCriticalSection = v124;
+  LODWORD(this->m_simulation->m_frameMarkerPsiSnap) = m_maxEntriesPerToiMidphaseCollideTask;
+  v126 = _mm_mul_ps(this->m_gravity.m_quad, this->m_gravity.m_quad);
+  v127 = _mm_add_ps(
+           _mm_add_ps(_mm_shuffle_ps(v126, v126, 85), _mm_shuffle_ps(v126, v126, 0)),
+           _mm_shuffle_ps(v126, v126, 170));
+  v128 = _mm_rsqrt_ps(v127);
+  v129 = _mm_andnot_ps(
+           _mm_cmple_ps(v127, (__m128)0i64),
+           _mm_mul_ps(
+             _mm_mul_ps(
+               _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v128, v127), v128)),
+               _mm_mul_ps(*(__m128 *)_xmm, v128)),
+             v127)).m128_f32[0];
+  if ( v129 == 0.0 )
+    v129 = FLOAT_9_8100004;
+  v130 = *(float *)&v161.m_deactivationNumInactiveFramesSelectFlag0;
+  m_deactivationReferenceDistance = v161.m_deactivationReferenceDistance;
+  m_toiCollisionResponseRotateNormal = v161.m_toiCollisionResponseRotateNormal;
+  m_collisionInput = this->m_collisionInput;
+  m_collisionDispatcher = this->m_collisionDispatcher;
+  v135 = *(float *)&v161.m_useCompoundSpuElf.m_bool;
+  v136 = v161.m_broadPhaseWorldAabb.m_max.m_quad.m128_f32[2];
+  this->m_numToisTillAllowedPenetrationSimplifiedToi = *(float *)&v161.m_deactivationNumInactiveFramesSelectFlag0;
+  this->m_numToisTillAllowedPenetrationToi = m_deactivationReferenceDistance;
+  this->m_numToisTillAllowedPenetrationToiHigher = m_toiCollisionResponseRotateNormal;
+  this->m_numToisTillAllowedPenetrationToiForced = v135;
+  v160.m_gravityLength = v129;
+  v137 = m_collisionInput->m_tolerance.m_storage;
+  v160.m_minDeltaTime = v136;
+  v160.m_wantContinuousCollisionDetection.m_bool = v117 >= 2;
+  *(_DWORD *)&v160.m_defaultConstraintPriority = 196609;
+  v160.m_enableNegativeManifoldTims.m_bool = v106 == 2;
+  *(_DWORD *)&v160.m_toiHigherConstraintPriority = 327684;
+  v160.m_collisionTolerance = v137;
+  v160.m_numToisTillAllowedPenetrationSimplifiedToi = v130;
+  v160.m_enableToiWeldRejection.m_bool = m_broadPhaseNumMarkers;
+  v160.m_enableNegativeToleranceToCreateNon4dContacts.m_bool = v106 >= 1;
+  LODWORD(v160.m_maxLinearVelocity) = v161.m_broadPhaseWorldAabb.m_max.m_quad.m128_i32[0];
+  v160.m_numToisTillAllowedPenetrationToi = m_deactivationReferenceDistance;
+  v160.m_numToisTillAllowedPenetrationToiHigher = m_toiCollisionResponseRotateNormal;
+  v160.m_numToisTillAllowedPenetrationToiForced = v135;
+  hkpCollisionDispatcher::initCollisionQualityInfo(m_collisionDispatcher, &v160);
+  this->m_collisionInput->m_collisionQualityInfo.m_storage = &this->m_collisionDispatcher->m_collisionQualityInfo[1];
+  v138 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v139 = (hkpSimulationIsland *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v138[11] + 8i64))(v138[11], 184i64);
+  if ( v139 )
+    hkpSimulationIsland::hkpSimulationIsland(v139, this);
   else
-    v143 = 0i64;
-  v3->m_fixedIsland = v143;
-  v143->m_storageIndex = -1;
-  *((_BYTE *)v3->m_fixedIsland + 50) &= 0xF3u;
-  *((_BYTE *)v3->m_fixedIsland + 50) &= 0xFCu;
-  if ( !v3->m_wantSimulationIslands.m_bool )
+    v140 = 0i64;
+  this->m_fixedIsland = v140;
+  v140->m_storageIndex = -1;
+  *((_BYTE *)this->m_fixedIsland + 50) &= 0xF3u;
+  *((_BYTE *)this->m_fixedIsland + 50) &= 0xFCu;
+  if ( !this->m_wantSimulationIslands.m_bool )
   {
-    v144 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v145 = (hkpSimulationIsland *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v144[11] + 8i64))(
-                                    v144[11],
-                                    184i64);
-    if ( v145 )
+    v141 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    v142 = (hkpSimulationIsland *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v141[11] + 8i64))(v141[11], 184i64);
+    if ( v142 )
     {
-      hkpSimulationIsland::hkpSimulationIsland(v145, v3);
-      v147 = v146;
+      hkpSimulationIsland::hkpSimulationIsland(v142, this);
+      v144 = v143;
     }
     else
     {
-      v147 = 0i64;
+      v144 = 0i64;
     }
-    if ( v3->m_activeSimulationIslands.m_size == (v3->m_activeSimulationIslands.m_capacityAndFlags & 0x3FFFFFFF) )
+    if ( this->m_activeSimulationIslands.m_size == (this->m_activeSimulationIslands.m_capacityAndFlags & 0x3FFFFFFF) )
       hkArrayUtil::_reserveMore(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        &v3->m_activeSimulationIslands,
+        &hkContainerHeapAllocator::s_alloc,
+        (const void **)&this->m_activeSimulationIslands.m_data,
         8);
-    v3->m_activeSimulationIslands.m_data[v3->m_activeSimulationIslands.m_size++] = v147;
-    v147->m_storageIndex = 0;
+    this->m_activeSimulationIslands.m_data[this->m_activeSimulationIslands.m_size++] = v144;
+    v144->m_storageIndex = 0;
   }
-  hkpRigidBodyCinfo::hkpRigidBodyCinfo((hkpRigidBodyCinfo *)&v173.m_maxNumToiCollisionPairsSinglethreaded);
-  v175 = 5;
-  v174 = 0;
-  v148 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v149 = (hkpRigidBody *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v148[11] + 8i64))(v148[11], 720i64);
-  if ( v149 )
-    hkpRigidBody::hkpRigidBody(v149, (hkpRigidBodyCinfo *)&v173.m_maxNumToiCollisionPairsSinglethreaded);
+  hkpRigidBodyCinfo::hkpRigidBodyCinfo((hkpRigidBodyCinfo *)&v161.m_maxNumToiCollisionPairsSinglethreaded);
+  v163 = 5;
+  v162 = 0;
+  v145 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v146 = (hkpRigidBody *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v145[11] + 8i64))(v145[11], 720i64);
+  if ( v146 )
+    hkpRigidBody::hkpRigidBody(v146, (hkpRigidBodyCinfo *)&v161.m_maxNumToiCollisionPairsSinglethreaded);
   else
-    v150 = 0i64;
-  v3->m_fixedRigidBody = v150;
-  v150->m_npData = 0;
-  hkpWorld::addEntity(v3, (hkpEntity *)&v3->m_fixedRigidBody->vfptr, HK_ENTITY_ACTIVATION_DO_ACTIVATE);
-  hkReferencedObject::removeReference((hkReferencedObject *)&v3->m_fixedRigidBody->vfptr);
-  v151 = v173.m_broadPhaseBorderBehaviour.m_storage;
-  v152 = (_DWORD *)&v3->m_dynamicsStepInfo.m_stepInfo.m_startTime.m_storage;
-  *v152 = 0;
-  v152[1] = 1015580809;
-  v152[2] = 1015580809;
-  v152[3] = 1114636287;
-  v3->m_collisionInput->m_dynamicsInfo = &v3->m_dynamicsStepInfo;
-  if ( v151 == 3 )
+    v147 = 0i64;
+  this->m_fixedRigidBody = v147;
+  v147->m_npData = 0;
+  hkpWorld::addEntity(this, this->m_fixedRigidBody, HK_ENTITY_ACTIVATION_DO_ACTIVATE);
+  hkReferencedObject::removeReference(this->m_fixedRigidBody);
+  v148 = v161.m_broadPhaseBorderBehaviour.m_storage;
+  this->m_dynamicsStepInfo.m_stepInfo.m_startTime.m_storage = 0.0;
+  this->m_dynamicsStepInfo.m_stepInfo.m_endTime.m_storage = 0.016666668;
+  this->m_dynamicsStepInfo.m_stepInfo.m_deltaTime.m_storage = 0.016666668;
+  this->m_dynamicsStepInfo.m_stepInfo.m_invDeltaTime.m_storage = 59.999996;
+  this->m_collisionInput->m_dynamicsInfo = &this->m_dynamicsStepInfo;
+  if ( v148 == 3 )
   {
-    v3->m_broadPhaseBorder = 0i64;
+    this->m_broadPhaseBorder = 0i64;
   }
   else
   {
-    v153 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v154 = (hkpBroadPhaseBorder *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v153[11] + 8i64))(
-                                    v153[11],
-                                    120i64);
-    if ( v154 )
+    v149 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    v150 = (hkpBroadPhaseBorder *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v149[11] + 8i64))(v149[11], 120i64);
+    if ( v150 )
     {
       hkpBroadPhaseBorder::hkpBroadPhaseBorder(
-        v154,
-        v3,
-        (hkpWorldCinfo::BroadPhaseBorderBehaviour)v151,
-        v173.m_mtPostponeAndSortBroadPhaseBorderCallbacks);
-      v3->m_broadPhaseBorder = v155;
+        v150,
+        this,
+        (hkpWorldCinfo::BroadPhaseBorderBehaviour)v148,
+        v161.m_mtPostponeAndSortBroadPhaseBorderCallbacks);
+      this->m_broadPhaseBorder = v151;
     }
     else
     {
-      v3->m_broadPhaseBorder = 0i64;
+      this->m_broadPhaseBorder = 0i64;
     }
   }
-  v156 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v157 = (hkpDefaultWorldMaintenanceMgr *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v156[11] + 8i64))(
-                                            v156[11],
+  v152 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v153 = (hkpDefaultWorldMaintenanceMgr *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v152[11] + 8i64))(
+                                            v152[11],
                                             24i64);
-  if ( v157 )
+  if ( v153 )
   {
-    hkpDefaultWorldMaintenanceMgr::hkpDefaultWorldMaintenanceMgr(v157);
-    v159 = v158;
+    hkpDefaultWorldMaintenanceMgr::hkpDefaultWorldMaintenanceMgr(v153);
+    v155 = v154;
   }
   else
   {
-    v159 = 0i64;
+    v155 = 0i64;
   }
-  v3->m_maintenanceMgr = v159;
-  ((void (__fastcall *)(hkpWorldMaintenanceMgr *, hkpWorld *))v159->vfptr[1].__first_virtual_table_function__)(v159, v3);
-  if ( LOBYTE(v173.m_maxEntriesPerToiNarrowphaseCollideTask) )
-    hkpWorldExtension::requireExtension<hkpCollisionCallbackUtil>((hkpWorldExtension *)v3, v160);
-  if ( v120 != 3 )
-    hkMultiThreadCheck::disableChecks(&v3->m_multiThreadCheck);
-  v161 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v162 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v161[11] + 8i64))(v161[11], 352i64);
-  if ( v162 )
+  this->m_maintenanceMgr = v155;
+  ((void (__fastcall *)(hkpWorldMaintenanceMgr *, hkpWorld *))v155->vfptr[1].__first_virtual_table_function__)(
+    v155,
+    this);
+  if ( LOBYTE(v161.m_maxEntriesPerToiNarrowphaseCollideTask) )
+    hkpWorldExtension::requireExtension<hkpCollisionCallbackUtil>((hkpWorldExtension *)this, v156);
+  if ( v117 != 3 )
+    hkMultiThreadCheck::disableChecks(&this->m_multiThreadCheck);
+  v157 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v158 = (hkpMtThreadStructure *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v157[11] + 8i64))(v157[11], 352i64);
+  if ( v158 )
   {
-    *(_QWORD *)(v162 + 152) = hkpBeginConstraints;
-    *(_DWORD *)(v162 + 172) = 0;
-    *(_QWORD *)(v162 + 280) = 0i64;
+    v158->m_constraintQueryIn.m_beginConstraints = hkpBeginConstraints;
+    v158->m_collisionInput.m_forceAcceptContactPoints.m_storage = 0;
+    v158->m_collisionInput.m_spareAgentSector = 0i64;
   }
   else
   {
-    v162 = 0i64;
+    v158 = 0i64;
   }
-  v163 = *(hkReferencedObject **)&v173.m_collisionTolerance;
-  v3->m_multithreadedSimulationJobData = (hkpMtThreadStructure *)v162;
-  if ( v163 )
-    hkReferencedObject::removeReference(v163);
+  v159 = *(hkReferencedObject **)&v161.m_collisionTolerance;
+  this->m_multithreadedSimulationJobData = v158;
+  if ( v159 )
+    hkReferencedObject::removeReference(v159);
   if ( v98 )
     hkReferencedObject::removeReference(v98);
   if ( v93 )
     hkReferencedObject::removeReference(v93);
-}ct::removeReference(v98);
-  if ( v93 )
-    hkReferencedObject::removeReference(v93);
-}
+}CallbackUtil>((hkpWorldExtension *)this, v156);
+  if ( v117 != 3 )
+    hkMultiThreadCheck::disableChecks(&this->m_multiThreadCheck);
+  v157 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v158 = (hkpMtThreadStructure *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v157[11] + 8i64))(v157[11], 352i64);
+  if ( v158 )
+  {
+    v158->m_constraintQueryIn.m_beginConstraints = hkpBeginConstraints;
+    v158->m_collisionInput.m_forceAcceptContactPoints.m_storage = 0;
+    v158->m_collisionInput.m_spareAgentSector = 0i64;
+  }
+  else
+  {
+    v158 = 0i64;
+  }
+  v159 = *(hkReferencedObject **)&v161.m_collisionTolerance;
+  this->m_multithreadedSimulationJobData = v158;
+  if ( v159 )
+    hkReferencedObject::removeReference(v159);
+  if ( v98 )
+    hkReferencedObject::removeR
 
 // File Line: 3397
 // RVA: 0xD5C1D0
-void __fastcall hkpWorld::shiftBroadPhase(hkpWorld *this, hkVector4f *shiftDistance, hkVector4f *effectiveShiftDistanceOut, hkpWorld::CachedAabbUpdate updateAabbs)
+void __fastcall hkpWorld::shiftBroadPhase(
+        hkpWorld *this,
+        hkVector4f *shiftDistance,
+        hkVector4f *effectiveShiftDistanceOut,
+        hkpWorld::CachedAabbUpdate updateAabbs)
 {
-  hkpWorld *v4; // r15
-  hkpWorld::CachedAabbUpdate v5; // er12
-  hkVector4f *v6; // rsi
-  hkVector4f *v7; // rbx
-  _QWORD *v8; // rax
+  _QWORD *Value; // rax
   _QWORD *v9; // rcx
   _QWORD *v10; // r8
   unsigned __int64 v11; // rax
-  signed __int64 v12; // rcx
-  hkpBroadPhase *v13; // rcx
-  __int64 v14; // r13
-  hkpCollisionFilter *v15; // r9
-  hkpCollidableCollidableFilter *v16; // r9
-  hkpBroadPhaseBorder *v17; // r14
-  signed __int64 v18; // rdi
-  __m128 *v19; // rbx
-  int v20; // eax
-  int v21; // eax
-  __int64 v22; // rbx
-  int v23; // er8
-  bool v24; // zf
-  unsigned int v25; // eax
-  __int64 v26; // rdi
-  __int64 v27; // rax
-  char *v28; // rsi
-  signed int v29; // er14
-  __int64 *v30; // rdx
-  BOOL v31; // eax
-  _BOOL8 v32; // rbx
-  __int64 v33; // r9
-  hkpSimulationIsland **v34; // r10
-  __int64 v35; // rdx
-  hkpSimulationIsland *v36; // rax
-  _BOOL8 v37; // rcx
-  __int64 v38; // r9
-  hkpSimulationIsland **v39; // r10
-  __int64 v40; // r11
-  __int64 v41; // rdx
-  hkpSimulationIsland *v42; // rax
-  __int64 v43; // rcx
-  char *v44; // r12
+  _QWORD *v12; // rcx
+  hkpBroadPhase *m_broadPhase; // rcx
+  hkpCollisionFilter *m_collisionFilter; // r9
+  hkpCollidableCollidableFilter *v15; // r9
+  hkpBroadPhaseBorder *m_broadPhaseBorder; // r14
+  __int64 i; // rdi
+  __m128 *v18; // rbx
+  int v19; // eax
+  int m_size; // eax
+  hkpSimulationIsland *m_fixedIsland; // rbx
+  int v22; // r8d
+  bool v23; // zf
+  unsigned int v24; // eax
+  __int64 v25; // rdi
+  __int64 v26; // rax
+  char *v27; // rsi
+  int v28; // r14d
+  __int64 *v29; // rdx
+  BOOL v30; // eax
+  _BOOL8 v31; // rbx
+  __int64 v32; // r9
+  hkpSimulationIsland **m_data; // r10
+  __int64 v34; // rdx
+  hkpSimulationIsland *v35; // rax
+  _BOOL8 v36; // rcx
+  __int64 v37; // r9
+  hkpSimulationIsland **v38; // r10
+  __int64 v39; // r11
+  __int64 v40; // rdx
+  hkpSimulationIsland *v41; // rax
+  __int64 v42; // rcx
+  char *v43; // r12
+  __int64 v44; // r13
   __int64 v45; // r14
   int v46; // ebx
   __int64 v47; // rdi
@@ -5819,159 +5577,156 @@ void __fastcall hkpWorld::shiftBroadPhase(hkpWorld *this, hkVector4f *shiftDista
   _QWORD *v50; // rcx
   _QWORD *v51; // r8
   unsigned __int64 v52; // rax
-  signed __int64 v53; // rcx
-  __int64 v54; // [rsp+20h] [rbp-60h]
-  hkpEntity **array; // [rsp+28h] [rbp-58h]
+  _QWORD *v53; // rcx
+  hkpSimulationIsland *v54; // [rsp+20h] [rbp-60h] BYREF
+  hkpEntity **array; // [rsp+28h] [rbp-58h] BYREF
   int v56; // [rsp+30h] [rbp-50h]
   int v57; // [rsp+34h] [rbp-4Ch]
-  hkpTypedBroadPhaseHandlePair *newPairs; // [rsp+38h] [rbp-48h]
+  hkpTypedBroadPhaseHandlePair *newPairs; // [rsp+38h] [rbp-48h] BYREF
   int numNewPairs; // [rsp+40h] [rbp-40h]
   int v60; // [rsp+44h] [rbp-3Ch]
-  signed int v61; // [rsp+90h] [rbp+10h]
+  int v61; // [rsp+90h] [rbp+10h]
   void *v62; // [rsp+A0h] [rbp+20h]
-  int v63; // [rsp+A8h] [rbp+28h]
+  int v63; // [rsp+A8h] [rbp+28h] BYREF
 
-  v4 = this;
-  v5 = updateAabbs;
-  v6 = effectiveShiftDistanceOut;
-  v7 = shiftDistance;
-  v8 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v9 = (_QWORD *)v8[1];
-  v10 = v8;
-  if ( (unsigned __int64)v9 < v8[3] )
+  Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v9 = (_QWORD *)Value[1];
+  v10 = Value;
+  if ( (unsigned __int64)v9 < Value[3] )
   {
     *v9 = "TtBroadphase Shift";
     v11 = __rdtsc();
-    v12 = (signed __int64)(v9 + 2);
-    *(_DWORD *)(v12 - 8) = v11;
+    v12 = v9 + 2;
+    *((_DWORD *)v12 - 2) = v11;
     v10[1] = v12;
   }
-  v13 = v4->m_broadPhase;
-  LODWORD(v14) = 0;
-  v60 = 2147483648;
+  m_broadPhase = this->m_broadPhase;
+  v60 = 0x80000000;
   newPairs = 0i64;
   numNewPairs = 0;
-  ((void (__fastcall *)(hkpBroadPhase *, hkVector4f *, hkVector4f *, hkpTypedBroadPhaseHandlePair **))v13->vfptr[11].__first_virtual_table_function__)(
-    v13,
-    v7,
-    v6,
+  ((void (__fastcall *)(hkpBroadPhase *, hkVector4f *, hkVector4f *, hkpTypedBroadPhaseHandlePair **))m_broadPhase->vfptr[11].__first_virtual_table_function__)(
+    m_broadPhase,
+    shiftDistance,
+    effectiveShiftDistanceOut,
     &newPairs);
-  ((void (__fastcall *)(hkpBroadPhase *, hkpCollisionInput::Aabb32Info *, hkVector4f *))v4->m_broadPhase->vfptr[12].__vecDelDtor)(
-    v4->m_broadPhase,
-    &v4->m_collisionInput->m_aabb32Info,
-    &v4->m_collisionInput->m_aabb32Info.m_bitOffsetHigh);
-  v4->m_broadPhaseExtents[0].m_quad = _mm_add_ps(v4->m_broadPhaseExtents[0].m_quad, v6->m_quad);
-  v4->m_broadPhaseExtents[1].m_quad = _mm_add_ps(v6->m_quad, v4->m_broadPhaseExtents[1].m_quad);
-  v15 = v4->m_collisionFilter;
-  ++v4->m_criticalOperationsLockCount;
-  if ( v15 )
-    v16 = (hkpCollidableCollidableFilter *)&v15->vfptr;
+  ((void (__fastcall *)(hkpBroadPhase *, hkpCollisionInput::Aabb32Info *, hkVector4f *))this->m_broadPhase->vfptr[12].__vecDelDtor)(
+    this->m_broadPhase,
+    &this->m_collisionInput->m_aabb32Info,
+    &this->m_collisionInput->m_aabb32Info.m_bitOffsetHigh);
+  this->m_broadPhaseExtents[0].m_quad = _mm_add_ps(
+                                          this->m_broadPhaseExtents[0].m_quad,
+                                          effectiveShiftDistanceOut->m_quad);
+  this->m_broadPhaseExtents[1].m_quad = _mm_add_ps(
+                                          effectiveShiftDistanceOut->m_quad,
+                                          this->m_broadPhaseExtents[1].m_quad);
+  m_collisionFilter = this->m_collisionFilter;
+  ++this->m_criticalOperationsLockCount;
+  if ( m_collisionFilter )
+    v15 = &m_collisionFilter->hkpCollidableCollidableFilter;
   else
-    v16 = 0i64;
-  hkpTypedBroadPhaseDispatcher::addPairs(v4->m_broadPhaseDispatcher, newPairs, numNewPairs, v16);
-  v17 = v4->m_broadPhaseBorder;
-  if ( v17 )
+    v15 = 0i64;
+  hkpTypedBroadPhaseDispatcher::addPairs(this->m_broadPhaseDispatcher, newPairs, numNewPairs, v15);
+  m_broadPhaseBorder = this->m_broadPhaseBorder;
+  if ( m_broadPhaseBorder )
   {
-    v18 = 0i64;
-    do
+    for ( i = 0i64; i < 6; ++i )
     {
-      v19 = (__m128 *)v17->m_phantoms[v18];
-      v20 = (*(__int64 (__fastcall **)(__m128 *))(v19->m128_u64[0] + 48))(v19);
-      if ( v20 )
+      v18 = (__m128 *)m_broadPhaseBorder->m_phantoms[i];
+      v19 = (*(__int64 (__fastcall **)(__m128 *))(v18->m128_u64[0] + 48))(v18);
+      if ( v19 )
       {
-        if ( (unsigned int)(v20 - 1) <= 1 )
-          v19[18] = _mm_add_ps(v6->m_quad, v19[18]);
+        if ( (unsigned int)(v19 - 1) <= 1 )
+          v18[18] = _mm_add_ps(effectiveShiftDistanceOut->m_quad, v18[18]);
       }
       else
       {
-        v19[15] = _mm_add_ps(v19[15], v6->m_quad);
-        v19[16] = _mm_add_ps(v6->m_quad, v19[16]);
+        v18[15] = _mm_add_ps(v18[15], effectiveShiftDistanceOut->m_quad);
+        v18[16] = _mm_add_ps(effectiveShiftDistanceOut->m_quad, v18[16]);
       }
-      ++v18;
     }
-    while ( v18 < 6 );
   }
-  if ( v5 == SHIFT_BROADPHASE_UPDATE_ENTITY_AABBS )
+  if ( updateAabbs == SHIFT_BROADPHASE_UPDATE_ENTITY_AABBS )
   {
-    v21 = v4->m_inactiveSimulationIslands.m_size;
-    v22 = (__int64)v4->m_fixedIsland;
+    m_size = this->m_inactiveSimulationIslands.m_size;
+    m_fixedIsland = this->m_fixedIsland;
     array = 0i64;
-    ++v21;
-    v23 = 0;
+    ++m_size;
+    v22 = 0;
     v56 = 0;
-    v24 = v4->m_activeSimulationIslands.m_size + v21 == 0;
-    v25 = v4->m_activeSimulationIslands.m_size + v21;
-    v57 = 2147483648;
-    v54 = v22;
-    v26 = v25;
-    if ( v24 )
+    v23 = this->m_activeSimulationIslands.m_size + m_size == 0;
+    v24 = this->m_activeSimulationIslands.m_size + m_size;
+    v57 = 0x80000000;
+    v54 = m_fixedIsland;
+    v25 = v24;
+    if ( v23 )
     {
-      v28 = 0i64;
+      v27 = 0i64;
     }
     else
     {
-      v63 = 8 * v25;
-      v27 = ((__int64 (__fastcall *)(hkContainerHeapAllocator::Allocator *, int *, _QWORD))hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc)(
+      v63 = 8 * v24;
+      v26 = ((__int64 (__fastcall *)(hkContainerHeapAllocator::Allocator *, int *, _QWORD))hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc)(
               &hkContainerHeapAllocator::s_alloc,
               &v63,
               0i64);
-      v23 = v56;
-      v28 = (char *)v27;
-      v25 = v63 / 8;
+      v22 = v56;
+      v27 = (char *)v26;
+      v24 = v63 / 8;
     }
-    v29 = 2147483648;
-    v30 = &v54;
-    if ( v25 )
-      v29 = v25;
-    v31 = v22 != 0;
-    v62 = v28;
-    if ( !v22 )
-      v30 = 0i64;
-    v61 = v29;
-    v32 = v22 != 0;
-    if ( v31 > 0 )
+    v28 = 0x80000000;
+    v29 = (__int64 *)&v54;
+    if ( v24 )
+      v28 = v24;
+    v30 = m_fixedIsland != 0i64;
+    v62 = v27;
+    if ( !m_fixedIsland )
+      v29 = 0i64;
+    v61 = v28;
+    v31 = m_fixedIsland != 0i64;
+    if ( v30 > 0 )
     {
-      memmove(v28, v30, 8i64 * v31);
-      v23 = v56;
+      memmove(v27, v29, 8i64 * v30);
+      v22 = v56;
     }
-    v33 = v4->m_activeSimulationIslands.m_size;
-    v34 = v4->m_activeSimulationIslands.m_data;
-    v35 = 0i64;
-    if ( v33 > 0 )
+    v32 = this->m_activeSimulationIslands.m_size;
+    m_data = this->m_activeSimulationIslands.m_data;
+    v34 = 0i64;
+    if ( v32 > 0 )
     {
       do
       {
-        v36 = v34[v35];
-        v37 = v32 + v35++;
-        *(_QWORD *)&v28[8 * v37] = v36;
+        v35 = m_data[v34];
+        v36 = v31 + v34++;
+        *(_QWORD *)&v27[8 * v36] = v35;
       }
-      while ( v35 < v33 );
-      v23 = v56;
+      while ( v34 < v32 );
+      v22 = v56;
     }
-    v38 = v4->m_inactiveSimulationIslands.m_size;
-    v39 = v4->m_inactiveSimulationIslands.m_data;
-    v40 = v4->m_activeSimulationIslands.m_size;
-    v41 = 0i64;
-    if ( v38 > 0 )
+    v37 = this->m_inactiveSimulationIslands.m_size;
+    v38 = this->m_inactiveSimulationIslands.m_data;
+    v39 = this->m_activeSimulationIslands.m_size;
+    v40 = 0i64;
+    if ( v37 > 0 )
     {
       do
       {
-        v42 = v39[v41];
-        v43 = v41++ + v40 + v32;
-        *(_QWORD *)&v28[8 * v43] = v42;
+        v41 = v38[v40];
+        v42 = v40 + v39 + v31;
+        ++v40;
+        *(_QWORD *)&v27[8 * v42] = v41;
       }
-      while ( v41 < v38 );
-      v23 = v56;
+      while ( v40 < v37 );
+      v22 = v56;
     }
-    if ( (signed int)v26 > 0 )
+    if ( (int)v25 > 0 )
     {
-      v44 = v28;
-      v14 = v26;
+      v43 = v27;
+      v44 = v25;
       do
       {
-        v45 = *(_QWORD *)v44;
+        v45 = *(_QWORD *)v43;
         v46 = 0;
-        if ( *(_DWORD *)(*(_QWORD *)v44 + 104i64) > 0 )
+        if ( *(int *)(*(_QWORD *)v43 + 104i64) > 0 )
         {
           v47 = 0i64;
           do
@@ -5979,45 +5734,39 @@ void __fastcall hkpWorld::shiftBroadPhase(hkpWorld *this, hkVector4f *shiftDista
             v48 = *(_QWORD *)(v45 + 96);
             if ( *(_QWORD *)(*(_QWORD *)(v48 + v47) + 32i64) )
             {
-              if ( v23 == (v57 & 0x3FFFFFFF) )
+              if ( v22 == (v57 & 0x3FFFFFFF) )
               {
-                hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, 8);
-                v23 = v56;
+                hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&array, 8);
+                v22 = v56;
               }
-              array[v23] = *(hkpEntity **)(v48 + v47);
-              v23 = v56++ + 1;
+              array[v22] = *(hkpEntity **)(v48 + v47);
+              v22 = ++v56;
             }
             ++v46;
             v47 += 8i64;
           }
           while ( v46 < *(_DWORD *)(v45 + 104) );
         }
-        v44 += 8;
-        --v14;
+        v43 += 8;
+        --v44;
       }
-      while ( v14 );
-      v29 = v61;
+      while ( v44 );
+      v28 = v61;
     }
-    hkpEntityAabbUtil::entityBatchRecalcAabb((hkpCollisionInput *)&v4->m_collisionInput->m_dispatcher, array, v23);
-    if ( v29 >= 0 )
-      hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-        v62,
-        8 * v29);
-    v56 = v14;
+    hkpEntityAabbUtil::entityBatchRecalcAabb(this->m_collisionInput, array, v22);
+    if ( v28 >= 0 )
+      hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v62, 8 * v28);
+    v56 = 0;
     if ( v57 >= 0 )
-      hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-        array,
-        8 * v57);
+      hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, array, 8 * v57);
   }
-  v24 = v4->m_criticalOperationsLockCount-- == 1;
-  if ( v24 && !v4->m_blockExecutingPendingOperations.m_bool )
+  v23 = this->m_criticalOperationsLockCount-- == 1;
+  if ( v23 && !this->m_blockExecutingPendingOperations.m_bool )
   {
-    if ( v4->m_pendingOperationsCount )
-      hkpWorld::internal_executePendingOperations(v4);
-    if ( v4->m_pendingOperationQueueCount == 1 && v4->m_pendingBodyOperationsCount )
-      hkpWorld::internal_executePendingBodyOperations(v4);
+    if ( this->m_pendingOperationsCount )
+      hkpWorld::internal_executePendingOperations(this);
+    if ( this->m_pendingOperationQueueCount == 1 && this->m_pendingBodyOperationsCount )
+      hkpWorld::internal_executePendingBodyOperations(this);
   }
   v49 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
   v50 = (_QWORD *)v49[1];
@@ -6026,46 +5775,40 @@ void __fastcall hkpWorld::shiftBroadPhase(hkpWorld *this, hkVector4f *shiftDista
   {
     *v50 = "Et";
     v52 = __rdtsc();
-    v53 = (signed __int64)(v50 + 2);
-    *(_DWORD *)(v53 - 8) = v52;
+    v53 = v50 + 2;
+    *((_DWORD *)v53 - 2) = v52;
     v51[1] = v53;
   }
-  numNewPairs = v14;
+  numNewPairs = 0;
   if ( v60 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      newPairs,
-      16 * v60);
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, newPairs, 16 * v60);
 }
 
 // File Line: 3493
 // RVA: 0xD5B2D0
-void __fastcall hkpWorld::setCollisionFilter(hkpWorld *this, hkpCollisionFilter *filter, hkBool runUpdateCollisionFilterOnWorld, hkpUpdateCollisionFilterOnWorldMode updateMode, hkpUpdateCollectionFilterMode updateShapeCollectionFilter)
+void __fastcall hkpWorld::setCollisionFilter(
+        hkpWorld *this,
+        hkpCollisionFilter *filter,
+        hkBool runUpdateCollisionFilterOnWorld,
+        hkpUpdateCollisionFilterOnWorldMode updateMode,
+        hkpUpdateCollectionFilterMode updateShapeCollectionFilter)
 {
-  hkpUpdateCollisionFilterOnWorldMode v5; // esi
   hkpCollisionFilter *v6; // rbx
-  hkpWorld *v7; // rdi
-  _QWORD **v8; // rax
+  _QWORD **Value; // rax
   hkpNullCollisionFilter *v9; // rax
   hkpCollisionFilter *v10; // rax
-  hkReferencedObject *v11; // rcx
-  hkpProcessCollisionInput *v12; // rax
-  char v13; // [rsp+40h] [rbp+18h]
+  hkpCollisionFilter *m_collisionFilter; // rcx
+  hkpProcessCollisionInput *m_collisionInput; // rax
 
-  v13 = runUpdateCollisionFilterOnWorld.m_bool;
-  v5 = updateMode;
   v6 = filter;
-  v7 = this;
   if ( filter )
   {
-    hkReferencedObject::addReference((hkReferencedObject *)&filter->vfptr);
+    hkReferencedObject::addReference(filter);
   }
   else
   {
-    v8 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v9 = (hkpNullCollisionFilter *)(*(__int64 (__fastcall **)(_QWORD *, _QWORD))(*v8[11] + 8i64))(
-                                     v8[11],
-                                     (unsigned int)((_DWORD)v6 + 72));
+    Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    v9 = (hkpNullCollisionFilter *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 72i64);
     if ( v9 )
     {
       hkpNullCollisionFilter::hkpNullCollisionFilter(v9);
@@ -6076,17 +5819,17 @@ void __fastcall hkpWorld::setCollisionFilter(hkpWorld *this, hkpCollisionFilter 
       v6 = 0i64;
     }
   }
-  v11 = (hkReferencedObject *)&v7->m_collisionFilter->vfptr;
-  if ( v11 )
-    hkReferencedObject::removeReference(v11);
-  v12 = v7->m_collisionInput;
-  v7->m_collisionFilter = v6;
-  v12->m_filter.m_storage = v6;
-  ((void (__fastcall *)(hkpCollisionFilter *, hkpWorld *))v7->m_collisionFilter->vfptr[1].__first_virtual_table_function__)(
-    v7->m_collisionFilter,
-    v7);
-  if ( v13 )
-    hkpWorld::updateCollisionFilterOnWorld(v7, v5, updateShapeCollectionFilter);
+  m_collisionFilter = this->m_collisionFilter;
+  if ( m_collisionFilter )
+    hkReferencedObject::removeReference(m_collisionFilter);
+  m_collisionInput = this->m_collisionInput;
+  this->m_collisionFilter = v6;
+  m_collisionInput->m_filter.m_storage = v6;
+  ((void (__fastcall *)(hkpCollisionFilter *, hkpWorld *))this->m_collisionFilter->vfptr[1].__first_virtual_table_function__)(
+    this->m_collisionFilter,
+    this);
+  if ( runUpdateCollisionFilterOnWorld.m_bool )
+    hkpWorld::updateCollisionFilterOnWorld(this, updateMode, updateShapeCollectionFilter);
 }
 
 // File Line: 3533
@@ -6100,21 +5843,17 @@ void __fastcall hkpWorld::checkAccessGetActiveSimulationIslands(hkpWorld *this)
 // RVA: 0xD5C170
 void __fastcall hkpWorld::setBroadPhaseBorder(hkpWorld *this, hkpBroadPhaseBorder *b)
 {
-  hkpWorld *v2; // rdi
-  hkpBroadPhaseBorder *v3; // rcx
-  hkpBroadPhaseBorder *v4; // rbx
+  hkpBroadPhaseBorder *m_broadPhaseBorder; // rcx
 
-  v2 = this;
-  v3 = this->m_broadPhaseBorder;
-  v4 = b;
-  if ( v3 )
+  m_broadPhaseBorder = this->m_broadPhaseBorder;
+  if ( m_broadPhaseBorder )
   {
-    ((void (*)(void))v3->vfptr[2].__vecDelDtor)();
-    hkReferencedObject::removeReference((hkReferencedObject *)&v2->m_broadPhaseBorder->vfptr);
+    ((void (__fastcall *)(hkpBroadPhaseBorder *))m_broadPhaseBorder->hkReferencedObject::hkBaseObject::vfptr[2].__vecDelDtor)(m_broadPhaseBorder);
+    hkReferencedObject::removeReference(this->m_broadPhaseBorder);
   }
-  v2->m_broadPhaseBorder = v4;
-  if ( v4 )
-    hkReferencedObject::addReference((hkReferencedObject *)&v4->vfptr);
+  this->m_broadPhaseBorder = b;
+  if ( b )
+    hkReferencedObject::addReference(b);
 }
 
 // File Line: 3561
@@ -6128,45 +5867,37 @@ hkpBroadPhaseBorder *__fastcall hkpWorld::getBroadPhaseBorder(hkpWorld *this)
 // RVA: 0xD5B490
 void __fastcall hkpWorld::castRay(hkpWorld *this, hkpWorldRayCastInput *input, hkpRayHitCollector *collector)
 {
-  hkpWorld *v3; // rbx
-  hkpRayHitCollector *v4; // rdi
-  hkpWorldRayCastInput *v5; // rsi
-  _QWORD *v6; // rax
+  _QWORD *Value; // rax
   _QWORD *v7; // rcx
   _QWORD *v8; // r9
   unsigned __int64 v9; // rax
-  signed __int64 v10; // rcx
-  hkpCollisionFilter *v11; // r9
-  hkpBroadPhase *v12; // rdx
+  _QWORD *v10; // rcx
+  hkpCollisionFilter *m_collisionFilter; // r9
+  hkpBroadPhase *m_broadPhase; // rdx
   _QWORD *v13; // rax
   _QWORD *v14; // rcx
   _QWORD *v15; // r8
   unsigned __int64 v16; // rax
-  signed __int64 v17; // rcx
-  hkpWorldRayCaster v18; // [rsp+30h] [rbp-78h]
+  _QWORD *v17; // rcx
+  hkpWorldRayCaster v18; // [rsp+30h] [rbp-78h] BYREF
 
-  v3 = this;
-  v4 = collector;
-  v5 = input;
-  v6 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v7 = (_QWORD *)v6[1];
-  v8 = v6;
-  if ( (unsigned __int64)v7 < v6[3] )
+  Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v7 = (_QWORD *)Value[1];
+  v8 = Value;
+  if ( (unsigned __int64)v7 < Value[3] )
   {
     *v7 = "TtworldCastRayCollector";
     v9 = __rdtsc();
-    v10 = (signed __int64)(v7 + 2);
-    *(_DWORD *)(v10 - 8) = v9;
+    v10 = v7 + 2;
+    *((_DWORD *)v10 - 2) = v9;
     v8[1] = v10;
   }
-  v11 = v3->m_collisionFilter;
-  v12 = v3->m_broadPhase;
+  m_collisionFilter = this->m_collisionFilter;
+  m_broadPhase = this->m_broadPhase;
   v18.vfptr = (hkpBroadPhaseCastCollectorVtbl *)&hkpWorldRayCaster::`vftable;
   v18.m_shapeInput.m_filterInfo = 0;
-  v18.m_shapeInput.m_rayShapeCollectionFilter = 0i64;
-  v18.m_shapeInput.m_collidable = 0i64;
-  v18.m_shapeInput.m_userData = 0i64;
-  hkpWorldRayCaster::castRay(&v18, v12, v5, v11, 0i64, v4);
+  memset(&v18.m_shapeInput.m_rayShapeCollectionFilter, 0, 24);
+  hkpWorldRayCaster::castRay(&v18, m_broadPhase, input, m_collisionFilter, 0i64, collector);
   v18.vfptr = (hkpBroadPhaseCastCollectorVtbl *)&hkpBroadPhaseCastCollector::`vftable;
   v13 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
   v14 = (_QWORD *)v13[1];
@@ -6175,8 +5906,8 @@ void __fastcall hkpWorld::castRay(hkpWorld *this, hkpWorldRayCastInput *input, h
   {
     *v14 = "Et";
     v16 = __rdtsc();
-    v17 = (signed __int64)(v14 + 2);
-    *(_DWORD *)(v17 - 8) = v16;
+    v17 = v14 + 2;
+    *((_DWORD *)v17 - 2) = v16;
     v15[1] = v17;
   }
 }
@@ -6185,45 +5916,37 @@ void __fastcall hkpWorld::castRay(hkpWorld *this, hkpWorldRayCastInput *input, h
 // RVA: 0xD5B390
 void __fastcall hkpWorld::castRay(hkpWorld *this, hkpWorldRayCastInput *input, hkpWorldRayCastOutput *output)
 {
-  hkpWorld *v3; // rbx
-  hkpWorldRayCastOutput *v4; // rdi
-  hkpWorldRayCastInput *v5; // rsi
-  _QWORD *v6; // rax
+  _QWORD *Value; // rax
   _QWORD *v7; // rcx
   _QWORD *v8; // r9
   unsigned __int64 v9; // rax
-  signed __int64 v10; // rcx
-  hkpCollisionFilter *v11; // r9
-  hkpBroadPhase *v12; // rdx
+  _QWORD *v10; // rcx
+  hkpCollisionFilter *m_collisionFilter; // r9
+  hkpBroadPhase *m_broadPhase; // rdx
   _QWORD *v13; // rax
   _QWORD *v14; // rcx
   _QWORD *v15; // r8
   unsigned __int64 v16; // rax
-  signed __int64 v17; // rcx
-  hkpSimpleWorldRayCaster v18; // [rsp+30h] [rbp-68h]
+  _QWORD *v17; // rcx
+  hkpSimpleWorldRayCaster v18; // [rsp+30h] [rbp-68h] BYREF
 
-  v3 = this;
-  v4 = output;
-  v5 = input;
-  v6 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v7 = (_QWORD *)v6[1];
-  v8 = v6;
-  if ( (unsigned __int64)v7 < v6[3] )
+  Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v7 = (_QWORD *)Value[1];
+  v8 = Value;
+  if ( (unsigned __int64)v7 < Value[3] )
   {
     *v7 = "TtworldCastRay";
     v9 = __rdtsc();
-    v10 = (signed __int64)(v7 + 2);
-    *(_DWORD *)(v10 - 8) = v9;
+    v10 = v7 + 2;
+    *((_DWORD *)v10 - 2) = v9;
     v8[1] = v10;
   }
-  v11 = v3->m_collisionFilter;
-  v12 = v3->m_broadPhase;
+  m_collisionFilter = this->m_collisionFilter;
+  m_broadPhase = this->m_broadPhase;
   v18.vfptr = (hkpBroadPhaseCastCollectorVtbl *)&hkpSimpleWorldRayCaster::`vftable;
   v18.m_shapeInput.m_filterInfo = 0;
-  v18.m_shapeInput.m_rayShapeCollectionFilter = 0i64;
-  v18.m_shapeInput.m_collidable = 0i64;
-  v18.m_shapeInput.m_userData = 0i64;
-  hkpSimpleWorldRayCaster::castRay(&v18, v12, v5, v11, 0i64, v4);
+  memset(&v18.m_shapeInput.m_rayShapeCollectionFilter, 0, 24);
+  hkpSimpleWorldRayCaster::castRay(&v18, m_broadPhase, input, m_collisionFilter, 0i64, output);
   v18.vfptr = (hkpBroadPhaseCastCollectorVtbl *)&hkpBroadPhaseCastCollector::`vftable;
   v13 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
   v14 = (_QWORD *)v13[1];
@@ -6232,61 +5955,60 @@ void __fastcall hkpWorld::castRay(hkpWorld *this, hkpWorldRayCastInput *input, h
   {
     *v14 = "Et";
     v16 = __rdtsc();
-    v17 = (signed __int64)(v14 + 2);
-    *(_DWORD *)(v17 - 8) = v16;
+    v17 = v14 + 2;
+    *((_DWORD *)v17 - 2) = v16;
     v15[1] = v17;
   }
 }
 
 // File Line: 3584
 // RVA: 0xD5B5A0
-void __fastcall hkpWorld::castRayMt(hkpWorld *this, hkpWorldRayCastCommand *commandArray, int numCommands, hkJobQueue *jobQueue, hkJobThreadPool *jobThreadPool, hkSemaphore *semaphore, int numCommandsPerJob)
+void __fastcall hkpWorld::castRayMt(
+        hkpWorld *this,
+        hkpWorldRayCastCommand *commandArray,
+        int numCommands,
+        hkJobQueue *jobQueue,
+        hkJobThreadPool *jobThreadPool,
+        hkSemaphore *semaphore,
+        int numCommandsPerJob)
 {
-  hkpWorld *v7; // rdi
-  hkJobQueue *v8; // rsi
-  int v9; // er14
-  hkpWorldRayCastCommand *v10; // rbx
-  _QWORD **v11; // rax
+  _QWORD **Value; // rax
   __int64 v12; // rax
-  hkpProcessCollisionInput *v13; // rcx
+  hkpProcessCollisionInput *m_collisionInput; // rcx
   hkpCollisionQueryJobHeader *v14; // r15
-  hkpBroadPhase *v15; // rax
+  hkpBroadPhase *m_broadPhase; // rax
   int v16; // eax
   int i; // ecx
   int v18; // eax
   __int128 v19; // xmm0
   _QWORD **v20; // rax
-  hkpWorldRayCastJob v21; // [rsp+20h] [rbp-91h]
-  hkJob job; // [rsp+80h] [rbp-31h]
+  hkpWorldRayCastJob v21; // [rsp+20h] [rbp-91h] BYREF
+  hkJob job; // [rsp+80h] [rbp-31h] BYREF
   __int128 v23; // [rsp+90h] [rbp-21h]
   __int128 v24; // [rsp+A0h] [rbp-11h]
   __int128 v25; // [rsp+B0h] [rbp-1h]
   __int128 v26; // [rsp+C0h] [rbp+Fh]
   __int128 v27; // [rsp+D0h] [rbp+1Fh]
 
-  v7 = this;
-  v8 = jobQueue;
-  v9 = numCommands;
-  v10 = commandArray;
-  v11 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v12 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v11[11] + 8i64))(v11[11], 16i64);
-  v13 = v7->m_collisionInput;
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v12 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 16i64);
+  m_collisionInput = this->m_collisionInput;
   v14 = (hkpCollisionQueryJobHeader *)v12;
   v21.m_size = 96;
   *(_WORD *)&v21.m_jobSubType = 769;
   v21.m_threadAffinity = -1;
-  v15 = v7->m_broadPhase;
+  m_broadPhase = this->m_broadPhase;
   v21.m_jobDoneFlag = 0i64;
   v21.m_jobSpuType.m_storage = 1;
-  v21.m_collisionInput = v13;
+  v21.m_collisionInput = m_collisionInput;
   v21.m_sharedJobHeaderOnPpu = v14;
-  v21.m_broadphase = v15;
+  v21.m_broadphase = m_broadPhase;
   v21.m_numCommandsPerTask = 64;
   v21.m_semaphore = semaphore;
-  v21.m_commandArray = v10;
-  v21.m_numCommands = v9;
-  if ( v9 )
-    v16 = (v9 - 1) / 64 + 1;
+  v21.m_commandArray = commandArray;
+  v21.m_numCommands = numCommands;
+  if ( numCommands )
+    v16 = (numCommands - 1) / 64 + 1;
   else
     v16 = 1;
   v14->m_openJobs = v16;
@@ -6298,7 +6020,7 @@ void __fastcall hkpWorld::castRayMt(hkpWorld *this, hkpWorldRayCastCommand *comm
     v18 = numCommandsPerJob;
     if ( i < numCommandsPerJob )
       v18 = i;
-    job = v21.0;
+    job = v21.hkJob;
     v25 = *(_OWORD *)&v21.m_numCommandsPerTask;
     v24 = *(_OWORD *)&v21.m_jobDoneFlag;
     v19 = *(_OWORD *)&v21.m_numCommands;
@@ -6307,179 +6029,163 @@ void __fastcall hkpWorld::castRayMt(hkpWorld *this, hkpWorldRayCastCommand *comm
     v26 = v19;
     LODWORD(v26) = v18;
     v21.m_commandArray = (hkpWorldRayCastCommand *)(80i64 * numCommandsPerJob
-                                                  + *(unsigned __int128 *)&_mm_srli_si128(
-                                                                             *(__m128i *)&v21.m_numCommandsPerTask,
-                                                                             8));
+                                                  + _mm_srli_si128(*(__m128i *)&v21.m_numCommandsPerTask, 8).m128i_u64[0]);
     v27 = *(_OWORD *)&v21.m_numBundleCommands;
-    hkJobQueue::addJob(v8, &job, JOB_LOW_PRIORITY);
+    hkJobQueue::addJob(jobQueue, &job, JOB_LOW_PRIORITY);
   }
-  ((void (__fastcall *)(hkJobThreadPool *, hkJobQueue *, signed __int64))jobThreadPool->vfptr[5].__first_virtual_table_function__)(
+  ((void (__fastcall *)(hkJobThreadPool *, hkJobQueue *, __int64))jobThreadPool->vfptr[5].__first_virtual_table_function__)(
     jobThreadPool,
-    v8,
+    jobQueue,
     20i64);
-  hkJobQueue::processAllJobs(v8, 1);
+  hkJobQueue::processAllJobs(jobQueue, 1);
   ((void (__fastcall *)(hkJobThreadPool *))jobThreadPool->vfptr[2].__vecDelDtor)(jobThreadPool);
   hkSemaphore::acquire(semaphore);
   v20 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  (*(void (__fastcall **)(_QWORD *, hkpCollisionQueryJobHeader *, signed __int64))(*v20[11] + 16i64))(
-    v20[11],
-    v14,
-    16i64);
+  (*(void (__fastcall **)(_QWORD *, hkpCollisionQueryJobHeader *, __int64))(*v20[11] + 16i64))(v20[11], v14, 16i64);
 }
 
 // File Line: 3608
 // RVA: 0xD5BA80
-void __fastcall hkpWorld::getClosestPoints(hkpWorld *this, hkpCollidable *collA, hkpCollisionInput *input, hkpCdPointCollector *collector)
+void __fastcall hkpWorld::getClosestPoints(
+        hkpWorld *this,
+        hkpCollidable *collA,
+        hkpCollisionInput *input,
+        hkpCdPointCollector *collector)
 {
-  hkpWorld *v4; // rbp
-  hkpCollidable *v5; // r14
-  hkpCdPointCollector *v6; // r13
-  hkpCollisionInput *v7; // r15
-  float v8; // xmm2_4
-  _QWORD *v9; // r8
-  unsigned __int64 v10; // rcx
-  unsigned __int64 v11; // rax
-  hkpBroadPhase *v12; // rcx
-  _QWORD *v13; // r8
-  _QWORD *v14; // rcx
-  unsigned __int64 v15; // rax
-  signed __int64 v16; // rcx
-  int v17; // esi
-  __int64 v18; // r12
-  __int64 v19; // rdi
-  hkpCollidable *v20; // rbx
-  _QWORD *v21; // rax
-  _QWORD *v22; // rcx
-  _QWORD *v23; // r8
-  unsigned __int64 v24; // rax
-  signed __int64 v25; // rcx
-  char v26; // [rsp+20h] [rbp-858h]
-  char *v27; // [rsp+40h] [rbp-838h]
-  int v28; // [rsp+48h] [rbp-830h]
-  int v29; // [rsp+4Ch] [rbp-82Ch]
-  char v30; // [rsp+50h] [rbp-828h]
-  char v31; // [rsp+880h] [rbp+8h]
+  _QWORD *Value; // r8
+  unsigned __int64 v9; // rcx
+  unsigned __int64 v10; // rax
+  hkpBroadPhase *m_broadPhase; // rcx
+  _QWORD *v12; // r8
+  _QWORD *v13; // rcx
+  unsigned __int64 v14; // rax
+  _QWORD *v15; // rcx
+  int v16; // esi
+  __int64 m_storage; // r12
+  char *v18; // rdi
+  hkpCollidable *v19; // rbx
+  _QWORD *v20; // rax
+  _QWORD *v21; // rcx
+  _QWORD *v22; // r8
+  unsigned __int64 v23; // rax
+  _QWORD *v24; // rcx
+  char v25[32]; // [rsp+20h] [rbp-858h] BYREF
+  char *v26; // [rsp+40h] [rbp-838h] BYREF
+  int v27; // [rsp+48h] [rbp-830h]
+  int v28; // [rsp+4Ch] [rbp-82Ch]
+  char v29; // [rsp+50h] [rbp-828h] BYREF
+  char v30; // [rsp+880h] [rbp+8h] BYREF
 
-  v4 = this;
-  v5 = collA;
-  v6 = collector;
-  v7 = input;
-  v8 = input->m_tolerance.m_storage - (float)(this->m_collisionInput->m_tolerance.m_storage * 0.5);
   ((void (__fastcall *)(hkpShape *, const void *, hkpCollisionInput *, char *))collA->m_shape->vfptr[2].__vecDelDtor)(
     collA->m_shape,
     collA->m_motion,
     input,
-    &v26);
-  v9 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v10 = v9[1];
-  if ( v10 < v9[3] )
+    v25);
+  Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v9 = Value[1];
+  if ( v9 < Value[3] )
   {
-    *(_QWORD *)v10 = "LthkpWorld::getClosestPoints";
-    *(_QWORD *)(v10 + 16) = "StBroadPhase";
-    v11 = __rdtsc();
-    *(_DWORD *)(v10 + 8) = v11;
-    v9[1] = v10 + 24;
+    *(_QWORD *)v9 = "LthkpWorld::getClosestPoints";
+    *(_QWORD *)(v9 + 16) = "StBroadPhase";
+    v10 = __rdtsc();
+    *(_DWORD *)(v9 + 8) = v10;
+    Value[1] = v9 + 24;
   }
-  v12 = v4->m_broadPhase;
-  v28 = 0;
-  v27 = &v30;
-  v29 = -2147483520;
-  ((void (__fastcall *)(hkpBroadPhase *, char *, char **))v12->vfptr[9].__vecDelDtor)(v12, &v26, &v27);
-  v13 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v14 = (_QWORD *)v13[1];
-  if ( (unsigned __int64)v14 < v13[3] )
+  m_broadPhase = this->m_broadPhase;
+  v27 = 0;
+  v26 = &v29;
+  v28 = -2147483520;
+  ((void (__fastcall *)(hkpBroadPhase *, char *, char **))m_broadPhase->vfptr[9].__vecDelDtor)(m_broadPhase, v25, &v26);
+  v12 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v13 = (_QWORD *)v12[1];
+  if ( (unsigned __int64)v13 < v12[3] )
   {
-    *v14 = "StNarrowPhase";
-    v15 = __rdtsc();
-    v16 = (signed __int64)(v14 + 2);
-    *(_DWORD *)(v16 - 8) = v15;
-    v13[1] = v16;
+    *v13 = "StNarrowPhase";
+    v14 = __rdtsc();
+    v15 = v13 + 2;
+    *((_DWORD *)v15 - 2) = v14;
+    v12[1] = v15;
   }
-  v17 = v28 - 1;
-  v18 = (unsigned __int8)v5->m_shape->m_type.m_storage;
-  if ( v28 - 1 >= 0 )
+  v16 = v27 - 1;
+  m_storage = (unsigned __int8)collA->m_shape->m_type.m_storage;
+  if ( v27 - 1 >= 0 )
   {
-    v19 = (__int64)(v27 + 8);
+    v18 = v26 + 8;
     do
     {
-      v20 = (hkpCollidable *)(*(_QWORD *)v19 + *(char *)(*(_QWORD *)v19 + 5i64));
-      if ( v5 != v20
-        && *(_BYTE *)v4->m_collisionFilter->vfptr->isCollisionEnabled(
-                       (hkpCollidableCollidableFilter *)&v4->m_collisionFilter->vfptr,
-                       (hkBool *)&v31,
-                       v5,
-                       (hkpCollidable *)(*(_QWORD *)v19 + *(char *)(*(_QWORD *)v19 + 5i64)))
-        && v20->m_shape )
+      v19 = (hkpCollidable *)(*(_QWORD *)v18 + *(char *)(*(_QWORD *)v18 + 5i64));
+      if ( collA != v19
+        && this->m_collisionFilter->vfptr->isCollisionEnabled(
+             &this->m_collisionFilter->hkpCollidableCollidableFilter,
+             &v30,
+             collA,
+             *(_QWORD *)v18 + *(char *)(*(_QWORD *)v18 + 5i64))->m_bool
+        && v19->m_shape )
       {
-        (*((void (__fastcall **)(hkpCollidable *, hkpCollidable *, hkpCollisionInput *, hkpCdPointCollector *))&v7->m_dispatcher.m_storage->vfptr
-         + 5
-         * ((unsigned __int8)v7->m_dispatcher.m_storage->m_agent2Types[v18][(unsigned __int8)v20->m_shape->m_type.m_storage]
-          + 79i64)))(
-          v5,
-          v20,
-          v7,
-          v6);
+        input->m_dispatcher.m_storage->m_agent2Func[(unsigned __int8)input->m_dispatcher.m_storage->m_agent2Types[m_storage][(unsigned __int8)v19->m_shape->m_type.m_storage]].m_getClosestPointFunc(
+          collA,
+          v19,
+          input,
+          collector);
       }
-      v19 += 16i64;
-      --v17;
+      v18 += 16;
+      --v16;
     }
-    while ( v17 >= 0 );
+    while ( v16 >= 0 );
   }
-  v21 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v22 = (_QWORD *)v21[1];
-  v23 = v21;
-  if ( (unsigned __int64)v22 < v21[3] )
+  v20 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v21 = (_QWORD *)v20[1];
+  v22 = v20;
+  if ( (unsigned __int64)v21 < v20[3] )
   {
-    *v22 = "lt";
-    v24 = __rdtsc();
-    v25 = (signed __int64)(v22 + 2);
-    *(_DWORD *)(v25 - 8) = v24;
-    v23[1] = v25;
+    *v21 = "lt";
+    v23 = __rdtsc();
+    v24 = v21 + 2;
+    *((_DWORD *)v24 - 2) = v23;
+    v22[1] = v24;
   }
-  v28 = 0;
-  if ( v29 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v27,
-      16 * v29);
+  v27 = 0;
+  if ( v28 >= 0 )
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v26, 16 * v28);
 }
 
 // File Line: 3657
 // RVA: 0xD5BCF0
-void __fastcall hkpWorld::getClosestPointsMt(hkpWorld *this, hkpWorldGetClosestPointsCommand *commandArray, int numCommands, hkJobQueue *jobQueue, hkJobThreadPool *jobThreadPool, hkSemaphore *semaphore, int numCommandsPerJob)
+void __fastcall hkpWorld::getClosestPointsMt(
+        hkpWorld *this,
+        hkpWorldGetClosestPointsCommand *commandArray,
+        int numCommands,
+        hkJobQueue *jobQueue,
+        hkJobThreadPool *jobThreadPool,
+        hkSemaphore *semaphore,
+        int numCommandsPerJob)
 {
-  hkpWorld *v7; // rbx
-  hkJobQueue *v8; // rsi
   __int64 v9; // r14
-  hkpWorldGetClosestPointsCommand *v10; // rdi
-  _QWORD **v11; // rax
+  _QWORD **Value; // rax
   __int64 v12; // rax
-  hkpProcessCollisionInput *v13; // rdx
-  hkpBroadPhase *v14; // r8
-  float v15; // xmm0_4
+  hkpProcessCollisionInput *m_collisionInput; // rdx
+  hkpBroadPhase *m_broadPhase; // r8
+  float m_storage; // xmm0_4
   hkpCollisionQueryJobHeader *v16; // r12
   __int64 v17; // rcx
-  unsigned int *v18; // rax
+  unsigned int *p_m_numResultsOut; // rax
   int i; // ecx
   int v20; // eax
   __int128 v21; // xmm0
   _QWORD **v22; // rax
-  hkpWorldGetClosestPointsJob v23; // [rsp+20h] [rbp-71h]
-  hkJob job; // [rsp+70h] [rbp-21h]
+  hkpWorldGetClosestPointsJob v23; // [rsp+20h] [rbp-71h] BYREF
+  hkJob job; // [rsp+70h] [rbp-21h] BYREF
   __int128 v25; // [rsp+80h] [rbp-11h]
   __int128 v26; // [rsp+90h] [rbp-1h]
   __int128 v27; // [rsp+A0h] [rbp+Fh]
   __int128 v28; // [rsp+B0h] [rbp+1Fh]
 
-  v7 = this;
-  v8 = jobQueue;
   v9 = numCommands;
-  v10 = commandArray;
-  v11 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v12 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v11[11] + 8i64))(v11[11], 16i64);
-  v13 = v7->m_collisionInput;
-  v14 = v7->m_broadPhase;
-  v15 = v13->m_tolerance.m_storage;
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v12 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 16i64);
+  m_collisionInput = this->m_collisionInput;
+  m_broadPhase = this->m_broadPhase;
+  m_storage = m_collisionInput->m_tolerance.m_storage;
   v16 = (hkpCollisionQueryJobHeader *)v12;
   v23.m_size = 80;
   *(_WORD *)&v23.m_jobSubType = 514;
@@ -6487,33 +6193,33 @@ void __fastcall hkpWorld::getClosestPointsMt(hkpWorld *this, hkpWorldGetClosestP
   v17 = v9;
   v23.m_threadAffinity = -1;
   v23.m_jobDoneFlag = 0i64;
-  if ( (signed int)v9 > 0 )
+  if ( (int)v9 > 0 )
   {
-    v18 = &v10->m_numResultsOut;
+    p_m_numResultsOut = &commandArray->m_numResultsOut;
     do
     {
-      *v18 = 0;
-      v18 += 6;
+      *p_m_numResultsOut = 0;
+      p_m_numResultsOut += 6;
       --v17;
     }
     while ( v17 );
   }
-  v23.m_collisionInput = v13;
-  v23.m_tolerance = v15;
+  v23.m_collisionInput = m_collisionInput;
+  v23.m_tolerance = m_storage;
   v23.m_sharedJobHeaderOnPpu = v16;
   v23.m_numCommandsPerTask = 64;
-  v23.m_broadphase = v14;
+  v23.m_broadphase = m_broadPhase;
   v23.m_semaphore = semaphore;
-  v23.m_commandArray = v10;
+  v23.m_commandArray = commandArray;
   v23.m_numCommands = v9;
-  v16->m_openJobs = ((signed int)v9 - 1) / 64 + 1;
+  v16->m_openJobs = ((int)v9 - 1) / 64 + 1;
   hkpWorldGetClosestPointsJob::setRunsOnSpuOrPpu(&v23);
   for ( i = v23.m_numCommands; v23.m_numCommands > 0; i = v23.m_numCommands )
   {
     v20 = numCommandsPerJob;
     if ( i < numCommandsPerJob )
       v20 = i;
-    job = v23.0;
+    job = v23.hkJob;
     v25 = *(_OWORD *)&v23.m_semaphore;
     v26 = *(_OWORD *)&v23.m_collisionInput;
     v21 = *(_OWORD *)&v23.m_commandArray;
@@ -6522,124 +6228,121 @@ void __fastcall hkpWorld::getClosestPointsMt(hkpWorld *this, hkpWorldGetClosestP
     v28 = v21;
     v27 = *(_OWORD *)&v23.m_broadphase;
     DWORD2(v28) = v20;
-    hkJobQueue::addJob(v8, &job, JOB_LOW_PRIORITY);
+    hkJobQueue::addJob(jobQueue, &job, JOB_LOW_PRIORITY);
   }
-  ((void (__fastcall *)(hkJobThreadPool *, hkJobQueue *, signed __int64))jobThreadPool->vfptr[5].__first_virtual_table_function__)(
+  ((void (__fastcall *)(hkJobThreadPool *, hkJobQueue *, __int64))jobThreadPool->vfptr[5].__first_virtual_table_function__)(
     jobThreadPool,
-    v8,
+    jobQueue,
     20i64);
-  hkJobQueue::processAllJobs(v8, 1);
+  hkJobQueue::processAllJobs(jobQueue, 1);
   ((void (__fastcall *)(hkJobThreadPool *))jobThreadPool->vfptr[2].__vecDelDtor)(jobThreadPool);
   hkSemaphore::acquire(semaphore);
   v22 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  (*(void (__fastcall **)(_QWORD *, hkpCollisionQueryJobHeader *, signed __int64))(*v22[11] + 16i64))(
-    v22[11],
-    v16,
-    16i64);
+  (*(void (__fastcall **)(_QWORD *, hkpCollisionQueryJobHeader *, __int64))(*v22[11] + 16i64))(v22[11], v16, 16i64);
 }
 
 // File Line: 3681
 // RVA: 0xD5BEC0
-void __fastcall hkpWorld::getPenetrations(hkpWorld *this, hkpCollidable *collA, hkpCollisionInput *input, hkpCdBodyPairCollector *collector)
+void __fastcall hkpWorld::getPenetrations(
+        hkpWorld *this,
+        hkpCollidable *collA,
+        hkpCollisionInput *input,
+        hkpCdBodyPairCollector *collector)
 {
-  hkpProcessCollisionInput *v4; // rax
-  hkpWorld *v5; // r13
-  hkpShape *v6; // rcx
-  hkBaseObjectVtbl *v7; // rax
-  hkpCollidable *v8; // r14
-  const void *v9; // rdx
-  hkpCdBodyPairCollector *v10; // rbp
-  hkpCollisionInput *v11; // r15
-  _QWORD *v12; // r8
+  hkpProcessCollisionInput *m_collisionInput; // rax
+  hkpShape *m_shape; // rcx
+  hkBaseObjectVtbl *vfptr; // rax
+  const void *m_motion; // rdx
+  _QWORD *Value; // r8
   unsigned __int64 v13; // rcx
   unsigned __int64 v14; // rax
-  hkpBroadPhase *v15; // rcx
+  hkpBroadPhase *m_broadPhase; // rcx
   _QWORD *v16; // r8
   _QWORD *v17; // rcx
   unsigned __int64 v18; // rax
-  signed __int64 v19; // rcx
+  _QWORD *v19; // rcx
   int v20; // esi
-  __int64 v21; // r12
-  __int64 v22; // rdi
+  __int64 m_storage; // r12
+  char *v22; // rdi
   hkpCollidable *v23; // rbx
   _QWORD *v24; // rax
   _QWORD *v25; // rcx
   _QWORD *v26; // r8
   unsigned __int64 v27; // rax
-  signed __int64 v28; // rcx
-  char v29; // [rsp+20h] [rbp-868h]
-  char *v30; // [rsp+40h] [rbp-848h]
+  _QWORD *v28; // rcx
+  char v29[32]; // [rsp+20h] [rbp-868h] BYREF
+  char *v30; // [rsp+40h] [rbp-848h] BYREF
   int v31; // [rsp+48h] [rbp-840h]
   int v32; // [rsp+4Ch] [rbp-83Ch]
-  char v33; // [rsp+50h] [rbp-838h]
-  int v34; // [rsp+890h] [rbp+8h]
+  char v33; // [rsp+50h] [rbp-838h] BYREF
+  int v34; // [rsp+890h] [rbp+8h] BYREF
   float v35; // [rsp+898h] [rbp+10h]
 
-  v4 = this->m_collisionInput;
-  v5 = this;
-  v6 = collA->m_shape;
-  v35 = input->m_tolerance.m_storage - (float)(v4->m_tolerance.m_storage * 0.5);
-  v7 = v6->vfptr;
-  v8 = collA;
-  v9 = collA->m_motion;
+  m_collisionInput = this->m_collisionInput;
+  m_shape = collA->m_shape;
+  v35 = input->m_tolerance.m_storage - (float)(m_collisionInput->m_tolerance.m_storage * 0.5);
+  vfptr = m_shape->vfptr;
+  m_motion = collA->m_motion;
   v34 = 0;
-  v10 = collector;
-  v11 = input;
-  ((void (__fastcall *)(hkpShape *, const void *, hkpCollisionInput *, char *))v7[2].__vecDelDtor)(v6, v9, input, &v29);
-  v12 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v13 = v12[1];
-  if ( v13 < v12[3] )
+  ((void (__fastcall *)(hkpShape *, const void *, hkpCollisionInput *, char *))vfptr[2].__vecDelDtor)(
+    m_shape,
+    m_motion,
+    input,
+    v29);
+  Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v13 = Value[1];
+  if ( v13 < Value[3] )
   {
     *(_QWORD *)v13 = "LthkpWorld::getPenetrations";
     *(_QWORD *)(v13 + 16) = "StBroadPhase";
     v14 = __rdtsc();
     *(_DWORD *)(v13 + 8) = v14;
-    v12[1] = v13 + 24;
+    Value[1] = v13 + 24;
   }
-  v15 = v5->m_broadPhase;
+  m_broadPhase = this->m_broadPhase;
   v31 = 0;
   v30 = &v33;
   v32 = -2147483520;
-  ((void (__fastcall *)(hkpBroadPhase *, char *, char **))v15->vfptr[9].__vecDelDtor)(v15, &v29, &v30);
+  ((void (__fastcall *)(hkpBroadPhase *, char *, char **))m_broadPhase->vfptr[9].__vecDelDtor)(m_broadPhase, v29, &v30);
   v16 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
   v17 = (_QWORD *)v16[1];
   if ( (unsigned __int64)v17 < v16[3] )
   {
     *v17 = "StNarrowPhase";
     v18 = __rdtsc();
-    v19 = (signed __int64)(v17 + 2);
-    *(_DWORD *)(v19 - 8) = v18;
+    v19 = v17 + 2;
+    *((_DWORD *)v19 - 2) = v18;
     v16[1] = v19;
   }
   v20 = v31 - 1;
-  v21 = (unsigned __int8)v8->m_shape->m_type.m_storage;
+  m_storage = (unsigned __int8)collA->m_shape->m_type.m_storage;
   if ( v31 - 1 >= 0 )
   {
-    v22 = (__int64)(v30 + 8);
+    v22 = v30 + 8;
     do
     {
       v23 = (hkpCollidable *)(*(_QWORD *)v22 + *(char *)(*(_QWORD *)v22 + 5i64));
-      if ( v8 != v23 )
+      if ( collA != v23 )
       {
-        if ( *(_BYTE *)v5->m_collisionFilter->vfptr->isCollisionEnabled(
-                         (hkpCollidableCollidableFilter *)&v5->m_collisionFilter->vfptr,
-                         (hkBool *)&v34,
-                         v8,
-                         (hkpCollidable *)(*(_QWORD *)v22 + *(char *)(*(_QWORD *)v22 + 5i64))) )
+        if ( this->m_collisionFilter->vfptr->isCollisionEnabled(
+               &this->m_collisionFilter->hkpCollidableCollidableFilter,
+               &v34,
+               collA,
+               *(_QWORD *)v22 + *(char *)(*(_QWORD *)v22 + 5i64))->m_bool )
         {
           if ( v23->m_shape )
           {
-            v11->m_dispatcher.m_storage->m_agent2Func[(unsigned __int8)v11->m_dispatcher.m_storage->m_agent2Types[v21][(unsigned __int8)v23->m_shape->m_type.m_storage]].m_getPenetrationsFunc(
-              (hkpCdBody *)&v8->m_shape,
-              (hkpCdBody *)&v23->m_shape,
-              v11,
-              v10);
-            if ( v10->m_earlyOut.m_bool )
+            input->m_dispatcher.m_storage->m_agent2Func[(unsigned __int8)input->m_dispatcher.m_storage->m_agent2Types[m_storage][(unsigned __int8)v23->m_shape->m_type.m_storage]].m_getPenetrationsFunc(
+              collA,
+              v23,
+              input,
+              collector);
+            if ( collector->m_earlyOut.m_bool )
               break;
           }
         }
       }
-      v22 += 16i64;
+      v22 += 16;
       --v20;
     }
     while ( v20 >= 0 );
@@ -6651,72 +6354,66 @@ void __fastcall hkpWorld::getPenetrations(hkpWorld *this, hkpCollidable *collA, 
   {
     *v25 = "lt";
     v27 = __rdtsc();
-    v28 = (signed __int64)(v25 + 2);
-    *(_DWORD *)(v28 - 8) = v27;
+    v28 = v25 + 2;
+    *((_DWORD *)v28 - 2) = v27;
     v26[1] = v28;
   }
   v31 = 0;
   if ( v32 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v30,
-      16 * v32);
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v30, 16 * v32);
 }
 
 // File Line: 3732
 // RVA: 0xD5B780
-void __fastcall hkpWorld::linearCast(hkpWorld *this, hkpCollidable *collA, hkpLinearCastInput *input, hkpCdPointCollector *castCollector, hkpCdPointCollector *startPointCollector)
+void __fastcall hkpWorld::linearCast(
+        hkpWorld *this,
+        hkpCollidable *collA,
+        hkpLinearCastInput *input,
+        hkpCdPointCollector *castCollector,
+        hkpCdPointCollector *startPointCollector)
 {
-  hkpWorld *v5; // rbx
-  hkpCdPointCollector *v6; // rdi
-  hkpLinearCastInput *v7; // rsi
-  hkpCollidable *v8; // rbp
-  _QWORD *v9; // rax
+  _QWORD *Value; // rax
   _QWORD *v10; // rcx
   _QWORD *v11; // r10
   unsigned __int64 v12; // rax
-  signed __int64 v13; // rcx
-  hkpCollisionFilter *v14; // rax
+  _QWORD *v13; // rcx
+  hkpCollisionFilter *m_collisionFilter; // rax
   hkpCollidableCollidableFilter *filter; // rdx
   _QWORD *v16; // rax
   _QWORD *v17; // rcx
   _QWORD *v18; // r8
   unsigned __int64 v19; // rax
-  signed __int64 v20; // rcx
-  hkpWorldLinearCaster v21; // [rsp+50h] [rbp-C8h]
+  _QWORD *v20; // rcx
+  hkpWorldLinearCaster v21; // [rsp+50h] [rbp-C8h] BYREF
 
-  v5 = this;
-  v6 = castCollector;
-  v7 = input;
-  v8 = collA;
-  v9 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v10 = (_QWORD *)v9[1];
-  v11 = v9;
-  if ( (unsigned __int64)v10 < v9[3] )
+  Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v10 = (_QWORD *)Value[1];
+  v11 = Value;
+  if ( (unsigned __int64)v10 < Value[3] )
   {
     *v10 = "TtworldLinCast";
     v12 = __rdtsc();
-    v13 = (signed __int64)(v10 + 2);
-    *(_DWORD *)(v13 - 8) = v12;
+    v13 = v10 + 2;
+    *((_DWORD *)v13 - 2) = v12;
     v11[1] = v13;
   }
   v21.vfptr = (hkpBroadPhaseCastCollectorVtbl *)&hkpWorldLinearCaster::`vftable;
-  v14 = v5->m_collisionFilter;
+  m_collisionFilter = this->m_collisionFilter;
   v21.m_shapeInput.m_maxExtraPenetration = FLOAT_1_1920929eN7;
-  filter = (hkpCollidableCollidableFilter *)&v14->vfptr;
+  filter = &m_collisionFilter->hkpCollidableCollidableFilter;
   v21.m_shapeInput.m_forceAcceptContactPoints.m_storage = 0;
-  if ( !v14 )
+  if ( !m_collisionFilter )
     filter = 0i64;
   hkpWorldLinearCaster::linearCast(
     &v21,
-    v5->m_broadPhase,
-    v8,
-    v7,
+    this->m_broadPhase,
+    collA,
+    input,
     filter,
-    (hkpCollisionInput *)&v5->m_collisionInput->m_dispatcher,
-    v5->m_collisionInput->m_config,
+    this->m_collisionInput,
+    this->m_collisionInput->m_config,
     0i64,
-    v6,
+    castCollector,
     startPointCollector);
   v21.vfptr = (hkpBroadPhaseCastCollectorVtbl *)&hkpBroadPhaseCastCollector::`vftable;
   v16 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
@@ -6726,63 +6423,62 @@ void __fastcall hkpWorld::linearCast(hkpWorld *this, hkpCollidable *collA, hkpLi
   {
     *v17 = "Et";
     v19 = __rdtsc();
-    v20 = (signed __int64)(v17 + 2);
-    *(_DWORD *)(v20 - 8) = v19;
+    v20 = v17 + 2;
+    *((_DWORD *)v20 - 2) = v19;
     v18[1] = v20;
   }
 }
 
 // File Line: 3742
 // RVA: 0xD5B8D0
-void __fastcall hkpWorld::linearCastMt(hkpWorld *this, hkpWorldLinearCastCommand *commandArray, int numCommands, hkJobQueue *jobQueue, hkJobThreadPool *jobThreadPool, hkSemaphore *semaphore, int numCommandsPerJob)
+void __fastcall hkpWorld::linearCastMt(
+        hkpWorld *this,
+        hkpWorldLinearCastCommand *commandArray,
+        int numCommands,
+        hkJobQueue *jobQueue,
+        hkJobThreadPool *jobThreadPool,
+        hkSemaphore *semaphore,
+        int numCommandsPerJob)
 {
-  hkpWorld *v7; // rdi
-  hkJobQueue *v8; // r14
-  int v9; // esi
-  hkpWorldLinearCastCommand *v10; // rbx
-  _QWORD **v11; // rax
+  _QWORD **Value; // rax
   hkpCollisionQueryJobHeader *v12; // r15
-  hkpBroadPhase *v13; // rax
+  hkpBroadPhase *m_broadPhase; // rax
   int i; // ecx
   int v15; // eax
   __int128 v16; // xmm0
   _QWORD **v17; // rax
-  hkpWorldLinearCastJob v18; // [rsp+20h] [rbp-71h]
-  hkJob job; // [rsp+70h] [rbp-21h]
+  hkpWorldLinearCastJob v18; // [rsp+20h] [rbp-71h] BYREF
+  hkJob job; // [rsp+70h] [rbp-21h] BYREF
   __int128 v20; // [rsp+80h] [rbp-11h]
   __int128 v21; // [rsp+90h] [rbp-1h]
   __int128 v22; // [rsp+A0h] [rbp+Fh]
   __int128 v23; // [rsp+B0h] [rbp+1Fh]
 
-  v7 = this;
-  v8 = jobQueue;
-  v9 = numCommands;
-  v10 = commandArray;
-  v11 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v12 = (hkpCollisionQueryJobHeader *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v11[11] + 8i64))(
-                                        v11[11],
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v12 = (hkpCollisionQueryJobHeader *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(
+                                        Value[11],
                                         16i64);
-  v18.m_collisionInput = v7->m_collisionInput;
+  v18.m_collisionInput = this->m_collisionInput;
   v18.m_size = 80;
   *(_WORD *)&v18.m_jobSubType = 516;
   v18.m_threadAffinity = -1;
-  v13 = v7->m_broadPhase;
+  m_broadPhase = this->m_broadPhase;
   v18.m_jobSpuType.m_storage = 2;
-  v18.m_broadphase = v13;
+  v18.m_broadphase = m_broadPhase;
   v18.m_jobDoneFlag = 0i64;
   v18.m_sharedJobHeaderOnPpu = v12;
   v18.m_numCommandsPerTask = 64;
   v18.m_semaphore = semaphore;
-  v18.m_commandArray = v10;
-  v18.m_numCommands = v9;
-  v12->m_openJobs = (v9 - 1) / 64 + 1;
+  v18.m_commandArray = commandArray;
+  v18.m_numCommands = numCommands;
+  v12->m_openJobs = (numCommands - 1) / 64 + 1;
   hkpWorldLinearCastJob::setRunsOnSpuOrPpu(&v18);
   for ( i = v18.m_numCommands; v18.m_numCommands > 0; i = v18.m_numCommands )
   {
     v15 = numCommandsPerJob;
     if ( i < numCommandsPerJob )
       v15 = i;
-    job = v18.0;
+    job = v18.hkJob;
     v20 = *(_OWORD *)&v18.m_semaphore;
     v21 = *(_OWORD *)&v18.m_collisionInput;
     v16 = *(_OWORD *)&v18.m_numCommands;
@@ -6790,165 +6486,138 @@ void __fastcall hkpWorld::linearCastMt(hkpWorld *this, hkpWorldLinearCastCommand
     v22 = *(_OWORD *)&v18.m_numCommandsPerTask;
     v23 = v16;
     LODWORD(v23) = v15;
-    v18.m_commandArray = (hkpWorldLinearCastCommand *)(((signed __int64)numCommandsPerJob << 6)
-                                                     + *(unsigned __int128 *)&_mm_srli_si128(
-                                                                                *(__m128i *)&v18.m_numCommandsPerTask,
-                                                                                8));
-    hkJobQueue::addJob(v8, &job, JOB_LOW_PRIORITY);
+    v18.m_commandArray = (hkpWorldLinearCastCommand *)(((__int64)numCommandsPerJob << 6)
+                                                     + _mm_srli_si128(*(__m128i *)&v18.m_numCommandsPerTask, 8).m128i_u64[0]);
+    hkJobQueue::addJob(jobQueue, &job, JOB_LOW_PRIORITY);
   }
-  ((void (__fastcall *)(hkJobThreadPool *, hkJobQueue *, signed __int64))jobThreadPool->vfptr[5].__first_virtual_table_function__)(
+  ((void (__fastcall *)(hkJobThreadPool *, hkJobQueue *, __int64))jobThreadPool->vfptr[5].__first_virtual_table_function__)(
     jobThreadPool,
-    v8,
+    jobQueue,
     20i64);
-  hkJobQueue::processAllJobs(v8, 1);
+  hkJobQueue::processAllJobs(jobQueue, 1);
   ((void (__fastcall *)(hkJobThreadPool *))jobThreadPool->vfptr[2].__vecDelDtor)(jobThreadPool);
   hkSemaphore::acquire(semaphore);
   v17 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  (*(void (__fastcall **)(_QWORD *, hkpCollisionQueryJobHeader *, signed __int64))(*v17[11] + 16i64))(
-    v17[11],
-    v12,
-    16i64);
+  (*(void (__fastcall **)(_QWORD *, hkpCollisionQueryJobHeader *, __int64))(*v17[11] + 16i64))(v17[11], v12, 16i64);
 }
 
 // File Line: 3772
 // RVA: 0xD5DE10
 hkBool *__fastcall enumerateAllInactiveEntitiesInWorld(hkBool *result, hkpWorld *world, hkpPhysicsSystem *sys)
 {
-  hkpSimulationIsland *v3; // rdi
+  hkpSimulationIsland *m_fixedIsland; // rdi
   bool v4; // bl
-  hkpWorld *v5; // r13
-  hkBool *v6; // r12
-  hkpPhysicsSystem *v7; // r15
   __int64 v8; // rbx
   int i; // esi
-  hkpSimulationIsland **v10; // r14
+  hkpSimulationIsland **m_data; // r14
   hkpSimulationIsland *v11; // rdi
   int v12; // ebp
   __int64 v13; // rsi
-  hkBool *v14; // rax
 
-  v3 = world->m_fixedIsland;
+  m_fixedIsland = world->m_fixedIsland;
   v4 = 0;
-  v5 = world;
-  v6 = result;
-  v7 = sys;
-  if ( v3 )
+  if ( m_fixedIsland )
   {
     v8 = 0i64;
-    for ( i = 0; i < v3->m_entities.m_size; ++v8 )
+    for ( i = 0; i < m_fixedIsland->m_entities.m_size; ++v8 )
     {
-      if ( v8 || (*v3->m_entities.m_data)->m_collidable.m_shape )
-        hkpPhysicsSystem::addRigidBody(v7, (hkpRigidBody *)v3->m_entities.m_data[v8]);
+      if ( v8 || (*m_fixedIsland->m_entities.m_data)->m_collidable.m_shape )
+        hkpPhysicsSystem::addRigidBody(sys, (hkpRigidBody *)m_fixedIsland->m_entities.m_data[v8]);
       ++i;
     }
-    v4 = v3->m_entities.m_size > 0;
+    v4 = m_fixedIsland->m_entities.m_size > 0;
   }
-  v10 = v5->m_inactiveSimulationIslands.m_data;
-  if ( v10 != &v10[v5->m_inactiveSimulationIslands.m_size] )
+  m_data = world->m_inactiveSimulationIslands.m_data;
+  if ( m_data != &m_data[world->m_inactiveSimulationIslands.m_size] )
   {
     do
     {
-      v11 = *v10;
+      v11 = *m_data;
       v12 = 0;
-      if ( (*v10)->m_entities.m_size > 0 )
+      if ( (*m_data)->m_entities.m_size > 0 )
       {
         v13 = 0i64;
         do
         {
-          hkpPhysicsSystem::addRigidBody(v7, (hkpRigidBody *)v11->m_entities.m_data[v13]);
+          hkpPhysicsSystem::addRigidBody(sys, (hkpRigidBody *)v11->m_entities.m_data[v13]);
           ++v12;
           ++v13;
         }
         while ( v12 < v11->m_entities.m_size );
       }
-      ++v10;
+      ++m_data;
     }
-    while ( v10 != &v5->m_inactiveSimulationIslands.m_data[v5->m_inactiveSimulationIslands.m_size] );
+    while ( m_data != &world->m_inactiveSimulationIslands.m_data[world->m_inactiveSimulationIslands.m_size] );
   }
-  if ( v5->m_inactiveSimulationIslands.m_size > 0 || v4 )
+  if ( world->m_inactiveSimulationIslands.m_size > 0 || v4 )
   {
-    v6->m_bool = 1;
-    v14 = v6;
+    result->m_bool = 1;
+    return result;
   }
   else
   {
-    v6->m_bool = 0;
-    v14 = v6;
+    result->m_bool = 0;
+    return result;
   }
-  return v14;
 }
 
 // File Line: 3803
 // RVA: 0xD5DF30
 hkBool *__fastcall enumerateAllActiveEntitiesInWorld(hkBool *result, hkpWorld *world, hkpPhysicsSystem *sys)
 {
-  hkpSimulationIsland **v3; // r14
-  hkpPhysicsSystem *v4; // r15
-  hkpWorld *v5; // rbp
-  hkBool *v6; // r12
+  hkpSimulationIsland **m_data; // r14
   hkpSimulationIsland *v7; // rbx
   int v8; // esi
   __int64 v9; // rdi
 
-  v3 = world->m_activeSimulationIslands.m_data;
-  v4 = sys;
-  v5 = world;
-  v6 = result;
-  if ( v3 != &v3[world->m_activeSimulationIslands.m_size] )
+  m_data = world->m_activeSimulationIslands.m_data;
+  if ( m_data != &m_data[world->m_activeSimulationIslands.m_size] )
   {
     do
     {
-      v7 = *v3;
+      v7 = *m_data;
       v8 = 0;
-      if ( (*v3)->m_entities.m_size > 0 )
+      if ( (*m_data)->m_entities.m_size > 0 )
       {
         v9 = 0i64;
         do
         {
-          hkpPhysicsSystem::addRigidBody(v4, (hkpRigidBody *)v7->m_entities.m_data[v9]);
+          hkpPhysicsSystem::addRigidBody(sys, (hkpRigidBody *)v7->m_entities.m_data[v9]);
           ++v8;
           ++v9;
         }
         while ( v8 < v7->m_entities.m_size );
       }
-      ++v3;
+      ++m_data;
     }
-    while ( v3 != &v5->m_activeSimulationIslands.m_data[v5->m_activeSimulationIslands.m_size] );
+    while ( m_data != &world->m_activeSimulationIslands.m_data[world->m_activeSimulationIslands.m_size] );
   }
-  v6->m_bool = v5->m_activeSimulationIslands.m_size > 0;
-  return v6;
+  result->m_bool = world->m_activeSimulationIslands.m_size > 0;
+  return result;
 }
 
 // File Line: 3819
 // RVA: 0xD5DFF0
 void __fastcall enumerateAllEntitiesInWorld(hkpWorld *world, hkpPhysicsSystem *sys)
 {
-  hkpPhysicsSystem *v2; // rdi
-  hkpWorld *v3; // rbx
-  hkBool result; // [rsp+38h] [rbp+10h]
+  hkBool result; // [rsp+38h] [rbp+10h] BYREF
 
-  v2 = sys;
-  v3 = world;
   enumerateAllInactiveEntitiesInWorld(&result, world, sys);
-  v2->m_active = (hkBool)enumerateAllActiveEntitiesInWorld(&result, v3, v2)->m_bool;
+  sys->m_active = (hkBool)enumerateAllActiveEntitiesInWorld(&result, world, sys)->m_bool;
 }
 
 // File Line: 3825
 // RVA: 0xD5E040
 void __fastcall enumerateAllConstraintsInIsland(hkpSimulationIsland *island, hkpPhysicsSystem *sys)
 {
-  hkpPhysicsSystem *v2; // r15
-  hkpSimulationIsland *v3; // r13
   int v4; // ebp
   __int64 v5; // r14
-  signed int v6; // edi
+  int v6; // edi
   hkpEntity *v7; // rsi
   __int64 v8; // rbx
-  hkConstraintInternal *v9; // rdx
+  hkConstraintInternal *m_data; // rdx
   hkpConstraintAtom *i; // rax
 
-  v2 = sys;
-  v3 = island;
   v4 = 0;
   if ( island->m_entities.m_size > 0 )
   {
@@ -6956,17 +6625,17 @@ void __fastcall enumerateAllConstraintsInIsland(hkpSimulationIsland *island, hkp
     do
     {
       v6 = 0;
-      v7 = v3->m_entities.m_data[v5];
-      if ( v7->m_constraintsMaster.m_size > 0u )
+      v7 = island->m_entities.m_data[v5];
+      if ( v7->m_constraintsMaster.m_size )
       {
         v8 = 0i64;
         do
         {
-          v9 = v7->m_constraintsMaster.m_data;
-          for ( i = v9[v8].m_atoms; i->m_type.m_storage >= 0x1Eu; i = *(hkpConstraintAtom **)&i[12].m_type.m_storage )
+          m_data = v7->m_constraintsMaster.m_data;
+          for ( i = m_data[v8].m_atoms; i->m_type.m_storage >= 0x1Eu; i = *(hkpConstraintAtom **)&i[12].m_type.m_storage )
             ;
           if ( i->m_type.m_storage != 29 )
-            hkpPhysicsSystem::addConstraint(v2, v9[v8].m_constraint);
+            hkpPhysicsSystem::addConstraint(sys, m_data[v8].m_constraint);
           ++v6;
           ++v8;
         }
@@ -6975,7 +6644,7 @@ void __fastcall enumerateAllConstraintsInIsland(hkpSimulationIsland *island, hkp
       ++v4;
       ++v5;
     }
-    while ( v4 < v3->m_entities.m_size );
+    while ( v4 < island->m_entities.m_size );
   }
 }
 
@@ -6983,32 +6652,22 @@ void __fastcall enumerateAllConstraintsInIsland(hkpSimulationIsland *island, hkp
 // RVA: 0xD5E120
 void __fastcall enumerateAllConstraintsInWorld(hkpWorld *world, hkpPhysicsSystem *sys)
 {
-  hkpSimulationIsland **v2; // rbx
-  hkpPhysicsSystem *v3; // rsi
-  hkpWorld *v4; // rdi
+  hkpSimulationIsland **m_data; // rbx
   hkpSimulationIsland **v5; // rbx
 
-  v2 = world->m_activeSimulationIslands.m_data;
-  v3 = sys;
-  v4 = world;
-  if ( v2 != &v2[world->m_activeSimulationIslands.m_size] )
+  m_data = world->m_activeSimulationIslands.m_data;
+  if ( m_data != &m_data[world->m_activeSimulationIslands.m_size] )
   {
     do
-    {
-      enumerateAllConstraintsInIsland(*v2, v3);
-      ++v2;
-    }
-    while ( v2 != &v4->m_activeSimulationIslands.m_data[v4->m_activeSimulationIslands.m_size] );
+      enumerateAllConstraintsInIsland(*m_data++, sys);
+    while ( m_data != &world->m_activeSimulationIslands.m_data[world->m_activeSimulationIslands.m_size] );
   }
-  v5 = v4->m_inactiveSimulationIslands.m_data;
-  if ( v5 != &v5[v4->m_inactiveSimulationIslands.m_size] )
+  v5 = world->m_inactiveSimulationIslands.m_data;
+  if ( v5 != &v5[world->m_inactiveSimulationIslands.m_size] )
   {
     do
-    {
-      enumerateAllConstraintsInIsland(*v5, v3);
-      ++v5;
-    }
-    while ( v5 != &v4->m_inactiveSimulationIslands.m_data[v4->m_inactiveSimulationIslands.m_size] );
+      enumerateAllConstraintsInIsland(*v5++, sys);
+    while ( v5 != &world->m_inactiveSimulationIslands.m_data[world->m_inactiveSimulationIslands.m_size] );
   }
 }
 
@@ -7016,9 +6675,7 @@ void __fastcall enumerateAllConstraintsInWorld(hkpWorld *world, hkpPhysicsSystem
 // RVA: 0xD5E1C0
 void __fastcall enumerateAllActionsInWorld(hkpWorld *world, hkpPhysicsSystem *sys)
 {
-  hkpSimulationIsland **v2; // r14
-  hkpPhysicsSystem *v3; // rbp
-  hkpWorld *v4; // r15
+  hkpSimulationIsland **m_data; // r14
   hkpSimulationIsland *v5; // rbx
   int v6; // esi
   __int64 v7; // rdi
@@ -7027,32 +6684,30 @@ void __fastcall enumerateAllActionsInWorld(hkpWorld *world, hkpPhysicsSystem *sy
   int v10; // esi
   __int64 v11; // rdi
 
-  v2 = world->m_activeSimulationIslands.m_data;
-  v3 = sys;
-  v4 = world;
-  if ( v2 != &v2[world->m_activeSimulationIslands.m_size] )
+  m_data = world->m_activeSimulationIslands.m_data;
+  if ( m_data != &m_data[world->m_activeSimulationIslands.m_size] )
   {
     do
     {
-      v5 = *v2;
+      v5 = *m_data;
       v6 = 0;
-      if ( (*v2)->m_actions.m_size > 0 )
+      if ( (*m_data)->m_actions.m_size > 0 )
       {
         v7 = 0i64;
         do
         {
-          hkpPhysicsSystem::addAction(v3, v5->m_actions.m_data[v7]);
+          hkpPhysicsSystem::addAction(sys, v5->m_actions.m_data[v7]);
           ++v6;
           ++v7;
         }
         while ( v6 < v5->m_actions.m_size );
       }
-      ++v2;
+      ++m_data;
     }
-    while ( v2 != &v4->m_activeSimulationIslands.m_data[v4->m_activeSimulationIslands.m_size] );
+    while ( m_data != &world->m_activeSimulationIslands.m_data[world->m_activeSimulationIslands.m_size] );
   }
-  v8 = v4->m_inactiveSimulationIslands.m_data;
-  if ( v8 != &v8[v4->m_inactiveSimulationIslands.m_size] )
+  v8 = world->m_inactiveSimulationIslands.m_data;
+  if ( v8 != &v8[world->m_inactiveSimulationIslands.m_size] )
   {
     do
     {
@@ -7063,7 +6718,7 @@ void __fastcall enumerateAllActionsInWorld(hkpWorld *world, hkpPhysicsSystem *sy
         v11 = 0i64;
         do
         {
-          hkpPhysicsSystem::addAction(v3, v9->m_actions.m_data[v11]);
+          hkpPhysicsSystem::addAction(sys, v9->m_actions.m_data[v11]);
           ++v10;
           ++v11;
         }
@@ -7071,7 +6726,7 @@ void __fastcall enumerateAllActionsInWorld(hkpWorld *world, hkpPhysicsSystem *sy
       }
       ++v8;
     }
-    while ( v8 != &v4->m_inactiveSimulationIslands.m_data[v4->m_inactiveSimulationIslands.m_size] );
+    while ( v8 != &world->m_inactiveSimulationIslands.m_data[world->m_inactiveSimulationIslands.m_size] );
   }
 }
 
@@ -7079,51 +6734,47 @@ void __fastcall enumerateAllActionsInWorld(hkpWorld *world, hkpPhysicsSystem *sy
 // RVA: 0xD5E2A0
 void __fastcall enumerateAllPhantomsInWorld(hkpWorld *world, hkpPhysicsSystem *sys)
 {
-  hkpPhysicsSystem *v2; // rbp
-  hkpWorld *v3; // rsi
   int v4; // ebx
-  hkpBroadPhaseBorder *v5; // rdi
+  hkpBroadPhaseBorder *BroadPhaseBorder; // rdi
   __int64 v6; // r14
   hkpPhantom *v7; // rdx
   __int64 v8; // rdi
 
-  v2 = sys;
-  v3 = world;
   v4 = 0;
-  v5 = hkpWorld::getBroadPhaseBorder(world);
-  if ( v5 )
+  BroadPhaseBorder = hkpWorld::getBroadPhaseBorder(world);
+  if ( BroadPhaseBorder )
   {
-    if ( v3->m_phantoms.m_size > 0 )
+    if ( world->m_phantoms.m_size > 0 )
     {
       v6 = 0i64;
       do
       {
-        v7 = v3->m_phantoms.m_data[v6];
-        if ( v7 != v5->m_phantoms[0]
-          && v7 != v5->m_phantoms[1]
-          && v7 != v5->m_phantoms[2]
-          && v7 != v5->m_phantoms[3]
-          && v7 != v5->m_phantoms[4]
-          && v7 != v5->m_phantoms[5] )
+        v7 = world->m_phantoms.m_data[v6];
+        if ( v7 != BroadPhaseBorder->m_phantoms[0]
+          && v7 != BroadPhaseBorder->m_phantoms[1]
+          && v7 != BroadPhaseBorder->m_phantoms[2]
+          && v7 != BroadPhaseBorder->m_phantoms[3]
+          && v7 != BroadPhaseBorder->m_phantoms[4]
+          && v7 != BroadPhaseBorder->m_phantoms[5] )
         {
-          hkpPhysicsSystem::addPhantom(v2, v7);
+          hkpPhysicsSystem::addPhantom(sys, v7);
         }
         ++v4;
         ++v6;
       }
-      while ( v4 < v3->m_phantoms.m_size );
+      while ( v4 < world->m_phantoms.m_size );
     }
   }
-  else if ( v3->m_phantoms.m_size > 0 )
+  else if ( world->m_phantoms.m_size > 0 )
   {
     v8 = 0i64;
     do
     {
-      hkpPhysicsSystem::addPhantom(v2, v3->m_phantoms.m_data[v8]);
+      hkpPhysicsSystem::addPhantom(sys, world->m_phantoms.m_data[v8]);
       ++v4;
       ++v8;
     }
-    while ( v4 < v3->m_phantoms.m_size );
+    while ( v4 < world->m_phantoms.m_size );
   }
 }
 
@@ -7131,15 +6782,13 @@ void __fastcall enumerateAllPhantomsInWorld(hkpWorld *world, hkpPhysicsSystem *s
 // RVA: 0xD5C970
 hkpPhysicsSystem *__fastcall hkpWorld::getWorldAsOneSystem(hkpWorld *this)
 {
-  hkpWorld *v1; // rdi
-  _QWORD **v2; // rax
+  _QWORD **Value; // rax
   hkpPhysicsSystem *v3; // rax
   hkpPhysicsSystem *v4; // rax
   hkpPhysicsSystem *v5; // rbx
 
-  v1 = this;
-  v2 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v3 = (hkpPhysicsSystem *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v2[11] + 8i64))(v2[11], 104i64);
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v3 = (hkpPhysicsSystem *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 104i64);
   if ( v3 )
   {
     hkpPhysicsSystem::hkpPhysicsSystem(v3);
@@ -7149,32 +6798,30 @@ hkpPhysicsSystem *__fastcall hkpWorld::getWorldAsOneSystem(hkpWorld *this)
   {
     v5 = 0i64;
   }
-  enumerateAllEntitiesInWorld(v1, v5);
-  enumerateAllPhantomsInWorld(v1, v5);
-  enumerateAllConstraintsInWorld(v1, v5);
-  enumerateAllActionsInWorld(v1, v5);
+  enumerateAllEntitiesInWorld(this, v5);
+  enumerateAllPhantomsInWorld(this, v5);
+  enumerateAllConstraintsInWorld(this, v5);
+  enumerateAllActionsInWorld(this, v5);
   return v5;
 }
 
 // File Line: 3937
 // RVA: 0xD5C9F0
-void __fastcall hkpWorld::getWorldAsSystems(hkpWorld *this, hkArray<hkpPhysicsSystem *,hkContainerHeapAllocator> *systemsInOut)
+void __fastcall hkpWorld::getWorldAsSystems(
+        hkpWorld *this,
+        hkArray<hkpPhysicsSystem *,hkContainerHeapAllocator> *systemsInOut)
 {
-  hkpWorld *v2; // rsi
-  hkArray<hkpPhysicsSystem *,hkContainerHeapAllocator> *v3; // rbx
-  _QWORD **v4; // rax
+  _QWORD **Value; // rax
   hkpPhysicsSystem *v5; // rax
   hkpPhysicsSystem *v6; // rax
   hkpPhysicsSystem *v7; // rdi
   _QWORD **v8; // rax
   hkpPhysicsSystem *v9; // rax
   hkpPhysicsSystem *v10; // rax
-  hkBool result; // [rsp+38h] [rbp+10h]
+  hkBool result; // [rsp+38h] [rbp+10h] BYREF
 
-  v2 = this;
-  v3 = systemsInOut;
-  v4 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v5 = (hkpPhysicsSystem *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v4[11] + 8i64))(v4[11], 104i64);
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v5 = (hkpPhysicsSystem *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 104i64);
   if ( v5 )
   {
     hkpPhysicsSystem::hkpPhysicsSystem(v5);
@@ -7184,19 +6831,19 @@ void __fastcall hkpWorld::getWorldAsSystems(hkpWorld *this, hkArray<hkpPhysicsSy
   {
     v7 = 0i64;
   }
-  if ( enumerateAllInactiveEntitiesInWorld(&result, v2, v7)->m_bool )
+  if ( enumerateAllInactiveEntitiesInWorld(&result, this, v7)->m_bool )
   {
     v7->m_active.m_bool = 0;
-    if ( v3->m_size == (v3->m_capacityAndFlags & 0x3FFFFFFF) )
-      hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v3, 8);
-    v3->m_data[v3->m_size++] = v7;
+    if ( systemsInOut->m_size == (systemsInOut->m_capacityAndFlags & 0x3FFFFFFF) )
+      hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&systemsInOut->m_data, 8);
+    systemsInOut->m_data[systemsInOut->m_size++] = v7;
   }
   else if ( v7 )
   {
     goto LABEL_12;
   }
   v8 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v9 = (hkpPhysicsSystem *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v8[11] + 8i64))(v8[11], 104i64);
+  v9 = (hkpPhysicsSystem *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v8[11] + 8i64))(v8[11], 104i64);
   if ( v9 )
   {
     hkpPhysicsSystem::hkpPhysicsSystem(v9);
@@ -7207,13 +6854,13 @@ void __fastcall hkpWorld::getWorldAsSystems(hkpWorld *this, hkArray<hkpPhysicsSy
     v7 = 0i64;
   }
 LABEL_12:
-  if ( v3->m_size == (v3->m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v3, 8);
-  v3->m_data[v3->m_size++] = v7;
-  enumerateAllActiveEntitiesInWorld(&result, v2, v7);
-  enumerateAllPhantomsInWorld(v2, v7);
-  enumerateAllConstraintsInWorld(v2, v7);
-  enumerateAllActionsInWorld(v2, v7);
+  if ( systemsInOut->m_size == (systemsInOut->m_capacityAndFlags & 0x3FFFFFFF) )
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&systemsInOut->m_data, 8);
+  systemsInOut->m_data[systemsInOut->m_size++] = v7;
+  enumerateAllActiveEntitiesInWorld(&result, this, v7);
+  enumerateAllPhantomsInWorld(this, v7);
+  enumerateAllConstraintsInWorld(this, v7);
+  enumerateAllActionsInWorld(this, v7);
 }
 
 // File Line: 3972
@@ -7236,27 +6883,25 @@ void __fastcall hkpWorld::internal_executePendingBodyOperations(hkpWorld *this)
 // RVA: 0xD5D940
 void __fastcall hkpWorld::checkConstraintsViolated(hkpWorld *this)
 {
-  hkpWorld *v1; // rdi
-  signed int v2; // edx
+  signed int m_nextFreeElement; // edx
   __int64 v3; // rbx
   __int64 v4; // rsi
 
-  v1 = this;
-  v2 = this->m_violatedConstraintArray->m_nextFreeElement;
-  if ( v2 >= 128 )
-    v2 = 128;
+  m_nextFreeElement = this->m_violatedConstraintArray->m_nextFreeElement;
+  if ( m_nextFreeElement >= 128 )
+    m_nextFreeElement = 128;
   v3 = 0i64;
-  v4 = v2;
-  if ( v2 <= 0 )
+  v4 = m_nextFreeElement;
+  if ( m_nextFreeElement <= 0 )
   {
     this->m_violatedConstraintArray->m_nextFreeElement = 0;
   }
   else
   {
     do
-      hkpWorldCallbackUtil::fireConstraintViolated(v1, v1->m_violatedConstraintArray->m_constraints[v3++]);
+      hkpWorldCallbackUtil::fireConstraintViolated(this, this->m_violatedConstraintArray->m_constraints[v3++]);
     while ( v3 < v4 );
-    v1->m_violatedConstraintArray->m_nextFreeElement = 0;
+    this->m_violatedConstraintArray->m_nextFreeElement = 0;
   }
 }
 
@@ -7269,11 +6914,16 @@ void __fastcall hkpWorld::queueOperation(hkpWorld *this, hkWorldOperation::BaseO
 
 // File Line: 4011
 // RVA: 0xD5D920
-void __fastcall hkpWorld::addBodyOperation(hkpWorld *this, hkpRigidBody *breakingBody, hkpBodyOperation *operation, int priority, int hint)
+void __fastcall hkpWorld::addBodyOperation(
+        hkpWorld *this,
+        hkpRigidBody *breakingBody,
+        hkpBodyOperation *operation,
+        int priority,
+        int hint)
 {
   hkpWorldOperationQueue::queueBodyOperation(
     this->m_pendingOperations,
-    (hkpEntity *)&breakingBody->vfptr,
+    breakingBody,
     operation,
     priority,
     (hkpBodyOperation::ExecutionState)hint);
@@ -7281,14 +6931,15 @@ void __fastcall hkpWorld::addBodyOperation(hkpWorld *this, hkpRigidBody *breakin
 
 // File Line: 4016
 // RVA: 0xD5D8D0
-hkWorldOperation::UserCallback *__fastcall hkpWorld::queueCallback(hkpWorld *this, hkWorldOperation::UserCallback *callback, unsigned __int64 userData)
+hkWorldOperation::UserCallback *__fastcall hkpWorld::queueCallback(
+        hkpWorld *this,
+        hkWorldOperation::UserCallback *callback,
+        __int64 userData)
 {
-  hkWorldOperation::UserCallback *v3; // rbx
-  hkWorldOperation::BaseOperation operation; // [rsp+20h] [rbp-28h]
+  hkWorldOperation::BaseOperation operation; // [rsp+20h] [rbp-28h] BYREF
   hkWorldOperation::UserCallback *v6; // [rsp+28h] [rbp-20h]
-  unsigned __int64 v7; // [rsp+30h] [rbp-18h]
+  __int64 v7; // [rsp+30h] [rbp-18h]
 
-  v3 = callback;
   if ( this->m_criticalOperationsLockCount )
   {
     v6 = callback;
@@ -7298,49 +6949,36 @@ hkWorldOperation::UserCallback *__fastcall hkpWorld::queueCallback(hkpWorld *thi
   }
   else
   {
-    ((void (__fastcall *)(hkWorldOperation::UserCallback *, unsigned __int64))callback->vfptr[1].__first_virtual_table_function__)(
+    ((void (__fastcall *)(hkWorldOperation::UserCallback *, __int64))callback->vfptr[1].__first_virtual_table_function__)(
       callback,
       userData);
   }
-  return v3;
+  return callback;
 }
 
 // File Line: 4032
 // RVA: 0xD5A3E0
 void __fastcall hkpWorld::findInitialContactPoints(hkpWorld *this, hkpEntity **entities, __int64 numEntities)
 {
-  hkpWorld *v3; // r9
-  hkpSimulation *v4; // rcx
+  hkpSimulation *m_simulation; // rcx
   float v5; // xmm0_4
-  int v6; // xmm1_4
-  float v7; // xmm1_4
-  signed int v8; // ST28_4
-  int v9; // [rsp+30h] [rbp-18h]
-  int v10; // [rsp+34h] [rbp-14h]
-  float v11; // [rsp+38h] [rbp-10h]
-  float v12; // [rsp+3Ch] [rbp-Ch]
+  int v6[6]; // [rsp+30h] [rbp-18h] BYREF
 
-  v3 = this;
-  v4 = this->m_simulation;
+  m_simulation = this->m_simulation;
   v5 = 0.0;
-  v6 = SLODWORD(v4->m_currentPsiTime);
-  v9 = v6;
-  v10 = v6;
-  v7 = *(float *)&v6 - *(float *)&v6;
-  v11 = v7;
-  if ( v7 != 0.0 )
-    v5 = 1.0 / v7;
-  v12 = v5;
-  v8 = 1;
-  ((void (__fastcall *)(hkpSimulation *, hkpEntity **, __int64, hkpWorld *, int *, signed int, _QWORD, _QWORD))v4->vfptr[5].__first_virtual_table_function__)(
-    v4,
+  v6[0] = LODWORD(m_simulation->m_currentPsiTime);
+  v6[1] = v6[0];
+  *(float *)&v6[2] = *(float *)v6 - *(float *)v6;
+  if ( (float)(*(float *)v6 - *(float *)v6) != 0.0 )
+    v5 = 1.0 / (float)(*(float *)v6 - *(float *)v6);
+  *(float *)&v6[3] = v5;
+  ((void (__fastcall *)(hkpSimulation *, hkpEntity **, __int64, hkpWorld *, int *, int))m_simulation->vfptr[5].__first_virtual_table_function__)(
+    m_simulation,
     entities,
     numEntities,
-    v3,
-    &v9,
-    v8,
-    *(_QWORD *)&v9,
-    *(_QWORD *)&v11);
+    this,
+    v6,
+    1);
 }
 
 // File Line: 4042
@@ -7348,13 +6986,11 @@ void __fastcall hkpWorld::findInitialContactPoints(hkpWorld *this, hkpEntity **e
 void __fastcall hkpWorld::findInitialContactPointsOfAllEntities(hkpWorld *this)
 {
   int v1; // edi
-  hkpWorld *v2; // rbx
   int v3; // ebp
   __int64 v4; // rsi
   __int64 v5; // rsi
 
   v1 = 0;
-  v2 = this;
   v3 = 0;
   if ( this->m_activeSimulationIslands.m_size > 0 )
   {
@@ -7362,79 +6998,77 @@ void __fastcall hkpWorld::findInitialContactPointsOfAllEntities(hkpWorld *this)
     do
     {
       hkpWorld::findInitialContactPoints(
-        v2,
-        v2->m_activeSimulationIslands.m_data[v4]->m_entities.m_data,
-        (unsigned int)v2->m_activeSimulationIslands.m_data[v4]->m_entities.m_size);
+        this,
+        this->m_activeSimulationIslands.m_data[v4]->m_entities.m_data,
+        (unsigned int)this->m_activeSimulationIslands.m_data[v4]->m_entities.m_size);
       ++v3;
       ++v4;
     }
-    while ( v3 < v2->m_activeSimulationIslands.m_size );
+    while ( v3 < this->m_activeSimulationIslands.m_size );
   }
-  if ( v2->m_inactiveSimulationIslands.m_size > 0 )
+  if ( this->m_inactiveSimulationIslands.m_size > 0 )
   {
     v5 = 0i64;
     do
     {
       hkpWorld::findInitialContactPoints(
-        v2,
-        v2->m_inactiveSimulationIslands.m_data[v5]->m_entities.m_data,
-        (unsigned int)v2->m_inactiveSimulationIslands.m_data[v5]->m_entities.m_size);
+        this,
+        this->m_inactiveSimulationIslands.m_data[v5]->m_entities.m_data,
+        (unsigned int)this->m_inactiveSimulationIslands.m_data[v5]->m_entities.m_size);
       ++v1;
       ++v5;
     }
-    while ( v1 < v2->m_inactiveSimulationIslands.m_size );
+    while ( v1 < this->m_inactiveSimulationIslands.m_size );
   }
 }
 
 // File Line: 4056
 // RVA: 0xD5A4F0
-void __fastcall hkpWorld::calcRequiredSolverBufferSize(hkpWorld *this, hkWorldMemoryAvailableWatchDog::MemUsageInfo *infoOut)
+void __fastcall hkpWorld::calcRequiredSolverBufferSize(
+        hkpWorld *this,
+        hkWorldMemoryAvailableWatchDog::MemUsageInfo *infoOut)
 {
-  hkWorldMemoryAvailableWatchDog::MemUsageInfo *v2; // rbx
-  hkpWorld *v3; // rdi
   __int64 v4; // rdx
   __int64 v5; // r8
-  int v6; // er11
+  int v6; // r11d
   int v7; // eax
   __int64 i; // r9
   hkpSimulationIsland *v9; // r10
   int v10; // ecx
-  int v11; // eax
+  int m_sumRuntimeBlockSize; // eax
 
-  v2 = infoOut;
-  v3 = this;
   hkpWorldOperationUtil::cleanupDirtyIslands(this);
   v6 = 0;
-  *(_QWORD *)&v2->m_maxRuntimeBlockSize = 0i64;
-  v2->m_largestSimulationIsland = 0i64;
-  v7 = v3->m_activeSimulationIslands.m_size - 1;
+  *(_QWORD *)&infoOut->m_maxRuntimeBlockSize = 0i64;
+  infoOut->m_largestSimulationIsland = 0i64;
+  v7 = this->m_activeSimulationIslands.m_size - 1;
   for ( i = v7; i >= 0; --i )
   {
-    v9 = v3->m_activeSimulationIslands.m_data[i];
+    v9 = this->m_activeSimulationIslands.m_data[i];
     v4 = (unsigned int)(2 * (v9->m_numConstraints / 80) + 8);
     v5 = 32 * ((_DWORD)v4 + 4 * v9->m_entities.m_size)
        + ((4 * (v9->m_constraintInfo.m_numSolverElemTemps + 3 * (_DWORD)v4) + 23) & 0xFFFFFFF0)
        + 176;
     v10 = v5 + v9->m_constraintInfo.m_sizeOfSchemas;
     v6 += v10;
-    v2->m_sumRuntimeBlockSize = v6;
-    if ( v10 > v2->m_maxRuntimeBlockSize )
+    infoOut->m_sumRuntimeBlockSize = v6;
+    if ( v10 > infoOut->m_maxRuntimeBlockSize )
     {
-      v2->m_maxRuntimeBlockSize = v10;
-      v2->m_largestSimulationIsland = v9;
+      infoOut->m_maxRuntimeBlockSize = v10;
+      infoOut->m_largestSimulationIsland = v9;
     }
   }
-  if ( (unsigned int)(v3->m_simulationType.m_storage - 2) <= 1 )
+  if ( (unsigned int)(this->m_simulationType.m_storage - 2) <= 1 )
   {
-    v11 = (*(__int64 (__fastcall **)(_QWORD, __int64, __int64, __int64))(**(_QWORD **)&v3->m_simulation[1].m_lastProcessingStep.m_storage
-                                                                       + 56i64))(
-            *(_QWORD *)&v3->m_simulation[1].m_lastProcessingStep.m_storage,
-            v4,
-            v5,
-            i);
-    if ( v2->m_sumRuntimeBlockSize > v11 )
-      v11 = v2->m_sumRuntimeBlockSize;
-    v2->m_sumRuntimeBlockSize = v11;
+    m_sumRuntimeBlockSize = (*(__int64 (__fastcall **)(_QWORD, __int64, __int64, __int64))(**(_QWORD **)&this->m_simulation[1].m_lastProcessingStep.m_storage
+                                                                                         + 56i64))(
+                              *(_QWORD *)&this->m_simulation[1].m_lastProcessingStep.m_storage,
+                              v4,
+                              v5,
+                              i);
+    if ( infoOut->m_sumRuntimeBlockSize > m_sumRuntimeBlockSize )
+      m_sumRuntimeBlockSize = infoOut->m_sumRuntimeBlockSize;
+    infoOut->m_sumRuntimeBlockSize = m_sumRuntimeBlockSize;
   }
 }
 
@@ -7442,11 +7076,8 @@ void __fastcall hkpWorld::calcRequiredSolverBufferSize(hkpWorld *this, hkWorldMe
 // RVA: 0xD5A630
 void __fastcall hkpWorld::lock(hkpWorld *this)
 {
-  hkpWorld *v1; // rbx
-
-  v1 = this;
   hkReferencedObject::lockAll();
-  ++v1->m_isLocked;
+  ++this->m_isLocked;
 }
 
 // File Line: 4104
@@ -7482,64 +7113,62 @@ char __fastcall hkpWorld::checkUnmarked(hkpWorld *this)
 // RVA: 0xD5A6A0
 void __fastcall hkpWorld::lockIslandForConstraintUpdate(hkpWorld *this, hkpSimulationIsland *island)
 {
-  hkCriticalSection *v2; // rcx
+  hkCriticalSection *m_modifyConstraintCriticalSection; // rcx
 
-  v2 = this->m_modifyConstraintCriticalSection;
-  if ( v2 )
-    EnterCriticalSection(&v2->m_section);
+  m_modifyConstraintCriticalSection = this->m_modifyConstraintCriticalSection;
+  if ( m_modifyConstraintCriticalSection )
+    EnterCriticalSection(&m_modifyConstraintCriticalSection->m_section);
 }
 
 // File Line: 4154
 // RVA: 0xD5A6C0
 void __fastcall hkpWorld::lockForIslandSplit(hkpWorld *this, hkpSimulationIsland *island)
 {
-  hkCriticalSection *v2; // rcx
+  hkCriticalSection *m_modifyConstraintCriticalSection; // rcx
 
-  v2 = this->m_modifyConstraintCriticalSection;
-  if ( v2 )
-    EnterCriticalSection(&v2->m_section);
+  m_modifyConstraintCriticalSection = this->m_modifyConstraintCriticalSection;
+  if ( m_modifyConstraintCriticalSection )
+    EnterCriticalSection(&m_modifyConstraintCriticalSection->m_section);
 }
 
 // File Line: 4166
 // RVA: 0xD5A6E0
 void __fastcall hkpWorld::unlockIslandForConstraintUpdate(hkpWorld *this, hkpSimulationIsland *island)
 {
-  hkCriticalSection *v2; // rcx
+  hkCriticalSection *m_modifyConstraintCriticalSection; // rcx
 
-  v2 = this->m_modifyConstraintCriticalSection;
-  if ( v2 )
-    LeaveCriticalSection(&v2->m_section);
+  m_modifyConstraintCriticalSection = this->m_modifyConstraintCriticalSection;
+  if ( m_modifyConstraintCriticalSection )
+    LeaveCriticalSection(&m_modifyConstraintCriticalSection->m_section);
 }
 
 // File Line: 4181
 // RVA: 0xD5A700
 void __fastcall hkpWorld::unlockForIslandSplit(hkpWorld *this, hkpSimulationIsland *island)
 {
-  hkCriticalSection *v2; // rcx
+  hkCriticalSection *m_modifyConstraintCriticalSection; // rcx
 
-  v2 = this->m_modifyConstraintCriticalSection;
-  if ( v2 )
-    LeaveCriticalSection(&v2->m_section);
+  m_modifyConstraintCriticalSection = this->m_modifyConstraintCriticalSection;
+  if ( m_modifyConstraintCriticalSection )
+    LeaveCriticalSection(&m_modifyConstraintCriticalSection->m_section);
 }
 
 // File Line: 4193
 // RVA: 0xD5A720
 void __fastcall hkpWorld::setMultithreadedAccessChecking(hkpWorld *this, hkpWorld::MtAccessChecking accessCheckState)
 {
-  hkpWorld *v2; // rbx
-  hkMultiThreadCheck *v3; // rcx
+  hkMultiThreadCheck *p_m_multiThreadCheck; // rcx
 
-  v2 = this;
-  v3 = &this->m_multiThreadCheck;
+  p_m_multiThreadCheck = &this->m_multiThreadCheck;
   if ( accessCheckState )
   {
-    hkMultiThreadCheck::disableChecks(v3);
-    hkMultiThreadCheck::disableChecks(&v2->m_broadPhase->m_multiThreadCheck);
+    hkMultiThreadCheck::disableChecks(p_m_multiThreadCheck);
+    hkMultiThreadCheck::disableChecks(&this->m_broadPhase->m_multiThreadCheck);
   }
   else
   {
-    hkMultiThreadCheck::enableChecks(v3);
-    hkMultiThreadCheck::enableChecks(&v2->m_broadPhase->m_multiThreadCheck);
+    hkMultiThreadCheck::enableChecks(p_m_multiThreadCheck);
+    hkMultiThreadCheck::enableChecks(&this->m_broadPhase->m_multiThreadCheck);
   }
 }
 

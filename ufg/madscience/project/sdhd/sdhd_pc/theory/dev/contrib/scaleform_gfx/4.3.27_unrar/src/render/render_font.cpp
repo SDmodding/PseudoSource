@@ -1,103 +1,98 @@
 // File Line: 44
 // RVA: 0x9D3070
-void __fastcall Scaleform::Render::Font::calcLowerUpperTop(Scaleform::Render::Font *this, Scaleform::Render::GlyphCache *log)
+void __fastcall Scaleform::Render::Font::calcLowerUpperTop(
+        Scaleform::Render::Font *this,
+        Scaleform::Render::GlyphCache *log)
 {
-  Scaleform::Render::GlyphCache *v2; // rbp
-  Scaleform::Render::Font *v3; // rsi
-  __int64 *v4; // rbx
+  char *v4; // rbx
   unsigned __int8 v5; // cl
-  Scaleform::RefCountImplCoreVtbl *v6; // rax
+  Scaleform::RefCountImplCoreVtbl *vfptr; // rax
   unsigned int v7; // eax
-  signed int v8; // edi
-  char *v9; // rdi
-  char *v10; // rbx
-  __int64 v11; // rax
-  signed int v12; // eax
+  int v8; // edi
+  const char *v9; // rdi
+  const char *v10; // rbx
+  const char *v11; // rax
+  int v12; // eax
   unsigned __int8 v13; // cl
-  int *v14; // rbx
+  char *v14; // rbx
   Scaleform::RefCountImplCoreVtbl *v15; // rax
   unsigned int v16; // eax
-  __int64 v17; // [rsp+30h] [rbp-38h]
-  __int16 v18; // [rsp+38h] [rbp-30h]
-  __int128 v19; // [rsp+40h] [rbp-28h]
-  int v20; // [rsp+70h] [rbp+8h]
-  __int16 v21; // [rsp+74h] [rbp+Ch]
+  char v17[16]; // [rsp+30h] [rbp-38h] BYREF
+  __int128 v18; // [rsp+40h] [rbp-28h] BYREF
+  char v19[8]; // [rsp+70h] [rbp+8h] BYREF
 
-  v2 = log;
-  v3 = this;
   if ( *(_DWORD *)&this->LowerCaseTop )
     goto LABEL_6;
-  v4 = &v17;
-  v17 = *(_QWORD *)aHeftuvwx;
+  v4 = v17;
+  strcpy(v17, "HEFTUVWXZ");
   v5 = aHeftuvwx[0];
-  v18 = 90;
-  v20 = *(_DWORD *)aZxvw;
-  v21 = 121;
+  strcpy(v19, "zxvwy");
   if ( !aHeftuvwx[0] )
     goto LABEL_6;
   while ( 1 )
   {
-    v6 = v3->vfptr;
-    v19 = 0i64;
-    v7 = (__int64)v6[2].__vecDelDtor((Scaleform::RefCountImplCore *)&v3->vfptr, v5);
+    vfptr = this->vfptr;
+    v18 = 0i64;
+    v7 = (unsigned int)vfptr[2].__vecDelDtor(this, v5);
     if ( v7 != -1 )
     {
-      ((void (__fastcall *)(Scaleform::Render::Font *, _QWORD, __int128 *))v3->vfptr[7].__vecDelDtor)(v3, v7, &v19);
-      v8 = (signed int)COERCE_FLOAT(DWORD1(v19) ^ _xmm[0]);
+      ((void (__fastcall *)(Scaleform::Render::Font *, _QWORD, __int128 *))this->vfptr[7].__vecDelDtor)(this, v7, &v18);
+      v8 = (int)COERCE_FLOAT(DWORD1(v18) ^ _xmm[0]);
       if ( (_WORD)v8 )
         break;
     }
-    v5 = *((_BYTE *)v4 + 1);
-    v4 = (__int64 *)((char *)v4 + 1);
+    v5 = *++v4;
     if ( !v5 )
       goto LABEL_6;
   }
-  v13 = v20;
-  v14 = &v20;
-  if ( (_BYTE)v20 )
+  v13 = v19[0];
+  v14 = v19;
+  if ( v19[0] )
   {
     while ( 1 )
     {
-      v15 = v3->vfptr;
-      v19 = 0i64;
-      v16 = (__int64)v15[2].__vecDelDtor((Scaleform::RefCountImplCore *)&v3->vfptr, v13);
+      v15 = this->vfptr;
+      v18 = 0i64;
+      v16 = (unsigned int)v15[2].__vecDelDtor(this, v13);
       if ( v16 != -1 )
       {
-        ((void (__fastcall *)(Scaleform::Render::Font *, _QWORD, __int128 *))v3->vfptr[7].__vecDelDtor)(v3, v16, &v19);
-        v12 = (signed int)COERCE_FLOAT(DWORD1(v19) ^ _xmm[0]);
+        ((void (__fastcall *)(Scaleform::Render::Font *, _QWORD, __int128 *))this->vfptr[7].__vecDelDtor)(
+          this,
+          v16,
+          &v18);
+        v12 = (int)COERCE_FLOAT(DWORD1(v18) ^ _xmm[0]);
         if ( (_WORD)v12 )
           break;
       }
-      v13 = *((_BYTE *)v14 + 1);
-      v14 = (int *)((char *)v14 + 1);
+      v13 = *++v14;
       if ( !v13 )
         goto LABEL_6;
     }
-    v3->UpperCaseTop = v8;
+    this->UpperCaseTop = v8;
   }
   else
   {
 LABEL_6:
-    if ( v2 )
+    if ( log )
     {
-      v9 = &customWorldMapCaption;
-      v10 = &customWorldMapCaption;
-      if ( v3->Flags & 1 )
+      v9 = &customCaption;
+      v10 = &customCaption;
+      if ( (this->Flags & 1) != 0 )
         v10 = " Italic";
-      if ( (v3->Flags >> 1) & 1 )
+      if ( (this->Flags & 2) != 0 )
         v9 = " Bold";
-      v11 = ((__int64 (__fastcall *)(Scaleform::Render::Font *))v3->vfptr[1].__vecDelDtor)(v3);
+      v11 = (const char *)((__int64 (__fastcall *)(Scaleform::Render::Font *))this->vfptr[1].__vecDelDtor)(this);
       Scaleform::Render::GlyphCache::LogWarning(
-        v2,
+        log,
         "Font %s%s%s: No hinting chars (any of HEFTUVWXZ and zxvwy). Auto-Hinting disabled.",
         v11,
         v9,
         v10);
     }
     LOWORD(v12) = -1;
-    v3->UpperCaseTop = -1;
+    this->UpperCaseTop = -1;
   }
-  v3->LowerCaseTop = v12;
+  this->LowerCaseTop = v12;
 }
 
 // File Line: 91

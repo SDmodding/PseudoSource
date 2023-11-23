@@ -1,452 +1,420 @@
 // File Line: 32
 // RVA: 0xE18970
-hkpPoweredChainMapper *__fastcall hkpPoweredChainMapper::buildChainMapper(hkpPoweredChainMapper::Config config, hkArray<hkpConstraintInstance *,hkContainerHeapAllocator> *allConstraints, hkArray<hkpPoweredChainMapper::ChainEndpoints,hkContainerHeapAllocator> *pairs, hkArray<hkpConstraintInstance *,hkContainerHeapAllocator> *unusedConstraints)
+hkpPoweredChainMapper *__fastcall hkpPoweredChainMapper::buildChainMapper(
+        hkpPoweredChainMapper::Config config,
+        hkArray<hkpConstraintInstance *,hkContainerHeapAllocator> *allConstraints,
+        hkArray<hkpPoweredChainMapper::ChainEndpoints,hkContainerHeapAllocator> *pairs,
+        hkArray<hkpConstraintInstance *,hkContainerHeapAllocator> *unusedConstraints)
 {
   hkArray<hkpConstraintInstance *,hkContainerHeapAllocator> *v4; // r13
-  hkArray<hkpConstraintInstance *,hkContainerHeapAllocator> *v5; // r14
-  _QWORD **v6; // rax
+  _QWORD **Value; // rax
   __int64 v7; // rax
-  signed int *v8; // r15
-  __int64 v9; // rsi
+  __int64 v8; // r15
+  __int64 m_size; // rsi
   _DWORD *v10; // rdi
-  int v11; // er9
   __int64 i; // rcx
-  bool v13; // zf
-  bool v14; // sf
+  bool v12; // cc
+  int v13; // edi
+  __int64 v14; // rsi
   int v15; // edi
-  __int64 v16; // rsi
-  signed int v17; // edi
-  _QWORD *v18; // r12
-  int v19; // eax
-  int v20; // eax
-  int v21; // er9
+  _QWORD *v16; // r12
+  int v17; // eax
+  int v18; // eax
+  int v19; // r9d
+  __int64 v20; // rdx
+  int v21; // eax
   __int64 v22; // rcx
-  int v23; // eax
-  signed __int64 v24; // rdx
-  __int64 v25; // rcx
-  signed __int64 v26; // rdx
-  _DWORD *v27; // rdi
+  __int64 v23; // rdx
+  _DWORD *v24; // rdi
   __int64 j; // rcx
-  hkArray<hkpPoweredChainMapper::ChainEndpoints,hkContainerHeapAllocator> *v29; // rax
-  hkResultEnum v30; // er14
-  __int64 v31; // r12
-  hkpPoweredChainMapper::ChainEndpoints *v32; // rax
-  hkpConstraintChainInstance *v33; // r13
-  int v34; // esi
-  __int64 v35; // r14
-  int v36; // eax
-  int v37; // edx
-  __int64 v38; // r12
-  signed __int64 v39; // rdi
-  __int64 v40; // r15
-  hkpConstraintData *v41; // rax
-  signed int v42; // edi
-  signed int v43; // edx
-  __int64 v44; // rcx
-  __int64 v45; // r8
-  int v46; // eax
-  int v47; // eax
-  int v48; // er9
-  int v49; // er9
-  __int64 v50; // r8
-  char *v51; // rdx
-  signed int *v52; // rdi
-  _QWORD *v53; // rcx
-  signed int v54; // esi
-  __int64 v55; // r14
-  __int64 v56; // rdi
-  hkpConstraintInstance **v57; // r12
-  hkpConstraintInstance *v58; // rax
-  int v60; // er9
-  int v61; // ecx
-  hkReferencedObject *v62; // rcx
-  int v63; // er9
-  int v64; // ecx
-  hkResult result; // [rsp+30h] [rbp-D0h]
-  hkArray<hkpConstraintInstance *,hkContainerHeapAllocator> constraints; // [rsp+38h] [rbp-C8h]
-  char *v67; // [rsp+48h] [rbp-B8h]
-  int v68; // [rsp+50h] [rbp-B0h]
-  int v69; // [rsp+54h] [rbp-ACh]
-  _DWORD *array; // [rsp+58h] [rbp-A8h]
-  int v71; // [rsp+60h] [rbp-A0h]
-  int v72; // [rsp+64h] [rbp-9Ch]
-  hkArray<hkpEntity *,hkContainerHeapAllocator> entitiesOut; // [rsp+68h] [rbp-98h]
-  signed int *v74; // [rsp+78h] [rbp-88h]
-  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > v75; // [rsp+80h] [rbp-80h]
-  hkErrStream v76; // [rsp+90h] [rbp-70h]
-  __int64 v77; // [rsp+A8h] [rbp-58h]
-  hkReferencedObject *v78; // [rsp+B0h] [rbp-50h]
-  hkResult v79; // [rsp+B8h] [rbp-48h]
-  _QWORD *v80; // [rsp+C0h] [rbp-40h]
-  char buf; // [rsp+D0h] [rbp-30h]
-  hkpPoweredChainMapper::Config v82; // [rsp+320h] [rbp+220h]
-  hkArray<hkpConstraintInstance *,hkContainerHeapAllocator> *allConstraintsa; // [rsp+328h] [rbp+228h]
-  hkArray<hkpPoweredChainMapper::ChainEndpoints,hkContainerHeapAllocator> *v84; // [rsp+330h] [rbp+230h]
-  hkArray<hkpConstraintInstance *,hkContainerHeapAllocator> *v85; // [rsp+338h] [rbp+238h]
+  hkArray<hkpPoweredChainMapper::ChainEndpoints,hkContainerHeapAllocator> *v26; // rax
+  hkResultEnum m_enum; // r14d
+  __int64 v28; // r12
+  hkpPoweredChainMapper::ChainEndpoints *v29; // rax
+  hkpConstraintChainInstance *v30; // r13
+  int v31; // esi
+  __int64 v32; // r14
+  int Key; // eax
+  int v34; // edx
+  __int64 val_low; // r12
+  __int64 v36; // rdi
+  char *v37; // r15
+  hkpConstraintData *v38; // rax
+  int v39; // edi
+  int v40; // edx
+  __int64 v41; // rcx
+  __int64 v42; // r8
+  int v43; // eax
+  int v44; // eax
+  int v45; // r9d
+  int v46; // r9d
+  __int64 v47; // r8
+  char *v48; // rdx
+  int *v49; // rdi
+  _QWORD *v50; // rcx
+  int v51; // esi
+  __int64 v52; // r14
+  __int64 v53; // rdi
+  hkpConstraintInstance **m_data; // r12
+  hkpConstraintInstance *v55; // rax
+  int v57; // r9d
+  unsigned int v58; // ecx
+  hkReferencedObject *v59; // rcx
+  int v60; // r9d
+  unsigned int v61; // ecx
+  hkResult result; // [rsp+30h] [rbp-D0h] BYREF
+  hkArray<hkpConstraintInstance *,hkContainerHeapAllocator> constraints; // [rsp+38h] [rbp-C8h] BYREF
+  char *v64; // [rsp+48h] [rbp-B8h] BYREF
+  int v65; // [rsp+50h] [rbp-B0h]
+  int v66; // [rsp+54h] [rbp-ACh]
+  _DWORD *array; // [rsp+58h] [rbp-A8h] BYREF
+  int v68; // [rsp+60h] [rbp-A0h]
+  int v69; // [rsp+64h] [rbp-9Ch]
+  hkArray<hkpEntity *,hkContainerHeapAllocator> entitiesOut; // [rsp+68h] [rbp-98h] BYREF
+  hkReferencedObject *v71; // [rsp+78h] [rbp-88h]
+  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > v72; // [rsp+80h] [rbp-80h] BYREF
+  hkErrStream v73; // [rsp+90h] [rbp-70h] BYREF
+  __int64 v74; // [rsp+A8h] [rbp-58h]
+  hkReferencedObject *v75; // [rsp+B0h] [rbp-50h]
+  hkResult v76; // [rsp+B8h] [rbp-48h] BYREF
+  _QWORD *v77; // [rsp+C0h] [rbp-40h]
+  char buf[576]; // [rsp+D0h] [rbp-30h] BYREF
+  hkArray<hkpPoweredChainMapper::ChainEndpoints,hkContainerHeapAllocator> *v81; // [rsp+330h] [rbp+230h] BYREF
+  hkArray<hkpConstraintInstance *,hkContainerHeapAllocator> *v82; // [rsp+338h] [rbp+238h]
 
-  v85 = unusedConstraints;
-  v84 = pairs;
-  allConstraintsa = allConstraints;
-  v82 = config;
+  v82 = unusedConstraints;
+  v81 = pairs;
   v4 = unusedConstraints;
-  v5 = allConstraints;
-  v6 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v7 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v6[11] + 8i64))(v6[11], 64i64);
-  v8 = (signed int *)v7;
-  v74 = (signed int *)v7;
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v7 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 64i64);
+  v8 = v7;
+  v71 = (hkReferencedObject *)v7;
   if ( v7 )
   {
     *(_DWORD *)(v7 + 8) = 0x1FFFF;
     *(_QWORD *)v7 = &hkpPoweredChainMapper::`vftable;
     *(_QWORD *)(v7 + 16) = 0i64;
     *(_DWORD *)(v7 + 24) = 0;
-    *(_DWORD *)(v7 + 28) = 2147483648;
+    *(_DWORD *)(v7 + 28) = 0x80000000;
     *(_QWORD *)(v7 + 32) = 0i64;
     *(_DWORD *)(v7 + 40) = 0;
-    *(_DWORD *)(v7 + 44) = 2147483648;
+    *(_DWORD *)(v7 + 44) = 0x80000000;
     *(_QWORD *)(v7 + 48) = 0i64;
     *(_DWORD *)(v7 + 56) = 0;
-    *(_DWORD *)(v7 + 60) = 2147483648;
+    *(_DWORD *)(v7 + 60) = 0x80000000;
   }
   else
   {
     v8 = 0i64;
-    v74 = 0i64;
+    v71 = 0i64;
   }
-  v9 = v5->m_size;
-  v67 = 0i64;
-  v68 = 0;
-  v69 = 2147483648;
+  m_size = allConstraints->m_size;
+  v64 = 0i64;
+  v65 = 0;
+  v66 = 0x80000000;
   v10 = 0i64;
   array = 0i64;
-  v71 = 0;
-  v72 = 2147483648;
-  if ( (signed int)v9 > 0 )
+  v68 = 0;
+  v69 = 0x80000000;
+  if ( (int)m_size > 0 )
   {
-    v11 = v9;
-    if ( (signed int)v9 < 0 )
-      v11 = 0;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, v11, 4);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&array, m_size, 4);
     v10 = array;
   }
-  v71 = v9;
-  if ( (signed int)(((unsigned __int64)(4 * v9) >> 2) - 1) >= 0 )
+  v68 = m_size;
+  if ( (int)(((unsigned __int64)(4 * m_size) >> 2) - 1) >= 0 )
   {
-    for ( i = (unsigned int)((unsigned __int64)(4 * v9) >> 2); i; --i )
-    {
-      *v10 = 0;
-      ++v10;
-    }
+    for ( i = (unsigned int)((unsigned __int64)(4 * m_size) >> 2); i; --i )
+      *v10++ = 0;
   }
-  v13 = v5->m_size == 0;
-  v14 = v5->m_size < 0;
-  v75.m_elem = 0i64;
-  v75.m_numElems = 0;
-  v75.m_hashMod = -1;
-  v15 = 0;
-  if ( !v14 && !v13 )
+  v12 = allConstraints->m_size <= 0;
+  v72.m_elem = 0i64;
+  v72.m_numElems = 0;
+  v72.m_hashMod = -1;
+  v13 = 0;
+  if ( !v12 )
   {
-    v16 = 0i64;
+    v14 = 0i64;
     do
-    {
       hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::insert(
-        &v75,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        (unsigned __int64)v5->m_data[v16],
-        v15++);
-      ++v16;
-    }
-    while ( v15 < v5->m_size );
+        &v72,
+        &hkContainerHeapAllocator::s_alloc,
+        (unsigned __int64)allConstraints->m_data[v14++],
+        v13++);
+    while ( v13 < allConstraints->m_size );
   }
-  v17 = v5->m_size;
-  v18 = v8 + 4;
-  v19 = v8[7] & 0x3FFFFFFF;
-  v80 = v8 + 4;
-  if ( v19 < v17 )
+  v15 = allConstraints->m_size;
+  v16 = (_QWORD *)(v8 + 16);
+  v17 = *(_DWORD *)(v8 + 28) & 0x3FFFFFFF;
+  v77 = (_QWORD *)(v8 + 16);
+  if ( v17 < v15 )
   {
-    v20 = 2 * v19;
-    v21 = v17;
-    if ( v17 < v20 )
-      v21 = v20;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v8 + 4, v21, 16);
+    v18 = 2 * v17;
+    v19 = v15;
+    if ( v15 < v18 )
+      v19 = v18;
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)(v8 + 16), v19, 16);
   }
-  v22 = v8[6];
-  v23 = v17 - v22;
-  v24 = 16 * v22;
-  v25 = v17 - (signed int)v22;
-  v26 = *v18 + v24;
-  if ( v23 > 0 )
+  v20 = *(int *)(v8 + 24);
+  v21 = v15 - v20;
+  v22 = v15 - (int)v20;
+  v23 = *v16 + 16 * v20;
+  if ( v21 > 0 )
   {
     do
     {
-      if ( v26 )
+      if ( v23 )
       {
-        *(_DWORD *)v26 = -1;
-        *(_DWORD *)(v26 + 4) = 0;
-        *(_QWORD *)(v26 + 8) = 0i64;
+        *(_DWORD *)v23 = -1;
+        *(_DWORD *)(v23 + 4) = 0;
+        *(_QWORD *)(v23 + 8) = 0i64;
       }
-      v26 += 16i64;
-      --v25;
+      v23 += 16i64;
+      --v22;
     }
-    while ( v25 );
+    while ( v22 );
   }
-  v8[6] = v17;
-  if ( (signed int)(((unsigned __int64)(16i64 * v8[6]) >> 2) - 1) >= 0 )
+  *(_DWORD *)(v8 + 24) = v15;
+  if ( (int)(((unsigned __int64)(16i64 * *(int *)(v8 + 24)) >> 2) - 1) >= 0 )
   {
-    v27 = (_DWORD *)*v18;
-    for ( j = (unsigned int)((unsigned __int64)(16i64 * v8[6]) >> 2); j; --j )
-    {
-      *v27 = 0;
-      ++v27;
-    }
+    v24 = (_DWORD *)*v16;
+    for ( j = (unsigned int)((unsigned __int64)(16i64 * *(int *)(v8 + 24)) >> 2); j; --j )
+      *v24++ = 0;
   }
-  v29 = v84;
-  v30 = 0;
-  result.m_enum = 0;
-  if ( v84->m_size <= 0 )
+  v26 = v81;
+  m_enum = HK_SUCCESS;
+  result.m_enum = HK_SUCCESS;
+  if ( v81->m_size <= 0 )
   {
-LABEL_50:
-    v42 = 0;
-    v43 = 0;
-    if ( v8[6] > 0 )
+LABEL_48:
+    v39 = 0;
+    v40 = 0;
+    if ( *(int *)(v8 + 24) > 0 )
     {
-      v44 = 0i64;
-      v45 = 0i64;
+      v41 = 0i64;
+      v42 = 0i64;
       do
       {
-        ++v43;
-        ++v45;
-        *(_DWORD *)(v44 + *v18) = v42;
-        v44 += 16i64;
-        v42 += array[v45 - 1];
-        *(_DWORD *)(v44 + *v18 - 12) = 0;
+        ++v40;
+        ++v42;
+        *(_DWORD *)(v41 + *v16) = v39;
+        v41 += 16i64;
+        v39 += array[v42 - 1];
+        *(_DWORD *)(v41 + *v16 - 12) = 0;
       }
-      while ( v43 < v8[6] );
+      while ( v40 < *(_DWORD *)(v8 + 24) );
     }
-    v46 = v8[11] & 0x3FFFFFFF;
-    if ( v46 < v42 )
+    v43 = *(_DWORD *)(v8 + 44) & 0x3FFFFFFF;
+    if ( v43 < v39 )
     {
-      v47 = 2 * v46;
-      v48 = v42;
-      if ( v42 < v47 )
-        v48 = v47;
-      hkArrayUtil::_reserve(
-        (hkResult *)&v84,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        v8 + 8,
-        v48,
-        16);
+      v44 = 2 * v43;
+      v45 = v39;
+      if ( v39 < v44 )
+        v45 = v44;
+      hkArrayUtil::_reserve((hkResult *)&v81, &hkContainerHeapAllocator::s_alloc, (const void **)(v8 + 32), v45, 16);
     }
-    v8[10] = v42;
-    v49 = 0;
-    if ( v68 > 0 )
+    *(_DWORD *)(v8 + 40) = v39;
+    v46 = 0;
+    if ( v65 > 0 )
     {
-      v50 = 0i64;
+      v47 = 0i64;
       do
       {
-        v51 = v67;
-        ++v49;
-        v50 += 24i64;
-        v52 = (signed int *)(*v18 + 16i64 * *(signed int *)&v67[v50 - 8]);
-        v53 = (_QWORD *)(*((_QWORD *)v8 + 4) + 16 * (*v52 + (signed __int64)v52[1]));
-        *v53 = *(_QWORD *)&v67[v50 - 24];
-        v53[1] = *(_QWORD *)&v51[v50 - 16];
-        ++v52[1];
+        v48 = v64;
+        ++v46;
+        v47 += 24i64;
+        v49 = (int *)(*v16 + 16i64 * *(int *)&v64[v47 - 8]);
+        v50 = (_QWORD *)(*(_QWORD *)(v8 + 32) + 16 * (*v49 + (__int64)v49[1]));
+        *v50 = *(_QWORD *)&v64[v47 - 24];
+        v50[1] = *(_QWORD *)&v48[v47 - 16];
+        ++v49[1];
       }
-      while ( v49 < v68 );
+      while ( v46 < v65 );
     }
     if ( v4 )
     {
-      v54 = 0;
-      if ( v8[6] > 0 )
+      v51 = 0;
+      if ( *(int *)(v8 + 24) > 0 )
       {
-        v55 = 0i64;
-        v56 = 0i64;
+        v52 = 0i64;
+        v53 = 0i64;
         do
         {
-          if ( !*(_DWORD *)(v56 + *v18 + 4) )
+          if ( !*(_DWORD *)(v53 + *v16 + 4) )
           {
-            v57 = allConstraintsa->m_data;
+            m_data = allConstraints->m_data;
             if ( v4->m_size == (v4->m_capacityAndFlags & 0x3FFFFFFF) )
-              hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v4, 8);
-            v58 = v57[v55];
-            v18 = v8 + 4;
-            v4->m_data[v4->m_size++] = v58;
+              hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&v4->m_data, 8);
+            v55 = m_data[v52];
+            v16 = (_QWORD *)(v8 + 16);
+            v4->m_data[v4->m_size++] = v55;
           }
-          ++v54;
-          v56 += 16i64;
-          ++v55;
+          ++v51;
+          v53 += 16i64;
+          ++v52;
         }
-        while ( v54 < v8[6] );
+        while ( v51 < *(_DWORD *)(v8 + 24) );
       }
     }
-    goto LABEL_68;
+    goto LABEL_66;
   }
-  v31 = 0i64;
-  v77 = 0i64;
+  v28 = 0i64;
+  v74 = 0i64;
   while ( 1 )
   {
-    v32 = v29->m_data;
+    v29 = v26->m_data;
     entitiesOut.m_data = 0i64;
     entitiesOut.m_size = 0;
-    entitiesOut.m_capacityAndFlags = 2147483648;
+    entitiesOut.m_capacityAndFlags = 0x80000000;
     constraints.m_data = 0i64;
     constraints.m_size = 0;
-    constraints.m_capacityAndFlags = 2147483648;
+    constraints.m_capacityAndFlags = 0x80000000;
     if ( hkpConstraintChainUtil::findConstraintLinkBetweenEntities(
-           &v79,
-           allConstraintsa,
-           *(hkpEntity **)((char *)&v32->m_start + v31),
-           *(hkpEntity **)((char *)&v32->m_end + v31),
+           &v76,
+           allConstraints,
+           *(hkpEntity **)((char *)&v29->m_start + v28),
+           *(hkpEntity **)((char *)&v29->m_end + v28),
            &entitiesOut,
-           &constraints)->m_enum == 1 )
+           &constraints)->m_enum == HK_FAILURE )
     {
-      hkErrStream::hkErrStream(&v76, &buf, 512);
-      hkOstream::operator<<(
-        (hkOstream *)&v76.vfptr,
-        "Cannot find a chain of constraints linking one of the entity pairs.");
-      v63 = 68;
-      v64 = -1413830008;
-      goto LABEL_78;
+      hkErrStream::hkErrStream(&v73, buf, 512);
+      hkOstream::operator<<(&v73, "Cannot find a chain of constraints linking one of the entity pairs.");
+      v60 = 68;
+      v61 = -1413830008;
+      goto LABEL_76;
     }
-    v33 = hkpConstraintChainUtil::buildPoweredChain(&constraints, v82.m_cloneMotors);
-    v78 = (hkReferencedObject *)&v33->vfptr;
-    if ( !v33 )
+    v30 = hkpConstraintChainUtil::buildPoweredChain(&constraints, config.m_cloneMotors);
+    v75 = v30;
+    if ( !v30 )
     {
-      hkErrStream::hkErrStream(&v76, &buf, 512);
-      hkOstream::operator<<((hkOstream *)&v76.vfptr, "Failed to build a chain.");
-      v63 = 78;
-      v64 = -1413816918;
-LABEL_78:
-      hkError::messageWarning(v64, &buf, "Constraint\\Chain\\hkpPoweredChainMapper.cpp", v63);
-      hkOstream::~hkOstream((hkOstream *)&v76.vfptr);
-      v62 = (hkReferencedObject *)v8;
-      goto LABEL_79;
+      hkErrStream::hkErrStream(&v73, buf, 512);
+      hkOstream::operator<<(&v73, "Failed to build a chain.");
+      v60 = 78;
+      v61 = -1413816918;
+LABEL_76:
+      hkError::messageWarning(v61, buf, "Constraint\\Chain\\hkpPoweredChainMapper.cpp", v60);
+      hkOstream::~hkOstream(&v73);
+      v59 = (hkReferencedObject *)v8;
+      goto LABEL_77;
     }
-    if ( v8[14] == (v8[15] & 0x3FFFFFFF) )
-      hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v8 + 12, 8);
-    v34 = 0;
-    *(_QWORD *)(*((_QWORD *)v8 + 6) + 8i64 * v8[14]++) = v33;
+    if ( *(_DWORD *)(v8 + 56) == (*(_DWORD *)(v8 + 60) & 0x3FFFFFFF) )
+      hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)(v8 + 48), 8);
+    v31 = 0;
+    *(_QWORD *)(*(_QWORD *)(v8 + 48) + 8i64 * (int)(*(_DWORD *)(v8 + 56))++) = v30;
     if ( constraints.m_size > 0 )
       break;
-LABEL_44:
+LABEL_42:
     constraints.m_size = 0;
     if ( constraints.m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+        &hkContainerHeapAllocator::s_alloc,
         constraints.m_data,
         8 * constraints.m_capacityAndFlags);
     constraints.m_data = 0i64;
-    constraints.m_capacityAndFlags = 2147483648;
+    constraints.m_capacityAndFlags = 0x80000000;
     entitiesOut.m_size = 0;
     if ( entitiesOut.m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+        &hkContainerHeapAllocator::s_alloc,
         entitiesOut.m_data,
         8 * entitiesOut.m_capacityAndFlags);
-    v29 = v84;
-    ++v30;
-    v31 += 16i64;
+    v26 = v81;
+    ++m_enum;
+    v28 += 16i64;
     entitiesOut.m_data = 0i64;
-    entitiesOut.m_capacityAndFlags = 2147483648;
-    result.m_enum = v30;
-    v77 = v31;
-    if ( v30 >= v84->m_size )
+    entitiesOut.m_capacityAndFlags = 0x80000000;
+    result.m_enum = m_enum;
+    v74 = v28;
+    if ( m_enum >= v81->m_size )
     {
-      v4 = v85;
-      v18 = v8 + 4;
-      goto LABEL_50;
+      v4 = v82;
+      v16 = (_QWORD *)(v8 + 16);
+      goto LABEL_48;
     }
   }
-  v35 = 0i64;
+  v32 = 0i64;
   while ( 1 )
   {
-    v36 = (unsigned __int64)hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::findKey(
-                              &v75,
-                              (unsigned __int64)constraints.m_data[v35]);
-    if ( v36 > v75.m_hashMod )
+    Key = (unsigned int)hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::findKey(
+                          &v72,
+                          (unsigned __int64)constraints.m_data[v32]);
+    if ( Key > v72.m_hashMod )
       break;
-    v37 = v68;
-    v38 = SLODWORD(v75.m_elem[v36].val);
-    v39 = *v80 + 16 * v38;
-    if ( v68 == (v69 & 0x3FFFFFFF) )
+    v34 = v65;
+    val_low = SLODWORD(v72.m_elem[Key].val);
+    v36 = *v77 + 16 * val_low;
+    if ( v65 == (v66 & 0x3FFFFFFF) )
     {
-      hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v67, 24);
-      v37 = v68;
+      hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&v64, 24);
+      v34 = v65;
     }
-    v33 = (hkpConstraintChainInstance *)v78;
-    v68 = v37 + 1;
-    v40 = (__int64)&v67[24 * v37];
-    *(_DWORD *)(v40 + 16) = v38;
-    ++array[v38];
-    if ( ((unsigned int (*)(void))v33->m_data->vfptr[1].__first_virtual_table_function__)() != 102 )
+    v30 = (hkpConstraintChainInstance *)v75;
+    v65 = v34 + 1;
+    v37 = &v64[24 * v34];
+    *((_DWORD *)v37 + 4) = val_low;
+    ++array[val_low];
+    if ( ((unsigned int (__fastcall *)(hkpConstraintData *))v30->m_data->hkpConstraintInstance::vfptr[1].__first_virtual_table_function__)(v30->m_data) != 102 )
     {
-      hkErrStream::hkErrStream(&v76, &buf, 512);
-      hkOstream::operator<<((hkOstream *)&v76.vfptr, "Internal error; invalid chain type.");
-      v60 = 108;
-      v61 = -1413833363;
-      goto LABEL_74;
+      hkErrStream::hkErrStream(&v73, buf, 512);
+      hkOstream::operator<<(&v73, "Internal error; invalid chain type.");
+      v57 = 108;
+      v58 = -1413833363;
+      goto LABEL_72;
     }
-    v41 = v33->m_data;
-    *(_DWORD *)(v40 + 8) = v34;
-    *(_QWORD *)v40 = v41;
-    if ( v82.m_createLimitConstraints.m_bool && !*(_QWORD *)(v39 + 8) )
-      *(_QWORD *)(v39 + 8) = hkpConstraintUtils::convertToLimits(constraints.m_data[v35]);
-    ++v34;
-    ++v35;
-    if ( v34 >= constraints.m_size )
+    v38 = v30->m_data;
+    *((_DWORD *)v37 + 2) = v31;
+    *(_QWORD *)v37 = v38;
+    if ( config.m_createLimitConstraints.m_bool && !*(_QWORD *)(v36 + 8) )
+      *(_QWORD *)(v36 + 8) = hkpConstraintUtils::convertToLimits(constraints.m_data[v32]);
+    ++v31;
+    ++v32;
+    if ( v31 >= constraints.m_size )
     {
-      v8 = v74;
-      v30 = result.m_enum;
-      v31 = v77;
-      goto LABEL_44;
+      v8 = (__int64)v71;
+      m_enum = result.m_enum;
+      v28 = v74;
+      goto LABEL_42;
     }
   }
-  hkErrStream::hkErrStream(&v76, &buf, 512);
-  hkOstream::operator<<((hkOstream *)&v76.vfptr, "Internal error.");
-  v60 = 93;
-  v61 = -1413834275;
-LABEL_74:
-  hkError::messageWarning(v61, &buf, "Constraint\\Chain\\hkpPoweredChainMapper.cpp", v60);
-  hkOstream::~hkOstream((hkOstream *)&v76.vfptr);
-  hkReferencedObject::removeReference((hkReferencedObject *)&v33->vfptr);
-  v62 = (hkReferencedObject *)v74;
-LABEL_79:
-  hkReferencedObject::removeReference(v62);
+  hkErrStream::hkErrStream(&v73, buf, 512);
+  hkOstream::operator<<(&v73, "Internal error.");
+  v57 = 93;
+  v58 = -1413834275;
+LABEL_72:
+  hkError::messageWarning(v58, buf, "Constraint\\Chain\\hkpPoweredChainMapper.cpp", v57);
+  hkOstream::~hkOstream(&v73);
+  hkReferencedObject::removeReference(v30);
+  v59 = v71;
+LABEL_77:
+  hkReferencedObject::removeReference(v59);
   constraints.m_size = 0;
   if ( constraints.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       constraints.m_data,
       8 * constraints.m_capacityAndFlags);
   constraints.m_data = 0i64;
-  constraints.m_capacityAndFlags = 2147483648;
+  constraints.m_capacityAndFlags = 0x80000000;
   entitiesOut.m_size = 0;
   if ( entitiesOut.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       entitiesOut.m_data,
       8 * entitiesOut.m_capacityAndFlags);
   v8 = 0i64;
-LABEL_68:
+LABEL_66:
   hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::clearAndDeallocate(
-    &v75,
-    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr);
-  _((AMD_HD3D *)&v75);
-  v71 = 0;
-  if ( v72 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      array,
-      4 * v72);
-  array = 0i64;
-  v72 = 2147483648;
+    &v72,
+    &hkContainerHeapAllocator::s_alloc);
+  _((AMD_HD3D *)&v72);
   v68 = 0;
   if ( v69 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v67,
-      24 * (v69 & 0x3FFFFFFF));
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, array, 4 * v69);
+  array = 0i64;
+  v69 = 0x80000000;
+  v65 = 0;
+  if ( v66 >= 0 )
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v64, 24 * (v66 & 0x3FFFFFFF));
   return (hkpPoweredChainMapper *)v8;
 }
 
@@ -454,17 +422,15 @@ LABEL_68:
 // RVA: 0xE18820
 void __fastcall hkpPoweredChainMapper::~hkpPoweredChainMapper(hkpPoweredChainMapper *this)
 {
-  hkpPoweredChainMapper *v1; // rbx
   int v2; // edi
   __int64 v3; // rsi
-  hkReferencedObject *v4; // rcx
+  hkpConstraintInstance *m_limitConstraint; // rcx
   int v5; // edi
   __int64 v6; // rsi
-  int v7; // er8
-  int v8; // er8
-  int v9; // er8
+  int m_capacityAndFlags; // r8d
+  int v8; // r8d
+  int v9; // r8d
 
-  v1 = this;
   this->vfptr = (hkBaseObjectVtbl *)&hkpPoweredChainMapper::`vftable;
   v2 = 0;
   if ( this->m_links.m_size > 0 )
@@ -472,69 +438,71 @@ void __fastcall hkpPoweredChainMapper::~hkpPoweredChainMapper(hkpPoweredChainMap
     v3 = 0i64;
     do
     {
-      v4 = (hkReferencedObject *)&v1->m_links.m_data[v3].m_limitConstraint->vfptr;
-      if ( v4 )
-        hkReferencedObject::removeReference(v4);
+      m_limitConstraint = this->m_links.m_data[v3].m_limitConstraint;
+      if ( m_limitConstraint )
+        hkReferencedObject::removeReference(m_limitConstraint);
       ++v2;
       ++v3;
     }
-    while ( v2 < v1->m_links.m_size );
+    while ( v2 < this->m_links.m_size );
   }
   v5 = 0;
-  if ( v1->m_chains.m_size > 0 )
+  if ( this->m_chains.m_size > 0 )
   {
     v6 = 0i64;
     do
     {
-      hkReferencedObject::removeReference((hkReferencedObject *)&v1->m_chains.m_data[v6]->vfptr);
+      hkReferencedObject::removeReference(this->m_chains.m_data[v6]);
       ++v5;
       ++v6;
     }
-    while ( v5 < v1->m_chains.m_size );
+    while ( v5 < this->m_chains.m_size );
   }
-  v7 = v1->m_chains.m_capacityAndFlags;
-  v1->m_chains.m_size = 0;
-  if ( v7 >= 0 )
+  m_capacityAndFlags = this->m_chains.m_capacityAndFlags;
+  this->m_chains.m_size = 0;
+  if ( m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_chains.m_data,
-      8 * v7);
-  v1->m_chains.m_data = 0i64;
-  v1->m_chains.m_capacityAndFlags = 2147483648;
-  v8 = v1->m_targets.m_capacityAndFlags;
-  v1->m_targets.m_size = 0;
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_chains.m_data,
+      8 * m_capacityAndFlags);
+  this->m_chains.m_data = 0i64;
+  this->m_chains.m_capacityAndFlags = 0x80000000;
+  v8 = this->m_targets.m_capacityAndFlags;
+  this->m_targets.m_size = 0;
   if ( v8 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_targets.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_targets.m_data,
       16 * v8);
-  v1->m_targets.m_data = 0i64;
-  v1->m_targets.m_capacityAndFlags = 2147483648;
-  v9 = v1->m_links.m_capacityAndFlags;
-  v1->m_links.m_size = 0;
+  this->m_targets.m_data = 0i64;
+  this->m_targets.m_capacityAndFlags = 0x80000000;
+  v9 = this->m_links.m_capacityAndFlags;
+  this->m_links.m_size = 0;
   if ( v9 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_links.m_data,
-      16 * v9);
-  v1->m_links.m_data = 0i64;
-  v1->m_links.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, this->m_links.m_data, 16 * v9);
+  this->m_links.m_data = 0i64;
+  this->m_links.m_capacityAndFlags = 0x80000000;
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 199
 // RVA: 0xE19150
-void __fastcall hkpPoweredChainMapper::setForceLimits(hkpPoweredChainMapper *this, int linkIndex, int coordinageIndex, float minForce, float maxForce)
+void __fastcall hkpPoweredChainMapper::setForceLimits(
+        hkpPoweredChainMapper *this,
+        int linkIndex,
+        int coordinageIndex,
+        float minForce,
+        float maxForce)
 {
-  int v5; // er8
+  int v5; // r8d
   float v6; // xmm1_4
   __int64 v7; // rdx
   hkpConstraintMotor *v8; // rcx
-  hkArray<hkpConstraintMotor *,hkContainerHeapAllocator> motorsOut; // [rsp+20h] [rbp-28h]
+  hkArray<hkpConstraintMotor *,hkContainerHeapAllocator> motorsOut; // [rsp+20h] [rbp-28h] BYREF
 
   motorsOut.m_data = 0i64;
   motorsOut.m_size = 0;
-  motorsOut.m_capacityAndFlags = 2147483648;
+  motorsOut.m_capacityAndFlags = 0x80000000;
   hkpPoweredChainMapper::getMotors(this, linkIndex, coordinageIndex, &motorsOut);
   if ( motorsOut.m_size )
   {
@@ -546,8 +514,7 @@ void __fastcall hkpPoweredChainMapper::setForceLimits(hkpPoweredChainMapper *thi
       do
       {
         ++v5;
-        ++v7;
-        v8 = motorsOut.m_data[v7 - 1];
+        v8 = motorsOut.m_data[v7++];
         *(float *)&v8[1].vfptr = minForce * v6;
         *((float *)&v8[1].vfptr + 1) = maxForce * v6;
       }
@@ -557,39 +524,39 @@ void __fastcall hkpPoweredChainMapper::setForceLimits(hkpPoweredChainMapper *thi
   motorsOut.m_size = 0;
   if ( motorsOut.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       motorsOut.m_data,
       8 * motorsOut.m_capacityAndFlags);
 }
 
 // File Line: 222
 // RVA: 0xE19220
-void __fastcall hkpPoweredChainMapper::getMotors(hkpPoweredChainMapper *this, int linkIndex, int coordinateIndex, hkArray<hkpConstraintMotor *,hkContainerHeapAllocator> *motorsOut)
+void __fastcall hkpPoweredChainMapper::getMotors(
+        hkpPoweredChainMapper *this,
+        int linkIndex,
+        int coordinateIndex,
+        hkArray<hkpConstraintMotor *,hkContainerHeapAllocator> *motorsOut)
 {
   int v4; // edi
-  hkArray<hkpConstraintMotor *,hkContainerHeapAllocator> *v5; // rbx
-  hkpPoweredChainMapper *v6; // r14
   hkpPoweredChainMapper::LinkInfo *v7; // rsi
   __int64 v8; // r15
-  signed int *v9; // r8
+  hkpPoweredChainMapper::Target *v9; // r8
   hkpConstraintMotor *v10; // rbp
 
   v4 = 0;
-  v5 = motorsOut;
-  v6 = this;
   v7 = &this->m_links.m_data[linkIndex];
   if ( v7->m_numTargets > 0 )
   {
     v8 = coordinateIndex;
     do
     {
-      v9 = (signed int *)&v6->m_targets.m_data[v4 + v7->m_firstTargetIdx];
-      v10 = *(hkpConstraintMotor **)(*(_QWORD *)(*(_QWORD *)v9 + 64i64) + 8 * (v8 + 12i64 * v9[2]) + 64);
+      v9 = &this->m_targets.m_data[v4 + v7->m_firstTargetIdx];
+      v10 = v9->m_chain->m_infos.m_data[v9->m_infoIndex].m_motors[v8];
       if ( v10 )
       {
-        if ( v5->m_size == (v5->m_capacityAndFlags & 0x3FFFFFFF) )
-          hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v5, 8);
-        v5->m_data[v5->m_size++] = v10;
+        if ( motorsOut->m_size == (motorsOut->m_capacityAndFlags & 0x3FFFFFFF) )
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&motorsOut->m_data, 8);
+        motorsOut->m_data[motorsOut->m_size++] = v10;
       }
       ++v4;
     }
@@ -599,34 +566,34 @@ void __fastcall hkpPoweredChainMapper::getMotors(hkpPoweredChainMapper *this, in
 
 // File Line: 246
 // RVA: 0xE192F0
-void __fastcall hkpPoweredChainMapper::setMotors(hkpPoweredChainMapper *this, int linkIndex, int coordinateIndex, hkpConstraintMotor *newMotor)
+void __fastcall hkpPoweredChainMapper::setMotors(
+        hkpPoweredChainMapper *this,
+        int linkIndex,
+        int coordinateIndex,
+        hkpConstraintMotor *newMotor)
 {
   int v4; // ebx
-  hkpConstraintMotor *v5; // rsi
-  hkpPoweredChainMapper *v6; // r12
   hkpPoweredChainMapper::LinkInfo *v7; // r14
   __int64 v8; // r15
-  signed int *v9; // rdi
-  __int64 v10; // rbp
+  hkpPoweredChainMapper::Target *v9; // rdi
+  hkpPoweredChainData *m_chain; // rbp
   hkReferencedObject *v11; // rcx
 
   v4 = 0;
-  v5 = newMotor;
-  v6 = this;
   v7 = &this->m_links.m_data[linkIndex];
   if ( v7->m_numTargets > 0 )
   {
     v8 = coordinateIndex;
     do
     {
-      v9 = (signed int *)&v6->m_targets.m_data[v4 + v7->m_firstTargetIdx];
-      v10 = *(_QWORD *)v9;
-      v11 = *(hkReferencedObject **)(*(_QWORD *)(*(_QWORD *)v9 + 64i64) + 8 * (v8 + 12i64 * v9[2]) + 64);
+      v9 = &this->m_targets.m_data[v4 + v7->m_firstTargetIdx];
+      m_chain = v9->m_chain;
+      v11 = v9->m_chain->m_infos.m_data[v9->m_infoIndex].m_motors[v8];
       if ( v11 )
         hkReferencedObject::removeReference(v11);
-      *(_QWORD *)(*(_QWORD *)(v10 + 64) + 8 * (v8 + 12i64 * v9[2]) + 64) = v5;
-      if ( v5 )
-        hkReferencedObject::addReference((hkReferencedObject *)&v5->vfptr);
+      m_chain->m_infos.m_data[v9->m_infoIndex].m_motors[v8] = newMotor;
+      if ( newMotor )
+        hkReferencedObject::addReference(newMotor);
       ++v4;
     }
     while ( v4 < v7->m_numTargets );
@@ -635,59 +602,57 @@ void __fastcall hkpPoweredChainMapper::setMotors(hkpPoweredChainMapper *this, in
 
 // File Line: 272
 // RVA: 0xE193C0
-void __fastcall hkpPoweredChainMapper::setTargetOrientation(hkpPoweredChainMapper *this, int linkIndex, hkQuaternionf *newTarget_aTb)
+void __fastcall hkpPoweredChainMapper::setTargetOrientation(
+        hkpPoweredChainMapper *this,
+        int linkIndex,
+        hkQuaternionf *newTarget_aTb)
 {
-  int v3; // er10
-  hkpPoweredChainMapper *v4; // r9
+  int v3; // r10d
   hkpPoweredChainMapper::LinkInfo *v5; // rax
   __int64 v6; // rdx
-  signed int *v7; // rdx
+  hkpPoweredChainMapper::Target *v7; // rdx
   __m128 v8; // xmm4
-  __int64 v9; // rcx
-  signed __int64 v10; // rdx
-  __m128 v11; // xmm6
-  __m128 v12; // xmm2
-  __m128 v13; // xmm6
-  __m128 v14; // xmm5
+  hkpPoweredChainData::ConstraintInfo *m_data; // rcx
+  __int64 m_infoIndex; // rdx
+  __m128 m_quad; // xmm2
+  __m128 v12; // xmm6
+  __m128 v13; // xmm5
+  __m128 v14; // xmm3
   __m128 v15; // xmm3
-  __m128 v16; // xmm3
 
   v3 = 0;
-  v4 = this;
   v5 = &this->m_links.m_data[linkIndex];
   if ( v5->m_numTargets > 0 )
   {
     do
     {
-      v6 = v3++ + v5->m_firstTargetIdx;
-      v7 = (signed int *)&v4->m_targets.m_data[v6];
+      v6 = v3 + v5->m_firstTargetIdx;
+      ++v3;
+      v7 = &this->m_targets.m_data[v6];
       v8 = _mm_shuffle_ps(newTarget_aTb->m_vec.m_quad, newTarget_aTb->m_vec.m_quad, 255);
-      v9 = *(_QWORD *)(*(_QWORD *)v7 + 64i64);
-      v10 = 96i64 * v7[2];
-      v11 = *(__m128 *)(v10 + v9 + 48);
-      v12 = v11;
-      v13 = _mm_shuffle_ps(v11, v11, 255);
-      v14 = _mm_mul_ps(newTarget_aTb->m_vec.m_quad, v12);
-      v15 = _mm_sub_ps(
-              _mm_mul_ps(
-                _mm_shuffle_ps(*(__m128 *)(v10 + v9 + 48), *(__m128 *)(v10 + v9 + 48), 201),
-                newTarget_aTb->m_vec.m_quad),
-              _mm_mul_ps(
-                _mm_shuffle_ps(newTarget_aTb->m_vec.m_quad, newTarget_aTb->m_vec.m_quad, 201),
-                *(__m128 *)(v10 + v9 + 48)));
-      v16 = _mm_add_ps(
-              _mm_add_ps(_mm_shuffle_ps(v15, v15, 201), _mm_mul_ps(v8, v12)),
-              _mm_mul_ps(v13, newTarget_aTb->m_vec.m_quad));
-      *(__m128 *)(v10 + v9 + 32) = _mm_shuffle_ps(
-                                     v16,
-                                     _mm_unpackhi_ps(
-                                       v16,
-                                       _mm_sub_ps(
-                                         _mm_mul_ps(v13, v8),
-                                         _mm_add_ps(
-                                           _mm_add_ps(_mm_shuffle_ps(v14, v14, 85), _mm_shuffle_ps(v14, v14, 0)),
-                                           _mm_shuffle_ps(v14, v14, 170)))),
-                                     196);
+      m_data = v7->m_chain->m_infos.m_data;
+      m_infoIndex = v7->m_infoIndex;
+      m_quad = m_data[m_infoIndex].m_bTc.m_vec.m_quad;
+      v12 = _mm_shuffle_ps(m_quad, m_quad, 255);
+      v13 = _mm_mul_ps(newTarget_aTb->m_vec.m_quad, m_quad);
+      v14 = _mm_sub_ps(
+              _mm_mul_ps(_mm_shuffle_ps(m_quad, m_quad, 201), newTarget_aTb->m_vec.m_quad),
+              _mm_mul_ps(_mm_shuffle_ps(newTarget_aTb->m_vec.m_quad, newTarget_aTb->m_vec.m_quad, 201), m_quad));
+      v15 = _mm_add_ps(
+              _mm_add_ps(_mm_shuffle_ps(v14, v14, 201), _mm_mul_ps(v8, m_quad)),
+              _mm_mul_ps(v12, newTarget_aTb->m_vec.m_quad));
+      m_data[m_infoIndex].m_aTc.m_vec.m_quad = _mm_shuffle_ps(
+                                                 v15,
+                                                 _mm_unpackhi_ps(
+                                                   v15,
+                                                   _mm_sub_ps(
+                                                     _mm_mul_ps(v12, v8),
+                                                     _mm_add_ps(
+                                                       _mm_add_ps(
+                                                         _mm_shuffle_ps(v13, v13, 85),
+                                                         _mm_shuffle_ps(v13, v13, 0)),
+                                                       _mm_shuffle_ps(v13, v13, 170)))),
+                                                 196);
     }
     while ( v3 < v5->m_numTargets );
   }

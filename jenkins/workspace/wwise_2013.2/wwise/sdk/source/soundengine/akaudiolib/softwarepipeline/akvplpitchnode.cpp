@@ -1,25 +1,22 @@
 // File Line: 27
 // RVA: 0xA844B0
-void __usercall CAkVPLPitchNode::GetBuffer(CAkVPLPitchNode *this@<rcx>, AkVPLState *io_state@<rdx>, float a3@<xmm0>)
+void __fastcall CAkVPLPitchNode::GetBuffer(CAkVPLPitchNode *this, AkVPLState *io_state)
 {
-  unsigned int v3; // eax
-  CAkVPLPitchNode *v4; // rbx
-  AkVPLState *v5; // rdi
+  unsigned int uMaxFrames; // eax
+  float v5; // xmm0_4
 
-  v3 = io_state->uMaxFrames;
+  uMaxFrames = io_state->uMaxFrames;
   this->m_bStartPosInfoUpdated = 0;
-  v4 = this;
-  this->m_Pitch.m_InternalPitchState.uRequestedFrames = v3;
-  v5 = io_state;
-  ((void (*)(void))this->m_pInput->vfptr->GetPitch)();
-  CAkResampler::SetPitch(&v4->m_Pitch, a3);
-  if ( v4->m_BufferIn.uValidFrames )
+  this->m_Pitch.m_InternalPitchState.uRequestedFrames = uMaxFrames;
+  v5 = this->m_pInput->CAkVPLNode::vfptr->GetPitch(this->m_pInput);
+  CAkResampler::SetPitch(&this->m_Pitch, v5);
+  if ( this->m_BufferIn.uValidFrames )
   {
-    CAkVPLPitchNode::ConsumeBuffer(v4, v5);
+    CAkVPLPitchNode::ConsumeBuffer(this, io_state);
   }
-  else if ( v4->m_bLast )
+  else if ( this->m_bLast )
   {
-    v5->result = 17;
+    io_state->result = AK_NoMoreData;
   }
 }
 
@@ -27,200 +24,190 @@ void __usercall CAkVPLPitchNode::GetBuffer(CAkVPLPitchNode *this@<rcx>, AkVPLSta
 // RVA: 0xA841B0
 void __fastcall CAkVPLPitchNode::ConsumeBuffer(CAkVPLPitchNode *this, AkVPLState *io_state)
 {
-  AkVPLState *v2; // r14
-  CAkVPLPitchNode *v3; // rsi
-  AkPipelineBuffer *v4; // r15
-  CAkPBI *v5; // rax
-  int v6; // ebx
+  AkPipelineBuffer *p_m_BufferOut; // r15
+  CAkPBI *m_pPBI; // rax
+  int m_iFrameOffset; // ebx
   signed int v7; // ebx
   CAkPBI *v8; // rax
-  signed int v9; // ecx
+  signed int m_uSeekPosition; // ecx
   int v10; // edx
-  unsigned __int16 v11; // bx
-  unsigned int v12; // er13
-  AKRESULT v13; // ebp
-  unsigned int v14; // ecx
-  float v15; // eax
-  float v16; // xmm0_4
+  unsigned __int16 uValidFrames; // bx
+  unsigned int uInFrameOffset; // r13d
+  AKRESULT Src; // ebp
+  unsigned int uStartPos; // ecx
+  float fLastRate; // eax
+  float LastRate; // xmm0_4
   bool v17; // zf
-  signed int v18; // eax
+  AKRESULT v18; // eax
 
-  v2 = io_state;
-  v3 = this;
-  if ( io_state->result == 17 )
+  if ( io_state->result == AK_NoMoreData )
     this->m_bLast = 1;
   if ( !this->m_BufferIn.uValidFrames )
   {
-    if ( !io_state->uValidFrames && io_state->result == 45 )
+    if ( !io_state->uValidFrames && io_state->result == AK_DataReady )
     {
-      io_state->result = 43;
+      io_state->result = AK_DataNeeded;
       return;
     }
-    this->m_BufferIn.pData = io_state->pData;
-    *(_QWORD *)&this->m_BufferIn.uChannelMask = *(_QWORD *)&io_state->uChannelMask;
-    *(_QWORD *)&this->m_BufferIn.uMaxFrames = *(_QWORD *)&io_state->uMaxFrames;
-    *(_QWORD *)&this->m_BufferIn.uNumMarkers = *(_QWORD *)&io_state->uNumMarkers;
-    this->m_BufferIn.pMarkers = io_state->pMarkers;
-    *(_QWORD *)&this->m_BufferIn.posInfo.uStartPos = *(_QWORD *)&io_state->posInfo.uStartPos;
-    *(_QWORD *)&this->m_BufferIn.posInfo.uFileEnd = *(_QWORD *)&io_state->posInfo.uFileEnd;
+    this->m_BufferIn = io_state->AkPipelineBuffer;
   }
-  v4 = &this->m_BufferOut;
+  p_m_BufferOut = &this->m_BufferOut;
   if ( !this->m_BufferOut.pData )
   {
     if ( (unsigned int)AkPipelineBufferBase::GetCachedBuffer(
-                         (AkPipelineBufferBase *)&this->m_BufferOut.pData,
+                         &this->m_BufferOut,
                          this->m_Pitch.m_InternalPitchState.uRequestedFrames,
                          this->m_BufferIn.uChannelMask) != 1 )
     {
-      v2->result = 2;
+      io_state->result = AK_Fail;
       return;
     }
-    if ( v3->m_bPadFrameOffset )
+    if ( this->m_bPadFrameOffset )
     {
-      v5 = v3->m_pPBI;
-      v6 = v5->m_iFrameOffset;
-      if ( *((_BYTE *)v5 + 374) < 0 )
-        v7 = v6 + 8;
+      m_pPBI = this->m_pPBI;
+      m_iFrameOffset = m_pPBI->m_iFrameOffset;
+      if ( *((char *)m_pPBI + 374) < 0 )
+        v7 = m_iFrameOffset + 8;
       else
-        v7 = v6 + 1024;
+        v7 = m_iFrameOffset + 1024;
       if ( v7 > 0 )
       {
-        if ( CAkResampler::IsPostDeInterleaveRequired(&v3->m_Pitch) )
-          ZeroPrePadBufferInterleaved((AkAudioBuffer *)&v4->pData, v7);
+        if ( CAkResampler::IsPostDeInterleaveRequired(&this->m_Pitch) )
+          ZeroPrePadBufferInterleaved(p_m_BufferOut, v7);
         else
-          ZeroPrePadBuffer((AkAudioBuffer *)&v4->pData, v7);
-        v3->m_Pitch.m_InternalPitchState.uOutFrameOffset = v7;
+          ZeroPrePadBuffer(p_m_BufferOut, v7);
+        this->m_Pitch.m_InternalPitchState.uOutFrameOffset = v7;
       }
-      v3->m_bPadFrameOffset = 0;
+      this->m_bPadFrameOffset = 0;
     }
   }
-  v8 = v3->m_pPBI;
-  if ( *((_BYTE *)v8 + 375) & 2 || (v9 = v8->m_uSeekPosition) == 0 )
+  v8 = this->m_pPBI;
+  if ( (*((_BYTE *)v8 + 375) & 2) != 0 || (m_uSeekPosition = v8->m_uSeekPosition) == 0 )
   {
 LABEL_24:
-    v11 = v3->m_BufferIn.uValidFrames;
-    v12 = v3->m_Pitch.m_InternalPitchState.uInFrameOffset;
-    v13 = CAkResampler::Execute(&v3->m_Pitch, (AkAudioBuffer *)&v3->m_BufferIn.pData, (AkAudioBuffer *)&v4->pData);
-    CAkVPLNode::CopyRelevantMarkers(&v3->m_BufferIn, v4, v12, (unsigned __int16)(v11 - v3->m_BufferIn.uValidFrames));
-    v14 = v3->m_BufferIn.posInfo.uStartPos;
-    if ( v14 != -1 && !v3->m_bStartPosInfoUpdated )
+    uValidFrames = this->m_BufferIn.uValidFrames;
+    uInFrameOffset = this->m_Pitch.m_InternalPitchState.uInFrameOffset;
+    Src = CAkResampler::Execute(&this->m_Pitch, &this->m_BufferIn, p_m_BufferOut);
+    CAkVPLNode::CopyRelevantMarkers(
+      &this->m_BufferIn,
+      p_m_BufferOut,
+      uInFrameOffset,
+      (unsigned __int16)(uValidFrames - this->m_BufferIn.uValidFrames));
+    uStartPos = this->m_BufferIn.posInfo.uStartPos;
+    if ( uStartPos != -1 && !this->m_bStartPosInfoUpdated )
     {
-      v15 = v3->m_BufferIn.posInfo.fLastRate;
-      v3->m_bStartPosInfoUpdated = 1;
-      v3->m_BufferOut.posInfo.fLastRate = v15;
-      v3->m_BufferOut.posInfo.uFileEnd = v3->m_BufferIn.posInfo.uFileEnd;
-      v3->m_BufferOut.posInfo.uSampleRate = v3->m_BufferIn.posInfo.uSampleRate;
-      v3->m_BufferOut.posInfo.uStartPos = v14 + v12;
+      fLastRate = this->m_BufferIn.posInfo.fLastRate;
+      this->m_bStartPosInfoUpdated = 1;
+      this->m_BufferOut.posInfo.fLastRate = fLastRate;
+      this->m_BufferOut.posInfo.uFileEnd = this->m_BufferIn.posInfo.uFileEnd;
+      this->m_BufferOut.posInfo.uSampleRate = this->m_BufferIn.posInfo.uSampleRate;
+      this->m_BufferOut.posInfo.uStartPos = uStartPos + uInFrameOffset;
     }
-    v16 = CAkResampler::GetLastRate(&v3->m_Pitch);
-    v17 = v3->m_BufferIn.uValidFrames == 0;
-    v3->m_BufferOut.posInfo.fLastRate = v16;
+    LastRate = CAkResampler::GetLastRate(&this->m_Pitch);
+    v17 = this->m_BufferIn.uValidFrames == 0;
+    this->m_BufferOut.posInfo.fLastRate = LastRate;
     if ( v17 )
     {
-      CAkVPLPitchNode::ReleaseInputBuffer(v3, (AkPipelineBuffer *)&v2->pData);
-      if ( v3->m_bLast == 1 )
+      CAkVPLPitchNode::ReleaseInputBuffer(this, io_state);
+      if ( this->m_bLast )
       {
-        if ( !v3->m_pCbx->m_pSources[1] )
+        if ( !this->m_pCbx->m_pSources[1] )
         {
-          v13 = 17;
+          Src = AK_NoMoreData;
           goto LABEL_33;
         }
-        v13 = CAkVPLPitchNode::SwitchToNextSrc(v3);
+        Src = CAkVPLPitchNode::SwitchToNextSrc(this);
       }
     }
-    if ( v13 != 45 && v13 != 17 )
+    if ( Src != AK_DataReady && Src != AK_NoMoreData )
     {
 LABEL_36:
-      v2->result = v13;
+      io_state->result = Src;
       return;
     }
 LABEL_33:
-    if ( CAkResampler::IsPostDeInterleaveRequired(&v3->m_Pitch) )
-      CAkResampler::DeinterleaveAndSwapOutput(&v3->m_Pitch, (AkAudioBuffer *)&v4->pData);
-    v2->pData = v4->pData;
-    *(_QWORD *)&v2->uChannelMask = *(_QWORD *)&v4->uChannelMask;
-    *(_QWORD *)&v2->uMaxFrames = *(_QWORD *)&v4->uMaxFrames;
-    *(_QWORD *)&v2->uNumMarkers = *(_QWORD *)&v4->uNumMarkers;
-    v2->pMarkers = v4->pMarkers;
-    *(_QWORD *)&v2->posInfo.uStartPos = *(_QWORD *)&v4->posInfo.uStartPos;
-    *(_QWORD *)&v2->posInfo.uFileEnd = *(_QWORD *)&v4->posInfo.uFileEnd;
+    if ( CAkResampler::IsPostDeInterleaveRequired(&this->m_Pitch) )
+      CAkResampler::DeinterleaveAndSwapOutput(&this->m_Pitch, p_m_BufferOut);
+    io_state->pData = p_m_BufferOut->pData;
+    *(_QWORD *)&io_state->uChannelMask = *(_QWORD *)&p_m_BufferOut->uChannelMask;
+    *(_QWORD *)&io_state->uMaxFrames = *(_QWORD *)&p_m_BufferOut->uMaxFrames;
+    *(_QWORD *)&io_state->uNumMarkers = *(_QWORD *)&p_m_BufferOut->uNumMarkers;
+    io_state->pMarkers = p_m_BufferOut->pMarkers;
+    *(_QWORD *)&io_state->posInfo.uStartPos = *(_QWORD *)&p_m_BufferOut->posInfo.uStartPos;
+    *(_QWORD *)&io_state->posInfo.uFileEnd = *(_QWORD *)&p_m_BufferOut->posInfo.uFileEnd;
     goto LABEL_36;
   }
-  v10 = v3->m_BufferIn.uValidFrames;
-  if ( v10 > v9 )
+  v10 = this->m_BufferIn.uValidFrames;
+  if ( v10 > m_uSeekPosition )
   {
-    v3->m_Pitch.m_InternalPitchState.uInFrameOffset = v9;
-    v3->m_BufferIn.uValidFrames = v10 - v9;
+    this->m_Pitch.m_InternalPitchState.uInFrameOffset = m_uSeekPosition;
+    this->m_BufferIn.uValidFrames = v10 - m_uSeekPosition;
     *((_BYTE *)v8 + 375) &= 0xF1u;
     v8->m_uSeekPosition = 0;
     goto LABEL_24;
   }
   *((_BYTE *)v8 + 375) &= 0xF1u;
-  v8->m_uSeekPosition = v9 - v10;
-  v3->m_BufferIn.uValidFrames = 0;
-  v2->uValidFrames = 0;
-  CAkVPLPitchNode::ReleaseInputBuffer(v3, (AkPipelineBuffer *)&v2->pData);
-  v18 = 43;
-  if ( v3->m_bLast )
-    v18 = 17;
-  v2->result = v18;
+  v8->m_uSeekPosition = m_uSeekPosition - v10;
+  this->m_BufferIn.uValidFrames = 0;
+  io_state->uValidFrames = 0;
+  CAkVPLPitchNode::ReleaseInputBuffer(this, io_state);
+  v18 = AK_DataNeeded;
+  if ( this->m_bLast )
+    v18 = AK_NoMoreData;
+  io_state->result = v18;
 }
 
 // File Line: 278
 // RVA: 0xA846D0
-signed __int64 __usercall CAkVPLPitchNode::SwitchToNextSrc@<rax>(CAkVPLPitchNode *this@<rcx>, float a2@<xmm0>)
+__int64 __fastcall CAkVPLPitchNode::SwitchToNextSrc(CAkVPLPitchNode *this)
 {
-  CAkVPLSrcCbxNode *v2; // rax
-  CAkVPLPitchNode *v3; // rsi
-  CAkPBI *v4; // rbx
-  int v5; // ecx
-  int v6; // eax
-  signed __int64 result; // rax
-  int v8; // eax
-  AkAudioFormat v9; // rax
-  CAkVPLSrcCbxNode *v10; // rax
+  CAkVPLSrcCbxNode *m_pCbx; // rax
+  CAkPBI *m_pCtx; // rbx
+  int m_iFrameOffset; // ecx
+  int v5; // eax
+  __int64 result; // rax
+  int StreamedData; // eax
+  AkAudioFormat m_sMediaFormat; // rax
+  CAkVPLSrcCbxNode *v9; // rax
   unsigned int in_uSampleRate; // edi
+  float v11; // xmm0_4
   bool v12; // zf
-  AkAudioFormat in_fmt; // [rsp+40h] [rbp+8h]
+  AkAudioFormat in_fmt; // [rsp+40h] [rbp+8h] BYREF
 
-  v2 = this->m_pCbx;
-  v3 = this;
-  v4 = v2->m_pSources[1]->m_pCtx;
-  v5 = v4->m_iFrameOffset;
-  if ( v5 > 0 )
+  m_pCbx = this->m_pCbx;
+  m_pCtx = m_pCbx->m_pSources[1]->m_pCtx;
+  m_iFrameOffset = m_pCtx->m_iFrameOffset;
+  if ( m_iFrameOffset > 0 )
   {
-    if ( v5 >= 0 )
-    {
-      v6 = v4->m_iFrameOffset;
-      if ( v3->m_BufferOut.uMaxFrames - v3->m_BufferOut.uValidFrames < v5 )
-        v6 = v3->m_BufferOut.uMaxFrames - v3->m_BufferOut.uValidFrames;
-      v4->m_iFrameOffset = v5 - v6;
-    }
+    v5 = m_pCtx->m_iFrameOffset;
+    if ( this->m_BufferOut.uMaxFrames - this->m_BufferOut.uValidFrames < m_iFrameOffset )
+      v5 = this->m_BufferOut.uMaxFrames - this->m_BufferOut.uValidFrames;
+    m_pCtx->m_iFrameOffset = m_iFrameOffset - v5;
     return 17i64;
   }
-  v8 = CAkVPLSrcNode::FetchStreamedData(v2->m_pSources[1]);
-  if ( v8 == 63 )
+  StreamedData = CAkVPLSrcNode::FetchStreamedData(m_pCbx->m_pSources[1]);
+  if ( StreamedData == 63 )
     return 17i64;
-  if ( v8 != 1 )
+  if ( StreamedData != 1 )
     return 2i64;
-  v9 = v3->m_pPBI->m_sMediaFormat;
-  in_fmt = v4->m_sMediaFormat;
-  if ( (*((_DWORD *)&v9 + 1) ^ *((_DWORD *)&in_fmt + 1)) & 0x3FFFF )
+  m_sMediaFormat = this->m_pPBI->m_sMediaFormat;
+  in_fmt = m_pCtx->m_sMediaFormat;
+  if ( ((*((_DWORD *)&m_sMediaFormat + 1) ^ *((_DWORD *)&in_fmt + 1)) & 0x3FFFF) != 0 )
     return 17i64;
-  CAkVPLSrcCbxNode::SwitchToNextSrc(v3->m_pCbx);
-  v10 = v3->m_pCbx;
-  v3->m_pPBI = v4;
-  v3->m_pInput = (CAkVPLNode *)&v10->m_pSources[0]->vfptr;
-  if ( !(*((_BYTE *)v4 + 372) & 0x20) )
-    v4->vfptr[7].~CAkTransportAware((CAkTransportAware *)&v4->vfptr);
-  in_uSampleRate = v3->m_pCbx->m_uSampleRate;
-  ((void (*)(void))v3->m_pInput->vfptr->GetPitch)();
-  CAkResampler::SwitchTo(&v3->m_Pitch, &in_fmt, a2, (AkAudioBuffer *)&v3->m_BufferOut.pData, in_uSampleRate);
-  v12 = v3->m_BufferOut.uValidFrames == v3->m_Pitch.m_InternalPitchState.uRequestedFrames;
+  CAkVPLSrcCbxNode::SwitchToNextSrc(this->m_pCbx);
+  v9 = this->m_pCbx;
+  this->m_pPBI = m_pCtx;
+  this->m_pInput = v9->m_pSources[0];
+  if ( (*((_BYTE *)m_pCtx + 372) & 0x20) == 0 )
+    m_pCtx->CAkTransportAware::vfptr[7].~CAkTransportAware(m_pCtx);
+  in_uSampleRate = this->m_pCbx->m_uSampleRate;
+  v11 = this->m_pInput->CAkVPLNode::vfptr->GetPitch(this->m_pInput);
+  CAkResampler::SwitchTo(&this->m_Pitch, &in_fmt, v11, &this->m_BufferOut, in_uSampleRate);
+  v12 = this->m_BufferOut.uValidFrames == this->m_Pitch.m_InternalPitchState.uRequestedFrames;
   result = 45i64;
-  v3->m_bLast = 0;
+  this->m_bLast = 0;
   if ( !v12 )
-    result = 43i64;
+    return 43i64;
   return result;
 }
 
@@ -228,23 +215,21 @@ signed __int64 __usercall CAkVPLPitchNode::SwitchToNextSrc@<rax>(CAkVPLPitchNode
 // RVA: 0xA84550
 void __fastcall CAkVPLPitchNode::ReleaseBuffer(CAkVPLPitchNode *this)
 {
-  AkPipelineBuffer *v1; // rbx
-  CAkVPLPitchNode *v2; // rdi
+  AkPipelineBuffer *p_m_BufferOut; // rbx
 
-  v1 = &this->m_BufferOut;
-  v2 = this;
+  p_m_BufferOut = &this->m_BufferOut;
   if ( this->m_BufferOut.pData )
   {
-    AkPipelineBufferBase::ReleaseCachedBuffer((AkPipelineBufferBase *)&this->m_BufferOut.pData);
-    *(_QWORD *)&v1->eState = 43i64;
-    v1->pData = 0i64;
-    v1->uNumMarkers = 0;
-    v1->pMarkers = 0i64;
-    v1->posInfo.uStartPos = -1;
-    v1->posInfo.fLastRate = 1.0;
-    v1->posInfo.uFileEnd = -1;
-    v1->posInfo.uSampleRate = 1;
-    v2->m_Pitch.m_InternalPitchState.uOutFrameOffset = 0;
+    AkPipelineBufferBase::ReleaseCachedBuffer(&this->m_BufferOut);
+    *(_QWORD *)&p_m_BufferOut->eState = 43i64;
+    p_m_BufferOut->pData = 0i64;
+    p_m_BufferOut->uNumMarkers = 0;
+    p_m_BufferOut->pMarkers = 0i64;
+    p_m_BufferOut->posInfo.uStartPos = -1;
+    p_m_BufferOut->posInfo.fLastRate = 1.0;
+    p_m_BufferOut->posInfo.uFileEnd = -1;
+    p_m_BufferOut->posInfo.uSampleRate = 1;
+    this->m_Pitch.m_InternalPitchState.uOutFrameOffset = 0;
   }
 }
 
@@ -252,97 +237,85 @@ void __fastcall CAkVPLPitchNode::ReleaseBuffer(CAkVPLPitchNode *this)
 // RVA: 0xA845C0
 void __fastcall CAkVPLPitchNode::ReleaseInputBuffer(CAkVPLPitchNode *this, AkPipelineBuffer *io_buffer)
 {
-  CAkVPLPitchNode *v2; // rbx
-  AkPipelineBuffer *v3; // rdi
-
-  v2 = this;
-  v3 = io_buffer;
-  ((void (*)(void))this->m_pInput->vfptr->ReleaseBuffer)();
-  AkPipelineBuffer::FreeMarkers(&v2->m_BufferIn);
-  *(_QWORD *)&v2->m_BufferIn.eState = 43i64;
-  v2->m_BufferIn.pData = 0i64;
-  v2->m_BufferIn.posInfo.uStartPos = -1;
-  v2->m_BufferIn.posInfo.fLastRate = 1.0;
-  v2->m_BufferIn.posInfo.uFileEnd = -1;
-  v2->m_BufferIn.posInfo.uSampleRate = 1;
-  v3->pData = 0i64;
-  v3->uNumMarkers = 0;
-  v3->pMarkers = 0i64;
+  this->m_pInput->CAkVPLNode::vfptr->ReleaseBuffer(this->m_pInput);
+  AkPipelineBuffer::FreeMarkers(&this->m_BufferIn);
+  *(_QWORD *)&this->m_BufferIn.eState = 43i64;
+  this->m_BufferIn.pData = 0i64;
+  this->m_BufferIn.posInfo.uStartPos = -1;
+  this->m_BufferIn.posInfo.fLastRate = 1.0;
+  this->m_BufferIn.posInfo.uFileEnd = -1;
+  this->m_BufferIn.posInfo.uSampleRate = 1;
+  io_buffer->pData = 0i64;
+  io_buffer->uNumMarkers = 0;
+  io_buffer->pMarkers = 0i64;
 }
 
 // File Line: 366
 // RVA: 0xA84880
-__int64 __usercall CAkVPLPitchNode::TimeSkip@<rax>(CAkVPLPitchNode *this@<rcx>, unsigned int *io_uFrames@<rdx>, float a3@<xmm0>)
+__int64 __fastcall CAkVPLPitchNode::TimeSkip(CAkVPLPitchNode *this, unsigned int *io_uFrames)
 {
-  CAkVPLPitchNode *v3; // rbx
-  unsigned int *v4; // r14
-  signed int v5; // esi
+  float v4; // xmm0_4
+  int v5; // esi
   unsigned int v6; // ebp
   unsigned int v7; // edi
-  CAkVPLNode *v8; // rcx
+  CAkVPLNode *m_pInput; // rcx
   __int64 result; // rax
-  CAkPBI *v10; // rdx
-  unsigned int v11; // ecx
-  int v12; // er8
-  unsigned int v13; // er8
-  unsigned int v14; // eax
+  CAkPBI *m_pPBI; // rdx
+  unsigned int m_uSeekPosition; // ecx
+  unsigned int v12; // r8d
+  unsigned int v13; // r8d
+  unsigned int uValidFrames; // eax
   bool v15; // zf
-  unsigned int v16; // [rsp+40h] [rbp+8h]
+  unsigned int v16; // [rsp+40h] [rbp+8h] BYREF
 
-  v3 = this;
-  v4 = io_uFrames;
-  ((void (*)(void))this->m_pInput->vfptr->GetPitch)();
-  CAkResampler::SetPitchForTimeSkip(&v3->m_Pitch, a3);
+  v4 = this->m_pInput->CAkVPLNode::vfptr->GetPitch(this->m_pInput);
+  CAkResampler::SetPitchForTimeSkip(&this->m_Pitch, v4);
   v5 = 0;
   v6 = 45;
-  v7 = (signed int)(float)((float)((float)((float)(signed int)v3->m_Pitch.m_InternalPitchState.uCurrentFrameSkip
-                                         * 0.000015258789)
-                                 * (float)(signed int)*v4)
-                         + 0.5);
+  v7 = (int)(float)((float)((float)((float)(int)this->m_Pitch.m_InternalPitchState.uCurrentFrameSkip * 0.000015258789)
+                          * (float)(int)*io_uFrames)
+                  + 0.5);
   if ( v7 )
   {
     while ( 1 )
     {
-      if ( !v3->m_BufferIn.uValidFrames && !v3->m_bLast )
+      if ( !this->m_BufferIn.uValidFrames && !this->m_bLast )
       {
-        v8 = v3->m_pInput;
-        v16 = *v4;
-        result = v8->vfptr->TimeSkip(v8, &v16);
+        m_pInput = this->m_pInput;
+        v16 = *io_uFrames;
+        result = ((__int64 (__fastcall *)(CAkVPLNode *, unsigned int *))m_pInput->vfptr->TimeSkip)(m_pInput, &v16);
         if ( (_DWORD)result != 45 )
         {
           if ( (_DWORD)result != 17 )
             return result;
-          v3->m_bLast = 1;
+          this->m_bLast = 1;
         }
-        v10 = v3->m_pPBI;
-        if ( *((_BYTE *)v10 + 375) & 2 )
-          v11 = 0;
+        m_pPBI = this->m_pPBI;
+        if ( (*((_BYTE *)m_pPBI + 375) & 2) != 0 )
+          m_uSeekPosition = 0;
         else
-          v11 = v10->m_uSeekPosition;
+          m_uSeekPosition = m_pPBI->m_uSeekPosition;
         v12 = 0;
-        if ( v11 > v16 )
+        if ( m_uSeekPosition > v16 )
         {
-          v13 = v11;
-          v11 = v16;
+          v13 = m_uSeekPosition;
+          m_uSeekPosition = v16;
           v12 = v13 - v16;
         }
-        v16 -= v11;
-        *((_BYTE *)v10 + 375) &= 0xF1u;
-        v10->m_uSeekPosition = v12;
-        v3->m_BufferIn.uValidFrames = v16;
+        v16 -= m_uSeekPosition;
+        *((_BYTE *)m_pPBI + 375) &= 0xF1u;
+        m_pPBI->m_uSeekPosition = v12;
+        this->m_BufferIn.uValidFrames = v16;
       }
-      v14 = v3->m_BufferIn.uValidFrames;
-      if ( v7 < v14 )
-        v14 = v7;
-      v5 += v14;
-      v7 -= v14;
-      v15 = v3->m_BufferIn.uValidFrames == (_WORD)v14;
-      v3->m_BufferIn.uValidFrames -= v14;
-      if ( v15 )
-      {
-        if ( v3->m_bLast )
-          break;
-      }
+      uValidFrames = this->m_BufferIn.uValidFrames;
+      if ( v7 < uValidFrames )
+        uValidFrames = v7;
+      v5 += uValidFrames;
+      v7 -= uValidFrames;
+      v15 = this->m_BufferIn.uValidFrames == (unsigned __int16)uValidFrames;
+      this->m_BufferIn.uValidFrames -= uValidFrames;
+      if ( v15 && this->m_bLast )
+        break;
       if ( !v7 )
         goto LABEL_20;
     }
@@ -350,10 +323,10 @@ __int64 __usercall CAkVPLPitchNode::TimeSkip@<rax>(CAkVPLPitchNode *this@<rcx>, 
   }
 LABEL_20:
   result = v6;
-  *v4 = (signed int)(float)((float)((float)v5
-                                  / (float)((float)(signed int)v3->m_Pitch.m_InternalPitchState.uCurrentFrameSkip
-                                          * 0.000015258789))
-                          + 0.5);
+  *io_uFrames = (int)(float)((float)((float)v5
+                                   / (float)((float)(int)this->m_Pitch.m_InternalPitchState.uCurrentFrameSkip
+                                           * 0.000015258789))
+                           + 0.5);
   return result;
 }
 
@@ -361,70 +334,67 @@ LABEL_20:
 // RVA: 0xA84A20
 void __fastcall CAkVPLPitchNode::VirtualOn(CAkVPLPitchNode *this, AkVirtualQueueBehavior eBehavior)
 {
-  AkVirtualQueueBehavior v2; // esi
-  CAkVPLPitchNode *v3; // rbx
-
-  v2 = eBehavior;
-  v3 = this;
-  if ( eBehavior != 2 )
+  if ( eBehavior != AkVirtualQueueBehavior_Resume )
   {
     if ( this->m_BufferIn.pData )
-      ((void (*)(void))this->m_pInput->vfptr->ReleaseBuffer)();
-    AkPipelineBuffer::FreeMarkers(&v3->m_BufferIn);
-    *(_QWORD *)&v3->m_BufferIn.eState = 43i64;
-    v3->m_BufferIn.pData = 0i64;
-    v3->m_BufferIn.posInfo.uStartPos = -1;
-    v3->m_BufferIn.posInfo.fLastRate = 1.0;
-    v3->m_BufferIn.posInfo.uFileEnd = -1;
-    v3->m_BufferIn.posInfo.uSampleRate = 1;
-    CAkResampler::ResetOffsets(&v3->m_Pitch);
+      this->m_pInput->CAkVPLNode::vfptr->ReleaseBuffer(this->m_pInput);
+    AkPipelineBuffer::FreeMarkers(&this->m_BufferIn);
+    *(_QWORD *)&this->m_BufferIn.eState = 43i64;
+    this->m_BufferIn.pData = 0i64;
+    this->m_BufferIn.posInfo.uStartPos = -1;
+    this->m_BufferIn.posInfo.fLastRate = 1.0;
+    this->m_BufferIn.posInfo.uFileEnd = -1;
+    this->m_BufferIn.posInfo.uSampleRate = 1;
+    CAkResampler::ResetOffsets(&this->m_Pitch);
   }
-  if ( v2 == AkVirtualQueueBehavior_FromBeginning )
-    v3->m_bLast = 0;
-  if ( !v3->m_bLast )
-    v3->m_pInput->vfptr->VirtualOn(v3->m_pInput, v2);
+  if ( eBehavior == AkVirtualQueueBehavior_FromBeginning )
+    this->m_bLast = 0;
+  if ( !this->m_bLast )
+    this->m_pInput->CAkVPLNode::vfptr->VirtualOn(this->m_pInput, eBehavior);
 }
 
 // File Line: 471
 // RVA: 0xA849F0
-signed __int64 __fastcall CAkVPLPitchNode::VirtualOff(CAkVPLPitchNode *this, __int64 eBehavior, __int64 in_bUseSourceOffset)
+__int64 __fastcall CAkVPLPitchNode::VirtualOff(CAkVPLPitchNode *this, __int64 eBehavior, __int64 in_bUseSourceOffset)
 {
-  signed __int64 result; // rax
-
   if ( (_DWORD)eBehavior == 1 )
     this->m_BufferIn.uValidFrames = 0;
   if ( this->m_bLast )
-    result = 1i64;
+    return 1i64;
   else
-    result = this->m_pInput->vfptr->VirtualOff(this->m_pInput, (AkVirtualQueueBehavior)eBehavior, in_bUseSourceOffset);
-  return result;
+    return ((__int64 (__fastcall *)(CAkVPLNode *, __int64, __int64))this->m_pInput->CAkVPLNode::vfptr->VirtualOff)(
+             this->m_pInput,
+             eBehavior,
+             in_bUseSourceOffset);
 }
 
 // File Line: 485
 // RVA: 0xA84650
 __int64 __fastcall CAkVPLPitchNode::Seek(CAkVPLPitchNode *this)
 {
-  CAkVPLPitchNode *v1; // rdi
-  CAkVPLNode *v2; // rcx
+  CAkVPLNode *m_pInput; // rcx
 
-  v1 = this;
-  ((void (*)(void))this->m_pInput->vfptr->ReleaseBuffer)();
-  AkPipelineBuffer::FreeMarkers(&v1->m_BufferIn);
-  *(_QWORD *)&v1->m_BufferIn.eState = 43i64;
-  v1->m_BufferIn.pData = 0i64;
-  v1->m_BufferIn.posInfo.uStartPos = -1;
-  v1->m_BufferIn.posInfo.fLastRate = 1.0;
-  v1->m_BufferIn.posInfo.uFileEnd = -1;
-  v1->m_BufferIn.posInfo.uSampleRate = 1;
-  CAkResampler::ResetOffsets(&v1->m_Pitch);
-  v2 = v1->m_pInput;
-  v1->m_bLast = 0;
-  return ((__int64 (*)(void))v2->vfptr->Seek)();
+  this->m_pInput->CAkVPLNode::vfptr->ReleaseBuffer(this->m_pInput);
+  AkPipelineBuffer::FreeMarkers(&this->m_BufferIn);
+  *(_QWORD *)&this->m_BufferIn.eState = 43i64;
+  this->m_BufferIn.pData = 0i64;
+  this->m_BufferIn.posInfo.uStartPos = -1;
+  this->m_BufferIn.posInfo.fLastRate = 1.0;
+  this->m_BufferIn.posInfo.uFileEnd = -1;
+  this->m_BufferIn.posInfo.uSampleRate = 1;
+  CAkResampler::ResetOffsets(&this->m_Pitch);
+  m_pInput = this->m_pInput;
+  this->m_bLast = 0;
+  return ((__int64 (__fastcall *)(CAkVPLNode *))m_pInput->vfptr->Seek)(m_pInput);
 }
 
 // File Line: 512
 // RVA: 0xA84520
-void __fastcall CAkVPLPitchNode::Init(CAkVPLPitchNode *this, AkAudioFormat *io_pFormat, CAkPBI *in_pPBI, unsigned int in_usSampleRate)
+void __fastcall CAkVPLPitchNode::Init(
+        CAkVPLPitchNode *this,
+        AkAudioFormat *io_pFormat,
+        CAkPBI *in_pPBI,
+        unsigned int in_usSampleRate)
 {
   this->m_pPBI = in_pPBI;
   this->m_bLast = 0;
@@ -436,27 +406,24 @@ void __fastcall CAkVPLPitchNode::Init(CAkVPLPitchNode *this, AkAudioFormat *io_p
 // RVA: 0xA84820
 void __fastcall CAkVPLPitchNode::Term(CAkVPLPitchNode *this)
 {
-  CAkVPLPitchNode *v1; // rbx
-
-  v1 = this;
   if ( this->m_BufferOut.pData )
   {
     AkPipelineBuffer::FreeMarkers(&this->m_BufferOut);
-    AkPipelineBufferBase::ReleaseCachedBuffer((AkPipelineBufferBase *)&v1->m_BufferOut.pData);
+    AkPipelineBufferBase::ReleaseCachedBuffer(&this->m_BufferOut);
   }
-  AkPipelineBuffer::FreeMarkers(&v1->m_BufferIn);
-  v1->m_pPBI = 0i64;
-  _((AMD_HD3D *)&v1->m_Pitch);
+  AkPipelineBuffer::FreeMarkers(&this->m_BufferIn);
+  this->m_pPBI = 0i64;
+  _((AMD_HD3D *)&this->m_Pitch);
 }
 
 // File Line: 554
 // RVA: 0xA84630
 void __fastcall CAkVPLPitchNode::RelocateMedia(CAkVPLPitchNode *this, char *in_pNewMedia, char *in_pOldMedia)
 {
-  _BYTE *v3; // rax
+  _BYTE *pData; // rax
 
-  v3 = this->m_BufferIn.pData;
-  if ( v3 )
-    this->m_BufferIn.pData = &in_pNewMedia[v3 - in_pOldMedia];
+  pData = this->m_BufferIn.pData;
+  if ( pData )
+    this->m_BufferIn.pData = &in_pNewMedia[pData - in_pOldMedia];
 }
 

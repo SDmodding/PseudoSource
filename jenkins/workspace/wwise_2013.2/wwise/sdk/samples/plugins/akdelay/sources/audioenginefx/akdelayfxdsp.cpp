@@ -19,7 +19,11 @@ void __fastcall CAkDelayFXDSP::CAkDelayFXDSP(CAkDelayFXDSP *this)
 
 // File Line: 27
 // RVA: 0xACCED0
-void __fastcall CAkDelayFXDSP::Setup(CAkDelayFXDSP *this, AkDelayFXParams *pInitialParams, bool in_bIsSendMode, unsigned int in_uSampleRate)
+void __fastcall CAkDelayFXDSP::Setup(
+        CAkDelayFXDSP *this,
+        AkDelayFXParams *pInitialParams,
+        bool in_bIsSendMode,
+        unsigned int in_uSampleRate)
 {
   int v4; // eax
 
@@ -40,272 +44,256 @@ void __fastcall CAkDelayFXDSP::Setup(CAkDelayFXDSP *this, AkDelayFXParams *pInit
 
 // File Line: 42
 // RVA: 0xACC9C0
-signed __int64 __fastcall CAkDelayFXDSP::InitDelay(CAkDelayFXDSP *this, AK::IAkPluginMemAlloc *in_pAllocator, AkDelayFXParams *pParams, unsigned int in_uChannelMask)
+__int64 __fastcall CAkDelayFXDSP::InitDelay(
+        CAkDelayFXDSP *this,
+        AK::IAkPluginMemAlloc *in_pAllocator,
+        AkDelayFXParams *pParams,
+        unsigned int in_uChannelMask)
 {
-  unsigned int v4; // edi
-  AkDelayFXParams *v5; // rsi
-  AK::IAkPluginMemAlloc *v6; // rbp
-  CAkDelayFXDSP *v7; // rbx
-  unsigned int v8; // er11
-  unsigned int i; // er10
-  bool v10; // al
-  unsigned int v11; // er9
-  signed __int64 result; // rax
+  unsigned int v8; // r11d
+  unsigned int i; // r10d
+  bool bProcessLFE; // al
+  unsigned int m_uNumProcessedChannels; // r9d
 
-  v4 = in_uChannelMask;
-  v5 = pParams;
-  v6 = in_pAllocator;
-  v7 = this;
-  AK::DSP::CAkDelayLineMemory<float,8>::Term(
-    (AK::DSP::CAkDelayLineMemory<float,8> *)this->m_DelayMem.m_pDelay,
-    in_pAllocator);
+  AK::DSP::CAkDelayLineMemory<float,8>::Term(&this->m_DelayMem, in_pAllocator);
   v8 = 0;
-  for ( i = v4; i; i &= i - 1 )
+  for ( i = in_uChannelMask; i; i &= i - 1 )
     ++v8;
-  v7->m_uNumProcessedChannels = v8;
-  v10 = v5->NonRTPC.bProcessLFE;
-  v7->m_bProcessLFE = v10;
-  if ( v4 & 8 && !v10 )
-    v7->m_uNumProcessedChannels = v8 - 1;
-  v11 = v7->m_uNumProcessedChannels;
-  if ( v11 )
-    result = AK::DSP::CAkDelayLineMemory<float,8>::Init(
-               (AK::DSP::CAkDelayLineMemory<float,8> *)v7->m_DelayMem.m_pDelay,
-               v6,
-               (signed int)(float)((float)(signed int)v7->m_uSampleRate * v5->NonRTPC.fDelayTime),
-               v11);
+  this->m_uNumProcessedChannels = v8;
+  bProcessLFE = pParams->NonRTPC.bProcessLFE;
+  this->m_bProcessLFE = bProcessLFE;
+  if ( (in_uChannelMask & 8) != 0 && !bProcessLFE )
+    this->m_uNumProcessedChannels = v8 - 1;
+  m_uNumProcessedChannels = this->m_uNumProcessedChannels;
+  if ( m_uNumProcessedChannels )
+    return AK::DSP::CAkDelayLineMemory<float,8>::Init(
+             &this->m_DelayMem,
+             in_pAllocator,
+             (int)(float)((float)(int)this->m_uSampleRate * pParams->NonRTPC.fDelayTime),
+             m_uNumProcessedChannels);
   else
-    result = 2i64;
-  return result;
+    return 2i64;
 }
 
 // File Line: 59
 // RVA: 0xACCEC0
+// attributes: thunk
 void __fastcall CAkDelayFXDSP::ResetDelay(CAkDelayFXDSP *this)
 {
-  AK::DSP::CAkDelayLineMemory<float,8>::Reset((AK::DSP::CAkDelayLineMemory<float,8> *)this->m_DelayMem.m_pDelay);
+  AK::DSP::CAkDelayLineMemory<float,8>::Reset(&this->m_DelayMem);
 }
 
 // File Line: 64
 // RVA: 0xACCFA0
+// attributes: thunk
 void __fastcall CAkDelayFXDSP::TermDelay(CAkDelayFXDSP *this, AK::IAkPluginMemAlloc *in_pAllocator)
 {
-  AK::DSP::CAkDelayLineMemory<float,8>::Term(
-    (AK::DSP::CAkDelayLineMemory<float,8> *)this->m_DelayMem.m_pDelay,
-    in_pAllocator);
+  AK::DSP::CAkDelayLineMemory<float,8>::Term(&this->m_DelayMem, in_pAllocator);
 }
 
 // File Line: 69
 // RVA: 0xACC8C0
-void __fastcall CAkDelayFXDSP::ComputeTailLength(CAkDelayFXDSP *this, bool in_bFeedbackEnabled, float in_fFeedbackValue)
+void __fastcall CAkDelayFXDSP::ComputeTailLength(
+        CAkDelayFXDSP *this,
+        bool in_bFeedbackEnabled,
+        float in_fFeedbackValue)
 {
-  CAkDelayFXDSP *v3; // rbx
   float v4; // xmm0_4
   float v5; // xmm1_4
 
-  v3 = this;
-  if ( in_bFeedbackEnabled && in_fFeedbackValue != 0.0 )
+  if ( !in_bFeedbackEnabled || in_fFeedbackValue == 0.0 )
+  {
+    this->m_uTailLength = this->m_DelayMem.m_uDelayLineLength;
+  }
+  else
   {
     v4 = log10f(in_fFeedbackValue) * 20.0;
     if ( v4 >= -0.60000002 )
       v5 = FLOAT_100_0;
     else
       v5 = -60.0 / v4;
-    v3->m_uTailLength = (signed int)(float)((float)(signed int)v3->m_DelayMem.m_uDelayLineLength * v5);
-  }
-  else
-  {
-    this->m_uTailLength = this->m_DelayMem.m_uDelayLineLength;
+    this->m_uTailLength = (int)(float)((float)(int)this->m_DelayMem.m_uDelayLineLength * v5);
   }
 }
 
 // File Line: 104
 // RVA: 0xACCA60
-void __usercall CAkDelayFXDSP::Process(CAkDelayFXDSP *this@<rcx>, AkAudioBuffer *io_pBuffer@<rdx>, AkDelayFXParams *pCurrentParams@<r8>, __m128 a4@<xmm8>)
+void __fastcall CAkDelayFXDSP::Process(CAkDelayFXDSP *this, AkAudioBuffer *io_pBuffer, AkDelayFXParams *pCurrentParams)
 {
-  CAkDelayFXDSP *v4; // r15
-  AkDelayFXParams *v5; // r12
+  __m128 v3; // xmm8
   AkAudioBuffer *v6; // rbx
-  signed int v7; // edi
+  int uValidFrames; // edi
   int v8; // esi
-  unsigned int v9; // ecx
-  unsigned int v10; // edx
-  __m128 v11; // xmm2
-  unsigned int v12; // ebp
-  __m128 *v13; // r13
+  unsigned int m_uNumProcessedChannels; // ecx
+  unsigned int m_uOffset; // edx
+  __m128 fOutputLevel_low; // xmm2
+  unsigned int m_uDelayLineLength; // ebp
+  __m128 *pData; // r13
   __int64 v14; // rax
   CAkDelayFXDSP *v15; // r14
   float v16; // xmm4_4
-  __m128 v17; // ST20_16
-  signed __int64 v18; // rcx
-  __m128 v19; // xmm8
+  __int64 v17; // rcx
+  __m128 v18; // xmm8
+  __m128 v19; // xmm9
   __m128 v20; // xmm9
-  __m128 v21; // xmm9
-  float v22; // xmm0_4
-  float v23; // xmm0_4
-  __m128 v24; // xmm2
-  __m128 v25; // xmm12
-  __m128 v26; // xmm10
-  __m128 v27; // xmm10
-  float v28; // xmm0_4
-  float v29; // xmm0_4
-  __m128 v30; // xmm2
-  __m128 v31; // xmm13
-  __m128 v32; // xmm11
-  __m128 v33; // xmm11
-  __m128 v34; // xmm4
-  __m128 *v35; // r11
-  unsigned int v36; // ebx
-  __m128 v37; // xmm5
-  __m128 v38; // xmm6
-  __m128 v39; // xmm7
-  unsigned int v40; // er8
-  unsigned int v41; // er9
-  signed __int64 v42; // r10
-  __m128 v43; // xmm3
-  __m128 v44; // xmm1
-  __m128 v45; // xmm0
-  __m128 v46; // xmm1
-  __m128 v47; // xmm0
-  __m128 v48; // xmm1
-  __m128 v49; // xmm0
-  unsigned int v50; // ecx
-  char *v51; // rcx
-  __m128 v52; // [rsp+20h] [rbp-D8h]
-  signed __int64 v53; // [rsp+100h] [rbp+8h]
-  AkAudioBuffer *v54; // [rsp+108h] [rbp+10h]
-  __int64 v55; // [rsp+110h] [rbp+18h]
+  float v21; // xmm0_4
+  __m128 fFeedback_low; // xmm2
+  __m128 v23; // xmm12
+  __m128 v24; // xmm10
+  __m128 v25; // xmm10
+  float v26; // xmm0_4
+  __m128 fWetDryMix_low; // xmm2
+  __m128 v28; // xmm13
+  __m128 v29; // xmm11
+  __m128 v30; // xmm11
+  __m128 v31; // xmm4
+  __m128 *v32; // r11
+  unsigned int v33; // ebx
+  __m128 v34; // xmm5
+  __m128 v35; // xmm6
+  __m128 v36; // xmm7
+  unsigned int v37; // r8d
+  unsigned int v38; // r9d
+  __int64 v39; // r10
+  __m128 v40; // xmm3
+  __m128 v41; // xmm1
+  __m128 v42; // xmm0
+  __m128 v43; // xmm1
+  __m128 v44; // xmm0
+  __m128 v45; // xmm1
+  __m128 v46; // xmm0
+  unsigned int uChannelMask; // ecx
+  char *v48; // rcx
+  __m128 v49; // [rsp+20h] [rbp-D8h]
+  __m128 v50; // [rsp+20h] [rbp-D8h]
+  __int64 v51; // [rsp+100h] [rbp+8h]
+  __int64 v53; // [rsp+110h] [rbp+18h]
 
-  v54 = io_pBuffer;
-  v4 = this;
-  v5 = pCurrentParams;
   v6 = io_pBuffer;
   AkFXTailHandler::HandleTail(&this->m_FXTailHandler, io_pBuffer, this->m_uTailLength);
-  v7 = v6->uValidFrames;
+  uValidFrames = v6->uValidFrames;
   v8 = 0;
-  if ( !v5->RTPC.bFeedbackEnabled )
-    v5->RTPC.fFeedback = 0.0;
-  if ( v4->m_bSendMode )
-    v5->RTPC.fWetDryMix = 1.0;
-  v9 = v4->m_uNumProcessedChannels;
-  v10 = 0;
-  if ( v9 )
+  if ( !pCurrentParams->RTPC.bFeedbackEnabled )
+    pCurrentParams->RTPC.fFeedback = 0.0;
+  if ( this->m_bSendMode )
+    pCurrentParams->RTPC.fWetDryMix = 1.0;
+  m_uNumProcessedChannels = this->m_uNumProcessedChannels;
+  m_uOffset = 0;
+  if ( m_uNumProcessedChannels )
   {
-    v11 = (__m128)LODWORD(v5->RTPC.fOutputLevel);
-    v12 = v4->m_DelayMem.m_uDelayLineLength;
-    v13 = (__m128 *)v6->pData;
-    v55 = v4->m_uNumProcessedChannels;
-    v53 = 4i64 * v6->uMaxFrames;
-    v14 = v9;
-    v15 = v4;
-    v16 = 1.0 / (float)v7;
-    v17.m128_i32[0] = LODWORD(v4->m_PreviousParams.RTPC.fOutputLevel);
-    v18 = 4i64 * v6->uMaxFrames;
-    a4.m128_f32[0] = 1.0;
-    v11.m128_f32[0] = (float)(v11.m128_f32[0] - v17.m128_f32[0]) * v16;
-    v19 = _mm_shuffle_ps(a4, a4, 0);
-    v20 = v11;
-    v20.m128_f32[0] = v11.m128_f32[0] * 4.0;
-    v21 = _mm_shuffle_ps(v20, v20, 0);
-    v17.m128_f32[1] = v11.m128_f32[0] + v17.m128_f32[0];
-    v22 = (float)(v11.m128_f32[0] + v17.m128_f32[0]) + v11.m128_f32[0];
-    v17.m128_f32[2] = v22;
-    v23 = v22 + v11.m128_f32[0];
-    v24 = (__m128)LODWORD(v5->RTPC.fFeedback);
-    v17.m128_f32[3] = v23;
-    v25 = v17;
-    v17.m128_i32[0] = LODWORD(v4->m_PreviousParams.RTPC.fFeedback);
-    v24.m128_f32[0] = (float)(v24.m128_f32[0] - v17.m128_f32[0]) * v16;
-    v26 = v24;
-    v26.m128_f32[0] = v24.m128_f32[0] * 4.0;
-    v27 = _mm_shuffle_ps(v26, v26, 0);
-    v17.m128_f32[1] = v24.m128_f32[0] + v17.m128_f32[0];
-    v28 = (float)(v24.m128_f32[0] + v17.m128_f32[0]) + v24.m128_f32[0];
-    v17.m128_f32[2] = v28;
-    v29 = v28 + v24.m128_f32[0];
-    v30 = (__m128)LODWORD(v5->RTPC.fWetDryMix);
-    v17.m128_f32[3] = v29;
-    v31 = v17;
-    v52.m128_i32[0] = LODWORD(v4->m_PreviousParams.RTPC.fWetDryMix);
-    v30.m128_f32[0] = (float)(v30.m128_f32[0] - v52.m128_f32[0]) * v16;
-    v32 = v30;
-    v32.m128_f32[0] = v30.m128_f32[0] * 4.0;
-    v52.m128_f32[1] = v30.m128_f32[0] + v52.m128_f32[0];
-    v33 = _mm_shuffle_ps(v32, v32, 0);
-    v52.m128_f32[2] = (float)(v30.m128_f32[0] + v52.m128_f32[0]) + v30.m128_f32[0];
-    v52.m128_f32[3] = v52.m128_f32[2] + v30.m128_f32[0];
+    fOutputLevel_low = (__m128)LODWORD(pCurrentParams->RTPC.fOutputLevel);
+    m_uDelayLineLength = this->m_DelayMem.m_uDelayLineLength;
+    pData = (__m128 *)v6->pData;
+    v53 = this->m_uNumProcessedChannels;
+    v51 = 4i64 * v6->uMaxFrames;
+    v14 = m_uNumProcessedChannels;
+    v15 = this;
+    v16 = 1.0 / (float)uValidFrames;
+    v49.m128_i32[0] = LODWORD(this->m_PreviousParams.RTPC.fOutputLevel);
+    v17 = v51;
+    v3.m128_f32[0] = 1.0;
+    fOutputLevel_low.m128_f32[0] = (float)(fOutputLevel_low.m128_f32[0] - v49.m128_f32[0]) * v16;
+    v18 = _mm_shuffle_ps(v3, v3, 0);
+    v19 = fOutputLevel_low;
+    v19.m128_f32[0] = fOutputLevel_low.m128_f32[0] * 4.0;
+    v20 = _mm_shuffle_ps(v19, v19, 0);
+    v49.m128_f32[1] = fOutputLevel_low.m128_f32[0] + v49.m128_f32[0];
+    v49.m128_f32[2] = (float)(fOutputLevel_low.m128_f32[0] + v49.m128_f32[0]) + fOutputLevel_low.m128_f32[0];
+    v21 = v49.m128_f32[2] + fOutputLevel_low.m128_f32[0];
+    fFeedback_low = (__m128)LODWORD(pCurrentParams->RTPC.fFeedback);
+    v49.m128_f32[3] = v21;
+    v23 = v49;
+    v49.m128_i32[0] = LODWORD(this->m_PreviousParams.RTPC.fFeedback);
+    fFeedback_low.m128_f32[0] = (float)(fFeedback_low.m128_f32[0] - v49.m128_f32[0]) * v16;
+    v24 = fFeedback_low;
+    v24.m128_f32[0] = fFeedback_low.m128_f32[0] * 4.0;
+    v25 = _mm_shuffle_ps(v24, v24, 0);
+    v49.m128_f32[1] = fFeedback_low.m128_f32[0] + v49.m128_f32[0];
+    v49.m128_f32[2] = (float)(fFeedback_low.m128_f32[0] + v49.m128_f32[0]) + fFeedback_low.m128_f32[0];
+    v26 = v49.m128_f32[2] + fFeedback_low.m128_f32[0];
+    fWetDryMix_low = (__m128)LODWORD(pCurrentParams->RTPC.fWetDryMix);
+    v49.m128_f32[3] = v26;
+    v28 = v49;
+    v50.m128_i32[0] = LODWORD(this->m_PreviousParams.RTPC.fWetDryMix);
+    fWetDryMix_low.m128_f32[0] = (float)(fWetDryMix_low.m128_f32[0] - v50.m128_f32[0]) * v16;
+    v29 = fWetDryMix_low;
+    v29.m128_f32[0] = fWetDryMix_low.m128_f32[0] * 4.0;
+    v50.m128_f32[1] = fWetDryMix_low.m128_f32[0] + v50.m128_f32[0];
+    v30 = _mm_shuffle_ps(v29, v29, 0);
+    v50.m128_f32[2] = (float)(fWetDryMix_low.m128_f32[0] + v50.m128_f32[0]) + fWetDryMix_low.m128_f32[0];
+    v50.m128_f32[3] = v50.m128_f32[2] + fWetDryMix_low.m128_f32[0];
     do
     {
-      v10 = v4->m_DelayMem.m_uOffset;
-      v34 = v52;
-      v35 = v13;
-      v36 = 0;
-      v37 = v25;
-      v38 = v31;
-      v39 = _mm_sub_ps(v19, v52);
-      if ( v7 )
+      m_uOffset = this->m_DelayMem.m_uOffset;
+      v31 = v50;
+      v32 = pData;
+      v33 = 0;
+      v34 = v23;
+      v35 = v28;
+      v36 = _mm_sub_ps(v18, v50);
+      if ( uValidFrames )
       {
         do
         {
-          v40 = v7 - v36;
-          if ( v12 - v10 < v7 - v36 )
-            v40 = v12 - v10;
-          v41 = v40 >> 2;
-          if ( v40 >> 2 )
+          v37 = uValidFrames - v33;
+          if ( m_uDelayLineLength - m_uOffset < uValidFrames - v33 )
+            v37 = m_uDelayLineLength - m_uOffset;
+          v38 = v37 >> 2;
+          if ( v37 >> 2 )
           {
-            v42 = (signed __int64)&v15->m_DelayMem.m_pDelay[0][v10];
+            v39 = (__int64)&v15->m_DelayMem.m_pDelay[0][m_uOffset];
             do
             {
-              v43 = *v35;
-              v44 = v34;
-              v34 = _mm_add_ps(v34, v33);
-              v42 += 16i64;
-              ++v35;
-              v45 = _mm_mul_ps(v43, v39);
-              v39 = _mm_sub_ps(v19, v34);
-              v46 = _mm_add_ps(_mm_mul_ps(v44, *(__m128 *)(v42 - 16)), v45);
-              v47 = v38;
-              v38 = _mm_add_ps(v38, v27);
-              v48 = _mm_mul_ps(v46, v37);
-              v49 = _mm_add_ps(_mm_mul_ps(v47, *(__m128 *)(v42 - 16)), v43);
-              v37 = _mm_add_ps(v37, v21);
-              v35[-1] = v48;
-              *(__m128 *)(v42 - 16) = v49;
-              --v41;
+              v40 = *v32;
+              v41 = v31;
+              v31 = _mm_add_ps(v31, v30);
+              v39 += 16i64;
+              ++v32;
+              v42 = _mm_mul_ps(v40, v36);
+              v36 = _mm_sub_ps(v18, v31);
+              v43 = _mm_add_ps(_mm_mul_ps(v41, *(__m128 *)(v39 - 16)), v42);
+              v44 = v35;
+              v35 = _mm_add_ps(v35, v25);
+              v45 = _mm_mul_ps(v43, v34);
+              v46 = _mm_add_ps(_mm_mul_ps(v44, *(__m128 *)(v39 - 16)), v40);
+              v34 = _mm_add_ps(v34, v20);
+              v32[-1] = v45;
+              *(__m128 *)(v39 - 16) = v46;
+              --v38;
             }
-            while ( v41 );
+            while ( v38 );
           }
-          v10 += v40;
-          v36 += v40;
-          if ( v10 == v12 )
-            v10 = 0;
+          m_uOffset += v37;
+          v33 += v37;
+          if ( m_uOffset == m_uDelayLineLength )
+            m_uOffset = 0;
         }
-        while ( v36 < v7 );
-        v14 = v55;
-        v18 = v53;
+        while ( v33 < uValidFrames );
+        v14 = v53;
+        v17 = v51;
       }
-      v13 = (__m128 *)((char *)v13 + v18);
+      pData = (__m128 *)((char *)pData + v17);
       v15 = (CAkDelayFXDSP *)((char *)v15 + 8);
-      v55 = --v14;
+      v53 = --v14;
     }
     while ( v14 );
-    v6 = v54;
+    v6 = io_pBuffer;
   }
-  v4->m_DelayMem.m_uOffset = v10;
-  v50 = v6->uChannelMask;
-  if ( v50 & 8 )
+  this->m_DelayMem.m_uOffset = m_uOffset;
+  uChannelMask = v6->uChannelMask;
+  if ( (uChannelMask & 8) != 0 )
   {
-    for ( ; v50; v50 &= v50 - 1 )
+    for ( ; uChannelMask; uChannelMask &= uChannelMask - 1 )
       ++v8;
-    v51 = (char *)v6->pData + 4 * v6->uMaxFrames * (unsigned __int64)(unsigned int)(v8 - 1);
-    if ( v51 && v4->m_bSendMode && !v5->NonRTPC.bProcessLFE )
-      memset(v51, 0, (unsigned int)(4 * v7));
+    v48 = (char *)v6->pData + 4 * v6->uMaxFrames * (unsigned __int64)(unsigned int)(v8 - 1);
+    if ( v48 && this->m_bSendMode && !pCurrentParams->NonRTPC.bProcessLFE )
+      memset(v48, 0, (unsigned int)(4 * uValidFrames));
   }
-  v4->m_PreviousParams.RTPC.fFeedback = v5->RTPC.fFeedback;
-  v4->m_PreviousParams.RTPC.fWetDryMix = v5->RTPC.fWetDryMix;
-  v4->m_PreviousParams.RTPC.fOutputLevel = v5->RTPC.fOutputLevel;
-  *(_DWORD *)&v4->m_PreviousParams.RTPC.bFeedbackEnabled = *(_DWORD *)&v5->RTPC.bFeedbackEnabled;
-  v4->m_PreviousParams.NonRTPC.fDelayTime = v5->NonRTPC.fDelayTime;
-  *(_DWORD *)&v4->m_PreviousParams.NonRTPC.bProcessLFE = *(_DWORD *)&v5->NonRTPC.bProcessLFE;
+  this->m_PreviousParams.RTPC.fFeedback = pCurrentParams->RTPC.fFeedback;
+  this->m_PreviousParams.RTPC.fWetDryMix = pCurrentParams->RTPC.fWetDryMix;
+  this->m_PreviousParams.RTPC.fOutputLevel = pCurrentParams->RTPC.fOutputLevel;
+  *(_DWORD *)&this->m_PreviousParams.RTPC.bFeedbackEnabled = *(_DWORD *)&pCurrentParams->RTPC.bFeedbackEnabled;
+  this->m_PreviousParams.NonRTPC.fDelayTime = pCurrentParams->NonRTPC.fDelayTime;
+  *(_DWORD *)&this->m_PreviousParams.NonRTPC.bProcessLFE = *(_DWORD *)&pCurrentParams->NonRTPC.bProcessLFE;
 }
 

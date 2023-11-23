@@ -46,33 +46,24 @@ DNA::DNAFactory *__fastcall DNA::DNAFactory::Instance()
 bool __fastcall DNA::DNAFactory::InventoryFilterFunction(UFG::qReflectObject *object)
 {
   UFG::qTree64Base *v1; // rcx
-  bool result; // al
 
   v1 = UFG::qTree64Base::Get(&DNA::DNAFactory::sInstance->mLoadedContent.mTree, object->mBaseNode.mUID);
-  if ( v1 )
-    result = v1 == (UFG::qTree64Base *)136;
-  else
-    result = 1;
-  return result;
+  return !v1 || v1 == (UFG::qTree64Base *)136;
 }
 
 // File Line: 68
 // RVA: 0x1AF290
-UFG::qReflectObject *__fastcall DNA::DNAFactory::CreateObject(DNA::DNAFactory *this, unsigned __int64 type_uid, const char *name)
+UFG::qReflectObject *__fastcall DNA::DNAFactory::CreateObject(
+        DNA::DNAFactory *this,
+        unsigned __int64 type_uid,
+        const char *name)
 {
-  const char *v3; // rdi
-  unsigned __int64 v4; // rsi
-  DNA::DNAFactory *v5; // rbp
   UFG::allocator::free_link *v6; // rax
   DNA::DNAFactory::CreatedContent *v7; // rbx
   UFG::allocator::free_link *v8; // rax
-  UFG::qReflectInventoryBase::ObjectLookup *v9; // rax
-  DNA::Database *v10; // rax
-  unsigned __int64 v11; // rax
+  DNA::Database *v9; // rax
+  unsigned __int64 v10; // rax
 
-  v3 = name;
-  v4 = type_uid;
-  v5 = this;
   v6 = UFG::qMalloc(0xB0ui64, UFG::gGlobalNewName, 0i64);
   v7 = (DNA::DNAFactory::CreatedContent *)v6;
   if ( v6 )
@@ -92,69 +83,65 @@ UFG::qReflectObject *__fastcall DNA::DNAFactory::CreateObject(DNA::DNAFactory *t
     v8[3].mNext = v8;
     v8[4].mNext = v8;
     v8[5].mNext = v8;
-    v9 = &v7->mObjectLookup;
-    v9->mBaseNode.mUID = 0i64;
-    v9->mBaseNode.mParent = &v9->mBaseNode;
-    v9->mBaseNode.mChildren[0] = &v9->mBaseNode;
-    v9->mBaseNode.mChildren[1] = &v9->mBaseNode;
-    v9->mBaseNode.mNeighbours[0] = &v9->mBaseNode;
-    v9->mBaseNode.mNeighbours[1] = &v9->mBaseNode;
+    v7->mObjectLookup.mBaseNode.mUID = 0i64;
+    v7->mObjectLookup.mBaseNode.mParent = &v7->mObjectLookup.mBaseNode;
+    v7->mObjectLookup.mBaseNode.mChildren[0] = &v7->mObjectLookup.mBaseNode;
+    v7->mObjectLookup.mBaseNode.mChildren[1] = &v7->mObjectLookup.mBaseNode;
+    v7->mObjectLookup.mBaseNode.mNeighbours[0] = &v7->mObjectLookup.mBaseNode;
+    v7->mObjectLookup.mBaseNode.mNeighbours[1] = &v7->mObjectLookup.mBaseNode;
   }
   else
   {
     v7 = 0i64;
   }
   DNA::Database::Instance();
-  v11 = DNA::Database::GenUID(v10);
-  v7->mBaseNode.mUID = v11;
-  DNA::DNAFactory::CreatedContent::CreateObject(v7, v4, v11, v3);
-  UFG::qTree64Base::Add(&v5->mCreatedContent.mTree, &v7->mBaseNode);
+  v10 = DNA::Database::GenUID(v9);
+  v7->mBaseNode.mUID = v10;
+  DNA::DNAFactory::CreatedContent::CreateObject(v7, type_uid, v10, name);
+  UFG::qTree64Base::Add(&this->mCreatedContent.mTree, &v7->mBaseNode);
   return v7->mObject;
 }
 
 // File Line: 80
 // RVA: 0x1AF250
-UFG::qReflectObject *__fastcall DNA::DNAFactory::CreateObject(DNA::DNAFactory *this, const char *type_name, const char *name)
+UFG::qReflectObject *__fastcall DNA::DNAFactory::CreateObject(
+        DNA::DNAFactory *this,
+        const char *type_name,
+        const char *name)
 {
-  DNA::DNAFactory *v3; // rbx
-  const char *v4; // rdi
   unsigned __int64 v5; // rax
 
-  v3 = this;
-  v4 = name;
   v5 = UFG::qStringHash64(type_name, 0xFFFFFFFFFFFFFFFFui64);
-  return DNA::DNAFactory::CreateObject(v3, v5, v4);
+  return DNA::DNAFactory::CreateObject(this, v5, name);
 }
 
 // File Line: 209
 // RVA: 0x1AF1A0
-void __fastcall DNA::DNAFactory::CreatedContent::CreateObject(DNA::DNAFactory::CreatedContent *this, unsigned __int64 type_uid, unsigned __int64 name_uid, const char *name)
+void __fastcall DNA::DNAFactory::CreatedContent::CreateObject(
+        DNA::DNAFactory::CreatedContent *this,
+        unsigned __int64 type_uid,
+        unsigned __int64 name_uid,
+        const char *name)
 {
-  DNA::DNAFactory::CreatedContent *v4; // rbp
-  const char *v5; // r14
-  unsigned __int64 v6; // rbx
   UFG::qTree64Base *v7; // rax
-  __int64 v8; // rax
+  UFG::qReflectObject *v8; // rax
   UFG::qReflectWarehouse *v9; // rax
-  UFG::qReflectInventoryBase *v10; // rbx
+  UFG::qReflectInventoryBase *Inventory; // rbx
 
-  v4 = this;
   this->mTypeUID = type_uid;
-  v5 = name;
-  v6 = name_uid;
   v7 = UFG::qTree64Base::Get(&UFG::FactoryOperation::sOperations->mTree, type_uid);
   if ( v7 )
   {
-    v8 = ((__int64 (__fastcall *)(unsigned __int64))v7->mCount)(v6);
-    v4->mNameLookup.mName = v5;
-    v4->mNameLookup.mBaseNode.mUID = v6;
-    v4->mObjectLookup.mNameUID = v6;
-    v4->mObject = (UFG::qReflectObject *)v8;
-    v4->mObjectLookup.mBaseNode.mUID = UFG::qStringHash64(v5, 0xFFFFFFFFFFFFFFFFui64);
+    v8 = (UFG::qReflectObject *)((__int64 (__fastcall *)(unsigned __int64))v7->mCount)(name_uid);
+    this->mNameLookup.mName = name;
+    this->mNameLookup.mBaseNode.mUID = name_uid;
+    this->mObjectLookup.mNameUID = name_uid;
+    this->mObject = v8;
+    this->mObjectLookup.mBaseNode.mUID = UFG::qStringHash64(name, 0xFFFFFFFFFFFFFFFFui64);
     v9 = UFG::qReflectWarehouse::Instance();
-    v10 = UFG::qReflectWarehouse::GetInventory(v9, v4->mTypeUID);
-    UFG::qReflectInventoryBase::AddLookup(v10, &v4->mNameLookup, &v4->mObjectLookup);
-    UFG::qReflectInventoryBase::Add(v10, v4->mObject);
+    Inventory = UFG::qReflectWarehouse::GetInventory(v9, this->mTypeUID);
+    UFG::qReflectInventoryBase::AddLookup(Inventory, &this->mNameLookup, &this->mObjectLookup);
+    UFG::qReflectInventoryBase::Add(Inventory, this->mObject);
   }
 }
 

@@ -2,12 +2,10 @@
 // RVA: 0x67B1C0
 UFG::qSymbol *__fastcall UFG::AudioCurve::GetSourceValueSymbol(UFG::AudioCurve *this)
 {
-  UFG::AudioCurve *v1; // rbx
   UFG::AudioCurveSymbolManager *v2; // rdx
   UFG::allocator::free_link *v3; // rax
   UFG::AudioCurveSymbolManager *v4; // rax
 
-  v1 = this;
   v2 = UFG::AudioCurveSymbolManager::ms_instance;
   if ( !UFG::AudioCurveSymbolManager::ms_instance )
   {
@@ -23,19 +21,17 @@ UFG::qSymbol *__fastcall UFG::AudioCurve::GetSourceValueSymbol(UFG::AudioCurve *
     }
     UFG::AudioCurveSymbolManager::ms_instance = v2;
   }
-  return (UFG::qSymbol *)((char *)v2 + 4 * v1->mSourceValue);
+  return (UFG::qSymbol *)v2 + this->mSourceValue;
 }
 
 // File Line: 157
 // RVA: 0x67B2E0
 UFG::qSymbol *__fastcall UFG::AudioCurve::GetTargetValueSymbol(UFG::AudioCurve *this)
 {
-  UFG::AudioCurve *v1; // rbx
   UFG::AudioCurveSymbolManager *v2; // rdx
   UFG::allocator::free_link *v3; // rax
   UFG::AudioCurveSymbolManager *v4; // rax
 
-  v1 = this;
   v2 = UFG::AudioCurveSymbolManager::ms_instance;
   if ( !UFG::AudioCurveSymbolManager::ms_instance )
   {
@@ -51,19 +47,17 @@ UFG::qSymbol *__fastcall UFG::AudioCurve::GetTargetValueSymbol(UFG::AudioCurve *
     }
     UFG::AudioCurveSymbolManager::ms_instance = v2;
   }
-  return (UFG::qSymbol *)((char *)v2 + 4 * v1->mTargetValue);
+  return (UFG::qSymbol *)v2 + this->mTargetValue;
 }
 
 // File Line: 158
 // RVA: 0x679640
 UFG::qSymbol *__fastcall UFG::AudioCurve::GetBlendModeSymbol(UFG::AudioCurve *this)
 {
-  UFG::AudioCurve *v1; // rbx
   UFG::AudioCurveSymbolManager *v2; // rdx
   UFG::allocator::free_link *v3; // rax
   UFG::AudioCurveSymbolManager *v4; // rax
 
-  v1 = this;
   v2 = UFG::AudioCurveSymbolManager::ms_instance;
   if ( !UFG::AudioCurveSymbolManager::ms_instance )
   {
@@ -79,6 +73,6 @@ UFG::qSymbol *__fastcall UFG::AudioCurve::GetBlendModeSymbol(UFG::AudioCurve *th
     }
     UFG::AudioCurveSymbolManager::ms_instance = v2;
   }
-  return (UFG::qSymbol *)((char *)v2 + 4 * v1->mBlendMode);
+  return (UFG::qSymbol *)v2 + this->mBlendMode;
 }
 

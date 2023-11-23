@@ -4,10 +4,10 @@ _iobuf *__fastcall fdopen(int filedes, const char *mode)
 {
   const char *v2; // rbx
   __int64 v3; // rsi
-  signed int v4; // edi
-  signed int v5; // edx
-  signed int v6; // er8
-  signed int v7; // er9
+  int v4; // edi
+  int v5; // edx
+  int v6; // r8d
+  int v7; // r9d
   unsigned int v8; // edi
   char v9; // al
   _iobuf *v10; // rax
@@ -22,9 +22,9 @@ _iobuf *__fastcall fdopen(int filedes, const char *mode)
     *errno() = 9;
     return 0i64;
   }
-  if ( (signed int)ioinit() < 0 )
+  if ( (int)ioinit() < 0 )
     return 0i64;
-  if ( (signed int)v3 < 0 || (unsigned int)v3 >= nhandle || !(_pioinfo[v3 >> 5][v3 & 0x1F].osfile & 1) )
+  if ( (int)v3 < 0 || (unsigned int)v3 >= nhandle || (_pioinfo[v3 >> 5][v3 & 0x1F].osfile & 1) == 0 )
   {
     *errno() = 9;
     goto LABEL_44;
@@ -62,28 +62,28 @@ LABEL_18:
     {
       switch ( v9 )
       {
-        case 43:
+        case +:
           if ( (v8 & 0x80u) == 0 )
-            v8 = v8 & 0xFFFFFFFC | 0x80;
+            v8 = v8 & 0xFFFFFF7C | 0x80;
           else
 LABEL_35:
             v5 = 0;
           break;
-        case 98:
+        case b:
           goto LABEL_32;
-        case 99:
+        case c:
           if ( v6 )
             goto LABEL_35;
           v6 = 1;
           v8 |= 0x4000u;
           break;
-        case 110:
+        case n:
           if ( v6 )
             goto LABEL_35;
           v6 = 1;
-          v8 &= 0xFFFFBFFF;
+          v8 &= ~0x4000u;
           break;
-        case 116:
+        case t:
 LABEL_32:
           if ( v7 )
             goto LABEL_35;

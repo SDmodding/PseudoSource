@@ -2,118 +2,110 @@
 // RVA: 0x98660
 void __fastcall UFG::CustomCollisionFilter::CustomCollisionFilter(UFG::CustomCollisionFilter *this)
 {
-  UFG::CustomCollisionFilter *v1; // rbx
-  char *v2; // rdi
+  UFG::Stack *v2; // rdi
   unsigned int v3; // eax
   unsigned __int64 v4; // rax
   unsigned __int64 v5; // kr00_8
-  UFG::qList<UFG::FilterNode,UFG::FilterNode,1,0> *v6; // [rsp+48h] [rbp+10h]
 
-  v1 = this;
-  hkpGroupFilter::hkpGroupFilter((hkpGroupFilter *)&this->vfptr);
-  v1->vfptr = (hkpEntityListenerVtbl *)&hkpEntityListener::`vftable;
-  v1->vfptr = (hkBaseObjectVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkReferencedObject};
-  v1->vfptr = (hkpCollidableCollidableFilterVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkpCollidableCollidableFilter};
-  v1->vfptr = (hkpShapeCollectionFilterVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkpShapeCollectionFilter};
-  v1->vfptr = (hkpRayShapeCollectionFilterVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkpRayShapeCollectionFilter};
-  v1->vfptr = (hkpRayCollidableFilterVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkpRayCollidableFilter};
-  v1->vfptr = (hkpEntityListenerVtbl *)&UFG::CustomCollisionFilter::`vftable;
-  v6 = &v1->mNonCollidable;
-  v6->mNode.mPrev = &v6->mNode;
-  v6->mNode.mNext = &v6->mNode;
-  v2 = UFG::qMalloc(0x10ui64, UFG::gGlobalNewName, 0i64);
+  hkpGroupFilter::hkpGroupFilter(this);
+  this->hkpEntityListener::vfptr = (hkpEntityListenerVtbl *)&hkpEntityListener::`vftable;
+  this->hkpGroupFilter::hkpCollisionFilter::hkReferencedObject::hkBaseObject::vfptr = (hkBaseObjectVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkReferencedObject};
+  this->hkpGroupFilter::hkpCollisionFilter::hkpCollidableCollidableFilter::vfptr = (hkpCollidableCollidableFilterVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkpCollidableCollidableFilter};
+  this->hkpGroupFilter::hkpCollisionFilter::hkpShapeCollectionFilter::vfptr = (hkpShapeCollectionFilterVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkpShapeCollectionFilter};
+  this->hkpGroupFilter::hkpCollisionFilter::hkpRayShapeCollectionFilter::vfptr = (hkpRayShapeCollectionFilterVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkpRayShapeCollectionFilter};
+  this->hkpGroupFilter::hkpCollisionFilter::hkpRayCollidableFilter::vfptr = (hkpRayCollidableFilterVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkpRayCollidableFilter};
+  this->hkpEntityListener::vfptr = (hkpEntityListenerVtbl *)&UFG::CustomCollisionFilter::`vftable;
+  this->mNonCollidable.mNode.mPrev = &this->mNonCollidable.mNode;
+  this->mNonCollidable.mNode.mNext = &this->mNonCollidable.mNode;
+  v2 = (UFG::Stack *)UFG::qMalloc(0x10ui64, UFG::gGlobalNewName, 0i64);
   if ( v2 )
   {
     v3 = stack_size;
-    *(_DWORD *)v2 = 0;
-    *((_DWORD *)v2 + 1) = v3;
+    v2->mHead = 0;
+    v2->mCapacity = v3;
     v5 = v3;
     v4 = 4i64 * v3;
     if ( !is_mul_ok(v5, 4ui64) )
       v4 = -1i64;
-    *((_QWORD *)v2 + 1) = UFG::qMalloc(v4, "Stack", 0i64);
+    v2->mBuffer = (unsigned int *)UFG::qMalloc(v4, "Stack", 0i64);
   }
   else
   {
     v2 = 0i64;
   }
-  v1->mAssignedSystemGroups = (UFG::Stack *)v2;
-  UFG::CustomCollisionFilter::ResetState(v1);
+  this->mAssignedSystemGroups = v2;
+  UFG::CustomCollisionFilter::ResetState(this);
 }
 
 // File Line: 39
 // RVA: 0x9BFE0
 void __fastcall UFG::CustomCollisionFilter::~CustomCollisionFilter(UFG::CustomCollisionFilter *this)
 {
-  UFG::CustomCollisionFilter *v1; // rdi
-  UFG::Stack *v2; // rbx
-  UFG::qList<UFG::FilterNode,UFG::FilterNode,1,0> *v3; // rbx
-  UFG::qNode<UFG::FilterNode,UFG::FilterNode> *v4; // rdx
-  UFG::qNode<UFG::FilterNode,UFG::FilterNode> *v5; // rcx
+  UFG::Stack *mAssignedSystemGroups; // rbx
+  UFG::qList<UFG::FilterNode,UFG::FilterNode,1,0> *p_mNonCollidable; // rbx
+  UFG::qNode<UFG::FilterNode,UFG::FilterNode> *mNext; // rdx
+  UFG::qNode<UFG::FilterNode,UFG::FilterNode> *mPrev; // rcx
   UFG::qNode<UFG::FilterNode,UFG::FilterNode> *v6; // rax
   UFG::qNode<UFG::FilterNode,UFG::FilterNode> *v7; // rcx
   UFG::qNode<UFG::FilterNode,UFG::FilterNode> *v8; // rax
   UFG::qNode<UFG::FilterNode,UFG::FilterNode> *v9; // rcx
   UFG::qNode<UFG::FilterNode,UFG::FilterNode> *v10; // rax
 
-  v1 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkReferencedObject};
-  this->vfptr = (hkpCollidableCollidableFilterVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkpCollidableCollidableFilter};
-  this->vfptr = (hkpShapeCollectionFilterVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkpShapeCollectionFilter};
-  this->vfptr = (hkpRayShapeCollectionFilterVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkpRayShapeCollectionFilter};
-  this->vfptr = (hkpRayCollidableFilterVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkpRayCollidableFilter};
-  this->vfptr = (hkpEntityListenerVtbl *)&UFG::CustomCollisionFilter::`vftable;
-  v2 = this->mAssignedSystemGroups;
-  if ( v2 )
+  this->hkpGroupFilter::hkpCollisionFilter::hkReferencedObject::hkBaseObject::vfptr = (hkBaseObjectVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkReferencedObject};
+  this->hkpGroupFilter::hkpCollisionFilter::hkpCollidableCollidableFilter::vfptr = (hkpCollidableCollidableFilterVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkpCollidableCollidableFilter};
+  this->hkpGroupFilter::hkpCollisionFilter::hkpShapeCollectionFilter::vfptr = (hkpShapeCollectionFilterVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkpShapeCollectionFilter};
+  this->hkpGroupFilter::hkpCollisionFilter::hkpRayShapeCollectionFilter::vfptr = (hkpRayShapeCollectionFilterVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkpRayShapeCollectionFilter};
+  this->hkpGroupFilter::hkpCollisionFilter::hkpRayCollidableFilter::vfptr = (hkpRayCollidableFilterVtbl *)&UFG::CustomCollisionFilter::`vftable{for `hkpRayCollidableFilter};
+  this->hkpEntityListener::vfptr = (hkpEntityListenerVtbl *)&UFG::CustomCollisionFilter::`vftable;
+  mAssignedSystemGroups = this->mAssignedSystemGroups;
+  if ( mAssignedSystemGroups )
   {
-    operator delete[](v2->mBuffer);
-    operator delete[](v2);
+    operator delete[](mAssignedSystemGroups->mBuffer);
+    operator delete[](mAssignedSystemGroups);
   }
-  v3 = &v1->mNonCollidable;
-  while ( (UFG::qList<UFG::FilterNode,UFG::FilterNode,1,0> *)v1->mNonCollidable.mNode.mNext != &v1->mNonCollidable )
+  p_mNonCollidable = &this->mNonCollidable;
+  while ( (UFG::qList<UFG::FilterNode,UFG::FilterNode,1,0> *)this->mNonCollidable.mNode.mNext != &this->mNonCollidable )
   {
-    v4 = v1->mNonCollidable.mNode.mNext;
-    v5 = v4->mPrev;
-    v6 = v4->mNext;
-    v5->mNext = v6;
-    v6->mPrev = v5;
-    v4->mPrev = v4;
-    v4->mNext = v4;
-    v7 = v4->mPrev;
-    v8 = v4->mNext;
+    mNext = this->mNonCollidable.mNode.mNext;
+    mPrev = mNext->mPrev;
+    v6 = mNext->mNext;
+    mPrev->mNext = v6;
+    v6->mPrev = mPrev;
+    mNext->mPrev = mNext;
+    mNext->mNext = mNext;
+    v7 = mNext->mPrev;
+    v8 = mNext->mNext;
     v7->mNext = v8;
     v8->mPrev = v7;
-    v4->mPrev = v4;
-    v4->mNext = v4;
-    UFG::qMemoryPool::Free(&gPhysicsMemoryPool, v4);
+    mNext->mPrev = mNext;
+    mNext->mNext = mNext;
+    UFG::qMemoryPool::Free(&gPhysicsMemoryPool, mNext);
   }
-  UFG::qList<UFG::FilterNode,UFG::FilterNode,1,0>::DeleteNodes(&v1->mNonCollidable);
-  v9 = v3->mNode.mPrev;
-  v10 = v1->mNonCollidable.mNode.mNext;
+  UFG::qList<UFG::FilterNode,UFG::FilterNode,1,0>::DeleteNodes(&this->mNonCollidable);
+  v9 = p_mNonCollidable->mNode.mPrev;
+  v10 = this->mNonCollidable.mNode.mNext;
   v9->mNext = v10;
   v10->mPrev = v9;
-  v3->mNode.mPrev = &v3->mNode;
-  v1->mNonCollidable.mNode.mNext = &v1->mNonCollidable.mNode;
-  v1->vfptr = (hkpEntityListenerVtbl *)&hkpEntityListener::`vftable;
-  hkpGroupFilter::~hkpGroupFilter((hkpGroupFilter *)&v1->vfptr);
+  p_mNonCollidable->mNode.mPrev = &p_mNonCollidable->mNode;
+  this->mNonCollidable.mNode.mNext = &this->mNonCollidable.mNode;
+  this->hkpEntityListener::vfptr = (hkpEntityListenerVtbl *)&hkpEntityListener::`vftable;
+  hkpGroupFilter::~hkpGroupFilter(this);
 }
 
 // File Line: 52
 // RVA: 0xB0210
 void __fastcall UFG::CustomCollisionFilter::ResetState(UFG::CustomCollisionFilter *this)
 {
-  UFG::CustomCollisionFilter *v1; // rbx
-  signed __int16 v2; // r8
-  int v3; // er10
-  signed int v4; // er9
-  UFG::Stack *v5; // rdx
-  UFG::qNode<UFG::FilterNode,UFG::FilterNode> *v6; // rdx
-  UFG::qNode<UFG::FilterNode,UFG::FilterNode> *v7; // rcx
+  __int16 v2; // r8
+  int v3; // r10d
+  int v4; // r9d
+  UFG::Stack *mAssignedSystemGroups; // rdx
+  UFG::qNode<UFG::FilterNode,UFG::FilterNode> *mNext; // rdx
+  UFG::qNode<UFG::FilterNode,UFG::FilterNode> *mPrev; // rcx
   UFG::qNode<UFG::FilterNode,UFG::FilterNode> *v8; // rax
   UFG::qNode<UFG::FilterNode,UFG::FilterNode> *v9; // rcx
   UFG::qNode<UFG::FilterNode,UFG::FilterNode> *v10; // rax
 
-  v1 = this;
   this->mAssignedSystemGroups->mHead = 0;
   v2 = 1;
   v3 = stack_size + 1;
@@ -122,202 +114,200 @@ void __fastcall UFG::CustomCollisionFilter::ResetState(UFG::CustomCollisionFilte
     v4 = 1;
     do
     {
-      v5 = this->mAssignedSystemGroups;
-      v5->mBuffer[v5->mHead++] = v4;
+      mAssignedSystemGroups = this->mAssignedSystemGroups;
+      mAssignedSystemGroups->mBuffer[mAssignedSystemGroups->mHead++] = v4;
       v4 = ++v2;
     }
     while ( v2 < v3 );
   }
-  if ( (UFG::qList<UFG::FilterNode,UFG::FilterNode,1,0> *)this->mNonCollidable.mNode.mNext != &this->mNonCollidable )
+  while ( (UFG::qList<UFG::FilterNode,UFG::FilterNode,1,0> *)this->mNonCollidable.mNode.mNext != &this->mNonCollidable )
   {
-    do
-    {
-      v6 = v1->mNonCollidable.mNode.mNext;
-      v7 = v6->mPrev;
-      v8 = v6->mNext;
-      v7->mNext = v8;
-      v8->mPrev = v7;
-      v6->mPrev = v6;
-      v6->mNext = v6;
-      v9 = v6->mPrev;
-      v10 = v6->mNext;
-      v9->mNext = v10;
-      v10->mPrev = v9;
-      v6->mPrev = v6;
-      v6->mNext = v6;
-      UFG::qMemoryPool::Free(&gPhysicsMemoryPool, v6);
-    }
-    while ( (UFG::qList<UFG::FilterNode,UFG::FilterNode,1,0> *)v1->mNonCollidable.mNode.mNext != &v1->mNonCollidable );
+    mNext = this->mNonCollidable.mNode.mNext;
+    mPrev = mNext->mPrev;
+    v8 = mNext->mNext;
+    mPrev->mNext = v8;
+    v8->mPrev = mPrev;
+    mNext->mPrev = mNext;
+    mNext->mNext = mNext;
+    v9 = mNext->mPrev;
+    v10 = mNext->mNext;
+    v9->mNext = v10;
+    v10->mPrev = v9;
+    mNext->mPrev = mNext;
+    mNext->mNext = mNext;
+    UFG::qMemoryPool::Free(&gPhysicsMemoryPool, mNext);
   }
 }
 
 // File Line: 85
 // RVA: 0xB81E0
-hkBool *__fastcall UFG::CustomCollisionFilter::isCollisionEnabled(UFG::CustomCollisionFilter *this, hkBool *result, hkpCollidable *a, hkpCollidable *b)
+hkBool *__fastcall UFG::CustomCollisionFilter::isCollisionEnabled(
+        UFG::CustomCollisionFilter *this,
+        hkBool *result,
+        hkpCollidable *a,
+        hkpCollidable *b)
 {
-  hkpEntityListenerVtbl *v4; // rax
-  hkBool *v5; // rbx
+  hkpEntityListenerVtbl *vfptr; // rax
   hkpCollidable *v6; // r11
-  hkpCollidable *v7; // r10
-  hkBool *v8; // rax
-  hkBool resulta; // [rsp+30h] [rbp+8h]
+  hkpCollidable *entityRemovedCallback; // r10
+  hkBool resulta; // [rsp+30h] [rbp+8h] BYREF
 
-  v4 = this->vfptr;
-  v5 = result;
-  if ( v4 == (hkpEntityListenerVtbl *)&this->m_pad256[3].m_quad.m128_u16[4] )
+  vfptr = this->hkpEntityListener::vfptr;
+  if ( vfptr == (hkpEntityListenerVtbl *)&this->m_pad256[3].m_quad.m128_u16[4] )
   {
 LABEL_8:
-    result->m_bool = hkpGroupFilter::isCollisionEnabled((hkpGroupFilter *)&this->vfptr, &resulta, a, b)->m_bool != 0;
-    v8 = v5;
+    result->m_bool = hkpGroupFilter::isCollisionEnabled(this, &resulta, a, b)->m_bool != 0;
+    return result;
   }
   else
   {
     v6 = (hkpCollidable *)((char *)a + a->m_ownerOffset);
     while ( 1 )
     {
-      v7 = (hkpCollidable *)v4->entityRemovedCallback;
-      if ( v6 == v7 && (char *)b + b->m_ownerOffset == (char *)v4->entityShapeSetCallback )
+      entityRemovedCallback = (hkpCollidable *)vfptr->entityRemovedCallback;
+      if ( v6 == entityRemovedCallback && (char *)b + b->m_ownerOffset == (char *)vfptr->entityShapeSetCallback )
         break;
-      if ( (hkpCollidable *)((char *)b + b->m_ownerOffset) == v7 && v6 == (hkpCollidable *)v4->entityShapeSetCallback )
+      if ( (hkpCollidable *)((char *)b + b->m_ownerOffset) == entityRemovedCallback
+        && v6 == (hkpCollidable *)vfptr->entityShapeSetCallback )
+      {
         break;
-      v4 = (hkpEntityListenerVtbl *)v4->entityAddedCallback;
-      if ( v4 == (hkpEntityListenerVtbl *)&this->m_pad256[3].m_quad.m128_u16[4] )
+      }
+      vfptr = (hkpEntityListenerVtbl *)vfptr->entityAddedCallback;
+      if ( vfptr == (hkpEntityListenerVtbl *)&this->m_pad256[3].m_quad.m128_u16[4] )
         goto LABEL_8;
     }
     result->m_bool = 0;
-    v8 = result;
+    return result;
   }
-  return v8;
 }
 
 // File Line: 105
 // RVA: 0xA7290
-void __fastcall UFG::CustomCollisionFilter::DisableCollisionsBetween(UFG::CustomCollisionFilter *this, hkpEntity *entityA, hkpEntity *entityB)
+void __fastcall UFG::CustomCollisionFilter::DisableCollisionsBetween(
+        UFG::CustomCollisionFilter *this,
+        hkpEntity *entityA,
+        hkpEntity *entityB)
 {
-  hkpEntity *v3; // rdi
-  hkpEntity *v4; // rsi
-  UFG::CustomCollisionFilter *v5; // r14
   bool v6; // r9
-  UFG::qNode<UFG::FilterNode,UFG::FilterNode> *v7; // rax
-  UFG::qList<UFG::FilterNode,UFG::FilterNode,1,0> *v8; // rbp
-  char *v9; // rax
-  char *v10; // rcx
-  signed int v11; // ebx
-  _QWORD *v12; // rax
-  hkpEntityListener *v13; // rbp
-  hkSmallArray<hkpEntityListener *> *v14; // rax
-  signed int v15; // ecx
-  signed int v16; // edx
-  hkpEntityListener **v17; // rax
-  bool v18; // r14
-  hkSmallArray<hkpEntityListener *> *v19; // rax
-  signed int v20; // ecx
-  hkpEntityListener **v21; // rax
-  bool v22; // bl
-  hkpWorld *v23; // rcx
-  hkpWorld *v24; // rcx
+  UFG::qNode<UFG::FilterNode,UFG::FilterNode> *mNext; // rax
+  UFG::qList<UFG::FilterNode,UFG::FilterNode,1,0> *p_mNonCollidable; // rbp
+  hkpEntity *mPrev; // rcx
+  char *v10; // rax
+  UFG::qNode<UFG::FilterNode,UFG::FilterNode> *v11; // rcx
+  int v12; // ebx
+  UFG::qNode<UFG::FilterNode,UFG::FilterNode> *v13; // rax
+  hkpEntityListener *v14; // rbp
+  hkSmallArray<hkpEntityListener *> *EntityListeners; // rax
+  int v16; // ecx
+  int m_size; // edx
+  hkpEntityListener **m_data; // rax
+  bool v19; // r14
+  hkSmallArray<hkpEntityListener *> *v20; // rax
+  int v21; // ecx
+  hkpEntityListener **v22; // rax
+  bool v23; // bl
+  hkpWorld *m_world; // rcx
+  hkpWorld *v25; // rcx
 
   if ( entityB )
   {
-    v3 = entityB;
-    v4 = entityA;
-    v5 = this;
     v6 = 0;
-    v7 = this->mNonCollidable.mNode.mNext;
-    v8 = &this->mNonCollidable;
-    if ( v7 == (UFG::qNode<UFG::FilterNode,UFG::FilterNode> *)&this->mNonCollidable )
+    mNext = this->mNonCollidable.mNode.mNext;
+    p_mNonCollidable = &this->mNonCollidable;
+    if ( mNext == (UFG::qNode<UFG::FilterNode,UFG::FilterNode> *)&this->mNonCollidable )
     {
-LABEL_10:
-      v9 = UFG::qMemoryPool::Allocate(&gPhysicsMemoryPool, 0x20ui64, "FilterNode", 0i64, 1u);
-      v10 = v9;
-      v11 = 0;
-      if ( v9 )
+LABEL_12:
+      v10 = UFG::qMemoryPool::Allocate(&gPhysicsMemoryPool, 0x20ui64, "FilterNode", 0i64, 1u);
+      v11 = (UFG::qNode<UFG::FilterNode,UFG::FilterNode> *)v10;
+      v12 = 0;
+      if ( v10 )
       {
-        *(_QWORD *)v9 = v9;
-        *((_QWORD *)v9 + 1) = v9;
+        *(_QWORD *)v10 = v10;
+        *((_QWORD *)v10 + 1) = v10;
       }
       else
       {
-        v10 = 0i64;
+        v11 = 0i64;
       }
-      *((_QWORD *)v10 + 2) = v4;
-      *((_QWORD *)v10 + 3) = v3;
-      v12 = &v8->mNode.mNext->mPrev;
-      v8->mNode.mNext = (UFG::qNode<UFG::FilterNode,UFG::FilterNode> *)v10;
-      *(_QWORD *)v10 = v8;
-      *((_QWORD *)v10 + 1) = v12;
-      *v12 = v10;
-      v13 = (hkpEntityListener *)&v5->vfptr;
-      v14 = hkpEntity::getEntityListeners(v4);
-      v15 = 0;
-      v16 = v14->m_size;
-      if ( v16 <= 0 )
+      v11[1].mPrev = (UFG::qNode<UFG::FilterNode,UFG::FilterNode> *)entityA;
+      v11[1].mNext = (UFG::qNode<UFG::FilterNode,UFG::FilterNode> *)entityB;
+      v13 = p_mNonCollidable->mNode.mNext;
+      p_mNonCollidable->mNode.mNext = v11;
+      v11->mPrev = &p_mNonCollidable->mNode;
+      v11->mNext = v13;
+      v13->mPrev = v11;
+      v14 = &this->hkpEntityListener;
+      EntityListeners = hkpEntity::getEntityListeners(entityA);
+      v16 = 0;
+      m_size = EntityListeners->m_size;
+      if ( EntityListeners->m_size )
       {
-LABEL_17:
-        v15 = -1;
-      }
-      else
-      {
-        v17 = v14->m_data;
-        while ( *v17 != v13 )
+        m_data = EntityListeners->m_data;
+        while ( *m_data != v14 )
         {
-          ++v15;
-          ++v17;
-          if ( v15 >= v16 )
-            goto LABEL_17;
+          ++v16;
+          ++m_data;
+          if ( v16 >= m_size )
+            goto LABEL_19;
         }
       }
-      v18 = v15 >= 0;
-      v19 = hkpEntity::getEntityListeners(v3);
-      v20 = v19->m_size;
-      if ( v20 <= 0 )
+      else
       {
-LABEL_22:
-        v11 = -1;
+LABEL_19:
+        v16 = -1;
+      }
+      v19 = v16 >= 0;
+      v20 = hkpEntity::getEntityListeners(entityB);
+      v21 = v20->m_size;
+      if ( v20->m_size )
+      {
+        v22 = v20->m_data;
+        while ( *v22 != v14 )
+        {
+          ++v12;
+          ++v22;
+          if ( v12 >= v21 )
+            goto LABEL_24;
+        }
       }
       else
       {
-        v21 = v19->m_data;
-        while ( *v21 != v13 )
-        {
-          ++v11;
-          ++v21;
-          if ( v11 >= v20 )
-            goto LABEL_22;
-        }
+LABEL_24:
+        v12 = -1;
       }
-      v22 = v11 >= 0;
-      v23 = v4->m_world;
-      if ( v23 && !v18 )
+      v23 = v12 >= 0;
+      m_world = entityA->m_world;
+      if ( m_world && !v19 )
         hkpWorld::updateCollisionFilterOnEntity(
-          v23,
-          v4,
+          m_world,
+          entityA,
           HK_UPDATE_FILTER_ON_ENTITY_DISABLE_ENTITY_ENTITY_COLLISIONS_ONLY,
           HK_UPDATE_COLLECTION_FILTER_PROCESS_SHAPE_COLLECTIONS);
-      v24 = v3->m_world;
-      if ( v24 && !v22 )
+      v25 = entityB->m_world;
+      if ( v25 && !v23 )
         hkpWorld::updateCollisionFilterOnEntity(
-          v24,
-          v3,
+          v25,
+          entityB,
           HK_UPDATE_FILTER_ON_ENTITY_DISABLE_ENTITY_ENTITY_COLLISIONS_ONLY,
           HK_UPDATE_COLLECTION_FILTER_PROCESS_SHAPE_COLLECTIONS);
-      if ( !v18 )
-        hkpEntity::addEntityListener(v4, v13);
-      if ( !v22 )
-        hkpEntity::addEntityListener(v3, v13);
+      if ( !v19 )
+        hkpEntity::addEntityListener(entityA, v14);
+      if ( !v23 )
+        hkpEntity::addEntityListener(entityB, v14);
     }
     else
     {
       while ( !v6 )
       {
-        v6 = *(_OWORD *)&v7[1] == __PAIR__((unsigned __int64)entityB, (unsigned __int64)entityA)
-          || __PAIR__(v7[1].mPrev, (unsigned __int64)entityA) == __PAIR__((unsigned __int64)entityB, v7[1].mNext);
-        v7 = v7->mNext;
-        if ( v7 == (UFG::qNode<UFG::FilterNode,UFG::FilterNode> *)v8 )
+        mPrev = (hkpEntity *)mNext[1].mPrev;
+        v6 = mPrev == entityA && (hkpEntity *)mNext[1].mNext == entityB
+          || mPrev == entityB && (hkpEntity *)mNext[1].mNext == entityA;
+        mNext = mNext->mNext;
+        if ( mNext == (UFG::qNode<UFG::FilterNode,UFG::FilterNode> *)p_mNonCollidable )
         {
           if ( v6 )
             return;
-          goto LABEL_10;
+          goto LABEL_12;
         }
       }
     }
@@ -326,87 +316,80 @@ LABEL_22:
 
 // File Line: 162
 // RVA: 0xAE550
-char __fastcall UFG::CustomCollisionFilter::ReenableCollisionsBetween(UFG::CustomCollisionFilter *this, hkpEntity *entityA, hkpEntity *entityB)
+char __fastcall UFG::CustomCollisionFilter::ReenableCollisionsBetween(
+        UFG::CustomCollisionFilter *this,
+        hkpEntity *entityA,
+        hkpEntity *entityB)
 {
-  hkpEntity *v3; // rdi
-  hkpEntity *v4; // rsi
-  UFG::CustomCollisionFilter *v5; // rbp
-  UFG::qNode<UFG::FilterNode,UFG::FilterNode> *v7; // rdx
-  UFG::qList<UFG::FilterNode,UFG::FilterNode,1,0> *v8; // rcx
-  hkpEntity *v9; // rax
+  UFG::qNode<UFG::FilterNode,UFG::FilterNode> *mNext; // rdx
+  UFG::qList<UFG::FilterNode,UFG::FilterNode,1,0> *p_mNonCollidable; // rcx
+  hkpEntity *mPrev; // rax
   UFG::qNode<UFG::FilterNode,UFG::FilterNode> *v10; // rcx
   UFG::qNode<UFG::FilterNode,UFG::FilterNode> *v11; // rax
   UFG::qNode<UFG::FilterNode,UFG::FilterNode> *v12; // rcx
   UFG::qNode<UFG::FilterNode,UFG::FilterNode> *v13; // rax
   hkpEntityListener *v14; // rbp
-  hkSmallArray<hkpEntityListener *> *v15; // rax
-  signed int v16; // ebx
-  signed int v17; // ecx
-  signed int v18; // edx
-  hkpEntityListener **v19; // rax
+  hkSmallArray<hkpEntityListener *> *EntityListeners; // rax
+  int v16; // ebx
+  int v17; // ecx
+  int m_size; // edx
+  hkpEntityListener **m_data; // rax
   bool v20; // r14
   hkSmallArray<hkpEntityListener *> *v21; // rax
-  signed int v22; // ecx
+  int v22; // ecx
   hkpEntityListener **v23; // rax
   bool v24; // bl
-  hkpWorld *v25; // rcx
+  hkpWorld *m_world; // rcx
   hkpWorld *v26; // rcx
 
-  v3 = entityB;
-  v4 = entityA;
-  v5 = this;
   if ( !entityB )
     return 0;
-  v7 = this->mNonCollidable.mNode.mNext;
-  v8 = &this->mNonCollidable;
-  while ( v7 != (UFG::qNode<UFG::FilterNode,UFG::FilterNode> *)v8 )
+  mNext = this->mNonCollidable.mNode.mNext;
+  p_mNonCollidable = &this->mNonCollidable;
+  while ( mNext != (UFG::qNode<UFG::FilterNode,UFG::FilterNode> *)p_mNonCollidable )
   {
-    v9 = (hkpEntity *)v7[1].mPrev;
-    if ( v9 == v4 && (hkpEntity *)v7[1].mNext == entityB || v9 == entityB && (hkpEntity *)v7[1].mNext == v4 )
+    mPrev = (hkpEntity *)mNext[1].mPrev;
+    if ( mPrev == entityA && (hkpEntity *)mNext[1].mNext == entityB
+      || mPrev == entityB && (hkpEntity *)mNext[1].mNext == entityA )
     {
-      v10 = v7->mPrev;
-      v11 = v7->mNext;
+      v10 = mNext->mPrev;
+      v11 = mNext->mNext;
       v10->mNext = v11;
       v11->mPrev = v10;
-      v7->mPrev = v7;
-      v7->mNext = v7;
-      v12 = v7->mPrev;
-      v13 = v7->mNext;
+      mNext->mPrev = mNext;
+      mNext->mNext = mNext;
+      v12 = mNext->mPrev;
+      v13 = mNext->mNext;
       v12->mNext = v13;
       v13->mPrev = v12;
-      v7->mPrev = v7;
-      v7->mNext = v7;
-      UFG::qMemoryPool::Free(&gPhysicsMemoryPool, v7);
-      v14 = (hkpEntityListener *)&v5->vfptr;
-      v15 = hkpEntity::getEntityListeners(v4);
+      mNext->mPrev = mNext;
+      mNext->mNext = mNext;
+      UFG::qMemoryPool::Free(&gPhysicsMemoryPool, mNext);
+      v14 = &this->hkpEntityListener;
+      EntityListeners = hkpEntity::getEntityListeners(entityA);
       v16 = 0;
       v17 = 0;
-      v18 = v15->m_size;
-      if ( v18 <= 0 )
+      m_size = EntityListeners->m_size;
+      if ( EntityListeners->m_size )
+      {
+        m_data = EntityListeners->m_data;
+        while ( *m_data != v14 )
+        {
+          ++v17;
+          ++m_data;
+          if ( v17 >= m_size )
+            goto LABEL_14;
+        }
+      }
+      else
       {
 LABEL_14:
         v17 = -1;
       }
-      else
-      {
-        v19 = v15->m_data;
-        while ( *v19 != v14 )
-        {
-          ++v17;
-          ++v19;
-          if ( v17 >= v18 )
-            goto LABEL_14;
-        }
-      }
       v20 = v17 >= 0;
-      v21 = hkpEntity::getEntityListeners(v3);
+      v21 = hkpEntity::getEntityListeners(entityB);
       v22 = v21->m_size;
-      if ( v22 <= 0 )
-      {
-LABEL_19:
-        v16 = -1;
-      }
-      else
+      if ( v21->m_size )
       {
         v23 = v21->m_data;
         while ( *v23 != v14 )
@@ -417,20 +400,33 @@ LABEL_19:
             goto LABEL_19;
         }
       }
+      else
+      {
+LABEL_19:
+        v16 = -1;
+      }
       v24 = v16 >= 0;
-      v25 = v4->m_world;
-      if ( v25 && v20 )
-        hkpWorld::updateCollisionFilterOnEntity(v25, v4, 0, HK_UPDATE_COLLECTION_FILTER_PROCESS_SHAPE_COLLECTIONS);
-      v26 = v3->m_world;
+      m_world = entityA->m_world;
+      if ( m_world && v20 )
+        hkpWorld::updateCollisionFilterOnEntity(
+          m_world,
+          entityA,
+          HK_UPDATE_FILTER_ON_ENTITY_FULL_CHECK,
+          HK_UPDATE_COLLECTION_FILTER_PROCESS_SHAPE_COLLECTIONS);
+      v26 = entityB->m_world;
       if ( v26 && v24 )
-        hkpWorld::updateCollisionFilterOnEntity(v26, v3, 0, HK_UPDATE_COLLECTION_FILTER_PROCESS_SHAPE_COLLECTIONS);
+        hkpWorld::updateCollisionFilterOnEntity(
+          v26,
+          entityB,
+          HK_UPDATE_FILTER_ON_ENTITY_FULL_CHECK,
+          HK_UPDATE_COLLECTION_FILTER_PROCESS_SHAPE_COLLECTIONS);
       if ( v20 )
-        hkpEntity::removeEntityListener(v4, v14);
+        hkpEntity::removeEntityListener(entityA, v14);
       if ( v24 )
-        hkpEntity::removeEntityListener(v3, v14);
+        hkpEntity::removeEntityListener(entityB, v14);
       return 1;
     }
-    v7 = v7->mNext;
+    mNext = mNext->mNext;
   }
   return 1;
 }
@@ -439,98 +435,101 @@ LABEL_19:
 // RVA: 0xAE3D0
 __int64 __fastcall UFG::CustomCollisionFilter::ReenableCollisions(UFG::CustomCollisionFilter *this, hkpEntity *entity)
 {
-  hkpEntity *v2; // rdi
-  UFG::CustomCollisionFilter *v3; // r15
   unsigned __int8 v4; // si
-  UFG::CustomCollisionFilter *v5; // rbx
-  UFG::qList<UFG::FilterNode,UFG::FilterNode,1,0> *v6; // r12
+  UFG::CustomCollisionFilter *mNext; // rbx
+  UFG::qList<UFG::FilterNode,UFG::FilterNode,1,0> *p_mNonCollidable; // r12
   UFG::CustomCollisionFilter *v7; // r14
-  _QWORD **v8; // rax
+  _QWORD **Value; // rax
   __int64 v9; // rax
-  hkpEntity::ExtendedListeners *v10; // rcx
-  signed int v11; // eax
-  signed int v12; // edx
-  UFG::CustomCollisionFilter **v13; // rcx
+  hkpEntity::ExtendedListeners *m_extendedListeners; // rcx
+  int v11; // eax
+  int m_size; // edx
+  UFG::CustomCollisionFilter **m_data; // rcx
   bool v14; // si
-  hkpWorld *v15; // rcx
-  hkBaseObjectVtbl *v16; // r8
+  hkpWorld *m_world; // rcx
+  hkBaseObjectVtbl *vfptr; // r8
   hkBaseObjectVtbl **v17; // rcx
 
-  v2 = entity;
-  v3 = this;
   v4 = 0;
-  v5 = (UFG::CustomCollisionFilter *)this->mNonCollidable.mNode.mNext;
-  v6 = &this->mNonCollidable;
-  if ( v5 != (UFG::CustomCollisionFilter *)&this->mNonCollidable )
+  mNext = (UFG::CustomCollisionFilter *)this->mNonCollidable.mNode.mNext;
+  p_mNonCollidable = &this->mNonCollidable;
+  if ( mNext != (UFG::CustomCollisionFilter *)&this->mNonCollidable )
   {
     while ( 1 )
     {
-      v7 = *(UFG::CustomCollisionFilter **)&v5->m_memSizeAndFlags;
-      if ( (hkpEntity *)v5->vfptr != v2 && (hkpEntity *)v5->vfptr != v2 )
+      v7 = *(UFG::CustomCollisionFilter **)&mNext->m_memSizeAndFlags;
+      if ( (hkpEntity *)mNext->hkpGroupFilter::hkpCollisionFilter::hkpCollidableCollidableFilter::vfptr != entity
+        && (hkpEntity *)mNext->hkpGroupFilter::hkpCollisionFilter::hkpShapeCollectionFilter::vfptr != entity )
+      {
         goto LABEL_21;
+      }
       if ( !v4 )
       {
-        if ( !v2->m_extendedListeners )
+        if ( !entity->m_extendedListeners )
         {
-          v8 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-          v9 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v8[11] + 8i64))(v8[11], 32i64);
+          Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+          v9 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 32i64);
           if ( v9 )
           {
             *(_QWORD *)v9 = 0i64;
-            *(_DWORD *)(v9 + 8) = 2147483648;
+            *(_DWORD *)(v9 + 8) = 0x80000000;
             *(_QWORD *)(v9 + 16) = 0i64;
-            *(_DWORD *)(v9 + 24) = 2147483648;
+            *(_DWORD *)(v9 + 24) = 0x80000000;
           }
           else
           {
             v9 = 0i64;
           }
-          v2->m_extendedListeners = (hkpEntity::ExtendedListeners *)v9;
+          entity->m_extendedListeners = (hkpEntity::ExtendedListeners *)v9;
         }
-        v10 = v2->m_extendedListeners;
+        m_extendedListeners = entity->m_extendedListeners;
         v11 = 0;
-        v12 = v10->m_entityListeners.m_size;
-        if ( v12 <= 0 )
+        m_size = m_extendedListeners->m_entityListeners.m_size;
+        if ( m_extendedListeners->m_entityListeners.m_size )
+        {
+          m_data = (UFG::CustomCollisionFilter **)m_extendedListeners->m_entityListeners.m_data;
+          while ( *m_data != (UFG::CustomCollisionFilter *)&this->hkpEntityListener )
+          {
+            ++v11;
+            ++m_data;
+            if ( v11 >= m_size )
+              goto LABEL_14;
+          }
+        }
+        else
         {
 LABEL_14:
           v11 = -1;
         }
-        else
-        {
-          v13 = (UFG::CustomCollisionFilter **)v10->m_entityListeners.m_data;
-          while ( *v13 != (UFG::CustomCollisionFilter *)&v3->vfptr )
-          {
-            ++v11;
-            ++v13;
-            if ( v11 >= v12 )
-              goto LABEL_14;
-          }
-        }
         v14 = v11 >= 0;
-        v15 = v2->m_world;
-        if ( !v15 )
+        m_world = entity->m_world;
+        if ( !m_world )
           goto LABEL_18;
         if ( v11 >= 0 )
           break;
       }
 LABEL_20:
       v4 = 1;
-      v16 = v5->vfptr;
-      v17 = *(hkBaseObjectVtbl ***)&v5->m_memSizeAndFlags;
-      v16->__first_virtual_table_function__ = (void (__fastcall *)(hkBaseObject *))v17;
-      *v17 = v16;
-      v5->vfptr = (hkBaseObjectVtbl *)v5;
-      *(_QWORD *)&v5->m_memSizeAndFlags = v5;
-      UFG::qMemoryPool::Free(&gPhysicsMemoryPool, v5);
+      vfptr = mNext->hkpGroupFilter::hkpCollisionFilter::hkReferencedObject::hkBaseObject::vfptr;
+      v17 = *(hkBaseObjectVtbl ***)&mNext->m_memSizeAndFlags;
+      vfptr->__first_virtual_table_function__ = (void (__fastcall *)(hkBaseObject *))v17;
+      *v17 = vfptr;
+      mNext->hkpGroupFilter::hkpCollisionFilter::hkReferencedObject::hkBaseObject::vfptr = (hkBaseObjectVtbl *)mNext;
+      *(_QWORD *)&mNext->m_memSizeAndFlags = mNext;
+      UFG::qMemoryPool::Free(&gPhysicsMemoryPool, mNext);
 LABEL_21:
-      v5 = v7;
-      if ( v7 == (UFG::CustomCollisionFilter *)v6 )
+      mNext = v7;
+      if ( v7 == (UFG::CustomCollisionFilter *)p_mNonCollidable )
         return v4;
     }
-    hkpWorld::updateCollisionFilterOnEntity(v15, v2, 0, HK_UPDATE_COLLECTION_FILTER_PROCESS_SHAPE_COLLECTIONS);
+    hkpWorld::updateCollisionFilterOnEntity(
+      m_world,
+      entity,
+      HK_UPDATE_FILTER_ON_ENTITY_FULL_CHECK,
+      HK_UPDATE_COLLECTION_FILTER_PROCESS_SHAPE_COLLECTIONS);
 LABEL_18:
     if ( v14 )
-      hkpEntity::removeEntityListener(v2, (hkpEntityListener *)&v3->vfptr);
+      hkpEntity::removeEntityListener(entity, &this->hkpEntityListener);
     goto LABEL_20;
   }
   return v4;
@@ -540,61 +539,59 @@ LABEL_18:
 // RVA: 0xAB780
 __int64 __fastcall UFG::CustomCollisionFilter::GetUnusedSystemId(UFG::CustomCollisionFilter *this)
 {
-  UFG::Stack *v1; // r8
+  UFG::Stack *mAssignedSystemGroups; // r8
 
-  v1 = this->mAssignedSystemGroups;
-  return v1->mBuffer[v1->mHead-- - 1];
+  mAssignedSystemGroups = this->mAssignedSystemGroups;
+  return mAssignedSystemGroups->mBuffer[--mAssignedSystemGroups->mHead];
 }
 
 // File Line: 263
 // RVA: 0xAF3E0
-void __fastcall UFG::CustomCollisionFilter::ReleaseSystemId(UFG::CustomCollisionFilter *this, unsigned __int16 systemId)
+void __fastcall UFG::CustomCollisionFilter::ReleaseSystemId(
+        UFG::CustomCollisionFilter *this,
+        unsigned __int16 systemId)
 {
-  UFG::Stack *v2; // r8
+  UFG::Stack *mAssignedSystemGroups; // r8
 
-  v2 = this->mAssignedSystemGroups;
-  v2->mBuffer[v2->mHead++] = systemId;
+  mAssignedSystemGroups = this->mAssignedSystemGroups;
+  mAssignedSystemGroups->mBuffer[mAssignedSystemGroups->mHead++] = systemId;
 }
 
 // File Line: 271
 // RVA: 0xB7E00
 void __fastcall UFG::CustomCollisionFilter::entityDeletedCallback(UFG::CustomCollisionFilter *this, hkpEntity *entity)
 {
-  hkpEntity *v2; // rdi
-  UFG::CustomCollisionFilter *v3; // rbx
   hkpEntityListener *v4; // rdx
-  hkpCollidableCollidableFilterVtbl *v5; // rdx
-  signed __int64 v6; // rsi
-  hkBool *(__fastcall *v7)(hkpCollidableCollidableFilter *, hkBool *, hkpCollidable *, hkpCollidable *); // rbx
-  void *(__fastcall *v8)(hkpCollidableCollidableFilter *, unsigned int); // rcx
+  hkpCollidableCollidableFilterVtbl *vfptr; // rdx
+  unsigned __int16 *p_m_memSizeAndFlags; // rsi
+  hkBool *(__fastcall *isCollisionEnabled)(hkpCollidableCollidableFilter *, hkBool *, hkpCollidable *, hkpCollidable *); // rbx
+  void *(__fastcall *vecDelDtor)(hkpCollidableCollidableFilter *, unsigned int); // rcx
   hkBool *(__fastcall *v9)(hkpCollidableCollidableFilter *, hkBool *, hkpCollidable *, hkpCollidable *); // rax
 
-  v2 = entity;
-  v3 = this;
   v4 = 0i64;
   if ( this != (UFG::CustomCollisionFilter *)272 )
     v4 = (hkpEntityListener *)this;
-  hkpEntity::removeEntityListener(v2, v4);
-  v5 = v3->vfptr;
-  v6 = (signed __int64)&v3->m_memSizeAndFlags;
-  if ( v5 != (hkpCollidableCollidableFilterVtbl *)&v3->m_memSizeAndFlags )
+  hkpEntity::removeEntityListener(entity, v4);
+  vfptr = this->hkpGroupFilter::hkpCollisionFilter::hkpCollidableCollidableFilter::vfptr;
+  p_m_memSizeAndFlags = &this->m_memSizeAndFlags;
+  if ( vfptr != (hkpCollidableCollidableFilterVtbl *)&this->m_memSizeAndFlags )
   {
     do
     {
-      v7 = v5->isCollisionEnabled;
-      if ( (hkpEntity *)v5[1].__vecDelDtor == v2 || (hkpEntity *)v5[1].isCollisionEnabled == v2 )
+      isCollisionEnabled = vfptr->isCollisionEnabled;
+      if ( (hkpEntity *)vfptr[1].__vecDelDtor == entity || (hkpEntity *)vfptr[1].isCollisionEnabled == entity )
       {
-        v8 = v5->__vecDelDtor;
-        v9 = v5->isCollisionEnabled;
-        *((_QWORD *)v8 + 1) = v9;
-        *(_QWORD *)v9 = v8;
-        v5->__vecDelDtor = (void *(__fastcall *)(hkpCollidableCollidableFilter *, unsigned int))v5;
-        v5->isCollisionEnabled = (hkBool *(__fastcall *)(hkpCollidableCollidableFilter *, hkBool *, hkpCollidable *, hkpCollidable *))v5;
-        UFG::qMemoryPool::Free(&gPhysicsMemoryPool, v5);
+        vecDelDtor = vfptr->__vecDelDtor;
+        v9 = vfptr->isCollisionEnabled;
+        *((_QWORD *)vecDelDtor + 1) = v9;
+        *(_QWORD *)v9 = vecDelDtor;
+        vfptr->__vecDelDtor = (void *(__fastcall *)(hkpCollidableCollidableFilter *, unsigned int))vfptr;
+        vfptr->isCollisionEnabled = (hkBool *(__fastcall *)(hkpCollidableCollidableFilter *, hkBool *, hkpCollidable *, hkpCollidable *))vfptr;
+        UFG::qMemoryPool::Free(&gPhysicsMemoryPool, vfptr);
       }
-      v5 = (hkpCollidableCollidableFilterVtbl *)v7;
+      vfptr = (hkpCollidableCollidableFilterVtbl *)isCollisionEnabled;
     }
-    while ( v7 != (hkBool *(__fastcall *)(hkpCollidableCollidableFilter *, hkBool *, hkpCollidable *, hkpCollidable *))v6 );
+    while ( (char *)isCollisionEnabled != (char *)p_m_memSizeAndFlags );
   }
 }
 

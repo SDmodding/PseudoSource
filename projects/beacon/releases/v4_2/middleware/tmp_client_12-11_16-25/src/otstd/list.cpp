@@ -12,7 +12,9 @@ OSuite::ZListBase *__fastcall OSuite::ZListBase::operator=(OSuite::ZListBase *th
 
 // File Line: 54
 // RVA: 0xEE4C2C
-void __fastcall OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(OSuite::ZListBase::ZListIteratorBase *this, OSuite::ZListBase *pList)
+void __fastcall OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(
+        OSuite::ZListBase::ZListIteratorBase *this,
+        OSuite::ZListBase *pList)
 {
   this->m_nIndex = 0i64;
   this->m_pListBase = pList;
@@ -36,13 +38,13 @@ bool __fastcall OSuite::ZListBase::ZListIteratorBase::operator bool(OSuite::ZLis
 // RVA: 0xEE4C78
 void __fastcall OSuite::ZListBase::ZListIteratorBase::Next(OSuite::ZListBase::ZListIteratorBase *this)
 {
-  unsigned __int64 v1; // r8
-  unsigned __int64 v2; // rdx
+  unsigned __int64 m_nIndex; // r8
+  unsigned __int64 m_nTop; // rdx
 
-  v1 = this->m_nIndex;
-  v2 = this->m_pListBase->m_nTop;
-  this->m_nIndex = v1 + 1;
-  if ( v1 == v2 )
+  m_nIndex = this->m_nIndex;
+  m_nTop = this->m_pListBase->m_nTop;
+  this->m_nIndex = m_nIndex + 1;
+  if ( m_nIndex == m_nTop )
     this->m_nIndex = 0i64;
 }
 
@@ -50,6 +52,6 @@ void __fastcall OSuite::ZListBase::ZListIteratorBase::Next(OSuite::ZListBase::ZL
 // RVA: 0xEE4C98
 void __fastcall OSuite::ZListBase::ZListIteratorBase::Remove(OSuite::ZListBase::ZListIteratorBase *this)
 {
-  this->m_pListBase->vfptr[1].__vecDelDtor((OSuite::ZObject *)this->m_pListBase, this->m_nIndex);
+  this->m_pListBase->vfptr[1].__vecDelDtor(this->m_pListBase, this->m_nIndex);
 }
 

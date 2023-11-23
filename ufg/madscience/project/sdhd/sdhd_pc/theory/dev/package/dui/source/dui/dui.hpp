@@ -2,17 +2,17 @@
 // RVA: 0x197470
 bool __fastcall UFG::DUIRect::Contains(UFG::DUIRect *this, UFG::DUIPoint *point)
 {
-  int v2; // edx
-  int v3; // er8
+  int mY; // edx
+  int v3; // r8d
   bool result; // al
 
   result = 0;
   if ( point->mX >= this->mX && point->mX <= this->mW + this->mX )
   {
-    v2 = point->mY;
+    mY = point->mY;
     v3 = this->mY;
-    if ( v2 >= v3 && v2 <= this->mH + v3 - 1 )
-      result = 1;
+    if ( mY >= v3 && mY <= this->mH + v3 - 1 )
+      return 1;
   }
   return result;
 }
@@ -21,37 +21,35 @@ bool __fastcall UFG::DUIRect::Contains(UFG::DUIRect *this, UFG::DUIPoint *point)
 // RVA: 0x1973F0
 bool __fastcall UFG::DUIRect::Contains(UFG::DUIRect *this, UFG::DUIRect *rect)
 {
-  int v2; // er11
+  int mX; // r11d
   int v3; // ebx
-  int v4; // er9
-  UFG::DUIRect *v5; // r8
+  int mY; // r9d
   int v6; // edi
   int v7; // edx
-  int v8; // er10
-  int v9; // er11
+  int v8; // r10d
+  int v9; // r11d
   int v10; // ecx
   bool result; // al
 
-  v2 = rect->mX;
+  mX = rect->mX;
   v3 = this->mX;
-  v4 = rect->mY;
-  v5 = rect;
+  mY = rect->mY;
   result = 0;
   if ( rect->mX >= this->mX )
   {
     v6 = this->mW + v3;
-    if ( v2 <= v6 )
+    if ( mX <= v6 )
     {
       v7 = this->mY;
-      if ( v4 >= v7 )
+      if ( mY >= v7 )
       {
         v8 = this->mH + v7 - 1;
-        if ( v4 <= v8 )
+        if ( mY <= v8 )
         {
-          v9 = v5->mW + v2;
-          v10 = v4 + v5->mH;
+          v9 = rect->mW + mX;
+          v10 = mY + rect->mH;
           if ( v9 >= v3 && v9 <= v6 && v10 >= v7 && v10 <= v8 )
-            result = 1;
+            return 1;
         }
       }
     }
@@ -63,17 +61,17 @@ bool __fastcall UFG::DUIRect::Contains(UFG::DUIRect *this, UFG::DUIRect *rect)
 // RVA: 0x19BF50
 bool __fastcall UFG::DUIRect::Overlaps(UFG::DUIRect *this, UFG::DUIRect *rect)
 {
-  int v2; // er8
-  int v3; // er10
+  int mY; // r8d
+  int v3; // r10d
   bool result; // al
 
   result = 0;
   if ( this->mX < rect->mX + rect->mW && this->mX + this->mW > rect->mX )
   {
-    v2 = rect->mY;
+    mY = rect->mY;
     v3 = this->mY;
-    if ( v3 < v2 + rect->mH && v3 + this->mH > v2 )
-      result = 1;
+    if ( v3 < mY + rect->mH && v3 + this->mH > mY )
+      return 1;
   }
   return result;
 }
@@ -82,274 +80,243 @@ bool __fastcall UFG::DUIRect::Overlaps(UFG::DUIRect *this, UFG::DUIRect *rect)
 // RVA: 0x19BE90
 __int64 __fastcall UFG::DUIRect::OverlappedArea(UFG::DUIRect *this, UFG::DUIRect *rect)
 {
-  int v2; // edi
+  int mX; // edi
   int v3; // esi
   int v4; // ebp
-  int v5; // er14
-  int v6; // er15
-  int v7; // er12
-  int v8; // er13
-  int v9; // ebx
+  int mW; // r14d
+  int mY; // r15d
+  int v7; // r12d
+  int v8; // r13d
+  int mH; // ebx
 
-  v2 = rect->mX;
+  mX = rect->mX;
   v3 = this->mX;
   v4 = rect->mX + rect->mW;
   if ( this->mX >= v4 )
     return 0i64;
-  v5 = this->mW;
-  if ( v5 + v3 <= v2 )
+  mW = this->mW;
+  if ( mW + v3 <= mX )
     return 0i64;
-  v6 = rect->mY;
+  mY = rect->mY;
   v7 = this->mY;
-  v8 = v6 + rect->mH;
+  v8 = mY + rect->mH;
   if ( v7 >= v8 )
     return 0i64;
-  v9 = this->mH;
-  if ( v9 + v7 <= v6 )
+  mH = this->mH;
+  if ( mH + v7 <= mY )
     return 0i64;
   if ( UFG::DUIRect::Contains(this, rect) )
-    return (unsigned int)(v5 * v9);
-  if ( v3 > v2 )
-    v2 = v3;
-  if ( v7 > v6 )
-    v6 = v7;
-  if ( v9 + v7 < v8 )
-    v8 = v9 + v7;
-  if ( v5 + v3 < v4 )
-    v4 = v5 + v3;
-  return (unsigned int)((v8 - v6) * (v4 - v2));
+    return (unsigned int)(mW * mH);
+  if ( v3 > mX )
+    mX = v3;
+  if ( v7 > mY )
+    mY = v7;
+  if ( mH + v7 < v8 )
+    v8 = mH + v7;
+  if ( mW + v3 < v4 )
+    v4 = mW + v3;
+  return (unsigned int)((v8 - mY) * (v4 - mX));
 }
 
 // File Line: 283
 // RVA: 0x19A330
 UFG::DUIRect *__fastcall UFG::DUIRect::Merge(UFG::DUIRect *this, UFG::DUIRect *rect)
 {
-  int v2; // ebx
-  int v3; // er8
-  int v4; // er10
-  int v5; // edi
+  int mX; // ebx
+  int v3; // r8d
+  int mY; // r10d
+  int mH; // edi
   int v6; // ebp
-  int v7; // er11
-  UFG::DUIRect *v8; // r14
+  int v7; // r11d
   int v9; // esi
   int v10; // eax
   int v11; // edx
-  int v12; // er9
+  int v12; // r9d
   int v13; // ecx
   int v14; // eax
   int v15; // edi
-  int v16; // er9
+  int v16; // r9d
   int v17; // ecx
   int v18; // eax
 
-  v2 = rect->mX;
+  mX = rect->mX;
   v3 = this->mX;
-  v4 = rect->mY;
-  v5 = rect->mH;
+  mY = rect->mY;
+  mH = rect->mH;
   v6 = rect->mX + rect->mW;
   v7 = this->mX + this->mW;
-  v8 = this;
-  v9 = rect->mX + rect->mW;
+  v9 = v6;
   v10 = rect->mX;
   v11 = this->mY;
   v12 = this->mH;
-  if ( this->mX < v2 )
+  if ( this->mX < mX )
     v10 = this->mX;
   v13 = this->mX + this->mW;
   if ( v10 < v7 )
     v13 = v10;
-  v14 = v4;
+  v14 = mY;
   if ( v13 < v6 )
     v9 = v13;
-  v15 = v4 + v5;
+  v15 = mY + mH;
   v16 = v11 + v12;
   v17 = v16;
-  v8->mX = v9;
-  if ( v11 < v4 )
+  this->mX = v9;
+  if ( v11 < mY )
     v14 = v11;
   if ( v14 < v16 )
     v17 = v14;
   v18 = v15;
   if ( v17 < v15 )
     v18 = v17;
-  if ( v3 > v2 )
-    v2 = v3;
-  v8->mY = v18;
-  if ( v2 > v7 )
-    v7 = v2;
+  if ( v3 > mX )
+    mX = v3;
+  this->mY = v18;
+  if ( mX > v7 )
+    v7 = mX;
   if ( v7 > v6 )
     v6 = v7;
-  if ( v11 > v4 )
-    v4 = v11;
-  if ( v4 > v16 )
-    v16 = v4;
+  if ( v11 > mY )
+    mY = v11;
+  if ( mY > v16 )
+    v16 = mY;
   if ( v16 > v15 )
     v15 = v16;
-  v8->mW = v6 - v9;
-  v8->mH = v15 - v18;
-  return v8;
+  this->mW = v6 - v9;
+  this->mH = v15 - v18;
+  return this;
 }
 
 // File Line: 612
 // RVA: 0x1531A0
 void __fastcall UFG::DUIWindow::DUIWindow(UFG::DUIWindow *this)
 {
-  UFG::DUIWindow *v1; // rdi
-  UFG::qNode<UFG::DUIWindow,UFG::DUIWindow> *v2; // rax
-  UFG::qNode<UFG::DUIWindow,UFG::DUIManager> *v3; // rax
-  UFG::qReflectString *v4; // [rsp+48h] [rbp+10h]
-  UFG::qReflectString *v5; // [rsp+48h] [rbp+10h]
-
-  v1 = this;
-  UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>((UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject> *)&this->vfptr);
-  v2 = (UFG::qNode<UFG::DUIWindow,UFG::DUIWindow> *)&v1->mPrev;
-  v2->mPrev = v2;
-  v2->mNext = v2;
-  v3 = (UFG::qNode<UFG::DUIWindow,UFG::DUIManager> *)&v1->mPrev;
-  v3->mPrev = v3;
-  v3->mNext = v3;
-  UFG::qSafePointerNode<UFG::DUIWindow>::qSafePointerNode<UFG::DUIWindow>((UFG::qSafePointerNode<UFG::DUIWindow> *)&v1->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
-  v4 = &v1->mGroupTag;
-  *(_QWORD *)&v4->mText.mData.mNumItems = 0i64;
-  v4->mText.mData.mItems = 0i64;
-  v5 = &v1->mSurfaceName;
-  *(_QWORD *)&v5->mText.mData.mNumItems = 0i64;
-  v5->mText.mData.mItems = 0i64;
-  UFG::qString::qString(&v1->mTitle);
-  UFG::DUIWindow::Init(v1);
+  UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>(this);
+  this->UFG::qNode<UFG::DUIWindow,UFG::DUIWindow>::mPrev = &this->UFG::qNode<UFG::DUIWindow,UFG::DUIWindow>;
+  this->UFG::qNode<UFG::DUIWindow,UFG::DUIWindow>::mNext = &this->UFG::qNode<UFG::DUIWindow,UFG::DUIWindow>;
+  this->UFG::qNode<UFG::DUIWindow,UFG::DUIManager>::mPrev = &this->UFG::qNode<UFG::DUIWindow,UFG::DUIManager>;
+  this->UFG::qNode<UFG::DUIWindow,UFG::DUIManager>::mNext = &this->UFG::qNode<UFG::DUIWindow,UFG::DUIManager>;
+  UFG::qSafePointerNode<UFG::DUIWindow>::qSafePointerNode<UFG::DUIWindow>(&this->UFG::qSafePointerNode<UFG::DUIWindow>);
+  this->UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>::UFG::qReflectObject::vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  this->UFG::qSafePointerNode<UFG::DUIWindow>::vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
+  *(_QWORD *)&this->mGroupTag.mText.mData.mNumItems = 0i64;
+  this->mGroupTag.mText.mData.mItems = 0i64;
+  *(_QWORD *)&this->mSurfaceName.mText.mData.mNumItems = 0i64;
+  this->mSurfaceName.mText.mData.mItems = 0i64;
+  UFG::qString::qString(&this->mTitle);
+  UFG::DUIWindow::Init(this);
 }
 
 // File Line: 613
 // RVA: 0x1530B0
 void __fastcall UFG::DUIWindow::DUIWindow(UFG::DUIWindow *this, MemImageLoadFlag f)
 {
-  UFG::DUIWindow *v2; // rdi
-  UFG::qTreeNode64<UFG::qReflectObject,UFG::qReflectObject> *v3; // rdx
-  unsigned __int64 v4; // rax
-  UFG::qNode<UFG::DUIWindow,UFG::DUIWindow> *v5; // rax
-  UFG::qNode<UFG::DUIWindow,UFG::DUIManager> *v6; // rax
-  UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0> *v7; // [rsp+50h] [rbp+18h]
+  unsigned __int64 mUID; // rax
 
-  v2 = this;
-  v3 = (UFG::qTreeNode64<UFG::qReflectObject,UFG::qReflectObject> *)&this->mBaseNode;
-  v4 = this->mBaseNode.mUID;
-  v3->mBaseNode.mUID = 0i64;
-  v3->mBaseNode.mParent = &v3->mBaseNode;
-  v3->mBaseNode.mChildren[0] = &v3->mBaseNode;
-  v3->mBaseNode.mChildren[1] = &v3->mBaseNode;
-  v3->mBaseNode.mNeighbours[0] = &v3->mBaseNode;
-  v3->mBaseNode.mNeighbours[1] = &v3->mBaseNode;
-  v3->mBaseNode.mUID = v4;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
-  v7 = &this->mHandles;
-  v7->mNode.mPrev = &v7->mNode;
-  v7->mNode.mNext = &v7->mNode;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>::`vftable;
-  v5 = (UFG::qNode<UFG::DUIWindow,UFG::DUIWindow> *)&this->mPrev;
-  v5->mPrev = v5;
-  v5->mNext = v5;
-  v6 = (UFG::qNode<UFG::DUIWindow,UFG::DUIManager> *)&this->mPrev;
-  v6->mPrev = v6;
-  v6->mNext = v6;
-  UFG::qSafePointerNode<UFG::DUIWindow>::qSafePointerNode<UFG::DUIWindow>((UFG::qSafePointerNode<UFG::DUIWindow> *)&this->vfptr);
-  v2->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
-  v2->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
-  v2->mGroupTag.mText.mData.mFlags = 2;
-  v2->mSurfaceName.mText.mData.mFlags = 2;
-  UFG::qString::qString(&v2->mTitle);
-  UFG::DUIWindow::NoSerializeInit(v2);
+  mUID = this->mBaseNode.mUID;
+  this->mBaseNode.mUID = 0i64;
+  this->mBaseNode.mParent = &this->mBaseNode;
+  this->mBaseNode.mChildren[0] = &this->mBaseNode;
+  this->mBaseNode.mChildren[1] = &this->mBaseNode;
+  this->mBaseNode.mNeighbours[0] = &this->mBaseNode;
+  this->mBaseNode.mNeighbours[1] = &this->mBaseNode;
+  this->mBaseNode.mUID = mUID;
+  this->UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>::UFG::qReflectObject::vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
+  this->mHandles.mNode.UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>::UFG::qReflectObject::mPrev = &this->mHandles.mNode;
+  this->mHandles.mNode.mNext = &this->mHandles.mNode;
+  this->UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>::UFG::qReflectObject::vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>::`vftable;
+  this->UFG::qNode<UFG::DUIWindow,UFG::DUIWindow>::mPrev = &this->UFG::qNode<UFG::DUIWindow,UFG::DUIWindow>;
+  this->UFG::qNode<UFG::DUIWindow,UFG::DUIWindow>::mNext = &this->UFG::qNode<UFG::DUIWindow,UFG::DUIWindow>;
+  this->UFG::qNode<UFG::DUIWindow,UFG::DUIManager>::mPrev = &this->UFG::qNode<UFG::DUIWindow,UFG::DUIManager>;
+  this->UFG::qNode<UFG::DUIWindow,UFG::DUIManager>::mNext = &this->UFG::qNode<UFG::DUIWindow,UFG::DUIManager>;
+  UFG::qSafePointerNode<UFG::DUIWindow>::qSafePointerNode<UFG::DUIWindow>(&this->UFG::qSafePointerNode<UFG::DUIWindow>);
+  this->UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>::UFG::qReflectObject::vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  this->UFG::qSafePointerNode<UFG::DUIWindow>::vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
+  this->mGroupTag.mText.mData.mFlags = 2;
+  this->mSurfaceName.mText.mData.mFlags = 2;
+  UFG::qString::qString(&this->mTitle);
+  UFG::DUIWindow::NoSerializeInit(this);
 }
 
 // File Line: 614
 // RVA: 0x154DF0
 void __fastcall UFG::DUIWindow::~DUIWindow(UFG::DUIWindow *this)
 {
-  UFG::DUIWindow *v1; // rdi
   UFG::qSafePointerNode<UFG::ParkourHandle> *v2; // rsi
-  void **v3; // rbx
-  void **v4; // rbx
-  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v5; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v6; // rax
-  UFG::qNode<UFG::DUIWindow,UFG::DUIManager> *v7; // rdx
-  UFG::qNode<UFG::DUIWindow,UFG::DUIManager> *v8; // rcx
-  UFG::qNode<UFG::DUIWindow,UFG::DUIManager> *v9; // rax
-  UFG::qNode<UFG::DUIWindow,UFG::DUIWindow> *v10; // rdx
-  UFG::qNode<UFG::DUIWindow,UFG::DUIWindow> *v11; // rcx
-  UFG::qNode<UFG::DUIWindow,UFG::DUIWindow> *v12; // rax
-  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *v13; // rcx
-  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *v14; // rax
+  UFG::qReflectString *p_mSurfaceName; // rbx
+  UFG::qReflectString *p_mGroupTag; // rbx
+  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *mNext; // rax
+  UFG::qNode<UFG::DUIWindow,UFG::DUIManager> *v7; // rcx
+  UFG::qNode<UFG::DUIWindow,UFG::DUIManager> *v8; // rax
+  UFG::qNode<UFG::DUIWindow,UFG::DUIWindow> *v9; // rcx
+  UFG::qNode<UFG::DUIWindow,UFG::DUIWindow> *v10; // rax
+  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *v11; // rcx
+  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *v12; // rax
 
-  v1 = this;
-  this->vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
-  v2 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)&this->vfptr;
-  this->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
+  this->UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>::UFG::qReflectObject::vfptr = (UFG::qReflectObjectVtbl *)&UFG::DUIWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  v2 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)&this->UFG::qSafePointerNode<UFG::DUIWindow>;
+  this->UFG::qSafePointerNode<UFG::DUIWindow>::vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::DUIWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
   UFG::qString::~qString(&this->mTitle);
-  v3 = (void **)&v1->mSurfaceName.mText.mData.mItems;
-  if ( !(v1->mSurfaceName.mText.mData.mFlags & 2) )
-    operator delete[](*v3);
-  *v3 = 0i64;
-  *(_QWORD *)&v1->mSurfaceName.mText.mData.mNumItems = 0i64;
-  v4 = (void **)&v1->mGroupTag.mText.mData.mItems;
-  if ( !(v1->mGroupTag.mText.mData.mFlags & 2) )
-    operator delete[](*v4);
-  *v4 = 0i64;
-  *(_QWORD *)&v1->mGroupTag.mText.mData.mNumItems = 0i64;
+  p_mSurfaceName = &this->mSurfaceName;
+  if ( (this->mSurfaceName.mText.mData.mFlags & 2) == 0 )
+    operator delete[](p_mSurfaceName->mText.mData.mItems);
+  p_mSurfaceName->mText.mData.mItems = 0i64;
+  *(_QWORD *)&this->mSurfaceName.mText.mData.mNumItems = 0i64;
+  p_mGroupTag = &this->mGroupTag;
+  if ( (this->mGroupTag.mText.mData.mFlags & 2) == 0 )
+    operator delete[](p_mGroupTag->mText.mData.mItems);
+  p_mGroupTag->mText.mData.mItems = 0i64;
+  *(_QWORD *)&this->mGroupTag.mText.mData.mNumItems = 0i64;
   v2->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::DUIWindow>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull(v2);
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes(&v2->m_SafePointerList);
-  v5 = v2->m_SafePointerList.mNode.mPrev;
-  v6 = v2->m_SafePointerList.mNode.mNext;
-  v5->mNext = v6;
-  v6->mPrev = v5;
+  mPrev = v2->m_SafePointerList.mNode.mPrev;
+  mNext = v2->m_SafePointerList.mNode.mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
   v2->m_SafePointerList.mNode.mPrev = &v2->m_SafePointerList.mNode;
   v2->m_SafePointerList.mNode.mNext = &v2->m_SafePointerList.mNode;
-  v7 = (UFG::qNode<UFG::DUIWindow,UFG::DUIManager> *)&v1->mPrev;
-  v8 = v1->mPrev;
-  v9 = v1->mNext;
-  v8->mNext = v9;
-  v9->mPrev = v8;
-  v7->mPrev = v7;
-  v7->mNext = v7;
-  v10 = (UFG::qNode<UFG::DUIWindow,UFG::DUIWindow> *)&v1->mPrev;
-  v11 = v1->mPrev;
-  v12 = v1->mNext;
+  v7 = this->UFG::qNode<UFG::DUIWindow,UFG::DUIManager>::mPrev;
+  v8 = this->UFG::qNode<UFG::DUIWindow,UFG::DUIManager>::mNext;
+  v7->mNext = v8;
+  v8->mPrev = v7;
+  this->UFG::qNode<UFG::DUIWindow,UFG::DUIManager>::mPrev = &this->UFG::qNode<UFG::DUIWindow,UFG::DUIManager>;
+  this->UFG::qNode<UFG::DUIWindow,UFG::DUIManager>::mNext = &this->UFG::qNode<UFG::DUIWindow,UFG::DUIManager>;
+  v9 = this->UFG::qNode<UFG::DUIWindow,UFG::DUIWindow>::mPrev;
+  v10 = this->UFG::qNode<UFG::DUIWindow,UFG::DUIWindow>::mNext;
+  v9->mNext = v10;
+  v10->mPrev = v9;
+  this->UFG::qNode<UFG::DUIWindow,UFG::DUIWindow>::mPrev = &this->UFG::qNode<UFG::DUIWindow,UFG::DUIWindow>;
+  this->UFG::qNode<UFG::DUIWindow,UFG::DUIWindow>::mNext = &this->UFG::qNode<UFG::DUIWindow,UFG::DUIWindow>;
+  this->UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>::UFG::qReflectObject::vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
+  UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0>::DeleteNodes(&this->mHandles);
+  v11 = this->mHandles.mNode.UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>::UFG::qReflectObject::mPrev;
+  v12 = this->mHandles.mNode.mNext;
   v11->mNext = v12;
   v12->mPrev = v11;
-  v10->mPrev = v10;
-  v10->mNext = v10;
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObject::`vftable;
-  UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0>::DeleteNodes(&v1->mHandles);
-  v13 = v1->mHandles.mNode.mPrev;
-  v14 = v1->mHandles.mNode.mNext;
-  v13->mNext = v14;
-  v14->mPrev = v13;
-  v1->mHandles.mNode.mPrev = &v1->mHandles.mNode;
-  v1->mHandles.mNode.mNext = &v1->mHandles.mNode;
+  this->mHandles.mNode.UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>::UFG::qReflectObject::mPrev = &this->mHandles.mNode;
+  this->mHandles.mNode.mNext = &this->mHandles.mNode;
 }
 
 // File Line: 819
 // RVA: 0x193A40
 void __fastcall UFG::DUIIntArray::Add(UFG::DUIIntArray *this, unsigned __int64 item)
 {
-  __int64 v2; // rsi
-  UFG::qArray<unsigned __int64,0> *v3; // rdi
-  unsigned __int64 v4; // rbp
-  unsigned int v5; // edx
+  __int64 size; // rsi
+  UFG::qArray<unsigned __int64,0> *p_mData; // rdi
+  unsigned int capacity; // edx
   unsigned int v6; // ebx
   unsigned int v7; // edx
-  unsigned __int64 *v8; // rax
+  unsigned __int64 *p; // rax
 
-  v2 = this->mData.size;
-  v3 = &this->mData;
-  v4 = item;
-  v5 = this->mData.capacity;
-  v6 = v2 + 1;
-  if ( (signed int)v2 + 1 > v5 )
+  size = this->mData.size;
+  p_mData = &this->mData;
+  capacity = this->mData.capacity;
+  v6 = size + 1;
+  if ( (int)size + 1 > capacity )
   {
-    if ( v5 )
-      v7 = 2 * v5;
+    if ( capacity )
+      v7 = 2 * capacity;
     else
       v7 = 1;
     for ( ; v7 < v6; v7 *= 2 )
@@ -357,43 +324,41 @@ void __fastcall UFG::DUIIntArray::Add(UFG::DUIIntArray *this, unsigned __int64 i
     if ( v7 <= 2 )
       v7 = 2;
     if ( v7 - v6 > 0x10000 )
-      v7 = v2 + 65537;
+      v7 = size + 65537;
     UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(
       (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&this->mData,
       v7,
       "qArray.Add");
   }
-  v8 = v3->p;
-  v3->size = v6;
-  v8[v2] = v4;
+  p = p_mData->p;
+  p_mData->size = v6;
+  p[size] = item;
 }
 
 // File Line: 820
 // RVA: 0x19CAA0
 void __fastcall UFG::DUIIntArray::Remove(UFG::DUIIntArray *this, unsigned __int64 item)
 {
-  UFG::DUIIntArray *v2; // rbx
-  unsigned int v3; // eax
+  unsigned int size; // eax
 
-  v2 = this;
-  v2->mData.p[this->vfptr->IndexOf((UFG::IDUICollectionView *)this, item)] = v2->mData.p[v2->mData.size - 1];
-  v3 = v2->mData.size;
-  if ( v3 > 1 )
-    v2->mData.size = v3 - 1;
+  this->mData.p[this->vfptr->IndexOf(this, item)] = this->mData.p[this->mData.size - 1];
+  size = this->mData.size;
+  if ( size > 1 )
+    this->mData.size = size - 1;
   else
-    v2->mData.size = 0;
+    this->mData.size = 0;
 }
 
 // File Line: 821
 // RVA: 0x19CAF0
 void __fastcall UFG::DUIIntArray::RemoveAt(UFG::DUIIntArray *this, unsigned int idx)
 {
-  unsigned int v2; // eax
+  unsigned int size; // eax
 
   this->mData.p[idx] = this->mData.p[this->mData.size - 1];
-  v2 = this->mData.size;
-  if ( v2 > 1 )
-    this->mData.size = v2 - 1;
+  size = this->mData.size;
+  if ( size > 1 )
+    this->mData.size = size - 1;
   else
     this->mData.size = 0;
 }
@@ -407,22 +372,20 @@ unsigned __int64 __fastcall UFG::DUIIntArray::GetAt(UFG::DUIIntArray *this, unsi
 
 // File Line: 823
 // RVA: 0x1993F0
-signed __int64 __fastcall UFG::DUIIntArray::IndexOf(UFG::DUIIntArray *this, unsigned __int64 item)
+__int64 __fastcall UFG::DUIIntArray::IndexOf(UFG::DUIIntArray *this, unsigned __int64 item)
 {
-  unsigned int v2; // er8
-  signed __int64 result; // rax
-  unsigned __int64 *v4; // rcx
+  unsigned int size; // r8d
+  __int64 result; // rax
+  unsigned __int64 *i; // rcx
 
-  v2 = this->mData.size;
+  size = this->mData.size;
   result = 0i64;
-  if ( !v2 )
+  if ( !size )
     return 0xFFFFFFFFi64;
-  v4 = this->mData.p;
-  while ( item != *v4 )
+  for ( i = this->mData.p; item != *i; ++i )
   {
     result = (unsigned int)(result + 1);
-    ++v4;
-    if ( (unsigned int)result >= v2 )
+    if ( (unsigned int)result >= size )
       return 0xFFFFFFFFi64;
   }
   return result;

@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkaAnimationContainerClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 66
@@ -28,17 +28,17 @@ hkClass *__fastcall hkaAnimationContainer::staticClass()
 
 // File Line: 73
 // RVA: 0xB1CE70
-void __fastcall finishLoadedObjecthkaAnimationContainer(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaAnimationContainer(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaAnimationContainer::`vftable;
+    *p = &hkaAnimationContainer::`vftable;
 }
 
 // File Line: 79
 // RVA: 0xB1CE90
-void __fastcall cleanupLoadedObjecthkaAnimationContainer(void *p)
+void __fastcall cleanupLoadedObjecthkaAnimationContainer(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 83
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkaAnimationContainerTypeInfo__()
   hkaAnimationContainerTypeInfo.m_typeName = "hkaAnimationContainer";
   hkaAnimationContainerTypeInfo.m_vtable = result;
   hkaAnimationContainerTypeInfo.m_scopedName = "!hkaAnimationContainer";
-  hkaAnimationContainerTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaAnimationContainer;
-  hkaAnimationContainerTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaAnimationContainer;
+  hkaAnimationContainerTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaAnimationContainer;
+  hkaAnimationContainerTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaAnimationContainer;
   return result;
 }
 

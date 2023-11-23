@@ -2,7 +2,7 @@
 // RVA: 0x3EF390
 _BOOL8 __fastcall UFG::CopSystem::IsActive(UFG::CopSystem *this)
 {
-  return this->mHeatLevel != 0;
+  return this->mHeatLevel != HEATLEVEL_NONE;
 }
 
 // File Line: 54

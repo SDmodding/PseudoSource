@@ -1,8 +1,13 @@
 // File Line: 102
 // RVA: 0xB07940
-void __fastcall ProcessFutzNoiseGenChannel(FutzBoxNoiseGenMemoryMap *memoryMap, const float *inputBuf, const float *randomBuf, float *outputBuf, unsigned int samplesRemaining)
+void __fastcall ProcessFutzNoiseGenChannel(
+        FutzBoxNoiseGenMemoryMap *memoryMap,
+        const float *inputBuf,
+        const float *randomBuf,
+        float *outputBuf,
+        unsigned int samplesRemaining)
 {
-  unsigned int v5; // er10
+  unsigned int v5; // r10d
   const float *v6; // rbx
   float v7; // xmm4_4
   float v8; // xmm6_4
@@ -17,7 +22,7 @@ void __fastcall ProcessFutzNoiseGenChannel(FutzBoxNoiseGenMemoryMap *memoryMap, 
   float v17; // xmm0_4
   float *v18; // r11
   signed __int64 v19; // rdi
-  signed int v20; // er8
+  int v20; // r8d
   float v21; // xmm1_4
   float v22; // xmm1_4
   float v23; // xmm2_4
@@ -62,8 +67,8 @@ void __fastcall ProcessFutzNoiseGenChannel(FutzBoxNoiseGenMemoryMap *memoryMap, 
   v41 = memoryMap->XMemory[5];
   v17 = memoryMap->XMemory[6];
   v37 = memoryMap->XMemory[9];
-  v43 = memoryMap->XMemory[6];
-  v42 = memoryMap->XMemory[2];
+  v43 = v17;
+  v42 = v7;
   v38 = memoryMap->XMemory[10];
   if ( samplesRemaining )
   {
@@ -136,16 +141,16 @@ void __fastcall ProcessFutzNoiseGenChannel(FutzBoxNoiseGenMemoryMap *memoryMap, 
 
 // File Line: 271
 // RVA: 0xB06FF0
-char *__fastcall ProcessFutzBoxNoiseGenWwise(char *memoryBlock, float *pfChannelIn, float *pfChannelNoise, float *pfChannelOut, unsigned int uNumSamples)
+char *__fastcall ProcessFutzBoxNoiseGenWwise(
+        FutzBoxNoiseGenMemoryMap *memoryBlock,
+        const float *pfChannelIn,
+        const float *pfChannelNoise,
+        float *pfChannelOut,
+        unsigned int uNumSamples)
 {
   __int64 v5; // rcx
 
-  ProcessFutzNoiseGenChannel(
-    (FutzBoxNoiseGenMemoryMap *)memoryBlock,
-    pfChannelIn,
-    pfChannelNoise,
-    pfChannelOut,
-    uNumSamples);
+  ProcessFutzNoiseGenChannel(memoryBlock, pfChannelIn, pfChannelNoise, pfChannelOut, uNumSamples);
   return (char *)(v5 + 168);
 }
 
@@ -153,53 +158,55 @@ char *__fastcall ProcessFutzBoxNoiseGenWwise(char *memoryBlock, float *pfChannel
 // RVA: 0xB07020
 void __fastcall FutzBoxNoiseGenMemoryMapHelper::FutzBoxNoiseGenMemoryMapHelper(FutzBoxNoiseGenMemoryMapHelper *this)
 {
-  FutzBoxNoiseGenMemoryMapHelper *v1; // rbx
-
-  v1 = this;
-  DSPMemoryMapHelper::DSPMemoryMapHelper(&this->0);
-  v1->FutzBoxMemMapPtr = 0i64;
+  DSPMemoryMapHelper::DSPMemoryMapHelper(this);
+  this->FutzBoxMemMapPtr = 0i64;
 }
 
 // File Line: 359
 // RVA: 0xB07050
+// attributes: thunk
 void __fastcall FutzBoxNoiseGenMemoryMapHelper::~FutzBoxNoiseGenMemoryMapHelper(FutzBoxNoiseGenMemoryMapHelper *this)
 {
-  DSPMemoryMapHelper::~DSPMemoryMapHelper(&this->0);
+  DSPMemoryMapHelper::~DSPMemoryMapHelper(this);
 }
 
 // File Line: 365
 // RVA: 0xB07060
-signed __int64 __fastcall FutzBoxNoiseGenMemoryMapHelper::GetMemoryMapSize(unsigned int numChannels)
+__int64 __fastcall FutzBoxNoiseGenMemoryMapHelper::GetMemoryMapSize(unsigned int numChannels)
 {
   return 168i64 * numChannels;
 }
 
 // File Line: 374
 // RVA: 0xB07070
-__int64 __fastcall FutzBoxNoiseGenMemoryMapHelper::Init(FutzBoxNoiseGenMemoryMapHelper *this, PooledMemoryAllocator *memoryMapAllocator, unsigned int numChannels, unsigned int sampleRate)
+__int64 __fastcall FutzBoxNoiseGenMemoryMapHelper::Init(
+        FutzBoxNoiseGenMemoryMapHelper *this,
+        PooledMemoryAllocator *memoryMapAllocator,
+        unsigned int numChannels,
+        unsigned int sampleRate)
 {
-  FutzBoxNoiseGenMemoryMapHelper *v4; // rbx
   unsigned __int64 v5; // rax
   char *v6; // rax
   unsigned int v7; // ecx
 
   this->mNumChannels = numChannels;
-  v4 = this;
   this->mSampleRate = sampleRate;
   v5 = 168i64 * numChannels;
   if ( !is_mul_ok(numChannels, 0xA8ui64) )
     v5 = -1i64;
   v6 = PooledMemoryAllocator::Malloc(memoryMapAllocator, v5);
   v7 = 1;
-  v4->FutzBoxMemMapPtr = (FutzBoxNoiseGenMemoryMap *)v6;
+  this->FutzBoxMemMapPtr = (FutzBoxNoiseGenMemoryMap *)v6;
   if ( !v6 )
-    v7 = 52;
+    return 52;
   return v7;
 }
 
 // File Line: 391
 // RVA: 0xB070D0
-FutzBoxNoiseGenMemoryMap *__fastcall FutzBoxNoiseGenMemoryMapHelper::GetMemoryMap(FutzBoxNoiseGenMemoryMapHelper *this, unsigned int channelIndex)
+FutzBoxNoiseGenMemoryMap *__fastcall FutzBoxNoiseGenMemoryMapHelper::GetMemoryMap(
+        FutzBoxNoiseGenMemoryMapHelper *this,
+        unsigned int channelIndex)
 {
   return &this->FutzBoxMemMapPtr[channelIndex];
 }
@@ -208,29 +215,23 @@ FutzBoxNoiseGenMemoryMap *__fastcall FutzBoxNoiseGenMemoryMapHelper::GetMemoryMa
 // RVA: 0xB070F0
 void __fastcall FutzBoxNoiseGenMemoryMapHelper::SetNoiseState(FutzBoxNoiseGenMemoryMapHelper *this)
 {
-  unsigned int v1; // ebx
-  FutzBoxNoiseGenMemoryMapHelper *v2; // rdi
+  unsigned int i; // ebx
 
-  v1 = 0;
-  v2 = this;
-  if ( this->mNumChannels )
-  {
-    do
-      DSPMemoryMapHelper::SetLongValue(&v2->0, 0, v2->FutzBoxMemMapPtr[v1++].XMemory, 0);
-    while ( v1 < v2->mNumChannels );
-  }
+  for ( i = 0; i < this->mNumChannels; ++i )
+    DSPMemoryMapHelper::SetLongValue(this, 0, this->FutzBoxMemMapPtr[i].XMemory, 0);
 }
 
 // File Line: 418
 // RVA: 0xB07140
-void __fastcall FutzBoxNoiseGenMemoryMapHelper::SetNoiseLevel(FutzBoxNoiseGenMemoryMapHelper *this, long double level, bool bypassed)
+void __fastcall FutzBoxNoiseGenMemoryMapHelper::SetNoiseLevel(
+        FutzBoxNoiseGenMemoryMapHelper *this,
+        long double level,
+        bool bypassed)
 {
-  FutzBoxNoiseGenMemoryMapHelper *v3; // rdi
   double v4; // xmm6_8
   double v5; // xmm1_8
-  unsigned int v6; // ebx
+  unsigned int i; // ebx
 
-  v3 = this;
   v4 = 0.0;
   if ( !bypassed )
   {
@@ -238,250 +239,185 @@ void __fastcall FutzBoxNoiseGenMemoryMapHelper::SetNoiseLevel(FutzBoxNoiseGenMem
     if ( v5 >= -143.0 )
       v4 = pow(10.0, v5 * 0.05);
   }
-  v6 = 0;
-  if ( v3->mNumChannels )
-  {
-    do
-      DSPMemoryMapHelper::SetDoubleValue(&v3->0, v4, v3->FutzBoxMemMapPtr[v6++].YMemory, 1);
-    while ( v6 < v3->mNumChannels );
-  }
+  for ( i = 0; i < this->mNumChannels; ++i )
+    DSPMemoryMapHelper::SetDoubleValue(this, v4, this->FutzBoxMemMapPtr[i].YMemory, 1);
 }
 
 // File Line: 440
 // RVA: 0xB071E0
-void __fastcall FutzBoxNoiseGenMemoryMapHelper::SetNoiseLowFilter(FutzBoxNoiseGenMemoryMapHelper *this, long double frequency, bool bypassed)
+void __fastcall FutzBoxNoiseGenMemoryMapHelper::SetNoiseLowFilter(
+        FutzBoxNoiseGenMemoryMapHelper *this,
+        long double frequency,
+        bool bypassed)
 {
-  FutzBoxNoiseGenMemoryMapHelper *v3; // rdi
-  bool v4; // bl
-  unsigned int v5; // ebx
-  SCoefs outCoefs; // [rsp+20h] [rbp-48h]
+  unsigned int i; // ebx
+  SCoefs outCoefs; // [rsp+20h] [rbp-48h] BYREF
 
-  v3 = this;
-  v4 = bypassed;
   CoefficientCalculator::CalculateBypassed(&outCoefs);
-  if ( !v4 )
-    CoefficientCalculator::CalculateSecondOrderHighPass(v3->mSampleRate, frequency, 1.414, &outCoefs);
-  v5 = 0;
-  if ( v3->mNumChannels )
-  {
-    do
-      DSPMemoryMapHelper::SetFilterCoefs(&v3->0, &outCoefs, v3->FutzBoxMemMapPtr[v5++].XMemory, 1);
-    while ( v5 < v3->mNumChannels );
-  }
+  if ( !bypassed )
+    CoefficientCalculator::CalculateSecondOrderHighPass(this->mSampleRate, frequency, 1.414, &outCoefs);
+  for ( i = 0; i < this->mNumChannels; ++i )
+    DSPMemoryMapHelper::SetFilterCoefs(this, &outCoefs, this->FutzBoxMemMapPtr[i].XMemory, 1);
 }
 
 // File Line: 457
 // RVA: 0xB07270
-void __fastcall FutzBoxNoiseGenMemoryMapHelper::SetNoiseHighFilter(FutzBoxNoiseGenMemoryMapHelper *this, long double frequency, bool bypassed)
+void __fastcall FutzBoxNoiseGenMemoryMapHelper::SetNoiseHighFilter(
+        FutzBoxNoiseGenMemoryMapHelper *this,
+        long double frequency,
+        bool bypassed)
 {
-  FutzBoxNoiseGenMemoryMapHelper *v3; // rdi
-  bool v4; // bl
-  unsigned int v5; // ebx
-  SCoefs outCoefs; // [rsp+20h] [rbp-48h]
+  unsigned int i; // ebx
+  SCoefs outCoefs; // [rsp+20h] [rbp-48h] BYREF
 
-  v3 = this;
-  v4 = bypassed;
   CoefficientCalculator::CalculateBypassed(&outCoefs);
-  if ( !v4 )
-    CoefficientCalculator::CalculateSecondOrderLowPass(v3->mSampleRate, frequency, 1.414, &outCoefs);
-  v5 = 0;
-  if ( v3->mNumChannels )
-  {
-    do
-      DSPMemoryMapHelper::SetFilterCoefs(&v3->0, &outCoefs, v3->FutzBoxMemMapPtr[v5++].XMemory, 6);
-    while ( v5 < v3->mNumChannels );
-  }
+  if ( !bypassed )
+    CoefficientCalculator::CalculateSecondOrderLowPass(this->mSampleRate, frequency, 1.414, &outCoefs);
+  for ( i = 0; i < this->mNumChannels; ++i )
+    DSPMemoryMapHelper::SetFilterCoefs(this, &outCoefs, this->FutzBoxMemMapPtr[i].XMemory, 6);
 }
 
 // File Line: 474
 // RVA: 0xB07300
 void __fastcall FutzBoxNoiseGenMemoryMapHelper::SetNoiseDuckerInput(FutzBoxNoiseGenMemoryMapHelper *this)
 {
-  unsigned int v1; // ebx
-  FutzBoxNoiseGenMemoryMapHelper *v2; // rdi
+  unsigned int i; // ebx
 
-  v1 = 0;
-  v2 = this;
-  if ( this->mNumChannels )
-  {
-    do
-      DSPMemoryMapHelper::SetLongValue(&v2->0, 14, v2->FutzBoxMemMapPtr[v1++].XMemory, 18);
-    while ( v1 < v2->mNumChannels );
-  }
+  for ( i = 0; i < this->mNumChannels; ++i )
+    DSPMemoryMapHelper::SetLongValue(this, 14, this->FutzBoxMemMapPtr[i].XMemory, 18);
 }
 
 // File Line: 482
 // RVA: 0xB07360
 void __fastcall FutzBoxNoiseGenMemoryMapHelper::SetNoiseDuckerKeyInput(FutzBoxNoiseGenMemoryMapHelper *this)
 {
-  unsigned int v1; // ebx
-  FutzBoxNoiseGenMemoryMapHelper *v2; // rdi
+  unsigned int i; // ebx
 
-  v1 = 0;
-  v2 = this;
-  if ( this->mNumChannels )
-  {
-    do
-      DSPMemoryMapHelper::SetLongValue(&v2->0, 0, v2->FutzBoxMemMapPtr[v1++].XMemory, 11);
-    while ( v1 < v2->mNumChannels );
-  }
+  for ( i = 0; i < this->mNumChannels; ++i )
+    DSPMemoryMapHelper::SetLongValue(this, 0, this->FutzBoxMemMapPtr[i].XMemory, 11);
 }
 
 // File Line: 490
 // RVA: 0xB073B0
-void __fastcall FutzBoxNoiseGenMemoryMapHelper::SetNoiseDuckerThreshold(FutzBoxNoiseGenMemoryMapHelper *this, long double threshold)
+void __fastcall FutzBoxNoiseGenMemoryMapHelper::SetNoiseDuckerThreshold(
+        FutzBoxNoiseGenMemoryMapHelper *this,
+        long double threshold)
 {
-  FutzBoxNoiseGenMemoryMapHelper *v2; // rdi
   unsigned int v3; // ebx
-  double v4; // xmm6_8
+  double i; // xmm6_8
 
-  v2 = this;
   v3 = 0;
-  v4 = pow(10.0, threshold * 0.05);
-  if ( v2->mNumChannels )
-  {
-    do
-      DSPMemoryMapHelper::SetDoubleValue(&v2->0, v4, v2->FutzBoxMemMapPtr[v3++].XMemory, 12);
-    while ( v3 < v2->mNumChannels );
-  }
+  for ( i = pow(10.0, threshold * 0.05); v3 < this->mNumChannels; ++v3 )
+    DSPMemoryMapHelper::SetDoubleValue(this, i, this->FutzBoxMemMapPtr[v3].XMemory, 12);
 }
 
 // File Line: 500
 // RVA: 0xB07420
-void __fastcall FutzBoxNoiseGenMemoryMapHelper::SetNoiseDuckerRange(FutzBoxNoiseGenMemoryMapHelper *this, long double range)
+void __fastcall FutzBoxNoiseGenMemoryMapHelper::SetNoiseDuckerRange(
+        FutzBoxNoiseGenMemoryMapHelper *this,
+        long double range)
 {
-  FutzBoxNoiseGenMemoryMapHelper *v2; // rdi
   unsigned int v3; // ebx
-  double v4; // xmm6_8
+  double i; // xmm6_8
 
-  v2 = this;
   v3 = 0;
-  v4 = pow(10.0, range * 0.05);
-  if ( v2->mNumChannels )
-  {
-    do
-      DSPMemoryMapHelper::SetDoubleValue(&v2->0, v4, v2->FutzBoxMemMapPtr[v3++].XMemory, 14);
-    while ( v3 < v2->mNumChannels );
-  }
+  for ( i = pow(10.0, range * 0.05); v3 < this->mNumChannels; ++v3 )
+    DSPMemoryMapHelper::SetDoubleValue(this, i, this->FutzBoxMemMapPtr[v3].XMemory, 14);
 }
 
 // File Line: 510
 // RVA: 0xB07490
 void __fastcall FutzBoxNoiseGenMemoryMapHelper::SetNoiseDuckerPassingGain(FutzBoxNoiseGenMemoryMapHelper *this)
 {
-  unsigned int v1; // ebx
-  FutzBoxNoiseGenMemoryMapHelper *v2; // rdi
+  unsigned int i; // ebx
 
-  v1 = 0;
-  v2 = this;
-  if ( this->mNumChannels )
-  {
-    do
-      DSPMemoryMapHelper::SetDoubleValue(&v2->0, 1.0, v2->FutzBoxMemMapPtr[v1++].YMemory, 15);
-    while ( v1 < v2->mNumChannels );
-  }
+  for ( i = 0; i < this->mNumChannels; ++i )
+    DSPMemoryMapHelper::SetDoubleValue(this, 1.0, this->FutzBoxMemMapPtr[i].YMemory, 15);
 }
 
 // File Line: 520
 // RVA: 0xB07500
-void __usercall FutzBoxNoiseGenMemoryMapHelper::SetNoiseDuckerAttack(FutzBoxNoiseGenMemoryMapHelper *this@<rcx>, long double recovery@<xmm1>, long double a3@<xmm0>)
+void __fastcall FutzBoxNoiseGenMemoryMapHelper::SetNoiseDuckerAttack(
+        FutzBoxNoiseGenMemoryMapHelper *this,
+        long double recovery)
 {
-  FutzBoxNoiseGenMemoryMapHelper *v3; // rdi
-  unsigned int v4; // ebx
+  unsigned int v3; // ebx
+  long double i; // xmm6_8
 
-  v3 = this;
-  DynamicsCalculator::CalculateAttackScalar(this->mSampleRate, recovery);
-  v4 = 0;
-  if ( v3->mNumChannels )
-  {
-    do
-      DSPMemoryMapHelper::SetDoubleValue(&v3->0, a3, v3->FutzBoxMemMapPtr[v4++].XMemory, 17);
-    while ( v4 < v3->mNumChannels );
-  }
+  v3 = 0;
+  for ( i = DynamicsCalculator::CalculateAttackScalar(this->mSampleRate, recovery); v3 < this->mNumChannels; ++v3 )
+    DSPMemoryMapHelper::SetDoubleValue(this, i, this->FutzBoxMemMapPtr[v3].XMemory, 17);
 }
 
 // File Line: 530
 // RVA: 0xB07570
 void __fastcall FutzBoxNoiseGenMemoryMapHelper::SetNoiseDuckerHold(FutzBoxNoiseGenMemoryMapHelper *this)
 {
-  FutzBoxNoiseGenMemoryMapHelper *v1; // rbx
   unsigned int v2; // edi
-  int v3; // esi
+  int i; // esi
 
-  v1 = this;
   v2 = 0;
-  v3 = DynamicsCalculator::CalculateHoldSamples(this->mSampleRate, 1.0);
-  if ( v1->mNumChannels )
-  {
-    do
-      DSPMemoryMapHelper::SetLongValue(&v1->0, v3, v1->FutzBoxMemMapPtr[v2++].XMemory, 15);
-    while ( v2 < v1->mNumChannels );
-  }
+  for ( i = DynamicsCalculator::CalculateHoldSamples(this->mSampleRate, 1.0); v2 < this->mNumChannels; ++v2 )
+    DSPMemoryMapHelper::SetLongValue(this, i, this->FutzBoxMemMapPtr[v2].XMemory, 15);
 }
 
 // File Line: 541
 // RVA: 0xB075E0
-void __usercall FutzBoxNoiseGenMemoryMapHelper::SetNoiseDuckerRelease(FutzBoxNoiseGenMemoryMapHelper *this@<rcx>, long double a2@<xmm0>)
+void __fastcall FutzBoxNoiseGenMemoryMapHelper::SetNoiseDuckerRelease(FutzBoxNoiseGenMemoryMapHelper *this)
 {
-  FutzBoxNoiseGenMemoryMapHelper *v2; // rbx
-  unsigned int v3; // edi
+  unsigned int v2; // edi
+  long double i; // xmm6_8
 
-  v2 = this;
-  DynamicsCalculator::CalculateReleaseScalar(this->mSampleRate, 1.0);
-  v3 = 0;
-  if ( v2->mNumChannels )
-  {
-    do
-      DSPMemoryMapHelper::SetDoubleValue(&v2->0, a2, v2->FutzBoxMemMapPtr[v3++].XMemory, 16);
-    while ( v3 < v2->mNumChannels );
-  }
+  v2 = 0;
+  for ( i = DynamicsCalculator::CalculateReleaseScalar(this->mSampleRate, 1.0); v2 < this->mNumChannels; ++v2 )
+    DSPMemoryMapHelper::SetDoubleValue(this, i, this->FutzBoxMemMapPtr[v2].XMemory, 16);
 }
 
 // File Line: 556
 // RVA: 0xB07650
 void __fastcall FutzNoiseGenImpl::FutzNoiseGenImpl(FutzNoiseGenImpl *this)
 {
-  FutzNoiseGenImpl *v1; // rbx
-
-  v1 = this;
-  DSPMemoryMapHelper::DSPMemoryMapHelper(&this->MemoryMapHelper.0);
-  v1->MemoryMapHelper.FutzBoxMemMapPtr = 0i64;
+  DSPMemoryMapHelper::DSPMemoryMapHelper(&this->MemoryMapHelper);
+  this->MemoryMapHelper.FutzBoxMemMapPtr = 0i64;
 }
 
 // File Line: 562
 // RVA: 0xB07680
+// attributes: thunk
 void __fastcall FutzNoiseGenImpl::~FutzNoiseGenImpl(FutzNoiseGenImpl *this)
 {
-  DSPMemoryMapHelper::~DSPMemoryMapHelper(&this->MemoryMapHelper.0);
+  DSPMemoryMapHelper::~DSPMemoryMapHelper(&this->MemoryMapHelper);
 }
 
 // File Line: 571
 // RVA: 0xB07690
-signed __int64 __fastcall FutzNoiseGenImpl::GetMemoryMapSize(FutzNoiseGenImpl *this, unsigned int numChannels)
+__int64 __fastcall FutzNoiseGenImpl::GetMemoryMapSize(FutzNoiseGenImpl *this, unsigned int numChannels)
 {
   return 168i64 * numChannels;
 }
 
 // File Line: 580
 // RVA: 0xB076A0
-__int64 __fastcall FutzNoiseGenImpl::Init(FutzNoiseGenImpl *this, PooledMemoryAllocator *memoryMapAllocator, unsigned int numChannels, unsigned int sampleRate)
+__int64 __fastcall FutzNoiseGenImpl::Init(
+        FutzNoiseGenImpl *this,
+        PooledMemoryAllocator *memoryMapAllocator,
+        unsigned int numChannels,
+        unsigned int sampleRate)
 {
-  FutzNoiseGenImpl *v4; // rbx
   unsigned __int64 v5; // rax
   char *v6; // rax
   unsigned int v7; // ecx
 
   this->MemoryMapHelper.mNumChannels = numChannels;
-  v4 = this;
   this->MemoryMapHelper.mSampleRate = sampleRate;
   v5 = 168i64 * numChannels;
   if ( !is_mul_ok(numChannels, 0xA8ui64) )
     v5 = -1i64;
   v6 = PooledMemoryAllocator::Malloc(memoryMapAllocator, v5);
   v7 = 1;
-  v4->MemoryMapHelper.FutzBoxMemMapPtr = (FutzBoxNoiseGenMemoryMap *)v6;
+  this->MemoryMapHelper.FutzBoxMemMapPtr = (FutzBoxNoiseGenMemoryMap *)v6;
   if ( !v6 )
-    v7 = 52;
+    return 52;
   return v7;
 }
 
@@ -490,54 +426,64 @@ __int64 __fastcall FutzNoiseGenImpl::Init(FutzNoiseGenImpl *this, PooledMemoryAl
 void __fastcall FutzNoiseGenImpl::SetParameters(FutzNoiseGenImpl *this, FutzNoiseParameters *noiseParams)
 {
   unsigned int v2; // edi
-  FutzNoiseParameters *v3; // rbp
-  FutzNoiseGenImpl *v4; // rbx
-  unsigned int v5; // esi
   unsigned int i; // esi
   unsigned int j; // esi
+  unsigned int k; // esi
   unsigned int v8; // esi
-  double k; // xmm6_8
-  long double v10; // xmm0_8
-  unsigned int l; // esi
-  unsigned int m; // esi
+  double m; // xmm6_8
+  unsigned int v10; // esi
+  double n; // xmm6_8
+  unsigned int ii; // esi
+  long double v13; // xmm6_8
 
   v2 = 0;
-  v3 = noiseParams;
-  v4 = this;
-  v5 = 0;
+  for ( i = 0; i < this->MemoryMapHelper.mNumChannels; ++i )
+    DSPMemoryMapHelper::SetLongValue(&this->MemoryMapHelper, 0, this->MemoryMapHelper.FutzBoxMemMapPtr[i].XMemory, 0);
+  FutzBoxNoiseGenMemoryMapHelper::SetNoiseLevel(&this->MemoryMapHelper, noiseParams->level, noiseParams->bypassed);
+  FutzBoxNoiseGenMemoryMapHelper::SetNoiseLowFilter(
+    &this->MemoryMapHelper,
+    noiseParams->hpfFrequency,
+    noiseParams->bypassed);
+  FutzBoxNoiseGenMemoryMapHelper::SetNoiseHighFilter(
+    &this->MemoryMapHelper,
+    noiseParams->lpfFrequency,
+    noiseParams->bypassed);
+  for ( j = 0; j < this->MemoryMapHelper.mNumChannels; ++j )
+    DSPMemoryMapHelper::SetLongValue(&this->MemoryMapHelper, 14, this->MemoryMapHelper.FutzBoxMemMapPtr[j].XMemory, 18);
+  for ( k = 0; k < this->MemoryMapHelper.mNumChannels; ++k )
+    DSPMemoryMapHelper::SetLongValue(&this->MemoryMapHelper, 0, this->MemoryMapHelper.FutzBoxMemMapPtr[k].XMemory, 11);
+  v8 = 0;
+  for ( m = pow(10.0, noiseParams->threshold * 0.05); v8 < this->MemoryMapHelper.mNumChannels; ++v8 )
+    DSPMemoryMapHelper::SetDoubleValue(
+      &this->MemoryMapHelper,
+      m,
+      this->MemoryMapHelper.FutzBoxMemMapPtr[v8].XMemory,
+      12);
+  v10 = 0;
+  for ( n = pow(10.0, noiseParams->range * 0.05); v10 < this->MemoryMapHelper.mNumChannels; ++v10 )
+    DSPMemoryMapHelper::SetDoubleValue(
+      &this->MemoryMapHelper,
+      n,
+      this->MemoryMapHelper.FutzBoxMemMapPtr[v10].XMemory,
+      14);
+  for ( ii = 0; ii < this->MemoryMapHelper.mNumChannels; ++ii )
+    DSPMemoryMapHelper::SetDoubleValue(
+      &this->MemoryMapHelper,
+      1.0,
+      this->MemoryMapHelper.FutzBoxMemMapPtr[ii].YMemory,
+      15);
+  v13 = DynamicsCalculator::CalculateAttackScalar(this->MemoryMapHelper.mSampleRate, noiseParams->recovery);
   if ( this->MemoryMapHelper.mNumChannels )
   {
     do
-      DSPMemoryMapHelper::SetLongValue(&v4->MemoryMapHelper.0, 0, v4->MemoryMapHelper.FutzBoxMemMapPtr[v5++].XMemory, 0);
-    while ( v5 < v4->MemoryMapHelper.mNumChannels );
-  }
-  FutzBoxNoiseGenMemoryMapHelper::SetNoiseLevel(&v4->MemoryMapHelper, v3->level, v3->bypassed);
-  FutzBoxNoiseGenMemoryMapHelper::SetNoiseLowFilter(&v4->MemoryMapHelper, v3->hpfFrequency, v3->bypassed);
-  FutzBoxNoiseGenMemoryMapHelper::SetNoiseHighFilter(&v4->MemoryMapHelper, v3->lpfFrequency, v3->bypassed);
-  for ( i = 0; i < v4->MemoryMapHelper.mNumChannels; ++i )
-    DSPMemoryMapHelper::SetLongValue(&v4->MemoryMapHelper.0, 14, v4->MemoryMapHelper.FutzBoxMemMapPtr[i].XMemory, 18);
-  for ( j = 0; j < v4->MemoryMapHelper.mNumChannels; ++j )
-    DSPMemoryMapHelper::SetLongValue(&v4->MemoryMapHelper.0, 0, v4->MemoryMapHelper.FutzBoxMemMapPtr[j].XMemory, 11);
-  v8 = 0;
-  for ( k = pow(10.0, v3->threshold * 0.05); v8 < v4->MemoryMapHelper.mNumChannels; ++v8 )
-    DSPMemoryMapHelper::SetDoubleValue(&v4->MemoryMapHelper.0, k, v4->MemoryMapHelper.FutzBoxMemMapPtr[v8].XMemory, 12);
-  v10 = pow(10.0, v3->range * 0.05);
-  for ( l = 0; l < v4->MemoryMapHelper.mNumChannels; ++l )
-    DSPMemoryMapHelper::SetDoubleValue(&v4->MemoryMapHelper.0, v10, v4->MemoryMapHelper.FutzBoxMemMapPtr[l].XMemory, 14);
-  for ( m = 0; m < v4->MemoryMapHelper.mNumChannels; ++m )
-    DSPMemoryMapHelper::SetDoubleValue(&v4->MemoryMapHelper.0, 1.0, v4->MemoryMapHelper.FutzBoxMemMapPtr[m].YMemory, 15);
-  DynamicsCalculator::CalculateAttackScalar(v4->MemoryMapHelper.mSampleRate, v3->recovery);
-  if ( v4->MemoryMapHelper.mNumChannels > 0 )
-  {
-    do
       DSPMemoryMapHelper::SetDoubleValue(
-        &v4->MemoryMapHelper.0,
-        v10,
-        v4->MemoryMapHelper.FutzBoxMemMapPtr[v2++].XMemory,
+        &this->MemoryMapHelper,
+        v13,
+        this->MemoryMapHelper.FutzBoxMemMapPtr[v2++].XMemory,
         17);
-    while ( v2 < v4->MemoryMapHelper.mNumChannels );
+    while ( v2 < this->MemoryMapHelper.mNumChannels );
   }
-  FutzBoxNoiseGenMemoryMapHelper::SetNoiseDuckerHold(&v4->MemoryMapHelper);
-  FutzBoxNoiseGenMemoryMapHelper::SetNoiseDuckerRelease(&v4->MemoryMapHelper, v10);
+  FutzBoxNoiseGenMemoryMapHelper::SetNoiseDuckerHold(&this->MemoryMapHelper);
+  FutzBoxNoiseGenMemoryMapHelper::SetNoiseDuckerRelease(&this->MemoryMapHelper);
 }
 

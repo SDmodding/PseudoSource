@@ -2,86 +2,78 @@
 // RVA: 0x8BBF30
 void __fastcall Scaleform::GFx::ASString::Clear(Scaleform::GFx::ASString *this)
 {
-  Scaleform::GFx::ASString *v1; // rdi
-  Scaleform::GFx::ASStringManager *v2; // rbx
-  Scaleform::GFx::ASStringNode *v3; // rcx
-  signed __int64 v4; // rbx
-  bool v5; // zf
+  Scaleform::GFx::ASStringManager *pManager; // rbx
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  Scaleform::GFx::ASStringNode *p_EmptyStringNode; // rbx
 
-  v1 = this;
-  v2 = this->pNode->pManager;
-  ++v2->EmptyStringNode.RefCount;
-  v3 = this->pNode;
-  v4 = (signed __int64)&v2->EmptyStringNode;
-  v5 = v3->RefCount-- == 1;
-  if ( v5 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v3);
-  v1->pNode = (Scaleform::GFx::ASStringNode *)v4;
+  pManager = this->pNode->pManager;
+  ++pManager->EmptyStringNode.RefCount;
+  pNode = this->pNode;
+  p_EmptyStringNode = &pManager->EmptyStringNode;
+  if ( pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
+  this->pNode = p_EmptyStringNode;
 }
 
 // File Line: 42
 // RVA: 0x8A9360
 bool __fastcall Scaleform::GFx::ASString::operator<(Scaleform::GFx::ASString *this, Scaleform::GFx::ASString *str)
 {
-  Scaleform::GFx::ASStringNode *v2; // rcx
+  Scaleform::GFx::ASStringNode *pNode; // rcx
   Scaleform::GFx::ASStringNode *v3; // rdx
-  bool result; // al
-  unsigned int v5; // ebx
-  const char *v6; // rdx
+  unsigned int Size; // ebx
+  const char *pData; // rdx
   size_t v7; // r8
   unsigned int v8; // edi
   const char *v9; // rcx
   int v10; // ecx
 
-  v2 = this->pNode;
+  pNode = this->pNode;
   v3 = str->pNode;
-  if ( v2 == v3 )
+  if ( pNode == v3 )
     return 0;
-  v5 = v3->Size;
-  v6 = v3->pData;
-  v7 = v5;
-  v8 = v2->Size;
-  v9 = v2->pData;
-  if ( v8 < v5 )
+  Size = v3->Size;
+  pData = v3->pData;
+  v7 = Size;
+  v8 = pNode->Size;
+  v9 = pNode->pData;
+  if ( v8 < Size )
     v7 = v8;
-  v10 = memcmp(v9, v6, v7);
+  v10 = memcmp(v9, pData, v7);
   if ( v10 )
-    result = v10 < 0;
+    return v10 < 0;
   else
-    result = v8 < v5;
-  return result;
+    return v8 < Size;
 }
 
 // File Line: 54
 // RVA: 0x8DAAC0
 __int64 __fastcall Scaleform::GFx::ASConstString::GetLength(Scaleform::GFx::ASConstString *this)
 {
-  Scaleform::GFx::ASConstString *v1; // rdi
-  Scaleform::GFx::ASStringNode *v2; // rcx
-  __int64 v3; // rbx
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  __int64 Size; // rbx
   __int64 result; // rax
 
-  v1 = this;
-  v2 = this->pNode;
-  v3 = v2->Size;
-  if ( v2->HashFlags & 0x8000000 )
-    return (unsigned int)v3;
-  result = Scaleform::UTF8Util::GetLength(v2->pData, v3);
-  if ( (_DWORD)result == (_DWORD)v3 )
-    v1->pNode->HashFlags |= 0x8000000u;
+  pNode = this->pNode;
+  Size = pNode->Size;
+  if ( (pNode->HashFlags & 0x8000000) != 0 )
+    return (unsigned int)Size;
+  result = Scaleform::UTF8Util::GetLength(pNode->pData, Size);
+  if ( (_DWORD)result == (_DWORD)Size )
+    this->pNode->HashFlags |= 0x8000000u;
   return result;
 }
 
 // File Line: 67
 // RVA: 0x8D5B40
-unsigned int __fastcall Scaleform::GFx::ASConstString::GetCharAt(Scaleform::GFx::ASConstString *this, unsigned int index)
+unsigned int __fastcall Scaleform::GFx::ASConstString::GetCharAt(Scaleform::GFx::ASConstString *this, int index)
 {
-  signed int v2; // ebx
+  int v2; // ebx
   unsigned int result; // eax
-  char *putf8Buffer; // [rsp+30h] [rbp+8h]
+  char *putf8Buffer; // [rsp+30h] [rbp+8h] BYREF
 
   v2 = index;
-  if ( this->pNode->HashFlags & 0x8000000 )
+  if ( (this->pNode->HashFlags & 0x8000000) != 0 )
     return this->pNode->pData[index];
   putf8Buffer = (char *)this->pNode->pData;
   do
@@ -95,29 +87,28 @@ unsigned int __fastcall Scaleform::GFx::ASConstString::GetCharAt(Scaleform::GFx:
 
 // File Line: 98
 // RVA: 0x8D80A0
-unsigned int __fastcall Scaleform::GFx::ASConstString::GetFirstCharAt(Scaleform::GFx::ASConstString *this, unsigned __int64 index, const char **offset)
+unsigned int __fastcall Scaleform::GFx::ASConstString::GetFirstCharAt(
+        Scaleform::GFx::ASConstString *this,
+        __int64 index,
+        char **offset)
 {
-  Scaleform::GFx::ASStringNode *v3; // rax
-  const char **v4; // rsi
-  signed __int64 v5; // rbx
+  Scaleform::GFx::ASStringNode *pNode; // rax
   char *v6; // rdi
   unsigned int result; // eax
-  char *putf8Buffer; // [rsp+30h] [rbp+8h]
+  char *putf8Buffer; // [rsp+30h] [rbp+8h] BYREF
 
-  v3 = this->pNode;
-  v4 = offset;
-  v5 = index;
+  pNode = this->pNode;
   putf8Buffer = (char *)this->pNode->pData;
-  v6 = &putf8Buffer[v3->Size];
+  v6 = &putf8Buffer[pNode->Size];
   while ( 1 )
   {
     result = Scaleform::UTF8Util::DecodeNextChar_Advance0((const char **)&putf8Buffer);
-    --v5;
+    --index;
     if ( putf8Buffer >= v6 )
       break;
-    if ( v5 < 0 )
+    if ( index < 0 )
     {
-      *v4 = putf8Buffer;
+      *offset = putf8Buffer;
       return result;
     }
   }
@@ -126,175 +117,169 @@ unsigned int __fastcall Scaleform::GFx::ASConstString::GetFirstCharAt(Scaleform:
 
 // File Line: 123
 // RVA: 0x8DB6E0
-unsigned int __fastcall Scaleform::GFx::ASConstString::GetNextChar(Scaleform::GFx::ASConstString *this, const char **offset)
+unsigned int __fastcall Scaleform::GFx::ASConstString::GetNextChar(
+        Scaleform::GFx::ASConstString *this,
+        const char **offset)
 {
-  const char **v2; // rbx
   unsigned int result; // eax
 
-  v2 = offset;
-  if ( this->pNode->HashFlags & 0x8000000 )
+  if ( (this->pNode->HashFlags & 0x8000000) != 0 )
+  {
     return *(*offset)++;
-  result = Scaleform::UTF8Util::DecodeNextChar_Advance0(offset);
-  if ( !result )
-    --*v2;
+  }
+  else
+  {
+    result = Scaleform::UTF8Util::DecodeNextChar_Advance0(offset);
+    if ( !result )
+      --*offset;
+  }
   return result;
 }
 
 // File Line: 137
 // RVA: 0x8B63A0
-Scaleform::GFx::ASStringNode *__fastcall Scaleform::GFx::ASConstString::AppendCharNode(Scaleform::GFx::ASConstString *this, unsigned int ch)
+Scaleform::GFx::ASStringNode *__fastcall Scaleform::GFx::ASConstString::AppendCharNode(
+        Scaleform::GFx::ASConstString *this,
+        unsigned int ch)
 {
-  const char ***v2; // rbx
-  unsigned int v3; // edi
   Scaleform::GFx::ASStringNode *result; // rax
-  __int64 pindex; // [rsp+40h] [rbp+8h]
-  char pbuffer; // [rsp+50h] [rbp+18h]
+  __int64 pindex; // [rsp+40h] [rbp+8h] BYREF
+  char pbuffer; // [rsp+50h] [rbp+18h] BYREF
 
-  v2 = (const char ***)this;
-  v3 = ch;
   pindex = 0i64;
   Scaleform::UTF8Util::EncodeCharSafe(&pbuffer, 8ui64, &pindex, ch);
   result = Scaleform::GFx::ASStringManager::CreateStringNode(
-             (Scaleform::GFx::ASStringManager *)(*v2)[1],
-             **v2,
-             *((unsigned int *)*v2 + 8),
+             this->pNode->pManager,
+             this->pNode->pData,
+             this->pNode->Size,
              &pbuffer,
              pindex);
-  if ( *((_DWORD *)*v2 + 7) & 0x8000000 )
-  {
-    if ( v3 < 0x80 )
-      result->HashFlags |= 0x8000000u;
-  }
+  if ( (this->pNode->HashFlags & 0x8000000) != 0 && ch < 0x80 )
+    result->HashFlags |= 0x8000000u;
   return result;
 }
 
 // File Line: 162
 // RVA: 0x912050
-Scaleform::GFx::ASStringNode *__fastcall Scaleform::GFx::ASConstString::SubstringNode(Scaleform::GFx::ASConstString *this, int start, int end)
+Scaleform::GFx::ASStringNode *__fastcall Scaleform::GFx::ASConstString::SubstringNode(
+        Scaleform::GFx::ASConstString *this,
+        int start,
+        int end)
 {
-  Scaleform::GFx::ASStringNode *v3; // rax
-  int v4; // esi
-  int v5; // er14
-  Scaleform::GFx::ASConstString *v6; // r15
-  char *v8; // rcx
+  Scaleform::GFx::ASStringNode *pNode; // rax
+  char *pData; // rcx
   int v9; // ebx
   const char *v10; // rdi
   char *v11; // rbp
-  unsigned int v12; // eax
-  char *putf8Buffer; // [rsp+58h] [rbp+20h]
+  unsigned int Char_Advance0; // eax
+  char *putf8Buffer; // [rsp+58h] [rbp+20h] BYREF
 
-  v3 = this->pNode;
-  v4 = end;
-  v5 = start;
-  v6 = this;
+  pNode = this->pNode;
   if ( start == end )
-    return &v3->pManager->EmptyStringNode;
-  v8 = (char *)v3->pData;
+    return &pNode->pManager->EmptyStringNode;
+  pData = (char *)pNode->pData;
   v9 = 0;
-  putf8Buffer = v8;
-  v10 = v8;
-  v11 = v8;
+  putf8Buffer = pData;
+  v10 = pData;
+  v11 = pData;
   do
   {
-    if ( v9 == v5 )
-      v10 = v8;
-    v12 = Scaleform::UTF8Util::DecodeNextChar_Advance0((const char **)&putf8Buffer);
-    v8 = putf8Buffer;
-    if ( !v12 )
-      v8 = putf8Buffer-- - 1;
-    if ( ++v9 == v4 )
+    if ( v9 == start )
+      v10 = pData;
+    Char_Advance0 = Scaleform::UTF8Util::DecodeNextChar_Advance0((const char **)&putf8Buffer);
+    pData = putf8Buffer;
+    if ( !Char_Advance0 )
+      pData = --putf8Buffer;
+    if ( ++v9 == end )
     {
-      v11 = v8;
+      v11 = pData;
       goto LABEL_14;
     }
   }
-  while ( v12 );
-  if ( v9 < v4 )
-    v11 = v8;
+  while ( Char_Advance0 );
+  if ( v9 < end )
+    v11 = pData;
 LABEL_14:
   if ( v11 < v10 )
     LODWORD(v11) = (_DWORD)v10;
-  return Scaleform::GFx::ASStringManager::CreateStringNode(v6->pNode->pManager, v10, (signed int)v11 - (signed int)v10);
+  return Scaleform::GFx::ASStringManager::CreateStringNode(this->pNode->pManager, v10, (int)v11 - (int)v10);
 }
 
 // File Line: 212
 // RVA: 0x914A40
-Scaleform::GFx::ASStringNode *__fastcall Scaleform::GFx::ASConstString::TruncateWhitespaceNode(Scaleform::GFx::ASConstString *this)
+Scaleform::GFx::ASStringNode *__fastcall Scaleform::GFx::ASConstString::TruncateWhitespaceNode(
+        Scaleform::GFx::ASConstString *this)
 {
-  Scaleform::GFx::ASConstString *v1; // rbx
-  const char *v2; // rax
-  unsigned __int64 v3; // r8
-  const char *v4; // rcx
-  Scaleform::StringDataPtr result; // [rsp+20h] [rbp-28h]
-  Scaleform::StringDataPtr v7; // [rsp+30h] [rbp-18h]
+  const char *pData; // rax
+  unsigned __int64 Size; // r8
+  const char *pStr; // rcx
+  Scaleform::StringDataPtr result; // [rsp+20h] [rbp-28h] BYREF
+  Scaleform::StringDataPtr v7; // [rsp+30h] [rbp-18h] BYREF
 
-  v1 = this;
-  v2 = this->pNode->pData;
+  pData = this->pNode->pData;
   v7.Size = this->pNode->Size;
-  v7.pStr = v2;
+  v7.pStr = pData;
   Scaleform::StringDataPtr::GetTruncateWhitespace(&v7, &result);
-  v3 = result.Size;
-  v4 = result.pStr;
+  Size = result.Size;
+  pStr = result.pStr;
   if ( v7.Size != result.Size )
-    return Scaleform::GFx::ASStringManager::CreateStringNode(v1->pNode->pManager, v4, v3);
+    return Scaleform::GFx::ASStringManager::CreateStringNode(this->pNode->pManager, pStr, Size);
   if ( v7.pStr != result.pStr )
   {
     if ( !result.pStr || !v7.pStr )
-      return Scaleform::GFx::ASStringManager::CreateStringNode(v1->pNode->pManager, v4, v3);
+      return Scaleform::GFx::ASStringManager::CreateStringNode(this->pNode->pManager, pStr, Size);
     if ( strncmp(result.pStr, v7.pStr, result.Size) )
     {
-      v3 = result.Size;
-      v4 = result.pStr;
-      return Scaleform::GFx::ASStringManager::CreateStringNode(v1->pNode->pManager, v4, v3);
+      Size = result.Size;
+      pStr = result.pStr;
+      return Scaleform::GFx::ASStringManager::CreateStringNode(this->pNode->pManager, pStr, Size);
     }
   }
-  return v1->pNode;
+  return this->pNode;
 }
 
 // File Line: 224
 // RVA: 0x9130E0
-Scaleform::GFx::ASStringNode *__fastcall Scaleform::GFx::ASConstString::ToUpperNode(Scaleform::GFx::ASConstString *this)
+Scaleform::GFx::ASStringNode *__fastcall Scaleform::GFx::ASConstString::ToUpperNode(
+        Scaleform::GFx::ASConstString *this)
 {
-  Scaleform::GFx::ASConstString *v1; // rdi
   Scaleform::String *v2; // rax
-  Scaleform::GFx::ASStringNode *v3; // rax
+  Scaleform::GFx::ASStringNode *StringNode; // rax
   Scaleform::GFx::ASStringNode *v4; // rdi
-  Scaleform::String result; // [rsp+40h] [rbp+8h]
-  Scaleform::String v6; // [rsp+48h] [rbp+10h]
+  Scaleform::String result; // [rsp+40h] [rbp+8h] BYREF
+  Scaleform::String v6; // [rsp+48h] [rbp+10h] BYREF
 
-  v1 = this;
   Scaleform::String::String(&v6, this->pNode->pData, this->pNode->Size);
   Scaleform::String::ToUpper(v2, &result);
   if ( !_InterlockedDecrement((volatile signed __int32 *)((v6.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-    ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
-  v3 = Scaleform::GFx::ASStringManager::CreateStringNode(
-         v1->pNode->pManager,
-         (const char *)((result.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12),
-         *(_QWORD *)(result.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) & 0x7FFFFFFFFFFFFFFFi64);
-  v4 = v3;
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+  StringNode = Scaleform::GFx::ASStringManager::CreateStringNode(
+                 this->pNode->pManager,
+                 (const char *)((result.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12),
+                 *(_QWORD *)(result.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) & 0x7FFFFFFFFFFFFFFFi64);
+  v4 = StringNode;
   if ( !_InterlockedDecrement((volatile signed __int32 *)((result.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
   {
-    ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
-    v3 = v4;
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+    return v4;
   }
-  return v3;
+  return StringNode;
 }
 
 // File Line: 230
 // RVA: 0x912DC0
-Scaleform::GFx::ASStringNode *__fastcall Scaleform::GFx::ASConstString::ToLowerNode(Scaleform::GFx::ASConstString *this)
+Scaleform::GFx::ASStringNode *__fastcall Scaleform::GFx::ASConstString::ToLowerNode(
+        Scaleform::GFx::ASConstString *this)
 {
-  Scaleform::GFx::ASConstString *v1; // rbx
-  Scaleform::GFx::ASStringNode *v2; // rcx
+  Scaleform::GFx::ASStringNode *pNode; // rcx
   Scaleform::GFx::ASStringNode *result; // rax
 
-  v1 = this;
-  v2 = this->pNode;
-  if ( !v2->pLower )
-    Scaleform::GFx::ASStringNode::ResolveLowercase_Impl(v2);
-  result = v1->pNode->pLower;
+  pNode = this->pNode;
+  if ( !pNode->pLower )
+    Scaleform::GFx::ASStringNode::ResolveLowercase_Impl(pNode);
+  result = this->pNode->pLower;
   if ( !result )
-    result = &v1->pNode->pManager->EmptyStringNode;
+    return &this->pNode->pManager->EmptyStringNode;
   return result;
 }
 
@@ -302,32 +287,27 @@ Scaleform::GFx::ASStringNode *__fastcall Scaleform::GFx::ASConstString::ToLowerN
 // RVA: 0x8A8D10
 void __fastcall Scaleform::GFx::ASString::operator=(Scaleform::GFx::ASString *this, const char *pstr)
 {
-  Scaleform::GFx::ASString *v2; // rbx
   unsigned __int64 v3; // r8
-  Scaleform::GFx::ASStringNode *v4; // rax
+  Scaleform::GFx::ASStringNode *StringNode; // rax
   Scaleform::GFx::ASStringNode *v5; // rdi
-  Scaleform::GFx::ASStringNode *v6; // rcx
-  bool v7; // zf
+  Scaleform::GFx::ASStringNode *pNode; // rcx
 
-  v2 = this;
   v3 = -1i64;
   do
     ++v3;
   while ( pstr[v3] );
-  v4 = Scaleform::GFx::ASStringManager::CreateStringNode(this->pNode->pManager, pstr, v3);
-  v5 = v4;
-  ++v4->RefCount;
-  v6 = v2->pNode;
-  v7 = v2->pNode->RefCount == 1;
-  --v6->RefCount;
-  if ( v7 )
+  StringNode = Scaleform::GFx::ASStringManager::CreateStringNode(this->pNode->pManager, pstr, v3);
+  v5 = StringNode;
+  ++StringNode->RefCount;
+  pNode = this->pNode;
+  if ( this->pNode->RefCount-- == 1 )
   {
-    Scaleform::GFx::ASStringNode::ReleaseNode(v6);
-    v2->pNode = v5;
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
+    this->pNode = v5;
   }
   else
   {
-    v2->pNode = v4;
+    this->pNode = StringNode;
   }
 }
 
@@ -335,32 +315,27 @@ void __fastcall Scaleform::GFx::ASString::operator=(Scaleform::GFx::ASString *th
 // RVA: 0x8B6340
 void __fastcall Scaleform::GFx::ASString::Append(Scaleform::GFx::ASString *this, const char *str, unsigned __int64 len)
 {
-  Scaleform::GFx::ASString *v3; // rbx
-  Scaleform::GFx::ASStringNode *v4; // rax
+  Scaleform::GFx::ASStringNode *StringNode; // rax
   Scaleform::GFx::ASStringNode *v5; // rdi
-  Scaleform::GFx::ASStringNode *v6; // rcx
-  bool v7; // zf
+  Scaleform::GFx::ASStringNode *pNode; // rcx
 
-  v3 = this;
-  v4 = Scaleform::GFx::ASStringManager::CreateStringNode(
-         this->pNode->pManager,
-         this->pNode->pData,
-         this->pNode->Size,
-         str,
-         len);
-  v5 = v4;
-  ++v4->RefCount;
-  v6 = v3->pNode;
-  v7 = v3->pNode->RefCount == 1;
-  --v6->RefCount;
-  if ( v7 )
+  StringNode = Scaleform::GFx::ASStringManager::CreateStringNode(
+                 this->pNode->pManager,
+                 this->pNode->pData,
+                 this->pNode->Size,
+                 str,
+                 len);
+  v5 = StringNode;
+  ++StringNode->RefCount;
+  pNode = this->pNode;
+  if ( this->pNode->RefCount-- == 1 )
   {
-    Scaleform::GFx::ASStringNode::ReleaseNode(v6);
-    v3->pNode = v5;
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
+    this->pNode = v5;
   }
   else
   {
-    v3->pNode = v4;
+    this->pNode = StringNode;
   }
 }
 
@@ -368,100 +343,95 @@ void __fastcall Scaleform::GFx::ASString::Append(Scaleform::GFx::ASString *this,
 // RVA: 0x8B62E0
 void __fastcall Scaleform::GFx::ASString::Append(Scaleform::GFx::ASString *this, Scaleform::GFx::ASString *str)
 {
-  Scaleform::GFx::ASString *v2; // rbx
-  Scaleform::GFx::ASStringNode *v3; // rax
+  Scaleform::GFx::ASStringNode *StringNode; // rax
   Scaleform::GFx::ASStringNode *v4; // rdi
-  Scaleform::GFx::ASStringNode *v5; // rcx
-  bool v6; // zf
+  Scaleform::GFx::ASStringNode *pNode; // rcx
 
-  v2 = this;
-  v3 = Scaleform::GFx::ASStringManager::CreateStringNode(
-         this->pNode->pManager,
-         this->pNode->pData,
-         this->pNode->Size,
-         str->pNode->pData,
-         str->pNode->Size);
-  v4 = v3;
-  ++v3->RefCount;
-  v5 = v2->pNode;
-  v6 = v2->pNode->RefCount == 1;
-  --v5->RefCount;
-  if ( v6 )
+  StringNode = Scaleform::GFx::ASStringManager::CreateStringNode(
+                 this->pNode->pManager,
+                 this->pNode->pData,
+                 this->pNode->Size,
+                 str->pNode->pData,
+                 str->pNode->Size);
+  v4 = StringNode;
+  ++StringNode->RefCount;
+  pNode = this->pNode;
+  if ( this->pNode->RefCount-- == 1 )
   {
-    Scaleform::GFx::ASStringNode::ReleaseNode(v5);
-    v2->pNode = v4;
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
+    this->pNode = v4;
   }
   else
   {
-    v2->pNode = v3;
+    this->pNode = StringNode;
   }
 }
 
 // File Line: 256
 // RVA: 0x8A92F0
-Scaleform::GFx::ASString *__fastcall Scaleform::GFx::ASString::operator+(Scaleform::GFx::ASString *this, Scaleform::GFx::ASString *result, const char *pstr)
+Scaleform::GFx::ASString *__fastcall Scaleform::GFx::ASString::operator+(
+        Scaleform::GFx::ASString *this,
+        Scaleform::GFx::ASString *result,
+        const char *pstr)
 {
-  Scaleform::GFx::ASString *v3; // rbx
-  Scaleform::GFx::ASStringNode *v4; // rdx
-  Scaleform::GFx::ASStringManager *v5; // rcx
+  Scaleform::GFx::ASStringNode *pNode; // rdx
+  Scaleform::GFx::ASStringManager *pManager; // rcx
   unsigned __int64 l2; // rax
-  Scaleform::GFx::ASStringNode *v7; // rax
+  Scaleform::GFx::ASStringNode *StringNode; // rax
 
-  v3 = result;
-  v4 = this->pNode;
-  v5 = this->pNode->pManager;
+  pNode = this->pNode;
+  pManager = this->pNode->pManager;
   l2 = -1i64;
   do
     ++l2;
   while ( pstr[l2] );
-  v7 = Scaleform::GFx::ASStringManager::CreateStringNode(v5, v4->pData, v4->Size, pstr, l2);
-  v3->pNode = v7;
-  ++v7->RefCount;
-  return v3;
+  StringNode = Scaleform::GFx::ASStringManager::CreateStringNode(pManager, pNode->pData, pNode->Size, pstr, l2);
+  result->pNode = StringNode;
+  ++StringNode->RefCount;
+  return result;
 }
 
 // File Line: 262
 // RVA: 0x8A9290
-Scaleform::GFx::ASString *__fastcall Scaleform::GFx::ASString::operator+(Scaleform::GFx::ASString *this, Scaleform::GFx::ASString *result, Scaleform::GFx::ASString *str)
+Scaleform::GFx::ASString *__fastcall Scaleform::GFx::ASString::operator+(
+        Scaleform::GFx::ASString *this,
+        Scaleform::GFx::ASString *result,
+        Scaleform::GFx::ASString *str)
 {
-  Scaleform::GFx::ASString *v3; // rbx
-  Scaleform::GFx::ASStringNode *v4; // rax
+  Scaleform::GFx::ASStringNode *StringNode; // rax
 
-  v3 = result;
-  v4 = Scaleform::GFx::ASStringManager::CreateStringNode(
-         this->pNode->pManager,
-         this->pNode->pData,
-         this->pNode->Size,
-         str->pNode->pData,
-         str->pNode->Size);
-  v3->pNode = v4;
-  ++v4->RefCount;
-  return v3;
+  StringNode = Scaleform::GFx::ASStringManager::CreateStringNode(
+                 this->pNode->pManager,
+                 this->pNode->pData,
+                 this->pNode->Size,
+                 str->pNode->pData,
+                 str->pNode->Size);
+  result->pNode = StringNode;
+  ++StringNode->RefCount;
+  return result;
 }
 
 // File Line: 284
 // RVA: 0x8E9190
-__int64 __fastcall Scaleform::GFx::ASConstString::LocaleCompare_CaseCheck(Scaleform::GFx::ASConstString *this, const char *pstr, unsigned __int64 len, bool caseSensitive)
+__int64 __fastcall Scaleform::GFx::ASConstString::LocaleCompare_CaseCheck(
+        Scaleform::GFx::ASConstString *this,
+        const char *pstr,
+        unsigned __int64 len,
+        bool caseSensitive)
 {
-  bool v4; // r12
   unsigned __int64 v5; // rbx
-  const char *v6; // rbp
-  const char ***v7; // r15
-  Scaleform::GFx::ASStringNode *v8; // rcx
-  unsigned int v9; // edi
-  unsigned int v10; // eax
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  unsigned int Size; // edi
+  unsigned int Length; // eax
   __int64 v11; // r14
   wchar_t *v12; // rsi
   wchar_t *v13; // rdi
   int v14; // eax
   unsigned int v15; // ebx
-  char v17; // [rsp+20h] [rbp-418h]
-  char v18; // [rsp+220h] [rbp-218h]
+  char v17[512]; // [rsp+20h] [rbp-418h] BYREF
+  char v18[512]; // [rsp+220h] [rbp-218h] BYREF
 
-  v4 = caseSensitive;
   v5 = len;
-  v6 = pstr;
-  v7 = (const char ***)this;
   if ( len == -1i64 )
   {
     v5 = -1i64;
@@ -469,34 +439,34 @@ __int64 __fastcall Scaleform::GFx::ASConstString::LocaleCompare_CaseCheck(Scalef
       ++v5;
     while ( pstr[v5] );
   }
-  v8 = this->pNode;
-  v9 = v8->Size;
-  if ( !(v8->HashFlags & 0x8000000) )
+  pNode = this->pNode;
+  Size = pNode->Size;
+  if ( (pNode->HashFlags & 0x8000000) == 0 )
   {
-    v10 = Scaleform::UTF8Util::GetLength(v8->pData, v9);
-    if ( v10 == v9 )
-      *((_DWORD *)*v7 + 7) |= 0x8000000u;
-    v9 = v10;
+    Length = Scaleform::UTF8Util::GetLength(pNode->pData, Size);
+    if ( Length == Size )
+      this->pNode->HashFlags |= 0x8000000u;
+    Size = Length;
   }
-  v11 = v9;
-  if ( v9 < 0xFAui64 )
-    v12 = (wchar_t *)&v17;
+  v11 = Size;
+  if ( Size < 0xFAui64 )
+    v12 = (wchar_t *)v17;
   else
-    v12 = (wchar_t *)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(Scaleform::Memory::pGlobalHeap, 2i64 * v9 + 2, 0i64);
+    v12 = (wchar_t *)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(Scaleform::Memory::pGlobalHeap, 2i64 * Size + 2, 0i64);
   if ( v5 < 0xFA )
-    v13 = (wchar_t *)&v18;
+    v13 = (wchar_t *)v18;
   else
     v13 = (wchar_t *)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(Scaleform::Memory::pGlobalHeap, 2 * v5 + 2, 0i64);
-  Scaleform::UTF8Util::DecodeStringSafe(v12, v11 + 1, **v7, *((unsigned int *)*v7 + 8));
-  Scaleform::UTF8Util::DecodeStringSafe(v13, v5 + 1, v6, v5);
-  if ( v4 )
+  Scaleform::UTF8Util::DecodeStringSafe(v12, v11 + 1, this->pNode->pData, this->pNode->Size);
+  Scaleform::UTF8Util::DecodeStringSafe(v13, v5 + 1, pstr, v5);
+  if ( caseSensitive )
     v14 = wcscoll(v12, v13);
   else
     v14 = wcsicoll(v12, v13);
   v15 = v14;
-  if ( v12 != (wchar_t *)&v17 )
+  if ( v12 != (wchar_t *)v17 )
     Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v12);
-  if ( v13 != (wchar_t *)&v18 )
+  if ( v13 != (wchar_t *)v18 )
     Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v13);
   return v15;
 }
@@ -505,159 +475,145 @@ __int64 __fastcall Scaleform::GFx::ASConstString::LocaleCompare_CaseCheck(Scalef
 // RVA: 0x904100
 void __fastcall Scaleform::GFx::ASStringNode::ResolveLowercase_Impl(Scaleform::GFx::ASStringNode *this)
 {
-  Scaleform::GFx::ASStringNode *v1; // rdi
   Scaleform::String *v2; // rax
-  Scaleform::GFx::ASStringNode *v3; // rax
-  Scaleform::String result; // [rsp+40h] [rbp+8h]
-  Scaleform::String v5; // [rsp+48h] [rbp+10h]
+  Scaleform::GFx::ASStringNode *StringNode; // rax
+  Scaleform::String result; // [rsp+40h] [rbp+8h] BYREF
+  Scaleform::String v5; // [rsp+48h] [rbp+10h] BYREF
 
-  v1 = this;
   Scaleform::String::String(&v5, this->pData, this->Size);
   Scaleform::String::ToLower(v2, &result);
   if ( !_InterlockedDecrement((volatile signed __int32 *)((v5.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-    ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
-  v3 = Scaleform::GFx::ASStringManager::CreateStringNode(
-         v1->pManager,
-         (const char *)((result.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12),
-         *(_QWORD *)(result.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) & 0x7FFFFFFFFFFFFFFFi64);
-  if ( v3 != &v1->pManager->EmptyStringNode )
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+  StringNode = Scaleform::GFx::ASStringManager::CreateStringNode(
+                 this->pManager,
+                 (const char *)((result.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12),
+                 *(_QWORD *)(result.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) & 0x7FFFFFFFFFFFFFFFi64);
+  if ( StringNode != &this->pManager->EmptyStringNode )
   {
-    v1->pLower = v3;
-    if ( v3 != v1 )
-      ++v3->RefCount;
+    this->pLower = StringNode;
+    if ( StringNode != this )
+      ++StringNode->RefCount;
   }
   if ( !_InterlockedDecrement((volatile signed __int32 *)((result.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-    ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
 }
 
 // File Line: 336
 // RVA: 0x8FEA00
 void __fastcall Scaleform::GFx::ASStringNode::ReleaseNode(Scaleform::GFx::ASStringNode *this)
 {
-  Scaleform::GFx::ASStringNode *v1; // rbx
-  Scaleform::GFx::ASStringNode *v2; // rcx
-  bool v3; // zf
-  Scaleform::HashSetBase<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::AllocatorLH<Scaleform::GFx::ASStringNode *,324>,Scaleform::HashsetEntry<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *> > > *v4; // rcx
-  char *v5; // rdx
+  Scaleform::GFx::ASStringNode *pLower; // rcx
+  Scaleform::GFx::ASStringManager *pManager; // rcx
+  char *pData; // rdx
   Scaleform::GFx::ASStringManager *v6; // rdi
-  Scaleform::GFx::ASStringNode *key; // [rsp+30h] [rbp+8h]
+  Scaleform::GFx::ASStringNode *key; // [rsp+30h] [rbp+8h] BYREF
 
-  v1 = this;
-  v2 = this->pLower;
-  if ( v2 != v1 )
+  pLower = this->pLower;
+  if ( pLower != this )
   {
-    if ( v2 )
+    if ( pLower )
     {
-      v3 = v2->RefCount-- == 1;
-      if ( v3 )
-        Scaleform::GFx::ASStringNode::ReleaseNode(v2);
+      if ( pLower->RefCount-- == 1 )
+        Scaleform::GFx::ASStringNode::ReleaseNode(pLower);
     }
   }
-  v4 = (Scaleform::HashSetBase<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::AllocatorLH<Scaleform::GFx::ASStringNode *,324>,Scaleform::HashsetEntry<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *> > > *)v1->pManager;
-  key = v1;
+  pManager = this->pManager;
+  key = this;
   Scaleform::HashSetBase<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::AllocatorLH<Scaleform::GFx::ASStringNode *,324>,Scaleform::HashsetEntry<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>>>::RemoveAlt<Scaleform::GFx::ASStringNode *>(
-    v4 + 2,
+    &pManager->StringSet,
     &key);
-  v5 = (char *)v1->pData;
-  v6 = v1->pManager;
-  if ( v1->pData )
+  pData = (char *)this->pData;
+  v6 = this->pManager;
+  if ( this->pData )
   {
-    if ( !(v1->HashFlags & 0x40000000) )
+    if ( (this->HashFlags & 0x40000000) == 0 )
     {
-      if ( v1->Size >= 0x10 )
+      if ( this->Size >= 0x10 )
       {
-        ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
+        ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
       }
       else
       {
-        *(_QWORD *)v5 = v6->pFreeTextBuffers;
-        v6->pFreeTextBuffers = (Scaleform::GFx::ASStringManager::TextPage::Entry *)v5;
+        *(_QWORD *)pData = v6->pFreeTextBuffers;
+        v6->pFreeTextBuffers = (Scaleform::GFx::ASStringManager::TextPage::Entry *)pData;
       }
     }
-    v1->pData = 0i64;
+    this->pData = 0i64;
   }
-  v1->pLower = v6->pFreeStringNodes;
-  v6->pFreeStringNodes = v1;
+  this->pLower = v6->pFreeStringNodes;
+  v6->pFreeStringNodes = this;
 }
 
 // File Line: 353
 // RVA: 0x894650
-void __fastcall Scaleform::GFx::ASStringManager::ASStringManager(Scaleform::GFx::ASStringManager *this, Scaleform::MemoryHeap *pheap)
+void __fastcall Scaleform::GFx::ASStringManager::ASStringManager(
+        Scaleform::GFx::ASStringManager *this,
+        Scaleform::MemoryHeap *pheap)
 {
-  Scaleform::GFx::ASStringManager *v2; // rsi
-  Scaleform::GFx::ASStringNode *v3; // rdi
-  Scaleform::GFx::ASStringNode *v4; // rcx
-  Scaleform::GFx::ASStringNode *key; // [rsp+58h] [rbp+10h]
+  Scaleform::HashSetUncachedLH<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,324> *p_StringSet; // rdi
+  Scaleform::GFx::ASStringNode *key; // [rsp+58h] [rbp+10h] BYREF
 
-  v2 = this;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,324>::`vftable;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::ASStringManager,324>::`vftable;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ASStringManager::`vftable;
-  v3 = (Scaleform::GFx::ASStringNode *)&this->StringSet;
-  key = v3;
-  v3->pData = 0i64;
+  p_StringSet = &this->StringSet;
+  key = (Scaleform::GFx::ASStringNode *)&this->StringSet;
+  this->StringSet.pTable = 0i64;
   this->pHeap = pheap;
   this->pLog.pObject = 0i64;
   Scaleform::StringLH::StringLH(&this->FileName);
-  v2->pStringNodePages = 0i64;
-  v2->pFreeStringNodes = 0i64;
-  v2->pFreeTextBuffers = 0i64;
-  v2->pTextBufferPages = 0i64;
-  v2->EmptyStringNode.RefCount = 1;
-  v2->EmptyStringNode.Size = 0;
-  v2->EmptyStringNode.HashFlags = Scaleform::String::BernsteinHashFunctionCIS(&customWorldMapCaption, 0i64, 0x1505ui64) & 0xFFFFFF | 0xC8000000;
-  v2->EmptyStringNode.pData = &customWorldMapCaption;
-  v2->EmptyStringNode.pManager = v2;
-  v2->EmptyStringNode.pLower = &v2->EmptyStringNode;
-  key = &v2->EmptyStringNode;
+  this->pStringNodePages = 0i64;
+  this->pFreeStringNodes = 0i64;
+  this->pFreeTextBuffers = 0i64;
+  this->pTextBufferPages = 0i64;
+  this->EmptyStringNode.RefCount = 1;
+  this->EmptyStringNode.Size = 0;
+  this->EmptyStringNode.HashFlags = Scaleform::String::BernsteinHashFunctionCIS(&customCaption, 0i64, 0x1505ui64) & 0xFFFFFF | 0xC8000000;
+  this->EmptyStringNode.pData = &customCaption;
+  this->EmptyStringNode.pManager = this;
+  this->EmptyStringNode.pLower = &this->EmptyStringNode;
+  key = &this->EmptyStringNode;
   Scaleform::HashSetBase<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::AllocatorLH<Scaleform::GFx::ASStringNode *,324>,Scaleform::HashsetEntry<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>>>::add<Scaleform::GFx::ASStringNode *>(
-    (Scaleform::HashSetBase<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::AllocatorLH<Scaleform::GFx::ASStringNode *,324>,Scaleform::HashsetEntry<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *> > > *)v3,
-    v3,
+    p_StringSet,
+    p_StringSet,
     &key,
-    v2->EmptyStringNode.HashFlags);
-  v4 = &v2->NullStringNode;
-  v4->pData = v2->EmptyStringNode.pData;
-  v4->pManager = v2->EmptyStringNode.pManager;
-  v4->pLower = v2->EmptyStringNode.pLower;
-  *(_QWORD *)&v4->RefCount = *(_QWORD *)&v2->EmptyStringNode.RefCount;
-  *(_QWORD *)&v4->Size = *(_QWORD *)&v2->EmptyStringNode.Size;
-  v2->NullStringNode.pLower = &v2->NullStringNode;
+    this->EmptyStringNode.HashFlags);
+  this->NullStringNode = this->EmptyStringNode;
+  this->NullStringNode.pLower = &this->NullStringNode;
 }
 
 // File Line: 377
 // RVA: 0x8A2E70
 void __fastcall Scaleform::GFx::ASStringManager::~ASStringManager(Scaleform::GFx::ASStringManager *this)
 {
-  Scaleform::GFx::ASStringManager *v1; // rdi
   unsigned int v2; // esi
-  Scaleform::GFx::ASStringManager::StringNodePage *v3; // r15
+  Scaleform::GFx::ASStringManager::StringNodePage *pStringNodePages; // r15
   Scaleform::GFx::ASStringManager::StringNodePage *v4; // rbx
-  signed __int64 v5; // rbp
+  __int64 v5; // rbp
   const char *v6; // rdx
-  char *v7; // rdx
-  Scaleform::GFx::ASStringManager::TextPage *v8; // rax
-  void *v9; // rdx
-  Scaleform::GFx::LogBase<Scaleform::GFx::LogState> *v10; // rcx
+  Scaleform::GFx::ASStringManager::TextPage::Entry *pData; // rdx
+  Scaleform::GFx::ASStringManager::TextPage *pTextBufferPages; // rax
+  void *pMem; // rdx
+  Scaleform::GFx::LogState *pObject; // rcx
   char *v11; // r8
   Scaleform::Render::RenderBuffer *v12; // rcx
-  void **v13; // rbx
-  Scaleform::HashSetBase<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::AllocatorLH<Scaleform::GFx::ASStringNode *,324>,Scaleform::HashsetEntry<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *> > >::TableType *v14; // rax
+  Scaleform::HashSetUncachedLH<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,324> *p_StringSet; // rbx
+  Scaleform::HashSetBase<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::AllocatorLH<Scaleform::GFx::ASStringNode *,324>,Scaleform::HashsetEntry<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *> > >::TableType *pTable; // rax
   __int64 v15; // rcx
-  signed __int64 v16; // rdx
-  Scaleform::StringBuffer v17; // [rsp+28h] [rbp-60h]
+  __int64 v16; // rdx
+  Scaleform::StringBuffer v17; // [rsp+28h] [rbp-60h] BYREF
 
-  v1 = this;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ASStringManager::`vftable;
   Scaleform::StringBuffer::StringBuffer(&v17, Scaleform::Memory::pGlobalHeap);
   v2 = 0;
-  while ( v1->pStringNodePages )
+  while ( this->pStringNodePages )
   {
-    v3 = v1->pStringNodePages;
-    v1->pStringNodePages = v3->pNext;
-    v4 = v3;
+    pStringNodePages = this->pStringNodePages;
+    this->pStringNodePages = pStringNodePages->pNext;
+    v4 = pStringNodePages;
     v5 = 127i64;
     do
     {
@@ -673,17 +629,17 @@ void __fastcall Scaleform::GFx::ASStringManager::~ASStringManager(Scaleform::GFx
           Scaleform::StringBuffer::AppendString(&v17, "", -1i64);
         }
         ++v2;
-        if ( !(v4->Nodes[0].HashFlags & 0x40000000) )
+        if ( (v4->Nodes[0].HashFlags & 0x40000000) == 0 )
         {
-          v7 = (char *)v4->Nodes[0].pData;
+          pData = (Scaleform::GFx::ASStringManager::TextPage::Entry *)v4->Nodes[0].pData;
           if ( v4->Nodes[0].Size >= 0x10 )
           {
-            Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v7);
+            Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, pData);
           }
           else
           {
-            *(_QWORD *)v7 = v1->pFreeTextBuffers;
-            v1->pFreeTextBuffers = (Scaleform::GFx::ASStringManager::TextPage::Entry *)v7;
+            pData->pNextAlloc = this->pFreeTextBuffers;
+            this->pFreeTextBuffers = pData;
           }
         }
       }
@@ -691,84 +647,81 @@ void __fastcall Scaleform::GFx::ASStringManager::~ASStringManager(Scaleform::GFx
       --v5;
     }
     while ( v5 );
-    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v3);
+    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, pStringNodePages);
   }
-  while ( v1->pTextBufferPages )
+  while ( this->pTextBufferPages )
   {
-    v8 = v1->pTextBufferPages;
-    v9 = v8->pMem;
-    v1->pTextBufferPages = v8->pNext;
-    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v9);
+    pTextBufferPages = this->pTextBufferPages;
+    pMem = pTextBufferPages->pMem;
+    this->pTextBufferPages = pTextBufferPages->pNext;
+    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, pMem);
   }
   if ( v2 )
   {
-    v10 = (Scaleform::GFx::LogBase<Scaleform::GFx::LogState> *)v1->pLog.pObject;
-    if ( v10 )
+    pObject = this->pLog.pObject;
+    if ( pObject )
     {
       Scaleform::GFx::LogBase<Scaleform::GFx::LogState>::LogScriptError(
-        v10 + 3,
+        &pObject->Scaleform::GFx::LogBase<Scaleform::GFx::LogState>,
         "ActionScript Memory leaks in movie %s, including %d string nodes",
-        (v1->FileName.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12,
-        v2,
-        -2i64);
-      v11 = &customWorldMapCaption;
+        (const char *)((this->FileName.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12),
+        v2);
+      v11 = &customCaption;
       if ( v17.pData )
         v11 = v17.pData;
       Scaleform::GFx::LogBase<Scaleform::GFx::LogState>::LogScriptError(
-        (Scaleform::GFx::LogBase<Scaleform::GFx::LogState> *)&v1->pLog.pObject->vfptr,
+        &this->pLog.pObject->Scaleform::GFx::LogBase<Scaleform::GFx::LogState>,
         "Leaked string content: %s\n",
         v11);
     }
   }
   Scaleform::ArrayDataBase<Scaleform::MsgFormat::fmt_record,Scaleform::AllocatorGH_POD<Scaleform::MsgFormat::fmt_record,2>,Scaleform::ArrayDefaultPolicy>::~ArrayDataBase<Scaleform::MsgFormat::fmt_record,Scaleform::AllocatorGH_POD<Scaleform::MsgFormat::fmt_record,2>,Scaleform::ArrayDefaultPolicy>((Scaleform::ArrayDataBase<int,Scaleform::AllocatorGH<int,2>,Scaleform::ArrayDefaultPolicy> *)&v17);
   if ( _InterlockedExchangeAdd(
-         (volatile signed __int32 *)((v1->FileName.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8),
+         (volatile signed __int32 *)((this->FileName.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8),
          0xFFFFFFFF) == 1 )
-    ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
-  v12 = (Scaleform::Render::RenderBuffer *)v1->pLog.pObject;
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+  v12 = (Scaleform::Render::RenderBuffer *)this->pLog.pObject;
   if ( v12 )
     Scaleform::RefCountImpl::Release(v12);
-  v13 = (void **)&v1->StringSet.pTable;
-  v14 = v1->StringSet.pTable;
-  if ( v14 )
+  p_StringSet = &this->StringSet;
+  pTable = this->StringSet.pTable;
+  if ( pTable )
   {
     v15 = 0i64;
-    v16 = v14->SizeMask + 1;
+    v16 = pTable->SizeMask + 1;
     do
     {
-      if ( *(_QWORD *)((char *)*v13 + v15 + 16) != -2i64 )
-        *(_QWORD *)((char *)*v13 + v15 + 16) = -2i64;
-      v15 += 16i64;
+      if ( p_StringSet->pTable[v15 + 1].EntryCount != -2i64 )
+        p_StringSet->pTable[v15 + 1].EntryCount = -2i64;
+      ++v15;
       --v16;
     }
     while ( v16 );
-    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, *v13);
-    *v13 = 0i64;
+    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, p_StringSet->pTable);
+    p_StringSet->pTable = 0i64;
   }
-  Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&v1->vfptr);
+  Scaleform::RefCountImplCore::~RefCountImplCore(this);
 }
 
 // File Line: 442
 // RVA: 0x8B5E40
 void __fastcall Scaleform::GFx::ASStringManager::AllocateStringNodes(Scaleform::GFx::ASStringManager *this)
 {
-  Scaleform::GFx::ASStringManager *v1; // rbx
   Scaleform::GFx::ASStringManager::StringNodePage *v2; // rax
-  signed __int64 v3; // rdx
+  __int64 v3; // rdx
 
-  v1 = this;
-  v2 = (Scaleform::GFx::ASStringManager::StringNodePage *)this->pHeap->vfptr->Alloc(this->pHeap, 5088ui64, 0i64);
+  v2 = (Scaleform::GFx::ASStringManager::StringNodePage *)this->pHeap->vfptr->Alloc(this->pHeap, 5088i64, 0i64);
   if ( v2 )
   {
-    v2->pNext = v1->pStringNodePages;
-    v1->pStringNodePages = v2;
+    v2->pNext = this->pStringNodePages;
+    this->pStringNodePages = v2;
     v3 = 127i64;
     do
     {
       v2->Nodes[0].pData = 0i64;
-      v2->Nodes[0].pManager = v1;
-      v2->Nodes[0].pLower = v1->pFreeStringNodes;
-      v1->pFreeStringNodes = (Scaleform::GFx::ASStringNode *)v2;
+      v2->Nodes[0].pManager = this;
+      v2->Nodes[0].pLower = this->pFreeStringNodes;
+      this->pFreeStringNodes = (Scaleform::GFx::ASStringNode *)v2;
       v2 = (Scaleform::GFx::ASStringManager::StringNodePage *)((char *)v2 + 40);
       --v3;
     }
@@ -780,36 +733,34 @@ void __fastcall Scaleform::GFx::ASStringManager::AllocateStringNodes(Scaleform::
 // RVA: 0x8B5F10
 void __fastcall Scaleform::GFx::ASStringManager::AllocateTextBuffers(Scaleform::GFx::ASStringManager *this)
 {
-  Scaleform::GFx::ASStringManager *v1; // rbx
   void *v2; // rax
-  unsigned __int64 v3; // rcx
-  signed __int64 v4; // r8
+  Scaleform::GFx::ASStringManager::TextPage *v3; // rcx
+  __int64 v4; // r8
   Scaleform::GFx::ASStringManager::TextPage::Entry *v5; // rax
   Scaleform::GFx::ASStringManager::TextPage::Entry *v6; // rdx
   Scaleform::GFx::ASStringManager::TextPage::Entry *v7; // rcx
 
-  v1 = this;
-  v2 = this->pHeap->vfptr->Alloc(this->pHeap, 2040ui64, 0i64);
-  v3 = ((unsigned __int64)v2 + 7) & 0xFFFFFFFFFFFFFFF8ui64;
+  v2 = this->pHeap->vfptr->Alloc(this->pHeap, 2040i64, 0i64);
+  v3 = (Scaleform::GFx::ASStringManager::TextPage *)(((unsigned __int64)v2 + 7) & 0xFFFFFFFFFFFFFFF8ui64);
   if ( v3 )
   {
-    *(_QWORD *)(v3 + 2024) = v2;
+    v3->pMem = v2;
     v4 = 21i64;
-    *(_QWORD *)(v3 + 2016) = v1->pTextBufferPages;
-    v1->pTextBufferPages = (Scaleform::GFx::ASStringManager::TextPage *)v3;
-    v5 = (Scaleform::GFx::ASStringManager::TextPage::Entry *)(v3 + 32);
+    v3->pNext = this->pTextBufferPages;
+    this->pTextBufferPages = v3;
+    v5 = &v3->Entries[2];
     do
     {
-      v5[-2].pNextAlloc = v1->pFreeTextBuffers;
+      v5[-2].pNextAlloc = this->pFreeTextBuffers;
       v5[-1].pNextAlloc = v5 - 2;
       v5->pNextAlloc = v5 - 1;
       v5[1].pNextAlloc = v5;
       v6 = v5 + 2;
-      v6->pNextAlloc = v5 + 1;
+      v5[2].pNextAlloc = v5 + 1;
       v7 = v5 + 3;
       v5 += 6;
       v7->pNextAlloc = v6;
-      v1->pFreeTextBuffers = v7;
+      this->pFreeTextBuffers = v7;
       --v4;
     }
     while ( v4 );
@@ -818,17 +769,14 @@ void __fastcall Scaleform::GFx::ASStringManager::AllocateTextBuffers(Scaleform::
 
 // File Line: 541
 // RVA: 0x8B5D20
-Scaleform::GFx::ASStringManager::TextPage::Entry *__fastcall Scaleform::GFx::ASStringManager::AllocTextBuffer(Scaleform::GFx::ASStringManager *this, const char *pbuffer, unsigned __int64 length)
+Scaleform::GFx::ASStringManager::TextPage::Entry *__fastcall Scaleform::GFx::ASStringManager::AllocTextBuffer(
+        Scaleform::GFx::ASStringManager *this,
+        const char *pbuffer,
+        size_t length)
 {
-  unsigned __int64 v3; // rsi
-  const char *v4; // rbp
-  Scaleform::GFx::ASStringManager *v5; // rdi
-  Scaleform::GFx::ASStringManager::TextPage::Entry *v6; // rax
+  Scaleform::GFx::ASStringManager::TextPage::Entry *pFreeTextBuffers; // rax
   Scaleform::GFx::ASStringManager::TextPage::Entry *v7; // rbx
 
-  v3 = length;
-  v4 = pbuffer;
-  v5 = this;
   if ( length >= 0x10 )
   {
     v7 = (Scaleform::GFx::ASStringManager::TextPage::Entry *)this->pHeap->vfptr->Alloc(this->pHeap, length + 1, 0i64);
@@ -837,84 +785,80 @@ Scaleform::GFx::ASStringManager::TextPage::Entry *__fastcall Scaleform::GFx::ASS
   {
     if ( !this->pFreeTextBuffers )
       Scaleform::GFx::ASStringManager::AllocateTextBuffers(this);
-    v6 = v5->pFreeTextBuffers;
+    pFreeTextBuffers = this->pFreeTextBuffers;
     v7 = 0i64;
-    if ( v6 )
+    if ( pFreeTextBuffers )
     {
-      v7 = v5->pFreeTextBuffers;
-      v5->pFreeTextBuffers = v6->pNextAlloc;
+      v7 = this->pFreeTextBuffers;
+      this->pFreeTextBuffers = pFreeTextBuffers->pNextAlloc;
     }
   }
   if ( v7 )
   {
-    memmove(v7, v4, v3);
-    v7->Buff[v3] = 0;
+    memmove(v7, pbuffer, length);
+    v7->Buff[length] = 0;
   }
   return v7;
 }
 
 // File Line: 565
 // RVA: 0x8BF250
-Scaleform::GFx::ASStringNode *__fastcall Scaleform::GFx::ASStringManager::CreateConstStringNode(Scaleform::GFx::ASStringManager *this, const char *pstr, unsigned __int64 length, unsigned int stringFlags)
+Scaleform::GFx::ASStringNode *__fastcall Scaleform::GFx::ASStringManager::CreateConstStringNode(
+        Scaleform::GFx::ASStringManager *this,
+        const char *pstr,
+        unsigned __int64 length,
+        unsigned int stringFlags)
 {
-  unsigned __int64 v4; // r15
-  const char *v5; // r12
-  Scaleform::GFx::ASStringManager *v6; // rdi
-  unsigned int v7; // ebp
   unsigned __int64 v8; // rax
-  Scaleform::HashSetBase<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::AllocatorLH<Scaleform::GFx::ASStringNode *,324>,Scaleform::HashsetEntry<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *> > >::TableType *v9; // r8
+  Scaleform::HashSetBase<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::AllocatorLH<Scaleform::GFx::ASStringNode *,324>,Scaleform::HashsetEntry<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *> > >::TableType *pTable; // r8
   unsigned __int64 v10; // rsi
   signed __int64 v11; // rax
   Scaleform::GFx::ASStringNode *result; // rax
-  Scaleform::GFx::ASStringNode *v13; // rbx
-  Scaleform::GFx::ASStringKey key; // [rsp+20h] [rbp-48h]
-  Scaleform::GFx::ASStringNode *v15; // [rsp+70h] [rbp+8h]
+  Scaleform::GFx::ASStringNode *pFreeStringNodes; // rbx
+  Scaleform::GFx::ASStringKey key; // [rsp+20h] [rbp-48h] BYREF
+  Scaleform::GFx::ASStringNode *v15; // [rsp+70h] [rbp+8h] BYREF
 
-  v4 = length;
-  v5 = pstr;
-  v6 = this;
   key.pStr = pstr;
-  v7 = stringFlags;
   v8 = Scaleform::String::BernsteinHashFunctionCIS(pstr, length, 0x1505ui64);
-  v9 = v6->StringSet.pTable;
-  key.Length = v4;
+  pTable = this->StringSet.pTable;
+  key.Length = length;
   v10 = v8 & 0xFFFFFF;
-  key.HashValue = v8 & 0xFFFFFF;
-  if ( v9
+  key.HashValue = v10;
+  if ( pTable
     && (v11 = Scaleform::HashSetBase<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::AllocatorLH<Scaleform::GFx::ASStringNode *,324>,Scaleform::HashsetEntry<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>>>::findIndexCore<Scaleform::GFx::ASStringKey>(
-                (Scaleform::HashSetBase<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::AllocatorLH<Scaleform::GFx::ASStringNode *,324>,Scaleform::HashsetEntry<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *> > > *)&v6->StringSet.pTable,
+                &this->StringSet,
                 &key,
-                v10 & v9->SizeMask),
+                v10 & pTable->SizeMask),
         v11 >= 0) )
   {
-    result = (Scaleform::GFx::ASStringNode *)v6->StringSet.pTable[v11 + 1].SizeMask;
-    result->HashFlags |= v7;
+    result = (Scaleform::GFx::ASStringNode *)this->StringSet.pTable[v11 + 1].SizeMask;
+    result->HashFlags |= stringFlags;
   }
   else
   {
-    if ( !v6->pFreeStringNodes )
-      Scaleform::GFx::ASStringManager::AllocateStringNodes(v6);
-    v13 = v6->pFreeStringNodes;
-    if ( v13 )
-      v6->pFreeStringNodes = v13->pLower;
-    v15 = v13;
-    if ( v13 )
+    if ( !this->pFreeStringNodes )
+      Scaleform::GFx::ASStringManager::AllocateStringNodes(this);
+    pFreeStringNodes = this->pFreeStringNodes;
+    if ( pFreeStringNodes )
+      this->pFreeStringNodes = pFreeStringNodes->pLower;
+    v15 = pFreeStringNodes;
+    if ( pFreeStringNodes )
     {
-      v13->RefCount = 0;
-      v13->Size = v4;
-      v13->pData = v5;
-      v13->HashFlags = v7 | v10 | 0x40000000;
-      v13->pLower = 0i64;
+      pFreeStringNodes->RefCount = 0;
+      pFreeStringNodes->Size = length;
+      pFreeStringNodes->pData = pstr;
+      pFreeStringNodes->HashFlags = stringFlags | v10 | 0x40000000;
+      pFreeStringNodes->pLower = 0i64;
       Scaleform::HashSetBase<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::AllocatorLH<Scaleform::GFx::ASStringNode *,324>,Scaleform::HashsetEntry<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>>>::add<Scaleform::GFx::ASStringNode *>(
-        (Scaleform::HashSetBase<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::AllocatorLH<Scaleform::GFx::ASStringNode *,324>,Scaleform::HashsetEntry<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *> > > *)&v6->StringSet.pTable,
-        &v6->StringSet,
+        &this->StringSet,
+        &this->StringSet,
         &v15,
-        v13->HashFlags);
-      result = v13;
+        pFreeStringNodes->HashFlags);
+      return pFreeStringNodes;
     }
     else
     {
-      result = &v6->EmptyStringNode;
+      return &this->EmptyStringNode;
     }
   }
   return result;
@@ -922,71 +866,69 @@ Scaleform::GFx::ASStringNode *__fastcall Scaleform::GFx::ASStringManager::Create
 
 // File Line: 595
 // RVA: 0x8C3CD0
-Scaleform::GFx::ASStringNode *__fastcall Scaleform::GFx::ASStringManager::CreateStringNode(Scaleform::GFx::ASStringManager *this, const char *pstr, unsigned __int64 length)
+Scaleform::GFx::ASStringNode *__fastcall Scaleform::GFx::ASStringManager::CreateStringNode(
+        Scaleform::GFx::ASStringManager *this,
+        const char *pstr,
+        unsigned __int64 length)
 {
-  unsigned __int64 v3; // rsi
-  const char *v4; // rbp
-  Scaleform::GFx::ASStringManager *v5; // rdi
   unsigned __int64 v6; // rax
-  Scaleform::HashSetBase<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::AllocatorLH<Scaleform::GFx::ASStringNode *,324>,Scaleform::HashsetEntry<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *> > >::TableType *v7; // r8
+  Scaleform::HashSetBase<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::AllocatorLH<Scaleform::GFx::ASStringNode *,324>,Scaleform::HashsetEntry<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *> > >::TableType *pTable; // r8
   unsigned __int64 v8; // r15
   signed __int64 v9; // rax
-  Scaleform::GFx::ASStringNode *v11; // rbx
+  Scaleform::GFx::ASStringNode *pFreeStringNodes; // rbx
   Scaleform::GFx::ASStringManager::TextPage::Entry *v12; // rax
-  Scaleform::GFx::ASStringKey key; // [rsp+20h] [rbp-38h]
-  Scaleform::GFx::ASStringNode *v14; // [rsp+68h] [rbp+10h]
+  Scaleform::GFx::ASStringKey key; // [rsp+20h] [rbp-38h] BYREF
+  Scaleform::GFx::ASStringNode *v14; // [rsp+68h] [rbp+10h] BYREF
 
-  v3 = length;
-  v4 = pstr;
-  v5 = this;
   if ( !pstr || !length )
     return &this->EmptyStringNode;
   key.pStr = pstr;
   v6 = Scaleform::String::BernsteinHashFunctionCIS(pstr, length, 0x1505ui64);
-  v7 = v5->StringSet.pTable;
-  key.Length = v3;
+  pTable = this->StringSet.pTable;
+  key.Length = length;
   v8 = v6 & 0xFFFFFF;
-  key.HashValue = v6 & 0xFFFFFF;
-  if ( v7 )
+  key.HashValue = v8;
+  if ( pTable )
   {
     v9 = Scaleform::HashSetBase<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::AllocatorLH<Scaleform::GFx::ASStringNode *,324>,Scaleform::HashsetEntry<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>>>::findIndexCore<Scaleform::GFx::ASStringKey>(
-           (Scaleform::HashSetBase<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::AllocatorLH<Scaleform::GFx::ASStringNode *,324>,Scaleform::HashsetEntry<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *> > > *)&v5->StringSet.pTable,
+           &this->StringSet,
            &key,
-           v8 & v7->SizeMask);
+           v8 & pTable->SizeMask);
     if ( v9 >= 0 )
-      return (Scaleform::GFx::ASStringNode *)v5->StringSet.pTable[v9 + 1].SizeMask;
+      return (Scaleform::GFx::ASStringNode *)this->StringSet.pTable[v9 + 1].SizeMask;
   }
-  if ( !v5->pFreeStringNodes )
-    Scaleform::GFx::ASStringManager::AllocateStringNodes(v5);
-  v11 = v5->pFreeStringNodes;
-  if ( v11 )
-    v5->pFreeStringNodes = v11->pLower;
-  v14 = v11;
-  if ( v11 )
+  if ( !this->pFreeStringNodes )
+    Scaleform::GFx::ASStringManager::AllocateStringNodes(this);
+  pFreeStringNodes = this->pFreeStringNodes;
+  if ( pFreeStringNodes )
+    this->pFreeStringNodes = pFreeStringNodes->pLower;
+  v14 = pFreeStringNodes;
+  if ( !pFreeStringNodes )
+    return &this->EmptyStringNode;
+  v12 = Scaleform::GFx::ASStringManager::AllocTextBuffer(this, pstr, length);
+  pFreeStringNodes->pData = (const char *)v12;
+  if ( !v12 )
   {
-    v12 = Scaleform::GFx::ASStringManager::AllocTextBuffer(v5, v4, v3);
-    v11->pData = (const char *)v12;
-    if ( v12 )
-    {
-      v11->RefCount = 0;
-      v11->Size = v3;
-      v11->HashFlags = v8;
-      v11->pLower = 0i64;
-      Scaleform::HashSetBase<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::AllocatorLH<Scaleform::GFx::ASStringNode *,324>,Scaleform::HashsetEntry<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>>>::add<Scaleform::GFx::ASStringNode *>(
-        (Scaleform::HashSetBase<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::AllocatorLH<Scaleform::GFx::ASStringNode *,324>,Scaleform::HashsetEntry<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *> > > *)&v5->StringSet.pTable,
-        &v5->StringSet,
-        &v14,
-        v11->HashFlags);
-      return v11;
-    }
-    Scaleform::GFx::ASStringManager::FreeStringNode(v5, v11);
+    Scaleform::GFx::ASStringManager::FreeStringNode(this, pFreeStringNodes);
+    return &this->EmptyStringNode;
   }
-  return &v5->EmptyStringNode;
+  pFreeStringNodes->RefCount = 0;
+  pFreeStringNodes->Size = length;
+  pFreeStringNodes->HashFlags = v8;
+  pFreeStringNodes->pLower = 0i64;
+  Scaleform::HashSetBase<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::AllocatorLH<Scaleform::GFx::ASStringNode *,324>,Scaleform::HashsetEntry<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>>>::add<Scaleform::GFx::ASStringNode *>(
+    &this->StringSet,
+    &this->StringSet,
+    &v14,
+    pFreeStringNodes->HashFlags);
+  return pFreeStringNodes;
 }
 
 // File Line: 629
 // RVA: 0x8C3AC0
-Scaleform::GFx::ASStringNode *__fastcall Scaleform::GFx::ASStringManager::CreateStringNode(Scaleform::GFx::ASStringManager *this, const char *pstr)
+Scaleform::GFx::ASStringNode *__fastcall Scaleform::GFx::ASStringManager::CreateStringNode(
+        Scaleform::GFx::ASStringManager *this,
+        const char *pstr)
 {
   unsigned __int64 v3; // r8
 
@@ -1001,60 +943,54 @@ Scaleform::GFx::ASStringNode *__fastcall Scaleform::GFx::ASStringManager::Create
 
 // File Line: 637
 // RVA: 0x8C3E00
-Scaleform::GFx::ASStringNode *__fastcall Scaleform::GFx::ASStringManager::CreateStringNode(Scaleform::GFx::ASStringManager *this, const wchar_t *pwstr, __int64 len)
+Scaleform::GFx::ASStringNode *__fastcall Scaleform::GFx::ASStringManager::CreateStringNode(
+        Scaleform::GFx::ASStringManager *this,
+        const wchar_t *pwstr,
+        __int64 len)
 {
-  __int64 v3; // rbx
-  const wchar_t *v4; // rdi
-  Scaleform::GFx::ASStringManager *v5; // rsi
   Scaleform::GFx::ASStringNode *result; // rax
   Scaleform::GFx::ASStringNode *v7; // rbx
-  Scaleform::String v8; // [rsp+58h] [rbp+20h]
+  Scaleform::String v8; // [rsp+58h] [rbp+20h] BYREF
 
-  v3 = len;
-  v4 = pwstr;
-  v5 = this;
   Scaleform::String::String(&v8);
-  Scaleform::String::AppendString(&v8, v4, v3);
+  Scaleform::String::AppendString(&v8, pwstr, len);
   result = Scaleform::GFx::ASStringManager::CreateStringNode(
-             v5,
+             this,
              (const char *)((v8.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12),
              *(_QWORD *)(v8.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) & 0x7FFFFFFFFFFFFFFFi64);
   v7 = result;
   if ( !_InterlockedDecrement((volatile signed __int32 *)((v8.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
   {
-    ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
-    result = v7;
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+    return v7;
   }
   return result;
 }
 
 // File Line: 649
 // RVA: 0x8C3AE0
-Scaleform::GFx::ASStringNode *__fastcall Scaleform::GFx::ASStringManager::CreateStringNode(Scaleform::GFx::ASStringManager *this, const char *pstr1, unsigned __int64 l1, const char *pstr2, unsigned __int64 l2)
+Scaleform::GFx::ASStringNode *__fastcall Scaleform::GFx::ASStringManager::CreateStringNode(
+        Scaleform::GFx::ASStringManager *this,
+        const char *pstr1,
+        size_t l1,
+        const char *pstr2,
+        Scaleform::GFx::ASStringNode *l2)
 {
-  unsigned __int64 v5; // r14
-  const char *v6; // r12
-  unsigned __int64 v7; // rsi
+  size_t v5; // r14
   unsigned __int64 v8; // rbp
-  const char *v9; // r15
-  Scaleform::GFx::ASStringManager *v10; // rbx
-  Scaleform::GFx::ASStringManager::TextPage::Entry *v11; // rax
+  Scaleform::GFx::ASStringManager::TextPage::Entry *pFreeTextBuffers; // rax
   Scaleform::GFx::ASStringManager::TextPage::Entry *v12; // rdi
   unsigned __int64 v13; // rax
-  Scaleform::HashSetBase<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::AllocatorLH<Scaleform::GFx::ASStringNode *,324>,Scaleform::HashsetEntry<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *> > >::TableType *v14; // r8
+  Scaleform::HashSetBase<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::AllocatorLH<Scaleform::GFx::ASStringNode *,324>,Scaleform::HashsetEntry<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *> > >::TableType *pTable; // r8
   unsigned __int64 v15; // r15
   signed __int64 v16; // rax
-  unsigned __int64 v17; // rsi
-  unsigned __int64 v19; // rsi
-  Scaleform::GFx::ASStringKey key; // [rsp+20h] [rbp-38h]
+  unsigned __int64 SizeMask; // rsi
+  Scaleform::GFx::ASStringNode *pFreeStringNodes; // rsi
+  Scaleform::GFx::ASStringKey key; // [rsp+20h] [rbp-38h] BYREF
 
-  v5 = l2;
-  v6 = pstr2;
-  v7 = l1;
-  v8 = l1 + l2;
-  v9 = pstr1;
-  v10 = this;
-  if ( l1 + l2 >= 0x10 )
+  v5 = (size_t)l2;
+  v8 = (unsigned __int64)l2 + l1;
+  if ( (unsigned __int64)l2 + l1 >= 0x10 )
   {
     v12 = (Scaleform::GFx::ASStringManager::TextPage::Entry *)this->pHeap->vfptr->Alloc(this->pHeap, v8 + 1, 0i64);
   }
@@ -1062,53 +998,53 @@ Scaleform::GFx::ASStringNode *__fastcall Scaleform::GFx::ASStringManager::Create
   {
     if ( !this->pFreeTextBuffers )
       Scaleform::GFx::ASStringManager::AllocateTextBuffers(this);
-    v11 = v10->pFreeTextBuffers;
+    pFreeTextBuffers = this->pFreeTextBuffers;
     v12 = 0i64;
-    if ( v11 )
+    if ( pFreeTextBuffers )
     {
-      v12 = v10->pFreeTextBuffers;
-      v10->pFreeTextBuffers = v11->pNextAlloc;
+      v12 = this->pFreeTextBuffers;
+      this->pFreeTextBuffers = pFreeTextBuffers->pNextAlloc;
     }
   }
   if ( !v12 )
-    return &v10->EmptyStringNode;
-  if ( v9 && v7 )
-    memmove(v12, v9, v7);
-  if ( v6 && v5 )
-    memmove((char *)v12 + v7, v6, v5);
+    return &this->EmptyStringNode;
+  if ( pstr1 && l1 )
+    memmove(v12, pstr1, l1);
+  if ( pstr2 && v5 )
+    memmove((char *)v12 + l1, pstr2, v5);
   v12->Buff[v8] = 0;
   key.pStr = (const char *)v12;
   v13 = Scaleform::String::BernsteinHashFunctionCIS(v12, v8, 0x1505ui64);
-  v14 = v10->StringSet.pTable;
+  pTable = this->StringSet.pTable;
   key.Length = v8;
   v15 = v13 & 0xFFFFFF;
-  key.HashValue = v13 & 0xFFFFFF;
-  if ( !v14
+  key.HashValue = v15;
+  if ( !pTable
     || (v16 = Scaleform::HashSetBase<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::AllocatorLH<Scaleform::GFx::ASStringNode *,324>,Scaleform::HashsetEntry<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>>>::findIndexCore<Scaleform::GFx::ASStringKey>(
-                (Scaleform::HashSetBase<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::AllocatorLH<Scaleform::GFx::ASStringNode *,324>,Scaleform::HashsetEntry<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *> > > *)&v10->StringSet.pTable,
+                &this->StringSet,
                 &key,
-                v15 & v14->SizeMask),
+                v15 & pTable->SizeMask),
         v16 < 0) )
   {
-    if ( !v10->pFreeStringNodes )
-      Scaleform::GFx::ASStringManager::AllocateStringNodes(v10);
-    v19 = (unsigned __int64)v10->pFreeStringNodes;
-    if ( v19 )
-      v10->pFreeStringNodes = *(Scaleform::GFx::ASStringNode **)(v19 + 16);
-    l2 = v19;
-    if ( v19 )
+    if ( !this->pFreeStringNodes )
+      Scaleform::GFx::ASStringManager::AllocateStringNodes(this);
+    pFreeStringNodes = this->pFreeStringNodes;
+    if ( pFreeStringNodes )
+      this->pFreeStringNodes = pFreeStringNodes->pLower;
+    l2 = pFreeStringNodes;
+    if ( pFreeStringNodes )
     {
-      *(_DWORD *)(v19 + 24) = 0;
-      *(_DWORD *)(v19 + 32) = v8;
-      *(_QWORD *)v19 = v12;
-      *(_DWORD *)(v19 + 28) = v15;
-      *(_QWORD *)(v19 + 16) = 0i64;
+      pFreeStringNodes->RefCount = 0;
+      pFreeStringNodes->Size = v8;
+      pFreeStringNodes->pData = (const char *)v12;
+      pFreeStringNodes->HashFlags = v15;
+      pFreeStringNodes->pLower = 0i64;
       Scaleform::HashSetBase<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::AllocatorLH<Scaleform::GFx::ASStringNode *,324>,Scaleform::HashsetEntry<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>>>::add<Scaleform::GFx::ASStringNode *>(
-        (Scaleform::HashSetBase<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *>,Scaleform::AllocatorLH<Scaleform::GFx::ASStringNode *,324>,Scaleform::HashsetEntry<Scaleform::GFx::ASStringNode *,Scaleform::GFx::ASStringNodeHashFunc<Scaleform::GFx::ASStringNode *> > > *)&v10->StringSet.pTable,
-        &v10->StringSet,
-        (Scaleform::GFx::ASStringNode *const *)&l2,
-        *(unsigned int *)(v19 + 28));
-      return (Scaleform::GFx::ASStringNode *)v19;
+        &this->StringSet,
+        &this->StringSet,
+        &l2,
+        pFreeStringNodes->HashFlags);
+      return pFreeStringNodes;
     }
     if ( v8 >= 0x10 )
     {
@@ -1116,45 +1052,46 @@ Scaleform::GFx::ASStringNode *__fastcall Scaleform::GFx::ASStringManager::Create
     }
     else
     {
-      v12->pNextAlloc = v10->pFreeTextBuffers;
-      v10->pFreeTextBuffers = v12;
+      v12->pNextAlloc = this->pFreeTextBuffers;
+      this->pFreeTextBuffers = v12;
     }
-    return &v10->EmptyStringNode;
+    return &this->EmptyStringNode;
   }
-  v17 = v10->StringSet.pTable[v16 + 1].SizeMask;
+  SizeMask = this->StringSet.pTable[v16 + 1].SizeMask;
   if ( v8 >= 0x10 )
   {
     Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v12);
   }
   else
   {
-    v12->pNextAlloc = v10->pFreeTextBuffers;
-    v10->pFreeTextBuffers = v12;
+    v12->pNextAlloc = this->pFreeTextBuffers;
+    this->pFreeTextBuffers = v12;
   }
-  return (Scaleform::GFx::ASStringNode *)v17;
+  return (Scaleform::GFx::ASStringNode *)SizeMask;
 }
 
 // File Line: 739
 // RVA: 0x8E3CA0
-void __fastcall Scaleform::GFx::ASStringManager::InitBuiltinArray(Scaleform::GFx::ASStringManager *this, Scaleform::GFx::ASStringNodeHolder *nodes, const char **strings, unsigned int count)
+void __fastcall Scaleform::GFx::ASStringManager::InitBuiltinArray(
+        Scaleform::GFx::ASStringManager *this,
+        Scaleform::GFx::ASStringNodeHolder *nodes,
+        const char **strings,
+        unsigned int count)
 {
   Scaleform::GFx::ASStringNodeHolder *v4; // rbx
-  Scaleform::GFx::ASStringManager *v5; // rbp
   signed __int64 v6; // rsi
   __int64 v7; // rdi
   const char *v8; // r8
   unsigned __int64 v9; // r9
-  Scaleform::GFx::ASStringNode *v10; // rax
+  Scaleform::GFx::ASStringNode *pNode; // rax
   Scaleform::GFx::ASStringNode *v11; // rcx
-  bool v12; // zf
-  Scaleform::GFx::ASString result; // [rsp+30h] [rbp-18h]
+  Scaleform::GFx::ASString result; // [rsp+30h] [rbp-18h] BYREF
   __int64 v14; // [rsp+38h] [rbp-10h]
 
   if ( count )
   {
     v14 = -2i64;
     v4 = nodes;
-    v5 = this;
     v6 = (char *)strings - (char *)nodes;
     v7 = count;
     do
@@ -1164,15 +1101,13 @@ void __fastcall Scaleform::GFx::ASStringManager::InitBuiltinArray(Scaleform::GFx
       do
         ++v9;
       while ( v8[v9] );
-      Scaleform::GFx::ASStringManager::CreateConstString(v5, &result, v8, v9, 0x80000000);
-      v10 = result.pNode;
+      Scaleform::GFx::ASStringManager::CreateConstString(this, &result, v8, v9, 0x80000000);
+      pNode = result.pNode;
       v4->pNode = result.pNode;
-      ++v10->RefCount;
+      ++pNode->RefCount;
       Scaleform::GFx::ASStringNode::ResolveLowercase_Impl(v4->pNode);
       v11 = result.pNode;
-      v12 = result.pNode->RefCount == 1;
-      --v11->RefCount;
-      if ( v12 )
+      if ( result.pNode->RefCount-- == 1 )
         Scaleform::GFx::ASStringNode::ReleaseNode(v11);
       ++v4;
       --v7;
@@ -1183,26 +1118,24 @@ void __fastcall Scaleform::GFx::ASStringManager::InitBuiltinArray(Scaleform::GFx
 
 // File Line: 752
 // RVA: 0x8FE6F0
-void __fastcall Scaleform::GFx::ASStringManager::ReleaseBuiltinArray(Scaleform::GFx::ASStringManager *this, Scaleform::GFx::ASStringNodeHolder *nodes, unsigned int count)
+void __fastcall Scaleform::GFx::ASStringManager::ReleaseBuiltinArray(
+        Scaleform::GFx::ASStringManager *this,
+        Scaleform::GFx::ASStringNodeHolder *nodes,
+        unsigned int count)
 {
-  Scaleform::GFx::ASStringNodeHolder *v3; // rbx
   __int64 v4; // rdi
-  Scaleform::GFx::ASStringNode *v5; // rcx
-  bool v6; // zf
+  Scaleform::GFx::ASStringNode *pNode; // rcx
 
   if ( count )
   {
-    v3 = nodes;
     v4 = count;
     do
     {
-      v5 = v3->pNode;
-      v6 = v3->pNode->RefCount == 1;
-      --v5->RefCount;
-      if ( v6 )
-        Scaleform::GFx::ASStringNode::ReleaseNode(v5);
-      v3->pNode = 0i64;
-      ++v3;
+      pNode = nodes->pNode;
+      if ( nodes->pNode->RefCount-- == 1 )
+        Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
+      nodes->pNode = 0i64;
+      ++nodes;
       --v4;
     }
     while ( v4 );

@@ -28,24 +28,24 @@ hkClass *__fastcall hkpDisableEntityCollisionFilter::staticClass()
 
 // File Line: 65
 // RVA: 0xE0A920
-void __fastcall finishLoadedObjecthkpDisableEntityCollisionFilter(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpDisableEntityCollisionFilter(_QWORD *p, int finishing)
 {
   if ( p )
   {
-    *(_QWORD *)p = &hkpDisableEntityCollisionFilter::`vftable{for `hkReferencedObject};
-    *((_QWORD *)p + 2) = &hkpDisableEntityCollisionFilter::`vftable{for `hkpCollidableCollidableFilter};
-    *((_QWORD *)p + 3) = &hkpDisableEntityCollisionFilter::`vftable{for `hkpShapeCollectionFilter};
-    *((_QWORD *)p + 4) = &hkpDisableEntityCollisionFilter::`vftable{for `hkpRayShapeCollectionFilter};
-    *((_QWORD *)p + 5) = &hkpDisableEntityCollisionFilter::`vftable{for `hkpRayCollidableFilter};
-    *((_QWORD *)p + 9) = &hkpDisableEntityCollisionFilter::`vftable;
+    *p = &hkpDisableEntityCollisionFilter::`vftable{for `hkReferencedObject};
+    p[2] = &hkpDisableEntityCollisionFilter::`vftable{for `hkpCollidableCollidableFilter};
+    p[3] = &hkpDisableEntityCollisionFilter::`vftable{for `hkpShapeCollectionFilter};
+    p[4] = &hkpDisableEntityCollisionFilter::`vftable{for `hkpRayShapeCollectionFilter};
+    p[5] = &hkpDisableEntityCollisionFilter::`vftable{for `hkpRayCollidableFilter};
+    p[9] = &hkpDisableEntityCollisionFilter::`vftable;
   }
 }
 
 // File Line: 71
 // RVA: 0xE0A970
-void __fastcall cleanupLoadedObjecthkpDisableEntityCollisionFilter(void *p)
+void __fastcall cleanupLoadedObjecthkpDisableEntityCollisionFilter(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 75
@@ -66,8 +66,8 @@ void **dynamic_initializer_for__hkpDisableEntityCollisionFilterTypeInfo__()
   hkpDisableEntityCollisionFilterTypeInfo.m_typeName = "hkpDisableEntityCollisionFilter";
   hkpDisableEntityCollisionFilterTypeInfo.m_vtable = result;
   hkpDisableEntityCollisionFilterTypeInfo.m_scopedName = "!hkpDisableEntityCollisionFilter";
-  hkpDisableEntityCollisionFilterTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpDisableEntityCollisionFilter;
-  hkpDisableEntityCollisionFilterTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpDisableEntityCollisionFilter;
+  hkpDisableEntityCollisionFilterTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpDisableEntityCollisionFilter;
+  hkpDisableEntityCollisionFilterTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpDisableEntityCollisionFilter;
   return result;
 }
 

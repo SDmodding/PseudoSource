@@ -1,19 +1,20 @@
 // File Line: 76
 // RVA: 0x9ABE0
-void __fastcall hkLocalBuffer<hkaKeyFrameHierarchyUtility::Output>::~hkLocalBuffer<hkaKeyFrameHierarchyUtility::Output>(hkLocalBuffer<hkaKeyFrameHierarchyUtility::Output> *this)
+void __fastcall hkLocalBuffer<hkaKeyFrameHierarchyUtility::Output>::~hkLocalBuffer<hkaKeyFrameHierarchyUtility::Output>(
+        hkLocalBuffer<hkaKeyFrameHierarchyUtility::Output> *this)
 {
-  hkaKeyFrameHierarchyUtility::Output *v1; // rdi
+  hkaKeyFrameHierarchyUtility::Output *m_storage; // rdi
   signed int v2; // ebx
-  hkLifoAllocator *v3; // rax
-  int v4; // er8
+  hkLifoAllocator *Value; // rax
+  int v4; // r8d
 
-  v1 = this->m_data.m_storage;
+  m_storage = this->m_data.m_storage;
   v2 = (4 * this->m_size.m_storage + 127) & 0xFFFFFF80;
-  v3 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  Value = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   v4 = (v2 + 15) & 0xFFFFFFF0;
-  if ( v2 > v3->m_slabSize || (char *)v1 + v4 != v3->m_cur || v3->m_firstNonLifoEnd == v1 )
-    hkLifoAllocator::slowBlockFree(v3, v1, v4);
+  if ( v2 > Value->m_slabSize || (char *)m_storage + v4 != Value->m_cur || Value->m_firstNonLifoEnd == m_storage )
+    hkLifoAllocator::slowBlockFree(Value, m_storage, v4);
   else
-    v3->m_cur = v1;
+    Value->m_cur = m_storage;
 }
 

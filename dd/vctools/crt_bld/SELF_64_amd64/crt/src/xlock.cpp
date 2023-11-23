@@ -3,7 +3,7 @@
 void __fastcall std::_Init_locks::_Init_locks(std::_Init_locks *this)
 {
   _RTL_CRITICAL_SECTION *v1; // rbx
-  signed __int64 v2; // rdi
+  __int64 v2; // rdi
 
   if ( !_InterlockedIncrement(&init) )
   {
@@ -11,8 +11,7 @@ void __fastcall std::_Init_locks::_Init_locks(std::_Init_locks *this)
     v2 = 4i64;
     do
     {
-      Mtxinit(v1);
-      ++v1;
+      Mtxinit(v1++);
       --v2;
     }
     while ( v2 );
@@ -24,7 +23,7 @@ void __fastcall std::_Init_locks::_Init_locks(std::_Init_locks *this)
 void __fastcall std::_Init_locks::~_Init_locks(std::_Init_locks *this)
 {
   _RTL_CRITICAL_SECTION *v1; // rbx
-  signed __int64 v2; // rdi
+  __int64 v2; // rdi
 
   if ( _InterlockedAdd(&init, 0xFFFFFFFF) < 0 )
   {
@@ -32,8 +31,7 @@ void __fastcall std::_Init_locks::~_Init_locks(std::_Init_locks *this)
     v2 = 4i64;
     do
     {
-      Mtxdst(v1);
-      ++v1;
+      Mtxdst(v1++);
       --v2;
     }
     while ( v2 );
@@ -45,7 +43,7 @@ void __fastcall std::_Init_locks::~_Init_locks(std::_Init_locks *this)
 __int64 std::_dynamic_initializer_for__initlocks__()
 {
   std::_Init_locks::_Init_locks(&initlocks);
-  return atexit(std::_dynamic_atexit_destructor_for__initlocks__);
+  return atexit((int (__fastcall *)())std::_dynamic_atexit_destructor_for__initlocks__);
 }
 
 // File Line: 64
@@ -68,13 +66,13 @@ void __fastcall std::_Lockit::_Lockit(std::_Lockit *this, int kind)
 // RVA: 0x12DD818
 void __fastcall std::_Lockit::~_Lockit(std::_Lockit *this)
 {
-  __int64 v1; // rax
+  __int64 Locktype; // rax
 
-  v1 = this->_Locktype;
-  if ( (_DWORD)v1 )
+  Locktype = this->_Locktype;
+  if ( (_DWORD)Locktype )
   {
-    if ( (signed int)v1 < 4 )
-      Mtxunlock(&mtx[v1]);
+    if ( (int)Locktype < 4 )
+      Mtxunlock(&mtx[Locktype]);
   }
   else
   {

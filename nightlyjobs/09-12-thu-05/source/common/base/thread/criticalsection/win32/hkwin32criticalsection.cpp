@@ -1,16 +1,14 @@
 // File Line: 21
 // RVA: 0xC754F0
-void __fastcall hkCriticalSection::hkCriticalSection(hkCriticalSection *this, int spinCount)
+void __fastcall hkCriticalSection::hkCriticalSection(hkCriticalSection *this, DWORD spinCount)
 {
-  hkCriticalSection *v2; // rbx
-  hkHardwareInfo info; // [rsp+38h] [rbp+10h]
+  hkHardwareInfo info; // [rsp+38h] [rbp+10h] BYREF
 
-  v2 = this;
   if ( !spinCount )
   {
     hkGetHardwareInfo(&info);
     spinCount = 1000 * info.m_numThreads;
   }
-  InitializeCriticalSectionAndSpinCount(&v2->m_section, spinCount);
+  InitializeCriticalSectionAndSpinCount(&this->m_section, spinCount);
 }
 

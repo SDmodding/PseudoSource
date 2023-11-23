@@ -1,181 +1,175 @@
 // File Line: 19
 // RVA: 0xE6D010
-hkResult *__fastcall hkDebugDisplayHandler::addGeometry(hkDebugDisplayHandler *this, hkResult *result, hkDisplayGeometry *geometry, unsigned __int64 id, int tag, unsigned __int64 shapeIdHint)
+hkResult *__fastcall hkDebugDisplayHandler::addGeometry(
+        hkDebugDisplayHandler *this,
+        hkResult *result,
+        hkDisplayGeometry *geometry,
+        unsigned __int64 id,
+        int tag,
+        unsigned __int64 shapeIdHint)
 {
-  hkDebugDisplayHandlerVtbl *v6; // r10
-  int v7; // ST38_4
-  hkResult *v8; // rbx
-  int v9; // ST28_4
-  hkDisplayGeometry **v11; // [rsp+40h] [rbp-28h]
-  int v12; // [rsp+48h] [rbp-20h]
-  int v13; // [rsp+4Ch] [rbp-1Ch]
-  hkDisplayGeometry *v14; // [rsp+50h] [rbp-18h]
+  hkDebugDisplayHandlerVtbl *vfptr; // r10
+  hkDisplayGeometry **v9; // [rsp+40h] [rbp-28h] BYREF
+  int v10; // [rsp+48h] [rbp-20h]
+  int v11; // [rsp+4Ch] [rbp-1Ch]
+  hkDisplayGeometry *v12; // [rsp+50h] [rbp-18h] BYREF
 
-  v6 = this->vfptr;
-  v7 = 0;
-  v14 = geometry;
-  v11 = &v14;
-  v8 = result;
-  v9 = tag;
-  v13 = -2147483647;
-  v12 = 1;
-  (*(void (__fastcall **)(hkDebugDisplayHandler *, hkResult *, hkDisplayGeometry ***, hkTransformf *, unsigned __int64, int, unsigned __int64, int))v6->gap8)(
+  vfptr = this->vfptr;
+  v12 = geometry;
+  v9 = &v12;
+  v11 = -2147483647;
+  v10 = 1;
+  (*(void (__fastcall **)(hkDebugDisplayHandler *, hkResult *, hkDisplayGeometry ***, hkTransformf *, unsigned __int64, int, unsigned __int64, _DWORD))vfptr->gap8)(
     this,
     result,
-    &v11,
+    &v9,
     &geometry->m_transform,
     id,
-    v9,
+    tag,
     shapeIdHint,
-    v7);
-  v12 = 0;
-  if ( v13 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v11,
-      8 * v13);
-  return v8;
+    0);
+  v10 = 0;
+  if ( v11 >= 0 )
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v9, 8 * v11);
+  return result;
 }
 
 // File Line: 26
 // RVA: 0xE6D0C0
-hkResult *__fastcall hkDebugDisplayHandler::updateGeometry(hkDebugDisplayHandler *this, hkResult *result, hkQsTransformf *transform, unsigned __int64 id, int tag)
+hkResult *__fastcall hkDebugDisplayHandler::updateGeometry(
+        hkDebugDisplayHandler *this,
+        hkResult *result,
+        hkQsTransformf *transform,
+        unsigned __int64 id,
+        int tag)
 {
-  hkDebugDisplayHandler *v5; // rdi
-  hkResult *v6; // rsi
-  unsigned __int64 v7; // rbx
-  int v8; // ST20_4
-  hkMatrix4f v10; // [rsp+30h] [rbp-48h]
+  hkMatrix4f v9; // [rsp+30h] [rbp-48h] BYREF
 
-  v5 = this;
-  v6 = result;
-  v7 = id;
-  hkMatrix4f::set(&v10, transform);
-  v8 = tag;
-  v5->vfptr->updateGeometry(v5, v6, &v10, v7, v8);
-  return v6;
+  hkMatrix4f::set(&v9, transform);
+  this->vfptr->updateGeometry(this, result, &v9, id, tag);
+  return result;
 }
 
 // File Line: 34
 // RVA: 0xE6D120
-hkResult *__fastcall hkDebugDisplayHandler::skinGeometry(hkDebugDisplayHandler *this, hkResult *result, unsigned __int64 *ids, int numIds, hkQsTransformf *poseModel, int numPoseModel, hkQsTransformf *worldFromModel, int tag)
+hkResult *__fastcall hkDebugDisplayHandler::skinGeometry(
+        hkDebugDisplayHandler *this,
+        hkResult *result,
+        unsigned __int64 *ids,
+        int numIds,
+        hkQsTransformf *poseModel,
+        unsigned int numPoseModel,
+        hkQsTransformf *worldFromModel,
+        int tag)
 {
-  hkDebugDisplayHandler *v8; // r13
-  hkResult *v9; // r12
-  hkLifoAllocator *v10; // rax
-  hkMatrix4f *v11; // rbp
-  int v12; // er14
+  hkLifoAllocator *Value; // rax
+  hkMatrix4f *m_cur; // rbp
+  int v12; // r14d
   char *v13; // rcx
-  hkQsTransformf *v14; // rdi
   hkMatrix4f *v15; // rbx
   __int64 v16; // rsi
   hkLifoAllocator *v17; // rax
-  int v18; // er8
-  hkResult *v19; // rax
-  hkMatrix4f v20; // [rsp+40h] [rbp-78h]
-  unsigned __int64 *v21; // [rsp+D0h] [rbp+18h]
-  unsigned int v22; // [rsp+D8h] [rbp+20h]
+  int v18; // r8d
+  hkMatrix4f v20; // [rsp+40h] [rbp-78h] BYREF
 
-  v22 = numIds;
-  v21 = ids;
-  v8 = this;
-  v9 = result;
-  v10 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v11 = (hkMatrix4f *)v10->m_cur;
+  Value = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  m_cur = (hkMatrix4f *)Value->m_cur;
   v12 = ((numPoseModel << 6) + 127) & 0xFFFFFF80;
-  v13 = (char *)v11 + v12;
-  if ( v12 > v10->m_slabSize || v13 > v10->m_end )
-    v11 = (hkMatrix4f *)hkLifoAllocator::allocateFromNewSlab(v10, v12);
+  v13 = (char *)m_cur + v12;
+  if ( v12 > Value->m_slabSize || v13 > Value->m_end )
+    m_cur = (hkMatrix4f *)hkLifoAllocator::allocateFromNewSlab(Value, v12);
   else
-    v10->m_cur = v13;
-  if ( numPoseModel > 0 )
+    Value->m_cur = v13;
+  if ( (int)numPoseModel > 0 )
   {
-    v14 = poseModel;
-    v15 = v11;
-    v16 = (unsigned int)numPoseModel;
+    v15 = m_cur;
+    v16 = numPoseModel;
     do
     {
-      hkMatrix4f::set(v15, v14);
-      ++v14;
-      ++v15;
+      hkMatrix4f::set(v15++, poseModel++);
       --v16;
     }
     while ( v16 );
   }
   hkMatrix4f::set(&v20, worldFromModel);
-  v8->vfptr->skinGeometry(v8, v9, v21, v22, v11, numPoseModel, &v20, tag);
+  this->vfptr->skinGeometry(this, result, ids, numIds, m_cur, numPoseModel, &v20, tag);
   v17 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   v18 = (v12 + 15) & 0xFFFFFFF0;
-  if ( v12 > v17->m_slabSize || (char *)v11 + v18 != v17->m_cur || v17->m_firstNonLifoEnd == v11 )
+  if ( v12 > v17->m_slabSize || (char *)m_cur + v18 != v17->m_cur || v17->m_firstNonLifoEnd == m_cur )
   {
-    hkLifoAllocator::slowBlockFree(v17, v11, v18);
-    v19 = v9;
+    hkLifoAllocator::slowBlockFree(v17, (char *)m_cur, v18);
+    return result;
   }
   else
   {
-    v17->m_cur = v11;
-    v19 = v9;
+    v17->m_cur = m_cur;
+    return result;
   }
-  return v19;
 }
 
 // File Line: 49
 // RVA: 0xE6D2C0
-int hkDebugDisplayHandler::displayFrame(...)
+// local variable allocation has failed, the output may be wrong!
+void __fastcall hkDebugDisplayHandler::displayFrame(
+        hkDebugDisplayHandler *this,
+        hkQsTransformf *worldFromLocal,
+        double size,
+        int id)
 {
-  hkDebugDisplayHandler *v4; // rsi
-  int v5; // edi
-  hkQsTransformf *v6; // rbx
-  hkVector4f b; // [rsp+28h] [rbp-41h]
-  hkVector4f from; // [rsp+38h] [rbp-31h]
-  hkVector4f v9; // [rsp+48h] [rbp-21h]
-  hkVector4f v10; // [rsp+58h] [rbp-11h]
-  hkVector4f v11; // [rsp+68h] [rbp-1h]
-  hkVector4f dir; // [rsp+78h] [rbp+Fh]
-  hkVector4f v13; // [rsp+88h] [rbp+1Fh]
-  hkVector4f v14; // [rsp+98h] [rbp+2Fh]
+  hkVector4f b; // [rsp+28h] [rbp-41h] BYREF
+  hkVector4f from; // [rsp+38h] [rbp-31h] BYREF
+  hkVector4f v9; // [rsp+48h] [rbp-21h] BYREF
+  hkVector4f v10; // [rsp+58h] [rbp-11h] BYREF
+  hkVector4f v11; // [rsp+68h] [rbp-1h] BYREF
+  hkVector4f dir; // [rsp+78h] [rbp+Fh] BYREF
+  hkVector4f v13; // [rsp+88h] [rbp+1Fh] BYREF
+  hkVector4f v14; // [rsp+98h] [rbp+2Fh] BYREF
   int v15; // [rsp+E8h] [rbp+7Fh]
 
-  v4 = this;
-  v5 = id;
   b.m_quad = 0i64;
-  v6 = worldFromLocal;
-  hkVector4f::setTransformedPos((hkVector4f *)((char *)&from + 8), worldFromLocal, (hkVector4f *)((char *)&b + 8));
-  b.m_quad = _mm_unpacklo_ps(_mm_unpacklo_ps((__m128)size, (__m128)0i64), (__m128)0i64);
-  hkVector4f::setTransformedPos(&v9, v6, &b);
-  b.m_quad = _mm_unpacklo_ps((__m128)0i64, _mm_unpacklo_ps((__m128)size, (__m128)0i64));
-  hkVector4f::setTransformedPos(&v10, v6, &b);
-  b.m_quad = _mm_unpacklo_ps(_mm_unpacklo_ps((__m128)0i64, (__m128)size), (__m128)0i64);
-  hkVector4f::setTransformedPos(&v11, v6, &b);
+  hkVector4f::setTransformedPos(
+    (hkVector4f *)&from.m_quad.m128_u16[4],
+    worldFromLocal,
+    (hkVector4f *)&b.m_quad.m128_u16[4]);
+  b.m_quad = _mm_unpacklo_ps(_mm_unpacklo_ps(*(__m128 *)&size, (__m128)0i64), (__m128)0i64);
+  hkVector4f::setTransformedPos(&v9, worldFromLocal, &b);
+  b.m_quad = _mm_unpacklo_ps((__m128)0i64, _mm_unpacklo_ps(*(__m128 *)&size, (__m128)0i64));
+  hkVector4f::setTransformedPos(&v10, worldFromLocal, &b);
+  b.m_quad = _mm_unpacklo_ps(_mm_unpacklo_ps((__m128)0i64, *(__m128 *)&size), (__m128)0i64);
+  hkVector4f::setTransformedPos(&v11, worldFromLocal, &b);
   dir.m_quad = _mm_sub_ps(v9.m_quad, from.m_quad);
   v14.m_quad = _mm_sub_ps(v11.m_quad, from.m_quad);
   v13.m_quad = _mm_sub_ps(v10.m_quad, from.m_quad);
-  hkDebugDisplayHandler::displayArrow(v4, &from, &dir, hkColor::RED, v5, v15);
-  hkDebugDisplayHandler::displayArrow(v4, &from, &v13, hkColor::GREEN, v5, v15);
-  hkDebugDisplayHandler::displayArrow(v4, &from, &v14, hkColor::BLUE, v5, v15);
+  hkDebugDisplayHandler::displayArrow(this, &from, &dir, hkColor::RED, id, v15);
+  hkDebugDisplayHandler::displayArrow(this, &from, &v13, hkColor::GREEN, id, v15);
+  hkDebugDisplayHandler::displayArrow(this, &from, &v14, hkColor::BLUE, id, v15);
 }
 
 // File Line: 74
 // RVA: 0xE6D420
-void __fastcall hkDebugDisplayHandler::displayFrame(hkDebugDisplayHandler *this, hkTransformf *worldFromLocal, float size, int id, int tag)
+void __fastcall hkDebugDisplayHandler::displayFrame(
+        hkDebugDisplayHandler *this,
+        hkTransformf *worldFromLocal,
+        double size,
+        int id)
 {
-  hkDebugDisplayHandler *v5; // rdi
-  int v6; // ebx
-  hkQsTransformf worldFromLocala; // [rsp+30h] [rbp-48h]
+  hkQsTransformf worldFromLocala; // [rsp+30h] [rbp-48h] BYREF
 
-  v5 = this;
-  v6 = id;
   hkQsTransformf::setFromTransform(&worldFromLocala, worldFromLocal);
-  hkDebugDisplayHandler::displayFrame(v5, &worldFromLocala, size, v6, tag);
+  hkDebugDisplayHandler::displayFrame(this, &worldFromLocala, size, id);
 }
 
 // File Line: 81
 // RVA: 0xE6D480
-void __fastcall hkDebugDisplayHandler::displayArrow(hkDebugDisplayHandler *this, hkVector4f *from, hkVector4f *dir, unsigned int color, int id, int tag)
+void __fastcall hkDebugDisplayHandler::displayArrow(
+        hkDebugDisplayHandler *this,
+        hkVector4f *from,
+        hkVector4f *dir,
+        unsigned int color,
+        int id,
+        int tag)
 {
-  __m128 v6; // xmm12
-  unsigned int v7; // ebp
-  hkDebugDisplayHandler *v8; // rsi
+  __m128 m_quad; // xmm12
   __m128 v9; // xmm11
   __m128 v10; // xmm9
   __m128 v11; // xmm5
@@ -193,50 +187,33 @@ void __fastcall hkDebugDisplayHandler::displayArrow(hkDebugDisplayHandler *this,
   __m128 v23; // xmm4
   int v24; // edi
   int v25; // ebx
-  hkDebugDisplayHandlerVtbl *v26; // rax
-  int v27; // ST30_4
-  int v28; // ST28_4
-  __m128 v29; // xmm3
-  unsigned int v30; // ST20_4
-  __m128 v31; // xmm1
-  __m128 v32; // xmm7
-  __m128 v33; // xmm1
-  __m128 v34; // xmm10
-  __m128 v35; // xmm2
-  __int64 v36; // ST30_8
-  __int64 v37; // ST28_8
-  __int64 v38; // ST20_8
-  __int64 v39; // ST30_8
-  __int64 v40; // ST28_8
-  __int64 v41; // ST20_8
-  __int64 v42; // ST30_8
-  __int64 v43; // ST28_8
-  __int64 v44; // ST20_8
-  __int64 v45; // ST30_8
-  __int64 v46; // ST28_8
-  __int64 v47; // ST20_8
-  __m128 v48; // [rsp+40h] [rbp-C8h]
-  __m128 v49; // [rsp+50h] [rbp-B8h]
-  __m128 v50; // [rsp+60h] [rbp-A8h]
-  __m128 v51; // [rsp+70h] [rbp-98h]
-  __m128 v52; // [rsp+80h] [rbp-88h]
-  unsigned int v53; // [rsp+120h] [rbp+18h]
+  hkDebugDisplayHandlerVtbl *vfptr; // rax
+  __m128 v27; // xmm3
+  __m128 v28; // xmm1
+  __m128 v29; // xmm7
+  __m128 v30; // xmm1
+  __m128 v31; // xmm10
+  __m128 v32; // xmm2
+  __m128 v33; // [rsp+40h] [rbp-C8h] BYREF
+  __m128 v34; // [rsp+50h] [rbp-B8h] BYREF
+  __m128 v35; // [rsp+60h] [rbp-A8h] BYREF
+  __m128 v36; // [rsp+70h] [rbp-98h] BYREF
+  __m128 v37[3]; // [rsp+80h] [rbp-88h] BYREF
+  unsigned int v38; // [rsp+120h] [rbp+18h] BYREF
 
-  v6 = dir->m_quad;
-  v7 = color;
-  v8 = this;
-  v9 = _mm_mul_ps(v6, v6);
-  if ( (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v9, v9, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v9, v9, 0)))
-             + COERCE_FLOAT(_mm_shuffle_ps(v9, v9, 170))) >= 0.00000011920929 )
+  m_quad = dir->m_quad;
+  v9 = _mm_mul_ps(m_quad, m_quad);
+  if ( (float)((float)(_mm_shuffle_ps(v9, v9, 85).m128_f32[0] + _mm_shuffle_ps(v9, v9, 0).m128_f32[0])
+             + _mm_shuffle_ps(v9, v9, 170).m128_f32[0]) >= 0.00000011920929 )
   {
     v10 = from->m_quad;
-    v11 = _mm_shuffle_ps(v6, _mm_unpackhi_ps(v6, (__m128)0i64), 196);
+    v11 = _mm_shuffle_ps(m_quad, _mm_unpackhi_ps(m_quad, (__m128)0i64), 196);
     v12 = _mm_shuffle_ps(v11, v11, 241);
     v13 = _mm_shuffle_ps(v11, v11, 206);
-    v48 = _mm_add_ps(from->m_quad, v6);
+    v33 = _mm_add_ps(from->m_quad, m_quad);
     v14 = _mm_mul_ps(v12, v12);
     v15 = _mm_mul_ps(v13, v13);
-    v16 = _mm_cmpltps(
+    v16 = _mm_cmplt_ps(
             _mm_add_ps(
               _mm_add_ps(_mm_shuffle_ps(v14, v14, 85), _mm_shuffle_ps(v14, v14, 0)),
               _mm_shuffle_ps(v14, v14, 170)),
@@ -254,111 +231,96 @@ void __fastcall hkDebugDisplayHandler::displayArrow(hkDebugDisplayHandler *this,
     v21 = _mm_mul_ps(
             v17,
             _mm_andnot_ps(
-              _mm_cmpleps(v19, (__m128)0i64),
+              _mm_cmple_ps(v19, (__m128)0i64),
               _mm_mul_ps(
                 _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v20, v19), v20)),
                 _mm_mul_ps(*(__m128 *)_xmm, v20))));
-    v22 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v21, v21, 201), v6), _mm_mul_ps(_mm_shuffle_ps(v6, v6, 201), v21));
+    v22 = _mm_sub_ps(
+            _mm_mul_ps(_mm_shuffle_ps(v21, v21, 201), m_quad),
+            _mm_mul_ps(_mm_shuffle_ps(m_quad, m_quad, 201), v21));
     v23 = _mm_shuffle_ps(v22, v22, 201);
     v24 = tag;
     v25 = id;
-    v26 = this->vfptr;
-    v27 = tag;
-    v28 = id;
-    v29 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v9, v9, 85), _mm_shuffle_ps(v9, v9, 0)), _mm_shuffle_ps(v9, v9, 170));
-    v30 = color;
-    v31 = _mm_rsqrt_ps(v29);
-    v32 = _mm_mul_ps(
+    vfptr = this->vfptr;
+    v27 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v9, v9, 85), _mm_shuffle_ps(v9, v9, 0)), _mm_shuffle_ps(v9, v9, 170));
+    v28 = _mm_rsqrt_ps(v27);
+    v29 = _mm_mul_ps(
             v21,
             _mm_andnot_ps(
-              _mm_cmpleps(v29, (__m128)0i64),
+              _mm_cmple_ps(v27, (__m128)0i64),
               _mm_mul_ps(
                 _mm_mul_ps(
-                  _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v31, v29), v31)),
-                  _mm_mul_ps(*(__m128 *)_xmm, v31)),
-                v29)));
-    v53 = LODWORD(FLOAT_0_14999998);
-    v33 = _mm_shuffle_ps((__m128)v53, (__m128)v53, 0);
-    v34 = _mm_sub_ps((__m128)0i64, v33);
-    v35 = _mm_add_ps(
+                  _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v28, v27), v28)),
+                  _mm_mul_ps(*(__m128 *)_xmm, v28)),
+                v27)));
+    v38 = LODWORD(FLOAT_0_14999998);
+    v30 = _mm_shuffle_ps((__m128)v38, (__m128)v38, 0);
+    v31 = _mm_sub_ps((__m128)0i64, v30);
+    v32 = _mm_add_ps(
             _mm_mul_ps(
               _mm_shuffle_ps((__m128)LODWORD(FLOAT_0_85000002), (__m128)LODWORD(FLOAT_0_85000002), 0),
-              _mm_sub_ps(v48, v10)),
+              _mm_sub_ps(v33, v10)),
             v10);
-    v49 = _mm_add_ps(_mm_mul_ps(v33, v32), v35);
-    v51 = _mm_add_ps(_mm_mul_ps(v33, v23), v35);
-    v52 = _mm_add_ps(_mm_mul_ps(v34, v23), v35);
-    v50 = _mm_add_ps(_mm_mul_ps(v34, v32), v35);
-    v26->displayLine(this, (hkResult *)&v53, from, (hkVector4f *)&v48, v30, v28, v27);
-    LODWORD(v36) = v24;
-    LODWORD(v37) = v25;
-    LODWORD(v38) = v7;
-    v8->vfptr->displayLine(v8, (hkResult *)&v53, (hkVector4f *)&v48, (hkVector4f *)&v49, v38, v37, v36);
-    LODWORD(v39) = v24;
-    LODWORD(v40) = v25;
-    LODWORD(v41) = v7;
-    v8->vfptr->displayLine(v8, (hkResult *)&v53, (hkVector4f *)&v48, (hkVector4f *)&v50, v41, v40, v39);
-    LODWORD(v42) = v24;
-    LODWORD(v43) = v25;
-    LODWORD(v44) = v7;
-    v8->vfptr->displayLine(v8, (hkResult *)&v53, (hkVector4f *)&v48, (hkVector4f *)&v51, v44, v43, v42);
-    LODWORD(v45) = v24;
-    LODWORD(v46) = v25;
-    LODWORD(v47) = v7;
-    v8->vfptr->displayLine(v8, (hkResult *)&v53, (hkVector4f *)&v48, (hkVector4f *)&v52, v47, v46, v45);
+    v34 = _mm_add_ps(_mm_mul_ps(v30, v29), v32);
+    v36 = _mm_add_ps(_mm_mul_ps(v30, v23), v32);
+    v37[0] = _mm_add_ps(_mm_mul_ps(v31, v23), v32);
+    v35 = _mm_add_ps(_mm_mul_ps(v31, v29), v32);
+    vfptr->displayLine(this, (hkResult *)&v38, from, (hkVector4f *)&v33, color, id, tag);
+    this->vfptr->displayLine(this, (hkResult *)&v38, (hkVector4f *)&v33, (hkVector4f *)&v34, color, v25, v24);
+    this->vfptr->displayLine(this, (hkResult *)&v38, (hkVector4f *)&v33, (hkVector4f *)&v35, color, v25, v24);
+    this->vfptr->displayLine(this, (hkResult *)&v38, (hkVector4f *)&v33, (hkVector4f *)&v36, color, v25, v24);
+    this->vfptr->displayLine(this, (hkResult *)&v38, (hkVector4f *)&v33, (hkVector4f *)v37, color, v25, v24);
   }
 }
 
 // File Line: 111
 // RVA: 0xE6D7F0
-void __fastcall hkDebugDisplayHandler::displayStar(hkDebugDisplayHandler *this, hkVector4f *position, float scale, unsigned int color, int id, int tag)
+void __fastcall hkDebugDisplayHandler::displayStar(
+        hkDebugDisplayHandler *this,
+        hkVector4f *position,
+        float scale,
+        unsigned int color,
+        int id,
+        int tag)
 {
-  unsigned int v6; // esi
-  hkVector4f *v7; // rbp
-  hkDebugDisplayHandler *v8; // rdi
-  signed __int64 v9; // rbx
-  __m128 v10; // xmm3
-  hkDebugDisplayHandlerVtbl *v11; // rax
-  __int64 v12; // [rsp+20h] [rbp-98h]
-  __int64 v13; // [rsp+28h] [rbp-90h]
-  __int64 v14[2]; // [rsp+30h] [rbp-88h]
-  char v15; // [rsp+40h] [rbp-78h]
-  __m128 v16; // [rsp+50h] [rbp-68h]
-  __m128 v17; // [rsp+60h] [rbp-58h]
-  __m128 v18; // [rsp+70h] [rbp-48h]
+  __int64 i; // rbx
+  __m128 m_quad; // xmm3
+  hkDebugDisplayHandlerVtbl *vfptr; // rax
+  char v12; // [rsp+40h] [rbp-78h] BYREF
+  __m128 v13; // [rsp+50h] [rbp-68h]
+  __m128 v14; // [rsp+60h] [rbp-58h] BYREF
+  __m128 v15; // [rsp+70h] [rbp-48h] BYREF
 
-  v6 = color;
-  v7 = position;
-  v8 = this;
-  v9 = 0i64;
-  do
+  for ( i = 0i64; i < 3; ++i )
   {
-    v10 = v7->m_quad;
-    v11 = v8->vfptr;
-    v16 = 0i64;
-    v16.m128_f32[v9] = scale;
-    LODWORD(v14[0]) = tag;
-    LODWORD(v13) = id;
-    LODWORD(v12) = v6;
-    v17 = _mm_sub_ps(v10, v16);
-    v18 = _mm_add_ps(v10, v16);
-    v11->displayLine(v8, (hkResult *)&v15, (hkVector4f *)&v18, (hkVector4f *)&v17, v12, v13, v14[0]);
-    ++v9;
+    m_quad = position->m_quad;
+    vfptr = this->vfptr;
+    v13 = 0i64;
+    v13.m128_f32[i] = scale;
+    v14 = _mm_sub_ps(m_quad, v13);
+    v15 = _mm_add_ps(m_quad, v13);
+    vfptr->displayLine(this, (hkResult *)&v12, (hkVector4f *)&v15, (hkVector4f *)&v14, color, id, tag);
   }
-  while ( v9 < 3 );
 }
 
 // File Line: 125
 // RVA: 0xE6D8C0
-void __fastcall hkDebugDisplayHandler::displayModelSpacePose(hkDebugDisplayHandler *this, int numTransforms, const __int16 *parentIndices, hkQsTransformf *modelSpacePose, hkQsTransformf *worldFromModel, unsigned int color, int id, int tag)
+void __fastcall hkDebugDisplayHandler::displayModelSpacePose(
+        hkDebugDisplayHandler *this,
+        __int16 numTransforms,
+        const __int16 *parentIndices,
+        hkQsTransformf *modelSpacePose,
+        hkQsTransformf *worldFromModel,
+        unsigned int color,
+        int id,
+        int tag)
 {
   hkDebugDisplayHandler *v8; // rdi
-  hkQsTransformf *v9; // r13
   __int64 v10; // rbx
-  __m128 *v11; // r14
+  hkQsTransformf *v11; // r14
   __m128 v12; // xmm7
   __int16 v13; // ax
-  __m128 v14; // xmm8
+  __m128 m_quad; // xmm8
   __m128 v15; // xmm1
   __m128 v16; // xmm1
   __m128 v17; // xmm3
@@ -370,78 +332,57 @@ void __fastcall hkDebugDisplayHandler::displayModelSpacePose(hkDebugDisplayHandl
   __m128 v23; // xmm6
   __m128 v24; // xmm3
   __m128 v25; // xmm5
-  hkDebugDisplayHandlerVtbl *v26; // rax
+  hkDebugDisplayHandlerVtbl *vfptr; // rax
   hkDebugDisplayHandlerVtbl *v27; // rax
-  __int64 v28; // ST30_8
-  __int64 v29; // ST28_8
-  __int64 v30; // ST20_8
-  hkDebugDisplayHandlerVtbl *v31; // rax
-  __int64 v32; // ST30_8
-  __int64 v33; // ST28_8
-  __int64 v34; // ST20_8
-  int v35; // eax
-  __int64 v36; // [rsp+20h] [rbp-E0h]
-  __int64 v37; // [rsp+20h] [rbp-E0h]
-  __int64 v38; // [rsp+28h] [rbp-D8h]
-  __int64 v39; // [rsp+28h] [rbp-D8h]
-  __int64 v40[2]; // [rsp+30h] [rbp-D0h]
-  __int64 v41; // [rsp+30h] [rbp-D0h]
-  hkVector4f v42; // [rsp+40h] [rbp-C0h]
-  hkVector4f v43; // [rsp+50h] [rbp-B0h]
-  int v44; // [rsp+60h] [rbp-A0h]
-  hkVector4f direction; // [rsp+70h] [rbp-90h]
-  char v46; // [rsp+80h] [rbp-80h]
-  char v47; // [rsp+84h] [rbp-7Ch]
-  char v48; // [rsp+88h] [rbp-78h]
-  hkVector4f b; // [rsp+90h] [rbp-70h]
-  char v50; // [rsp+A0h] [rbp-60h]
-  hkQuaternionf quat; // [rsp+B0h] [rbp-50h]
-  char v52; // [rsp+C0h] [rbp-40h]
-  hkVector4f v53; // [rsp+D0h] [rbp-30h]
-  int v54; // [rsp+198h] [rbp+98h]
-  const __int16 *v55; // [rsp+1A0h] [rbp+A0h]
+  hkDebugDisplayHandlerVtbl *v28; // rax
+  int v29; // eax
+  hkVector4f v30; // [rsp+40h] [rbp-C0h] BYREF
+  hkVector4f v31; // [rsp+50h] [rbp-B0h] BYREF
+  int v32; // [rsp+60h] [rbp-A0h]
+  hkVector4f direction; // [rsp+70h] [rbp-90h] BYREF
+  hkResult v34; // [rsp+80h] [rbp-80h] BYREF
+  hkResult v35; // [rsp+84h] [rbp-7Ch] BYREF
+  char v36; // [rsp+88h] [rbp-78h] BYREF
+  hkVector4f b; // [rsp+90h] [rbp-70h] BYREF
+  char v38; // [rsp+A0h] [rbp-60h] BYREF
+  hkQuaternionf quat; // [rsp+B0h] [rbp-50h] BYREF
+  char v40; // [rsp+C0h] [rbp-40h] BYREF
+  hkVector4f v41; // [rsp+D0h] [rbp-30h] BYREF
+  int v42; // [rsp+198h] [rbp+98h]
 
-  v55 = parentIndices;
   v8 = this;
   LOWORD(this) = 0;
-  v54 = 0;
-  v9 = modelSpacePose;
-  v44 = (signed __int16)numTransforms;
-  if ( (signed __int16)numTransforms > 0 )
+  v42 = 0;
+  v32 = numTransforms;
+  if ( numTransforms > 0 )
   {
     do
     {
-      v10 = (signed __int16)this;
-      v11 = &v9[(signed __int16)this].m_translation.m_quad;
-      hkVector4f::setTransformedPos(&v42, worldFromModel, &v9[(signed __int16)this].m_translation);
+      v10 = (__int16)this;
+      v11 = &modelSpacePose[(__int16)this];
+      hkVector4f::setTransformedPos(&v30, worldFromModel, &v11->m_translation);
       v12 = (__m128)(unsigned int)FLOAT_1_0;
-      v13 = v55[v10];
+      v13 = parentIndices[v10];
       if ( v13 == -1 )
       {
         b.m_quad = 0i64;
         hkVector4f::setTransformedPos(&b, worldFromModel, &b);
-        LODWORD(v40[0]) = tag;
-        LODWORD(v38) = id;
-        LODWORD(v36) = color;
-        v8->vfptr->displayLine(v8, (hkResult *)&v48, &v42, &b, v36, v38, v40[0]);
-        v14 = v42.m_quad;
+        v8->vfptr->displayLine(v8, (hkResult *)&v36, &v30, &b, color, id, tag);
+        m_quad = v30.m_quad;
       }
       else
       {
-        hkVector4f::setTransformedPos(&v53, worldFromModel, &v9[v13].m_translation);
-        LODWORD(v40[0]) = tag;
-        LODWORD(v38) = id;
-        LODWORD(v36) = color;
-        v8->vfptr->displayLine(v8, (hkResult *)&v52, &v42, &v53, v36, v38, v40[0]);
-        v14 = v42.m_quad;
-        v15 = _mm_sub_ps(v42.m_quad, v53.m_quad);
+        hkVector4f::setTransformedPos(&v41, worldFromModel, &modelSpacePose[v13].m_translation);
+        v8->vfptr->displayLine(v8, (hkResult *)&v40, &v30, &v41, color, id, tag);
+        m_quad = v30.m_quad;
+        v15 = _mm_sub_ps(v30.m_quad, v41.m_quad);
         v16 = _mm_mul_ps(v15, v15);
         v17 = _mm_add_ps(
                 _mm_add_ps(_mm_shuffle_ps(v16, v16, 85), _mm_shuffle_ps(v16, v16, 0)),
                 _mm_shuffle_ps(v16, v16, 170));
         v18 = _mm_rsqrt_ps(v17);
         v12 = _mm_andnot_ps(
-                _mm_cmpleps(v17, (__m128)0i64),
+                _mm_cmple_ps(v17, (__m128)0i64),
                 _mm_mul_ps(
                   _mm_mul_ps(
                     _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v18, v17), v18)),
@@ -457,10 +398,10 @@ void __fastcall hkDebugDisplayHandler::displayModelSpacePose(hkDebugDisplayHandl
           v12 = (__m128)LODWORD(FLOAT_10_0);
         }
       }
-      v19 = v11[1];
+      v19 = v11->m_rotation.m_vec.m_quad;
       v20.m_vec.m_quad = (__m128)worldFromModel->m_rotation;
       v12.m128_f32[0] = v12.m128_f32[0] * 0.25;
-      v21 = _mm_shuffle_ps(v11[1], v11[1], 255);
+      v21 = _mm_shuffle_ps(v19, v19, 255);
       v22 = _mm_sub_ps(
               _mm_mul_ps(_mm_shuffle_ps(v19, v19, 201), v20.m_vec.m_quad),
               _mm_mul_ps(_mm_shuffle_ps(v20.m_vec.m_quad, v20.m_vec.m_quad, 201), v19));
@@ -480,58 +421,54 @@ void __fastcall hkDebugDisplayHandler::displayModelSpacePose(hkDebugDisplayHandl
                                   _mm_shuffle_ps(v23, v23, 170)))),
                             196);
       direction.m_quad = _mm_unpacklo_ps(_mm_unpacklo_ps(v12, (__m128)0i64), (__m128)0i64);
-      hkVector4f::setRotatedDir(&v43, &quat, &direction);
-      v26 = v8->vfptr;
-      LODWORD(v41) = tag;
-      v43.m_quad = _mm_add_ps(v43.m_quad, v42.m_quad);
-      LODWORD(v39) = id;
-      LODWORD(v37) = 2147418112;
-      v26->displayLine(v8, (hkResult *)&v50, &v42, &v43, v37, v39, v41);
-      v42.m_quad = v14;
+      hkVector4f::setRotatedDir(&v31, &quat, &direction);
+      vfptr = v8->vfptr;
+      v31.m_quad = _mm_add_ps(v31.m_quad, v30.m_quad);
+      vfptr->displayLine(v8, (hkResult *)&v38, &v30, &v31, 2147418112u, id, tag);
+      v30.m_quad = m_quad;
       direction.m_quad = _mm_unpacklo_ps((__m128)0i64, _mm_unpacklo_ps(v12, (__m128)0i64));
-      hkVector4f::setRotatedDir(&v43, &quat, &direction);
+      hkVector4f::setRotatedDir(&v31, &quat, &direction);
       v27 = v8->vfptr;
-      LODWORD(v28) = tag;
-      LODWORD(v29) = id;
-      v43.m_quad = _mm_add_ps(v43.m_quad, v42.m_quad);
-      LODWORD(v30) = 2130771712;
-      v27->displayLine(v8, (hkResult *)&v47, &v42, &v43, v30, v29, v28);
-      v42.m_quad = v14;
+      v31.m_quad = _mm_add_ps(v31.m_quad, v30.m_quad);
+      v27->displayLine(v8, &v35, &v30, &v31, 2130771712u, id, tag);
+      v30.m_quad = m_quad;
       direction.m_quad = _mm_unpacklo_ps(_mm_unpacklo_ps((__m128)0i64, v12), (__m128)0i64);
-      hkVector4f::setRotatedDir(&v43, &quat, &direction);
-      v31 = v8->vfptr;
-      LODWORD(v32) = tag;
-      v43.m_quad = _mm_add_ps(v43.m_quad, v42.m_quad);
-      LODWORD(v33) = id;
-      LODWORD(v34) = 2130706687;
-      v31->displayLine(v8, (hkResult *)&v46, &v42, &v43, v34, v33, v32);
-      WORD1(this) = HIWORD(v54);
-      LOWORD(this) = v54 + 1;
-      v35 = (signed __int16)(v54 + 1);
-      v54 = (signed int)this;
+      hkVector4f::setRotatedDir(&v31, &quat, &direction);
+      v28 = v8->vfptr;
+      v31.m_quad = _mm_add_ps(v31.m_quad, v30.m_quad);
+      v28->displayLine(v8, &v34, &v30, &v31, 2130706687u, id, tag);
+      WORD1(this) = HIWORD(v42);
+      LOWORD(this) = v42 + 1;
+      v29 = (__int16)(v42 + 1);
+      v42 = (int)this;
     }
-    while ( v35 < v44 );
+    while ( v29 < v32 );
   }
 }
 
 // File Line: 189
 // RVA: 0xE6DCF0
-void __fastcall hkDebugDisplayHandler::displayLocalSpacePose(hkDebugDisplayHandler *this, int numTransforms, const __int16 *parentIndices, hkQsTransformf *localSpacePose, hkQsTransformf *worldFromModel, unsigned int color, int id, int tag)
+void __fastcall hkDebugDisplayHandler::displayLocalSpacePose(
+        hkDebugDisplayHandler *this,
+        int numTransforms,
+        const __int16 *parentIndices,
+        hkQsTransformf *localSpacePose,
+        hkQsTransformf *worldFromModel,
+        unsigned int color,
+        int id,
+        int tag)
 {
-  hkDebugDisplayHandler *v8; // r15
-  hkQsTransformf *v9; // rbp
-  const __int16 *v10; // rsi
   __int64 v11; // r14
-  hkLifoAllocator *v12; // rax
-  hkQsTransformf *v13; // rbx
+  hkLifoAllocator *Value; // rax
+  hkQsTransformf *m_cur; // rbx
   int v14; // edi
   char *v15; // rcx
   __int64 v16; // rdx
-  signed __int64 v17; // r9
+  hkQuaternionf *p_m_rotation; // r9
   signed __int64 v18; // r8
   __int64 v19; // rax
   hkQsTransformf *v20; // rax
-  __m128 v21; // xmm2
+  __m128 m_quad; // xmm2
   __m128 v22; // xmm3
   __m128 v23; // xmm1
   __m128 v24; // xmm5
@@ -547,112 +484,119 @@ void __fastcall hkDebugDisplayHandler::displayLocalSpacePose(hkDebugDisplayHandl
   __m128 v34; // xmm3
   __m128 v35; // xmm3
   hkLifoAllocator *v36; // rax
-  int v37; // er8
+  int v37; // r8d
 
-  v8 = this;
-  v9 = localSpacePose;
-  v10 = parentIndices;
   v11 = numTransforms;
-  v12 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v13 = (hkQsTransformf *)v12->m_cur;
+  Value = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  m_cur = (hkQsTransformf *)Value->m_cur;
   v14 = (48 * v11 + 127) & 0xFFFFFF80;
-  v15 = (char *)v13 + v14;
-  if ( v14 > v12->m_slabSize || v15 > v12->m_end )
-    v13 = (hkQsTransformf *)hkLifoAllocator::allocateFromNewSlab(v12, v14);
+  v15 = (char *)m_cur + v14;
+  if ( v14 > Value->m_slabSize || v15 > Value->m_end )
+    m_cur = (hkQsTransformf *)hkLifoAllocator::allocateFromNewSlab(Value, v14);
   else
-    v12->m_cur = v15;
+    Value->m_cur = v15;
   v16 = 0i64;
-  if ( (signed int)v11 > 0 )
+  if ( (int)v11 > 0 )
   {
-    v17 = (signed __int64)&v9->m_rotation;
-    v18 = (char *)v13 - (char *)v9;
+    p_m_rotation = &localSpacePose->m_rotation;
+    v18 = (char *)m_cur - (char *)localSpacePose;
     do
     {
-      v19 = v10[v16];
+      v19 = parentIndices[v16];
       if ( (_DWORD)v19 == -1 )
         v20 = &hkQsTransformf_identityStorage;
       else
-        v20 = &v13[v19];
-      v21 = v20->m_rotation.m_vec.m_quad;
-      v22 = *(__m128 *)(v17 - 16);
+        v20 = &m_cur[v19];
+      m_quad = v20->m_rotation.m_vec.m_quad;
+      v22 = p_m_rotation[-1].m_vec.m_quad;
       ++v16;
-      v17 += 48i64;
-      v23 = _mm_mul_ps(v20->m_rotation.m_vec.m_quad, v22);
-      v24 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v22, v22, 201), v21), _mm_mul_ps(_mm_shuffle_ps(v21, v21, 201), v22));
-      v25 = _mm_shuffle_ps(v20->m_rotation.m_vec.m_quad, v21, 255);
+      p_m_rotation += 3;
+      v23 = _mm_mul_ps(m_quad, v22);
+      v24 = _mm_sub_ps(
+              _mm_mul_ps(_mm_shuffle_ps(v22, v22, 201), m_quad),
+              _mm_mul_ps(_mm_shuffle_ps(m_quad, m_quad, 201), v22));
+      v25 = _mm_shuffle_ps(m_quad, m_quad, 255);
       v26 = _mm_add_ps(
               _mm_add_ps(
                 _mm_mul_ps(
                   _mm_add_ps(
                     _mm_add_ps(_mm_shuffle_ps(v23, v23, 85), _mm_shuffle_ps(v23, v23, 0)),
                     _mm_shuffle_ps(v23, v23, 170)),
-                  v21),
+                  m_quad),
                 _mm_mul_ps(_mm_sub_ps(_mm_mul_ps(v25, v25), (__m128)xmmword_141A711B0), v22)),
               _mm_mul_ps(_mm_shuffle_ps(v24, v24, 201), v25));
-      *(__m128 *)(v18 + v17 - 64) = _mm_add_ps(_mm_add_ps(v26, v26), v20->m_translation.m_quad);
-      v27 = *(__m128 *)(v17 - 48);
+      *(__m128 *)((char *)&p_m_rotation[-4].m_vec.m_quad + v18) = _mm_add_ps(
+                                                                    _mm_add_ps(v26, v26),
+                                                                    v20->m_translation.m_quad);
+      v27 = p_m_rotation[-3].m_vec.m_quad;
       v28 = v20->m_rotation.m_vec.m_quad;
-      v29 = _mm_shuffle_ps(v20->m_rotation.m_vec.m_quad, v20->m_rotation.m_vec.m_quad, 255);
+      v29 = _mm_shuffle_ps(v28, v28, 255);
       v30 = _mm_mul_ps(_mm_shuffle_ps(v28, v28, 201), v27);
-      v31 = _mm_shuffle_ps(*(__m128 *)(v17 - 48), *(__m128 *)(v17 - 48), 255);
+      v31 = _mm_shuffle_ps(v27, v27, 255);
       v32 = _mm_mul_ps(_mm_shuffle_ps(v27, v27, 201), v28);
       v33 = _mm_mul_ps(v28, v27);
       v34 = _mm_sub_ps(v32, v30);
       v35 = _mm_add_ps(
-              _mm_add_ps(_mm_shuffle_ps(v34, v34, 201), _mm_mul_ps(*(__m128 *)(v17 - 48), v29)),
+              _mm_add_ps(_mm_shuffle_ps(v34, v34, 201), _mm_mul_ps(v27, v29)),
               _mm_mul_ps(v20->m_rotation.m_vec.m_quad, v31));
-      *(__m128 *)(v18 + v17 - 48) = _mm_shuffle_ps(
-                                      v35,
-                                      _mm_unpackhi_ps(
-                                        v35,
-                                        _mm_sub_ps(
-                                          _mm_mul_ps(v31, v29),
-                                          _mm_add_ps(
-                                            _mm_add_ps(_mm_shuffle_ps(v33, v33, 85), _mm_shuffle_ps(v33, v33, 0)),
-                                            _mm_shuffle_ps(v33, v33, 170)))),
-                                      196);
-      *(__m128 *)(v18 + v17 - 32) = _mm_mul_ps(*(__m128 *)(v17 - 32), v20->m_scale.m_quad);
+      *(__m128 *)((char *)&p_m_rotation[-3].m_vec.m_quad + v18) = _mm_shuffle_ps(
+                                                                    v35,
+                                                                    _mm_unpackhi_ps(
+                                                                      v35,
+                                                                      _mm_sub_ps(
+                                                                        _mm_mul_ps(v31, v29),
+                                                                        _mm_add_ps(
+                                                                          _mm_add_ps(
+                                                                            _mm_shuffle_ps(v33, v33, 85),
+                                                                            _mm_shuffle_ps(v33, v33, 0)),
+                                                                          _mm_shuffle_ps(v33, v33, 170)))),
+                                                                    196);
+      *(__m128 *)((char *)&p_m_rotation[-2].m_vec.m_quad + v18) = _mm_mul_ps(
+                                                                    p_m_rotation[-2].m_vec.m_quad,
+                                                                    v20->m_scale.m_quad);
     }
     while ( v16 < v11 );
   }
-  hkDebugDisplayHandler::displayModelSpacePose(v8, v11, v10, v13, worldFromModel, color, id, tag);
+  hkDebugDisplayHandler::displayModelSpacePose(this, v11, parentIndices, m_cur, worldFromModel, color, id, tag);
   v36 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   v37 = (v14 + 15) & 0xFFFFFFF0;
-  if ( v14 > v36->m_slabSize || (char *)v13 + v37 != v36->m_cur || v36->m_firstNonLifoEnd == v13 )
-    hkLifoAllocator::slowBlockFree(v36, v13, v37);
+  if ( v14 > v36->m_slabSize || (char *)m_cur + v37 != v36->m_cur || v36->m_firstNonLifoEnd == m_cur )
+    hkLifoAllocator::slowBlockFree(v36, (char *)m_cur, v37);
   else
-    v36->m_cur = v13;
+    v36->m_cur = m_cur;
 }
 
 // File Line: 206
 // RVA: 0xE6DF50
-hkResult *__fastcall hkDebugDisplayHandler::addGeometryLazily(hkDebugDisplayHandler *this, hkResult *result, hkReferencedObject *source, hkDisplayGeometryBuilder *builder, hkTransformf *transform, unsigned __int64 id, int tag, unsigned __int64 shapeIdHint)
+hkResult *__fastcall hkDebugDisplayHandler::addGeometryLazily(
+        hkDebugDisplayHandler *this,
+        hkResult *result,
+        hkReferencedObject *source,
+        hkDisplayGeometryBuilder *builder,
+        hkTransformf *transform,
+        unsigned __int64 id,
+        int tag,
+        unsigned __int64 shapeIdHint)
 {
-  hkResult *v8; // rsi
-  hkBaseObjectVtbl *v9; // rax
-  hkDebugDisplayHandler *v10; // r14
+  hkBaseObjectVtbl *vfptr; // rax
   int v11; // edx
   int v12; // edi
   __int64 i; // rbx
   hkReferencedObject *v14; // rcx
-  int v15; // ST38_4
-  int v16; // ST28_4
-  hkResultEnum *v17; // rax
-  hkReferencedObject **objects; // [rsp+40h] [rbp-C0h]
+  hkResultEnum *v15; // rax
+  hkReferencedObject **objects; // [rsp+40h] [rbp-C0h] BYREF
   int numObjects; // [rsp+48h] [rbp-B8h]
-  int v21; // [rsp+4Ch] [rbp-B4h]
-  char v22; // [rsp+50h] [rbp-B0h]
-  hkErrStream v23; // [rsp+90h] [rbp-70h]
-  char buf; // [rsp+B0h] [rbp-50h]
-  char v25; // [rsp+2D8h] [rbp+1D8h]
+  int v19; // [rsp+4Ch] [rbp-B4h]
+  char v20; // [rsp+50h] [rbp-B0h] BYREF
+  hkErrStream v21; // [rsp+90h] [rbp-70h] BYREF
+  char buf[512]; // [rsp+B0h] [rbp-50h] BYREF
+  char v23; // [rsp+2D8h] [rbp+1D8h] BYREF
 
-  v8 = result;
-  objects = (hkReferencedObject **)&v22;
-  v9 = builder->vfptr;
-  v10 = this;
+  objects = (hkReferencedObject **)&v20;
+  vfptr = builder->vfptr;
   numObjects = 0;
-  v21 = -2147483640;
-  ((void (__fastcall *)(hkDisplayGeometryBuilder *, hkReferencedObject *, hkReferencedObject ***))v9[1].__first_virtual_table_function__)(
+  v19 = -2147483640;
+  ((void (__fastcall *)(hkDisplayGeometryBuilder *, hkReferencedObject *, hkReferencedObject ***))vfptr[1].__first_virtual_table_function__)(
     builder,
     source,
     &objects);
@@ -663,10 +607,10 @@ hkResult *__fastcall hkDebugDisplayHandler::addGeometryLazily(hkDebugDisplayHand
     v14 = objects[i];
     if ( LODWORD(v14[6].vfptr) == 6 && !v14[1].vfptr )
     {
-      hkErrStream::hkErrStream(&v23, &buf, 512);
-      hkOstream::operator<<((hkOstream *)&v23.vfptr, "Unable to build display geometry from source");
-      hkError::messageReport(-1, &buf, "hkDebugDisplayHandler.cpp", 216);
-      hkOstream::~hkOstream((hkOstream *)&v23.vfptr);
+      hkErrStream::hkErrStream(&v21, buf, 512);
+      hkOstream::operator<<(&v21, "Unable to build display geometry from source");
+      hkError::messageReport(0xFFFFFFFF, buf, "hkDebugDisplayHandler.cpp", 216);
+      hkOstream::~hkOstream(&v21);
       hkReferencedObject::removeReference(objects[i]);
       v11 = numObjects - 1;
       numObjects = v11;
@@ -678,65 +622,48 @@ hkResult *__fastcall hkDebugDisplayHandler::addGeometryLazily(hkDebugDisplayHand
     }
     --v12;
   }
-  v8->m_enum = 1;
+  result->m_enum = HK_FAILURE;
   if ( v11 > 0 )
   {
-    v15 = 0;
-    v16 = tag;
-    v17 = (hkResultEnum *)(*(__int64 (__fastcall **)(hkDebugDisplayHandler *, char *, hkReferencedObject ***, hkTransformf *, unsigned __int64, int, unsigned __int64, int))v10->vfptr->gap8)(
-                            v10,
-                            &v25,
+    v15 = (hkResultEnum *)(*(__int64 (__fastcall **)(hkDebugDisplayHandler *, char *, hkReferencedObject ***, hkTransformf *, unsigned __int64, int, unsigned __int64, _DWORD))this->vfptr->gap8)(
+                            this,
+                            &v23,
                             &objects,
                             transform,
                             id,
-                            v16,
+                            tag,
                             shapeIdHint,
-                            v15);
+                            0);
     v11 = numObjects;
-    v8->m_enum = *v17;
+    result->m_enum = *v15;
   }
   hkReferencedObject::removeReferences(objects, v11, 8);
   numObjects = 0;
-  if ( v21 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      objects,
-      8 * v21);
-  return v8;
+  if ( v19 >= 0 )
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, objects, 8 * v19);
+  return result;
 }
 
 // File Line: 235
 // RVA: 0xE6E120
-hkResult *__fastcall hkDebugDisplayHandler::addGeometryHash(hkDebugDisplayHandler *this, hkResult *result, hkReferencedObject *source, hkDisplayGeometryBuilder *builder, const unsigned __int64 *hash, unsigned __int64 id, int tag)
+hkResult *__fastcall hkDebugDisplayHandler::addGeometryHash(
+        hkDebugDisplayHandler *this,
+        hkResult *result,
+        hkReferencedObject *source,
+        hkDisplayGeometryBuilder *builder,
+        const unsigned __int64 *hash,
+        unsigned __int64 id,
+        int tag)
 {
-  hkDebugDisplayHandlerVtbl *v7; // r10
-  hkResult *v8; // rbx
-  int v9; // ST48_4
-  int v10; // ST30_4
-  __int128 v12; // [rsp+50h] [rbp-28h]
-  __m128 v13; // [rsp+60h] [rbp-18h]
+  hkDebugDisplayHandlerVtbl *vfptr; // r10
+  __int128 v10[2]; // [rsp+50h] [rbp-28h] BYREF
 
-  v7 = this->vfptr;
-  v8 = result;
-  v12 = xmmword_141A712A0;
-  v9 = tag;
-  v13 = _mm_xor_ps((__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 0), (__m128)xmmword_141A712A0);
-  v10 = 0;
-  ((void (__fastcall *)(hkDebugDisplayHandler *, hkResult *, hkReferencedObject *, hkDisplayGeometryBuilder *, const unsigned __int64 *, __int128 *, int, hkVector4f *, unsigned __int64, int, _QWORD, _QWORD, unsigned __int64, unsigned __int64))v7->addGeometryHash)(
-    this,
-    result,
-    source,
-    builder,
-    hash,
-    &v12,
-    v10,
-    &transform,
-    id,
-    v9,
-    xmmword_141A712A0,
-    *((_QWORD *)&xmmword_141A712A0 + 1),
-    v13.m128_u64[0],
-    v13.m128_u64[1]);
-  return v8;
+  vfptr = this->vfptr;
+  v10[0] = xmmword_141A712A0;
+  v10[1] = (__int128)_mm_xor_ps(
+                       (__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 0),
+                       (__m128)xmmword_141A712A0);
+  vfptr->addGeometryHash(this, result, source, builder, hash, (hkAabb *)v10, 0, (hkTransformf *)&transform, id, tag);
+  return result;
 }
 

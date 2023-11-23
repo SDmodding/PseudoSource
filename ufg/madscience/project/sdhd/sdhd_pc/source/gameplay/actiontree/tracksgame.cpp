@@ -6,7 +6,7 @@ __int64 dynamic_initializer_for__gStaticSymbol_None__()
 
   v0 = UFG::qStringHash32("None", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gStaticSymbol_None, v0);
-  return atexit(dynamic_atexit_destructor_for__gStaticSymbol_None__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gStaticSymbol_None__);
 }
 
 // File Line: 42
@@ -17,7 +17,7 @@ __int64 dynamic_initializer_for__gStaticSymbol_none__()
 
   v0 = UFG::qStringHash32("none", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gStaticSymbol_none, v0);
-  return atexit(dynamic_atexit_destructor_for__gStaticSymbol_none__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gStaticSymbol_none__);
 }
 
 // File Line: 43
@@ -28,7 +28,7 @@ __int64 dynamic_initializer_for__gStaticSymbol_BikeCrash__()
 
   v0 = UFG::qStringHash32("BikeCrash", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gStaticSymbol_BikeCrash, v0);
-  return atexit(dynamic_atexit_destructor_for__gStaticSymbol_BikeCrash__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gStaticSymbol_BikeCrash__);
 }
 
 // File Line: 44
@@ -39,7 +39,7 @@ __int64 dynamic_initializer_for__gStaticSymbol_PushAway__()
 
   v0 = UFG::qStringHash32("PushAway", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gStaticSymbol_PushAway, v0);
-  return atexit(dynamic_atexit_destructor_for__gStaticSymbol_PushAway__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gStaticSymbol_PushAway__);
 }
 
 // File Line: 45
@@ -50,7 +50,7 @@ __int64 dynamic_initializer_for__gStaticSymbol_Projectile__()
 
   v0 = UFG::qStringHash32("Projectile", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gStaticSymbol_Projectile, v0);
-  return atexit(dynamic_atexit_destructor_for__gStaticSymbol_Projectile__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gStaticSymbol_Projectile__);
 }
 
 // File Line: 46
@@ -61,7 +61,7 @@ __int64 dynamic_initializer_for__gStaticSymbol_VehicleTireShot__()
 
   v0 = UFG::qStringHash32("VehicleTireShot", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gStaticSymbol_VehicleTireShot, v0);
-  return atexit(dynamic_atexit_destructor_for__gStaticSymbol_VehicleTireShot__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gStaticSymbol_VehicleTireShot__);
 }
 
 // File Line: 47
@@ -72,7 +72,7 @@ __int64 dynamic_initializer_for__gStaticSymbol_VehicleGasTankShot__()
 
   v0 = UFG::qStringHash32("VehicleGasTankShot", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gStaticSymbol_VehicleGasTankShot, v0);
-  return atexit(dynamic_atexit_destructor_for__gStaticSymbol_VehicleGasTankShot__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gStaticSymbol_VehicleGasTankShot__);
 }
 
 // File Line: 48
@@ -83,7 +83,7 @@ __int64 dynamic_initializer_for__gStaticSymbol_WorldCollision__()
 
   v0 = UFG::qStringHash32("WorldCollision", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gStaticSymbol_WorldCollision, v0);
-  return atexit(dynamic_atexit_destructor_for__gStaticSymbol_WorldCollision__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gStaticSymbol_WorldCollision__);
 }
 
 // File Line: 49
@@ -94,7 +94,7 @@ __int64 dynamic_initializer_for__gStaticSymbol_WeaponEquipped__()
 
   v0 = UFG::qStringHash32("WeaponEquipped", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gStaticSymbol_WeaponEquipped, v0);
-  return atexit(dynamic_atexit_destructor_for__gStaticSymbol_WeaponEquipped__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gStaticSymbol_WeaponEquipped__);
 }
 
 // File Line: 50
@@ -105,7 +105,7 @@ __int64 dynamic_initializer_for__gStaticSymbol_Explosion__()
 
   v0 = UFG::qStringHash32("Explosion", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gStaticSymbol_Explosion, v0);
-  return atexit(dynamic_atexit_destructor_for__gStaticSymbol_Explosion__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gStaticSymbol_Explosion__);
 }
 
 // File Line: 51
@@ -116,7 +116,7 @@ __int64 dynamic_initializer_for__gStaticSymbol_ExplosionNoDamage__()
 
   v0 = UFG::qStringHash32("ExplosionNoDamage", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gStaticSymbol_ExplosionNoDamage, v0);
-  return atexit(dynamic_atexit_destructor_for__gStaticSymbol_ExplosionNoDamage__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gStaticSymbol_ExplosionNoDamage__);
 }
 
 // File Line: 52
@@ -127,7 +127,7 @@ __int64 dynamic_initializer_for__gStaticSymbol_RemoveDriver__()
 
   v0 = UFG::qStringHash32("RemoveDriver", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gStaticSymbol_RemoveDriver, v0);
-  return atexit(dynamic_atexit_destructor_for__gStaticSymbol_RemoveDriver__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gStaticSymbol_RemoveDriver__);
 }
 
 // File Line: 53
@@ -138,7 +138,7 @@ __int64 dynamic_initializer_for__gStaticSymbol_KnockDown__()
 
   v0 = UFG::qStringHash32("KnockDown", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gStaticSymbol_KnockDown, v0);
-  return atexit(dynamic_atexit_destructor_for__gStaticSymbol_KnockDown__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gStaticSymbol_KnockDown__);
 }
 
 // File Line: 54
@@ -149,7 +149,7 @@ __int64 dynamic_initializer_for__gStaticSymbol_Stun__()
 
   v0 = UFG::qStringHash32("Stun", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gStaticSymbol_Stun, v0);
-  return atexit(dynamic_atexit_destructor_for__gStaticSymbol_Stun__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gStaticSymbol_Stun__);
 }
 
 // File Line: 55
@@ -160,7 +160,7 @@ __int64 dynamic_initializer_for__gStaticSymbol_Heavy__()
 
   v0 = UFG::qStringHash32("Heavy", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gStaticSymbol_Heavy, v0);
-  return atexit(dynamic_atexit_destructor_for__gStaticSymbol_Heavy__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gStaticSymbol_Heavy__);
 }
 
 // File Line: 56
@@ -171,7 +171,7 @@ __int64 dynamic_initializer_for__gStaticSymbol_High__()
 
   v0 = UFG::qStringHash32("High", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gStaticSymbol_High, v0);
-  return atexit(dynamic_atexit_destructor_for__gStaticSymbol_High__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gStaticSymbol_High__);
 }
 
 // File Line: 58
@@ -179,14 +179,14 @@ __int64 dynamic_initializer_for__gStaticSymbol_High__()
 __int64 dynamic_initializer_for__gAttackCollisionEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&gAttackCollisionEnum, "Global/Act/AttackCollisionTypes.xml");
-  return atexit(dynamic_atexit_destructor_for__gAttackCollisionEnum__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gAttackCollisionEnum__);
 }
 
 // File Line: 59
 // RVA: 0x149BC90
 __int64 dynamic_initializer_for__gAttackCollisionBikeCrash__()
 {
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v0; // rax
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
 
   gAttackCollisionBikeCrash.m_EnumSymbol.mUID = gStaticSymbol_BikeCrash.mUID;
   *(_QWORD *)&gAttackCollisionBikeCrash.m_EnumValue = 0i64;
@@ -197,20 +197,20 @@ __int64 dynamic_initializer_for__gAttackCollisionBikeCrash__()
   }
   else
   {
-    v0 = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackCollisionBikeCrash;
-    gAttackCollisionBikeCrash.mPrev = v0;
+    mPrev = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &gAttackCollisionBikeCrash;
+    gAttackCollisionBikeCrash.mPrev = mPrev;
     gAttackCollisionBikeCrash.mNext = &gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackCollisionBikeCrash;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &gAttackCollisionBikeCrash;
   }
-  return atexit(dynamic_atexit_destructor_for__gAttackCollisionBikeCrash__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gAttackCollisionBikeCrash__);
 }
 
 // File Line: 60
 // RVA: 0x149C020
 __int64 dynamic_initializer_for__gAttackCollisionPushAway__()
 {
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v0; // rax
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
 
   gAttackCollisionPushAway.m_EnumSymbol.mUID = gStaticSymbol_PushAway.mUID;
   *(_QWORD *)&gAttackCollisionPushAway.m_EnumValue = 0i64;
@@ -221,20 +221,20 @@ __int64 dynamic_initializer_for__gAttackCollisionPushAway__()
   }
   else
   {
-    v0 = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackCollisionPushAway;
-    gAttackCollisionPushAway.mPrev = v0;
+    mPrev = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &gAttackCollisionPushAway;
+    gAttackCollisionPushAway.mPrev = mPrev;
     gAttackCollisionPushAway.mNext = &gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackCollisionPushAway;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &gAttackCollisionPushAway;
   }
-  return atexit(dynamic_atexit_destructor_for__gAttackCollisionPushAway__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gAttackCollisionPushAway__);
 }
 
 // File Line: 61
 // RVA: 0x149BF90
 __int64 dynamic_initializer_for__gAttackCollisionProjectile__()
 {
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v0; // rax
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
 
   gAttackCollisionProjectile.m_EnumSymbol.mUID = gStaticSymbol_Projectile.mUID;
   *(_QWORD *)&gAttackCollisionProjectile.m_EnumValue = 0i64;
@@ -245,20 +245,20 @@ __int64 dynamic_initializer_for__gAttackCollisionProjectile__()
   }
   else
   {
-    v0 = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackCollisionProjectile;
-    gAttackCollisionProjectile.mPrev = v0;
+    mPrev = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &gAttackCollisionProjectile;
+    gAttackCollisionProjectile.mPrev = mPrev;
     gAttackCollisionProjectile.mNext = &gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackCollisionProjectile;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &gAttackCollisionProjectile;
   }
-  return atexit(dynamic_atexit_destructor_for__gAttackCollisionProjectile__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gAttackCollisionProjectile__);
 }
 
 // File Line: 62
 // RVA: 0x149C260
 __int64 dynamic_initializer_for__gAttackCollisionVehicleTireShot__()
 {
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v0; // rax
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
 
   gAttackCollisionVehicleTireShot.m_EnumSymbol.mUID = gStaticSymbol_VehicleTireShot.mUID;
   *(_QWORD *)&gAttackCollisionVehicleTireShot.m_EnumValue = 0i64;
@@ -269,20 +269,20 @@ __int64 dynamic_initializer_for__gAttackCollisionVehicleTireShot__()
   }
   else
   {
-    v0 = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackCollisionVehicleTireShot;
-    gAttackCollisionVehicleTireShot.mPrev = v0;
+    mPrev = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &gAttackCollisionVehicleTireShot;
+    gAttackCollisionVehicleTireShot.mPrev = mPrev;
     gAttackCollisionVehicleTireShot.mNext = &gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackCollisionVehicleTireShot;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &gAttackCollisionVehicleTireShot;
   }
-  return atexit(dynamic_atexit_destructor_for__gAttackCollisionVehicleTireShot__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gAttackCollisionVehicleTireShot__);
 }
 
 // File Line: 63
 // RVA: 0x149C1D0
 __int64 dynamic_initializer_for__gAttackCollisionVehicleGasTankShot__()
 {
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v0; // rax
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
 
   gAttackCollisionVehicleGasTankShot.m_EnumSymbol.mUID = gStaticSymbol_VehicleGasTankShot.mUID;
   *(_QWORD *)&gAttackCollisionVehicleGasTankShot.m_EnumValue = 0i64;
@@ -293,20 +293,20 @@ __int64 dynamic_initializer_for__gAttackCollisionVehicleGasTankShot__()
   }
   else
   {
-    v0 = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackCollisionVehicleGasTankShot;
-    gAttackCollisionVehicleGasTankShot.mPrev = v0;
+    mPrev = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &gAttackCollisionVehicleGasTankShot;
+    gAttackCollisionVehicleGasTankShot.mPrev = mPrev;
     gAttackCollisionVehicleGasTankShot.mNext = &gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackCollisionVehicleGasTankShot;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &gAttackCollisionVehicleGasTankShot;
   }
-  return atexit(dynamic_atexit_destructor_for__gAttackCollisionVehicleGasTankShot__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gAttackCollisionVehicleGasTankShot__);
 }
 
 // File Line: 64
 // RVA: 0x149C410
 __int64 dynamic_initializer_for__gAttackTypeWorldCollision__()
 {
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v0; // rax
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
 
   gAttackTypeWorldCollision.m_EnumSymbol.mUID = gStaticSymbol_WorldCollision.mUID;
   *(_QWORD *)&gAttackTypeWorldCollision.m_EnumValue = 0i64;
@@ -317,20 +317,20 @@ __int64 dynamic_initializer_for__gAttackTypeWorldCollision__()
   }
   else
   {
-    v0 = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackTypeWorldCollision;
-    gAttackTypeWorldCollision.mPrev = v0;
+    mPrev = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &gAttackTypeWorldCollision;
+    gAttackTypeWorldCollision.mPrev = mPrev;
     gAttackTypeWorldCollision.mNext = &gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackTypeWorldCollision;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &gAttackTypeWorldCollision;
   }
-  return atexit(dynamic_atexit_destructor_for__gAttackTypeWorldCollision__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gAttackTypeWorldCollision__);
 }
 
 // File Line: 65
 // RVA: 0x149C2F0
 __int64 dynamic_initializer_for__gAttackMaterialNone__()
 {
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v0; // rax
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
 
   gAttackMaterialNone.m_EnumSymbol.mUID = gStaticSymbol_None.mUID;
   *(_QWORD *)&gAttackMaterialNone.m_EnumValue = 0i64;
@@ -341,20 +341,20 @@ __int64 dynamic_initializer_for__gAttackMaterialNone__()
   }
   else
   {
-    v0 = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackMaterialNone;
-    gAttackMaterialNone.mPrev = v0;
+    mPrev = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &gAttackMaterialNone;
+    gAttackMaterialNone.mPrev = mPrev;
     gAttackMaterialNone.mNext = &gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackMaterialNone;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &gAttackMaterialNone;
   }
-  return atexit(dynamic_atexit_destructor_for__gAttackMaterialNone__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gAttackMaterialNone__);
 }
 
 // File Line: 66
 // RVA: 0x149C380
 __int64 dynamic_initializer_for__gAttackMaterialWeaponEquipped__()
 {
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v0; // rax
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
 
   gAttackMaterialWeaponEquipped.m_EnumSymbol.mUID = gStaticSymbol_WeaponEquipped.mUID;
   *(_QWORD *)&gAttackMaterialWeaponEquipped.m_EnumValue = 0i64;
@@ -365,20 +365,20 @@ __int64 dynamic_initializer_for__gAttackMaterialWeaponEquipped__()
   }
   else
   {
-    v0 = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackMaterialWeaponEquipped;
-    gAttackMaterialWeaponEquipped.mPrev = v0;
+    mPrev = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &gAttackMaterialWeaponEquipped;
+    gAttackMaterialWeaponEquipped.mPrev = mPrev;
     gAttackMaterialWeaponEquipped.mNext = &gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackMaterialWeaponEquipped;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &gAttackMaterialWeaponEquipped;
   }
-  return atexit(dynamic_atexit_destructor_for__gAttackMaterialWeaponEquipped__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gAttackMaterialWeaponEquipped__);
 }
 
 // File Line: 67
 // RVA: 0x149BD50
 __int64 dynamic_initializer_for__gAttackCollisionExplosion__()
 {
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v0; // rax
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
 
   gAttackCollisionExplosion.m_EnumSymbol.mUID = gStaticSymbol_Explosion.mUID;
   *(_QWORD *)&gAttackCollisionExplosion.m_EnumValue = 0i64;
@@ -389,20 +389,20 @@ __int64 dynamic_initializer_for__gAttackCollisionExplosion__()
   }
   else
   {
-    v0 = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackCollisionExplosion;
-    gAttackCollisionExplosion.mPrev = v0;
+    mPrev = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &gAttackCollisionExplosion;
+    gAttackCollisionExplosion.mPrev = mPrev;
     gAttackCollisionExplosion.mNext = &gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackCollisionExplosion;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &gAttackCollisionExplosion;
   }
-  return atexit(dynamic_atexit_destructor_for__gAttackCollisionExplosion__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gAttackCollisionExplosion__);
 }
 
 // File Line: 68
 // RVA: 0x149BDE0
 __int64 dynamic_initializer_for__gAttackCollisionExplosionNoDamage__()
 {
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v0; // rax
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
 
   gAttackCollisionExplosionNoDamage.m_EnumSymbol.mUID = gStaticSymbol_ExplosionNoDamage.mUID;
   *(_QWORD *)&gAttackCollisionExplosionNoDamage.m_EnumValue = 0i64;
@@ -413,20 +413,20 @@ __int64 dynamic_initializer_for__gAttackCollisionExplosionNoDamage__()
   }
   else
   {
-    v0 = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackCollisionExplosionNoDamage;
-    gAttackCollisionExplosionNoDamage.mPrev = v0;
+    mPrev = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &gAttackCollisionExplosionNoDamage;
+    gAttackCollisionExplosionNoDamage.mPrev = mPrev;
     gAttackCollisionExplosionNoDamage.mNext = &gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackCollisionExplosionNoDamage;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &gAttackCollisionExplosionNoDamage;
   }
-  return atexit(dynamic_atexit_destructor_for__gAttackCollisionExplosionNoDamage__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gAttackCollisionExplosionNoDamage__);
 }
 
 // File Line: 69
 // RVA: 0x149C0B0
 __int64 dynamic_initializer_for__gAttackCollisionRemoveDriver__()
 {
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v0; // rax
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
 
   gAttackCollisionRemoveDriver.m_EnumSymbol.mUID = gStaticSymbol_RemoveDriver.mUID;
   *(_QWORD *)&gAttackCollisionRemoveDriver.m_EnumValue = 0i64;
@@ -437,20 +437,20 @@ __int64 dynamic_initializer_for__gAttackCollisionRemoveDriver__()
   }
   else
   {
-    v0 = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackCollisionRemoveDriver;
-    gAttackCollisionRemoveDriver.mPrev = v0;
+    mPrev = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &gAttackCollisionRemoveDriver;
+    gAttackCollisionRemoveDriver.mPrev = mPrev;
     gAttackCollisionRemoveDriver.mNext = &gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackCollisionRemoveDriver;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &gAttackCollisionRemoveDriver;
   }
-  return atexit(dynamic_atexit_destructor_for__gAttackCollisionRemoveDriver__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gAttackCollisionRemoveDriver__);
 }
 
 // File Line: 70
 // RVA: 0x149C140
 __int64 dynamic_initializer_for__gAttackCollisionStun__()
 {
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v0; // rax
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
 
   gAttackCollisionStun.m_EnumSymbol.mUID = gStaticSymbol_Stun.mUID;
   *(_QWORD *)&gAttackCollisionStun.m_EnumValue = 0i64;
@@ -461,20 +461,20 @@ __int64 dynamic_initializer_for__gAttackCollisionStun__()
   }
   else
   {
-    v0 = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackCollisionStun;
-    gAttackCollisionStun.mPrev = v0;
+    mPrev = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &gAttackCollisionStun;
+    gAttackCollisionStun.mPrev = mPrev;
     gAttackCollisionStun.mNext = &gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackCollisionStun;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &gAttackCollisionStun;
   }
-  return atexit(dynamic_atexit_destructor_for__gAttackCollisionStun__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gAttackCollisionStun__);
 }
 
 // File Line: 71
 // RVA: 0x149BF00
 __int64 dynamic_initializer_for__gAttackCollisionKnockDown__()
 {
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v0; // rax
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
 
   gAttackCollisionKnockDown.m_EnumSymbol.mUID = gStaticSymbol_KnockDown.mUID;
   *(_QWORD *)&gAttackCollisionKnockDown.m_EnumValue = 0i64;
@@ -485,20 +485,20 @@ __int64 dynamic_initializer_for__gAttackCollisionKnockDown__()
   }
   else
   {
-    v0 = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackCollisionKnockDown;
-    gAttackCollisionKnockDown.mPrev = v0;
+    mPrev = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &gAttackCollisionKnockDown;
+    gAttackCollisionKnockDown.mPrev = mPrev;
     gAttackCollisionKnockDown.mNext = &gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackCollisionKnockDown;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &gAttackCollisionKnockDown;
   }
-  return atexit(dynamic_atexit_destructor_for__gAttackCollisionKnockDown__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gAttackCollisionKnockDown__);
 }
 
 // File Line: 72
 // RVA: 0x149BE70
 __int64 dynamic_initializer_for__gAttackCollisionHeavy__()
 {
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v0; // rax
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
 
   gAttackCollisionHeavy.m_EnumSymbol.mUID = gStaticSymbol_Heavy.mUID;
   *(_QWORD *)&gAttackCollisionHeavy.m_EnumValue = 0i64;
@@ -509,13 +509,13 @@ __int64 dynamic_initializer_for__gAttackCollisionHeavy__()
   }
   else
   {
-    v0 = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackCollisionHeavy;
-    gAttackCollisionHeavy.mPrev = v0;
+    mPrev = gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &gAttackCollisionHeavy;
+    gAttackCollisionHeavy.mPrev = mPrev;
     gAttackCollisionHeavy.mNext = &gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAttackCollisionHeavy;
+    gAttackCollisionEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &gAttackCollisionHeavy;
   }
-  return atexit(dynamic_atexit_destructor_for__gAttackCollisionHeavy__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gAttackCollisionHeavy__);
 }
 
 // File Line: 74
@@ -523,7 +523,7 @@ __int64 dynamic_initializer_for__gAttackCollisionHeavy__()
 __int64 dynamic_initializer_for__activationTypeEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&activationTypeEnum, UFG::StimulusActivationTypeNames, 3, 0i64);
-  return atexit(dynamic_atexit_destructor_for__activationTypeEnum__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__activationTypeEnum__);
 }
 
 // File Line: 80
@@ -684,7 +684,7 @@ __int64 dynamic_initializer_for__AttackCollisionTrack::sClassNameUID__()
 // RVA: 0x149C4E0
 __int64 dynamic_initializer_for__gDefaultIntensity__()
 {
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v0; // rax
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
 
   gDefaultIntensity.m_EnumSymbol.mUID = gStaticSymbol_none.mUID;
   *(_QWORD *)&gDefaultIntensity.m_EnumValue = 0i64;
@@ -695,84 +695,74 @@ __int64 dynamic_initializer_for__gDefaultIntensity__()
   }
   else
   {
-    v0 = audioEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    audioEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gDefaultIntensity;
-    gDefaultIntensity.mPrev = v0;
+    mPrev = audioEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    audioEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &gDefaultIntensity;
+    gDefaultIntensity.mPrev = mPrev;
     gDefaultIntensity.mNext = &audioEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    audioEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gDefaultIntensity;
+    audioEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &gDefaultIntensity;
   }
-  return atexit(dynamic_atexit_destructor_for__gDefaultIntensity__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gDefaultIntensity__);
 }
 
 // File Line: 335
 // RVA: 0x2DDBC0
 void __fastcall AttackCollisionTrack::AttackCollisionTrack(AttackCollisionTrack *this)
 {
-  AttackCollisionTrack *v1; // rdi
-
-  v1 = this;
-  NodeRefTrack<AttackCollisionTask>::NodeRefTrack<AttackCollisionTask>(
-    (NodeRefTrack<AttackCollisionTask> *)&this->vfptr,
-    AttackCollisionTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AttackCollisionTrack::`vftable;
-  v1->mDamage.text.mOffset = 1i64;
-  BinString::Set(&v1->mDamage.text, &customWorldMapCaption);
-  v1->mDamage.expression.mOffset = 0i64;
-  v1->mDamage.value = 0;
-  v1->mPropDamage.text.mOffset = 1i64;
-  BinString::Set(&v1->mPropDamage.text, &customWorldMapCaption);
-  v1->mPropDamage.expression.mOffset = 0i64;
-  v1->mPropDamage.value = 0;
-  v1->mWeaponDamage.text.mOffset = 1i64;
-  BinString::Set(&v1->mWeaponDamage.text, &customWorldMapCaption);
-  v1->mWeaponDamage.expression.mOffset = 0i64;
-  v1->mWeaponDamage.value = 0.0;
-  v1->mTimeCollisionBegin = 0.0;
-  v1->mTimeCollisionEnd = -1.0;
-  v1->mAttackLimbName = UFG::gNullQSymbolUC;
-  *(_QWORD *)&v1->mAttackRadius = 1045220557i64;
-  *(_QWORD *)&v1->m_eAttackIntensityType.mValue = 0i64;
-  *(_QWORD *)&v1->mAttackLocationLateralID = 0i64;
-  *(_QWORD *)&v1->m_eTargetType.mValue = 22i64;
-  *(_QWORD *)&v1->mMinimumDistance = 0i64;
-  v1->mAudioIntensity = 0;
-  *(_DWORD *)&v1->mEmitAttackStimulus = 65537;
-  *(_WORD *)&v1->mHitGlassOnly = 256;
-  v1->mAttackMaterial = gAttackMaterialNone.m_uEnumIndex;
-  v1->mAudioIntensity = gDefaultIntensity.m_uEnumIndex;
+  NodeRefTrack<AttackCollisionTask>::NodeRefTrack<AttackCollisionTask>(this, AttackCollisionTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&AttackCollisionTrack::`vftable;
+  this->mDamage.text.mOffset = 1i64;
+  BinString::Set(&this->mDamage.text, &customCaption);
+  this->mDamage.expression.mOffset = 0i64;
+  this->mDamage.value = 0;
+  this->mPropDamage.text.mOffset = 1i64;
+  BinString::Set(&this->mPropDamage.text, &customCaption);
+  this->mPropDamage.expression.mOffset = 0i64;
+  this->mPropDamage.value = 0;
+  this->mWeaponDamage.text.mOffset = 1i64;
+  BinString::Set(&this->mWeaponDamage.text, &customCaption);
+  this->mWeaponDamage.expression.mOffset = 0i64;
+  this->mWeaponDamage.value = 0.0;
+  this->mTimeCollisionBegin = 0.0;
+  this->mTimeCollisionEnd = -1.0;
+  this->mAttackLimbName = UFG::gNullQSymbolUC;
+  *(_QWORD *)&this->mAttackRadius = 1045220557i64;
+  *(_QWORD *)&this->m_eAttackIntensityType.mValue = 0i64;
+  *(_QWORD *)&this->mAttackLocationLateralID = 0i64;
+  *(_QWORD *)&this->m_eTargetType.mValue = 22i64;
+  *(_QWORD *)&this->mMinimumDistance = 0i64;
+  this->mAudioIntensity = 0;
+  *(_DWORD *)&this->mEmitAttackStimulus = 65537;
+  *(_WORD *)&this->mHitGlassOnly = 256;
+  this->mAttackMaterial = gAttackMaterialNone.m_uEnumIndex;
+  this->mAudioIntensity = gDefaultIntensity.m_uEnumIndex;
 }
 
 // File Line: 366
 // RVA: 0x301BA0
 __int64 __fastcall AttackCollisionTrack::GetAudioIntensityUID(AttackCollisionTrack *this)
 {
-  __int64 result; // rax
-
-  if ( (signed int)audioEnum.m_enumLists.size <= 0 )
-    result = *(unsigned int *)(MEMORY[0x30] + 4i64 * (unsigned int)this->mAudioIntensity);
+  if ( (int)audioEnum.m_enumLists.size <= 0 )
+    return *(unsigned int *)(MEMORY[0x30] + 4i64 * (unsigned int)this->mAudioIntensity);
   else
-    result = *(unsigned int *)(*(_QWORD *)(*((_QWORD *)audioEnum.m_enumLists.p + 4) + 48i64)
-                             + 4i64 * (unsigned int)this->mAudioIntensity);
-  return result;
+    return *(unsigned int *)(*(_QWORD *)(*((_QWORD *)audioEnum.m_enumLists.p + 4) + 48i64)
+                           + 4i64 * (unsigned int)this->mAudioIntensity);
 }
 
 // File Line: 375
 // RVA: 0x2FD5A0
 AttackCollisionTrack *__fastcall AttackCollisionTrack::CreateClone(AttackCollisionTrack *this)
 {
-  AttackCollisionTrack *v1; // r14
   char *v2; // rax
   ActionNodeReference *v3; // rdi
   AttackCollisionTrack *v4; // rax
   AttackCollisionTrack *v5; // rbp
-  UFG::qOffset64<ActionNodeReference *> *v6; // rsi
-  __int64 v7; // rax
-  signed __int64 v8; // rbx
-  signed __int64 v9; // rbx
+  UFG::qOffset64<ActionNodeReference *> *p_mActionNodeReference; // rsi
+  __int64 mOffset; // rax
+  char *v8; // rbx
+  __int64 v9; // rbx
   __int64 v10; // rax
   ActionNodeReference *v11; // rdx
 
-  v1 = this;
   v2 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0xC8ui64, "AttackCollisionTrack::CreateClone", 0i64, 1u);
   v3 = 0i64;
   if ( v2 )
@@ -784,24 +774,24 @@ AttackCollisionTrack *__fastcall AttackCollisionTrack::CreateClone(AttackCollisi
   {
     v5 = 0i64;
   }
-  v6 = &v5->mActionNodeReference;
-  v7 = v5->mActionNodeReference.mOffset;
-  v8 = (signed __int64)&v5->mActionNodeReference + v7;
-  if ( !v7 )
+  p_mActionNodeReference = &v5->mActionNodeReference;
+  mOffset = v5->mActionNodeReference.mOffset;
+  v8 = (char *)&v5->mActionNodeReference + mOffset;
+  if ( !mOffset )
     v8 = 0i64;
-  AttackCollisionTrack::operator=(v5, v1);
+  AttackCollisionTrack::operator=(v5, this);
   if ( v8 )
-    v9 = v8 - (_QWORD)v6;
+    v9 = v8 - (char *)p_mActionNodeReference;
   else
     v9 = 0i64;
-  v6->mOffset = v9;
-  v10 = v1->mActionNodeReference.mOffset;
+  p_mActionNodeReference->mOffset = v9;
+  v10 = this->mActionNodeReference.mOffset;
   if ( v10 )
-    v11 = (ActionNodeReference *)((char *)&v1->mActionNodeReference + v10);
+    v11 = (ActionNodeReference *)((char *)&this->mActionNodeReference + v10);
   else
     v11 = 0i64;
   if ( v9 )
-    v3 = (ActionNodeReference *)((char *)v6 + v9);
+    v3 = (ActionNodeReference *)((char *)p_mActionNodeReference + v9);
   ActionNodeReference::CopyFrom(v3, v11);
   return v5;
 }
@@ -843,14 +833,11 @@ __int64 dynamic_initializer_for__OverrideDesiredFocusModeTrack::sClassNameUID__(
 // RVA: 0x2DFFA0
 void __fastcall OverrideDesiredFocusModeTrack::OverrideDesiredFocusModeTrack(OverrideDesiredFocusModeTrack *this)
 {
-  OverrideDesiredFocusModeTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, OverrideDesiredFocusModeTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<OverrideDesiredFocusModeTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&OverrideDesiredFocusModeTrack::`vftable;
-  v1->m_eOverrideMode.mValue = 0;
-  v1->m_bResetOnEnd = 1;
+  ITrack::ITrack(this, OverrideDesiredFocusModeTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<OverrideDesiredFocusModeTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&OverrideDesiredFocusModeTrack::`vftable;
+  this->m_eOverrideMode.mValue = 0;
+  this->m_bResetOnEnd = 1;
 }
 
 // File Line: 491
@@ -868,19 +855,16 @@ __int64 dynamic_initializer_for__ParkourSyncPositionTrack::sClassNameUID__()
 // RVA: 0x2E01D0
 void __fastcall ParkourSyncPositionTrack::ParkourSyncPositionTrack(ParkourSyncPositionTrack *this)
 {
-  ParkourSyncPositionTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, ParkourSyncPositionTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ParkourSyncPositionTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ParkourSyncPositionTrack::`vftable;
-  v1->mSyncTimeStart = 0.0;
-  v1->mSyncTimeEnd = -1.0;
-  v1->mSyncTime = 0.333;
-  *(_QWORD *)&v1->mAttachment.mUID = UFG::gNullQSymbolUC.mUID;
-  *(_WORD *)&v1->mAttachToSimObject = 0;
-  v1->mCheckRight = 0;
-  v1->mEdgeDistance = 0.40000001;
+  ITrack::ITrack(this, ParkourSyncPositionTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<ParkourSyncPositionTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ParkourSyncPositionTrack::`vftable;
+  this->mSyncTimeStart = 0.0;
+  this->mSyncTimeEnd = -1.0;
+  this->mSyncTime = 0.333;
+  *(_QWORD *)&this->mAttachment.mUID = UFG::gNullQSymbolUC.mUID;
+  *(_WORD *)&this->mAttachToSimObject = 0;
+  this->mCheckRight = 0;
+  this->mEdgeDistance = 0.40000001;
 }
 
 // File Line: 550
@@ -898,13 +882,10 @@ __int64 dynamic_initializer_for__ParkourNeighborAdvanceTrack::sClassNameUID__()
 // RVA: 0x2E0180
 void __fastcall ParkourNeighborAdvanceTrack::ParkourNeighborAdvanceTrack(ParkourNeighborAdvanceTrack *this)
 {
-  ParkourNeighborAdvanceTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, ParkourNeighborAdvanceTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ParkourNeighborAdvanceTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ParkourNeighborAdvanceTrack::`vftable;
-  v1->mAdvanceRightNeighbor = 0;
+  ITrack::ITrack(this, ParkourNeighborAdvanceTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<ParkourNeighborAdvanceTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ParkourNeighborAdvanceTrack::`vftable;
+  this->mAdvanceRightNeighbor = 0;
 }
 
 // File Line: 571
@@ -922,19 +903,16 @@ __int64 dynamic_initializer_for__ParkourConstrainTrack::sClassNameUID__()
 // RVA: 0x2E00B0
 void __fastcall ParkourConstrainTrack::ParkourConstrainTrack(ParkourConstrainTrack *this)
 {
-  ParkourConstrainTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, ParkourConstrainTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ParkourConstrainTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ParkourConstrainTrack::`vftable;
-  v1->mSyncTimeStart = 0.0;
-  v1->mSyncTimeEnd = -1.0;
-  v1->mSyncTime = 0.333;
-  *(_QWORD *)&v1->mAttachment.mUID = UFG::gNullQSymbolUC.mUID;
-  *(_WORD *)&v1->mAttachToSimObject = 0;
-  v1->mCheckRight = 0;
-  v1->mEdgeDistance = 0.40000001;
+  ITrack::ITrack(this, ParkourConstrainTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<ParkourConstrainTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ParkourConstrainTrack::`vftable;
+  this->mSyncTimeStart = 0.0;
+  this->mSyncTimeEnd = -1.0;
+  this->mSyncTime = 0.333;
+  *(_QWORD *)&this->mAttachment.mUID = UFG::gNullQSymbolUC.mUID;
+  *(_WORD *)&this->mAttachToSimObject = 0;
+  this->mCheckRight = 0;
+  this->mEdgeDistance = 0.40000001;
 }
 
 // File Line: 630
@@ -952,16 +930,13 @@ __int64 dynamic_initializer_for__CoverSyncPositionTrack::sClassNameUID__()
 // RVA: 0x2DE8B0
 void __fastcall CoverSyncPositionTrack::CoverSyncPositionTrack(CoverSyncPositionTrack *this)
 {
-  CoverSyncPositionTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, CoverSyncPositionTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CoverSyncPositionTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverSyncPositionTrack::`vftable;
-  v1->m_SyncTime = 0.333;
-  v1->m_Attachment = UFG::gNullQSymbolUC;
-  *(_WORD *)&v1->m_SyncParkour = 1;
-  v1->m_SyncRightCorner = 0;
+  ITrack::ITrack(this, CoverSyncPositionTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<CoverSyncPositionTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&CoverSyncPositionTrack::`vftable;
+  this->m_SyncTime = 0.333;
+  this->m_Attachment = UFG::gNullQSymbolUC;
+  *(_WORD *)&this->m_SyncParkour = 1;
+  this->m_SyncRightCorner = 0;
 }
 
 // File Line: 666
@@ -979,13 +954,10 @@ __int64 dynamic_initializer_for__CoverHoldPositionTrack::sClassNameUID__()
 // RVA: 0x2DE770
 void __fastcall CoverHoldPositionTrack::CoverHoldPositionTrack(CoverHoldPositionTrack *this)
 {
-  CoverHoldPositionTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, CoverHoldPositionTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CoverHoldPositionTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverHoldPositionTrack::`vftable;
-  v1->m_AllowUpdate = 1;
+  ITrack::ITrack(this, CoverHoldPositionTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<CoverHoldPositionTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&CoverHoldPositionTrack::`vftable;
+  this->m_AllowUpdate = 1;
 }
 
 // File Line: 688
@@ -1003,13 +975,10 @@ __int64 dynamic_initializer_for__CoverProbeForwardAndLatchTrack::sClassNameUID__
 // RVA: 0x2DE810
 void __fastcall CoverProbeForwardAndLatchTrack::CoverProbeForwardAndLatchTrack(CoverProbeForwardAndLatchTrack *this)
 {
-  CoverProbeForwardAndLatchTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, CoverProbeForwardAndLatchTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CoverProbeForwardAndLatchTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverProbeForwardAndLatchTrack::`vftable;
-  *(_QWORD *)&v1->m_Distance = 1056964608i64;
+  ITrack::ITrack(this, CoverProbeForwardAndLatchTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<CoverProbeForwardAndLatchTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&CoverProbeForwardAndLatchTrack::`vftable;
+  *(_QWORD *)&this->m_Distance = 1056964608i64;
 }
 
 // File Line: 712
@@ -1027,13 +996,10 @@ __int64 dynamic_initializer_for__CoverProbeAndLatchTrack::sClassNameUID__()
 // RVA: 0x2DE7C0
 void __fastcall CoverProbeAndLatchTrack::CoverProbeAndLatchTrack(CoverProbeAndLatchTrack *this)
 {
-  CoverProbeAndLatchTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, CoverProbeAndLatchTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CoverProbeAndLatchTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverProbeAndLatchTrack::`vftable;
-  *(_QWORD *)&v1->m_Distance = 1056964608i64;
+  ITrack::ITrack(this, CoverProbeAndLatchTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<CoverProbeAndLatchTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&CoverProbeAndLatchTrack::`vftable;
+  *(_QWORD *)&this->m_Distance = 1056964608i64;
 }
 
 // File Line: 737
@@ -1051,13 +1017,10 @@ __int64 dynamic_initializer_for__CoverSetPopoutSideTrack::sClassNameUID__()
 // RVA: 0x2DE860
 void __fastcall CoverSetPopoutSideTrack::CoverSetPopoutSideTrack(CoverSetPopoutSideTrack *this)
 {
-  CoverSetPopoutSideTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, CoverSetPopoutSideTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CoverSetPopoutSideTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CoverSetPopoutSideTrack::`vftable;
-  v1->m_eCoverPopoutSide.mValue = 0;
+  ITrack::ITrack(this, CoverSetPopoutSideTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<CoverSetPopoutSideTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&CoverSetPopoutSideTrack::`vftable;
+  this->m_eCoverPopoutSide.mValue = 0;
 }
 
 // File Line: 759
@@ -1075,16 +1038,13 @@ __int64 dynamic_initializer_for__DynamicWallHandleTrack::sClassNameUID__()
 // RVA: 0x2DF370
 void __fastcall DynamicWallHandleTrack::DynamicWallHandleTrack(DynamicWallHandleTrack *this)
 {
-  DynamicWallHandleTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, DynamicWallHandleTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DynamicWallHandleTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DynamicWallHandleTrack::`vftable;
-  v1->mDirection = 0.0;
-  v1->mFirstRayHeight = 0.75;
-  v1->mRaySpacing = 1.0;
-  v1->mRayLength = 3.0;
+  ITrack::ITrack(this, DynamicWallHandleTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<DynamicWallHandleTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&DynamicWallHandleTrack::`vftable;
+  this->mDirection = 0.0;
+  this->mFirstRayHeight = 0.75;
+  this->mRaySpacing = 1.0;
+  this->mRayLength = 3.0;
 }
 
 // File Line: 791
@@ -1102,14 +1062,11 @@ __int64 dynamic_initializer_for__EventTrack::sClassNameUID__()
 // RVA: 0x2DF3D0
 void __fastcall EventTrack::EventTrack(EventTrack *this)
 {
-  EventTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, EventTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<EventTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&EventTrack::`vftable;
-  v1->mEventName.mOffset = 1i64;
-  BinString::Set(&v1->mEventName, "NO_EVENT");
+  ITrack::ITrack(this, EventTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<EventTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&EventTrack::`vftable;
+  this->mEventName.mOffset = 1i64;
+  BinString::Set(&this->mEventName, "NO_EVENT");
 }
 
 // File Line: 812
@@ -1125,43 +1082,38 @@ __int64 dynamic_initializer_for__ApplyStimulusEmitterToTargetTrack::sClassNameUI
 
 // File Line: 829
 // RVA: 0x2DDA10
-void __fastcall ApplyStimulusEmitterToTargetTrack::ApplyStimulusEmitterToTargetTrack(ApplyStimulusEmitterToTargetTrack *this)
+void __fastcall ApplyStimulusEmitterToTargetTrack::ApplyStimulusEmitterToTargetTrack(
+        ApplyStimulusEmitterToTargetTrack *this)
 {
-  ApplyStimulusEmitterToTargetTrack *v1; // rbx
-  signed __int64 v2; // [rsp+48h] [rbp+10h]
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, ApplyStimulusEmitterToTargetTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ApplyStimulusEmitterToTargetTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ApplyStimulusEmitterToTargetTrack::`vftable;
-  *(_QWORD *)&v1->mActivationType.mValue = 0i64;
-  v1->mMaxDuration = -1.0;
-  v1->mEmitUntilSpeedLessThan = -1.0;
-  v2 = (signed __int64)&v1->m_ActionPath;
-  *(_DWORD *)v2 = 0;
-  *(_QWORD *)(v2 + 8) = 0i64;
-  v1->mStimulusType.mValue = 0;
+  ITrack::ITrack(this, ApplyStimulusEmitterToTargetTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<ApplyStimulusEmitterToTargetTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ApplyStimulusEmitterToTargetTrack::`vftable;
+  *(_QWORD *)&this->mActivationType.mValue = 0i64;
+  this->mMaxDuration = -1.0;
+  this->mEmitUntilSpeedLessThan = -1.0;
+  this->m_ActionPath.mPath.mCount = 0;
+  this->m_ActionPath.mPath.mData.mOffset = 0i64;
+  this->mStimulusType.mValue = 0;
 }
 
 // File Line: 834
 // RVA: 0x2E3180
-void __fastcall ApplyStimulusEmitterToTargetTrack::~ApplyStimulusEmitterToTargetTrack(ApplyStimulusEmitterToTargetTrack *this)
+void __fastcall ApplyStimulusEmitterToTargetTrack::~ApplyStimulusEmitterToTargetTrack(
+        ApplyStimulusEmitterToTargetTrack *this)
 {
-  ApplyStimulusEmitterToTargetTrack *v1; // rbx
-  ActionPath *v2; // rdi
-  __int64 v3; // rax
+  ActionPath *p_m_ActionPath; // rdi
+  __int64 mOffset; // rax
   __int64 v4; // rax
   char *v5; // rcx
-  ExpressionParameterFloat *v6; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v7; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&ApplyStimulusEmitterToTargetTrack::`vftable;
-  v2 = &this->m_ActionPath;
+  p_m_ActionPath = &this->m_ActionPath;
   if ( this->m_ActionPath.mPath.mCount >= 0 )
   {
-    v3 = this->m_ActionPath.mPath.mData.mOffset;
-    if ( v3 && (UFG::qOffset64<ActionID *> *)((char *)&v2->mPath.mData + v3) )
+    mOffset = this->m_ActionPath.mPath.mData.mOffset;
+    if ( mOffset && (UFG::qOffset64<ActionID *> *)((char *)&p_m_ActionPath->mPath.mData + mOffset) )
     {
       v4 = this->m_ActionPath.mPath.mData.mOffset;
       if ( v4 )
@@ -1170,21 +1122,18 @@ void __fastcall ApplyStimulusEmitterToTargetTrack::~ApplyStimulusEmitterToTarget
         v5 = 0i64;
       operator delete[](v5);
     }
-    v2->mPath.mData.mOffset = 0i64;
-    v2->mPath.mCount &= 0x80000000;
+    p_m_ActionPath->mPath.mData.mOffset = 0i64;
+    p_m_ActionPath->mPath.mCount &= 0x80000000;
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v6 = &v1->mMasterRate;
-  if ( !(~LOBYTE(v1->mMasterRate.text.mOffset) & 1) )
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
+  p_mMasterRate = &this->mMasterRate;
+  if ( (this->mMasterRate.text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v6->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v7 = (char *)v6 + (v6->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v7 != BinString::sEmptyString )
-        operator delete[](v7);
-    }
+    v7 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v7 != BinString::sEmptyString )
+      operator delete[](v7);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 861
@@ -1202,37 +1151,29 @@ __int64 dynamic_initializer_for__AttackRightsTrack::sClassNameUID__()
 // RVA: 0x2DDD60
 void __fastcall AttackRightsTrack::AttackRightsTrack(AttackRightsTrack *this)
 {
-  AttackRightsTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, AttackRightsTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AttackRightsTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AttackRightsTrack::`vftable;
-  *(_WORD *)&v1->mAttackingEnabled = 256;
+  ITrack::ITrack(this, AttackRightsTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<AttackRightsTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&AttackRightsTrack::`vftable;
+  *(_WORD *)&this->mAttackingEnabled = 256;
 }
 
 // File Line: 875
 // RVA: 0x2E32D0
 void __fastcall AttackRightsTrack::~AttackRightsTrack(AttackRightsTrack *this)
 {
-  AttackRightsTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&AttackRightsTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 891
@@ -1250,97 +1191,82 @@ __int64 dynamic_initializer_for__SkookumTrack::sClassNameUID__()
 // RVA: 0x2E10A0
 void __fastcall SkookumTrack::SkookumTrack(SkookumTrack *this)
 {
-  SkookumTrack *v1; // rbx
-  const char *v2; // rdx
+  char *v2; // rdx
 
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, SkookumTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SkookumTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SkookumTrack::`vftable;
-  v2 = SkookumTrack::sDefaultScope;
-  v1->mClassScopeText.mOffset = 1i64;
-  BinString::Set(&v1->mClassScopeText, v2);
-  v1->mSkookumScriptRaw.mOffset = 1i64;
-  BinString::Set(&v1->mSkookumScriptRaw, &customWorldMapCaption);
-  v1->mpScript = 0i64;
+  ITrack::ITrack(this, SkookumTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<SkookumTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&SkookumTrack::`vftable;
+  v2 = (char *)SkookumTrack::sDefaultScope;
+  this->mClassScopeText.mOffset = 1i64;
+  BinString::Set(&this->mClassScopeText, v2);
+  this->mSkookumScriptRaw.mOffset = 1i64;
+  BinString::Set(&this->mSkookumScriptRaw, &customCaption);
+  this->mpScript = 0i64;
 }
 
 // File Line: 914
 // RVA: 0x2E0FF0
 void __fastcall SkookumTrack::SkookumTrack(SkookumTrack *this, MemImageLoadFlag flag)
 {
-  SkookumTrack *v2; // rbx
   const char *v3; // rdi
   const char *v4; // rsi
 
-  v2 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, flag);
-  v2->vfptr = (Expression::IMemberMapVtbl *)&Track<SkookumTask>::`vftable;
-  v2->vfptr = (Expression::IMemberMapVtbl *)&SkookumTrack::`vftable;
+  ITrack::ITrack(this, flag);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<SkookumTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&SkookumTrack::`vftable;
   v3 = BinString::sEmptyString;
-  if ( v2->mClassScopeText.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    v4 = (char *)&v2->mClassScopeText + (v2->mClassScopeText.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+  if ( (this->mClassScopeText.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
+    v4 = (char *)&this->mClassScopeText + (this->mClassScopeText.mOffset & 0xFFFFFFFFFFFFFFFEui64);
   else
     v4 = BinString::sEmptyString;
-  if ( v2->mSkookumScriptRaw.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    v3 = (char *)&v2->mSkookumScriptRaw + (v2->mSkookumScriptRaw.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-  if ( (signed int)UFG::qStringLength(v3) > 0 )
-    v2->mpScript = (UFG::ScriptCache::Script *)UFG::ScriptCache::GetScript(
-                                                 v3,
-                                                 v4,
-                                                 SkookumCondition::sDefaultScope,
-                                                 "Track");
+  if ( (this->mSkookumScriptRaw.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
+    v3 = (char *)&this->mSkookumScriptRaw + (this->mSkookumScriptRaw.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+  if ( (int)UFG::qStringLength(v3) > 0 )
+    this->mpScript = (UFG::ScriptCache::Script *)UFG::ScriptCache::GetScript(
+                                                   v3,
+                                                   v4,
+                                                   SkookumCondition::sDefaultScope,
+                                                   "Track");
 }
 
 // File Line: 929
 // RVA: 0x2E50A0
 void __fastcall SkookumTrack::~SkookumTrack(SkookumTrack *this)
 {
-  SkookumTrack *v1; // rbx
-  UFG::ScriptCache::Script *v2; // rcx
+  UFG::ScriptCache::Script *mpScript; // rcx
   char *v3; // rcx
   char *v4; // rcx
-  ExpressionParameterFloat *v5; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v6; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&SkookumTrack::`vftable;
-  v2 = this->mpScript;
-  if ( v2 )
+  mpScript = this->mpScript;
+  if ( mpScript )
   {
-    UFG::ScriptCache::ReleaseScript(v2);
-    v1->mpScript = 0i64;
+    UFG::ScriptCache::ReleaseScript(mpScript);
+    this->mpScript = 0i64;
   }
-  if ( !(~LOBYTE(v1->mSkookumScriptRaw.mOffset) & 1) )
+  if ( (this->mSkookumScriptRaw.mOffset & 1) != 0 && (this->mSkookumScriptRaw.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v1->mSkookumScriptRaw.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)&v1->mSkookumScriptRaw + (v1->mSkookumScriptRaw.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)&this->mSkookumScriptRaw + (this->mSkookumScriptRaw.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  if ( !(~LOBYTE(v1->mClassScopeText.mOffset) & 1) )
+  if ( (this->mClassScopeText.mOffset & 1) != 0 && (this->mClassScopeText.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v1->mClassScopeText.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v4 = (char *)&v1->mClassScopeText + (v1->mClassScopeText.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v4 != BinString::sEmptyString )
-        operator delete[](v4);
-    }
+    v4 = (char *)&this->mClassScopeText + (this->mClassScopeText.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v4 != BinString::sEmptyString )
+      operator delete[](v4);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v5 = &v1->mMasterRate;
-  if ( !(~LOBYTE(v1->mMasterRate.text.mOffset) & 1) )
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
+  p_mMasterRate = &this->mMasterRate;
+  if ( (this->mMasterRate.text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v5->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v6 = (char *)v5 + (v5->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v6 != BinString::sEmptyString )
-        operator delete[](v6);
-    }
+    v6 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v6 != BinString::sEmptyString )
+      operator delete[](v6);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 1039
@@ -1369,14 +1295,11 @@ __int64 dynamic_initializer_for__ReloadGunTrack::sClassNameUID__()
 // RVA: 0x2E0C60
 void __fastcall ReloadGunTrack::ReloadGunTrack(ReloadGunTrack *this)
 {
-  ReloadGunTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, ReloadGunTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ReloadGunTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ReloadGunTrack::`vftable;
-  v1->m_bReloadOverride = 0;
-  v1->m_nReloadAmount = -1;
+  ITrack::ITrack(this, ReloadGunTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<ReloadGunTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ReloadGunTrack::`vftable;
+  this->m_bReloadOverride = 0;
+  this->m_nReloadAmount = -1;
 }
 
 // File Line: 1081
@@ -1403,14 +1326,12 @@ __int64 dynamic_initializer_for__AimingFreeAimIntentionResetTrack::sClassNameUID
 
 // File Line: 1103
 // RVA: 0x2DD7E0
-void __fastcall AimingFreeAimIntentionResetTrack::AimingFreeAimIntentionResetTrack(AimingFreeAimIntentionResetTrack *this)
+void __fastcall AimingFreeAimIntentionResetTrack::AimingFreeAimIntentionResetTrack(
+        AimingFreeAimIntentionResetTrack *this)
 {
-  AimingFreeAimIntentionResetTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, AimingFreeAimIntentionResetTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AimingFreeAimIntentionResetTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AimingFreeAimIntentionResetTrack::`vftable;
+  ITrack::ITrack(this, AimingFreeAimIntentionResetTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<AimingFreeAimIntentionResetTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&AimingFreeAimIntentionResetTrack::`vftable;
 }
 
 // File Line: 1118
@@ -1428,12 +1349,9 @@ __int64 dynamic_initializer_for__AimingSoftLockTrack::sClassNameUID__()
 // RVA: 0x2DD900
 void __fastcall AimingSoftLockTrack::AimingSoftLockTrack(AimingSoftLockTrack *this)
 {
-  AimingSoftLockTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, AimingSoftLockTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AimingSoftLockTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AimingSoftLockTrack::`vftable;
+  ITrack::ITrack(this, AimingSoftLockTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<AimingSoftLockTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&AimingSoftLockTrack::`vftable;
 }
 
 // File Line: 1139
@@ -1451,12 +1369,9 @@ __int64 dynamic_initializer_for__AimingSoftLockDisableTrack::sClassNameUID__()
 // RVA: 0x2DD870
 void __fastcall AimingSoftLockDisableTrack::AimingSoftLockDisableTrack(AimingSoftLockDisableTrack *this)
 {
-  AimingSoftLockDisableTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, AimingSoftLockDisableTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AimingSoftLockDisableTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AimingSoftLockDisableTrack::`vftable;
+  ITrack::ITrack(this, AimingSoftLockDisableTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<AimingSoftLockDisableTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&AimingSoftLockDisableTrack::`vftable;
 }
 
 // File Line: 1160
@@ -1474,12 +1389,9 @@ __int64 dynamic_initializer_for__AimingFreeAimConeClampTrack::sClassNameUID__()
 // RVA: 0x2DD7A0
 void __fastcall AimingFreeAimConeClampTrack::AimingFreeAimConeClampTrack(AimingFreeAimConeClampTrack *this)
 {
-  AimingFreeAimConeClampTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, AimingFreeAimConeClampTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AimingFreeAimConeClampTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AimingFreeAimConeClampTrack::`vftable;
+  ITrack::ITrack(this, AimingFreeAimConeClampTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<AimingFreeAimConeClampTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&AimingFreeAimConeClampTrack::`vftable;
 }
 
 // File Line: 1184
@@ -1495,14 +1407,12 @@ __int64 dynamic_initializer_for__PowerManagementSuspendPermanentlyTrack::sClassN
 
 // File Line: 1190
 // RVA: 0x2E03E0
-void __fastcall PowerManagementSuspendPermanentlyTrack::PowerManagementSuspendPermanentlyTrack(PowerManagementSuspendPermanentlyTrack *this)
+void __fastcall PowerManagementSuspendPermanentlyTrack::PowerManagementSuspendPermanentlyTrack(
+        PowerManagementSuspendPermanentlyTrack *this)
 {
-  PowerManagementSuspendPermanentlyTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, PowerManagementSuspendPermanentlyTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<PowerManagementSuspendPermanentlyTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PowerManagementSuspendPermanentlyTrack::`vftable;
+  ITrack::ITrack(this, PowerManagementSuspendPermanentlyTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<PowerManagementSuspendPermanentlyTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&PowerManagementSuspendPermanentlyTrack::`vftable;
 }
 
 // File Line: 1204
@@ -1520,12 +1430,9 @@ __int64 dynamic_initializer_for__MotionIntentionHoldTrack::sClassNameUID__()
 // RVA: 0x2DFE10
 void __fastcall MotionIntentionHoldTrack::MotionIntentionHoldTrack(MotionIntentionHoldTrack *this)
 {
-  MotionIntentionHoldTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, MotionIntentionHoldTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<MotionIntentionHoldTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&MotionIntentionHoldTrack::`vftable;
+  ITrack::ITrack(this, MotionIntentionHoldTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<MotionIntentionHoldTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&MotionIntentionHoldTrack::`vftable;
 }
 
 // File Line: 1221
@@ -1543,18 +1450,15 @@ __int64 dynamic_initializer_for__AttachmentTransferTrack::sClassNameUID__()
 // RVA: 0x2DDA80
 void __fastcall AttachmentTransferTrack::AttachmentTransferTrack(AttachmentTransferTrack *this)
 {
-  AttachmentTransferTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, AttachmentTransferTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AttachmentTransferTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AttachmentTransferTrack::`vftable;
-  v1->m_SourceAttachJoint = UFG::gNullQSymbolUC;
-  v1->m_DestAttachJoint = UFG::gNullQSymbolUC;
-  v1->m_AttachmentAttachJoint.mUID = -1;
-  v1->m_SourceAttachJoint.mUID = gStaticSymbolUC_none.mUID;
-  v1->m_DestAttachJoint.mUID = gStaticSymbolUC_none.mUID;
-  v1->m_AttachmentAttachJoint.mUID = gStaticSymbolUC_none.mUID;
+  ITrack::ITrack(this, AttachmentTransferTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<AttachmentTransferTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&AttachmentTransferTrack::`vftable;
+  this->m_SourceAttachJoint = UFG::gNullQSymbolUC;
+  this->m_DestAttachJoint = UFG::gNullQSymbolUC;
+  this->m_AttachmentAttachJoint.mUID = -1;
+  this->m_SourceAttachJoint.mUID = gStaticSymbolUC_none.mUID;
+  this->m_DestAttachJoint.mUID = gStaticSymbolUC_none.mUID;
+  this->m_AttachmentAttachJoint.mUID = gStaticSymbolUC_none.mUID;
 }
 
 // File Line: 1249
@@ -1570,14 +1474,12 @@ __int64 dynamic_initializer_for__PlaybackSpeedModifierEnabledTrack::sClassNameUI
 
 // File Line: 1251
 // RVA: 0x2E0300
-void __fastcall PlaybackSpeedModifierEnabledTrack::PlaybackSpeedModifierEnabledTrack(PlaybackSpeedModifierEnabledTrack *this)
+void __fastcall PlaybackSpeedModifierEnabledTrack::PlaybackSpeedModifierEnabledTrack(
+        PlaybackSpeedModifierEnabledTrack *this)
 {
-  PlaybackSpeedModifierEnabledTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, PlaybackSpeedModifierEnabledTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<PlaybackSpeedModifierEnabledTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlaybackSpeedModifierEnabledTrack::`vftable;
+  ITrack::ITrack(this, PlaybackSpeedModifierEnabledTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<PlaybackSpeedModifierEnabledTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&PlaybackSpeedModifierEnabledTrack::`vftable;
 }
 
 // File Line: 1263
@@ -1595,13 +1497,10 @@ __int64 dynamic_initializer_for__CharacterStatModifyTrack::sClassNameUID__()
 // RVA: 0x2DE620
 void __fastcall CharacterStatModifyTrack::CharacterStatModifyTrack(CharacterStatModifyTrack *this)
 {
-  CharacterStatModifyTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, CharacterStatModifyTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CharacterStatModifyTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CharacterStatModifyTrack::`vftable;
-  *(_QWORD *)&v1->m_iCharacterStat = 0i64;
+  ITrack::ITrack(this, CharacterStatModifyTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<CharacterStatModifyTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&CharacterStatModifyTrack::`vftable;
+  *(_QWORD *)&this->m_iCharacterStat = 0i64;
 }
 
 // File Line: 1287
@@ -1619,13 +1518,10 @@ __int64 dynamic_initializer_for__SetOutOfFightTrack::sClassNameUID__()
 // RVA: 0x2E0E30
 void __fastcall SetOutOfFightTrack::SetOutOfFightTrack(SetOutOfFightTrack *this)
 {
-  SetOutOfFightTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, SetOutOfFightTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SetOutOfFightTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SetOutOfFightTrack::`vftable;
-  v1->m_OutOfFightState = 1;
+  ITrack::ITrack(this, SetOutOfFightTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<SetOutOfFightTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&SetOutOfFightTrack::`vftable;
+  this->m_OutOfFightState = 1;
 }
 
 // File Line: 1306
@@ -1654,14 +1550,11 @@ __int64 dynamic_initializer_for__StruggleTrack::sClassNameUID__()
 // RVA: 0x2E1260
 void __fastcall StruggleTrack::StruggleTrack(StruggleTrack *this)
 {
-  StruggleTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, StruggleTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<StruggleTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&StruggleTrack::`vftable;
-  v1->mIncrement = 0.050000001;
-  v1->mAutoStruggleToOne = 0;
+  ITrack::ITrack(this, StruggleTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<StruggleTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&StruggleTrack::`vftable;
+  this->mIncrement = 0.050000001;
+  this->mAutoStruggleToOne = 0;
 }
 
 // File Line: 1342
@@ -1679,15 +1572,12 @@ __int64 dynamic_initializer_for__Struggle2Track::sClassNameUID__()
 // RVA: 0x2E1200
 void __fastcall Struggle2Track::Struggle2Track(Struggle2Track *this)
 {
-  Struggle2Track *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, Struggle2Track::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<Struggle2Task>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Struggle2Track::`vftable;
-  v1->mActionRequest.mValue = gActionRequest_Action.m_EnumValue;
-  v1->mStrugglePeriod = 0.16666667;
-  v1->mStruggleFallOffPeriod = 0.33333334;
+  ITrack::ITrack(this, Struggle2Track::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<Struggle2Task>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Struggle2Track::`vftable;
+  this->mActionRequest.mValue = gActionRequest_Action.m_EnumValue;
+  this->mStrugglePeriod = 0.16666667;
+  this->mStruggleFallOffPeriod = 0.33333334;
 }
 
 // File Line: 1373
@@ -1695,7 +1585,7 @@ void __fastcall Struggle2Track::Struggle2Track(Struggle2Track *this)
 __int64 dynamic_initializer_for__audioStateEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&audioStateEnum, UFG::AudioStateNames, 2, 0i64);
-  return atexit(dynamic_atexit_destructor_for__audioStateEnum__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__audioStateEnum__);
 }
 
 // File Line: 1375
@@ -1713,37 +1603,29 @@ __int64 dynamic_initializer_for__ActorStateCounterTrack::sClassNameUID__()
 // RVA: 0x2DD700
 void __fastcall ActorStateCounterTrack::ActorStateCounterTrack(ActorStateCounterTrack *this)
 {
-  ActorStateCounterTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, ActorStateCounterTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ActorStateCounterTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ActorStateCounterTrack::`vftable;
-  v1->m_audioStateCounter.mValue = 0;
+  ITrack::ITrack(this, ActorStateCounterTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<ActorStateCounterTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ActorStateCounterTrack::`vftable;
+  this->m_audioStateCounter.mValue = 0;
 }
 
 // File Line: 1386
 // RVA: 0x2E3040
 void __fastcall ActorStateCounterTrack::~ActorStateCounterTrack(ActorStateCounterTrack *this)
 {
-  ActorStateCounterTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&ActorStateCounterTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 1401
@@ -1751,7 +1633,7 @@ void __fastcall ActorStateCounterTrack::~ActorStateCounterTrack(ActorStateCounte
 __int64 dynamic_initializer_for__gGameStatEventTypeEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&gGameStatEventTypeEnum, UFG::GameStatEventStrings, 107, 0i64);
-  return atexit(dynamic_atexit_destructor_for__gGameStatEventTypeEnum__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gGameStatEventTypeEnum__);
 }
 
 // File Line: 1403
@@ -1769,38 +1651,30 @@ __int64 dynamic_initializer_for__GameStatEventTrack::sClassNameUID__()
 // RVA: 0x2DF5B0
 void __fastcall GameStatEventTrack::GameStatEventTrack(GameStatEventTrack *this)
 {
-  GameStatEventTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, GameStatEventTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<GameStatEventTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&GameStatEventTrack::`vftable;
-  v1->mEventType.mValue = 0;
-  v1->mPlayerOnly = 0;
+  ITrack::ITrack(this, GameStatEventTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<GameStatEventTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&GameStatEventTrack::`vftable;
+  this->mEventType.mValue = 0;
+  this->mPlayerOnly = 0;
 }
 
 // File Line: 1417
 // RVA: 0x2E4040
 void __fastcall GameStatEventTrack::~GameStatEventTrack(GameStatEventTrack *this)
 {
-  GameStatEventTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&GameStatEventTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 1432
@@ -1818,13 +1692,10 @@ __int64 dynamic_initializer_for__GameStatDistanceTrack::sClassNameUID__()
 // RVA: 0x2DF510
 void __fastcall GameStatDistanceTrack::GameStatDistanceTrack(GameStatDistanceTrack *this)
 {
-  GameStatDistanceTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, GameStatDistanceTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<GameStatDistanceTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&GameStatDistanceTrack::`vftable;
-  v1->mPlayerOnly = 1;
+  ITrack::ITrack(this, GameStatDistanceTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<GameStatDistanceTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&GameStatDistanceTrack::`vftable;
+  this->mPlayerOnly = 1;
 }
 
 // File Line: 1451
@@ -1842,13 +1713,10 @@ __int64 dynamic_initializer_for__GameStatSpecialMoveTrack::sClassNameUID__()
 // RVA: 0x2DF600
 void __fastcall GameStatSpecialMoveTrack::GameStatSpecialMoveTrack(GameStatSpecialMoveTrack *this)
 {
-  GameStatSpecialMoveTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, GameStatSpecialMoveTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<GameStatSpecialMoveTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&GameStatSpecialMoveTrack::`vftable;
-  v1->mPlayerOnly = 0;
+  ITrack::ITrack(this, GameStatSpecialMoveTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<GameStatSpecialMoveTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&GameStatSpecialMoveTrack::`vftable;
+  this->mPlayerOnly = 0;
 }
 
 // File Line: 1471
@@ -1866,14 +1734,11 @@ __int64 dynamic_initializer_for__AccuracyOverrideTrack::sClassNameUID__()
 // RVA: 0x2DD660
 void __fastcall AccuracyOverrideTrack::AccuracyOverrideTrack(AccuracyOverrideTrack *this)
 {
-  AccuracyOverrideTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, AccuracyOverrideTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AccuracyOverrideTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AccuracyOverrideTrack::`vftable;
-  v1->m_fAccuracyOverride = 1.0;
-  v1->m_bCoverAccuracyOverride = 0;
+  ITrack::ITrack(this, AccuracyOverrideTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<AccuracyOverrideTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&AccuracyOverrideTrack::`vftable;
+  this->m_fAccuracyOverride = 1.0;
+  this->m_bCoverAccuracyOverride = 0;
 }
 
 // File Line: 1495
@@ -1891,12 +1756,9 @@ __int64 dynamic_initializer_for__AccuracyEnsureMissTrack::sClassNameUID__()
 // RVA: 0x2DD530
 void __fastcall AccuracyEnsureMissTrack::AccuracyEnsureMissTrack(AccuracyEnsureMissTrack *this)
 {
-  AccuracyEnsureMissTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, AccuracyEnsureMissTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AccuracyEnsureMissTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AccuracyEnsureMissTrack::`vftable;
+  ITrack::ITrack(this, AccuracyEnsureMissTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<AccuracyEnsureMissTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&AccuracyEnsureMissTrack::`vftable;
 }
 
 // File Line: 1513
@@ -1914,13 +1776,10 @@ __int64 dynamic_initializer_for__ReticleSizeOverrideTrack::sClassNameUID__()
 // RVA: 0x2E0D50
 void __fastcall ReticleSizeOverrideTrack::ReticleSizeOverrideTrack(ReticleSizeOverrideTrack *this)
 {
-  ReticleSizeOverrideTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, ReticleSizeOverrideTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ReticleSizeOverrideTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ReticleSizeOverrideTrack::`vftable;
-  v1->m_fOverrideSize = -1.0;
+  ITrack::ITrack(this, ReticleSizeOverrideTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<ReticleSizeOverrideTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ReticleSizeOverrideTrack::`vftable;
+  this->m_fOverrideSize = -1.0;
 }
 
 // File Line: 1555
@@ -1938,14 +1797,11 @@ __int64 dynamic_initializer_for__CharacterStatModifyIntTrack::sClassNameUID__()
 // RVA: 0x2DE5D0
 void __fastcall CharacterStatModifyIntTrack::CharacterStatModifyIntTrack(CharacterStatModifyIntTrack *this)
 {
-  CharacterStatModifyIntTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, CharacterStatModifyIntTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CharacterStatModifyIntTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CharacterStatModifyIntTrack::`vftable;
-  *(_QWORD *)&v1->m_StatType = 0i64;
-  v1->m_Value = 0;
+  ITrack::ITrack(this, CharacterStatModifyIntTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<CharacterStatModifyIntTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&CharacterStatModifyIntTrack::`vftable;
+  *(_QWORD *)&this->m_StatType = 0i64;
+  this->m_Value = 0;
 }
 
 // File Line: 1582
@@ -1961,15 +1817,13 @@ __int64 dynamic_initializer_for__MotionIntentionSetRelativeToPlayerTrack::sClass
 
 // File Line: 1590
 // RVA: 0x2DFE50
-void __fastcall MotionIntentionSetRelativeToPlayerTrack::MotionIntentionSetRelativeToPlayerTrack(MotionIntentionSetRelativeToPlayerTrack *this)
+void __fastcall MotionIntentionSetRelativeToPlayerTrack::MotionIntentionSetRelativeToPlayerTrack(
+        MotionIntentionSetRelativeToPlayerTrack *this)
 {
-  MotionIntentionSetRelativeToPlayerTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, MotionIntentionSetRelativeToPlayerTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<MotionIntentionSetRelativeToPlayerTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&MotionIntentionSetRelativeToPlayerTrack::`vftable;
-  v1->m_RelativeToPlayer = 0;
+  ITrack::ITrack(this, MotionIntentionSetRelativeToPlayerTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<MotionIntentionSetRelativeToPlayerTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&MotionIntentionSetRelativeToPlayerTrack::`vftable;
+  this->m_RelativeToPlayer = 0;
 }
 
 // File Line: 1603
@@ -1987,13 +1841,10 @@ __int64 dynamic_initializer_for__GunConsumeAmmoTrack::sClassNameUID__()
 // RVA: 0x2DF6A0
 void __fastcall GunConsumeAmmoTrack::GunConsumeAmmoTrack(GunConsumeAmmoTrack *this)
 {
-  GunConsumeAmmoTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, GunConsumeAmmoTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<GunConsumeAmmoTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&GunConsumeAmmoTrack::`vftable;
-  v1->m_AmountToConsume = 0;
+  ITrack::ITrack(this, GunConsumeAmmoTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<GunConsumeAmmoTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&GunConsumeAmmoTrack::`vftable;
+  this->m_AmountToConsume = 0;
 }
 
 // File Line: 1627
@@ -2011,13 +1862,10 @@ __int64 dynamic_initializer_for__SetStateFlagTrack::sClassNameUID__()
 // RVA: 0x2E0ED0
 void __fastcall SetStateFlagTrack::SetStateFlagTrack(SetStateFlagTrack *this)
 {
-  SetStateFlagTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, SetStateFlagTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SetStateFlagTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SetStateFlagTrack::`vftable;
-  v1->m_FlagType.mValue = 0;
+  ITrack::ITrack(this, SetStateFlagTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<SetStateFlagTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&SetStateFlagTrack::`vftable;
+  this->m_FlagType.mValue = 0;
 }
 
 // File Line: 1646
@@ -2033,15 +1881,13 @@ __int64 dynamic_initializer_for__HitRecordSetBerserkAttackFlagTrack::sClassNameU
 
 // File Line: 1655
 // RVA: 0x2DF9D0
-void __fastcall HitRecordSetBerserkAttackFlagTrack::HitRecordSetBerserkAttackFlagTrack(HitRecordSetBerserkAttackFlagTrack *this)
+void __fastcall HitRecordSetBerserkAttackFlagTrack::HitRecordSetBerserkAttackFlagTrack(
+        HitRecordSetBerserkAttackFlagTrack *this)
 {
-  HitRecordSetBerserkAttackFlagTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, HitRecordSetBerserkAttackFlagTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<HitRecordSetBerserkAttackFlagTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&HitRecordSetBerserkAttackFlagTrack::`vftable;
-  v1->m_Enabled = 0;
+  ITrack::ITrack(this, HitRecordSetBerserkAttackFlagTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<HitRecordSetBerserkAttackFlagTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&HitRecordSetBerserkAttackFlagTrack::`vftable;
+  this->m_Enabled = 0;
 }
 
 // File Line: 1670
@@ -2059,13 +1905,10 @@ __int64 dynamic_initializer_for__PlayerBuffActivateTrack::sClassNameUID__()
 // RVA: 0x2E0340
 void __fastcall PlayerBuffActivateTrack::PlayerBuffActivateTrack(PlayerBuffActivateTrack *this)
 {
-  PlayerBuffActivateTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, PlayerBuffActivateTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<PlayerBuffActivateTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PlayerBuffActivateTrack::`vftable;
-  v1->m_ePlayerBuffType = 0;
+  ITrack::ITrack(this, PlayerBuffActivateTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<PlayerBuffActivateTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&PlayerBuffActivateTrack::`vftable;
+  this->m_ePlayerBuffType = 0;
 }
 
 // File Line: 1692
@@ -2116,12 +1959,9 @@ __int64 dynamic_initializer_for__FaceMeterActivateTrack::sClassNameUID__()
 // RVA: 0x2DF4D0
 void __fastcall FaceMeterActivateTrack::FaceMeterActivateTrack(FaceMeterActivateTrack *this)
 {
-  FaceMeterActivateTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, FaceMeterActivateTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<FaceMeterActivateTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&FaceMeterActivateTrack::`vftable;
+  ITrack::ITrack(this, FaceMeterActivateTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<FaceMeterActivateTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&FaceMeterActivateTrack::`vftable;
 }
 
 // File Line: 1741
@@ -2139,18 +1979,17 @@ __int64 dynamic_initializer_for__FaceInteractionResultSetTrack::sClassNameUID__(
 // RVA: 0x2DF480
 void __fastcall FaceInteractionResultSetTrack::FaceInteractionResultSetTrack(FaceInteractionResultSetTrack *this)
 {
-  FaceInteractionResultSetTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, FaceInteractionResultSetTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<FaceInteractionResultSetTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&FaceInteractionResultSetTrack::`vftable;
-  v1->mInteractionResult = 0;
+  ITrack::ITrack(this, FaceInteractionResultSetTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<FaceInteractionResultSetTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&FaceInteractionResultSetTrack::`vftable;
+  this->mInteractionResult = 0;
 }
 
 // File Line: 1754
 // RVA: 0x303600
-void __fastcall FaceInteractionResultSetTrack::ResolveReferences(CAkParameterNodeBase *this, CAkParameterNodeBase *in_pParent)
+void __fastcall FaceInteractionResultSetTrack::ResolveReferences(
+        CAkParameterNodeBase *this,
+        CAkParameterNodeBase *in_pParent)
 {
   this->m_pBusOutputNode = in_pParent;
 }
@@ -2170,14 +2009,11 @@ __int64 dynamic_initializer_for__ParkourHandleTrack::sClassNameUID__()
 // RVA: 0x2E0130
 void __fastcall ParkourHandleTrack::ParkourHandleTrack(ParkourHandleTrack *this)
 {
-  ParkourHandleTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, ParkourHandleTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ParkourHandleTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ParkourHandleTrack::`vftable;
-  v1->mHandleState = 1;
-  v1->mCollisionGeoName.mUID = -1;
+  ITrack::ITrack(this, ParkourHandleTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<ParkourHandleTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ParkourHandleTrack::`vftable;
+  this->mHandleState = 1;
+  this->mCollisionGeoName.mUID = -1;
 }
 
 // File Line: 1795
@@ -2195,12 +2031,9 @@ __int64 dynamic_initializer_for__InvulnerableTrack::sClassNameUID__()
 // RVA: 0x2DFCA0
 void __fastcall InvulnerableTrack::InvulnerableTrack(InvulnerableTrack *this)
 {
-  InvulnerableTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, InvulnerableTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<InvulnerableTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&InvulnerableTrack::`vftable;
+  ITrack::ITrack(this, InvulnerableTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<InvulnerableTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&InvulnerableTrack::`vftable;
 }
 
 // File Line: 1814
@@ -2218,13 +2051,10 @@ __int64 dynamic_initializer_for__SocialSetEnabledTrack::sClassNameUID__()
 // RVA: 0x2E1120
 void __fastcall SocialSetEnabledTrack::SocialSetEnabledTrack(SocialSetEnabledTrack *this)
 {
-  SocialSetEnabledTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, SocialSetEnabledTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SocialSetEnabledTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SocialSetEnabledTrack::`vftable;
-  v1->m_Enable = 0;
+  ITrack::ITrack(this, SocialSetEnabledTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<SocialSetEnabledTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&SocialSetEnabledTrack::`vftable;
+  this->m_Enable = 0;
 }
 
 // File Line: 1834
@@ -2275,15 +2105,12 @@ __int64 dynamic_initializer_for__TriggerRecoilPostEffectTrack::sClassNameUID__()
 // RVA: 0x2E2170
 void __fastcall TriggerRecoilPostEffectTrack::TriggerRecoilPostEffectTrack(TriggerRecoilPostEffectTrack *this)
 {
-  TriggerRecoilPostEffectTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, TriggerRecoilPostEffectTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<TriggerRecoilPostEffectTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&TriggerRecoilPostEffectTrack::`vftable;
-  v1->mAmountMin = 1.0;
-  v1->mAmountMax = 1.0;
-  v1->mFallOffScale = 1.0;
+  ITrack::ITrack(this, TriggerRecoilPostEffectTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<TriggerRecoilPostEffectTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&TriggerRecoilPostEffectTrack::`vftable;
+  this->mAmountMin = 1.0;
+  this->mAmountMax = 1.0;
+  this->mFallOffScale = 1.0;
 }
 
 // File Line: 1905
@@ -2301,44 +2128,37 @@ __int64 dynamic_initializer_for__AccuracyModifierTrack::sClassNameUID__()
 // RVA: 0x2DD5D0
 void __fastcall AccuracyModifierTrack::AccuracyModifierTrack(AccuracyModifierTrack *this)
 {
-  AccuracyModifierTrack *v1; // rdi
-  signed __int64 v2; // [rsp+48h] [rbp+10h]
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, AccuracyModifierTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AccuracyModifierTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AccuracyModifierTrack::`vftable;
-  v1->m_fAccuracyModifier.text.mOffset = 1i64;
-  BinString::Set(&v1->m_fAccuracyModifier.text, &customWorldMapCaption);
-  v1->m_fAccuracyModifier.expression.mOffset = 0i64;
-  v1->m_fAccuracyModifier.value = 0.0;
-  *(_WORD *)&v1->m_bContinuous = 256;
-  v2 = (signed __int64)&v1->m_ActionPath;
-  *(_DWORD *)v2 = 0;
-  *(_QWORD *)(v2 + 8) = 0i64;
+  ITrack::ITrack(this, AccuracyModifierTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<AccuracyModifierTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&AccuracyModifierTrack::`vftable;
+  this->m_fAccuracyModifier.text.mOffset = 1i64;
+  BinString::Set(&this->m_fAccuracyModifier.text, &customCaption);
+  this->m_fAccuracyModifier.expression.mOffset = 0i64;
+  this->m_fAccuracyModifier.value = 0.0;
+  *(_WORD *)&this->m_bContinuous = 256;
+  this->m_ActionPath.mPath.mCount = 0;
+  this->m_ActionPath.mPath.mData.mOffset = 0i64;
 }
 
 // File Line: 1923
 // RVA: 0x2E2F50
 void __fastcall AccuracyModifierTrack::~AccuracyModifierTrack(AccuracyModifierTrack *this)
 {
-  AccuracyModifierTrack *v1; // rbx
-  ActionPath *v2; // rdi
-  __int64 v3; // rax
+  ActionPath *p_m_ActionPath; // rdi
+  __int64 mOffset; // rax
   __int64 v4; // rax
   char *v5; // rcx
-  ExpressionParameterFloat *v6; // rcx
+  ExpressionParameterFloat *p_m_fAccuracyModifier; // rcx
   char *v7; // rcx
-  ExpressionParameterFloat *v8; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v9; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&AccuracyModifierTrack::`vftable;
-  v2 = &this->m_ActionPath;
+  p_m_ActionPath = &this->m_ActionPath;
   if ( this->m_ActionPath.mPath.mCount >= 0 )
   {
-    v3 = this->m_ActionPath.mPath.mData.mOffset;
-    if ( v3 && (UFG::qOffset64<ActionID *> *)((char *)&v2->mPath.mData + v3) )
+    mOffset = this->m_ActionPath.mPath.mData.mOffset;
+    if ( mOffset && (UFG::qOffset64<ActionID *> *)((char *)&p_m_ActionPath->mPath.mData + mOffset) )
     {
       v4 = this->m_ActionPath.mPath.mData.mOffset;
       if ( v4 )
@@ -2347,31 +2167,26 @@ void __fastcall AccuracyModifierTrack::~AccuracyModifierTrack(AccuracyModifierTr
         v5 = 0i64;
       operator delete[](v5);
     }
-    v2->mPath.mData.mOffset = 0i64;
-    v2->mPath.mCount &= 0x80000000;
+    p_m_ActionPath->mPath.mData.mOffset = 0i64;
+    p_m_ActionPath->mPath.mCount &= 0x80000000;
   }
-  v6 = &v1->m_fAccuracyModifier;
-  if ( !(~LOBYTE(v1->m_fAccuracyModifier.text.mOffset) & 1) )
+  p_m_fAccuracyModifier = &this->m_fAccuracyModifier;
+  if ( (this->m_fAccuracyModifier.text.mOffset & 1) != 0
+    && (p_m_fAccuracyModifier->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v6->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v7 = (char *)v6 + (v6->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v7 != BinString::sEmptyString )
-        operator delete[](v7);
-    }
+    v7 = (char *)p_m_fAccuracyModifier + (p_m_fAccuracyModifier->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v7 != BinString::sEmptyString )
+      operator delete[](v7);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v8 = &v1->mMasterRate;
-  if ( !(~LOBYTE(v1->mMasterRate.text.mOffset) & 1) )
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
+  p_mMasterRate = &this->mMasterRate;
+  if ( (this->mMasterRate.text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v8->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v9 = (char *)v8 + (v8->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v9 != BinString::sEmptyString )
-        operator delete[](v9);
-    }
+    v9 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v9 != BinString::sEmptyString )
+      operator delete[](v9);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 1948
@@ -2389,37 +2204,29 @@ __int64 dynamic_initializer_for__AIOutlineActivateTrack::sClassNameUID__()
 // RVA: 0x2DD4E0
 void __fastcall AIOutlineActivateTrack::AIOutlineActivateTrack(AIOutlineActivateTrack *this)
 {
-  AIOutlineActivateTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, AIOutlineActivateTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AIOutlineActivateTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AIOutlineActivateTrack::`vftable;
-  v1->m_bActivate = 1;
+  ITrack::ITrack(this, AIOutlineActivateTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<AIOutlineActivateTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&AIOutlineActivateTrack::`vftable;
+  this->m_bActivate = 1;
 }
 
 // File Line: 1959
 // RVA: 0x2E2EE0
 void __fastcall AIOutlineActivateTrack::~AIOutlineActivateTrack(AIOutlineActivateTrack *this)
 {
-  AIOutlineActivateTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&AIOutlineActivateTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 1972
@@ -2437,39 +2244,31 @@ __int64 dynamic_initializer_for__CollectibleCollectTrack::sClassNameUID__()
 // RVA: 0x2DE6C0
 void __fastcall CollectibleCollectTrack::CollectibleCollectTrack(CollectibleCollectTrack *this)
 {
-  CollectibleCollectTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, CollectibleCollectTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CollectibleCollectTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CollectibleCollectTrack::`vftable;
-  v1->mCollectibleType.mUID = -1;
-  v1->mTargetType.mValue = 0;
-  v1->mCollectibleType.mUID = gStaticSymbolUC_none.mUID;
+  ITrack::ITrack(this, CollectibleCollectTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<CollectibleCollectTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&CollectibleCollectTrack::`vftable;
+  this->mCollectibleType.mUID = -1;
+  this->mTargetType.mValue = 0;
+  this->mCollectibleType.mUID = gStaticSymbolUC_none.mUID;
 }
 
 // File Line: 1996
 // RVA: 0x2E3890
 void __fastcall CollectibleCollectTrack::~CollectibleCollectTrack(CollectibleCollectTrack *this)
 {
-  CollectibleCollectTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&CollectibleCollectTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 2005
@@ -2487,38 +2286,31 @@ __int64 dynamic_initializer_for__SimObjectFlagSetTrack::sClassNameUID__()
 // RVA: 0x2E0F90
 void __fastcall SimObjectFlagSetTrack::SimObjectFlagSetTrack(SimObjectFlagSetTrack *this)
 {
-  SimObjectFlagSetTrack *v1; // rbx
-  signed __int64 v2; // [rsp+48h] [rbp+10h]
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, SimObjectFlagSetTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SimObjectFlagSetTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SimObjectFlagSetTrack::`vftable;
-  v1->m_eSimObjectFlag.mValue = 0;
-  v2 = (signed __int64)&v1->m_ActionPath;
-  *(_DWORD *)v2 = 0;
-  *(_QWORD *)(v2 + 8) = 0i64;
+  ITrack::ITrack(this, SimObjectFlagSetTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<SimObjectFlagSetTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&SimObjectFlagSetTrack::`vftable;
+  this->m_eSimObjectFlag.mValue = 0;
+  this->m_ActionPath.mPath.mCount = 0;
+  this->m_ActionPath.mPath.mData.mOffset = 0i64;
 }
 
 // File Line: 2019
 // RVA: 0x2E4FE0
 void __fastcall SimObjectFlagSetTrack::~SimObjectFlagSetTrack(SimObjectFlagSetTrack *this)
 {
-  SimObjectFlagSetTrack *v1; // rbx
-  ActionPath *v2; // rdi
-  __int64 v3; // rax
+  ActionPath *p_m_ActionPath; // rdi
+  __int64 mOffset; // rax
   __int64 v4; // rax
   char *v5; // rcx
-  ExpressionParameterFloat *v6; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v7; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&SimObjectFlagSetTrack::`vftable;
-  v2 = &this->m_ActionPath;
+  p_m_ActionPath = &this->m_ActionPath;
   if ( this->m_ActionPath.mPath.mCount >= 0 )
   {
-    v3 = this->m_ActionPath.mPath.mData.mOffset;
-    if ( v3 && (UFG::qOffset64<ActionID *> *)((char *)&v2->mPath.mData + v3) )
+    mOffset = this->m_ActionPath.mPath.mData.mOffset;
+    if ( mOffset && (UFG::qOffset64<ActionID *> *)((char *)&p_m_ActionPath->mPath.mData + mOffset) )
     {
       v4 = this->m_ActionPath.mPath.mData.mOffset;
       if ( v4 )
@@ -2527,21 +2319,18 @@ void __fastcall SimObjectFlagSetTrack::~SimObjectFlagSetTrack(SimObjectFlagSetTr
         v5 = 0i64;
       operator delete[](v5);
     }
-    v2->mPath.mData.mOffset = 0i64;
-    v2->mPath.mCount &= 0x80000000;
+    p_m_ActionPath->mPath.mData.mOffset = 0i64;
+    p_m_ActionPath->mPath.mCount &= 0x80000000;
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v6 = &v1->mMasterRate;
-  if ( !(~LOBYTE(v1->mMasterRate.text.mOffset) & 1) )
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
+  p_mMasterRate = &this->mMasterRate;
+  if ( (this->mMasterRate.text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v6->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v7 = (char *)v6 + (v6->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v7 != BinString::sEmptyString )
-        operator delete[](v7);
-    }
+    v7 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v7 != BinString::sEmptyString )
+      operator delete[](v7);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 2040
@@ -2559,37 +2348,29 @@ __int64 dynamic_initializer_for__SetRollStabilityTrack::sClassNameUID__()
 // RVA: 0x2E0E80
 void __fastcall SetRollStabilityTrack::SetRollStabilityTrack(SetRollStabilityTrack *this)
 {
-  SetRollStabilityTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, SetRollStabilityTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SetRollStabilityTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SetRollStabilityTrack::`vftable;
-  v1->m_fRollStability = 0.0;
+  ITrack::ITrack(this, SetRollStabilityTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<SetRollStabilityTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&SetRollStabilityTrack::`vftable;
+  this->m_fRollStability = 0.0;
 }
 
 // File Line: 2052
 // RVA: 0x2E4EB0
 void __fastcall SetRollStabilityTrack::~SetRollStabilityTrack(SetRollStabilityTrack *this)
 {
-  SetRollStabilityTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&SetRollStabilityTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 2066

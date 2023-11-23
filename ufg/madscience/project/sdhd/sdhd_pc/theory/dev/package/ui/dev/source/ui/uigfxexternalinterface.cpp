@@ -4,7 +4,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_PLAY_SOUND__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("PLAY_SOUND", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("PLAY_SOUND", -1);
   UI_HASH_PLAY_SOUND = result;
   return result;
 }
@@ -15,7 +15,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_AUDIO_MESSAGE__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("AUDIO_MESSAGE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("AUDIO_MESSAGE", -1);
   UI_HASH_AUDIO_MESSAGE = result;
   return result;
 }
@@ -26,7 +26,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_LOCALIZE_STRING__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("LOCALIZE_STRING", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("LOCALIZE_STRING", -1);
   UI_HASH_LOCALIZE_STRING = result;
   return result;
 }
@@ -37,7 +37,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_ADD_TWEEN_TO__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("ADD_TWEEN_TO", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("ADD_TWEEN_TO", -1);
   UI_HASH_ADD_TWEEN_TO = result;
   return result;
 }
@@ -48,7 +48,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_ADD_TWEEN_FROM__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("ADD_TWEEN_FROM", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("ADD_TWEEN_FROM", -1);
   UI_HASH_ADD_TWEEN_FROM = result;
   return result;
 }
@@ -59,7 +59,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_ADD_TWEEN_TEXT__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("ADD_TWEEN_TEXT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("ADD_TWEEN_TEXT", -1);
   UI_HASH_ADD_TWEEN_TEXT = result;
   return result;
 }
@@ -70,7 +70,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_KILL_TWEENS__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("KILL_TWEENS", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("KILL_TWEENS", -1);
   UI_HASH_KILL_TWEENS = result;
   return result;
 }
@@ -80,886 +80,882 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_KILL_TWEENS__()
 __int64 dynamic_initializer_for__UFG::UIGfxExternalInterface::mCallbackFuncList__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::UIGfxExternalInterface::mCallbackFuncList.mTree);
-  return atexit(dynamic_atexit_destructor_for__UFG::UIGfxExternalInterface::mCallbackFuncList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::UIGfxExternalInterface::mCallbackFuncList__);
 }
 
 // File Line: 79
 // RVA: 0xA24940
-void __fastcall UFG::UIGfxExternalInterface::Callback(UFG::UIGfxExternalInterface *this, Scaleform::GFx::Movie *movieView, const char *methodName, Scaleform::GFx::Value *args)
+void __fastcall UFG::UIGfxExternalInterface::Callback(
+        UFG::UIGfxExternalInterface *this,
+        Scaleform::GFx::Movie *movieView,
+        const char *methodName,
+        Scaleform::GFx::Value *args)
 {
-  Scaleform::GFx::Value *v4; // rbx
-  Scaleform::GFx::Movie *v5; // rsi
   UFG::UIMessage *v6; // rdi
-  signed int v7; // er14
+  int v7; // r14d
   unsigned int v8; // eax
-  unsigned int v9; // er15
-  const char *v10; // rcx
+  unsigned int v9; // r15d
+  const char *pString; // rcx
   unsigned int v11; // ebx
   __int64 v12; // rax
   const char *v13; // rax
-  int v14; // edx
-  unsigned int v15; // eax
-  void (__fastcall *v16)(const char *, unsigned int, unsigned int, unsigned int); // r10
-  const char *v17; // rcx
-  unsigned int v18; // edi
-  int v19; // ebx
-  __int64 v20; // rax
-  const char *v21; // rax
-  int v22; // edx
-  unsigned int v23; // eax
-  void (__fastcall *v24)(const char *, unsigned int, unsigned int, unsigned int); // r10
-  const char *v25; // r14
-  const char *v26; // r15
-  unsigned int v27; // eax
-  UFG::UIGfxTranslator *v28; // rcx
-  long double v29; // rbx
-  long double v30; // r9
-  long double v31; // r8
-  int v32; // eax
-  const char *v33; // r8
-  UFG::qBaseTreeRB *v34; // rax
-  __int64 v35; // rbx
-  UFG::allocator::free_link *v36; // rbx
-  UFG::UIMessage *v37; // rax
-  signed int v38; // er12
-  UFG::allocator::free_link *v39; // r13
-  const char *v40; // rdx
-  float v41; // xmm0_4
-  __int64 v42; // rax
-  __int64 v43; // rsi
-  int v44; // eax
-  float v45; // xmm0_4
-  int v46; // eax
-  float v47; // xmm0_4
-  int v48; // eax
-  float v49; // xmm0_4
-  float v50; // xmm6_4
-  unsigned int v51; // er14
-  unsigned int v52; // er12
-  int v53; // eax
-  char v54; // r13
-  char v55; // r13
-  signed int v56; // er14
-  signed __int64 v57; // r12
-  const char *v58; // r8
-  int v59; // eax
-  float v60; // xmm0_4
+  unsigned int mStringHashUpper32; // eax
+  void (__fastcall *m_audioCallback)(const char *, unsigned int, unsigned int, unsigned int); // r10
+  const char *v16; // rcx
+  unsigned int v17; // edi
+  unsigned int UIValue; // ebx
+  __int64 v19; // rax
+  const char *v20; // rax
+  unsigned int v21; // eax
+  void (__fastcall *v22)(const char *, unsigned int, unsigned int, unsigned int); // r10
+  const char *v23; // r14
+  const char *v24; // r15
+  unsigned int v25; // eax
+  UFG::UIGfxTranslator *m_translator; // rcx
+  Scaleform::GFx::Value::ValueUnion mValue; // rbx
+  Scaleform::GFx::Value::ValueUnion v28; // r9
+  Scaleform::GFx::Value::ValueUnion v29; // r8
+  unsigned int v30; // eax
+  const char *v31; // r8
+  UFG::qBaseTreeRB *v32; // rax
+  char v33; // bl
+  Scaleform::GFx::Value *v34; // rbx
+  UFG::UIMessage *v35; // rax
+  signed int mStringHash32; // r12d
+  Scaleform::GFx::Value *v37; // r13
+  float Float; // xmm0_4
+  __int64 v39; // rax
+  __int64 v40; // rsi
+  int v41; // eax
+  float v42; // xmm0_4
+  int v43; // eax
+  float v44; // xmm0_4
+  int v45; // eax
+  float v46; // xmm0_4
+  float v47; // xmm6_4
+  unsigned int v48; // r14d
+  unsigned int v49; // r12d
+  int v50; // eax
+  char v51; // r13
+  char v52; // r13
+  int v53; // r14d
+  __int64 v54; // r12
+  const char *v55; // r8
+  int v56; // eax
+  float v57; // xmm0_4
+  int v58; // eax
+  float v59; // xmm6_4
+  float v60; // xmm7_4
   int v61; // eax
-  char v62; // al
-  float v63; // xmm6_4
-  float v64; // xmm7_4
-  int v65; // eax
-  int v66; // eax
-  const char *v67; // rdx
-  UFG::qList<UFG::UITween,UFG::UITween,1,0> *v68; // rcx
-  UFG::qNode<UFG::UITween,UFG::UITween> *v69; // rax
-  __int64 check_null[2]; // [rsp+20h] [rbp-B8h]
-  __int64 check_nulla; // [rsp+20h] [rbp-B8h]
-  __int64 check_nullb; // [rsp+20h] [rbp-B8h]
-  __int64 check_nullc; // [rsp+20h] [rbp-B8h]
-  __int64 check_nulld; // [rsp+20h] [rbp-B8h]
-  __int64 check_nulle; // [rsp+20h] [rbp-B8h]
-  __int64 check_nullf; // [rsp+20h] [rbp-B8h]
-  __int64 check_nullg; // [rsp+20h] [rbp-B8h]
-  __int64 check_nullh; // [rsp+20h] [rbp-B8h]
-  __int64 check_nulli; // [rsp+20h] [rbp-B8h]
-  __int64 check_nullj; // [rsp+20h] [rbp-B8h]
-  __int64 check_nullk; // [rsp+20h] [rbp-B8h]
-  __int64 check_nulll; // [rsp+20h] [rbp-B8h]
-  __int64 check_nullm; // [rsp+20h] [rbp-B8h]
-  __int64 check_nulln; // [rsp+20h] [rbp-B8h]
-  __int64 check_nullo; // [rsp+20h] [rbp-B8h]
-  __int64 check_nullp; // [rsp+20h] [rbp-B8h]
-  __int64 check_nullq; // [rsp+20h] [rbp-B8h]
-  __int64 check_nullr; // [rsp+20h] [rbp-B8h]
-  __int64 check_nulls; // [rsp+20h] [rbp-B8h]
-  __int64 check_nullt; // [rsp+20h] [rbp-B8h]
-  __int64 check_nullu; // [rsp+20h] [rbp-B8h]
-  __int64 check_nullv; // [rsp+20h] [rbp-B8h]
-  __int64 check_nullw; // [rsp+20h] [rbp-B8h]
-  UFG::qString result; // [rsp+30h] [rbp-A8h]
-  __int64 v95; // [rsp+58h] [rbp-80h]
-  __int64 v96; // [rsp+60h] [rbp-78h]
-  __int64 *v97; // [rsp+68h] [rbp-70h]
-  __int64 v98; // [rsp+70h] [rbp-68h]
-  UFG::qString argsa; // [rsp+78h] [rbp-60h]
-  __int64 v100; // [rsp+A8h] [rbp-30h]
+  int v62; // eax
+  const char *v63; // rdx
+  UFG::qList<UFG::UITween,UFG::UITween,1,0> *p_m_activeTweens; // rcx
+  UFG::qNode<UFG::UITween,UFG::UITween> *mPrev; // rax
+  int check_null; // [rsp+20h] [rbp-B8h]
+  int check_nulla; // [rsp+20h] [rbp-B8h]
+  int check_nullb; // [rsp+20h] [rbp-B8h]
+  int check_nullc; // [rsp+20h] [rbp-B8h]
+  int check_nulld; // [rsp+20h] [rbp-B8h]
+  int check_nulle; // [rsp+20h] [rbp-B8h]
+  int check_nullf; // [rsp+20h] [rbp-B8h]
+  int check_nullg; // [rsp+20h] [rbp-B8h]
+  int check_nullh; // [rsp+20h] [rbp-B8h]
+  int check_nulli; // [rsp+20h] [rbp-B8h]
+  int check_nullj; // [rsp+20h] [rbp-B8h]
+  int check_nullk; // [rsp+20h] [rbp-B8h]
+  int check_nulll; // [rsp+20h] [rbp-B8h]
+  int check_nullm; // [rsp+20h] [rbp-B8h]
+  int check_nulln; // [rsp+20h] [rbp-B8h]
+  int check_nullo; // [rsp+20h] [rbp-B8h]
+  int check_nullp; // [rsp+20h] [rbp-B8h]
+  int check_nullq; // [rsp+20h] [rbp-B8h]
+  int check_nullr; // [rsp+20h] [rbp-B8h]
+  int check_nulls; // [rsp+20h] [rbp-B8h]
+  int check_nullt; // [rsp+20h] [rbp-B8h]
+  int check_nullu; // [rsp+20h] [rbp-B8h]
+  int check_nullv; // [rsp+20h] [rbp-B8h]
+  int check_nullw; // [rsp+20h] [rbp-B8h]
+  UFG::qString result; // [rsp+30h] [rbp-A8h] BYREF
+  __int64 v91; // [rsp+58h] [rbp-80h]
+  Scaleform::GFx::Value v92; // [rsp+60h] [rbp-78h] BYREF
+  unsigned int args_24; // [rsp+90h] [rbp-48h]
+  __int64 args_32; // [rsp+98h] [rbp-40h]
+  __int64 v95; // [rsp+A8h] [rbp-30h]
   void *retaddr; // [rsp+138h] [rbp+60h]
 
-  v100 = -2i64;
-  v4 = args;
-  v5 = movieView;
+  v95 = -2i64;
   v6 = 0i64;
   v7 = 0;
-  LODWORD(v98) = 0;
-  v8 = UFG::qStringHashUpper32(methodName, 0xFFFFFFFF);
+  LODWORD(v92.pObjectInterface) = 0;
+  v8 = UFG::qStringHashUpper32(methodName, -1);
   v9 = v8;
   if ( UI_HASH_PLAY_SOUND == v8 )
   {
-    if ( ((unsigned int)v4->Type >> 6) & 1 )
-      v10 = *v4->mValue.pStringManaged;
+    if ( (args->Type & 0x40) != 0 )
+      pString = *args->mValue.pStringManaged;
     else
-      v10 = v4->mValue.pString;
-    v11 = UFG::qStringHashUpper32(v10, 0xFFFFFFFF);
-    v12 = ((__int64 (__fastcall *)(Scaleform::GFx::Movie *))v5->vfptr[1].__vecDelDtor)(v5);
+      pString = args->mValue.pString;
+    v11 = UFG::qStringHashUpper32(pString, -1);
+    v12 = ((__int64 (__fastcall *)(Scaleform::GFx::Movie *))movieView->Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr[1].__vecDelDtor)(movieView);
     v13 = (const char *)(*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v12 + 96i64))(v12);
-    UFG::qString::qString(&argsa, v13);
-    UFG::qString::GetFilenameWithoutExtension(&argsa, &result);
-    v15 = result.mStringHashUpper32;
+    UFG::qString::qString((UFG::qString *)&v92.Type, v13);
+    UFG::qString::GetFilenameWithoutExtension((UFG::qString *)&v92.Type, &result);
+    mStringHashUpper32 = result.mStringHashUpper32;
     if ( result.mStringHashUpper32 == -1 )
     {
-      v15 = UFG::qStringHashUpper32(result.mData, result.mStringHashUpper32 | v14);
-      result.mStringHashUpper32 = v15;
+      mStringHashUpper32 = UFG::qStringHashUpper32(result.mData, -1);
+      result.mStringHashUpper32 = mStringHashUpper32;
     }
-    v16 = UFG::UIScreenManager::s_instance->m_audioCallback;
-    if ( v16 )
-      v16(result.mData, v15, UI_HASH_PLAY_SOUND, v11);
+    m_audioCallback = UFG::UIScreenManager::s_instance->m_audioCallback;
+    if ( m_audioCallback )
+      m_audioCallback(result.mData, mStringHashUpper32, UI_HASH_PLAY_SOUND, v11);
+LABEL_9:
     UFG::qString::~qString(&result);
-    UFG::qString::~qString(&argsa);
+    UFG::qString::~qString((UFG::qString *)&v92.Type);
     return;
   }
   if ( UI_HASH_AUDIO_MESSAGE == v8 )
   {
-    if ( ((unsigned int)v4->Type >> 6) & 1 )
-      v17 = *v4->mValue.pStringManaged;
+    if ( (args->Type & 0x40) != 0 )
+      v16 = *args->mValue.pStringManaged;
     else
-      v17 = v4->mValue.pString;
-    v18 = UFG::qStringHashUpper32(v17, 0xFFFFFFFF);
-    v19 = v4[1].mValue.IValue;
-    v20 = ((__int64 (__fastcall *)(Scaleform::GFx::Movie *))v5->vfptr[1].__vecDelDtor)(v5);
-    v21 = (const char *)(*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v20 + 96i64))(v20);
-    UFG::qString::qString(&argsa, v21);
-    UFG::qString::GetFilenameWithoutExtension(&argsa, &result);
-    v23 = result.mStringHashUpper32;
+      v16 = args->mValue.pString;
+    v17 = UFG::qStringHashUpper32(v16, -1);
+    UIValue = args[1].mValue.UIValue;
+    v19 = ((__int64 (__fastcall *)(Scaleform::GFx::Movie *))movieView->Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr[1].__vecDelDtor)(movieView);
+    v20 = (const char *)(*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v19 + 96i64))(v19);
+    UFG::qString::qString((UFG::qString *)&v92.Type, v20);
+    UFG::qString::GetFilenameWithoutExtension((UFG::qString *)&v92.Type, &result);
+    v21 = result.mStringHashUpper32;
     if ( result.mStringHashUpper32 == -1 )
     {
-      v23 = UFG::qStringHashUpper32(result.mData, result.mStringHashUpper32 | v22);
-      result.mStringHashUpper32 = v23;
+      v21 = UFG::qStringHashUpper32(result.mData, -1);
+      result.mStringHashUpper32 = v21;
     }
-    v24 = UFG::UIScreenManager::s_instance->m_audioCallback;
-    if ( v24 )
-      v24(result.mData, v23, v18, v19);
-    UFG::qString::~qString(&result);
-    UFG::qString::~qString(&argsa);
-    return;
+    v22 = UFG::UIScreenManager::s_instance->m_audioCallback;
+    if ( v22 )
+      v22(result.mData, v21, v17, UIValue);
+    goto LABEL_9;
   }
   if ( UI_HASH_LOCALIZE_STRING == v8 )
   {
-    if ( !(_DWORD)retaddr || (v4->Type & 0x8F) != 6 )
+    if ( !(_DWORD)retaddr || (args->Type & 0x8F) != 6 )
       return;
-    *(_QWORD *)&argsa.mMagic = 0i64;
-    LODWORD(argsa.mData) = 0;
-    if ( ((unsigned int)v4->Type >> 6) & 1 )
-      v25 = *v4->mValue.pStringManaged;
+    v92.DataAux = 0i64;
+    args_24 = 0;
+    if ( (args->Type & 0x40) != 0 )
+      v23 = *args->mValue.pStringManaged;
     else
-      v25 = v4->mValue.pString;
-    if ( v25 )
+      v23 = args->mValue.pString;
+    if ( v23 )
     {
-      if ( *v25 == 36 )
-        ++v25;
-      v27 = UFG::qStringHashUpper32(v25, 0xFFFFFFFF);
-      v28 = UFG::UIScreenManager::s_instance->m_translator;
-      if ( !v28
-        || (v26 = (const char *)v28->vfptr[5].__vecDelDtor((Scaleform::RefCountImplCore *)&v28->vfptr, v27)) == 0i64 )
-      {
-        v26 = v25;
-      }
+      if ( *v23 == 36 )
+        ++v23;
+      v25 = UFG::qStringHashUpper32(v23, -1);
+      m_translator = UFG::UIScreenManager::s_instance->m_translator;
+      if ( !m_translator || (v24 = (const char *)m_translator->vfptr[5].__vecDelDtor(m_translator, v25)) == 0i64 )
+        v24 = v23;
     }
     else
     {
-      v26 = 0i64;
+      v24 = 0i64;
     }
     if ( (_DWORD)retaddr == 1 )
     {
-      Scaleform::GFx::Movie::CreateString(v5, (Scaleform::GFx::Value *)&argsa, v26);
+      Scaleform::GFx::Movie::CreateString(movieView, (Scaleform::GFx::Value *)&v92.Type, v24);
 LABEL_51:
-      Scaleform::GFx::Movie::SetExternalInterfaceRetVal(v5, (Scaleform::GFx::Value *)&argsa);
-      v32 = LODWORD(argsa.mData) >> 6;
+      Scaleform::GFx::Movie::SetExternalInterfaceRetVal(movieView, (Scaleform::GFx::Value *)&v92.Type);
+      v30 = args_24 >> 6;
 LABEL_52:
-      if ( v32 & 1 )
+      if ( (v30 & 1) != 0 )
       {
-        (*(void (__fastcall **)(_QWORD, UFG::qString *, _QWORD))(**(_QWORD **)&argsa.mMagic + 16i64))(
-          *(_QWORD *)&argsa.mMagic,
-          &argsa,
-          *(_QWORD *)&argsa.mStringHash32);
-        *(_QWORD *)&argsa.mMagic = 0i64;
+        (*(void (__fastcall **)(unsigned __int64, Scaleform::GFx::Value::ValueType *, __int64))(*(_QWORD *)v92.DataAux
+                                                                                              + 16i64))(
+          v92.DataAux,
+          &v92.Type,
+          args_32);
+        v92.DataAux = 0i64;
       }
-      LODWORD(argsa.mData) = 0;
+      args_24 = 0;
       return;
     }
     if ( (_DWORD)retaddr == 2 )
     {
-      if ( (v4[1].Type & 0x8F) != 6 )
+      if ( (args[1].Type & 0x8F) != 6 )
         goto LABEL_51;
-      if ( ((unsigned int)v4[1].Type >> 6) & 1 )
-        v29 = *(double *)v4[1].mValue.pString;
+      if ( (args[1].Type & 0x40) != 0 )
+        mValue = *(Scaleform::GFx::Value::ValueUnion *)args[1].mValue.pString;
       else
-        v29 = v4[1].mValue.NValue;
+        mValue = args[1].mValue;
       UFG::qString::qString(&result);
-      UFG::qString::Format(&result, v26, v29);
-      Scaleform::GFx::Movie::CreateString(v5, (Scaleform::GFx::Value *)&argsa, result.mData);
+      UFG::qString::Format(&result, v24, mValue.pString);
+      Scaleform::GFx::Movie::CreateString(movieView, (Scaleform::GFx::Value *)&v92.Type, result.mData);
     }
     else
     {
-      if ( (_DWORD)retaddr != 3 || (v4[1].Type & 0x8F) != 6 || (v4[2].Type & 0x8F) != 6 )
+      if ( (_DWORD)retaddr != 3 || (args[1].Type & 0x8F) != 6 || (args[2].Type & 0x8F) != 6 )
         goto LABEL_51;
       UFG::qString::qString(&result);
-      if ( ((unsigned int)v4[2].Type >> 6) & 1 )
-        v30 = *(double *)v4[2].mValue.pString;
+      if ( (args[2].Type & 0x40) != 0 )
+        v28 = *(Scaleform::GFx::Value::ValueUnion *)args[2].mValue.pString;
       else
-        v30 = v4[2].mValue.NValue;
-      if ( ((unsigned int)v4[1].Type >> 6) & 1 )
-        v31 = *(double *)v4[1].mValue.pString;
+        v28 = args[2].mValue;
+      if ( (args[1].Type & 0x40) != 0 )
+        v29 = *(Scaleform::GFx::Value::ValueUnion *)args[1].mValue.pString;
       else
-        v31 = v4[1].mValue.NValue;
-      UFG::qString::Format(&result, v26, v31, v30);
-      Scaleform::GFx::Movie::CreateString(v5, (Scaleform::GFx::Value *)&argsa, result.mData);
+        v29 = args[1].mValue;
+      UFG::qString::Format(&result, v24, v29.pString, v28.pString);
+      Scaleform::GFx::Movie::CreateString(movieView, (Scaleform::GFx::Value *)&v92.Type, result.mData);
     }
     UFG::qString::~qString(&result);
     goto LABEL_51;
   }
   if ( UI_HASH_ADD_TWEEN_TO == v8 || UI_HASH_ADD_TWEEN_FROM == v8 || UI_HASH_ADD_TWEEN_TEXT == v8 )
   {
-    if ( (unsigned int)retaddr >= 3 && (v4->Type & 0x8F) == 6 && (v4[1].Type & 0x8F) == 5 && (v4[2].Type & 0x8F) == 8 )
+    if ( (unsigned int)retaddr >= 3
+      && (args->Type & 0x8F) == 6
+      && (args[1].Type & 0x8F) == 5
+      && (args[2].Type & 0x8F) == 8 )
     {
       *(_QWORD *)&result.mMagic = 0i64;
       LODWORD(result.mData) = 0;
-      v38 = 6;
-      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD, const char *, UFG::qString *, bool))&v4[2].pObjectInterface->vfptr->gap8[24])(
-             v4[2].pObjectInterface,
-             *(_QWORD *)&v4[2].mValue.NValue,
+      mStringHash32 = 6;
+      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value::ValueUnion, const char *, UFG::qString *, bool))&args[2].pObjectInterface->vfptr->gap8[24])(
+             args[2].pObjectInterface,
+             args[2].mValue,
              "ease",
              &result,
-             (v4[2].Type & 0x8F) == 10) )
+             (args[2].Type & 0x8F) == 10) )
       {
-        v38 = result.mStringHash32;
+        mStringHash32 = result.mStringHash32;
       }
-      v39 = UFG::qMalloc(0x3E0ui64, UFG::gGlobalNewName, 0i64);
-      v97 = (__int64 *)v39;
-      if ( v39 )
+      v37 = (Scaleform::GFx::Value *)UFG::qMalloc(0x3E0ui64, UFG::gGlobalNewName, 0i64);
+      v92.pNext = v37;
+      if ( v37 )
       {
-        if ( ((unsigned int)v4->Type >> 6) & 1 )
-          v40 = *v4->mValue.pStringManaged;
+        if ( (args->Type & 0x40) != 0 )
+          UFG::qString::qString((UFG::qString *)&v92.Type, *args->mValue.pStringManaged);
         else
-          v40 = v4->mValue.pString;
-        UFG::qString::qString(&argsa, v40);
+          UFG::qString::qString((UFG::qString *)&v92.Type, args->mValue.pString);
         v7 = 1;
-        LODWORD(v98) = 1;
-        v41 = UFG::UI::GetFloat(v4 + 1);
-        UFG::UITween::UITween((UFG::UITween *)v39, v5, &argsa, v41, (UFG::UITween::eTweenType)v38);
-        v43 = v42;
+        LODWORD(v92.pObjectInterface) = 1;
+        Float = UFG::UI::GetFloat(args + 1);
+        UFG::UITween::UITween(
+          (UFG::UITween *)v37,
+          movieView,
+          (UFG::qString *)&v92.Type,
+          Float,
+          (UFG::UITween::eTweenType)mStringHash32);
+        v40 = v39;
       }
       else
       {
-        v43 = 0i64;
+        v40 = 0i64;
       }
-      if ( v7 & 1 )
+      if ( (v7 & 1) != 0 )
       {
-        LODWORD(v98) = v7 & 0xFFFFFFFE;
-        UFG::qString::~qString(&argsa);
+        LODWORD(v92.pObjectInterface) = v7 & 0xFFFFFFFE;
+        UFG::qString::~qString((UFG::qString *)&v92.Type);
       }
-      LOBYTE(check_null[0]) = (v4[2].Type & 0x8F) == 10;
-      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD, const char *, UFG::qString *, __int64))&v4[2].pObjectInterface->vfptr->gap8[24])(
-             v4[2].pObjectInterface,
-             *(_QWORD *)&v4[2].mValue.NValue,
+      LOBYTE(check_null) = (args[2].Type & 0x8F) == 10;
+      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value::ValueUnion, const char *, UFG::qString *, int))&args[2].pObjectInterface->vfptr->gap8[24])(
+             args[2].pObjectInterface,
+             args[2].mValue,
              "delay",
              &result,
-             check_null[0]) )
+             check_null) )
       {
-        v44 = (_QWORD)result.mData & 0x8F;
-        if ( v44 == 3 )
+        v41 = (__int64)result.mData & 0x8F;
+        if ( v41 == 3 )
         {
-          v45 = (float)(signed int)result.mStringHash32;
+          v42 = (float)(int)result.mStringHash32;
         }
-        else if ( v44 == 4 )
+        else if ( v41 == 4 )
         {
-          v45 = (float)(signed int)result.mStringHash32;
+          v42 = (float)(int)result.mStringHash32;
         }
         else
         {
-          v45 = *(double *)&result.mStringHash32;
+          v42 = *(double *)&result.mStringHash32;
         }
-        *(float *)(v43 + 216) = v45;
+        *(float *)(v40 + 216) = v42;
       }
-      LOBYTE(check_nulla) = (v4[2].Type & 0x8F) == 10;
-      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD, const char *, UFG::qString *, __int64))&v4[2].pObjectInterface->vfptr->gap8[24])(
-             v4[2].pObjectInterface,
-             *(_QWORD *)&v4[2].mValue.NValue,
+      LOBYTE(check_nulla) = (args[2].Type & 0x8F) == 10;
+      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value::ValueUnion, const char *, UFG::qString *, int))&args[2].pObjectInterface->vfptr->gap8[24])(
+             args[2].pObjectInterface,
+             args[2].mValue,
              "step",
              &result,
              check_nulla) )
       {
-        v46 = (_QWORD)result.mData & 0x8F;
-        if ( v46 == 3 )
+        v43 = (__int64)result.mData & 0x8F;
+        if ( v43 == 3 )
         {
-          v47 = (float)(signed int)result.mStringHash32;
+          v44 = (float)(int)result.mStringHash32;
         }
-        else if ( v46 == 4 )
+        else if ( v43 == 4 )
         {
-          v47 = (float)(signed int)result.mStringHash32;
+          v44 = (float)(int)result.mStringHash32;
+        }
+        else
+        {
+          v44 = *(double *)&result.mStringHash32;
+        }
+        *(float *)(v40 + 220) = v44;
+      }
+      LOBYTE(check_nullb) = (args[2].Type & 0x8F) == 10;
+      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value::ValueUnion, const char *, UFG::qString *, int))&args[2].pObjectInterface->vfptr->gap8[24])(
+             args[2].pObjectInterface,
+             args[2].mValue,
+             "loopType",
+             &result,
+             check_nullb) )
+      {
+        *(_DWORD *)(v40 + 224) = result.mStringHash32;
+      }
+      LOBYTE(check_nullc) = (args[2].Type & 0x8F) == 10;
+      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value::ValueUnion, const char *, UFG::qString *, int))&args[2].pObjectInterface->vfptr->gap8[24])(
+             args[2].pObjectInterface,
+             args[2].mValue,
+             "loopCount",
+             &result,
+             check_nullc) )
+      {
+        *(_DWORD *)(v40 + 228) = result.mStringHash32;
+      }
+      LOBYTE(check_nulld) = (args[2].Type & 0x8F) == 10;
+      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value::ValueUnion, const char *, UFG::qString *, int))&args[2].pObjectInterface->vfptr->gap8[24])(
+             args[2].pObjectInterface,
+             args[2].mValue,
+             "loopDelay",
+             &result,
+             check_nulld) )
+      {
+        v45 = (__int64)result.mData & 0x8F;
+        if ( v45 == 3 )
+        {
+          v46 = (float)(int)result.mStringHash32;
+        }
+        else if ( v45 == 4 )
+        {
+          v46 = (float)(int)result.mStringHash32;
+        }
+        else
+        {
+          v46 = *(double *)&result.mStringHash32;
+        }
+        *(float *)(v40 + 232) = v46;
+      }
+      v47 = 0.0;
+      v48 = 0;
+      v49 = 0;
+      LOBYTE(check_nulle) = (args[2].Type & 0x8F) == 10;
+      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value::ValueUnion, const char *, UFG::qString *, int))&args[2].pObjectInterface->vfptr->gap8[24])(
+             args[2].pObjectInterface,
+             args[2].mValue,
+             "roughRange",
+             &result,
+             check_nulle) )
+      {
+        v50 = (__int64)result.mData & 0x8F;
+        if ( v50 == 3 )
+        {
+          v47 = (float)(int)result.mStringHash32;
+        }
+        else if ( v50 == 4 )
+        {
+          v47 = (float)(int)result.mStringHash32;
         }
         else
         {
           v47 = *(double *)&result.mStringHash32;
         }
-        *(float *)(v43 + 220) = v47;
       }
-      LOBYTE(check_nullb) = (v4[2].Type & 0x8F) == 10;
-      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD, const char *, UFG::qString *, __int64))&v4[2].pObjectInterface->vfptr->gap8[24])(
-             v4[2].pObjectInterface,
-             *(_QWORD *)&v4[2].mValue.NValue,
-             "loopType",
-             &result,
-             check_nullb) )
-      {
-        *(_DWORD *)(v43 + 224) = result.mStringHash32;
-      }
-      LOBYTE(check_nullc) = (v4[2].Type & 0x8F) == 10;
-      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD, const char *, UFG::qString *, __int64))&v4[2].pObjectInterface->vfptr->gap8[24])(
-             v4[2].pObjectInterface,
-             *(_QWORD *)&v4[2].mValue.NValue,
-             "loopCount",
-             &result,
-             check_nullc) )
-      {
-        *(_DWORD *)(v43 + 228) = result.mStringHash32;
-      }
-      LOBYTE(check_nulld) = (v4[2].Type & 0x8F) == 10;
-      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD, const char *, UFG::qString *, __int64))&v4[2].pObjectInterface->vfptr->gap8[24])(
-             v4[2].pObjectInterface,
-             *(_QWORD *)&v4[2].mValue.NValue,
-             "loopDelay",
-             &result,
-             check_nulld) )
-      {
-        v48 = (_QWORD)result.mData & 0x8F;
-        if ( v48 == 3 )
-        {
-          v49 = (float)(signed int)result.mStringHash32;
-        }
-        else if ( v48 == 4 )
-        {
-          v49 = (float)(signed int)result.mStringHash32;
-        }
-        else
-        {
-          v49 = *(double *)&result.mStringHash32;
-        }
-        *(float *)(v43 + 232) = v49;
-      }
-      v50 = 0.0;
-      v51 = 0;
-      v52 = 0;
-      LOBYTE(check_nulle) = (v4[2].Type & 0x8F) == 10;
-      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD, const char *, UFG::qString *, __int64))&v4[2].pObjectInterface->vfptr->gap8[24])(
-             v4[2].pObjectInterface,
-             *(_QWORD *)&v4[2].mValue.NValue,
-             "roughRange",
-             &result,
-             check_nulle) )
-      {
-        v53 = (_QWORD)result.mData & 0x8F;
-        if ( v53 == 3 )
-        {
-          v50 = (float)(signed int)result.mStringHash32;
-        }
-        else if ( v53 == 4 )
-        {
-          v50 = (float)(signed int)result.mStringHash32;
-        }
-        else
-        {
-          v50 = *(double *)&result.mStringHash32;
-        }
-      }
-      LOBYTE(check_nullf) = (v4[2].Type & 0x8F) == 10;
-      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD, const char *, UFG::qString *, __int64))&v4[2].pObjectInterface->vfptr->gap8[24])(
-             v4[2].pObjectInterface,
-             *(_QWORD *)&v4[2].mValue.NValue,
+      LOBYTE(check_nullf) = (args[2].Type & 0x8F) == 10;
+      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value::ValueUnion, const char *, UFG::qString *, int))&args[2].pObjectInterface->vfptr->gap8[24])(
+             args[2].pObjectInterface,
+             args[2].mValue,
              "roughPoints",
              &result,
              check_nullf) )
       {
-        if ( ((_QWORD)result.mData & 0x8F) == 5 )
-          v51 = (signed int)*(double *)&result.mStringHash32;
+        if ( ((__int64)result.mData & 0x8F) == 5 )
+          v48 = (int)*(double *)&result.mStringHash32;
         else
-          v51 = result.mStringHash32;
+          v48 = result.mStringHash32;
       }
-      LOBYTE(check_nullg) = (v4[2].Type & 0x8F) == 10;
-      v54 = 1;
-      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD, const char *, UFG::qString *, __int64))&v4[2].pObjectInterface->vfptr->gap8[24])(
-             v4[2].pObjectInterface,
-             *(_QWORD *)&v4[2].mValue.NValue,
+      LOBYTE(check_nullg) = (args[2].Type & 0x8F) == 10;
+      v51 = 1;
+      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value::ValueUnion, const char *, UFG::qString *, int))&args[2].pObjectInterface->vfptr->gap8[24])(
+             args[2].pObjectInterface,
+             args[2].mValue,
              "roughRandom",
              &result,
              check_nullg) )
       {
-        v54 = result.mStringHash32;
+        v51 = result.mStringHash32;
       }
-      LOBYTE(check_nullh) = (v4[2].Type & 0x8F) == 10;
-      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD, const char *, UFG::qString *, __int64))&v4[2].pObjectInterface->vfptr->gap8[24])(
-             v4[2].pObjectInterface,
-             *(_QWORD *)&v4[2].mValue.NValue,
+      LOBYTE(check_nullh) = (args[2].Type & 0x8F) == 10;
+      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value::ValueUnion, const char *, UFG::qString *, int))&args[2].pObjectInterface->vfptr->gap8[24])(
+             args[2].pObjectInterface,
+             args[2].mValue,
              "roughTaper",
              &result,
              check_nullh) )
       {
-        if ( ((_QWORD)result.mData & 0x8F) == 5 )
-          v52 = (signed int)*(double *)&result.mStringHash32;
+        if ( ((__int64)result.mData & 0x8F) == 5 )
+          v49 = (int)*(double *)&result.mStringHash32;
         else
-          v52 = result.mStringHash32;
+          v49 = result.mStringHash32;
       }
-      *(float *)(v43 + 236) = v50;
-      *(_DWORD *)(v43 + 240) = v51;
-      *(_BYTE *)(v43 + 244) = v54;
-      *(_DWORD *)(v43 + 248) = v52;
-      LOBYTE(check_nulli) = (v4[2].Type & 0x8F) == 10;
-      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD, const char *, UFG::qString *, __int64))&v4[2].pObjectInterface->vfptr->gap8[24])(
-             v4[2].pObjectInterface,
-             *(_QWORD *)&v4[2].mValue.NValue,
+      *(float *)(v40 + 236) = v47;
+      *(_DWORD *)(v40 + 240) = v48;
+      *(_BYTE *)(v40 + 244) = v51;
+      *(_DWORD *)(v40 + 248) = v49;
+      LOBYTE(check_nulli) = (args[2].Type & 0x8F) == 10;
+      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value::ValueUnion, const char *, UFG::qString *, int))&args[2].pObjectInterface->vfptr->gap8[24])(
+             args[2].pObjectInterface,
+             args[2].mValue,
              "onInit",
              &result,
              check_nulli) )
       {
-        v97 = &v96;
-        v98 = 0i64;
-        LODWORD(argsa.mPrev) = result.mData;
-        v95 = *(_QWORD *)&result.mStringHash32;
-        v96 = *(_QWORD *)&result.mStringHash32;
-        if ( (LODWORD(result.mData) >> 6) & 1 )
+        v92.pNext = &v92;
+        v92.pObjectInterface = 0i64;
+        v92.Type = (Scaleform::GFx::Value::ValueType)result.mData;
+        v91 = *(_QWORD *)&result.mStringHash32;
+        v92.pPrev = *(Scaleform::GFx::Value **)&result.mStringHash32;
+        if ( ((__int64)result.mData & 0x40) != 0 )
         {
-          v98 = *(_QWORD *)&result.mMagic;
-          (*(void (__fastcall **)(_QWORD, __int64 *))(**(_QWORD **)&result.mMagic + 8i64))(
+          v92.pObjectInterface = *(Scaleform::GFx::Value::ObjectInterface **)&result.mMagic;
+          (*(void (__fastcall **)(_QWORD, Scaleform::GFx::Value *))(**(_QWORD **)&result.mMagic + 8i64))(
             *(_QWORD *)&result.mMagic,
-            &v96);
+            &v92);
         }
-        UFG::UITween::SetCallback((UFG::UITween *)v43, 0, (Scaleform::GFx::Value *)&v96);
+        UFG::UITween::SetCallback((UFG::UITween *)v40, ONINIT, &v92);
       }
-      LOBYTE(check_nullj) = (v4[2].Type & 0x8F) == 10;
-      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD, const char *, UFG::qString *, __int64))&v4[2].pObjectInterface->vfptr->gap8[24])(
-             v4[2].pObjectInterface,
-             *(_QWORD *)&v4[2].mValue.NValue,
+      LOBYTE(check_nullj) = (args[2].Type & 0x8F) == 10;
+      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value::ValueUnion, const char *, UFG::qString *, int))&args[2].pObjectInterface->vfptr->gap8[24])(
+             args[2].pObjectInterface,
+             args[2].mValue,
              "onInitParams",
              &result,
              check_nullj) )
       {
-        v97 = &v96;
-        v98 = 0i64;
-        LODWORD(argsa.mPrev) = result.mData;
-        v95 = *(_QWORD *)&result.mStringHash32;
-        v96 = *(_QWORD *)&result.mStringHash32;
-        if ( (LODWORD(result.mData) >> 6) & 1 )
+        v92.pNext = &v92;
+        v92.pObjectInterface = 0i64;
+        v92.Type = (Scaleform::GFx::Value::ValueType)result.mData;
+        v91 = *(_QWORD *)&result.mStringHash32;
+        v92.pPrev = *(Scaleform::GFx::Value **)&result.mStringHash32;
+        if ( ((__int64)result.mData & 0x40) != 0 )
         {
-          v98 = *(_QWORD *)&result.mMagic;
-          (*(void (__fastcall **)(_QWORD, __int64 *))(**(_QWORD **)&result.mMagic + 8i64))(
+          v92.pObjectInterface = *(Scaleform::GFx::Value::ObjectInterface **)&result.mMagic;
+          (*(void (__fastcall **)(_QWORD, Scaleform::GFx::Value *))(**(_QWORD **)&result.mMagic + 8i64))(
             *(_QWORD *)&result.mMagic,
-            &v96);
+            &v92);
         }
-        UFG::UITween::SetCallbackParams((UFG::UITween *)v43, 0, (Scaleform::GFx::Value *)&v96);
+        UFG::UITween::SetCallbackParams((UFG::UITween *)v40, ONINIT, &v92);
       }
-      LOBYTE(check_nullk) = (v4[2].Type & 0x8F) == 10;
-      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD, const char *, UFG::qString *, __int64))&v4[2].pObjectInterface->vfptr->gap8[24])(
-             v4[2].pObjectInterface,
-             *(_QWORD *)&v4[2].mValue.NValue,
+      LOBYTE(check_nullk) = (args[2].Type & 0x8F) == 10;
+      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value::ValueUnion, const char *, UFG::qString *, int))&args[2].pObjectInterface->vfptr->gap8[24])(
+             args[2].pObjectInterface,
+             args[2].mValue,
              "onStart",
              &result,
              check_nullk) )
       {
-        v97 = &v96;
-        v98 = 0i64;
-        LODWORD(argsa.mPrev) = result.mData;
-        v95 = *(_QWORD *)&result.mStringHash32;
-        v96 = *(_QWORD *)&result.mStringHash32;
-        if ( (LODWORD(result.mData) >> 6) & 1 )
+        v92.pNext = &v92;
+        v92.pObjectInterface = 0i64;
+        v92.Type = (Scaleform::GFx::Value::ValueType)result.mData;
+        v91 = *(_QWORD *)&result.mStringHash32;
+        v92.pPrev = *(Scaleform::GFx::Value **)&result.mStringHash32;
+        if ( ((__int64)result.mData & 0x40) != 0 )
         {
-          v98 = *(_QWORD *)&result.mMagic;
-          (*(void (__fastcall **)(_QWORD, __int64 *))(**(_QWORD **)&result.mMagic + 8i64))(
+          v92.pObjectInterface = *(Scaleform::GFx::Value::ObjectInterface **)&result.mMagic;
+          (*(void (__fastcall **)(_QWORD, Scaleform::GFx::Value *))(**(_QWORD **)&result.mMagic + 8i64))(
             *(_QWORD *)&result.mMagic,
-            &v96);
+            &v92);
         }
-        v55 = 1;
-        UFG::UITween::SetCallback((UFG::UITween *)v43, ONSTART, (Scaleform::GFx::Value *)&v96);
+        v52 = 1;
+        UFG::UITween::SetCallback((UFG::UITween *)v40, ONSTART, &v92);
       }
       else
       {
-        v55 = 1;
+        v52 = 1;
       }
-      LOBYTE(check_nulll) = (v4[2].Type & 0x8F) == 10;
-      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD, const char *, UFG::qString *, __int64))&v4[2].pObjectInterface->vfptr->gap8[24])(
-             v4[2].pObjectInterface,
-             *(_QWORD *)&v4[2].mValue.NValue,
+      LOBYTE(check_nulll) = (args[2].Type & 0x8F) == 10;
+      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value::ValueUnion, const char *, UFG::qString *, int))&args[2].pObjectInterface->vfptr->gap8[24])(
+             args[2].pObjectInterface,
+             args[2].mValue,
              "onStartParams",
              &result,
              check_nulll) )
       {
-        v97 = &v96;
-        v98 = 0i64;
-        LODWORD(argsa.mPrev) = result.mData;
-        v95 = *(_QWORD *)&result.mStringHash32;
-        v96 = *(_QWORD *)&result.mStringHash32;
-        if ( (LODWORD(result.mData) >> 6) & 1 )
+        v92.pNext = &v92;
+        v92.pObjectInterface = 0i64;
+        v92.Type = (Scaleform::GFx::Value::ValueType)result.mData;
+        v91 = *(_QWORD *)&result.mStringHash32;
+        v92.pPrev = *(Scaleform::GFx::Value **)&result.mStringHash32;
+        if ( ((__int64)result.mData & 0x40) != 0 )
         {
-          v98 = *(_QWORD *)&result.mMagic;
-          (*(void (__fastcall **)(_QWORD, __int64 *))(**(_QWORD **)&result.mMagic + 8i64))(
+          v92.pObjectInterface = *(Scaleform::GFx::Value::ObjectInterface **)&result.mMagic;
+          (*(void (__fastcall **)(_QWORD, Scaleform::GFx::Value *))(**(_QWORD **)&result.mMagic + 8i64))(
             *(_QWORD *)&result.mMagic,
-            &v96);
+            &v92);
         }
-        UFG::UITween::SetCallbackParams((UFG::UITween *)v43, ONSTART, (Scaleform::GFx::Value *)&v96);
+        UFG::UITween::SetCallbackParams((UFG::UITween *)v40, ONSTART, &v92);
       }
-      LOBYTE(check_nullm) = (v4[2].Type & 0x8F) == 10;
-      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD, const char *, UFG::qString *, __int64))&v4[2].pObjectInterface->vfptr->gap8[24])(
-             v4[2].pObjectInterface,
-             *(_QWORD *)&v4[2].mValue.NValue,
+      LOBYTE(check_nullm) = (args[2].Type & 0x8F) == 10;
+      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value::ValueUnion, const char *, UFG::qString *, int))&args[2].pObjectInterface->vfptr->gap8[24])(
+             args[2].pObjectInterface,
+             args[2].mValue,
              "onUpdate",
              &result,
              check_nullm) )
       {
-        v97 = &v96;
-        v98 = 0i64;
-        LODWORD(argsa.mPrev) = result.mData;
-        v95 = *(_QWORD *)&result.mStringHash32;
-        v96 = *(_QWORD *)&result.mStringHash32;
-        if ( (LODWORD(result.mData) >> 6) & 1 )
+        v92.pNext = &v92;
+        v92.pObjectInterface = 0i64;
+        v92.Type = (Scaleform::GFx::Value::ValueType)result.mData;
+        v91 = *(_QWORD *)&result.mStringHash32;
+        v92.pPrev = *(Scaleform::GFx::Value **)&result.mStringHash32;
+        if ( ((__int64)result.mData & 0x40) != 0 )
         {
-          v98 = *(_QWORD *)&result.mMagic;
-          (*(void (__fastcall **)(_QWORD, __int64 *))(**(_QWORD **)&result.mMagic + 8i64))(
+          v92.pObjectInterface = *(Scaleform::GFx::Value::ObjectInterface **)&result.mMagic;
+          (*(void (__fastcall **)(_QWORD, Scaleform::GFx::Value *))(**(_QWORD **)&result.mMagic + 8i64))(
             *(_QWORD *)&result.mMagic,
-            &v96);
+            &v92);
         }
-        UFG::UITween::SetCallback((UFG::UITween *)v43, ONUPDATE, (Scaleform::GFx::Value *)&v96);
+        UFG::UITween::SetCallback((UFG::UITween *)v40, ONUPDATE, &v92);
       }
-      LOBYTE(check_nulln) = (v4[2].Type & 0x8F) == 10;
-      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD, const char *, UFG::qString *, __int64))&v4[2].pObjectInterface->vfptr->gap8[24])(
-             v4[2].pObjectInterface,
-             *(_QWORD *)&v4[2].mValue.NValue,
+      LOBYTE(check_nulln) = (args[2].Type & 0x8F) == 10;
+      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value::ValueUnion, const char *, UFG::qString *, int))&args[2].pObjectInterface->vfptr->gap8[24])(
+             args[2].pObjectInterface,
+             args[2].mValue,
              "onUpdateParams",
              &result,
              check_nulln) )
       {
-        v97 = &v96;
-        v98 = 0i64;
-        LODWORD(argsa.mPrev) = result.mData;
-        v95 = *(_QWORD *)&result.mStringHash32;
-        v96 = *(_QWORD *)&result.mStringHash32;
-        if ( (LODWORD(result.mData) >> 6) & 1 )
+        v92.pNext = &v92;
+        v92.pObjectInterface = 0i64;
+        v92.Type = (Scaleform::GFx::Value::ValueType)result.mData;
+        v91 = *(_QWORD *)&result.mStringHash32;
+        v92.pPrev = *(Scaleform::GFx::Value **)&result.mStringHash32;
+        if ( ((__int64)result.mData & 0x40) != 0 )
         {
-          v98 = *(_QWORD *)&result.mMagic;
-          (*(void (__fastcall **)(_QWORD, __int64 *))(**(_QWORD **)&result.mMagic + 8i64))(
+          v92.pObjectInterface = *(Scaleform::GFx::Value::ObjectInterface **)&result.mMagic;
+          (*(void (__fastcall **)(_QWORD, Scaleform::GFx::Value *))(**(_QWORD **)&result.mMagic + 8i64))(
             *(_QWORD *)&result.mMagic,
-            &v96);
+            &v92);
         }
-        UFG::UITween::SetCallbackParams((UFG::UITween *)v43, ONUPDATE, (Scaleform::GFx::Value *)&v96);
+        UFG::UITween::SetCallbackParams((UFG::UITween *)v40, ONUPDATE, &v92);
       }
-      LOBYTE(check_nullo) = (v4[2].Type & 0x8F) == 10;
-      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD, const char *, UFG::qString *, __int64))&v4[2].pObjectInterface->vfptr->gap8[24])(
-             v4[2].pObjectInterface,
-             *(_QWORD *)&v4[2].mValue.NValue,
+      LOBYTE(check_nullo) = (args[2].Type & 0x8F) == 10;
+      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value::ValueUnion, const char *, UFG::qString *, int))&args[2].pObjectInterface->vfptr->gap8[24])(
+             args[2].pObjectInterface,
+             args[2].mValue,
              "onLoop",
              &result,
              check_nullo) )
       {
-        v97 = &v96;
-        v98 = 0i64;
-        LODWORD(argsa.mPrev) = result.mData;
-        v95 = *(_QWORD *)&result.mStringHash32;
-        v96 = *(_QWORD *)&result.mStringHash32;
-        if ( (LODWORD(result.mData) >> 6) & 1 )
+        v92.pNext = &v92;
+        v92.pObjectInterface = 0i64;
+        v92.Type = (Scaleform::GFx::Value::ValueType)result.mData;
+        v91 = *(_QWORD *)&result.mStringHash32;
+        v92.pPrev = *(Scaleform::GFx::Value **)&result.mStringHash32;
+        if ( ((__int64)result.mData & 0x40) != 0 )
         {
-          v98 = *(_QWORD *)&result.mMagic;
-          (*(void (__fastcall **)(_QWORD, __int64 *))(**(_QWORD **)&result.mMagic + 8i64))(
+          v92.pObjectInterface = *(Scaleform::GFx::Value::ObjectInterface **)&result.mMagic;
+          (*(void (__fastcall **)(_QWORD, Scaleform::GFx::Value *))(**(_QWORD **)&result.mMagic + 8i64))(
             *(_QWORD *)&result.mMagic,
-            &v96);
+            &v92);
         }
-        UFG::UITween::SetCallback((UFG::UITween *)v43, ONLOOP, (Scaleform::GFx::Value *)&v96);
+        UFG::UITween::SetCallback((UFG::UITween *)v40, ONLOOP, &v92);
       }
-      LOBYTE(check_nullp) = (v4[2].Type & 0x8F) == 10;
-      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD, const char *, UFG::qString *, __int64))&v4[2].pObjectInterface->vfptr->gap8[24])(
-             v4[2].pObjectInterface,
-             *(_QWORD *)&v4[2].mValue.NValue,
+      LOBYTE(check_nullp) = (args[2].Type & 0x8F) == 10;
+      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value::ValueUnion, const char *, UFG::qString *, int))&args[2].pObjectInterface->vfptr->gap8[24])(
+             args[2].pObjectInterface,
+             args[2].mValue,
              "onLoopParams",
              &result,
              check_nullp) )
       {
-        v97 = &v96;
-        v98 = 0i64;
-        LODWORD(argsa.mPrev) = result.mData;
-        v95 = *(_QWORD *)&result.mStringHash32;
-        v96 = *(_QWORD *)&result.mStringHash32;
-        if ( (LODWORD(result.mData) >> 6) & 1 )
+        v92.pNext = &v92;
+        v92.pObjectInterface = 0i64;
+        v92.Type = (Scaleform::GFx::Value::ValueType)result.mData;
+        v91 = *(_QWORD *)&result.mStringHash32;
+        v92.pPrev = *(Scaleform::GFx::Value **)&result.mStringHash32;
+        if ( ((__int64)result.mData & 0x40) != 0 )
         {
-          v98 = *(_QWORD *)&result.mMagic;
-          (*(void (__fastcall **)(_QWORD, __int64 *))(**(_QWORD **)&result.mMagic + 8i64))(
+          v92.pObjectInterface = *(Scaleform::GFx::Value::ObjectInterface **)&result.mMagic;
+          (*(void (__fastcall **)(_QWORD, Scaleform::GFx::Value *))(**(_QWORD **)&result.mMagic + 8i64))(
             *(_QWORD *)&result.mMagic,
-            &v96);
+            &v92);
         }
-        UFG::UITween::SetCallbackParams((UFG::UITween *)v43, ONLOOP, (Scaleform::GFx::Value *)&v96);
+        UFG::UITween::SetCallbackParams((UFG::UITween *)v40, ONLOOP, &v92);
       }
-      LOBYTE(check_nullq) = (v4[2].Type & 0x8F) == 10;
-      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD, const char *, UFG::qString *, __int64))&v4[2].pObjectInterface->vfptr->gap8[24])(
-             v4[2].pObjectInterface,
-             *(_QWORD *)&v4[2].mValue.NValue,
+      LOBYTE(check_nullq) = (args[2].Type & 0x8F) == 10;
+      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value::ValueUnion, const char *, UFG::qString *, int))&args[2].pObjectInterface->vfptr->gap8[24])(
+             args[2].pObjectInterface,
+             args[2].mValue,
              "onOscillateComplete",
              &result,
              check_nullq) )
       {
-        v97 = &v96;
-        v98 = 0i64;
-        LODWORD(argsa.mPrev) = result.mData;
-        v95 = *(_QWORD *)&result.mStringHash32;
-        v96 = *(_QWORD *)&result.mStringHash32;
-        if ( (LODWORD(result.mData) >> 6) & 1 )
+        v92.pNext = &v92;
+        v92.pObjectInterface = 0i64;
+        v92.Type = (Scaleform::GFx::Value::ValueType)result.mData;
+        v91 = *(_QWORD *)&result.mStringHash32;
+        v92.pPrev = *(Scaleform::GFx::Value **)&result.mStringHash32;
+        if ( ((__int64)result.mData & 0x40) != 0 )
         {
-          v98 = *(_QWORD *)&result.mMagic;
-          (*(void (__fastcall **)(_QWORD, __int64 *))(**(_QWORD **)&result.mMagic + 8i64))(
+          v92.pObjectInterface = *(Scaleform::GFx::Value::ObjectInterface **)&result.mMagic;
+          (*(void (__fastcall **)(_QWORD, Scaleform::GFx::Value *))(**(_QWORD **)&result.mMagic + 8i64))(
             *(_QWORD *)&result.mMagic,
-            &v96);
+            &v92);
         }
-        UFG::UITween::SetCallback((UFG::UITween *)v43, ONOSCILLATECOMPLETE, (Scaleform::GFx::Value *)&v96);
+        UFG::UITween::SetCallback((UFG::UITween *)v40, ONOSCILLATECOMPLETE, &v92);
       }
-      LOBYTE(check_nullr) = (v4[2].Type & 0x8F) == 10;
-      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD, const char *, UFG::qString *, __int64))&v4[2].pObjectInterface->vfptr->gap8[24])(
-             v4[2].pObjectInterface,
-             *(_QWORD *)&v4[2].mValue.NValue,
+      LOBYTE(check_nullr) = (args[2].Type & 0x8F) == 10;
+      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value::ValueUnion, const char *, UFG::qString *, int))&args[2].pObjectInterface->vfptr->gap8[24])(
+             args[2].pObjectInterface,
+             args[2].mValue,
              "onOscillateCompleteParams",
              &result,
              check_nullr) )
       {
-        v97 = &v96;
-        v98 = 0i64;
-        LODWORD(argsa.mPrev) = result.mData;
-        v95 = *(_QWORD *)&result.mStringHash32;
-        v96 = *(_QWORD *)&result.mStringHash32;
-        if ( (LODWORD(result.mData) >> 6) & 1 )
+        v92.pNext = &v92;
+        v92.pObjectInterface = 0i64;
+        v92.Type = (Scaleform::GFx::Value::ValueType)result.mData;
+        v91 = *(_QWORD *)&result.mStringHash32;
+        v92.pPrev = *(Scaleform::GFx::Value **)&result.mStringHash32;
+        if ( ((__int64)result.mData & 0x40) != 0 )
         {
-          v98 = *(_QWORD *)&result.mMagic;
-          (*(void (__fastcall **)(_QWORD, __int64 *))(**(_QWORD **)&result.mMagic + 8i64))(
+          v92.pObjectInterface = *(Scaleform::GFx::Value::ObjectInterface **)&result.mMagic;
+          (*(void (__fastcall **)(_QWORD, Scaleform::GFx::Value *))(**(_QWORD **)&result.mMagic + 8i64))(
             *(_QWORD *)&result.mMagic,
-            &v96);
+            &v92);
         }
-        UFG::UITween::SetCallbackParams((UFG::UITween *)v43, ONOSCILLATECOMPLETE, (Scaleform::GFx::Value *)&v96);
+        UFG::UITween::SetCallbackParams((UFG::UITween *)v40, ONOSCILLATECOMPLETE, &v92);
       }
-      LOBYTE(check_nulls) = (v4[2].Type & 0x8F) == 10;
-      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD, const char *, UFG::qString *, __int64))&v4[2].pObjectInterface->vfptr->gap8[24])(
-             v4[2].pObjectInterface,
-             *(_QWORD *)&v4[2].mValue.NValue,
+      LOBYTE(check_nulls) = (args[2].Type & 0x8F) == 10;
+      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value::ValueUnion, const char *, UFG::qString *, int))&args[2].pObjectInterface->vfptr->gap8[24])(
+             args[2].pObjectInterface,
+             args[2].mValue,
              "onComplete",
              &result,
              check_nulls) )
       {
-        v97 = &v96;
-        v98 = 0i64;
-        LODWORD(argsa.mPrev) = result.mData;
-        v95 = *(_QWORD *)&result.mStringHash32;
-        v96 = *(_QWORD *)&result.mStringHash32;
-        if ( (LODWORD(result.mData) >> 6) & 1 )
+        v92.pNext = &v92;
+        v92.pObjectInterface = 0i64;
+        v92.Type = (Scaleform::GFx::Value::ValueType)result.mData;
+        v91 = *(_QWORD *)&result.mStringHash32;
+        v92.pPrev = *(Scaleform::GFx::Value **)&result.mStringHash32;
+        if ( ((__int64)result.mData & 0x40) != 0 )
         {
-          v98 = *(_QWORD *)&result.mMagic;
-          (*(void (__fastcall **)(_QWORD, __int64 *))(**(_QWORD **)&result.mMagic + 8i64))(
+          v92.pObjectInterface = *(Scaleform::GFx::Value::ObjectInterface **)&result.mMagic;
+          (*(void (__fastcall **)(_QWORD, Scaleform::GFx::Value *))(**(_QWORD **)&result.mMagic + 8i64))(
             *(_QWORD *)&result.mMagic,
-            &v96);
+            &v92);
         }
-        UFG::UITween::SetCallback((UFG::UITween *)v43, ONCOMPLETE, (Scaleform::GFx::Value *)&v96);
+        UFG::UITween::SetCallback((UFG::UITween *)v40, ONCOMPLETE, &v92);
       }
-      LOBYTE(check_nullt) = (v4[2].Type & 0x8F) == 10;
-      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD, const char *, UFG::qString *, __int64))&v4[2].pObjectInterface->vfptr->gap8[24])(
-             v4[2].pObjectInterface,
-             *(_QWORD *)&v4[2].mValue.NValue,
+      LOBYTE(check_nullt) = (args[2].Type & 0x8F) == 10;
+      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value::ValueUnion, const char *, UFG::qString *, int))&args[2].pObjectInterface->vfptr->gap8[24])(
+             args[2].pObjectInterface,
+             args[2].mValue,
              "onCompleteParams",
              &result,
              check_nullt) )
       {
-        v97 = &v96;
-        v98 = 0i64;
-        LODWORD(argsa.mPrev) = result.mData;
-        v95 = *(_QWORD *)&result.mStringHash32;
-        v96 = *(_QWORD *)&result.mStringHash32;
-        if ( (LODWORD(result.mData) >> 6) & 1 )
+        v92.pNext = &v92;
+        v92.pObjectInterface = 0i64;
+        v92.Type = (Scaleform::GFx::Value::ValueType)result.mData;
+        v91 = *(_QWORD *)&result.mStringHash32;
+        v92.pPrev = *(Scaleform::GFx::Value **)&result.mStringHash32;
+        if ( ((__int64)result.mData & 0x40) != 0 )
         {
-          v98 = *(_QWORD *)&result.mMagic;
-          (*(void (__fastcall **)(_QWORD, __int64 *))(**(_QWORD **)&result.mMagic + 8i64))(
+          v92.pObjectInterface = *(Scaleform::GFx::Value::ObjectInterface **)&result.mMagic;
+          (*(void (__fastcall **)(_QWORD, Scaleform::GFx::Value *))(**(_QWORD **)&result.mMagic + 8i64))(
             *(_QWORD *)&result.mMagic,
-            &v96);
+            &v92);
         }
-        UFG::UITween::SetCallbackParams((UFG::UITween *)v43, ONCOMPLETE, (Scaleform::GFx::Value *)&v96);
+        UFG::UITween::SetCallbackParams((UFG::UITween *)v40, ONCOMPLETE, &v92);
       }
       if ( UI_HASH_ADD_TWEEN_TO == v9 || UI_HASH_ADD_TWEEN_FROM == v9 )
       {
-        v56 = 0;
-        v57 = v43 + 76;
-        while ( 1 )
+        v53 = 0;
+        v54 = v40 + 76;
+        while ( 2 )
         {
-          switch ( v56 )
+          switch ( v53 )
           {
             case 0:
-              v58 = "x";
+              v55 = "x";
               goto LABEL_196;
             case 1:
-              v58 = "y";
+              v55 = "y";
               goto LABEL_196;
             case 2:
-              v58 = "z";
+              v55 = "z";
               goto LABEL_196;
             case 3:
-              v58 = "alpha";
+              v55 = "alpha";
               goto LABEL_196;
             case 4:
-              v58 = "scaleX";
+              v55 = "scaleX";
               goto LABEL_196;
             case 5:
-              v58 = "scaleY";
+              v55 = "scaleY";
               goto LABEL_196;
             case 6:
-              v58 = "scaleZ";
+              v55 = "scaleZ";
               goto LABEL_196;
             case 7:
-              v58 = "rotation";
+              v55 = "rotation";
               goto LABEL_196;
             case 8:
-              v58 = "rotationX";
+              v55 = "rotationX";
               goto LABEL_196;
             case 9:
-              v58 = "rotationY";
+              v55 = "rotationY";
               goto LABEL_196;
             case 10:
-              v58 = "fov";
+              v55 = "fov";
 LABEL_196:
-              LOBYTE(check_nullu) = (v4[2].Type & 0x8F) == 10;
-              if ( !(*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD, const char *, UFG::qString *, __int64))&v4[2].pObjectInterface->vfptr->gap8[24])(
-                      v4[2].pObjectInterface,
-                      *(_QWORD *)&v4[2].mValue.NValue,
-                      v58,
+              LOBYTE(check_nullu) = (args[2].Type & 0x8F) == 10;
+              if ( !(*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value::ValueUnion, const char *, UFG::qString *, int))&args[2].pObjectInterface->vfptr->gap8[24])(
+                      args[2].pObjectInterface,
+                      args[2].mValue,
+                      v55,
                       &result,
                       check_nullu) )
-                goto LABEL_214;
+                goto LABEL_212;
               if ( UI_HASH_ADD_TWEEN_TO == v9 )
               {
-                v59 = (_QWORD)result.mData & 0x8F;
-                if ( v59 == 3 )
+                v56 = (__int64)result.mData & 0x8F;
+                if ( v56 == 3 )
                 {
-                  v60 = (float)(signed int)result.mStringHash32;
+                  v57 = (float)(int)result.mStringHash32;
                 }
-                else if ( v59 == 4 )
+                else if ( v56 == 4 )
                 {
-                  v60 = (float)(signed int)result.mStringHash32;
+                  v57 = (float)(int)result.mStringHash32;
                 }
                 else
                 {
-                  v60 = *(double *)&result.mStringHash32;
+                  v57 = *(double *)&result.mStringHash32;
                 }
-                *(_DWORD *)(v57 - 4) = -1082130432;
-                *(float *)v57 = v60;
+                *(_DWORD *)(v54 - 4) = -1082130432;
+                *(float *)v54 = v57;
               }
               else
               {
                 if ( UI_HASH_ADD_TWEEN_FROM != v9 )
-                  goto LABEL_214;
-                v61 = (_QWORD)result.mData & 0x8F;
-                if ( v61 == 3 )
+                  goto LABEL_212;
+                v58 = (__int64)result.mData & 0x8F;
+                if ( v58 == 3 )
                 {
-                  v60 = (float)(signed int)result.mStringHash32;
+                  v57 = (float)(int)result.mStringHash32;
                 }
-                else if ( v61 == 4 )
+                else if ( v58 == 4 )
                 {
-                  v60 = (float)(signed int)result.mStringHash32;
+                  v57 = (float)(int)result.mStringHash32;
                 }
                 else
                 {
-                  v60 = *(double *)&result.mStringHash32;
+                  v57 = *(double *)&result.mStringHash32;
                 }
-                *(float *)(v57 - 4) = v60;
-                *(_DWORD *)v57 = -1082130432;
+                *(float *)(v54 - 4) = v57;
+                *(_DWORD *)v54 = -1082130432;
               }
-              v62 = 1;
-              if ( v60 == -1.0 )
-                v62 = 0;
-              *(_BYTE *)(v57 + 4) = v62;
-LABEL_214:
-              ++v56;
-              v57 += 12i64;
-              if ( v56 >= 12 )
-                goto LABEL_215;
-              break;
+              *(_BYTE *)(v54 + 4) = v57 != -1.0;
+LABEL_212:
+              ++v53;
+              v54 += 12i64;
+              if ( v53 >= 12 )
+                break;
+              continue;
             default:
-              goto LABEL_214;
+              goto LABEL_212;
           }
+          break;
         }
       }
-LABEL_215:
-      v63 = FLOAT_N1_0;
-      v64 = FLOAT_N1_0;
-      LOBYTE(check_nullu) = (v4[2].Type & 0x8F) == 10;
-      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD, const char *, UFG::qString *, __int64))&v4[2].pObjectInterface->vfptr->gap8[24])(
-             v4[2].pObjectInterface,
-             *(_QWORD *)&v4[2].mValue.NValue,
+      v59 = FLOAT_N1_0;
+      v60 = FLOAT_N1_0;
+      LOBYTE(check_nullu) = (args[2].Type & 0x8F) == 10;
+      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value::ValueUnion, const char *, UFG::qString *, int))&args[2].pObjectInterface->vfptr->gap8[24])(
+             args[2].pObjectInterface,
+             args[2].mValue,
              "txtStart",
              &result,
              check_nullu) )
       {
-        v65 = (_QWORD)result.mData & 0x8F;
-        if ( v65 == 3 )
+        v61 = (__int64)result.mData & 0x8F;
+        if ( v61 == 3 )
         {
-          v63 = (float)(signed int)result.mStringHash32;
+          v59 = (float)(int)result.mStringHash32;
         }
-        else if ( v65 == 4 )
+        else if ( v61 == 4 )
         {
-          v63 = (float)(signed int)result.mStringHash32;
+          v59 = (float)(int)result.mStringHash32;
         }
         else
         {
-          v63 = *(double *)&result.mStringHash32;
+          v59 = *(double *)&result.mStringHash32;
         }
       }
-      LOBYTE(check_nullv) = (v4[2].Type & 0x8F) == 10;
-      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD, const char *, UFG::qString *, __int64))&v4[2].pObjectInterface->vfptr->gap8[24])(
-             v4[2].pObjectInterface,
-             *(_QWORD *)&v4[2].mValue.NValue,
+      LOBYTE(check_nullv) = (args[2].Type & 0x8F) == 10;
+      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value::ValueUnion, const char *, UFG::qString *, int))&args[2].pObjectInterface->vfptr->gap8[24])(
+             args[2].pObjectInterface,
+             args[2].mValue,
              "txtEnd",
              &result,
              check_nullv) )
       {
-        v66 = (_QWORD)result.mData & 0x8F;
-        if ( v66 == 3 )
+        v62 = (__int64)result.mData & 0x8F;
+        if ( v62 == 3 )
         {
-          v64 = (float)(signed int)result.mStringHash32;
+          v60 = (float)(int)result.mStringHash32;
         }
-        else if ( v66 == 4 )
+        else if ( v62 == 4 )
         {
-          v64 = (float)(signed int)result.mStringHash32;
+          v60 = (float)(int)result.mStringHash32;
         }
         else
         {
-          v64 = *(double *)&result.mStringHash32;
+          v60 = *(double *)&result.mStringHash32;
         }
       }
-      if ( v63 != -1.0 && v64 != -1.0 )
+      if ( v59 != -1.0 && v60 != -1.0 )
       {
-        *(float *)(v43 + 204) = v63;
-        *(float *)(v43 + 208) = v64;
-        if ( v63 == v64 )
-          v55 = 0;
-        *(_BYTE *)(v43 + 212) = v55;
+        *(float *)(v40 + 204) = v59;
+        *(float *)(v40 + 208) = v60;
+        if ( v59 == v60 )
+          v52 = 0;
+        *(_BYTE *)(v40 + 212) = v52;
       }
-      LOBYTE(check_nullw) = (v4[2].Type & 0x8F) == 10;
-      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, _QWORD, const char *, UFG::qString *, __int64))&v4[2].pObjectInterface->vfptr->gap8[24])(
-             v4[2].pObjectInterface,
-             *(_QWORD *)&v4[2].mValue.NValue,
+      LOBYTE(check_nullw) = (args[2].Type & 0x8F) == 10;
+      if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value::ValueUnion, const char *, UFG::qString *, int))&args[2].pObjectInterface->vfptr->gap8[24])(
+             args[2].pObjectInterface,
+             args[2].mValue,
              "txtFormat",
              &result,
              check_nullw) )
       {
-        if ( (LODWORD(result.mData) >> 6) & 1 )
-          v67 = **(const char ***)&result.mStringHash32;
+        if ( ((__int64)result.mData & 0x40) != 0 )
+          v63 = **(const char ***)&result.mStringHash32;
         else
-          v67 = *(const char **)&result.mStringHash32;
-        UFG::qString::Set((UFG::qString *)(v43 + 944), v67);
+          v63 = *(const char **)&result.mStringHash32;
+        UFG::qString::Set((UFG::qString *)(v40 + 944), v63);
       }
-      v68 = &UFG::UIScreenManager::s_instance->m_activeTweens;
-      v69 = UFG::UIScreenManager::s_instance->m_activeTweens.mNode.mPrev;
-      v69->mNext = (UFG::qNode<UFG::UITween,UFG::UITween> *)v43;
-      *(_QWORD *)v43 = v69;
-      *(_QWORD *)(v43 + 8) = v68;
-      v68->mNode.mPrev = (UFG::qNode<UFG::UITween,UFG::UITween> *)v43;
-      if ( (LODWORD(result.mData) >> 6) & 1 )
+      p_m_activeTweens = &UFG::UIScreenManager::s_instance->m_activeTweens;
+      mPrev = UFG::UIScreenManager::s_instance->m_activeTweens.mNode.mPrev;
+      mPrev->mNext = (UFG::qNode<UFG::UITween,UFG::UITween> *)v40;
+      *(_QWORD *)v40 = mPrev;
+      *(_QWORD *)(v40 + 8) = p_m_activeTweens;
+      p_m_activeTweens->mNode.mPrev = (UFG::qNode<UFG::UITween,UFG::UITween> *)v40;
+      if ( ((__int64)result.mData & 0x40) != 0 )
         (*(void (__fastcall **)(_QWORD, UFG::qString *, _QWORD))(**(_QWORD **)&result.mMagic + 16i64))(
           *(_QWORD *)&result.mMagic,
           &result,
@@ -970,64 +966,67 @@ LABEL_215:
   {
     if ( UI_HASH_KILL_TWEENS == v8 )
     {
-      if ( (unsigned int)retaddr < 1 || (v4->Type & 0x8F) != 6 )
+      if ( !(_DWORD)retaddr || (args->Type & 0x8F) != 6 )
         return;
-      if ( ((unsigned int)v4->Type >> 6) & 1 )
-        v33 = *v4->mValue.pStringManaged;
+      if ( (args->Type & 0x40) != 0 )
+        v31 = *args->mValue.pStringManaged;
       else
-        v33 = v4->mValue.pString;
-      UFG::UIScreenManagerBase::killTweens(
-        (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-        v5,
-        v33);
+        v31 = args->mValue.pString;
+      UFG::UIScreenManagerBase::killTweens(UFG::UIScreenManager::s_instance, movieView, v31);
     }
     if ( v9 )
     {
-      v34 = UFG::qBaseTreeRB::Get(&UFG::UIGfxExternalInterface::mCallbackFuncList.mTree, v9);
-      if ( v34 )
+      v32 = UFG::qBaseTreeRB::Get(&UFG::UIGfxExternalInterface::mCallbackFuncList.mTree, v9);
+      if ( v32 )
       {
-        if ( v34 != (UFG::qBaseTreeRB *)8 )
+        if ( v32 != (UFG::qBaseTreeRB *)8 )
         {
-          *(_QWORD *)&argsa.mMagic = 0i64;
-          LODWORD(argsa.mData) = 0;
-          v35 = (**(unsigned __int8 (__fastcall ***)(signed __int64, Scaleform::GFx::Movie *, Scaleform::GFx::Value *, _QWORD, UFG::qString *))&v34[-1].mCount)(
-                  (signed __int64)&v34[-1].mCount,
-                  v5,
-                  v4,
+          v92.DataAux = 0i64;
+          args_24 = 0;
+          v33 = (**(__int64 (__fastcall ***)(__int64, Scaleform::GFx::Movie *, Scaleform::GFx::Value *, _QWORD, Scaleform::GFx::Value::ValueType *))&v32[-1].mCount)(
+                  (__int64)&v32[-1].mCount,
+                  movieView,
+                  args,
                   (unsigned int)retaddr,
-                  &argsa);
-          Scaleform::GFx::Movie::SetExternalInterfaceRetVal(v5, (Scaleform::GFx::Value *)&argsa);
-          v32 = LODWORD(argsa.mData) >> 6;
-          if ( (_BYTE)v35 )
+                  &v92.Type);
+          Scaleform::GFx::Movie::SetExternalInterfaceRetVal(movieView, (Scaleform::GFx::Value *)&v92.Type);
+          v30 = args_24 >> 6;
+          if ( v33 )
             goto LABEL_52;
-          if ( v32 & 1 )
+          if ( (args_24 & 0x40) != 0 )
           {
-            (*(void (__fastcall **)(_QWORD, UFG::qString *, _QWORD))(**(_QWORD **)&argsa.mMagic + 16i64))(
-              *(_QWORD *)&argsa.mMagic,
-              &argsa,
-              *(_QWORD *)&argsa.mStringHash32);
-            *(_QWORD *)&argsa.mMagic = 0i64;
+            (*(void (__fastcall **)(unsigned __int64, Scaleform::GFx::Value::ValueType *, __int64))(*(_QWORD *)v92.DataAux
+                                                                                                  + 16i64))(
+              v92.DataAux,
+              &v92.Type,
+              args_32);
+            v92.DataAux = 0i64;
           }
-          LODWORD(argsa.mData) = 0;
+          args_24 = 0;
         }
       }
     }
-    v36 = UFG::qMemoryPool::Allocate(&gScaleformMemoryPool, 0x68ui64, "UIGfxExternalInterface::Callback", 0i64, 1u);
-    v97 = (__int64 *)v36;
-    if ( v36 )
+    v34 = (Scaleform::GFx::Value *)UFG::qMemoryPool::Allocate(
+                                     &gScaleformMemoryPool,
+                                     0x68ui64,
+                                     "UIGfxExternalInterface::Callback",
+                                     0i64,
+                                     1u);
+    v92.pNext = v34;
+    if ( v34 )
     {
-      UFG::qString::qString(&argsa, &customWorldMapCaption);
+      UFG::qString::qString((UFG::qString *)&v92.Type, &customCaption);
       v7 = 2;
-      LODWORD(v98) = 2;
-      UFG::UIMessageFlash::UIMessageFlash((UFG::UIMessageFlash *)v36, v9, v5, &argsa);
-      v6 = v37;
+      LODWORD(v92.pObjectInterface) = 2;
+      UFG::UIMessageFlash::UIMessageFlash((UFG::UIMessageFlash *)v34, v9, movieView, (UFG::qString *)&v92.Type);
+      v6 = v35;
     }
-    if ( v7 & 2 )
+    if ( (v7 & 2) != 0 )
     {
-      LODWORD(v98) = v7 & 0xFFFFFFFD;
-      UFG::qString::~qString(&argsa);
+      LODWORD(v92.pObjectInterface) = v7 & 0xFFFFFFFD;
+      UFG::qString::~qString((UFG::qString *)&v92.Type);
     }
-    UFG::UIScreenManagerBase::queueMessageEx((UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr, v6);
+    UFG::UIScreenManagerBase::queueMessageEx(UFG::UIScreenManager::s_instance, v6);
   }
 }
 

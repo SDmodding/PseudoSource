@@ -14,15 +14,17 @@ hkClass *__fastcall hkaBone::staticClass()
 
 // File Line: 61
 // RVA: 0xB1C660
-void __fastcall finishLoadedObjecthkaBone(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaBone(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkStringPtr::hkStringPtr);
+  if ( p )
+    hkStringPtr::hkStringPtr(p, finishing);
 }
 
 // File Line: 67
 // RVA: 0xB1C680
-void __fastcall cleanupLoadedObjecthkaBone(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkaBone(hkStringPtr *p)
 {
-  hkStringPtr::~hkStringPtr((hkStringPtr *)p);
+  hkStringPtr::~hkStringPtr(p);
 }
 

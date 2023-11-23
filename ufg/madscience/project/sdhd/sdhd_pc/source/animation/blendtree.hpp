@@ -2,26 +2,18 @@
 // RVA: 0x298910
 void __fastcall PoseNode::PoseNode(PoseNode *this)
 {
-  PoseNode *v1; // rdi
-  UFG::qNode<PoseNode,PoseNode> *v2; // rax
-
-  v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  UFG::qSafePointerNode<PoseNode>::qSafePointerNode<PoseNode>((UFG::qSafePointerNode<PoseNode> *)&this->vfptr);
-  v2 = (UFG::qNode<PoseNode,PoseNode> *)&v1->mPrev;
-  v2->mPrev = v2;
-  v2->mNext = v2;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PoseNode::`vftable{for `Expression::IMemberMap};
-  v1->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
-  v1->mParent.mOffset = 0i64;
-  v1->mPriority = 0;
-  *(_QWORD *)&v1->mName.mUID = -1i64;
-  *(_WORD *)&v1->mBreakPoint = 0;
-  v1->mDebugPoseColour.r = UFG::qColour::Green.r;
-  v1->mDebugPoseColour.g = UFG::qColour::Green.g;
-  v1->mDebugPoseColour.b = UFG::qColour::Green.b;
-  v1->mDebugPoseColour.a = UFG::qColour::Green.a;
+  UFG::qSafePointerNode<PoseNode>::qSafePointerNode<PoseNode>(&this->UFG::qSafePointerNode<PoseNode>);
+  this->mPrev = &this->UFG::qNode<PoseNode,PoseNode>;
+  this->mNext = &this->UFG::qNode<PoseNode,PoseNode>;
+  this->Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&PoseNode::`vftable{for `Expression::IMemberMap};
+  this->UFG::qSafePointerNode<PoseNode>::vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
+  this->mParent.mOffset = 0i64;
+  this->mPriority = 0;
+  *(_QWORD *)&this->mName.mUID = -1i64;
+  *(_WORD *)&this->mBreakPoint = 0;
+  this->mDebugPoseColour = UFG::qColour::Green;
 }
 
 // File Line: 293
@@ -32,7 +24,7 @@ PoseNode *__fastcall PoseNode::FindFirstAtPriority(PoseNode *this, int priority)
 
   result = 0i64;
   if ( priority >= this->mPriority )
-    result = this;
+    return this;
   return result;
 }
 
@@ -44,7 +36,7 @@ PoseNode *__fastcall PoseNode::Find(PoseNode *this, UFG::qSymbolUC *name)
 
   result = 0i64;
   if ( name->mUID == this->mName.mUID )
-    result = this;
+    return this;
   return result;
 }
 
@@ -52,61 +44,53 @@ PoseNode *__fastcall PoseNode::Find(PoseNode *this, UFG::qSymbolUC *name)
 // RVA: 0x29D520
 void __fastcall PoseNodeParent::~PoseNodeParent(PoseNodeParent *this)
 {
-  PoseNodeParent *v1; // rdi
-  UFG::qList<PoseNode,PoseNode,1,0> *v2; // rbx
-  int *v3; // rax
-  int *v4; // rsi
+  UFG::qList<PoseNode,PoseNode,1,0> *p_mChildren; // rbx
+  int *p_mNext; // rax
+  int *i; // rsi
   _QWORD *v5; // rdx
   __int64 v6; // rcx
   _QWORD *v7; // rax
-  UFG::qNode<PoseNode,PoseNode> *v8; // rcx
-  UFG::qNode<PoseNode,PoseNode> *v9; // rax
-  __int64 v10; // rax
+  UFG::qNode<PoseNode,PoseNode> *mPrev; // rcx
+  UFG::qNode<PoseNode,PoseNode> *mNext; // rax
+  __int64 mOffset; // rax
   char *v11; // rcx
 
-  v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&PoseNodeParent::`vftable{for `Expression::IMemberMap};
-  this->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNodeParent::`vftable{for `UFG::qSafePointerNode<PoseNode>};
-  v2 = &this->mChildren;
-  v3 = (int *)&this->mChildren.mNode.mNext[-3].mNext;
-  v4 = &this->mNetPoseSequence;
-  if ( v3 != &this->mNetPoseSequence )
+  this->PoseNode::Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&PoseNodeParent::`vftable{for `Expression::IMemberMap};
+  this->PoseNode::UFG::qSafePointerNode<PoseNode>::vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNodeParent::`vftable{for `UFG::qSafePointerNode<PoseNode>};
+  p_mChildren = &this->mChildren;
+  p_mNext = (int *)&this->mChildren.mNode.mNext[-3].mNext;
+  for ( i = &this->mNetPoseSequence; p_mNext != i; p_mNext = (int *)&p_mChildren->mNode.mNext[-3].mNext )
   {
-    do
-    {
-      v5 = v3 + 10;
-      v6 = *((_QWORD *)v3 + 5);
-      v7 = (_QWORD *)*((_QWORD *)v3 + 6);
-      *(_QWORD *)(v6 + 8) = v7;
-      *v7 = v6;
-      *v5 = v5;
-      v5[1] = v5;
-      if ( v5 != (_QWORD *)40 )
-        (*(void (__fastcall **)(_QWORD *, signed __int64))(*(v5 - 5) + 8i64))(v5 - 5, 1i64);
-      v3 = (int *)&v2->mNode.mNext[-3].mNext;
-    }
-    while ( v3 != v4 );
+    v5 = p_mNext + 10;
+    v6 = *((_QWORD *)p_mNext + 5);
+    v7 = (_QWORD *)*((_QWORD *)p_mNext + 6);
+    *(_QWORD *)(v6 + 8) = v7;
+    *v7 = v6;
+    *v5 = v5;
+    v5[1] = v5;
+    if ( v5 != (_QWORD *)40 )
+      (*(void (__fastcall **)(_QWORD *, __int64))(*(v5 - 5) + 8i64))(v5 - 5, 1i64);
   }
-  UFG::qList<PoseNode,PoseNode,1,0>::DeleteNodes(v2);
-  v8 = v2->mNode.mPrev;
-  v9 = v2->mNode.mNext;
-  v8->mNext = v9;
-  v9->mPrev = v8;
-  v2->mNode.mPrev = &v2->mNode;
-  v2->mNode.mNext = &v2->mNode;
-  if ( v1->mChildrenSerialized.mCount >= 0 )
+  UFG::qList<PoseNode,PoseNode,1,0>::DeleteNodes(p_mChildren);
+  mPrev = p_mChildren->mNode.mPrev;
+  mNext = p_mChildren->mNode.mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  p_mChildren->mNode.mPrev = &p_mChildren->mNode;
+  p_mChildren->mNode.mNext = &p_mChildren->mNode;
+  if ( this->mChildrenSerialized.mCount >= 0 )
   {
-    v10 = v1->mChildrenSerialized.mData.mOffset;
-    if ( v10 )
+    mOffset = this->mChildrenSerialized.mData.mOffset;
+    if ( mOffset )
     {
-      v11 = (char *)&v1->mChildrenSerialized.mData + v10;
+      v11 = (char *)&this->mChildrenSerialized.mData + mOffset;
       if ( v11 )
         operator delete[](v11);
     }
-    v1->mChildrenSerialized.mData.mOffset = 0i64;
-    v1->mChildrenSerialized.mCount &= 0x80000000;
+    this->mChildrenSerialized.mData.mOffset = 0i64;
+    this->mChildrenSerialized.mCount &= 0x80000000;
   }
-  PoseNode::~PoseNode((PoseNode *)&v1->vfptr);
+  PoseNode::~PoseNode(this);
 }
 
 // File Line: 331
@@ -127,32 +111,24 @@ void __fastcall PoseNodeParent::Accept(PoseNodeParent *this, PoseNodeVisitor *vi
 // RVA: 0x2BD400
 void __fastcall PoseNodeParent::DeleteChildren(PoseNodeParent *this)
 {
-  UFG::qNode<PoseNode,PoseNode> *v1; // rax
-  int *v2; // rdi
-  PoseNodeParent *v3; // rbx
+  UFG::qNode<PoseNode,PoseNode> *mNext; // rax
+  int *i; // rdi
   UFG::qNode<PoseNode,PoseNode> *v4; // rcx
-  UFG::qNode<PoseNode,PoseNode> *v5; // rdx
+  UFG::qNode<PoseNode,PoseNode> *mPrev; // rdx
 
-  v1 = this->mChildren.mNode.mNext;
-  v2 = &this->mNetPoseSequence;
-  v3 = this;
-  if ( &v1[-3].mNext != (UFG::qNode<PoseNode,PoseNode> **)&this->mNetPoseSequence )
+  mNext = this->mChildren.mNode.mNext;
+  for ( i = &this->mNetPoseSequence;
+        &mNext[-3].mNext != (UFG::qNode<PoseNode,PoseNode> **)i;
+        mNext = this->mChildren.mNode.mNext )
   {
-    do
-    {
-      v4 = v1->mNext;
-      v5 = v1->mPrev;
-      v5->mNext = v4;
-      v4->mPrev = v5;
-      v1->mPrev = v1;
-      v1->mNext = v1;
-      if ( v1 != (UFG::qNode<PoseNode,PoseNode> *)40 )
-        ((void (__fastcall *)(UFG::qNode<PoseNode,PoseNode> **, signed __int64))v1[-3].mNext->mNext)(
-          &v1[-3].mNext,
-          1i64);
-      v1 = v3->mChildren.mNode.mNext;
-    }
-    while ( &v1[-3].mNext != (UFG::qNode<PoseNode,PoseNode> **)v2 );
+    v4 = mNext->mNext;
+    mPrev = mNext->mPrev;
+    mPrev->mNext = v4;
+    v4->mPrev = mPrev;
+    mNext->mPrev = mNext;
+    mNext->mNext = mNext;
+    if ( mNext != (UFG::qNode<PoseNode,PoseNode> *)40 )
+      ((void (__fastcall *)(UFG::qNode<PoseNode,PoseNode> **, __int64))mNext[-3].mNext->mNext)(&mNext[-3].mNext, 1i64);
   }
 }
 
@@ -160,28 +136,35 @@ void __fastcall PoseNodeParent::DeleteChildren(PoseNodeParent *this)
 // RVA: 0x2BD6F0
 Expression::IMemberMap *__fastcall PoseNodeParent::GetChild2(PoseNodeParent *this, __int64 priority)
 {
-  return (Expression::IMemberMap *)this->vfptr[1].__vecDelDtor((Expression::IMemberMap *)this, priority);
+  return (Expression::IMemberMap *)this->PoseNode::Expression::IMemberMap::vfptr[1].__vecDelDtor(this, priority);
 }
 
 // File Line: 358
 // RVA: 0x2AF130
 void __fastcall PoseNodeParent::AddChild2(PoseNodeParent *this, Expression::IMemberMap *node)
 {
-  ((void (__fastcall *)(PoseNodeParent *, Expression::IMemberMap *))this->vfptr[4].GetClassNameUID)(this, node);
+  ((void (__fastcall *)(PoseNodeParent *, Expression::IMemberMap *))this->PoseNode::Expression::IMemberMap::vfptr[4].GetClassNameUID)(
+    this,
+    node);
 }
 
 // File Line: 359
 // RVA: 0x2BD3B0
 void __fastcall PoseNodeParent::DeleteChild2(PoseNodeParent *this, Expression::IMemberMap *node)
 {
-  ((void (__fastcall *)(PoseNodeParent *, Expression::IMemberMap *))this->vfptr[4].GetResourcePath)(this, node);
+  ((void (__fastcall *)(PoseNodeParent *, Expression::IMemberMap *))this->PoseNode::Expression::IMemberMap::vfptr[4].GetResourcePath)(
+    this,
+    node);
 }
 
 // File Line: 360
 // RVA: 0x2AF190
-void __fastcall PoseNodeParent::ChangeChildPriority2(PoseNodeParent *this, Expression::IMemberMap *node, __int64 increase)
+void __fastcall PoseNodeParent::ChangeChildPriority2(
+        PoseNodeParent *this,
+        Expression::IMemberMap *node,
+        __int64 increase)
 {
-  ((void (__fastcall *)(PoseNodeParent *, Expression::IMemberMap *, __int64))this->vfptr[4].ResolveReferences)(
+  ((void (__fastcall *)(PoseNodeParent *, Expression::IMemberMap *, __int64))this->PoseNode::Expression::IMemberMap::vfptr[4].ResolveReferences)(
     this,
     node,
     increase);
@@ -191,60 +174,58 @@ void __fastcall PoseNodeParent::ChangeChildPriority2(PoseNodeParent *this, Expre
 // RVA: 0x2AF5A0
 PoseNodeParent *__fastcall PoseNodeParent::Clone(PoseNodeParent *this)
 {
-  PoseNodeParent *v1; // rdi
   PoseNodeParent *v2; // rax
   PoseNodeParent *v3; // rbx
 
-  v1 = this;
   v2 = PoseNodeParent::Create();
-  v2->mName.mUID = v1->mName.mUID;
+  v2->mName.mUID = this->mName.mUID;
   v3 = v2;
-  PoseNodeParent::copyChildren(v1, v2);
+  PoseNodeParent::copyChildren(this, v2);
   return v3;
 }
 
 // File Line: 422
 // RVA: 0x2DCD10
-char __usercall PoseNodeParent::Update@<al>(PoseNodeParent *this@<rcx>, float timeDelta@<xmm1>, bool updateAnimation@<r8b>, __int64 a4@<rdx>)
+char __fastcall PoseNodeParent::Update(PoseNodeParent *this, float timeDelta, bool updateAnimation)
 {
-  int *v4; // rbp
-  int *v5; // rdi
-  bool v6; // r14
-  char v7; // si
-  signed __int64 v8; // rbx
+  __int64 v3; // rdx
+  int *p_mNetPoseSequence; // rbp
+  int *p_mNext; // rdi
+  bool v7; // si
+  __int64 v8; // rbx
   __int64 v9; // rdx
   _QWORD *v10; // rax
-  _QWORD *v11; // r8
 
-  v4 = &this->mNetPoseSequence;
-  v5 = (int *)&this->mChildren.mNode.mNext[-3].mNext;
-  v6 = updateAnimation;
-  v7 = v5 == &this->mNetPoseSequence;
+  p_mNetPoseSequence = &this->mNetPoseSequence;
+  p_mNext = (int *)&this->mChildren.mNode.mNext[-3].mNext;
+  v7 = p_mNext == &this->mNetPoseSequence;
   this->mLocalTime = timeDelta + this->mLocalTime;
-  if ( !v5 )
+  if ( !p_mNext )
     return 1;
   do
   {
     if ( v7 )
       break;
-    v8 = *((_QWORD *)v5 + 6) - 40i64;
-    if ( (*(unsigned __int8 (__fastcall **)(int *, __int64, bool))(*(_QWORD *)v5 + 120i64))(v5, a4, v6) )
+    v8 = *((_QWORD *)p_mNext + 6) - 40i64;
+    if ( (*(unsigned __int8 (__fastcall **)(int *, __int64, bool))(*(_QWORD *)p_mNext + 120i64))(
+           p_mNext,
+           v3,
+           updateAnimation) )
     {
-      v7 = v8 == (_QWORD)v4;
+      v7 = v8 == (_QWORD)p_mNetPoseSequence;
     }
     else
     {
-      v7 = v8 && (int *)v8 != v4 ? 0 : 1;
-      v9 = *((_QWORD *)v5 + 5);
-      v10 = (_QWORD *)*((_QWORD *)v5 + 6);
-      v11 = v5 + 10;
+      v7 = !v8 || (int *)v8 == p_mNetPoseSequence;
+      v9 = *((_QWORD *)p_mNext + 5);
+      v10 = (_QWORD *)*((_QWORD *)p_mNext + 6);
       *(_QWORD *)(v9 + 8) = v10;
       *v10 = v9;
-      *v11 = v11;
-      v11[1] = v11;
-      (*(void (__fastcall **)(int *, signed __int64))(*(_QWORD *)v5 + 8i64))(v5, 1i64);
+      *((_QWORD *)p_mNext + 5) = p_mNext + 10;
+      *((_QWORD *)p_mNext + 6) = p_mNext + 10;
+      (*(void (__fastcall **)(int *, __int64))(*(_QWORD *)p_mNext + 8i64))(p_mNext, 1i64);
     }
-    v5 = (int *)v8;
+    p_mNext = (int *)v8;
   }
   while ( v8 );
   return 1;
@@ -254,25 +235,23 @@ char __usercall PoseNodeParent::Update@<al>(PoseNodeParent *this@<rcx>, float ti
 // RVA: 0x2DD020
 void __fastcall PoseNodeParent::copyChildren(PoseNodeParent *this, PoseNodeParent *clone)
 {
-  int *v2; // rbp
-  PoseNodeParent *v3; // rsi
-  PoseNodeParent *v4; // rbx
-  Expression::IMemberMapVtbl *v5; // rdi
+  int *p_mNetPoseSequence; // rbp
+  PoseNodeParent *p_mNext; // rbx
+  Expression::IMemberMapVtbl *vfptr; // rdi
   __int64 v6; // rax
 
-  v2 = &this->mNetPoseSequence;
-  v3 = clone;
-  v4 = (PoseNodeParent *)&this->mChildren.mNode.mNext[-3].mNext;
-  if ( v4 != (PoseNodeParent *)&this->mNetPoseSequence )
+  p_mNetPoseSequence = &this->mNetPoseSequence;
+  p_mNext = (PoseNodeParent *)&this->mChildren.mNode.mNext[-3].mNext;
+  if ( p_mNext != (PoseNodeParent *)&this->mNetPoseSequence )
   {
     do
     {
-      v5 = v3->vfptr;
-      v6 = ((__int64 (__fastcall *)(PoseNodeParent *))v4->vfptr[1].Serialize)(v4);
-      ((void (__fastcall *)(PoseNodeParent *, __int64))v5[4].GetClassNameUID)(v3, v6);
-      v4 = (PoseNodeParent *)&v4->mNext[-3].mNext;
+      vfptr = clone->PoseNode::Expression::IMemberMap::vfptr;
+      v6 = ((__int64 (__fastcall *)(PoseNodeParent *))p_mNext->PoseNode::Expression::IMemberMap::vfptr[1].Serialize)(p_mNext);
+      ((void (__fastcall *)(PoseNodeParent *, __int64))vfptr[4].GetClassNameUID)(clone, v6);
+      p_mNext = (PoseNodeParent *)&p_mNext->mNext[-3].mNext;
     }
-    while ( v4 != (PoseNodeParent *)v2 );
+    while ( p_mNext != (PoseNodeParent *)p_mNetPoseSequence );
   }
 }
 
@@ -280,19 +259,19 @@ void __fastcall PoseNodeParent::copyChildren(PoseNodeParent *this, PoseNodeParen
 // RVA: 0x2DCBF0
 void __fastcall PoseNodeParent::SetParametricPlayTime(PoseNodeParent *this, float parametric)
 {
-  int *v2; // rdi
-  PoseNodeParent *v3; // rbx
+  int *p_mNetPoseSequence; // rdi
+  PoseNodeParent *p_mNext; // rbx
 
-  v2 = &this->mNetPoseSequence;
-  v3 = (PoseNodeParent *)&this->mChildren.mNode.mNext[-3].mNext;
-  if ( v3 != (PoseNodeParent *)&this->mNetPoseSequence )
+  p_mNetPoseSequence = &this->mNetPoseSequence;
+  p_mNext = (PoseNodeParent *)&this->mChildren.mNode.mNext[-3].mNext;
+  if ( p_mNext != (PoseNodeParent *)&this->mNetPoseSequence )
   {
     do
     {
-      v3->vfptr[3].GetClassNameUID((Expression::IMemberMap *)&v3->vfptr);
-      v3 = (PoseNodeParent *)&v3->mNext[-3].mNext;
+      p_mNext->PoseNode::Expression::IMemberMap::vfptr[3].GetClassNameUID(p_mNext);
+      p_mNext = (PoseNodeParent *)&p_mNext->mNext[-3].mNext;
     }
-    while ( v3 != (PoseNodeParent *)v2 );
+    while ( p_mNext != (PoseNodeParent *)p_mNetPoseSequence );
   }
 }
 
@@ -300,19 +279,19 @@ void __fastcall PoseNodeParent::SetParametricPlayTime(PoseNodeParent *this, floa
 // RVA: 0x2DCB60
 void __fastcall PoseNodeParent::SetLocalTime(PoseNodeParent *this, float localTime)
 {
-  int *v2; // rdi
-  PoseNodeParent *v3; // rbx
+  int *p_mNetPoseSequence; // rdi
+  PoseNodeParent *p_mNext; // rbx
 
-  v2 = &this->mNetPoseSequence;
-  v3 = (PoseNodeParent *)&this->mChildren.mNode.mNext[-3].mNext;
-  if ( v3 != (PoseNodeParent *)&this->mNetPoseSequence )
+  p_mNetPoseSequence = &this->mNetPoseSequence;
+  p_mNext = (PoseNodeParent *)&this->mChildren.mNode.mNext[-3].mNext;
+  if ( p_mNext != (PoseNodeParent *)&this->mNetPoseSequence )
   {
     do
     {
-      ((void (__fastcall *)(PoseNodeParent *))v3->vfptr[3].GetResourcePath)(v3);
-      v3 = (PoseNodeParent *)&v3->mNext[-3].mNext;
+      ((void (__fastcall *)(PoseNodeParent *))p_mNext->PoseNode::Expression::IMemberMap::vfptr[3].GetResourcePath)(p_mNext);
+      p_mNext = (PoseNodeParent *)&p_mNext->mNext[-3].mNext;
     }
-    while ( v3 != (PoseNodeParent *)v2 );
+    while ( p_mNext != (PoseNodeParent *)p_mNetPoseSequence );
   }
 }
 
@@ -320,38 +299,38 @@ void __fastcall PoseNodeParent::SetLocalTime(PoseNodeParent *this, float localTi
 // RVA: 0x2BD700
 PoseNodeParent *__fastcall PoseNodeParent::GetChild(PoseNodeParent *this, int priority)
 {
-  PoseNodeParent *v2; // r8
+  PoseNodeParent *p_mNext; // r8
   PoseNodeParent *v3; // rax
 
-  v2 = (PoseNodeParent *)&this->mChildren.mNode.mNext[-3].mNext;
-  if ( v2 == (PoseNodeParent *)&this->mNetPoseSequence )
+  p_mNext = (PoseNodeParent *)&this->mChildren.mNode.mNext[-3].mNext;
+  if ( p_mNext == (PoseNodeParent *)&this->mNetPoseSequence )
     return 0i64;
   while ( 1 )
   {
-    v3 = (PoseNodeParent *)&v2->mNext[-3].mNext;
+    v3 = (PoseNodeParent *)&p_mNext->mNext[-3].mNext;
     if ( !priority )
       break;
     --priority;
-    v2 = (PoseNodeParent *)&v2->mNext[-3].mNext;
+    p_mNext = (PoseNodeParent *)&p_mNext->mNext[-3].mNext;
     if ( v3 == (PoseNodeParent *)&this->mNetPoseSequence )
       return 0i64;
   }
-  return v2;
+  return p_mNext;
 }
 
 // File Line: 507
 // RVA: 0x2BD730
 __int64 __fastcall PoseNodeParent::GetChildCount(PoseNodeParent *this)
 {
-  UFG::qNode<PoseNode,PoseNode> *v1; // rdx
-  int *v2; // rcx
+  UFG::qNode<PoseNode,PoseNode> *mNext; // rdx
+  int *p_mNetPoseSequence; // rcx
   __int64 result; // rax
-  signed __int64 i; // rdx
+  __int64 i; // rdx
 
-  v1 = this->mChildren.mNode.mNext;
-  v2 = &this->mNetPoseSequence;
+  mNext = this->mChildren.mNode.mNext;
+  p_mNetPoseSequence = &this->mNetPoseSequence;
   result = 0i64;
-  for ( i = (signed __int64)&v1[-3].mNext; (int *)i != v2; i = *(_QWORD *)(i + 48) - 40i64 )
+  for ( i = (__int64)&mNext[-3].mNext; (int *)i != p_mNetPoseSequence; i = *(_QWORD *)(i + 48) - 40i64 )
     result = (unsigned int)(result + 1);
   return result;
 }
@@ -360,63 +339,53 @@ __int64 __fastcall PoseNodeParent::GetChildCount(PoseNodeParent *this)
 // RVA: 0x2AF140
 void __fastcall PoseNodeParent::AddChild(PoseNodeParent *this, PoseNode *node)
 {
-  PoseNode *v2; // r9
-  UFG::qOffset64<PoseNodeParent *> *v3; // r8
-  char *v4; // rax
-  UFG::qNode<PoseNode,PoseNode> *v5; // rax
-  UFG::qList<PoseNode,PoseNode,1,0> *v6; // rdx
-  UFG::qNode<PoseNode,PoseNode> *v7; // rcx
+  UFG::qOffset64<PoseNodeParent *> *p_mParent; // r8
+  char *v3; // rax
+  UFG::qNode<PoseNode,PoseNode> *mPrev; // rax
 
-  v2 = node;
-  v3 = &node->mParent;
+  p_mParent = &node->mParent;
   if ( this )
-    v4 = (char *)((char *)this - (char *)v3);
+    v3 = (char *)((char *)this - (char *)p_mParent);
   else
-    v4 = 0i64;
-  v3->mOffset = (__int64)v4;
-  v5 = this->mChildren.mNode.mPrev;
-  v6 = &this->mChildren;
-  v7 = (UFG::qNode<PoseNode,PoseNode> *)&v2->mPrev;
-  v5->mNext = (UFG::qNode<PoseNode,PoseNode> *)&v2->mPrev;
-  v7->mPrev = v5;
-  v7->mNext = &v6->mNode;
-  v6->mNode.mPrev = (UFG::qNode<PoseNode,PoseNode> *)&v2->mPrev;
+    v3 = 0i64;
+  p_mParent->mOffset = (__int64)v3;
+  mPrev = this->mChildren.mNode.mPrev;
+  mPrev->mNext = &node->UFG::qNode<PoseNode,PoseNode>;
+  node->mPrev = mPrev;
+  node->mNext = &this->mChildren.mNode;
+  this->mChildren.mNode.mPrev = &node->UFG::qNode<PoseNode,PoseNode>;
 }
 
 // File Line: 518
 // RVA: 0x2BD3C0
 void __fastcall PoseNodeParent::DeleteChild(PoseNodeParent *this, PoseNode *child)
 {
-  UFG::qNode<PoseNode,PoseNode> *v2; // rcx
-  UFG::qNode<PoseNode,PoseNode> *v3; // rax
-  UFG::qNode<PoseNode,PoseNode> *v4; // r8
+  UFG::qNode<PoseNode,PoseNode> *mPrev; // rcx
+  UFG::qNode<PoseNode,PoseNode> *mNext; // rax
 
-  v2 = child->mPrev;
-  v3 = child->mNext;
-  v4 = (UFG::qNode<PoseNode,PoseNode> *)&child->mPrev;
-  v2->mNext = v3;
-  v3->mPrev = v2;
-  v4->mPrev = v4;
-  v4->mNext = v4;
+  mPrev = child->mPrev;
+  mNext = child->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  child->mPrev = &child->UFG::qNode<PoseNode,PoseNode>;
+  child->mNext = &child->UFG::qNode<PoseNode,PoseNode>;
   if ( child )
-    child->vfptr->__vecDelDtor((Expression::IMemberMap *)child, 1u);
+    child->Expression::IMemberMap::vfptr->__vecDelDtor(child, 1u);
 }
 
 // File Line: 524
 // RVA: 0x2DC820
 void __fastcall PoseNodeParent::RemoveChild(PoseNodeParent *this, PoseNode *child)
 {
-  UFG::qNode<PoseNode,PoseNode> *v2; // rcx
-  UFG::qNode<PoseNode,PoseNode> *v3; // rax
-  UFG::qNode<PoseNode,PoseNode> *v4; // r8
+  UFG::qNode<PoseNode,PoseNode> *mPrev; // rcx
+  UFG::qNode<PoseNode,PoseNode> *mNext; // rax
 
-  v2 = child->mPrev;
-  v3 = child->mNext;
-  v4 = (UFG::qNode<PoseNode,PoseNode> *)&child->mPrev;
-  v2->mNext = v3;
-  v3->mPrev = v2;
-  v4->mPrev = v4;
-  v4->mNext = v4;
+  mPrev = child->mPrev;
+  mNext = child->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  child->mPrev = &child->UFG::qNode<PoseNode,PoseNode>;
+  child->mNext = &child->UFG::qNode<PoseNode,PoseNode>;
   child->mParent.mOffset = 0i64;
 }
 
@@ -424,25 +393,25 @@ void __fastcall PoseNodeParent::RemoveChild(PoseNodeParent *this, PoseNode *chil
 // RVA: 0x2DC850
 void __fastcall PoseNodeParent::Replace(PoseNodeParent *this, PoseNode *currentChild, PoseNode *newChild)
 {
-  UFG::qNode<PoseNode,PoseNode> *v3; // rax
+  UFG::qNode<PoseNode,PoseNode> *mPrev; // rax
   UFG::qNode<PoseNode,PoseNode> *v4; // r9
-  UFG::qOffset64<PoseNodeParent *> *v5; // r8
+  UFG::qOffset64<PoseNodeParent *> *p_mParent; // r8
 
-  v3 = currentChild->mPrev;
-  v4 = (UFG::qNode<PoseNode,PoseNode> *)&newChild->mPrev;
-  v3->mNext = (UFG::qNode<PoseNode,PoseNode> *)&newChild->mPrev;
-  v5 = &newChild->mParent;
-  v4->mPrev = v3;
-  v4->mNext = (UFG::qNode<PoseNode,PoseNode> *)&currentChild->mPrev;
+  mPrev = currentChild->mPrev;
+  v4 = &newChild->UFG::qNode<PoseNode,PoseNode>;
+  mPrev->mNext = &newChild->UFG::qNode<PoseNode,PoseNode>;
+  p_mParent = &newChild->mParent;
+  v4->mPrev = mPrev;
+  v4->mNext = &currentChild->UFG::qNode<PoseNode,PoseNode>;
   currentChild->mPrev = v4;
   if ( this )
   {
-    v5->mOffset = (char *)this - (char *)v5;
-    ((void (*)(void))this->vfptr[4].SetResourceOwner)();
+    p_mParent->mOffset = (char *)this - (char *)p_mParent;
+    ((void (__fastcall *)(PoseNodeParent *))this->PoseNode::Expression::IMemberMap::vfptr[4].SetResourceOwner)(this);
   }
   else
   {
-    v5->mOffset = 0i64;
+    p_mParent->mOffset = 0i64;
     (*(void (**)(void))(MEMORY[0] + 384))();
   }
 }
@@ -456,29 +425,29 @@ void __fastcall PoseNodeParent::ChangeChildPriority(PoseNodeParent *this, PoseNo
 
 // File Line: 545
 // RVA: 0x2C30E0
-void __fastcall PoseNodeParent::GetExtractedDeltaReferenceFrame(PoseNodeParent *this, float deltaTime, hkQsTransformf *deltaMotionOut)
+void __fastcall PoseNodeParent::GetExtractedDeltaReferenceFrame(
+        PoseNodeParent *this,
+        float deltaTime,
+        hkQsTransformf *deltaMotionOut)
 {
-  PoseNodeParent *v3; // rdx
+  PoseNodeParent *p_mNext; // rdx
 
-  v3 = (PoseNodeParent *)&this->mChildren.mNode.mNext[-3].mNext;
-  if ( v3 != (PoseNodeParent *)&this->mNetPoseSequence )
-    v3->vfptr[1].GetResourcePath(
-      (Expression::IMemberMap *)&this->mChildren.mNode.mNext[-3].mNext,
-      (char *)v3,
-      (int)deltaMotionOut);
+  p_mNext = (PoseNodeParent *)&this->mChildren.mNode.mNext[-3].mNext;
+  if ( p_mNext != (PoseNodeParent *)&this->mNetPoseSequence )
+    ((void (__fastcall *)(UFG::qNode<PoseNode,PoseNode> **))p_mNext->PoseNode::Expression::IMemberMap::vfptr[1].GetResourcePath)(&this->mChildren.mNode.mNext[-3].mNext);
 }
 
 // File Line: 556
 // RVA: 0x2DCAE0
 void __fastcall PoseNodeParent::SetActiveDirection(PoseNodeParent *this, float activeDirection, bool force)
 {
-  UFG::qNode<PoseNode,PoseNode> *v3; // rax
-  int *v4; // rcx
-  signed __int64 i; // rax
+  UFG::qNode<PoseNode,PoseNode> *mNext; // rax
+  int *p_mNetPoseSequence; // rcx
+  __int64 i; // rax
 
-  v3 = this->mChildren.mNode.mNext;
-  v4 = &this->mNetPoseSequence;
-  for ( i = (signed __int64)&v3[-3].mNext; (int *)i != v4; i = *(_QWORD *)(i + 48) - 40i64 )
+  mNext = this->mChildren.mNode.mNext;
+  p_mNetPoseSequence = &this->mNetPoseSequence;
+  for ( i = (__int64)&mNext[-3].mNext; (int *)i != p_mNetPoseSequence; i = *(_QWORD *)(i + 48) - 40i64 )
     ;
 }
 
@@ -486,21 +455,21 @@ void __fastcall PoseNodeParent::SetActiveDirection(PoseNodeParent *this, float a
 // RVA: 0x2DCB00
 void __fastcall PoseNodeParent::SetContext(PoseNodeParent *this, ActionContext *context)
 {
-  int *v2; // rdi
-  ActionContext *v3; // rsi
-  PoseNodeParent *v4; // rbx
+  int *p_mNetPoseSequence; // rdi
+  PoseNodeParent *p_mNext; // rbx
 
-  v2 = &this->mNetPoseSequence;
-  v3 = context;
-  v4 = (PoseNodeParent *)&this->mChildren.mNode.mNext[-3].mNext;
-  if ( v4 != (PoseNodeParent *)&this->mNetPoseSequence )
+  p_mNetPoseSequence = &this->mNetPoseSequence;
+  p_mNext = (PoseNodeParent *)&this->mChildren.mNode.mNext[-3].mNext;
+  if ( p_mNext != (PoseNodeParent *)&this->mNetPoseSequence )
   {
     do
     {
-      ((void (__fastcall *)(PoseNodeParent *, ActionContext *))v4->vfptr[2].GetResourceOwner)(v4, v3);
-      v4 = (PoseNodeParent *)&v4->mNext[-3].mNext;
+      ((void (__fastcall *)(PoseNodeParent *, ActionContext *))p_mNext->PoseNode::Expression::IMemberMap::vfptr[2].GetResourceOwner)(
+        p_mNext,
+        context);
+      p_mNext = (PoseNodeParent *)&p_mNext->mNext[-3].mNext;
     }
-    while ( v4 != (PoseNodeParent *)v2 );
+    while ( p_mNext != (PoseNodeParent *)p_mNetPoseSequence );
   }
 }
 
@@ -508,25 +477,25 @@ void __fastcall PoseNodeParent::SetContext(PoseNodeParent *this, ActionContext *
 // RVA: 0x2BD580
 PoseNodeParent *__fastcall PoseNodeParent::FindFirstAtPriority(PoseNodeParent *this, int priority)
 {
-  unsigned int v2; // esi
   PoseNodeParent *result; // rax
-  int *v4; // rdi
-  PoseNodeParent *v5; // rbx
+  int *p_mNetPoseSequence; // rdi
+  PoseNodeParent *p_mNext; // rbx
 
-  v2 = priority;
   if ( priority >= this->mPriority )
     return this;
-  v4 = &this->mNetPoseSequence;
-  v5 = (PoseNodeParent *)&this->mChildren.mNode.mNext[-3].mNext;
-  if ( v5 == (PoseNodeParent *)&this->mNetPoseSequence )
+  p_mNetPoseSequence = &this->mNetPoseSequence;
+  p_mNext = (PoseNodeParent *)&this->mChildren.mNode.mNext[-3].mNext;
+  if ( p_mNext == (PoseNodeParent *)&this->mNetPoseSequence )
     return 0i64;
   while ( 1 )
   {
-    result = (PoseNodeParent *)((__int64 (__fastcall *)(PoseNodeParent *, _QWORD))v5->vfptr[3].GetResourceOwner)(v5, v2);
+    result = (PoseNodeParent *)((__int64 (__fastcall *)(PoseNodeParent *, _QWORD))p_mNext->PoseNode::Expression::IMemberMap::vfptr[3].GetResourceOwner)(
+                                 p_mNext,
+                                 (unsigned int)priority);
     if ( result )
       break;
-    v5 = (PoseNodeParent *)&v5->mNext[-3].mNext;
-    if ( v5 == (PoseNodeParent *)v4 )
+    p_mNext = (PoseNodeParent *)&p_mNext->mNext[-3].mNext;
+    if ( p_mNext == (PoseNodeParent *)p_mNetPoseSequence )
       return 0i64;
   }
   return result;
@@ -536,25 +505,25 @@ PoseNodeParent *__fastcall PoseNodeParent::FindFirstAtPriority(PoseNodeParent *t
 // RVA: 0x2BD4F0
 PoseNodeParent *__fastcall PoseNodeParent::Find(PoseNodeParent *this, UFG::qSymbolUC *name)
 {
-  UFG::qSymbolUC *v2; // rsi
   PoseNodeParent *result; // rax
-  int *v4; // rdi
-  PoseNodeParent *v5; // rbx
+  int *p_mNetPoseSequence; // rdi
+  PoseNodeParent *p_mNext; // rbx
 
-  v2 = name;
   if ( name->mUID == this->mName.mUID )
     return this;
-  v4 = &this->mNetPoseSequence;
-  v5 = (PoseNodeParent *)&this->mChildren.mNode.mNext[-3].mNext;
-  if ( v5 == (PoseNodeParent *)&this->mNetPoseSequence )
+  p_mNetPoseSequence = &this->mNetPoseSequence;
+  p_mNext = (PoseNodeParent *)&this->mChildren.mNode.mNext[-3].mNext;
+  if ( p_mNext == (PoseNodeParent *)&this->mNetPoseSequence )
     return 0i64;
   while ( 1 )
   {
-    result = (PoseNodeParent *)v5->vfptr[4].FindWithOldPath((Expression::IMemberMap *)&v5->vfptr, (const char *)v2);
+    result = (PoseNodeParent *)p_mNext->PoseNode::Expression::IMemberMap::vfptr[4].FindWithOldPath(
+                                 p_mNext,
+                                 (const char *)name);
     if ( result )
       break;
-    v5 = (PoseNodeParent *)&v5->mNext[-3].mNext;
-    if ( v5 == (PoseNodeParent *)v4 )
+    p_mNext = (PoseNodeParent *)&p_mNext->mNext[-3].mNext;
+    if ( p_mNext == (PoseNodeParent *)p_mNetPoseSequence )
       return 0i64;
   }
   return result;
@@ -562,24 +531,22 @@ PoseNodeParent *__fastcall PoseNodeParent::Find(PoseNodeParent *this, UFG::qSymb
 
 // File Line: 615
 // RVA: 0x2DCC80
-void __fastcall PoseNodeParent::SetPlayPriority(PoseNodeParent *this, int playPriority)
+void __fastcall PoseNodeParent::SetPlayPriority(PoseNodeParent *this, unsigned int playPriority)
 {
-  int *v2; // rsi
-  unsigned int v3; // edi
-  PoseNodeParent *v4; // rbx
+  int *p_mNetPoseSequence; // rsi
+  PoseNodeParent *p_mNext; // rbx
 
-  v2 = &this->mNetPoseSequence;
-  v3 = playPriority;
-  v4 = (PoseNodeParent *)&this->mChildren.mNode.mNext[-3].mNext;
+  p_mNetPoseSequence = &this->mNetPoseSequence;
+  p_mNext = (PoseNodeParent *)&this->mChildren.mNode.mNext[-3].mNext;
   this->mPriority = playPriority;
-  if ( v4 != (PoseNodeParent *)&this->mNetPoseSequence )
+  if ( p_mNext != (PoseNodeParent *)&this->mNetPoseSequence )
   {
     do
     {
-      v4->vfptr[4].__vecDelDtor((Expression::IMemberMap *)&v4->vfptr, v3);
-      v4 = (PoseNodeParent *)&v4->mNext[-3].mNext;
+      p_mNext->PoseNode::Expression::IMemberMap::vfptr[4].__vecDelDtor(p_mNext, playPriority);
+      p_mNext = (PoseNodeParent *)&p_mNext->mNext[-3].mNext;
     }
-    while ( v4 != (PoseNodeParent *)v2 );
+    while ( p_mNext != (PoseNodeParent *)p_mNetPoseSequence );
   }
 }
 
@@ -587,21 +554,19 @@ void __fastcall PoseNodeParent::SetPlayPriority(PoseNodeParent *this, int playPr
 // RVA: 0x2DC490
 void __fastcall PoseNodeParent::PreserveMotion(PoseNodeParent *this, bool tf)
 {
-  int *v2; // rdi
-  bool v3; // si
-  PoseNodeParent *v4; // rbx
+  int *p_mNetPoseSequence; // rdi
+  PoseNodeParent *p_mNext; // rbx
 
-  v2 = &this->mNetPoseSequence;
-  v3 = tf;
-  v4 = (PoseNodeParent *)&this->mChildren.mNode.mNext[-3].mNext;
-  if ( v4 != (PoseNodeParent *)&this->mNetPoseSequence )
+  p_mNetPoseSequence = &this->mNetPoseSequence;
+  p_mNext = (PoseNodeParent *)&this->mChildren.mNode.mNext[-3].mNext;
+  if ( p_mNext != (PoseNodeParent *)&this->mNetPoseSequence )
   {
     do
     {
-      v4->vfptr[3].__vecDelDtor((Expression::IMemberMap *)&v4->vfptr, v3);
-      v4 = (PoseNodeParent *)&v4->mNext[-3].mNext;
+      p_mNext->PoseNode::Expression::IMemberMap::vfptr[3].__vecDelDtor(p_mNext, tf);
+      p_mNext = (PoseNodeParent *)&p_mNext->mNext[-3].mNext;
     }
-    while ( v4 != (PoseNodeParent *)v2 );
+    while ( p_mNext != (PoseNodeParent *)p_mNetPoseSequence );
   }
 }
 
@@ -609,21 +574,16 @@ void __fastcall PoseNodeParent::PreserveMotion(PoseNodeParent *this, bool tf)
 // RVA: 0x39E400
 void __fastcall PoseNodeRoot::PoseNodeRoot(PoseNodeRoot *this)
 {
-  PoseNodeRoot *v1; // rbx
-  UFG::qList<PoseNode,PoseNode,1,0> *v2; // [rsp+48h] [rbp+10h]
-
-  v1 = this;
-  PoseNode::PoseNode((PoseNode *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PoseNodeParent::`vftable{for `Expression::IMemberMap};
-  v1->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNodeParent::`vftable{for `UFG::qSafePointerNode<PoseNode>};
-  v1->mChildrenSerialized.mCount = 0;
-  v1->mChildrenSerialized.mData.mOffset = 0i64;
-  v2 = &v1->mChildren;
-  v2->mNode.mPrev = &v2->mNode;
-  v2->mNode.mNext = &v2->mNode;
-  v1->mLocalTime = 0.0;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PoseNodeRoot::`vftable{for `Expression::IMemberMap};
-  v1->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNodeRoot::`vftable{for `UFG::qSafePointerNode<PoseNode>};
+  PoseNode::PoseNode(this);
+  this->PoseNodeParent::PoseNode::Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&PoseNodeParent::`vftable{for `Expression::IMemberMap};
+  this->PoseNodeParent::PoseNode::UFG::qSafePointerNode<PoseNode>::vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNodeParent::`vftable{for `UFG::qSafePointerNode<PoseNode>};
+  this->mChildrenSerialized.mCount = 0;
+  this->mChildrenSerialized.mData.mOffset = 0i64;
+  this->mChildren.mNode.PoseNodeParent::mPrev = &this->mChildren.mNode;
+  this->mChildren.mNode.mNext = &this->mChildren.mNode;
+  this->mLocalTime = 0.0;
+  this->PoseNodeParent::PoseNode::Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&PoseNodeRoot::`vftable{for `Expression::IMemberMap};
+  this->PoseNodeParent::PoseNode::UFG::qSafePointerNode<PoseNode>::vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNodeRoot::`vftable{for `UFG::qSafePointerNode<PoseNode>};
 }
 
 // File Line: 707
@@ -641,9 +601,9 @@ void __fastcall PoseNodeRoot::Create()
 // RVA: 0x299F70
 void __fastcall BlendNode::~BlendNode(BlendNode *this)
 {
-  this->vfptr = (Expression::IMemberMapVtbl *)&BlendNode::`vftable{for `Expression::IMemberMap};
-  this->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&BlendNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
-  PoseNodeParent::~PoseNodeParent((PoseNodeParent *)&this->vfptr);
+  this->PoseNodeParent::PoseNode::Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&BlendNode::`vftable{for `Expression::IMemberMap};
+  this->PoseNodeParent::PoseNode::UFG::qSafePointerNode<PoseNode>::vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&BlendNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
+  PoseNodeParent::~PoseNodeParent(this);
 }
 
 // File Line: 741
@@ -675,61 +635,51 @@ void __fastcall BlendNode::SetPlayRate(BlendNode *this, float rate)
 // RVA: 0x298520
 void __fastcall BlendNode::BlendNode(BlendNode *this)
 {
-  BlendNode *v1; // rbx
-  UFG::qList<PoseNode,PoseNode,1,0> *v2; // [rsp+48h] [rbp+10h]
-
-  v1 = this;
-  PoseNode::PoseNode((PoseNode *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&PoseNodeParent::`vftable{for `Expression::IMemberMap};
-  v1->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNodeParent::`vftable{for `UFG::qSafePointerNode<PoseNode>};
-  v1->mChildrenSerialized.mCount = 0;
-  v1->mChildrenSerialized.mData.mOffset = 0i64;
-  v2 = &v1->mChildren;
-  v2->mNode.mPrev = &v2->mNode;
-  v2->mNode.mNext = &v2->mNode;
-  v1->mLocalTime = 0.0;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&BlendNode::`vftable{for `Expression::IMemberMap};
-  v1->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&BlendNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
-  v1->mWeightSet = 0i64;
-  v1->mWeightSetMask = 0i64;
-  *(_DWORD *)&v1->mStarted = 0;
-  *(_QWORD *)&v1->mBlendRate = 1065353216i64;
-  *(_QWORD *)&v1->mWeightSetName.mUID = -1i64;
+  PoseNode::PoseNode(this);
+  this->PoseNodeParent::PoseNode::Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&PoseNodeParent::`vftable{for `Expression::IMemberMap};
+  this->PoseNodeParent::PoseNode::UFG::qSafePointerNode<PoseNode>::vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNodeParent::`vftable{for `UFG::qSafePointerNode<PoseNode>};
+  this->mChildrenSerialized.mCount = 0;
+  this->mChildrenSerialized.mData.mOffset = 0i64;
+  this->mChildren.mNode.PoseNodeParent::mPrev = &this->mChildren.mNode;
+  this->mChildren.mNode.mNext = &this->mChildren.mNode;
+  this->mLocalTime = 0.0;
+  this->PoseNodeParent::PoseNode::Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&BlendNode::`vftable{for `Expression::IMemberMap};
+  this->PoseNodeParent::PoseNode::UFG::qSafePointerNode<PoseNode>::vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&BlendNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
+  this->mWeightSet = 0i64;
+  this->mWeightSetMask = 0i64;
+  *(_DWORD *)&this->mStarted = 0;
+  *(_QWORD *)&this->mBlendRate = 1065353216i64;
+  *(_QWORD *)&this->mWeightSetName.mUID = -1i64;
 }
 
 // File Line: 872
 // RVA: 0x30F380
 void __fastcall BlendNode::BlendNode(BlendNode *this, float blendInTime)
 {
-  BlendNode *v2; // rbx
-  UFG::qList<PoseNode,PoseNode,1,0> *v3; // [rsp+60h] [rbp+18h]
-
-  v2 = this;
-  PoseNode::PoseNode((PoseNode *)&this->vfptr);
-  v2->vfptr = (Expression::IMemberMapVtbl *)&PoseNodeParent::`vftable{for `Expression::IMemberMap};
-  v2->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNodeParent::`vftable{for `UFG::qSafePointerNode<PoseNode>};
-  v2->mChildrenSerialized.mCount = 0;
-  v2->mChildrenSerialized.mData.mOffset = 0i64;
-  v3 = &v2->mChildren;
-  v3->mNode.mPrev = &v3->mNode;
-  v3->mNode.mNext = &v3->mNode;
-  v2->mLocalTime = 0.0;
-  v2->vfptr = (Expression::IMemberMapVtbl *)&BlendNode::`vftable{for `Expression::IMemberMap};
-  v2->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&BlendNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
-  v2->mWeightSet = 0i64;
-  v2->mWeightSetMask = 0i64;
-  *(_DWORD *)&v2->mStarted = 0;
-  *(_QWORD *)&v2->mBlendRate = 1065353216i64;
-  *(_QWORD *)&v2->mWeightSetName.mUID = -1i64;
+  PoseNode::PoseNode(this);
+  this->PoseNodeParent::PoseNode::Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&PoseNodeParent::`vftable{for `Expression::IMemberMap};
+  this->PoseNodeParent::PoseNode::UFG::qSafePointerNode<PoseNode>::vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&PoseNodeParent::`vftable{for `UFG::qSafePointerNode<PoseNode>};
+  this->mChildrenSerialized.mCount = 0;
+  this->mChildrenSerialized.mData.mOffset = 0i64;
+  this->mChildren.mNode.PoseNodeParent::mPrev = &this->mChildren.mNode;
+  this->mChildren.mNode.mNext = &this->mChildren.mNode;
+  this->mLocalTime = 0.0;
+  this->PoseNodeParent::PoseNode::Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&BlendNode::`vftable{for `Expression::IMemberMap};
+  this->PoseNodeParent::PoseNode::UFG::qSafePointerNode<PoseNode>::vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&BlendNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
+  this->mWeightSet = 0i64;
+  this->mWeightSetMask = 0i64;
+  *(_DWORD *)&this->mStarted = 0;
+  *(_QWORD *)&this->mBlendRate = 1065353216i64;
+  *(_QWORD *)&this->mWeightSetName.mUID = -1i64;
   if ( blendInTime == 0.0 )
   {
-    v2->mBlendRate = 1.0;
-    v2->mBlendParam = 1.0;
+    this->mBlendRate = 1.0;
+    this->mBlendParam = 1.0;
   }
   else if ( blendInTime > 0.0 )
   {
-    v2->mBlendRate = 1.0 / blendInTime;
-    v2->mBlendParam = 0.0;
+    this->mBlendRate = 1.0 / blendInTime;
+    this->mBlendParam = 0.0;
   }
 }
 
@@ -737,12 +687,10 @@ void __fastcall BlendNode::BlendNode(BlendNode *this, float blendInTime)
 // RVA: 0x2AF2C0
 PoseNode *__fastcall BlendNode::Clone(BlendNode *this)
 {
-  BlendNode *v1; // rdi
   char *v2; // rax
   __int64 v3; // rax
   __int64 v4; // rbx
 
-  v1 = this;
   v2 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0xB0ui64, "BlendNode", 0i64, 1u);
   if ( v2 )
   {
@@ -753,18 +701,18 @@ PoseNode *__fastcall BlendNode::Clone(BlendNode *this)
   {
     v4 = 0i64;
   }
-  *(float *)(v4 + 156) = v1->mBlendRate;
-  *(float *)(v4 + 160) = v1->mBlendParam;
-  *(_BYTE *)(v4 + 155) = v1->mKeepBlend;
-  *(_BYTE *)(v4 + 153) = v1->mSyncOnStart;
-  *(_BYTE *)(v4 + 154) = v1->mPauseBlend;
-  *(_DWORD *)(v4 + 68) = v1->mName.mUID;
-  *(_DWORD *)(v4 + 64) = v1->mPriority;
-  *(_QWORD *)(v4 + 136) = v1->mWeightSet;
-  *(_QWORD *)(v4 + 144) = v1->mWeightSetMask;
-  *(_DWORD *)(v4 + 164) = v1->mWeightSetName.mUID;
-  *(_DWORD *)(v4 + 168) = v1->mWeightSetMaskName.mUID;
-  PoseNodeParent::copyChildren((PoseNodeParent *)&v1->vfptr, (PoseNodeParent *)v4);
+  *(float *)(v4 + 156) = this->mBlendRate;
+  *(float *)(v4 + 160) = this->mBlendParam;
+  *(_BYTE *)(v4 + 155) = this->mKeepBlend;
+  *(_BYTE *)(v4 + 153) = this->mSyncOnStart;
+  *(_BYTE *)(v4 + 154) = this->mPauseBlend;
+  *(_DWORD *)(v4 + 68) = this->mName.mUID;
+  *(_DWORD *)(v4 + 64) = this->mPriority;
+  *(_QWORD *)(v4 + 136) = this->mWeightSet;
+  *(_QWORD *)(v4 + 144) = this->mWeightSetMask;
+  *(_DWORD *)(v4 + 164) = this->mWeightSetName.mUID;
+  *(_DWORD *)(v4 + 168) = this->mWeightSetMaskName.mUID;
+  PoseNodeParent::copyChildren(this, (PoseNodeParent *)v4);
   return (PoseNode *)v4;
 }
 
@@ -803,12 +751,10 @@ float __fastcall BlendDirectionNode::GetPlayRate(BlendNode *this)
 // RVA: 0x3A4E70
 BlendDirectionNode *__fastcall BlendDirectionNode::Clone(BlendDirectionNode *this)
 {
-  BlendDirectionNode *v1; // rdi
   char *v2; // rax
   BlendDirectionNode *v3; // rax
   BlendDirectionNode *v4; // rbx
 
-  v1 = this;
   v2 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0xF0ui64, "BlendDirectionNode", 0i64, 1u);
   if ( v2 )
   {
@@ -819,10 +765,10 @@ BlendDirectionNode *__fastcall BlendDirectionNode::Clone(BlendDirectionNode *thi
   {
     v4 = 0i64;
   }
-  BlendDirectionNode::operator=(v4, v1);
+  BlendDirectionNode::operator=(v4, this);
   v4->mNetPoseSequence = -1;
-  v4->mName.mUID = v1->mName.mUID;
-  PoseNodeParent::copyChildren((PoseNodeParent *)&v1->vfptr, (PoseNodeParent *)&v4->vfptr);
+  v4->mName.mUID = this->mName.mUID;
+  PoseNodeParent::copyChildren(this, v4);
   return v4;
 }
 
@@ -830,13 +776,10 @@ BlendDirectionNode *__fastcall BlendDirectionNode::Clone(BlendDirectionNode *thi
 // RVA: 0x30F330
 void __fastcall BlendAddNode::BlendAddNode(BlendAddNode *this, float blendInTime)
 {
-  BlendAddNode *v2; // rbx
-
-  v2 = this;
-  BlendNode::BlendNode((BlendNode *)&this->vfptr, blendInTime);
-  v2->vfptr = (Expression::IMemberMapVtbl *)&BlendAddNode::`vftable{for `Expression::IMemberMap};
-  v2->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&BlendAddNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
-  v2->mKeepBlend = 1;
+  BlendNode::BlendNode(this, blendInTime);
+  this->BlendNode::PoseNodeParent::PoseNode::Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&BlendAddNode::`vftable{for `Expression::IMemberMap};
+  this->BlendNode::PoseNodeParent::PoseNode::UFG::qSafePointerNode<PoseNode>::vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&BlendAddNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
+  this->mKeepBlend = 1;
 }
 
 // File Line: 1380
@@ -868,11 +811,9 @@ void __fastcall ActionNodeBank::Accept(MemberMapFileObject *this, MemberMapFileN
 // RVA: 0x2AF1B0
 PoseNode *__fastcall BlendAddNode::Clone(BlendAddNode *this)
 {
-  BlendAddNode *v1; // rdi
   char *v2; // rax
   char *v3; // rbx
 
-  v1 = this;
   v2 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0xB0ui64, "BlendAddNode", 0i64, 1u);
   v3 = v2;
   if ( v2 )
@@ -886,18 +827,18 @@ PoseNode *__fastcall BlendAddNode::Clone(BlendAddNode *this)
   {
     v3 = 0i64;
   }
-  *((_DWORD *)v3 + 39) = LODWORD(v1->mBlendRate);
-  *((_DWORD *)v3 + 40) = LODWORD(v1->mBlendParam);
-  v3[155] = v1->mKeepBlend;
-  v3[153] = v1->mSyncOnStart;
-  v3[154] = v1->mPauseBlend;
-  *((_DWORD *)v3 + 17) = v1->mName.mUID;
-  *((_DWORD *)v3 + 16) = v1->mPriority;
-  *((_QWORD *)v3 + 17) = v1->mWeightSet;
-  *((_QWORD *)v3 + 18) = v1->mWeightSetMask;
-  *((_DWORD *)v3 + 41) = v1->mWeightSetName.mUID;
-  *((_DWORD *)v3 + 42) = v1->mWeightSetMaskName.mUID;
-  PoseNodeParent::copyChildren((PoseNodeParent *)&v1->vfptr, (PoseNodeParent *)v3);
+  *((_DWORD *)v3 + 39) = LODWORD(this->mBlendRate);
+  *((_DWORD *)v3 + 40) = LODWORD(this->mBlendParam);
+  v3[155] = this->mKeepBlend;
+  v3[153] = this->mSyncOnStart;
+  v3[154] = this->mPauseBlend;
+  *((_DWORD *)v3 + 17) = this->mName.mUID;
+  *((_DWORD *)v3 + 16) = this->mPriority;
+  *((_QWORD *)v3 + 17) = this->mWeightSet;
+  *((_QWORD *)v3 + 18) = this->mWeightSetMask;
+  *((_DWORD *)v3 + 41) = this->mWeightSetName.mUID;
+  *((_DWORD *)v3 + 42) = this->mWeightSetMaskName.mUID;
+  PoseNodeParent::copyChildren(this, (PoseNodeParent *)v3);
   return (PoseNode *)v3;
 }
 
@@ -923,11 +864,9 @@ BlendSubNode *__fastcall BlendSubNode::Create()
 // RVA: 0x2AF4D0
 PoseNode *__fastcall BlendSubNode::Clone(BlendSubNode *this)
 {
-  BlendSubNode *v1; // rdi
   char *v2; // rax
   char *v3; // rbx
 
-  v1 = this;
   v2 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0xB0ui64, "BlendSubNode", 0i64, 1u);
   v3 = v2;
   if ( v2 )
@@ -941,13 +880,13 @@ PoseNode *__fastcall BlendSubNode::Clone(BlendSubNode *this)
   {
     v3 = 0i64;
   }
-  *((_DWORD *)v3 + 39) = LODWORD(v1->mBlendRate);
-  *((_DWORD *)v3 + 40) = LODWORD(v1->mBlendParam);
-  v3[155] = v1->mKeepBlend;
-  v3[153] = v1->mSyncOnStart;
-  v3[154] = v1->mPauseBlend;
-  *((_DWORD *)v3 + 17) = v1->mName.mUID;
-  PoseNodeParent::copyChildren((PoseNodeParent *)&v1->vfptr, (PoseNodeParent *)v3);
+  *((_DWORD *)v3 + 39) = LODWORD(this->mBlendRate);
+  *((_DWORD *)v3 + 40) = LODWORD(this->mBlendParam);
+  v3[155] = this->mKeepBlend;
+  v3[153] = this->mSyncOnStart;
+  v3[154] = this->mPauseBlend;
+  *((_DWORD *)v3 + 17) = this->mName.mUID;
+  PoseNodeParent::copyChildren(this, (PoseNodeParent *)v3);
   return (PoseNode *)v3;
 }
 
@@ -955,14 +894,11 @@ PoseNode *__fastcall BlendSubNode::Clone(BlendSubNode *this)
 // RVA: 0x30F470
 void __fastcall BlendPhaseNode::BlendPhaseNode(BlendPhaseNode *this, float blendInTime)
 {
-  BlendPhaseNode *v2; // rbx
-
-  v2 = this;
-  BlendNode::BlendNode((BlendNode *)&this->vfptr, blendInTime);
-  v2->vfptr = (Expression::IMemberMapVtbl *)&BlendPhaseNode::`vftable{for `Expression::IMemberMap};
-  v2->vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&BlendPhaseNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
-  v2->mHoldPose = 0;
-  v2->mKeepBlend = 1;
+  BlendNode::BlendNode(this, blendInTime);
+  this->BlendNode::PoseNodeParent::PoseNode::Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&BlendPhaseNode::`vftable{for `Expression::IMemberMap};
+  this->BlendNode::PoseNodeParent::PoseNode::UFG::qSafePointerNode<PoseNode>::vfptr = (UFG::qSafePointerNode<PoseNode>Vtbl *)&BlendPhaseNode::`vftable{for `UFG::qSafePointerNode<PoseNode>};
+  this->mHoldPose = 0;
+  this->mKeepBlend = 1;
 }
 
 // File Line: 1476
@@ -983,11 +919,9 @@ void __fastcall UELFragmentNode::Accept(MemberMapFileProject *this, MemberMapFil
 // RVA: 0x2AF3B0
 PoseNode *__fastcall BlendPhaseNode::Clone(BlendPhaseNode *this)
 {
-  BlendPhaseNode *v1; // rdi
   char *v2; // rax
   char *v3; // rbx
 
-  v1 = this;
   v2 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0xB8ui64, "BlendPhaseNode", 0i64, 1u);
   v3 = v2;
   if ( v2 )
@@ -1002,19 +936,19 @@ PoseNode *__fastcall BlendPhaseNode::Clone(BlendPhaseNode *this)
   {
     v3 = 0i64;
   }
-  *((_DWORD *)v3 + 39) = LODWORD(v1->mBlendRate);
-  *((_DWORD *)v3 + 40) = LODWORD(v1->mBlendParam);
-  v3[155] = v1->mKeepBlend;
-  v3[153] = v1->mSyncOnStart;
-  v3[154] = v1->mPauseBlend;
-  v3[176] = v1->mHoldPose;
-  *((_DWORD *)v3 + 17) = v1->mName.mUID;
-  *((_DWORD *)v3 + 16) = v1->mPriority;
-  *((_QWORD *)v3 + 17) = v1->mWeightSet;
-  *((_QWORD *)v3 + 18) = v1->mWeightSetMask;
-  *((_DWORD *)v3 + 41) = v1->mWeightSetName.mUID;
-  *((_DWORD *)v3 + 42) = v1->mWeightSetMaskName.mUID;
-  PoseNodeParent::copyChildren((PoseNodeParent *)&v1->vfptr, (PoseNodeParent *)v3);
+  *((_DWORD *)v3 + 39) = LODWORD(this->mBlendRate);
+  *((_DWORD *)v3 + 40) = LODWORD(this->mBlendParam);
+  v3[155] = this->mKeepBlend;
+  v3[153] = this->mSyncOnStart;
+  v3[154] = this->mPauseBlend;
+  v3[176] = this->mHoldPose;
+  *((_DWORD *)v3 + 17) = this->mName.mUID;
+  *((_DWORD *)v3 + 16) = this->mPriority;
+  *((_QWORD *)v3 + 17) = this->mWeightSet;
+  *((_QWORD *)v3 + 18) = this->mWeightSetMask;
+  *((_DWORD *)v3 + 41) = this->mWeightSetName.mUID;
+  *((_DWORD *)v3 + 42) = this->mWeightSetMaskName.mUID;
+  PoseNodeParent::copyChildren(this, (PoseNodeParent *)v3);
   return (PoseNode *)v3;
 }
 
@@ -1059,7 +993,7 @@ void __fastcall AnimationNode::Resume(AnimationNode *this)
 
 // File Line: 1587
 // RVA: 0x3AD5C0
-void __fastcall AnimationNode::PreserveMotion(AnimationNode *this, bool tf)
+void __fastcall AnimationNode::PreserveMotion(AnimationNode *this, char tf)
 {
   this->mPreserveMotionOnHoldLastFrame = tf;
 }
@@ -1106,14 +1040,13 @@ void __fastcall AnimationNode::Set_MotionPhase(AnimationNode *this, Expression::
   this->mMotionPhase.mResourceOwner = motionPhase->mResourceOwner;
   this->mMotionPhase.mPhaseMark.mValue = (unsigned int)motionPhase[1].vfptr;
   this->mMotionPhase.mPhasePeriod = HIDWORD(motionPhase[1].vfptr);
-  this->mMotionPhase.mPhase = *(float *)&motionPhase[1].mResourceOwner;
-  this->mMotionPhase.mPhaseDuration = *((float *)&motionPhase[1].mResourceOwner + 1);
+  *(_QWORD *)&this->mMotionPhase.mPhase = motionPhase[1].mResourceOwner;
 }
 
 // File Line: 1762
 // RVA: 0x3A8EE0
 __int64 __fastcall AnimationNode::GetIsFinished(AnimationNode *this)
 {
-  return ((__int64 (*)(void))this->vfptr[1].SetResourceOwner)();
+  return ((__int64 (__fastcall *)(AnimationNode *))this->PoseNode::Expression::IMemberMap::vfptr[1].SetResourceOwner)(this);
 }
 

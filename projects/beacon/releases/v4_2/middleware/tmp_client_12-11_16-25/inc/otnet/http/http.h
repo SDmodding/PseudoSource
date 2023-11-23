@@ -1,14 +1,14 @@
 // File Line: 68
 // RVA: 0xEC2D48
-signed __int64 __fastcall OSuite::ZHttp::HttpToOsError(OSuite::ZHttp::EError httpError)
+__int64 __fastcall OSuite::ZHttp::HttpToOsError(int httpError)
 {
-  __int32 v1; // ecx
+  int v1; // ecx
   int v2; // ecx
   int v3; // ecx
   int v4; // ecx
   int v5; // ecx
   int v6; // ecx
-  __int32 v8; // ecx
+  int v8; // ecx
   int v9; // ecx
   int v10; // ecx
   int v11; // ecx
@@ -16,11 +16,11 @@ signed __int64 __fastcall OSuite::ZHttp::HttpToOsError(OSuite::ZHttp::EError htt
   int v13; // ecx
   int v14; // ecx
 
-  if ( (signed int)httpError <= 8 )
+  if ( httpError <= 8 )
   {
     if ( httpError != 8 )
     {
-      if ( httpError == HTTPERROR_OK )
+      if ( !httpError )
         return 0i64;
       v1 = httpError - 1;
       if ( !v1 )

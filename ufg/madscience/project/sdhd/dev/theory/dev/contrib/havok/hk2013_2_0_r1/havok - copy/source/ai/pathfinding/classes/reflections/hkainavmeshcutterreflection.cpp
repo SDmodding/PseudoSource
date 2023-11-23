@@ -86,7 +86,7 @@ void dynamic_initializer_for__hkaiNavMeshCutterSavedConnectivityClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 179
@@ -105,9 +105,10 @@ void __fastcall finishLoadedObjecthkaiNavMeshCutterSavedConnectivity(void *p, in
 
 // File Line: 192
 // RVA: 0xBB6AA0
-void __fastcall cleanupLoadedObjecthkaiNavMeshCutterSavedConnectivity(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkaiNavMeshCutterSavedConnectivity(hkaiNavMeshCutter::SavedConnectivity *p)
 {
-  hkaiNavMeshCutter::SavedConnectivity::~SavedConnectivity((hkaiNavMeshCutter::SavedConnectivity *)p);
+  hkaiNavMeshCutter::SavedConnectivity::~SavedConnectivity(p);
 }
 
 // File Line: 230
@@ -147,27 +148,25 @@ void __fastcall finishLoadedObjecthkaiNavMeshCutterMeshInfo(void *p, int finishi
 
 // File Line: 246
 // RVA: 0xBB6AC0
-void __fastcall cleanupLoadedObjecthkaiNavMeshCutterMeshInfo(void *p)
+void __fastcall cleanupLoadedObjecthkaiNavMeshCutterMeshInfo(_DWORD *p)
 {
-  int v1; // er8
-  _QWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 7);
-  v2 = p;
-  *((_DWORD *)p + 6) = 0;
+  v1 = p[7];
+  p[6] = 0;
   if ( v1 < 0 )
   {
     *((_QWORD *)p + 2) = 0i64;
-    *((_DWORD *)p + 7) = 2147483648;
+    p[7] = 0x80000000;
   }
   else
   {
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       (void *)*((_QWORD *)p + 2),
       4 * v1);
-    v2[2] = 0i64;
-    *((_DWORD *)v2 + 7) = 2147483648;
+    *((_QWORD *)p + 2) = 0i64;
+    p[7] = 0x80000000;
   }
 }
 
@@ -200,7 +199,7 @@ void dynamic_initializer_for__hkaiNavMeshCutterClass__()
     &hkaiNavMeshCutter_Default,
     0i64,
     0,
-    0xDu);
+    13);
 }
 
 // File Line: 324
@@ -212,23 +211,24 @@ hkClass *__fastcall hkaiNavMeshCutter::staticClass()
 
 // File Line: 331
 // RVA: 0xBB6B30
-void __fastcall finishLoadedObjecthkaiNavMeshCutter(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiNavMeshCutter(hkaiNavMeshCutter *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiNavMeshCutter::hkaiNavMeshCutter);
+  if ( p )
+    hkaiNavMeshCutter::hkaiNavMeshCutter(p, finishing);
 }
 
 // File Line: 337
 // RVA: 0xBB6B50
-void __fastcall cleanupLoadedObjecthkaiNavMeshCutter(void *p)
+void __fastcall cleanupLoadedObjecthkaiNavMeshCutter(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 341
 // RVA: 0xBB6B60
 hkBaseObjectVtbl *__fastcall getVtablehkaiNavMeshCutter()
 {
-  hkaiNavMeshCutter v1; // [rsp+20h] [rbp-C8h]
+  hkaiNavMeshCutter v1; // [rsp+20h] [rbp-C8h] BYREF
 
   hkaiNavMeshCutter::hkaiNavMeshCutter(&v1, 0);
   return v1.vfptr;
@@ -245,8 +245,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiNavMeshCutterTypeInfo__()
   hkaiNavMeshCutterTypeInfo.m_typeName = "hkaiNavMeshCutter";
   hkaiNavMeshCutterTypeInfo.m_vtable = result;
   hkaiNavMeshCutterTypeInfo.m_scopedName = "!hkaiNavMeshCutter";
-  hkaiNavMeshCutterTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiNavMeshCutter;
-  hkaiNavMeshCutterTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiNavMeshCutter;
+  hkaiNavMeshCutterTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiNavMeshCutter;
+  hkaiNavMeshCutterTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiNavMeshCutter;
   return result;
 }
 

@@ -28,31 +28,31 @@ hkClass *__fastcall hkxBlobMeshShape::staticClass()
 
 // File Line: 66
 // RVA: 0xE31A40
-void __fastcall finishLoadedObjecthkxBlobMeshShape(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxBlobMeshShape(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
   hkStringPtr *v2; // rcx
 
   if ( p )
   {
-    v2 = (hkStringPtr *)((char *)p + 48);
+    v2 = p + 6;
     v2[-6].m_stringAndFlag = (const char *)&hkxBlobMeshShape::`vftable;
     v2[-4].m_stringAndFlag = (const char *)&hkxBlob::`vftable;
-    hkStringPtr::hkStringPtr(v2, (hkFinishLoadedObjectFlag)finishing);
+    hkStringPtr::hkStringPtr(v2, finishing);
   }
 }
 
 // File Line: 72
 // RVA: 0xE31A70
-void __fastcall cleanupLoadedObjecthkxBlobMeshShape(void *p)
+void __fastcall cleanupLoadedObjecthkxBlobMeshShape(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 76
 // RVA: 0xE31A80
 void **__fastcall getVtablehkxBlobMeshShape()
 {
-  hkStringPtr v1; // [rsp+50h] [rbp-18h]
+  hkStringPtr v1; // [rsp+50h] [rbp-18h] BYREF
 
   hkStringPtr::hkStringPtr(&v1, 0);
   return &hkxBlobMeshShape::`vftable;
@@ -69,8 +69,8 @@ void **dynamic_initializer_for__hkxBlobMeshShapeTypeInfo__()
   hkxBlobMeshShapeTypeInfo.m_typeName = "hkxBlobMeshShape";
   hkxBlobMeshShapeTypeInfo.m_vtable = result;
   hkxBlobMeshShapeTypeInfo.m_scopedName = "!hkxBlobMeshShape";
-  hkxBlobMeshShapeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxBlobMeshShape;
-  hkxBlobMeshShapeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxBlobMeshShape;
+  hkxBlobMeshShapeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxBlobMeshShape;
+  hkxBlobMeshShapeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxBlobMeshShape;
   return result;
 }
 

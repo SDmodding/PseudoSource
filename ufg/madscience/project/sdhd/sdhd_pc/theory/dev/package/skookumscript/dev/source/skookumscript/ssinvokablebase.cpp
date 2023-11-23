@@ -2,19 +2,17 @@
 // RVA: 0x107100
 void __fastcall SSInvokableBase::~SSInvokableBase(SSInvokableBase *this)
 {
-  SSParameters *v1; // rbx
-  bool v2; // zf
+  SSParameters *i_obj_p; // rbx
 
   this->vfptr = (SSInvokableBaseVtbl *)&SSInvokableBase::`vftable;
-  v1 = this->i_params_p.i_obj_p;
-  if ( v1 )
+  i_obj_p = this->i_params_p.i_obj_p;
+  if ( i_obj_p )
   {
-    v2 = v1->i_ref_count-- == 1;
-    if ( v2 )
+    if ( i_obj_p->i_ref_count-- == 1 )
     {
-      v1->i_ref_count = 2147483648;
-      SSParameters::~SSParameters(v1);
-      AMemory::c_free_func(v1);
+      i_obj_p->i_ref_count = 0x80000000;
+      SSParameters::~SSParameters(i_obj_p);
+      AMemory::c_free_func(i_obj_p);
     }
   }
 }

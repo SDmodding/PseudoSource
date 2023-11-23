@@ -14,7 +14,7 @@ const char *__fastcall MemberMapFileObject::GetClassname(MemberMapFileObject *th
 
 // File Line: 183
 // RVA: 0x152190
-MemberMapFileObject *__fastcall MemberMapFileDependent::Create()
+MemberMapFileDependent *__fastcall MemberMapFileDependent::Create()
 {
   MemberMapFileObject *v0; // rax
   MemberMapFileObject *v1; // rbx
@@ -30,7 +30,7 @@ MemberMapFileObject *__fastcall MemberMapFileDependent::Create()
     return 0i64;
   MemberMapFileObject::MemberMapFileObject(v0);
   v1->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileDependent::`vftable;
-  return v1;
+  return (MemberMapFileDependent *)v1;
 }
 
 // File Line: 203
@@ -65,6 +65,6 @@ MemberMapFileManager *__fastcall MemberMapFileManager::GetDataBaseRoot()
 // RVA: 0x152B50
 void __fastcall MemberMapFileNodeVisitor::Visit(Json::DefaultValueAllocator *this, char *memberName)
 {
-  this->vfptr->releaseStringValue((Json::ValueAllocator *)this, memberName);
+  this->vfptr->releaseStringValue(this, memberName);
 }
 

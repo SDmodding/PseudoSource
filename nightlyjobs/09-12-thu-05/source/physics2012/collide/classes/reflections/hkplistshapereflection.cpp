@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkpListShapeChildInfoClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 73
@@ -63,26 +63,27 @@ hkClass *__fastcall hkpListShape::staticClass()
 
 // File Line: 133
 // RVA: 0xCEAF80
-void __fastcall finishLoadedObjecthkpListShape(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpListShape(hkpListShape *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpListShape::hkpListShape);
+  if ( p )
+    hkpListShape::hkpListShape(p, finishing);
 }
 
 // File Line: 139
 // RVA: 0xCEAFA0
-void __fastcall cleanupLoadedObjecthkpListShape(void *p)
+void __fastcall cleanupLoadedObjecthkpListShape(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 143
 // RVA: 0xCEAFB0
 hkBaseObjectVtbl *__fastcall getVtablehkpListShape()
 {
-  hkpListShape v1; // [rsp+20h] [rbp-98h]
+  hkpListShape v1; // [rsp+20h] [rbp-98h] BYREF
 
   hkpListShape::hkpListShape(&v1, 0);
-  return v1.vfptr;
+  return v1.hkpShapeCollection::hkpShape::hkpShapeBase::hkcdShape::hkReferencedObject::hkBaseObject::vfptr;
 }
 
 // File Line: 165
@@ -96,8 +97,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpListShapeTypeInfo__()
   hkpListShapeTypeInfo.m_typeName = "hkpListShape";
   hkpListShapeTypeInfo.m_vtable = result;
   hkpListShapeTypeInfo.m_scopedName = "!hkpListShape";
-  hkpListShapeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpListShape;
-  hkpListShapeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpListShape;
+  hkpListShapeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpListShape;
+  hkpListShapeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpListShape;
   return result;
 }
 

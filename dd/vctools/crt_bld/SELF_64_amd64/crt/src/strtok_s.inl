@@ -4,10 +4,9 @@ char *__fastcall strtok_s(char *_String, const char *_Control, char **_Context)
 {
   const char *v3; // rbx
   char *v4; // r10
-  char *result; // rax
-  signed __int64 v6; // rax
+  __int64 v6; // rax
   bool v7; // cf
-  unsigned int v8; // er9
+  unsigned int v8; // r9d
   char *v9; // r9
   char v10[32]; // [rsp+20h] [rbp-38h]
 
@@ -22,7 +21,7 @@ char *__fastcall strtok_s(char *_String, const char *_Control, char **_Context)
       if ( !v7 )
       {
         _report_rangecheckfailure();
-        JUMPOUT(*(_QWORD *)&byte_1412BC4F6);
+        JUMPOUT(0x1412BC4F6i64);
       }
       v10[v6++] = 0;
       v7 = (unsigned __int64)v6 < 0x20;
@@ -36,12 +35,13 @@ char *__fastcall strtok_s(char *_String, const char *_Control, char **_Context)
     while ( (_BYTE)v8 );
     if ( !_String )
       v4 = *_Context;
-    while ( (unsigned __int8)(1 << (*v4 & 7)) & (unsigned __int8)v10[(unsigned __int64)(unsigned __int8)*v4 >> 3] && *v4 )
+    while ( ((unsigned __int8)(1 << (*v4 & 7)) & (unsigned __int8)v10[(unsigned __int64)(unsigned __int8)*v4 >> 3]) != 0
+         && *v4 )
       ++v4;
     v9 = v4;
     while ( *v4 )
     {
-      if ( (unsigned __int8)(1 << (*v4 & 7)) & (unsigned __int8)v10[(unsigned __int64)(unsigned __int8)*v4 >> 3] )
+      if ( ((unsigned __int8)(1 << (*v4 & 7)) & (unsigned __int8)v10[(unsigned __int64)(unsigned __int8)*v4 >> 3]) != 0 )
       {
         *v4++ = 0;
         break;
@@ -50,15 +50,14 @@ char *__fastcall strtok_s(char *_String, const char *_Control, char **_Context)
     }
     *_Context = v4;
     if ( v9 == v4 )
-      v9 = 0i64;
-    result = v9;
+      return 0i64;
+    return v9;
   }
   else
   {
     *errno() = 22;
     invalid_parameter_noinfo();
-    result = 0i64;
+    return 0i64;
   }
-  return result;
 }
 

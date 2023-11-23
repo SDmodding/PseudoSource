@@ -3,7 +3,7 @@
 void UFG::GlobalCooldownManager::CreateInstance(void)
 {
   UFG::allocator::free_link *v0; // rax
-  signed __int64 v1; // rcx
+  __int64 v1; // rcx
 
   if ( !UFG::GlobalCooldownManager::s_pInstance )
   {
@@ -14,7 +14,7 @@ void UFG::GlobalCooldownManager::CreateInstance(void)
       do
       {
         *((_DWORD *)&v0->mNext + v1) = -943501440;
-        *((_DWORD *)&v0[9].mNext + v1++ + 1) = -943501440;
+        *((_DWORD *)&v0[9].mNext + ++v1) = -943501440;
       }
       while ( v1 < 19 );
     }
@@ -37,14 +37,16 @@ void UFG::GlobalCooldownManager::DeleteInstance(void)
 
 // File Line: 55
 // RVA: 0x386F80
-void __fastcall UFG::GlobalCooldownManager::SetLastTimeFired(UFG::GlobalCooldownManager *this, UFG::eGlobalCooldownType type, float min_time_until_next_can_fire, float max_time_until_next_can_fire)
+void __fastcall UFG::GlobalCooldownManager::SetLastTimeFired(
+        UFG::GlobalCooldownManager *this,
+        UFG::eGlobalCooldownType type,
+        float min_time_until_next_can_fire,
+        float max_time_until_next_can_fire)
 {
   __int64 v4; // rdi
-  UFG::GlobalCooldownManager *v5; // rbx
   float v6; // xmm0_4
 
   v4 = type;
-  v5 = this;
   this->m_LastTimeFired[type] = UFG::Metrics::msInstance.mSimTime_Temp;
   if ( max_time_until_next_can_fire <= min_time_until_next_can_fire )
   {
@@ -52,14 +54,14 @@ void __fastcall UFG::GlobalCooldownManager::SetLastTimeFired(UFG::GlobalCooldown
   }
   else
   {
-    v6 = UFG::qRandom(max_time_until_next_can_fire - min_time_until_next_can_fire, &UFG::qDefaultSeed)
+    v6 = UFG::qRandom(max_time_until_next_can_fire - min_time_until_next_can_fire, (unsigned int *)&UFG::qDefaultSeed)
        + min_time_until_next_can_fire;
     if ( v6 <= min_time_until_next_can_fire )
       v6 = min_time_until_next_can_fire;
     if ( v6 >= max_time_until_next_can_fire )
-      v5->m_TimeUntilNextCanFire[v4] = max_time_until_next_can_fire;
+      this->m_TimeUntilNextCanFire[v4] = max_time_until_next_can_fire;
     else
-      v5->m_TimeUntilNextCanFire[v4] = v6;
+      this->m_TimeUntilNextCanFire[v4] = v6;
   }
 }
 

@@ -4,17 +4,11 @@ unsigned __int64 __fastcall strnlen(const char *str, unsigned __int64 maxsize)
 {
   unsigned __int64 result; // rax
 
-  result = 0i64;
-  if ( maxsize )
+  for ( result = 0i64; result < maxsize; ++str )
   {
-    do
-    {
-      if ( !*str )
-        break;
-      ++result;
-      ++str;
-    }
-    while ( result < maxsize );
+    if ( !*str )
+      break;
+    ++result;
   }
   return result;
 }

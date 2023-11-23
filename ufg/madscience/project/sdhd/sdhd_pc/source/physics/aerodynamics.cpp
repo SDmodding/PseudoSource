@@ -10,59 +10,71 @@ float __fastcall UFG::VehicleAerodynamics::calcAerodynamicDrag(UFG::VehicleAerod
 
 // File Line: 60
 // RVA: 0x483530
-void __fastcall UFG::VehicleAerodynamics::calcAerodynamics(UFG::VehicleAerodynamics *this, const float deltaTime, hkpVehicleInstance *vehicle, hkpVehicleAerodynamics::AerodynamicsDragOutput *dragInfoOut)
+void __fastcall UFG::VehicleAerodynamics::calcAerodynamics(
+        UFG::VehicleAerodynamics *this,
+        const float deltaTime,
+        hkpVehicleInstance *vehicle,
+        hkpVehicleAerodynamics::AerodynamicsDragOutput *dragInfoOut)
 {
-  hkpEntity *v4; // rdi
-  hkpVehicleAerodynamics::AerodynamicsDragOutput *v5; // rsi
-  __m128 *v6; // rbx
-  __m128 v7; // xmm2
+  hkpEntity *m_entity; // rdi
+  __m128 m_quad; // xmm2
   __m128 v8; // xmm4
   __m128 v9; // xmm3
-  hkpVehicleData *v10; // rax
+  hkpVehicleData *m_data; // rax
   __m128 v11; // xmm0
   __m128 v12; // xmm10
   __m128 v13; // xmm8
   __m128 v14; // xmm9
   __m128 v15; // xmm2
   __m128 v16; // xmm0
-  __m128 v17; // xmm1
-  __m128 v18; // xmm0
-  __m128 v19; // xmm6
+  __m128 v17; // xmm7
+  __m128 v18; // xmm1
+  float v19; // xmm6_4
+  __m128 v20; // xmm0
+  __m128 v21; // xmm6
 
-  v4 = vehicle->m_entity;
-  v5 = dragInfoOut;
-  v6 = (__m128 *)this;
-  v7 = v4->m_motion.m_motionState.m_transform.m_rotation.m_col2.m_quad;
-  v8 = v4->m_motion.m_motionState.m_transform.m_rotation.m_col1.m_quad;
-  v9 = v4->m_motion.m_motionState.m_transform.m_rotation.m_col0.m_quad;
-  v10 = vehicle->m_data;
-  v11 = v10->m_chassisOrientation.m_col0.m_quad;
+  m_entity = vehicle->m_entity;
+  m_quad = m_entity->m_motion.m_motionState.m_transform.m_rotation.m_col2.m_quad;
+  v8 = m_entity->m_motion.m_motionState.m_transform.m_rotation.m_col1.m_quad;
+  v9 = m_entity->m_motion.m_motionState.m_transform.m_rotation.m_col0.m_quad;
+  m_data = vehicle->m_data;
+  v11 = m_data->m_chassisOrientation.m_col0.m_quad;
   v12 = _mm_add_ps(
           _mm_add_ps(
             _mm_mul_ps(
-              _mm_shuffle_ps(v10->m_chassisOrientation.m_col1.m_quad, v10->m_chassisOrientation.m_col1.m_quad, 0),
+              _mm_shuffle_ps(m_data->m_chassisOrientation.m_col1.m_quad, m_data->m_chassisOrientation.m_col1.m_quad, 0),
               v9),
             _mm_mul_ps(
-              _mm_shuffle_ps(v10->m_chassisOrientation.m_col1.m_quad, v10->m_chassisOrientation.m_col1.m_quad, 85),
+              _mm_shuffle_ps(m_data->m_chassisOrientation.m_col1.m_quad, m_data->m_chassisOrientation.m_col1.m_quad, 85),
               v8)),
           _mm_mul_ps(
-            _mm_shuffle_ps(v10->m_chassisOrientation.m_col1.m_quad, v10->m_chassisOrientation.m_col1.m_quad, 170),
-            v7));
-  v13 = _mm_mul_ps(_mm_shuffle_ps(v11, v11, 170), v7);
+            _mm_shuffle_ps(m_data->m_chassisOrientation.m_col1.m_quad, m_data->m_chassisOrientation.m_col1.m_quad, 170),
+            m_quad));
+  v13 = _mm_mul_ps(_mm_shuffle_ps(v11, v11, 170), m_quad);
   v14 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v11, v11, 0), v9), _mm_mul_ps(_mm_shuffle_ps(v11, v11, 85), v8));
-  v15 = _mm_mul_ps(v4->m_motion.m_linearVelocity.m_quad, v12);
+  v15 = _mm_mul_ps(m_entity->m_motion.m_linearVelocity.m_quad, v12);
   v16 = _mm_shuffle_ps(v15, v15, 0);
-  ((void (*)(void))this->vfptr[2].__vecDelDtor)();
   v17 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v15, v15, 85), v16), _mm_shuffle_ps(v15, v15, 170));
-  (*(void (__fastcall **)(__m128 *))(v6->m128_u64[0] + 40))(v6);
-  v17.m128_f32[0] = v16.m128_f32[0];
-  v18 = _mm_mul_ps(_mm_shuffle_ps(v16, v16, 0), v12);
-  v5->m_aerodynamicsForce.m_quad = _mm_add_ps(_mm_mul_ps(_mm_add_ps(v14, v13), _mm_shuffle_ps(v17, v17, 0)), v18);
-  v19 = _mm_mul_ps(_mm_shuffle_ps((__m128)v6[3].m128_u32[1], (__m128)v6[3].m128_u32[1], 0), v6[2]);
-  v18.m128_f32[0] = hkpMotion::getMass((hkpMotion *)&v4->m_motion.vfptr);
-  v5->m_aerodynamicsForce.m_quad = _mm_add_ps(
-                                     _mm_mul_ps(_mm_shuffle_ps(v18, v18, 0), v19),
-                                     v5->m_aerodynamicsForce.m_quad);
-  v5->m_aerodynamicsTorque = 0i64;
+  *(double *)v16.m128_u64 = ((double (__fastcall *)(UFG::VehicleAerodynamics *))this->vfptr[2].__vecDelDtor)(this);
+  v18 = v17;
+  v19 = v16.m128_f32[0];
+  *(double *)v16.m128_u64 = ((double (__fastcall *)(UFG::VehicleAerodynamics *))this->vfptr[2].__first_virtual_table_function__)(this);
+  v18.m128_f32[0] = v16.m128_f32[0];
+  v16.m128_f32[0] = v19;
+  v20 = _mm_mul_ps(_mm_shuffle_ps(v16, v16, 0), v12);
+  dragInfoOut->m_aerodynamicsForce.m_quad = _mm_add_ps(
+                                              _mm_mul_ps(_mm_add_ps(v14, v13), _mm_shuffle_ps(v18, v18, 0)),
+                                              v20);
+  v21 = _mm_mul_ps(
+          _mm_shuffle_ps(
+            (__m128)LODWORD(this->mExtraGravityMultiplier),
+            (__m128)LODWORD(this->mExtraGravityMultiplier),
+            0),
+          this->m_extraGravityws.m_quad);
+  v20.m128_f32[0] = hkpMotion::getMass(&m_entity->m_motion);
+  dragInfoOut->m_aerodynamicsForce.m_quad = _mm_add_ps(
+                                              _mm_mul_ps(_mm_shuffle_ps(v20, v20, 0), v21),
+                                              dragInfoOut->m_aerodynamicsForce.m_quad);
+  dragInfoOut->m_aerodynamicsTorque = 0i64;
 }
 

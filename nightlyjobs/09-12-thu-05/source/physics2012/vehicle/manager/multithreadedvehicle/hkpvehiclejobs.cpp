@@ -7,114 +7,117 @@ void __fastcall hkpVehicleIntegrateJob::setRunsOnSpuOrPpu(hkpVehicleIntegrateJob
 
 // File Line: 23
 // RVA: 0xE313E0
-void __fastcall hkpVehicleJobResults::applyForcesFromStep(hkpVehicleJobResults *this, hkpVehicleInstance *vehicleInstance)
+void __fastcall hkpVehicleJobResults::applyForcesFromStep(
+        hkpVehicleJobResults *this,
+        hkpVehicleInstance *vehicleInstance)
 {
-  hkpVehicleJobResults *v2; // r13
   hkpVehicleInstance *v3; // rbx
-  _QWORD *v4; // r8
+  _QWORD *Value; // r8
   _QWORD *v5; // rcx
   unsigned __int64 v6; // rax
-  signed __int64 v7; // rcx
-  int v8; // ebp
-  __int64 v9; // r12
-  __int64 v10; // r15
-  const __m128i *v11; // r14
-  __m128 v12; // xmm6
-  hkpVehicleInstance::WheelInfo *v13; // rbx
-  signed __int64 v14; // rsi
-  hkpEntity *v15; // rbx
-  hkpEntity *v16; // rbx
-  hkpEntity **v17; // rdi
-  signed __int64 v18; // rsi
-  signed __int64 v19; // rbp
-  hkpEntity *v20; // rbx
+  _QWORD *v7; // rcx
+  hkpVehicleData *m_data; // rax
+  int v9; // ebp
+  __int64 m_numWheels; // r12
+  __int64 v11; // r15
+  hkVector4f *m_groundBodyImpulses; // r14
+  __m128 v13; // xmm6
+  hkpVehicleInstance::WheelInfo *v14; // rbx
+  hkpVehicleInstance::WheelInfo *v15; // rsi
+  hkpEntity *m_contactBody; // rbx
+  hkpEntity *m_entity; // rbx
+  hkpRigidBody **m_groundBodyPtr; // rdi
+  hkVector4f *m_groundBodyLinearVel; // rsi
+  __int64 v20; // rbp
   hkpEntity *v21; // rbx
-  _QWORD *v22; // rax
-  _QWORD *v23; // rcx
-  _QWORD *v24; // r8
-  unsigned __int64 v25; // rax
-  signed __int64 v26; // rcx
-  hkpVehicleInstance *v27; // [rsp+78h] [rbp+10h]
+  hkpEntity *v22; // rbx
+  _QWORD *v23; // rax
+  _QWORD *v24; // rcx
+  _QWORD *v25; // r8
+  unsigned __int64 v26; // rax
+  _QWORD *v27; // rcx
 
-  v27 = vehicleInstance;
-  v2 = this;
   v3 = vehicleInstance;
-  v4 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v5 = (_QWORD *)v4[1];
-  if ( (unsigned __int64)v5 < v4[3] )
+  Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v5 = (_QWORD *)Value[1];
+  if ( (unsigned __int64)v5 < Value[3] )
   {
     *v5 = "TtApplyVehicleForces";
     v6 = __rdtsc();
-    v7 = (signed __int64)(v5 + 2);
-    *(_DWORD *)(v7 - 8) = v6;
-    v4[1] = v7;
+    v7 = v5 + 2;
+    *((_DWORD *)v7 - 2) = v6;
+    Value[1] = v7;
   }
-  v8 = 0;
-  v9 = (unsigned __int8)v3->m_data->m_numWheels;
-  if ( (signed int)v9 > 0 )
+  m_data = v3->m_data;
+  v9 = 0;
+  m_numWheels = (unsigned __int8)m_data->m_numWheels;
+  if ( m_data->m_numWheels )
   {
-    v10 = 0i64;
-    v11 = (const __m128i *)v2->m_groundBodyImpulses;
-    v12 = _mm_shuffle_ps((__m128)LODWORD(FLOAT_0_001), (__m128)LODWORD(FLOAT_0_001), 0);
+    v11 = 0i64;
+    m_groundBodyImpulses = this->m_groundBodyImpulses;
+    v13 = _mm_shuffle_ps((__m128)LODWORD(FLOAT_0_001), (__m128)LODWORD(FLOAT_0_001), 0);
     do
     {
-      if ( (_mm_movemask_ps(_mm_cmpltps((__m128)_mm_srli_epi32(_mm_slli_epi32(_mm_load_si128(v11), 1u), 1u), v12)) & 7) != 7 )
+      if ( (_mm_movemask_ps(
+              _mm_cmplt_ps(
+                (__m128)_mm_srli_epi32(_mm_slli_epi32(_mm_load_si128((const __m128i *)m_groundBodyImpulses), 1u), 1u),
+                v13)) & 7) != 7 )
       {
-        v13 = v3->m_wheelsInfo.m_data;
-        v14 = (signed __int64)&v13[v8];
-        v15 = (hkpEntity *)&v13[v10].m_contactBody->vfptr;
-        hkpEntity::activate(v15);
-        ((void (__fastcall *)(hkpMaxSizeMotion *, signed __int64, signed __int64))v15->m_motion.vfptr[11].__first_virtual_table_function__)(
-          &v15->m_motion,
-          (signed __int64)v2 + 16 * (v8 + 7i64),
-          v14 + 80);
-        v3 = v27;
+        v14 = v3->m_wheelsInfo.m_data;
+        v15 = &v14[v9];
+        m_contactBody = v14[v11].m_contactBody;
+        hkpEntity::activate(m_contactBody);
+        ((void (__fastcall *)(hkpMaxSizeMotion *, hkVector4f *, hkVector4f *))m_contactBody->m_motion.vfptr[11].__first_virtual_table_function__)(
+          &m_contactBody->m_motion,
+          &this->m_groundBodyImpulses[v9],
+          &v15->m_hardPointWs);
+        v3 = vehicleInstance;
       }
-      ++v8;
+      ++v9;
+      ++m_groundBodyImpulses;
       ++v11;
-      ++v10;
-      --v9;
+      --m_numWheels;
     }
-    while ( v9 );
+    while ( m_numWheels );
   }
-  v16 = v3->m_entity;
-  hkpEntity::activate(v16);
-  ((void (__fastcall *)(hkpMaxSizeMotion *, hkVector4f *))v16->m_motion.vfptr[9].__first_virtual_table_function__)(
-    &v16->m_motion,
-    &v2->m_chassisAngularVel);
-  hkpEntity::activate(v16);
-  v16->m_motion.vfptr[9].__vecDelDtor((hkBaseObject *)&v16->m_motion.vfptr, (unsigned int)v2);
-  v17 = (hkpEntity **)v2->m_groundBodyPtr;
-  v18 = (signed __int64)v2->m_groundBodyLinearVel;
-  v19 = 2i64;
+  m_entity = v3->m_entity;
+  hkpEntity::activate(m_entity);
+  ((void (__fastcall *)(hkpMaxSizeMotion *, hkVector4f *))m_entity->m_motion.vfptr[9].__first_virtual_table_function__)(
+    &m_entity->m_motion,
+    &this->m_chassisAngularVel);
+  hkpEntity::activate(m_entity);
+  m_entity->m_motion.vfptr[9].__vecDelDtor(&m_entity->m_motion, (unsigned int)this);
+  m_groundBodyPtr = this->m_groundBodyPtr;
+  m_groundBodyLinearVel = this->m_groundBodyLinearVel;
+  v20 = 2i64;
   do
   {
-    v20 = *v17;
-    if ( *v17 )
+    v21 = *m_groundBodyPtr;
+    if ( *m_groundBodyPtr )
     {
-      hkpEntity::activate(*v17);
-      ((void (__fastcall *)(hkpMaxSizeMotion *, signed __int64))v20->m_motion.vfptr[9].__first_virtual_table_function__)(
-        &v20->m_motion,
-        v18 + 32);
-      v21 = *v17;
-      hkpEntity::activate(*v17);
-      v21->m_motion.vfptr[9].__vecDelDtor((hkBaseObject *)&v21->m_motion.vfptr, v18);
+      hkpEntity::activate(*m_groundBodyPtr);
+      ((void (__fastcall *)(hkpMaxSizeMotion *, hkVector4f *))v21->m_motion.vfptr[9].__first_virtual_table_function__)(
+        &v21->m_motion,
+        &m_groundBodyLinearVel[2]);
+      v22 = *m_groundBodyPtr;
+      hkpEntity::activate(*m_groundBodyPtr);
+      v22->m_motion.vfptr[9].__vecDelDtor(&v22->m_motion, (unsigned int)m_groundBodyLinearVel);
     }
-    v18 += 16i64;
-    ++v17;
-    --v19;
+    ++m_groundBodyLinearVel;
+    ++m_groundBodyPtr;
+    --v20;
   }
-  while ( v19 );
-  v22 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v23 = (_QWORD *)v22[1];
-  v24 = v22;
-  if ( (unsigned __int64)v23 < v22[3] )
+  while ( v20 );
+  v23 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v24 = (_QWORD *)v23[1];
+  v25 = v23;
+  if ( (unsigned __int64)v24 < v23[3] )
   {
-    *v23 = "Et";
-    v25 = __rdtsc();
-    v26 = (signed __int64)(v23 + 2);
-    *(_DWORD *)(v26 - 8) = v25;
-    v24[1] = v26;
+    *v24 = "Et";
+    v26 = __rdtsc();
+    v27 = v24 + 2;
+    *((_DWORD *)v27 - 2) = v26;
+    v25[1] = v27;
   }
 }
 

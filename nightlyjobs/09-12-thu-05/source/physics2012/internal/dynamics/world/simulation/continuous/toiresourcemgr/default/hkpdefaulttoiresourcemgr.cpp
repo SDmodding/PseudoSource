@@ -37,30 +37,31 @@ __int64 __fastcall hkpDefaultToiResourceMgr::getScratchpadCapacity(hkpDefaultToi
 
 // File Line: 46
 // RVA: 0xDE5AB0
-hkResult *__fastcall hkpDefaultToiResourceMgr::beginToiAndSetupResources(hkpDefaultToiResourceMgr *this, hkResult *result, hkpToiEvent *event, hkArray<hkpToiEvent,hkContainerHeapAllocator> *otherEvents, hkpToiResources *resourcesOut)
+hkResult *__fastcall hkpDefaultToiResourceMgr::beginToiAndSetupResources(
+        hkpDefaultToiResourceMgr *this,
+        hkResult *result,
+        hkpToiEvent *event,
+        hkArray<hkpToiEvent,hkContainerHeapAllocator> *otherEvents,
+        hkpToiResources *resourcesOut)
 {
-  hkResult *v5; // rdi
-  hkpDefaultToiResourceMgr *v6; // rsi
-  int v7; // eax
+  int m_defaultScratchpadSize; // eax
   __int64 v8; // rcx
   char *v9; // rax
   int v10; // ecx
-  hkBool resulta; // [rsp+20h] [rbp-18h]
-  int v13; // [rsp+24h] [rbp-14h]
+  hkBool resulta; // [rsp+20h] [rbp-18h] BYREF
+  int v13[5]; // [rsp+24h] [rbp-14h] BYREF
 
-  v5 = result;
-  v6 = this;
   if ( hkpDefaultToiResourceMgr::shouldHandleGivenToi(this, &resulta, event)->m_bool )
   {
-    v7 = v6->m_defaultScratchpadSize;
-    resourcesOut->m_scratchpadSize = v7;
-    v6->m_scratchPadCapacity = v7;
+    m_defaultScratchpadSize = this->m_defaultScratchpadSize;
+    resourcesOut->m_scratchpadSize = m_defaultScratchpadSize;
+    this->m_scratchPadCapacity = m_defaultScratchpadSize;
     v8 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 13);
-    v13 = v6->m_scratchPadCapacity;
-    v9 = (char *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v8 + 24i64))(v8, &v13);
-    v10 = v13;
-    v5->m_enum = 0;
-    v6->m_scratchPadCapacity = v10;
+    v13[0] = this->m_scratchPadCapacity;
+    v9 = (char *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v8 + 24i64))(v8, v13);
+    v10 = v13[0];
+    result->m_enum = HK_SUCCESS;
+    this->m_scratchPadCapacity = v10;
     resourcesOut->m_scratchpad = v9;
     resourcesOut->m_priorityClassMap = hkpDefaultToiResourceMgr::s_priorityClassMap;
     resourcesOut->m_numToiSolverIterations = 3;
@@ -69,27 +70,31 @@ hkResult *__fastcall hkpDefaultToiResourceMgr::beginToiAndSetupResources(hkpDefa
     resourcesOut->m_maxNumActiveEntities = 1000;
     resourcesOut->m_maxNumConstraints = 1000;
     resourcesOut->m_maxNumEntities = 1000;
-    resourcesOut->m_minPriorityToProcess = 3;
+    resourcesOut->m_minPriorityToProcess = PRIORITY_TOI;
   }
   else
   {
-    v5->m_enum = 1;
+    result->m_enum = HK_FAILURE;
   }
-  return v5;
+  return result;
 }
 
 // File Line: 81
 // RVA: 0xDE5BB0
-void __fastcall hkpDefaultToiResourceMgr::endToiAndFreeResources(hkpDefaultToiResourceMgr *this, hkpToiEvent *event, hkArray<hkpToiEvent,hkContainerHeapAllocator> *otherEvents, hkpToiResources *resources)
+void __fastcall hkpDefaultToiResourceMgr::endToiAndFreeResources(
+        hkpDefaultToiResourceMgr *this,
+        hkpToiEvent *event,
+        hkArray<hkpToiEvent,hkContainerHeapAllocator> *otherEvents,
+        hkpToiResources *resources)
 {
-  unsigned int v4; // ebx
-  char *v5; // rdi
-  _QWORD **v6; // rax
+  unsigned int m_scratchPadCapacity; // ebx
+  char *m_scratchpad; // rdi
+  _QWORD **Value; // rax
 
-  v4 = this->m_scratchPadCapacity;
-  v5 = resources->m_scratchpad;
-  v6 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  (*(void (__fastcall **)(_QWORD *, char *, _QWORD))(*v6[13] + 32i64))(v6[13], v5, v4);
+  m_scratchPadCapacity = this->m_scratchPadCapacity;
+  m_scratchpad = resources->m_scratchpad;
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  (*(void (__fastcall **)(_QWORD *, char *, _QWORD))(*Value[13] + 32i64))(Value[13], m_scratchpad, m_scratchPadCapacity);
 }
 
 // File Line: 86
@@ -101,7 +106,10 @@ void __fastcall hkpDefaultToiResourceMgr::~hkpDefaultToiResourceMgr(hkpDefaultTo
 
 // File Line: 91
 // RVA: 0xDE5C00
-hkBool *__fastcall hkpDefaultToiResourceMgr::shouldHandleGivenToi(hkpDefaultToiResourceMgr *this, hkBool *result, hkpToiEvent *event)
+hkBool *__fastcall hkpDefaultToiResourceMgr::shouldHandleGivenToi(
+        hkpDefaultToiResourceMgr *this,
+        hkBool *result,
+        hkpToiEvent *event)
 {
   result->m_bool = 1;
   return result;
@@ -109,14 +117,16 @@ hkBool *__fastcall hkpDefaultToiResourceMgr::shouldHandleGivenToi(hkpDefaultToiR
 
 // File Line: 96
 // RVA: 0xDE5BA0
-signed __int64 __fastcall hkpDefaultToiResourceMgr::resourcesDepleted(hkpDefaultToiResourceMgr *this)
+__int64 __fastcall hkpDefaultToiResourceMgr::resourcesDepleted(hkpDefaultToiResourceMgr *this)
 {
   return 1i64;
 }
 
 // File Line: 105
 // RVA: 0xDE5B90
-__int64 __fastcall hkpDefaultToiResourceMgr::cannotSolve(hkpDefaultToiResourceMgr *this, hkArray<hkpToiResourceMgr::ConstraintViolationInfo,hkContainerHeapAllocator> *violatedConstraints)
+__int64 __fastcall hkpDefaultToiResourceMgr::cannotSolve(
+        hkpDefaultToiResourceMgr *this,
+        hkArray<hkpToiResourceMgr::ConstraintViolationInfo,hkContainerHeapAllocator> *violatedConstraints)
 {
   return 0i64;
 }

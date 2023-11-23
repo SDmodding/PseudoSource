@@ -2,18 +2,16 @@
 // RVA: 0xBB350
 AStringRef **__fastcall APArrayBase<AStringRef>::alloc_array(unsigned int needed)
 {
-  unsigned int v1; // edi
   AStringRef **result; // rax
   AStringRef **v3; // rbx
   AErrMsg *v4; // rax
-  AErrMsg err_msg; // [rsp+40h] [rbp-78h]
-  AErrMsg v6; // [rsp+78h] [rbp-40h]
-  eAErrAction action_p; // [rsp+C0h] [rbp+8h]
+  AErrMsg err_msg; // [rsp+40h] [rbp-78h] BYREF
+  AErrMsg v6; // [rsp+78h] [rbp-40h] BYREF
+  eAErrAction action_p; // [rsp+C0h] [rbp+8h] BYREF
 
-  v1 = needed;
   result = (AStringRef **)AMemory::c_malloc_func(8i64 * needed, "APArrayBase.buffer");
   v3 = result;
-  if ( `APArrayBase<AStringRef>::alloc_array::`3::_test && v1 && !result )
+  if ( `APArrayBase<AStringRef>::alloc_array::`3::_test && needed && !result )
   {
     AErrMsg::AErrMsg(&err_msg, "Unable to allocate memory", AErrLevel_error, 0i64, 0i64);
     AErrMsg::AErrMsg(
@@ -26,9 +24,9 @@ AStringRef **__fastcall APArrayBase<AStringRef>::alloc_array(unsigned int needed
       3u);
     if ( ADebug::resolve_error(v4, &action_p, &`APArrayBase<AStringRef>::alloc_array::`3::_test) )
       __debugbreak();
-    if ( action_p != 3 )
+    if ( action_p != AErrAction_ignore )
       __debugbreak();
-    result = v3;
+    return v3;
   }
   return result;
 }

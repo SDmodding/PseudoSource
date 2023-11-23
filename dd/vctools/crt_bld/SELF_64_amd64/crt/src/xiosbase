@@ -2,43 +2,37 @@
 // RVA: 0x12DE278
 void __fastcall std::ios_base::_Tidy(std::ios_base *this)
 {
-  std::ios_base::_Fnarray *v1; // rbx
-  std::ios_base *v2; // rdi
-  std::ios_base::_Iosarray *v3; // rcx
-  std::ios_base::_Iosarray *v4; // rbx
-  std::ios_base::_Fnarray *v5; // rcx
+  std::ios_base::_Fnarray *i; // rbx
+  std::ios_base::_Iosarray *Arr; // rcx
+  std::ios_base::_Iosarray *Next; // rbx
+  std::ios_base::_Fnarray *Calls; // rcx
   std::ios_base::_Fnarray *v6; // rbx
 
-  v1 = this->_Calls;
-  v2 = this;
-  while ( v1 )
-  {
-    v1->_Pfn(0i64, v2, v1->_Index);
-    v1 = v1->_Next;
-  }
-  v3 = v2->_Arr;
-  if ( v3 )
+  for ( i = this->_Calls; i; i = i->_Next )
+    i->_Pfn(erase_event, this, i->_Index);
+  Arr = this->_Arr;
+  if ( Arr )
   {
     do
     {
-      v4 = v3->_Next;
-      Illusion::ShaderParam::operator delete(v3);
-      v3 = v4;
+      Next = Arr->_Next;
+      Illusion::ShaderParam::operator delete(Arr);
+      Arr = Next;
     }
-    while ( v4 );
+    while ( Next );
   }
-  v5 = v2->_Calls;
-  v2->_Arr = 0i64;
-  if ( v5 )
+  Calls = this->_Calls;
+  this->_Arr = 0i64;
+  if ( Calls )
   {
     do
     {
-      v6 = v5->_Next;
-      Illusion::ShaderParam::operator delete(v5);
-      v5 = v6;
+      v6 = Calls->_Next;
+      Illusion::ShaderParam::operator delete(Calls);
+      Calls = v6;
     }
     while ( v6 );
   }
-  v2->_Calls = 0i64;
+  this->_Calls = 0i64;
 }
 

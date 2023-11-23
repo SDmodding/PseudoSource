@@ -1,125 +1,119 @@
 // File Line: 660
 // RVA: 0xDF2650
-void __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::clear(hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun> *this)
+void __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::clear(
+        hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun> *this)
 {
-  hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun> *v1; // rbx
-  int v2; // eax
-  hkcdStaticMeshTreeBase::Section *v3; // rcx
+  int m_size; // eax
+  hkcdStaticMeshTreeBase::Section *m_data; // rcx
   int v4; // eax
   __int64 v5; // rsi
   int *v6; // rdi
-  int v7; // er8
-  int v8; // eax
-  int v9; // er8
-  int v10; // er8
-  int v11; // er8
-  int v12; // er8
-  int v13; // er8
+  int v7; // r8d
+  int m_capacityAndFlags; // eax
+  int v9; // r8d
+  int v10; // r8d
+  int v11; // r8d
+  int v12; // r8d
+  int v13; // r8d
 
-  v1 = this;
   this->m_nodes.m_size = 0;
   this->m_domain.m_min = (hkVector4f)xmmword_141A712A0;
   this->m_domain.m_max.m_quad = _mm_xor_ps(
                                   (__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 0),
                                   this->m_domain.m_min.m_quad);
-  v2 = this->m_sections.m_size;
-  v3 = this->m_sections.m_data;
-  v4 = v2 - 1;
+  m_size = this->m_sections.m_size;
+  m_data = this->m_sections.m_data;
+  v4 = m_size - 1;
   v5 = v4;
   if ( v4 >= 0 )
   {
-    v6 = &v3->m_nodes.m_capacityAndFlags + 24 * v4;
+    v6 = &m_data->m_nodes.m_capacityAndFlags + 24 * v4;
     do
     {
       v7 = *v6;
       *(v6 - 1) = 0;
       if ( v7 >= 0 )
-        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-          *(void **)(v6 - 3),
-          4 * v7);
+        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, *(void **)(v6 - 3), 4 * v7);
       *(_QWORD *)(v6 - 3) = 0i64;
-      *v6 = 2147483648;
+      *v6 = 0x80000000;
       v6 -= 24;
       --v5;
     }
     while ( v5 >= 0 );
   }
-  v8 = v1->m_sections.m_capacityAndFlags;
-  v1->m_sections.m_size = 0;
-  if ( v8 >= 0 )
+  m_capacityAndFlags = this->m_sections.m_capacityAndFlags;
+  this->m_sections.m_size = 0;
+  if ( m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_sections.m_data,
-      96 * (v8 & 0x3FFFFFFF));
-  v1->m_sections.m_data = 0i64;
-  v1->m_sections.m_capacityAndFlags = 2147483648;
-  v9 = v1->m_primitives.m_capacityAndFlags;
-  v1->m_primitives.m_size = 0;
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_sections.m_data,
+      96 * (m_capacityAndFlags & 0x3FFFFFFF));
+  this->m_sections.m_data = 0i64;
+  this->m_sections.m_capacityAndFlags = 0x80000000;
+  v9 = this->m_primitives.m_capacityAndFlags;
+  this->m_primitives.m_size = 0;
   if ( v9 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_primitives.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_primitives.m_data,
       4 * v9);
-  v1->m_primitives.m_data = 0i64;
-  v1->m_primitives.m_capacityAndFlags = 2147483648;
-  v10 = v1->m_packedVertices.m_capacityAndFlags;
-  v1->m_packedVertices.m_size = 0;
+  this->m_primitives.m_data = 0i64;
+  this->m_primitives.m_capacityAndFlags = 0x80000000;
+  v10 = this->m_packedVertices.m_capacityAndFlags;
+  this->m_packedVertices.m_size = 0;
   if ( v10 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_packedVertices.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_packedVertices.m_data,
       4 * v10);
-  v1->m_packedVertices.m_data = 0i64;
-  v1->m_packedVertices.m_capacityAndFlags = 2147483648;
-  v11 = v1->m_sharedVertices.m_capacityAndFlags;
-  v1->m_sharedVertices.m_size = 0;
+  this->m_packedVertices.m_data = 0i64;
+  this->m_packedVertices.m_capacityAndFlags = 0x80000000;
+  v11 = this->m_sharedVertices.m_capacityAndFlags;
+  this->m_sharedVertices.m_size = 0;
   if ( v11 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_sharedVertices.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_sharedVertices.m_data,
       8 * v11);
-  v1->m_sharedVertices.m_data = 0i64;
-  v1->m_sharedVertices.m_capacityAndFlags = 2147483648;
-  v12 = v1->m_sharedVerticesIndex.m_capacityAndFlags;
-  v1->m_sharedVerticesIndex.m_size = 0;
+  this->m_sharedVertices.m_data = 0i64;
+  this->m_sharedVertices.m_capacityAndFlags = 0x80000000;
+  v12 = this->m_sharedVerticesIndex.m_capacityAndFlags;
+  this->m_sharedVerticesIndex.m_size = 0;
   if ( v12 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_sharedVerticesIndex.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_sharedVerticesIndex.m_data,
       2 * (v12 & 0x3FFFFFFF));
-  v1->m_sharedVerticesIndex.m_data = 0i64;
-  v1->m_sharedVerticesIndex.m_capacityAndFlags = 2147483648;
-  v13 = v1->m_primitiveDataRuns.m_capacityAndFlags;
-  v1->m_primitiveDataRuns.m_size = 0;
+  this->m_sharedVerticesIndex.m_data = 0i64;
+  this->m_sharedVerticesIndex.m_capacityAndFlags = 0x80000000;
+  v13 = this->m_primitiveDataRuns.m_capacityAndFlags;
+  this->m_primitiveDataRuns.m_size = 0;
   if ( v13 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_primitiveDataRuns.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_primitiveDataRuns.m_data,
       8 * v13);
-  v1->m_primitiveDataRuns.m_capacityAndFlags = 2147483648;
-  v1->m_primitiveDataRuns.m_data = 0i64;
+  this->m_primitiveDataRuns.m_capacityAndFlags = 0x80000000;
+  this->m_primitiveDataRuns.m_data = 0i64;
 }
 
 // File Line: 673
 // RVA: 0xDF3B50
-__int64 __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::getMemoryFootPrint(hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun> *this, hkcdStaticMeshTreeBase::MemoryStatistics *stats)
+__int64 __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::getMemoryFootPrint(
+        hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun> *this,
+        hkcdStaticMeshTreeBase::MemoryStatistics *stats)
 {
-  hkcdStaticMeshTreeBase::MemoryStatistics *v2; // r10
-  hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun> *v3; // r9
   int v4; // eax
   __int64 v5; // r8
   int v6; // ecx
   int v7; // edx
   int v8; // ecx
   int v9; // edx
-  int v10; // er8
+  int v10; // r8d
   int v11; // ecx
   int v12; // eax
   __int64 result; // rax
 
-  v2 = stats;
-  v3 = this;
   v4 = 0;
   stats->m_collisionSize = 5 * this->m_nodes.m_size;
   if ( this->m_sections.m_size > 0 )
@@ -128,60 +122,59 @@ __int64 __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned in
     do
     {
       ++v4;
-      ++v5;
-      stats->m_collisionSize += 4 * *((_DWORD *)&this->m_sections.m_data[v5] - 22);
+      stats->m_collisionSize += 4 * this->m_sections.m_data[v5++].m_nodes.m_size;
     }
     while ( v4 < this->m_sections.m_size );
   }
   stats->m_geometrySize = 160;
   v6 = 96 * this->m_sections.m_size + 160;
   stats->m_geometrySize = v6;
-  v7 = v6 + 4 * v3->m_primitives.m_size;
-  v2->m_geometrySize = v7;
-  v8 = v7 + 4 * v3->m_packedVertices.m_size;
-  v2->m_geometrySize = v8;
-  v9 = v8 + 8 * v3->m_sharedVertices.m_size;
-  v2->m_geometrySize = v9;
-  v10 = v9 + 2 * v3->m_sharedVerticesIndex.m_size;
-  v2->m_geometrySize = v10;
-  v11 = 8 * v3->m_primitiveDataRuns.m_size;
-  v12 = v11 + v2->m_collisionSize;
-  v2->m_dataSize = v11;
+  v7 = v6 + 4 * this->m_primitives.m_size;
+  stats->m_geometrySize = v7;
+  v8 = v7 + 4 * this->m_packedVertices.m_size;
+  stats->m_geometrySize = v8;
+  v9 = v8 + 8 * this->m_sharedVertices.m_size;
+  stats->m_geometrySize = v9;
+  v10 = v9 + 2 * this->m_sharedVerticesIndex.m_size;
+  stats->m_geometrySize = v10;
+  v11 = 8 * this->m_primitiveDataRuns.m_size;
+  v12 = v11 + stats->m_collisionSize;
+  stats->m_dataSize = v11;
   result = (unsigned int)(v10 + v12);
-  v2->m_totalSize = result;
+  stats->m_totalSize = result;
   return result;
 }
 
 // File Line: 713
 // RVA: 0xDF3C00
-signed __int64 __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::getNextKey(hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun> *this, unsigned int primitiveKey)
+__int64 __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::getNextKey(
+        hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun> *this,
+        unsigned int primitiveKey)
 {
-  hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun> *v2; // rbx
   __int64 v3; // r8
-  unsigned int v4; // er10
-  int v5; // er9
-  unsigned int v6; // edi
+  unsigned int v4; // r10d
+  int v5; // r9d
+  unsigned int m_data; // edi
   __int64 v7; // rcx
   hkcdStaticMeshTreeBase::Primitive *v8; // rax
   int v9; // edx
   hkcdStaticMeshTreeBase::Primitive *v10; // r11
   int v11; // eax
   int v12; // ecx
-  signed int v13; // eax
+  int v13; // eax
   int v14; // ecx
-  int v15; // eax
-  int v16; // er10
+  signed int v15; // eax
+  unsigned int v16; // r10d
 
-  v2 = this;
   v3 = primitiveKey >> 8;
   v4 = primitiveKey & 1;
   v5 = (unsigned __int8)primitiveKey >> 1;
-  v6 = this->m_sections.m_data[v3].m_primitives.m_data;
-  v7 = v5 + (this->m_sections.m_data[v3].m_primitives.m_data >> 8);
-  v8 = v2->m_primitives.m_data;
+  m_data = this->m_sections.m_data[v3].m_primitives.m_data;
+  v7 = (int)(v5 + (m_data >> 8));
+  v8 = this->m_primitives.m_data;
   v9 = (unsigned __int8)v8[v7].m_indices[1];
   v10 = &v8[v7];
-  v11 = (unsigned __int8)v8[v7].m_indices[3];
+  v11 = (unsigned __int8)v10->m_indices[3];
   v12 = (unsigned __int8)v10->m_indices[2];
   if ( v11 == v12 )
   {
@@ -189,13 +182,13 @@ signed __int64 __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsi
     if ( v12 == v9 )
       v13 = 3;
   }
-  else if ( v10->m_indices[0] != -34 || v9 != 173 || v12 != 222 || v11 != 173 )
+  else if ( v10->m_indices[0] == -34 && v9 == 173 && v12 == 222 && v11 == 173 )
   {
-    v13 = 2;
+    v13 = 0;
   }
   else
   {
-    v13 = 0;
+    v13 = 2;
   }
   v14 = hkcdStaticMeshTreeBase::Primitive::g_typeToNumTriangles[v13];
   v15 = v4;
@@ -204,29 +197,31 @@ signed __int64 __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsi
   {
     ++v5;
     v16 = 0;
-    if ( v5 >= (unsigned __int8)v6 )
+    if ( v5 >= (unsigned __int8)m_data )
     {
       LODWORD(v3) = v3 + 1;
       v5 = 0;
-      if ( (signed int)v3 >= v2->m_sections.m_size )
+      if ( (int)v3 >= this->m_sections.m_size )
         return 0xFFFFFFFFi64;
     }
   }
-  if ( (signed int)v3 < 0 )
+  if ( (int)v3 < 0 )
     return 0xFFFFFFFFi64;
-  return v16 | 2 * ((unsigned int)v5 | ((_DWORD)v3 << 7));
+  return v16 | (2 * (v5 | ((_DWORD)v3 << 7)));
 }
 
 // File Line: 753
 // RVA: 0xDF41E0
-void __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::getTriangleVertices(hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun> *this, unsigned int primitiveKey, hkVector4f *verticesOut)
+void __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::getTriangleVertices(
+        hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun> *this,
+        unsigned int primitiveKey,
+        hkVector4f *verticesOut)
 {
   hkVector4f v3; // xmm3
   __m128 v4; // xmm6
   signed int v5; // esi
-  __int64 v6; // r11
-  int v7; // er10
-  hkVector4f *v8; // rbx
+  __int64 m_data; // r11
+  int v7; // r10d
   __int64 v9; // rax
   hkVector4f v10; // xmm13
   __m128 v11; // xmm5
@@ -236,8 +231,8 @@ void __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,u
   unsigned __int64 *v15; // r14
   unsigned __int16 *v16; // rdx
   hkcdStaticMeshTreeBase::Primitive *v17; // rcx
-  signed __int64 v18; // r8
-  __m128i v19; // xmm7
+  unsigned __int16 *v18; // r8
+  __m128i si128; // xmm7
   __m128i v20; // xmm8
   __m128i v21; // xmm9
   unsigned __int8 *v22; // rdx
@@ -246,7 +241,7 @@ void __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,u
   __m128i v25; // xmm12
   __int64 v26; // rax
   __m128i v27; // xmm2
-  __m128 v28; // xmm4
+  hkVector4f v28; // xmm4
   __int64 v29; // rax
   __m128i v30; // xmm2
   __int64 v31; // rax
@@ -257,26 +252,25 @@ void __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,u
   __m128 v36; // [rsp+20h] [rbp-138h]
   __m128 v37; // [rsp+30h] [rbp-128h]
   __int128 v38; // [rsp+90h] [rbp-C8h]
-  __m128i v39; // [rsp+A0h] [rbp-B8h]
+  __int128 v39; // [rsp+A0h] [rbp-B8h]
 
   v3.m_quad = (__m128)this->m_domain.m_max;
   v4 = 0i64;
   v5 = primitiveKey & 1;
-  LODWORD(v6) = 0;
+  LODWORD(m_data) = 0;
   v7 = (unsigned __int8)primitiveKey >> 1;
-  v8 = verticesOut;
   v9 = primitiveKey >> 8;
   v10.m_quad = (__m128)this->m_domain.m_min;
   v11 = 0i64;
-  _mm_store_si128((__m128i *)&v38, (__m128i)0i64);
-  _mm_store_si128(&v39, (__m128i)0i64);
+  v38 = 0i64;
+  v39 = 0i64;
   v12 = _mm_mul_ps(
           _mm_sub_ps(v3.m_quad, v10.m_quad),
           (__m128)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::setupParameters::`2::invBitScalesBuffer);
   if ( (_DWORD)v9 == -1 )
   {
-    v18 = v39.m128i_i64[1];
-    v15 = (unsigned __int64 *)v39.m128i_i64[0];
+    v18 = (unsigned __int16 *)*((_QWORD *)&v39 + 1);
+    v15 = (unsigned __int64 *)v39;
     v14 = (unsigned int *)*((_QWORD *)&v38 + 1);
     v17 = (hkcdStaticMeshTreeBase::Primitive *)v38;
   }
@@ -285,7 +279,7 @@ void __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,u
     v13 = &this->m_sections.m_data[v9];
     v4 = *(__m128 *)v13->m_codecParms;
     v14 = &this->m_packedVertices.m_data[v13->m_firstPackedVertex];
-    v6 = (unsigned __int8)v13->m_sharedVertices.m_data;
+    m_data = (unsigned __int8)v13->m_sharedVertices.m_data;
     v11 = (__m128)_mm_srli_si128(
                     _mm_slli_si128(
                       (__m128i)_mm_movelh_ps(
@@ -293,12 +287,12 @@ void __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,u
                                  (__m128)LODWORD(v13->m_codecParms[5])),
                       4),
                     4);
-    v15 = &this->m_sharedVertices.m_data[(unsigned __int8)v13->m_page << 16];
+    v15 = &this->m_sharedVertices.m_data[0x10000 * (unsigned __int8)v13->m_page];
     v16 = &this->m_sharedVerticesIndex.m_data[(unsigned __int64)v13->m_sharedVertices.m_data >> 8];
     v17 = &this->m_primitives.m_data[(unsigned __int64)v13->m_primitives.m_data >> 8];
-    v18 = (signed __int64)&v16[-v6];
+    v18 = &v16[-m_data];
   }
-  v19 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskZ);
+  si128 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskZ);
   v20 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskY);
   v21 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskX);
   v22 = (unsigned __int8 *)&v17[v7];
@@ -306,42 +300,42 @@ void __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,u
   v24 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskY);
   v25 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskX);
   v26 = *v22;
-  if ( (signed int)v26 < (signed int)v6 )
+  if ( (int)v26 < (int)m_data )
   {
-    v28 = _mm_add_ps(
-            _mm_mul_ps(
-              _mm_cvtepi32_ps(
-                _mm_or_si128(
-                  _mm_or_si128(
-                    _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32((__m128i)v14[v26], 0x16u), 0), v19),
-                    _mm_and_si128((__m128i)v14[v26], v21)),
-                  _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32((__m128i)v14[v26], 0xBu), 0), v20))),
-              v11),
-            v4);
+    v28.m_quad = _mm_add_ps(
+                   _mm_mul_ps(
+                     _mm_cvtepi32_ps(
+                       _mm_or_si128(
+                         _mm_or_si128(
+                           _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32((__m128i)v14[v26], 0x16u), 0), si128),
+                           _mm_and_si128((__m128i)v14[v26], v21)),
+                         _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32((__m128i)v14[v26], 0xBu), 0), v20))),
+                     v11),
+                   v4);
   }
   else
   {
-    v27 = _mm_loadl_epi64((const __m128i *)&v15[*(unsigned __int16 *)(v18 + 2i64 * *v22)]);
-    v28 = _mm_add_ps(
-            _mm_mul_ps(
-              _mm_cvtepi32_ps(
-                _mm_or_si128(
-                  _mm_or_si128(
-                    _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v27, 0xAu), 85), v23),
-                    _mm_and_si128(v27, v25)),
-                  _mm_and_si128(_mm_srli_epi32(_mm_slli_si128(v27, 2), 5u), v24))),
-              v12),
-            v10.m_quad);
+    v27 = _mm_loadl_epi64((const __m128i *)&v15[v18[*v22]]);
+    v28.m_quad = _mm_add_ps(
+                   _mm_mul_ps(
+                     _mm_cvtepi32_ps(
+                       _mm_or_si128(
+                         _mm_or_si128(
+                           _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v27, 0xAu), 85), v23),
+                           _mm_and_si128(v27, v25)),
+                         _mm_and_si128(_mm_srli_epi32(_mm_slli_si128(v27, 2), 5u), v24))),
+                     v12),
+                   v10.m_quad);
   }
   v29 = v22[1];
-  if ( (signed int)v29 < (signed int)v6 )
+  if ( (int)v29 < (int)m_data )
   {
     v35 = _mm_add_ps(
             _mm_mul_ps(
               _mm_cvtepi32_ps(
                 _mm_or_si128(
                   _mm_or_si128(
-                    _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32((__m128i)v14[v29], 0x16u), 0), v19),
+                    _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32((__m128i)v14[v29], 0x16u), 0), si128),
                     _mm_and_si128((__m128i)v14[v29], v21)),
                   _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32((__m128i)v14[v29], 0xBu), 0), v20))),
               v11),
@@ -349,7 +343,7 @@ void __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,u
   }
   else
   {
-    v30 = _mm_loadl_epi64((const __m128i *)&v15[*(unsigned __int16 *)(v18 + 2i64 * v22[1])]);
+    v30 = _mm_loadl_epi64((const __m128i *)&v15[v18[v22[1]]]);
     v35 = _mm_add_ps(
             _mm_mul_ps(
               _mm_cvtepi32_ps(
@@ -362,14 +356,14 @@ void __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,u
             v10.m_quad);
   }
   v31 = v22[2];
-  if ( (signed int)v31 < (signed int)v6 )
+  if ( (int)v31 < (int)m_data )
   {
     v36 = _mm_add_ps(
             _mm_mul_ps(
               _mm_cvtepi32_ps(
                 _mm_or_si128(
                   _mm_or_si128(
-                    _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32((__m128i)v14[v31], 0x16u), 0), v19),
+                    _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32((__m128i)v14[v31], 0x16u), 0), si128),
                     _mm_and_si128((__m128i)v14[v31], v21)),
                   _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32((__m128i)v14[v31], 0xBu), 0), v20))),
               v11),
@@ -377,7 +371,7 @@ void __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,u
   }
   else
   {
-    v32 = _mm_loadl_epi64((const __m128i *)&v15[*(unsigned __int16 *)(v18 + 2i64 * v22[2])]);
+    v32 = _mm_loadl_epi64((const __m128i *)&v15[v18[v22[2]]]);
     v36 = _mm_add_ps(
             _mm_mul_ps(
               _mm_cvtepi32_ps(
@@ -390,14 +384,14 @@ void __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,u
             v10.m_quad);
   }
   v33 = v22[3];
-  if ( (signed int)v33 < (signed int)v6 )
+  if ( (int)v33 < (int)m_data )
   {
     v37 = _mm_add_ps(
             _mm_mul_ps(
               _mm_cvtepi32_ps(
                 _mm_or_si128(
                   _mm_or_si128(
-                    _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32((__m128i)v14[v33], 0x16u), 0), v19),
+                    _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32((__m128i)v14[v33], 0x16u), 0), si128),
                     _mm_and_si128((__m128i)v14[v33], v21)),
                   _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32((__m128i)v14[v33], 0xBu), 0), v20))),
               v11),
@@ -405,7 +399,7 @@ void __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,u
   }
   else
   {
-    v34 = _mm_loadl_epi64((const __m128i *)&v15[*(unsigned __int16 *)(v18 + 2i64 * v22[3])]);
+    v34 = _mm_loadl_epi64((const __m128i *)&v15[v18[v22[3]]]);
     v37 = _mm_add_ps(
             _mm_mul_ps(
               _mm_cvtepi32_ps(
@@ -417,34 +411,32 @@ void __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,u
               v12),
             v10.m_quad);
   }
-  *v8 = (hkVector4f)v28;
-  v8[1] = *((hkVector4f *)&v35 + v5);
-  v8[2] = *((hkVector4f *)&v36 + v5);
-}
-  *v8 = (hkVector4f)v28;
-  v8[1] = *((hkVector4f *)&v35 + v5);
-  v8[2] = *((hkVector4f *)&v36 + v5);
+  *verticesOut = (hkVector4f)v28.m_quad;
+  verticesOut[1] = *((hkVector4f *)&v35 + v5);
+  verticesOut[2] = *((hkVector4f *)&v36 + v5);
 }
 
 // File Line: 772
 // RVA: 0xDF3DE0
-__int64 __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::getQuadVertices(hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun> *this, unsigned int primitiveKey, hkVector4f *verticesOut)
+__int64 __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::getQuadVertices(
+        hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun> *this,
+        unsigned int primitiveKey,
+        hkVector4f *verticesOut)
 {
   hkVector4f v3; // xmm6
-  int v4; // er10
+  int v4; // r10d
   __m128 v5; // xmm4
   __int64 v6; // rax
-  hkVector4f *v7; // rdi
   __m128 v8; // xmm3
   __m128 v9; // xmm5
-  int v10; // er11
-  __int64 v11; // rbx
+  int v10; // r11d
+  __int64 m_data; // rbx
   hkcdStaticMeshTreeBase::Section *v12; // r8
   unsigned int *v13; // rbp
   unsigned __int64 *v14; // r14
   unsigned __int16 *v15; // rdx
   hkcdStaticMeshTreeBase::Primitive *v16; // rcx
-  signed __int64 v17; // r8
+  unsigned __int16 *v17; // r8
   unsigned __int8 *v18; // rdx
   __int64 v19; // rax
   __m128i v20; // xmm2
@@ -454,35 +446,30 @@ __int64 __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned in
   __m128i v24; // xmm2
   __int64 v25; // rax
   __m128i v26; // xmm2
-  __int128 v28; // [rsp+50h] [rbp-58h]
-  __m128i v29; // [rsp+60h] [rbp-48h]
 
   v3.m_quad = (__m128)this->m_domain.m_min;
   v4 = 0;
   v5 = 0i64;
   v6 = primitiveKey >> 8;
-  v7 = verticesOut;
   v8 = _mm_mul_ps(
          _mm_sub_ps(this->m_domain.m_max.m_quad, v3.m_quad),
          (__m128)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::setupParameters::`2::invBitScalesBuffer);
   v9 = 0i64;
-  _mm_store_si128((__m128i *)&v28, (__m128i)0i64);
   v10 = (unsigned __int8)primitiveKey >> 1;
-  LODWORD(v11) = 0;
-  _mm_store_si128(&v29, (__m128i)0i64);
+  LODWORD(m_data) = 0;
   if ( (_DWORD)v6 == -1 )
   {
-    v17 = v29.m128i_i64[1];
-    v14 = (unsigned __int64 *)v29.m128i_i64[0];
-    v13 = (unsigned int *)*((_QWORD *)&v28 + 1);
-    v16 = (hkcdStaticMeshTreeBase::Primitive *)v28;
+    v17 = 0i64;
+    v14 = 0i64;
+    v13 = 0i64;
+    v16 = 0i64;
   }
   else
   {
     v12 = &this->m_sections.m_data[v6];
     v5 = *(__m128 *)v12->m_codecParms;
     v13 = &this->m_packedVertices.m_data[v12->m_firstPackedVertex];
-    v11 = (unsigned __int8)v12->m_sharedVertices.m_data;
+    m_data = (unsigned __int8)v12->m_sharedVertices.m_data;
     v9 = (__m128)_mm_srli_si128(
                    _mm_slli_si128(
                      (__m128i)_mm_movelh_ps(
@@ -490,172 +477,171 @@ __int64 __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned in
                                 (__m128)LODWORD(v12->m_codecParms[5])),
                      4),
                    4);
-    v14 = &this->m_sharedVertices.m_data[(unsigned __int8)v12->m_page << 16];
+    v14 = &this->m_sharedVertices.m_data[0x10000 * (unsigned __int8)v12->m_page];
     v15 = &this->m_sharedVerticesIndex.m_data[(unsigned __int64)v12->m_sharedVertices.m_data >> 8];
     v16 = &this->m_primitives.m_data[(unsigned __int64)v12->m_primitives.m_data >> 8];
-    v17 = (signed __int64)&v15[-v11];
+    v17 = &v15[-m_data];
   }
   v18 = (unsigned __int8 *)&v16[v10];
-  v19 = (unsigned __int8)v16[v10].m_indices[0];
-  if ( (signed int)v19 < (signed int)v11 )
+  v19 = *v18;
+  if ( (int)v19 < (int)m_data )
   {
-    v7->m_quad = _mm_add_ps(
-                   _mm_mul_ps(
-                     _mm_cvtepi32_ps(
-                       _mm_or_si128(
-                         _mm_or_si128(
-                           _mm_and_si128(
-                             _mm_shuffle_epi32(_mm_srli_epi32((__m128i)v13[v19], 0x16u), 0),
-                             (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskZ),
-                           _mm_and_si128(
-                             (__m128i)v13[v19],
-                             (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskX)),
-                         _mm_and_si128(
-                           _mm_shuffle_epi32(_mm_srli_epi32((__m128i)v13[v19], 0xBu), 0),
-                           (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskY))),
-                     v9),
-                   v5);
+    verticesOut->m_quad = _mm_add_ps(
+                            _mm_mul_ps(
+                              _mm_cvtepi32_ps(
+                                _mm_or_si128(
+                                  _mm_or_si128(
+                                    _mm_and_si128(
+                                      _mm_shuffle_epi32(_mm_srli_epi32((__m128i)v13[v19], 0x16u), 0),
+                                      (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskZ),
+                                    _mm_and_si128(
+                                      (__m128i)v13[v19],
+                                      (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskX)),
+                                  _mm_and_si128(
+                                    _mm_shuffle_epi32(_mm_srli_epi32((__m128i)v13[v19], 0xBu), 0),
+                                    (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskY))),
+                              v9),
+                            v5);
   }
   else
   {
-    v20 = _mm_loadl_epi64((const __m128i *)&v14[*(unsigned __int16 *)(v17 + 2i64
-                                                                          * (unsigned __int8)v16[v10].m_indices[0])]);
-    v7->m_quad = _mm_add_ps(
-                   _mm_mul_ps(
-                     _mm_cvtepi32_ps(
-                       _mm_or_si128(
-                         _mm_or_si128(
-                           _mm_and_si128(
-                             _mm_shuffle_epi32(_mm_srli_epi32(v20, 0xAu), 85),
-                             (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskZ),
-                           _mm_and_si128(
-                             v20,
-                             (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskX)),
-                         _mm_and_si128(
-                           _mm_srli_epi32(_mm_slli_si128(v20, 2), 5u),
-                           (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskY))),
-                     v8),
-                   v3.m_quad);
+    v20 = _mm_loadl_epi64((const __m128i *)&v14[v17[*v18]]);
+    verticesOut->m_quad = _mm_add_ps(
+                            _mm_mul_ps(
+                              _mm_cvtepi32_ps(
+                                _mm_or_si128(
+                                  _mm_or_si128(
+                                    _mm_and_si128(
+                                      _mm_shuffle_epi32(_mm_srli_epi32(v20, 0xAu), 85),
+                                      (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskZ),
+                                    _mm_and_si128(
+                                      v20,
+                                      (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskX)),
+                                  _mm_and_si128(
+                                    _mm_srli_epi32(_mm_slli_si128(v20, 2), 5u),
+                                    (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskY))),
+                              v8),
+                            v3.m_quad);
   }
   v21 = v18[1];
-  if ( (signed int)v21 < (signed int)v11 )
+  if ( (int)v21 < (int)m_data )
   {
-    v7[1].m_quad = _mm_add_ps(
-                     _mm_mul_ps(
-                       _mm_cvtepi32_ps(
-                         _mm_or_si128(
-                           _mm_or_si128(
-                             _mm_and_si128(
-                               _mm_shuffle_epi32(_mm_srli_epi32((__m128i)v13[v21], 0x16u), 0),
-                               (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskZ),
-                             _mm_and_si128(
-                               (__m128i)v13[v21],
-                               (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskX)),
-                           _mm_and_si128(
-                             _mm_shuffle_epi32(_mm_srli_epi32((__m128i)v13[v21], 0xBu), 0),
-                             (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskY))),
-                       v9),
-                     v5);
+    verticesOut[1].m_quad = _mm_add_ps(
+                              _mm_mul_ps(
+                                _mm_cvtepi32_ps(
+                                  _mm_or_si128(
+                                    _mm_or_si128(
+                                      _mm_and_si128(
+                                        _mm_shuffle_epi32(_mm_srli_epi32((__m128i)v13[v21], 0x16u), 0),
+                                        (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskZ),
+                                      _mm_and_si128(
+                                        (__m128i)v13[v21],
+                                        (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskX)),
+                                    _mm_and_si128(
+                                      _mm_shuffle_epi32(_mm_srli_epi32((__m128i)v13[v21], 0xBu), 0),
+                                      (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskY))),
+                                v9),
+                              v5);
   }
   else
   {
-    v22 = _mm_loadl_epi64((const __m128i *)&v14[*(unsigned __int16 *)(v17 + 2i64 * v18[1])]);
-    v7[1].m_quad = _mm_add_ps(
-                     _mm_mul_ps(
-                       _mm_cvtepi32_ps(
-                         _mm_or_si128(
-                           _mm_or_si128(
-                             _mm_and_si128(
-                               _mm_shuffle_epi32(_mm_srli_epi32(v22, 0xAu), 85),
-                               (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskZ),
-                             _mm_and_si128(
-                               v22,
-                               (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskX)),
-                           _mm_and_si128(
-                             _mm_srli_epi32(_mm_slli_si128(v22, 2), 5u),
-                             (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskY))),
-                       v8),
-                     v3.m_quad);
+    v22 = _mm_loadl_epi64((const __m128i *)&v14[v17[v18[1]]]);
+    verticesOut[1].m_quad = _mm_add_ps(
+                              _mm_mul_ps(
+                                _mm_cvtepi32_ps(
+                                  _mm_or_si128(
+                                    _mm_or_si128(
+                                      _mm_and_si128(
+                                        _mm_shuffle_epi32(_mm_srli_epi32(v22, 0xAu), 85),
+                                        (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskZ),
+                                      _mm_and_si128(
+                                        v22,
+                                        (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskX)),
+                                    _mm_and_si128(
+                                      _mm_srli_epi32(_mm_slli_si128(v22, 2), 5u),
+                                      (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskY))),
+                                v8),
+                              v3.m_quad);
   }
   v23 = v18[2];
-  if ( (signed int)v23 < (signed int)v11 )
+  if ( (int)v23 < (int)m_data )
   {
-    v7[2].m_quad = _mm_add_ps(
-                     _mm_mul_ps(
-                       _mm_cvtepi32_ps(
-                         _mm_or_si128(
-                           _mm_or_si128(
-                             _mm_and_si128(
-                               _mm_shuffle_epi32(_mm_srli_epi32((__m128i)v13[v23], 0x16u), 0),
-                               (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskZ),
-                             _mm_and_si128(
-                               (__m128i)v13[v23],
-                               (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskX)),
-                           _mm_and_si128(
-                             _mm_shuffle_epi32(_mm_srli_epi32((__m128i)v13[v23], 0xBu), 0),
-                             (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskY))),
-                       v9),
-                     v5);
+    verticesOut[2].m_quad = _mm_add_ps(
+                              _mm_mul_ps(
+                                _mm_cvtepi32_ps(
+                                  _mm_or_si128(
+                                    _mm_or_si128(
+                                      _mm_and_si128(
+                                        _mm_shuffle_epi32(_mm_srli_epi32((__m128i)v13[v23], 0x16u), 0),
+                                        (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskZ),
+                                      _mm_and_si128(
+                                        (__m128i)v13[v23],
+                                        (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskX)),
+                                    _mm_and_si128(
+                                      _mm_shuffle_epi32(_mm_srli_epi32((__m128i)v13[v23], 0xBu), 0),
+                                      (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskY))),
+                                v9),
+                              v5);
   }
   else
   {
-    v24 = _mm_loadl_epi64((const __m128i *)&v14[*(unsigned __int16 *)(v17 + 2i64 * v18[2])]);
-    v7[2].m_quad = _mm_add_ps(
-                     _mm_mul_ps(
-                       _mm_cvtepi32_ps(
-                         _mm_or_si128(
-                           _mm_or_si128(
-                             _mm_and_si128(
-                               _mm_shuffle_epi32(_mm_srli_epi32(v24, 0xAu), 85),
-                               (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskZ),
-                             _mm_and_si128(
-                               v24,
-                               (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskX)),
-                           _mm_and_si128(
-                             _mm_srli_epi32(_mm_slli_si128(v24, 2), 5u),
-                             (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskY))),
-                       v8),
-                     v3.m_quad);
+    v24 = _mm_loadl_epi64((const __m128i *)&v14[v17[v18[2]]]);
+    verticesOut[2].m_quad = _mm_add_ps(
+                              _mm_mul_ps(
+                                _mm_cvtepi32_ps(
+                                  _mm_or_si128(
+                                    _mm_or_si128(
+                                      _mm_and_si128(
+                                        _mm_shuffle_epi32(_mm_srli_epi32(v24, 0xAu), 85),
+                                        (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskZ),
+                                      _mm_and_si128(
+                                        v24,
+                                        (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskX)),
+                                    _mm_and_si128(
+                                      _mm_srli_epi32(_mm_slli_si128(v24, 2), 5u),
+                                      (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskY))),
+                                v8),
+                              v3.m_quad);
   }
   v25 = v18[3];
-  if ( (signed int)v25 < (signed int)v11 )
+  if ( (int)v25 < (int)m_data )
   {
-    v7[3].m_quad = _mm_add_ps(
-                     _mm_mul_ps(
-                       _mm_cvtepi32_ps(
-                         _mm_or_si128(
-                           _mm_or_si128(
-                             _mm_and_si128(
-                               _mm_shuffle_epi32(_mm_srli_epi32((__m128i)v13[v25], 0x16u), 0),
-                               (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskZ),
-                             _mm_and_si128(
-                               (__m128i)v13[v25],
-                               (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskX)),
-                           _mm_and_si128(
-                             _mm_shuffle_epi32(_mm_srli_epi32((__m128i)v13[v25], 0xBu), 0),
-                             (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskY))),
-                       v9),
-                     v5);
+    verticesOut[3].m_quad = _mm_add_ps(
+                              _mm_mul_ps(
+                                _mm_cvtepi32_ps(
+                                  _mm_or_si128(
+                                    _mm_or_si128(
+                                      _mm_and_si128(
+                                        _mm_shuffle_epi32(_mm_srli_epi32((__m128i)v13[v25], 0x16u), 0),
+                                        (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskZ),
+                                      _mm_and_si128(
+                                        (__m128i)v13[v25],
+                                        (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskX)),
+                                    _mm_and_si128(
+                                      _mm_shuffle_epi32(_mm_srli_epi32((__m128i)v13[v25], 0xBu), 0),
+                                      (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskY))),
+                                v9),
+                              v5);
   }
   else
   {
-    v26 = _mm_loadl_epi64((const __m128i *)&v14[*(unsigned __int16 *)(v17 + 2i64 * v18[3])]);
-    v7[3].m_quad = _mm_add_ps(
-                     _mm_mul_ps(
-                       _mm_cvtepi32_ps(
-                         _mm_or_si128(
-                           _mm_or_si128(
-                             _mm_and_si128(
-                               _mm_shuffle_epi32(_mm_srli_epi32(v26, 0xAu), 85),
-                               (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskZ),
-                             _mm_and_si128(
-                               v26,
-                               (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskX)),
-                           _mm_and_si128(
-                             _mm_srli_epi32(_mm_slli_si128(v26, 2), 5u),
-                             (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskY))),
-                       v8),
-                     v3.m_quad);
+    v26 = _mm_loadl_epi64((const __m128i *)&v14[v17[v18[3]]]);
+    verticesOut[3].m_quad = _mm_add_ps(
+                              _mm_mul_ps(
+                                _mm_cvtepi32_ps(
+                                  _mm_or_si128(
+                                    _mm_or_si128(
+                                      _mm_and_si128(
+                                        _mm_shuffle_epi32(_mm_srli_epi32(v26, 0xAu), 85),
+                                        (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskZ),
+                                      _mm_and_si128(
+                                        v26,
+                                        (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskX)),
+                                    _mm_and_si128(
+                                      _mm_srli_epi32(_mm_slli_si128(v26, 2), 5u),
+                                      (__m128i)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskY))),
+                                v8),
+                              v3.m_quad);
   }
   LOBYTE(v4) = v18[2] != v18[3];
   return (unsigned int)(v4 + 1);
@@ -663,20 +649,23 @@ __int64 __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned in
 
 // File Line: 788
 // RVA: 0xE09E30
-__int64 __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::getPrimitiveData(hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun> *this, unsigned int primitiveKey)
+__int64 __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::getPrimitiveData(
+        hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun> *this,
+        unsigned int primitiveKey)
 {
   __int64 v2; // rax
-  int v3; // er11
+  int v3; // r11d
   hkcdStaticMeshTreeBase::Section *v4; // rdx
   hkpBvCompressedMeshShapeTreeDataRun *v5; // rbx
-  int v6; // er8
+  int v6; // r8d
   int v7; // edx
   int i; // ecx
   int v9; // ecx
-  int v10; // er9
-  int v11; // er9
-  unsigned __int8 *v12; // rdx
-  int v13; // er8
+  hkpBvCompressedMeshShapeTreeDataRun *v10; // r10
+  int v11; // r9d
+  int v12; // r9d
+  unsigned __int8 *v13; // rdx
+  int v14; // r8d
 
   v2 = primitiveKey >> 8;
   v3 = (unsigned __int8)primitiveKey >> 1;
@@ -692,254 +681,254 @@ __int64 __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned in
   for ( i = v7 + 1; i > 4; i = v7 - v6 + 1 )
   {
     v9 = (v7 + v6) >> 1;
-    v10 = v3 - (unsigned __int8)v5[v9].m_index;
-    if ( v10 < 0 )
+    v10 = &v5[v9];
+    v11 = v3 - (unsigned __int8)v10->m_index;
+    if ( v11 < 0 )
     {
       v7 = (v7 + v6) >> 1;
     }
     else
     {
-      if ( v10 < (unsigned __int8)v5[v9].m_count )
+      if ( v11 < (unsigned __int8)v10->m_count )
         return v5[v9].m_value;
       v6 = v9 + 1;
     }
   }
-  v11 = 0;
-  v12 = (unsigned __int8 *)&v5[v6];
+  v12 = 0;
+  v13 = (unsigned __int8 *)&v5[v6];
   if ( i <= 0 )
     return (unsigned int)MEMORY[0];
   while ( 1 )
   {
-    v13 = v3 - v12[4];
-    if ( v13 >= 0 && v13 < v12[5] )
+    v14 = v3 - v13[4];
+    if ( v14 >= 0 && v14 < v13[5] )
       break;
-    ++v11;
-    v12 += 8;
-    if ( v11 >= i )
+    ++v12;
+    v13 += 8;
+    if ( v12 >= i )
       return (unsigned int)MEMORY[0];
   }
-  return *(unsigned int *)v12;
+  return *(unsigned int *)v13;
 }
 
 // File Line: 1250
 // RVA: 0xE069A0
-void __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::CustomGeometryConverter::appendCustomPrimitiveToGeometry(hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::CustomGeometryConverter *this, hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::Decoder *decoder, int primitiveIndex, hkGeometry *geometry)
+void __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::CustomGeometryConverter::appendCustomPrimitiveToGeometry(
+        hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::CustomGeometryConverter *this,
+        hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::Decoder *decoder,
+        int primitiveIndex,
+        hkGeometry *geometry)
 {
-  int v4; // ebp
-  signed __int64 v5; // rbx
-  hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::Decoder *v6; // rsi
+  __int64 v5; // rbx
   hkcdStaticMeshTreeBase::Primitive *v7; // rcx
   int *v8; // rdi
-  hkGeometry *v9; // r15
   int v10; // edx
-  int v11; // edx
-  hkcdStaticTree::Tree<hkcdStaticTree::DynamicStorage4> *v12; // rcx
-  hkcdStaticMeshTreeBase::Section *v13; // r10
-  signed int v14; // er9
-  __int64 v15; // rdx
-  __int64 v16; // r8
-  char *v17; // rcx
-  const unsigned __int16 *v18; // rcx
-  __int64 v19; // rdx
-  int v20; // er14
-  unsigned __int16 v21; // r10
-  unsigned int v22; // er9
-  int v23; // er9
-  int v24; // ebx
+  hkcdStaticMeshTreeBase::Section *m_section; // rcx
+  hkcdStaticMeshTreeBase::Section *v12; // r10
+  int v13; // r9d
+  __int64 v14; // rdx
+  __int64 m_size; // r8
+  char *p_m_data; // rcx
+  const unsigned __int16 *m_sharedVerticesIndex; // rcx
+  __int64 v18; // rdx
+  int v19; // r14d
+  unsigned __int16 v20; // r10
+  int v21; // r9d
+  int v22; // r9d
+  int v23; // ebx
+  hkOstream *v24; // rax
   hkOstream *v25; // rax
-  hkOstream *v26; // rax
-  hkVector4f v27; // xmm5
-  int v28; // er9
-  signed __int64 v29; // r11
-  __m128 v30; // xmm4
-  hkVector4f *v31; // r10
-  unsigned int v32; // ecx
-  __m128i v33; // xmm0
-  __m128i v34; // xmm2
-  __m128i v35; // xmm3
-  int v36; // ecx
-  int v37; // eax
-  unsigned int v38; // eax
-  hkVector4f *v39; // r10
-  signed __int64 v40; // r8
-  unsigned int v41; // ecx
-  unsigned int v42; // eax
-  hkVector4f v43; // xmm4
-  int v44; // edx
-  signed __int64 v45; // r10
-  __m128i v46; // xmm5
-  __m128i v47; // xmm6
-  __m128i v48; // xmm7
-  __m128 v49; // xmm3
-  hkVector4f *v50; // r9
-  __m128i v51; // xmm1
-  int v52; // eax
-  __m128i v53; // xmm1
-  hkVector4f *v54; // r9
-  signed __int64 v55; // r8
-  int v56; // eax
-  unsigned int v57; // ecx
-  __m128i v58; // xmm1
-  __m128i v59; // xmm3
-  __m128i v60; // xmm4
-  __m128i v61; // xmm5
-  signed __int64 v62; // r10
-  int v63; // ecx
-  __m128 v64; // xmm6
-  __m128 v65; // xmm7
-  hkVector4f *v66; // rdx
-  const __m128i *v67; // r9
-  unsigned int v68; // eax
-  __int64 v69; // r11
+  hkVector4f v26; // xmm5
+  int v27; // r9d
+  const unsigned __int64 *v28; // r11
+  __m128 v29; // xmm4
+  hkVector4f *v30; // r10
+  unsigned int v31; // eax
+  __m128i v32; // xmm0
+  __m128i v33; // xmm2
+  __m128i v34; // xmm3
+  int v35; // ecx
+  int v36; // eax
+  unsigned int v37; // eax
+  hkVector4f *v38; // r10
+  __int64 v39; // r8
+  unsigned int v40; // ecx
+  unsigned int v41; // eax
+  hkVector4f v42; // xmm4
+  int v43; // edx
+  const unsigned __int64 *v44; // r10
+  __m128i si128; // xmm5
+  __m128i v46; // xmm6
+  __m128i v47; // xmm7
+  __m128 v48; // xmm3
+  hkVector4f *v49; // r9
+  __m128i v50; // xmm1
+  int v51; // eax
+  __m128i v52; // xmm0
+  hkVector4f *v53; // r9
+  __int64 v54; // r8
+  int v55; // eax
+  unsigned int v56; // ecx
+  __m128i v57; // xmm0
+  __m128i v58; // xmm3
+  __m128i v59; // xmm4
+  __m128i v60; // xmm5
+  const unsigned __int64 *v61; // r10
+  int v62; // ecx
+  hkVector4f v63; // xmm6
+  hkVector4f v64; // xmm7
+  hkVector4f *v65; // rdx
+  const __m128i *v66; // r9
+  unsigned int v67; // eax
+  __int64 v68; // r11
+  __m128i v69; // xmm2
   __m128i v70; // xmm2
-  __m128i v71; // xmm2
-  __m128 v72; // xmm6
-  __m128 v73; // xmm7
-  hkVector4f *v74; // rdx
-  signed __int64 v75; // r8
-  __int64 v76; // rax
-  __m128i v77; // xmm2
-  hkpBvCompressedMeshShapeTreeDataRun *v78; // r11
-  int v79; // edx
-  int v80; // er9
-  int i; // eax
-  int v82; // ecx
-  int v83; // er8
+  hkVector4f v71; // xmm6
+  hkVector4f v72; // xmm7
+  hkVector4f *v73; // rdx
+  __int64 v74; // r8
+  __int64 v75; // rax
+  __m128i v76; // xmm2
+  hkpBvCompressedMeshShapeTreeDataRun *m_primitiveDataRuns; // r11
+  int v78; // edx
+  int v79; // r9d
+  int m_data_low; // eax
+  int v81; // ecx
+  hkpBvCompressedMeshShapeTreeDataRun *v82; // r10
+  int v83; // r8d
   __int64 v84; // rcx
-  int v85; // er9
-  signed __int64 v86; // rdx
-  int v87; // er8
-  hkAabb aabb; // [rsp+20h] [rbp-1258h]
-  char buf; // [rsp+40h] [rbp-1238h]
-  hkVector4f vertices[256]; // [rsp+240h] [rbp-1038h]
+  int v85; // r9d
+  hkpBvCompressedMeshShapeTreeDataRun *v86; // rdx
+  int v87; // r8d
+  hkAabb aabb; // [rsp+20h] [rbp-1258h] BYREF
+  char buf[512]; // [rsp+40h] [rbp-1238h] BYREF
+  hkVector4f vertices[256]; // [rsp+240h] [rbp-1038h] BYREF
 
-  v4 = primitiveIndex;
   v5 = primitiveIndex;
-  v6 = decoder;
-  v7 = &decoder->m_primitives[primitiveIndex];
+  v7 = &decoder->m_primitives[v5];
   v8 = 0i64;
-  v9 = geometry;
-  v10 = (unsigned __int8)v7->m_indices[2];
-  if ( (unsigned __int8)v7->m_indices[3] != v10 || v10 != (unsigned __int8)v7->m_indices[1] )
+  if ( __PAIR64__((unsigned __int8)v7->m_indices[3], (unsigned __int8)v7->m_indices[2]) == __PAIR64__(
+                                                                                             (unsigned __int8)v7->m_indices[2],
+                                                                                             (unsigned __int8)v7->m_indices[1]) )
   {
-    v13 = v6->m_section;
-    v14 = 0;
-    v15 = 0i64;
-    v16 = v13->m_nodes.m_size;
-    if ( v16 <= 0 )
-    {
-LABEL_9:
-      v14 = -1;
-    }
-    else
-    {
-      v17 = &v13->m_nodes.m_data->m_data;
-      while ( *v17 & 1 || v4 != (unsigned int)(unsigned __int8)*v17 >> 1 )
-      {
-        ++v15;
-        ++v14;
-        v17 += 4;
-        if ( v15 >= v16 )
-          goto LABEL_9;
-      }
-    }
-    v11 = v14;
-    v12 = (hkcdStaticTree::Tree<hkcdStaticTree::DynamicStorage4> *)&v6->m_section->m_nodes;
+    v10 = (unsigned __int8)v7->m_indices[1];
+    m_section = decoder->m_section;
   }
   else
   {
-    v11 = (unsigned __int8)v7->m_indices[1];
-    v12 = (hkcdStaticTree::Tree<hkcdStaticTree::DynamicStorage4> *)&v6->m_section->m_nodes;
-  }
-  hkcdStaticTree::Tree<hkcdStaticTree::DynamicStorage4>::getNodeAabb(v12, v11, &aabb);
-  v18 = v6->m_sharedVerticesIndex;
-  v19 = (unsigned __int8)v6->m_primitives[v5].m_indices[0];
-  v20 = 256;
-  v21 = v18[v19 + 1];
-  if ( (signed int)((unsigned int)v18[v19] >> 8) < 256 )
-    v20 = (unsigned int)v18[v19] >> 8;
-  v22 = ((unsigned int)v18[v19] >> 4) & 3;
-  if ( v22 )
-  {
-    v23 = v22 - 1;
-    if ( v23 )
+    v12 = decoder->m_section;
+    v13 = 0;
+    v14 = 0i64;
+    m_size = v12->m_nodes.m_size;
+    if ( m_size <= 0 )
     {
-      if ( v23 == 1 )
+LABEL_8:
+      v13 = -1;
+    }
+    else
+    {
+      p_m_data = &v12->m_nodes.m_data->m_data;
+      while ( (*p_m_data & 1) != 0 || primitiveIndex != (unsigned __int8)*p_m_data >> 1 )
       {
-        v27.m_quad = (__m128)aabb.m_min;
-        v28 = 0;
-        v29 = (signed __int64)&v6->m_sharedVertices[v21];
-        v30 = _mm_mul_ps(
+        ++v14;
+        ++v13;
+        p_m_data += 4;
+        if ( v14 >= m_size )
+          goto LABEL_8;
+      }
+    }
+    v10 = v13;
+    m_section = decoder->m_section;
+  }
+  hkcdStaticTree::Tree<hkcdStaticTree::DynamicStorage4>::getNodeAabb(m_section, v10, &aabb);
+  m_sharedVerticesIndex = decoder->m_sharedVerticesIndex;
+  v18 = (unsigned __int8)decoder->m_primitives[v5].m_indices[0];
+  v19 = 256;
+  v20 = m_sharedVerticesIndex[v18 + 1];
+  if ( HIBYTE(m_sharedVerticesIndex[v18]) < 0x100u )
+    v19 = HIBYTE(m_sharedVerticesIndex[v18]);
+  v21 = (m_sharedVerticesIndex[v18] >> 4) & 3;
+  if ( v21 )
+  {
+    v22 = v21 - 1;
+    if ( v22 )
+    {
+      if ( v22 == 1 )
+      {
+        v26.m_quad = (__m128)aabb.m_min;
+        v27 = 0;
+        v28 = &decoder->m_sharedVertices[v20];
+        v29 = _mm_mul_ps(
                 _mm_sub_ps(aabb.m_max.m_quad, aabb.m_min.m_quad),
                 (__m128)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned short,5,5>::setupParameters::`2::invBitScalesBuffer);
-        if ( v20 - 1 > 0 )
+        if ( v19 - 1 > 0 )
         {
-          v31 = vertices;
+          v30 = vertices;
           do
           {
-            v31 += 2;
-            v32 = *(unsigned __int16 *)(v29 + 2i64 * (signed int)((v28 & 0xFFFFFFFC) - (v28 & 3) + 3));
-            v33 = _mm_cvtsi32_si128(v32 >> 10);
-            v34 = _mm_cvtsi32_si128((v32 >> 5) & 0x1F);
-            v35 = _mm_cvtsi32_si128(*(_WORD *)(v29 + 2i64 * (signed int)((v28 & 0xFFFFFFFC) - (v28 & 3) + 3)) & 0x1F);
-            v36 = v28 + 1;
-            v37 = (v28 + 1) & 3;
-            v28 += 2;
-            v31[-2].m_quad = _mm_add_ps(
+            v30 += 2;
+            v31 = *((unsigned __int16 *)v28 + (int)((v27 & 0xFFFFFFFC) - (v27 & 3) + 3));
+            v32 = _mm_cvtsi32_si128(v31 >> 10);
+            v33 = _mm_cvtsi32_si128((v31 >> 5) & 0x1F);
+            v34 = _mm_cvtsi32_si128(*((_WORD *)v28 + (int)((v27 & 0xFFFFFFFC) - (v27 & 3) + 3)) & 0x1F);
+            v35 = v27 + 1;
+            v36 = (v27 + 1) & 3;
+            v27 += 2;
+            v30[-2].m_quad = _mm_add_ps(
                                _mm_mul_ps(
                                  _mm_cvtepi32_ps(
                                    _mm_unpacklo_epi32(
-                                     _mm_unpacklo_epi32(v35, v33),
-                                     _mm_unpacklo_epi32(v34, _mm_cvtsi32_si128(0)))),
-                                 v30),
-                               v27.m_quad);
-            v38 = *(unsigned __int16 *)(v29 + 2i64 * (signed int)((v36 & 0xFFFFFFFC) - v37 + 3));
-            v31[-1].m_quad = _mm_add_ps(
+                                     _mm_unpacklo_epi32(v34, v32),
+                                     _mm_unpacklo_epi32(v33, _mm_cvtsi32_si128(0)))),
+                                 v29),
+                               v26.m_quad);
+            v37 = *((unsigned __int16 *)v28 + (int)((v35 & 0xFFFFFFFC) - v36 + 3));
+            v30[-1].m_quad = _mm_add_ps(
                                _mm_mul_ps(
                                  _mm_cvtepi32_ps(
                                    _mm_unpacklo_epi32(
-                                     _mm_unpacklo_epi32(_mm_cvtsi32_si128(v38 & 0x1F), _mm_cvtsi32_si128(v38 >> 10)),
-                                     _mm_unpacklo_epi32(_mm_cvtsi32_si128((v38 >> 5) & 0x1F), _mm_cvtsi32_si128(0)))),
-                                 v30),
-                               v27.m_quad);
+                                     _mm_unpacklo_epi32(_mm_cvtsi32_si128(v37 & 0x1F), _mm_cvtsi32_si128(v37 >> 10)),
+                                     _mm_unpacklo_epi32(_mm_cvtsi32_si128((v37 >> 5) & 0x1F), _mm_cvtsi32_si128(0)))),
+                                 v29),
+                               v26.m_quad);
           }
-          while ( v28 < v20 - 1 );
+          while ( v27 < v19 - 1 );
         }
-        if ( v28 < (signed __int64)v20 )
+        if ( v27 < (__int64)v19 )
         {
-          v39 = &vertices[v28];
-          v40 = v20 - (signed __int64)v28;
+          v38 = &vertices[v27];
+          v39 = v19 - (__int64)v27;
           do
           {
-            ++v39;
-            v41 = (v28 & 0xFFFFFFFC) - (v28 & 3);
-            ++v28;
-            v42 = *(unsigned __int16 *)(v29 + 2i64 * (signed int)(v41 + 3));
-            v39[-1].m_quad = _mm_add_ps(
+            ++v38;
+            v40 = (v27 & 0xFFFFFFFC) - (v27 & 3);
+            ++v27;
+            v41 = *((unsigned __int16 *)v28 + (int)(v40 + 3));
+            v38[-1].m_quad = _mm_add_ps(
                                _mm_mul_ps(
                                  _mm_cvtepi32_ps(
                                    _mm_unpacklo_epi32(
                                      _mm_unpacklo_epi32(
-                                       _mm_cvtsi32_si128(*(_WORD *)(v29 + 2i64 * (signed int)(v41 + 3)) & 0x1F),
-                                       _mm_cvtsi32_si128(v42 >> 10)),
-                                     _mm_unpacklo_epi32(_mm_cvtsi32_si128((v42 >> 5) & 0x1F), _mm_cvtsi32_si128(0)))),
-                                 v30),
-                               v27.m_quad);
-            --v40;
+                                       _mm_cvtsi32_si128(*((_WORD *)v28 + (int)(v40 + 3)) & 0x1F),
+                                       _mm_cvtsi32_si128(v41 >> 10)),
+                                     _mm_unpacklo_epi32(_mm_cvtsi32_si128((v41 >> 5) & 0x1F), _mm_cvtsi32_si128(0)))),
+                                 v29),
+                               v26.m_quad);
+            --v39;
           }
-          while ( v40 );
+          while ( v39 );
         }
       }
       else
       {
-        hkErrStream::hkErrStream((hkErrStream *)&aabb, &buf, 512);
-        v24 = ((unsigned int)v6->m_sharedVerticesIndex[(unsigned __int8)v6->m_primitives[v5].m_indices[0]] >> 4) & 3;
-        v25 = hkOstream::operator<<((hkOstream *)&aabb, "Compression method #");
-        v26 = hkOstream::operator<<(v25, v24, (int)v25);
-        hkOstream::operator<<(v26, " not implemented");
+        hkErrStream::hkErrStream((hkErrStream *)&aabb, buf, 512);
+        v23 = (decoder->m_sharedVerticesIndex[(unsigned __int8)decoder->m_primitives[v5].m_indices[0]] >> 4) & 3;
+        v24 = hkOstream::operator<<((hkOstream *)&aabb, "Compression method #");
+        v25 = hkOstream::operator<<(v24, v23);
+        hkOstream::operator<<(v25, " not implemented");
         if ( (unsigned int)hkError::messageError(
-                             -1875965459,
-                             &buf,
+                             0x902F09ED,
+                             buf,
                              "Y:\\NightlyJobs\\09-12-Thu-05\\Source\\Geometry/Internal/DataStructures/StaticMeshTree/hkcd"
                              "StaticMeshTree.inl",
                              499) )
@@ -949,237 +938,240 @@ LABEL_9:
     }
     else
     {
-      v43.m_quad = (__m128)aabb.m_min;
-      v44 = 0;
-      v45 = (signed __int64)&v6->m_sharedVertices[v21];
-      v46 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskZ);
-      v47 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskY);
-      v48 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskX);
-      v49 = _mm_mul_ps(
+      v42.m_quad = (__m128)aabb.m_min;
+      v43 = 0;
+      v44 = &decoder->m_sharedVertices[v20];
+      si128 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskZ);
+      v46 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskY);
+      v47 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskX);
+      v48 = _mm_mul_ps(
               _mm_sub_ps(aabb.m_max.m_quad, aabb.m_min.m_quad),
               (__m128)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::setupParameters::`2::invBitScalesBuffer);
-      if ( v20 - 1 > 0 )
+      if ( v19 - 1 > 0 )
       {
-        v50 = vertices;
+        v49 = vertices;
         do
         {
-          v50 += 2;
-          v51 = (__m128i)*(unsigned int *)(v45 + 4i64 * (signed int)((v44 & 0xFFFFFFFE) - (v44 & 1) + 1));
-          v52 = v44 + 1;
-          v44 += 2;
-          v50[-2].m_quad = _mm_add_ps(
+          v49 += 2;
+          v50 = (__m128i)*((unsigned int *)v44 + (int)((v43 & 0xFFFFFFFE) - (v43 & 1) + 1));
+          v51 = v43 + 1;
+          v43 += 2;
+          v49[-2].m_quad = _mm_add_ps(
                              _mm_mul_ps(
                                _mm_cvtepi32_ps(
                                  _mm_or_si128(
                                    _mm_or_si128(
-                                     _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v51, 0x16u), 0), v46),
-                                     _mm_and_si128(v51, v48)),
-                                   _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v51, 0xBu), 0), v47))),
-                               v49),
-                             v43.m_quad);
-          v53 = (__m128i)*(unsigned int *)(v45 + 4i64 * (signed int)((v52 & 0xFFFFFFFE) - (v52 & 1) + 1));
-          v50[-1].m_quad = _mm_add_ps(
+                                     _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v50, 0x16u), 0), si128),
+                                     _mm_and_si128(v50, v47)),
+                                   _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v50, 0xBu), 0), v46))),
+                               v48),
+                             v42.m_quad);
+          v52 = (__m128i)*((unsigned int *)v44 + (int)((v51 & 0xFFFFFFFE) - (v51 & 1) + 1));
+          v49[-1].m_quad = _mm_add_ps(
                              _mm_mul_ps(
                                _mm_cvtepi32_ps(
                                  _mm_or_si128(
                                    _mm_or_si128(
-                                     _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v53, 0x16u), 0), v46),
-                                     _mm_and_si128(v53, v48)),
-                                   _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v53, 0xBu), 0), v47))),
-                               v49),
-                             v43.m_quad);
+                                     _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v52, 0x16u), 0), si128),
+                                     _mm_and_si128(v52, v47)),
+                                   _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v52, 0xBu), 0), v46))),
+                               v48),
+                             v42.m_quad);
         }
-        while ( v44 < v20 - 1 );
+        while ( v43 < v19 - 1 );
       }
-      if ( v44 < (signed __int64)v20 )
+      if ( v43 < (__int64)v19 )
       {
-        v54 = &vertices[v44];
-        v55 = v20 - (signed __int64)v44;
+        v53 = &vertices[v43];
+        v54 = v19 - (__int64)v43;
         do
         {
-          ++v54;
-          v56 = v44 & 1;
-          v57 = v44++ & 0xFFFFFFFE;
-          v58 = (__m128i)*(unsigned int *)(v45 + 4i64 * (signed int)(v57 - v56 + 1));
-          v54[-1].m_quad = _mm_add_ps(
+          ++v53;
+          v55 = v43 & 1;
+          v56 = v43++ & 0xFFFFFFFE;
+          v57 = (__m128i)*((unsigned int *)v44 + (int)(v56 - v55 + 1));
+          v53[-1].m_quad = _mm_add_ps(
                              _mm_mul_ps(
                                _mm_cvtepi32_ps(
                                  _mm_or_si128(
                                    _mm_or_si128(
-                                     _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v58, 0x16u), 0), v46),
-                                     _mm_and_si128(v58, v48)),
-                                   _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v58, 0xBu), 0), v47))),
-                               v49),
-                             v43.m_quad);
-          --v55;
+                                     _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v57, 0x16u), 0), si128),
+                                     _mm_and_si128(v57, v47)),
+                                   _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v57, 0xBu), 0), v46))),
+                               v48),
+                             v42.m_quad);
+          --v54;
         }
-        while ( v55 );
+        while ( v54 );
       }
     }
   }
   else
   {
-    v59 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskZ);
-    v60 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskY);
-    v61 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskX);
-    v62 = (signed __int64)&v6->m_sharedVertices[v21];
-    v63 = 0;
-    if ( v20 - 1 > 0 )
+    v58 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskZ);
+    v59 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskY);
+    v60 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskX);
+    v61 = &decoder->m_sharedVertices[v20];
+    v62 = 0;
+    if ( v19 - 1 > 0 )
     {
-      v64 = v6->m_sharedParms.m_scale.m_quad;
-      v65 = v6->m_sharedParms.m_origin.m_quad;
-      v66 = vertices;
-      v67 = (const __m128i *)v62;
-      v68 = ((unsigned int)(v20 - 2) >> 1) + 1;
-      v69 = v68;
-      v63 = 2 * v68;
+      v63.m_quad = (__m128)decoder->m_sharedParms.m_scale;
+      v64.m_quad = (__m128)decoder->m_sharedParms.m_origin;
+      v65 = vertices;
+      v66 = (const __m128i *)v61;
+      v67 = ((unsigned int)(v19 - 2) >> 1) + 1;
+      v68 = v67;
+      v62 = 2 * v67;
       do
       {
-        v70 = _mm_loadl_epi64(v67);
-        v66 += 2;
-        ++v67;
-        v66[-2].m_quad = _mm_add_ps(
+        v69 = _mm_loadl_epi64(v66);
+        v65 += 2;
+        ++v66;
+        v65[-2].m_quad = _mm_add_ps(
                            _mm_mul_ps(
                              _mm_cvtepi32_ps(
                                _mm_or_si128(
                                  _mm_or_si128(
-                                   _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v70, 0xAu), 85), v59),
-                                   _mm_and_si128(v70, v61)),
-                                 _mm_and_si128(_mm_srli_epi32(_mm_slli_si128(v70, 2), 5u), v60))),
-                             v64),
-                           v65);
-        v71 = _mm_loadl_epi64((const __m128i *)((char *)v67 - 8));
-        v66[-1].m_quad = _mm_add_ps(
+                                   _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v69, 0xAu), 85), v58),
+                                   _mm_and_si128(v69, v60)),
+                                 _mm_and_si128(_mm_srli_epi32(_mm_slli_si128(v69, 2), 5u), v59))),
+                             v63.m_quad),
+                           v64.m_quad);
+        v70 = _mm_loadl_epi64((const __m128i *)((char *)v66 - 8));
+        v65[-1].m_quad = _mm_add_ps(
                            _mm_mul_ps(
                              _mm_cvtepi32_ps(
                                _mm_or_si128(
                                  _mm_or_si128(
-                                   _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v71, 0xAu), 85), v59),
-                                   _mm_and_si128(v71, v61)),
-                                 _mm_and_si128(_mm_srli_epi32(_mm_slli_si128(v71, 2), 5u), v60))),
-                             v64),
-                           v65);
-        --v69;
+                                   _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v70, 0xAu), 85), v58),
+                                   _mm_and_si128(v70, v60)),
+                                 _mm_and_si128(_mm_srli_epi32(_mm_slli_si128(v70, 2), 5u), v59))),
+                             v63.m_quad),
+                           v64.m_quad);
+        --v68;
       }
-      while ( v69 );
+      while ( v68 );
     }
-    if ( v63 < (signed __int64)v20 )
+    if ( v62 < (__int64)v19 )
     {
-      v72 = v6->m_sharedParms.m_scale.m_quad;
-      v73 = v6->m_sharedParms.m_origin.m_quad;
-      v74 = &vertices[v63];
-      v75 = v20 - (signed __int64)v63;
+      v71.m_quad = (__m128)decoder->m_sharedParms.m_scale;
+      v72.m_quad = (__m128)decoder->m_sharedParms.m_origin;
+      v73 = &vertices[v62];
+      v74 = v19 - (__int64)v62;
       do
       {
-        v76 = v63;
-        ++v74;
-        ++v63;
-        v77 = _mm_loadl_epi64((const __m128i *)(v62 + 8 * v76));
-        v74[-1].m_quad = _mm_add_ps(
+        v75 = v62;
+        ++v73;
+        ++v62;
+        v76 = _mm_loadl_epi64((const __m128i *)&v61[v75]);
+        v73[-1].m_quad = _mm_add_ps(
                            _mm_mul_ps(
                              _mm_cvtepi32_ps(
                                _mm_or_si128(
                                  _mm_or_si128(
-                                   _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v77, 0xAu), 85), v59),
-                                   _mm_and_si128(v77, v61)),
-                                 _mm_and_si128(_mm_srli_epi32(_mm_slli_si128(v77, 2), 5u), v60))),
-                             v72),
-                           v73);
-        --v75;
+                                   _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v76, 0xAu), 85), v58),
+                                   _mm_and_si128(v76, v60)),
+                                 _mm_and_si128(_mm_srli_epi32(_mm_slli_si128(v76, 2), 5u), v59))),
+                             v71.m_quad),
+                           v72.m_quad);
+        --v74;
       }
-      while ( v75 );
+      while ( v74 );
     }
   }
-  v78 = v6->m_primitiveDataRuns;
-  v79 = LOBYTE(v6->m_section->m_dataRuns.m_data) - 1;
-  v80 = 0;
-  for ( i = LOBYTE(v6->m_section->m_dataRuns.m_data); i > 4; i = v79 - v80 + 1 )
+  m_primitiveDataRuns = decoder->m_primitiveDataRuns;
+  v78 = LOBYTE(decoder->m_section->m_dataRuns.m_data) - 1;
+  v79 = 0;
+  m_data_low = LOBYTE(decoder->m_section->m_dataRuns.m_data);
+  if ( (unsigned int)m_data_low > 4 )
   {
-    v82 = (v80 + v79) >> 1;
-    v83 = v4 - (unsigned __int8)v78[v82].m_index;
-    if ( v83 < 0 )
+    do
     {
-      v79 = (v80 + v79) >> 1;
-    }
-    else
-    {
-      if ( v83 < (unsigned __int8)v78[v82].m_count )
+      v81 = (v79 + v78) >> 1;
+      v82 = &m_primitiveDataRuns[v81];
+      v83 = primitiveIndex - (unsigned __int8)v82->m_index;
+      if ( v83 < 0 )
       {
-        v8 = (int *)&v78[v82];
-        goto LABEL_52;
+        v78 = (v79 + v78) >> 1;
       }
-      v80 = v82 + 1;
+      else
+      {
+        if ( v83 < (unsigned __int8)v82->m_count )
+        {
+          v8 = (int *)&m_primitiveDataRuns[v81];
+          goto LABEL_51;
+        }
+        v79 = v81 + 1;
+      }
+      m_data_low = v78 - v79 + 1;
     }
+    while ( m_data_low > 4 );
   }
-  v84 = v80;
+  v84 = v79;
   v85 = 0;
-  v86 = (signed __int64)&v78[v84];
-  if ( i > 0 )
+  v86 = &m_primitiveDataRuns[v84];
+  if ( m_data_low > 0 )
   {
     while ( 1 )
     {
-      v87 = v4 - *(unsigned __int8 *)(v86 + 4);
-      if ( v87 >= 0 && v87 < *(unsigned __int8 *)(v86 + 5) )
+      v87 = primitiveIndex - (unsigned __int8)v86->m_index;
+      if ( v87 >= 0 && v87 < (unsigned __int8)v86->m_count )
         break;
       ++v85;
-      v86 += 8i64;
-      if ( v85 >= i )
-        goto LABEL_52;
+      ++v86;
+      if ( v85 >= m_data_low )
+        goto LABEL_51;
     }
     v8 = (int *)v86;
   }
-LABEL_52:
+LABEL_51:
   hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::CustomGeometryConverter::appendVerticesAsConvexHull(
     vertices,
-    v20,
+    v19,
     *v8,
-    v9);
+    geometry);
 }
 
 // File Line: 1261
 // RVA: 0xE09400
-void __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::CustomGeometryConverter::appendVerticesAsConvexHull(hkVector4f *vertices, int numVertices, int material, hkGeometry *geometry)
+void __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::CustomGeometryConverter::appendVerticesAsConvexHull(
+        hkVector4f *vertices,
+        int numVertices,
+        int material,
+        hkGeometry *geometry)
 {
-  hkVector4f *v4; // rdi
-  hkGeometry *v5; // rsi
-  int v6; // er14
-  int v7; // ebx
   hkgpConvexHull::BuildConfig *v8; // rax
-  hkResult result; // [rsp+30h] [rbp-19h]
-  hkgpConvexHull::BuildConfig v10; // [rsp+34h] [rbp-15h]
-  hkgpConvexHull v11; // [rsp+48h] [rbp-1h]
-  hkGeometry geometrya; // [rsp+70h] [rbp+27h]
+  hkResult result; // [rsp+30h] [rbp-19h] BYREF
+  hkgpConvexHull::BuildConfig v10; // [rsp+34h] [rbp-15h] BYREF
+  hkgpConvexHull v11; // [rsp+48h] [rbp-1h] BYREF
+  hkGeometry geometrya; // [rsp+70h] [rbp+27h] BYREF
 
-  v4 = vertices;
-  v5 = geometry;
-  v6 = material;
-  v7 = numVertices;
   hkgpConvexHull::hkgpConvexHull(&v11);
   hkgpConvexHull::BuildConfig::BuildConfig(&v10);
-  if ( hkgpConvexHull::build(&v11, v4, v7, v8) >= 2 )
+  if ( hkgpConvexHull::build(&v11, vertices, numVertices, v8) >= 2 )
   {
     geometrya.vfptr = (hkBaseObjectVtbl *)&hkGeometry::`vftable;
     *(_DWORD *)&geometrya.m_memSizeAndFlags = 0x1FFFF;
     geometrya.m_vertices.m_data = 0i64;
     geometrya.m_vertices.m_size = 0;
-    geometrya.m_vertices.m_capacityAndFlags = 2147483648;
+    geometrya.m_vertices.m_capacityAndFlags = 0x80000000;
     geometrya.m_triangles.m_data = 0i64;
     geometrya.m_triangles.m_size = 0;
-    geometrya.m_triangles.m_capacityAndFlags = 2147483648;
-    hkgpConvexHull::generateGeometry(&v11, 0, &geometrya, v6, 1);
-    hkGeometry::appendGeometry(v5, &result, &geometrya, 0i64);
+    geometrya.m_triangles.m_capacityAndFlags = 0x80000000;
+    hkgpConvexHull::generateGeometry(&v11, SOURCE_VERTICES, &geometrya, material, 1);
+    hkGeometry::appendGeometry(geometry, &result, &geometrya, 0i64);
     geometrya.m_triangles.m_size = 0;
     if ( geometrya.m_triangles.m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+        &hkContainerHeapAllocator::s_alloc,
         geometrya.m_triangles.m_data,
         16 * geometrya.m_triangles.m_capacityAndFlags);
     geometrya.m_triangles.m_data = 0i64;
-    geometrya.m_triangles.m_capacityAndFlags = 2147483648;
+    geometrya.m_triangles.m_capacityAndFlags = 0x80000000;
     geometrya.m_vertices.m_size = 0;
     if ( geometrya.m_vertices.m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+        &hkContainerHeapAllocator::s_alloc,
         geometrya.m_vertices.m_data,
         16 * geometrya.m_vertices.m_capacityAndFlags);
   }
@@ -1188,224 +1180,227 @@ void __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,u
 
 // File Line: 1287
 // RVA: 0xE09540
-void __usercall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::convertToGeometry(hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun> *this@<rcx>, int sectionIndex@<edx>, hkGeometry *geometry@<r8>, hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::CustomGeometryConverter *gc@<r9>, hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::CustomGeometryConverter *a5@<rbx>, int append, bool weld, hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::TriangleMaterial tm)
+void __fastcall hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::convertToGeometry(
+        hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun> *this,
+        int sectionIndex,
+        hkGeometry *geometry,
+        hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::CustomGeometryConverter *gc,
+        int append,
+        bool weld,
+        hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::TriangleMaterial tm)
 {
+  hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::CustomGeometryConverter *v7; // rbx
   hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::CustomGeometryConverter *v8; // rsi
   hkGeometry *v9; // r13
   __int64 v10; // rdi
-  hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun> *v11; // rbx
   __m128 v12; // xmm4
-  signed __int64 v13; // r8
-  unsigned __int64 v14; // r11
-  signed int v15; // er14
+  hkcdStaticMeshTreeBase::Section *v13; // r8
+  hkpBvCompressedMeshShapeTreeDataRun *v14; // r11
+  int m_data_low; // r14d
   __m128 v16; // xmm5
-  __m128 v17; // xmm3
-  __m128 v18; // xmm6
-  __m128 v19; // xmm3
-  signed __int64 v20; // rdx
-  int v21; // er12
-  __int64 v22; // r15
-  __m128i v23; // xmm7
-  __m128i v24; // xmm8
-  __m128i v25; // xmm9
-  __m128i v26; // xmm10
-  __m128i v27; // xmm11
-  __m128i v28; // xmm12
-  int v29; // edx
-  int v30; // eax
-  int v31; // ecx
-  int *v32; // rdi
-  int v33; // er9
-  int v34; // er8
+  hkVector4f v17; // xmm6
+  __m128 v18; // xmm3
+  unsigned int *v19; // rdx
+  int v20; // r12d
+  __int64 v21; // r15
+  __m128i si128; // xmm7
+  __m128i v23; // xmm8
+  __m128i v24; // xmm9
+  __m128i v25; // xmm10
+  __m128i v26; // xmm11
+  __m128i v27; // xmm12
+  int v28; // edx
+  int v29; // eax
+  int v30; // ecx
+  hkpBvCompressedMeshShapeTreeDataRun *v31; // rdi
+  int v32; // r9d
+  int v33; // r8d
   int i; // ecx
-  int v36; // ecx
-  int v37; // edx
-  __int64 v38; // rax
-  int v39; // er9
-  signed __int64 v40; // rdx
-  int v41; // er8
-  __int64 v42; // rax
-  int v43; // er13
-  __int64 v44; // r9
-  __m128i v45; // xmm2
-  __int64 v46; // rcx
-  __int64 v47; // rax
-  __m128i v48; // xmm2
-  __int64 v49; // r8
-  __m128i v50; // xmm2
-  __int64 v51; // rdx
-  __m128i v52; // xmm2
-  int v53; // er14
-  char v54; // si
-  int v55; // er15
-  int v56; // edi
-  int v57; // er12
-  int v58; // ebx
-  int v59; // esi
-  __m128 *v60; // rcx
-  __int64 v61; // [rsp+20h] [rbp-D0h]
-  __m128 v62; // [rsp+30h] [rbp-C0h]
-  __m128 v63; // [rsp+40h] [rbp-B0h]
-  __m128 v64; // [rsp+50h] [rbp-A0h]
-  __m128 v65; // [rsp+60h] [rbp-90h]
-  __int128 v66; // [rsp+70h] [rbp-80h]
-  __int128 v67; // [rsp+80h] [rbp-70h]
-  unsigned __int64 v68; // [rsp+90h] [rbp-60h]
-  int v69; // [rsp+98h] [rbp-58h]
-  __int64 v70; // [rsp+9Ch] [rbp-54h]
-  __int64 v71; // [rsp+B0h] [rbp-40h]
-  hkVector4f a; // [rsp+C0h] [rbp-30h]
-  __m128 v73; // [rsp+D0h] [rbp-20h]
-  __m128 v74; // [rsp+E0h] [rbp-10h]
-  __m128 v75; // [rsp+F0h] [rbp+0h]
-  hkErrStream v76; // [rsp+100h] [rbp+10h]
-  char buf; // [rsp+120h] [rbp+30h]
-  __int64 vars0; // [rsp+3D0h] [rbp+2E0h]
-  hkArrayBase<hkVector4f> *v79; // [rsp+3E0h] [rbp+2F0h]
-  hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::CustomGeometryConverter *v80; // [rsp+3E8h] [rbp+2F8h]
-  int v81; // [rsp+3F0h] [rbp+300h]
-  hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::CustomGeometryConverter *v82; // [rsp+3F8h] [rbp+308h]
+  int v35; // ecx
+  int v36; // edx
+  __int64 v37; // rax
+  int v38; // r9d
+  hkpBvCompressedMeshShapeTreeDataRun *v39; // rdx
+  int v40; // r8d
+  __int64 v41; // rax
+  unsigned int m_value; // r13d
+  __int64 v43; // r9
+  __m128i v44; // xmm2
+  __int64 v45; // rcx
+  __int64 v46; // rax
+  __m128i v47; // xmm2
+  __int64 v48; // r8
+  __m128i v49; // xmm2
+  __int64 v50; // rdx
+  __m128i v51; // xmm2
+  int m_size; // r14d
+  char v53; // si
+  int v54; // r15d
+  int v55; // edi
+  int v56; // r12d
+  unsigned int v57; // ebx
+  unsigned int v58; // esi
+  __m128 *p_m_quad; // rcx
+  __int64 v60; // [rsp+20h] [rbp-D0h]
+  __m128 m_quad; // [rsp+30h] [rbp-C0h] BYREF
+  __m128 v62; // [rsp+40h] [rbp-B0h]
+  __m128 v63; // [rsp+50h] [rbp-A0h]
+  __m128 v64; // [rsp+60h] [rbp-90h]
+  __int128 v65; // [rsp+70h] [rbp-80h]
+  __int128 v66; // [rsp+80h] [rbp-70h]
+  hkpBvCompressedMeshShapeTreeDataRun *v67; // [rsp+90h] [rbp-60h]
+  int v68; // [rsp+98h] [rbp-58h]
+  __int64 v69; // [rsp+9Ch] [rbp-54h]
+  __int64 v70; // [rsp+B0h] [rbp-40h]
+  hkVector4f a; // [rsp+C0h] [rbp-30h] BYREF
+  __m128 v72; // [rsp+D0h] [rbp-20h]
+  __m128 v73; // [rsp+E0h] [rbp-10h]
+  __m128 v74; // [rsp+F0h] [rbp+0h]
+  hkErrStream v75; // [rsp+100h] [rbp+10h] BYREF
+  char buf[528]; // [rsp+120h] [rbp+30h] BYREF
+  hkcdStaticMeshTreeBase::Section *vars0; // [rsp+3D0h] [rbp+2E0h]
+  hkArrayBase<hkVector4f> *v78; // [rsp+3E0h] [rbp+2F0h]
+  hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::CustomGeometryConverter *v79; // [rsp+3E8h] [rbp+2F8h]
+  int v80; // [rsp+3F0h] [rbp+300h]
+  char v81; // [rsp+3F8h] [rbp+308h]
 
-  v82 = gc;
-  v80 = a5;
+  v81 = (char)gc;
+  v79 = v7;
   v8 = gc;
   v9 = geometry;
   v10 = sectionIndex;
-  v11 = this;
   if ( !(_BYTE)geometry )
     hkGeometry::clear(geometry);
   v12 = 0i64;
   v13 = 0i64;
-  v66 = (unsigned __int64)v11;
-  v70 = -1i64;
+  v69 = -1i64;
   v14 = 0i64;
+  m_quad = 0i64;
   v62 = 0i64;
   v63 = 0i64;
-  v64 = 0i64;
-  v68 = 0i64;
-  v15 = 0;
+  v67 = 0i64;
+  m_data_low = 0;
   vars0 = 0i64;
+  v64 = 0i64;
   v65 = 0i64;
-  _mm_store_si128((__m128i *)&v66, (__m128i)0i64);
-  _mm_store_si128((__m128i *)&v67, (__m128i)0i64);
-  v69 = 0;
+  v66 = 0i64;
+  v68 = 0;
   v16 = 0i64;
-  v17 = _mm_sub_ps(v11->m_domain.m_max.m_quad, v11->m_domain.m_min.m_quad);
-  v63 = v17;
-  v18 = v11->m_domain.m_min.m_quad;
-  v19 = _mm_mul_ps(
-          v17,
+  v62 = _mm_sub_ps(this->m_domain.m_max.m_quad, this->m_domain.m_min.m_quad);
+  v17.m_quad = (__m128)this->m_domain.m_min;
+  v18 = _mm_mul_ps(
+          v62,
           (__m128)`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::setupParameters::`2::invBitScalesBuffer);
-  v62 = v11->m_domain.m_min.m_quad;
-  v63 = v19;
+  m_quad = v17.m_quad;
+  v62 = v18;
   if ( (_DWORD)v10 != -1 )
   {
-    v13 = (signed __int64)&v11->m_sections.m_data[v10];
-    HIDWORD(v70) = v10;
-    LODWORD(v70) = v10;
-    *((_QWORD *)&v66 + 1) = v13;
-    v20 = (signed __int64)&v11->m_packedVertices.m_data[*(unsigned int *)(v13 + 72)];
+    v13 = &this->m_sections.m_data[v10];
+    HIDWORD(v69) = v10;
+    LODWORD(v69) = v10;
+    *((_QWORD *)&v65 + 1) = v13;
+    v19 = &this->m_packedVertices.m_data[v13->m_firstPackedVertex];
     vars0 = v13;
-    *((_QWORD *)&v66 + 1) = v20;
-    *(_QWORD *)&v67 = &v11->m_sharedVertices.m_data[*(unsigned __int8 *)(v13 + 92) << 16];
-    *((_QWORD *)&v67 + 1) = &v11->m_sharedVerticesIndex.m_data[(unsigned __int64)*(unsigned int *)(v13 + 76) >> 8];
-    v14 = (unsigned __int64)&v11->m_primitiveDataRuns.m_data[(unsigned __int64)*(unsigned int *)(v13 + 84) >> 8];
-    v68 = (unsigned __int64)&v11->m_primitiveDataRuns.m_data[(unsigned __int64)*(unsigned int *)(v13 + 84) >> 8];
-    v15 = *(unsigned __int8 *)(v13 + 76);
-    v69 = *(unsigned __int8 *)(v13 + 76);
-    *(_QWORD *)&v66 = &v11->m_primitives.m_data[(unsigned __int64)*(unsigned int *)(v13 + 80) >> 8];
-    v12 = *(__m128 *)(v13 + 48);
-    v64 = *(__m128 *)(v13 + 48);
+    *((_QWORD *)&v65 + 1) = v19;
+    *(_QWORD *)&v66 = &this->m_sharedVertices.m_data[0x10000 * (unsigned __int8)v13->m_page];
+    *((_QWORD *)&v66 + 1) = &this->m_sharedVerticesIndex.m_data[(unsigned __int64)v13->m_sharedVertices.m_data >> 8];
+    v14 = &this->m_primitiveDataRuns.m_data[(unsigned __int64)v13->m_dataRuns.m_data >> 8];
+    v67 = v14;
+    m_data_low = LOBYTE(v13->m_sharedVertices.m_data);
+    v68 = m_data_low;
+    *(_QWORD *)&v65 = &this->m_primitives.m_data[(unsigned __int64)v13->m_primitives.m_data >> 8];
+    v12 = *(__m128 *)v13->m_codecParms;
+    v63 = v12;
     v16 = (__m128)_mm_srli_si128(
                     _mm_slli_si128(
                       (__m128i)_mm_movelh_ps(
-                                 (__m128)*(unsigned __int64 *)(v13 + 60),
-                                 (__m128)*(unsigned int *)(v13 + 68)),
+                                 (__m128)*(unsigned __int64 *)&v13->m_codecParms[3],
+                                 (__m128)LODWORD(v13->m_codecParms[5])),
                       4),
                     4);
-    v65 = v16;
-    *((_QWORD *)&v67 + 1) -= 2i64 * *(unsigned __int8 *)(v13 + 76);
+    v64 = v16;
+    *((_QWORD *)&v66 + 1) -= 2i64 * LOBYTE(v13->m_sharedVertices.m_data);
   }
-  v21 = 0;
-  v22 = 0i64;
-  v81 = 0;
-  v61 = 0i64;
-  v71 = *(unsigned __int8 *)(v13 + 80);
-  if ( v71 > 0 )
+  v20 = 0;
+  v21 = 0i64;
+  v80 = 0;
+  v60 = 0i64;
+  v70 = LOBYTE(v13->m_primitives.m_data);
+  if ( v70 )
   {
-    v23 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskZ);
-    v24 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskY);
-    v25 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskX);
-    v26 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskZ);
-    v27 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskY);
-    v28 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskX);
+    si128 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskZ);
+    v23 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskY);
+    v24 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskX);
+    v25 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskZ);
+    v26 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskY);
+    v27 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskX);
     do
     {
-      v29 = *(unsigned __int8 *)(v66 + 4 * v22 + 3);
-      v30 = *(unsigned __int8 *)(v66 + 4 * v22 + 2);
-      v31 = *(unsigned __int8 *)(v66 + 4 * v22 + 1);
-      if ( v29 == v30 )
+      v28 = *(unsigned __int8 *)(v65 + 4 * v21 + 3);
+      v29 = *(unsigned __int8 *)(v65 + 4 * v21 + 2);
+      v30 = *(unsigned __int8 *)(v65 + 4 * v21 + 1);
+      if ( v28 == v29 )
       {
-        if ( v30 == v31 )
+        if ( v29 == v30 )
         {
-          if ( v8->vfptr->isKeyConvertionAllowed(v8, ((_DWORD)v70 << 8) | 2 * v21) )
+          if ( v8->vfptr->isKeyConvertionAllowed(v8, ((_DWORD)v69 << 8) | (2 * v20)) )
             v8->vfptr->appendCustomPrimitiveToGeometry(
               v8,
-              (hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::Decoder *)&v62,
-              v21,
+              (hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::Decoder *)&m_quad,
+              v20,
               v9);
           goto LABEL_11;
         }
       }
-      else if ( *(_BYTE *)(v66 + 4 * v22) == -34 && v31 == 173 && v30 == 222 && v29 == 173 )
+      else if ( *(_BYTE *)(v65 + 4 * v21) == 0xDE && v30 == 173 && v29 == 222 && v28 == 173 )
       {
         goto LABEL_60;
       }
-      v32 = 0i64;
-      v33 = 0;
-      v34 = *(unsigned __int8 *)(v13 + 84) - 1;
-      for ( i = v34 + 1; i > 4; i = v34 - v33 + 1 )
+      v31 = 0i64;
+      v32 = 0;
+      v33 = LOBYTE(v13->m_dataRuns.m_data) - 1;
+      for ( i = v33 + 1; i > 4; i = v33 - v32 + 1 )
       {
-        v36 = (v34 + v33) >> 1;
-        v37 = v21 - *(unsigned __int8 *)(v14 + 8i64 * v36 + 4);
-        if ( v37 < 0 )
+        v35 = (v33 + v32) >> 1;
+        v36 = v20 - (unsigned __int8)v14[v35].m_index;
+        if ( v36 < 0 )
         {
-          v34 = (v34 + v33) >> 1;
+          v33 = (v33 + v32) >> 1;
         }
         else
         {
-          if ( v37 < *(unsigned __int8 *)(v14 + 8i64 * v36 + 5) )
+          if ( v36 < (unsigned __int8)v14[v35].m_count )
           {
-            v32 = (int *)(v14 + 8i64 * v36);
+            v31 = &v14[v35];
             goto LABEL_29;
           }
-          v33 = v36 + 1;
+          v32 = v35 + 1;
         }
       }
-      v38 = v33;
-      v39 = 0;
-      v40 = v14 + 8 * v38;
+      v37 = v32;
+      v38 = 0;
+      v39 = &v14[v37];
       if ( i > 0 )
       {
         while ( 1 )
         {
-          v41 = v21 - *(unsigned __int8 *)(v40 + 4);
-          if ( v41 >= 0 && v41 < *(unsigned __int8 *)(v40 + 5) )
+          v40 = v20 - (unsigned __int8)v39->m_index;
+          if ( v40 >= 0 && v40 < (unsigned __int8)v39->m_count )
             break;
+          ++v38;
           ++v39;
-          v40 += 8i64;
-          if ( v39 >= i )
+          if ( v38 >= i )
             goto LABEL_29;
         }
-        v32 = (int *)v40;
+        v31 = v39;
       }
 LABEL_29:
-      v42 = *(unsigned __int8 *)(v66 + 4 * v22);
-      v43 = *v32;
-      v44 = v67;
-      if ( (signed int)v42 < v15 )
+      v41 = *(unsigned __int8 *)(v65 + 4 * v21);
+      m_value = v31->m_value;
+      v43 = v66;
+      if ( (int)v41 < m_data_low )
       {
-        v46 = *((_QWORD *)&v66 + 1);
+        v45 = *((_QWORD *)&v65 + 1);
         a.m_quad = _mm_add_ps(
                      _mm_mul_ps(
                        _mm_cvtepi32_ps(
@@ -1413,38 +1408,74 @@ LABEL_29:
                            _mm_or_si128(
                              _mm_and_si128(
                                _mm_shuffle_epi32(
-                                 _mm_srli_epi32((__m128i)*(unsigned int *)(*((_QWORD *)&v66 + 1) + 4 * v42), 0x16u),
+                                 _mm_srli_epi32((__m128i)*(unsigned int *)(*((_QWORD *)&v65 + 1) + 4 * v41), 0x16u),
                                  0),
-                               v23),
-                             _mm_and_si128((__m128i)*(unsigned int *)(*((_QWORD *)&v66 + 1) + 4 * v42), v25)),
+                               si128),
+                             _mm_and_si128((__m128i)*(unsigned int *)(*((_QWORD *)&v65 + 1) + 4 * v41), v24)),
                            _mm_and_si128(
                              _mm_shuffle_epi32(
-                               _mm_srli_epi32((__m128i)*(unsigned int *)(*((_QWORD *)&v66 + 1) + 4 * v42), 0xBu),
+                               _mm_srli_epi32((__m128i)*(unsigned int *)(*((_QWORD *)&v65 + 1) + 4 * v41), 0xBu),
                                0),
-                             v24))),
+                             v23))),
                        v16),
                      v12);
       }
       else
       {
-        v45 = _mm_loadl_epi64((const __m128i *)(v67
+        v44 = _mm_loadl_epi64((const __m128i *)(v66
                                               + 8i64
-                                              * *(unsigned __int16 *)(*((_QWORD *)&v67 + 1)
-                                                                    + 2i64 * *(unsigned __int8 *)(v66 + 4 * v22))));
-        v46 = *((_QWORD *)&v66 + 1);
+                                              * *(unsigned __int16 *)(*((_QWORD *)&v66 + 1)
+                                                                    + 2i64 * *(unsigned __int8 *)(v65 + 4 * v21))));
+        v45 = *((_QWORD *)&v65 + 1);
         a.m_quad = _mm_add_ps(
                      _mm_mul_ps(
                        _mm_cvtepi32_ps(
                          _mm_or_si128(
                            _mm_or_si128(
-                             _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v45, 0xAu), 85), v26),
-                             _mm_and_si128(v45, v28)),
-                           _mm_and_si128(_mm_srli_epi32(_mm_slli_si128(v45, 2), 5u), v27))),
-                       v19),
-                     v18);
+                             _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v44, 0xAu), 85), v25),
+                             _mm_and_si128(v44, v27)),
+                           _mm_and_si128(_mm_srli_epi32(_mm_slli_si128(v44, 2), 5u), v26))),
+                       v18),
+                     v17.m_quad);
       }
-      v47 = *(unsigned __int8 *)(v66 + 4 * v22 + 1);
-      if ( (signed int)v47 < v15 )
+      v46 = *(unsigned __int8 *)(v65 + 4 * v21 + 1);
+      if ( (int)v46 < m_data_low )
+      {
+        v72 = _mm_add_ps(
+                _mm_mul_ps(
+                  _mm_cvtepi32_ps(
+                    _mm_or_si128(
+                      _mm_or_si128(
+                        _mm_and_si128(
+                          _mm_shuffle_epi32(_mm_srli_epi32((__m128i)*(unsigned int *)(v45 + 4 * v46), 0x16u), 0),
+                          si128),
+                        _mm_and_si128((__m128i)*(unsigned int *)(v45 + 4 * v46), v24)),
+                      _mm_and_si128(
+                        _mm_shuffle_epi32(_mm_srli_epi32((__m128i)*(unsigned int *)(v45 + 4 * v46), 0xBu), 0),
+                        v23))),
+                  v16),
+                v12);
+      }
+      else
+      {
+        v47 = _mm_loadl_epi64((const __m128i *)(v66
+                                              + 8i64
+                                              * *(unsigned __int16 *)(*((_QWORD *)&v66 + 1)
+                                                                    + 2i64 * *(unsigned __int8 *)(v65 + 4 * v21 + 1))));
+        v45 = *((_QWORD *)&v65 + 1);
+        v72 = _mm_add_ps(
+                _mm_mul_ps(
+                  _mm_cvtepi32_ps(
+                    _mm_or_si128(
+                      _mm_or_si128(
+                        _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v47, 0xAu), 85), v25),
+                        _mm_and_si128(v47, v27)),
+                      _mm_and_si128(_mm_srli_epi32(_mm_slli_si128(v47, 2), 5u), v26))),
+                  v18),
+                v17.m_quad);
+      }
+      v48 = *(unsigned __int8 *)(v65 + 4 * v21 + 2);
+      if ( (int)v48 < m_data_low )
       {
         v73 = _mm_add_ps(
                 _mm_mul_ps(
@@ -1452,35 +1483,35 @@ LABEL_29:
                     _mm_or_si128(
                       _mm_or_si128(
                         _mm_and_si128(
-                          _mm_shuffle_epi32(_mm_srli_epi32((__m128i)*(unsigned int *)(v46 + 4 * v47), 0x16u), 0),
-                          v23),
-                        _mm_and_si128((__m128i)*(unsigned int *)(v46 + 4 * v47), v25)),
+                          _mm_shuffle_epi32(_mm_srli_epi32((__m128i)*(unsigned int *)(v45 + 4 * v48), 0x16u), 0),
+                          si128),
+                        _mm_and_si128((__m128i)*(unsigned int *)(v45 + 4 * v48), v24)),
                       _mm_and_si128(
-                        _mm_shuffle_epi32(_mm_srli_epi32((__m128i)*(unsigned int *)(v46 + 4 * v47), 0xBu), 0),
-                        v24))),
+                        _mm_shuffle_epi32(_mm_srli_epi32((__m128i)*(unsigned int *)(v45 + 4 * v48), 0xBu), 0),
+                        v23))),
                   v16),
                 v12);
       }
       else
       {
-        v48 = _mm_loadl_epi64((const __m128i *)(v67
+        v49 = _mm_loadl_epi64((const __m128i *)(v66
                                               + 8i64
-                                              * *(unsigned __int16 *)(*((_QWORD *)&v67 + 1)
-                                                                    + 2i64 * *(unsigned __int8 *)(v66 + 4 * v22 + 1))));
-        v46 = *((_QWORD *)&v66 + 1);
+                                              * *(unsigned __int16 *)(*((_QWORD *)&v66 + 1)
+                                                                    + 2i64 * *(unsigned __int8 *)(v65 + 4 * v21 + 2))));
+        v45 = *((_QWORD *)&v65 + 1);
         v73 = _mm_add_ps(
                 _mm_mul_ps(
                   _mm_cvtepi32_ps(
                     _mm_or_si128(
                       _mm_or_si128(
-                        _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v48, 0xAu), 85), v26),
-                        _mm_and_si128(v48, v28)),
-                      _mm_and_si128(_mm_srli_epi32(_mm_slli_si128(v48, 2), 5u), v27))),
-                  v19),
-                v18);
+                        _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v49, 0xAu), 85), v25),
+                        _mm_and_si128(v49, v27)),
+                      _mm_and_si128(_mm_srli_epi32(_mm_slli_si128(v49, 2), 5u), v26))),
+                  v18),
+                v17.m_quad);
       }
-      v49 = *(unsigned __int8 *)(v66 + 4 * v22 + 2);
-      if ( (signed int)v49 < v15 )
+      v50 = *(unsigned __int8 *)(v65 + 4 * v21 + 3);
+      if ( (int)v50 < m_data_low )
       {
         v74 = _mm_add_ps(
                 _mm_mul_ps(
@@ -1488,178 +1519,138 @@ LABEL_29:
                     _mm_or_si128(
                       _mm_or_si128(
                         _mm_and_si128(
-                          _mm_shuffle_epi32(_mm_srli_epi32((__m128i)*(unsigned int *)(v46 + 4 * v49), 0x16u), 0),
-                          v23),
-                        _mm_and_si128((__m128i)*(unsigned int *)(v46 + 4 * v49), v25)),
+                          _mm_shuffle_epi32(_mm_srli_epi32((__m128i)*(unsigned int *)(v45 + 4 * v50), 0x16u), 0),
+                          si128),
+                        _mm_and_si128((__m128i)*(unsigned int *)(v45 + 4 * v50), v24)),
                       _mm_and_si128(
-                        _mm_shuffle_epi32(_mm_srli_epi32((__m128i)*(unsigned int *)(v46 + 4 * v49), 0xBu), 0),
-                        v24))),
+                        _mm_shuffle_epi32(_mm_srli_epi32((__m128i)*(unsigned int *)(v45 + 4 * v50), 0xBu), 0),
+                        v23))),
                   v16),
                 v12);
       }
       else
       {
-        v50 = _mm_loadl_epi64((const __m128i *)(v67
+        v51 = _mm_loadl_epi64((const __m128i *)(v66
                                               + 8i64
-                                              * *(unsigned __int16 *)(*((_QWORD *)&v67 + 1)
-                                                                    + 2i64 * *(unsigned __int8 *)(v66 + 4 * v22 + 2))));
-        v46 = *((_QWORD *)&v66 + 1);
+                                              * *(unsigned __int16 *)(*((_QWORD *)&v66 + 1)
+                                                                    + 2i64 * *(unsigned __int8 *)(v65 + 4 * v21 + 3))));
         v74 = _mm_add_ps(
                 _mm_mul_ps(
                   _mm_cvtepi32_ps(
                     _mm_or_si128(
                       _mm_or_si128(
-                        _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v50, 0xAu), 85), v26),
-                        _mm_and_si128(v50, v28)),
-                      _mm_and_si128(_mm_srli_epi32(_mm_slli_si128(v50, 2), 5u), v27))),
-                  v19),
-                v18);
+                        _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v51, 0xAu), 85), v25),
+                        _mm_and_si128(v51, v27)),
+                      _mm_and_si128(_mm_srli_epi32(_mm_slli_si128(v51, 2), 5u), v26))),
+                  v18),
+                v17.m_quad);
       }
-      v51 = *(unsigned __int8 *)(v66 + 4 * v22 + 3);
-      if ( (signed int)v51 < v15 )
-      {
-        v75 = _mm_add_ps(
-                _mm_mul_ps(
-                  _mm_cvtepi32_ps(
-                    _mm_or_si128(
-                      _mm_or_si128(
-                        _mm_and_si128(
-                          _mm_shuffle_epi32(_mm_srli_epi32((__m128i)*(unsigned int *)(v46 + 4 * v51), 0x16u), 0),
-                          v23),
-                        _mm_and_si128((__m128i)*(unsigned int *)(v46 + 4 * v51), v25)),
-                      _mm_and_si128(
-                        _mm_shuffle_epi32(_mm_srli_epi32((__m128i)*(unsigned int *)(v46 + 4 * v51), 0xBu), 0),
-                        v24))),
-                  v16),
-                v12);
-      }
-      else
-      {
-        v52 = _mm_loadl_epi64((const __m128i *)(v67
-                                              + 8i64
-                                              * *(unsigned __int16 *)(*((_QWORD *)&v67 + 1)
-                                                                    + 2i64 * *(unsigned __int8 *)(v66 + 4 * v22 + 3))));
-        v75 = _mm_add_ps(
-                _mm_mul_ps(
-                  _mm_cvtepi32_ps(
-                    _mm_or_si128(
-                      _mm_or_si128(
-                        _mm_and_si128(_mm_shuffle_epi32(_mm_srli_epi32(v52, 0xAu), 85), v26),
-                        _mm_and_si128(v52, v28)),
-                      _mm_and_si128(_mm_srli_epi32(_mm_slli_si128(v52, 2), 5u), v27))),
-                  v19),
-                v18);
-      }
-      v53 = v79[1].m_size;
-      v54 = 0;
-      v55 = ((_BYTE)v49 != (_BYTE)v51) + 1;
-      v56 = 0;
-      if ( v55 <= 0 )
+      m_size = v78[1].m_size;
+      v53 = 0;
+      v54 = ((_BYTE)v48 != (unsigned __int8)v50) + 1;
+      v55 = 0;
+      if ( v54 <= 0 )
       {
         v13 = vars0;
-        v9 = (hkGeometry *)v79;
+        v9 = (hkGeometry *)v78;
         goto LABEL_59;
       }
-      v57 = 2 * v21;
+      v56 = 2 * v20;
       do
       {
-        v58 = v56 | v57 | ((_DWORD)v70 << 8);
-        if ( ((unsigned __int8 (__fastcall *)(hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::CustomGeometryConverter *, _QWORD, __int64, __int64))v80->vfptr->isKeyConvertionAllowed)(
-               v80,
-               v56 | (unsigned int)v57 | ((_DWORD)v70 << 8),
-               v49,
-               v44) )
+        v57 = v55 | v56 | ((_DWORD)v69 << 8);
+        if ( ((unsigned __int8 (__fastcall *)(hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::CustomGeometryConverter *, _QWORD, __int64, __int64))v79->vfptr->isKeyConvertionAllowed)(
+               v79,
+               v57,
+               v48,
+               v43) )
         {
-          v59 = 0;
+          v58 = 0;
           if ( append )
           {
             if ( append == 1 )
             {
-              v59 = v58;
+              v58 = v57;
             }
             else
             {
-              hkErrStream::hkErrStream(&v76, &buf, 512);
-              hkOstream::operator<<((hkOstream *)&v76.vfptr, "Triangle material type not supported.");
+              hkErrStream::hkErrStream(&v75, buf, 512);
+              hkOstream::operator<<(&v75, "Triangle material type not supported.");
               if ( (unsigned int)hkError::messageError(
-                                   -560922122,
-                                   &buf,
+                                   0xDE9101F6,
+                                   buf,
                                    "Y:\\NightlyJobs\\09-12-Thu-05\\Source\\Geometry/Internal/DataStructures/StaticMeshTre"
                                    "e/hkcdStaticMeshTree.inl",
                                    1317) )
                 __debugbreak();
-              hkOstream::~hkOstream((hkOstream *)&v76.vfptr);
+              hkOstream::~hkOstream(&v75);
             }
           }
           else
           {
-            v59 = v43;
+            v58 = m_value;
           }
-          if ( v79[2].m_size == (v79[2].m_capacityAndFlags & 0x3FFFFFFF) )
-            hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v79[2], 16);
-          v60 = &v79[2].m_data[v79[2].m_size++].m_quad;
-          HIDWORD(v60->m128_u64[1]) = v59;
-          LODWORD(v60->m128_u64[0]) = v53;
-          v54 = 1;
-          HIDWORD(v60->m128_u64[0]) = v56 + v53 + 1;
-          LODWORD(v60->m128_u64[1]) = v56 + v53 + 2;
+          if ( v78[2].m_size == (v78[2].m_capacityAndFlags & 0x3FFFFFFF) )
+            hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&v78[2].m_data, 16);
+          p_m_quad = &v78[2].m_data[v78[2].m_size++].m_quad;
+          p_m_quad->m128_i32[3] = v58;
+          p_m_quad->m128_i32[0] = m_size;
+          v53 = 1;
+          p_m_quad->m128_i32[1] = v55 + m_size + 1;
+          p_m_quad->m128_i32[2] = v55 + m_size + 2;
         }
-        ++v56;
+        ++v55;
       }
-      while ( v56 < v55 );
-      v9 = (hkGeometry *)v79;
-      if ( v54 )
+      while ( v55 < v54 );
+      v9 = (hkGeometry *)v78;
+      if ( v53 )
       {
-        hkArrayBase<hkVector4f>::_append(
-          v79 + 1,
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-          &a,
-          v55 + 2);
-        v13 = *((_QWORD *)&v66 + 1);
-        v14 = v68;
-        v16 = v65;
-        v12 = v64;
-        v19 = v63;
-        v21 = v81;
-        vars0 = *((_QWORD *)&v66 + 1);
+        hkArrayBase<hkVector4f>::_append(v78 + 1, &hkContainerHeapAllocator::s_alloc, &a, v54 + 2);
+        v13 = (hkcdStaticMeshTreeBase::Section *)*((_QWORD *)&v65 + 1);
+        v14 = v67;
+        v16 = v64;
+        v12 = v63;
         v18 = v62;
-        v26 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskZ);
-        v27 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskY);
-        v28 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskX);
-        v23 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskZ);
-        v24 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskY);
-        v25 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskX);
+        v20 = v80;
+        vars0 = (hkcdStaticMeshTreeBase::Section *)*((_QWORD *)&v65 + 1);
+        v17.m_quad = m_quad;
+        v25 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskZ);
+        v26 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskY);
+        v27 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskX);
+        si128 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskZ);
+        v23 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskY);
+        v24 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskX);
 LABEL_59:
-        v22 = v61;
+        v21 = v60;
         goto LABEL_60;
       }
-      v21 = v81;
-      v22 = v61;
+      v20 = v80;
+      v21 = v60;
 LABEL_11:
-      v13 = *((_QWORD *)&v66 + 1);
-      v14 = v68;
-      v16 = v65;
-      v12 = v64;
-      v19 = v63;
+      v13 = (hkcdStaticMeshTreeBase::Section *)*((_QWORD *)&v65 + 1);
+      v14 = v67;
+      v16 = v64;
+      v12 = v63;
       v18 = v62;
-      vars0 = *((_QWORD *)&v66 + 1);
-      v26 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskZ);
-      v27 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskY);
-      v28 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskX);
-      v23 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskZ);
-      v24 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskY);
-      v25 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskX);
+      v17.m_quad = m_quad;
+      vars0 = (hkcdStaticMeshTreeBase::Section *)*((_QWORD *)&v65 + 1);
+      v25 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskZ);
+      v26 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskY);
+      v27 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned __int64,21,21>::decode::`2::maskX);
+      si128 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskZ);
+      v23 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskY);
+      v24 = _mm_load_si128((const __m128i *)&`hkcdStaticMeshTreeBase::VertexCODEC<unsigned int,11,11>::decode::`2::maskX);
 LABEL_60:
-      v8 = v80;
-      v15 = v69;
-      ++v22;
+      v8 = v79;
+      m_data_low = v68;
       ++v21;
-      v61 = v22;
-      v81 = v21;
+      ++v20;
+      v60 = v21;
+      v80 = v20;
     }
-    while ( v22 < v71 );
+    while ( v21 < v70 );
   }
-  if ( (_BYTE)v82 )
+  if ( v81 )
     hkGeometryUtils::weldVertices(v9, 0.0);
 }
 

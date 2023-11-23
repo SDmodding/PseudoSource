@@ -1,137 +1,135 @@
 // File Line: 17
 // RVA: 0x1307320
-void __fastcall hkTrackerStringMapLayoutHandler::getReferences(hkTrackerStringMapLayoutHandler *this, hkTrackerLayoutBlock *curBlock, const void *curData, hkTrackerTypeTreeNode *curType, hkTrackerLayoutCalculator *layoutCalc, hkArray<hkTrackerLayoutBlock const *,hkContainerTempAllocator> *newBlocks)
+void __fastcall hkTrackerStringMapLayoutHandler::getReferences(
+        hkTrackerStringMapLayoutHandler *this,
+        hkTrackerLayoutBlock *curBlock,
+        hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator> *curData,
+        hkTrackerTypeTreeNode *curType,
+        hkTrackerLayoutCalculator *layoutCalc,
+        hkArray<hkTrackerLayoutBlock const *,hkContainerTempAllocator> *newBlocks)
 {
-  hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator> *v6; // r14
-  hkTrackerLayoutBlock *v7; // r15
-  hkTrackerTypeTreeNode *v8; // rbx
-  hkBool *v9; // rax
-  char v10; // r13
-  bool v11; // zf
-  hkTrackerTypeTreeCache *v12; // r12
-  int v13; // eax
-  hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::Elem *v14; // rbp
-  const char *v15; // rsi
-  signed __int64 v16; // rdi
-  hkTrackerTypeTreeNode *v17; // rsi
-  _QWORD **v18; // rax
-  __int64 v19; // rax
-  hkTrackerLayoutBlock *v20; // rbx
-  hkArray<hkTrackerLayoutBlock const *,hkContainerTempAllocator> *v21; // rdi
-  Dummy *v22; // rbp
-  const char *v23; // r15
-  unsigned __int64 v24; // rsi
-  hkTrackerTypeTreeNode *v25; // r13
-  _QWORD **v26; // rax
-  __int64 v27; // rsi
-  int v28; // eax
-  hkBool result; // [rsp+80h] [rbp+18h]
-  bool v30; // [rsp+88h] [rbp+20h]
+  char v9; // r13
+  bool v10; // zf
+  hkTrackerTypeTreeCache *m_pntr; // r12
+  int Capacity; // eax
+  hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::Elem *m_elem; // rbp
+  const char *v14; // rsi
+  __int64 v15; // rdi
+  hkTrackerTypeTreeNode *v16; // rsi
+  _QWORD **Value; // rax
+  __int64 v18; // rax
+  hkTrackerLayoutBlock *v19; // rbx
+  hkArray<hkTrackerLayoutBlock const *,hkContainerTempAllocator> *v20; // rdi
+  Dummy *Iterator; // rbp
+  const char *Key; // r15
+  unsigned __int64 v23; // rsi
+  hkTrackerTypeTreeNode *v24; // r13
+  _QWORD **v25; // rax
+  __int64 v26; // rsi
+  int v27; // eax
+  hkBool result; // [rsp+80h] [rbp+18h] BYREF
+  char v29; // [rsp+88h] [rbp+20h]
 
-  v6 = (hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator> *)curData;
-  v7 = curBlock;
-  v8 = curType;
-  v9 = hkSubString::operator==(&curType->m_name, &result, "hkStorageStringMap");
-  v10 = v9->m_bool != 0;
-  v11 = v8->m_contains->m_type == 1;
-  v12 = layoutCalc->m_typeCache.m_pntr;
-  v30 = v9->m_bool != 0;
-  result.m_bool = v11;
-  v13 = hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getCapacity(v6);
-  if ( v13 > 0 )
+  v9 = hkSubString::operator==(&curType->m_name, &result, "hkStorageStringMap")->m_bool != 0;
+  v10 = curType->m_contains->m_type == TYPE_BYTE;
+  m_pntr = layoutCalc->m_typeCache.m_pntr;
+  v29 = v9;
+  result.m_bool = v10;
+  Capacity = hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getCapacity(curData);
+  if ( Capacity > 0 )
   {
-    v14 = v6->m_elem;
-    v15 = "buffer_hkStringMap";
-    if ( v10 )
-      v15 = "buffer_hkStorageStringMap";
-    v16 = 24i64 * v13;
-    if ( v7->m_references.m_size == (v7->m_references.m_capacityAndFlags & 0x3FFFFFFF) )
-      hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v7->m_references, 8);
-    v7->m_references.m_data[v7->m_references.m_size++] = v14;
-    v17 = hkTrackerTypeTreeCache::newNamedNode(v12, TYPE_ARRAY, v15, 0);
-    v18 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v19 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v18[11] + 8i64))(v18[11], 48i64);
-    v20 = (hkTrackerLayoutBlock *)v19;
-    if ( v19 )
+    m_elem = curData->m_elem;
+    v14 = "buffer_hkStringMap";
+    if ( v9 )
+      v14 = "buffer_hkStorageStringMap";
+    v15 = 24i64 * Capacity;
+    if ( curBlock->m_references.m_size == (curBlock->m_references.m_capacityAndFlags & 0x3FFFFFFF) )
+      hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&curBlock->m_references.m_data, 8);
+    curBlock->m_references.m_data[curBlock->m_references.m_size++] = m_elem;
+    v16 = hkTrackerTypeTreeCache::newNamedNode(m_pntr, TYPE_ARRAY, v14, 0);
+    Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    v18 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 48i64);
+    v19 = (hkTrackerLayoutBlock *)v18;
+    if ( v18 )
     {
-      *(_QWORD *)v19 = v17;
-      *(_QWORD *)(v19 + 8) = v14;
-      *(_QWORD *)(v19 + 16) = v16;
-      *(_DWORD *)(v19 + 24) = -1;
-      *(_QWORD *)(v19 + 32) = 0i64;
-      *(_DWORD *)(v19 + 40) = 0;
-      *(_DWORD *)(v19 + 44) = 2147483648;
+      *(_QWORD *)v18 = v16;
+      *(_QWORD *)(v18 + 8) = m_elem;
+      *(_QWORD *)(v18 + 16) = v15;
+      *(_DWORD *)(v18 + 24) = -1;
+      *(_QWORD *)(v18 + 32) = 0i64;
+      *(_DWORD *)(v18 + 40) = 0;
+      *(_DWORD *)(v18 + 44) = 0x80000000;
     }
     else
     {
-      v20 = 0i64;
+      v19 = 0i64;
     }
-    v21 = newBlocks;
+    v20 = newBlocks;
     if ( newBlocks->m_size == (newBlocks->m_capacityAndFlags & 0x3FFFFFFF) )
-      hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, newBlocks, 8);
-    v21->m_data[v21->m_size++] = v20;
-    v22 = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::getIterator((hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)v6);
+      hkArrayUtil::_reserveMore(&hkContainerTempAllocator::s_alloc, (const void **)&newBlocks->m_data, 8);
+    v20->m_data[v20->m_size++] = v19;
+    Iterator = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::getIterator((hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)curData);
     hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::isValid(
-      (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)v6,
+      (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)curData,
       (hkBool *)&layoutCalc,
-      v22);
+      Iterator);
     while ( (_BYTE)layoutCalc )
     {
-      v23 = (const char *)hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getKey(v6, v22);
-      if ( v20->m_references.m_size == (v20->m_references.m_capacityAndFlags & 0x3FFFFFFF) )
-        hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v20->m_references, 8);
-      v20->m_references.m_data[v20->m_references.m_size++] = v23;
+      Key = (const char *)hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getKey(curData, Iterator);
+      if ( v19->m_references.m_size == (v19->m_references.m_capacityAndFlags & 0x3FFFFFFF) )
+        hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&v19->m_references.m_data, 8);
+      v19->m_references.m_data[v19->m_references.m_size++] = Key;
       if ( result.m_bool )
       {
-        v24 = hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getValue(
-                (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)v6,
-                v22);
-        if ( v20->m_references.m_size == (v20->m_references.m_capacityAndFlags & 0x3FFFFFFF) )
-          hkArrayUtil::_reserveMore(
-            (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-            &v20->m_references,
-            8);
-        v20->m_references.m_data[v20->m_references.m_size++] = (const void *)v24;
+        v23 = hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getValue(
+                (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)curData,
+                Iterator);
+        if ( v19->m_references.m_size == (v19->m_references.m_capacityAndFlags & 0x3FFFFFFF) )
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&v19->m_references.m_data, 8);
+        v19->m_references.m_data[v19->m_references.m_size++] = (const void *)v23;
       }
-      if ( v10 )
+      if ( v9 )
       {
-        v25 = hkTrackerTypeTreeCache::newNamedNode(v12, TYPE_ARRAY, "buffer_hkStorageStringMap_key", 0);
-        v26 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-        v27 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v26[11] + 8i64))(v26[11], 48i64);
-        if ( v27 )
+        v24 = hkTrackerTypeTreeCache::newNamedNode(m_pntr, TYPE_ARRAY, "buffer_hkStorageStringMap_key", 0);
+        v25 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+        v26 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*v25[11] + 8i64))(v25[11], 48i64);
+        if ( v26 )
         {
-          v28 = hkString::strLen(v23);
-          *(_QWORD *)v27 = v25;
-          *(_QWORD *)(v27 + 8) = v23;
-          *(_DWORD *)(v27 + 24) = -1;
-          *(_QWORD *)(v27 + 16) = v28 + 1;
-          *(_QWORD *)(v27 + 32) = 0i64;
-          *(_DWORD *)(v27 + 40) = 0;
-          *(_DWORD *)(v27 + 44) = 2147483648;
+          v27 = hkString::strLen(Key);
+          *(_QWORD *)v26 = v24;
+          *(_QWORD *)(v26 + 8) = Key;
+          *(_DWORD *)(v26 + 24) = -1;
+          *(_QWORD *)(v26 + 16) = v27 + 1;
+          *(_QWORD *)(v26 + 32) = 0i64;
+          *(_DWORD *)(v26 + 40) = 0;
+          *(_DWORD *)(v26 + 44) = 0x80000000;
         }
         else
         {
-          v27 = 0i64;
+          v26 = 0i64;
         }
-        if ( v21->m_size == (v21->m_capacityAndFlags & 0x3FFFFFFF) )
-          hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, v21, 8);
-        v10 = v30;
-        v21->m_data[v21->m_size++] = (hkTrackerLayoutBlock *)v27;
+        if ( v20->m_size == (v20->m_capacityAndFlags & 0x3FFFFFFF) )
+          hkArrayUtil::_reserveMore(&hkContainerTempAllocator::s_alloc, (const void **)&v20->m_data, 8);
+        v9 = v29;
+        v20->m_data[v20->m_size++] = (hkTrackerLayoutBlock *)v26;
       }
-      v22 = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::getNext(
-              (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)v6,
-              v22);
+      Iterator = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::getNext(
+                   (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)curData,
+                   Iterator);
       hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::isValid(
-        (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)v6,
+        (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)curData,
         (hkBool *)&layoutCalc,
-        v22);
+        Iterator);
     }
   }
 }
 
 // File Line: 68
 // RVA: 0x1307660
-unsigned __int64 __fastcall hkTrackerStringMapLayoutHandler::getSize(hkTrackerStringMapLayoutHandler *this, hkTrackerTypeTreeNode *curType, hkTrackerLayoutCalculator *layoutCalc)
+unsigned __int64 __fastcall hkTrackerStringMapLayoutHandler::getSize(
+        hkTrackerStringMapLayoutHandler *this,
+        hkTrackerTypeTreeNode *curType,
+        hkTrackerLayoutCalculator *layoutCalc)
 {
   return 24i64;
 }

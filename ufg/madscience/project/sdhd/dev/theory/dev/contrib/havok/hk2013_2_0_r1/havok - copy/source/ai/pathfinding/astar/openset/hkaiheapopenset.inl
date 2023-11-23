@@ -2,79 +2,73 @@
 // RVA: 0xBFD7D0
 void __fastcall hkaiHeapOpenSet::insertSearchIndex(hkaiHeapOpenSet *this, int nid, float newCost)
 {
-  __int64 v3; // r10
-  hkaiHeapOpenSet::IndexCostPair *v4; // r8
-  hkaiHeapOpenSet *v5; // r11
+  __int64 m_heapSize; // r10
+  hkaiHeapOpenSet::IndexCostPair *m_heap; // r8
   hkaiHeapOpenSet::IndexCostPair *v6; // rcx
-  int v7; // ebx
-  float v8; // er9
-  int i; // er8
+  int m_idx; // ebx
+  hkaiHeapOpenSet::IndexCostPair::CostUnion v8; // r9d
+  int i; // r8d
   __int64 v10; // rcx
-  __int64 v11; // rcx
 
-  v3 = this->m_heapSize;
-  v4 = this->m_heap;
-  v5 = this;
-  this->m_heapSize = v3 + 1;
-  v4[v3].m_idx = nid;
-  v4[v3].m_cost.m_floatCost = newCost;
+  m_heapSize = this->m_heapSize;
+  m_heap = this->m_heap;
+  this->m_heapSize = m_heapSize + 1;
+  m_heap[m_heapSize].m_idx = nid;
+  m_heap[m_heapSize].m_cost.m_floatCost = newCost;
   v6 = this->m_heap;
-  v7 = v6[v3].m_idx;
-  v8 = v6[v3].m_cost.m_floatCost;
-  for ( i = ((signed int)v3 - 1) / 2; (signed int)v3 > 0; i = (i - 1) / 2 )
+  m_idx = v6[m_heapSize].m_idx;
+  LODWORD(v8.m_floatCost) = v6[m_heapSize].m_cost;
+  for ( i = ((int)m_heapSize - 1) / 2; (int)m_heapSize > 0; i = (i - 1) / 2 )
   {
-    if ( v5->m_heap[i].m_cost.m_intCost <= SLODWORD(v8) )
+    if ( this->m_heap[i].m_cost.m_intCost <= v8.m_intCost )
       break;
-    v10 = (signed int)v3;
-    LODWORD(v3) = i;
-    v5->m_heap[v10] = v5->m_heap[i];
+    v10 = (int)m_heapSize;
+    LODWORD(m_heapSize) = i;
+    this->m_heap[v10] = this->m_heap[i];
   }
-  v11 = (signed int)v3;
-  v5->m_heap[v11].m_idx = v7;
-  v5->m_heap[v11].m_cost.m_floatCost = v8;
+  this->m_heap[(int)m_heapSize].m_idx = m_idx;
+  this->m_heap[(int)m_heapSize].m_cost = v8;
 }
 
 // File Line: 127
 // RVA: 0xBFD860
 __int64 __fastcall hkaiHeapOpenSet::popNextSearchIndex(hkaiHeapOpenSet *this)
 {
-  hkaiHeapOpenSet::IndexCostPair *v1; // r8
+  hkaiHeapOpenSet::IndexCostPair *m_heap; // r8
   int v2; // edi
-  hkaiHeapOpenSet *v3; // r11
-  unsigned int v4; // esi
-  int v5; // ebx
+  unsigned int m_idx; // esi
+  int m_heapSize; // ebx
   int v6; // ecx
-  signed __int64 v7; // r8
-  signed __int64 v8; // r9
-  __int64 v9; // rax
+  hkaiHeapOpenSet::IndexCostPair *v7; // r8
+  hkaiHeapOpenSet::IndexCostPair *v8; // r9
+  hkaiHeapOpenSet::IndexCostPair v9; // rax
   int v10; // eax
 
-  v1 = this->m_heap;
+  m_heap = this->m_heap;
   v2 = 0;
-  v3 = this;
-  v4 = this->m_heap->m_idx;
-  *v1 = v1[--this->m_heapSize];
-  v5 = this->m_heapSize;
-  if ( v5 > 2 )
+  m_idx = this->m_heap->m_idx;
+  *m_heap = m_heap[--this->m_heapSize];
+  m_heapSize = this->m_heapSize;
+  if ( m_heapSize > 2 )
     v6 = (this->m_heap[1].m_cost.m_intCost > this->m_heap[2].m_cost.m_intCost) + 1;
   else
     v6 = 1;
-  while ( v6 < v5 )
+  while ( v6 < m_heapSize )
   {
-    v7 = (signed __int64)&v3->m_heap[v6];
-    v8 = (signed __int64)&v3->m_heap[v2];
-    if ( *(_DWORD *)(v7 + 4) >= *(_DWORD *)(v8 + 4) )
+    v7 = &this->m_heap[v6];
+    v8 = &this->m_heap[v2];
+    if ( v7->m_cost.m_intCost >= v8->m_cost.m_intCost )
       break;
-    v9 = *(_QWORD *)v8;
+    v9 = *v8;
     v2 = v6;
-    *(_QWORD *)v8 = *(_QWORD *)v7;
-    *(_QWORD *)v7 = v9;
-    LODWORD(v9) = 2 * v6;
+    *v8 = *v7;
+    *v7 = v9;
+    v9.m_idx = 2 * v6;
     v6 = 2 * v6 + 1;
-    v10 = v9 + 2;
-    if ( v10 < v3->m_heapSize )
-      v6 += v3->m_heap[v6].m_cost.m_intCost > v3->m_heap[v10].m_cost.m_intCost;
+    v10 = v9.m_idx + 2;
+    if ( v10 < this->m_heapSize )
+      v6 += this->m_heap[v6].m_cost.m_intCost > this->m_heap[v10].m_cost.m_intCost;
   }
-  return v4;
+  return m_idx;
 }
 

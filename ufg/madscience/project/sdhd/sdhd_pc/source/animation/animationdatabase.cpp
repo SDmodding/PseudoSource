@@ -2,13 +2,13 @@
 // RVA: 0x3ADB60
 void __fastcall ReloadHotSwapBinFile(const char *filename)
 {
-  UFG::qString *v1; // rax
-  UFG::qString v2; // [rsp+28h] [rbp-60h]
-  UFG::qString result; // [rsp+50h] [rbp-38h]
+  UFG::qString *FilenameWithoutExtension; // rax
+  UFG::qString v2; // [rsp+28h] [rbp-60h] BYREF
+  UFG::qString result; // [rsp+50h] [rbp-38h] BYREF
 
   UFG::qString::qString(&v2, filename);
-  v1 = UFG::qString::GetFilenameWithoutExtension(&v2, &result);
-  AnimationDataBase::ReLoadAnimBankData(AnimationDataBase::sAnimationDataBase, v1->mData);
+  FilenameWithoutExtension = UFG::qString::GetFilenameWithoutExtension(&v2, &result);
+  AnimationDataBase::ReLoadAnimBankData(AnimationDataBase::sAnimationDataBase, FilenameWithoutExtension->mData);
   UFG::qString::~qString(&result);
   UFG::qString::~qString(&v2);
 }
@@ -17,28 +17,26 @@ void __fastcall ReloadHotSwapBinFile(const char *filename)
 // RVA: 0x3ADBC0
 void __fastcall ReloadHotSwapBtrFile(const char *filename)
 {
-  const char *v1; // rbp
   UFG::qNode<UFG::ActionTreeComponent,UFG::ActionTreeComponent> *v2; // rdi
-  char *v3; // rcx
-  signed __int64 v4; // rbx
+  char *p_mNext; // rcx
+  __int64 v4; // rbx
   UFG::qList<UFG::CharacterAnimationComponent,UFG::CharacterAnimationComponent,1,0> *v5; // rcx
   UFG::qList<UFG::CharacterAnimationComponent,UFG::CharacterAnimationComponent,1,0> *v6; // rbx
-  UFG::qNode<UFG::CharacterAnimationComponent,UFG::CharacterAnimationComponent> *v7; // rcx
+  UFG::qNode<UFG::CharacterAnimationComponent,UFG::CharacterAnimationComponent> *mNext; // rcx
   char *v8; // rcx
-  signed __int64 v9; // rbx
-  UFG::qString v10; // [rsp+28h] [rbp-30h]
+  __int64 v9; // rbx
+  UFG::qString v10; // [rsp+28h] [rbp-30h] BYREF
 
-  v1 = filename;
   v2 = (UFG::qNode<UFG::ActionTreeComponent,UFG::ActionTreeComponent> *)((char *)&UFG::ActionTreeComponent::s_ActionTreeComponentList
                                                                        - 152);
-  v3 = (char *)&UFG::ActionTreeComponent::s_ActionTreeComponentList.mNode.mNext[-10].mNext;
+  p_mNext = (char *)&UFG::ActionTreeComponent::s_ActionTreeComponentList.mNode.mNext[-10].mNext;
   if ( &UFG::ActionTreeComponent::s_ActionTreeComponentList.mNode.mNext[-10].mNext != (UFG::qNode<UFG::ActionTreeComponent,UFG::ActionTreeComponent> **)((char *)&UFG::ActionTreeComponent::s_ActionTreeComponentList - 152) )
   {
     do
     {
-      v4 = *((_QWORD *)v3 + 20) - 152i64;
-      ActionController::Stop((ActionController *)(v3 + 192));
-      v3 = (char *)v4;
+      v4 = *((_QWORD *)p_mNext + 20) - 152i64;
+      ActionController::Stop((ActionController *)(p_mNext + 192));
+      p_mNext = (char *)v4;
     }
     while ( (UFG::qNode<UFG::ActionTreeComponent,UFG::ActionTreeComponent> *)v4 != v2 );
   }
@@ -48,14 +46,14 @@ void __fastcall ReloadHotSwapBtrFile(const char *filename)
     do
     {
       v6 = (UFG::qList<UFG::CharacterAnimationComponent,UFG::CharacterAnimationComponent,1,0> *)&v5[13].mNode.mPrev[-13].mNext;
-      v7 = v5[9].mNode.mNext;
-      if ( v7 && !LOBYTE(v7[2].mNext) )
-        ((void (__cdecl *)(UFG::qNode<UFG::CharacterAnimationComponent,UFG::CharacterAnimationComponent> *))v7[31].mPrev[24].mNext)(&v7[31]);
+      mNext = v5[9].mNode.mNext;
+      if ( mNext && !LOBYTE(mNext[2].mNext) )
+        ((void (__fastcall *)(UFG::qNode<UFG::CharacterAnimationComponent,UFG::CharacterAnimationComponent> *))mNext[31].mPrev[24].mNext)(&mNext[31]);
       v5 = v6;
     }
     while ( v6 != (UFG::qList<UFG::CharacterAnimationComponent,UFG::CharacterAnimationComponent,1,0> *)((char *)&UFG::CharacterAnimationComponent::s_CharacterAnimationComponentList - 200) );
   }
-  UFG::qString::qString(&v10, v1);
+  UFG::qString::qString(&v10, filename);
   BlendTreeDataBase::ReLoadBlendTrees(BlendTreeDataBase::sBlendTreeDataBase, v10.mData);
   ActionNode::ResolveReferencesGlobal();
   v8 = (char *)&UFG::ActionTreeComponent::s_ActionTreeComponentList.mNode.mNext[-10].mNext;
@@ -77,26 +75,26 @@ void __fastcall ReloadHotSwapBtrFile(const char *filename)
 // RVA: 0x3ADD10
 void __fastcall ReloadHotSwapBtrFile_Bin(const char *filename)
 {
-  char *v1; // rcx
+  char *p_mNext; // rcx
   UFG::qNode<UFG::ActionTreeComponent,UFG::ActionTreeComponent> *v2; // rdi
-  signed __int64 v3; // rbx
+  __int64 v3; // rbx
   UFG::qList<UFG::CharacterAnimationComponent,UFG::CharacterAnimationComponent,1,0> *v4; // rcx
-  UFG::qNode<UFG::CharacterAnimationComponent,UFG::CharacterAnimationComponent> *v5; // rbx
-  UFG::qNode<UFG::CharacterAnimationComponent,UFG::CharacterAnimationComponent> *v6; // rcx
+  UFG::qNode<UFG::CharacterAnimationComponent,UFG::CharacterAnimationComponent> *mPrev; // rbx
+  UFG::qNode<UFG::CharacterAnimationComponent,UFG::CharacterAnimationComponent> *mNext; // rcx
   UFG::qList<UFG::CharacterAnimationComponent,UFG::CharacterAnimationComponent,1,0> *v7; // rbx
   char *v8; // rcx
-  signed __int64 v9; // rbx
+  __int64 v9; // rbx
 
-  v1 = (char *)&UFG::ActionTreeComponent::s_ActionTreeComponentList.mNode.mNext[-10].mNext;
+  p_mNext = (char *)&UFG::ActionTreeComponent::s_ActionTreeComponentList.mNode.mNext[-10].mNext;
   v2 = (UFG::qNode<UFG::ActionTreeComponent,UFG::ActionTreeComponent> *)((char *)&UFG::ActionTreeComponent::s_ActionTreeComponentList
                                                                        - 152);
   if ( &UFG::ActionTreeComponent::s_ActionTreeComponentList.mNode.mNext[-10].mNext != (UFG::qNode<UFG::ActionTreeComponent,UFG::ActionTreeComponent> **)((char *)&UFG::ActionTreeComponent::s_ActionTreeComponentList - 152) )
   {
     do
     {
-      v3 = *((_QWORD *)v1 + 20) - 152i64;
-      ActionController::Stop((ActionController *)(v1 + 192));
-      v1 = (char *)v3;
+      v3 = *((_QWORD *)p_mNext + 20) - 152i64;
+      ActionController::Stop((ActionController *)(p_mNext + 192));
+      p_mNext = (char *)v3;
     }
     while ( (UFG::qNode<UFG::ActionTreeComponent,UFG::ActionTreeComponent> *)v3 != v2 );
   }
@@ -105,11 +103,11 @@ void __fastcall ReloadHotSwapBtrFile_Bin(const char *filename)
   {
     do
     {
-      v5 = v4[13].mNode.mPrev;
-      v6 = v4[9].mNode.mNext;
-      v7 = (UFG::qList<UFG::CharacterAnimationComponent,UFG::CharacterAnimationComponent,1,0> *)&v5[-13].mNext;
-      if ( v6 && !LOBYTE(v6[2].mNext) )
-        ((void (*)(void))v6[31].mPrev[24].mNext)();
+      mPrev = v4[13].mNode.mPrev;
+      mNext = v4[9].mNode.mNext;
+      v7 = (UFG::qList<UFG::CharacterAnimationComponent,UFG::CharacterAnimationComponent,1,0> *)&mPrev[-13].mNext;
+      if ( mNext && !LOBYTE(mNext[2].mNext) )
+        ((void (__fastcall *)(UFG::qNode<UFG::CharacterAnimationComponent,UFG::CharacterAnimationComponent> *))mNext[31].mPrev[24].mNext)(&mNext[31]);
       v4 = v7;
     }
     while ( v7 != (UFG::qList<UFG::CharacterAnimationComponent,UFG::CharacterAnimationComponent,1,0> *)((char *)&UFG::CharacterAnimationComponent::s_CharacterAnimationComponentList - 200) );
@@ -135,14 +133,14 @@ void __fastcall ReloadHotSwapBtrFile_Bin(const char *filename)
 // RVA: 0x3AFC70
 bool __fastcall SortDescendingPriority(AnimationGroup *const a, AnimationGroup *const b)
 {
-  char v2; // al
+  char mValue; // al
   char v3; // r8
 
-  v2 = b->mCurrentAnimationPriority.mValue;
+  mValue = b->mCurrentAnimationPriority.mValue;
   v3 = a->mCurrentAnimationPriority.mValue;
-  if ( v2 < v3 )
+  if ( mValue < v3 )
     return 1;
-  if ( v2 == v3 )
+  if ( mValue == v3 )
     return b->mCurrentAnimationSubPriority <= a->mCurrentAnimationSubPriority;
   return 0;
 }
@@ -163,12 +161,7 @@ __int64 dynamic_initializer_for__BlendTreeDataBase::sClassNameUID__()
 void BlendTreeDataBase::Init(void)
 {
   char *v0; // rcx
-  void (__fastcall *v1)(fastdelegate::FastDelegate1<char const *,void> *, const char *); // rax
-  hkResourceHandle *v2; // rax
-  fastdelegate::FastDelegate1<char const *,void> v3; // [rsp+38h] [rbp-30h]
-  void (__fastcall *v4)(const char *); // [rsp+48h] [rbp-20h]
-  void (__fastcall *v5)(fastdelegate::FastDelegate1<char const *,void> *, const char *); // [rsp+50h] [rbp-18h]
-  _QWORD *v6; // [rsp+78h] [rbp+10h]
+  hkResourceHandle *v1; // rax
 
   v0 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0x30ui64, "BlendTreeDataBase", 0i64, 1u);
   if ( v0 )
@@ -178,23 +171,16 @@ void BlendTreeDataBase::Init(void)
     *(_QWORD *)v0 = &BlendTreeDataBase::`vftable;
     *((_QWORD *)v0 + 3) = 0i64;
     *((_QWORD *)v0 + 2) = 0i64;
-    v6 = v0 + 32;
-    *v6 = v6;
-    v6[1] = v6;
+    *((_QWORD *)v0 + 4) = v0 + 32;
+    *((_QWORD *)v0 + 5) = v0 + 32;
   }
   else
   {
     v0 = 0i64;
   }
   BlendTreeDataBase::sBlendTreeDataBase = (BlendTreeDataBase *)v0;
-  v3 = UFG::DefaultHotSwapCallBack;
-  v1 = fastdelegate::FastDelegate1<char const *,void>::InvokeStaticFunction;
-  if ( !ReloadHotSwapBtrFile_Bin )
-    v1 = 0i64;
-  v5 = v1;
-  v4 = ReloadHotSwapBtrFile_Bin;
-  v2 = (hkResourceHandle *)UFG::HotSwapFileManager::Get();
-  TargetVisibleInAIDataCondition::CreateClone(v2);
+  v1 = (hkResourceHandle *)UFG::HotSwapFileManager::Get();
+  TargetVisibleInAIDataCondition::CreateClone(v1);
 }
 
 // File Line: 320
@@ -208,33 +194,31 @@ BlendTreeDataBase *__fastcall BlendTreeDataBase::GetInstance()
 // RVA: 0x39F700
 void __fastcall BlendTreeDataBase::~BlendTreeDataBase(BlendTreeDataBase *this)
 {
-  BlendTreeDataBase *v1; // rdi
-  UFG::qList<PoseNode,PoseNode,1,0> *v2; // rbx
-  UFG::qNode<PoseNode,PoseNode> *v3; // rcx
-  UFG::qNode<PoseNode,PoseNode> *v4; // rax
-  BlendTreeDataBase::PoseNodeLookupEntry *v5; // rcx
-  PoseNode **v6; // rbx
+  UFG::qList<PoseNode,PoseNode,1,0> *p_mPoseNodes; // rbx
+  UFG::qNode<PoseNode,PoseNode> *mPrev; // rcx
+  UFG::qNode<PoseNode,PoseNode> *mNext; // rax
+  BlendTreeDataBase::PoseNodeLookupEntry *p; // rcx
+  PoseNode **p_mpPoseNode; // rbx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&BlendTreeDataBase::`vftable;
-  v2 = &this->mPoseNodes;
+  p_mPoseNodes = &this->mPoseNodes;
   UFG::qList<PoseNode,PoseNode,1,0>::DeleteNodes(&this->mPoseNodes);
-  v3 = v2->mNode.mPrev;
-  v4 = v2->mNode.mNext;
-  v3->mNext = v4;
-  v4->mPrev = v3;
-  v2->mNode.mPrev = &v2->mNode;
-  v2->mNode.mNext = &v2->mNode;
-  v5 = v1->mPoseNodeLookup.p;
-  if ( v5 )
+  mPrev = p_mPoseNodes->mNode.mPrev;
+  mNext = p_mPoseNodes->mNode.mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  p_mPoseNodes->mNode.mPrev = &p_mPoseNodes->mNode;
+  p_mPoseNodes->mNode.mNext = &p_mPoseNodes->mNode;
+  p = this->mPoseNodeLookup.p;
+  if ( p )
   {
-    v6 = &v5[-1].mpPoseNode;
-    `eh vector destructor iterator(v5, 0x10ui64, (int)v5[-1].mpPoseNode, (void (__fastcall *)(void *))_);
-    operator delete[](v6);
+    p_mpPoseNode = &p[-1].mpPoseNode;
+    `eh vector destructor iterator(p, 0x10ui64, (int)p[-1].mpPoseNode, (void (__fastcall *)(void *))_);
+    operator delete[](p_mpPoseNode);
   }
-  v1->mPoseNodeLookup.p = 0i64;
-  *(_QWORD *)&v1->mPoseNodeLookup.size = 0i64;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->mPoseNodeLookup.p = 0i64;
+  *(_QWORD *)&this->mPoseNodeLookup.size = 0i64;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 341
@@ -253,7 +237,7 @@ __int64 dynamic_initializer_for__AnimationDataBase::sClassNameUID__()
 __int64 dynamic_initializer_for__gBankNameFilter__()
 {
   UFG::qString::qString(&gBankNameFilter);
-  return atexit(dynamic_atexit_destructor_for__gBankNameFilter__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gBankNameFilter__);
 }
 
 // File Line: 387
@@ -261,7 +245,7 @@ __int64 dynamic_initializer_for__gBankNameFilter__()
 __int64 dynamic_initializer_for__gReferencedByFilter__()
 {
   UFG::qString::qString(&gReferencedByFilter);
-  return atexit(dynamic_atexit_destructor_for__gReferencedByFilter__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gReferencedByFilter__);
 }
 
 // File Line: 402
@@ -294,45 +278,39 @@ AnimationDataBase *__fastcall AnimationDataBase::GetInstance()
 // RVA: 0x39CE10
 void __fastcall AnimationDataBase::AnimationDataBase(AnimationDataBase *this)
 {
-  AnimationDataBase *v1; // rdi
   UFG::StreamPrioritySystem *v2; // rbx
-  signed int v3; // ecx
-  UFG::eAnimationPriorityEnum *v4; // rax
+  int v3; // ecx
+  UFG::eAnimationPriorityEnum *p_mOverFlowPriority; // rax
   UFG::allocator::free_link *v5; // rax
   UFG::StreamPrioritySystem *v6; // rax
-  UFG::qList<AnimationGroup,AnimationGroupBudgetedList,0,0> *v7; // [rsp+68h] [rbp+10h]
-  UFG::qList<AnimationGroup,AnimationGroupUpdateList,0,0> *v8; // [rsp+68h] [rbp+10h]
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   v2 = 0i64;
   this->mResourceOwner = 0i64;
   this->vfptr = (Expression::IMemberMapVtbl *)&AnimationDataBase::`vftable;
   UFG::qBaseTreeRB::qBaseTreeRB(&this->mAnimGroups.mTree);
-  UFG::qBaseTreeRB::qBaseTreeRB(&v1->mAnimations.mTree);
+  UFG::qBaseTreeRB::qBaseTreeRB(&this->mAnimations.mTree);
   `eh vector constructor iterator(
-    v1->mDefaultReferenceContainers,
+    this->mDefaultReferenceContainers,
     0x18ui64,
     17,
     (void (__fastcall *)(void *))AnimationGroupHandleContainer::AnimationGroupHandleContainer);
-  v7 = &v1->mBudgetedAnimationGroups;
-  v7->mNode.mPrev = &v7->mNode;
-  v7->mNode.mNext = &v7->mNode;
-  v8 = &v1->mQueuedUpdateGroups;
-  v8->mNode.mPrev = &v8->mNode;
-  v8->mNode.mNext = &v8->mNode;
+  this->mBudgetedAnimationGroups.mNode.mPrev = &this->mBudgetedAnimationGroups.mNode;
+  this->mBudgetedAnimationGroups.mNode.mNext = &this->mBudgetedAnimationGroups.mNode;
+  this->mQueuedUpdateGroups.mNode.mPrev = &this->mQueuedUpdateGroups.mNode;
+  this->mQueuedUpdateGroups.mNode.mNext = &this->mQueuedUpdateGroups.mNode;
   v3 = 16;
-  v4 = &v1->mPriorityBudgets.p[0].mOverFlowPriority;
+  p_mOverFlowPriority = &this->mPriorityBudgets.p[0].mOverFlowPriority;
   do
   {
-    *((_QWORD *)v4 - 1) = 0i64;
-    *v4 = 0;
-    v4 += 3;
+    *((_QWORD *)p_mOverFlowPriority - 1) = 0i64;
+    *p_mOverFlowPriority = eANIM_PRIORITY_INACTIVE_NIS;
+    p_mOverFlowPriority += 3;
     --v3;
   }
   while ( v3 >= 0 );
-  v1->mPriorityBudgets.size = 0;
-  UFG::qString::qString(&v1->mGlobalFallbackAnimation);
+  this->mPriorityBudgets.size = 0;
+  UFG::qString::qString(&this->mGlobalFallbackAnimation);
   v5 = UFG::qMalloc(0x70ui64, "AnimationDataBase.StreamPrioritySystem", 0i64);
   if ( v5 )
   {
@@ -347,82 +325,83 @@ void __fastcall AnimationDataBase::AnimationDataBase(AnimationDataBase *this)
       0xA0000u);
     v2 = v6;
   }
-  v1->m_pStreamPrioritySystem = v2;
+  this->m_pStreamPrioritySystem = v2;
   AnimationGroup::sStreamPrioritySystem = v2;
-  NISManager::sStreamPrioritySystem = v1->m_pStreamPrioritySystem;
-  UFG::qString::Set(&v1->mGlobalFallbackAnimation, "LOC_Stand_Idle");
-  v1->mPriorityBudgets.size = 17;
-  v1->mPriorityBudgets.p[9].mMaxSize = 0x100000;
-  v1->mPriorityBudgets.p[9].mOverFlowPriority = 5;
-  v1->mPriorityBudgets.p[5].mMaxSize = 0x800000;
-  v1->mPriorityBudgets.p[5].mOverFlowPriority = 4;
-  v1->mPriorityBudgets.p[4].mMaxSize = 0x400000;
-  v1->mPriorityBudgets.p[4].mOverFlowPriority = 3;
-  v1->mPriorityBudgets.p[3].mMaxSize = 0x800000;
-  v1->mPriorityBudgets.p[3].mOverFlowPriority = 2;
-  v1->mUseFallbackAnimations = 1;
+  NISManager::sStreamPrioritySystem = this->m_pStreamPrioritySystem;
+  UFG::qString::Set(&this->mGlobalFallbackAnimation, "LOC_Stand_Idle");
+  this->mPriorityBudgets.size = 17;
+  this->mPriorityBudgets.p[9].mMaxSize = 0x100000;
+  this->mPriorityBudgets.p[9].mOverFlowPriority = eANIM_PRIORITY_ACTIVE_POI;
+  this->mPriorityBudgets.p[5].mMaxSize = 0x800000;
+  this->mPriorityBudgets.p[5].mOverFlowPriority = eANIM_PRIORITY_PREDICTIVE_POI;
+  this->mPriorityBudgets.p[4].mMaxSize = 0x400000;
+  this->mPriorityBudgets.p[4].mOverFlowPriority = eANIM_PRIORITY_INSTANCED_POI;
+  this->mPriorityBudgets.p[3].mMaxSize = 0x800000;
+  this->mPriorityBudgets.p[3].mOverFlowPriority = eANIM_PRIORITY_INACTIVE_POI;
+  this->mUseFallbackAnimations = 1;
 }
 
 // File Line: 575
 // RVA: 0x39ECD0
 void __fastcall AnimationDataBase::~AnimationDataBase(AnimationDataBase *this)
 {
-  AnimationDataBase *v1; // rsi
-  Render::Skinning *v2; // rdi
-  Render::SkinningCacheNode *v3; // rax
-  signed __int64 v4; // rbx
-  UFG::qBaseNodeVariableRB<unsigned __int64> *v5; // rdx
+  Render::Skinning *p_mAnimGroups; // rdi
+  Render::SkinningCacheNode *Head; // rax
+  Render::SkinningCacheNode *v4; // rbx
+  UFG::qBaseNodeVariableRB<unsigned __int64> *p_mNode; // rdx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&AnimationDataBase::`vftable;
-  v2 = (Render::Skinning *)&this->mAnimGroups;
+  p_mAnimGroups = (Render::Skinning *)&this->mAnimGroups;
   if ( this->mAnimGroups.mTree.mCount )
   {
     while ( 1 )
     {
-      v3 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead(&v2->mSkinnedVertexBuffers);
-      if ( !v3 )
+      Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead(&p_mAnimGroups->mSkinnedVertexBuffers);
+      if ( !Head )
         break;
-      v4 = (signed __int64)&v3[-1];
-      if ( v3 == (Render::SkinningCacheNode *)40 )
+      v4 = Head - 1;
+      if ( Head == (Render::SkinningCacheNode *)40 )
         goto LABEL_6;
-      v5 = &v3->mNode;
+      p_mNode = &Head->mNode;
 LABEL_7:
-      UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(&v2->mSkinnedVertexBuffers.mTree, v5);
+      UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(&p_mAnimGroups->mSkinnedVertexBuffers.mTree, p_mNode);
       if ( v4 )
-        (*(void (__fastcall **)(signed __int64, signed __int64))(*(_QWORD *)v4 + 8i64))(v4, 1i64);
-      if ( !v2->mSkinnedVertexBuffers.mTree.mCount )
+        ((void (__fastcall *)(Render::SkinningCacheNode *, __int64))v4->mNode.mParent->mChild[0])(v4, 1i64);
+      if ( !p_mAnimGroups->mSkinnedVertexBuffers.mTree.mCount )
         goto LABEL_10;
     }
     v4 = 0i64;
 LABEL_6:
-    v5 = 0i64;
+    p_mNode = 0i64;
     goto LABEL_7;
   }
 LABEL_10:
   AnimationGroup::sStreamPrioritySystem = 0i64;
-  UFG::qString::~qString(&v1->mGlobalFallbackAnimation);
-  v1->mPriorityBudgets.size = 0;
-  UFG::qList<ActionNodeBank,ActionNodeBank,0,1>::~qList<ActionNodeBank,ActionNodeBank,0,1>((UFG::qList<ActionNodeBank,ActionNodeBank,0,1> *)&v1->mQueuedUpdateGroups);
-  UFG::qList<AnimationGroup,AnimationGroupBudgetedList,0,0>::~qList<AnimationGroup,AnimationGroupBudgetedList,0,0>(&v1->mBudgetedAnimationGroups);
+  UFG::qString::~qString(&this->mGlobalFallbackAnimation);
+  this->mPriorityBudgets.size = 0;
+  UFG::qList<ActionNodeBank,ActionNodeBank,0,1>::~qList<ActionNodeBank,ActionNodeBank,0,1>((UFG::qList<ActionNodeBank,ActionNodeBank,0,1> *)&this->mQueuedUpdateGroups);
+  UFG::qList<AnimationGroup,AnimationGroupBudgetedList,0,0>::~qList<AnimationGroup,AnimationGroupBudgetedList,0,0>(&this->mBudgetedAnimationGroups);
   `eh vector destructor iterator(
-    v1->mDefaultReferenceContainers,
+    this->mDefaultReferenceContainers,
     0x18ui64,
     17,
     (void (__fastcall *)(void *))AnimationGroupHandleContainer::~AnimationGroupHandleContainer);
-  UFG::qTreeRB<AnimationGroup,AnimationGroup,1>::DeleteAll(&v1->mAnimations);
-  UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)&v1->mAnimations);
-  UFG::qTreeRB<AnimationGroup,AnimationGroup,1>::DeleteAll((UFG::qTreeRB<SkeletalAnimation,SkeletalAnimation,1> *)v2);
-  UFG::qBaseTreeRB::~qBaseTreeRB(v2);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  UFG::qTreeRB<AnimationGroup,AnimationGroup,1>::DeleteAll(&this->mAnimations);
+  UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)&this->mAnimations);
+  UFG::qTreeRB<AnimationGroup,AnimationGroup,1>::DeleteAll((UFG::qTreeRB<SkeletalAnimation,SkeletalAnimation,1> *)p_mAnimGroups);
+  UFG::qBaseTreeRB::~qBaseTreeRB(p_mAnimGroups);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 584
 // RVA: 0x3A7B80
-__int64 __fastcall AnimationDataBase::GetAvailablePriority(AnimationDataBase *this, __int64 requestPriority, const unsigned int size)
+__int64 __fastcall AnimationDataBase::GetAvailablePriority(
+        AnimationDataBase *this,
+        __int64 requestPriority,
+        const unsigned int size)
 {
-  signed __int64 v3; // rax
-  unsigned int v4; // er11
+  __int64 v3; // rax
+  unsigned int v4; // r11d
   unsigned int *v5; // rax
 
   v3 = 3i64 * (unsigned int)requestPriority + 151;
@@ -435,7 +414,7 @@ __int64 __fastcall AnimationDataBase::GetAvailablePriority(AnimationDataBase *th
       if ( size + v5[1] <= v4 )
         break;
       requestPriority = v5[2];
-      v5 = (unsigned int *)((char *)this + 4 * (requestPriority + 2 * requestPriority + 151));
+      v5 = &this->mPriorityBudgets.p[0].mMaxSize + 2 * requestPriority + requestPriority;
       v4 = *v5;
     }
     while ( *v5 );
@@ -447,35 +426,33 @@ __int64 __fastcall AnimationDataBase::GetAvailablePriority(AnimationDataBase *th
 // RVA: 0x3B4B40
 void __fastcall AnimationDataBase::UpdateQueuedUpdateGroups(AnimationDataBase *this)
 {
-  AnimationDataBase *v1; // rdi
-  AnimationGroup *v2; // rsi
-  AnimationGroup *v3; // rcx
-  signed __int64 v4; // rbx
+  AnimationGroupHandleContainer *v2; // rsi
+  AnimationGroup *p_mNext; // rcx
+  __int64 v4; // rbx
   UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *i; // rax
-  UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *v6; // rcx
-  UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *v7; // rdx
+  UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *mNext; // rcx
+  UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *mPrev; // rdx
 
-  v1 = this;
-  v2 = (AnimationGroup *)&this->mDefaultReferenceContainers[14];
-  v3 = (AnimationGroup *)&this->mQueuedUpdateGroups.mNode.mNext[-6].mNext;
-  if ( v3 != v2 )
+  v2 = &this->mDefaultReferenceContainers[14];
+  p_mNext = (AnimationGroup *)&this->mQueuedUpdateGroups.mNode.mNext[-6].mNext;
+  if ( p_mNext != (AnimationGroup *)v2 )
   {
     do
     {
-      v4 = (signed __int64)&v3->mNext[-6].mNext;
-      AnimationGroup::UpdatePriorityFromHandles(v3);
-      v3 = (AnimationGroup *)v4;
+      v4 = (__int64)&p_mNext->UFG::qNode<AnimationGroup,AnimationGroupUpdateList>::mNext[-6].mNext;
+      AnimationGroup::UpdatePriorityFromHandles(p_mNext);
+      p_mNext = (AnimationGroup *)v4;
     }
-    while ( (AnimationGroup *)v4 != v2 );
+    while ( (AnimationGroupHandleContainer *)v4 != v2 );
   }
-  for ( i = v1->mQueuedUpdateGroups.mNode.mNext;
-        &i[-6].mNext != (UFG::qNode<AnimationGroup,AnimationGroupUpdateList> **)&v1->mDefaultReferenceContainers[14];
-        i = v1->mQueuedUpdateGroups.mNode.mNext )
+  for ( i = this->mQueuedUpdateGroups.mNode.mNext;
+        &i[-6].mNext != (UFG::qNode<AnimationGroup,AnimationGroupUpdateList> **)&this->mDefaultReferenceContainers[14];
+        i = this->mQueuedUpdateGroups.mNode.mNext )
   {
-    v6 = i->mNext;
-    v7 = i->mPrev;
-    v7->mNext = v6;
-    v6->mPrev = v7;
+    mNext = i->mNext;
+    mPrev = i->mPrev;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
     i->mPrev = i;
     i->mNext = i;
   }
@@ -485,127 +462,123 @@ void __fastcall AnimationDataBase::UpdateQueuedUpdateGroups(AnimationDataBase *t
 // RVA: 0x3B06B0
 void __fastcall AnimationDataBase::Update(AnimationDataBase *this, const float fDeltaS)
 {
-  AnimationDataBase *v2; // rsi
-  __int64 v3; // rcx
-  unsigned int *v4; // rax
-  signed __int64 v5; // rbx
+  __int64 size; // rcx
+  unsigned int *p_mUsedSize; // rax
+  AnimationGroupHandleContainer *p_mNext; // rbx
   __int64 v6; // rdi
-  signed __int64 v7; // rbp
-  unsigned int v8; // er14
+  AnimationDataBase *v7; // rbp
+  unsigned int mPrev; // r14d
   _DWORD *v9; // rdx
-  unsigned int v10; // er8
-  UFG::StreamPriorityHandle *v11; // rdx
-  __int64 v12; // r8
+  unsigned int v10; // r8d
+  UFG::qPropertySet *mNext; // rdx
+  __int64 mNext_low; // r8
   unsigned int v13; // ebx
   _DWORD *v14; // rdx
-  unsigned int v15; // er9
+  unsigned int v15; // r9d
 
-  v2 = this;
   AnimationDataBase::UpdateQueuedUpdateGroups(this);
   UFG::qList<AnimationGroup,AnimationGroupBudgetedList,0,0>::MergeSort(
-    &v2->mBudgetedAnimationGroups,
+    &this->mBudgetedAnimationGroups,
     (bool (__fastcall *)(AnimationGroup *, AnimationGroup *))SortDescendingPriority);
-  v3 = v2->mPriorityBudgets.size;
-  if ( (_DWORD)v3 )
+  size = this->mPriorityBudgets.size;
+  if ( (_DWORD)size )
   {
-    v4 = &v2->mPriorityBudgets.p[0].mUsedSize;
+    p_mUsedSize = &this->mPriorityBudgets.p[0].mUsedSize;
     do
     {
-      *v4 = 0;
-      v4 += 3;
-      --v3;
+      *p_mUsedSize = 0;
+      p_mUsedSize += 3;
+      --size;
     }
-    while ( v3 );
+    while ( size );
   }
-  v5 = (signed __int64)&v2->mBudgetedAnimationGroups.mNode.mNext[-5].mNext;
-  if ( (AnimationGroupHandleContainer *)v5 != &v2->mDefaultReferenceContainers[14] )
+  p_mNext = (AnimationGroupHandleContainer *)&this->mBudgetedAnimationGroups.mNode.mNext[-5].mNext;
+  if ( p_mNext != &this->mDefaultReferenceContainers[14] )
   {
     do
     {
-      v6 = (unsigned int)*(char *)(v5 + 198);
-      v7 = *(_QWORD *)(v5 + 80) - 72i64;
-      if ( v2->mPriorityBudgets.p[v6].mMaxSize )
+      v6 = (unsigned int)SBYTE6(p_mNext[8].m_AnimationGroupHandleList.mNode.mPrev);
+      v7 = (AnimationDataBase *)&p_mNext[3].m_AnimationGroupHandleList.mNode.mNext[-5].mNext;
+      if ( this->mPriorityBudgets.p[v6].mMaxSize )
       {
-        v8 = *(_DWORD *)(v5 + 168);
-        v9 = (_DWORD *)((char *)v2 + 12 * v6);
+        mPrev = (unsigned int)p_mNext[7].m_AnimationGroupHandleList.mNode.mPrev;
+        v9 = (_DWORD *)((char *)this + 12 * v6);
         v10 = v9[151];
-        if ( v10 && v8 + v9[152] > v10 )
-          LODWORD(v6) = AnimationDataBase::GetAvailablePriority(v2, (unsigned int)v9[153], v8);
-        if ( (_DWORD)v6 != *(char *)(v5 + 198) )
+        if ( v10 && mPrev + v9[152] > v10 )
+          LODWORD(v6) = AnimationDataBase::GetAvailablePriority(this, (unsigned int)v9[153], mPrev);
+        if ( (_DWORD)v6 != SBYTE6(p_mNext[8].m_AnimationGroupHandleList.mNode.mPrev) )
         {
-          v11 = *(UFG::StreamPriorityHandle **)(v5 + 104);
-          *(_BYTE *)(v5 + 198) = v6;
-          *(_WORD *)(v5 + 196) = -1;
-          if ( v11 )
+          mNext = (UFG::qPropertySet *)p_mNext[4].m_AnimationGroupHandleList.mNode.mNext;
+          BYTE6(p_mNext[8].m_AnimationGroupHandleList.mNode.mPrev) = v6;
+          WORD2(p_mNext[8].m_AnimationGroupHandleList.mNode.mPrev) = -1;
+          if ( mNext )
             UFG::StreamPrioritySystem::ChangePriority(
               AnimationGroup::sStreamPrioritySystem,
-              v11,
+              mNext,
               ((unsigned __int16)(char)v6 << 16) | 0xFFFF);
         }
-        if ( v2->mPriorityBudgets.p[(unsigned int)v6].mMaxSize )
-          v2->mPriorityBudgets.p[(unsigned int)v6].mUsedSize += v8;
+        if ( this->mPriorityBudgets.p[(unsigned int)v6].mMaxSize )
+          this->mPriorityBudgets.p[(unsigned int)v6].mUsedSize += mPrev;
       }
       else
       {
-        v12 = (unsigned int)*(char *)(v5 + 200);
-        if ( v2->mPriorityBudgets.p[v12].mMaxSize )
+        mNext_low = (unsigned int)SLOBYTE(p_mNext[8].m_AnimationGroupHandleList.mNode.mNext);
+        if ( this->mPriorityBudgets.p[mNext_low].mMaxSize )
         {
-          v13 = *(_DWORD *)(v5 + 168);
-          v14 = (_DWORD *)((char *)v2 + 12 * v12);
+          v13 = (unsigned int)p_mNext[7].m_AnimationGroupHandleList.mNode.mPrev;
+          v14 = (_DWORD *)((char *)this + 12 * mNext_low);
           v15 = v14[151];
           if ( v15 && v13 + v14[152] > v15 )
-            LODWORD(v12) = AnimationDataBase::GetAvailablePriority(v2, (unsigned int)v14[153], v13);
-          if ( v2->mPriorityBudgets.p[(unsigned int)v12].mMaxSize )
-            v2->mPriorityBudgets.p[(unsigned int)v12].mUsedSize += v13;
+            LODWORD(mNext_low) = AnimationDataBase::GetAvailablePriority(this, (unsigned int)v14[153], v13);
+          if ( this->mPriorityBudgets.p[(unsigned int)mNext_low].mMaxSize )
+            this->mPriorityBudgets.p[(unsigned int)mNext_low].mUsedSize += v13;
         }
       }
-      v5 = v7;
+      p_mNext = (AnimationGroupHandleContainer *)v7;
     }
-    while ( (AnimationGroupHandleContainer *)v7 != &v2->mDefaultReferenceContainers[14] );
+    while ( v7 != (AnimationDataBase *)&this->mDefaultReferenceContainers[14] );
   }
-  UFG::StreamPrioritySystem::Update(v2->m_pStreamPrioritySystem);
+  UFG::StreamPrioritySystem::Update(this->m_pStreamPrioritySystem);
 }
 
 // File Line: 771
 // RVA: 0x3A7910
 PoseNode *__fastcall BlendTreeDataBase::FindBlendTree(BlendTreeDataBase *this, UFG::qSymbolUC *animUID)
 {
-  BlendTreeDataBase *v2; // rax
-  unsigned int v3; // ecx
-  int v4; // er8
+  unsigned int size; // ecx
+  int v4; // r8d
   int v5; // ecx
-  BlendTreeDataBase::PoseNodeLookupEntry *v6; // r11
-  unsigned int v7; // er10
+  BlendTreeDataBase::PoseNodeLookupEntry *p; // r11
+  unsigned int mUID; // r10d
   unsigned int v8; // eax
-  unsigned int v9; // er9
+  unsigned int v9; // r9d
 
-  v2 = this;
-  v3 = this->mPoseNodeLookup.size;
-  if ( !v3 )
+  size = this->mPoseNodeLookup.size;
+  if ( !size )
     return 0i64;
   v4 = 0;
-  v5 = v3 - 1;
+  v5 = size - 1;
   if ( v5 < 0 )
     return 0i64;
-  v6 = v2->mPoseNodeLookup.p;
-  v7 = animUID->mUID;
+  p = this->mPoseNodeLookup.p;
+  mUID = animUID->mUID;
   while ( 1 )
   {
     v8 = (v5 + v4) / 2;
-    v9 = v6[v8].mName.mUID;
-    if ( v7 <= v9 )
+    v9 = p[v8].mName.mUID;
+    if ( mUID <= v9 )
       break;
     v4 = v8 + 1;
 LABEL_8:
     if ( v4 > v5 )
       return 0i64;
   }
-  if ( v7 < v9 )
+  if ( mUID < v9 )
   {
     v5 = v8 - 1;
     goto LABEL_8;
   }
-  return v6[(v5 + v4) / 2].mpPoseNode;
+  return p[(v5 + v4) / 2].mpPoseNode;
 }
 
 // File Line: 805
@@ -629,79 +602,67 @@ __int64 dynamic_initializer_for__gAnimationNodeFactory__()
     &gAnimationNodeFactory,
     sAnimationNodeFactoryList,
     sAnimationNodeFactoryListNum);
-  return atexit(dynamic_atexit_destructor_for__gAnimationNodeFactory__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gAnimationNodeFactory__);
 }
 
 // File Line: 829
 // RVA: 0x3AB380
-AnimationGroup *__fastcall AnimationDataBase::LoadAnimBank(AnimationDataBase *this, const char *animBankName)
+UFG::qBaseNodeRB *__fastcall AnimationDataBase::LoadAnimBank(AnimationDataBase *this, const char *animBankName)
 {
-  const char *v2; // rbx
-  AnimationDataBase *v3; // rdi
   UFG::qBaseTreeRB *v4; // rax
-  signed __int64 v5; // rdi
-  UFG::qSymbolUC result; // [rsp+38h] [rbp+10h]
+  UFG::qBaseNodeRB *p_mNULL; // rdi
+  UFG::qSymbolUC result; // [rsp+38h] [rbp+10h] BYREF
 
-  v2 = animBankName;
-  v3 = this;
   if ( !animBankName )
     return 0i64;
   UFG::qSymbolUC::create_from_string(&result, animBankName);
   if ( !result.mUID )
     return 0i64;
-  v4 = UFG::qBaseTreeRB::Get(&v3->mAnimGroups.mTree, result.mUID);
+  v4 = UFG::qBaseTreeRB::Get(&this->mAnimGroups.mTree, result.mUID);
   if ( !v4 )
     return 0i64;
-  v5 = (signed __int64)&v4[-1].mNULL;
+  p_mNULL = &v4[-1].mNULL;
   if ( v4 == (UFG::qBaseTreeRB *)40 )
     return 0i64;
-  UFG::qPrintf("WARNING: Animation Group Already Loaded: %s\n", v2);
-  return (AnimationGroup *)v5;
+  UFG::qPrintf("WARNING: Animation Group Already Loaded: %s\n", animBankName);
+  return p_mNULL;
 }
 
 // File Line: 921
 // RVA: 0x3A0B40
 void __fastcall AnimationDataBase::AddAnimBank(AnimationDataBase *this, AnimationGroup *animGroup)
 {
-  AnimationDataBase *v2; // rdi
-  AnimationGroup *v3; // rbx
-  UFG::qBaseNodeRB *v4; // rdx
+  UFG::qNodeRB<AnimationGroup> *v4; // rdx
 
-  v2 = this;
-  v3 = animGroup;
   AnimationGroup::LoadInternal(animGroup);
-  if ( v3 )
-    v4 = &v3->mNode;
+  if ( animGroup )
+    v4 = &animGroup->UFG::qNodeRB<AnimationGroup>;
   else
     v4 = 0i64;
-  UFG::qBaseTreeRB::Add(&v2->mAnimGroups.mTree, v4);
+  UFG::qBaseTreeRB::Add(&this->mAnimGroups.mTree, &v4->mNode);
 }
 
 // File Line: 954
 // RVA: 0x3AB2B0
 char __fastcall AnimationDataBase::IsStreamedIn(AnimationDataBase *this, const char *animBankName)
 {
-  const char *v2; // rbx
-  AnimationDataBase *v3; // rdi
   UFG::qBaseTreeRB *v4; // rax
-  signed __int64 v5; // rax
+  UFG::qBaseNodeRB *p_mNULL; // rax
   UFG::DataStreamer::Handle *v6; // rcx
-  UFG::qSymbolUC result; // [rsp+38h] [rbp+10h]
+  UFG::qSymbolUC result; // [rsp+38h] [rbp+10h] BYREF
 
-  v2 = animBankName;
-  v3 = this;
   if ( animBankName
     && (UFG::qSymbolUC::create_from_string(&result, animBankName), result.mUID)
-    && (v4 = UFG::qBaseTreeRB::Get(&v3->mAnimGroups.mTree, result.mUID)) != 0i64
-    && (v5 = (signed __int64)&v4[-1].mNULL) != 0 )
+    && (v4 = UFG::qBaseTreeRB::Get(&this->mAnimGroups.mTree, result.mUID)) != 0i64
+    && (p_mNULL = &v4[-1].mNULL) != 0i64 )
   {
-    v6 = *(UFG::DataStreamer::Handle **)(v5 + 104);
+    v6 = (UFG::DataStreamer::Handle *)p_mNULL[3].mChild[0];
     if ( v6 && (unsigned int)UFG::DataStreamer::GetStreamState(v6) == 6 )
       return 1;
   }
   else
   {
-    UFG::qPrintf("WARNING: AnimationDataBase::IsStreamedIn: Animation Group Not Found (%s)!\n", v2);
+    UFG::qPrintf("WARNING: AnimationDataBase::IsStreamedIn: Animation Group Not Found (%s)!\n", animBankName);
   }
   return 0;
 }
@@ -710,28 +671,24 @@ char __fastcall AnimationDataBase::IsStreamedIn(AnimationDataBase *this, const c
 // RVA: 0x3B0440
 void __fastcall AnimationDataBase::UnloadAnimBank(AnimationDataBase *this, const char *animBankName)
 {
-  const char *v2; // rbx
-  AnimationDataBase *v3; // rsi
   UFG::qBaseTreeRB *v4; // rax
-  signed __int64 v5; // rdi
-  UFG::qSymbolUC result; // [rsp+38h] [rbp+10h]
+  UFG::qBaseNodeRB *p_mNULL; // rdi
+  UFG::qSymbolUC result; // [rsp+38h] [rbp+10h] BYREF
 
-  v2 = animBankName;
-  v3 = this;
   if ( animBankName
     && (UFG::qSymbolUC::create_from_string(&result, animBankName), result.mUID)
-    && (v4 = UFG::qBaseTreeRB::Get(&v3->mAnimGroups.mTree, result.mUID)) != 0i64
-    && (v5 = (signed __int64)&v4[-1].mNULL, v4 != (UFG::qBaseTreeRB *)40) )
+    && (v4 = UFG::qBaseTreeRB::Get(&this->mAnimGroups.mTree, result.mUID)) != 0i64
+    && (p_mNULL = &v4[-1].mNULL, v4 != (UFG::qBaseTreeRB *)40) )
   {
     AnimationGroup::UnloadInternal((AnimationGroup *)&v4[-1].mNULL);
     UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
-      (UFG::qBaseTreeVariableRB<unsigned __int64> *)&v3->mAnimGroups,
-      (UFG::qBaseNodeVariableRB<unsigned __int64> *)(v5 + 40));
-    (*(void (__fastcall **)(signed __int64, signed __int64))(*(_QWORD *)v5 + 8i64))(v5, 1i64);
+      (UFG::qBaseTreeVariableRB<unsigned __int64> *)&this->mAnimGroups,
+      (UFG::qBaseNodeVariableRB<unsigned __int64> *)p_mNULL[1].mChild);
+    ((void (__fastcall *)(UFG::qBaseNodeRB *, __int64))p_mNULL->mParent->mChild[0])(p_mNULL, 1i64);
   }
   else
   {
-    UFG::qPrintf("WARNING: AnimationDataBase::UnloadAnimBank: Animation Group Not Found (%s)!\n", v2);
+    UFG::qPrintf("WARNING: AnimationDataBase::UnloadAnimBank: Animation Group Not Found (%s)!\n", animBankName);
   }
 }
 
@@ -739,54 +696,50 @@ void __fastcall AnimationDataBase::UnloadAnimBank(AnimationDataBase *this, const
 // RVA: 0x3ADF70
 void __fastcall AnimationDataBase::RemoveAnimBank(AnimationDataBase *this, AnimationGroup *animationGroup)
 {
-  AnimationDataBase *v2; // rdi
-  AnimationGroup *v3; // rbx
   UFG::qBaseNodeVariableRB<unsigned __int64> *v4; // rdx
 
-  v2 = this;
-  v3 = animationGroup;
   AnimationGroup::UnloadInternal(animationGroup);
-  if ( v3 )
-    v4 = (UFG::qBaseNodeVariableRB<unsigned __int64> *)&v3->mNode;
+  if ( animationGroup )
+    v4 = (UFG::qBaseNodeVariableRB<unsigned __int64> *)&animationGroup->UFG::qNodeRB<AnimationGroup>;
   else
     v4 = 0i64;
-  UFG::qBaseTreeVariableRB<unsigned __int64>::Remove((UFG::qBaseTreeVariableRB<unsigned __int64> *)&v2->mAnimGroups, v4);
+  UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
+    (UFG::qBaseTreeVariableRB<unsigned __int64> *)&this->mAnimGroups,
+    v4);
 }
 
 // File Line: 1039
 // RVA: 0x3AD5D0
 void __fastcall AnimationDataBase::ReLoadAnimBankData(AnimationDataBase *this, const char *animBankName)
 {
-  AnimationDataBase *v2; // rbx
   UFG::qBaseTreeRB *v3; // rax
-  signed __int64 v4; // rbx
+  UFG::qBaseNodeRB *p_mNULL; // rbx
   UFG::StreamPriorityHandle *v5; // rdx
-  UFG::StreamPriorityHandle *v6; // rdx
+  UFG::qPropertySet *v6; // rdx
   UFG *v7; // rcx
-  UFG::qSymbolUC result; // [rsp+38h] [rbp+10h]
+  UFG::qSymbolUC result; // [rsp+38h] [rbp+10h] BYREF
 
   if ( animBankName )
   {
-    v2 = this;
     UFG::qSymbolUC::create_from_string(&result, animBankName);
     if ( result.mUID )
     {
-      v3 = UFG::qBaseTreeRB::Get(&v2->mAnimGroups.mTree, result.mUID);
+      v3 = UFG::qBaseTreeRB::Get(&this->mAnimGroups.mTree, result.mUID);
       if ( v3 )
       {
-        v4 = (signed __int64)&v3[-1].mNULL;
+        p_mNULL = &v3[-1].mNULL;
         if ( v3 != (UFG::qBaseTreeRB *)40 )
         {
-          v5 = *(UFG::StreamPriorityHandle **)(v4 + 104);
+          v5 = (UFG::StreamPriorityHandle *)p_mNULL[3].mChild[0];
           if ( v5 )
           {
             UFG::StreamPrioritySystem::EvictFromMemory(AnimationGroup::sStreamPrioritySystem, v5);
-            v6 = *(UFG::StreamPriorityHandle **)(v4 + 104);
+            v6 = (UFG::qPropertySet *)p_mNULL[3].mChild[0];
             if ( v6 )
               UFG::StreamPrioritySystem::ChangePriority(
                 AnimationGroup::sStreamPrioritySystem,
                 v6,
-                *(unsigned __int16 *)(v4 + 196) | ((unsigned __int16)*(char *)(v4 + 198) << 16));
+                WORD2(p_mNULL[6].mParent) | ((unsigned __int16)SBYTE6(p_mNULL[6].mParent) << 16));
           }
           UFG::DataStreamer::Service(0.0);
           UFG::DataStreamer::Service(0.0);
@@ -807,63 +760,63 @@ void __fastcall AnimationDataBase::ReLoadAnimBankData(AnimationDataBase *this, c
 // RVA: 0x3A2C60
 void __fastcall AnimationDataBase::BindStaticGroups(AnimationDataBase *this)
 {
-  AnimationDataBase *v1; // r15
-  Render::SkinningCacheNode *v2; // rax
-  signed __int64 v3; // rbx
+  Render::SkinningCacheNode *Head; // rax
+  Render::SkinningCacheNode *v3; // rbx
   UFG::qBaseNodeRB *v4; // rdx
-  UFG::qBaseTreeRB *v5; // rax
-  signed __int64 v6; // rdi
-  signed __int64 v7; // rsi
-  signed __int64 v8; // rbp
+  UFG::qBaseTreeRB *Next; // rax
+  UFG::qBaseNodeRB *p_mNULL; // rdi
+  unsigned int *p_mUID; // rsi
+  __int64 v8; // rbp
   bool v9; // di
   AnimationGroupHandle *i; // rbx
   char v11; // al
 
-  v1 = this;
-  v2 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&this->mAnimGroups);
-  if ( v2 )
+  Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&this->mAnimGroups);
+  if ( Head )
   {
-    v3 = (signed __int64)&v2[-1];
-    if ( v2 != (Render::SkinningCacheNode *)40 )
+    v3 = Head - 1;
+    if ( Head != (Render::SkinningCacheNode *)40 )
     {
       do
       {
         if ( v3 )
-          v4 = (UFG::qBaseNodeRB *)(v3 + 40);
+          v4 = (UFG::qBaseNodeRB *)&v3[1];
         else
           v4 = 0i64;
-        v5 = UFG::qBaseTreeRB::GetNext(&v1->mAnimGroups.mTree, v4);
-        if ( v5 )
-          v6 = (signed __int64)&v5[-1].mNULL;
+        Next = UFG::qBaseTreeRB::GetNext(&this->mAnimGroups.mTree, v4);
+        if ( Next )
+          p_mNULL = &Next[-1].mNULL;
         else
-          v6 = 0i64;
+          p_mNULL = 0i64;
         AnimationGroupHandleContainer::Add(
-          (AnimationGroupHandleContainer *)(&v1->vfptr + *(char *)(v3 + 199) + 2 * (*(char *)(v3 + 199) + 10i64)),
-          (UFG::qSymbolUC *)(v3 + 172),
-          (UFG::eAnimationPriorityEnum)*(char *)(v3 + 199));
-        v3 = v6;
+          (AnimationGroupHandleContainer *)((char *)this->mDefaultReferenceContainers
+                                          + 16 * SHIBYTE(v3[4].mCachedBufferPtr)
+                                          + 8 * SHIBYTE(v3[4].mCachedBufferPtr)),
+          (UFG::qSymbolUC *)&v3[4].mNode.mChild0 + 1,
+          (UFG::eAnimationPriorityEnum)SHIBYTE(v3[4].mCachedBufferPtr));
+        v3 = (Render::SkinningCacheNode *)p_mNULL;
       }
-      while ( v6 );
+      while ( p_mNULL );
     }
   }
-  v7 = (signed __int64)&v1->mAnimations.mTree.mNULL.mUID;
+  p_mUID = &this->mAnimations.mTree.mNULL.mUID;
   v8 = 17i64;
   do
   {
     v9 = 1;
-    for ( i = (AnimationGroupHandle *)(*(_QWORD *)(v7 + 24) - 16i64);
-          i != (AnimationGroupHandle *)v7;
-          i = (AnimationGroupHandle *)&i->mNext[-1] )
+    for ( i = (AnimationGroupHandle *)(*((_QWORD *)p_mUID + 3) - 16i64);
+          i != (AnimationGroupHandle *)p_mUID;
+          i = (AnimationGroupHandle *)&i->UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer>::mNext[-1] )
     {
       v11 = AnimationGroupHandle::Bind(i);
       v9 = v9 && v11;
     }
-    *(_BYTE *)(v7 + 32) = 1;
-    v7 += 24i64;
+    *((_BYTE *)p_mUID + 32) = 1;
+    p_mUID += 6;
     --v8;
   }
   while ( v8 );
-  AnimationDataBase::Update(v1, 0.0);
+  AnimationDataBase::Update(this, 0.0);
 }
 
 // File Line: 1094
@@ -877,45 +830,43 @@ void __fastcall AnimationDataBase::UpdatePrioritySystem(AnimationDataBase *this)
 // RVA: 0x3AE390
 void __fastcall AnimationDataBase::ResolveFallbackAnimations(AnimationDataBase *this)
 {
-  AnimationDataBase *v1; // rbx
   unsigned int v2; // eax
   UFG::qBaseTreeRB *v3; // rax
-  SkeletalAnimation *v4; // rsi
-  UFG::qBaseTreeRB *v5; // rbp
-  Render::SkinningCacheNode *v6; // rax
+  SkeletalAnimation *p_mNULL; // rsi
+  UFG::qTreeRB<SkeletalAnimation,SkeletalAnimation,1> *p_mAnimations; // rbp
+  Render::SkinningCacheNode *Head; // rax
   SkeletalAnimation *v7; // rbx
-  UFG::qBaseNodeRB *v8; // rdx
-  UFG::qBaseTreeRB *v9; // rax
-  signed __int64 v10; // rdi
+  UFG::qBaseNodeRB *p_mNode; // rdx
+  UFG::qBaseTreeRB *Next; // rax
+  SkeletalAnimation *v10; // rdi
 
-  v1 = this;
   if ( this->mUseFallbackAnimations )
   {
-    v2 = UFG::qStringHashUpper32(this->mGlobalFallbackAnimation.mData, 0xFFFFFFFF);
-    if ( v2 && (v3 = UFG::qBaseTreeRB::Get(&v1->mAnimations.mTree, v2)) != 0i64 )
-      v4 = (SkeletalAnimation *)&v3[-1].mNULL;
+    v2 = UFG::qStringHashUpper32(this->mGlobalFallbackAnimation.mData, -1);
+    if ( v2 && (v3 = UFG::qBaseTreeRB::Get(&this->mAnimations.mTree, v2)) != 0i64 )
+      p_mNULL = (SkeletalAnimation *)&v3[-1].mNULL;
     else
-      v4 = 0i64;
-    v5 = &v1->mAnimations.mTree;
-    v6 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v1->mAnimations);
-    if ( v6 )
+      p_mNULL = 0i64;
+    p_mAnimations = &this->mAnimations;
+    Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&this->mAnimations);
+    if ( Head )
     {
-      v7 = (SkeletalAnimation *)&v6[-1];
-      if ( v6 != (Render::SkinningCacheNode *)40 )
+      v7 = (SkeletalAnimation *)&Head[-1];
+      if ( Head != (Render::SkinningCacheNode *)40 )
       {
         do
         {
           if ( v7 )
-            v8 = &v7->mNode;
+            p_mNode = &v7->mNode;
           else
-            v8 = 0i64;
-          v9 = UFG::qBaseTreeRB::GetNext(v5, v8);
-          if ( v9 )
-            v10 = (signed __int64)&v9[-1].mNULL;
+            p_mNode = 0i64;
+          Next = UFG::qBaseTreeRB::GetNext(&p_mAnimations->mTree, p_mNode);
+          if ( Next )
+            v10 = (SkeletalAnimation *)&Next[-1].mNULL;
           else
             v10 = 0i64;
-          SkeletalAnimation::ResolveFallbackAnimation(v7, v4);
-          v7 = (SkeletalAnimation *)v10;
+          SkeletalAnimation::ResolveFallbackAnimation(v7, p_mNULL);
+          v7 = v10;
         }
         while ( v10 );
       }
@@ -927,52 +878,48 @@ void __fastcall AnimationDataBase::ResolveFallbackAnimations(AnimationDataBase *
 // RVA: 0x3A78D0
 UFG::qBaseNodeRB *__fastcall AnimationDataBase::FindAnimBank(AnimationDataBase *this, const char *pAnimBankName)
 {
-  AnimationDataBase *v2; // rbx
   UFG::qBaseTreeRB *v3; // rax
-  UFG::qBaseNodeRB *v4; // rax
-  UFG::qSymbolUC result; // [rsp+38h] [rbp+10h]
+  UFG::qSymbolUC result; // [rsp+38h] [rbp+10h] BYREF
 
-  v2 = this;
   if ( pAnimBankName
     && (UFG::qSymbolUC::create_from_string(&result, pAnimBankName), result.mUID)
-    && (v3 = UFG::qBaseTreeRB::Get(&v2->mAnimGroups.mTree, result.mUID)) != 0i64 )
+    && (v3 = UFG::qBaseTreeRB::Get(&this->mAnimGroups.mTree, result.mUID)) != 0i64 )
   {
-    v4 = &v3[-1].mNULL;
+    return &v3[-1].mNULL;
   }
   else
   {
-    v4 = 0i64;
+    return 0i64;
   }
-  return v4;
 }
 
 // File Line: 1217
 // RVA: 0x3A78A0
-UFG::qBaseNodeRB *__fastcall AnimationDataBase::FindAnimBank(AnimationDataBase *this, UFG::qSymbolUC *theAnimationGroupSymbol)
+UFG::qBaseNodeRB *__fastcall AnimationDataBase::FindAnimBank(
+        AnimationDataBase *this,
+        UFG::qSymbolUC *theAnimationGroupSymbol)
 {
-  unsigned int v2; // edx
+  unsigned int mUID; // edx
   UFG::qBaseTreeRB *v3; // rax
-  UFG::qBaseNodeRB *result; // rax
 
-  v2 = theAnimationGroupSymbol->mUID;
-  if ( v2 && (v3 = UFG::qBaseTreeRB::Get(&this->mAnimGroups.mTree, v2)) != 0i64 )
-    result = &v3[-1].mNULL;
+  mUID = theAnimationGroupSymbol->mUID;
+  if ( mUID && (v3 = UFG::qBaseTreeRB::Get(&this->mAnimGroups.mTree, mUID)) != 0i64 )
+    return &v3[-1].mNULL;
   else
-    result = 0i64;
-  return result;
+    return 0i64;
 }
 
 // File Line: 1239
 // RVA: 0x3A13D0
 void __fastcall BlendTreeDataBase::AddBlendTrees(BlendTreeDataBase *this, PoseNode *poseNode)
 {
-  UFG::qNode<PoseNode,PoseNode> *v2; // rax
+  UFG::qNode<PoseNode,PoseNode> *mPrev; // rax
   UFG::qNode<PoseNode,PoseNode> *v3; // rdx
 
-  v2 = this->mPoseNodes.mNode.mPrev;
-  v3 = (UFG::qNode<PoseNode,PoseNode> *)&poseNode->mPrev;
-  v2->mNext = v3;
-  v3->mPrev = v2;
+  mPrev = this->mPoseNodes.mNode.mPrev;
+  v3 = &poseNode->UFG::qNode<PoseNode,PoseNode>;
+  mPrev->mNext = v3;
+  v3->mPrev = mPrev;
   v3->mNext = &this->mPoseNodes.mNode;
   this->mPoseNodes.mNode.mPrev = v3;
   BlendTreeDataBase::RebuildPoseNodeLookup(this);
@@ -982,15 +929,15 @@ void __fastcall BlendTreeDataBase::AddBlendTrees(BlendTreeDataBase *this, PoseNo
 // RVA: 0x3AE030
 void __fastcall BlendTreeDataBase::RemoveBlendTrees(BlendTreeDataBase *this, PoseNode *poseNode)
 {
-  UFG::qNode<PoseNode,PoseNode> *v2; // rcx
-  UFG::qNode<PoseNode,PoseNode> *v3; // rax
+  UFG::qNode<PoseNode,PoseNode> *mPrev; // rcx
+  UFG::qNode<PoseNode,PoseNode> *mNext; // rax
   UFG::qNode<PoseNode,PoseNode> *v4; // rdx
 
-  v2 = poseNode->mPrev;
-  v3 = poseNode->mNext;
-  v4 = (UFG::qNode<PoseNode,PoseNode> *)&poseNode->mPrev;
-  v2->mNext = v3;
-  v3->mPrev = v2;
+  mPrev = poseNode->mPrev;
+  mNext = poseNode->mNext;
+  v4 = &poseNode->UFG::qNode<PoseNode,PoseNode>;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
   v4->mPrev = v4;
   v4->mNext = v4;
 }
@@ -999,83 +946,81 @@ void __fastcall BlendTreeDataBase::RemoveBlendTrees(BlendTreeDataBase *this, Pos
 // RVA: 0x3AD990
 void __fastcall BlendTreeDataBase::RebuildPoseNodeLookup(BlendTreeDataBase *this)
 {
-  UFG::qArray<BlendTreeDataBase::PoseNodeLookupEntry,0> *v1; // rdi
-  BlendTreeDataBase *v2; // rsi
-  BlendTreeDataBase::PoseNodeLookupEntry *v3; // rcx
-  PoseNode **v4; // rbx
-  signed __int64 v5; // r14
-  __int64 v6; // rsi
-  unsigned int v7; // edx
-  int v8; // ebp
-  signed __int64 v9; // r15
+  UFG::qArray<BlendTreeDataBase::PoseNodeLookupEntry,0> *p_mPoseNodeLookup; // rdi
+  BlendTreeDataBase::PoseNodeLookupEntry *p; // rcx
+  PoseNode **p_mpPoseNode; // rbx
+  BlendTreeDataBase *v5; // r14
+  __int64 size; // rsi
+  unsigned int capacity; // edx
+  unsigned int v8; // ebp
+  __int64 p_GetClassNameUID; // r15
   unsigned int v10; // ebx
   unsigned int v11; // edx
-  signed __int64 v12; // rax
-  unsigned int v13; // esi
-  int v14; // er13
+  __int64 v12; // rax
+  int v13; // esi
+  int v14; // r13d
   __int64 v15; // rax
   __int64 v16; // r15
   unsigned int v17; // edx
-  int v18; // er12
+  int v18; // r12d
   unsigned int v19; // ebx
   __int64 v20; // rbp
   unsigned int v21; // edx
-  signed __int64 v22; // rax
-  signed __int64 v23; // [rsp+60h] [rbp+8h]
-  signed __int64 v24; // [rsp+68h] [rbp+10h]
+  __int64 v22; // rax
+  __int64 v23; // [rsp+60h] [rbp+8h]
+  UFG::qNode<PoseNode,PoseNode> **p_mNext; // [rsp+68h] [rbp+10h]
 
-  v1 = &this->mPoseNodeLookup;
-  v2 = this;
-  v3 = this->mPoseNodeLookup.p;
-  if ( v3 )
+  p_mPoseNodeLookup = &this->mPoseNodeLookup;
+  p = this->mPoseNodeLookup.p;
+  if ( p )
   {
-    v4 = &v3[-1].mpPoseNode;
-    `eh vector destructor iterator(v3, 0x10ui64, (int)v3[-1].mpPoseNode, (void (__fastcall *)(void *))_);
-    operator delete[](v4);
+    p_mpPoseNode = &p[-1].mpPoseNode;
+    `eh vector destructor iterator(p, 0x10ui64, (int)p[-1].mpPoseNode, (void (__fastcall *)(void *))_);
+    operator delete[](p_mpPoseNode);
   }
-  v1->p = 0i64;
-  *(_QWORD *)&v1->size = 0i64;
-  v24 = (signed __int64)&v2[-1].mPoseNodes.mNode.mNext;
-  v5 = (signed __int64)&v2->mPoseNodes.mNode.mNext[-3].mNext;
-  if ( (UFG::qNode<PoseNode,PoseNode> **)v5 != &v2[-1].mPoseNodes.mNode.mNext )
+  p_mPoseNodeLookup->p = 0i64;
+  *(_QWORD *)&p_mPoseNodeLookup->size = 0i64;
+  p_mNext = &this[-1].mPoseNodes.mNode.mNext;
+  v5 = (BlendTreeDataBase *)&this->mPoseNodes.mNode.mNext[-3].mNext;
+  if ( v5 != (BlendTreeDataBase *)&this[-1].mPoseNodes.mNode.mNext )
   {
     do
     {
-      v6 = v1->size;
-      v7 = v1->capacity;
-      v8 = *(_DWORD *)(v5 + 68);
-      v9 = *(_QWORD *)(v5 + 48) - 40i64;
-      v10 = v6 + 1;
-      v23 = *(_QWORD *)(v5 + 48) - 40i64;
-      if ( (signed int)v6 + 1 > v7 )
+      size = p_mPoseNodeLookup->size;
+      capacity = p_mPoseNodeLookup->capacity;
+      v8 = v5[1].mPoseNodeLookup.capacity;
+      p_GetClassNameUID = (__int64)&v5[1].vfptr[-1].GetClassNameUID;
+      v10 = size + 1;
+      v23 = p_GetClassNameUID;
+      if ( (int)size + 1 > capacity )
       {
-        if ( v7 )
-          v11 = 2 * v7;
+        if ( capacity )
+          v11 = 2 * capacity;
         else
           v11 = 1;
         for ( ; v11 < v10; v11 *= 2 )
           ;
         if ( v11 - v10 > 0x10000 )
-          v11 = v6 + 65537;
-        UFG::qArray<BlendTreeDataBase::PoseNodeLookupEntry,0>::Reallocate(v1, v11, "qArray.Add");
+          v11 = size + 65537;
+        UFG::qArray<BlendTreeDataBase::PoseNodeLookupEntry,0>::Reallocate(p_mPoseNodeLookup, v11, "qArray.Add");
       }
-      v1->size = v10;
-      v12 = (signed __int64)&v1->p[v6];
+      p_mPoseNodeLookup->size = v10;
+      v12 = (__int64)&p_mPoseNodeLookup->p[size];
       *(_DWORD *)v12 = v8;
       *(_QWORD *)(v12 + 8) = v5;
       v13 = 0;
-      v14 = (*(__int64 (__fastcall **)(signed __int64))(*(_QWORD *)v5 + 96i64))(v5);
+      v14 = (int)v5->vfptr[1].CreateClone(v5);
       if ( v14 > 0 )
       {
         do
         {
-          v15 = (*(__int64 (__fastcall **)(signed __int64, _QWORD))(*(_QWORD *)v5 + 88i64))(v5, v13);
-          v16 = v1->size;
-          v17 = v1->capacity;
+          v15 = (__int64)v5->vfptr[1].__vecDelDtor(v5, v13);
+          v16 = p_mPoseNodeLookup->size;
+          v17 = p_mPoseNodeLookup->capacity;
           v18 = *(_DWORD *)(v15 + 68);
           v19 = v16 + 1;
           v20 = v15;
-          if ( (signed int)v16 + 1 > v17 )
+          if ( (int)v16 + 1 > v17 )
           {
             if ( v17 )
               v21 = 2 * v17;
@@ -1085,24 +1030,24 @@ void __fastcall BlendTreeDataBase::RebuildPoseNodeLookup(BlendTreeDataBase *this
               ;
             if ( v21 - v19 > 0x10000 )
               v21 = v16 + 65537;
-            UFG::qArray<BlendTreeDataBase::PoseNodeLookupEntry,0>::Reallocate(v1, v21, "qArray.Add");
+            UFG::qArray<BlendTreeDataBase::PoseNodeLookupEntry,0>::Reallocate(p_mPoseNodeLookup, v21, "qArray.Add");
           }
-          v1->size = v19;
+          p_mPoseNodeLookup->size = v19;
           ++v13;
-          v22 = (signed __int64)&v1->p[v16];
+          v22 = (__int64)&p_mPoseNodeLookup->p[v16];
           *(_DWORD *)v22 = v18;
           *(_QWORD *)(v22 + 8) = v20;
         }
-        while ( (signed int)v13 < v14 );
-        v9 = v23;
+        while ( v13 < v14 );
+        p_GetClassNameUID = v23;
       }
-      v5 = v9;
+      v5 = (BlendTreeDataBase *)p_GetClassNameUID;
     }
-    while ( v9 != v24 );
+    while ( (UFG::qNode<PoseNode,PoseNode> **)p_GetClassNameUID != p_mNext );
   }
   UFG::qQuickSortImpl<BlendTreeDataBase::PoseNodeLookupEntry,bool (*)(BlendTreeDataBase::PoseNodeLookupEntry const &,BlendTreeDataBase::PoseNodeLookupEntry const &)>(
-    v1->p,
-    &v1->p[(signed int)v1->size - 1],
+    p_mPoseNodeLookup->p,
+    &p_mPoseNodeLookup->p[(int)p_mPoseNodeLookup->size - 1],
     (bool (__fastcall *)(BlendTreeDataBase::PoseNodeLookupEntry *, BlendTreeDataBase::PoseNodeLookupEntry *))BlendTreeDataBase::UIDSort);
 }
 
@@ -1152,37 +1097,32 @@ bool __fastcall AnimGroupSortByRefCount(AnimationGroupStats *A, AnimationGroupSt
 // RVA: 0x39C530
 bool __fastcall AnimGroupSortByPriority(AnimationGroupStats *A, AnimationGroupStats *B)
 {
-  int v2; // eax
-  int v3; // er8
+  int mCurrentPriority; // eax
+  int v3; // r8d
 
-  v2 = B->mCurrentPriority;
+  mCurrentPriority = B->mCurrentPriority;
   v3 = A->mCurrentPriority;
-  return v2 < v3 || v2 == v3 && B->mCurrentSubPriority <= A->mCurrentSubPriority;
+  return mCurrentPriority < v3 || mCurrentPriority == v3 && B->mCurrentSubPriority <= A->mCurrentSubPriority;
 }
 
 // File Line: 1365
 // RVA: 0x39C550
 bool __fastcall AnimGroupSortByName(AnimationGroupStats *A, AnimationGroupStats *B)
 {
-  return (signed int)UFG::qStringCompareInsensitive(B->mName, A->mName, -1) >= 0;
+  return (int)UFG::qStringCompareInsensitive(B->mName, A->mName, -1) >= 0;
 }
 
 // File Line: 2244
 // RVA: 0x39D200
 void __fastcall AnimationGroupHandle::AnimationGroupHandle(AnimationGroupHandle *this)
 {
-  UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *v1; // rax
-  UFG::qSafePointer<AnimationGroup,AnimationGroup> *v2; // [rsp+28h] [rbp+10h]
-
-  this->mPrev = (UFG::qNode<AnimationGroupHandle,AnimationGroupList> *)&this->mPrev;
-  this->mNext = (UFG::qNode<AnimationGroupHandle,AnimationGroupList> *)&this->mPrev;
-  v1 = (UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *)&this->mPrev;
-  v1->mPrev = v1;
-  v1->mNext = v1;
+  this->UFG::qNode<AnimationGroupHandle,AnimationGroupList>::mPrev = this;
+  this->UFG::qNode<AnimationGroupHandle,AnimationGroupList>::mNext = this;
+  this->UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer>::mPrev = &this->UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer>;
+  this->UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer>::mNext = &this->UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer>;
   this->m_AnimationGroupSymbol.mUID = -1;
-  v2 = &this->m_AnimationGroup;
-  v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<AnimationGroup>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v2->mNext = (UFG::qNode<UFG::qSafePointerBase<AnimationGroup>,UFG::qSafePointerNodeList> *)&v2->mPrev;
+  this->m_AnimationGroup.mPrev = &this->m_AnimationGroup;
+  this->m_AnimationGroup.mNext = &this->m_AnimationGroup;
   this->m_AnimationGroup.m_pPointer = 0i64;
   *(_DWORD *)&this->m_eAnimationPriority.mValue = -65524;
   this->m_bHasBeenBound = 0;
@@ -1193,83 +1133,78 @@ void __fastcall AnimationGroupHandle::AnimationGroupHandle(AnimationGroupHandle 
 // RVA: 0x39F0F0
 void __fastcall AnimationGroupHandle::~AnimationGroupHandle(AnimationGroupHandle *this)
 {
-  AnimationGroupHandle *v1; // rbx
-  UFG::qSharedString *v2; // rdi
-  UFG::qSafePointer<AnimationGroup,AnimationGroup> *v3; // rdx
-  UFG::qNode<UFG::qSafePointerBase<AnimationGroup>,UFG::qSafePointerNodeList> *v4; // rcx
-  UFG::qNode<UFG::qSafePointerBase<AnimationGroup>,UFG::qSafePointerNodeList> *v5; // rax
+  AnimationGroupHandle::ReferenceInfo *m_pReferenceInfo; // rdi
+  UFG::qSafePointer<AnimationGroup,AnimationGroup> *p_m_AnimationGroup; // rdx
+  UFG::qNode<UFG::qSafePointerBase<AnimationGroup>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<AnimationGroup>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<AnimationGroup>,UFG::qSafePointerNodeList> *v6; // rcx
   UFG::qNode<UFG::qSafePointerBase<AnimationGroup>,UFG::qSafePointerNodeList> *v7; // rax
-  UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *v8; // rdx
-  UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *v9; // rcx
-  UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *v10; // rax
-  UFG::qNode<AnimationGroupHandle,AnimationGroupList> *v11; // rcx
-  UFG::qNode<AnimationGroupHandle,AnimationGroupList> *v12; // rax
+  UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *v8; // rcx
+  UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *v9; // rax
+  UFG::qNode<AnimationGroupHandle,AnimationGroupList> *v10; // rcx
+  UFG::qNode<AnimationGroupHandle,AnimationGroupList> *v11; // rax
 
-  v1 = this;
   AnimationGroupHandle::Unbind(this);
-  UFG::qSymbolUC::set_null(&v1->m_AnimationGroupSymbol);
-  v2 = (UFG::qSharedString *)v1->m_pReferenceInfo;
-  if ( v2 )
+  UFG::qSymbolUC::set_null(&this->m_AnimationGroupSymbol);
+  m_pReferenceInfo = this->m_pReferenceInfo;
+  if ( m_pReferenceInfo )
   {
-    UFG::qSharedString::~qSharedString(v2 + 1);
-    operator delete[](v2);
+    UFG::qSharedString::~qSharedString(&m_pReferenceInfo->m_ReferenceText);
+    operator delete[](m_pReferenceInfo);
   }
-  v3 = &v1->m_AnimationGroup;
-  if ( v1->m_AnimationGroup.m_pPointer )
+  p_m_AnimationGroup = &this->m_AnimationGroup;
+  if ( this->m_AnimationGroup.m_pPointer )
   {
-    v4 = v3->mPrev;
-    v5 = v1->m_AnimationGroup.mNext;
-    v4->mNext = v5;
-    v5->mPrev = v4;
-    v3->mPrev = (UFG::qNode<UFG::qSafePointerBase<AnimationGroup>,UFG::qSafePointerNodeList> *)&v3->mPrev;
-    v1->m_AnimationGroup.mNext = (UFG::qNode<UFG::qSafePointerBase<AnimationGroup>,UFG::qSafePointerNodeList> *)&v1->m_AnimationGroup.mPrev;
+    mPrev = p_m_AnimationGroup->mPrev;
+    mNext = this->m_AnimationGroup.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_m_AnimationGroup->mPrev = p_m_AnimationGroup;
+    this->m_AnimationGroup.mNext = &this->m_AnimationGroup;
   }
-  v1->m_AnimationGroup.m_pPointer = 0i64;
-  v6 = v3->mPrev;
-  v7 = v1->m_AnimationGroup.mNext;
+  this->m_AnimationGroup.m_pPointer = 0i64;
+  v6 = p_m_AnimationGroup->mPrev;
+  v7 = this->m_AnimationGroup.mNext;
   v6->mNext = v7;
   v7->mPrev = v6;
-  v3->mPrev = (UFG::qNode<UFG::qSafePointerBase<AnimationGroup>,UFG::qSafePointerNodeList> *)&v3->mPrev;
-  v1->m_AnimationGroup.mNext = (UFG::qNode<UFG::qSafePointerBase<AnimationGroup>,UFG::qSafePointerNodeList> *)&v1->m_AnimationGroup.mPrev;
-  v8 = (UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *)&v1->mPrev;
-  v9 = v1->mPrev;
-  v10 = v1->mNext;
-  v9->mNext = v10;
-  v10->mPrev = v9;
-  v8->mPrev = v8;
-  v8->mNext = v8;
-  v11 = v1->mPrev;
-  v12 = v1->mNext;
-  v11->mNext = v12;
-  v12->mPrev = v11;
-  v1->mPrev = (UFG::qNode<AnimationGroupHandle,AnimationGroupList> *)&v1->mPrev;
-  v1->mNext = (UFG::qNode<AnimationGroupHandle,AnimationGroupList> *)&v1->mPrev;
+  p_m_AnimationGroup->mPrev = p_m_AnimationGroup;
+  this->m_AnimationGroup.mNext = &this->m_AnimationGroup;
+  v8 = this->UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer>::mPrev;
+  v9 = this->UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer>::mNext;
+  v8->mNext = v9;
+  v9->mPrev = v8;
+  this->UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer>::mPrev = &this->UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer>;
+  this->UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer>::mNext = &this->UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer>;
+  v10 = this->UFG::qNode<AnimationGroupHandle,AnimationGroupList>::mPrev;
+  v11 = this->UFG::qNode<AnimationGroupHandle,AnimationGroupList>::mNext;
+  v10->mNext = v11;
+  v11->mPrev = v10;
+  this->UFG::qNode<AnimationGroupHandle,AnimationGroupList>::mPrev = this;
+  this->UFG::qNode<AnimationGroupHandle,AnimationGroupList>::mNext = this;
 }
 
 // File Line: 2268
 // RVA: 0x3AA860
-void __fastcall AnimationGroupHandle::Init(AnimationGroupHandle *this, UFG::qSymbolUC *theAnimationGroupSymbol, UFG::eAnimationPriorityEnum eAnimationPriority)
+void __fastcall AnimationGroupHandle::Init(
+        AnimationGroupHandle *this,
+        UFG::qSymbolUC *theAnimationGroupSymbol,
+        UFG::eAnimationPriorityEnum eAnimationPriority)
 {
-  unsigned int v3; // eax
+  unsigned int mUID; // eax
   unsigned __int16 v4; // bp
-  UFG::qSymbolUC *v5; // rsi
-  AnimationGroupHandle *v6; // rbx
 
-  v3 = this->m_AnimationGroupSymbol.mUID;
+  mUID = this->m_AnimationGroupSymbol.mUID;
   v4 = eAnimationPriority;
-  v5 = theAnimationGroupSymbol;
-  v6 = this;
-  if ( v3 != theAnimationGroupSymbol->mUID )
+  if ( mUID != theAnimationGroupSymbol->mUID )
   {
-    if ( v3 != -1 )
+    if ( mUID != -1 )
     {
       AnimationGroupHandle::Unbind(this);
-      UFG::qSymbolUC::set_null(&v6->m_AnimationGroupSymbol);
+      UFG::qSymbolUC::set_null(&this->m_AnimationGroupSymbol);
     }
-    v6->m_AnimationGroupSymbol = (UFG::qSymbolUC)v5->mUID;
-    v6->m_eAnimationPriority.mValue = v4;
-    v6->m_AnimationSubPriority = -1;
+    this->m_AnimationGroupSymbol = (UFG::qSymbolUC)theAnimationGroupSymbol->mUID;
+    this->m_eAnimationPriority.mValue = v4;
+    this->m_AnimationSubPriority = -1;
   }
 }
 
@@ -1277,84 +1212,80 @@ void __fastcall AnimationGroupHandle::Init(AnimationGroupHandle *this, UFG::qSym
 // RVA: 0x3AE0F0
 void __fastcall AnimationGroupHandle::Reset(AnimationGroupHandle *this)
 {
-  AnimationGroupHandle *v1; // rbx
-
-  v1 = this;
   AnimationGroupHandle::Unbind(this);
-  UFG::qSymbolUC::set_null(&v1->m_AnimationGroupSymbol);
+  UFG::qSymbolUC::set_null(&this->m_AnimationGroupSymbol);
 }
 
 // File Line: 2296
 // RVA: 0x3A2B60
 char __fastcall AnimationGroupHandle::Bind(AnimationGroupHandle *this)
 {
-  AnimationGroupHandle *v1; // rbx
-  unsigned int v2; // edx
+  unsigned int mUID; // edx
   UFG::qBaseTreeRB *v3; // rax
-  signed __int64 v4; // r8
-  UFG::qSafePointer<AnimationGroup,AnimationGroup> *v5; // rdx
-  UFG::qNode<UFG::qSafePointerBase<AnimationGroup>,UFG::qSafePointerNodeList> *v6; // rcx
-  UFG::qNode<UFG::qSafePointerBase<AnimationGroup>,UFG::qSafePointerNodeList> *v7; // rax
+  AnimationGroup *p_mNULL; // r8
+  UFG::qSafePointer<AnimationGroup,AnimationGroup> *p_m_AnimationGroup; // rdx
+  UFG::qNode<UFG::qSafePointerBase<AnimationGroup>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<AnimationGroup>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<AnimationGroup>,UFG::qSafePointerNodeList> *v8; // rax
-  AnimationGroup *v9; // rcx
-  UFG::qNode<AnimationGroupHandle,AnimationGroupList> *v10; // rcx
+  AnimationGroup *m_pPointer; // rcx
+  UFG::qNode<AnimationGroupHandle,AnimationGroupList> *p_mNode; // rcx
   UFG::qNode<AnimationGroupHandle,AnimationGroupList> *v11; // rax
   AnimationGroup *v12; // rax
   AnimationGroup *v13; // rax
   UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *v14; // rdx
-  UFG::qList<AnimationGroup,AnimationGroupUpdateList,0,0> *v15; // rcx
+  UFG::qList<AnimationGroup,AnimationGroupUpdateList,0,0> *p_mQueuedUpdateGroups; // rcx
   UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *v16; // rax
 
-  v1 = this;
   if ( this->m_AnimationGroup.m_pPointer )
     AnimationGroupHandle::Unbind(this);
-  v2 = v1->m_AnimationGroupSymbol.mUID;
-  v1->m_bHasBeenBound = 1;
-  if ( v2 && (v3 = UFG::qBaseTreeRB::Get(&AnimationDataBase::sAnimationDataBase->mAnimGroups.mTree, v2)) != 0i64 )
-    v4 = (signed __int64)&v3[-1].mNULL;
+  mUID = this->m_AnimationGroupSymbol.mUID;
+  this->m_bHasBeenBound = 1;
+  if ( mUID && (v3 = UFG::qBaseTreeRB::Get(&AnimationDataBase::sAnimationDataBase->mAnimGroups.mTree, mUID)) != 0i64 )
+    p_mNULL = (AnimationGroup *)&v3[-1].mNULL;
   else
-    v4 = 0i64;
-  v5 = &v1->m_AnimationGroup;
-  if ( v1->m_AnimationGroup.m_pPointer )
+    p_mNULL = 0i64;
+  p_m_AnimationGroup = &this->m_AnimationGroup;
+  if ( this->m_AnimationGroup.m_pPointer )
   {
-    v6 = v5->mPrev;
-    v7 = v1->m_AnimationGroup.mNext;
-    v6->mNext = v7;
-    v7->mPrev = v6;
-    v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<AnimationGroup>,UFG::qSafePointerNodeList> *)&v5->mPrev;
-    v1->m_AnimationGroup.mNext = (UFG::qNode<UFG::qSafePointerBase<AnimationGroup>,UFG::qSafePointerNodeList> *)&v1->m_AnimationGroup.mPrev;
+    mPrev = p_m_AnimationGroup->mPrev;
+    mNext = this->m_AnimationGroup.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_m_AnimationGroup->mPrev = p_m_AnimationGroup;
+    this->m_AnimationGroup.mNext = &this->m_AnimationGroup;
   }
-  v1->m_AnimationGroup.m_pPointer = (AnimationGroup *)v4;
-  if ( v4 )
+  this->m_AnimationGroup.m_pPointer = p_mNULL;
+  if ( p_mNULL )
   {
-    v8 = *(UFG::qNode<UFG::qSafePointerBase<AnimationGroup>,UFG::qSafePointerNodeList> **)(v4 + 24);
-    v8->mNext = (UFG::qNode<UFG::qSafePointerBase<AnimationGroup>,UFG::qSafePointerNodeList> *)&v5->mPrev;
-    v5->mPrev = v8;
-    v1->m_AnimationGroup.mNext = (UFG::qNode<UFG::qSafePointerBase<AnimationGroup>,UFG::qSafePointerNodeList> *)(v4 + 24);
-    *(_QWORD *)(v4 + 24) = v5;
+    v8 = p_mNULL->m_SafePointerList.UFG::qSafePointerNode<AnimationGroup>::mNode.UFG::qSafePointerNode<AnimationGroup>::mPrev;
+    v8->mNext = p_m_AnimationGroup;
+    p_m_AnimationGroup->mPrev = v8;
+    this->m_AnimationGroup.mNext = &p_mNULL->m_SafePointerList.UFG::qSafePointerNode<AnimationGroup>::mNode;
+    p_mNULL->m_SafePointerList.UFG::qSafePointerNode<AnimationGroup>::mNode.UFG::qSafePointerNode<AnimationGroup>::mPrev = p_m_AnimationGroup;
   }
-  v9 = v1->m_AnimationGroup.m_pPointer;
-  if ( !v9 || !v9->mMemorySize )
+  m_pPointer = this->m_AnimationGroup.m_pPointer;
+  if ( !m_pPointer || !m_pPointer->mMemorySize )
     return 0;
-  v10 = &v9->mAnimGroupHandles.mNode;
-  v11 = v10->mPrev;
-  v11->mNext = (UFG::qNode<AnimationGroupHandle,AnimationGroupList> *)&v1->mPrev;
-  v1->mPrev = v11;
-  v1->mNext = v10;
-  v10->mPrev = (UFG::qNode<AnimationGroupHandle,AnimationGroupList> *)&v1->mPrev;
-  v12 = v1->m_AnimationGroup.m_pPointer;
+  p_mNode = &m_pPointer->mAnimGroupHandles.mNode;
+  v11 = p_mNode->mPrev;
+  v11->mNext = this;
+  this->UFG::qNode<AnimationGroupHandle,AnimationGroupList>::mPrev = v11;
+  this->UFG::qNode<AnimationGroupHandle,AnimationGroupList>::mNext = p_mNode;
+  p_mNode->mPrev = this;
+  v12 = this->m_AnimationGroup.m_pPointer;
   ++v12->mRefCount;
   ++v12->mRefCountTotal;
-  v13 = v1->m_AnimationGroup.m_pPointer;
-  v14 = (UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *)&v13->mPrev;
-  if ( v14->mPrev == v14 && (UFG::qNode<AnimationGroup,AnimationGroupUpdateList> **)v13->mNext == &v13->mPrev )
+  v13 = this->m_AnimationGroup.m_pPointer;
+  v14 = &v13->UFG::qNode<AnimationGroup,AnimationGroupUpdateList>;
+  if ( v14->mPrev == v14
+    && v13->UFG::qNode<AnimationGroup,AnimationGroupUpdateList>::mNext == &v13->UFG::qNode<AnimationGroup,AnimationGroupUpdateList> )
   {
-    v15 = &AnimationDataBase::sAnimationDataBase->mQueuedUpdateGroups;
+    p_mQueuedUpdateGroups = &AnimationDataBase::sAnimationDataBase->mQueuedUpdateGroups;
     v16 = AnimationDataBase::sAnimationDataBase->mQueuedUpdateGroups.mNode.mPrev;
     v16->mNext = v14;
     v14->mPrev = v16;
-    v14->mNext = &v15->mNode;
-    v15->mNode.mPrev = v14;
+    v14->mNext = &p_mQueuedUpdateGroups->mNode;
+    p_mQueuedUpdateGroups->mNode.mPrev = v14;
   }
   return 1;
 }
@@ -1363,54 +1294,52 @@ char __fastcall AnimationGroupHandle::Bind(AnimationGroupHandle *this)
 // RVA: 0x3B02C0
 void __fastcall AnimationGroupHandle::Unbind(AnimationGroupHandle *this)
 {
-  AnimationGroupHandle *v1; // rbx
-  UFG::qNode<AnimationGroupHandle,AnimationGroupList> *v2; // rdx
-  UFG::qNode<AnimationGroupHandle,AnimationGroupList> *v3; // rax
-  AnimationGroup *v4; // rcx
+  UFG::qNode<AnimationGroupHandle,AnimationGroupList> *mPrev; // rdx
+  UFG::qNode<AnimationGroupHandle,AnimationGroupList> *mNext; // rax
+  AnimationGroup *m_pPointer; // rcx
   bool v5; // zf
   UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *v6; // rdx
-  UFG::qList<AnimationGroup,AnimationGroupUpdateList,0,0> *v7; // rcx
+  UFG::qList<AnimationGroup,AnimationGroupUpdateList,0,0> *p_mQueuedUpdateGroups; // rcx
   UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *v8; // rax
-  UFG::qSafePointer<AnimationGroup,AnimationGroup> *v9; // rdx
+  UFG::qSafePointer<AnimationGroup,AnimationGroup> *p_m_AnimationGroup; // rdx
   UFG::qNode<UFG::qSafePointerBase<AnimationGroup>,UFG::qSafePointerNodeList> *v10; // rcx
   UFG::qNode<UFG::qSafePointerBase<AnimationGroup>,UFG::qSafePointerNodeList> *v11; // rax
 
-  v1 = this;
   if ( this->m_AnimationGroup.m_pPointer )
   {
-    v2 = this->mPrev;
-    v3 = this->mNext;
-    v2->mNext = v3;
-    v3->mPrev = v2;
-    this->mPrev = (UFG::qNode<AnimationGroupHandle,AnimationGroupList> *)&this->mPrev;
-    this->mNext = (UFG::qNode<AnimationGroupHandle,AnimationGroupList> *)&this->mPrev;
-    v4 = this->m_AnimationGroup.m_pPointer;
-    v5 = v4->mRefCount-- == 1;
-    if ( v5 && !v4->mAnimRefCount )
-      AnimationGroup::DestroyStreamHandle(v4);
-    v6 = (UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *)&v1->m_AnimationGroup.m_pPointer->mPrev;
+    mPrev = this->UFG::qNode<AnimationGroupHandle,AnimationGroupList>::mPrev;
+    mNext = this->UFG::qNode<AnimationGroupHandle,AnimationGroupList>::mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    this->UFG::qNode<AnimationGroupHandle,AnimationGroupList>::mPrev = this;
+    this->UFG::qNode<AnimationGroupHandle,AnimationGroupList>::mNext = this;
+    m_pPointer = this->m_AnimationGroup.m_pPointer;
+    v5 = m_pPointer->mRefCount-- == 1;
+    if ( v5 && !m_pPointer->mAnimRefCount )
+      AnimationGroup::DestroyStreamHandle(m_pPointer);
+    v6 = &this->m_AnimationGroup.m_pPointer->UFG::qNode<AnimationGroup,AnimationGroupUpdateList>;
     if ( v6->mPrev == v6
-      && v1->m_AnimationGroup.m_pPointer->mNext == (UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *)&v1->m_AnimationGroup.m_pPointer->mPrev )
+      && this->m_AnimationGroup.m_pPointer->mNext == &this->m_AnimationGroup.m_pPointer->UFG::qNode<AnimationGroup,AnimationGroupUpdateList> )
     {
-      v7 = &AnimationDataBase::sAnimationDataBase->mQueuedUpdateGroups;
+      p_mQueuedUpdateGroups = &AnimationDataBase::sAnimationDataBase->mQueuedUpdateGroups;
       v8 = AnimationDataBase::sAnimationDataBase->mQueuedUpdateGroups.mNode.mPrev;
       v8->mNext = v6;
       v6->mPrev = v8;
-      v6->mNext = &v7->mNode;
-      v7->mNode.mPrev = v6;
+      v6->mNext = &p_mQueuedUpdateGroups->mNode;
+      p_mQueuedUpdateGroups->mNode.mPrev = v6;
     }
-    v9 = &v1->m_AnimationGroup;
-    if ( v1->m_AnimationGroup.m_pPointer )
+    p_m_AnimationGroup = &this->m_AnimationGroup;
+    if ( this->m_AnimationGroup.m_pPointer )
     {
-      v10 = v9->mPrev;
-      v11 = v1->m_AnimationGroup.mNext;
+      v10 = p_m_AnimationGroup->mPrev;
+      v11 = this->m_AnimationGroup.mNext;
       v10->mNext = v11;
       v11->mPrev = v10;
-      v9->mPrev = (UFG::qNode<UFG::qSafePointerBase<AnimationGroup>,UFG::qSafePointerNodeList> *)&v9->mPrev;
-      v1->m_AnimationGroup.mNext = (UFG::qNode<UFG::qSafePointerBase<AnimationGroup>,UFG::qSafePointerNodeList> *)&v1->m_AnimationGroup.mPrev;
+      p_m_AnimationGroup->mPrev = p_m_AnimationGroup;
+      this->m_AnimationGroup.mNext = &this->m_AnimationGroup;
     }
-    v1->m_AnimationGroup.m_pPointer = 0i64;
-    v1->m_bHasBeenBound = 0;
+    this->m_AnimationGroup.m_pPointer = 0i64;
+    this->m_bHasBeenBound = 0;
   }
   else
   {
@@ -1420,29 +1349,32 @@ void __fastcall AnimationGroupHandle::Unbind(AnimationGroupHandle *this)
 
 // File Line: 2369
 // RVA: 0x3AEEA0
-void __fastcall AnimationGroupHandle::SetAnimationPriority(AnimationGroupHandle *this, UFG::eAnimationPriorityEnum eAnimationPriority, unsigned __int16 subPriority)
+void __fastcall AnimationGroupHandle::SetAnimationPriority(
+        AnimationGroupHandle *this,
+        UFG::eAnimationPriorityEnum eAnimationPriority,
+        unsigned __int16 subPriority)
 {
-  AnimationGroup *v3; // rdx
+  AnimationGroup *m_pPointer; // rdx
   UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *v4; // rdx
-  UFG::qList<AnimationGroup,AnimationGroupUpdateList,0,0> *v5; // rcx
-  UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *v6; // rax
+  UFG::qList<AnimationGroup,AnimationGroupUpdateList,0,0> *p_mQueuedUpdateGroups; // rcx
+  UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *mPrev; // rax
 
   if ( this->m_eAnimationPriority.mValue != eAnimationPriority || this->m_AnimationSubPriority != subPriority )
   {
     this->m_eAnimationPriority.mValue = eAnimationPriority;
-    v3 = this->m_AnimationGroup.m_pPointer;
+    m_pPointer = this->m_AnimationGroup.m_pPointer;
     this->m_AnimationSubPriority = subPriority;
-    if ( v3 )
+    if ( m_pPointer )
     {
-      v4 = (UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *)&v3->mPrev;
+      v4 = &m_pPointer->UFG::qNode<AnimationGroup,AnimationGroupUpdateList>;
       if ( v4->mPrev == v4 && v4->mNext == v4 )
       {
-        v5 = &AnimationDataBase::sAnimationDataBase->mQueuedUpdateGroups;
-        v6 = AnimationDataBase::sAnimationDataBase->mQueuedUpdateGroups.mNode.mPrev;
-        v6->mNext = v4;
-        v4->mPrev = v6;
-        v4->mNext = &v5->mNode;
-        v5->mNode.mPrev = v4;
+        p_mQueuedUpdateGroups = &AnimationDataBase::sAnimationDataBase->mQueuedUpdateGroups;
+        mPrev = AnimationDataBase::sAnimationDataBase->mQueuedUpdateGroups.mNode.mPrev;
+        mPrev->mNext = v4;
+        v4->mPrev = mPrev;
+        v4->mNext = &p_mQueuedUpdateGroups->mNode;
+        p_mQueuedUpdateGroups->mNode.mPrev = v4;
       }
     }
   }
@@ -1456,7 +1388,7 @@ __int64 dynamic_initializer_for__gStaticSymbol_Default__()
 
   v0 = UFG::qStringHash32("default", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gStaticSymbol_Default, v0);
-  return atexit(dynamic_atexit_destructor_for__gStaticSymbol_Default__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gStaticSymbol_Default__);
 }
 
 // File Line: 2433
@@ -1466,14 +1398,14 @@ __int64 dynamic_initializer_for__gAnimCompressionProfileTracksEnum__()
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(
     &gAnimCompressionProfileTracksEnum,
     "Global\\Act\\AnimCompressionProfileEnum.xml");
-  return atexit(dynamic_atexit_destructor_for__gAnimCompressionProfileTracksEnum__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gAnimCompressionProfileTracksEnum__);
 }
 
 // File Line: 2434
 // RVA: 0x14BCD30
 __int64 dynamic_initializer_for__gAnimCompressionProfileDefault__()
 {
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v0; // rax
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
 
   gAnimCompressionProfileDefault.m_EnumSymbol.mUID = gStaticSymbol_Default.mUID;
   *(_QWORD *)&gAnimCompressionProfileDefault.m_EnumValue = 0i64;
@@ -1484,13 +1416,13 @@ __int64 dynamic_initializer_for__gAnimCompressionProfileDefault__()
   }
   else
   {
-    v0 = gAnimCompressionProfileTracksEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    gAnimCompressionProfileTracksEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAnimCompressionProfileDefault;
-    gAnimCompressionProfileDefault.mPrev = v0;
+    mPrev = gAnimCompressionProfileTracksEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    gAnimCompressionProfileTracksEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &gAnimCompressionProfileDefault;
+    gAnimCompressionProfileDefault.mPrev = mPrev;
     gAnimCompressionProfileDefault.mNext = &gAnimCompressionProfileTracksEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    gAnimCompressionProfileTracksEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAnimCompressionProfileDefault;
+    gAnimCompressionProfileTracksEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &gAnimCompressionProfileDefault;
   }
-  return atexit(dynamic_atexit_destructor_for__gAnimCompressionProfileDefault__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gAnimCompressionProfileDefault__);
 }
 
 // File Line: 2437
@@ -1498,14 +1430,14 @@ __int64 dynamic_initializer_for__gAnimCompressionProfileDefault__()
 __int64 dynamic_initializer_for__gAnimationBlendTypeEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&gAnimationBlendTypeEnum, gAnimationBlendTypeValues, 3, 0i64);
-  return atexit(dynamic_atexit_destructor_for__gAnimationBlendTypeEnum__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gAnimationBlendTypeEnum__);
 }
 
 // File Line: 2438
 // RVA: 0x14BCE50
 __int64 dynamic_initializer_for__gAnimationBlendTypeDefault__()
 {
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v0; // rax
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
 
   gAnimationBlendTypeDefault.m_EnumSymbol.mUID = gStaticSymbol_Default.mUID;
   *(_QWORD *)&gAnimationBlendTypeDefault.m_EnumValue = 0i64;
@@ -1516,13 +1448,13 @@ __int64 dynamic_initializer_for__gAnimationBlendTypeDefault__()
   }
   else
   {
-    v0 = gAnimationBlendTypeEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    gAnimationBlendTypeEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAnimationBlendTypeDefault;
-    gAnimationBlendTypeDefault.mPrev = v0;
+    mPrev = gAnimationBlendTypeEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    gAnimationBlendTypeEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &gAnimationBlendTypeDefault;
+    gAnimationBlendTypeDefault.mPrev = mPrev;
     gAnimationBlendTypeDefault.mNext = &gAnimationBlendTypeEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    gAnimationBlendTypeEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&gAnimationBlendTypeDefault;
+    gAnimationBlendTypeEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &gAnimationBlendTypeDefault;
   }
-  return atexit(dynamic_atexit_destructor_for__gAnimationBlendTypeDefault__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gAnimationBlendTypeDefault__);
 }
 
 // File Line: 2440
@@ -1540,94 +1472,77 @@ __int64 dynamic_initializer_for__AnimationGroup::sClassNameUID__()
 // RVA: 0x39D0D0
 void __fastcall AnimationGroup::AnimationGroup(AnimationGroup *this)
 {
-  AnimationGroup *v1; // rdi
-  UFG::qNode<AnimationGroup,AnimationGroupBudgetedList> *v2; // rax
-  UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *v3; // rax
-  UFG::qList<AnimationGroupHandle,AnimationGroupList,0,0> *v4; // [rsp+48h] [rbp+10h]
-
-  v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  UFG::qSafePointerNode<AnimationGroup>::qSafePointerNode<AnimationGroup>((UFG::qSafePointerNode<AnimationGroup> *)&this->vfptr);
-  v1->mNode.mParent = 0i64;
-  v1->mNode.mChild[0] = 0i64;
-  v1->mNode.mChild[1] = 0i64;
-  v2 = (UFG::qNode<AnimationGroup,AnimationGroupBudgetedList> *)&v1->mPrev;
-  v2->mPrev = v2;
-  v2->mNext = v2;
-  v3 = (UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *)&v1->mPrev;
-  v3->mPrev = v3;
-  v3->mNext = v3;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AnimationGroup::`vftable{for `Expression::IMemberMap};
-  v1->vfptr = (UFG::qSafePointerNode<AnimationGroup>Vtbl *)&AnimationGroup::`vftable{for `UFG::qSafePointerNode<AnimationGroup>};
-  v1->mName.mOffset = 1i64;
-  BinString::Set(&v1->mName, &customWorldMapCaption);
-  v1->mAnimations.mCount = 0;
-  v1->mAnimations.mData.mOffset = 0i64;
-  v1->mCategory.mOffset = 1i64;
-  BinString::Set(&v1->mCategory, "default");
-  v1->mMode.mOffset = 1i64;
-  BinString::Set(&v1->mMode, "default");
-  v4 = &v1->mAnimGroupHandles;
-  v4->mNode.mPrev = &v4->mNode;
-  v4->mNode.mNext = &v4->mNode;
-  v1->mMemorySize = 0;
-  *(_QWORD *)&v1->mNameSymbol.mUID = -1i64;
-  *(_QWORD *)&v1->mRefCount = 0i64;
-  *(_QWORD *)&v1->mRefCountTotal = 0i64;
-  *(_DWORD *)&v1->mCurrentAnimationSubPriority = 16842752;
-  *(_DWORD *)&v1->mHighestBudgetedPriority.mValue = 1;
-  v1->mSourceABKFromSingleHKX = 0;
-  v1->mStreamHandle = 0i64;
+  UFG::qSafePointerNode<AnimationGroup>::qSafePointerNode<AnimationGroup>(&this->UFG::qSafePointerNode<AnimationGroup>);
+  this->mNode.mParent = 0i64;
+  this->mNode.mChild[0] = 0i64;
+  this->mNode.mChild[1] = 0i64;
+  this->UFG::qNode<AnimationGroup,AnimationGroupBudgetedList>::mPrev = &this->UFG::qNode<AnimationGroup,AnimationGroupBudgetedList>;
+  this->UFG::qNode<AnimationGroup,AnimationGroupBudgetedList>::mNext = &this->UFG::qNode<AnimationGroup,AnimationGroupBudgetedList>;
+  this->UFG::qNode<AnimationGroup,AnimationGroupUpdateList>::mPrev = &this->UFG::qNode<AnimationGroup,AnimationGroupUpdateList>;
+  this->UFG::qNode<AnimationGroup,AnimationGroupUpdateList>::mNext = &this->UFG::qNode<AnimationGroup,AnimationGroupUpdateList>;
+  this->Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&AnimationGroup::`vftable{for `Expression::IMemberMap};
+  this->UFG::qSafePointerNode<AnimationGroup>::vfptr = (UFG::qSafePointerNode<AnimationGroup>Vtbl *)&AnimationGroup::`vftable{for `UFG::qSafePointerNode<AnimationGroup>};
+  this->mName.mOffset = 1i64;
+  BinString::Set(&this->mName, &customCaption);
+  this->mAnimations.mCount = 0;
+  this->mAnimations.mData.mOffset = 0i64;
+  this->mCategory.mOffset = 1i64;
+  BinString::Set(&this->mCategory, "default");
+  this->mMode.mOffset = 1i64;
+  BinString::Set(&this->mMode, "default");
+  this->mAnimGroupHandles.mNode.mPrev = &this->mAnimGroupHandles.mNode;
+  this->mAnimGroupHandles.mNode.mNext = &this->mAnimGroupHandles.mNode;
+  this->mMemorySize = 0;
+  *(_QWORD *)&this->mNameSymbol.mUID = -1i64;
+  *(_QWORD *)&this->mRefCount = 0i64;
+  *(_QWORD *)&this->mRefCountTotal = 0i64;
+  *(_DWORD *)&this->mCurrentAnimationSubPriority = 16842752;
+  *(_DWORD *)&this->mHighestBudgetedPriority.mValue = 1;
+  this->mSourceABKFromSingleHKX = 0;
+  this->mStreamHandle = 0i64;
 }
 
 // File Line: 2509
 // RVA: 0x39CFE0
 void __fastcall AnimationGroup::AnimationGroup(AnimationGroup *this, MemImageLoadFlag flag)
 {
-  AnimationGroup *v2; // rdi
-  UFG::qNode<AnimationGroup,AnimationGroupBudgetedList> *v3; // rax
-  UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *v4; // rax
-  signed __int64 v5; // rsi
-  unsigned int v6; // ebx
-  signed __int64 v7; // rdx
-  UFG::qBaseNodeRB *v8; // rdx
-  UFG::qList<AnimationGroupHandle,AnimationGroupList,0,0> *v9; // [rsp+60h] [rbp+18h]
+  char *v3; // rsi
+  unsigned int v4; // ebx
+  __int64 v5; // rdx
+  UFG::qBaseNodeRB *v6; // rdx
 
-  v2 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  UFG::qSafePointerNode<AnimationGroup>::qSafePointerNode<AnimationGroup>((UFG::qSafePointerNode<AnimationGroup> *)&this->vfptr);
-  v2->mNode.mParent = 0i64;
-  v2->mNode.mChild[0] = 0i64;
-  v2->mNode.mChild[1] = 0i64;
-  v3 = (UFG::qNode<AnimationGroup,AnimationGroupBudgetedList> *)&v2->mPrev;
-  v3->mPrev = v3;
-  v3->mNext = v3;
-  v4 = (UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *)&v2->mPrev;
-  v4->mPrev = v4;
-  v4->mNext = v4;
-  v2->vfptr = (Expression::IMemberMapVtbl *)&AnimationGroup::`vftable{for `Expression::IMemberMap};
-  v2->vfptr = (UFG::qSafePointerNode<AnimationGroup>Vtbl *)&AnimationGroup::`vftable{for `UFG::qSafePointerNode<AnimationGroup>};
-  v9 = &v2->mAnimGroupHandles;
-  v9->mNode.mPrev = &v9->mNode;
-  v9->mNode.mNext = &v9->mNode;
-  v2->mMemorySize = 0;
-  v5 = (signed __int64)&v2->mAnimations.mData + v2->mAnimations.mData.mOffset;
-  v6 = 0;
-  if ( v2->mAnimations.mCount & 0x7FFFFFFF )
+  UFG::qSafePointerNode<AnimationGroup>::qSafePointerNode<AnimationGroup>(&this->UFG::qSafePointerNode<AnimationGroup>);
+  this->mNode.mParent = 0i64;
+  this->mNode.mChild[0] = 0i64;
+  this->mNode.mChild[1] = 0i64;
+  this->UFG::qNode<AnimationGroup,AnimationGroupBudgetedList>::mPrev = &this->UFG::qNode<AnimationGroup,AnimationGroupBudgetedList>;
+  this->UFG::qNode<AnimationGroup,AnimationGroupBudgetedList>::mNext = &this->UFG::qNode<AnimationGroup,AnimationGroupBudgetedList>;
+  this->UFG::qNode<AnimationGroup,AnimationGroupUpdateList>::mPrev = &this->UFG::qNode<AnimationGroup,AnimationGroupUpdateList>;
+  this->UFG::qNode<AnimationGroup,AnimationGroupUpdateList>::mNext = &this->UFG::qNode<AnimationGroup,AnimationGroupUpdateList>;
+  this->Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&AnimationGroup::`vftable{for `Expression::IMemberMap};
+  this->UFG::qSafePointerNode<AnimationGroup>::vfptr = (UFG::qSafePointerNode<AnimationGroup>Vtbl *)&AnimationGroup::`vftable{for `UFG::qSafePointerNode<AnimationGroup>};
+  this->mAnimGroupHandles.mNode.mPrev = &this->mAnimGroupHandles.mNode;
+  this->mAnimGroupHandles.mNode.mNext = &this->mAnimGroupHandles.mNode;
+  this->mMemorySize = 0;
+  v3 = (char *)&this->mAnimations.mData + this->mAnimations.mData.mOffset;
+  v4 = 0;
+  if ( (this->mAnimations.mCount & 0x7FFFFFFF) != 0 )
   {
     do
     {
-      v7 = v5 + 8i64 * v6 + *(_QWORD *)(v5 + 8i64 * v6);
-      if ( v7 )
-        v8 = (UFG::qBaseNodeRB *)(v7 + 40);
+      v5 = (__int64)&v3[8 * v4 + *(_QWORD *)&v3[8 * v4]];
+      if ( v5 )
+        v6 = (UFG::qBaseNodeRB *)(v5 + 40);
       else
-        v8 = 0i64;
-      UFG::qBaseTreeRB::Add(&AnimationDataBase::sAnimationDataBase->mAnimations.mTree, v8);
-      ++v6;
+        v6 = 0i64;
+      UFG::qBaseTreeRB::Add(&AnimationDataBase::sAnimationDataBase->mAnimations.mTree, v6);
+      ++v4;
     }
-    while ( v6 < (v2->mAnimations.mCount & 0x7FFFFFFFu) );
+    while ( v4 < (this->mAnimations.mCount & 0x7FFFFFFFu) );
   }
 }
 
@@ -1635,174 +1550,156 @@ void __fastcall AnimationGroup::AnimationGroup(AnimationGroup *this, MemImageLoa
 // RVA: 0x39EDF0
 void __fastcall AnimationGroup::~AnimationGroup(AnimationGroup *this)
 {
-  AnimationGroup *v1; // rdi
   UFG::qSafePointerNode<UFG::ParkourHandle> *v2; // rbx
-  int v3; // er8
+  int v3; // r8d
   int v4; // edx
-  __int64 v5; // rcx
-  signed __int64 v6; // r9
-  _QWORD *v7; // r10
-  _QWORD *v8; // r10
-  signed __int64 v9; // r11
-  UFG::qList<AnimationGroupHandle,AnimationGroupList,0,0> *v17; // r8
-  UFG::qList<AnimationGroupHandle,AnimationGroupList,0,0> *v18; // rdx
-  UFG::qNode<AnimationGroupHandle,AnimationGroupList> *v19; // rcx
-  UFG::qNode<AnimationGroupHandle,AnimationGroupList> *v20; // rax
-  UFG::qNode<AnimationGroupHandle,AnimationGroupList> *v21; // rcx
-  UFG::qNode<AnimationGroupHandle,AnimationGroupList> *v22; // rax
-  char *v23; // rcx
-  char *v24; // rcx
-  __int64 v25; // rax
-  char *v26; // rcx
-  char *v27; // rcx
-  UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *v28; // rdx
-  UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *v29; // rcx
-  UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *v30; // rax
-  UFG::qNode<AnimationGroup,AnimationGroupBudgetedList> *v31; // rdx
-  UFG::qNode<AnimationGroup,AnimationGroupBudgetedList> *v32; // rcx
-  UFG::qNode<AnimationGroup,AnimationGroupBudgetedList> *v33; // rax
-  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v34; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v35; // rax
-  UFG::qList<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList,1,0> *v36; // [rsp+48h] [rbp+10h]
+  __int64 mOffset; // rcx
+  char *v6; // r9
+  char *v7; // r10
+  char *v8; // r10
+  char *v9; // r11
+  UFG::qList<AnimationGroupHandle,AnimationGroupList,0,0> *p_mAnimGroupHandles; // r8
+  AnimationGroup *mNext; // rdx
+  Expression::IMemberMapVtbl *vfptr; // rcx
+  Expression::IMemberMap *mResourceOwner; // rax
+  UFG::qNode<AnimationGroupHandle,AnimationGroupList> *mPrev; // rcx
+  UFG::qNode<AnimationGroupHandle,AnimationGroupList> *v15; // rax
+  char *v16; // rcx
+  char *v17; // rcx
+  __int64 v18; // rax
+  char *v19; // rcx
+  char *v20; // rcx
+  UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *v21; // rcx
+  UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *v22; // rax
+  UFG::qNode<AnimationGroup,AnimationGroupBudgetedList> *v23; // rcx
+  UFG::qNode<AnimationGroup,AnimationGroupBudgetedList> *v24; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v25; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v26; // rax
 
-  v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&AnimationGroup::`vftable{for `Expression::IMemberMap};
-  v2 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)&this->vfptr;
-  this->vfptr = (UFG::qSafePointerNode<AnimationGroup>Vtbl *)&AnimationGroup::`vftable{for `UFG::qSafePointerNode<AnimationGroup>};
+  this->Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&AnimationGroup::`vftable{for `Expression::IMemberMap};
+  v2 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)&this->UFG::qSafePointerNode<AnimationGroup>;
+  this->UFG::qSafePointerNode<AnimationGroup>::vfptr = (UFG::qSafePointerNode<AnimationGroup>Vtbl *)&AnimationGroup::`vftable{for `UFG::qSafePointerNode<AnimationGroup>};
   AnimationGroup::Destroy(this);
-  while ( v1->mAnimations.mCount & 0x7FFFFFFF )
+  while ( (this->mAnimations.mCount & 0x7FFFFFFF) != 0 )
   {
-    v3 = v1->mAnimations.mCount & 0x7FFFFFFF;
+    v3 = this->mAnimations.mCount & 0x7FFFFFFF;
     if ( v3 && (v4 = v3 - 1, v3 - 1 >= 0) && v4 < v3 )
     {
-      v5 = v1->mAnimations.mData.mOffset;
-      if ( v5 )
-        v6 = (signed __int64)&v1->mAnimations.mData + v5;
+      mOffset = this->mAnimations.mData.mOffset;
+      if ( mOffset )
+        v6 = (char *)&this->mAnimations.mData + mOffset;
       else
         v6 = 0i64;
-      v7 = (_QWORD *)(v6 + 8i64 * v4);
-      if ( *v7 )
-        v8 = (_QWORD *)((char *)v7 + *v7);
+      v7 = &v6[8 * v4];
+      if ( *(_QWORD *)v7 )
+        v8 = &v7[*(_QWORD *)v7];
       else
         v8 = 0i64;
-      if ( v5 )
-        v9 = (signed __int64)&v1->mAnimations.mData + v5;
+      if ( mOffset )
+        v9 = (char *)&this->mAnimations.mData + mOffset;
       else
         v9 = 0i64;
       if ( v3 == 1 )
       {
-        v1->mAnimations.mCount &= 0x80000000;
-        v1->mAnimations.mData.mOffset = 0i64;
+        this->mAnimations.mCount &= 0x80000000;
+        this->mAnimations.mData.mOffset = 0i64;
       }
       else
       {
-        v1->mAnimations.mCount ^= (((v1->mAnimations.mCount & 0x7FFFFFFF) - 1) ^ v1->mAnimations.mCount) & 0x7FFFFFFF;
-        *(_QWORD *)(v9 + 8i64 * (unsigned int)(v3 - 1)) = 0i64;
+        this->mAnimations.mCount ^= (((this->mAnimations.mCount & 0x7FFFFFFF) - 1) ^ this->mAnimations.mCount) & 0x7FFFFFFF;
+        *(_QWORD *)&v9[8 * (v3 - 1)] = 0i64;
       }
     }
     else
     {
       v8 = 0i64;
     }
-    v8[15] = 0i64;
-    (*(void (__fastcall **)(_QWORD *, signed __int64))(*v8 + 8i64))(v8, 1i64);
+    *((_QWORD *)v8 + 15) = 0i64;
+    (*(void (__fastcall **)(char *, __int64))(*(_QWORD *)v8 + 8i64))(v8, 1i64);
   }
-  v17 = &v1->mAnimGroupHandles;
-  v18 = (UFG::qList<AnimationGroupHandle,AnimationGroupList,0,0> *)v1->mAnimGroupHandles.mNode.mNext;
-  if ( v18 != &v1->mAnimGroupHandles )
+  p_mAnimGroupHandles = &this->mAnimGroupHandles;
+  mNext = (AnimationGroup *)this->mAnimGroupHandles.mNode.mNext;
+  if ( mNext != (AnimationGroup *)&this->mAnimGroupHandles )
   {
     do
     {
-      v19 = v18->mNode.mPrev;
-      v20 = v18->mNode.mNext;
-      v19->mNext = v20;
-      v20->mPrev = v19;
-      v18->mNode.mPrev = &v18->mNode;
-      v18->mNode.mNext = &v18->mNode;
-      v18 = (UFG::qList<AnimationGroupHandle,AnimationGroupList,0,0> *)v1->mAnimGroupHandles.mNode.mNext;
+      vfptr = mNext->Expression::IMemberMap::vfptr;
+      mResourceOwner = mNext->mResourceOwner;
+      vfptr->__vecDelDtor = (void *(__fastcall *)(Expression::IMemberMap *, unsigned int))mResourceOwner;
+      mResourceOwner->vfptr = vfptr;
+      mNext->Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)mNext;
+      mNext->mResourceOwner = mNext;
+      mNext = (AnimationGroup *)this->mAnimGroupHandles.mNode.mNext;
     }
-    while ( v18 != v17 );
+    while ( mNext != (AnimationGroup *)p_mAnimGroupHandles );
   }
-  v21 = v17->mNode.mPrev;
-  v22 = v1->mAnimGroupHandles.mNode.mNext;
+  mPrev = p_mAnimGroupHandles->mNode.mPrev;
+  v15 = this->mAnimGroupHandles.mNode.mNext;
+  mPrev->mNext = v15;
+  v15->mPrev = mPrev;
+  p_mAnimGroupHandles->mNode.mPrev = &p_mAnimGroupHandles->mNode;
+  this->mAnimGroupHandles.mNode.mNext = &this->mAnimGroupHandles.mNode;
+  if ( (this->mMode.mOffset & 1) != 0 && (this->mMode.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
+  {
+    v16 = (char *)&this->mMode + (this->mMode.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v16 != BinString::sEmptyString )
+      operator delete[](v16);
+  }
+  if ( (this->mCategory.mOffset & 1) != 0 && (this->mCategory.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
+  {
+    v17 = (char *)&this->mCategory + (this->mCategory.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v17 != BinString::sEmptyString )
+      operator delete[](v17);
+  }
+  if ( this->mAnimations.mCount >= 0 )
+  {
+    v18 = this->mAnimations.mData.mOffset;
+    if ( v18 )
+    {
+      v19 = (char *)&this->mAnimations.mData + v18;
+      if ( v19 )
+        operator delete[](v19);
+    }
+    this->mAnimations.mData.mOffset = 0i64;
+    this->mAnimations.mCount &= 0x80000000;
+  }
+  if ( (this->mName.mOffset & 1) != 0 && (this->mName.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
+  {
+    v20 = (char *)&this->mName + (this->mName.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v20 != BinString::sEmptyString )
+      operator delete[](v20);
+  }
+  v21 = this->UFG::qNode<AnimationGroup,AnimationGroupUpdateList>::mPrev;
+  v22 = this->UFG::qNode<AnimationGroup,AnimationGroupUpdateList>::mNext;
   v21->mNext = v22;
   v22->mPrev = v21;
-  v17->mNode.mPrev = &v17->mNode;
-  v1->mAnimGroupHandles.mNode.mNext = &v1->mAnimGroupHandles.mNode;
-  if ( !(~LOBYTE(v1->mMode.mOffset) & 1) )
-  {
-    if ( v1->mMode.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v23 = (char *)&v1->mMode + (v1->mMode.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v23 != BinString::sEmptyString )
-        operator delete[](v23);
-    }
-  }
-  if ( !(~LOBYTE(v1->mCategory.mOffset) & 1) )
-  {
-    if ( v1->mCategory.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v24 = (char *)&v1->mCategory + (v1->mCategory.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v24 != BinString::sEmptyString )
-        operator delete[](v24);
-    }
-  }
-  if ( v1->mAnimations.mCount >= 0 )
-  {
-    v25 = v1->mAnimations.mData.mOffset;
-    if ( v25 )
-    {
-      v26 = (char *)&v1->mAnimations.mData + v25;
-      if ( v26 )
-        operator delete[](v26);
-    }
-    v1->mAnimations.mData.mOffset = 0i64;
-    v1->mAnimations.mCount &= 0x80000000;
-  }
-  if ( !(~LOBYTE(v1->mName.mOffset) & 1) )
-  {
-    if ( v1->mName.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v27 = (char *)&v1->mName + (v1->mName.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v27 != BinString::sEmptyString )
-        operator delete[](v27);
-    }
-  }
-  v28 = (UFG::qNode<AnimationGroup,AnimationGroupUpdateList> *)&v1->mPrev;
-  v29 = v1->mPrev;
-  v30 = v1->mNext;
-  v29->mNext = v30;
-  v30->mPrev = v29;
-  v28->mPrev = v28;
-  v28->mNext = v28;
-  v31 = (UFG::qNode<AnimationGroup,AnimationGroupBudgetedList> *)&v1->mPrev;
-  v32 = v1->mPrev;
-  v33 = v1->mNext;
-  v32->mNext = v33;
-  v33->mPrev = v32;
-  v31->mPrev = v31;
-  v31->mNext = v31;
+  this->UFG::qNode<AnimationGroup,AnimationGroupUpdateList>::mPrev = &this->UFG::qNode<AnimationGroup,AnimationGroupUpdateList>;
+  this->UFG::qNode<AnimationGroup,AnimationGroupUpdateList>::mNext = &this->UFG::qNode<AnimationGroup,AnimationGroupUpdateList>;
+  v23 = this->UFG::qNode<AnimationGroup,AnimationGroupBudgetedList>::mPrev;
+  v24 = this->UFG::qNode<AnimationGroup,AnimationGroupBudgetedList>::mNext;
+  v23->mNext = v24;
+  v24->mPrev = v23;
+  this->UFG::qNode<AnimationGroup,AnimationGroupBudgetedList>::mPrev = &this->UFG::qNode<AnimationGroup,AnimationGroupBudgetedList>;
+  this->UFG::qNode<AnimationGroup,AnimationGroupBudgetedList>::mNext = &this->UFG::qNode<AnimationGroup,AnimationGroupBudgetedList>;
   v2->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<AnimationGroup>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull(v2);
-  v36 = &v2->m_SafePointerList;
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes(&v2->m_SafePointerList);
-  v34 = v2->m_SafePointerList.mNode.mPrev;
-  v35 = v2->m_SafePointerList.mNode.mNext;
-  v34->mNext = v35;
-  v35->mPrev = v34;
-  v36->mNode.mPrev = &v36->mNode;
-  v36->mNode.mNext = &v36->mNode;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  v25 = v2->m_SafePointerList.mNode.mPrev;
+  v26 = v2->m_SafePointerList.mNode.mNext;
+  v25->mNext = v26;
+  v26->mPrev = v25;
+  v2->m_SafePointerList.mNode.mPrev = &v2->m_SafePointerList.mNode;
+  v2->m_SafePointerList.mNode.mNext = &v2->m_SafePointerList.mNode;
+  this->Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 2533
 // RVA: 0x3A6840
 void __fastcall AnimationGroup::Destroy(AnimationGroup *this)
 {
-  AnimationGroup *v1; // r13
   char *v2; // rdi
   unsigned int v3; // ebx
-  signed __int64 v4; // rdx
+  __int64 v4; // rdx
   UFG::qBaseNodeVariableRB<unsigned __int64> *v5; // rdx
   AnimationDataBase *v6; // rbx
   UFG::allocator::free_link *v7; // r14
@@ -1817,17 +1714,16 @@ void __fastcall AnimationGroup::Destroy(AnimationGroup *this)
   UFG::allocator::free_link *v16; // rbp
   UFG::allocator::free_link *v17; // rdx
   __int64 v18; // r8
-  signed __int64 j; // rbx
-  UFG::StreamPriorityHandle *v20; // rdx
+  __int64 v19; // rbx
+  UFG::StreamPriorityHandle *mStreamHandle; // rdx
 
-  v1 = this;
   v2 = (char *)&this->mAnimations.mData + this->mAnimations.mData.mOffset;
   v3 = 0;
-  if ( this->mAnimations.mCount & 0x7FFFFFFF )
+  if ( (this->mAnimations.mCount & 0x7FFFFFFF) != 0 )
   {
     do
     {
-      v4 = (signed __int64)&v2[8 * v3 + *(_QWORD *)&v2[8 * v3]];
+      v4 = (__int64)&v2[8 * v3 + *(_QWORD *)&v2[8 * v3]];
       if ( v4 )
         v5 = (UFG::qBaseNodeVariableRB<unsigned __int64> *)(v4 + 40);
       else
@@ -1837,18 +1733,18 @@ void __fastcall AnimationGroup::Destroy(AnimationGroup *this)
         v5);
       ++v3;
     }
-    while ( v3 < (v1->mAnimations.mCount & 0x7FFFFFFFu) );
+    while ( v3 < (this->mAnimations.mCount & 0x7FFFFFFFu) );
   }
   v6 = AnimationDataBase::sAnimationDataBase;
-  AnimationGroup::UnloadInternal(v1);
+  AnimationGroup::UnloadInternal(this);
   UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
     (UFG::qBaseTreeVariableRB<unsigned __int64> *)&v6->mAnimGroups,
-    (UFG::qBaseNodeVariableRB<unsigned __int64> *)&v1->mNode);
+    (UFG::qBaseNodeVariableRB<unsigned __int64> *)&this->UFG::qNodeRB<AnimationGroup>);
   v7 = 0i64;
   v8 = 0;
   v9 = 0;
-  for ( i = (AnimationGroup *)v1->mAnimGroupHandles.mNode.mNext;
-        i != (AnimationGroup *)&v1->mAnimGroupHandles;
+  for ( i = (AnimationGroup *)this->mAnimGroupHandles.mNode.mNext;
+        i != (AnimationGroup *)&this->mAnimGroupHandles;
         i = (AnimationGroup *)i->mResourceOwner )
   {
     v11 = v8;
@@ -1894,15 +1790,20 @@ void __fastcall AnimationGroup::Destroy(AnimationGroup *this)
     ++v8;
     v7[v11].mNext = (UFG::allocator::free_link *)i;
   }
-  for ( j = 0i64; j < v8; ++j )
-    AnimationGroupHandle::Unbind((AnimationGroupHandle *)v7[j].mNext);
+  v19 = 0i64;
+  if ( v8 )
+  {
+    do
+      AnimationGroupHandle::Unbind((AnimationGroupHandle *)v7[v19++].mNext);
+    while ( v19 < v8 );
+  }
   if ( v7 )
     operator delete[](v7);
-  v20 = v1->mStreamHandle;
-  if ( v20 )
+  mStreamHandle = this->mStreamHandle;
+  if ( mStreamHandle )
   {
-    UFG::StreamPrioritySystem::FreeHandle(AnimationGroup::sStreamPrioritySystem, v20);
-    v1->mStreamHandle = 0i64;
+    UFG::StreamPrioritySystem::FreeHandle(AnimationGroup::sStreamPrioritySystem, mStreamHandle);
+    this->mStreamHandle = 0i64;
   }
 }
 
@@ -1910,132 +1811,126 @@ void __fastcall AnimationGroup::Destroy(AnimationGroup *this)
 // RVA: 0x3AB490
 void __fastcall AnimationGroup::LoadInternal(AnimationGroup *this)
 {
-  AnimationGroup *v1; // rbp
   const char **v2; // r15
-  signed __int64 v3; // r12
+  __int64 v3; // r12
   char *v4; // rax
-  signed __int64 v5; // r14
+  char *v5; // r14
   __int64 v6; // rbx
-  signed __int64 v7; // rdx
+  __int64 v7; // rdx
   unsigned int v8; // esi
   UFG::qResourceHandle *v9; // rdi
-  UFG::qResourceInventory *v10; // rax
+  UFG::qResourceInventory *Inventory; // rax
   UFG::qResourceWarehouse *v11; // rax
-  const char *v12; // rax
-  unsigned int v13; // eax
+  const char *Name; // rax
+  unsigned int MemorySize; // eax
   const char *v14; // rdx
-  signed __int64 v15; // [rsp+20h] [rbp-88h]
-  UFG::qString v16; // [rsp+28h] [rbp-80h]
-  UFG::qString v17; // [rsp+50h] [rbp-58h]
+  UFG::qString v15; // [rsp+28h] [rbp-80h] BYREF
+  UFG::qString v16; // [rsp+50h] [rbp-58h] BYREF
 
-  v15 = -2i64;
-  v1 = this;
   v2 = gLoadPaths;
   v3 = 2i64;
   do
   {
-    UFG::qString::qString(&v16, *v2);
-    v4 = UFG::qSymbol::as_cstr_dbg(&v1->mNameSymbol);
-    UFG::qString::operator+=(&v16, v4);
-    UFG::qString::operator+=(&v16, "\\");
-    v5 = (signed __int64)&v1->mAnimations.mData + v1->mAnimations.mData.mOffset;
+    UFG::qString::qString(&v15, *v2);
+    v4 = UFG::qSymbol::as_cstr_dbg(&this->mNameSymbol);
+    UFG::qString::operator+=(&v15, v4);
+    UFG::qString::operator+=(&v15, "\\");
+    v5 = (char *)&this->mAnimations.mData + this->mAnimations.mData.mOffset;
     v6 = 0i64;
-    if ( v1->mAnimations.mCount & 0x7FFFFFFF )
+    if ( (this->mAnimations.mCount & 0x7FFFFFFF) != 0 )
     {
       do
       {
-        v7 = v5 + 8 * v6 + *(_QWORD *)(v5 + 8 * v6);
+        v7 = (__int64)&v5[8 * v6 + *(_QWORD *)&v5[8 * v6]];
         v8 = *(_DWORD *)(v7 + 168);
         v9 = (UFG::qResourceHandle *)(v7 + 88);
         *(_QWORD *)(v7 + 120) = v7;
-        v10 = `UFG::qGetResourceInventory<UFG::AnimationResource>::`2::result;
+        Inventory = `UFG::qGetResourceInventory<UFG::AnimationResource>::`2::result;
         if ( !`UFG::qGetResourceInventory<UFG::AnimationResource>::`2::result )
         {
           v11 = UFG::qResourceWarehouse::Instance();
-          v10 = UFG::qResourceWarehouse::GetInventory(v11, 0x53F1685Eu);
-          `UFG::qGetResourceInventory<UFG::AnimationResource>::`2::result = v10;
+          Inventory = UFG::qResourceWarehouse::GetInventory(v11, 0x53F1685Eu);
+          `UFG::qGetResourceInventory<UFG::AnimationResource>::`2::result = Inventory;
         }
-        UFG::qResourceHandle::Init(v9, 0x53F1685Eu, v8, v10);
+        UFG::qResourceHandle::Init(v9, 0x53F1685Eu, v8, Inventory);
         v6 = (unsigned int)(v6 + 1);
       }
-      while ( (unsigned int)v6 < (v1->mAnimations.mCount & 0x7FFFFFFFu) );
+      while ( (unsigned int)v6 < (this->mAnimations.mCount & 0x7FFFFFFFu) );
     }
-    v12 = AnimationGroup::GetName(v1);
-    UFG::qString::qString(&v17, "%s%s.bin", *v2, v12, v15);
-    v13 = UFG::StreamPrioritySystem::GetMemorySize(v17.mData);
-    if ( v1->mMemorySize > v13 )
-      v13 = v1->mMemorySize;
-    v1->mMemorySize = v13;
-    UFG::qString::~qString(&v17);
+    Name = AnimationGroup::GetName(this);
+    UFG::qString::qString(&v16, "%s%s.bin", *v2, Name);
+    MemorySize = UFG::StreamPrioritySystem::GetMemorySize(v16.mData);
+    if ( this->mMemorySize > MemorySize )
+      MemorySize = this->mMemorySize;
+    this->mMemorySize = MemorySize;
     UFG::qString::~qString(&v16);
+    UFG::qString::~qString(&v15);
     ++v2;
     --v3;
   }
   while ( v3 );
-  if ( v1->mMemorySize <= 0 )
+  if ( !this->mMemorySize )
   {
-    if ( v1->mName.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-      v14 = (char *)&v1->mName + (v1->mName.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( (this->mName.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
+      v14 = (char *)&this->mName + (this->mName.mOffset & 0xFFFFFFFFFFFFFFFEui64);
     else
       v14 = BinString::sEmptyString;
     UFG::qPrintf(
       "WARNING: Zero Byte Animation Binary File Found: %s -- this will cause all sorts of streaming problems!\n",
       v14);
   }
-  AnimationGroup::CreateStreamHandle(v1);
+  AnimationGroup::CreateStreamHandle(this);
 }
 
 // File Line: 2629
 // RVA: 0x3B04E0
 void __fastcall AnimationGroup::UnloadInternal(AnimationGroup *this)
 {
-  AnimationGroup *v1; // rsi
-  signed __int64 v2; // rbp
+  __int64 v2; // rbp
   __int64 v3; // rbx
-  signed __int64 v4; // r14
-  UFG::qResourceInventory *v5; // rax
-  signed __int64 v6; // rdi
+  char *v4; // r14
+  UFG::qResourceInventory *Inventory; // rax
+  __int64 v6; // rdi
   UFG::qResourceWarehouse *v7; // rax
-  UFG::StreamPriorityHandle *v8; // rbx
-  const char *v9; // rbx
+  UFG::StreamPriorityHandle *mStreamHandle; // rbx
+  const char *mText; // rbx
   UFG::HotSwapFileManager *v10; // rax
-  fastdelegate::FastDelegate1<char const *,void> v11; // [rsp+20h] [rbp-18h]
+  fastdelegate::FastDelegate1<char const *,void> v11; // [rsp+20h] [rbp-18h] BYREF
 
-  v1 = this;
   v2 = 2i64;
   do
   {
     v3 = 0i64;
-    v4 = (signed __int64)&v1->mAnimations.mData + v1->mAnimations.mData.mOffset;
-    if ( v1->mAnimations.mCount & 0x7FFFFFFF )
+    v4 = (char *)&this->mAnimations.mData + this->mAnimations.mData.mOffset;
+    if ( (this->mAnimations.mCount & 0x7FFFFFFF) != 0 )
     {
       do
       {
-        v5 = `UFG::qGetResourceInventory<UFG::AnimationResource>::`2::result;
-        v6 = v4 + 8 * v3 + *(_QWORD *)(v4 + 8 * v3);
+        Inventory = `UFG::qGetResourceInventory<UFG::AnimationResource>::`2::result;
+        v6 = (__int64)&v4[8 * v3 + *(_QWORD *)&v4[8 * v3]];
         if ( !`UFG::qGetResourceInventory<UFG::AnimationResource>::`2::result )
         {
           v7 = UFG::qResourceWarehouse::Instance();
-          v5 = UFG::qResourceWarehouse::GetInventory(v7, 0x53F1685Eu);
-          `UFG::qGetResourceInventory<UFG::AnimationResource>::`2::result = v5;
+          Inventory = UFG::qResourceWarehouse::GetInventory(v7, 0x53F1685Eu);
+          `UFG::qGetResourceInventory<UFG::AnimationResource>::`2::result = Inventory;
         }
-        UFG::qResourceHandle::Close((UFG::qResourceHandle *)(v6 + 88), v5);
+        UFG::qResourceHandle::Close((UFG::qResourceHandle *)(v6 + 88), Inventory);
         v3 = (unsigned int)(v3 + 1);
       }
-      while ( (unsigned int)v3 < (v1->mAnimations.mCount & 0x7FFFFFFFu) );
+      while ( (unsigned int)v3 < (this->mAnimations.mCount & 0x7FFFFFFFu) );
     }
     --v2;
   }
   while ( v2 );
-  v8 = v1->mStreamHandle;
-  if ( v8 )
+  mStreamHandle = this->mStreamHandle;
+  if ( mStreamHandle )
   {
     v11 = UFG::DefaultHotSwapCallBack;
-    v9 = v8->mFilename.mText;
+    mText = mStreamHandle->mFilename.mText;
     v10 = UFG::HotSwapFileManager::Get();
-    UFG::HotSwapFileManager::UnRegisterFile(v10, v9, &v11);
-    UFG::StreamPrioritySystem::FreeHandle(AnimationGroup::sStreamPrioritySystem, v1->mStreamHandle);
-    v1->mStreamHandle = 0i64;
+    UFG::HotSwapFileManager::UnRegisterFile(v10, mText, &v11);
+    UFG::StreamPrioritySystem::FreeHandle(AnimationGroup::sStreamPrioritySystem, this->mStreamHandle);
+    this->mStreamHandle = 0i64;
   }
 }
 
@@ -2052,35 +1947,26 @@ void __fastcall AnimationGroup::AddRefCount(AnimationGroup *this)
 _BOOL8 __fastcall AnimationGroup::RemoveRefCount(AnimationGroup *this)
 {
   bool v1; // zf
-  AnimationGroup *v2; // rbx
 
   v1 = this->mRefCount-- == 1;
-  v2 = this;
   if ( v1 && !this->mAnimRefCount )
     AnimationGroup::DestroyStreamHandle(this);
-  return v2->mRefCount == 0;
+  return this->mRefCount == 0;
 }
 
 // File Line: 2696
 // RVA: 0x3AE500
 void __fastcall AnimationGroup::Serialize(AnimationGroup *this, IActionTreeSerializer *serializer)
 {
-  IActionTreeSerializer *v2; // r15
-  AnimationGroup *v3; // rsi
   unsigned int v4; // ebx
   char *v5; // r14
   char *v6; // rcx
   char *v7; // rdi
-  __int64 v8; // rax
-  __int64 v9; // [rsp+28h] [rbp-40h]
-  __int64 v10; // [rsp+30h] [rbp-38h]
-  __int64 v11; // [rsp+40h] [rbp-28h]
+  const char *v8; // rax
 
-  v2 = serializer;
-  v3 = this;
   v4 = 0;
   v5 = (char *)&this->mAnimations.mData + this->mAnimations.mData.mOffset;
-  if ( this->mAnimations.mCount & 0x7FFFFFFF )
+  if ( (this->mAnimations.mCount & 0x7FFFFFFF) != 0 )
   {
     do
     {
@@ -2088,25 +1974,22 @@ void __fastcall AnimationGroup::Serialize(AnimationGroup *this, IActionTreeSeria
       v7 = &v6[*(_QWORD *)v6];
       if ( v7 )
       {
-        v8 = (*(__int64 (__fastcall **)(char *))(*(_QWORD *)v7 + 32i64))(&v6[*(_QWORD *)v6]);
-        LODWORD(v11) = -1;
-        LODWORD(v10) = 0;
-        LODWORD(v9) = 1;
-        v2->vfptr->_PushObjectToSerialize(
-          v2,
+        v8 = (const char *)(*(__int64 (__fastcall **)(char *))(*(_QWORD *)v7 + 32i64))(&v6[*(_QWORD *)v6]);
+        serializer->vfptr->_PushObjectToSerialize(
+          serializer,
           v7,
           1u,
           (void (__fastcall *)(void *, unsigned int, IActionTreeSerializer *, const char *, unsigned int, void (__fastcall *)(IActionTreeSerializer *, void *)))_,
-          (const char *)v8,
-          (QUEUE_PRIORITY)v9,
-          v10,
+          v8,
+          PRIORITY_MEDIUM,
+          0,
           0i64,
-          v11,
+          -1u,
           0i64);
       }
       ++v4;
     }
-    while ( v4 < (v3->mAnimations.mCount & 0x7FFFFFFFu) );
+    while ( v4 < (this->mAnimations.mCount & 0x7FFFFFFFu) );
   }
 }
 
@@ -2114,53 +1997,35 @@ void __fastcall AnimationGroup::Serialize(AnimationGroup *this, IActionTreeSeria
 // RVA: 0x3A6540
 void __fastcall AnimationGroup::CreateStreamHandle(AnimationGroup *this)
 {
-  AnimationGroup *v1; // rbx
   const char *v2; // r8
-  void (__fastcall *v3)(fastdelegate::FastDelegate1<char const *,void> *, const char *); // rax
-  hkResourceHandle *v4; // rax
-  const char *v5; // r8
-  void (__fastcall *v6)(fastdelegate::FastDelegate1<char const *,void> *, const char *); // rax
-  hkResourceHandle *v7; // rax
-  fastdelegate::FastDelegate1<char const *,void> v8; // [rsp+38h] [rbp-30h]
-  fastdelegate::FastDelegate1<char const *,void> v9; // [rsp+48h] [rbp-20h]
-  UFG::qSharedString filename; // [rsp+70h] [rbp+8h]
-  UFG::qSharedString v11; // [rsp+78h] [rbp+10h]
+  hkResourceHandle *v3; // rax
+  const char *v4; // r8
+  hkResourceHandle *v5; // rax
+  UFG::qSharedString filename; // [rsp+70h] [rbp+8h] BYREF
+  UFG::qSharedString v7; // [rsp+78h] [rbp+10h] BYREF
 
-  v1 = this;
-  if ( this->mName.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
+  if ( (this->mName.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
     v2 = (char *)&this->mName + (this->mName.mOffset & 0xFFFFFFFFFFFFFFFEui64);
   else
     v2 = BinString::sEmptyString;
   UFG::qSharedString::qSharedString(&filename, "Data\\Animation\\%s.bin", v2);
   if ( (unsigned int)UFG::StreamPrioritySystem::GetMemorySize(filename.mText) )
   {
-    v1->mStreamHandle = UFG::StreamPrioritySystem::CreateHandle(AnimationGroup::sStreamPrioritySystem, &filename);
-    v8 = UFG::DefaultHotSwapCallBack;
-    v3 = fastdelegate::FastDelegate1<char const *,void>::InvokeStaticFunction;
-    if ( !ReloadHotSwapBinFile )
-      v3 = 0i64;
-    v9.m_Closure.m_pFunction = (void (__fastcall *)(fastdelegate::detail::GenericClass *))v3;
-    v9.m_Closure.m_pthis = (fastdelegate::detail::GenericClass *)ReloadHotSwapBinFile;
-    v4 = (hkResourceHandle *)UFG::HotSwapFileManager::Get();
-    TargetVisibleInAIDataCondition::CreateClone(v4);
+    this->mStreamHandle = UFG::StreamPrioritySystem::CreateHandle(AnimationGroup::sStreamPrioritySystem, &filename);
+    v3 = (hkResourceHandle *)UFG::HotSwapFileManager::Get();
+    TargetVisibleInAIDataCondition::CreateClone(v3);
   }
   else
   {
-    if ( v1->mName.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-      v5 = (char *)&v1->mName + (v1->mName.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( (this->mName.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
+      v4 = (char *)&this->mName + (this->mName.mOffset & 0xFFFFFFFFFFFFFFFEui64);
     else
-      v5 = BinString::sEmptyString;
-    UFG::qSharedString::qSharedString(&v11, "Data\\AnimationNIS\\%s.bin", v5);
-    v1->mStreamHandle = UFG::StreamPrioritySystem::CreateHandle(AnimationGroup::sStreamPrioritySystem, &v11);
-    v9 = UFG::DefaultHotSwapCallBack;
-    v6 = fastdelegate::FastDelegate1<char const *,void>::InvokeStaticFunction;
-    if ( !ReloadHotSwapBinFile )
-      v6 = 0i64;
-    v8.m_Closure.m_pFunction = (void (__fastcall *)(fastdelegate::detail::GenericClass *))v6;
-    v8.m_Closure.m_pthis = (fastdelegate::detail::GenericClass *)ReloadHotSwapBinFile;
-    v7 = (hkResourceHandle *)UFG::HotSwapFileManager::Get();
-    TargetVisibleInAIDataCondition::CreateClone(v7);
-    UFG::qSharedString::~qSharedString(&v11);
+      v4 = BinString::sEmptyString;
+    UFG::qSharedString::qSharedString(&v7, "Data\\AnimationNIS\\%s.bin", v4);
+    this->mStreamHandle = UFG::StreamPrioritySystem::CreateHandle(AnimationGroup::sStreamPrioritySystem, &v7);
+    v5 = (hkResourceHandle *)UFG::HotSwapFileManager::Get();
+    TargetVisibleInAIDataCondition::CreateClone(v5);
+    UFG::qSharedString::~qSharedString(&v7);
   }
   UFG::qSharedString::~qSharedString(&filename);
 }
@@ -2169,22 +2034,20 @@ void __fastcall AnimationGroup::CreateStreamHandle(AnimationGroup *this)
 // RVA: 0x3A6C80
 void __fastcall AnimationGroup::DestroyStreamHandle(AnimationGroup *this)
 {
-  UFG::StreamPriorityHandle *v1; // rbx
-  AnimationGroup *v2; // rdi
-  const char *v3; // rbx
+  UFG::StreamPriorityHandle *mStreamHandle; // rbx
+  const char *mText; // rbx
   UFG::HotSwapFileManager *v4; // rax
-  fastdelegate::FastDelegate1<char const *,void> v5; // [rsp+20h] [rbp-18h]
+  fastdelegate::FastDelegate1<char const *,void> v5; // [rsp+20h] [rbp-18h] BYREF
 
-  v1 = this->mStreamHandle;
-  v2 = this;
-  if ( v1 )
+  mStreamHandle = this->mStreamHandle;
+  if ( mStreamHandle )
   {
     v5 = UFG::DefaultHotSwapCallBack;
-    v3 = v1->mFilename.mText;
+    mText = mStreamHandle->mFilename.mText;
     v4 = UFG::HotSwapFileManager::Get();
-    UFG::HotSwapFileManager::UnRegisterFile(v4, v3, &v5);
-    UFG::StreamPrioritySystem::FreeHandle(AnimationGroup::sStreamPrioritySystem, v2->mStreamHandle);
-    v2->mStreamHandle = 0i64;
+    UFG::HotSwapFileManager::UnRegisterFile(v4, mText, &v5);
+    UFG::StreamPrioritySystem::FreeHandle(AnimationGroup::sStreamPrioritySystem, this->mStreamHandle);
+    this->mStreamHandle = 0i64;
   }
 }
 
@@ -2192,89 +2055,88 @@ void __fastcall AnimationGroup::DestroyStreamHandle(AnimationGroup *this)
 // RVA: 0x3AB330
 bool __fastcall AnimationGroup::IsStreamedIn(AnimationGroup *this)
 {
-  UFG::StreamPriorityHandle *v1; // rcx
+  UFG::StreamPriorityHandle *mStreamHandle; // rcx
 
-  v1 = this->mStreamHandle;
-  return v1 && (unsigned int)UFG::DataStreamer::GetStreamState(&v1->mHandle) == 6;
+  mStreamHandle = this->mStreamHandle;
+  return mStreamHandle && (unsigned int)UFG::DataStreamer::GetStreamState(&mStreamHandle->mHandle) == 6;
 }
 
 // File Line: 2864
 // RVA: 0x3B49F0
 void __fastcall AnimationGroup::UpdatePriorityFromHandles(AnimationGroup *this)
 {
-  __int64 v1; // r8
-  signed int v2; // er10
+  __int64 mValue; // r8
+  int v2; // r10d
   __int64 v3; // rbx
-  UFG::qList<AnimationGroupHandle,AnimationGroupList,0,0> *v4; // r11
-  AnimationGroup *v5; // rdi
-  UFG::qNode<AnimationGroupHandle,AnimationGroupList> *v6; // rcx
-  char *v7; // r9
-  __int64 v8; // rdx
-  UFG::StreamPriorityHandle *v9; // rdx
+  UFG::qList<AnimationGroupHandle,AnimationGroupList,0,0> *p_mAnimGroupHandles; // r11
+  UFG::qNode<AnimationGroupHandle,AnimationGroupList> *mNext; // rcx
+  UFG::qList<AnimationGroupHandle,AnimationGroupList,0,0> *v7; // r9
+  __int64 mPrev_low; // rdx
+  UFG::qPropertySet *mStreamHandle; // rdx
   UFG::qNode<AnimationGroup,AnimationGroupBudgetedList> *v10; // rdx
-  UFG::qList<AnimationGroup,AnimationGroupBudgetedList,0,0> *v11; // rcx
-  UFG::qNode<AnimationGroup,AnimationGroupBudgetedList> *v12; // rax
+  UFG::qList<AnimationGroup,AnimationGroupBudgetedList,0,0> *p_mBudgetedAnimationGroups; // rcx
+  UFG::qNode<AnimationGroup,AnimationGroupBudgetedList> *mPrev; // rax
   UFG::qNode<AnimationGroup,AnimationGroupBudgetedList> *v13; // rcx
   UFG::qNode<AnimationGroup,AnimationGroupBudgetedList> *v14; // rax
 
-  v1 = (unsigned int)this->mDefaultAnimationPriority.mValue;
+  mValue = (unsigned int)this->mDefaultAnimationPriority.mValue;
   v2 = 0;
   v3 = 0i64;
-  v4 = &this->mAnimGroupHandles;
-  v5 = this;
-  v6 = this->mAnimGroupHandles.mNode.mNext;
-  if ( AnimationDataBase::sAnimationDataBase->mPriorityBudgets.p[v1].mMaxSize )
-    v3 = (unsigned int)v1;
-  if ( v6 != (UFG::qNode<AnimationGroupHandle,AnimationGroupList> *)v4 )
+  p_mAnimGroupHandles = &this->mAnimGroupHandles;
+  mNext = this->mAnimGroupHandles.mNode.mNext;
+  if ( AnimationDataBase::sAnimationDataBase->mPriorityBudgets.p[mValue].mMaxSize )
+    v3 = (unsigned int)mValue;
+  if ( mNext != (UFG::qNode<AnimationGroupHandle,AnimationGroupList> *)p_mAnimGroupHandles )
   {
     do
     {
-      v7 = (char *)v6->mNext;
-      if ( v6[3].mNext )
+      v7 = (UFG::qList<AnimationGroupHandle,AnimationGroupList,0,0> *)mNext->mNext;
+      if ( mNext[3].mNext )
       {
-        v8 = LOWORD(v6[4].mPrev);
-        if ( (signed int)v8 > (signed int)v1 || (_DWORD)v8 == (_DWORD)v1 && WORD1(v6[4].mPrev) > v2 )
+        mPrev_low = LOWORD(mNext[4].mPrev);
+        if ( (int)mPrev_low > (int)mValue || (_DWORD)mPrev_low == (_DWORD)mValue && WORD1(mNext[4].mPrev) > v2 )
         {
-          v2 = WORD1(v6[4].mPrev);
-          LODWORD(v1) = v8;
+          v2 = WORD1(mNext[4].mPrev);
+          LODWORD(mValue) = LOWORD(mNext[4].mPrev);
         }
-        if ( AnimationDataBase::sAnimationDataBase->mPriorityBudgets.p[v8].mMaxSize && (signed int)v8 > (signed int)v3 )
-          v3 = (unsigned int)v8;
+        if ( AnimationDataBase::sAnimationDataBase->mPriorityBudgets.p[mPrev_low].mMaxSize && (int)mPrev_low > (int)v3 )
+          v3 = LOWORD(mNext[4].mPrev);
       }
-      v6 = v6->mNext;
+      mNext = mNext->mNext;
     }
-    while ( v7 != (char *)v4 );
+    while ( v7 != p_mAnimGroupHandles );
   }
-  v9 = v5->mStreamHandle;
-  v5->mCurrentAnimationPriority.mValue = v1;
-  v5->mCurrentAnimationSubPriority = v2;
-  if ( v9 )
+  mStreamHandle = (UFG::qPropertySet *)this->mStreamHandle;
+  this->mCurrentAnimationPriority.mValue = mValue;
+  this->mCurrentAnimationSubPriority = v2;
+  if ( mStreamHandle )
     UFG::StreamPrioritySystem::ChangePriority(
       AnimationGroup::sStreamPrioritySystem,
-      v9,
-      (unsigned __int16)v2 | ((unsigned __int16)(char)v1 << 16));
-  v5->mHighestBudgetedPriority.mValue = v3;
-  v10 = (UFG::qNode<AnimationGroup,AnimationGroupBudgetedList> *)&v5->mPrev;
+      mStreamHandle,
+      (unsigned __int16)v2 | ((unsigned __int16)(char)mValue << 16));
+  this->mHighestBudgetedPriority.mValue = v3;
+  v10 = &this->UFG::qNode<AnimationGroup,AnimationGroupBudgetedList>;
   if ( AnimationDataBase::sAnimationDataBase->mPriorityBudgets.p[v3].mMaxSize )
   {
-    if ( v10->mPrev == v10 && (UFG::qNode<AnimationGroup,AnimationGroupBudgetedList> **)v5->mNext == &v5->mPrev )
+    if ( v10->mPrev == v10
+      && this->UFG::qNode<AnimationGroup,AnimationGroupBudgetedList>::mNext == &this->UFG::qNode<AnimationGroup,AnimationGroupBudgetedList> )
     {
-      v11 = &AnimationDataBase::sAnimationDataBase->mBudgetedAnimationGroups;
-      v12 = AnimationDataBase::sAnimationDataBase->mBudgetedAnimationGroups.mNode.mPrev;
-      v12->mNext = v10;
-      v10->mPrev = v12;
-      v5->mNext = &v11->mNode;
-      v11->mNode.mPrev = v10;
+      p_mBudgetedAnimationGroups = &AnimationDataBase::sAnimationDataBase->mBudgetedAnimationGroups;
+      mPrev = AnimationDataBase::sAnimationDataBase->mBudgetedAnimationGroups.mNode.mPrev;
+      mPrev->mNext = v10;
+      v10->mPrev = mPrev;
+      this->UFG::qNode<AnimationGroup,AnimationGroupBudgetedList>::mNext = &p_mBudgetedAnimationGroups->mNode;
+      p_mBudgetedAnimationGroups->mNode.mPrev = v10;
     }
   }
   else
   {
     v13 = v10->mPrev;
-    v14 = v5->mNext;
+    v14 = this->UFG::qNode<AnimationGroup,AnimationGroupBudgetedList>::mNext;
     v13->mNext = v14;
     v14->mPrev = v13;
     v10->mPrev = v10;
-    v5->mNext = (UFG::qNode<AnimationGroup,AnimationGroupBudgetedList> *)&v5->mPrev;
+    this->UFG::qNode<AnimationGroup,AnimationGroupBudgetedList>::mNext = &this->UFG::qNode<AnimationGroup,AnimationGroupBudgetedList>;
   }
 }
 
@@ -2305,30 +2167,20 @@ __int64 dynamic_initializer_for__gBlendTreeNodeFactory__()
     &gBlendTreeNodeFactory,
     sBlendTreeNodeFactoryList,
     sBlendTreeNodeFactoryListNum);
-  return atexit(dynamic_atexit_destructor_for__gBlendTreeNodeFactory__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gBlendTreeNodeFactory__);
 }
 
 // File Line: 3240
 // RVA: 0x3AB3F0
 PoseNode *__fastcall BlendTreeDataBase::LoadBlendTrees(BlendTreeDataBase *this, const char *bankBlendTreeFileName)
 {
-  void (__fastcall *v2)(fastdelegate::FastDelegate1<char const *,void> *, const char *); // rax
-  hkResourceHandle *v3; // rax
-  fastdelegate::FastDelegate1<char const *,void> v5; // [rsp+38h] [rbp-50h]
-  void (__fastcall *v6)(const char *); // [rsp+48h] [rbp-40h]
-  void (__fastcall *v7)(fastdelegate::FastDelegate1<char const *,void> *, const char *); // [rsp+50h] [rbp-38h]
-  UFG::qString v8; // [rsp+58h] [rbp-30h]
+  hkResourceHandle *v2; // rax
+  UFG::qString v4; // [rsp+58h] [rbp-30h] BYREF
 
-  v5 = UFG::DefaultHotSwapCallBack;
-  v2 = fastdelegate::FastDelegate1<char const *,void>::InvokeStaticFunction;
-  if ( !ReloadHotSwapBtrFile )
-    v2 = 0i64;
-  v7 = v2;
-  v6 = ReloadHotSwapBtrFile;
-  v3 = (hkResourceHandle *)UFG::HotSwapFileManager::Get();
-  TargetVisibleInAIDataCondition::CreateClone(v3);
-  UFG::qString::qString(&v8);
-  UFG::qString::~qString(&v8);
+  v2 = (hkResourceHandle *)UFG::HotSwapFileManager::Get();
+  TargetVisibleInAIDataCondition::CreateClone(v2);
+  UFG::qString::qString(&v4);
+  UFG::qString::~qString(&v4);
   return 0i64;
 }
 
@@ -2336,70 +2188,62 @@ PoseNode *__fastcall BlendTreeDataBase::LoadBlendTrees(BlendTreeDataBase *this, 
 // RVA: 0x3AD6B0
 PoseNode *__fastcall BlendTreeDataBase::ReLoadBlendTrees(BlendTreeDataBase *this, const char *bankNameFileName)
 {
-  const char *v2; // r14
-  BlendTreeDataBase *v3; // rbp
-  signed __int64 v4; // rbx
-  char *v5; // rdi
+  UFG::qSymbolUC *p_mNext; // rbx
+  char *mData; // rdi
   char *v6; // rax
-  _QWORD *v7; // rdx
-  __int64 v8; // rcx
-  _QWORD *v9; // rax
-  PoseNode *v10; // rbx
-  UFG::qString result; // [rsp+28h] [rbp-60h]
-  UFG::qString v13; // [rsp+50h] [rbp-38h]
+  __int64 v7; // rcx
+  _QWORD *v8; // rax
+  PoseNode *BlendTrees; // rbx
+  UFG::qString result; // [rsp+28h] [rbp-60h] BYREF
+  UFG::qString v12; // [rsp+50h] [rbp-38h] BYREF
 
-  v2 = bankNameFileName;
-  v3 = this;
-  UFG::qString::qString(&v13, bankNameFileName);
-  UFG::qString::GetFilenameWithoutExtension(&v13, &result);
-  v4 = (signed __int64)&v3->mPoseNodes.mNode.mNext[-3].mNext;
-  if ( (UFG::qNode<PoseNode,PoseNode> **)v4 != &v3[-1].mPoseNodes.mNode.mNext )
+  UFG::qString::qString(&v12, bankNameFileName);
+  UFG::qString::GetFilenameWithoutExtension(&v12, &result);
+  p_mNext = (UFG::qSymbolUC *)&this->mPoseNodes.mNode.mNext[-3].mNext;
+  if ( p_mNext != (UFG::qSymbolUC *)&this[-1].mPoseNodes.mNode.mNext )
   {
     while ( 1 )
     {
-      v5 = result.mData;
-      v6 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)(v4 + 68));
-      if ( !(unsigned int)UFG::qStringCompareInsensitive(v5, v6, -1) )
+      mData = result.mData;
+      v6 = UFG::qSymbol::as_cstr_dbg(p_mNext + 17);
+      if ( !(unsigned int)UFG::qStringCompareInsensitive(mData, v6, -1) )
         break;
-      v4 = *(_QWORD *)(v4 + 48) - 40i64;
-      if ( (UFG::qNode<PoseNode,PoseNode> **)v4 == &v3[-1].mPoseNodes.mNode.mNext )
+      p_mNext = (UFG::qSymbolUC *)(*(_QWORD *)&p_mNext[12].mUID - 40i64);
+      if ( p_mNext == (UFG::qSymbolUC *)&this[-1].mPoseNodes.mNode.mNext )
         goto LABEL_7;
     }
-    v7 = (_QWORD *)(v4 + 40);
-    v8 = *(_QWORD *)(v4 + 40);
-    v9 = *(_QWORD **)(v4 + 48);
-    *(_QWORD *)(v8 + 8) = v9;
-    *v9 = v8;
-    *v7 = v7;
-    v7[1] = v7;
-    if ( v4 )
-      (*(void (__fastcall **)(signed __int64, signed __int64))(*(_QWORD *)v4 + 8i64))(v4, 1i64);
+    v7 = *(_QWORD *)&p_mNext[10].mUID;
+    v8 = *(_QWORD **)&p_mNext[12].mUID;
+    *(_QWORD *)(v7 + 8) = v8;
+    *v8 = v7;
+    *(_QWORD *)&p_mNext[10].mUID = p_mNext + 10;
+    *(_QWORD *)&p_mNext[12].mUID = p_mNext + 10;
+    if ( p_mNext )
+      (*(void (__fastcall **)(UFG::qSymbolUC *, __int64))(*(_QWORD *)&p_mNext->mUID + 8i64))(p_mNext, 1i64);
   }
 LABEL_7:
-  v10 = BlendTreeDataBase::LoadBlendTrees(v3, v2);
+  BlendTrees = BlendTreeDataBase::LoadBlendTrees(this, bankNameFileName);
   UFG::qString::~qString(&result);
-  UFG::qString::~qString(&v13);
-  return v10;
+  UFG::qString::~qString(&v12);
+  return BlendTrees;
 }
 
 // File Line: 3309
 // RVA: 0x3AA9C0
 void __fastcall PoseCache::Init(unsigned __int64 cache_size)
 {
-  __int64 v1; // rbx
   UFG::allocator::free_link *v2; // rax
   PoseCache *v3; // rax
 
-  v1 = cache_size;
   v2 = UFG::qMalloc(0x24C8ui64, "PoseCache", 0i64);
   if ( v2 )
     PoseCache::PoseCache((PoseCache *)v2);
   else
     v3 = 0i64;
   PoseCache::sPoseCache = v3;
-  if ( v1 )
+  if ( cache_size )
   {
-    UFG::qMemoryPool::Init(&v3->mCachedDataPool, "PoseCachePool", v1, 0, 0, 1u, 0i64, 1, 1);
+    UFG::qMemoryPool::Init(&v3->mCachedDataPool, "PoseCachePool", cache_size, 0, 0, 1u, 0i64, 1, 1);
     PoseCache::sPoseCache->mEnablePoseCache = 1;
   }
   else
@@ -2412,33 +2256,35 @@ void __fastcall PoseCache::Init(unsigned __int64 cache_size)
 
 // File Line: 3348
 // RVA: 0x3A7840
-PoseCacheNode *__fastcall PoseCache::Find(PoseCache *this, unsigned __int64 uid)
+UFG::qTreeRB64<PoseCacheNode,PoseCacheNode,1> *__fastcall PoseCache::Find(PoseCache *this, unsigned __int64 uid)
 {
-  PoseCacheNode *v2; // rcx
-  PoseCacheNode *result; // rax
+  UFG::qTreeRB64<PoseCacheNode,PoseCacheNode,1> *p_mCachedDataTree; // rcx
+  UFG::qTreeRB64<PoseCacheNode,PoseCacheNode,1> *result; // rax
   bool i; // zf
   PoseCacheNode *j; // rcx
 
   if ( uid )
   {
-    v2 = (PoseCacheNode *)&this->mCachedDataTree;
-    result = v2;
-    for ( i = v2 == (PoseCacheNode *)&v2->mPrev; !i; i = result == (PoseCacheNode *)&v2->mPrev )
+    p_mCachedDataTree = &this->mCachedDataTree;
+    result = p_mCachedDataTree;
+    for ( i = p_mCachedDataTree == (UFG::qTreeRB64<PoseCacheNode,PoseCacheNode,1> *)&p_mCachedDataTree->mTree.mNULL;
+          !i;
+          i = result == (UFG::qTreeRB64<PoseCacheNode,PoseCacheNode,1> *)&p_mCachedDataTree->mTree.mNULL )
     {
-      if ( result != v2 && result->mNode.mUID == uid )
+      if ( result != p_mCachedDataTree && result->mTree.mRoot.mUID == uid )
       {
-        for ( j = (PoseCacheNode *)result->mNode.mChild[0]; j; j = (PoseCacheNode *)j->mNode.mChild[0] )
+        for ( j = (PoseCacheNode *)result->mTree.mRoot.mChild[0]; j; j = (PoseCacheNode *)j->mNode.mChild[0] )
         {
           if ( j->mNode.mUID != uid )
             break;
-          result = j;
+          result = (UFG::qTreeRB64<PoseCacheNode,PoseCacheNode,1> *)j;
         }
         return result;
       }
-      if ( uid > result->mNode.mUID )
-        result = (PoseCacheNode *)result->mNode.mChild[1];
+      if ( uid > result->mTree.mRoot.mUID )
+        result = (UFG::qTreeRB64<PoseCacheNode,PoseCacheNode,1> *)result->mTree.mRoot.mChild[1];
       else
-        result = (PoseCacheNode *)result->mNode.mChild[0];
+        result = (UFG::qTreeRB64<PoseCacheNode,PoseCacheNode,1> *)result->mTree.mRoot.mChild[0];
     }
   }
   return 0i64;
@@ -2446,46 +2292,43 @@ PoseCacheNode *__fastcall PoseCache::Find(PoseCache *this, unsigned __int64 uid)
 
 // File Line: 3376
 // RVA: 0x3AFCA0
-UFG::allocator::free_link *__fastcall PoseCache::Store(PoseCache *this, unsigned __int64 uid, unsigned __int64 size)
+UFG::allocator::free_link *__fastcall PoseCache::Store(
+        PoseCache *this,
+        UFG::allocator::free_link *uid,
+        UFG::allocator::free_link *size)
 {
-  unsigned __int64 v3; // r15
-  unsigned __int64 v4; // rdi
-  PoseCache *v5; // rsi
-  UFG::qTreeRB64<PoseCacheNode,PoseCacheNode,1> *v6; // rcx
-  char *v7; // rax
+  UFG::qTreeRB64<PoseCacheNode,PoseCacheNode,1> *p_mCachedDataTree; // rcx
+  UFG::qTreeRB64<PoseCacheNode,PoseCacheNode,1> *v7; // rax
   bool i; // zf
-  char *j; // rcx
-  UFG::qList<PoseCacheNode,PoseCacheNode,1,0> *v11; // r14
-  UFG::qNode<PoseCacheNode,PoseCacheNode> *v12; // rdx
-  UFG::qNode<PoseCacheNode,PoseCacheNode> *v13; // rcx
+  UFG::qTreeRB64<PoseCacheNode,PoseCacheNode,1> *j; // rcx
+  UFG::qList<PoseCacheNode,PoseCacheNode,1,0> *p_mCachedDataList; // r14
+  UFG::qNode<PoseCacheNode,PoseCacheNode> *mNext; // rdx
+  UFG::qNode<PoseCacheNode,PoseCacheNode> *mPrev; // rcx
   UFG::qNode<PoseCacheNode,PoseCacheNode> *v14; // rax
-  signed __int64 v15; // rbx
-  _QWORD *v16; // r8
-  __int64 v17; // rdx
-  _QWORD *v18; // rax
-  UFG::allocator::free_link *v19; // rbp
-  UFG::allocator::free_link *v20; // rax
-  UFG::allocator::free_link *v21; // rbx
-  UFG::allocator::free_link *v22; // rax
-  UFG::allocator::free_link *v23; // rdx
-  UFG::qNode<PoseCacheNode,PoseCacheNode> *v24; // rcx
+  UFG::qNode<PoseCacheNode,PoseCacheNode> *v15; // rbx
+  UFG::qNode<PoseCacheNode,PoseCacheNode> *v16; // rdx
+  UFG::qNode<PoseCacheNode,PoseCacheNode> *v17; // rax
+  UFG::allocator::free_link *v18; // rbp
+  UFG::allocator::free_link *v19; // rax
+  UFG::allocator::free_link *v20; // rbx
+  UFG::allocator::free_link *v21; // rax
+  UFG::qNode<PoseCacheNode,PoseCacheNode> *v22; // rcx
 
-  v3 = size;
-  v4 = uid;
-  v5 = this;
   if ( uid )
   {
-    v6 = &this->mCachedDataTree;
-    v7 = (char *)v6;
-    for ( i = v6 == (UFG::qTreeRB64<PoseCacheNode,PoseCacheNode,1> *)&v6->mTree.mNULL;
+    p_mCachedDataTree = &this->mCachedDataTree;
+    v7 = p_mCachedDataTree;
+    for ( i = p_mCachedDataTree == (UFG::qTreeRB64<PoseCacheNode,PoseCacheNode,1> *)&p_mCachedDataTree->mTree.mNULL;
           !i;
-          i = v7 == (char *)&v6->mTree.mNULL )
+          i = v7 == (UFG::qTreeRB64<PoseCacheNode,PoseCacheNode,1> *)&p_mCachedDataTree->mTree.mNULL )
     {
-      if ( v7 != (char *)v6 && *((_QWORD *)v7 + 3) == uid )
+      if ( v7 != p_mCachedDataTree && (UFG::allocator::free_link *)v7->mTree.mRoot.mUID == uid )
       {
-        for ( j = (char *)*((_QWORD *)v7 + 1); j; j = (char *)*((_QWORD *)j + 1) )
+        for ( j = (UFG::qTreeRB64<PoseCacheNode,PoseCacheNode,1> *)v7->mTree.mRoot.mChild[0];
+              j;
+              j = (UFG::qTreeRB64<PoseCacheNode,PoseCacheNode,1> *)j->mTree.mRoot.mChild[0] )
         {
-          if ( *((_QWORD *)j + 3) != uid )
+          if ( (UFG::allocator::free_link *)j->mTree.mRoot.mUID != uid )
             break;
           v7 = j;
         }
@@ -2493,71 +2336,69 @@ UFG::allocator::free_link *__fastcall PoseCache::Store(PoseCache *this, unsigned
           return 0i64;
         break;
       }
-      if ( uid > *((_QWORD *)v7 + 3) )
-        v7 = (char *)*((_QWORD *)v7 + 2);
+      if ( (unsigned __int64)uid > v7->mTree.mRoot.mUID )
+        v7 = (UFG::qTreeRB64<PoseCacheNode,PoseCacheNode,1> *)v7->mTree.mRoot.mChild[1];
       else
-        v7 = (char *)*((_QWORD *)v7 + 1);
+        v7 = (UFG::qTreeRB64<PoseCacheNode,PoseCacheNode,1> *)v7->mTree.mRoot.mChild[0];
     }
   }
-  v11 = &v5->mCachedDataList;
-  while ( ($CA91B2824B6F331601351B2AC7FEF5D9 *)&v5->mCachedDataList.mNode.mNext[-2] != &v5->mCachedDataTree.mTree.mNULL.8 )
+  p_mCachedDataList = &this->mCachedDataList;
+  while ( ($CA91B2824B6F331601351B2AC7FEF5D9 *)&this->mCachedDataList.mNode.mNext[-2] != &this->mCachedDataTree.mTree.mNULL.8 )
   {
-    if ( UFG::qMemoryPool::GetLargestFree(&v5->mCachedDataPool, 0i64) >= v3 )
+    if ( UFG::qMemoryPool::GetLargestFree(&this->mCachedDataPool, 0i64) >= (unsigned __int64)size )
       break;
-    v12 = v5->mCachedDataList.mNode.mNext;
-    v13 = v12->mPrev;
-    v14 = v12->mNext;
-    v13->mNext = v14;
-    v14->mPrev = v13;
-    v12->mPrev = v12;
-    v12->mNext = v12;
-    v15 = (signed __int64)&v12[-2];
-    UFG::qMemoryPool::Free(&v5->mCachedDataPool, v12[1].mPrev);
+    mNext = this->mCachedDataList.mNode.mNext;
+    mPrev = mNext->mPrev;
+    v14 = mNext->mNext;
+    mPrev->mNext = v14;
+    v14->mPrev = mPrev;
+    mNext->mPrev = mNext;
+    mNext->mNext = mNext;
+    v15 = mNext - 2;
+    UFG::qMemoryPool::Free(&this->mCachedDataPool, (char *)mNext[1].mPrev);
     UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
-      &v5->mCachedDataTree.mTree,
+      &this->mCachedDataTree.mTree,
       (UFG::qBaseNodeVariableRB<unsigned __int64> *)v15);
-    v5->mPoseCacheUsageBytes -= *(_DWORD *)(v15 + 80);
-    --v5->mPoseCacheUsageEntries;
-    v16 = (_QWORD *)(v15 + 32);
-    v17 = *(_QWORD *)(v15 + 32);
-    v18 = *(_QWORD **)(v15 + 40);
-    *(_QWORD *)(v17 + 8) = v18;
-    *v18 = v17;
-    *v16 = v16;
-    v16[1] = v16;
-    operator delete[]((void *)v15);
+    this->mPoseCacheUsageBytes -= LODWORD(v15[5].mPrev);
+    --this->mPoseCacheUsageEntries;
+    v16 = v15[2].mPrev;
+    v17 = v15[2].mNext;
+    v16->mNext = v17;
+    v17->mPrev = v16;
+    v15[2].mPrev = v15 + 2;
+    v15[2].mNext = v15 + 2;
+    operator delete[](v15);
   }
-  v19 = UFG::qMemoryPool::Allocate(&v5->mCachedDataPool, v3, "pose_cache_alloc", 0i64, 1u);
-  v20 = UFG::qMalloc(0x60ui64, "PoseCacheNode", 0x800ui64);
-  v21 = v20;
-  if ( v20 )
+  v18 = UFG::qMemoryPool::Allocate(&this->mCachedDataPool, (unsigned __int64)size, "pose_cache_alloc", 0i64, 1u);
+  v19 = UFG::qMalloc(0x60ui64, "PoseCacheNode", 0x800ui64);
+  v20 = v19;
+  if ( v19 )
   {
-    v20->mNext = 0i64;
-    v20[1].mNext = 0i64;
-    v20[2].mNext = 0i64;
-    v20[3].mNext = (UFG::allocator::free_link *)v4;
-    v22 = v20 + 4;
-    v22->mNext = v22;
-    v22[1].mNext = v22;
-    v21[6].mNext = v19;
-    v21[10].mNext = (UFG::allocator::free_link *)v3;
-    LODWORD(v21[11].mNext) = 0;
+    v19->mNext = 0i64;
+    v19[1].mNext = 0i64;
+    v19[2].mNext = 0i64;
+    v19[3].mNext = uid;
+    v21 = v19 + 4;
+    v21->mNext = v21;
+    v21[1].mNext = v21;
+    v20[6].mNext = v18;
+    v20[10].mNext = size;
+    LODWORD(v20[11].mNext) = 0;
   }
   else
   {
-    v21 = 0i64;
+    v20 = 0i64;
   }
-  v23 = v21 + 4;
-  v24 = v11->mNode.mPrev;
-  v24->mNext = (UFG::qNode<PoseCacheNode,PoseCacheNode> *)&v21[4];
-  v23->mNext = (UFG::allocator::free_link *)v24;
-  v23[1].mNext = (UFG::allocator::free_link *)v11;
-  v11->mNode.mPrev = (UFG::qNode<PoseCacheNode,PoseCacheNode> *)&v21[4];
+  v22 = p_mCachedDataList->mNode.mPrev;
+  v22->mNext = (UFG::qNode<PoseCacheNode,PoseCacheNode> *)&v20[4];
+  v20[4].mNext = (UFG::allocator::free_link *)v22;
+  v20[5].mNext = (UFG::allocator::free_link *)p_mCachedDataList;
+  p_mCachedDataList->mNode.mPrev = (UFG::qNode<PoseCacheNode,PoseCacheNode> *)&v20[4];
   UFG::qBaseTreeVariableRB<unsigned __int64>::Add(
-    &v5->mCachedDataTree.mTree,
-    (UFG::qBaseNodeVariableRB<unsigned __int64> *)v21);
-  v5->mPoseCacheUsageBytes += LODWORD(v21[10].mNext);
-  ++v5->mPoseCacheUsageEntries;
-  return v21;
+    &this->mCachedDataTree.mTree,
+    (UFG::qBaseNodeVariableRB<unsigned __int64> *)v20);
+  this->mPoseCacheUsageBytes += LODWORD(v20[10].mNext);
+  ++this->mPoseCacheUsageEntries;
+  return v20;
 }
 

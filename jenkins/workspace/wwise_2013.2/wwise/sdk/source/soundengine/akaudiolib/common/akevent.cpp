@@ -2,20 +2,18 @@
 // RVA: 0xA6A710
 CAkEvent *__fastcall CAkEvent::CreateNoIndex(unsigned int in_ulID)
 {
-  unsigned int v1; // edi
   CAkEvent *result; // rax
   CAkEvent *v3; // rbx
 
-  v1 = in_ulID;
   result = (CAkEvent *)AK::MemoryMgr::Malloc(g_DefaultPoolId, 0x28ui64);
   v3 = result;
   if ( result )
   {
-    CAkIndexable::CAkIndexable((CAkIndexable *)&result->vfptr, v1);
+    CAkIndexable::CAkIndexable(result, in_ulID);
     v3->vfptr = (CAkIndexableVtbl *)&CAkEvent::`vftable;
     v3->m_actions.m_pFirst = 0i64;
     v3->m_iPreparationCount = 0;
-    result = v3;
+    return v3;
   }
   return result;
 }
@@ -24,18 +22,16 @@ CAkEvent *__fastcall CAkEvent::CreateNoIndex(unsigned int in_ulID)
 // RVA: 0xA6A6A0
 void __fastcall CAkEvent::AddToIndex(CAkEvent *this)
 {
-  CAkEvent *v1; // rbx
-  CAkIndexItem<CAkEvent *> *v2; // rdi
-  signed __int64 v3; // rdx
+  CAkIndexItem<CAkEvent *> *p_m_idxEvents; // rdi
+  _RTL_CRITICAL_SECTION_DEBUG **v3; // rdx
 
-  v1 = this;
-  v2 = &g_pIndex->m_idxEvents;
+  p_m_idxEvents = &g_pIndex->m_idxEvents;
   EnterCriticalSection(&g_pIndex->m_idxEvents.m_IndexLock.m_csLock);
-  v3 = (signed __int64)v2 + 8 * (v1->key % 0xC1);
-  v1->pNextItem = *(CAkIndexable **)(v3 + 40);
-  *(_QWORD *)(v3 + 40) = v1;
-  ++v2->m_mapIDToPtr.m_uiSize;
-  LeaveCriticalSection(&v2->m_IndexLock.m_csLock);
+  v3 = &p_m_idxEvents->m_IndexLock.m_csLock.DebugInfo + this->key % 0xC1;
+  this->pNextItem = (CAkIndexable *)v3[5];
+  v3[5] = (_RTL_CRITICAL_SECTION_DEBUG *)this;
+  ++p_m_idxEvents->m_mapIDToPtr.m_uiSize;
+  LeaveCriticalSection(&p_m_idxEvents->m_IndexLock.m_csLock);
 }
 
 // File Line: 69
@@ -43,14 +39,12 @@ void __fastcall CAkEvent::AddToIndex(CAkEvent *this)
 __int64 __fastcall CAkEvent::AddRef(CAkEvent *this)
 {
   CAkAudioLibIndex *v1; // rbx
-  CAkEvent *v2; // rsi
   unsigned int v3; // edi
 
   v1 = g_pIndex;
-  v2 = this;
   EnterCriticalSection(&g_pIndex->m_idxEvents.m_IndexLock.m_csLock);
-  v3 = v2->m_lRef + 1;
-  v2->m_lRef = v3;
+  v3 = this->m_lRef + 1;
+  this->m_lRef = v3;
   LeaveCriticalSection(&v1->m_idxEvents.m_IndexLock.m_csLock);
   return v3;
 }
@@ -60,44 +54,40 @@ __int64 __fastcall CAkEvent::AddRef(CAkEvent *this)
 __int64 __fastcall CAkEvent::Release(CAkEvent *this)
 {
   CAkAudioLibIndex *v1; // rbx
-  CAkEvent *v2; // rsi
   bool v3; // zf
-  unsigned int v4; // ebp
+  unsigned int m_lRef; // ebp
   int v5; // edi
 
   v1 = g_pIndex;
-  v2 = this;
   EnterCriticalSection(&g_pIndex->m_idxEvents.m_IndexLock.m_csLock);
-  v3 = v2->m_lRef-- == 1;
-  v4 = v2->m_lRef;
+  v3 = this->m_lRef-- == 1;
+  m_lRef = this->m_lRef;
   if ( v3 )
   {
-    CAkIndexItem<CAkEvent *>::RemoveID((CAkIndexItem<CAkParameterNodeBase *> *)&g_pIndex->m_idxEvents, v2->key);
+    CAkIndexItem<CAkEvent *>::RemoveID((CAkIndexItem<CAkParameterNodeBase *> *)&g_pIndex->m_idxEvents, this->key);
     v5 = g_DefaultPoolId;
-    v2->vfptr->__vecDelDtor((CAkIndexable *)&v2->vfptr, 0);
-    AK::MemoryMgr::Free(v5, v2);
+    this->vfptr->__vecDelDtor(this, 0i64);
+    AK::MemoryMgr::Free(v5, this);
   }
   LeaveCriticalSection(&v1->m_idxEvents.m_IndexLock.m_csLock);
-  return v4;
+  return m_lRef;
 }
 
 // File Line: 138
 // RVA: 0xA6A800
-signed __int64 __fastcall CAkEvent::SetInitialValues(CAkEvent *this, char *in_pData, unsigned int in_ulDataSize)
+__int64 __fastcall CAkEvent::SetInitialValues(CAkEvent *this, char *in_pData, unsigned int in_ulDataSize)
 {
-  unsigned int v3; // er12
+  unsigned int v3; // r12d
   CAkAction *v4; // rbp
-  unsigned int v5; // er14
-  CAkEvent *v6; // r13
+  unsigned int v5; // r14d
   char *v7; // rsi
   unsigned int v8; // edi
-  _RTL_CRITICAL_SECTION *v9; // r15
-  CAkAction *v10; // rbx
+  CAkIndexItem<CAkAction *> *p_m_idxActions; // r15
+  CAkAction *pNextItem; // rbx
 
   v3 = *((_DWORD *)in_pData + 1);
   v4 = 0i64;
   v5 = 0;
-  v6 = this;
   v7 = in_pData + 8;
   if ( !v3 )
     return 1i64;
@@ -107,32 +97,30 @@ signed __int64 __fastcall CAkEvent::SetInitialValues(CAkEvent *this, char *in_pD
     v7 += 4;
     if ( !v8 )
       return 14i64;
-    v9 = &g_pIndex->m_idxActions.m_IndexLock.m_csLock;
+    p_m_idxActions = &g_pIndex->m_idxActions;
     EnterCriticalSection(&g_pIndex->m_idxActions.m_IndexLock.m_csLock);
-    v10 = (CAkAction *)*((_QWORD *)&v9[1].DebugInfo + v8 % 0xC1);
-    if ( !v10 )
-      goto LABEL_6;
-    while ( v10->key != v8 )
-    {
-      v10 = (CAkAction *)v10->pNextItem;
-      if ( !v10 )
-        goto LABEL_6;
-    }
-    if ( !v10 )
+    pNextItem = (CAkAction *)p_m_idxActions->m_mapIDToPtr.m_table[v8 % 0xC1];
+    if ( !pNextItem )
     {
 LABEL_6:
-      LeaveCriticalSection(v9);
+      LeaveCriticalSection(&p_m_idxActions->m_IndexLock.m_csLock);
       return 2i64;
     }
-    ++v10->m_lRef;
-    LeaveCriticalSection(v9);
-    v10->pNextLightItem = 0i64;
+    while ( pNextItem->key != v8 )
+    {
+      pNextItem = (CAkAction *)pNextItem->pNextItem;
+      if ( !pNextItem )
+        goto LABEL_6;
+    }
+    ++pNextItem->m_lRef;
+    LeaveCriticalSection(&p_m_idxActions->m_IndexLock.m_csLock);
+    pNextItem->pNextLightItem = 0i64;
     if ( v4 )
-      v4->pNextLightItem = v10;
+      v4->pNextLightItem = pNextItem;
     else
-      v6->m_actions.m_pFirst = v10;
+      this->m_actions.m_pFirst = pNextItem;
     ++v5;
-    v4 = v10;
+    v4 = pNextItem;
     if ( v5 >= v3 )
       return 1i64;
   }

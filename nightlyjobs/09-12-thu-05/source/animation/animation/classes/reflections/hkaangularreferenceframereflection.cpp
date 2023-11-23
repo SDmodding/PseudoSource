@@ -28,23 +28,26 @@ hkClass *__fastcall hkaAngularReferenceFrame::staticClass()
 
 // File Line: 63
 // RVA: 0xB1CC40
-void __fastcall finishLoadedObjecthkaAngularReferenceFrame(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaAngularReferenceFrame(
+        hkaAngularReferenceFrame *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaAngularReferenceFrame::hkaAngularReferenceFrame);
+  if ( p )
+    hkaAngularReferenceFrame::hkaAngularReferenceFrame(p, finishing);
 }
 
 // File Line: 69
 // RVA: 0xB1CC60
-void __fastcall cleanupLoadedObjecthkaAngularReferenceFrame(void *p)
+void __fastcall cleanupLoadedObjecthkaAngularReferenceFrame(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 73
 // RVA: 0xB1CC70
 hkBaseObjectVtbl *__fastcall getVtablehkaAngularReferenceFrame()
 {
-  hkaAngularReferenceFrame v1; // [rsp+20h] [rbp-78h]
+  hkaAngularReferenceFrame v1; // [rsp+20h] [rbp-78h] BYREF
 
   hkaAngularReferenceFrame::hkaAngularReferenceFrame(&v1, 0);
   return v1.vfptr;
@@ -61,8 +64,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaAngularReferenceFrameTypeInfo__()
   hkaAngularReferenceFrameTypeInfo.m_typeName = "hkaAngularReferenceFrame";
   hkaAngularReferenceFrameTypeInfo.m_vtable = result;
   hkaAngularReferenceFrameTypeInfo.m_scopedName = "!hkaAngularReferenceFrame";
-  hkaAngularReferenceFrameTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaAngularReferenceFrame;
-  hkaAngularReferenceFrameTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaAngularReferenceFrame;
+  hkaAngularReferenceFrameTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaAngularReferenceFrame;
+  hkaAngularReferenceFrameTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaAngularReferenceFrame;
   return result;
 }
 

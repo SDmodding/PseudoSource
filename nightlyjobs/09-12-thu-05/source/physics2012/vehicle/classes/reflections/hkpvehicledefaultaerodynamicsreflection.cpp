@@ -28,17 +28,17 @@ hkClass *__fastcall hkpVehicleDefaultAerodynamics::staticClass()
 
 // File Line: 66
 // RVA: 0xE25380
-void __fastcall finishLoadedObjecthkpVehicleDefaultAerodynamics(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpVehicleDefaultAerodynamics(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleDefaultAerodynamics::`vftable;
+    *p = &hkpVehicleDefaultAerodynamics::`vftable;
 }
 
 // File Line: 72
 // RVA: 0xE253A0
-void __fastcall cleanupLoadedObjecthkpVehicleDefaultAerodynamics(void *p)
+void __fastcall cleanupLoadedObjecthkpVehicleDefaultAerodynamics(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 76
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkpVehicleDefaultAerodynamicsTypeInfo__()
   hkpVehicleDefaultAerodynamicsTypeInfo.m_typeName = "hkpVehicleDefaultAerodynamics";
   hkpVehicleDefaultAerodynamicsTypeInfo.m_vtable = result;
   hkpVehicleDefaultAerodynamicsTypeInfo.m_scopedName = "!hkpVehicleDefaultAerodynamics";
-  hkpVehicleDefaultAerodynamicsTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpVehicleDefaultAerodynamics;
-  hkpVehicleDefaultAerodynamicsTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpVehicleDefaultAerodynamics;
+  hkpVehicleDefaultAerodynamicsTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpVehicleDefaultAerodynamics;
+  hkpVehicleDefaultAerodynamicsTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpVehicleDefaultAerodynamics;
   return result;
 }
 

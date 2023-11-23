@@ -2,7 +2,7 @@
 // RVA: 0x15C7740
 __int64 dynamic_initializer_for__s_defaultMallocAllocator__()
 {
-  return atexit(dynamic_atexit_destructor_for__s_defaultMallocAllocator__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__s_defaultMallocAllocator__);
 }
 
 // File Line: 170
@@ -39,8 +39,8 @@ void __fastcall hkMallocAllocator::resetPeakMemoryStatistics(hkMallocAllocator *
 
 // File Line: 199
 // RVA: 0xC81A60
-__int64 __fastcall hkMallocAllocator::getAllocatedSize(hkMallocAllocator *this, const void *obj, int numBytes)
+__int64 __fastcall hkMallocAllocator::getAllocatedSize(hkMallocAllocator *this, const void *obj, unsigned int numBytes)
 {
-  return (unsigned int)numBytes;
+  return numBytes;
 }
 

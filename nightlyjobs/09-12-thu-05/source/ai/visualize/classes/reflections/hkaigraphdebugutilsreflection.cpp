@@ -28,8 +28,9 @@ hkClass *__fastcall hkaiGraphDebugUtils::DebugInfo::staticClass()
 
 // File Line: 81
 // RVA: 0xC3E0D0
-void __fastcall cleanupLoadedObjecthkaiGraphDebugUtilsDebugInfo(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkaiGraphDebugUtilsDebugInfo(hkaiGraphDebugUtils::DebugInfo *p)
 {
-  hkaiGraphDebugUtils::DebugInfo::~DebugInfo((hkaiGraphDebugUtils::DebugInfo *)p);
+  hkaiGraphDebugUtils::DebugInfo::~DebugInfo(p);
 }
 

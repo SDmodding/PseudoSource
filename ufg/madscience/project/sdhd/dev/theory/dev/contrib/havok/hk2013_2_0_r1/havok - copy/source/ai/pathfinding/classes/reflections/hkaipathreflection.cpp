@@ -27,7 +27,7 @@ void dynamic_initializer_for__hkaiPathPathPointClass__()
     0i64,
     0i64,
     0,
-    3u);
+    3);
 }
 
 // File Line: 88
@@ -73,7 +73,7 @@ void dynamic_initializer_for__hkaiPathClass__()
     &hkaiPath_Default,
     0i64,
     0,
-    0xAu);
+    10);
 }
 
 // File Line: 157
@@ -85,17 +85,17 @@ hkClass *__fastcall hkaiPath::staticClass()
 
 // File Line: 164
 // RVA: 0xBB7140
-void __fastcall finishLoadedObjecthkaiPath(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiPath(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiPath::`vftable;
+    *p = &hkaiPath::`vftable;
 }
 
 // File Line: 170
 // RVA: 0xBB7160
-void __fastcall cleanupLoadedObjecthkaiPath(void *p)
+void __fastcall cleanupLoadedObjecthkaiPath(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 174
@@ -116,8 +116,8 @@ void **dynamic_initializer_for__hkaiPathTypeInfo__()
   hkaiPathTypeInfo.m_typeName = "hkaiPath";
   hkaiPathTypeInfo.m_vtable = result;
   hkaiPathTypeInfo.m_scopedName = "!hkaiPath";
-  hkaiPathTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiPath;
-  hkaiPathTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiPath;
+  hkaiPathTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiPath;
+  hkaiPathTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiPath;
   return result;
 }
 

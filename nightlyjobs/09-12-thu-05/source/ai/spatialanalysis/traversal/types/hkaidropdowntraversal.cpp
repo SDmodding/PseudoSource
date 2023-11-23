@@ -2,307 +2,284 @@
 // RVA: 0xC34660
 void __fastcall hkaiDropDownAnalyzer::analyze(hkaiDropDownAnalyzer *this, hkaiTraversalAnalysisContext *context)
 {
-  hkaiDropDownAnalyzer *v2; // r13
-  hkaiTraversalAnalysisContext *v3; // rbx
   hkVector4f v4; // xmm6
-  __m128i v5; // xmm3
-  hkaiTraversalAnalysisSettings *v6; // rax
-  float v7; // xmm8_4
+  __m128i si128; // xmm3
+  hkaiTraversalAnalysisSettings *m_settings; // rax
+  float m_maxPlanarAngle; // xmm8_4
   int v8; // xmm1_4
   __m128 v9; // xmm7
-  float v10; // xmm0_4
-  float v11; // xmm1_4
+  float m_minEdgeLength; // xmm0_4
+  float m_maxUnderhang; // xmm1_4
   __m128 v12; // xmm2
-  float v13; // xmm0_4
-  __m128i v14; // xmm4
-  __m128i v15; // xmm6
-  __m128 v16; // xmm1
-  __m128 v17; // xmm5
-  __m128 v18; // xmm4
-  __m128 v19; // xmm3
-  float v20; // xmm0_4
-  __m128i v21; // xmm3
-  int v22; // xmm0_4
-  __m128i v23; // xmm6
-  __m128 v24; // xmm2
-  __m128i v25; // xmm6
-  __m128 v26; // xmm1
-  __m128 v27; // xmm5
-  __m128 v28; // xmm4
+  float m_minDropDistance; // xmm0_4
+  __m128i v14; // xmm6
+  __m128 v15; // xmm5
+  __m128 v16; // xmm0
+  __m128 v17; // xmm4
+  __m128 v18; // xmm3
+  __m128i v19; // xmm3
+  __m128i v20; // xmm6
+  __m128 v21; // xmm2
+  __m128i v22; // xmm6
+  __m128 v23; // xmm5
+  __m128 v24; // xmm0
+  __m128 v25; // xmm4
+  __m128 v26; // xmm2
+  __m128i v27; // xmm4
+  __m128 v28; // xmm6
   __m128 v29; // xmm2
-  float v30; // xmm0_4
-  __m128i v31; // xmm4
-  __m128 v32; // xmm6
-  __m128 v33; // xmm2
-  __m128i v34; // xmm7
-  hkaiPairedEdgeFinder *v35; // rcx
-  int v36; // edi
-  __m128i v37; // xmm7
-  __m128 v38; // xmm1
-  __m128 v39; // xmm5
-  __m128 v40; // xmm4
-  __m128 v41; // xmm2
-  __m128i v42; // xmm1
-  float v43; // xmm11_4
-  float v44; // xmm11_4
-  hkVector4f *v45; // r9
-  __int64 v46; // r12
-  __int64 v47; // rsi
-  hkaiPairedEdgeFinder::EdgePair *v48; // r14
-  hkaiNavMeshUtils *v49; // rcx
-  hkVector4f *v50; // r9
-  __m128i v51; // xmm1
-  __m128 v52; // xmm0
+  __m128i v30; // xmm7
+  hkaiPairedEdgeFinder *m_pntr; // rcx
+  int v32; // edi
+  __m128i v33; // xmm7
+  __m128 v34; // xmm5
+  __m128 v35; // xmm0
+  __m128 v36; // xmm4
+  __m128 v37; // xmm2
+  __m128i v38; // xmm1
+  float v39; // xmm11_4
+  float v40; // xmm11_4
+  hkVector4f *v41; // r9
+  __int64 m_size; // r12
+  __int64 v43; // rsi
+  hkaiPairedEdgeFinder::EdgePair *m_data; // r14
+  hkaiNavMeshInstance *m_fromNavMeshInstance; // rcx
+  hkVector4f *v46; // r9
+  __m128 v47; // xmm2
+  __m128 v48; // xmm4
+  __m128 v49; // xmm5
+  __m128 v50; // xmm0
+  __m128 v51; // xmm3
+  __m128 v52; // xmm4
   __m128 v53; // xmm1
   __m128 v54; // xmm5
-  __m128 v55; // xmm2
-  __m128 v56; // xmm0
+  int v55; // r15d
+  unsigned int *Interval; // rax
   __m128 v57; // xmm3
   __m128 v58; // xmm4
-  __m128 v59; // xmm1
-  __m128 v60; // xmm5
-  int v61; // er15
-  unsigned int *v62; // rax
-  __m128 v63; // xmm3
-  __m128 v64; // xmm4
-  int v65; // xmm1_4
-  __m128 v66; // xmm9
-  __m128 v67; // xmm8
-  __m128 v68; // xmm9
-  __m128 v69; // xmm8
+  int v59; // xmm1_4
+  __m128 v60; // xmm8
+  __m128 v61; // xmm9
+  __m128 v62; // xmm8
+  __m128 v63; // xmm2
+  __m128 v64; // xmm2
+  __m128 v65; // xmm6
+  __m128 v66; // xmm7
+  __m128 v67; // xmm6
+  hkaiNavMeshInstance *v68; // rax
+  unsigned int m_userdata; // r9d
   __m128 v70; // xmm2
-  __m128 v71; // xmm2
-  __m128 v72; // xmm6
-  __m128 v73; // xmm7
-  __m128 v74; // xmm6
-  hkaiNavMeshInstance *v75; // rax
-  unsigned int v76; // er9
-  __m128 v77; // xmm2
-  __m128 v78; // xmm1
-  float v79; // xmm0_4
-  unsigned int v80; // ecx
-  hkaiNavMeshInstance *v81; // rax
-  unsigned int v82; // ecx
-  hkaiTraversalAnnotationLibrary *v83; // rcx
-  hkaiIntervalPartition reachableAreasOut; // [rsp+40h] [rbp-B8h]
-  hkaiIntervalPartition other; // [rsp+50h] [rbp-A8h]
-  hkArray<hkaiPairedEdgeFinder::EdgePair,hkContainerTempAllocator> pairsOut; // [rsp+60h] [rbp-98h]
-  hkVector4f rightInOut; // [rsp+70h] [rbp-88h]
-  hkVector4f rightEnd; // [rsp+88h] [rbp-70h]
-  hkVector4f leftInOut; // [rsp+98h] [rbp-60h]
-  hkVector4f topLeftIn; // [rsp+A8h] [rbp-50h]
-  hkVector4f bottomLeftIn; // [rsp+B8h] [rbp-40h]
-  hkVector4f topRightIn; // [rsp+C8h] [rbp-30h]
-  hkVector4f bottomRightIn; // [rsp+D8h] [rbp-20h]
-  hkaiPairedEdgeFinder::PairedEdgeSettings settings; // [rsp+E8h] [rbp-10h]
-  unsigned int v95; // [rsp+130h] [rbp+38h]
-  int v96; // [rsp+134h] [rbp+3Ch]
-  unsigned int v97; // [rsp+138h] [rbp+40h]
-  hkaiUserEdgeUtils::UserEdgePair userEdgePair; // [rsp+148h] [rbp+50h]
-  hkVector4f facePlane; // [rsp+198h] [rbp+A0h]
-  hkVector4f v100; // [rsp+1A8h] [rbp+B0h]
-  int faceIndex; // [rsp+1B8h] [rbp+C0h]
-  float retaddr; // [rsp+268h] [rbp+170h]
-  __int64 v103; // [rsp+270h] [rbp+178h]
+  __m128 v71; // xmm1
+  float m_baseCost; // xmm0_4
+  unsigned int m_sectionUid; // ecx
+  hkaiNavMeshInstance *m_toNavMeshInstance; // rax
+  unsigned int v75; // ecx
+  hkaiTraversalAnnotationLibrary *m_outputLibrary; // rcx
+  hkaiIntervalPartition reachableAreasOut; // [rsp+40h] [rbp-B8h] BYREF
+  hkaiIntervalPartition other; // [rsp+50h] [rbp-A8h] BYREF
+  hkArray<hkaiPairedEdgeFinder::EdgePair,hkContainerTempAllocator> pairsOut; // [rsp+60h] [rbp-98h] BYREF
+  char rightInOut[24]; // [rsp+70h] [rbp-88h] BYREF
+  hkVector4f rightEnd; // [rsp+88h] [rbp-70h] BYREF
+  hkVector4f leftInOut; // [rsp+98h] [rbp-60h] BYREF
+  hkVector4f topLeftIn; // [rsp+A8h] [rbp-50h] BYREF
+  hkVector4f bottomLeftIn; // [rsp+B8h] [rbp-40h] BYREF
+  hkVector4f topRightIn; // [rsp+C8h] [rbp-30h] BYREF
+  hkVector4f bottomRightIn; // [rsp+D8h] [rbp-20h] BYREF
+  hkaiPairedEdgeFinder::PairedEdgeSettings settings; // [rsp+E8h] [rbp-10h] BYREF
+  unsigned int v88; // [rsp+130h] [rbp+38h]
+  int v89; // [rsp+134h] [rbp+3Ch]
+  unsigned int v90; // [rsp+138h] [rbp+40h]
+  hkaiUserEdgeUtils::UserEdgePair userEdgePair; // [rsp+148h] [rbp+50h] BYREF
+  hkVector4f facePlane; // [rsp+198h] [rbp+A0h] BYREF
+  __m128 m_quad; // [rsp+1A8h] [rbp+B0h]
+  hkVector4f faceIndex; // [rsp+1B8h] [rbp+C0h] BYREF
+  void *retaddr; // [rsp+268h] [rbp+170h]
+  __int64 v96; // [rsp+270h] [rbp+178h]
 
-  v2 = this;
-  v3 = context;
-  v100.m_quad = (__m128)context->m_settings->m_up;
-  v4.m_quad = v100.m_quad;
+  m_quad = context->m_settings->m_up.m_quad;
+  v4.m_quad = m_quad;
   hkaiPairedEdgeFinder::PairedEdgeSettings::PairedEdgeSettings(&settings);
-  v5 = _mm_load_si128((const __m128i *)_xmm);
-  v6 = v3->m_settings;
-  v7 = v2->m_maxPlanarAngle;
-  v8 = LODWORD(v2->m_maxDropDistance) ^ _xmm[0];
-  v9 = _mm_add_ps((__m128)LODWORD(v2->m_maxPlanarAngle), *(__m128 *)_xmm);
+  si128 = _mm_load_si128((const __m128i *)_xmm);
+  m_settings = context->m_settings;
+  m_maxPlanarAngle = this->m_maxPlanarAngle;
+  v8 = LODWORD(this->m_maxDropDistance) ^ _xmm[0];
+  v9 = _mm_add_ps((__m128)LODWORD(m_maxPlanarAngle), *(__m128 *)_xmm);
   settings.m_up = (hkVector4f)v4.m_quad;
-  v10 = v6->m_minEdgeLength;
+  m_minEdgeLength = m_settings->m_minEdgeLength;
   LODWORD(settings.m_minHeightDelta) = v8;
-  v11 = v2->m_maxUnderhang;
+  m_maxUnderhang = this->m_maxUnderhang;
   v12 = _mm_andnot_ps(*(__m128 *)_xmm, v9);
-  settings.m_minLength = v10;
-  v13 = v2->m_minDropDistance;
-  settings.m_maxHorizontalDelta = v11;
-  LODWORD(settings.m_maxHeightDelta) = LODWORD(v13) ^ _xmm[0];
-  v14 = _mm_add_epi32(v5, v5);
+  settings.m_minLength = m_minEdgeLength;
+  m_minDropDistance = this->m_minDropDistance;
+  settings.m_maxHorizontalDelta = m_maxUnderhang;
+  LODWORD(settings.m_maxHeightDelta) = LODWORD(m_minDropDistance) ^ _xmm[0];
   settings.m_minHorizontalDelta = 0.0;
-  _mm_store_si128((__m128i *)&rightInOut, v14);
-  v15 = _mm_andnot_si128(v5, _mm_add_epi32(_mm_cvttps_epi32(_mm_mul_ps(v12, *(__m128 *)_xmm)), v5));
-  v16 = _mm_cvtepi32_ps(v15);
-  v17 = (__m128)_mm_cmpeq_epi32(_mm_and_si128(v15, v14), (__m128i)0i64);
-  v18 = _mm_add_ps(
+  *(__m128i *)rightInOut = _mm_add_epi32(si128, si128);
+  v14 = _mm_andnot_si128(si128, _mm_add_epi32(_mm_cvttps_epi32(_mm_mul_ps(v12, *(__m128 *)_xmm)), si128));
+  v15 = (__m128)_mm_cmpeq_epi32(_mm_and_si128(v14, *(__m128i *)rightInOut), (__m128i)0i64);
+  v16 = _mm_cvtepi32_ps(v14);
+  v17 = _mm_add_ps(
           _mm_add_ps(_mm_add_ps(_mm_mul_ps(v16, *(__m128 *)DP1_0), v12), _mm_mul_ps(v16, *(__m128 *)DP2)),
           _mm_mul_ps(v16, *(__m128 *)DP3));
-  v19 = _mm_mul_ps(v18, v18);
-  v12.m128_i32[0] = (unsigned __int128)_mm_andnot_ps(
-                                         v17,
-                                         _mm_add_ps(
-                                           _mm_sub_ps(
-                                             _mm_mul_ps(
-                                               _mm_mul_ps(
-                                                 _mm_add_ps(
+  v18 = _mm_mul_ps(v17, v17);
+  v12.m128_f32[0] = _mm_andnot_ps(
+                      v15,
+                      _mm_add_ps(
+                        _mm_sub_ps(
+                          _mm_mul_ps(
+                            _mm_mul_ps(
+                              _mm_add_ps(
+                                _mm_mul_ps(
+                                  _mm_add_ps(_mm_mul_ps(v18, *(__m128 *)cosCoeff0_0), *(__m128 *)cosCoeff1),
+                                  v18),
+                                *(__m128 *)cosCoeff2_0),
+                              v18),
+                            v18),
+                          _mm_mul_ps(v18, *(__m128 *)_xmm)),
+                        *(__m128 *)_xmm)).m128_f32[0];
+  v16.m128_f32[0] = (float)((float)((float)((float)(v18.m128_f32[0] * -0.00019515296) + 0.0083321612) * v18.m128_f32[0])
+                          + -0.16666655)
+                  * v18.m128_f32[0];
+  v19 = _mm_load_si128((const __m128i *)rightInOut);
+  v12.m128_i32[0] |= COERCE_UNSIGNED_INT((float)(v16.m128_f32[0] * v17.m128_f32[0]) + v17.m128_f32[0]) & v15.m128_i32[0];
+  v16.m128_i32[0] = _mm_and_si128(_mm_add_epi32(v19, v19), v14).m128i_u32[0];
+  v20 = _mm_load_si128((const __m128i *)_xmm);
+  LODWORD(settings.m_cosMaxPlanarAngle) = v12.m128_i32[0] ^ (v16.m128_i32[0] << 29) ^ v9.m128_i32[0] & _xmm[0];
+  v21 = _mm_andnot_ps(*(__m128 *)_xmm, (__m128)LODWORD(m_maxPlanarAngle));
+  v22 = _mm_andnot_si128(v20, _mm_add_epi32(_mm_cvttps_epi32(_mm_mul_ps(v21, *(__m128 *)_xmm)), v20));
+  v23 = (__m128)_mm_cmpeq_epi32(_mm_and_si128(v22, v19), (__m128i)0i64);
+  v24 = _mm_cvtepi32_ps(v22);
+  v25 = _mm_add_ps(
+          _mm_add_ps(_mm_add_ps(_mm_mul_ps(v24, *(__m128 *)DP1_0), v21), _mm_mul_ps(v24, *(__m128 *)DP2)),
+          _mm_mul_ps(v24, *(__m128 *)DP3));
+  v26 = _mm_mul_ps(v25, v25);
+  v24.m128_f32[0] = (float)((float)((float)((float)((float)((float)(v26.m128_f32[0] * -0.00019515296) + 0.0083321612)
+                                                  * v26.m128_f32[0])
+                                          + -0.16666655)
+                                  * v26.m128_f32[0])
+                          * v25.m128_f32[0])
+                  + v25.m128_f32[0];
+  v27 = _mm_load_si128((const __m128i *)rightInOut);
+  *(float *)&retaddr = this->m_maxRelativeSlopeAngle;
+  LODWORD(settings.m_sinMaxPlanarAngle) = (_mm_andnot_ps(
+                                             v23,
+                                             _mm_add_ps(
+                                               _mm_sub_ps(
+                                                 _mm_mul_ps(
                                                    _mm_mul_ps(
                                                      _mm_add_ps(
-                                                       _mm_mul_ps(v19, *(__m128 *)cosCoeff0_0),
-                                                       *(__m128 *)cosCoeff1),
-                                                     v19),
-                                                   *(__m128 *)cosCoeff2_0),
-                                                 v19),
-                                               v19),
-                                             _mm_mul_ps(v19, *(__m128 *)_xmm)),
-                                           *(__m128 *)_xmm));
-  v20 = (float)((float)((float)((float)(v19.m128_f32[0] * -0.00019515296) + 0.0083321612) * v19.m128_f32[0])
-              + -0.16666655)
-      * v19.m128_f32[0];
-  v21 = _mm_load_si128((const __m128i *)&rightInOut);
-  v12.m128_i32[0] |= COERCE_UNSIGNED_INT((float)(v20 * v18.m128_f32[0]) + v18.m128_f32[0]) & v17.m128_i32[0];
-  v22 = (unsigned __int128)_mm_and_si128(_mm_add_epi32(v21, v21), v15);
-  v23 = _mm_load_si128((const __m128i *)_xmm);
-  LODWORD(settings.m_cosMaxPlanarAngle) = v12.m128_i32[0] ^ (v22 << 29) ^ v9.m128_i32[0] & _xmm[0];
-  v24 = _mm_andnot_ps(*(__m128 *)_xmm, (__m128)LODWORD(v7));
-  v25 = _mm_andnot_si128(v23, _mm_add_epi32(_mm_cvttps_epi32(_mm_mul_ps(v24, *(__m128 *)_xmm)), v23));
-  v26 = _mm_cvtepi32_ps(v25);
-  v27 = (__m128)_mm_cmpeq_epi32(_mm_and_si128(v25, v21), (__m128i)0i64);
-  v28 = _mm_add_ps(
-          _mm_add_ps(_mm_add_ps(_mm_mul_ps(v26, *(__m128 *)DP1_0), v24), _mm_mul_ps(v26, *(__m128 *)DP2)),
-          _mm_mul_ps(v26, *(__m128 *)DP3));
-  v29 = _mm_mul_ps(v28, v28);
-  v30 = (float)((float)((float)((float)((float)((float)(v29.m128_f32[0] * -0.00019515296) + 0.0083321612)
-                                      * v29.m128_f32[0])
-                              + -0.16666655)
-                      * v29.m128_f32[0])
-              * v28.m128_f32[0])
-      + v28.m128_f32[0];
-  v31 = _mm_load_si128((const __m128i *)&rightInOut);
-  retaddr = v2->m_maxRelativeSlopeAngle;
-  LODWORD(settings.m_sinMaxPlanarAngle) = (*(unsigned __int128 *)&_mm_andnot_ps(
-                                                                    v27,
-                                                                    _mm_add_ps(
-                                                                      _mm_sub_ps(
-                                                                        _mm_mul_ps(
-                                                                          _mm_mul_ps(
-                                                                            _mm_add_ps(
-                                                                              _mm_mul_ps(
-                                                                                _mm_add_ps(
-                                                                                  _mm_mul_ps(
-                                                                                    v29,
-                                                                                    *(__m128 *)cosCoeff0_0),
-                                                                                  *(__m128 *)cosCoeff1),
-                                                                                v29),
-                                                                              *(__m128 *)cosCoeff2_0),
-                                                                            v29),
-                                                                          v29),
-                                                                        _mm_mul_ps(v29, *(__m128 *)_xmm)),
-                                                                      *(__m128 *)_xmm)) | LODWORD(v30) & v27.m128_i32[0]) ^ ((unsigned int)*(_OWORD *)&_mm_and_si128(_mm_add_epi32(v31, v31), v25) << 29) ^ LODWORD(v7) & _xmm[0];
-  v32 = _mm_add_ps((__m128)LODWORD(retaddr), *(__m128 *)_xmm);
-  v33 = _mm_andnot_ps(*(__m128 *)_xmm, v32);
-  v34 = _mm_load_si128((const __m128i *)_xmm);
-  v35 = v3->m_pairedEdgeFinder.m_pntr;
-  v36 = 0;
+                                                       _mm_mul_ps(
+                                                         _mm_add_ps(
+                                                           _mm_mul_ps(v26, *(__m128 *)cosCoeff0_0),
+                                                           *(__m128 *)cosCoeff1),
+                                                         v26),
+                                                       *(__m128 *)cosCoeff2_0),
+                                                     v26),
+                                                   v26),
+                                                 _mm_mul_ps(v26, *(__m128 *)_xmm)),
+                                               *(__m128 *)_xmm)).m128_u32[0] | v24.m128_i32[0] & v23.m128_i32[0]) ^ (_mm_and_si128(_mm_add_epi32(v27, v27), v22).m128i_u32[0] << 29) ^ LODWORD(m_maxPlanarAngle) & _xmm[0];
+  v28 = _mm_add_ps((__m128)(unsigned int)retaddr, *(__m128 *)_xmm);
+  v29 = _mm_andnot_ps(*(__m128 *)_xmm, v28);
+  v30 = _mm_load_si128((const __m128i *)_xmm);
+  m_pntr = context->m_pairedEdgeFinder.m_pntr;
+  v32 = 0;
   settings.m_matchAngles.m_bool = 1;
   settings.m_findInternalEnds.m_bool = 1;
-  v37 = _mm_andnot_si128(v34, _mm_add_epi32(_mm_cvttps_epi32(_mm_mul_ps(v33, *(__m128 *)_xmm)), v34));
-  v38 = _mm_cvtepi32_ps(v37);
+  v33 = _mm_andnot_si128(v30, _mm_add_epi32(_mm_cvttps_epi32(_mm_mul_ps(v29, *(__m128 *)_xmm)), v30));
   pairsOut.m_data = 0i64;
   pairsOut.m_size = 0;
-  pairsOut.m_capacityAndFlags = 2147483648;
-  v39 = (__m128)_mm_cmpeq_epi32(_mm_and_si128(v37, v31), (__m128i)0i64);
-  v40 = _mm_add_ps(
-          _mm_add_ps(_mm_add_ps(_mm_mul_ps(v38, *(__m128 *)DP1_0), v33), _mm_mul_ps(v38, *(__m128 *)DP2)),
-          _mm_mul_ps(v38, *(__m128 *)DP3));
-  v41 = _mm_mul_ps(v40, v40);
-  v42 = _mm_load_si128((const __m128i *)&rightInOut);
-  LODWORD(settings.m_cosMaxDeltaSlopeAngle) = (*(unsigned __int128 *)&_mm_andnot_ps(
-                                                                        v39,
-                                                                        _mm_add_ps(
-                                                                          _mm_sub_ps(
-                                                                            _mm_mul_ps(
-                                                                              _mm_mul_ps(
-                                                                                _mm_add_ps(
-                                                                                  _mm_mul_ps(
-                                                                                    _mm_add_ps(
-                                                                                      _mm_mul_ps(
-                                                                                        v41,
-                                                                                        *(__m128 *)cosCoeff0_0),
-                                                                                      *(__m128 *)cosCoeff1),
-                                                                                    v41),
-                                                                                  *(__m128 *)cosCoeff2_0),
-                                                                                v41),
-                                                                              v41),
-                                                                            _mm_mul_ps(v41, *(__m128 *)_xmm)),
-                                                                          *(__m128 *)_xmm)) | COERCE_UNSIGNED_INT(
-                                                                                                (float)((float)((float)((float)((float)((float)(v41.m128_f32[0] * -0.00019515296) + 0.0083321612) * v41.m128_f32[0]) + -0.16666655) * v41.m128_f32[0]) * v40.m128_f32[0])
-                                                                                              + v40.m128_f32[0]) & v39.m128_i32[0]) ^ ((unsigned int)*(_OWORD *)&_mm_and_si128(_mm_add_epi32(v42, v42), v37) << 29) ^ v32.m128_i32[0] & _xmm[0];
-  hkaiPairedEdgeFinder::findEdgePairs(v35, &settings, &pairsOut);
-  LODWORD(v43) = (unsigned __int128)_mm_shuffle_ps(
-                                      (__m128)LODWORD(v3->m_settings->m_minEdgeLength),
-                                      (__m128)LODWORD(v3->m_settings->m_minEdgeLength),
-                                      0);
-  v44 = v43 * v43;
+  pairsOut.m_capacityAndFlags = 0x80000000;
+  v34 = (__m128)_mm_cmpeq_epi32(_mm_and_si128(v33, v27), (__m128i)0i64);
+  v35 = _mm_cvtepi32_ps(v33);
+  v36 = _mm_add_ps(
+          _mm_add_ps(_mm_add_ps(_mm_mul_ps(v35, *(__m128 *)DP1_0), v29), _mm_mul_ps(v35, *(__m128 *)DP2)),
+          _mm_mul_ps(v35, *(__m128 *)DP3));
+  v37 = _mm_mul_ps(v36, v36);
+  v38 = _mm_load_si128((const __m128i *)rightInOut);
+  LODWORD(settings.m_cosMaxDeltaSlopeAngle) = (_mm_andnot_ps(
+                                                 v34,
+                                                 _mm_add_ps(
+                                                   _mm_sub_ps(
+                                                     _mm_mul_ps(
+                                                       _mm_mul_ps(
+                                                         _mm_add_ps(
+                                                           _mm_mul_ps(
+                                                             _mm_add_ps(
+                                                               _mm_mul_ps(v37, *(__m128 *)cosCoeff0_0),
+                                                               *(__m128 *)cosCoeff1),
+                                                             v37),
+                                                           *(__m128 *)cosCoeff2_0),
+                                                         v37),
+                                                       v37),
+                                                     _mm_mul_ps(v37, *(__m128 *)_xmm)),
+                                                   *(__m128 *)_xmm)).m128_u32[0] | COERCE_UNSIGNED_INT(
+                                                                                     (float)((float)((float)((float)((float)((float)(v37.m128_f32[0] * -0.00019515296) + 0.0083321612) * v37.m128_f32[0]) + -0.16666655) * v37.m128_f32[0])
+                                                                                           * v36.m128_f32[0])
+                                                                                   + v36.m128_f32[0]) & v34.m128_i32[0]) ^ (_mm_and_si128(_mm_add_epi32(v38, v38), v33).m128i_u32[0] << 29) ^ v28.m128_i32[0] & _xmm[0];
+  hkaiPairedEdgeFinder::findEdgePairs(m_pntr, &settings, &pairsOut);
+  v39 = _mm_shuffle_ps(
+          (__m128)LODWORD(context->m_settings->m_minEdgeLength),
+          (__m128)LODWORD(context->m_settings->m_minEdgeLength),
+          0).m128_f32[0];
+  v40 = v39 * v39;
   hkaiIntervalPartition::hkaiIntervalPartition(&other);
   hkaiIntervalPartition::hkaiIntervalPartition(&reachableAreasOut);
-  v46 = pairsOut.m_size;
-  v103 = pairsOut.m_size;
-  if ( pairsOut.m_size > 0i64 )
+  m_size = pairsOut.m_size;
+  v96 = pairsOut.m_size;
+  if ( pairsOut.m_size > 0 )
   {
-    v47 = 0i64;
+    v43 = 0i64;
     do
     {
-      v48 = pairsOut.m_data;
-      v49 = (hkaiNavMeshUtils *)v3->m_fromNavMeshInstance;
-      _mm_store_si128((__m128i *)&leftInOut, (__m128i)pairsOut.m_data[v47].m_startLeft.m_quad);
-      _mm_store_si128((__m128i *)&rightInOut.m_quad.m128_u16[4], (__m128i)v48[v47].m_startRight.m_quad);
-      _mm_store_si128((__m128i *)&rightInOut, (__m128i)v48[v47].m_endLeft.m_quad);
-      _mm_store_si128((__m128i *)&rightEnd, (__m128i)v48[v47].m_endRight.m_quad);
+      m_data = pairsOut.m_data;
+      m_fromNavMeshInstance = context->m_fromNavMeshInstance;
+      leftInOut.m_quad = (__m128)pairsOut.m_data[v43].m_startLeft;
+      *(hkVector4f *)&rightInOut[8] = pairsOut.m_data[v43].m_startRight;
+      *(hkVector4f *)rightInOut = pairsOut.m_data[v43].m_endLeft;
+      rightEnd.m_quad = (__m128)pairsOut.m_data[v43].m_endRight;
       hkaiNavMeshUtils::calcFacePlane<hkaiNavMeshInstance>(
-        v49,
-        (hkaiNavMeshInstance *)(unsigned int)v48[v47].m_startFace,
-        (__int64)&faceIndex,
-        v45);
+        (hkaiNavMeshUtils *)m_fromNavMeshInstance,
+        (hkaiNavMeshInstance *)(unsigned int)pairsOut.m_data[v43].m_startFace,
+        &faceIndex.m_quad,
+        v41);
       hkaiNavMeshUtils::calcFacePlane<hkaiNavMeshInstance>(
-        (hkaiNavMeshUtils *)v3->m_toNavMeshInstance,
-        (hkaiNavMeshInstance *)(unsigned int)v48[v47].m_endFace,
-        (__int64)&facePlane,
-        v50);
-      hkaiTraversalAnalysisUtils::setBackEdge(
-        &leftInOut,
-        (hkVector4f *)((char *)&rightInOut + 8),
-        (hkVector4f *)&faceIndex,
-        v3);
-      hkaiTraversalAnalysisUtils::setBackEdge(&rightEnd, &rightInOut, &facePlane, v3);
+        (hkaiNavMeshUtils *)context->m_toNavMeshInstance,
+        (hkaiNavMeshInstance *)(unsigned int)m_data[v43].m_endFace,
+        &facePlane.m_quad,
+        v46);
+      hkaiTraversalAnalysisUtils::setBackEdge(&leftInOut, (hkVector4f *)&rightInOut[8], &faceIndex, context);
+      hkaiTraversalAnalysisUtils::setBackEdge(&rightEnd, (hkVector4f *)rightInOut, &facePlane, context);
       hkaiIntervalPartition::clear(&other);
       hkaiTraversalAnalysisUtils::filterUnwalkableLandingZones(
         &leftInOut,
-        (hkVector4f *)((char *)&rightInOut + 8),
-        &rightInOut,
+        (hkVector4f *)&rightInOut[8],
+        (hkVector4f *)rightInOut,
         &rightEnd,
-        v48[v47].m_startFace,
-        v48[v47].m_endFace,
+        m_data[v43].m_startFace,
+        m_data[v43].m_endFace,
         &other,
-        v3);
+        context);
       if ( other.m_intervals.m_size )
       {
-        v51 = *(__m128i *)((char *)&rightInOut + 8);
-        _mm_store_si128((__m128i *)&topRightIn, (__m128i)leftInOut.m_quad);
-        v52 = rightInOut.m_quad;
-        _mm_store_si128((__m128i *)&topLeftIn, v51);
-        v53 = rightEnd.m_quad;
-        _mm_store_si128((__m128i *)&bottomRightIn, (__m128i)v52);
-        _mm_store_si128((__m128i *)&bottomLeftIn, (__m128i)v53);
-        if ( hkaiTraversalAnalysisUtils::raiseEdgeAboveGeometry(&topRightIn, &topLeftIn, v3) )
+        topRightIn.m_quad = leftInOut.m_quad;
+        topLeftIn.m_quad = *(__m128 *)&rightInOut[8];
+        bottomRightIn.m_quad = *(__m128 *)rightInOut;
+        bottomLeftIn.m_quad = rightEnd.m_quad;
+        if ( hkaiTraversalAnalysisUtils::raiseEdgeAboveGeometry(&topRightIn, &topLeftIn, context) )
         {
-          if ( hkaiTraversalAnalysisUtils::raiseEdgeAboveGeometry(&bottomLeftIn, &bottomRightIn, v3) )
+          if ( hkaiTraversalAnalysisUtils::raiseEdgeAboveGeometry(&bottomLeftIn, &bottomRightIn, context) )
           {
-            v54 = _mm_mul_ps(topRightIn.m_quad, v100.m_quad);
-            v55 = _mm_mul_ps(topLeftIn.m_quad, v100.m_quad);
-            v56 = _mm_mul_ps(bottomLeftIn.m_quad, v100.m_quad);
-            v57 = _mm_mul_ps(bottomRightIn.m_quad, v100.m_quad);
-            v58 = _mm_shuffle_ps(v54, v55, 68);
-            v59 = _mm_shuffle_ps(v57, v56, 68);
-            v60 = _mm_add_ps(
-                    _mm_shuffle_ps(_mm_shuffle_ps(v54, v55, 238), _mm_shuffle_ps(v57, v56, 238), 136),
-                    _mm_add_ps(_mm_shuffle_ps(v58, v59, 221), _mm_shuffle_ps(v58, v59, 136)));
-            if ( fmin(COERCE_FLOAT(_mm_shuffle_ps(v60, v60, 0)), COERCE_FLOAT(_mm_shuffle_ps(v60, v60, 85))) > fmax(COERCE_FLOAT(_mm_shuffle_ps(v60, v60, 170)), COERCE_FLOAT(_mm_shuffle_ps(v60, v60, 255))) )
+            v47 = _mm_mul_ps(topLeftIn.m_quad, m_quad);
+            v48 = _mm_mul_ps(topRightIn.m_quad, m_quad);
+            v49 = _mm_shuffle_ps(v48, v47, 238);
+            v50 = _mm_mul_ps(bottomLeftIn.m_quad, m_quad);
+            v51 = _mm_mul_ps(bottomRightIn.m_quad, m_quad);
+            v52 = _mm_shuffle_ps(v48, v47, 68);
+            v53 = _mm_shuffle_ps(v51, v50, 68);
+            v54 = _mm_add_ps(
+                    _mm_shuffle_ps(v49, _mm_shuffle_ps(v51, v50, 238), 136),
+                    _mm_add_ps(_mm_shuffle_ps(v52, v53, 221), _mm_shuffle_ps(v52, v53, 136)));
+            if ( fmin(_mm_shuffle_ps(v54, v54, 0).m128_f32[0], _mm_shuffle_ps(v54, v54, 85).m128_f32[0]) > fmax(_mm_shuffle_ps(v54, v54, 170).m128_f32[0], _mm_shuffle_ps(v54, v54, 255).m128_f32[0]) )
             {
               hkaiIntervalPartition::clear(&reachableAreasOut);
               hkaiTraversalAnalysisUtils::findOverLedgeReachability(
@@ -310,105 +287,103 @@ void __fastcall hkaiDropDownAnalyzer::analyze(hkaiDropDownAnalyzer *this, hkaiTr
                 &bottomRightIn,
                 &topLeftIn,
                 &topRightIn,
-                v3,
+                context,
                 &reachableAreasOut);
               hkaiIntervalPartition::clipNotDefined(&reachableAreasOut, &other);
-              v61 = reachableAreasOut.m_intervals.m_size;
+              v55 = reachableAreasOut.m_intervals.m_size;
               if ( reachableAreasOut.m_intervals.m_size )
               {
                 if ( reachableAreasOut.m_intervals.m_size > 0 )
                 {
                   do
                   {
-                    v62 = (unsigned int *)hkaiIntervalPartition::getInterval(&reachableAreasOut, v36);
-                    v63 = _mm_shuffle_ps((__m128)*v62, (__m128)*v62, 0);
-                    v64 = _mm_shuffle_ps((__m128)v62[1], (__m128)v62[1], 0);
-                    v65 = v62[3];
-                    v95 = v62[2];
-                    v97 = v62[4];
-                    v96 = v65;
-                    v66 = _mm_sub_ps(*(__m128 *)((char *)&rightInOut.m_quad + 8), leftInOut.m_quad);
-                    v67 = v66;
-                    v68 = _mm_add_ps(_mm_mul_ps(v66, v64), leftInOut.m_quad);
-                    v69 = _mm_add_ps(_mm_mul_ps(v67, v63), leftInOut.m_quad);
-                    v70 = _mm_sub_ps(v69, v68);
-                    v71 = _mm_mul_ps(v70, v70);
-                    if ( (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v71, v71, 85))
-                                       + COERCE_FLOAT(_mm_shuffle_ps(v71, v71, 0)))
-                               + COERCE_FLOAT(_mm_shuffle_ps(v71, v71, 170))) >= v44 )
+                    Interval = (unsigned int *)hkaiIntervalPartition::getInterval(&reachableAreasOut, v32);
+                    v57 = _mm_shuffle_ps((__m128)*Interval, (__m128)*Interval, 0);
+                    v58 = _mm_shuffle_ps((__m128)Interval[1], (__m128)Interval[1], 0);
+                    v59 = Interval[3];
+                    v88 = Interval[2];
+                    v90 = Interval[4];
+                    v89 = v59;
+                    v60 = _mm_sub_ps(*(__m128 *)&rightInOut[8], leftInOut.m_quad);
+                    v61 = _mm_add_ps(_mm_mul_ps(v60, v58), leftInOut.m_quad);
+                    v62 = _mm_add_ps(_mm_mul_ps(v60, v57), leftInOut.m_quad);
+                    v63 = _mm_sub_ps(v62, v61);
+                    v64 = _mm_mul_ps(v63, v63);
+                    if ( (float)((float)(_mm_shuffle_ps(v64, v64, 85).m128_f32[0]
+                                       + _mm_shuffle_ps(v64, v64, 0).m128_f32[0])
+                               + _mm_shuffle_ps(v64, v64, 170).m128_f32[0]) >= v40 )
                     {
-                      v72 = _mm_sub_ps(rightEnd.m_quad, rightInOut.m_quad);
-                      v73 = _mm_add_ps(_mm_mul_ps(v72, v64), rightInOut.m_quad);
-                      v74 = _mm_add_ps(_mm_mul_ps(v72, v63), rightInOut.m_quad);
+                      v65 = _mm_sub_ps(rightEnd.m_quad, *(__m128 *)rightInOut);
+                      v66 = _mm_add_ps(_mm_mul_ps(v65, v58), *(__m128 *)rightInOut);
+                      v67 = _mm_add_ps(_mm_mul_ps(v65, v57), *(__m128 *)rightInOut);
                       hkaiUserEdgeUtils::UserEdgePair::UserEdgePair(&userEdgePair);
-                      v75 = v3->m_fromNavMeshInstance;
-                      v76 = v2->m_userdata;
-                      v77 = _mm_shuffle_ps(v69, v68, 68);
-                      v78 = _mm_shuffle_ps(v73, v74, 68);
-                      userEdgePair.m_x.m_quad = _mm_shuffle_ps(v77, v78, 136);
-                      v79 = v2->m_baseCost;
-                      userEdgePair.m_y.m_quad = _mm_shuffle_ps(v77, v78, 221);
+                      v68 = context->m_fromNavMeshInstance;
+                      m_userdata = this->m_userdata;
+                      v70 = _mm_shuffle_ps(v62, v61, 68);
+                      v71 = _mm_shuffle_ps(v66, v67, 68);
+                      userEdgePair.m_x.m_quad = _mm_shuffle_ps(v70, v71, 136);
+                      m_baseCost = this->m_baseCost;
+                      userEdgePair.m_y.m_quad = _mm_shuffle_ps(v70, v71, 221);
                       userEdgePair.m_z.m_quad = _mm_shuffle_ps(
-                                                  _mm_shuffle_ps(v69, v68, 238),
-                                                  _mm_shuffle_ps(v73, v74, 238),
+                                                  _mm_shuffle_ps(v62, v61, 238),
+                                                  _mm_shuffle_ps(v66, v67, 238),
                                                   136);
-                      v80 = v75->m_sectionUid;
-                      v81 = v3->m_toNavMeshInstance;
-                      userEdgePair.m_instanceUidA = v80;
-                      v82 = v81->m_sectionUid;
-                      retaddr = v79 * 1.0039062;
-                      userEdgePair.m_faceA = v48[v47].m_startFace;
-                      LODWORD(v81) = v48[v47].m_endFace;
-                      userEdgePair.m_instanceUidB = v82;
-                      v83 = v3->m_outputLibrary;
-                      userEdgePair.m_faceB = (signed int)v81;
+                      m_sectionUid = v68->m_sectionUid;
+                      m_toNavMeshInstance = context->m_toNavMeshInstance;
+                      userEdgePair.m_instanceUidA = m_sectionUid;
+                      v75 = m_toNavMeshInstance->m_sectionUid;
+                      *(float *)&retaddr = m_baseCost * 1.0039062;
+                      userEdgePair.m_faceA = m_data[v43].m_startFace;
+                      LODWORD(m_toNavMeshInstance) = m_data[v43].m_endFace;
+                      userEdgePair.m_instanceUidB = v75;
+                      m_outputLibrary = context->m_outputLibrary;
+                      userEdgePair.m_faceB = (int)m_toNavMeshInstance;
                       userEdgePair.m_direction.m_storage = 1;
                       userEdgePair.m_costBtoA.m_value = 0;
-                      userEdgePair.m_costAtoB.m_value = HIWORD(retaddr);
+                      userEdgePair.m_costAtoB.m_value = WORD1(retaddr);
                       hkaiTraversalAnnotationLibrary::addAnnotation(
-                        v83,
+                        m_outputLibrary,
                         &userEdgePair,
                         HKAI_TRAVERSAL_TYPE_DROP_DOWN,
-                        v76);
+                        m_userdata);
                     }
-                    ++v36;
+                    ++v32;
                   }
-                  while ( v36 < v61 );
-                  v46 = v103;
+                  while ( v32 < v55 );
+                  m_size = v96;
                 }
-                v36 = 0;
+                v32 = 0;
               }
             }
           }
         }
       }
-      ++v47;
-      v103 = --v46;
+      ++v43;
+      v96 = --m_size;
     }
-    while ( v46 );
+    while ( m_size );
   }
   reachableAreasOut.m_intervals.m_size = 0;
   if ( reachableAreasOut.m_intervals.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       reachableAreasOut.m_intervals.m_data,
       20 * (reachableAreasOut.m_intervals.m_capacityAndFlags & 0x3FFFFFFF));
   reachableAreasOut.m_intervals.m_data = 0i64;
-  reachableAreasOut.m_intervals.m_capacityAndFlags = 2147483648;
+  reachableAreasOut.m_intervals.m_capacityAndFlags = 0x80000000;
   other.m_intervals.m_size = 0;
   if ( other.m_intervals.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       other.m_intervals.m_data,
       20 * (other.m_intervals.m_capacityAndFlags & 0x3FFFFFFF));
   other.m_intervals.m_data = 0i64;
   pairsOut.m_size = 0;
-  other.m_intervals.m_capacityAndFlags = 2147483648;
+  other.m_intervals.m_capacityAndFlags = 0x80000000;
   if ( pairsOut.m_capacityAndFlags >= 0 )
     hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
+      &hkContainerTempAllocator::s_alloc,
       pairsOut.m_data,
       80 * (pairsOut.m_capacityAndFlags & 0x3FFFFFFF));
-}er.m_intervals.m_capacityAndFlags & 0x3FFFFFFF));
-
+}
 

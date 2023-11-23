@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkBitFieldClass__()
     0i64,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 51
@@ -35,27 +35,22 @@ void __fastcall finishLoadedObjecthkBitField(void *p, int finishing)
 
 // File Line: 64
 // RVA: 0xC54A40
-void __fastcall cleanupLoadedObjecthkBitField(void *p)
+void __fastcall cleanupLoadedObjecthkBitField(_DWORD *p)
 {
-  int v1; // er8
-  _DWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      *(void **)p,
-      4 * v1);
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, *(void **)p, 4 * v1);
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 
@@ -96,27 +91,22 @@ void __fastcall finishLoadedObjecthkOffsetBitField(void *p, int finishing)
 
 // File Line: 114
 // RVA: 0xC54AC0
-void __fastcall cleanupLoadedObjecthkOffsetBitField(void *p)
+void __fastcall cleanupLoadedObjecthkOffsetBitField(_DWORD *p)
 {
-  int v1; // er8
-  _DWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      *(void **)p,
-      4 * v1);
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, *(void **)p, 4 * v1);
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 
@@ -150,27 +140,22 @@ void __fastcall finishLoadedObjecthkBitFieldStoragehkArrayunsignedinthkContainer
 
 // File Line: 167
 // RVA: 0xC54B40
-void __fastcall cleanupLoadedObjecthkBitFieldStoragehkArrayunsignedinthkContainerHeapAllocator(void *p)
+void __fastcall cleanupLoadedObjecthkBitFieldStoragehkArrayunsignedinthkContainerHeapAllocator(_DWORD *p)
 {
-  int v1; // er8
-  _DWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      *(void **)p,
-      4 * v1);
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, *(void **)p, 4 * v1);
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 
@@ -197,34 +182,31 @@ void dynamic_initializer_for__hkBitFieldBasehkBitFieldStoragehkArrayunsignedinth
 
 // File Line: 214
 // RVA: 0xC54BB0
-void __fastcall finishLoadedObjecthkBitFieldBasehkBitFieldStoragehkArrayunsignedinthkContainerHeapAllocator(void *p, int finishing)
+void __fastcall finishLoadedObjecthkBitFieldBasehkBitFieldStoragehkArrayunsignedinthkContainerHeapAllocator(
+        void *p,
+        int finishing)
 {
   ;
 }
 
 // File Line: 220
 // RVA: 0xC54BC0
-void __fastcall cleanupLoadedObjecthkBitFieldBasehkBitFieldStoragehkArrayunsignedinthkContainerHeapAllocator(void *p)
+void __fastcall cleanupLoadedObjecthkBitFieldBasehkBitFieldStoragehkArrayunsignedinthkContainerHeapAllocator(_DWORD *p)
 {
-  int v1; // er8
-  _DWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      *(void **)p,
-      4 * v1);
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, *(void **)p, 4 * v1);
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 
@@ -251,34 +233,31 @@ void dynamic_initializer_for__hkOffsetBitFieldStoragehkArrayunsignedinthkContain
 
 // File Line: 267
 // RVA: 0xC54C30
-void __fastcall finishLoadedObjecthkOffsetBitFieldStoragehkArrayunsignedinthkContainerHeapAllocator(void *p, int finishing)
+void __fastcall finishLoadedObjecthkOffsetBitFieldStoragehkArrayunsignedinthkContainerHeapAllocator(
+        void *p,
+        int finishing)
 {
   ;
 }
 
 // File Line: 273
 // RVA: 0xC54C40
-void __fastcall cleanupLoadedObjecthkOffsetBitFieldStoragehkArrayunsignedinthkContainerHeapAllocator(void *p)
+void __fastcall cleanupLoadedObjecthkOffsetBitFieldStoragehkArrayunsignedinthkContainerHeapAllocator(_DWORD *p)
 {
-  int v1; // er8
-  _DWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      *(void **)p,
-      4 * v1);
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, *(void **)p, 4 * v1);
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 
@@ -305,34 +284,32 @@ void dynamic_initializer_for__hkBitFieldBasehkOffsetBitFieldStoragehkArrayunsign
 
 // File Line: 320
 // RVA: 0xC54CB0
-void __fastcall finishLoadedObjecthkBitFieldBasehkOffsetBitFieldStoragehkArrayunsignedinthkContainerHeapAllocator(void *p, int finishing)
+void __fastcall finishLoadedObjecthkBitFieldBasehkOffsetBitFieldStoragehkArrayunsignedinthkContainerHeapAllocator(
+        void *p,
+        int finishing)
 {
   ;
 }
 
 // File Line: 326
 // RVA: 0xC54CC0
-void __fastcall cleanupLoadedObjecthkBitFieldBasehkOffsetBitFieldStoragehkArrayunsignedinthkContainerHeapAllocator(void *p)
+void __fastcall cleanupLoadedObjecthkBitFieldBasehkOffsetBitFieldStoragehkArrayunsignedinthkContainerHeapAllocator(
+        _DWORD *p)
 {
-  int v1; // er8
-  _DWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      *(void **)p,
-      4 * v1);
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, *(void **)p, 4 * v1);
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 

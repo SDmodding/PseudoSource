@@ -2,7 +2,7 @@
 // RVA: 0x14672F0
 __int64 dynamic_initializer_for__SyncedVehicleComponent::s_SyncedVehicleComponentList__()
 {
-  return atexit(dynamic_atexit_destructor_for__SyncedVehicleComponent::s_SyncedVehicleComponentList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__SyncedVehicleComponent::s_SyncedVehicleComponentList__);
 }
 
 // File Line: 54

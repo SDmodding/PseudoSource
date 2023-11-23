@@ -6,7 +6,7 @@ __int64 UFG::_dynamic_initializer_for__player_is_escaping_by_vehicle_speed_thres
 
   v0 = UFG::qStringHash32("player_is_escaping_by_vehicle_speed_threshold", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&player_is_escaping_by_vehicle_speed_threshold, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__player_is_escaping_by_vehicle_speed_threshold__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__player_is_escaping_by_vehicle_speed_threshold__);
 }
 
 // File Line: 5
@@ -17,7 +17,7 @@ __int64 UFG::_dynamic_initializer_for__surrender_vehicle_min_distance__()
 
   v0 = UFG::qStringHash32("surrender_vehicle_min_distance", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&surrender_vehicle_min_distance, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__surrender_vehicle_min_distance__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__surrender_vehicle_min_distance__);
 }
 
 // File Line: 6
@@ -28,7 +28,7 @@ __int64 UFG::_dynamic_initializer_for__surrender_vehicle_max_distance__()
 
   v0 = UFG::qStringHash32("surrender_vehicle_max_distance", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&surrender_vehicle_max_distance, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__surrender_vehicle_max_distance__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__surrender_vehicle_max_distance__);
 }
 
 // File Line: 7
@@ -39,7 +39,7 @@ __int64 UFG::_dynamic_initializer_for__vehicle_pursuit_min_time__()
 
   v0 = UFG::qStringHash32("vehicle_pursuit_min_time", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&vehicle_pursuit_min_time, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__vehicle_pursuit_min_time__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__vehicle_pursuit_min_time__);
 }
 
 // File Line: 8
@@ -50,7 +50,7 @@ __int64 UFG::_dynamic_initializer_for__vehicle_pursuit_max_time__()
 
   v0 = UFG::qStringHash32("vehicle_pursuit_max_time", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&vehicle_pursuit_max_time, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__vehicle_pursuit_max_time__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__vehicle_pursuit_max_time__);
 }
 
 // File Line: 9
@@ -61,7 +61,7 @@ __int64 UFG::_dynamic_initializer_for__scanner_min_time__()
 
   v0 = UFG::qStringHash32("scanner_min_time", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&scanner_min_time, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__scanner_min_time__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__scanner_min_time__);
 }
 
 // File Line: 10
@@ -72,7 +72,7 @@ __int64 UFG::_dynamic_initializer_for__scanner_max_time__()
 
   v0 = UFG::qStringHash32("scanner_max_time", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&scanner_max_time, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__scanner_max_time__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__scanner_max_time__);
 }
 
 // File Line: 11
@@ -83,7 +83,7 @@ __int64 UFG::_dynamic_initializer_for__chance_pursuit_is_from_scanner__()
 
   v0 = UFG::qStringHash32("chance_pursuit_is_from_scanner", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&chance_pursuit_is_from_scanner, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__chance_pursuit_is_from_scanner__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__chance_pursuit_is_from_scanner__);
 }
 
 // File Line: 14
@@ -95,65 +95,55 @@ float __fastcall UFG::RandomMinMax(float min, float max)
   v2 = min;
   if ( min >= max )
     v2 = max;
-  return UFG::qRandom(max - v2, &UFG::qDefaultSeed) + v2;
+  return UFG::qRandom(max - v2, (unsigned int *)&UFG::qDefaultSeed) + v2;
 }
 
 // File Line: 26
 // RVA: 0x3EEE20
-void __fastcall UFG::CopSystem::HandleHeatLevelChangeAudio(UFG::CopSystem *this, UFG::HeatLevelEnum oldHeatLevel, UFG::HeatLevelEnum newHeatLevel)
+void __fastcall UFG::CopSystem::HandleHeatLevelChangeAudio(
+        UFG::CopSystem *this,
+        signed int oldHeatLevel,
+        signed int newHeatLevel)
 {
-  UFG::HeatLevelEnum v3; // ebx
-  unsigned __int16 v4; // dx
+  signed __int16 m_Flags; // dx
   UFG::ActorAudioComponent *v5; // rax
   const char *v6; // r8
-  float outDistanceToPlayer; // [rsp+58h] [rbp+10h]
-  UFG::SimObject *outClosestCop; // [rsp+68h] [rbp+20h]
+  float outDistanceToPlayer; // [rsp+58h] [rbp+10h] BYREF
+  UFG::SimObject *outClosestCop; // [rsp+68h] [rbp+20h] BYREF
 
   if ( newHeatLevel > oldHeatLevel )
   {
-    v3 = newHeatLevel;
     if ( this->mFocusTargetContext.mIsOnFootRaw )
     {
       outClosestCop = 0i64;
       UFG::CopSystem::FindClosestHumanCopForAudio(this, &outClosestCop, &outDistanceToPlayer);
       if ( outClosestCop )
       {
-        v4 = outClosestCop->m_Flags;
-        if ( (v4 >> 14) & 1 )
-        {
+        m_Flags = outClosestCop->m_Flags;
+        if ( (m_Flags & 0x4000) != 0 )
           v5 = UFG::SimObjectCharacter::GetComponent<UFG::ActorAudioComponent>((UFG::SimObjectCharacter *)outClosestCop);
-        }
-        else if ( (v4 & 0x8000u) == 0 )
-        {
-          if ( (v4 >> 13) & 1 )
-            v5 = (UFG::ActorAudioComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                               (UFG::SimObjectGame *)outClosestCop,
-                                               UFG::ActorAudioComponent::_TypeUID);
-          else
-            v5 = (UFG::ActorAudioComponent *)((v4 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                 (UFG::SimObjectGame *)outClosestCop,
-                                                                 UFG::ActorAudioComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(outClosestCop, UFG::ActorAudioComponent::_TypeUID));
-        }
         else
-        {
-          v5 = (UFG::ActorAudioComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                             (UFG::SimObjectGame *)outClosestCop,
-                                             UFG::ActorAudioComponent::_TypeUID);
-        }
+          v5 = (UFG::ActorAudioComponent *)(m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+                                          ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                              (UFG::SimObjectGame *)outClosestCop,
+                                              UFG::ActorAudioComponent::_TypeUID)
+                                          : UFG::SimObject::GetComponentOfType(
+                                              outClosestCop,
+                                              UFG::ActorAudioComponent::_TypeUID));
         if ( v5 )
         {
-          if ( v3 == 1 || v3 == 2 )
+          if ( newHeatLevel == 1 || newHeatLevel == 2 )
           {
             v6 = "police_heat";
           }
-          else if ( v3 == 3 )
+          else if ( newHeatLevel == 3 )
           {
             v6 = "police_heat_3";
           }
           else
           {
             v6 = "police_heat_4";
-            if ( v3 != 4 && v3 != 5 )
+            if ( newHeatLevel != 4 && newHeatLevel != 5 )
               v6 = 0i64;
           }
           UFG::ActorAudioComponent::QueueSpeechExternalAmbient(
@@ -176,120 +166,105 @@ void __fastcall UFG::CopSystem::HandleHeatLevelChangeAudio(UFG::CopSystem *this,
 
 // File Line: 83
 // RVA: 0x3ED1C0
-void __fastcall UFG::CopSystem::FindClosestHumanCopForAudio(UFG::CopSystem *this, UFG::SimObject **outClosestCop, float *outDistanceToPlayer)
+void __fastcall UFG::CopSystem::FindClosestHumanCopForAudio(
+        UFG::CopSystem *this,
+        UFG::SimObject **outClosestCop,
+        float *outDistanceToPlayer)
 {
-  float *v3; // r15
-  UFG::SimObject **v4; // r12
-  UFG::CopSystem *v5; // rsi
   UFG::SimObject *v6; // r14
   unsigned int v7; // ebx
-  float v8; // xmm6_4
-  UFG::SimObject *v9; // rdi
-  float *v10; // rbp
+  float i; // xmm6_4
+  UFG::SimObject *m_pSimObject; // rdi
+  float *m_pTransformNodeComponent; // rbp
 
-  v3 = outDistanceToPlayer;
-  v4 = outClosestCop;
-  v5 = this;
-  if ( ((__int64 (*)(void))this->vfptr[18].__vecDelDtor)() )
+  if ( ((__int64 (__fastcall *)(UFG::CopSystem *))this->vfptr[18].__vecDelDtor)(this) )
   {
     v6 = 0i64;
     v7 = 0;
-    v8 = FLOAT_100000_0;
-    if ( v5->mHumans.size )
+    for ( i = FLOAT_100000_0; v7 < this->mHumans.size; ++v7 )
     {
-      do
+      m_pSimObject = this->mHumans.p[v7]->m_pSimObject;
+      if ( m_pSimObject )
       {
-        v9 = v5->mHumans.p[v7]->m_pSimObject;
-        if ( v9 )
+        m_pTransformNodeComponent = (float *)m_pSimObject->m_pTransformNodeComponent;
+        if ( m_pTransformNodeComponent )
         {
-          v10 = (float *)v9->m_pTransformNodeComponent;
-          if ( v10 )
+          UFG::TransformNodeComponent::UpdateWorldTransform(m_pSimObject->m_pTransformNodeComponent);
+          if ( (float)((float)((float)((float)(m_pTransformNodeComponent[45] - this->mFocusTargetPosition.y)
+                                     * (float)(m_pTransformNodeComponent[45] - this->mFocusTargetPosition.y))
+                             + (float)((float)(m_pTransformNodeComponent[44] - this->mFocusTargetPosition.x)
+                                     * (float)(m_pTransformNodeComponent[44] - this->mFocusTargetPosition.x)))
+                     + (float)((float)(m_pTransformNodeComponent[46] - this->mFocusTargetPosition.z)
+                             * (float)(m_pTransformNodeComponent[46] - this->mFocusTargetPosition.z))) < i )
           {
-            UFG::TransformNodeComponent::UpdateWorldTransform(v9->m_pTransformNodeComponent);
-            if ( (float)((float)((float)((float)(v10[45] - v5->mFocusTargetPosition.y)
-                                       * (float)(v10[45] - v5->mFocusTargetPosition.y))
-                               + (float)((float)(v10[44] - v5->mFocusTargetPosition.x)
-                                       * (float)(v10[44] - v5->mFocusTargetPosition.x)))
-                       + (float)((float)(v10[46] - v5->mFocusTargetPosition.z)
-                               * (float)(v10[46] - v5->mFocusTargetPosition.z))) < v8 )
-            {
-              v6 = v9;
-              v8 = (float)((float)((float)(v10[45] - v5->mFocusTargetPosition.y)
-                                 * (float)(v10[45] - v5->mFocusTargetPosition.y))
-                         + (float)((float)(v10[44] - v5->mFocusTargetPosition.x)
-                                 * (float)(v10[44] - v5->mFocusTargetPosition.x)))
-                 + (float)((float)(v10[46] - v5->mFocusTargetPosition.z) * (float)(v10[46] - v5->mFocusTargetPosition.z));
-            }
+            v6 = m_pSimObject;
+            i = (float)((float)((float)(m_pTransformNodeComponent[45] - this->mFocusTargetPosition.y)
+                              * (float)(m_pTransformNodeComponent[45] - this->mFocusTargetPosition.y))
+                      + (float)((float)(m_pTransformNodeComponent[44] - this->mFocusTargetPosition.x)
+                              * (float)(m_pTransformNodeComponent[44] - this->mFocusTargetPosition.x)))
+              + (float)((float)(m_pTransformNodeComponent[46] - this->mFocusTargetPosition.z)
+                      * (float)(m_pTransformNodeComponent[46] - this->mFocusTargetPosition.z));
           }
         }
-        ++v7;
       }
-      while ( v7 < v5->mHumans.size );
     }
-    if ( v4 )
-      *v4 = v6;
-    if ( v3 )
-      *v3 = v8;
+    if ( outClosestCop )
+      *outClosestCop = v6;
+    if ( outDistanceToPlayer )
+      *outDistanceToPlayer = i;
   }
 }
 
 // File Line: 121
 // RVA: 0x3ED2E0
-void __fastcall UFG::CopSystem::FindClosestVehicleCopForAudio(UFG::CopSystem *this, UFG::SimObject **outClosestCop, float *outDistanceToPlayer)
+void __fastcall UFG::CopSystem::FindClosestVehicleCopForAudio(
+        UFG::CopSystem *this,
+        UFG::SimObject **outClosestCop,
+        float *outDistanceToPlayer)
 {
-  float *v3; // r15
-  UFG::SimObject **v4; // r12
-  UFG::CopSystem *v5; // rsi
   UFG::SimObject *v6; // r14
   unsigned int v7; // ebx
-  float v8; // xmm6_4
-  UFG::SimObject *v9; // rdi
-  float *v10; // rbp
+  float i; // xmm6_4
+  UFG::SimObject *m_pSimObject; // rdi
+  float *m_pTransformNodeComponent; // rbp
   float v11; // xmm2_4
 
-  v3 = outDistanceToPlayer;
-  v4 = outClosestCop;
-  v5 = this;
-  if ( ((__int64 (*)(void))this->vfptr[18].__vecDelDtor)() )
+  if ( ((__int64 (__fastcall *)(UFG::CopSystem *))this->vfptr[18].__vecDelDtor)(this) )
   {
     v6 = 0i64;
     v7 = 0;
-    v8 = FLOAT_100000_0;
-    if ( v5->mVehicles.size )
+    for ( i = FLOAT_100000_0; v7 < this->mVehicles.size; ++v7 )
     {
-      do
+      m_pSimObject = this->mVehicles.p[v7]->m_pSimObject;
+      if ( m_pSimObject )
       {
-        v9 = v5->mVehicles.p[v7]->m_pSimObject;
-        if ( v9 )
+        m_pTransformNodeComponent = (float *)m_pSimObject->m_pTransformNodeComponent;
+        if ( m_pTransformNodeComponent )
         {
-          v10 = (float *)v9->m_pTransformNodeComponent;
-          if ( v10 )
+          UFG::TransformNodeComponent::UpdateWorldTransform(m_pSimObject->m_pTransformNodeComponent);
+          v11 = (float)((float)((float)(m_pTransformNodeComponent[45] - this->mFocusTargetPosition.y)
+                              * (float)(m_pTransformNodeComponent[45] - this->mFocusTargetPosition.y))
+                      + (float)((float)(m_pTransformNodeComponent[44] - this->mFocusTargetPosition.x)
+                              * (float)(m_pTransformNodeComponent[44] - this->mFocusTargetPosition.x)))
+              + (float)((float)(m_pTransformNodeComponent[46] - this->mFocusTargetPosition.z)
+                      * (float)(m_pTransformNodeComponent[46] - this->mFocusTargetPosition.z));
+          if ( v11 < i && v11 > 1.0 )
           {
-            UFG::TransformNodeComponent::UpdateWorldTransform(v9->m_pTransformNodeComponent);
-            v11 = (float)((float)((float)(v10[45] - v5->mFocusTargetPosition.y)
-                                * (float)(v10[45] - v5->mFocusTargetPosition.y))
-                        + (float)((float)(v10[44] - v5->mFocusTargetPosition.x)
-                                * (float)(v10[44] - v5->mFocusTargetPosition.x)))
-                + (float)((float)(v10[46] - v5->mFocusTargetPosition.z) * (float)(v10[46] - v5->mFocusTargetPosition.z));
-            if ( v11 < v8 && v11 > 1.0 )
-            {
-              v6 = v9;
-              v8 = (float)((float)((float)(v10[45] - v5->mFocusTargetPosition.y)
-                                 * (float)(v10[45] - v5->mFocusTargetPosition.y))
-                         + (float)((float)(v10[44] - v5->mFocusTargetPosition.x)
-                                 * (float)(v10[44] - v5->mFocusTargetPosition.x)))
-                 + (float)((float)(v10[46] - v5->mFocusTargetPosition.z) * (float)(v10[46] - v5->mFocusTargetPosition.z));
-            }
+            v6 = m_pSimObject;
+            i = (float)((float)((float)(m_pTransformNodeComponent[45] - this->mFocusTargetPosition.y)
+                              * (float)(m_pTransformNodeComponent[45] - this->mFocusTargetPosition.y))
+                      + (float)((float)(m_pTransformNodeComponent[44] - this->mFocusTargetPosition.x)
+                              * (float)(m_pTransformNodeComponent[44] - this->mFocusTargetPosition.x)))
+              + (float)((float)(m_pTransformNodeComponent[46] - this->mFocusTargetPosition.z)
+                      * (float)(m_pTransformNodeComponent[46] - this->mFocusTargetPosition.z));
           }
         }
-        ++v7;
       }
-      while ( v7 < v5->mVehicles.size );
     }
-    if ( v4 )
-      *v4 = v6;
-    if ( v3 )
-      *v3 = v8;
+    if ( outClosestCop )
+      *outClosestCop = v6;
+    if ( outDistanceToPlayer )
+      *outDistanceToPlayer = i;
   }
 }
 
@@ -297,67 +272,59 @@ void __fastcall UFG::CopSystem::FindClosestVehicleCopForAudio(UFG::CopSystem *th
 // RVA: 0x3F0720
 void __fastcall UFG::CopSystem::ShutdownAudio(UFG::CopSystem *this)
 {
-  UFG::CopSystem *v1; // rbx
-
-  v1 = this;
   if ( UFG::OneShotHandle::IsValid(&this->mDistantSirens) )
-    UFG::OneShot::Stop(v1->mDistantSirens.m_pOneShot, 0x64u, 0);
-  *(_QWORD *)&v1->mAudioHeatLevel.m_currentValue = 0i64;
+    UFG::OneShot::Stop(this->mDistantSirens.m_pOneShot, 0x64u, 0);
+  *(_QWORD *)&this->mAudioHeatLevel.m_currentValue = 0i64;
 }
 
 // File Line: 170
 // RVA: 0x3F0DD0
 void __fastcall UFG::CopSystem::UpdateAudio(UFG::CopSystem *this, float deltaTime)
 {
-  float v2; // xmm7_4
-  UFG::CopSystem *v3; // rdi
-  float *v4; // rbx
-  float v5; // xmm1_4
-  float v6; // xmm2_4
+  UFG::RateLimitedFloatNoMinMax *p_mAudioHeatLevel; // rbx
+  float m_targetValue; // xmm1_4
+  float m_fallRate; // xmm2_4
   unsigned int v7; // eax
-  float v8; // xmm6_4
-  UFG::TiDo *v9; // rax
+  float m_currentValue; // xmm6_4
+  UFG::TiDo *Instance; // rax
   float v10; // xmm7_4
-  UFG::HeatLevelEnum v11; // eax
-  bool v12; // zf
-  bool v13; // sf
-  float *v14; // rbx
-  float *v15; // rax
-  float v16; // xmm6_4
+  UFG::HeatLevelEnum mHeatLevel; // eax
+  bool v12; // cc
+  float *v13; // rbx
+  float *v14; // rax
+  float v15; // xmm6_4
+  float *v16; // rbx
   float *v17; // rbx
-  float *v18; // rbx
-  float *v19; // rax
-  float v20; // xmm0_4
-  float *v21; // rbp
-  float *v22; // r14
-  __int64 v23; // rax
-  __int64 v24; // rbx
-  __m128 v25; // xmm6
-  unsigned __int16 v26; // dx
-  UFG::SimComponent *v27; // rax
-  UFG::SimComponent *v28; // rbx
-  UFG::SimObjectCharacter *v29; // rax
-  unsigned __int16 v30; // dx
-  UFG::ActorAudioComponent *v31; // rax
-  float *v32; // rbx
-  float *v33; // rax
-  UFG::SimObject *outClosestCop; // [rsp+A0h] [rbp+8h]
-  float outDistanceToPlayer; // [rsp+A8h] [rbp+10h]
+  float *v18; // rax
+  float v19; // xmm0_4
+  float *v20; // rbp
+  float *v21; // r14
+  __int64 v22; // rax
+  __int64 v23; // rbx
+  __m128 v24; // xmm6
+  signed __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rbx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
+  UFG::SimObjectCharacter *Texture; // rax
+  __int16 v29; // dx
+  UFG::ActorAudioComponent *ComponentOfType; // rax
+  float *v31; // rbx
+  float *v32; // rax
+  UFG::SimObject *outClosestCop; // [rsp+A0h] [rbp+8h] BYREF
+  float outDistanceToPlayer; // [rsp+A8h] [rbp+10h] BYREF
 
-  v2 = deltaTime;
-  v3 = this;
   this->mAudioHeatLevel.m_riseRate = 3.0;
   this->mAudioHeatLevel.m_fallRate = 3.0;
-  this->mAudioHeatLevel.m_targetValue = (float)(signed int)this->mHeatLevel;
-  v4 = &this->mAudioHeatLevel.m_currentValue;
-  v5 = this->mAudioHeatLevel.m_targetValue;
-  if ( v5 < this->mAudioHeatLevel.m_currentValue )
-    v6 = this->mAudioHeatLevel.m_fallRate;
+  this->mAudioHeatLevel.m_targetValue = (float)this->mHeatLevel;
+  p_mAudioHeatLevel = &this->mAudioHeatLevel;
+  m_targetValue = this->mAudioHeatLevel.m_targetValue;
+  if ( m_targetValue < this->mAudioHeatLevel.m_currentValue )
+    m_fallRate = this->mAudioHeatLevel.m_fallRate;
   else
-    v6 = this->mAudioHeatLevel.m_riseRate;
-  UFG::qApproach(&this->mAudioHeatLevel.m_currentValue, v5, v6, v2);
+    m_fallRate = this->mAudioHeatLevel.m_riseRate;
+  UFG::qApproach(&this->mAudioHeatLevel.m_currentValue, m_targetValue, m_fallRate, deltaTime);
   v7 = _S7_9;
-  if ( !(_S7_9 & 1) )
+  if ( (_S7_9 & 1) == 0 )
   {
     _S7_9 |= 1u;
     heat_level.mUID = UFG::qWiseSymbolUIDFromString("heat_level", 0x811C9DC5);
@@ -365,200 +332,185 @@ void __fastcall UFG::CopSystem::UpdateAudio(UFG::CopSystem *this, float deltaTim
     atexit(UFG::CopSystem::UpdateAudio_::_2_::_dynamic_atexit_destructor_for__heat_level__);
     v7 = _S7_9;
   }
-  if ( !(v7 & 2) )
+  if ( (v7 & 2) == 0 )
   {
     _S7_9 = v7 | 2;
     play_distant_sirens.mUID = UFG::qWiseSymbolUIDFromString("play_distant_sirens", 0x811C9DC5);
     _((AMD_HD3D *)play_distant_sirens.mUID);
     atexit(UFG::CopSystem::UpdateAudio_::_2_::_dynamic_atexit_destructor_for__play_distant_sirens__);
   }
-  if ( *v4 != last_heat_level )
+  if ( p_mAudioHeatLevel->m_currentValue != last_heat_level )
   {
-    if ( *v4 >= 1.0 && !UFG::OneShotHandle::IsValid(&v3->mDistantSirens) )
+    if ( p_mAudioHeatLevel->m_currentValue >= 1.0 && !UFG::OneShotHandle::IsValid(&this->mDistantSirens) )
     {
-      UFG::OneShotPool::GetOneShotHandle(&v3->mDistantSirens, &UFG::qMatrix44::msIdentity);
-      if ( UFG::OneShotHandle::IsValid(&v3->mDistantSirens) )
-        UFG::OneShot::Play(v3->mDistantSirens.m_pOneShot, play_distant_sirens.mUID);
+      UFG::OneShotPool::GetOneShotHandle(&this->mDistantSirens, &UFG::qMatrix44::msIdentity);
+      if ( UFG::OneShotHandle::IsValid(&this->mDistantSirens) )
+        UFG::OneShot::Play(this->mDistantSirens.m_pOneShot, play_distant_sirens.mUID);
     }
-    if ( *v4 < 1.0 && UFG::OneShotHandle::IsValid(&v3->mDistantSirens) )
-      UFG::OneShotHandle::StopAndRelease(&v3->mDistantSirens);
-    v8 = *v4;
-    v9 = UFG::TiDo::GetInstance();
-    UFG::TiDo::SetWwiseRtpcValue(v9, heat_level.mUID, v8, 0xFFFFFFFFFFFFFFFFui64);
-    last_heat_level = *v4;
+    if ( p_mAudioHeatLevel->m_currentValue < 1.0 && UFG::OneShotHandle::IsValid(&this->mDistantSirens) )
+      UFG::OneShotHandle::StopAndRelease(&this->mDistantSirens);
+    m_currentValue = p_mAudioHeatLevel->m_currentValue;
+    Instance = UFG::TiDo::GetInstance();
+    UFG::TiDo::SetWwiseRtpcValue(Instance, heat_level.mUID, m_currentValue, 0xFFFFFFFFFFFFFFFFui64);
+    last_heat_level = p_mAudioHeatLevel->m_currentValue;
   }
-  v10 = v2 + v3->mAudioTimer;
-  v3->mAudioTimer = v10;
+  v10 = deltaTime + this->mAudioTimer;
+  this->mAudioTimer = v10;
   if ( !unk_14242F240 )
-    goto LABEL_28;
-  v11 = v3->mHeatLevel;
-  v12 = v11 == 0;
-  v13 = (signed int)v11 < 0;
-  if ( v11 )
   {
-LABEL_24:
-    if ( !v13 && !v12 && v10 > v3->mAudioPursuitDelay )
-    {
-      v17 = UFG::qPropertySet::Get<float>(
-              v3->mCopAudioConfig,
-              (UFG::qSymbol *)&chance_pursuit_is_from_scanner.mUID,
-              DEPTH_RECURSE);
-      if ( UFG::qRandom(1.0, &UFG::qDefaultSeed) < *v17 )
-      {
-        UFG::PoliceScannerAudio::PlayScenario(&UFG::PoliceScannerAudio::sm_Instance, "Chase");
-        v18 = UFG::qPropertySet::Get<float>(
-                v3->mCopAudioConfig,
-                (UFG::qSymbol *)&vehicle_pursuit_min_time.mUID,
-                DEPTH_RECURSE);
-        v19 = UFG::qPropertySet::Get<float>(
-                v3->mCopAudioConfig,
-                (UFG::qSymbol *)&vehicle_pursuit_max_time.mUID,
-                DEPTH_RECURSE);
-        v20 = UFG::RandomMinMax(*v18, *v19);
-        v3->mAudioTimer = 0.0;
-LABEL_62:
-        v3->mAudioPursuitDelay = v20;
-        return;
-      }
-    }
 LABEL_28:
-    if ( v3->mHeatLevel == HEATLEVEL_NONE )
+    if ( this->mHeatLevel == HEATLEVEL_NONE )
       return;
-    if ( v3->mAudioPursuitDelay > v3->mAudioTimer )
+    if ( this->mAudioPursuitDelay > this->mAudioTimer )
       return;
-    if ( v3->mVehicles.size < 1 )
+    if ( !this->mVehicles.size )
       return;
+    v20 = UFG::qPropertySet::Get<float>(
+            this->mCopAudioConfig,
+            (UFG::qArray<unsigned long,0> *)&surrender_vehicle_min_distance,
+            DEPTH_RECURSE);
     v21 = UFG::qPropertySet::Get<float>(
-            v3->mCopAudioConfig,
-            (UFG::qSymbol *)&surrender_vehicle_min_distance.mUID,
+            this->mCopAudioConfig,
+            (UFG::qArray<unsigned long,0> *)&surrender_vehicle_max_distance,
             DEPTH_RECURSE);
-    v22 = UFG::qPropertySet::Get<float>(
-            v3->mCopAudioConfig,
-            (UFG::qSymbol *)&surrender_vehicle_max_distance.mUID,
-            DEPTH_RECURSE);
-    v23 = ((__int64 (__fastcall *)(UFG::CopSystem *))v3->vfptr[18].__vecDelDtor)(v3);
-    if ( !v23 )
+    v22 = ((__int64 (__fastcall *)(UFG::CopSystem *))this->vfptr[18].__vecDelDtor)(this);
+    if ( !v22 )
       return;
-    v24 = *(_QWORD *)(v23 + 88);
-    UFG::TransformNodeComponent::UpdateWorldTransform(*(UFG::TransformNodeComponent **)(v23 + 88));
-    v25 = (__m128)*(unsigned int *)(v24 + 256);
-    v25.m128_f32[0] = (float)((float)(v25.m128_f32[0] * v25.m128_f32[0])
-                            + (float)(*(float *)(v24 + 260) * *(float *)(v24 + 260)))
-                    + (float)(*(float *)(v24 + 264) * *(float *)(v24 + 264));
-    if ( COERCE_FLOAT(_mm_sqrt_ps(v25)) < *UFG::qPropertySet::Get<float>(
-                                             v3->mCopAudioConfig,
-                                             (UFG::qSymbol *)&player_is_escaping_by_vehicle_speed_threshold.mUID,
-                                             DEPTH_RECURSE) )
+    v23 = *(_QWORD *)(v22 + 88);
+    UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v23);
+    v24 = (__m128)*(unsigned int *)(v23 + 256);
+    v24.m128_f32[0] = (float)((float)(v24.m128_f32[0] * v24.m128_f32[0])
+                            + (float)(*(float *)(v23 + 260) * *(float *)(v23 + 260)))
+                    + (float)(*(float *)(v23 + 264) * *(float *)(v23 + 264));
+    if ( _mm_sqrt_ps(v24).m128_f32[0] < *UFG::qPropertySet::Get<float>(
+                                           this->mCopAudioConfig,
+                                           (UFG::qArray<unsigned long,0> *)&player_is_escaping_by_vehicle_speed_threshold,
+                                           DEPTH_RECURSE) )
       return;
     outClosestCop = 0i64;
     outDistanceToPlayer = 0.0;
-    UFG::CopSystem::FindClosestVehicleCopForAudio(v3, &outClosestCop, &outDistanceToPlayer);
-    if ( outDistanceToPlayer > (float)(*v22 * *v22) || outDistanceToPlayer < (float)(*v21 * *v21) )
+    UFG::CopSystem::FindClosestVehicleCopForAudio(this, &outClosestCop, &outDistanceToPlayer);
+    if ( outDistanceToPlayer > (float)(*v21 * *v21) || outDistanceToPlayer < (float)(*v20 * *v20) )
     {
-      v20 = v3->mAudioPursuitDelay + 3.0;
-      goto LABEL_62;
+      v19 = this->mAudioPursuitDelay + 3.0;
+      goto LABEL_60;
     }
     if ( !outClosestCop )
       return;
-    v26 = outClosestCop->m_Flags;
-    if ( (v26 >> 14) & 1 )
+    m_Flags = outClosestCop->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
+      goto LABEL_42;
+    if ( m_Flags < 0 )
     {
-      v27 = UFG::SimObjectGame::GetComponentOfTypeHK(
-              (UFG::SimObjectGame *)outClosestCop,
-              UFG::VehicleOccupantComponent::_TypeUID);
+      m_pComponent = outClosestCop->m_Components.p[30].m_pComponent;
+      goto LABEL_45;
     }
+    if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+LABEL_42:
+      ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                            (UFG::SimObjectGame *)outClosestCop,
+                            UFG::VehicleOccupantComponent::_TypeUID);
     else
+      ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(outClosestCop, UFG::VehicleOccupantComponent::_TypeUID);
+    m_pComponent = ComponentOfTypeHK;
+LABEL_45:
+    if ( m_pComponent )
     {
-      if ( (v26 & 0x8000u) != 0 )
+      if ( Scaleform::Render::RBGenericImpl::RenderTarget::GetTexture((hkSimpleLocalFrame *)m_pComponent) )
       {
-        v28 = outClosestCop->m_Components.p[30].m_pComponent;
-LABEL_46:
-        if ( v28 )
+        Texture = (UFG::SimObjectCharacter *)Scaleform::Render::RBGenericImpl::RenderTarget::GetTexture((hkSimpleLocalFrame *)m_pComponent);
+        if ( Texture )
         {
-          if ( Scaleform::Render::RBGenericImpl::RenderTarget::GetTexture((hkSimpleLocalFrame *)v28) )
+          v29 = Texture->m_Flags;
+          if ( (v29 & 0x4000) != 0 )
           {
-            v29 = (UFG::SimObjectCharacter *)Scaleform::Render::RBGenericImpl::RenderTarget::GetTexture((hkSimpleLocalFrame *)v28);
-            if ( v29 )
-            {
-              v30 = v29->m_Flags;
-              if ( (v30 >> 14) & 1 )
-              {
-                v31 = UFG::SimObjectCharacter::GetComponent<UFG::ActorAudioComponent>(v29);
-              }
-              else if ( (v30 & 0x8000u) == 0 )
-              {
-                if ( (v30 >> 13) & 1 )
-                  v31 = (UFG::ActorAudioComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                      (UFG::SimObjectGame *)&v29->vfptr,
-                                                      UFG::ActorAudioComponent::_TypeUID);
-                else
-                  v31 = (UFG::ActorAudioComponent *)((v30 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                         (UFG::SimObjectGame *)&v29->vfptr,
-                                                                         UFG::ActorAudioComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v29->vfptr, UFG::ActorAudioComponent::_TypeUID));
-              }
-              else
-              {
-                v31 = (UFG::ActorAudioComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                    (UFG::SimObjectGame *)&v29->vfptr,
-                                                    UFG::ActorAudioComponent::_TypeUID);
-              }
-              if ( v31 )
-                UFG::ActorAudioComponent::QueueSpeechExternalAmbient(
-                  v31,
-                  play_police_bullhorn_9.mUID,
-                  "police_surrender_car",
-                  0i64,
-                  5u,
-                  0,
-                  0);
-            }
+            ComponentOfType = UFG::SimObjectCharacter::GetComponent<UFG::ActorAudioComponent>(Texture);
           }
+          else if ( v29 < 0 || (v29 & 0x2000) != 0 || (v29 & 0x1000) != 0 )
+          {
+            ComponentOfType = (UFG::ActorAudioComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                            Texture,
+                                                            UFG::ActorAudioComponent::_TypeUID);
+          }
+          else
+          {
+            ComponentOfType = (UFG::ActorAudioComponent *)UFG::SimObject::GetComponentOfType(
+                                                            Texture,
+                                                            UFG::ActorAudioComponent::_TypeUID);
+          }
+          if ( ComponentOfType )
+            UFG::ActorAudioComponent::QueueSpeechExternalAmbient(
+              ComponentOfType,
+              play_police_bullhorn_9.mUID,
+              "police_surrender_car",
+              0i64,
+              5u,
+              0,
+              0);
         }
-        v32 = UFG::qPropertySet::Get<float>(
-                v3->mCopAudioConfig,
-                (UFG::qSymbol *)&vehicle_pursuit_min_time.mUID,
-                DEPTH_RECURSE);
-        v33 = UFG::qPropertySet::Get<float>(
-                v3->mCopAudioConfig,
-                (UFG::qSymbol *)&vehicle_pursuit_max_time.mUID,
-                DEPTH_RECURSE);
-        v20 = UFG::RandomMinMax(*v32, *v33);
-        v3->mAudioTimer = 0.0;
-        goto LABEL_62;
-      }
-      if ( (v26 >> 13) & 1 )
-      {
-        v27 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                (UFG::SimObjectGame *)outClosestCop,
-                UFG::VehicleOccupantComponent::_TypeUID);
-      }
-      else if ( (v26 >> 12) & 1 )
-      {
-        v27 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                (UFG::SimObjectGame *)outClosestCop,
-                UFG::VehicleOccupantComponent::_TypeUID);
-      }
-      else
-      {
-        v27 = UFG::SimObject::GetComponentOfType(outClosestCop, UFG::VehicleOccupantComponent::_TypeUID);
       }
     }
-    v28 = v27;
-    goto LABEL_46;
+    v31 = UFG::qPropertySet::Get<float>(
+            this->mCopAudioConfig,
+            (UFG::qArray<unsigned long,0> *)&vehicle_pursuit_min_time,
+            DEPTH_RECURSE);
+    v32 = UFG::qPropertySet::Get<float>(
+            this->mCopAudioConfig,
+            (UFG::qArray<unsigned long,0> *)&vehicle_pursuit_max_time,
+            DEPTH_RECURSE);
+    v19 = UFG::RandomMinMax(*v31, *v32);
+    this->mAudioTimer = 0.0;
+    goto LABEL_60;
   }
-  if ( v10 <= v3->mAudioScannerDelay )
+  mHeatLevel = this->mHeatLevel;
+  v12 = mHeatLevel <= HEATLEVEL_NONE;
+  if ( mHeatLevel )
+  {
+LABEL_24:
+    if ( !v12 && v10 > this->mAudioPursuitDelay )
+    {
+      v16 = UFG::qPropertySet::Get<float>(
+              this->mCopAudioConfig,
+              (UFG::qArray<unsigned long,0> *)&chance_pursuit_is_from_scanner,
+              DEPTH_RECURSE);
+      if ( UFG::qRandom(1.0, (unsigned int *)&UFG::qDefaultSeed) < *v16 )
+      {
+        UFG::PoliceScannerAudio::PlayScenario(&UFG::PoliceScannerAudio::sm_Instance, "Chase");
+        v17 = UFG::qPropertySet::Get<float>(
+                this->mCopAudioConfig,
+                (UFG::qArray<unsigned long,0> *)&vehicle_pursuit_min_time,
+                DEPTH_RECURSE);
+        v18 = UFG::qPropertySet::Get<float>(
+                this->mCopAudioConfig,
+                (UFG::qArray<unsigned long,0> *)&vehicle_pursuit_max_time,
+                DEPTH_RECURSE);
+        v19 = UFG::RandomMinMax(*v17, *v18);
+        this->mAudioTimer = 0.0;
+LABEL_60:
+        this->mAudioPursuitDelay = v19;
+        return;
+      }
+    }
+    goto LABEL_28;
+  }
+  if ( v10 <= this->mAudioScannerDelay )
   {
     v12 = 1;
-    v13 = 0;
     goto LABEL_24;
   }
   UFG::PoliceScannerAudio::PlayScenario(&UFG::PoliceScannerAudio::sm_Instance, "Ambient_Chatter");
-  v14 = UFG::qPropertySet::Get<float>(v3->mCopAudioConfig, (UFG::qSymbol *)&scanner_min_time.mUID, DEPTH_RECURSE);
-  v15 = UFG::qPropertySet::Get<float>(v3->mCopAudioConfig, (UFG::qSymbol *)&scanner_max_time.mUID, DEPTH_RECURSE);
-  v16 = *v14;
-  if ( *v14 >= *v15 )
-    v16 = *v15;
-  v3->mAudioScannerDelay = UFG::qRandom(*v15 - v16, &UFG::qDefaultSeed) + v16;
-  v3->mAudioTimer = 0.0;
+  v13 = UFG::qPropertySet::Get<float>(
+          this->mCopAudioConfig,
+          (UFG::qArray<unsigned long,0> *)&scanner_min_time,
+          DEPTH_RECURSE);
+  v14 = UFG::qPropertySet::Get<float>(
+          this->mCopAudioConfig,
+          (UFG::qArray<unsigned long,0> *)&scanner_max_time,
+          DEPTH_RECURSE);
+  v15 = *v13;
+  if ( *v13 >= *v14 )
+    v15 = *v14;
+  this->mAudioScannerDelay = UFG::qRandom(*v14 - v15, (unsigned int *)&UFG::qDefaultSeed) + v15;
+  this->mAudioTimer = 0.0;
 }
 

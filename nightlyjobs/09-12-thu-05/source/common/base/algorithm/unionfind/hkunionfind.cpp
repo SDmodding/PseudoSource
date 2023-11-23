@@ -11,7 +11,7 @@ void __fastcall hkUnionFind::hkUnionFind(hkUnionFind *this, hkFixedArray<int> *p
 // RVA: 0xC6C2A0
 void __fastcall hkUnionFind::clear(hkUnionFind *this)
 {
-  int v1; // er9
+  int v1; // r9d
   __int64 v2; // r8
 
   v1 = 0;
@@ -21,8 +21,7 @@ void __fastcall hkUnionFind::clear(hkUnionFind *this)
     do
     {
       ++v1;
-      ++v2;
-      this->m_parents->m_data.m_storage[v2 - 1] = -1;
+      this->m_parents->m_data.m_storage[v2++] = -1;
     }
     while ( v1 < this->m_numNodes );
   }
@@ -36,38 +35,31 @@ void __fastcall hkUnionFind::clear(hkUnionFind *this)
 __int64 __fastcall hkUnionFind::findRootOfNode(hkUnionFind *this, int i)
 {
   __int64 v2; // r10
-  hkUnionFind *v3; // r11
-  int *v4; // rdx
-  int v5; // ecx
-  int v6; // eax
-  int v7; // er9
-  __int64 v8; // rdx
-  int *v9; // rcx
+  int *m_storage; // rdx
+  int v5; // eax
+  int v6; // r9d
+  __int64 v7; // rdx
+  int *v8; // rcx
 
   v2 = i;
-  v3 = this;
-  v4 = this->m_parents->m_data.m_storage;
-  v5 = v4[v2];
-  if ( v5 >= 0 )
+  m_storage = this->m_parents->m_data.m_storage;
+  if ( m_storage[v2] >= 0 )
   {
-    v6 = v4[v2];
+    v5 = m_storage[v2];
     do
     {
-      v7 = v6;
-      v6 = v4[v6];
+      v6 = v5;
+      v5 = m_storage[v5];
     }
-    while ( v6 >= 0 );
-    if ( v5 >= 0 )
+    while ( v5 >= 0 );
+    do
     {
-      do
-      {
-        v8 = (signed int)v2;
-        v9 = v3->m_parents->m_data.m_storage;
-        v2 = v9[(signed int)v2];
-        v9[v8] = v7;
-      }
-      while ( v3->m_parents->m_data.m_storage[v2] >= 0 );
+      v7 = (int)v2;
+      v8 = this->m_parents->m_data.m_storage;
+      v2 = v8[(int)v2];
+      v8[v7] = v6;
     }
+    while ( this->m_parents->m_data.m_storage[v2] >= 0 );
   }
   return (unsigned int)v2;
 }
@@ -76,24 +68,22 @@ __int64 __fastcall hkUnionFind::findRootOfNode(hkUnionFind *this, int i)
 // RVA: 0xC6CA30
 void __fastcall hkUnionFind::unionRoots(hkUnionFind *this, int r1, int r2)
 {
-  hkUnionFind *v3; // r9
-  signed __int64 v4; // r11
-  int *v5; // rcx
-  int v6; // er10
+  __int64 v4; // r11
+  int *m_storage; // rcx
+  int v6; // r10d
 
-  v3 = this;
   v4 = r1;
-  v5 = this->m_parents->m_data.m_storage;
-  v6 = v5[v4];
+  m_storage = this->m_parents->m_data.m_storage;
+  v6 = m_storage[v4];
   if ( r1 >= r2 )
   {
-    v5[r2] += v6;
-    v3->m_parents->m_data.m_storage[v4] = r2;
+    m_storage[r2] += v6;
+    this->m_parents->m_data.m_storage[v4] = r2;
   }
   else
   {
-    v5[v4] = v6 + v5[r2];
-    v3->m_parents->m_data.m_storage[r2] = r1;
+    m_storage[r1] = v6 + m_storage[r2];
+    this->m_parents->m_data.m_storage[r2] = r1;
   }
 }
 
@@ -102,27 +92,23 @@ void __fastcall hkUnionFind::unionRoots(hkUnionFind *this, int r1, int r2)
 void __fastcall hkUnionFind::merge(hkUnionFind *this, hkUnionFind *uf)
 {
   int v2; // ebx
-  hkUnionFind *v3; // r14
-  hkUnionFind *v4; // rsi
   __int64 v5; // rdi
-  int v6; // er8
+  int v6; // r8d
 
   v2 = 0;
-  v3 = uf;
-  v4 = this;
   this->m_isCollapsed = 0;
   if ( this->m_numNodes > 0 )
   {
     v5 = 0i64;
     do
     {
-      v6 = v3->m_parents->m_data.m_storage[v5];
+      v6 = uf->m_parents->m_data.m_storage[v5];
       if ( v6 >= 0 )
-        hkUnionFind::addEdge(v4, v2, v6);
+        hkUnionFind::addEdge(this, v2, v6);
       ++v2;
       ++v5;
     }
-    while ( v2 < v4->m_numNodes );
+    while ( v2 < this->m_numNodes );
   }
 }
 
@@ -131,87 +117,72 @@ void __fastcall hkUnionFind::merge(hkUnionFind *this, hkUnionFind *uf)
 void __fastcall hkUnionFind::addEdge(hkUnionFind *this, int i1, int i2)
 {
   __int64 v3; // rbx
-  hkUnionFind *v4; // r9
-  int *v5; // rcx
+  int *m_storage; // rcx
   __int64 v6; // r11
   int v7; // edx
-  int v8; // eax
-  int v9; // er10
+  int i; // eax
+  int v9; // r10d
   __int64 v10; // rdx
   int *v11; // rcx
   int *v12; // rcx
-  int v13; // edx
-  int v14; // eax
-  int v15; // er8
-  __int64 v16; // rdx
-  int *v17; // rcx
-  signed __int64 v18; // rdx
-  int *v19; // rcx
-  int v20; // er8
+  int v13; // eax
+  int v14; // r8d
+  __int64 v15; // rdx
+  int *v16; // rcx
+  unsigned __int64 v17; // rdx
+  int *v18; // rcx
+  int v19; // r8d
 
   LODWORD(v3) = i1;
-  v4 = this;
-  v5 = this->m_parents->m_data.m_storage;
+  m_storage = this->m_parents->m_data.m_storage;
   LODWORD(v6) = i2;
-  v7 = v5[i1];
+  v7 = m_storage[i1];
   if ( v7 >= 0 )
   {
-    v8 = v7;
+    for ( i = v7; i >= 0; i = m_storage[i] )
+      v9 = i;
     do
     {
-      v9 = v8;
-      v8 = v5[v8];
+      v10 = (int)v3;
+      v11 = this->m_parents->m_data.m_storage;
+      v3 = v11[(int)v3];
+      v11[v10] = v9;
     }
-    while ( v8 >= 0 );
-    if ( v7 >= 0 )
-    {
-      do
-      {
-        v10 = (signed int)v3;
-        v11 = v4->m_parents->m_data.m_storage;
-        v3 = v11[(signed int)v3];
-        v11[v10] = v9;
-      }
-      while ( v4->m_parents->m_data.m_storage[v3] >= 0 );
-    }
+    while ( this->m_parents->m_data.m_storage[v3] >= 0 );
   }
-  v12 = v4->m_parents->m_data.m_storage;
-  v13 = v12[i2];
-  if ( v13 >= 0 )
+  v12 = this->m_parents->m_data.m_storage;
+  if ( v12[i2] >= 0 )
   {
-    v14 = v12[i2];
+    v13 = v12[i2];
     do
     {
-      v15 = v14;
-      v14 = v12[v14];
+      v14 = v13;
+      v13 = v12[v13];
     }
-    while ( v14 >= 0 );
-    if ( v13 >= 0 )
+    while ( v13 >= 0 );
+    do
     {
-      do
-      {
-        v16 = (signed int)v6;
-        v17 = v4->m_parents->m_data.m_storage;
-        v6 = v17[(signed int)v6];
-        v17[v16] = v15;
-      }
-      while ( v4->m_parents->m_data.m_storage[v6] >= 0 );
+      v15 = (int)v6;
+      v16 = this->m_parents->m_data.m_storage;
+      v6 = v16[(int)v6];
+      v16[v15] = v14;
     }
+    while ( this->m_parents->m_data.m_storage[v6] >= 0 );
   }
   if ( (_DWORD)v3 != (_DWORD)v6 )
   {
-    v18 = (signed int)v3;
-    v19 = v4->m_parents->m_data.m_storage;
-    v20 = v19[v18];
-    if ( (signed int)v3 >= (signed int)v6 )
+    v17 = (int)v3;
+    v18 = this->m_parents->m_data.m_storage;
+    v19 = v18[v17];
+    if ( (int)v3 >= (int)v6 )
     {
-      v19[(signed int)v6] += v20;
-      v4->m_parents->m_data.m_storage[v18] = v6;
+      v18[(int)v6] += v19;
+      this->m_parents->m_data.m_storage[v17] = v6;
     }
     else
     {
-      v19[v18] = v20 + v19[(signed int)v6];
-      v4->m_parents->m_data.m_storage[(signed int)v6] = v3;
+      v18[v17] = v19 + v18[(int)v6];
+      this->m_parents->m_data.m_storage[(int)v6] = v3;
     }
   }
 }
@@ -220,143 +191,135 @@ void __fastcall hkUnionFind::addEdge(hkUnionFind *this, int i1, int i2)
 // RVA: 0xC6CB10
 __int64 __fastcall hkUnionFind::collapseTree(hkUnionFind *this)
 {
-  hkUnionFind *v1; // r10
-  __int64 v3; // r11
-  int *v4; // rcx
-  signed __int64 i; // rbx
+  __int64 m_numNodes; // r11
+  int *m_storage; // rcx
+  int *i; // rbx
   __int64 v6; // rax
 
-  v1 = this;
   if ( this->m_isCollapsed )
     return (unsigned int)this->m_numRoots;
-  v3 = this->m_numNodes;
-  v4 = this->m_parents->m_data.m_storage;
-  for ( i = (signed __int64)&v4[v3]; v4 != (int *)i; ++v4 )
+  m_numNodes = this->m_numNodes;
+  m_storage = this->m_parents->m_data.m_storage;
+  for ( i = &m_storage[m_numNodes]; m_storage != i; ++m_storage )
   {
-    if ( *v4 >= 0 )
+    if ( *m_storage >= 0 )
     {
-      LODWORD(v3) = v3 - 1;
-      if ( v1->m_parents->m_data.m_storage[*v4] >= 0 )
+      LODWORD(m_numNodes) = m_numNodes - 1;
+      if ( this->m_parents->m_data.m_storage[*m_storage] >= 0 )
       {
-        LODWORD(v6) = *v4;
+        LODWORD(v6) = *m_storage;
         do
         {
-          v6 = v1->m_parents->m_data.m_storage[(signed int)v6];
-          *v4 = v6;
+          v6 = this->m_parents->m_data.m_storage[(int)v6];
+          *m_storage = v6;
         }
-        while ( v1->m_parents->m_data.m_storage[v6] >= 0 );
+        while ( this->m_parents->m_data.m_storage[v6] >= 0 );
       }
     }
   }
-  v1->m_isCollapsed = 1;
-  v1->m_numRoots = v3;
-  return (unsigned int)v3;
+  this->m_isCollapsed = 1;
+  this->m_numRoots = m_numNodes;
+  return (unsigned int)m_numNodes;
 }
 
 // File Line: 207
 // RVA: 0xC6C3E0
-hkResult *__fastcall hkUnionFind::assignGroups(hkUnionFind *this, hkResult *result, hkArray<int,hkContainerHeapAllocator> *elementsPerGroup)
+hkResult *__fastcall hkUnionFind::assignGroups(
+        hkUnionFind *this,
+        hkResult *result,
+        hkArray<int,hkContainerHeapAllocator> *elementsPerGroup)
 {
-  hkArray<int,hkContainerHeapAllocator> *v3; // rdi
-  hkResult *v4; // rsi
-  hkUnionFind *v5; // rbx
   int v6; // eax
-  int v7; // er9
-  int v8; // er9
-  int v10; // er9
-  int v11; // er11
+  int v7; // r9d
+  int v8; // r9d
+  int v10; // r9d
+  int v11; // r11d
   __int64 v12; // rdx
-  int *v13; // rcx
+  int *m_storage; // rcx
   __int64 v14; // r8
-  hkResult resulta; // [rsp+50h] [rbp+18h]
+  hkResult resulta; // [rsp+50h] [rbp+18h] BYREF
 
-  v3 = elementsPerGroup;
-  v4 = result;
-  v5 = this;
   v6 = hkUnionFind::collapseTree(this);
-  v7 = v3->m_capacityAndFlags & 0x3FFFFFFF;
+  v7 = elementsPerGroup->m_capacityAndFlags & 0x3FFFFFFF;
   if ( v7 >= v6 )
   {
-    resulta.m_enum = 0;
+    resulta.m_enum = HK_SUCCESS;
   }
   else
   {
     v8 = 2 * v7;
     if ( v6 < v8 )
       v6 = v8;
-    hkArrayUtil::_reserve(&resulta, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v3, v6, 4);
+    hkArrayUtil::_reserve(&resulta, &hkContainerHeapAllocator::s_alloc, (const void **)&elementsPerGroup->m_data, v6, 4);
     if ( resulta.m_enum )
     {
-      v4->m_enum = 1;
-      return v4;
+      result->m_enum = HK_FAILURE;
+      return result;
     }
   }
   v10 = 0;
   v11 = 0;
-  if ( v5->m_numNodes > 0 )
+  if ( this->m_numNodes > 0 )
   {
     v12 = 0i64;
     do
     {
-      v13 = v5->m_parents->m_data.m_storage;
-      v14 = v13[v12];
-      if ( (signed int)v14 >= 0 )
+      m_storage = this->m_parents->m_data.m_storage;
+      v14 = m_storage[v12];
+      if ( (int)v14 >= 0 )
       {
-        v13[v12] = v13[v14];
+        m_storage[v12] = m_storage[v14];
       }
       else
       {
-        v3->m_data[v3->m_size++] = -(signed int)v14;
-        v5->m_parents->m_data.m_storage[v12] = v11++;
+        elementsPerGroup->m_data[elementsPerGroup->m_size++] = -(int)v14;
+        this->m_parents->m_data.m_storage[v12] = v11++;
       }
       ++v10;
       ++v12;
     }
-    while ( v10 < v5->m_numNodes );
+    while ( v10 < this->m_numNodes );
   }
-  v4->m_enum = 0;
-  return v4;
+  result->m_enum = HK_SUCCESS;
+  return result;
 }
 
 // File Line: 241
 // RVA: 0xC6C810
-__int64 __fastcall hkUnionFind::moveBiggestGroupToIndexZero(hkUnionFind *this, hkArray<int,hkContainerHeapAllocator> *elementsPerGroup)
+__int64 __fastcall hkUnionFind::moveBiggestGroupToIndexZero(
+        hkUnionFind *this,
+        hkArray<int,hkContainerHeapAllocator> *elementsPerGroup)
 {
-  signed __int64 v2; // rdi
+  __int64 m_size; // rdi
   int v3; // ebx
-  int v4; // er10
+  int v4; // r10d
   __int64 v5; // r8
-  hkArray<int,hkContainerHeapAllocator> *v6; // r15
-  hkUnionFind *v7; // r14
   unsigned int v8; // ebp
-  signed __int64 v9; // rsi
+  __int64 v9; // rsi
   int *v10; // rax
-  signed __int64 v11; // r9
-  int v12; // eax
-  unsigned int *v13; // r9
-  signed int v14; // er11
-  signed int v15; // ecx
-  __m128i v16; // xmm1
-  signed int v17; // edi
-  __m128i v18; // xmm0
-  __int64 v19; // rax
-  signed __int64 i; // rax
-  int v21; // er8
-  __int64 v22; // r10
-  int v24; // [rsp+48h] [rbp+10h]
+  __int64 v11; // r9
+  unsigned int *v12; // r9
+  int v13; // r11d
+  signed int v14; // ecx
+  __m128i si128; // xmm1
+  signed int v16; // edi
+  __m128i v17; // xmm0
+  __int64 v18; // rax
+  __int64 i; // rax
+  int v20; // r8d
+  __int64 v21; // r10
+  int v23; // [rsp+48h] [rbp+10h] BYREF
 
-  v2 = elementsPerGroup->m_size;
+  m_size = elementsPerGroup->m_size;
   v3 = 0;
   v4 = *elementsPerGroup->m_data;
   LODWORD(v5) = 1;
-  v6 = elementsPerGroup;
-  v7 = this;
   v8 = 0;
-  v9 = v2;
-  if ( v2 <= 1 )
+  v9 = m_size;
+  if ( m_size <= 1 )
     return 0i64;
   v10 = elementsPerGroup->m_data + 1;
-  v11 = v2 - 1;
+  v11 = m_size - 1;
   do
   {
     if ( *v10 > v4 )
@@ -371,92 +334,80 @@ __int64 __fastcall hkUnionFind::moveBiggestGroupToIndexZero(hkUnionFind *this, h
   while ( v11 );
   if ( !v8 )
     return 0i64;
-  v12 = elementsPerGroup->m_size;
-  if ( (_DWORD)v2 )
+  v23 = 4 * m_size;
+  v12 = (unsigned int *)((__int64 (__fastcall *)(hkContainerTempAllocator::Allocator *, int *, __int64))hkContainerTempAllocator::s_alloc.vfptr->bufAlloc)(
+                          &hkContainerTempAllocator::s_alloc,
+                          &v23,
+                          v5);
+  v13 = 0x80000000;
+  v14 = 0;
+  if ( v23 / 4 )
+    v13 = v23 / 4;
+  if ( (unsigned int)m_size >= 4 )
   {
-    v24 = 4 * v2;
-    v13 = (unsigned int *)((__int64 (__fastcall *)(hkContainerTempAllocator::Allocator *, int *, __int64))hkContainerTempAllocator::s_alloc.vfptr->bufAlloc)(
-                            &hkContainerTempAllocator::s_alloc,
-                            &v24,
-                            v5);
-    v12 = v24 / 4;
-  }
-  else
-  {
-    v13 = 0i64;
-  }
-  v14 = 2147483648;
-  v15 = 0;
-  if ( v12 )
-    v14 = v12;
-  if ( (signed int)v2 > 0 && (unsigned int)v2 >= 4 )
-  {
-    v16 = _mm_load_si128((const __m128i *)&_xmm);
-    v17 = v2 - (signed int)v2 % 4;
+    si128 = _mm_load_si128((const __m128i *)&_xmm);
+    v16 = m_size - (m_size & 0x80000003);
     do
     {
-      v18 = _mm_cvtsi32_si128(v15);
-      v19 = v15;
-      v15 += 4;
-      _mm_storeu_si128((__m128i *)&v13[v19], _mm_add_epi32(_mm_shuffle_epi32(v18, 0), v16));
+      v17 = _mm_cvtsi32_si128(v14);
+      v18 = v14;
+      v14 += 4;
+      *(__m128i *)&v12[v18] = _mm_add_epi32(_mm_shuffle_epi32(v17, 0), si128);
     }
-    while ( v15 < v17 );
+    while ( v14 < v16 );
   }
-  for ( i = v15; i < v9; ++v15 )
-    v13[i++] = v15;
-  *v13 = v8;
-  v13[v8] = 0;
-  v21 = v6->m_data[v8];
-  v6->m_data[v8] = *v6->m_data;
-  *v6->m_data = v21;
-  if ( v7->m_numNodes > 0 )
+  for ( i = v14; i < v9; v12[i++] = v14++ )
+    ;
+  *v12 = v8;
+  v12[v8] = 0;
+  v20 = elementsPerGroup->m_data[v8];
+  elementsPerGroup->m_data[v8] = *elementsPerGroup->m_data;
+  *elementsPerGroup->m_data = v20;
+  if ( this->m_numNodes > 0 )
   {
-    v22 = 0i64;
+    v21 = 0i64;
     do
     {
       ++v3;
-      ++v22;
-      v7->m_parents->m_data.m_storage[v22 - 1] = v13[v7->m_parents->m_data.m_storage[v22 - 1]];
+      ++v21;
+      this->m_parents->m_data.m_storage[v21 - 1] = v12[this->m_parents->m_data.m_storage[v21 - 1]];
     }
-    while ( v3 < v7->m_numNodes );
+    while ( v3 < this->m_numNodes );
   }
-  if ( v14 >= 0 )
-    hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-      v13,
-      4 * v14);
+  if ( v13 >= 0 )
+    hkContainerTempAllocator::s_alloc.vfptr->bufFree(&hkContainerTempAllocator::s_alloc, v12, 4 * v13);
   return v8;
 }
 
 // File Line: 286
 // RVA: 0xC6C660
-void __fastcall hkUnionFind::reindex(hkUnionFind *this, hkFixedArray<int> *rindex, __int64 numNewGroups, hkArray<int,hkContainerHeapAllocator> *elementsPerGroup)
+void __fastcall hkUnionFind::reindex(
+        hkUnionFind *this,
+        hkFixedArray<int> *rindex,
+        __int64 numNewGroups,
+        hkArray<int,hkContainerHeapAllocator> *elementsPerGroup)
 {
   __int64 v4; // rbx
-  hkArray<int,hkContainerHeapAllocator> *v5; // rsi
-  hkFixedArray<int> *v6; // r13
   __int64 v7; // r12
   __int64 v8; // r9
   __int64 v9; // rdi
   int v10; // eax
   _DWORD *v11; // r14
-  signed int v12; // ebp
+  int v12; // ebp
   _DWORD *v13; // rdi
   __int64 i; // rcx
-  int v15; // er8
+  int v15; // r8d
   __int64 v16; // rdi
   _DWORD *v17; // rdx
   int v18; // eax
   int v19; // eax
-  int v20; // er9
+  int v20; // r9d
   int v21; // eax
-  hkResult result; // [rsp+70h] [rbp+8h]
-  int v23; // [rsp+80h] [rbp+18h]
+  hkResult result; // [rsp+70h] [rbp+8h] BYREF
+  int v23; // [rsp+80h] [rbp+18h] BYREF
 
   v4 = 0i64;
-  v5 = elementsPerGroup;
-  v6 = rindex;
-  v7 = (signed int)numNewGroups;
+  v7 = (int)numNewGroups;
   v8 = 0i64;
   if ( this->m_numNodes > 0 )
   {
@@ -467,7 +418,7 @@ void __fastcall hkUnionFind::reindex(hkUnionFind *this, hkFixedArray<int> *rinde
       ++v9;
       this->m_parents->m_data.m_storage[v9 - 1] = rindex->m_data.m_storage[this->m_parents->m_data.m_storage[v9 - 1]];
     }
-    while ( (signed int)v8 < this->m_numNodes );
+    while ( (int)v8 < this->m_numNodes );
   }
   v10 = numNewGroups;
   if ( (_DWORD)numNewGroups )
@@ -484,160 +435,134 @@ void __fastcall hkUnionFind::reindex(hkUnionFind *this, hkFixedArray<int> *rinde
   {
     v11 = 0i64;
   }
-  v12 = 2147483648;
+  v12 = 0x80000000;
   if ( v10 )
     v12 = v10;
-  if ( (signed int)v7 > 0 )
+  if ( (int)v7 > 0 )
   {
     v13 = v11;
     for ( i = v7; i; --i )
-    {
-      *v13 = 0;
-      ++v13;
-    }
+      *v13++ = 0;
   }
   v15 = 0;
-  if ( v5->m_size > 0 )
+  if ( elementsPerGroup->m_size > 0 )
   {
     v16 = 0i64;
     do
     {
       ++v15;
-      ++v16;
-      v17 = &v11[v6->m_data.m_storage[v16 - 1]];
-      *v17 += v5->m_data[v16 - 1];
+      v17 = &v11[rindex->m_data.m_storage[v16++]];
+      *v17 += elementsPerGroup->m_data[v16 - 1];
     }
-    while ( v15 < v5->m_size );
+    while ( v15 < elementsPerGroup->m_size );
   }
-  v18 = v5->m_capacityAndFlags & 0x3FFFFFFF;
-  if ( v18 < (signed int)v7 )
+  v18 = elementsPerGroup->m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v18 < (int)v7 )
   {
     v19 = 2 * v18;
     v20 = v7;
-    if ( (signed int)v7 < v19 )
+    if ( (int)v7 < v19 )
       v20 = v19;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v5, v20, 4);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&elementsPerGroup->m_data, v20, 4);
   }
-  v5->m_size = v7;
+  elementsPerGroup->m_size = v7;
   if ( v7 > 0 )
   {
     do
     {
       v21 = v11[v4++];
-      v5->m_data[v4 - 1] = v21;
+      elementsPerGroup->m_data[v4 - 1] = v21;
     }
     while ( v4 < v7 );
   }
   if ( v12 >= 0 )
-    hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-      v11,
-      4 * v12);
+    hkContainerTempAllocator::s_alloc.vfptr->bufFree(&hkContainerTempAllocator::s_alloc, v11, 4 * v12);
 }
 
 // File Line: 312
 // RVA: 0xC6C4E0
-hkResult *__fastcall hkUnionFind::sortByGroupId(hkUnionFind *this, hkResult *result, hkArray<int,hkContainerHeapAllocator> *elementsPerGroup, hkArray<int,hkContainerHeapAllocator> *orderedGroups)
+hkResult *__fastcall hkUnionFind::sortByGroupId(
+        hkUnionFind *this,
+        hkResult *result,
+        hkArray<int,hkContainerHeapAllocator> *elementsPerGroup,
+        hkArray<int,hkContainerHeapAllocator> *orderedGroups)
 {
-  int v4; // edi
+  int m_numNodes; // edi
   int v5; // eax
-  hkArray<int,hkContainerHeapAllocator> *v6; // r15
-  hkArray<int,hkContainerHeapAllocator> *v7; // rsi
-  hkResult *v8; // rbx
-  hkUnionFind *v9; // r14
   int v10; // eax
-  int v11; // er9
-  __int64 v12; // rdi
-  signed int *v13; // r10
-  signed int v14; // edx
-  __int64 v15; // rcx
-  int *v16; // r11
-  int v17; // er8
-  int *i; // r9
+  int v11; // r9d
+  __int64 m_size; // rdi
+  int *v13; // r10
+  int v14; // edx
+  __int64 i; // rcx
+  int *m_data; // r11
+  int v17; // r8d
+  int *j; // r9
   __int64 v19; // rax
   __int64 v20; // rdx
-  signed int *array; // [rsp+30h] [rbp-38h]
+  int *array; // [rsp+30h] [rbp-38h] BYREF
   int v23; // [rsp+38h] [rbp-30h]
   int v24; // [rsp+3Ch] [rbp-2Ch]
-  hkResult resulta; // [rsp+70h] [rbp+8h]
-  hkResult v26; // [rsp+88h] [rbp+20h]
+  hkResult resulta; // [rsp+70h] [rbp+8h] BYREF
+  hkResult v26; // [rsp+88h] [rbp+20h] BYREF
 
-  v4 = this->m_numNodes;
+  m_numNodes = this->m_numNodes;
   v5 = orderedGroups->m_capacityAndFlags & 0x3FFFFFFF;
-  v6 = orderedGroups;
-  v7 = elementsPerGroup;
-  v8 = result;
-  v9 = this;
-  if ( v5 >= v4 )
+  if ( v5 >= m_numNodes )
   {
-    resulta.m_enum = 0;
+    resulta.m_enum = HK_SUCCESS;
   }
   else
   {
     v10 = 2 * v5;
     v11 = this->m_numNodes;
-    if ( v4 < v10 )
+    if ( m_numNodes < v10 )
       v11 = v10;
-    hkArrayUtil::_reserve(&resulta, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v6, v11, 4);
+    hkArrayUtil::_reserve(&resulta, &hkContainerHeapAllocator::s_alloc, (const void **)&orderedGroups->m_data, v11, 4);
     if ( resulta.m_enum )
     {
-      v8->m_enum = 1;
-      return v8;
+      result->m_enum = HK_FAILURE;
+      return result;
     }
   }
-  v6->m_size = v4;
-  v12 = v7->m_size;
-  if ( (signed int)v12 <= 0 )
+  orderedGroups->m_size = m_numNodes;
+  m_size = elementsPerGroup->m_size;
+  if ( (int)m_size > 0 )
   {
-    v8->m_enum = 0;
-    return v8;
-  }
-  array = 0i64;
-  v23 = 0;
-  v24 = 2147483648;
-  if ( (signed int)v12 <= 0 )
-  {
-    v26.m_enum = 0;
-    goto LABEL_13;
-  }
-  hkArrayUtil::_reserve(&v26, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, &array, v12, 4);
-  if ( v26.m_enum == HK_SUCCESS )
-  {
-LABEL_13:
-    v13 = array;
-    v23 = v12;
-    v14 = 0;
-    v15 = 0i64;
-    if ( (signed int)v12 > 0 )
+    array = 0i64;
+    v23 = 0;
+    v24 = 0x80000000;
+    hkArrayUtil::_reserve(&v26, &hkContainerTempAllocator::s_alloc, (const void **)&array, m_size, 4);
+    if ( v26.m_enum )
     {
-      do
+      result->m_enum = HK_FAILURE;
+    }
+    else
+    {
+      v13 = array;
+      v23 = m_size;
+      v14 = 0;
+      for ( i = 0i64; i < m_size; v14 += elementsPerGroup->m_data[i - 1] )
+        v13[i++] = v14;
+      m_data = orderedGroups->m_data;
+      v17 = 0;
+      for ( j = this->m_parents->m_data.m_storage; v17 < this->m_numNodes; ++v17 )
       {
-        v13[v15++] = v14;
-        v14 += v7->m_data[v15 - 1];
+        v19 = *j++;
+        v20 = v13[v19];
+        v13[v19] = v20 + 1;
+        m_data[v20] = v17;
       }
-      while ( v15 < v12 );
+      result->m_enum = HK_SUCCESS;
     }
-    v16 = v6->m_data;
-    v17 = 0;
-    for ( i = v9->m_parents->m_data.m_storage; v17 < v9->m_numNodes; ++v17 )
-    {
-      v19 = *i;
-      ++i;
-      v20 = v13[v19];
-      v13[v19] = v20 + 1;
-      v16[v20] = v17;
-    }
-    v8->m_enum = 0;
-    goto LABEL_18;
+    v23 = 0;
+    if ( v24 >= 0 )
+      hkContainerTempAllocator::s_alloc.vfptr->bufFree(&hkContainerTempAllocator::s_alloc, array, 4 * v24);
   }
-  v8->m_enum = 1;
-LABEL_18:
-  v23 = 0;
-  if ( v24 >= 0 )
-    hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-      array,
-      4 * v24);
-  return v8;
+  else
+  {
+    result->m_enum = HK_SUCCESS;
+  }
+  return result;
 }
 

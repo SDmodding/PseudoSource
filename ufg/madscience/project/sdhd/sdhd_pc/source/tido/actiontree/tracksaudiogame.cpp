@@ -13,61 +13,53 @@ __int64 dynamic_initializer_for__AudioTrackSurfaceDetection::sClassNameUID__()
 // RVA: 0x2DE0E0
 void __fastcall AudioTrackSurfaceDetection::AudioTrackSurfaceDetection(AudioTrackSurfaceDetection *this)
 {
-  AudioTrackSurfaceDetection *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, AudioTrackSurfaceDetection::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AudioTaskSurfaceDetection>::`vftable;
-  v1->m_RtpcVal = 0.0;
-  v1->m_playPercent = 100.0;
-  *(_QWORD *)&v1->m_audioTagId[4] = 0i64;
-  *(_QWORD *)&v1->m_audioTagId[2] = 0i64;
-  *(_QWORD *)v1->m_audioTagId = 0i64;
-  *(_QWORD *)&v1->m_audioTagUID[4] = 0i64;
-  *(_QWORD *)&v1->m_audioTagUID[2] = 0i64;
-  *(_QWORD *)v1->m_audioTagUID = 0i64;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&AudioTrackSurfaceDetection::`vftable;
-  *(_QWORD *)&v1->m_Bone = 8i64;
+  ITrack::ITrack(this, AudioTrackSurfaceDetection::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<AudioTaskSurfaceDetection>::`vftable;
+  this->m_RtpcVal = 0.0;
+  this->m_playPercent = 100.0;
+  *(_QWORD *)&this->m_audioTagId[4] = 0i64;
+  *(_QWORD *)&this->m_audioTagId[2] = 0i64;
+  *(_QWORD *)this->m_audioTagId = 0i64;
+  *(_QWORD *)&this->m_audioTagUID[4] = 0i64;
+  *(_QWORD *)&this->m_audioTagUID[2] = 0i64;
+  *(_QWORD *)this->m_audioTagUID = 0i64;
+  this->vfptr = (Expression::IMemberMapVtbl *)&AudioTrackSurfaceDetection::`vftable;
+  *(_QWORD *)&this->m_Bone = 8i64;
 }
 
 // File Line: 45
 // RVA: 0x2E3550
 void __fastcall AudioTrackSurfaceDetection::~AudioTrackSurfaceDetection(AudioTrackSurfaceDetection *this)
 {
-  AudioTrackSurfaceDetection *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&AudioTrackSurfaceDetection::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 50
 // RVA: 0x301CC0
-UFG::qSymbolUC *__fastcall AudioTrackSurfaceDetection::GetBoneUID(AudioTrackSurfaceDetection *this, UFG::qSymbolUC *result)
+UFG::qSymbolUC *__fastcall AudioTrackSurfaceDetection::GetBoneUID(
+        AudioTrackSurfaceDetection *this,
+        UFG::qSymbolUC *result)
 {
-  UFG::qSymbolUC *v2; // rbx
   __int64 v3; // rdx
 
-  v2 = result;
-  if ( (signed int)gAttackCollisionEnum.m_enumLists.size <= 0 )
+  if ( (int)gAttackCollisionEnum.m_enumLists.size <= 0 )
     v3 = 0i64;
   else
     v3 = *((_QWORD *)gAttackCollisionEnum.m_enumLists.p + 3);
-  UFG::qSymbolUC::create_from_string(v2, *(const char **)(*(_QWORD *)(v3 + 16) + 8i64 * (unsigned int)this->m_Bone));
-  return v2;
+  UFG::qSymbolUC::create_from_string(result, *(const char **)(*(_QWORD *)(v3 + 16) + 8i64 * (unsigned int)this->m_Bone));
+  return result;
 }
 
 // File Line: 71
@@ -100,62 +92,23 @@ __int64 __fastcall DialogueTrackBase::GetTag(DialogueTrackBase *this, int listId
   EnumList<unsigned long> *v8; // r11
   char *v9; // r9
   char v10; // cl
-  __int64 v11; // r9
-  __int64 v12; // rdx
-  __int64 v13; // rcx
-  unsigned int *v14; // rax
-  char *v15; // rdx
-  char v16; // al
+  __int64 v11; // rdx
+  __int64 v12; // rcx
+  unsigned int *p; // rax
+  char *v14; // rdx
+  char v15; // al
 
   v3 = (unsigned int)this->m_dialogueTagId[listId];
   v4 = this->m_dialogueTagUid[listId];
   if ( name )
   {
     v5 = 0i64;
-    if ( (signed __int64)audioEnum.m_enumLists.size <= 0 )
-    {
-LABEL_9:
-      v7 = 0i64;
-      if ( (signed __int64)audioEnum.m_enumLists.size > 0 )
-      {
-        while ( 1 )
-        {
-          v8 = (signed int)audioEnum.m_enumLists.size <= 0 ? 0i64 : audioEnum.m_enumLists.p[v7];
-          v11 = v8->m_enumName.size;
-          v12 = 0i64;
-          v13 = 0i64;
-          if ( v11 > 0 )
-            break;
-LABEL_20:
-          if ( ++v7 >= audioEnum.m_enumLists.size )
-            return (unsigned int)v3;
-        }
-        v14 = v8->m_enumValue.p;
-        while ( v4 != *v14 )
-        {
-          ++v13;
-          v12 = (unsigned int)(v12 + 1);
-          ++v14;
-          if ( v13 >= v11 )
-            goto LABEL_20;
-        }
-        v15 = v8->m_enumName.p[v12];
-        do
-        {
-          v16 = *v15;
-          ++name;
-          ++v15;
-          *(name - 1) = v16;
-        }
-        while ( v16 );
-      }
-    }
-    else
+    if ( audioEnum.m_enumLists.size )
     {
       while ( 1 )
       {
-        v6 = (signed int)audioEnum.m_enumLists.size <= 0 ? 0i64 : audioEnum.m_enumLists.p[v5];
-        if ( (signed int)v3 < (signed int)v6->m_enumName.size && v4 == v6->m_uid.p[v3] )
+        v6 = (int)audioEnum.m_enumLists.size <= 0 ? 0i64 : audioEnum.m_enumLists.p[v5];
+        if ( (int)v3 < (signed int)v6->m_enumName.size && v4 == v6->m_uid.p[v3] )
           break;
         if ( ++v5 >= audioEnum.m_enumLists.size )
           goto LABEL_9;
@@ -169,6 +122,43 @@ LABEL_20:
         *(name - 1) = v10;
       }
       while ( v10 );
+    }
+    else
+    {
+LABEL_9:
+      v7 = 0i64;
+      if ( audioEnum.m_enumLists.size )
+      {
+        while ( 1 )
+        {
+          v8 = (int)audioEnum.m_enumLists.size <= 0 ? 0i64 : audioEnum.m_enumLists.p[v7];
+          v11 = 0i64;
+          v12 = 0i64;
+          if ( v8->m_enumName.size )
+            break;
+LABEL_20:
+          if ( ++v7 >= audioEnum.m_enumLists.size )
+            return (unsigned int)v3;
+        }
+        p = v8->m_enumValue.p;
+        while ( v4 != *p )
+        {
+          ++v12;
+          v11 = (unsigned int)(v11 + 1);
+          ++p;
+          if ( v12 >= v8->m_enumName.size )
+            goto LABEL_20;
+        }
+        v14 = v8->m_enumName.p[v11];
+        do
+        {
+          v15 = *v14;
+          ++name;
+          ++v14;
+          *(name - 1) = v15;
+        }
+        while ( v15 );
+      }
     }
   }
   return (unsigned int)v3;
@@ -189,54 +179,46 @@ __int64 dynamic_initializer_for__DialogueTrack::sClassNameUID__()
 // RVA: 0x2DF170
 void __fastcall DialogueTrack::DialogueTrack(DialogueTrack *this)
 {
-  DialogueTrack *v1; // rbx
-  unsigned int *v2; // rax
-  signed __int64 v3; // rcx
+  unsigned int *m_dialogueTagUid; // rax
+  __int64 v3; // rcx
 
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, DialogueTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DialogueTask>::`vftable;
-  v1->vfptr = (DialogueTrackBaseVtbl *)&DialogueTrackBase::`vftable;
-  v1->m_playPercent = 100.0;
-  v1->m_priority = 5;
-  v2 = v1->m_dialogueTagUid;
+  ITrack::ITrack(this, DialogueTrack::sClassNameUID);
+  this->Track<DialogueTask>::ITrack::Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&Track<DialogueTask>::`vftable;
+  this->DialogueTrackBase::vfptr = (DialogueTrackBaseVtbl *)&DialogueTrackBase::`vftable;
+  this->m_playPercent = 100.0;
+  this->m_priority = 5;
+  m_dialogueTagUid = this->m_dialogueTagUid;
   v3 = 3i64;
   do
   {
-    *(v2 - 3) = 0;
-    *v2 = 0;
-    ++v2;
+    *(m_dialogueTagUid - 3) = 0;
+    *m_dialogueTagUid++ = 0;
     --v3;
   }
   while ( v3 );
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DialogueTrack::`vftable{for `Track<DialogueTask>};
-  v1->vfptr = (DialogueTrackBaseVtbl *)&DialogueTrack::`vftable{for `DialogueTrackBase};
+  this->Track<DialogueTask>::ITrack::Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&DialogueTrack::`vftable{for `Track<DialogueTask>};
+  this->DialogueTrackBase::vfptr = (DialogueTrackBaseVtbl *)&DialogueTrack::`vftable{for `DialogueTrackBase};
 }
 
 // File Line: 206
 // RVA: 0x2E3EC0
 void __fastcall DialogueTrack::~DialogueTrack(DialogueTrack *this)
 {
-  DialogueTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&DialogueTrack::`vftable{for `Track<DialogueTask>};
-  this->vfptr = (DialogueTrackBaseVtbl *)&DialogueTrack::`vftable{for `DialogueTrackBase};
-  this->vfptr = (DialogueTrackBaseVtbl *)&DialogueTrackBase::`vftable;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  this->Track<DialogueTask>::ITrack::Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&DialogueTrack::`vftable{for `Track<DialogueTask>};
+  this->DialogueTrackBase::vfptr = (DialogueTrackBaseVtbl *)&DialogueTrack::`vftable{for `DialogueTrackBase};
+  this->DialogueTrackBase::vfptr = (DialogueTrackBaseVtbl *)&DialogueTrackBase::`vftable;
+  this->Track<DialogueTask>::ITrack::Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->Track<DialogueTask>::ITrack::Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 219
@@ -254,54 +236,46 @@ __int64 dynamic_initializer_for__DialogueTrackPOI::sClassNameUID__()
 // RVA: 0x2DF1F0
 void __fastcall DialogueTrackPOI::DialogueTrackPOI(DialogueTrackPOI *this)
 {
-  DialogueTrackPOI *v1; // rbx
-  unsigned int *v2; // rax
-  signed __int64 v3; // rcx
+  unsigned int *m_dialogueTagUid; // rax
+  __int64 v3; // rcx
 
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, DialogueTrackPOI::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DialogueTaskPOI>::`vftable;
-  v1->vfptr = (DialogueTrackBaseVtbl *)&DialogueTrackBase::`vftable;
-  v1->m_playPercent = 100.0;
-  v1->m_priority = 5;
-  v2 = v1->m_dialogueTagUid;
+  ITrack::ITrack(this, DialogueTrackPOI::sClassNameUID);
+  this->Track<DialogueTaskPOI>::ITrack::Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&Track<DialogueTaskPOI>::`vftable;
+  this->DialogueTrackBase::vfptr = (DialogueTrackBaseVtbl *)&DialogueTrackBase::`vftable;
+  this->m_playPercent = 100.0;
+  this->m_priority = 5;
+  m_dialogueTagUid = this->m_dialogueTagUid;
   v3 = 3i64;
   do
   {
-    *(v2 - 3) = 0;
-    *v2 = 0;
-    ++v2;
+    *(m_dialogueTagUid - 3) = 0;
+    *m_dialogueTagUid++ = 0;
     --v3;
   }
   while ( v3 );
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DialogueTrackPOI::`vftable{for `Track<DialogueTaskPOI>};
-  v1->vfptr = (DialogueTrackBaseVtbl *)&DialogueTrackPOI::`vftable{for `DialogueTrackBase};
+  this->Track<DialogueTaskPOI>::ITrack::Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&DialogueTrackPOI::`vftable{for `Track<DialogueTaskPOI>};
+  this->DialogueTrackBase::vfptr = (DialogueTrackBaseVtbl *)&DialogueTrackPOI::`vftable{for `DialogueTrackBase};
 }
 
 // File Line: 239
 // RVA: 0x2E3F50
 void __fastcall DialogueTrackPOI::~DialogueTrackPOI(DialogueTrackPOI *this)
 {
-  DialogueTrackPOI *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&DialogueTrackPOI::`vftable{for `Track<DialogueTaskPOI>};
-  this->vfptr = (DialogueTrackBaseVtbl *)&DialogueTrackPOI::`vftable{for `DialogueTrackBase};
-  this->vfptr = (DialogueTrackBaseVtbl *)&DialogueTrackBase::`vftable;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  this->Track<DialogueTaskPOI>::ITrack::Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&DialogueTrackPOI::`vftable{for `Track<DialogueTaskPOI>};
+  this->DialogueTrackBase::vfptr = (DialogueTrackBaseVtbl *)&DialogueTrackPOI::`vftable{for `DialogueTrackBase};
+  this->DialogueTrackBase::vfptr = (DialogueTrackBaseVtbl *)&DialogueTrackBase::`vftable;
+  this->Track<DialogueTaskPOI>::ITrack::Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->Track<DialogueTaskPOI>::ITrack::Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 252
@@ -319,23 +293,20 @@ __int64 dynamic_initializer_for__DialogueTrackWeaponImpact::sClassNameUID__()
 // RVA: 0x2DF270
 void __fastcall DialogueTrackWeaponImpact::DialogueTrackWeaponImpact(DialogueTrackWeaponImpact *this)
 {
-  DialogueTrackWeaponImpact *v1; // rbx
-  unsigned int *v2; // rax
-  signed __int64 v3; // rcx
+  unsigned int *m_dialogueTagUid; // rax
+  __int64 v3; // rcx
 
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, DialogueTrackWeaponImpact::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DialogueTaskWeaponImpact>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DialogueTrackWeaponImpact::`vftable;
-  v1->m_playPercent = 100.0;
-  v1->m_priority = 5;
-  v2 = v1->m_dialogueTagUid;
+  ITrack::ITrack(this, DialogueTrackWeaponImpact::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<DialogueTaskWeaponImpact>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&DialogueTrackWeaponImpact::`vftable;
+  this->m_playPercent = 100.0;
+  this->m_priority = 5;
+  m_dialogueTagUid = this->m_dialogueTagUid;
   v3 = 2i64;
   do
   {
-    *(v2 - 2) = 0;
-    *v2 = 0;
-    ++v2;
+    *(m_dialogueTagUid - 2) = 0;
+    *m_dialogueTagUid++ = 0;
     --v3;
   }
   while ( v3 );
@@ -345,24 +316,19 @@ void __fastcall DialogueTrackWeaponImpact::DialogueTrackWeaponImpact(DialogueTra
 // RVA: 0x2E3FD0
 void __fastcall DialogueTrackWeaponImpact::~DialogueTrackWeaponImpact(DialogueTrackWeaponImpact *this)
 {
-  DialogueTrackWeaponImpact *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&DialogueTrackWeaponImpact::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 312
@@ -380,13 +346,10 @@ __int64 dynamic_initializer_for__ConversationTrackCreate::sClassNameUID__()
 // RVA: 0x2DE720
 void __fastcall ConversationTrackCreate::ConversationTrackCreate(ConversationTrackCreate *this)
 {
-  ConversationTrackCreate *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, ConversationTrackCreate::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<ConversationTaskCreate>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ConversationTrackCreate::`vftable;
-  v1->m_topic = 0;
+  ITrack::ITrack(this, ConversationTrackCreate::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<ConversationTaskCreate>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&ConversationTrackCreate::`vftable;
+  this->m_topic = 0;
 }
 
 // File Line: 332

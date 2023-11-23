@@ -1,155 +1,151 @@
 // File Line: 36
 // RVA: 0xAA90E0
-void __fastcall AK::StreamMgr::CAkStmMemViewDeferred::Cancel(AK::StreamMgr::CAkStmMemViewDeferred *this, AK::StreamMgr::IAkIOHookDeferred *in_pLowLevelHook, bool in_bCallLowLevelIO, bool in_bAllCancelled)
+void __fastcall AK::StreamMgr::CAkStmMemViewDeferred::Cancel(
+        AK::StreamMgr::CAkStmMemViewDeferred *this,
+        AK::StreamMgr::IAkIOHookDeferred *in_pLowLevelHook,
+        bool in_bCallLowLevelIO,
+        bool in_bAllCancelled)
 {
-  AK::StreamMgr::CAkStmMemViewDeferred *v4; // rbx
-  bool v5; // r14
-  AK::StreamMgr::CAkDeviceBase *v6; // rbp
-  AK::StreamMgr::IAkIOHookDeferred *v7; // rdi
-  AK::StreamMgr::AkMemBlock *v8; // rdx
-  AK::StreamMgr::AkMemBlock *v9; // rbx
+  AK::StreamMgr::CAkDeviceBase *m_pDevice; // rbp
+  AK::StreamMgr::AkMemBlock *m_pBlock; // rdx
+  AK::StreamMgr::AkMemBlock *pNextBlock; // rbx
   AK::StreamMgr::AkMemBlock *v10; // rcx
-  bool v11; // [rsp+58h] [rbp+20h]
+  bool v11; // [rsp+58h] [rbp+20h] BYREF
 
   v11 = in_bAllCancelled;
-  v4 = this;
-  v5 = in_bCallLowLevelIO;
-  v6 = this->m_pOwner->m_pDevice;
-  v7 = in_pLowLevelHook;
-  EnterCriticalSection(&v6->m_lockSems.m_csLock);
-  v8 = v4->m_pBlock;
-  v9 = v8->pNextBlock;
-  if ( v9 )
+  m_pDevice = this->m_pOwner->m_pDevice;
+  EnterCriticalSection(&m_pDevice->m_lockSems.m_csLock);
+  m_pBlock = this->m_pBlock;
+  pNextBlock = m_pBlock->pNextBlock;
+  if ( pNextBlock )
   {
-    v10 = v9[1].pNextBlock;
-    if ( *(_QWORD *)&v10->uAvailableSize || *(_QWORD *)&v10->uRefCount != *(_QWORD *)&v9[1].uAvailableSize )
+    v10 = pNextBlock[1].pNextBlock;
+    if ( *(_QWORD *)&v10->uAvailableSize || *(_QWORD *)&v10->uRefCount != *(_QWORD *)&pNextBlock[1].uAvailableSize )
     {
-      v9 = 0i64;
+      pNextBlock = 0i64;
     }
-    else if ( v8->fileID != -1 )
+    else if ( m_pBlock->fileID != -1 )
     {
-      AK::StreamMgr::CAkIOMemMgr::UntagBlock(&v6->m_mgrMemIO, v8);
+      AK::StreamMgr::CAkIOMemMgr::UntagBlock(&m_pDevice->m_mgrMemIO, m_pBlock);
     }
   }
-  LeaveCriticalSection(&v6->m_lockSems.m_csLock);
-  if ( v9 )
+  LeaveCriticalSection(&m_pDevice->m_lockSems.m_csLock);
+  if ( pNextBlock )
   {
-    if ( v5 )
+    if ( in_bCallLowLevelIO )
     {
-      if ( v9[1].uRefCount & 1 )
+      if ( (pNextBlock[1].uRefCount & 1) != 0 )
         v11 = 0;
       else
-        ((void (__fastcall *)(AK::StreamMgr::IAkIOHookDeferred *, _QWORD, void **, bool *))v7->vfptr[1].GetBlockSize)(
-          v7,
-          *(_QWORD *)(*(_QWORD *)&v9[1].uAvailableSize + 40i64),
-          &v9->pData,
+        ((void (__fastcall *)(AK::StreamMgr::IAkIOHookDeferred *, _QWORD, void **, bool *))in_pLowLevelHook->vfptr[1].GetBlockSize)(
+          in_pLowLevelHook,
+          *(_QWORD *)(*(_QWORD *)&pNextBlock[1].uAvailableSize + 40i64),
+          &pNextBlock->pData,
           &v11);
     }
-    *(_DWORD *)&v9[1].uRefCount |= 1u;
+    *(_DWORD *)&pNextBlock[1].uRefCount |= 1u;
   }
 }
 
 // File Line: 79
 // RVA: 0xAA9220
-void __fastcall AK::StreamMgr::CAkLowLevelTransferDeferred::LLIOCallback(AkAsyncIOTransferInfo *in_pTransferInfo, AKRESULT in_eResult)
+void __fastcall AK::StreamMgr::CAkLowLevelTransferDeferred::LLIOCallback(
+        AkAsyncIOTransferInfo *in_pTransferInfo,
+        AKRESULT in_eResult)
 {
-  AK::StreamMgr::CAkLowLevelTransferDeferred *v2; // rcx
+  AK::StreamMgr::CAkLowLevelTransferDeferred *pCookie; // rcx
 
-  v2 = (AK::StreamMgr::CAkLowLevelTransferDeferred *)in_pTransferInfo->pCookie;
-  if ( in_eResult != 1 )
-    in_eResult = 2;
-  AK::StreamMgr::CAkLowLevelTransferDeferred::Update(v2, in_eResult);
+  pCookie = (AK::StreamMgr::CAkLowLevelTransferDeferred *)in_pTransferInfo->pCookie;
+  if ( in_eResult != AK_Success )
+    in_eResult = AK_Fail;
+  AK::StreamMgr::CAkLowLevelTransferDeferred::Update(pCookie, in_eResult);
 }
 
 // File Line: 103
 // RVA: 0xAA9240
-void __fastcall AK::StreamMgr::CAkLowLevelTransferDeferred::Update(AK::StreamMgr::CAkLowLevelTransferDeferred *this, AKRESULT in_eResult)
+void __fastcall AK::StreamMgr::CAkLowLevelTransferDeferred::Update(
+        AK::StreamMgr::CAkLowLevelTransferDeferred *this,
+        unsigned int in_eResult)
 {
-  AKRESULT v2; // er14
-  AK::StreamMgr::CAkDeviceBase *v3; // rbp
-  __int64 v4; // rbx
-  __m128i v5; // di
-  AK::StreamMgr::AkMemBlock *v6; // rdx
-  AK::StreamMgr::CAkIOThreadVtbl *v7; // rcx
-  AK::StreamMgr::AkMemBlock *v8; // rax
+  AK::StreamMgr::CAkDeviceBase *m_pDevice; // rbp
+  AK::StreamMgr::CAkStmMemViewDeferred *m_pFirst; // rbx
+  AK::StreamMgr::AkMemBlock *m_pBlock; // rdx
+  AK::StreamMgr::CAkIOThreadVtbl *vfptr; // rcx
+  AK::StreamMgr::AkMemBlock *pNextBlock; // rax
   __int64 v9; // r9
-  __int64 i; // rdx
-  __int64 *v11; // rcx
-  __int64 v12; // rax
-  __m128i v13; // [rsp+30h] [rbp-28h]
+  AK::StreamMgr::CAkStmMemViewDeferred *i; // rdx
+  AK::StreamMgr::CAkStmMemViewDeferred *pNextObserver; // rdi
 
-  v5.m128i_i64[0] = (__int64)this;
-  v2 = in_eResult;
-  v3 = this->m_pOwner->m_pDevice;
-  EnterCriticalSection(&v3->m_lockSems.m_csLock);
-  v4 = *(_QWORD *)(v5.m128i_i64[0] + 56);
-  v5 = (__m128i)v5.m128i_u64[0];
-  *(_QWORD *)(v5.m128i_i64[0] + 56) = 0i64;
-  v6 = *(AK::StreamMgr::AkMemBlock **)(v4 + 8);
-  v7 = v3[1].vfptr;
-  v8 = v6->pNextBlock;
-  if ( v7 )
+  m_pDevice = this->m_pOwner->m_pDevice;
+  EnterCriticalSection(&m_pDevice->m_lockSems.m_csLock);
+  m_pFirst = this->m_observers.m_pFirst;
+  this->m_observers.m_pFirst = 0i64;
+  m_pBlock = m_pFirst->m_pBlock;
+  vfptr = m_pDevice[1].vfptr;
+  pNextBlock = m_pBlock->pNextBlock;
+  if ( vfptr )
   {
-    v8->uPosition = (unsigned __int64)v7;
-    v3[1].vfptr = (AK::StreamMgr::CAkIOThreadVtbl *)v8;
+    pNextBlock->uPosition = (unsigned __int64)vfptr;
+    m_pDevice[1].vfptr = (AK::StreamMgr::CAkIOThreadVtbl *)pNextBlock;
   }
   else
   {
-    v3[1].vfptr = (AK::StreamMgr::CAkIOThreadVtbl *)v8;
-    v8->uPosition = 0i64;
+    m_pDevice[1].vfptr = (AK::StreamMgr::CAkIOThreadVtbl *)pNextBlock;
+    pNextBlock->uPosition = 0i64;
   }
-  v6->pNextBlock = 0i64;
-  if ( v2 != 1 && v6->fileID != -1 )
-    AK::StreamMgr::CAkIOMemMgr::UntagBlock(&v3->m_mgrMemIO, v6);
-  LeaveCriticalSection(&v3->m_lockSems.m_csLock);
+  m_pBlock->pNextBlock = 0i64;
+  if ( in_eResult != 1 && m_pBlock->fileID != -1 )
+    AK::StreamMgr::CAkIOMemMgr::UntagBlock(&m_pDevice->m_mgrMemIO, m_pBlock);
+  LeaveCriticalSection(&m_pDevice->m_lockSems.m_csLock);
   LOBYTE(v9) = 1;
-  for ( i = v4; ; i = v13.m128i_i64[0] )
+  for ( i = m_pFirst; ; i = pNextObserver )
   {
-    v5.m128i_i64[0] = *(_QWORD *)(i + 24);
-    if ( i == v4 )
-      v4 = *(_QWORD *)(i + 24);
+    pNextObserver = i->pNextObserver;
+    if ( i == m_pFirst )
+      m_pFirst = i->pNextObserver;
     else
-      *(_QWORD *)(v5.m128i_i64[1] + 24) = v5.m128i_i64[0];
-    v11 = *(__int64 **)(i + 32);
-    v12 = *v11;
-    _mm_store_si128(&v13, v5);
-    (*(void (__fastcall **)(__int64 *, __int64, _QWORD, __int64))(v12 + 40))(v11, i, (unsigned int)v2, v9);
+      MEMORY[0x18] = i->pNextObserver;
+    ((void (__fastcall *)(AK::StreamMgr::CAkStmTask *, AK::StreamMgr::CAkStmMemViewDeferred *, _QWORD, __int64))i->m_pOwner->vfptr[5].__vecDelDtor)(
+      i->m_pOwner,
+      i,
+      in_eResult,
+      v9);
     LOBYTE(v9) = 0;
-    if ( !v5.m128i_i64[0] )
+    if ( !pNextObserver )
       break;
-    v5.m128i_i64[1] = v13.m128i_i64[1];
   }
 }
 
 // File Line: 146
 // RVA: 0xAA91B0
-__int64 __fastcall AK::StreamMgr::CAkLowLevelTransferDeferred::Execute(AK::StreamMgr::CAkLowLevelTransferDeferred *this, AK::StreamMgr::IAkIOHookDeferred *in_pLowLevelHook, AkFileDesc *in_pFileDesc, AkIoHeuristics *in_heuristics, bool in_bWriteOp)
+__int64 __fastcall AK::StreamMgr::CAkLowLevelTransferDeferred::Execute(
+        AK::StreamMgr::CAkLowLevelTransferDeferred *this,
+        AK::StreamMgr::IAkIOHookDeferred *in_pLowLevelHook,
+        AkFileDesc *in_pFileDesc,
+        AkIoHeuristics *in_heuristics,
+        bool in_bWriteOp)
 {
-  AkIoHeuristics *v5; // r11
-  AK::StreamMgr::CAkLowLevelTransferDeferred *v6; // rbx
-  AK::StreamMgr::IAkLowLevelIOHookVtbl *v7; // rax
-  char *v8; // r9
+  AK::StreamMgr::IAkLowLevelIOHookVtbl *vfptr; // rax
+  AkAsyncIOTransferInfo *p_info; // r9
   __int64 result; // rax
 
-  v5 = in_heuristics;
-  v6 = this;
-  if ( *((_BYTE *)this + 72) & 2 )
+  if ( (*((_BYTE *)this + 72) & 2) != 0 )
     return 1i64;
-  v7 = in_pLowLevelHook->vfptr;
-  v8 = (char *)&this->info;
+  vfptr = in_pLowLevelHook->vfptr;
+  p_info = &this->info;
   if ( in_bWriteOp )
-    result = ((__int64 (__fastcall *)(AK::StreamMgr::IAkIOHookDeferred *, AkFileDesc *, AkIoHeuristics *, char *))v7[1].Close)(
+    result = ((__int64 (__fastcall *)(AK::StreamMgr::IAkIOHookDeferred *, AkFileDesc *, AkIoHeuristics *, AkAsyncIOTransferInfo *))vfptr[1].Close)(
                in_pLowLevelHook,
                in_pFileDesc,
-               v5,
-               v8);
+               in_heuristics,
+               p_info);
   else
-    result = ((__int64 (__fastcall *)(AK::StreamMgr::IAkIOHookDeferred *, AkFileDesc *, AkIoHeuristics *, char *))v7[1].__vecDelDtor)(
+    result = ((__int64 (__fastcall *)(AK::StreamMgr::IAkIOHookDeferred *, AkFileDesc *, AkIoHeuristics *, AkAsyncIOTransferInfo *))vfptr[1].__vecDelDtor)(
                in_pLowLevelHook,
                in_pFileDesc,
-               v5,
-               v8);
-  *((_DWORD *)v6 + 18) |= 2u;
+               in_heuristics,
+               p_info);
+  *((_DWORD *)this + 18) |= 2u;
   return result;
 }
 

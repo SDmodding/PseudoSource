@@ -485,6 +485,6 @@ const char *dynamic_initializer_for__sConditionFactoryList__()
 __int64 dynamic_initializer_for__gConditionFactory__()
 {
   Expression::MemberMapFactory::MemberMapFactory(&gConditionFactory, sConditionFactoryList, sConditionFactoryListNum);
-  return atexit(dynamic_atexit_destructor_for__gConditionFactory__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gConditionFactory__);
 }
 

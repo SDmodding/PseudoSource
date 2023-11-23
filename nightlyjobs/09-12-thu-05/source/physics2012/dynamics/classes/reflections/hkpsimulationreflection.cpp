@@ -39,17 +39,17 @@ hkClass *__fastcall hkpSimulation::staticClass()
 
 // File Line: 111
 // RVA: 0xD51110
-void __fastcall finishLoadedObjecthkpSimulation(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpSimulation(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpSimulation::`vftable;
+    *p = &hkpSimulation::`vftable;
 }
 
 // File Line: 117
 // RVA: 0xD51130
-void __fastcall cleanupLoadedObjecthkpSimulation(void *p)
+void __fastcall cleanupLoadedObjecthkpSimulation(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 121
@@ -70,8 +70,8 @@ void **dynamic_initializer_for__hkpSimulationTypeInfo__()
   hkpSimulationTypeInfo.m_typeName = "hkpSimulation";
   hkpSimulationTypeInfo.m_vtable = result;
   hkpSimulationTypeInfo.m_scopedName = "!hkpSimulation";
-  hkpSimulationTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpSimulation;
-  hkpSimulationTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpSimulation;
+  hkpSimulationTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpSimulation;
+  hkpSimulationTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpSimulation;
   return result;
 }
 

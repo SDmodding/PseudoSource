@@ -28,17 +28,17 @@ hkClass *__fastcall hkaiDropDownAnalyzer::staticClass()
 
 // File Line: 64
 // RVA: 0xC32260
-void __fastcall finishLoadedObjecthkaiDropDownAnalyzer(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiDropDownAnalyzer(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiDropDownAnalyzer::`vftable;
+    *p = &hkaiDropDownAnalyzer::`vftable;
 }
 
 // File Line: 70
 // RVA: 0xC32280
-void __fastcall cleanupLoadedObjecthkaiDropDownAnalyzer(void *p)
+void __fastcall cleanupLoadedObjecthkaiDropDownAnalyzer(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 74
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkaiDropDownAnalyzerTypeInfo__()
   hkaiDropDownAnalyzerTypeInfo.m_typeName = "hkaiDropDownAnalyzer";
   hkaiDropDownAnalyzerTypeInfo.m_vtable = result;
   hkaiDropDownAnalyzerTypeInfo.m_scopedName = "!hkaiDropDownAnalyzer";
-  hkaiDropDownAnalyzerTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiDropDownAnalyzer;
-  hkaiDropDownAnalyzerTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiDropDownAnalyzer;
+  hkaiDropDownAnalyzerTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiDropDownAnalyzer;
+  hkaiDropDownAnalyzerTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiDropDownAnalyzer;
   return result;
 }
 

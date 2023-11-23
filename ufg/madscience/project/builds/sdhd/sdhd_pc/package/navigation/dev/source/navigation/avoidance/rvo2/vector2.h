@@ -84,13 +84,11 @@ RVO::Vector2 *__fastcall RVO::operator*(RVO::Vector2 *result, float s, RVO::Vect
 // RVA: 0xF9D00
 RVO::Vector2 *__fastcall RVO::normalize(RVO::Vector2 *result, RVO::Vector2 *vector)
 {
-  __m128 v2; // xmm1
-  RVO::Vector2 *v3; // rbx
+  __m128 x_low; // xmm1
 
-  v2 = (__m128)LODWORD(vector->x_);
-  v3 = result;
-  v2.m128_f32[0] = (float)(v2.m128_f32[0] * v2.m128_f32[0]) + (float)(vector->y_ * vector->y_);
-  RVO::Vector2::operator/(vector, result, COERCE_FLOAT(_mm_sqrt_ps(v2)));
-  return v3;
+  x_low = (__m128)LODWORD(vector->x_);
+  x_low.m128_f32[0] = (float)(x_low.m128_f32[0] * x_low.m128_f32[0]) + (float)(vector->y_ * vector->y_);
+  RVO::Vector2::operator/(vector, result, _mm_sqrt_ps(x_low).m128_f32[0]);
+  return result;
 }
 

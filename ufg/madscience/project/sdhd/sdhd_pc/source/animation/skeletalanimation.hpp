@@ -2,28 +2,21 @@
 // RVA: 0x2989C0
 void __fastcall SkeletalAnimation::SkeletalAnimation(SkeletalAnimation *this, MemImageLoadFlag flag)
 {
-  SkeletalAnimation *v2; // rdi
-  UFG::qNode<SkeletalAnimation,SkeletalAnimation> *v3; // rax
-  UFG::qList<SkeletalAnimationHandle,SkeletalAnimationList,0,0> *v4; // [rsp+50h] [rbp+18h]
-
-  v2 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  UFG::qSafePointerNode<SkeletalAnimation>::qSafePointerNode<SkeletalAnimation>((UFG::qSafePointerNode<SkeletalAnimation> *)&this->vfptr);
-  v2->mNode.mParent = 0i64;
-  v2->mNode.mChild[0] = 0i64;
-  v2->mNode.mChild[1] = 0i64;
-  v3 = (UFG::qNode<SkeletalAnimation,SkeletalAnimation> *)&v2->mPrev;
-  v3->mPrev = v3;
-  v3->mNext = v3;
-  v2->vfptr = (Expression::IMemberMapVtbl *)&SkeletalAnimation::`vftable{for `Expression::IMemberMap};
-  v2->vfptr = (UFG::qSafePointerNode<SkeletalAnimation>Vtbl *)&SkeletalAnimation::`vftable{for `UFG::qSafePointerNode<SkeletalAnimation>};
-  UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v2->m_AnimationResourceHandle.mPrev);
-  v2->m_AnimationResourceHandle.m_pSkeletalAnimationOwner = 0i64;
-  v2->m_AnimationResourceHandle.m_bUnloading = 0;
-  v4 = &v2->m_SkeletalAnimationHandles;
-  v4->mNode.mPrev = &v4->mNode;
-  v4->mNode.mNext = &v4->mNode;
+  UFG::qSafePointerNode<SkeletalAnimation>::qSafePointerNode<SkeletalAnimation>(&this->UFG::qSafePointerNode<SkeletalAnimation>);
+  this->mNode.mParent = 0i64;
+  this->mNode.mChild[0] = 0i64;
+  this->mNode.mChild[1] = 0i64;
+  this->mPrev = &this->UFG::qNode<SkeletalAnimation,SkeletalAnimation>;
+  this->mNext = &this->UFG::qNode<SkeletalAnimation,SkeletalAnimation>;
+  this->Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&SkeletalAnimation::`vftable{for `Expression::IMemberMap};
+  this->UFG::qSafePointerNode<SkeletalAnimation>::vfptr = (UFG::qSafePointerNode<SkeletalAnimation>Vtbl *)&SkeletalAnimation::`vftable{for `UFG::qSafePointerNode<SkeletalAnimation>};
+  UFG::qResourceHandle::qResourceHandle(&this->m_AnimationResourceHandle);
+  this->m_AnimationResourceHandle.m_pSkeletalAnimationOwner = 0i64;
+  this->m_AnimationResourceHandle.m_bUnloading = 0;
+  this->m_SkeletalAnimationHandles.mNode.mPrev = &this->m_SkeletalAnimationHandles.mNode;
+  this->m_SkeletalAnimationHandles.mNode.mNext = &this->m_SkeletalAnimationHandles.mNode;
 }
 
 // File Line: 123
@@ -41,7 +34,7 @@ TrackGroup *__fastcall SkeletalAnimation::GetTrackGroup(SkeletalAnimation *this)
 
   result = (TrackGroup *)this->mTracks.mOffset;
   if ( result )
-    result = (TrackGroup *)((char *)result + (_QWORD)this + 176);
+    return (TrackGroup *)((char *)result + (_QWORD)this + 176);
   return result;
 }
 
@@ -53,7 +46,7 @@ MotionPhaseChannel *__fastcall SkeletalAnimation::GetMotionPhaseChannel(Skeletal
 
   result = (MotionPhaseChannel *)this->mMotionPhaseChannel.mOffset;
   if ( result )
-    result = (MotionPhaseChannel *)((char *)result + (_QWORD)this + 184);
+    return (MotionPhaseChannel *)((char *)result + (_QWORD)this + 184);
   return result;
 }
 
@@ -62,8 +55,8 @@ MotionPhaseChannel *__fastcall SkeletalAnimation::GetMotionPhaseChannel(Skeletal
 float __fastcall SkeletalAnimation::GetDuration(SkeletalAnimation *this)
 {
   float result; // xmm0_4
-  UFG::qResourceData *v2; // rbx
-  SkeletalAnimation *v3; // rax
+  UFG::qResourceData *mData; // rbx
+  SkeletalAnimation *m_pFallbackAnimation; // rax
   UFG::qResourceData *v4; // rbx
   hkReferencedObject *v5; // rcx
   hkReferencedObject *v6; // rbx
@@ -71,34 +64,34 @@ float __fastcall SkeletalAnimation::GetDuration(SkeletalAnimation *this)
   char v8; // di
   hkReferencedObject *v9; // rcx
   __int64 v10; // rsi
-  hkReferencedObject *v11; // [rsp+58h] [rbp+10h]
-  hkReferencedObject *v12; // [rsp+60h] [rbp+18h]
+  hkReferencedObject *v11; // [rsp+58h] [rbp+10h] BYREF
+  hkReferencedObject *v12; // [rsp+60h] [rbp+18h] BYREF
 
   result = this->mDurationCached;
   if ( result != 3.4028235e38 )
     return result;
-  v2 = this->m_AnimationResourceHandle.mData;
-  if ( v2 )
+  mData = this->m_AnimationResourceHandle.mData;
+  if ( mData )
   {
-    v2 = (UFG::qResourceData *)v2[1].mNode.mChild[0];
-    if ( v2 )
+    mData = (UFG::qResourceData *)mData[1].mNode.mChild[0];
+    if ( mData )
       goto LABEL_8;
   }
-  v3 = this->m_pFallbackAnimation;
-  if ( v3 )
+  m_pFallbackAnimation = this->m_pFallbackAnimation;
+  if ( m_pFallbackAnimation )
   {
-    v4 = v3->m_AnimationResourceHandle.mData;
+    v4 = m_pFallbackAnimation->m_AnimationResourceHandle.mData;
     if ( !v4 )
       goto LABEL_11;
-    v2 = (UFG::qResourceData *)v4[1].mNode.mChild[0];
+    mData = (UFG::qResourceData *)v4[1].mNode.mChild[0];
   }
-  if ( v2 )
+  if ( mData )
   {
 LABEL_8:
-    v5 = *(hkReferencedObject **)&v2->mNode.mUID;
+    v5 = *(hkReferencedObject **)&mData->mNode.mUID;
     if ( v5 )
       hkReferencedObject::addReference(v5);
-    v6 = *(hkReferencedObject **)&v2->mNode.mUID;
+    v6 = *(hkReferencedObject **)&mData->mNode.mUID;
     v12 = v6;
     v7 = (__int64 *)&v12;
     v8 = 1;
@@ -113,23 +106,22 @@ LABEL_11:
   v6 = v12;
 LABEL_12:
   v10 = *v7;
-  if ( v8 & 2 )
+  if ( (v8 & 2) != 0 )
   {
-    v8 &= 0xFDu;
+    v8 &= ~2u;
     if ( v9 )
       hkReferencedObject::removeReference(v9);
     v11 = 0i64;
   }
-  if ( v8 & 1 )
+  if ( (v8 & 1) != 0 )
   {
     if ( v6 )
       hkReferencedObject::removeReference(v6);
     v12 = 0i64;
   }
   if ( v10 )
-    result = *(float *)(v10 + 20);
+    return *(float *)(v10 + 20);
   else
-    result = SkeletalAnimation::msTposeAnimPlayDuration;
-  return result;
+    return SkeletalAnimation::msTposeAnimPlayDuration;
 }
 

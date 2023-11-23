@@ -3,9 +3,9 @@
 void __fastcall hkpVehiclePerWheelSimulation::hkpVehiclePerWheelSimulation(hkpVehiclePerWheelSimulation *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpVehiclePerWheelSimulation::`vftable{for `hkpVehicleSimulation};
-  this->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpVehiclePerWheelSimulation::`vftable{for `hkpWorldPostSimulationListener};
-  this->m_wheelData.m_capacityAndFlags = 2147483648;
+  this->hkpVehicleSimulation::hkReferencedObject::hkBaseObject::vfptr = (hkBaseObjectVtbl *)&hkpVehiclePerWheelSimulation::`vftable{for `hkpVehicleSimulation};
+  this->hkpWorldPostSimulationListener::vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpVehiclePerWheelSimulation::`vftable{for `hkpWorldPostSimulationListener};
+  this->m_wheelData.m_capacityAndFlags = 0x80000000;
   this->m_wheelData.m_data = 0i64;
   this->m_wheelData.m_size = 0;
   this->m_world = 0i64;
@@ -21,141 +21,137 @@ void __fastcall hkpVehiclePerWheelSimulation::hkpVehiclePerWheelSimulation(hkpVe
 void __fastcall hkpVehiclePerWheelSimulation::~hkpVehiclePerWheelSimulation(hkpVehiclePerWheelSimulation *this)
 {
   bool v1; // zf
-  hkpVehiclePerWheelSimulation *v2; // rbx
   int v3; // eax
   __int64 v4; // rcx
-  hkpWheelFrictionConstraintData *v5; // rdx
-  int v6; // er8
+  hkpWheelFrictionConstraintData *p_m_frictionData; // rdx
+  int m_capacityAndFlags; // r8d
 
   v1 = this->m_world == 0i64;
-  v2 = this;
-  this->vfptr = (hkBaseObjectVtbl *)&hkpVehiclePerWheelSimulation::`vftable{for `hkpVehicleSimulation};
-  this->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpVehiclePerWheelSimulation::`vftable{for `hkpWorldPostSimulationListener};
+  this->hkpVehicleSimulation::hkReferencedObject::hkBaseObject::vfptr = (hkBaseObjectVtbl *)&hkpVehiclePerWheelSimulation::`vftable{for `hkpVehicleSimulation};
+  this->hkpWorldPostSimulationListener::vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpVehiclePerWheelSimulation::`vftable{for `hkpWorldPostSimulationListener};
   if ( !v1 )
     hkpVehiclePerWheelSimulation::removeFromWorld(this);
-  v3 = v2->m_wheelData.m_size - 1;
+  v3 = this->m_wheelData.m_size - 1;
   v4 = v3;
   if ( v3 >= 0 )
   {
-    v5 = &v2->m_wheelData.m_data[v3].m_frictionData;
+    p_m_frictionData = &this->m_wheelData.m_data[v3].m_frictionData;
     do
     {
       --v4;
-      v5->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
-      v5 = (hkpWheelFrictionConstraintData *)((char *)v5 - 336);
+      p_m_frictionData->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+      p_m_frictionData = (hkpWheelFrictionConstraintData *)((char *)p_m_frictionData - 336);
     }
     while ( v4 >= 0 );
   }
-  v6 = v2->m_wheelData.m_capacityAndFlags;
-  v2->m_wheelData.m_size = 0;
-  if ( v6 >= 0 )
+  m_capacityAndFlags = this->m_wheelData.m_capacityAndFlags;
+  this->m_wheelData.m_size = 0;
+  if ( m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_wheelData.m_data,
-      336 * (v6 & 0x3FFFFFFF));
-  v2->m_wheelData.m_data = 0i64;
-  v2->m_wheelData.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpWorldPostSimulationListener::`vftable;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_wheelData.m_data,
+      336 * (m_capacityAndFlags & 0x3FFFFFFF));
+  this->m_wheelData.m_data = 0i64;
+  this->m_wheelData.m_capacityAndFlags = 0x80000000;
+  this->hkpWorldPostSimulationListener::vfptr = (hkpWorldPostSimulationListenerVtbl *)&hkpWorldPostSimulationListener::`vftable;
+  this->hkpVehicleSimulation::hkReferencedObject::hkBaseObject::vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 40
 // RVA: 0xE2F1E0
 void __fastcall hkpVehiclePerWheelSimulation::init(hkpVehiclePerWheelSimulation *this, hkpVehicleInstance *instance)
 {
-  hkpVehicleData *v2; // r15
-  __int64 v3; // rbx
+  hkpVehicleData *m_data; // r15
+  __int64 m_numWheels; // rbx
   int v4; // eax
-  hkpVehiclePerWheelSimulation *v5; // r14
   int v6; // eax
-  int v7; // er9
+  int v7; // r9d
   int v8; // eax
   __int64 v9; // rcx
-  hkpWheelFrictionConstraintData *v10; // rdx
-  int v11; // eax
+  hkpWheelFrictionConstraintData *p_m_frictionData; // rdx
+  int m_size; // eax
   __int64 v12; // rdx
-  _QWORD *v13; // rcx
+  float *m_frictionImpulse; // rcx
   int v14; // ebp
   __int64 v15; // rbx
   __int64 v16; // rdi
   hkpVehicleData::WheelComponentParams *v17; // r8
-  float v18; // xmm2_4
+  float m_mass; // xmm2_4
   float v19; // xmm2_4
   hkpVehiclePerWheelSimulation::WheelData *v20; // rax
-  signed __int64 v21; // rdx
-  hkResult result; // [rsp+90h] [rbp+8h]
+  hkpVehiclePerWheelSimulation::WheelData *v21; // rdx
+  hkResult result; // [rsp+90h] [rbp+8h] BYREF
 
   this->m_instance = instance;
-  v2 = instance->m_data;
-  v3 = v2->m_numWheels;
+  m_data = instance->m_data;
+  m_numWheels = m_data->m_numWheels;
   v4 = this->m_wheelData.m_capacityAndFlags & 0x3FFFFFFF;
-  v5 = this;
-  if ( v4 < (signed int)v3 )
+  if ( v4 < (int)m_numWheels )
   {
     v6 = 2 * v4;
-    v7 = v2->m_numWheels;
-    if ( (signed int)v3 < v6 )
+    v7 = m_data->m_numWheels;
+    if ( (int)m_numWheels < v6 )
       v7 = v6;
     hkArrayUtil::_reserve(
       &result,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &this->m_wheelData,
+      &hkContainerHeapAllocator::s_alloc,
+      (const void **)&this->m_wheelData.m_data,
       v7,
       336);
   }
-  v8 = v5->m_wheelData.m_size - v3 - 1;
+  v8 = this->m_wheelData.m_size - m_numWheels - 1;
   v9 = v8;
   if ( v8 >= 0 )
   {
-    v10 = &v5->m_wheelData.m_data[v3 + v8].m_frictionData;
+    p_m_frictionData = &this->m_wheelData.m_data[m_numWheels + v8].m_frictionData;
     do
     {
       --v9;
-      v10->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
-      v10 = (hkpWheelFrictionConstraintData *)((char *)v10 - 336);
+      p_m_frictionData->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+      p_m_frictionData = (hkpWheelFrictionConstraintData *)((char *)p_m_frictionData - 336);
     }
     while ( v9 >= 0 );
   }
-  v11 = v5->m_wheelData.m_size;
-  v12 = (signed int)v3 - v11;
-  if ( (signed int)v3 - v11 > 0 )
+  m_size = this->m_wheelData.m_size;
+  v12 = (int)m_numWheels - m_size;
+  if ( (int)m_numWheels - m_size > 0 )
   {
-    v13 = (_QWORD *)v5->m_wheelData.m_data[v5->m_wheelData.m_size].m_frictionData.m_atoms.m_friction.m_frictionImpulse;
+    m_frictionImpulse = this->m_wheelData.m_data[this->m_wheelData.m_size].m_frictionData.m_atoms.m_friction.m_frictionImpulse;
     do
     {
-      if ( v13 != (_QWORD *)244 )
+      if ( m_frictionImpulse != (float *)244 )
       {
-        *((_DWORD *)v13 - 47) = 0x1FFFF;
-        *(_QWORD *)((char *)v13 - 180) = 0i64;
-        *(_QWORD *)((char *)v13 - 196) = &hkpWheelFrictionConstraintData::`vftable;
-        *((_WORD *)v13 - 82) = 2;
-        *((_WORD *)v13 - 10) = 28;
-        *((_BYTE *)v13 - 18) = 1;
-        *v13 = 0i64;
-        v13[1] = 0i64;
-        *(_QWORD *)((char *)v13 + 20) = 0i64;
-        *(_QWORD *)((char *)v13 + 28) = 0i64;
+        *((_DWORD *)m_frictionImpulse - 47) = 0x1FFFF;
+        *(_QWORD *)(m_frictionImpulse - 45) = 0i64;
+        *(_QWORD *)(m_frictionImpulse - 49) = &hkpWheelFrictionConstraintData::`vftable;
+        *((_WORD *)m_frictionImpulse - 82) = 2;
+        *((_WORD *)m_frictionImpulse - 10) = 28;
+        *((_BYTE *)m_frictionImpulse - 18) = 1;
+        *(_QWORD *)m_frictionImpulse = 0i64;
+        *((_QWORD *)m_frictionImpulse + 1) = 0i64;
+        *(_QWORD *)(m_frictionImpulse + 5) = 0i64;
+        *(_QWORD *)(m_frictionImpulse + 7) = 0i64;
       }
-      v13 += 42;
+      m_frictionImpulse += 84;
       --v12;
     }
     while ( v12 );
   }
-  v5->m_wheelData.m_size = v3;
+  this->m_wheelData.m_size = m_numWheels;
   v14 = 0;
-  if ( (signed int)v3 > 0 )
+  if ( (int)m_numWheels > 0 )
   {
     v15 = 0i64;
     v16 = 0i64;
     do
     {
-      v17 = v2->m_wheelParams.m_data;
-      v18 = v17[v16].m_mass;
-      if ( v18 == 0.0 )
+      v17 = m_data->m_wheelParams.m_data;
+      m_mass = v17[v16].m_mass;
+      if ( m_mass == 0.0 )
         v19 = 0.0;
       else
-        v19 = 2.0 / (float)((float)(v17[v16].m_radius * v18) * v17[v16].m_radius);
-      v20 = v5->m_wheelData.m_data;
+        v19 = 2.0 / (float)((float)(v17[v16].m_radius * m_mass) * v17[v16].m_radius);
+      v20 = this->m_wheelData.m_data;
       v20[v15].m_axle.m_invInertia = v19;
       v20[v15].m_axle.m_numWheels = 1;
       if ( v19 == 0.0 )
@@ -168,35 +164,30 @@ void __fastcall hkpVehiclePerWheelSimulation::init(hkpVehiclePerWheelSimulation 
       v20[v15].m_axle.m_impulseScaling = 1.0;
       v20[v15].m_axle.m_impulseMax = 3.40282e38;
       v20[v15].m_axle.m_numWheelsOnGround = 0;
-      v21 = (signed __int64)&v5->m_wheelData.m_data[v14];
-      hkpWheelFrictionConstraintData::init(
-        (hkpWheelFrictionConstraintData *)(v21 + 48),
-        (hkpWheelFrictionConstraintAtom::Axle *)v21,
-        v17[v16].m_radius);
+      v21 = &this->m_wheelData.m_data[v14];
+      hkpWheelFrictionConstraintData::init(&v21->m_frictionData, &v21->m_axle, v17[v16].m_radius);
       ++v14;
       ++v16;
       ++v15;
     }
-    while ( v14 < v5->m_wheelData.m_size );
+    while ( v14 < this->m_wheelData.m_size );
   }
 }
 
 // File Line: 70
 // RVA: 0xE2F440
-hkpVehicleSimulation *__fastcall hkpVehiclePerWheelSimulation::clone(hkpVehiclePerWheelSimulation *this, hkpVehicleInstance *instance)
+hkpVehicleSimulation *__fastcall hkpVehiclePerWheelSimulation::clone(
+        hkpVehiclePerWheelSimulation *this,
+        hkpVehicleInstance *instance)
 {
-  hkpVehiclePerWheelSimulation *v2; // rdi
-  hkpVehicleInstance *v3; // rsi
-  _QWORD **v4; // rax
+  _QWORD **Value; // rax
   hkpVehiclePerWheelSimulation *v5; // rax
-  _DWORD *v6; // rax
-  _DWORD *v7; // rbx
+  float *v6; // rax
+  float *v7; // rbx
 
-  v2 = this;
-  v3 = instance;
-  v4 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v5 = (hkpVehiclePerWheelSimulation *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v4[11] + 8i64))(
-                                         v4[11],
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v5 = (hkpVehiclePerWheelSimulation *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(
+                                         Value[11],
                                          80i64);
   if ( v5 )
   {
@@ -207,12 +198,12 @@ hkpVehicleSimulation *__fastcall hkpVehiclePerWheelSimulation::clone(hkpVehicleP
   {
     v7 = 0i64;
   }
-  v7[10] = LODWORD(v2->m_slipDamping);
-  v7[11] = LODWORD(v2->m_impulseScaling);
-  v7[12] = LODWORD(v2->m_maxImpulse);
-  v7[13] = LODWORD(v2->m_takeDynamicVelocity);
-  v7[14] = LODWORD(v2->m_curbDamping);
-  (*(void (__fastcall **)(_DWORD *, hkpVehicleInstance *))(*(_QWORD *)v7 + 24i64))(v7, v3);
+  v7[10] = this->m_slipDamping;
+  v7[11] = this->m_impulseScaling;
+  v7[12] = this->m_maxImpulse;
+  v7[13] = this->m_takeDynamicVelocity;
+  v7[14] = this->m_curbDamping;
+  (*(void (__fastcall **)(float *, hkpVehicleInstance *))(*(_QWORD *)v7 + 24i64))(v7, instance);
   return (hkpVehicleSimulation *)v7;
 }
 
@@ -221,7 +212,7 @@ hkpVehicleSimulation *__fastcall hkpVehiclePerWheelSimulation::clone(hkpVehicleP
 void __fastcall hkpVehiclePerWheelSimulation::addToWorld(hkpVehiclePerWheelSimulation *this, hkpWorld *world)
 {
   this->m_world = world;
-  hkpWorld::addWorldPostSimulationListener(world, (hkpWorldPostSimulationListener *)&this->vfptr);
+  hkpWorld::addWorldPostSimulationListener(world, &this->hkpWorldPostSimulationListener);
 }
 
 // File Line: 91
@@ -229,107 +220,103 @@ void __fastcall hkpVehiclePerWheelSimulation::addToWorld(hkpVehiclePerWheelSimul
 void __fastcall hkpVehiclePerWheelSimulation::removeFromWorld(hkpVehiclePerWheelSimulation *this)
 {
   int v1; // ebx
-  hkpVehiclePerWheelSimulation *v2; // rdi
   hkpWorldPostSimulationListener *v3; // rdx
   __int64 v4; // rsi
 
   v1 = 0;
-  v2 = this;
-  v3 = (hkpWorldPostSimulationListener *)&this->vfptr;
+  v3 = &this->hkpWorldPostSimulationListener;
   if ( !this )
     v3 = 0i64;
   hkpWorld::removeWorldPostSimulationListener(this->m_world, v3);
-  v2->m_world = 0i64;
-  if ( v2->m_wheelData.m_size > 0 )
+  this->m_world = 0i64;
+  if ( this->m_wheelData.m_size > 0 )
   {
     v4 = 0i64;
     do
     {
-      if ( v2->m_wheelData.m_data[v4].m_frictionConstraint )
-        hkpVehiclePerWheelSimulation::removeFrictionConstraint(v2, v1);
+      if ( this->m_wheelData.m_data[v4].m_frictionConstraint )
+        hkpVehiclePerWheelSimulation::removeFrictionConstraint(this, v1);
       ++v1;
       ++v4;
     }
-    while ( v1 < v2->m_wheelData.m_size );
+    while ( v1 < this->m_wheelData.m_size );
   }
 }
 
 // File Line: 108
 // RVA: 0xE2F570
-void __fastcall hkpVehiclePerWheelSimulation::simulateVehicle(hkpVehiclePerWheelSimulation *this, hkpVehicleInstance *instance, hkStepInfo *stepInfo, hkpVehicleSimulation::SimulationInput *simulInput, hkpVehicleJobResults *vehicleJobResults)
+void __fastcall hkpVehiclePerWheelSimulation::simulateVehicle(
+        hkpVehiclePerWheelSimulation *this,
+        hkpVehicleInstance *instance,
+        hkStepInfo *stepInfo,
+        hkpVehicleSimulation::SimulationInput *simulInput,
+        hkpVehicleJobResults *vehicleJobResults)
 {
-  hkStepInfo *v5; // rsi
-  hkpVehicleSimulation::SimulationInput *v6; // rdi
-  hkpVehiclePerWheelSimulation *v7; // rbx
-
-  v5 = stepInfo;
-  v6 = simulInput;
-  v7 = this;
   hkpVehiclePerWheelSimulation::applySuspensionForces(this, stepInfo, simulInput);
-  hkpVehiclePerWheelSimulation::applyAerodynamicForces(v7, v5, v6);
-  hkpVehiclePerWheelSimulation::setupFriction(v7, v5, v6);
+  hkpVehiclePerWheelSimulation::applyAerodynamicForces(this, stepInfo, simulInput);
+  hkpVehiclePerWheelSimulation::setupFriction(this, stepInfo, simulInput);
 }
 
 // File Line: 124
 // RVA: 0xE2F9E0
-void __fastcall hkpVehiclePerWheelSimulation::applySuspensionForces(hkpVehiclePerWheelSimulation *this, hkStepInfo *stepInfo, hkpVehicleSimulation::SimulationInput *simulInput)
+void __fastcall hkpVehiclePerWheelSimulation::applySuspensionForces(
+        hkpVehiclePerWheelSimulation *this,
+        hkStepInfo *stepInfo,
+        hkpVehicleSimulation::SimulationInput *simulInput)
 {
-  hkpVehicleInstance *v3; // rax
+  hkpVehicleInstance *m_instance; // rax
   __int64 v4; // rbx
-  hkpVehicleSimulation::SimulationInput *v5; // r15
-  hkpEntity *v6; // r13
-  hkStepInfo *v7; // r12
-  hkpVehiclePerWheelSimulation *v8; // r14
-  __int64 v9; // rsi
-  __int64 v10; // rdi
-  hkpVehicleInstance::WheelInfo *v11; // rbp
-  float v12; // xmm0_4
-  __m128 v13; // [rsp+20h] [rbp-48h]
+  hkpEntity *m_entity; // r13
+  hkpVehicleData *m_data; // rax
+  __int64 m_numWheels; // rsi
+  __int64 v11; // rdi
+  hkpVehicleInstance::WheelInfo *v12; // rbp
+  float v13; // xmm0_4
+  __m128 v14; // [rsp+20h] [rbp-48h] BYREF
 
-  v3 = this->m_instance;
+  m_instance = this->m_instance;
   v4 = 0i64;
-  v5 = simulInput;
-  v6 = v3->m_entity;
-  v7 = stepInfo;
-  v8 = this;
-  v9 = (unsigned __int8)v3->m_data->m_numWheels;
-  if ( (signed int)v9 > 0 )
+  m_entity = m_instance->m_entity;
+  m_data = m_instance->m_data;
+  m_numWheels = (unsigned __int8)m_data->m_numWheels;
+  if ( m_data->m_numWheels )
   {
-    v10 = 0i64;
+    v11 = 0i64;
     do
     {
-      v11 = v8->m_instance->m_wheelsInfo.m_data;
-      v12 = v5->suspensionForceAtWheel->m_data[v4];
-      if ( v12 > 0.0 )
+      v12 = this->m_instance->m_wheelsInfo.m_data;
+      v13 = simulInput->suspensionForceAtWheel->m_data[v4];
+      if ( v13 > 0.0 )
       {
-        v13 = _mm_mul_ps(
+        v14 = _mm_mul_ps(
                 _mm_shuffle_ps(
-                  (__m128)COERCE_UNSIGNED_INT(v12 * v7->m_deltaTime.m_storage),
-                  (__m128)COERCE_UNSIGNED_INT(v12 * v7->m_deltaTime.m_storage),
+                  (__m128)COERCE_UNSIGNED_INT(v13 * stepInfo->m_deltaTime.m_storage),
+                  (__m128)COERCE_UNSIGNED_INT(v13 * stepInfo->m_deltaTime.m_storage),
                   0),
-                v11[v10].m_contactPoint.m_separatingNormal.m_quad);
-        hkpEntity::activate(v6);
-        ((void (__fastcall *)(hkpMaxSizeMotion *, __m128 *, hkVector4f *))v6->m_motion.vfptr[11].__first_virtual_table_function__)(
-          &v6->m_motion,
-          &v13,
-          &v11[v10].m_hardPointWs);
+                v12[v11].m_contactPoint.m_separatingNormal.m_quad);
+        hkpEntity::activate(m_entity);
+        ((void (__fastcall *)(hkpMaxSizeMotion *, __m128 *, hkVector4f *))m_entity->m_motion.vfptr[11].__first_virtual_table_function__)(
+          &m_entity->m_motion,
+          &v14,
+          &v12[v11].m_hardPointWs);
       }
       ++v4;
-      ++v10;
+      ++v11;
     }
-    while ( v4 < v9 );
+    while ( v4 < m_numWheels );
   }
 }
 
 // File Line: 148
 // RVA: 0xE2FAD0
-void __fastcall hkpVehiclePerWheelSimulation::applyAerodynamicForces(hkpVehiclePerWheelSimulation *this, hkStepInfo *stepInfo, hkpVehicleSimulation::SimulationInput *simulInput)
+void __fastcall hkpVehiclePerWheelSimulation::applyAerodynamicForces(
+        hkpVehiclePerWheelSimulation *this,
+        hkStepInfo *stepInfo,
+        hkpVehicleSimulation::SimulationInput *simulInput)
 {
-  hkpVehiclePerWheelSimulation *v3; // rbx
-  hkpEntity *v4; // rbp
-  hkpVehicleAerodynamics::AerodynamicsDragOutput *v5; // rax
+  hkpEntity *m_entity; // rbp
+  hkpVehicleAerodynamics::AerodynamicsDragOutput *aerodynamicsDragInfo; // rax
   __m128 v6; // xmm6
-  __m128 **v7; // rdi
   hkpEntity *v8; // rcx
   __m128 v9; // xmm9
   __m128 v10; // xmm8
@@ -337,34 +324,32 @@ void __fastcall hkpVehiclePerWheelSimulation::applyAerodynamicForces(hkpVehicleP
   __m128 v12; // xmm1
   __m128 v13; // xmm2
   __m128 v14; // xmm5
-  __m128 v15; // [rsp+20h] [rbp-58h]
-  __m128 v16; // [rsp+30h] [rbp-48h]
+  __m128 m_quad; // [rsp+20h] [rbp-58h] BYREF
+  __m128 v16[3]; // [rsp+30h] [rbp-48h] BYREF
 
-  v3 = this;
-  v4 = this->m_instance->m_entity;
-  v5 = simulInput->aerodynamicsDragInfo;
+  m_entity = this->m_instance->m_entity;
+  aerodynamicsDragInfo = simulInput->aerodynamicsDragInfo;
   v6 = _mm_shuffle_ps(
          (__m128)LODWORD(stepInfo->m_deltaTime.m_storage),
          (__m128)LODWORD(stepInfo->m_deltaTime.m_storage),
          0);
-  v7 = (__m128 **)simulInput;
-  v15 = v4->m_motion.m_linearVelocity.m_quad;
-  v15 = _mm_add_ps(
-          v15,
-          _mm_mul_ps(
-            _mm_mul_ps(
-              _mm_shuffle_ps(
-                (__m128)v4->m_motion.m_inertiaAndMassInv.m_quad.m128_u32[3],
-                (__m128)v4->m_motion.m_inertiaAndMassInv.m_quad.m128_u32[3],
-                0),
-              v6),
-            v5->m_aerodynamicsForce.m_quad));
-  hkpEntity::activate(v4);
-  v4->m_motion.vfptr[9].__vecDelDtor((hkBaseObject *)&v4->m_motion.vfptr, (unsigned int)&v15);
-  v8 = v3->m_instance->m_entity;
+  m_quad = m_entity->m_motion.m_linearVelocity.m_quad;
+  m_quad = _mm_add_ps(
+             m_quad,
+             _mm_mul_ps(
+               _mm_mul_ps(
+                 _mm_shuffle_ps(
+                   (__m128)m_entity->m_motion.m_inertiaAndMassInv.m_quad.m128_u32[3],
+                   (__m128)m_entity->m_motion.m_inertiaAndMassInv.m_quad.m128_u32[3],
+                   0),
+                 v6),
+               aerodynamicsDragInfo->m_aerodynamicsForce.m_quad));
+  hkpEntity::activate(m_entity);
+  m_entity->m_motion.vfptr[9].__vecDelDtor(&m_entity->m_motion, (unsigned int)&m_quad);
+  v8 = this->m_instance->m_entity;
   v9 = v8->m_motion.m_motionState.m_transform.m_rotation.m_col2.m_quad;
   v10 = v8->m_motion.m_motionState.m_transform.m_rotation.m_col0.m_quad;
-  v11 = _mm_mul_ps((*v7)[1], v6);
+  v11 = _mm_mul_ps(simulInput->aerodynamicsDragInfo->m_aerodynamicsTorque.m_quad, v6);
   v12 = _mm_unpacklo_ps(v10, v8->m_motion.m_motionState.m_transform.m_rotation.m_col1.m_quad);
   v13 = _mm_movelh_ps(v12, v9);
   v14 = _mm_mul_ps(
@@ -374,24 +359,24 @@ void __fastcall hkpVehiclePerWheelSimulation::applyAerodynamicForces(hkpVehicleP
               _mm_mul_ps(_mm_shuffle_ps(v11, v11, 0), v13)),
             _mm_mul_ps(
               _mm_shuffle_ps(
-                _mm_unpackhi_ps(
-                  v8->m_motion.m_motionState.m_transform.m_rotation.m_col0.m_quad,
-                  v8->m_motion.m_motionState.m_transform.m_rotation.m_col1.m_quad),
+                _mm_unpackhi_ps(v10, v8->m_motion.m_motionState.m_transform.m_rotation.m_col1.m_quad),
                 v9,
                 228),
               _mm_shuffle_ps(v11, v11, 170))),
-          v4->m_motion.m_inertiaAndMassInv.m_quad);
-  v16 = _mm_add_ps(
-          _mm_add_ps(
-            _mm_add_ps(
-              _mm_mul_ps(_mm_shuffle_ps(v14, v14, 85), v8->m_motion.m_motionState.m_transform.m_rotation.m_col1.m_quad),
-              _mm_mul_ps(_mm_shuffle_ps(v14, v14, 0), v10)),
-            _mm_mul_ps(_mm_shuffle_ps(v14, v14, 170), v9)),
-          v4->m_motion.m_angularVelocity.m_quad);
-  hkpEntity::activate(v4);
-  ((void (__fastcall *)(hkpMaxSizeMotion *, __m128 *))v4->m_motion.vfptr[9].__first_virtual_table_function__)(
-    &v4->m_motion,
-    &v16);
+          m_entity->m_motion.m_inertiaAndMassInv.m_quad);
+  v16[0] = _mm_add_ps(
+             _mm_add_ps(
+               _mm_add_ps(
+                 _mm_mul_ps(
+                   _mm_shuffle_ps(v14, v14, 85),
+                   v8->m_motion.m_motionState.m_transform.m_rotation.m_col1.m_quad),
+                 _mm_mul_ps(_mm_shuffle_ps(v14, v14, 0), v10)),
+               _mm_mul_ps(_mm_shuffle_ps(v14, v14, 170), v9)),
+             m_entity->m_motion.m_angularVelocity.m_quad);
+  hkpEntity::activate(m_entity);
+  ((void (__fastcall *)(hkpMaxSizeMotion *, __m128 *))m_entity->m_motion.vfptr[9].__first_virtual_table_function__)(
+    &m_entity->m_motion,
+    v16);
 }
 
 // File Line: 171
@@ -399,225 +384,208 @@ void __fastcall hkpVehiclePerWheelSimulation::applyAerodynamicForces(hkpVehicleP
 void __fastcall hkpVehiclePerWheelSimulation::removeFrictionConstraint(hkpVehiclePerWheelSimulation *this, int w_it)
 {
   hkpVehiclePerWheelSimulation::WheelData *v2; // rbx
-  hkBool result; // [rsp+38h] [rbp+10h]
+  hkBool result; // [rsp+38h] [rbp+10h] BYREF
 
   v2 = &this->m_wheelData.m_data[w_it];
   hkpWorld::removeConstraint(this->m_instance->m_entity->m_world, &result, v2->m_frictionConstraint);
-  hkReferencedObject::removeReference((hkReferencedObject *)&v2->m_frictionConstraint->vfptr);
+  hkReferencedObject::removeReference(v2->m_frictionConstraint);
   --v2->m_axle.m_numWheelsOnGround;
   v2->m_frictionConstraint = 0i64;
 }
 
 // File Line: 188
 // RVA: 0xE2FC70
-void __fastcall hkpVehiclePerWheelSimulation::setupFriction(hkpVehiclePerWheelSimulation *this, hkStepInfo *stepInfo, hkpVehicleSimulation::SimulationInput *simulInput)
+void __fastcall hkpVehiclePerWheelSimulation::setupFriction(
+        hkpVehiclePerWheelSimulation *this,
+        hkStepInfo *stepInfo,
+        hkpVehicleSimulation::SimulationInput *simulInput)
 {
-  hkpVehicleInstance *v3; // rax
-  int v4; // er14
-  __int64 v5; // r15
-  hkpEntity *v6; // r9
-  hkpVehicleSimulation::SimulationInput *v7; // r10
-  hkStepInfo *v8; // r11
-  hkpVehiclePerWheelSimulation *v9; // rbp
-  __int64 v10; // rdx
-  __int64 v11; // r12
-  __int64 v12; // rbx
-  hkpVehicleInstance *v13; // rcx
-  hkpVehiclePerWheelSimulation::WheelData *v14; // rdi
-  hkpVehicleData::WheelComponentParams *v15; // r8
-  hkVector4f *v16; // rsi
-  hkpConstraintInstance *v17; // rax
-  hkpEntity *v18; // r13
-  float v19; // xmm10_4
-  char v20; // al
-  int v21; // eax
-  __m128 v22; // xmm3
+  int v3; // r14d
+  __int64 v4; // r15
+  hkpEntity *m_entity; // r9
+  hkpVehicleSimulation::SimulationInput *v6; // r10
+  hkStepInfo *v7; // r11
+  __int64 v9; // rdx
+  __int64 v10; // r12
+  __int64 v11; // rbx
+  hkpVehicleInstance *m_instance; // rcx
+  hkpVehiclePerWheelSimulation::WheelData *m_data; // rdi
+  hkpVehicleData::WheelComponentParams *v14; // r8
+  hkVector4f *v15; // rsi
+  hkpConstraintInstance *m_frictionConstraint; // rax
+  hkpEntity *v17; // r13
+  float v18; // xmm10_4
+  char m_bool; // al
+  float m_spinVelocity; // eax
+  __m128 m_quad; // xmm3
+  __m128 v22; // xmm2
   __m128 v23; // xmm2
-  __m128 v24; // xmm2
-  __m128 v25; // xmm5
-  float v26; // xmm9_4
-  __m128 v27; // xmm5
-  __m128 v28; // xmm1
-  __m128 v29; // xmm3
-  __m128 v30; // xmm2
-  __m128 v31; // xmm4
+  __m128 v24; // xmm5
+  float v25; // xmm9_4
+  __m128 v26; // xmm5
+  __m128 v27; // xmm1
+  __m128 v28; // xmm3
+  __m128 v29; // xmm2
+  __m128 v30; // xmm4
+  __m128 v31; // xmm5
   __m128 v32; // xmm5
-  __m128 v33; // xmm5
-  __m128 v34; // xmm1
-  __m128 v35; // xmm2
-  __m128 v36; // xmm1
-  hkVector4f *side; // ST28_8
-  _QWORD **v38; // rax
-  hkpConstraintInstance *v39; // rax
-  hkpEntity *v40; // rsi
+  __m128 v33; // xmm1
+  __m128 v34; // xmm2
+  __m128 v35; // xmm1
+  _QWORD **Value; // rax
+  hkpConstraintInstance *v37; // rax
+  hkVector4f *side; // [rsp+28h] [rbp-B0h]
   hkpEntity *entityA; // [rsp+30h] [rbp-A8h]
-  hkpVehicleData::WheelComponentParams *v42; // [rsp+E0h] [rbp+8h]
-  hkStepInfo *v43; // [rsp+E8h] [rbp+10h]
-  hkpVehicleSimulation::SimulationInput *v44; // [rsp+F0h] [rbp+18h]
-  __int64 v45; // [rsp+F8h] [rbp+20h]
+  hkpVehicleData::WheelComponentParams *v40; // [rsp+E0h] [rbp+8h]
+  __int64 v43; // [rsp+F8h] [rbp+20h]
 
-  v44 = simulInput;
-  v43 = stepInfo;
-  v3 = this->m_instance;
-  v4 = 0;
-  v5 = 0i64;
-  v6 = v3->m_entity;
-  v7 = simulInput;
-  v8 = stepInfo;
-  v9 = this;
-  entityA = v3->m_entity;
+  v3 = 0;
+  v4 = 0i64;
+  m_entity = this->m_instance->m_entity;
+  v6 = simulInput;
+  v7 = stepInfo;
+  entityA = m_entity;
   if ( this->m_wheelData.m_size > 0 )
   {
+    v9 = 0i64;
     v10 = 0i64;
+    v43 = 0i64;
     v11 = 0i64;
-    v45 = 0i64;
-    v12 = 0i64;
     do
     {
-      v13 = v9->m_instance;
-      v14 = v9->m_wheelData.m_data;
-      v15 = v13->m_data->m_wheelParams.m_data;
-      v16 = (hkVector4f *)((char *)&v13->m_wheelsInfo.m_data->m_contactPoint.m_position + v10);
-      v17 = v14[v12].m_frictionConstraint;
-      v18 = (hkpEntity *)v16[2].m_quad.m128_u64[1];
-      v42 = v15;
-      v19 = v7->totalLinearForceAtWheel->m_data[v5] * v15[v11].m_radius;
-      if ( v17 && v17->m_entities[1] != v18 )
+      m_instance = this->m_instance;
+      m_data = this->m_wheelData.m_data;
+      v14 = m_instance->m_data->m_wheelParams.m_data;
+      v15 = (hkVector4f *)((char *)&m_instance->m_wheelsInfo.m_data->m_contactPoint.m_position + v9);
+      m_frictionConstraint = m_data[v11].m_frictionConstraint;
+      v17 = (hkpEntity *)v15[2].m_quad.m128_u64[1];
+      v40 = v14;
+      v18 = v6->totalLinearForceAtWheel->m_data[v4] * v14[v10].m_radius;
+      if ( m_frictionConstraint && m_frictionConstraint->m_entities[1] != v17 )
       {
-        hkpVehiclePerWheelSimulation::removeFrictionConstraint(v9, v4);
-        v10 = v45;
-        v6 = entityA;
-        v15 = v42;
-        v7 = v44;
-        v8 = v43;
+        hkpVehiclePerWheelSimulation::removeFrictionConstraint(this, v3);
+        v9 = v43;
+        m_entity = entityA;
+        v14 = v40;
+        v6 = simulInput;
+        v7 = stepInfo;
       }
-      v20 = v9->m_instance->m_isFixed.m_data[v5].m_bool;
-      v14[v12].m_axle.m_isFixed.m_bool = v20;
-      if ( v20 )
-        v14[v12].m_axle.m_spinVelocity = 0.0;
+      m_bool = this->m_instance->m_isFixed.m_data[v4].m_bool;
+      m_data[v11].m_axle.m_isFixed.m_bool = m_bool;
+      if ( m_bool )
+        m_data[v11].m_axle.m_spinVelocity = 0.0;
       else
-        v14[v12].m_axle.m_spinVelocity = v16[12].m_quad.m128_f32[0];
-      if ( v18 )
+        LODWORD(m_data[v11].m_axle.m_spinVelocity) = v15[12].m_quad.m128_i32[0];
+      if ( v17 )
       {
-        v22 = v16[1].m_quad;
-        v23 = (__m128)LODWORD(v7->suspensionForceAtWheel->m_data[v4]);
-        v24 = _mm_mul_ps(_mm_mul_ps(_mm_shuffle_ps(v23, v23, 0), v16[8].m_quad), v22);
-        v25 = _mm_sub_ps(
-                _mm_mul_ps(_mm_shuffle_ps(v16[10].m_quad, v16[10].m_quad, 201), v22),
-                _mm_mul_ps(_mm_shuffle_ps(v22, v22, 201), v16[10].m_quad));
-        v26 = (float)(COERCE_FLOAT((unsigned int)(2
-                                                * COERCE_SIGNED_INT(
-                                                    (float)(COERCE_FLOAT(_mm_shuffle_ps(v24, v24, 85))
-                                                          + COERCE_FLOAT(_mm_shuffle_ps(v24, v24, 0)))
-                                                  + COERCE_FLOAT(_mm_shuffle_ps(v24, v24, 170)))) >> 1)
-                    * v15[v11].m_friction)
-            * v16[2].m_quad.m128_f32[0];
-        v27 = _mm_shuffle_ps(v25, v25, 201);
-        v28 = _mm_mul_ps(v27, v27);
-        v29 = _mm_add_ps(
-                _mm_add_ps(_mm_shuffle_ps(v28, v28, 85), _mm_shuffle_ps(v28, v28, 0)),
-                _mm_shuffle_ps(v28, v28, 170));
-        v30 = _mm_rsqrt_ps(v29);
-        v31 = _mm_mul_ps(
+        m_quad = v15[1].m_quad;
+        v22 = (__m128)LODWORD(v6->suspensionForceAtWheel->m_data[v3]);
+        v23 = _mm_mul_ps(_mm_mul_ps(_mm_shuffle_ps(v22, v22, 0), v15[8].m_quad), m_quad);
+        v24 = _mm_sub_ps(
+                _mm_mul_ps(_mm_shuffle_ps(v15[10].m_quad, v15[10].m_quad, 201), m_quad),
+                _mm_mul_ps(_mm_shuffle_ps(m_quad, m_quad, 201), v15[10].m_quad));
+        v25 = (float)(COERCE_FLOAT((unsigned int)(2
+                                                * COERCE_INT(
+                                                    (float)(_mm_shuffle_ps(v23, v23, 85).m128_f32[0]
+                                                          + _mm_shuffle_ps(v23, v23, 0).m128_f32[0])
+                                                  + _mm_shuffle_ps(v23, v23, 170).m128_f32[0])) >> 1)
+                    * v14[v10].m_friction)
+            * v15[2].m_quad.m128_f32[0];
+        v26 = _mm_shuffle_ps(v24, v24, 201);
+        v27 = _mm_mul_ps(v26, v26);
+        v28 = _mm_add_ps(
+                _mm_add_ps(_mm_shuffle_ps(v27, v27, 85), _mm_shuffle_ps(v27, v27, 0)),
+                _mm_shuffle_ps(v27, v27, 170));
+        v29 = _mm_rsqrt_ps(v28);
+        v30 = _mm_mul_ps(
                 _mm_andnot_ps(
-                  _mm_cmpleps(v29, (__m128)0i64),
+                  _mm_cmple_ps(v28, (__m128)0i64),
                   _mm_mul_ps(
-                    _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v30, v29), v30)),
-                    _mm_mul_ps(*(__m128 *)_xmm, v30))),
-                v27);
-        v14[v12].m_forwardDirectionWs.m_quad = v31;
-        v32 = _mm_sub_ps(
-                _mm_mul_ps(_mm_shuffle_ps(v16[1].m_quad, v16[1].m_quad, 201), v31),
-                _mm_mul_ps(_mm_shuffle_ps(v31, v31, 201), v16[1].m_quad));
-        v33 = _mm_shuffle_ps(v32, v32, 201);
-        v34 = _mm_mul_ps(v33, v33);
-        v35 = _mm_add_ps(
-                _mm_add_ps(_mm_shuffle_ps(v34, v34, 85), _mm_shuffle_ps(v34, v34, 0)),
-                _mm_shuffle_ps(v34, v34, 170));
-        v36 = _mm_rsqrt_ps(v35);
-        side = &v14[v12].m_sideDirectionWs;
+                    _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v29, v28), v29)),
+                    _mm_mul_ps(*(__m128 *)_xmm, v29))),
+                v26);
+        m_data[v11].m_forwardDirectionWs.m_quad = v30;
+        v31 = _mm_sub_ps(
+                _mm_mul_ps(_mm_shuffle_ps(v15[1].m_quad, v15[1].m_quad, 201), v30),
+                _mm_mul_ps(_mm_shuffle_ps(v30, v30, 201), v15[1].m_quad));
+        v32 = _mm_shuffle_ps(v31, v31, 201);
+        v33 = _mm_mul_ps(v32, v32);
+        v34 = _mm_add_ps(
+                _mm_add_ps(_mm_shuffle_ps(v33, v33, 85), _mm_shuffle_ps(v33, v33, 0)),
+                _mm_shuffle_ps(v33, v33, 170));
+        v35 = _mm_rsqrt_ps(v34);
+        side = &m_data[v11].m_sideDirectionWs;
         side->m_quad = _mm_mul_ps(
                          _mm_andnot_ps(
-                           _mm_cmpleps(v35, (__m128)0i64),
+                           _mm_cmple_ps(v34, (__m128)0i64),
                            _mm_mul_ps(
-                             _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v36, v35), v36)),
-                             _mm_mul_ps(*(__m128 *)_xmm, v36))),
-                         v33);
-        v14[v12].m_contactLocal.m_quad = _mm_sub_ps(
-                                           v16->m_quad,
-                                           v6->m_motion.m_motionState.m_sweptTransform.m_centerOfMass1.m_quad);
+                             _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v35, v34), v35)),
+                             _mm_mul_ps(*(__m128 *)_xmm, v35))),
+                         v32);
+        m_data[v11].m_contactLocal.m_quad = _mm_sub_ps(
+                                              v15->m_quad,
+                                              m_entity->m_motion.m_motionState.m_sweptTransform.m_centerOfMass1.m_quad);
         hkpWheelFrictionConstraintData::setInWorldSpace(
-          &v14[v12].m_frictionData,
-          &v6->m_motion.m_motionState.m_transform,
-          &v18->m_motion.m_motionState.m_transform,
-          v16,
-          &v14[v12].m_forwardDirectionWs,
+          &m_data[v11].m_frictionData,
+          &m_entity->m_motion.m_motionState.m_transform,
+          &v17->m_motion.m_motionState.m_transform,
+          v15,
+          &m_data[v11].m_forwardDirectionWs,
           side);
-        hkpWheelFrictionConstraintData::setMaxFrictionForce(&v14[v12].m_frictionData, v26);
-        hkpWheelFrictionConstraintData::setTorque(&v14[v12].m_frictionData, v19);
+        hkpWheelFrictionConstraintData::setMaxFrictionForce(&m_data[v11].m_frictionData, v25);
+        hkpWheelFrictionConstraintData::setTorque(&m_data[v11].m_frictionData, v18);
         hkpWheelFrictionConstraintData::setImpulseScaling(
-          &v14[v12].m_frictionData,
-          v9->m_impulseScaling,
-          v9->m_maxImpulse);
-        if ( !v14[v12].m_frictionConstraint )
+          &m_data[v11].m_frictionData,
+          this->m_impulseScaling,
+          this->m_maxImpulse);
+        if ( !m_data[v11].m_frictionConstraint )
         {
-          v38 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-          v39 = (hkpConstraintInstance *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v38[11] + 8i64))(
-                                           v38[11],
+          Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+          v37 = (hkpConstraintInstance *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(
+                                           Value[11],
                                            112i64);
-          if ( v39 )
-          {
-            v40 = entityA;
-            hkpConstraintInstance::hkpConstraintInstance(
-              v39,
-              entityA,
-              v18,
-              (hkpConstraintData *)&v14[v12].m_frictionData.vfptr,
-              PRIORITY_PSI);
-          }
-          else
-          {
-            v40 = entityA;
-          }
-          v14[v12].m_frictionConstraint = v39;
-          hkpWorld::addConstraint(v40->m_world, v39);
-          ++v14[v12].m_axle.m_numWheelsOnGround;
+          if ( v37 )
+            hkpConstraintInstance::hkpConstraintInstance(v37, entityA, v17, &m_data[v11].m_frictionData, PRIORITY_PSI);
+          m_data[v11].m_frictionConstraint = v37;
+          hkpWorld::addConstraint(entityA->m_world, v37);
+          ++m_data[v11].m_axle.m_numWheelsOnGround;
         }
-        v10 = v45;
+        v9 = v43;
       }
       else
       {
-        v16[13].m_quad.m128_u64[0] = 0i64;
-        v16[12].m_quad.m128_i32[3] = 0;
-        if ( !v14[v12].m_axle.m_isFixed.m_bool )
-          v14[v12].m_axle.m_spinVelocity = (float)((float)(v19 * v8->m_deltaTime.m_storage)
-                                                 * v14[v12].m_axle.m_invInertia)
-                                         + v14[v12].m_axle.m_spinVelocity;
-        v21 = LODWORD(v14[v12].m_axle.m_spinVelocity);
-        v16[13].m_quad.m128_i32[1] = 0;
-        v16[12].m_quad.m128_i32[1] = v21;
+        v15[13].m_quad.m128_u64[0] = 0i64;
+        v15[12].m_quad.m128_i32[3] = 0;
+        if ( !m_data[v11].m_axle.m_isFixed.m_bool )
+          m_data[v11].m_axle.m_spinVelocity = (float)((float)(v18 * v7->m_deltaTime.m_storage)
+                                                    * m_data[v11].m_axle.m_invInertia)
+                                            + m_data[v11].m_axle.m_spinVelocity;
+        m_spinVelocity = m_data[v11].m_axle.m_spinVelocity;
+        v15[13].m_quad.m128_i32[1] = 0;
+        v15[12].m_quad.m128_f32[1] = m_spinVelocity;
       }
-      v6 = entityA;
-      v7 = v44;
-      v8 = v43;
-      v10 += 224i64;
+      m_entity = entityA;
+      v6 = simulInput;
+      v7 = stepInfo;
+      v9 += 224i64;
+      ++v3;
       ++v4;
-      ++v5;
-      ++v12;
       ++v11;
-      v45 = v10;
+      ++v10;
+      v43 = v9;
     }
-    while ( v4 < v9->m_wheelData.m_size );
+    while ( v3 < this->m_wheelData.m_size );
   }
 }
 
 // File Line: 270
 // RVA: 0xE2F5D0
-void __fastcall hkpVehiclePerWheelSimulation::postSimulationCallback(hkpVehiclePerWheelSimulation *this, hkpWorld *world)
+void __fastcall hkpVehiclePerWheelSimulation::postSimulationCallback(
+        hkpVehiclePerWheelSimulation *this,
+        hkpWorld *world)
 {
-  hkpVehiclePerWheelSimulation *v2; // r14
-  float v3; // xmm9_4
-  int v4; // er12
+  float m_storage; // xmm9_4
+  int v4; // r12d
   __int64 v5; // r15
   __int64 v6; // rbx
   __int64 v7; // rsi
@@ -639,13 +607,12 @@ void __fastcall hkpVehiclePerWheelSimulation::postSimulationCallback(hkpVehicleP
   __m128 v23; // xmm2
   float v24; // xmm1_4
   int v25; // eax
-  hkVector4f worldLinearFrictionImpulse; // [rsp+20h] [rbp-C8h]
-  hkVector4f worldAngularVelocityDeltaOut; // [rsp+30h] [rbp-B8h]
-  float v28; // [rsp+F0h] [rbp+8h]
+  hkVector4f worldLinearFrictionImpulse; // [rsp+20h] [rbp-C8h] BYREF
+  hkVector4f worldAngularVelocityDeltaOut; // [rsp+30h] [rbp-B8h] BYREF
+  float SideSlipImpulse; // [rsp+F0h] [rbp+8h]
   __int64 v29; // [rsp+F8h] [rbp+10h]
 
-  v2 = this;
-  v3 = world->m_dynamicsStepInfo.m_stepInfo.m_deltaTime.m_storage;
+  m_storage = world->m_dynamicsStepInfo.m_stepInfo.m_deltaTime.m_storage;
   v4 = 0;
   v29 = *(_QWORD *)(*(_QWORD *)&this->m_memSizeAndFlags + 48i64);
   if ( SLODWORD(this->m_curbDamping) > 0 )
@@ -655,8 +622,8 @@ void __fastcall hkpVehiclePerWheelSimulation::postSimulationCallback(hkpVehicleP
     v7 = 0i64;
     while ( 1 )
     {
-      v8 = *(_QWORD *)&v2->m_memSizeAndFlags;
-      v9 = *(_QWORD *)&v2->m_maxImpulse;
+      v8 = *(_QWORD *)&this->m_memSizeAndFlags;
+      v9 = *(_QWORD *)&this->m_maxImpulse;
       v10 = *(_QWORD *)(v8 + 152);
       v11 = *(_QWORD *)(*(_QWORD *)(v8 + 56) + 144i64);
       v12 = *(float *)(v6 + v10 + 200);
@@ -672,13 +639,15 @@ LABEL_8:
       {
         *(float *)&v14 = hkpWheelFrictionConstraintData::getForwardSlipImpulse((hkpWheelFrictionConstraintData *)(v7 + v9 + 48));
         v15 = _mm_mul_ps(_mm_shuffle_ps((__m128)v14, (__m128)v14, 0), *(__m128 *)(v7 + v9 + 288));
-        v28 = hkpWheelFrictionConstraintData::getSideSlipImpulse((hkpWheelFrictionConstraintData *)(v7 + v9 + 48));
+        SideSlipImpulse = hkpWheelFrictionConstraintData::getSideSlipImpulse((hkpWheelFrictionConstraintData *)(v7 + v9 + 48));
         v16 = _mm_add_ps(
                 v15,
-                _mm_mul_ps(_mm_shuffle_ps((__m128)LODWORD(v28), (__m128)LODWORD(v28), 0), *(__m128 *)(v7 + v9 + 304)));
+                _mm_mul_ps(
+                  _mm_shuffle_ps((__m128)LODWORD(SideSlipImpulse), (__m128)LODWORD(SideSlipImpulse), 0),
+                  *(__m128 *)(v7 + v9 + 304)));
         worldLinearFrictionImpulse.m_quad = v16;
         hkpVehiclePerWheelSimulation::computeAngularChassisAcceleration(
-          (hkpVehiclePerWheelSimulation *)((char *)v2 - 16),
+          (hkpVehiclePerWheelSimulation *)((char *)this - 16),
           &worldLinearFrictionImpulse,
           (hkVector4f *)(v7 + v9 + 320),
           &worldAngularVelocityDeltaOut);
@@ -698,23 +667,23 @@ LABEL_8:
         {
           v19 = _mm_mul_ps(v18, *(__m128 *)(v7 + v9 + 288));
           *(float *)(v7 + v9) = *(float *)(v7 + v9)
-                              - (float)((float)((float)((float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v19, v19, 85))
-                                                                      + COERCE_FLOAT(_mm_shuffle_ps(v19, v19, 0)))
-                                                              + COERCE_FLOAT(_mm_shuffle_ps(v19, v19, 170)))
+                              - (float)((float)((float)((float)((float)(_mm_shuffle_ps(v19, v19, 85).m128_f32[0]
+                                                                      + _mm_shuffle_ps(v19, v19, 0).m128_f32[0])
+                                                              + _mm_shuffle_ps(v19, v19, 170).m128_f32[0])
                                                       / *(float *)(v5 + v11))
-                                              * *(float *)&v2->m_instance)
-                                      * v3);
+                                              * *(float *)&this->m_instance)
+                                      * m_storage);
         }
         *(float *)(v6 + v10 + 208) = hkpWheelFrictionConstraintData::getSideFrictionImpulse((hkpWheelFrictionConstraintData *)(v7 + v9 + 48))
-                                   / v3;
+                                   / m_storage;
         v20 = _mm_mul_ps(*(__m128 *)(v7 + v9 + 304), v18);
         v21 = _mm_mul_ps(v18, v18);
-        *(float *)(v6 + v10 + 216) = (float)(COERCE_FLOAT(_mm_shuffle_ps(v20, v20, 85))
-                                           + COERCE_FLOAT(_mm_shuffle_ps(v20, v20, 0)))
-                                   + COERCE_FLOAT(_mm_shuffle_ps(v20, v20, 170));
-        *(float *)(v6 + v10 + 204) = (float)((float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v21, v21, 85))
-                                                           + COERCE_FLOAT(_mm_shuffle_ps(v21, v21, 0)))
-                                                   + COERCE_FLOAT(_mm_shuffle_ps(v21, v21, 170)))
+        *(float *)(v6 + v10 + 216) = (float)(_mm_shuffle_ps(v20, v20, 85).m128_f32[0]
+                                           + _mm_shuffle_ps(v20, v20, 0).m128_f32[0])
+                                   + _mm_shuffle_ps(v20, v20, 170).m128_f32[0];
+        *(float *)(v6 + v10 + 204) = (float)((float)((float)(_mm_shuffle_ps(v21, v21, 85).m128_f32[0]
+                                                           + _mm_shuffle_ps(v21, v21, 0).m128_f32[0])
+                                                   + _mm_shuffle_ps(v21, v21, 170).m128_f32[0])
                                            * (float)(hkpMotion::getMass((hkpMotion *)(v29 + 336)) * 0.5))
                                    * 0.001;
         hkpWheelFrictionConstraintData::resetSolverData((hkpWheelFrictionConstraintData *)(v7 + v9 + 48));
@@ -726,8 +695,8 @@ LABEL_8:
                   _mm_shuffle_ps(*(__m128 *)(v7 + v9 + 320), *(__m128 *)(v7 + v9 + 320), 201),
                   *(__m128 *)(v29 + 576)));
         v23 = _mm_mul_ps(_mm_add_ps(_mm_shuffle_ps(v22, v22, 201), *(__m128 *)(v29 + 560)), *(__m128 *)(v7 + v9 + 288));
-        v24 = (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v23, v23, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v23, v23, 0)))
-                    + COERCE_FLOAT(_mm_shuffle_ps(v23, v23, 170)))
+        v24 = (float)((float)(_mm_shuffle_ps(v23, v23, 85).m128_f32[0] + _mm_shuffle_ps(v23, v23, 0).m128_f32[0])
+                    + _mm_shuffle_ps(v23, v23, 170).m128_f32[0])
             / *(float *)(v5 + v11);
         *(float *)(v6 + v10 + 196) = v24;
         *(float *)(v6 + v10 + 212) = (float)(*(float *)(v7 + v9) - v24) * *(float *)(v5 + v11);
@@ -744,8 +713,8 @@ LABEL_8:
       v6 += 224i64;
       v7 += 336i64;
       v5 += 40i64;
-      *(float *)(v6 + v10 - 24) = (float)(v3 * *(float *)(v7 + v9 - 336)) + *(float *)(v6 + v10 - 24);
-      if ( v4 >= SLODWORD(v2->m_curbDamping) )
+      *(float *)(v6 + v10 - 24) = (float)(m_storage * *(float *)(v7 + v9 - 336)) + *(float *)(v6 + v10 - 24);
+      if ( v4 >= SLODWORD(this->m_curbDamping) )
         return;
     }
     v13 = v12 - 3141.5928;
@@ -757,45 +726,41 @@ LABEL_7:
 
 // File Line: 346
 // RVA: 0xE300C0
-void __fastcall hkpVehiclePerWheelSimulation::computeAngularChassisAcceleration(hkpVehiclePerWheelSimulation *this, hkVector4f *worldLinearFrictionImpulse, hkVector4f *contactLocal, hkVector4f *worldAngularVelocityDeltaOut)
+void __fastcall hkpVehiclePerWheelSimulation::computeAngularChassisAcceleration(
+        hkpVehiclePerWheelSimulation *this,
+        hkVector4f *worldLinearFrictionImpulse,
+        hkVector4f *contactLocal,
+        hkVector4f *worldAngularVelocityDeltaOut)
 {
-  hkpEntity *v4; // rcx
-  __m128 v5; // xmm3
+  hkpEntity *m_entity; // rcx
+  __m128 m_quad; // xmm3
   __m128 v6; // xmm5
   __m128 v7; // xmm1
-  __m128 v8; // xmm5
-  __m128 v9; // xmm2
-  hkVector4f b; // [rsp+20h] [rbp-18h]
+  __m128 v8; // xmm4
+  __m128 v9; // xmm1
+  __m128 v10; // xmm5
+  __m128 v11; // xmm2
+  hkVector4f b; // [rsp+20h] [rbp-18h] BYREF
 
-  v4 = this->m_instance->m_entity;
-  v5 = v4->m_motion.m_motionState.m_transform.m_rotation.m_col2.m_quad;
+  m_entity = this->m_instance->m_entity;
+  m_quad = m_entity->m_motion.m_motionState.m_transform.m_rotation.m_col2.m_quad;
   v6 = _mm_sub_ps(
          _mm_mul_ps(
            _mm_shuffle_ps(worldLinearFrictionImpulse->m_quad, worldLinearFrictionImpulse->m_quad, 201),
            contactLocal->m_quad),
          _mm_mul_ps(_mm_shuffle_ps(contactLocal->m_quad, contactLocal->m_quad, 201), worldLinearFrictionImpulse->m_quad));
-  v7 = _mm_unpacklo_ps(
-         v4->m_motion.m_motionState.m_transform.m_rotation.m_col0.m_quad,
-         v4->m_motion.m_motionState.m_transform.m_rotation.m_col1.m_quad);
-  v8 = _mm_shuffle_ps(v6, v6, 201);
-  v9 = _mm_movelh_ps(v7, v5);
+  v7 = m_entity->m_motion.m_motionState.m_transform.m_rotation.m_col0.m_quad;
+  v8 = _mm_unpackhi_ps(v7, m_entity->m_motion.m_motionState.m_transform.m_rotation.m_col1.m_quad);
+  v9 = _mm_unpacklo_ps(v7, m_entity->m_motion.m_motionState.m_transform.m_rotation.m_col1.m_quad);
+  v10 = _mm_shuffle_ps(v6, v6, 201);
+  v11 = _mm_movelh_ps(v9, m_quad);
   b.m_quad = _mm_mul_ps(
                _mm_add_ps(
                  _mm_add_ps(
-                   _mm_mul_ps(_mm_shuffle_ps(v8, v8, 85), _mm_shuffle_ps(_mm_movehl_ps(v9, v7), v5, 212)),
-                   _mm_mul_ps(_mm_shuffle_ps(v8, v8, 0), v9)),
-                 _mm_mul_ps(
-                   _mm_shuffle_ps(
-                     _mm_unpackhi_ps(
-                       v4->m_motion.m_motionState.m_transform.m_rotation.m_col0.m_quad,
-                       v4->m_motion.m_motionState.m_transform.m_rotation.m_col1.m_quad),
-                     v5,
-                     228),
-                   _mm_shuffle_ps(v8, v8, 170))),
-               v4->m_motion.m_inertiaAndMassInv.m_quad);
-  hkVector4f::setRotatedDir(
-    worldAngularVelocityDeltaOut,
-    (hkMatrix3f *)&v4->m_motion.m_motionState.m_transform.m_rotation.m_col0,
-    &b);
+                   _mm_mul_ps(_mm_shuffle_ps(v10, v10, 85), _mm_shuffle_ps(_mm_movehl_ps(v11, v9), m_quad, 212)),
+                   _mm_mul_ps(_mm_shuffle_ps(v10, v10, 0), v11)),
+                 _mm_mul_ps(_mm_shuffle_ps(v8, m_quad, 228), _mm_shuffle_ps(v10, v10, 170))),
+               m_entity->m_motion.m_inertiaAndMassInv.m_quad);
+  hkVector4f::setRotatedDir(worldAngularVelocityDeltaOut, &m_entity->m_motion.m_motionState.m_transform.m_rotation, &b);
 }
 

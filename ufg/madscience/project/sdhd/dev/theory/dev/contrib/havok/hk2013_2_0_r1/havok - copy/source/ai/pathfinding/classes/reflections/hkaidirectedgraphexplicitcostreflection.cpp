@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkaiDirectedGraphExplicitCostNodeClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 85
@@ -62,7 +62,7 @@ void dynamic_initializer_for__hkaiDirectedGraphExplicitCostEdgeClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 132
@@ -97,7 +97,7 @@ void dynamic_initializer_for__hkaiDirectedGraphExplicitCostClass__()
     &hkaiDirectedGraphExplicitCost_Default,
     0i64,
     0,
-    7u);
+    7);
 }
 
 // File Line: 207
@@ -109,23 +109,26 @@ hkClass *__fastcall hkaiDirectedGraphExplicitCost::staticClass()
 
 // File Line: 214
 // RVA: 0xBB6590
-void __fastcall finishLoadedObjecthkaiDirectedGraphExplicitCost(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiDirectedGraphExplicitCost(
+        hkaiDirectedGraphExplicitCost *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiDirectedGraphExplicitCost::hkaiDirectedGraphExplicitCost);
+  if ( p )
+    hkaiDirectedGraphExplicitCost::hkaiDirectedGraphExplicitCost(p, finishing);
 }
 
 // File Line: 220
 // RVA: 0xBB65B0
-void __fastcall cleanupLoadedObjecthkaiDirectedGraphExplicitCost(void *p)
+void __fastcall cleanupLoadedObjecthkaiDirectedGraphExplicitCost(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 224
 // RVA: 0xBB65C0
 hkBaseObjectVtbl *__fastcall getVtablehkaiDirectedGraphExplicitCost()
 {
-  hkaiDirectedGraphExplicitCost v1; // [rsp+20h] [rbp-88h]
+  hkaiDirectedGraphExplicitCost v1; // [rsp+20h] [rbp-88h] BYREF
 
   hkaiDirectedGraphExplicitCost::hkaiDirectedGraphExplicitCost(&v1, 0);
   return v1.vfptr;
@@ -142,8 +145,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiDirectedGraphExplicitCostTypeInfo
   hkaiDirectedGraphExplicitCostTypeInfo.m_typeName = "hkaiDirectedGraphExplicitCost";
   hkaiDirectedGraphExplicitCostTypeInfo.m_vtable = result;
   hkaiDirectedGraphExplicitCostTypeInfo.m_scopedName = "!hkaiDirectedGraphExplicitCost";
-  hkaiDirectedGraphExplicitCostTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiDirectedGraphExplicitCost;
-  hkaiDirectedGraphExplicitCostTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiDirectedGraphExplicitCost;
+  hkaiDirectedGraphExplicitCostTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiDirectedGraphExplicitCost;
+  hkaiDirectedGraphExplicitCostTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiDirectedGraphExplicitCost;
   return result;
 }
 

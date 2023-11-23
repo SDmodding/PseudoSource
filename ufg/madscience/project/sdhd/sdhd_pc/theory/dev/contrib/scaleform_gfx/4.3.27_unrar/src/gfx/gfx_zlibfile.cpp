@@ -1,41 +1,36 @@
 // File Line: 77
 // RVA: 0x89FA80
-void __fastcall Scaleform::GFx::ZLibFileImpl::ZLibFileImpl(Scaleform::GFx::ZLibFileImpl *this, Scaleform::File *pin)
+void __fastcall Scaleform::GFx::ZLibFileImpl::ZLibFileImpl(
+        Scaleform::GFx::ZLibFileImpl *this,
+        Scaleform::GFx::Resource *pin)
 {
-  Scaleform::File *v2; // rdi
-  Scaleform::GFx::ZLibFileImpl *v3; // rbx
-  signed __int64 v4; // rcx
-
-  v2 = pin;
-  v3 = this;
   this->pIn.pObject = 0i64;
   if ( pin )
-    Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)pin);
-  if ( v3->pIn.pObject )
-    Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v3->pIn.pObject);
-  v3->pIn.pObject = v2;
-  v3->InitialStreamPos = ((__int64 (__fastcall *)(Scaleform::File *))v2->vfptr[4].__vecDelDtor)(v2);
-  v3->LogicalStreamPos = 0;
-  v3->AtEofFlag = 0;
-  v3->ErrorCode = 0;
-  v4 = (signed __int64)&v3->ZStream;
-  *(_QWORD *)(v4 + 48) = Scaleform::GFx::ZLibAllocFunc;
-  *(_QWORD *)(v4 + 56) = Scaleform::GFx::ZLibFreeFunc;
-  *(_QWORD *)(v4 + 64) = v3;
-  *(_QWORD *)v4 = 0i64;
-  *(_DWORD *)(v4 + 8) = 0;
-  *(_QWORD *)(v4 + 16) = 0i64;
-  *(_DWORD *)(v4 + 24) = 0;
-  *(_QWORD *)(v4 + 72) = 0i64;
-  *(_DWORD *)(v4 + 80) = 0;
-  if ( (unsigned int)inflateInit_(&v3->ZStream, "1.2.7", 88i64) )
+    Scaleform::Render::RenderBuffer::AddRef(pin);
+  if ( this->pIn.pObject )
+    Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)this->pIn.pObject);
+  this->pIn.pObject = (Scaleform::File *)pin;
+  this->InitialStreamPos = ((__int64 (__fastcall *)(Scaleform::GFx::Resource *))pin->vfptr[1].__vecDelDtor)(pin);
+  this->LogicalStreamPos = 0;
+  this->AtEofFlag = 0;
+  this->ErrorCode = 0;
+  this->ZStream.zalloc = Scaleform::GFx::ZLibAllocFunc;
+  this->ZStream.zfree = Scaleform::GFx::ZLibFreeFunc;
+  this->ZStream.opaque = this;
+  this->ZStream.next_in = 0i64;
+  this->ZStream.avail_in = 0;
+  this->ZStream.next_out = 0i64;
+  this->ZStream.avail_out = 0;
+  *(_QWORD *)&this->ZStream.data_type = 0i64;
+  this->ZStream.reserved = 0;
+  if ( (unsigned int)inflateInit_(&this->ZStream, "1.2.7", 88i64) )
   {
-    v3->ErrorCode = 1;
+    this->ErrorCode = 1;
   }
   else
   {
-    *(_QWORD *)&v3->BacktrackTail = 0i64;
-    v3->UserPos = 0;
+    *(_QWORD *)&this->BacktrackTail = 0i64;
+    this->UserPos = 0;
   }
 }
 
@@ -43,136 +38,135 @@ void __fastcall Scaleform::GFx::ZLibFileImpl::ZLibFileImpl(Scaleform::GFx::ZLibF
 // RVA: 0x9010D0
 void __fastcall Scaleform::GFx::ZLibFileImpl::Reset(Scaleform::GFx::ZLibFileImpl *this)
 {
-  Scaleform::GFx::ZLibFileImpl *v1; // rbx
-  z_stream_s *v2; // rcx
-  Scaleform::File *v3; // rcx
-  __int64 v4; // rdx
+  z_stream_s *p_ZStream; // rcx
+  Scaleform::File *pObject; // rcx
+  __int64 InitialStreamPos; // rdx
 
-  v1 = this;
-  v2 = &this->ZStream;
-  v2[1].total_in = 0;
-  LOBYTE(v2[1].avail_in) = 0;
+  p_ZStream = &this->ZStream;
+  p_ZStream[1].total_in = 0;
+  LOBYTE(p_ZStream[1].avail_in) = 0;
   if ( (unsigned int)inflateReset() )
   {
-    v1->ErrorCode = 1;
+    this->ErrorCode = 1;
   }
   else
   {
-    v3 = v1->pIn.pObject;
-    v4 = (unsigned int)v1->InitialStreamPos;
-    v1->ZStream.next_in = 0i64;
-    v1->ZStream.avail_in = 0;
-    v1->ZStream.next_out = 0i64;
-    v1->ZStream.avail_out = 0;
-    ((void (__fastcall *)(Scaleform::File *, __int64, _QWORD))v3->vfptr[14].__vecDelDtor)(v3, v4, 0i64);
-    v1->LogicalStreamPos = 0;
-    *(_QWORD *)&v1->BacktrackTail = 0i64;
-    v1->UserPos = 0;
+    pObject = this->pIn.pObject;
+    InitialStreamPos = (unsigned int)this->InitialStreamPos;
+    this->ZStream.next_in = 0i64;
+    this->ZStream.avail_in = 0;
+    this->ZStream.next_out = 0i64;
+    this->ZStream.avail_out = 0;
+    ((void (__fastcall *)(Scaleform::File *, __int64, _QWORD))pObject->vfptr[14].__vecDelDtor)(
+      pObject,
+      InitialStreamPos,
+      0i64);
+    this->LogicalStreamPos = 0;
+    *(_QWORD *)&this->BacktrackTail = 0i64;
+    this->UserPos = 0;
   }
 }
 
 // File Line: 147
 // RVA: 0x8E3760
-__int64 __fastcall Scaleform::GFx::ZLibFileImpl::Inflate(Scaleform::GFx::ZLibFileImpl *this, void *dst, int bytes)
+__int64 __fastcall Scaleform::GFx::ZLibFileImpl::Inflate(Scaleform::GFx::ZLibFileImpl *this, char *dst, int bytes)
 {
-  int v3; // eax
-  int v4; // er15
-  unsigned int v5; // er14
-  int v6; // er12
+  int UserPos; // eax
+  int LogicalStreamPos; // r15d
+  unsigned int v5; // r14d
+  int v6; // r12d
   char *v7; // rbp
-  Scaleform::GFx::ZLibFileImpl *v8; // rsi
-  int v9; // ecx
-  int v10; // er15
-  int v11; // er13
+  int BacktrackTail; // ecx
+  int v10; // r15d
+  int v11; // r13d
   int v12; // edi
   int v13; // eax
   int v14; // edi
-  char *v15; // rcx
+  char *BacktrackBuffer; // rcx
   char *v16; // rdx
-  signed __int64 v17; // rax
+  __int64 v17; // rax
   __int128 v18; // xmm0
   __int64 result; // rax
-  int v20; // er15
-  signed int v21; // eax
+  int v20; // r15d
+  int BacktrackSize; // eax
   int v22; // ecx
 
-  v3 = this->UserPos;
-  v4 = this->LogicalStreamPos;
+  UserPos = this->UserPos;
+  LogicalStreamPos = this->LogicalStreamPos;
   v5 = 0;
   v6 = bytes;
-  v7 = (char *)dst;
-  v8 = this;
-  if ( v3 < v4 )
+  v7 = dst;
+  if ( UserPos < LogicalStreamPos )
   {
-    v9 = this->BacktrackTail;
-    v10 = v4 - v3;
+    BacktrackTail = this->BacktrackTail;
+    v10 = LogicalStreamPos - UserPos;
     v11 = v10;
     if ( v10 > bytes )
       v11 = bytes;
     v5 = v11;
-    if ( v10 > v9 )
+    if ( v10 > BacktrackTail )
     {
-      v12 = v10 - v9;
-      if ( v10 - v9 > v11 )
+      v12 = v10 - BacktrackTail;
+      if ( v10 - BacktrackTail > v11 )
         v12 = v11;
-      memmove(dst, &v8->BacktrackBuffer[v9 + v8->BacktrackSize - v10], v12);
+      memmove(dst, &this->BacktrackBuffer[BacktrackTail + this->BacktrackSize - v10], v12);
       v11 -= v12;
       v10 -= v12;
       v7 += v12;
     }
     if ( v11 > 0 )
     {
-      memmove(v7, &v8->BacktrackBuffer[v8->BacktrackTail - v10], v11);
+      memmove(v7, &this->BacktrackBuffer[this->BacktrackTail - v10], v11);
       v7 += v11;
     }
     v6 -= v5;
-    v8->UserPos += v5;
+    this->UserPos += v5;
   }
   if ( v6 <= 0 )
     return v5;
-  v13 = Scaleform::GFx::ZLibFileImpl::InflateFromStream(v8, v7, v6);
+  v13 = Scaleform::GFx::ZLibFileImpl::InflateFromStream(this, v7, v6);
   v14 = v13;
   if ( v13 < 4096 )
   {
     if ( v13 > 0 )
     {
       v20 = v13;
-      if ( 4096 - v8->BacktrackTail < v13 )
-        v20 = 4096 - v8->BacktrackTail;
+      if ( 4096 - this->BacktrackTail < v13 )
+        v20 = 4096 - this->BacktrackTail;
       if ( v20 > 0 )
       {
-        memmove(&v8->BacktrackBuffer[v8->BacktrackTail], v7, v20);
+        memmove(&this->BacktrackBuffer[this->BacktrackTail], v7, v20);
         v7 += v20;
-        v8->BacktrackTail += v20;
+        this->BacktrackTail += v20;
       }
       if ( v14 > v20 )
       {
-        v8->BacktrackTail = v14 - v20;
-        memmove(v8->BacktrackBuffer, v7, v14 - v20);
+        this->BacktrackTail = v14 - v20;
+        memmove(this->BacktrackBuffer, v7, v14 - v20);
       }
-      v21 = v8->BacktrackSize;
-      if ( v21 < 4096 )
+      BacktrackSize = this->BacktrackSize;
+      if ( BacktrackSize < 4096 )
       {
-        v22 = v21 + v14;
-        if ( v21 + v14 > 4096 )
+        v22 = BacktrackSize + v14;
+        if ( BacktrackSize + v14 > 4096 )
           v22 = 4096;
-        v8->BacktrackSize = v22;
+        this->BacktrackSize = v22;
       }
     }
     result = v14 + v5;
-    v8->UserPos = v8->LogicalStreamPos;
+    this->UserPos = this->LogicalStreamPos;
   }
   else
   {
-    v15 = v8->BacktrackBuffer;
-    v8->BacktrackTail = 4096;
-    v8->BacktrackSize = 4096;
+    BacktrackBuffer = this->BacktrackBuffer;
+    this->BacktrackTail = 4096;
+    this->BacktrackSize = 4096;
     v16 = &v7[v13 - 4096];
-    if ( ((unsigned __int8)((_BYTE)v8 + 124) | (unsigned __int8)((_BYTE)v7 + v13)) & 0xF )
+    if ( (((unsigned __int8)((_BYTE)this + 124) | (unsigned __int8)((_BYTE)v7 + v13)) & 0xF) != 0 )
     {
-      memmove(v15, v16, 0x1000ui64);
+      memmove(BacktrackBuffer, v16, 0x1000ui64);
       result = v14 + v5;
-      v8->UserPos = v8->LogicalStreamPos;
+      this->UserPos = this->LogicalStreamPos;
     }
     else
     {
@@ -180,21 +174,21 @@ __int64 __fastcall Scaleform::GFx::ZLibFileImpl::Inflate(Scaleform::GFx::ZLibFil
       do
       {
         v18 = *(_OWORD *)v16;
-        v15 += 128;
+        BacktrackBuffer += 128;
         v16 += 128;
-        *((_OWORD *)v15 - 8) = v18;
-        *((_OWORD *)v15 - 7) = *((_OWORD *)v16 - 7);
-        *((_OWORD *)v15 - 6) = *((_OWORD *)v16 - 6);
-        *((_OWORD *)v15 - 5) = *((_OWORD *)v16 - 5);
-        *((_OWORD *)v15 - 4) = *((_OWORD *)v16 - 4);
-        *((_OWORD *)v15 - 3) = *((_OWORD *)v16 - 3);
-        *((_OWORD *)v15 - 2) = *((_OWORD *)v16 - 2);
-        *((_OWORD *)v15 - 1) = *((_OWORD *)v16 - 1);
+        *((_OWORD *)BacktrackBuffer - 8) = v18;
+        *((_OWORD *)BacktrackBuffer - 7) = *((_OWORD *)v16 - 7);
+        *((_OWORD *)BacktrackBuffer - 6) = *((_OWORD *)v16 - 6);
+        *((_OWORD *)BacktrackBuffer - 5) = *((_OWORD *)v16 - 5);
+        *((_OWORD *)BacktrackBuffer - 4) = *((_OWORD *)v16 - 4);
+        *((_OWORD *)BacktrackBuffer - 3) = *((_OWORD *)v16 - 3);
+        *((_OWORD *)BacktrackBuffer - 2) = *((_OWORD *)v16 - 2);
+        *((_OWORD *)BacktrackBuffer - 1) = *((_OWORD *)v16 - 1);
         --v17;
       }
       while ( v17 );
       result = v14 + v5;
-      v8->UserPos = v8->LogicalStreamPos;
+      this->UserPos = this->LogicalStreamPos;
     }
   }
   return result;
@@ -204,86 +198,81 @@ __int64 __fastcall Scaleform::GFx::ZLibFileImpl::Inflate(Scaleform::GFx::ZLibFil
 // RVA: 0x909DB0
 __int64 __fastcall Scaleform::GFx::ZLibFileImpl::SetPosition(Scaleform::GFx::ZLibFileImpl *this, int offset)
 {
-  int v2; // eax
-  int v3; // edi
-  Scaleform::GFx::ZLibFileImpl *v4; // rbx
-  int v6; // er8
-  char dst; // [rsp+20h] [rbp-1008h]
+  int LogicalStreamPos; // eax
+  int v6; // r8d
+  char dst[4104]; // [rsp+20h] [rbp-1008h] BYREF
 
-  v2 = this->LogicalStreamPos;
-  v3 = offset;
-  v4 = this;
-  if ( offset >= v2 )
+  LogicalStreamPos = this->LogicalStreamPos;
+  if ( offset >= LogicalStreamPos )
   {
-    if ( offset > v2 )
-      this->UserPos = v2;
+    if ( offset > LogicalStreamPos )
+      this->UserPos = LogicalStreamPos;
   }
   else
   {
-    if ( offset >= v2 - this->BacktrackSize )
+    if ( offset >= LogicalStreamPos - this->BacktrackSize )
     {
       this->UserPos = offset;
       return (unsigned int)offset;
     }
     Scaleform::GFx::ZLibFileImpl::Reset(this);
   }
-  if ( v4->UserPos < v3 )
+  if ( this->UserPos < offset )
   {
     do
     {
       v6 = 4096;
-      if ( v3 - v4->UserPos < 4096 )
-        v6 = v3 - v4->UserPos;
+      if ( offset - this->UserPos < 4096 )
+        v6 = offset - this->UserPos;
     }
-    while ( (unsigned int)Scaleform::GFx::ZLibFileImpl::Inflate(v4, &dst, v6) && v4->UserPos < v3 );
+    while ( (unsigned int)Scaleform::GFx::ZLibFileImpl::Inflate(this, dst, v6) && this->UserPos < offset );
   }
-  return (unsigned int)v4->UserPos;
+  return (unsigned int)this->UserPos;
 }
 
 // File Line: 327
 // RVA: 0x8E3970
-__int64 __fastcall Scaleform::GFx::ZLibFileImpl::InflateFromStream(Scaleform::GFx::ZLibFileImpl *this, void *dst, int bytes)
+__int64 __fastcall Scaleform::GFx::ZLibFileImpl::InflateFromStream(
+        Scaleform::GFx::ZLibFileImpl *this,
+        char *dst,
+        unsigned int bytes)
 {
-  int v3; // esi
-  Scaleform::GFx::ZLibFileImpl *v4; // rbx
   unsigned int v6; // eax
   int v7; // eax
   unsigned int v8; // esi
 
-  v3 = bytes;
-  v4 = this;
   if ( this->ErrorCode )
     return 0i64;
-  this->ZStream.next_out = (char *)dst;
+  this->ZStream.next_out = dst;
   this->ZStream.avail_out = bytes;
   while ( 1 )
   {
-    if ( !v4->ZStream.avail_in )
+    if ( !this->ZStream.avail_in )
     {
-      v6 = ((__int64 (__fastcall *)(Scaleform::File *, char *, signed __int64))v4->pIn.pObject->vfptr[10].__vecDelDtor)(
-             v4->pIn.pObject,
-             v4->DataBuffer,
+      v6 = ((__int64 (__fastcall *)(Scaleform::File *, char *, __int64))this->pIn.pObject->vfptr[10].__vecDelDtor)(
+             this->pIn.pObject,
+             this->DataBuffer,
              4096i64);
       if ( !v6 )
         goto LABEL_13;
-      v4->ZStream.next_in = v4->DataBuffer;
-      v4->ZStream.avail_in = v6;
+      this->ZStream.next_in = this->DataBuffer;
+      this->ZStream.avail_in = v6;
     }
-    v7 = inflate(&v4->ZStream, 2i64);
+    v7 = inflate(&this->ZStream, 2i64);
     if ( v7 == 1 )
       break;
     if ( v7 )
     {
-      v4->ErrorCode = 1;
+      this->ErrorCode = 1;
       goto LABEL_13;
     }
-    if ( !v4->ZStream.avail_out )
+    if ( !this->ZStream.avail_out )
       goto LABEL_13;
   }
-  v4->AtEofFlag = 1;
+  this->AtEofFlag = 1;
 LABEL_13:
-  v8 = v3 - v4->ZStream.avail_out;
-  v4->LogicalStreamPos += v8;
+  v8 = bytes - this->ZStream.avail_out;
+  this->LogicalStreamPos += v8;
   return v8;
 }
 
@@ -291,16 +280,12 @@ LABEL_13:
 // RVA: 0x89F9C0
 void __fastcall Scaleform::GFx::ZLibFile::ZLibFile(Scaleform::GFx::ZLibFile *this, Scaleform::File *psourceFile)
 {
-  Scaleform::File *v2; // rdi
-  Scaleform::GFx::ZLibFile *v3; // rbx
   Scaleform::GFx::ZLibFileImpl *v4; // rsi
   Scaleform::GFx::ZLibFileImpl *v5; // rax
   Scaleform::GFx::ZLibFileImpl *v6; // rax
-  int v7; // [rsp+58h] [rbp+10h]
+  int v7; // [rsp+58h] [rbp+10h] BYREF
   Scaleform::GFx::ZLibFileImpl *v8; // [rsp+60h] [rbp+18h]
 
-  v2 = psourceFile;
-  v3 = this;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
@@ -314,19 +299,19 @@ void __fastcall Scaleform::GFx::ZLibFile::ZLibFile(Scaleform::GFx::ZLibFile *thi
     && ((unsigned __int8 (__fastcall *)(Scaleform::File *))psourceFile->vfptr[2].__vecDelDtor)(psourceFile) )
   {
     v7 = 2;
-    v5 = (Scaleform::GFx::ZLibFileImpl *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, Scaleform::GFx::ZLibFile *, signed __int64, int *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap)(
+    v5 = (Scaleform::GFx::ZLibFileImpl *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, Scaleform::GFx::ZLibFile *, __int64, int *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap)(
                                            Scaleform::Memory::pGlobalHeap,
-                                           v3,
+                                           this,
                                            8320i64,
                                            &v7,
                                            -2i64);
     v8 = v5;
     if ( v5 )
     {
-      Scaleform::GFx::ZLibFileImpl::ZLibFileImpl(v5, v2);
+      Scaleform::GFx::ZLibFileImpl::ZLibFileImpl(v5, psourceFile);
       v4 = v6;
     }
-    v3->pImpl = v4;
+    this->pImpl = v4;
   }
 }
 
@@ -334,26 +319,24 @@ void __fastcall Scaleform::GFx::ZLibFile::ZLibFile(Scaleform::GFx::ZLibFile *thi
 // RVA: 0x8A8AB0
 void __fastcall Scaleform::GFx::ZLibFile::~ZLibFile(Scaleform::GFx::ZLibFile *this)
 {
-  Scaleform::GFx::ZLibFile *v1; // rbx
-  Scaleform::GFx::ZLibFileImpl *v2; // rdi
+  Scaleform::GFx::ZLibFileImpl *pImpl; // rdi
   int v3; // eax
   Scaleform::Render::RenderBuffer **v4; // rdi
 
-  v1 = this;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::ZLibFile::`vftable;
-  v2 = this->pImpl;
-  if ( v2 )
+  pImpl = this->pImpl;
+  if ( pImpl )
   {
-    if ( v2->ZStream.avail_in )
+    if ( pImpl->ZStream.avail_in )
     {
-      v3 = ((__int64 (__cdecl *)(Scaleform::File *))v2->pIn.pObject->vfptr[4].__vecDelDtor)(v2->pIn.pObject);
-      ((void (__fastcall *)(Scaleform::File *, _QWORD, _QWORD))v2->pIn.pObject->vfptr[14].__vecDelDtor)(
-        v2->pIn.pObject,
-        v3 - v2->ZStream.avail_in,
+      v3 = ((__int64 (__fastcall *)(Scaleform::File *))pImpl->pIn.pObject->vfptr[4].__vecDelDtor)(pImpl->pIn.pObject);
+      ((void (__fastcall *)(Scaleform::File *, _QWORD, _QWORD))pImpl->pIn.pObject->vfptr[14].__vecDelDtor)(
+        pImpl->pIn.pObject,
+        v3 - pImpl->ZStream.avail_in,
         0i64);
     }
-    inflateEnd(&v1->pImpl->ZStream);
-    v4 = (Scaleform::Render::RenderBuffer **)v1->pImpl;
+    inflateEnd(&this->pImpl->ZStream);
+    v4 = (Scaleform::Render::RenderBuffer **)this->pImpl;
     if ( v4 )
     {
       if ( *v4 )
@@ -361,65 +344,59 @@ void __fastcall Scaleform::GFx::ZLibFile::~ZLibFile(Scaleform::GFx::ZLibFile *th
       Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v4);
     }
   }
-  Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&v1->vfptr);
+  Scaleform::RefCountImplCore::~RefCountImplCore(this);
 }
 
 // File Line: 424
 // RVA: 0x8D7B40
 const char *__fastcall Scaleform::GFx::ZLibFile::GetFilePath(Scaleform::GFx::ZLibFile *this)
 {
-  Scaleform::GFx::ZLibFileImpl *v1; // rcx
-  const char *result; // rax
+  Scaleform::GFx::ZLibFileImpl *pImpl; // rcx
 
-  v1 = this->pImpl;
-  if ( v1 )
-    result = (const char *)((__int64 (*)(void))v1->pIn.pObject->vfptr[1].__vecDelDtor)();
+  pImpl = this->pImpl;
+  if ( pImpl )
+    return (const char *)((__int64 (__fastcall *)(Scaleform::File *))pImpl->pIn.pObject->vfptr[1].__vecDelDtor)(pImpl->pIn.pObject);
   else
-    result = 0i64;
-  return result;
+    return 0i64;
 }
 
 // File Line: 436
 // RVA: 0x912CF0
-signed __int64 __fastcall Scaleform::GFx::ZLibFile::Tell(Scaleform::GFx::ZLibFile *this)
+__int64 __fastcall Scaleform::GFx::ZLibFile::Tell(Scaleform::GFx::ZLibFile *this)
 {
-  Scaleform::GFx::ZLibFileImpl *v1; // rax
-  signed __int64 result; // rax
+  Scaleform::GFx::ZLibFileImpl *pImpl; // rax
 
-  v1 = this->pImpl;
-  if ( v1 )
-    result = (unsigned int)v1->UserPos;
+  pImpl = this->pImpl;
+  if ( pImpl )
+    return (unsigned int)pImpl->UserPos;
   else
-    result = 0xFFFFFFFFi64;
-  return result;
+    return 0xFFFFFFFFi64;
 }
 
 // File Line: 441
 // RVA: 0x8E80D0
 __int64 __fastcall Scaleform::GFx::ZLibFile::LTell(Scaleform::GFx::ZLibFile *this)
 {
-  return ((signed int (*)(void))this->vfptr[4].__vecDelDtor)();
+  return ((int (__fastcall *)(Scaleform::GFx::ZLibFile *))this->vfptr[4].__vecDelDtor)(this);
 }
 
 // File Line: 445
 // RVA: 0x8DAB10
 __int64 __fastcall Scaleform::GFx::ZLibFile::GetLength(Scaleform::GFx::ZLibFile *this)
 {
-  Scaleform::GFx::ZLibFileImpl *v1; // rax
-  Scaleform::GFx::ZLibFile *v2; // rsi
-  unsigned int v4; // edi
+  Scaleform::GFx::ZLibFileImpl *pImpl; // rax
+  unsigned int UserPos; // edi
   unsigned int v5; // ebx
 
-  v1 = this->pImpl;
-  v2 = this;
-  if ( !v1 || v1->ErrorCode )
+  pImpl = this->pImpl;
+  if ( !pImpl || pImpl->ErrorCode )
     return 0i64;
-  v4 = v1->UserPos;
-  v5 = ((__int64 (__fastcall *)(Scaleform::GFx::ZLibFile *, _QWORD, signed __int64))this->vfptr[14].__vecDelDtor)(
+  UserPos = pImpl->UserPos;
+  v5 = ((__int64 (__fastcall *)(Scaleform::GFx::ZLibFile *, _QWORD, __int64))this->vfptr[14].__vecDelDtor)(
          this,
          0i64,
          2i64);
-  ((void (__fastcall *)(Scaleform::GFx::ZLibFile *, _QWORD, _QWORD))v2->vfptr[14].__vecDelDtor)(v2, v4, 0i64);
+  ((void (__fastcall *)(Scaleform::GFx::ZLibFile *, _QWORD, _QWORD))this->vfptr[14].__vecDelDtor)(this, UserPos, 0i64);
   return v5;
 }
 
@@ -431,7 +408,7 @@ Scaleform::GFx::ZLibFileImpl *__fastcall Scaleform::GFx::ZLibFile::GetErrorCode(
 
   result = this->pImpl;
   if ( result )
-    result = (Scaleform::GFx::ZLibFileImpl *)(unsigned int)result->ErrorCode;
+    return (Scaleform::GFx::ZLibFileImpl *)(unsigned int)result->ErrorCode;
   return result;
 }
 
@@ -439,22 +416,20 @@ Scaleform::GFx::ZLibFileImpl *__fastcall Scaleform::GFx::ZLibFile::GetErrorCode(
 // RVA: 0x8FA860
 __int64 __fastcall Scaleform::GFx::ZLibFile::Read(Scaleform::GFx::ZLibFile *this, char *pbuffer, int numBytes)
 {
-  Scaleform::GFx::ZLibFileImpl *v3; // rcx
-  __int64 result; // rax
+  Scaleform::GFx::ZLibFileImpl *pImpl; // rcx
 
-  v3 = this->pImpl;
-  if ( v3 )
-    result = Scaleform::GFx::ZLibFileImpl::Inflate(v3, pbuffer, numBytes);
+  pImpl = this->pImpl;
+  if ( pImpl )
+    return Scaleform::GFx::ZLibFileImpl::Inflate(pImpl, pbuffer, numBytes);
   else
-    result = 0xFFFFFFFFi64;
-  return result;
+    return 0xFFFFFFFFi64;
 }
 
 // File Line: 487
 // RVA: 0x910BC0
 __int64 __fastcall Scaleform::GFx::ZLibFile::SkipBytes(Scaleform::GFx::ZLibFile *this, __int64 numBytes)
 {
-  return ((__int64 (__fastcall *)(Scaleform::GFx::ZLibFile *, __int64, signed __int64))this->vfptr[14].__vecDelDtor)(
+  return ((__int64 (__fastcall *)(Scaleform::GFx::ZLibFile *, __int64, __int64))this->vfptr[14].__vecDelDtor)(
            this,
            numBytes,
            1i64);
@@ -464,96 +439,88 @@ __int64 __fastcall Scaleform::GFx::ZLibFile::SkipBytes(Scaleform::GFx::ZLibFile 
 // RVA: 0x8B8940
 __int64 __fastcall Scaleform::GFx::ZLibFile::BytesAvailable(Scaleform::GFx::ZLibFile *this)
 {
-  Scaleform::GFx::ZLibFileImpl *v1; // rax
-  Scaleform::GFx::ZLibFile *v2; // rsi
-  unsigned int v4; // edi
+  Scaleform::GFx::ZLibFileImpl *pImpl; // rax
+  unsigned int UserPos; // edi
   int v5; // ebx
 
-  v1 = this->pImpl;
-  v2 = this;
-  if ( !v1 || v1->ErrorCode )
+  pImpl = this->pImpl;
+  if ( !pImpl || pImpl->ErrorCode )
     return 0i64;
-  v4 = v1->UserPos;
-  v5 = ((__int64 (__fastcall *)(Scaleform::GFx::ZLibFile *, _QWORD, signed __int64))this->vfptr[14].__vecDelDtor)(
+  UserPos = pImpl->UserPos;
+  v5 = ((__int64 (__fastcall *)(Scaleform::GFx::ZLibFile *, _QWORD, __int64))this->vfptr[14].__vecDelDtor)(
          this,
          0i64,
          2i64);
-  ((void (__fastcall *)(Scaleform::GFx::ZLibFile *, _QWORD, _QWORD))v2->vfptr[14].__vecDelDtor)(v2, v4, 0i64);
-  return v5 - v4;
+  ((void (__fastcall *)(Scaleform::GFx::ZLibFile *, _QWORD, _QWORD))this->vfptr[14].__vecDelDtor)(this, UserPos, 0i64);
+  return v5 - UserPos;
 }
 
 // File Line: 513
 // RVA: 0x904A40
-signed __int64 __fastcall Scaleform::GFx::ZLibFile::Seek(Scaleform::GFx::ZLibFile *this, int offset, int origin)
+__int64 __fastcall Scaleform::GFx::ZLibFile::Seek(Scaleform::GFx::ZLibFile *this, int offset, int origin)
 {
-  Scaleform::GFx::ZLibFile *v3; // rdi
-  Scaleform::GFx::ZLibFileImpl *v4; // rcx
-  int v5; // ebx
-  int v7; // er8
+  Scaleform::GFx::ZLibFileImpl *pImpl; // rcx
+  int v7; // r8d
 
-  v3 = this;
-  v4 = this->pImpl;
-  v5 = offset;
-  if ( !v4 )
+  pImpl = this->pImpl;
+  if ( !pImpl )
     return 0xFFFFFFFFi64;
-  if ( v4->ErrorCode )
-    return (unsigned int)v4->UserPos;
+  if ( pImpl->ErrorCode )
+    return (unsigned int)pImpl->UserPos;
   if ( origin )
   {
     v7 = origin - 1;
     if ( v7 )
     {
       if ( v7 != 1 )
-        return (unsigned int)v3->pImpl->UserPos;
-      Scaleform::GFx::ZLibFileImpl::SetPosition(v4, 0x7FFFFFFF);
-      if ( !v5 )
-        return (unsigned int)v3->pImpl->UserPos;
-      v4 = v3->pImpl;
+        return (unsigned int)this->pImpl->UserPos;
+      Scaleform::GFx::ZLibFileImpl::SetPosition(pImpl, 0x7FFFFFFF);
+      if ( !offset )
+        return (unsigned int)this->pImpl->UserPos;
+      pImpl = this->pImpl;
     }
-    v5 += v4->UserPos;
+    offset += pImpl->UserPos;
   }
-  Scaleform::GFx::ZLibFileImpl::SetPosition(v4, v5);
-  return (unsigned int)v3->pImpl->UserPos;
+  Scaleform::GFx::ZLibFileImpl::SetPosition(pImpl, offset);
+  return (unsigned int)this->pImpl->UserPos;
 }
 
 // File Line: 571
 // RVA: 0x8BD1B0
 bool __fastcall Scaleform::GFx::ZLibFile::Close(Scaleform::GFx::ZLibFile *this)
 {
-  Scaleform::GFx::ZLibFile *v1; // rbx
-  Scaleform::GFx::ZLibFileImpl *v2; // rdi
+  Scaleform::GFx::ZLibFileImpl *pImpl; // rdi
   int v4; // eax
   int v5; // esi
   Scaleform::Render::RenderBuffer **v6; // rdi
 
-  v1 = this;
-  v2 = this->pImpl;
-  if ( !v2 )
+  pImpl = this->pImpl;
+  if ( !pImpl )
     return 0;
-  if ( v2->ZStream.avail_in )
+  if ( pImpl->ZStream.avail_in )
   {
-    v4 = ((__int64 (__cdecl *)(Scaleform::File *))v2->pIn.pObject->vfptr[4].__vecDelDtor)(v2->pIn.pObject);
-    ((void (__fastcall *)(Scaleform::File *, _QWORD, _QWORD))v2->pIn.pObject->vfptr[14].__vecDelDtor)(
-      v2->pIn.pObject,
-      v4 - v2->ZStream.avail_in,
+    v4 = ((__int64 (__fastcall *)(Scaleform::File *))pImpl->pIn.pObject->vfptr[4].__vecDelDtor)(pImpl->pIn.pObject);
+    ((void (__fastcall *)(Scaleform::File *, _QWORD, _QWORD))pImpl->pIn.pObject->vfptr[14].__vecDelDtor)(
+      pImpl->pIn.pObject,
+      v4 - pImpl->ZStream.avail_in,
       0i64);
   }
-  v5 = inflateEnd(&v1->pImpl->ZStream);
-  ((void (__cdecl *)(Scaleform::File *))v1->pImpl->pIn.pObject->vfptr[19].__vecDelDtor)(v1->pImpl->pIn.pObject);
-  v6 = (Scaleform::Render::RenderBuffer **)v1->pImpl;
+  v5 = inflateEnd(&this->pImpl->ZStream);
+  ((void (__fastcall *)(Scaleform::File *))this->pImpl->pIn.pObject->vfptr[19].__vecDelDtor)(this->pImpl->pIn.pObject);
+  v6 = (Scaleform::Render::RenderBuffer **)this->pImpl;
   if ( v6 )
   {
     if ( *v6 )
       Scaleform::RefCountImpl::Release(*v6);
     Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v6);
   }
-  v1->pImpl = 0i64;
+  this->pImpl = 0i64;
   return v5 == 0;
 }
 
 // File Line: 590
 // RVA: 0x91CC50
-__int64 __fastcall Scaleform::GFx::ZLibAllocFunc(void *opaque, unsigned int items, unsigned int size)
+void *__fastcall Scaleform::GFx::ZLibAllocFunc(void *opaque, unsigned int items, unsigned int size)
 {
   return Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap(
            Scaleform::Memory::pGlobalHeap,

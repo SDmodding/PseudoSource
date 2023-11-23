@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkPackfileSectionHeaderClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 62

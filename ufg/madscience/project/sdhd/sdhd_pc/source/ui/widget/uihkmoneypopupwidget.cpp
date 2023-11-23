@@ -1,136 +1,135 @@
 // File Line: 48
 // RVA: 0x615290
-void __fastcall UFG::UIHKMoneyPopupWidget::Update(UFG::UIHKMoneyPopupWidget *this, UFG::UIScreen *screen, float elapsed)
+void __fastcall UFG::UIHKMoneyPopupWidget::Update(
+        UFG::UIHKMoneyPopupWidget *this,
+        UFG::UIScreen *screen,
+        float elapsed)
 {
-  UFG::UIScreen *v3; // rdi
-  UFG::UIHKMoneyPopupWidget *v4; // rbx
-  int v5; // er15
+  int mMoney; // r15d
   UFG::GameStatTracker *v6; // rax
-  int v7; // esi
+  int Stat; // esi
   int v8; // eax
-  Scaleform::GFx::Movie *v9; // rbp
-  bool v10; // r14
+  Scaleform::GFx::Movie *pObject; // rbp
+  bool mLeaveOn; // r14
   Scaleform::GFx::Movie *v11; // rcx
-  Scaleform::GFx::Value value; // [rsp+38h] [rbp-50h]
+  Scaleform::GFx::Value value; // [rsp+38h] [rbp-50h] BYREF
 
-  v3 = screen;
-  v4 = this;
-  v5 = this->mMoney;
+  mMoney = this->mMoney;
   v6 = UFG::GameStatTracker::Instance();
-  v7 = UFG::GameStatTracker::GetStat(v6, Money);
-  v8 = v4->mMoney;
-  if ( v7 != v8 )
-    goto LABEL_25;
-  if ( !v4->mForceShow )
+  Stat = UFG::GameStatTracker::GetStat(v6, Money);
+  v8 = this->mMoney;
+  if ( Stat != v8 )
+    goto LABEL_4;
+  if ( !this->mForceShow )
     return;
-  if ( v7 != v8 )
+  if ( Stat != v8 )
   {
-LABEL_25:
-    v4->mTimerActive = 1;
-    v4->mHideTimer = 6.0;
+LABEL_4:
+    this->mTimerActive = 1;
+    this->mHideTimer = 6.0;
   }
-  v4->mForceShow = 0;
-  v4->mMoney = v7;
-  if ( v4->mLeaveOnChanged )
+  this->mForceShow = 0;
+  this->mMoney = Stat;
+  if ( this->mLeaveOnChanged )
   {
-    v4->mLeaveOnChanged = 0;
-    if ( !v3 )
+    this->mLeaveOnChanged = 0;
+    if ( !screen )
       return;
-    v9 = v3->mRenderable->m_movie.pObject;
-    if ( !v9 )
+    pObject = screen->mRenderable->m_movie.pObject;
+    if ( !pObject )
       return;
     value.pObjectInterface = 0i64;
-    value.Type = 0;
-    v10 = v4->mLeaveOn;
-    value.Type = 2;
-    value.mValue.BValue = v10;
-    Scaleform::GFx::Movie::SetVariable(v9, "gMoneyStayOn", &value, 1i64);
-    if ( ((unsigned int)value.Type >> 6) & 1 )
+    value.Type = VT_Undefined;
+    mLeaveOn = this->mLeaveOn;
+    value.Type = VT_Boolean;
+    value.mValue.BValue = mLeaveOn;
+    Scaleform::GFx::Movie::SetVariable(pObject, "gMoneyStayOn", &value, 1i64);
+    if ( (value.Type & 0x40) != 0 )
     {
-      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
+      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&value.pObjectInterface->vfptr->gap8[8])(
         value.pObjectInterface,
         &value,
-        *(_QWORD *)&value.mValue.NValue);
+        value.mValue);
       value.pObjectInterface = 0i64;
     }
-    value.Type = 0;
+    value.Type = VT_Undefined;
   }
-  if ( !v4->mIsVisible )
+  if ( !this->mIsVisible )
   {
-    if ( !v4->mTryToHide )
-      UFG::UIHKMoneyPopupWidget::Flash_Show(v4, v3, v5, v7);
-    if ( !v4->mIsVisible )
-      goto LABEL_26;
+    if ( !this->mTryToHide )
+      UFG::UIHKMoneyPopupWidget::Flash_Show(this, screen, mMoney, Stat);
+    if ( !this->mIsVisible )
+      goto LABEL_20;
   }
-  if ( v4->mTryToHide )
+  if ( this->mTryToHide )
   {
-    if ( v3 )
+    if ( screen )
     {
-      v11 = v3->mRenderable->m_movie.pObject;
+      v11 = screen->mRenderable->m_movie.pObject;
       if ( v11 )
       {
-        v4->mIsVisible = 0;
+        this->mIsVisible = 0;
         Scaleform::GFx::Movie::Invoke(v11, "MoneyPopup_Hide", 0i64, 0i64, 0);
       }
     }
-    *(_WORD *)&v4->mLeaveOnChanged = 1;
-    v4->mLeaveOn = 0;
+    *(_WORD *)&this->mLeaveOnChanged = 1;
+    this->mLeaveOn = 0;
   }
   else
   {
-LABEL_26:
-    v4->mTryToHide = 0;
+LABEL_20:
+    this->mTryToHide = 0;
   }
 }
 
 // File Line: 143
 // RVA: 0x5E3280
-void __fastcall UFG::UIHKMoneyPopupWidget::Flash_Show(UFG::UIHKMoneyPopupWidget *this, UFG::UIScreen *screen, int oldMoney, int newMoney)
+void __fastcall UFG::UIHKMoneyPopupWidget::Flash_Show(
+        UFG::UIHKMoneyPopupWidget *this,
+        UFG::UIScreen *screen,
+        int oldMoney,
+        int newMoney)
 {
-  int v4; // edi
-  int v5; // ebx
-  Scaleform::GFx::Movie *v6; // rsi
+  Scaleform::GFx::Movie *pObject; // rsi
   UFG::HudAudio *v7; // rcx
   unsigned int v8; // edx
-  Scaleform::GFx::Value pargs; // [rsp+40h] [rbp-68h]
-  char v10; // [rsp+70h] [rbp-38h]
+  Scaleform::GFx::Value pargs; // [rsp+40h] [rbp-68h] BYREF
+  char v10[16]; // [rsp+70h] [rbp-38h] BYREF
   __int64 v11; // [rsp+80h] [rbp-28h]
-  unsigned int v12; // [rsp+88h] [rbp-20h]
+  int v12; // [rsp+88h] [rbp-20h]
   double v13; // [rsp+90h] [rbp-18h]
 
   if ( screen )
   {
-    v4 = newMoney;
-    v5 = oldMoney;
-    v6 = screen->mRenderable->m_movie.pObject;
-    if ( v6 )
+    pObject = screen->mRenderable->m_movie.pObject;
+    if ( pObject )
     {
       this->mIsVisible = 1;
       `eh vector constructor iterator(&pargs, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-      if ( ((unsigned int)pargs.Type >> 6) & 1 )
+      if ( (pargs.Type & 0x40) != 0 )
       {
-        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
+        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&pargs.pObjectInterface->vfptr->gap8[8])(
           pargs.pObjectInterface,
           &pargs,
-          *(_QWORD *)&pargs.mValue.NValue);
+          pargs.mValue);
         pargs.pObjectInterface = 0i64;
       }
-      pargs.Type = 5;
-      pargs.mValue.NValue = (double)v5;
-      if ( (v12 >> 6) & 1 )
+      pargs.Type = VT_Number;
+      pargs.mValue.NValue = (double)oldMoney;
+      if ( (v12 & 0x40) != 0 )
       {
         (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v11 + 16i64))(
           v11,
-          &v10,
+          v10,
           COERCE_DOUBLE(*(_QWORD *)&v13));
         v11 = 0i64;
       }
       v12 = 5;
-      v13 = (double)v4;
-      Scaleform::GFx::Movie::Invoke(v6, "MoneyPopup_Show", 0i64, &pargs, 2u);
-      if ( v5 >= v4 )
+      v13 = (double)newMoney;
+      Scaleform::GFx::Movie::Invoke(pObject, "MoneyPopup_Show", 0i64, &pargs, 2u);
+      if ( oldMoney >= newMoney )
       {
-        if ( v5 <= v4 )
+        if ( oldMoney <= newMoney )
           goto LABEL_14;
         v7 = UFG::HudAudio::m_instance;
         if ( !UFG::HudAudio::m_instance )
@@ -152,7 +151,7 @@ LABEL_14:
         }
         v8 = -351352389;
       }
-      UFG::AudioEntity::CreateAndPlayEvent((UFG::AudioEntity *)&v7->vfptr, v8, 0i64, 0, 0i64);
+      UFG::AudioEntity::CreateAndPlayEvent(v7, v8, 0i64, 0, 0i64);
       goto LABEL_14;
     }
   }

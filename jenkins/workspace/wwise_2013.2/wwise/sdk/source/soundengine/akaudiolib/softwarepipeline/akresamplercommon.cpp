@@ -1,15 +1,16 @@
 // File Line: 52
 // RVA: 0xA9D160
-signed __int64 __fastcall Bypass_Native_NChan(AkAudioBuffer *io_pInBuffer, AkAudioBuffer *io_pOutBuffer, unsigned int uRequestedSize, AkInternalPitchState *io_pPitchState)
+__int64 __fastcall Bypass_Native_NChan(
+        AkAudioBuffer *io_pInBuffer,
+        AkAudioBuffer *io_pOutBuffer,
+        unsigned int uRequestedSize,
+        AkInternalPitchState *io_pPitchState)
 {
-  unsigned int v4; // eax
-  unsigned int v5; // er15
-  AkAudioBuffer *v6; // r13
-  unsigned int v7; // edx
+  unsigned int uValidFrames; // eax
+  unsigned int v5; // r15d
+  unsigned int uChannelMask; // edx
   unsigned int v8; // esi
-  AkAudioBuffer *v9; // r14
   unsigned int v10; // ecx
-  AkInternalPitchState *v11; // rdi
   __int64 v12; // rbp
   size_t v13; // rdx
   __int64 v14; // r12
@@ -21,19 +22,16 @@ signed __int64 __fastcall Bypass_Native_NChan(AkAudioBuffer *io_pInBuffer, AkAud
   unsigned int v21; // [rsp+88h] [rbp+10h]
   unsigned int i; // [rsp+90h] [rbp+18h]
 
-  v4 = io_pInBuffer->uValidFrames;
+  uValidFrames = io_pInBuffer->uValidFrames;
   v5 = uRequestedSize - io_pPitchState->uOutFrameOffset;
-  v6 = io_pOutBuffer;
-  v7 = io_pInBuffer->uChannelMask;
-  v8 = v4;
-  v9 = io_pInBuffer;
-  if ( v5 < v4 )
+  uChannelMask = io_pInBuffer->uChannelMask;
+  v8 = uValidFrames;
+  if ( v5 < uValidFrames )
     v8 = uRequestedSize - io_pPitchState->uOutFrameOffset;
   v10 = 0;
-  v11 = io_pPitchState;
-  v21 = v4;
+  v21 = uValidFrames;
   v20 = uRequestedSize - io_pPitchState->uOutFrameOffset;
-  for ( i = v8; v7; v7 &= v7 - 1 )
+  for ( i = v8; uChannelMask; uChannelMask &= uChannelMask - 1 )
     ++v10;
   v12 = 0i64;
   if ( v10 )
@@ -41,14 +39,17 @@ signed __int64 __fastcall Bypass_Native_NChan(AkAudioBuffer *io_pInBuffer, AkAud
     v13 = 4 * v8;
     v14 = 0i64;
     v15 = v10;
-    v16 = (signed int)(v8 - 1);
+    v16 = (int)(v8 - 1);
     v19 = v13;
     do
     {
-      v17 = (char *)v9->pData + 4 * (v11->uInFrameOffset + v12 * v9->uMaxFrames);
-      memmove((char *)v6->pData + 4 * (v11->uOutFrameOffset + v14 * v6->uMaxFrames), v17, v13);
+      v17 = (char *)io_pInBuffer->pData + 4 * io_pPitchState->uInFrameOffset + 4 * v12 * io_pInBuffer->uMaxFrames;
+      memmove(
+        (char *)io_pOutBuffer->pData + 4 * io_pPitchState->uOutFrameOffset + 4 * v14 * io_pOutBuffer->uMaxFrames,
+        v17,
+        v13);
       v13 = v19;
-      v11->fLastValue[v12++] = *(float *)&v17[4 * v16];
+      io_pPitchState->fLastValue[v12++] = *(float *)&v17[4 * v16];
       ++v14;
       --v15;
     }
@@ -56,109 +57,104 @@ signed __int64 __fastcall Bypass_Native_NChan(AkAudioBuffer *io_pInBuffer, AkAud
     v8 = i;
     v5 = v20;
   }
-  v9->uValidFrames -= v8;
-  v6->uValidFrames = LOWORD(v11->uOutFrameOffset) + v8;
-  v11->uFloatIndex = 0x10000;
+  io_pInBuffer->uValidFrames -= v8;
+  io_pOutBuffer->uValidFrames = LOWORD(io_pPitchState->uOutFrameOffset) + v8;
+  io_pPitchState->uFloatIndex = 0x10000;
   if ( v8 == v21 )
-    v11->uInFrameOffset = 0;
+    io_pPitchState->uInFrameOffset = 0;
   else
-    v11->uInFrameOffset += v8;
+    io_pPitchState->uInFrameOffset += v8;
   if ( v8 == v5 )
     return 45i64;
-  v11->uOutFrameOffset += v8;
+  io_pPitchState->uOutFrameOffset += v8;
   return 43i64;
 }
 
 // File Line: 74
 // RVA: 0xA9D430
-signed __int64 __fastcall Fixed_I16_NChan(AkAudioBuffer *io_pInBuffer, AkAudioBuffer *io_pOutBuffer, unsigned int uRequestedSize, AkInternalPitchState *io_pPitchState)
+__int64 __fastcall Fixed_I16_NChan(
+        AkAudioBuffer *io_pInBuffer,
+        AkAudioBuffer *io_pOutBuffer,
+        unsigned int uRequestedSize,
+        AkInternalPitchState *io_pPitchState)
 {
-  unsigned int v4; // edi
+  unsigned int uChannelMask; // edi
   AkInternalPitchState *v5; // r15
-  __int64 v6; // r11
-  unsigned int v7; // er10
-  unsigned int v8; // er14
-  unsigned int v9; // er8
-  AkAudioBuffer *v10; // r9
+  __int64 uOutFrameOffset; // r11
+  unsigned int uFloatIndex; // r10d
+  unsigned int uCurrentFrameSkip; // r14d
+  unsigned int v9; // r8d
   unsigned int v11; // ecx
   unsigned int v12; // ebp
   __int64 v13; // rbx
-  char *v14; // rax
-  _DWORD *v15; // r12
+  char *pData; // rax
+  unsigned int *p_uInFrameOffset; // r12
   unsigned int v16; // esi
-  unsigned __int64 v17; // rcx
-  unsigned int v18; // er9
-  signed __int64 v19; // r13
-  unsigned int v20; // ecx
-  int v21; // edx
-  int v22; // er12
-  AkInternalPitchState *v23; // r13
-  signed __int64 v24; // rax
-  unsigned int v25; // er15
-  int v26; // ebp
-  unsigned int v27; // er8
-  unsigned int v28; // er9
-  char *v29; // r12
-  unsigned int v30; // edx
-  int v31; // ecx
-  int v32; // edx
+  unsigned int v17; // r9d
+  char *v18; // r13
+  unsigned int v19; // ecx
+  int v20; // edx
+  int v21; // r12d
+  AkInternalPitchState *v22; // r13
+  __int64 v23; // rax
+  unsigned int v24; // r15d
+  int v25; // ebp
+  unsigned int v26; // r8d
+  unsigned int v27; // r9d
+  char *v28; // r12
+  unsigned int v29; // edx
+  int v30; // ecx
+  int v31; // edx
   unsigned int i; // ecx
-  unsigned __int64 v34; // r8
-  unsigned int v35; // ecx
-  int v36; // edx
-  int v37; // er11
-  int v38; // edx
-  int v39; // eax
-  unsigned int v40; // edi
-  unsigned int j; // er11
-  __int64 v42; // rcx
-  int v43; // edx
-  int v44; // eax
-  unsigned int v45; // er8
-  unsigned int v46; // edx
-  __int64 v47; // rax
-  int v48; // ecx
-  unsigned int v50; // [rsp+0h] [rbp-A8h]
-  int v51; // [rsp+4h] [rbp-A4h]
-  unsigned int v52; // [rsp+8h] [rbp-A0h]
-  unsigned int v53; // [rsp+10h] [rbp-98h]
-  unsigned int v54; // [rsp+14h] [rbp-94h]
-  unsigned int v55; // [rsp+18h] [rbp-90h]
-  int v56; // [rsp+1Ch] [rbp-8Ch]
-  unsigned int v57; // [rsp+20h] [rbp-88h]
-  signed __int64 v58; // [rsp+28h] [rbp-80h]
-  signed __int64 v59; // [rsp+30h] [rbp-78h]
-  signed __int64 v60; // [rsp+38h] [rbp-70h]
-  unsigned int *v61; // [rsp+40h] [rbp-68h]
-  __int64 v62; // [rsp+48h] [rbp-60h]
-  unsigned int *v63; // [rsp+50h] [rbp-58h]
-  AkAudioBuffer *v64; // [rsp+B0h] [rbp+8h]
-  AkAudioBuffer *v65; // [rsp+B8h] [rbp+10h]
-  unsigned int v66; // [rsp+C0h] [rbp+18h]
-  AkInternalPitchState *v67; // [rsp+C8h] [rbp+20h]
+  float *v33; // r8
+  unsigned int v34; // ecx
+  int v35; // edx
+  int v36; // r11d
+  int v37; // edx
+  int v38; // eax
+  unsigned int v39; // edi
+  unsigned int j; // r11d
+  __int64 v41; // rcx
+  int v42; // edx
+  int v43; // eax
+  unsigned int v44; // r8d
+  unsigned int k; // edx
+  __int64 v46; // rax
+  unsigned int v47; // ecx
+  unsigned int uValidFrames; // [rsp+0h] [rbp-A8h]
+  int v50; // [rsp+4h] [rbp-A4h]
+  unsigned int v51; // [rsp+8h] [rbp-A0h]
+  unsigned int v52; // [rsp+10h] [rbp-98h]
+  unsigned int v53; // [rsp+14h] [rbp-94h]
+  unsigned int v54; // [rsp+18h] [rbp-90h]
+  int v55; // [rsp+1Ch] [rbp-8Ch]
+  unsigned int v56; // [rsp+20h] [rbp-88h]
+  char *v57; // [rsp+28h] [rbp-80h]
+  unsigned int *v58; // [rsp+30h] [rbp-78h]
+  __int64 v59; // [rsp+38h] [rbp-70h]
+  unsigned int *p_uFloatIndex; // [rsp+40h] [rbp-68h]
+  __int64 v61; // [rsp+48h] [rbp-60h]
+  unsigned int *p_uOutFrameOffset; // [rsp+50h] [rbp-58h]
+  unsigned int v65; // [rsp+C0h] [rbp+18h]
 
-  v67 = io_pPitchState;
-  v65 = io_pOutBuffer;
-  v64 = io_pInBuffer;
-  v4 = io_pInBuffer->uChannelMask;
+  uChannelMask = io_pInBuffer->uChannelMask;
   v5 = io_pPitchState;
-  v6 = io_pPitchState->uOutFrameOffset;
-  v7 = io_pPitchState->uFloatIndex;
-  v8 = io_pPitchState->uCurrentFrameSkip;
-  v50 = io_pInBuffer->uValidFrames;
-  v63 = &io_pPitchState->uOutFrameOffset;
-  v9 = uRequestedSize - v6;
-  v61 = &io_pPitchState->uFloatIndex;
-  v10 = io_pInBuffer;
-  v52 = v9;
-  v55 = io_pInBuffer->uChannelMask;
-  v11 = io_pInBuffer->uChannelMask;
-  v12 = (v8 - v7 + 0xFFFF) / v8;
+  uOutFrameOffset = io_pPitchState->uOutFrameOffset;
+  uFloatIndex = io_pPitchState->uFloatIndex;
+  uCurrentFrameSkip = io_pPitchState->uCurrentFrameSkip;
+  uValidFrames = io_pInBuffer->uValidFrames;
+  p_uOutFrameOffset = &io_pPitchState->uOutFrameOffset;
+  v9 = uRequestedSize - uOutFrameOffset;
+  p_uFloatIndex = &io_pPitchState->uFloatIndex;
+  v51 = v9;
+  v54 = uChannelMask;
+  v11 = uChannelMask;
+  v12 = (uCurrentFrameSkip - uFloatIndex + 0xFFFF) / uCurrentFrameSkip;
   if ( v9 < v12 )
     v12 = v9;
   v13 = 0i64;
-  v66 = v12;
-  if ( v4 )
+  v65 = v12;
+  if ( uChannelMask )
   {
     do
     {
@@ -167,266 +163,257 @@ signed __int64 __fastcall Fixed_I16_NChan(AkAudioBuffer *io_pInBuffer, AkAudioBu
     }
     while ( v11 );
   }
-  v14 = (char *)v10->pData;
-  v15 = &v5->uInFrameOffset;
+  pData = (char *)io_pInBuffer->pData;
+  p_uInFrameOffset = &v5->uInFrameOffset;
   v16 = 0;
-  v17 = (unsigned int)(v13 * v5->uInFrameOffset) - (unsigned __int64)(unsigned int)v13;
-  v59 = (signed __int64)&v5->uInFrameOffset;
-  v18 = v7;
-  v19 = (signed __int64)&v14[2 * v17];
-  v53 = v7;
-  v58 = (signed __int64)&v14[2 * v17];
+  v58 = &v5->uInFrameOffset;
+  v17 = uFloatIndex;
+  v18 = &pData[2 * ((unsigned int)(v13 * v5->uInFrameOffset) - (unsigned __int64)(unsigned int)v13)];
+  v52 = uFloatIndex;
+  v57 = v18;
   if ( (_DWORD)v13 )
   {
-    v20 = v7 >> 16;
-    v21 = v4 & 8;
-    v22 = (unsigned __int16)v7;
-    v23 = v5;
-    v57 = v9 - v12;
-    v54 = v7 >> 16;
-    v24 = v58 - (_QWORD)v5;
-    v51 = (unsigned __int16)v7;
-    v56 = v4 & 8;
-    v62 = v6;
-    v25 = v12;
-    v60 = v24;
+    v19 = HIWORD(uFloatIndex);
+    v20 = uChannelMask & 8;
+    v21 = (unsigned __int16)uFloatIndex;
+    v22 = v5;
+    v56 = v9 - v12;
+    v53 = HIWORD(uFloatIndex);
+    v23 = v57 - (char *)v5;
+    v50 = (unsigned __int16)uFloatIndex;
+    v55 = v20;
+    v61 = uOutFrameOffset;
+    v24 = v12;
+    v59 = v23;
     while ( 1 )
     {
-      v7 = v18;
-      v26 = v22;
-      v27 = v16;
-      v28 = v20;
-      v29 = (char *)v23 + v24;
-      if ( v21 )
+      uFloatIndex = v17;
+      v25 = v21;
+      v26 = v16;
+      v27 = v19;
+      v28 = (char *)v22 + v23;
+      if ( v20 )
       {
-        v30 = 0;
-        v31 = v4 & 7;
-        if ( v4 & 7 )
+        v29 = 0;
+        v30 = uChannelMask & 7;
+        if ( (uChannelMask & 7) != 0 )
         {
           do
           {
-            ++v30;
-            v31 &= v31 - 1;
+            ++v29;
+            v30 &= v30 - 1;
           }
-          while ( v31 );
+          while ( v30 );
         }
-        if ( v16 == v30 )
+        if ( v16 == v29 )
         {
-          v32 = 0;
-          for ( i = v4; i; i &= i - 1 )
-            ++v32;
-          v27 = v32 - 1;
+          v31 = 0;
+          for ( i = uChannelMask; i; i &= i - 1 )
+            ++v31;
+          v26 = v31 - 1;
         }
-        else if ( v16 > v30 )
+        else if ( v16 > v29 )
         {
-          v27 = v16 - 1;
+          v26 = v16 - 1;
         }
       }
-      v34 = (unsigned __int64)v65->pData + 4 * (v6 + v65->uMaxFrames * (unsigned __int64)v27);
-      v35 = v25;
-      if ( v25 )
+      v33 = (float *)((char *)io_pOutBuffer->pData
+                    + 4 * uOutFrameOffset
+                    + 4 * io_pOutBuffer->uMaxFrames * (unsigned __int64)v26);
+      v34 = v24;
+      if ( v24 )
       {
-        v36 = v23->iLastValue[0];
-        v37 = *(signed __int16 *)&v29[2 * v13] - v36;
-        v38 = v36 << 16;
+        v35 = v22->iLastValue[0];
+        v36 = *(__int16 *)&v28[2 * v13] - v35;
+        v37 = v35 << 16;
         do
         {
-          v7 += v8;
-          v34 += 4i64;
-          v39 = v38 + v26 * v37;
-          v28 = v7 >> 16;
-          v26 = (unsigned __int16)v7;
-          *(float *)(v34 - 4) = (float)v39 * 4.6566129e-10;
-          --v35;
+          uFloatIndex += uCurrentFrameSkip;
+          ++v33;
+          v38 = v37 + v25 * v36;
+          v27 = HIWORD(uFloatIndex);
+          v25 = (unsigned __int16)uFloatIndex;
+          *(v33 - 1) = (float)v38 * 4.6566129e-10;
+          --v34;
         }
-        while ( v35 );
+        while ( v34 );
       }
-      v40 = (v8 + (v50 << 16) - v7 - 1) / v8;
-      if ( v57 < v40 )
-        v40 = v57;
-      for ( j = v40; j; --j )
+      v39 = (uCurrentFrameSkip + (uValidFrames << 16) - uFloatIndex - 1) / uCurrentFrameSkip;
+      if ( v56 < v39 )
+        v39 = v56;
+      for ( j = v39; j; --j )
       {
-        v7 += v8;
-        v34 += 4i64;
-        v42 = v28 * (unsigned int)v13;
-        v43 = *(signed __int16 *)&v29[2 * v42];
-        v28 = v7 >> 16;
-        v44 = v26 * (*(signed __int16 *)&v29[2 * (unsigned int)(v13 + v42)] - v43);
-        v26 = (unsigned __int16)v7;
-        *(float *)(v34 - 4) = (float)((v43 << 16) + v44) * 4.6566129e-10;
+        uFloatIndex += uCurrentFrameSkip;
+        ++v33;
+        v41 = v27 * (unsigned int)v13;
+        v42 = *(__int16 *)&v28[2 * v41];
+        v27 = HIWORD(uFloatIndex);
+        v43 = v25 * (*(__int16 *)&v28[2 * (unsigned int)(v13 + v41)] - v42);
+        v25 = (unsigned __int16)uFloatIndex;
+        *(v33 - 1) = (float)((v42 << 16) + v43) * 4.6566129e-10;
       }
-      v20 = v54;
-      v21 = v56;
-      v24 = v60;
-      v18 = v53;
-      v22 = v51;
-      v6 = v62;
+      v19 = v53;
+      v20 = v55;
+      v23 = v59;
+      v17 = v52;
+      v21 = v50;
+      uOutFrameOffset = v61;
       ++v16;
-      v23 = (AkInternalPitchState *)((char *)v23 + 2);
+      v22 = (AkInternalPitchState *)((char *)v22 + 2);
       if ( v16 >= (unsigned int)v13 )
         break;
-      v4 = v55;
+      uChannelMask = v54;
     }
-    v5 = v67;
-    v12 = v66;
-    v15 = (_DWORD *)v59;
-    v19 = v58;
+    v5 = io_pPitchState;
+    v12 = v65;
+    p_uInFrameOffset = v58;
+    v18 = v57;
   }
   else
   {
-    v40 = v12;
+    v39 = v12;
   }
-  v45 = v50;
-  if ( v7 >> 16 < v50 )
-    v45 = v7 >> 16;
-  if ( v45 )
+  v44 = uValidFrames;
+  if ( HIWORD(uFloatIndex) < uValidFrames )
+    v44 = HIWORD(uFloatIndex);
+  if ( v44 )
   {
-    v46 = 0;
-    if ( (_DWORD)v13 )
+    for ( k = 0; k < (unsigned int)v13; HIWORD(v5[-1].uRequestedFrames) = *(_WORD *)&v18[2 * v46] )
     {
-      do
-      {
-        v47 = v45 * (_DWORD)v13 + v46++;
-        v5 = (AkInternalPitchState *)((char *)v5 + 2);
-        HIWORD(v5[-1].uRequestedFrames) = *(_WORD *)(v19 + 2 * v47);
-      }
-      while ( v46 < (unsigned int)v13 );
+      v46 = v44 * (_DWORD)v13 + k++;
+      v5 = (AkInternalPitchState *)((char *)v5 + 2);
     }
   }
-  v48 = v40 + v12;
-  *v61 = v7 - (v45 << 16);
-  v64->uValidFrames -= v45;
-  v65->uValidFrames = *(_WORD *)v63 + v40 + v12;
-  if ( v45 == v50 )
-    *v15 = 0;
+  v47 = v39 + v12;
+  *p_uFloatIndex = uFloatIndex - (v44 << 16);
+  io_pInBuffer->uValidFrames -= v44;
+  io_pOutBuffer->uValidFrames = *(_WORD *)p_uOutFrameOffset + v39 + v12;
+  if ( v44 == uValidFrames )
+    *p_uInFrameOffset = 0;
   else
-    *v15 += v45;
-  if ( v48 == v52 )
+    *p_uInFrameOffset += v44;
+  if ( v47 == v51 )
     return 45i64;
-  *v63 += v48;
+  *p_uOutFrameOffset += v47;
   return 43i64;
 }
 
 // File Line: 123
 // RVA: 0xA9D770
-signed __int64 __fastcall Fixed_Native_NChan(AkAudioBuffer *io_pInBuffer, AkAudioBuffer *io_pOutBuffer, unsigned int uRequestedSize, AkInternalPitchState *io_pPitchState)
+__int64 __fastcall Fixed_Native_NChan(
+        AkAudioBuffer *io_pInBuffer,
+        AkAudioBuffer *io_pOutBuffer,
+        unsigned int uRequestedSize,
+        AkInternalPitchState *io_pPitchState)
 {
-  unsigned int v4; // er12
+  unsigned int uValidFrames; // r12d
   AkInternalPitchState *v5; // r11
-  __int64 v6; // r9
-  unsigned int v7; // edi
-  unsigned int v8; // er10
-  unsigned int v9; // er8
-  AkAudioBuffer *v10; // rsi
+  __int64 uOutFrameOffset; // r9
+  unsigned int uCurrentFrameSkip; // edi
+  unsigned int uFloatIndex; // r10d
+  unsigned int v9; // r8d
   AkAudioBuffer *v11; // r14
-  unsigned int v12; // ecx
+  unsigned int uChannelMask; // ecx
   unsigned int v13; // eax
-  unsigned int v14; // ebp
+  int v14; // ebp
   unsigned int v15; // edx
-  unsigned int v16; // er15
-  signed int v17; // ebx
+  unsigned int v16; // r15d
+  int v17; // ebx
   float *v18; // r12
-  int v19; // ecx
-  char *v20; // rax
-  __int64 v21; // rsi
-  signed __int64 v22; // r13
-  unsigned int v23; // er11
-  signed __int64 v24; // rsi
+  unsigned int v19; // ecx
+  char *pData; // rax
+  __int64 uInFrameOffset; // rsi
+  char *v22; // r13
+  unsigned int v23; // r11d
+  __int64 v24; // rsi
   __int64 v25; // rax
   unsigned int v26; // ebp
   float v27; // xmm2_4
-  unsigned int v28; // er8
-  signed __int64 v29; // r9
+  unsigned int v28; // r8d
+  float *v29; // r9
   unsigned int v30; // ecx
   float v31; // xmm1_4
-  signed int v32; // eax
-  unsigned int v33; // er15
+  int v32; // eax
+  unsigned int v33; // r15d
   unsigned int i; // edx
   __int64 v35; // rax
   __int64 v36; // rcx
   float v37; // xmm1_4
-  unsigned int v38; // er9
+  unsigned int v38; // r9d
   unsigned int v39; // esi
   __int64 v40; // r8
-  signed __int64 v41; // rdi
-  signed __int64 v42; // rbx
+  __int64 v41; // rdi
+  char *v42; // rbx
   unsigned int v43; // eax
   __int64 v44; // r13
   __int64 v45; // rax
-  signed __int64 v46; // rcx
+  __int64 v46; // rcx
   __int64 v47; // rdx
   __int64 v48; // rax
-  int v49; // ecx
-  unsigned int v51; // [rsp+0h] [rbp-88h]
+  unsigned int v49; // ecx
+  int v51; // [rsp+0h] [rbp-88h]
   unsigned int v52; // [rsp+4h] [rbp-84h]
   unsigned int v53; // [rsp+8h] [rbp-80h]
-  signed int v54; // [rsp+Ch] [rbp-7Ch]
+  int v54; // [rsp+Ch] [rbp-7Ch]
   unsigned int v55; // [rsp+10h] [rbp-78h]
   unsigned int v56; // [rsp+14h] [rbp-74h]
   __int64 v57; // [rsp+20h] [rbp-68h]
-  signed __int64 v58; // [rsp+28h] [rbp-60h]
-  signed __int64 v59; // [rsp+30h] [rbp-58h]
-  AkAudioBuffer *v60; // [rsp+90h] [rbp+8h]
-  AkAudioBuffer *v61; // [rsp+98h] [rbp+10h]
+  __int64 v58; // [rsp+28h] [rbp-60h]
+  __int64 v59; // [rsp+30h] [rbp-58h]
   unsigned int v62; // [rsp+A0h] [rbp+18h]
-  AkInternalPitchState *v63; // [rsp+A8h] [rbp+20h]
 
-  v63 = io_pPitchState;
-  v61 = io_pOutBuffer;
-  v60 = io_pInBuffer;
-  v4 = io_pInBuffer->uValidFrames;
+  uValidFrames = io_pInBuffer->uValidFrames;
   v5 = io_pPitchState;
-  v6 = io_pPitchState->uOutFrameOffset;
-  v7 = v5->uCurrentFrameSkip;
-  v8 = v5->uFloatIndex;
-  v9 = uRequestedSize - v6;
-  v10 = io_pOutBuffer;
+  uOutFrameOffset = io_pPitchState->uOutFrameOffset;
+  uCurrentFrameSkip = v5->uCurrentFrameSkip;
+  uFloatIndex = v5->uFloatIndex;
+  v9 = uRequestedSize - uOutFrameOffset;
   v11 = io_pInBuffer;
-  v12 = io_pInBuffer->uChannelMask;
-  v52 = v4;
+  uChannelMask = io_pInBuffer->uChannelMask;
+  v52 = uValidFrames;
   v55 = v9;
-  v13 = (v5->uCurrentFrameSkip - v8 + 0xFFFF) / v7;
+  v13 = (uCurrentFrameSkip - uFloatIndex + 0xFFFF) / uCurrentFrameSkip;
   if ( v9 < v13 )
     v13 = v9;
   v14 = 0;
   v51 = 0;
   v62 = v13;
-  if ( v12 )
+  if ( uChannelMask )
   {
     do
     {
       ++v14;
-      v12 &= v12 - 1;
+      uChannelMask &= uChannelMask - 1;
     }
-    while ( v12 );
+    while ( uChannelMask );
     v51 = v14;
   }
   v15 = v5->uFloatIndex;
-  v53 = v5->uFloatIndex;
+  v53 = v15;
   if ( v14 )
   {
-    v16 = v4 << 16;
-    v17 = (unsigned __int16)v8;
+    v16 = uValidFrames << 16;
+    v17 = (unsigned __int16)uFloatIndex;
     v18 = (float *)v5;
     v19 = v9 - v13;
-    v54 = (unsigned __int16)v8;
+    v54 = (unsigned __int16)uFloatIndex;
     v56 = v16;
     v59 = 4i64 * v11->uMaxFrames;
-    v58 = 4i64 * v10->uMaxFrames;
-    v20 = (char *)v10->pData;
-    v21 = v5->uInFrameOffset;
-    v22 = (signed __int64)&v20[4 * v6];
+    v58 = 4i64 * io_pOutBuffer->uMaxFrames;
+    pData = (char *)io_pOutBuffer->pData;
+    uInFrameOffset = v5->uInFrameOffset;
+    v22 = &pData[4 * uOutFrameOffset];
     v23 = v19;
-    v24 = (signed __int64)v11->pData + 4 * v21 - 4;
-    v25 = v14;
-    v26 = v8 >> 16;
+    v24 = (__int64)v11->pData + 4 * uInFrameOffset - 4;
+    v25 = (unsigned int)v14;
+    v26 = HIWORD(uFloatIndex);
     v57 = v25;
     while ( 1 )
     {
       v27 = *v18;
-      v8 = v15;
+      uFloatIndex = v15;
       v28 = v26;
-      v29 = v22;
+      v29 = (float *)v22;
       v30 = v62;
       if ( v62 )
       {
@@ -434,31 +421,30 @@ signed __int64 __fastcall Fixed_Native_NChan(AkAudioBuffer *io_pInBuffer, AkAudi
         do
         {
           v32 = v17;
-          v8 += v7;
-          v29 += 4i64;
-          v17 = (unsigned __int16)v8;
-          v28 = v8 >> 16;
-          *(float *)(v29 - 4) = (float)((float)((float)v32 * 0.000015258789) * v31) + v27;
+          uFloatIndex += uCurrentFrameSkip;
+          ++v29;
+          v17 = (unsigned __int16)uFloatIndex;
+          v28 = HIWORD(uFloatIndex);
+          *(v29 - 1) = (float)((float)((float)v32 * 0.000015258789) * v31) + v27;
           --v30;
         }
         while ( v30 );
       }
-      v33 = (v7 + v16 - v8 - 1) / v7;
+      v33 = (uCurrentFrameSkip + v16 - uFloatIndex - 1) / uCurrentFrameSkip;
       if ( v23 < v33 )
         v33 = v23;
       for ( i = v33; i; --i )
       {
         v35 = v28 + 1;
         v36 = v28;
-        v8 += v7;
-        v29 += 4i64;
-        v28 = v8 >> 16;
+        uFloatIndex += uCurrentFrameSkip;
+        ++v29;
+        v28 = HIWORD(uFloatIndex);
         v37 = *(float *)(v24 + 4 * v35);
         LODWORD(v35) = v17;
-        v17 = (unsigned __int16)v8;
-        *(float *)(v29 - 4) = (float)((float)(v37 - *(float *)(v24 + 4 * v36))
-                                    * (float)((float)(signed int)v35 * 0.000015258789))
-                            + *(float *)(v24 + 4 * v36);
+        v17 = (unsigned __int16)uFloatIndex;
+        *(v29 - 1) = (float)((float)(v37 - *(float *)(v24 + 4 * v36)) * (float)((float)(int)v35 * 0.000015258789))
+                   + *(float *)(v24 + 4 * v36);
       }
       v22 += v58;
       v24 += v59;
@@ -469,62 +455,62 @@ signed __int64 __fastcall Fixed_Native_NChan(AkAudioBuffer *io_pInBuffer, AkAudi
         break;
       v16 = v56;
     }
-    v5 = v63;
+    v5 = io_pPitchState;
     v14 = v51;
-    v11 = v60;
-    v4 = v52;
+    v11 = io_pInBuffer;
+    uValidFrames = v52;
   }
   else
   {
     v33 = v13;
   }
-  v38 = v4;
-  if ( v8 >> 16 < v4 )
-    v38 = v8 >> 16;
+  v38 = uValidFrames;
+  if ( HIWORD(uFloatIndex) < uValidFrames )
+    v38 = HIWORD(uFloatIndex);
   if ( v38 )
   {
     v39 = 0;
     v40 = 0i64;
-    if ( (signed int)v14 >= 4 )
+    if ( v14 >= 4 )
     {
       v41 = 2i64;
-      v42 = (signed __int64)&v5->uLastValue[8];
-      v43 = ((v14 - 4) >> 2) + 1;
+      v42 = &v5->uLastValue[8];
+      v43 = ((unsigned int)(v14 - 4) >> 2) + 1;
       v44 = v43;
       v39 = 4 * v43;
       do
       {
-        v42 += 16i64;
+        v42 += 16;
         v45 = v38 + v40 * v11->uMaxFrames;
         v40 += 4i64;
-        *(_DWORD *)(v42 - 24) = *((_DWORD *)v11->pData + v45 + v5->uInFrameOffset - 1);
-        *(_DWORD *)(v42 - 20) = *((_DWORD *)v11->pData + v38 + (v41 - 1) * v11->uMaxFrames + v5->uInFrameOffset - 1);
-        *(_DWORD *)(v42 - 16) = *((_DWORD *)v11->pData + v38 + v41 * v11->uMaxFrames + v5->uInFrameOffset - 1);
+        *((_DWORD *)v42 - 6) = *((_DWORD *)v11->pData + v45 + v5->uInFrameOffset - 1);
+        *((_DWORD *)v42 - 5) = *((_DWORD *)v11->pData + v38 + (v41 - 1) * v11->uMaxFrames + v5->uInFrameOffset - 1);
+        *((_DWORD *)v42 - 4) = *((_DWORD *)v11->pData + v38 + v41 * v11->uMaxFrames + v5->uInFrameOffset - 1);
         v46 = v41 + 1;
         v41 += 4i64;
-        *(_DWORD *)(v42 - 12) = *((_DWORD *)v11->pData + v38 + v46 * v11->uMaxFrames + v5->uInFrameOffset - 1);
+        *((_DWORD *)v42 - 3) = *((_DWORD *)v11->pData + v38 + v46 * v11->uMaxFrames + v5->uInFrameOffset - 1);
         --v44;
       }
       while ( v44 );
-      v4 = v52;
+      uValidFrames = v52;
     }
     if ( v39 < v14 )
     {
       v47 = v14 - v39;
       do
       {
-        v48 = v40++ * v11->uMaxFrames;
-        v5->fLastValue[v40 - 1] = *((float *)v11->pData + v38 + v48 + v5->uInFrameOffset - 1);
+        v48 = v40 * v11->uMaxFrames;
+        v5->fLastValue[v40++] = *((float *)v11->pData + v38 + v48 + v5->uInFrameOffset - 1);
         --v47;
       }
       while ( v47 );
     }
   }
   v49 = v33 + v62;
-  v5->uFloatIndex = v8 - (v38 << 16);
+  v5->uFloatIndex = uFloatIndex - (v38 << 16);
   v11->uValidFrames -= v38;
-  v61->uValidFrames = LOWORD(v5->uOutFrameOffset) + v33 + v62;
-  if ( v38 == v4 )
+  io_pOutBuffer->uValidFrames = LOWORD(v5->uOutFrameOffset) + v33 + v62;
+  if ( v38 == uValidFrames )
     v5->uInFrameOffset = 0;
   else
     v5->uInFrameOffset += v38;
@@ -536,56 +522,59 @@ signed __int64 __fastcall Fixed_Native_NChan(AkAudioBuffer *io_pInBuffer, AkAudi
 
 // File Line: 170
 // RVA: 0xA9DCA0
-signed __int64 __fastcall Interpolating_I16_NChan(AkAudioBuffer *io_pInBuffer, AkAudioBuffer *io_pOutBuffer, unsigned int uRequestedSize, AkInternalPitchState *io_pPitchState)
+__int64 __fastcall Interpolating_I16_NChan(
+        AkAudioBuffer *io_pInBuffer,
+        AkAudioBuffer *io_pOutBuffer,
+        unsigned int uRequestedSize,
+        AkInternalPitchState *io_pPitchState)
 {
-  __int64 v4; // r10
-  unsigned int v5; // esi
-  unsigned int v6; // ebx
-  AkAudioBuffer *v7; // r11
-  unsigned int v8; // ecx
-  unsigned int *v9; // rax
+  __int64 uOutFrameOffset; // r10
+  unsigned int uValidFrames; // esi
+  unsigned int uFloatIndex; // ebx
+  unsigned int uCurrentFrameSkip; // ecx
+  unsigned int *p_uFloatIndex; // rax
   unsigned int v10; // edi
   AkInternalPitchState *v11; // r12
-  unsigned int v12; // er9
+  unsigned int uChannelMask; // r9d
   __int64 v13; // r14
-  unsigned int v14; // er8
-  unsigned int v15; // er13
+  unsigned int i; // r8d
+  unsigned int uInterpolationRampInc; // r13d
   __int64 v16; // r15
-  unsigned __int64 v17; // rax
+  char *v17; // rax
   unsigned int v18; // edx
-  int v19; // er8
+  int v19; // r8d
   unsigned int v20; // ecx
   int v21; // ebp
-  unsigned int v22; // esi
-  unsigned int v23; // er11
+  unsigned int uInterpolationRampCount; // esi
+  unsigned int v23; // r11d
   unsigned int v24; // ebx
-  unsigned int v25; // er8
+  unsigned int v25; // r8d
   unsigned int v26; // edx
   int v27; // ecx
   int v28; // edx
-  unsigned int j; // ecx
+  unsigned int k; // ecx
   __int16 v30; // bp
   float *v31; // r10
-  signed __int64 v32; // r9
-  signed __int64 v33; // r8
+  char *v32; // r9
+  __int64 v33; // r8
   unsigned int v34; // edx
   int v35; // eax
   __m128i v36; // xmm0
-  signed __int64 v37; // r9
-  unsigned int v38; // er8
-  int v39; // er15
+  __int64 v37; // r9
+  unsigned int v38; // r8d
+  int v39; // r15d
   int v40; // eax
   __int64 v41; // rcx
   int v42; // edx
   int v43; // eax
   __m128i v44; // xmm0
-  unsigned int v45; // er8
-  unsigned int v46; // edx
+  unsigned int v45; // r8d
+  unsigned int m; // edx
   __int64 v47; // rax
-  signed __int64 v48; // r10
+  __int64 v48; // r10
   int v50; // [rsp+0h] [rbp-C8h]
   int v51; // [rsp+4h] [rbp-C4h]
-  int v52; // [rsp+8h] [rbp-C0h]
+  unsigned int v52; // [rsp+8h] [rbp-C0h]
   unsigned int v53; // [rsp+Ch] [rbp-BCh]
   int v54; // [rsp+10h] [rbp-B8h]
   int v55; // [rsp+14h] [rbp-B4h]
@@ -594,82 +583,66 @@ signed __int64 __fastcall Interpolating_I16_NChan(AkAudioBuffer *io_pInBuffer, A
   unsigned int v58; // [rsp+20h] [rbp-A8h]
   unsigned int v59; // [rsp+24h] [rbp-A4h]
   unsigned int v60; // [rsp+28h] [rbp-A0h]
-  unsigned __int64 v61; // [rsp+30h] [rbp-98h]
-  signed __int64 v62; // [rsp+38h] [rbp-90h]
-  unsigned int *v63; // [rsp+40h] [rbp-88h]
-  char *v64; // [rsp+48h] [rbp-80h]
+  char *v61; // [rsp+30h] [rbp-98h]
+  char *v62; // [rsp+38h] [rbp-90h]
+  unsigned int *p_uInFrameOffset; // [rsp+40h] [rbp-88h]
+  char *pData; // [rsp+48h] [rbp-80h]
   float *v65; // [rsp+58h] [rbp-70h]
-  __int64 i; // [rsp+60h] [rbp-68h]
+  __int64 j; // [rsp+60h] [rbp-68h]
   unsigned int *v67; // [rsp+68h] [rbp-60h]
-  __int64 v68; // [rsp+70h] [rbp-58h]
-  unsigned int *v69; // [rsp+78h] [rbp-50h]
-  AkAudioBuffer *v70; // [rsp+D0h] [rbp+8h]
-  AkAudioBuffer *v71; // [rsp+D8h] [rbp+10h]
+  __int64 uMaxFrames; // [rsp+70h] [rbp-58h]
+  unsigned int *p_uOutFrameOffset; // [rsp+78h] [rbp-50h]
   unsigned int v72; // [rsp+E0h] [rbp+18h]
-  AkInternalPitchState *v73; // [rsp+E8h] [rbp+20h]
 
-  v73 = io_pPitchState;
-  v71 = io_pOutBuffer;
-  v70 = io_pInBuffer;
-  v4 = io_pPitchState->uOutFrameOffset;
-  v5 = io_pInBuffer->uValidFrames;
-  v6 = io_pPitchState->uFloatIndex;
-  v7 = io_pInBuffer;
-  v8 = io_pPitchState->uCurrentFrameSkip;
-  v69 = &io_pPitchState->uOutFrameOffset;
-  v9 = &io_pPitchState->uFloatIndex;
-  v10 = uRequestedSize - v4;
+  uOutFrameOffset = io_pPitchState->uOutFrameOffset;
+  uValidFrames = io_pInBuffer->uValidFrames;
+  uFloatIndex = io_pPitchState->uFloatIndex;
+  uCurrentFrameSkip = io_pPitchState->uCurrentFrameSkip;
+  p_uOutFrameOffset = &io_pPitchState->uOutFrameOffset;
+  p_uFloatIndex = &io_pPitchState->uFloatIndex;
+  v10 = uRequestedSize - uOutFrameOffset;
   v11 = io_pPitchState;
-  v12 = v7->uChannelMask;
+  uChannelMask = io_pInBuffer->uChannelMask;
   v13 = 0i64;
-  v59 = v6;
-  v58 = v5;
-  v54 = uRequestedSize - v4;
-  v67 = v9;
-  v60 = v12;
-  v14 = v7->uChannelMask;
-  if ( v12 )
-  {
-    do
-    {
-      v13 = (unsigned int)(v13 + 1);
-      v14 &= v14 - 1;
-    }
-    while ( v14 );
-  }
-  v15 = v11->uInterpolationRampInc;
-  v53 = v8 << 10;
-  v52 = v11->uTargetFrameSkip - v8;
+  v59 = uFloatIndex;
+  v58 = uValidFrames;
+  v54 = uRequestedSize - uOutFrameOffset;
+  v67 = p_uFloatIndex;
+  v60 = uChannelMask;
+  for ( i = uChannelMask; i; i &= i - 1 )
+    v13 = (unsigned int)(v13 + 1);
+  uInterpolationRampInc = v11->uInterpolationRampInc;
+  v53 = uCurrentFrameSkip << 10;
+  v52 = v11->uTargetFrameSkip - uCurrentFrameSkip;
   v16 = 0i64;
-  v63 = &v11->uInFrameOffset;
-  v17 = (unsigned __int64)v7->pData
+  p_uInFrameOffset = &v11->uInFrameOffset;
+  v17 = (char *)io_pInBuffer->pData
       + 2 * ((unsigned int)(v13 * v11->uInFrameOffset) - (unsigned __int64)(unsigned int)v13);
-  v18 = v6 >> 16;
-  v64 = (char *)v71->pData;
-  v19 = (unsigned __int16)v6;
-  v20 = v5 - 1;
-  v21 = v7->uChannelMask & 8;
-  v61 = (unsigned __int64)v7->pData
-      + 2 * ((unsigned int)(v13 * v11->uInFrameOffset) - (unsigned __int64)(unsigned int)v13);
+  v18 = HIWORD(uFloatIndex);
+  pData = (char *)io_pOutBuffer->pData;
+  v19 = (unsigned __int16)uFloatIndex;
+  v20 = uValidFrames - 1;
+  v21 = uChannelMask & 8;
+  v61 = v17;
   v50 = 0;
-  v57 = v6 >> 16;
-  v72 = v5 - 1;
-  v56 = (unsigned __int16)v6;
-  v55 = v7->uChannelMask & 8;
-  v68 = v71->uMaxFrames;
-  for ( i = v4; ; v4 = i )
+  v57 = HIWORD(uFloatIndex);
+  v72 = uValidFrames - 1;
+  v56 = (unsigned __int16)uFloatIndex;
+  v55 = v21;
+  uMaxFrames = io_pOutBuffer->uMaxFrames;
+  for ( j = uOutFrameOffset; ; uOutFrameOffset = j )
   {
-    v22 = v11->uInterpolationRampCount;
-    v23 = v6;
+    uInterpolationRampCount = v11->uInterpolationRampCount;
+    v23 = uFloatIndex;
     v51 = v19;
     v24 = v18;
-    v62 = v17 + 2 * v16;
+    v62 = &v17[2 * v16];
     v25 = v16;
     if ( v21 )
     {
       v26 = 0;
-      v27 = v12 & 7;
-      if ( v12 & 7 )
+      v27 = uChannelMask & 7;
+      if ( (uChannelMask & 7) != 0 )
       {
         do
         {
@@ -681,7 +654,7 @@ signed __int64 __fastcall Interpolating_I16_NChan(AkAudioBuffer *io_pInBuffer, A
       if ( (_DWORD)v16 == v26 )
       {
         v28 = 0;
-        for ( j = v12; j; j &= j - 1 )
+        for ( k = uChannelMask; k; k &= k - 1 )
           ++v28;
         v25 = v28 - 1;
       }
@@ -692,41 +665,41 @@ signed __int64 __fastcall Interpolating_I16_NChan(AkAudioBuffer *io_pInBuffer, A
       v20 = v72;
     }
     v30 = v11->iLastValue[v16];
-    v31 = (float *)&v64[4 * (v4 + v68 * v25)];
-    v32 = (signed __int64)&v31[v10];
+    v31 = (float *)&pData[4 * uOutFrameOffset + 4 * uMaxFrames * v25];
+    v32 = (char *)&v31[v10];
     v65 = v31;
-    v33 = 4i64 * v10 >> 2;
-    if ( (unsigned int)v33 >= (1024 - v22) / v15 )
-      LODWORD(v33) = (1024 - v22) / v15;
+    v33 = (4i64 * v10) >> 2;
+    if ( (unsigned int)v33 >= (1024 - uInterpolationRampCount) / uInterpolationRampInc )
+      LODWORD(v33) = (1024 - uInterpolationRampCount) / uInterpolationRampInc;
     if ( !v24 )
     {
-      v34 = v53 + v22 * v52;
+      v34 = v53 + uInterpolationRampCount * v52;
       do
       {
         v35 = v33;
         LODWORD(v33) = v33 - 1;
         if ( !v35 )
           break;
-        v34 += v15 * v52;
+        v34 += uInterpolationRampInc * v52;
         ++v31;
-        v22 += v15;
+        uInterpolationRampCount += uInterpolationRampInc;
         v23 += v34 >> 10;
-        v36 = _mm_cvtsi32_si128(((signed int)v30 << 16) + v51 * (*(signed __int16 *)(v62 + 2 * v13) - (signed int)v30));
-        v24 = v23 >> 16;
+        v36 = _mm_cvtsi32_si128((v30 << 16) + v51 * (*(__int16 *)&v62[2 * v13] - v30));
+        v24 = HIWORD(v23);
         v51 = (unsigned __int16)v23;
-        *(v31 - 1) = COERCE_FLOAT(_mm_cvtepi32_ps(v36)) * 4.6566129e-10;
+        *(v31 - 1) = _mm_cvtepi32_ps(v36).m128_f32[0] * 4.6566129e-10;
       }
-      while ( !(v23 >> 16) );
+      while ( !HIWORD(v23) );
       LODWORD(v16) = v50;
-      v11 = v73;
+      v11 = io_pPitchState;
       v20 = v72;
     }
-    v37 = (v32 - (signed __int64)v31) >> 2;
-    if ( (unsigned int)v37 >= (1024 - v22) / v15 )
-      LODWORD(v37) = (1024 - v22) / v15;
+    v37 = (v32 - (char *)v31) >> 2;
+    if ( (unsigned int)v37 >= (1024 - uInterpolationRampCount) / uInterpolationRampInc )
+      LODWORD(v37) = (1024 - uInterpolationRampCount) / uInterpolationRampInc;
     if ( v24 <= v20 )
     {
-      v38 = v53 + v22 * v52;
+      v38 = v53 + uInterpolationRampCount * v52;
       v39 = v51;
       do
       {
@@ -734,26 +707,26 @@ signed __int64 __fastcall Interpolating_I16_NChan(AkAudioBuffer *io_pInBuffer, A
         LODWORD(v37) = v37 - 1;
         if ( !v40 )
           break;
-        v38 += v15 * v52;
+        v38 += uInterpolationRampInc * v52;
         ++v31;
-        v22 += v15;
+        uInterpolationRampCount += uInterpolationRampInc;
         v41 = v24 * (unsigned int)v13;
-        v42 = *(signed __int16 *)(v62 + 2 * v41);
-        v43 = *(signed __int16 *)(v62 + 2i64 * (unsigned int)(v13 + v41));
+        v42 = *(__int16 *)&v62[2 * v41];
+        v43 = *(__int16 *)&v62[2 * (unsigned int)(v13 + v41)];
         v20 = v72;
         v44 = _mm_cvtsi32_si128((v42 << 16) + v39 * (v43 - v42));
         v23 += v38 >> 10;
         v39 = (unsigned __int16)v23;
-        v24 = v23 >> 16;
-        *(v31 - 1) = COERCE_FLOAT(_mm_cvtepi32_ps(v44)) * 4.6566129e-10;
+        v24 = HIWORD(v23);
+        *(v31 - 1) = _mm_cvtepi32_ps(v44).m128_f32[0] * 4.6566129e-10;
       }
-      while ( v23 >> 16 <= v72 );
+      while ( HIWORD(v23) <= v72 );
       LODWORD(v16) = v50;
-      v11 = v73;
+      v11 = io_pPitchState;
     }
-    v12 = v60;
+    uChannelMask = v60;
     v17 = v61;
-    v6 = v59;
+    uFloatIndex = v59;
     v18 = v57;
     v21 = v55;
     v19 = v56;
@@ -762,66 +735,64 @@ signed __int64 __fastcall Interpolating_I16_NChan(AkAudioBuffer *io_pInBuffer, A
     if ( (unsigned int)v16 >= (unsigned int)v13 )
       break;
   }
-  v11->uInterpolationRampCount = v22;
+  v11->uInterpolationRampCount = uInterpolationRampCount;
   v45 = v58;
-  if ( v23 >> 16 < v58 )
-    v45 = v23 >> 16;
+  if ( HIWORD(v23) < v58 )
+    v45 = HIWORD(v23);
   if ( v45 )
   {
-    v46 = 0;
-    if ( (_DWORD)v13 )
+    for ( m = 0; m < (unsigned int)v13; HIWORD(v11[-1].uRequestedFrames) = *(_WORD *)&v61[2 * v47] )
     {
-      do
-      {
-        v47 = v45 * (_DWORD)v13 + v46++;
-        v11 = (AkInternalPitchState *)((char *)v11 + 2);
-        HIWORD(v11[-1].uRequestedFrames) = *(_WORD *)(v61 + 2 * v47);
-      }
-      while ( v46 < (unsigned int)v13 );
+      v47 = v45 * (_DWORD)v13 + m++;
+      v11 = (AkInternalPitchState *)((char *)v11 + 2);
     }
   }
   v48 = v31 - v65;
   *v67 = v23 - (v45 << 16);
-  v70->uValidFrames -= v45;
-  v71->uValidFrames = *(_WORD *)v69 + v48;
+  io_pInBuffer->uValidFrames -= v45;
+  io_pOutBuffer->uValidFrames = *(_WORD *)p_uOutFrameOffset + v48;
   if ( v45 == v58 )
-    *v63 = 0;
+    *p_uInFrameOffset = 0;
   else
-    *v63 += v45;
+    *p_uInFrameOffset += v45;
   if ( (_DWORD)v48 == v54 )
     return 45i64;
-  *v69 += v48;
+  *p_uOutFrameOffset += v48;
   return 43i64;
 }
 
 // File Line: 229
 // RVA: 0xA9E0B0
-signed __int64 __fastcall Interpolating_Native_NChan(AkAudioBuffer *io_pInBuffer, AkAudioBuffer *io_pOutBuffer, unsigned int uRequestedSize, AkInternalPitchState *io_pPitchState)
+__int64 __fastcall Interpolating_Native_NChan(
+        AkAudioBuffer *io_pInBuffer,
+        AkAudioBuffer *io_pOutBuffer,
+        unsigned int uRequestedSize,
+        AkInternalPitchState *io_pPitchState)
 {
-  unsigned int v4; // er11
-  unsigned int v5; // edx
-  unsigned int v6; // er13
-  unsigned int v7; // er10
+  unsigned int uFloatIndex; // r11d
+  unsigned int uCurrentFrameSkip; // edx
+  int v6; // r13d
+  unsigned int uChannelMask; // r10d
   __int64 v8; // r8
-  unsigned int v9; // er14
+  unsigned int uInterpolationRampInc; // r14d
   unsigned int v10; // ebp
   unsigned int v11; // edx
-  signed int v12; // er15
+  int v12; // r15d
   unsigned int v13; // edi
-  unsigned int v14; // esi
+  unsigned int uInterpolationRampCount; // esi
   float v15; // xmm2_4
   unsigned int v16; // ebx
-  unsigned int v17; // er11
-  signed int v18; // er12
+  unsigned int v17; // r11d
+  int v18; // r12d
   float *v19; // r15
-  unsigned __int64 v20; // r10
-  signed __int64 v21; // r8
-  signed __int64 v22; // rcx
+  float *v20; // r10
+  char *v21; // r8
+  __int64 v22; // rcx
   int v23; // ebp
   unsigned int v24; // edx
   int v25; // eax
   float v26; // xmm0_4
-  signed __int64 v27; // r8
+  __int64 v27; // r8
   int v28; // ebp
   unsigned int v29; // edx
   int v30; // eax
@@ -830,76 +801,74 @@ signed __int64 __fastcall Interpolating_Native_NChan(AkAudioBuffer *io_pInBuffer
   float v33; // xmm0_4
   unsigned int v34; // esi
   unsigned int v35; // ebp
-  unsigned int v36; // er12
+  unsigned int v36; // r12d
   __int64 v37; // r8
-  signed __int64 v38; // rsi
+  __int64 v38; // rsi
   char *v39; // r11
   unsigned int v40; // eax
   __int64 v41; // r15
   __int64 v42; // rax
-  signed __int64 v43; // rcx
+  __int64 v43; // rcx
   __int64 v44; // rdx
   __int64 v45; // rax
-  signed __int64 v46; // r10
+  __int64 v46; // r10
   unsigned int v48; // [rsp+0h] [rbp-88h]
   unsigned int v49; // [rsp+4h] [rbp-84h]
-  unsigned int v50; // [rsp+8h] [rbp-80h]
-  signed int v51; // [rsp+Ch] [rbp-7Ch]
-  unsigned __int64 v52; // [rsp+10h] [rbp-78h]
+  unsigned int uValidFrames; // [rsp+8h] [rbp-80h]
+  int v51; // [rsp+Ch] [rbp-7Ch]
+  float *v52; // [rsp+10h] [rbp-78h]
   unsigned int v53; // [rsp+18h] [rbp-70h]
   int i; // [rsp+1Ch] [rbp-6Ch]
-  __int64 v55; // [rsp+20h] [rbp-68h]
-  __int64 v56; // [rsp+28h] [rbp-60h]
-  char *v57; // [rsp+30h] [rbp-58h]
+  __int64 uMaxFrames; // [rsp+20h] [rbp-68h]
+  __int64 uOutFrameOffset; // [rsp+28h] [rbp-60h]
+  char *pData; // [rsp+30h] [rbp-58h]
   __int64 v58; // [rsp+38h] [rbp-50h]
-  AkAudioBuffer *v59; // [rsp+90h] [rbp+8h]
-  AkAudioBuffer *v60; // [rsp+98h] [rbp+10h]
   unsigned int v61; // [rsp+A0h] [rbp+18h]
   AkInternalPitchState *v62; // [rsp+A8h] [rbp+20h]
 
   v62 = io_pPitchState;
-  v60 = io_pOutBuffer;
-  v59 = io_pInBuffer;
-  v4 = io_pPitchState->uFloatIndex;
-  v5 = io_pPitchState->uCurrentFrameSkip;
+  uFloatIndex = io_pPitchState->uFloatIndex;
+  uCurrentFrameSkip = io_pPitchState->uCurrentFrameSkip;
   v6 = 0;
-  v7 = io_pInBuffer->uChannelMask;
+  uChannelMask = io_pInBuffer->uChannelMask;
   v8 = uRequestedSize - io_pPitchState->uOutFrameOffset;
-  v50 = io_pInBuffer->uValidFrames;
-  for ( i = v8; v7; v7 &= v7 - 1 )
+  uValidFrames = io_pInBuffer->uValidFrames;
+  for ( i = v8; uChannelMask; uChannelMask &= uChannelMask - 1 )
     ++v6;
-  v9 = io_pPitchState->uInterpolationRampInc;
-  v10 = io_pPitchState->uTargetFrameSkip - v5;
-  v55 = io_pInBuffer->uMaxFrames;
-  v49 = v5 << 10;
-  v57 = (char *)io_pInBuffer->pData;
-  v11 = v4 >> 16;
-  v12 = (unsigned __int16)v4;
+  uInterpolationRampInc = io_pPitchState->uInterpolationRampInc;
+  v10 = io_pPitchState->uTargetFrameSkip - uCurrentFrameSkip;
+  uMaxFrames = io_pInBuffer->uMaxFrames;
+  v49 = uCurrentFrameSkip << 10;
+  pData = (char *)io_pInBuffer->pData;
+  v11 = HIWORD(uFloatIndex);
+  v12 = (unsigned __int16)uFloatIndex;
   v61 = v10;
   v13 = 0;
   v48 = io_pInBuffer->uValidFrames - 1;
-  v53 = v4 >> 16;
-  v51 = (unsigned __int16)v4;
-  v56 = io_pPitchState->uOutFrameOffset;
+  v53 = HIWORD(uFloatIndex);
+  v51 = (unsigned __int16)uFloatIndex;
+  uOutFrameOffset = io_pPitchState->uOutFrameOffset;
   v58 = v8;
   do
   {
-    v14 = io_pPitchState->uInterpolationRampCount;
+    uInterpolationRampCount = io_pPitchState->uInterpolationRampCount;
     v15 = io_pPitchState->fLastValue[v13];
-    v16 = v4;
+    v16 = uFloatIndex;
     v17 = v11;
     v18 = v12;
-    v19 = (float *)&v57[4 * (io_pPitchState->uInFrameOffset + v55 * v13)];
-    v20 = (unsigned __int64)v60->pData + 4 * (v56 + v13 * (unsigned __int64)v60->uMaxFrames);
-    v21 = v20 + 4 * v8;
-    v52 = (unsigned __int64)v60->pData + 4 * (v56 + v13 * (unsigned __int64)v60->uMaxFrames);
-    v22 = (signed __int64)(v21 - v20) >> 2;
-    if ( (unsigned int)v22 >= (1024 - v14) / v9 )
-      LODWORD(v22) = (1024 - v14) / v9;
+    v19 = (float *)&pData[4 * io_pPitchState->uInFrameOffset + 4 * uMaxFrames * v13];
+    v20 = (float *)((char *)io_pOutBuffer->pData
+                  + 4 * uOutFrameOffset
+                  + 4 * v13 * (unsigned __int64)io_pOutBuffer->uMaxFrames);
+    v21 = (char *)&v20[v8];
+    v52 = v20;
+    v22 = (v21 - (char *)v20) >> 2;
+    if ( (unsigned int)v22 >= (1024 - uInterpolationRampCount) / uInterpolationRampInc )
+      LODWORD(v22) = (1024 - uInterpolationRampCount) / uInterpolationRampInc;
     if ( !v11 )
     {
-      v23 = v9 * v10;
-      v24 = v49 + v14 * v61;
+      v23 = uInterpolationRampInc * v10;
+      v24 = v49 + uInterpolationRampCount * v61;
       do
       {
         v25 = v22;
@@ -908,23 +877,23 @@ signed __int64 __fastcall Interpolating_Native_NChan(AkAudioBuffer *io_pInBuffer
           break;
         v26 = (float)v18;
         v24 += v23;
-        v20 += 4i64;
-        v14 += v9;
+        ++v20;
+        uInterpolationRampCount += uInterpolationRampInc;
         v16 += v24 >> 10;
         v18 = (unsigned __int16)v16;
-        v17 = v16 >> 16;
-        *(float *)(v20 - 4) = (float)((float)(*v19 - v15) * (float)(v26 * 0.000015258789)) + v15;
+        v17 = HIWORD(v16);
+        *(v20 - 1) = (float)((float)(*v19 - v15) * (float)(v26 * 0.000015258789)) + v15;
       }
-      while ( !(v16 >> 16) );
+      while ( !HIWORD(v16) );
       v10 = v61;
     }
-    v27 = (signed __int64)(v21 - v20) >> 2;
-    if ( (unsigned int)v27 >= (1024 - v14) / v9 )
-      LODWORD(v27) = (1024 - v14) / v9;
+    v27 = (v21 - (char *)v20) >> 2;
+    if ( (unsigned int)v27 >= (1024 - uInterpolationRampCount) / uInterpolationRampInc )
+      LODWORD(v27) = (1024 - uInterpolationRampCount) / uInterpolationRampInc;
     if ( v17 <= v48 )
     {
-      v28 = v9 * v10;
-      v29 = v49 + v14 * v61;
+      v28 = uInterpolationRampInc * v10;
+      v29 = v49 + uInterpolationRampCount * v61;
       do
       {
         v30 = v27;
@@ -932,79 +901,91 @@ signed __int64 __fastcall Interpolating_Native_NChan(AkAudioBuffer *io_pInBuffer
         if ( !v30 )
           break;
         v29 += v28;
-        v20 += 4i64;
-        v14 += v9;
+        ++v20;
+        uInterpolationRampCount += uInterpolationRampInc;
         v31 = v19[v17 - 1];
         v32 = v19[v17];
         v33 = (float)v18;
         v16 += v29 >> 10;
         v18 = (unsigned __int16)v16;
-        v17 = v16 >> 16;
-        *(float *)(v20 - 4) = (float)((float)(v32 - v31) * (float)(v33 * 0.000015258789)) + v31;
+        v17 = HIWORD(v16);
+        *(v20 - 1) = (float)((float)(v32 - v31) * (float)(v33 * 0.000015258789)) + v31;
       }
-      while ( v16 >> 16 <= v48 );
+      while ( HIWORD(v16) <= v48 );
       io_pPitchState = v62;
     }
     v10 = v61;
-    v4 = io_pPitchState->uFloatIndex;
+    uFloatIndex = io_pPitchState->uFloatIndex;
     v11 = v53;
     v12 = v51;
     v8 = v58;
     ++v13;
   }
   while ( v13 < v6 );
-  io_pPitchState->uInterpolationRampCount = v14;
-  v34 = v50;
-  v35 = v50;
-  if ( v16 >> 16 < v50 )
-    v35 = v16 >> 16;
+  io_pPitchState->uInterpolationRampCount = uInterpolationRampCount;
+  v34 = uValidFrames;
+  v35 = uValidFrames;
+  if ( HIWORD(v16) < uValidFrames )
+    v35 = HIWORD(v16);
   if ( v35 )
   {
     v36 = 0;
     v37 = 0i64;
-    if ( (signed int)v6 >= 4 )
+    if ( v6 >= 4 )
     {
       v38 = 2i64;
       v39 = &io_pPitchState->uLastValue[8];
-      v40 = ((v6 - 4) >> 2) + 1;
+      v40 = ((unsigned int)(v6 - 4) >> 2) + 1;
       v41 = v40;
       v36 = 4 * v40;
       do
       {
         v39 += 16;
-        v42 = v35 + v37 * v59->uMaxFrames;
+        v42 = v35 + v37 * io_pInBuffer->uMaxFrames;
         v37 += 4i64;
-        *((_DWORD *)v39 - 6) = *((_DWORD *)v59->pData + v42 + io_pPitchState->uInFrameOffset - 1);
-        *((_DWORD *)v39 - 5) = *((_DWORD *)v59->pData
+        *((_DWORD *)v39 - 6) = *((_DWORD *)io_pInBuffer->pData + v42 + io_pPitchState->uInFrameOffset - 1);
+        *((_DWORD *)v39 - 5) = *((_DWORD *)io_pInBuffer->pData
                                + v35
-                               + (v38 - 1) * v59->uMaxFrames
+                               + (v38 - 1) * io_pInBuffer->uMaxFrames
                                + io_pPitchState->uInFrameOffset
                                - 1);
-        *((_DWORD *)v39 - 4) = *((_DWORD *)v59->pData + v35 + v38 * v59->uMaxFrames + io_pPitchState->uInFrameOffset - 1);
+        *((_DWORD *)v39 - 4) = *((_DWORD *)io_pInBuffer->pData
+                               + v35
+                               + v38 * io_pInBuffer->uMaxFrames
+                               + io_pPitchState->uInFrameOffset
+                               - 1);
         v43 = v38 + 1;
         v38 += 4i64;
-        *((_DWORD *)v39 - 3) = *((_DWORD *)v59->pData + v35 + v43 * v59->uMaxFrames + io_pPitchState->uInFrameOffset - 1);
+        *((_DWORD *)v39 - 3) = *((_DWORD *)io_pInBuffer->pData
+                               + v35
+                               + v43 * io_pInBuffer->uMaxFrames
+                               + io_pPitchState->uInFrameOffset
+                               - 1);
         --v41;
       }
       while ( v41 );
-      v34 = v50;
+      v34 = uValidFrames;
     }
     if ( v36 < v6 )
     {
       v44 = v6 - v36;
       do
       {
-        v45 = v37++ * v59->uMaxFrames;
-        io_pPitchState->fLastValue[v37 - 1] = *((float *)v59->pData + v35 + v45 + io_pPitchState->uInFrameOffset - 1);
+        v45 = v37 * io_pInBuffer->uMaxFrames;
+        io_pPitchState->fLastValue[v37++] = *((float *)io_pInBuffer->pData
+                                            + v35
+                                            + v45
+                                            + io_pPitchState->uInFrameOffset
+                                            - 1);
         --v44;
       }
       while ( v44 );
     }
   }
-  v46 = (signed __int64)(v20 - v52) >> 2;
+  v46 = v20 - v52;
   io_pPitchState->uFloatIndex = v16 - (v35 << 16);
-  v59->uValidFrames -= v35;
-  v60->uValidFrames = LOWORD(io_pPitchState->uOutFrameOffset) + v46;
+  io_pInBuffer->uValidFrames -= v35;
+  io_pOutBuffer->uValidFrames = LOWORD(io_pPitchState->uOutFrameOffset) + v46;
   if ( v35 == v34 )
     io_pPitchState->uInFrameOffset = 0;
   else
@@ -1019,23 +1000,23 @@ signed __int64 __fastcall Interpolating_Native_NChan(AkAudioBuffer *io_pInBuffer
 // RVA: 0xA9D2D0
 void __fastcall Deinterleave_Native_NChan(AkAudioBuffer *io_pInBuffer, AkAudioBuffer *io_pOutBuffer)
 {
-  unsigned int v2; // esi
-  signed int v3; // ebp
+  unsigned int uChannelMask; // esi
+  int uValidFrames; // ebp
   unsigned int v4; // ebx
-  unsigned int i; // er8
-  unsigned int v6; // er10
-  int *v7; // rdi
+  unsigned int i; // r8d
+  unsigned int v6; // r10d
+  int *pData; // rdi
   char *v8; // r12
-  __int64 v9; // r15
+  __int64 uMaxFrames; // r15
   int *v10; // rcx
-  unsigned int v11; // er9
-  unsigned int v12; // er8
+  unsigned int v11; // r9d
+  unsigned int v12; // r8d
   int v13; // edx
-  int v14; // er8
+  int v14; // r8d
   unsigned int j; // edx
-  unsigned int v16; // er11
+  unsigned int v16; // r11d
   char *v17; // rdx
-  signed __int64 v18; // r8
+  __int64 v18; // r8
   unsigned int v19; // eax
   __int64 v20; // r9
   int v21; // eax
@@ -1048,26 +1029,26 @@ void __fastcall Deinterleave_Native_NChan(AkAudioBuffer *io_pInBuffer, AkAudioBu
   __int64 v28; // r8
   int v29; // eax
 
-  v2 = io_pInBuffer->uChannelMask;
-  v3 = io_pOutBuffer->uValidFrames;
+  uChannelMask = io_pInBuffer->uChannelMask;
+  uValidFrames = io_pOutBuffer->uValidFrames;
   v4 = 0;
-  for ( i = v2; i; i &= i - 1 )
+  for ( i = uChannelMask; i; i &= i - 1 )
     ++v4;
   v6 = 0;
   if ( v4 )
   {
-    v7 = (int *)io_pInBuffer->pData;
+    pData = (int *)io_pInBuffer->pData;
     v8 = (char *)io_pOutBuffer->pData;
-    v9 = io_pOutBuffer->uMaxFrames;
+    uMaxFrames = io_pOutBuffer->uMaxFrames;
     do
     {
-      v10 = v7;
+      v10 = pData;
       v11 = v6;
-      if ( v2 & 8 )
+      if ( (uChannelMask & 8) != 0 )
       {
         v12 = 0;
-        v13 = v2 & 7;
-        if ( v2 & 7 )
+        v13 = uChannelMask & 7;
+        if ( (uChannelMask & 7) != 0 )
         {
           do
           {
@@ -1079,7 +1060,7 @@ void __fastcall Deinterleave_Native_NChan(AkAudioBuffer *io_pInBuffer, AkAudioBu
         if ( v6 == v12 )
         {
           v14 = 0;
-          for ( j = v2; j; j &= j - 1 )
+          for ( j = uChannelMask; j; j &= j - 1 )
             ++v14;
           v11 = v14 - 1;
         }
@@ -1089,11 +1070,11 @@ void __fastcall Deinterleave_Native_NChan(AkAudioBuffer *io_pInBuffer, AkAudioBu
         }
       }
       v16 = 0;
-      v17 = &v8[4 * v9 * v11];
-      if ( v3 >= 4 )
+      v17 = &v8[4 * uMaxFrames * v11];
+      if ( uValidFrames >= 4 )
       {
         v18 = v4;
-        v19 = ((unsigned int)(v3 - 4) >> 2) + 1;
+        v19 = ((unsigned int)(uValidFrames - 4) >> 2) + 1;
         v20 = v19;
         v16 = 4 * v19;
         do
@@ -1115,9 +1096,9 @@ void __fastcall Deinterleave_Native_NChan(AkAudioBuffer *io_pInBuffer, AkAudioBu
         }
         while ( v20 );
       }
-      if ( v16 < v3 )
+      if ( v16 < uValidFrames )
       {
-        v28 = v3 - v16;
+        v28 = uValidFrames - v16;
         do
         {
           v29 = *v10;
@@ -1129,7 +1110,7 @@ void __fastcall Deinterleave_Native_NChan(AkAudioBuffer *io_pInBuffer, AkAudioBu
         while ( v28 );
       }
       ++v6;
-      ++v7;
+      ++pData;
     }
     while ( v6 < v4 );
   }
@@ -1139,23 +1120,23 @@ void __fastcall Deinterleave_Native_NChan(AkAudioBuffer *io_pInBuffer, AkAudioBu
 // RVA: 0xA9DB50
 void __fastcall Interleave_Native_NChan(AkAudioBuffer *io_pInBuffer, AkAudioBuffer *io_pOutBuffer)
 {
-  unsigned int v2; // edi
-  signed int v3; // ebp
+  unsigned int uChannelMask; // edi
+  int uValidFrames; // ebp
   unsigned int v4; // ebx
-  unsigned int i; // er8
-  unsigned int v6; // er10
-  _DWORD *v7; // rsi
+  unsigned int i; // r8d
+  unsigned int v6; // r10d
+  _DWORD *pData; // rsi
   char *v8; // r12
-  __int64 v9; // r15
-  unsigned int v10; // er8
+  __int64 uMaxFrames; // r15
+  unsigned int v10; // r8d
   unsigned int v11; // edx
   int v12; // ecx
   int v13; // edx
   unsigned int j; // ecx
-  unsigned int v15; // er11
+  unsigned int v15; // r11d
   _DWORD *v16; // rcx
   char *v17; // rdx
-  signed __int64 v18; // r8
+  __int64 v18; // r8
   unsigned int v19; // eax
   __int64 v20; // r9
   int v21; // eax
@@ -1165,25 +1146,25 @@ void __fastcall Interleave_Native_NChan(AkAudioBuffer *io_pInBuffer, AkAudioBuff
   __int64 v25; // r8
   int v26; // eax
 
-  v2 = io_pInBuffer->uChannelMask;
-  v3 = io_pOutBuffer->uValidFrames;
+  uChannelMask = io_pInBuffer->uChannelMask;
+  uValidFrames = io_pOutBuffer->uValidFrames;
   v4 = 0;
-  for ( i = v2; i; i &= i - 1 )
+  for ( i = uChannelMask; i; i &= i - 1 )
     ++v4;
   v6 = 0;
   if ( v4 )
   {
-    v7 = io_pOutBuffer->pData;
+    pData = io_pOutBuffer->pData;
     v8 = (char *)io_pInBuffer->pData;
-    v9 = io_pInBuffer->uMaxFrames;
+    uMaxFrames = io_pInBuffer->uMaxFrames;
     do
     {
       v10 = v6;
-      if ( v2 & 8 )
+      if ( (uChannelMask & 8) != 0 )
       {
         v11 = 0;
-        v12 = v2 & 7;
-        if ( v2 & 7 )
+        v12 = uChannelMask & 7;
+        if ( (uChannelMask & 7) != 0 )
         {
           do
           {
@@ -1195,7 +1176,7 @@ void __fastcall Interleave_Native_NChan(AkAudioBuffer *io_pInBuffer, AkAudioBuff
         if ( v6 == v11 )
         {
           v13 = 0;
-          for ( j = v2; j; j &= j - 1 )
+          for ( j = uChannelMask; j; j &= j - 1 )
             ++v13;
           v10 = v13 - 1;
         }
@@ -1205,12 +1186,12 @@ void __fastcall Interleave_Native_NChan(AkAudioBuffer *io_pInBuffer, AkAudioBuff
         }
       }
       v15 = 0;
-      v16 = v7;
-      v17 = &v8[4 * v9 * v10];
-      if ( v3 >= 4 )
+      v16 = pData;
+      v17 = &v8[4 * uMaxFrames * v10];
+      if ( uValidFrames >= 4 )
       {
         v18 = v4;
-        v19 = ((unsigned int)(v3 - 4) >> 2) + 1;
+        v19 = ((unsigned int)(uValidFrames - 4) >> 2) + 1;
         v20 = v19;
         v15 = 4 * v19;
         do
@@ -1229,9 +1210,9 @@ void __fastcall Interleave_Native_NChan(AkAudioBuffer *io_pInBuffer, AkAudioBuff
         }
         while ( v20 );
       }
-      if ( v15 < v3 )
+      if ( v15 < uValidFrames )
       {
-        v25 = v3 - v15;
+        v25 = uValidFrames - v15;
         do
         {
           v26 = *(_DWORD *)v17;
@@ -1243,7 +1224,7 @@ void __fastcall Interleave_Native_NChan(AkAudioBuffer *io_pInBuffer, AkAudioBuff
         while ( v25 );
       }
       ++v6;
-      ++v7;
+      ++pData;
     }
     while ( v6 < v4 );
   }

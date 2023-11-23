@@ -1,172 +1,176 @@
 // File Line: 23
 // RVA: 0xA2AE40
-signed __int64 __fastcall UFG::UILanguages::getLanguage(const char *language)
+__int64 __fastcall UFG::UILanguages::getLanguage(const char *language)
 {
   unsigned int v1; // ebx
-  const char *v2; // rdi
-  signed __int64 result; // rax
+  __int64 result; // rax
 
   v1 = -1;
-  v2 = language;
   result = UFG::qStringCompareInsensitive(language, "Debug-Blank", -1);
   if ( (_DWORD)result )
   {
-    if ( (unsigned int)UFG::qStringCompareInsensitive(v2, "Debug-Label", -1) )
+    if ( (unsigned int)UFG::qStringCompareInsensitive(language, "Debug-Label", -1) )
     {
-      if ( (unsigned int)UFG::qStringCompareInsensitive(v2, "Debug-MaxString", -1) )
+      if ( (unsigned int)UFG::qStringCompareInsensitive(language, "Debug-MaxString", -1) )
       {
-        if ( (unsigned int)UFG::qStringCompareInsensitive(v2, "Debug-NumericID", -1) )
+        if ( (unsigned int)UFG::qStringCompareInsensitive(language, "Debug-NumericID", -1) )
         {
-          if ( (unsigned int)UFG::qStringCompareInsensitive(v2, "Cantonese", -1) )
+          if ( (unsigned int)UFG::qStringCompareInsensitive(language, "Cantonese", -1) )
           {
-            if ( (unsigned int)UFG::qStringCompareInsensitive(v2, "Danish", -1) )
+            if ( (unsigned int)UFG::qStringCompareInsensitive(language, "Danish", -1) )
             {
-              if ( (unsigned int)UFG::qStringCompareInsensitive(v2, "Dutch", -1) )
+              if ( (unsigned int)UFG::qStringCompareInsensitive(language, "Dutch", -1) )
               {
-                if ( (unsigned int)UFG::qStringCompareInsensitive(v2, "English", -1) )
+                if ( (unsigned int)UFG::qStringCompareInsensitive(language, "English", -1) )
                 {
-                  if ( (unsigned int)UFG::qStringCompareInsensitive(v2, "English-UK", -1) )
+                  if ( (unsigned int)UFG::qStringCompareInsensitive(language, "English-UK", -1) )
                   {
-                    if ( (unsigned int)UFG::qStringCompareInsensitive(v2, "Finnish", -1) )
+                    if ( (unsigned int)UFG::qStringCompareInsensitive(language, "Finnish", -1) )
                     {
-                      if ( (unsigned int)UFG::qStringCompareInsensitive(v2, "French", -1) )
+                      if ( (unsigned int)UFG::qStringCompareInsensitive(language, "French", -1) )
                       {
-                        if ( (unsigned int)UFG::qStringCompareInsensitive(v2, "French-CA", -1) )
+                        if ( (unsigned int)UFG::qStringCompareInsensitive(language, "French-CA", -1) )
                         {
-                          if ( (unsigned int)UFG::qStringCompareInsensitive(v2, "German", -1) )
+                          if ( (unsigned int)UFG::qStringCompareInsensitive(language, "German", -1) )
                           {
-                            if ( (unsigned int)UFG::qStringCompareInsensitive(v2, "Italian", -1) )
+                            if ( (unsigned int)UFG::qStringCompareInsensitive(language, "Italian", -1) )
                             {
-                              if ( (unsigned int)UFG::qStringCompareInsensitive(v2, "Japanese", -1) )
+                              if ( (unsigned int)UFG::qStringCompareInsensitive(language, "Japanese", -1) )
                               {
-                                if ( (unsigned int)UFG::qStringCompareInsensitive(v2, "Korean", -1) )
+                                if ( (unsigned int)UFG::qStringCompareInsensitive(language, "Korean", -1) )
                                 {
-                                  if ( (unsigned int)UFG::qStringCompareInsensitive(v2, "Norwegian", -1) )
+                                  if ( (unsigned int)UFG::qStringCompareInsensitive(language, "Norwegian", -1) )
                                   {
-                                    if ( (unsigned int)UFG::qStringCompareInsensitive(v2, "Polish", -1) )
+                                    if ( (unsigned int)UFG::qStringCompareInsensitive(language, "Polish", -1) )
                                     {
-                                      if ( (unsigned int)UFG::qStringCompareInsensitive(v2, "Portuguese", -1) )
+                                      if ( (unsigned int)UFG::qStringCompareInsensitive(language, "Portuguese", -1) )
                                       {
-                                        if ( (unsigned int)UFG::qStringCompareInsensitive(v2, "Portuguese-BR", -1) )
+                                        if ( (unsigned int)UFG::qStringCompareInsensitive(language, "Portuguese-BR", -1) )
                                         {
-                                          if ( (unsigned int)UFG::qStringCompareInsensitive(v2, "Russian", -1) )
+                                          if ( (unsigned int)UFG::qStringCompareInsensitive(language, "Russian", -1) )
                                           {
-                                            if ( (unsigned int)UFG::qStringCompareInsensitive(v2, "Spanish", -1) )
+                                            if ( (unsigned int)UFG::qStringCompareInsensitive(language, "Spanish", -1) )
                                             {
-                                              if ( (unsigned int)UFG::qStringCompareInsensitive(v2, "Spanish-US", -1) )
+                                              if ( (unsigned int)UFG::qStringCompareInsensitive(
+                                                                   language,
+                                                                   "Spanish-US",
+                                                                   -1) )
                                               {
-                                                if ( !(unsigned int)UFG::qStringCompareInsensitive(v2, "Swedish", -1) )
-                                                  v1 = 23;
-                                                result = v1;
+                                                if ( !(unsigned int)UFG::qStringCompareInsensitive(
+                                                                      language,
+                                                                      "Swedish",
+                                                                      -1) )
+                                                  return 23;
+                                                return v1;
                                               }
                                               else
                                               {
-                                                result = 22i64;
+                                                return 22i64;
                                               }
                                             }
                                             else
                                             {
-                                              result = 21i64;
+                                              return 21i64;
                                             }
                                           }
                                           else
                                           {
-                                            result = 20i64;
+                                            return 20i64;
                                           }
                                         }
                                         else
                                         {
-                                          result = 19i64;
+                                          return 19i64;
                                         }
                                       }
                                       else
                                       {
-                                        result = 18i64;
+                                        return 18i64;
                                       }
                                     }
                                     else
                                     {
-                                      result = 17i64;
+                                      return 17i64;
                                     }
                                   }
                                   else
                                   {
-                                    result = 16i64;
+                                    return 16i64;
                                   }
                                 }
                                 else
                                 {
-                                  result = 15i64;
+                                  return 15i64;
                                 }
                               }
                               else
                               {
-                                result = 14i64;
+                                return 14i64;
                               }
                             }
                             else
                             {
-                              result = 13i64;
+                              return 13i64;
                             }
                           }
                           else
                           {
-                            result = 12i64;
+                            return 12i64;
                           }
                         }
                         else
                         {
-                          result = 11i64;
+                          return 11i64;
                         }
                       }
                       else
                       {
-                        result = 10i64;
+                        return 10i64;
                       }
                     }
                     else
                     {
-                      result = 9i64;
+                      return 9i64;
                     }
                   }
                   else
                   {
-                    result = 8i64;
+                    return 8i64;
                   }
                 }
                 else
                 {
-                  result = 7i64;
+                  return 7i64;
                 }
               }
               else
               {
-                result = 6i64;
+                return 6i64;
               }
             }
             else
             {
-              result = 5i64;
+              return 5i64;
             }
           }
           else
           {
-            result = 4i64;
+            return 4i64;
           }
         }
         else
         {
-          result = 3i64;
+          return 3i64;
         }
       }
       else
       {
-        result = 2i64;
+        return 2i64;
       }
     }
     else
     {
-      result = 1i64;
+      return 1i64;
     }
   }
   return result;
@@ -180,76 +184,76 @@ const char *__fastcall UFG::UILanguages::getLanguageString(UFG::UILanguages::eLa
 
   switch ( language )
   {
-    case 0u:
+    case eLang_DebugBlank:
       result = "Debug-Blank";
       break;
-    case 1u:
+    case eLang_DebugLabel:
       result = "Debug-Label";
       break;
-    case 2u:
+    case eLang_DebugMaxString:
       result = "Debug-MaxString";
       break;
-    case 3u:
+    case eLang_DebugNumericID:
       result = "Debug-NumericID";
       break;
-    case 4u:
+    case eLang_Cantonese:
       result = "Cantonese";
       break;
-    case 5u:
+    case eLang_Danish:
       result = "Danish";
       break;
-    case 6u:
+    case eLang_Dutch:
       result = "Dutch";
       break;
-    case 7u:
+    case eLang_English:
       result = "English";
       break;
-    case 8u:
+    case eLang_English_UK:
       result = "English-UK";
       break;
-    case 9u:
+    case eLang_Finnish:
       result = "Finnish";
       break;
-    case 0xAu:
+    case eLang_French:
       result = "French";
       break;
-    case 0xBu:
+    case eLang_French_CA:
       result = "French-CA";
       break;
-    case 0xCu:
+    case eLang_German:
       result = "German";
       break;
-    case 0xDu:
+    case eLang_Italian:
       result = "Italian";
       break;
-    case 0xEu:
+    case eLang_Japanese:
       result = "Japanese";
       break;
-    case 0xFu:
+    case eLang_Korean:
       result = "Korean";
       break;
-    case 0x10u:
+    case eLang_Norwegian:
       result = "Norwegian";
       break;
-    case 0x11u:
+    case eLang_Polish:
       result = "Polish";
       break;
-    case 0x12u:
+    case eLang_Portuguese:
       result = "Portuguese";
       break;
-    case 0x13u:
+    case eLang_Portuguese_BR:
       result = "Portuguese-BR";
       break;
-    case 0x14u:
+    case eLang_Russian:
       result = "Russian";
       break;
-    case 0x15u:
+    case eLang_Spanish:
       result = "Spanish";
       break;
-    case 0x16u:
+    case eLang_Spanish_US:
       result = "Spanish-US";
       break;
-    case 0x17u:
+    case eLang_Swedish:
       result = "Swedish";
       break;
     default:
@@ -267,76 +271,76 @@ const char *__fastcall UFG::UILanguages::getLanguageStringShort(UFG::UILanguages
 
   switch ( language )
   {
-    case 0u:
+    case eLang_DebugBlank:
       result = "DBG_BLNK";
       break;
-    case 1u:
+    case eLang_DebugLabel:
       result = "DBG_LBL";
       break;
-    case 2u:
+    case eLang_DebugMaxString:
       result = "DBG_MAX";
       break;
-    case 3u:
+    case eLang_DebugNumericID:
       result = "DBG_ID";
       break;
-    case 4u:
+    case eLang_Cantonese:
       result = "CN";
       break;
-    case 5u:
+    case eLang_Danish:
       result = "DA";
       break;
-    case 6u:
+    case eLang_Dutch:
       result = "DU";
       break;
-    case 7u:
+    case eLang_English:
       result = "EN";
       break;
-    case 8u:
+    case eLang_English_UK:
       result = "UK";
       break;
-    case 9u:
+    case eLang_Finnish:
       result = "FI";
       break;
-    case 0xAu:
+    case eLang_French:
       result = "FR";
       break;
-    case 0xBu:
+    case eLang_French_CA:
       result = "FC";
       break;
-    case 0xCu:
+    case eLang_German:
       result = "DE";
       break;
-    case 0xDu:
+    case eLang_Italian:
       result = "IT";
       break;
-    case 0xEu:
+    case eLang_Japanese:
       result = "JP";
       break;
-    case 0xFu:
+    case eLang_Korean:
       result = "KO";
       break;
-    case 0x10u:
+    case eLang_Norwegian:
       result = "NO";
       break;
-    case 0x11u:
+    case eLang_Polish:
       result = "PO";
       break;
-    case 0x12u:
+    case eLang_Portuguese:
       result = "PR";
       break;
-    case 0x13u:
+    case eLang_Portuguese_BR:
       result = "PB";
       break;
-    case 0x14u:
+    case eLang_Russian:
       result = "RU";
       break;
-    case 0x15u:
+    case eLang_Spanish:
       result = "SP";
       break;
-    case 0x16u:
+    case eLang_Spanish_US:
       result = "SU";
       break;
-    case 0x17u:
+    case eLang_Swedish:
       result = "SW";
       break;
     default:

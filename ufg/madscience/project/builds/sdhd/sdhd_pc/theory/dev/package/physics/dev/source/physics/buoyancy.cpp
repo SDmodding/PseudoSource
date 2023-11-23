@@ -1,8 +1,18 @@
 // File Line: 86
 // RVA: 0xA1E50
-float __usercall UFG::ClipTriangle@<xmm0>(hkVector4f *centroid@<rcx>, hkVector4f *p@<rdx>, hkVector4f *v1@<r8>, hkVector4f *v2@<r9>, __m128 a5@<xmm5>, __m128 a6@<xmm10>, hkVector4f *v3, float d1, float d2, float d3)
+float __fastcall UFG::ClipTriangle(
+        hkVector4f *centroid,
+        hkVector4f *p,
+        hkVector4f *v1,
+        hkVector4f *v2,
+        hkVector4f *v3,
+        float d1,
+        float d2,
+        float d3)
 {
-  __m128 v10; // xmm6
+  __m128 v8; // xmm5
+  __m128 v9; // xmm10
+  __m128 m_quad; // xmm6
   __m128 v11; // xmm11
   __m128 v12; // xmm12
   __m128 v13; // xmm11
@@ -13,7 +23,7 @@ float __usercall UFG::ClipTriangle@<xmm0>(hkVector4f *centroid@<rcx>, hkVector4f
   __m128 v18; // xmm2
   __m128 v19; // xmm8
   __m128 v20; // xmm1
-  hkVector4f v21; // xmm9
+  __m128 v21; // xmm9
   __m128 v22; // xmm2
   __m128 v23; // xmm1
   __m128 v24; // xmm2
@@ -36,7 +46,7 @@ float __usercall UFG::ClipTriangle@<xmm0>(hkVector4f *centroid@<rcx>, hkVector4f
   __m128 v41; // xmm1
   __m128 v42; // xmm9
   __m128 v43; // xmm1
-  hkVector4f v44; // xmm9
+  __m128 v44; // xmm9
   __m128 v45; // xmm2
   __m128 v46; // xmm2
   __m128 v47; // xmm2
@@ -50,7 +60,7 @@ float __usercall UFG::ClipTriangle@<xmm0>(hkVector4f *centroid@<rcx>, hkVector4f
   __m128 v55; // xmm3
   __m128 v56; // xmm2
 
-  v10 = v1->m_quad;
+  m_quad = v1->m_quad;
   v11 = (__m128)LODWORD(d1);
   v11.m128_f32[0] = d1 / (float)(d1 - d2);
   v12 = v2->m_quad;
@@ -59,9 +69,9 @@ float __usercall UFG::ClipTriangle@<xmm0>(hkVector4f *centroid@<rcx>, hkVector4f
   {
     if ( d3 < 0.0 )
     {
-      v14 = _mm_sub_ps(v10, v13);
-      a6.m128_f32[0] = d2 / (float)(d2 - d3);
-      v15 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(a6, a6, 0), _mm_sub_ps(v3->m_quad, v12)), v12);
+      v14 = _mm_sub_ps(m_quad, v13);
+      v9.m128_f32[0] = d2 / (float)(d2 - d3);
+      v15 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v9, v9, 0), _mm_sub_ps(v3->m_quad, v12)), v12);
       v16 = _mm_sub_ps(v15, v13);
       v17 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v16, v16, 201), v14), _mm_mul_ps(_mm_shuffle_ps(v14, v14, 201), v16));
       v18 = _mm_mul_ps(_mm_shuffle_ps(v17, v17, 201), _mm_sub_ps(p->m_quad, v13));
@@ -71,12 +81,10 @@ float __usercall UFG::ClipTriangle@<xmm0>(hkVector4f *centroid@<rcx>, hkVector4f
       v19.m128_f32[0] = v19.m128_f32[0] * 0.16666667;
       v20 = v19;
       v20.m128_f32[0] = v19.m128_f32[0] * 0.25;
-      v21.m_quad = _mm_add_ps(
-                     _mm_mul_ps(
-                       _mm_add_ps(_mm_add_ps(_mm_add_ps(p->m_quad, v13), v15), v10),
-                       _mm_shuffle_ps(v20, v20, 0)),
-                     centroid->m_quad);
-      *centroid = (hkVector4f)v21.m_quad;
+      v21 = _mm_add_ps(
+              _mm_mul_ps(_mm_add_ps(_mm_add_ps(_mm_add_ps(p->m_quad, v13), v15), m_quad), _mm_shuffle_ps(v20, v20, 0)),
+              centroid->m_quad);
+      *centroid = (hkVector4f)v21;
       v22 = _mm_sub_ps(v3->m_quad, v15);
       v23 = _mm_sub_ps(v1->m_quad, v15);
       v24 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v22, v22, 201), v23), _mm_mul_ps(_mm_shuffle_ps(v23, v23, 201), v22));
@@ -92,23 +100,23 @@ float __usercall UFG::ClipTriangle@<xmm0>(hkVector4f *centroid@<rcx>, hkVector4f
                            _mm_mul_ps(
                              _mm_add_ps(_mm_add_ps(_mm_add_ps(v15, p->m_quad), v3->m_quad), v1->m_quad),
                              _mm_shuffle_ps(v27, v27, 0)),
-                           v21.m_quad);
+                           v21);
       return result;
     }
-    v29 = _mm_sub_ps(v10, v13);
-    a5.m128_f32[0] = d1 / (float)(d1 - d3);
-    v30 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(a5, a5, 0), _mm_sub_ps(v3->m_quad, v10)), v10);
+    v29 = _mm_sub_ps(m_quad, v13);
+    v8.m128_f32[0] = d1 / (float)(d1 - d3);
+    v30 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v8, v8, 0), _mm_sub_ps(v3->m_quad, m_quad)), m_quad);
     v31 = _mm_sub_ps(v30, v13);
     v32 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v31, v31, 201), v29), _mm_mul_ps(_mm_shuffle_ps(v29, v29, 201), v31));
     v33 = p->m_quad;
-    v34 = _mm_add_ps(_mm_add_ps(_mm_add_ps(p->m_quad, v13), v30), v10);
+    v34 = _mm_add_ps(_mm_add_ps(_mm_add_ps(p->m_quad, v13), v30), m_quad);
     goto LABEL_8;
   }
   if ( d3 >= 0.0 )
   {
     v51 = _mm_sub_ps(v12, v13);
-    a5.m128_f32[0] = d2 / (float)(d2 - d3);
-    v52 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(a5, a5, 0), _mm_sub_ps(v3->m_quad, v12)), v12);
+    v8.m128_f32[0] = d2 / (float)(d2 - d3);
+    v52 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v8, v8, 0), _mm_sub_ps(v3->m_quad, v12)), v12);
     v53 = _mm_sub_ps(v52, v13);
     v32 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v51, v51, 201), v53), _mm_mul_ps(_mm_shuffle_ps(v53, v53, 201), v51));
     v33 = p->m_quad;
@@ -126,9 +134,9 @@ LABEL_8:
     goto LABEL_9;
   }
   v35 = _mm_sub_ps(v3->m_quad, v13);
-  a6.m128_f32[0] = d1 / (float)(d1 - d3);
+  v9.m128_f32[0] = d1 / (float)(d1 - d3);
   v36 = _mm_sub_ps(v12, v13);
-  v37 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(a6, a6, 0), _mm_sub_ps(v3->m_quad, v10)), v10);
+  v37 = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v9, v9, 0), _mm_sub_ps(v3->m_quad, m_quad)), m_quad);
   v38 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v36, v36, 201), v35), _mm_mul_ps(_mm_shuffle_ps(v35, v35, 201), v36));
   v39 = _mm_mul_ps(_mm_shuffle_ps(v38, v38, 201), _mm_sub_ps(p->m_quad, v13));
   v40 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v39, v39, 85), _mm_shuffle_ps(v39, v39, 0)), _mm_shuffle_ps(v39, v39, 170));
@@ -137,8 +145,8 @@ LABEL_8:
   v41.m128_f32[0] = v40.m128_f32[0] * 0.25;
   v42 = _mm_mul_ps(_mm_add_ps(_mm_add_ps(_mm_add_ps(p->m_quad, v13), v12), v3->m_quad), _mm_shuffle_ps(v41, v41, 0));
   v43 = _mm_sub_ps(v37, v13);
-  v44.m_quad = _mm_add_ps(v42, centroid->m_quad);
-  *centroid = (hkVector4f)v44.m_quad;
+  v44 = _mm_add_ps(v42, centroid->m_quad);
+  *centroid = (hkVector4f)v44;
   v45 = _mm_sub_ps(v3->m_quad, v13);
   v46 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v45, v45, 201), v43), _mm_mul_ps(_mm_shuffle_ps(v43, v43, 201), v45));
   v47 = _mm_mul_ps(_mm_shuffle_ps(v46, v46, 201), _mm_sub_ps(p->m_quad, v13));
@@ -151,7 +159,7 @@ LABEL_8:
                  _mm_mul_ps(
                    _mm_add_ps(_mm_add_ps(_mm_add_ps(p->m_quad, v13), v3->m_quad), v37),
                    _mm_shuffle_ps(v49, v49, 0)),
-                 v44.m_quad);
+                 v44);
 LABEL_9:
   *centroid = (hkVector4f)v50.m_quad;
   return result;
@@ -159,13 +167,15 @@ LABEL_9:
 
 // File Line: 140
 // RVA: 0xA36A0
-float __usercall UFG::BuoyancyVolume::ComputeBuoyancy@<xmm0>(UFG::BuoyancyVolume *this@<rcx>, hkTransformf *transform@<rdx>, hkVector4f *centreOfBuoyancy@<r8>, float waterElevation@<xmm3>, __m128 d1@<xmm2>)
+float __fastcall UFG::BuoyancyVolume::ComputeBuoyancy(
+        UFG::BuoyancyVolume *this,
+        hkTransformf *transform,
+        hkVector4f *centreOfBuoyancy,
+        float waterElevation)
 {
-  hkVector4f *v5; // rsi
-  UFG::BuoyancyVolume *v6; // rbx
-  hkTransformf *v7; // r14
+  __m128 d1; // xmm2
   float v8; // xmm6_4
-  __m128 v9; // xmm9
+  __m128 m_quad; // xmm9
   unsigned __int16 v10; // di
   unsigned __int16 v11; // dx
   __m128 v12; // xmm3
@@ -173,126 +183,129 @@ float __usercall UFG::BuoyancyVolume::ComputeBuoyancy@<xmm0>(UFG::BuoyancyVolume
   __m128 v14; // xmm2
   float v15; // xmm1_4
   float v16; // xmm0_4
-  __m128 *v17; // xmm10_8
-  __int64 v18; // rdx
+  __int64 v17; // rdx
   float d2; // xmm3_4
-  float v20; // xmm1_4
-  __m128 v21; // xmm4
-  __m128 v22; // xmm5
-  __m128 v23; // xmm8
-  float v24; // xmm0_4
-  __m128 v25; // xmm3
-  __m128 v26; // xmm1
+  float v19; // xmm1_4
+  __m128 v20; // xmm4
+  __m128 v21; // xmm5
+  __m128 v22; // xmm8
+  float v23; // xmm0_4
+  __m128 v24; // xmm3
+  __m128 v25; // xmm1
+  __m128 v26; // xmm3
   __m128 v27; // xmm3
-  __m128 v28; // xmm3
-  __m128 v29; // xmm1
-  hkVector4f b; // [rsp+38h] [rbp-59h]
-  hkVector4f v32; // [rsp+48h] [rbp-49h]
-  hkVector4f v3; // [rsp+58h] [rbp-39h]
-  hkVector4f v2; // [rsp+68h] [rbp-29h]
-  hkVector4f v1; // [rsp+78h] [rbp-19h]
+  __m128 v28; // xmm1
+  hkVector4f b; // [rsp+38h] [rbp-59h] BYREF
+  hkVector4f v31; // [rsp+48h] [rbp-49h] BYREF
+  hkVector4f v3; // [rsp+58h] [rbp-39h] BYREF
+  hkVector4f v2; // [rsp+68h] [rbp-29h] BYREF
+  hkVector4f v1; // [rsp+78h] [rbp-19h] BYREF
 
-  v5 = centreOfBuoyancy;
-  v6 = this;
-  v7 = transform;
   b.m_quad = (__m128)transform->m_translation;
   b.m_quad.m128_f32[2] = waterElevation;
-  hkVector4f::setTransformedInversePos((hkVector4f *)((char *)&b + 8), transform, (hkVector4f *)((char *)&b + 8));
-  *v5 = 0i64;
+  hkVector4f::setTransformedInversePos(
+    (hkVector4f *)&b.m_quad.m128_u16[4],
+    transform,
+    (hkVector4f *)&b.m_quad.m128_u16[4]);
+  *centreOfBuoyancy = 0i64;
   v8 = 0.0;
-  v32.m_quad = _xmm;
-  hkVector4f::setRotatedInverseDir(&v32, (hkMatrix3f *)&v7->m_rotation.m_col0, &v32);
-  v9 = b.m_quad;
+  v31.m_quad = _xmm;
+  hkVector4f::setRotatedInverseDir(&v31, &transform->m_rotation, &v31);
+  m_quad = b.m_quad;
   v10 = 0;
   v11 = 0;
-  if ( v6->mNumVertices > 0u )
+  if ( this->mNumVertices )
   {
-    v12 = v32.m_quad;
+    v12 = v31.m_quad;
     do
     {
       v13 = v11++;
-      v14 = _mm_mul_ps(_mm_sub_ps(v6->mLocalVertices[(unsigned int)v13].m_quad, v9), v12);
-      LODWORD(v15) = (unsigned __int128)_mm_shuffle_ps(v14, v14, 85);
-      LODWORD(v16) = (unsigned __int128)_mm_shuffle_ps(v14, v14, 0);
+      v14 = _mm_mul_ps(_mm_sub_ps(this->mLocalVertices[(unsigned int)v13].m_quad, m_quad), v12);
+      v15 = _mm_shuffle_ps(v14, v14, 85).m128_f32[0];
+      v16 = _mm_shuffle_ps(v14, v14, 0).m128_f32[0];
       d1 = _mm_shuffle_ps(v14, v14, 170);
-      v6->mDepths[v13] = (float)(v15 + v16) + d1.m128_f32[0];
+      this->mDepths[v13] = (float)(v15 + v16) + d1.m128_f32[0];
     }
-    while ( v11 < v6->mNumVertices );
+    while ( v11 < this->mNumVertices );
   }
-  if ( v6->mNumIndices > 0u )
+  if ( this->mNumIndices )
   {
-    v17 = (__m128 *)LODWORD(FLOAT_0_16666667);
     do
     {
-      v18 = v6->mIndices[v10 + 2];
-      d2 = v6->mDepths[v6->mIndices[v10 + 1]];
-      d1 = (__m128)LODWORD(v6->mDepths[v6->mIndices[v10]]);
-      v20 = v6->mDepths[v18];
-      v21 = v6->mLocalVertices[v6->mIndices[v10]].m_quad;
-      v22 = v6->mLocalVertices[v6->mIndices[v10 + 1]].m_quad;
-      v3.m_quad = (__m128)v6->mLocalVertices[v6->mIndices[v10]];
-      v23 = v6->mLocalVertices[(unsigned int)v18].m_quad;
-      v1.m_quad = v22;
-      v2.m_quad = v23;
+      v17 = this->mIndices[v10 + 2];
+      d2 = this->mDepths[this->mIndices[v10 + 1]];
+      d1 = (__m128)LODWORD(this->mDepths[this->mIndices[v10]]);
+      v19 = this->mDepths[v17];
+      v20 = this->mLocalVertices[this->mIndices[v10]].m_quad;
+      v21 = this->mLocalVertices[this->mIndices[v10 + 1]].m_quad;
+      v3.m_quad = v20;
+      v22 = this->mLocalVertices[(unsigned int)v17].m_quad;
+      v1.m_quad = v21;
+      v2.m_quad = v22;
       if ( (float)(d2 * d1.m128_f32[0]) >= 0.0 )
       {
-        if ( (float)(v20 * d1.m128_f32[0]) >= 0.0 )
+        if ( (float)(v19 * d1.m128_f32[0]) >= 0.0 )
         {
-          if ( (float)(v20 * d2) >= 0.0 )
+          if ( (float)(v19 * d2) >= 0.0 )
           {
-            if ( d1.m128_f32[0] < 0.0 || d2 < 0.0 || v20 < 0.0 )
+            if ( d1.m128_f32[0] < 0.0 || d2 < 0.0 || v19 < 0.0 )
             {
-              v25 = _mm_sub_ps(v22, v21);
-              v26 = _mm_sub_ps(v23, v21);
-              v27 = _mm_sub_ps(
-                      _mm_mul_ps(_mm_shuffle_ps(v25, v25, 201), v26),
-                      _mm_mul_ps(_mm_shuffle_ps(v26, v26, 201), v25));
-              v28 = _mm_mul_ps(_mm_shuffle_ps(v27, v27, 201), _mm_sub_ps(v9, v21));
+              v24 = _mm_sub_ps(v21, v20);
+              v25 = _mm_sub_ps(v22, v20);
+              v26 = _mm_sub_ps(
+                      _mm_mul_ps(_mm_shuffle_ps(v24, v24, 201), v25),
+                      _mm_mul_ps(_mm_shuffle_ps(v25, v25, 201), v24));
+              v27 = _mm_mul_ps(_mm_shuffle_ps(v26, v26, 201), _mm_sub_ps(m_quad, v20));
               d1 = _mm_add_ps(
-                     _mm_add_ps(_mm_shuffle_ps(v28, v28, 85), _mm_shuffle_ps(v28, v28, 0)),
-                     _mm_shuffle_ps(v28, v28, 170));
-              d1.m128_f32[0] = d1.m128_f32[0] * *(float *)&v17;
-              v29 = d1;
+                     _mm_add_ps(_mm_shuffle_ps(v27, v27, 85), _mm_shuffle_ps(v27, v27, 0)),
+                     _mm_shuffle_ps(v27, v27, 170));
+              d1.m128_f32[0] = d1.m128_f32[0] * 0.16666667;
+              v28 = d1;
               v8 = v8 + d1.m128_f32[0];
-              v29.m128_f32[0] = d1.m128_f32[0] * 0.25;
-              v5->m_quad = _mm_add_ps(
-                             _mm_mul_ps(
-                               _mm_add_ps(_mm_add_ps(_mm_add_ps(v21, v9), v22), v23),
-                               _mm_shuffle_ps(v29, v29, 0)),
-                             v5->m_quad);
+              v28.m128_f32[0] = d1.m128_f32[0] * 0.25;
+              centreOfBuoyancy->m_quad = _mm_add_ps(
+                                           _mm_mul_ps(
+                                             _mm_add_ps(_mm_add_ps(_mm_add_ps(v20, m_quad), v21), v22),
+                                             _mm_shuffle_ps(v28, v28, 0)),
+                                           centreOfBuoyancy->m_quad);
             }
-            goto LABEL_17;
+            goto LABEL_16;
           }
-          v24 = UFG::ClipTriangle(v5, &b, &v1, &v2, (__m128 *)v22.m128_u64[0], v17, &v3, d2, v20, d1.m128_f32[0]);
+          v23 = UFG::ClipTriangle(centreOfBuoyancy, &b, &v1, &v2, &v3, d2, v19, d1.m128_f32[0]);
         }
         else
         {
-          v24 = UFG::ClipTriangle(v5, &b, &v2, &v3, (__m128 *)v22.m128_u64[0], v17, &v1, v20, d1.m128_f32[0], d2);
+          v23 = UFG::ClipTriangle(centreOfBuoyancy, &b, &v2, &v3, &v1, v19, d1.m128_f32[0], d2);
         }
       }
       else
       {
-        v24 = UFG::ClipTriangle(v5, &b, &v3, &v1, (__m128 *)v22.m128_u64[0], v17, &v2, d1.m128_f32[0], d2, v20);
+        v23 = UFG::ClipTriangle(centreOfBuoyancy, &b, &v3, &v1, &v2, d1.m128_f32[0], d2, v19);
       }
-      v8 = v8 + v24;
-LABEL_17:
+      v8 = v8 + v23;
+LABEL_16:
       v10 += 3;
     }
-    while ( v10 < v6->mNumIndices );
+    while ( v10 < this->mNumIndices );
   }
   d1.m128_f32[0] = 1.0 / v8;
-  v5->m_quad = _mm_mul_ps(_mm_shuffle_ps(d1, d1, 0), v5->m_quad);
-  hkVector4f::setTransformedPos(v5, v7, v5);
+  centreOfBuoyancy->m_quad = _mm_mul_ps(_mm_shuffle_ps(d1, d1, 0), centreOfBuoyancy->m_quad);
+  hkVector4f::setTransformedPos(centreOfBuoyancy, transform, centreOfBuoyancy);
   return v8;
 }
 
 // File Line: 219
 // RVA: 0x97000
-void __fastcall UFG::BuoyancyAction::BuoyancyAction(UFG::BuoyancyAction *this, hkpRigidBody *body, float waterElevation, float buoyancyFactor, float linearDaming, float angularDamping, float buoyancyDecayRate)
+void __fastcall UFG::BuoyancyAction::BuoyancyAction(
+        UFG::BuoyancyAction *this,
+        hkpRigidBody *body,
+        float waterElevation,
+        float buoyancyFactor,
+        float linearDaming,
+        float angularDamping,
+        float buoyancyDecayRate)
 {
-  hkpRigidBody *v7; // rbx
-  __m128 *v8; // rdi
-  hkpShape *v9; // rcx
+  hkpShape *m_shape; // rcx
   __int64 v10; // r8
   __m128 v11; // xmm4
   __m128 v12; // xmm7
@@ -301,152 +314,149 @@ void __fastcall UFG::BuoyancyAction::BuoyancyAction(UFG::BuoyancyAction *this, h
   __m128 v15; // xmm5
   __m128 v16; // xmm4
   __m128 v17; // xmm1
-  __m128 v18; // [rsp+30h] [rbp-A8h]
+  __m128 v18; // [rsp+30h] [rbp-A8h] BYREF
   __m128 v19; // [rsp+40h] [rbp-98h]
-  __m128 v20; // [rsp+50h] [rbp-88h]
-  __m128 v21; // [rsp+60h] [rbp-78h]
-  __m128 v22; // [rsp+70h] [rbp-68h]
-  __int128 v23; // [rsp+80h] [rbp-58h]
+  __int128 v20[8]; // [rsp+50h] [rbp-88h] BYREF
 
-  v7 = body;
-  v8 = (__m128 *)this;
-  hkpUnaryAction::hkpUnaryAction((hkpUnaryAction *)&this->vfptr, (hkpEntity *)&body->vfptr, 0i64);
-  v8->m128_u64[0] = (unsigned __int64)&UFG::BuoyancyAction::`vftable;
-  v8[19].m128_f32[0] = waterElevation;
-  v8[19].m128_f32[1] = buoyancyFactor;
-  v8[19].m128_f32[2] = buoyancyDecayRate;
-  v8[19].m128_f32[3] = linearDaming;
-  v8[20].m128_f32[0] = angularDamping;
-  v9 = v7->m_collidable.m_shape;
-  v20 = transform.m_quad;
-  v21 = direction.m_quad;
-  v22 = stru_141A71280.m_quad;
-  v23 = 0i64;
-  ((void (__fastcall *)(hkpShape *, __m128 *, __int64, __m128 *, signed __int64))v9->vfptr[2].__vecDelDtor)(
-    v9,
-    &v20,
+  hkpUnaryAction::hkpUnaryAction(this, body, 0i64);
+  this->vfptr = (hkBaseObjectVtbl *)&UFG::BuoyancyAction::`vftable;
+  this->mWaterElevation = waterElevation;
+  this->mBuoyancyFactor = buoyancyFactor;
+  this->mBuoyancyDecayRate = buoyancyDecayRate;
+  this->mLinearDamping = linearDaming;
+  this->mAngularDamping = angularDamping;
+  m_shape = body->m_collidable.m_shape;
+  v20[0] = (__int128)transform.m_quad;
+  v20[1] = (__int128)direction.m_quad;
+  v20[2] = (__int128)stru_141A71280.m_quad;
+  v20[3] = 0i64;
+  ((void (__fastcall *)(hkpShape *, __int128 *, __int64, __m128 *, __int64))m_shape->vfptr[2].__vecDelDtor)(
+    m_shape,
+    v20,
     v10,
     &v18,
     -2i64);
-  v8[18].m128_i32[2] = 2359304;
+  *(_DWORD *)&this->mBuoyancyVolume.mNumVertices = 2359304;
   v11 = (__m128)v19.m128_u32[2];
   v12 = (__m128)v18.m128_u32[1];
   v13 = (__m128)v18.m128_u32[0];
-  v8[4] = _mm_unpacklo_ps(
-            _mm_unpacklo_ps((__m128)v18.m128_u32[0], (__m128)v19.m128_u32[2]),
-            _mm_unpacklo_ps((__m128)v18.m128_u32[1], (__m128)(unsigned int)FLOAT_1_0));
+  this->mBuoyancyVolume.mLocalVertices[0].m_quad = _mm_unpacklo_ps(
+                                                     _mm_unpacklo_ps((__m128)v18.m128_u32[0], (__m128)v19.m128_u32[2]),
+                                                     _mm_unpacklo_ps(
+                                                       (__m128)v18.m128_u32[1],
+                                                       (__m128)(unsigned int)FLOAT_1_0));
   v14 = (__m128)v19.m128_u32[0];
-  v8[5] = _mm_unpacklo_ps(
-            _mm_unpacklo_ps((__m128)v19.m128_u32[0], v11),
-            _mm_unpacklo_ps(v12, (__m128)(unsigned int)FLOAT_1_0));
+  this->mBuoyancyVolume.mLocalVertices[1].m_quad = _mm_unpacklo_ps(
+                                                     _mm_unpacklo_ps((__m128)v19.m128_u32[0], v11),
+                                                     _mm_unpacklo_ps(v12, (__m128)(unsigned int)FLOAT_1_0));
   v15 = (__m128)v19.m128_u32[1];
-  v8[6] = _mm_unpacklo_ps(
-            _mm_unpacklo_ps(v14, v11),
-            _mm_unpacklo_ps((__m128)v19.m128_u32[1], (__m128)(unsigned int)FLOAT_1_0));
-  v8[7] = _mm_unpacklo_ps(_mm_unpacklo_ps(v13, v11), _mm_unpacklo_ps(v15, (__m128)(unsigned int)FLOAT_1_0));
+  this->mBuoyancyVolume.mLocalVertices[2].m_quad = _mm_unpacklo_ps(
+                                                     _mm_unpacklo_ps(v14, v11),
+                                                     _mm_unpacklo_ps(
+                                                       (__m128)v19.m128_u32[1],
+                                                       (__m128)(unsigned int)FLOAT_1_0));
+  this->mBuoyancyVolume.mLocalVertices[3].m_quad = _mm_unpacklo_ps(
+                                                     _mm_unpacklo_ps(v13, v11),
+                                                     _mm_unpacklo_ps(v15, (__m128)(unsigned int)FLOAT_1_0));
   v16 = (__m128)v18.m128_u32[2];
-  v8[8] = _mm_unpacklo_ps(
-            _mm_unpacklo_ps(v13, (__m128)v18.m128_u32[2]),
-            _mm_unpacklo_ps(v12, (__m128)(unsigned int)FLOAT_1_0));
-  v8[9] = _mm_unpacklo_ps(_mm_unpacklo_ps(v14, v16), _mm_unpacklo_ps(v12, (__m128)(unsigned int)FLOAT_1_0));
-  v8[10] = _mm_unpacklo_ps(_mm_unpacklo_ps(v14, v16), _mm_unpacklo_ps(v15, (__m128)(unsigned int)FLOAT_1_0));
-  v8[11] = _mm_unpacklo_ps(_mm_unpacklo_ps(v13, v16), _mm_unpacklo_ps(v15, (__m128)(unsigned int)FLOAT_1_0));
-  v8[12].m128_i32[0] = 0x10000;
-  v8[12].m128_i32[1] = 2;
-  v8[12].m128_i32[2] = 196610;
-  v8[12].m128_i32[3] = 131078;
-  v8[13].m128_i32[0] = 393217;
-  v8[13].m128_i32[1] = 327681;
-  v8[13].m128_i32[2] = 458758;
-  v8[13].m128_i32[3] = 393219;
-  v8[14].m128_i32[0] = 131075;
-  v8[14].m128_i32[1] = 196608;
-  v8[14].m128_i32[2] = 7;
-  v8[14].m128_i32[3] = 262151;
-  v8[15].m128_i32[0] = 327684;
-  v8[15].m128_i32[1] = 262145;
-  v8[15].m128_i32[2] = 1;
-  v8[15].m128_i32[3] = 393220;
-  v8[16].m128_i32[0] = 262149;
-  v8[16].m128_i32[1] = 393223;
+  this->mBuoyancyVolume.mLocalVertices[4].m_quad = _mm_unpacklo_ps(
+                                                     _mm_unpacklo_ps(v13, (__m128)v18.m128_u32[2]),
+                                                     _mm_unpacklo_ps(v12, (__m128)(unsigned int)FLOAT_1_0));
+  this->mBuoyancyVolume.mLocalVertices[5].m_quad = _mm_unpacklo_ps(
+                                                     _mm_unpacklo_ps(v14, v16),
+                                                     _mm_unpacklo_ps(v12, (__m128)(unsigned int)FLOAT_1_0));
+  this->mBuoyancyVolume.mLocalVertices[6].m_quad = _mm_unpacklo_ps(
+                                                     _mm_unpacklo_ps(v14, v16),
+                                                     _mm_unpacklo_ps(v15, (__m128)(unsigned int)FLOAT_1_0));
+  this->mBuoyancyVolume.mLocalVertices[7].m_quad = _mm_unpacklo_ps(
+                                                     _mm_unpacklo_ps(v13, v16),
+                                                     _mm_unpacklo_ps(v15, (__m128)(unsigned int)FLOAT_1_0));
+  *(_DWORD *)this->mBuoyancyVolume.mIndices = 0x10000;
+  *(_DWORD *)&this->mBuoyancyVolume.mIndices[2] = 2;
+  *(_DWORD *)&this->mBuoyancyVolume.mIndices[4] = 196610;
+  *(_DWORD *)&this->mBuoyancyVolume.mIndices[6] = 131078;
+  *(_DWORD *)&this->mBuoyancyVolume.mIndices[8] = 393217;
+  *(_DWORD *)&this->mBuoyancyVolume.mIndices[10] = 327681;
+  *(_DWORD *)&this->mBuoyancyVolume.mIndices[12] = 458758;
+  *(_DWORD *)&this->mBuoyancyVolume.mIndices[14] = 393219;
+  *(_DWORD *)&this->mBuoyancyVolume.mIndices[16] = 131075;
+  *(_DWORD *)&this->mBuoyancyVolume.mIndices[18] = 196608;
+  *(_DWORD *)&this->mBuoyancyVolume.mIndices[20] = 7;
+  *(_DWORD *)&this->mBuoyancyVolume.mIndices[22] = 262151;
+  *(_DWORD *)&this->mBuoyancyVolume.mIndices[24] = 327684;
+  *(_DWORD *)&this->mBuoyancyVolume.mIndices[26] = 262145;
+  *(_DWORD *)&this->mBuoyancyVolume.mIndices[28] = 1;
+  *(_DWORD *)&this->mBuoyancyVolume.mIndices[30] = 393220;
+  *(_DWORD *)&this->mBuoyancyVolume.mIndices[32] = 262149;
+  *(_DWORD *)&this->mBuoyancyVolume.mIndices[34] = 393223;
   v17 = _mm_mul_ps(_mm_mul_ps(_mm_sub_ps(v19, v18), (__m128)xmmword_141A711B0), (__m128)_xmm);
-  v8[20].m128_f32[1] = (float)(v17.m128_f32[0] * COERCE_FLOAT(_mm_shuffle_ps(v17, v17, 85)))
-                     * COERCE_FLOAT(_mm_shuffle_ps(v17, v17, 170));
-  v8[20].m128_i32[2] = 0;
+  this->mAabbVolume = (float)(v17.m128_f32[0] * _mm_shuffle_ps(v17, v17, 85).m128_f32[0])
+                    * _mm_shuffle_ps(v17, v17, 170).m128_f32[0];
+  this->mSubmergedPercent = 0.0;
 }
 
 // File Line: 288
 // RVA: 0xB6190
-void __fastcall UFG::BuoyancyAction::applyAction(UFG::BuoyancyAction *this, hkStepInfo *stepInfo, double a3)
+void __fastcall UFG::BuoyancyAction::applyAction(UFG::BuoyancyAction *this, hkStepInfo *stepInfo)
 {
-  __m128 v3; // xmm0
-  hkStepInfo *v4; // rbp
-  UFG::BuoyancyAction *v5; // rdi
-  float v6; // xmm1_4
-  hkpEntity *v7; // rsi
-  float v8; // xmm7_4
-  __m128 v9; // xmm2
-  __int128 v10; // xmm6
-  __int64 v11; // rdx
-  __m128 v12; // xmm0
-  __int128 v13; // xmm6
-  __int64 v14; // rdx
-  __m128 v15; // [rsp+20h] [rbp-68h]
-  hkVector4f v16; // [rsp+30h] [rbp-58h]
-  __m128 v17; // [rsp+40h] [rbp-48h]
-  __m128 v18; // [rsp+50h] [rbp-38h]
+  __m128 mBuoyancyDecayRate_low; // xmm0
+  float v4; // xmm1_4
+  hkpEntity *m_entity; // rsi
+  float v6; // xmm7_4
+  __m128 v7; // xmm2
+  __int64 v8; // rdx
+  __m128 v9; // xmm0
+  __int64 v10; // rdx
+  __m128 m_quad; // [rsp+20h] [rbp-68h] BYREF
+  hkVector4f v12; // [rsp+30h] [rbp-58h] BYREF
+  __m128 v13; // [rsp+40h] [rbp-48h] BYREF
+  __m128 v14; // [rsp+50h] [rbp-38h] BYREF
 
-  v3 = (__m128)LODWORD(this->mBuoyancyDecayRate);
-  v4 = stepInfo;
-  v5 = this;
-  v6 = this->mBuoyancyFactor
-     - (float)((float)(v3.m128_f32[0] * stepInfo->m_deltaTime.m_storage) * this->mBuoyancyFactor);
-  this->mBuoyancyFactor = v6;
-  if ( v6 <= 0.0 )
+  mBuoyancyDecayRate_low = (__m128)LODWORD(this->mBuoyancyDecayRate);
+  v4 = this->mBuoyancyFactor
+     - (float)((float)(mBuoyancyDecayRate_low.m128_f32[0] * stepInfo->m_deltaTime.m_storage) * this->mBuoyancyFactor);
+  this->mBuoyancyFactor = v4;
+  if ( v4 <= 0.0 )
   {
     this->mBuoyancyFactor = 0.0;
   }
   else
   {
-    v7 = this->m_entity;
-    v3.m128_f32[0] = UFG::BuoyancyVolume::ComputeBuoyancy(
-                       &this->mBuoyancyVolume,
-                       &v7->m_motion.m_motionState.m_transform,
-                       &v16,
-                       this->mWaterElevation,
-                       a3);
-    v8 = v3.m128_f32[0];
-    if ( v3.m128_f32[0] <= 0.0 )
+    m_entity = this->m_entity;
+    mBuoyancyDecayRate_low.m128_f32[0] = UFG::BuoyancyVolume::ComputeBuoyancy(
+                                           &this->mBuoyancyVolume,
+                                           &m_entity->m_motion.m_motionState.m_transform,
+                                           &v12,
+                                           this->mWaterElevation);
+    v6 = mBuoyancyDecayRate_low.m128_f32[0];
+    if ( mBuoyancyDecayRate_low.m128_f32[0] <= 0.0 )
     {
-      v5->mSubmergedPercent = 0.0;
+      this->mSubmergedPercent = 0.0;
     }
     else
     {
-      v9 = v3;
-      v5->mSubmergedPercent = v3.m128_f32[0] / v5->mAabbVolume;
-      v10 = LODWORD(v4->m_deltaTime.m_storage);
-      v9.m128_f32[0] = (float)((float)(v3.m128_f32[0] * 9.8000002) * 1000.0) * v5->mBuoyancyFactor;
-      v17 = _mm_unpacklo_ps(_mm_unpacklo_ps((__m128)0i64, v9), (__m128)0i64);
-      hkpEntity::activate(v7);
-      ((void (__fastcall *)(hkpMaxSizeMotion *, __int64, __m128 *, hkVector4f *))v7->m_motion.vfptr[12].__first_virtual_table_function__)(
-        &v7->m_motion,
-        v11,
-        &v17,
-        &v16);
-      v18 = _mm_mul_ps((__m128)_xmm, v7->m_motion.m_linearVelocity.m_quad);
-      hkpEntity::activate(v7);
-      v7->m_motion.vfptr[9].__vecDelDtor((hkBaseObject *)&v7->m_motion.vfptr, (unsigned int)&v18);
-      v12 = v7->m_motion.m_angularVelocity.m_quad;
-      v15 = v7->m_motion.m_angularVelocity.m_quad;
-      v12.m128_f32[0] = hkpMotion::getMass((hkpMotion *)&v7->m_motion.vfptr);
-      v13 = LODWORD(v4->m_deltaTime.m_storage);
-      v12.m128_f32[0] = COERCE_FLOAT(COERCE_UNSIGNED_INT((float)(v8 * v5->mAngularDamping) * v12.m128_f32[0]) ^ _xmm[0]);
-      v15 = _mm_mul_ps(v15, _mm_shuffle_ps(v12, v12, 0));
-      hkpEntity::activate(v7);
-      ((void (__fastcall *)(hkpMaxSizeMotion *, __int64, __m128 *))v7->m_motion.vfptr[13].__first_virtual_table_function__)(
-        &v7->m_motion,
-        v14,
-        &v15);
+      v7 = mBuoyancyDecayRate_low;
+      this->mSubmergedPercent = mBuoyancyDecayRate_low.m128_f32[0] / this->mAabbVolume;
+      v7.m128_f32[0] = (float)((float)(mBuoyancyDecayRate_low.m128_f32[0] * 9.8000002) * 1000.0) * this->mBuoyancyFactor;
+      v13 = _mm_unpacklo_ps(_mm_unpacklo_ps((__m128)0i64, v7), (__m128)0i64);
+      hkpEntity::activate(m_entity);
+      ((void (__fastcall *)(hkpMaxSizeMotion *, __int64, __m128 *, hkVector4f *))m_entity->m_motion.vfptr[12].__first_virtual_table_function__)(
+        &m_entity->m_motion,
+        v8,
+        &v13,
+        &v12);
+      v14 = _mm_mul_ps((__m128)_xmm, m_entity->m_motion.m_linearVelocity.m_quad);
+      hkpEntity::activate(m_entity);
+      m_entity->m_motion.vfptr[9].__vecDelDtor(&m_entity->m_motion, (unsigned int)&v14);
+      m_quad = m_entity->m_motion.m_angularVelocity.m_quad;
+      v9 = m_quad;
+      v9.m128_i32[0] = COERCE_UNSIGNED_INT((float)(v6 * this->mAngularDamping) * hkpMotion::getMass(&m_entity->m_motion)) ^ _xmm[0];
+      m_quad = _mm_mul_ps(m_quad, _mm_shuffle_ps(v9, v9, 0));
+      hkpEntity::activate(m_entity);
+      ((void (__fastcall *)(hkpMaxSizeMotion *, __int64, __m128 *))m_entity->m_motion.vfptr[13].__first_virtual_table_function__)(
+        &m_entity->m_motion,
+        v10,
+        &m_quad);
     }
   }
 }

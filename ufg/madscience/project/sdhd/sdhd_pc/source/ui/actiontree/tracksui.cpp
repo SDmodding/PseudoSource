@@ -13,14 +13,11 @@ __int64 dynamic_initializer_for__UIEventTrack::sClassNameUID__()
 // RVA: 0x2E21D0
 void __fastcall UIEventTrack::UIEventTrack(UIEventTrack *this)
 {
-  UIEventTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, UIEventTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<UIEventTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&UIEventTrack::`vftable;
-  v1->mEventName.mOffset = 1i64;
-  BinString::Set(&v1->mEventName, "NO_EVENT");
+  ITrack::ITrack(this, UIEventTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<UIEventTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&UIEventTrack::`vftable;
+  this->mEventName.mOffset = 1i64;
+  BinString::Set(&this->mEventName, "NO_EVENT");
 }
 
 // File Line: 57
@@ -28,7 +25,7 @@ void __fastcall UIEventTrack::UIEventTrack(UIEventTrack *this)
 __int64 dynamic_initializer_for__gUIScreenListEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&gUIScreenListEnum, gUIScreenListNames, gUIScreenListCount, 0i64);
-  return atexit(dynamic_atexit_destructor_for__gUIScreenListEnum__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gUIScreenListEnum__);
 }
 
 // File Line: 58
@@ -46,15 +43,12 @@ __int64 dynamic_initializer_for__UIScreenTrack::sClassNameUID__()
 // RVA: 0x2E2290
 void __fastcall UIScreenTrack::UIScreenTrack(UIScreenTrack *this)
 {
-  UIScreenTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, UIScreenTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<UIScreenTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&UIScreenTrack::`vftable;
-  v1->mScreen = 0;
-  *(_WORD *)&v1->mPopHud = 1;
-  v1->mDontRemoveOnEnd = 0;
+  ITrack::ITrack(this, UIScreenTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<UIScreenTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&UIScreenTrack::`vftable;
+  this->mScreen = 0;
+  *(_WORD *)&this->mPopHud = 1;
+  this->mDontRemoveOnEnd = 0;
 }
 
 // File Line: 90
@@ -72,14 +66,11 @@ __int64 dynamic_initializer_for__HUDSocialActionChargeTrack::sClassNameUID__()
 // RVA: 0x2DF730
 void __fastcall HUDSocialActionChargeTrack::HUDSocialActionChargeTrack(HUDSocialActionChargeTrack *this)
 {
-  HUDSocialActionChargeTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, HUDSocialActionChargeTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<HUDSocialActionChargeTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&HUDSocialActionChargeTrack::`vftable;
-  v1->m_Charge = 0.0;
-  v1->m_SetValue = 0;
+  ITrack::ITrack(this, HUDSocialActionChargeTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<HUDSocialActionChargeTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&HUDSocialActionChargeTrack::`vftable;
+  this->m_Charge = 0.0;
+  this->m_SetValue = 0;
 }
 
 // File Line: 116
@@ -97,13 +88,10 @@ __int64 dynamic_initializer_for__HUDSocialActionEnableTrack::sClassNameUID__()
 // RVA: 0x2DF780
 void __fastcall HUDSocialActionEnableTrack::HUDSocialActionEnableTrack(HUDSocialActionEnableTrack *this)
 {
-  HUDSocialActionEnableTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, HUDSocialActionEnableTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<HUDSocialActionEnableTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&HUDSocialActionEnableTrack::`vftable;
-  v1->m_Enabled = 1;
+  ITrack::ITrack(this, HUDSocialActionEnableTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<HUDSocialActionEnableTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&HUDSocialActionEnableTrack::`vftable;
+  this->m_Enabled = 1;
 }
 
 // File Line: 138
@@ -121,11 +109,8 @@ __int64 dynamic_initializer_for__HUDSocialActionActivateTrack::sClassNameUID__()
 // RVA: 0x2DF6F0
 void __fastcall HUDSocialActionActivateTrack::HUDSocialActionActivateTrack(HUDSocialActionActivateTrack *this)
 {
-  HUDSocialActionActivateTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, HUDSocialActionActivateTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<HUDSocialActionActivateTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&HUDSocialActionActivateTrack::`vftable;
+  ITrack::ITrack(this, HUDSocialActionActivateTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<HUDSocialActionActivateTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&HUDSocialActionActivateTrack::`vftable;
 }
 

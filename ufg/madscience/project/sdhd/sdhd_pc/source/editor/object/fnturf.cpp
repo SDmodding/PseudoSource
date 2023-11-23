@@ -6,6 +6,6 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymDefaultComponentTurf__()
 
   v0 = UFG::qStringHash32("default-component-Turf", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&gsymDefaultComponentTurf, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymDefaultComponentTurf__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymDefaultComponentTurf__);
 }
 

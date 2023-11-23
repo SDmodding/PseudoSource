@@ -37,24 +37,19 @@ __int64 __fastcall DialogueTrackWeaponImpact::GetClassNameUID(DialogueTrackWeapo
 // RVA: 0x29B090
 void __fastcall ConversationTrackCreate::~ConversationTrackCreate(ConversationTrackCreate *this)
 {
-  ConversationTrackCreate *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&ConversationTrackCreate::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 264
@@ -68,24 +63,19 @@ __int64 __fastcall ConversationTrackCreate::GetClassNameUID(ConversationTrackCre
 // RVA: 0x29B020
 void __fastcall ConversationTrackCleanup::~ConversationTrackCleanup(ConversationTrackCleanup *this)
 {
-  ConversationTrackCleanup *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&ConversationTrackCleanup::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 287
@@ -109,24 +99,19 @@ ConversationTrackCleanup *__fastcall ConversationTrackCleanup::Create()
 // RVA: 0x29B170
 void __fastcall ConversationTrackOperation::~ConversationTrackOperation(ConversationTrackOperation *this)
 {
-  ConversationTrackOperation *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&ConversationTrackOperation::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 305
@@ -140,24 +125,19 @@ __int64 __fastcall ConversationTrackOperation::GetClassNameUID(ConversationTrack
 // RVA: 0x29B100
 void __fastcall ConversationTrackInterrupt::~ConversationTrackInterrupt(ConversationTrackInterrupt *this)
 {
-  ConversationTrackInterrupt *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&ConversationTrackInterrupt::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 328

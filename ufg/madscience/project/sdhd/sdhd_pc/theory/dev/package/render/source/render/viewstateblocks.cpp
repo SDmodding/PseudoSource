@@ -3,18 +3,18 @@
 void __fastcall Render::ScreenProjectionStateInit::ScreenProjectionStateInit(Render::ScreenProjectionStateInit *this)
 {
   __m128 v1; // xmm2
-  __m128 v2; // ST20_16
-  __m128 v3; // ST30_16
-  __int128 v4; // ST50_16
+  __m128 v2; // [rsp+20h] [rbp-58h]
+  __m128 v3; // [rsp+30h] [rbp-48h]
+  __int128 v4; // [rsp+50h] [rbp-28h]
 
   v1 = 0i64;
   v1.m128_f32[0] = (float)1;
   v2 = v1;
   v3 = _mm_shuffle_ps(v1, v1, 81);
-  HIDWORD(v4) = *(unsigned __int128 *)&_mm_shuffle_ps(v1, v1, 21) >> 96;
+  HIDWORD(v4) = HIDWORD(*(unsigned __int128 *)&_mm_shuffle_ps(v1, v1, 21));
   v2.m128_f32[0] = FLOAT_2_0;
   v3.m128_f32[1] = FLOAT_N2_0;
-  *(_QWORD *)&v4 = __PAIR__((unsigned int)FLOAT_1_0, LODWORD(FLOAT_N1_0));
+  *(_QWORD *)&v4 = __PAIR64__((unsigned int)FLOAT_1_0, LODWORD(FLOAT_N1_0));
   *((float *)&v4 + 2) = FLOAT_0_001;
   UFG::qMemSet(&Render::cbScreenProjectionState::sScreenLocalTransform, 0, 0xC0u);
   *(__m128 *)&Render::cbScreenProjectionState::sScreenLocalTransform.LocalWorld[8] = _mm_shuffle_ps(v1, v1, 69);

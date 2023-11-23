@@ -28,20 +28,20 @@ hkClass *__fastcall hkpRemoveTerminalsMoppModifier::staticClass()
 
 // File Line: 68
 // RVA: 0xCEBB60
-void __fastcall finishLoadedObjecthkpRemoveTerminalsMoppModifier(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpRemoveTerminalsMoppModifier(_QWORD *p, int finishing)
 {
   if ( p )
   {
-    *(_QWORD *)p = &hkpRemoveTerminalsMoppModifier::`vftable{for `hkReferencedObject};
-    *((_QWORD *)p + 2) = &hkpRemoveTerminalsMoppModifier::`vftable{for `hkpMoppModifier};
+    *p = &hkpRemoveTerminalsMoppModifier::`vftable{for `hkReferencedObject};
+    p[2] = &hkpRemoveTerminalsMoppModifier::`vftable{for `hkpMoppModifier};
   }
 }
 
 // File Line: 74
 // RVA: 0xCEBB90
-void __fastcall cleanupLoadedObjecthkpRemoveTerminalsMoppModifier(void *p)
+void __fastcall cleanupLoadedObjecthkpRemoveTerminalsMoppModifier(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 78
@@ -62,8 +62,8 @@ void **dynamic_initializer_for__hkpRemoveTerminalsMoppModifierTypeInfo__()
   hkpRemoveTerminalsMoppModifierTypeInfo.m_typeName = "hkpRemoveTerminalsMoppModifier";
   hkpRemoveTerminalsMoppModifierTypeInfo.m_vtable = result;
   hkpRemoveTerminalsMoppModifierTypeInfo.m_scopedName = "!hkpRemoveTerminalsMoppModifier";
-  hkpRemoveTerminalsMoppModifierTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpRemoveTerminalsMoppModifier;
-  hkpRemoveTerminalsMoppModifierTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpRemoveTerminalsMoppModifier;
+  hkpRemoveTerminalsMoppModifierTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpRemoveTerminalsMoppModifier;
+  hkpRemoveTerminalsMoppModifierTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpRemoveTerminalsMoppModifier;
   return result;
 }
 

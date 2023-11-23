@@ -17,7 +17,7 @@ __int64 UFG::_dynamic_initializer_for__symbol_List__()
 
   v0 = UFG::qStringHash32("List", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&symbol_List, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__symbol_List__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__symbol_List__);
 }
 
 // File Line: 39
@@ -28,65 +28,60 @@ __int64 UFG::_dynamic_initializer_for__symbol_CaseName__()
 
   v0 = UFG::qStringHash32("CaseName", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&symbol_CaseName, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__symbol_CaseName__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__symbol_CaseName__);
 }
 
 // File Line: 47
 // RVA: 0x5C4670
 void __fastcall UFG::UIHKPlayerObjective::UIHKPlayerObjective(UFG::UIHKPlayerObjective *this)
 {
-  UFG::UIHKPlayerObjective *v1; // rbx
-  UFG::qSafePointer<UFG::SimComponent,UFG::HudComponent> *v2; // [rsp+48h] [rbp+10h]
-
-  v1 = this;
   UFG::qString::qString(&this->titleCaption);
-  v1->minimapBlips.p = 0i64;
-  *(_QWORD *)&v1->minimapBlips.size = 0i64;
-  UFG::qString::qString(&v1->gameSliceName);
-  v2 = &v1->gpsTarget;
-  v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->gpsTarget.m_pPointer = 0i64;
-  v1->useFixedPos = 0;
-  UFG::qString::qString(&v1->alternateCaption);
-  v1->mObjective = 0i64;
+  this->minimapBlips.p = 0i64;
+  *(_QWORD *)&this->minimapBlips.size = 0i64;
+  UFG::qString::qString(&this->gameSliceName);
+  this->gpsTarget.mPrev = &this->gpsTarget;
+  this->gpsTarget.mNext = &this->gpsTarget;
+  this->gpsTarget.m_pPointer = 0i64;
+  this->useFixedPos = 0;
+  UFG::qString::qString(&this->alternateCaption);
+  this->mObjective = 0i64;
 }
 
 // File Line: 79
 // RVA: 0x5E8490
-UFG::qReflectObject *__fastcall UFG::UIHKPlayerObjective::GetObjective(Render::SimpleDrawableComponent *this)
+UFG::ModelData *__fastcall UFG::UIHKPlayerObjective::GetObjective(Render::SimpleDrawableComponent *this)
 {
-  return this->mModelDataHandle.mData;
+  return (UFG::ModelData *)this->mModelDataHandle.mData;
 }
 
 // File Line: 103
 // RVA: 0x5E9440
 UFG::SimObject *__fastcall UFG::UIHKPlayerObjective::GetSimObject(UFG::UIHKPlayerObjective *this)
 {
-  UFG::Objective *v1; // rcx
+  UFG::Objective *mObjective; // rcx
   UFG::qSymbol *v2; // rcx
-  Render::SkinningCacheNode *v3; // rax
-  char v4; // al
-  UFG::SimObject *v5; // rcx
-  UFG::SimObject *simObj; // [rsp+30h] [rbp+8h]
+  Render::SkinningCacheNode *FirstIndicator; // rax
+  char TargetBySymbol; // al
+  __int64 v5; // rcx
+  UFG::SimObject *simObj; // [rsp+30h] [rbp+8h] BYREF
 
-  v1 = this->mObjective;
-  if ( v1 )
+  mObjective = this->mObjective;
+  if ( mObjective )
   {
-    v3 = UFG::Objective::GetFirstIndicator(v1);
+    FirstIndicator = UFG::Objective::GetFirstIndicator(mObjective);
     v2 = &UFG::gNullQSymbol;
-    if ( v3 )
-      v2 = (UFG::qSymbol *)&v3[1];
+    if ( FirstIndicator )
+      v2 = (UFG::qSymbol *)&FirstIndicator[1];
   }
   else
   {
     v2 = &UFG::gNullQSymbol;
   }
-  v4 = UFG::FindTargetBySymbol(v2, &simObj);
+  TargetBySymbol = UFG::FindTargetBySymbol(v2, &simObj);
   v5 = 0i64;
-  if ( v4 )
-    v5 = simObj;
-  return v5;
+  if ( TargetBySymbol )
+    return simObj;
+  return (UFG::SimObject *)v5;
 }
 
 // File Line: 138
@@ -97,7 +92,7 @@ UFG::Objective *__fastcall UFG::UIHKPlayerObjective::GetDisplayPriority(UFG::UIH
 
   result = this->mObjective;
   if ( result )
-    result = (UFG::Objective *)result->mDisplayPriority;
+    return (UFG::Objective *)result->mDisplayPriority;
   return result;
 }
 
@@ -105,80 +100,67 @@ UFG::Objective *__fastcall UFG::UIHKPlayerObjective::GetDisplayPriority(UFG::UIH
 // RVA: 0x5C46F0
 void __fastcall UFG::UIHKPlayerObjectiveManager::UIHKPlayerObjectiveManager(UFG::UIHKPlayerObjectiveManager *this)
 {
-  UFG::UIHKPlayerObjectiveManager *v1; // rbx
-
-  v1 = this;
   this->vfptr = (UFG::UIHKPlayerObjectiveManagerVtbl *)&UFG::UIHKPlayerObjectiveManager::`vftable;
   this->m_objectives.p = 0i64;
   *(_QWORD *)&this->m_objectives.size = 0i64;
   this->m_currentObjective = -1;
   UFG::qBaseTreeRB::qBaseTreeRB(&this->m_knownBlips.mTree.mTree);
-  UFG::qBaseTreeRB::qBaseTreeRB(&v1->m_pendingBlips.mTree.mTree);
-  v1->mFlashObjectiveFlag = 0;
-  UFG::UIHKPlayerObjective::UIHKPlayerObjective(&v1->mTempObjective);
-  *(_WORD *)&v1->mTempObjectiveSelected = 0;
-  v1->mWorldMapObjective_IsSelected = 0;
-  UFG::UIHKPlayerObjective::UIHKPlayerObjective(&v1->mWorldMapObjective);
-  UFG::UIHKPlayerObjectiveManager::mInstance = v1;
+  UFG::qBaseTreeRB::qBaseTreeRB(&this->m_pendingBlips.mTree.mTree);
+  this->mFlashObjectiveFlag = 0;
+  UFG::UIHKPlayerObjective::UIHKPlayerObjective(&this->mTempObjective);
+  *(_WORD *)&this->mTempObjectiveSelected = 0;
+  this->mWorldMapObjective_IsSelected = 0;
+  UFG::UIHKPlayerObjective::UIHKPlayerObjective(&this->mWorldMapObjective);
+  UFG::UIHKPlayerObjectiveManager::mInstance = this;
 }
 
 // File Line: 164
 // RVA: 0x5C9C40
 void __fastcall UFG::UIHKPlayerObjectiveManager::~UIHKPlayerObjectiveManager(UFG::UIHKPlayerObjectiveManager *this)
 {
-  UFG::UIHKPlayerObjectiveManager *v1; // rdi
-  UFG::UIHKPlayerObjective **v2; // rcx
+  UFG::UIHKPlayerObjective **p; // rcx
 
-  v1 = this;
   this->vfptr = (UFG::UIHKPlayerObjectiveManagerVtbl *)&UFG::UIHKPlayerObjectiveManager::`vftable;
   UFG::UIHKPlayerObjectiveManager::mInstance = 0i64;
   UFG::UIHKPlayerObjective::~UIHKPlayerObjective(&this->mWorldMapObjective);
-  UFG::UIHKPlayerObjective::~UIHKPlayerObjective(&v1->mTempObjective);
-  UFG::qTreeRB<UFG::qMapNode32<UFG::UIHKPlayerObjectiveMinimapBlip>,UFG::qMapNode32<UFG::UIHKPlayerObjectiveMinimapBlip>,1>::DeleteAll(&v1->m_pendingBlips.mTree);
-  UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)&v1->m_pendingBlips);
-  UFG::qTreeRB<UFG::qMapNode32<UFG::UIHKPlayerObjectiveMinimapBlip>,UFG::qMapNode32<UFG::UIHKPlayerObjectiveMinimapBlip>,1>::DeleteAll(&v1->m_knownBlips.mTree);
-  UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)&v1->m_knownBlips);
-  v2 = v1->m_objectives.p;
-  if ( v2 )
-    operator delete[](v2);
-  v1->m_objectives.p = 0i64;
-  *(_QWORD *)&v1->m_objectives.size = 0i64;
+  UFG::UIHKPlayerObjective::~UIHKPlayerObjective(&this->mTempObjective);
+  UFG::qTreeRB<UFG::qMapNode32<UFG::UIHKPlayerObjectiveMinimapBlip>,UFG::qMapNode32<UFG::UIHKPlayerObjectiveMinimapBlip>,1>::DeleteAll(&this->m_pendingBlips.mTree);
+  UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)&this->m_pendingBlips);
+  UFG::qTreeRB<UFG::qMapNode32<UFG::UIHKPlayerObjectiveMinimapBlip>,UFG::qMapNode32<UFG::UIHKPlayerObjectiveMinimapBlip>,1>::DeleteAll(&this->m_knownBlips.mTree);
+  UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)&this->m_knownBlips);
+  p = this->m_objectives.p;
+  if ( p )
+    operator delete[](p);
+  this->m_objectives.p = 0i64;
+  *(_QWORD *)&this->m_objectives.size = 0i64;
 }
 
 // File Line: 199
 // RVA: 0x5D5290
 void __fastcall UFG::UIHKPlayerObjectiveManager::Clear(UFG::UIHKPlayerObjectiveManager *this)
 {
-  __int64 v1; // rbx
-  UFG::UIHKPlayerObjectiveManager *v2; // rdi
-  UFG::UIHKPlayerObjective **v3; // rax
+  __int64 i; // rbx
+  UFG::UIHKPlayerObjective **p; // rax
   UFG::UIHKPlayerObjective *v4; // rsi
   UFG::UIHKPlayerObjective **v5; // rcx
 
-  v1 = 0i64;
-  v2 = this;
-  if ( this->m_objectives.size )
+  for ( i = 0i64; (unsigned int)i < this->m_objectives.size; i = (unsigned int)(i + 1) )
   {
-    do
+    p = this->m_objectives.p;
+    v4 = p[i];
+    if ( v4 )
     {
-      v3 = v2->m_objectives.p;
-      v4 = v3[v1];
-      if ( v4 )
-      {
-        UFG::UIHKPlayerObjective::~UIHKPlayerObjective(v3[v1]);
-        operator delete[](v4);
-      }
-      v1 = (unsigned int)(v1 + 1);
+      UFG::UIHKPlayerObjective::~UIHKPlayerObjective(p[i]);
+      operator delete[](v4);
     }
-    while ( (unsigned int)v1 < v2->m_objectives.size );
   }
-  v5 = v2->m_objectives.p;
+  v5 = this->m_objectives.p;
   if ( v5 )
     operator delete[](v5);
-  v2->m_objectives.p = 0i64;
-  *(_QWORD *)&v2->m_objectives.size = 0i64;
-  v2->m_currentObjective = 0;
-  v2->mTempObjectiveSelected = 0;
+  this->m_objectives.p = 0i64;
+  *(_QWORD *)&this->m_objectives.size = 0i64;
+  this->m_currentObjective = 0;
+  this->mTempObjectiveSelected = 0;
 }
 
 // File Line: 297
@@ -193,33 +175,33 @@ void __fastcall UFG::UIHKPlayerObjectiveManager::ClearWorldMapDest(UFG::UIHKPlay
 void __fastcall UFG::UIHKPlayerObjectiveManager::UpdateObjectives(UFG::UIHKPlayerObjectiveManager *this)
 {
   UFG::UIHKPlayerObjectiveManager *v1; // r13
-  signed __int64 v2; // rax
-  unsigned int v3; // ecx
-  __int64 v4; // rcx
-  const char *v5; // rdx
-  UFG::UIHKPlayerObjective *v6; // r15
-  unsigned int v7; // ebx
-  UFG::UIHKPlayerObjective **v8; // rax
+  UFG::UIHKPlayerObjective *p_mTempObjective; // rax
+  unsigned int size; // ecx
+  UFG::Objective *mObjective; // rcx
+  const char *mData; // rdx
+  UFG::UIHKPlayerObjective *p_mWorldMapObjective; // r15
+  unsigned int i; // ebx
+  UFG::UIHKPlayerObjective **p; // rax
   UFG::UIHKPlayerObjective *v9; // rdi
   UFG::UIHKPlayerObjective **v10; // rcx
   UFG::ProgressionTracker *v11; // rax
-  UFG::ObjectiveTracker *v12; // r14
+  UFG::ObjectiveTracker *p_mObjectiveTracker; // r14
   UFG::qSymbol *v13; // rax
-  UFG::qPropertySet *v14; // r12
-  UFG::Objective *v15; // r14
-  UFG::Objective::Status v16; // eax
+  UFG::qPropertySet *PropertySet; // r12
+  UFG::Objective *FirstObjective; // r14
+  UFG::Objective::Status mStatus; // eax
   UFG::allocator::free_link *v17; // rax
   __int64 v18; // rax
   __int64 v19; // rdi
-  UFG::GameSlice *v20; // rsi
+  UFG::GameSlice *mpGameSlice; // rsi
   UFG::qString *v21; // rax
   UFG::qPropertyList *v22; // rbx
   UFG::qSymbol *v23; // rax
-  unsigned int v24; // eax
-  char *v25; // rax
+  unsigned int ElementPropertySet; // eax
+  char *ValuePtr; // rax
   UFG::qPropertySet *v26; // rcx
   char *v27; // rdx
-  UFG::GameSlice *v28; // rbx
+  UFG::GameSlice *Parent; // rbx
   UFG::qString *v29; // rax
   UFG::qString *v30; // rax
   UFG::qPropertyList *v31; // rbx
@@ -227,216 +209,204 @@ void __fastcall UFG::UIHKPlayerObjectiveManager::UpdateObjectives(UFG::UIHKPlaye
   unsigned int v33; // eax
   char *v34; // rax
   UFG::qSharedStringData *v35; // rbx
-  UFG::qSymbol *v36; // rax
-  UFG::qSymbol *v37; // rbx
-  UFG::TSActor *v38; // rax
-  UFG::SimObject *v39; // rsi
-  UFG::qBaseTreeRB *v40; // rax
-  UFG::qMemoryPool *v41; // rax
-  UFG::allocator::free_link *v42; // rax
-  UFG::SimComponent *v43; // rax
-  UFG::SimComponent *v44; // rbx
-  unsigned __int16 v45; // cx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v46; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v47; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v48; // rax
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v49; // rax
-  void *v50; // rcx
-  UFG::ObjectiveIndicator *v51; // r14
-  UFG::qBaseTreeRB *v52; // rsi
-  UFG::allocator::free_link *v53; // rax
-  signed __int64 v54; // rbx
-  _QWORD *v55; // rax
-  __int64 *v56; // rbx
-  __int64 v57; // rdx
-  __int64 v58; // rcx
-  _QWORD *v59; // rax
-  __int64 v60; // rax
-  UFG::qBaseNodeRB **v61; // rdx
-  __int64 v62; // r8
-  UFG::qBaseNodeRB *v63; // rcx
-  UFG::qBaseNodeRB *v64; // rax
-  UFG::qBaseNodeRB *v65; // rax
-  __int64 v66; // r12
-  unsigned int v67; // esi
-  unsigned int v68; // ebx
-  unsigned int v69; // ebx
-  unsigned __int64 v70; // rax
-  UFG::allocator::free_link *v71; // rax
-  UFG::allocator::free_link *v72; // r14
-  unsigned int i; // er9
-  __int64 *v74; // rcx
-  __int64 **v75; // rax
-  __int64 *v76; // rcx
-  __int64 **v77; // rax
-  __int64 v78; // r12
-  unsigned int v79; // esi
-  unsigned int v80; // ebx
-  unsigned int v81; // ebx
-  unsigned __int64 v82; // rax
-  UFG::allocator::free_link *v83; // rax
-  UFG::UIHKPlayerObjective **v84; // r14
-  unsigned int j; // er9
-  unsigned int v86; // esi
-  __int64 v87; // rsi
-  __int64 v88; // rbx
-  UFG::UIHKPlayerObjective **v89; // r12
-  UFG::UIHKPlayerObjective *v90; // r13
-  UFG::Objective *v91; // rax
-  unsigned int v92; // er14
-  char *v93; // rdi
-  int v94; // ebx
-  UFG::UIHKPlayerObjective *v95; // rax
-  UFG::Objective *v96; // rax
-  const char *v97; // rcx
-  UFG::UIHKObjectiveFlasherWidget::eState v98; // eax
-  UFG::qBaseTreeRB *v99; // r14
-  Render::SkinningCacheNode *v100; // rdi
-  unsigned int v101; // edx
-  UFG::qBaseTreeRB *v102; // rax
-  UFG::SimComponent *v103; // rdx
-  Render::SkinningCacheNode *v104; // rdx
-  UFG::qBaseNodeVariableRB<unsigned __int64> *v105; // rcx
-  UFG::qBaseNodeVariableRB<unsigned __int64> *v106; // rax
-  UFG::ProgressionTracker *v107; // rax
-  unsigned int v108; // edx
-  UFG::qBaseTreeRB *v109; // rax
-  UFG::qBaseTreeRB *v110; // rbx
-  UFG::qBaseNodeRB **v111; // rdx
-  UFG::qBaseNodeRB *v112; // rcx
-  UFG::qBaseNodeRB *v113; // rax
-  UFG::qBaseNodeRB *v114; // rcx
-  UFG::qBaseNodeRB *v115; // rax
-  UFG::qBaseTreeRB *v116; // r12
-  UFG::qBaseTreeRB *v117; // r13
-  unsigned int v118; // edx
-  UFG::TSActor *v119; // rax
-  UFG::SimObject *v120; // rdi
-  UFG::qBaseTreeRB *v121; // rax
-  UFG::qMemoryPool *v122; // rax
-  UFG::allocator::free_link *v123; // rax
-  UFG::SimComponent *v124; // rax
-  UFG::SimComponent *v125; // rsi
-  unsigned __int16 v126; // cx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v127; // rdx
-  UFG::qBaseNodeRB *v128; // rcx
-  UFG::qBaseNodeRB *v129; // rax
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v130; // rax
-  UFG::ProgressionTracker *v131; // rax
-  UFG::qMap<UFG::UIHKPlayerObjectiveMinimapBlip> *v132; // rcx
-  unsigned int v133; // edx
-  unsigned int v134; // ecx
-  UFG::Objective *v135; // [rsp+30h] [rbp-D0h]
+  ASymbol *v36; // rbx
+  UFG::TSActor *instance; // rax
+  UFG::SimObject *m_pPointer; // rsi
+  UFG::qBaseTreeRB *Named; // rax
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
+  UFG::allocator::free_link *v41; // rax
+  UFG::SimComponent *v42; // rax
+  UFG::SimComponent *v43; // rbx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v44; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v46; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v47; // rax
+  void *v48; // rcx
+  UFG::ObjectiveIndicator *FirstIndicator; // r14
+  UFG::qBaseTreeRB *v50; // rsi
+  UFG::allocator::free_link *v51; // rax
+  UFG::allocator::free_link *v52; // rbx
+  UFG::allocator::free_link *v53; // rbx
+  __int64 v54; // rdx
+  UFG::allocator::free_link *mNext; // rcx
+  UFG::allocator::free_link *v56; // rax
+  UFG::allocator::free_link *v57; // rax
+  UFG::qBaseNodeRB **mChild; // rdx
+  __int64 v59; // r8
+  UFG::qBaseNodeRB *v60; // rcx
+  UFG::qBaseNodeRB *v61; // rax
+  UFG::qBaseNodeRB *v62; // rax
+  __int64 v63; // r12
+  unsigned int v64; // esi
+  unsigned int v65; // ebx
+  unsigned int v66; // ebx
+  unsigned __int64 v67; // rax
+  UFG::allocator::free_link *v68; // rax
+  UFG::allocator::free_link *v69; // r14
+  unsigned int j; // r9d
+  __int64 *v71; // rcx
+  __int64 **v72; // rax
+  __int64 *v73; // rcx
+  __int64 **v74; // rax
+  __int64 v75; // r12
+  unsigned int v76; // esi
+  unsigned int capacity; // ebx
+  unsigned int v78; // ebx
+  unsigned __int64 v79; // rax
+  UFG::allocator::free_link *v80; // rax
+  UFG::UIHKPlayerObjective **v81; // r14
+  unsigned int k; // r9d
+  unsigned int v83; // esi
+  __int64 v84; // rsi
+  __int64 v85; // rbx
+  UFG::UIHKPlayerObjective **v86; // r12
+  UFG::UIHKPlayerObjective *v87; // r13
+  UFG::Objective *v88; // rax
+  unsigned int mDisplayPriority; // r14d
+  char *v90; // rdi
+  int v91; // ebx
+  UFG::UIHKPlayerObjective *v92; // rax
+  UFG::Objective *v93; // rax
+  const char *v94; // rcx
+  UFG::UIHKObjectiveFlasherWidget::eState v95; // eax
+  UFG::qBaseTreeRB *v96; // r14
+  Render::SkinningCacheNode *Head; // rdi
+  unsigned int mCachedBufferPtr; // edx
+  UFG::qBaseTreeRB *Next; // rax
+  UFG::SimComponent *v100; // rdx
+  Render::SkinningCacheNode *v101; // rdx
+  UFG::qBaseNodeVariableRB<unsigned __int64> *mParent; // rcx
+  UFG::qBaseNodeVariableRB<unsigned __int64> *v103; // rax
+  UFG::ProgressionTracker *v104; // rax
+  unsigned int v105; // edx
+  UFG::qBaseTreeRB *v106; // rax
+  UFG::qBaseTreeRB *v107; // rbx
+  UFG::qBaseNodeRB **v108; // rdx
+  UFG::qBaseNodeRB *v109; // rcx
+  UFG::qBaseNodeRB *v110; // rax
+  UFG::qBaseNodeRB *v111; // rcx
+  UFG::qBaseNodeRB *v112; // rax
+  UFG::qBaseTreeRB *v113; // r12
+  UFG::qBaseTreeRB *v114; // r13
+  unsigned int v115; // edx
+  UFG::TSActor *v116; // rax
+  UFG::SimObject *v117; // rdi
+  UFG::qBaseTreeRB *v118; // rax
+  UFG::qMemoryPool *v119; // rax
+  UFG::allocator::free_link *v120; // rax
+  UFG::SimComponent *v121; // rax
+  UFG::SimComponent *v122; // rsi
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v123; // rdx
+  UFG::qBaseNodeRB *v124; // rcx
+  UFG::qBaseNodeRB *v125; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v126; // rax
+  UFG::ProgressionTracker *v127; // rax
+  UFG::qMap<UFG::UIHKPlayerObjectiveMinimapBlip> *v128; // rcx
+  unsigned int v129; // edx
+  unsigned int v130; // ecx
+  UFG::Objective *v131; // [rsp+30h] [rbp-D0h]
   unsigned int uid; // [rsp+40h] [rbp-C0h]
-  UFG::qString v137; // [rsp+48h] [rbp-B8h]
-  __int64 *v138; // [rsp+70h] [rbp-90h]
-  __int64 **v139; // [rsp+78h] [rbp-88h]
-  __int64 v140; // [rsp+80h] [rbp-80h]
-  UFG::ObjectiveIndicator *v141; // [rsp+90h] [rbp-70h]
-  UFG::qPropertySet *v142; // [rsp+98h] [rbp-68h]
-  UFG::ObjectiveTracker *v143; // [rsp+A0h] [rbp-60h]
-  UFG::qSymbol v144; // [rsp+A8h] [rbp-58h]
-  UFG::qBaseTreeRB *v145; // [rsp+B0h] [rbp-50h]
-  UFG::qSymbol v146; // [rsp+B8h] [rbp-48h]
-  UFG::SimObjectModifier v147; // [rsp+C0h] [rbp-40h]
-  UFG::UIHKScreenHud *v148; // [rsp+E0h] [rbp-20h]
-  UFG::qString v149; // [rsp+E8h] [rbp-18h]
-  UFG::qBaseTreeRB v150; // [rsp+110h] [rbp+10h]
-  __int64 **v151; // [rsp+160h] [rbp+60h]
-  UFG::qString v152; // [rsp+168h] [rbp+68h]
-  _QWORD *v153; // [rsp+190h] [rbp+90h]
-  __int64 v154; // [rsp+198h] [rbp+98h]
-  __int64 v155; // [rsp+1A0h] [rbp+A0h]
-  __int64 **v156; // [rsp+1A8h] [rbp+A8h]
-  UFG::qString v157; // [rsp+1B0h] [rbp+B0h]
-  UFG::qString v158; // [rsp+1D8h] [rbp+D8h]
-  UFG::qString v159; // [rsp+200h] [rbp+100h]
-  UFG::qString v160; // [rsp+228h] [rbp+128h]
-  UFG::UIHKPlayerObjectiveManager *v161; // [rsp+2B0h] [rbp+1B0h]
-  UFG::qSymbol result; // [rsp+2C0h] [rbp+1C0h]
-  UFG::qSymbol v163; // [rsp+2C8h] [rbp+1C8h]
+  UFG::qString v133; // [rsp+48h] [rbp-B8h] BYREF
+  __int64 *v134; // [rsp+70h] [rbp-90h] BYREF
+  __int64 **v135; // [rsp+78h] [rbp-88h]
+  __int64 v136; // [rsp+80h] [rbp-80h]
+  UFG::ObjectiveIndicator *v137; // [rsp+90h] [rbp-70h]
+  UFG::qPropertySet *v138; // [rsp+98h] [rbp-68h]
+  UFG::ObjectiveTracker *v139; // [rsp+A0h] [rbp-60h]
+  UFG::qSymbol v140; // [rsp+A8h] [rbp-58h] BYREF
+  UFG::qBaseTreeRB *p_mTree; // [rsp+B0h] [rbp-50h]
+  UFG::qSymbol v142; // [rsp+B8h] [rbp-48h] BYREF
+  UFG::SimObjectModifier v143; // [rsp+C0h] [rbp-40h] BYREF
+  UFG::UIHKScreenHud *v144; // [rsp+E0h] [rbp-20h]
+  UFG::qString v145; // [rsp+E8h] [rbp-18h] BYREF
+  UFG::qBaseTreeRB v146; // [rsp+110h] [rbp+10h] BYREF
+  __int64 **v147; // [rsp+160h] [rbp+60h]
+  UFG::qString v148; // [rsp+168h] [rbp+68h] BYREF
+  UFG::allocator::free_link *v149; // [rsp+190h] [rbp+90h]
+  __int64 v150; // [rsp+198h] [rbp+98h]
+  UFG::allocator::free_link *v151; // [rsp+1A0h] [rbp+A0h]
+  __int64 **v152; // [rsp+1A8h] [rbp+A8h]
+  UFG::qString v153; // [rsp+1B0h] [rbp+B0h] BYREF
+  UFG::qString v154; // [rsp+1D8h] [rbp+D8h] BYREF
+  UFG::qString v155; // [rsp+200h] [rbp+100h] BYREF
+  UFG::qString v156; // [rsp+228h] [rbp+128h] BYREF
+  UFG::qBaseNodeRB **result; // [rsp+2C0h] [rbp+1C0h] BYREF
+  UFG::qSymbol v159; // [rsp+2C8h] [rbp+1C8h] BYREF
 
-  v161 = this;
-  v154 = -2i64;
+  v150 = -2i64;
   v1 = this;
   if ( UFG::UIHKScreenHud::mIconManager )
   {
-    UFG::qString::qString(&v152);
+    UFG::qString::qString(&v148);
     if ( v1->mTempObjectiveSelected )
     {
-      v2 = (signed __int64)&v1->mTempObjective;
+      p_mTempObjective = &v1->mTempObjective;
       goto LABEL_12;
     }
     if ( v1->mWorldMapObjective_IsSelected )
     {
       if ( v1->mWorldMapObjective_IsSet )
       {
-        v2 = (signed __int64)&v1->mWorldMapObjective;
+        p_mTempObjective = &v1->mWorldMapObjective;
         goto LABEL_12;
       }
       v1->mWorldMapObjective_IsSelected = 0;
     }
-    v3 = v1->m_objectives.size;
-    if ( !v3 )
+    size = v1->m_objectives.size;
+    if ( !size )
       goto LABEL_17;
-    if ( (unsigned __int8)v1->m_currentObjective >= v3 )
+    if ( (unsigned __int8)v1->m_currentObjective >= size )
       v1->m_currentObjective = 0;
-    v2 = (signed __int64)v1->m_objectives.p[(unsigned __int8)v1->m_currentObjective];
+    p_mTempObjective = v1->m_objectives.p[(unsigned __int8)v1->m_currentObjective];
 LABEL_12:
-    if ( v2 )
+    if ( p_mTempObjective )
     {
-      v4 = *(_QWORD *)(v2 + 184);
-      if ( v4 )
-        v5 = *(const char **)(v4 + 72);
+      mObjective = p_mTempObjective->mObjective;
+      if ( mObjective )
+        mData = mObjective->mIdentifier.mData;
       else
-        v5 = &customWorldMapCaption;
-      UFG::qString::Set(&v152, v5);
+        mData = &customCaption;
+      UFG::qString::Set(&v148, mData);
     }
 LABEL_17:
-    v6 = 0i64;
-    v7 = 0;
-    if ( v1->m_objectives.size )
+    p_mWorldMapObjective = 0i64;
+    for ( i = 0; i < v1->m_objectives.size; ++i )
     {
-      do
+      p = v1->m_objectives.p;
+      v9 = p[i];
+      if ( v9 )
       {
-        v8 = v1->m_objectives.p;
-        v9 = v8[v7];
-        if ( v9 )
-        {
-          UFG::UIHKPlayerObjective::~UIHKPlayerObjective(v8[v7]);
-          operator delete[](v9);
-        }
-        ++v7;
+        UFG::UIHKPlayerObjective::~UIHKPlayerObjective(p[i]);
+        operator delete[](v9);
       }
-      while ( v7 < v1->m_objectives.size );
     }
     v10 = v1->m_objectives.p;
     if ( v10 )
       operator delete[](v10);
     v1->m_objectives.p = 0i64;
     *(_QWORD *)&v1->m_objectives.size = 0i64;
-    v145 = &v1->m_pendingBlips.mTree.mTree;
+    p_mTree = &v1->m_pendingBlips.mTree.mTree;
     UFG::qTreeRB<UFG::qMapNode32<UFG::UIHKPlayerObjectiveMinimapBlip>,UFG::qMapNode32<UFG::UIHKPlayerObjectiveMinimapBlip>,1>::DeleteAll(&v1->m_pendingBlips.mTree);
-    v148 = UFG::UIHKScreenHud::mInstance;
+    v144 = UFG::UIHKScreenHud::mInstance;
     if ( UFG::UIHKScreenHud::mInstance )
       UFG::UIHKObjectiveDistanceWidget::Clear(UFG::UIHKScreenHud::ObjectiveDistance);
     v11 = UFG::ProgressionTracker::Instance();
-    v12 = &v11->mObjectiveTracker;
-    v143 = &v11->mObjectiveTracker;
+    p_mObjectiveTracker = &v11->mObjectiveTracker;
+    v139 = &v11->mObjectiveTracker;
     if ( v11 == (UFG::ProgressionTracker *)-408i64 )
       goto LABEL_199;
-    UFG::qBaseTreeRB::qBaseTreeRB(&v150);
-    v13 = UFG::qSymbol::create_from_string(&result, "default-unlockables-casedocs-list");
-    v14 = UFG::PropertySetManager::GetPropertySet(v13);
-    v142 = v14;
-    v15 = UFG::ObjectiveTracker::GetFirstObjective(v12);
-    v135 = v15;
-    if ( v15 )
+    UFG::qBaseTreeRB::qBaseTreeRB(&v146);
+    v13 = UFG::qSymbol::create_from_string((UFG::qSymbol *)&result, "default-unlockables-casedocs-list");
+    PropertySet = UFG::PropertySetManager::GetPropertySet(v13);
+    v138 = PropertySet;
+    FirstObjective = UFG::ObjectiveTracker::GetFirstObjective(p_mObjectiveTracker);
+    v131 = FirstObjective;
+    if ( FirstObjective )
     {
       while ( 1 )
       {
-        v16 = v15->mStatus;
-        if ( v16 && (unsigned int)(v16 - 3) > 1 )
+        mStatus = FirstObjective->mStatus;
+        if ( mStatus && (unsigned int)(mStatus - 3) > 1 )
         {
           v17 = UFG::qMalloc(0xC0ui64, "UIHKPlayerObjectiveManager::UpdateObjectives UIHKPlayerObjective", 0i64);
           if ( v17 )
@@ -452,566 +422,569 @@ LABEL_17:
             break;
         }
 LABEL_127:
-        v15 = UFG::ObjectiveTracker::GetNextObjective(v143, v15);
-        v135 = v15;
-        if ( !v15 )
+        FirstObjective = UFG::ObjectiveTracker::GetNextObjective(v139, FirstObjective);
+        v131 = FirstObjective;
+        if ( !FirstObjective )
           goto LABEL_128;
       }
-      *(_QWORD *)(v19 + 184) = v15;
-      v20 = v15->mpGameSlice;
-      if ( v20 && v20->mType == 10 && v14 )
+      *(_QWORD *)(v19 + 184) = FirstObjective;
+      mpGameSlice = FirstObjective->mpGameSlice;
+      if ( mpGameSlice && mpGameSlice->mType == 10 && PropertySet )
       {
-        UFG::qString::qString(&v157, v20->mName.mText);
-        UFG::qString::qString(&v149, "CaseDoc_");
-        v21 = UFG::qString::Substring(&v157, &v158, 0, v157.mLength - 1);
-        UFG::qString::operator+=(&v149, v21);
-        UFG::qString::~qString(&v158);
-        v22 = UFG::qPropertySet::Get<UFG::qPropertyList>(v14, (UFG::qSymbol *)&symbol_List.mUID, DEPTH_RECURSE);
-        v23 = UFG::qSymbol::create_from_string(&v163, v149.mData);
-        v24 = UFG::PSWrapper::FindElementPropertySet(v22, v23);
-        v25 = UFG::qPropertyList::GetValuePtr(v22, 0x1Au, v24);
-        if ( v25 )
+        UFG::qString::qString(&v153, mpGameSlice->mName.mText);
+        UFG::qString::qString(&v145, "CaseDoc_");
+        v21 = UFG::qString::Substring(&v153, &v154, 0, v153.mLength - 1);
+        UFG::qString::operator+=(&v145, v21);
+        UFG::qString::~qString(&v154);
+        v22 = UFG::qPropertySet::Get<UFG::qPropertyList>(
+                PropertySet,
+                (UFG::qArray<unsigned long,0> *)&symbol_List,
+                DEPTH_RECURSE);
+        v23 = UFG::qSymbol::create_from_string(&v159, v145.mData);
+        ElementPropertySet = UFG::PSWrapper::FindElementPropertySet((hkMemoryResourceContainer *)v22, v23);
+        ValuePtr = UFG::qPropertyList::GetValuePtr(v22, 0x1Au, ElementPropertySet);
+        if ( ValuePtr )
         {
-          if ( *(_QWORD *)v25 )
+          if ( *(_QWORD *)ValuePtr )
           {
-            v26 = (UFG::qPropertySet *)&v25[*(_QWORD *)v25];
+            v26 = (UFG::qPropertySet *)&ValuePtr[*(_QWORD *)ValuePtr];
             if ( v26 )
-              goto LABEL_202;
+              goto LABEL_39;
           }
         }
-        v28 = UFG::GameSlice::GetParent(v20);
-        if ( !v28 )
-          goto LABEL_203;
-        UFG::qString::Set(&v149, "CaseDoc_");
-        UFG::qString::qString(&v160, v28->mName.mText);
-        v30 = UFG::qString::Substring(v29, &v159, 0, *((signed __int16 *)v28->mName.mText - 4) - 1);
-        UFG::qString::operator+=(&v149, v30);
-        UFG::qString::~qString(&v159);
-        UFG::qString::~qString(&v160);
-        v31 = UFG::qPropertySet::Get<UFG::qPropertyList>(v14, (UFG::qSymbol *)&symbol_List.mUID, DEPTH_RECURSE);
-        v32 = UFG::qSymbol::create_from_string(&v144, v149.mData);
-        v33 = UFG::PSWrapper::FindElementPropertySet(v31, v32);
+        Parent = UFG::GameSlice::GetParent(mpGameSlice);
+        if ( !Parent )
+          goto LABEL_44;
+        UFG::qString::Set(&v145, "CaseDoc_");
+        UFG::qString::qString(&v156, Parent->mName.mText);
+        v30 = UFG::qString::Substring(v29, &v155, 0, *((__int16 *)Parent->mName.mText - 4) - 1);
+        UFG::qString::operator+=(&v145, v30);
+        UFG::qString::~qString(&v155);
+        UFG::qString::~qString(&v156);
+        v31 = UFG::qPropertySet::Get<UFG::qPropertyList>(
+                PropertySet,
+                (UFG::qArray<unsigned long,0> *)&symbol_List,
+                DEPTH_RECURSE);
+        v32 = UFG::qSymbol::create_from_string(&v140, v145.mData);
+        v33 = UFG::PSWrapper::FindElementPropertySet((hkMemoryResourceContainer *)v31, v32);
         v34 = UFG::qPropertyList::GetValuePtr(v31, 0x1Au, v33);
         if ( !v34 )
-          goto LABEL_203;
+          goto LABEL_44;
         if ( *(_QWORD *)v34 && (v26 = (UFG::qPropertySet *)&v34[*(_QWORD *)v34]) != 0i64 )
-LABEL_202:
-          v27 = UFG::qPropertySet::Get<char const *>(v26, (UFG::qSymbol *)&symbol_CaseName.mUID, DEPTH_RECURSE);
+LABEL_39:
+          v27 = UFG::qPropertySet::Get<char const *>(
+                  v26,
+                  (UFG::qArray<unsigned long,0> *)&symbol_CaseName,
+                  DEPTH_RECURSE);
         else
-LABEL_203:
-          v27 = &customWorldMapCaption;
+LABEL_44:
+          v27 = &customCaption;
         UFG::qString::Set((UFG::qString *)v19, v27);
-        UFG::qString::~qString(&v149);
-        UFG::qString::~qString(&v157);
+        UFG::qString::~qString(&v145);
+        UFG::qString::~qString(&v153);
       }
-      UFG::qString::Set((UFG::qString *)(v19 + 56), v20->mName.mText);
-      *(_DWORD *)(v19 + 96) = v20->mType;
-      v35 = (UFG::qSharedStringData *)(v15->mGPSMarker.mText - 48);
+      UFG::qString::Set((UFG::qString *)(v19 + 56), mpGameSlice->mName.mText);
+      *(_DWORD *)(v19 + 96) = mpGameSlice->mType;
+      v35 = (UFG::qSharedStringData *)(FirstObjective->mGPSMarker.mText - 48);
       if ( v35 != UFG::qSharedStringData::GetEmptyString() )
       {
-        v36 = UFG::qSymbol::create_from_string(&v146, v15->mGPSMarker.mText);
-        v37 = v36;
-        v38 = UFG::TSActor::find_instance(v36);
-        if ( v38 )
+        v36 = (ASymbol *)UFG::qSymbol::create_from_string(&v142, FirstObjective->mGPSMarker.mText);
+        instance = UFG::TSActor::find_instance(v36);
+        if ( instance )
         {
-          v39 = v38->mpSimObj.m_pPointer;
+          m_pPointer = instance->mpSimObj.m_pPointer;
           goto LABEL_51;
         }
-        v40 = UFG::MarkerBase::GetNamed(v37);
-        if ( v40 )
+        Named = UFG::MarkerBase::GetNamed((UFG::qSymbol *)v36);
+        if ( Named )
         {
-          v39 = (UFG::SimObject *)v40->mNULL.mChild[0];
+          m_pPointer = (UFG::SimObject *)Named->mNULL.mChild[0];
 LABEL_51:
-          if ( v39 )
+          if ( m_pPointer )
           {
-            v41 = UFG::GetSimulationMemoryPool();
-            v42 = UFG::qMemoryPool::Allocate(v41, 0x118ui64, "HudComponent", 0i64, 1u);
-            if ( v42 )
+            SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+            v41 = UFG::qMemoryPool::Allocate(SimulationMemoryPool, 0x118ui64, "HudComponent", 0i64, 1u);
+            if ( v41 )
             {
               UFG::HudComponent::HudComponent(
-                (UFG::HudComponent *)v42,
+                (UFG::HudComponent *)v41,
                 HASH_HUD_COMPONENT,
                 "invisible_icon",
                 0,
                 0.0,
-                &customWorldMapCaption);
-              v44 = v43;
+                &customCaption);
+              v43 = v42;
             }
             else
             {
-              v44 = 0i64;
+              v43 = 0i64;
             }
-            v45 = v39->m_Flags;
-            UFG::SimObjectModifier::SimObjectModifier(&v147, v39, 1);
-            UFG::SimObjectModifier::AttachComponent(&v147, v44, 0xFFFFFFFFi64);
-            UFG::SimObjectModifier::Close(&v147);
-            UFG::SimObjectModifier::~SimObjectModifier(&v147);
-            v46 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)(v19 + 104);
+            UFG::SimObjectModifier::SimObjectModifier(&v143, m_pPointer, 1);
+            UFG::SimObjectModifier::AttachComponent(&v143, v43, 0xFFFFFFFFi64);
+            UFG::SimObjectModifier::Close(&v143);
+            UFG::SimObjectModifier::~SimObjectModifier(&v143);
+            v44 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)(v19 + 104);
             if ( *(_QWORD *)(v19 + 120) )
             {
-              v47 = v46->mPrev;
-              v48 = *(UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> **)(v19 + 112);
-              v47->mNext = v48;
-              v48->mPrev = v47;
-              v46->mPrev = v46;
+              mPrev = v44->mPrev;
+              v46 = *(UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> **)(v19 + 112);
+              mPrev->mNext = v46;
+              v46->mPrev = mPrev;
+              v44->mPrev = v44;
               *(_QWORD *)(v19 + 112) = v19 + 104;
             }
-            *(_QWORD *)(v19 + 120) = v44;
-            if ( v44 )
+            *(_QWORD *)(v19 + 120) = v43;
+            if ( v43 )
             {
-              v49 = v44->m_SafePointerList.mNode.mPrev;
-              v49->mNext = v46;
-              v46->mPrev = v49;
-              *(_QWORD *)(v19 + 112) = (char *)v44 + 8;
-              v44->m_SafePointerList.mNode.mPrev = v46;
+              v47 = v43->m_SafePointerList.mNode.mPrev;
+              v47->mNext = v44;
+              v44->mPrev = v47;
+              *(_QWORD *)(v19 + 112) = &v43->m_SafePointerList;
+              v43->m_SafePointerList.mNode.mPrev = v44;
             }
           }
-          goto LABEL_59;
         }
       }
-LABEL_59:
-      v50 = *(void **)(v19 + 48);
-      if ( v50 )
-        operator delete[](v50);
+      v48 = *(void **)(v19 + 48);
+      if ( v48 )
+        operator delete[](v48);
       *(_QWORD *)(v19 + 48) = 0i64;
       *(_QWORD *)(v19 + 40) = 0i64;
-      v51 = (UFG::ObjectiveIndicator *)UFG::Objective::GetFirstIndicator(v15);
-      v141 = v51;
-      if ( v51 )
+      FirstIndicator = (UFG::ObjectiveIndicator *)UFG::Objective::GetFirstIndicator(FirstObjective);
+      v137 = FirstIndicator;
+      if ( FirstIndicator )
       {
-        v156 = &v138;
-        v151 = &v138;
+        v152 = &v134;
+        v147 = &v134;
         do
         {
-          UFG::qString::qString(&v137);
-          v138 = (__int64 *)&v138;
-          v139 = &v138;
-          v140 = 0i64;
-          uid = v51->mIdentifier.mUID;
-          UFG::qString::Set(&v137, v51->mBlipType.mText);
-          if ( !uid || (v52 = UFG::qBaseTreeRB::Get(&v150, uid)) == 0i64 )
+          UFG::qString::qString(&v133);
+          v134 = (__int64 *)&v134;
+          v135 = &v134;
+          v136 = 0i64;
+          uid = FirstIndicator->mIdentifier.mUID;
+          UFG::qString::Set(&v133, FirstIndicator->mBlipType.mText);
+          if ( !uid || (v50 = UFG::qBaseTreeRB::Get(&v146, uid)) == 0i64 )
           {
-            v53 = UFG::qMalloc(0x68ui64, "qMap::qMapNode32", 0i64);
-            v52 = (UFG::qBaseTreeRB *)v53;
-            if ( v53 )
+            v51 = UFG::qMalloc(0x68ui64, "qMap::qMapNode32", 0i64);
+            v50 = (UFG::qBaseTreeRB *)v51;
+            if ( v51 )
             {
-              v53->mNext = 0i64;
-              v53[1].mNext = 0i64;
-              v53[2].mNext = 0i64;
-              LODWORD(v53[3].mNext) = uid;
-              v54 = (signed __int64)&v53[4];
-              v155 = v54;
-              *(_DWORD *)v54 = -1;
-              UFG::qString::qString((UFG::qString *)&v53[5]);
-              v55 = (_QWORD *)(v54 + 48);
-              v153 = v55;
-              *v55 = v55;
-              v55[1] = v55;
-              *(_QWORD *)(v54 + 64) = 0i64;
-              *(_DWORD *)v54 = uid;
-              UFG::qString::Set((UFG::qString *)(v54 + 8), v137.mData, v137.mLength, 0i64, 0);
-              v56 = (__int64 *)(v54 + 48);
-              v57 = v140;
-              if ( v56[2] )
+              v51->mNext = 0i64;
+              v51[1].mNext = 0i64;
+              v51[2].mNext = 0i64;
+              LODWORD(v51[3].mNext) = uid;
+              v52 = v51 + 4;
+              v151 = v51 + 4;
+              LODWORD(v51[4].mNext) = -1;
+              UFG::qString::qString((UFG::qString *)&v51[5]);
+              v149 = v52 + 6;
+              v52[6].mNext = v52 + 6;
+              v52[7].mNext = v52 + 6;
+              v52[8].mNext = 0i64;
+              LODWORD(v52->mNext) = uid;
+              UFG::qString::Set((UFG::qString *)&v52[1], v133.mData, v133.mLength, 0i64, 0);
+              v53 = v52 + 6;
+              v54 = v136;
+              if ( v53[2].mNext )
               {
-                v58 = *v56;
-                v59 = (_QWORD *)v56[1];
-                *(_QWORD *)(v58 + 8) = v59;
-                *v59 = v58;
-                *v56 = (__int64)v56;
-                v56[1] = (__int64)v56;
+                mNext = v53->mNext;
+                v56 = v53[1].mNext;
+                mNext[1].mNext = v56;
+                v56->mNext = mNext;
+                v53->mNext = v53;
+                v53[1].mNext = v53;
               }
-              v56[2] = v57;
-              if ( v57 )
+              v53[2].mNext = (UFG::allocator::free_link *)v54;
+              if ( v54 )
               {
-                v60 = *(_QWORD *)(v57 + 8);
-                *(_QWORD *)(v60 + 8) = v56;
-                *v56 = v60;
-                v56[1] = v57 + 8;
-                *(_QWORD *)(v57 + 8) = v56;
+                v57 = *(UFG::allocator::free_link **)(v54 + 8);
+                v57[1].mNext = v53;
+                v53->mNext = v57;
+                v53[1].mNext = (UFG::allocator::free_link *)(v54 + 8);
+                *(_QWORD *)(v54 + 8) = v53;
               }
             }
             else
             {
-              v52 = 0i64;
+              v50 = 0i64;
             }
-            UFG::qBaseTreeRB::Add(&v150, &v52->mRoot);
+            UFG::qBaseTreeRB::Add(&v146, &v50->mRoot);
           }
-          LODWORD(v52->mNULL.mParent) = uid;
-          UFG::qString::Set((UFG::qString *)v52->mNULL.mChild, v137.mData, v137.mLength, 0i64, 0);
-          v61 = v52[1].mRoot.mChild;
-          v62 = v140;
-          if ( *(_QWORD *)&v52[1].mRoot.mUID )
+          LODWORD(v50->mNULL.mParent) = uid;
+          UFG::qString::Set((UFG::qString *)v50->mNULL.mChild, v133.mData, v133.mLength, 0i64, 0);
+          mChild = v50[1].mRoot.mChild;
+          v59 = v136;
+          if ( *(_QWORD *)&v50[1].mRoot.mUID )
           {
-            v63 = *v61;
-            v64 = v52[1].mRoot.mChild[1];
-            v63->mChild[0] = v64;
-            v64->mParent = v63;
-            *v61 = (UFG::qBaseNodeRB *)v61;
-            v52[1].mRoot.mChild[1] = (UFG::qBaseNodeRB *)((char *)&v52[1].mRoot + 8);
+            v60 = *mChild;
+            v61 = v50[1].mRoot.mChild[1];
+            v60->mChild[0] = v61;
+            v61->mParent = v60;
+            *mChild = (UFG::qBaseNodeRB *)mChild;
+            v50[1].mRoot.mChild[1] = (UFG::qBaseNodeRB *)v50[1].mRoot.mChild;
           }
-          *(_QWORD *)&v52[1].mRoot.mUID = v62;
-          if ( v62 )
+          *(_QWORD *)&v50[1].mRoot.mUID = v59;
+          if ( v59 )
           {
-            v65 = *(UFG::qBaseNodeRB **)(v62 + 8);
-            v65->mChild[0] = (UFG::qBaseNodeRB *)v61;
-            *v61 = v65;
-            v52[1].mRoot.mChild[1] = (UFG::qBaseNodeRB *)(v62 + 8);
-            *(_QWORD *)(v62 + 8) = v61;
+            v62 = *(UFG::qBaseNodeRB **)(v59 + 8);
+            v62->mChild[0] = (UFG::qBaseNodeRB *)mChild;
+            *mChild = v62;
+            v50[1].mRoot.mChild[1] = (UFG::qBaseNodeRB *)(v59 + 8);
+            *(_QWORD *)(v59 + 8) = mChild;
           }
-          v66 = *(unsigned int *)(v19 + 40);
-          v67 = v66 + 1;
-          v68 = *(_DWORD *)(v19 + 44);
-          if ( (signed int)v66 + 1 > v68 )
+          v63 = *(unsigned int *)(v19 + 40);
+          v64 = v63 + 1;
+          v65 = *(_DWORD *)(v19 + 44);
+          if ( (int)v63 + 1 > v65 )
           {
-            if ( v68 )
-              v69 = 2 * v68;
+            if ( v65 )
+              v66 = 2 * v65;
             else
-              v69 = 1;
-            for ( ; v69 < v67; v69 *= 2 )
+              v66 = 1;
+            for ( ; v66 < v64; v66 *= 2 )
               ;
-            if ( v69 <= 4 )
-              v69 = 4;
-            if ( v69 - v67 > 0x10000 )
-              v69 = v66 + 65537;
-            if ( v69 != (_DWORD)v66 )
+            if ( v66 <= 4 )
+              v66 = 4;
+            if ( v66 - v64 > 0x10000 )
+              v66 = v63 + 65537;
+            if ( v66 != (_DWORD)v63 )
             {
-              v70 = 4i64 * v69;
-              if ( !is_mul_ok(v69, 4ui64) )
-                v70 = -1i64;
-              v71 = UFG::qMalloc(v70, "qArray.Add", 0i64);
-              v72 = v71;
+              v67 = 4i64 * v66;
+              if ( !is_mul_ok(v66, 4ui64) )
+                v67 = -1i64;
+              v68 = UFG::qMalloc(v67, "qArray.Add", 0i64);
+              v69 = v68;
               if ( *(_QWORD *)(v19 + 48) )
               {
-                for ( i = 0; i < *(_DWORD *)(v19 + 40); ++i )
-                  *((_DWORD *)&v71->mNext + i) = *(_DWORD *)(*(_QWORD *)(v19 + 48) + 4i64 * i);
+                for ( j = 0; j < *(_DWORD *)(v19 + 40); ++j )
+                  *((_DWORD *)&v68->mNext + j) = *(_DWORD *)(*(_QWORD *)(v19 + 48) + 4i64 * j);
                 operator delete[](*(void **)(v19 + 48));
               }
-              *(_QWORD *)(v19 + 48) = v72;
-              *(_DWORD *)(v19 + 44) = v69;
-              v51 = v141;
+              *(_QWORD *)(v19 + 48) = v69;
+              *(_DWORD *)(v19 + 44) = v66;
+              FirstIndicator = v137;
             }
           }
-          *(_DWORD *)(v19 + 40) = v67;
-          *(_DWORD *)(*(_QWORD *)(v19 + 48) + 4 * v66) = uid;
-          if ( v140 )
+          *(_DWORD *)(v19 + 40) = v64;
+          *(_DWORD *)(*(_QWORD *)(v19 + 48) + 4 * v63) = uid;
+          if ( v136 )
           {
-            v74 = v138;
-            v75 = v139;
-            v138[1] = (__int64)v139;
-            *v75 = v74;
-            v138 = (__int64 *)&v138;
-            v139 = &v138;
+            v71 = v134;
+            v72 = v135;
+            v134[1] = (__int64)v135;
+            *v72 = v71;
+            v134 = (__int64 *)&v134;
+            v135 = &v134;
           }
-          v140 = 0i64;
-          v76 = v138;
-          v77 = v139;
-          v138[1] = (__int64)v139;
-          *v77 = v76;
-          v138 = (__int64 *)&v138;
-          v139 = &v138;
-          UFG::qString::~qString(&v137);
-          v51 = (UFG::ObjectiveIndicator *)UFG::Objective::GetNextIndicator(v135, v51);
-          v141 = v51;
+          v136 = 0i64;
+          v73 = v134;
+          v74 = v135;
+          v134[1] = (__int64)v135;
+          *v74 = v73;
+          v134 = (__int64 *)&v134;
+          v135 = &v134;
+          UFG::qString::~qString(&v133);
+          FirstIndicator = (UFG::ObjectiveIndicator *)UFG::Objective::GetNextIndicator(v131, FirstIndicator);
+          v137 = FirstIndicator;
         }
-        while ( v51 );
-        v1 = v161;
+        while ( FirstIndicator );
+        v1 = this;
       }
-      v78 = v1->m_objectives.size;
-      v79 = v78 + 1;
-      v80 = v1->m_objectives.capacity;
-      if ( (signed int)v78 + 1 > v80 )
+      v75 = v1->m_objectives.size;
+      v76 = v75 + 1;
+      capacity = v1->m_objectives.capacity;
+      if ( (int)v75 + 1 > capacity )
       {
-        if ( v80 )
-          v81 = 2 * v80;
+        if ( capacity )
+          v78 = 2 * capacity;
         else
-          v81 = 1;
-        for ( ; v81 < v79; v81 *= 2 )
+          v78 = 1;
+        for ( ; v78 < v76; v78 *= 2 )
           ;
-        if ( v81 <= 2 )
-          v81 = 2;
-        if ( v81 - v79 > 0x10000 )
-          v81 = v78 + 65537;
-        if ( v81 != (_DWORD)v78 )
+        if ( v78 <= 2 )
+          v78 = 2;
+        if ( v78 - v76 > 0x10000 )
+          v78 = v75 + 65537;
+        if ( v78 != (_DWORD)v75 )
         {
-          v82 = 8i64 * v81;
-          if ( !is_mul_ok(v81, 8ui64) )
-            v82 = -1i64;
-          v83 = UFG::qMalloc(v82, "qArray.Add", 0i64);
-          v84 = (UFG::UIHKPlayerObjective **)v83;
+          v79 = 8i64 * v78;
+          if ( !is_mul_ok(v78, 8ui64) )
+            v79 = -1i64;
+          v80 = UFG::qMalloc(v79, "qArray.Add", 0i64);
+          v81 = (UFG::UIHKPlayerObjective **)v80;
           if ( v1->m_objectives.p )
           {
-            for ( j = 0; j < v1->m_objectives.size; ++j )
-              v83[j] = (UFG::allocator::free_link)v1->m_objectives.p[j];
+            for ( k = 0; k < v1->m_objectives.size; ++k )
+              v80[k] = (UFG::allocator::free_link)v1->m_objectives.p[k];
             operator delete[](v1->m_objectives.p);
           }
-          v1->m_objectives.p = v84;
-          v1->m_objectives.capacity = v81;
+          v1->m_objectives.p = v81;
+          v1->m_objectives.capacity = v78;
         }
       }
-      v1->m_objectives.size = v79;
-      v1->m_objectives.p[v78] = (UFG::UIHKPlayerObjective *)v19;
-      v86 = v1->m_objectives.size;
-      if ( v86 > 1 )
+      v1->m_objectives.size = v76;
+      v1->m_objectives.p[v75] = (UFG::UIHKPlayerObjective *)v19;
+      v83 = v1->m_objectives.size;
+      if ( v83 > 1 )
       {
-        v87 = v86 - 1;
-        v88 = (signed int)v87;
-        if ( (signed int)v87 > 0 )
+        v84 = v83 - 1;
+        v85 = (int)v84;
+        if ( (int)v84 > 0 )
         {
           do
           {
-            v89 = v1->m_objectives.p;
-            v90 = v89[(unsigned int)(v87 - 1)];
-            v91 = v90->mObjective;
-            if ( v91 )
-              v92 = v91->mDisplayPriority;
+            v86 = v1->m_objectives.p;
+            v87 = v86[(unsigned int)(v84 - 1)];
+            v88 = v87->mObjective;
+            if ( v88 )
+              mDisplayPriority = v88->mDisplayPriority;
             else
-              v92 = 0;
-            if ( (unsigned int)UFG::UIHKPlayerObjective::GetDisplayPriority((UFG::UIHKPlayerObjective *)v19) <= v92 )
+              mDisplayPriority = 0;
+            if ( (unsigned int)UFG::UIHKPlayerObjective::GetDisplayPriority((UFG::UIHKPlayerObjective *)v19) <= mDisplayPriority )
               break;
-            v89[v88] = v90;
-            v87 = (unsigned int)(v87 - 1);
-            --v88;
-            v1 = v161;
+            v86[v85] = v87;
+            v84 = (unsigned int)(v84 - 1);
+            --v85;
+            v1 = this;
           }
-          while ( v88 > 0 );
-          v1 = v161;
+          while ( v85 > 0 );
+          v1 = this;
         }
-        v1->m_objectives.p[v87] = (UFG::UIHKPlayerObjective *)v19;
+        v1->m_objectives.p[v84] = (UFG::UIHKPlayerObjective *)v19;
       }
-      v14 = v142;
-      v15 = v135;
+      PropertySet = v138;
+      FirstObjective = v131;
       goto LABEL_127;
     }
 LABEL_128:
     v1->m_currentObjective = 0;
-    if ( !v1->mTempObjectiveSelected && v152.mLength > 0 )
+    if ( !v1->mTempObjectiveSelected && v148.mLength > 0 )
     {
-      v93 = v152.mData;
-      v94 = 0;
-      if ( v1->m_objectives.size <= 0 )
-      {
-LABEL_139:
-        v98 = UFG::UIHKObjectiveFlasherWidget::mState;
-        if ( UFG::UIHKObjectiveFlasherWidget::mState & 0xFFFFFFFB )
-          v98 = 3;
-        UFG::UIHKObjectiveFlasherWidget::mState = v98;
-      }
-      else
+      v90 = v148.mData;
+      v91 = 0;
+      if ( v1->m_objectives.size )
       {
         while ( 1 )
         {
-          v95 = v1->m_objectives.p[v94];
-          if ( v95 )
+          v92 = v1->m_objectives.p[v91];
+          if ( v92 )
           {
-            v96 = v95->mObjective;
-            v97 = v96 ? v96->mIdentifier.mData : &customWorldMapCaption;
-            if ( !(unsigned int)UFG::qStringCompare(v97, v93, -1) )
+            v93 = v92->mObjective;
+            v94 = v93 ? v93->mIdentifier.mData : &customCaption;
+            if ( !(unsigned int)UFG::qStringCompare(v94, v90, -1) )
               break;
           }
-          if ( ++v94 >= v1->m_objectives.size )
+          if ( ++v91 >= v1->m_objectives.size )
             goto LABEL_139;
         }
-        v1->m_currentObjective = v94;
+        v1->m_currentObjective = v91;
+      }
+      else
+      {
+LABEL_139:
+        v95 = UFG::UIHKObjectiveFlasherWidget::mState;
+        if ( (UFG::UIHKObjectiveFlasherWidget::mState & 0xFFFFFFFB) != 0 )
+          v95 = STATE_TEXT_INBOX;
+        UFG::UIHKObjectiveFlasherWidget::mState = v95;
       }
     }
-    v99 = &v1->m_knownBlips.mTree.mTree;
-    v100 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v1->m_knownBlips);
-    if ( v100 )
+    v96 = &v1->m_knownBlips.mTree.mTree;
+    Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v1->m_knownBlips);
+    if ( Head )
     {
       do
       {
-        v101 = (unsigned int)v100->mCachedBufferPtr;
-        if ( v101 && UFG::qBaseTreeRB::Get(&v150, v101) )
+        mCachedBufferPtr = (unsigned int)Head->mCachedBufferPtr;
+        if ( mCachedBufferPtr && UFG::qBaseTreeRB::Get(&v146, mCachedBufferPtr) )
         {
-          v102 = UFG::qBaseTreeRB::GetNext(&v1->m_knownBlips.mTree.mTree, (UFG::qBaseNodeRB *)v100);
+          Next = UFG::qBaseTreeRB::GetNext(&v1->m_knownBlips.mTree.mTree, (UFG::qBaseNodeRB *)Head);
         }
         else
         {
-          v103 = (UFG::SimComponent *)v100[2].mNode.mChild[1];
-          if ( v103 )
+          v100 = (UFG::SimComponent *)Head[2].mNode.mChild[1];
+          if ( v100 )
           {
-            if ( v103->m_pSimObject )
-              UFG::Simulation::DestroySimComponent(&UFG::gSim, v103);
-            v104 = v100 + 2;
-            if ( v100[2].mNode.mChild[1] )
+            if ( v100->m_pSimObject )
+              UFG::Simulation::DestroySimComponent(&UFG::gSim, v100);
+            v101 = Head + 2;
+            if ( Head[2].mNode.mChild[1] )
             {
-              v105 = v104->mNode.mParent;
-              v106 = v100[2].mNode.mChild[0];
-              v105->mChild[0] = v106;
-              v106->mParent = v105;
-              v104->mNode.mParent = &v104->mNode;
-              v100[2].mNode.mChild[0] = &v100[2].mNode;
+              mParent = v101->mNode.mParent;
+              v103 = Head[2].mNode.mChild[0];
+              mParent->mChild[0] = v103;
+              v103->mParent = mParent;
+              v101->mNode.mParent = &v101->mNode;
+              Head[2].mNode.mChild[0] = &Head[2].mNode;
             }
-            v100[2].mNode.mChild[1] = 0i64;
+            Head[2].mNode.mChild[1] = 0i64;
           }
-          v107 = UFG::ProgressionTracker::Instance();
-          if ( v107 != (UFG::ProgressionTracker *)-408i64 )
+          v104 = UFG::ProgressionTracker::Instance();
+          if ( v104 != (UFG::ProgressionTracker *)-408i64 )
             UFG::ObjectiveTracker::EnableObjectiveIndicatorCorona(
-              &v107->mObjectiveTracker,
-              (UFG::qSymbol *)&v100->mCachedBufferPtr,
+              &v104->mObjectiveTracker,
+              (UFG::qSymbol *)&Head->mCachedBufferPtr,
               0);
-          v108 = (unsigned int)v100->mCachedBufferPtr;
-          if ( v108 )
+          v105 = (unsigned int)Head->mCachedBufferPtr;
+          if ( v105 )
           {
-            v109 = UFG::qBaseTreeRB::Get(&v1->m_knownBlips.mTree.mTree, v108);
-            v110 = v109;
-            if ( v109 )
+            v106 = UFG::qBaseTreeRB::Get(&v1->m_knownBlips.mTree.mTree, v105);
+            v107 = v106;
+            if ( v106 )
             {
               UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
                 (UFG::qBaseTreeVariableRB<unsigned __int64> *)&v1->m_knownBlips,
-                (UFG::qBaseNodeVariableRB<unsigned __int64> *)v109);
-              v111 = v110[1].mRoot.mChild;
-              *(_QWORD *)&result.mUID = (char *)v110 + 80;
-              if ( *(_QWORD *)&v110[1].mRoot.mUID )
+                (UFG::qBaseNodeVariableRB<unsigned __int64> *)v106);
+              v108 = v107[1].mRoot.mChild;
+              result = v107[1].mRoot.mChild;
+              if ( *(_QWORD *)&v107[1].mRoot.mUID )
               {
-                v112 = *v111;
-                v113 = v110[1].mRoot.mChild[1];
-                v112->mChild[0] = v113;
-                v113->mParent = v112;
-                *v111 = (UFG::qBaseNodeRB *)v111;
-                v110[1].mRoot.mChild[1] = (UFG::qBaseNodeRB *)((char *)&v110[1].mRoot + 8);
+                v109 = *v108;
+                v110 = v107[1].mRoot.mChild[1];
+                v109->mChild[0] = v110;
+                v110->mParent = v109;
+                *v108 = (UFG::qBaseNodeRB *)v108;
+                v107[1].mRoot.mChild[1] = (UFG::qBaseNodeRB *)v107[1].mRoot.mChild;
               }
-              *(_QWORD *)&v110[1].mRoot.mUID = 0i64;
-              v114 = *v111;
-              v115 = v110[1].mRoot.mChild[1];
-              v114->mChild[0] = v115;
-              v115->mParent = v114;
-              *v111 = (UFG::qBaseNodeRB *)v111;
-              v110[1].mRoot.mChild[1] = (UFG::qBaseNodeRB *)((char *)&v110[1].mRoot + 8);
-              UFG::qString::~qString((UFG::qString *)v110->mNULL.mChild);
-              operator delete[](v110);
+              *(_QWORD *)&v107[1].mRoot.mUID = 0i64;
+              v111 = *v108;
+              v112 = v107[1].mRoot.mChild[1];
+              v111->mChild[0] = v112;
+              v112->mParent = v111;
+              *v108 = (UFG::qBaseNodeRB *)v108;
+              v107[1].mRoot.mChild[1] = (UFG::qBaseNodeRB *)v107[1].mRoot.mChild;
+              UFG::qString::~qString((UFG::qString *)v107->mNULL.mChild);
+              operator delete[](v107);
             }
           }
-          v102 = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v1->m_knownBlips);
+          Next = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v1->m_knownBlips);
         }
-        v100 = (Render::SkinningCacheNode *)v102;
+        Head = (Render::SkinningCacheNode *)Next;
       }
-      while ( v102 );
+      while ( Next );
     }
-    v116 = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v150);
-    if ( v116 )
+    v113 = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v146);
+    if ( v113 )
     {
-      v117 = v145;
+      v114 = p_mTree;
       while ( 1 )
       {
-        v118 = (unsigned int)v116->mNULL.mParent;
-        if ( v118 && UFG::qBaseTreeRB::Get(v99, v118) )
+        v115 = (unsigned int)v113->mNULL.mParent;
+        if ( v115 && UFG::qBaseTreeRB::Get(v96, v115) )
           goto LABEL_184;
-        v119 = UFG::TSActor::find_instance((UFG::qSymbol *)&v116->mNULL);
-        if ( v119 )
+        v116 = UFG::TSActor::find_instance((ASymbol *)&v113->mNULL);
+        if ( v116 )
         {
-          v120 = v119->mpSimObj.m_pPointer;
+          v117 = v116->mpSimObj.m_pPointer;
         }
         else
         {
-          v121 = UFG::MarkerBase::GetNamed((UFG::qSymbol *)&v116->mNULL);
-          if ( !v121 )
+          v118 = UFG::MarkerBase::GetNamed((UFG::qSymbol *)&v113->mNULL);
+          if ( !v118 )
             goto LABEL_180;
-          v120 = (UFG::SimObject *)v121->mNULL.mChild[0];
+          v117 = (UFG::SimObject *)v118->mNULL.mChild[0];
         }
-        if ( v120 )
+        if ( v117 )
         {
-          v122 = UFG::GetSimulationMemoryPool();
-          v123 = UFG::qMemoryPool::Allocate(v122, 0x118ui64, "HudComponent", 0i64, 1u);
-          if ( v123 )
+          v119 = UFG::GetSimulationMemoryPool();
+          v120 = UFG::qMemoryPool::Allocate(v119, 0x118ui64, "HudComponent", 0i64, 1u);
+          if ( v120 )
           {
             UFG::HudComponent::HudComponent(
-              (UFG::HudComponent *)v123,
+              (UFG::HudComponent *)v120,
               HASH_HUD_COMPONENT,
-              *(const char **)&v116->mCount,
+              *(const char **)&v113->mCount,
               0,
               0.0,
-              &customWorldMapCaption);
-            v125 = v124;
+              &customCaption);
+            v122 = v121;
           }
           else
           {
-            v125 = 0i64;
+            v122 = 0i64;
           }
-          v126 = v120->m_Flags;
-          UFG::SimObjectModifier::SimObjectModifier(&v147, v120, 1);
-          UFG::SimObjectModifier::AttachComponent(&v147, v125, 0xFFFFFFFFi64);
-          UFG::SimObjectModifier::Close(&v147);
-          UFG::SimObjectModifier::~SimObjectModifier(&v147);
-          v127 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)v116[1].mRoot.mChild;
-          if ( *(_QWORD *)&v116[1].mRoot.mUID )
+          UFG::SimObjectModifier::SimObjectModifier(&v143, v117, 1);
+          UFG::SimObjectModifier::AttachComponent(&v143, v122, 0xFFFFFFFFi64);
+          UFG::SimObjectModifier::Close(&v143);
+          UFG::SimObjectModifier::~SimObjectModifier(&v143);
+          v123 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)v113[1].mRoot.mChild;
+          if ( *(_QWORD *)&v113[1].mRoot.mUID )
           {
-            v128 = (UFG::qBaseNodeRB *)v127->mPrev;
-            v129 = v116[1].mRoot.mChild[1];
-            v128->mChild[0] = v129;
-            v129->mParent = v128;
-            v127->mPrev = v127;
-            v116[1].mRoot.mChild[1] = (UFG::qBaseNodeRB *)((char *)&v116[1].mRoot + 8);
+            v124 = (UFG::qBaseNodeRB *)v123->mPrev;
+            v125 = v113[1].mRoot.mChild[1];
+            v124->mChild[0] = v125;
+            v125->mParent = v124;
+            v123->mPrev = v123;
+            v113[1].mRoot.mChild[1] = (UFG::qBaseNodeRB *)v113[1].mRoot.mChild;
           }
-          *(_QWORD *)&v116[1].mRoot.mUID = v125;
-          if ( v125 )
+          *(_QWORD *)&v113[1].mRoot.mUID = v122;
+          if ( v122 )
           {
-            v130 = v125->m_SafePointerList.mNode.mPrev;
-            v130->mNext = v127;
-            v127->mPrev = v130;
-            v116[1].mRoot.mChild[1] = (UFG::qBaseNodeRB *)&v125->m_SafePointerList;
-            v125->m_SafePointerList.mNode.mPrev = v127;
+            v126 = v122->m_SafePointerList.mNode.mPrev;
+            v126->mNext = v123;
+            v123->mPrev = v126;
+            v113[1].mRoot.mChild[1] = (UFG::qBaseNodeRB *)&v122->m_SafePointerList;
+            v122->m_SafePointerList.mNode.mPrev = v123;
           }
-          v131 = UFG::ProgressionTracker::Instance();
-          if ( v131 != (UFG::ProgressionTracker *)-408i64 )
+          v127 = UFG::ProgressionTracker::Instance();
+          if ( v127 != (UFG::ProgressionTracker *)-408i64 )
             UFG::ObjectiveTracker::EnableObjectiveIndicatorCorona(
-              &v131->mObjectiveTracker,
-              (UFG::qSymbol *)&v116->mNULL,
+              &v127->mObjectiveTracker,
+              (UFG::qSymbol *)&v113->mNULL,
               1);
-          v132 = (UFG::qMap<UFG::UIHKPlayerObjectiveMinimapBlip> *)v99;
+          v128 = (UFG::qMap<UFG::UIHKPlayerObjectiveMinimapBlip> *)v96;
           goto LABEL_183;
         }
 LABEL_180:
-        v133 = (unsigned int)v116->mNULL.mParent;
-        if ( v133 && UFG::qBaseTreeRB::Get(v117, v133) )
+        v129 = (unsigned int)v113->mNULL.mParent;
+        if ( v129 && UFG::qBaseTreeRB::Get(v114, v129) )
           goto LABEL_184;
-        v132 = (UFG::qMap<UFG::UIHKPlayerObjectiveMinimapBlip> *)v117;
+        v128 = (UFG::qMap<UFG::UIHKPlayerObjectiveMinimapBlip> *)v114;
 LABEL_183:
         UFG::qMap<UFG::UIHKPlayerObjectiveMinimapBlip>::Set(
-          v132,
-          (unsigned int)v116->mNULL.mParent,
-          (UFG::UIHKPlayerObjectiveMinimapBlip *)&v116->mNULL);
+          v128,
+          (unsigned int)v113->mNULL.mParent,
+          (UFG::UIHKPlayerObjectiveMinimapBlip *)&v113->mNULL);
 LABEL_184:
-        v116 = UFG::qBaseTreeRB::GetNext(&v150, &v116->mRoot);
-        if ( !v116 )
+        v113 = UFG::qBaseTreeRB::GetNext(&v146, &v113->mRoot);
+        if ( !v113 )
         {
-          v1 = v161;
+          v1 = this;
           break;
         }
       }
     }
-    if ( !v148 )
+    if ( !v144 )
     {
 LABEL_198:
-      UFG::qTreeRB<UFG::qMapNode32<UFG::UIHKPlayerObjectiveMinimapBlip>,UFG::qMapNode32<UFG::UIHKPlayerObjectiveMinimapBlip>,1>::DeleteAll((UFG::qTreeRB<UFG::qMapNode32<UFG::UIHKPlayerObjectiveMinimapBlip>,UFG::qMapNode32<UFG::UIHKPlayerObjectiveMinimapBlip>,1> *)&v150);
-      UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)&v150);
+      UFG::qTreeRB<UFG::qMapNode32<UFG::UIHKPlayerObjectiveMinimapBlip>,UFG::qMapNode32<UFG::UIHKPlayerObjectiveMinimapBlip>,1>::DeleteAll((UFG::qTreeRB<UFG::qMapNode32<UFG::UIHKPlayerObjectiveMinimapBlip>,UFG::qMapNode32<UFG::UIHKPlayerObjectiveMinimapBlip>,1> *)&v146);
+      UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)&v146);
 LABEL_199:
-      UFG::qString::~qString(&v152);
+      UFG::qString::~qString(&v148);
       return;
     }
     if ( v1->mTempObjectiveSelected )
     {
-      v6 = &v1->mTempObjective;
+      p_mWorldMapObjective = &v1->mTempObjective;
 LABEL_197:
-      UFG::UIHKObjectiveDistanceWidget::SetObjective(UFG::UIHKScreenHud::ObjectiveDistance, v6);
+      UFG::UIHKObjectiveDistanceWidget::SetObjective(UFG::UIHKScreenHud::ObjectiveDistance, p_mWorldMapObjective);
       goto LABEL_198;
     }
     if ( v1->mWorldMapObjective_IsSelected )
     {
       if ( v1->mWorldMapObjective_IsSet )
       {
-        v6 = &v1->mWorldMapObjective;
+        p_mWorldMapObjective = &v1->mWorldMapObjective;
         goto LABEL_197;
       }
       v1->mWorldMapObjective_IsSelected = 0;
     }
-    v134 = v1->m_objectives.size;
-    if ( v134 )
+    v130 = v1->m_objectives.size;
+    if ( v130 )
     {
-      if ( (unsigned __int8)v1->m_currentObjective >= v134 )
+      if ( (unsigned __int8)v1->m_currentObjective >= v130 )
         v1->m_currentObjective = 0;
-      v6 = v1->m_objectives.p[(unsigned __int8)v1->m_currentObjective];
+      p_mWorldMapObjective = v1->m_objectives.p[(unsigned __int8)v1->m_currentObjective];
     }
     goto LABEL_197;
   }
@@ -1021,32 +994,32 @@ LABEL_197:
 // RVA: 0x61CA60
 void __fastcall UFG::UIHKPlayerObjectiveManager::UpdatePendingBlips(UFG::UIHKPlayerObjectiveManager *this)
 {
-  UFG::UIHKPlayerObjectiveMinimapBlip *v1; // r15
+  UFG::UIHKPlayerObjectiveMinimapBlip *p; // r15
   __int64 v2; // rdi
-  unsigned int v3; // er14
-  UFG::qBaseTreeRB *v4; // r12
-  UFG::qBaseTreeRB *v5; // r13
-  UFG::TSActor *v6; // rax
-  UFG::SimObject *v7; // rbp
-  UFG::qBaseTreeRB *v8; // rax
-  UFG::qMemoryPool *v9; // rax
+  unsigned int capacity; // r14d
+  UFG::qMap<UFG::UIHKPlayerObjectiveMinimapBlip> *p_m_pendingBlips; // r12
+  UFG::qBaseTreeRB *Head; // r13
+  UFG::TSActor *instance; // rax
+  UFG::SimObject *m_pPointer; // rbp
+  UFG::qBaseTreeRB *Named; // rax
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
   UFG::allocator::free_link *v10; // rax
   UFG::SimComponent *v11; // rax
   UFG::SimComponent *v12; // rbx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v13; // rdx
-  UFG::qBaseNodeRB *v14; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mChild; // rdx
+  UFG::qBaseNodeRB *mPrev; // rcx
   UFG::qBaseNodeRB *v15; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v16; // rax
   UFG::ProgressionTracker *v17; // rax
   __int64 v18; // rbx
   unsigned int v19; // edx
-  signed __int64 v20; // rbx
-  unsigned int *v21; // rdx
-  __int64 v22; // r8
-  __int64 v23; // rcx
-  _QWORD *v24; // rax
-  __int64 v25; // rax
-  unsigned int *v26; // rsi
+  __int64 v20; // rbx
+  UFG::qSafePointer<UFG::SimComponent,UFG::HudComponent> *p_target; // rdx
+  UFG::SimComponent *v22; // r8
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v23; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v25; // rax
+  unsigned int *p_mUID; // rsi
   UFG::qBaseTreeRB *v27; // rax
   UFG::qBaseTreeRB *v28; // rbx
   UFG::qBaseNodeRB **v29; // rdx
@@ -1054,149 +1027,142 @@ void __fastcall UFG::UIHKPlayerObjectiveManager::UpdatePendingBlips(UFG::UIHKPla
   UFG::qBaseNodeRB *v31; // rax
   UFG::qBaseNodeRB *v32; // rcx
   UFG::qBaseNodeRB *v33; // rax
-  UFG::qArray<UFG::UIHKPlayerObjectiveMinimapBlip,0> v34; // [rsp+38h] [rbp-80h]
-  UFG::SimObjectModifier v35; // [rsp+48h] [rbp-70h]
-  UFG::UIHKPlayerObjectiveManager *v36; // [rsp+C0h] [rbp+8h]
+  UFG::qArray<UFG::UIHKPlayerObjectiveMinimapBlip,0> v34; // [rsp+38h] [rbp-80h] BYREF
+  UFG::SimObjectModifier v35; // [rsp+48h] [rbp-70h] BYREF
 
-  v36 = this;
-  v1 = 0i64;
+  p = 0i64;
   v34.p = 0i64;
   v2 = 0i64;
   *(_QWORD *)&v34.size = 0i64;
-  v3 = 0;
-  v4 = &this->m_pendingBlips.mTree.mTree;
-  v5 = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&this->m_pendingBlips);
-  if ( v5 )
+  capacity = 0;
+  p_m_pendingBlips = &this->m_pendingBlips;
+  Head = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&this->m_pendingBlips);
+  if ( Head )
   {
     while ( 1 )
     {
-      v6 = UFG::TSActor::find_instance((UFG::qSymbol *)&v5->mNULL);
-      if ( v6 )
+      instance = UFG::TSActor::find_instance((ASymbol *)&Head->mNULL);
+      if ( instance )
         break;
-      v8 = UFG::MarkerBase::GetNamed((UFG::qSymbol *)&v5->mNULL);
-      if ( v8 )
+      Named = UFG::MarkerBase::GetNamed((UFG::qSymbol *)&Head->mNULL);
+      if ( Named )
       {
-        v7 = (UFG::SimObject *)v8->mNULL.mChild[0];
+        m_pPointer = (UFG::SimObject *)Named->mNULL.mChild[0];
 LABEL_6:
-        if ( v7 )
+        if ( m_pPointer )
         {
-          v9 = UFG::GetSimulationMemoryPool();
-          v10 = UFG::qMemoryPool::Allocate(v9, 0x118ui64, "HudComponent", 0i64, 1u);
+          SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+          v10 = UFG::qMemoryPool::Allocate(SimulationMemoryPool, 0x118ui64, "HudComponent", 0i64, 1u);
           if ( v10 )
           {
             UFG::HudComponent::HudComponent(
               (UFG::HudComponent *)v10,
               HASH_HUD_COMPONENT,
-              *(const char **)&v5->mCount,
+              *(const char **)&Head->mCount,
               0,
               0.0,
-              &customWorldMapCaption);
+              &customCaption);
             v12 = v11;
           }
           else
           {
             v12 = 0i64;
           }
-          UFG::SimObjectModifier::SimObjectModifier(&v35, v7, 1);
+          UFG::SimObjectModifier::SimObjectModifier(&v35, m_pPointer, 1);
           UFG::SimObjectModifier::AttachComponent(&v35, v12, 0xFFFFFFFFi64);
           UFG::SimObjectModifier::Close(&v35);
           UFG::SimObjectModifier::~SimObjectModifier(&v35);
-          v13 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)v5[1].mRoot.mChild;
-          if ( *(_QWORD *)&v5[1].mRoot.mUID )
+          mChild = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)Head[1].mRoot.mChild;
+          if ( *(_QWORD *)&Head[1].mRoot.mUID )
           {
-            v14 = (UFG::qBaseNodeRB *)v13->mPrev;
-            v15 = v5[1].mRoot.mChild[1];
-            v14->mChild[0] = v15;
-            v15->mParent = v14;
-            v13->mPrev = v13;
-            v5[1].mRoot.mChild[1] = (UFG::qBaseNodeRB *)((char *)&v5[1].mRoot + 8);
+            mPrev = (UFG::qBaseNodeRB *)mChild->mPrev;
+            v15 = Head[1].mRoot.mChild[1];
+            mPrev->mChild[0] = v15;
+            v15->mParent = mPrev;
+            mChild->mPrev = mChild;
+            Head[1].mRoot.mChild[1] = (UFG::qBaseNodeRB *)Head[1].mRoot.mChild;
           }
-          *(_QWORD *)&v5[1].mRoot.mUID = v12;
+          *(_QWORD *)&Head[1].mRoot.mUID = v12;
           if ( v12 )
           {
             v16 = v12->m_SafePointerList.mNode.mPrev;
-            v16->mNext = v13;
-            v13->mPrev = v16;
-            v5[1].mRoot.mChild[1] = (UFG::qBaseNodeRB *)&v12->m_SafePointerList;
-            v12->m_SafePointerList.mNode.mPrev = v13;
+            v16->mNext = mChild;
+            mChild->mPrev = v16;
+            Head[1].mRoot.mChild[1] = (UFG::qBaseNodeRB *)&v12->m_SafePointerList;
+            v12->m_SafePointerList.mNode.mPrev = mChild;
           }
           v17 = UFG::ProgressionTracker::Instance();
           if ( v17 != (UFG::ProgressionTracker *)-408i64 )
             UFG::ObjectiveTracker::EnableObjectiveIndicatorCorona(
               &v17->mObjectiveTracker,
-              (UFG::qSymbol *)&v5->mNULL,
+              (UFG::qSymbol *)&Head->mNULL,
               1);
           UFG::qMap<UFG::UIHKPlayerObjectiveMinimapBlip>::Set(
-            &v36->m_knownBlips,
-            (unsigned int)v5->mNULL.mParent,
-            (UFG::UIHKPlayerObjectiveMinimapBlip *)&v5->mNULL);
+            &this->m_knownBlips,
+            (unsigned int)Head->mNULL.mParent,
+            (UFG::UIHKPlayerObjectiveMinimapBlip *)&Head->mNULL);
           v18 = (unsigned int)v2;
           v2 = (unsigned int)(v2 + 1);
-          if ( (unsigned int)v2 > v3 )
+          if ( (unsigned int)v2 > capacity )
           {
             v19 = 1;
-            if ( v3 )
-              v19 = 2 * v3;
+            if ( capacity )
+              v19 = 2 * capacity;
             for ( ; v19 < (unsigned int)v2; v19 *= 2 )
               ;
             if ( v19 - (unsigned int)v2 > 0x10000 )
               v19 = v2 + 0x10000;
             UFG::qArray<UFG::UIHKPlayerObjectiveMinimapBlip,0>::Reallocate(&v34, v19, "qArray.Add");
-            v1 = v34.p;
-            v3 = v34.capacity;
+            p = v34.p;
+            capacity = v34.capacity;
           }
           v34.size = v2;
-          v20 = 9 * v18;
-          v1[(unsigned __int64)v20 / 9].name.mUID = (unsigned int)v5->mNULL.mParent;
-          UFG::qString::Set(
-            (UFG::qString *)((char *)v1 + 8 * (v20 + 1)),
-            *(const char **)&v5->mCount,
-            *(&v5->mNULL.mUID + 1),
-            0i64,
-            0);
-          v21 = &v1->name.mUID + 2 * (v20 + 6);
-          v22 = *(_QWORD *)&v5[1].mRoot.mUID;
-          if ( *((_QWORD *)v21 + 2) )
+          v20 = v18;
+          p[v20].name.mUID = (unsigned int)Head->mNULL.mParent;
+          UFG::qString::Set(&p[v20].type, *(const char **)&Head->mCount, *(&Head->mNULL.mUID + 1), 0i64, 0);
+          p_target = &p[v20].target;
+          v22 = *(UFG::SimComponent **)&Head[1].mRoot.mUID;
+          if ( p_target->m_pPointer )
           {
-            v23 = *(_QWORD *)v21;
-            v24 = (_QWORD *)*((_QWORD *)v21 + 1);
-            *(_QWORD *)(v23 + 8) = v24;
-            *v24 = v23;
-            *(_QWORD *)v21 = v21;
-            *((_QWORD *)v21 + 1) = v21;
+            v23 = p_target->mPrev;
+            mNext = p_target->mNext;
+            v23->mNext = mNext;
+            mNext->mPrev = v23;
+            p_target->mPrev = p_target;
+            p_target->mNext = p_target;
           }
-          *((_QWORD *)v21 + 2) = v22;
+          p_target->m_pPointer = v22;
           if ( v22 )
           {
-            v25 = *(_QWORD *)(v22 + 8);
-            *(_QWORD *)(v25 + 8) = v21;
-            *(_QWORD *)v21 = v25;
-            *((_QWORD *)v21 + 1) = v22 + 8;
-            *(_QWORD *)(v22 + 8) = v21;
+            v25 = v22->m_SafePointerList.mNode.mPrev;
+            v25->mNext = p_target;
+            p_target->mPrev = v25;
+            p_target->mNext = &v22->m_SafePointerList.mNode;
+            v22->m_SafePointerList.mNode.mPrev = p_target;
           }
         }
       }
-      v5 = UFG::qBaseTreeRB::GetNext(v4, &v5->mRoot);
-      if ( !v5 )
+      Head = UFG::qBaseTreeRB::GetNext(&p_m_pendingBlips->mTree.mTree, &Head->mRoot);
+      if ( !Head )
         goto LABEL_29;
     }
-    v7 = v6->mpSimObj.m_pPointer;
+    m_pPointer = instance->mpSimObj.m_pPointer;
     goto LABEL_6;
   }
 LABEL_29:
   if ( (_DWORD)v2 )
   {
-    v26 = &v1->name.mUID;
+    p_mUID = &p->name.mUID;
     do
     {
-      if ( *v26 )
+      if ( *p_mUID )
       {
-        v27 = UFG::qBaseTreeRB::Get(v4, *v26);
+        v27 = UFG::qBaseTreeRB::Get(&p_m_pendingBlips->mTree.mTree, *p_mUID);
         v28 = v27;
         if ( v27 )
         {
           UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
-            (UFG::qBaseTreeVariableRB<unsigned __int64> *)v4,
+            (UFG::qBaseTreeVariableRB<unsigned __int64> *)p_m_pendingBlips,
             (UFG::qBaseNodeVariableRB<unsigned __int64> *)v27);
           v29 = v28[1].mRoot.mChild;
           if ( *(_QWORD *)&v28[1].mRoot.mUID )
@@ -1206,7 +1172,7 @@ LABEL_29:
             v30->mChild[0] = v31;
             v31->mParent = v30;
             *v29 = (UFG::qBaseNodeRB *)v29;
-            v28[1].mRoot.mChild[1] = (UFG::qBaseNodeRB *)((char *)&v28[1].mRoot + 8);
+            v28[1].mRoot.mChild[1] = (UFG::qBaseNodeRB *)v28[1].mRoot.mChild;
           }
           *(_QWORD *)&v28[1].mRoot.mUID = 0i64;
           v32 = *v29;
@@ -1214,35 +1180,34 @@ LABEL_29:
           v32->mChild[0] = v33;
           v33->mParent = v32;
           *v29 = (UFG::qBaseNodeRB *)v29;
-          v28[1].mRoot.mChild[1] = (UFG::qBaseNodeRB *)((char *)&v28[1].mRoot + 8);
+          v28[1].mRoot.mChild[1] = (UFG::qBaseNodeRB *)v28[1].mRoot.mChild;
           UFG::qString::~qString((UFG::qString *)v28->mNULL.mChild);
           operator delete[](v28);
         }
       }
-      v26 += 18;
+      p_mUID += 18;
       --v2;
     }
     while ( v2 );
   }
-  if ( v1 )
+  if ( p )
   {
     `eh vector destructor iterator(
-      v1,
+      p,
       0x48ui64,
-      (int)v1[-1].target.m_pPointer,
+      (int)p[-1].target.m_pPointer,
       (void (__fastcall *)(void *))UFG::UIHKPlayerObjectiveMinimapBlip::~UIHKPlayerObjectiveMinimapBlip);
-    operator delete[](&v1[-1].target.m_pPointer);
+    operator delete[](&p[-1].target.m_pPointer);
   }
 }
 
 // File Line: 615
 // RVA: 0x5E7260
-UFG::UIHKPlayerObjective *__fastcall UFG::UIHKPlayerObjectiveManager::GetCurrentObjective(UFG::UIHKPlayerObjectiveManager *this)
+UFG::UIHKPlayerObjective *__fastcall UFG::UIHKPlayerObjectiveManager::GetCurrentObjective(
+        UFG::UIHKPlayerObjectiveManager *this)
 {
-  UFG::UIHKPlayerObjectiveManager *v1; // rdx
-  unsigned int v3; // ecx
+  unsigned int size; // ecx
 
-  v1 = this;
   if ( this->mTempObjectiveSelected )
     return &this->mTempObjective;
   if ( this->mWorldMapObjective_IsSelected )
@@ -1251,87 +1216,83 @@ UFG::UIHKPlayerObjective *__fastcall UFG::UIHKPlayerObjectiveManager::GetCurrent
       return &this->mWorldMapObjective;
     this->mWorldMapObjective_IsSelected = 0;
   }
-  v3 = this->m_objectives.size;
-  if ( !v3 )
+  size = this->m_objectives.size;
+  if ( !size )
     return 0i64;
-  if ( (unsigned __int8)v1->m_currentObjective >= v3 )
-    v1->m_currentObjective = 0;
-  return v1->m_objectives.p[(unsigned __int8)v1->m_currentObjective];
+  if ( (unsigned __int8)this->m_currentObjective >= size )
+    this->m_currentObjective = 0;
+  return this->m_objectives.p[(unsigned __int8)this->m_currentObjective];
 }
 
 // File Line: 663
 // RVA: 0x604030
 void __fastcall UFG::UIHKPlayerObjectiveManager::ScrollNextObjective(UFG::UIHKPlayerObjectiveManager *this)
 {
-  unsigned int v1; // eax
-  UFG::UIHKPlayerObjectiveManager *v2; // rbx
-  UFG::Objective *v3; // rcx
-  const char *v4; // rsi
-  __int64 v5; // rdi
-  UFG::UIHKPlayerObjective *v6; // rax
-  UFG::Objective *v7; // rax
-  const char *v8; // rcx
-  char v9; // di
-  UFG::UIHKPlayerObjective *v10; // rdx
-  signed __int64 v11; // rax
-  unsigned int v12; // ecx
+  UFG::Objective *mObjective; // rcx
+  const char *mData; // rsi
+  __int64 v4; // rdi
+  UFG::UIHKPlayerObjective *v5; // rax
+  UFG::Objective *v6; // rax
+  const char *v7; // rcx
+  char v8; // di
+  UFG::UIHKPlayerObjective *v9; // rdx
+  UFG::UIHKPlayerObjective *p_mTempObjective; // rax
+  unsigned int size; // ecx
 
-  v1 = this->m_objectives.size;
-  v2 = this;
-  if ( v1 )
+  if ( this->m_objectives.size )
   {
     if ( this->mTempObjectiveSelected )
     {
       this->mTempObjectiveSelected = 0;
-      v3 = this->mTempObjective.mObjective;
-      v4 = v3 ? v3->mIdentifier.mData : &customWorldMapCaption;
-      v5 = 0i64;
-      if ( v1 )
+      mObjective = this->mTempObjective.mObjective;
+      if ( mObjective )
+        mData = mObjective->mIdentifier.mData;
+      else
+        mData = &customCaption;
+      v4 = 0i64;
+      while ( 1 )
       {
-        while ( 1 )
+        v5 = this->m_objectives.p[v4];
+        if ( v5 )
         {
-          v6 = v2->m_objectives.p[v5];
-          if ( v6 )
-          {
-            v7 = v6->mObjective;
-            v8 = v7 ? v7->mIdentifier.mData : &customWorldMapCaption;
-            if ( !(unsigned int)UFG::qStringCompare(v8, v4, -1) )
-              break;
-          }
-          v5 = (unsigned int)(v5 + 1);
-          if ( (unsigned int)v5 >= v2->m_objectives.size )
-            goto LABEL_17;
+          v6 = v5->mObjective;
+          v7 = v6 ? v6->mIdentifier.mData : &customCaption;
+          if ( !(unsigned int)UFG::qStringCompare(v7, mData, -1) )
+            break;
         }
-        v2->m_currentObjective = v5;
+        v4 = (unsigned int)(v4 + 1);
+        if ( (unsigned int)v4 >= this->m_objectives.size )
+          goto LABEL_17;
       }
+      this->m_currentObjective = v4;
     }
 LABEL_17:
-    v9 = 0;
+    v8 = 0;
     while ( 1 )
     {
-      if ( v2->mWorldMapObjective_IsSelected )
+      if ( this->mWorldMapObjective_IsSelected )
       {
-        v2->mWorldMapObjective_IsSelected = 0;
-        v2->m_currentObjective = 0;
+        this->mWorldMapObjective_IsSelected = 0;
+        this->m_currentObjective = 0;
       }
       else
       {
-        ++v2->m_currentObjective;
+        ++this->m_currentObjective;
       }
-      if ( (unsigned __int8)v2->m_currentObjective >= v2->m_objectives.size )
+      if ( (unsigned __int8)this->m_currentObjective >= this->m_objectives.size )
       {
-        v2->m_currentObjective = 0;
-        if ( v9 )
+        this->m_currentObjective = 0;
+        if ( v8 )
           goto LABEL_28;
-        v9 = 1;
-        if ( v2->mWorldMapObjective_IsSet )
+        v8 = 1;
+        if ( this->mWorldMapObjective_IsSet )
           break;
       }
-      v10 = v2->m_objectives.p[(unsigned __int8)v2->m_currentObjective];
-      if ( v10 && UFG::UIHKPlayerObjectiveManager::ShouldFlashObjective(v2, v10) )
+      v9 = this->m_objectives.p[(unsigned __int8)this->m_currentObjective];
+      if ( v9 && UFG::UIHKPlayerObjectiveManager::ShouldFlashObjective(this, v9) )
         goto LABEL_28;
     }
-    v2->mWorldMapObjective_IsSelected = 1;
+    this->mWorldMapObjective_IsSelected = 1;
   }
   else
   {
@@ -1340,85 +1301,82 @@ LABEL_17:
     this->mWorldMapObjective_IsSelected = 1;
   }
 LABEL_28:
-  if ( v2->mTempObjectiveSelected )
+  if ( this->mTempObjectiveSelected )
   {
-    v11 = (signed __int64)&v2->mTempObjective;
+    p_mTempObjective = &this->mTempObjective;
     goto LABEL_38;
   }
-  if ( v2->mWorldMapObjective_IsSelected )
+  if ( this->mWorldMapObjective_IsSelected )
   {
-    if ( v2->mWorldMapObjective_IsSet )
+    if ( this->mWorldMapObjective_IsSet )
     {
-      v11 = (signed __int64)&v2->mWorldMapObjective;
+      p_mTempObjective = &this->mWorldMapObjective;
       goto LABEL_38;
     }
-    v2->mWorldMapObjective_IsSelected = 0;
+    this->mWorldMapObjective_IsSelected = 0;
   }
-  v12 = v2->m_objectives.size;
-  if ( !v12 )
+  size = this->m_objectives.size;
+  if ( !size )
     return;
-  if ( (unsigned __int8)v2->m_currentObjective >= v12 )
-    v2->m_currentObjective = 0;
-  v11 = (signed __int64)v2->m_objectives.p[(unsigned __int8)v2->m_currentObjective];
+  if ( (unsigned __int8)this->m_currentObjective >= size )
+    this->m_currentObjective = 0;
+  p_mTempObjective = this->m_objectives.p[(unsigned __int8)this->m_currentObjective];
 LABEL_38:
-  if ( v11 )
-    v2->mFlashObjectiveFlag = 1;
+  if ( p_mTempObjective )
+    this->mFlashObjectiveFlag = 1;
 }
 
 // File Line: 778
 // RVA: 0x5D8E50
-void __fastcall UFG::UIHKPlayerObjectiveManager::FlashObjective(UFG::UIHKPlayerObjectiveManager *this, UFG::Objective *obj, bool forceFlash)
+void __fastcall UFG::UIHKPlayerObjectiveManager::FlashObjective(
+        UFG::UIHKPlayerObjectiveManager *this,
+        UFG::Objective *obj,
+        bool forceFlash)
 {
   bool v3; // r12
-  UFG::Objective *v4; // r13
-  UFG::UIHKPlayerObjectiveManager *v5; // rdi
-  char *v6; // rsi
+  char *mData; // rsi
   int v7; // ebx
   UFG::UIHKPlayerObjective *v8; // rax
-  UFG::Objective *v9; // rax
+  UFG::Objective *mObjective; // rax
   const char *v10; // rcx
-  UFG::qArray<unsigned long,0> *v11; // rsi
-  unsigned int *v12; // rcx
-  UFG::ObjectiveIndicator *v13; // rbp
-  __int64 v14; // r14
-  unsigned int v15; // edx
-  unsigned int v16; // er15
+  UFG::qArray<unsigned long,0> *p_minimapBlips; // rsi
+  unsigned int *p; // rcx
+  UFG::ObjectiveIndicator *FirstIndicator; // rbp
+  __int64 size; // r14
+  unsigned int capacity; // edx
+  unsigned int mUID; // r15d
   unsigned int v17; // ebx
   unsigned int v18; // edx
   unsigned int *v19; // rax
-  bool v20; // [rsp+60h] [rbp+18h]
 
   if ( obj )
   {
-    v20 = forceFlash;
     v3 = forceFlash;
-    v4 = obj;
-    v5 = this;
-    if ( forceFlash || (v6 = obj->mIdentifier.mData, v7 = 0, this->m_objectives.size <= 0) )
+    if ( forceFlash || (mData = obj->mIdentifier.mData, v7 = 0, !this->m_objectives.size) )
     {
 LABEL_10:
-      v11 = &v5->mTempObjective.minimapBlips;
-      v5->mTempObjective.mObjective = v4;
-      v12 = v5->mTempObjective.minimapBlips.p;
-      if ( v12 )
-        operator delete[](v12);
-      v5->mTempObjective.minimapBlips.p = 0i64;
-      *(_QWORD *)&v11->size = 0i64;
-      v13 = (UFG::ObjectiveIndicator *)UFG::Objective::GetFirstIndicator(v4);
-      if ( v13 )
+      p_minimapBlips = &this->mTempObjective.minimapBlips;
+      this->mTempObjective.mObjective = obj;
+      p = this->mTempObjective.minimapBlips.p;
+      if ( p )
+        operator delete[](p);
+      this->mTempObjective.minimapBlips.p = 0i64;
+      *(_QWORD *)&p_minimapBlips->size = 0i64;
+      FirstIndicator = (UFG::ObjectiveIndicator *)UFG::Objective::GetFirstIndicator(obj);
+      if ( FirstIndicator )
       {
         do
         {
-          if ( *((_WORD *)v13->mBlipType.mText - 4) > 0 )
+          if ( *((__int16 *)FirstIndicator->mBlipType.mText - 4) > 0 )
           {
-            v14 = v11->size;
-            v15 = v5->mTempObjective.minimapBlips.capacity;
-            v16 = v13->mIdentifier.mUID;
-            v17 = v14 + 1;
-            if ( (signed int)v14 + 1 > v15 )
+            size = p_minimapBlips->size;
+            capacity = this->mTempObjective.minimapBlips.capacity;
+            mUID = FirstIndicator->mIdentifier.mUID;
+            v17 = size + 1;
+            if ( (int)size + 1 > capacity )
             {
-              if ( v15 )
-                v18 = 2 * v15;
+              if ( capacity )
+                v18 = 2 * capacity;
               else
                 v18 = 1;
               for ( ; v18 < v17; v18 *= 2 )
@@ -1426,21 +1384,21 @@ LABEL_10:
               if ( v18 <= 4 )
                 v18 = 4;
               if ( v18 - v17 > 0x10000 )
-                v18 = v14 + 65537;
-              UFG::qArray<long,0>::Reallocate(&v5->mTempObjective.minimapBlips, v18, "qArray.Add");
+                v18 = size + 65537;
+              UFG::qArray<long,0>::Reallocate(&this->mTempObjective.minimapBlips, v18, "qArray.Add");
             }
-            v19 = v5->mTempObjective.minimapBlips.p;
-            v11->size = v17;
-            v19[v14] = v16;
+            v19 = this->mTempObjective.minimapBlips.p;
+            p_minimapBlips->size = v17;
+            v19[size] = mUID;
           }
-          v13 = (UFG::ObjectiveIndicator *)UFG::Objective::GetNextIndicator(v4, v13);
+          FirstIndicator = (UFG::ObjectiveIndicator *)UFG::Objective::GetNextIndicator(obj, FirstIndicator);
         }
-        while ( v13 );
-        v3 = v20;
+        while ( FirstIndicator );
+        v3 = forceFlash;
       }
-      if ( v3 || UFG::UIHKPlayerObjectiveManager::ShouldFlashObjective(v5, &v5->mTempObjective) )
+      if ( v3 || UFG::UIHKPlayerObjectiveManager::ShouldFlashObjective(this, &this->mTempObjective) )
       {
-        v5->mTempObjectiveSelected = 1;
+        this->mTempObjectiveSelected = 1;
         goto LABEL_33;
       }
     }
@@ -1448,25 +1406,24 @@ LABEL_10:
     {
       while ( 1 )
       {
-        v8 = v5->m_objectives.p[v7];
+        v8 = this->m_objectives.p[v7];
         if ( v8 )
         {
-          v9 = v8->mObjective;
-          v10 = v9 ? v9->mIdentifier.mData : &customWorldMapCaption;
-          if ( !(unsigned int)UFG::qStringCompare(v10, v6, -1) )
+          mObjective = v8->mObjective;
+          v10 = mObjective ? mObjective->mIdentifier.mData : &customCaption;
+          if ( !(unsigned int)UFG::qStringCompare(v10, mData, -1) )
             break;
         }
-        if ( ++v7 >= v5->m_objectives.size )
+        if ( ++v7 >= this->m_objectives.size )
           goto LABEL_10;
       }
-      if ( UFG::UIHKPlayerObjectiveManager::ShouldFlashObjective(v5, v5->m_objectives.p[v7]) )
+      if ( UFG::UIHKPlayerObjectiveManager::ShouldFlashObjective(this, this->m_objectives.p[v7]) )
       {
-        v5->m_currentObjective = v7;
-        v5->mTempObjectiveSelected = 0;
-        v5->mWorldMapObjective_IsSelected = 0;
+        this->m_currentObjective = v7;
+        this->mTempObjectiveSelected = 0;
+        this->mWorldMapObjective_IsSelected = 0;
 LABEL_33:
-        v5->mFlashObjectiveFlag = 1;
-        return;
+        this->mFlashObjectiveFlag = 1;
       }
     }
   }
@@ -1478,9 +1435,9 @@ __int64 UFG::_dynamic_initializer_for__symMissionStart__()
 {
   unsigned int v0; // eax
 
-  v0 = UFG::qStringHashUpper32("mission_start", 0xFFFFFFFF);
+  v0 = UFG::qStringHashUpper32("mission_start", -1);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::symMissionStart, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__symMissionStart__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__symMissionStart__);
 }
 
 // File Line: 819
@@ -1489,9 +1446,9 @@ __int64 UFG::_dynamic_initializer_for__symMissionObjective__()
 {
   unsigned int v0; // eax
 
-  v0 = UFG::qStringHashUpper32("mission_objective", 0xFFFFFFFF);
+  v0 = UFG::qStringHashUpper32("mission_objective", -1);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::symMissionObjective, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__symMissionObjective__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__symMissionObjective__);
 }
 
 // File Line: 820
@@ -1500,9 +1457,9 @@ __int64 UFG::_dynamic_initializer_for__symCopEventStart__()
 {
   unsigned int v0; // eax
 
-  v0 = UFG::qStringHashUpper32("cop_event_start", 0xFFFFFFFF);
+  v0 = UFG::qStringHashUpper32("cop_event_start", -1);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::symCopEventStart, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__symCopEventStart__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__symCopEventStart__);
 }
 
 // File Line: 821
@@ -1511,9 +1468,9 @@ __int64 UFG::_dynamic_initializer_for__symEventStart__()
 {
   unsigned int v0; // eax
 
-  v0 = UFG::qStringHashUpper32("event_start", 0xFFFFFFFF);
+  v0 = UFG::qStringHashUpper32("event_start", -1);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::symEventStart, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__symEventStart__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__symEventStart__);
 }
 
 // File Line: 822
@@ -1522,9 +1479,9 @@ __int64 UFG::_dynamic_initializer_for__symEventObjective__()
 {
   unsigned int v0; // eax
 
-  v0 = UFG::qStringHashUpper32("event_objective", 0xFFFFFFFF);
+  v0 = UFG::qStringHashUpper32("event_objective", -1);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::symEventObjective, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__symEventObjective__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__symEventObjective__);
 }
 
 // File Line: 823
@@ -1533,9 +1490,9 @@ __int64 UFG::_dynamic_initializer_for__symCaseStart__()
 {
   unsigned int v0; // eax
 
-  v0 = UFG::qStringHashUpper32("case_start", 0xFFFFFFFF);
+  v0 = UFG::qStringHashUpper32("case_start", -1);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::symCaseStart, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__symCaseStart__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__symCaseStart__);
 }
 
 // File Line: 824
@@ -1544,136 +1501,128 @@ __int64 UFG::_dynamic_initializer_for__symCaseObjective__()
 {
   unsigned int v0; // eax
 
-  v0 = UFG::qStringHashUpper32("case_objective", 0xFFFFFFFF);
+  v0 = UFG::qStringHashUpper32("case_objective", -1);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::symCaseObjective, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__symCaseObjective__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__symCaseObjective__);
 }
 
 // File Line: 828
 // RVA: 0x5D8B20
-void __fastcall UFG::UIHKPlayerObjectiveManager::FlashObjective(UFG::UIHKPlayerObjectiveManager *this, UFG::UIHKPlayerObjective *obj)
+void __fastcall UFG::UIHKPlayerObjectiveManager::FlashObjective(
+        UFG::UIHKPlayerObjectiveManager *this,
+        UFG::UIHKPlayerObjective *obj)
 {
   UFG::UIMapBlipManager *v2; // r14
-  UFG::UIHKPlayerObjective *v3; // rdi
-  UFG::UIHKPlayerObjectiveManager *v4; // r15
   const char *v5; // rbx
-  UFG::qBaseTreeRB *v6; // rax
-  AK::IAkPluginParam *v7; // rax
-  int v8; // eax
-  UFG::Objective *v9; // rax
-  const char *v10; // rcx
+  UFG::qBaseTreeRB *CollisionModel; // rax
+  AK::IAkPluginParam *Type; // rax
+  int vfptr; // eax
+  UFG::Objective *mObjective; // rax
+  char *mData; // rcx
   UFG::Objective *v11; // rax
-  const char *v12; // rsi
+  char *v12; // rsi
   char v13; // al
   UFG::UIHKObjectiveFlasherWidget::eState v14; // eax
-  UFG::HudComponent *v15; // rbp
-  unsigned int v16; // ebx
+  UFG::HudComponent *m_pPointer; // rbp
+  unsigned int i; // ebx
   UFG::qBaseTreeRB *v17; // rax
   UFG::UIMapBlip *v18; // rsi
   UFG::qBaseTreeRB *v19; // rax
   UFG::UIMapBlip *v20; // rbx
-  UFG::qColour *v21; // rax
+  UFG::qColour *Color; // rax
   UFG::qColour *v22; // rax
-  float v23; // eax
-  float v24; // xmm1_4
-  float v25; // xmm0_4
-  char v26; // al
-  UFG::qVector3 pos; // [rsp+20h] [rbp-28h]
-  UFG::HudComponent *target; // [rsp+58h] [rbp+10h]
+  float a; // eax
+  float y; // xmm1_4
+  float z; // xmm0_4
+  bool WorldPosition; // al
+  UFG::qVector3 pos; // [rsp+20h] [rbp-28h] BYREF
+  UFG::HudComponent *target; // [rsp+58h] [rbp+10h] BYREF
 
   if ( obj )
   {
     v2 = UFG::UIHKScreenHud::mIconManager;
-    v3 = obj;
-    v4 = this;
     if ( UFG::UIHKScreenHud::mIconManager )
     {
       v5 = "$COMMON_OBJECTIVE";
       if ( obj->minimapBlips.size )
       {
-        v6 = UFG::BasePhysicsSystem::GetCollisionModel(
-               (UFG::BasePhysicsSystem *)UFG::UIHKScreenHud::mIconManager,
-               *obj->minimapBlips.p);
-        if ( v6 )
+        CollisionModel = UFG::BasePhysicsSystem::GetCollisionModel(
+                           (UFG::BasePhysicsSystem *)UFG::UIHKScreenHud::mIconManager,
+                           *obj->minimapBlips.p);
+        if ( CollisionModel )
         {
-          v7 = UFG::UIMapBlip::GetType((CAkSrcPhysModel *)v6);
-          if ( v7 )
+          Type = UFG::UIMapBlip::GetType((CAkSrcPhysModel *)CollisionModel);
+          if ( Type )
           {
-            v8 = (int)v7->vfptr;
-            if ( v8 == UFG::symMissionStart.mUID || v8 == UFG::symMissionObjective.mUID )
+            vfptr = (int)Type->vfptr;
+            if ( vfptr == UFG::symMissionStart.mUID || vfptr == UFG::symMissionObjective.mUID )
             {
               v5 = "$COMMON_MISSION";
             }
-            else if ( v8 == UFG::symEventStart.mUID || v8 == UFG::symEventObjective.mUID )
+            else if ( vfptr == UFG::symEventStart.mUID || vfptr == UFG::symEventObjective.mUID )
             {
               v5 = "$COMMON_EVENT";
             }
-            else if ( v8 == UFG::symCaseStart.mUID || v8 == UFG::symCaseObjective.mUID )
+            else if ( vfptr == UFG::symCaseStart.mUID || vfptr == UFG::symCaseObjective.mUID )
             {
               v5 = "$COMMON_CASE_LEAD";
             }
           }
         }
       }
-      v9 = v3->mObjective;
-      if ( v9 )
-        v10 = v9->mCaption.mData;
+      mObjective = obj->mObjective;
+      if ( mObjective )
+        mData = mObjective->mCaption.mData;
       else
-        v10 = v3->alternateCaption.mData;
-      if ( (signed int)UFG::qStringLength(v10) <= 0 )
+        mData = obj->alternateCaption.mData;
+      if ( (int)UFG::qStringLength(mData) <= 0 )
       {
         v14 = UFG::UIHKObjectiveFlasherWidget::mState;
-        if ( UFG::UIHKObjectiveFlasherWidget::mState & 0xFFFFFFFB )
-          v14 = 3;
+        if ( (UFG::UIHKObjectiveFlasherWidget::mState & 0xFFFFFFFB) != 0 )
+          v14 = STATE_TEXT_INBOX;
         UFG::UIHKObjectiveFlasherWidget::mState = v14;
       }
       else
       {
-        v11 = v3->mObjective;
+        v11 = obj->mObjective;
         if ( v11 )
           v12 = v11->mCaption.mData;
         else
-          v12 = v3->alternateCaption.mData;
-        v13 = UFG::UIHKPlayerObjectiveManager::AnyObjectiveUsesPDA(v4);
+          v12 = obj->alternateCaption.mData;
+        v13 = UFG::UIHKPlayerObjectiveManager::AnyObjectiveUsesPDA(this);
         UFG::UIHKObjectiveFlasherWidget::Show(v12, v5, v13);
       }
       UFG::UIMapBlipManager::UnselectAllObjectiveBlips(v2);
-      v15 = 0i64;
-      v16 = 0;
-      if ( v3->minimapBlips.size )
+      m_pPointer = 0i64;
+      for ( i = 0; i < obj->minimapBlips.size; ++i )
       {
-        do
+        v17 = UFG::BasePhysicsSystem::GetCollisionModel((UFG::BasePhysicsSystem *)v2, obj->minimapBlips.p[i]);
+        v18 = (UFG::UIMapBlip *)v17;
+        if ( v17 )
         {
-          v17 = UFG::BasePhysicsSystem::GetCollisionModel((UFG::BasePhysicsSystem *)v2, v3->minimapBlips.p[v16]);
-          v18 = (UFG::UIMapBlip *)v17;
-          if ( v17 )
-          {
-            UFG::UIMapBlip::Blink((UFG::UIMapBlip *)v17);
-            UFG::UIMapBlip::SetIsSelectedObjective(v18, 1);
-          }
-          ++v16;
+          UFG::UIMapBlip::Blink((UFG::UIMapBlip *)v17);
+          UFG::UIMapBlip::SetIsSelectedObjective(v18, 1);
         }
-        while ( v16 < v3->minimapBlips.size );
       }
-      if ( v3->minimapBlips.size > 0
-        && (v19 = UFG::BasePhysicsSystem::GetCollisionModel((UFG::BasePhysicsSystem *)v2, *v3->minimapBlips.p),
+      if ( obj->minimapBlips.size
+        && (v19 = UFG::BasePhysicsSystem::GetCollisionModel((UFG::BasePhysicsSystem *)v2, *obj->minimapBlips.p),
             (v20 = (UFG::UIMapBlip *)v19) != 0i64) )
       {
-        v21 = UFG::UIMapBlip::GetColor((UFG::UIMapBlip *)v19);
-        UFG::UITiledMapWidget::SetGPSLineColor(v21);
+        Color = UFG::UIMapBlip::GetColor((UFG::UIMapBlip *)v19);
+        UFG::UITiledMapWidget::SetGPSLineColor(Color);
         v22 = UFG::UIMapBlip::GetColor(v20);
         UFG::UIHKObjectiveFlasherWidget::mColor.r = v22->r;
         UFG::UIHKObjectiveFlasherWidget::mColor.g = v22->g;
         UFG::UIHKObjectiveFlasherWidget::mColor.b = v22->b;
-        v23 = v22->a;
+        a = v22->a;
       }
-      else if ( v4->mWorldMapObjective_IsSelected )
+      else if ( this->mWorldMapObjective_IsSelected )
       {
-        UFG::UITiledMapWidget::SetGPSLineColor(&v4->mWorldMapObjectiveColor);
-        UFG::UIHKObjectiveFlasherWidget::mColor.r = v4->mWorldMapObjectiveColor.r;
-        UFG::UIHKObjectiveFlasherWidget::mColor.g = v4->mWorldMapObjectiveColor.g;
-        UFG::UIHKObjectiveFlasherWidget::mColor.b = v4->mWorldMapObjectiveColor.b;
-        v23 = v4->mWorldMapObjectiveColor.a;
+        UFG::UITiledMapWidget::SetGPSLineColor(&this->mWorldMapObjectiveColor);
+        UFG::UIHKObjectiveFlasherWidget::mColor.r = this->mWorldMapObjectiveColor.r;
+        UFG::UIHKObjectiveFlasherWidget::mColor.g = this->mWorldMapObjectiveColor.g;
+        UFG::UIHKObjectiveFlasherWidget::mColor.b = this->mWorldMapObjectiveColor.b;
+        a = this->mWorldMapObjectiveColor.a;
       }
       else
       {
@@ -1681,43 +1630,43 @@ void __fastcall UFG::UIHKPlayerObjectiveManager::FlashObjective(UFG::UIHKPlayerO
         UFG::UIHKObjectiveFlasherWidget::mColor.r = UFG::qColour::White.r;
         UFG::UIHKObjectiveFlasherWidget::mColor.g = UFG::qColour::White.g;
         UFG::UIHKObjectiveFlasherWidget::mColor.b = UFG::qColour::White.b;
-        v23 = UFG::qColour::White.a;
+        a = UFG::qColour::White.a;
       }
-      UFG::UIHKObjectiveFlasherWidget::mColor.a = v23;
+      UFG::UIHKObjectiveFlasherWidget::mColor.a = a;
       target = 0i64;
-      if ( v3->useFixedPos )
+      if ( obj->useFixedPos )
       {
-        v24 = v3->fixedPos.y;
-        pos.x = v3->fixedPos.x;
-        v25 = v3->fixedPos.z;
-        pos.y = v24;
-        pos.z = v25;
+        y = obj->fixedPos.y;
+        pos.x = obj->fixedPos.x;
+        z = obj->fixedPos.z;
+        pos.y = y;
+        pos.z = z;
       }
       else
       {
-        v15 = (UFG::HudComponent *)v3->gpsTarget.m_pPointer;
-        if ( v15 )
+        m_pPointer = (UFG::HudComponent *)obj->gpsTarget.m_pPointer;
+        if ( m_pPointer )
         {
-          v26 = UFG::HudComponent::GetWorldPosition((UFG::HudComponent *)v3->gpsTarget.m_pPointer, &pos);
+          WorldPosition = UFG::HudComponent::GetWorldPosition((UFG::HudComponent *)obj->gpsTarget.m_pPointer, &pos);
         }
         else
         {
-          v26 = UFG::UIHKPlayerObjectiveManager::GetObjectivePos(v4, v3, &pos, &target);
-          v15 = target;
+          WorldPosition = UFG::UIHKPlayerObjectiveManager::GetObjectivePos(this, obj, &pos, &target);
+          m_pPointer = target;
         }
-        if ( !v26 )
+        if ( !WorldPosition )
         {
           UFG::UITiledMapGPS::SetActive(UFG::UIHKScreenHud::GPS, 0);
 LABEL_44:
           if ( UFG::UIHKScreenHud::ObjectiveDistance )
-            UFG::UIHKObjectiveDistanceWidget::SetObjective(UFG::UIHKScreenHud::ObjectiveDistance, v3);
+            UFG::UIHKObjectiveDistanceWidget::SetObjective(UFG::UIHKScreenHud::ObjectiveDistance, obj);
           return;
         }
       }
       UFG::UITiledMapGPS::UsePlayerSourcePosition(UFG::UIHKScreenHud::GPS);
-      UFG::UITiledMapGPS::SetDestination(UFG::UIHKScreenHud::GPS, &pos, v4->mWorldMapObjective_IsSelected);
+      UFG::UITiledMapGPS::SetDestination(UFG::UIHKScreenHud::GPS, &pos, this->mWorldMapObjective_IsSelected);
       UFG::UITiledMapGPS::SetActive(UFG::UIHKScreenHud::GPS, 1);
-      UFG::UITiledMapGPS::SetTrackingTarget(UFG::UIHKScreenHud::GPS, v15);
+      UFG::UITiledMapGPS::SetTrackingTarget(UFG::UIHKScreenHud::GPS, m_pPointer);
       goto LABEL_44;
     }
   }
@@ -1725,61 +1674,58 @@ LABEL_44:
 
 // File Line: 934
 // RVA: 0x60C8B0
-char __fastcall UFG::UIHKPlayerObjectiveManager::ShouldFlashObjective(UFG::UIHKPlayerObjectiveManager *this, UFG::UIHKPlayerObjective *obj)
+char __fastcall UFG::UIHKPlayerObjectiveManager::ShouldFlashObjective(
+        UFG::UIHKPlayerObjectiveManager *this,
+        UFG::UIHKPlayerObjective *obj)
 {
-  UFG::UIHKPlayerObjective *v2; // rbp
-  unsigned int v4; // er12
+  unsigned int size; // r12d
   char v5; // r15
   unsigned int v6; // ebx
   __int64 v7; // r14
-  UFG::qBaseTreeRB *v8; // rax
+  UFG::qBaseTreeRB *CollisionModel; // rax
   UFG::UIMapBlip *v9; // rdi
   UFG::UIHKScreenHud *v10; // rsi
-  float v11; // xmm0_4
-  UFG::qVector3 pos; // [rsp+20h] [rbp-48h]
-  UFG::qVector3 dir; // [rsp+30h] [rbp-38h]
+  float Alpha; // xmm0_4
+  UFG::qVector3 pos; // [rsp+20h] [rbp-48h] BYREF
+  UFG::qVector3 dir; // [rsp+30h] [rbp-38h] BYREF
 
-  v2 = obj;
   if ( !obj )
     return 0;
-  v4 = obj->minimapBlips.size;
-  if ( v4 < 1 )
+  size = obj->minimapBlips.size;
+  if ( !size )
     return 1;
   v5 = 0;
   v6 = 0;
-  if ( v4 )
+  v7 = 0i64;
+  do
   {
-    v7 = 0i64;
-    do
+    if ( UFG::UIHKScreenHud::mIconManager )
     {
-      if ( UFG::UIHKScreenHud::mIconManager )
+      if ( obj->minimapBlips.size > v6 )
       {
-        if ( v2->minimapBlips.size > v6 )
+        CollisionModel = UFG::BasePhysicsSystem::GetCollisionModel(
+                           (UFG::BasePhysicsSystem *)UFG::UIHKScreenHud::mIconManager,
+                           obj->minimapBlips.p[v7]);
+        v9 = (UFG::UIMapBlip *)CollisionModel;
+        if ( CollisionModel )
         {
-          v8 = UFG::BasePhysicsSystem::GetCollisionModel(
-                 (UFG::BasePhysicsSystem *)UFG::UIHKScreenHud::mIconManager,
-                 v2->minimapBlips.p[v7]);
-          v9 = (UFG::UIMapBlip *)v8;
-          if ( v8 )
+          if ( UFG::UIMapBlip::IsVisible((UFG::UIMapBlip *)CollisionModel) )
           {
-            if ( UFG::UIMapBlip::IsVisible((UFG::UIMapBlip *)v8) )
-            {
-              v10 = UFG::UIHKScreenHud::mInstance;
-              if ( UFG::UIHKScreenHud::mInstance && UFG::UI::GetPlayerWorldPosition(&pos, &dir) )
-                v11 = UFG::UIMapBlip::GetAlpha(v9, &pos, &v10->Minimap.m_mapGeo);
-              else
-                v11 = UFG::UIMapBlip::GetAlpha(v9);
-              if ( v11 >= 0.1 )
-                v5 |= BYTE1(UFG::UIMapBlip::GetType((CAkSrcPhysModel *)v9)[6].vfptr);
-            }
+            v10 = UFG::UIHKScreenHud::mInstance;
+            if ( UFG::UIHKScreenHud::mInstance && UFG::UI::GetPlayerWorldPosition(&pos, &dir) )
+              Alpha = UFG::UIMapBlip::GetAlpha(v9, &pos, &v10->Minimap.m_mapGeo);
+            else
+              Alpha = UFG::UIMapBlip::GetAlpha(v9);
+            if ( Alpha >= 0.1 )
+              v5 |= BYTE1(UFG::UIMapBlip::GetType((CAkSrcPhysModel *)v9)[6].vfptr);
           }
         }
       }
-      ++v6;
-      ++v7;
     }
-    while ( v6 < v4 );
+    ++v6;
+    ++v7;
   }
+  while ( v6 < size );
   return v5;
 }
 
@@ -1787,30 +1733,27 @@ char __fastcall UFG::UIHKPlayerObjectiveManager::ShouldFlashObjective(UFG::UIHKP
 // RVA: 0x5D3B80
 char __fastcall UFG::UIHKPlayerObjectiveManager::AnyObjectiveUsesPDA(UFG::UIHKPlayerObjectiveManager *this)
 {
-  unsigned int v1; // er9
-  unsigned int v2; // eax
-  UFG::UIHKPlayerObjective **v3; // rcx
-  UFG::Objective *v4; // r8
+  unsigned int size; // r9d
+  int v2; // eax
+  UFG::UIHKPlayerObjective **i; // rcx
+  UFG::Objective *mObjective; // r8
 
-  v1 = this->m_objectives.size;
+  size = this->m_objectives.size;
   v2 = 0;
-  if ( !v1 )
+  if ( !size )
     return 0;
-  v3 = this->m_objectives.p;
-  while ( 1 )
+  for ( i = this->m_objectives.p; ; ++i )
   {
-    if ( *v3 )
+    if ( *i )
     {
-      v4 = (*v3)->mObjective;
-      if ( v4 )
+      mObjective = (*i)->mObjective;
+      if ( mObjective )
       {
-        if ( v4->mUsesPDA )
+        if ( mObjective->mUsesPDA )
           break;
       }
     }
-    ++v2;
-    ++v3;
-    if ( v2 >= v1 )
+    if ( ++v2 >= size )
       return 0;
   }
   return 1;
@@ -1818,23 +1761,23 @@ char __fastcall UFG::UIHKPlayerObjectiveManager::AnyObjectiveUsesPDA(UFG::UIHKPl
 
 // File Line: 1071
 // RVA: 0x5E84A0
-char __fastcall UFG::UIHKPlayerObjectiveManager::GetObjectivePos(UFG::UIHKPlayerObjectiveManager *this, UFG::UIHKPlayerObjective *obj, UFG::qVector3 *pos, UFG::HudComponent **target)
+char __fastcall UFG::UIHKPlayerObjectiveManager::GetObjectivePos(
+        UFG::UIHKPlayerObjectiveManager *this,
+        UFG::UIHKPlayerObjective *obj,
+        UFG::qVector3 *pos,
+        UFG::HudComponent **target)
 {
-  UFG::HudComponent **v4; // r15
-  UFG::qVector3 *v5; // r14
-  UFG::UIHKPlayerObjective *v6; // rsi
-  UFG::UIHKPlayerObjectiveManager *v7; // r13
   char v8; // r12
-  float v10; // xmm0_4
-  float v11; // xmm1_4
+  float y; // xmm0_4
+  float z; // xmm1_4
   __int64 v12; // rdi
   unsigned int v13; // ebx
   UFG::qBaseTreeRB *v14; // rax
-  int *v15; // rbx
+  int *p_mNULL; // rbx
   UFG::HudComponent *v16; // r8
   __int64 *v17; // rcx
   __int64 **v18; // rax
-  __int64 *v19; // rax
+  __int64 *mPrev; // rax
   __int64 *v20; // rcx
   __int64 **v21; // rax
   __int64 *v22; // rcx
@@ -1861,42 +1804,34 @@ char __fastcall UFG::UIHKPlayerObjectiveManager::GetObjectivePos(UFG::UIHKPlayer
   __int64 **v43; // rax
   __int64 *v44; // rcx
   __int64 **v45; // rax
-  __int64 *v46; // rcx
-  __int64 **v47; // rax
-  __int64 *v48; // rcx
-  __int64 **v49; // rax
-  __int64 *v50; // rdx
-  __int64 **v51; // rcx
-  int v52; // [rsp+30h] [rbp-99h]
-  UFG::qString v53; // [rsp+38h] [rbp-91h]
-  __int64 *v54; // [rsp+60h] [rbp-69h]
-  __int64 **v55; // [rsp+68h] [rbp-61h]
-  UFG::HudComponent *v56; // [rsp+70h] [rbp-59h]
-  int v57; // [rsp+80h] [rbp-49h]
-  UFG::qString v58; // [rsp+88h] [rbp-41h]
-  __int64 *v59; // [rsp+B0h] [rbp-19h]
-  __int64 **v60; // [rsp+B8h] [rbp-11h]
-  __int64 v61; // [rsp+C0h] [rbp-9h]
-  __int64 **v62; // [rsp+D0h] [rbp+7h]
-  UFG::qVector3 posa; // [rsp+D8h] [rbp+Fh]
-  __int64 v64; // [rsp+E8h] [rbp+1Fh]
+  __int64 *v46; // rdx
+  __int64 **v47; // rcx
+  int v48; // [rsp+30h] [rbp-99h]
+  UFG::qString v49; // [rsp+38h] [rbp-91h] BYREF
+  __int64 *v50; // [rsp+60h] [rbp-69h] BYREF
+  __int64 **p_m_SafePointerList; // [rsp+68h] [rbp-61h]
+  UFG::HudComponent *v52; // [rsp+70h] [rbp-59h]
+  int v53; // [rsp+80h] [rbp-49h] BYREF
+  UFG::qString v54; // [rsp+88h] [rbp-41h] BYREF
+  __int64 *v55; // [rsp+B0h] [rbp-19h] BYREF
+  __int64 **v56; // [rsp+B8h] [rbp-11h]
+  __int64 v57; // [rsp+C0h] [rbp-9h]
+  __int64 **v58; // [rsp+D0h] [rbp+7h]
+  UFG::qVector3 posa; // [rsp+D8h] [rbp+Fh] BYREF
+  __int64 v60; // [rsp+E8h] [rbp+1Fh]
 
-  v64 = -2i64;
-  v4 = target;
-  v5 = pos;
-  v6 = obj;
-  v7 = this;
+  v60 = -2i64;
   v8 = 0;
   *target = 0i64;
   if ( !obj )
     return 0;
   if ( obj->useFixedPos )
   {
-    v10 = obj->fixedPos.y;
-    v11 = obj->fixedPos.z;
+    y = obj->fixedPos.y;
+    z = obj->fixedPos.z;
     pos->x = obj->fixedPos.x;
-    pos->y = v10;
-    pos->z = v11;
+    pos->y = y;
+    pos->z = z;
     return 1;
   }
   v12 = 0i64;
@@ -1904,289 +1839,261 @@ char __fastcall UFG::UIHKPlayerObjectiveManager::GetObjectivePos(UFG::UIHKPlayer
     return v8;
   while ( 1 )
   {
-    v13 = v6->minimapBlips.p[v12];
-    v57 = -1;
-    UFG::qString::qString(&v58);
-    v59 = (__int64 *)&v59;
-    v60 = &v59;
-    v61 = 0i64;
-    UFG::qString::qString(&v53);
-    v54 = (__int64 *)&v54;
-    v55 = &v54;
-    v56 = 0i64;
-    if ( !v13 || (v14 = UFG::qBaseTreeRB::Get(&v7->m_knownBlips.mTree.mTree, v13), v15 = (int *)&v14->mNULL, !v14) )
-      v15 = &v57;
-    v52 = *v15;
-    UFG::qString::Set(&v53, *((const char **)v15 + 4), v15[7], 0i64, 0);
-    v16 = (UFG::HudComponent *)*((_QWORD *)v15 + 8);
-    if ( v56 )
+    v13 = obj->minimapBlips.p[v12];
+    v53 = -1;
+    UFG::qString::qString(&v54);
+    v55 = (__int64 *)&v55;
+    v56 = &v55;
+    v57 = 0i64;
+    UFG::qString::qString(&v49);
+    v50 = (__int64 *)&v50;
+    p_m_SafePointerList = &v50;
+    v52 = 0i64;
+    if ( !v13 || (v14 = UFG::qBaseTreeRB::Get(&this->m_knownBlips.mTree.mTree, v13), p_mNULL = (int *)&v14->mNULL, !v14) )
+      p_mNULL = &v53;
+    v48 = *p_mNULL;
+    UFG::qString::Set(&v49, *((const char **)p_mNULL + 4), p_mNULL[7], 0i64, 0);
+    v16 = (UFG::HudComponent *)*((_QWORD *)p_mNULL + 8);
+    if ( v52 )
     {
-      v17 = v54;
-      v18 = v55;
-      v54[1] = (__int64)v55;
+      v17 = v50;
+      v18 = p_m_SafePointerList;
+      v50[1] = (__int64)p_m_SafePointerList;
       *v18 = v17;
-      v54 = (__int64 *)&v54;
-      v55 = &v54;
+      v50 = (__int64 *)&v50;
+      p_m_SafePointerList = &v50;
     }
-    v56 = v16;
+    v52 = v16;
     if ( v16 )
     {
-      v19 = (__int64 *)v16->m_SafePointerList.mNode.mPrev;
-      v19[1] = (__int64)&v54;
-      v54 = v19;
-      v55 = (__int64 **)&v16->m_SafePointerList;
-      v16->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v54;
-      v16 = v56;
+      mPrev = (__int64 *)v16->m_SafePointerList.mNode.UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mPrev;
+      mPrev[1] = (__int64)&v50;
+      v50 = mPrev;
+      p_m_SafePointerList = (__int64 **)&v16->m_SafePointerList;
+      v16->m_SafePointerList.mNode.UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v50;
+      v16 = v52;
     }
-    if ( v52 != -1 )
+    if ( v48 != -1 )
       break;
-    v62 = &v54;
-    if ( v56 )
+    v58 = &v50;
+    if ( v52 )
     {
-      v20 = v54;
-      v21 = v55;
-      v54[1] = (__int64)v55;
+      v20 = v50;
+      v21 = p_m_SafePointerList;
+      v50[1] = (__int64)p_m_SafePointerList;
       *v21 = v20;
-      v54 = (__int64 *)&v54;
-      v55 = &v54;
+      v50 = (__int64 *)&v50;
+      p_m_SafePointerList = &v50;
     }
-    v56 = 0i64;
-    v22 = v54;
-    v23 = v55;
-    v54[1] = (__int64)v55;
+    v52 = 0i64;
+    v22 = v50;
+    v23 = p_m_SafePointerList;
+    v50[1] = (__int64)p_m_SafePointerList;
     *v23 = v22;
-    v54 = (__int64 *)&v54;
-    v55 = &v54;
-    UFG::qString::~qString(&v53);
-    v62 = &v59;
-    if ( v61 )
+    v50 = (__int64 *)&v50;
+    p_m_SafePointerList = &v50;
+    UFG::qString::~qString(&v49);
+    v58 = &v55;
+    if ( v57 )
     {
-      v24 = v59;
-      v25 = v60;
-      v59[1] = (__int64)v60;
+      v24 = v55;
+      v25 = v56;
+      v55[1] = (__int64)v56;
       *v25 = v24;
-      v59 = (__int64 *)&v59;
-      v60 = &v59;
+      v55 = (__int64 *)&v55;
+      v56 = &v55;
     }
-    v61 = 0i64;
-    v26 = v59;
-    v27 = v60;
-    v59[1] = (__int64)v60;
-    *v27 = v26;
-    v59 = (__int64 *)&v59;
-    v60 = &v59;
-LABEL_31:
-    UFG::qString::~qString(&v58);
+LABEL_30:
+    v57 = 0i64;
+    v38 = v55;
+    v39 = v56;
+    v55[1] = (__int64)v56;
+    *v39 = v38;
+    v55 = (__int64 *)&v55;
+    v56 = &v55;
+    UFG::qString::~qString(&v54);
     v12 = (unsigned int)(v12 + 1);
-    if ( (unsigned int)v12 >= v6->minimapBlips.size )
+    if ( (unsigned int)v12 >= obj->minimapBlips.size )
       return v8;
   }
-  *v4 = v16;
+  *target = v16;
   if ( !v16 )
   {
-    v62 = &v54;
-    if ( v56 )
+    v58 = &v50;
+    if ( v52 )
     {
-      v28 = v54;
-      v29 = v55;
-      v54[1] = (__int64)v55;
-      *v29 = v28;
-      v54 = (__int64 *)&v54;
-      v55 = &v54;
+      v26 = v50;
+      v27 = p_m_SafePointerList;
+      v50[1] = (__int64)p_m_SafePointerList;
+      *v27 = v26;
+      v50 = (__int64 *)&v50;
+      p_m_SafePointerList = &v50;
     }
-    v56 = 0i64;
-    v30 = v54;
-    v31 = v55;
-    v54[1] = (__int64)v55;
-    *v31 = v30;
-    v54 = (__int64 *)&v54;
-    v55 = &v54;
-    UFG::qString::~qString(&v53);
-    v62 = &v59;
-    if ( v61 )
+    v52 = 0i64;
+    v28 = v50;
+    v29 = p_m_SafePointerList;
+    v50[1] = (__int64)p_m_SafePointerList;
+    *v29 = v28;
+    v50 = (__int64 *)&v50;
+    p_m_SafePointerList = &v50;
+    UFG::qString::~qString(&v49);
+    v58 = &v55;
+    if ( v57 )
     {
-      v32 = v59;
-      v33 = v60;
-      v59[1] = (__int64)v60;
-      *v33 = v32;
-      v59 = (__int64 *)&v59;
-      v60 = &v59;
+      v30 = v55;
+      v31 = v56;
+      v55[1] = (__int64)v56;
+      *v31 = v30;
+      v55 = (__int64 *)&v55;
+      v56 = &v55;
     }
-    v61 = 0i64;
-    v34 = v59;
-    v35 = v60;
-    v59[1] = (__int64)v60;
-    *v35 = v34;
-    v59 = (__int64 *)&v59;
-    v60 = &v59;
-    goto LABEL_31;
+    goto LABEL_30;
   }
   if ( !UFG::HudComponent::GetWorldPosition(v16, &posa) )
   {
-    v62 = &v54;
-    if ( v56 )
+    v58 = &v50;
+    if ( v52 )
     {
-      v36 = v54;
-      v37 = v55;
-      v54[1] = (__int64)v55;
+      v32 = v50;
+      v33 = p_m_SafePointerList;
+      v50[1] = (__int64)p_m_SafePointerList;
+      *v33 = v32;
+      v50 = (__int64 *)&v50;
+      p_m_SafePointerList = &v50;
+    }
+    v52 = 0i64;
+    v34 = v50;
+    v35 = p_m_SafePointerList;
+    v50[1] = (__int64)p_m_SafePointerList;
+    *v35 = v34;
+    v50 = (__int64 *)&v50;
+    p_m_SafePointerList = &v50;
+    UFG::qString::~qString(&v49);
+    v58 = &v55;
+    if ( v57 )
+    {
+      v36 = v55;
+      v37 = v56;
+      v55[1] = (__int64)v56;
       *v37 = v36;
-      v54 = (__int64 *)&v54;
-      v55 = &v54;
+      v55 = (__int64 *)&v55;
+      v56 = &v55;
     }
-    v56 = 0i64;
-    v38 = v54;
-    v39 = v55;
-    v54[1] = (__int64)v55;
-    *v39 = v38;
-    v54 = (__int64 *)&v54;
-    v55 = &v54;
-    UFG::qString::~qString(&v53);
-    v62 = &v59;
-    if ( v61 )
-    {
-      v40 = v59;
-      v41 = v60;
-      v59[1] = (__int64)v60;
-      *v41 = v40;
-      v59 = (__int64 *)&v59;
-      v60 = &v59;
-    }
-    v61 = 0i64;
-    v42 = v59;
-    v43 = v60;
-    v59[1] = (__int64)v60;
-    *v43 = v42;
-    v59 = (__int64 *)&v59;
-    v60 = &v59;
-    goto LABEL_31;
+    goto LABEL_30;
   }
-  v5->x = posa.x;
-  v5->y = posa.y;
-  v5->z = posa.z;
+  *pos = posa;
   v8 = 1;
-  if ( v56 )
+  if ( v52 )
   {
-    v44 = v54;
-    v45 = v55;
-    v54[1] = (__int64)v55;
+    v40 = v50;
+    v41 = p_m_SafePointerList;
+    v50[1] = (__int64)p_m_SafePointerList;
+    *v41 = v40;
+    v50 = (__int64 *)&v50;
+    p_m_SafePointerList = &v50;
+  }
+  v52 = 0i64;
+  v42 = v50;
+  v43 = p_m_SafePointerList;
+  v50[1] = (__int64)p_m_SafePointerList;
+  *v43 = v42;
+  v50 = (__int64 *)&v50;
+  p_m_SafePointerList = &v50;
+  UFG::qString::~qString(&v49);
+  if ( v57 )
+  {
+    v44 = v55;
+    v45 = v56;
+    v55[1] = (__int64)v56;
     *v45 = v44;
-    v54 = (__int64 *)&v54;
-    v55 = &v54;
+    v55 = (__int64 *)&v55;
+    v56 = &v55;
   }
-  v56 = 0i64;
-  v46 = v54;
-  v47 = v55;
-  v54[1] = (__int64)v55;
+  v57 = 0i64;
+  v46 = v55;
+  v47 = v56;
+  v55[1] = (__int64)v56;
   *v47 = v46;
-  v54 = (__int64 *)&v54;
-  v55 = &v54;
-  UFG::qString::~qString(&v53);
-  if ( v61 )
-  {
-    v48 = v59;
-    v49 = v60;
-    v59[1] = (__int64)v60;
-    *v49 = v48;
-    v59 = (__int64 *)&v59;
-    v60 = &v59;
-  }
-  v61 = 0i64;
-  v50 = v59;
-  v51 = v60;
-  v59[1] = (__int64)v60;
-  *v51 = v50;
-  v59 = (__int64 *)&v59;
-  v60 = &v59;
-  UFG::qString::~qString(&v58);
+  v55 = (__int64 *)&v55;
+  v56 = &v55;
+  UFG::qString::~qString(&v54);
   return v8;
 }
 
 // File Line: 1157
 // RVA: 0x5D86C0
-UFG::UIHKPlayerObjective *__fastcall UFG::UIHKPlayerObjectiveManager::FindNearestObjective(UFG::UIHKPlayerObjectiveManager *this, UFG::qVector3 *pos)
+UFG::UIHKPlayerObjective *__fastcall UFG::UIHKPlayerObjectiveManager::FindNearestObjective(
+        UFG::UIHKPlayerObjectiveManager *this,
+        UFG::qVector3 *pos)
 {
   float v2; // xmm6_4
-  UFG::qVector3 *v3; // r14
-  UFG::UIHKPlayerObjectiveManager *v4; // rsi
   UFG::UIHKPlayerObjective *v5; // rbp
-  unsigned int v6; // edi
+  unsigned int i; // edi
   UFG::UIHKPlayerObjective *v7; // rbx
-  float v8; // xmm3_4
-  float v9; // xmm4_4
-  float v10; // xmm0_4
-  UFG::HudComponent *v11; // rcx
-  char v12; // al
-  UFG::qVector3 posa; // [rsp+20h] [rbp-38h]
-  UFG::HudComponent *target; // [rsp+60h] [rbp+8h]
+  float y; // xmm3_4
+  float z; // xmm4_4
+  float x; // xmm0_4
+  UFG::HudComponent *m_pPointer; // rcx
+  bool WorldPosition; // al
+  UFG::qVector3 posa; // [rsp+20h] [rbp-38h] BYREF
+  UFG::HudComponent *target; // [rsp+60h] [rbp+8h] BYREF
 
   v2 = FLOAT_1_0e8;
-  v3 = pos;
-  v4 = this;
   v5 = 0i64;
-  v6 = 0;
-  if ( this->m_objectives.size )
+  for ( i = 0; i < this->m_objectives.size; ++i )
   {
-    do
+    v7 = this->m_objectives.p[i];
+    if ( v7 )
     {
-      v7 = v4->m_objectives.p[v6];
-      if ( v7 )
+      target = 0i64;
+      if ( v7->useFixedPos )
       {
-        target = 0i64;
-        if ( v7->useFixedPos )
-        {
-          v8 = v7->fixedPos.y;
-          v9 = v7->fixedPos.z;
-          v10 = v7->fixedPos.x;
-          posa.x = v7->fixedPos.x;
-          posa.y = v8;
-          posa.z = v9;
-        }
-        else
-        {
-          v11 = (UFG::HudComponent *)v7->gpsTarget.m_pPointer;
-          if ( v11 )
-            v12 = UFG::HudComponent::GetWorldPosition(v11, &posa);
-          else
-            v12 = UFG::UIHKPlayerObjectiveManager::GetObjectivePos(v4, v7, &posa, &target);
-          if ( !v12 )
-            goto LABEL_12;
-          v9 = posa.z;
-          v8 = posa.y;
-          v10 = posa.x;
-        }
-        if ( (float)((float)((float)((float)(v3->y - v8) * (float)(v3->y - v8))
-                           + (float)((float)(v3->x - v10) * (float)(v3->x - v10)))
-                   + (float)((float)(v3->z - v9) * (float)(v3->z - v9))) < v2 )
-        {
-          v2 = (float)((float)((float)(v3->y - v8) * (float)(v3->y - v8))
-                     + (float)((float)(v3->x - v10) * (float)(v3->x - v10)))
-             + (float)((float)(v3->z - v9) * (float)(v3->z - v9));
-          v5 = v7;
-        }
+        y = v7->fixedPos.y;
+        z = v7->fixedPos.z;
+        x = v7->fixedPos.x;
+        posa.x = x;
+        posa.y = y;
+        posa.z = z;
       }
-LABEL_12:
-      ++v6;
+      else
+      {
+        m_pPointer = (UFG::HudComponent *)v7->gpsTarget.m_pPointer;
+        if ( m_pPointer )
+          WorldPosition = UFG::HudComponent::GetWorldPosition(m_pPointer, &posa);
+        else
+          WorldPosition = UFG::UIHKPlayerObjectiveManager::GetObjectivePos(this, v7, &posa, &target);
+        if ( !WorldPosition )
+          continue;
+        z = posa.z;
+        y = posa.y;
+        x = posa.x;
+      }
+      if ( (float)((float)((float)((float)(pos->y - y) * (float)(pos->y - y))
+                         + (float)((float)(pos->x - x) * (float)(pos->x - x)))
+                 + (float)((float)(pos->z - z) * (float)(pos->z - z))) < v2 )
+      {
+        v2 = (float)((float)((float)(pos->y - y) * (float)(pos->y - y))
+                   + (float)((float)(pos->x - x) * (float)(pos->x - x)))
+           + (float)((float)(pos->z - z) * (float)(pos->z - z));
+        v5 = v7;
+      }
     }
-    while ( v6 < v4->m_objectives.size );
   }
   return v5;
 }
 
 // File Line: 1187
 // RVA: 0x5D8800
-UFG::UIHKPlayerObjective *__fastcall UFG::UIHKPlayerObjectiveManager::FindObjectiveFromBlip(UFG::UIHKPlayerObjectiveManager *this, UFG::UIMapBlip *blip)
+UFG::UIHKPlayerObjective *__fastcall UFG::UIHKPlayerObjectiveManager::FindObjectiveFromBlip(
+        UFG::UIHKPlayerObjectiveManager *this,
+        UFG::UIMapBlip *blip)
 {
-  UFG::UIMapBlip *v2; // rbp
-  UFG::UIHKPlayerObjectiveManager *v3; // r14
   UFG::BasePhysicsSystem *v5; // r15
   __int64 v6; // rsi
   UFG::UIHKPlayerObjective *v7; // rdi
-  unsigned int v8; // eax
-  __int64 v9; // rbx
-  UFG::qBaseTreeRB *v10; // rax
+  __int64 v8; // rbx
+  UFG::qBaseTreeRB *CollisionModel; // rax
 
-  v2 = blip;
-  v3 = this;
   if ( !blip )
     return 0i64;
   v5 = (UFG::BasePhysicsSystem *)UFG::UIHKScreenHud::mIconManager;
@@ -2197,27 +2104,29 @@ UFG::UIHKPlayerObjective *__fastcall UFG::UIHKPlayerObjectiveManager::FindObject
     return 0i64;
   while ( 1 )
   {
-    v7 = v3->m_objectives.p[v6];
-    if ( !v7 )
-      goto LABEL_12;
-    v8 = v7->minimapBlips.size;
-    v9 = 0i64;
-    if ( !v8 )
-      goto LABEL_12;
-    if ( v8 > 0 )
-      break;
+    v7 = this->m_objectives.p[v6];
+    if ( v7 )
+    {
+      v8 = 0i64;
+      if ( v7->minimapBlips.size )
+        break;
+    }
 LABEL_11:
-    v9 = (unsigned int)(v9 + 1);
-    if ( v7->minimapBlips.size > (unsigned int)v9 )
-      break;
-LABEL_12:
     v6 = (unsigned int)(v6 + 1);
-    if ( (unsigned int)v6 >= v3->m_objectives.size )
+    if ( (unsigned int)v6 >= this->m_objectives.size )
       return 0i64;
   }
-  v10 = UFG::BasePhysicsSystem::GetCollisionModel(v5, v7->minimapBlips.p[v9]);
-  if ( !v10 || v2->mNode.mUID != v10->mRoot.mUID )
-    goto LABEL_11;
-  return v7;
+  while ( 1 )
+  {
+    CollisionModel = UFG::BasePhysicsSystem::GetCollisionModel(v5, v7->minimapBlips.p[v8]);
+    if ( CollisionModel )
+    {
+      if ( blip->mNode.mUID == CollisionModel->mRoot.mUID )
+        return v7;
+    }
+    v8 = (unsigned int)(v8 + 1);
+    if ( v7->minimapBlips.size <= (unsigned int)v8 )
+      goto LABEL_11;
+  }
 }
 

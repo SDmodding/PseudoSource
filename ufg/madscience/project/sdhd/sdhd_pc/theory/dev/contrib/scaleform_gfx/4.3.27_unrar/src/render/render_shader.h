@@ -1,122 +1,134 @@
 // File Line: 136
 // RVA: 0xA02B40
-void __fastcall Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform0(Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *this, Scaleform::Render::D3D1x::ShaderPair *sd, unsigned int var, const float *v, unsigned int n, unsigned int index)
+void __fastcall Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform0(
+        Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *this,
+        Scaleform::Render::D3D1x::ShaderPair *sd,
+        unsigned int var,
+        const float *v,
+        unsigned int n,
+        unsigned int index)
 {
   __int64 v6; // rdi
-  const float *v7; // r14
-  Scaleform::Render::D3D1x::ShaderPair *v8; // rsi
-  Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *v9; // rbx
-  signed __int64 v10; // rbp
-  Scaleform::Render::D3D1x::UniformVar *v11; // r10
+  __int64 v10; // rbp
+  Scaleform::Render::D3D1x::UniformVar *Uniforms; // r10
   Scaleform::Render::D3D1x::UniformVar *v12; // rdx
 
   v6 = var;
-  v7 = v;
-  v8 = sd;
-  v9 = this;
   v10 = var;
-  v11 = sd->pVDesc->Uniforms;
-  if ( v11[v10].Size )
+  Uniforms = sd->pVDesc->Uniforms;
+  if ( Uniforms[v10].Size )
     memmove(
-      &this->UniformData[v11[v10].ShadowOffset + (unsigned __int64)(index * (unsigned __int8)v11[v10].ElementSize)],
+      &this->UniformData[Uniforms[v10].ShadowOffset
+                       + (unsigned __int64)(index * (unsigned __int8)Uniforms[v10].ElementSize)],
       v,
       4i64 * n);
-  v12 = v8->pFDesc->Uniforms;
+  v12 = sd->pFDesc->Uniforms;
   if ( v12[v10].Size )
     memmove(
-      &v9->UniformData[v12[v10].ShadowOffset + (unsigned __int64)(index * (unsigned __int8)v12[v10].ElementSize)],
-      v7,
+      &this->UniformData[v12[v10].ShadowOffset + (unsigned __int64)(index * (unsigned __int8)v12[v10].ElementSize)],
+      v,
       4i64 * n);
-  v9->UniformSet[v6] = 1;
+  this->UniformSet[v6] = 1;
 }
 
 // File Line: 160
 // RVA: 0xA02C10
-void __fastcall Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *this, Scaleform::Render::D3D1x::ShaderPair *sd, unsigned int var, const float *v, unsigned int n, unsigned int index, unsigned int batch)
+void __fastcall Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
+        Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *this,
+        Scaleform::Render::D3D1x::ShaderPair *sd,
+        unsigned int var,
+        const float *v,
+        unsigned int n,
+        unsigned int index,
+        unsigned int batch)
 {
-  Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *v7; // rdi
-  Scaleform::Render::D3D1x::VertexShaderDesc *v8; // rcx
-  const float *v9; // rbx
-  Scaleform::Render::D3D1x::BatchVar *v10; // r9
-  Scaleform::Render::D3D1x::ShaderPair *v11; // r10
-  signed __int64 v12; // rdx
-  char v13; // r11
-  Scaleform::Render::D3D1x::FragShaderDesc *v14; // r9
-  Scaleform::Render::D3D1x::BatchVar *v15; // rax
-  char v16; // r11
+  Scaleform::Render::D3D1x::VertexShaderDesc *pVDesc; // rcx
+  Scaleform::Render::D3D1x::BatchVar *BatchUniforms; // r9
+  __int64 v12; // rdx
+  char Offset; // r11
+  __int64 v14; // r8
+  Scaleform::Render::D3D1x::FragShaderDesc *pFDesc; // r9
+  Scaleform::Render::D3D1x::BatchVar *v16; // rax
+  char v17; // r11
+  __int64 Array; // r8
 
-  v7 = this;
-  v8 = sd->pVDesc;
-  v9 = v;
-  v10 = v8->BatchUniforms;
-  v11 = sd;
+  pVDesc = sd->pVDesc;
+  BatchUniforms = pVDesc->BatchUniforms;
   v12 = var;
-  v13 = v10[v12].Offset;
-  if ( v13 < 0 )
+  Offset = BatchUniforms[v12].Offset;
+  if ( Offset < 0 )
   {
-    v14 = v11->pFDesc;
-    v15 = v14->BatchUniforms;
-    v16 = v15[v12].Offset;
-    if ( v16 < 0 )
+    pFDesc = sd->pFDesc;
+    v16 = pFDesc->BatchUniforms;
+    v17 = v16[v12].Offset;
+    if ( v17 < 0 )
+    {
       Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform0(
-        v7,
-        v11,
+        this,
+        sd,
         var,
-        v9,
+        v,
         n,
         index);
+    }
     else
+    {
+      Array = (unsigned int)v16[var].Array;
       Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform0(
-        v7,
-        v11,
-        v15[v12].Array,
-        v9,
+        this,
+        sd,
+        Array,
+        v,
         n,
-        batch * (unsigned __int8)v14->Uniforms[v15[v12].Array].BatchSize + index + v16);
+        batch * (unsigned __int8)pFDesc->Uniforms[Array].BatchSize + index + v17);
+    }
   }
   else
   {
+    v14 = (unsigned int)BatchUniforms[var].Array;
     Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform0(
-      v7,
-      v11,
-      v10[v12].Array,
-      v9,
+      this,
+      sd,
+      v14,
+      v,
       n,
-      index + batch * (unsigned __int8)v8->Uniforms[v10[v12].Array].BatchSize + v13);
+      index + batch * (unsigned __int8)pVDesc->Uniforms[v14].BatchSize + Offset);
   }
 }
 
 // File Line: 195
 // RVA: 0xA01FF0
-void __fastcall Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetMatrix(Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *this, Scaleform::Render::D3D1x::ShaderPair *sd, unsigned int var, Scaleform::Render::Matrix2x4<float> *m1, Scaleform::Render::MatrixPoolImpl::HMatrix *m2, Scaleform::Render::MatrixState *Matrices, unsigned int index, unsigned int batch)
+void __fastcall Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetMatrix(
+        Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *this,
+        Scaleform::Render::D3D1x::ShaderPair *sd,
+        unsigned int var,
+        Scaleform::Render::Matrix2x4<float> *m1,
+        Scaleform::Render::MatrixPoolImpl::HMatrix *m2,
+        Scaleform::Render::MatrixState *Matrices,
+        unsigned int index,
+        unsigned int batch)
 {
-  unsigned int v8; // edi
-  Scaleform::Render::D3D1x::ShaderPair *v9; // rsi
-  Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *v10; // rbp
-  Scaleform::Render::MatrixPoolImpl::DataHeader *v11; // r11
+  Scaleform::Render::MatrixPoolImpl::DataHeader *pHeader; // r11
   __int64 v12; // rax
-  Scaleform::Render::Matrix4x4<float> *v13; // rax
-  Scaleform::Render::Matrix3x4<float> v14; // [rsp+40h] [rbp-78h]
-  Scaleform::Render::Matrix4x4<float> v15; // [rsp+70h] [rbp-48h]
+  Scaleform::Render::Matrix4x4<float> *UVP; // rax
+  Scaleform::Render::Matrix3x4<float> v14; // [rsp+40h] [rbp-78h] BYREF
+  Scaleform::Render::Matrix4x4<float> v15; // [rsp+70h] [rbp-48h] BYREF
 
-  v8 = var;
-  v9 = sd;
-  v10 = this;
-  v11 = m2->pHandle->pHeader;
-  v12 = v11->Format & 0xF;
-  if ( v11->Format & 0x10 )
+  pHeader = m2->pHandle->pHeader;
+  v12 = pHeader->Format & 0xF;
+  if ( (pHeader->Format & 0x10) != 0 )
   {
     Scaleform::Render::Matrix3x4<float>::MultiplyMatrix(
       &v14,
-      (Scaleform::Render::Matrix3x4<float> *)&v11[(unsigned __int8)Scaleform::Render::MatrixPoolImpl::HMatrixConstants::MatrixElementSizeTable[v12].Offsets[4]
-                                                + 1],
+      (Scaleform::Render::Matrix3x4<float> *)&pHeader[(unsigned __int8)Scaleform::Render::MatrixPoolImpl::HMatrixConstants::MatrixElementSizeTable[v12].Offsets[4]
+                                                    + 1],
       m1);
-    v13 = Scaleform::Render::MatrixState::GetUVP(Matrices);
-    Scaleform::Render::Matrix4x4<float>::MultiplyMatrix(&v15, v13, &v14);
+    UVP = Scaleform::Render::MatrixState::GetUVP(Matrices);
+    Scaleform::Render::Matrix4x4<float>::MultiplyMatrix(&v15, UVP, &v14);
     Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-      v10,
-      v9,
-      v8,
+      this,
+      sd,
+      var,
       (const float *)&v15,
       0x10u,
       index,
@@ -127,13 +139,13 @@ void __fastcall Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x:
     Scaleform::Render::Matrix2x4<float>::SetToAppend(
       (Scaleform::Render::Matrix2x4<float> *)&v14,
       m1,
-      (Scaleform::Render::Matrix2x4<float> *)&v11[(unsigned __int8)Scaleform::Render::MatrixPoolImpl::HMatrixConstants::MatrixElementSizeTable[v12].Offsets[4]
-                                                + 1],
+      (Scaleform::Render::Matrix2x4<float> *)&pHeader[(unsigned __int8)Scaleform::Render::MatrixPoolImpl::HMatrixConstants::MatrixElementSizeTable[v12].Offsets[4]
+                                                    + 1],
       &Matrices->UserView);
     Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-      v10,
-      v9,
-      v8,
+      this,
+      sd,
+      var,
       (const float *)&v14,
       8u,
       2 * index,
@@ -143,17 +155,13 @@ void __fastcall Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x:
 
 // File Line: 212
 // RVA: 0xA00BD0
-void __fastcall Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetCxform(Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *this, Scaleform::Render::D3D1x::ShaderPair *sd, Scaleform::Render::Cxform *cx, unsigned int index, unsigned int batch)
+void __fastcall Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetCxform(
+        Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *this,
+        Scaleform::Render::D3D1x::ShaderPair *sd,
+        Scaleform::Render::Cxform *cx,
+        unsigned int index,
+        unsigned int batch)
 {
-  unsigned int v5; // esi
-  Scaleform::Render::Cxform *v6; // rdi
-  Scaleform::Render::D3D1x::ShaderPair *v7; // rbp
-  Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *v8; // r14
-
-  v5 = index;
-  v6 = cx;
-  v7 = sd;
-  v8 = this;
   Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
     this,
     sd,
@@ -163,85 +171,75 @@ void __fastcall Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x:
     index,
     batch);
   Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-    v8,
-    v7,
+    this,
+    sd,
     4u,
-    v6->M[1],
+    cx->M[1],
     4u,
-    v5,
+    index,
     batch);
 }
 
 // File Line: 221
 // RVA: 0x9FF050
-__int64 __fastcall Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::GetUniformSize(Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *this, Scaleform::Render::D3D1x::ShaderPair *sd, unsigned int i)
+__int64 __fastcall Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::GetUniformSize(
+        Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *this,
+        Scaleform::Render::D3D1x::ShaderPair *sd,
+        unsigned int i)
 {
-  Scaleform::Render::D3D1x::VertexShaderDesc *v3; // r9
-  signed __int64 v4; // rcx
-  Scaleform::Render::D3D1x::BatchVar *v5; // rax
-  signed __int64 v6; // r10
-  signed __int64 v7; // r8
-  char v8; // al
-  signed __int64 v10; // rcx
-  Scaleform::Render::D3D1x::UniformVar *v11; // rax
-  Scaleform::Render::D3D1x::FragShaderDesc *v12; // rdx
-  Scaleform::Render::D3D1x::BatchVar *v13; // rax
-  signed __int64 v14; // r8
-  char v15; // al
+  Scaleform::Render::D3D1x::VertexShaderDesc *pVDesc; // r9
+  __int64 v4; // rcx
+  __int64 v5; // r10
+  Scaleform::Render::D3D1x::BatchVar *v6; // r8
+  __int64 v8; // rcx
+  Scaleform::Render::D3D1x::UniformVar *Uniforms; // rax
+  Scaleform::Render::D3D1x::FragShaderDesc *pFDesc; // rdx
+  Scaleform::Render::D3D1x::BatchVar *v11; // r8
 
-  v3 = sd->pVDesc;
+  pVDesc = sd->pVDesc;
   v4 = i;
-  v5 = v3->BatchUniforms;
-  v6 = i;
-  v7 = (signed __int64)&v5[v6];
-  v8 = v5[v6].Array;
-  if ( v8 <= 25 )
-    return (unsigned __int8)v3->Uniforms[v8].ElementSize * (unsigned int)*(unsigned __int8 *)(v7 + 2);
-  v10 = v4;
-  v11 = v3->Uniforms;
-  if ( v11[v10].Location >= 0 )
-    return (unsigned int)v11[v10].Size;
-  v12 = sd->pFDesc;
-  v13 = v12->BatchUniforms;
-  v14 = (signed __int64)&v13[v6];
-  v15 = v13[v6].Array;
-  if ( v15 <= 25 )
-    return (unsigned __int8)v12->Uniforms[v15].ElementSize * (unsigned int)*(unsigned __int8 *)(v14 + 2);
-  v11 = v12->Uniforms;
-  if ( v11[v10].Location >= 0 )
-    return (unsigned int)v11[v10].Size;
+  v5 = i;
+  v6 = &pVDesc->BatchUniforms[v5];
+  if ( v6->Array <= 25 )
+    return (unsigned __int8)pVDesc->Uniforms[v6->Array].ElementSize * (unsigned int)(unsigned __int8)v6->Size;
+  v8 = v4;
+  Uniforms = pVDesc->Uniforms;
+  if ( Uniforms[v8].Location >= 0 )
+    return (unsigned int)Uniforms[v8].Size;
+  pFDesc = sd->pFDesc;
+  v11 = &pFDesc->BatchUniforms[v5];
+  if ( v11->Array <= 25 )
+    return (unsigned __int8)pFDesc->Uniforms[v11->Array].ElementSize * (unsigned int)(unsigned __int8)v11->Size;
+  Uniforms = pFDesc->Uniforms;
+  if ( Uniforms[v8].Location >= 0 )
+    return (unsigned int)Uniforms[v8].Size;
   return 0i64;
 }
 
 // File Line: 240
 // RVA: 0xA02CF0
-void __fastcall Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUserUniforms(Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *this, Scaleform::Render::D3D1x::ShaderPair *sd, Scaleform::Render::MatrixPoolImpl::HMatrix *m, int batch)
+void __fastcall Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUserUniforms(
+        Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *this,
+        Scaleform::Render::D3D1x::ShaderPair *sd,
+        Scaleform::Render::MatrixPoolImpl::HMatrix *m,
+        unsigned int batch)
 {
-  Scaleform::Render::D3D1x::ShaderPair *v4; // r12
-  Scaleform::Render::MatrixPoolImpl::DataHeader *v5; // rdx
-  int v6; // er13
-  Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *v7; // r15
-  signed __int64 v8; // rsi
+  Scaleform::Render::MatrixPoolImpl::DataHeader *pHeader; // rdx
+  __int64 v8; // rsi
   signed int v9; // ebx
   char *v10; // r14
   char v11; // bp
-  unsigned int v12; // eax
+  unsigned int UniformSize; // eax
   __int64 n; // rdi
   Scaleform::Render::Texture *v14; // rcx
   const float *v15; // r9
-  signed int v16; // eax
-  float v17; // [rsp+40h] [rbp-48h]
-  float v18; // [rsp+44h] [rbp-44h]
-  int v19; // [rsp+48h] [rbp-40h]
-  int v20; // [rsp+4Ch] [rbp-3Ch]
+  int Height; // eax
+  int v17[4]; // [rsp+40h] [rbp-48h] BYREF
 
-  v4 = sd;
-  v5 = m->pHandle->pHeader;
-  v6 = batch;
-  v7 = this;
-  if ( v5->Format & 8 )
-    v8 = (signed __int64)&v5[(unsigned __int8)Scaleform::Render::MatrixPoolImpl::HMatrixConstants::MatrixElementSizeTable[v5->Format & 0xF].Offsets[3]
-                           + 1];
+  pHeader = m->pHandle->pHeader;
+  if ( (pHeader->Format & 8) != 0 )
+    v8 = (__int64)&pHeader[(unsigned __int8)Scaleform::Render::MatrixPoolImpl::HMatrixConstants::MatrixElementSizeTable[pHeader->Format & 0xF].Offsets[3]
+                         + 1];
   else
     v8 = 0i64;
   v9 = 0;
@@ -249,36 +247,36 @@ void __fastcall Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x:
   do
   {
     v11 = *v10;
-    if ( !(*v10 & 1) )
+    if ( (*v10 & 1) == 0 )
     {
-      v12 = Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::GetUniformSize(
-              v7,
-              v4,
-              v9);
-      n = v12;
-      if ( v12 )
+      UniformSize = Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::GetUniformSize(
+                      this,
+                      sd,
+                      v9);
+      n = UniformSize;
+      if ( UniformSize )
       {
-        if ( v11 & 2 && (unsigned int)n <= 4 && (v14 = v7->Textures[0]) != 0i64 )
+        if ( (v11 & 2) != 0 && UniformSize <= 4 && (v14 = this->Textures[0]) != 0i64 )
         {
-          v15 = &v17;
-          v16 = v14->ImgSize.Height;
-          v17 = (float)(1.0 / (float)(signed int)v14->ImgSize.Width) * *(float *)v8;
-          v19 = *(_DWORD *)(v8 + 8);
-          v18 = (float)(1.0 / (float)v16) * *(float *)(v8 + 4);
-          v20 = *(_DWORD *)(v8 + 12);
+          v15 = (const float *)v17;
+          Height = v14->ImgSize.Height;
+          *(float *)v17 = (float)(1.0 / (float)(int)v14->ImgSize.Width) * *(float *)v8;
+          v17[2] = *(_DWORD *)(v8 + 8);
+          *(float *)&v17[1] = (float)(1.0 / (float)Height) * *(float *)(v8 + 4);
+          v17[3] = *(_DWORD *)(v8 + 12);
         }
         else
         {
           v15 = (const float *)v8;
         }
         Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-          v7,
-          v4,
+          this,
+          sd,
           v9,
           v15,
           n,
           0,
-          v6);
+          batch);
         v8 += 4 * n;
       }
     }
@@ -290,7 +288,8 @@ void __fastcall Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x:
 
 // File Line: 323
 // RVA: 0x9FBB00
-void __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::~StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>(Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this)
+void __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::~StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>(
+        Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this)
 {
   Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *v1; // rbx
 
@@ -306,305 +305,303 @@ void __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x:
 
 // File Line: 339
 // RVA: 0xA03080
-signed int __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::StaticShaderForFill(Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this, Scaleform::Render::PrimitiveFill *pfill, unsigned int *fillflags, unsigned int batchType)
+int __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::StaticShaderForFill(
+        Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this,
+        Scaleform::Render::PrimitiveFill *pfill,
+        unsigned int *fillflags,
+        unsigned int batchType)
 {
-  Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *v4; // r14
-  Scaleform::Render::PrimitiveFill *v5; // rbx
-  unsigned int v6; // edi
-  unsigned int *v7; // rsi
   Scaleform::Render::PrimitiveFillType v8; // ebp
-  signed int v9; // edx
+  Scaleform::Render::PrimitiveFillType Type; // edx
   int v10; // eax
   int v11; // eax
-  signed int v12; // ecx
-  unsigned int v13; // edx
-  int v14; // edi
+  int v12; // ecx
+  int v13; // edi
 
-  v4 = this;
-  v5 = pfill;
-  v6 = batchType;
-  v7 = fillflags;
-  v8 = (unsigned int)this->Profiler->vfptr->GetFillType(this->Profiler, pfill->Data.Type);
+  v8 = this->Profiler->vfptr->GetFillType(this->Profiler, pfill->Data.Type);
   if ( (unsigned int)(v8 - 5) > 1 )
     return Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::StaticShaderForFill(
-             v4,
+             this,
              v8,
-             v7,
-             v6);
-  v9 = v5->Data.Type;
-  if ( (unsigned int)(v9 - 5) > 3 && v9 < 11 )
+             fillflags,
+             batchType);
+  Type = pfill->Data.Type;
+  if ( (unsigned int)(Type - 5) > 3 && Type < PrimFill_UVTexture )
     return Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::StaticShaderForFill(
-             v4,
+             this,
              v8,
-             v7,
-             v6);
-  if ( ((signed int (*)(void))v5->Data.Textures[0].pObject->vfptr[4].__vecDelDtor)() < 200
-    || ((signed int (*)(void))v5->Data.Textures[0].pObject->vfptr[4].__vecDelDtor)() > 202 )
+             fillflags,
+             batchType);
+  if ( ((int (__fastcall *)(Scaleform::Render::Texture *))pfill->Data.Textures[0].pObject->vfptr[4].__vecDelDtor)(pfill->Data.Textures[0].pObject) < 200
+    || ((int (__fastcall *)(Scaleform::Render::Texture *))pfill->Data.Textures[0].pObject->vfptr[4].__vecDelDtor)(pfill->Data.Textures[0].pObject) > 202 )
   {
     return Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::StaticShaderForFill(
-             v4,
+             this,
              v8,
-             v7,
-             v6);
+             fillflags,
+             batchType);
   }
-  v10 = (unsigned __int64)((__int64 (*)(void))v5->Data.Textures[0].pObject->vfptr[4].__vecDelDtor)() - 200;
+  v10 = ((__int64 (__fastcall *)(Scaleform::Render::Texture *))pfill->Data.Textures[0].pObject->vfptr[4].__vecDelDtor)(pfill->Data.Textures[0].pObject)
+      - 200;
   if ( v10 )
   {
     v11 = v10 - 1;
     if ( !v11 )
     {
       if ( !`Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::StaticShaderForFill::`14::warned )
-        `Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::StaticShaderForFill::`14::warned = (unsigned int)Scaleform::Render::Texture::GetPlaneCount(v5->Data.Textures[0].pObject) != 4;
+        `Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::StaticShaderForFill::`14::warned = (unsigned int)Scaleform::Render::Texture::GetPlaneCount(pfill->Data.Textures[0].pObject) != 4;
       v12 = 270336;
       goto LABEL_18;
     }
     if ( v11 == 1 )
     {
       if ( !`Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::StaticShaderForFill::`18::warned )
-        `Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::StaticShaderForFill::`18::warned = (unsigned int)Scaleform::Render::Texture::GetPlaneCount(v5->Data.Textures[0].pObject) != 1;
+        `Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::StaticShaderForFill::`18::warned = (unsigned int)Scaleform::Render::Texture::GetPlaneCount(pfill->Data.Textures[0].pObject) != 1;
       v12 = 278528;
       goto LABEL_18;
     }
   }
   else if ( !`Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::StaticShaderForFill::`10::warned )
   {
-    `Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::StaticShaderForFill::`10::warned = (unsigned int)Scaleform::Render::Texture::GetPlaneCount(v5->Data.Textures[0].pObject) != 3;
+    `Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::StaticShaderForFill::`10::warned = (unsigned int)Scaleform::Render::Texture::GetPlaneCount(pfill->Data.Textures[0].pObject) != 3;
   }
   v12 = 0x40000;
 LABEL_18:
-  if ( v8 == 6 )
+  if ( v8 == PrimFill_Texture_EAlpha )
     v12 += 32;
   if ( v12 != 133120 )
   {
-    v13 = *v7;
-    if ( (*(_BYTE *)v7 & 0xC) == 12 )
+    if ( (*(_BYTE *)fillflags & 0xC) == 12 )
     {
       v12 += 256;
     }
-    else if ( v13 & 8 )
+    else if ( (*fillflags & 8) != 0 )
     {
       v12 += 16;
     }
   }
-  v14 = v6 - 1;
-  if ( v14 )
+  v13 = batchType - 1;
+  if ( v13 )
   {
-    if ( v14 == 1 )
+    if ( v13 == 1 )
       v12 += 4;
   }
   else
   {
     v12 += 2;
   }
-  if ( *v7 & 1 )
+  if ( (*fillflags & 1) != 0 )
     ++v12;
-  if ( *v7 & 0x10 )
+  if ( (*fillflags & 0x10) != 0 )
     v12 += 8;
   return v12;
 }
 
 // File Line: 414
 // RVA: 0xA03200
-__int64 __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::StaticShaderForFill(Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this, Scaleform::Render::PrimitiveFillType fill, unsigned int *fillflags, unsigned int batchType)
+__int64 __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::StaticShaderForFill(
+        Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this,
+        Scaleform::Render::PrimitiveFillType fill,
+        unsigned int *fillflags,
+        unsigned int batchType)
 {
   unsigned int v4; // ecx
-  unsigned int v5; // er9
-  unsigned int v6; // eax
+  int v5; // r9d
+  int v6; // eax
   bool v7; // zf
   __int64 result; // rax
 
-  switch ( 0x40000000 )
+  switch ( fill )
   {
-    case 0:
+    case PrimFill_VColor:
       v4 = 65537;
       goto LABEL_13;
-    case 1:
+    case PrimFill_VColor_EAlpha:
       v4 = 65569;
       goto LABEL_13;
-    case 2:
+    case PrimFill_Texture:
       v4 = 1;
       goto LABEL_13;
-    case 3:
+    case PrimFill_Texture_EAlpha:
       v4 = 33;
       goto LABEL_13;
-    case 4:
+    case PrimFill_Texture_VColor:
       v4 = 1025;
       goto LABEL_13;
-    case 5:
+    case PrimFill_Texture_VColor_EAlpha:
       v4 = 1057;
       goto LABEL_13;
-    case 6:
+    case PrimFill_2Texture:
       v4 = 513;
       goto LABEL_13;
-    case 7:
+    case PrimFill_2Texture_EAlpha:
       v4 = 545;
       goto LABEL_13;
-    case 8:
+    case PrimFill_UVTexture:
       v4 = 135168;
       goto LABEL_13;
-    case 9:
+    case PrimFill_UVTextureAlpha_VColor:
       *fillflags |= 8u;
       v4 = 133120;
-      break;
+      goto LABEL_17;
     default:
-      *fillflags &= 0xFFFFFFF7;
+      *fillflags &= ~8u;
       v4 = 0x20000;
 LABEL_13:
       if ( (*(_BYTE *)fillflags & 0xC) == 12 )
       {
         v4 += 256;
       }
-      else if ( *fillflags & 8 )
+      else if ( (*fillflags & 8) != 0 )
       {
         v4 += 16;
       }
-      break;
+LABEL_17:
+      v5 = batchType - 1;
+      if ( v5 )
+      {
+        if ( v5 == 1 )
+          v4 += 4;
+      }
+      else
+      {
+        v4 += 2;
+      }
+      v6 = *fillflags;
+      if ( (*fillflags & 1) != 0 )
+        ++v4;
+      if ( (v6 & 2) != 0 )
+        v4 += 64;
+      v7 = (v6 & 0x10) == 0;
+      result = v4 + 8;
+      if ( v7 )
+        return v4;
+      return result;
   }
-  v5 = batchType - 1;
-  if ( v5 )
-  {
-    if ( v5 == 1 )
-      v4 += 4;
-  }
-  else
-  {
-    v4 += 2;
-  }
-  v6 = *fillflags;
-  if ( *fillflags & 1 )
-    ++v4;
-  if ( v6 & 2 )
-    v4 += 64;
-  v7 = (v6 & 0x10) == 0;
-  result = v4 + 8;
-  if ( v7 )
-    result = v4;
-  return result;
 }
 
 // File Line: 542
 // RVA: 0xA09B50
-void __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::MapVertexFormat(Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this, __int64 fill, Scaleform::Render::VertexFormat *sourceFormat, Scaleform::Render::VertexFormat **single, Scaleform::Render::VertexFormat **batch, Scaleform::Render::VertexFormat **instanced, unsigned int flags)
+void __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::MapVertexFormat(
+        Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this,
+        __int64 fill,
+        Scaleform::Render::VertexFormat *sourceFormat,
+        Scaleform::Render::VertexFormat **single,
+        Scaleform::Render::VertexFormat **batch,
+        Scaleform::Render::VertexFormat **instanced,
+        int flags)
 {
-  Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *v7; // rdi
-  Scaleform::Render::VertexFormat **v8; // r13
-  Scaleform::Render::VertexFormat *v9; // r14
   Scaleform::Render::PrimitiveFillType v10; // eax
-  Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::Render::SourceFormatHash,Scaleform::Render::ResultFormat,Scaleform::FixedSizeHash<Scaleform::Render::SourceFormatHash> >,Scaleform::HashNode<Scaleform::Render::SourceFormatHash,Scaleform::Render::ResultFormat,Scaleform::FixedSizeHash<Scaleform::Render::SourceFormatHash> >::NodeHashF,Scaleform::HashNode<Scaleform::Render::SourceFormatHash,Scaleform::Render::ResultFormat,Scaleform::FixedSizeHash<Scaleform::Render::SourceFormatHash> >::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::Render::SourceFormatHash,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::HashNode<Scaleform::Render::SourceFormatHash,Scaleform::Render::ResultFormat,Scaleform::FixedSizeHash<Scaleform::Render::SourceFormatHash> >,Scaleform::HashNode<Scaleform::Render::SourceFormatHash,Scaleform::Render::ResultFormat,Scaleform::FixedSizeHash<Scaleform::Render::SourceFormatHash> >::NodeHashF> >::TableType *v11; // r9
+  Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::Render::SourceFormatHash,Scaleform::Render::ResultFormat,Scaleform::FixedSizeHash<Scaleform::Render::SourceFormatHash> >,Scaleform::HashNode<Scaleform::Render::SourceFormatHash,Scaleform::Render::ResultFormat,Scaleform::FixedSizeHash<Scaleform::Render::SourceFormatHash> >::NodeHashF,Scaleform::HashNode<Scaleform::Render::SourceFormatHash,Scaleform::Render::ResultFormat,Scaleform::FixedSizeHash<Scaleform::Render::SourceFormatHash> >::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::Render::SourceFormatHash,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::HashNode<Scaleform::Render::SourceFormatHash,Scaleform::Render::ResultFormat,Scaleform::FixedSizeHash<Scaleform::Render::SourceFormatHash> >,Scaleform::HashNode<Scaleform::Render::SourceFormatHash,Scaleform::Render::ResultFormat,Scaleform::FixedSizeHash<Scaleform::Render::SourceFormatHash> >::NodeHashF> >::TableType *pTable; // r9
   char v12; // r15
-  Scaleform::Render::PrimitiveFillType v13; // er10
-  signed __int64 v14; // rdx
-  signed __int64 v15; // rcx
+  Scaleform::Render::PrimitiveFillType v13; // r10d
+  __int64 v14; // rdx
+  __int64 v15; // rcx
   __int64 v16; // rax
-  signed __int64 v17; // rax
-  signed __int64 v18; // r8
-  signed __int64 v19; // rdx
-  signed __int64 v20; // rcx
-  signed __int64 v21; // rcx
+  __int64 v17; // rax
+  __int64 v18; // r8
+  __int64 v19; // rdx
+  __int64 v20; // rcx
+  unsigned __int64 *v21; // rcx
   Scaleform::Render::VertexFormat *v22; // rdx
   Scaleform::Render::VertexFormat *v23; // rcx
-  signed __int64 v24; // rdx
-  unsigned int v25; // esi
-  Scaleform::Render::D3D1x::ShaderDesc::ShaderType v26; // ebx
-  Scaleform::Render::D3D1x::ShaderDesc::ShaderVersion v27; // eax
-  Scaleform::Render::D3D1x::VertexShaderDesc *v28; // rax
-  Scaleform::Render::D3D1x::VertexShaderDesc *v29; // r12
-  Scaleform::Render::VertexFormat **v30; // rax
-  int v31; // er13
-  unsigned int v32; // ebx
-  signed int v33; // er9
-  int v34; // edi
-  signed int v35; // er11
-  Scaleform::Render::VertexElement *v36; // rdx
-  $3C54659889F1EB765F9D24AEEC355797 *v37; // r8
-  unsigned int *v38; // r10
-  int v39; // edi
-  $3C54659889F1EB765F9D24AEEC355797 *v40; // r8
-  Scaleform::Render::VertexElement *v41; // rdx
-  Scaleform::Render::VertexElement *v42; // rcx
-  unsigned int v43; // eax
-  unsigned int v44; // er9
-  int v45; // eax
-  unsigned int v46; // er9
-  unsigned int v47; // ecx
-  Scaleform::Render::VertexElement *v48; // rsi
-  Scaleform::Render::MultiKeyCollection<Scaleform::Render::VertexElement,Scaleform::Render::VertexFormat,32,8> *v49; // rsi
-  Scaleform::Render::VertexFormat *v50; // rdx
-  unsigned int v51; // ecx
-  Scaleform::Render::VertexFormat *v52; // rdx
-  Scaleform::Render::VertexFormat **v53; // r14
-  unsigned int v54; // ecx
-  signed __int64 v55; // rdx
-  signed __int64 v56; // rcx
-  __int64 v57; // rax
-  int v58; // eax
-  Scaleform::Render::VertexFormat *v59; // rdx
-  Scaleform::Render::VertexFormat **v60; // rcx
-  unsigned int v61; // ecx
-  Scaleform::Render::VertexElement keys; // [rsp+20h] [rbp-81h]
-  __int64 v63; // [rsp+28h] [rbp-79h]
-  __int64 v64[6]; // [rsp+30h] [rbp-71h]
-  Scaleform::Render::VertexElement *ppnewKeys; // [rsp+60h] [rbp-41h]
-  __int128 *v66; // [rsp+68h] [rbp-39h]
-  Scaleform::Render::PrimitiveFillType v67; // [rsp+70h] [rbp-31h]
-  unsigned int v68; // [rsp+74h] [rbp-2Dh]
-  Scaleform::Render::VertexFormat *v69; // [rsp+78h] [rbp-29h]
-  __int128 v70; // [rsp+80h] [rbp-21h]
-  Scaleform::Render::VertexFormat *v71; // [rsp+90h] [rbp-11h]
+  unsigned int v24; // esi
+  Scaleform::Render::D3D1x::ShaderDesc::ShaderType v25; // ebx
+  Scaleform::Render::D3D1x::ShaderDesc::ShaderVersion v26; // eax
+  Scaleform::Render::D3D1x::VertexShaderDesc *Desc; // rax
+  Scaleform::Render::D3D1x::VertexShaderDesc *v28; // r12
+  Scaleform::Render::VertexFormat **v29; // rax
+  int v30; // r13d
+  unsigned int v31; // ebx
+  unsigned int v32; // r9d
+  int v33; // edi
+  int v34; // r11d
+  Scaleform::Render::VertexElement *p_keys; // rdx
+  $3C54659889F1EB765F9D24AEEC355797 *v36; // r8
+  unsigned int *p_Attr; // r10
+  int v38; // edi
+  $3C54659889F1EB765F9D24AEEC355797 *v39; // r8
+  Scaleform::Render::VertexElement *v40; // rdx
+  Scaleform::Render::VertexElement *pElements; // rcx
+  unsigned int Attribute; // eax
+  unsigned int v43; // r9d
+  int v44; // eax
+  unsigned int v45; // r9d
+  unsigned int v46; // ecx
+  Scaleform::Render::VertexElement *v47; // rsi
+  Scaleform::Render::MultiKeyCollection<Scaleform::Render::VertexElement,Scaleform::Render::VertexFormat,32,8> *v48; // rsi
+  Scaleform::Render::VertexFormat *v49; // rdx
+  unsigned int v50; // ecx
+  Scaleform::Render::VertexFormat *v51; // rdx
+  __int64 *v52; // r14
+  unsigned int v53; // ecx
+  __int64 v54; // rdx
+  __int64 v55; // rcx
+  __int64 v56; // rax
+  unsigned int v57; // eax
+  Scaleform::Render::VertexFormat *v58; // rdx
+  __int64 *v59; // rcx
+  unsigned int v60; // ecx
+  Scaleform::Render::VertexElement keys; // [rsp+20h] [rbp-81h] BYREF
+  __int64 v62[7]; // [rsp+28h] [rbp-79h]
+  Scaleform::HashNode<Scaleform::Render::SourceFormatHash,Scaleform::Render::ResultFormat,Scaleform::FixedSizeHash<Scaleform::Render::SourceFormatHash> >::NodeRef ppnewKeys; // [rsp+60h] [rbp-41h] BYREF
+  int v64[2]; // [rsp+70h] [rbp-31h] BYREF
+  Scaleform::Render::VertexFormat *v65; // [rsp+78h] [rbp-29h]
+  Scaleform::Render::VertexFormat *v66; // [rsp+80h] [rbp-21h] BYREF
+  Scaleform::Render::VertexFormat *v67; // [rsp+88h] [rbp-19h]
+  __int64 v68; // [rsp+90h] [rbp-11h]
   void *pmemAddr; // [rsp+98h] [rbp-9h]
-  Scaleform::Render::VertexElement *v73; // [rsp+F0h] [rbp+4Fh]
-  unsigned int v74; // [rsp+F8h] [rbp+57h]
-  int v75; // [rsp+100h] [rbp+5Fh]
-  Scaleform::Render::VertexFormat **v76; // [rsp+108h] [rbp+67h]
+  Scaleform::Render::VertexElement *v70; // [rsp+F0h] [rbp+4Fh] BYREF
+  unsigned int v71; // [rsp+F8h] [rbp+57h]
+  int v72; // [rsp+100h] [rbp+5Fh]
+  Scaleform::Render::VertexFormat **v73; // [rsp+108h] [rbp+67h]
 
-  v76 = single;
-  v73 = (Scaleform::Render::VertexElement *)this;
-  v7 = this;
-  v8 = single;
-  v9 = sourceFormat;
-  v10 = (unsigned int)this->Profiler->vfptr->GetFillType(this->Profiler, (Scaleform::Render::PrimitiveFillType)fill);
-  v11 = v7->VertexFormatComputedHash.mHash.pTable;
+  v73 = single;
+  v70 = (Scaleform::Render::VertexElement *)this;
+  v10 = this->Profiler->vfptr->GetFillType(this->Profiler, (Scaleform::Render::PrimitiveFillType)fill);
+  pTable = this->VertexFormatComputedHash.mHash.pTable;
   v12 = flags;
   v13 = v10;
-  v67 = v10;
-  v68 = flags;
-  v69 = v9;
-  pmemAddr = &v7->VertexFormatComputedHash;
-  if ( v11 )
+  v64[0] = v10;
+  v64[1] = flags;
+  v65 = sourceFormat;
+  pmemAddr = &this->VertexFormatComputedHash;
+  if ( pTable )
   {
     v14 = 16i64;
     v15 = 5381i64;
     do
     {
-      v16 = *((unsigned __int8 *)&v66 + v14-- + 7);
+      v16 = *((unsigned __int8 *)&ppnewKeys.pSecond + v14-- + 7);
       v17 = 65599 * v15 + v16;
       v15 = v17;
     }
     while ( v14 );
-    v18 = v17 & v11->SizeMask;
+    v18 = v17 & pTable->SizeMask;
     v19 = v18;
-    v20 = (signed __int64)&v11[1] + 56 * v18;
+    v20 = (__int64)&pTable[1] + 56 * v18;
     if ( *(_QWORD *)v20 != -2i64 && *(_QWORD *)(v20 + 8) == v18 )
     {
       while ( *(_QWORD *)(v20 + 8) != v18
            || v13 != *(_DWORD *)(v20 + 16)
-           || v9 != *(Scaleform::Render::VertexFormat **)(v20 + 24)
+           || sourceFormat != *(Scaleform::Render::VertexFormat **)(v20 + 24)
            || flags != *(_DWORD *)(v20 + 20) )
       {
         v19 = *(_QWORD *)v20;
         if ( *(_QWORD *)v20 == -1i64 )
           goto LABEL_15;
-        v20 = (signed __int64)&v11[1] + 56 * v19;
+        v20 = (__int64)&pTable[1] + 56 * v19;
       }
       if ( v19 >= 0 )
       {
-        v21 = (signed __int64)&v11[2] + 56 * v19;
+        v21 = &pTable[2].EntryCount + 7 * v19;
         if ( v21 )
         {
-          v70 = *(_OWORD *)(v21 + 16);
-          v22 = (Scaleform::Render::VertexFormat *)*((_QWORD *)&v70 + 1);
-          v23 = *(Scaleform::Render::VertexFormat **)(v21 + 32);
-          *v8 = (Scaleform::Render::VertexFormat *)v70;
+          v66 = (Scaleform::Render::VertexFormat *)v21[2];
+          v67 = (Scaleform::Render::VertexFormat *)v21[3];
+          v22 = v67;
+          v23 = (Scaleform::Render::VertexFormat *)v21[4];
+          *single = v66;
           *batch = v22;
           *instanced = v23;
           return;
@@ -613,366 +610,355 @@ void __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x:
     }
   }
 LABEL_15:
-  v24 = 0i64;
-  v25 = 1;
+  v24 = 1;
   switch ( v13 )
   {
-    case 3:
-      v26 = 65537;
+    case PrimFill_VColor:
+      v25 = ST_Vertex;
       break;
-    case 4:
-      v26 = 65569;
+    case PrimFill_VColor_EAlpha:
+      v25 = ST_VertexEAlpha;
       break;
-    case 5:
-      v26 = 1;
+    case PrimFill_Texture:
+      v25 = ST_base_Mul;
       break;
-    case 6:
-      v26 = 33;
+    case PrimFill_Texture_EAlpha:
+      v25 = ST_TexTGEAlpha;
       break;
-    case 7:
-      v26 = 1025;
+    case PrimFill_Texture_VColor:
+      v25 = ST_TexTGVertex;
       break;
-    case 8:
-      v26 = 1057;
+    case PrimFill_Texture_VColor_EAlpha:
+      v25 = ST_TexTGVertexEAlpha;
       break;
-    case 9:
-      v26 = 513;
+    case PrimFill_2Texture:
+      v25 = ST_TexTGTexTG;
       break;
-    case 10:
-      v26 = 545;
+    case PrimFill_2Texture_EAlpha:
+      v25 = ST_TexTGTexTGEAlpha;
       break;
-    case 11:
-      v26 = 135168;
+    case PrimFill_UVTexture:
+      v25 = ST_TexUV;
       break;
-    case 12:
-      v26 = 133120;
-      v24 = 8i64;
+    case PrimFill_UVTextureAlpha_VColor:
+      v25 = ST_Text;
       break;
     default:
-      v26 = 0x20000;
+      v25 = ST_start_base_text;
       break;
   }
-  if ( v24 & 1 )
-    ++v26;
-  if ( v24 & 2 )
-    v26 += 64;
-  if ( v24 & 0x10 )
-    v26 += 8;
-  v27 = ((unsigned int (__fastcall *)(Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *, signed __int64, signed __int64))v7->vfptr->GetShaderVersion)(
-          v7,
-          v24,
-          5368709120i64);
-  v28 = Scaleform::Render::D3D1x::VertexShaderDesc::GetDesc(v26, v27);
-  v29 = v28;
-  if ( !v28 )
+  v26 = this->vfptr->GetShaderVersion(this);
+  Desc = Scaleform::Render::D3D1x::VertexShaderDesc::GetDesc(v25, v26);
+  v28 = Desc;
+  if ( !Desc )
   {
     *instanced = 0i64;
-    v30 = batch;
-    *v8 = 0i64;
-    *v30 = 0i64;
+    v29 = batch;
+    *single = 0i64;
+    *v29 = 0i64;
     return;
   }
-  v31 = -1;
-  v32 = 0;
-  v33 = 4;
+  v30 = -1;
+  v31 = 0;
+  v32 = 4;
+  v33 = 0;
   v34 = 0;
-  v35 = 0;
-  v74 = 4;
-  v75 = -1;
-  if ( v28->NumAttribs > 0 )
+  v71 = 4;
+  v72 = -1;
+  if ( Desc->NumAttribs > 0 )
   {
-    v36 = &keys;
-    v37 = &keys.4;
-    v38 = &v28->Attributes[0].Attr;
-    while ( (*v38 & 0xFF0F) == 4612 )
+    p_keys = &keys;
+    v36 = &keys.4;
+    p_Attr = &Desc->Attributes[0].Attr;
+    while ( (*p_Attr & 0xFF0F) == 4612 )
     {
-      v39 = v34 + 1;
-      v36->Offset = v32;
-      v75 = v39;
-      if ( v12 & 0x20 )
+      v38 = v33 + 1;
+      p_keys->Offset = v31;
+      v72 = v38;
+      if ( (v12 & 0x20) != 0 )
       {
-        v37->Attribute = 4625;
-        v40 = v37 + 2;
-        v31 = v32 + 1;
-        v40->Attribute = 8721;
+        v36->Attribute = 4625;
+        v39 = v36 + 2;
+        v30 = v31 + 1;
+        v39->Attribute = 8721;
       }
       else
       {
-        v37->Attribute = 8721;
-        v40 = v37 + 2;
-        v31 = v32 + 2;
-        v40->Attribute = 4625;
+        v36->Attribute = 8721;
+        v39 = v36 + 2;
+        v30 = v31 + 2;
+        v39->Attribute = 4625;
       }
-      v33 = v74;
-      v41 = v36 + 1;
-      v34 = v39 + 1;
-      v41->Offset = v32 + 3;
-      v36 = v41 + 1;
-      v37 = v40 + 2;
-      v32 += 4;
-LABEL_57:
-      ++v35;
-      v38 += 8;
-      if ( v35 >= v29->NumAttribs )
-        goto LABEL_58;
+      v32 = v71;
+      v40 = p_keys + 1;
+      v33 = v38 + 1;
+      v40->Offset = v31 + 3;
+      p_keys = v40 + 1;
+      v36 = v39 + 2;
+      v31 += 4;
+LABEL_51:
+      ++v34;
+      p_Attr += 8;
+      if ( v34 >= v28->NumAttribs )
+        goto LABEL_52;
     }
-    v42 = v9->pElements;
-    v43 = v42->Attribute;
-    if ( !v43 )
+    pElements = sourceFormat->pElements;
+    Attribute = pElements->Attribute;
+    if ( !Attribute )
     {
-LABEL_45:
+LABEL_39:
       *instanced = 0i64;
-      *v76 = 0i64;
+      *v73 = 0i64;
       *batch = 0i64;
       return;
     }
-    while ( (v43 & 0xFF00) != (*v38 & 0xFF00) )
+    while ( (Attribute & 0xFF00) != (*p_Attr & 0xFF00) )
     {
-      v43 = v42[1].Attribute;
-      ++v42;
-      if ( !v43 )
-        goto LABEL_45;
+      Attribute = pElements[1].Attribute;
+      ++pElements;
+      if ( !Attribute )
+        goto LABEL_39;
     }
-    *v36 = *v42;
-    v36->Offset = v32;
-    v44 = v42->Attribute;
-    v45 = v42->Attribute & 0xFFF;
-    if ( v12 & 4 )
+    *p_keys = *pElements;
+    p_keys->Offset = v31;
+    v43 = pElements->Attribute;
+    v44 = v43 & 0xFFF;
+    if ( (v12 & 4) != 0 )
     {
-      if ( v45 == 532 )
+      if ( v44 == 532 )
       {
-        v46 = v44 & 0xFFFFF251 | 0x251;
-LABEL_51:
-        v37->Attribute = v46;
-        goto LABEL_52;
+        v45 = v43 & 0xFFFFF000 | 0x251;
+LABEL_45:
+        v36->Attribute = v45;
       }
     }
-    else if ( v45 == 593 )
+    else if ( v44 == 593 )
     {
-      v46 = v44 & 0xFFFFF214 | 0x214;
-      goto LABEL_51;
+      v45 = v43 & 0xFFFFF000 | 0x214;
+      goto LABEL_45;
     }
-LABEL_52:
-    v47 = VertexTypeSizes_44[((unsigned __int8)v42->Attribute >> 4) - 1];
-    if ( v47 < v74 )
-      v47 = v74;
-    v33 = v47;
-    v74 = v47;
+    v46 = VertexTypeSizes_44[((unsigned __int8)pElements->Attribute >> 4) - 1];
+    if ( v46 < v71 )
+      v46 = v71;
+    v32 = v46;
+    v71 = v46;
     v12 = flags;
-    v32 += (v36->Attribute & 0xF) * VertexTypeSizes_44[((unsigned __int8)v36->Attribute >> 4) - 1];
-    if ( flags & 2 )
-      v32 = (v32 + 3) & 0xFFFFFFFC;
-    ++v34;
-    v37 += 2;
-    ++v36;
-    goto LABEL_57;
+    v31 += (p_keys->Attribute & 0xF) * VertexTypeSizes_44[((unsigned __int8)p_keys->Attribute >> 4) - 1];
+    if ( (flags & 2) != 0 )
+      v31 = (v31 + 3) & 0xFFFFFFFC;
+    ++v33;
+    v36 += 2;
+    ++p_keys;
+    goto LABEL_51;
   }
-LABEL_58:
-  if ( v12 & 1 )
-    v25 = v33;
-  flags = v25;
-  v48 = v73;
-  *((_QWORD *)&keys + v34) = 0i64;
-  v49 = (Scaleform::Render::MultiKeyCollection<Scaleform::Render::VertexElement,Scaleform::Render::VertexFormat,32,8> *)&v48[1];
-  ppnewKeys = &keys;
-  v50 = Scaleform::Render::MultiKeyCollection<Scaleform::Render::VertexElement,Scaleform::Render::VertexFormat,32,8>::Find(
-          v49,
+LABEL_52:
+  if ( (v12 & 1) != 0 )
+    v24 = v32;
+  flags = v24;
+  v47 = v70;
+  *((_QWORD *)&keys + v33) = 0i64;
+  v48 = (Scaleform::Render::MultiKeyCollection<Scaleform::Render::VertexElement,Scaleform::Render::VertexFormat,32,8> *)&v47[1];
+  ppnewKeys.pFirst = (Scaleform::Render::SourceFormatHash *)&keys;
+  v49 = Scaleform::Render::MultiKeyCollection<Scaleform::Render::VertexElement,Scaleform::Render::VertexFormat,32,8>::Find(
+          v48,
           &keys,
-          v34 + 1);
-  if ( !v50 )
+          v33 + 1);
+  if ( !v49 )
   {
-    v50 = Scaleform::Render::MultiKeyCollection<Scaleform::Render::VertexElement,Scaleform::Render::VertexFormat,32,8>::Add(
-            v49,
-            &ppnewKeys,
+    v49 = Scaleform::Render::MultiKeyCollection<Scaleform::Render::VertexElement,Scaleform::Render::VertexFormat,32,8>::Add(
+            v48,
+            (Scaleform::Render::VertexElement **)&ppnewKeys,
             &keys,
-            v34 + 1);
-    if ( v50 )
+            v33 + 1);
+    if ( v49 )
     {
-      v51 = ~(flags - 1) & (v32 + flags - 1);
-      v50->pElements = ppnewKeys;
-      v50->Size = v51;
+      v50 = ~(flags - 1) & (v31 + flags - 1);
+      v49->pElements = (Scaleform::Render::VertexElement *)ppnewKeys.pFirst;
+      v49->Size = v50;
     }
     else
     {
-      v50 = 0i64;
+      v49 = 0i64;
     }
   }
-  *v76 = v50;
-  if ( v12 & 8 )
+  *v73 = v49;
+  if ( (v12 & 8) != 0 )
   {
-    *(&keys.Offset + 2 * v34) = 0;
-    *(&keys.Attribute + 2 * v34) = 66673;
-    v73 = &keys;
-    *(&v63 + v34) = 0i64;
-    v52 = Scaleform::Render::MultiKeyCollection<Scaleform::Render::VertexElement,Scaleform::Render::VertexFormat,32,8>::Find(
-            v49,
+    *(&keys.Offset + 2 * v33) = 0;
+    *(&keys.Attribute + 2 * v33) = 66673;
+    v70 = &keys;
+    v62[v33] = 0i64;
+    v51 = Scaleform::Render::MultiKeyCollection<Scaleform::Render::VertexElement,Scaleform::Render::VertexFormat,32,8>::Find(
+            v48,
             &keys,
-            v34 + 2);
-    if ( !v52 )
+            v33 + 2);
+    if ( !v51 )
     {
-      v52 = Scaleform::Render::MultiKeyCollection<Scaleform::Render::VertexElement,Scaleform::Render::VertexFormat,32,8>::Add(
-              v49,
-              &v73,
+      v51 = Scaleform::Render::MultiKeyCollection<Scaleform::Render::VertexElement,Scaleform::Render::VertexFormat,32,8>::Add(
+              v48,
+              &v70,
               &keys,
-              v34 + 2);
-      if ( !v52 )
+              v33 + 2);
+      if ( !v51 )
       {
-        v53 = instanced;
+        v52 = (__int64 *)instanced;
         *instanced = 0i64;
-        goto LABEL_71;
+        goto LABEL_65;
       }
-      v54 = ~(flags - 1) & (v32 + flags - 1);
-      v52->pElements = v73;
-      v52->Size = v54;
+      v53 = ~(flags - 1) & (v31 + flags - 1);
+      v51->pElements = v70;
+      v51->Size = v53;
     }
-    v53 = instanced;
-    *instanced = v52;
+    v52 = (__int64 *)instanced;
+    *instanced = v51;
   }
   else
   {
-    v53 = instanced;
+    v52 = (__int64 *)instanced;
     *instanced = 0i64;
   }
-LABEL_71:
-  if ( v12 & 0x10 )
+LABEL_65:
+  if ( (v12 & 0x10) != 0 )
   {
-    v60 = batch;
+    v59 = (__int64 *)batch;
     *batch = 0i64;
-    goto LABEL_86;
+    goto LABEL_80;
   }
-  if ( v31 < 0 )
+  if ( v30 < 0 )
   {
-    *(&keys.Attribute + 2 * v34) = 66593;
-    v58 = v32;
-    if ( v12 & 0x20 )
-      v58 = v32 + 3;
-    *(&keys.Offset + 2 * v34) = v58;
-    v32 += (*(&keys.Attribute + 2 * v34) & 0xF)
-         * VertexTypeSizes_44[((unsigned __int8)*(&keys.Attribute + 2 * v34) >> 4) - 1];
-    if ( v12 & 2 )
-      v32 = (v32 + 3) & 0xFFFFFFFC;
+    *(&keys.Attribute + 2 * v33) = 66593;
+    v57 = v31;
+    if ( (v12 & 0x20) != 0 )
+      v57 = v31 + 3;
+    *(&keys.Offset + 2 * v33) = v57;
+    v31 += (*(&keys.Attribute + 2 * v33) & 0xF)
+         * VertexTypeSizes_44[((unsigned __int8)*(&keys.Attribute + 2 * v33) >> 4) - 1];
+    if ( (v12 & 2) != 0 )
+      v31 = (v31 + 3) & 0xFFFFFFFC;
   }
   else
   {
-    v55 = v75;
-    v56 = v34 - 1;
-    if ( v56 >= v75 )
+    v54 = v72;
+    v55 = v33 - 1;
+    if ( v55 >= v72 )
     {
       do
       {
-        v57 = *((_QWORD *)&keys + v56--);
-        v64[v56] = v57;
+        v56 = *((_QWORD *)&keys + v55--);
+        v62[v55 + 1] = v56;
       }
-      while ( v56 >= v55 );
+      while ( v55 >= v54 );
     }
-    *(&keys.Attribute + 2 * v55) = 66593;
-    *(&keys.Offset + 2 * v55) = v31;
+    *(&keys.Attribute + 2 * v54) = 66593;
+    *(&keys.Offset + 2 * v54) = v30;
   }
-  *(&v63 + v34) = 0i64;
-  v73 = &keys;
-  v59 = Scaleform::Render::MultiKeyCollection<Scaleform::Render::VertexElement,Scaleform::Render::VertexFormat,32,8>::Find(
-          v49,
+  v62[v33] = 0i64;
+  v70 = &keys;
+  v58 = Scaleform::Render::MultiKeyCollection<Scaleform::Render::VertexElement,Scaleform::Render::VertexFormat,32,8>::Find(
+          v48,
           &keys,
-          v34 + 2);
-  if ( v59 )
-    goto LABEL_84;
-  v59 = Scaleform::Render::MultiKeyCollection<Scaleform::Render::VertexElement,Scaleform::Render::VertexFormat,32,8>::Add(
-          v49,
-          &v73,
+          v33 + 2);
+  if ( v58 )
+    goto LABEL_78;
+  v58 = Scaleform::Render::MultiKeyCollection<Scaleform::Render::VertexElement,Scaleform::Render::VertexFormat,32,8>::Add(
+          v48,
+          &v70,
           &keys,
-          v34 + 2);
-  if ( v59 )
+          v33 + 2);
+  if ( v58 )
   {
-    v61 = ~(flags - 1) & (v32 + flags - 1);
-    v59->pElements = v73;
-    v59->Size = v61;
-LABEL_84:
-    v60 = batch;
-    *batch = v59;
-    goto LABEL_86;
+    v60 = ~(flags - 1) & (v31 + flags - 1);
+    v58->pElements = v70;
+    v58->Size = v60;
+LABEL_78:
+    v59 = (__int64 *)batch;
+    *batch = v58;
+    goto LABEL_80;
   }
-  v60 = batch;
+  v59 = (__int64 *)batch;
   *batch = 0i64;
-LABEL_86:
-  *(_QWORD *)&v70 = *v76;
-  *((_QWORD *)&v70 + 1) = *v60;
-  v71 = *v53;
-  ppnewKeys = (Scaleform::Render::VertexElement *)&v67;
-  v66 = &v70;
+LABEL_80:
+  v66 = *v73;
+  v67 = (Scaleform::Render::VertexFormat *)*v59;
+  v68 = *v52;
+  ppnewKeys.pFirst = (Scaleform::Render::SourceFormatHash *)v64;
+  ppnewKeys.pSecond = (Scaleform::Render::ResultFormat *)&v66;
   Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::Render::SourceFormatHash,Scaleform::Render::ResultFormat,Scaleform::FixedSizeHash<Scaleform::Render::SourceFormatHash>>,Scaleform::HashNode<Scaleform::Render::SourceFormatHash,Scaleform::Render::ResultFormat,Scaleform::FixedSizeHash<Scaleform::Render::SourceFormatHash>>::NodeHashF,Scaleform::HashNode<Scaleform::Render::SourceFormatHash,Scaleform::Render::ResultFormat,Scaleform::FixedSizeHash<Scaleform::Render::SourceFormatHash>>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::Render::SourceFormatHash,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::HashNode<Scaleform::Render::SourceFormatHash,Scaleform::Render::ResultFormat,Scaleform::FixedSizeHash<Scaleform::Render::SourceFormatHash>>,Scaleform::HashNode<Scaleform::Render::SourceFormatHash,Scaleform::Render::ResultFormat,Scaleform::FixedSizeHash<Scaleform::Render::SourceFormatHash>>::NodeHashF>>::Set<Scaleform::HashNode<Scaleform::Render::SourceFormatHash,Scaleform::Render::ResultFormat,Scaleform::FixedSizeHash<Scaleform::Render::SourceFormatHash>>::NodeRef>(
     (Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::Render::SourceFormatHash,Scaleform::Render::ResultFormat,Scaleform::FixedSizeHash<Scaleform::Render::SourceFormatHash> >,Scaleform::HashNode<Scaleform::Render::SourceFormatHash,Scaleform::Render::ResultFormat,Scaleform::FixedSizeHash<Scaleform::Render::SourceFormatHash> >::NodeHashF,Scaleform::HashNode<Scaleform::Render::SourceFormatHash,Scaleform::Render::ResultFormat,Scaleform::FixedSizeHash<Scaleform::Render::SourceFormatHash> >::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::Render::SourceFormatHash,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::HashNode<Scaleform::Render::SourceFormatHash,Scaleform::Render::ResultFormat,Scaleform::FixedSizeHash<Scaleform::Render::SourceFormatHash> >,Scaleform::HashNode<Scaleform::Render::SourceFormatHash,Scaleform::Render::ResultFormat,Scaleform::FixedSizeHash<Scaleform::Render::SourceFormatHash> >::NodeHashF> > *)pmemAddr,
     pmemAddr,
-    (Scaleform::HashNode<Scaleform::Render::SourceFormatHash,Scaleform::Render::ResultFormat,Scaleform::FixedSizeHash<Scaleform::Render::SourceFormatHash> >::NodeRef *)&ppnewKeys);
+    &ppnewKeys);
 }
 
 // File Line: 695
 // RVA: 0xA02130
-Scaleform::Render::D3D1x::ShaderPair *__fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::SetPrimitiveFill(Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this, Scaleform::Render::PrimitiveFill *pfill, unsigned int *fillFlags, unsigned int batchType)
+Scaleform::Render::D3D1x::ShaderPair *__fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::SetPrimitiveFill(
+        Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this,
+        Scaleform::Render::PrimitiveFill *pfill,
+        unsigned int *fillFlags,
+        unsigned int batchType)
 {
-  Scaleform::Render::PrimitiveFill *v4; // r14
-  unsigned int v5; // esi
   unsigned int *v6; // rdi
   __int64 v7; // r15
-  unsigned int v8; // er13
+  unsigned int v8; // r13d
   unsigned int v9; // ebx
   Scaleform::Render::MatrixPoolImpl::HMatrix *v10; // rdi
-  Scaleform::Render::MatrixPoolImpl::DataHeader *v11; // rdx
+  Scaleform::Render::MatrixPoolImpl::DataHeader *pHeader; // rdx
   Scaleform::Render::Cxform *v12; // r8
   float v13; // xmm0_4
-  unsigned int v14; // er9
+  unsigned int v14; // r9d
   Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *v15; // rsi
   Scaleform::Render::D3D1x::ShaderDesc::ShaderType v16; // ebx
   Scaleform::Render::D3D1x::ShaderInterface *v17; // rdi
-  Scaleform::Render::D3D1x::ShaderPair *v18; // rsi
+  Scaleform::Render::D3D1x::ShaderPair *p_CurShaders; // rsi
   unsigned __int8 *v19; // rax
   __m128i v20; // xmm2
-  Scaleform::Render::D3D1x::VertexShaderDesc *v21; // rcx
+  Scaleform::Render::D3D1x::VertexShaderDesc *pVDesc; // rcx
   __m128i v22; // xmm3
   float v23; // xmm0_4
   float v24; // xmm1_4
-  Scaleform::Render::D3D1x::BatchVar *v25; // rax
+  Scaleform::Render::D3D1x::BatchVar *BatchUniforms; // rax
   float v26; // xmm1_4
-  char v27; // dl
+  char Offset; // dl
   float v28; // xmm2_4
   float v29; // xmm3_4
-  __int64 v30; // rax
-  int v31; // er10
+  __int64 Array; // rax
+  int v31; // r10d
   Scaleform::Render::D3D1x::BatchVar *v32; // rdx
   char v33; // al
-  Scaleform::Render::D3D1x::UniformVar *v34; // r8
+  Scaleform::Render::D3D1x::UniformVar *Uniforms; // r8
   unsigned __int64 v35; // rcx
   Scaleform::Render::D3D1x::UniformVar *v36; // r8
   unsigned __int64 v37; // rcx
   Scaleform::Render::D3D1x::UniformVar *v38; // rax
-  __int64 v39; // rax
+  __int64 ShadowOffset; // rax
   Scaleform::Render::D3D1x::UniformVar *v40; // rcx
   __int64 v41; // rax
   __int128 v42; // xmm0
   __int128 v43; // xmm1
-  Scaleform::Render::Texture *v44; // rbx
+  Scaleform::Render::Texture *pObject; // rbx
   __int128 v45; // xmm0
   __int128 v46; // xmm1
   Scaleform::Render::Texture *v47; // r9
-  unsigned int v48; // eax
+  unsigned int TextureCount; // eax
   unsigned int v49; // ebx
   Scaleform::Render::MatrixPoolImpl::HMatrix *v50; // r14
   Scaleform::Render::D3D1x::VertexShaderDesc *v51; // rcx
   Scaleform::Render::D3D1x::BatchVar *v52; // rax
   unsigned __int8 v53; // dl
-  int v54; // er12
+  unsigned __int16 v54; // r12
   Scaleform::Render::D3D1x::UniformVar *v55; // rax
   __int16 v56; // dx
-  Scaleform::Render::D3D1x::FragShaderDesc *v57; // rdx
+  Scaleform::Render::D3D1x::FragShaderDesc *pFDesc; // rdx
   Scaleform::Render::D3D1x::BatchVar *v58; // rcx
   unsigned __int8 v59; // r8
   Scaleform::Render::D3D1x::UniformVar *v60; // rcx
-  __int16 v61; // dx
-  unsigned int v62; // er13
+  __int16 Size; // dx
+  unsigned int batch; // r13d
   __int64 v63; // r14
-  unsigned int v64; // er12
-  signed __int64 v65; // rbx
+  unsigned int v64; // r12d
+  Scaleform::Render::MatrixPoolImpl::HMatrix *v65; // rbx
   Scaleform::Render::MatrixPoolImpl::HMatrix *v66; // rax
-  Scaleform::Render::ProfileViews *v67; // rcx
+  Scaleform::Render::ProfileViews *Profiler; // rcx
   unsigned __int8 *v68; // rax
   __m128i v69; // xmm2
   Scaleform::Render::D3D1x::VertexShaderDesc *v70; // rcx
@@ -985,7 +971,7 @@ Scaleform::Render::D3D1x::ShaderPair *__fastcall Scaleform::Render::StaticShader
   float v77; // xmm2_4
   float v78; // xmm3_4
   __int64 v79; // rax
-  int v80; // er10
+  int v80; // r10d
   Scaleform::Render::D3D1x::BatchVar *v81; // rdx
   char v82; // al
   Scaleform::Render::D3D1x::UniformVar *v83; // r8
@@ -996,37 +982,34 @@ Scaleform::Render::D3D1x::ShaderPair *__fastcall Scaleform::Render::StaticShader
   __int64 v88; // rax
   Scaleform::Render::D3D1x::UniformVar *v89; // rcx
   __int64 v90; // rax
-  __int64 v91; // rdx
+  Scaleform::Render::MatrixPoolImpl::DataHeader *v91; // rdx
   Scaleform::Render::Cxform *v92; // r8
   Scaleform::Render::Cxform *v93; // rbx
   unsigned int v94; // ebx
-  signed int v95; // er15
-  signed __int64 v96; // r14
-  signed __int64 v97; // rax
-  float v98; // xmm1_4
-  Scaleform::Render::MatrixPoolImpl::EntryHandle *v99; // rax
+  int v95; // r15d
+  __int64 v96; // r14
+  __int64 v97; // rax
+  int v98; // xmm1_4
+  Scaleform::Render::MatrixPoolImpl::EntryHandle *pHandle; // rax
   Scaleform::Render::Matrix2x4<float> *v100; // rdx
   Scaleform::Render::MatrixPoolImpl::HMatrix *v102; // [rsp+8h] [rbp-49h]
   __int64 v103; // [rsp+10h] [rbp-41h]
-  Scaleform::Render::Cxform v104; // [rsp+18h] [rbp-39h]
-  unsigned int batch[2]; // [rsp+38h] [rbp-19h]
-  Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *v106; // [rsp+98h] [rbp+47h]
-  char v107; // [rsp+A0h] [rbp+4Fh]
-  unsigned int *v108; // [rsp+A8h] [rbp+57h]
+  Scaleform::Render::D3D1x::ShaderPair v104[2]; // [rsp+18h] [rbp-39h] BYREF
+  Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *v105; // [rsp+98h] [rbp+47h]
+  char v106[8]; // [rsp+A0h] [rbp+4Fh] BYREF
+  unsigned int *v107; // [rsp+A8h] [rbp+57h]
   Scaleform::Render::VertexFormat *pformat; // [rsp+B8h] [rbp+67h]
   unsigned int vars0; // [rsp+C0h] [rbp+6Fh]
   Scaleform::Render::MatrixState *retaddr; // [rsp+C8h] [rbp+77h]
   Scaleform::Render::MatrixPoolImpl::HMatrix *m; // [rsp+D0h] [rbp+7Fh]
-  Scaleform::Render::D3D1x::ShaderInterface *v113; // [rsp+D8h] [rbp+87h]
-  unsigned int *v114; // [rsp+E0h] [rbp+8Fh]
+  Scaleform::Render::D3D1x::ShaderInterface *v112; // [rsp+D8h] [rbp+87h] BYREF
+  unsigned int *v113; // [rsp+E0h] [rbp+8Fh]
 
-  v114 = fillFlags;
+  v113 = fillFlags;
   m = (Scaleform::Render::MatrixPoolImpl::HMatrix *)this;
-  v4 = pfill;
-  v5 = batchType;
   v6 = fillFlags;
   v7 = this->Profiler->vfptr->GetFillType(this->Profiler, pfill->Data.Type);
-  if ( !(*(_BYTE *)v6 & 0x20) && Scaleform::Render::PrimitiveFillData::RequiresBlend(&v4->Data) )
+  if ( (*(_BYTE *)v6 & 0x20) == 0 && Scaleform::Render::PrimitiveFillData::RequiresBlend(&pfill->Data) )
     *v6 |= 0x20u;
   v8 = vars0;
   if ( (*(_BYTE *)v6 & 0x28) != 40 )
@@ -1037,80 +1020,87 @@ Scaleform::Render::D3D1x::ShaderPair *__fastcall Scaleform::Render::StaticShader
       v10 = m;
       while ( 1 )
       {
-        v11 = v10->pHandle->pHeader;
-        v12 = (Scaleform::Render::Cxform *)(v11->Format & 1 ? &v11[(unsigned __int8)Scaleform::Render::MatrixPoolImpl::HMatrixConstants::MatrixElementSizeTable[v11->Format & 0xF].Offsets[0]
-                                                                 + 1] : &Scaleform::Render::Cxform::Identity);
-        v106->Profiler->vfptr->GetCxform(v106->Profiler, &v104, v12);
-        if ( Scaleform::Render::Cxform::operator!=(&v104, &Scaleform::Render::Cxform::Identity) )
+        pHeader = v10->pHandle->pHeader;
+        v12 = (pHeader->Format & 1) != 0
+            ? (Scaleform::Render::Cxform *)&pHeader[(unsigned __int8)Scaleform::Render::MatrixPoolImpl::HMatrixConstants::MatrixElementSizeTable[pHeader->Format & 0xF].Offsets[0]
+                                                  + 1]
+            : &Scaleform::Render::Cxform::Identity;
+        v105->Profiler->vfptr->GetCxform(v105->Profiler, (Scaleform::Render::Cxform *)v104, v12);
+        if ( Scaleform::Render::Cxform::operator!=(
+               (Scaleform::Render::Cxform *)v104,
+               &Scaleform::Render::Cxform::Identity) )
+        {
           break;
+        }
         ++v9;
         v10 += 2;
         if ( v9 >= v8 )
         {
-          v6 = v108;
+          v6 = v107;
           goto LABEL_15;
         }
       }
-      v6 = v108;
-      v13 = v104.M[0][3];
-      *v6 |= 8u;
+      v6 = v107;
+      v13 = *((float *)&v104[0].pVDesc + 1);
+      *v107 |= 8u;
       if ( v13 < 1.0 )
         *v6 |= 0x20u;
     }
   }
 LABEL_15:
-  v14 = v5;
-  v15 = v106;
+  v14 = batchType;
+  v15 = v105;
   v16 = Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::StaticShaderForFill(
-          v106,
-          v4,
+          v105,
+          pfill,
           v6,
           v14);
   v15->Profiler->vfptr->SetFillFlags(v15->Profiler, *v6);
-  v17 = v113;
-  Scaleform::Render::D3D1x::ShaderInterface::SetStaticShader(v113, v16, pformat);
-  v18 = &v17->CurShaders;
-  if ( Scaleform::Render::PrimitiveFill::IsSolid((Scaleform::Render::PrimitiveFillType)v7) )
+  v17 = v112;
+  Scaleform::Render::D3D1x::ShaderInterface::SetStaticShader(v112, v16, pformat);
+  p_CurShaders = &v17->CurShaders;
+  if ( Scaleform::Render::PrimitiveFill::IsSolid(v7) )
   {
-    LODWORD(v113) = v4->Data.SolidColor.Raw;
-    v19 = (unsigned __int8 *)((__int64 (__fastcall *)(Scaleform::Render::ProfileViews *, char *, Scaleform::Render::D3D1x::ShaderInterface **))v106->Profiler->vfptr->GetColor)(
-                               v106->Profiler,
-                               &v107,
-                               &v113);
+    LODWORD(v112) = pfill->Data.SolidColor.Raw;
+    v19 = (unsigned __int8 *)((__int64 (__fastcall *)(Scaleform::Render::ProfileViews *, char *, Scaleform::Render::D3D1x::ShaderInterface **))v105->Profiler->vfptr->GetColor)(
+                               v105->Profiler,
+                               v106,
+                               &v112);
     v20 = _mm_cvtsi32_si128(*v19);
-    v21 = v17->CurShaders.pVDesc;
+    pVDesc = v17->CurShaders.pVDesc;
     v22 = _mm_cvtsi32_si128(v19[3]);
     v23 = (float)v19[2] * 0.0039215689;
     v24 = (float)v19[1];
-    v25 = v21->BatchUniforms;
+    BatchUniforms = pVDesc->BatchUniforms;
     v26 = v24 * 0.0039215689;
-    v27 = v25[5].Offset;
-    v28 = COERCE_FLOAT(_mm_cvtepi32_ps(v20)) * 0.0039215689;
-    v29 = COERCE_FLOAT(_mm_cvtepi32_ps(v22)) * 0.0039215689;
-    if ( v27 >= 0 )
+    Offset = BatchUniforms[5].Offset;
+    v28 = _mm_cvtepi32_ps(v20).m128_f32[0] * 0.0039215689;
+    v29 = _mm_cvtepi32_ps(v22).m128_f32[0] * 0.0039215689;
+    if ( Offset >= 0 )
     {
-      v30 = (unsigned int)v25[5].Array;
-      v31 = v27;
+      Array = (unsigned int)BatchUniforms[5].Array;
+      v31 = Offset;
 LABEL_20:
-      v34 = v21->Uniforms;
-      if ( v34[v30].Size )
+      Uniforms = pVDesc->Uniforms;
+      if ( Uniforms[Array].Size )
       {
-        v35 = v34[v30].ShadowOffset + (unsigned __int64)(v31 * (unsigned int)(unsigned __int8)v34[v30].ElementSize);
+        v35 = Uniforms[Array].ShadowOffset
+            + (unsigned __int64)(v31 * (unsigned int)(unsigned __int8)Uniforms[Array].ElementSize);
         v17->UniformData[v35] = v23;
         v17->UniformData[v35 + 1] = v26;
         v17->UniformData[v35 + 2] = v28;
         v17->UniformData[v35 + 3] = v29;
       }
       v36 = v17->CurShaders.pFDesc->Uniforms;
-      if ( v36[v30].Size )
+      if ( v36[Array].Size )
       {
-        v37 = v36[v30].ShadowOffset + (unsigned __int64)(v31 * (unsigned int)(unsigned __int8)v36[v30].ElementSize);
+        v37 = v36[Array].ShadowOffset + (unsigned __int64)(v31 * (unsigned int)(unsigned __int8)v36[Array].ElementSize);
         v17->UniformData[v37] = v23;
         v17->UniformData[v37 + 1] = v26;
         v17->UniformData[v37 + 2] = v28;
         v17->UniformData[v37 + 3] = v29;
       }
-      v17->UniformSet[(unsigned int)v30] = 1;
+      v17->UniformSet[(unsigned int)Array] = 1;
       goto LABEL_33;
     }
     v32 = v17->CurShaders.pFDesc->BatchUniforms;
@@ -1118,17 +1108,17 @@ LABEL_20:
     if ( v33 >= 0 )
     {
       v31 = v33;
-      v30 = (unsigned int)v32[5].Array;
+      Array = (unsigned int)v32[5].Array;
       goto LABEL_20;
     }
-    v38 = v21->Uniforms;
+    v38 = pVDesc->Uniforms;
     if ( v38[5].Size )
     {
-      v39 = v38[5].ShadowOffset;
-      v17->UniformData[v39] = v23;
-      v17->UniformData[v39 + 1] = v26;
-      v17->UniformData[v39 + 2] = v28;
-      v17->UniformData[v39 + 3] = v29;
+      ShadowOffset = v38[5].ShadowOffset;
+      v17->UniformData[ShadowOffset] = v23;
+      v17->UniformData[ShadowOffset + 1] = v26;
+      v17->UniformData[ShadowOffset + 2] = v28;
+      v17->UniformData[ShadowOffset + 3] = v29;
     }
     v40 = v17->CurShaders.pFDesc->Uniforms;
     if ( v40[5].Size )
@@ -1141,40 +1131,40 @@ LABEL_20:
     }
     v17->UniformSet[5] = 1;
   }
-  else if ( (signed int)v7 >= 5 )
+  else if ( (int)v7 >= 5 )
   {
-    v42 = *(_OWORD *)&v18->pVS;
+    v42 = *(_OWORD *)&p_CurShaders->pVS;
     v43 = *(_OWORD *)&v17->CurShaders.pFS;
-    v44 = v4->Data.Textures[0].pObject;
-    LOBYTE(v113) = v4->Data.FillModes[0].Fill;
-    *(_OWORD *)&v104.M[0][0] = v42;
-    *(_OWORD *)&v104.M[1][0] = v43;
-    *(_QWORD *)batch = v17->CurShaders.pVFormat;
+    pObject = pfill->Data.Textures[0].pObject;
+    LOBYTE(v112) = pfill->Data.FillModes[0].Fill;
+    *(_OWORD *)&v104[0].pVS = v42;
+    *(_OWORD *)&v104[0].pFS = v43;
+    v104[0].pVFormat = v17->CurShaders.pVFormat;
     Scaleform::Render::D3D1x::ShaderInterface::SetTexture(
       v17,
-      (Scaleform::Render::D3D1x::ShaderPair *)&v104,
+      v104,
       0x14u,
-      v44,
-      (Scaleform::Render::ImageFillMode)&v113,
+      pObject,
+      (Scaleform::Render::ImageFillMode)&v112,
       0);
     if ( (unsigned int)(v7 - 9) <= 1 )
     {
-      v45 = *(_OWORD *)&v18->pVS;
+      v45 = *(_OWORD *)&p_CurShaders->pVS;
       v46 = *(_OWORD *)&v17->CurShaders.pFS;
-      v47 = v4->Data.Textures[1].pObject;
-      LOBYTE(v113) = v4->Data.FillModes[1].Fill;
-      v48 = (unsigned __int8)v44->TextureCount;
-      *(_OWORD *)&v104.M[0][0] = v45;
-      *(_OWORD *)&v104.M[1][0] = v46;
-      LODWORD(v104.M[1][0]) = v48;
-      *(_QWORD *)batch = v17->CurShaders.pVFormat;
+      v47 = pfill->Data.Textures[1].pObject;
+      LOBYTE(v112) = pfill->Data.FillModes[1].Fill;
+      TextureCount = (unsigned __int8)pObject->TextureCount;
+      *(_OWORD *)&v104[0].pVS = v45;
+      *(_OWORD *)&v104[0].pFS = v46;
+      LODWORD(v104[0].pFS) = TextureCount;
+      v104[0].pVFormat = v17->CurShaders.pVFormat;
       Scaleform::Render::D3D1x::ShaderInterface::SetTexture(
         v17,
-        (Scaleform::Render::D3D1x::ShaderPair *)&v104,
+        v104,
         0x14u,
         v47,
-        (Scaleform::Render::ImageFillMode)&v113,
-        v48);
+        (Scaleform::Render::ImageFillMode)&v112,
+        TextureCount);
     }
   }
 LABEL_33:
@@ -1187,7 +1177,7 @@ LABEL_33:
       do
       {
         Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUserUniforms(
-          (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)v17->UniformData,
+          v17,
           &v17->CurShaders,
           v50,
           v49++);
@@ -1200,91 +1190,89 @@ LABEL_33:
   v52 = v51->BatchUniforms;
   if ( v52[21].Offset >= 0 && (v53 = v52[21].Size) != 0 )
   {
-    LOWORD(v54) = v53;
+    v54 = v53;
   }
   else
   {
     v55 = v51->Uniforms;
     if ( v55[21].Location < 0 || (v56 = v55[21].Size, v56 <= 0) )
     {
-      v57 = v17->CurShaders.pFDesc;
-      v58 = v57->BatchUniforms;
+      pFDesc = v17->CurShaders.pFDesc;
+      v58 = pFDesc->BatchUniforms;
       if ( v58[21].Offset >= 0 && (v59 = v58[21].Size) != 0 )
       {
-        LOWORD(v54) = v59;
+        v54 = v59;
       }
       else
       {
-        v60 = v57->Uniforms;
-        if ( v60[21].Location < 0 || (v61 = v60[21].Size, v61 <= 0) )
-          LOWORD(v54) = 0;
+        v60 = pFDesc->Uniforms;
+        if ( v60[21].Location < 0 || (Size = v60[21].Size, Size <= 0) )
+          v54 = 0;
         else
-          v54 = v61 / (signed int)(unsigned __int8)v55[21].ElementSize | 0x20000;
+          v54 = Size / (unsigned __int8)v55[21].ElementSize;
       }
     }
     else
     {
-      v54 = v56 / (signed int)(unsigned __int8)v55[21].ElementSize | 0x10000;
+      v54 = v56 / (unsigned __int8)v55[21].ElementSize;
     }
   }
-  v62 = 0;
+  batch = 0;
   v63 = v7;
-  v64 = (unsigned __int16)v54 >> 1;
+  v64 = v54 >> 1;
   if ( vars0 )
   {
-    v65 = (signed __int64)m;
+    v65 = m;
     v66 = m;
     do
     {
       Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetMatrix(
-        (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)v17->UniformData,
+        v17,
         &v17->CurShaders,
         0xDu,
-        (Scaleform::Render::Matrix2x4<float> *)(*(_QWORD *)(v65 + 8) + 192i64),
+        (Scaleform::Render::Matrix2x4<float> *)&v65[1].pHandle[24],
         v66,
         retaddr,
         0,
-        v62);
+        batch);
       if ( v63 != 1 )
       {
-        if ( *(_BYTE *)v108 & 8 )
+        if ( (*(_BYTE *)v107 & 8) != 0 )
         {
-          v91 = **(_QWORD **)v65;
-          if ( *(_BYTE *)(v91 + 15) & 1 )
-            v92 = (Scaleform::Render::Cxform *)(v91
-                                              + 16
-                                              * (unsigned __int8)Scaleform::Render::MatrixPoolImpl::HMatrixConstants::MatrixElementSizeTable[*(_BYTE *)(v91 + 15) & 0xF].Offsets[0]
-                                              + 16i64);
+          v91 = v65->pHandle->pHeader;
+          if ( (v91->Format & 1) != 0 )
+            v92 = (Scaleform::Render::Cxform *)&v91[(unsigned __int8)Scaleform::Render::MatrixPoolImpl::HMatrixConstants::MatrixElementSizeTable[v91->Format & 0xF].Offsets[0]
+                                                  + 1];
           else
             v92 = &Scaleform::Render::Cxform::Identity;
-          v93 = v106->Profiler->vfptr->GetCxform(v106->Profiler, &v104, v92);
+          v93 = v105->Profiler->vfptr->GetCxform(v105->Profiler, v104, v92);
           Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-            (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)v17->UniformData,
+            v17,
             &v17->CurShaders,
             5u,
             (const float *)v93,
             4u,
             0,
-            v62);
+            batch);
           Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-            (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)v17->UniformData,
+            v17,
             &v17->CurShaders,
             4u,
             v93->M[1],
             4u,
             0,
-            v62);
+            batch);
         }
         goto LABEL_72;
       }
-      *(_WORD *)((char *)&v113 + 1) = -32768;
-      LOBYTE(v113) = 0;
-      v67 = v106->Profiler;
-      BYTE3(v113) = -128;
-      v68 = (unsigned __int8 *)((__int64 (__fastcall *)(Scaleform::Render::ProfileViews *, char *, Scaleform::Render::D3D1x::ShaderInterface **))v67->vfptr->GetColor)(
-                                 v67,
-                                 &v107,
-                                 &v113);
+      *(_WORD *)((char *)&v112 + 1) = 0x8000;
+      LOBYTE(v112) = 0;
+      Profiler = v105->Profiler;
+      BYTE3(v112) = 0x80;
+      v68 = (unsigned __int8 *)((__int64 (__fastcall *)(Scaleform::Render::ProfileViews *, char *, Scaleform::Render::D3D1x::ShaderInterface **))Profiler->vfptr->GetColor)(
+                                 Profiler,
+                                 v106,
+                                 &v112);
       v69 = _mm_cvtsi32_si128(*v68);
       v70 = v17->CurShaders.pVDesc;
       v71 = _mm_cvtsi32_si128(v68[3]);
@@ -1293,8 +1281,8 @@ LABEL_33:
       v74 = v70->BatchUniforms;
       v75 = v73 * 0.0039215689;
       v76 = v74[5].Offset;
-      v77 = COERCE_FLOAT(_mm_cvtepi32_ps(v69)) * 0.0039215689;
-      v78 = COERCE_FLOAT(_mm_cvtepi32_ps(v71)) * 0.0039215689;
+      v77 = _mm_cvtepi32_ps(v69).m128_f32[0] * 0.0039215689;
+      v78 = _mm_cvtepi32_ps(v71).m128_f32[0] * 0.0039215689;
       if ( v76 < 0 )
       {
         v81 = v17->CurShaders.pFDesc->BatchUniforms;
@@ -1358,92 +1346,100 @@ LABEL_72:
         do
         {
           v95 = __ROL4__(v95, 1);
-          v97 = (signed __int64)&m[1].pHandle[24];
-          *(_OWORD *)&v104.M[0][0] = *(_OWORD *)v97;
-          *(_QWORD *)&v104.M[1][0] = *(_QWORD *)(v97 + 16);
-          v104.M[1][2] = *(float *)(v97 + 24);
-          v98 = *(float *)(v97 + 28);
-          v99 = m->pHandle;
-          v104.M[1][3] = v98;
-          if ( (unsigned __int8)v95 & v99->pHeader->Format )
-            v100 = (Scaleform::Render::Matrix2x4<float> *)&v99->pHeader[(unsigned __int8)Scaleform::Render::MatrixPoolImpl::HMatrixConstants::MatrixElementSizeTable[0].Offsets[4 * (v99->pHeader->Format & 0xF) + v96 + (v99->pHeader->Format & 0xF)]
-                                                                      + 1];
+          v97 = (__int64)&m[1].pHandle[24];
+          *(_OWORD *)&v104[0].pVS = *(_OWORD *)v97;
+          v104[0].pFS = *(Scaleform::Render::D3D1x::FragShader **)(v97 + 16);
+          LODWORD(v104[0].pFDesc) = *(_DWORD *)(v97 + 24);
+          v98 = *(_DWORD *)(v97 + 28);
+          pHandle = m->pHandle;
+          HIDWORD(v104[0].pFDesc) = v98;
+          if ( ((unsigned __int8)v95 & pHandle->pHeader->Format) != 0 )
+            v100 = (Scaleform::Render::Matrix2x4<float> *)&pHandle->pHeader[(unsigned __int8)Scaleform::Render::MatrixPoolImpl::HMatrixConstants::MatrixElementSizeTable[0].Offsets[4 * (pHandle->pHeader->Format & 0xF) + v96 + (pHandle->pHeader->Format & 0xF)]
+                                                                          + 1];
           else
             v100 = &Scaleform::Render::Matrix2x4<float>::Identity;
-          Scaleform::Render::Matrix2x4<float>::Append((Scaleform::Render::Matrix2x4<float> *)&v104, v100);
+          Scaleform::Render::Matrix2x4<float>::Append((Scaleform::Render::Matrix2x4<float> *)v104, v100);
           Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-            (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)v17->UniformData,
+            v17,
             &v17->CurShaders,
             0x15u,
-            (const float *)&v104,
+            (const float *)v104,
             8u,
             2 * v94++,
-            v62);
+            batch);
           ++v96;
         }
         while ( v94 < v64 );
         v63 = v103;
       }
-      ++v62;
+      ++batch;
       v66 = v102 + 2;
-      v65 = (signed __int64)&m[2];
+      v65 = m + 2;
       m += 2;
     }
-    while ( v62 < vars0 );
+    while ( batch < vars0 );
   }
   return &v17->CurShaders;
 }
 
 // File Line: 788
 // RVA: 0xA014A0
-bool __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::SetFilterFill(Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this, Scaleform::Render::Matrix2x4<float> *mvp, Scaleform::Render::Cxform *cx, Scaleform::Render::Filter *filter, Scaleform::Ptr<Scaleform::Render::RenderTarget> *targets, unsigned int *shaders, unsigned int pass, unsigned int passCount, Scaleform::Render::VertexFormat *pvf, Scaleform::Render::D3D1x::ShaderInterface *psi)
+bool __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::SetFilterFill(
+        Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this,
+        Scaleform::Render::Matrix2x4<float> *mvp,
+        Scaleform::Render::Cxform *cx,
+        Scaleform::Render::Filter *filter,
+        Scaleform::Ptr<Scaleform::Render::RenderTarget> *targets,
+        unsigned int *shaders,
+        unsigned int pass,
+        unsigned int passCount,
+        Scaleform::Render::VertexFormat *pvf,
+        Scaleform::Render::D3D1x::ShaderInterface *psi)
 {
   __int64 v10; // rbx
   unsigned int *v11; // r12
   Scaleform::Render::D3D1x::ShaderInterface *v12; // rdi
-  Scaleform::Render::Matrix2x4<float> *v13; // r13
-  Scaleform::Render::Filter *v14; // r14
   bool result; // al
-  Scaleform::Render::D3D1x::ShaderPair *v16; // rsi
-  unsigned int v17; // eax
-  bool v18; // cf
-  bool v19; // zf
-  Scaleform::RefCountImplCoreVtbl *v20; // rax
-  Scaleform::Render::Texture *v21; // rax
-  __int128 v22; // xmm1
-  Scaleform::Render::Texture *v23; // r13
-  __int64 v24; // xmm0_8
-  float v25; // xmm7_4
-  float v26; // xmm2_4
-  float v27; // xmm3_4
-  float v28; // xmm4_4
-  signed int v29; // eax
-  __m128 v30; // xmm3
-  signed int v31; // ecx
-  float v32; // xmm1_4
-  __m128 v33; // xmm1
-  signed int v34; // ecx
-  float v35; // xmm2_4
-  float v36; // xmm7_4
-  float v37; // xmm2_4
-  float v38; // xmm0_4
+  Scaleform::Render::D3D1x::ShaderPair *p_CurShaders; // rsi
+  Scaleform::Render::RenderTarget *pObject; // rcx
+  unsigned int v18; // eax
+  bool v19; // cf
+  bool v20; // zf
+  Scaleform::RefCountImplCoreVtbl *vfptr; // rax
+  Scaleform::Render::Texture *v22; // rax
+  __int128 v23; // xmm1
+  Scaleform::Render::Texture *v24; // r13
+  Scaleform::Render::VertexFormat *pVFormat; // xmm0_8
+  float v26; // xmm7_4
+  float x1; // xmm2_4
+  float v28; // xmm3_4
+  float v29; // xmm4_4
+  Scaleform::Render::FilterType Type; // eax
+  __m128 RefCount; // xmm3
+  int v32; // ecx
+  float Height; // xmm1_4
+  __m128 v34; // xmm1
+  int v35; // ecx
+  float v36; // xmm2_4
+  float v37; // xmm7_4
+  float v38; // xmm2_4
   float v39; // xmm0_4
-  float v40; // xmm0_4
-  Scaleform::Render::RenderTarget *v41; // rcx
-  Scaleform::Render::Texture *v42; // rbx
-  float v43; // xmm1_4
-  __int128 v44; // xmm1
-  Scaleform::Render::Texture *v45; // rax
-  __int128 v46; // xmm1
-  Scaleform::Render::VertexFormat *v47; // xmm0_8
-  Scaleform::RefCountBase<Scaleform::Render::Filter,2> v48; // xmm0
-  __int128 v49; // xmm3
-  float v50; // xmm9_4
-  float v51; // xmm7_4
-  float v52; // xmm6_4
-  float v53; // xmm5_4
-  __int128 v54; // xmm2
-  __int128 v55; // xmm4
+  int v40; // xmm0_4
+  float v41; // xmm0_4
+  Scaleform::Render::RenderTarget *v42; // rcx
+  Scaleform::Render::Texture *v43; // rbx
+  float v44; // xmm1_4
+  __int128 v45; // xmm1
+  Scaleform::Render::Texture *v46; // rax
+  __int128 v47; // xmm1
+  Scaleform::Render::VertexFormat *v48; // xmm0_8
+  Scaleform::RefCountBase<Scaleform::Render::Filter,2> v49; // xmm0
+  __int128 v50; // xmm3
+  float v51; // xmm9_4
+  float v52; // xmm7_4
+  float v53; // xmm6_4
+  float v54; // xmm5_4
+  Scaleform::RefCountBase<Scaleform::Render::Filter,2> v55; // xmm4
   __int128 v56; // xmm8
   float v57; // xmm1_4
   char v58; // bl
@@ -1451,38 +1447,34 @@ bool __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x:
   __int128 v60; // xmm1
   Scaleform::Render::Texture *v61; // r12
   Scaleform::Render::FilterType v62; // ecx
-  int v63; // ecx
-  int v64; // ecx
-  int v65; // ecx
-  float v66; // xmm4_4
-  float v67; // xmm3_4
-  float v68; // xmm1_4
-  signed int v69; // eax
-  float v70; // xmm0_4
-  float v71; // xmm3_4
-  float v72; // xmm5_4
-  float v73; // xmm1_4
-  float v74; // xmm0_4
-  float v[4]; // [rsp+40h] [rbp-C0h]
-  float pa[4]; // [rsp+50h] [rbp-B0h]
-  __int64 v77; // [rsp+60h] [rbp-A0h]
-  float v78[2]; // [rsp+70h] [rbp-90h]
-  __int64 v79; // [rsp+78h] [rbp-88h]
-  float v80[2]; // [rsp+80h] [rbp-80h]
-  __int64 v81; // [rsp+88h] [rbp-78h]
-  float v82[4]; // [rsp+90h] [rbp-70h]
-  __int128 v83; // [rsp+A0h] [rbp-60h]
-  __int128 v84; // [rsp+B0h] [rbp-50h]
-  __int128 v85; // [rsp+C0h] [rbp-40h]
-  float v86[4]; // [rsp+D0h] [rbp-30h]
-  Scaleform::Render::Cxform *v87; // [rsp+160h] [rbp+60h]
+  __int32 v63; // ecx
+  __int32 v64; // ecx
+  __int32 v65; // ecx
+  float Width; // xmm4_4
+  float v67; // xmm1_4
+  int v68; // eax
+  float v69; // xmm0_4
+  float v70; // xmm3_4
+  float v71; // xmm5_4
+  float v72; // xmm1_4
+  float v73; // xmm0_4
+  Scaleform::Render::D3D1x::ShaderPair v; // [rsp+40h] [rbp-C0h] BYREF
+  float v75[2]; // [rsp+70h] [rbp-90h] BYREF
+  __int64 v76; // [rsp+78h] [rbp-88h]
+  float v77[2]; // [rsp+80h] [rbp-80h] BYREF
+  __int64 v78; // [rsp+88h] [rbp-78h]
+  float v79[4]; // [rsp+90h] [rbp-70h] BYREF
+  __int128 v80; // [rsp+A0h] [rbp-60h]
+  __int128 v81; // [rsp+B0h] [rbp-50h]
+  float v82; // [rsp+C0h] [rbp-40h]
+  float v83; // [rsp+C4h] [rbp-3Ch]
+  float v84; // [rsp+C8h] [rbp-38h]
+  float v85; // [rsp+CCh] [rbp-34h]
+  float v86[4]; // [rsp+D0h] [rbp-30h] BYREF
 
-  v87 = cx;
   v10 = pass;
   v11 = shaders;
   v12 = psi;
-  v13 = mvp;
-  v14 = filter;
   result = Scaleform::Render::D3D1x::ShaderInterface::SetStaticShader(
              psi,
              (Scaleform::Render::D3D1x::ShaderDesc::ShaderType)shaders[pass],
@@ -1501,209 +1493,208 @@ bool __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x:
       v12->Textures[2] = 0i64;
       v12->Textures[3] = 0i64;
     }
-    v16 = &v12->CurShaders;
+    p_CurShaders = &v12->CurShaders;
     Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-      (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)v12->UniformData,
+      v12,
       &v12->CurShaders,
       0xDu,
-      (const float *)v13,
+      (const float *)mvp,
       8u,
       0,
       0);
-    v17 = v11[v10] - 655360;
-    v18 = v17 < 0x19801;
-    v19 = v17 == 104449;
-    v20 = targets->pObject->vfptr;
-    LOBYTE(shaders) = v18 || v19;
-    v21 = (Scaleform::Render::Texture *)((__int64 (*)(void))v20[3].__vecDelDtor)();
-    v22 = *(_OWORD *)&v12->CurShaders.pFS;
-    v23 = v21;
-    *(_OWORD *)v = *(_OWORD *)&v12->CurShaders.pVS;
-    *(_OWORD *)pa = v22;
-    v24 = (__int64)v12->CurShaders.pVFormat;
+    pObject = targets->pObject;
+    v18 = v11[v10] - 655360;
+    v19 = v18 < 0x19801;
+    v20 = v18 == 104449;
+    vfptr = targets->pObject->vfptr;
+    LOBYTE(shaders) = v19 || v20;
+    v22 = (Scaleform::Render::Texture *)((__int64 (__fastcall *)(Scaleform::Render::RenderTarget *))vfptr[3].__vecDelDtor)(pObject);
+    v23 = *(_OWORD *)&v12->CurShaders.pFS;
+    v24 = v22;
+    *(_OWORD *)&v.pVS = *(_OWORD *)&v12->CurShaders.pVS;
+    *(_OWORD *)&v.pFS = v23;
+    pVFormat = v12->CurShaders.pVFormat;
     LOBYTE(pass) = 3;
-    v77 = v24;
+    v.pVFormat = pVFormat;
     Scaleform::Render::D3D1x::ShaderInterface::SetTexture(
       v12,
-      (Scaleform::Render::D3D1x::ShaderPair *)v,
+      &v,
       0x14u,
-      v21,
+      v22,
       (Scaleform::Render::ImageFillMode)&pass,
       0);
-    v25 = 0.0;
-    v26 = (float)targets->pObject->ViewRect.x1;
-    v27 = (float)(targets->pObject->ViewRect.y2 - targets->pObject->ViewRect.y1)
-        / (float)(signed int)v23->ImgSize.Height;
-    *(float *)&v22 = (float)(targets->pObject->ViewRect.x2 - targets->pObject->ViewRect.x1)
-                   / (float)(signed int)v23->ImgSize.Width;
-    v28 = (float)targets->pObject->ViewRect.y1 * v27;
-    pa[1] = (float)(targets->pObject->ViewRect.y2 - targets->pObject->ViewRect.y1)
-          / (float)(signed int)v23->ImgSize.Height;
-    pa[3] = v28;
-    LODWORD(v[0]) = v22;
-    v[1] = *(float *)&v22 * 0.0;
-    v[2] = *(float *)&v22 * 0.0;
-    v[3] = v26 * *(float *)&v22;
-    pa[0] = v27 * 0.0;
-    pa[2] = v27 * 0.0;
+    v26 = 0.0;
+    x1 = (float)targets->pObject->ViewRect.x1;
+    v28 = (float)(targets->pObject->ViewRect.y2 - targets->pObject->ViewRect.y1) / (float)(int)v24->ImgSize.Height;
+    *(float *)&v23 = (float)(targets->pObject->ViewRect.x2 - targets->pObject->ViewRect.x1)
+                   / (float)(int)v24->ImgSize.Width;
+    v29 = (float)targets->pObject->ViewRect.y1 * v28;
+    *((float *)&v.pFS + 1) = v28;
+    *((float *)&v.pFDesc + 1) = v29;
+    LODWORD(v.pVS) = v23;
+    *((float *)&v.pVS + 1) = *(float *)&v23 * 0.0;
+    *(float *)&v.pVDesc = *(float *)&v23 * 0.0;
+    *((float *)&v.pVDesc + 1) = x1 * *(float *)&v23;
+    *(float *)&v.pFS = v28 * 0.0;
+    *(float *)&v.pFDesc = v28 * 0.0;
     Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-      (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)v12->UniformData,
+      v12,
       &v12->CurShaders,
       0x15u,
-      v,
+      (const float *)&v,
       8u,
       0,
       0);
-    v29 = v14->Type;
-    if ( v29 <= 5 )
+    Type = filter->Type;
+    if ( Type <= Filter_GradientBevel )
     {
       Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetCxform(
-        (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)v12->UniformData,
+        v12,
         &v12->CurShaders,
-        v87,
+        cx,
         0,
         0);
-      v30 = (__m128)(unsigned int)v14[1].RefCount;
-      v30.m128_f32[0] = v30.m128_f32[0] * 0.050000001;
-      v31 = (signed int)v30.m128_f32[0];
-      v32 = (float)(signed int)v23->ImgSize.Height;
-      v78[0] = 1.0 / (float)(signed int)v23->ImgSize.Width;
-      v78[1] = 1.0 / v32;
-      if ( (signed int)v30.m128_f32[0] != 0x80000000 && (float)v31 != v30.m128_f32[0] )
-        v30.m128_f32[0] = (float)(v31 - (_mm_movemask_ps(_mm_unpacklo_ps(v30, v30)) & 1));
-      if ( v30.m128_f32[0] < 1.0 )
-        v30.m128_i32[0] = (signed int)FLOAT_1_0;
-      v33 = (__m128)*((unsigned int *)&v14[1].RefCount + 1);
-      v33.m128_f32[0] = v33.m128_f32[0] * 0.050000001;
-      v34 = (signed int)v33.m128_f32[0];
-      if ( (signed int)v33.m128_f32[0] != 0x80000000 && (float)v34 != v33.m128_f32[0] )
-        v33.m128_f32[0] = (float)(v34 - (_mm_movemask_ps(_mm_unpacklo_ps(v33, v33)) & 1));
-      if ( v33.m128_f32[0] < 1.0 )
-        v33.m128_i32[0] = (signed int)FLOAT_1_0;
+      RefCount = (__m128)(unsigned int)filter[1].RefCount;
+      RefCount.m128_f32[0] = RefCount.m128_f32[0] * 0.050000001;
+      v32 = (int)RefCount.m128_f32[0];
+      Height = (float)(int)v24->ImgSize.Height;
+      v75[0] = 1.0 / (float)(int)v24->ImgSize.Width;
+      v75[1] = 1.0 / Height;
+      if ( (int)RefCount.m128_f32[0] != 0x80000000 && (float)v32 != RefCount.m128_f32[0] )
+        RefCount.m128_f32[0] = (float)(v32 - (_mm_movemask_ps(_mm_unpacklo_ps(RefCount, RefCount)) & 1));
+      if ( RefCount.m128_f32[0] < 1.0 )
+        RefCount.m128_i32[0] = (int)FLOAT_1_0;
+      v34 = (__m128)*((unsigned int *)&filter[1].RefCount + 1);
+      v34.m128_f32[0] = v34.m128_f32[0] * 0.050000001;
+      v35 = (int)v34.m128_f32[0];
+      if ( (int)v34.m128_f32[0] != 0x80000000 && (float)v35 != v34.m128_f32[0] )
+        v34.m128_f32[0] = (float)(v35 - (_mm_movemask_ps(_mm_unpacklo_ps(v34, v34)) & 1));
+      if ( v34.m128_f32[0] < 1.0 )
+        v34.m128_i32[0] = (int)FLOAT_1_0;
       if ( v11[v10] - 0x80000 <= 1 )
       {
-        if ( !(v10 & 1) )
+        if ( (v10 & 1) == 0 )
         {
-          v78[1] = 0.0;
-          v38 = 1.0 / v30.m128_f32[0];
-          v35 = (float)(v30.m128_f32[0] - 1.0) * 0.5;
+          v75[1] = 0.0;
+          v39 = 1.0 / RefCount.m128_f32[0];
+          v36 = (float)(RefCount.m128_f32[0] - 1.0) * 0.5;
 LABEL_25:
-          v[3] = v38;
+          *((float *)&v.pVDesc + 1) = v39;
           if ( (_DWORD)v10 == passCount - 1 )
-            v39 = *(float *)&v14[2].vfptr;
+            v40 = (int)filter[2].vfptr;
           else
-            v39 = *(float *)&FLOAT_1_0;
-          v[2] = v39;
-          v40 = FLOAT_1_0eN12;
-          if ( v35 < 1.0e-12 )
-            v35 = FLOAT_1_0eN12;
-          v[0] = v35;
-          if ( v25 >= 1.0e-12 )
-            v40 = v25;
-          v[1] = v40;
+            v40 = (int)FLOAT_1_0;
+          LODWORD(v.pVDesc) = v40;
+          v41 = FLOAT_1_0eN12;
+          if ( v36 < 1.0e-12 )
+            v36 = FLOAT_1_0eN12;
+          *(float *)&v.pVS = v36;
+          if ( v26 >= 1.0e-12 )
+            v41 = v26;
+          *((float *)&v.pVS + 1) = v41;
           Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-            (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)v12->UniformData,
+            v12,
             &v12->CurShaders,
             8u,
-            v,
+            (const float *)&v,
             4u,
             0,
             0);
           Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-            (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)v12->UniformData,
+            v12,
             &v12->CurShaders,
             0x16u,
-            v78,
+            v75,
             2u,
             0,
             0);
           if ( (_BYTE)shaders )
           {
             Scaleform::Render::Color::GetRGBAFloat(
-              (Scaleform::Render::Color *)&v14[2].vfptr + 1,
-              v,
-              &v[1],
-              &v[2],
-              &v[3]);
+              (Scaleform::Render::Color *)&filter[2].vfptr + 1,
+              (float *)&v,
+              (float *)&v.pVS + 1,
+              (float *)&v.pVDesc,
+              (float *)&v.pVDesc + 1);
             Scaleform::Render::Color::GetRGBAFloat(
-              (Scaleform::Render::Color *)&v14[2].RefCount,
-              pa,
-              &pa[1],
-              &pa[2],
-              &pa[3]);
-            v41 = targets[2].pObject;
-            v80[0] = *(float *)&v14[1].Type * -0.050000001;
-            v80[1] = *(float *)&v14[1].Frozen * -0.050000001;
-            if ( v41 )
+              (Scaleform::Render::Color *)&filter[2].RefCount,
+              (float *)&v.pFS,
+              (float *)&v.pFS + 1,
+              (float *)&v.pFDesc,
+              (float *)&v.pFDesc + 1);
+            v42 = targets[2].pObject;
+            v77[0] = *(float *)&filter[1].Type * -0.050000001;
+            v77[1] = *(float *)&filter[1].Frozen * -0.050000001;
+            if ( v42 )
             {
-              v42 = (Scaleform::Render::Texture *)((__int64 (*)(void))v41->vfptr[3].__vecDelDtor)();
-              v43 = (float)(signed int)v42->ImgSize.Height;
-              *(float *)&shaders = 1.0 / (float)((float)(signed int)v42->ImgSize.Width * v78[0]);
-              *((float *)&shaders + 1) = 1.0 / (float)(v43 * v78[1]);
+              v43 = (Scaleform::Render::Texture *)((__int64 (__fastcall *)(Scaleform::Render::RenderTarget *))v42->vfptr[3].__vecDelDtor)(v42);
+              v44 = (float)(int)v43->ImgSize.Height;
+              *(float *)&shaders = 1.0 / (float)((float)(int)v43->ImgSize.Width * v75[0]);
+              *((float *)&shaders + 1) = 1.0 / (float)(v44 * v75[1]);
               Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-                (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)v12->UniformData,
+                v12,
                 &v12->CurShaders,
                 0x13u,
                 (const float *)&shaders,
                 2u,
                 0,
                 0);
-              v44 = *(_OWORD *)&v12->CurShaders.pFS;
-              *(_OWORD *)v82 = *(_OWORD *)&v16->pVS;
+              v45 = *(_OWORD *)&v12->CurShaders.pFS;
+              *(_OWORD *)v79 = *(_OWORD *)&p_CurShaders->pVS;
               LOBYTE(pass) = 3;
-              *(_QWORD *)&v84 = v12->CurShaders.pVFormat;
-              v83 = v44;
+              *(_QWORD *)&v81 = v12->CurShaders.pVFormat;
+              v80 = v45;
               Scaleform::Render::D3D1x::ShaderInterface::SetTexture(
                 v12,
-                (Scaleform::Render::D3D1x::ShaderPair *)v82,
+                (Scaleform::Render::D3D1x::ShaderPair *)v79,
                 0x12u,
-                v42,
+                v43,
                 (Scaleform::Render::ImageFillMode)&pass,
                 0);
             }
             Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-              (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)v12->UniformData,
+              v12,
               &v12->CurShaders,
               0xEu,
-              v80,
+              v77,
               2u,
               0,
               0);
-            if ( v14->Type == 3 )
+            if ( filter->Type == Filter_Bevel )
               Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-                (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)v12->UniformData,
+                v12,
                 &v12->CurShaders,
                 0x11u,
-                pa,
+                (const float *)&v.pFS,
                 4u,
                 0,
                 0);
-            if ( (unsigned int)(v14->Type - 4) <= 1 )
+            if ( (unsigned int)(filter->Type - 4) <= 1 )
             {
-              v45 = (Scaleform::Render::Texture *)(*(__int64 (__fastcall **)(_QWORD, Scaleform::Render::TextureManager *))(**(_QWORD **)&v14[3].RefCount + 168i64))(
-                                                    *(_QWORD *)&v14[3].RefCount,
-                                                    v23->pManagerLocks.pObject->pManager);
-              v46 = *(_OWORD *)&v12->CurShaders.pFS;
-              *(_OWORD *)v82 = *(_OWORD *)&v16->pVS;
-              v83 = v46;
-              v47 = v12->CurShaders.pVFormat;
+              v46 = (Scaleform::Render::Texture *)(*(__int64 (__fastcall **)(_QWORD, Scaleform::Render::TextureManager *))(**(_QWORD **)&filter[3].RefCount + 168i64))(
+                                                    *(_QWORD *)&filter[3].RefCount,
+                                                    v24->pManagerLocks.pObject->pManager);
+              v47 = *(_OWORD *)&v12->CurShaders.pFS;
+              *(_OWORD *)v79 = *(_OWORD *)&p_CurShaders->pVS;
+              v80 = v47;
+              v48 = v12->CurShaders.pVFormat;
               LOBYTE(pass) = 3;
-              *(_QWORD *)&v84 = v47;
+              *(_QWORD *)&v81 = v48;
               Scaleform::Render::D3D1x::ShaderInterface::SetTexture(
                 v12,
-                (Scaleform::Render::D3D1x::ShaderPair *)v82,
+                (Scaleform::Render::D3D1x::ShaderPair *)v79,
                 9u,
-                v45,
+                v46,
                 (Scaleform::Render::ImageFillMode)&pass,
                 0);
             }
             else
             {
               Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-                (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)v12->UniformData,
+                v12,
                 &v12->CurShaders,
                 0x10u,
-                v,
+                (const float *)&v,
                 4u,
                 0,
                 0);
@@ -1711,67 +1702,65 @@ LABEL_25:
           }
           goto LABEL_63;
         }
-        v37 = v33.m128_f32[0];
-        v78[0] = 0.0;
+        v38 = v34.m128_f32[0];
+        v75[0] = 0.0;
       }
       else
       {
         if ( (_DWORD)v10 == passCount - 1 && (_DWORD)v10 )
         {
-          v35 = 0.0;
-          v25 = (float)(v33.m128_f32[0] - 1.0) * 0.5;
+          v36 = 0.0;
+          v26 = (float)(v34.m128_f32[0] - 1.0) * 0.5;
 LABEL_24:
-          v38 = 1.0 / v33.m128_f32[0];
+          v39 = 1.0 / v34.m128_f32[0];
           goto LABEL_25;
         }
-        v36 = v33.m128_f32[0];
-        v37 = v30.m128_f32[0];
-        v33.m128_f32[0] = v33.m128_f32[0] * v30.m128_f32[0];
-        v25 = (float)(v36 - 1.0) * 0.5;
+        v37 = v34.m128_f32[0];
+        v38 = RefCount.m128_f32[0];
+        v34.m128_f32[0] = v34.m128_f32[0] * RefCount.m128_f32[0];
+        v26 = (float)(v37 - 1.0) * 0.5;
       }
-      v35 = (float)(v37 - 1.0) * 0.5;
+      v36 = (float)(v38 - 1.0) * 0.5;
       goto LABEL_24;
     }
-    if ( v29 == 8 )
+    if ( Type == Filter_ColorMatrix )
     {
-      v48 = v14[1].0;
-      v49 = *(_OWORD *)&v14[2].RefCount;
-      *(Scaleform::RefCountBase<Scaleform::Render::Filter,2> *)v82 = v48;
-      v84 = v49;
-      v50 = v87->M[0][3];
-      v51 = v87->M[0][0];
-      v52 = v87->M[0][1];
-      v53 = v87->M[0][2];
-      v54 = *(_OWORD *)&v14[1].Type;
-      v83 = v54;
-      v55 = (__int128)v14[3].0;
-      v56 = *(_OWORD *)&v14[3].Type;
-      v82[0] = (float)(*(float *)&v48.vfptr * v51) * v50;
-      v85 = v55;
+      v49 = filter[1].Scaleform::RefCountBase<Scaleform::Render::Filter,2>;
+      v50 = *(_OWORD *)&filter[2].RefCount;
+      *(Scaleform::RefCountBase<Scaleform::Render::Filter,2> *)v79 = v49;
+      v81 = v50;
+      v51 = cx->M[0][3];
+      v52 = cx->M[0][0];
+      v53 = cx->M[0][1];
+      v54 = cx->M[0][2];
+      v80 = *(_OWORD *)&filter[1].Type;
+      v55 = filter[3].Scaleform::RefCountBase<Scaleform::Render::Filter,2>;
+      v56 = *(_OWORD *)&filter[3].Type;
+      v79[0] = (float)(*(float *)&v49.vfptr * v52) * v51;
       *(_OWORD *)v86 = v56;
-      v82[2] = (float)(*(float *)&v48.RefCount * v53) * v50;
-      *(float *)&v84 = (float)(*(float *)&v49 * v51) * v50;
-      *(float *)&v83 = (float)(*(float *)&v54 * v51) * v50;
-      *(float *)&v85 = (float)(*(float *)&v55 * v51) * v50;
-      v82[1] = (float)(v82[1] * v52) * v50;
-      *((float *)&v83 + 2) = (float)(*((float *)&v54 + 2) * v53) * v50;
-      v82[3] = *((float *)&v48.RefCount + 1) * v50;
-      *((float *)&v83 + 1) = (float)(*((float *)&v83 + 1) * v52) * v50;
-      *((float *)&v84 + 2) = (float)(*((float *)&v49 + 2) * v53) * v50;
-      *((float *)&v83 + 3) = *((float *)&v54 + 3) * v50;
-      *((float *)&v84 + 1) = (float)(*((float *)&v84 + 1) * v52) * v50;
-      *((float *)&v85 + 2) = (float)(*((float *)&v55 + 2) * v53) * v50;
-      *((float *)&v84 + 3) = *((float *)&v49 + 3) * v50;
-      *((float *)&v85 + 1) = (float)(*((float *)&v85 + 1) * v52) * v50;
-      *((float *)&v85 + 3) = *((float *)&v55 + 3) * v50;
-      v86[0] = (float)((float)(v87->M[1][0] * 0.0039215689) + (float)((float)(*(float *)&v56 * v51) * v50)) * v50;
-      v57 = v87->M[1][2];
-      v86[1] = (float)((float)(v87->M[1][1] * 0.0039215689) + (float)((float)(v86[1] * v52) * v50)) * v50;
-      *(float *)&v48.vfptr = v87->M[1][3];
-      v86[2] = (float)((float)(v57 * 0.0039215689) + (float)((float)(*((float *)&v56 + 2) * v53) * v50)) * v50;
-      v86[3] = (float)((float)(*(float *)&v48.vfptr * 0.0039215689) + (float)(*((float *)&v56 + 3) * v50)) * v50;
+      v79[2] = (float)(*(float *)&v49.RefCount * v54) * v51;
+      *(float *)&v81 = (float)(*(float *)&v50 * v52) * v51;
+      *(float *)&v80 = (float)(*(float *)&v80 * v52) * v51;
+      v82 = (float)(*(float *)&v55.vfptr * v52) * v51;
+      v79[1] = (float)(*((float *)&v49.vfptr + 1) * v53) * v51;
+      *((float *)&v80 + 2) = (float)(*((float *)&v80 + 2) * v54) * v51;
+      v79[3] = *((float *)&v49.RefCount + 1) * v51;
+      *((float *)&v80 + 1) = (float)(*((float *)&v80 + 1) * v53) * v51;
+      *((float *)&v81 + 2) = (float)(*((float *)&v50 + 2) * v54) * v51;
+      *((float *)&v80 + 3) = *((float *)&v80 + 3) * v51;
+      *((float *)&v81 + 1) = (float)(*((float *)&v50 + 1) * v53) * v51;
+      v84 = (float)(*(float *)&v55.RefCount * v54) * v51;
+      *((float *)&v81 + 3) = *((float *)&v50 + 3) * v51;
+      v83 = (float)(*((float *)&v55.vfptr + 1) * v53) * v51;
+      v85 = *((float *)&v55.RefCount + 1) * v51;
+      v86[0] = (float)((float)(cx->M[1][0] * 0.0039215689) + (float)((float)(*(float *)&v56 * v52) * v51)) * v51;
+      v57 = cx->M[1][2];
+      v86[1] = (float)((float)(cx->M[1][1] * 0.0039215689) + (float)((float)(*((float *)&v56 + 1) * v53) * v51)) * v51;
+      *(float *)&v49.vfptr = cx->M[1][3];
+      v86[2] = (float)((float)(v57 * 0.0039215689) + (float)((float)(*((float *)&v56 + 2) * v54) * v51)) * v51;
+      v86[3] = (float)((float)(*(float *)&v49.vfptr * 0.0039215689) + (float)(*((float *)&v56 + 3) * v51)) * v51;
       Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-        (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)v12->UniformData,
+        v12,
         &v12->CurShaders,
         4u,
         v86,
@@ -1779,10 +1768,10 @@ LABEL_24:
         0,
         0);
       Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-        (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)v12->UniformData,
+        v12,
         &v12->CurShaders,
         5u,
-        v82,
+        v79,
         0x10u,
         0,
         0);
@@ -1790,35 +1779,35 @@ LABEL_63:
       Scaleform::Render::D3D1x::ShaderInterface::Finish(v12, 1u);
       return 1;
     }
-    if ( v29 != 10 )
+    if ( Type != Filter_DisplacementMap )
       goto LABEL_63;
     v58 = 3;
-    if ( !LODWORD(v14[2].vfptr) )
+    if ( !LODWORD(filter[2].vfptr) )
       v58 = 2;
-    v59 = (Scaleform::Render::Texture *)(*((__int64 (__fastcall **)(Scaleform::RefCountImplCoreVtbl *, _QWORD))v14[1].vfptr->__vecDelDtor
+    v59 = (Scaleform::Render::Texture *)(*((__int64 (__fastcall **)(Scaleform::RefCountImplCoreVtbl *, _QWORD))filter[1].vfptr->__vecDelDtor
                                          + 21))(
-                                          v14[1].vfptr,
+                                          filter[1].vfptr,
                                           0i64);
     LOBYTE(pass) = v58;
     v60 = *(_OWORD *)&v12->CurShaders.pFS;
     v61 = v59;
-    *(_OWORD *)v82 = *(_OWORD *)&v16->pVS;
-    v83 = v60;
-    *(_QWORD *)&v84 = v12->CurShaders.pVFormat;
+    *(_OWORD *)v79 = *(_OWORD *)&p_CurShaders->pVS;
+    v80 = v60;
+    *(_QWORD *)&v81 = v12->CurShaders.pVFormat;
     Scaleform::Render::D3D1x::ShaderInterface::SetTexture(
       v12,
-      (Scaleform::Render::D3D1x::ShaderPair *)v82,
+      (Scaleform::Render::D3D1x::ShaderPair *)v79,
       0xBu,
       v59,
       (Scaleform::Render::ImageFillMode)&pass,
       0);
-    v62 = v14[1].Type;
-    *(_QWORD *)v80 = 0i64;
-    v81 = 0i64;
-    *(_QWORD *)v78 = 0i64;
-    v79 = 0i64;
-    *(_QWORD *)v = 0i64;
-    *(_QWORD *)&v[2] = 0i64;
+    v62 = filter[1].Type;
+    *(_QWORD *)v77 = 0i64;
+    v78 = 0i64;
+    *(_QWORD *)v75 = 0i64;
+    v76 = 0i64;
+    v.pVS = 0i64;
+    v.pVDesc = 0i64;
     shaders = 0i64;
     v63 = v62 - 1;
     if ( v63 )
@@ -1826,95 +1815,99 @@ LABEL_63:
       v64 = v63 - 1;
       if ( !v64 )
       {
-        v80[1] = 1.0;
+        v77[1] = 1.0;
         goto LABEL_53;
       }
       v65 = v64 - 2;
       if ( !v65 )
       {
-        LODWORD(v81) = 1065353216;
+        LODWORD(v78) = 1065353216;
         goto LABEL_53;
       }
       if ( v65 == 4 )
       {
-        HIDWORD(v81) = 1065353216;
+        HIDWORD(v78) = 1065353216;
         goto LABEL_53;
       }
     }
-    v80[0] = 1.0;
+    v77[0] = 1.0;
 LABEL_53:
-    if ( *(_DWORD *)&v14[1].Frozen != 1 )
+    if ( *(_DWORD *)&filter[1].Frozen != 1 )
     {
-      switch ( *(_DWORD *)&v14[1].Frozen )
+      switch ( *(_DWORD *)&filter[1].Frozen )
       {
         case 2:
-          v78[1] = 1.0;
+          v75[1] = 1.0;
           goto LABEL_61;
         case 4:
-          LODWORD(v79) = 1065353216;
+          LODWORD(v76) = 1065353216;
           goto LABEL_61;
         case 8:
-          HIDWORD(v79) = 1065353216;
+          HIDWORD(v76) = 1065353216;
           goto LABEL_61;
       }
     }
-    v78[0] = 1.0;
+    v75[0] = 1.0;
 LABEL_61:
-    v66 = (float)(signed int)v23->ImgSize.Width;
-    v67 = 1.0 / (float)(signed int)v61->ImgSize.Width;
-    v68 = (float)(signed int)v61->ImgSize.Height;
-    v69 = v23->ImgSize.Height;
-    v70 = v67;
-    v71 = v67 * *(float *)&v14[1].RefCount;
-    v[0] = v70 * v66;
-    v[2] = v71;
-    v72 = 1.0 / v68;
-    v73 = *(float *)&v14[2].RefCount;
-    v[3] = v72 * *((float *)&v14[1].RefCount + 1);
-    v[1] = v72 * (float)v69;
-    v74 = *((float *)&v14[2].vfptr + 1) / v66;
-    *((float *)&shaders + 1) = v73 / (float)v69;
-    *(float *)&shaders = v74;
+    Width = (float)(int)v24->ImgSize.Width;
+    v67 = (float)(int)v61->ImgSize.Height;
+    v68 = v24->ImgSize.Height;
+    v69 = 1.0 / (float)(int)v61->ImgSize.Width;
+    v70 = v69 * *(float *)&filter[1].RefCount;
+    *(float *)&v.pVS = v69 * Width;
+    *(float *)&v.pVDesc = v70;
+    v71 = 1.0 / v67;
+    v72 = *(float *)&filter[2].RefCount;
+    *((float *)&v.pVDesc + 1) = v71 * *((float *)&filter[1].RefCount + 1);
+    *((float *)&v.pVS + 1) = v71 * (float)v68;
+    v73 = *((float *)&filter[2].vfptr + 1) / Width;
+    *((float *)&shaders + 1) = v72 / (float)v68;
+    *(float *)&shaders = v73;
     Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-      (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)v12->UniformData,
+      v12,
       &v12->CurShaders,
       2u,
-      v80,
+      v77,
       4u,
       0,
       0);
     Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-      (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)v12->UniformData,
+      v12,
       &v12->CurShaders,
       3u,
-      v78,
+      v75,
       4u,
       0,
       0);
     Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-      (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)v12->UniformData,
+      v12,
       &v12->CurShaders,
       0xAu,
-      v,
+      (const float *)&v,
       4u,
       0,
       0);
     Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-      (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)v12->UniformData,
+      v12,
       &v12->CurShaders,
       0xFu,
       (const float *)&shaders,
       2u,
       0,
       0);
-    if ( LODWORD(v14[2].vfptr) == 3 )
+    if ( LODWORD(filter[2].vfptr) == 3 )
     {
-      Scaleform::Render::Color::GetRGBAFloat((Scaleform::Render::Color *)&v14[2].RefCount + 1, v, &v[1], &v[2], &v[3]);
+      Scaleform::Render::Color::GetRGBAFloat(
+        (Scaleform::Render::Color *)&filter[2].RefCount + 1,
+        (float *)&v,
+        (float *)&v.pVS + 1,
+        (float *)&v.pVDesc,
+        (float *)&v.pVDesc + 1);
       Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-        (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)v12->UniformData,
+        v12,
         &v12->CurShaders,
         1u,
-        v,
+        (const float *)&v,
         4u,
         0,
         0);
@@ -1922,47 +1915,49 @@ LABEL_61:
     goto LABEL_63;
   }
   return result;
-}aleform::Render::Color::GetRGBAFloat((Scaleform::Render::Color *)&v
+}
 
 // File Line: 995
 // RVA: 0x9FED20
-signed __int64 __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::GetFilterPasses(Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this, Scaleform::Render::Filter *filter, unsigned int fillFlags, unsigned int *passes)
+__int64 __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::GetFilterPasses(
+        Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this,
+        Scaleform::Render::Filter *filter,
+        char fillFlags,
+        unsigned int *passes)
 {
-  Scaleform::Render::FilterType v4; // eax
-  char v5; // si
-  unsigned int v6; // er8
+  Scaleform::Render::FilterType Type; // eax
+  unsigned int vfptr_high; // r8d
   char v7; // bl
-  unsigned int v8; // er10
-  signed int v9; // eax
+  unsigned int v8; // r10d
+  int v9; // eax
   unsigned int *v10; // rdi
   __int64 i; // rcx
   int v12; // edi
-  int v13; // eax
+  int vfptr; // eax
   unsigned int *v14; // rcx
   unsigned int v15; // eax
   int v16; // eax
   int v17; // edx
-  signed int v19; // eax
-  int v20; // eax
+  int v19; // eax
+  unsigned int v20; // eax
 
-  v4 = filter->Type;
-  v5 = fillFlags;
-  if ( (signed int)v4 > 5 )
+  Type = filter->Type;
+  if ( Type > Filter_GradientBevel )
   {
-    if ( v4 == 8 )
+    if ( Type == Filter_ColorMatrix )
     {
-      v6 = 1;
+      vfptr_high = 1;
       *passes = 393216;
-      if ( v5 & 1 )
+      if ( (fillFlags & 1) != 0 )
       {
         *passes = 393217;
         return 1i64;
       }
     }
-    else if ( v4 == 10 )
+    else if ( Type == Filter_DisplacementMap )
     {
       *passes = 786432;
-      v6 = 1;
+      vfptr_high = 1;
       if ( LODWORD(filter[2].vfptr) == 2 )
       {
         *passes = 851968;
@@ -1976,33 +1971,30 @@ signed __int64 __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Rend
     }
     else
     {
-      v6 = 0;
+      return 0;
     }
   }
   else
   {
-    v6 = HIDWORD(filter[1].vfptr);
+    vfptr_high = HIDWORD(filter[1].vfptr);
     v7 = 0;
     if ( (float)(*((float *)&filter[1].RefCount + 1) * *(float *)&filter[1].RefCount) >= 12800.0 )
     {
-      v6 *= 2;
+      vfptr_high *= 2;
       v7 = 1;
     }
     v8 = 0;
-    if ( v6 != 1 )
+    if ( vfptr_high != 1 )
     {
-      v8 = v6 - 1;
+      v8 = vfptr_high - 1;
       v9 = 557056;
       v10 = passes;
       if ( v7 )
         v9 = 0x80000;
       for ( i = v8; i; --i )
-      {
-        *v10 = v9;
-        ++v10;
-      }
+        *v10++ = v9;
     }
-    v12 = (_QWORD)filter[1].vfptr & 7;
+    v12 = (__int64)filter[1].vfptr & 7;
     if ( (unsigned int)(v12 - 1) > 4 )
     {
       v19 = 0x8000;
@@ -2010,15 +2002,15 @@ signed __int64 __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Rend
         v19 = 0;
       v20 = v19 + 0x80000;
       passes[v8] = v20;
-      if ( v5 & 1 )
+      if ( (fillFlags & 1) != 0 )
       {
         passes[v8] = v20 + 1;
-        return v6;
+        return vfptr_high;
       }
     }
     else
     {
-      if ( v12 <= 2 )
+      if ( (unsigned __int64)((__int64)filter[1].vfptr & 7) <= 2 )
       {
         passes[v8] = 655360;
       }
@@ -2037,12 +2029,12 @@ signed __int64 __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Rend
             break;
         }
       }
-      v13 = (int)filter[1].vfptr;
-      if ( v13 & 0x20 )
+      vfptr = (int)filter[1].vfptr;
+      if ( (vfptr & 0x20) != 0 )
       {
         v14 = &passes[v8];
-        v15 = passes[v8];
-        if ( _bittest((const signed int *)&v15, 0x10u) || v12 == 4 )
+        v15 = *v14;
+        if ( (*v14 & 0x10000) != 0 || v12 == 4 )
         {
           v16 = v15 + 2048;
           *v14 = v16;
@@ -2053,52 +2045,50 @@ signed __int64 __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Rend
           *v14 = v16;
         }
       }
-      else if ( (v13 & 0x80u) == 0 && (v12 != 1 || !(v13 & 0x40) || v13 & 0x10) )
+      else if ( (vfptr & 0x80u) != 0 || v12 == 1 && (vfptr & 0x40) != 0 && (vfptr & 0x10) == 0 )
       {
         v14 = &passes[v8];
-        v16 = passes[v8];
+        v16 = *v14 + 512;
+        *v14 = v16;
       }
       else
       {
         v14 = &passes[v8];
-        v16 = passes[v8] + 512;
-        *v14 = v16;
+        v16 = *v14;
       }
       v17 = (int)filter[1].vfptr;
-      if ( v17 & 0x40 || v17 & 0x10 )
+      if ( (v17 & 0x40) != 0 || (v17 & 0x10) != 0 )
         v16 += 4096;
       *v14 = v16;
-      if ( v5 & 1 )
+      if ( (fillFlags & 1) != 0 )
       {
         *v14 = v16 + 1;
-        return v6;
+        return vfptr_high;
       }
     }
   }
-  return v6;
+  return vfptr_high;
 }
 
 // File Line: 1151
 // RVA: 0xA00F30
-char __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::SetDrawableCopyPixelsFill(Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this, Scaleform::Render::Texture **tex, Scaleform::Render::Matrix2x4<float> *texgen, Scaleform::Render::Size<int> texsize, Scaleform::Render::Matrix2x4<float> *mvp, bool mergeAlpha, bool destAlpha, Scaleform::Render::VertexFormat *pvf, Scaleform::Render::D3D1x::ShaderInterface *psi)
+char __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::SetDrawableCopyPixelsFill(
+        Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this,
+        Scaleform::Render::Texture **tex,
+        Scaleform::Render::Matrix2x4<float> *texgen,
+        Scaleform::Render::Size<int> texsize,
+        Scaleform::Render::Matrix2x4<float> *mvp,
+        bool mergeAlpha,
+        bool destAlpha,
+        Scaleform::Render::VertexFormat *pvf,
+        Scaleform::Render::D3D1x::ShaderInterface *psi)
 {
-  Scaleform::Render::Texture **v9; // rdi
   Scaleform::Render::D3D1x::ShaderDesc::ShaderType v10; // edx
-  int *v11; // rsi
-  Scaleform::Render::Matrix2x4<float> *v12; // rbp
-  Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *v13; // r14
-  Scaleform::Render::D3D1x::ShaderInterface *v14; // rbx
   char result; // al
-  bool v16; // zf
-  Scaleform::Render::Size<int> v17; // [rsp+68h] [rbp+10h]
 
-  v9 = tex;
-  v10 = 917504;
-  v11 = (int *)texsize;
-  v12 = texgen;
-  if ( v9[2] )
-    v10 = 917632;
-  v13 = this;
+  v10 = ST_start_DrawableCopyPixels;
+  if ( tex[2] )
+    v10 = ST_DrawableCopyPixelsAlpha;
   if ( destAlpha )
   {
     if ( mergeAlpha )
@@ -2108,51 +2098,43 @@ char __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x:
   {
     v10 += 32;
   }
-  v14 = psi;
   result = Scaleform::Render::D3D1x::ShaderInterface::SetStaticShader(psi, v10, pvf);
   if ( result )
   {
-    if ( !v14->PrimitiveOpen )
+    if ( !psi->PrimitiveOpen )
     {
-      v14->PrimitiveOpen = 1;
-      *(_QWORD *)v14->UniformSet = 0i64;
-      *(_QWORD *)&v14->UniformSet[8] = 0i64;
-      *(_QWORD *)&v14->UniformSet[16] = 0i64;
-      *(_WORD *)&v14->UniformSet[24] = 0;
-      v14->Textures[0] = 0i64;
-      v14->Textures[1] = 0i64;
-      v14->Textures[2] = 0i64;
-      v14->Textures[3] = 0i64;
+      psi->PrimitiveOpen = 1;
+      *(_QWORD *)psi->UniformSet = 0i64;
+      *(_QWORD *)&psi->UniformSet[8] = 0i64;
+      *(_QWORD *)&psi->UniformSet[16] = 0i64;
+      *(_WORD *)&psi->UniformSet[24] = 0;
+      psi->Textures[0] = 0i64;
+      psi->Textures[1] = 0i64;
+      psi->Textures[2] = 0i64;
+      psi->Textures[3] = 0i64;
     }
-    v16 = v9[2] == 0i64;
-    v17.Width = *v11;
-    v17.Height = v11[1];
-    result = Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::DrawableFinish(
-               v13,
-               !v16 + 2,
-               v9,
-               v12);
+    return Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::DrawableFinish(
+             this,
+             (tex[2] != 0i64) + 2,
+             tex,
+             texgen);
   }
   return result;
 }
 
 // File Line: 1174
 // RVA: 0xA01180
-char __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::SetDrawableMergeFill(Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this, Scaleform::Render::Texture **tex, Scaleform::Render::Matrix2x4<float> *texgen, Scaleform::Render::Size<int> texsize, Scaleform::Render::Matrix4x4<float> *cxmul, Scaleform::Render::VertexFormat *pvf, Scaleform::Render::D3D1x::ShaderInterface *psi)
+char __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::SetDrawableMergeFill(
+        Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this,
+        Scaleform::Render::Texture **tex,
+        Scaleform::Render::Matrix2x4<float> *texgen,
+        Scaleform::Render::Size<int> texsize,
+        Scaleform::Render::Matrix4x4<float> *cxmul,
+        Scaleform::Render::VertexFormat *pvf,
+        Scaleform::Render::D3D1x::ShaderInterface *psi)
 {
-  Scaleform::Render::Matrix2x4<float> *v7; // rbp
-  Scaleform::Render::Texture **v8; // r15
-  Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *v9; // r12
-  int *v10; // r14
   char result; // al
-  int v12; // eax
-  Scaleform::Render::Size<int> texsizea; // [rsp+40h] [rbp-58h]
-  Scaleform::Render::Matrix2x4<float> mvpOriginal; // [rsp+50h] [rbp-48h]
 
-  v7 = texgen;
-  v8 = tex;
-  v9 = this;
-  v10 = (int *)texsize;
   result = Scaleform::Render::D3D1x::ShaderInterface::SetStaticShader(psi, ST_start_DrawableMerge, pvf);
   if ( result )
   {
@@ -2169,7 +2151,7 @@ char __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x:
       psi->Textures[3] = 0i64;
     }
     Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-      (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)psi->UniformData,
+      psi,
       &psi->CurShaders,
       5u,
       (const float *)cxmul,
@@ -2177,44 +2159,35 @@ char __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x:
       0,
       0);
     Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-      (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)psi->UniformData,
+      psi,
       &psi->CurShaders,
       6u,
       (const float *)&cxmul[1],
       0x10u,
       0,
       0);
-    v12 = *v10;
-    *(_OWORD *)&mvpOriginal.M[0][0] = _xmm_bf800000000000000000000040000000;
-    *(_OWORD *)&mvpOriginal.M[1][0] = _xmm;
-    texsizea.Width = v12;
-    texsizea.Height = v10[1];
-    result = Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::DrawableFinish(
-               v9,
-               2u,
-               v8,
-               v7);
+    return Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::DrawableFinish(
+             this,
+             2u,
+             tex,
+             texgen);
   }
   return result;
 }
 
 // File Line: 1192
 // RVA: 0xA01050
-char __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::SetDrawableCxform(Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this, Scaleform::Render::Texture **tex, Scaleform::Render::Matrix2x4<float> *texgen, Scaleform::Render::Size<int> texsize, Scaleform::Render::Cxform *cx, Scaleform::Render::VertexFormat *pvf, Scaleform::Render::D3D1x::ShaderInterface *psi)
+char __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::SetDrawableCxform(
+        Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this,
+        Scaleform::Render::Texture **tex,
+        Scaleform::Render::Matrix2x4<float> *texgen,
+        Scaleform::Render::Size<int> texsize,
+        Scaleform::Render::Cxform *cx,
+        Scaleform::Render::VertexFormat *pvf,
+        Scaleform::Render::D3D1x::ShaderInterface *psi)
 {
-  Scaleform::Render::Matrix2x4<float> *v7; // rsi
-  Scaleform::Render::Texture **v8; // rbp
-  Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *v9; // r14
-  int *v10; // rdi
   char result; // al
-  int v12; // eax
-  Scaleform::Render::Size<int> texsizea; // [rsp+40h] [rbp-38h]
-  Scaleform::Render::Matrix2x4<float> v14; // [rsp+50h] [rbp-28h]
 
-  v7 = texgen;
-  v8 = tex;
-  v9 = this;
-  v10 = (int *)texsize;
   result = Scaleform::Render::D3D1x::ShaderInterface::SetStaticShader(psi, ST_TexTGCxform, pvf);
   if ( result )
   {
@@ -2231,42 +2204,32 @@ char __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x:
       psi->Textures[3] = 0i64;
     }
     Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetCxform(
-      (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)psi->UniformData,
+      psi,
       &psi->CurShaders,
       cx,
       0,
       0);
-    texsizea.Width = *v10;
-    v12 = v10[1];
-    *(_OWORD *)&v14.M[0][0] = _xmm_bf800000000000000000000040000000;
-    *(_OWORD *)&v14.M[1][0] = _xmm;
-    texsizea.Height = v12;
-    result = Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::DrawableFinish(
-               v9,
-               1u,
-               v8,
-               v7);
+    return Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::DrawableFinish(
+             this,
+             1u,
+             tex,
+             texgen);
   }
   return result;
 }
 
 // File Line: 1207
 // RVA: 0xA00E20
-char __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::SetDrawableCompare(Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this, Scaleform::Render::Texture **tex, Scaleform::Render::Matrix2x4<float> *texgen, Scaleform::Render::Size<int> texsize, Scaleform::Render::VertexFormat *pvf, Scaleform::Render::D3D1x::ShaderInterface *psi)
+char __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::SetDrawableCompare(
+        Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this,
+        Scaleform::Render::Texture **tex,
+        Scaleform::Render::Matrix2x4<float> *texgen,
+        Scaleform::Render::Size<int> texsize,
+        Scaleform::Render::VertexFormat *pvf,
+        Scaleform::Render::D3D1x::ShaderInterface *psi)
 {
-  Scaleform::Render::Matrix2x4<float> *v6; // rsi
-  Scaleform::Render::Texture **v7; // rbp
-  Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *v8; // r14
-  int *v9; // rdi
   char result; // al
-  int v11; // eax
-  Scaleform::Render::Size<int> v12; // [rsp+40h] [rbp-38h]
-  Scaleform::Render::Matrix2x4<float> v13; // [rsp+50h] [rbp-28h]
 
-  v6 = texgen;
-  v7 = tex;
-  v8 = this;
-  v9 = (int *)texsize;
   result = Scaleform::Render::D3D1x::ShaderInterface::SetStaticShader(psi, ST_start_DrawableCompare, pvf);
   if ( result )
   {
@@ -2282,41 +2245,34 @@ char __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x:
       psi->Textures[2] = 0i64;
       psi->Textures[3] = 0i64;
     }
-    v12.Width = *v9;
-    v11 = v9[1];
-    *(_OWORD *)&v13.M[0][0] = _xmm_bf800000000000000000000040000000;
-    *(_OWORD *)&v13.M[1][0] = _xmm;
-    v12.Height = v11;
-    result = Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::DrawableFinish(
-               v8,
-               2u,
-               v7,
-               v6);
+    return Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::DrawableFinish(
+             this,
+             2u,
+             tex,
+             texgen);
   }
   return result;
 }
 
 // File Line: 1220
 // RVA: 0xA01310
-char __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::SetDrawablePaletteMap(Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this, Scaleform::Render::Texture **tex, Scaleform::Render::Matrix2x4<float> *texgen, Scaleform::Render::Size<int> texsize, Scaleform::Render::Matrix2x4<float> *mvp, Scaleform::Render::Texture *paletteMap, Scaleform::Render::VertexFormat *pvf, Scaleform::Render::D3D1x::ShaderInterface *psi)
+char __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::SetDrawablePaletteMap(
+        Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this,
+        Scaleform::Render::Texture **tex,
+        Scaleform::Render::Matrix2x4<float> *texgen,
+        Scaleform::Render::Size<int> texsize,
+        Scaleform::Render::Matrix2x4<float> *mvp,
+        Scaleform::Render::Texture *paletteMap,
+        Scaleform::Render::VertexFormat *pvf,
+        Scaleform::Render::D3D1x::ShaderInterface *psi)
 {
-  Scaleform::Render::Matrix2x4<float> *v8; // rsi
-  Scaleform::Render::Texture **v9; // rbp
-  Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *v10; // r14
-  int *v11; // rdi
   char result; // al
   __int128 v13; // xmm0
   __int128 v14; // xmm1
-  char v15; // [rsp+40h] [rbp-48h]
+  char v15; // [rsp+40h] [rbp-48h] BYREF
   Scaleform::Render::Size<int> v16; // [rsp+48h] [rbp-40h]
-  __int128 v17; // [rsp+50h] [rbp-38h]
-  __int128 v18; // [rsp+60h] [rbp-28h]
-  Scaleform::Render::VertexFormat *v19; // [rsp+70h] [rbp-18h]
+  Scaleform::Render::D3D1x::ShaderPair v17; // [rsp+50h] [rbp-38h] BYREF
 
-  v8 = texgen;
-  v9 = tex;
-  v10 = this;
-  v11 = (int *)texsize;
   result = Scaleform::Render::D3D1x::ShaderInterface::SetStaticShader(psi, ST_start_DrawablePaletteMap, pvf);
   if ( result )
   {
@@ -2335,34 +2291,34 @@ char __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x:
     v13 = *(_OWORD *)&psi->CurShaders.pVS;
     v14 = *(_OWORD *)&psi->CurShaders.pFS;
     v15 = 1;
-    v17 = v13;
-    v18 = v14;
-    v19 = psi->CurShaders.pVFormat;
+    *(_OWORD *)&v17.pVS = v13;
+    *(_OWORD *)&v17.pFS = v14;
+    v17.pVFormat = psi->CurShaders.pVFormat;
     Scaleform::Render::D3D1x::ShaderInterface::SetTexture(
       psi,
-      (Scaleform::Render::D3D1x::ShaderPair *)&v17,
+      &v17,
       0x12u,
       paletteMap,
       (Scaleform::Render::ImageFillMode)&v15,
       0);
-    v16.Width = *v11;
-    v16.Height = v11[1];
-    result = Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::DrawableFinish(
-               v10,
-               1u,
-               v9,
-               v8);
+    v16 = **(Scaleform::Render::Size<int> **)&texsize;
+    return Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::DrawableFinish(
+             this,
+             1u,
+             tex,
+             texgen);
   }
   return result;
 }
 
 // File Line: 1238
 // RVA: 0x9FE540
-char __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::DrawableFinish(Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this, unsigned int srcCount, Scaleform::Render::Texture **tex, Scaleform::Render::Matrix2x4<float> *texgen)
+char __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::DrawableFinish(
+        Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this,
+        unsigned int srcCount,
+        Scaleform::Render::Texture **tex,
+        Scaleform::Render::Matrix2x4<float> *texgen)
 {
-  Scaleform::Render::Matrix2x4<float> *v4; // r14
-  Scaleform::Render::Texture **v5; // r15
-  unsigned int v6; // er12
   float v7; // xmm1_4
   float v8; // xmm9_4
   float v9; // xmm6_4
@@ -2371,163 +2327,148 @@ char __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x:
   float v12; // xmm7_4
   unsigned int v13; // xmm0_4
   float v14; // xmm0_4
-  unsigned int v15; // ebx
+  unsigned int i; // ebx
   __int128 v16; // xmm0
-  __int128 v17; // xmm1
+  __int128 index; // xmm1
   Scaleform::Render::Texture *v18; // r9
-  unsigned int n[4]; // [rsp+18h] [rbp-79h]
-  unsigned int index[4]; // [rsp+28h] [rbp-69h]
-  __int64 v22; // [rsp+38h] [rbp-59h]
-  signed int *retaddr; // [rsp+F8h] [rbp+67h]
-  __int64 v24; // [rsp+100h] [rbp+6Fh]
-  Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *v25; // [rsp+108h] [rbp+77h]
-  int v26; // [rsp+110h] [rbp+7Fh]
+  Scaleform::Render::D3D1x::ShaderPair n[2]; // [rsp+18h] [rbp-79h] BYREF
+  int *retaddr; // [rsp+F8h] [rbp+67h]
+  __int64 v22; // [rsp+100h] [rbp+6Fh]
+  Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *v23; // [rsp+108h] [rbp+77h]
+  int v24; // [rsp+110h] [rbp+7Fh] BYREF
 
-  v4 = texgen;
-  v5 = tex;
-  v6 = srcCount;
-  v7 = *(float *)v24;
-  v8 = *(float *)(v24 + 4);
-  v9 = *(float *)(v24 + 12);
-  v10 = *(float *)(v24 + 16);
-  v11 = *(float *)(v24 + 20);
-  v12 = *(float *)(v24 + 28);
-  n[2] = *(_DWORD *)(v24 + 8);
-  v13 = *(_DWORD *)(v24 + 24);
-  *(float *)n = v7;
-  *(float *)&n[1] = v8;
-  *(float *)&n[3] = v9;
-  *(float *)index = v10;
-  *(float *)&index[1] = v11;
-  index[2] = v13;
-  *(float *)&index[3] = v12;
-  if ( v26 & 2 )
+  v7 = *(float *)v22;
+  v8 = *(float *)(v22 + 4);
+  v9 = *(float *)(v22 + 12);
+  v10 = *(float *)(v22 + 16);
+  v11 = *(float *)(v22 + 20);
+  v12 = *(float *)(v22 + 28);
+  LODWORD(n[0].pVDesc) = *(_DWORD *)(v22 + 8);
+  v13 = *(_DWORD *)(v22 + 24);
+  n[0].pVS = (Scaleform::Render::D3D1x::VertexShader *)__PAIR64__(LODWORD(v8), LODWORD(v7));
+  *((float *)&n[0].pVDesc + 1) = v9;
+  n[0].pFS = (Scaleform::Render::D3D1x::FragShader *)__PAIR64__(LODWORD(v11), LODWORD(v10));
+  n[0].pFDesc = (Scaleform::Render::D3D1x::FragShaderDesc *)__PAIR64__(LODWORD(v12), v13);
+  if ( (v24 & 2) != 0 )
   {
-    index[2] = 0;
-    n[2] = 0;
-    *(float *)n = v7 + (float)(v8 * 0.0);
-    *(float *)&n[1] = (float)(v7 * 0.0) - (float)(v8 * 1.0);
+    LODWORD(n[0].pFDesc) = 0;
+    LODWORD(n[0].pVDesc) = 0;
+    *(float *)&n[0].pVS = v7 + (float)(v8 * 0.0);
+    *((float *)&n[0].pVS + 1) = (float)(v7 * 0.0) - (float)(v8 * 1.0);
     v9 = (float)(v9 + (float)((float)(v7 * 0.0) + v8)) + (float)((float)(v7 * 0.0) + (float)(v8 * 0.0));
-    *(float *)index = v10 + (float)(v11 * 0.0);
-    *(float *)&n[3] = v9;
+    *(float *)&n[0].pFS = v10 + (float)(v11 * 0.0);
+    *((float *)&n[0].pVDesc + 1) = v9;
     v12 = (float)(v12 + (float)((float)(v10 * 0.0) + v11)) + (float)((float)(v10 * 0.0) + (float)(v11 * 0.0));
-    *(float *)&index[1] = (float)(v10 * 0.0) - (float)(v11 * 1.0);
-    *(float *)&index[3] = v12;
+    *((float *)&n[0].pFS + 1) = (float)(v10 * 0.0) - (float)(v11 * 1.0);
+    *((float *)&n[0].pFDesc + 1) = v12;
   }
-  if ( v26 & 1 )
+  if ( (v24 & 1) != 0 )
   {
     v14 = (float)retaddr[1];
-    *(float *)&n[3] = v9 + (float)(-1.0 / (float)*retaddr);
-    *(float *)&index[3] = v12 + (float)(1.0 / v14);
+    *((float *)&n[0].pVDesc + 1) = v9 + (float)(-1.0 / (float)*retaddr);
+    *((float *)&n[0].pFDesc + 1) = v12 + (float)(1.0 / v14);
   }
   Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-    v25,
-    (Scaleform::Render::D3D1x::ShaderPair *)&v25[1].UniformData[2],
+    v23,
+    (Scaleform::Render::D3D1x::ShaderPair *)&v23[1].UniformData[2],
     0xDu,
     (const float *)n,
     8u,
     0,
     0);
-  v15 = 0;
-  if ( v6 )
+  for ( i = 0; i < srcCount; ++tex )
   {
-    do
-    {
-      v16 = *(_OWORD *)&v25[1].UniformData[2];
-      v17 = *(_OWORD *)&v25[1].UniformData[6];
-      v18 = *v5;
-      LOBYTE(v26) = 1;
-      *(_OWORD *)n = v16;
-      *(_OWORD *)index = v17;
-      v22 = *(_QWORD *)&v25[1].UniformData[10];
-      Scaleform::Render::D3D1x::ShaderInterface::SetTexture(
-        (Scaleform::Render::D3D1x::ShaderInterface *)v25,
-        (Scaleform::Render::D3D1x::ShaderPair *)n,
-        0x14u,
-        v18,
-        (Scaleform::Render::ImageFillMode)&v26,
-        v17);
-      Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-        v25,
-        (Scaleform::Render::D3D1x::ShaderPair *)&v25[1].UniformData[2],
-        0x15u,
-        (const float *)v4,
-        8u,
-        2 * v15++,
-        0);
-      ++v4;
-      ++v5;
-    }
-    while ( v15 < v6 );
+    v16 = *(_OWORD *)&v23[1].UniformData[2];
+    index = *(_OWORD *)&v23[1].UniformData[6];
+    v18 = *tex;
+    LOBYTE(v24) = 1;
+    *(_OWORD *)&n[0].pVS = v16;
+    *(_OWORD *)&n[0].pFS = index;
+    n[0].pVFormat = *(Scaleform::Render::VertexFormat **)&v23[1].UniformData[10];
+    Scaleform::Render::D3D1x::ShaderInterface::SetTexture(
+      (Scaleform::Render::D3D1x::ShaderInterface *)v23,
+      n,
+      0x14u,
+      v18,
+      (Scaleform::Render::ImageFillMode)&v24,
+      index);
+    Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
+      v23,
+      (Scaleform::Render::D3D1x::ShaderPair *)&v23[1].UniformData[2],
+      0x15u,
+      (const float *)texgen++,
+      8u,
+      2 * i++,
+      0);
   }
-  Scaleform::Render::D3D1x::ShaderInterface::Finish((Scaleform::Render::D3D1x::ShaderInterface *)v25, 1u);
+  Scaleform::Render::D3D1x::ShaderInterface::Finish((Scaleform::Render::D3D1x::ShaderInterface *)v23, 1u);
   return 1;
 }
 
 // File Line: 1268
 // RVA: 0xA00890
-void __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::SetBlendFill(Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this, Scaleform::Render::BlendMode mode, Scaleform::Render::Matrix2x4<float> *mvp, Scaleform::Render::Cxform *cx, Scaleform::Render::Texture **ptextures, Scaleform::Render::Matrix2x4<float> *texgen, Scaleform::Render::VertexFormat *pvf, Scaleform::Render::D3D1x::ShaderInterface *psi)
+void __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::SetBlendFill(
+        Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture> *this,
+        Scaleform::Render::BlendMode mode,
+        Scaleform::Render::Matrix2x4<float> *mvp,
+        Scaleform::Render::Cxform *cx,
+        Scaleform::Render::Texture **ptextures,
+        Scaleform::Render::Matrix2x4<float> *texgen,
+        Scaleform::Render::VertexFormat *pvf,
+        Scaleform::Render::D3D1x::ShaderInterface *psi)
 {
   Scaleform::Render::Texture **v8; // rsi
-  Scaleform::Render::BlendMode v9; // ebp
-  unsigned int v10; // er14
-  __int32 v11; // eax
-  Scaleform::Render::Cxform *v12; // r12
-  Scaleform::Render::Matrix2x4<float> *v13; // r15
+  unsigned int v10; // r14d
+  int v11; // eax
   Scaleform::Render::D3D1x::ShaderDesc::ShaderType v14; // edx
   char v15; // cl
   Scaleform::Render::D3D1x::ShaderInterface *v16; // rbx
-  __int128 *v17; // rdi
+  Scaleform::Render::D3D1x::ShaderPair *p_CurShaders; // rdi
   Scaleform::Render::Matrix2x4<float> *v18; // r15
   Scaleform::Render::Texture *v19; // r9
   __int128 v20; // xmm1
-  __int64 v21; // xmm0_8
+  Scaleform::Render::VertexFormat *pVFormat; // xmm0_8
   Scaleform::Render::Texture *v22; // r9
   __int128 v23; // xmm1
   Scaleform::Render::Texture *v24; // r9
   __int128 v25; // xmm1
-  __int64 v26; // xmm0_8
-  __int128 v27; // [rsp+40h] [rbp-58h]
-  __int128 v28; // [rsp+50h] [rbp-48h]
-  __int64 v29; // [rsp+60h] [rbp-38h]
-  char v30; // [rsp+A8h] [rbp+10h]
+  Scaleform::Render::VertexFormat *v26; // xmm0_8
+  Scaleform::Render::D3D1x::ShaderPair v27; // [rsp+40h] [rbp-58h] BYREF
+  char v28; // [rsp+A8h] [rbp+10h] BYREF
 
   v8 = ptextures;
-  v9 = mode;
   v10 = 18;
   v11 = mode - 2;
-  v12 = cx;
-  v13 = mvp;
-  v14 = 0x20000;
+  v14 = ST_start_base_text;
   switch ( v11 )
   {
     case 0:
       if ( ptextures[2] )
       {
-        v14 = 1441793;
+        v14 = ST_BlendLayer;
       }
       else
       {
         if ( !`Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::SetBlendFill::`12::warned )
           `Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::SetBlendFill::`12::warned = ptextures[1] != 0i64;
-        v14 = 257;
+        v14 = ST_TexTGCxformAc;
         v10 = 20;
       }
       break;
     case 3:
-      v14 = 1441792;
+      v14 = ST_start_blends;
       break;
     case 4:
-      v14 = 1441808;
+      v14 = ST_BlendDarken;
       break;
     case 5:
-      v14 = 1441794;
+      v14 = ST_BlendDifference;
       break;
     case 11:
-      v14 = 1441800;
+      v14 = ST_BlendOverlay;
       break;
     case 12:
-      v14 = 1441796;
+      v14 = ST_BlendHardlight;
       break;
     default:
       v15 = `Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x::ShaderDesc,Scaleform::Render::D3D1x::VertexShaderDesc,Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderInterface,Scaleform::Render::D3D1x::Texture>::SetBlendFill::`5::warned;
@@ -2550,18 +2491,18 @@ void __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x:
     v16->Textures[2] = 0i64;
     v16->Textures[3] = 0i64;
   }
-  v17 = (__int128 *)&v16->CurShaders;
+  p_CurShaders = &v16->CurShaders;
   Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-    (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)v16->UniformData,
+    v16,
     &v16->CurShaders,
     0xDu,
-    (const float *)v13,
+    (const float *)mvp,
     8u,
     0,
     0);
   v18 = texgen;
   Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-    (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)v16->UniformData,
+    v16,
     &v16->CurShaders,
     0x15u,
     (const float *)texgen,
@@ -2570,22 +2511,16 @@ void __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x:
     0);
   v19 = *v8;
   v20 = *(_OWORD *)&v16->CurShaders.pFS;
-  v27 = *(_OWORD *)&v16->CurShaders.pVS;
-  v28 = v20;
-  v21 = (__int64)v16->CurShaders.pVFormat;
-  v30 = 1;
-  v29 = v21;
-  Scaleform::Render::D3D1x::ShaderInterface::SetTexture(
-    v16,
-    (Scaleform::Render::D3D1x::ShaderPair *)&v27,
-    v10,
-    v19,
-    (Scaleform::Render::ImageFillMode)&v30,
-    0);
+  *(_OWORD *)&v27.pVS = *(_OWORD *)&v16->CurShaders.pVS;
+  *(_OWORD *)&v27.pFS = v20;
+  pVFormat = v16->CurShaders.pVFormat;
+  v28 = 1;
+  v27.pVFormat = pVFormat;
+  Scaleform::Render::D3D1x::ShaderInterface::SetTexture(v16, &v27, v10, v19, (Scaleform::Render::ImageFillMode)&v28, 0);
   if ( v8[1] )
   {
     Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-      (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)v16->UniformData,
+      v16,
       &v16->CurShaders,
       0x15u,
       (const float *)&v18[1],
@@ -2594,22 +2529,16 @@ void __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x:
       0);
     v22 = v8[1];
     v23 = *(_OWORD *)&v16->CurShaders.pFS;
-    v27 = *v17;
-    v28 = v23;
-    v29 = (__int64)v16->CurShaders.pVFormat;
-    v30 = 1;
-    Scaleform::Render::D3D1x::ShaderInterface::SetTexture(
-      v16,
-      (Scaleform::Render::D3D1x::ShaderPair *)&v27,
-      7u,
-      v22,
-      (Scaleform::Render::ImageFillMode)&v30,
-      0);
+    *(_OWORD *)&v27.pVS = *(_OWORD *)&p_CurShaders->pVS;
+    *(_OWORD *)&v27.pFS = v23;
+    v27.pVFormat = v16->CurShaders.pVFormat;
+    v28 = 1;
+    Scaleform::Render::D3D1x::ShaderInterface::SetTexture(v16, &v27, 7u, v22, (Scaleform::Render::ImageFillMode)&v28, 0);
   }
   if ( v8[2] )
   {
     Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetUniform(
-      (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)v16->UniformData,
+      v16,
       &v16->CurShaders,
       0x15u,
       (const float *)&v18[2],
@@ -2618,24 +2547,18 @@ void __fastcall Scaleform::Render::StaticShaderManager<Scaleform::Render::D3D1x:
       0);
     v24 = v8[2];
     v25 = *(_OWORD *)&v16->CurShaders.pFS;
-    v27 = *v17;
-    v28 = v25;
-    v26 = (__int64)v16->CurShaders.pVFormat;
-    v30 = 1;
-    v29 = v26;
-    Scaleform::Render::D3D1x::ShaderInterface::SetTexture(
-      v16,
-      (Scaleform::Render::D3D1x::ShaderPair *)&v27,
-      0,
-      v24,
-      (Scaleform::Render::ImageFillMode)&v30,
-      0);
+    *(_OWORD *)&v27.pVS = *(_OWORD *)&p_CurShaders->pVS;
+    *(_OWORD *)&v27.pFS = v25;
+    v26 = v16->CurShaders.pVFormat;
+    v28 = 1;
+    v27.pVFormat = v26;
+    Scaleform::Render::D3D1x::ShaderInterface::SetTexture(v16, &v27, 0, v24, (Scaleform::Render::ImageFillMode)&v28, 0);
   }
-  if ( v9 == 2 )
+  if ( mode == Blend_Layer )
     Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair>::SetCxform(
-      (Scaleform::Render::ShaderInterfaceBase<Scaleform::Render::D3D1x::Uniform,Scaleform::Render::D3D1x::ShaderPair> *)v16->UniformData,
+      v16,
       &v16->CurShaders,
-      v12,
+      cx,
       0,
       0);
   Scaleform::Render::D3D1x::ShaderInterface::Finish(v16, 1u);

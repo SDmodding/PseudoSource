@@ -27,7 +27,7 @@ __int64 dynamic_initializer_for__UFG::GameCameraComponent::mDofFocusDist__()
     v0 = FLOAT_0_0099999998;
   UFG::GameCameraComponent::mDofFocusDist.A = (float)(v0 * 0.0) / (float)((float)(v0 * v0) * v0);
   UFG::GameCameraComponent::mDofFocusDist.B = COERCE_FLOAT(COERCE_UNSIGNED_INT(v0 * 0.0) ^ _xmm[0]) / (float)(v0 * v0);
-  return atexit(dynamic_atexit_destructor_for__UFG::GameCameraComponent::mDofFocusDist__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::GameCameraComponent::mDofFocusDist__);
 }
 
 // File Line: 154
@@ -35,29 +35,28 @@ __int64 dynamic_initializer_for__UFG::GameCameraComponent::mDofFocusDist__()
 __int64 dynamic_initializer_for__UFG::GameCameraComponent::mDynamicDofParams__()
 {
   `eh vector constructor iterator(
-    &UFG::GameCameraComponent::mDynamicDofParams,
+    (char *)&UFG::GameCameraComponent::mDynamicDofParams,
     0x4Cui64,
     6,
     (void (__fastcall *)(void *))UFG::GameCameraComponent::DynamicDofParam::DynamicDofParam);
-  return atexit(dynamic_atexit_destructor_for__UFG::GameCameraComponent::mDynamicDofParams__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::GameCameraComponent::mDynamicDofParams__);
 }
 
 // File Line: 155
 // RVA: 0x14BFE10
 __int64 dynamic_initializer_for__UFG::GameCameraComponent::mDutchDyn__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::GameCameraComponent::mDutchDyn__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::GameCameraComponent::mDutchDyn__);
 }
 
 // File Line: 159
 // RVA: 0x3BC3F0
 void __fastcall UFG::GameCameraComponent::GameCameraComponent(UFG::GameCameraComponent *this, unsigned int name_uid)
 {
-  UFG::GameCameraComponent *v2; // rdi
-  float *v3; // rsi
-  signed int v4; // ebx
-  float v5; // xmm1_4
-  float v6; // xmm2_4
+  UFG::qNoise<float,float> *p_mDofNoise; // rsi
+  int v4; // ebx
+  float y; // xmm1_4
+  float z; // xmm2_4
   float v7; // xmm1_4
   float v8; // xmm2_4
   float v9; // xmm1_4
@@ -73,7 +72,7 @@ void __fastcall UFG::GameCameraComponent::GameCameraComponent(UFG::GameCameraCom
   float v19; // xmm1_4
   float v20; // xmm2_4
   float v21; // xmm0_4
-  __int64 v22; // rax
+  __int64 nOctaves; // rax
   float v23; // xmm8_4
   float v24; // xmm3_4
   float v25; // xmm0_4
@@ -81,194 +80,179 @@ void __fastcall UFG::GameCameraComponent::GameCameraComponent(UFG::GameCameraCom
   float v27; // xmm7_4
   float v28; // xmm1_4
   float v29; // xmm1_4
-  signed int v30; // esi
-  char *v31; // r14
+  int v30; // esi
+  char *p_dest; // r14
   char *v32; // rsi
-  int v33; // [rsp+30h] [rbp-A8h]
-  int v34; // [rsp+34h] [rbp-A4h]
-  int v35; // [rsp+38h] [rbp-A0h]
-  int v36; // [rsp+40h] [rbp-98h]
-  int v37; // [rsp+44h] [rbp-94h]
-  int v38; // [rsp+48h] [rbp-90h]
-  int v39; // [rsp+50h] [rbp-88h]
-  int v40; // [rsp+54h] [rbp-84h]
-  int v41; // [rsp+58h] [rbp-80h]
-  __int64 v42; // [rsp+60h] [rbp-78h]
-  char dest; // [rsp+70h] [rbp-68h]
-  char v44; // [rsp+548h] [rbp+470h]
-  UFG::allocator::free_link *v45; // [rsp+AB8h] [rbp+9E0h]
+  UFG::qVector3 v33; // [rsp+30h] [rbp-A8h] BYREF
+  UFG::qVector3 v34; // [rsp+40h] [rbp-98h] BYREF
+  UFG::qVector3 v35; // [rsp+50h] [rbp-88h] BYREF
+  __int64 v36; // [rsp+60h] [rbp-78h]
+  char dest; // [rsp+70h] [rbp-68h] BYREF
+  char v38; // [rsp+548h] [rbp+470h] BYREF
+  UFG::allocator::free_link *v39; // [rsp+AB8h] [rbp+9E0h]
 
-  v42 = -2i64;
-  v2 = this;
-  UFG::BaseCameraComponent::BaseCameraComponent((UFG::BaseCameraComponent *)&this->vfptr, name_uid);
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GameCameraComponent::`vftable;
-  v3 = &v2->mDofNoise.tDecay;
-  UFG::qNoise<float,float>::qNoise<float,float>(&v2->mDofNoise);
-  v2->mEyeImpactNoise.bCircular = 0;
-  v39 = 1065353216;
-  v40 = 1065353216;
-  v41 = 1065353216;
-  v33 = -1082130432;
-  v34 = -1082130432;
-  v35 = -1082130432;
-  v36 = 1056964608;
-  v37 = 1056964608;
-  v38 = 1056964608;
-  UFG::qNoise<UFG::qVector3,float>::SetParameters(
-    &v2->mEyeImpactNoise,
-    6,
-    1.0,
-    (UFG::qVector3 *)&v36,
-    (UFG::qVector3 *)&v33,
-    (UFG::qVector3 *)&v39);
-  UFG::qNoise<UFG::qVector3,float>::qNoise<UFG::qVector3,float>(&v2->mLookImpactNoise);
-  v2->cAimWobbleRadius.mDuration = 0.0099999998;
-  UFG::SimComponent::AddType(
-    (UFG::SimComponent *)&v2->vfptr,
-    UFG::GameCameraComponent::_GameCameraComponentTypeUID,
-    "GameCameraComponent");
-  v2->mResetNext = -1;
-  *(_WORD *)&v2->mInCollision = 0;
+  v36 = -2i64;
+  UFG::BaseCameraComponent::BaseCameraComponent(this, name_uid);
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GameCameraComponent::`vftable;
+  p_mDofNoise = &this->mDofNoise;
+  UFG::qNoise<float,float>::qNoise<float,float>(&this->mDofNoise);
+  this->mEyeImpactNoise.bCircular = 0;
+  v35.x = 1.0;
+  v35.y = 1.0;
+  v35.z = 1.0;
+  v33.x = -1.0;
+  v33.y = -1.0;
+  v33.z = -1.0;
+  v34.x = 0.5;
+  v34.y = 0.5;
+  v34.z = 0.5;
+  UFG::qNoise<UFG::qVector3,float>::SetParameters(&this->mEyeImpactNoise, 6, 1.0, &v34, &v33, &v35);
+  UFG::qNoise<UFG::qVector3,float>::qNoise<UFG::qVector3,float>(&this->mLookImpactNoise);
+  this->cAimWobbleRadius.mDuration = 0.0099999998;
+  UFG::SimComponent::AddType(this, UFG::GameCameraComponent::_GameCameraComponentTypeUID, "GameCameraComponent");
+  this->mResetNext = -1;
+  *(_WORD *)&this->mInCollision = 0;
   v4 = 0;
-  v2->mPushInOverrideRate = 0.0;
-  v5 = UFG::qVector3::msAxisZ.y;
-  v6 = UFG::qVector3::msAxisZ.z;
-  v2->mCollisionSurfaceNormal.x = UFG::qVector3::msAxisZ.x;
-  v2->mCollisionSurfaceNormal.y = v5;
-  v2->mCollisionSurfaceNormal.z = v6;
+  this->mPushInOverrideRate = 0.0;
+  y = UFG::qVector3::msAxisZ.y;
+  z = UFG::qVector3::msAxisZ.z;
+  this->mCollisionSurfaceNormal.x = UFG::qVector3::msAxisZ.x;
+  this->mCollisionSurfaceNormal.y = y;
+  this->mCollisionSurfaceNormal.z = z;
   v7 = UFG::qVector3::msZero.y;
   v8 = UFG::qVector3::msZero.z;
-  v2->mCollisionContactPosition.x = UFG::qVector3::msZero.x;
-  v2->mCollisionContactPosition.y = v7;
-  v2->mCollisionContactPosition.z = v8;
+  this->mCollisionContactPosition.x = UFG::qVector3::msZero.x;
+  this->mCollisionContactPosition.y = v7;
+  this->mCollisionContactPosition.z = v8;
   v9 = UFG::qVector3::msZero.y;
   v10 = UFG::qVector3::msZero.z;
-  v2->mCollisionLookOffset.x = UFG::qVector3::msZero.x;
-  v2->mCollisionLookOffset.y = v9;
-  v2->mCollisionLookOffset.z = v10;
-  *(_QWORD *)&v2->mSafeRadius = 1065353216i64;
-  v2->mCollisionBlend = 0.69999999;
-  *(_QWORD *)&v2->mCollisionPlateau = 1060320051i64;
-  UFG::qMemSet(v2->mCollisionTargetPoints, 0, 4u);
+  this->mCollisionLookOffset.x = UFG::qVector3::msZero.x;
+  this->mCollisionLookOffset.y = v9;
+  this->mCollisionLookOffset.z = v10;
+  *(_QWORD *)&this->mSafeRadius = 1065353216i64;
+  strcpy((char *)&this->mCollisionBlend, "333?333?");
+  BYTE1(this->mCollisionTargetPointsNum) = 0;
+  HIWORD(this->mCollisionTargetPointsNum) = 0;
+  UFG::qMemSet(this->mCollisionTargetPoints, 0, 4u);
   v11 = UFG::qMemoryPool::Allocate(&gPhysicsMemoryPool, 0x30ui64, "ShapeCasterCollector", 0i64, 1u);
-  v45 = v11;
+  v39 = v11;
   if ( v11 )
     UFG::ShapeCasterCollector::ShapeCasterCollector(
       (UFG::ShapeCasterCollector *)v11,
       UFG::trCollisionTargetPointCastingRadius,
       0x12u,
-      0);
+      PhantomBehaviour_Simple);
   else
     v12 = 0i64;
-  v2->pCollisionCollectorTargetPoints = v12;
+  this->pCollisionCollectorTargetPoints = v12;
   v13 = UFG::qMemoryPool::Allocate(&gPhysicsMemoryPool, 0x30ui64, "ShapeCasterCollector", 0i64, 1u);
-  v45 = v13;
+  v39 = v13;
   if ( v13 )
     UFG::ShapeCasterCollector::ShapeCasterCollector(
       (UFG::ShapeCasterCollector *)v13,
       UFG::trCollisionCastingRadius,
       0x12u,
-      0);
+      PhantomBehaviour_Simple);
   else
     v14 = 0i64;
-  v2->pCollisionCollector = v14;
-  v2->mCollisionTargetPointCastingRadiusSubmitted = UFG::trCollisionTargetPointCastingRadius;
-  v2->mCollisionCastingRadiusSubmitted = UFG::trCollisionCastingRadius;
-  v2->mAlternateLookValid = 0;
+  this->pCollisionCollector = v14;
+  this->mCollisionTargetPointCastingRadiusSubmitted = UFG::trCollisionTargetPointCastingRadius;
+  this->mCollisionCastingRadiusSubmitted = UFG::trCollisionCastingRadius;
+  this->mAlternateLookValid = 0;
   v15 = UFG::qVector3::msZero.y;
   v16 = UFG::qVector3::msZero.z;
-  v2->mAlternateLook.x = UFG::qVector3::msZero.x;
-  v2->mAlternateLook.y = v15;
-  v2->mAlternateLook.z = v16;
-  v2->mEyePushValid = 0;
-  *(_QWORD *)&v2->mEyePushPercent = 0i64;
-  v2->mAllowCanOccludeCamera = 1;
+  this->mAlternateLook.x = UFG::qVector3::msZero.x;
+  this->mAlternateLook.y = v15;
+  this->mAlternateLook.z = v16;
+  this->mEyePushValid = 0;
+  *(_QWORD *)&this->mEyePushPercent = 0i64;
+  this->mAllowCanOccludeCamera = 1;
   v17 = UFG::qVector3::msZero.y;
   v18 = UFG::qVector3::msZero.z;
-  v2->mCandidateEye.x = UFG::qVector3::msZero.x;
-  v2->mCandidateEye.y = v17;
-  v2->mCandidateEye.z = v18;
-  v2->pSimObjectPassThru1 = 0i64;
-  v2->pSimObjectPassThru2 = 0i64;
-  *(_QWORD *)&v2->mDofNoiseTimer = 0i64;
-  v2->mDofNoiseAmplitudeDecay = 2.0;
-  v2->mDofNoise.tRangeMin = -1.0;
-  v2->mDofNoise.tRangeMax = 1.0;
+  this->mCandidateEye.x = UFG::qVector3::msZero.x;
+  this->mCandidateEye.y = v17;
+  this->mCandidateEye.z = v18;
+  this->pSimObjectPassThru1 = 0i64;
+  this->pSimObjectPassThru2 = 0i64;
+  *(_QWORD *)&this->mDofNoiseTimer = 0i64;
+  this->mDofNoiseAmplitudeDecay = 2.0;
+  this->mDofNoise.tRangeMin = -1.0;
+  this->mDofNoise.tRangeMax = 1.0;
   v19 = 0.0;
   v20 = 0.0;
   v21 = *(float *)&FLOAT_1_0;
-  v22 = (unsigned int)v2->mDofNoise.nOctaves;
-  if ( (signed int)v22 > 0 )
+  nOctaves = (unsigned int)this->mDofNoise.nOctaves;
+  if ( (int)nOctaves > 0 )
   {
     do
     {
       v20 = v20 + v21;
-      v21 = v21 * *v3;
-      --v22;
+      v21 = v21 * p_mDofNoise->tDecay;
+      --nOctaves;
     }
-    while ( v22 );
+    while ( nOctaves );
   }
-  v2->mDofNoise.tAmplitude = 1.0 / v20;
+  this->mDofNoise.tAmplitude = 1.0 / v20;
   v23 = FLOAT_0_000099999997;
   if ( COERCE_FLOAT((unsigned int)FLOAT_1_0 & _xmm) <= 0.000099999997 )
     v24 = FLOAT_0_000099999997;
   else
     LODWORD(v24) = (unsigned int)FLOAT_1_0 & _xmm;
-  v2->mDofNoise.tOffset = (float)((float)(1.0 / v24) * v2->mDofNoise.tFrequency) * v2->mDofNoise.tOffset;
-  LODWORD(v2->mDofNoise.tFrequency) = (unsigned int)FLOAT_1_0 & _xmm;
+  this->mDofNoise.tOffset = (float)((float)(1.0 / v24) * this->mDofNoise.tFrequency) * this->mDofNoise.tOffset;
+  LODWORD(this->mDofNoise.tFrequency) = (unsigned int)FLOAT_1_0 & _xmm;
   v25 = *(float *)&FLOAT_1_0;
-  v26 = (unsigned int)v2->mDofNoise.nOctaves;
-  if ( (signed int)v26 > 0 )
+  v26 = (unsigned int)this->mDofNoise.nOctaves;
+  if ( (int)v26 > 0 )
   {
     do
     {
       v19 = v19 + v25;
-      v25 = v25 * *v3;
+      v25 = v25 * p_mDofNoise->tDecay;
       --v26;
     }
     while ( v26 );
   }
-  v2->mDofNoise.tAmplitude = 1.0 / v19;
+  this->mDofNoise.tAmplitude = 1.0 / v19;
   LODWORD(v27) = LODWORD(FLOAT_15_0) & _xmm;
   if ( COERCE_FLOAT(LODWORD(FLOAT_15_0) & _xmm) <= 0.000099999997 )
     v28 = FLOAT_0_000099999997;
   else
     LODWORD(v28) = LODWORD(FLOAT_15_0) & _xmm;
-  v2->mEyeImpactNoise.tOffset = (float)((float)(1.0 / v28) * v2->mEyeImpactNoise.tFrequency)
-                              * v2->mEyeImpactNoise.tOffset;
-  v2->mEyeImpactNoise.tFrequency = v27;
-  UFG::qNoise<UFG::qVector3,float>::Init(&v2->mEyeImpactNoise);
+  this->mEyeImpactNoise.tOffset = (float)((float)(1.0 / v28) * this->mEyeImpactNoise.tFrequency)
+                                * this->mEyeImpactNoise.tOffset;
+  this->mEyeImpactNoise.tFrequency = v27;
+  UFG::qNoise<UFG::qVector3,float>::Init(&this->mEyeImpactNoise);
   if ( v27 > 0.000099999997 )
     LODWORD(v23) = LODWORD(FLOAT_15_0) & _xmm;
-  v2->mLookImpactNoise.tOffset = (float)((float)(1.0 / v23) * v2->mLookImpactNoise.tFrequency)
-                               * v2->mLookImpactNoise.tOffset;
-  v2->mLookImpactNoise.tFrequency = v27;
-  UFG::qNoise<UFG::qVector3,float>::Init(&v2->mLookImpactNoise);
-  v36 = 1045220557;
-  v37 = 1045220557;
-  v38 = 1045220557;
-  v33 = -1102263091;
-  v34 = -1102263091;
-  v35 = -1102263091;
-  UFG::qNoise<UFG::qVector3,float>::SetRange(&v2->mEyeImpactNoise, (UFG::qVector3 *)&v33, (UFG::qVector3 *)&v36);
-  v36 = 1036831949;
-  v37 = 1036831949;
-  v38 = 1036831949;
-  v33 = -1110651699;
-  v34 = -1110651699;
-  v35 = -1110651699;
-  UFG::qNoise<UFG::qVector3,float>::SetRange(&v2->mLookImpactNoise, (UFG::qVector3 *)&v33, (UFG::qVector3 *)&v36);
+  this->mLookImpactNoise.tOffset = (float)((float)(1.0 / v23) * this->mLookImpactNoise.tFrequency)
+                                 * this->mLookImpactNoise.tOffset;
+  this->mLookImpactNoise.tFrequency = v27;
+  UFG::qNoise<UFG::qVector3,float>::Init(&this->mLookImpactNoise);
+  v34.x = 0.2;
+  v34.y = 0.2;
+  v34.z = 0.2;
+  v33.x = -0.2;
+  v33.y = -0.2;
+  v33.z = -0.2;
+  UFG::qNoise<UFG::qVector3,float>::SetRange(&this->mEyeImpactNoise, &v33, &v34);
+  v34.x = 0.1;
+  v34.y = 0.1;
+  v34.z = 0.1;
+  v33.x = -0.1;
+  v33.y = -0.1;
+  v33.z = -0.1;
+  UFG::qNoise<UFG::qVector3,float>::SetRange(&this->mLookImpactNoise, &v33, &v34);
   v29 = UFG::qVector2::msZero.y;
-  v2->mAimWobble.x = UFG::qVector2::msZero.x;
-  v2->mAimWobble.y = v29;
-  *(_QWORD *)&v2->cAimWobbleRadius.mDuration = 1065353216i64;
-  *(_QWORD *)&v2->cAimWobbleRadius.v0 = 0i64;
-  *(_QWORD *)&v2->cAimWobbleRadius.p0 = 0i64;
-  UFG::HomerCubic<float>::MakeCoeffs(&v2->cAimWobbleRadius);
-  UFG::GameCameraComponent::ResetAimWobble(v2);
-  *(_QWORD *)&v2->mImpactShakeSeed = 0i64;
-  v2->mImpactShakeAmplitude = 0.0;
-  v2->mImpactShakeAmplitudeDecay = 8.0;
+  this->mAimWobble.x = UFG::qVector2::msZero.x;
+  this->mAimWobble.y = v29;
+  *(_QWORD *)&this->cAimWobbleRadius.mDuration = 1065353216i64;
+  *(_QWORD *)&this->cAimWobbleRadius.v0 = 0i64;
+  *(_QWORD *)&this->cAimWobbleRadius.p0 = 0i64;
+  UFG::HomerCubic<float>::MakeCoeffs(&this->cAimWobbleRadius);
+  UFG::GameCameraComponent::ResetAimWobble(this);
+  *(_QWORD *)&this->mImpactShakeSeed = 0i64;
+  this->mImpactShakeAmplitude = 0.0;
+  this->mImpactShakeAmplitudeDecay = 8.0;
   *(_QWORD *)&UFG::GameCameraComponent::mDynamicDofParams.mDuration = 1065353216i64;
   *(_QWORD *)&UFG::GameCameraComponent::mDynamicDofParams.v0 = 0i64;
   UFG::GameCameraComponent::mDynamicDofParams.p0 = 5.0;
@@ -327,14 +311,14 @@ void __fastcall UFG::GameCameraComponent::GameCameraComponent(UFG::GameCameraCom
   qword_1423D7E20 = 1065353216i64;
   UFG::GameCameraComponent::ResetDutch(1);
   v30 = 0;
-  v31 = &dest;
+  p_dest = &dest;
   do
   {
-    UFG::qSPrintf(v31, "\\Camera\\Damage FX\\Damage %d", (unsigned int)v30++);
-    v31 += 256;
+    UFG::qSPrintf(p_dest, "\\Camera\\Damage FX\\Damage %d", (unsigned int)v30++);
+    p_dest += 256;
   }
   while ( v30 < 5 );
-  v32 = &v44;
+  v32 = &v38;
   do
   {
     UFG::qSPrintf(v32, "\\Camera\\Damage FX\\DOF Noise %d", (unsigned int)v4++);
@@ -347,47 +331,45 @@ void __fastcall UFG::GameCameraComponent::GameCameraComponent(UFG::GameCameraCom
 // RVA: 0x3BDEC0
 void __fastcall UFG::GameCameraComponent::~GameCameraComponent(UFG::GameCameraComponent *this)
 {
-  UFG::GameCameraComponent *v1; // rbx
-  UFG::ShapeCasterCollector *v2; // rcx
-  UFG::ShapeCasterCollector *v3; // rcx
-  UFG::BaseCameraComponent *v4; // rcx
+  UFG::ShapeCasterCollector *pCollisionCollector; // rcx
+  UFG::ShapeCasterCollector *pCollisionCollectorTargetPoints; // rcx
+  UFG::GameCameraComponent *mCurrentCamera; // rcx
   UFG::Director *v5; // rax
 
-  v1 = this;
   this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GameCameraComponent::`vftable;
   if ( this->mActive )
     this->mActive = 0;
-  v2 = this->pCollisionCollector;
-  if ( v2 )
-    v2->vfptr->__vecDelDtor(v2, 1u);
-  v3 = v1->pCollisionCollectorTargetPoints;
-  if ( v3 )
-    v3->vfptr->__vecDelDtor(v3, 1u);
-  v4 = UFG::Director::Get()->mCurrentCamera;
-  if ( v4 )
-    v4 = (UFG::BaseCameraComponent *)((char *)v4 + 80);
-  if ( v4 == (UFG::BaseCameraComponent *)&v1->mCamera )
+  pCollisionCollector = this->pCollisionCollector;
+  if ( pCollisionCollector )
+    pCollisionCollector->vfptr->__vecDelDtor(pCollisionCollector, 1u);
+  pCollisionCollectorTargetPoints = this->pCollisionCollectorTargetPoints;
+  if ( pCollisionCollectorTargetPoints )
+    pCollisionCollectorTargetPoints->vfptr->__vecDelDtor(pCollisionCollectorTargetPoints, 1u);
+  mCurrentCamera = (UFG::GameCameraComponent *)UFG::Director::Get()->mCurrentCamera;
+  if ( mCurrentCamera )
+    mCurrentCamera = (UFG::GameCameraComponent *)((char *)mCurrentCamera + 80);
+  if ( mCurrentCamera == (UFG::GameCameraComponent *)&this->mCamera )
   {
     v5 = UFG::Director::Get();
     UFG::Director::SetCurrentCamera(v5, 0i64);
   }
-  UFG::BaseCameraComponent::~BaseCameraComponent((UFG::BaseCameraComponent *)&v1->vfptr);
+  UFG::BaseCameraComponent::~BaseCameraComponent(this);
 }
 
 // File Line: 343
 // RVA: 0x3C89C0
 void __fastcall UFG::GameCameraComponent::Reset(UFG::GameCameraComponent *this)
 {
-  float v1; // xmm2_4
-  float v2; // xmm0_4
+  float z; // xmm2_4
+  float x; // xmm0_4
 
   this->mAllowCanOccludeCamera = 1;
-  v1 = UFG::qVector3::msZero.z;
-  v2 = UFG::qVector3::msZero.x;
+  z = UFG::qVector3::msZero.z;
+  x = UFG::qVector3::msZero.x;
   this->mCollisionLookOffset.y = UFG::qVector3::msZero.y;
-  this->mCollisionLookOffset.z = v1;
-  this->mCollisionLookOffset.x = v2;
-  UFG::BaseCameraComponent::Reset((UFG::BaseCameraComponent *)&this->vfptr);
+  this->mCollisionLookOffset.z = z;
+  this->mCollisionLookOffset.x = x;
+  UFG::BaseCameraComponent::Reset(this);
 }
 
 // File Line: 351
@@ -416,9 +398,9 @@ void __fastcall UFG::GameCameraComponent::SetCollisionIgnoreVehicles(bool enable
 // RVA: 0x3C8A00
 void __fastcall UFG::GameCameraComponent::ResetAimWobble(UFG::GameCameraComponent *this)
 {
-  UFG::HomerCubic<float> *v1; // rbx
+  UFG::HomerCubic<float> *p_cAimWobbleRadius; // rbx
   float v2; // xmm0_4
-  float v3; // xmm1_4
+  float rAimWobbleRadiusPeriod; // xmm1_4
 
   this->rAimWobbleRadiusMin = 0.0020000001;
   this->rAimWobbleRadiusMax = 0.003;
@@ -427,39 +409,38 @@ void __fastcall UFG::GameCameraComponent::ResetAimWobble(UFG::GameCameraComponen
   this->rAimWobbleAxisWeight = 0.27500001;
   *(_WORD *)&this->bAimWobbleHoldingBreathInput = 0;
   this->rAimWobbleHoldBreathMultiplier = 1.0;
-  v1 = &this->cAimWobbleRadius;
+  p_cAimWobbleRadius = &this->cAimWobbleRadius;
   *(_QWORD *)&this->rAimWobbleOverallScale = 0i64;
   *(_QWORD *)&this->rAimWobbleHoldBreathElapsedTime = 0i64;
   v2 = this->cAimWobbleRadius.mParameter / this->cAimWobbleRadius.mDuration;
   this->cAimWobbleRadius.mParameter = v2;
-  v3 = this->rAimWobbleRadiusPeriod;
-  if ( v3 <= 0.0099999998 )
-    v3 = FLOAT_0_0099999998;
-  v1->mDuration = v3;
-  this->cAimWobbleRadius.mParameter = v3 * v2;
+  rAimWobbleRadiusPeriod = this->rAimWobbleRadiusPeriod;
+  if ( rAimWobbleRadiusPeriod <= 0.0099999998 )
+    rAimWobbleRadiusPeriod = FLOAT_0_0099999998;
+  p_cAimWobbleRadius->mDuration = rAimWobbleRadiusPeriod;
+  this->cAimWobbleRadius.mParameter = rAimWobbleRadiusPeriod * v2;
   UFG::HomerCubic<float>::MakeCoeffs(&this->cAimWobbleRadius);
-  v1->p1 = 0.0;
-  UFG::HomerCubic<float>::MakeCoeffs(v1);
-  v1->mParameter = 0.0;
-  v1->p0 = v1->p1;
-  v1->v0 = v1->v1;
-  UFG::HomerCubic<float>::MakeCoeffs(v1);
-  v1->mParameter = 0.0;
+  p_cAimWobbleRadius->p1 = 0.0;
+  UFG::HomerCubic<float>::MakeCoeffs(p_cAimWobbleRadius);
+  p_cAimWobbleRadius->mParameter = 0.0;
+  p_cAimWobbleRadius->p0 = p_cAimWobbleRadius->p1;
+  p_cAimWobbleRadius->v0 = p_cAimWobbleRadius->v1;
+  UFG::HomerCubic<float>::MakeCoeffs(p_cAimWobbleRadius);
+  p_cAimWobbleRadius->mParameter = 0.0;
 }
 
 // File Line: 408
 // RVA: 0x3D5E00
 void __fastcall UFG::GameCameraComponent::Update(UFG::GameCameraComponent *this, float delta_seconds)
 {
-  UFG::GameCameraComponent *v2; // rbx
   float v3; // xmm2_4
   float v4; // xmm2_4
   float v5; // xmm9_4
   UFG::ShapeCasterCollector *v6; // rdi
-  UFG::ShapeCasterCollector *v7; // rcx
+  UFG::ShapeCasterCollector *pCollisionCollectorTargetPoints; // rcx
   UFG::allocator::free_link *v8; // rax
   UFG::ShapeCasterCollector *v9; // rax
-  UFG::ShapeCasterCollector *v10; // rcx
+  UFG::ShapeCasterCollector *pCollisionCollector; // rcx
   UFG::allocator::free_link *v11; // rax
   UFG::ShapeCasterCollector *v12; // rax
   float v13; // xmm15_4
@@ -469,55 +450,54 @@ void __fastcall UFG::GameCameraComponent::Update(UFG::GameCameraComponent *this,
   float v17; // xmm11_4
   float v18; // xmm12_4
   float v19; // xmm3_4
-  float v20; // xmm5_4
+  float mDuration; // xmm5_4
   float v21; // xmm3_4
-  float v22; // xmm4_4
-  float v23; // xmm14_4
-  float v24; // xmm2_4
+  float A; // xmm4_4
+  float B; // xmm14_4
+  float C; // xmm2_4
   float v25; // xmm9_4
   float v26; // xmm0_4
-  float v27; // xmm6_4
+  float p0; // xmm6_4
   float v28; // xmm3_4
   float v29; // [rsp+F0h] [rbp+8h]
   float v30; // [rsp+100h] [rbp+18h]
 
-  v2 = this;
-  UFG::BaseCameraComponent::Update((UFG::BaseCameraComponent *)&this->vfptr, delta_seconds);
-  v3 = 1.0 - (float)(delta_seconds * v2->mImpactShakeAmplitudeDecay);
+  UFG::BaseCameraComponent::Update(this, delta_seconds);
+  v3 = 1.0 - (float)(delta_seconds * this->mImpactShakeAmplitudeDecay);
   if ( v3 < 0.0 )
     v3 = 0.0;
-  v4 = v3 * v2->mImpactShakeAmplitude;
-  v2->mImpactShakeAmplitude = v4;
+  v4 = v3 * this->mImpactShakeAmplitude;
+  this->mImpactShakeAmplitude = v4;
   v5 = FLOAT_0_0099999998;
   if ( v4 > 0.0099999998 )
-    v2->mImpactShakeTimer = delta_seconds + v2->mImpactShakeTimer;
+    this->mImpactShakeTimer = delta_seconds + this->mImpactShakeTimer;
   UFG::GameCameraComponent::mNoRotationTimer = UFG::GameCameraComponent::mNoRotationTimer - delta_seconds;
   if ( UFG::GameCameraComponent::mNoRotationTimer < 0.0 )
     UFG::GameCameraComponent::mNoRotationTimer = 0.0;
-  UFG::GameCameraComponent::UpdateAimWobble(v2, delta_seconds);
+  UFG::GameCameraComponent::UpdateAimWobble(this, delta_seconds);
   v6 = 0i64;
-  if ( UFG::trCollisionTargetPointCastingRadius != v2->mCollisionTargetPointCastingRadiusSubmitted )
+  if ( UFG::trCollisionTargetPointCastingRadius != this->mCollisionTargetPointCastingRadiusSubmitted )
   {
-    v7 = v2->pCollisionCollectorTargetPoints;
-    if ( v7 )
-      v7->vfptr->__vecDelDtor(v7, 1u);
+    pCollisionCollectorTargetPoints = this->pCollisionCollectorTargetPoints;
+    if ( pCollisionCollectorTargetPoints )
+      pCollisionCollectorTargetPoints->vfptr->__vecDelDtor(pCollisionCollectorTargetPoints, 1u);
     v8 = UFG::qMemoryPool::Allocate(&gPhysicsMemoryPool, 0x30ui64, "ShapeCasterCollector", 0i64, 1u);
     if ( v8 )
       UFG::ShapeCasterCollector::ShapeCasterCollector(
         (UFG::ShapeCasterCollector *)v8,
         UFG::trCollisionTargetPointCastingRadius,
         0x12u,
-        0);
+        PhantomBehaviour_Simple);
     else
       v9 = 0i64;
-    v2->pCollisionCollectorTargetPoints = v9;
-    v2->mCollisionTargetPointCastingRadiusSubmitted = UFG::trCollisionTargetPointCastingRadius;
+    this->pCollisionCollectorTargetPoints = v9;
+    this->mCollisionTargetPointCastingRadiusSubmitted = UFG::trCollisionTargetPointCastingRadius;
   }
-  if ( UFG::trCollisionCastingRadius != v2->mCollisionCastingRadiusSubmitted )
+  if ( UFG::trCollisionCastingRadius != this->mCollisionCastingRadiusSubmitted )
   {
-    v10 = v2->pCollisionCollector;
-    if ( v10 )
-      v10->vfptr->__vecDelDtor(v10, 1u);
+    pCollisionCollector = this->pCollisionCollector;
+    if ( pCollisionCollector )
+      pCollisionCollector->vfptr->__vecDelDtor(pCollisionCollector, 1u);
     v11 = UFG::qMemoryPool::Allocate(&gPhysicsMemoryPool, 0x30ui64, "ShapeCasterCollector", 0i64, 1u);
     if ( v11 )
     {
@@ -525,11 +505,11 @@ void __fastcall UFG::GameCameraComponent::Update(UFG::GameCameraComponent *this,
         (UFG::ShapeCasterCollector *)v11,
         UFG::trCollisionCastingRadius,
         0x12u,
-        0);
+        PhantomBehaviour_Simple);
       v6 = v12;
     }
-    v2->pCollisionCollector = v6;
-    v2->mCollisionCastingRadiusSubmitted = UFG::trCollisionCastingRadius;
+    this->pCollisionCollector = v6;
+    this->mCollisionCastingRadiusSubmitted = UFG::trCollisionCastingRadius;
   }
   v13 = UFG::GameCameraComponent::mDynamicDutchDurHigh;
   v14 = UFG::GameCameraComponent::mDynamicDutchDurDevHigh;
@@ -553,37 +533,25 @@ void __fastcall UFG::GameCameraComponent::Update(UFG::GameCameraComponent *this,
   if ( UFG::GameCameraComponent::mDynamicDutch )
   {
     v19 = UFG::GameCameraComponent::mDutchDyn.mParameter / UFG::GameCameraComponent::mDutchDyn.mDuration;
-    v20 = UFG::GameCameraComponent::mDynamicDutchTransitionDuration;
+    mDuration = UFG::GameCameraComponent::mDynamicDutchTransitionDuration;
     if ( UFG::GameCameraComponent::mDynamicDutchTransitionDuration <= 0.0099999998 )
-      v20 = FLOAT_0_0099999998;
-    UFG::GameCameraComponent::mDutchDyn.mDuration = v20;
-    v21 = v19 * v20;
+      mDuration = FLOAT_0_0099999998;
+    UFG::GameCameraComponent::mDutchDyn.mDuration = mDuration;
+    v21 = v19 * mDuration;
     UFG::GameCameraComponent::mDutchDyn.mParameter = v21;
-    if ( v20 > 0.0099999998 )
-      v5 = v20;
-    v22 = (float)((float)((float)(UFG::GameCameraComponent::mDutchDyn.v1 + UFG::GameCameraComponent::mDutchDyn.v0) * v5)
-                + (float)((float)(UFG::GameCameraComponent::mDutchDyn.p0 - UFG::GameCameraComponent::mDutchDyn.p1) * 2.0))
-        / (float)((float)(v5 * v5) * v5);
-    UFG::GameCameraComponent::mDutchDyn.A = (float)((float)((float)(UFG::GameCameraComponent::mDutchDyn.v1
-                                                                  + UFG::GameCameraComponent::mDutchDyn.v0)
-                                                          * v5)
-                                                  + (float)((float)(UFG::GameCameraComponent::mDutchDyn.p0
-                                                                  - UFG::GameCameraComponent::mDutchDyn.p1)
-                                                          * 2.0))
-                                          / (float)((float)(v5 * v5) * v5);
-    v23 = (float)((float)((float)(UFG::GameCameraComponent::mDutchDyn.p1 - UFG::GameCameraComponent::mDutchDyn.p0) * 3.0)
-                - (float)((float)((float)(UFG::GameCameraComponent::mDutchDyn.v0 * 2.0)
-                                + UFG::GameCameraComponent::mDutchDyn.v1)
-                        * v5))
-        / (float)(v5 * v5);
-    UFG::GameCameraComponent::mDutchDyn.B = (float)((float)((float)(UFG::GameCameraComponent::mDutchDyn.p1
-                                                                  - UFG::GameCameraComponent::mDutchDyn.p0)
-                                                          * 3.0)
-                                                  - (float)((float)((float)(UFG::GameCameraComponent::mDutchDyn.v0 * 2.0)
-                                                                  + UFG::GameCameraComponent::mDutchDyn.v1)
-                                                          * v5))
-                                          / (float)(v5 * v5);
-    v24 = UFG::GameCameraComponent::mDutchDyn.v0;
+    if ( mDuration > 0.0099999998 )
+      v5 = mDuration;
+    A = (float)((float)((float)(UFG::GameCameraComponent::mDutchDyn.v1 + UFG::GameCameraComponent::mDutchDyn.v0) * v5)
+              + (float)((float)(UFG::GameCameraComponent::mDutchDyn.p0 - UFG::GameCameraComponent::mDutchDyn.p1) * 2.0))
+      / (float)((float)(v5 * v5) * v5);
+    UFG::GameCameraComponent::mDutchDyn.A = A;
+    B = (float)((float)((float)(UFG::GameCameraComponent::mDutchDyn.p1 - UFG::GameCameraComponent::mDutchDyn.p0) * 3.0)
+              - (float)((float)((float)(UFG::GameCameraComponent::mDutchDyn.v0 * 2.0)
+                              + UFG::GameCameraComponent::mDutchDyn.v1)
+                      * v5))
+      / (float)(v5 * v5);
+    UFG::GameCameraComponent::mDutchDyn.B = B;
+    C = UFG::GameCameraComponent::mDutchDyn.v0;
     UFG::GameCameraComponent::mDutchDyn.C = UFG::GameCameraComponent::mDutchDyn.v0;
     UFG::GameCameraComponent::mDutchDyn.D = UFG::GameCameraComponent::mDutchDyn.p0;
     UFG::GameCameraComponent::mDynamicDutchCurElapsed = UFG::GameCameraComponent::mDynamicDutchCurElapsed
@@ -591,18 +559,18 @@ void __fastcall UFG::GameCameraComponent::Update(UFG::GameCameraComponent *this,
     if ( UFG::GameCameraComponent::mDynamicDutchCurElapsed <= UFG::GameCameraComponent::mDynamicDutchCurDuration )
     {
       v25 = FLOAT_2_0;
-      v27 = UFG::GameCameraComponent::mDutchDyn.p0;
+      p0 = UFG::GameCameraComponent::mDutchDyn.p0;
     }
     else
     {
-      UFG::GameCameraComponent::mDynamicDutchCurIsHigh = UFG::GameCameraComponent::mDynamicDutchCurIsHigh == 0;
+      UFG::GameCameraComponent::mDynamicDutchCurIsHigh = !UFG::GameCameraComponent::mDynamicDutchCurIsHigh;
       if ( !UFG::GameCameraComponent::mDynamicDutchCurIsHigh )
       {
         v13 = v29;
         v14 = v30;
       }
       v25 = FLOAT_2_0;
-      v26 = UFG::qRandom(v14 * 2.0, &UFG::qDefaultSeed);
+      v26 = UFG::qRandom(v14 * 2.0, (unsigned int *)&UFG::qDefaultSeed);
       UFG::GameCameraComponent::mDynamicDutchCurElapsed = 0.0;
       UFG::GameCameraComponent::mDynamicDutchCurDuration = (float)(v26 - v14) + v13;
       if ( !UFG::GameCameraComponent::mDynamicDutchCurIsHigh )
@@ -610,27 +578,26 @@ void __fastcall UFG::GameCameraComponent::Update(UFG::GameCameraComponent *this,
         v15 = v17;
         v16 = v18;
       }
-      UFG::GameCameraComponent::mDutchDyn.p1 = (float)(UFG::qRandom(v16 * 2.0, &UFG::qDefaultSeed) - v16) + v15;
+      UFG::GameCameraComponent::mDutchDyn.p1 = (float)(UFG::qRandom(v16 * 2.0, (unsigned int *)&UFG::qDefaultSeed) - v16)
+                                             + v15;
       UFG::HomerCubic<float>::MakeCoeffs(&UFG::GameCameraComponent::mDutchDyn);
       v21 = 0.0;
-      v27 = UFG::GameCameraComponent::mDutchDyn.D;
-      v24 = UFG::GameCameraComponent::mDutchDyn.C;
-      v23 = UFG::GameCameraComponent::mDutchDyn.B;
-      v22 = UFG::GameCameraComponent::mDutchDyn.A;
-      v20 = UFG::GameCameraComponent::mDutchDyn.mDuration;
+      p0 = UFG::GameCameraComponent::mDutchDyn.D;
+      C = UFG::GameCameraComponent::mDutchDyn.C;
+      B = UFG::GameCameraComponent::mDutchDyn.B;
+      A = UFG::GameCameraComponent::mDutchDyn.A;
+      mDuration = UFG::GameCameraComponent::mDutchDyn.mDuration;
     }
     v28 = v21 + delta_seconds;
     if ( v28 <= 0.0 )
       v28 = 0.0;
-    if ( v28 >= v20 )
-      v28 = v20;
+    if ( v28 >= mDuration )
+      v28 = mDuration;
     UFG::GameCameraComponent::mDutchDyn.mParameter = v28;
-    UFG::GameCameraComponent::mDutchDyn.v0 = (float)((float)((float)((float)(v22 * 3.0) * v28) + (float)(v23 * v25))
-                                                   * v28)
-                                           + v24;
-    UFG::GameCameraComponent::mDutchDyn.p0 = (float)((float)((float)((float)((float)(v22 * v28) + v23) * v28) + v24)
-                                                   * v28)
-                                           + v27;
+    UFG::GameCameraComponent::mDutchDyn.v0 = (float)((float)((float)((float)(A * 3.0) * v28) + (float)(B * v25)) * v28)
+                                           + C;
+    UFG::GameCameraComponent::mDutchDyn.p0 = (float)((float)((float)((float)((float)(A * v28) + B) * v28) + C) * v28)
+                                           + p0;
   }
 }
 
@@ -670,14 +637,11 @@ void __fastcall UFG::GameCameraComponent::ResetDutch(bool snap)
 // RVA: 0x3CC280
 void __fastcall UFG::GameCameraComponent::SetDutch(float angle, bool snap)
 {
-  bool v2; // bl
-
-  v2 = snap;
   UFG::GameCameraComponent::mDynamicDutch = 0;
   UFG::GameCameraComponent::mDutchDyn.p1 = angle;
   UFG::HomerCubic<float>::MakeCoeffs(&UFG::GameCameraComponent::mDutchDyn);
   UFG::GameCameraComponent::mDutchDyn.mParameter = 0.0;
-  if ( v2 )
+  if ( snap )
   {
     UFG::GameCameraComponent::mDutchDyn.p0 = UFG::GameCameraComponent::mDutchDyn.p1;
     UFG::GameCameraComponent::mDutchDyn.v0 = UFG::GameCameraComponent::mDutchDyn.v1;
@@ -696,7 +660,15 @@ void __fastcall UFG::GameCameraComponent::SetDutch(float angle, bool snap)
 
 // File Line: 528
 // RVA: 0x3CC3A0
-void __fastcall UFG::GameCameraComponent::SetDynamicDutch(float dur_high, float dur_dev_high, float ang_high, float ang_dev_high, float dur_low, float dur_dev_low, float ang_low, float ang_dev_low)
+void __fastcall UFG::GameCameraComponent::SetDynamicDutch(
+        float dur_high,
+        float dur_dev_high,
+        float ang_high,
+        float ang_dev_high,
+        float dur_low,
+        float dur_dev_low,
+        float ang_low,
+        float ang_dev_low)
 {
   UFG::GameCameraComponent::mDynamicDutchDurHigh = dur_high;
   UFG::GameCameraComponent::mDynamicDutchDurDevHigh = dur_dev_high;
@@ -713,20 +685,22 @@ void __fastcall UFG::GameCameraComponent::SetDynamicDutch(float dur_high, float 
 // RVA: 0x3CCBD0
 void __fastcall UFG::GameCameraComponent::SetHoldingBreathInput(UFG::GameCameraComponent *this, bool enable)
 {
-  bool v2; // al
-  float v3; // xmm1_4
+  bool bAimWobbleHoldingBreathInput; // al
+  float rAimWobbleHoldBreathElapsedTime; // xmm1_4
   float v4; // xmm1_4
 
-  v2 = this->bAimWobbleHoldingBreathInput;
-  if ( enable != v2 )
+  bAimWobbleHoldingBreathInput = this->bAimWobbleHoldingBreathInput;
+  if ( enable != bAimWobbleHoldingBreathInput )
   {
-    if ( !enable || UFG::rtAimWobbleBreathRequiredTime >= this->rAimWobbleBreathElapsedTime || v2 )
+    if ( !enable
+      || UFG::rtAimWobbleBreathRequiredTime >= this->rAimWobbleBreathElapsedTime
+      || bAimWobbleHoldingBreathInput )
     {
       if ( this->bAimWobbleHoldingBreath )
       {
-        v3 = this->rAimWobbleHoldBreathElapsedTime;
+        rAimWobbleHoldBreathElapsedTime = this->rAimWobbleHoldBreathElapsedTime;
         this->bAimWobbleHoldingBreath = 0;
-        v4 = v3 / UFG::rtAimWobbleHoldBreathMaxTime;
+        v4 = rAimWobbleHoldBreathElapsedTime / UFG::rtAimWobbleHoldBreathMaxTime;
         if ( v4 <= 0.0 )
         {
           v4 = 0.0;
@@ -752,32 +726,28 @@ void __fastcall UFG::GameCameraComponent::SetHoldingBreathInput(UFG::GameCameraC
 void __fastcall UFG::GameCameraComponent::UpdateAimWobble(UFG::GameCameraComponent *this, float dt)
 {
   bool v2; // zf
-  UFG::GameCameraComponent *v3; // rbx
-  float v4; // xmm6_4
   float v5; // xmm0_4
   float v6; // xmm0_4
-  float v7; // xmm1_4
+  float rAimWobbleHoldBreathElapsedTime; // xmm1_4
   float v8; // xmm7_4
   float v9; // xmm1_4
   float v10; // xmm2_4
-  float *v11; // rax
+  float *p_rAimWobbleRadiusPeriod; // rax
   float v12; // xmm0_4
   float v13; // xmm1_4
-  float v14; // xmm6_4
-  float v15; // xmm0_4
-  float v16; // xmm11_4
-  float v17; // xmm10_4
+  float rAimWobbleRadiusMin; // xmm6_4
+  float rAimWobbleRadiusMax; // xmm0_4
+  float rAimWobbleAxisWeight; // xmm11_4
+  float rAimWobbleFreq; // xmm10_4
   float v18; // xmm10_4
-  float v19; // xmm6_4
+  float p0; // xmm6_4
   float v20; // xmm8_4
   float v21; // xmm0_4
-  float v22; // xmm2_4
-  float v23; // xmm1_4
+  float rAimWobbleOverallScale; // xmm1_4
+  float y; // xmm1_4
 
-  v2 = this->bAimWobbleHoldingBreath == 0;
-  v3 = this;
+  v2 = !this->bAimWobbleHoldingBreath;
   this->rAimWobbleElapsedTime = dt + this->rAimWobbleElapsedTime;
-  v4 = dt;
   if ( v2 )
   {
     v6 = dt + this->rAimWobbleBreathElapsedTime;
@@ -790,12 +760,12 @@ void __fastcall UFG::GameCameraComponent::UpdateAimWobble(UFG::GameCameraCompone
     this->rAimWobbleBreathElapsedTime = 0.0;
     this->rAimWobbleHoldBreathElapsedTime = v5;
   }
-  v7 = this->rAimWobbleHoldBreathElapsedTime;
+  rAimWobbleHoldBreathElapsedTime = this->rAimWobbleHoldBreathElapsedTime;
   v8 = 0.0;
-  if ( v7 > UFG::rtAimWobbleHoldBreathMaxTime )
+  if ( rAimWobbleHoldBreathElapsedTime > UFG::rtAimWobbleHoldBreathMaxTime )
   {
     this->bAimWobbleHoldingBreath = 0;
-    v9 = v7 / UFG::rtAimWobbleHoldBreathMaxTime;
+    v9 = rAimWobbleHoldBreathElapsedTime / UFG::rtAimWobbleHoldBreathMaxTime;
     if ( v9 <= 0.0 )
     {
       v9 = 0.0;
@@ -806,8 +776,8 @@ void __fastcall UFG::GameCameraComponent::UpdateAimWobble(UFG::GameCameraCompone
     }
     this->rAimWobbleHoldBreathMultiplier = (float)((float)(UFG::rtAimWobbleMaxBreathMultiplier - 1.0) * v9) + 1.0;
   }
-  UFG::qApproach(&this->rAimWobbleHoldBreathMultiplier, 1.0, UFG::rtAimWobbleMaxBreathDecayRate, v4);
-  if ( v3->bAimWobbleHoldingBreath )
+  UFG::qApproach(&this->rAimWobbleHoldBreathMultiplier, 1.0, UFG::rtAimWobbleMaxBreathDecayRate, dt);
+  if ( this->bAimWobbleHoldingBreath )
   {
     v10 = UFG::trAimWobbleHoldBreathRate;
   }
@@ -816,62 +786,65 @@ void __fastcall UFG::GameCameraComponent::UpdateAimWobble(UFG::GameCameraCompone
     v10 = UFG::trAimWobbleReleaseBreathRate;
     v8 = *(float *)&FLOAT_1_0;
   }
-  UFG::qApproach(&v3->rAimWobbleOverallScale, v8, v10, v4);
-  v11 = &UFG::trAimWobbleRadiusPeriod;
+  UFG::qApproach(&this->rAimWobbleOverallScale, v8, v10, dt);
+  p_rAimWobbleRadiusPeriod = &UFG::trAimWobbleRadiusPeriod;
   if ( !UFG::tbAimWobbleUseTweakables )
-    v11 = &v3->rAimWobbleRadiusPeriod;
-  v12 = v3->cAimWobbleRadius.mParameter / v3->cAimWobbleRadius.mDuration;
-  v3->cAimWobbleRadius.mParameter = v12;
-  v13 = *v11;
-  if ( *v11 <= 0.0099999998 )
+    p_rAimWobbleRadiusPeriod = &this->rAimWobbleRadiusPeriod;
+  v12 = this->cAimWobbleRadius.mParameter / this->cAimWobbleRadius.mDuration;
+  this->cAimWobbleRadius.mParameter = v12;
+  v13 = *p_rAimWobbleRadiusPeriod;
+  if ( *p_rAimWobbleRadiusPeriod <= 0.0099999998 )
     v13 = FLOAT_0_0099999998;
-  v3->cAimWobbleRadius.mDuration = v13;
-  v3->cAimWobbleRadius.mParameter = v13 * v12;
-  UFG::HomerCubic<float>::MakeCoeffs(&v3->cAimWobbleRadius);
-  UFG::HomerCubic<float>::Update(&v3->cAimWobbleRadius, v4);
-  if ( COERCE_FLOAT(COERCE_UNSIGNED_INT(v3->cAimWobbleRadius.p1 - v3->cAimWobbleRadius.p0) & _xmm) < 0.0000099999997 )
+  this->cAimWobbleRadius.mDuration = v13;
+  this->cAimWobbleRadius.mParameter = v13 * v12;
+  UFG::HomerCubic<float>::MakeCoeffs(&this->cAimWobbleRadius);
+  UFG::HomerCubic<float>::Update(&this->cAimWobbleRadius, dt);
+  if ( COERCE_FLOAT(COERCE_UNSIGNED_INT(this->cAimWobbleRadius.p1 - this->cAimWobbleRadius.p0) & _xmm) < 0.0000099999997 )
   {
     if ( UFG::tbAimWobbleUseTweakables )
     {
-      v14 = UFG::trAimWobbleRadiusMin;
-      v15 = UFG::trAimWobbleRadiusMax;
+      rAimWobbleRadiusMin = UFG::trAimWobbleRadiusMin;
+      rAimWobbleRadiusMax = UFG::trAimWobbleRadiusMax;
     }
     else
     {
-      v14 = v3->rAimWobbleRadiusMin;
-      v15 = v3->rAimWobbleRadiusMax;
+      rAimWobbleRadiusMin = this->rAimWobbleRadiusMin;
+      rAimWobbleRadiusMax = this->rAimWobbleRadiusMax;
     }
-    v3->cAimWobbleRadius.p1 = UFG::qRandom(v15 - v14, &UFG::qDefaultSeed) + v14;
-    UFG::HomerCubic<float>::MakeCoeffs(&v3->cAimWobbleRadius);
-    v3->cAimWobbleRadius.mParameter = 0.0;
+    this->cAimWobbleRadius.p1 = UFG::qRandom(
+                                  rAimWobbleRadiusMax - rAimWobbleRadiusMin,
+                                  (unsigned int *)&UFG::qDefaultSeed)
+                              + rAimWobbleRadiusMin;
+    UFG::HomerCubic<float>::MakeCoeffs(&this->cAimWobbleRadius);
+    this->cAimWobbleRadius.mParameter = 0.0;
   }
-  if ( ((unsigned __int8 (__fastcall *)(UFG::GameCameraComponent *))v3->vfptr[37].__vecDelDtor)(v3) )
+  if ( ((unsigned __int8 (__fastcall *)(UFG::GameCameraComponent *))this->vfptr[37].__vecDelDtor)(this) )
   {
     if ( UFG::tbAimWobbleUseTweakables )
     {
-      v16 = UFG::trAimWobbleAxisWeight;
-      v17 = UFG::trAimWobbleFreq;
+      rAimWobbleAxisWeight = UFG::trAimWobbleAxisWeight;
+      rAimWobbleFreq = UFG::trAimWobbleFreq;
     }
     else
     {
-      v16 = v3->rAimWobbleAxisWeight;
-      v17 = v3->rAimWobbleFreq;
+      rAimWobbleAxisWeight = this->rAimWobbleAxisWeight;
+      rAimWobbleFreq = this->rAimWobbleFreq;
     }
-    v18 = v17 * v3->rAimWobbleElapsedTime;
-    v19 = v3->cAimWobbleRadius.p0;
-    v20 = (float)(sinf(v18) * (float)((float)(1.0 - v16) * v19)) * v3->rAimWobbleHoldBreathMultiplier;
-    v21 = (float)(cosf(v18) * (float)(v19 * v16)) * v3->rAimWobbleHoldBreathMultiplier;
-    v3->mAimWobble.y = v20;
-    v3->mAimWobble.x = v21;
-    v22 = v3->rAimWobbleOverallScale;
-    v3->mAimWobble.y = v22 * v20;
-    v3->mAimWobble.x = v22 * v21;
+    v18 = rAimWobbleFreq * this->rAimWobbleElapsedTime;
+    p0 = this->cAimWobbleRadius.p0;
+    v20 = (float)(sinf(v18) * (float)((float)(1.0 - rAimWobbleAxisWeight) * p0)) * this->rAimWobbleHoldBreathMultiplier;
+    v21 = (float)(cosf(v18) * (float)(p0 * rAimWobbleAxisWeight)) * this->rAimWobbleHoldBreathMultiplier;
+    this->mAimWobble.y = v20;
+    this->mAimWobble.x = v21;
+    rAimWobbleOverallScale = this->rAimWobbleOverallScale;
+    this->mAimWobble.y = rAimWobbleOverallScale * v20;
+    this->mAimWobble.x = rAimWobbleOverallScale * v21;
   }
   else
   {
-    v23 = UFG::qVector2::msZero.y;
-    v3->mAimWobble.x = UFG::qVector2::msZero.x;
-    v3->mAimWobble.y = v23;
+    y = UFG::qVector2::msZero.y;
+    this->mAimWobble.x = UFG::qVector2::msZero.x;
+    this->mAimWobble.y = y;
   }
 }
 
@@ -879,23 +852,19 @@ void __fastcall UFG::GameCameraComponent::UpdateAimWobble(UFG::GameCameraCompone
 // RVA: 0x3BF110
 void __fastcall UFG::GameCameraComponent::AddShakeAmplitude(UFG::GameCameraComponent *this, float shake)
 {
-  UFG::GameCameraComponent *v2; // rdi
-  UFG::GameCameraComponent *v3; // rax
+  UFG::GameCameraComponent *CurrentGameCamera; // rax
   UFG::SimComponent *v4; // rbx
 
-  v2 = this;
-  v3 = UFG::GetCurrentGameCamera();
-  v4 = (UFG::SimComponent *)&v3->vfptr;
-  if ( (!v3
-     || !UFG::SimComponent::IsType(
-           (UFG::SimComponent *)&v3->vfptr,
-           UFG::AnimatedCameraComponent::_AnimatedCameraComponentTypeUID)
+  CurrentGameCamera = UFG::GetCurrentGameCamera();
+  v4 = CurrentGameCamera;
+  if ( (!CurrentGameCamera
+     || !UFG::SimComponent::IsType(CurrentGameCamera, UFG::AnimatedCameraComponent::_AnimatedCameraComponentTypeUID)
      && !UFG::SimComponent::IsType(v4, UFG::ScriptCameraComponent::_ScriptCameraComponentTypeUID))
-    && shake > v2->mImpactShakeAmplitude )
+    && shake > this->mImpactShakeAmplitude )
   {
-    v2->mImpactShakeAmplitude = shake;
-    v2->mImpactShakeTimer = UFG::qRandom(511.0, &UFG::qDefaultSeed);
-    v2->mImpactShakeSeed = UFG::qRandom(511.0, &UFG::qDefaultSeed) + 511.0;
+    this->mImpactShakeAmplitude = shake;
+    this->mImpactShakeTimer = UFG::qRandom(511.0, (unsigned int *)&UFG::qDefaultSeed);
+    this->mImpactShakeSeed = UFG::qRandom(511.0, (unsigned int *)&UFG::qDefaultSeed) + 511.0;
   }
 }
 
@@ -908,11 +877,17 @@ void __fastcall UFG::GameCameraComponent::HandleDamage(UFG::GameCameraComponent 
 
 // File Line: 660
 // RVA: 0x3BFB40
-void __fastcall UFG::GameCameraComponent::BeginDOFOverride(float focalRange, float nearRange, float farRange, float nearBlur, float farBlur, UFG::GameCameraComponent::DOFOverridePriority priority)
+void __fastcall UFG::GameCameraComponent::BeginDOFOverride(
+        float focalRange,
+        float nearRange,
+        float farRange,
+        float nearBlur,
+        float farBlur,
+        UFG::GameCameraComponent::DOFOverridePriority priority)
 {
-  signed __int64 v6; // rcx
+  __int64 v6; // rcx
 
-  v6 = 3i64 * (signed int)priority;
+  v6 = 3i64 * (int)priority;
   UFG::GameCameraComponent::mDofOverrideParams[8 * v6] = 1;
   *(float *)&UFG::GameCameraComponent::mDofOverrideParams[8 * v6 + 4] = focalRange;
   *(float *)&UFG::GameCameraComponent::mDofOverrideParams[8 * v6 + 8] = nearRange;
@@ -930,14 +905,19 @@ void __fastcall UFG::GameCameraComponent::EndDOFOverride(UFG::GameCameraComponen
 
 // File Line: 748
 // RVA: 0x3DC0D0
-void __fastcall UFG::GameCameraComponent::UpdateDof(UFG::GameCameraComponent *this, float dt, float inFocusRange, float nearRange, float nearBlurRadius, float farRange, float farBlurRadius)
+void __fastcall UFG::GameCameraComponent::UpdateDof(
+        UFG::GameCameraComponent *this,
+        float dt,
+        float inFocusRange,
+        float nearRange,
+        float nearBlurRadius,
+        float farRange,
+        float farBlurRadius)
 {
-  UFG::GameCameraComponent *v7; // rbx
   float v8; // xmm7_4
   float v9; // xmm6_4
-  Render::DepthOfField::Focus desDofParameters; // [rsp+20h] [rbp-68h]
+  Render::DepthOfField::Focus desDofParameters; // [rsp+20h] [rbp-68h] BYREF
 
-  v7 = this;
   v8 = (float)(UFG::GameCameraComponent::mDofFocusObjectDistFar + UFG::GameCameraComponent::mDofFocusObjectDistNear)
      * 0.5;
   v9 = (float)((float)(inFocusRange * 0.5) + UFG::GameCameraComponent::mDofFocusObjectDistFar)
@@ -949,352 +929,345 @@ void __fastcall UFG::GameCameraComponent::UpdateDof(UFG::GameCameraComponent *th
   desDofParameters.mFarBlurRadius = farBlurRadius;
   desDofParameters.mInFocusRange = v9;
   desDofParameters.mNearRange = nearRange;
-  UFG::GameCameraComponent::UpdateDof(v7, dt, &desDofParameters, 0);
+  UFG::GameCameraComponent::UpdateDof(this, dt, &desDofParameters, 0);
 }
 
 // File Line: 770
 // RVA: 0x3DB660
-void __fastcall UFG::GameCameraComponent::UpdateDof(UFG::GameCameraComponent *this, float dt, Render::DepthOfField::Focus *desDofParameters, bool snap)
+void __fastcall UFG::GameCameraComponent::UpdateDof(
+        UFG::GameCameraComponent *this,
+        float dt,
+        Render::DepthOfField::Focus *desDofParameters,
+        bool snap)
 {
-  UFG::GameCameraComponent *v4; // rsi
-  bool v5; // r14
-  Render::DepthOfField::Focus *v6; // rbx
-  float v7; // xmm12_4
-  float v8; // xmm8_4
-  float v9; // xmm9_4
-  float v10; // xmm10_4
-  float v11; // xmm11_4
-  float v12; // xmm13_4
+  float mInFocusRange; // xmm8_4
+  float mNearRange; // xmm9_4
+  float mNearBlurRadius; // xmm10_4
+  float mFarRange; // xmm11_4
+  float mFarBlurRadius; // xmm13_4
   float v13; // xmm6_4
   float v14; // xmm8_4
-  float *v15; // rbx
-  signed __int64 v16; // rbp
+  float *p_mParameter; // rbx
+  __int64 v16; // rbp
   float v17; // xmm0_4
   float v18; // xmm0_4
-  bool v19; // cf
-  bool v20; // zf
-  bool v21; // al
-  float v22; // xmm8_4
-  float v23; // xmm6_4
+  bool v19; // cc
+  bool v20; // al
+  float v21; // xmm8_4
+  float v22; // xmm6_4
+  float v23; // xmm0_4
   float v24; // xmm0_4
   float v25; // xmm0_4
-  float v26; // xmm0_4
-  int v27; // xmm0_4
-  float v28; // xmm3_4
-  float v29; // xmm2_4
-  float v30; // xmm4_4
-  float v31; // xmm3_4
-  float v32; // xmm2_4
-  float v33; // xmm8_4
-  float v34; // xmm3_4
-  float v35; // xmm2_4
-  float v36; // xmm3_4
-  float v37; // xmm2_4
-  float v38; // xmm3_4
-  float v39; // xmm2_4
-  float v40; // xmm3_4
-  int v41; // ecx
-  _BYTE *v42; // rax
+  int v26; // xmm0_4
+  float mDuration; // xmm3_4
+  float v28; // xmm2_4
+  float v29; // xmm4_4
+  float v30; // xmm3_4
+  float v31; // xmm2_4
+  float v32; // xmm8_4
+  float v33; // xmm3_4
+  float v34; // xmm2_4
+  float v35; // xmm3_4
+  float v36; // xmm2_4
+  float v37; // xmm3_4
+  float v38; // xmm2_4
+  float v39; // xmm3_4
+  int v40; // ecx
+  _BYTE *v41; // rax
+  float *v42; // rax
   float *v43; // rax
-  float *v44; // rax
-  float v45; // xmm3_4
-  float v46; // xmm5_4
-  float v47; // xmm3_4
-  float v48; // xmm2_4
-  float v49; // xmm3_4
-  float v50; // xmm4_4
-  float v51; // xmm0_4
-  float v52; // xmm6_4
-  float v53; // xmm14_4
-  float v54; // xmm0_4
-  float v55; // xmm2_4
+  float v44; // xmm3_4
+  float v45; // xmm5_4
+  float v46; // xmm3_4
+  float v47; // xmm2_4
+  float v48; // xmm3_4
+  float v49; // xmm4_4
+  float v50; // xmm0_4
+  float v51; // xmm6_4
+  float v52; // xmm14_4
+  float v53; // xmm0_4
+  float mDofNoiseAmplitude; // xmm2_4
+  float v55; // xmm1_4
   float v56; // xmm1_4
-  float v57; // xmm1_4
-  float v58; // xmm6_4
-  Render::DepthOfField::Focus focus; // [rsp+20h] [rbp-D8h]
+  float p0; // xmm6_4
+  Render::DepthOfField::Focus focus; // [rsp+20h] [rbp-D8h] BYREF
 
-  v4 = this;
   UFG::GameCameraComponent::mDofFocusDist.p1 = desDofParameters->mFocalDistance;
-  v5 = snap;
-  v6 = desDofParameters;
-  v7 = dt;
   UFG::HomerCubic<float>::MakeCoeffs(&UFG::GameCameraComponent::mDofFocusDist);
   UFG::GameCameraComponent::mDofFocusDist.mParameter = 0.0;
-  v8 = v6->mInFocusRange;
-  v9 = v6->mNearRange;
-  v10 = v6->mNearBlurRadius;
-  v11 = v6->mFarRange;
-  v12 = v6->mFarBlurRadius;
+  mInFocusRange = desDofParameters->mInFocusRange;
+  mNearRange = desDofParameters->mNearRange;
+  mNearBlurRadius = desDofParameters->mNearBlurRadius;
+  mFarRange = desDofParameters->mFarRange;
+  mFarBlurRadius = desDofParameters->mFarBlurRadius;
   v13 = FLOAT_0_0099999998;
   if ( UFG::GameCameraComponent::mDynamicDOF )
   {
     v14 = UFG::GameCameraComponent::mDynamicDOFTransitionDuration;
-    v15 = &UFG::GameCameraComponent::mDynamicDofParams.mParameter;
+    p_mParameter = &UFG::GameCameraComponent::mDynamicDofParams.mParameter;
     v16 = 6i64;
     do
     {
-      *v15 = *v15 / *(v15 - 1);
+      *p_mParameter = *p_mParameter / *(p_mParameter - 1);
       if ( v14 <= v13 )
         v17 = v13;
       else
         v17 = v14;
-      *(v15 - 1) = v17;
-      *v15 = v17 * *v15;
-      UFG::HomerCubic<float>::MakeCoeffs((UFG::HomerCubic<float> *)(v15 - 1));
-      v18 = dt + v15[17];
-      v19 = v18 < v15[16];
-      v20 = v18 == v15[16];
-      v15[17] = v18;
-      if ( !v19 && !v20 )
+      *(p_mParameter - 1) = v17;
+      *p_mParameter = v17 * *p_mParameter;
+      UFG::HomerCubic<float>::MakeCoeffs((UFG::HomerCubic<float> *)(p_mParameter - 1));
+      v18 = dt + p_mParameter[17];
+      v19 = v18 <= p_mParameter[16];
+      p_mParameter[17] = v18;
+      if ( !v19 )
       {
-        v21 = *((_BYTE *)v15 + 60) == 0;
-        *((_BYTE *)v15 + 60) = v21;
-        if ( v21 )
+        v20 = *((_BYTE *)p_mParameter + 60) == 0;
+        *((_BYTE *)p_mParameter + 60) = v20;
+        if ( v20 )
         {
-          v22 = v15[9];
-          v23 = v15[10];
+          v21 = p_mParameter[9];
+          v22 = p_mParameter[10];
         }
         else
         {
-          v22 = v15[12];
-          v23 = v15[13];
+          v21 = p_mParameter[12];
+          v22 = p_mParameter[13];
         }
-        v24 = UFG::qRandom(v23 * 2.0, &UFG::qDefaultSeed);
-        v15[17] = 0.0;
-        v25 = v24 - v23;
+        v23 = UFG::qRandom(v22 * 2.0, (unsigned int *)&UFG::qDefaultSeed);
+        p_mParameter[17] = 0.0;
+        v24 = v23 - v22;
         v13 = FLOAT_0_0099999998;
-        v26 = v25 + v22;
+        v25 = v24 + v21;
         v14 = UFG::GameCameraComponent::mDynamicDOFTransitionDuration;
-        v15[16] = v26;
+        p_mParameter[16] = v25;
       }
-      if ( *((_BYTE *)v15 + 60) )
-        v27 = *((_DWORD *)v15 + 11);
+      if ( *((_BYTE *)p_mParameter + 60) )
+        v26 = *((_DWORD *)p_mParameter + 11);
       else
-        v27 = *((_DWORD *)v15 + 14);
-      *((_DWORD *)v15 + 6) = v27;
-      UFG::HomerCubic<float>::MakeCoeffs((UFG::HomerCubic<float> *)(v15 - 1));
-      *v15 = 0.0;
-      v15 += 19;
+        v26 = *((_DWORD *)p_mParameter + 14);
+      *((_DWORD *)p_mParameter + 6) = v26;
+      UFG::HomerCubic<float>::MakeCoeffs((UFG::HomerCubic<float> *)(p_mParameter - 1));
+      *p_mParameter = 0.0;
+      p_mParameter += 19;
       --v16;
     }
     while ( v16 );
-    v28 = UFG::GameCameraComponent::mDynamicDofParams.mParameter + dt;
+    mDuration = UFG::GameCameraComponent::mDynamicDofParams.mParameter + dt;
     if ( (float)(UFG::GameCameraComponent::mDynamicDofParams.mParameter + dt) <= 0.0 )
-      v28 = 0.0;
-    if ( v28 >= UFG::GameCameraComponent::mDynamicDofParams.mDuration )
-      v28 = UFG::GameCameraComponent::mDynamicDofParams.mDuration;
-    UFG::GameCameraComponent::mDynamicDofParams.mParameter = v28;
-    v29 = (float)((float)((float)(UFG::GameCameraComponent::mDynamicDofParams.A * 3.0) * v28)
+      mDuration = 0.0;
+    if ( mDuration >= UFG::GameCameraComponent::mDynamicDofParams.mDuration )
+      mDuration = UFG::GameCameraComponent::mDynamicDofParams.mDuration;
+    UFG::GameCameraComponent::mDynamicDofParams.mParameter = mDuration;
+    v28 = (float)((float)((float)(UFG::GameCameraComponent::mDynamicDofParams.A * 3.0) * mDuration)
                 + (float)(UFG::GameCameraComponent::mDynamicDofParams.B * 2.0))
-        * v28;
-    v30 = (float)((float)((float)((float)((float)(UFG::GameCameraComponent::mDynamicDofParams.A * v28)
+        * mDuration;
+    v29 = (float)((float)((float)((float)((float)(UFG::GameCameraComponent::mDynamicDofParams.A * mDuration)
                                         + UFG::GameCameraComponent::mDynamicDofParams.B)
-                                * v28)
+                                * mDuration)
                         + UFG::GameCameraComponent::mDynamicDofParams.C)
-                * v28)
+                * mDuration)
         + UFG::GameCameraComponent::mDynamicDofParams.D;
-    v31 = stru_1423D7CAC.mParameter + dt;
-    UFG::GameCameraComponent::mDynamicDofParams.v0 = v29 + UFG::GameCameraComponent::mDynamicDofParams.C;
-    UFG::GameCameraComponent::mDynamicDofParams.p0 = v30;
+    v30 = stru_1423D7CAC.mParameter + dt;
+    UFG::GameCameraComponent::mDynamicDofParams.v0 = v28 + UFG::GameCameraComponent::mDynamicDofParams.C;
+    UFG::GameCameraComponent::mDynamicDofParams.p0 = v29;
     if ( (float)(stru_1423D7CAC.mParameter + dt) <= 0.0 )
-      v31 = 0.0;
-    if ( v31 >= stru_1423D7CAC.mDuration )
-      v31 = stru_1423D7CAC.mDuration;
-    stru_1423D7CAC.mParameter = v31;
-    v32 = (float)((float)((float)(stru_1423D7CAC.A * 3.0) * v31) + (float)(stru_1423D7CAC.B * 2.0)) * v31;
-    v33 = (float)((float)((float)((float)((float)(stru_1423D7CAC.A * v31) + stru_1423D7CAC.B) * v31) + stru_1423D7CAC.C)
-                * v31)
+      v30 = 0.0;
+    if ( v30 >= stru_1423D7CAC.mDuration )
+      v30 = stru_1423D7CAC.mDuration;
+    stru_1423D7CAC.mParameter = v30;
+    v31 = (float)((float)((float)(stru_1423D7CAC.A * 3.0) * v30) + (float)(stru_1423D7CAC.B * 2.0)) * v30;
+    v32 = (float)((float)((float)((float)((float)(stru_1423D7CAC.A * v30) + stru_1423D7CAC.B) * v30) + stru_1423D7CAC.C)
+                * v30)
         + stru_1423D7CAC.D;
-    v34 = stru_1423D7CF8.mParameter + dt;
-    stru_1423D7CAC.v0 = v32 + stru_1423D7CAC.C;
-    stru_1423D7CAC.p0 = v33;
+    v33 = stru_1423D7CF8.mParameter + dt;
+    stru_1423D7CAC.v0 = v31 + stru_1423D7CAC.C;
+    stru_1423D7CAC.p0 = v32;
     if ( (float)(stru_1423D7CF8.mParameter + dt) <= 0.0 )
-      v34 = 0.0;
-    if ( v34 >= stru_1423D7CF8.mDuration )
-      v34 = stru_1423D7CF8.mDuration;
-    stru_1423D7CF8.mParameter = v34;
-    v35 = (float)((float)((float)(stru_1423D7CF8.A * 3.0) * v34) + (float)(stru_1423D7CF8.B * 2.0)) * v34;
-    v9 = (float)((float)((float)((float)((float)(stru_1423D7CF8.A * v34) + stru_1423D7CF8.B) * v34) + stru_1423D7CF8.C)
-               * v34)
-       + stru_1423D7CF8.D;
-    v36 = stru_1423D7D44.mParameter + dt;
-    stru_1423D7CF8.v0 = v35 + stru_1423D7CF8.C;
-    stru_1423D7CF8.p0 = v9;
+      v33 = 0.0;
+    if ( v33 >= stru_1423D7CF8.mDuration )
+      v33 = stru_1423D7CF8.mDuration;
+    stru_1423D7CF8.mParameter = v33;
+    v34 = (float)((float)((float)(stru_1423D7CF8.A * 3.0) * v33) + (float)(stru_1423D7CF8.B * 2.0)) * v33;
+    mNearRange = (float)((float)((float)((float)((float)(stru_1423D7CF8.A * v33) + stru_1423D7CF8.B) * v33)
+                               + stru_1423D7CF8.C)
+                       * v33)
+               + stru_1423D7CF8.D;
+    v35 = stru_1423D7D44.mParameter + dt;
+    stru_1423D7CF8.v0 = v34 + stru_1423D7CF8.C;
+    stru_1423D7CF8.p0 = mNearRange;
     if ( (float)(stru_1423D7D44.mParameter + dt) <= 0.0 )
-      v36 = 0.0;
-    if ( v36 >= stru_1423D7D44.mDuration )
-      v36 = stru_1423D7D44.mDuration;
-    stru_1423D7D44.mParameter = v36;
-    v37 = (float)((float)((float)(stru_1423D7D44.A * 3.0) * v36) + (float)(stru_1423D7D44.B * 2.0)) * v36;
-    v10 = (float)((float)((float)((float)((float)(stru_1423D7D44.A * v36) + stru_1423D7D44.B) * v36) + stru_1423D7D44.C)
-                * v36)
-        + stru_1423D7D44.D;
-    v38 = stru_1423D7D90.mParameter + dt;
-    stru_1423D7D44.v0 = v37 + stru_1423D7D44.C;
-    stru_1423D7D44.p0 = v10;
+      v35 = 0.0;
+    if ( v35 >= stru_1423D7D44.mDuration )
+      v35 = stru_1423D7D44.mDuration;
+    stru_1423D7D44.mParameter = v35;
+    v36 = (float)((float)((float)(stru_1423D7D44.A * 3.0) * v35) + (float)(stru_1423D7D44.B * 2.0)) * v35;
+    mNearBlurRadius = (float)((float)((float)((float)((float)(stru_1423D7D44.A * v35) + stru_1423D7D44.B) * v35)
+                                    + stru_1423D7D44.C)
+                            * v35)
+                    + stru_1423D7D44.D;
+    v37 = stru_1423D7D90.mParameter + dt;
+    stru_1423D7D44.v0 = v36 + stru_1423D7D44.C;
+    stru_1423D7D44.p0 = mNearBlurRadius;
     if ( (float)(stru_1423D7D90.mParameter + dt) <= 0.0 )
-      v38 = 0.0;
-    if ( v38 >= stru_1423D7D90.mDuration )
-      v38 = stru_1423D7D90.mDuration;
-    stru_1423D7D90.mParameter = v38;
-    v39 = (float)((float)((float)(stru_1423D7D90.A * 3.0) * v38) + (float)(stru_1423D7D90.B * 2.0)) * v38;
-    v11 = (float)((float)((float)((float)((float)(stru_1423D7D90.A * v38) + stru_1423D7D90.B) * v38) + stru_1423D7D90.C)
-                * v38)
-        + stru_1423D7D90.D;
-    v40 = stru_1423D7DDC.mParameter + dt;
-    stru_1423D7D90.v0 = v39 + stru_1423D7D90.C;
-    stru_1423D7D90.p0 = v11;
+      v37 = 0.0;
+    if ( v37 >= stru_1423D7D90.mDuration )
+      v37 = stru_1423D7D90.mDuration;
+    stru_1423D7D90.mParameter = v37;
+    v38 = (float)((float)((float)(stru_1423D7D90.A * 3.0) * v37) + (float)(stru_1423D7D90.B * 2.0)) * v37;
+    mFarRange = (float)((float)((float)((float)((float)(stru_1423D7D90.A * v37) + stru_1423D7D90.B) * v37)
+                              + stru_1423D7D90.C)
+                      * v37)
+              + stru_1423D7D90.D;
+    v39 = stru_1423D7DDC.mParameter + dt;
+    stru_1423D7D90.v0 = v38 + stru_1423D7D90.C;
+    stru_1423D7D90.p0 = mFarRange;
     if ( (float)(stru_1423D7DDC.mParameter + dt) <= 0.0 )
-      v40 = 0.0;
-    if ( v40 >= stru_1423D7DDC.mDuration )
-      v40 = stru_1423D7DDC.mDuration;
-    stru_1423D7DDC.mParameter = v40;
-    UFG::GameCameraComponent::mDofFocusDist.p1 = v30;
-    v12 = (float)((float)((float)((float)((float)(stru_1423D7DDC.A * v40) + stru_1423D7DDC.B) * v40) + stru_1423D7DDC.C)
-                * v40)
-        + stru_1423D7DDC.D;
-    stru_1423D7DDC.v0 = (float)((float)((float)((float)(stru_1423D7DDC.A * 3.0) * v40) + (float)(stru_1423D7DDC.B * 2.0))
-                              * v40)
+      v39 = 0.0;
+    if ( v39 >= stru_1423D7DDC.mDuration )
+      v39 = stru_1423D7DDC.mDuration;
+    stru_1423D7DDC.mParameter = v39;
+    UFG::GameCameraComponent::mDofFocusDist.p1 = v29;
+    mFarBlurRadius = (float)((float)((float)((float)((float)(stru_1423D7DDC.A * v39) + stru_1423D7DDC.B) * v39)
+                                   + stru_1423D7DDC.C)
+                           * v39)
+                   + stru_1423D7DDC.D;
+    stru_1423D7DDC.v0 = (float)((float)((float)((float)(stru_1423D7DDC.A * 3.0) * v39) + (float)(stru_1423D7DDC.B * 2.0))
+                              * v39)
                       + stru_1423D7DDC.C;
-    stru_1423D7DDC.p0 = (float)((float)((float)((float)((float)(stru_1423D7DDC.A * v40) + stru_1423D7DDC.B) * v40)
-                                      + stru_1423D7DDC.C)
-                              * v40)
-                      + stru_1423D7DDC.D;
+    stru_1423D7DDC.p0 = mFarBlurRadius;
     UFG::HomerCubic<float>::MakeCoeffs(&UFG::GameCameraComponent::mDofFocusDist);
-    v8 = v33 * 2.0;
+    mInFocusRange = v32 * 2.0;
   }
-  v41 = 0;
-  v42 = UFG::GameCameraComponent::mDofOverrideParams;
-  while ( !*v42 )
+  v40 = 0;
+  v41 = UFG::GameCameraComponent::mDofOverrideParams;
+  while ( !*v41 )
   {
-    v42 += 24;
-    ++v41;
-    if ( (signed __int64)v42 >= (signed __int64)&UI_HASH_SCREEN_PUSHED_7 )
+    v41 += 24;
+    ++v40;
+    if ( (__int64)v41 >= (__int64)&UI_HASH_SCREEN_PUSHED_7 )
       goto LABEL_46;
   }
-  v43 = (float *)&UFG::GameCameraComponent::mDofOverrideParams[24 * v41];
-  if ( v43 )
+  v42 = (float *)&UFG::GameCameraComponent::mDofOverrideParams[24 * v40];
+  if ( v42 )
   {
-    v8 = v43[1];
-    v9 = v43[2];
-    v10 = v43[4];
-    v11 = v43[3];
-    v12 = v43[5];
+    mInFocusRange = v42[1];
+    mNearRange = v42[2];
+    mNearBlurRadius = v42[4];
+    mFarRange = v42[3];
+    mFarBlurRadius = v42[5];
   }
 LABEL_46:
-  v44 = &UFG::trDofFocusDistanceDurationShrink;
-  v45 = 0.0 / UFG::GameCameraComponent::mDofFocusDist.mDuration;
+  v43 = &UFG::trDofFocusDistanceDurationShrink;
+  v44 = 0.0 / UFG::GameCameraComponent::mDofFocusDist.mDuration;
   if ( UFG::GameCameraComponent::mDofFocusDist.p1 > UFG::GameCameraComponent::mDofFocusDist.p0 )
-    v44 = &UFG::trDofFocusDistanceDurationGrow;
-  v46 = *v44;
-  if ( *v44 <= v13 )
-    v46 = v13;
-  UFG::GameCameraComponent::mDofFocusDist.mDuration = v46;
-  v47 = v45 * v46;
-  if ( v46 > v13 )
-    v13 = v46;
-  v48 = v13 * v13;
-  v49 = v47 + dt;
-  v50 = (float)((float)((float)(UFG::GameCameraComponent::mDofFocusDist.v1 + UFG::GameCameraComponent::mDofFocusDist.v0)
+    v43 = &UFG::trDofFocusDistanceDurationGrow;
+  v45 = *v43;
+  if ( *v43 <= v13 )
+    v45 = v13;
+  UFG::GameCameraComponent::mDofFocusDist.mDuration = v45;
+  v46 = v44 * v45;
+  if ( v45 > v13 )
+    v13 = v45;
+  v47 = v13 * v13;
+  v48 = v46 + dt;
+  v49 = (float)((float)((float)(UFG::GameCameraComponent::mDofFocusDist.v1 + UFG::GameCameraComponent::mDofFocusDist.v0)
                       * v13)
               + (float)((float)(UFG::GameCameraComponent::mDofFocusDist.p0 - UFG::GameCameraComponent::mDofFocusDist.p1)
                       * 2.0))
       / (float)((float)(v13 * v13) * v13);
-  UFG::GameCameraComponent::mDofFocusDist.A = (float)((float)((float)(UFG::GameCameraComponent::mDofFocusDist.v1
-                                                                    + UFG::GameCameraComponent::mDofFocusDist.v0)
-                                                            * v13)
-                                                    + (float)((float)(UFG::GameCameraComponent::mDofFocusDist.p0
-                                                                    - UFG::GameCameraComponent::mDofFocusDist.p1)
-                                                            * 2.0))
-                                            / (float)((float)(v13 * v13) * v13);
-  v51 = (float)((float)(UFG::GameCameraComponent::mDofFocusDist.v0 * 2.0) + UFG::GameCameraComponent::mDofFocusDist.v1)
+  UFG::GameCameraComponent::mDofFocusDist.A = v49;
+  v50 = (float)((float)(UFG::GameCameraComponent::mDofFocusDist.v0 * 2.0) + UFG::GameCameraComponent::mDofFocusDist.v1)
       * v13;
-  v52 = UFG::GameCameraComponent::mDofFocusDist.v0;
+  v51 = UFG::GameCameraComponent::mDofFocusDist.v0;
   UFG::GameCameraComponent::mDofFocusDist.C = UFG::GameCameraComponent::mDofFocusDist.v0;
-  v53 = (float)((float)((float)(UFG::GameCameraComponent::mDofFocusDist.p1 - UFG::GameCameraComponent::mDofFocusDist.p0)
+  v52 = (float)((float)((float)(UFG::GameCameraComponent::mDofFocusDist.p1 - UFG::GameCameraComponent::mDofFocusDist.p0)
                       * 3.0)
-              - v51)
-      / v48;
+              - v50)
+      / v47;
   UFG::GameCameraComponent::mDofFocusDist.D = UFG::GameCameraComponent::mDofFocusDist.p0;
-  UFG::GameCameraComponent::mDofFocusDist.B = (float)((float)((float)(UFG::GameCameraComponent::mDofFocusDist.p1
-                                                                    - UFG::GameCameraComponent::mDofFocusDist.p0)
-                                                            * 3.0)
-                                                    - v51)
-                                            / v48;
-  if ( v49 <= 0.0 )
-    v49 = 0.0;
-  if ( v49 >= v46 )
-    v49 = v46;
-  UFG::GameCameraComponent::mDofFocusDist.mParameter = v49;
-  UFG::GameCameraComponent::mDofFocusDist.v0 = (float)((float)((float)((float)(v50 * 3.0) * v49) + (float)(v53 * 2.0))
-                                                     * v49)
+  UFG::GameCameraComponent::mDofFocusDist.B = v52;
+  if ( v48 <= 0.0 )
+    v48 = 0.0;
+  if ( v48 >= v45 )
+    v48 = v45;
+  UFG::GameCameraComponent::mDofFocusDist.mParameter = v48;
+  UFG::GameCameraComponent::mDofFocusDist.v0 = (float)((float)((float)((float)(v49 * 3.0) * v48) + (float)(v52 * 2.0))
+                                                     * v48)
                                              + UFG::GameCameraComponent::mDofFocusDist.v0;
-  UFG::GameCameraComponent::mDofFocusDist.p0 = (float)((float)((float)((float)((float)(v50 * v49) + v53) * v49) + v52)
-                                                     * v49)
+  UFG::GameCameraComponent::mDofFocusDist.p0 = (float)((float)((float)((float)((float)(v49 * v48) + v52) * v48) + v51)
+                                                     * v48)
                                              + UFG::GameCameraComponent::mDofFocusDist.p0;
-  if ( v8 <= UFG::GameCameraComponent::mDofInFocusRange )
-    v54 = UFG::trDofInFocusRangeRateShrink;
+  if ( mInFocusRange <= UFG::GameCameraComponent::mDofInFocusRange )
+    v53 = UFG::trDofInFocusRangeRateShrink;
   else
-    v54 = UFG::trDofInFocusRangeRateGrow;
+    v53 = UFG::trDofInFocusRangeRateGrow;
   UFG::qApproach(
     &UFG::GameCameraComponent::mDofInFocusRange,
-    v8,
-    COERCE_FLOAT(COERCE_UNSIGNED_INT(UFG::GameCameraComponent::mDofInFocusRange - v8) & _xmm) * v54,
+    mInFocusRange,
+    COERCE_FLOAT(COERCE_UNSIGNED_INT(UFG::GameCameraComponent::mDofInFocusRange - mInFocusRange) & _xmm) * v53,
     dt);
   UFG::qApproach(
     &UFG::GameCameraComponent::mDofNearRange,
-    v9,
-    COERCE_FLOAT(COERCE_UNSIGNED_INT(UFG::GameCameraComponent::mDofNearRange - v9) & _xmm) * UFG::trDofNearRangeRate,
+    mNearRange,
+    COERCE_FLOAT(COERCE_UNSIGNED_INT(UFG::GameCameraComponent::mDofNearRange - mNearRange) & _xmm)
+  * UFG::trDofNearRangeRate,
     dt);
   UFG::qApproach(
     &UFG::GameCameraComponent::mDofNearBlur,
-    v10,
-    COERCE_FLOAT(COERCE_UNSIGNED_INT(UFG::GameCameraComponent::mDofNearBlur - v10) & _xmm) * UFG::trDofNearBlurRate,
+    mNearBlurRadius,
+    COERCE_FLOAT(COERCE_UNSIGNED_INT(UFG::GameCameraComponent::mDofNearBlur - mNearBlurRadius) & _xmm)
+  * UFG::trDofNearBlurRate,
     dt);
   UFG::qApproach(
     &UFG::GameCameraComponent::mDofFarRange,
-    v11,
-    COERCE_FLOAT(COERCE_UNSIGNED_INT(UFG::GameCameraComponent::mDofFarRange - v11) & _xmm) * UFG::trDofFarRangeRate,
+    mFarRange,
+    COERCE_FLOAT(COERCE_UNSIGNED_INT(UFG::GameCameraComponent::mDofFarRange - mFarRange) & _xmm)
+  * UFG::trDofFarRangeRate,
     dt);
   UFG::qApproach(
     &UFG::GameCameraComponent::mDofFarBlur,
-    v12,
-    COERCE_FLOAT(COERCE_UNSIGNED_INT(UFG::GameCameraComponent::mDofFarBlur - v12) & _xmm) * UFG::trDofFarBlurRate,
+    mFarBlurRadius,
+    COERCE_FLOAT(COERCE_UNSIGNED_INT(UFG::GameCameraComponent::mDofFarBlur - mFarBlurRadius) & _xmm)
+  * UFG::trDofFarBlurRate,
     dt);
-  if ( v5 )
+  if ( snap )
   {
     UFG::GameCameraComponent::mDofFocusDist.p0 = UFG::GameCameraComponent::mDofFocusDist.p1;
     UFG::GameCameraComponent::mDofFocusDist.v0 = UFG::GameCameraComponent::mDofFocusDist.v1;
     UFG::HomerCubic<float>::MakeCoeffs(&UFG::GameCameraComponent::mDofFocusDist);
     UFG::GameCameraComponent::mDofFocusDist.mParameter = 0.0;
-    UFG::GameCameraComponent::mDofInFocusRange = v8;
-    UFG::GameCameraComponent::mDofNearRange = v9;
-    UFG::GameCameraComponent::mDofNearBlur = v10;
-    UFG::GameCameraComponent::mDofFarRange = v11;
-    UFG::GameCameraComponent::mDofFarBlur = v12;
+    UFG::GameCameraComponent::mDofInFocusRange = mInFocusRange;
+    UFG::GameCameraComponent::mDofNearRange = mNearRange;
+    UFG::GameCameraComponent::mDofNearBlur = mNearBlurRadius;
+    UFG::GameCameraComponent::mDofFarRange = mFarRange;
+    UFG::GameCameraComponent::mDofFarBlur = mFarBlurRadius;
   }
-  v55 = v4->mDofNoiseAmplitude;
-  v56 = 1.0 - (float)(dt * v4->mDofNoiseAmplitudeDecay);
-  if ( v56 < 0.0 )
-    v56 = 0.0;
-  v57 = v56 * v55;
-  v4->mDofNoiseAmplitude = v57;
-  if ( v57 <= 0.0099999998 )
+  mDofNoiseAmplitude = this->mDofNoiseAmplitude;
+  v55 = 1.0 - (float)(dt * this->mDofNoiseAmplitudeDecay);
+  if ( v55 < 0.0 )
+    v55 = 0.0;
+  v56 = v55 * mDofNoiseAmplitude;
+  this->mDofNoiseAmplitude = v56;
+  if ( v56 <= 0.0099999998 )
   {
-    if ( v55 > 0.0099999998 )
-      *(_QWORD *)&v4->mDofNoiseTimer = 0i64;
+    if ( mDofNoiseAmplitude > 0.0099999998 )
+      *(_QWORD *)&this->mDofNoiseTimer = 0i64;
   }
   else
   {
-    v4->mDofNoiseTimer = v7 + v4->mDofNoiseTimer;
+    this->mDofNoiseTimer = dt + this->mDofNoiseTimer;
   }
   Render::DepthOfField::Focus::Focus(&focus);
-  v58 = UFG::GameCameraComponent::mDofFocusDist.p0;
-  if ( 0.0 != v4->mDofNoiseAmplitude )
-    v58 = v58 + (float)(UFG::qNoise<float,float>::GetValue(&v4->mDofNoise, v4->mDofNoiseTimer) * v4->mDofNoiseAmplitude);
-  if ( v58 < 0.0099999998 )
-    v58 = FLOAT_0_0099999998;
-  focus.mFocalDistance = v58;
+  p0 = UFG::GameCameraComponent::mDofFocusDist.p0;
+  if ( this->mDofNoiseAmplitude != 0.0 )
+    p0 = p0
+       + (float)(UFG::qNoise<float,float>::GetValue(
+                   &this->mDofNoise,
+                   COERCE_DOUBLE((unsigned __int64)LODWORD(this->mDofNoiseTimer)))
+               * this->mDofNoiseAmplitude);
+  if ( p0 < 0.0099999998 )
+    p0 = FLOAT_0_0099999998;
+  focus.mFocalDistance = p0;
   if ( UFG::GameCameraComponent::mDofInFocusRange >= 0.0099999998 )
     focus.mInFocusRange = UFG::GameCameraComponent::mDofInFocusRange;
   else
@@ -1315,7 +1288,7 @@ LABEL_46:
     focus.mFarBlurRadius = UFG::GameCameraComponent::mDofFarBlur;
   else
     focus.mFarBlurRadius = 0.0;
-  Render::DepthOfField::Focus::Set(&v4->mCamera.mDepthOfFieldFocus, &focus);
+  Render::DepthOfField::Focus::Set(&this->mCamera.mDepthOfFieldFocus, &focus);
 }
 
 // File Line: 922
@@ -1334,7 +1307,14 @@ void UFG::GameCameraComponent::StopDynamicDof(void)
 
 // File Line: 934
 // RVA: 0x3CC350
-void __fastcall UFG::GameCameraComponent::SetDynamicDOFParam(UFG::GameCameraComponent::DynamicDofParamType dofParamType, float duration_high, float deviation_high, float value_high, float duration_low, float deviation_low, float value_low)
+void __fastcall UFG::GameCameraComponent::SetDynamicDOFParam(
+        UFG::GameCameraComponent::DynamicDofParamType dofParamType,
+        float duration_high,
+        float deviation_high,
+        float value_high,
+        float duration_low,
+        float deviation_low,
+        float value_low)
 {
   UFG::GameCameraComponent::DynamicDofParam *v7; // rax
 
@@ -1350,426 +1330,399 @@ void __fastcall UFG::GameCameraComponent::SetDynamicDOFParam(UFG::GameCameraComp
 
 // File Line: 981
 // RVA: 0x3C2160
-UFG::qNode<UFG::ShapeCasterCollector::HitInfo,UFG::ShapeCasterCollector::HitInfo> *__fastcall UFG::GameCameraComponent::FindClosestCollidableHit(UFG::GameCameraComponent *this, UFG::ShapeCasterCollector *collector, UFG::qVector3 *startPos, float safeRadius)
+UFG::ShapeCasterCollector::HitInfo *__fastcall UFG::GameCameraComponent::FindClosestCollidableHit(
+        UFG::GameCameraComponent *this,
+        UFG::ShapeCasterCollector *collector,
+        UFG::qVector3 *startPos,
+        float safeRadius)
 {
-  UFG::qNode<UFG::ShapeCasterCollector::HitInfo,UFG::ShapeCasterCollector::HitInfo> *v4; // rbx
-  UFG::qList<UFG::ShapeCasterCollector::HitInfo,UFG::ShapeCasterCollector::HitInfo,1,0> *v5; // rdi
-  UFG::qVector3 *v6; // rsi
-  UFG::ShapeCasterCollector *v7; // r15
-  UFG::GameCameraComponent *v8; // r14
+  UFG::qNode<UFG::ShapeCasterCollector::HitInfo,UFG::ShapeCasterCollector::HitInfo> *mNext; // rbx
+  UFG::qList<UFG::ShapeCasterCollector::HitInfo,UFG::ShapeCasterCollector::HitInfo,1,0> *p_mHitList; // rdi
   float v10; // xmm6_4
   UFG::qNode<UFG::ShapeCasterCollector::HitInfo,UFG::ShapeCasterCollector::HitInfo> *v11; // rbp
-  float v12; // xmm1_4
-  float v13; // xmm0_4
-  float v14; // xmm1_4
-  float v15; // xmm2_4
-  float v16; // xmm0_4
-  float v17; // xmm2_4
+  float mRadius; // xmm0_4
+  float v13; // xmm1_4
+  float v14; // xmm2_4
+  float v15; // xmm0_4
+  float v16; // xmm2_4
 
-  v4 = collector->mHitList.mNode.mNext;
-  v5 = &collector->mHitList;
-  v6 = startPos;
-  v7 = collector;
-  v8 = this;
-  if ( v4 == (UFG::qNode<UFG::ShapeCasterCollector::HitInfo,UFG::ShapeCasterCollector::HitInfo> *)&collector->mHitList )
+  mNext = collector->mHitList.mNode.mNext;
+  p_mHitList = &collector->mHitList;
+  if ( mNext == (UFG::qNode<UFG::ShapeCasterCollector::HitInfo,UFG::ShapeCasterCollector::HitInfo> *)&collector->mHitList )
     return 0i64;
   v10 = FLOAT_1_0e12;
   v11 = 0i64;
   do
   {
-    if ( !UFG::GameCameraComponent::ShouldPassThru(v8, (UFG::ShapeCasterCollector::HitInfo *)v4, v6) )
+    if ( !UFG::GameCameraComponent::ShouldPassThru(this, (UFG::ShapeCasterCollector::HitInfo *)mNext, startPos) )
     {
-      v12 = v7->mRadius;
-      v13 = v12;
-      v14 = (float)((float)(v12 * *((float *)&v4[2].mPrev + 1)) + *(float *)&v4[1].mNext) - v6->z;
-      v15 = (float)((float)(v7->mRadius * *(float *)&v4[2].mPrev) + *((float *)&v4[1].mPrev + 1)) - v6->y;
-      v16 = (float)((float)(v13 * *((float *)&v4[1].mNext + 1)) + *(float *)&v4[1].mPrev) - v6->x;
-      v17 = (float)((float)(v15 * v15) + (float)(v16 * v16)) + (float)(v14 * v14);
-      if ( v17 >= (float)(safeRadius * safeRadius) && v17 < v10 )
+      mRadius = collector->mRadius;
+      v13 = (float)((float)(mRadius * *((float *)&mNext[2].mPrev + 1)) + *(float *)&mNext[1].mNext) - startPos->z;
+      v14 = (float)((float)(mRadius * *(float *)&mNext[2].mPrev) + *((float *)&mNext[1].mPrev + 1)) - startPos->y;
+      v15 = (float)((float)(mRadius * *((float *)&mNext[1].mNext + 1)) + *(float *)&mNext[1].mPrev) - startPos->x;
+      v16 = (float)((float)(v14 * v14) + (float)(v15 * v15)) + (float)(v13 * v13);
+      if ( v16 >= (float)(safeRadius * safeRadius) && v16 < v10 )
       {
-        v11 = v4;
-        v10 = v17;
+        v11 = mNext;
+        v10 = v16;
       }
     }
-    v4 = v4->mNext;
+    mNext = mNext->mNext;
   }
-  while ( v4 != (UFG::qNode<UFG::ShapeCasterCollector::HitInfo,UFG::ShapeCasterCollector::HitInfo> *)v5 );
-  return v11;
+  while ( mNext != (UFG::qNode<UFG::ShapeCasterCollector::HitInfo,UFG::ShapeCasterCollector::HitInfo> *)p_mHitList );
+  return (UFG::ShapeCasterCollector::HitInfo *)v11;
 }
 
 // File Line: 1051
 // RVA: 0x3C0C20
-float __fastcall UFG::GameCameraComponent::ComputeNearOffset(UFG::GameCameraComponent *this, UFG::qVector3 *eye, UFG::qVector3 *look, float dispFov)
+float __fastcall UFG::GameCameraComponent::ComputeNearOffset(
+        UFG::GameCameraComponent *this,
+        UFG::qVector3 *eye,
+        UFG::qVector3 *look,
+        float dispFov)
 {
-  UFG::qVector3 *v4; // rdi
-  UFG::qVector3 *v5; // rbx
-  UFG::GameCameraComponent *v6; // r14
   float v8; // xmm15_4
   float v9; // xmm6_4
-  float v10; // xmm11_4
-  __m128 v11; // xmm10
+  float x; // xmm11_4
+  __m128 y_low; // xmm10
   UFG::CharacterSubjectComponent *v12; // rdi
   float v13; // xmm8_4
   float v14; // xmm13_4
   float v15; // xmm7_4
-  float v16; // xmm5_4
+  float y; // xmm5_4
   float v17; // xmm11_4
   __m128 v18; // xmm2
   float v19; // xmm3_4
   float v20; // xmm10_4
   float v21; // xmm11_4
-  __m128 v22; // xmm12
-  float v23; // xmm6_4
-  float v24; // xmm1_4
-  float v25; // xmm3_4
-  float v26; // xmm6_4
+  __m128 z_low; // xmm12
+  float v23; // xmm3_4
+  float v24; // xmm0_4
+  char v25; // r13
+  __m128 v26; // xmm2
   float v27; // xmm0_4
-  char v28; // r13
-  __m128 v29; // xmm2
-  float v30; // xmm0_4
-  float v31; // xmm1_4
-  float v32; // xmm2_4
-  float v33; // xmm7_4
-  char v34; // r15
-  __m128 v35; // xmm2
-  float v36; // xmm0_4
-  __m128 v37; // xmm4
-  float v38; // xmm13_4
-  float v39; // xmm15_4
-  __m128 v40; // xmm2
-  float v41; // xmm5_4
-  float v42; // xmm6_4
+  float v28; // xmm1_4
+  float v29; // xmm2_4
+  float v30; // xmm7_4
+  char v31; // r15
+  __m128 v32; // xmm2
+  float DisplayAspectRatio; // xmm0_4
+  __m128 v34; // xmm4
+  float v35; // xmm13_4
+  float v36; // xmm15_4
+  __m128 v37; // xmm2
+  float v38; // xmm5_4
+  float v39; // xmm6_4
+  float v40; // xmm3_4
+  float v41; // xmm1_4
+  float v42; // xmm0_4
   float v43; // xmm3_4
-  float v44; // xmm1_4
-  float v45; // xmm0_4
-  float v46; // xmm3_4
+  float v44; // xmm0_4
+  char v45; // r12
+  __m128 v46; // xmm3
   float v47; // xmm0_4
-  char v48; // r12
-  __m128 v49; // xmm3
-  float v50; // xmm0_4
-  float v51; // xmm6_4
-  unsigned __int16 v52; // dx
-  UFG::CharacterSubjectComponent *v53; // rax
-  __int64 v54; // rax
-  bool v55; // zf
-  float v56; // xmm1_4
-  float v57; // xmm2_4
-  float v58; // xmm1_4
-  float v59; // xmm0_4
-  __m128 v60; // xmm2
-  float v61; // xmm6_4
-  Render::DebugDrawContext *v62; // rax
-  UFG::qColour *v63; // rsi
-  float v64; // xmm7_4
-  float v65; // xmm13_4
-  float v66; // xmm14_4
-  Render::DebugDrawContext *v67; // rdi
+  float v48; // xmm6_4
+  signed __int16 m_Flags; // dx
+  UFG::CharacterSubjectComponent *ComponentOfTypeHK; // rax
+  __int64 v51; // rax
+  bool v52; // zf
+  float v53; // xmm1_4
+  float v54; // xmm2_4
+  float v55; // xmm1_4
+  float z; // xmm0_4
+  __m128 v57; // xmm2
+  float v58; // xmm6_4
+  Render::DebugDrawContext *Context; // rax
+  UFG::qColour *v60; // rsi
+  float v61; // xmm7_4
+  float v62; // xmm13_4
+  float v63; // xmm14_4
+  Render::DebugDrawContext *v64; // rdi
+  UFG::qColour *v65; // r9
+  float v66; // xmm0_4
+  float v67; // xmm1_4
   UFG::qColour *v68; // r9
   float v69; // xmm0_4
   float v70; // xmm1_4
-  UFG::qColour *v71; // r9
-  float v72; // xmm0_4
-  float v73; // xmm1_4
-  float v74; // xmm11_4
-  float v75; // xmm10_4
-  float v76; // xmm12_4
-  UFG::qColour *v77; // r9
-  float v78; // xmm1_4
-  float v79; // xmm0_4
-  UFG::qVector3 rayEnd; // [rsp+40h] [rbp-C0h]
-  UFG::qVector3 closest_point; // [rsp+50h] [rbp-B0h]
-  float v82; // [rsp+60h] [rbp-A0h]
-  float v83; // [rsp+64h] [rbp-9Ch]
-  float v84; // [rsp+68h] [rbp-98h]
-  float v85; // [rsp+6Ch] [rbp-94h]
-  float v86; // [rsp+70h] [rbp-90h]
-  float v87; // [rsp+74h] [rbp-8Ch]
-  float v88; // [rsp+78h] [rbp-88h]
-  UFG::qVector3 lA0; // [rsp+80h] [rbp-80h]
-  UFG::RayCastData data; // [rsp+90h] [rbp-70h]
-  UFG::RayCastData v91; // [rsp+170h] [rbp+70h]
-  UFG::RayCastData v92; // [rsp+250h] [rbp+150h]
-  float v93; // [rsp+418h] [rbp+318h]
+  float v71; // xmm11_4
+  float v72; // xmm10_4
+  float v73; // xmm12_4
+  UFG::qColour *v74; // r9
+  float v75; // xmm1_4
+  float v76; // xmm0_4
+  UFG::qVector3 rayEnd; // [rsp+40h] [rbp-C0h] BYREF
+  UFG::qVector3 closest_point; // [rsp+50h] [rbp-B0h] BYREF
+  float v79; // [rsp+60h] [rbp-A0h]
+  float v80; // [rsp+64h] [rbp-9Ch]
+  float v81; // [rsp+68h] [rbp-98h]
+  float v82; // [rsp+6Ch] [rbp-94h]
+  float v83; // [rsp+70h] [rbp-90h]
+  float v84; // [rsp+74h] [rbp-8Ch]
+  float v85; // [rsp+78h] [rbp-88h]
+  UFG::qVector3 lA0; // [rsp+80h] [rbp-80h] BYREF
+  UFG::RayCastData data; // [rsp+90h] [rbp-70h] BYREF
+  UFG::RayCastData v88; // [rsp+170h] [rbp+70h] BYREF
+  UFG::RayCastData v89; // [rsp+250h] [rbp+150h] BYREF
+  float v90; // [rsp+418h] [rbp+318h]
 
-  v4 = look;
-  v5 = eye;
-  v6 = this;
   if ( !UFG::tbCollisionNearOffsetCasts )
     return 0.0;
-  v93 = dispFov * 0.5;
+  v90 = dispFov * 0.5;
   v8 = cosf(dispFov * 0.5);
   v9 = tanf(dispFov * 0.5);
   UFG::Director::Get();
-  v10 = v4->x;
-  v11 = (__m128)LODWORD(v4->y);
-  v22 = (__m128)LODWORD(v4->z);
+  x = look->x;
+  y_low = (__m128)LODWORD(look->y);
+  z_low = (__m128)LODWORD(look->z);
   v12 = 0i64;
   data.mInput.m_enableShapeCollectionFilter.m_bool = 0;
   data.mOutput.m_hitFraction = 1.0;
   data.mOutput.m_extraInfo = -1;
   data.mOutput.m_shapeKeys[0] = -1;
   v13 = 0.0;
-  v22.m128_f32[0] = v22.m128_f32[0] - v5->z;
+  z_low.m128_f32[0] = z_low.m128_f32[0] - eye->z;
   v14 = UFG::trCollisionNearMargin + UFG::gCameraDefaultNear;
-  v15 = v5->x;
+  v15 = eye->x;
   data.mInput.m_filterInfo = 0;
   data.mInput.m_userData = 0i64;
   data.mOutput.m_shapeKeyIndex = 0;
   data.mOutput.m_rootCollidable = 0i64;
   data.mDebugName = 0i64;
-  v16 = v5->y;
-  v17 = v10 - v15;
-  v11.m128_f32[0] = v11.m128_f32[0] - v16;
-  v88 = UFG::trCollisionNearMargin + UFG::gCameraDefaultNear;
-  v18 = v11;
-  v18.m128_f32[0] = (float)((float)(v11.m128_f32[0] * v11.m128_f32[0]) + (float)(v17 * v17))
-                  + (float)(v22.m128_f32[0] * v22.m128_f32[0]);
-  v19 = (float)(UFG::trCollisionNearMargin + UFG::gCameraDefaultNear) / COERCE_FLOAT(_mm_sqrt_ps(v18));
-  v20 = v11.m128_f32[0] * v19;
+  y = eye->y;
+  v17 = x - v15;
+  y_low.m128_f32[0] = y_low.m128_f32[0] - y;
+  v85 = UFG::trCollisionNearMargin + UFG::gCameraDefaultNear;
+  v18 = y_low;
+  v18.m128_f32[0] = (float)((float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(v17 * v17))
+                  + (float)(z_low.m128_f32[0] * z_low.m128_f32[0]);
+  v19 = (float)(UFG::trCollisionNearMargin + UFG::gCameraDefaultNear) / _mm_sqrt_ps(v18).m128_f32[0];
+  v20 = y_low.m128_f32[0] * v19;
   v21 = v17 * v19;
-  v22.m128_f32[0] = v22.m128_f32[0] * v19;
-  v82 = (float)(UFG::trCollisionNearMargin + UFG::gCameraDefaultNear) * v9;
-  v23 = v82
+  z_low.m128_f32[0] = z_low.m128_f32[0] * v19;
+  v79 = (float)(UFG::trCollisionNearMargin + UFG::gCameraDefaultNear) * v9;
+  v23 = v79
       / fsqrt((float)(COERCE_FLOAT(LODWORD(v21) ^ _xmm[0]) * COERCE_FLOAT(LODWORD(v21) ^ _xmm[0])) + (float)(v20 * v20));
-  v24 = v23;
-  v25 = v23;
-  v26 = v23 * 0.0;
-  v86 = v26;
-  v83 = v24 * v20;
-  v84 = v25 * COERCE_FLOAT(LODWORD(v21) ^ _xmm[0]);
+  v83 = v23 * 0.0;
+  v80 = v23 * v20;
+  v81 = v23 * COERCE_FLOAT(LODWORD(v21) ^ _xmm[0]);
   data.mCollisionModelName.mUID = -1;
-  v27 = (float)(v22.m128_f32[0] + v5->z) + v26;
-  rayEnd.x = (float)(v15 + v21) + (float)(v24 * v20);
-  rayEnd.y = (float)(v16 + v20) + (float)(v25 * COERCE_FLOAT(LODWORD(v21) ^ _xmm[0]));
-  rayEnd.z = v27;
-  UFG::RayCastData::Init(&data, v5, &rayEnd, 0x12u);
-  v28 = UFG::BasePhysicsSystem::CastRay(UFG::BasePhysicsSystem::mInstance, &data);
-  if ( v28 )
+  v24 = (float)(z_low.m128_f32[0] + eye->z) + (float)(v23 * 0.0);
+  rayEnd.x = (float)(v15 + v21) + (float)(v23 * v20);
+  rayEnd.y = (float)(y + v20) + v81;
+  rayEnd.z = v24;
+  UFG::RayCastData::Init(&data, eye, &rayEnd, 0x12u);
+  v25 = UFG::BasePhysicsSystem::CastRay(UFG::BasePhysicsSystem::mInstance, &data);
+  if ( v25 )
   {
-    v29 = (__m128)LODWORD(data.point.y);
-    v29.m128_f32[0] = (float)((float)((float)(data.point.y - v5->y) * (float)(data.point.y - v5->y))
-                            + (float)((float)(data.point.x - v5->x) * (float)(data.point.x - v5->x)))
-                    + (float)((float)(data.point.z - v5->z) * (float)(data.point.z - v5->z));
-    LODWORD(v13) = COERCE_UNSIGNED_INT(v14 - (float)(COERCE_FLOAT(_mm_sqrt_ps(v29)) * v8)) ^ _xmm[0];
+    v26 = (__m128)LODWORD(data.point.y);
+    v26.m128_f32[0] = (float)((float)((float)(data.point.y - eye->y) * (float)(data.point.y - eye->y))
+                            + (float)((float)(data.point.x - eye->x) * (float)(data.point.x - eye->x)))
+                    + (float)((float)(data.point.z - eye->z) * (float)(data.point.z - eye->z));
+    LODWORD(v13) = COERCE_UNSIGNED_INT(v14 - (float)(_mm_sqrt_ps(v26).m128_f32[0] * v8)) ^ _xmm[0];
   }
-  v91.mInput.m_enableShapeCollectionFilter.m_bool = 0;
-  v91.mInput.m_filterInfo = 0;
-  v30 = v21 + v5->x;
-  v31 = v20 + v5->y;
-  v32 = v22.m128_f32[0] + v5->z;
-  v33 = 0.0;
-  v91.mInput.m_userData = 0i64;
-  v91.mOutput.m_hitFraction = 1.0;
-  v91.mOutput.m_extraInfo = -1;
-  v91.mOutput.m_shapeKeyIndex = 0;
-  v91.mOutput.m_shapeKeys[0] = -1;
-  v91.mOutput.m_rootCollidable = 0i64;
-  v91.mDebugName = 0i64;
-  v91.mCollisionModelName.mUID = -1;
-  rayEnd.x = v30 - v83;
-  rayEnd.y = v31 - v84;
-  rayEnd.z = v32 - v26;
-  UFG::RayCastData::Init(&v91, v5, &rayEnd, 0x12u);
-  v34 = UFG::BasePhysicsSystem::CastRay(UFG::BasePhysicsSystem::mInstance, &v91);
-  if ( v34 )
+  v88.mInput.m_enableShapeCollectionFilter.m_bool = 0;
+  v88.mInput.m_filterInfo = 0;
+  v27 = v21 + eye->x;
+  v28 = v20 + eye->y;
+  v29 = z_low.m128_f32[0] + eye->z;
+  v30 = 0.0;
+  v88.mInput.m_userData = 0i64;
+  v88.mOutput.m_hitFraction = 1.0;
+  v88.mOutput.m_extraInfo = -1;
+  v88.mOutput.m_shapeKeyIndex = 0;
+  v88.mOutput.m_shapeKeys[0] = -1;
+  v88.mOutput.m_rootCollidable = 0i64;
+  v88.mDebugName = 0i64;
+  v88.mCollisionModelName.mUID = -1;
+  rayEnd.x = v27 - v80;
+  rayEnd.y = v28 - v81;
+  rayEnd.z = v29 - (float)(v23 * 0.0);
+  UFG::RayCastData::Init(&v88, eye, &rayEnd, 0x12u);
+  v31 = UFG::BasePhysicsSystem::CastRay(UFG::BasePhysicsSystem::mInstance, &v88);
+  if ( v31 )
   {
-    v35 = (__m128)LODWORD(v91.point.y);
-    v35.m128_f32[0] = (float)((float)((float)(v91.point.y - v5->y) * (float)(v91.point.y - v5->y))
-                            + (float)((float)(v91.point.x - v5->x) * (float)(v91.point.x - v5->x)))
-                    + (float)((float)(v91.point.z - v5->z) * (float)(v91.point.z - v5->z));
-    LODWORD(v33) = COERCE_UNSIGNED_INT(v14 - (float)(COERCE_FLOAT(_mm_sqrt_ps(v35)) * v8)) ^ _xmm[0];
+    v32 = (__m128)LODWORD(v88.point.y);
+    v32.m128_f32[0] = (float)((float)((float)(v88.point.y - eye->y) * (float)(v88.point.y - eye->y))
+                            + (float)((float)(v88.point.x - eye->x) * (float)(v88.point.x - eye->x)))
+                    + (float)((float)(v88.point.z - eye->z) * (float)(v88.point.z - eye->z));
+    LODWORD(v30) = COERCE_UNSIGNED_INT(v14 - (float)(_mm_sqrt_ps(v32).m128_f32[0] * v8)) ^ _xmm[0];
   }
-  v36 = Render::GetDisplayAspectRatio();
-  v37 = v22;
-  v38 = 0.0;
-  v39 = 1.0 / v36;
-  v92.mInput.m_enableShapeCollectionFilter.m_bool = 0;
-  v92.mInput.m_filterInfo = 0;
-  v92.mInput.m_userData = 0i64;
-  v37.m128_f32[0] = (float)(v22.m128_f32[0] * COERCE_FLOAT(LODWORD(v83) ^ _xmm[0]))
-                  - (float)(COERCE_FLOAT(LODWORD(v86) ^ _xmm[0]) * v21);
-  v92.mOutput.m_hitFraction = 1.0;
-  v92.mOutput.m_extraInfo = -1;
-  v92.mOutput.m_shapeKeyIndex = 0;
-  v40 = v37;
-  v92.mOutput.m_shapeKeys[0] = -1;
-  v92.mOutput.m_rootCollidable = 0i64;
-  v92.mDebugName = 0i64;
-  v92.mCollisionModelName.mUID = -1;
-  v41 = (float)(COERCE_FLOAT(LODWORD(v86) ^ _xmm[0]) * v20)
-      - (float)(v22.m128_f32[0] * COERCE_FLOAT(LODWORD(v84) ^ _xmm[0]));
-  v42 = (float)(COERCE_FLOAT(LODWORD(v84) ^ _xmm[0]) * v21) - (float)(COERCE_FLOAT(LODWORD(v83) ^ _xmm[0]) * v20);
-  v43 = (float)(1.0 / v36) * v82;
-  v40.m128_f32[0] = (float)((float)(v37.m128_f32[0] * v37.m128_f32[0]) + (float)(v41 * v41)) + (float)(v42 * v42);
-  v44 = v20 + v5->y;
-  LODWORD(v45) = (unsigned __int128)_mm_sqrt_ps(v40);
-  v40.m128_f32[0] = v22.m128_f32[0] + v5->z;
-  v46 = v43 / v45;
-  v82 = v46 * v41;
-  v47 = v21 + v5->x;
-  v85 = v46 * v42;
-  rayEnd.z = v40.m128_f32[0] + (float)(v46 * v42);
-  v87 = v46 * v37.m128_f32[0];
-  rayEnd.x = v47 + (float)(v46 * v41);
-  rayEnd.y = v44 + (float)(v46 * v37.m128_f32[0]);
-  UFG::RayCastData::Init(&v92, v5, &rayEnd, 0x12u);
-  v48 = UFG::BasePhysicsSystem::CastRay(UFG::BasePhysicsSystem::mInstance, &v92);
-  if ( v48 )
+  DisplayAspectRatio = Render::GetDisplayAspectRatio();
+  v34 = z_low;
+  v35 = 0.0;
+  v36 = 1.0 / DisplayAspectRatio;
+  v89.mInput.m_enableShapeCollectionFilter.m_bool = 0;
+  v89.mInput.m_filterInfo = 0;
+  v89.mInput.m_userData = 0i64;
+  v34.m128_f32[0] = (float)(z_low.m128_f32[0] * COERCE_FLOAT(LODWORD(v80) ^ _xmm[0]))
+                  - (float)(COERCE_FLOAT(LODWORD(v83) ^ _xmm[0]) * v21);
+  v89.mOutput.m_hitFraction = 1.0;
+  v89.mOutput.m_extraInfo = -1;
+  v89.mOutput.m_shapeKeyIndex = 0;
+  v37 = v34;
+  v89.mOutput.m_shapeKeys[0] = -1;
+  v89.mOutput.m_rootCollidable = 0i64;
+  v89.mDebugName = 0i64;
+  v89.mCollisionModelName.mUID = -1;
+  v38 = (float)(COERCE_FLOAT(LODWORD(v83) ^ _xmm[0]) * v20)
+      - (float)(z_low.m128_f32[0] * COERCE_FLOAT(LODWORD(v81) ^ _xmm[0]));
+  v39 = (float)(COERCE_FLOAT(LODWORD(v81) ^ _xmm[0]) * v21) - (float)(COERCE_FLOAT(LODWORD(v80) ^ _xmm[0]) * v20);
+  v40 = (float)(1.0 / DisplayAspectRatio) * v79;
+  v37.m128_f32[0] = (float)((float)(v34.m128_f32[0] * v34.m128_f32[0]) + (float)(v38 * v38)) + (float)(v39 * v39);
+  v41 = v20 + eye->y;
+  v42 = _mm_sqrt_ps(v37).m128_f32[0];
+  v37.m128_f32[0] = z_low.m128_f32[0] + eye->z;
+  v43 = v40 / v42;
+  v79 = v43 * v38;
+  v44 = v21 + eye->x;
+  v82 = v43 * v39;
+  rayEnd.z = v37.m128_f32[0] + (float)(v43 * v39);
+  v84 = v43 * v34.m128_f32[0];
+  rayEnd.x = v44 + (float)(v43 * v38);
+  rayEnd.y = v41 + (float)(v43 * v34.m128_f32[0]);
+  UFG::RayCastData::Init(&v89, eye, &rayEnd, 0x12u);
+  v45 = UFG::BasePhysicsSystem::CastRay(UFG::BasePhysicsSystem::mInstance, &v89);
+  if ( v45 )
   {
-    v49 = (__m128)LODWORD(v92.point.y);
-    v49.m128_f32[0] = (float)((float)((float)(v92.point.y - v5->y) * (float)(v92.point.y - v5->y))
-                            + (float)((float)(v92.point.x - v5->x) * (float)(v92.point.x - v5->x)))
-                    + (float)((float)(v92.point.z - v5->z) * (float)(v92.point.z - v5->z));
-    v50 = cosf(v39 * v93);
-    LODWORD(v38) = COERCE_UNSIGNED_INT(v88 - (float)(COERCE_FLOAT(_mm_sqrt_ps(v49)) * v50)) ^ _xmm[0];
+    v46 = (__m128)LODWORD(v89.point.y);
+    v46.m128_f32[0] = (float)((float)((float)(v89.point.y - eye->y) * (float)(v89.point.y - eye->y))
+                            + (float)((float)(v89.point.x - eye->x) * (float)(v89.point.x - eye->x)))
+                    + (float)((float)(v89.point.z - eye->z) * (float)(v89.point.z - eye->z));
+    v47 = cosf(v36 * v90);
+    LODWORD(v35) = COERCE_UNSIGNED_INT(v85 - (float)(_mm_sqrt_ps(v46).m128_f32[0] * v47)) ^ _xmm[0];
   }
-  v51 = 0.0;
+  v48 = 0.0;
   if ( LocalPlayer )
   {
-    v52 = LocalPlayer->m_Flags;
-    if ( (v52 >> 14) & 1 )
+    m_Flags = LocalPlayer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v53 = UFG::SimObjectCharacter::GetComponent<UFG::CharacterSubjectComponent>(LocalPlayer);
+      ComponentOfTypeHK = UFG::SimObjectCharacter::GetComponent<UFG::CharacterSubjectComponent>(LocalPlayer);
     }
-    else if ( (v52 & 0x8000u) == 0 )
+    else if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v52 >> 13) & 1 )
-      {
-        v53 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                  (UFG::SimObjectGame *)&LocalPlayer->vfptr,
-                                                  UFG::CharacterSubjectComponent::_TypeUID);
-      }
-      else if ( (v52 >> 12) & 1 )
-      {
-        v53 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                  (UFG::SimObjectGame *)&LocalPlayer->vfptr,
-                                                  UFG::CharacterSubjectComponent::_TypeUID);
-      }
-      else
-      {
-        v53 = (UFG::CharacterSubjectComponent *)UFG::SimObject::GetComponentOfType(
-                                                  (UFG::SimObject *)&LocalPlayer->vfptr,
-                                                  UFG::CharacterSubjectComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                              LocalPlayer,
+                                                              UFG::CharacterSubjectComponent::_TypeUID);
     }
     else
     {
-      v53 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                (UFG::SimObjectGame *)&LocalPlayer->vfptr,
-                                                UFG::CharacterSubjectComponent::_TypeUID);
+      ComponentOfTypeHK = (UFG::CharacterSubjectComponent *)UFG::SimObject::GetComponentOfType(
+                                                              LocalPlayer,
+                                                              UFG::CharacterSubjectComponent::_TypeUID);
     }
-    v12 = v53;
+    v12 = ComponentOfTypeHK;
   }
   if ( v12 && !((unsigned __int8 (__fastcall *)(UFG::CharacterSubjectComponent *))v12->vfptr[29].__vecDelDtor)(v12) )
   {
-    v54 = ((__int64 (__fastcall *)(UFG::CharacterSubjectComponent *))v12->vfptr[26].__vecDelDtor)(v12);
-    v55 = v12->mPelvisDirty == 0;
-    v56 = *(float *)(v54 + 4);
-    v57 = *(float *)(v54 + 8);
-    rayEnd.x = *(float *)v54;
-    rayEnd.y = v56;
-    rayEnd.z = v57;
-    if ( !v55 )
+    v51 = ((__int64 (__fastcall *)(UFG::CharacterSubjectComponent *))v12->vfptr[26].__vecDelDtor)(v12);
+    v52 = !v12->mPelvisDirty;
+    v53 = *(float *)(v51 + 4);
+    v54 = *(float *)(v51 + 8);
+    rayEnd.x = *(float *)v51;
+    rayEnd.y = v53;
+    rayEnd.z = v54;
+    if ( !v52 )
       UFG::CharacterSubjectComponent::UpdatePelvis(v12);
-    v58 = v12->mPelvisPosition.y;
+    v55 = v12->mPelvisPosition.y;
     lA0.x = v12->mPelvisPosition.x;
-    v59 = v12->mPelvisPosition.z;
-    lA0.y = v58;
-    lA0.z = v59;
-    UFG::qGetClosestPointOnSegment(&closest_point, &lA0, &rayEnd, v5);
-    v60 = (__m128)LODWORD(closest_point.y);
-    v60.m128_f32[0] = (float)((float)((float)(closest_point.y - v5->y) * (float)(closest_point.y - v5->y))
-                            + (float)((float)(closest_point.x - v5->x) * (float)(closest_point.x - v5->x)))
-                    + (float)((float)(closest_point.z - v5->z) * (float)(closest_point.z - v5->z));
-    v61 = (float)(COERCE_FLOAT(_mm_sqrt_ps(v60)) - 0.40000001) * 2.8571429;
-    if ( v61 <= 0.0 )
+    z = v12->mPelvisPosition.z;
+    lA0.y = v55;
+    lA0.z = z;
+    UFG::qGetClosestPointOnSegment(&closest_point, &lA0, &rayEnd, eye);
+    v57 = (__m128)LODWORD(closest_point.y);
+    v57.m128_f32[0] = (float)((float)((float)(closest_point.y - eye->y) * (float)(closest_point.y - eye->y))
+                            + (float)((float)(closest_point.x - eye->x) * (float)(closest_point.x - eye->x)))
+                    + (float)((float)(closest_point.z - eye->z) * (float)(closest_point.z - eye->z));
+    v58 = (float)(_mm_sqrt_ps(v57).m128_f32[0] - 0.40000001) * 2.8571429;
+    if ( v58 <= 0.0 )
     {
-      v61 = 0.0;
+      v58 = 0.0;
     }
-    else if ( v61 >= 1.0 )
+    else if ( v58 >= 1.0 )
     {
-      v61 = *(float *)&FLOAT_1_0;
+      v58 = *(float *)&FLOAT_1_0;
     }
-    v51 = (float)(v61 * 0.22) - 0.22;
+    v48 = (float)(v58 * 0.22) - 0.22;
   }
-  if ( v13 >= v33 )
-    v13 = v33;
-  if ( v13 >= v38 )
-    v13 = v38;
-  if ( v13 >= v51 )
-    v13 = v51;
+  if ( v13 >= v30 )
+    v13 = v30;
+  if ( v13 >= v35 )
+    v13 = v35;
+  if ( v13 >= v48 )
+    v13 = v48;
   if ( (float)(v13 + UFG::gCameraDefaultNear) < UFG::trCollisionNearOffsetMin )
     v13 = UFG::trCollisionNearOffsetMin - UFG::gCameraDefaultNear;
   if ( COERCE_FLOAT(LODWORD(v13) & _xmm) < 0.000099999997 )
     v13 = 0.0;
   if ( UFG::tbCollisionDebugDraw )
   {
-    v62 = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 1u);
-    v63 = &UFG::qColour::Green;
-    v64 = v86;
-    v65 = v83;
-    v66 = v84;
-    v67 = v62;
-    v68 = &UFG::qColour::Green;
-    v69 = v21 + v5->x;
-    v70 = v20 + v5->y;
-    if ( v28 )
-      v68 = &UFG::qColour::Red;
-    closest_point.z = (float)(v22.m128_f32[0] + v5->z) + v86;
-    closest_point.x = v69 + v83;
-    closest_point.y = v70 + v84;
-    Render::DebugDrawContext::DrawSphere(v62, &closest_point, 0.0099999998, v68, &UFG::qMatrix44::msIdentity, 0i64);
-    if ( v28 )
+    Context = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 1u);
+    v60 = &UFG::qColour::Green;
+    v61 = v83;
+    v62 = v80;
+    v63 = v81;
+    v64 = Context;
+    v65 = &UFG::qColour::Green;
+    v66 = v21 + eye->x;
+    v67 = v20 + eye->y;
+    if ( v25 )
+      v65 = &UFG::qColour::Red;
+    closest_point.z = (float)(z_low.m128_f32[0] + eye->z) + v83;
+    closest_point.x = v66 + v80;
+    closest_point.y = v67 + v81;
+    Render::DebugDrawContext::DrawSphere(Context, &closest_point, 0.0099999998, v65, &UFG::qMatrix44::msIdentity, 0i64);
+    if ( v25 )
       Render::DebugDrawContext::DrawSphere(
-        v67,
+        v64,
         &data.point,
         0.0099999998,
         &UFG::qColour::Red,
         &UFG::qMatrix44::msIdentity,
         0i64);
-    v71 = &UFG::qColour::Green;
-    if ( v34 )
-      v71 = &UFG::qColour::Red;
-    v72 = (float)(v21 + v5->x) - v65;
-    v73 = (float)(v20 + v5->y) - v66;
-    closest_point.z = (float)(v22.m128_f32[0] + v5->z) - v64;
-    closest_point.x = v72;
-    closest_point.y = v73;
-    Render::DebugDrawContext::DrawSphere(v67, &closest_point, 0.0099999998, v71, &UFG::qMatrix44::msIdentity, 0i64);
-    if ( v34 )
+    v68 = &UFG::qColour::Green;
+    if ( v31 )
+      v68 = &UFG::qColour::Red;
+    v69 = (float)(v21 + eye->x) - v62;
+    v70 = (float)(v20 + eye->y) - v63;
+    closest_point.z = (float)(z_low.m128_f32[0] + eye->z) - v61;
+    closest_point.x = v69;
+    closest_point.y = v70;
+    Render::DebugDrawContext::DrawSphere(v64, &closest_point, 0.0099999998, v68, &UFG::qMatrix44::msIdentity, 0i64);
+    if ( v31 )
       Render::DebugDrawContext::DrawSphere(
-        v67,
-        &v91.point,
+        v64,
+        &v88.point,
         0.0099999998,
         &UFG::qColour::Red,
         &UFG::qMatrix44::msIdentity,
         0i64);
-    v74 = v21 + v5->x;
-    v75 = v20 + v5->y;
-    v76 = v22.m128_f32[0] + v5->z;
-    if ( v48 )
-      v63 = &UFG::qColour::Red;
-    closest_point.x = v74 + v82;
-    closest_point.y = v75 + v87;
-    closest_point.z = v76 + v85;
-    Render::DebugDrawContext::DrawSphere(v67, &closest_point, 0.0099999998, v63, &UFG::qMatrix44::msIdentity, 0i64);
-    if ( v48 )
+    v71 = v21 + eye->x;
+    v72 = v20 + eye->y;
+    v73 = z_low.m128_f32[0] + eye->z;
+    if ( v45 )
+      v60 = &UFG::qColour::Red;
+    closest_point.x = v71 + v79;
+    closest_point.y = v72 + v84;
+    closest_point.z = v73 + v82;
+    Render::DebugDrawContext::DrawSphere(v64, &closest_point, 0.0099999998, v60, &UFG::qMatrix44::msIdentity, 0i64);
+    if ( v45 )
       Render::DebugDrawContext::DrawSphere(
-        v67,
-        &v92.point,
+        v64,
+        &v89.point,
         0.0099999998,
         &UFG::qColour::Red,
         &UFG::qMatrix44::msIdentity,
         0i64);
-    v77 = &UFG::qColour::Yellow;
+    v74 = &UFG::qColour::Yellow;
     if ( v13 == 0.0 )
-      v77 = &UFG::qColour::White;
-    v78 = v6->mCamera.mProjection.v2.z;
-    if ( v78 == 0.0 || v78 == v6->mCamera.mProjection.v2.w )
-      v79 = v85;
+      v74 = &UFG::qColour::White;
+    v75 = this->mCamera.mProjection.v2.z;
+    if ( v75 == 0.0 || v75 == this->mCamera.mProjection.v2.w )
+      v76 = v82;
     else
-      v79 = v6->mCamera.mProjection.v3.z / v78;
-    Render::DebugDrawContext::DrawTextA(v67, 440, 500, v77, "Nearoffset : %f(res:%f)", v13, v79);
+      v76 = this->mCamera.mProjection.v3.z / v75;
+    Render::DebugDrawContext::DrawTextA(v64, 440, 500, v74, "Nearoffset : %f(res:%f)", v13, v76);
   }
   return v13;
 }
@@ -1779,51 +1732,48 @@ float __fastcall UFG::GameCameraComponent::ComputeNearOffset(UFG::GameCameraComp
 char __fastcall UFG::GameCameraComponent::AnyTargetPointVisible(UFG::GameCameraComponent *this, UFG::qVector3 *eye)
 {
   int v2; // edi
-  UFG::qVector3 *v3; // rbp
-  UFG::GameCameraComponent *v4; // rbx
-  float *v5; // rsi
+  float *i; // rsi
   float v6; // xmm1_4
-  UFG::ShapeCasterCollector *v7; // rdx
+  UFG::ShapeCasterCollector *pCollisionCollectorTargetPoints; // rdx
   float v8; // xmm0_4
-  float v9; // xmm1_4
-  float v10; // xmm0_4
-  float v11; // xmm1_4
-  UFG::ShapeCasterCollector::HitInfo *v12; // rax
-  UFG::qVector3 start; // [rsp+30h] [rbp-28h]
-  UFG::qVector3 end; // [rsp+40h] [rbp-18h]
+  float x; // xmm1_4
+  float y; // xmm0_4
+  float z; // xmm1_4
+  UFG::ShapeCasterCollector::HitInfo *ClosestCollidableHit; // rax
+  UFG::qVector3 start; // [rsp+30h] [rbp-28h] BYREF
+  UFG::qVector3 end; // [rsp+40h] [rbp-18h] BYREF
 
   v2 = 0;
-  v3 = eye;
-  v4 = this;
   if ( this->mCollisionTargetPointsNum <= 0 )
     return 0;
-  v5 = &this->mCollisionTargetPoints[0].z;
-  while ( 1 )
+  for ( i = &this->mCollisionTargetPoints[0].z; ; i += 3 )
   {
-    v6 = *(v5 - 1);
-    v7 = v4->pCollisionCollectorTargetPoints;
-    start.x = *(v5 - 2);
-    v8 = *v5;
+    v6 = *(i - 1);
+    pCollisionCollectorTargetPoints = this->pCollisionCollectorTargetPoints;
+    start.x = *(i - 2);
+    v8 = *i;
     start.y = v6;
-    v9 = v3->x;
+    x = eye->x;
     start.z = v8;
-    v10 = v3->y;
-    end.x = v9;
-    v11 = v3->z;
-    end.y = v10;
-    end.z = v11;
-    if ( !UFG::BasePhysicsSystem::CastShape(UFG::BasePhysicsSystem::mInstance, v7, &start, &end) )
-      break;
-    v12 = UFG::GameCameraComponent::FindClosestCollidableHit(
-            v4,
-            v4->pCollisionCollectorTargetPoints,
+    y = eye->y;
+    end.x = x;
+    z = eye->z;
+    end.y = y;
+    end.z = z;
+    if ( !UFG::BasePhysicsSystem::CastShape(
+            UFG::BasePhysicsSystem::mInstance,
+            pCollisionCollectorTargetPoints,
             &start,
-            v4->mSafeRadius);
-    if ( !v12 || UFG::GameCameraComponent::ShouldPassThru(v4, v12, &start) )
+            &end) )
       break;
-    ++v2;
-    v5 += 3;
-    if ( v2 >= v4->mCollisionTargetPointsNum )
+    ClosestCollidableHit = UFG::GameCameraComponent::FindClosestCollidableHit(
+                             this,
+                             this->pCollisionCollectorTargetPoints,
+                             &start,
+                             this->mSafeRadius);
+    if ( !ClosestCollidableHit || UFG::GameCameraComponent::ShouldPassThru(this, ClosestCollidableHit, &start) )
+      break;
+    if ( ++v2 >= this->mCollisionTargetPointsNum )
       return 0;
   }
   return 1;
@@ -1831,131 +1781,126 @@ char __fastcall UFG::GameCameraComponent::AnyTargetPointVisible(UFG::GameCameraC
 
 // File Line: 1276
 // RVA: 0x3CB1C0
-void __usercall UFG::GameCameraComponent::SetDesiredEyeLookUp(UFG::GameCameraComponent *this@<rcx>, float dt@<xmm1>, UFG::qVector3 *desEye@<r8>, UFG::qVector3 *desLook@<r9>, float *a5@<r13>, UFG::qVector3 *desUp, bool collide, UFG::qVector3 *newEye, UFG::qVector3 *newLook)
+void __fastcall UFG::GameCameraComponent::SetDesiredEyeLookUp(
+        UFG::GameCameraComponent *this,
+        float dt,
+        UFG::qVector3 *desEye,
+        UFG::qVector3 *desLook,
+        UFG::qVector3 *desUp,
+        bool collide,
+        UFG::qVector3 *newEye,
+        UFG::qVector3 *newLook)
 {
+  float *v8; // r13
   char v9; // bl
-  float v10; // xmm3_4
-  float v11; // xmm4_4
-  UFG::qVector3 *v12; // rdi
-  UFG::qVector3 *v13; // r14
+  float x; // xmm3_4
+  float y; // xmm4_4
   UFG::GameCameraComponent *v14; // rsi
   float v15; // xmm8_4
-  float v16; // xmm7_4
+  float z; // xmm7_4
   bool v17; // zf
-  __int128 v18; // xmm9
-  float v19; // xmm15_4
+  __int128 y_low; // xmm9
   float v20; // xmm0_4
   float v21; // xmm2_4
   float v22; // xmm0_4
   float v23; // xmm0_4
-  float v24; // xmm6_4
-  UFG::qVector3 *v25; // rax
-  float v26; // xmm3_4
-  float v27; // xmm1_4
-  float v28; // xmm2_4
-  float v29; // xmm2_4
-  UFG::qVector3 *v30; // rax
-  float v31; // xmm0_4
-  float v32; // xmm1_4
-  float v33; // xmm6_4
-  float v34; // xmm2_4
-  float v35; // xmm0_4
-  float *v36; // rdi
+  float v24; // xmm0_4
+  float v25; // xmm6_4
+  UFG::qVector3 *Value; // rax
+  float v27; // xmm3_4
+  float v28; // xmm1_4
+  float mImpactShakeSeed; // xmm2_4
+  float v30; // xmm2_4
+  UFG::qVector3 *v31; // rax
+  float v32; // xmm2_4
+  float v33; // xmm0_4
+  float *v34; // rdi
+  float v35; // xmm1_4
+  float v36; // xmm0_4
   float v37; // xmm1_4
   float v38; // xmm0_4
-  float v39; // xmm1_4
-  float v40; // xmm0_4
-  float v41; // xmm0_4
-  float v42; // xmm1_4
-  float *v43; // rax
-  float v44; // xmm7_4
-  float v45; // xmm8_4
-  float v46; // xmm1_4
-  float v47; // xmm0_4
-  float v48; // xmm7_4
-  float v49; // xmm8_4
-  float v50; // xmm12_4
-  __m128 v51; // xmm2
-  float v52; // xmm1_4
-  float v53; // xmm8_4
-  float v54; // xmm9_4
-  float v55; // xmm7_4
-  UFG::qNode<UFG::ShapeCasterCollector::HitInfo,UFG::ShapeCasterCollector::HitInfo> *v56; // rbx
-  float v57; // xmm6_4
-  UFG::qNode<UFG::ShapeCasterCollector::HitInfo,UFG::ShapeCasterCollector::HitInfo> *v58; // rax
-  float v59; // xmm0_4
-  float v60; // xmm1_4
-  float v61; // xmm1_4
-  float v62; // xmm2_4
-  float v63; // eax
-  float v64; // xmm4_4
-  __m128 v65; // xmm2
-  float v66; // xmm3_4
-  float v67; // xmm1_4
-  float *v68; // r13
-  float v69; // xmm0_4
+  float v39; // xmm0_4
+  float v40; // xmm1_4
+  UFG::ShapeCasterCollector::HitInfo *ClosestCollidableHit; // rax
+  float mRadius; // xmm8_4
+  float v43; // xmm1_4
+  float v44; // xmm0_4
+  float v45; // xmm7_4
+  float v46; // xmm8_4
+  float v47; // xmm12_4
+  __m128 v48; // xmm2
+  float v49; // xmm1_4
+  float v50; // xmm8_4
+  float v51; // xmm9_4
+  float v52; // xmm7_4
+  UFG::ShapeCasterCollector::HitInfo *v53; // rbx
+  float v54; // xmm6_4
+  UFG::ShapeCasterCollector::HitInfo *v55; // rax
+  float v56; // xmm0_4
+  float v57; // xmm1_4
+  float v58; // xmm1_4
+  float v59; // xmm2_4
+  float v60; // eax
+  float v61; // xmm4_4
+  __m128 v62; // xmm2
+  float v63; // xmm3_4
+  float v64; // xmm1_4
+  float *p_mEyePushPercent; // r13
+  float v66; // xmm0_4
+  float mPushInOverrideRate; // xmm2_4
+  float v68; // xmm13_4
+  float v69; // xmm1_4
   float v70; // xmm2_4
-  float v71; // xmm13_4
-  float v72; // xmm1_4
-  float v73; // xmm2_4
-  float v74; // xmm6_4
-  float v75; // xmm2_4
-  float v76; // xmm10_4
+  float mCollisionRise; // xmm6_4
+  float v72; // xmm2_4
+  float mEyePushRise; // xmm2_4
+  float v74; // xmm0_4
+  float v75; // xmm3_4
+  float v76; // xmm12_4
   float v77; // xmm2_4
   float v78; // xmm0_4
-  float v79; // xmm3_4
-  float v80; // xmm12_4
-  float v81; // xmm2_4
-  float v82; // xmm0_4
-  float v83; // xmm1_4
-  float v84; // xmm8_4
-  float v85; // xmm9_4
-  float *v86; // rdi
-  float *v87; // rax
-  float v88; // xmm7_4
-  Render::DebugDrawContext *v89; // rax
-  bool v90; // dl
-  const char *v91; // rbx
-  Render::DebugDrawContext *v92; // r12
-  const char *v93; // rcx
-  UFG::qColour *v94; // r9
-  UFG::qColour *v95; // r9
+  float v79; // xmm1_4
+  float *p_ymax; // rdi
+  float *v81; // rax
+  float v82; // xmm7_4
+  Render::DebugDrawContext *Context; // rax
+  bool mLookModified; // dl
+  const char *v85; // rbx
+  Render::DebugDrawContext *v86; // r12
+  const char *v87; // rcx
+  UFG::qColour *v88; // r9
+  UFG::qColour *v89; // r9
+  UFG::qColour *v90; // r9
+  float v91; // xmm0_4
+  UFG::qColour *v92; // r13
+  char v93; // r14
+  const char *v94; // rbx
+  const char *v95; // rax
   UFG::qColour *v96; // r9
-  float v97; // xmm0_4
-  double removePhantomWhenDone; // ST28_8
-  UFG::qColour *v99; // r13
-  char v100; // r14
-  const char *v101; // rbx
-  const char *v102; // rax
-  UFG::qColour *v103; // r9
-  UFG::qVector3 eye; // [rsp+40h] [rbp-90h]
-  UFG::qVector3 loook; // [rsp+50h] [rbp-80h]
-  UFG::qVector3 up; // [rsp+60h] [rbp-70h]
-  UFG::qVector3 result; // [rsp+70h] [rbp-60h]
-  UFG::GameCameraComponent *v108; // [rsp+120h] [rbp+50h]
+  double removePhantomWhenDone; // [rsp+28h] [rbp-A8h]
+  UFG::qVector3 eye; // [rsp+40h] [rbp-90h] BYREF
+  UFG::qVector3 loook; // [rsp+50h] [rbp-80h] BYREF
+  UFG::qVector3 up; // [rsp+60h] [rbp-70h] BYREF
+  UFG::qVector3 result; // [rsp+70h] [rbp-60h] BYREF
+  UFG::GameCameraComponent *v102; // [rsp+120h] [rbp+50h]
   UFG::qVector3 *centre; // [rsp+138h] [rbp+68h]
   float *vars0; // [rsp+140h] [rbp+70h]
   void *retaddr; // [rsp+148h] [rbp+78h]
-  float *v112; // [rsp+150h] [rbp+80h]
-  float *v113; // [rsp+158h] [rbp+88h]
-  float *v114; // [rsp+158h] [rbp+88h]
+  float *v107; // [rsp+158h] [rbp+88h]
+  float *v108; // [rsp+158h] [rbp+88h]
 
-  v112 = (float *)this;
   v9 = (char)retaddr;
-  v10 = desEye->x;
-  v11 = desEye->y;
-  v12 = desLook;
-  v13 = desEye;
+  x = desEye->x;
+  y = desEye->y;
   v14 = this;
   v15 = desLook->x;
-  v16 = desLook->z;
+  z = desLook->z;
   eye.x = desEye->x;
   if ( UFG::tbCollisionDisable )
     v9 = 0;
   v17 = this->mImpactShakeAmplitude == 0.0;
-  v18 = LODWORD(desLook->y);
-  eye.y = v11;
-  v19 = dt;
+  y_low = LODWORD(desLook->y);
+  eye.y = y;
   v20 = *vars0;
   v21 = vars0[1];
   loook.x = v15;
@@ -1964,49 +1909,46 @@ void __usercall UFG::GameCameraComponent::SetDesiredEyeLookUp(UFG::GameCameraCom
   up.y = v21;
   up.z = v22;
   v23 = desEye->z;
-  LODWORD(loook.y) = v18;
+  LODWORD(loook.y) = y_low;
   eye.z = v23;
-  loook.z = v16;
+  loook.z = z;
   if ( !v17 )
   {
-    ((void (*)(void))this->vfptr[19].__vecDelDtor)();
-    v24 = tanf(v23 * 0.5) * (float)(v14->mImpactShakeAmplitude * 1.6);
-    v25 = UFG::qNoise<UFG::qVector3,float>::GetValue(&v14->mEyeImpactNoise, &result, v14->mImpactShakeTimer);
-    v26 = v24 * v25->z;
-    v27 = eye.y + (float)(v24 * v25->y);
-    v28 = v14->mImpactShakeSeed;
-    eye.x = eye.x + (float)(v24 * v25->x);
-    v29 = v28 + v14->mImpactShakeTimer;
-    eye.y = v27;
-    eye.z = eye.z + v26;
-    v30 = UFG::qNoise<UFG::qVector3,float>::GetValue(&v14->mLookImpactNoise, &result, v29);
-    v18 = LODWORD(loook.y);
-    v31 = v24 * v30->x;
-    v32 = v24 * v30->y;
-    v33 = v24 * v30->z;
-    v11 = eye.y;
-    v10 = eye.x;
-    v15 = loook.x + v31;
-    *(float *)&v18 = loook.y + v32;
-    v16 = loook.z + v33;
-    loook.x = loook.x + v31;
-    loook.y = loook.y + v32;
-    loook.z = loook.z + v33;
+    v24 = ((float (__fastcall *)(UFG::GameCameraComponent *))this->vfptr[19].__vecDelDtor)(this);
+    v25 = tanf(v24 * 0.5) * (float)(v14->mImpactShakeAmplitude * 1.6);
+    Value = UFG::qNoise<UFG::qVector3,float>::GetValue(&v14->mEyeImpactNoise, &result, v14->mImpactShakeTimer);
+    v27 = v25 * Value->z;
+    v28 = eye.y + (float)(v25 * Value->y);
+    mImpactShakeSeed = v14->mImpactShakeSeed;
+    eye.x = eye.x + (float)(v25 * Value->x);
+    v30 = mImpactShakeSeed + v14->mImpactShakeTimer;
+    eye.y = v28;
+    eye.z = eye.z + v27;
+    v31 = UFG::qNoise<UFG::qVector3,float>::GetValue(&v14->mLookImpactNoise, &result, v30);
+    y_low = LODWORD(loook.y);
+    y = v28;
+    x = eye.x;
+    v15 = loook.x + (float)(v25 * v31->x);
+    *(float *)&y_low = loook.y + (float)(v25 * v31->y);
+    z = loook.z + (float)(v25 * v31->z);
+    loook.x = v15;
+    loook.y = *(float *)&y_low;
+    loook.z = z;
   }
   v14->mInCollision = 0;
-  v34 = UFG::qVector3::msZero.z;
-  v35 = UFG::qVector3::msZero.x;
+  v32 = UFG::qVector3::msZero.z;
+  v33 = UFG::qVector3::msZero.x;
   v14->mCollisionLookOffset.y = UFG::qVector3::msZero.y;
-  v14->mCollisionLookOffset.z = v34;
-  v14->mCollisionLookOffset.x = v35;
+  v14->mCollisionLookOffset.z = v32;
+  v14->mCollisionLookOffset.x = v33;
   if ( v9 )
   {
-    v41 = v13->y;
-    v42 = v13->z;
-    v114 = a5;
-    v14->mCandidateEye.x = v13->x;
-    v14->mCandidateEye.y = v41;
-    v14->mCandidateEye.z = v42;
+    v39 = desEye->y;
+    v40 = desEye->z;
+    v108 = v8;
+    v14->mCandidateEye.x = desEye->x;
+    v14->mCandidateEye.y = v39;
+    v14->mCandidateEye.z = v40;
     v14->mLookModified = 0;
     if ( v14->mAlternateLookValid )
     {
@@ -2015,362 +1957,360 @@ void __usercall UFG::GameCameraComponent::SetDesiredEyeLookUp(UFG::GameCameraCom
              v14->pCollisionCollectorTargetPoints,
              &v14->mAlternateLook,
              &loook)
-        && (v43 = (float *)UFG::GameCameraComponent::FindClosestCollidableHit(
-                             v14,
-                             v14->pCollisionCollectorTargetPoints,
-                             &v14->mAlternateLook,
-                             0.0)) != 0i64 )
+        && (ClosestCollidableHit = UFG::GameCameraComponent::FindClosestCollidableHit(
+                                     v14,
+                                     v14->pCollisionCollectorTargetPoints,
+                                     &v14->mAlternateLook,
+                                     0.0)) != 0i64 )
       {
-        v44 = v14->pCollisionCollectorTargetPoints->mRadius;
-        v45 = v44;
-        v18 = LODWORD(v44);
-        v16 = (float)(v44 * v43[9]) + v43[6];
-        v15 = (float)(v45 * v43[7]) + v43[4];
-        *(float *)&v18 = (float)(*(float *)&v18 * v43[8]) + v43[5];
-        loook.z = v16;
-        v46 = *(float *)&v18 - v12->y;
-        v47 = v16 - v12->z;
-        v14->mCollisionLookOffset.x = v15 - v12->x;
-        v14->mCollisionLookOffset.y = v46;
-        v14->mCollisionLookOffset.z = v47;
+        mRadius = v14->pCollisionCollectorTargetPoints->mRadius;
+        y_low = LODWORD(mRadius);
+        z = (float)(mRadius * ClosestCollidableHit->mContactNormal.z) + ClosestCollidableHit->mContactPosition.z;
+        v15 = (float)(mRadius * ClosestCollidableHit->mContactNormal.x) + ClosestCollidableHit->mContactPosition.x;
+        *(float *)&y_low = (float)(*(float *)&y_low * ClosestCollidableHit->mContactNormal.y)
+                         + ClosestCollidableHit->mContactPosition.y;
+        loook.z = z;
+        v43 = *(float *)&y_low - desLook->y;
+        v44 = z - desLook->z;
+        v14->mCollisionLookOffset.x = v15 - desLook->x;
+        v14->mCollisionLookOffset.y = v43;
+        v14->mCollisionLookOffset.z = v44;
         v14->mLookModified = 1;
         loook.x = v15;
-        LODWORD(loook.y) = v18;
+        LODWORD(loook.y) = y_low;
       }
       else
       {
-        v16 = loook.z;
-        v18 = LODWORD(loook.y);
+        z = loook.z;
+        y_low = LODWORD(loook.y);
         v15 = loook.x;
       }
-      v10 = eye.x;
-      v11 = eye.y;
+      x = eye.x;
+      y = eye.y;
     }
-    v48 = v16 - eye.z;
-    v49 = v15 - v10;
-    v50 = 0.0;
-    *(float *)&v18 = *(float *)&v18 - v11;
-    v51 = (__m128)v18;
-    v51.m128_f32[0] = (float)((float)(*(float *)&v18 * *(float *)&v18) + (float)(v49 * v49)) + (float)(v48 * v48);
-    if ( v51.m128_f32[0] <= 0.000099999997 )
+    v45 = z - eye.z;
+    v46 = v15 - x;
+    v47 = 0.0;
+    *(float *)&y_low = *(float *)&y_low - y;
+    v48 = (__m128)y_low;
+    v48.m128_f32[0] = (float)((float)(*(float *)&y_low * *(float *)&y_low) + (float)(v46 * v46)) + (float)(v45 * v45);
+    if ( v48.m128_f32[0] <= 0.000099999997 )
     {
-      v53 = *(float *)&FLOAT_1_0;
-      v54 = 0.0;
-      v55 = 0.0;
+      v50 = *(float *)&FLOAT_1_0;
+      v51 = 0.0;
+      v52 = 0.0;
     }
     else
     {
-      LODWORD(v50) = (unsigned __int128)_mm_sqrt_ps(v51);
-      if ( v51.m128_f32[0] == 0.0 )
+      LODWORD(v47) = _mm_sqrt_ps(v48).m128_u32[0];
+      if ( v48.m128_f32[0] == 0.0 )
       {
-        v53 = v49 * 0.0;
-        v54 = *(float *)&v18 * 0.0;
-        v55 = v48 * 0.0;
+        v50 = v46 * 0.0;
+        v51 = *(float *)&y_low * 0.0;
+        v52 = v45 * 0.0;
       }
       else
       {
-        v52 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v51));
-        v53 = v49 * v52;
-        v54 = *(float *)&v18 * v52;
-        v55 = v48 * v52;
+        v49 = 1.0 / _mm_sqrt_ps(v48).m128_f32[0];
+        v50 = v46 * v49;
+        v51 = *(float *)&y_low * v49;
+        v52 = v45 * v49;
       }
     }
-    v56 = 0i64;
+    v53 = 0i64;
     if ( UFG::BasePhysicsSystem::CastShape(UFG::BasePhysicsSystem::mInstance, v14->pCollisionCollector, &eye, &eye) )
-      v56 = UFG::GameCameraComponent::FindClosestCollidableHit(v14, v14->pCollisionCollector, &eye, 0.0);
-    v57 = 0.0;
-    if ( (!UFG::GameCameraComponent::AnyTargetPointVisible(v14, &eye) || v56)
+      v53 = UFG::GameCameraComponent::FindClosestCollidableHit(v14, v14->pCollisionCollector, &eye, 0.0);
+    v54 = 0.0;
+    if ( (!UFG::GameCameraComponent::AnyTargetPointVisible(v14, &eye) || v53)
       && UFG::BasePhysicsSystem::CastShape(UFG::BasePhysicsSystem::mInstance, v14->pCollisionCollector, &loook, &eye) )
     {
-      v58 = UFG::GameCameraComponent::FindClosestCollidableHit(v14, v14->pCollisionCollector, &loook, v14->mSafeRadius);
-      if ( v58 )
+      v55 = UFG::GameCameraComponent::FindClosestCollidableHit(v14, v14->pCollisionCollector, &loook, v14->mSafeRadius);
+      if ( v55 )
       {
-        v59 = *(float *)&v58[2].mPrev;
-        v60 = *((float *)&v58[2].mPrev + 1);
-        v14->mCollisionSurfaceNormal.x = *((float *)&v58[1].mNext + 1);
-        v14->mCollisionSurfaceNormal.y = v59;
-        v14->mCollisionSurfaceNormal.z = v60;
-        v61 = *((float *)&v58[1].mPrev + 1);
-        v62 = *(float *)&v58[1].mNext;
-        v63 = *(float *)&v58[1].mPrev;
-        v14->mCollisionContactPosition.z = v62;
-        v14->mCollisionContactPosition.y = v61;
-        v14->mCollisionContactPosition.x = v63;
-        v64 = (float)(UFG::trCollisionCastingRadius * v14->mCollisionSurfaceNormal.z) + v62;
-        v65 = (__m128)LODWORD(eye.y);
-        v66 = (float)(UFG::trCollisionCastingRadius * v14->mCollisionSurfaceNormal.y) + v61;
-        v67 = eye.x
+        v56 = v55->mContactNormal.y;
+        v57 = v55->mContactNormal.z;
+        v14->mCollisionSurfaceNormal.x = v55->mContactNormal.x;
+        v14->mCollisionSurfaceNormal.y = v56;
+        v14->mCollisionSurfaceNormal.z = v57;
+        v58 = v55->mContactPosition.y;
+        v59 = v55->mContactPosition.z;
+        v60 = v55->mContactPosition.x;
+        v14->mCollisionContactPosition.z = v59;
+        v14->mCollisionContactPosition.y = v58;
+        v14->mCollisionContactPosition.x = v60;
+        v61 = (float)(UFG::trCollisionCastingRadius * v14->mCollisionSurfaceNormal.z) + v59;
+        v62 = (__m128)LODWORD(eye.y);
+        v63 = (float)(UFG::trCollisionCastingRadius * v14->mCollisionSurfaceNormal.y) + v58;
+        v64 = eye.x
             - (float)((float)(UFG::trCollisionCastingRadius * v14->mCollisionSurfaceNormal.x)
                     + v14->mCollisionContactPosition.x);
-        v65.m128_f32[0] = (float)((float)((float)(eye.y - v66) * (float)(eye.y - v66)) + (float)(v67 * v67))
-                        + (float)((float)(eye.z - v64) * (float)(eye.z - v64));
-        v57 = COERCE_FLOAT(_mm_sqrt_ps(v65)) / v50;
-        if ( v57 > 1.0 )
-          v57 = *(float *)&FLOAT_1_0;
+        v62.m128_f32[0] = (float)((float)((float)(eye.y - v63) * (float)(eye.y - v63)) + (float)(v64 * v64))
+                        + (float)((float)(eye.z - v61) * (float)(eye.z - v61));
+        v54 = _mm_sqrt_ps(v62).m128_f32[0] / v47;
+        if ( v54 > 1.0 )
+          v54 = *(float *)&FLOAT_1_0;
         v14->mInCollision = 1;
       }
     }
-    v14->mAllowCanOccludeCamera = v14->mInCollision == 0;
+    v14->mAllowCanOccludeCamera = !v14->mInCollision;
     if ( !v14->mEyePushValid )
     {
       v14->mEyePushPercent = 0.0;
       v14->mEyePushValid = 1;
     }
-    v68 = &v14->mEyePushPercent;
-    LODWORD(v69) = COERCE_UNSIGNED_INT(v57 - v14->mEyePushPercent) & _xmm;
+    p_mEyePushPercent = &v14->mEyePushPercent;
+    LODWORD(v66) = COERCE_UNSIGNED_INT(v54 - v14->mEyePushPercent) & _xmm;
     if ( UFG::tbCollisionForceSnap )
-      *v68 = v57;
-    if ( v57 <= *v68 )
+      *p_mEyePushPercent = v54;
+    if ( v54 <= *p_mEyePushPercent )
     {
-      v70 = UFG::trCollisionApproachRateFactorOut;
+      mPushInOverrideRate = UFG::trCollisionApproachRateFactorOut;
     }
     else
     {
-      v70 = v14->mPushInOverrideRate;
-      if ( v70 <= 0.0 )
-        v70 = UFG::trCollisionApproachRateFactorIn;
+      mPushInOverrideRate = v14->mPushInOverrideRate;
+      if ( mPushInOverrideRate <= 0.0 )
+        mPushInOverrideRate = UFG::trCollisionApproachRateFactorIn;
     }
-    UFG::qApproach(&v14->mEyePushPercent, v57, v70 * v69, v19);
-    v71 = v50 * *v68;
-    v72 = v14->mCollisionBlend + v14->mCollisionPlateau;
-    v73 = v71 - (float)(v50 - v72);
-    if ( v73 <= 0.0 )
-      v73 = 0.0;
-    if ( v73 >= v72 )
-      v73 = v14->mCollisionBlend + v14->mCollisionPlateau;
-    v74 = v14->mCollisionRise;
-    v75 = v73 / v14->mCollisionBlend;
-    if ( v75 >= 1.0 )
-    {
-      v76 = FLOAT_0_5;
-    }
+    UFG::qApproach(&v14->mEyePushPercent, v54, mPushInOverrideRate * v66, dt);
+    v68 = v47 * *p_mEyePushPercent;
+    v69 = v14->mCollisionBlend + v14->mCollisionPlateau;
+    v70 = v68 - (float)(v47 - v69);
+    if ( v70 <= 0.0 )
+      v70 = 0.0;
+    if ( v70 >= v69 )
+      v70 = v14->mCollisionBlend + v14->mCollisionPlateau;
+    mCollisionRise = v14->mCollisionRise;
+    v72 = v70 / v14->mCollisionBlend;
+    if ( v72 < 1.0 )
+      mCollisionRise = (float)((float)(cosf((float)(v72 * 3.1415927) - 3.1415927) + 1.0) * 0.5) * mCollisionRise;
+    mEyePushRise = v14->mEyePushRise;
+    if ( mCollisionRise <= mEyePushRise )
+      v74 = UFG::trCollisionEyeDropRate;
     else
+      v74 = UFG::trCollisionEyeRiseRate;
+    UFG::qApproach(
+      &v14->mEyePushRise,
+      mCollisionRise,
+      COERCE_FLOAT(COERCE_UNSIGNED_INT(mEyePushRise - mCollisionRise) & _xmm) * v74,
+      dt);
+    v75 = FLOAT_0_050000001;
+    v76 = v47 - v68;
+    v77 = (float)((float)(v52 * v68) + eye.z) + v14->mEyePushRise;
+    v78 = (float)(v50 * v68) + eye.x;
+    v79 = (float)(v51 * v68) + eye.y;
+    eye.z = v77;
+    eye.x = v78;
+    eye.y = v79;
+    if ( v76 >= 0.050000001 )
+      v75 = v76;
+    p_ymax = &aWaterExcludeBoxes[0].ymax;
+    v81 = &aWaterExcludeBoxes[0].ymax;
+    v82 = (float)(v52 * v75) + v77;
+    loook.x = v78 + (float)(v50 * v75);
+    loook.y = v79 + (float)(v51 * v75);
+    loook.z = v82;
+    while ( v78 >= *(v81 - 1) || v78 <= *(v81 - 3) || v79 >= *v81 || v79 <= *(v81 - 2) )
     {
-      v76 = FLOAT_0_5;
-      v74 = (float)((float)(cosf((float)(v75 * 3.1415927) - 3.1415927) + 1.0) * 0.5) * v74;
-    }
-    v77 = v14->mEyePushRise;
-    if ( v74 <= v77 )
-      v78 = UFG::trCollisionEyeDropRate;
-    else
-      v78 = UFG::trCollisionEyeRiseRate;
-    UFG::qApproach(&v14->mEyePushRise, v74, COERCE_FLOAT(COERCE_UNSIGNED_INT(v77 - v74) & _xmm) * v78, v19);
-    v79 = FLOAT_0_050000001;
-    v80 = v50 - v71;
-    v81 = (float)((float)(v55 * v71) + eye.z) + v14->mEyePushRise;
-    v82 = (float)(v53 * v71) + eye.x;
-    v83 = (float)(v54 * v71) + eye.y;
-    eye.z = (float)((float)(v55 * v71) + eye.z) + v14->mEyePushRise;
-    eye.x = (float)(v53 * v71) + eye.x;
-    eye.y = (float)(v54 * v71) + eye.y;
-    if ( v80 >= 0.050000001 )
-      v79 = v80;
-    v84 = v53 * v79;
-    v85 = v54 * v79;
-    v86 = &aWaterExcludeBoxes[0].ymax;
-    v87 = &aWaterExcludeBoxes[0].ymax;
-    v88 = (float)(v55 * v79) + v81;
-    loook.x = v82 + v84;
-    loook.y = v83 + v85;
-    loook.z = v88;
-    while ( v82 >= *(v87 - 1) || v82 <= *(v87 - 3) || v83 >= *v87 || v83 <= *(v87 - 2) )
-    {
-      v87 += 4;
-      if ( (signed __int64)v87 >= (signed __int64)&UFG::GameCameraComponent::mDofDamageDomain[3] )
+      v81 += 4;
+      if ( (__int64)v81 >= (__int64)&UFG::GameCameraComponent::mDofDamageDomain[3] )
       {
-        if ( v81 < UFG::trCollisionWaterLevel )
+        if ( v77 < UFG::trCollisionWaterLevel )
         {
-          v81 = UFG::trCollisionWaterLevel;
+          v77 = UFG::trCollisionWaterLevel;
           LOBYTE(retaddr) = 1;
           eye.z = UFG::trCollisionWaterLevel;
-          goto LABEL_67;
+          goto LABEL_66;
         }
         break;
       }
     }
     LOBYTE(retaddr) = 0;
-LABEL_67:
-    if ( v112 )
+LABEL_66:
+    if ( this )
     {
-      *v112 = v82;
-      v112[1] = v83;
-      v112[2] = v81;
+      *(float *)&this->vfptr = v78;
+      *((float *)&this->vfptr + 1) = v79;
+      *(float *)&this->m_SafePointerList.mNode.UFG::BaseCameraComponent::UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mPrev = v77;
     }
-    if ( v114 )
+    if ( v108 )
     {
-      *v114 = v82 + v84;
-      v114[1] = v83 + v85;
-      v114[2] = v88;
+      *v108 = v78 + (float)(v50 * v75);
+      v108[1] = v79 + (float)(v51 * v75);
+      v108[2] = v82;
     }
-    UFG::BaseCameraComponent::SetEyeLookUp((UFG::BaseCameraComponent *)&v14->vfptr, v19, &eye, &loook, &up);
+    UFG::BaseCameraComponent::SetEyeLookUp(v14, dt, &eye, &loook, &up);
     if ( UFG::tbCollisionDebugDraw )
     {
-      v89 = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 1u);
-      v90 = v14->mLookModified;
-      v91 = "No";
-      v92 = v89;
-      v93 = "No";
-      v94 = &UFG::qColour::White;
-      if ( v90 )
-        v93 = "Yes";
-      if ( v90 )
-        v94 = &UFG::qColour::Red;
-      Render::DebugDrawContext::DrawTextA(v89, 240, 500, v94, "Look Modified : %s", v93);
-      v95 = &UFG::qColour::White;
+      Context = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(
+                                              Render::DebugDrawManager::mInstance,
+                                              1u);
+      mLookModified = v14->mLookModified;
+      v85 = "No";
+      v86 = Context;
+      v87 = "No";
+      v88 = &UFG::qColour::White;
+      if ( mLookModified )
+        v87 = "Yes";
+      if ( mLookModified )
+        v88 = &UFG::qColour::Red;
+      Render::DebugDrawContext::DrawTextA(Context, 240, 500, v88, "Look Modified : %s", v87);
+      v89 = &UFG::qColour::White;
       if ( v14->mInCollision )
       {
-        v91 = "Yes";
+        v85 = "Yes";
         if ( v14->mInCollision )
-          v95 = &UFG::qColour::Red;
+          v89 = &UFG::qColour::Red;
       }
-      Render::DebugDrawContext::DrawTextA(v92, 240, 511, v95, "In Collision  : %s", v91);
-      Render::DebugDrawContext::DrawTextA(v92, 240, 522, &UFG::qColour::White, "Collision Push: %f", v71);
-      v96 = &UFG::qColour::White;
-      v97 = v14->mEyePushRise;
-      if ( v97 > 0.001 )
-        v96 = &UFG::qColour::Red;
-      Render::DebugDrawContext::DrawTextA(v92, 240, 533, v96, "Collision Rise: %f", v97);
-      removePhantomWhenDone = *v68;
-      v99 = &UFG::qColour::White;
+      Render::DebugDrawContext::DrawTextA(v86, 240, 511, v89, "In Collision  : %s", v85);
+      Render::DebugDrawContext::DrawTextA(v86, 240, 522, &UFG::qColour::White, "Collision Push: %f", v68);
+      v90 = &UFG::qColour::White;
+      v91 = v14->mEyePushRise;
+      if ( v91 > 0.001 )
+        v90 = &UFG::qColour::Red;
+      Render::DebugDrawContext::DrawTextA(v86, 240, 533, v90, "Collision Rise: %f", v91);
+      removePhantomWhenDone = *p_mEyePushPercent;
+      v92 = &UFG::qColour::White;
       Render::DebugDrawContext::DrawTextA(
-        v92,
+        v86,
         240,
         544,
         &UFG::qColour::White,
         "Push Percent  : %f",
         removePhantomWhenDone);
       Render::DebugDrawContext::DrawSphere(
-        v92,
+        v86,
         centre,
         UFG::trCollisionTargetPointCastingRadius,
         &UFG::qColour::Blue,
         &UFG::qMatrix44::msIdentity,
         0i64);
       Render::DebugDrawContext::DrawSphere(
-        v92,
+        v86,
         &loook,
         UFG::trCollisionTargetPointCastingRadius * 1.02,
         &UFG::qColour::White,
         &UFG::qMatrix44::msIdentity,
         0i64);
-      Render::DebugDrawContext::DrawText(v92, centre, &UFG::qColour::Blue, "dL");
-      Render::DebugDrawContext::DrawText(v92, &loook, &UFG::qColour::White, "  L");
+      Render::DebugDrawContext::DrawText(v86, centre, &UFG::qColour::Blue, "dL");
+      Render::DebugDrawContext::DrawText(v86, &loook, &UFG::qColour::White, "  L");
       if ( v14->mAlternateLookValid )
       {
         Render::DebugDrawContext::DrawSphere(
-          v92,
+          v86,
           &v14->mAlternateLook,
           UFG::trCollisionTargetPointCastingRadius * 0.98000002,
           &UFG::qColour::Green,
           &UFG::qMatrix44::msIdentity,
           0i64);
-        Render::DebugDrawContext::DrawText(v92, &v14->mAlternateLook, &UFG::qColour::Green, "aL");
+        Render::DebugDrawContext::DrawText(v86, &v14->mAlternateLook, &UFG::qColour::Green, "aL");
       }
       Render::DebugDrawContext::DrawSphere(
-        v92,
-        v13,
+        v86,
+        desEye,
         UFG::trCollisionCastingRadius,
         &UFG::qColour::Red,
         &UFG::qMatrix44::msIdentity,
         0i64);
       Render::DebugDrawContext::DrawSphere(
-        v92,
+        v86,
         &eye,
         UFG::trCollisionCastingRadius * 1.02,
         &UFG::qColour::Yellow,
         &UFG::qMatrix44::msIdentity,
         0i64);
-      Render::DebugDrawContext::DrawText(v92, v13, &UFG::qColour::Red, "dE");
-      Render::DebugDrawContext::DrawText(v92, &eye, &UFG::qColour::Yellow, "  E");
-      result.x = (float)(loook.x + eye.x) * v76;
-      result.y = (float)(loook.y + eye.y) * v76;
+      Render::DebugDrawContext::DrawText(v86, desEye, &UFG::qColour::Red, "dE");
+      Render::DebugDrawContext::DrawText(v86, &eye, &UFG::qColour::Yellow, "  E");
+      result.x = (float)(loook.x + eye.x) * 0.5;
+      result.y = (float)(loook.y + eye.y) * 0.5;
       result.z = UFG::trCollisionWaterLevel;
       Render::DebugDrawContext::DrawCircle(
-        v92,
+        v86,
         &result,
         &UFG::qVector3::msAxisY,
         3.0,
         &UFG::qColour::Blue,
         &UFG::qMatrix44::msIdentity,
         0i64);
-      v100 = 0;
+      v93 = 0;
       do
       {
         Render::DebugDrawContext::DrawRect(
-          v92,
-          *(v86 - 3) + *(v86 - 1),
-          *(v86 - 2) + *v86,
-          *(v86 - 1) - *(v86 - 3),
-          *v86 - *(v86 - 2),
+          v86,
+          *(p_ymax - 3) + *(p_ymax - 1),
+          *(p_ymax - 2) + *p_ymax,
+          *(p_ymax - 1) - *(p_ymax - 3),
+          *p_ymax - *(p_ymax - 2),
           &UFG::qColour::Red);
-        if ( eye.x < *(v86 - 1) && eye.x > *(v86 - 3) && eye.y < *v86 && eye.y > *(v86 - 2) )
-          v100 = 1;
-        v86 += 4;
+        if ( eye.x < *(p_ymax - 1) && eye.x > *(p_ymax - 3) && eye.y < *p_ymax && eye.y > *(p_ymax - 2) )
+          v93 = 1;
+        p_ymax += 4;
       }
-      while ( (signed __int64)v86 < (signed __int64)&UFG::GameCameraComponent::mDofDamageDomain[3] );
-      v101 = "False";
-      v102 = "False";
-      v103 = &UFG::qColour::White;
-      if ( v100 )
-        v102 = "True";
-      if ( v100 )
-        v103 = &UFG::qColour::Red;
-      Render::DebugDrawContext::DrawTextA(v92, 240, 555, v103, "Ignore Water Test: %s", v102);
+      while ( (__int64)p_ymax < (__int64)&UFG::GameCameraComponent::mDofDamageDomain[3] );
+      v94 = "False";
+      v95 = "False";
+      v96 = &UFG::qColour::White;
+      if ( v93 )
+        v95 = "True";
+      if ( v93 )
+        v96 = &UFG::qColour::Red;
+      Render::DebugDrawContext::DrawTextA(v86, 240, 555, v96, "Ignore Water Test: %s", v95);
       if ( (_BYTE)retaddr )
-        v99 = &UFG::qColour::Red;
+        v92 = &UFG::qColour::Red;
       if ( (_BYTE)retaddr )
-        v101 = "True";
-      Render::DebugDrawContext::DrawTextA(v92, 240, 566, v99, "DEye Below Water: %s", v101);
-      v14 = v108;
+        v94 = "True";
+      Render::DebugDrawContext::DrawTextA(v86, 240, 566, v92, "DEye Below Water: %s", v94);
+      v14 = v102;
     }
     *(_QWORD *)&v14->mCandidateEye.x = 0i64;
     v14->mCandidateEye.z = -100000.0;
   }
   else
   {
-    v36 = &aWaterExcludeBoxes[0].ymax;
-    while ( v10 >= *(v36 - 1) || v10 <= *(v36 - 3) || v11 >= *v36 || v11 <= *(v36 - 2) )
+    v34 = &aWaterExcludeBoxes[0].ymax;
+    while ( x >= *(v34 - 1) || x <= *(v34 - 3) || y >= *v34 || y <= *(v34 - 2) )
     {
-      v36 += 4;
-      if ( (signed __int64)v36 >= (signed __int64)&UFG::GameCameraComponent::mDofDamageDomain[3] )
+      v34 += 4;
+      if ( (__int64)v34 >= (__int64)&UFG::GameCameraComponent::mDofDamageDomain[3] )
       {
         if ( eye.z < UFG::trCollisionWaterLevel )
           eye.z = UFG::trCollisionWaterLevel;
         break;
       }
     }
-    UFG::BaseCameraComponent::SetEyeLookUp((UFG::BaseCameraComponent *)&v14->vfptr, v19, &eye, &loook, &up);
-    if ( v112 )
+    UFG::BaseCameraComponent::SetEyeLookUp(v14, dt, &eye, &loook, &up);
+    if ( this )
     {
-      v37 = eye.y;
-      *v112 = eye.x;
-      v38 = eye.z;
-      v112[1] = v37;
-      v112[2] = v38;
+      v35 = eye.y;
+      *(float *)&this->vfptr = eye.x;
+      v36 = eye.z;
+      *((float *)&this->vfptr + 1) = v35;
+      *(float *)&this->m_SafePointerList.mNode.UFG::BaseCameraComponent::UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mPrev = v36;
     }
-    if ( v113 )
+    if ( v107 )
     {
-      v39 = loook.y;
-      *v113 = loook.x;
-      v40 = loook.z;
-      v113[1] = v39;
-      v113[2] = v40;
+      v37 = loook.y;
+      *v107 = loook.x;
+      v38 = loook.z;
+      v107[1] = v37;
+      v107[2] = v38;
     }
   }
 }
 
 // File Line: 1525
 // RVA: 0x3C39E0
-char __fastcall UFG::GameCameraComponent::GetSurfaceNormal(UFG::qVector3 *surfNormal, hkpCollidable *collidable, unsigned int shapeKey)
+bool __fastcall UFG::GameCameraComponent::GetSurfaceNormal(
+        UFG::qVector3 *surfNormal,
+        hkpCollidable *collidable,
+        unsigned int shapeKey)
 {
-  hkpCollidable *v3; // rdi
-  UFG::qVector3 *v4; // rsi
-  hkpShape *v5; // rax
-  char result; // al
-  unsigned __int64 v7; // rcx
+  hkpShape *m_shape; // rax
+  bool result; // al
+  unsigned __int64 m_userData; // rcx
   __int64 v8; // rax
   __int64 v9; // rbx
-  hkVector4f *v10; // rcx
+  const void *m_motion; // rcx
   hkVector4f v11; // xmm1
   hkVector4f v12; // xmm2
   hkVector4f v13; // xmm3
@@ -2380,14 +2320,14 @@ char __fastcall UFG::GameCameraComponent::GetSurfaceNormal(UFG::qVector3 *surfNo
   float v17; // xmm5_4
   float v18; // xmm0_4
   float v19; // xmm4_4
-  float v20; // ST24_4
-  float v21; // ST20_4
-  float v22; // xmm14_4
+  float v20; // xmm14_4
+  float v21; // xmm9_4
+  float v22; // xmm0_4
   float v23; // xmm9_4
-  float v24; // xmm0_4
-  float v25; // xmm9_4
-  float v26; // xmm10_4
-  float d; // [rsp+30h] [rbp-2F8h]
+  float v24; // xmm10_4
+  float v25; // [rsp+20h] [rbp-308h]
+  float v26; // [rsp+24h] [rbp-304h]
+  float d; // [rsp+30h] [rbp-2F8h] BYREF
   float v28; // [rsp+34h] [rbp-2F4h]
   float v29; // [rsp+38h] [rbp-2F0h]
   float v30; // [rsp+40h] [rbp-2E8h]
@@ -2399,37 +2339,35 @@ char __fastcall UFG::GameCameraComponent::GetSurfaceNormal(UFG::qVector3 *surfNo
   float v36; // [rsp+60h] [rbp-2C8h]
   float v37; // [rsp+64h] [rbp-2C4h]
   float v38; // [rsp+68h] [rbp-2C0h]
-  hkTransformf v39; // [rsp+70h] [rbp-2B8h]
-  char v40; // [rsp+B0h] [rbp-278h]
+  hkTransformf v39; // [rsp+70h] [rbp-2B8h] BYREF
+  char v40[512]; // [rsp+B0h] [rbp-278h] BYREF
   float v41; // [rsp+338h] [rbp+10h]
   float v42; // [rsp+348h] [rbp+20h]
 
-  v3 = collidable;
-  v4 = surfNormal;
   if ( !collidable )
     return 0;
   if ( shapeKey == -1 )
     return 0;
-  v5 = collidable->m_shape;
+  m_shape = collidable->m_shape;
   if ( !collidable->m_shape )
     return 0;
-  if ( v5->m_type.m_storage != 9 )
+  if ( m_shape->m_type.m_storage != 9 )
     return 0;
-  v7 = v5[2].m_userData;
-  if ( !v7 || *(_BYTE *)(v7 + 41) != 1 )
+  m_userData = m_shape[2].m_userData;
+  if ( !m_userData || *(_BYTE *)(m_userData + 41) != 1 )
     return 0;
-  v8 = (*(__int64 (__fastcall **)(unsigned __int64, _QWORD, char *))(*(_QWORD *)(v7 + 32) + 40i64))(
-         v7 + 32,
+  v8 = (*(__int64 (__fastcall **)(unsigned __int64, _QWORD, char *))(*(_QWORD *)(m_userData + 32) + 40i64))(
+         m_userData + 32,
          shapeKey,
-         &v40);
+         v40);
   v9 = v8;
   if ( !v8 || *(_BYTE *)(v8 + 16) != 2 )
     return 0;
-  v10 = (hkVector4f *)v3->m_motion;
-  v11.m_quad = (__m128)v10[1];
-  v12.m_quad = (__m128)v10[2];
-  v13.m_quad = (__m128)v10[3];
-  v39.m_rotation.m_col0 = (hkVector4f)v10->m_quad;
+  m_motion = collidable->m_motion;
+  v11.m_quad = (__m128)*((_OWORD *)m_motion + 1);
+  v12.m_quad = (__m128)*((_OWORD *)m_motion + 2);
+  v13.m_quad = (__m128)*((_OWORD *)m_motion + 3);
+  v39.m_rotation.m_col0 = *(hkVector4f *)m_motion;
   v39.m_rotation.m_col1 = (hkVector4f)v11.m_quad;
   v39.m_rotation.m_col2 = (hkVector4f)v12.m_quad;
   v39.m_translation = (hkVector4f)v13.m_quad;
@@ -2447,104 +2385,100 @@ char __fastcall UFG::GameCameraComponent::GetSurfaceNormal(UFG::qVector3 *surfNo
   v13.m_quad.m128_i32[0] = *(_DWORD *)(v9 + 64);
   v11.m_quad.m128_f32[0] = v35 * v14;
   v19 = *(float *)(v9 + 72);
-  v20 = (float)((float)(v15 + v18) + v11.m_quad.m128_f32[0]) + v38;
-  v21 = (float)((float)((float)(v30 * v12.m_quad.m128_f32[0]) + (float)(d * v13.m_quad.m128_f32[0])) + (float)(v33 * v19))
+  v26 = (float)((float)(v15 + v18) + v11.m_quad.m128_f32[0]) + v38;
+  v25 = (float)((float)((float)(v30 * v12.m_quad.m128_f32[0]) + (float)(d * v13.m_quad.m128_f32[0])) + (float)(v33 * v19))
       + v36;
-  v22 = (float)((float)((float)((float)(v31 * v12.m_quad.m128_f32[0]) + (float)(v28 * v13.m_quad.m128_f32[0]))
+  v20 = (float)((float)((float)((float)(v31 * v12.m_quad.m128_f32[0]) + (float)(v28 * v13.m_quad.m128_f32[0]))
                       + (float)(v34 * v19))
               + v37)
       - (float)(v17 + v37);
-  v23 = v32 * v12.m_quad.m128_f32[0];
+  v21 = v32 * v12.m_quad.m128_f32[0];
   v12.m_quad.m128_i32[0] = *(_DWORD *)(v9 + 88);
   result = 1;
-  v24 = *(float *)(v9 + 84);
+  v22 = *(float *)(v9 + 84);
   v11.m_quad.m128_i32[0] = *(_DWORD *)(v9 + 80);
-  v25 = (float)((float)((float)(v23 + (float)(v29 * v13.m_quad.m128_f32[0])) + (float)(v35 * v19)) + v38) - v20;
-  v42 = (float)((float)((float)(v30 * v24) + (float)(d * v11.m_quad.m128_f32[0])) + (float)(v33 * v12.m_quad.m128_f32[0]))
+  v23 = (float)((float)((float)(v21 + (float)(v29 * v13.m_quad.m128_f32[0])) + (float)(v35 * v19)) + v38) - v26;
+  v42 = (float)((float)((float)(v30 * v22) + (float)(d * v11.m_quad.m128_f32[0])) + (float)(v33 * v12.m_quad.m128_f32[0]))
       + v36;
-  v26 = (float)((float)((float)((float)(v31 * v24) + (float)(v28 * v11.m_quad.m128_f32[0]))
+  v24 = (float)((float)((float)((float)(v31 * v22) + (float)(v28 * v11.m_quad.m128_f32[0]))
                       + (float)(v34 * v12.m_quad.m128_f32[0]))
               + v37)
       - (float)(v17 + v37);
-  v13.m_quad.m128_f32[0] = (float)((float)((float)((float)(v32 * v24) + (float)(v29 * v11.m_quad.m128_f32[0]))
+  v13.m_quad.m128_f32[0] = (float)((float)((float)((float)(v32 * v22) + (float)(v29 * v11.m_quad.m128_f32[0]))
                                          + (float)(v35 * v12.m_quad.m128_f32[0]))
                                  + v38)
-                         - v20;
-  v4->x = (float)(v22 * v13.m_quad.m128_f32[0]) - (float)(v25 * v26);
-  v4->z = (float)((float)(v21 - v41) * v26) - (float)(v22 * (float)(v42 - v41));
-  v4->y = (float)(v25 * (float)(v42 - v41)) - (float)((float)(v21 - v41) * v13.m_quad.m128_f32[0]);
+                         - v26;
+  surfNormal->x = (float)(v20 * v13.m_quad.m128_f32[0]) - (float)(v23 * v24);
+  surfNormal->z = (float)((float)(v25 - v41) * v24) - (float)(v20 * (float)(v42 - v41));
+  surfNormal->y = (float)(v23 * (float)(v42 - v41)) - (float)((float)(v25 - v41) * v13.m_quad.m128_f32[0]);
   return result;
 }
 
 // File Line: 1581
 // RVA: 0x3CD680
-char __fastcall UFG::GameCameraComponent::ShouldPassThru(UFG::GameCameraComponent *this, UFG::ShapeCasterCollector::HitInfo *info, UFG::qVector3 *startPos)
+char __fastcall UFG::GameCameraComponent::ShouldPassThru(
+        UFG::GameCameraComponent *this,
+        UFG::ShapeCasterCollector::HitInfo *info,
+        UFG::qVector3 *startPos)
 {
-  UFG::qVector3 *v3; // r14
-  UFG::ShapeCasterCollector::HitInfo *v4; // rbx
-  UFG::GameCameraComponent *v5; // rdi
-  hkpRigidBody *v6; // rsi
+  hkpRigidBody *mRigidBody; // rsi
   UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject> *v7; // rcx
-  const char *v8; // rax
-  UFG::qReflectObject *v9; // rax
-  __int128 v10; // xmm1
-  __int128 v11; // xmm2
-  __int128 v12; // xmm3
+  const char *TypeName; // rax
+  UFG::qReflectObject *mData; // rax
+  hkVector4f v10; // xmm1
+  hkVector4f v11; // xmm2
+  hkVector4f v12; // xmm3
   __int64 v13; // r8
   __m128 v14; // xmm1
-  float v15; // xmm0_4
-  float v16; // xmm0_4
-  float v17; // xmm0_4
-  UFG::SimObjectCharacter *v18; // rbx
-  unsigned __int16 v19; // cx
-  UFG::TargetingSystemItemComponent *v20; // rax
-  unsigned __int16 v21; // cx
-  UFG::CharacterSubjectComponent *v22; // rax
-  UFG::SimObjectCharacter *v23; // rax
-  UFG::SimObjectCharacter *v24; // rax
+  float x; // xmm0_4
+  float y; // xmm0_4
+  float z; // xmm0_4
+  UFG::SimObjectCharacter *mSimObject; // rbx
+  __int16 m_Flags; // cx
+  UFG::TargetingSystemItemComponent *ComponentOfTypeHK; // rax
+  __int16 v21; // cx
+  UFG::CharacterSubjectComponent *ComponentOfType; // rax
+  UFG::SimObject *pSimObjectPassThru1; // rax
+  UFG::SimObject *pSimObjectPassThru2; // rax
   char v25; // bl
-  UFG::qVector3 surfNormal; // [rsp+20h] [rbp-D8h]
-  __m128 v28; // [rsp+30h] [rbp-C8h]
-  __m128 v29; // [rsp+40h] [rbp-B8h]
-  UFG::qReflectHandleBase v30; // [rsp+50h] [rbp-A8h]
-  hkVector4f v31; // [rsp+78h] [rbp-80h]
-  __int128 v32; // [rsp+88h] [rbp-70h]
-  __int128 v33; // [rsp+98h] [rbp-60h]
-  __int128 v34; // [rsp+A8h] [rbp-50h]
-  hkpRigidBodyCinfo infoa; // [rsp+B8h] [rbp-40h]
+  UFG::qVector3 surfNormal; // [rsp+20h] [rbp-E0h] BYREF
+  __m128 v28; // [rsp+30h] [rbp-D0h] BYREF
+  __m128 v29; // [rsp+40h] [rbp-C0h]
+  UFG::qReflectHandleBase v30; // [rsp+50h] [rbp-B0h] BYREF
+  __int64 v31; // [rsp+78h] [rbp-88h]
+  _OWORD v32[3]; // [rsp+80h] [rbp-80h] BYREF
+  __m128 m_quad; // [rsp+B0h] [rbp-50h]
+  hkpRigidBodyCinfo info_8; // [rsp+C0h] [rbp-40h] BYREF
 
-  v31.m_quad.m128_u64[0] = -2i64;
-  v3 = startPos;
-  v4 = info;
-  v5 = this;
+  v31 = -2i64;
   if ( info )
   {
-    v6 = info->mRigidBody;
-    if ( v6 )
+    mRigidBody = info->mRigidBody;
+    if ( mRigidBody )
     {
       UFG::qReflectHandleBase::qReflectHandleBase(&v30);
-      v8 = UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject>::GetTypeName(v7);
-      v30.mTypeUID = UFG::qStringHash64(v8, 0xFFFFFFFFFFFFFFFFui64);
-      UFG::qReflectHandleBase::Init(&v30, v30.mTypeUID, v4->mPhysicsObjectPropertyHandleUID);
-      v9 = v30.mData;
+      TypeName = UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject>::GetTypeName(v7);
+      v30.mTypeUID = UFG::qStringHash64(TypeName, 0xFFFFFFFFFFFFFFFFui64);
+      UFG::qReflectHandleBase::Init(&v30, v30.mTypeUID, info->mPhysicsObjectPropertyHandleUID);
+      mData = v30.mData;
       if ( !v30.mData )
-        goto LABEL_54;
+        goto LABEL_17;
       if ( BYTE5(v30.mData[1].mHandles.mNode.mPrev) )
       {
-        if ( BYTE6(v30.mData[1].mHandles.mNode.mPrev) && v5->mAllowCanOccludeCamera )
+        if ( BYTE6(v30.mData[1].mHandles.mNode.mPrev) && this->mAllowCanOccludeCamera )
         {
-          hkpRigidBodyCinfo::hkpRigidBodyCinfo(&infoa);
-          hkpRigidBody::getCinfo(v6, &infoa);
-          v10 = (__int128)v6->m_motion.m_motionState.m_transform.m_rotation.m_col1;
-          v11 = (__int128)v6->m_motion.m_motionState.m_transform.m_rotation.m_col2;
-          v12 = (__int128)v6->m_motion.m_motionState.m_transform.m_translation;
-          v31.m_quad = (__m128)v6->m_motion.m_motionState.m_transform.m_rotation.m_col0;
-          v32 = v10;
-          v33 = v11;
-          v34 = v12;
-          ((void (__fastcall *)(hkpShape *, hkVector4f *, __int64, __m128 *))infoa.m_shape->vfptr[2].__vecDelDtor)(
-            infoa.m_shape,
-            &v31,
+          hkpRigidBodyCinfo::hkpRigidBodyCinfo(&info_8);
+          hkpRigidBody::getCinfo(mRigidBody, &info_8);
+          v10.m_quad = (__m128)mRigidBody->m_motion.m_motionState.m_transform.m_rotation.m_col1;
+          v11.m_quad = (__m128)mRigidBody->m_motion.m_motionState.m_transform.m_rotation.m_col2;
+          v12.m_quad = (__m128)mRigidBody->m_motion.m_motionState.m_transform.m_translation;
+          v32[0] = mRigidBody->m_motion.m_motionState.m_transform.m_rotation.m_col0;
+          v32[1] = v10.m_quad;
+          v32[2] = v11.m_quad;
+          m_quad = v12.m_quad;
+          ((void (__fastcall *)(hkpShape *, _OWORD *, __int64, __m128 *))info_8.m_shape->vfptr[2].__vecDelDtor)(
+            info_8.m_shape,
+            v32,
             v13,
             &v28);
           v14 = _mm_shuffle_ps(
@@ -2553,55 +2487,75 @@ char __fastcall UFG::GameCameraComponent::ShouldPassThru(UFG::GameCameraComponen
                   0);
           v29 = _mm_add_ps(v29, v14);
           v28 = _mm_sub_ps(v28, v14);
-          v15 = v5->mCandidateEye.x;
-          if ( v15 < v28.m128_f32[0] )
-            goto LABEL_48;
-          if ( v15 > v29.m128_f32[0] )
-            goto LABEL_48;
-          v16 = v5->mCandidateEye.y;
-          if ( v16 < v28.m128_f32[1] )
-            goto LABEL_48;
-          if ( v16 > v29.m128_f32[1] )
-            goto LABEL_48;
-          v17 = v5->mCandidateEye.z;
-          if ( v17 < v28.m128_f32[2] || v17 > v29.m128_f32[2] )
-            goto LABEL_48;
-          v9 = v30.mData;
+          x = this->mCandidateEye.x;
+          if ( x < v28.m128_f32[0] )
+            goto LABEL_45;
+          if ( x > v29.m128_f32[0] )
+            goto LABEL_45;
+          y = this->mCandidateEye.y;
+          if ( y < v28.m128_f32[1] )
+            goto LABEL_45;
+          if ( y > v29.m128_f32[1] )
+            goto LABEL_45;
+          z = this->mCandidateEye.z;
+          if ( z < v28.m128_f32[2] || z > v29.m128_f32[2] )
+            goto LABEL_45;
+          mData = v30.mData;
         }
-        if ( !BYTE1(v9[2].vfptr)
-          || !UFG::GameCameraComponent::GetSurfaceNormal(&surfNormal, v4->mCollidableB, v4->mShapeKeyB)
-          || (float)((float)((float)(surfNormal.x * (float)(v3->x - v4->mContactPosition.x))
-                           + (float)(surfNormal.y * (float)(v3->y - v4->mContactPosition.y)))
-                   + (float)(surfNormal.z * (float)(v3->z - v4->mContactPosition.z))) >= 0.0 )
+        if ( !BYTE1(mData[2].vfptr)
+          || !UFG::GameCameraComponent::GetSurfaceNormal(&surfNormal, info->mCollidableB, info->mShapeKeyB)
+          || (float)((float)((float)(surfNormal.x * (float)(startPos->x - info->mContactPosition.x))
+                           + (float)(surfNormal.y * (float)(startPos->y - info->mContactPosition.y)))
+                   + (float)(surfNormal.z * (float)(startPos->z - info->mContactPosition.z))) >= 0.0 )
         {
-LABEL_54:
-          v18 = (UFG::SimObjectCharacter *)v4->mSimObject;
-          if ( !v18
-            || ((v19 = v18->m_Flags, !((v19 >> 14) & 1)) ? ((v19 & 0x8000u) == 0 ? (!((v19 >> 13) & 1) ? (!((v19 >> 12) & 1) ? (v20 = (UFG::TargetingSystemItemComponent *)UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v18->vfptr, UFG::TargetingSystemItemComponent::_TypeUID)) : (v20 = (UFG::TargetingSystemItemComponent *)UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)&v18->vfptr, UFG::TargetingSystemItemComponent::_TypeUID))) : (v20 = (UFG::TargetingSystemItemComponent *)UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)&v18->vfptr, UFG::TargetingSystemItemComponent::_TypeUID))) : (v20 = UFG::SimObjectCVBase::GetComponent<UFG::TargetingSystemItemComponent>((UFG::SimObjectCVBase *)&v18->vfptr))) : (v20 = UFG::SimObjectCVBase::GetComponent<UFG::TargetingSystemItemComponent>((UFG::SimObjectCVBase *)&v18->vfptr)),
-                !v20
-             && ((v21 = v18->m_Flags, !((v21 >> 14) & 1)) ? ((v21 & 0x8000u) == 0 ? (!((v21 >> 13) & 1) ? (!((v21 >> 12) & 1) ? (v22 = (UFG::CharacterSubjectComponent *)UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v18->vfptr, UFG::CharacterSubjectComponent::_TypeUID)) : (v22 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)&v18->vfptr, UFG::CharacterSubjectComponent::_TypeUID))) : (v22 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)&v18->vfptr, UFG::CharacterSubjectComponent::_TypeUID))) : (v22 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)&v18->vfptr, UFG::CharacterSubjectComponent::_TypeUID))) : (v22 = UFG::SimObjectCharacter::GetComponent<UFG::CharacterSubjectComponent>(v18)),
-                 !v22)) )
+LABEL_17:
+          mSimObject = (UFG::SimObjectCharacter *)info->mSimObject;
+          if ( !mSimObject
+            || ((m_Flags = mSimObject->m_Flags, (m_Flags & 0x4000) != 0) || m_Flags < 0
+              ? (ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::TargetingSystemItemComponent>(mSimObject))
+              : (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+              ? (ComponentOfTypeHK = (UFG::TargetingSystemItemComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                            mSimObject,
+                                                                            UFG::TargetingSystemItemComponent::_TypeUID))
+              : (ComponentOfTypeHK = (UFG::TargetingSystemItemComponent *)UFG::SimObject::GetComponentOfType(
+                                                                            mSimObject,
+                                                                            UFG::TargetingSystemItemComponent::_TypeUID)),
+                !ComponentOfTypeHK
+             && ((v21 = mSimObject->m_Flags, (v21 & 0x4000) == 0)
+               ? (v21 >= 0 && (v21 & 0x2000) == 0 && (v21 & 0x1000) == 0
+                ? (ComponentOfType = (UFG::CharacterSubjectComponent *)UFG::SimObject::GetComponentOfType(
+                                                                         mSimObject,
+                                                                         UFG::CharacterSubjectComponent::_TypeUID))
+                : (ComponentOfType = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                         mSimObject,
+                                                                         UFG::CharacterSubjectComponent::_TypeUID)))
+               : (ComponentOfType = UFG::SimObjectCharacter::GetComponent<UFG::CharacterSubjectComponent>(mSimObject)),
+                 !ComponentOfType)) )
           {
-            if ( (!UFG::GameCameraComponent::mCollisionIgnoreAllCharacters || !v18 || !((v18->m_Flags >> 14) & 1))
-              && (!UFG::GameCameraComponent::mCollisionIgnoreAllVehicles || !v18 || (v18->m_Flags & 0x8000u) == 0) )
+            if ( (!UFG::GameCameraComponent::mCollisionIgnoreAllCharacters
+               || !mSimObject
+               || (mSimObject->m_Flags & 0x4000) == 0)
+              && (!UFG::GameCameraComponent::mCollisionIgnoreAllVehicles
+               || !mSimObject
+               || (mSimObject->m_Flags & 0x8000u) == 0) )
             {
-              v23 = (UFG::SimObjectCharacter *)v5->pSimObjectPassThru1;
-              if ( !v23 || v18 != v23 )
+              pSimObjectPassThru1 = this->pSimObjectPassThru1;
+              if ( !pSimObjectPassThru1 || mSimObject != pSimObjectPassThru1 )
               {
-                v24 = (UFG::SimObjectCharacter *)v5->pSimObjectPassThru2;
-                if ( !v24 || v18 != v24 )
+                pSimObjectPassThru2 = this->pSimObjectPassThru2;
+                if ( !pSimObjectPassThru2 || mSimObject != pSimObjectPassThru2 )
                 {
                   v25 = 0;
-                  goto LABEL_50;
+                  goto LABEL_47;
                 }
               }
             }
           }
         }
       }
-LABEL_48:
+LABEL_45:
       v25 = 1;
-LABEL_50:
+LABEL_47:
       UFG::qReflectHandleBase::~qReflectHandleBase(&v30);
       return v25;
     }
@@ -2613,12 +2567,12 @@ LABEL_50:
 // RVA: 0x14BFF40
 __int64 dynamic_initializer_for__UFG::GameSubject::s_GameSubjectList__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::GameSubject::s_GameSubjectList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::GameSubject::s_GameSubjectList__);
 }
 
 // File Line: 1689
 // RVA: 0x3C3F00
-signed __int64 __fastcall UFG::CopRoadBlock::GetTypeSize(UFG::GameSubject *this)
+__int64 __fastcall UFG::CopRoadBlock::GetTypeSize(UFG::GameSubject *this)
 {
   return 304i64;
 }
@@ -2627,51 +2581,42 @@ signed __int64 __fastcall UFG::CopRoadBlock::GetTypeSize(UFG::GameSubject *this)
 // RVA: 0x3BCC30
 void __fastcall UFG::GameSubject::GameSubject(UFG::GameSubject *this, unsigned int name_uid)
 {
-  UFG::GameSubject *v2; // rbx
-  UFG::qNode<UFG::GameSubject,UFG::GameSubject> *v3; // rcx
-  UFG::qNode<UFG::GameSubject,UFG::GameSubject> *v4; // rax
+  UFG::qNode<UFG::GameSubject,UFG::GameSubject> *mPrev; // rax
 
-  v2 = this;
-  UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CameraSubject::`vftable;
-  UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::RebindingComponentHandle<UFG::TransformNodeComponent,0>(&v2->pTransformNodeComponent);
-  UFG::SimComponent::AddType(
-    (UFG::SimComponent *)&v2->vfptr,
-    UFG::CameraSubject::_CameraSubjectTypeUID,
-    "CameraSubject");
-  UFG::CameraSubject::Init((UFG::CameraSubject *)&v2->vfptr);
-  v3 = (UFG::qNode<UFG::GameSubject,UFG::GameSubject> *)&v2->mPrev;
-  v3->mPrev = v3;
-  v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GameSubject::`vftable;
-  v4 = UFG::GameSubject::s_GameSubjectList.mNode.mPrev;
-  UFG::GameSubject::s_GameSubjectList.mNode.mPrev->mNext = (UFG::qNode<UFG::GameSubject,UFG::GameSubject> *)&v2->mPrev;
-  v3->mPrev = v4;
-  v2->mNext = (UFG::qNode<UFG::GameSubject,UFG::GameSubject> *)&UFG::GameSubject::s_GameSubjectList;
-  UFG::GameSubject::s_GameSubjectList.mNode.mPrev = (UFG::qNode<UFG::GameSubject,UFG::GameSubject> *)&v2->mPrev;
-  UFG::SimComponent::AddType((UFG::SimComponent *)&v2->vfptr, UFG::GameSubject::_GameSubjectTypeUID, "GameSubject");
+  UFG::SimComponent::SimComponent(this, name_uid);
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CameraSubject::`vftable;
+  UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::RebindingComponentHandle<UFG::TransformNodeComponent,0>(&this->pTransformNodeComponent);
+  UFG::SimComponent::AddType(this, UFG::CameraSubject::_CameraSubjectTypeUID, "CameraSubject");
+  UFG::CameraSubject::Init(this);
+  this->mPrev = &this->UFG::qNode<UFG::GameSubject,UFG::GameSubject>;
+  this->mNext = &this->UFG::qNode<UFG::GameSubject,UFG::GameSubject>;
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GameSubject::`vftable;
+  mPrev = UFG::GameSubject::s_GameSubjectList.mNode.mPrev;
+  UFG::GameSubject::s_GameSubjectList.mNode.mPrev->mNext = &this->UFG::qNode<UFG::GameSubject,UFG::GameSubject>;
+  this->mPrev = mPrev;
+  this->mNext = (UFG::qNode<UFG::GameSubject,UFG::GameSubject> *)&UFG::GameSubject::s_GameSubjectList;
+  UFG::GameSubject::s_GameSubjectList.mNode.mPrev = &this->UFG::qNode<UFG::GameSubject,UFG::GameSubject>;
+  UFG::SimComponent::AddType(this, UFG::GameSubject::_GameSubjectTypeUID, "GameSubject");
 }
 
 // File Line: 1701
 // RVA: 0x3BDF60
 void __fastcall UFG::GameSubject::~GameSubject(UFG::GameSubject *this)
 {
-  UFG::GameSubject *v1; // rbx
   UFG::qNode<UFG::GameSubject,UFG::GameSubject> *v2; // rdx
-  UFG::qNode<UFG::GameSubject,UFG::GameSubject> *v3; // rcx
-  UFG::qNode<UFG::GameSubject,UFG::GameSubject> *v4; // rax
+  UFG::qNode<UFG::GameSubject,UFG::GameSubject> *mPrev; // rcx
+  UFG::qNode<UFG::GameSubject,UFG::GameSubject> *mNext; // rax
   UFG::qNode<UFG::GameSubject,UFG::GameSubject> *v5; // rcx
   UFG::qNode<UFG::GameSubject,UFG::GameSubject> *v6; // rax
 
-  v1 = this;
   this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::GameSubject::`vftable;
   if ( this == UFG::GameSubject::s_GameSubjectpCurrentIterator )
     UFG::GameSubject::s_GameSubjectpCurrentIterator = (UFG::GameSubject *)&this->mPrev[-18];
-  v2 = (UFG::qNode<UFG::GameSubject,UFG::GameSubject> *)&this->mPrev;
-  v3 = this->mPrev;
-  v4 = v2->mNext;
-  v3->mNext = v4;
-  v4->mPrev = v3;
+  v2 = &this->UFG::qNode<UFG::GameSubject,UFG::GameSubject>;
+  mPrev = this->mPrev;
+  mNext = v2->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
   v5 = v2->mPrev;
@@ -2680,41 +2625,40 @@ void __fastcall UFG::GameSubject::~GameSubject(UFG::GameSubject *this)
   v6->mPrev = v5;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CameraSubject::`vftable;
-  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>(&v1->pTransformNodeComponent);
-  UFG::SimComponent::~SimComponent((UFG::SimComponent *)&v1->vfptr);
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CameraSubject::`vftable;
+  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>(&this->pTransformNodeComponent);
+  UFG::SimComponent::~SimComponent(this);
 }
 
 // File Line: 1717
 // RVA: 0x3C81E0
-UFG::SimComponent *__fastcall UFG::GameSubject::PropertiesOnActivate(UFG::SceneObjectProperties *scene_object_properties)
+UFG::GameSubject *__fastcall UFG::GameSubject::PropertiesOnActivate(
+        UFG::SceneObjectProperties *scene_object_properties)
 {
-  UFG::SceneObjectProperties *v1; // rdi
-  unsigned int v2; // ebx
-  UFG::qMemoryPool *v3; // rax
+  unsigned int m_NameUID; // ebx
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
   UFG::allocator::free_link *v4; // rax
   UFG::SimComponent *v5; // rax
   UFG::SimComponent *v6; // rbx
-  UFG::SimObjectModifier v8; // [rsp+38h] [rbp-30h]
+  UFG::SimObjectModifier v8; // [rsp+38h] [rbp-30h] BYREF
 
-  v1 = scene_object_properties;
-  v2 = scene_object_properties->m_NameUID;
-  v3 = UFG::GetSimulationMemoryPool();
-  v4 = UFG::qMemoryPool::Allocate(v3, 0x130ui64, "GameSubject", 0i64, 1u);
+  m_NameUID = scene_object_properties->m_NameUID;
+  SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+  v4 = UFG::qMemoryPool::Allocate(SimulationMemoryPool, 0x130ui64, "GameSubject", 0i64, 1u);
   if ( v4 )
   {
-    UFG::GameSubject::GameSubject((UFG::GameSubject *)v4, v2);
+    UFG::GameSubject::GameSubject((UFG::GameSubject *)v4, m_NameUID);
     v6 = v5;
   }
   else
   {
     v6 = 0i64;
   }
-  UFG::SimObjectModifier::SimObjectModifier(&v8, v1->m_pSimObject, 1);
+  UFG::SimObjectModifier::SimObjectModifier(&v8, scene_object_properties->m_pSimObject, 1);
   UFG::SimObjectModifier::AttachComponent(&v8, v6, 0xFFFFFFFFi64);
   UFG::SimObjectModifier::Close(&v8);
   UFG::SimObjectModifier::~SimObjectModifier(&v8);
-  return v6;
+  return (UFG::GameSubject *)v6;
 }
 
 // File Line: 1725

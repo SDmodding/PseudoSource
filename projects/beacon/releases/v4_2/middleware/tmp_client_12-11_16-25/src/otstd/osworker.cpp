@@ -2,33 +2,27 @@
 // RVA: 0xEE9BB0
 void __fastcall OSuite::ZWorker::ZWorker(OSuite::ZWorker *this)
 {
-  OSuite::ZWorker *v1; // rbx
-
-  v1 = this;
-  OSuite::ZThread::ZThread((OSuite::ZThread *)&this->vfptr, 0);
-  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZWorker::`vftable;
-  OSuite::ZEvent::ZEvent(&v1->m_wakeUpSignal, 0);
-  OSuite::ZMutex::ZMutex(&v1->m_mutex);
-  OSuite::ZCallbackManager::ZCallbackManager(&v1->m_CallbackManager);
-  v1->m_deltaTimeUs = 60000;
-  v1->m_nLastGameTime = 0;
-  v1->m_tid = 0i64;
-  v1->m_eRunning = 0;
-  v1->m_bCallbacksOwnership = 0;
+  OSuite::ZThread::ZThread(this, 0);
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZWorker::`vftable;
+  OSuite::ZEvent::ZEvent(&this->m_wakeUpSignal, 0);
+  OSuite::ZMutex::ZMutex(&this->m_mutex);
+  OSuite::ZCallbackManager::ZCallbackManager(&this->m_CallbackManager);
+  this->m_deltaTimeUs = 60000;
+  this->m_nLastGameTime = 0;
+  this->m_tid = 0i64;
+  this->m_eRunning = WORKER_INIT;
+  this->m_bCallbacksOwnership = 0;
 }
 
 // File Line: 41
 // RVA: 0xEE9C18
 void __fastcall OSuite::ZWorker::~ZWorker(OSuite::ZWorker *this)
 {
-  OSuite::ZWorker *v1; // rbx
-
-  v1 = this;
   this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZWorker::`vftable;
   OSuite::ZCallbackManager::~ZCallbackManager(&this->m_CallbackManager);
-  OSuite::ZMutex::~ZMutex(&v1->m_mutex);
-  OSuite::ZEvent::~ZEvent(&v1->m_wakeUpSignal);
-  OSuite::ZThread::~ZThread((OSuite::ZThread *)&v1->vfptr);
+  OSuite::ZMutex::~ZMutex(&this->m_mutex);
+  OSuite::ZEvent::~ZEvent(&this->m_wakeUpSignal);
+  OSuite::ZThread::~ZThread(this);
 }
 
 // File Line: 45
@@ -60,7 +54,7 @@ OSuite::ZWorker *__fastcall OSuite::ZWorker::Instance()
     {
       OSuite::ZWorker::_instance = 0i64;
     }
-    result = v1;
+    return v1;
   }
   return result;
 }
@@ -70,24 +64,22 @@ OSuite::ZWorker *__fastcall OSuite::ZWorker::Instance()
 void OSuite::ZWorker::FreeInstance(void)
 {
   if ( OSuite::ZWorker::_instance )
-    OSuite::ZWorker::_instance->vfptr->__vecDelDtor((OSuite::ZObject *)OSuite::ZWorker::_instance, 1u);
+    OSuite::ZWorker::_instance->vfptr->__vecDelDtor(OSuite::ZWorker::_instance, 1i64);
 }
 
 // File Line: 61
 // RVA: 0xEE9C90
 void __fastcall OSuite::ZWorker::CallCallbacks(OSuite::ZWorker *this)
 {
-  OSuite::ZWorker *v1; // rbx
   OSuite::ZOnlineSuite *v2; // rax
-  OSuite::IGameConfig *v3; // rax
+  OSuite::IGameConfig *GameConfig; // rax
 
-  v1 = this;
   if ( this->m_eRunning )
   {
     v2 = OSuite::ZOnlineSuite::Instance();
-    v3 = OSuite::ZOnlineSuite::GetGameConfig(v2);
-    v1->m_nLastGameTime = v3->vfptr->GameTime(v3);
-    OSuite::ZCallbackManager::Update(&v1->m_CallbackManager);
+    GameConfig = OSuite::ZOnlineSuite::GetGameConfig(v2);
+    this->m_nLastGameTime = GameConfig->vfptr->GameTime(GameConfig);
+    OSuite::ZCallbackManager::Update(&this->m_CallbackManager);
   }
 }
 
@@ -102,8 +94,7 @@ void __fastcall OSuite::ZWorker::AddCallback(OSuite::ZWorker *this, OSuite::Mana
 // RVA: 0xEE9D4C
 void __fastcall OSuite::ZWorker::Run(OSuite::ZWorker *this)
 {
-  OSuite::ZWorker *v1; // rsi
-  unsigned __int64 v2; // rax
+  unsigned __int64 CurrentTID; // rax
   bool v3; // di
   bool v4; // di
   bool v5; // di
@@ -112,29 +103,28 @@ void __fastcall OSuite::ZWorker::Run(OSuite::ZWorker *this)
   OSuite::psock *v8; // rcx
   OSuite::ZGameInterface *v9; // rax
 
-  v1 = this;
-  v2 = OSuite::ZThread::GetCurrentTID();
-  v1->m_eRunning = 1;
-  v1->m_tid = v2;
+  CurrentTID = OSuite::ZThread::GetCurrentTID();
+  this->m_eRunning = WORKER_RUNNING;
+  this->m_tid = CurrentTID;
   do
   {
-    OSuite::ZEvent::Wait(&v1->m_wakeUpSignal, v1->m_deltaTimeUs);
-    OSuite::ZMutex::Lock(&v1->m_mutex);
-    v3 = v1->m_eRunning == 1;
-    OSuite::ZMutex::Unlock(&v1->m_mutex);
+    OSuite::ZEvent::Wait(&this->m_wakeUpSignal, this->m_deltaTimeUs);
+    OSuite::ZMutex::Lock(&this->m_mutex);
+    v3 = this->m_eRunning == WORKER_RUNNING;
+    OSuite::ZMutex::Unlock(&this->m_mutex);
     if ( !v3 )
       break;
-    OSuite::ZWorker::Update(v1);
-    OSuite::ZMutex::Lock(&v1->m_mutex);
-    v4 = v1->m_eRunning == 1;
-    OSuite::ZMutex::Unlock(&v1->m_mutex);
+    OSuite::ZWorker::Update(this);
+    OSuite::ZMutex::Lock(&this->m_mutex);
+    v4 = this->m_eRunning == WORKER_RUNNING;
+    OSuite::ZMutex::Unlock(&this->m_mutex);
     if ( !v4 )
       break;
-    if ( v1->m_bCallbacksOwnership )
-      OSuite::ZWorker::CallCallbacks(v1);
-    OSuite::ZMutex::Lock(&v1->m_mutex);
-    v5 = v1->m_eRunning == 1;
-    OSuite::ZMutex::Unlock(&v1->m_mutex);
+    if ( this->m_bCallbacksOwnership )
+      OSuite::ZWorker::CallCallbacks(this);
+    OSuite::ZMutex::Lock(&this->m_mutex);
+    v5 = this->m_eRunning == WORKER_RUNNING;
+    OSuite::ZMutex::Unlock(&this->m_mutex);
   }
   while ( v5 );
   OSuite::ZThread::JoinRogueThreads();
@@ -150,15 +140,14 @@ void __fastcall OSuite::ZWorker::Run(OSuite::ZWorker *this)
 // RVA: 0xEE9E48
 void __fastcall OSuite::ZWorker::Stop(OSuite::ZWorker *this)
 {
-  this->m_eRunning = 2;
+  this->m_eRunning = WORKER_STOP;
 }
 
 // File Line: 130
 // RVA: 0xEE9E54
 void __fastcall OSuite::ZWorker::Update(OSuite::ZWorker *this)
 {
-  OSuite::ZMutex *v1; // rbx
-  OSuite::ZWorker *v2; // rsi
+  OSuite::ZMutex *p_m_mutex; // rbx
   bool v3; // di
   OSuite::ZHttpManager *v4; // rax
   OSuite::ZObject *v5; // rdx
@@ -167,59 +156,58 @@ void __fastcall OSuite::ZWorker::Update(OSuite::ZWorker *this)
   bool v8; // di
   OSuite::AuthenticationManager *v9; // rax
   bool v10; // di
-  OSuite::IConsumablesManager *v11; // rax
+  OSuite::IConsumablesManager *ConsumableManager; // rax
   bool v12; // di
   bool v13; // di
   OSuite::ZGameInterface *v14; // rax
   bool v15; // di
   OSuite::ZUsageTrackingManager *v16; // rax
 
-  v1 = &this->m_mutex;
-  v2 = this;
+  p_m_mutex = &this->m_mutex;
   OSuite::ZMutex::Lock(&this->m_mutex);
-  v3 = v2->m_eRunning == 1;
-  OSuite::ZMutex::Unlock(v1);
+  v3 = this->m_eRunning == WORKER_RUNNING;
+  OSuite::ZMutex::Unlock(p_m_mutex);
   if ( v3 )
   {
     v4 = OSuite::TSingleton<OSuite::ZHttpManager>::Object();
     OSuite::ZHttpRequestManager::Update(v4->m_httpRequestManager, v5);
-    OSuite::ZMutex::Lock(v1);
-    v6 = v2->m_eRunning == 1;
-    OSuite::ZMutex::Unlock(v1);
+    OSuite::ZMutex::Lock(p_m_mutex);
+    v6 = this->m_eRunning == WORKER_RUNNING;
+    OSuite::ZMutex::Unlock(p_m_mutex);
     if ( v6 )
     {
       v7 = OSuite::TSingleton<OSuite::ZSocketManager>::Object();
       OSuite::ZSocketManager::Update(v7);
-      OSuite::ZMutex::Lock(v1);
-      v8 = v2->m_eRunning == 1;
-      OSuite::ZMutex::Unlock(v1);
+      OSuite::ZMutex::Lock(p_m_mutex);
+      v8 = this->m_eRunning == WORKER_RUNNING;
+      OSuite::ZMutex::Unlock(p_m_mutex);
       if ( v8 )
       {
         v9 = OSuite::TSingleton<OSuite::AuthenticationManager>::Object();
         OSuite::AuthenticationManager::Update(v9);
-        OSuite::ZMutex::Lock(v1);
-        v10 = v2->m_eRunning == 1;
-        OSuite::ZMutex::Unlock(v1);
+        OSuite::ZMutex::Lock(p_m_mutex);
+        v10 = this->m_eRunning == WORKER_RUNNING;
+        OSuite::ZMutex::Unlock(p_m_mutex);
         if ( v10 )
         {
-          v11 = OSuite::IConsumablesManager::GetConsumableManager();
-          v11->vfptr->Update(v11);
-          OSuite::ZMutex::Lock(v1);
-          v12 = v2->m_eRunning == 1;
-          OSuite::ZMutex::Unlock(v1);
+          ConsumableManager = OSuite::IConsumablesManager::GetConsumableManager();
+          ConsumableManager->vfptr->Update(ConsumableManager);
+          OSuite::ZMutex::Lock(p_m_mutex);
+          v12 = this->m_eRunning == WORKER_RUNNING;
+          OSuite::ZMutex::Unlock(p_m_mutex);
           if ( v12 )
           {
             OSuite::ZMetricAppender::Update();
-            OSuite::ZMutex::Lock(v1);
-            v13 = v2->m_eRunning == 1;
-            OSuite::ZMutex::Unlock(v1);
+            OSuite::ZMutex::Lock(p_m_mutex);
+            v13 = this->m_eRunning == WORKER_RUNNING;
+            OSuite::ZMutex::Unlock(p_m_mutex);
             if ( v13 )
             {
               v14 = OSuite::GameInterface();
               OSuite::ZGameInterface::Update(v14);
-              OSuite::ZMutex::Lock(v1);
-              v15 = v2->m_eRunning == 1;
-              OSuite::ZMutex::Unlock(v1);
+              OSuite::ZMutex::Lock(p_m_mutex);
+              v15 = this->m_eRunning == WORKER_RUNNING;
+              OSuite::ZMutex::Unlock(p_m_mutex);
               if ( v15 )
               {
                 v16 = OSuite::TSingleton<OSuite::ZUsageTrackingManager>::Object();

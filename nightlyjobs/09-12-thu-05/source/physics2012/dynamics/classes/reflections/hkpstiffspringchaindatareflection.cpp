@@ -63,23 +63,26 @@ hkClass *__fastcall hkpStiffSpringChainData::staticClass()
 
 // File Line: 117
 // RVA: 0xD512B0
-void __fastcall finishLoadedObjecthkpStiffSpringChainData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpStiffSpringChainData(
+        hkpStiffSpringChainData *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpStiffSpringChainData::hkpStiffSpringChainData);
+  if ( p )
+    hkpStiffSpringChainData::hkpStiffSpringChainData(p, finishing);
 }
 
 // File Line: 123
 // RVA: 0xD512D0
-void __fastcall cleanupLoadedObjecthkpStiffSpringChainData(void *p)
+void __fastcall cleanupLoadedObjecthkpStiffSpringChainData(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 127
 // RVA: 0xD512E0
 hkBaseObjectVtbl *__fastcall getVtablehkpStiffSpringChainData()
 {
-  hkpStiffSpringChainData v1; // [rsp+20h] [rbp-68h]
+  hkpStiffSpringChainData v1; // [rsp+20h] [rbp-68h] BYREF
 
   hkpStiffSpringChainData::hkpStiffSpringChainData(&v1, 0);
   return v1.vfptr;
@@ -96,8 +99,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpStiffSpringChainDataTypeInfo__()
   hkpStiffSpringChainDataTypeInfo.m_typeName = "hkpStiffSpringChainData";
   hkpStiffSpringChainDataTypeInfo.m_vtable = result;
   hkpStiffSpringChainDataTypeInfo.m_scopedName = "!hkpStiffSpringChainData";
-  hkpStiffSpringChainDataTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpStiffSpringChainData;
-  hkpStiffSpringChainDataTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpStiffSpringChainData;
+  hkpStiffSpringChainDataTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpStiffSpringChainData;
+  hkpStiffSpringChainDataTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpStiffSpringChainData;
   return result;
 }
 

@@ -21,8 +21,9 @@ void __fastcall finishLoadedObjecthkcdAdf(void *p, int finishing)
 
 // File Line: 87
 // RVA: 0xC8F530
-void __fastcall cleanupLoadedObjecthkcdAdf(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkcdAdf(hkcdAdf *p)
 {
-  hkcdAdf::~hkcdAdf((hkcdAdf *)p);
+  hkcdAdf::~hkcdAdf(p);
 }
 

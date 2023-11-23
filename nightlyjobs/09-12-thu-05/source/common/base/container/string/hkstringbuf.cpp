@@ -6,7 +6,7 @@ __int64 __fastcall tolower(char i)
 
   result = (unsigned int)i;
   if ( (unsigned __int8)(i - 65) <= 0x19u )
-    result = (unsigned int)(result + 32);
+    return (unsigned int)(result + 32);
   return result;
 }
 
@@ -18,7 +18,7 @@ __int64 __fastcall toupper(char i)
 
   result = (unsigned int)i;
   if ( (unsigned __int8)(i - 97) <= 0x19u )
-    result = (unsigned int)(result - 32);
+    return (unsigned int)(result - 32);
   return result;
 }
 
@@ -26,20 +26,16 @@ __int64 __fastcall toupper(char i)
 // RVA: 0xC6A6C0
 void __fastcall hkStringBuf::hkStringBuf(hkStringBuf *this, const char *s)
 {
-  const char *v2; // rsi
-  hkStringBuf *v3; // rdi
-  int v4; // ebx
+  unsigned int v4; // ebx
 
-  v2 = s;
-  v3 = this;
   this->m_string.m_size = 0;
   this->m_string.m_capacityAndFlags = -2147483520;
   this->m_string.m_data = this->m_string.m_storage;
   if ( s )
   {
     v4 = hkString::strLen(s);
-    hkStringBuf::setLength(v3, v4);
-    hkString::memCpy(v3->m_string.m_data, v2, v4);
+    hkStringBuf::setLength(this, v4);
+    hkString::memCpy(this->m_string.m_data, s, v4);
   }
   else
   {
@@ -55,12 +51,19 @@ void __fastcall hkStringBuf::hkStringBuf(hkStringBuf *this, hkStringPtr *s)
   this->m_string.m_size = 0;
   this->m_string.m_capacityAndFlags = -2147483520;
   this->m_string.m_data = this->m_string.m_storage;
-  hkStringBuf::operator=(this, (const char *)((_QWORD)s->m_stringAndFlag & 0xFFFFFFFFFFFFFFFEui64));
+  hkStringBuf::operator=(this, (const char *)((unsigned __int64)s->m_stringAndFlag & 0xFFFFFFFFFFFFFFFEui64));
 }
 
 // File Line: 57
 // RVA: 0xC6A790
-void __fastcall hkStringBuf::hkStringBuf(hkStringBuf *this, const char *s0, const char *s1, const char *s2, const char *s3, const char *s4, const char *s5)
+void __fastcall hkStringBuf::hkStringBuf(
+        hkStringBuf *this,
+        const char *s0,
+        const char *s1,
+        const char *s2,
+        const char *s3,
+        const char *s4,
+        const char *s5)
 {
   this->m_string.m_size = 0;
   this->m_string.m_capacityAndFlags = -2147483520;
@@ -75,16 +78,12 @@ void __fastcall hkStringBuf::hkStringBuf(hkStringBuf *this, const char *s0, cons
 void __fastcall hkStringBuf::hkStringBuf(hkStringBuf *this, const char *b, int len)
 {
   __int64 v3; // rsi
-  const char *v4; // rbp
   int v5; // edi
-  hkStringBuf *v6; // rbx
-  int v7; // er9
-  hkResult result; // [rsp+50h] [rbp+18h]
+  int v7; // r9d
+  hkResult result; // [rsp+50h] [rbp+18h] BYREF
 
   v3 = len;
-  v4 = b;
   v5 = len + 1;
-  v6 = this;
   this->m_string.m_size = 0;
   this->m_string.m_data = this->m_string.m_storage;
   this->m_string.m_capacityAndFlags = -2147483520;
@@ -93,50 +92,46 @@ void __fastcall hkStringBuf::hkStringBuf(hkStringBuf *this, const char *b, int l
     v7 = len + 1;
     if ( v5 < 256 )
       v7 = 256;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, this, v7, 1);
+    hkArrayUtil::_reserve(&result, &hkContainerTempAllocator::s_alloc, (const void **)&this->m_string.m_data, v7, 1);
   }
-  v6->m_string.m_size = v5;
-  v6->m_string.m_data[v3] = 0;
-  hkString::memCpy(v6->m_string.m_data, v4, v3);
+  this->m_string.m_size = v5;
+  this->m_string.m_data[v3] = 0;
+  hkString::memCpy(this->m_string.m_data, b, v3);
 }
 
 // File Line: 69
 // RVA: 0xC6A890
 void __fastcall hkStringBuf::hkStringBuf(hkStringBuf *this, hkStringBuf *s)
 {
-  hkStringBuf *v2; // rdi
-  hkStringBuf *v3; // rbx
   __int64 v4; // rcx
-  char *v5; // rax
+  char *m_data; // rax
   __int64 v6; // rdx
   char *v7; // r8
   char v8; // cl
-  int v9; // [rsp+30h] [rbp+8h]
+  int m_size; // [rsp+30h] [rbp+8h] BYREF
 
   this->m_string.m_size = 0;
   this->m_string.m_capacityAndFlags = -2147483520;
   this->m_string.m_data = this->m_string.m_storage;
-  v2 = s;
-  v3 = this;
   if ( s->m_string.m_size > 128 )
   {
-    v9 = s->m_string.m_size;
+    m_size = s->m_string.m_size;
     this->m_string.m_data = (char *)hkContainerTempAllocator::s_alloc.vfptr->bufAlloc(
-                                      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-                                      &v9);
-    v3->m_string.m_capacityAndFlags = v9;
+                                      &hkContainerTempAllocator::s_alloc,
+                                      &m_size);
+    this->m_string.m_capacityAndFlags = m_size;
   }
-  v4 = v2->m_string.m_size;
-  v5 = v3->m_string.m_data;
-  v3->m_string.m_size = v4;
+  v4 = s->m_string.m_size;
+  m_data = this->m_string.m_data;
+  this->m_string.m_size = v4;
   v6 = v4;
-  if ( (signed int)v4 > 0 )
+  if ( (int)v4 > 0 )
   {
-    v7 = (char *)(v2->m_string.m_data - v5);
+    v7 = (char *)(s->m_string.m_data - m_data);
     do
     {
-      v8 = (v5++)[(_QWORD)v7];
-      *(v5 - 1) = v8;
+      v8 = (m_data++)[(_QWORD)v7];
+      *(m_data - 1) = v8;
       --v6;
     }
     while ( v6 );
@@ -147,95 +142,75 @@ void __fastcall hkStringBuf::hkStringBuf(hkStringBuf *this, hkStringBuf *s)
 // RVA: 0xC6A930
 hkStringBuf *__fastcall hkStringBuf::operator=(hkStringBuf *this, hkStringBuf *s)
 {
-  hkStringBuf *v2; // rdi
-  hkStringBuf *v3; // rbx
   __int64 v4; // rcx
-  char *v5; // rax
+  char *m_data; // rax
   __int64 v6; // rdx
   char *v7; // r8
   char v8; // cl
-  int v10; // [rsp+30h] [rbp+8h]
+  int m_size; // [rsp+30h] [rbp+8h] BYREF
 
-  v2 = s;
-  v3 = this;
   if ( (this->m_string.m_capacityAndFlags & 0x3FFFFFFF) < s->m_string.m_size )
   {
     if ( this->m_string.m_capacityAndFlags >= 0 )
       ((void (__fastcall *)(hkContainerTempAllocator::Allocator *, char *))hkContainerTempAllocator::s_alloc.vfptr->bufFree)(
         &hkContainerTempAllocator::s_alloc,
         this->m_string.m_data);
-    v10 = v2->m_string.m_size;
-    v3->m_string.m_data = (char *)hkContainerTempAllocator::s_alloc.vfptr->bufAlloc(
-                                    (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-                                    &v10);
-    v3->m_string.m_capacityAndFlags = v10;
+    m_size = s->m_string.m_size;
+    this->m_string.m_data = (char *)hkContainerTempAllocator::s_alloc.vfptr->bufAlloc(
+                                      &hkContainerTempAllocator::s_alloc,
+                                      &m_size);
+    this->m_string.m_capacityAndFlags = m_size;
   }
-  v4 = v2->m_string.m_size;
-  v5 = v3->m_string.m_data;
-  v3->m_string.m_size = v4;
+  v4 = s->m_string.m_size;
+  m_data = this->m_string.m_data;
+  this->m_string.m_size = v4;
   v6 = v4;
-  if ( (signed int)v4 > 0 )
+  if ( (int)v4 > 0 )
   {
-    v7 = (char *)(v2->m_string.m_data - v5);
+    v7 = (char *)(s->m_string.m_data - m_data);
     do
     {
-      v8 = (v5++)[(_QWORD)v7];
-      *(v5 - 1) = v8;
+      v8 = (m_data++)[(_QWORD)v7];
+      *(m_data - 1) = v8;
       --v6;
     }
     while ( v6 );
   }
-  return v3;
+  return this;
 }
 
 // File Line: 80
 // RVA: 0xC6A9E0
 hkStringBuf *__fastcall hkStringBuf::operator=(hkStringBuf *this, const char *s)
 {
-  const char *v2; // rsi
-  hkStringBuf *v3; // rdi
-  int v4; // ebx
-  hkStringBuf *v5; // rax
-  int v6; // eax
-  int v7; // eax
-  int v8; // er9
-  hkResult result; // [rsp+40h] [rbp+8h]
+  unsigned int v4; // ebx
+  hkResult result; // [rsp+40h] [rbp+8h] BYREF
 
-  v2 = s;
-  v3 = this;
   if ( s )
   {
     v4 = hkString::strLen(s);
-    hkStringBuf::setLength(v3, v4);
-    hkString::memCpy(v3->m_string.m_data, v2, v4);
-    v5 = v3;
+    hkStringBuf::setLength(this, v4);
+    hkString::memCpy(this->m_string.m_data, s, v4);
+    return this;
   }
   else
   {
-    v6 = this->m_string.m_capacityAndFlags & 0x3FFFFFFF;
-    if ( v6 < 1 )
-    {
-      v7 = 2 * v6;
-      v8 = 1;
-      if ( v7 > 1 )
-        v8 = v7;
-      hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, this, v8, 1);
-    }
-    v3->m_string.m_size = 1;
-    *v3->m_string.m_data = 0;
-    v5 = v3;
+    if ( (this->m_string.m_capacityAndFlags & 0x3FFFFFFF) == 0 )
+      hkArrayUtil::_reserve(&result, &hkContainerTempAllocator::s_alloc, (const void **)&this->m_string.m_data, 1, 1);
+    this->m_string.m_size = 1;
+    *this->m_string.m_data = 0;
+    return this;
   }
-  return v5;
 }
 
 // File Line: 95
 // RVA: 0xC6AA90
-signed __int64 __fastcall hkStringBuf::indexOf(hkStringBuf *this, char c, int startIndex, int endIndex)
+__int64 __fastcall hkStringBuf::indexOf(hkStringBuf *this, char c, int startIndex, int endIndex)
 {
-  signed __int64 v4; // r10
-  int v5; // er8
-  signed __int64 v6; // rax
-  char *v7; // rcx
+  __int64 v4; // r10
+  int v5; // r8d
+  __int64 v6; // rax
+  char *m_data; // rcx
 
   v4 = startIndex;
   v5 = this->m_string.m_size - 1;
@@ -244,8 +219,8 @@ signed __int64 __fastcall hkStringBuf::indexOf(hkStringBuf *this, char c, int st
     v5 = endIndex;
   if ( v4 >= v5 )
     return 0xFFFFFFFFi64;
-  v7 = this->m_string.m_data;
-  while ( v7[v6] != c )
+  m_data = this->m_string.m_data;
+  while ( m_data[v6] != c )
   {
     ++v6;
     LODWORD(v4) = v4 + 1;
@@ -257,72 +232,60 @@ signed __int64 __fastcall hkStringBuf::indexOf(hkStringBuf *this, char c, int st
 
 // File Line: 108
 // RVA: 0xC6AAD0
-signed __int64 __fastcall hkStringBuf::indexOf(hkStringBuf *this, const char *s, int startIndex, int endIndex)
+__int64 __fastcall hkStringBuf::indexOf(hkStringBuf *this, const char *s, int startIndex, int endIndex)
 {
-  hkStringBuf *v4; // rbx
   char *v5; // rax
-  signed __int64 result; // rax
 
-  v4 = this;
   v5 = hkString::strStr(&this->m_string.m_data[startIndex], s);
   if ( v5 )
-    result = (unsigned int)((_DWORD)v5 - LODWORD(v4->m_string.m_data));
+    return (unsigned int)((_DWORD)v5 - LODWORD(this->m_string.m_data));
   else
-    result = 0xFFFFFFFFi64;
-  return result;
+    return 0xFFFFFFFFi64;
 }
 
 // File Line: 118
 // RVA: 0xC6AB00
-signed __int64 __fastcall hkStringBuf::indexOfCase(hkStringBuf *this, const char *needle)
+__int64 __fastcall hkStringBuf::indexOfCase(hkStringBuf *this, char *needle)
 {
-  char *v2; // r11
+  char *m_data; // r11
   unsigned int v3; // edi
-  const char *v4; // rsi
-  char v5; // bp
-  signed __int64 v6; // r14
-  __int64 v7; // r10
-  char v8; // al
-  const char *v9; // r9
-  char v10; // dl
-  char v11; // r8
-  char v12; // cl
+  __int64 v4; // r10
+  char v5; // al
+  const char *v6; // r9
+  char v7; // r8
+  char v8; // cl
 
-  v2 = this->m_string.m_data;
+  m_data = this->m_string.m_data;
   v3 = 0;
-  v4 = needle;
   if ( !*this->m_string.m_data )
     return 0xFFFFFFFFi64;
-  v5 = *needle;
-  v6 = -(signed __int64)needle;
   while ( 1 )
   {
-    v7 = 0i64;
-    if ( v5 )
+    v4 = 0i64;
+    if ( *needle )
     {
-      v8 = v5;
-      v9 = v4;
+      v5 = *needle;
+      v6 = needle;
       do
       {
-        v10 = v2[v6 + (_QWORD)v9];
-        v11 = v10;
-        if ( (unsigned __int8)(v10 - 65) <= 0x19u )
-          v11 = v10 + 32;
-        v12 = v8;
-        if ( (unsigned __int8)(v8 - 65) <= 0x19u )
-          v12 = v8 + 32;
-        if ( v11 != v12 )
+        v7 = v6[m_data - needle];
+        if ( (unsigned __int8)(v7 - 65) <= 0x19u )
+          v7 += 32;
+        v8 = v5;
+        if ( (unsigned __int8)(v5 - 65) <= 0x19u )
+          v8 = v5 + 32;
+        if ( v7 != v8 )
           break;
-        v8 = (v9++)[1];
-        ++v7;
+        v5 = *++v6;
+        ++v4;
       }
-      while ( v8 );
+      while ( v5 );
     }
-    if ( !v4[v7] )
+    if ( !needle[v4] )
       break;
-    ++v2;
+    ++m_data;
     ++v3;
-    if ( !*v2 )
+    if ( !*m_data )
       return 0xFFFFFFFFi64;
   }
   return v3;
@@ -330,47 +293,43 @@ signed __int64 __fastcall hkStringBuf::indexOfCase(hkStringBuf *this, const char
 
 // File Line: 146
 // RVA: 0xC6ABC0
-signed __int64 __fastcall hkStringBuf::lastIndexOf(hkStringBuf *this, char c, int start, int end)
+__int64 __fastcall hkStringBuf::lastIndexOf(hkStringBuf *this, char c, int start, int end)
 {
-  int v4; // er9
-  signed __int64 v5; // rax
-  char *v6; // rcx
+  unsigned int v4; // r9d
+  __int64 v5; // rax
+  char *m_data; // rcx
 
   if ( end > this->m_string.m_size - 1 )
     end = this->m_string.m_size - 1;
   v4 = end - 1;
-  v5 = v4;
-  if ( v4 < (signed __int64)start )
+  v5 = (int)v4;
+  if ( (int)v4 < (__int64)start )
     return 0xFFFFFFFFi64;
-  v6 = this->m_string.m_data;
-  while ( v6[v5] != c )
+  m_data = this->m_string.m_data;
+  while ( m_data[v5] != c )
   {
     --v5;
     --v4;
     if ( v5 < start )
       return 0xFFFFFFFFi64;
   }
-  return (unsigned int)v4;
+  return v4;
 }
 
 // File Line: 161
 // RVA: 0xC6AC00
-signed __int64 __fastcall hkStringBuf::lastIndexOf(hkStringBuf *this, const char *needle, int startIndex, int endIndex)
+__int64 __fastcall hkStringBuf::lastIndexOf(hkStringBuf *this, const char *needle, int startIndex, int endIndex)
 {
-  hkStringBuf *v4; // rsi
-  const char *v5; // rdi
   char *v6; // rax
   unsigned int v7; // ebx
 
-  v4 = this;
-  v5 = needle;
   v6 = hkString::strStr(this->m_string.m_data, needle);
   if ( !v6 )
     return 0xFFFFFFFFi64;
   do
   {
-    v7 = (_DWORD)v6 - LODWORD(v4->m_string.m_data);
-    v6 = hkString::strStr(v6 + 1, v5);
+    v7 = (_DWORD)v6 - LODWORD(this->m_string.m_data);
+    v6 = hkString::strStr(v6 + 1, needle);
   }
   while ( v6 );
   return v7;
@@ -385,7 +344,7 @@ __int64 __fastcall hkStringBuf::compareTo(hkStringBuf *this, const char *other)
 
 // File Line: 180
 // RVA: 0xC6AC80
-signed __int64 __fastcall hkStringBuf::compareToIgnoreCase(hkStringBuf *this, const char *other)
+__int64 __fastcall hkStringBuf::compareToIgnoreCase(hkStringBuf *this, const char *other)
 {
   return hkString::strCasecmp(this->m_string.m_data, other);
 }
@@ -394,11 +353,8 @@ signed __int64 __fastcall hkStringBuf::compareToIgnoreCase(hkStringBuf *this, co
 // RVA: 0xC6AC90
 hkBool *__fastcall hkStringBuf::operator<(hkStringBuf *this, hkBool *result, const char *other)
 {
-  hkBool *v3; // rbx
-
-  v3 = result;
-  result->m_bool = (signed int)hkString::strCmp(this->m_string.m_data, other) < 0;
-  return v3;
+  result->m_bool = (int)hkString::strCmp(this->m_string.m_data, other) < 0;
+  return result;
 }
 
 // File Line: 190
@@ -412,12 +368,12 @@ _BOOL8 __fastcall hkStringBuf::operator==(hkStringBuf *this, const char *other)
 // RVA: 0xC6ACE0
 __int64 __fastcall hkStringBuf::startsWith(hkStringBuf *this, const char *s)
 {
-  char *v2; // rax
-  unsigned int v3; // er10
-  int v4; // er9
+  char *m_data; // rax
+  unsigned int v3; // r10d
+  int v4; // r9d
   const char *v5; // rcx
 
-  v2 = this->m_string.m_data;
+  m_data = this->m_string.m_data;
   v3 = 0;
   v4 = 0;
   if ( *this->m_string.m_data )
@@ -425,12 +381,12 @@ __int64 __fastcall hkStringBuf::startsWith(hkStringBuf *this, const char *s)
     v5 = s;
     while ( *v5 )
     {
-      if ( *v2 != *v5 )
+      if ( *m_data != *v5 )
         return 0i64;
-      ++v2;
+      ++m_data;
       ++v4;
       ++v5;
-      if ( !*v2 )
+      if ( !*m_data )
         break;
     }
   }
@@ -440,57 +396,54 @@ __int64 __fastcall hkStringBuf::startsWith(hkStringBuf *this, const char *s)
 
 // File Line: 208
 // RVA: 0xC6AD30
-signed __int64 __fastcall hkStringBuf::startsWithCase(hkStringBuf *this, const char *s)
+__int64 __fastcall hkStringBuf::startsWithCase(hkStringBuf *this, char *s)
 {
-  char *v2; // r8
-  const char *i; // r9
-  char v4; // cl
-  char v5; // dl
-  char v6; // al
+  char *m_data; // r8
+  char v4; // dl
+  char v5; // al
 
-  v2 = this->m_string.m_data;
-  for ( i = s; *v2; ++i )
+  m_data = this->m_string.m_data;
+  if ( *this->m_string.m_data )
   {
-    v4 = *i;
-    if ( !*i )
-      break;
-    v5 = *v2;
-    if ( (unsigned __int8)(*v2 - 65) <= 0x19u )
-      v5 += 32;
-    v6 = *i;
-    if ( (unsigned __int8)(v4 - 65) <= 0x19u )
-      v6 = v4 + 32;
-    if ( v5 != v6 )
-      return 0i64;
-    ++v2;
+    while ( *s )
+    {
+      v4 = *m_data;
+      if ( (unsigned __int8)(*m_data - 65) <= 0x19u )
+        v4 += 32;
+      v5 = *s;
+      if ( (unsigned __int8)(*s - 65) <= 0x19u )
+        v5 = *s + 32;
+      if ( v4 != v5 )
+        return 0i64;
+      ++m_data;
+      ++s;
+      if ( !*m_data )
+        return 1i64;
+    }
   }
   return 1i64;
 }
 
 // File Line: 220
 // RVA: 0xC6AD90
-signed __int64 __fastcall hkStringBuf::endsWith(hkStringBuf *this, const char *s)
+__int64 __fastcall hkStringBuf::endsWith(hkStringBuf *this, const char *s)
 {
-  hkStringBuf *v2; // rdi
-  const char *v3; // rbx
   int v4; // eax
-  int v5; // edx
+  int m_size; // edx
   __int64 v6; // r9
   __int64 v8; // rax
   int v9; // edx
 
-  v2 = this;
-  v3 = s;
   v4 = hkString::strLen(s);
-  v5 = v2->m_string.m_size;
+  m_size = this->m_string.m_size;
   v6 = v4;
-  if ( v4 > v5 - 1 )
+  if ( v4 > m_size - 1 )
     return 0i64;
   v8 = 0i64;
-  v9 = v5 - v6 - 1;
-  if ( (signed int)v6 > 0 )
+  v9 = m_size - v6 - 1;
+  if ( (int)v6 > 0 )
   {
-    while ( v2->m_string.m_data[v9 + v8] == v3[v8] )
+    while ( this->m_string.m_data[v9 + v8] == s[v8] )
     {
       if ( ++v8 >= v6 )
         return 1i64;
@@ -502,42 +455,36 @@ signed __int64 __fastcall hkStringBuf::endsWith(hkStringBuf *this, const char *s
 
 // File Line: 239
 // RVA: 0xC6AE00
-signed __int64 __fastcall hkStringBuf::endsWithCase(hkStringBuf *this, const char *s)
+__int64 __fastcall hkStringBuf::endsWithCase(hkStringBuf *this, const char *s)
 {
-  hkStringBuf *v2; // rbx
-  const char *v3; // rdi
   int v4; // eax
-  int v5; // er9
+  int m_size; // r9d
   __int64 v7; // rcx
   __int64 v8; // rdx
   __int64 v9; // r9
   char *v10; // r10
   char v11; // dl
-  char v12; // r8
-  char v13; // al
+  char v12; // al
 
-  v2 = this;
-  v3 = s;
   v4 = hkString::strLen(s);
-  v5 = v2->m_string.m_size;
-  if ( v4 > v5 - 1 )
+  m_size = this->m_string.m_size;
+  if ( v4 > m_size - 1 )
     return 0i64;
   v7 = 0i64;
-  v8 = v5 - v4 - 1;
+  v8 = m_size - v4 - 1;
   v9 = v4;
   if ( v4 > 0 )
   {
-    v10 = &v2->m_string.m_data[v8];
+    v10 = &this->m_string.m_data[v8];
     while ( 1 )
     {
       v11 = v10[v7];
       if ( (unsigned __int8)(v11 - 65) <= 0x19u )
         v11 += 32;
-      v12 = v3[v7];
-      v13 = v12;
+      v12 = s[v7];
       if ( (unsigned __int8)(v12 - 65) <= 0x19u )
-        v13 = v12 + 32;
-      if ( v11 != v13 )
+        v12 += 32;
+      if ( v11 != v12 )
         break;
       if ( ++v7 >= v9 )
         return 1i64;
@@ -549,94 +496,75 @@ signed __int64 __fastcall hkStringBuf::endsWithCase(hkStringBuf *this, const cha
 
 // File Line: 258
 // RVA: 0xC6AEA0
-__int64 __fastcall hkStringBuf::split(hkStringBuf *this, int sep, hkArray<char const *,hkContainerTempAllocator> *bits)
+__int64 __fastcall hkStringBuf::split(
+        hkStringBuf *this,
+        char sep,
+        hkArray<char const *,hkContainerTempAllocator> *bits)
 {
-  char *v3; // rdi
-  hkArray<char const *,hkContainerTempAllocator> *v4; // rbx
-  char v5; // r14
-  hkStringBuf *v6; // rsi
-  unsigned int v7; // edi
+  char *m_data; // rdi
+  unsigned int m_size; // edi
   int i; // edx
   int v9; // ebp
   const char *v10; // rdi
 
-  v3 = this->m_string.m_data;
-  v4 = bits;
-  v5 = sep;
-  v6 = this;
+  m_data = this->m_string.m_data;
   if ( bits->m_size == (bits->m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, bits, 8);
-  v4->m_data[v4->m_size++] = v3;
-  v7 = v4->m_size;
-  for ( i = hkStringBuf::indexOf(v6, v5, 0, 0x7FFFFFFF); i >= 0; i = hkStringBuf::indexOf(v6, v5, v9, 0x7FFFFFFF) )
+    hkArrayUtil::_reserveMore(&hkContainerTempAllocator::s_alloc, (const void **)&bits->m_data, 8);
+  bits->m_data[bits->m_size++] = m_data;
+  m_size = bits->m_size;
+  for ( i = hkStringBuf::indexOf(this, sep, 0, 0x7FFFFFFF); i >= 0; i = hkStringBuf::indexOf(this, sep, v9, 0x7FFFFFFF) )
   {
     v9 = i + 1;
-    v6->m_string.m_data[i] = 0;
-    v10 = &v6->m_string.m_data[i + 1];
-    if ( v4->m_size == (v4->m_capacityAndFlags & 0x3FFFFFFF) )
-      hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, v4, 8);
-    v4->m_data[v4->m_size++] = v10;
-    v7 = v4->m_size;
+    this->m_string.m_data[i] = 0;
+    v10 = &this->m_string.m_data[i + 1];
+    if ( bits->m_size == (bits->m_capacityAndFlags & 0x3FFFFFFF) )
+      hkArrayUtil::_reserveMore(&hkContainerTempAllocator::s_alloc, (const void **)&bits->m_data, 8);
+    bits->m_data[bits->m_size++] = v10;
+    m_size = bits->m_size;
   }
-  return v7;
+  return m_size;
 }
 
 // File Line: 279
 // RVA: 0xC6AFB0
 void __fastcall hkStringBuf::clear(hkStringBuf *this)
 {
-  hkStringBuf *v1; // rbx
-  int v2; // eax
-  int v3; // eax
-  int v4; // er9
-  hkResult result; // [rsp+40h] [rbp+8h]
+  hkResult result; // [rsp+40h] [rbp+8h] BYREF
 
-  v1 = this;
-  v2 = this->m_string.m_capacityAndFlags & 0x3FFFFFFF;
-  if ( v2 < 1 )
-  {
-    v3 = 2 * v2;
-    v4 = 1;
-    if ( v3 > 1 )
-      v4 = v3;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, this, v4, 1);
-  }
-  v1->m_string.m_size = 1;
-  *v1->m_string.m_data = 0;
+  if ( (this->m_string.m_capacityAndFlags & 0x3FFFFFFF) == 0 )
+    hkArrayUtil::_reserve(&result, &hkContainerTempAllocator::s_alloc, (const void **)&this->m_string.m_data, 1, 1);
+  this->m_string.m_size = 1;
+  *this->m_string.m_data = 0;
 }
 
 // File Line: 284
 // RVA: 0xC6B010
 void hkStringBuf::printf(hkStringBuf *this, const char *fmt, ...)
 {
-  hkStringBuf *v2; // rbx
-  signed int v3; // esi
+  int v3; // esi
   int v4; // eax
   __int64 v5; // rdi
   int v6; // esi
   int v7; // ecx
   int v8; // ecx
-  int v9; // er9
-  char *v10; // rax
+  int v9; // r9d
+  char *m_data; // rax
   int v11; // edi
   int v12; // esi
   int v13; // eax
   int v14; // eax
-  int v15; // er9
-  hkResult result; // [rsp+30h] [rbp-38h]
-  hkResult v17; // [rsp+34h] [rbp-34h]
-  char *fmta; // [rsp+78h] [rbp+10h]
-  va_list va; // [rsp+80h] [rbp+18h]
+  int v15; // r9d
+  hkResult result; // [rsp+30h] [rbp-38h] BYREF
+  hkResult v17; // [rsp+34h] [rbp-34h] BYREF
+  va_list va; // [rsp+80h] [rbp+18h] BYREF
 
   va_start(va, fmt);
-  fmta = (char *)fmt;
-  v2 = this;
   while ( 1 )
   {
     while ( 1 )
     {
-      v3 = v2->m_string.m_capacityAndFlags & 0x3FFFFFFF;
-      v4 = hkString::vsnprintf(v2->m_string.m_data, v3, fmta, va);
+      v3 = this->m_string.m_capacityAndFlags & 0x3FFFFFFF;
+      v4 = hkString::vsnprintf(this->m_string.m_data, v3, fmt, va);
       v5 = v4;
       if ( v4 >= 0 )
         break;
@@ -644,12 +572,12 @@ void hkStringBuf::printf(hkStringBuf *this, const char *fmt, ...)
       if ( 2 * v3 > 255 )
         v11 = 2 * v3;
       v12 = v11 + 1;
-      v13 = v2->m_string.m_capacityAndFlags & 0x3FFFFFFF;
+      v13 = this->m_string.m_capacityAndFlags & 0x3FFFFFFF;
       if ( v13 >= v11 + 1 )
       {
-        v2->m_string.m_size = v12;
-        v2->m_string.m_data[v11] = 0;
-        v17.m_enum = 0;
+        this->m_string.m_size = v12;
+        this->m_string.m_data[v11] = 0;
+        v17.m_enum = HK_SUCCESS;
       }
       else
       {
@@ -657,200 +585,187 @@ void hkStringBuf::printf(hkStringBuf *this, const char *fmt, ...)
         v15 = v11 + 1;
         if ( v12 < v14 )
           v15 = v14;
-        hkArrayUtil::_reserve(&v17, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, v2, v15, 1);
-        v2->m_string.m_size = v12;
-        v2->m_string.m_data[v11] = 0;
+        hkArrayUtil::_reserve(&v17, &hkContainerTempAllocator::s_alloc, (const void **)&this->m_string.m_data, v15, 1);
+        this->m_string.m_size = v12;
+        this->m_string.m_data[v11] = 0;
       }
     }
-    if ( (signed int)v5 < v3 )
+    if ( v4 < v3 )
       break;
-    v6 = v5 + 1;
-    v7 = v2->m_string.m_capacityAndFlags & 0x3FFFFFFF;
-    if ( v7 >= (signed int)v5 + 1 )
+    v6 = v4 + 1;
+    v7 = this->m_string.m_capacityAndFlags & 0x3FFFFFFF;
+    if ( v7 >= v4 + 1 )
     {
-      v2->m_string.m_size = v6;
-      v10 = v2->m_string.m_data;
-      result.m_enum = 0;
-      v10[v5] = 0;
+      this->m_string.m_size = v6;
+      m_data = this->m_string.m_data;
+      result.m_enum = HK_SUCCESS;
+      m_data[v5] = 0;
     }
     else
     {
       v8 = 2 * v7;
-      v9 = v5 + 1;
+      v9 = v4 + 1;
       if ( v6 < v8 )
         v9 = v8;
-      hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, v2, v9, 1);
-      v2->m_string.m_size = v6;
-      v2->m_string.m_data[v5] = 0;
+      hkArrayUtil::_reserve(&result, &hkContainerTempAllocator::s_alloc, (const void **)&this->m_string.m_data, v9, 1);
+      this->m_string.m_size = v6;
+      this->m_string.m_data[v5] = 0;
     }
   }
-  hkStringBuf::setLength(v2, v4);
+  hkStringBuf::setLength(this, v4);
 }
 
 // File Line: 314
 // RVA: 0xC6B140
 void hkStringBuf::appendPrintf(hkStringBuf *this, const char *fmt, ...)
 {
-  hkStringBuf *v2; // rsi
   int v3; // edi
   int v4; // eax
   __int64 v5; // rbx
-  bool v6; // sf
-  unsigned __int8 v7; // of
-  int v8; // edi
-  int v9; // er9
-  int v10; // ebx
-  int v11; // er9
-  int v12; // er9
-  hkResult v13; // [rsp+30h] [rbp-79h]
-  hkResult result; // [rsp+34h] [rbp-75h]
-  char *buf; // [rsp+40h] [rbp-69h]
-  int v16; // [rsp+48h] [rbp-61h]
-  int v17; // [rsp+4Ch] [rbp-5Dh]
-  char v18; // [rsp+50h] [rbp-59h]
-  char *fmta; // [rsp+118h] [rbp+6Fh]
-  va_list hkargs; // [rsp+120h] [rbp+77h]
+  bool v6; // cc
+  int v7; // edi
+  int v8; // r9d
+  int v9; // ebx
+  int v10; // r9d
+  int v11; // r9d
+  hkResult v12; // [rsp+30h] [rbp-79h] BYREF
+  hkResult result; // [rsp+34h] [rbp-75h] BYREF
+  char *buf; // [rsp+40h] [rbp-69h] BYREF
+  int v15; // [rsp+48h] [rbp-61h]
+  int v16; // [rsp+4Ch] [rbp-5Dh]
+  char v17; // [rsp+50h] [rbp-59h] BYREF
+  va_list hkargs; // [rsp+120h] [rbp+77h] BYREF
 
   va_start(hkargs, fmt);
-  fmta = (char *)fmt;
-  v2 = this;
-  v17 = -2147483520;
-  v16 = 1;
-  v18 = 0;
-  buf = &v18;
+  v16 = -2147483520;
+  v15 = 1;
+  v17 = 0;
+  buf = &v17;
   while ( 1 )
   {
     while ( 1 )
     {
-      v3 = v17 & 0x3FFFFFFF;
-      v4 = hkString::vsnprintf(buf, v17 & 0x3FFFFFFF, fmta, hkargs);
+      v3 = v16 & 0x3FFFFFFF;
+      v4 = hkString::vsnprintf(buf, v16 & 0x3FFFFFFF, fmt, hkargs);
       v5 = v4;
       if ( v4 >= 0 )
         break;
-      v10 = 255;
+      v9 = 255;
       if ( 2 * v3 > 255 )
-        v10 = 2 * v3;
-      if ( (v17 & 0x3FFFFFFF) >= v10 + 1 )
+        v9 = 2 * v3;
+      if ( (v16 & 0x3FFFFFFF) >= v9 + 1 )
       {
-        v16 = v10 + 1;
-        buf[v10] = 0;
-        v13.m_enum = 0;
+        v15 = v9 + 1;
+        buf[v9] = 0;
+        v12.m_enum = HK_SUCCESS;
       }
       else
       {
-        v11 = v10 + 1;
-        if ( v10 + 1 < 2 * (v17 & 0x3FFFFFFF) )
-          v11 = 2 * (v17 & 0x3FFFFFFF);
-        hkArrayUtil::_reserve(&v13, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, &buf, v11, 1);
-        v16 = v10 + 1;
-        buf[v10] = 0;
+        v10 = v9 + 1;
+        if ( v9 + 1 < 2 * (v16 & 0x3FFFFFFF) )
+          v10 = 2 * (v16 & 0x3FFFFFFF);
+        hkArrayUtil::_reserve(&v12, &hkContainerTempAllocator::s_alloc, (const void **)&buf, v10, 1);
+        v15 = v9 + 1;
+        buf[v9] = 0;
       }
     }
-    v7 = __OFSUB__((_DWORD)v5, v3);
-    v6 = (signed int)v5 - v3 < 0;
-    v8 = v5 + 1;
-    if ( v6 ^ v7 )
+    v6 = v4 < v3;
+    v7 = v4 + 1;
+    if ( v6 )
       break;
-    if ( (v17 & 0x3FFFFFFF) >= v8 )
+    if ( (v16 & 0x3FFFFFFF) >= v7 )
     {
-      v16 = v5 + 1;
-      result.m_enum = 0;
+      v15 = v4 + 1;
+      result.m_enum = HK_SUCCESS;
       buf[v4] = 0;
     }
     else
     {
-      v9 = v5 + 1;
-      if ( v8 < 2 * (v17 & 0x3FFFFFFF) )
-        v9 = 2 * (v17 & 0x3FFFFFFF);
-      hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, &buf, v9, 1);
-      v16 = v5 + 1;
+      v8 = v4 + 1;
+      if ( v7 < 2 * (v16 & 0x3FFFFFFF) )
+        v8 = 2 * (v16 & 0x3FFFFFFF);
+      hkArrayUtil::_reserve(&result, &hkContainerTempAllocator::s_alloc, (const void **)&buf, v8, 1);
+      v15 = v5 + 1;
       buf[v5] = 0;
     }
   }
-  if ( (v17 & 0x3FFFFFFF) < v8 )
+  if ( (v16 & 0x3FFFFFFF) < v7 )
   {
-    v12 = v5 + 1;
-    if ( v8 < 2 * (v17 & 0x3FFFFFFF) )
-      v12 = 2 * (v17 & 0x3FFFFFFF);
-    hkArrayUtil::_reserve(&v13, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, &buf, v12, 1);
+    v11 = v4 + 1;
+    if ( v7 < 2 * (v16 & 0x3FFFFFFF) )
+      v11 = 2 * (v16 & 0x3FFFFFFF);
+    hkArrayUtil::_reserve(&v12, &hkContainerTempAllocator::s_alloc, (const void **)&buf, v11, 1);
   }
-  v16 = v5 + 1;
+  v15 = v5 + 1;
   buf[v5] = 0;
-  hkStringBuf::append(v2, buf, -1);
-  v16 = 0;
-  if ( v17 >= 0 )
-    hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-      buf,
-      v17 & 0x3FFFFFFF);
+  hkStringBuf::append(this, buf, -1);
+  v15 = 0;
+  if ( v16 >= 0 )
+    hkContainerTempAllocator::s_alloc.vfptr->bufFree(&hkContainerTempAllocator::s_alloc, buf, v16 & 0x3FFFFFFF);
 }
 
 // File Line: 346
 // RVA: 0xC6B310
 hkStringBuf *__fastcall hkStringBuf::operator+=(hkStringBuf *this, const char *other)
 {
-  const char *v2; // rdi
-  hkStringBuf *v3; // rbx
   int numtoinsert; // eax
 
-  v2 = other;
-  v3 = this;
   if ( other )
   {
     numtoinsert = hkString::strLen(other);
     hkArrayBase<char>::_insertAt(
-      (hkArrayBase<char> *)&v3->m_string.m_data,
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr,
-      v3->m_string.m_size - 1,
-      v2,
+      &this->m_string,
+      &hkContainerTempAllocator::s_alloc,
+      this->m_string.m_size - 1,
+      other,
       numtoinsert);
   }
-  return v3;
+  return this;
 }
 
 // File Line: 356
 // RVA: 0xC6B360
-hkStringBuf *__fastcall hkStringBuf::appendJoin(hkStringBuf *this, const char *s0, const char *s1, const char *s2, const char *s3, const char *s4, const char *s5)
+hkStringBuf *__fastcall hkStringBuf::appendJoin(
+        hkStringBuf *this,
+        const char *s0,
+        const char *s1,
+        const char *s2,
+        const char *s3,
+        const char *s4,
+        const char *s5)
 {
-  int v7; // ebp
+  int m_size; // ebp
   __int64 v8; // rdi
   int v9; // ebp
   const char *v10; // rsi
-  hkStringBuf *v11; // r14
-  int v12; // er15
+  int v12; // r15d
   __int64 v13; // rbx
   const char *v14; // rax
   int v15; // eax
   int v16; // ebx
   int v17; // eax
   int v18; // eax
-  int v19; // er9
-  int v20; // ebx
-  int v22; // [rsp+2Ch] [rbp-6Ch]
-  __int64 n; // [rsp+30h] [rbp-68h]
+  int v19; // r9d
+  unsigned int v20; // ebx
+  int n[2]; // [rsp+30h] [rbp-68h]
   __int64 v24; // [rsp+38h] [rbp-60h]
   __int64 v25; // [rsp+40h] [rbp-58h]
-  const char *v26; // [rsp+48h] [rbp-50h]
-  const char *v27; // [rsp+50h] [rbp-48h]
-  const char *v28; // [rsp+58h] [rbp-40h]
-  const char *v29; // [rsp+60h] [rbp-38h]
-  unsigned __int128 v30; // [rsp+68h] [rbp-30h]
-  __int64 v31; // [rsp+78h] [rbp-20h]
+  __int64 v26[7]; // [rsp+48h] [rbp-50h]
 
-  v7 = this->m_string.m_size;
+  m_size = this->m_string.m_size;
   v8 = 0i64;
-  n = 0i64;
+  *(_QWORD *)n = 0i64;
   v24 = 0i64;
   v25 = 0i64;
-  v9 = v7 - 1;
+  v9 = m_size - 1;
   v10 = s0;
-  v29 = s3;
-  v11 = this;
-  v30 = __PAIR__((unsigned __int64)s5, (unsigned __int64)s4);
-  v26 = s0;
-  v27 = s1;
-  v28 = s2;
-  v31 = 0i64;
+  v26[3] = (__int64)s3;
+  v26[4] = (__int64)s4;
+  v26[0] = (__int64)s0;
+  v26[1] = (__int64)s1;
+  v26[2] = (__int64)s2;
+  v26[6] = 0i64;
+  v26[5] = (__int64)s5;
   v12 = v9;
   v13 = 0i64;
   if ( s0 )
@@ -859,81 +774,85 @@ hkStringBuf *__fastcall hkStringBuf::appendJoin(hkStringBuf *this, const char *s
     do
     {
       v15 = hkString::strLen(v14);
-      *(&v22 + ++v13) = v15;
+      n[v13++] = v15;
       v12 += v15;
-      v14 = (&v26)[v13];
+      v14 = (const char *)v26[v13];
     }
     while ( v14 );
   }
   v16 = v12 + 1;
-  v17 = v11->m_string.m_capacityAndFlags & 0x3FFFFFFF;
+  v17 = this->m_string.m_capacityAndFlags & 0x3FFFFFFF;
   if ( v17 < v12 + 1 )
   {
     v18 = 2 * v17;
     v19 = v12 + 1;
     if ( v16 < v18 )
       v19 = v18;
-    hkArrayUtil::_reserve((hkResult *)&s3, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, v11, v19, 1);
+    hkArrayUtil::_reserve(
+      (hkResult *)&s3,
+      &hkContainerTempAllocator::s_alloc,
+      (const void **)&this->m_string.m_data,
+      v19,
+      1);
   }
-  v11->m_string.m_size = v16;
-  for ( v11->m_string.m_data[v12] = 0; v10; v10 = (&v26)[v8] )
+  this->m_string.m_size = v16;
+  for ( this->m_string.m_data[v12] = 0; v10; v10 = (const char *)v26[v8] )
   {
-    v20 = *((_DWORD *)&n + v8);
-    hkString::memCpy(&v11->m_string.m_data[v9], v10, *((_DWORD *)&n + v8++));
+    v20 = n[v8];
+    hkString::memCpy(&this->m_string.m_data[v9], v10, v20);
+    ++v8;
     v9 += v20;
   }
-  return v11;
+  return this;
 }
 
 // File Line: 377
 // RVA: 0xC6B4A0
-hkStringBuf *__fastcall hkStringBuf::setJoin(hkStringBuf *this, const char *s0, const char *s1, const char *s2, const char *s3, const char *s4, const char *s5)
+hkStringBuf *__fastcall hkStringBuf::setJoin(
+        hkStringBuf *this,
+        const char *s0,
+        const char *s1,
+        const char *s2,
+        const char *s3,
+        const char *s4,
+        const char *s5)
 {
-  const char *v7; // rbx
-  const char *v8; // rdi
-  const char *v9; // rsi
-  hkStringBuf *v10; // rbp
-
-  v7 = s2;
-  v8 = s1;
-  v9 = s0;
-  v10 = this;
   hkStringBuf::clear(this);
-  hkStringBuf::appendJoin(v10, v9, v8, v7, s3, s4, s5);
-  return v10;
+  hkStringBuf::appendJoin(this, s0, s1, s2, s3, s4, s5);
+  return this;
 }
 
 // File Line: 384
 // RVA: 0xC6B520
 void __fastcall hkStringBuf::chompStart(hkStringBuf *this, int n)
 {
-  int v2; // er9
-  int v3; // er8
-  int v4; // er9
-  char *v5; // rax
+  int m_size; // r9d
+  int v3; // r8d
+  int v4; // r9d
+  char *m_data; // rax
   char *v6; // r8
   signed __int64 v7; // r8
   __int64 v8; // rdx
   char v9; // cl
 
-  v2 = this->m_string.m_size;
-  v3 = v2 - 1;
-  if ( n < v2 - 1 )
+  m_size = this->m_string.m_size;
+  v3 = m_size - 1;
+  if ( n < m_size - 1 )
     v3 = n;
   if ( v3 > 0 )
   {
-    v4 = v2 - v3;
+    v4 = m_size - v3;
     this->m_string.m_size = v4;
-    v5 = this->m_string.m_data;
+    m_data = this->m_string.m_data;
     v6 = &this->m_string.m_data[v3];
     if ( v4 > 0 )
     {
-      v7 = v6 - v5;
+      v7 = v6 - m_data;
       v8 = (unsigned int)v4;
       do
       {
-        v9 = (v5++)[v7];
-        *(v5 - 1) = v9;
+        v9 = (m_data++)[v7];
+        *(m_data - 1) = v9;
         --v8;
       }
       while ( v8 );
@@ -961,29 +880,27 @@ void __fastcall hkStringBuf::chompEnd(hkStringBuf *this, int n)
 void __fastcall hkStringBuf::slice(hkStringBuf *this, int startOffset, int length)
 {
   __int64 v3; // rsi
-  hkStringBuf *v4; // rbx
   int v5; // edi
   int v6; // eax
   int v7; // eax
-  int v8; // er9
-  hkResult result; // [rsp+48h] [rbp+10h]
+  int v8; // r9d
+  hkResult result; // [rsp+48h] [rbp+10h] BYREF
 
   v3 = length;
-  v4 = this;
   if ( startOffset )
     hkMemUtil::memMove(this->m_string.m_data, &this->m_string.m_data[startOffset], length);
   v5 = v3 + 1;
-  v6 = v4->m_string.m_capacityAndFlags & 0x3FFFFFFF;
-  if ( v6 < (signed int)v3 + 1 )
+  v6 = this->m_string.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v6 < (int)v3 + 1 )
   {
     v7 = 2 * v6;
     v8 = v3 + 1;
     if ( v5 < v7 )
       v8 = v7;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, v4, v8, 1);
+    hkArrayUtil::_reserve(&result, &hkContainerTempAllocator::s_alloc, (const void **)&this->m_string.m_data, v8, 1);
   }
-  v4->m_string.m_size = v5;
-  v4->m_string.m_data[v3] = 0;
+  this->m_string.m_size = v5;
+  this->m_string.m_data[v3] = 0;
 }
 
 // File Line: 412
@@ -991,32 +908,28 @@ void __fastcall hkStringBuf::slice(hkStringBuf *this, int startOffset, int lengt
 void __fastcall hkStringBuf::set(hkStringBuf *this, const char *s, int len)
 {
   int v3; // ebx
-  const char *v4; // rbp
-  hkStringBuf *v5; // rdi
   int v6; // esi
   int v7; // eax
   int v8; // eax
-  int v9; // er9
-  hkResult result; // [rsp+50h] [rbp+18h]
+  int v9; // r9d
+  hkResult result; // [rsp+50h] [rbp+18h] BYREF
 
   v3 = len;
-  v4 = s;
-  v5 = this;
   if ( len < 0 )
     v3 = hkString::strLen(s);
   v6 = v3 + 1;
-  v7 = v5->m_string.m_capacityAndFlags & 0x3FFFFFFF;
+  v7 = this->m_string.m_capacityAndFlags & 0x3FFFFFFF;
   if ( v7 < v3 + 1 )
   {
     v8 = 2 * v7;
     v9 = v3 + 1;
     if ( v6 < v8 )
       v9 = v8;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, v5, v9, 1);
+    hkArrayUtil::_reserve(&result, &hkContainerTempAllocator::s_alloc, (const void **)&this->m_string.m_data, v9, 1);
   }
-  v5->m_string.m_size = v6;
-  v5->m_string.m_data[v3] = 0;
-  hkMemUtil::memCpy(v5->m_string.m_data, v4, v3);
+  this->m_string.m_size = v6;
+  this->m_string.m_data[v3] = 0;
+  hkMemUtil::memCpy(this->m_string.m_data, s, v3);
 }
 
 // File Line: 423
@@ -1024,20 +937,16 @@ void __fastcall hkStringBuf::set(hkStringBuf *this, const char *s, int len)
 void __fastcall hkStringBuf::append(hkStringBuf *this, const char *s, int len)
 {
   int v3; // edi
-  const char *v4; // rsi
-  hkStringBuf *v5; // rbp
   int v6; // ebx
 
   if ( s )
   {
     v3 = len;
-    v4 = s;
-    v5 = this;
     if ( len < 0 )
       v3 = hkString::strLen(s);
-    v6 = v5->m_string.m_size - 1;
-    hkStringBuf::setLength(v5, v6 + v3);
-    hkMemUtil::memCpy(&v5->m_string.m_data[v6], v4, v3);
+    v6 = this->m_string.m_size - 1;
+    hkStringBuf::setLength(this, v6 + v3);
+    hkMemUtil::memCpy(&this->m_string.m_data[v6], s, v3);
   }
 }
 
@@ -1053,24 +962,13 @@ void __fastcall hkStringBuf::prepend(hkStringBuf *this, const char *s, int len)
 void __fastcall hkStringBuf::insert(hkStringBuf *this, int pos, const char *s, int len)
 {
   int numtoinsert; // eax
-  const char *v5; // rbx
-  int v6; // edi
-  hkStringBuf *v7; // rsi
 
   if ( s )
   {
     numtoinsert = len;
-    v5 = s;
-    v6 = pos;
-    v7 = this;
     if ( len < 0 )
       numtoinsert = hkString::strLen(s);
-    hkArrayBase<char>::_insertAt(
-      (hkArrayBase<char> *)&v7->m_string.m_data,
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr,
-      v6,
-      v5,
-      numtoinsert);
+    hkArrayBase<char>::_insertAt(&this->m_string, &hkContainerTempAllocator::s_alloc, pos, s, numtoinsert);
   }
 }
 
@@ -1078,43 +976,38 @@ void __fastcall hkStringBuf::insert(hkStringBuf *this, int pos, const char *s, i
 // RVA: 0xC6B7B0
 void __fastcall hkStringBuf::pathBasename(hkStringBuf *this)
 {
-  hkStringBuf *v1; // rdi
-  int v2; // ebx
+  int IndexOf; // ebx
   int v3; // eax
 
-  v1 = this;
-  v2 = hkStringBuf::lastIndexOf(this, 47, 0, 0x7FFFFFFF);
-  v3 = hkStringBuf::lastIndexOf(v1, 92, 0, 0x7FFFFFFF);
-  if ( v3 > v2 )
-    v2 = v3;
-  if ( v2 >= 0 )
-    hkStringBuf::chompStart(v1, v2 + 1);
+  IndexOf = hkStringBuf::lastIndexOf(this, 47, 0, 0x7FFFFFFF);
+  v3 = hkStringBuf::lastIndexOf(this, 92, 0, 0x7FFFFFFF);
+  if ( v3 > IndexOf )
+    IndexOf = v3;
+  if ( IndexOf >= 0 )
+    hkStringBuf::chompStart(this, IndexOf + 1);
 }
 
 // File Line: 465
 // RVA: 0xC6B810
 void __fastcall hkStringBuf::pathDirname(hkStringBuf *this)
 {
-  hkStringBuf *v1; // rbx
-  int v2; // edi
+  int IndexOf; // edi
   int v3; // eax
 
-  v1 = this;
-  v2 = hkStringBuf::lastIndexOf(this, 47, 0, 0x7FFFFFFF);
-  v3 = hkStringBuf::lastIndexOf(v1, 92, 0, 0x7FFFFFFF);
-  if ( v3 > v2 )
-    v2 = v3;
-  if ( v2 < 0 )
-    hkStringBuf::clear(v1);
+  IndexOf = hkStringBuf::lastIndexOf(this, 47, 0, 0x7FFFFFFF);
+  v3 = hkStringBuf::lastIndexOf(this, 92, 0, 0x7FFFFFFF);
+  if ( v3 > IndexOf )
+    IndexOf = v3;
+  if ( IndexOf < 0 )
+    hkStringBuf::clear(this);
   else
-    hkStringBuf::slice(v1, 0, v2);
+    hkStringBuf::slice(this, 0, IndexOf);
 }
 
 // File Line: 478
 // RVA: 0xC6B880
 void __fastcall hkStringBuf::pathNormalize(hkStringBuf *this)
 {
-  hkStringBuf *v1; // r12
   const char *v2; // r15
   int v3; // edi
   int v4; // esi
@@ -1122,32 +1015,31 @@ void __fastcall hkStringBuf::pathNormalize(hkStringBuf *this)
   int v6; // ecx
   const char **v7; // r14
   int v8; // ecx
-  const char **v9; // r14
+  const char **m_data; // r14
   int v10; // edi
   __int64 v11; // rbx
-  _QWORD *array; // [rsp+18h] [rbp-79h]
+  _QWORD *array; // [rsp+18h] [rbp-79h] BYREF
   int v13; // [rsp+20h] [rbp-71h]
   int v14; // [rsp+24h] [rbp-6Dh]
-  hkArray<char const *,hkContainerTempAllocator> bits; // [rsp+28h] [rbp-69h]
-  hkStringBuf v16; // [rsp+38h] [rbp-59h]
+  hkArray<char const *,hkContainerTempAllocator> bits; // [rsp+28h] [rbp-69h] BYREF
+  hkStringBuf v16; // [rsp+38h] [rbp-59h] BYREF
 
-  v1 = this;
   hkStringBuf::hkStringBuf(&v16, this);
   hkStringBuf::replace(&v16, 92, 47, REPLACE_ALL);
   v2 = "//";
   if ( !(unsigned int)hkStringBuf::startsWith(&v16, "//") )
   {
-    v2 = &customWorldMapCaption;
+    v2 = &customCaption;
     if ( (unsigned int)hkStringBuf::startsWith(&v16, "/") )
       v2 = "/";
   }
   bits.m_data = 0i64;
   bits.m_size = 0;
-  bits.m_capacityAndFlags = 2147483648;
+  bits.m_capacityAndFlags = 0x80000000;
   hkStringBuf::split(&v16, 47, &bits);
   array = 0i64;
   v13 = 0;
-  v14 = 2147483648;
+  v14 = 0x80000000;
   v3 = 0;
   v4 = 0;
   if ( bits.m_size > 0 )
@@ -1160,14 +1052,14 @@ void __fastcall hkStringBuf::pathNormalize(hkStringBuf *this)
         if ( (unsigned int)hkString::strCmp(".", bits.m_data[v5]) )
         {
           v8 = v13;
-          v9 = bits.m_data;
+          m_data = bits.m_data;
           ++v3;
           if ( v13 == (v14 & 0x3FFFFFFF) )
           {
-            hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, &array, 8);
+            hkArrayUtil::_reserveMore(&hkContainerTempAllocator::s_alloc, (const void **)&array, 8);
             v8 = v13;
           }
-          array[v8] = v9[v5];
+          array[v8] = m_data[v5];
           goto LABEL_16;
         }
       }
@@ -1179,7 +1071,7 @@ void __fastcall hkStringBuf::pathNormalize(hkStringBuf *this)
           v7 = bits.m_data;
           if ( v13 == (v14 & 0x3FFFFFFF) )
           {
-            hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, &array, 8);
+            hkArrayUtil::_reserveMore(&hkContainerTempAllocator::s_alloc, (const void **)&array, 8);
             v6 = v13;
           }
           array[v6] = v7[v5];
@@ -1196,14 +1088,14 @@ LABEL_17:
     }
     while ( v4 < bits.m_size );
   }
-  hkStringBuf::operator=(v1, v2);
+  hkStringBuf::operator=(this, v2);
   v10 = 0;
   if ( v13 > 0 )
   {
     v11 = 0i64;
     do
     {
-      hkStringBuf::pathAppend(v1, (const char *)array[v11], 0i64, 0i64);
+      hkStringBuf::pathAppend(this, (const char *)array[v11], 0i64, 0i64);
       ++v10;
       ++v11;
     }
@@ -1211,24 +1103,21 @@ LABEL_17:
   }
   v13 = 0;
   if ( v14 >= 0 )
-    hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-      array,
-      8 * v14);
+    hkContainerTempAllocator::s_alloc.vfptr->bufFree(&hkContainerTempAllocator::s_alloc, array, 8 * v14);
   array = 0i64;
-  v14 = 2147483648;
+  v14 = 0x80000000;
   bits.m_size = 0;
   if ( bits.m_capacityAndFlags >= 0 )
     hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
+      &hkContainerTempAllocator::s_alloc,
       bits.m_data,
       8 * bits.m_capacityAndFlags);
   bits.m_data = 0i64;
   v16.m_string.m_size = 0;
-  bits.m_capacityAndFlags = 2147483648;
+  bits.m_capacityAndFlags = 0x80000000;
   if ( v16.m_string.m_capacityAndFlags >= 0 )
     hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
+      &hkContainerTempAllocator::s_alloc,
       v16.m_string.m_data,
       v16.m_string.m_capacityAndFlags & 0x3FFFFFFF);
 }
@@ -1237,15 +1126,13 @@ LABEL_17:
 // RVA: 0xC6BB40
 void __fastcall hkStringBuf::pathExtension(hkStringBuf *this)
 {
-  hkStringBuf *v1; // rbx
-  int v2; // eax
+  int IndexOf; // eax
 
-  v1 = this;
-  v2 = hkStringBuf::lastIndexOf(this, 46, 0, 0x7FFFFFFF);
-  if ( v2 == -1 )
-    hkStringBuf::clear(v1);
+  IndexOf = hkStringBuf::lastIndexOf(this, 46, 0, 0x7FFFFFFF);
+  if ( IndexOf == -1 )
+    hkStringBuf::clear(this);
   else
-    hkStringBuf::chompStart(v1, v2);
+    hkStringBuf::chompStart(this, IndexOf);
 }
 
 // File Line: 537
@@ -1255,22 +1142,18 @@ hkStringBuf *__fastcall hkStringBuf::pathAppend(hkStringBuf *this, const char *p
   __int64 v4; // r14
   bool v5; // zf
   const char *v6; // rbx
-  hkStringBuf *v7; // rsi
   bool i; // bp
   int v9; // eax
   int v10; // edi
   __int64 v11; // rcx
-  const char *v13; // [rsp+28h] [rbp-20h]
-  const char *v14; // [rsp+30h] [rbp-18h]
-  __int64 v15; // [rsp+38h] [rbp-10h]
+  __int64 v13[4]; // [rsp+28h] [rbp-20h]
 
   v4 = 0i64;
   v5 = this->m_string.m_size-- == 1;
   v6 = p0;
-  v7 = this;
-  v13 = p1;
-  v15 = 0i64;
-  v14 = p2;
+  v13[0] = (__int64)p1;
+  v13[2] = 0i64;
+  v13[1] = (__int64)p2;
   for ( i = !v5 && this->m_string.m_data[this->m_string.m_size - 1] != 47; v6; ++v4 )
   {
     if ( *v6 )
@@ -1292,24 +1175,20 @@ hkStringBuf *__fastcall hkStringBuf::pathAppend(hkStringBuf *this, const char *p
         while ( v11 );
         if ( v10 && i )
         {
-          if ( v7->m_string.m_size == (v7->m_string.m_capacityAndFlags & 0x3FFFFFFF) )
-            hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, v7, 1);
-          v7->m_string.m_data[v7->m_string.m_size++] = 47;
+          if ( this->m_string.m_size == (this->m_string.m_capacityAndFlags & 0x3FFFFFFF) )
+            hkArrayUtil::_reserveMore(&hkContainerTempAllocator::s_alloc, (const void **)&this->m_string.m_data, 1);
+          this->m_string.m_data[this->m_string.m_size++] = 47;
         }
-        hkArrayBase<char>::_append(
-          (hkArrayBase<char> *)&v7->m_string.m_data,
-          (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr,
-          v6,
-          v10);
+        hkArrayBase<char>::_append(&this->m_string, &hkContainerTempAllocator::s_alloc, v6, v10);
       }
       i = 1;
     }
-    v6 = (&v13)[v4];
+    v6 = (const char *)v13[v4];
   }
-  if ( v7->m_string.m_size == (v7->m_string.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, v7, 1);
-  v7->m_string.m_data[v7->m_string.m_size++] = 0;
-  return v7;
+  if ( this->m_string.m_size == (this->m_string.m_capacityAndFlags & 0x3FFFFFFF) )
+    hkArrayUtil::_reserveMore(&hkContainerTempAllocator::s_alloc, (const void **)&this->m_string.m_data, 1);
+  this->m_string.m_data[this->m_string.m_size++] = 0;
+  return this;
 }
 
 // File Line: 572
@@ -1317,7 +1196,7 @@ hkStringBuf *__fastcall hkStringBuf::pathAppend(hkStringBuf *this, const char *p
 __int64 __fastcall hkStringBuf::replace(hkStringBuf *this, char from, char to, hkStringBuf::ReplaceType rt)
 {
   unsigned int v4; // ebx
-  int v5; // er11
+  int v5; // r11d
   __int64 i; // r10
 
   v4 = 0;
@@ -1338,26 +1217,26 @@ __int64 __fastcall hkStringBuf::replace(hkStringBuf *this, char from, char to, h
 
 // File Line: 590
 // RVA: 0xC6BD30
-__int64 __fastcall hkStringBuf::replace(hkStringBuf *this, const char *from, const char *to, hkStringBuf::ReplaceType rtype)
+__int64 __fastcall hkStringBuf::replace(
+        hkStringBuf *this,
+        const char *from,
+        const char *to,
+        hkStringBuf::ReplaceType rtype)
 {
-  hkStringBuf *v4; // r12
-  hkStringBuf::ReplaceType v5; // er14
-  const char *v6; // r13
-  const char *v7; // rbp
   hkResultEnum v8; // esi
   hkResultEnum v9; // eax
   __int64 v10; // r15
   int v11; // edi
   int v12; // ebx
-  char *v13; // rsi
+  char *m_data; // rsi
   int v14; // ebp
-  int v15; // er14
+  int v15; // r14d
   int v16; // eax
-  hkResultEnum v17; // er8
-  signed __int64 v18; // rdi
+  hkResultEnum m_enum; // r8d
+  __int64 v18; // rdi
   __int64 v19; // rbx
   __int64 v20; // r10
-  int v21; // er9
+  int v21; // r9d
   char v22; // al
   __int64 v23; // rcx
   char v24; // al
@@ -1365,34 +1244,26 @@ __int64 __fastcall hkStringBuf::replace(hkStringBuf *this, const char *from, con
   char *v26; // rcx
   char *v27; // rdx
   __int64 v28; // rbx
-  int v29; // er14
+  int v29; // r14d
   int v30; // eax
   int v31; // eax
-  int v32; // er9
+  int v32; // r9d
   unsigned int v34; // [rsp+30h] [rbp-D8h]
-  hkResult result; // [rsp+34h] [rbp-D4h]
-  hkStringBuf v36; // [rsp+40h] [rbp-C8h]
-  char *s; // [rsp+118h] [rbp+10h]
-  hkStringBuf::ReplaceType v38; // [rsp+128h] [rbp+20h]
+  hkResult result; // [rsp+34h] [rbp-D4h] BYREF
+  hkStringBuf v36; // [rsp+40h] [rbp-C8h] BYREF
 
-  v38 = rtype;
-  s = (char *)from;
-  v4 = this;
-  v5 = rtype;
-  v6 = to;
-  v7 = from;
   v8 = (unsigned int)hkString::strLen(from);
   result.m_enum = v8;
-  v9 = (unsigned int)hkString::strLen(v6);
+  v9 = (unsigned int)hkString::strLen(to);
   v34 = 0;
   v10 = v9;
   if ( v9 <= v8 )
   {
-    v13 = v4->m_string.m_data;
+    m_data = this->m_string.m_data;
     v14 = 0;
     v15 = 0;
-    v16 = hkStringBuf::indexOf(v4, s, 0, 0x7FFFFFFF);
-    v17 = result.m_enum;
+    v16 = hkStringBuf::indexOf(this, from, 0, 0x7FFFFFFF);
+    m_enum = result.m_enum;
     v18 = 0i64;
     v19 = 0i64;
     v20 = result.m_enum;
@@ -1407,8 +1278,8 @@ __int64 __fastcall hkStringBuf::replace(hkStringBuf *this, const char *from, con
           v15 += v21 - v18;
           do
           {
-            v22 = v13[v18++];
-            v13[++v19 - 1] = v22;
+            v22 = m_data[v18++];
+            m_data[v19++] = v22;
           }
           while ( v18 < v21 );
         }
@@ -1418,74 +1289,74 @@ __int64 __fastcall hkStringBuf::replace(hkStringBuf *this, const char *from, con
           v15 += v10;
           do
           {
-            v24 = v6[v23++];
-            v13[++v19 - 1] = v24;
+            v24 = to[v23++];
+            m_data[v19++] = v24;
           }
           while ( v23 < v10 );
         }
-        v14 += v17;
+        v14 += m_enum;
         v18 += v20;
-        if ( v38 == REPLACE_ONE )
+        if ( rtype == REPLACE_ONE )
           break;
-        v25 = hkStringBuf::indexOf(v4, s, v21 + v17, 0x7FFFFFFF);
-        v17 = result.m_enum;
+        v25 = hkStringBuf::indexOf(this, from, v21 + m_enum, 0x7FFFFFFF);
+        m_enum = result.m_enum;
         v20 = result.m_enum;
         v21 = v25;
       }
       while ( v25 != -1 );
     }
-    if ( v14 < v4->m_string.m_size - 1 )
+    if ( v14 < this->m_string.m_size - 1 )
     {
-      v26 = &v13[v15];
-      v27 = &v13[v14];
+      v26 = &m_data[v15];
+      v27 = &m_data[v14];
       do
       {
         ++v14;
         ++v15;
         *v26++ = *v27++;
       }
-      while ( v14 < v4->m_string.m_size - 1 );
+      while ( v14 < this->m_string.m_size - 1 );
     }
     v28 = v15;
     v29 = v15 + 1;
-    v13[v28] = 0;
-    v30 = v4->m_string.m_capacityAndFlags & 0x3FFFFFFF;
+    m_data[v28] = 0;
+    v30 = this->m_string.m_capacityAndFlags & 0x3FFFFFFF;
     if ( v30 < v29 )
     {
       v31 = 2 * v30;
       v32 = v29;
       if ( v29 < v31 )
         v32 = v31;
-      hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, v4, v32, 1);
+      hkArrayUtil::_reserve(&result, &hkContainerTempAllocator::s_alloc, (const void **)&this->m_string.m_data, v32, 1);
     }
-    v4->m_string.m_size = v29;
-    v4->m_string.m_data[v28] = 0;
+    this->m_string.m_size = v29;
+    this->m_string.m_data[v28] = 0;
   }
   else
   {
-    hkStringBuf::hkStringBuf(&v36, v4);
-    hkStringBuf::clear(v4);
+    hkStringBuf::hkStringBuf(&v36, this);
+    hkStringBuf::clear(this);
     v11 = 0;
-    v12 = hkStringBuf::indexOf(&v36, v7, 0, 0x7FFFFFFF);
+    v12 = hkStringBuf::indexOf(&v36, from, 0, 0x7FFFFFFF);
     if ( v12 >= 0 )
     {
       v34 = 1;
       do
       {
-        hkStringBuf::append(v4, &v36.m_string.m_data[v11], v12 - v11);
-        hkStringBuf::append(v4, v6, v10);
+        hkStringBuf::append(this, &v36.m_string.m_data[v11], v12 - v11);
+        hkStringBuf::append(this, to, v10);
         v11 = v12 + v8;
-        if ( v5 == REPLACE_ONE )
+        if ( rtype == REPLACE_ONE )
           break;
-        v12 = hkStringBuf::indexOf(&v36, v7, v11, 0x7FFFFFFF);
+        v12 = hkStringBuf::indexOf(&v36, from, v11, 0x7FFFFFFF);
       }
       while ( v12 >= 0 );
     }
-    hkStringBuf::append(v4, &v36.m_string.m_data[v11], v36.m_string.m_size - v11 - 1);
+    hkStringBuf::append(this, &v36.m_string.m_data[v11], v36.m_string.m_size - v11 - 1);
     v36.m_string.m_size = 0;
     if ( v36.m_string.m_capacityAndFlags >= 0 )
       hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
+        &hkContainerTempAllocator::s_alloc,
         v36.m_string.m_data,
         v36.m_string.m_capacityAndFlags & 0x3FFFFFFF);
   }
@@ -1497,20 +1368,16 @@ __int64 __fastcall hkStringBuf::replace(hkStringBuf *this, const char *from, con
 void __fastcall hkStringBuf::lowerCase(hkStringBuf *this)
 {
   int v1; // edx
-  hkStringBuf *v2; // r10
   __int64 i; // r8
-  char v4; // cl
-  char v5; // al
+  char v3; // al
 
   v1 = 0;
-  v2 = this;
-  for ( i = 0i64; v1 < v2->m_string.m_size - 1; ++i )
+  for ( i = 0i64; v1 < this->m_string.m_size - 1; ++i )
   {
-    v4 = v2->m_string.m_data[i];
-    v5 = v4;
-    if ( (unsigned __int8)(v4 - 65) <= 0x19u )
-      v5 = v4 + 32;
-    v2->m_string.m_data[i] = v5;
+    v3 = this->m_string.m_data[i];
+    if ( (unsigned __int8)(v3 - 65) <= 0x19u )
+      v3 += 32;
+    this->m_string.m_data[i] = v3;
     ++v1;
   }
 }

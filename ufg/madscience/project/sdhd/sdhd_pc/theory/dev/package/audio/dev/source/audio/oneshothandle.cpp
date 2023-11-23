@@ -2,11 +2,11 @@
 // RVA: 0x14B390
 void __fastcall UFG::OneShotHandle::Release(UFG::OneShotHandle *this)
 {
-  UFG::OneShot *v1; // rdx
+  UFG::OneShot *m_pOneShot; // rdx
 
-  v1 = this->m_pOneShot;
-  if ( this->m_pOneShot && v1->m_pOwnerHandle )
-    v1->m_pOwnerHandle = 0i64;
+  m_pOneShot = this->m_pOneShot;
+  if ( this->m_pOneShot && m_pOneShot->m_pOwnerHandle )
+    m_pOneShot->m_pOwnerHandle = 0i64;
   this->m_pOneShot = 0i64;
 }
 
@@ -21,7 +21,11 @@ bool __fastcall UFG::OneShotHandle::IsValid(UFG::OneShotHandle *this)
 // RVA: 0x14CD20
 void __fastcall UFG::OneShotHandle::StopAndRelease(UFG::OneShotHandle *this)
 {
-  JUMPOUT(this->m_pOneShot, 0i64, UFG::OneShotPool::Free);
+  UFG::OneShot *m_pOneShot; // rcx
+
+  m_pOneShot = this->m_pOneShot;
+  if ( m_pOneShot )
+    UFG::OneShotPool::Free(m_pOneShot);
 }
 
 // File Line: 28

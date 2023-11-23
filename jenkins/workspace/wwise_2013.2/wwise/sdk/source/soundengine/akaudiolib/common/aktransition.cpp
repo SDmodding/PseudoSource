@@ -6,7 +6,7 @@ void __fastcall CAkTransition::CAkTransition(CAkTransition *this)
   *(_QWORD *)&this->m_UsersList.m_uLength = 0i64;
   *((_BYTE *)this + 64) &= 0xFCu;
   this->m_iNumUsers = 0;
-  this->m_eState = 0;
+  this->m_eState = NotRunning;
   this->m_fTimeRatio = 0.0;
   this->m_eTarget = 0x20000000i64;
 }
@@ -15,17 +15,15 @@ void __fastcall CAkTransition::CAkTransition(CAkTransition *this)
 // RVA: 0xA87370
 void __fastcall CAkTransition::Term(CAkTransition *this)
 {
-  ITransitionable **v1; // rdx
-  CAkTransition *v2; // rbx
+  ITransitionable **m_pItems; // rdx
 
-  v1 = this->m_UsersList.m_pItems;
-  v2 = this;
-  if ( v1 )
+  m_pItems = this->m_UsersList.m_pItems;
+  if ( m_pItems )
   {
     this->m_UsersList.m_uLength = 0;
-    AK::MemoryMgr::Free(g_DefaultPoolId, v1);
-    v2->m_UsersList.m_pItems = 0i64;
-    v2->m_UsersList.m_ulReserved = 0;
+    AK::MemoryMgr::Free(g_DefaultPoolId, m_pItems);
+    this->m_UsersList.m_pItems = 0i64;
+    this->m_UsersList.m_ulReserved = 0;
   }
 }
 
@@ -37,7 +35,7 @@ void __fastcall CAkTransition::Reset(CAkTransition *this)
   *((_BYTE *)this + 64) &= 0xFCu;
   this->m_iNumUsers = 0;
   this->m_eTarget = 0x20000000i64;
-  this->m_eState = 0;
+  this->m_eState = NotRunning;
   this->m_fTimeRatio = 0.0;
 }
 
@@ -45,95 +43,98 @@ void __fastcall CAkTransition::Reset(CAkTransition *this)
 // RVA: 0xA86FC0
 __int64 __fastcall CAkTransition::ComputeTransition(CAkTransition *this, unsigned int in_CurrentBufferTick)
 {
-  signed int v2; // er8
-  CAkTransition *v3; // rdi
-  unsigned int v4; // ecx
+  signed int m_uDurationInBufferTick; // r8d
+  unsigned int m_uStartTimeInBufferTick; // ecx
   unsigned __int8 v5; // si
-  float v6; // xmm6_4
+  float m_fTargetValue; // xmm6_4
   char v7; // cl
   float v8; // xmm2_4
-  ITransitionable **v9; // rbx
+  ITransitionable **m_pItems; // rbx
 
-  v2 = this->m_uDurationInBufferTick;
-  v3 = this;
-  v4 = this->m_uStartTimeInBufferTick;
+  m_uDurationInBufferTick = this->m_uDurationInBufferTick;
+  m_uStartTimeInBufferTick = this->m_uStartTimeInBufferTick;
   v5 = 0;
-  if ( in_CurrentBufferTick < v4 + v2 )
+  if ( in_CurrentBufferTick < m_uStartTimeInBufferTick + m_uDurationInBufferTick )
   {
-    if ( in_CurrentBufferTick > v4 )
-      v3->m_fTimeRatio = (float)(signed int)(in_CurrentBufferTick - v4) / (float)v2;
+    if ( in_CurrentBufferTick > m_uStartTimeInBufferTick )
+      this->m_fTimeRatio = (float)(int)(in_CurrentBufferTick - m_uStartTimeInBufferTick)
+                         / (float)m_uDurationInBufferTick;
     else
-      v3->m_fTimeRatio = 0.0;
-    v6 = AkInterpolation::InterpolateNoCheck(v3->m_fTimeRatio, v3->m_fStartValue, v3->m_fTargetValue, v3->m_eFadeCurve);
+      this->m_fTimeRatio = 0.0;
+    m_fTargetValue = AkInterpolation::InterpolateNoCheck(
+                       this->m_fTimeRatio,
+                       this->m_fStartValue,
+                       this->m_fTargetValue,
+                       this->m_eFadeCurve);
   }
   else
   {
-    v6 = v3->m_fTargetValue;
+    m_fTargetValue = this->m_fTargetValue;
     v5 = 1;
   }
-  v7 = *((_BYTE *)v3 + 64);
-  if ( v7 & 1 )
+  v7 = *((_BYTE *)this + 64);
+  if ( (v7 & 1) != 0 )
   {
-    v8 = (float)(COERCE_FLOAT((LODWORD(v6) & 0x7FFFFF) + 1065353216) - 1.0)
-       / (float)(COERCE_FLOAT((LODWORD(v6) & 0x7FFFFF) + 1065353216) + 1.0);
-    v6 = (float)((float)((float)((float)((float)((float)(v8 * v8) * 0.33333334) + 1.0) * (float)(v8 * 2.0))
-                       + (float)((float)((float)(unsigned __int8)(LODWORD(v6) >> 23) - 127.0) * 0.69314718))
-               * 0.43429449)
-       * 20.0;
+    v8 = (float)(COERCE_FLOAT((LODWORD(m_fTargetValue) & 0x7FFFFF) + 1065353216) - 1.0)
+       / (float)(COERCE_FLOAT((LODWORD(m_fTargetValue) & 0x7FFFFF) + 1065353216) + 1.0);
+    m_fTargetValue = (float)((float)((float)((float)((float)((float)(v8 * v8) * 0.33333334) + 1.0) * (float)(v8 * 2.0))
+                                   + (float)((float)((float)(unsigned __int8)(LODWORD(m_fTargetValue) >> 23) - 127.0)
+                                           * 0.69314718))
+                           * 0.43429449)
+                   * 20.0;
   }
-  v9 = v3->m_UsersList.m_pItems;
-  v3->m_fCurrentValue = v6;
-  *((_BYTE *)v3 + 64) = v7 | 2;
-  if ( v9 != &v9[v3->m_UsersList.m_uLength] )
+  m_pItems = this->m_UsersList.m_pItems;
+  this->m_fCurrentValue = m_fTargetValue;
+  *((_BYTE *)this + 64) = v7 | 2;
+  if ( m_pItems != &m_pItems[this->m_UsersList.m_uLength] )
   {
     do
     {
-      ((void (__fastcall *)(ITransitionable *, __int64, ITransitionableVtbl *, _QWORD))(*v9)->vfptr->TransUpdateValue)(
-        *v9,
-        v3->m_eTarget,
-        (*v9)->vfptr,
+      ((void (__fastcall *)(ITransitionable *, __int64, ITransitionableVtbl *, _QWORD))(*m_pItems)->vfptr->TransUpdateValue)(
+        *m_pItems,
+        this->m_eTarget,
+        (*m_pItems)->vfptr,
         v5);
-      ++v9;
+      ++m_pItems;
     }
-    while ( v9 != &v3->m_UsersList.m_pItems[v3->m_UsersList.m_uLength] );
+    while ( m_pItems != &this->m_UsersList.m_pItems[this->m_UsersList.m_uLength] );
   }
   return v5;
 }
 
 // File Line: 114
 // RVA: 0xA87130
-signed __int64 __fastcall CAkTransition::InitParameters(CAkTransition *this, TransitionParameters *in_Params, unsigned int in_CurrentBufferTick)
+__int64 __fastcall CAkTransition::InitParameters(
+        CAkTransition *this,
+        TransitionParameters *in_Params,
+        unsigned int in_CurrentBufferTick)
 {
-  TransitionParameters *v3; // r9
-  CAkTransition *v4; // rbx
-  float v5; // xmm2_4
-  float v6; // xmm1_4
+  float fStartValue; // xmm2_4
+  float fTargetValue; // xmm1_4
   int v7; // edx
   float v8; // xmm2_4
   float v9; // xmm3_4
   float v10; // xmm1_4
   AkCurveInterpolation v11; // ecx
-  int v12; // eax
+  AkCurveInterpolation eFadeCurve; // eax
   ITransitionable **v13; // r10
   int v14; // eax
-  ITransitionable **v15; // rax
-  ITransitionable *v16; // rdx
-  signed __int64 v17; // r8
+  ITransitionable **m_pItems; // rax
+  ITransitionable *pUser; // rdx
+  ITransitionable **v17; // r8
   bool v18; // zf
 
-  v3 = in_Params;
-  v4 = this;
   this->m_eTarget = in_Params->eTarget;
   *((_BYTE *)this + 64) ^= (in_Params->bdBs ^ *((_BYTE *)this + 64)) & 1;
-  v5 = in_Params->fStartValue;
-  v6 = in_Params->fTargetValue;
+  fStartValue = in_Params->fStartValue;
+  fTargetValue = in_Params->fTargetValue;
   if ( in_Params->bdBs )
   {
     v7 = `AkMath::FastPow10::`4::`local static guard;
-    v8 = v5 * 0.050000001;
+    v8 = fStartValue * 0.050000001;
     if ( v8 >= -37.0 )
     {
-      if ( `AkMath::FastPow10::`4::`local static guard & 1 )
+      if ( (`AkMath::FastPow10::`4::`local static guard & 1) != 0 )
       {
         v9 = *(float *)&`AkMath::FastPow10::`4::SCALE;
       }
@@ -144,78 +145,84 @@ signed __int64 __fastcall CAkTransition::InitParameters(CAkTransition *this, Tra
         `AkMath::FastPow10::`4::`local static guard |= 1u;
         `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
       }
-      v5 = (float)((float)((float)((float)(COERCE_FLOAT(
-                                             ((signed int)(float)((float)(v8 * v9) + 1065353200.0) & 0x7FFFFF)
-                                           + 1065353216)
-                                         * 0.32518977)
-                                 + 0.020805772)
-                         * COERCE_FLOAT(((signed int)(float)((float)(v8 * v9) + 1065353200.0) & 0x7FFFFF) + 1065353216))
-                 + 0.65304345)
-         * COERCE_FLOAT((signed int)(float)((float)(v8 * v9) + 1065353200.0) & 0xFF800000);
+      fStartValue = (float)((float)((float)((float)(COERCE_FLOAT(
+                                                      ((int)(float)((float)(v8 * v9) + 1065353200.0) & 0x7FFFFF)
+                                                    + 1065353216)
+                                                  * 0.32518977)
+                                          + 0.020805772)
+                                  * COERCE_FLOAT(((int)(float)((float)(v8 * v9) + 1065353200.0) & 0x7FFFFF) + 1065353216))
+                          + 0.65304345)
+                  * COERCE_FLOAT((int)(float)((float)(v8 * v9) + 1065353200.0) & 0xFF800000);
     }
     else
     {
       v9 = *(float *)&`AkMath::FastPow10::`4::SCALE;
-      v5 = 0.0;
+      fStartValue = 0.0;
     }
-    v10 = v6 * 0.050000001;
+    v10 = fTargetValue * 0.050000001;
     if ( v10 >= -37.0 )
     {
-      if ( !(v7 & 1) )
+      if ( (v7 & 1) == 0 )
       {
         v9 = FLOAT_2_7866352e7;
         `AkMath::FastPow10::`4::`local static guard = v7 | 1;
         `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
       }
-      v6 = (float)((float)((float)((float)(COERCE_FLOAT(
-                                             ((signed int)(float)((float)(v10 * v9) + 1065353200.0) & 0x7FFFFF)
-                                           + 1065353216)
-                                         * 0.32518977)
-                                 + 0.020805772)
-                         * COERCE_FLOAT(((signed int)(float)((float)(v10 * v9) + 1065353200.0) & 0x7FFFFF) + 1065353216))
-                 + 0.65304345)
-         * COERCE_FLOAT((signed int)(float)((float)(v10 * v9) + 1065353200.0) & 0xFF800000);
+      fTargetValue = (float)((float)((float)((float)(COERCE_FLOAT(
+                                                       ((int)(float)((float)(v10 * v9) + 1065353200.0) & 0x7FFFFF)
+                                                     + 1065353216)
+                                                   * 0.32518977)
+                                           + 0.020805772)
+                                   * COERCE_FLOAT(((int)(float)((float)(v10 * v9) + 1065353200.0) & 0x7FFFFF) + 1065353216))
+                           + 0.65304345)
+                   * COERCE_FLOAT((int)(float)((float)(v10 * v9) + 1065353200.0) & 0xFF800000);
     }
     else
     {
-      v6 = 0.0;
+      fTargetValue = 0.0;
     }
   }
-  this->m_fStartValue = v5;
-  this->m_fCurrentValue = v5;
-  this->m_fTargetValue = v6;
-  if ( v3->bUseReciprocalCurve && v5 >= v6 && (v11 = v3->eFadeCurve, (v11 - 3) & 0xFFFFFFFD) )
-    v12 = 8 - v11;
+  this->m_fStartValue = fStartValue;
+  this->m_fCurrentValue = fStartValue;
+  this->m_fTargetValue = fTargetValue;
+  if ( in_Params->bUseReciprocalCurve
+    && fStartValue >= fTargetValue
+    && (v11 = in_Params->eFadeCurve, ((v11 - 3) & 0xFFFFFFFD) != 0) )
+  {
+    eFadeCurve = 8 - v11;
+  }
   else
-    v12 = v3->eFadeCurve;
-  v4->m_eFadeCurve = v12;
-  v4->m_uStartTimeInBufferTick = in_CurrentBufferTick;
+  {
+    eFadeCurve = in_Params->eFadeCurve;
+  }
+  this->m_eFadeCurve = eFadeCurve;
+  this->m_uStartTimeInBufferTick = in_CurrentBufferTick;
   v13 = 0i64;
-  v14 = (AkAudioLibSettings::g_msPerBufferTick + v3->lDuration - 1) / AkAudioLibSettings::g_msPerBufferTick;
-  v4->m_fTimeRatio = 0.0;
-  v4->m_uDurationInBufferTick = v14;
-  v15 = v4->m_UsersList.m_pItems;
-  v16 = v3->pUser;
-  v17 = (signed __int64)&v15[v4->m_UsersList.m_uLength];
-  v18 = v15 == (ITransitionable **)v17;
-  if ( v15 != (ITransitionable **)v17 )
+  v14 = (AkAudioLibSettings::g_msPerBufferTick + in_Params->lDuration - 1) / AkAudioLibSettings::g_msPerBufferTick;
+  this->m_fTimeRatio = 0.0;
+  this->m_uDurationInBufferTick = v14;
+  m_pItems = this->m_UsersList.m_pItems;
+  pUser = in_Params->pUser;
+  v17 = &m_pItems[this->m_UsersList.m_uLength];
+  v18 = m_pItems == v17;
+  if ( m_pItems != v17 )
   {
     do
     {
-      if ( *v15 == v16 )
+      if ( *m_pItems == pUser )
         break;
-      ++v15;
+      ++m_pItems;
     }
-    while ( v15 != (ITransitionable **)v17 );
-    v18 = v15 == (ITransitionable **)v17;
+    while ( m_pItems != v17 );
+    v18 = m_pItems == v17;
   }
   if ( !v18 )
-    v13 = v15;
+    v13 = m_pItems;
   if ( !v13 )
   {
-    if ( !AkArray<CAkPBI *,CAkPBI *,ArrayPoolDefault,4,AkArrayAllocatorDefault>::AddLast(&v4->m_UsersList, v16) )
+    if ( !AkArray<CAkPBI *,CAkPBI *,ArrayPoolDefault,4,AkArrayAllocatorDefault>::AddLast(&this->m_UsersList, pUser) )
       return 2i64;
-    ++v4->m_iNumUsers;
+    ++this->m_iNumUsers;
   }
   return 1i64;
 }

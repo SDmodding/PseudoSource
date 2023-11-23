@@ -1,26 +1,27 @@
 // File Line: 14
 // RVA: 0xFB4D0
-void __fastcall UFG::NavAvoidanceStrategyFlowField::NavAvoidanceStrategyFlowField(UFG::NavAvoidanceStrategyFlowField *this)
+void __fastcall UFG::NavAvoidanceStrategyFlowField::NavAvoidanceStrategyFlowField(
+        UFG::NavAvoidanceStrategyFlowField *this)
 {
-  UFG::NavAvoidanceStrategyFlowField *v1; // rbx
-
-  v1 = this;
-  UFG::NavAvoidanceStrategy::NavAvoidanceStrategy((UFG::NavAvoidanceStrategy *)&this->vfptr);
-  v1->vfptr = (UFG::NavAvoidanceStrategyVtbl *)&UFG::NavAvoidanceStrategyFlowField::`vftable;
+  UFG::NavAvoidanceStrategy::NavAvoidanceStrategy(this);
+  this->vfptr = (UFG::NavAvoidanceStrategyVtbl *)&UFG::NavAvoidanceStrategyFlowField::`vftable;
 }
 
 // File Line: 22
 // RVA: 0x102B50
-void __fastcall UFG::NavAvoidanceStrategyFlowField::Update(UFG::NavAvoidanceStrategyFlowField *this, UFG::UpdatePhase phase, float deltaTime)
+void __fastcall UFG::NavAvoidanceStrategyFlowField::Update(
+        UFG::NavAvoidanceStrategyFlowField *this,
+        UFG::UpdatePhase phase,
+        float deltaTime)
 {
   UFG::qNode<UFG::NavComponent,UFG::NavComponent> *i; // rax
   UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent> *j; // rbx
   UFG::qNode<UFG::AvoidanceController,UFG::AvoidanceController> *k; // rbx
-  UFG::qNode<UFG::NavComponent,UFG::NavComponent> *l; // rbx
+  UFG::qNode<UFG::NavComponent,UFG::NavComponent> *m; // rbx
 
   if ( phase )
   {
-    if ( phase == 2 )
+    if ( phase == UPDATE_PHASE_PART3 )
     {
       if ( UFG::NavModuleLocalFlowField::mpTaskGroup )
       {
@@ -51,11 +52,11 @@ void __fastcall UFG::NavAvoidanceStrategyFlowField::Update(UFG::NavAvoidanceStra
     {
       ((void (__fastcall *)(UFG::qNode<UFG::AvoidanceController,UFG::AvoidanceController> *))k[4].mPrev->mNext)(&k[4]);
     }
-    for ( l = UFG::NavComponent::s_NavComponentList.mNode.mNext - 4;
-          l != (UFG::qNode<UFG::NavComponent,UFG::NavComponent> *)aVtstatisticsUf;
-          l = l[4].mNext - 4 )
+    for ( m = UFG::NavComponent::s_NavComponentList.mNode.mNext - 4;
+          m != (UFG::qNode<UFG::NavComponent,UFG::NavComponent> *)aVtstatisticsUf;
+          m = m[4].mNext - 4 )
     {
-      UFG::NavModuleLocalFlowField::QueueFlowTask((UFG::NavModuleLocalFlowField *)l[9].mNext);
+      UFG::NavModuleLocalFlowField::QueueFlowTask((UFG::NavModuleLocalFlowField *)m[9].mNext);
     }
     if ( UFG::NavModuleLocalFlowField::mpTaskGroup )
       UFG::qTaskManager::Queue(&UFG::gTaskManager, UFG::NavModuleLocalFlowField::mpTaskGroup);
@@ -64,7 +65,9 @@ void __fastcall UFG::NavAvoidanceStrategyFlowField::Update(UFG::NavAvoidanceStra
 
 // File Line: 65
 // RVA: 0x102460
-void __fastcall UFG::NavAvoidanceStrategyFlowField::SetLocalModuleFor(UFG::NavAvoidanceStrategyFlowField *this, UFG::NavComponent *pNavComponent)
+void __fastcall UFG::NavAvoidanceStrategyFlowField::SetLocalModuleFor(
+        UFG::NavAvoidanceStrategyFlowField *this,
+        UFG::NavComponent *pNavComponent)
 {
   UFG::NavComponent::SetLocalModule<UFG::NavModuleLocalFlowField>(pNavComponent);
 }

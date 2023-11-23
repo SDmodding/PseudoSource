@@ -2,17 +2,13 @@
 // RVA: 0x5C7600
 void __fastcall UFG::UIHKScreenSpyPC::UIHKScreenSpyPC(UFG::UIHKScreenSpyPC *this)
 {
-  UFG::UIHKScreenSpyPC *v1; // rbx
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v2; // rax
-  hkgpIndexedMeshDefinitions::Edge *v3; // rdx
-  hkgpIndexedMesh::EdgeBarrier *v4; // rcx
-  unsigned int v5; // eax
-  UFG::qWiseSymbol result; // [rsp+58h] [rbp+10h]
+  hkgpIndexedMeshDefinitions::Edge *v2; // rdx
+  hkgpIndexedMesh::EdgeBarrier *v3; // rcx
+  unsigned int v4; // eax
+  UFG::qWiseSymbol result; // [rsp+58h] [rbp+10h] BYREF
 
-  v1 = this;
-  v2 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
-  v2->mPrev = v2;
-  v2->mNext = v2;
+  this->mPrev = &this->UFG::qNode<UFG::UIScreen,UFG::UIScreen>;
+  this->mNext = &this->UFG::qNode<UFG::UIScreen,UFG::UIScreen>;
   this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
@@ -20,21 +16,21 @@ void __fastcall UFG::UIHKScreenSpyPC::UIHKScreenSpyPC(UFG::UIHKScreenSpyPC *this
   this->mScreenUID = -1;
   *(_QWORD *)&this->mControllerMask = 15i64;
   *(_QWORD *)&this->mPriority = 0i64;
-  this->mDimToApplyType = 0;
+  this->mDimToApplyType = eDIM_INVALID;
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
   this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKTaskableScreen::`vftable;
   this->mFinished = 0;
   this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenSpyPC::`vftable;
-  this->mState = 0;
+  this->mState = STATE_INVALID;
   UFG::PropertySetHandle::PropertySetHandle(&this->mProperties);
-  v1->mCurrentTime = 0;
-  *(_WORD *)&v1->mbLiveNeighborhood = 0;
-  v1->mbTriadSensitive = 0;
-  v1->mSavedControllerMode = UFG::gInputSystem->mControllers[UFG::gActiveControllerNum]->m_ActiveMapSet;
+  this->mCurrentTime = 0;
+  *(_WORD *)&this->mbLiveNeighborhood = 0;
+  this->mbTriadSensitive = 0;
+  this->mSavedControllerMode = UFG::gInputSystem->mControllers[UFG::gActiveControllerNum]->m_ActiveMapSet;
   UFG::SetInputMode(IM_UI_ONLY, UFG::gInputSystem->mControllers[UFG::gActiveControllerNum]->mControllerIndex);
-  if ( !Scaleform::Render::Text::DocView::DocumentListener::View_OnLineFormat(v4, v3) )
+  if ( !Scaleform::Render::Text::DocView::DocumentListener::View_OnLineFormat(v3, v2) )
   {
     UFG::qWiseSymbol::create_from_string(&result, "mg_spy_cam");
     UFG::TiDo::LoadWwiseBank(&result);
@@ -43,9 +39,9 @@ void __fastcall UFG::UIHKScreenSpyPC::UIHKScreenSpyPC(UFG::UIHKScreenSpyPC *this
       UFG::TiDo::m_pInstance,
       "ms_minigames",
       "surveillance");
-    v5 = UFG::TiDo::CalcWwiseUid("mute_rain");
+    v4 = UFG::TiDo::CalcWwiseUid("mute_rain");
     if ( UFG::HudAudio::m_instance )
-      UFG::AudioEntity::CreateAndPlayEvent((UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr, v5, 0i64, 0, 0i64);
+      UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, v4, 0i64, 0, 0i64);
     _((AMD_HD3D *)result.mUID);
   }
 }
@@ -54,28 +50,26 @@ void __fastcall UFG::UIHKScreenSpyPC::UIHKScreenSpyPC(UFG::UIHKScreenSpyPC *this
 // RVA: 0x5CCB50
 void __fastcall UFG::UIHKScreenSpyPC::~UIHKScreenSpyPC(UFG::UIHKScreenSpyPC *this)
 {
-  UFG::UIHKScreenSpyPC *v1; // rbx
   UFG::UIScreenTextureManager *v2; // rax
   UFG::UIScreenTextureManager *v3; // rax
   hkgpIndexedMeshDefinitions::Edge *v4; // rdx
   hkgpIndexedMesh::EdgeBarrier *v5; // rcx
-  UFG::SimComponent *v6; // rax
-  UFG::qWiseSymbol result; // [rsp+48h] [rbp+10h]
+  UFG::SimComponent *ComponentOfType; // rax
+  UFG::qWiseSymbol result; // [rsp+48h] [rbp+10h] BYREF
 
-  v1 = this;
   this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenSpyPC::`vftable;
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseTexturePack(v2, UFG::UIHKScreenSpyPC::gGridTexturePackFilename);
   v3 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v3, "SpyPC");
-  v1->mbTriadSensitive = 0;
-  UFG::PropertySetHandle::Null(&v1->mProperties);
+  this->mbTriadSensitive = 0;
+  UFG::PropertySetHandle::Null(&this->mProperties);
   UFG::SetInputMode(
-    v1->mSavedControllerMode,
+    this->mSavedControllerMode,
     UFG::gInputSystem->mControllers[UFG::gActiveControllerNum]->mControllerIndex);
   if ( !Scaleform::Render::Text::DocView::DocumentListener::View_OnLineFormat(v5, v4) )
   {
-    if ( !(_S24_0 & 1) )
+    if ( (_S24_0 & 1) == 0 )
     {
       _S24_0 |= 1u;
       Set_State_minigame_mus_end_2.mUID = UFG::qWiseSymbolUIDFromString("Set_State_minigame_mus_end", 0x811C9DC5);
@@ -92,224 +86,204 @@ void __fastcall UFG::UIHKScreenSpyPC::~UIHKScreenSpyPC(UFG::UIHKScreenSpyPC *thi
       "none");
     if ( LocalPlayer )
     {
-      v6 = UFG::SimObject::GetComponentOfType(
-             (UFG::SimObject *)&LocalPlayer->vfptr,
-             UFG::CharacterLookComponent::_TypeUID);
-      if ( v6 )
-        HIDWORD(v6[2].m_BoundComponentHandles.mNode.mNext) = 0;
+      ComponentOfType = UFG::SimObject::GetComponentOfType(LocalPlayer, UFG::CharacterLookComponent::_TypeUID);
+      if ( ComponentOfType )
+        HIDWORD(ComponentOfType[2].m_BoundComponentHandles.mNode.mNext) = 0;
     }
     _((AMD_HD3D *)result.mUID);
   }
-  UFG::PropertySetHandle::~PropertySetHandle(&v1->mProperties);
-  UFG::UIScreen::~UIScreen((UFG::UIScreen *)&v1->vfptr);
+  UFG::PropertySetHandle::~PropertySetHandle(&this->mProperties);
+  UFG::UIScreen::~UIScreen(this);
 }
 
 // File Line: 94
 // RVA: 0x6366A0
 void __fastcall UFG::UIHKScreenSpyPC::init(UFG::UIHKScreenSpyPC *this, UFG::UICommandData *data)
 {
-  UFG::UIHKScreenSpyPC *v2; // rbx
-  Scaleform::GFx::Movie *v3; // rdi
-  double v4; // xmm6_8
+  Scaleform::GFx::Movie *pObject; // rdi
+  double mState; // xmm6_8
   hkgpIndexedMeshDefinitions::Edge *v5; // rdx
   hkgpIndexedMesh::EdgeBarrier *v6; // rcx
-  double v7; // xmm6_8
-  bool v8; // bl
-  bool v9; // bl
-  Scaleform::GFx::Value pargs; // [rsp+30h] [rbp-C8h]
-  char ptr; // [rsp+60h] [rbp-98h]
+  Scaleform::GFx::Value::ValueUnion v7; // xmm6_8
+  bool mbLiveNeighborhood; // bl
+  bool m_IsKeyboardController; // bl
+  Scaleform::GFx::Value pargs; // [rsp+30h] [rbp-C8h] BYREF
+  char ptr[16]; // [rsp+60h] [rbp-98h] BYREF
   __int64 v12; // [rsp+70h] [rbp-88h]
   double v13; // [rsp+78h] [rbp-80h]
-  Scaleform::GFx::Value v14; // [rsp+88h] [rbp-70h]
-  char v15; // [rsp+B8h] [rbp-40h]
+  Scaleform::GFx::Value v14; // [rsp+88h] [rbp-70h] BYREF
+  char v15[16]; // [rsp+B8h] [rbp-40h] BYREF
   __int64 v16; // [rsp+C8h] [rbp-30h]
-  unsigned int v17; // [rsp+D0h] [rbp-28h]
+  int v17; // [rsp+D0h] [rbp-28h]
   __int64 v18; // [rsp+D8h] [rbp-20h]
   __int64 v19; // [rsp+E8h] [rbp-10h]
 
   v19 = -2i64;
-  v2 = this;
-  UFG::UIScreen::init((UFG::UIScreen *)&this->vfptr, data);
-  v2->mState = 1;
-  v3 = v2->mRenderable->m_movie.pObject;
-  `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-  v4 = (double)(signed int)v2->mState;
-  if ( (LODWORD(v13) >> 6) & 1 )
+  UFG::UIScreen::init(this, data);
+  this->mState = STATE_NORMAL;
+  pObject = this->mRenderable->m_movie.pObject;
+  `eh vector constructor iterator(ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+  mState = (double)(int)this->mState;
+  if ( (LOBYTE(v13) & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v12 + 16i64))(
-      v12,
-      &ptr,
-      COERCE_DOUBLE(*(_QWORD *)&v13));
+    (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v12 + 16i64))(v12, ptr, COERCE_DOUBLE(*(_QWORD *)&v13));
     v12 = 0i64;
   }
-  v13 = v4;
+  v13 = mState;
   `eh vector constructor iterator(&v14, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-  v7 = (double)(signed int)UFG::UIHKScreenSpyPC::GetDefaultNeighborhood(v2);
-  if ( ((unsigned int)v14.Type >> 6) & 1 )
+  v7.NValue = (double)(int)UFG::UIHKScreenSpyPC::GetDefaultNeighborhood(this);
+  if ( (v14.Type & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&v14.pObjectInterface->vfptr->gap8[8])(
+    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&v14.pObjectInterface->vfptr->gap8[8])(
       v14.pObjectInterface,
       &v14,
-      *(_QWORD *)&v14.mValue.NValue);
+      v14.mValue);
     v14.pObjectInterface = 0i64;
   }
-  v14.Type = 5;
-  v14.mValue.NValue = v7;
-  v8 = v2->mbLiveNeighborhood;
-  if ( (v17 >> 6) & 1 )
+  v14.Type = VT_Number;
+  v14.mValue = v7;
+  mbLiveNeighborhood = this->mbLiveNeighborhood;
+  if ( (v17 & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v16 + 16i64))(v16, &v15, v18);
+    (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v16 + 16i64))(v16, v15, v18);
     v16 = 0i64;
   }
   v17 = 2;
-  LOBYTE(v18) = v8;
-  if ( v3 )
+  LOBYTE(v18) = mbLiveNeighborhood;
+  if ( pObject )
   {
     pargs.pObjectInterface = 0i64;
-    pargs.Type = 0;
-    v9 = UFG::gInputSystem->mControllers[UFG::gActiveControllerNum]->m_IsKeyboardController;
-    pargs.Type = 2;
-    pargs.mValue.BValue = v9;
-    Scaleform::GFx::Movie::Invoke(v3, "Show_PCCtrls", 0i64, &pargs, 1u);
-    Scaleform::GFx::Movie::Invoke(v3, "setState", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
-    Scaleform::GFx::Movie::Invoke(v3, "setNeighborhood", 0i64, &v14, 2u);
-    if ( ((unsigned int)pargs.Type >> 6) & 1 )
+    pargs.Type = VT_Undefined;
+    m_IsKeyboardController = UFG::gInputSystem->mControllers[UFG::gActiveControllerNum]->m_IsKeyboardController;
+    pargs.Type = VT_Boolean;
+    pargs.mValue.BValue = m_IsKeyboardController;
+    Scaleform::GFx::Movie::Invoke(pObject, "Show_PCCtrls", 0i64, &pargs, 1u);
+    Scaleform::GFx::Movie::Invoke(pObject, "setState", 0i64, (Scaleform::GFx::Value *)ptr, 1u);
+    Scaleform::GFx::Movie::Invoke(pObject, "setNeighborhood", 0i64, &v14, 2u);
+    if ( (pargs.Type & 0x40) != 0 )
     {
-      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
+      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&pargs.pObjectInterface->vfptr->gap8[8])(
         pargs.pObjectInterface,
         &pargs,
-        *(_QWORD *)&pargs.mValue.NValue);
+        pargs.mValue);
       pargs.pObjectInterface = 0i64;
     }
-    pargs.Type = 0;
+    pargs.Type = VT_Undefined;
   }
   if ( !Scaleform::Render::Text::DocView::DocumentListener::View_OnLineFormat(v6, v5) && UFG::HudAudio::m_instance )
-    UFG::AudioEntity::CreateAndPlayEvent(
-      (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-      0xF41B2F0D,
-      0i64,
-      0,
-      0i64);
+    UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0xF41B2F0D, 0i64, 0, 0i64);
   `eh vector destructor iterator(&v14, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
-  `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+  `eh vector destructor iterator(ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
 // File Line: 127
 // RVA: 0x5E7680
-signed __int64 __fastcall UFG::UIHKScreenSpyPC::GetDefaultNeighborhood(UFG::UIHKScreenSpyPC *this)
+__int64 __fastcall UFG::UIHKScreenSpyPC::GetDefaultNeighborhood(UFG::UIHKScreenSpyPC *this)
 {
-  UFG::UIHKScreenSpyPC *v1; // rbx
   int v2; // esi
-  Scaleform::GFx::Movie *v3; // r15
+  Scaleform::GFx::Movie *pObject; // r15
   UFG::qSymbol *v4; // rax
-  UFG::qPropertySet *v5; // rax
+  UFG::qPropertySet *PropertySet; // rax
   UFG::qPropertyList *v6; // rax
   UFG::qPropertyList *v7; // r13
-  unsigned int v8; // er12
-  unsigned int v9; // er14
-  char *v10; // rax
+  unsigned int mNumElements; // r12d
+  unsigned int i; // r14d
+  char *ValuePtr; // rax
   UFG::qPropertySet *v11; // rdi
   UFG::GameStatTracker *v12; // rax
   UFG::GameStatTracker *v13; // rax
   UFG::ProgressionTracker *v14; // rbx
-  UFG::GameSlice *v15; // rbp
+  UFG::GameSlice *ActiveMaster; // rbp
   bool v16; // al
   char *v17; // rbx
-  double v18; // xmm6_8
-  char ptr; // [rsp+40h] [rbp-78h]
-  __int64 v21; // [rsp+50h] [rbp-68h]
-  unsigned int v22; // [rsp+58h] [rbp-60h]
-  double v23; // [rsp+60h] [rbp-58h]
-  UFG::qSymbol name; // [rsp+C0h] [rbp+8h]
-  UFG::qSymbol result; // [rsp+C8h] [rbp+10h]
+  Scaleform::GFx::Value::ValueUnion v18; // xmm6_8
+  Scaleform::GFx::Value ptr; // [rsp+40h] [rbp-78h] BYREF
+  UFG::qSymbol name; // [rsp+C0h] [rbp+8h] BYREF
+  UFG::qSymbol result; // [rsp+C8h] [rbp+10h] BYREF
 
-  v1 = this;
   v2 = 0;
-  v3 = this->mRenderable->m_movie.pObject;
+  pObject = this->mRenderable->m_movie.pObject;
   v4 = UFG::qSymbol::create_from_string(&name, "default-spycams-list");
-  v5 = UFG::PropertySetManager::GetPropertySet(v4);
-  UFG::PropertySetHandle::SetPropSet(&v1->mProperties, v5);
-  UFG::PropertySetHandle::Bind(&v1->mProperties);
+  PropertySet = UFG::PropertySetManager::GetPropertySet(v4);
+  UFG::PropertySetHandle::SetPropSet(&this->mProperties, PropertySet);
+  UFG::PropertySetHandle::Bind(&this->mProperties);
   v6 = UFG::qPropertySet::Get<UFG::qPropertyList>(
-         v1->mProperties.mpPropSet,
-         (UFG::qSymbol *)&SpyCamSymbol_List_1.mUID,
+         this->mProperties.mpPropSet,
+         (UFG::qArray<unsigned long,0> *)&SpyCamSymbol_List_1,
          DEPTH_RECURSE);
   v7 = v6;
   if ( v6 )
   {
-    v8 = v6->mNumElements;
-    v9 = 0;
-    if ( v8 )
+    mNumElements = v6->mNumElements;
+    for ( i = 0; i < mNumElements; ++i )
     {
-      do
+      ValuePtr = UFG::qPropertyList::GetValuePtr(v7, 0x1Au, i);
+      if ( ValuePtr && *(_QWORD *)ValuePtr )
+        v11 = (UFG::qPropertySet *)&ValuePtr[*(_QWORD *)ValuePtr];
+      else
+        v11 = 0i64;
+      if ( *UFG::qPropertySet::Get<bool>(
+              v11,
+              (UFG::qArray<unsigned long,0> *)&SpyCamSymbol_TWSensitive_1,
+              DEPTH_RECURSE) )
       {
-        v10 = UFG::qPropertyList::GetValuePtr(v7, 0x1Au, v9);
-        if ( v10 && *(_QWORD *)v10 )
-          v11 = (UFG::qPropertySet *)&v10[*(_QWORD *)v10];
-        else
-          v11 = 0i64;
-        if ( *UFG::qPropertySet::Get<bool>(v11, (UFG::qSymbol *)&SpyCamSymbol_TWSensitive_1.mUID, DEPTH_RECURSE) )
+        v12 = UFG::GameStatTracker::Instance();
+        if ( UFG::GameStatTracker::GetStat(v12, Collectible_SpyCam, &v11->mName) )
         {
-          v12 = UFG::GameStatTracker::Instance();
-          if ( UFG::GameStatTracker::GetStat(v12, Collectible_SpyCam, &v11->mName) )
+          name.mUID = UFG::qPropertySet::Get<UFG::qSymbol>(
+                        v11,
+                        (UFG::qArray<unsigned long,0> *)&SpyCamSymbol_TWName_1,
+                        DEPTH_RECURSE)->mUID;
+          v13 = UFG::GameStatTracker::Instance();
+          if ( UFG::GameStatTracker::GetStat(v13, Collectible_EnforcerUnlocked, &name) )
           {
-            name.mUID = UFG::qPropertySet::Get<UFG::qSymbol>(
-                          v11,
-                          (UFG::qSymbol *)&SpyCamSymbol_TWName_1.mUID,
-                          DEPTH_RECURSE)->mUID;
-            v13 = UFG::GameStatTracker::Instance();
-            if ( UFG::GameStatTracker::GetStat(v13, Collectible_EnforcerUnlocked, &name) )
+            v14 = UFG::ProgressionTracker::Instance();
+            ActiveMaster = UFG::ProgressionTracker::GetActiveMaster(v14);
+            if ( ActiveMaster )
             {
-              v14 = UFG::ProgressionTracker::Instance();
-              v15 = UFG::ProgressionTracker::GetActiveMaster(v14);
-              if ( v15 )
+              v16 = 1;
+              if ( UFG::ProgressionTracker::IsRunningCriticalActiveMaster(v14) )
               {
-                v16 = 1;
-                if ( UFG::ProgressionTracker::IsRunningCriticalActiveMaster(v14) )
+                v2 |= 1u;
+                if ( ActiveMaster->mNode.mUID != UFG::qSymbol::create_from_string(&result, "C_PS2")->mUID )
+                  v16 = 0;
+              }
+              if ( (v2 & 1) != 0 )
+                v2 &= ~1u;
+              if ( v16 )
+              {
+                v17 = UFG::qPropertySet::Get<char const *>(
+                        v11,
+                        (UFG::qArray<unsigned long,0> *)&SpyCamSymbol_Neighborhood_1,
+                        DEPTH_RECURSE);
+                `eh vector constructor iterator(
+                  &ptr,
+                  0x30ui64,
+                  1,
+                  (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+                v18.NValue = (double)(int)UFG::UIHKScreenSpyPC::GetNeighborhoodId(v17);
+                if ( (ptr.Type & 0x40) != 0 )
                 {
-                  v2 |= 1u;
-                  if ( v15->mNode.mUID != UFG::qSymbol::create_from_string(&result, "C_PS2")->mUID )
-                    v16 = 0;
-                }
-                if ( v2 & 1 )
-                  v2 &= 0xFFFFFFFE;
-                if ( v16 )
-                {
-                  v17 = UFG::qPropertySet::Get<char const *>(
-                          v11,
-                          (UFG::qSymbol *)&SpyCamSymbol_Neighborhood_1.mUID,
-                          DEPTH_RECURSE);
-                  `eh vector constructor iterator(
+                  (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&ptr.pObjectInterface->vfptr->gap8[8])(
+                    ptr.pObjectInterface,
                     &ptr,
-                    0x30ui64,
-                    1,
-                    (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-                  v18 = (double)(signed int)UFG::UIHKScreenSpyPC::GetNeighborhoodId(v17);
-                  if ( (v22 >> 6) & 1 )
-                  {
-                    (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v21 + 16i64))(
-                      v21,
-                      &ptr,
-                      COERCE_DOUBLE(*(_QWORD *)&v23));
-                    v21 = 0i64;
-                  }
-                  v22 = 5;
-                  v23 = v18;
-                  if ( v3 )
-                    Scaleform::GFx::Movie::Invoke(v3, "setForTW", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
-                  `eh vector destructor iterator(
-                    &ptr,
-                    0x30ui64,
-                    1,
-                    (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+                    ptr.mValue);
+                  ptr.pObjectInterface = 0i64;
                 }
+                ptr.Type = VT_Number;
+                ptr.mValue = v18;
+                if ( pObject )
+                  Scaleform::GFx::Movie::Invoke(pObject, "setForTW", 0i64, &ptr, 1u);
+                `eh vector destructor iterator(
+                  &ptr,
+                  0x30ui64,
+                  1,
+                  (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
               }
             }
           }
         }
-        ++v9;
       }
-      while ( v9 < v8 );
     }
   }
   return 1i64;
@@ -317,52 +291,48 @@ signed __int64 __fastcall UFG::UIHKScreenSpyPC::GetDefaultNeighborhood(UFG::UIHK
 
 // File Line: 184
 // RVA: 0x5E83F0
-signed __int64 __fastcall UFG::UIHKScreenSpyPC::GetNeighborhoodId(const char *neighborhood)
+__int64 __fastcall UFG::UIHKScreenSpyPC::GetNeighborhoodId(const char *neighborhood)
 {
-  const char *v1; // rbx
   int v3; // eax
   unsigned int v4; // ecx
 
-  v1 = neighborhood;
   if ( !(unsigned int)UFG::qStringCompare(neighborhood, "CT", -1) )
     return 1i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "NP", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(neighborhood, "NP", -1) )
     return 2i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "AB", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(neighborhood, "AB", -1) )
     return 3i64;
-  v3 = UFG::qStringCompare(v1, "KT", -1);
+  v3 = UFG::qStringCompare(neighborhood, "KT", -1);
   v4 = 0;
   if ( !v3 )
-    v4 = 4;
+    return 4;
   return v4;
 }
 
 // File Line: 197
 // RVA: 0x640050
-void __usercall UFG::UIHKScreenSpyPC::update(UFG::UIHKScreenSpyPC *this@<rcx>, float elapsed@<xmm1>, __int64 a3@<rdx>)
+void __fastcall UFG::UIHKScreenSpyPC::update(UFG::UIHKScreenSpyPC *this, float elapsed)
 {
-  UFG::UIHKScreenSpyPC *v3; // rdi
-  char v4; // bl
-  UFG::qWiseSymbol *v5; // rax
-  bool v6; // si
-  UFG::qWiseSymbol result; // [rsp+50h] [rbp+8h]
+  char v3; // bl
+  UFG::qWiseSymbol *v4; // rax
+  bool v5; // si
+  UFG::qWiseSymbol result; // [rsp+50h] [rbp+8h] BYREF
 
-  v3 = this;
-  v4 = 0;
-  ((void (__cdecl *)(UFG::UIHKScreenSpyPC *, __int64))this->vfptr[1].__vecDelDtor)(this, a3);
-  v6 = 0;
-  if ( !v3->mbMusicPlay )
+  v3 = 0;
+  ((void (__fastcall *)(UFG::UIHKScreenSpyPC *))this->vfptr[1].__vecDelDtor)(this);
+  v5 = 0;
+  if ( !this->mbMusicPlay )
   {
-    v5 = UFG::qWiseSymbol::create_from_string(&result, "mg_spy_cam");
-    v4 = 1;
-    if ( (unsigned __int8)UFG::TiDo::BankLoaded(v5->mUID) )
-      v6 = 1;
+    v4 = UFG::qWiseSymbol::create_from_string(&result, "mg_spy_cam");
+    v3 = 1;
+    if ( UFG::TiDo::BankLoaded(v4->mUID) )
+      v5 = 1;
   }
-  if ( v4 & 1 )
+  if ( (v3 & 1) != 0 )
     _((AMD_HD3D *)result.mUID);
-  if ( v6 )
+  if ( v5 )
   {
-    if ( !(_S25_2 & 1) )
+    if ( (_S25_2 & 1) == 0 )
     {
       _S25_2 |= 1u;
       Set_State_minigame_mus_start_2.mUID = UFG::qWiseSymbolUIDFromString("Set_State_minigame_mus_start", 0x811C9DC5);
@@ -370,39 +340,36 @@ void __usercall UFG::UIHKScreenSpyPC::update(UFG::UIHKScreenSpyPC *this@<rcx>, f
       atexit(UFG::UIHKScreenSpyPC::update_::_5_::_dynamic_atexit_destructor_for__Set_State_minigame_mus_start__);
     }
     UFG::Music::MusicEvent(Set_State_minigame_mus_start_2.mUID);
-    v3->mbMusicPlay = 1;
+    this->mbMusicPlay = 1;
   }
-  UFG::UIScreen::update((UFG::UIScreen *)&v3->vfptr, elapsed);
+  UFG::UIScreen::update(this, elapsed);
 }
 
 // File Line: 211
 // RVA: 0x61D670
 void __fastcall UFG::UIHKScreenSpyPC::UpdateTime(UFG::UIHKScreenSpyPC *this)
 {
-  UFG::UIHKScreenSpyPC *v1; // rbx
-  Scaleform::GFx::Movie *v2; // rdi
-  UFG::TimeOfDayManager *v3; // rax
+  Scaleform::GFx::Movie *pObject; // rdi
+  UFG::TimeOfDayManager *Instance; // rax
   unsigned int v4; // edx
   unsigned int v5; // ecx
   const char *v6; // rax
-  char *v7; // rbx
-  bool v8; // bl
-  Scaleform::GFx::Value v9; // [rsp+28h] [rbp-39h]
-  Scaleform::GFx::Value pargs; // [rsp+58h] [rbp-9h]
-  __int64 v11; // [rsp+88h] [rbp+27h]
-  UFG::qString result; // [rsp+90h] [rbp+2Fh]
+  bool m_IsKeyboardController; // bl
+  Scaleform::GFx::Value v8; // [rsp+28h] [rbp-39h] BYREF
+  Scaleform::GFx::Value pargs; // [rsp+58h] [rbp-9h] BYREF
+  __int64 v10; // [rsp+88h] [rbp+27h]
+  UFG::qString result; // [rsp+90h] [rbp+2Fh] BYREF
 
-  v11 = -2i64;
-  v1 = this;
-  v2 = this->mRenderable->m_movie.pObject;
-  if ( v2 )
+  v10 = -2i64;
+  pObject = this->mRenderable->m_movie.pObject;
+  if ( pObject )
   {
-    v3 = UFG::TimeOfDayManager::GetInstance();
-    v4 = (signed int)(float)(v3->m_SecondsSinceMidnight * 0.00027777778);
-    v5 = (signed int)(float)((float)(v3->m_SecondsSinceMidnight - (float)((float)(signed int)v4 * 3600.0)) * 0.016666668);
-    if ( v5 != v1->mCurrentTime )
+    Instance = UFG::TimeOfDayManager::GetInstance();
+    v4 = (int)(float)(Instance->m_SecondsSinceMidnight * 0.00027777778);
+    v5 = (int)(float)((float)(Instance->m_SecondsSinceMidnight - (float)((float)(int)v4 * 3600.0)) * 0.016666668);
+    if ( v5 != this->mCurrentTime )
     {
-      v1->mCurrentTime = v5;
+      this->mCurrentTime = v5;
       v6 = "AM";
       if ( v4 > 0xC )
       {
@@ -411,35 +378,33 @@ void __fastcall UFG::UIHKScreenSpyPC::UpdateTime(UFG::UIHKScreenSpyPC *this)
       }
       UFG::qString::FormatEx(&result, "%02u:%02u %s", v4, v5, v6);
       pargs.pObjectInterface = 0i64;
-      pargs.Type = 0;
-      v7 = result.mData;
-      pargs.Type = 6;
-      *(_QWORD *)&pargs.mValue.NValue = v7;
-      Scaleform::GFx::Movie::Invoke(v2, "SpyPC_SetTime", 0i64, &pargs, 1u);
-      v9.pObjectInterface = 0i64;
-      v9.Type = 0;
-      v8 = UFG::gInputSystem->mControllers[UFG::gActiveControllerNum]->m_IsKeyboardController;
-      v9.Type = 2;
-      v9.mValue.BValue = v8;
-      Scaleform::GFx::Movie::Invoke(v2, "Show_PCCtrls", 0i64, &v9, 1u);
-      if ( ((unsigned int)v9.Type >> 6) & 1 )
+      pargs.Type = VT_String;
+      pargs.mValue.pString = result.mData;
+      Scaleform::GFx::Movie::Invoke(pObject, "SpyPC_SetTime", 0i64, &pargs, 1u);
+      v8.pObjectInterface = 0i64;
+      v8.Type = VT_Undefined;
+      m_IsKeyboardController = UFG::gInputSystem->mControllers[UFG::gActiveControllerNum]->m_IsKeyboardController;
+      v8.Type = VT_Boolean;
+      v8.mValue.BValue = m_IsKeyboardController;
+      Scaleform::GFx::Movie::Invoke(pObject, "Show_PCCtrls", 0i64, &v8, 1u);
+      if ( (v8.Type & 0x40) != 0 )
       {
-        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&v9.pObjectInterface->vfptr->gap8[8])(
-          v9.pObjectInterface,
-          &v9,
-          *(_QWORD *)&v9.mValue.NValue);
-        v9.pObjectInterface = 0i64;
+        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&v8.pObjectInterface->vfptr->gap8[8])(
+          v8.pObjectInterface,
+          &v8,
+          v8.mValue);
+        v8.pObjectInterface = 0i64;
       }
-      v9.Type = 0;
-      if ( ((unsigned int)pargs.Type >> 6) & 1 )
+      v8.Type = VT_Undefined;
+      if ( (pargs.Type & 0x40) != 0 )
       {
-        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
+        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&pargs.pObjectInterface->vfptr->gap8[8])(
           pargs.pObjectInterface,
           &pargs,
-          *(_QWORD *)&pargs.mValue.NValue);
+          pargs.mValue);
         pargs.pObjectInterface = 0i64;
       }
-      pargs.Type = 0;
+      pargs.Type = VT_Undefined;
       UFG::qString::~qString(&result);
     }
   }
@@ -447,38 +412,40 @@ void __fastcall UFG::UIHKScreenSpyPC::UpdateTime(UFG::UIHKScreenSpyPC *this)
 
 // File Line: 247
 // RVA: 0x62C640
-char __fastcall UFG::UIHKScreenSpyPC::handleMessage(UFG::UIHKScreenSpyPC *this, unsigned int msgId, UFG::UIMessage *msg)
+char __fastcall UFG::UIHKScreenSpyPC::handleMessage(
+        UFG::UIHKScreenSpyPC *this,
+        unsigned int msgId,
+        UFG::UIMessage *msg)
 {
   UFG::UIMessage *v3; // r15
   unsigned int v4; // esi
-  UFG::UIHKScreenSpyPC *v5; // r14
-  UFG::UIHKScreenSpyPC::eState v6; // ecx
+  UFG::UIHKScreenSpyPC::eState mState; // ecx
   unsigned int v7; // eax
-  Scaleform::GFx::Movie *v9; // rbx
-  signed int v10; // ebx
+  Scaleform::GFx::Movie *pObject; // rbx
+  UFG::UIHKScreenSpyPC::eNeighborhood NValue; // ebx
   unsigned int v11; // eax
   unsigned int v12; // eax
   SSClass *v13; // rbx
   SSInstance *v14; // rcx
   const char *v15; // rdx
   unsigned int v16; // eax
-  double v17; // xmm6_8
+  Scaleform::GFx::Value::ValueUnion v17; // xmm6_8
   UFG::UIScreenTextureManager *v18; // rax
   bool v19; // bl
   UFG::qSymbol *v20; // rax
-  UFG::qPropertySet *v21; // rax
+  UFG::qPropertySet *PropertySet; // rax
   UFG::qPropertyList *v22; // rax
   UFG::qPropertyList *v23; // r13
-  unsigned int v24; // er12
-  unsigned int v25; // er15
-  char *v26; // rax
+  unsigned int mNumElements; // r12d
+  unsigned int v25; // r15d
+  char *ValuePtr; // rax
   UFG::qPropertySet *v27; // rbx
   char *v28; // rax
   int *v29; // rax
-  ASymbol *v30; // r15
-  ASymbol *v31; // r12
+  UFG::qSymbol *v30; // r15
+  UFG::qSymbol *v31; // r12
   UFG::GameStatTracker *v32; // rax
-  bool v33; // al
+  bool Stat; // al
   ASymbol *v34; // rcx
   unsigned int v35; // ebx
   SSClass *v36; // rax
@@ -486,61 +453,60 @@ char __fastcall UFG::UIHKScreenSpyPC::handleMessage(UFG::UIHKScreenSpyPC *this, 
   ASymbol *v38; // rax
   unsigned int v39; // eax
   UFG::UIScreenTextureManager *v40; // rax
-  UFG::qString v41; // [rsp+10h] [rbp-41h]
-  Scaleform::GFx::Value pval; // [rsp+38h] [rbp-19h]
-  ASymbol result; // [rsp+B8h] [rbp+67h]
+  UFG::qString v41; // [rsp+10h] [rbp-41h] BYREF
+  Scaleform::GFx::Value pval; // [rsp+38h] [rbp-19h] BYREF
+  ASymbol result; // [rsp+B8h] [rbp+67h] BYREF
   UFG::UIMessage *v44; // [rsp+C8h] [rbp+77h]
-  SSInstance *args_pp; // [rsp+D0h] [rbp+7Fh]
+  SSInstance *args_pp; // [rsp+D0h] [rbp+7Fh] BYREF
 
   v3 = msg;
   v4 = msgId;
-  v5 = this;
-  v6 = this->mState;
-  if ( v6 == 3 )
-    return UFG::UIScreen::handleMessage((UFG::UIScreen *)&v5->vfptr, msgId, msg);
+  mState = this->mState;
+  if ( mState == STATE_COMPLETE )
+    return UFG::UIScreen::handleMessage(this, msgId, msg);
   if ( msgId == UI_HASH_PLAYSOUND_20 )
   {
     UFG::qString::qString(&v41, (UFG::qString *)&msg[1]);
     v7 = UFG::TiDo::CalcWwiseUid(v41.mData);
     if ( UFG::HudAudio::m_instance )
-      UFG::AudioEntity::CreateAndPlayEvent((UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr, v7, 0i64, 0, 0i64);
+      UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, v7, 0i64, 0, 0i64);
     UFG::qString::~qString(&v41);
     return 1;
   }
-  v9 = v5->mRenderable->m_movie.pObject;
-  if ( !v9 )
-    return UFG::UIScreen::handleMessage((UFG::UIScreen *)&v5->vfptr, msgId, msg);
-  if ( v6 == 1 )
+  pObject = this->mRenderable->m_movie.pObject;
+  if ( !pObject )
+    return UFG::UIScreen::handleMessage(this, msgId, msg);
+  if ( mState == STATE_NORMAL )
   {
     if ( msgId == UI_HASH_BUTTON_ACCEPT_PRESSED_30 )
     {
       pval.pObjectInterface = 0i64;
-      pval.Type = 0;
-      Scaleform::GFx::Movie::GetVariable(v9, &pval, "currentAntenna");
-      v10 = (signed int)pval.mValue.NValue;
+      pval.Type = VT_Undefined;
+      Scaleform::GFx::Movie::GetVariable(pObject, &pval, "currentAntenna");
+      NValue = (int)pval.mValue.NValue;
       v11 = UFG::TiDo::CalcWwiseUid("Play_sp_accept");
       if ( UFG::HudAudio::m_instance )
-        UFG::AudioEntity::CreateAndPlayEvent((UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr, v11, 0i64, 0, 0i64);
-      v5->mNeighborhood = v10;
-      v5->mState = 2;
-      UFG::UIHKScreenSpyPC::LoadNeighborhoodTexturePack(v5);
-      if ( ((unsigned int)pval.Type >> 6) & 1 )
+        UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, v11, 0i64, 0, 0i64);
+      this->mNeighborhood = NValue;
+      this->mState = STATE_DANGER;
+      UFG::UIHKScreenSpyPC::LoadNeighborhoodTexturePack(this);
+      if ( (pval.Type & 0x40) != 0 )
       {
-        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pval.pObjectInterface->vfptr->gap8[8])(
+        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&pval.pObjectInterface->vfptr->gap8[8])(
           pval.pObjectInterface,
           &pval,
-          *(_QWORD *)&pval.mValue.NValue);
+          pval.mValue);
         pval.pObjectInterface = 0i64;
       }
-      pval.Type = 0;
+      pval.Type = VT_Undefined;
       goto LABEL_78;
     }
     if ( msgId == UI_HASH_BUTTON_BACK_PRESSED_30 )
     {
-      v5->mFinished = 1;
+      this->mFinished = 1;
       v12 = UFG::TiDo::CalcWwiseUid("Play_sp_back");
       if ( UFG::HudAudio::m_instance )
-        UFG::AudioEntity::CreateAndPlayEvent((UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr, v12, 0i64, 0, 0i64);
+        UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, v12, 0i64, 0, 0i64);
       v13 = SSBrain::get_class("SpyPC");
       ASymbol::create(&result, "_end_camera", 0xFFFFFFFF, ATerm_long);
       if ( LODWORD(v13[1].vfptr) )
@@ -554,12 +520,7 @@ char __fastcall UFG::UIHKScreenSpyPC::handleMessage(UFG::UIHKScreenSpyPC *this, 
     if ( msgId == UI_HASH_DPAD_DOWN_PRESSED_30 || msgId == UI_HASH_THUMBSTICK_LEFT_DOWN_30 )
     {
       if ( UFG::HudAudio::m_instance )
-        UFG::AudioEntity::CreateAndPlayEvent(
-          (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-          0xEDB4A8C7,
-          0i64,
-          0,
-          0i64);
+        UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0xEDB4A8C7, 0i64, 0, 0i64);
       v15 = "highlightNeighborhoodDown";
     }
     else
@@ -567,22 +528,17 @@ char __fastcall UFG::UIHKScreenSpyPC::handleMessage(UFG::UIHKScreenSpyPC *this, 
       if ( msgId != UI_HASH_DPAD_UP_PRESSED_30 && msgId != UI_HASH_THUMBSTICK_LEFT_UP_30 )
         goto LABEL_78;
       if ( UFG::HudAudio::m_instance )
-        UFG::AudioEntity::CreateAndPlayEvent(
-          (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-          0xEDB4A8C7,
-          0i64,
-          0,
-          0i64);
+        UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0xEDB4A8C7, 0i64, 0, 0i64);
       v15 = "highlightNeighborhoodUp";
     }
     goto LABEL_77;
   }
-  if ( v6 != 2 )
+  if ( mState != STATE_DANGER )
   {
 LABEL_78:
     msg = v3;
     msgId = v4;
-    return UFG::UIScreen::handleMessage((UFG::UIScreen *)&v5->vfptr, msgId, msg);
+    return UFG::UIScreen::handleMessage(this, msgId, msg);
   }
   if ( msgId == UI_HASH_DPAD_DOWN_PRESSED_30 || msgId == UI_HASH_THUMBSTICK_LEFT_DOWN_30 )
   {
@@ -603,30 +559,30 @@ LABEL_78:
   {
     v15 = "highlightRight";
 LABEL_77:
-    Scaleform::GFx::Movie::Invoke(v9, v15, 0i64, 0i64, 0);
+    Scaleform::GFx::Movie::Invoke(pObject, v15, 0i64, 0i64, 0);
     goto LABEL_78;
   }
   if ( msgId == UI_HASH_BUTTON_BACK_PRESSED_30 )
   {
-    v5->mState = 1;
+    this->mState = STATE_NORMAL;
     v16 = UFG::TiDo::CalcWwiseUid("Play_sp_back");
     if ( UFG::HudAudio::m_instance )
-      UFG::AudioEntity::CreateAndPlayEvent((UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr, v16, 0i64, 0, 0i64);
+      UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, v16, 0i64, 0, 0i64);
     *(_QWORD *)&v41.mMagic = Scaleform::GFx::Value::~Value;
     `eh vector constructor iterator(&pval, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-    v17 = (double)(signed int)v5->mState;
-    if ( ((unsigned int)pval.Type >> 6) & 1 )
+    v17.NValue = (double)(int)this->mState;
+    if ( (pval.Type & 0x40) != 0 )
     {
-      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pval.pObjectInterface->vfptr->gap8[8])(
+      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&pval.pObjectInterface->vfptr->gap8[8])(
         pval.pObjectInterface,
         &pval,
-        *(_QWORD *)&pval.mValue.NValue);
+        pval.mValue);
       pval.pObjectInterface = 0i64;
     }
-    pval.Type = 5;
-    pval.mValue.NValue = v17;
-    Scaleform::GFx::Movie::Invoke(v9, "setState", 0i64, &pval, 1u);
-    Scaleform::GFx::Movie::Invoke(v9, "resetNeighborhoodScreen", 0i64, 0i64, 0);
+    pval.Type = VT_Number;
+    pval.mValue = v17;
+    Scaleform::GFx::Movie::Invoke(pObject, "setState", 0i64, &pval, 1u);
+    Scaleform::GFx::Movie::Invoke(pObject, "resetNeighborhoodScreen", 0i64, 0i64, 0);
     v18 = UFG::UIScreenTextureManager::Instance();
     UFG::UIScreenTextureManager::ReleaseTexturePack(v18, UFG::UIHKScreenSpyPC::gGridTexturePackFilename);
     `eh vector destructor iterator(&pval, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
@@ -635,39 +591,39 @@ LABEL_77:
   if ( msgId != UI_HASH_BUTTON_ACCEPT_PRESSED_30 )
     goto LABEL_78;
   pval.pObjectInterface = 0i64;
-  pval.Type = 0;
-  Scaleform::GFx::Movie::Invoke(v9, "confirmCameraStatus", 0i64, &customWorldMapCaption);
-  Scaleform::GFx::Movie::GetVariable(v9, &pval, "selectedSlot");
-  args_pp = (SSInstance *)(unsigned int)(signed int)pval.mValue.NValue;
+  pval.Type = VT_Undefined;
+  Scaleform::GFx::Movie::Invoke(pObject, "confirmCameraStatus", 0i64, &customCaption);
+  Scaleform::GFx::Movie::GetVariable(pObject, &pval, "selectedSlot");
+  args_pp = (SSInstance *)(unsigned int)(int)pval.mValue.NValue;
   if ( (_DWORD)args_pp != -1 )
   {
     v20 = UFG::qSymbol::create_from_string((UFG::qSymbol *)&result, "default-spycams-list");
-    v21 = UFG::PropertySetManager::GetPropertySet(v20);
-    UFG::PropertySetHandle::SetPropSet(&v5->mProperties, v21);
-    UFG::PropertySetHandle::Bind(&v5->mProperties);
+    PropertySet = UFG::PropertySetManager::GetPropertySet(v20);
+    UFG::PropertySetHandle::SetPropSet(&this->mProperties, PropertySet);
+    UFG::PropertySetHandle::Bind(&this->mProperties);
     v22 = UFG::qPropertySet::Get<UFG::qPropertyList>(
-            v5->mProperties.mpPropSet,
-            (UFG::qSymbol *)&SpyCamSymbol_List_1.mUID,
+            this->mProperties.mpPropSet,
+            (UFG::qArray<unsigned long,0> *)&SpyCamSymbol_List_1,
             DEPTH_RECURSE);
     v23 = v22;
-    if ( v22 && (v24 = v22->mNumElements, v25 = 0, v24) )
+    if ( v22 && (mNumElements = v22->mNumElements, v25 = 0, mNumElements) )
     {
       while ( 1 )
       {
-        v26 = UFG::qPropertyList::GetValuePtr(v23, 0x1Au, v25);
-        if ( !v26 || (v27 = (UFG::qPropertySet *)&v26[*(_QWORD *)v26], !*(_QWORD *)v26) )
+        ValuePtr = UFG::qPropertyList::GetValuePtr(v23, 0x1Au, v25);
+        if ( !ValuePtr || (v27 = (UFG::qPropertySet *)&ValuePtr[*(_QWORD *)ValuePtr], !*(_QWORD *)ValuePtr) )
           v27 = 0i64;
         v28 = UFG::qPropertySet::Get<char const *>(
                 v27,
-                (UFG::qSymbol *)&SpyCamSymbol_Neighborhood_1.mUID,
+                (UFG::qArray<unsigned long,0> *)&SpyCamSymbol_Neighborhood_1,
                 DEPTH_RECURSE);
-        if ( !(unsigned int)UFG::qStringCompare(v28, v5->mCurrentNeighborhood, -1) )
+        if ( !(unsigned int)UFG::qStringCompare(v28, this->mCurrentNeighborhood, -1) )
         {
-          v29 = UFG::qPropertySet::Get<long>(v27, (UFG::qSymbol *)&SpyCamSymbol_Index_1.mUID, DEPTH_RECURSE);
+          v29 = UFG::qPropertySet::Get<long>(v27, (UFG::qArray<unsigned long,0> *)&SpyCamSymbol_Index_1, DEPTH_RECURSE);
           if ( *v29 == (_DWORD)args_pp )
             break;
         }
-        if ( ++v25 >= v24 )
+        if ( ++v25 >= mNumElements )
           goto LABEL_59;
       }
     }
@@ -676,32 +632,32 @@ LABEL_77:
 LABEL_59:
       v27 = 0i64;
     }
-    v30 = (ASymbol *)UFG::qPropertySet::Get<UFG::qSymbol>(
-                       v27,
-                       (UFG::qSymbol *)&SpyCamSymbol_CameraMarker_1.mUID,
-                       DEPTH_RECURSE);
-    v31 = (ASymbol *)UFG::qPropertySet::Get<UFG::qSymbol>(
-                       v27,
-                       (UFG::qSymbol *)&SpyCamSymbol_TeleportMarker_1.mUID,
-                       DEPTH_RECURSE);
-    UFG::qPropertySet::Get<UFG::qSymbol>(v27, (UFG::qSymbol *)&SpyCamSymbol_SliceName_1.mUID, DEPTH_RECURSE);
-    if ( *UFG::qPropertySet::Get<bool>(v27, (UFG::qSymbol *)&SpyCamSymbol_TWSensitive_1.mUID, DEPTH_RECURSE) )
+    v30 = UFG::qPropertySet::Get<UFG::qSymbol>(
+            v27,
+            (UFG::qArray<unsigned long,0> *)&SpyCamSymbol_CameraMarker_1,
+            DEPTH_RECURSE);
+    v31 = UFG::qPropertySet::Get<UFG::qSymbol>(
+            v27,
+            (UFG::qArray<unsigned long,0> *)&SpyCamSymbol_TeleportMarker_1,
+            DEPTH_RECURSE);
+    UFG::qPropertySet::Get<UFG::qSymbol>(v27, (UFG::qArray<unsigned long,0> *)&SpyCamSymbol_SliceName_1, DEPTH_RECURSE);
+    if ( *UFG::qPropertySet::Get<bool>(v27, (UFG::qArray<unsigned long,0> *)&SpyCamSymbol_TWSensitive_1, DEPTH_RECURSE) )
     {
       result.i_uid = UFG::qPropertySet::Get<UFG::qSymbol>(
                        v27,
-                       (UFG::qSymbol *)&SpyCamSymbol_TWName_1.mUID,
+                       (UFG::qArray<unsigned long,0> *)&SpyCamSymbol_TWName_1,
                        DEPTH_RECURSE)->mUID;
       v32 = UFG::GameStatTracker::Instance();
-      v33 = UFG::GameStatTracker::GetStat(v32, Collectible_EnforcerUnlocked, (UFG::qSymbol *)&result);
-      v34 = v30;
-      if ( v33 )
+      Stat = UFG::GameStatTracker::GetStat(v32, Collectible_EnforcerUnlocked, (UFG::qSymbol *)&result);
+      v34 = (ASymbol *)v30;
+      if ( Stat )
       {
         v35 = 4;
-        SSSymbol::as_instance(v30);
-        SSSymbol::as_instance(v31);
+        SSSymbol::as_instance((ASymbol *)v30);
+        SSSymbol::as_instance((ASymbol *)v31);
         *(_QWORD *)&v41.mMagic = SSSymbol::as_instance(&result);
         v41.mData = (char *)SSBoolean::pool_new(1);
-        v5->mbTriadSensitive = 1;
+        this->mbTriadSensitive = 1;
 LABEL_65:
         v36 = SSBrain::get_class("SpyPC");
         if ( LODWORD(v36[1].vfptr) )
@@ -712,48 +668,43 @@ LABEL_65:
         SSInstance::coroutine_call(v37, v38, (SSInstance **)&v41, v35, 1, 0.0, 0i64, 0i64);
         v39 = UFG::TiDo::CalcWwiseUid("Play_sp_accept");
         if ( UFG::HudAudio::m_instance )
-          UFG::AudioEntity::CreateAndPlayEvent(
-            (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-            v39,
-            0i64,
-            0,
-            0i64);
-        v5->mState = 3;
+          UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, v39, 0i64, 0, 0i64);
+        this->mState = STATE_COMPLETE;
         UFG::UIHK_NISOverlay::ShowCurtains(1.0, 0);
         v40 = UFG::UIScreenTextureManager::Instance();
         UFG::UIScreenTextureManager::QueueLoadAndPush(v40, "SpyCam", 0i64);
-        if ( ((unsigned int)pval.Type >> 6) & 1 )
+        if ( (pval.Type & 0x40) != 0 )
         {
-          (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pval.pObjectInterface->vfptr->gap8[8])(
+          (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&pval.pObjectInterface->vfptr->gap8[8])(
             pval.pObjectInterface,
             &pval,
-            *(_QWORD *)&pval.mValue.NValue);
+            pval.mValue);
           pval.pObjectInterface = 0i64;
         }
-        pval.Type = 0;
+        pval.Type = VT_Undefined;
         v3 = v44;
         goto LABEL_78;
       }
     }
     else
     {
-      v34 = v30;
+      v34 = (ASymbol *)v30;
     }
     v35 = 2;
     SSSymbol::as_instance(v34);
-    v41.mNext = (UFG::qNode<UFG::qString,UFG::qString> *)SSSymbol::as_instance(v31);
+    v41.mNext = (UFG::qNode<UFG::qString,UFG::qString> *)SSSymbol::as_instance((ASymbol *)v31);
     goto LABEL_65;
   }
-  v19 = UFG::UIScreen::handleMessage((UFG::UIScreen *)&v5->vfptr, v4, v3);
-  if ( ((unsigned int)pval.Type >> 6) & 1 )
+  v19 = UFG::UIScreen::handleMessage(this, v4, v3);
+  if ( (pval.Type & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pval.pObjectInterface->vfptr->gap8[8])(
+    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&pval.pObjectInterface->vfptr->gap8[8])(
       pval.pObjectInterface,
       &pval,
-      *(_QWORD *)&pval.mValue.NValue);
+      pval.mValue);
     pval.pObjectInterface = 0i64;
   }
-  pval.Type = 0;
+  pval.Type = VT_Undefined;
   return v19;
 }
 
@@ -766,19 +717,19 @@ void __fastcall UFG::UIHKScreenSpyPC::LoadNeighborhoodTexturePack(UFG::UIHKScree
 
   switch ( this->mNeighborhood )
   {
-    case 1u:
+    case CYLINDER:
       this->mCurrentNeighborhood = "CT";
       v1 = "Data\\UI\\CTCameras_texturepack.perm.bin";
       goto LABEL_9;
-    case 2u:
+    case TRIANGLE:
       this->mCurrentNeighborhood = "NP";
       v1 = "Data\\UI\\NPCameras_texturepack.perm.bin";
       goto LABEL_9;
-    case 3u:
+    case BOX:
       this->mCurrentNeighborhood = "AB";
       v1 = "Data\\UI\\ABCameras_texturepack.perm.bin";
       goto LABEL_9;
-    case 4u:
+    case CAPSULE:
       this->mCurrentNeighborhood = "KT";
       v1 = "Data\\UI\\KTCameras_texturepack.perm.bin";
 LABEL_9:
@@ -790,49 +741,45 @@ LABEL_9:
     v2,
     UFG::UIHKScreenSpyPC::gGridTexturePackFilename,
     DEFAULT_PRIORITY,
-    UFG::UIHKScreenSpyPC::TextureLoadedCallback,
-    "SpyPC");
+    (UFG::qReflectInventoryBase *)UFG::UIHKScreenSpyPC::TextureLoadedCallback,
+    (UFG::qReflectInventoryBase *)"SpyPC");
 }
 
 // File Line: 498
 // RVA: 0x612940
 void __fastcall UFG::UIHKScreenSpyPC::TextureLoadedCallback(UFG::DataStreamer::Handle *handle, void *param)
 {
-  UFG::UIHKScreenSpyPC *v2; // rax
+  UFG::UIHKScreenSpyPC *Screen; // rax
 
-  v2 = (UFG::UIHKScreenSpyPC *)UFG::UIScreenManagerBase::getScreen(
-                                 (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-                                 "SpyPC");
-  if ( v2 )
-    UFG::UIHKScreenSpyPC::HandleTextureLoaded(v2);
+  Screen = (UFG::UIHKScreenSpyPC *)UFG::UIScreenManagerBase::getScreen(UFG::UIScreenManager::s_instance, "SpyPC");
+  if ( Screen )
+    UFG::UIHKScreenSpyPC::HandleTextureLoaded(Screen);
 }
 
 // File Line: 512
 // RVA: 0x5EC240
 void __fastcall UFG::UIHKScreenSpyPC::HandleTextureLoaded(UFG::UIHKScreenSpyPC *this)
 {
-  UFG::UIHKScreenSpyPC *v1; // rdi
-  Scaleform::GFx::Movie *v2; // rbx
-  double v3; // xmm6_8
-  Scaleform::GFx::Value pargs; // [rsp+38h] [rbp-50h]
+  Scaleform::GFx::Movie *pObject; // rbx
+  Scaleform::GFx::Value::ValueUnion v3; // xmm6_8
+  Scaleform::GFx::Value pargs; // [rsp+38h] [rbp-50h] BYREF
 
-  v1 = this;
-  v2 = this->mRenderable->m_movie.pObject;
+  pObject = this->mRenderable->m_movie.pObject;
   `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-  v3 = (double)(signed int)v1->mState;
-  if ( ((unsigned int)pargs.Type >> 6) & 1 )
+  v3.NValue = (double)(int)this->mState;
+  if ( (pargs.Type & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
+    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&pargs.pObjectInterface->vfptr->gap8[8])(
       pargs.pObjectInterface,
       &pargs,
-      *(_QWORD *)&pargs.mValue.NValue);
+      pargs.mValue);
     pargs.pObjectInterface = 0i64;
   }
-  pargs.Type = 5;
-  pargs.mValue.NValue = v3;
-  if ( v2 )
-    Scaleform::GFx::Movie::Invoke(v2, "setState", 0i64, &pargs, 1u);
-  UFG::UIHKScreenSpyPC::processUnlockedCameras(v1);
+  pargs.Type = VT_Number;
+  pargs.mValue = v3;
+  if ( pObject )
+    Scaleform::GFx::Movie::Invoke(pObject, "setState", 0i64, &pargs, 1u);
+  UFG::UIHKScreenSpyPC::processUnlockedCameras(this);
   `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
@@ -840,188 +787,187 @@ void __fastcall UFG::UIHKScreenSpyPC::HandleTextureLoaded(UFG::UIHKScreenSpyPC *
 // RVA: 0x639780
 void __fastcall UFG::UIHKScreenSpyPC::processUnlockedCameras(UFG::UIHKScreenSpyPC *this)
 {
-  UFG::UIHKScreenSpyPC *v1; // rbx
-  int v2; // er14
+  int v2; // r14d
   __int64 v3; // rdi
   UFG::GameStatTracker *v4; // rax
-  UFG::PersistentData::MapFloat *v5; // rax
+  UFG::PersistentData::MapFloat *MapBool; // rax
   UFG::qSymbol *v6; // rax
-  UFG::qPropertySet *v7; // rax
+  UFG::qPropertySet *PropertySet; // rax
   UFG::qPropertyList *v8; // r13
-  unsigned int v9; // er15
+  unsigned int mNumElements; // r15d
   __int64 *v10; // r12
   unsigned int v11; // ebx
   _DWORD *v12; // rsi
-  char *v13; // rax
+  char *ValuePtr; // rax
   UFG::qPropertySet *v14; // rdi
   char *v15; // rax
-  signed int *v16; // rbx
+  int *v16; // rbx
   char *v17; // rsi
-  double v18; // xmm6_8
+  Scaleform::GFx::Value::ValueUnion v18; // xmm6_8
   UFG::ProgressionTracker *v19; // rsi
   UFG::GameStatTracker *v20; // rax
-  UFG::GameSlice *v21; // rbx
+  UFG::GameSlice *ActiveMaster; // rbx
   bool v22; // al
-  UFG::PersistentData::MapFloat::Iterator result; // [rsp+38h] [rbp-C8h]
-  Scaleform::GFx::Movie *v24; // [rsp+48h] [rbp-B8h]
-  char ptr; // [rsp+50h] [rbp-B0h]
-  __int64 v26; // [rsp+60h] [rbp-A0h]
-  unsigned int v27; // [rsp+68h] [rbp-98h]
-  double v28; // [rsp+70h] [rbp-90h]
-  char v29; // [rsp+80h] [rbp-80h]
-  __int64 v30; // [rsp+90h] [rbp-70h]
-  unsigned int v31; // [rsp+98h] [rbp-68h]
-  char *v32; // [rsp+A0h] [rbp-60h]
-  char v33; // [rsp+B0h] [rbp-50h]
-  __int64 v34; // [rsp+C0h] [rbp-40h]
-  unsigned int v35; // [rsp+C8h] [rbp-38h]
-  __int64 v36; // [rsp+D0h] [rbp-30h]
-  char v37; // [rsp+E0h] [rbp-20h]
-  __int64 v38; // [rsp+F0h] [rbp-10h]
-  unsigned int v39; // [rsp+F8h] [rbp-8h]
-  __int64 v40; // [rsp+100h] [rbp+0h]
-  __int64 v41; // [rsp+110h] [rbp+10h]
-  __int64 v42[6]; // [rsp+120h] [rbp+20h]
-  UFG::UIHKScreenSpyPC *v43; // [rsp+250h] [rbp+150h]
-  UFG::qSymbol name; // [rsp+258h] [rbp+158h]
-  UFG::qSymbol v45; // [rsp+260h] [rbp+160h]
-  __int64 v46; // [rsp+268h] [rbp+168h]
+  UFG::PersistentData::MapFloat::Iterator result; // [rsp+38h] [rbp-C8h] BYREF
+  Scaleform::GFx::Movie *pObject; // [rsp+48h] [rbp-B8h]
+  Scaleform::GFx::Value ptr; // [rsp+50h] [rbp-B0h] BYREF
+  char v26[16]; // [rsp+80h] [rbp-80h] BYREF
+  __int64 v27; // [rsp+90h] [rbp-70h]
+  int v28; // [rsp+98h] [rbp-68h]
+  char *v29; // [rsp+A0h] [rbp-60h]
+  char v30[16]; // [rsp+B0h] [rbp-50h] BYREF
+  __int64 v31; // [rsp+C0h] [rbp-40h]
+  int v32; // [rsp+C8h] [rbp-38h]
+  __int64 v33; // [rsp+D0h] [rbp-30h]
+  char v34[16]; // [rsp+E0h] [rbp-20h] BYREF
+  __int64 v35; // [rsp+F0h] [rbp-10h]
+  int v36; // [rsp+F8h] [rbp-8h]
+  __int64 v37; // [rsp+100h] [rbp+0h]
+  __int64 v38; // [rsp+110h] [rbp+10h]
+  __int64 v39[6]; // [rsp+120h] [rbp+20h] BYREF
+  UFG::qSymbol name; // [rsp+258h] [rbp+158h] BYREF
+  UFG::qSymbol v42; // [rsp+260h] [rbp+160h] BYREF
+  __int64 v43; // [rsp+268h] [rbp+168h]
 
-  v43 = this;
-  v41 = -2i64;
-  v1 = this;
+  v38 = -2i64;
   v2 = 0;
-  v24 = this->mRenderable->m_movie.pObject;
-  Scaleform::GFx::Movie::Invoke(v24, "resetCameras", 0i64, 0i64, 0);
+  pObject = this->mRenderable->m_movie.pObject;
+  Scaleform::GFx::Movie::Invoke(pObject, "resetCameras", 0i64, 0i64, 0);
   v3 = 0i64;
   v4 = UFG::GameStatTracker::Instance();
-  v5 = (UFG::PersistentData::MapFloat *)UFG::GameStatTracker::GetMapBool(v4, Collectible_SpyCam);
-  UFG::PersistentData::MapInt::GetIterator(v5, &result);
+  MapBool = (UFG::PersistentData::MapFloat *)UFG::GameStatTracker::GetMapBool(v4, Collectible_SpyCam);
+  UFG::PersistentData::MapInt::GetIterator(MapBool, &result);
   while ( UFG::PersistentData::MapBool::Iterator::IsValid((UFG::PersistentData::MapBool::Iterator *)&result) )
   {
     if ( UFG::PersistentData::MapBool::Iterator::GetStatus((UFG::PersistentData::MapBool::Iterator *)&result) )
     {
-      v42[v3] = (__int64)UFG::PersistentData::MapBool::Iterator::GetName((UFG::PersistentData::MapBool::Iterator *)&result);
+      v39[v3] = (__int64)UFG::PersistentData::MapBool::Iterator::GetName((UFG::PersistentData::MapBool::Iterator *)&result);
       v3 = (unsigned int)(v3 + 1);
     }
     UFG::PersistentData::MapFloat::Iterator::Next((ARefCountMix<SSInstance> *)&result);
   }
   v6 = UFG::qSymbol::create_from_string(&name, "default-spycams-list");
-  v7 = UFG::PropertySetManager::GetPropertySet(v6);
-  UFG::PropertySetHandle::SetPropSet(&v1->mProperties, v7);
-  UFG::PropertySetHandle::Bind(&v1->mProperties);
+  PropertySet = UFG::PropertySetManager::GetPropertySet(v6);
+  UFG::PropertySetHandle::SetPropSet(&this->mProperties, PropertySet);
+  UFG::PropertySetHandle::Bind(&this->mProperties);
   v8 = UFG::qPropertySet::Get<UFG::qPropertyList>(
-         v1->mProperties.mpPropSet,
-         (UFG::qSymbol *)&SpyCamSymbol_List_1.mUID,
+         this->mProperties.mpPropSet,
+         (UFG::qArray<unsigned long,0> *)&SpyCamSymbol_List_1,
          DEPTH_RECURSE);
-  v9 = v8->mNumElements;
+  mNumElements = v8->mNumElements;
   if ( (_DWORD)v3 )
   {
-    v10 = v42;
-    v46 = (unsigned int)v3;
+    v10 = v39;
+    v43 = (unsigned int)v3;
     do
     {
       v11 = 0;
-      if ( v9 )
+      if ( mNumElements )
       {
         v12 = (_DWORD *)*v10;
         while ( 1 )
         {
-          v13 = UFG::qPropertyList::GetValuePtr(v8, 0x1Au, v11);
-          if ( v13 && *(_QWORD *)v13 )
-            v14 = (UFG::qPropertySet *)&v13[*(_QWORD *)v13];
+          ValuePtr = UFG::qPropertyList::GetValuePtr(v8, 0x1Au, v11);
+          if ( ValuePtr && *(_QWORD *)ValuePtr )
+            v14 = (UFG::qPropertySet *)&ValuePtr[*(_QWORD *)ValuePtr];
           else
             v14 = 0i64;
           if ( *v12 == v14->mName.mUID )
           {
             v15 = UFG::qPropertySet::Get<char const *>(
                     v14,
-                    (UFG::qSymbol *)&SpyCamSymbol_Neighborhood_1.mUID,
+                    (UFG::qArray<unsigned long,0> *)&SpyCamSymbol_Neighborhood_1,
                     DEPTH_RECURSE);
-            if ( !(unsigned int)UFG::qStringCompare(v15, v43->mCurrentNeighborhood, -1) )
+            if ( !(unsigned int)UFG::qStringCompare(v15, this->mCurrentNeighborhood, -1) )
               break;
           }
-          if ( ++v11 >= v9 )
+          if ( ++v11 >= mNumElements )
             goto LABEL_39;
         }
-        v16 = UFG::qPropertySet::Get<long>(v14, (UFG::qSymbol *)&SpyCamSymbol_Index_1.mUID, DEPTH_RECURSE);
-        v17 = UFG::qPropertySet::Get<char const *>(v14, (UFG::qSymbol *)&SpyCamSymbol_Name_1.mUID, DEPTH_RECURSE);
+        v16 = UFG::qPropertySet::Get<long>(v14, (UFG::qArray<unsigned long,0> *)&SpyCamSymbol_Index_1, DEPTH_RECURSE);
+        v17 = UFG::qPropertySet::Get<char const *>(
+                v14,
+                (UFG::qArray<unsigned long,0> *)&SpyCamSymbol_Name_1,
+                DEPTH_RECURSE);
         `eh vector constructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-        v18 = (double)*v16;
-        if ( (v27 >> 6) & 1 )
+        v18.NValue = (double)*v16;
+        if ( (ptr.Type & 0x40) != 0 )
         {
-          (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v26 + 16i64))(
-            v26,
+          (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&ptr.pObjectInterface->vfptr->gap8[8])(
+            ptr.pObjectInterface,
             &ptr,
-            COERCE_DOUBLE(*(_QWORD *)&v28));
-          v26 = 0i64;
+            ptr.mValue);
+          ptr.pObjectInterface = 0i64;
         }
-        v27 = 5;
-        v28 = v18;
-        if ( (v31 >> 6) & 1 )
+        ptr.Type = VT_Number;
+        ptr.mValue = v18;
+        if ( (v28 & 0x40) != 0 )
         {
-          (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v30 + 16i64))(v30, &v29, v32);
-          v30 = 0i64;
+          (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v27 + 16i64))(v27, v26, v29);
+          v27 = 0i64;
         }
-        v31 = 6;
-        v32 = v17;
-        if ( (v35 >> 6) & 1 )
+        v28 = 6;
+        v29 = v17;
+        if ( (v32 & 0x40) != 0 )
         {
-          (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v34 + 16i64))(v34, &v33, v36);
-          v34 = 0i64;
+          (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v31 + 16i64))(v31, v30, v33);
+          v31 = 0i64;
         }
-        v35 = 2;
-        LOBYTE(v36) = 0;
-        if ( (v39 >> 6) & 1 )
+        v32 = 2;
+        LOBYTE(v33) = 0;
+        if ( (v36 & 0x40) != 0 )
         {
-          (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v38 + 16i64))(v38, &v37, v40);
-          v38 = 0i64;
+          (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v35 + 16i64))(v35, v34, v37);
+          v35 = 0i64;
         }
-        v39 = 2;
-        LOBYTE(v40) = 0;
+        v36 = 2;
+        LOBYTE(v37) = 0;
         v19 = UFG::ProgressionTracker::Instance();
-        if ( *UFG::qPropertySet::Get<bool>(v14, (UFG::qSymbol *)&SpyCamSymbol_TWSensitive_1.mUID, DEPTH_RECURSE) )
+        if ( *UFG::qPropertySet::Get<bool>(
+                v14,
+                (UFG::qArray<unsigned long,0> *)&SpyCamSymbol_TWSensitive_1,
+                DEPTH_RECURSE) )
         {
           name.mUID = UFG::qPropertySet::Get<UFG::qSymbol>(
                         v14,
-                        (UFG::qSymbol *)&SpyCamSymbol_TWName_1.mUID,
+                        (UFG::qArray<unsigned long,0> *)&SpyCamSymbol_TWName_1,
                         DEPTH_RECURSE)->mUID;
           v20 = UFG::GameStatTracker::Instance();
           if ( UFG::GameStatTracker::GetStat(v20, Collectible_EnforcerUnlocked, &name) )
           {
-            v21 = UFG::ProgressionTracker::GetActiveMaster(v19);
-            if ( v21 )
+            ActiveMaster = UFG::ProgressionTracker::GetActiveMaster(v19);
+            if ( ActiveMaster )
             {
               v22 = 1;
               if ( UFG::ProgressionTracker::IsRunningCriticalActiveMaster(v19) )
               {
                 v2 |= 1u;
-                if ( v21->mNode.mUID != UFG::qSymbol::create_from_string(&v45, "C_PS2")->mUID )
+                if ( ActiveMaster->mNode.mUID != UFG::qSymbol::create_from_string(&v42, "C_PS2")->mUID )
                   v22 = 0;
               }
-              if ( v2 & 1 )
-                v2 &= 0xFFFFFFFE;
+              if ( (v2 & 1) != 0 )
+                v2 &= ~1u;
               if ( v22 )
               {
-                if ( (v39 >> 6) & 1 )
+                if ( (v36 & 0x40) != 0 )
                 {
-                  (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v38 + 16i64))(v38, &v37, v40);
-                  v38 = 0i64;
+                  (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v35 + 16i64))(v35, v34, v37);
+                  v35 = 0i64;
                 }
-                v39 = 2;
-                LOBYTE(v40) = 1;
+                v36 = 2;
+                LOBYTE(v37) = 1;
               }
             }
           }
         }
-        Scaleform::GFx::Movie::Invoke(v24, "addCameras", 0i64, (Scaleform::GFx::Value *)&ptr, 4u);
+        Scaleform::GFx::Movie::Invoke(pObject, "addCameras", 0i64, &ptr, 4u);
         `eh vector destructor iterator(&ptr, 0x30ui64, 4, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
       }
 LABEL_39:
       ++v10;
-      --v46;
+      --v43;
     }
-    while ( v46 );
+    while ( v43 );
   }
 }
 

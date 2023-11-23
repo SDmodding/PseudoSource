@@ -39,17 +39,17 @@ hkClass *__fastcall hkpCallbackConstraintMotor::staticClass()
 
 // File Line: 105
 // RVA: 0xD43630
-void __fastcall finishLoadedObjecthkpCallbackConstraintMotor(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpCallbackConstraintMotor(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpCallbackConstraintMotor::`vftable;
+    *p = &hkpCallbackConstraintMotor::`vftable;
 }
 
 // File Line: 111
 // RVA: 0xD43650
-void __fastcall cleanupLoadedObjecthkpCallbackConstraintMotor(void *p)
+void __fastcall cleanupLoadedObjecthkpCallbackConstraintMotor(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 115
@@ -70,8 +70,8 @@ void **dynamic_initializer_for__hkpCallbackConstraintMotorTypeInfo__()
   hkpCallbackConstraintMotorTypeInfo.m_typeName = "hkpCallbackConstraintMotor";
   hkpCallbackConstraintMotorTypeInfo.m_vtable = result;
   hkpCallbackConstraintMotorTypeInfo.m_scopedName = "!hkpCallbackConstraintMotor";
-  hkpCallbackConstraintMotorTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpCallbackConstraintMotor;
-  hkpCallbackConstraintMotorTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpCallbackConstraintMotor;
+  hkpCallbackConstraintMotorTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpCallbackConstraintMotor;
+  hkpCallbackConstraintMotorTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpCallbackConstraintMotor;
   return result;
 }
 

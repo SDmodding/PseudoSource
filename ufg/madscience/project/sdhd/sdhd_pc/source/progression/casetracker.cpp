@@ -2,28 +2,22 @@
 // RVA: 0x48A890
 void __fastcall UFG::CaseInfo::CaseInfo(UFG::CaseInfo *this)
 {
-  UFG::CaseInfo *v1; // rbx
-
-  v1 = this;
   this->mPropertySetName.mUID = -1;
   this->mDependents.size = 0;
-  this->mStatus = 0;
+  this->mStatus = InPlace;
   UFG::qSymbol::set_null(&this->mPropertySetName);
-  v1->mStatus = 0;
-  v1->mDependents.size = 0;
+  this->mStatus = InPlace;
+  this->mDependents.size = 0;
 }
 
 // File Line: 16
 // RVA: 0x4902B0
 void __fastcall UFG::CaseInfo::~CaseInfo(UFG::CaseInfo *this)
 {
-  UFG::CaseInfo *v1; // rbx
-
-  v1 = this;
   UFG::qSymbol::set_null(&this->mPropertySetName);
-  v1->mStatus = 0;
-  v1->mDependents.size = 0;
-  v1->mDependents.size = 0;
+  this->mStatus = InPlace;
+  this->mDependents.size = 0;
+  this->mDependents.size = 0;
 }
 
 // File Line: 28
@@ -37,14 +31,13 @@ bool __fastcall UFG::CaseInfo::IsOpened(UFG::CaseInfo *this)
 // RVA: 0x4C8600
 void __fastcall UFG::CaseInfo::UpdateStatus(UFG::CaseInfo *this)
 {
-  UFG::CaseInfo *v1; // rdi
   char v2; // r8
   char v3; // r10
-  __int64 v4; // rcx
+  __int64 size; // rcx
   UFG::GameStatTracker *v5; // rsi
   __int64 v6; // rbx
-  signed __int64 v7; // rdx
-  signed int v8; // eax
+  UFG::GameSlice **p; // rdx
+  int mState; // eax
   unsigned int v9; // edx
   UFG::GameStatTracker *v10; // rcx
   UFG::PersistentData::MapInt *v11; // r8
@@ -54,30 +47,29 @@ void __fastcall UFG::CaseInfo::UpdateStatus(UFG::CaseInfo *this)
   UFG::PersistentData::KeyValue *v15; // rax
   UFG::GameStatTracker *v16; // rcx
 
-  v1 = this;
   v2 = 1;
   v3 = 1;
-  v4 = this->mDependents.size;
+  size = this->mDependents.size;
   v5 = &sGameStatTracker;
   v6 = 0i64;
-  if ( v4 <= 0 )
-    goto LABEL_53;
-  v7 = (signed __int64)v1->mDependents.p;
+  if ( !size )
+    goto LABEL_39;
+  p = this->mDependents.p;
   do
   {
-    v8 = *(_DWORD *)(*(_QWORD *)v7 + 264i64);
-    if ( v8 != 8 )
+    mState = (*p)->mState;
+    if ( mState != 8 )
       v2 = 0;
-    if ( v8 >= 1 || *(_WORD *)(*(_QWORD *)v7 + 364i64) > 0 )
+    if ( mState >= 1 || (*p)->mCompletionCount > 0 )
       v3 = 0;
-    v7 += 8i64;
-    --v4;
+    ++p;
+    --size;
   }
-  while ( v4 );
+  while ( size );
   if ( v3 )
   {
-LABEL_53:
-    v1->mStatus = 0;
+LABEL_39:
+    this->mStatus = InPlace;
     v9 = _S12_6;
   }
   else
@@ -85,7 +77,7 @@ LABEL_53:
     v9 = _S12_6;
     if ( v2 )
     {
-      if ( !(_S12_6 & 1) )
+      if ( (_S12_6 & 1) == 0 )
       {
         _S12_6 |= 1u;
         UFG::GameStatTracker::GameStatTracker(&sGameStatTracker);
@@ -100,7 +92,7 @@ LABEL_53:
       if ( !v11->mValues.size )
         goto LABEL_23;
       v12 = v11->mValues.p;
-      while ( v12->mKey.mUID != v1->mPropertySetName.mUID )
+      while ( v12->mKey.mUID != this->mPropertySetName.mUID )
       {
         v6 = (unsigned int)(v6 + 1);
         ++v12;
@@ -108,14 +100,14 @@ LABEL_53:
           goto LABEL_23;
       }
       if ( (_DWORD)v6 != -1 && v11->mValues.p[v6].mIntValue == 4 )
-        v1->mStatus = 4;
+        this->mStatus = Closed;
       else
 LABEL_23:
-        v1->mStatus = 3;
+        this->mStatus = DockedBottom;
     }
     else
     {
-      if ( !(_S12_6 & 1) )
+      if ( (_S12_6 & 1) == 0 )
       {
         _S12_6 |= 1u;
         UFG::GameStatTracker::GameStatTracker(&sGameStatTracker);
@@ -130,7 +122,7 @@ LABEL_23:
       if ( !v14->mValues.size )
         goto LABEL_36;
       v15 = v14->mValues.p;
-      while ( v15->mKey.mUID != v1->mPropertySetName.mUID )
+      while ( v15->mKey.mUID != this->mPropertySetName.mUID )
       {
         v6 = (unsigned int)(v6 + 1);
         ++v15;
@@ -139,19 +131,19 @@ LABEL_23:
       }
       if ( (_DWORD)v6 != -1 && v14->mValues.p[v6].mIntValue == 2 )
       {
-        v1->mStatus = 2;
+        this->mStatus = DockedTop;
       }
       else
       {
 LABEL_36:
-        if ( (unsigned int)(v1->mDependents.p[0]->mState - 1) <= 1 )
-          v1->mStatus = 1;
+        if ( (unsigned int)(this->mDependents.p[0]->mState - 1) <= 1 )
+          this->mStatus = Floating;
         else
-          v1->mStatus = 2;
+          this->mStatus = DockedTop;
       }
     }
   }
-  if ( !(v9 & 1) )
+  if ( (v9 & 1) == 0 )
   {
     _S12_6 = v9 | 1;
     UFG::GameStatTracker::GameStatTracker(&sGameStatTracker);
@@ -161,12 +153,12 @@ LABEL_36:
   if ( UFG::GameStatTracker::mspInstance )
     v16 = UFG::GameStatTracker::mspInstance;
   UFG::GameStatTracker::mspInstance = v16;
-  if ( !(*((_BYTE *)v16 + 6216) & 1) )
+  if ( (*((_BYTE *)v16 + 6216) & 1) == 0 )
   {
-    UFG::PersistentData::MapInt::SetStatus(v16->mpSnapshots[0]->mpMapInts[22], &v1->mPropertySetName, v1->mStatus);
+    UFG::PersistentData::MapInt::SetStatus(v16->mpSnapshots[0]->mpMapInts[22], &this->mPropertySetName, this->mStatus);
     if ( UFG::GameStatAction::PostStat::sIsEnabled )
     {
-      if ( !(_S12_6 & 1) )
+      if ( (_S12_6 & 1) == 0 )
       {
         _S12_6 |= 1u;
         UFG::GameStatTracker::GameStatTracker(&sGameStatTracker);
@@ -177,8 +169,8 @@ LABEL_36:
       UFG::GameStatTracker::mspInstance = v5;
     }
   }
-}:GameStatTracker::mspInstance )
-        v5 = UFG::GameS
+}ameStatTracker::mspInstance )
+        v5 = UFG::Ga
 
 // File Line: 128
 // RVA: 0x4902E0
@@ -193,47 +185,41 @@ void __fastcall UFG::CaseTracker::~CaseTracker(UFG::CaseTracker *this)
 // RVA: 0x4A1E40
 UFG::CaseInfo *__fastcall UFG::CaseTracker::GetCase(UFG::CaseTracker *this, UFG::GameSlice *pGameSlice)
 {
-  UFG::CaseTracker *v2; // rdi
-  __int64 v3; // rbx
+  __int64 size; // rbx
   __int64 v4; // r11
   __int64 v5; // r10
-  UFG::GameSlice **v6; // r9
-  __int64 v7; // r8
-  __int64 v8; // rcx
-  UFG::GameSlice **v9; // rax
+  UFG::GameSlice **i; // r9
+  __int64 v7; // rcx
+  UFG::GameSlice **v8; // rax
 
-  v2 = this;
   if ( pGameSlice->mType != 10 )
     return 0i64;
-  while ( pGameSlice->mpParent || pGameSlice->mType <= 0 )
+  while ( pGameSlice->mpParent || pGameSlice->mType <= TYPE_CULL )
     pGameSlice = pGameSlice->mpParent;
-  v3 = this->mCases.size;
+  size = this->mCases.size;
   v4 = 0i64;
   v5 = 0i64;
-  if ( v3 <= 0 )
+  if ( !this->mCases.size )
     return 0i64;
-  v6 = this->mCases.p[0].mDependents.p;
-  while ( 1 )
+  for ( i = this->mCases.p[0].mDependents.p; ; i += 10 )
   {
-    v7 = *((unsigned int *)v6 - 2);
-    v8 = 0i64;
-    if ( v7 > 0 )
+    v7 = 0i64;
+    if ( *((_DWORD *)i - 2) )
       break;
 LABEL_11:
     ++v5;
     v4 = (unsigned int)(v4 + 1);
-    v6 += 10;
-    if ( v5 >= v3 )
+    if ( v5 >= size )
       return 0i64;
   }
-  v9 = v6;
-  while ( pGameSlice != *v9 )
+  v8 = i;
+  while ( pGameSlice != *v8 )
   {
+    ++v7;
     ++v8;
-    ++v9;
-    if ( v8 >= v7 )
+    if ( v7 >= *((unsigned int *)i - 2) )
       goto LABEL_11;
   }
-  return &v2->mCases.p[v4];
+  return &this->mCases.p[v4];
 }
 

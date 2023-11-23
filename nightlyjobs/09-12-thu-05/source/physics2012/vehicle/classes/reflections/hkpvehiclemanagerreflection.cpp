@@ -28,17 +28,17 @@ hkClass *__fastcall hkpVehicleManager::staticClass()
 
 // File Line: 65
 // RVA: 0xE25C20
-void __fastcall finishLoadedObjecthkpVehicleManager(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpVehicleManager(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleManager::`vftable;
+    *p = &hkpVehicleManager::`vftable;
 }
 
 // File Line: 71
 // RVA: 0xE25C40
-void __fastcall cleanupLoadedObjecthkpVehicleManager(void *p)
+void __fastcall cleanupLoadedObjecthkpVehicleManager(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 75
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkpVehicleManagerTypeInfo__()
   hkpVehicleManagerTypeInfo.m_typeName = "hkpVehicleManager";
   hkpVehicleManagerTypeInfo.m_vtable = result;
   hkpVehicleManagerTypeInfo.m_scopedName = "!hkpVehicleManager";
-  hkpVehicleManagerTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpVehicleManager;
-  hkpVehicleManagerTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpVehicleManager;
+  hkpVehicleManagerTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpVehicleManager;
+  hkpVehicleManagerTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpVehicleManager;
   return result;
 }
 

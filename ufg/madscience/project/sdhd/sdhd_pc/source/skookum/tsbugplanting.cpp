@@ -3,17 +3,30 @@
 void UFG::TSBugplanting::BindAtomics(void)
 {
   SSClass *v0; // rbx
+  ASymbol rebind; // [rsp+20h] [rbp-18h]
+  ASymbol rebinda; // [rsp+20h] [rbp-18h]
+  ASymbol rebindb; // [rsp+20h] [rbp-18h]
+  ASymbol rebindc; // [rsp+20h] [rbp-18h]
 
+  LOBYTE(rebind.i_uid) = 0;
   v0 = SSBrain::get_class("Bugplanting");
-  SSClass::register_method_func(v0, "set_bugging_only", UFG::TSBugplanting::MthdC_set_bugging_only, 1, 0);
+  SSClass::register_method_func(v0, "set_bugging_only", UFG::TSBugplanting::MthdC_set_bugging_only, 1, rebind);
+  LOBYTE(rebinda.i_uid) = 0;
   SSClass::register_method_func(
     v0,
     "is_switch_to_calibration",
     UFG::TSBugplanting::MthdC_is_switch_to_calibration,
     1,
-    0);
-  SSClass::register_method_func(v0, "is_switch_to_screwing", UFG::TSBugplanting::MthdC_is_switch_to_screwing, 1, 0);
-  SSClass::register_method_func(v0, "is_successful", UFG::TSBugplanting::MthdC_is_successful, 1, 0);
+    rebinda);
+  LOBYTE(rebindb.i_uid) = 0;
+  SSClass::register_method_func(
+    v0,
+    "is_switch_to_screwing",
+    UFG::TSBugplanting::MthdC_is_switch_to_screwing,
+    1,
+    rebindb);
+  LOBYTE(rebindc.i_uid) = 0;
+  SSClass::register_method_func(v0, "is_successful", UFG::TSBugplanting::MthdC_is_successful, 1, rebindc);
 }
 
 // File Line: 65
@@ -27,19 +40,15 @@ void __fastcall UFG::TSBugplanting::MthdC_set_bugging_only(SSInvokedMethod *pSco
 // RVA: 0x4E9C70
 void __fastcall UFG::TSBugplanting::MthdC_is_switch_to_calibration(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance **v2; // rbx
-  UFG::UIScreen *v3; // rax
+  UFG::UIScreen *Screen; // rax
 
   if ( ppResult )
   {
-    v2 = ppResult;
-    v3 = UFG::UIScreenManagerBase::getScreen(
-           (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-           "BugPlantingMinigame");
-    if ( v3 )
-      *v2 = (SSInstance *)SSBoolean::pool_new((bool)v3[1].mNext);
+    Screen = UFG::UIScreenManagerBase::getScreen(UFG::UIScreenManager::s_instance, "BugPlantingMinigame");
+    if ( Screen )
+      *ppResult = SSBoolean::pool_new((bool)Screen[1].mNext);
     else
-      *v2 = 0i64;
+      *ppResult = 0i64;
   }
 }
 
@@ -47,19 +56,15 @@ void __fastcall UFG::TSBugplanting::MthdC_is_switch_to_calibration(SSInvokedMeth
 // RVA: 0x4E9CC0
 void __fastcall UFG::TSBugplanting::MthdC_is_switch_to_screwing(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance **v2; // rbx
-  UFG::UIScreen *v3; // rax
+  UFG::UIScreen *Screen; // rax
 
   if ( ppResult )
   {
-    v2 = ppResult;
-    v3 = UFG::UIScreenManagerBase::getScreen(
-           (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-           "BugPlantingMinigame");
-    if ( v3 )
-      *v2 = (SSInstance *)SSBoolean::pool_new(BYTE1(v3[1].mNext));
+    Screen = UFG::UIScreenManagerBase::getScreen(UFG::UIScreenManager::s_instance, "BugPlantingMinigame");
+    if ( Screen )
+      *ppResult = SSBoolean::pool_new(BYTE1(Screen[1].mNext));
     else
-      *v2 = 0i64;
+      *ppResult = 0i64;
   }
 }
 
@@ -68,6 +73,6 @@ void __fastcall UFG::TSBugplanting::MthdC_is_switch_to_screwing(SSInvokedMethod 
 void __fastcall UFG::TSBugplanting::MthdC_is_successful(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
   if ( ppResult )
-    *ppResult = (SSInstance *)SSBoolean::pool_new(UFG::UIHKScreenBugPlantingMinigame::m_bWon);
+    *ppResult = SSBoolean::pool_new(UFG::UIHKScreenBugPlantingMinigame::m_bWon);
 }
 

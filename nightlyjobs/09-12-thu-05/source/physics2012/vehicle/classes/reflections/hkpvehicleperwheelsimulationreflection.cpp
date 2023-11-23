@@ -28,30 +28,30 @@ hkClass *__fastcall hkpVehiclePerWheelSimulation::WheelData::staticClass()
 
 // File Line: 72
 // RVA: 0xE25C80
-void __fastcall finishLoadedObjecthkpVehiclePerWheelSimulationWheelData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpVehiclePerWheelSimulationWheelData(
+        hkpConstraintData *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  _QWORD *v2; // rbx
-  int v3; // edi
+  hkpConstraintData *v2; // rbx
 
   if ( p )
   {
-    v2 = (char *)p + 48;
-    v3 = finishing;
-    hkpConstraintData::hkpConstraintData((hkpConstraintData *)p + 2, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpWheelFrictionConstraintData::`vftable;
-    if ( v3 )
+    v2 = p + 2;
+    hkpConstraintData::hkpConstraintData(p + 2, finishing);
+    v2->vfptr = (hkBaseObjectVtbl *)&hkpWheelFrictionConstraintData::`vftable;
+    if ( finishing.m_finishing )
     {
-      *(_QWORD *)((char *)v2 + 196) = 0i64;
-      *(_QWORD *)((char *)v2 + 204) = 0i64;
+      *(hkBaseObjectVtbl **)((char *)&v2[8].vfptr + 4) = 0i64;
+      *(_QWORD *)(&v2[8].m_referenceCount + 1) = 0i64;
     }
   }
 }
 
 // File Line: 78
 // RVA: 0xE25CD0
-void __fastcall cleanupLoadedObjecthkpVehiclePerWheelSimulationWheelData(void *p)
+void __fastcall cleanupLoadedObjecthkpVehiclePerWheelSimulationWheelData(_QWORD *p)
 {
-  *((_QWORD *)p + 6) = &hkBaseObject::`vftable;
+  p[6] = &hkBaseObject::`vftable;
 }
 
 // File Line: 123
@@ -84,20 +84,20 @@ hkClass *__fastcall hkpVehiclePerWheelSimulation::staticClass()
 
 // File Line: 133
 // RVA: 0xE25CF0
-void __fastcall finishLoadedObjecthkpVehiclePerWheelSimulation(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpVehiclePerWheelSimulation(_QWORD *p, int finishing)
 {
   if ( p )
   {
-    *(_QWORD *)p = &hkpVehiclePerWheelSimulation::`vftable{for `hkpVehicleSimulation};
-    *((_QWORD *)p + 2) = &hkpVehiclePerWheelSimulation::`vftable{for `hkpWorldPostSimulationListener};
+    *p = &hkpVehiclePerWheelSimulation::`vftable{for `hkpVehicleSimulation};
+    p[2] = &hkpVehiclePerWheelSimulation::`vftable{for `hkpWorldPostSimulationListener};
   }
 }
 
 // File Line: 139
 // RVA: 0xE25D20
-void __fastcall cleanupLoadedObjecthkpVehiclePerWheelSimulation(void *p)
+void __fastcall cleanupLoadedObjecthkpVehiclePerWheelSimulation(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 143
@@ -118,8 +118,8 @@ void **dynamic_initializer_for__hkpVehiclePerWheelSimulationTypeInfo__()
   hkpVehiclePerWheelSimulationTypeInfo.m_typeName = "hkpVehiclePerWheelSimulation";
   hkpVehiclePerWheelSimulationTypeInfo.m_vtable = result;
   hkpVehiclePerWheelSimulationTypeInfo.m_scopedName = "!hkpVehiclePerWheelSimulation";
-  hkpVehiclePerWheelSimulationTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpVehiclePerWheelSimulation;
-  hkpVehiclePerWheelSimulationTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpVehiclePerWheelSimulation;
+  hkpVehiclePerWheelSimulationTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpVehiclePerWheelSimulation;
+  hkpVehiclePerWheelSimulationTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpVehiclePerWheelSimulation;
   return result;
 }
 

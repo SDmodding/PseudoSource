@@ -35,16 +35,14 @@ void __fastcall finishLoadedObjecthkaSkeletonLocalFrameOnBone(void *p, int finis
 
 // File Line: 74
 // RVA: 0xB1C850
-void __fastcall cleanupLoadedObjecthkaSkeletonLocalFrameOnBone(void *p)
+void __fastcall cleanupLoadedObjecthkaSkeletonLocalFrameOnBone(hkReferencedObject **p)
 {
-  _QWORD *v1; // rbx
   hkReferencedObject *v2; // rcx
 
-  v1 = p;
-  v2 = *(hkReferencedObject **)p;
+  v2 = *p;
   if ( v2 )
     hkReferencedObject::removeReference(v2);
-  *v1 = 0i64;
+  *p = 0i64;
 }
 
 // File Line: 111
@@ -65,7 +63,7 @@ void dynamic_initializer_for__hkaSkeletonPartitionClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 114
@@ -77,16 +75,18 @@ hkClass *__fastcall hkaSkeleton::Partition::staticClass()
 
 // File Line: 121
 // RVA: 0xB1C880
-void __fastcall finishLoadedObjecthkaSkeletonPartition(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaSkeletonPartition(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkStringPtr::hkStringPtr);
+  if ( p )
+    hkStringPtr::hkStringPtr(p, finishing);
 }
 
 // File Line: 127
 // RVA: 0xB1C8A0
-void __fastcall cleanupLoadedObjecthkaSkeletonPartition(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkaSkeletonPartition(hkStringPtr *p)
 {
-  hkStringPtr::~hkStringPtr((hkStringPtr *)p);
+  hkStringPtr::~hkStringPtr(p);
 }
 
 // File Line: 172
@@ -107,7 +107,7 @@ void dynamic_initializer_for__hkaSkeletonClass__()
     0i64,
     0i64,
     0,
-    5u);
+    5);
 }
 
 // File Line: 175
@@ -119,30 +119,30 @@ hkClass *__fastcall hkaSkeleton::staticClass()
 
 // File Line: 182
 // RVA: 0xB1C8B0
-void __fastcall finishLoadedObjecthkaSkeleton(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaSkeleton(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
   hkStringPtr *v2; // rcx
 
   if ( p )
   {
-    v2 = (hkStringPtr *)((char *)p + 16);
+    v2 = p + 2;
     v2[-2].m_stringAndFlag = (const char *)&hkaSkeleton::`vftable;
-    hkStringPtr::hkStringPtr(v2, (hkFinishLoadedObjectFlag)finishing);
+    hkStringPtr::hkStringPtr(v2, finishing);
   }
 }
 
 // File Line: 188
 // RVA: 0xB1C8E0
-void __fastcall cleanupLoadedObjecthkaSkeleton(void *p)
+void __fastcall cleanupLoadedObjecthkaSkeleton(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 192
 // RVA: 0xB1C8F0
 void **__fastcall getVtablehkaSkeleton()
 {
-  hkStringPtr v1; // [rsp+30h] [rbp-88h]
+  hkStringPtr v1; // [rsp+30h] [rbp-88h] BYREF
 
   hkStringPtr::hkStringPtr(&v1, 0);
   return &hkaSkeleton::`vftable;
@@ -159,8 +159,8 @@ void **dynamic_initializer_for__hkaSkeletonTypeInfo__()
   hkaSkeletonTypeInfo.m_typeName = "hkaSkeleton";
   hkaSkeletonTypeInfo.m_vtable = result;
   hkaSkeletonTypeInfo.m_scopedName = "!hkaSkeleton";
-  hkaSkeletonTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaSkeleton;
-  hkaSkeletonTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaSkeleton;
+  hkaSkeletonTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaSkeleton;
+  hkaSkeletonTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaSkeleton;
   return result;
 }
 

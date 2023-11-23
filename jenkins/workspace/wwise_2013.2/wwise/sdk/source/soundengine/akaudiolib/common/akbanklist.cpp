@@ -3,14 +3,14 @@
 __int64 dynamic_initializer_for__CAkBankList::m_BankListLock__()
 {
   InitializeCriticalSection(&CAkBankList::m_BankListLock.m_csLock);
-  return atexit(dynamic_atexit_destructor_for__CAkBankList::m_BankListLock__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__CAkBankList::m_BankListLock__);
 }
 
 // File Line: 26
 // RVA: 0xA87C90
 void __fastcall CAkBankList::Init(CAkBankList *this)
 {
-  signed __int64 v1; // rax
+  __int64 v1; // rax
 
   this->m_ListLoadedBanks.m_uiSize = 0;
   v1 = 3i64;
@@ -39,21 +39,16 @@ void __fastcall CAkBankList::Init(CAkBankList *this)
 
 // File Line: 36
 // RVA: 0xA87D30
-void __fastcall CAkBankList::Set(CAkBankList *this, AkBankKey *in_BankKey, CAkUsageSlot *in_pSlot)
+void __fastcall CAkBankList::Set(CAkBankList *this, __m128i *in_BankKey, CAkUsageSlot *in_pSlot)
 {
-  CAkBankList *v3; // rdi
-  CAkUsageSlot *v4; // rsi
-  __m128i *v5; // rbx
   CAkUsageSlot *v6; // rax
   __int64 v7; // r8
   __m128i v8; // [rsp+20h] [rbp-18h]
 
-  v3 = this;
-  v4 = in_pSlot;
-  v5 = (__m128i *)in_BankKey;
   EnterCriticalSection(&CAkBankList::m_BankListLock.m_csLock);
-  v8 = *v5;
-  v6 = v3->m_ListLoadedBanks.m_table[(_mm_cvtsi128_si32(*v5) + (unsigned int)*(_OWORD *)&_mm_srli_si128(*v5, 8)) % 0x1F];
+  v8 = *in_BankKey;
+  v6 = this->m_ListLoadedBanks.m_table[(_mm_cvtsi128_si32(*in_BankKey) + _mm_srli_si128(*in_BankKey, 8).m128i_u32[0])
+                                     % 0x1F];
   if ( v6 )
   {
     while ( v6->key.bankID != v8.m128i_i32[0] || v6->key.pInMemoryPtr != (const void *)v8.m128i_i64[1] )
@@ -66,30 +61,27 @@ void __fastcall CAkBankList::Set(CAkBankList *this, AkBankKey *in_BankKey, CAkUs
   else
   {
 LABEL_5:
-    *(_QWORD *)&v4->key.bankID = v5->m128i_i64[0];
-    v4->key.pInMemoryPtr = (const void *)v5->m128i_i64[1];
-    v7 = (_mm_cvtsi128_si32(*v5) + (unsigned int)*(_OWORD *)&_mm_srli_si128(*v5, 8)) % 0x1F;
-    v4->pNextItem = v3->m_ListLoadedBanks.m_table[v7];
-    v3->m_ListLoadedBanks.m_table[v7] = v4;
-    ++v3->m_ListLoadedBanks.m_uiSize;
+    *(_QWORD *)&in_pSlot->key.bankID = in_BankKey->m128i_i64[0];
+    in_pSlot->key.pInMemoryPtr = (const void *)in_BankKey->m128i_i64[1];
+    v7 = (_mm_cvtsi128_si32(*in_BankKey) + _mm_srli_si128(*in_BankKey, 8).m128i_u32[0]) % 0x1F;
+    in_pSlot->pNextItem = this->m_ListLoadedBanks.m_table[v7];
+    this->m_ListLoadedBanks.m_table[v7] = in_pSlot;
+    ++this->m_ListLoadedBanks.m_uiSize;
   }
   LeaveCriticalSection(&CAkBankList::m_BankListLock.m_csLock);
 }
 
 // File Line: 51
 // RVA: 0xA87BF0
-CAkUsageSlot *__fastcall CAkBankList::Get(CAkBankList *this, AkBankKey *in_BankKey)
+CAkUsageSlot *__fastcall CAkBankList::Get(CAkBankList *this, __m128i *in_BankKey)
 {
-  CAkBankList *v2; // rdi
-  __m128i *v3; // rbx
   CAkUsageSlot *v4; // rbx
   __m128i v6; // [rsp+20h] [rbp-18h]
 
-  v2 = this;
-  v3 = (__m128i *)in_BankKey;
   EnterCriticalSection(&CAkBankList::m_BankListLock.m_csLock);
-  v6 = *v3;
-  v4 = v2->m_ListLoadedBanks.m_table[(_mm_cvtsi128_si32(*v3) + (unsigned int)*(_OWORD *)&_mm_srli_si128(*v3, 8)) % 0x1F];
+  v6 = *in_BankKey;
+  v4 = this->m_ListLoadedBanks.m_table[(_mm_cvtsi128_si32(*in_BankKey) + _mm_srli_si128(*in_BankKey, 8).m128i_u32[0])
+                                     % 0x1F];
   if ( v4 )
   {
     while ( v4->key.bankID != v6.m128i_i32[0] || v4->key.pInMemoryPtr != (const void *)v6.m128i_i64[1] )
@@ -112,15 +104,10 @@ LABEL_5:
 // RVA: 0xA87CF0
 void __fastcall CAkBankList::Remove(CAkBankList *this, AkBankKey *in_BankKey)
 {
-  CAkBankList *v2; // rdi
-  AkBankKey *v3; // rbx
-
-  v2 = this;
-  v3 = in_BankKey;
   EnterCriticalSection(&CAkBankList::m_BankListLock.m_csLock);
   AkHashListBare<AkBankKey,CAkUsageSlot,31,AkDefaultHashListBarePolicy<AkBankKey,CAkUsageSlot>>::Unset(
-    &v2->m_ListLoadedBanks,
-    v3);
+    &this->m_ListLoadedBanks,
+    in_BankKey);
   LeaveCriticalSection(&CAkBankList::m_BankListLock.m_csLock);
 }
 

@@ -28,33 +28,31 @@ hkClass *__fastcall hkpSpringAction::staticClass()
 
 // File Line: 159
 // RVA: 0xE0BBC0
-void __fastcall finishLoadedObjecthkpSpringAction(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpSpringAction(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
-  _QWORD *v2; // rbx
   hkStringPtr *v3; // rcx
 
   if ( p )
   {
-    v2 = p;
-    v3 = (hkStringPtr *)((char *)p + 40);
+    v3 = p + 5;
     v3[-5].m_stringAndFlag = (const char *)&hkpAction::`vftable;
-    hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpSpringAction::`vftable;
+    hkStringPtr::hkStringPtr(v3, finishing);
+    p->m_stringAndFlag = (const char *)&hkpSpringAction::`vftable;
   }
 }
 
 // File Line: 165
 // RVA: 0xE0BC00
-void __fastcall cleanupLoadedObjecthkpSpringAction(void *p)
+void __fastcall cleanupLoadedObjecthkpSpringAction(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 169
 // RVA: 0xE0BC10
 void **__fastcall getVtablehkpSpringAction()
 {
-  hkStringPtr v1; // [rsp+48h] [rbp-60h]
+  hkStringPtr v1; // [rsp+48h] [rbp-60h] BYREF
 
   hkStringPtr::hkStringPtr(&v1, 0);
   return &hkpSpringAction::`vftable;
@@ -71,8 +69,8 @@ void **dynamic_initializer_for__hkpSpringActionTypeInfo__()
   hkpSpringActionTypeInfo.m_typeName = "hkpSpringAction";
   hkpSpringActionTypeInfo.m_vtable = result;
   hkpSpringActionTypeInfo.m_scopedName = "!hkpSpringAction";
-  hkpSpringActionTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpSpringAction;
-  hkpSpringActionTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpSpringAction;
+  hkpSpringActionTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpSpringAction;
+  hkpSpringActionTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpSpringAction;
   return result;
 }
 

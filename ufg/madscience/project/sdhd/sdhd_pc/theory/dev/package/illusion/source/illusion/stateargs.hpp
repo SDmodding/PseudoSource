@@ -2,31 +2,34 @@
 // RVA: 0x7B70
 void __fastcall Illusion::StateArg::~StateArg(Illusion::StateArg *this)
 {
-  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v1; // rdx
-  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v2; // rax
+  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *mPrev; // rdx
+  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *mNext; // rax
 
-  v1 = this->mPrev;
-  v2 = this->mNext;
-  v1->mNext = v2;
-  v2->mPrev = v1;
-  this->mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&this->mPrev;
-  this->mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&this->mPrev;
+  mPrev = this->mPrev;
+  mNext = this->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->mPrev = this;
+  this->mNext = this;
 }
 
 // File Line: 90
 // RVA: 0x7720
-void __fastcall Illusion::StateArg::ExecuteSetStateBlock<Render::cbLocalTransformState>(Illusion::StateArg *this, Illusion::StateArg *arg, Illusion::StateValues *state_values)
+void __fastcall Illusion::StateArg::ExecuteSetStateBlock<Render::cbLocalTransformState>(
+        Illusion::StateArg *this,
+        Illusion::StateArg *arg,
+        Illusion::StateValues *state_values)
 {
   __int16 v3; // r8
-  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v4; // r9
+  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *mPrev; // r9
 
   v3 = Render::cbLocalTransformState::sStateParamIndex;
-  v4 = this[1].mPrev;
-  if ( (unsigned int)(signed __int16)Render::cbLocalTransformState::sStateParamIndex >= 0x40 )
-    arg->mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)((_QWORD)arg->mNext | (1i64 << ((unsigned __int8)Render::cbLocalTransformState::sStateParamIndex - 64)));
+  mPrev = this[1].mPrev;
+  if ( (unsigned int)(__int16)Render::cbLocalTransformState::sStateParamIndex >= 0x40 )
+    arg->mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)((__int64)arg->mNext | (1i64 << ((unsigned __int8)Render::cbLocalTransformState::sStateParamIndex - 64)));
   else
-    arg->mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)((_QWORD)arg->mPrev | (1i64 << Render::cbLocalTransformState::sStateParamIndex));
-  *((_QWORD *)&arg->mCallback + v3) = v4;
+    arg->mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)((__int64)arg->mPrev | (1i64 << Render::cbLocalTransformState::sStateParamIndex));
+  *((_QWORD *)&arg->mCallback + v3) = mPrev;
 }
 
 // File Line: 169
@@ -42,152 +45,141 @@ void __fastcall Illusion::StateArgs::~StateArgs(Illusion::StateArgs *this)
 
 // File Line: 182
 // RVA: 0x7850
-void __fastcall Illusion::StateArgs::Set<Render::cbLocalTransformInverseState>(Illusion::StateArgs *this, Render::cbLocalTransformInverseState *arg)
+void __fastcall Illusion::StateArgs::Set<Render::cbLocalTransformInverseState>(
+        Illusion::StateArgs *this,
+        Render::cbLocalTransformInverseState *arg)
 {
-  __int16 v2; // ax
-  Illusion::StateArgs *v3; // r9
-  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v4; // r8
-  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v5; // rax
+  __int16 mStateParamIndex; // ax
+  UFG::qList<Illusion::StateArg,Illusion::StateArg,0,0> *v4; // r8
+  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *mNext; // rax
   unsigned int v6; // ecx
-  signed __int64 v7; // r8
-  signed __int64 v8; // rax
-  char v9; // cl
-  char v10; // r10
-  __m128i v11; // xmm0
-  __m128i v12; // [rsp+0h] [rbp-18h]
+  __int64 v7; // r8
+  __int64 v8; // rax
+  char mFlags; // r10
+  __int128 v10; // xmm0
+  __int128 v11; // [rsp+0h] [rbp-18h]
+  __int128 v12; // [rsp+0h] [rbp-18h]
 
-  v2 = arg->mStateParamIndex;
-  v3 = this;
-  if ( v2 != -1 )
+  mStateParamIndex = arg->mStateParamIndex;
+  if ( mStateParamIndex != -1 )
   {
-    v12.m128i_i64[0] = 0i64;
-    v4 = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)(&this->mStateArgsCreateMask + v2 + 3i64);
-    v5 = v4->mNext;
-    v4->mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg->mPrev;
-    arg->mPrev = v4;
-    arg->mNext = v5;
-    v5->mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg->mPrev;
+    v11 = 0ui64;
+    v4 = &this->mStateArgs[mStateParamIndex];
+    mNext = v4->mNode.mNext;
+    v4->mNode.mNext = arg;
+    arg->mPrev = &v4->mNode;
+    arg->mNext = mNext;
+    mNext->mPrev = arg;
     v6 = arg->mStateParamIndex;
     v7 = 0i64;
     arg->mCallback = (void (__fastcall *)(Illusion::StateArg *, Illusion::StateValues *))Illusion::StateArg::ExecuteSetStateBlock<Render::cbLocalTransformInverseState>;
     v8 = 0i64;
-    v12.m128i_i64[1] = 0i64;
     if ( v6 >= 0x40 )
     {
-      v9 = v6 - 64;
-      v8 = 1i64 << v9;
-      v12.m128i_i64[1] = 1i64 << v9;
+      v8 = 1i64 << ((unsigned __int8)v6 - 64);
+      *((_QWORD *)&v11 + 1) = v8;
     }
     else
     {
       v7 = 1i64 << v6;
-      v12.m128i_i64[0] = 1i64 << v6;
+      *(_QWORD *)&v11 = 1i64 << v6;
     }
-    v10 = arg->mFlags;
-    v3->mStateArgsCreateMask.mFlags[0] |= v7;
-    v3->mStateArgsCreateMask.mFlags[1] |= v8;
-    v11 = v12;
-    if ( v10 & 1 )
-      _mm_store_si128(&v12, v12);
+    mFlags = arg->mFlags;
+    this->mStateArgsCreateMask.mFlags[0] |= v7;
+    this->mStateArgsCreateMask.mFlags[1] |= v8;
+    v10 = v11;
+    if ( (mFlags & 1) == 0 )
+      v11 = 0ui64;
+    *(_OWORD *)&this->mStateParamModelFreqMask |= v11;
+    if ( (mFlags & 2) != 0 )
+      v12 = v10;
     else
       v12 = 0ui64;
-    *(_OWORD *)&v3->mStateParamModelFreqMask |= *(_OWORD *)&v12;
-    if ( v10 & 2 )
-      _mm_store_si128(&v12, v11);
-    else
-      v12 = 0ui64;
-    *(_OWORD *)&v3->mStateParamMeshFreqMask |= *(_OWORD *)&v12;
+    *(_OWORD *)&this->mStateParamMeshFreqMask |= v12;
     arg->mIsSet = 1;
   }
 }
 
 // File Line: 184
 // RVA: 0xC450
-void __fastcall Illusion::StateArgs::Set<Render::cbLocalTransformInverseState>(Illusion::StateArgs *this, Render::cbLocalTransformInverseState *arg)
+void __fastcall Illusion::StateArgs::Set<Render::cbLocalTransformInverseState>(
+        Illusion::StateArgs *this,
+        Render::cbLocalTransformInverseState *arg)
 {
-  __int16 v2; // ax
-  Illusion::StateArgs *v3; // r9
-  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v4; // r8
-  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v5; // rax
-  signed __int64 v6; // r8
+  __int16 mStateParamIndex; // ax
+  UFG::qList<Illusion::StateArg,Illusion::StateArg,0,0> *v4; // r8
+  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *mNext; // rax
+  __int64 v6; // r8
   unsigned int v7; // ecx
-  signed __int64 v8; // rax
-  char v9; // cl
-  char v10; // r10
-  __m128i v11; // xmm0
-  __int64 v12; // rax
-  __m128i v13; // [rsp+0h] [rbp-18h]
+  __int64 v8; // rax
+  char mFlags; // r10
+  __int128 v10; // xmm0
+  __int128 v11; // [rsp+0h] [rbp-18h]
+  __int128 v12; // [rsp+0h] [rbp-18h]
 
-  v2 = arg->mStateParamIndex;
-  v3 = this;
-  if ( v2 != -1 )
+  mStateParamIndex = arg->mStateParamIndex;
+  if ( mStateParamIndex != -1 )
   {
-    v13.m128i_i64[0] = 0i64;
-    v4 = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)(&this->mStateArgsCreateMask + v2 + 3i64);
-    arg->mPrev = v4;
-    v5 = v4->mNext;
-    v4->mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg->mPrev;
+    v11 = 0ui64;
+    v4 = &this->mStateArgs[mStateParamIndex];
+    arg->mPrev = &v4->mNode;
+    mNext = v4->mNode.mNext;
+    v4->mNode.mNext = arg;
     v6 = 0i64;
-    arg->mNext = v5;
+    arg->mNext = mNext;
     v7 = arg->mStateParamIndex;
-    v5->mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg->mPrev;
+    mNext->mPrev = arg;
     arg->mCallback = (void (__fastcall *)(Illusion::StateArg *, Illusion::StateValues *))Illusion::StateArg::ExecuteSetStateBlock<Render::cbLocalTransformInverseState>;
     v8 = 0i64;
-    v13.m128i_i64[1] = 0i64;
     if ( v7 >= 0x40 )
     {
-      v9 = v7 - 64;
-      v8 = 1i64 << v9;
-      v13.m128i_i64[1] = 1i64 << v9;
+      v8 = 1i64 << ((unsigned __int8)v7 - 64);
+      *((_QWORD *)&v11 + 1) = v8;
     }
     else
     {
       v6 = 1i64 << v7;
-      v13.m128i_i64[0] = 1i64 << v7;
+      *(_QWORD *)&v11 = 1i64 << v7;
     }
-    v10 = arg->mFlags;
-    v3->mStateArgsCreateMask.mFlags[0] |= v6;
-    v3->mStateArgsCreateMask.mFlags[1] |= v8;
-    v11 = v13;
-    if ( v10 & 1 )
-      _mm_store_si128(&v13, v13);
+    mFlags = arg->mFlags;
+    this->mStateArgsCreateMask.mFlags[0] |= v6;
+    this->mStateArgsCreateMask.mFlags[1] |= v8;
+    v10 = v11;
+    if ( (mFlags & 1) == 0 )
+      v11 = 0ui64;
+    *(_OWORD *)&this->mStateParamModelFreqMask |= v11;
+    if ( (mFlags & 2) != 0 )
+      v12 = v10;
     else
-      v13 = 0ui64;
-    *(_OWORD *)&v3->mStateParamModelFreqMask |= *(_OWORD *)&v13;
-    if ( v10 & 2 )
-      _mm_store_si128(&v13, v11);
-    else
-      v13 = 0ui64;
-    v12 = v13.m128i_i64[0];
+      v12 = 0ui64;
     arg->mIsSet = 1;
-    v3->mStateParamMeshFreqMask.mFlags[0] |= v12;
-    v3->mStateParamMeshFreqMask.mFlags[1] |= v13.m128i_u64[1];
+    *(_OWORD *)&this->mStateParamMeshFreqMask |= v12;
   }
 }
 
 // File Line: 185
 // RVA: 0xC2F0
-void __fastcall Illusion::StateArgs::Clear<Render::cbLocalTransformInverseState>(Illusion::StateArgs *this, Render::cbLocalTransformState *arg)
+void __fastcall Illusion::StateArgs::Clear<Render::cbLocalTransformInverseState>(
+        Illusion::StateArgs *this,
+        Render::cbLocalTransformState *arg)
 {
-  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v2; // rax
-  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v3; // r8
-  Illusion::StateArgs *v4; // r9
-  __int64 v5; // rcx
+  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *mNext; // rax
+  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *mPrev; // r8
+  __int64 mStateParamIndex; // rcx
   unsigned __int64 *v6; // rdx
 
-  v2 = arg->mNext;
-  v3 = arg->mPrev;
-  v4 = this;
-  v5 = arg->mStateParamIndex;
-  v3->mNext = v2;
-  v2->mPrev = v3;
-  arg->mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg->mPrev;
-  arg->mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg->mPrev;
+  mNext = arg->mNext;
+  mPrev = arg->mPrev;
+  mStateParamIndex = arg->mStateParamIndex;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  arg->mPrev = arg;
+  arg->mNext = arg;
   arg->mIsSet = 0;
-  if ( (Illusion::StateArgs *)v4->mStateArgsCreateMask.mFlags[2 * (v5 + 3) + 1] == (Illusion::StateArgs *)((char *)v4 + 16 * (v5 + 3)) )
+  if ( (UFG::qList<Illusion::StateArg,Illusion::StateArg,0,0> *)this->mStateArgs[mStateParamIndex].mNode.mNext == &this->mStateArgs[mStateParamIndex] )
   {
-    v6 = &v4->mStateArgsCreateMask.mFlags[(unsigned int)(signed __int16)v5 >> 6];
-    *v6 &= ~(1i64 << (v5 & 0x3F));
+    v6 = &this->mStateArgsCreateMask.mFlags[(unsigned int)(__int16)mStateParamIndex >> 6];
+    *v6 &= ~(1i64 << (mStateParamIndex & 0x3F));
   }
 }
 

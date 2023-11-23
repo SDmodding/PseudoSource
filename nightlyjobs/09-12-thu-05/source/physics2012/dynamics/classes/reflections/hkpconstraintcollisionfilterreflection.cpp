@@ -28,13 +28,13 @@ hkClass *__fastcall hkpConstraintCollisionFilter::staticClass()
 
 // File Line: 58
 // RVA: 0xD506C0
-void __fastcall finishLoadedObjecthkpConstraintCollisionFilter(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpConstraintCollisionFilter(_DWORD *p, int finishing)
 {
   if ( p )
   {
-    *((_DWORD *)p + 21) = -1;
+    p[21] = -1;
     *((_QWORD *)p + 9) = 0i64;
-    *((_DWORD *)p + 20) = 0;
+    p[20] = 0;
     *(_QWORD *)p = &hkpConstraintCollisionFilter::`vftable{for `hkReferencedObject};
     *((_QWORD *)p + 2) = &hkpConstraintCollisionFilter::`vftable{for `hkpCollidableCollidableFilter};
     *((_QWORD *)p + 3) = &hkpConstraintCollisionFilter::`vftable{for `hkpShapeCollectionFilter};
@@ -46,9 +46,9 @@ void __fastcall finishLoadedObjecthkpConstraintCollisionFilter(void *p, int fini
 
 // File Line: 64
 // RVA: 0xD50720
-void __fastcall cleanupLoadedObjecthkpConstraintCollisionFilter(void *p)
+void __fastcall cleanupLoadedObjecthkpConstraintCollisionFilter(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 68
@@ -69,8 +69,8 @@ void **dynamic_initializer_for__hkpConstraintCollisionFilterTypeInfo__()
   hkpConstraintCollisionFilterTypeInfo.m_typeName = "hkpConstraintCollisionFilter";
   hkpConstraintCollisionFilterTypeInfo.m_vtable = result;
   hkpConstraintCollisionFilterTypeInfo.m_scopedName = "!hkpConstraintCollisionFilter";
-  hkpConstraintCollisionFilterTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpConstraintCollisionFilter;
-  hkpConstraintCollisionFilterTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpConstraintCollisionFilter;
+  hkpConstraintCollisionFilterTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpConstraintCollisionFilter;
+  hkpConstraintCollisionFilterTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpConstraintCollisionFilter;
   return result;
 }
 

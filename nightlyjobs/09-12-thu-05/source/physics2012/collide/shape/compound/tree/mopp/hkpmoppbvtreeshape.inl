@@ -2,25 +2,21 @@
 // RVA: 0xCEB110
 void __fastcall hkpMoppBvTreeShape::hkpMoppBvTreeShape(hkpMoppBvTreeShape *this, hkFinishLoadedObjectFlag flag)
 {
-  hkpMoppBvTreeShape *v2; // rbx
-  hkpMoppCode *v3; // rcx
-  int v4; // [rsp+38h] [rbp+10h]
+  hkpMoppCode *m_code; // rcx
 
-  v4 = flag.m_finishing;
-  v2 = this;
-  hkpBvTreeShape::hkpBvTreeShape((hkpBvTreeShape *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkMoppBvTreeShapeBase::`vftable;
-  if ( v4 )
-    v2->m_bvTreeType.m_storage = 0;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpMoppBvTreeShape::`vftable;
-  v2->m_child.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable;
-  if ( v4 == 1 )
+  hkpBvTreeShape::hkpBvTreeShape(this, flag);
+  this->vfptr = (hkBaseObjectVtbl *)&hkMoppBvTreeShapeBase::`vftable;
+  if ( flag.m_finishing )
+    this->m_bvTreeType.m_storage = 0;
+  this->vfptr = (hkBaseObjectVtbl *)&hkpMoppBvTreeShape::`vftable;
+  this->m_child.vfptr = (hkpShapeContainerVtbl *)&hkpSingleShapeContainer::`vftable;
+  if ( flag.m_finishing == 1 )
   {
-    v3 = v2->m_code;
-    v2->m_type.m_storage = 9;
-    v2->m_codeInfoCopy = (hkVector4f)v3->m_info;
-    v2->m_moppData = v3->m_data.m_data;
-    v2->m_moppDataSize = v3->m_data.m_size;
+    m_code = this->m_code;
+    this->m_type.m_storage = 9;
+    this->m_codeInfoCopy = (hkVector4f)m_code->m_info;
+    this->m_moppData = m_code->m_data.m_data;
+    this->m_moppDataSize = m_code->m_data.m_size;
   }
 }
 
@@ -28,6 +24,6 @@ void __fastcall hkpMoppBvTreeShape::hkpMoppBvTreeShape(hkpMoppBvTreeShape *this,
 // RVA: 0xCEB2D0
 hkpShapeContainer *__fastcall hkpMoppBvTreeShape::getContainer(hkpMoppBvTreeShape *this)
 {
-  return (hkpShapeContainer *)((__int64 (*)(void))this->m_child.m_childShape->vfptr[7].__vecDelDtor)();
+  return (hkpShapeContainer *)((__int64 (__fastcall *)(hkpShape *))this->m_child.m_childShape->vfptr[7].__vecDelDtor)(this->m_child.m_childShape);
 }
 

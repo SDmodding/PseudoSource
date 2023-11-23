@@ -3,7 +3,7 @@
 __int64 UFG::Editor::VisibilityManager::_dynamic_initializer_for__mHiddenObjects__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::Editor::VisibilityManager::mHiddenObjects.mTree);
-  return atexit(UFG::Editor::VisibilityManager::_dynamic_atexit_destructor_for__mHiddenObjects__);
+  return atexit((int (__fastcall *)())UFG::Editor::VisibilityManager::_dynamic_atexit_destructor_for__mHiddenObjects__);
 }
 
 // File Line: 39
@@ -13,7 +13,7 @@ __int64 UFG::Editor::VisibilityManager::_dynamic_initializer_for__mStoredHiddenO
   UFG::qString::qString(&stru_142040B50, "default");
   stru_142040B78.p = 0i64;
   *(_QWORD *)&stru_142040B78.size = 0i64;
-  return atexit(UFG::Editor::VisibilityManager::_dynamic_atexit_destructor_for__mStoredHiddenObjects__);
+  return atexit((int (__fastcall *)())UFG::Editor::VisibilityManager::_dynamic_atexit_destructor_for__mStoredHiddenObjects__);
 }
 
 // File Line: 72
@@ -25,13 +25,13 @@ void __fastcall UFG::Editor::VisibilityManager::Deactivate(UFG::Editor::Visibili
   UFG::allocator::free_link *v3; // rax
   UFG::Editor::VisibilityManager *v4; // rcx
   UFG::qBaseTreeRB *i; // rbp
-  __int64 v6; // rsi
+  __int64 size; // rsi
   unsigned int v7; // ebx
   unsigned int v8; // edx
   UFG::Editor::DAGPath *v9; // rbx
   UFG::Editor::SmartHandleObject *v10; // rcx
-  UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *v11; // rcx
-  UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *v12; // rax
+  UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *p_mNode; // rcx
+  UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *mPrev; // rax
   UFG::allocator::free_link *v13; // rax
   UFG::Event *v14; // rdx
   UFG::allocator::free_link *v15; // rax
@@ -60,7 +60,7 @@ void __fastcall UFG::Editor::VisibilityManager::Deactivate(UFG::Editor::Visibili
   {
     if ( UFG::qArray<UFG::Editor::DAGPath,0>::Find(&stru_142040B78, (UFG::Editor::DAGPath *)&i->mNULL) <= -1 )
     {
-      v6 = stru_142040B78.size;
+      size = stru_142040B78.size;
       v7 = stru_142040B78.size + 1;
       if ( stru_142040B78.size + 1 > stru_142040B78.capacity )
       {
@@ -75,10 +75,10 @@ void __fastcall UFG::Editor::VisibilityManager::Deactivate(UFG::Editor::Visibili
         UFG::qArray<UFG::Editor::DAGPath,0>::Reallocate(&stru_142040B78, v8, "qArray.Add");
       }
       stru_142040B78.size = v7;
-      v9 = &stru_142040B78.p[v6];
+      v9 = &stru_142040B78.p[size];
       if ( &i->mNULL != (UFG::qBaseNodeRB *)v9 )
       {
-        UFG::Editor::DAGPath::Clear(&stru_142040B78.p[v6]);
+        UFG::Editor::DAGPath::Clear(&stru_142040B78.p[size]);
         if ( v9->mPathType == Default )
         {
           v10 = (UFG::Editor::SmartHandleObject *)i->mNULL.mChild[1];
@@ -88,12 +88,12 @@ void __fastcall UFG::Editor::VisibilityManager::Deactivate(UFG::Editor::Visibili
             {
               v9->mFnObject.mTypeId = v10->mTypeId;
               v9->mFnObject.mPtr = v10;
-              v11 = &v10->mSmartHandleList.mNode;
-              v12 = v11->mPrev;
-              v12->mNext = (UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *)&v9->mFnObject.mPrev;
-              v9->mFnObject.mPrev = v12;
-              v9->mFnObject.mNext = v11;
-              v11->mPrev = (UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *)&v9->mFnObject.mPrev;
+              p_mNode = &v10->mSmartHandleList.mNode;
+              mPrev = p_mNode->mPrev;
+              mPrev->mNext = &v9->mFnObject;
+              v9->mFnObject.mPrev = mPrev;
+              v9->mFnObject.mNext = p_mNode;
+              p_mNode->mPrev = &v9->mFnObject;
             }
           }
         }
@@ -122,43 +122,39 @@ void __fastcall UFG::Editor::VisibilityManager::Deactivate(UFG::Editor::Visibili
     }
   }
   UFG::Editor::VisibilityManager::UnhideAll(v4);
-}&UFG::EventDispatcher::mInstance, v14);
-    }
-  }
-  UFG::Editor::VisibilityManager::UnhideAll(
+}
 
 // File Line: 136
 // RVA: 0x213CF0
 void __fastcall UFG::Editor::VisibilityManager::Unhide(UFG::Editor::DAGPath *p)
 {
-  UFG::Editor::DAGPath *v1; // rbx
-  UFG::Editor::SmartHandleObject *v2; // rcx
-  UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *v3; // rcx
-  UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *v4; // rax
-  unsigned int *v5; // rbx
-  unsigned int v6; // eax
+  UFG::Editor::SmartHandleObject *mPtr; // rcx
+  UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *p_mNode; // rcx
+  UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *mPrev; // rax
+  unsigned int *p_mStringHash32; // rbx
+  unsigned int Hash; // eax
   UFG::qBaseTreeRB *v7; // rax
   UFG::Editor::DAGPath *v8; // rbx
-  UFG::qSymbol *v9; // rax
-  unsigned int v10; // ebx
-  UFG::Editor::DAGPathType::Enum v11; // ecx
+  UFG::qSymbol *SystemName; // rax
+  unsigned int mUID; // ebx
+  UFG::Editor::DAGPathType::Enum mPathType; // ecx
   UFG::Editor::SmartHandleObject *v12; // rax
   UFG::qBaseTreeRB *v13; // rax
-  UFG::Editor::SmartHandleObject *v14; // rdx
+  UFG::Editor::FnObject *v14; // rdx
   UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *v15; // rax
-  UFG::qBaseNodeRB *v16; // rax
+  UFG::qBaseNodeRB *SimObject; // rax
   UFG::SimObject *v17; // rbx
   UFG::qSymbol *v18; // rax
   unsigned int v19; // ebx
-  char v20; // al
+  bool v20; // al
   UFG::SimObject *v21; // rbx
-  UFG::SimComponent *v22; // rax
+  UFG::SimComponent *ComponentOfType; // rax
   UFG::SimComponent *v23; // rsi
   unsigned int v24; // edi
   UFG::qSymbol *v25; // rbx
   UFG::Editor::SmartHandleObject *v26; // r8
   UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *v27; // rcx
-  UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *v28; // rax
+  UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *mNext; // rax
   unsigned int *v29; // rbx
   UFG::qSymbol *v30; // rbx
   unsigned int *v31; // rbx
@@ -166,14 +162,13 @@ void __fastcall UFG::Editor::VisibilityManager::Unhide(UFG::Editor::DAGPath *p)
   UFG::Editor::SmartHandleObject *v33; // r8
   UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *v34; // rcx
   UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *v35; // rax
-  UFG::Editor::DAGPath path; // [rsp+30h] [rbp-89h]
-  UFG::Editor::DAGPath pa; // [rsp+90h] [rbp-29h]
+  UFG::Editor::DAGPath path; // [rsp+30h] [rbp-89h] BYREF
+  UFG::Editor::DAGPath pa; // [rsp+90h] [rbp-29h] BYREF
   __int64 v38; // [rsp+F0h] [rbp+37h]
-  UFG::Editor::DAGPath *result; // [rsp+120h] [rbp+67h]
-  UFG::Editor::DAGPath *v40; // [rsp+128h] [rbp+6Fh]
+  UFG::Editor::DAGPath *result; // [rsp+120h] [rbp+67h] BYREF
+  UFG::Editor::DAGPath *p_pa; // [rsp+128h] [rbp+6Fh]
 
   v38 = -2i64;
-  v1 = p;
   result = &path;
   path.mFnObject.mPrev = (UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *)&path;
   path.mFnObject.mNext = (UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *)&path;
@@ -184,51 +179,49 @@ void __fastcall UFG::Editor::VisibilityManager::Unhide(UFG::Editor::DAGPath *p)
   *(_QWORD *)&path.mElements.size = 0i64;
   UFG::qArray<UFG::qSymbol,0>::Reallocate(&path.mElements, 4u, "qArray.Reallocate(Constructor)");
   path.mInterfaceName.mUID = -1;
-  path.mSubElements.p = 0i64;
-  *(_QWORD *)&path.mSubElements.size = 0i64;
-  path.mPathType = 0;
-  if ( v1 != &path )
+  memset(&path.mSubElements, 0, 20);
+  if ( p != &path )
   {
     UFG::Editor::DAGPath::Clear(&path);
     if ( path.mPathType == Default )
     {
-      v2 = v1->mFnObject.mPtr;
+      mPtr = p->mFnObject.mPtr;
       if ( !path.mFnObject.mPtr )
       {
-        if ( v2 )
+        if ( mPtr )
         {
-          path.mFnObject.mTypeId = v2->mTypeId;
-          path.mFnObject.mPtr = v2;
-          v3 = &v2->mSmartHandleList.mNode;
-          v4 = v3->mPrev;
-          v4->mNext = (UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *)&path;
-          path.mFnObject.mPrev = v4;
-          path.mFnObject.mNext = v3;
-          v3->mPrev = (UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *)&path;
+          path.mFnObject.mTypeId = mPtr->mTypeId;
+          path.mFnObject.mPtr = mPtr;
+          p_mNode = &mPtr->mSmartHandleList.mNode;
+          mPrev = p_mNode->mPrev;
+          mPrev->mNext = (UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *)&path;
+          path.mFnObject.mPrev = mPrev;
+          path.mFnObject.mNext = p_mNode;
+          p_mNode->mPrev = (UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *)&path;
         }
       }
     }
-    path.mSystemName.mUID = v1->mSystemName.mUID;
-    UFG::qArray<UFG::qSymbol,0>::Clone(&v1->mElements, &path.mElements);
-    path.mInterfaceName.mUID = v1->mInterfaceName.mUID;
-    UFG::qArray<UFG::qString,0>::Clone(&v1->mSubElements, &path.mSubElements);
+    path.mSystemName.mUID = p->mSystemName.mUID;
+    UFG::qArray<UFG::qSymbol,0>::Clone(&p->mElements, &path.mElements);
+    path.mInterfaceName.mUID = p->mInterfaceName.mUID;
+    UFG::qArray<UFG::qString,0>::Clone(&p->mSubElements, &path.mSubElements);
   }
   if ( path.mSubElements.p )
   {
-    v5 = &path.mSubElements.p[-1].mStringHash32;
+    p_mStringHash32 = &path.mSubElements.p[-1].mStringHash32;
     `eh vector destructor iterator(
       path.mSubElements.p,
       0x28ui64,
       path.mSubElements.p[-1].mStringHash32,
       (void (__fastcall *)(void *))UFG::qString::~qString);
-    operator delete[](v5);
+    operator delete[](p_mStringHash32);
   }
   path.mSubElements.p = 0i64;
   *(_QWORD *)&path.mSubElements.size = 0i64;
-  v6 = UFG::Editor::DAGPath::GetHash(&path);
-  if ( v6 )
+  Hash = UFG::Editor::DAGPath::GetHash(&path);
+  if ( Hash )
   {
-    v7 = UFG::qBaseTreeRB::Get(&UFG::Editor::VisibilityManager::mHiddenObjects.mTree, v6);
+    v7 = UFG::qBaseTreeRB::Get(&UFG::Editor::VisibilityManager::mHiddenObjects.mTree, Hash);
     v8 = (UFG::Editor::DAGPath *)v7;
     if ( v7 )
     {
@@ -236,31 +229,31 @@ void __fastcall UFG::Editor::VisibilityManager::Unhide(UFG::Editor::DAGPath *p)
         (UFG::qBaseTreeVariableRB<unsigned __int64> *)&UFG::Editor::VisibilityManager::mHiddenObjects,
         (UFG::qBaseNodeVariableRB<unsigned __int64> *)v7);
       result = v8;
-      UFG::Editor::DAGPath::~DAGPath((UFG::Editor::DAGPath *)((char *)v8 + 32));
+      UFG::Editor::DAGPath::~DAGPath((UFG::Editor::DAGPath *)&v8->mSystemName);
       operator delete[](v8);
       --UFG::Editor::VisibilityManager::mNumHidden;
     }
   }
-  v9 = UFG::Editor::DAGPath::GetSystemName(&path, (UFG::qSymbol *)&result);
-  v10 = UFG::Editor::DAGTypeSceneObject::TYPE_SYMBOL.mUID;
-  if ( v9->mUID == UFG::Editor::DAGTypeSceneObject::TYPE_SYMBOL.mUID )
+  SystemName = UFG::Editor::DAGPath::GetSystemName(&path, (UFG::qSymbol *)&result);
+  mUID = UFG::Editor::DAGTypeSceneObject::TYPE_SYMBOL.mUID;
+  if ( SystemName->mUID == UFG::Editor::DAGTypeSceneObject::TYPE_SYMBOL.mUID )
   {
     if ( !path.mElements.size )
       goto LABEL_59;
-    if ( UFG::Editor::DAGPath::GetSystemName(&path, (UFG::qSymbol *)&result)->mUID != v10 )
+    if ( UFG::Editor::DAGPath::GetSystemName(&path, (UFG::qSymbol *)&result)->mUID != mUID )
     {
       if ( UFG::Editor::DAGPath::GetSystemName(&path, (UFG::qSymbol *)&result)->mUID != UFG::Editor::DAGTypeSimObject::TYPE_SYMBOL.mUID )
       {
         v17 = 0i64;
         goto LABEL_32;
       }
-      v16 = UFG::Simulation::GetSimObject(&UFG::gSim, path.mElements.p);
+      SimObject = UFG::Simulation::GetSimObject(&UFG::gSim, path.mElements.p);
 LABEL_31:
-      v17 = (UFG::SimObject *)v16;
+      v17 = (UFG::SimObject *)SimObject;
 LABEL_32:
       if ( v17 )
       {
-        v40 = &pa;
+        p_pa = &pa;
         pa.mFnObject.mPrev = (UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *)&pa;
         pa.mFnObject.mNext = (UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *)&pa;
         pa.mFnObject.mPtr = 0i64;
@@ -270,25 +263,23 @@ LABEL_32:
         *(_QWORD *)&pa.mElements.size = 0i64;
         UFG::qArray<UFG::qSymbol,0>::Reallocate(&pa.mElements, 4u, "qArray.Reallocate(Constructor)");
         pa.mInterfaceName.mUID = -1;
-        pa.mSubElements.p = 0i64;
-        *(_QWORD *)&pa.mSubElements.size = 0i64;
-        pa.mPathType = 0;
+        memset(&pa.mSubElements, 0, 20);
         if ( UFG::Editor::Core::GetDAGPath(&pa, v17) )
           UFG::Editor::VisibilityManager::Unhide(&pa);
         UFG::Editor::DAGPath::~DAGPath(&pa);
       }
       goto LABEL_59;
     }
-    v11 = path.mPathType;
-    if ( path.mPathType == 1 )
+    mPathType = path.mPathType;
+    if ( path.mPathType == Half )
       goto LABEL_59;
     v12 = path.mFnObject.mPtr;
     if ( path.mFnObject.mPtr )
     {
 LABEL_25:
-      if ( v11 == 1 )
+      if ( mPathType == Half )
         v12 = 0i64;
-      v16 = UFG::Simulation::GetSimObject(&UFG::gSim, (unsigned int)v12[2].mSmartHandleList.mNode.mNext);
+      SimObject = UFG::Simulation::GetSimObject(&UFG::gSim, (unsigned int)v12[2].mSmartHandleList.mNode.mNext);
       goto LABEL_31;
     }
     if ( !path.mSystemName.mUID )
@@ -301,18 +292,18 @@ LABEL_25:
       if ( path.mFnObject.mPtr )
       {
 LABEL_24:
-        v11 = path.mPathType;
+        mPathType = path.mPathType;
         goto LABEL_25;
       }
       if ( !v14 )
         goto LABEL_59;
       path.mFnObject.mTypeId = v14->mTypeId;
       path.mFnObject.mPtr = v14;
-      v15 = v14->mSmartHandleList.mNode.mPrev;
+      v15 = v14->mSmartHandleList.UFG::Editor::SmartHandleObject::mNode.mPrev;
       v15->mNext = (UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *)&path;
       path.mFnObject.mPrev = v15;
-      path.mFnObject.mNext = &v14->mSmartHandleList.mNode;
-      v14->mSmartHandleList.mNode.mPrev = (UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *)&path;
+      path.mFnObject.mNext = &v14->mSmartHandleList.UFG::Editor::SmartHandleObject::mNode;
+      v14->mSmartHandleList.UFG::Editor::SmartHandleObject::mNode.mPrev = (UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *)&path;
     }
     v12 = path.mFnObject.mPtr;
     if ( !path.mFnObject.mPtr )
@@ -323,15 +314,15 @@ LABEL_24:
   v19 = UFG::Editor::DAGTypeSimObject::TYPE_SYMBOL.mUID;
   if ( v18->mUID == UFG::Editor::DAGTypeSimObject::TYPE_SYMBOL.mUID )
   {
-    v20 = path.mElements.size && UFG::Editor::DAGPath::GetSystemName(&path, (UFG::qSymbol *)&result)->mUID == v19 ? 0 : 1;
-    v21 = (UFG::SimObject *)(v20 ? 0i64 : UFG::Simulation::GetSimObject(&UFG::gSim, path.mElements.p));
+    v20 = !path.mElements.size || UFG::Editor::DAGPath::GetSystemName(&path, (UFG::qSymbol *)&result)->mUID != v19;
+    v21 = v20 ? 0i64 : (UFG::SimObject *)UFG::Simulation::GetSimObject(&UFG::gSim, path.mElements.p);
     UFG::SimObject::Restore(v21);
-    v22 = UFG::SimObject::GetComponentOfType(v21, UFG::PrefabComponent::_TypeUID);
-    v23 = v22;
-    if ( v22 )
+    ComponentOfType = UFG::SimObject::GetComponentOfType(v21, UFG::PrefabComponent::_TypeUID);
+    v23 = ComponentOfType;
+    if ( ComponentOfType )
     {
       v24 = 0;
-      if ( v22[1].m_TypeUID )
+      if ( ComponentOfType[1].m_TypeUID )
       {
         result = &pa;
         do
@@ -346,9 +337,7 @@ LABEL_24:
           *(_QWORD *)&pa.mElements.size = 0i64;
           UFG::qArray<UFG::qSymbol,0>::Reallocate(&pa.mElements, 4u, "qArray.Reallocate(Constructor)");
           pa.mInterfaceName.mUID = -1;
-          pa.mSubElements.p = 0i64;
-          *(_QWORD *)&pa.mSubElements.size = 0i64;
-          pa.mPathType = 0;
+          memset(&pa.mSubElements, 0, 20);
           UFG::Editor::DAGPath::Clear(&pa);
           if ( v25 )
           {
@@ -358,9 +347,9 @@ LABEL_24:
             if ( pa.mFnObject.mPtr )
             {
               v27 = pa.mFnObject.mPrev;
-              v28 = pa.mFnObject.mNext;
+              mNext = pa.mFnObject.mNext;
               pa.mFnObject.mPrev->mNext = pa.mFnObject.mNext;
-              v28->mPrev = v27;
+              mNext->mPrev = v27;
               pa.mFnObject.mPrev = (UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *)&pa;
               pa.mFnObject.mNext = (UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *)&pa;
               if ( (UFG::qList<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList,1,0> *)v26->mSmartHandleList.mNode.mNext == &v26->mSmartHandleList
@@ -443,7 +432,7 @@ LABEL_59:
     path.mFnObject.mPtr = 0i64;
   }
   path.mFnObject.mPtr = 0i64;
-  UFG::Editor::SmartHandle::~SmartHandle((UFG::Editor::SmartHandle *)&path.mFnObject.mPrev);
+  UFG::Editor::SmartHandle::~SmartHandle(&path.mFnObject);
 }
 
 // File Line: 190
@@ -451,24 +440,24 @@ LABEL_59:
 void __fastcall UFG::Editor::VisibilityManager::UnhideAll(UFG::Editor::VisibilityManager *this)
 {
   UFG::qBaseTreeRB *i; // r14
-  __int64 v2; // rsi
+  __int64 size; // rsi
   unsigned int v3; // ebx
   unsigned int v4; // edx
   UFG::Editor::DAGPath *v5; // rbx
   UFG::Editor::SmartHandleObject *v6; // rcx
-  UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *v7; // rcx
-  UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *v8; // rax
+  UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *p_mNode; // rcx
+  UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *mPrev; // rax
   UFG::allocator::free_link *v9; // rax
   UFG::Event *v10; // rdx
   UFG::allocator::free_link *v11; // rax
   unsigned int j; // ebx
-  UFG::Editor::DAGPathType::Enum *v13; // rbx
+  UFG::Editor::DAGPathType::Enum *p_mPathType; // rbx
   __int64 *v14; // rcx
   __int64 **v15; // rax
-  __int64 *v16; // [rsp+30h] [rbp-50h]
+  __int64 *v16; // [rsp+30h] [rbp-50h] BYREF
   __int64 **v17; // [rsp+38h] [rbp-48h]
-  UFG::qString v18; // [rsp+40h] [rbp-40h]
-  UFG::qArray<UFG::Editor::DAGPath,0> v19; // [rsp+68h] [rbp-18h]
+  UFG::qString v18; // [rsp+40h] [rbp-40h] BYREF
+  UFG::qArray<UFG::Editor::DAGPath,0> v19; // [rsp+68h] [rbp-18h] BYREF
 
   v16 = (__int64 *)&v16;
   v17 = &v16;
@@ -479,9 +468,9 @@ void __fastcall UFG::Editor::VisibilityManager::UnhideAll(UFG::Editor::Visibilit
         i;
         i = UFG::qBaseTreeRB::GetNext(&UFG::Editor::VisibilityManager::mHiddenObjects.mTree, &i->mRoot) )
   {
-    if ( (signed int)UFG::qArray<UFG::Editor::DAGPath,0>::Find(&v19, (UFG::Editor::DAGPath *)&i->mNULL) <= -1 )
+    if ( (int)UFG::qArray<UFG::Editor::DAGPath,0>::Find(&v19, (UFG::Editor::DAGPath *)&i->mNULL) <= -1 )
     {
-      v2 = v19.size;
+      size = v19.size;
       v3 = v19.size + 1;
       if ( v19.size + 1 > v19.capacity )
       {
@@ -496,10 +485,10 @@ void __fastcall UFG::Editor::VisibilityManager::UnhideAll(UFG::Editor::Visibilit
         UFG::qArray<UFG::Editor::DAGPath,0>::Reallocate(&v19, v4, "qArray.Add");
       }
       v19.size = v3;
-      v5 = &v19.p[v2];
+      v5 = &v19.p[size];
       if ( &i->mNULL != (UFG::qBaseNodeRB *)v5 )
       {
-        UFG::Editor::DAGPath::Clear(&v19.p[v2]);
+        UFG::Editor::DAGPath::Clear(&v19.p[size]);
         if ( v5->mPathType == Default )
         {
           v6 = (UFG::Editor::SmartHandleObject *)i->mNULL.mChild[1];
@@ -509,12 +498,12 @@ void __fastcall UFG::Editor::VisibilityManager::UnhideAll(UFG::Editor::Visibilit
             {
               v5->mFnObject.mTypeId = v6->mTypeId;
               v5->mFnObject.mPtr = v6;
-              v7 = &v6->mSmartHandleList.mNode;
-              v8 = v7->mPrev;
-              v8->mNext = (UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *)&v5->mFnObject.mPrev;
-              v5->mFnObject.mPrev = v8;
-              v5->mFnObject.mNext = v7;
-              v7->mPrev = (UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *)&v5->mFnObject.mPrev;
+              p_mNode = &v6->mSmartHandleList.mNode;
+              mPrev = p_mNode->mPrev;
+              mPrev->mNext = &v5->mFnObject;
+              v5->mFnObject.mPrev = mPrev;
+              v5->mFnObject.mNext = p_mNode;
+              p_mNode->mPrev = &v5->mFnObject;
             }
           }
         }
@@ -546,13 +535,13 @@ void __fastcall UFG::Editor::VisibilityManager::UnhideAll(UFG::Editor::Visibilit
     UFG::Editor::VisibilityManager::Unhide(&v19.p[j]);
   if ( v19.p )
   {
-    v13 = &v19.p[-1].mPathType;
+    p_mPathType = &v19.p[-1].mPathType;
     `eh vector destructor iterator(
       v19.p,
       0x58ui64,
       v19.p[-1].mPathType,
       (void (__fastcall *)(void *))UFG::Editor::DAGPath::~DAGPath);
-    operator delete[](v13);
+    operator delete[](p_mPathType);
   }
   v19.p = 0i64;
   *(_QWORD *)&v19.size = 0i64;
@@ -561,9 +550,5 @@ void __fastcall UFG::Editor::VisibilityManager::UnhideAll(UFG::Editor::Visibilit
   v15 = v17;
   v16[1] = (__int64)v17;
   *v15 = v14;
-} = 0i64;
-  UFG::qString::~qString(&v18);
-  v14 = v16;
-  v15 = v17;
-  v16[1
+}
 

@@ -8,7 +8,7 @@ char __fastcall hkaiNewFaceCutterUtil::Membership::getEffectivePainterIndex(hkai
   v1 = (this->m_data >> 1) & 0x7FFF;
   if ( !v1 )
     return -1;
-  for ( i = 0; !(v1 & 1); ++i )
+  for ( i = 0; (v1 & 1) == 0; ++i )
     v1 >>= 1;
   return i;
 }

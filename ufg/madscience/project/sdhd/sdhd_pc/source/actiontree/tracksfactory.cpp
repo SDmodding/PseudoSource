@@ -407,6 +407,6 @@ const char *dynamic_initializer_for__sTrackFactoryList__()
 __int64 dynamic_initializer_for__gTrackFactory__()
 {
   Expression::MemberMapFactory::MemberMapFactory(&gTrackFactory, sTrackFactoryList, sTrackFactoryListNum);
-  return atexit(dynamic_atexit_destructor_for__gTrackFactory__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gTrackFactory__);
 }
 

@@ -2,7 +2,6 @@
 // RVA: 0x5B8790
 void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::ParameterBindingEntry,1> *pParameterData)
 {
-  UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::ParameterBindingEntry,1> *v1; // r13
   UFG::qNodeRB<UEL::ParameterBindingEntry> *v2; // rsi
   UFG::allocator::free_link *v3; // rdx
   unsigned int v4; // eax
@@ -310,320 +309,320 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   UEL::Value::Type v306; // rbx
   UFG::qSymbol *v307; // rax
   UFG::qNodeRB<UEL::ParameterBindingEntry> *v308; // rax
-  UEL::Value::Type v309; // [rsp+48h] [rbp-B8h]
-  UEL::Value::Type v310; // [rsp+50h] [rbp-B0h]
-  UEL::Value::Type v311; // [rsp+58h] [rbp-A8h]
-  UEL::Value::Type v312; // [rsp+60h] [rbp-A0h]
-  UFG::qSymbol v313; // [rsp+68h] [rbp-98h]
-  UFG::qSymbol v314; // [rsp+6Ch] [rbp-94h]
-  UFG::qSymbol v315; // [rsp+70h] [rbp-90h]
-  UFG::qSymbol v316; // [rsp+74h] [rbp-8Ch]
-  UFG::qSymbol v317; // [rsp+78h] [rbp-88h]
-  UFG::qSymbol v318; // [rsp+7Ch] [rbp-84h]
-  UFG::qSymbol v319; // [rsp+80h] [rbp-80h]
-  UFG::qSymbol v320; // [rsp+84h] [rbp-7Ch]
-  UFG::qSymbol v321; // [rsp+88h] [rbp-78h]
-  UFG::qSymbol v322; // [rsp+8Ch] [rbp-74h]
-  __int16 v323; // [rsp+90h] [rbp-70h]
+  UEL::Value::Type v309; // [rsp+48h] [rbp-B8h] BYREF
+  UEL::Value::Type p_alwaysReturns; // [rsp+50h] [rbp-B0h] BYREF
+  UEL::Value::Type v311; // [rsp+58h] [rbp-A8h] BYREF
+  UEL::Value::Type v312; // [rsp+60h] [rbp-A0h] BYREF
+  UFG::qSymbol v313; // [rsp+68h] [rbp-98h] BYREF
+  UFG::qSymbol v314; // [rsp+6Ch] [rbp-94h] BYREF
+  UFG::qSymbol v315; // [rsp+70h] [rbp-90h] BYREF
+  UFG::qSymbol v316; // [rsp+74h] [rbp-8Ch] BYREF
+  UFG::qSymbol v317; // [rsp+78h] [rbp-88h] BYREF
+  UFG::qSymbol v318; // [rsp+7Ch] [rbp-84h] BYREF
+  UFG::qSymbol v319; // [rsp+80h] [rbp-80h] BYREF
+  UFG::qSymbol v320; // [rsp+84h] [rbp-7Ch] BYREF
+  UFG::qSymbol v321; // [rsp+88h] [rbp-78h] BYREF
+  UFG::qSymbol v322; // [rsp+8Ch] [rbp-74h] BYREF
+  __int16 v323; // [rsp+90h] [rbp-70h] BYREF
   unsigned int v324; // [rsp+94h] [rbp-6Ch]
-  __int16 v325; // [rsp+98h] [rbp-68h]
+  __int16 v325; // [rsp+98h] [rbp-68h] BYREF
   int v326; // [rsp+9Ch] [rbp-64h]
-  __int16 v327; // [rsp+A0h] [rbp-60h]
+  __int16 v327; // [rsp+A0h] [rbp-60h] BYREF
   unsigned int v328; // [rsp+A4h] [rbp-5Ch]
-  __int16 v329; // [rsp+A8h] [rbp-58h]
+  __int16 v329; // [rsp+A8h] [rbp-58h] BYREF
   unsigned int v330; // [rsp+ACh] [rbp-54h]
-  __int16 v331; // [rsp+B0h] [rbp-50h]
+  __int16 v331; // [rsp+B0h] [rbp-50h] BYREF
   unsigned int v332; // [rsp+B4h] [rbp-4Ch]
-  __int16 v333; // [rsp+B8h] [rbp-48h]
+  __int16 v333; // [rsp+B8h] [rbp-48h] BYREF
   unsigned int v334; // [rsp+BCh] [rbp-44h]
-  __int16 v335; // [rsp+C0h] [rbp-40h]
+  __int16 v335; // [rsp+C0h] [rbp-40h] BYREF
   unsigned int v336; // [rsp+C4h] [rbp-3Ch]
-  __int16 v337; // [rsp+C8h] [rbp-38h]
+  __int16 v337; // [rsp+C8h] [rbp-38h] BYREF
   unsigned int v338; // [rsp+CCh] [rbp-34h]
-  __int16 v339; // [rsp+D0h] [rbp-30h]
+  __int16 v339; // [rsp+D0h] [rbp-30h] BYREF
   unsigned int v340; // [rsp+D4h] [rbp-2Ch]
-  __int16 v341; // [rsp+D8h] [rbp-28h]
+  __int16 v341; // [rsp+D8h] [rbp-28h] BYREF
   unsigned int v342; // [rsp+DCh] [rbp-24h]
-  __int16 v343; // [rsp+E0h] [rbp-20h]
+  __int16 v343; // [rsp+E0h] [rbp-20h] BYREF
   unsigned int v344; // [rsp+E4h] [rbp-1Ch]
-  __int16 v345; // [rsp+E8h] [rbp-18h]
+  __int16 v345; // [rsp+E8h] [rbp-18h] BYREF
   unsigned int v346; // [rsp+ECh] [rbp-14h]
-  __int16 v347; // [rsp+F0h] [rbp-10h]
+  __int16 v347; // [rsp+F0h] [rbp-10h] BYREF
   unsigned int v348; // [rsp+F4h] [rbp-Ch]
-  __int16 v349; // [rsp+F8h] [rbp-8h]
+  __int16 v349; // [rsp+F8h] [rbp-8h] BYREF
   unsigned int v350; // [rsp+FCh] [rbp-4h]
-  __int16 v351; // [rsp+100h] [rbp+0h]
+  __int16 v351; // [rsp+100h] [rbp+0h] BYREF
   unsigned int v352; // [rsp+104h] [rbp+4h]
-  __int16 v353; // [rsp+108h] [rbp+8h]
+  __int16 v353; // [rsp+108h] [rbp+8h] BYREF
   unsigned int v354; // [rsp+10Ch] [rbp+Ch]
-  __int16 v355; // [rsp+110h] [rbp+10h]
+  __int16 v355; // [rsp+110h] [rbp+10h] BYREF
   unsigned int v356; // [rsp+114h] [rbp+14h]
-  __int16 v357; // [rsp+118h] [rbp+18h]
+  __int16 v357; // [rsp+118h] [rbp+18h] BYREF
   unsigned int v358; // [rsp+11Ch] [rbp+1Ch]
-  __int16 v359; // [rsp+120h] [rbp+20h]
+  __int16 v359; // [rsp+120h] [rbp+20h] BYREF
   unsigned int v360; // [rsp+124h] [rbp+24h]
-  __int16 v361; // [rsp+128h] [rbp+28h]
+  __int16 v361; // [rsp+128h] [rbp+28h] BYREF
   unsigned int v362; // [rsp+12Ch] [rbp+2Ch]
-  __int16 v363; // [rsp+130h] [rbp+30h]
+  __int16 v363; // [rsp+130h] [rbp+30h] BYREF
   int v364; // [rsp+134h] [rbp+34h]
-  __int16 v365; // [rsp+138h] [rbp+38h]
+  __int16 v365; // [rsp+138h] [rbp+38h] BYREF
   unsigned int v366; // [rsp+13Ch] [rbp+3Ch]
-  __int16 v367; // [rsp+140h] [rbp+40h]
+  __int16 v367; // [rsp+140h] [rbp+40h] BYREF
   unsigned int v368; // [rsp+144h] [rbp+44h]
-  __int16 v369; // [rsp+148h] [rbp+48h]
+  __int16 v369; // [rsp+148h] [rbp+48h] BYREF
   unsigned int v370; // [rsp+14Ch] [rbp+4Ch]
-  __int16 v371; // [rsp+150h] [rbp+50h]
+  __int16 v371; // [rsp+150h] [rbp+50h] BYREF
   unsigned int v372; // [rsp+154h] [rbp+54h]
-  __int16 v373; // [rsp+158h] [rbp+58h]
+  __int16 v373; // [rsp+158h] [rbp+58h] BYREF
   unsigned int v374; // [rsp+15Ch] [rbp+5Ch]
-  __int16 v375; // [rsp+160h] [rbp+60h]
+  __int16 v375; // [rsp+160h] [rbp+60h] BYREF
   unsigned int v376; // [rsp+164h] [rbp+64h]
-  __int16 v377; // [rsp+168h] [rbp+68h]
+  __int16 v377; // [rsp+168h] [rbp+68h] BYREF
   unsigned int v378; // [rsp+16Ch] [rbp+6Ch]
-  __int16 v379; // [rsp+170h] [rbp+70h]
+  __int16 v379; // [rsp+170h] [rbp+70h] BYREF
   int v380; // [rsp+174h] [rbp+74h]
-  __int16 v381; // [rsp+178h] [rbp+78h]
+  __int16 v381; // [rsp+178h] [rbp+78h] BYREF
   unsigned int v382; // [rsp+17Ch] [rbp+7Ch]
-  __int16 v383; // [rsp+180h] [rbp+80h]
+  __int16 v383; // [rsp+180h] [rbp+80h] BYREF
   unsigned int v384; // [rsp+184h] [rbp+84h]
-  __int16 v385; // [rsp+188h] [rbp+88h]
+  __int16 v385; // [rsp+188h] [rbp+88h] BYREF
   unsigned int v386; // [rsp+18Ch] [rbp+8Ch]
-  __int16 v387; // [rsp+190h] [rbp+90h]
+  __int16 v387; // [rsp+190h] [rbp+90h] BYREF
   int v388; // [rsp+194h] [rbp+94h]
-  __int16 v389; // [rsp+198h] [rbp+98h]
+  __int16 v389; // [rsp+198h] [rbp+98h] BYREF
   unsigned int v390; // [rsp+19Ch] [rbp+9Ch]
-  __int16 v391; // [rsp+1A0h] [rbp+A0h]
+  __int16 v391; // [rsp+1A0h] [rbp+A0h] BYREF
   unsigned int v392; // [rsp+1A4h] [rbp+A4h]
-  __int16 v393; // [rsp+1A8h] [rbp+A8h]
+  __int16 v393; // [rsp+1A8h] [rbp+A8h] BYREF
   unsigned int v394; // [rsp+1ACh] [rbp+ACh]
-  __int16 v395; // [rsp+1B0h] [rbp+B0h]
+  __int16 v395; // [rsp+1B0h] [rbp+B0h] BYREF
   unsigned int v396; // [rsp+1B4h] [rbp+B4h]
-  __int16 v397; // [rsp+1B8h] [rbp+B8h]
+  __int16 v397; // [rsp+1B8h] [rbp+B8h] BYREF
   unsigned int v398; // [rsp+1BCh] [rbp+BCh]
-  __int16 v399; // [rsp+1C0h] [rbp+C0h]
+  __int16 v399; // [rsp+1C0h] [rbp+C0h] BYREF
   unsigned int v400; // [rsp+1C4h] [rbp+C4h]
-  __int16 v401; // [rsp+1C8h] [rbp+C8h]
+  __int16 v401; // [rsp+1C8h] [rbp+C8h] BYREF
   unsigned int v402; // [rsp+1CCh] [rbp+CCh]
-  __int16 v403; // [rsp+1D0h] [rbp+D0h]
+  __int16 v403; // [rsp+1D0h] [rbp+D0h] BYREF
   unsigned int v404; // [rsp+1D4h] [rbp+D4h]
-  __int16 v405; // [rsp+1D8h] [rbp+D8h]
+  __int16 v405; // [rsp+1D8h] [rbp+D8h] BYREF
   unsigned int v406; // [rsp+1DCh] [rbp+DCh]
-  __int16 v407; // [rsp+1E0h] [rbp+E0h]
+  __int16 v407; // [rsp+1E0h] [rbp+E0h] BYREF
   unsigned int v408; // [rsp+1E4h] [rbp+E4h]
-  __int16 v409; // [rsp+1E8h] [rbp+E8h]
+  __int16 v409; // [rsp+1E8h] [rbp+E8h] BYREF
   unsigned int v410; // [rsp+1ECh] [rbp+ECh]
-  __int16 v411; // [rsp+1F0h] [rbp+F0h]
+  __int16 v411; // [rsp+1F0h] [rbp+F0h] BYREF
   unsigned int v412; // [rsp+1F4h] [rbp+F4h]
-  __int16 v413; // [rsp+1F8h] [rbp+F8h]
+  __int16 v413; // [rsp+1F8h] [rbp+F8h] BYREF
   unsigned int v414; // [rsp+1FCh] [rbp+FCh]
-  __int16 v415; // [rsp+200h] [rbp+100h]
+  __int16 v415; // [rsp+200h] [rbp+100h] BYREF
   unsigned int v416; // [rsp+204h] [rbp+104h]
-  __int16 v417; // [rsp+208h] [rbp+108h]
+  __int16 v417; // [rsp+208h] [rbp+108h] BYREF
   unsigned int v418; // [rsp+20Ch] [rbp+10Ch]
-  __int16 v419; // [rsp+210h] [rbp+110h]
+  __int16 v419; // [rsp+210h] [rbp+110h] BYREF
   unsigned int v420; // [rsp+214h] [rbp+114h]
-  __int16 v421; // [rsp+218h] [rbp+118h]
+  __int16 v421; // [rsp+218h] [rbp+118h] BYREF
   unsigned int v422; // [rsp+21Ch] [rbp+11Ch]
-  __int16 v423; // [rsp+220h] [rbp+120h]
+  __int16 v423; // [rsp+220h] [rbp+120h] BYREF
   unsigned int v424; // [rsp+224h] [rbp+124h]
-  __int16 v425; // [rsp+228h] [rbp+128h]
+  __int16 v425; // [rsp+228h] [rbp+128h] BYREF
   unsigned int v426; // [rsp+22Ch] [rbp+12Ch]
-  __int16 v427; // [rsp+230h] [rbp+130h]
+  __int16 v427; // [rsp+230h] [rbp+130h] BYREF
   unsigned int v428; // [rsp+234h] [rbp+134h]
-  __int16 v429; // [rsp+238h] [rbp+138h]
+  __int16 v429; // [rsp+238h] [rbp+138h] BYREF
   unsigned int v430; // [rsp+23Ch] [rbp+13Ch]
-  __int16 v431; // [rsp+240h] [rbp+140h]
-  unsigned int v432; // [rsp+244h] [rbp+144h]
-  __int16 v433; // [rsp+248h] [rbp+148h]
+  __int16 v431; // [rsp+240h] [rbp+140h] BYREF
+  unsigned int mUID; // [rsp+244h] [rbp+144h]
+  __int16 v433; // [rsp+248h] [rbp+148h] BYREF
   unsigned int v434; // [rsp+24Ch] [rbp+14Ch]
-  __int16 v435; // [rsp+250h] [rbp+150h]
+  __int16 v435; // [rsp+250h] [rbp+150h] BYREF
   unsigned int v436; // [rsp+254h] [rbp+154h]
-  __int16 v437; // [rsp+258h] [rbp+158h]
+  __int16 v437; // [rsp+258h] [rbp+158h] BYREF
   unsigned int v438; // [rsp+25Ch] [rbp+15Ch]
-  __int16 v439; // [rsp+260h] [rbp+160h]
+  __int16 v439; // [rsp+260h] [rbp+160h] BYREF
   unsigned int v440; // [rsp+264h] [rbp+164h]
-  __int16 v441; // [rsp+268h] [rbp+168h]
+  __int16 v441; // [rsp+268h] [rbp+168h] BYREF
   unsigned int v442; // [rsp+26Ch] [rbp+16Ch]
-  __int16 v443; // [rsp+270h] [rbp+170h]
+  __int16 v443; // [rsp+270h] [rbp+170h] BYREF
   int v444; // [rsp+274h] [rbp+174h]
-  __int16 v445; // [rsp+278h] [rbp+178h]
+  __int16 v445; // [rsp+278h] [rbp+178h] BYREF
   unsigned int v446; // [rsp+27Ch] [rbp+17Ch]
-  __int16 v447; // [rsp+280h] [rbp+180h]
+  __int16 v447; // [rsp+280h] [rbp+180h] BYREF
   int v448; // [rsp+284h] [rbp+184h]
-  __int16 v449; // [rsp+288h] [rbp+188h]
+  __int16 v449; // [rsp+288h] [rbp+188h] BYREF
   unsigned int v450; // [rsp+28Ch] [rbp+18Ch]
-  __int16 v451; // [rsp+290h] [rbp+190h]
+  __int16 v451; // [rsp+290h] [rbp+190h] BYREF
   unsigned int v452; // [rsp+294h] [rbp+194h]
-  __int16 v453; // [rsp+298h] [rbp+198h]
+  __int16 v453; // [rsp+298h] [rbp+198h] BYREF
   unsigned int v454; // [rsp+29Ch] [rbp+19Ch]
-  __int16 v455; // [rsp+2A0h] [rbp+1A0h]
+  __int16 v455; // [rsp+2A0h] [rbp+1A0h] BYREF
   int v456; // [rsp+2A4h] [rbp+1A4h]
-  __int16 v457; // [rsp+2A8h] [rbp+1A8h]
+  __int16 v457; // [rsp+2A8h] [rbp+1A8h] BYREF
   unsigned int v458; // [rsp+2ACh] [rbp+1ACh]
-  __int16 v459; // [rsp+2B0h] [rbp+1B0h]
+  __int16 v459; // [rsp+2B0h] [rbp+1B0h] BYREF
   int v460; // [rsp+2B4h] [rbp+1B4h]
-  __int16 v461; // [rsp+2B8h] [rbp+1B8h]
+  __int16 v461; // [rsp+2B8h] [rbp+1B8h] BYREF
   unsigned int v462; // [rsp+2BCh] [rbp+1BCh]
-  __int16 v463; // [rsp+2C0h] [rbp+1C0h]
+  __int16 v463; // [rsp+2C0h] [rbp+1C0h] BYREF
   unsigned int v464; // [rsp+2C4h] [rbp+1C4h]
-  __int16 v465; // [rsp+2C8h] [rbp+1C8h]
+  __int16 v465; // [rsp+2C8h] [rbp+1C8h] BYREF
   unsigned int v466; // [rsp+2CCh] [rbp+1CCh]
-  __int16 v467; // [rsp+2D0h] [rbp+1D0h]
+  __int16 v467; // [rsp+2D0h] [rbp+1D0h] BYREF
   unsigned int v468; // [rsp+2D4h] [rbp+1D4h]
-  __int16 v469; // [rsp+2D8h] [rbp+1D8h]
+  __int16 v469; // [rsp+2D8h] [rbp+1D8h] BYREF
   unsigned int v470; // [rsp+2DCh] [rbp+1DCh]
-  __int16 v471; // [rsp+2E0h] [rbp+1E0h]
+  __int16 v471; // [rsp+2E0h] [rbp+1E0h] BYREF
   unsigned int v472; // [rsp+2E4h] [rbp+1E4h]
-  __int16 v473; // [rsp+2E8h] [rbp+1E8h]
+  __int16 v473; // [rsp+2E8h] [rbp+1E8h] BYREF
   unsigned int v474; // [rsp+2ECh] [rbp+1ECh]
-  __int16 v475; // [rsp+2F0h] [rbp+1F0h]
+  __int16 v475; // [rsp+2F0h] [rbp+1F0h] BYREF
   unsigned int v476; // [rsp+2F4h] [rbp+1F4h]
-  __int16 v477; // [rsp+2F8h] [rbp+1F8h]
+  __int16 v477; // [rsp+2F8h] [rbp+1F8h] BYREF
   unsigned int v478; // [rsp+2FCh] [rbp+1FCh]
-  UEL::Value::Type v479; // [rsp+300h] [rbp+200h]
-  __int16 v480; // [rsp+308h] [rbp+208h]
+  UEL::Value::Type v479; // [rsp+300h] [rbp+200h] BYREF
+  __int16 v480; // [rsp+308h] [rbp+208h] BYREF
   unsigned int v481; // [rsp+30Ch] [rbp+20Ch]
-  __int16 v482; // [rsp+310h] [rbp+210h]
+  __int16 v482; // [rsp+310h] [rbp+210h] BYREF
   unsigned int v483; // [rsp+314h] [rbp+214h]
-  __int16 v484; // [rsp+318h] [rbp+218h]
+  __int16 v484; // [rsp+318h] [rbp+218h] BYREF
   unsigned int v485; // [rsp+31Ch] [rbp+21Ch]
-  __int16 v486; // [rsp+320h] [rbp+220h]
+  __int16 v486; // [rsp+320h] [rbp+220h] BYREF
   unsigned int v487; // [rsp+324h] [rbp+224h]
-  __int16 v488; // [rsp+328h] [rbp+228h]
+  __int16 v488; // [rsp+328h] [rbp+228h] BYREF
   unsigned int v489; // [rsp+32Ch] [rbp+22Ch]
-  __int16 v490; // [rsp+330h] [rbp+230h]
+  __int16 v490; // [rsp+330h] [rbp+230h] BYREF
   unsigned int v491; // [rsp+334h] [rbp+234h]
-  __int16 v492; // [rsp+338h] [rbp+238h]
+  __int16 v492; // [rsp+338h] [rbp+238h] BYREF
   unsigned int v493; // [rsp+33Ch] [rbp+23Ch]
-  __int16 v494; // [rsp+340h] [rbp+240h]
+  __int16 v494; // [rsp+340h] [rbp+240h] BYREF
   unsigned int v495; // [rsp+344h] [rbp+244h]
-  __int16 v496; // [rsp+348h] [rbp+248h]
+  __int16 v496; // [rsp+348h] [rbp+248h] BYREF
   unsigned int v497; // [rsp+34Ch] [rbp+24Ch]
-  __int16 v498; // [rsp+350h] [rbp+250h]
+  __int16 v498; // [rsp+350h] [rbp+250h] BYREF
   unsigned int v499; // [rsp+354h] [rbp+254h]
-  __int16 v500; // [rsp+358h] [rbp+258h]
+  __int16 v500; // [rsp+358h] [rbp+258h] BYREF
   unsigned int v501; // [rsp+35Ch] [rbp+25Ch]
-  __int16 v502; // [rsp+360h] [rbp+260h]
+  __int16 v502; // [rsp+360h] [rbp+260h] BYREF
   unsigned int v503; // [rsp+364h] [rbp+264h]
-  __int16 v504; // [rsp+368h] [rbp+268h]
+  __int16 v504; // [rsp+368h] [rbp+268h] BYREF
   unsigned int v505; // [rsp+36Ch] [rbp+26Ch]
-  __int16 v506; // [rsp+370h] [rbp+270h]
+  __int16 v506; // [rsp+370h] [rbp+270h] BYREF
   unsigned int v507; // [rsp+374h] [rbp+274h]
-  __int16 v508; // [rsp+378h] [rbp+278h]
+  __int16 v508; // [rsp+378h] [rbp+278h] BYREF
   unsigned int v509; // [rsp+37Ch] [rbp+27Ch]
-  __int16 v510; // [rsp+380h] [rbp+280h]
+  __int16 v510; // [rsp+380h] [rbp+280h] BYREF
   unsigned int v511; // [rsp+384h] [rbp+284h]
-  __int16 v512; // [rsp+388h] [rbp+288h]
+  __int16 v512; // [rsp+388h] [rbp+288h] BYREF
   unsigned int v513; // [rsp+38Ch] [rbp+28Ch]
-  __int16 v514; // [rsp+390h] [rbp+290h]
+  __int16 v514; // [rsp+390h] [rbp+290h] BYREF
   unsigned int v515; // [rsp+394h] [rbp+294h]
-  __int16 v516; // [rsp+398h] [rbp+298h]
+  __int16 v516; // [rsp+398h] [rbp+298h] BYREF
   unsigned int v517; // [rsp+39Ch] [rbp+29Ch]
-  __int16 v518; // [rsp+3A0h] [rbp+2A0h]
+  __int16 v518; // [rsp+3A0h] [rbp+2A0h] BYREF
   unsigned int v519; // [rsp+3A4h] [rbp+2A4h]
-  __int16 v520; // [rsp+3A8h] [rbp+2A8h]
+  __int16 v520; // [rsp+3A8h] [rbp+2A8h] BYREF
   unsigned int v521; // [rsp+3ACh] [rbp+2ACh]
-  __int16 v522; // [rsp+3B0h] [rbp+2B0h]
+  __int16 v522; // [rsp+3B0h] [rbp+2B0h] BYREF
   unsigned int v523; // [rsp+3B4h] [rbp+2B4h]
-  __int16 v524; // [rsp+3B8h] [rbp+2B8h]
+  __int16 v524; // [rsp+3B8h] [rbp+2B8h] BYREF
   unsigned int v525; // [rsp+3BCh] [rbp+2BCh]
-  __int16 v526; // [rsp+3C0h] [rbp+2C0h]
+  __int16 v526; // [rsp+3C0h] [rbp+2C0h] BYREF
   unsigned int v527; // [rsp+3C4h] [rbp+2C4h]
-  UEL::Value::Type v528; // [rsp+3C8h] [rbp+2C8h]
-  UFG::qSymbol v529; // [rsp+3D0h] [rbp+2D0h]
-  UFG::qSymbol v530; // [rsp+3D4h] [rbp+2D4h]
-  UFG::qSymbol v531; // [rsp+3D8h] [rbp+2D8h]
-  UFG::qSymbol v532; // [rsp+3DCh] [rbp+2DCh]
-  UFG::qSymbol v533; // [rsp+3E0h] [rbp+2E0h]
-  UFG::qSymbol v534; // [rsp+3E4h] [rbp+2E4h]
-  UFG::qSymbol v535; // [rsp+3E8h] [rbp+2E8h]
-  UFG::qSymbol v536; // [rsp+3ECh] [rbp+2ECh]
-  UFG::qSymbol v537; // [rsp+3F0h] [rbp+2F0h]
-  UFG::qSymbol v538; // [rsp+3F4h] [rbp+2F4h]
-  UFG::qSymbol v539; // [rsp+3F8h] [rbp+2F8h]
-  UFG::qSymbol result; // [rsp+3FCh] [rbp+2FCh]
-  UFG::qSymbol v541; // [rsp+400h] [rbp+300h]
-  UFG::qSymbol v542; // [rsp+404h] [rbp+304h]
-  UFG::qSymbol v543; // [rsp+408h] [rbp+308h]
-  UFG::qSymbol v544; // [rsp+40Ch] [rbp+30Ch]
-  UFG::qSymbol v545; // [rsp+410h] [rbp+310h]
-  UFG::qSymbol v546; // [rsp+414h] [rbp+314h]
-  UFG::qSymbol v547; // [rsp+418h] [rbp+318h]
-  UFG::qSymbol v548; // [rsp+41Ch] [rbp+31Ch]
-  UFG::qSymbol v549; // [rsp+420h] [rbp+320h]
-  UFG::qSymbol v550; // [rsp+424h] [rbp+324h]
-  UFG::qSymbol v551; // [rsp+428h] [rbp+328h]
-  UFG::qSymbol v552; // [rsp+42Ch] [rbp+32Ch]
-  UFG::qSymbol v553; // [rsp+430h] [rbp+330h]
-  UFG::qSymbol v554; // [rsp+434h] [rbp+334h]
-  UFG::qSymbol v555; // [rsp+438h] [rbp+338h]
-  UFG::qSymbol v556; // [rsp+43Ch] [rbp+33Ch]
-  UFG::qSymbol v557; // [rsp+440h] [rbp+340h]
-  UFG::qSymbol v558; // [rsp+444h] [rbp+344h]
-  UFG::qSymbol v559; // [rsp+448h] [rbp+348h]
-  UFG::qSymbol v560; // [rsp+44Ch] [rbp+34Ch]
-  UFG::qSymbol v561; // [rsp+450h] [rbp+350h]
-  UFG::qSymbol v562; // [rsp+454h] [rbp+354h]
-  UFG::qSymbol v563; // [rsp+458h] [rbp+358h]
-  UFG::qSymbol v564; // [rsp+45Ch] [rbp+35Ch]
-  UFG::qSymbol v565; // [rsp+460h] [rbp+360h]
-  UFG::qSymbol v566; // [rsp+464h] [rbp+364h]
-  UFG::qSymbol v567; // [rsp+468h] [rbp+368h]
-  UFG::qSymbol v568; // [rsp+46Ch] [rbp+36Ch]
-  UFG::qSymbol v569; // [rsp+470h] [rbp+370h]
-  UFG::qSymbol v570; // [rsp+474h] [rbp+374h]
-  UFG::qSymbol v571; // [rsp+478h] [rbp+378h]
-  UFG::qSymbol v572; // [rsp+47Ch] [rbp+37Ch]
-  UFG::qSymbol v573; // [rsp+480h] [rbp+380h]
-  UFG::qSymbol v574; // [rsp+484h] [rbp+384h]
-  UFG::qSymbol v575; // [rsp+488h] [rbp+388h]
-  UFG::qSymbol v576; // [rsp+48Ch] [rbp+38Ch]
-  UFG::qSymbol v577; // [rsp+490h] [rbp+390h]
-  UFG::qSymbol v578; // [rsp+494h] [rbp+394h]
-  UFG::qSymbol v579; // [rsp+498h] [rbp+398h]
-  UFG::qSymbol v580; // [rsp+49Ch] [rbp+39Ch]
-  UFG::qSymbol v581; // [rsp+4A0h] [rbp+3A0h]
-  UFG::qSymbol v582; // [rsp+4A4h] [rbp+3A4h]
-  UFG::qSymbol v583; // [rsp+4A8h] [rbp+3A8h]
-  UFG::qSymbol v584; // [rsp+4ACh] [rbp+3ACh]
-  UFG::qSymbol v585; // [rsp+4B0h] [rbp+3B0h]
-  UFG::qSymbol v586; // [rsp+4B4h] [rbp+3B4h]
-  UFG::qSymbol v587; // [rsp+4B8h] [rbp+3B8h]
-  UFG::qSymbol v588; // [rsp+4BCh] [rbp+3BCh]
-  UFG::qSymbol v589; // [rsp+4C0h] [rbp+3C0h]
-  UFG::qSymbol v590; // [rsp+4C4h] [rbp+3C4h]
-  UFG::qSymbol v591; // [rsp+4C8h] [rbp+3C8h]
-  UFG::qSymbol v592; // [rsp+4CCh] [rbp+3CCh]
-  UFG::qSymbol v593; // [rsp+4D0h] [rbp+3D0h]
-  UFG::qSymbol v594; // [rsp+4D4h] [rbp+3D4h]
-  UFG::qSymbol v595; // [rsp+4D8h] [rbp+3D8h]
-  UFG::qSymbol v596; // [rsp+4DCh] [rbp+3DCh]
-  UFG::qSymbol v597; // [rsp+4E0h] [rbp+3E0h]
-  UFG::qSymbol v598; // [rsp+4E4h] [rbp+3E4h]
-  UFG::qSymbol v599; // [rsp+4E8h] [rbp+3E8h]
-  UFG::qSymbol v600; // [rsp+4ECh] [rbp+3ECh]
-  UFG::qSymbol v601; // [rsp+4F0h] [rbp+3F0h]
-  UFG::qSymbol v602; // [rsp+4F4h] [rbp+3F4h]
-  UFG::qSymbol v603; // [rsp+4F8h] [rbp+3F8h]
-  UFG::qSymbol v604; // [rsp+4FCh] [rbp+3FCh]
-  UFG::qSymbol v605; // [rsp+500h] [rbp+400h]
-  UFG::qSymbol v606; // [rsp+504h] [rbp+404h]
-  UFG::qSymbol v607; // [rsp+508h] [rbp+408h]
-  UFG::qSymbol v608; // [rsp+50Ch] [rbp+40Ch]
-  UFG::qSymbol source; // [rsp+510h] [rbp+410h]
-  UFG::qSymbol v610; // [rsp+514h] [rbp+414h]
-  UFG::qSymbol v611[2]; // [rsp+518h] [rbp+418h]
-  UFG::qSymbol v612; // [rsp+520h] [rbp+420h]
-  UEL::Value::Type alwaysReturns; // [rsp+528h] [rbp+428h]
-  UFG::qSymbol v614; // [rsp+530h] [rbp+430h]
-  qEnum<enum UEL::Value::BaseType,unsigned short> v615; // [rsp+538h] [rbp+438h]
-  UFG::qSymbol v616; // [rsp+53Ch] [rbp+43Ch]
-  UFG::qSymbol v617; // [rsp+540h] [rbp+440h]
-  UFG::qSymbol v618; // [rsp+544h] [rbp+444h]
-  UFG::qSymbol v619; // [rsp+548h] [rbp+448h]
-  UFG::qSymbol v620; // [rsp+54Ch] [rbp+44Ch]
-  UFG::qSymbol v621[2]; // [rsp+550h] [rbp+450h]
-  UFG::qSymbol v622[2]; // [rsp+558h] [rbp+458h]
+  UEL::Value::Type v528; // [rsp+3C8h] [rbp+2C8h] BYREF
+  UFG::qSymbol v529; // [rsp+3D0h] [rbp+2D0h] BYREF
+  UFG::qSymbol v530; // [rsp+3D4h] [rbp+2D4h] BYREF
+  UFG::qSymbol v531; // [rsp+3D8h] [rbp+2D8h] BYREF
+  UFG::qSymbol v532; // [rsp+3DCh] [rbp+2DCh] BYREF
+  UFG::qSymbol v533; // [rsp+3E0h] [rbp+2E0h] BYREF
+  UFG::qSymbol v534; // [rsp+3E4h] [rbp+2E4h] BYREF
+  UFG::qSymbol v535; // [rsp+3E8h] [rbp+2E8h] BYREF
+  UFG::qSymbol v536; // [rsp+3ECh] [rbp+2ECh] BYREF
+  UFG::qSymbol v537; // [rsp+3F0h] [rbp+2F0h] BYREF
+  UFG::qSymbol v538; // [rsp+3F4h] [rbp+2F4h] BYREF
+  UFG::qSymbol v539; // [rsp+3F8h] [rbp+2F8h] BYREF
+  UFG::qSymbol result; // [rsp+3FCh] [rbp+2FCh] BYREF
+  UFG::qSymbol v541; // [rsp+400h] [rbp+300h] BYREF
+  UFG::qSymbol v542; // [rsp+404h] [rbp+304h] BYREF
+  UFG::qSymbol v543; // [rsp+408h] [rbp+308h] BYREF
+  UFG::qSymbol v544; // [rsp+40Ch] [rbp+30Ch] BYREF
+  UFG::qSymbol v545; // [rsp+410h] [rbp+310h] BYREF
+  UFG::qSymbol v546; // [rsp+414h] [rbp+314h] BYREF
+  UFG::qSymbol v547; // [rsp+418h] [rbp+318h] BYREF
+  UFG::qSymbol v548; // [rsp+41Ch] [rbp+31Ch] BYREF
+  UFG::qSymbol v549; // [rsp+420h] [rbp+320h] BYREF
+  UFG::qSymbol v550; // [rsp+424h] [rbp+324h] BYREF
+  UFG::qSymbol v551; // [rsp+428h] [rbp+328h] BYREF
+  UFG::qSymbol v552; // [rsp+42Ch] [rbp+32Ch] BYREF
+  UFG::qSymbol v553; // [rsp+430h] [rbp+330h] BYREF
+  UFG::qSymbol v554; // [rsp+434h] [rbp+334h] BYREF
+  UFG::qSymbol v555; // [rsp+438h] [rbp+338h] BYREF
+  UFG::qSymbol v556; // [rsp+43Ch] [rbp+33Ch] BYREF
+  UFG::qSymbol v557; // [rsp+440h] [rbp+340h] BYREF
+  UFG::qSymbol v558; // [rsp+444h] [rbp+344h] BYREF
+  UFG::qSymbol v559; // [rsp+448h] [rbp+348h] BYREF
+  UFG::qSymbol v560; // [rsp+44Ch] [rbp+34Ch] BYREF
+  UFG::qSymbol v561; // [rsp+450h] [rbp+350h] BYREF
+  UFG::qSymbol v562; // [rsp+454h] [rbp+354h] BYREF
+  UFG::qSymbol v563; // [rsp+458h] [rbp+358h] BYREF
+  UFG::qSymbol v564; // [rsp+45Ch] [rbp+35Ch] BYREF
+  UFG::qSymbol v565; // [rsp+460h] [rbp+360h] BYREF
+  UFG::qSymbol v566; // [rsp+464h] [rbp+364h] BYREF
+  UFG::qSymbol v567; // [rsp+468h] [rbp+368h] BYREF
+  UFG::qSymbol v568; // [rsp+46Ch] [rbp+36Ch] BYREF
+  UFG::qSymbol v569; // [rsp+470h] [rbp+370h] BYREF
+  UFG::qSymbol v570; // [rsp+474h] [rbp+374h] BYREF
+  UFG::qSymbol v571; // [rsp+478h] [rbp+378h] BYREF
+  UFG::qSymbol v572; // [rsp+47Ch] [rbp+37Ch] BYREF
+  UFG::qSymbol v573; // [rsp+480h] [rbp+380h] BYREF
+  UFG::qSymbol v574; // [rsp+484h] [rbp+384h] BYREF
+  UFG::qSymbol v575; // [rsp+488h] [rbp+388h] BYREF
+  UFG::qSymbol v576; // [rsp+48Ch] [rbp+38Ch] BYREF
+  UFG::qSymbol v577; // [rsp+490h] [rbp+390h] BYREF
+  UFG::qSymbol v578; // [rsp+494h] [rbp+394h] BYREF
+  UFG::qSymbol v579; // [rsp+498h] [rbp+398h] BYREF
+  UFG::qSymbol v580; // [rsp+49Ch] [rbp+39Ch] BYREF
+  UFG::qSymbol v581; // [rsp+4A0h] [rbp+3A0h] BYREF
+  UFG::qSymbol v582; // [rsp+4A4h] [rbp+3A4h] BYREF
+  UFG::qSymbol v583; // [rsp+4A8h] [rbp+3A8h] BYREF
+  UFG::qSymbol v584; // [rsp+4ACh] [rbp+3ACh] BYREF
+  UFG::qSymbol v585; // [rsp+4B0h] [rbp+3B0h] BYREF
+  UFG::qSymbol v586; // [rsp+4B4h] [rbp+3B4h] BYREF
+  UFG::qSymbol v587; // [rsp+4B8h] [rbp+3B8h] BYREF
+  UFG::qSymbol v588; // [rsp+4BCh] [rbp+3BCh] BYREF
+  UFG::qSymbol v589; // [rsp+4C0h] [rbp+3C0h] BYREF
+  UFG::qSymbol v590; // [rsp+4C4h] [rbp+3C4h] BYREF
+  UFG::qSymbol v591; // [rsp+4C8h] [rbp+3C8h] BYREF
+  UFG::qSymbol v592; // [rsp+4CCh] [rbp+3CCh] BYREF
+  UFG::qSymbol v593; // [rsp+4D0h] [rbp+3D0h] BYREF
+  UFG::qSymbol v594; // [rsp+4D4h] [rbp+3D4h] BYREF
+  UFG::qSymbol v595; // [rsp+4D8h] [rbp+3D8h] BYREF
+  UFG::qSymbol v596; // [rsp+4DCh] [rbp+3DCh] BYREF
+  UFG::qSymbol v597; // [rsp+4E0h] [rbp+3E0h] BYREF
+  UFG::qSymbol v598; // [rsp+4E4h] [rbp+3E4h] BYREF
+  UFG::qSymbol v599; // [rsp+4E8h] [rbp+3E8h] BYREF
+  UFG::qSymbol v600; // [rsp+4ECh] [rbp+3ECh] BYREF
+  UFG::qSymbol v601; // [rsp+4F0h] [rbp+3F0h] BYREF
+  UFG::qSymbol v602; // [rsp+4F4h] [rbp+3F4h] BYREF
+  UFG::qSymbol v603; // [rsp+4F8h] [rbp+3F8h] BYREF
+  UFG::qSymbol v604; // [rsp+4FCh] [rbp+3FCh] BYREF
+  UFG::qSymbol v605; // [rsp+500h] [rbp+400h] BYREF
+  UFG::qSymbol v606; // [rsp+504h] [rbp+404h] BYREF
+  UFG::qSymbol v607; // [rsp+508h] [rbp+408h] BYREF
+  UFG::qSymbol v608; // [rsp+50Ch] [rbp+40Ch] BYREF
+  UFG::qSymbol source; // [rsp+510h] [rbp+410h] BYREF
+  UFG::qSymbol v610; // [rsp+514h] [rbp+414h] BYREF
+  UFG::qSymbol v611[2]; // [rsp+518h] [rbp+418h] BYREF
+  UFG::qSymbol v612; // [rsp+520h] [rbp+420h] BYREF
+  UEL::Value::Type alwaysReturns; // [rsp+528h] [rbp+428h] BYREF
+  UFG::qSymbol v614; // [rsp+530h] [rbp+430h] BYREF
+  qEnum<enum UEL::Value::BaseType,unsigned short> v615; // [rsp+538h] [rbp+438h] BYREF
+  UFG::qSymbol v616; // [rsp+53Ch] [rbp+43Ch] BYREF
+  UFG::qSymbol v617; // [rsp+540h] [rbp+440h] BYREF
+  UFG::qSymbol v618; // [rsp+544h] [rbp+444h] BYREF
+  UFG::qSymbol v619; // [rsp+548h] [rbp+448h] BYREF
+  UFG::qSymbol v620; // [rsp+54Ch] [rbp+44Ch] BYREF
+  UFG::qSymbol v621[2]; // [rsp+550h] [rbp+450h] BYREF
+  UFG::qSymbol v622[2]; // [rsp+558h] [rbp+458h] BYREF
   unsigned int v623; // [rsp+560h] [rbp+460h]
   __int16 v624; // [rsp+564h] [rbp+464h]
   int v625; // [rsp+568h] [rbp+468h]
@@ -669,83 +668,83 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   __int16 v665; // [rsp+608h] [rbp+508h]
   unsigned int v666; // [rsp+60Ch] [rbp+50Ch]
   unsigned int v667; // [rsp+610h] [rbp+510h]
-  UEL::Value::Type v668; // [rsp+618h] [rbp+518h]
+  UEL::Value::Type v668; // [rsp+618h] [rbp+518h] BYREF
   unsigned int v669; // [rsp+620h] [rbp+520h]
-  UEL::Value::Type v670; // [rsp+628h] [rbp+528h]
+  UEL::Value::Type v670; // [rsp+628h] [rbp+528h] BYREF
   unsigned int v671; // [rsp+630h] [rbp+530h]
-  UEL::Value::Type v672; // [rsp+638h] [rbp+538h]
+  UEL::Value::Type v672; // [rsp+638h] [rbp+538h] BYREF
   unsigned int v673; // [rsp+640h] [rbp+540h]
-  UEL::Value::Type v674; // [rsp+648h] [rbp+548h]
+  UEL::Value::Type v674; // [rsp+648h] [rbp+548h] BYREF
   unsigned int v675; // [rsp+650h] [rbp+550h]
-  UEL::Value::Type v676; // [rsp+658h] [rbp+558h]
+  UEL::Value::Type v676; // [rsp+658h] [rbp+558h] BYREF
   unsigned int v677; // [rsp+660h] [rbp+560h]
-  UEL::Value::Type v678; // [rsp+668h] [rbp+568h]
+  UEL::Value::Type v678; // [rsp+668h] [rbp+568h] BYREF
   unsigned int v679; // [rsp+670h] [rbp+570h]
-  UEL::Value::Type v680; // [rsp+678h] [rbp+578h]
+  UEL::Value::Type v680; // [rsp+678h] [rbp+578h] BYREF
   unsigned int v681; // [rsp+680h] [rbp+580h]
-  UEL::Value::Type v682; // [rsp+688h] [rbp+588h]
+  UEL::Value::Type v682; // [rsp+688h] [rbp+588h] BYREF
   unsigned int v683; // [rsp+690h] [rbp+590h]
-  UEL::Value::Type v684; // [rsp+698h] [rbp+598h]
+  UEL::Value::Type v684; // [rsp+698h] [rbp+598h] BYREF
   unsigned int v685; // [rsp+6A0h] [rbp+5A0h]
-  UEL::Value::Type v686; // [rsp+6A8h] [rbp+5A8h]
+  UEL::Value::Type v686; // [rsp+6A8h] [rbp+5A8h] BYREF
   unsigned int v687; // [rsp+6B0h] [rbp+5B0h]
-  UEL::Value::Type v688; // [rsp+6B8h] [rbp+5B8h]
+  UEL::Value::Type v688; // [rsp+6B8h] [rbp+5B8h] BYREF
   unsigned int v689; // [rsp+6C0h] [rbp+5C0h]
-  UEL::Value::Type v690; // [rsp+6C8h] [rbp+5C8h]
-  UFG::qSymbol v691; // [rsp+6D0h] [rbp+5D0h]
-  UEL::Value::Type v692; // [rsp+6D8h] [rbp+5D8h]
-  UFG::qSymbol v693; // [rsp+6E0h] [rbp+5E0h]
-  UEL::Value::Type v694; // [rsp+6E8h] [rbp+5E8h]
-  UFG::qSymbol v695; // [rsp+6F0h] [rbp+5F0h]
-  UEL::Value::Type v696; // [rsp+6F8h] [rbp+5F8h]
-  UFG::qSymbol v697; // [rsp+700h] [rbp+600h]
-  UEL::Value::Type v698; // [rsp+708h] [rbp+608h]
+  UEL::Value::Type v690; // [rsp+6C8h] [rbp+5C8h] BYREF
+  UFG::qSymbol v691; // [rsp+6D0h] [rbp+5D0h] BYREF
+  UEL::Value::Type v692; // [rsp+6D8h] [rbp+5D8h] BYREF
+  UFG::qSymbol v693; // [rsp+6E0h] [rbp+5E0h] BYREF
+  UEL::Value::Type v694; // [rsp+6E8h] [rbp+5E8h] BYREF
+  UFG::qSymbol v695; // [rsp+6F0h] [rbp+5F0h] BYREF
+  UEL::Value::Type v696; // [rsp+6F8h] [rbp+5F8h] BYREF
+  UFG::qSymbol v697; // [rsp+700h] [rbp+600h] BYREF
+  UEL::Value::Type v698; // [rsp+708h] [rbp+608h] BYREF
   unsigned int v699; // [rsp+710h] [rbp+610h]
-  UEL::Value::Type v700; // [rsp+718h] [rbp+618h]
+  UEL::Value::Type v700; // [rsp+718h] [rbp+618h] BYREF
   int v701; // [rsp+720h] [rbp+620h]
-  UEL::Value::Type v702; // [rsp+728h] [rbp+628h]
+  UEL::Value::Type v702; // [rsp+728h] [rbp+628h] BYREF
   int v703; // [rsp+730h] [rbp+630h]
-  UEL::Value::Type v704; // [rsp+738h] [rbp+638h]
+  UEL::Value::Type v704; // [rsp+738h] [rbp+638h] BYREF
   int v705; // [rsp+740h] [rbp+640h]
-  UEL::Value::Type v706; // [rsp+748h] [rbp+648h]
+  UEL::Value::Type v706; // [rsp+748h] [rbp+648h] BYREF
   unsigned int v707; // [rsp+750h] [rbp+650h]
-  UEL::Value::Type v708; // [rsp+758h] [rbp+658h]
+  UEL::Value::Type v708; // [rsp+758h] [rbp+658h] BYREF
   __int16 v709; // [rsp+760h] [rbp+660h]
   unsigned int v710; // [rsp+764h] [rbp+664h]
-  UEL::Value::Type v711; // [rsp+768h] [rbp+668h]
+  UEL::Value::Type v711; // [rsp+768h] [rbp+668h] BYREF
   __int16 v712; // [rsp+770h] [rbp+670h]
   unsigned int v713; // [rsp+774h] [rbp+674h]
-  UEL::Value::Type v714; // [rsp+778h] [rbp+678h]
+  UEL::Value::Type v714; // [rsp+778h] [rbp+678h] BYREF
   __int16 v715; // [rsp+780h] [rbp+680h]
   int v716; // [rsp+784h] [rbp+684h]
-  UEL::Value::Type v717; // [rsp+788h] [rbp+688h]
+  UEL::Value::Type v717; // [rsp+788h] [rbp+688h] BYREF
   __int16 v718; // [rsp+790h] [rbp+690h]
   int v719; // [rsp+794h] [rbp+694h]
-  UEL::Value::Type v720; // [rsp+798h] [rbp+698h]
+  UEL::Value::Type v720; // [rsp+798h] [rbp+698h] BYREF
   unsigned int v721; // [rsp+7A0h] [rbp+6A0h]
-  UEL::Value::Type v722; // [rsp+7A8h] [rbp+6A8h]
+  UEL::Value::Type v722; // [rsp+7A8h] [rbp+6A8h] BYREF
   unsigned int v723; // [rsp+7B0h] [rbp+6B0h]
-  UEL::Value::Type v724; // [rsp+7B8h] [rbp+6B8h]
+  UEL::Value::Type v724; // [rsp+7B8h] [rbp+6B8h] BYREF
   unsigned int v725; // [rsp+7C0h] [rbp+6C0h]
-  UEL::Value::Type v726; // [rsp+7C8h] [rbp+6C8h]
+  UEL::Value::Type v726; // [rsp+7C8h] [rbp+6C8h] BYREF
   unsigned int v727; // [rsp+7D0h] [rbp+6D0h]
-  UEL::Value::Type v728; // [rsp+7D8h] [rbp+6D8h]
+  UEL::Value::Type v728; // [rsp+7D8h] [rbp+6D8h] BYREF
   unsigned int v729; // [rsp+7E0h] [rbp+6E0h]
-  UEL::Value::Type v730; // [rsp+7E8h] [rbp+6E8h]
+  UEL::Value::Type v730; // [rsp+7E8h] [rbp+6E8h] BYREF
   int v731; // [rsp+7F0h] [rbp+6F0h]
-  UEL::Value::Type v732; // [rsp+7F8h] [rbp+6F8h]
+  UEL::Value::Type v732; // [rsp+7F8h] [rbp+6F8h] BYREF
   int v733; // [rsp+800h] [rbp+700h]
-  UEL::Value::Type v734; // [rsp+808h] [rbp+708h]
+  UEL::Value::Type v734; // [rsp+808h] [rbp+708h] BYREF
   unsigned int v735; // [rsp+810h] [rbp+710h]
-  UEL::Value::Type v736; // [rsp+818h] [rbp+718h]
+  UEL::Value::Type v736; // [rsp+818h] [rbp+718h] BYREF
   unsigned int v737; // [rsp+820h] [rbp+720h]
-  UEL::Value::Type v738; // [rsp+828h] [rbp+728h]
+  UEL::Value::Type v738; // [rsp+828h] [rbp+728h] BYREF
   unsigned int v739; // [rsp+830h] [rbp+730h]
-  UEL::Value::Type v740; // [rsp+838h] [rbp+738h]
+  UEL::Value::Type v740; // [rsp+838h] [rbp+738h] BYREF
   unsigned int v741; // [rsp+840h] [rbp+740h]
-  UEL::Value::Type v742; // [rsp+848h] [rbp+748h]
+  UEL::Value::Type v742; // [rsp+848h] [rbp+748h] BYREF
   unsigned int v743; // [rsp+850h] [rbp+750h]
-  UEL::Value::Type v744; // [rsp+858h] [rbp+758h]
+  UEL::Value::Type v744; // [rsp+858h] [rbp+758h] BYREF
   unsigned int v745; // [rsp+860h] [rbp+760h]
   int v746; // [rsp+864h] [rbp+764h]
   unsigned int v747; // [rsp+868h] [rbp+768h]
@@ -787,26 +786,26 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   __int64 v783; // [rsp+8F8h] [rbp+7F8h]
   UFG::qSymbol *v784; // [rsp+900h] [rbp+800h]
   UEL::Value::Type *v785; // [rsp+908h] [rbp+808h]
-  UEL::Value::Type v786; // [rsp+910h] [rbp+810h]
+  UEL::Value::Type v786; // [rsp+910h] [rbp+810h] BYREF
   UFG::qSymbol *v787; // [rsp+918h] [rbp+818h]
-  UEL::Value::Type v788; // [rsp+920h] [rbp+820h]
+  UEL::Value::Type v788; // [rsp+920h] [rbp+820h] BYREF
   UFG::qSymbol *v789; // [rsp+928h] [rbp+828h]
-  UEL::Value::Type v790; // [rsp+930h] [rbp+830h]
-  UEL::Value::Type v791; // [rsp+938h] [rbp+838h]
-  UEL::Value::Type v792; // [rsp+940h] [rbp+840h]
-  UEL::Value::Type v793; // [rsp+948h] [rbp+848h]
-  UEL::Value::Type v794; // [rsp+950h] [rbp+850h]
+  UEL::Value::Type v790; // [rsp+930h] [rbp+830h] BYREF
+  UEL::Value::Type v791; // [rsp+938h] [rbp+838h] BYREF
+  UEL::Value::Type v792; // [rsp+940h] [rbp+840h] BYREF
+  UEL::Value::Type v793; // [rsp+948h] [rbp+848h] BYREF
+  UEL::Value::Type v794; // [rsp+950h] [rbp+850h] BYREF
   __int64 v795; // [rsp+958h] [rbp+858h]
   __int64 v796; // [rsp+960h] [rbp+860h]
-  UEL::Value::Type v797; // [rsp+968h] [rbp+868h]
+  UEL::Value::Type v797; // [rsp+968h] [rbp+868h] BYREF
   __int64 v798; // [rsp+970h] [rbp+870h]
   __int64 v799; // [rsp+978h] [rbp+878h]
   UEL::Value::Type *v800; // [rsp+980h] [rbp+880h]
   __int64 v801; // [rsp+988h] [rbp+888h]
   __int64 v802; // [rsp+990h] [rbp+890h]
   char *v803; // [rsp+998h] [rbp+898h]
-  UEL::Value::Type v804; // [rsp+9A0h] [rbp+8A0h]
-  UFG::ScalingPreset::RegionValues v805; // [rsp+9B0h] [rbp+8B0h]
+  UEL::Value::Type v804; // [rsp+9A0h] [rbp+8A0h] BYREF
+  UFG::ScalingPreset::RegionValues v805; // [rsp+9B0h] [rbp+8B0h] BYREF
   __int64 v806; // [rsp+A00h] [rbp+900h]
   __int64 v807; // [rsp+A08h] [rbp+908h]
   __int64 v808; // [rsp+A10h] [rbp+910h]
@@ -817,13 +816,12 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   __int64 v813; // [rsp+A38h] [rbp+938h]
   __int64 v814; // [rsp+A40h] [rbp+940h]
   __int64 v815; // [rsp+A48h] [rbp+948h]
-  UFG::allocator::free_link *v816; // [rsp+AF0h] [rbp+9F0h]
-  __int16 *v817; // [rsp+AF8h] [rbp+9F8h]
-  __int16 *v818; // [rsp+B00h] [rbp+A00h]
-  __int16 *v819; // [rsp+B08h] [rbp+A08h]
+  UFG::allocator::free_link *v816; // [rsp+AF0h] [rbp+9F0h] BYREF
+  __int16 *v817; // [rsp+AF8h] [rbp+9F8h] BYREF
+  __int16 *v818; // [rsp+B00h] [rbp+A00h] BYREF
+  __int16 *v819; // [rsp+B08h] [rbp+A08h] BYREF
 
   v783 = -2i64;
-  v1 = pParameterData;
   v2 = 0i64;
   v806 = 0i64;
   v807 = 0i64;
@@ -843,7 +841,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
     v817 = &v431;
     v818 = &v331;
     v431 = 0;
-    v432 = UFG::gNullQSymbol.mUID;
+    mUID = UFG::gNullQSymbol.mUID;
     v331 = 9;
     v332 = UFG::gNullQSymbol.mUID;
     v4 = result.mUID;
@@ -856,7 +854,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
     WORD2(v3[4].mNext) = v331;
     LODWORD(v3[5].mNext) = v332;
     WORD2(v3[5].mNext) = v431;
-    LODWORD(v3[6].mNext) = v432;
+    LODWORD(v3[6].mNext) = mUID;
     BYTE4(v3[6].mNext) = 0;
     LODWORD(v3[7].mNext) = 0;
     v3[8].mNext = 0i64;
@@ -866,7 +864,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   {
     v3 = 0i64;
   }
-  UFG::qBaseTreeRB::Add(&v1->mTree, (UFG::qBaseNodeRB *)v3);
+  UFG::qBaseTreeRB::Add(&pParameterData->mTree, (UFG::qBaseNodeRB *)v3);
   UFG::qSymbol::create_from_string(&v618, "GangMember2");
   v5 = UFG::qMalloc(0x50ui64, UFG::gGlobalNewName, 0i64);
   v816 = v5;
@@ -901,7 +899,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   {
     v5 = 0i64;
   }
-  UFG::qBaseTreeRB::Add(&v1->mTree, (UFG::qBaseNodeRB *)v5);
+  UFG::qBaseTreeRB::Add(&pParameterData->mTree, (UFG::qBaseNodeRB *)v5);
   UFG::qSymbol::create_from_string(&v620, "MeleeWeapon2");
   v7 = UFG::qMalloc(0x50ui64, UFG::gGlobalNewName, 0i64);
   v816 = v7;
@@ -936,7 +934,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   {
     v7 = 0i64;
   }
-  UFG::qBaseTreeRB::Add(&v1->mTree, (UFG::qBaseNodeRB *)v7);
+  UFG::qBaseTreeRB::Add(&pParameterData->mTree, (UFG::qBaseNodeRB *)v7);
   UFG::qSymbol::create_from_string(&v608, "RangedWeapon2");
   v9 = UFG::qMalloc(0x50ui64, UFG::gGlobalNewName, 0i64);
   v816 = v9;
@@ -971,7 +969,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   {
     v9 = 0i64;
   }
-  UFG::qBaseTreeRB::Add(&v1->mTree, (UFG::qBaseNodeRB *)v9);
+  UFG::qBaseTreeRB::Add(&pParameterData->mTree, (UFG::qBaseNodeRB *)v9);
   UFG::qSymbol::create_from_string(&v532, "ThrownWeapon2");
   v11 = UFG::qMalloc(0x50ui64, UFG::gGlobalNewName, 0i64);
   v816 = v11;
@@ -1006,7 +1004,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   {
     v11 = 0i64;
   }
-  UFG::qBaseTreeRB::Add(&v1->mTree, (UFG::qBaseNodeRB *)v11);
+  UFG::qBaseTreeRB::Add(&pParameterData->mTree, (UFG::qBaseNodeRB *)v11);
   v13 = (UFG::qBaseTreeRB *)UFG::qMalloc(0x48ui64, UFG::gGlobalNewName, 0i64);
   v14 = v13;
   v817 = (__int16 *)v13;
@@ -1085,18 +1083,18 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   {
     v818 = &v325;
     v819 = &v443;
-    v701 = (signed int)v816;
+    v701 = (int)v816;
     v758 = 8;
-    v759 = (signed int)v816;
+    v759 = (int)v816;
     v325 = 8;
-    v326 = (signed int)v816;
-    v774 = (signed int)v816;
+    v326 = (int)v816;
+    v774 = (int)v816;
     v715 = 8;
-    v716 = (signed int)v816;
+    v716 = (int)v816;
     v443 = 8;
-    v444 = (signed int)v816;
-    v20 = (signed int)v816;
-    v703 = (signed int)v816;
+    v444 = (int)v816;
+    v20 = (int)v816;
+    v703 = (int)v816;
     v19->mNext = 0i64;
     v19[1].mNext = 0i64;
     v19[2].mNext = 0i64;
@@ -1115,7 +1113,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   {
     v19 = 0i64;
   }
-  UFG::qBaseTreeRB::Add(&v1->mTree, (UFG::qBaseNodeRB *)v19);
+  UFG::qBaseTreeRB::Add(&pParameterData->mTree, (UFG::qBaseNodeRB *)v19);
   v21 = (UFG::qBaseTreeRB *)UFG::qMalloc(0x48ui64, UFG::gGlobalNewName, 0i64);
   v22 = v21;
   v818 = (__int16 *)v21;
@@ -1162,18 +1160,18 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   {
     v819 = &v447;
     v309 = (UEL::Value::Type)&v363;
-    v705 = (signed int)v817;
+    v705 = (int)v817;
     v781 = 8;
-    v782 = (signed int)v817;
+    v782 = (int)v817;
     v447 = 8;
-    v448 = (signed int)v817;
-    v746 = (signed int)v817;
+    v448 = (int)v817;
+    v746 = (int)v817;
     v718 = 8;
-    v719 = (signed int)v817;
+    v719 = (int)v817;
     v363 = 8;
-    v364 = (signed int)v817;
-    v26 = (signed int)v817;
-    v748 = (signed int)v817;
+    v364 = (int)v817;
+    v26 = (int)v817;
+    v748 = (int)v817;
     v25->mNext = 0i64;
     v25[1].mNext = 0i64;
     v25[2].mNext = 0i64;
@@ -1192,7 +1190,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   {
     v25 = 0i64;
   }
-  UFG::qBaseTreeRB::Add(&v1->mTree, (UFG::qBaseNodeRB *)v25);
+  UFG::qBaseTreeRB::Add(&pParameterData->mTree, (UFG::qBaseNodeRB *)v25);
   v27 = (UFG::qBaseTreeRB *)UFG::qMalloc(0x48ui64, UFG::gGlobalNewName, 0i64);
   v28 = v27;
   v819 = (__int16 *)v27;
@@ -1206,7 +1204,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   if ( v29 )
   {
     v309 = (UEL::Value::Type)&v518;
-    v310 = (UEL::Value::Type)&v367;
+    p_alwaysReturns = (UEL::Value::Type)&v367;
     v518 = 7;
     v519 = UFG::gNullQSymbol.mUID;
     v367 = 7;
@@ -1238,7 +1236,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   if ( v31 )
   {
     v309 = (UEL::Value::Type)&v451;
-    v310 = (UEL::Value::Type)&v371;
+    p_alwaysReturns = (UEL::Value::Type)&v371;
     v451 = 4;
     v452 = UFG::gNullQSymbol.mUID;
     v371 = 4;
@@ -1270,7 +1268,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   if ( v33 )
   {
     v309 = (UEL::Value::Type)&v490;
-    v310 = (UEL::Value::Type)&v375;
+    p_alwaysReturns = (UEL::Value::Type)&v375;
     v490 = 5;
     v491 = UFG::gNullQSymbol.mUID;
     v375 = 23;
@@ -1302,19 +1300,19 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   if ( v35 )
   {
     v309 = (UEL::Value::Type)&v455;
-    v310 = (UEL::Value::Type)&v379;
-    v731 = (signed int)v818;
+    p_alwaysReturns = (UEL::Value::Type)&v379;
+    v731 = (int)v818;
     v770 = 8;
-    v771 = (signed int)v818;
+    v771 = (int)v818;
     v455 = 8;
-    v456 = (signed int)v818;
-    v658 = (signed int)v818;
+    v456 = (int)v818;
+    v658 = (int)v818;
     v624 = 8;
-    v625 = (signed int)v818;
+    v625 = (int)v818;
     v379 = 8;
-    v380 = (signed int)v818;
-    v36 = (signed int)v818;
-    v777 = (signed int)v818;
+    v380 = (int)v818;
+    v36 = (int)v818;
+    v777 = (int)v818;
     v35->mNext = 0i64;
     v35[1].mNext = 0i64;
     v35[2].mNext = 0i64;
@@ -1333,7 +1331,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   {
     v35 = 0i64;
   }
-  UFG::qBaseTreeRB::Add(&v1->mTree, (UFG::qBaseNodeRB *)v35);
+  UFG::qBaseTreeRB::Add(&pParameterData->mTree, (UFG::qBaseNodeRB *)v35);
   v37 = (UFG::qBaseTreeRB *)UFG::qMalloc(0x48ui64, UFG::gGlobalNewName, 0i64);
   v38 = v37;
   v309 = (UEL::Value::Type)v37;
@@ -1348,7 +1346,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v39;
   if ( v39 )
   {
-    v310 = (UEL::Value::Type)&v510;
+    p_alwaysReturns = (UEL::Value::Type)&v510;
     v311 = (UEL::Value::Type)&v383;
     v510 = 7;
     v511 = UFG::gNullQSymbol.mUID;
@@ -1380,20 +1378,20 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v41;
   if ( v41 )
   {
-    v310 = (UEL::Value::Type)&v459;
+    p_alwaysReturns = (UEL::Value::Type)&v459;
     v311 = (UEL::Value::Type)&v387;
-    v733 = (signed int)v819;
+    v733 = (int)v819;
     v626 = 8;
-    v627 = (signed int)v819;
+    v627 = (int)v819;
     v459 = 8;
-    v460 = (signed int)v819;
-    v664 = (signed int)v819;
+    v460 = (int)v819;
+    v664 = (int)v819;
     v629 = 8;
-    v630 = (signed int)v819;
+    v630 = (int)v819;
     v387 = 8;
-    v388 = (signed int)v819;
-    v42 = (signed int)v819;
-    v768 = (signed int)v819;
+    v388 = (int)v819;
+    v42 = (int)v819;
+    v768 = (int)v819;
     v41->mNext = 0i64;
     v41[1].mNext = 0i64;
     v41[2].mNext = 0i64;
@@ -1412,7 +1410,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   {
     v41 = 0i64;
   }
-  UFG::qBaseTreeRB::Add(&v1->mTree, (UFG::qBaseNodeRB *)v41);
+  UFG::qBaseTreeRB::Add(&pParameterData->mTree, (UFG::qBaseNodeRB *)v41);
   v43 = (UFG::qBaseTreeRB *)UFG::qMalloc(0x48ui64, UFG::gGlobalNewName, 0i64);
   v44 = v43;
   v309 = (UEL::Value::Type)v43;
@@ -1427,7 +1425,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v45;
   if ( v45 )
   {
-    v310 = (UEL::Value::Type)&v494;
+    p_alwaysReturns = (UEL::Value::Type)&v494;
     v311 = (UEL::Value::Type)&v391;
     v494 = 8;
     v495 = UFG::gNullQSymbol.mUID;
@@ -1459,7 +1457,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v47;
   if ( v47 )
   {
-    v310 = (UEL::Value::Type)&v463;
+    p_alwaysReturns = (UEL::Value::Type)&v463;
     v311 = (UEL::Value::Type)&v395;
     v735 = v319.mUID;
     v632 = 8;
@@ -1491,7 +1489,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   {
     v47 = 0i64;
   }
-  UFG::qBaseTreeRB::Add(&v1->mTree, (UFG::qBaseNodeRB *)v47);
+  UFG::qBaseTreeRB::Add(&pParameterData->mTree, (UFG::qBaseNodeRB *)v47);
   v49 = (UFG::qBaseTreeRB *)UFG::qMalloc(0x48ui64, UFG::gGlobalNewName, 0i64);
   v50 = v49;
   v309 = (UEL::Value::Type)v49;
@@ -1506,7 +1504,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v51;
   if ( v51 )
   {
-    v310 = (UEL::Value::Type)&v526;
+    p_alwaysReturns = (UEL::Value::Type)&v526;
     v311 = (UEL::Value::Type)&v399;
     v526 = 8;
     v527 = UFG::gNullQSymbol.mUID;
@@ -1538,7 +1536,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v53;
   if ( v53 )
   {
-    v310 = (UEL::Value::Type)&v467;
+    p_alwaysReturns = (UEL::Value::Type)&v467;
     v311 = (UEL::Value::Type)&v403;
     v673 = v316.mUID;
     v638 = 8;
@@ -1570,7 +1568,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   {
     v53 = 0i64;
   }
-  UFG::qBaseTreeRB::Add(&v1->mTree, (UFG::qBaseNodeRB *)v53);
+  UFG::qBaseTreeRB::Add(&pParameterData->mTree, (UFG::qBaseNodeRB *)v53);
   v55 = (UFG::qBaseTreeRB *)UFG::qMalloc(0x48ui64, UFG::gGlobalNewName, 0i64);
   v56 = v55;
   v309 = (UEL::Value::Type)v55;
@@ -1583,7 +1581,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v57;
   if ( v57 )
   {
-    v310 = (UEL::Value::Type)&v498;
+    p_alwaysReturns = (UEL::Value::Type)&v498;
     v311 = (UEL::Value::Type)&v407;
     v498 = 4;
     v499 = UFG::gNullQSymbol.mUID;
@@ -1615,7 +1613,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v59;
   if ( v59 )
   {
-    v310 = (UEL::Value::Type)&v471;
+    p_alwaysReturns = (UEL::Value::Type)&v471;
     v311 = (UEL::Value::Type)&v411;
     v471 = 4;
     v472 = UFG::gNullQSymbol.mUID;
@@ -1647,7 +1645,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v61;
   if ( v61 )
   {
-    v310 = (UEL::Value::Type)&v514;
+    p_alwaysReturns = (UEL::Value::Type)&v514;
     v311 = (UEL::Value::Type)&v415;
     v514 = 4;
     v515 = UFG::gNullQSymbol.mUID;
@@ -1679,7 +1677,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v63;
   if ( v63 )
   {
-    v310 = (UEL::Value::Type)&v475;
+    p_alwaysReturns = (UEL::Value::Type)&v475;
     v311 = (UEL::Value::Type)&v419;
     v475 = 4;
     v476 = UFG::gNullQSymbol.mUID;
@@ -1711,7 +1709,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v65;
   if ( v65 )
   {
-    v310 = (UEL::Value::Type)&v502;
+    p_alwaysReturns = (UEL::Value::Type)&v502;
     v311 = (UEL::Value::Type)&v423;
     v502 = 4;
     v503 = UFG::gNullQSymbol.mUID;
@@ -1743,7 +1741,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v67;
   if ( v67 )
   {
-    v310 = (UEL::Value::Type)&v327;
+    p_alwaysReturns = (UEL::Value::Type)&v327;
     v311 = (UEL::Value::Type)&v427;
     v327 = 4;
     v328 = UFG::gNullQSymbol.mUID;
@@ -1775,7 +1773,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v69;
   if ( v69 )
   {
-    v310 = (UEL::Value::Type)&v333;
+    p_alwaysReturns = (UEL::Value::Type)&v333;
     v311 = (UEL::Value::Type)&v329;
     v333 = 4;
     v334 = UFG::gNullQSymbol.mUID;
@@ -1807,7 +1805,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v71;
   if ( v71 )
   {
-    v310 = (UEL::Value::Type)&v341;
+    p_alwaysReturns = (UEL::Value::Type)&v341;
     v311 = (UEL::Value::Type)&v337;
     v341 = 4;
     v342 = UFG::gNullQSymbol.mUID;
@@ -1839,7 +1837,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v73;
   if ( v73 )
   {
-    v310 = (UEL::Value::Type)&v349;
+    p_alwaysReturns = (UEL::Value::Type)&v349;
     v311 = (UEL::Value::Type)&v345;
     v349 = 4;
     v350 = UFG::gNullQSymbol.mUID;
@@ -1871,7 +1869,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v75;
   if ( v75 )
   {
-    v310 = (UEL::Value::Type)&v357;
+    p_alwaysReturns = (UEL::Value::Type)&v357;
     v311 = (UEL::Value::Type)&v353;
     v357 = 4;
     v358 = UFG::gNullQSymbol.mUID;
@@ -1903,7 +1901,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v77;
   if ( v77 )
   {
-    v310 = (UEL::Value::Type)&v365;
+    p_alwaysReturns = (UEL::Value::Type)&v365;
     v311 = (UEL::Value::Type)&v361;
     v365 = 4;
     v366 = UFG::gNullQSymbol.mUID;
@@ -1935,7 +1933,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v79;
   if ( v79 )
   {
-    v310 = (UEL::Value::Type)&v373;
+    p_alwaysReturns = (UEL::Value::Type)&v373;
     v311 = (UEL::Value::Type)&v369;
     v373 = 4;
     v374 = UFG::gNullQSymbol.mUID;
@@ -1967,7 +1965,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v81;
   if ( v81 )
   {
-    v310 = (UEL::Value::Type)&v381;
+    p_alwaysReturns = (UEL::Value::Type)&v381;
     v311 = (UEL::Value::Type)&v377;
     v381 = 4;
     v382 = UFG::gNullQSymbol.mUID;
@@ -1999,7 +1997,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v83;
   if ( v83 )
   {
-    v310 = (UEL::Value::Type)&v389;
+    p_alwaysReturns = (UEL::Value::Type)&v389;
     v311 = (UEL::Value::Type)&v385;
     v689 = v318.mUID;
     v644 = 8;
@@ -2031,7 +2029,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   {
     v83 = 0i64;
   }
-  UFG::qBaseTreeRB::Add(&v1->mTree, (UFG::qBaseNodeRB *)v83);
+  UFG::qBaseTreeRB::Add(&pParameterData->mTree, (UFG::qBaseNodeRB *)v83);
   v85 = (UFG::qBaseTreeRB *)UFG::qMalloc(0x48ui64, UFG::gGlobalNewName, 0i64);
   v86 = v85;
   v309 = (UEL::Value::Type)v85;
@@ -2044,7 +2042,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v87;
   if ( v87 )
   {
-    v310 = (UEL::Value::Type)&v397;
+    p_alwaysReturns = (UEL::Value::Type)&v397;
     v311 = (UEL::Value::Type)&v393;
     v397 = 4;
     v398 = UFG::gNullQSymbol.mUID;
@@ -2076,7 +2074,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v89;
   if ( v89 )
   {
-    v310 = (UEL::Value::Type)&v405;
+    p_alwaysReturns = (UEL::Value::Type)&v405;
     v311 = (UEL::Value::Type)&v401;
     v405 = 4;
     v406 = UFG::gNullQSymbol.mUID;
@@ -2108,7 +2106,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v91;
   if ( v91 )
   {
-    v310 = (UEL::Value::Type)&v413;
+    p_alwaysReturns = (UEL::Value::Type)&v413;
     v311 = (UEL::Value::Type)&v409;
     v413 = 4;
     v414 = UFG::gNullQSymbol.mUID;
@@ -2140,7 +2138,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v93;
   if ( v93 )
   {
-    v310 = (UEL::Value::Type)&v421;
+    p_alwaysReturns = (UEL::Value::Type)&v421;
     v311 = (UEL::Value::Type)&v417;
     v421 = 4;
     v422 = UFG::gNullQSymbol.mUID;
@@ -2172,7 +2170,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v95;
   if ( v95 )
   {
-    v310 = (UEL::Value::Type)&v429;
+    p_alwaysReturns = (UEL::Value::Type)&v429;
     v311 = (UEL::Value::Type)&v425;
     v721 = v320.mUID;
     v650 = 8;
@@ -2204,7 +2202,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   {
     v95 = 0i64;
   }
-  UFG::qBaseTreeRB::Add(&v1->mTree, (UFG::qBaseNodeRB *)v95);
+  UFG::qBaseTreeRB::Add(&pParameterData->mTree, (UFG::qBaseNodeRB *)v95);
   v97 = (UFG::qBaseTreeRB *)UFG::qMalloc(0x48ui64, UFG::gGlobalNewName, 0i64);
   v98 = v97;
   v309 = (UEL::Value::Type)v97;
@@ -2217,7 +2215,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v99;
   if ( v99 )
   {
-    v310 = (UEL::Value::Type)&v437;
+    p_alwaysReturns = (UEL::Value::Type)&v437;
     v311 = (UEL::Value::Type)&v433;
     v437 = 4;
     v438 = UFG::gNullQSymbol.mUID;
@@ -2249,7 +2247,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v101;
   if ( v101 )
   {
-    v310 = (UEL::Value::Type)&v445;
+    p_alwaysReturns = (UEL::Value::Type)&v445;
     v311 = (UEL::Value::Type)&v441;
     v445 = 4;
     v446 = UFG::gNullQSymbol.mUID;
@@ -2281,7 +2279,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v103;
   if ( v103 )
   {
-    v310 = (UEL::Value::Type)&v453;
+    p_alwaysReturns = (UEL::Value::Type)&v453;
     v311 = (UEL::Value::Type)&v449;
     v453 = 4;
     v454 = UFG::gNullQSymbol.mUID;
@@ -2313,7 +2311,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v105;
   if ( v105 )
   {
-    v310 = (UEL::Value::Type)&v461;
+    p_alwaysReturns = (UEL::Value::Type)&v461;
     v311 = (UEL::Value::Type)&v457;
     v780 = v322.mUID;
     v656 = 8;
@@ -2345,7 +2343,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   {
     v105 = 0i64;
   }
-  UFG::qBaseTreeRB::Add(&v1->mTree, (UFG::qBaseNodeRB *)v105);
+  UFG::qBaseTreeRB::Add(&pParameterData->mTree, (UFG::qBaseNodeRB *)v105);
   v107 = (UFG::qBaseTreeRB *)UFG::qMalloc(0x48ui64, UFG::gGlobalNewName, 0i64);
   v108 = v107;
   v309 = (UEL::Value::Type)v107;
@@ -2358,7 +2356,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v109;
   if ( v109 )
   {
-    v310 = (UEL::Value::Type)&v469;
+    p_alwaysReturns = (UEL::Value::Type)&v469;
     v311 = (UEL::Value::Type)&v465;
     v469 = 4;
     v470 = UFG::gNullQSymbol.mUID;
@@ -2390,7 +2388,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v111;
   if ( v111 )
   {
-    v310 = (UEL::Value::Type)&v477;
+    p_alwaysReturns = (UEL::Value::Type)&v477;
     v311 = (UEL::Value::Type)&v473;
     v477 = 4;
     v478 = UFG::gNullQSymbol.mUID;
@@ -2422,7 +2420,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v113;
   if ( v113 )
   {
-    v310 = (UEL::Value::Type)&v484;
+    p_alwaysReturns = (UEL::Value::Type)&v484;
     v311 = (UEL::Value::Type)&v480;
     v484 = 4;
     v485 = UFG::gNullQSymbol.mUID;
@@ -2454,7 +2452,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v115;
   if ( v115 )
   {
-    v310 = (UEL::Value::Type)&v492;
+    p_alwaysReturns = (UEL::Value::Type)&v492;
     v311 = (UEL::Value::Type)&v488;
     v727 = v315.mUID;
     v662 = 8;
@@ -2486,7 +2484,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   {
     v115 = 0i64;
   }
-  UFG::qBaseTreeRB::Add(&v1->mTree, (UFG::qBaseNodeRB *)v115);
+  UFG::qBaseTreeRB::Add(&pParameterData->mTree, (UFG::qBaseNodeRB *)v115);
   v117 = (UFG::qBaseTreeRB *)UFG::qMalloc(0x48ui64, UFG::gGlobalNewName, 0i64);
   parameterNameToDataMap = (UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::ParameterBindingEntry,1> *)v117;
   v309 = (UEL::Value::Type)v117;
@@ -2501,7 +2499,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v119;
   if ( v119 )
   {
-    v310 = (UEL::Value::Type)&v500;
+    p_alwaysReturns = (UEL::Value::Type)&v500;
     v311 = (UEL::Value::Type)&v496;
     v500 = 4;
     v501 = UFG::gNullQSymbol.mUID;
@@ -2533,7 +2531,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v121;
   if ( v121 )
   {
-    v310 = (UEL::Value::Type)&v508;
+    p_alwaysReturns = (UEL::Value::Type)&v508;
     v311 = (UEL::Value::Type)&v504;
     v508 = 4;
     v509 = UFG::gNullQSymbol.mUID;
@@ -2565,7 +2563,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v123;
   if ( v123 )
   {
-    v310 = (UEL::Value::Type)&v516;
+    p_alwaysReturns = (UEL::Value::Type)&v516;
     v311 = (UEL::Value::Type)&v512;
     v516 = 4;
     v517 = UFG::gNullQSymbol.mUID;
@@ -2597,7 +2595,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v125;
   if ( v125 )
   {
-    v310 = (UEL::Value::Type)&v524;
+    p_alwaysReturns = (UEL::Value::Type)&v524;
     v311 = (UEL::Value::Type)&v520;
     v524 = 4;
     v525 = UFG::gNullQSymbol.mUID;
@@ -2629,17 +2627,17 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v127;
   if ( v127 )
   {
-    v310 = (UEL::Value::Type)&alwaysReturns;
+    p_alwaysReturns = (UEL::Value::Type)&alwaysReturns;
     v311 = (UEL::Value::Type)&v615;
     v312 = (UEL::Value::Type)&v570;
     alwaysReturns.mBaseType.mValue = 4;
     alwaysReturns.mDetailedType = UFG::gNullQSymbol;
-    qEnum<enum  UEL::Value::BaseType,unsigned short>::qEnum<enum  UEL::Value::BaseType,unsigned short>(&v615, ANSIX923);
+    qEnum<enum UEL::Value::BaseType,unsigned short>::qEnum<enum UEL::Value::BaseType,unsigned short>(&v615, ANSIX923);
     UFG::qSymbol::qSymbol(&v616, &UFG::gNullQSymbol);
     v128 = UFG::qSymbol::qSymbol(&v570, &source);
     UEL::ParameterBindingEntry::ParameterBindingEntry(
       (UEL::ParameterBindingEntry *)v127,
-      (__int64)v128,
+      &v128->mUID,
       (UEL::Value::Type)&v615,
       (UEL::Value::Type)&alwaysReturns,
       0,
@@ -2657,7 +2655,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v130;
   if ( v130 )
   {
-    v310 = (UEL::Value::Type)&v668;
+    p_alwaysReturns = (UEL::Value::Type)&v668;
     v311 = (UEL::Value::Type)&v670;
     v312 = (UEL::Value::Type)&v572;
     UEL::Value::Type::Type(&v668, ANSIX923);
@@ -2667,7 +2665,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
     v135 = UFG::qSymbol::qSymbol(&v572, &v596);
     UEL::ParameterBindingEntry::ParameterBindingEntry(
       (UEL::ParameterBindingEntry *)v130,
-      (__int64)v135,
+      &v135->mUID,
       v134,
       v132,
       0,
@@ -2685,7 +2683,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v137;
   if ( v137 )
   {
-    v310 = (UEL::Value::Type)&v672;
+    p_alwaysReturns = (UEL::Value::Type)&v672;
     v311 = (UEL::Value::Type)&v674;
     v312 = (UEL::Value::Type)&v574;
     UEL::Value::Type::Type(&v672, ANSIX923);
@@ -2695,7 +2693,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
     v142 = UFG::qSymbol::qSymbol(&v574, &v614);
     UEL::ParameterBindingEntry::ParameterBindingEntry(
       (UEL::ParameterBindingEntry *)v137,
-      (__int64)v142,
+      &v142->mUID,
       v141,
       v139,
       0,
@@ -2713,7 +2711,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v144;
   if ( v144 )
   {
-    v310 = (UEL::Value::Type)&v676;
+    p_alwaysReturns = (UEL::Value::Type)&v676;
     v311 = (UEL::Value::Type)&v678;
     v312 = (UEL::Value::Type)&v576;
     UEL::Value::Type::Type(&v676, ANSIX923);
@@ -2723,7 +2721,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
     v149 = UFG::qSymbol::qSymbol(&v576, &v598);
     UEL::ParameterBindingEntry::ParameterBindingEntry(
       (UEL::ParameterBindingEntry *)v144,
-      (__int64)v149,
+      &v149->mUID,
       v148,
       v146,
       0,
@@ -2741,7 +2739,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v151;
   if ( v151 )
   {
-    v310 = (UEL::Value::Type)&v680;
+    p_alwaysReturns = (UEL::Value::Type)&v680;
     v311 = (UEL::Value::Type)&v682;
     v312 = (UEL::Value::Type)&v533;
     UEL::Value::Type::Type(&v680, ANSIX923);
@@ -2751,7 +2749,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
     v156 = UFG::qSymbol::qSymbol(&v533, &v531);
     UEL::ParameterBindingEntry::ParameterBindingEntry(
       (UEL::ParameterBindingEntry *)v151,
-      (__int64)v156,
+      &v156->mUID,
       v155,
       v153,
       0,
@@ -2769,7 +2767,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v158;
   if ( v158 )
   {
-    v310 = (UEL::Value::Type)&v684;
+    p_alwaysReturns = (UEL::Value::Type)&v684;
     v311 = (UEL::Value::Type)&v686;
     v312 = (UEL::Value::Type)&v537;
     UEL::Value::Type::Type(&v684, ANSIX923);
@@ -2779,7 +2777,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
     v163 = UFG::qSymbol::qSymbol(&v537, &v535);
     UEL::ParameterBindingEntry::ParameterBindingEntry(
       (UEL::ParameterBindingEntry *)v158,
-      (__int64)v163,
+      &v163->mUID,
       v162,
       v160,
       0,
@@ -2797,7 +2795,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v165;
   if ( v165 )
   {
-    v310 = (UEL::Value::Type)&v688;
+    p_alwaysReturns = (UEL::Value::Type)&v688;
     v311 = (UEL::Value::Type)&v690;
     v312 = (UEL::Value::Type)&v541;
     UEL::Value::Type::Type(&v688, ANSIX923);
@@ -2807,7 +2805,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
     v170 = UFG::qSymbol::qSymbol(&v541, &v539);
     UEL::ParameterBindingEntry::ParameterBindingEntry(
       (UEL::ParameterBindingEntry *)v165,
-      (__int64)v170,
+      &v170->mUID,
       v169,
       v167,
       0,
@@ -2825,7 +2823,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v172;
   if ( v172 )
   {
-    v310 = (UEL::Value::Type)&v692;
+    p_alwaysReturns = (UEL::Value::Type)&v692;
     v311 = (UEL::Value::Type)&v694;
     v312 = (UEL::Value::Type)&v545;
     UEL::Value::Type::Type(&v692, ANSIX923);
@@ -2835,7 +2833,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
     v177 = UFG::qSymbol::qSymbol(&v545, &v543);
     UEL::ParameterBindingEntry::ParameterBindingEntry(
       (UEL::ParameterBindingEntry *)v172,
-      (__int64)v177,
+      &v177->mUID,
       v176,
       v174,
       0,
@@ -2853,7 +2851,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v179;
   if ( v179 )
   {
-    v310 = (UEL::Value::Type)&v696;
+    p_alwaysReturns = (UEL::Value::Type)&v696;
     v311 = (UEL::Value::Type)&v698;
     v312 = (UEL::Value::Type)&v549;
     UEL::Value::Type::Type(&v696, ANSIX923);
@@ -2863,7 +2861,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
     v184 = UFG::qSymbol::qSymbol(&v549, &v547);
     UEL::ParameterBindingEntry::ParameterBindingEntry(
       (UEL::ParameterBindingEntry *)v179,
-      (__int64)v184,
+      &v184->mUID,
       v183,
       v181,
       0,
@@ -2881,23 +2879,23 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v186;
   if ( v186 )
   {
-    v310 = (UEL::Value::Type)&v700;
+    p_alwaysReturns = (UEL::Value::Type)&v700;
     v311 = (UEL::Value::Type)&v551;
     v312 = (UEL::Value::Type)&v702;
     v479 = (UEL::Value::Type)&v553;
     v528 = (UEL::Value::Type)&v555;
     v187 = UFG::qSymbol::qSymbol(&v551, &v313);
-    UEL::Value::Type::Type(&v794, (UEL::Value::BaseType)8, (__int64)v187);
+    UEL::Value::Type::Type(&v794, (UEL::Value::BaseType)8, &v187->mUID);
     UEL::Value::Type::Type(&v700, v188);
     v190 = v189;
     v191 = UFG::qSymbol::qSymbol(&v553, &v313);
-    UEL::Value::Type::Type(&v786, (UEL::Value::BaseType)8, (__int64)v191);
+    UEL::Value::Type::Type(&v786, (UEL::Value::BaseType)8, &v191->mUID);
     UEL::Value::Type::Type(&v702, v192);
     v194 = v193;
     v195 = UFG::qSymbol::qSymbol(&v555, &v313);
     UEL::ParameterBindingEntry::ParameterBindingEntry(
       (UEL::ParameterBindingEntry *)v186,
-      (__int64)v195,
+      &v195->mUID,
       v194,
       v190,
       0,
@@ -2909,7 +2907,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   {
     v196 = 0i64;
   }
-  UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::ParameterBindingEntry,1>::Add(v1, v196);
+  UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::ParameterBindingEntry,1>::Add(pParameterData, v196);
   UFG::ScalingPreset::RegionValues::~RegionValues(&v805);
   v197 = AMemory::malloc_default(0x48ui64);
   v309 = (UEL::Value::Type)v197;
@@ -2927,7 +2925,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v200;
   if ( v200 )
   {
-    v310 = (UEL::Value::Type)&v704;
+    p_alwaysReturns = (UEL::Value::Type)&v704;
     v311 = (UEL::Value::Type)&v706;
     v312 = (UEL::Value::Type)&v559;
     UEL::Value::Type::Type(&v704, ANSIX923);
@@ -2937,7 +2935,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
     v205 = UFG::qSymbol::qSymbol(&v559, &v557);
     UEL::ParameterBindingEntry::ParameterBindingEntry(
       (UEL::ParameterBindingEntry *)v200,
-      (__int64)v205,
+      &v205->mUID,
       v204,
       v202,
       0,
@@ -2955,7 +2953,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v207;
   if ( v207 )
   {
-    v310 = (UEL::Value::Type)&v708;
+    p_alwaysReturns = (UEL::Value::Type)&v708;
     v311 = (UEL::Value::Type)&v711;
     v312 = (UEL::Value::Type)&v563;
     UEL::Value::Type::Type(&v708, ANSIX923);
@@ -2965,7 +2963,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
     v212 = UFG::qSymbol::qSymbol(&v563, &v561);
     UEL::ParameterBindingEntry::ParameterBindingEntry(
       (UEL::ParameterBindingEntry *)v207,
-      (__int64)v212,
+      &v212->mUID,
       v211,
       v209,
       0,
@@ -2983,7 +2981,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v214;
   if ( v214 )
   {
-    v310 = (UEL::Value::Type)&v714;
+    p_alwaysReturns = (UEL::Value::Type)&v714;
     v311 = (UEL::Value::Type)&v717;
     v312 = (UEL::Value::Type)&v567;
     UEL::Value::Type::Type(&v714, ANSIX923);
@@ -2993,7 +2991,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
     v219 = UFG::qSymbol::qSymbol(&v567, &v565);
     UEL::ParameterBindingEntry::ParameterBindingEntry(
       (UEL::ParameterBindingEntry *)v214,
-      (__int64)v219,
+      &v219->mUID,
       v218,
       v216,
       0,
@@ -3011,23 +3009,23 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v221;
   if ( v221 )
   {
-    v310 = (UEL::Value::Type)&v720;
+    p_alwaysReturns = (UEL::Value::Type)&v720;
     v311 = (UEL::Value::Type)&v569;
     v312 = (UEL::Value::Type)&v722;
     v479 = (UEL::Value::Type)&v571;
     v528 = (UEL::Value::Type)&v573;
     v222 = UFG::qSymbol::qSymbol(&v569, &v317);
-    UEL::Value::Type::Type(&v804, (UEL::Value::BaseType)8, (__int64)v222);
+    UEL::Value::Type::Type(&v804, (UEL::Value::BaseType)8, &v222->mUID);
     UEL::Value::Type::Type(&v720, v223);
     v225 = v224;
     v226 = UFG::qSymbol::qSymbol(&v571, &v317);
-    UEL::Value::Type::Type(&v788, (UEL::Value::BaseType)8, (__int64)v226);
+    UEL::Value::Type::Type(&v788, (UEL::Value::BaseType)8, &v226->mUID);
     UEL::Value::Type::Type(&v722, v227);
     v229 = v228;
     v230 = UFG::qSymbol::qSymbol(&v573, &v317);
     UEL::ParameterBindingEntry::ParameterBindingEntry(
       (UEL::ParameterBindingEntry *)v221,
-      (__int64)v230,
+      &v230->mUID,
       v229,
       v225,
       0,
@@ -3039,7 +3037,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   {
     v231 = 0i64;
   }
-  UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::ParameterBindingEntry,1>::Add(v1, v231);
+  UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::ParameterBindingEntry,1>::Add(pParameterData, v231);
   v232 = AMemory::malloc_default(0x48ui64);
   v309 = (UEL::Value::Type)v232;
   if ( v232 )
@@ -3056,7 +3054,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v235;
   if ( v235 )
   {
-    v310 = (UEL::Value::Type)&v724;
+    p_alwaysReturns = (UEL::Value::Type)&v724;
     v311 = (UEL::Value::Type)&v726;
     v312 = (UEL::Value::Type)&v530;
     UEL::Value::Type::Type(&v724, ANSIX923);
@@ -3066,7 +3064,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
     v240 = UFG::qSymbol::qSymbol(&v530, &v575);
     UEL::ParameterBindingEntry::ParameterBindingEntry(
       (UEL::ParameterBindingEntry *)v235,
-      (__int64)v240,
+      &v240->mUID,
       v239,
       v237,
       0,
@@ -3084,7 +3082,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v242;
   if ( v242 )
   {
-    v310 = (UEL::Value::Type)&v728;
+    p_alwaysReturns = (UEL::Value::Type)&v728;
     v311 = (UEL::Value::Type)&v730;
     v312 = (UEL::Value::Type)&v579;
     UEL::Value::Type::Type(&v728, ANSIX923);
@@ -3094,7 +3092,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
     v247 = UFG::qSymbol::qSymbol(&v579, &v577);
     UEL::ParameterBindingEntry::ParameterBindingEntry(
       (UEL::ParameterBindingEntry *)v242,
-      (__int64)v247,
+      &v247->mUID,
       v246,
       v244,
       0,
@@ -3112,7 +3110,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v249;
   if ( v249 )
   {
-    v310 = (UEL::Value::Type)&v732;
+    p_alwaysReturns = (UEL::Value::Type)&v732;
     v311 = (UEL::Value::Type)&v734;
     v312 = (UEL::Value::Type)&v583;
     UEL::Value::Type::Type(&v732, ANSIX923);
@@ -3122,7 +3120,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
     v254 = UFG::qSymbol::qSymbol(&v583, &v581);
     UEL::ParameterBindingEntry::ParameterBindingEntry(
       (UEL::ParameterBindingEntry *)v249,
-      (__int64)v254,
+      &v254->mUID,
       v253,
       v251,
       0,
@@ -3140,7 +3138,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v256;
   if ( v256 )
   {
-    v310 = (UEL::Value::Type)&v736;
+    p_alwaysReturns = (UEL::Value::Type)&v736;
     v311 = (UEL::Value::Type)&v738;
     v312 = (UEL::Value::Type)&v587;
     UEL::Value::Type::Type(&v736, ANSIX923);
@@ -3150,7 +3148,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
     v261 = UFG::qSymbol::qSymbol(&v587, &v585);
     UEL::ParameterBindingEntry::ParameterBindingEntry(
       (UEL::ParameterBindingEntry *)v256,
-      (__int64)v261,
+      &v261->mUID,
       v260,
       v258,
       0,
@@ -3168,23 +3166,23 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v263;
   if ( v263 )
   {
-    v310 = (UEL::Value::Type)&v740;
+    p_alwaysReturns = (UEL::Value::Type)&v740;
     v311 = (UEL::Value::Type)&v589;
     v312 = (UEL::Value::Type)&v742;
     v479 = (UEL::Value::Type)&v591;
     v528 = (UEL::Value::Type)&v593;
     v264 = UFG::qSymbol::qSymbol(&v589, &v321);
-    UEL::Value::Type::Type(&v797, (UEL::Value::BaseType)8, (__int64)v264);
+    UEL::Value::Type::Type(&v797, (UEL::Value::BaseType)8, &v264->mUID);
     UEL::Value::Type::Type(&v740, v265);
     v267 = v266;
     v268 = UFG::qSymbol::qSymbol(&v591, &v321);
-    UEL::Value::Type::Type(&v790, (UEL::Value::BaseType)8, (__int64)v268);
+    UEL::Value::Type::Type(&v790, (UEL::Value::BaseType)8, &v268->mUID);
     UEL::Value::Type::Type(&v742, v269);
     v271 = v270;
     v272 = UFG::qSymbol::qSymbol(&v593, &v321);
     UEL::ParameterBindingEntry::ParameterBindingEntry(
       (UEL::ParameterBindingEntry *)v263,
-      (__int64)v272,
+      &v272->mUID,
       v271,
       v267,
       0,
@@ -3196,7 +3194,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   {
     v273 = 0i64;
   }
-  UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::ParameterBindingEntry,1>::Add(v1, v273);
+  UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::ParameterBindingEntry,1>::Add(pParameterData, v273);
   v274 = AMemory::malloc_default(0x48ui64);
   v309 = (UEL::Value::Type)v274;
   if ( v274 )
@@ -3213,7 +3211,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v277;
   if ( v277 )
   {
-    v310 = (UEL::Value::Type)&v744;
+    p_alwaysReturns = (UEL::Value::Type)&v744;
     v311 = (UEL::Value::Type)&v528;
     v312 = (UEL::Value::Type)&v597;
     UEL::Value::Type::Type(&v744, ANSIX923);
@@ -3223,7 +3221,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
     v282 = UFG::qSymbol::qSymbol(&v597, &v595);
     UEL::ParameterBindingEntry::ParameterBindingEntry(
       (UEL::ParameterBindingEntry *)v277,
-      (__int64)v282,
+      &v282->mUID,
       v281,
       v279,
       0,
@@ -3241,7 +3239,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v284;
   if ( v284 )
   {
-    v310 = (UEL::Value::Type)&v479;
+    p_alwaysReturns = (UEL::Value::Type)&v479;
     v311 = (UEL::Value::Type)&v312;
     *(_QWORD *)&v611[0].mUID = &v601;
     UEL::Value::Type::Type(&v479, ANSIX923);
@@ -3251,7 +3249,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
     v289 = UFG::qSymbol::qSymbol(&v601, &v599);
     UEL::ParameterBindingEntry::ParameterBindingEntry(
       (UEL::ParameterBindingEntry *)v284,
-      (__int64)v289,
+      &v289->mUID,
       v288,
       v286,
       0,
@@ -3270,16 +3268,16 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   if ( v291 )
   {
     *(_QWORD *)&v611[0].mUID = &v311;
-    *(_QWORD *)&v622[0].mUID = &v310;
+    *(_QWORD *)&v622[0].mUID = &p_alwaysReturns;
     *(_QWORD *)&v621[0].mUID = &v605;
     UEL::Value::Type::Type(&v311, ANSIX923);
     v293 = v292;
-    UEL::Value::Type::Type(&v310, ANSIX923);
+    UEL::Value::Type::Type(&p_alwaysReturns, ANSIX923);
     v295 = v294;
     v296 = UFG::qSymbol::qSymbol(&v605, &v603);
     UEL::ParameterBindingEntry::ParameterBindingEntry(
       (UEL::ParameterBindingEntry *)v291,
-      (__int64)v296,
+      &v296->mUID,
       v295,
       v293,
       0,
@@ -3303,17 +3301,17 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
     v787 = v622;
     v789 = v611;
     v299 = UFG::qSymbol::qSymbol(v621, &v314);
-    UEL::Value::Type::Type(&v791, (UEL::Value::BaseType)8, (__int64)v299);
+    UEL::Value::Type::Type(&v791, (UEL::Value::BaseType)8, &v299->mUID);
     UEL::Value::Type::Type(&v792, v300);
     v302 = v301;
     v303 = UFG::qSymbol::qSymbol(v622, &v314);
-    UEL::Value::Type::Type(&v793, (UEL::Value::BaseType)8, (__int64)v303);
+    UEL::Value::Type::Type(&v793, (UEL::Value::BaseType)8, &v303->mUID);
     UEL::Value::Type::Type(&v309, v304);
     v306 = v305;
     v307 = UFG::qSymbol::qSymbol(v611, &v314);
     UEL::ParameterBindingEntry::ParameterBindingEntry(
       (UEL::ParameterBindingEntry *)v298,
-      (__int64)v307,
+      &v307->mUID,
       v306,
       v302,
       0,
@@ -3322,14 +3320,15 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
       1);
     v2 = v308;
   }
-  UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::ParameterBindingEntry,1>::Add(v1, v2);
-}eRB<UEL::ParameterBindingEntry,UEL::ParameterBindingEntry,1>::Add(v1, v2);
-}create_from_string(&v595, "Radius");
+  UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::ParameterBindingEntry,1>::Add(pParameterData, v2);
+} = 0i64;
+  }
+  UFG::qSymbol::create_from_string(&v595, "Radius");
   v277 = AMemory::malloc_default(0x50ui64);
   v309 = (UEL::Value::Type)v277;
   if ( v277 )
   {
-    v310 = (UEL::Value::Type)&v744;
+    p_alwaysReturns = (UEL::Value::Type)&v744;
     v311 = (UEL::Value::Type)&v528;
     v312 = (UEL::Value::Type)&v597;
     UEL::Value::Type::Type(&v744, ANSIX923);
@@ -3339,7 +3338,7 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
     v282 = UFG::qSymbol::qSymbol(&v597, &v595);
     UEL::ParameterBindingEntry::ParameterBindingEntry(
       (UEL::ParameterBindingEntry *)v277,
-      (__int64)v282,
+      &v282->mUID,
       v281,
       v279,
       0,
@@ -3357,10 +3356,76 @@ void __fastcall InitParameters(UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::Para
   v309 = (UEL::Value::Type)v284;
   if ( v284 )
   {
-    v310 = (UEL::Value::Type)&v479;
+    p_alwaysReturns = (UEL::Value::Type)&v479;
     v311 = (UEL::Value::Type)&v312;
     *(_QWORD *)&v611[0].mUID = &v601;
     UEL::Value::Type::Type(&v479, ANSIX923);
     v286 = v285;
-    UE
+    UEL::Value::Type::Type(&v312, ANSIX923);
+    v288 = v287;
+    v289 = UFG::qSymbol::qSymbol(&v601, &v599);
+    UEL::ParameterBindingEntry::ParameterBindingEntry(
+      (UEL::ParameterBindingEntry *)v284,
+      &v289->mUID,
+      v288,
+      v286,
+      0,
+      4u,
+      0i64,
+      0);
+  }
+  else
+  {
+    v290 = 0i64;
+  }
+  UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::ParameterBindingEntry,1>::Add(v276, v290);
+  UFG::qSymbol::create_from_string(&v603, "Damage");
+  v291 = AMemory::malloc_default(0x50ui64);
+  v309 = (UEL::Value::Type)v291;
+  if ( v291 )
+  {
+    *(_QWORD *)&v611[0].mUID = &v311;
+    *(_QWORD *)&v622[0].mUID = &p_alwaysReturns;
+    *(_QWORD *)&v621[0].mUID = &v605;
+    UEL::Value::Type::Type(&v311, ANSIX923);
+    v293 = v292;
+    UEL::Value::Type::Type(&p_alwaysReturns, ANSIX923);
+    v295 = v294;
+    v296 = UFG::qSymbol::qSymbol(&v605, &v603);
+    UEL::ParameterBindingEntry::ParameterBindingEntry(
+      (UEL::ParameterBindingEntry *)v291,
+      &v296->mUID,
+      v295,
+      v293,
+      0,
+      8u,
+      0i64,
+      0);
+  }
+  else
+  {
+    v297 = 0i64;
+  }
+  UFG::qTreeRB<UEL::ParameterBindingEntry,UEL::ParameterBindingEntry,1>::Add(v276, v297);
+  UFG::qSymbol::create_from_string(&v314, "ThrownWeaponStatData2");
+  v298 = AMemory::malloc_default(0x50ui64);
+  v803 = v298;
+  if ( v298 )
+  {
+    v800 = &v792;
+    v784 = v621;
+    v785 = &v309;
+    v787 = v622;
+    v789 = v611;
+    v299 = UFG::qSymbol::qSymbol(v621, &v314);
+    UEL::Value::Type::Type(&v791, (UEL::Value::BaseType)8, &v299->mUID);
+    UEL::Value::Type::Type(&v792, v300);
+    v302 = v301;
+    v303 = UFG::qSymbol::qSymbol(v622, &v314);
+    UEL::Value::Type::Type(&v793, (UEL::Value::BaseType)8, &v303->mUID);
+    UEL::Value::Type::Type(&v309, v304);
+    v306 = v305;
+    v307 = UFG::qSymbol::qSymbol(v611, &v314);
+    UEL::ParameterBindingEntry::ParameterBindingEntry(
+      (UEL::ParameterBindingEntry *)v298,
 

@@ -2,40 +2,35 @@
 // RVA: 0x12BC704
 int __fastcall localtime64_s(tm *ptm, const __int64 *ptime)
 {
-  const __int64 *v2; // rdi
-  tm *v3; // rbx
   int result; // eax
   int v5; // eax
   __int64 v6; // rax
   __int64 v7; // rcx
   int v8; // eax
-  signed __int64 v9; // r9
+  __int64 v9; // r9
   int v10; // ecx
-  unsigned __int64 v11; // r8
-  unsigned __int64 v12; // r8
-  int v13; // edx
-  unsigned __int64 v14; // r8
-  signed __int64 v15; // r8
-  int v16; // ecx
-  int v17; // ecx
-  int v18; // eax
-  __int64 timp; // [rsp+30h] [rbp-10h]
-  int _Timezone; // [rsp+60h] [rbp+20h]
-  int _Daylight; // [rsp+70h] [rbp+30h]
-  int _Daylight_savings_bias; // [rsp+78h] [rbp+38h]
+  __int64 v11; // r8
+  int v12; // edx
+  unsigned __int64 v13; // r8
+  __int64 v14; // r8
+  int v15; // ecx
+  int tm_wday; // ecx
+  int tm_mday; // eax
+  __int64 timp[2]; // [rsp+30h] [rbp-10h] BYREF
+  int _Timezone; // [rsp+60h] [rbp+20h] BYREF
+  int _Daylight; // [rsp+70h] [rbp+30h] BYREF
+  int _Daylight_savings_bias; // [rsp+78h] [rbp+38h] BYREF
 
   _Daylight = 0;
   _Daylight_savings_bias = 0;
   _Timezone = 0;
-  v2 = ptime;
-  v3 = ptm;
-  if ( !ptm || (memset(ptm, 255, 0x24ui64), !v2) )
+  if ( !ptm || (memset(ptm, 255, sizeof(tm)), !ptime) )
   {
     *errno() = 22;
     invalid_parameter_noinfo();
     return 22;
   }
-  if ( *v2 < 0 || *v2 > 32535244799i64 )
+  if ( *ptime >= 0x793407000ui64 )
   {
     *errno() = 22;
     return 22;
@@ -43,137 +38,121 @@ int __fastcall localtime64_s(tm *ptm, const __int64 *ptime)
   _tzset();
   if ( get_daylight(&_Daylight) )
   {
-LABEL_38:
     invoke_watson(0i64, 0i64, 0i64, 0, 0i64);
     __debugbreak();
-    JUMPOUT(*(_QWORD *)fprintf);
   }
   if ( get_dstbias(&_Daylight_savings_bias) )
   {
-LABEL_37:
     invoke_watson(0i64, 0i64, 0i64, 0, 0i64);
     __debugbreak();
-    goto LABEL_38;
   }
   if ( get_timezone(&_Timezone) )
   {
     invoke_watson(0i64, 0i64, 0i64, 0, 0i64);
     __debugbreak();
-    goto LABEL_37;
   }
-  if ( *v2 > 259200 )
+  if ( *ptime <= 259200 )
   {
-    timp = *v2 - _Timezone;
-    result = gmtime64_s(v3, &timp);
-    if ( result )
-      return result;
-    if ( _Daylight && isindst(v3) )
+    result = gmtime64_s(ptm, ptime);
+    if ( !result )
     {
-      timp -= _Daylight_savings_bias;
-      result = gmtime64_s(v3, &timp);
-      if ( result )
-        return result;
-      v3->tm_isdst = 1;
-    }
-    return 0;
-  }
-  result = gmtime64_s(v3, v2);
-  if ( result )
-    return result;
-  if ( _Daylight && isindst(v3) )
-  {
-    v5 = _Timezone;
-    v3->tm_isdst = 1;
-    v6 = _Daylight_savings_bias + v5;
-  }
-  else
-  {
-    v6 = _Timezone;
-  }
-  v7 = v3->tm_sec - v6;
-  v8 = v3->tm_sec
-     - v6
-     - 60
-     * (((unsigned __int64)(v7 + ((unsigned __int128)(v7 * (signed __int128)-8608480567731124087i64) >> 64)) >> 63)
-      + ((signed __int64)(v7 + ((unsigned __int128)(v7 * (signed __int128)-8608480567731124087i64) >> 64)) >> 5));
-  v3->tm_sec = v8;
-  if ( v8 < 0 )
-  {
-    v7 -= 60i64;
-    v3->tm_sec = v8 + 60;
-  }
-  v9 = v3->tm_min
-     + ((unsigned __int64)(v7 + ((unsigned __int128)(v7 * (signed __int128)-8608480567731124087i64) >> 64)) >> 63)
-     + ((signed __int64)(v7 + ((unsigned __int128)(v7 * (signed __int128)-8608480567731124087i64) >> 64)) >> 5);
-  v10 = v3->tm_min
-      + ((unsigned __int64)(v7 + ((unsigned __int128)(v7 * (signed __int128)-8608480567731124087i64) >> 64)) >> 63)
-      + ((signed __int64)(v7 + ((unsigned __int128)(v7 * (signed __int128)-8608480567731124087i64) >> 64)) >> 5)
-      - 60
-      * (((unsigned __int64)(v9 + ((unsigned __int128)(v9 * (signed __int128)-8608480567731124087i64) >> 64)) >> 63)
-       + ((signed __int64)(v9 + ((unsigned __int128)(v9 * (signed __int128)-8608480567731124087i64) >> 64)) >> 5));
-  v3->tm_min = v10;
-  if ( v10 < 0 )
-  {
-    v9 -= 60i64;
-    v3->tm_min = v10 + 60;
-  }
-  v11 = v9 + ((unsigned __int128)(v9 * (signed __int128)-8608480567731124087i64) >> 64);
-  v12 = v3->tm_hour + (v11 >> 63) + ((signed __int64)v11 >> 5);
-  v13 = v12
-      - 24
-      * (((unsigned __int64)((unsigned __int128)((signed __int64)v12 * (signed __int128)3074457345618258603i64) >> 64) >> 63)
-       + ((signed __int64)((unsigned __int128)((signed __int64)v12 * (signed __int128)3074457345618258603i64) >> 64) >> 2));
-  v3->tm_hour = v13;
-  if ( v13 < 0 )
-  {
-    v12 -= 24i64;
-    v3->tm_hour = v13 + 24;
-  }
-  v14 = (signed __int64)((unsigned __int128)((signed __int64)v12 * (signed __int128)3074457345618258603i64) >> 64) >> 2;
-  v15 = (v14 >> 63) + v14;
-  if ( v15 <= 0 )
-  {
-    if ( v15 >= 0 )
-      return 0;
-    v17 = v3->tm_wday;
-    v3->tm_mday += v15;
-    v18 = v3->tm_mday;
-    v3->tm_wday = ((signed int)v15 + v17 + 7) % 7;
-    if ( v18 <= 0 )
-    {
-      v3->tm_mon = 11;
-      v3->tm_mday = v18 + 31;
-      v3->tm_yday += v15 + 365;
-      --v3->tm_year;
+      if ( _Daylight && isindst(ptm) )
+      {
+        v5 = _Timezone;
+        ptm->tm_isdst = 1;
+        v6 = _Daylight_savings_bias + v5;
+      }
+      else
+      {
+        v6 = _Timezone;
+      }
+      v7 = ptm->tm_sec - v6;
+      v8 = (int)v7 % 60;
+      ptm->tm_sec = (int)v7 % 60;
+      if ( (int)v7 % 60 < 0 )
+      {
+        v7 -= 60i64;
+        ptm->tm_sec = v8 + 60;
+      }
+      v9 = ptm->tm_min + v7 / 60;
+      v10 = (int)v9 % 60;
+      ptm->tm_min = (int)v9 % 60;
+      if ( (int)v9 % 60 < 0 )
+      {
+        v9 -= 60i64;
+        ptm->tm_min = v10 + 60;
+      }
+      v11 = ptm->tm_hour + v9 / 60;
+      v12 = (int)v11 % 24;
+      ptm->tm_hour = (int)v11 % 24;
+      if ( (int)v11 % 24 < 0 )
+      {
+        v11 -= 24i64;
+        ptm->tm_hour = v12 + 24;
+      }
+      v13 = (__int64)((unsigned __int128)(v11 * (__int128)0x2AAAAAAAAAAAAAABi64) >> 64) >> 2;
+      v14 = (v13 >> 63) + v13;
+      if ( v14 <= 0 )
+      {
+        if ( v14 >= 0 )
+          return 0;
+        tm_wday = ptm->tm_wday;
+        ptm->tm_mday += v14;
+        tm_mday = ptm->tm_mday;
+        ptm->tm_wday = ((int)v14 + tm_wday + 7) % 7;
+        if ( tm_mday <= 0 )
+        {
+          ptm->tm_mon = 11;
+          ptm->tm_mday = tm_mday + 31;
+          ptm->tm_yday += v14 + 365;
+          --ptm->tm_year;
+          return 0;
+        }
+      }
+      else
+      {
+        v15 = v14 + ptm->tm_wday;
+        ptm->tm_mday += v14;
+        ptm->tm_wday = v15 % 7;
+      }
+      ptm->tm_yday += v14;
       return 0;
     }
   }
   else
   {
-    v16 = v15 + v3->tm_wday;
-    v3->tm_mday += v15;
-    v3->tm_wday = v16 % 7;
+    timp[0] = *ptime - _Timezone;
+    result = gmtime64_s(ptm, timp);
+    if ( !result )
+    {
+      if ( !_Daylight || !isindst(ptm) )
+        return 0;
+      timp[0] -= _Daylight_savings_bias;
+      result = gmtime64_s(ptm, timp);
+      if ( !result )
+      {
+        ptm->tm_isdst = 1;
+        return 0;
+      }
+    }
   }
-  v3->tm_yday += v15;
-  return 0;
+  return result;
 }
 
 // File Line: 234
 // RVA: 0x12BC6BC
 tm *__fastcall localtime64(const __int64 *ptime)
 {
-  const __int64 *v1; // rdi
   tm *result; // rax
   tm *v3; // rbx
 
-  v1 = ptime;
   result = (tm *)_getgmtimebuf();
   v3 = result;
   if ( result )
   {
-    if ( localtime64_s(result, v1) )
-      v3 = 0i64;
-    result = v3;
+    if ( localtime64_s(result, ptime) )
+      return 0i64;
+    return v3;
   }
   return result;
 }

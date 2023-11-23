@@ -1,30 +1,26 @@
 // File Line: 35
 // RVA: 0x930B0
-Illusion::MemImageSchema *__fastcall Illusion::Factory::NewStateBlock(const char *name, unsigned int name_uid, unsigned int num_values, unsigned int byte_size, Illusion::MemImageSchema *schema, UFG::qMemoryPool *memory_pool, unsigned __int64 allocation_params)
+Illusion::MemImageSchema *__fastcall Illusion::Factory::NewStateBlock(
+        const char *name,
+        unsigned int name_uid,
+        unsigned int num_values,
+        unsigned int byte_size,
+        Illusion::MemImageSchema *schema,
+        UFG::qMemoryPool *memory_pool,
+        unsigned __int64 allocation_params)
 {
-  unsigned int v7; // esi
-  unsigned int v8; // ebp
-  unsigned int v9; // er14
-  const char *v10; // rdi
   Illusion::MemImageSchema *v11; // r10
-  unsigned int v12; // er9
-  signed int v13; // er8
-  __int64 v14; // rcx
-  signed __int64 v15; // rdx
-  signed int v16; // er8
+  unsigned int v12; // r9d
+  signed int v13; // r8d
+  __int64 mNumMemStructures; // rcx
+  char *v15; // rdx
+  signed int v16; // r8d
   __int64 v17; // rcx
-  signed __int64 v18; // rdx
+  char *v18; // rdx
   Illusion::StateBlock *v19; // rbx
-  UFG::qNode<Illusion::StateBlock,Illusion::StateBlock> *v20; // rax
-  unsigned __int64 v22; // [rsp+20h] [rbp-28h]
-  __int64 v23; // [rsp+28h] [rbp-20h]
-  Illusion::MemImageSchema *v24; // [rsp+30h] [rbp-18h]
+  __int64 v21[5]; // [rsp+20h] [rbp-28h] BYREF
 
-  v23 = -2i64;
-  v7 = byte_size;
-  v8 = num_values;
-  v9 = name_uid;
-  v10 = name;
+  v21[1] = -2i64;
   v11 = &Illusion::gMemImageSchema;
   if ( schema )
     v11 = schema;
@@ -42,70 +38,68 @@ Illusion::MemImageSchema *__fastcall Illusion::Factory::NewStateBlock(const char
   schema = (Illusion::MemImageSchema *)v11->mCurrSize;
   v11->mMemStructure[0].mPointer = (void **)&schema;
   v11->mCurrSize = (v11->mCurrSize + 143) & 0xFFFFFFFFFFFFFFF0ui64;
-  v13 = (v7 + 15) & 0xFFFFFFF0;
-  v14 = v11->mNumMemStructures;
-  v15 = (signed __int64)v11 + 48 * v14;
-  v11->mNumMemStructures = v14 + 1;
-  *(_QWORD *)(v15 + 16) = "StateBlockData";
-  *(_QWORD *)(v15 + 24) = v11->mCurrSize;
-  *(_DWORD *)(v15 + 32) = v13;
-  *(_QWORD *)(v15 + 56) = 0i64;
-  *(_QWORD *)(v15 + 48) = 0i64;
-  *(_QWORD *)(v15 + 40) = &v22;
+  v13 = (byte_size + 15) & 0xFFFFFFF0;
+  mNumMemStructures = v11->mNumMemStructures;
+  v15 = (char *)v11 + 48 * mNumMemStructures;
+  v11->mNumMemStructures = mNumMemStructures + 1;
+  *((_QWORD *)v15 + 2) = "StateBlockData";
+  *((_QWORD *)v15 + 3) = v11->mCurrSize;
+  *((_DWORD *)v15 + 8) = v13;
+  *((_QWORD *)v15 + 7) = 0i64;
+  *((_QWORD *)v15 + 6) = 0i64;
+  *((_QWORD *)v15 + 5) = v21;
   v11->mCurrSize = (v13 + v11->mCurrSize + 15) & 0xFFFFFFFFFFFFFFF0ui64;
   v16 = (v12 + 0xF) & 0xFFFFFFF0;
   v17 = v11->mNumMemStructures;
-  v18 = (signed __int64)v11 + 48 * v17;
+  v18 = (char *)v11 + 48 * v17;
   v11->mNumMemStructures = v17 + 1;
-  *(_QWORD *)(v18 + 16) = "StateBlockHeaders";
-  *(_QWORD *)(v18 + 24) = v11->mCurrSize;
-  *(_DWORD *)(v18 + 32) = v16;
-  *(_QWORD *)(v18 + 40) = 0i64;
-  *(_QWORD *)(v18 + 56) = 0i64;
-  *(_QWORD *)(v18 + 48) = 0i64;
-  v22 = v11->mCurrSize;
-  *(_QWORD *)(v18 + 40) = &v22;
+  *((_QWORD *)v18 + 2) = "StateBlockHeaders";
+  *((_QWORD *)v18 + 3) = v11->mCurrSize;
+  *((_DWORD *)v18 + 8) = v16;
+  *((_QWORD *)v18 + 5) = 0i64;
+  *((_QWORD *)v18 + 7) = 0i64;
+  *((_QWORD *)v18 + 6) = 0i64;
+  v21[0] = v11->mCurrSize;
+  *((_QWORD *)v18 + 5) = v21;
   v11->mCurrSize += v16;
   Illusion::MemImageSchema::Allocate(v11, memory_pool, allocation_params);
   v19 = (Illusion::StateBlock *)schema;
-  v24 = schema;
+  v21[2] = (__int64)schema;
   if ( schema )
   {
-    UFG::qResourceData::qResourceData((UFG::qResourceData *)schema, 0x4D04C7F2u, v9, v10);
-    v20 = (UFG::qNode<Illusion::StateBlock,Illusion::StateBlock> *)&v19->mPrev;
-    v20->mPrev = v20;
-    v20->mNext = v20;
-    v19->mNameUID = UFG::qStringHashUpper32(v10, 0xFFFFFFFF);
-    v19->mNumValues = v8;
-    v19->mDataByteSize = v7;
+    UFG::qResourceData::qResourceData((UFG::qResourceData *)schema, 0x4D04C7F2u, name_uid, name);
+    v19->mPrev = &v19->UFG::qNode<Illusion::StateBlock,Illusion::StateBlock>;
+    v19->mNext = &v19->UFG::qNode<Illusion::StateBlock,Illusion::StateBlock>;
+    v19->mNameUID = UFG::qStringHashUpper32(name, 0xFFFFFFFF);
+    v19->mNumValues = num_values;
+    v19->mDataByteSize = byte_size;
   }
   return schema;
 }
 
 // File Line: 106
 // RVA: 0x92CB0
-Illusion::Material *__fastcall Illusion::Factory::NewMaterial(const char *name, unsigned int name_uid, unsigned int num_params, Illusion::MemImageSchema *schema, UFG::qMemoryPool *memory_pool, unsigned __int64 allocation_params)
+Illusion::Material *__fastcall Illusion::Factory::NewMaterial(
+        const char *name,
+        unsigned int name_uid,
+        unsigned int num_params,
+        Illusion::MemImageSchema *schema,
+        UFG::qMemoryPool *memory_pool,
+        unsigned __int64 allocation_params)
 {
-  unsigned int v6; // ebx
-  unsigned int v7; // edi
-  const char *v8; // rsi
   Illusion::MemImageSchema *v9; // rcx
   __int64 v10; // r9
-  __int64 v11; // rdx
-  signed __int64 v12; // r8
+  __int64 mNumMemStructures; // rdx
+  char *v12; // r8
   Illusion::Material *v13; // r9
   __int64 v14; // rdx
-  signed __int64 v15; // r8
-  signed __int64 v16; // r9
-  Illusion::MaterialUser *v18; // [rsp+20h] [rbp-28h]
-  __int64 v19; // [rsp+28h] [rbp-20h]
-  void *v20; // [rsp+30h] [rbp-18h]
-  Illusion::Material *v21; // [rsp+68h] [rbp+20h]
+  char *v15; // r8
+  UFG::qOffset64<Illusion::MaterialUser *> *p_mMaterialUser; // r9
+  Illusion::MaterialUser *v18[2]; // [rsp+20h] [rbp-28h] BYREF
+  Illusion::Material *v19; // [rsp+30h] [rbp-18h]
+  Illusion::Material *mCurrSize; // [rsp+68h] [rbp+20h] BYREF
 
-  v19 = -2i64;
-  v6 = num_params;
-  v7 = name_uid;
-  v8 = name;
+  v18[1] = (Illusion::MaterialUser *)-2i64;
   v9 = &Illusion::gMemImageSchema;
   if ( schema )
     v9 = schema;
@@ -119,86 +113,84 @@ Illusion::Material *__fastcall Illusion::Factory::NewMaterial(const char *name, 
   v9->mMemStructure[0].mPointer = 0i64;
   v9->mMemStructure[0].mFixupOffsetPointer = 0i64;
   v9->mMemStructure[0].mFixupOffset = 0i64;
-  v21 = (Illusion::Material *)v9->mCurrSize;
-  v9->mMemStructure[0].mPointer = (void **)&v21;
+  mCurrSize = (Illusion::Material *)v9->mCurrSize;
+  v9->mMemStructure[0].mPointer = (void **)&mCurrSize;
   v9->mCurrSize = (v9->mCurrSize + 143) & 0xFFFFFFFFFFFFFFF0ui64;
   if ( num_params )
   {
     v10 = num_params;
     do
     {
-      v11 = v9->mNumMemStructures;
-      v12 = (signed __int64)v9 + 48 * v11;
-      v9->mNumMemStructures = v11 + 1;
-      *(_QWORD *)(v12 + 16) = "MaterialParam";
-      *(_QWORD *)(v12 + 24) = v9->mCurrSize;
-      *(_DWORD *)(v12 + 32) = 56;
-      *(_QWORD *)(v12 + 40) = 0i64;
-      *(_QWORD *)(v12 + 56) = 0i64;
-      *(_QWORD *)(v12 + 48) = 0i64;
+      mNumMemStructures = v9->mNumMemStructures;
+      v12 = (char *)v9 + 48 * mNumMemStructures;
+      v9->mNumMemStructures = mNumMemStructures + 1;
+      *((_QWORD *)v12 + 2) = "MaterialParam";
+      *((_QWORD *)v12 + 3) = v9->mCurrSize;
+      *((_DWORD *)v12 + 8) = 56;
+      *((_QWORD *)v12 + 5) = 0i64;
+      *((_QWORD *)v12 + 7) = 0i64;
+      *((_QWORD *)v12 + 6) = 0i64;
       v9->mCurrSize += 56i64;
       --v10;
     }
     while ( v10 );
   }
   v9->mCurrSize = (v9->mCurrSize + 15) & 0xFFFFFFFFFFFFFFF0ui64;
-  v13 = v21;
+  v13 = mCurrSize;
   v14 = v9->mNumMemStructures;
-  v15 = (signed __int64)v9 + 48 * v14;
+  v15 = (char *)v9 + 48 * v14;
   v9->mNumMemStructures = v14 + 1;
-  *(_QWORD *)(v15 + 16) = "MaterialUser";
-  *(_QWORD *)(v15 + 24) = v9->mCurrSize;
-  *(_DWORD *)(v15 + 32) = 16;
-  *(_QWORD *)(v15 + 40) = 0i64;
-  *(_QWORD *)(v15 + 56) = 0i64;
-  *(_QWORD *)(v15 + 48) = 0i64;
-  v18 = (Illusion::MaterialUser *)v9->mCurrSize;
-  *(_QWORD *)(v15 + 40) = &v18;
-  v16 = (signed __int64)&v13->mMaterialUser;
-  if ( v16 )
+  *((_QWORD *)v15 + 2) = "MaterialUser";
+  *((_QWORD *)v15 + 3) = v9->mCurrSize;
+  *((_DWORD *)v15 + 8) = 16;
+  *((_QWORD *)v15 + 5) = 0i64;
+  *((_QWORD *)v15 + 7) = 0i64;
+  *((_QWORD *)v15 + 6) = 0i64;
+  v18[0] = (Illusion::MaterialUser *)v9->mCurrSize;
+  *((_QWORD *)v15 + 5) = v18;
+  p_mMaterialUser = &v13->mMaterialUser;
+  if ( p_mMaterialUser )
   {
-    *(_QWORD *)(v15 + 56) = v16;
-    *(_QWORD *)(v15 + 48) = v9->mCurrSize - v16;
+    *((_QWORD *)v15 + 7) = p_mMaterialUser;
+    *((_QWORD *)v15 + 6) = v9->mCurrSize - (_QWORD)p_mMaterialUser;
   }
   v9->mCurrSize += 16i64;
   Illusion::MemImageSchema::Allocate(v9, memory_pool, allocation_params);
-  v20 = v21;
-  if ( v21 )
-    Illusion::Material::Material(v21, v8, v7, v6);
-  v20 = v18;
-  if ( v18 )
-    Illusion::MaterialUser::MaterialUser(v18);
-  return v21;
+  v19 = mCurrSize;
+  if ( mCurrSize )
+    Illusion::Material::Material(mCurrSize, name, name_uid, num_params);
+  v19 = (Illusion::Material *)v18[0];
+  if ( v18[0] )
+    Illusion::MaterialUser::MaterialUser(v18[0]);
+  return mCurrSize;
 }
 
 // File Line: 148
 // RVA: 0x92EA0
-UFG::qResourceData *__fastcall Illusion::Factory::NewMaterialTable(const char *name, unsigned int name_uid, __int64 num_materials, Illusion::MemImageSchema *schema, UFG::qMemoryPool *memory_pool, unsigned __int64 allocation_params)
+Illusion::MaterialTable *__fastcall Illusion::Factory::NewMaterialTable(
+        const char *name,
+        unsigned int name_uid,
+        __int64 num_materials,
+        Illusion::MemImageSchema *schema,
+        UFG::qMemoryPool *memory_pool,
+        unsigned __int64 allocation_params)
 {
   int v6; // esi
-  unsigned int v7; // ebp
-  const char *v8; // r14
   Illusion::MemImageSchema *v9; // r10
   unsigned int v10; // ebx
-  __int64 v11; // rcx
-  signed __int64 v12; // rdx
+  __int64 mNumMemStructures; // rcx
+  char *v12; // rdx
   UFG::qResourceData *v13; // r8
   __int64 v14; // rcx
-  signed __int64 v15; // rdx
-  signed __int64 v16; // r8
+  char *v15; // rdx
+  UFG::qBaseNodeRB **mChild; // r8
   UFG::qResourceData *v17; // rdi
-  signed __int64 v18; // rax
-  unsigned __int64 v20; // [rsp+20h] [rbp-48h]
-  __int64 v21; // [rsp+28h] [rbp-40h]
-  UFG::qResourceData *v22; // [rsp+30h] [rbp-38h]
-  UFG::qBaseNodeRB **v23; // [rsp+38h] [rbp-30h]
-  UFG::qBaseNodeRB **v24; // [rsp+40h] [rbp-28h]
-  UFG::qResourceData *v25; // [rsp+88h] [rbp+20h]
+  UFG::qResourceHandle *v18; // rcx
+  __int64 v20[9]; // [rsp+20h] [rbp-48h] BYREF
+  UFG::qResourceData *mCurrSize; // [rsp+88h] [rbp+20h] BYREF
 
-  v21 = -2i64;
+  v20[1] = -2i64;
   v6 = num_materials;
-  v7 = name_uid;
-  v8 = name;
   v9 = &Illusion::gMemImageSchema;
   if ( schema )
     v9 = schema;
@@ -213,69 +205,69 @@ UFG::qResourceData *__fastcall Illusion::Factory::NewMaterialTable(const char *n
   v9->mMemStructure[0].mPointer = 0i64;
   v9->mMemStructure[0].mFixupOffsetPointer = 0i64;
   v9->mMemStructure[0].mFixupOffset = 0i64;
-  v25 = (UFG::qResourceData *)v9->mCurrSize;
-  v9->mMemStructure[0].mPointer = (void **)&v25;
+  mCurrSize = (UFG::qResourceData *)v9->mCurrSize;
+  v9->mMemStructure[0].mPointer = (void **)&mCurrSize;
   v9->mCurrSize += 104i64;
   if ( (_DWORD)num_materials )
   {
     num_materials = (unsigned int)num_materials;
     do
     {
-      v11 = v9->mNumMemStructures;
-      v12 = (signed __int64)v9 + 48 * v11;
-      v9->mNumMemStructures = v11 + 1;
-      *(_QWORD *)(v12 + 16) = "MaterialHandle";
-      *(_QWORD *)(v12 + 24) = v9->mCurrSize;
-      *(_DWORD *)(v12 + 32) = 32;
-      *(_QWORD *)(v12 + 40) = 0i64;
-      *(_QWORD *)(v12 + 56) = 0i64;
-      *(_QWORD *)(v12 + 48) = 0i64;
+      mNumMemStructures = v9->mNumMemStructures;
+      v12 = (char *)v9 + 48 * mNumMemStructures;
+      v9->mNumMemStructures = mNumMemStructures + 1;
+      *((_QWORD *)v12 + 2) = "MaterialHandle";
+      *((_QWORD *)v12 + 3) = v9->mCurrSize;
+      *((_DWORD *)v12 + 8) = 32;
+      *((_QWORD *)v12 + 5) = 0i64;
+      *((_QWORD *)v12 + 7) = 0i64;
+      *((_QWORD *)v12 + 6) = 0i64;
       v9->mCurrSize += 32i64;
       --num_materials;
     }
     while ( num_materials );
   }
-  v13 = v25;
+  v13 = mCurrSize;
   v14 = v9->mNumMemStructures;
-  v15 = (signed __int64)v9 + 48 * v14;
+  v15 = (char *)v9 + 48 * v14;
   v9->mNumMemStructures = v14 + 1;
-  *(_QWORD *)(v15 + 16) = "MaterialTableUser";
-  *(_QWORD *)(v15 + 24) = v9->mCurrSize;
-  *(_DWORD *)(v15 + 32) = 16;
-  *(_QWORD *)(v15 + 40) = 0i64;
-  *(_QWORD *)(v15 + 56) = 0i64;
-  *(_QWORD *)(v15 + 48) = 0i64;
-  v20 = v9->mCurrSize;
-  *(_QWORD *)(v15 + 40) = &v20;
-  v16 = (signed __int64)v13[1].mNode.mChild;
-  if ( v16 )
+  *((_QWORD *)v15 + 2) = "MaterialTableUser";
+  *((_QWORD *)v15 + 3) = v9->mCurrSize;
+  *((_DWORD *)v15 + 8) = 16;
+  *((_QWORD *)v15 + 5) = 0i64;
+  *((_QWORD *)v15 + 7) = 0i64;
+  *((_QWORD *)v15 + 6) = 0i64;
+  v20[0] = v9->mCurrSize;
+  *((_QWORD *)v15 + 5) = v20;
+  mChild = v13[1].mNode.mChild;
+  if ( mChild )
   {
-    *(_QWORD *)(v15 + 56) = v16;
-    *(_QWORD *)(v15 + 48) = v9->mCurrSize - v16;
+    *((_QWORD *)v15 + 7) = mChild;
+    *((_QWORD *)v15 + 6) = v9->mCurrSize - (_QWORD)mChild;
   }
   v9->mCurrSize += 16i64;
   Illusion::MemImageSchema::Allocate(v9, memory_pool, allocation_params);
-  v17 = v25;
-  v22 = v25;
-  if ( v25 )
+  v17 = mCurrSize;
+  v20[2] = (__int64)mCurrSize;
+  if ( mCurrSize )
   {
-    UFG::qResourceData::qResourceData(v25, 0x80D1F139, v7, v8);
+    UFG::qResourceData::qResourceData(mCurrSize, 0x80D1F139, name_uid, name);
     if ( LODWORD(v17[1].mNode.mParent) )
     {
       do
       {
-        v18 = 4i64 * v10;
-        v23 = &v17[1].mNode.mChild[v18 + 1];
-        v24 = &v17[1].mNode.mChild[v18 + 1];
-        if ( &v17[1].mNode.mChild[v18 + 1] )
-          UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v17[1].mNode.mChild[v18 + 1]);
+        v18 = (UFG::qResourceHandle *)&v17[1].mNode.mChild[4 * v10 + 1];
+        v20[3] = (__int64)v18;
+        v20[4] = (__int64)v18;
+        if ( v18 )
+          UFG::qResourceHandle::qResourceHandle(v18);
         ++v10;
       }
       while ( v10 < LODWORD(v17[1].mNode.mParent) );
     }
     LODWORD(v17[1].mNode.mParent) = v6;
   }
-  return v25;
+  return (Illusion::MaterialTable *)mCurrSize;
 }
 
 // File Line: 547
@@ -284,7 +276,7 @@ __int64 Illusion::_dynamic_initializer_for__gDeleteQueueBuffer__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&gDeleteQueueBuffer.mWaitQueue.mTree);
   UFG::qBaseTreeRB::qBaseTreeRB((UFG::qBaseTreeRB *)&stru_1421674E8);
-  return atexit(Illusion::_dynamic_atexit_destructor_for__gDeleteQueueBuffer__);
+  return atexit((int (__fastcall *)())Illusion::_dynamic_atexit_destructor_for__gDeleteQueueBuffer__);
 }
 
 // File Line: 548
@@ -293,7 +285,7 @@ __int64 Illusion::_dynamic_initializer_for__gDeleteQueueModel__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&gDeleteQueueModel.mWaitQueue.mTree);
   UFG::qBaseTreeRB::qBaseTreeRB((UFG::qBaseTreeRB *)&stru_1421677B8);
-  return atexit(Illusion::_dynamic_atexit_destructor_for__gDeleteQueueModel__);
+  return atexit((int (__fastcall *)())Illusion::_dynamic_atexit_destructor_for__gDeleteQueueModel__);
 }
 
 // File Line: 549
@@ -302,42 +294,40 @@ __int64 Illusion::_dynamic_initializer_for__gDeleteQueueTexture__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&gDeleteQueueTexture.mWaitQueue.mTree);
   UFG::qBaseTreeRB::qBaseTreeRB((UFG::qBaseTreeRB *)&stru_142167AC8);
-  return atexit(Illusion::_dynamic_atexit_destructor_for__gDeleteQueueTexture__);
+  return atexit((int (__fastcall *)())Illusion::_dynamic_atexit_destructor_for__gDeleteQueueTexture__);
 }
 
 // File Line: 550
 // RVA: 0x1457DE0
 __int64 Illusion::_dynamic_initializer_for__gDeleteQueueMutex__()
 {
-  UFG::qMutex::qMutex(&Illusion::gDeleteQueueMutex, &customWorldMapCaption);
-  return atexit(Illusion::_dynamic_atexit_destructor_for__gDeleteQueueMutex__);
+  UFG::qMutex::qMutex(&Illusion::gDeleteQueueMutex, &customCaption);
+  return atexit((int (__fastcall *)())Illusion::_dynamic_atexit_destructor_for__gDeleteQueueMutex__);
 }
 
 // File Line: 554
 // RVA: 0x94740
 void __fastcall Illusion::Factory::QueueDelete(Illusion::Texture *resource)
 {
-  Illusion::Texture *v1; // rbx
-  unsigned int v2; // edx
+  unsigned int mUID; // edx
   UFG::qBaseNodeRB *v3; // rdx
   unsigned int v4; // eax
 
-  v1 = resource;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&Illusion::gDeleteQueueMutex);
-  if ( v1 )
+  if ( resource )
   {
-    v2 = v1->mNode.mUID;
-    if ( !v2 || !UFG::qBaseTreeRB::Get(&gDeleteQueueTexture.mWaitQueue.mTree, v2) )
+    mUID = resource->mNode.mUID;
+    if ( !mUID || !UFG::qBaseTreeRB::Get(&gDeleteQueueTexture.mWaitQueue.mTree, mUID) )
     {
       v3 = (UFG::qBaseNodeRB *)UFG::qMalloc(0x28ui64, "DeleteQueueNode", 0i64);
       if ( v3 )
       {
-        v4 = v1->mNode.mUID;
+        v4 = resource->mNode.mUID;
         v3->mParent = 0i64;
         v3->mChild[0] = 0i64;
         v3->mChild[1] = 0i64;
         v3->mUID = v4;
-        v3[1].mParent = (UFG::qBaseNodeRB *)v1;
+        v3[1].mParent = (UFG::qBaseNodeRB *)resource;
       }
       else
       {
@@ -353,45 +343,45 @@ void __fastcall Illusion::Factory::QueueDelete(Illusion::Texture *resource)
 // RVA: 0x945E0
 void Illusion::Factory::ProcessWaitDeleteQueueAll(void)
 {
-  UFG::qBaseNodeRB *v0; // rbx
-  UFG::qBaseTreeRB *v1; // rdi
-  UFG::qBaseNodeRB *v2; // rbx
+  UFG::qBaseNodeRB *Head; // rbx
+  UFG::qBaseTreeRB *Next; // rdi
+  UFG::qBaseNodeRB *p_mRoot; // rbx
   UFG::qBaseTreeRB *v3; // rdi
   UFG::qBaseNodeRB *v4; // rbx
   UFG::qBaseTreeRB *v5; // rdi
 
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&Illusion::gDeleteQueueMutex);
-  v0 = (UFG::qBaseNodeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&gDeleteQueueBuffer);
-  if ( v0 )
+  Head = (UFG::qBaseNodeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&gDeleteQueueBuffer);
+  if ( Head )
   {
     do
     {
-      v1 = UFG::qBaseTreeRB::GetNext(&gDeleteQueueBuffer.mWaitQueue.mTree, v0);
-      if ( v0[1].mParent[3].mUID <= Illusion::gEngine.mSafeToDeleteFrameCount )
+      Next = UFG::qBaseTreeRB::GetNext(&gDeleteQueueBuffer.mWaitQueue.mTree, Head);
+      if ( Head[1].mParent[3].mUID <= Illusion::gEngine.mSafeToDeleteFrameCount )
       {
         UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
           (UFG::qBaseTreeVariableRB<unsigned __int64> *)&gDeleteQueueBuffer,
-          (UFG::qBaseNodeVariableRB<unsigned __int64> *)v0);
-        UFG::qBaseTreeRB::Add((UFG::qBaseTreeRB *)&stru_1421674E8, v0);
+          (UFG::qBaseNodeVariableRB<unsigned __int64> *)Head);
+        UFG::qBaseTreeRB::Add((UFG::qBaseTreeRB *)&stru_1421674E8, Head);
       }
-      v0 = &v1->mRoot;
+      Head = &Next->mRoot;
     }
-    while ( v1 );
+    while ( Next );
   }
-  v2 = (UFG::qBaseNodeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&gDeleteQueueModel);
-  if ( v2 )
+  p_mRoot = (UFG::qBaseNodeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&gDeleteQueueModel);
+  if ( p_mRoot )
   {
     do
     {
-      v3 = UFG::qBaseTreeRB::GetNext(&gDeleteQueueModel.mWaitQueue.mTree, v2);
-      if ( HIDWORD(v2[1].mParent[6].mChild[1]) <= Illusion::gEngine.mSafeToDeleteFrameCount )
+      v3 = UFG::qBaseTreeRB::GetNext(&gDeleteQueueModel.mWaitQueue.mTree, p_mRoot);
+      if ( HIDWORD(p_mRoot[1].mParent[6].mChild[1]) <= Illusion::gEngine.mSafeToDeleteFrameCount )
       {
         UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
           (UFG::qBaseTreeVariableRB<unsigned __int64> *)&gDeleteQueueModel,
-          (UFG::qBaseNodeVariableRB<unsigned __int64> *)v2);
-        UFG::qBaseTreeRB::Add((UFG::qBaseTreeRB *)&stru_1421677B8, v2);
+          (UFG::qBaseNodeVariableRB<unsigned __int64> *)p_mRoot);
+        UFG::qBaseTreeRB::Add((UFG::qBaseTreeRB *)&stru_1421677B8, p_mRoot);
       }
-      v2 = &v3->mRoot;
+      p_mRoot = &v3->mRoot;
     }
     while ( v3 );
   }
@@ -419,8 +409,8 @@ void Illusion::Factory::ProcessWaitDeleteQueueAll(void)
 // RVA: 0x8E810
 void Illusion::Factory::ClearFinalDeleteQueueAll(void)
 {
-  Render::SkinningCacheNode *v0; // rdi
-  Illusion::Buffer *v1; // rbx
+  Render::SkinningCacheNode *Head; // rdi
+  Illusion::Buffer *mCachedBufferPtr; // rbx
   UFG::qResourceWarehouse *v2; // rax
   Render::SkinningCacheNode *v3; // rdi
   Illusion::Model *v4; // rbx
@@ -432,20 +422,20 @@ void Illusion::Factory::ClearFinalDeleteQueueAll(void)
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&Illusion::gDeleteQueueMutex);
   while ( stru_1421674E8.mTree.mCount )
   {
-    v0 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead(&stru_1421674E8);
-    v1 = v0->mCachedBufferPtr;
+    Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead(&stru_1421674E8);
+    mCachedBufferPtr = Head->mCachedBufferPtr;
     v2 = UFG::qResourceWarehouse::Instance();
-    UFG::qResourceWarehouse::Remove(v2, (UFG::qResourceData *)&v1->mNode);
-    Illusion::Factory::Delete(v1, 0);
-    UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(&stru_1421674E8.mTree, &v0->mNode);
-    operator delete[](v0);
+    UFG::qResourceWarehouse::Remove(v2, &mCachedBufferPtr->UFG::qResourceData);
+    Illusion::Factory::Delete(mCachedBufferPtr, 0);
+    UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(&stru_1421674E8.mTree, &Head->mNode);
+    operator delete[](Head);
   }
   while ( stru_1421677B8.mTree.mCount )
   {
     v3 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead(&stru_1421677B8);
     v4 = (Illusion::Model *)v3->mCachedBufferPtr;
     v5 = UFG::qResourceWarehouse::Instance();
-    UFG::qResourceWarehouse::Remove(v5, (UFG::qResourceData *)&v4->mNode);
+    UFG::qResourceWarehouse::Remove(v5, &v4->UFG::qResourceData);
     Illusion::Factory::Delete(v4, 0);
     UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(&stru_1421677B8.mTree, &v3->mNode);
     operator delete[](v3);
@@ -455,7 +445,7 @@ void Illusion::Factory::ClearFinalDeleteQueueAll(void)
     v6 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead(&stru_142167AC8);
     v7 = (Illusion::Texture *)v6->mCachedBufferPtr;
     v8 = UFG::qResourceWarehouse::Instance();
-    UFG::qResourceWarehouse::Remove(v8, (UFG::qResourceData *)&v7->mNode);
+    UFG::qResourceWarehouse::Remove(v8, &v7->UFG::qResourceData);
     Illusion::Factory::Delete(v7, 0);
     UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(&stru_142167AC8.mTree, &v6->mNode);
     operator delete[](v6);

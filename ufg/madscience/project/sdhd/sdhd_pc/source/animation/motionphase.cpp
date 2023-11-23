@@ -3,7 +3,7 @@
 __int64 dynamic_initializer_for__animPhaseMarkEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&animPhaseMarkEnum, gAnimationPhaseMarkStringList, 3, 0i64);
-  return atexit(dynamic_atexit_destructor_for__animPhaseMarkEnum__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__animPhaseMarkEnum__);
 }
 
 // File Line: 23
@@ -57,7 +57,7 @@ __int64 dynamic_initializer_for__gAnimMotionKeyFactory__()
     &gAnimMotionKeyFactory,
     sAnimMotionKeyFactoryList,
     sAnimMotionKeyFactoryListNum);
-  return atexit(dynamic_atexit_destructor_for__gAnimMotionKeyFactory__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gAnimMotionKeyFactory__);
 }
 
 // File Line: 106
@@ -75,20 +75,19 @@ __int64 dynamic_initializer_for__MotionPhaseChannel::sClassNameUID__()
 // RVA: 0x3AFB00
 void __fastcall MotionPhaseChannel::Sort(MotionPhaseChannel *this)
 {
-  signed __int64 v1; // rbx
-  MotionPhaseChannel *v2; // r11
+  __int64 mCount; // rbx
   unsigned int v3; // edi
-  __int64 v4; // r8
+  __int64 mOffset; // r8
   __int64 v5; // rax
   __int64 v6; // r9
-  signed __int64 v7; // rcx
-  signed __int64 v8; // rdx
+  char *v7; // rcx
+  char *v8; // rdx
   __int64 v9; // rcx
-  signed __int64 v10; // r8
-  signed int v11; // er9
+  __int64 v10; // r8
+  int v11; // r9d
   __int64 v12; // r10
-  signed int v13; // edx
-  signed __int64 v14; // rcx
+  int v13; // edx
+  __int64 v14; // rcx
   float v15; // xmm0_4
   __int64 v16; // rax
   __int64 v17; // rax
@@ -100,43 +99,39 @@ void __fastcall MotionPhaseChannel::Sort(MotionPhaseChannel *this)
   __int64 v23; // r9
   __int64 v24; // rax
   __int64 v25; // rcx
-  __int64 v26; // r8
-  __int64 v27; // [rsp+0h] [rbp-650h]
-  __int64 v28; // [rsp+8h] [rbp-648h]
-  __int64 v29[200]; // [rsp+10h] [rbp-640h]
+  __int64 *v26; // r8
+  __int64 v27[202]; // [rsp+0h] [rbp-650h]
 
-  v1 = (unsigned int)this->mKeys.mCount;
-  v2 = this;
+  mCount = (unsigned int)this->mKeys.mCount;
   v3 = this->mKeys.mCount & 0x7FFFFFFF;
   if ( v3 )
   {
-    v4 = this->mKeys.mData.mOffset;
+    mOffset = this->mKeys.mData.mOffset;
     v5 = 0i64;
     v6 = v3;
     do
     {
-      if ( v4 )
-        v7 = (signed __int64)&v2->mKeys.mData + v4;
+      if ( mOffset )
+        v7 = (char *)&this->mKeys.mData + mOffset;
       else
         v7 = 0i64;
-      v8 = v5 + v7;
-      v9 = *(_QWORD *)(v5 + v7);
+      v8 = &v7[v5 * 8];
+      v9 = *(_QWORD *)&v7[v5 * 8];
       if ( v9 )
-        v9 += v8;
-      *(__int64 *)((char *)&v28 + v5) = v9;
-      v5 += 8i64;
+        v9 += (__int64)v8;
+      v27[++v5] = v9;
       --v6;
     }
     while ( v6 );
   }
   v10 = 1i64;
-  LODWORD(v1) = v1 & 0x7FFFFFFF;
-  if ( v1 > 1 )
+  LODWORD(mCount) = mCount & 0x7FFFFFFF;
+  if ( mCount > 1 )
   {
     v11 = 0;
     do
     {
-      v12 = *(&v28 + v10);
+      v12 = v27[v10 + 1];
       v13 = v11;
       v14 = v10 - 1;
       if ( v11 >= 0 )
@@ -149,10 +144,10 @@ LABEL_19:
             v20 = *(float *)(v12 + 16);
             do
             {
-              v21 = *(&v28 + v14);
+              v21 = v27[v14 + 1];
               if ( v20 >= *(float *)(v21 + 16) )
                 break;
-              v29[v14--] = v21;
+              v27[v14-- + 2] = v21;
               --v13;
             }
             while ( v13 >= 0 );
@@ -163,23 +158,23 @@ LABEL_19:
           v15 = *(float *)(v12 + 16);
           while ( 1 )
           {
-            v16 = *(&v28 + v14);
+            v16 = v27[v14 + 1];
             if ( v15 >= *(float *)(v16 + 16) )
               break;
-            v29[v14] = v16;
-            v17 = *(&v27 + v14--);
+            v27[v14 + 2] = v16;
+            v17 = v27[v14--];
             if ( v15 >= *(float *)(v17 + 16) )
               break;
-            v29[v14] = v17;
-            v18 = *(&v27 + v14--);
+            v27[v14 + 2] = v17;
+            v18 = v27[v14--];
             if ( v15 >= *(float *)(v18 + 16) )
               break;
-            v29[v14] = v18;
-            v19 = *(&v27 + v14--);
+            v27[v14 + 2] = v18;
+            v19 = v27[v14--];
             if ( v15 >= *(float *)(v19 + 16) )
               break;
             v13 -= 4;
-            v29[v14--] = v19;
+            v27[v14-- + 2] = v19;
             if ( v13 < 3 )
               goto LABEL_19;
           }
@@ -187,9 +182,9 @@ LABEL_19:
       }
       ++v10;
       ++v11;
-      v29[v14] = v12;
+      v27[v14 + 2] = v12;
     }
-    while ( v10 < v1 );
+    while ( v10 < mCount );
   }
   v22 = 0i64;
   if ( v3 )
@@ -197,18 +192,18 @@ LABEL_19:
     v23 = 0i64;
     do
     {
-      v24 = v2->mKeys.mData.mOffset;
-      v25 = *(&v28 + v22);
+      v24 = this->mKeys.mData.mOffset;
+      v25 = v27[v22 + 1];
       if ( v24 )
-        v24 += (__int64)&v2->mKeys.mData;
-      v26 = v23 + v24;
+        v24 += (__int64)&this->mKeys.mData;
+      v26 = (__int64 *)(v23 + v24);
       if ( v25 )
-        v25 -= v26;
-      *(_QWORD *)v26 = v25;
+        v25 -= (__int64)v26;
+      *v26 = v25;
       v22 = (unsigned int)(v22 + 1);
       v23 += 8i64;
     }
-    while ( (unsigned int)v22 < (v2->mKeys.mCount & 0x7FFFFFFFu) );
+    while ( (unsigned int)v22 < (this->mKeys.mCount & 0x7FFFFFFFu) );
   }
 }
 

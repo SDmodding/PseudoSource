@@ -13,40 +13,32 @@ __int64 dynamic_initializer_for__DestructionSetDefinitionTrack::sClassNameUID__(
 // RVA: 0x2DEC90
 void __fastcall DestructionSetDefinitionTrack::DestructionSetDefinitionTrack(DestructionSetDefinitionTrack *this)
 {
-  DestructionSetDefinitionTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, DestructionSetDefinitionTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DestructionSetDefinitionTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DestructionSetDefinitionTrack::`vftable;
-  v1->mDestructionObjectName = UFG::gNullQSymbolUC;
-  *(_QWORD *)&v1->mBulletDamageMultiplier = 0i64;
-  *(_QWORD *)&v1->mImpactDamageMultiplier = 0i64;
-  v1->mAttackDamageMultiplier = 0.0;
+  ITrack::ITrack(this, DestructionSetDefinitionTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<DestructionSetDefinitionTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&DestructionSetDefinitionTrack::`vftable;
+  this->mDestructionObjectName = UFG::gNullQSymbolUC;
+  *(_QWORD *)&this->mBulletDamageMultiplier = 0i64;
+  *(_QWORD *)&this->mImpactDamageMultiplier = 0i64;
+  this->mAttackDamageMultiplier = 0.0;
 }
 
 // File Line: 45
 // RVA: 0x2E3C80
 void __fastcall DestructionSetDefinitionTrack::~DestructionSetDefinitionTrack(DestructionSetDefinitionTrack *this)
 {
-  DestructionSetDefinitionTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&DestructionSetDefinitionTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 64
@@ -64,44 +56,36 @@ __int64 dynamic_initializer_for__DestructionEventTrack::sClassNameUID__()
 // RVA: 0x2DEA90
 void __fastcall DestructionEventTrack::DestructionEventTrack(DestructionEventTrack *this)
 {
-  DestructionEventTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, DestructionEventTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DestructionEventTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DestructionEventTrack::`vftable;
-  v1->mDestructionObjectName = UFG::gNullQSymbolUC;
-  v1->mSoundEffect = UFG::gNullQSymbolUC;
-  *(_DWORD *)&v1->mFractureObject = 0;
-  *(_QWORD *)&v1->mDisableCover = 0i64;
-  v1->mRenderModelSwap = UFG::gNullQSymbolUC;
-  v1->mVisualTreatment = UFG::gNullQSymbol;
-  v1->mDisableSelfIllumination = 0;
-  v1->mLifeSpan = -1.0;
+  ITrack::ITrack(this, DestructionEventTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<DestructionEventTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&DestructionEventTrack::`vftable;
+  this->mDestructionObjectName = UFG::gNullQSymbolUC;
+  this->mSoundEffect = UFG::gNullQSymbolUC;
+  *(_DWORD *)&this->mFractureObject = 0;
+  *(_QWORD *)&this->mDisableCover = 0i64;
+  this->mRenderModelSwap = UFG::gNullQSymbolUC;
+  this->mVisualTreatment = UFG::gNullQSymbol;
+  this->mDisableSelfIllumination = 0;
+  this->mLifeSpan = -1.0;
 }
 
 // File Line: 110
 // RVA: 0x2E3AC0
 void __fastcall DestructionEventTrack::~DestructionEventTrack(DestructionEventTrack *this)
 {
-  DestructionEventTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&DestructionEventTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 141
@@ -119,38 +103,31 @@ __int64 dynamic_initializer_for__DestructionEnableRiggedGeoTrack::sClassNameUID_
 // RVA: 0x2DEA40
 void __fastcall DestructionEnableRiggedGeoTrack::DestructionEnableRiggedGeoTrack(DestructionEnableRiggedGeoTrack *this)
 {
-  DestructionEnableRiggedGeoTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, DestructionEnableRiggedGeoTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DestructionEnableRiggedGeoTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DestructionEnableRiggedGeoTrack::`vftable;
-  v1->mBoneName = UFG::gNullQSymbolUC;
-  *(_WORD *)&v1->mEnable = 0;
+  ITrack::ITrack(this, DestructionEnableRiggedGeoTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<DestructionEnableRiggedGeoTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&DestructionEnableRiggedGeoTrack::`vftable;
+  this->mBoneName = UFG::gNullQSymbolUC;
+  *(_WORD *)&this->mEnable = 0;
 }
 
 // File Line: 157
 // RVA: 0x2E3A50
-void __fastcall DestructionEnableRiggedGeoTrack::~DestructionEnableRiggedGeoTrack(DestructionEnableRiggedGeoTrack *this)
+void __fastcall DestructionEnableRiggedGeoTrack::~DestructionEnableRiggedGeoTrack(
+        DestructionEnableRiggedGeoTrack *this)
 {
-  DestructionEnableRiggedGeoTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&DestructionEnableRiggedGeoTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 173
@@ -166,11 +143,11 @@ __int64 dynamic_initializer_for__DestructionSpawnPropertySetTrack::sClassNameUID
 
 // File Line: 200
 // RVA: 0x2DEDA0
-void __fastcall DestructionSpawnPropertySetTrack::DestructionSpawnPropertySetTrack(DestructionSpawnPropertySetTrack *this)
+void __fastcall DestructionSpawnPropertySetTrack::DestructionSpawnPropertySetTrack(
+        DestructionSpawnPropertySetTrack *this)
 {
-  DestructionSpawnPropertySetTrack *v1; // rbx
-  float v2; // xmm1_4
-  float v3; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
   float v4; // xmm1_4
   float v5; // xmm2_4
   float v6; // xmm1_4
@@ -178,57 +155,52 @@ void __fastcall DestructionSpawnPropertySetTrack::DestructionSpawnPropertySetTra
   float v8; // xmm1_4
   float v9; // xmm2_4
 
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, DestructionSpawnPropertySetTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DestructionSpawnPropertySetTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DestructionSpawnPropertySetTrack::`vftable;
-  v1->mDestructionObjectName = UFG::gNullQSymbolUC;
-  v1->mPropertySetName = UFG::gNullQSymbol;
-  v2 = UFG::qVector3::msZero.y;
-  v3 = UFG::qVector3::msZero.z;
-  v1->mTranslateOffset.x = UFG::qVector3::msZero.x;
-  v1->mTranslateOffset.y = v2;
-  v1->mTranslateOffset.z = v3;
+  ITrack::ITrack(this, DestructionSpawnPropertySetTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<DestructionSpawnPropertySetTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&DestructionSpawnPropertySetTrack::`vftable;
+  this->mDestructionObjectName = UFG::gNullQSymbolUC;
+  this->mPropertySetName = UFG::gNullQSymbol;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
+  this->mTranslateOffset.x = UFG::qVector3::msZero.x;
+  this->mTranslateOffset.y = y;
+  this->mTranslateOffset.z = z;
   v4 = UFG::qVector3::msZero.y;
   v5 = UFG::qVector3::msZero.z;
-  v1->mRotateOffset.x = UFG::qVector3::msZero.x;
-  v1->mRotateOffset.y = v4;
-  v1->mRotateOffset.z = v5;
+  this->mRotateOffset.x = UFG::qVector3::msZero.x;
+  this->mRotateOffset.y = v4;
+  this->mRotateOffset.z = v5;
   v6 = UFG::qVector3::msZero.y;
   v7 = UFG::qVector3::msZero.z;
-  v1->mLinearImpulseRotation.x = UFG::qVector3::msZero.x;
-  v1->mLinearImpulseRotation.y = v6;
-  v1->mLinearImpulseRotation.z = v7;
-  v1->mLinearImpulseMagnitude = 1.0;
+  this->mLinearImpulseRotation.x = UFG::qVector3::msZero.x;
+  this->mLinearImpulseRotation.y = v6;
+  this->mLinearImpulseRotation.z = v7;
+  this->mLinearImpulseMagnitude = 1.0;
   v8 = UFG::qVector3::msZero.y;
   v9 = UFG::qVector3::msZero.z;
-  v1->mAngularImpulse.x = UFG::qVector3::msZero.x;
-  v1->mAngularImpulse.y = v8;
-  v1->mAngularImpulse.z = v9;
+  this->mAngularImpulse.x = UFG::qVector3::msZero.x;
+  this->mAngularImpulse.y = v8;
+  this->mAngularImpulse.z = v9;
 }
 
 // File Line: 204
 // RVA: 0x2E3D60
-void __fastcall DestructionSpawnPropertySetTrack::~DestructionSpawnPropertySetTrack(DestructionSpawnPropertySetTrack *this)
+void __fastcall DestructionSpawnPropertySetTrack::~DestructionSpawnPropertySetTrack(
+        DestructionSpawnPropertySetTrack *this)
 {
-  DestructionSpawnPropertySetTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&DestructionSpawnPropertySetTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 224
@@ -244,55 +216,50 @@ __int64 dynamic_initializer_for__DestructionSpawnPhantomVolumeTrack::sClassNameU
 
 // File Line: 243
 // RVA: 0x2DECF0
-void __fastcall DestructionSpawnPhantomVolumeTrack::DestructionSpawnPhantomVolumeTrack(DestructionSpawnPhantomVolumeTrack *this)
+void __fastcall DestructionSpawnPhantomVolumeTrack::DestructionSpawnPhantomVolumeTrack(
+        DestructionSpawnPhantomVolumeTrack *this)
 {
-  DestructionSpawnPhantomVolumeTrack *v1; // rbx
-  float v2; // xmm1_4
-  float v3; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
   float v4; // xmm1_4
   float v5; // xmm2_4
 
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, DestructionSpawnPhantomVolumeTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DestructionSpawnPhantomVolumeTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DestructionSpawnPhantomVolumeTrack::`vftable;
-  v1->mDestructionObjectName = UFG::gNullQSymbolUC;
-  v1->mPhantomName = UFG::gNullQSymbolUC;
-  v2 = UFG::qVector3::msZero.y;
-  v3 = UFG::qVector3::msZero.z;
-  v1->mTranslateOffset.x = UFG::qVector3::msZero.x;
-  v1->mTranslateOffset.y = v2;
-  v1->mTranslateOffset.z = v3;
+  ITrack::ITrack(this, DestructionSpawnPhantomVolumeTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<DestructionSpawnPhantomVolumeTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&DestructionSpawnPhantomVolumeTrack::`vftable;
+  this->mDestructionObjectName = UFG::gNullQSymbolUC;
+  this->mPhantomName = UFG::gNullQSymbolUC;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
+  this->mTranslateOffset.x = UFG::qVector3::msZero.x;
+  this->mTranslateOffset.y = y;
+  this->mTranslateOffset.z = z;
   v4 = UFG::qVector3::msZero.y;
   v5 = UFG::qVector3::msZero.z;
-  v1->mBoxExtents.x = UFG::qVector3::msZero.x;
-  v1->mBoxExtents.y = v4;
-  v1->mBoxExtents.z = v5;
-  v1->mPhantomTimer = -1.0;
+  this->mBoxExtents.x = UFG::qVector3::msZero.x;
+  this->mBoxExtents.y = v4;
+  this->mBoxExtents.z = v5;
+  this->mPhantomTimer = -1.0;
 }
 
 // File Line: 247
 // RVA: 0x2E3CF0
-void __fastcall DestructionSpawnPhantomVolumeTrack::~DestructionSpawnPhantomVolumeTrack(DestructionSpawnPhantomVolumeTrack *this)
+void __fastcall DestructionSpawnPhantomVolumeTrack::~DestructionSpawnPhantomVolumeTrack(
+        DestructionSpawnPhantomVolumeTrack *this)
 {
-  DestructionSpawnPhantomVolumeTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&DestructionSpawnPhantomVolumeTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 264
@@ -310,45 +277,38 @@ __int64 dynamic_initializer_for__DestructionExplosionTrack::sClassNameUID__()
 // RVA: 0x2DEB10
 void __fastcall DestructionExplosionTrack::DestructionExplosionTrack(DestructionExplosionTrack *this)
 {
-  DestructionExplosionTrack *v1; // rbx
-  float v2; // xmm1_4
-  float v3; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
 
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, DestructionExplosionTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DestructionExplosionTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DestructionExplosionTrack::`vftable;
-  v1->mDestructionObjectName = UFG::gNullQSymbolUC;
-  v1->mExplosionType = UFG::gNullQSymbol;
-  v2 = UFG::qVector3::msZero.y;
-  v3 = UFG::qVector3::msZero.z;
-  v1->mPosition.x = UFG::qVector3::msZero.x;
-  v1->mPosition.y = v2;
-  v1->mPosition.z = v3;
+  ITrack::ITrack(this, DestructionExplosionTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<DestructionExplosionTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&DestructionExplosionTrack::`vftable;
+  this->mDestructionObjectName = UFG::gNullQSymbolUC;
+  this->mExplosionType = UFG::gNullQSymbol;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
+  this->mPosition.x = UFG::qVector3::msZero.x;
+  this->mPosition.y = y;
+  this->mPosition.z = z;
 }
 
 // File Line: 282
 // RVA: 0x2E3B30
 void __fastcall DestructionExplosionTrack::~DestructionExplosionTrack(DestructionExplosionTrack *this)
 {
-  DestructionExplosionTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&DestructionExplosionTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 297
@@ -364,40 +324,34 @@ __int64 dynamic_initializer_for__DestructionEnableFractureElementTrack::sClassNa
 
 // File Line: 326
 // RVA: 0x2DE9F0
-void __fastcall DestructionEnableFractureElementTrack::DestructionEnableFractureElementTrack(DestructionEnableFractureElementTrack *this)
+void __fastcall DestructionEnableFractureElementTrack::DestructionEnableFractureElementTrack(
+        DestructionEnableFractureElementTrack *this)
 {
-  DestructionEnableFractureElementTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, DestructionEnableFractureElementTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DestructionEnableFractureElementTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DestructionEnableFractureElementTrack::`vftable;
-  v1->mFractureElement1 = UFG::gNullQSymbolUC;
-  v1->mEnable1 = 0;
+  ITrack::ITrack(this, DestructionEnableFractureElementTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<DestructionEnableFractureElementTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&DestructionEnableFractureElementTrack::`vftable;
+  this->mFractureElement1 = UFG::gNullQSymbolUC;
+  this->mEnable1 = 0;
 }
 
 // File Line: 331
 // RVA: 0x2E39E0
-void __fastcall DestructionEnableFractureElementTrack::~DestructionEnableFractureElementTrack(DestructionEnableFractureElementTrack *this)
+void __fastcall DestructionEnableFractureElementTrack::~DestructionEnableFractureElementTrack(
+        DestructionEnableFractureElementTrack *this)
 {
-  DestructionEnableFractureElementTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&DestructionEnableFractureElementTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 355
@@ -415,37 +369,29 @@ __int64 dynamic_initializer_for__DestructionSetDamageTrack::sClassNameUID__()
 // RVA: 0x2DEC40
 void __fastcall DestructionSetDamageTrack::DestructionSetDamageTrack(DestructionSetDamageTrack *this)
 {
-  DestructionSetDamageTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, DestructionSetDamageTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DestructionSetDamageTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DestructionSetDamageTrack::`vftable;
-  *(_QWORD *)&v1->mDestructionObjectName.mUID = UFG::gNullQSymbolUC.mUID;
+  ITrack::ITrack(this, DestructionSetDamageTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<DestructionSetDamageTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&DestructionSetDamageTrack::`vftable;
+  *(_QWORD *)&this->mDestructionObjectName.mUID = UFG::gNullQSymbolUC.mUID;
 }
 
 // File Line: 370
 // RVA: 0x2E3C10
 void __fastcall DestructionSetDamageTrack::~DestructionSetDamageTrack(DestructionSetDamageTrack *this)
 {
-  DestructionSetDamageTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&DestructionSetDamageTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 385
@@ -461,41 +407,35 @@ __int64 dynamic_initializer_for__DestructionDeleteConstraintTrack::sClassNameUID
 
 // File Line: 396
 // RVA: 0x2DE990
-void __fastcall DestructionDeleteConstraintTrack::DestructionDeleteConstraintTrack(DestructionDeleteConstraintTrack *this)
+void __fastcall DestructionDeleteConstraintTrack::DestructionDeleteConstraintTrack(
+        DestructionDeleteConstraintTrack *this)
 {
-  DestructionDeleteConstraintTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, DestructionDeleteConstraintTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DestructionDeleteConstraintTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DestructionDeleteConstraintTrack::`vftable;
-  v1->mDestructionObjectName = UFG::gNullQSymbolUC;
-  v1->mDeleteConstraintName = UFG::gNullQSymbol;
-  v1->mDeleteConstraints = 0;
+  ITrack::ITrack(this, DestructionDeleteConstraintTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<DestructionDeleteConstraintTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&DestructionDeleteConstraintTrack::`vftable;
+  this->mDestructionObjectName = UFG::gNullQSymbolUC;
+  this->mDeleteConstraintName = UFG::gNullQSymbol;
+  this->mDeleteConstraints = 0;
 }
 
 // File Line: 401
 // RVA: 0x2E3970
-void __fastcall DestructionDeleteConstraintTrack::~DestructionDeleteConstraintTrack(DestructionDeleteConstraintTrack *this)
+void __fastcall DestructionDeleteConstraintTrack::~DestructionDeleteConstraintTrack(
+        DestructionDeleteConstraintTrack *this)
 {
-  DestructionDeleteConstraintTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&DestructionDeleteConstraintTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 417
@@ -513,52 +453,45 @@ __int64 dynamic_initializer_for__DestructionThrusterTrack::sClassNameUID__()
 // RVA: 0x2DEF40
 void __fastcall DestructionThrusterTrack::DestructionThrusterTrack(DestructionThrusterTrack *this)
 {
-  DestructionThrusterTrack *v1; // rbx
-  float v2; // xmm1_4
-  float v3; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
   float v4; // xmm1_4
   float v5; // xmm2_4
 
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, DestructionThrusterTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DestructionThrusterTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DestructionThrusterTrack::`vftable;
-  v1->mDestructionObjectName = UFG::gNullQSymbolUC;
-  v2 = UFG::qVector3::msZero.y;
-  v3 = UFG::qVector3::msZero.z;
-  v1->mOffset.x = UFG::qVector3::msZero.x;
-  v1->mOffset.y = v2;
-  v1->mOffset.z = v3;
+  ITrack::ITrack(this, DestructionThrusterTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<DestructionThrusterTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&DestructionThrusterTrack::`vftable;
+  this->mDestructionObjectName = UFG::gNullQSymbolUC;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
+  this->mOffset.x = UFG::qVector3::msZero.x;
+  this->mOffset.y = y;
+  this->mOffset.z = z;
   v4 = UFG::qVector3::msZero.y;
   v5 = UFG::qVector3::msZero.z;
-  v1->mForce.x = UFG::qVector3::msZero.x;
-  v1->mForce.y = v4;
-  v1->mForce.z = v5;
-  v1->mDecayRate = 0.0;
+  this->mForce.x = UFG::qVector3::msZero.x;
+  this->mForce.y = v4;
+  this->mForce.z = v5;
+  this->mDecayRate = 0.0;
 }
 
 // File Line: 441
 // RVA: 0x2E3E40
 void __fastcall DestructionThrusterTrack::~DestructionThrusterTrack(DestructionThrusterTrack *this)
 {
-  DestructionThrusterTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&DestructionThrusterTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 458
@@ -576,54 +509,48 @@ __int64 dynamic_initializer_for__DestructionHingeConstraintTrack::sClassNameUID_
 // RVA: 0x2DEB90
 void __fastcall DestructionHingeConstraintTrack::DestructionHingeConstraintTrack(DestructionHingeConstraintTrack *this)
 {
-  DestructionHingeConstraintTrack *v1; // rbx
-  float v2; // xmm1_4
-  float v3; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
   float v4; // xmm1_4
   float v5; // xmm2_4
 
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, DestructionHingeConstraintTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DestructionHingeConstraintTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DestructionHingeConstraintTrack::`vftable;
-  v1->mDestructionObjectName = UFG::gNullQSymbolUC;
-  v1->mConstraintName = UFG::gNullQSymbol;
-  v2 = UFG::qVector3::msZero.y;
-  v3 = UFG::qVector3::msZero.z;
-  v1->mPivot.x = UFG::qVector3::msZero.x;
-  v1->mPivot.y = v2;
-  v1->mPivot.z = v3;
+  ITrack::ITrack(this, DestructionHingeConstraintTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<DestructionHingeConstraintTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&DestructionHingeConstraintTrack::`vftable;
+  this->mDestructionObjectName = UFG::gNullQSymbolUC;
+  this->mConstraintName = UFG::gNullQSymbol;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
+  this->mPivot.x = UFG::qVector3::msZero.x;
+  this->mPivot.y = y;
+  this->mPivot.z = z;
   v4 = UFG::qVector3::msAxisZ.y;
   v5 = UFG::qVector3::msAxisZ.z;
-  v1->mAxis.x = UFG::qVector3::msAxisZ.x;
-  v1->mAxis.y = v4;
-  v1->mAxis.z = v5;
-  v1->mLimitMin = 0.0;
-  v1->mLimitMax = 1.0;
+  this->mAxis.x = UFG::qVector3::msAxisZ.x;
+  this->mAxis.y = v4;
+  this->mAxis.z = v5;
+  this->mLimitMin = 0.0;
+  this->mLimitMax = 1.0;
 }
 
 // File Line: 484
 // RVA: 0x2E3BA0
-void __fastcall DestructionHingeConstraintTrack::~DestructionHingeConstraintTrack(DestructionHingeConstraintTrack *this)
+void __fastcall DestructionHingeConstraintTrack::~DestructionHingeConstraintTrack(
+        DestructionHingeConstraintTrack *this)
 {
-  DestructionHingeConstraintTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&DestructionHingeConstraintTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 502
@@ -639,54 +566,49 @@ __int64 dynamic_initializer_for__DestructionStiffSpringConstraintTrack::sClassNa
 
 // File Line: 519
 // RVA: 0x2DEEA0
-void __fastcall DestructionStiffSpringConstraintTrack::DestructionStiffSpringConstraintTrack(DestructionStiffSpringConstraintTrack *this)
+void __fastcall DestructionStiffSpringConstraintTrack::DestructionStiffSpringConstraintTrack(
+        DestructionStiffSpringConstraintTrack *this)
 {
-  DestructionStiffSpringConstraintTrack *v1; // rbx
-  float v2; // xmm1_4
-  float v3; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
   float v4; // xmm1_4
   float v5; // xmm2_4
 
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, DestructionStiffSpringConstraintTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DestructionStiffSpringConstraintTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DestructionStiffSpringConstraintTrack::`vftable;
-  v1->mDestructionObjectName = UFG::gNullQSymbolUC;
-  v1->mConstraintName = UFG::gNullQSymbol;
-  v2 = UFG::qVector3::msZero.y;
-  v3 = UFG::qVector3::msZero.z;
-  v1->mPivot1.x = UFG::qVector3::msZero.x;
-  v1->mPivot1.y = v2;
-  v1->mPivot1.z = v3;
+  ITrack::ITrack(this, DestructionStiffSpringConstraintTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<DestructionStiffSpringConstraintTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&DestructionStiffSpringConstraintTrack::`vftable;
+  this->mDestructionObjectName = UFG::gNullQSymbolUC;
+  this->mConstraintName = UFG::gNullQSymbol;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
+  this->mPivot1.x = UFG::qVector3::msZero.x;
+  this->mPivot1.y = y;
+  this->mPivot1.z = z;
   v4 = UFG::qVector3::msZero.y;
   v5 = UFG::qVector3::msZero.z;
-  v1->mPivot2.x = UFG::qVector3::msZero.x;
-  v1->mPivot2.y = v4;
-  v1->mPivot2.z = v5;
+  this->mPivot2.x = UFG::qVector3::msZero.x;
+  this->mPivot2.y = v4;
+  this->mPivot2.z = v5;
 }
 
 // File Line: 524
 // RVA: 0x2E3DD0
-void __fastcall DestructionStiffSpringConstraintTrack::~DestructionStiffSpringConstraintTrack(DestructionStiffSpringConstraintTrack *this)
+void __fastcall DestructionStiffSpringConstraintTrack::~DestructionStiffSpringConstraintTrack(
+        DestructionStiffSpringConstraintTrack *this)
 {
-  DestructionStiffSpringConstraintTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&DestructionStiffSpringConstraintTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 541
@@ -702,46 +624,41 @@ __int64 dynamic_initializer_for__DestructionBallAndSocketConstraintTrack::sClass
 
 // File Line: 554
 // RVA: 0x2DE910
-void __fastcall DestructionBallAndSocketConstraintTrack::DestructionBallAndSocketConstraintTrack(DestructionBallAndSocketConstraintTrack *this)
+void __fastcall DestructionBallAndSocketConstraintTrack::DestructionBallAndSocketConstraintTrack(
+        DestructionBallAndSocketConstraintTrack *this)
 {
-  DestructionBallAndSocketConstraintTrack *v1; // rbx
-  float v2; // xmm1_4
-  float v3; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
 
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, DestructionBallAndSocketConstraintTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<DestructionBallAndSocketConstraintTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&DestructionBallAndSocketConstraintTrack::`vftable;
-  v1->mDestructionObjectName = UFG::gNullQSymbolUC;
-  v1->mConstraintName = UFG::gNullQSymbol;
-  v2 = UFG::qVector3::msZero.y;
-  v3 = UFG::qVector3::msZero.z;
-  v1->mPivot.x = UFG::qVector3::msZero.x;
-  v1->mPivot.y = v2;
-  v1->mPivot.z = v3;
+  ITrack::ITrack(this, DestructionBallAndSocketConstraintTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<DestructionBallAndSocketConstraintTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&DestructionBallAndSocketConstraintTrack::`vftable;
+  this->mDestructionObjectName = UFG::gNullQSymbolUC;
+  this->mConstraintName = UFG::gNullQSymbol;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
+  this->mPivot.x = UFG::qVector3::msZero.x;
+  this->mPivot.y = y;
+  this->mPivot.z = z;
 }
 
 // File Line: 559
 // RVA: 0x2E3900
-void __fastcall DestructionBallAndSocketConstraintTrack::~DestructionBallAndSocketConstraintTrack(DestructionBallAndSocketConstraintTrack *this)
+void __fastcall DestructionBallAndSocketConstraintTrack::~DestructionBallAndSocketConstraintTrack(
+        DestructionBallAndSocketConstraintTrack *this)
 {
-  DestructionBallAndSocketConstraintTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&DestructionBallAndSocketConstraintTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 

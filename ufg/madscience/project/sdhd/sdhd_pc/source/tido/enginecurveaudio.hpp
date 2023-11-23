@@ -17,19 +17,17 @@ void __fastcall UFG::AudioCurveSymbolManager::GetInstance()
 // RVA: 0x592BA0
 void __fastcall UFG::AudioCurveSymbolManager::AudioCurveSymbolManager(UFG::AudioCurveSymbolManager *this)
 {
-  UFG::AudioCurveSymbolManager *v1; // rbx
-  UFG::qSymbol *v2; // rax
-  signed __int64 v3; // rdx
+  UFG::AudioCurveSymbolManager *v2; // rax
+  __int64 v3; // rdx
 
-  v1 = this;
   `eh vector constructor iterator(this, 4ui64, 255, (void (__fastcall *)(void *))BackInfo::BackInfo);
-  v1->m_numSymbols = 1;
-  v2 = (UFG::qSymbol *)v1;
+  this->m_numSymbols = 1;
+  v2 = this;
   v3 = 254i64;
   do
   {
-    v2->mUID = UFG::gNullQSymbol.mUID;
-    ++v2;
+    v2->m_symbols[0] = UFG::gNullQSymbol;
+    v2 = (UFG::AudioCurveSymbolManager *)((char *)v2 + 4);
     --v3;
   }
   while ( v3 );
@@ -39,30 +37,28 @@ void __fastcall UFG::AudioCurveSymbolManager::AudioCurveSymbolManager(UFG::Audio
 // RVA: 0x593CF0
 void __fastcall UFG::AudioCurve::~AudioCurve(UFG::AudioCurve *this)
 {
-  UFG::AudioCurve *v1; // rsi
-  UFG::qArray<UFG::AudioCurve::PointProperties,0> *v2; // rdi
-  UFG::AudioCurve::PointProperties *v3; // rcx
-  UFG::qSymbol *v4; // rbx
+  UFG::qArray<UFG::AudioCurve::PointProperties,0> *mPointProperties; // rdi
+  UFG::AudioCurve::PointProperties *p; // rcx
+  UFG::qSymbol *p_mVehicleEvent; // rbx
 
-  v1 = this;
-  v2 = this->mPointProperties;
-  if ( v2 )
+  mPointProperties = this->mPointProperties;
+  if ( mPointProperties )
   {
-    v3 = v2->p;
-    if ( v3 )
+    p = mPointProperties->p;
+    if ( p )
     {
-      v4 = &v3[-1].mVehicleEvent;
+      p_mVehicleEvent = &p[-1].mVehicleEvent;
       `eh vector destructor iterator(
-        v3,
+        p,
         0xCui64,
-        v3[-1].mVehicleEvent.mUID,
+        p[-1].mVehicleEvent.mUID,
         (void (__fastcall *)(void *))UFG::AudioCurve::PointProperties::~PointProperties);
-      operator delete[](v4);
+      operator delete[](p_mVehicleEvent);
     }
-    v2->p = 0i64;
-    *(_QWORD *)&v2->size = 0i64;
-    operator delete[](v2);
-    v1->mPointProperties = 0i64;
+    mPointProperties->p = 0i64;
+    *(_QWORD *)&mPointProperties->size = 0i64;
+    operator delete[](mPointProperties);
+    this->mPointProperties = 0i64;
   }
   else
   {
@@ -75,29 +71,27 @@ void __fastcall UFG::AudioCurve::~AudioCurve(UFG::AudioCurve *this)
 // RVA: 0x5944F0
 void __fastcall UFG::EngineCurve::~EngineCurve(UFG::EngineCurve *this)
 {
-  UFG::EngineCurve *v1; // rbx
-  UFG::AudioCurveSet **v2; // rcx
+  UFG::AudioCurveSet **p; // rcx
   UFG::AudioCurveSet **v3; // rcx
-  UFG::qNode<UFG::EngineCurve,UFG::EngineCurve> *v4; // rcx
-  UFG::qNode<UFG::EngineCurve,UFG::EngineCurve> *v5; // rax
+  UFG::qNode<UFG::EngineCurve,UFG::EngineCurve> *mPrev; // rcx
+  UFG::qNode<UFG::EngineCurve,UFG::EngineCurve> *mNext; // rax
 
-  v1 = this;
   UFG::EngineCurve::DestroyEngineCurve(this);
-  v2 = v1->m_namedCurveSets.p;
-  if ( v2 )
-    operator delete[](v2);
-  v1->m_namedCurveSets.p = 0i64;
-  *(_QWORD *)&v1->m_namedCurveSets.size = 0i64;
-  v3 = v1->m_gears.p;
+  p = this->m_namedCurveSets.p;
+  if ( p )
+    operator delete[](p);
+  this->m_namedCurveSets.p = 0i64;
+  *(_QWORD *)&this->m_namedCurveSets.size = 0i64;
+  v3 = this->m_gears.p;
   if ( v3 )
     operator delete[](v3);
-  v1->m_gears.p = 0i64;
-  *(_QWORD *)&v1->m_gears.size = 0i64;
-  v4 = v1->mPrev;
-  v5 = v1->mNext;
-  v4->mNext = v5;
-  v5->mPrev = v4;
-  v1->mPrev = (UFG::qNode<UFG::EngineCurve,UFG::EngineCurve> *)&v1->mPrev;
-  v1->mNext = (UFG::qNode<UFG::EngineCurve,UFG::EngineCurve> *)&v1->mPrev;
+  this->m_gears.p = 0i64;
+  *(_QWORD *)&this->m_gears.size = 0i64;
+  mPrev = this->mPrev;
+  mNext = this->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->mPrev = this;
+  this->mNext = this;
 }
 

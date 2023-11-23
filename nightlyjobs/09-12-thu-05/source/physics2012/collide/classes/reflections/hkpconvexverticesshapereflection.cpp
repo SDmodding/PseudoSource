@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkpConvexVerticesShapeClass__()
     &hkpConvexVerticesShape_Default,
     0i64,
     0,
-    6u);
+    6);
 }
 
 // File Line: 86
@@ -28,23 +28,24 @@ hkClass *__fastcall hkpConvexVerticesShape::staticClass()
 
 // File Line: 93
 // RVA: 0xCEB8F0
-void __fastcall finishLoadedObjecthkpConvexVerticesShape(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpConvexVerticesShape(hkpConvexVerticesShape *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpConvexVerticesShape::hkpConvexVerticesShape);
+  if ( p )
+    hkpConvexVerticesShape::hkpConvexVerticesShape(p, finishing);
 }
 
 // File Line: 99
 // RVA: 0xCEB910
-void __fastcall cleanupLoadedObjecthkpConvexVerticesShape(void *p)
+void __fastcall cleanupLoadedObjecthkpConvexVerticesShape(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 103
 // RVA: 0xCEB920
 hkBaseObjectVtbl *__fastcall getVtablehkpConvexVerticesShape()
 {
-  hkpConvexVerticesShape v1; // [rsp+20h] [rbp-88h]
+  hkpConvexVerticesShape v1; // [rsp+20h] [rbp-88h] BYREF
 
   hkpConvexVerticesShape::hkpConvexVerticesShape(&v1, 0);
   return v1.vfptr;
@@ -61,8 +62,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpConvexVerticesShapeTypeInfo__()
   hkpConvexVerticesShapeTypeInfo.m_typeName = "hkpConvexVerticesShape";
   hkpConvexVerticesShapeTypeInfo.m_vtable = result;
   hkpConvexVerticesShapeTypeInfo.m_scopedName = "!hkpConvexVerticesShape";
-  hkpConvexVerticesShapeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpConvexVerticesShape;
-  hkpConvexVerticesShapeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpConvexVerticesShape;
+  hkpConvexVerticesShapeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpConvexVerticesShape;
+  hkpConvexVerticesShapeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpConvexVerticesShape;
   return result;
 }
 

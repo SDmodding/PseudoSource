@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkaiNavVolumeGenerationSnapshotClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 58
@@ -28,30 +28,22 @@ hkClass *__fastcall hkaiNavVolumeGenerationSnapshot::staticClass()
 
 // File Line: 65
 // RVA: 0xBB7ED0
-void __fastcall finishLoadedObjecthkaiNavVolumeGenerationSnapshot(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiNavVolumeGenerationSnapshot(char *p, hkFinishLoadedObjectFlag finishing)
 {
-  int v2; // edi
-  char *v3; // rbx
-
   if ( p )
   {
-    v2 = finishing;
-    v3 = (char *)p;
-    hkGeometry::hkGeometry((hkGeometry *)p, (hkFinishLoadedObjectFlag)finishing);
+    hkGeometry::hkGeometry((hkGeometry *)p, finishing);
     hkaiNavVolumeGenerationSettings::hkaiNavVolumeGenerationSettings(
-      (hkaiNavVolumeGenerationSettings *)(v3 + 48),
-      (hkFinishLoadedObjectFlag)v2);
+      (hkaiNavVolumeGenerationSettings *)(p + 48),
+      finishing);
   }
 }
 
 // File Line: 71
 // RVA: 0xBB7F10
-void __fastcall cleanupLoadedObjecthkaiNavVolumeGenerationSnapshot(void *p)
+void __fastcall cleanupLoadedObjecthkaiNavVolumeGenerationSnapshot(char *p)
 {
-  hkGeometry *v1; // rbx
-
-  v1 = (hkGeometry *)p;
-  hkaiNavVolumeGenerationSettings::~hkaiNavVolumeGenerationSettings((hkaiNavVolumeGenerationSettings *)((char *)p + 48));
-  hkGeometry::~hkGeometry(v1);
+  hkaiNavVolumeGenerationSettings::~hkaiNavVolumeGenerationSettings((hkaiNavVolumeGenerationSettings *)(p + 48));
+  hkGeometry::~hkGeometry((hkGeometry *)p);
 }
 

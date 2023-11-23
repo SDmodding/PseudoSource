@@ -2,10 +2,10 @@
 // RVA: 0xB8720
 void __fastcall UFG::BroadPhaseHandler::maxPositionExceededCallback(UFG::BroadPhaseHandler *this, hkpEntity *entity)
 {
-  void (__fastcall *v2)(hkpEntity *); // rax
+  void (__fastcall *mCallback)(hkpEntity *); // rax
 
-  v2 = this->mCallback;
-  if ( v2 )
-    v2(entity);
+  mCallback = this->mCallback;
+  if ( mCallback )
+    mCallback(entity);
 }
 

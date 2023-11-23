@@ -1,13 +1,15 @@
 // File Line: 23
 // RVA: 0xD310E0
-float __fastcall hkCpuWorldRayCastCollector::addBroadPhaseHandle(hkCpuWorldRayCastCollector *this, hkpBroadPhaseHandle *broadPhaseHandle, int castIndex)
+float __fastcall hkCpuWorldRayCastCollector::addBroadPhaseHandle(
+        hkCpuWorldRayCastCollector *this,
+        hkpBroadPhaseHandle *broadPhaseHandle,
+        int castIndex)
 {
-  __m128 *v3; // rbx
   hkpCollidable *v4; // rdi
-  hkpShape *v5; // rsi
-  __m128 *v6; // rax
-  unsigned __int64 v7; // r9
-  __m128 *v8; // rbp
+  hkpShape *m_shape; // rsi
+  hkpWorldRayCastInput *m_originalInput; // rax
+  hkpFixedBufferRayHitCollector *m_fixedBufferRayHitCollector; // r9
+  __m128 *m_motion; // rbp
   __m128 v9; // xmm6
   __m128 v10; // xmm4
   __m128 v11; // xmm1
@@ -17,132 +19,141 @@ float __fastcall hkCpuWorldRayCastCollector::addBroadPhaseHandle(hkCpuWorldRayCa
   __m128 v15; // xmm1
   __m128 v16; // xmm5
   __m128 v17; // xmm2
-  float v18; // xmm0_4
-  unsigned __int64 v19; // rax
-  hkBaseObjectVtbl *v20; // rax
-  unsigned __int64 v21; // rdx
-  signed __int64 v22; // rcx
-  signed int v23; // eax
+  float m_hitFraction; // xmm0_4
+  unsigned __int64 m_userData; // rax
+  hkBaseObjectVtbl *vfptr; // rax
+  hkpWorldRayCastCommand *m_command; // rdx
+  hkpWorldRayCastOutput *m_result; // rcx
+  int m_numResultsOut; // eax
   float v24; // xmm3_4
-  signed __int64 v25; // rdx
+  hkpWorldRayCastOutput *v25; // rdx
   __int64 v26; // r8
-  signed int v27; // edx
+  int v27; // edx
   __m128 *v28; // rax
   __m128 v29; // xmm0
-  unsigned __int64 v30; // rax
+  hkpWorldRayCastCommand *v30; // rax
   float v31; // xmm0_4
-  __m128 v32; // xmm0
-  __m128 v34; // [rsp+20h] [rbp-68h]
+  __m128 m_earlyOutHitFraction_low; // xmm0
+  __m128 v34; // [rsp+20h] [rbp-68h] BYREF
   float v35; // [rsp+30h] [rbp-58h]
   int v36; // [rsp+34h] [rbp-54h]
   int v37; // [rsp+40h] [rbp-48h]
   int v38; // [rsp+60h] [rbp-28h]
-  char v39; // [rsp+90h] [rbp+8h]
+  char v39; // [rsp+90h] [rbp+8h] BYREF
 
-  v3 = (__m128 *)this;
   v4 = (hkpCollidable *)((char *)broadPhaseHandle + SBYTE1(broadPhaseHandle[1].m_id));
-  v5 = v4->m_shape;
+  m_shape = v4->m_shape;
   if ( !v4->m_shape )
     return this->m_hitFraction;
-  if ( *(_BYTE *)this->m_filter->vfptr->isCollisionEnabled(
-                   (hkpRayCollidableFilter *)&this->m_filter->vfptr,
-                   (hkBool *)&v39,
-                   this->m_originalInput,
-                   v4) )
+  if ( this->m_filter->vfptr->isCollisionEnabled(
+         &this->m_filter->hkpRayCollidableFilter,
+         &v39,
+         this->m_originalInput,
+         v4)->m_bool )
   {
-    v6 = (__m128 *)v3[2].m128_u64[0];
-    v7 = v3[8].m128_u64[0];
-    v8 = (__m128 *)v4->m_motion;
-    v9 = _mm_sub_ps(*v6, v8[3]);
-    v10 = v8[2];
-    v11 = _mm_unpacklo_ps(*v8, v8[1]);
+    m_originalInput = this->m_originalInput;
+    m_fixedBufferRayHitCollector = this->m_fixedBufferRayHitCollector;
+    m_motion = (__m128 *)v4->m_motion;
+    v9 = _mm_sub_ps(m_originalInput->m_from.m_quad, m_motion[3]);
+    v10 = m_motion[2];
+    v11 = _mm_unpacklo_ps(*m_motion, m_motion[1]);
     v12 = _mm_movelh_ps(v11, v10);
-    v3[4] = _mm_add_ps(
-              _mm_add_ps(
-                _mm_mul_ps(_mm_shuffle_ps(_mm_movehl_ps(v12, v11), v10, 212), _mm_shuffle_ps(v9, v9, 85)),
-                _mm_mul_ps(_mm_shuffle_ps(v9, v9, 0), v12)),
-              _mm_mul_ps(_mm_shuffle_ps(v9, v9, 170), _mm_shuffle_ps(_mm_unpackhi_ps(*v8, v8[1]), v10, 228)));
-    v13 = v8[2];
-    v14 = _mm_sub_ps(v6[1], v8[3]);
-    v15 = _mm_unpacklo_ps(*v8, v8[1]);
-    v16 = _mm_shuffle_ps(_mm_unpackhi_ps(*v8, v8[1]), v13, 228);
-    v3[7].m128_u64[0] = (unsigned __int64)v4;
+    this->m_workInput.m_from.m_quad = _mm_add_ps(
+                                        _mm_add_ps(
+                                          _mm_mul_ps(
+                                            _mm_shuffle_ps(_mm_movehl_ps(v12, v11), v10, 212),
+                                            _mm_shuffle_ps(v9, v9, 85)),
+                                          _mm_mul_ps(_mm_shuffle_ps(v9, v9, 0), v12)),
+                                        _mm_mul_ps(
+                                          _mm_shuffle_ps(v9, v9, 170),
+                                          _mm_shuffle_ps(_mm_unpackhi_ps(*m_motion, m_motion[1]), v10, 228)));
+    v13 = m_motion[2];
+    v14 = _mm_sub_ps(m_originalInput->m_to.m_quad, m_motion[3]);
+    v15 = _mm_unpacklo_ps(*m_motion, m_motion[1]);
+    v16 = _mm_shuffle_ps(_mm_unpackhi_ps(*m_motion, m_motion[1]), v13, 228);
+    this->m_workInput.m_collidable = v4;
     v17 = _mm_movelh_ps(v15, v13);
-    v18 = v3[1].m128_f32[0];
-    v3[5] = _mm_add_ps(
-              _mm_add_ps(
-                _mm_mul_ps(_mm_shuffle_ps(_mm_movehl_ps(v17, v15), v13, 212), _mm_shuffle_ps(v14, v14, 85)),
-                _mm_mul_ps(_mm_shuffle_ps(v14, v14, 0), v17)),
-              _mm_mul_ps(_mm_shuffle_ps(v14, v14, 170), v16));
-    v19 = v6[2].m128_u64[1];
-    v35 = v18;
-    v3[7].m128_u64[1] = v19;
-    v20 = v5->vfptr;
+    m_hitFraction = this->m_hitFraction;
+    this->m_workInput.m_to.m_quad = _mm_add_ps(
+                                      _mm_add_ps(
+                                        _mm_mul_ps(
+                                          _mm_shuffle_ps(_mm_movehl_ps(v17, v15), v13, 212),
+                                          _mm_shuffle_ps(v14, v14, 85)),
+                                        _mm_mul_ps(_mm_shuffle_ps(v14, v14, 0), v17)),
+                                      _mm_mul_ps(_mm_shuffle_ps(v14, v14, 170), v16));
+    m_userData = m_originalInput->m_userData;
+    v35 = m_hitFraction;
+    this->m_workInput.m_userData = m_userData;
+    vfptr = m_shape->vfptr;
     v36 = -1;
     v38 = 0;
     v37 = -1;
-    if ( v7 )
+    if ( m_fixedBufferRayHitCollector )
     {
-      ((void (__fastcall *)(hkpShape *, __m128 *, hkpCollidable *))v20[3].__vecDelDtor)(v5, v3 + 4, v4);
-      *(_DWORD *)(v3[1].m128_u64[1] + 60) = *(_DWORD *)(v3[8].m128_u64[0] + 36);
-      v32 = (__m128)*(unsigned int *)(v3[8].m128_u64[0] + 8);
+      ((void (__fastcall *)(hkpShape *, hkpShapeRayCastInput *, hkpCollidable *))vfptr[3].__vecDelDtor)(
+        m_shape,
+        &this->m_workInput,
+        v4);
+      this->m_command->m_numResultsOut = this->m_fixedBufferRayHitCollector->m_numOutputs.m_storage;
+      m_earlyOutHitFraction_low = (__m128)LODWORD(this->m_fixedBufferRayHitCollector->m_earlyOutHitFraction);
     }
     else
     {
-      ((void (__fastcall *)(hkpShape *, char *, __m128 *, __m128 *))v20[2].__first_virtual_table_function__)(
-        v5,
+      ((void (__fastcall *)(hkpShape *, char *, hkpShapeRayCastInput *, __m128 *))vfptr[2].__first_virtual_table_function__)(
+        m_shape,
         &v39,
-        v3 + 4,
+        &this->m_workInput,
         &v34);
       if ( !v39 )
-        return v3[1].m128_f32[0];
-      v21 = v3[1].m128_u64[1];
-      v22 = v3[2].m128_i64[1];
-      v23 = *(_DWORD *)(v21 + 60);
-      if ( v23 >= *(_DWORD *)(v21 + 56) )
+        return this->m_hitFraction;
+      m_command = this->m_command;
+      m_result = this->m_result;
+      m_numResultsOut = m_command->m_numResultsOut;
+      if ( m_numResultsOut >= m_command->m_resultsCapacity )
       {
-        v25 = v22 + 96;
-        if ( v23 > 1 )
+        v25 = m_result + 1;
+        if ( m_numResultsOut > 1 )
         {
-          v26 = (unsigned int)(v23 - 1);
+          v26 = (unsigned int)(m_numResultsOut - 1);
           do
           {
-            if ( *(float *)(v22 + 16) < *(float *)(v25 + 16) )
-              v22 = v25;
-            v25 += 96i64;
+            if ( m_result->m_hitFraction < v25->m_hitFraction )
+              m_result = v25;
+            ++v25;
             --v26;
           }
           while ( v26 );
         }
-        v24 = *(float *)(v22 + 16);
+        v24 = m_result->m_hitFraction;
         if ( v35 >= v24 )
-          return v3[1].m128_f32[0];
+          return this->m_hitFraction;
       }
       else
       {
-        v22 = v3[3].m128_i64[0];
+        m_result = this->m_nextFreeResult;
         v24 = *(float *)&FLOAT_1_0;
-        *(_DWORD *)(v21 + 60) = v23 + 1;
-        v3[3].m128_u64[0] += 96i64;
+        m_command->m_numResultsOut = m_numResultsOut + 1;
+        ++this->m_nextFreeResult;
       }
-      if ( !v22 )
-        return v3[1].m128_f32[0];
+      if ( !m_result )
+        return this->m_hitFraction;
       v27 = 6;
       v28 = &v34;
       v34 = _mm_add_ps(
-              _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v34, v34, 85), v8[1]), _mm_mul_ps(_mm_shuffle_ps(v34, v34, 0), *v8)),
-              _mm_mul_ps(_mm_shuffle_ps(v34, v34, 170), v8[2]));
+              _mm_add_ps(
+                _mm_mul_ps(_mm_shuffle_ps(v34, v34, 85), m_motion[1]),
+                _mm_mul_ps(_mm_shuffle_ps(v34, v34, 0), *m_motion)),
+              _mm_mul_ps(_mm_shuffle_ps(v34, v34, 170), m_motion[2]));
       do
       {
         v29 = *v28;
         --v27;
-        ++v28;
-        *(__m128 *)((char *)v28 + v22 - (_QWORD)&v34 - 16) = v29;
+        *(__m128 *)((char *)++v28 + (char *)m_result - (char *)&v34 - 16) = v29;
       }
       while ( v27 > 0 );
-      *(_QWORD *)(v22 + 80) = v4;
-      v30 = v3[1].m128_u64[1];
-      if ( *(_BYTE *)(v30 + 65) )
+      m_result->m_rootCollidable = v4;
+      v30 = this->m_command;
+      if ( v30->m_stopAfterFirstHit.m_bool )
       {
         v31 = 0.0;
         v35 = 0.0;
@@ -151,55 +162,57 @@ float __fastcall hkCpuWorldRayCastCollector::addBroadPhaseHandle(hkCpuWorldRayCa
       {
         v31 = v35;
       }
-      if ( *(_DWORD *)(v30 + 56) != 1 )
+      if ( v30->m_resultsCapacity != 1 )
         v31 = v24;
-      v3[1].m128_f32[0] = v31;
-      v3[1].m128_i8[4] = 1;
-      v32 = (__m128)v3[1].m128_u32[0];
+      this->m_hitFraction = v31;
+      this->m_hit.m_bool = 1;
+      m_earlyOutHitFraction_low = (__m128)LODWORD(this->m_hitFraction);
     }
-    v3[9] = _mm_shuffle_ps(v32, v32, 0);
-    return v3[1].m128_f32[0];
+    this->m_earlyOutHitFraction.m_quad = _mm_shuffle_ps(m_earlyOutHitFraction_low, m_earlyOutHitFraction_low, 0);
+    return this->m_hitFraction;
   }
-  return v3[1].m128_f32[0];
+  return this->m_hitFraction;
 }
 
 // File Line: 86
 // RVA: 0xD31630
-void __fastcall castRayBroadPhase(hkpBroadPhase *broadphase, hkpWorldRayCastCommand *command, hkCpuWorldRayCastCollector *collector, hkpFixedBufferRayHitCollector *fixedBufferHitCollector)
+void __fastcall castRayBroadPhase(
+        hkpBroadPhase *broadphase,
+        hkpWorldRayCastCommand *command,
+        hkCpuWorldRayCastCollector *collector,
+        hkpFixedBufferRayHitCollector *fixedBufferHitCollector)
 {
   hkVector4f v4; // xmm0
-  unsigned int v5; // eax
-  hkpBroadPhase *v6; // r10
-  hkpWorldRayCastOutput *v7; // rax
-  hkpCollisionFilter *v8; // rax
-  int v9; // ecx
+  unsigned int m_filterInfo; // eax
+  hkpWorldRayCastOutput *m_results; // rax
+  hkpCollisionFilter *m_filter; // rax
+  int m_resultsCapacity; // ecx
   hkpWorldRayCastOutput *v10; // rax
   hkpWorldRayCastOutput *v11; // rax
-  __m128 v12; // [rsp+20h] [rbp-38h]
+  __m128 m_quad; // [rsp+20h] [rbp-38h] BYREF
   int v13; // [rsp+30h] [rbp-28h]
-  hkVector4f *v14; // [rsp+38h] [rbp-20h]
+  hkVector4f *p_m_to; // [rsp+38h] [rbp-20h]
   int v15; // [rsp+40h] [rbp-18h]
   __int64 v16; // [rsp+48h] [rbp-10h]
 
   v4.m_quad = (__m128)command->m_rayInput.m_from;
   collector->m_originalInput = &command->m_rayInput;
-  v14 = &command->m_rayInput.m_to;
-  v5 = command->m_rayInput.m_filterInfo;
-  v12 = v4.m_quad;
-  collector->m_workInput.m_filterInfo = v5;
-  v6 = broadphase;
+  p_m_to = &command->m_rayInput.m_to;
+  m_filterInfo = command->m_rayInput.m_filterInfo;
+  m_quad = v4.m_quad;
+  collector->m_workInput.m_filterInfo = m_filterInfo;
   collector->m_result = command->m_results;
-  v7 = command->m_results;
+  m_results = command->m_results;
   collector->m_command = command;
-  collector->m_nextFreeResult = v7;
+  collector->m_nextFreeResult = m_results;
   v15 = 16;
   v16 = 0i64;
   v13 = 1;
   if ( command->m_rayInput.m_enableShapeCollectionFilter.m_bool )
   {
-    v8 = collector->m_filter;
-    if ( v8 )
-      collector->m_workInput.m_rayShapeCollectionFilter = (hkpRayShapeCollectionFilter *)&v8->vfptr;
+    m_filter = collector->m_filter;
+    if ( m_filter )
+      collector->m_workInput.m_rayShapeCollectionFilter = &m_filter->hkpRayShapeCollectionFilter;
     else
       collector->m_workInput.m_rayShapeCollectionFilter = 0i64;
   }
@@ -211,11 +224,11 @@ void __fastcall castRayBroadPhase(hkpBroadPhase *broadphase, hkpWorldRayCastComm
   {
     if ( fixedBufferHitCollector )
     {
-      v9 = command->m_resultsCapacity;
+      m_resultsCapacity = command->m_resultsCapacity;
       v10 = command->m_results;
       fixedBufferHitCollector->m_rayCastOutputBase.m_storage = v10;
       fixedBufferHitCollector->m_nextFreeOutput.m_storage = v10;
-      fixedBufferHitCollector->m_capacity.m_storage = v9;
+      fixedBufferHitCollector->m_capacity.m_storage = m_resultsCapacity;
       fixedBufferHitCollector->m_earlyOutHitFraction = 1.0;
       fixedBufferHitCollector->vfptr = (hkpRayHitCollectorVtbl *)&hkpFixedBufferRayHitCollector::`vftable;
       fixedBufferHitCollector->m_numOutputs.m_storage = 0;
@@ -238,42 +251,34 @@ void __fastcall castRayBroadPhase(hkpBroadPhase *broadphase, hkpWorldRayCastComm
   v11->m_extraInfo = -1;
   v11->m_shapeKeyIndex = 0;
   v11->m_shapeKeys[0] = -1;
-  ((void (__fastcall *)(hkpBroadPhase *, __m128 *, hkCpuWorldRayCastCollector *, _QWORD, unsigned __int64, unsigned __int64, _QWORD, hkVector4f *, _QWORD, __int64))v6->vfptr[12].__first_virtual_table_function__)(
-    v6,
-    &v12,
+  ((void (__fastcall *)(hkpBroadPhase *, __m128 *, hkCpuWorldRayCastCollector *, _QWORD))broadphase->vfptr[12].__first_virtual_table_function__)(
+    broadphase,
+    &m_quad,
     collector,
-    0i64,
-    v12.m128_u64[0],
-    v12.m128_u64[1],
-    *(_QWORD *)&v13,
-    v14,
-    *(_QWORD *)&v15,
-    v16);
+    0i64);
 }
 
 // File Line: 132
 // RVA: 0xD313C0
 __int64 __fastcall hkCpuWorldRayCastJob(hkJobQueue *jobQueue, hkJobQueue::JobQueueEntry *nextJobOut)
 {
-  hkJobQueue *v2; // r14
-  hkJobQueue::JobQueueEntry *v3; // rsi
-  _QWORD *v4; // rax
+  _QWORD *Value; // rax
   _QWORD *v5; // rcx
   _QWORD *v6; // r8
   unsigned __int64 v7; // rax
-  signed __int64 v8; // rcx
+  _QWORD *v8; // rcx
   hkpWorldRayCastCommand *v9; // rbx
   __int64 v10; // rax
   __int64 v11; // rcx
   int v12; // edi
   hkpBroadPhase *v13; // rcx
-  unsigned int v14; // eax
-  signed __int64 v15; // rbx
+  int v14; // eax
+  __int64 v15; // rbx
   __int64 v16; // r13
-  int v17; // er14
+  int v17; // r14d
   unsigned int *v18; // r15
   unsigned __int64 *v19; // r12
-  signed __int64 v20; // rdi
+  __int64 v20; // rdi
   hkVector4f v21; // xmm0
   hkVector4f v22; // xmm1
   hkpBroadPhase *v23; // rcx
@@ -282,9 +287,9 @@ __int64 __fastcall hkCpuWorldRayCastJob(hkJobQueue *jobQueue, hkJobQueue::JobQue
   _QWORD *v26; // rcx
   _QWORD *v27; // r8
   unsigned __int64 v28; // rax
-  signed __int64 v29; // rcx
-  hkpFixedBufferRayHitCollector fixedBufferHitCollector; // [rsp+20h] [rbp-C8h]
-  hkpWorldRayCastCommand command; // [rsp+50h] [rbp-98h]
+  _QWORD *v29; // rcx
+  hkpFixedBufferRayHitCollector fixedBufferHitCollector; // [rsp+20h] [rbp-C8h] BYREF
+  hkpWorldRayCastCommand command; // [rsp+50h] [rbp-98h] BYREF
   int v33; // [rsp+E8h] [rbp+0h]
   __int64 v34; // [rsp+F0h] [rbp+8h]
   __int64 v35; // [rsp+F8h] [rbp+10h]
@@ -292,22 +297,20 @@ __int64 __fastcall hkCpuWorldRayCastJob(hkJobQueue *jobQueue, hkJobQueue::JobQue
   __int64 v37; // [rsp+108h] [rbp+20h]
   hkJobQueue *v38; // [rsp+158h] [rbp+70h]
 
-  v2 = jobQueue;
-  v3 = nextJobOut;
-  v4 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v5 = (_QWORD *)v4[1];
-  v6 = v4;
-  if ( (unsigned __int64)v5 < v4[3] )
+  Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v5 = (_QWORD *)Value[1];
+  v6 = Value;
+  if ( (unsigned __int64)v5 < Value[3] )
   {
     *v5 = "TtCollQueryWorldRayCast";
     v7 = __rdtsc();
-    v8 = (signed __int64)(v5 + 2);
-    *(_DWORD *)(v8 - 8) = v7;
+    v8 = v5 + 2;
+    *((_DWORD *)v8 - 2) = v7;
     v6[1] = v8;
   }
-  v9 = *(hkpWorldRayCastCommand **)&v3->m_data[40];
+  v9 = *(hkpWorldRayCastCommand **)&nextJobOut->m_data[40];
   *(_QWORD *)&command.m_resultsCapacity = &hkCpuWorldRayCastCollector::`vftable;
-  v10 = *(_QWORD *)&v3->m_data[24];
+  v10 = *(_QWORD *)&nextJobOut->m_data[24];
   v33 = 0;
   v34 = 0i64;
   v35 = 0i64;
@@ -323,23 +326,23 @@ __int64 __fastcall hkCpuWorldRayCastJob(hkJobQueue *jobQueue, hkJobQueue::JobQue
   *(_QWORD *)&command.m_useCollector.m_bool = v11;
   fixedBufferHitCollector.vfptr = (hkpRayHitCollectorVtbl *)&hkpFixedBufferRayHitCollector::`vftable;
   *(_QWORD *)&fixedBufferHitCollector.m_capacity.m_storage = 1i64;
-  for ( fixedBufferHitCollector.m_collidableOnPpu.m_storage = 0i64; v12 < *(_DWORD *)&v3->m_data[48]; ++v9 )
+  for ( fixedBufferHitCollector.m_collidableOnPpu.m_storage = 0i64; v12 < *(_DWORD *)&nextJobOut->m_data[48]; ++v9 )
   {
-    v13 = *(hkpBroadPhase **)&v3->m_data[72];
+    v13 = *(hkpBroadPhase **)&nextJobOut->m_data[72];
     *(_DWORD *)(&command.m_stopAfterFirstHit + 7) = 1065353216;
     *((_BYTE *)&command.m_stopAfterFirstHit + 11) = 0;
     castRayBroadPhase(v13, v9, (hkCpuWorldRayCastCollector *)&command.m_resultsCapacity, &fixedBufferHitCollector);
     ++v12;
   }
-  v14 = *(_DWORD *)&v3->m_data[64];
-  if ( (signed int)v14 > 0 )
+  v14 = *(_DWORD *)&nextJobOut->m_data[64];
+  if ( v14 > 0 )
   {
-    v15 = *(_QWORD *)&v3->m_data[56] + 192i64;
-    v16 = v14;
+    v15 = *(_QWORD *)&nextJobOut->m_data[56] + 192i64;
+    v16 = (unsigned int)v14;
     do
     {
       v17 = 0;
-      if ( *(_DWORD *)v15 > 0 )
+      if ( *(int *)v15 > 0 )
       {
         v18 = (unsigned int *)(v15 + 48);
         v19 = (unsigned __int64 *)(v15 + 8);
@@ -348,7 +351,7 @@ __int64 __fastcall hkCpuWorldRayCastJob(hkJobQueue *jobQueue, hkJobQueue::JobQue
         {
           v21.m_quad = *(__m128 *)(v20 - 32);
           v22.m_quad = *(__m128 *)(v20 - 16);
-          v23 = *(hkpBroadPhase **)&v3->m_data[72];
+          v23 = *(hkpBroadPhase **)&nextJobOut->m_data[72];
           command.m_rayInput.m_enableShapeCollectionFilter.m_bool = *(_BYTE *)v20;
           v24 = *(_DWORD *)(v20 + 4);
           command.m_rayInput.m_from = (hkVector4f)v21.m_quad;
@@ -368,8 +371,7 @@ __int64 __fastcall hkCpuWorldRayCastJob(hkJobQueue *jobQueue, hkJobQueue::JobQue
             &fixedBufferHitCollector);
           ++v17;
           ++v19;
-          *v18 = command.m_rayInput.m_filterInfo;
-          ++v18;
+          *v18++ = command.m_rayInput.m_filterInfo;
           v20 += 48i64;
         }
         while ( v17 < *(_DWORD *)v15 );
@@ -378,7 +380,7 @@ __int64 __fastcall hkCpuWorldRayCastJob(hkJobQueue *jobQueue, hkJobQueue::JobQue
       --v16;
     }
     while ( v16 );
-    v2 = v38;
+    jobQueue = v38;
   }
   v25 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
   v26 = (_QWORD *)v25[1];
@@ -387,10 +389,10 @@ __int64 __fastcall hkCpuWorldRayCastJob(hkJobQueue *jobQueue, hkJobQueue::JobQue
   {
     *v26 = "Et";
     v28 = __rdtsc();
-    v29 = (signed __int64)(v26 + 2);
-    *(_DWORD *)(v29 - 8) = v28;
+    v29 = v26 + 2;
+    *((_DWORD *)v29 - 2) = v28;
     v27[1] = v29;
   }
-  return hkJobQueue::finishJobAndGetNextJob(v2, v3, v3, 0);
+  return hkJobQueue::finishJobAndGetNextJob(jobQueue, nextJobOut, nextJobOut, WAIT_FOR_NEXT_JOB);
 }
 

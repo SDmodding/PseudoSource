@@ -1,106 +1,103 @@
 // File Line: 41
 // RVA: 0x12AFD10
-float __fastcall fmodf(float result, float y)
+float __fastcall fmodf(float x, float y)
 {
   double v2; // r8
-  double v3; // r11
-  double v4; // r9
-  double v5; // r10
-  unsigned __int64 v6; // rcx
-  unsigned __int64 v7; // rdx
-  double v8; // xmm2_8
-  double v9; // xmm3_8
-  unsigned int v10; // er8
-  double v11; // xmm4_8
-  int v12; // edx
-  unsigned int v13; // edx
-  __int64 v14; // rcx
-  double v15; // xmm1_8
-  double v16; // xmm2_8
-  double v17; // xmm0_8
+  double v3; // r9
+  double v4; // r10
+  unsigned __int64 v5; // rcx
+  unsigned __int64 v6; // rdx
+  double v7; // xmm2_8
+  double v8; // xmm3_8
+  unsigned int v9; // r8d
+  double v10; // xmm4_8
+  int v11; // edx
+  unsigned int v12; // edx
+  __int64 v13; // rcx
+  double v14; // xmm1_8
+  double v15; // xmm2_8
+  double v16; // xmm0_8
   float arg1; // [rsp+30h] [rbp-28h]
   float arg2; // [rsp+38h] [rbp-20h]
-  float v20; // [rsp+60h] [rbp+8h]
+  float v19; // [rsp+60h] [rbp+8h]
 
-  v20 = result;
-  v2 = result;
-  v3 = y;
-  *(_QWORD *)&v4 = *(unsigned __int64 *)&result & 0x7FFFFFFFFFFFFFFFi64;
-  *(_QWORD *)&v5 = *(unsigned __int64 *)&y & 0x7FFFFFFFFFFFFFFFi64;
-  v6 = (*(unsigned __int64 *)&result >> 52) & 0x7FF;
-  v7 = (*(unsigned __int64 *)&y >> 52) & 0x7FF;
-  if ( (signed int)v6 >= 1 )
+  v19 = x;
+  v2 = x;
+  v3 = fabs(x);
+  v4 = fabs(y);
+  v5 = (COERCE_UNSIGNED_INT64(x) >> 52) & 0x7FF;
+  v6 = (COERCE_UNSIGNED_INT64(y) >> 52) & 0x7FF;
+  if ( ((COERCE_UNSIGNED_INT64(x) >> 52) & 0x7FF) != 0 )
   {
-    if ( (signed int)v6 > 2046 )
+    if ( ((COERCE_UNSIGNED_INT64(x) >> 52) & 0x7FF) == 2047 )
       goto LABEL_20;
-    if ( (unsigned int)(v7 - 1) <= 0x7FD )
+    if ( (unsigned int)(v6 - 1) <= 0x7FD )
     {
-      if ( *(_QWORD *)&v4 == *(_QWORD *)&v5 )
+      if ( *(_QWORD *)&v3 == *(_QWORD *)&v4 )
         return COERCE_DOUBLE(*(_QWORD *)&v2 & 0x8000000000000000ui64);
-      *(_QWORD *)&v8 = *(unsigned __int64 *)&result & 0x7FFFFFFFFFFFFFFFi64;
-      *(_QWORD *)&v9 = *(unsigned __int64 *)&y & 0x7FFFFFFFFFFFFFFFi64;
-      if ( *(_QWORD *)&v4 >= *(_QWORD *)&v5 )
+      v7 = v3;
+      v8 = v4;
+      if ( *(_QWORD *)&v3 >= *(_QWORD *)&v4 )
       {
-        v10 = _mm_getcsr();
-        if ( (signed int)v6 > (signed int)v7 )
+        v9 = _mm_getcsr();
+        if ( (int)v5 > (int)v6 )
         {
-          v13 = (signed int)((unsigned __int64)(715827883i64 * ((signed int)v6 - (signed int)v7)) >> 32) >> 2;
-          v12 = (v13 >> 31) + v13;
-          v11 = 0.00000005960464477539062;
-          v9 = COERCE_DOUBLE((signed __int64)(24 * v12 + 1023) << 52) * v5;
+          v12 = (int)((unsigned __int64)(715827883i64 * ((int)v5 - (int)v6)) >> 32) >> 2;
+          v11 = (v12 >> 31) + v12;
+          v10 = 0.00000005960464477539062;
+          v8 = COERCE_DOUBLE((__int64)(24 * v11 + 1023) << 52) * v4;
         }
         else
         {
-          v11 = DOUBLE_1_0;
-          v12 = 0;
+          v10 = DOUBLE_1_0;
+          v11 = 0;
         }
-        if ( v12 > 0 )
+        if ( v11 > 0 )
         {
-          v14 = (unsigned int)v12;
+          v13 = (unsigned int)v11;
           do
           {
-            v15 = (double)(signed int)(v8 / v9) * v9;
-            v9 = v9 * v11;
-            v8 = v8 - v15;
-            --v14;
+            v14 = (double)(int)(v7 / v8) * v8;
+            v8 = v8 * v10;
+            v7 = v7 - v14;
+            --v13;
           }
-          while ( v14 );
+          while ( v13 );
         }
-        v16 = v8 - (double)(signed int)(v8 / v9) * v9;
-        _mm_setcsr(v10);
-        v17 = v16;
-        if ( v20 < 0.0 )
-          v17 = -v16;
-        result = v17;
+        v15 = v7 - (double)(int)(v7 / v8) * v8;
+        _mm_setcsr(v9);
+        v16 = v15;
+        if ( v19 < 0.0 )
+          return -v15;
+        return v16;
       }
       else
       {
-        if ( result < 0.0 )
-          v8 = -v4;
-        result = v8;
+        if ( x < 0.0 )
+          return -v3;
+        return v7;
       }
-      return result;
     }
   }
-  if ( (signed int)v6 > 2046 )
+  if ( ((COERCE_UNSIGNED_INT64(x) >> 52) & 0x7FF) == 2047 )
   {
 LABEL_20:
     arg2 = y;
-    arg1 = result;
-    if ( *(_QWORD *)&v2 & 0xFFFFFFFFFFFFFi64 )
-      return handle_errorf("fmodf", 22, LODWORD(result) | 0x400000i64, 1, 0, 33, result, y, 2);
+    arg1 = x;
+    if ( (*(_QWORD *)&v2 & 0xFFFFFFFFFFFFFi64) != 0 )
+      return handle_errorf("fmodf", 22, LODWORD(x) | 0x400000i64, 1, 0, 33, x, y, 2);
     return handle_errorf("fmodf", 22, 0xFFC00000ui64, 1, 8, 33, arg1, arg2, 2);
   }
-  if ( (signed int)v7 <= 2046 )
+  if ( ((COERCE_UNSIGNED_INT64(y) >> 52) & 0x7FF) != 2047 )
   {
-    if ( (signed int)v6 < 1 && (signed int)v7 >= 1 )
-      return result;
+    if ( ((COERCE_UNSIGNED_INT64(x) >> 52) & 0x7FF) == 0 && ((COERCE_UNSIGNED_INT64(y) >> 52) & 0x7FF) != 0 )
+      return x;
     arg2 = y;
-    arg1 = result;
+    arg1 = x;
     return handle_errorf("fmodf", 22, 0xFFC00000ui64, 1, 8, 33, arg1, arg2, 2);
   }
-  if ( *(_QWORD *)&v3 & 0xFFFFFFFFFFFFFi64 )
-    result = handle_errorf("fmodf", 22, LODWORD(y) | 0x400000i64, 1, 0, 33, result, y, 2);
-  return result;
+  if ( (COERCE_UNSIGNED_INT64(y) & 0xFFFFFFFFFFFFFi64) != 0 )
+    return handle_errorf("fmodf", 22, LODWORD(y) | 0x400000i64, 1, 0, 33, x, y, 2);
+  return x;
 }
 

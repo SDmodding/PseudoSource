@@ -3,32 +3,26 @@
 __int64 __fastcall strnicmp_l(const char *dst, const char *src, unsigned __int64 count, localeinfo_struct *plocinfo)
 {
   unsigned __int64 v4; // rbp
-  const char *v5; // rdi
-  const char *v6; // rsi
   unsigned int v7; // ebx
-  signed __int64 v8; // rsi
+  __int64 v8; // rsi
   int v9; // ebx
   int v10; // eax
-  localeinfo_struct plocinfoa; // [rsp+20h] [rbp-28h]
-  __int64 v13; // [rsp+30h] [rbp-18h]
-  char v14; // [rsp+38h] [rbp-10h]
+  _LocaleUpdate plocinfoa; // [rsp+20h] [rbp-28h] BYREF
 
   v4 = count;
-  v5 = src;
-  v6 = dst;
   if ( !count )
     return 0i64;
-  _LocaleUpdate::_LocaleUpdate((_LocaleUpdate *)&plocinfoa, plocinfo);
+  _LocaleUpdate::_LocaleUpdate(&plocinfoa, plocinfo);
   v7 = 0x7FFFFFFF;
-  if ( v6 && v5 && v4 <= 0x7FFFFFFF )
+  if ( dst && src && v4 <= 0x7FFFFFFF )
   {
-    if ( plocinfoa.locinfo->locale_name[2] )
+    if ( plocinfoa.localeinfo.locinfo->locale_name[2] )
     {
-      v8 = v6 - v5;
+      v8 = dst - src;
       do
       {
-        v9 = tolower_l((unsigned __int8)v5[v8], &plocinfoa);
-        v10 = tolower_l(*(unsigned __int8 *)v5++, &plocinfoa);
+        v9 = tolower_l((unsigned __int8)src[v8], &plocinfoa.localeinfo);
+        v10 = tolower_l(*(unsigned __int8 *)src++, &plocinfoa.localeinfo);
         --v4;
       }
       while ( v4 && v9 && v9 == v10 );
@@ -36,7 +30,7 @@ __int64 __fastcall strnicmp_l(const char *dst, const char *src, unsigned __int64
     }
     else
     {
-      v7 = _ascii_strnicmp(v6, v5, v4);
+      v7 = _ascii_strnicmp(dst, src, v4);
     }
   }
   else
@@ -44,8 +38,8 @@ __int64 __fastcall strnicmp_l(const char *dst, const char *src, unsigned __int64
     *errno() = 22;
     invalid_parameter_noinfo();
   }
-  if ( v14 )
-    *(_DWORD *)(v13 + 200) &= 0xFFFFFFFD;
+  if ( plocinfoa.updated )
+    plocinfoa.ptd->_ownlocale &= ~2u;
   return v7;
 }
 
@@ -53,16 +47,14 @@ __int64 __fastcall strnicmp_l(const char *dst, const char *src, unsigned __int64
 // RVA: 0x12B91A8
 __int64 __fastcall _ascii_strnicmp(const char *first, const char *last, unsigned __int64 count)
 {
-  const char *v3; // r10
-  int v4; // er9
+  int v4; // r9d
   int v5; // ecx
 
-  v3 = first;
   if ( !count )
     return 0i64;
   do
   {
-    v4 = *(unsigned __int8 *)v3++;
+    v4 = *(unsigned __int8 *)first++;
     if ( (unsigned int)(v4 - 65) <= 0x19 )
       v4 += 32;
     v5 = *(unsigned __int8 *)last++;

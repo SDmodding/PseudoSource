@@ -2,13 +2,11 @@
 // RVA: 0x39EAE0
 void __fastcall hkRefPtr<hkpCollisionFilter>::~hkRefPtr<hkpCollisionFilter>(hkRefPtr<hkpConvexListFilter> *this)
 {
-  hkRefPtr<hkpConvexListFilter> *v1; // rbx
-  hkpConvexListFilter *v2; // rcx
+  hkpConvexListFilter *m_pntr; // rcx
 
-  v1 = this;
-  v2 = this->m_pntr;
-  if ( v2 )
-    hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
-  v1->m_pntr = 0i64;
+  m_pntr = this->m_pntr;
+  if ( m_pntr )
+    hkReferencedObject::removeReference(m_pntr);
+  this->m_pntr = 0i64;
 }
 

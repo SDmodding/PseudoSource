@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkcdStaticAabbTreeClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 56
@@ -28,23 +28,24 @@ hkClass *__fastcall hkcdStaticAabbTree::staticClass()
 
 // File Line: 63
 // RVA: 0xC8F4C0
-void __fastcall finishLoadedObjecthkcdStaticAabbTree(void *p, int finishing)
+void __fastcall finishLoadedObjecthkcdStaticAabbTree(hkcdStaticAabbTree *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkcdStaticAabbTree::hkcdStaticAabbTree);
+  if ( p )
+    hkcdStaticAabbTree::hkcdStaticAabbTree(p, finishing);
 }
 
 // File Line: 69
 // RVA: 0xC8F4E0
-void __fastcall cleanupLoadedObjecthkcdStaticAabbTree(void *p)
+void __fastcall cleanupLoadedObjecthkcdStaticAabbTree(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 73
 // RVA: 0xC8F4F0
 hkBaseObjectVtbl *__fastcall getVtablehkcdStaticAabbTree()
 {
-  hkcdStaticAabbTree v1; // [rsp+20h] [rbp-28h]
+  hkcdStaticAabbTree v1; // [rsp+20h] [rbp-28h] BYREF
 
   hkcdStaticAabbTree::hkcdStaticAabbTree(&v1, 0);
   return v1.vfptr;
@@ -61,8 +62,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkcdStaticAabbTreeTypeInfo__()
   hkcdStaticAabbTreeTypeInfo.m_typeName = "hkcdStaticAabbTree";
   hkcdStaticAabbTreeTypeInfo.m_vtable = result;
   hkcdStaticAabbTreeTypeInfo.m_scopedName = "!hkcdStaticAabbTree";
-  hkcdStaticAabbTreeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkcdStaticAabbTree;
-  hkcdStaticAabbTreeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkcdStaticAabbTree;
+  hkcdStaticAabbTreeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkcdStaticAabbTree;
+  hkcdStaticAabbTreeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkcdStaticAabbTree;
   return result;
 }
 

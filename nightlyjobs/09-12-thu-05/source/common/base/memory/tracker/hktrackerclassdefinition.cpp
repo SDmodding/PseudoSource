@@ -11,11 +11,9 @@ void __fastcall hkTrackerTypeInit::hkTrackerTypeInit(hkTrackerTypeInit *this, hk
 // RVA: 0x1309530
 void __fastcall hkTrackerTypeInit::registerTypes(hkMemoryTracker *tracker)
 {
-  hkTrackerTypeInit *v1; // rbx
-  hkMemoryTracker *i; // rdi
+  hkTrackerTypeInit *i; // rbx
 
-  v1 = hkTrackerTypeInit::s_initLinkedList;
-  for ( i = tracker; v1; v1 = v1->m_next )
-    i->vfptr->addTypeDefinition(i, v1->m_definition);
+  for ( i = hkTrackerTypeInit::s_initLinkedList; i; i = i->m_next )
+    tracker->vfptr->addTypeDefinition(tracker, i->m_definition);
 }
 

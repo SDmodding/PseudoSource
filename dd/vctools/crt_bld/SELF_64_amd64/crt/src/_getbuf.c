@@ -2,27 +2,25 @@
 // RVA: 0x12D5668
 void __fastcall getbuf(_iobuf *str)
 {
-  _iobuf *v1; // rbx
   char *v2; // rax
-  char *v3; // rax
+  char *base; // rax
 
   ++cflush;
-  v1 = str;
   v2 = (char *)malloc_crt(0x1000ui64);
-  v1->_base = v2;
+  str->_base = v2;
   if ( v2 )
   {
-    v1->_flag |= 8u;
-    v1->_bufsiz = 4096;
+    str->_flag |= 8u;
+    str->_bufsiz = 4096;
   }
   else
   {
-    v1->_flag |= 4u;
-    v1->_bufsiz = 2;
-    v1->_base = (char *)&v1->_charbuf;
+    str->_flag |= 4u;
+    str->_bufsiz = 2;
+    str->_base = (char *)&str->_charbuf;
   }
-  v3 = v1->_base;
-  v1->_cnt = 0;
-  v1->_ptr = v3;
+  base = str->_base;
+  str->_cnt = 0;
+  str->_ptr = base;
 }
 

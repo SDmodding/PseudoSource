@@ -1,48 +1,47 @@
 // File Line: 30
 // RVA: 0x993E00
-void __fastcall Scaleform::HeapPT::AllocBitSet1::InitSegment(Scaleform::HeapPT::AllocBitSet1 *this, Scaleform::Heap::HeapSegment *seg)
+void __fastcall Scaleform::HeapPT::AllocBitSet1::InitSegment(
+        Scaleform::HeapPT::AllocBitSet1 *this,
+        Scaleform::Heap::HeapSegment *seg)
 {
-  unsigned __int64 v2; // r10
-  Scaleform::HeapPT::AllocBitSet1 *v3; // rbx
-  unsigned __int64 v4; // rcx
+  unsigned __int64 DataSize; // r10
+  unsigned __int64 MinAlignShift; // rcx
   unsigned __int64 v5; // r10
-  Scaleform::Heap::HeapSegment *v6; // r11
-  char *v7; // rdx
+  char *pData; // rdx
   unsigned __int64 v8; // rax
 
-  v2 = seg->DataSize;
-  v3 = this;
-  v4 = this->MinAlignShift;
-  LODWORD(seg[1].pPrev) &= 0xFFFFFFFE;
-  v5 = v2 >> v4;
-  v6 = seg;
+  DataSize = seg->DataSize;
+  MinAlignShift = this->MinAlignShift;
+  LODWORD(seg[1].pPrev) &= ~1u;
+  v5 = DataSize >> MinAlignShift;
   *((_DWORD *)&seg[1].pPrev + ((v5 - 1) >> 5)) &= ~(1 << ((v5 - 1) & 0x1F));
-  v7 = seg->pData;
-  v8 = v5 << v3->MinAlignShift;
+  pData = seg->pData;
+  v8 = v5 << this->MinAlignShift;
   if ( v5 >= 0x41 )
   {
-    *(_DWORD *)&v7[v8 - 4] = 65;
-    *((_DWORD *)v7 + 6) = 65;
-    *(_QWORD *)&v7[v8 - 16] = v5;
-    *((_QWORD *)v7 + 4) = v5;
+    *(_DWORD *)&pData[v8 - 4] = 65;
+    *((_DWORD *)pData + 6) = 65;
+    *(_QWORD *)&pData[v8 - 16] = v5;
+    *((_QWORD *)pData + 4) = v5;
   }
   else
   {
-    *(_DWORD *)&v7[v8 - 4] = v5;
-    *((_DWORD *)v7 + 6) = v5;
+    *(_DWORD *)&pData[v8 - 4] = v5;
+    *((_DWORD *)pData + 6) = v5;
   }
-  *((_QWORD *)v7 + 2) = v6;
-  Scaleform::HeapPT::FreeBin::Push(&v3->Bin, v7);
+  *((_QWORD *)pData + 2) = seg;
+  Scaleform::HeapPT::FreeBin::Push(&this->Bin, pData);
 }
 
 // File Line: 44
 // RVA: 0x9558C0
-char *__fastcall Scaleform::HeapPT::AllocBitSet1::Alloc(Scaleform::HeapPT::AllocBitSet1 *this, unsigned __int64 bytes, Scaleform::Heap::HeapSegment **allocSeg)
+char *__fastcall Scaleform::HeapPT::AllocBitSet1::Alloc(
+        Scaleform::HeapPT::AllocBitSet1 *this,
+        unsigned __int64 bytes,
+        Scaleform::Heap::HeapSegment **allocSeg)
 {
-  unsigned __int64 v3; // r14
-  Scaleform::HeapPT::AllocBitSet1 *v4; // r12
+  unsigned __int64 MinAlignShift; // r14
   unsigned __int64 v5; // rsi
-  Scaleform::Heap::HeapSegment **v6; // r13
   unsigned __int64 v7; // rbp
   char *result; // rax
   char *v9; // rdi
@@ -51,15 +50,12 @@ char *__fastcall Scaleform::HeapPT::AllocBitSet1::Alloc(Scaleform::HeapPT::Alloc
   unsigned __int64 v12; // rbx
   unsigned __int64 v13; // rax
   char *v14; // rdx
-  signed __int64 v15; // r8
+  char *v15; // r8
   unsigned __int64 v16; // rcx
   unsigned __int64 v17; // r9
-  signed __int64 v18; // r8
 
-  v3 = this->MinAlignShift;
-  v4 = this;
+  MinAlignShift = this->MinAlignShift;
   v5 = bytes;
-  v6 = allocSeg;
   v7 = bytes >> this->MinAlignShift;
   result = Scaleform::HeapPT::FreeBin::PullBest(&this->Bin, v7);
   v9 = result;
@@ -70,8 +66,8 @@ char *__fastcall Scaleform::HeapPT::AllocBitSet1::Alloc(Scaleform::HeapPT::Alloc
     if ( v10 >= 0x41 )
       v10 = *((_QWORD *)result + 4);
     v12 = v10 - v7;
-    v13 = v12 << v3;
-    if ( v12 << v3 < 0x20 )
+    v13 = v12 << MinAlignShift;
+    if ( v12 << MinAlignShift < 0x20 )
     {
       v5 += v13;
     }
@@ -91,32 +87,32 @@ char *__fastcall Scaleform::HeapPT::AllocBitSet1::Alloc(Scaleform::HeapPT::Alloc
         *((_DWORD *)v14 + 6) = v12;
       }
       *((_QWORD *)v14 + 2) = v11;
-      Scaleform::HeapPT::FreeBin::Push(&v4->Bin, v14);
-      v15 = (signed __int64)v11 + 4 * ((v5 + v9 - v11->pData) >> v3 >> 5);
-      v16 = v12 + ((v5 + v9 - v11->pData) >> v3) - 1;
-      *(_DWORD *)(v15 + 64) &= ~(1 << (((v5 + v9 - v11->pData) >> v3) & 0x1F));
+      Scaleform::HeapPT::FreeBin::Push(&this->Bin, v14);
+      v15 = (char *)v11 + 4 * ((v5 + v9 - v11->pData) >> MinAlignShift >> 5);
+      v16 = v12 + ((v5 + v9 - v11->pData) >> MinAlignShift) - 1;
+      *((_DWORD *)v15 + 16) &= ~(1 << (((v5 + v9 - v11->pData) >> MinAlignShift) & 0x1F));
       *((_DWORD *)&v11[1].pPrev + (v16 >> 5)) &= ~(1 << (v16 & 0x1F));
     }
-    v17 = (v9 - v11->pData) >> v3;
-    v18 = (signed __int64)v11 + 4 * (v17 >> 5);
-    *(_DWORD *)(v18 + 64) |= 1 << (v17 & 0x1F);
-    *((_DWORD *)&v11[1].pPrev + (((v5 >> v3) + v17 - 1) >> 5)) |= 1 << (((v5 >> v3) + v17 - 1) & 0x1F);
-    *v6 = v11;
-    result = v9;
+    v17 = (v9 - v11->pData) >> MinAlignShift;
+    *((_DWORD *)&v11[1].pPrev + (v17 >> 5)) |= 1 << (v17 & 0x1F);
+    *((_DWORD *)&v11[1].pPrev + (((v5 >> MinAlignShift) + v17 - 1) >> 5)) |= 1 << (((v5 >> MinAlignShift) + v17 - 1) & 0x1F);
+    *allocSeg = v11;
+    return v9;
   }
   return result;
 }
 
 // File Line: 80
 // RVA: 0x97D3E0
-void __fastcall Scaleform::HeapPT::AllocBitSet1::Free(Scaleform::HeapPT::AllocBitSet1 *this, Scaleform::Heap::HeapSegment *seg, void *ptr, unsigned __int64 bytes)
+void __fastcall Scaleform::HeapPT::AllocBitSet1::Free(
+        Scaleform::HeapPT::AllocBitSet1 *this,
+        Scaleform::Heap::HeapSegment *seg,
+        char *ptr,
+        unsigned __int64 bytes)
 {
-  Scaleform::HeapPT::AllocBitSet1 *v4; // rsi
-  unsigned __int64 v5; // rcx
+  unsigned __int64 MinAlignShift; // rcx
   char *v6; // r11
   unsigned __int64 v7; // r10
-  Scaleform::Heap::HeapSegment *v8; // r14
-  _DWORD *v9; // rdi
   unsigned __int64 v10; // rbp
   unsigned __int64 v11; // r8
   bool v12; // r11
@@ -125,19 +121,16 @@ void __fastcall Scaleform::HeapPT::AllocBitSet1::Free(Scaleform::HeapPT::AllocBi
   int v15; // eax
   bool right; // dl
   unsigned __int64 v17; // rax
-  Scaleform::HeapPT::FreeBin *v18; // rcx
+  Scaleform::HeapPT::FreeBin *p_Bin; // rcx
 
-  v4 = this;
-  v5 = this->MinAlignShift;
+  MinAlignShift = this->MinAlignShift;
   v6 = &seg->pData[seg->DataSize];
-  v7 = bytes >> v5;
-  v8 = seg;
-  v9 = ptr;
-  v10 = (signed __int64)((signed __int64)ptr - (unsigned __int64)seg->pData) >> v5;
+  v7 = bytes >> MinAlignShift;
+  v10 = (ptr - seg->pData) >> MinAlignShift;
   *((_DWORD *)&seg[1].pPrev + (v10 >> 5)) &= ~(1 << (v10 & 0x1F));
-  v11 = (bytes >> v5) + v10;
-  *((_DWORD *)&seg->pPrev + ((v11 - 1) >> 5) + 16) &= ~(1 << (((bytes >> v5) + v10 - 1) & 0x1F));
-  v12 = (char *)v9 + bytes < v6;
+  v11 = (bytes >> MinAlignShift) + v10;
+  *((_DWORD *)&seg[1].pPrev + ((v11 - 1) >> 5)) &= ~(1 << (((bytes >> MinAlignShift) + v10 - 1) & 0x1F));
+  v12 = &ptr[bytes] < v6;
   v14 = 0;
   if ( v10 )
   {
@@ -152,24 +145,24 @@ void __fastcall Scaleform::HeapPT::AllocBitSet1::Free(Scaleform::HeapPT::AllocBi
     if ( !_bittest(&v15, v11 & 0x1F) )
       right = 1;
   }
-  v17 = v7 << v4->MinAlignShift;
+  v17 = v7 << this->MinAlignShift;
   if ( v7 >= 0x41 )
   {
-    *(_DWORD *)((char *)v9 + v17 - 4) = 65;
-    v9[6] = 65;
-    *(_QWORD *)((char *)v9 + v17 - 16) = v7;
-    *((_QWORD *)v9 + 4) = v7;
+    *(_DWORD *)&ptr[v17 - 4] = 65;
+    *((_DWORD *)ptr + 6) = 65;
+    *(_QWORD *)&ptr[v17 - 16] = v7;
+    *((_QWORD *)ptr + 4) = v7;
   }
   else
   {
-    *(_DWORD *)((char *)v9 + v17 - 4) = v7;
-    v9[6] = v7;
+    *(_DWORD *)&ptr[v17 - 4] = v7;
+    *((_DWORD *)ptr + 6) = v7;
   }
-  *((_QWORD *)v9 + 2) = v8;
-  v18 = &v4->Bin;
+  *((_QWORD *)ptr + 2) = seg;
+  p_Bin = &this->Bin;
   if ( v14 || right )
-    Scaleform::HeapPT::FreeBin::Merge(v18, (char *)v9, v4->MinAlignShift, v14, right);
+    Scaleform::HeapPT::FreeBin::Merge(p_Bin, ptr, this->MinAlignShift, v14, right);
   else
-    Scaleform::HeapPT::FreeBin::Push(v18, (char *)v9);
+    Scaleform::HeapPT::FreeBin::Push(p_Bin, ptr);
 }
 

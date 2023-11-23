@@ -1,65 +1,58 @@
 // File Line: 44
 // RVA: 0x131090
-SSInvokedMethod *__fastcall SSInvokedMethod::pool_new(SSInvokedBase *caller_p, SSObjectBase *scope_p, SSMethodBase *method_p)
+SSInvokedMethod *__fastcall SSInvokedMethod::pool_new(
+        SSInvokedBase *caller_p,
+        SSObjectBase *scope_p,
+        SSMethodBase *method_p)
 {
-  SSMethodBase *v3; // r14
-  SSObjectBase *v4; // rbp
-  SSInvokedBase *v5; // rsi
-  AObjReusePool<SSInvokedMethod> *v6; // rax
-  unsigned int v7; // edi
-  AObjReusePool<SSInvokedMethod> *v8; // rbx
+  unsigned int v6; // edi
+  AObjReusePool<SSInvokedMethod> *pool; // rbx
+  unsigned int i_count; // eax
   unsigned int v9; // eax
-  unsigned int v10; // eax
-  unsigned int v11; // eax
-  __int64 v12; // rcx
-  SSInvokedMethod **v13; // rax
+  __int64 v10; // rcx
+  SSInvokedMethod **i_array_p; // rax
   SSInvokedMethod *result; // rax
-  unsigned int v15; // eax
-  unsigned int v16; // ecx
+  unsigned int v13; // eax
+  unsigned int i_ptr_id; // ecx
 
-  v3 = method_p;
-  v4 = scope_p;
-  v5 = caller_p;
-  v6 = SSInvokedMethod::get_pool();
-  v7 = 0;
-  v8 = v6;
-  v9 = v6->i_pool.i_count;
-  if ( v9 )
+  v6 = 0;
+  pool = SSInvokedMethod::get_pool();
+  if ( pool->i_pool.i_count )
   {
-    v15 = v9 - 1;
-    v8->i_pool.i_count = v15;
-    v12 = v15;
-    v13 = v8->i_pool.i_array_p;
+    v13 = pool->i_pool.i_count - 1;
+    pool->i_pool.i_count = v13;
+    v10 = v13;
+    i_array_p = pool->i_pool.i_array_p;
   }
   else
   {
-    if ( !v8->i_exp_pool.i_count )
-      AObjReusePool<SSInvokedMethod>::append_block(v8, v8->i_expand_size);
-    v10 = v8->i_exp_pool.i_count;
-    if ( !v10 )
+    if ( !pool->i_exp_pool.i_count )
+      AObjReusePool<SSInvokedMethod>::append_block(pool, pool->i_expand_size);
+    i_count = pool->i_exp_pool.i_count;
+    if ( !i_count )
     {
       result = 0i64;
       goto LABEL_9;
     }
-    v11 = v10 - 1;
-    v8->i_exp_pool.i_count = v11;
-    v12 = v11;
-    v13 = v8->i_exp_pool.i_array_p;
+    v9 = i_count - 1;
+    pool->i_exp_pool.i_count = v9;
+    v10 = v9;
+    i_array_p = pool->i_exp_pool.i_array_p;
   }
-  result = v13[v12];
+  result = i_array_p[v10];
 LABEL_9:
-  result->i_caller_p.i_obj_p = v5;
-  if ( v5 )
-    v16 = v5->i_ptr_id;
+  result->i_caller_p.i_obj_p = caller_p;
+  if ( caller_p )
+    i_ptr_id = caller_p->i_ptr_id;
   else
-    v16 = 0;
-  result->i_caller_p.i_ptr_id = v16;
-  result->i_scope_p.i_obj_p = v4;
-  if ( v4 )
-    v7 = v4->i_ptr_id;
-  result->i_scope_p.i_ptr_id = v7;
+    i_ptr_id = 0;
+  result->i_caller_p.i_ptr_id = i_ptr_id;
+  result->i_scope_p.i_obj_p = scope_p;
+  if ( scope_p )
+    v6 = scope_p->i_ptr_id;
+  result->i_scope_p.i_ptr_id = v6;
   result->i_ptr_id = ++SSObjectBase::c_ptr_id_prev;
-  result->i_method_p = v3;
+  result->i_method_p = method_p;
   return result;
 }
 
@@ -67,74 +60,71 @@ LABEL_9:
 // RVA: 0x130980
 void __fastcall SSInvokedMethod::pool_delete(SSInvokedMethod *imethod_p)
 {
-  SSInvokedMethod *v1; // rdi
-  AList<SSInvokedBase,SSInvokedBase> *v2; // rdx
-  AList<SSInvokedBase,SSInvokedBase> *v3; // rax
-  AList<SSInvokedBase,SSInvokedBase> *v4; // rcx
+  AList<SSInvokedBase,SSInvokedBase> *p_i_calls; // rdx
+  SSInvokedMethod *i_next_p; // rax
+  SSInvokedMethod *v4; // rcx
   AListNode<SSInvokedBase,SSInvokedBase> *v5; // rcx
-  AListNode<SSInvokedBase,SSInvokedBase> *v6; // rax
-  AListNode<SSInvokedBase,SSInvokedBase> *v7; // rdx
-  AObjReusePool<SSInvokedMethod> *v8; // rax
-  AObjBlock<SSInvokedMethod> *v9; // rcx
-  unsigned __int64 v10; // rdx
-  bool v11; // cf
-  APArray<SSInvokedMethod,SSInvokedMethod,ACompareAddress<SSInvokedMethod> > *v12; // rcx
+  AListNode<SSInvokedBase,SSInvokedBase> *i_prev_p; // rax
+  AObjReusePool<SSInvokedMethod> *pool; // rax
+  AObjBlock<SSInvokedMethod> *i_block_p; // rcx
+  unsigned __int64 i_objects_a; // rdx
+  bool v10; // cf
+  APArray<SSInvokedMethod,SSInvokedMethod,ACompareAddress<SSInvokedMethod> > *p_i_exp_pool; // rcx
 
-  v1 = imethod_p;
   SSData::empty_table((APSortedLogical<SSData,ASymbol> *)&imethod_p->i_data);
-  AMemory::c_free_func(v1->i_data.i_array_p);
-  v2 = &v1->i_calls;
-  v1->i_data.i_array_p = 0i64;
-  v1->i_data.i_count = 0;
-  v1->i_data.i_size = 0;
-  v3 = (AList<SSInvokedBase,SSInvokedBase> *)v1->i_calls.i_sentinel.i_next_p;
-  if ( v3 != &v1->i_calls )
+  AMemory::c_free_func(imethod_p->i_data.i_array_p);
+  p_i_calls = &imethod_p->i_calls;
+  imethod_p->i_data.i_array_p = 0i64;
+  imethod_p->i_data.i_count = 0;
+  imethod_p->i_data.i_size = 0;
+  i_next_p = (SSInvokedMethod *)imethod_p->i_calls.i_sentinel.SSInvokedContextBase::SSInvokedBase::i_next_p;
+  if ( i_next_p != (SSInvokedMethod *)&imethod_p->i_calls )
   {
     do
     {
-      v4 = v3;
-      v3 = (AList<SSInvokedBase,SSInvokedBase> *)v3->i_sentinel.i_next_p;
-      v4->i_sentinel.i_next_p = &v4->i_sentinel;
-      v4->i_sentinel.i_prev_p = &v4->i_sentinel;
+      v4 = i_next_p;
+      i_next_p = (SSInvokedMethod *)i_next_p->vfptr;
+      v4->vfptr = (SSObjectBaseVtbl *)v4;
+      *(_QWORD *)&v4->i_ptr_id = v4;
     }
-    while ( v3 != v2 );
-    v2->i_sentinel.i_next_p = &v2->i_sentinel;
-    v1->i_calls.i_sentinel.i_prev_p = &v1->i_calls.i_sentinel;
+    while ( i_next_p != (SSInvokedMethod *)p_i_calls );
+    p_i_calls->i_sentinel.i_next_p = &p_i_calls->i_sentinel;
+    imethod_p->i_calls.i_sentinel.i_prev_p = &imethod_p->i_calls.i_sentinel;
   }
-  v5 = v1->i_next_p;
-  v6 = v1->i_prev_p;
-  v7 = (AListNode<SSInvokedBase,SSInvokedBase> *)&v1->i_next_p;
-  v5->i_prev_p = v6;
-  v6->i_next_p = v5;
-  v7->i_prev_p = v7;
-  v7->i_next_p = v7;
-  v1->i_ptr_id = 0;
-  v8 = SSInvokedMethod::get_pool();
-  v9 = v8->i_block_p;
-  v10 = (unsigned __int64)v9->i_objects_a;
-  if ( (unsigned __int64)v1 < v10 || (v11 = (unsigned __int64)v1 < v10 + 120i64 * v9->i_size, v12 = &v8->i_pool, !v11) )
-    v12 = &v8->i_exp_pool;
-  APArray<SSInvokedMethod,SSInvokedMethod,ACompareAddress<SSInvokedMethod>>::append(v12, v1);
+  v5 = imethod_p->i_next_p;
+  i_prev_p = imethod_p->i_prev_p;
+  v5->i_prev_p = i_prev_p;
+  i_prev_p->i_next_p = v5;
+  imethod_p->i_prev_p = &imethod_p->AListNode<SSInvokedBase,SSInvokedBase>;
+  imethod_p->i_next_p = &imethod_p->AListNode<SSInvokedBase,SSInvokedBase>;
+  imethod_p->i_ptr_id = 0;
+  pool = SSInvokedMethod::get_pool();
+  i_block_p = pool->i_block_p;
+  i_objects_a = (unsigned __int64)i_block_p->i_objects_a;
+  if ( (unsigned __int64)imethod_p < i_objects_a
+    || (v10 = (unsigned __int64)imethod_p < i_objects_a + 120i64 * i_block_p->i_size, p_i_exp_pool = &pool->i_pool, !v10) )
+  {
+    p_i_exp_pool = &pool->i_exp_pool;
+  }
+  APArray<SSInvokedMethod,SSInvokedMethod,ACompareAddress<SSInvokedMethod>>::append(p_i_exp_pool, imethod_p);
 }
 
 // File Line: 136
 // RVA: 0x4CBD60
 void __fastcall SSIExternalMethodCallWrapper::~SSIExternalMethodCallWrapper(SSIExternalMethodCallWrapper *this)
 {
-  SSIExternalMethodCallWrapper *v1; // rbx
-  bool *v2; // rax
-  SSMethodBase *v3; // rcx
+  bool *i_finished_p; // rax
+  SSMethodBase *i_method_p; // rcx
 
-  v1 = this;
   this->vfptr = (SSObjectBaseVtbl *)&SSIExternalMethodCallWrapper::`vftable;
-  v2 = this->i_finished_p;
-  if ( v2 )
-    *v2 = 1;
+  i_finished_p = this->i_finished_p;
+  if ( i_finished_p )
+    *i_finished_p = 1;
   this->i_method_p[1].vfptr = 0i64;
-  v3 = this->i_method_p;
-  if ( v3 )
-    v3->vfptr->__vecDelDtor((SSInvokableBase *)&v3->vfptr, 1u);
-  AMemory::c_free_func(v1->i_data.i_array_p);
-  SSInvokedBase::~SSInvokedBase((SSInvokedBase *)&v1->vfptr);
+  i_method_p = this->i_method_p;
+  if ( i_method_p )
+    i_method_p->vfptr->__vecDelDtor(i_method_p, 1u);
+  AMemory::c_free_func(this->i_data.i_array_p);
+  SSInvokedBase::~SSInvokedBase(this);
 }
 

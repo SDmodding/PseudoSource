@@ -43,7 +43,7 @@ void __fastcall ActionRequestCondition::Create()
 
 // File Line: 192
 // RVA: 0x27DCF0
-signed __int64 __fastcall ActionRequestCondition::GetSignalMask(ActionRequestCondition *this)
+__int64 __fastcall ActionRequestCondition::GetSignalMask(ActionRequestCondition *this)
 {
   return 1i64 << (this->mActionRequest & 0x3F);
 }
@@ -450,21 +450,23 @@ ConditionGroup *__fastcall TargetConditionGroup::GetConditionGroup2(TargetCondit
 
   result = (ConditionGroup *)this->mConditions.mOffset;
   if ( result )
-    result = (ConditionGroup *)((char *)result + (_QWORD)this + 24);
+    return (ConditionGroup *)((char *)&result->mSignalMask + (_QWORD)this);
   return result;
 }
 
 // File Line: 1430
 // RVA: 0x294300
-void __fastcall TargetConditionGroup::SetConditionGroup2(TargetConditionGroup *this, Expression::IMemberMap *conditions)
+void __fastcall TargetConditionGroup::SetConditionGroup2(
+        TargetConditionGroup *this,
+        Expression::IMemberMap *conditions)
 {
-  UFG::qOffset64<ConditionGroup *> *v2; // rcx
+  UFG::qOffset64<ConditionGroup *> *p_mConditions; // rcx
 
-  v2 = &this->mConditions;
+  p_mConditions = &this->mConditions;
   if ( conditions )
-    v2->mOffset = (char *)conditions - (char *)v2;
+    p_mConditions->mOffset = (char *)conditions - (char *)p_mConditions;
   else
-    v2->mOffset = 0i64;
+    p_mConditions->mOffset = 0i64;
 }
 
 // File Line: 1456
@@ -482,18 +484,19 @@ void __fastcall ParkourHandleCondition::Create()
 // RVA: 0x294010
 void __fastcall ParkourHandleCondition::ResolveReferences(ParkourHandleCondition *this, ActionNode *parentNode)
 {
-  UFG::qOffset64<ActionNode *> *v2; // rcx
+  UFG::qOffset64<ActionNode *> *p_mParentNode; // rcx
 
-  v2 = &this->mParentNode;
+  p_mParentNode = &this->mParentNode;
   if ( parentNode )
-    v2->mOffset = (char *)parentNode - (char *)v2;
+    p_mParentNode->mOffset = (char *)parentNode - (char *)p_mParentNode;
   else
-    v2->mOffset = 0i64;
+    p_mParentNode->mOffset = 0i64;
 }
 
 // File Line: 1631
 // RVA: 0x27C420
-__int64 __fastcall ParkourHandleLatchedCloseToEdgeCondition::GetClassNameUID(ParkourHandleLatchedCloseToEdgeCondition *this)
+__int64 __fastcall ParkourHandleLatchedCloseToEdgeCondition::GetClassNameUID(
+        ParkourHandleLatchedCloseToEdgeCondition *this)
 {
   return ParkourHandleLatchedCloseToEdgeCondition::sClassNameUID;
 }
@@ -764,13 +767,10 @@ void __fastcall RandomCondition::Create()
 // RVA: 0x27DF80
 IWeightedCondition *__fastcall Scaleform::Event::GetAcquireInterface(RandomCondition *this)
 {
-  IWeightedCondition *result; // rax
-
   if ( this )
-    result = (IWeightedCondition *)&this->vfptr;
+    return &this->IWeightedCondition;
   else
-    result = 0i64;
-  return result;
+    return 0i64;
 }
 
 // File Line: 2577
@@ -924,7 +924,8 @@ const char *__fastcall TargetIsLockedCondition::GetClassname(TargetIsLockedCondi
 
 // File Line: 2922
 // RVA: 0x2BFD00
-__int64 __fastcall TargetVelocityRelativeToCollisionCondition::GetClassNameUID(TargetVelocityRelativeToCollisionCondition *this)
+__int64 __fastcall TargetVelocityRelativeToCollisionCondition::GetClassNameUID(
+        TargetVelocityRelativeToCollisionCondition *this)
 {
   return TargetVelocityRelativeToCollisionCondition::sClassNameUID;
 }
@@ -1024,7 +1025,8 @@ void __fastcall HitDistanceFromExplosionCondition::Create()
 
 // File Line: 3098
 // RVA: 0x27CCE0
-const char *__fastcall HitExplosionCanTriggerVehicleExplosion::GetClassname(HitExplosionCanTriggerVehicleExplosion *this)
+const char *__fastcall HitExplosionCanTriggerVehicleExplosion::GetClassname(
+        HitExplosionCanTriggerVehicleExplosion *this)
 {
   return HitExplosionCanTriggerVehicleExplosion::sClassName;
 }
@@ -1056,7 +1058,8 @@ __int64 __fastcall TargetPhysicalCollisionLayerCondition::GetClassNameUID(Target
 
 // File Line: 3216
 // RVA: 0x27C710
-__int64 __fastcall TargetPhysicalAttackShootComboCondition::GetClassNameUID(TargetPhysicalAttackShootComboCondition *this)
+__int64 __fastcall TargetPhysicalAttackShootComboCondition::GetClassNameUID(
+        TargetPhysicalAttackShootComboCondition *this)
 {
   return TargetPhysicalAttackShootComboCondition::sClassNameUID;
 }
@@ -1111,7 +1114,8 @@ void __fastcall TargetPhysicalDodgeableCondition::Create()
 
 // File Line: 3349
 // RVA: 0x27C770
-__int64 __fastcall TargetPhysicalMeleeAttackableCondition::GetClassNameUID(TargetPhysicalMeleeAttackableCondition *this)
+__int64 __fastcall TargetPhysicalMeleeAttackableCondition::GetClassNameUID(
+        TargetPhysicalMeleeAttackableCondition *this)
 {
   return TargetPhysicalMeleeAttackableCondition::sClassNameUID;
 }
@@ -1527,7 +1531,8 @@ __int64 __fastcall VehicleDamageCondition::GetClassNameUID(VehicleDamageConditio
 
 // File Line: 4088
 // RVA: 0x2C00B0
-__int64 __fastcall VehicleHasDriverOrPassengerOccupantCondition::GetClassNameUID(VehicleHasDriverOrPassengerOccupantCondition *this)
+__int64 __fastcall VehicleHasDriverOrPassengerOccupantCondition::GetClassNameUID(
+        VehicleHasDriverOrPassengerOccupantCondition *this)
 {
   return VehicleHasDriverOrPassengerOccupantCondition::sClassNameUID;
 }
@@ -1563,7 +1568,8 @@ VehicleDeniesAllyPassengerCondition *__fastcall VehicleDeniesAllyPassengerCondit
 
 // File Line: 4148
 // RVA: 0x2BFFF0
-__int64 __fastcall VehicleDeniesGetInPassengerSideCondition::GetClassNameUID(VehicleDeniesGetInPassengerSideCondition *this)
+__int64 __fastcall VehicleDeniesGetInPassengerSideCondition::GetClassNameUID(
+        VehicleDeniesGetInPassengerSideCondition *this)
 {
   return VehicleDeniesGetInPassengerSideCondition::sClassNameUID;
 }
@@ -1832,7 +1838,8 @@ __int64 __fastcall IsFactionStandingCondition::GetClassNameUID(IsFactionStanding
 
 // File Line: 4925
 // RVA: 0x27CF20
-const char *__fastcall IsTargetsTargetFactionStandingCondition::GetClassname(IsTargetsTargetFactionStandingCondition *this)
+const char *__fastcall IsTargetsTargetFactionStandingCondition::GetClassname(
+        IsTargetsTargetFactionStandingCondition *this)
 {
   return IsTargetsTargetFactionStandingCondition::sClassName;
 }
@@ -1894,7 +1901,8 @@ __int64 __fastcall TargetSimObjectWeaponTypeCondition::GetClassNameUID(TargetSim
 
 // File Line: 5096
 // RVA: 0x27D450
-const char *__fastcall TargetSimObjectWeaponAmmoInventoryItemCondition::GetClassname(TargetSimObjectWeaponAmmoInventoryItemCondition *this)
+const char *__fastcall TargetSimObjectWeaponAmmoInventoryItemCondition::GetClassname(
+        TargetSimObjectWeaponAmmoInventoryItemCondition *this)
 {
   return TargetSimObjectWeaponAmmoInventoryItemCondition::sClassName;
 }
@@ -1954,14 +1962,16 @@ const char *__fastcall TargetSimObjectWeaponCanFireCondition::GetClassname(Targe
 
 // File Line: 5258
 // RVA: 0x27C870
-__int64 __fastcall TargetSimObjectWeaponIsAutomaticCondition::GetClassNameUID(TargetSimObjectWeaponIsAutomaticCondition *this)
+__int64 __fastcall TargetSimObjectWeaponIsAutomaticCondition::GetClassNameUID(
+        TargetSimObjectWeaponIsAutomaticCondition *this)
 {
   return TargetSimObjectWeaponIsAutomaticCondition::sClassNameUID;
 }
 
 // File Line: 5277
 // RVA: 0x27D480
-const char *__fastcall TargetSimObjectWeaponCanReloadCondition::GetClassname(TargetSimObjectWeaponCanReloadCondition *this)
+const char *__fastcall TargetSimObjectWeaponCanReloadCondition::GetClassname(
+        TargetSimObjectWeaponCanReloadCondition *this)
 {
   return TargetSimObjectWeaponCanReloadCondition::sClassName;
 }
@@ -1996,7 +2006,8 @@ const char *__fastcall SimObjectBoatTypeCondition::GetClassname(SimObjectBoatTyp
 
 // File Line: 5384
 // RVA: 0x27D410
-const char *__fastcall TargetSimObjectCharacterBooleanCondition::GetClassname(TargetSimObjectCharacterBooleanCondition *this)
+const char *__fastcall TargetSimObjectCharacterBooleanCondition::GetClassname(
+        TargetSimObjectCharacterBooleanCondition *this)
 {
   return TargetSimObjectCharacterBooleanCondition::sClassName;
 }
@@ -2051,7 +2062,8 @@ const char *__fastcall IncomingAttackTypeCondition::GetClassname(IncomingAttackT
 
 // File Line: 5519
 // RVA: 0x27C150
-__int64 __fastcall IncomingAttackLocationLateralCondition::GetClassNameUID(IncomingAttackLocationLateralCondition *this)
+__int64 __fastcall IncomingAttackLocationLateralCondition::GetClassNameUID(
+        IncomingAttackLocationLateralCondition *this)
 {
   return IncomingAttackLocationLateralCondition::sClassNameUID;
 }
@@ -2239,7 +2251,8 @@ __int64 __fastcall IsTiredCondition::GetClassNameUID(IsTiredCondition *this)
 
 // File Line: 6037
 // RVA: 0x27C4E0
-__int64 __fastcall PlayerIsInCombatWithNumEnemiesCondition::GetClassNameUID(PlayerIsInCombatWithNumEnemiesCondition *this)
+__int64 __fastcall PlayerIsInCombatWithNumEnemiesCondition::GetClassNameUID(
+        PlayerIsInCombatWithNumEnemiesCondition *this)
 {
   return PlayerIsInCombatWithNumEnemiesCondition::sClassNameUID;
 }
@@ -2708,7 +2721,7 @@ ResourceIsAvailableCondition *__fastcall ResourceIsAvailableCondition::Create()
   Condition::Condition((Condition *)v0);
   *(_QWORD *)v1 = &ResourceIsAvailableCondition::`vftable;
   *((_QWORD *)v1 + 3) = 1i64;
-  BinString::Set((BinString *)v1 + 3, &customWorldMapCaption);
+  BinString::Set((BinString *)v1 + 3, &customCaption);
   *((_WORD *)v1 + 16) = 0;
   v1[34] = 0;
   return (ResourceIsAvailableCondition *)v1;
@@ -2833,7 +2846,8 @@ void __fastcall InteractionPointIsBestBusyCondition::Create()
 
 // File Line: 7291
 // RVA: 0x27C130
-__int64 __fastcall IfTargetsInteractionPointNotBusySetBestCondition::GetClassNameUID(IfTargetsInteractionPointNotBusySetBestCondition *this)
+__int64 __fastcall IfTargetsInteractionPointNotBusySetBestCondition::GetClassNameUID(
+        IfTargetsInteractionPointNotBusySetBestCondition *this)
 {
   return IfTargetsInteractionPointNotBusySetBestCondition::sClassNameUID;
 }
@@ -2861,7 +2875,8 @@ __int64 __fastcall SocialGreetSuccessfulCondition::GetClassNameUID(SocialGreetSu
 
 // File Line: 7391
 // RVA: 0x2C24A0
-const char *__fastcall SocialRequiresInteractionPointSyncCondition::GetClassname(SocialRequiresInteractionPointSyncCondition *this)
+const char *__fastcall SocialRequiresInteractionPointSyncCondition::GetClassname(
+        SocialRequiresInteractionPointSyncCondition *this)
 {
   return SocialRequiresInteractionPointSyncCondition::sClassName;
 }
@@ -2919,7 +2934,8 @@ const char *__fastcall SocialFastTalkOccurredCondition::GetClassname(SocialFastT
 
 // File Line: 7493
 // RVA: 0x27C5C0
-__int64 __fastcall SocialCombatFastTalkSucceededCondition::GetClassNameUID(SocialCombatFastTalkSucceededCondition *this)
+__int64 __fastcall SocialCombatFastTalkSucceededCondition::GetClassNameUID(
+        SocialCombatFastTalkSucceededCondition *this)
 {
   return SocialCombatFastTalkSucceededCondition::sClassNameUID;
 }
@@ -3048,7 +3064,8 @@ __int64 __fastcall SocialFaceActionStateCondition::GetClassNameUID(SocialFaceAct
 
 // File Line: 7748
 // RVA: 0x2C2470
-const char *__fastcall SocialFaceActionUseConfirmationDialogCondition::GetClassname(SocialFaceActionUseConfirmationDialogCondition *this)
+const char *__fastcall SocialFaceActionUseConfirmationDialogCondition::GetClassname(
+        SocialFaceActionUseConfirmationDialogCondition *this)
 {
   return SocialFaceActionUseConfirmationDialogCondition::sClassName;
 }
@@ -3076,7 +3093,8 @@ SocialFaceActionGetConfirmationDialogConfirmedCondition *__fastcall SocialFaceAc
 
 // File Line: 7782
 // RVA: 0x2BF7B0
-__int64 __fastcall SocialFaceActionRequiresGreetCondition::GetClassNameUID(SocialFaceActionRequiresGreetCondition *this)
+__int64 __fastcall SocialFaceActionRequiresGreetCondition::GetClassNameUID(
+        SocialFaceActionRequiresGreetCondition *this)
 {
   return SocialFaceActionRequiresGreetCondition::sClassNameUID;
 }
@@ -3090,7 +3108,8 @@ const char *__fastcall SocialFaceActionAutoChargeCondition::GetClassname(SocialF
 
 // File Line: 7816
 // RVA: 0x2C2480
-const char *__fastcall SocialIsTargetStandingSufficientCondition::GetClassname(SocialIsTargetStandingSufficientCondition *this)
+const char *__fastcall SocialIsTargetStandingSufficientCondition::GetClassname(
+        SocialIsTargetStandingSufficientCondition *this)
 {
   return SocialIsTargetStandingSufficientCondition::sClassName;
 }

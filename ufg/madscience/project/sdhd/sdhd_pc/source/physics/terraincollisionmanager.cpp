@@ -1,16 +1,13 @@
 // File Line: 18
 // RVA: 0x455FA0
-void __fastcall UFG::AddTerrainDataPhysicsCallback(Render::TerrainData *pData, Render::TerrainDefinition *terrainParams, UFG::TerrainQuadTreeNode *terrainNode)
+void __fastcall UFG::AddTerrainDataPhysicsCallback(
+        Render::TerrainData *pData,
+        Render::TerrainDefinition *terrainParams,
+        UFG::TerrainQuadTreeNode *terrainNode)
 {
-  UFG::TerrainQuadTreeNode *v3; // rbx
-  Render::TerrainDefinition *v4; // rdi
-  Render::TerrainData *v5; // rsi
   UFG::TerrainCollisionManager *v6; // rcx
   UFG::allocator::free_link *v7; // rax
 
-  v3 = terrainNode;
-  v4 = terrainParams;
-  v5 = pData;
   v6 = UFG::TerrainCollisionManager::mInstance;
   if ( !UFG::TerrainCollisionManager::mInstance )
   {
@@ -21,24 +18,22 @@ void __fastcall UFG::AddTerrainDataPhysicsCallback(Render::TerrainData *pData, R
     UFG::TerrainCollisionManager::GetInstance();
     v6 = UFG::TerrainCollisionManager::mInstance;
   }
-  UFG::TerrainCollisionManager::AddTerrainData(v6, v5, v4, v3);
+  UFG::TerrainCollisionManager::AddTerrainData(v6, pData, terrainParams, terrainNode);
 }
 
 // File Line: 24
 // RVA: 0x4732F0
 void __fastcall UFG::RemoveTerrainDataPhysicsCallback(Render::TerrainData *pData)
 {
-  Render::TerrainData *v1; // rbx
   UFG::TerrainCollisionManager *v2; // rcx
 
-  v1 = pData;
   v2 = UFG::TerrainCollisionManager::mInstance;
   if ( !UFG::TerrainCollisionManager::mInstance )
   {
     UFG::TerrainCollisionManager::Initialize();
     v2 = UFG::TerrainCollisionManager::mInstance;
   }
-  UFG::TerrainCollisionManager::RemoveTerrainData(v2, v1);
+  UFG::TerrainCollisionManager::RemoveTerrainData(v2, pData);
 }
 
 // File Line: 31
@@ -78,7 +73,7 @@ UFG::TerrainCollisionManager *__fastcall UFG::TerrainCollisionManager::GetInstan
       UFG::TerrainCollisionManager::TerrainCollisionManager((UFG::TerrainCollisionManager *)v1);
     UFG::TerrainCollisionManager::mInstance = (UFG::TerrainCollisionManager *)v1;
     UFG::TerrainCollisionManager::GetInstance();
-    result = UFG::TerrainCollisionManager::mInstance;
+    return UFG::TerrainCollisionManager::mInstance;
   }
   return result;
 }
@@ -97,107 +92,103 @@ void __fastcall UFG::TerrainCollisionManager::TerrainCollisionManager(UFG::Terra
 // RVA: 0x451790
 void __fastcall UFG::TerrainCollisionManager::~TerrainCollisionManager(UFG::TerrainCollisionManager *this)
 {
-  Render::Skinning *v1; // rdi
-  Render::SkinningCacheNode *v2; // rbx
+  Render::Skinning *p_mTerrainObjectMap; // rdi
+  Render::SkinningCacheNode *Head; // rbx
 
   this->vfptr = (UFG::TerrainCollisionManagerVtbl *)&UFG::TerrainCollisionManager::`vftable;
-  v1 = (Render::Skinning *)&this->mTerrainObjectMap;
+  p_mTerrainObjectMap = (Render::Skinning *)&this->mTerrainObjectMap;
   if ( this->mTerrainObjectMap.mTree.mTree.mCount )
   {
     do
     {
-      v2 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead(&v1->mSkinnedVertexBuffers);
-      UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(&v1->mSkinnedVertexBuffers.mTree, &v2->mNode);
-      operator delete[](v2);
+      Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead(&p_mTerrainObjectMap->mSkinnedVertexBuffers);
+      UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
+        &p_mTerrainObjectMap->mSkinnedVertexBuffers.mTree,
+        &Head->mNode);
+      operator delete[](Head);
     }
-    while ( v1->mSkinnedVertexBuffers.mTree.mCount );
+    while ( p_mTerrainObjectMap->mSkinnedVertexBuffers.mTree.mCount );
   }
-  UFG::qBaseTreeRB::~qBaseTreeRB(v1);
+  UFG::qBaseTreeRB::~qBaseTreeRB(p_mTerrainObjectMap);
 }
 
 // File Line: 60
 // RVA: 0x475EF0
 void __fastcall UFG::TerrainCollisionManager::Shutdown(UFG::TerrainCollisionManager *this)
 {
-  UFG::TerrainCollisionManager *i; // rsi
-  Render::SkinningCacheNode *v2; // rbx
-  UFG::SimObject *v3; // rdx
+  Render::SkinningCacheNode *Head; // rbx
+  UFG::SimObject *mCachedBufferPtr; // rdx
 
-  for ( i = this;
-        i->mTerrainObjectMap.mTree.mTree.mCount > 0;
-        UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
-          (UFG::qBaseTreeVariableRB<unsigned __int64> *)&i->mTerrainObjectMap,
-          &v2->mNode) )
+  while ( this->mTerrainObjectMap.mTree.mTree.mCount > 0 )
   {
-    v2 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&i->mTerrainObjectMap);
-    v3 = (UFG::SimObject *)v2->mCachedBufferPtr;
-    if ( v3 )
-      UFG::Simulation::DestroySimObject(&UFG::gSim, v3);
+    Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&this->mTerrainObjectMap);
+    mCachedBufferPtr = (UFG::SimObject *)Head->mCachedBufferPtr;
+    if ( mCachedBufferPtr )
+      UFG::Simulation::DestroySimObject(&UFG::gSim, mCachedBufferPtr);
+    UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
+      (UFG::qBaseTreeVariableRB<unsigned __int64> *)&this->mTerrainObjectMap,
+      &Head->mNode);
   }
 }
 
 // File Line: 75
 // RVA: 0x455D70
-void __fastcall UFG::TerrainCollisionManager::AddTerrainData(UFG::TerrainCollisionManager *this, Render::TerrainData *pTerrainData, Render::TerrainDefinition *terrainParams, UFG::TerrainQuadTreeNode *terrainNode)
+void __fastcall UFG::TerrainCollisionManager::AddTerrainData(
+        UFG::TerrainCollisionManager *this,
+        Render::TerrainData *pTerrainData,
+        Render::TerrainDefinition *terrainParams,
+        UFG::TerrainQuadTreeNode *terrainNode)
 {
-  UFG::TerrainQuadTreeNode *v4; // rdi
-  Render::TerrainDefinition *v5; // rbx
-  Render::TerrainData *v6; // rbp
-  UFG::TerrainCollisionManager *v7; // r14
   UFG::qSymbol *v8; // rax
   UFG::SimObject *v9; // rsi
   float v10; // xmm6_4
   float quant_scale; // xmm7_4
-  float v12; // xmm1_4
+  float z; // xmm1_4
   float v13; // xmm2_4
   float v14; // xmm1_4
   UFG::allocator::free_link *v15; // rax
-  __int64 v16; // rcx
+  __int64 mOffset; // rcx
   unsigned __int16 *v17; // rdx
   UFG::SimComponent *v18; // rax
   UFG::SimComponent *v19; // rbx
-  unsigned int v20; // ebp
+  unsigned int mUID; // ebp
   UFG::qBaseTreeRB *v21; // rax
   UFG::allocator::free_link *v22; // rax
   UFG::qBaseNodeRB *v23; // rbx
-  UFG::qVector3 pos; // [rsp+58h] [rbp-80h]
-  UFG::qVector3 dimensions; // [rsp+68h] [rbp-70h]
-  UFG::SimObjectModifier v26; // [rsp+78h] [rbp-60h]
-  UFG::allocator::free_link *v27; // [rsp+E0h] [rbp+8h]
-  UFG::qSymbol result; // [rsp+E8h] [rbp+10h]
+  UFG::qVector3 pos; // [rsp+58h] [rbp-80h] BYREF
+  UFG::qVector3 dimensions; // [rsp+68h] [rbp-70h] BYREF
+  UFG::SimObjectModifier v26; // [rsp+78h] [rbp-60h] BYREF
+  UFG::allocator::free_link *v27; // [rsp+E0h] [rbp+8h] BYREF
+  UFG::qSymbol result; // [rsp+E8h] [rbp+10h] BYREF
 
-  v4 = terrainNode;
-  v5 = terrainParams;
-  v6 = pTerrainData;
-  v7 = this;
   v8 = UFG::qSymbol::create_from_string((UFG::qSymbol *)&v27, "TerrainCollisionElement");
   UFG::Simulation::GenerateUniqueName(&UFG::gSim, &result, v8);
   v9 = UFG::Simulation::CreateSimObject(&UFG::gSim, &result);
-  v10 = (float)(v5->mMapResolution >> 2);
-  quant_scale = v5->mDimensions.z * 0.000015259022;
-  v12 = v4->mAABBMin.z;
-  pos.x = v4->mAABBMin.x;
-  pos.z = v12;
-  pos.y = v4->mAABBMax.y;
-  v13 = v4->mAABBMax.z - v12;
-  v14 = pos.y - v4->mAABBMin.y;
-  dimensions.x = v4->mAABBMax.x - pos.x;
+  v10 = (float)(terrainParams->mMapResolution >> 2);
+  quant_scale = terrainParams->mDimensions.z * 0.000015259022;
+  z = terrainNode->mAABBMin.z;
+  pos.x = terrainNode->mAABBMin.x;
+  pos.z = z;
+  pos.y = terrainNode->mAABBMax.y;
+  v13 = terrainNode->mAABBMax.z - z;
+  v14 = pos.y - terrainNode->mAABBMin.y;
+  dimensions.x = terrainNode->mAABBMax.x - pos.x;
   dimensions.y = v14;
   dimensions.z = v13;
   v15 = UFG::qMemoryPool::Allocate(&gPhysicsMemoryPool, 0xB8ui64, "TerrainCollisionComponent", 0i64, 1u);
   v27 = v15;
   if ( v15 )
   {
-    v16 = v6->mHeightField.mOffset;
-    if ( v16 )
-      v17 = (unsigned __int16 *)((char *)&v6->mHeightField + v16);
+    mOffset = pTerrainData->mHeightField.mOffset;
+    if ( mOffset )
+      v17 = (unsigned __int16 *)((char *)&pTerrainData->mHeightField + mOffset);
     else
       v17 = 0i64;
     UFG::TerrainCollisionComponent::TerrainCollisionComponent(
       (UFG::TerrainCollisionComponent *)v15,
       v9->mNode.mUID,
-      (signed int)v10,
-      (signed int)v10,
+      (int)v10,
+      (int)v10,
       v17,
       0.0,
       quant_scale,
@@ -213,8 +204,8 @@ void __fastcall UFG::TerrainCollisionManager::AddTerrainData(UFG::TerrainCollisi
   UFG::SimObjectModifier::AttachComponent(&v26, v19, 0xFFFFFFFFi64);
   UFG::SimObjectModifier::Close(&v26);
   UFG::SimObjectModifier::~SimObjectModifier(&v26);
-  v20 = v6->mUID;
-  if ( v20 && (v21 = UFG::qBaseTreeRB::Get(&v7->mTerrainObjectMap.mTree.mTree, v20)) != 0i64 )
+  mUID = pTerrainData->mUID;
+  if ( mUID && (v21 = UFG::qBaseTreeRB::Get(&this->mTerrainObjectMap.mTree.mTree, mUID)) != 0i64 )
   {
     v21->mNULL.mParent = (UFG::qBaseNodeRB *)v9;
   }
@@ -228,52 +219,50 @@ void __fastcall UFG::TerrainCollisionManager::AddTerrainData(UFG::TerrainCollisi
       v22->mNext = 0i64;
       v22[1].mNext = 0i64;
       v22[2].mNext = 0i64;
-      LODWORD(v22[3].mNext) = v20;
+      LODWORD(v22[3].mNext) = mUID;
       v22[4].mNext = (UFG::allocator::free_link *)v9;
     }
     else
     {
       v23 = 0i64;
     }
-    UFG::qBaseTreeRB::Add(&v7->mTerrainObjectMap.mTree.mTree, v23);
+    UFG::qBaseTreeRB::Add(&this->mTerrainObjectMap.mTree.mTree, v23);
     v23[1].mParent = (UFG::qBaseNodeRB *)v9;
   }
 }
 
 // File Line: 105
 // RVA: 0x473260
-void __fastcall UFG::TerrainCollisionManager::RemoveTerrainData(UFG::TerrainCollisionManager *this, Render::TerrainData *pTerrainData)
+void __fastcall UFG::TerrainCollisionManager::RemoveTerrainData(
+        UFG::TerrainCollisionManager *this,
+        Render::TerrainData *pTerrainData)
 {
-  Render::TerrainData *v2; // rbx
-  unsigned int v3; // edx
-  UFG::TerrainCollisionManager *v4; // rdi
+  unsigned int mUID; // edx
   UFG::qBaseTreeRB *v5; // rax
-  UFG::SimObject **v6; // rax
+  UFG::SimObject **p_mNULL; // rax
   unsigned int v7; // edx
   UFG::qBaseTreeRB *v8; // rax
   UFG::qBaseTreeRB *v9; // rbx
-  __int64 v10; // [rsp+38h] [rbp+10h]
+  __int64 v10; // [rsp+38h] [rbp+10h] BYREF
 
-  v2 = pTerrainData;
-  v3 = pTerrainData->mUID;
-  v4 = this;
+  mUID = pTerrainData->mUID;
   v10 = 0i64;
-  if ( v3 && (v5 = UFG::qBaseTreeRB::Get(&this->mTerrainObjectMap.mTree.mTree, v3)) != 0i64 )
-    v6 = (UFG::SimObject **)&v5->mNULL;
+  if ( mUID && (v5 = UFG::qBaseTreeRB::Get(&this->mTerrainObjectMap.mTree.mTree, mUID)) != 0i64 )
+    p_mNULL = (UFG::SimObject **)&v5->mNULL;
   else
-    v6 = (UFG::SimObject **)&v10;
-  if ( *v6 )
+    p_mNULL = (UFG::SimObject **)&v10;
+  if ( *p_mNULL )
   {
-    UFG::Simulation::DestroySimObject(&UFG::gSim, *v6);
-    v7 = v2->mUID;
+    UFG::Simulation::DestroySimObject(&UFG::gSim, *p_mNULL);
+    v7 = pTerrainData->mUID;
     if ( v7 )
     {
-      v8 = UFG::qBaseTreeRB::Get(&v4->mTerrainObjectMap.mTree.mTree, v7);
+      v8 = UFG::qBaseTreeRB::Get(&this->mTerrainObjectMap.mTree.mTree, v7);
       v9 = v8;
       if ( v8 )
       {
         UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
-          (UFG::qBaseTreeVariableRB<unsigned __int64> *)&v4->mTerrainObjectMap,
+          (UFG::qBaseTreeVariableRB<unsigned __int64> *)&this->mTerrainObjectMap,
           (UFG::qBaseNodeVariableRB<unsigned __int64> *)v8);
         operator delete[](v9);
       }

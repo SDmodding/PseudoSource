@@ -1,13 +1,13 @@
 // File Line: 22
 // RVA: 0xC0F940
-hkJobQueue::JobStatus __fastcall hkaiProcessNavMeshLineOfSightJob(hkJobQueue *jobQueue, hkJobQueue::JobQueueEntry *nextJobOut)
+hkJobQueue::JobStatus __fastcall hkaiProcessNavMeshLineOfSightJob(
+        hkJobQueue *jobQueue,
+        hkJobQueue::JobQueueEntry *nextJobOut)
 {
-  unsigned int v2; // eax
+  int v2; // eax
   __m128i *v3; // r12
-  hkJobQueue::JobQueueEntry *v4; // r14
-  hkJobQueue *v5; // r13
   __int64 v6; // r15
-  _QWORD *v7; // r8
+  _QWORD *Value; // r8
   unsigned __int64 v8; // rcx
   unsigned __int64 v9; // rax
   __m128i v10; // xmm8
@@ -20,90 +20,87 @@ hkJobQueue::JobStatus __fastcall hkaiProcessNavMeshLineOfSightJob(hkJobQueue *jo
   _QWORD *v17; // r8
   _QWORD *v18; // rcx
   unsigned __int64 v19; // rax
-  signed __int64 v20; // rcx
+  _QWORD *v20; // rcx
   void *v21; // rsi
   bool v22; // bl
   int v23; // edi
   hkLifoAllocator *v24; // rax
-  char *v25; // rcx
+  _DWORD *m_cur; // rcx
   int v26; // edx
   char *v27; // r8
   hkaiStreamingCollection::InstanceInfo *v28; // rcx
-  int v29; // eax
-  int v30; // ecx
-  bool v31; // sf
-  unsigned __int8 v32; // of
-  int v33; // eax
-  char *v34; // rsi
-  signed int v35; // edi
-  hkLifoAllocator *v36; // rax
-  int v37; // er8
-  _QWORD *v38; // r8
-  _QWORD *v39; // rcx
-  unsigned __int64 v40; // rax
-  signed __int64 v41; // rcx
-  _DWORD *array; // [rsp+20h] [rbp-C0h]
-  int v44; // [rsp+28h] [rbp-B8h]
-  int v45; // [rsp+2Ch] [rbp-B4h]
+  BOOL v29; // eax
+  int m_size; // ecx
+  bool v31; // cc
+  int v32; // eax
+  char *v33; // rsi
+  signed int v34; // edi
+  hkLifoAllocator *v35; // rax
+  int v36; // r8d
+  _QWORD *v37; // r8
+  _QWORD *v38; // rcx
+  unsigned __int64 v39; // rax
+  _QWORD *v40; // rcx
+  _DWORD *array; // [rsp+20h] [rbp-C0h] BYREF
+  int v43; // [rsp+28h] [rbp-B8h]
+  int v44; // [rsp+2Ch] [rbp-B4h]
   void *p; // [rsp+30h] [rbp-B0h]
-  int v47; // [rsp+38h] [rbp-A8h]
-  hkaiLineOfSightUtil::LineOfSightOutput output; // [rsp+40h] [rbp-A0h]
-  int v49; // [rsp+90h] [rbp-50h]
-  int v50; // [rsp+94h] [rbp-4Ch]
-  __int64 v51; // [rsp+98h] [rbp-48h]
-  int v52; // [rsp+A0h] [rbp-40h]
-  __int64 v53; // [rsp+B0h] [rbp-30h]
-  char v54; // [rsp+B8h] [rbp-28h]
-  char v55; // [rsp+BAh] [rbp-26h]
-  __int128 v56; // [rsp+C0h] [rbp-20h]
-  int v57; // [rsp+D0h] [rbp-10h]
-  __m128i v58; // [rsp+100h] [rbp+20h]
-  __int128 v59; // [rsp+110h] [rbp+30h]
+  int v46; // [rsp+38h] [rbp-A8h]
+  hkaiLineOfSightUtil::LineOfSightOutput output; // [rsp+40h] [rbp-A0h] BYREF
+  int v48; // [rsp+90h] [rbp-50h]
+  int v49; // [rsp+94h] [rbp-4Ch]
+  __int64 v50; // [rsp+98h] [rbp-48h]
+  int v51; // [rsp+A0h] [rbp-40h]
+  __int64 v52; // [rsp+B0h] [rbp-30h]
+  char v53; // [rsp+B8h] [rbp-28h]
+  char v54; // [rsp+BAh] [rbp-26h]
+  __int128 v55; // [rsp+C0h] [rbp-20h]
+  int v56; // [rsp+D0h] [rbp-10h]
+  __m128i v57; // [rsp+100h] [rbp+20h]
+  __int128 v58; // [rsp+110h] [rbp+30h]
   void *dst[2]; // [rsp+120h] [rbp+40h]
-  hkJobQueue *v61; // [rsp+1A0h] [rbp+C0h]
+  hkJobQueue *v60; // [rsp+1A0h] [rbp+C0h]
 
   v2 = *(_DWORD *)&nextJobOut->m_data[56];
   v3 = *(__m128i **)&nextJobOut->m_data[48];
-  v4 = nextJobOut;
-  v5 = jobQueue;
-  if ( (signed int)v2 > 0 )
+  if ( v2 > 0 )
   {
-    v6 = v2;
+    v6 = (unsigned int)v2;
     do
     {
-      v7 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-      v8 = v7[1];
-      if ( v8 < v7[3] )
+      Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+      v8 = Value[1];
+      if ( v8 < Value[3] )
       {
         *(_QWORD *)v8 = "LtMtPathLineOfSight";
         *(_QWORD *)(v8 + 16) = "StInit";
         v9 = __rdtsc();
         *(_DWORD *)(v8 + 8) = v9;
-        v7[1] = v8 + 24;
+        Value[1] = v8 + 24;
       }
       v11 = (__int128)v3[3];
       v12 = v3[4];
       v13 = *v3;
       v14 = (__int128)v3[1];
-      v58 = v3[2];
-      v10 = v58;
+      v57 = v3[2];
+      v10 = v57;
       v3 += 5;
-      v59 = v11;
+      v58 = v11;
       *(__m128i *)dst = v12;
       hkaiLineOfSightUtil::LineOfSightInput::LineOfSightInput((hkaiLineOfSightUtil::LineOfSightInput *)&output.m_doNotExceedArrayCapacity);
-      v15 = *(_DWORD *)&v4->m_data[60];
-      v52 = v11;
-      v16.m_quad = *(__m128 *)&v4->m_data[32];
-      v49 = _mm_cvtsi128_si32(v10);
+      v15 = *(_DWORD *)&nextJobOut->m_data[60];
+      v51 = v11;
+      v16.m_quad = *(__m128 *)&nextJobOut->m_data[32];
+      v48 = _mm_cvtsi128_si32(v10);
       *(__m128i *)&output.m_doNotExceedArrayCapacity.m_bool = v13;
-      v50 = v15;
-      v51 = v58.m128i_i64[1];
-      v56 = v14;
+      v49 = v15;
+      v50 = v57.m128i_i64[1];
+      v55 = v14;
       output.m_finalPoint = (hkVector4f)v16.m_quad;
-      v57 = _mm_cvtsi128_si32(_mm_srli_si128(v10, 4));
-      v55 = BYTE5(v59);
-      v54 = BYTE4(v59);
-      v53 = *(_QWORD *)&v4->m_data[64];
+      v56 = _mm_cvtsi128_si32(_mm_srli_si128(v10, 4));
+      v54 = BYTE5(v58);
+      v53 = BYTE4(v58);
+      v52 = *(_QWORD *)&nextJobOut->m_data[64];
       hkaiLineOfSightUtil::LineOfSightOutput::LineOfSightOutput(&output);
       v17 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
       v18 = (_QWORD *)v17[1];
@@ -111,8 +108,8 @@ hkJobQueue::JobStatus __fastcall hkaiProcessNavMeshLineOfSightJob(hkJobQueue *jo
       {
         *v18 = "StLineOfSight";
         v19 = __rdtsc();
-        v20 = (signed __int64)(v18 + 2);
-        *(_DWORD *)(v20 - 8) = v19;
+        v20 = v18 + 2;
+        *((_DWORD *)v20 - 2) = v19;
         v17[1] = v20;
       }
       v21 = dst[0];
@@ -120,122 +117,116 @@ hkJobQueue::JobStatus __fastcall hkaiProcessNavMeshLineOfSightJob(hkJobQueue *jo
       {
         v23 = (int)dst[1];
         array = 0i64;
-        v44 = 0;
-        v45 = 2147483648;
-        v47 = (int)dst[1];
+        v43 = 0;
+        v44 = 0x80000000;
+        v46 = (int)dst[1];
         if ( LODWORD(dst[1]) )
         {
           v24 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-          v25 = (char *)v24->m_cur;
+          m_cur = v24->m_cur;
           v26 = (4 * v23 + 127) & 0xFFFFFF80;
-          v27 = &v25[v26];
+          v27 = (char *)m_cur + v26;
           if ( v26 > v24->m_slabSize || v27 > v24->m_end )
-            v25 = (char *)hkLifoAllocator::allocateFromNewSlab(v24, v26);
+            m_cur = hkLifoAllocator::allocateFromNewSlab(v24, v26);
           else
             v24->m_cur = v27;
         }
         else
         {
-          v25 = 0i64;
+          m_cur = 0i64;
         }
-        array = v25;
-        p = v25;
-        output.m_visitedEdgesOut.m_data = (unsigned int *)v25;
-        v28 = *(hkaiStreamingCollection::InstanceInfo **)&v4->m_data[16];
-        v45 = v23 | 0x80000000;
+        array = m_cur;
+        p = m_cur;
+        output.m_visitedEdgesOut.m_data = m_cur;
+        v28 = *(hkaiStreamingCollection::InstanceInfo **)&nextJobOut->m_data[16];
+        v44 = v23 | 0x80000000;
         output.m_visitedEdgesOut.m_size = 0;
-        output.m_visitedEdgesOut.m_capacityAndFlags = (v23 | 0x80000000) & 0x3FFFFFFF | 0x80000000;
+        output.m_visitedEdgesOut.m_capacityAndFlags = v23 & 0x3FFFFFFF | 0x80000000;
         output.m_doNotExceedArrayCapacity.m_bool = 1;
         v29 = hkaiLineOfSightUtil::checkLineOfSight(
                 v28,
                 (hkaiLineOfSightUtil::LineOfSightInput *)&output.m_doNotExceedArrayCapacity,
                 &output);
-        v30 = output.m_visitedEdgesOut.m_size;
-        v22 = v29 != 0;
-        v44 = output.m_visitedEdgesOut.m_size;
-        v32 = __OFSUB__(output.m_visitedEdgesOut.m_size, v23);
-        v31 = output.m_visitedEdgesOut.m_size - v23 < 0;
+        m_size = output.m_visitedEdgesOut.m_size;
+        v22 = v29;
+        v43 = output.m_visitedEdgesOut.m_size;
+        v31 = output.m_visitedEdgesOut.m_size < v23;
         if ( output.m_visitedEdgesOut.m_size < v23 )
         {
-          if ( output.m_visitedEdgesOut.m_size == (v45 & 0x3FFFFFFF) )
+          if ( output.m_visitedEdgesOut.m_size == (v44 & 0x3FFFFFFF) )
           {
-            hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, 4);
-            v30 = v44;
+            hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &array, 4);
+            m_size = v43;
           }
-          array[v30] = -1;
-          v30 = v44 + 1;
-          v44 = v30;
-          v32 = __OFSUB__(v30, v23);
-          v31 = v30 - v23 < 0;
+          array[m_size] = -1;
+          m_size = v43 + 1;
+          v43 = m_size;
+          v31 = m_size < v23;
         }
-        if ( v31 ^ v32 )
-          v23 = v30;
+        if ( v31 )
+          v23 = m_size;
         hkString::memCpy(v21, array, 4 * v23);
-        v33 = v44;
-        v34 = (char *)p;
+        v32 = v43;
+        v33 = (char *)p;
         if ( p == array )
-          v33 = 0;
-        v44 = v33;
-        v35 = (4 * v47 + 127) & 0xFFFFFF80;
-        v36 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-        v37 = (v35 + 15) & 0xFFFFFFF0;
-        if ( v35 > v36->m_slabSize || &v34[v37] != v36->m_cur || v36->m_firstNonLifoEnd == v34 )
-          hkLifoAllocator::slowBlockFree(v36, v34, v37);
+          v32 = 0;
+        v43 = v32;
+        v34 = (4 * v46 + 127) & 0xFFFFFF80;
+        v35 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+        v36 = (v34 + 15) & 0xFFFFFFF0;
+        if ( v34 > v35->m_slabSize || &v33[v36] != v35->m_cur || v35->m_firstNonLifoEnd == v33 )
+          hkLifoAllocator::slowBlockFree(v35, v33, v36);
         else
-          v36->m_cur = v34;
-        v44 = 0;
-        if ( v45 >= 0 )
-          hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-            (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-            array,
-            4 * v45);
+          v35->m_cur = v33;
+        v43 = 0;
+        if ( v44 >= 0 )
+          hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, array, 4 * v44);
       }
       else
       {
-        v22 = (unsigned int)hkaiLineOfSightUtil::checkLineOfSight(
-                              *(hkaiStreamingCollection::InstanceInfo **)&v4->m_data[16],
-                              (hkaiLineOfSightUtil::LineOfSightInput *)&output.m_doNotExceedArrayCapacity,
-                              &output) != 0;
+        v22 = hkaiLineOfSightUtil::checkLineOfSight(
+                *(hkaiStreamingCollection::InstanceInfo **)&nextJobOut->m_data[16],
+                (hkaiLineOfSightUtil::LineOfSightInput *)&output.m_doNotExceedArrayCapacity,
+                &output);
       }
-      **((_BYTE **)&v59 + 1) = v22;
-      v38 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-      v39 = (_QWORD *)v38[1];
-      if ( (unsigned __int64)v39 < v38[3] )
+      **((_BYTE **)&v58 + 1) = v22;
+      v37 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+      v38 = (_QWORD *)v37[1];
+      if ( (unsigned __int64)v38 < v37[3] )
       {
-        *v39 = "lt";
-        v40 = __rdtsc();
-        v41 = (signed __int64)(v39 + 2);
-        *(_DWORD *)(v41 - 8) = v40;
-        v38[1] = v41;
+        *v38 = "lt";
+        v39 = __rdtsc();
+        v40 = v38 + 2;
+        *((_DWORD *)v40 - 2) = v39;
+        v37[1] = v40;
       }
       output.m_pointsOut.m_size = 0;
       if ( output.m_pointsOut.m_capacityAndFlags >= 0 )
         hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+          &hkContainerHeapAllocator::s_alloc,
           output.m_pointsOut.m_data,
           16 * output.m_pointsOut.m_capacityAndFlags);
       output.m_pointsOut.m_data = 0i64;
-      output.m_pointsOut.m_capacityAndFlags = 2147483648;
+      output.m_pointsOut.m_capacityAndFlags = 0x80000000;
       output.m_distancesOut.m_size = 0;
       if ( output.m_distancesOut.m_capacityAndFlags >= 0 )
         hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+          &hkContainerHeapAllocator::s_alloc,
           output.m_distancesOut.m_data,
           4 * output.m_distancesOut.m_capacityAndFlags);
       output.m_distancesOut.m_data = 0i64;
-      output.m_distancesOut.m_capacityAndFlags = 2147483648;
+      output.m_distancesOut.m_capacityAndFlags = 0x80000000;
       output.m_visitedEdgesOut.m_size = 0;
       if ( output.m_visitedEdgesOut.m_capacityAndFlags >= 0 )
         hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+          &hkContainerHeapAllocator::s_alloc,
           output.m_visitedEdgesOut.m_data,
           4 * output.m_visitedEdgesOut.m_capacityAndFlags);
       --v6;
     }
     while ( v6 );
-    v5 = v61;
+    jobQueue = v60;
   }
-  return hkJobQueue::finishJobAndGetNextJob(v5, v4, v4, 0);
-}s_alloc,
-          output.m_visitedEd
+  return hkJobQueue::finishJobAndGetNextJob(jobQueue, nextJobOut, nextJobOut, WAIT_FOR_NEXT_JOB);
+}
 

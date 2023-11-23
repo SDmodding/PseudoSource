@@ -16,12 +16,10 @@ void __fastcall Render::ViewMetrics::BeginTarget(Render::ViewMetrics *this)
 // RVA: 0x1A300
 void __fastcall Render::ViewMetrics::EndTarget(Render::ViewMetrics *this)
 {
-  Render::ViewMetrics *v1; // rbx
-  unsigned __int64 v2; // rax
+  unsigned __int64 Ticks; // rax
 
-  v1 = this;
-  v2 = UFG::qGetTicks();
-  v1->mTargetTiming = UFG::qGetTickTime(v1->mTargetTimingStartTicks, v2) + v1->mTargetTiming;
+  Ticks = UFG::qGetTicks();
+  this->mTargetTiming = UFG::qGetTickTime(this->mTargetTimingStartTicks, Ticks) + this->mTargetTiming;
 }
 
 // File Line: 39

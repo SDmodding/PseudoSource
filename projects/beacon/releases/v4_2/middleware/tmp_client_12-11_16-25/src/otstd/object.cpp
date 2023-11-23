@@ -35,7 +35,7 @@ __int64 __fastcall online_suite_malloc(unsigned __int64 size, char *pTag)
 
 // File Line: 95
 // RVA: 0xEE2778
-__int64 __fastcall online_suite_realloc(void *ptr, unsigned __int64 size, char *pTag)
+void *__fastcall online_suite_realloc(void *ptr, unsigned __int64 size, char *pTag)
 {
   return OSuite::ZObject::m_allocator->vfptr->realloc(OSuite::ZObject::m_allocator, ptr, size, pTag);
 }

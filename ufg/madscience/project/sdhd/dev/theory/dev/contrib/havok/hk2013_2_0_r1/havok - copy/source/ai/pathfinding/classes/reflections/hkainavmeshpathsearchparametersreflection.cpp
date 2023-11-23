@@ -29,7 +29,7 @@ void dynamic_initializer_for__hkaiNavMeshPathSearchParametersClass__()
     &hkaiNavMeshPathSearchParameters_Default,
     0i64,
     0,
-    0xAu);
+    10);
 }
 
 // File Line: 148

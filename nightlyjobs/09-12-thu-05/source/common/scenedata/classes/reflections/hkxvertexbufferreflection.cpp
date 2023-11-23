@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkxVertexBufferVertexDataClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 66
@@ -35,9 +35,10 @@ void __fastcall finishLoadedObjecthkxVertexBufferVertexData(void *p, int finishi
 
 // File Line: 79
 // RVA: 0xE33A60
-void __fastcall cleanupLoadedObjecthkxVertexBufferVertexData(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkxVertexBufferVertexData(hkxVertexBuffer::VertexData *p)
 {
-  hkxVertexBuffer::VertexData::~VertexData((hkxVertexBuffer::VertexData *)p);
+  hkxVertexBuffer::VertexData::~VertexData(p);
 }
 
 // File Line: 118
@@ -58,7 +59,7 @@ void dynamic_initializer_for__hkxVertexBufferClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 121
@@ -70,23 +71,24 @@ hkClass *__fastcall hkxVertexBuffer::staticClass()
 
 // File Line: 128
 // RVA: 0xE33A70
-void __fastcall finishLoadedObjecthkxVertexBuffer(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxVertexBuffer(hkxVertexBuffer *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkxVertexBuffer::hkxVertexBuffer);
+  if ( p )
+    hkxVertexBuffer::hkxVertexBuffer(p, finishing);
 }
 
 // File Line: 134
 // RVA: 0xE33A90
-void __fastcall cleanupLoadedObjecthkxVertexBuffer(void *p)
+void __fastcall cleanupLoadedObjecthkxVertexBuffer(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 138
 // RVA: 0xE33AA0
 hkBaseObjectVtbl *__fastcall getVtablehkxVertexBuffer()
 {
-  hkxVertexBuffer v1; // [rsp+20h] [rbp-98h]
+  hkxVertexBuffer v1; // [rsp+20h] [rbp-98h] BYREF
 
   hkxVertexBuffer::hkxVertexBuffer(&v1, 0);
   return v1.vfptr;
@@ -103,8 +105,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkxVertexBufferTypeInfo__()
   hkxVertexBufferTypeInfo.m_typeName = "hkxVertexBuffer";
   hkxVertexBufferTypeInfo.m_vtable = result;
   hkxVertexBufferTypeInfo.m_scopedName = "!hkxVertexBuffer";
-  hkxVertexBufferTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxVertexBuffer;
-  hkxVertexBufferTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxVertexBuffer;
+  hkxVertexBufferTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxVertexBuffer;
+  hkxVertexBufferTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxVertexBuffer;
   return result;
 }
 

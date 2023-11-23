@@ -14,7 +14,9 @@ __int64 __fastcall OSuitePrivate::ZConsumableTransactionBase::GetState(OSuitePri
 
 // File Line: 19
 // RVA: 0x133073C
-__int64 __fastcall OSuitePrivate::ZConsumableTransactionBase::SetState(OSuitePrivate::ZConsumableTransactionBase *this, OSuite::ITransactionState state)
+__int64 __fastcall OSuitePrivate::ZConsumableTransactionBase::SetState(
+        OSuitePrivate::ZConsumableTransactionBase *this,
+        OSuite::ITransactionState state)
 {
   this->m_eState = state;
   return 0i64;

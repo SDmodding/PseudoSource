@@ -4,20 +4,20 @@ UFG::ComponentIDDesc *__fastcall UFG::CharacterSubjectComponent::AccessComponent
 {
   UFG::ComponentIDDesc *v0; // rax
   int v1; // edx
-  _DWORD v3[6]; // [rsp+20h] [rbp-18h]
+  int v3; // [rsp+20h] [rbp-18h]
 
   if ( !UFG::CharacterSubjectComponent::_DescInit )
   {
     v0 = UFG::CameraSubject::AccessComponentDesc();
     ++UFG::CameraSubject::_TypeIDesc.mChildren;
     v1 = v0->mChildBitMask | (1 << SLOBYTE(UFG::CameraSubject::_TypeIDesc.mChildren));
-    LOWORD(v3[0]) = v0->mBaseTypeIndex;
-    *(_DWORD *)&UFG::CharacterSubjectComponent::_TypeIDesc.mBaseTypeIndex = v3[0];
+    LOWORD(v3) = v0->mBaseTypeIndex;
+    *(_DWORD *)&UFG::CharacterSubjectComponent::_TypeIDesc.mBaseTypeIndex = v3;
     UFG::CharacterSubjectComponent::_TypeIDesc.mChildBitMask = v1;
     UFG::CharacterSubjectComponent::_TypeIDesc.mChildren = 0;
     UFG::CharacterSubjectComponent::_DescInit = 1;
-    UFG::CharacterSubjectComponent::_TypeUID = v1 | (LOWORD(v3[0]) << 25);
-    UFG::CharacterSubjectComponent::_CharacterSubjectComponentTypeUID = v1 | (LOWORD(v3[0]) << 25);
+    UFG::CharacterSubjectComponent::_TypeUID = v1 | ((unsigned __int16)v3 << 25);
+    UFG::CharacterSubjectComponent::_CharacterSubjectComponentTypeUID = v1 | ((unsigned __int16)v3 << 25);
   }
   return &UFG::CharacterSubjectComponent::_TypeIDesc;
 }
@@ -26,7 +26,7 @@ UFG::ComponentIDDesc *__fastcall UFG::CharacterSubjectComponent::AccessComponent
 // RVA: 0x53B770
 void __fastcall UFG::CharacterSubjectComponent::IsPlayer(UFG::InventoryComponent *this)
 {
-  UFG::IsAnyLocalPlayer(this->m_pSimObject);
+  UFG::IsAnyLocalPlayer((UFG::SimObjectCharacter *)this->m_pSimObject);
 }
 
 // File Line: 63
@@ -47,39 +47,30 @@ float __fastcall UFG::CharacterSubjectComponent::GetSpeed(UFG::CharacterSubjectC
 // RVA: 0x535A30
 UFG::qVector3 *__fastcall UFG::CharacterSubjectComponent::HeadPosition(UFG::CharacterSubjectComponent *this)
 {
-  UFG::CharacterSubjectComponent *v1; // rbx
-
-  v1 = this;
   if ( !this->mHeadDirty )
     return &this->mHeadPosition;
   UFG::CharacterSubjectComponent::UpdateHead(this);
-  return &v1->mHeadPosition;
+  return &this->mHeadPosition;
 }
 
 // File Line: 120
 // RVA: 0x3C0BE0
 UFG::qVector3 *__fastcall UFG::CharacterSubjectComponent::CambonePosition(UFG::CharacterSubjectComponent *this)
 {
-  UFG::CharacterSubjectComponent *v1; // rbx
-
-  v1 = this;
   if ( !this->mCamboneDirty )
     return &this->mCambonePosition;
   UFG::CharacterSubjectComponent::UpdateCambone(this);
-  return &v1->mCambonePosition;
+  return &this->mCambonePosition;
 }
 
 // File Line: 121
 // RVA: 0x3C7D60
 UFG::qVector3 *__fastcall UFG::CharacterSubjectComponent::PelvisPosition(UFG::CharacterSubjectComponent *this)
 {
-  UFG::CharacterSubjectComponent *v1; // rbx
-
-  v1 = this;
   if ( !this->mPelvisDirty )
     return &this->mPelvisPosition;
   UFG::CharacterSubjectComponent::UpdatePelvis(this);
-  return &v1->mPelvisPosition;
+  return &this->mPelvisPosition;
 }
 
 // File Line: 123
@@ -119,28 +110,30 @@ UFG::qVector3 *__fastcall UFG::CharacterSubjectComponent::GetBoxMax(UFG::Charact
 
 // File Line: 282
 // RVA: 0x3C3590
-float __fastcall UFG::CharacterSubjectComponent::GetLockedElevation(UFG::CharacterSubjectComponent *this, UFG::CharacterSubjectComponent::SrcTransform src)
+float __fastcall UFG::CharacterSubjectComponent::GetLockedElevation(
+        UFG::CharacterSubjectComponent *this,
+        UFG::CharacterSubjectComponent::SrcTransform src)
 {
   float result; // xmm0_4
 
   switch ( src )
   {
-    case 1:
+    case SrcTransform_Camera:
       result = this->rLockedElevationCam;
       break;
-    case 2:
+    case SrcTransform_Pelvis:
       result = this->rLockedElevationHip;
       break;
-    case 3:
+    case SrcTransform_Head:
       result = this->rLockedElevationHed;
       break;
-    case 8:
+    case SrcTransform_FocusCreatureCambone:
       result = this->rLockedElevationFocusCreatureCambone;
       break;
-    case 9:
+    case SrcTransform_FocusCreaturePelvis:
       result = this->rLockedElevationFocusCreaturePelvis;
       break;
-    case 10:
+    case SrcTransform_FocusCreatureHead:
       result = this->rLockedElevationFocusCreatureHead;
       break;
     default:

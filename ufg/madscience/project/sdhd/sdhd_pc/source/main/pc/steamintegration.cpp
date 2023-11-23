@@ -1,37 +1,36 @@
 // File Line: 53
 // RVA: 0x426FE0
-void __fastcall SteamImplementation::SteamImplementation(SteamImplementation *this, void (__fastcall *textCallbackFn)(int, const char *), void (__fastcall *dlcCallbackFn)())
+void __fastcall SteamImplementation::SteamImplementation(
+        SteamImplementation *this,
+        void (__fastcall *textCallbackFn)(int, const char *),
+        void (__fastcall *dlcCallbackFn)())
 {
-  SteamImplementation *v3; // rbx
-  CCallback<SteamImplementation,DlcInstalled_t,0> *v4; // rcx
-  signed __int64 v5; // rcx
+  CCallback<SteamImplementation,DlcInstalled_t,0> *p_mDLCInstalledCallback; // rcx
 
-  v3 = this;
   this->mTextCallback = textCallbackFn;
   this->mDLCCallback = dlcCallbackFn;
-  v4 = &this->mDLCInstalledCallback;
-  v4->m_nCallbackFlags = 0;
-  v4->m_iCallback = 0;
-  v4->vfptr = (CCallbackBaseVtbl *)&CCallback<SteamImplementation,DlcInstalled_t,0>::`vftable;
-  v4->m_pObj = v3;
-  v4->m_Func = SteamImplementation::OnDLCInstalled;
+  p_mDLCInstalledCallback = &this->mDLCInstalledCallback;
+  p_mDLCInstalledCallback->m_nCallbackFlags = 0;
+  p_mDLCInstalledCallback->m_iCallback = 0;
+  p_mDLCInstalledCallback->vfptr = (CCallbackBaseVtbl *)&CCallback<SteamImplementation,DlcInstalled_t,0>::`vftable;
+  p_mDLCInstalledCallback->m_pObj = this;
+  p_mDLCInstalledCallback->m_Func = SteamImplementation::OnDLCInstalled;
   if ( SteamImplementation::OnDLCInstalled )
   {
-    v4->m_pObj = v3;
-    v4->m_Func = SteamImplementation::OnDLCInstalled;
-    SteamAPI_RegisterCallback(v4, 1005i64);
+    p_mDLCInstalledCallback->m_pObj = this;
+    p_mDLCInstalledCallback->m_Func = SteamImplementation::OnDLCInstalled;
+    SteamAPI_RegisterCallback(p_mDLCInstalledCallback, 1005i64);
   }
-  v5 = (signed __int64)&v3->mRegisterActivationCodeCallback;
-  *(_BYTE *)(v5 + 8) = 0;
-  *(_DWORD *)(v5 + 12) = 0;
-  *(_QWORD *)v5 = &CCallback<SteamImplementation,RegisterActivationCodeResponse_t,0>::`vftable;
-  *(_QWORD *)(v5 + 16) = v3;
-  *(_QWORD *)(v5 + 24) = SteamImplementation::OnRegisterActivationCode;
+  this->mRegisterActivationCodeCallback.m_nCallbackFlags = 0;
+  this->mRegisterActivationCodeCallback.m_iCallback = 0;
+  this->mRegisterActivationCodeCallback.vfptr = (CCallbackBaseVtbl *)&CCallback<SteamImplementation,RegisterActivationCodeResponse_t,0>::`vftable;
+  this->mRegisterActivationCodeCallback.m_pObj = this;
+  this->mRegisterActivationCodeCallback.m_Func = SteamImplementation::OnRegisterActivationCode;
   if ( SteamImplementation::OnRegisterActivationCode )
   {
-    v3->mRegisterActivationCodeCallback.m_pObj = v3;
-    v3->mRegisterActivationCodeCallback.m_Func = SteamImplementation::OnRegisterActivationCode;
-    SteamAPI_RegisterCallback(v5, 1008i64);
+    this->mRegisterActivationCodeCallback.m_pObj = this;
+    this->mRegisterActivationCodeCallback.m_Func = SteamImplementation::OnRegisterActivationCode;
+    SteamAPI_RegisterCallback(&this->mRegisterActivationCodeCallback, 1008i64);
   }
 }
 
@@ -39,59 +38,53 @@ void __fastcall SteamImplementation::SteamImplementation(SteamImplementation *th
 // RVA: 0x427270
 void __fastcall SteamImplementation::OnDLCInstalled(SteamImplementation *this, DlcInstalled_t *callbackData)
 {
-  SteamImplementation *v2; // rbx
-  void (__fastcall *v3)(); // rax
-  char string; // [rsp+20h] [rbp-208h]
+  void (__fastcall *mDLCCallback)(); // rax
+  char string[520]; // [rsp+20h] [rbp-208h] BYREF
 
-  v2 = this;
   if ( this->mTextCallback )
   {
-    snprintf(&string, 0x200ui64, "SteamImplementation::OnDLCInstalled(): AppID %d\n", callbackData->m_nAppID);
-    v2->mTextCallback(1, &string);
+    snprintf(string, 0x200ui64, "SteamImplementation::OnDLCInstalled(): AppID %d\n", callbackData->m_nAppID);
+    this->mTextCallback(1i64, string);
   }
-  v3 = v2->mDLCCallback;
-  if ( v3 )
-    ((void (__fastcall *)(SteamImplementation *, DlcInstalled_t *))v3)(this, callbackData);
+  mDLCCallback = this->mDLCCallback;
+  if ( mDLCCallback )
+    ((void (__fastcall *)(SteamImplementation *, DlcInstalled_t *))mDLCCallback)(this, callbackData);
 }
 
 // File Line: 71
 // RVA: 0x4272C0
-void __fastcall SteamImplementation::OnRegisterActivationCode(SteamImplementation *this, RegisterActivationCodeResponse_t *callbackData)
+void __fastcall SteamImplementation::OnRegisterActivationCode(
+        SteamImplementation *this,
+        RegisterActivationCodeResponse_t *callbackData)
 {
-  SteamImplementation *v2; // rbx
-  void (__fastcall *v3)(); // rax
-  char string; // [rsp+20h] [rbp-208h]
+  void (__fastcall *mDLCCallback)(); // rax
+  char string[520]; // [rsp+20h] [rbp-208h] BYREF
 
-  v2 = this;
   if ( this->mTextCallback )
   {
-    snprintf(&string, 0x200ui64, "SteamImplementation::OnRegisterActivationCode()\n");
-    v2->mTextCallback(1, &string);
+    snprintf(string, 0x200ui64, "SteamImplementation::OnRegisterActivationCode()\n");
+    this->mTextCallback(1i64, string);
   }
-  v3 = v2->mDLCCallback;
-  if ( v3 )
-    ((void (__fastcall *)(SteamImplementation *, RegisterActivationCodeResponse_t *))v3)(this, callbackData);
+  mDLCCallback = this->mDLCCallback;
+  if ( mDLCCallback )
+    ((void (__fastcall *)(SteamImplementation *, RegisterActivationCodeResponse_t *))mDLCCallback)(this, callbackData);
 }
 
 // File Line: 149
 // RVA: 0x427230
 void __fastcall MiniDumpFunction(unsigned int nExceptionCode, _EXCEPTION_POINTERS *pException)
 {
-  unsigned int v2; // edi
-  _EXCEPTION_POINTERS *v3; // rbx
-
-  v2 = nExceptionCode;
-  v3 = pException;
   SteamAPI_SetMiniDumpComment("Minidump comment: SDHDShip.exe\n");
-  SteamAPI_WriteMiniDump(v2, v3, (unsigned int)UFG::gCL_number);
+  SteamAPI_WriteMiniDump(nExceptionCode, pException, (unsigned int)UFG::gCL_number);
 }
 
 // File Line: 164
 // RVA: 0x427160
-char __fastcall SteamIntegration::InitAPI(void (__fastcall *textCallbackFn)(int, const char *), void (__fastcall *dlcCallbackFn)(), bool dev_mode)
+char __fastcall SteamIntegration::InitAPI(
+        void (__fastcall *textCallbackFn)(int, const char *),
+        void (__fastcall *dlcCallbackFn)(),
+        bool dev_mode)
 {
-  void (__fastcall *v3)(); // rdi
-  void (__fastcall *v4)(int, const char *); // rbx
   __int64 v6; // rcx
   __int64 v7; // rcx
   ISteamClient *v8; // rax
@@ -99,22 +92,20 @@ char __fastcall SteamIntegration::InitAPI(void (__fastcall *textCallbackFn)(int,
   ISteamUtils *v10; // rax
   UFG::allocator::free_link *v11; // rax
 
-  v3 = dlcCallbackFn;
-  v4 = textCallbackFn;
   if ( !dev_mode && (unsigned __int8)SteamAPI_RestartAppIfNecessary((unsigned int)UFG::OnlineManagerPlat::SteamAppID) )
     return 0;
   _set_se_translator(MiniDumpFunction);
   if ( !(unsigned __int8)SteamAPI_Init(v6) )
     return 0;
-  gOutputCallback = v4;
-  gDLCInstalledCallback = v3;
+  gOutputCallback = textCallbackFn;
+  gDLCInstalledCallback = dlcCallbackFn;
   v8 = (ISteamClient *)SteamClient(v7);
-  v8->vfptr->SetWarningMessageHook(v8, v4);
+  v8->vfptr->SetWarningMessageHook(v8, textCallbackFn);
   v10 = (ISteamUtils *)SteamUtils(v9);
   v10->vfptr->SetOverlayNotificationPosition(v10, k_EPositionBottomRight);
   v11 = UFG::qMalloc(0x50ui64, UFG::gGlobalNewName, 0i64);
   if ( v11 )
-    SteamImplementation::SteamImplementation((SteamImplementation *)v11, v4, v3);
+    SteamImplementation::SteamImplementation((SteamImplementation *)v11, textCallbackFn, dlcCallbackFn);
   sImplementation = (SteamImplementation *)v11;
   return 1;
 }
@@ -124,17 +115,17 @@ char __fastcall SteamIntegration::InitAPI(void (__fastcall *textCallbackFn)(int,
 void __fastcall SteamIntegration::CloseAPI(__int64 a1)
 {
   SteamImplementation *v1; // rbx
-  CCallback<SteamImplementation,RegisterActivationCodeResponse_t,0> *v2; // rcx
+  CCallback<SteamImplementation,RegisterActivationCodeResponse_t,0> *p_mRegisterActivationCodeCallback; // rcx
 
   v1 = sImplementation;
   if ( sImplementation )
   {
-    v2 = &sImplementation->mRegisterActivationCodeCallback;
+    p_mRegisterActivationCodeCallback = &sImplementation->mRegisterActivationCodeCallback;
     sImplementation->mRegisterActivationCodeCallback.vfptr = (CCallbackBaseVtbl *)&CCallback<SteamImplementation,RegisterActivationCodeResponse_t,0>::`vftable;
-    if ( v1->mRegisterActivationCodeCallback.m_nCallbackFlags & 1 )
-      SteamAPI_UnregisterCallback(v2);
+    if ( (v1->mRegisterActivationCodeCallback.m_nCallbackFlags & 1) != 0 )
+      SteamAPI_UnregisterCallback(p_mRegisterActivationCodeCallback);
     v1->mDLCInstalledCallback.vfptr = (CCallbackBaseVtbl *)&CCallback<SteamImplementation,DlcInstalled_t,0>::`vftable;
-    if ( v1->mDLCInstalledCallback.m_nCallbackFlags & 1 )
+    if ( (v1->mDLCInstalledCallback.m_nCallbackFlags & 1) != 0 )
       SteamAPI_UnregisterCallback(&v1->mDLCInstalledCallback);
     operator delete[](v1);
   }

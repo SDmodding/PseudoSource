@@ -6,7 +6,7 @@ __int64 UFG::_dynamic_initializer_for__sCircleCombat__()
 
   v0 = UFG::qStringHash32("CircleCombat", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&sCircleCombat, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__sCircleCombat__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__sCircleCombat__);
 }
 
 // File Line: 53
@@ -17,7 +17,7 @@ __int64 UFG::_dynamic_initializer_for__sSimObjChildren___0()
 
   v0 = UFG::qStringHash32("SimObjChildren", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&sSimObjChildren_0, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__sSimObjChildren___0);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__sSimObjChildren___0);
 }
 
 // File Line: 80
@@ -25,7 +25,7 @@ __int64 UFG::_dynamic_initializer_for__sSimObjChildren___0()
 __int64 UFG::_dynamic_initializer_for__gSceneLayerInventory__()
 {
   UFG::qResourceInventory::qResourceInventory(
-    (UFG::qResourceInventory *)&UFG::gSceneLayerInventory.vfptr,
+    &UFG::gSceneLayerInventory,
     "SceneLayerInventory",
     0xE0F4D9CC,
     0xE7F23AEE,
@@ -34,93 +34,85 @@ __int64 UFG::_dynamic_initializer_for__gSceneLayerInventory__()
   UFG::gSceneLayerInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::SceneLayerInventory::`vftable;
   UFG::gSceneLayerInventory.mPurgedScriptUIDs.p = 0i64;
   *(_QWORD *)&UFG::gSceneLayerInventory.mPurgedScriptUIDs.size = 0i64;
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSceneLayerInventory__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSceneLayerInventory__);
 }
 
 // File Line: 88
 // RVA: 0x243900
 void __fastcall UFG::SceneLayerInventory::PrintContents(UFG::SceneLayerInventory *this)
 {
-  UFG::SceneLayerInventory *v1; // rdi
   UFG::qBaseTreeRB *i; // rbx
 
-  v1 = this;
   UFG::qPrintf("Contents of Inventory %.64s %d items\n", this->mName, this->mNumResourceData);
-  for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v1->mResourceDatas);
+  for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&this->mResourceDatas);
         i;
-        i = UFG::qBaseTreeRB::GetNext(&v1->mResourceDatas.mTree, &i->mRoot) )
+        i = UFG::qBaseTreeRB::GetNext(&this->mResourceDatas.mTree, &i->mRoot) )
   {
     UFG::qPrintf(
       "  - Resource TypeUID:0x%08x DataUID:0x%08x Memory:0x%08x Name:%.36s\n",
       LODWORD(i->mNULL.mChild[1]),
       i->mRoot.mUID,
       i,
-      (char *)&i->mNULL.mChild[1] + 4);
+      (const char *)&i->mNULL.mChild[1] + 4);
   }
 }
 
 // File Line: 102
 // RVA: 0x239C30
-void __fastcall UFG::SceneLayerInventory::Add(UFG::SceneLayerInventory *this, UFG::qResourceData *resource_data)
+void __fastcall UFG::SceneLayerInventory::Add(UFG::SceneLayerInventory *this, UFG::SceneLayerResource *resource_data)
 {
-  UFG::SceneLayerResource *v2; // rbx
-  UFG::SceneLayerInventory *v3; // rdi
   char v4; // r10
-  int v5; // er9
+  unsigned int mScriptUID; // r9d
   __int64 v6; // r8
-  unsigned int v7; // edx
-  unsigned int *v8; // rcx
-  void (__fastcall *v9)(UFG::SceneLayerResource *); // rax
+  unsigned int size; // edx
+  unsigned int *p; // rcx
+  void (__fastcall *m_onSceneLayerResourceLoadedCallback)(UFG::SceneLayerResource *); // rax
 
-  v2 = (UFG::SceneLayerResource *)resource_data;
-  v3 = this;
-  v4 = (_QWORD)resource_data[1].mNode.mChild[1] & 1;
+  v4 = resource_data->mFlags & 1;
   if ( !v4 )
     goto LABEL_8;
-  v5 = (int)resource_data[1].mResourceHandles.mNode.mNext;
+  mScriptUID = resource_data->mScriptUID;
   v6 = 0i64;
-  v7 = this->mPurgedScriptUIDs.size;
-  if ( !v7 )
+  size = this->mPurgedScriptUIDs.size;
+  if ( !size )
     goto LABEL_8;
-  v8 = this->mPurgedScriptUIDs.p;
-  while ( v5 != v8[v6] )
+  p = this->mPurgedScriptUIDs.p;
+  while ( mScriptUID != p[v6] )
   {
     v6 = (unsigned int)(v6 + 1);
-    if ( (unsigned int)v6 >= v7 )
+    if ( (unsigned int)v6 >= size )
       goto LABEL_8;
   }
   if ( (_DWORD)v6 == -1 )
   {
 LABEL_8:
     if ( v4 )
-      UFG::SceneLayerResource::SceneLayerResource(v2);
-    UFG::qResourceInventory::Add((UFG::qResourceInventory *)&v3->vfptr, (UFG::qResourceData *)&v2->mNode);
-    v2->mFlags |= 2u;
-    v9 = v3->m_onSceneLayerResourceLoadedCallback;
-    if ( v9 )
-      v9(v2);
+      UFG::SceneLayerResource::SceneLayerResource(resource_data);
+    UFG::qResourceInventory::Add(this, resource_data);
+    resource_data->mFlags |= 2u;
+    m_onSceneLayerResourceLoadedCallback = this->m_onSceneLayerResourceLoadedCallback;
+    if ( m_onSceneLayerResourceLoadedCallback )
+      m_onSceneLayerResourceLoadedCallback(resource_data);
   }
 }
 
 // File Line: 125
 // RVA: 0x245020
-void __fastcall UFG::SceneLayerInventory::Remove(UFG::SceneLayerInventory *this, UFG::qResourceData *resource_data)
+void __fastcall UFG::SceneLayerInventory::Remove(
+        UFG::SceneLayerInventory *this,
+        UFG::SceneLayerResource *resource_data)
 {
-  UFG::SceneLayerResource *v2; // rbx
-  UFG::SceneLayerInventory *v3; // rdi
-  void (__fastcall *v4)(UFG::SceneLayerResource *); // rax
+  void (__fastcall *m_onSceneLayerResourceUnloadedCallback)(UFG::SceneLayerResource *); // rax
 
-  v2 = (UFG::SceneLayerResource *)resource_data;
-  v3 = this;
-  if ( (_QWORD)resource_data[1].mNode.mChild[1] & 2 )
+  if ( (resource_data->mFlags & 2) != 0 )
   {
-    UFG::qResourceInventory::Remove((UFG::qResourceInventory *)&this->vfptr, resource_data);
-    v2->mFlags &= 0xFFFFFFFD;
-    v4 = v3->m_onSceneLayerResourceUnloadedCallback;
-    if ( v4 )
-      v4(v2);
-    if ( v2->mFlags & 1 )
-      UFG::SceneLayerResource::~SceneLayerResource(v2);
+    UFG::qResourceInventory::Remove(this, resource_data);
+    resource_data->mFlags &= ~2u;
+    m_onSceneLayerResourceUnloadedCallback = this->m_onSceneLayerResourceUnloadedCallback;
+    if ( m_onSceneLayerResourceUnloadedCallback )
+      m_onSceneLayerResourceUnloadedCallback(resource_data);
+    if ( (resource_data->mFlags & 1) != 0 )
+      UFG::SceneLayerResource::~SceneLayerResource(resource_data);
   }
 }
 
@@ -128,56 +120,44 @@ void __fastcall UFG::SceneLayerInventory::Remove(UFG::SceneLayerInventory *this,
 // RVA: 0x237900
 void __fastcall UFG::SceneLayerResource::SceneLayerResource(UFG::SceneLayerResource *this)
 {
-  UFG::SceneLayerResource *v1; // rsi
-  UFG::qNode<UFG::SceneLayerResource,UFG::SceneLayerResource> *v2; // rax
-  UFG::qPropertySet *v3; // rbx
-  unsigned int v4; // edi
-  __int64 v5; // rax
-  signed __int64 v6; // rcx
-  _QWORD *v7; // rdx
-  UFG::qPropertySet *v8; // rcx
+  UFG::qPropertySet *v2; // rbx
+  unsigned int i; // edi
+  __int64 mOffset; // rax
+  char *v5; // rcx
+  char *v6; // rdx
+  UFG::qPropertySet *v7; // rcx
+  __int64 v8; // rax
   __int64 v9; // rax
-  __int64 v10; // rax
-  UFG::qList<UFG::SceneObjectProperties,UFG::SceneObjectProperties,0,0> *v11; // [rsp+58h] [rbp+10h]
 
-  v1 = this;
-  UFG::qResourceData::qResourceData((UFG::qResourceData *)&this->mNode);
-  v2 = (UFG::qNode<UFG::SceneLayerResource,UFG::SceneLayerResource> *)&v1->mPrev;
-  v2->mPrev = v2;
-  v2->mNext = v2;
-  v11 = &v1->mObjects;
-  v11->mNode.mPrev = &v11->mNode;
-  v11->mNode.mNext = &v11->mNode;
-  v3 = 0i64;
-  v4 = 0;
-  if ( v1->mPropertySetCount )
+  UFG::qResourceData::qResourceData(this);
+  this->mPrev = &this->UFG::qNode<UFG::SceneLayerResource,UFG::SceneLayerResource>;
+  this->mNext = &this->UFG::qNode<UFG::SceneLayerResource,UFG::SceneLayerResource>;
+  this->mObjects.mNode.mPrev = &this->mObjects.mNode;
+  this->mObjects.mNode.mNext = &this->mObjects.mNode;
+  v2 = 0i64;
+  for ( i = 0; i < this->mPropertySetCount; ++i )
   {
-    do
-    {
-      v5 = v1->mPropertySets.mOffset;
-      if ( v5 )
-        v6 = (signed __int64)&v1->mPropertySets + v5;
-      else
-        v6 = 0i64;
-      v7 = (_QWORD *)(v6 + 8i64 * v4);
-      if ( *v7 )
-        v8 = (UFG::qPropertySet *)((char *)v7 + *v7);
-      else
-        v8 = 0i64;
-      if ( v8 )
-        UFG::qPropertySet::qPropertySet(v8);
-      ++v4;
-    }
-    while ( v4 < v1->mPropertySetCount );
+    mOffset = this->mPropertySets.mOffset;
+    if ( mOffset )
+      v5 = (char *)&this->mPropertySets + mOffset;
+    else
+      v5 = 0i64;
+    v6 = &v5[8 * i];
+    if ( *(_QWORD *)v6 )
+      v7 = (UFG::qPropertySet *)&v6[*(_QWORD *)v6];
+    else
+      v7 = 0i64;
+    if ( v7 )
+      UFG::qPropertySet::qPropertySet(v7);
   }
-  v9 = v1->mGeoInfoPropSet.mOffset;
-  if ( v9 && (UFG::qOffset64<UFG::qPropertySet *> *)((char *)&v1->mGeoInfoPropSet + v9) )
+  v8 = this->mGeoInfoPropSet.mOffset;
+  if ( v8 && (UFG::qOffset64<UFG::qPropertySet *> *)((char *)&this->mGeoInfoPropSet + v8) )
   {
-    v10 = v1->mGeoInfoPropSet.mOffset;
-    if ( v10 )
-      v3 = (UFG::qPropertySet *)((char *)&v1->mGeoInfoPropSet + v10);
-    if ( v3 )
-      UFG::qPropertySet::qPropertySet(v3);
+    v9 = this->mGeoInfoPropSet.mOffset;
+    if ( v9 )
+      v2 = (UFG::qPropertySet *)((char *)&this->mGeoInfoPropSet + v9);
+    if ( v2 )
+      UFG::qPropertySet::qPropertySet(v2);
   }
 }
 
@@ -185,74 +165,65 @@ void __fastcall UFG::SceneLayerResource::SceneLayerResource(UFG::SceneLayerResou
 // RVA: 0x2379E0
 void __fastcall UFG::SceneLayerResource::SceneLayerResource(UFG::SceneLayerResource *this, const char *layer_name)
 {
-  const char *v2; // rdi
-  UFG::SceneLayerResource *v3; // rsi
   unsigned int v4; // eax
-  UFG::qNode<UFG::SceneLayerResource,UFG::SceneLayerResource> *v5; // rax
-  UFG::qList<UFG::SceneObjectProperties,UFG::SceneObjectProperties,0,0> *v6; // rax
+  float y; // xmm1_4
+  float z; // xmm2_4
   float v7; // xmm1_4
   float v8; // xmm2_4
-  float v9; // xmm1_4
-  float v10; // xmm2_4
-  unsigned int v11; // edx
-  UFG::qSymbol *v12; // rax
-  UFG::qPropertySet *v13; // rbx
-  UFG::qList<UFG::SceneObjectProperties,UFG::SceneObjectProperties,0,0> *result; // [rsp+60h] [rbp+18h]
-  UFG::qSymbol v15; // [rsp+68h] [rbp+20h]
+  unsigned int mUID; // edx
+  UFG::qSymbol *v10; // rax
+  UFG::qPropertySet *ContainedSet; // rbx
+  UFG::qList<UFG::SceneObjectProperties,UFG::SceneObjectProperties,0,0> *result; // [rsp+60h] [rbp+18h] BYREF
+  UFG::qSymbol v13; // [rsp+68h] [rbp+20h] BYREF
 
-  v2 = layer_name;
-  v3 = this;
   v4 = UFG::qStringHash32(layer_name, 0xFFFFFFFF);
-  UFG::qResourceData::qResourceData((UFG::qResourceData *)&v3->mNode, 0xE0F4D9CC, v4, v2);
-  v5 = (UFG::qNode<UFG::SceneLayerResource,UFG::SceneLayerResource> *)&v3->mPrev;
-  v5->mPrev = v5;
-  v5->mNext = v5;
-  v6 = &v3->mObjects;
-  result = v6;
-  v6->mNode.mPrev = &v6->mNode;
-  v6->mNode.mNext = &v6->mNode;
-  *(_QWORD *)&v3->mFlags = 0i64;
-  v3->mPropertySets.mOffset = 0i64;
-  v3->mGeoInfoPropSet.mOffset = 0i64;
+  UFG::qResourceData::qResourceData(this, 0xE0F4D9CC, v4, layer_name);
+  this->mPrev = &this->UFG::qNode<UFG::SceneLayerResource,UFG::SceneLayerResource>;
+  this->mNext = &this->UFG::qNode<UFG::SceneLayerResource,UFG::SceneLayerResource>;
+  result = &this->mObjects;
+  this->mObjects.mNode.mPrev = &this->mObjects.mNode;
+  this->mObjects.mNode.mNext = &this->mObjects.mNode;
+  *(_QWORD *)&this->mFlags = 0i64;
+  this->mPropertySets.mOffset = 0i64;
+  this->mGeoInfoPropSet.mOffset = 0i64;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
+  this->mAABBMin.x = UFG::qVector3::msZero.x;
+  this->mAABBMin.y = y;
+  this->mAABBMin.z = z;
   v7 = UFG::qVector3::msZero.y;
   v8 = UFG::qVector3::msZero.z;
-  v3->mAABBMin.x = UFG::qVector3::msZero.x;
-  v3->mAABBMin.y = v7;
-  v3->mAABBMin.z = v8;
-  v9 = UFG::qVector3::msZero.y;
-  v10 = UFG::qVector3::msZero.z;
-  v3->mAABBMax.x = UFG::qVector3::msZero.x;
-  v3->mAABBMax.y = v9;
-  v3->mAABBMax.z = v10;
-  v3->mpRuntimeSceneLayer = 0i64;
-  v11 = v3->mNode.mUID;
-  v3->mScriptUID = v11;
-  v3->mSourceCRC = -1;
-  v12 = (UFG::qSymbol *)UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&result, v11);
-  v13 = UFG::qPropertySet::CreateContainedSet(v12, "geo_info_prop_set");
-  v13->mSchemaName = (UFG::qSymbol)UFG::qSymbol::create_from_string(&v15, "default-schema-scenelayer")->mUID;
-  UFG::PropertySetManager::SetupSchemaSet(v13, &v13->mSchemaName);
-  UFG::SceneLayerResource::SetGeoInfoPropertySet(v3, v13);
-  _((AMD_HD3D *)v3->mNode.mUID);
+  this->mAABBMax.x = UFG::qVector3::msZero.x;
+  this->mAABBMax.y = v7;
+  this->mAABBMax.z = v8;
+  this->mpRuntimeSceneLayer = 0i64;
+  mUID = this->mNode.mUID;
+  this->mScriptUID = mUID;
+  this->mSourceCRC = -1;
+  v10 = (UFG::qSymbol *)UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&result, mUID);
+  ContainedSet = UFG::qPropertySet::CreateContainedSet(v10, "geo_info_prop_set");
+  ContainedSet->mSchemaName = (UFG::qSymbol)UFG::qSymbol::create_from_string(&v13, "default-schema-scenelayer")->mUID;
+  UFG::PropertySetManager::SetupSchemaSet(ContainedSet, (UFG::qArray<unsigned long,0> *)&ContainedSet->mSchemaName);
+  UFG::SceneLayerResource::SetGeoInfoPropertySet(this, ContainedSet);
+  _((AMD_HD3D *)this->mNode.mUID);
 }
 
 // File Line: 231
 // RVA: 0x238480
 void __fastcall UFG::SceneLayerResource::~SceneLayerResource(UFG::SceneLayerResource *this)
 {
-  UFG::SceneLayerResource *v1; // rdi
   UFG::qPropertySet *v2; // rbx
-  unsigned int v3; // esi
-  __int64 v4; // rax
-  signed __int64 v5; // rcx
-  _QWORD *v6; // rdx
+  unsigned int i; // esi
+  __int64 mOffset; // rax
+  char *v5; // rcx
+  char *v6; // rdx
   UFG::qPropertySet *v7; // rcx
   __int64 v8; // rax
   __int64 v9; // rax
-  unsigned int v10; // esi
+  unsigned int j; // esi
   __int64 v11; // rax
-  signed __int64 v12; // rcx
-  _QWORD *v13; // rdx
+  char *v12; // rcx
+  char *v13; // rdx
   UFG::qPropertySet *v14; // rcx
   __int64 v15; // rax
   __int64 v16; // rax
@@ -260,340 +231,330 @@ void __fastcall UFG::SceneLayerResource::~SceneLayerResource(UFG::SceneLayerReso
   __int64 v18; // rax
   __int64 v19; // rax
   UFG::qPropertySet *v20; // rcx
-  AMD_HD3D *v21; // rcx
-  UFG::qList<UFG::SceneObjectProperties,UFG::SceneObjectProperties,0,0> *v22; // r8
-  signed __int64 i; // rax
-  _QWORD *v24; // rdx
-  __int64 v25; // rcx
-  _QWORD *v26; // rax
+  AMD_HD3D *mUID; // rcx
+  UFG::qList<UFG::SceneObjectProperties,UFG::SceneObjectProperties,0,0> *p_mObjects; // r8
+  UFG::qNode<UFG::SceneObjectProperties,UFG::SceneObjectProperties> *k; // rax
+  UFG::qNode<UFG::SceneObjectProperties,UFG::SceneObjectProperties> *v24; // rdx
+  UFG::qNode<UFG::SceneObjectProperties,UFG::SceneObjectProperties> *mPrev; // rcx
+  UFG::qNode<UFG::SceneObjectProperties,UFG::SceneObjectProperties> *mNext; // rax
   UFG::qNode<UFG::SceneObjectProperties,UFG::SceneObjectProperties> *v27; // rcx
   UFG::qNode<UFG::SceneObjectProperties,UFG::SceneObjectProperties> *v28; // rax
-  UFG::qNode<UFG::SceneLayerResource,UFG::SceneLayerResource> *v29; // rdx
-  UFG::qNode<UFG::SceneLayerResource,UFG::SceneLayerResource> *v30; // rcx
-  UFG::qNode<UFG::SceneLayerResource,UFG::SceneLayerResource> *v31; // rax
-  UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0> *v32; // rdi
-  UFG::qResourceHandle *j; // rbx
-  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v34; // rdx
-  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v35; // rax
-  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v36; // rcx
-  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v37; // rax
+  UFG::qNode<UFG::SceneLayerResource,UFG::SceneLayerResource> *v29; // rcx
+  UFG::qNode<UFG::SceneLayerResource,UFG::SceneLayerResource> *v30; // rax
+  UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0> *p_mResourceHandles; // rdi
+  UFG::qResourceHandle *m; // rbx
+  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v33; // rdx
+  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v34; // rax
+  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v35; // rcx
+  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v36; // rax
 
-  v1 = this;
-  if ( this->mFlags & 1 )
+  if ( (this->mFlags & 1) != 0 )
   {
     v2 = 0i64;
-    v3 = 0;
-    if ( this->mPropertySetCount )
+    for ( i = 0; i < this->mPropertySetCount; ++i )
     {
-      do
-      {
-        v4 = v1->mPropertySets.mOffset;
-        if ( v4 )
-          v5 = (signed __int64)&v1->mPropertySets + v4;
-        else
-          v5 = 0i64;
-        v6 = (_QWORD *)(v5 + 8i64 * v3);
-        v7 = (UFG::qPropertySet *)((char *)v6 + *v6);
-        if ( !*v6 )
-          v7 = 0i64;
-        UFG::qPropertySet::~qPropertySet(v7);
-        ++v3;
-      }
-      while ( v3 < v1->mPropertySetCount );
+      mOffset = this->mPropertySets.mOffset;
+      if ( mOffset )
+        v5 = (char *)&this->mPropertySets + mOffset;
+      else
+        v5 = 0i64;
+      v6 = &v5[8 * i];
+      v7 = (UFG::qPropertySet *)&v6[*(_QWORD *)v6];
+      if ( !*(_QWORD *)v6 )
+        v7 = 0i64;
+      UFG::qPropertySet::~qPropertySet(v7);
     }
-    v8 = v1->mGeoInfoPropSet.mOffset;
-    if ( v8 && (UFG::qOffset64<UFG::qPropertySet *> *)((char *)&v1->mGeoInfoPropSet + v8) )
+    v8 = this->mGeoInfoPropSet.mOffset;
+    if ( v8 && (UFG::qOffset64<UFG::qPropertySet *> *)((char *)&this->mGeoInfoPropSet + v8) )
     {
-      v9 = v1->mGeoInfoPropSet.mOffset;
+      v9 = this->mGeoInfoPropSet.mOffset;
       if ( v9 )
-        v2 = (UFG::qPropertySet *)((char *)&v1->mGeoInfoPropSet + v9);
+        v2 = (UFG::qPropertySet *)((char *)&this->mGeoInfoPropSet + v9);
       UFG::qPropertySet::~qPropertySet(v2);
     }
   }
   else
   {
-    UFG::SceneLayerInventory::Remove(&UFG::gSceneLayerInventory, (UFG::qResourceData *)&this->mNode);
-    v10 = 0;
-    if ( v1->mPropertySetCount )
+    UFG::SceneLayerInventory::Remove(&UFG::gSceneLayerInventory, this);
+    for ( j = 0; j < this->mPropertySetCount; ++j )
     {
-      do
-      {
-        v11 = v1->mPropertySets.mOffset;
-        if ( v11 )
-          v12 = (signed __int64)&v1->mPropertySets + v11;
-        else
-          v12 = 0i64;
-        v13 = (_QWORD *)(v12 + 8i64 * v10);
-        v14 = (UFG::qPropertySet *)((char *)v13 + *v13);
-        if ( !*v13 )
-          v14 = 0i64;
-        UFG::qPropertySet::ReleaseRef(v14);
-        ++v10;
-      }
-      while ( v10 < v1->mPropertySetCount );
+      v11 = this->mPropertySets.mOffset;
+      if ( v11 )
+        v12 = (char *)&this->mPropertySets + v11;
+      else
+        v12 = 0i64;
+      v13 = &v12[8 * j];
+      v14 = (UFG::qPropertySet *)&v13[*(_QWORD *)v13];
+      if ( !*(_QWORD *)v13 )
+        v14 = 0i64;
+      UFG::qPropertySet::ReleaseRef(v14);
     }
-    v15 = v1->mPropertySets.mOffset;
-    if ( v15 && (UFG::qOffset64<UFG::qOffset64<UFG::qPropertySet *> *> *)((char *)&v1->mPropertySets + v15) )
+    v15 = this->mPropertySets.mOffset;
+    if ( v15 && (UFG::qOffset64<UFG::qOffset64<UFG::qPropertySet *> *> *)((char *)&this->mPropertySets + v15) )
     {
-      v16 = v1->mPropertySets.mOffset;
+      v16 = this->mPropertySets.mOffset;
       if ( v16 )
-        v17 = (char *)&v1->mPropertySets + v16;
+        v17 = (char *)&this->mPropertySets + v16;
       else
         v17 = 0i64;
       UFG::qMemoryPool::Free(&gPropertySetMemoryPool, v17);
-      v1->mPropertySets.mOffset = 0i64;
+      this->mPropertySets.mOffset = 0i64;
     }
-    v18 = v1->mGeoInfoPropSet.mOffset;
-    if ( v18 && (UFG::qOffset64<UFG::qPropertySet *> *)((char *)&v1->mGeoInfoPropSet + v18) )
+    v18 = this->mGeoInfoPropSet.mOffset;
+    if ( v18 && (UFG::qOffset64<UFG::qPropertySet *> *)((char *)&this->mGeoInfoPropSet + v18) )
     {
-      v19 = v1->mGeoInfoPropSet.mOffset;
+      v19 = this->mGeoInfoPropSet.mOffset;
       if ( v19 )
-        v20 = (UFG::qPropertySet *)((char *)&v1->mGeoInfoPropSet + v19);
+        v20 = (UFG::qPropertySet *)((char *)&this->mGeoInfoPropSet + v19);
       else
         v20 = 0i64;
       UFG::qPropertySet::ReleaseRef(v20);
-      v1->mGeoInfoPropSet.mOffset = 0i64;
+      this->mGeoInfoPropSet.mOffset = 0i64;
     }
-    v21 = (AMD_HD3D *)v1->mNode.mUID;
-    if ( (_DWORD)v21 != -275271401 )
-      _(v21);
+    mUID = (AMD_HD3D *)this->mNode.mUID;
+    if ( (_DWORD)mUID != -275271401 )
+      _(mUID);
   }
-  v22 = &v1->mObjects;
-  for ( i = (signed __int64)&v1->mObjects.mNode.mNext[-4];
-        (char *)i != &v1->mDebugName[28];
-        i = (signed __int64)&v1->mObjects.mNode.mNext[-4] )
+  p_mObjects = &this->mObjects;
+  for ( k = this->mObjects.mNode.mNext - 4;
+        k != (UFG::qNode<UFG::SceneObjectProperties,UFG::SceneObjectProperties> *)&this->mDebugName[28];
+        k = this->mObjects.mNode.mNext - 4 )
   {
-    v24 = (_QWORD *)(i + 64);
-    v25 = *(_QWORD *)(i + 64);
-    v26 = *(_QWORD **)(i + 72);
-    *(_QWORD *)(v25 + 8) = v26;
-    *v26 = v25;
-    *v24 = v24;
-    v24[1] = v24;
+    v24 = k + 4;
+    mPrev = k[4].mPrev;
+    mNext = k[4].mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    v24->mPrev = v24;
+    v24->mNext = v24;
   }
-  v27 = v22->mNode.mPrev;
-  v28 = v1->mObjects.mNode.mNext;
+  v27 = p_mObjects->mNode.mPrev;
+  v28 = this->mObjects.mNode.mNext;
   v27->mNext = v28;
   v28->mPrev = v27;
-  v22->mNode.mPrev = &v22->mNode;
-  v1->mObjects.mNode.mNext = &v1->mObjects.mNode;
-  v29 = (UFG::qNode<UFG::SceneLayerResource,UFG::SceneLayerResource> *)&v1->mPrev;
-  v30 = v1->mPrev;
-  v31 = v1->mNext;
-  v30->mNext = v31;
-  v31->mPrev = v30;
-  v29->mPrev = v29;
-  v29->mNext = v29;
-  v32 = &v1->mResourceHandles;
-  for ( j = (UFG::qResourceHandle *)v32->mNode.mNext;
-        j != (UFG::qResourceHandle *)v32;
-        j = (UFG::qResourceHandle *)v32->mNode.mNext )
+  p_mObjects->mNode.mPrev = &p_mObjects->mNode;
+  this->mObjects.mNode.mNext = &this->mObjects.mNode;
+  v29 = this->mPrev;
+  v30 = this->mNext;
+  v29->mNext = v30;
+  v30->mPrev = v29;
+  this->mPrev = &this->UFG::qNode<UFG::SceneLayerResource,UFG::SceneLayerResource>;
+  this->mNext = &this->UFG::qNode<UFG::SceneLayerResource,UFG::SceneLayerResource>;
+  p_mResourceHandles = &this->mResourceHandles;
+  for ( m = (UFG::qResourceHandle *)p_mResourceHandles->mNode.mNext;
+        m != (UFG::qResourceHandle *)p_mResourceHandles;
+        m = (UFG::qResourceHandle *)p_mResourceHandles->mNode.mNext )
   {
-    v34 = j->mPrev;
-    v35 = j->mNext;
-    v34->mNext = v35;
-    v35->mPrev = v34;
-    j->mPrev = (UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *)&j->mPrev;
-    j->mNext = (UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *)&j->mPrev;
-    UFG::qResourceHandle::~qResourceHandle(j);
-    operator delete[](j);
+    v33 = m->mPrev;
+    v34 = m->mNext;
+    v33->mNext = v34;
+    v34->mPrev = v33;
+    m->mPrev = m;
+    m->mNext = m;
+    UFG::qResourceHandle::~qResourceHandle(m);
+    operator delete[](m);
   }
-  v36 = v32->mNode.mPrev;
-  v37 = v32->mNode.mNext;
-  v36->mNext = v37;
-  v37->mPrev = v36;
-  v32->mNode.mPrev = &v32->mNode;
-  v32->mNode.mNext = &v32->mNode;
+  v35 = p_mResourceHandles->mNode.mPrev;
+  v36 = p_mResourceHandles->mNode.mNext;
+  v35->mNext = v36;
+  v36->mPrev = v35;
+  p_mResourceHandles->mNode.mPrev = &p_mResourceHandles->mNode;
+  p_mResourceHandles->mNode.mNext = &p_mResourceHandles->mNode;
 }
 
 // File Line: 282
 // RVA: 0x23EE30
 bool __fastcall UFG::SceneLayerResource::IsGeoInFrustrum(UFG::SceneLayerResource *this)
 {
-  UFG::SceneLayerResource *v1; // r14
-  UFG::BaseCameraComponent *v2; // rdx
-  UFG::Camera *v3; // rdi
-  UFG::qMatrix44 *v4; // rbx
-  UFG::qMatrix44 *v5; // rax
-  int v6; // xmm6_4
-  float v7; // xmm12_4
-  float v8; // ST3C_4
-  float v9; // ST40_4
-  float v10; // xmm11_4
-  float v11; // xmm10_4
-  float v12; // xmm13_4
-  float v13; // xmm14_4
-  float v14; // xmm15_4
-  float v15; // ST24_4
-  float v16; // ST30_4
-  float v17; // ST2C_4
+  UFG::BaseCameraComponent *mCurrentCamera; // rdx
+  UFG::Camera *p_mCamera; // rdi
+  UFG::qMatrix44 *ViewProjection; // rbx
+  UFG::qMatrix44 *WorldView; // rax
+  float v6; // xmm12_4
+  float v7; // xmm11_4
+  float v8; // xmm10_4
+  float v9; // xmm13_4
+  float v10; // xmm14_4
+  float v11; // xmm15_4
+  float v12; // xmm0_4
+  float v13; // xmm1_4
+  float v14; // xmm0_4
+  float v15; // xmm2_4
+  float v16; // xmm1_4
+  float v17; // xmm0_4
   float v18; // xmm0_4
-  float v19; // xmm0_4
+  __m128 v19; // xmm2
   float v20; // xmm0_4
-  __m128 v21; // xmm2
-  float v22; // xmm0_4
-  __m128 v23; // xmm2
-  float v24; // xmm0_4
-  float v25; // xmm5_4
-  __m128 v26; // xmm2
-  float v27; // xmm0_4
-  UFG::qMatrix44 result; // [rsp+50h] [rbp-88h]
-  float v30; // [rsp+90h] [rbp-48h]
-  float v31; // [rsp+94h] [rbp-44h]
-  float v32; // [rsp+98h] [rbp-40h]
-  float v33; // [rsp+9Ch] [rbp-3Ch]
-  float v34; // [rsp+A0h] [rbp-38h]
-  float v35; // [rsp+A4h] [rbp-34h]
-  float v36; // [rsp+A8h] [rbp-30h]
-  float v37; // [rsp+ACh] [rbp-2Ch]
-  float v38; // [rsp+B0h] [rbp-28h]
-  float v39; // [rsp+B4h] [rbp-24h]
-  float v40; // [rsp+B8h] [rbp-20h]
-  float v41; // [rsp+BCh] [rbp-1Ch]
-  float v42; // [rsp+C0h] [rbp-18h]
-  float v43; // [rsp+C4h] [rbp-14h]
-  float centre_distance_to_nearplan; // [rsp+198h] [rbp+C0h]
-  float v45; // [rsp+1A0h] [rbp+C8h]
-  float v46; // [rsp+1A8h] [rbp+D0h]
+  float v21; // xmm4_4
+  __m128 v22; // xmm2
+  float v23; // xmm0_4
+  __m128 v24; // xmm2
+  float v25; // xmm1_4
+  float v27; // [rsp+28h] [rbp-B0h]
+  float v28; // [rsp+2Ch] [rbp-ACh]
+  float v29; // [rsp+30h] [rbp-A8h]
+  float v30; // [rsp+3Ch] [rbp-9Ch]
+  float v31; // [rsp+40h] [rbp-98h]
+  UFG::qMatrix44 result; // [rsp+50h] [rbp-88h] BYREF
+  float v33; // [rsp+90h] [rbp-48h]
+  float v34; // [rsp+94h] [rbp-44h]
+  float v35; // [rsp+98h] [rbp-40h]
+  float v36; // [rsp+9Ch] [rbp-3Ch]
+  float v37; // [rsp+A0h] [rbp-38h]
+  float v38; // [rsp+A4h] [rbp-34h]
+  float v39; // [rsp+A8h] [rbp-30h]
+  float v40; // [rsp+ACh] [rbp-2Ch]
+  float v41; // [rsp+B0h] [rbp-28h]
+  float v42; // [rsp+B4h] [rbp-24h]
+  float v43; // [rsp+B8h] [rbp-20h]
+  float v44; // [rsp+BCh] [rbp-1Ch]
+  float v45; // [rsp+C0h] [rbp-18h]
+  float v46; // [rsp+C4h] [rbp-14h]
+  float centre_distance_to_nearplan; // [rsp+198h] [rbp+C0h] BYREF
+  float v48; // [rsp+1A0h] [rbp+C8h]
+  float v49; // [rsp+1A8h] [rbp+D0h]
   float vars0; // [rsp+1B0h] [rbp+D8h]
 
-  v1 = this;
-  v2 = UFG::Director::Get()->mCurrentCamera;
-  v3 = &v2->mCamera;
-  if ( !v2 )
-    v3 = 0i64;
-  v4 = UFG::Camera::GetViewProjection(v3);
-  v5 = UFG::Camera::GetWorldView(v3);
-  UFG::qMatrix44::operator*(v5, &result, v4);
-  v6 = LODWORD(result.v1.z) ^ _xmm[0];
-  LODWORD(v7) = COERCE_UNSIGNED_INT(result.v0.x + result.v0.w) ^ _xmm[0];
-  LODWORD(v8) = COERCE_UNSIGNED_INT(result.v2.w - result.v2.y) ^ _xmm[0];
-  LODWORD(v9) = COERCE_UNSIGNED_INT(result.v1.w - result.v1.y) ^ _xmm[0];
-  LODWORD(v10) = COERCE_UNSIGNED_INT(result.v1.x + result.v1.w) ^ _xmm[0];
-  LODWORD(v11) = COERCE_UNSIGNED_INT(result.v2.x + result.v2.w) ^ _xmm[0];
-  LODWORD(v45) = COERCE_UNSIGNED_INT(result.v0.y + result.v0.w) ^ _xmm[0];
+  mCurrentCamera = UFG::Director::Get()->mCurrentCamera;
+  p_mCamera = &mCurrentCamera->mCamera;
+  if ( !mCurrentCamera )
+    p_mCamera = 0i64;
+  ViewProjection = UFG::Camera::GetViewProjection(p_mCamera);
+  WorldView = UFG::Camera::GetWorldView(p_mCamera);
+  UFG::qMatrix44::operator*(WorldView, &result, ViewProjection);
+  LODWORD(v6) = COERCE_UNSIGNED_INT(result.v0.x + result.v0.w) ^ _xmm[0];
+  LODWORD(v30) = COERCE_UNSIGNED_INT(result.v2.w - result.v2.y) ^ _xmm[0];
+  LODWORD(v31) = COERCE_UNSIGNED_INT(result.v1.w - result.v1.y) ^ _xmm[0];
+  LODWORD(v7) = COERCE_UNSIGNED_INT(result.v1.x + result.v1.w) ^ _xmm[0];
+  LODWORD(v8) = COERCE_UNSIGNED_INT(result.v2.x + result.v2.w) ^ _xmm[0];
+  LODWORD(v48) = COERCE_UNSIGNED_INT(result.v0.y + result.v0.w) ^ _xmm[0];
   LODWORD(centre_distance_to_nearplan) = COERCE_UNSIGNED_INT(result.v1.y + result.v1.w) ^ _xmm[0];
-  LODWORD(v12) = COERCE_UNSIGNED_INT(result.v0.w - result.v0.x) ^ _xmm[0];
-  LODWORD(v13) = COERCE_UNSIGNED_INT(result.v1.w - result.v1.x) ^ _xmm[0];
-  LODWORD(v46) = COERCE_UNSIGNED_INT(result.v2.y + result.v2.w) ^ _xmm[0];
-  LODWORD(v14) = COERCE_UNSIGNED_INT(result.v2.w - result.v2.x) ^ _xmm[0];
+  LODWORD(v9) = COERCE_UNSIGNED_INT(result.v0.w - result.v0.x) ^ _xmm[0];
+  LODWORD(v10) = COERCE_UNSIGNED_INT(result.v1.w - result.v1.x) ^ _xmm[0];
+  LODWORD(v49) = COERCE_UNSIGNED_INT(result.v2.y + result.v2.w) ^ _xmm[0];
+  LODWORD(v11) = COERCE_UNSIGNED_INT(result.v2.w - result.v2.x) ^ _xmm[0];
   LODWORD(vars0) = COERCE_UNSIGNED_INT(result.v0.w + result.v1.y) ^ _xmm[0];
-  LODWORD(v15) = COERCE_UNSIGNED_INT(result.v0.w - result.v0.y) ^ _xmm[0];
-  LODWORD(v16) = COERCE_UNSIGNED_INT(result.v1.w - result.v1.z) ^ _xmm[0];
-  LODWORD(v17) = COERCE_UNSIGNED_INT(result.v2.w - result.v2.z) ^ _xmm[0];
-  v18 = fsqrt(
-          (float)((float)(*(float *)&v6 * *(float *)&v6)
+  LODWORD(v27) = COERCE_UNSIGNED_INT(result.v0.w - result.v0.z) ^ _xmm[0];
+  LODWORD(v29) = COERCE_UNSIGNED_INT(result.v1.w - result.v1.z) ^ _xmm[0];
+  LODWORD(v28) = COERCE_UNSIGNED_INT(result.v2.w - result.v2.z) ^ _xmm[0];
+  v12 = fsqrt(
+          (float)((float)(COERCE_FLOAT(LODWORD(result.v1.z) ^ _xmm[0]) * COERCE_FLOAT(LODWORD(result.v1.z) ^ _xmm[0]))
                 + (float)(COERCE_FLOAT(LODWORD(result.v0.z) ^ _xmm[0]) * COERCE_FLOAT(LODWORD(result.v0.z) ^ _xmm[0])))
         + (float)(COERCE_FLOAT(LODWORD(result.v2.z) ^ _xmm[0]) * COERCE_FLOAT(LODWORD(result.v2.z) ^ _xmm[0])));
-  result.v2.y = (float)(1.0 / v18) * COERCE_FLOAT(LODWORD(result.v1.x) ^ _xmm[0]);
-  result.v1.z = (float)(1.0 / v18) * COERCE_FLOAT(LODWORD(result.v0.z) ^ _xmm[0]);
-  result.v2.x = (float)(1.0 / v18) * COERCE_FLOAT(LODWORD(result.v2.z) ^ _xmm[0]);
-  result.v1.w = (float)(1.0 / v18) * *(float *)&v6;
-  v19 = fsqrt((float)((float)(v10 * v10) + (float)(v7 * v7)) + (float)(v11 * v11));
-  result.v2.z = (float)(1.0 / v19) * v7;
-  result.v2.w = (float)(1.0 / v19) * v10;
-  result.v3.y = (float)(1.0 / v19) * COERCE_FLOAT(COERCE_UNSIGNED_INT(result.v0.z + result.v1.y) ^ _xmm[0]);
-  result.v3.x = (float)(1.0 / v19) * v11;
-  v20 = fsqrt((float)((float)(v13 * v13) + (float)(v12 * v12)) + (float)(v14 * v14));
-  v31 = (float)(1.0 / v20) * COERCE_FLOAT(COERCE_UNSIGNED_INT(result.v1.y - result.v0.z) ^ _xmm[0]);
-  result.v3.z = (float)(1.0 / v20) * v12;
-  v30 = (float)(1.0 / v20) * v14;
-  result.v3.w = (float)(1.0 / v20) * v13;
-  v21 = (__m128)LODWORD(centre_distance_to_nearplan);
-  v21.m128_f32[0] = (float)((float)(v21.m128_f32[0] * v21.m128_f32[0]) + (float)(v45 * v45)) + (float)(v46 * v46);
-  LODWORD(v22) = (unsigned __int128)_mm_sqrt_ps(v21);
-  v32 = (float)(1.0 / v22) * v45;
-  v34 = (float)(1.0 / v22) * v46;
-  v33 = (float)(1.0 / v22) * centre_distance_to_nearplan;
-  v23 = (__m128)LODWORD(v9);
-  v35 = (float)(1.0 / v22) * vars0;
-  v23.m128_f32[0] = (float)((float)(v23.m128_f32[0] * v23.m128_f32[0]) + (float)(v15 * v15)) + (float)(v8 * v8);
-  v24 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v23));
-  v39 = v24 * COERCE_FLOAT(COERCE_UNSIGNED_INT(result.v1.y - result.v0.w) ^ _xmm[0]);
-  v36 = v24 * v15;
-  v37 = v24 * v9;
-  v38 = v24 * v8;
-  LODWORD(v25) = COERCE_UNSIGNED_INT(result.v0.w - result.v0.z) ^ _xmm[0];
-  v26 = (__m128)LODWORD(v16);
-  v26.m128_f32[0] = (float)((float)(v26.m128_f32[0] * v26.m128_f32[0]) + (float)(v25 * v25)) + (float)(v17 * v17);
-  v27 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v26));
-  v43 = v27 * COERCE_FLOAT(COERCE_UNSIGNED_INT(result.v1.y - result.v1.x) ^ _xmm[0]);
-  v42 = v27 * v17;
-  v40 = v27 * v25;
-  v41 = v27 * v16;
+  v13 = (float)(1.0 / v12) * COERCE_FLOAT(LODWORD(result.v1.z) ^ _xmm[0]);
+  result.v2.y = (float)(1.0 / v12) * COERCE_FLOAT(LODWORD(result.v1.x) ^ _xmm[0]);
+  result.v1.z = (float)(1.0 / v12) * COERCE_FLOAT(LODWORD(result.v0.z) ^ _xmm[0]);
+  result.v2.x = (float)(1.0 / v12) * COERCE_FLOAT(LODWORD(result.v2.z) ^ _xmm[0]);
+  result.v1.w = v13;
+  v14 = fsqrt((float)((float)(v7 * v7) + (float)(v6 * v6)) + (float)(v8 * v8));
+  v15 = (float)(1.0 / v14) * v6;
+  v16 = (float)(1.0 / v14) * v7;
+  v17 = 1.0 / v14;
+  result.v2.z = v15;
+  result.v2.w = v16;
+  result.v3.y = v17 * COERCE_FLOAT(COERCE_UNSIGNED_INT(result.v0.z + result.v1.y) ^ _xmm[0]);
+  result.v3.x = v17 * v8;
+  v18 = fsqrt((float)((float)(v10 * v10) + (float)(v9 * v9)) + (float)(v11 * v11));
+  v34 = (float)(1.0 / v18) * COERCE_FLOAT(COERCE_UNSIGNED_INT(result.v1.y - result.v0.z) ^ _xmm[0]);
+  result.v3.z = (float)(1.0 / v18) * v9;
+  v33 = (float)(1.0 / v18) * v11;
+  result.v3.w = (float)(1.0 / v18) * v10;
+  v19 = (__m128)LODWORD(centre_distance_to_nearplan);
+  v19.m128_f32[0] = (float)((float)(v19.m128_f32[0] * v19.m128_f32[0]) + (float)(v48 * v48)) + (float)(v49 * v49);
+  v20 = _mm_sqrt_ps(v19).m128_f32[0];
+  LODWORD(v21) = COERCE_UNSIGNED_INT(result.v0.w - result.v0.y) ^ _xmm[0];
+  v35 = (float)(1.0 / v20) * v48;
+  v37 = (float)(1.0 / v20) * v49;
+  v36 = (float)(1.0 / v20) * centre_distance_to_nearplan;
+  v22 = (__m128)LODWORD(v31);
+  v38 = (float)(1.0 / v20) * vars0;
+  v22.m128_f32[0] = (float)((float)(v22.m128_f32[0] * v22.m128_f32[0]) + (float)(v21 * v21)) + (float)(v30 * v30);
+  v23 = 1.0 / _mm_sqrt_ps(v22).m128_f32[0];
+  v42 = v23 * COERCE_FLOAT(COERCE_UNSIGNED_INT(result.v1.y - result.v0.w) ^ _xmm[0]);
+  v39 = v23 * v21;
+  v40 = v23 * v31;
+  v41 = v23 * v30;
+  v24 = (__m128)LODWORD(v29);
+  v24.m128_f32[0] = (float)((float)(v24.m128_f32[0] * v24.m128_f32[0]) + (float)(v27 * v27)) + (float)(v28 * v28);
+  v25 = 1.0 / _mm_sqrt_ps(v24).m128_f32[0];
+  v46 = v25 * COERCE_FLOAT(COERCE_UNSIGNED_INT(result.v1.y - result.v1.x) ^ _xmm[0]);
+  v45 = v25 * v28;
+  v43 = v25 * v27;
+  v44 = v25 * v29;
   centre_distance_to_nearplan = 0.0;
   return (unsigned int)IntersectAABBFrustum(
-                         (UFG::qVector4 *)((char *)&result.v1 + 8),
-                         &v1->mAABBMin,
-                         &v1->mAABBMax,
+                         (UFG::qVector4 *)&result.v1.z,
+                         &this->mAABBMin,
+                         &this->mAABBMax,
                          &centre_distance_to_nearplan) <= 1;
 }
 
 // File Line: 304
 // RVA: 0x23EDB0
-bool __fastcall UFG::SceneLayerResource::IsGeoClose(UFG::SceneLayerResource *this, UFG::qVector3 *testPoint, float maxDistanceSq)
+bool __fastcall UFG::SceneLayerResource::IsGeoClose(
+        UFG::SceneLayerResource *this,
+        UFG::qVector3 *testPoint,
+        float maxDistanceSq)
 {
-  float v3; // xmm1_4
-  float v4; // xmm0_4
-  float v5; // xmm1_4
+  float y; // xmm1_4
+  float z; // xmm0_4
+  float x; // xmm1_4
   float v6; // xmm0_4
   float v7; // xmm1_4
-  float v9; // [rsp+20h] [rbp-38h]
-  float v10; // [rsp+24h] [rbp-34h]
-  float v11; // [rsp+28h] [rbp-30h]
-  float v12; // [rsp+2Ch] [rbp-2Ch]
-  float v13; // [rsp+30h] [rbp-28h]
-  float v14; // [rsp+34h] [rbp-24h]
+  UFG::qBox v9; // [rsp+20h] [rbp-38h] BYREF
 
-  v3 = this->mAABBMin.y;
-  v9 = this->mAABBMin.x;
-  v4 = this->mAABBMin.z;
-  v10 = v3;
-  v5 = this->mAABBMax.x;
-  v11 = v4;
+  y = this->mAABBMin.y;
+  v9.mMin.x = this->mAABBMin.x;
+  z = this->mAABBMin.z;
+  v9.mMin.y = y;
+  x = this->mAABBMax.x;
+  v9.mMin.z = z;
   v6 = this->mAABBMax.y;
-  v12 = v5;
+  v9.mMax.x = x;
   v7 = this->mAABBMax.z;
-  v13 = v6;
-  v14 = v7;
-  return maxDistanceSq > UFG::qBox::DistanceSqrPoint((UFG::qBox *)&v9, testPoint);
+  v9.mMax.y = v6;
+  v9.mMax.z = v7;
+  return maxDistanceSq > UFG::qBox::DistanceSqrPoint(&v9, testPoint);
 }
 
 // File Line: 346
 // RVA: 0x23BBE0
-UFG::qPropertySet *__fastcall UFG::FindObjectPropertySetRecurse(UFG::qPropertySet *propertySet, UFG::qSymbol *objectName)
+UFG::qPropertySet *__fastcall UFG::FindObjectPropertySetRecurse(
+        UFG::qPropertySet *propertySet,
+        UFG::qSymbol *objectName)
 {
-  UFG::qSymbol *v2; // rbp
   UFG::qPropertySet *result; // rax
   UFG::qPropertyList *v4; // rax
   UFG::qPropertyList *v5; // rsi
-  unsigned int v6; // edi
+  unsigned int mNumElements; // edi
   unsigned int v7; // ebx
-  char *v8; // rax
+  char *ValuePtr; // rax
   UFG::qPropertySet *v9; // rcx
 
-  v2 = objectName;
   if ( propertySet->mName.mUID == objectName->mUID )
     return propertySet;
-  v4 = UFG::qPropertySet::Get<UFG::qPropertyList>(propertySet, (UFG::qSymbol *)&sSimObjChildren_0.mUID, DEPTH_RECURSE);
+  v4 = UFG::qPropertySet::Get<UFG::qPropertyList>(
+         propertySet,
+         (UFG::qArray<unsigned long,0> *)&sSimObjChildren_0,
+         DEPTH_RECURSE);
   v5 = v4;
   if ( !v4 )
     return 0i64;
-  v6 = v4->mNumElements;
+  mNumElements = v4->mNumElements;
   v7 = 0;
-  if ( !v6 )
+  if ( !mNumElements )
     return 0i64;
   while ( 1 )
   {
-    v8 = UFG::qPropertyList::GetValuePtr(v5, 0x1Au, v7);
-    if ( v8 && *(_QWORD *)v8 )
-      v9 = (UFG::qPropertySet *)&v8[*(_QWORD *)v8];
+    ValuePtr = UFG::qPropertyList::GetValuePtr(v5, 0x1Au, v7);
+    if ( ValuePtr && *(_QWORD *)ValuePtr )
+      v9 = (UFG::qPropertySet *)&ValuePtr[*(_QWORD *)ValuePtr];
     else
       v9 = 0i64;
-    result = UFG::FindObjectPropertySetRecurse(v9, v2);
+    result = UFG::FindObjectPropertySetRecurse(v9, objectName);
     if ( result )
       break;
-    if ( ++v7 >= v6 )
+    if ( ++v7 >= mNumElements )
       return 0i64;
   }
   return result;
@@ -601,23 +562,21 @@ UFG::qPropertySet *__fastcall UFG::FindObjectPropertySetRecurse(UFG::qPropertySe
 
 // File Line: 370
 // RVA: 0x23BB60
-UFG::qPropertySet *__fastcall UFG::SceneLayerResource::FindObjectPropertySet(UFG::SceneLayerResource *this, UFG::qSymbol *objectName)
+UFG::qPropertySet *__fastcall UFG::SceneLayerResource::FindObjectPropertySet(
+        UFG::SceneLayerResource *this,
+        UFG::qSymbol *objectName)
 {
-  __int64 v2; // rax
-  UFG::qSymbol *v3; // rbp
-  UFG::SceneLayerResource *v4; // rdi
+  __int64 mOffset; // rax
   char *v5; // rsi
   __int64 v6; // rbx
   __int64 v7; // rax
   UFG::qPropertySet *v8; // rcx
   UFG::qPropertySet *result; // rax
 
-  v2 = this->mPropertySets.mOffset;
-  v3 = objectName;
-  v4 = this;
-  if ( !v2 )
+  mOffset = this->mPropertySets.mOffset;
+  if ( !mOffset )
     return 0i64;
-  v5 = (char *)&this->mPropertySets + v2;
+  v5 = (char *)&this->mPropertySets + mOffset;
   if ( !v5 )
     return 0i64;
   v6 = 0i64;
@@ -626,12 +585,12 @@ UFG::qPropertySet *__fastcall UFG::SceneLayerResource::FindObjectPropertySet(UFG
   while ( 1 )
   {
     v7 = *(_QWORD *)&v5[8 * v6];
-    v8 = (UFG::qPropertySet *)(v7 ? &v5[8 * v6 + v7] : 0i64);
-    result = UFG::FindObjectPropertySetRecurse(v8, v3);
+    v8 = v7 ? (UFG::qPropertySet *)&v5[8 * v6 + v7] : 0i64;
+    result = UFG::FindObjectPropertySetRecurse(v8, objectName);
     if ( result )
       break;
     v6 = (unsigned int)(v6 + 1);
-    if ( (unsigned int)v6 >= v4->mPropertySetCount )
+    if ( (unsigned int)v6 >= this->mPropertySetCount )
       return 0i64;
   }
   return result;
@@ -641,56 +600,52 @@ UFG::qPropertySet *__fastcall UFG::SceneLayerResource::FindObjectPropertySet(UFG
 // RVA: 0x239CD0
 void __fastcall UFG::SceneLayerResource::AddPropertySet(UFG::SceneLayerResource *this, UFG::qPropertySet *property_set)
 {
-  __int64 v2; // r10
-  UFG::qOffset64<UFG::qOffset64<UFG::qPropertySet *> *> *v3; // r14
-  UFG::qPropertySet *v4; // rbx
-  UFG::SceneLayerResource *v5; // r13
+  __int64 mOffset; // r10
+  UFG::qOffset64<UFG::qOffset64<UFG::qPropertySet *> *> *p_mPropertySets; // r14
   char *v6; // r9
-  unsigned int v7; // edx
+  unsigned int mPropertySetCount; // edx
   __int64 v8; // r8
   UFG::qPropertySet *v9; // rax
   __int64 v10; // rsi
-  __int64 *v11; // rbp
+  char *v11; // rbp
   UFG::allocator::free_link *v12; // rax
   UFG::allocator::free_link *v13; // rdi
   __int64 *v14; // rcx
   __int64 v15; // r9
   signed __int64 v16; // r8
   __int64 v17; // rdx
-  signed __int64 v18; // rax
+  __int64 v18; // rax
   char *v19; // rdx
-  signed __int64 v20; // rax
+  char *v20; // rax
 
-  v2 = this->mPropertySets.mOffset;
-  v3 = &this->mPropertySets;
-  v4 = property_set;
-  v5 = this;
-  if ( !v2 )
+  mOffset = this->mPropertySets.mOffset;
+  p_mPropertySets = &this->mPropertySets;
+  if ( !mOffset )
     goto LABEL_10;
-  v6 = (char *)v3 + v2;
-  if ( !(UFG::qOffset64<UFG::qOffset64<UFG::qPropertySet *> *> *)((char *)v3 + v2) )
+  v6 = (char *)p_mPropertySets + mOffset;
+  if ( !(UFG::qOffset64<UFG::qOffset64<UFG::qPropertySet *> *> *)((char *)p_mPropertySets + mOffset) )
     goto LABEL_10;
-  v7 = this->mPropertySetCount;
+  mPropertySetCount = this->mPropertySetCount;
   v8 = 0i64;
-  if ( !v7 )
+  if ( !mPropertySetCount )
     goto LABEL_10;
   while ( 1 )
   {
     v9 = *(UFG::qPropertySet **)&v6[8 * v8];
     if ( v9 )
       v9 = (UFG::qPropertySet *)&v6[8 * v8 + (_QWORD)v9];
-    if ( v9 == v4 )
+    if ( v9 == property_set )
       break;
     v8 = (unsigned int)(v8 + 1);
-    if ( (unsigned int)v8 >= v7 )
+    if ( (unsigned int)v8 >= mPropertySetCount )
       goto LABEL_10;
   }
   if ( (_DWORD)v8 == -1 )
   {
 LABEL_10:
     v10 = this->mPropertySetCount;
-    if ( v2 )
-      v11 = (__int64 *)((char *)&v3->mOffset + v2);
+    if ( mOffset )
+      v11 = (char *)p_mPropertySets + mOffset;
     else
       v11 = 0i64;
     v12 = UFG::qMemoryPool::Allocate(
@@ -702,9 +657,9 @@ LABEL_10:
     v13 = v12;
     if ( (_DWORD)v10 )
     {
-      v14 = v11;
+      v14 = (__int64 *)v11;
       v15 = v10;
-      v16 = (char *)v12 - (char *)v11;
+      v16 = (char *)v12 - v11;
       do
       {
         v17 = *v14;
@@ -712,40 +667,39 @@ LABEL_10:
           v18 = v17 - v16;
         else
           v18 = 0i64;
-        *(__int64 *)((char *)v14 + v16) = v18;
-        ++v14;
+        *(__int64 *)((char *)v14++ + v16) = v18;
         --v15;
       }
       while ( v15 );
     }
     v19 = (char *)&v13[(unsigned int)v10];
-    if ( v4 )
-      v20 = (char *)v4 - v19;
+    if ( property_set )
+      v20 = (char *)((char *)property_set - v19);
     else
       v20 = 0i64;
     *(_QWORD *)v19 = v20;
     if ( v11 )
       UFG::qMemoryPool::Free(&gPropertySetMemoryPool, v11);
     if ( v13 )
-      v13 = (UFG::allocator::free_link *)((char *)v13 - (signed __int64)v3);
-    v3->mOffset = (__int64)v13;
-    v5->mPropertySetCount = v10 + 1;
-    v4->mFlags &= 0xFFFFFFFu;
-    v4->mFlags |= 0x20000000u;
-    UFG::qPropertySet::AddRef(v4);
+      v13 = (UFG::allocator::free_link *)((char *)v13 - (__int64)p_mPropertySets);
+    p_mPropertySets->mOffset = (__int64)v13;
+    this->mPropertySetCount = v10 + 1;
+    property_set->mFlags &= 0xFFFFFFFu;
+    property_set->mFlags |= 0x20000000u;
+    UFG::qPropertySet::AddRef(property_set);
   }
 }
 
 // File Line: 426
 // RVA: 0x2450F0
-char __fastcall UFG::SceneLayerResource::RemovePropertySet(UFG::SceneLayerResource *this, UFG::qPropertySet *property_set)
+char __fastcall UFG::SceneLayerResource::RemovePropertySet(
+        UFG::SceneLayerResource *this,
+        UFG::qPropertySet *property_set)
 {
-  __int64 v2; // rax
-  UFG::qOffset64<UFG::qOffset64<UFG::qPropertySet *> *> *v3; // r15
-  UFG::qPropertySet *v4; // r14
-  UFG::SceneLayerResource *v5; // r13
+  __int64 mOffset; // rax
+  UFG::qOffset64<UFG::qOffset64<UFG::qPropertySet *> *> *p_mPropertySets; // r15
   char *v6; // rdi
-  signed __int64 v7; // rsi
+  __int64 mPropertySetCount; // rsi
   __int64 v8; // rbx
   UFG::qPropertySet *v9; // rax
   UFG::allocator::free_link *v11; // rax
@@ -754,25 +708,23 @@ char __fastcall UFG::SceneLayerResource::RemovePropertySet(UFG::SceneLayerResour
   __int64 *v14; // rcx
   signed __int64 v15; // r8
   __int64 v16; // rdx
-  signed __int64 v17; // rax
+  __int64 v17; // rax
   int v18; // eax
   char *v19; // rcx
-  signed __int64 v20; // r8
-  signed __int64 v21; // rdx
-  signed __int64 v22; // rax
+  __int64 v20; // r8
+  __int64 v21; // rdx
+  __int64 v22; // rax
 
-  v2 = this->mPropertySets.mOffset;
-  v3 = &this->mPropertySets;
-  v4 = property_set;
-  v5 = this;
-  if ( !v2 )
+  mOffset = this->mPropertySets.mOffset;
+  p_mPropertySets = &this->mPropertySets;
+  if ( !mOffset )
     return 0;
-  v6 = (char *)v3 + v2;
-  if ( !(UFG::qOffset64<UFG::qOffset64<UFG::qPropertySet *> *> *)((char *)v3 + v2) )
+  v6 = (char *)p_mPropertySets + mOffset;
+  if ( !(UFG::qOffset64<UFG::qOffset64<UFG::qPropertySet *> *> *)((char *)p_mPropertySets + mOffset) )
     return 0;
-  v7 = (signed int)this->mPropertySetCount;
+  mPropertySetCount = (int)this->mPropertySetCount;
   v8 = 0i64;
-  if ( !(_DWORD)v7 )
+  if ( !(_DWORD)mPropertySetCount )
     return 0;
   while ( 1 )
   {
@@ -782,15 +734,20 @@ char __fastcall UFG::SceneLayerResource::RemovePropertySet(UFG::SceneLayerResour
     if ( v9 == property_set )
       break;
     v8 = (unsigned int)(v8 + 1);
-    if ( (unsigned int)v8 >= (unsigned int)v7 )
+    if ( (unsigned int)v8 >= (unsigned int)mPropertySetCount )
       return 0;
   }
   if ( (_DWORD)v8 == -1 )
     return 0;
-  v11 = UFG::qMemoryPool::Allocate(&gPropertySetMemoryPool, (unsigned int)(8 * (v7 - 1)), "PropertySetList", 0i64, 1u);
-  v12 = (signed int)v8;
+  v11 = UFG::qMemoryPool::Allocate(
+          &gPropertySetMemoryPool,
+          (unsigned int)(8 * (mPropertySetCount - 1)),
+          "PropertySetList",
+          0i64,
+          1u);
+  v12 = (int)v8;
   v13 = v11;
-  if ( (signed int)v8 > 0 )
+  if ( (int)v8 > 0 )
   {
     v14 = (__int64 *)v6;
     v15 = (char *)v11 - v6;
@@ -801,18 +758,17 @@ char __fastcall UFG::SceneLayerResource::RemovePropertySet(UFG::SceneLayerResour
         v17 = v16 - v15;
       else
         v17 = 0i64;
-      *(__int64 *)((char *)v14 + v15) = v17;
-      ++v14;
+      *(__int64 *)((char *)v14++ + v15) = v17;
       --v12;
     }
     while ( v12 );
   }
   v18 = v8 + 1;
-  if ( (signed int)v8 + 1 < v7 )
+  if ( (int)v8 + 1 < mPropertySetCount )
   {
     v19 = &v6[8 * v18];
     v20 = (char *)v13 - v6 - 8;
-    v21 = v7 - v18;
+    v21 = mPropertySetCount - v18;
     do
     {
       if ( *(_QWORD *)v19 && &v19[*(_QWORD *)v19] )
@@ -828,30 +784,30 @@ char __fastcall UFG::SceneLayerResource::RemovePropertySet(UFG::SceneLayerResour
   if ( v6 )
     UFG::qMemoryPool::Free(&gPropertySetMemoryPool, v6);
   if ( v13 )
-    v13 = (UFG::allocator::free_link *)((char *)v13 - (signed __int64)v3);
-  v3->mOffset = (__int64)v13;
-  v5->mPropertySetCount = v7 - 1;
-  v4->mFlags &= 0xFFFFFFFu;
-  UFG::qPropertySet::ReleaseRef(v4);
+    v13 = (UFG::allocator::free_link *)((char *)v13 - (__int64)p_mPropertySets);
+  p_mPropertySets->mOffset = (__int64)v13;
+  this->mPropertySetCount = mPropertySetCount - 1;
+  property_set->mFlags &= 0xFFFFFFFu;
+  UFG::qPropertySet::ReleaseRef(property_set);
   return 1;
 }
 
 // File Line: 477
 // RVA: 0x2454D0
-void __fastcall UFG::SceneLayerResource::SetGeoInfoPropertySet(UFG::SceneLayerResource *this, UFG::qPropertySet *property_set)
+void __fastcall UFG::SceneLayerResource::SetGeoInfoPropertySet(
+        UFG::SceneLayerResource *this,
+        UFG::qPropertySet *property_set)
 {
-  __int64 v2; // rax
-  UFG::qOffset64<UFG::qPropertySet *> *v3; // rsi
-  signed __int64 v4; // rdi
+  __int64 mOffset; // rax
+  UFG::qOffset64<UFG::qPropertySet *> *p_mGeoInfoPropSet; // rsi
+  char *v4; // rdi
   UFG::qPropertySet *v5; // rcx
-  UFG::qPropertySet *v6; // rbx
 
-  v2 = this->mGeoInfoPropSet.mOffset;
-  v3 = &this->mGeoInfoPropSet;
+  mOffset = this->mGeoInfoPropSet.mOffset;
+  p_mGeoInfoPropSet = &this->mGeoInfoPropSet;
   v4 = 0i64;
-  v5 = (UFG::qPropertySet *)((char *)&this->mGeoInfoPropSet + v2);
-  v6 = property_set;
-  if ( !v2 )
+  v5 = (UFG::qPropertySet *)((char *)&this->mGeoInfoPropSet + mOffset);
+  if ( !mOffset )
     v5 = 0i64;
   if ( property_set != v5 )
   {
@@ -860,46 +816,48 @@ void __fastcall UFG::SceneLayerResource::SetGeoInfoPropertySet(UFG::SceneLayerRe
       v5->mFlags &= 0xFFFFFFFu;
       UFG::qPropertySet::ReleaseRef(v5);
     }
-    if ( v6 )
-      v4 = (char *)v6 - (char *)v3;
-    v3->mOffset = v4;
-    UFG::qPropertySet::AddRef(v6);
-    v6->mFlags = v6->mFlags & 0xFFFFFFF | 0x30000000;
+    if ( property_set )
+      v4 = (char *)((char *)property_set - (char *)p_mGeoInfoPropSet);
+    p_mGeoInfoPropSet->mOffset = (__int64)v4;
+    UFG::qPropertySet::AddRef(property_set);
+    property_set->mFlags = property_set->mFlags & 0xFFFFFFF | 0x30000000;
   }
 }
 
 // File Line: 853
 // RVA: 0x23D970
-UFG::qPropertySet *__fastcall UFG::SceneLayerResource::GetNamedPropertySet(UFG::SceneLayerResource *this, UFG::qSymbol *name)
+UFG::qPropertySet *__fastcall UFG::SceneLayerResource::GetNamedPropertySet(
+        UFG::SceneLayerResource *this,
+        UFG::qSymbol *name)
 {
-  __int64 v2; // rax
+  __int64 mOffset; // rax
   __int64 *v3; // rax
-  unsigned int v4; // er9
-  unsigned int v5; // er8
-  unsigned int v6; // edx
+  unsigned int mPropertySetCount; // r9d
+  unsigned int v5; // r8d
+  unsigned int mUID; // edx
   __int64 v7; // rcx
 
-  v2 = this->mPropertySets.mOffset;
-  if ( !v2 )
+  mOffset = this->mPropertySets.mOffset;
+  if ( !mOffset )
     return 0i64;
-  v3 = (__int64 *)((char *)&this->mPropertySets.mOffset + v2);
+  v3 = (__int64 *)((char *)&this->mPropertySets.mOffset + mOffset);
   if ( !v3 )
     return 0i64;
-  v4 = this->mPropertySetCount;
+  mPropertySetCount = this->mPropertySetCount;
   v5 = 0;
-  if ( !v4 )
+  if ( !mPropertySetCount )
     return 0i64;
-  v6 = name->mUID;
+  mUID = name->mUID;
   while ( 1 )
   {
     v7 = *v3;
     if ( *v3 )
       v7 += (__int64)v3;
-    if ( *(_DWORD *)(v7 + 64) == v6 )
+    if ( *(_DWORD *)(v7 + 64) == mUID )
       break;
     ++v5;
     ++v3;
-    if ( v5 >= v4 )
+    if ( v5 >= mPropertySetCount )
       return 0i64;
   }
   return (UFG::qPropertySet *)v7;
@@ -913,7 +871,7 @@ __int64 UFG::_dynamic_initializer_for__symComponentRegion__()
 
   v0 = UFG::qStringHash32("default-component-Region", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::symComponentRegion, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__symComponentRegion__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__symComponentRegion__);
 }
 
 // File Line: 871
@@ -924,7 +882,7 @@ __int64 UFG::_dynamic_initializer_for__symXformLocal__()
 
   v0 = UFG::qStringHash32("XformLocal", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::symXformLocal, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__symXformLocal__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__symXformLocal__);
 }
 
 // File Line: 872
@@ -935,7 +893,7 @@ __int64 UFG::_dynamic_initializer_for__symXformLocalQuat__()
 
   v0 = UFG::qStringHash32("XformLocalQuat", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::symXformLocalQuat, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__symXformLocalQuat__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__symXformLocalQuat__);
 }
 
 // File Line: 873
@@ -946,7 +904,7 @@ __int64 UFG::_dynamic_initializer_for__symType__()
 
   v0 = UFG::qStringHash32("Type", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::symType, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__symType__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__symType__);
 }
 
 // File Line: 874
@@ -957,7 +915,7 @@ __int64 UFG::_dynamic_initializer_for__symMin__()
 
   v0 = UFG::qStringHash32("Min", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::symMin, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__symMin__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__symMin__);
 }
 
 // File Line: 875
@@ -968,7 +926,7 @@ __int64 UFG::_dynamic_initializer_for__symMax__()
 
   v0 = UFG::qStringHash32("Max", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::symMax, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__symMax__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__symMax__);
 }
 
 // File Line: 876
@@ -979,7 +937,7 @@ __int64 UFG::_dynamic_initializer_for__symRadius__()
 
   v0 = UFG::qStringHash32("Radius", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::symRadius, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__symRadius__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__symRadius__);
 }
 
 // File Line: 877
@@ -990,7 +948,7 @@ __int64 UFG::_dynamic_initializer_for__symExtentAbove__()
 
   v0 = UFG::qStringHash32("ExtentAbove", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::symExtentAbove, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__symExtentAbove__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__symExtentAbove__);
 }
 
 // File Line: 878
@@ -1001,7 +959,7 @@ __int64 UFG::_dynamic_initializer_for__symExtentBelow__()
 
   v0 = UFG::qStringHash32("ExtentBelow", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::symExtentBelow, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__symExtentBelow__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__symExtentBelow__);
 }
 
 // File Line: 879
@@ -1012,32 +970,30 @@ __int64 UFG::_dynamic_initializer_for__symVertexes__()
 
   v0 = UFG::qStringHash32("Vertexes", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::symVertexes, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__symVertexes__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__symVertexes__);
 }
 
 // File Line: 882
 // RVA: 0x2393A0
 void __fastcall UFG::SceneLayerResource::AccumulateBounds(UFG::SceneLayerResource *this, UFG::qBox *box)
 {
-  unsigned int v2; // eax
-  UFG::qBox *v3; // rdi
-  UFG::SceneLayerResource *v4; // r13
+  unsigned int mPropertySetCount; // eax
   __int64 v5; // r12
-  __int64 v6; // r15
-  __int64 v7; // rax
-  signed __int64 v8; // rcx
-  signed __int64 v9; // rax
+  __int64 i; // r15
+  __int64 mOffset; // rax
+  char *v8; // rcx
+  char *v9; // rax
   __int64 v10; // rcx
   UFG::qPropertySet *v11; // rbx
   UFG::qPropertySet *v12; // rsi
   UFG::qMatrix44 *v13; // rax
-  int v14; // xmm1_4
-  float v15; // xmm6_4
+  int z_low; // xmm1_4
+  float x; // xmm6_4
   float v16; // xmm7_4
-  float v17; // xmm8_4
-  float v18; // xmm9_4
-  int v19; // xmm0_4
-  int v20; // xmm1_4
+  float y; // xmm8_4
+  float z; // xmm9_4
+  int w_low; // xmm0_4
+  int x_low; // xmm1_4
   int v21; // xmm0_4
   int v22; // xmm1_4
   int v23; // xmm0_4
@@ -1054,7 +1010,7 @@ void __fastcall UFG::SceneLayerResource::AccumulateBounds(UFG::SceneLayerResourc
   float v34; // xmm7_4
   UFG::qPropertyList *v35; // rax
   unsigned int v36; // ebx
-  unsigned int v37; // esi
+  unsigned int mNumElements; // esi
   UFG::qPropertyList *v38; // r14
   UFG::qVector3 *v39; // rax
   float v40; // xmm1_4
@@ -1077,7 +1033,7 @@ void __fastcall UFG::SceneLayerResource::AccumulateBounds(UFG::SceneLayerResourc
   float v57; // xmm1_4
   UFG::qVector3 *v58; // rax
   unsigned __int64 v59; // rcx
-  signed __int64 v60; // rdx
+  __int64 v60; // rdx
   float v61; // xmm4_4
   float v62; // xmm3_4
   float v63; // xmm1_4
@@ -1090,76 +1046,75 @@ void __fastcall UFG::SceneLayerResource::AccumulateBounds(UFG::SceneLayerResourc
   float *v70; // rax
   float v71; // xmm6_4
   UFG::qVector3 *v72; // rdx
-  UFG::qVector3 pos; // [rsp+8h] [rbp-79h]
-  float v74; // [rsp+14h] [rbp-6Dh]
-  float v75; // [rsp+18h] [rbp-69h]
-  float v76; // [rsp+1Ch] [rbp-65h]
-  UFG::qVector3 *v77; // [rsp+20h] [rbp-61h]
-  UFG::qVector3 *v78; // [rsp+28h] [rbp-59h]
-  float v79; // [rsp+38h] [rbp-49h]
-  float v80; // [rsp+3Ch] [rbp-45h]
-  int v81; // [rsp+40h] [rbp-41h]
-  int v82; // [rsp+44h] [rbp-3Dh]
-  int v83; // [rsp+48h] [rbp-39h]
-  float v84; // [rsp+4Ch] [rbp-35h]
-  int v85; // [rsp+50h] [rbp-31h]
-  int v86; // [rsp+54h] [rbp-2Dh]
-  int v87; // [rsp+58h] [rbp-29h]
-  float v88; // [rsp+5Ch] [rbp-25h]
-  int v89; // [rsp+60h] [rbp-21h]
-  int v90; // [rsp+64h] [rbp-1Dh]
-  UFG::qVector3 v91; // [rsp+68h] [rbp-19h]
-  int v92; // [rsp+74h] [rbp-Dh]
+  UFG::qVector3 pos; // [rsp+8h] [rbp-79h] BYREF
+  int v74[3]; // [rsp+14h] [rbp-6Dh] BYREF
+  __int64 v75[3]; // [rsp+20h] [rbp-61h]
+  float v76; // [rsp+38h] [rbp-49h]
+  float v77; // [rsp+3Ch] [rbp-45h]
+  int v78; // [rsp+40h] [rbp-41h]
+  int v79; // [rsp+44h] [rbp-3Dh]
+  int v80; // [rsp+48h] [rbp-39h]
+  float v81; // [rsp+4Ch] [rbp-35h]
+  int v82; // [rsp+50h] [rbp-31h]
+  int v83; // [rsp+54h] [rbp-2Dh]
+  int v84; // [rsp+58h] [rbp-29h]
+  float v85; // [rsp+5Ch] [rbp-25h]
+  int v86; // [rsp+60h] [rbp-21h]
+  int v87; // [rsp+64h] [rbp-1Dh]
+  UFG::qVector3 v88; // [rsp+68h] [rbp-19h] BYREF
+  int v89; // [rsp+74h] [rbp-Dh]
 
-  v2 = this->mPropertySetCount;
-  v3 = box;
-  v4 = this;
-  if ( v2 )
+  mPropertySetCount = this->mPropertySetCount;
+  if ( mPropertySetCount )
   {
-    v5 = v2;
-    v6 = 0i64;
-    while ( 1 )
+    v5 = mPropertySetCount;
+    for ( i = 0i64; ; i += 8i64 )
     {
-      v7 = v4->mPropertySets.mOffset;
-      v8 = (signed __int64)(v7 ? (UFG::qOffset64<UFG::qOffset64<UFG::qPropertySet *> *> *)((char *)&v4->mPropertySets
-                                                                                         + v7) : 0i64);
-      v9 = v8 + v6;
-      v10 = *(_QWORD *)(v8 + v6);
-      v11 = (UFG::qPropertySet *)(v10 ? v10 + v9 : 0i64);
-      v12 = UFG::qPropertySet::Get<UFG::qPropertySet>(v11, (UFG::qSymbol *)&UFG::symComponentRegion.mUID, DEPTH_RECURSE);
-      v13 = UFG::qPropertySet::Get<UFG::qMatrix44>(v11, (UFG::qSymbol *)&UFG::symXformLocal.mUID, DEPTH_RECURSE);
-      v14 = LODWORD(v13->v0.z);
-      v15 = v13->v0.x;
+      mOffset = this->mPropertySets.mOffset;
+      v8 = mOffset ? (char *)&this->mPropertySets + mOffset : 0i64;
+      v9 = &v8[i];
+      v10 = *(_QWORD *)&v8[i];
+      v11 = v10 ? (UFG::qPropertySet *)&v9[v10] : 0i64;
+      v12 = UFG::qPropertySet::Get<UFG::qPropertySet>(
+              v11,
+              (UFG::qArray<unsigned long,0> *)&UFG::symComponentRegion,
+              DEPTH_RECURSE);
+      v13 = UFG::qPropertySet::Get<UFG::qMatrix44>(
+              v11,
+              (UFG::qArray<unsigned long,0> *)&UFG::symXformLocal,
+              DEPTH_RECURSE);
+      z_low = LODWORD(v13->v0.z);
+      x = v13->v0.x;
       v16 = v13->v3.x;
-      v17 = v13->v3.y;
-      v18 = v13->v3.z;
-      v80 = v13->v0.y;
-      v19 = LODWORD(v13->v0.w);
-      v81 = v14;
-      v20 = LODWORD(v13->v1.x);
-      v82 = v19;
-      v84 = v13->v1.y;
+      y = v13->v3.y;
+      z = v13->v3.z;
+      v77 = v13->v0.y;
+      w_low = LODWORD(v13->v0.w);
+      v78 = z_low;
+      x_low = LODWORD(v13->v1.x);
+      v79 = w_low;
+      v81 = v13->v1.y;
       v21 = LODWORD(v13->v1.w);
-      v83 = v20;
+      v80 = x_low;
       v22 = LODWORD(v13->v1.z);
-      v86 = v21;
-      v88 = v13->v2.y;
+      v83 = v21;
+      v85 = v13->v2.y;
       v23 = LODWORD(v13->v2.w);
-      v85 = v22;
+      v82 = v22;
       v24 = LODWORD(v13->v2.x);
-      v90 = v23;
+      v87 = v23;
       v25 = LODWORD(v13->v3.w);
-      v87 = v24;
+      v84 = v24;
       v26 = LODWORD(v13->v2.z);
-      v92 = v25;
-      v79 = v15;
-      v89 = v26;
-      v91.x = v16;
-      v91.y = v17;
-      v91.z = v18;
+      v89 = v25;
+      v76 = x;
+      v86 = v26;
+      v88.x = v16;
+      v88.y = y;
+      v88.z = z;
       if ( !v12 )
         break;
-      v27 = UFG::qPropertySet::Get<unsigned long>(v12, (UFG::qSymbol *)&UFG::symType.mUID, DEPTH_RECURSE);
+      v27 = UFG::qPropertySet::Get<unsigned long>(v12, (UFG::qArray<unsigned long,0> *)&UFG::symType, DEPTH_RECURSE);
       if ( v27 )
       {
         v28 = *v27 - 2;
@@ -1173,152 +1128,162 @@ void __fastcall UFG::SceneLayerResource::AccumulateBounds(UFG::SceneLayerResourc
             {
               if ( v30 == 2 )
               {
-                v31 = UFG::qPropertySet::Get<float>(v12, (UFG::qSymbol *)&UFG::symExtentAbove.mUID, DEPTH_RECURSE);
-                v32 = UFG::qPropertySet::Get<float>(v12, (UFG::qSymbol *)&UFG::symExtentBelow.mUID, DEPTH_RECURSE);
+                v31 = UFG::qPropertySet::Get<float>(
+                        v12,
+                        (UFG::qArray<unsigned long,0> *)&UFG::symExtentAbove,
+                        DEPTH_RECURSE);
+                v32 = UFG::qPropertySet::Get<float>(
+                        v12,
+                        (UFG::qArray<unsigned long,0> *)&UFG::symExtentBelow,
+                        DEPTH_RECURSE);
                 v33 = *v31;
                 v34 = *v32;
                 v35 = UFG::qPropertySet::Get<UFG::qPropertyList>(
                         v12,
-                        (UFG::qSymbol *)&UFG::symVertexes.mUID,
+                        (UFG::qArray<unsigned long,0> *)&UFG::symVertexes,
                         DEPTH_RECURSE);
                 v36 = 0;
-                v37 = v35->mNumElements;
+                mNumElements = v35->mNumElements;
                 v38 = v35;
-                if ( v37 )
+                if ( mNumElements )
                 {
                   do
                   {
                     v39 = UFG::qPropertyList::Get<UFG::qVector3>(v38, v36);
-                    v40 = v3->mMin.x;
-                    v41 = v39->x * v15;
-                    v42 = v39->y * v15;
-                    v43 = (float)(v33 + v39->z) * v15;
-                    if ( v3->mMin.x >= v41 )
-                      v40 = v39->x * v15;
-                    v3->mMin.x = v40;
-                    v44 = v3->mMin.y;
+                    v40 = box->mMin.x;
+                    v41 = v39->x * x;
+                    v42 = v39->y * x;
+                    v43 = (float)(v33 + v39->z) * x;
+                    if ( box->mMin.x >= v41 )
+                      v40 = v39->x * x;
+                    box->mMin.x = v40;
+                    v44 = box->mMin.y;
                     if ( v44 >= v42 )
                       v44 = v42;
-                    v3->mMin.y = v44;
-                    v45 = v3->mMin.z;
+                    box->mMin.y = v44;
+                    v45 = box->mMin.z;
                     if ( v45 >= v43 )
                       v45 = v43;
-                    v3->mMin.z = v45;
-                    v46 = v3->mMax.x;
+                    box->mMin.z = v45;
+                    v46 = box->mMax.x;
                     if ( v46 <= v41 )
                       v46 = v41;
-                    v3->mMax.x = v46;
-                    v47 = v3->mMax.y;
+                    box->mMax.x = v46;
+                    v47 = box->mMax.y;
                     if ( v47 <= v42 )
                       v47 = v42;
-                    v3->mMax.y = v47;
-                    v48 = v3->mMax.z;
+                    box->mMax.y = v47;
+                    v48 = box->mMax.z;
                     if ( v48 <= v43 )
                       v48 = v43;
-                    v3->mMax.z = v48;
-                    v49 = v3->mMin.x;
-                    v50 = v39->x * v15;
-                    v51 = v39->y * v15;
-                    v52 = (float)(v34 + v39->z) * v15;
-                    if ( v3->mMin.x >= v50 )
-                      v49 = v39->x * v15;
-                    v3->mMin.x = v49;
-                    v53 = v3->mMin.y;
+                    box->mMax.z = v48;
+                    v49 = box->mMin.x;
+                    v50 = v39->x * x;
+                    v51 = v39->y * x;
+                    v52 = (float)(v34 + v39->z) * x;
+                    if ( box->mMin.x >= v50 )
+                      v49 = v39->x * x;
+                    box->mMin.x = v49;
+                    v53 = box->mMin.y;
                     if ( v53 >= v51 )
                       v53 = v51;
-                    v3->mMin.y = v53;
-                    v54 = v3->mMin.z;
+                    box->mMin.y = v53;
+                    v54 = box->mMin.z;
                     if ( v54 >= v52 )
                       v54 = v52;
-                    v3->mMin.z = v54;
-                    v55 = v3->mMax.x;
+                    box->mMin.z = v54;
+                    v55 = box->mMax.x;
                     if ( v55 <= v50 )
                       v55 = v50;
-                    v3->mMax.x = v55;
-                    v56 = v3->mMax.y;
+                    box->mMax.x = v55;
+                    v56 = box->mMax.y;
                     if ( v56 <= v51 )
                       v56 = v51;
-                    v3->mMax.y = v56;
-                    v57 = v3->mMax.z;
+                    box->mMax.y = v56;
+                    v57 = box->mMax.z;
                     if ( v57 <= v52 )
                       v57 = v52;
                     ++v36;
-                    v3->mMax.z = v57;
+                    box->mMax.z = v57;
                   }
-                  while ( v36 < v37 );
+                  while ( v36 < mNumElements );
                 }
               }
             }
             else
             {
-              UFG::qPropertySet::Get<float>(v12, (UFG::qSymbol *)&UFG::symRadius.mUID, DEPTH_RECURSE);
-              UFG::qPropertySet::Get<float>(v12, (UFG::qSymbol *)&UFG::symExtentAbove.mUID, DEPTH_RECURSE);
-              UFG::qPropertySet::Get<float>(v12, (UFG::qSymbol *)&UFG::symExtentBelow.mUID, DEPTH_RECURSE);
+              UFG::qPropertySet::Get<float>(v12, (UFG::qArray<unsigned long,0> *)&UFG::symRadius, DEPTH_RECURSE);
+              UFG::qPropertySet::Get<float>(v12, (UFG::qArray<unsigned long,0> *)&UFG::symExtentAbove, DEPTH_RECURSE);
+              UFG::qPropertySet::Get<float>(v12, (UFG::qArray<unsigned long,0> *)&UFG::symExtentBelow, DEPTH_RECURSE);
             }
           }
           else
           {
-            v77 = UFG::qPropertySet::Get<UFG::qVector3>(v12, (UFG::qSymbol *)&UFG::symMin.mUID, DEPTH_RECURSE);
-            v58 = UFG::qPropertySet::Get<UFG::qVector3>(v12, (UFG::qSymbol *)&UFG::symMax.mUID, DEPTH_RECURSE);
+            v75[0] = (__int64)UFG::qPropertySet::Get<UFG::qVector3>(
+                                v12,
+                                (UFG::qArray<unsigned long,0> *)&UFG::symMin,
+                                DEPTH_RECURSE);
+            v58 = UFG::qPropertySet::Get<UFG::qVector3>(
+                    v12,
+                    (UFG::qArray<unsigned long,0> *)&UFG::symMax,
+                    DEPTH_RECURSE);
             v59 = 0i64;
-            v78 = v58;
+            v75[1] = (__int64)v58;
             v60 = 8i64;
             do
             {
-              v61 = v16 + (float)((*(&v77 + (v59 & 1)))->x * v15);
-              v62 = v17 + (float)((*(&v77 + ((v59 >> 1) & 1)))->y * v15);
-              v63 = v3->mMin.x;
-              v64 = v18 + (float)((*(&v77 + ((v59 >> 2) & 1)))->z * v15);
-              if ( v3->mMin.x >= v61 )
-                v63 = v16 + (float)((*(&v77 + (v59 & 1)))->x * v15);
-              v3->mMin.x = v63;
-              v65 = v3->mMin.y;
+              v61 = v16 + (float)(*(float *)v75[v59 & 1] * x);
+              v62 = y + (float)(*(float *)(v75[(v59 >> 1) & 1] + 4) * x);
+              v63 = box->mMin.x;
+              v64 = z + (float)(*(float *)(v75[(v59 >> 2) & 1] + 8) * x);
+              if ( box->mMin.x >= v61 )
+                v63 = v16 + (float)(*(float *)v75[v59 & 1] * x);
+              box->mMin.x = v63;
+              v65 = box->mMin.y;
               if ( v65 >= v62 )
                 v65 = v62;
-              v3->mMin.y = v65;
-              v66 = v3->mMin.z;
+              box->mMin.y = v65;
+              v66 = box->mMin.z;
               if ( v66 >= v64 )
                 v66 = v64;
-              v3->mMin.z = v66;
-              v67 = v3->mMax.x;
+              box->mMin.z = v66;
+              v67 = box->mMax.x;
               if ( v67 <= v61 )
                 v67 = v61;
-              v3->mMax.x = v67;
-              v68 = v3->mMax.y;
+              box->mMax.x = v67;
+              v68 = box->mMax.y;
               if ( v68 <= v62 )
                 v68 = v62;
-              v3->mMax.y = v68;
-              v69 = v3->mMax.z;
+              box->mMax.y = v68;
+              v69 = box->mMax.z;
               if ( v69 <= v64 )
                 v69 = v64;
               ++v59;
-              v3->mMax.z = v69;
+              box->mMax.z = v69;
               --v60;
             }
             while ( v60 );
           }
           goto LABEL_62;
         }
-        v70 = UFG::qPropertySet::Get<float>(v12, (UFG::qSymbol *)&UFG::symRadius.mUID, DEPTH_RECURSE);
+        v70 = UFG::qPropertySet::Get<float>(v12, (UFG::qArray<unsigned long,0> *)&UFG::symRadius, DEPTH_RECURSE);
         if ( v70 )
         {
           v71 = *v70;
-          UFG::qBox::Enclose(v3, &pos);
-          v72 = (UFG::qVector3 *)&v74;
-          v74 = v16 + v71;
-          v75 = v17 + v71;
-          v76 = v18 + v71;
+          UFG::qBox::Enclose(box, &pos);
+          v72 = (UFG::qVector3 *)v74;
+          *(float *)v74 = v16 + v71;
+          *(float *)&v74[1] = y + v71;
+          *(float *)&v74[2] = z + v71;
 LABEL_61:
-          UFG::qBox::Enclose(v3, v72);
-          goto LABEL_62;
+          UFG::qBox::Enclose(box, v72);
         }
       }
 LABEL_62:
-      v6 += 8i64;
       if ( !--v5 )
         return;
     }
-    v72 = &v91;
+    v72 = &v88;
     goto LABEL_61;
   }
 }

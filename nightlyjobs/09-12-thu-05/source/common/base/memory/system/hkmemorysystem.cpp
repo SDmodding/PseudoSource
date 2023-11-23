@@ -51,26 +51,24 @@ void __fastcall hkMemorySystem::garbageCollectShared(hkMemorySystem *this)
 // RVA: 0xC62DF0
 void __fastcall hkMemorySystem::garbageCollect(hkMemorySystem *this)
 {
-  hkMemorySystem *v1; // rbx
-  hkMemoryRouter *v2; // rax
+  hkMemoryRouter *Value; // rax
 
-  v1 = this;
-  v2 = (hkMemoryRouter *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v1->vfptr->garbageCollectThread(v1, v2);
-  v1->vfptr->garbageCollectShared(v1);
+  Value = (hkMemoryRouter *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  this->vfptr->garbageCollectThread(this, Value);
+  this->vfptr->garbageCollectShared(this);
 }
 
 // File Line: 84
 // RVA: 0xC62D90
 hkResult *__fastcall hkMemorySystem::setHeapSoftLimit(hkMemorySystem *this, hkResult *result, int nbytes)
 {
-  result->m_enum = 1;
+  result->m_enum = HK_FAILURE;
   return result;
 }
 
 // File Line: 89
 // RVA: 0xC62DA0
-signed __int64 __fastcall hkMemorySystem::getHeapSoftLimit(hkMemorySystem *this)
+__int64 __fastcall hkMemorySystem::getHeapSoftLimit(hkMemorySystem *this)
 {
   return 0xFFFFFFFFi64;
 }

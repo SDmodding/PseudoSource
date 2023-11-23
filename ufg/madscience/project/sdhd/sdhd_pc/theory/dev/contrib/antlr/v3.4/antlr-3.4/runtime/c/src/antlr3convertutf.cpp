@@ -1,14 +1,15 @@
 // File Line: 207
 // RVA: 0x25C700
-__int64 __fastcall ConvertUTF16toUTF8(const unsigned __int16 **sourceStart, const unsigned __int16 *sourceEnd, char **targetStart, char *targetEnd, ConversionFlags flags)
+__int64 __fastcall ConvertUTF16toUTF8(
+        const unsigned __int16 **sourceStart,
+        const unsigned __int16 *sourceEnd,
+        char **targetStart,
+        char *targetEnd,
+        ConversionFlags flags)
 {
   const unsigned __int16 *v5; // r11
   char *v6; // r10
-  unsigned int v7; // ebx
-  char *v8; // rbp
-  char **v9; // r14
-  const unsigned __int16 *v10; // rdi
-  const unsigned __int16 **i; // r15
+  unsigned int i; // ebx
   unsigned int v12; // eax
   const unsigned __int16 *v13; // r9
   int v14; // edx
@@ -22,31 +23,26 @@ __int64 __fastcall ConvertUTF16toUTF8(const unsigned __int16 **sourceStart, cons
 
   v5 = *sourceStart;
   v6 = *targetStart;
-  v7 = 0;
-  v8 = targetEnd;
-  v9 = targetStart;
-  v10 = sourceEnd;
-  for ( i = sourceStart; v5 < v10; v6 = &v17[v16] )
+  for ( i = 0; v5 < sourceEnd; v6 = &v17[v16] )
   {
     v12 = *v5;
-    v13 = v5;
-    ++v5;
+    v13 = v5++;
     if ( v12 - 55296 > 0x3FF )
     {
       if ( flags == strictConversion && v12 - 56320 <= 0x3FF )
       {
 LABEL_31:
         --v5;
-        v7 = 3;
+        i = 3;
         break;
       }
     }
     else
     {
-      if ( v5 >= v10 )
+      if ( v5 >= sourceEnd )
       {
         --v5;
-        v7 = 1;
+        i = 1;
         break;
       }
       v14 = *v5;
@@ -84,10 +80,10 @@ LABEL_31:
 LABEL_19:
     v16 = v15;
     v17 = &v6[v15];
-    if ( v17 > v8 )
+    if ( v17 > targetEnd )
     {
       v5 = v13;
-      v7 = 2;
+      i = 2;
       v6 = &v17[-v15];
       break;
     }
@@ -119,9 +115,9 @@ LABEL_27:
         break;
     }
   }
-  *i = v5;
-  result = v7;
-  *v9 = v6;
+  *sourceStart = v5;
+  result = i;
+  *targetStart = v6;
   return result;
 }
 

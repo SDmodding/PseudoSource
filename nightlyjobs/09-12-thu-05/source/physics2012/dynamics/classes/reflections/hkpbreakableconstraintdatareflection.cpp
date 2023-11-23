@@ -28,23 +28,26 @@ hkClass *__fastcall hkpBreakableConstraintData::staticClass()
 
 // File Line: 71
 // RVA: 0xD50130
-void __fastcall finishLoadedObjecthkpBreakableConstraintData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpBreakableConstraintData(
+        hkpBreakableConstraintData *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpBreakableConstraintData::hkpBreakableConstraintData);
+  if ( p )
+    hkpBreakableConstraintData::hkpBreakableConstraintData(p, finishing);
 }
 
 // File Line: 77
 // RVA: 0xD50150
-void __fastcall cleanupLoadedObjecthkpBreakableConstraintData(void *p)
+void __fastcall cleanupLoadedObjecthkpBreakableConstraintData(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 81
 // RVA: 0xD50160
 hkBaseObjectVtbl *__fastcall getVtablehkpBreakableConstraintData()
 {
-  hkpBreakableConstraintData v1; // [rsp+20h] [rbp-68h]
+  hkpBreakableConstraintData v1; // [rsp+20h] [rbp-68h] BYREF
 
   hkpBreakableConstraintData::hkpBreakableConstraintData(&v1, 0);
   return v1.vfptr;
@@ -61,8 +64,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpBreakableConstraintDataTypeInfo__(
   hkpBreakableConstraintDataTypeInfo.m_typeName = "hkpBreakableConstraintData";
   hkpBreakableConstraintDataTypeInfo.m_vtable = result;
   hkpBreakableConstraintDataTypeInfo.m_scopedName = "!hkpBreakableConstraintData";
-  hkpBreakableConstraintDataTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpBreakableConstraintData;
-  hkpBreakableConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpBreakableConstraintData;
+  hkpBreakableConstraintDataTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpBreakableConstraintData;
+  hkpBreakableConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpBreakableConstraintData;
   return result;
 }
 

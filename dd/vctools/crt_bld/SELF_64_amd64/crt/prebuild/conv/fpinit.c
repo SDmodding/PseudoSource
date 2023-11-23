@@ -1,5 +1,6 @@
 // File Line: 72
 // RVA: 0x12ADCCC
+// attributes: thunk
 void __fastcall fpmath(int initPrecision)
 {
   cfltcvt_init(initPrecision);

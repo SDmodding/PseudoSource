@@ -1,103 +1,89 @@
 // File Line: 26
 // RVA: 0x85310
-void __fastcall std::basic_streambuf<char,std::char_traits<char>>::basic_streambuf<char,std::char_traits<char>>(std::basic_streambuf<char,std::char_traits<char> > *this)
+void __fastcall std::streambuf::streambuf(std::streambuf *this)
 {
-  std::basic_streambuf<char,std::char_traits<char> > *v1; // rbx
   std::locale *v2; // rdi
 
-  v1 = this;
-  this->vfptr = (std::basic_streambuf<char,std::char_traits<char> >Vtbl *)&std::basic_streambuf<char,std::char_traits<char>>::`vftable;
+  this->vfptr = (std::streambufVtbl *)&std::streambuf::`vftable;
   v2 = (std::locale *)AMemory::malloc_default(8ui64);
   if ( v2 )
     v2->_Ptr = std::locale::_Init(1);
   else
     v2 = 0i64;
-  v1->_Plocale = v2;
-  v1->_IGfirst = &v1->_Gfirst;
-  v1->_IPfirst = &v1->_Pfirst;
-  v1->_IGnext = &v1->_Gnext;
-  v1->_IPnext = &v1->_Pnext;
-  v1->_IGcount = &v1->_Gcount;
-  v1->_IPcount = &v1->_Pcount;
-  v1->_Pfirst = 0i64;
-  *v1->_IPnext = 0i64;
-  *v1->_IPcount = 0;
-  *v1->_IGfirst = 0i64;
-  *v1->_IGnext = 0i64;
-  *v1->_IGcount = 0;
+  this->_Plocale = v2;
+  this->_IGfirst = &this->_Gfirst;
+  this->_IPfirst = &this->_Pfirst;
+  this->_IGnext = &this->_Gnext;
+  this->_IPnext = &this->_Pnext;
+  this->_IGcount = &this->_Gcount;
+  this->_IPcount = &this->_Pcount;
+  this->_Pfirst = 0i64;
+  *this->_IPnext = 0i64;
+  *this->_IPcount = 0;
+  *this->_IGfirst = 0i64;
+  *this->_IGnext = 0i64;
+  *this->_IGcount = 0;
 }
 
 // File Line: 276
 // RVA: 0x83380
-__int64 __fastcall std::basic_streambuf<char,std::char_traits<char>>::_Gnavail(std::basic_streambuf<char,std::char_traits<char> > *this)
+__int64 __fastcall std::streambuf::_Gnavail(std::streambuf *this)
 {
-  __int64 result; // rax
-
   if ( *this->_IGnext )
-    result = *this->_IGcount;
+    return *this->_IGcount;
   else
-    result = 0i64;
-  return result;
+    return 0i64;
 }
 
 // File Line: 307
 // RVA: 0x869A0
-__int64 __fastcall std::basic_streambuf<char,std::char_traits<char>>::_Pnavail(std::basic_streambuf<char,std::char_traits<char> > *this)
+__int64 __fastcall std::streambuf::_Pnavail(std::streambuf *this)
 {
-  __int64 result; // rax
-
   if ( *this->_IPnext )
-    result = *this->_IPcount;
+    return *this->_IPcount;
   else
-    result = 0i64;
-  return result;
+    return 0i64;
 }
 
 // File Line: 355
 // RVA: 0x87C00
-signed __int64 __fastcall std::basic_streambuf<char,std::char_traits<char>>::uflow(std::basic_streambuf<char,std::char_traits<char> > *this)
+__int64 __fastcall std::streambuf::uflow(std::streambuf *this)
 {
-  std::basic_streambuf<char,std::char_traits<char> > *v1; // rbx
-  char **v3; // rcx
+  char **IGnext; // rcx
   char *v4; // rdx
 
-  v1 = this;
-  if ( ((unsigned int (*)(void))this->vfptr->underflow)() == -1 )
+  if ( this->vfptr->underflow(this) == -1 )
     return 0xFFFFFFFFi64;
-  --*v1->_IGcount;
-  v3 = v1->_IGnext;
-  v4 = (*v3)++;
+  --*this->_IGcount;
+  IGnext = this->_IGnext;
+  v4 = (*IGnext)++;
   return (unsigned __int8)*v4;
 }
 
 // File Line: 362
 // RVA: 0x87C40
-__int64 __fastcall std::basic_streambuf<char,std::char_traits<char>>::xsgetn(std::basic_streambuf<char,std::char_traits<char> > *this, char *_Ptr, __int64 _Count)
+__int64 __fastcall std::streambuf::xsgetn(std::streambuf *this, char *_Ptr, __int64 _Count)
 {
   __int64 v3; // rbp
   __int64 v4; // rdi
-  char *v5; // rsi
-  std::basic_streambuf<char,std::char_traits<char> > *v6; // r14
   __int64 v7; // rax
   size_t v8; // rbx
   int v9; // eax
 
   v3 = 0i64;
   v4 = _Count;
-  v5 = _Ptr;
-  v6 = this;
   if ( _Count <= 0 )
     return 0i64;
   do
   {
-    v7 = std::basic_streambuf<char,std::char_traits<char>>::_Gnavail(v6);
+    v7 = std::streambuf::_Gnavail(this);
     v8 = v7;
     if ( v7 <= 0 )
     {
-      v9 = v6->vfptr->uflow(v6);
+      v9 = this->vfptr->uflow(this);
       if ( v9 == -1 )
         return v3;
-      *v5++ = v9;
+      *_Ptr++ = v9;
       ++v3;
       --v4;
     }
@@ -106,12 +92,12 @@ __int64 __fastcall std::basic_streambuf<char,std::char_traits<char>>::xsgetn(std
       if ( v4 < v7 )
         v8 = v4;
       if ( v8 )
-        memmove(v5, *(const void **)v6->_IGnext, v8);
-      v5 += v8;
+        memmove(_Ptr, *(const void **)this->_IGnext, v8);
+      _Ptr += v8;
       v3 += v8;
-      *v6->_IGcount -= v8;
+      *this->_IGcount -= v8;
       v4 -= v8;
-      *v6->_IGnext += (signed int)v8;
+      *this->_IGnext += (int)v8;
     }
   }
   while ( v4 > 0 );
@@ -120,30 +106,26 @@ __int64 __fastcall std::basic_streambuf<char,std::char_traits<char>>::xsgetn(std
 
 // File Line: 391
 // RVA: 0x87D00
-__int64 __fastcall std::basic_streambuf<char,std::char_traits<char>>::xsputn(std::basic_streambuf<char,std::char_traits<char> > *this, const char *_Ptr, __int64 _Count)
+__int64 __fastcall std::streambuf::xsputn(std::streambuf *this, const char *_Ptr, __int64 _Count)
 {
   __int64 v3; // rbp
   __int64 v4; // rdi
-  const char *v5; // rsi
-  std::basic_streambuf<char,std::char_traits<char> > *v6; // r14
   __int64 v7; // rax
   size_t v8; // rbx
 
   v3 = 0i64;
   v4 = _Count;
-  v5 = _Ptr;
-  v6 = this;
   if ( _Count <= 0 )
     return 0i64;
   do
   {
-    v7 = std::basic_streambuf<char,std::char_traits<char>>::_Pnavail(v6);
+    v7 = std::streambuf::_Pnavail(this);
     v8 = v7;
     if ( v7 <= 0 )
     {
-      if ( v6->vfptr->overflow(v6, *(unsigned __int8 *)v5) == -1 )
+      if ( this->vfptr->overflow(this, *(unsigned __int8 *)_Ptr) == -1 )
         return v3;
-      ++v5;
+      ++_Ptr;
       ++v3;
       --v4;
     }
@@ -152,12 +134,12 @@ __int64 __fastcall std::basic_streambuf<char,std::char_traits<char>>::xsputn(std
       if ( v4 < v7 )
         v8 = v4;
       if ( v8 )
-        memmove(*(void **)v6->_IPnext, v5, v8);
-      v5 += v8;
+        memmove(*(void **)this->_IPnext, _Ptr, v8);
+      _Ptr += v8;
       v3 += v8;
-      *v6->_IPcount -= v8;
+      *this->_IPcount -= v8;
       v4 -= v8;
-      *v6->_IPnext += (signed int)v8;
+      *this->_IPnext += (int)v8;
     }
   }
   while ( v4 > 0 );
@@ -166,7 +148,11 @@ __int64 __fastcall std::basic_streambuf<char,std::char_traits<char>>::xsputn(std
 
 // File Line: 421
 // RVA: 0x87BA0
-std::fpos<int> *__fastcall std::basic_streambuf<char,std::char_traits<char>>::seekpos(std::basic_streambuf<char,std::char_traits<char> > *this, std::fpos<int> *result, std::fpos<int> *__formal, int a4)
+std::fpos<int> *__fastcall std::streambuf::seekpos(
+        std::streambuf *this,
+        std::fpos<int> *result,
+        std::fpos<int> *__formal,
+        int a4)
 {
   result->_Myoff = std::_BADOFF;
   result->_Fpos = 0i64;

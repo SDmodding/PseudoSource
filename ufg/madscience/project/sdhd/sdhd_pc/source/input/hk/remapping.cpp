@@ -2,70 +2,64 @@
 // RVA: 0x41F3B0
 void __fastcall UFG::SaveKeyboardRemap(UFG *this)
 {
-  signed __int64 v1; // rsi
+  __int64 i; // rsi
   UFG::Controller *v2; // rcx
-  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *v3; // rbx
-  signed __int64 i; // rbp
+  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *mNext; // rbx
+  UFG::qList<UFG::ActionRemapInfo,UFG::ActionRemapInfo,1,0> *j; // rbp
   UFG::qSymbol *v5; // rdi
   UFG::GameStatTracker *v6; // rax
-  UFG::qWiseSymbol result; // [rsp+30h] [rbp+8h]
+  UFG::qWiseSymbol result; // [rsp+30h] [rbp+8h] BYREF
 
-  v1 = 0i64;
-  do
+  for ( i = 0i64; i < 5; ++i )
   {
-    v2 = UFG::gInputSystem->mControllers[v1];
+    v2 = UFG::gInputSystem->mControllers[i];
     if ( v2 )
     {
       if ( v2->m_IsKeyboardController )
       {
-        v3 = v2->mRemappableActions.mNode.mNext;
-        for ( i = (signed __int64)&v2->mRemappableActions;
-              v3 != (UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *)i;
-              v3 = v3->mNext )
+        mNext = v2->mRemappableActions.mNode.mNext;
+        for ( j = &v2->mRemappableActions;
+              mNext != (UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *)j;
+              mNext = mNext->mNext )
         {
-          v5 = (UFG::qSymbol *)UFG::qSymbol::qSymbol(&result, (unsigned int)v3[2].mNext);
+          v5 = (UFG::qSymbol *)UFG::qSymbol::qSymbol(&result, (unsigned int)mNext[2].mNext);
           v6 = UFG::GameStatTracker::Instance();
-          UFG::GameStatTracker::SetStat(v6, KeyboardMapping, v5, (int)v3[3].mPrev);
+          UFG::GameStatTracker::SetStat(v6, KeyboardMapping, v5, (int)mNext[3].mPrev);
         }
       }
     }
-    ++v1;
   }
-  while ( v1 < 5 );
 }
 
 // File Line: 41
 // RVA: 0x41F300
 void __fastcall UFG::LoadKeyboardRemap(UFG *this)
 {
-  signed __int64 v1; // r14
+  __int64 i; // r14
   UFG::Controller *v2; // rbp
-  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *i; // rbx
+  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *j; // rbx
   UFG::qSymbol *v4; // rdi
   UFG::GameStatTracker *v5; // rax
-  int v6; // eax
-  UFG::qWiseSymbol result; // [rsp+40h] [rbp+8h]
+  int Stat; // eax
+  UFG::qWiseSymbol result; // [rsp+40h] [rbp+8h] BYREF
 
-  v1 = 0i64;
-  do
+  for ( i = 0i64; i < 5; ++i )
   {
-    v2 = UFG::gInputSystem->mControllers[v1];
+    v2 = UFG::gInputSystem->mControllers[i];
     if ( v2 && v2->m_IsKeyboardController )
     {
-      for ( i = v2->mRemappableActions.mNode.mNext;
-            i != (UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *)&v2->mRemappableActions;
-            i = i->mNext )
+      for ( j = v2->mRemappableActions.mNode.mNext;
+            j != (UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *)&v2->mRemappableActions;
+            j = j->mNext )
       {
-        v4 = (UFG::qSymbol *)UFG::qSymbol::qSymbol(&result, (unsigned int)i[2].mNext);
+        v4 = (UFG::qSymbol *)UFG::qSymbol::qSymbol(&result, (unsigned int)j[2].mNext);
         v5 = UFG::GameStatTracker::Instance();
-        v6 = UFG::GameStatTracker::GetStat(v5, KeyboardMapping, v4);
-        if ( v6 )
-          LODWORD(i[3].mPrev) = v6;
+        Stat = UFG::GameStatTracker::GetStat(v5, KeyboardMapping, v4);
+        if ( Stat )
+          LODWORD(j[3].mPrev) = Stat;
       }
       UFG::Controller::ApplyRemapList(v2);
     }
-    ++v1;
   }
-  while ( v1 < 5 );
 }
 

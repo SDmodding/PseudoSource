@@ -2,7 +2,7 @@
 // RVA: 0x96610
 void __fastcall UFG::qNoise<float,float>::qNoise<float,float>(UFG::qNoise<float,float> *this)
 {
-  signed __int64 v1; // rax
+  __int64 v1; // rax
   float v2; // xmm1_4
   float v3; // xmm0_4
 
@@ -28,7 +28,13 @@ void __fastcall UFG::qNoise<float,float>::qNoise<float,float>(UFG::qNoise<float,
 
 // File Line: 213
 // RVA: 0xB1C10
-void __fastcall UFG::qNoise<float,float>::SetParameters(UFG::qNoise<float,float> *this, int octaves, float frequency, float decay, float min, float max)
+void __fastcall UFG::qNoise<float,float>::SetParameters(
+        UFG::qNoise<float,float> *this,
+        int octaves,
+        float frequency,
+        float decay,
+        float min,
+        float max)
 {
   float v6; // xmm1_4
   float v7; // xmm0_4
@@ -68,32 +74,29 @@ void __fastcall UFG::qNoise<float,float>::SetParameters(UFG::qNoise<float,float>
     v7 = max;
   this->tRangeMax = v7;
   v10 = *(float *)&FLOAT_1_0;
-  if ( octaves > 0 )
+  do
   {
-    do
-    {
-      ++v8;
-      v6 = v6 + v10;
-      v10 = v10 * decay;
-    }
-    while ( v8 < octaves );
+    ++v8;
+    v6 = v6 + v10;
+    v10 = v10 * decay;
   }
+  while ( v8 < octaves );
   this->tAmplitude = 1.0 / v6;
 }
 
 // File Line: 256
 // RVA: 0xAB7A0
-int UFG::qNoise<float,float>::GetValue(...)
+// local variable allocation has failed, the output may be wrong!
+float __fastcall UFG::qNoise<float,float>::GetValue(UFG::qNoise<float,float> *this, double t)
 {
   int v2; // edi
-  UFG::qNoise<float,float> *v3; // rbx
   float v4; // xmm9_4
-  float v5; // xmm13_4
-  float v6; // xmm11_4
+  float tAmplitude; // xmm13_4
+  float tFrequency; // xmm11_4
   __m128 i; // xmm12
   __m128 v8; // xmm7
   float v9; // xmm1_4
-  signed int v10; // ecx
+  int v10; // ecx
   bool v11; // zf
   float v12; // xmm8_4
   float v13; // xmm7_4
@@ -102,23 +105,22 @@ int UFG::qNoise<float,float>::GetValue(...)
   float v16; // xmm6_4
   int v17; // eax
   float v18; // xmm0_4
-  float x; // [rsp+D0h] [rbp+8h]
-  float v21; // [rsp+E0h] [rbp+18h]
+  float x; // [rsp+D0h] [rbp+8h] BYREF
+  float v21; // [rsp+E0h] [rbp+18h] BYREF
 
   v2 = 0;
-  v3 = this;
   v4 = 0.0;
-  v5 = this->tAmplitude;
-  v6 = this->tFrequency;
-  for ( i = (__m128)t; v2 < v3->nOctaves; v4 = v4 + v18 )
+  tAmplitude = this->tAmplitude;
+  tFrequency = this->tFrequency;
+  for ( i = *(__m128 *)&t; v2 < this->nOctaves; v4 = v4 + v18 )
   {
     v8 = i;
-    v8.m128_f32[0] = (float)(i.m128_f32[0] + v3->tOffset) * v6;
+    v8.m128_f32[0] = (float)(i.m128_f32[0] + this->tOffset) * tFrequency;
     v9 = v8.m128_f32[0];
-    v10 = (signed int)v8.m128_f32[0];
-    if ( (signed int)v8.m128_f32[0] != 0x80000000 && (float)v10 != v8.m128_f32[0] )
+    v10 = (int)v8.m128_f32[0];
+    if ( (int)v8.m128_f32[0] != 0x80000000 && (float)v10 != v8.m128_f32[0] )
       v9 = (float)(v10 - (_mm_movemask_ps(_mm_unpacklo_ps(v8, v8)) & 1));
-    v11 = v3->bCircular == 0;
+    v11 = !this->bCircular;
     x = v9;
     v21 = v9 + 1.0;
     v12 = (float)(v9 + 1.0) - v8.m128_f32[0];
@@ -133,10 +135,10 @@ int UFG::qNoise<float,float>::GetValue(...)
     v16 = UFG::NoiseRandom<float>(v15);
     v17 = UFG::NoiseSeed<float>(&v21);
     ++v2;
-    v6 = v6 * 2.0;
-    v18 = (float)((float)(UFG::NoiseRandom<float>(v17) * v13) + (float)(v16 * v12)) * v5;
-    v5 = v5 * v3->tDecay;
+    tFrequency = tFrequency * 2.0;
+    v18 = (float)((float)(UFG::NoiseRandom<float>(v17) * v13) + (float)(v16 * v12)) * tAmplitude;
+    tAmplitude = tAmplitude * this->tDecay;
   }
-  return (float)((float)(v3->tRangeMax - v3->tRangeMin) * (float)((float)(v4 + 1.0) * 0.5)) + v3->tRangeMin;
+  return (float)((float)(this->tRangeMax - this->tRangeMin) * (float)((float)(v4 + 1.0) * 0.5)) + this->tRangeMin;
 }
 

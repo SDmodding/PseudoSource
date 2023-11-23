@@ -1,16 +1,16 @@
 // File Line: 277
 // RVA: 0x15E190
-void __fastcall Intention::Set(Intention *this, unsigned int action_request, float chargeTime)
+void __fastcall Intention::Set(Intention *this, int action_request, float chargeTime)
 {
-  signed __int64 v3; // r9
+  __int64 v3; // r9
   float v4; // xmm1_4
 
   v3 = 1i64 << (action_request & 0x3F);
-  this->mActionRequests.mBits[(signed __int64)(signed int)action_request >> 6] |= v3;
-  v4 = (float)(signed int)(float)(chargeTime * 60.0);
+  this->mActionRequests.mBits[(__int64)action_request >> 6] |= v3;
+  v4 = (float)(int)(float)(chargeTime * 60.0);
   if ( v4 >= 255.0 )
     v4 = FLOAT_255_0;
-  this->mActionRequestChargeTimes[action_request] = (signed int)v4;
+  this->mActionRequestChargeTimes[action_request] = (int)v4;
   this->mSignals |= v3;
 }
 

@@ -2,7 +2,7 @@
 // RVA: 0x14B9510
 __int64 dynamic_initializer_for__UFG::AIAwarenessComponent::s_AIAwarenessComponentList__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::AIAwarenessComponent::s_AIAwarenessComponentList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::AIAwarenessComponent::s_AIAwarenessComponentList__);
 }
 
 // File Line: 39
@@ -24,61 +24,54 @@ __int64 dynamic_initializer_for__UFG::AIAwarenessComponent::_TypeIDesc__()
 // RVA: 0x399920
 void __fastcall UFG::AIAwarenessComponent::AIAwarenessComponent(UFG::AIAwarenessComponent *this, unsigned int nameUid)
 {
-  UFG::AIAwarenessComponent *v2; // r14
   UFG::qNode<UFG::AIAwarenessComponent,UFG::AIAwarenessComponent> *v3; // r15
-  signed __int64 v4; // rsi
+  __int64 i; // rsi
   UFG::qString *v5; // rax
-  UFG::qString *v6; // rdi
+  UFG::AIAwareness::Profile *v6; // rdi
   const char *v7; // rbx
   UFG::allocator::free_link *v8; // rax
-  UFG::allocator::free_link *v9; // rdx
-  UFG::allocator::free_link *v10; // rcx
-  float v11; // xmm1_4
-  float v12; // xmm2_4
-  char v13; // cl
-  UFG::allocator::free_link *v14; // rax
-  UFG::allocator::free_link *v15; // rdx
-  UFG::allocator::free_link *v16; // rcx
-  float v17; // xmm1_4
-  float v18; // xmm2_4
-  char v19; // cl
-  UFG::allocator::free_link *v20; // rbx
-  float v21; // xmm0_4
-  float v22; // xmm1_4
-  UFG::qNode<UFG::AIAwarenessComponent,UFG::AIAwarenessComponent> *v23; // rax
-  UFG::qSymbol result; // [rsp+90h] [rbp+18h]
-  UFG::allocator::free_link *v25; // [rsp+98h] [rbp+20h]
+  UFG::AIAwareness::Effector *v9; // rdx
+  float y; // xmm1_4
+  float z; // xmm2_4
+  char v12; // cl
+  UFG::allocator::free_link *v13; // rax
+  UFG::AIAwareness::Effector *v14; // rdx
+  float v15; // xmm1_4
+  float v16; // xmm2_4
+  char v17; // cl
+  UFG::AIAwareness::KnowledgeSpace *v18; // rbx
+  float v19; // xmm0_4
+  float v20; // xmm1_4
+  UFG::qNode<UFG::AIAwarenessComponent,UFG::AIAwarenessComponent> *mPrev; // rax
+  void *result; // [rsp+90h] [rbp+18h] BYREF
+  UFG::allocator::free_link *v23; // [rsp+98h] [rbp+20h]
 
-  v2 = this;
-  UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, nameUid);
-  v3 = (UFG::qNode<UFG::AIAwarenessComponent,UFG::AIAwarenessComponent> *)&v2->mPrev;
-  v3->mPrev = v3;
-  v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIAwarenessComponent::`vftable;
+  UFG::SimComponent::SimComponent(this, nameUid);
+  v3 = &this->UFG::qNode<UFG::AIAwarenessComponent,UFG::AIAwarenessComponent>;
+  this->mPrev = &this->UFG::qNode<UFG::AIAwarenessComponent,UFG::AIAwarenessComponent>;
+  this->mNext = &this->UFG::qNode<UFG::AIAwarenessComponent,UFG::AIAwarenessComponent>;
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIAwarenessComponent::`vftable;
   if ( !sInitialized )
   {
-    v4 = 0i64;
-    do
+    for ( i = 0i64; i < 4; ++i )
     {
       v5 = (UFG::qString *)UFG::qMalloc(0xB0ui64, "TEMPAwarenessProfile", 0i64);
-      v6 = v5;
-      v25 = (UFG::allocator::free_link *)v5;
+      v6 = (UFG::AIAwareness::Profile *)v5;
+      v23 = (UFG::allocator::free_link *)v5;
       if ( v5 )
       {
-        v7 = *(const char **)(v4 + 5402726688i64);
+        v7 = s_TEMP_AwarenessProfileNames[i];
         UFG::qString::qString(v5);
-        LODWORD(v6[1].mPrev) = -1;
-        UFG::qString::Set(v6, v7);
-        LODWORD(v6[1].mPrev) = (UFG::qSymbol)UFG::qSymbol::create_from_string(&result, v7)->mUID;
+        v6->mSymbol.mUID = -1;
+        UFG::qString::Set(&v6->mName, v7);
+        v6->mSymbol = (UFG::qSymbol)UFG::qSymbol::create_from_string((UFG::qSymbol *)&result, v7)->mUID;
       }
       else
       {
         v6 = 0i64;
       }
-      *(_QWORD *)(v4 + 5406253040i64) = v6;
-      v4 += 8i64;
+      s_TEMPProfiles[i] = v6;
     }
-    while ( v4 < 32 );
     s_TEMPProfiles[0]->mAIProperties[0].mWaitTimeMin = 1.0;
     s_TEMPProfiles[0]->mAIProperties[0].mWaitTimeMax = 1.5;
     s_TEMPProfiles[0]->mAIProperties[0].mNewTargetTimeMin = 2.0;
@@ -222,8 +215,8 @@ void __fastcall UFG::AIAwarenessComponent::AIAwarenessComponent(UFG::AIAwareness
     sInitialized = 1;
   }
   v8 = UFG::qMalloc(0xE8ui64, "AwarenessEffector", 0i64);
-  v9 = v8;
-  *(_QWORD *)&result.mUID = v8;
+  v9 = (UFG::AIAwareness::Effector *)v8;
+  result = v8;
   if ( v8 )
   {
     LODWORD(v8->mNext) = 0;
@@ -231,188 +224,181 @@ void __fastcall UFG::AIAwarenessComponent::AIAwarenessComponent(UFG::AIAwareness
     v8[4].mNext = 0i64;
     v8[5].mNext = 0i64;
     LODWORD(v8[6].mNext) = 1;
-    v10 = v8 + 7;
-    v25 = v10;
-    v10->mNext = v10;
-    v10[1].mNext = v10;
+    v23 = v8 + 7;
+    v8[7].mNext = v8 + 7;
+    v8[8].mNext = v8 + 7;
     v8[9].mNext = 0i64;
-    v11 = UFG::qVector3::msAxisX.y;
-    v12 = UFG::qVector3::msAxisX.z;
+    y = UFG::qVector3::msAxisX.y;
+    z = UFG::qVector3::msAxisX.z;
     HIDWORD(v8[11].mNext) = LODWORD(UFG::qVector3::msAxisX.x);
-    *(float *)&v8[12].mNext = v11;
-    *((float *)&v8[12].mNext + 1) = v12;
+    *(float *)&v8[12].mNext = y;
+    *((float *)&v8[12].mNext + 1) = z;
     LODWORD(v8[13].mNext) = 0;
     v8[26].mNext = 0i64;
     LODWORD(v8[28].mNext) = 0;
-    v13 = byte_1423CE011;
+    v12 = byte_1423CE011;
     if ( !byte_1423CE011 )
-      v13 = 1;
-    byte_1423CE011 = v13;
+      v12 = 1;
+    byte_1423CE011 = v12;
   }
   else
   {
     v9 = 0i64;
   }
-  v2->mpHeadEffector = (UFG::AIAwareness::Effector *)v9;
-  v14 = UFG::qMalloc(0xE8ui64, "AwarenessEffector", 0i64);
-  v15 = v14;
-  *(_QWORD *)&result.mUID = v14;
-  if ( v14 )
+  this->mpHeadEffector = v9;
+  v13 = UFG::qMalloc(0xE8ui64, "AwarenessEffector", 0i64);
+  v14 = (UFG::AIAwareness::Effector *)v13;
+  result = v13;
+  if ( v13 )
   {
-    LODWORD(v14->mNext) = 1;
-    v14[1].mNext = 0i64;
-    v14[4].mNext = 0i64;
-    v14[5].mNext = 0i64;
-    LODWORD(v14[6].mNext) = 1;
-    v16 = v14 + 7;
-    v25 = v16;
-    v16->mNext = v16;
-    v16[1].mNext = v16;
-    v14[9].mNext = 0i64;
-    v17 = UFG::qVector3::msAxisX.y;
-    v18 = UFG::qVector3::msAxisX.z;
-    HIDWORD(v14[11].mNext) = LODWORD(UFG::qVector3::msAxisX.x);
-    *(float *)&v14[12].mNext = v17;
-    *((float *)&v14[12].mNext + 1) = v18;
-    LODWORD(v14[13].mNext) = 0;
-    v14[26].mNext = 0i64;
-    LODWORD(v14[28].mNext) = 0;
-    v19 = byte_1423CE011;
+    LODWORD(v13->mNext) = 1;
+    v13[1].mNext = 0i64;
+    v13[4].mNext = 0i64;
+    v13[5].mNext = 0i64;
+    LODWORD(v13[6].mNext) = 1;
+    v23 = v13 + 7;
+    v13[7].mNext = v13 + 7;
+    v13[8].mNext = v13 + 7;
+    v13[9].mNext = 0i64;
+    v15 = UFG::qVector3::msAxisX.y;
+    v16 = UFG::qVector3::msAxisX.z;
+    HIDWORD(v13[11].mNext) = LODWORD(UFG::qVector3::msAxisX.x);
+    *(float *)&v13[12].mNext = v15;
+    *((float *)&v13[12].mNext + 1) = v16;
+    LODWORD(v13[13].mNext) = 0;
+    v13[26].mNext = 0i64;
+    LODWORD(v13[28].mNext) = 0;
+    v17 = byte_1423CE011;
     if ( !byte_1423CE011 )
-      v19 = 1;
-    byte_1423CE011 = v19;
+      v17 = 1;
+    byte_1423CE011 = v17;
   }
   else
   {
-    v15 = 0i64;
+    v14 = 0i64;
   }
-  v2->mpEyeEffector = (UFG::AIAwareness::Effector *)v15;
-  v20 = UFG::qMalloc(0x15E8ui64, "KnowledgeSpace", 0i64);
-  *(_QWORD *)&result.mUID = v20;
-  if ( v20 )
+  this->mpEyeEffector = v14;
+  v18 = (UFG::AIAwareness::KnowledgeSpace *)UFG::qMalloc(0x15E8ui64, "KnowledgeSpace", 0i64);
+  result = v18;
+  if ( v18 )
   {
     `eh vector constructor iterator(
-      v20,
+      v18,
       0x38ui64,
       100,
       (void (__fastcall *)(void *))UFG::AIAwareness::KnowledgeSpace::PositionCandidate::PositionCandidate);
-    LODWORD(v20[700].mNext) = 0;
-    BYTE4(v20[700].mNext) = 0;
+    v18->mNumPositionCandidates = 0;
+    v18->mHasOverridingTarget = 0;
   }
   else
   {
-    v20 = 0i64;
+    v18 = 0i64;
   }
-  v2->mpKnowledgeSpace = (UFG::AIAwareness::KnowledgeSpace *)v20;
-  v21 = s_MaxCharacterAwarenessDistance;
-  v2->mpHeadEffector->mMaxCharacterAwarenessDistance = s_MaxCharacterAwarenessDistance;
-  v2->mpEyeEffector->mMaxCharacterAwarenessDistance = v21;
-  v22 = s_MaxSpaceAwarenessDistance;
-  v2->mpHeadEffector->mMaxSpaceAwarenessDistance = s_MaxSpaceAwarenessDistance;
-  v2->mpEyeEffector->mMaxSpaceAwarenessDistance = v22;
-  v2->mpHeadEffector->mpCurrentProfile = s_TEMPProfiles[0];
-  v2->mpEyeEffector->mpCurrentProfile = s_TEMPProfiles[0];
-  v2->mpHeadEffector->mpKnowledgeSpace = v2->mpKnowledgeSpace;
-  v2->mpEyeEffector->mpKnowledgeSpace = v2->mpKnowledgeSpace;
-  v23 = UFG::AIAwarenessComponent::s_AIAwarenessComponentList.mNode.mPrev;
+  this->mpKnowledgeSpace = v18;
+  v19 = s_MaxCharacterAwarenessDistance;
+  this->mpHeadEffector->mMaxCharacterAwarenessDistance = s_MaxCharacterAwarenessDistance;
+  this->mpEyeEffector->mMaxCharacterAwarenessDistance = v19;
+  v20 = s_MaxSpaceAwarenessDistance;
+  this->mpHeadEffector->mMaxSpaceAwarenessDistance = s_MaxSpaceAwarenessDistance;
+  this->mpEyeEffector->mMaxSpaceAwarenessDistance = v20;
+  this->mpHeadEffector->mpCurrentProfile = s_TEMPProfiles[0];
+  this->mpEyeEffector->mpCurrentProfile = s_TEMPProfiles[0];
+  this->mpHeadEffector->mpKnowledgeSpace = this->mpKnowledgeSpace;
+  this->mpEyeEffector->mpKnowledgeSpace = this->mpKnowledgeSpace;
+  mPrev = UFG::AIAwarenessComponent::s_AIAwarenessComponentList.mNode.mPrev;
   UFG::AIAwarenessComponent::s_AIAwarenessComponentList.mNode.mPrev->mNext = v3;
-  v3->mPrev = v23;
-  v2->mNext = (UFG::qNode<UFG::AIAwarenessComponent,UFG::AIAwarenessComponent> *)&UFG::AIAwarenessComponent::s_AIAwarenessComponentList;
-  UFG::AIAwarenessComponent::s_AIAwarenessComponentList.mNode.mPrev = (UFG::qNode<UFG::AIAwarenessComponent,UFG::AIAwarenessComponent> *)&v2->mPrev;
-  UFG::SimComponent::AddType(
-    (UFG::SimComponent *)&v2->vfptr,
-    UFG::AIAwarenessComponent::_AIAwarenessComponentTypeUID,
-    "AIAwarenessComponent");
+  v3->mPrev = mPrev;
+  this->mNext = (UFG::qNode<UFG::AIAwarenessComponent,UFG::AIAwarenessComponent> *)&UFG::AIAwarenessComponent::s_AIAwarenessComponentList;
+  UFG::AIAwarenessComponent::s_AIAwarenessComponentList.mNode.mPrev = &this->UFG::qNode<UFG::AIAwarenessComponent,UFG::AIAwarenessComponent>;
+  UFG::SimComponent::AddType(this, UFG::AIAwarenessComponent::_AIAwarenessComponentTypeUID, "AIAwarenessComponent");
 }
 
 // File Line: 228
 // RVA: 0x39A470
 void __fastcall UFG::AIAwarenessComponent::~AIAwarenessComponent(UFG::AIAwarenessComponent *this)
 {
-  UFG::AIAwarenessComponent *v1; // rbx
   UFG::qNode<UFG::AIAwarenessComponent,UFG::AIAwarenessComponent> *v2; // rdi
-  UFG::qNode<UFG::AIAwarenessComponent,UFG::AIAwarenessComponent> *v3; // rcx
-  UFG::qNode<UFG::AIAwarenessComponent,UFG::AIAwarenessComponent> *v4; // rax
-  UFG::AIAwareness::Effector *v5; // rcx
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v6; // r8
+  UFG::qNode<UFG::AIAwarenessComponent,UFG::AIAwarenessComponent> *mPrev; // rcx
+  UFG::qNode<UFG::AIAwarenessComponent,UFG::AIAwarenessComponent> *mNext; // rax
+  UFG::AIAwareness::Effector *mpHeadEffector; // rcx
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mActiveSimObject; // r8
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v7; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v8; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v9; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v10; // rax
-  UFG::AIAwareness::Effector *v11; // rcx
+  UFG::AIAwareness::Effector *mpEyeEffector; // rcx
   UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v12; // r8
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v13; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v14; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v15; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v16; // rax
-  UFG::AIAwareness::KnowledgeSpace *v17; // rsi
+  UFG::AIAwareness::KnowledgeSpace *mpKnowledgeSpace; // rsi
   UFG::qNode<UFG::AIAwarenessComponent,UFG::AIAwarenessComponent> *v18; // rcx
   UFG::qNode<UFG::AIAwarenessComponent,UFG::AIAwarenessComponent> *v19; // rax
 
-  v1 = this;
   this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIAwarenessComponent::`vftable;
   if ( this == UFG::AIAwarenessComponent::s_AIAwarenessComponentpCurrentIterator )
     UFG::AIAwarenessComponent::s_AIAwarenessComponentpCurrentIterator = (UFG::AIAwarenessComponent *)&this->mPrev[-4];
-  v2 = (UFG::qNode<UFG::AIAwarenessComponent,UFG::AIAwarenessComponent> *)&this->mPrev;
-  v3 = this->mPrev;
-  v4 = v2->mNext;
-  v3->mNext = v4;
-  v4->mPrev = v3;
+  v2 = &this->UFG::qNode<UFG::AIAwarenessComponent,UFG::AIAwarenessComponent>;
+  mPrev = this->mPrev;
+  mNext = v2->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v5 = v1->mpHeadEffector;
-  if ( v5 )
+  mpHeadEffector = this->mpHeadEffector;
+  if ( mpHeadEffector )
   {
-    v6 = &v5->mActiveSimObject;
-    if ( v5->mActiveSimObject.m_pPointer )
+    p_mActiveSimObject = &mpHeadEffector->mActiveSimObject;
+    if ( mpHeadEffector->mActiveSimObject.m_pPointer )
     {
-      v7 = v6->mPrev;
-      v8 = v5->mActiveSimObject.mNext;
+      v7 = p_mActiveSimObject->mPrev;
+      v8 = mpHeadEffector->mActiveSimObject.mNext;
       v7->mNext = v8;
       v8->mPrev = v7;
-      v6->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v6->mPrev;
-      v5->mActiveSimObject.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v5->mActiveSimObject.mPrev;
+      p_mActiveSimObject->mPrev = p_mActiveSimObject;
+      mpHeadEffector->mActiveSimObject.mNext = &mpHeadEffector->mActiveSimObject;
     }
-    v5->mActiveSimObject.m_pPointer = 0i64;
-    v9 = v6->mPrev;
-    v10 = v5->mActiveSimObject.mNext;
+    mpHeadEffector->mActiveSimObject.m_pPointer = 0i64;
+    v9 = p_mActiveSimObject->mPrev;
+    v10 = mpHeadEffector->mActiveSimObject.mNext;
     v9->mNext = v10;
     v10->mPrev = v9;
-    v6->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v6->mPrev;
-    v5->mActiveSimObject.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v5->mActiveSimObject.mPrev;
-    operator delete[](v5);
+    p_mActiveSimObject->mPrev = p_mActiveSimObject;
+    mpHeadEffector->mActiveSimObject.mNext = &mpHeadEffector->mActiveSimObject;
+    operator delete[](mpHeadEffector);
   }
-  v11 = v1->mpEyeEffector;
-  if ( v11 )
+  mpEyeEffector = this->mpEyeEffector;
+  if ( mpEyeEffector )
   {
-    v12 = &v11->mActiveSimObject;
-    if ( v11->mActiveSimObject.m_pPointer )
+    v12 = &mpEyeEffector->mActiveSimObject;
+    if ( mpEyeEffector->mActiveSimObject.m_pPointer )
     {
       v13 = v12->mPrev;
-      v14 = v11->mActiveSimObject.mNext;
+      v14 = mpEyeEffector->mActiveSimObject.mNext;
       v13->mNext = v14;
       v14->mPrev = v13;
-      v12->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v12->mPrev;
-      v11->mActiveSimObject.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v11->mActiveSimObject.mPrev;
+      v12->mPrev = v12;
+      mpEyeEffector->mActiveSimObject.mNext = &mpEyeEffector->mActiveSimObject;
     }
-    v11->mActiveSimObject.m_pPointer = 0i64;
+    mpEyeEffector->mActiveSimObject.m_pPointer = 0i64;
     v15 = v12->mPrev;
-    v16 = v11->mActiveSimObject.mNext;
+    v16 = mpEyeEffector->mActiveSimObject.mNext;
     v15->mNext = v16;
     v16->mPrev = v15;
-    v12->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v12->mPrev;
-    v11->mActiveSimObject.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v11->mActiveSimObject.mPrev;
-    operator delete[](v11);
+    v12->mPrev = v12;
+    mpEyeEffector->mActiveSimObject.mNext = &mpEyeEffector->mActiveSimObject;
+    operator delete[](mpEyeEffector);
   }
-  v17 = v1->mpKnowledgeSpace;
-  if ( v17 )
+  mpKnowledgeSpace = this->mpKnowledgeSpace;
+  if ( mpKnowledgeSpace )
   {
     `eh vector destructor iterator(
-      v17,
+      mpKnowledgeSpace,
       0x38ui64,
       100,
       (void (__fastcall *)(void *))UFG::AIAwareness::KnowledgeSpace::PositionCandidate::~PositionCandidate);
-    operator delete[](v17);
+    operator delete[](mpKnowledgeSpace);
   }
   v18 = v2->mPrev;
   v19 = v2->mNext;
@@ -420,74 +406,73 @@ void __fastcall UFG::AIAwarenessComponent::~AIAwarenessComponent(UFG::AIAwarenes
   v19->mPrev = v18;
   v2->mPrev = v2;
   v2->mNext = v2;
-  UFG::SimComponent::~SimComponent((UFG::SimComponent *)&v1->vfptr);
-}
+  UFG::SimComponent::~SimComponent(this);
+}v = v18;
+  v2->mPrev = v2;
+  v2->mNext
 
 // File Line: 237
 // RVA: 0x39AF20
-void __fastcall UFG::AIAwarenessComponent::OnAttach(UFG::AIAwarenessComponent *this, UFG::SimObject *pObject)
+void __fastcall UFG::AIAwarenessComponent::OnAttach(UFG::AIAwarenessComponent *this, UFG::SimObjectCharacter *pObject)
 {
-  UFG::AIAwarenessComponent *v2; // rbx
   __int64 v3; // rax
-  int v4; // ecx
+  unsigned int v4; // ecx
 
-  v2 = this;
   if ( !UFG::IsAnyLocalPlayer(pObject) || (v3 = s_PlayerProfileOverride, s_PlayerProfileOverride == -1) )
   {
     v4 = numAwarenessProfilesToRandomize;
     if ( numAwarenessProfilesToRandomize >= 4 )
       v4 = 4;
     numAwarenessProfilesToRandomize = v4;
-    v3 = (signed int)UFG::qRandom(v4, &UFG::qDefaultSeed);
+    v3 = (int)UFG::qRandom(v4, (unsigned int *)&UFG::qDefaultSeed);
   }
-  v2->mpCurrentProfile = s_TEMPProfiles[v3];
+  this->mpCurrentProfile = s_TEMPProfiles[v3];
 }
 
 // File Line: 268
 // RVA: 0x39AF80
-UFG::SimComponent *__fastcall UFG::AIAwarenessComponent::PropertiesOnActivateNew(UFG::SceneObjectProperties *pSceneObj, bool required)
+UFG::AIAwarenessComponent *__fastcall UFG::AIAwarenessComponent::PropertiesOnActivateNew(
+        UFG::SceneObjectProperties *pSceneObj,
+        bool required)
 {
-  UFG::SceneObjectProperties *v2; // rdi
-  UFG::qMemoryPool *v3; // rax
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
   UFG::allocator::free_link *v4; // rax
   UFG::SimComponent *v5; // rax
   UFG::SimComponent *v6; // rbx
-  UFG::SimObjectModifier v8; // [rsp+38h] [rbp-30h]
+  UFG::SimObjectModifier v8; // [rsp+38h] [rbp-30h] BYREF
 
-  v2 = pSceneObj;
-  v3 = UFG::GetSimulationMemoryPool();
-  v4 = UFG::qMemoryPool::Allocate(v3, 0x78ui64, "AI::AIAwarenessComponent", 0i64, 1u);
+  SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+  v4 = UFG::qMemoryPool::Allocate(SimulationMemoryPool, 0x78ui64, "AI::AIAwarenessComponent", 0i64, 1u);
   if ( v4 )
   {
-    UFG::AIAwarenessComponent::AIAwarenessComponent((UFG::AIAwarenessComponent *)v4, v2->m_NameUID);
+    UFG::AIAwarenessComponent::AIAwarenessComponent((UFG::AIAwarenessComponent *)v4, pSceneObj->m_NameUID);
     v6 = v5;
   }
   else
   {
     v6 = 0i64;
   }
-  UFG::SimObjectModifier::SimObjectModifier(&v8, v2->m_pSimObject, 1);
+  UFG::SimObjectModifier::SimObjectModifier(&v8, pSceneObj->m_pSimObject, 1);
   UFG::SimObjectModifier::AttachComponent(&v8, v6, 0xFFFFFFFFi64);
   UFG::SimObjectModifier::Close(&v8);
   UFG::SimObjectModifier::~SimObjectModifier(&v8);
-  return v6;
+  return (UFG::AIAwarenessComponent *)v6;
 }
 
 // File Line: 283
 // RVA: 0x39BF60
 void __fastcall UFG::AIAwarenessComponent::UpdateSensors(UFG::AIAwarenessComponent *this, float deltaTime)
 {
-  UFG::AIAwarenessComponent *v2; // r14
-  UFG::SimObject *v3; // rdi
-  unsigned __int16 v4; // dx
+  UFG::SimObject *m_pSimObject; // rdi
+  __int16 m_Flags; // dx
   UFG::SimObjectCVBase *v5; // rcx
   UFG::ActiveAIEntityComponent *v6; // rax
-  hkMeshShape *v7; // r15
+  hkMeshShape *MeshShape; // r15
   float v8; // xmm6_4
   UFG::qNode<UFG::NearbyCharacter,UFG::NearbyCharacterLocalList> *v9; // rbx
   UFG::qNode<UFG::NearbyCharacter,UFG::NearbyCharacterLocalList> *v10; // rbp
-  UFG::qNode<UFG::NearbyCharacter,UFG::NearbyCharacterLocalList> *v11; // rax
-  UFG::SimObject *v12; // rax
+  UFG::qNode<UFG::NearbyCharacter,UFG::NearbyCharacterLocalList> *mPrev; // rax
+  UFG::SimObject *mNext; // rax
   UFG::TransformNodeComponent *v13; // rsi
   UFG::qNode<UFG::NearbyCharacter,UFG::NearbyCharacterLocalList> *i; // rax
   UFG::qNode<UFG::NearbyCharacter,UFG::NearbyCharacterLocalList> *v15; // rdx
@@ -495,71 +480,60 @@ void __fastcall UFG::AIAwarenessComponent::UpdateSensors(UFG::AIAwarenessCompone
   UFG::qNode<UFG::NearbyCharacter,UFG::NearbyCharacterLocalList> *v17; // rax
   UFG::qNode<UFG::NearbyCharacter,UFG::NearbyCharacterLocalList> *v18; // rcx
   UFG::qNode<UFG::NearbyCharacter,UFG::NearbyCharacterLocalList> *v19; // rax
-  __int64 v20; // [rsp+0h] [rbp-68h]
-  __int64 v21; // [rsp+20h] [rbp-48h]
-  UFG::qList<UFG::NearbyCharacter,UFG::NearbyCharacterLocalList,0,0> list; // [rsp+28h] [rbp-40h]
+  _QWORD v20[5]; // [rsp+0h] [rbp-68h] BYREF
+  UFG::qList<UFG::NearbyCharacter,UFG::NearbyCharacterLocalList,0,0> list; // [rsp+28h] [rbp-40h] BYREF
 
-  v21 = -2i64;
-  v2 = this;
-  v3 = this->m_pSimObject;
-  if ( v3 )
+  v20[4] = -2i64;
+  m_pSimObject = this->m_pSimObject;
+  if ( m_pSimObject )
   {
-    v4 = v3->m_Flags;
+    m_Flags = m_pSimObject->m_Flags;
     v5 = (UFG::SimObjectCVBase *)this->m_pSimObject;
-    if ( (v4 >> 14) & 1 )
-    {
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
       v6 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v5);
-    }
-    else if ( (v4 & 0x8000u) == 0 )
-    {
-      if ( (v4 >> 13) & 1 )
-        v6 = (UFG::ActiveAIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                               (UFG::SimObjectGame *)&v5->vfptr,
-                                               UFG::ActiveAIEntityComponent::_TypeUID);
-      else
-        v6 = (UFG::ActiveAIEntityComponent *)((v4 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                 (UFG::SimObjectGame *)&v5->vfptr,
-                                                                 UFG::ActiveAIEntityComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v5->vfptr, UFG::ActiveAIEntityComponent::_TypeUID));
-    }
     else
+      v6 = (UFG::ActiveAIEntityComponent *)((m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+                                          ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                              v5,
+                                              UFG::ActiveAIEntityComponent::_TypeUID)
+                                          : UFG::SimObject::GetComponentOfType(
+                                              v5,
+                                              UFG::ActiveAIEntityComponent::_TypeUID));
+    if ( v6 && m_pSimObject->m_pTransformNodeComponent )
     {
-      v6 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v5);
-    }
-    if ( v6 && v3->m_pTransformNodeComponent )
-    {
-      v7 = hkMemoryMeshBody::getMeshShape((hkMemoryMeshBody *)v6);
-      UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v7);
+      MeshShape = hkMemoryMeshBody::getMeshShape((hkMemoryMeshBody *)v6);
+      UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)MeshShape);
       list.mNode.mPrev = (UFG::qNode<UFG::NearbyCharacter,UFG::NearbyCharacterLocalList> *)&list;
       list.mNode.mNext = (UFG::qNode<UFG::NearbyCharacter,UFG::NearbyCharacterLocalList> *)&list;
       UFG::NearbyCharacterManager::GetNearbyCharactersAll(
         UFG::NearbyCharacterManager::s_pInstance,
-        &list,
-        (UFG::qVector3 *)&v7[11]);
+        (UFG::qNode<UFG::NearbyCharacter,UFG::NearbyCharacterMasterList> *)&list,
+        (UFG::qVector3 *)&MeshShape[11]);
       v8 = s_MaxCharacterAwarenessDistance * s_MaxCharacterAwarenessDistance;
       v9 = list.mNode.mNext - 1;
-      v10 = (UFG::qNode<UFG::NearbyCharacter,UFG::NearbyCharacterLocalList> *)(&v20 + 3);
+      v10 = (UFG::qNode<UFG::NearbyCharacter,UFG::NearbyCharacterLocalList> *)&v20[3];
       if ( list.mNode.mNext - 1 != v10 )
       {
         do
         {
-          v11 = v9[3].mPrev;
-          if ( v11 )
+          mPrev = v9[3].mPrev;
+          if ( mPrev )
           {
-            v12 = (UFG::SimObject *)v11[2].mNext;
-            v13 = v12 ? v12->m_pTransformNodeComponent : 0i64;
-            if ( v12 != v3 )
+            mNext = (UFG::SimObject *)mPrev[2].mNext;
+            v13 = mNext ? mNext->m_pTransformNodeComponent : 0i64;
+            if ( mNext != m_pSimObject )
             {
               UFG::TransformNodeComponent::UpdateWorldTransform(v13);
-              if ( (float)((float)((float)((float)(*((float *)&v7[11].vfptr + 1) - v13->mWorldTransform.v3.y)
-                                         * (float)(*((float *)&v7[11].vfptr + 1) - v13->mWorldTransform.v3.y))
-                                 + (float)((float)(*(float *)&v7[11].vfptr - v13->mWorldTransform.v3.x)
-                                         * (float)(*(float *)&v7[11].vfptr - v13->mWorldTransform.v3.x)))
-                         + (float)((float)(*(float *)&v7[11].m_memSizeAndFlags - v13->mWorldTransform.v3.z)
-                                 * (float)(*(float *)&v7[11].m_memSizeAndFlags - v13->mWorldTransform.v3.z))) < v8 )
+              if ( (float)((float)((float)((float)(*((float *)&MeshShape[11].vfptr + 1) - v13->mWorldTransform.v3.y)
+                                         * (float)(*((float *)&MeshShape[11].vfptr + 1) - v13->mWorldTransform.v3.y))
+                                 + (float)((float)(*(float *)&MeshShape[11].vfptr - v13->mWorldTransform.v3.x)
+                                         * (float)(*(float *)&MeshShape[11].vfptr - v13->mWorldTransform.v3.x)))
+                         + (float)((float)(*(float *)&MeshShape[11].m_memSizeAndFlags - v13->mWorldTransform.v3.z)
+                                 * (float)(*(float *)&MeshShape[11].m_memSizeAndFlags - v13->mWorldTransform.v3.z))) < v8 )
                 UFG::AIAwareness::KnowledgeSpace::AddTargetSimObject(
-                  v2->mpKnowledgeSpace,
+                  this->mpKnowledgeSpace,
                   (UFG::SimObject *)v9[3].mPrev[2].mNext,
-                  0);
+                  TARGETPRIORITY_AMBIENT);
             }
           }
           v9 = v9[1].mNext - 1;
@@ -588,36 +562,41 @@ void __fastcall UFG::AIAwarenessComponent::UpdateSensors(UFG::AIAwarenessCompone
 // RVA: 0x39BA70
 void __fastcall UFG::AIAwarenessComponent::UpdateEffectors(UFG::AIAwarenessComponent *this, float deltaTime)
 {
-  UFG::SimObject *v2; // rbx
-  UFG::AIEntityComponent *v3; // rdi
-  UFG::AIAwarenessComponent *v4; // rsi
-  UFG::TransformNodeComponent *v5; // rbp
+  UFG::SimObject *m_pSimObject; // rbx
+  UFG::AIEntityComponent *ComponentOfType; // rdi
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rbp
 
-  v2 = this->m_pSimObject;
-  v3 = 0i64;
-  v4 = this;
-  v5 = 0i64;
-  if ( v2 )
+  m_pSimObject = this->m_pSimObject;
+  ComponentOfType = 0i64;
+  m_pTransformNodeComponent = 0i64;
+  if ( m_pSimObject )
   {
-    v5 = v2->m_pTransformNodeComponent;
-    v3 = (UFG::AIEntityComponent *)UFG::SimObject::GetComponentOfType(
-                                     this->m_pSimObject,
-                                     UFG::ActiveAIEntityComponent::_TypeUID);
+    m_pTransformNodeComponent = m_pSimObject->m_pTransformNodeComponent;
+    ComponentOfType = (UFG::AIEntityComponent *)UFG::SimObject::GetComponentOfType(
+                                                  this->m_pSimObject,
+                                                  UFG::ActiveAIEntityComponent::_TypeUID);
   }
-  UFG::TransformNodeComponent::UpdateWorldTransform(v5);
-  UFG::AIAwareness::Effector::Update(v4->mpHeadEffector, deltaTime, v2, (UFG::qVector3 *)&v5->mWorldTransform);
-  UFG::AIAwareness::Effector::UpdateWithSameTarget(
-    v4->mpEyeEffector,
-    v4->mpHeadEffector,
+  UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+  UFG::AIAwareness::Effector::Update(
+    this->mpHeadEffector,
     deltaTime,
-    v2,
-    &v4->mpHeadEffector->mForward);
-  UFG::AIEntityComponent::SetHeadTrackingPosition(v3, &v4->mpHeadEffector->mActivePosition);
+    m_pSimObject,
+    (UFG::qVector3 *)&m_pTransformNodeComponent->mWorldTransform);
+  UFG::AIAwareness::Effector::UpdateWithSameTarget(
+    this->mpEyeEffector,
+    this->mpHeadEffector,
+    deltaTime,
+    m_pSimObject,
+    &this->mpHeadEffector->mForward);
+  UFG::AIEntityComponent::SetHeadTrackingPosition(ComponentOfType, &this->mpHeadEffector->mActivePosition);
 }
 
 // File Line: 338
 // RVA: 0x39A6E0
-void __fastcall UFG::AIAwarenessComponent::AddTargetSimObject(UFG::AIAwarenessComponent *this, UFG::SimObject *pSimObject, UFG::AIAwareness::TargetPriority priority)
+void __fastcall UFG::AIAwarenessComponent::AddTargetSimObject(
+        UFG::AIAwarenessComponent *this,
+        UFG::SimObject *pSimObject,
+        UFG::AIAwareness::TargetPriority priority)
 {
   UFG::AIAwareness::KnowledgeSpace::AddTargetSimObject(this->mpKnowledgeSpace, pSimObject, priority);
 }
@@ -626,29 +605,27 @@ void __fastcall UFG::AIAwarenessComponent::AddTargetSimObject(UFG::AIAwarenessCo
 // RVA: 0x39AED0
 void __fastcall UFG::AIAwarenessComponent::LockSimObject(UFG::AIAwarenessComponent *this, UFG::qSymbol *name)
 {
-  UFG::AIAwareness::KnowledgeSpace *v2; // r11
-  int v3; // er9
-  __int64 v4; // r10
+  UFG::AIAwareness::KnowledgeSpace *mpKnowledgeSpace; // r11
+  int v3; // r9d
+  __int64 mNumPositionCandidates; // r10
   __int64 v5; // r8
-  UFG::qSymbol *v6; // rax
+  UFG::qSymbol *i; // rax
 
-  v2 = this->mpKnowledgeSpace;
+  mpKnowledgeSpace = this->mpKnowledgeSpace;
   v3 = 0;
-  v4 = v2->mNumPositionCandidates;
+  mNumPositionCandidates = mpKnowledgeSpace->mNumPositionCandidates;
   v5 = 0i64;
-  if ( v4 > 0 )
+  if ( mNumPositionCandidates > 0 )
   {
-    v6 = &v2->mPositionCandidates[0].mName;
-    while ( v6[8].mUID != 1 || v6->mUID != name->mUID )
+    for ( i = &mpKnowledgeSpace->mPositionCandidates[0].mName; i[8].mUID != 1 || i->mUID != name->mUID; i += 14 )
     {
       ++v5;
       ++v3;
-      v6 += 14;
-      if ( v5 >= v4 )
+      if ( v5 >= mNumPositionCandidates )
         return;
     }
     if ( v3 >= 0 )
-      ++v2->mPositionCandidates[v3].mLockRefCount;
+      ++mpKnowledgeSpace->mPositionCandidates[v3].mLockRefCount;
   }
 }
 
@@ -656,36 +633,34 @@ void __fastcall UFG::AIAwarenessComponent::LockSimObject(UFG::AIAwarenessCompone
 // RVA: 0x39B500
 void __fastcall UFG::AIAwarenessComponent::UnlockSimObject(UFG::AIAwarenessComponent *this, UFG::qSymbol *name)
 {
-  UFG::AIAwareness::KnowledgeSpace *v2; // r11
-  __int64 v3; // r10
-  int v4; // er9
+  UFG::AIAwareness::KnowledgeSpace *mpKnowledgeSpace; // r11
+  __int64 mNumPositionCandidates; // r10
+  int v4; // r9d
   __int64 v5; // r8
-  UFG::qSymbol *v6; // rcx
-  signed __int64 v7; // rcx
+  UFG::qSymbol *i; // rcx
+  __int64 v7; // rcx
   int v8; // eax
 
-  v2 = this->mpKnowledgeSpace;
-  v3 = v2->mNumPositionCandidates;
+  mpKnowledgeSpace = this->mpKnowledgeSpace;
+  mNumPositionCandidates = mpKnowledgeSpace->mNumPositionCandidates;
   v4 = 0;
   v5 = 0i64;
-  if ( v3 > 0 )
+  if ( mNumPositionCandidates > 0 )
   {
-    v6 = &v2->mPositionCandidates[0].mName;
-    while ( v6[8].mUID != 1 || v6->mUID != name->mUID )
+    for ( i = &mpKnowledgeSpace->mPositionCandidates[0].mName; i[8].mUID != 1 || i->mUID != name->mUID; i += 14 )
     {
       ++v5;
       ++v4;
-      v6 += 14;
-      if ( v5 >= v3 )
+      if ( v5 >= mNumPositionCandidates )
         return;
     }
     if ( v4 >= 0 )
     {
       v7 = v4;
-      v8 = v2->mPositionCandidates[v7].mLockRefCount - 1;
+      v8 = mpKnowledgeSpace->mPositionCandidates[v7].mLockRefCount - 1;
       if ( v8 < 0 )
         LOBYTE(v8) = 0;
-      v2->mPositionCandidates[v7].mLockRefCount = v8;
+      mpKnowledgeSpace->mPositionCandidates[v7].mLockRefCount = v8;
     }
   }
 }
@@ -694,10 +669,8 @@ void __fastcall UFG::AIAwarenessComponent::UnlockSimObject(UFG::AIAwarenessCompo
 // RVA: 0x39B570
 void __fastcall UFG::AIAwarenessComponent::Update(UFG::AIAwarenessComponent *this, float deltaTime)
 {
-  UFG::AIAwarenessComponent *v2; // rbx
-  UFG::AIEntityComponent *v3; // rax
+  UFG::AIEntityComponent *ComponentOfType; // rax
 
-  v2 = this;
   if ( this->mEnabled )
   {
     this->mpHeadEffector->mpCurrentProfile = this->mpCurrentProfile;
@@ -705,17 +678,17 @@ void __fastcall UFG::AIAwarenessComponent::Update(UFG::AIAwarenessComponent *thi
     UFG::AIAwareness::KnowledgeSpace::Update(this->mpKnowledgeSpace, deltaTime);
     if ( s_EnableModule )
     {
-      UFG::AIAwarenessComponent::UpdateSensors(v2, deltaTime);
-      UFG::AIAwarenessComponent::UpdateEffectors(v2, deltaTime);
+      UFG::AIAwarenessComponent::UpdateSensors(this, deltaTime);
+      UFG::AIAwarenessComponent::UpdateEffectors(this, deltaTime);
     }
   }
   else
   {
-    v3 = (UFG::AIEntityComponent *)UFG::SimObject::GetComponentOfType(
-                                     this->m_pSimObject,
-                                     UFG::ActiveAIEntityComponent::_TypeUID);
-    if ( v3 )
-      UFG::AIEntityComponent::StopHeadTracking(v3);
+    ComponentOfType = (UFG::AIEntityComponent *)UFG::SimObject::GetComponentOfType(
+                                                  this->m_pSimObject,
+                                                  UFG::ActiveAIEntityComponent::_TypeUID);
+    if ( ComponentOfType )
+      UFG::AIEntityComponent::StopHeadTracking(ComponentOfType);
   }
 }
 

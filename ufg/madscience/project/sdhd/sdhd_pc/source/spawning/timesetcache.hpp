@@ -12,45 +12,40 @@ void __fastcall UFG::TimeBand::TimeBand(UFG::TimeBand *this)
 // RVA: 0x5B4EB0
 UFG::qBaseTreeRB *__fastcall UFG::TimeSetCache::ObtainTimeSet(UFG::TimeSetCache *this, UFG::qSymbol *timeSetName)
 {
-  UFG::qSymbol *v2; // rsi
-  unsigned int v3; // edx
+  unsigned int mUID; // edx
   UFG::qPropertySet *v4; // rbp
   UFG::qBaseTreeRB *v5; // rbx
   UFG::qBaseTreeRB *result; // rax
-  UFG::qPropertySet *v7; // rax
-  UFG::qPropertyList *v8; // rax
-  UFG::qPropertyList *v9; // r13
-  unsigned int v10; // er12
-  UFG::allocator::free_link *v11; // rax
-  UFG::allocator::free_link *v12; // rdi
-  UFG::qSymbol v13; // ecx
-  unsigned int v14; // er15
-  char *v15; // rax
-  __int64 v16; // r14
-  unsigned int v17; // ebx
+  UFG::qPropertySet *PropertySet; // rax
+  UFG::qPropertyList *v8; // r13
+  unsigned int mNumElements; // r12d
+  UFG::allocator::free_link *v10; // rax
+  UFG::allocator::free_link *v11; // rdi
+  unsigned int v12; // ecx
+  unsigned int v13; // r15d
+  char *ValuePtr; // rax
+  __int64 mNext_low; // r14
+  unsigned int v16; // ebx
+  unsigned int mNext_high; // edx
   unsigned int v18; // edx
-  unsigned int v19; // edx
-  signed __int64 v20; // rbx
-  int *v21; // rax
-  __int64 *v22; // rcx
-  int *v23; // rax
-  int *v24; // rcx
-  int *v25; // rax
-  int *v26; // rdx
-  UFG::qSymbol *v27; // rax
-  UFG::qSymbol *v28; // rcx
-  UFG::TimeSetCache *v29; // [rsp+80h] [rbp+8h]
-  UFG::allocator::free_link *v30; // [rsp+88h] [rbp+10h]
-  int v31; // [rsp+90h] [rbp+18h]
-  int v32; // [rsp+98h] [rbp+20h]
+  __int64 v19; // rbx
+  int *v20; // rax
+  __int64 *v21; // rcx
+  int *v22; // rax
+  int *v23; // rcx
+  int *v24; // rax
+  int *v25; // rdx
+  UFG::qSymbol *v26; // rax
+  UFG::qSymbol *v27; // rcx
+  UFG::allocator::free_link *v29; // [rsp+88h] [rbp+10h] BYREF
+  int v30; // [rsp+90h] [rbp+18h] BYREF
+  int v31; // [rsp+98h] [rbp+20h] BYREF
 
-  v29 = this;
-  v2 = timeSetName;
-  v3 = timeSetName->mUID;
+  mUID = timeSetName->mUID;
   v4 = 0i64;
-  if ( v3 )
+  if ( mUID )
   {
-    result = UFG::qBaseTreeRB::Get(&this->mTimeSets.mTree, v3);
+    result = UFG::qBaseTreeRB::Get(&this->mTimeSets.mTree, mUID);
     v5 = result;
     if ( result )
       return result;
@@ -59,86 +54,93 @@ UFG::qBaseTreeRB *__fastcall UFG::TimeSetCache::ObtainTimeSet(UFG::TimeSetCache 
   {
     v5 = 0i64;
   }
-  v7 = UFG::PropertySetManager::GetPropertySet(v2);
-  if ( !v7 )
+  PropertySet = UFG::PropertySetManager::GetPropertySet(timeSetName);
+  if ( !PropertySet )
     return v5;
-  v8 = UFG::qPropertySet::Get<UFG::qPropertyList>(v7, (UFG::qSymbol *)&qSymbol_TimeSetList.mUID, DEPTH_RECURSE);
-  v9 = v8;
-  v10 = v8->mNumElements;
-  v11 = UFG::qMalloc(0x30ui64, "TimeSet", 0i64);
-  v12 = v11;
-  v30 = v11;
-  if ( v11 )
+  v8 = UFG::qPropertySet::Get<UFG::qPropertyList>(
+         PropertySet,
+         (UFG::qArray<unsigned long,0> *)&qSymbol_TimeSetList,
+         DEPTH_RECURSE);
+  mNumElements = v8->mNumElements;
+  v10 = UFG::qMalloc(0x30ui64, "TimeSet", 0i64);
+  v11 = v10;
+  v29 = v10;
+  if ( v10 )
   {
-    v13.mUID = v2->mUID;
-    v11->mNext = 0i64;
-    v11[1].mNext = 0i64;
-    v11[2].mNext = 0i64;
-    LODWORD(v11[3].mNext) = v13;
-    v11[5].mNext = 0i64;
-    v11[4].mNext = 0i64;
+    v12 = timeSetName->mUID;
+    v10->mNext = 0i64;
+    v10[1].mNext = 0i64;
+    v10[2].mNext = 0i64;
+    LODWORD(v10[3].mNext) = v12;
+    v10[5].mNext = 0i64;
+    v10[4].mNext = 0i64;
   }
   else
   {
-    v12 = 0i64;
+    v11 = 0i64;
   }
-  if ( v10 > HIDWORD(v12[4].mNext) )
-    UFG::qArray<UFG::TimeBand,0>::Reallocate((UFG::qArray<UFG::TimeBand,0> *)&v12[4], v10, "TimeSetCache");
-  v14 = 0;
-  if ( v10 )
+  if ( mNumElements > HIDWORD(v11[4].mNext) )
+    UFG::qArray<UFG::TimeBand,0>::Reallocate((UFG::qArray<UFG::TimeBand,0> *)&v11[4], mNumElements, "TimeSetCache");
+  v13 = 0;
+  if ( mNumElements )
   {
-    LODWORD(v30) = -3;
+    LODWORD(v29) = -3;
+    v30 = -1;
     v31 = -1;
-    v32 = -1;
     do
     {
-      v15 = UFG::qPropertyList::GetValuePtr(v9, 0x1Au, v14);
-      if ( v15 && *(_QWORD *)v15 )
-        v4 = (UFG::qPropertySet *)&v15[*(_QWORD *)v15];
-      v16 = LODWORD(v12[4].mNext);
-      v17 = v16 + 1;
-      v18 = HIDWORD(v12[4].mNext);
-      if ( (signed int)v16 + 1 > v18 )
+      ValuePtr = UFG::qPropertyList::GetValuePtr(v8, 0x1Au, v13);
+      if ( ValuePtr && *(_QWORD *)ValuePtr )
+        v4 = (UFG::qPropertySet *)&ValuePtr[*(_QWORD *)ValuePtr];
+      mNext_low = LODWORD(v11[4].mNext);
+      v16 = mNext_low + 1;
+      mNext_high = HIDWORD(v11[4].mNext);
+      if ( (int)mNext_low + 1 > mNext_high )
       {
-        if ( v18 )
-          v19 = 2 * v18;
+        if ( mNext_high )
+          v18 = 2 * mNext_high;
         else
-          v19 = 1;
-        for ( ; v19 < v17; v19 *= 2 )
+          v18 = 1;
+        for ( ; v18 < v16; v18 *= 2 )
           ;
-        if ( v19 - v17 > 0x10000 )
-          v19 = v16 + 65537;
-        UFG::qArray<UFG::TimeBand,0>::Reallocate((UFG::qArray<UFG::TimeBand,0> *)&v12[4], v19, "qArray.Add");
+        if ( v18 - v16 > 0x10000 )
+          v18 = mNext_low + 65537;
+        UFG::qArray<UFG::TimeBand,0>::Reallocate((UFG::qArray<UFG::TimeBand,0> *)&v11[4], v18, "qArray.Add");
       }
-      LODWORD(v12[4].mNext) = v17;
-      v20 = (signed __int64)&v12[5].mNext[4 * v16];
-      v21 = UFG::qPropertySet::Get<long>(v4, (UFG::qSymbol *)&qSymbol_TimeSetSpawnPopulation.mUID, DEPTH_RECURSE);
-      v22 = (__int64 *)&v30;
-      if ( v21 )
-        v22 = (__int64 *)v21;
-      *(_DWORD *)(v20 + 24) = *(_DWORD *)v22;
-      v23 = UFG::qPropertySet::Get<long>(v4, (UFG::qSymbol *)&qSymbol_OnTime.mUID, DEPTH_RECURSE);
-      v24 = &v31;
-      if ( v23 )
-        v24 = v23;
-      *(_DWORD *)(v20 + 16) = *v24;
-      v25 = UFG::qPropertySet::Get<long>(v4, (UFG::qSymbol *)&qSymbol_OffTime.mUID, DEPTH_RECURSE);
-      v26 = &v32;
-      if ( v25 )
-        v26 = v25;
-      *(_DWORD *)(v20 + 20) = *v26;
-      v27 = UFG::qPropertySet::Get<UFG::qSymbol>(v4, (UFG::qSymbol *)&qSymbol_SpawnSet.mUID, DEPTH_RECURSE);
-      v28 = &UFG::gNullQSymbol;
-      if ( v27 )
-        v28 = v27;
-      *(UFG::qSymbol *)v20 = (UFG::qSymbol)v28->mUID;
-      *(_QWORD *)(v20 + 8) = UFG::PropertySetManager::GetPropertySet((UFG::qSymbol *)v20);
-      ++v14;
+      LODWORD(v11[4].mNext) = v16;
+      v19 = (__int64)&v11[5].mNext[4 * mNext_low];
+      v20 = UFG::qPropertySet::Get<long>(
+              v4,
+              (UFG::qArray<unsigned long,0> *)&qSymbol_TimeSetSpawnPopulation,
+              DEPTH_RECURSE);
+      v21 = (__int64 *)&v29;
+      if ( v20 )
+        v21 = (__int64 *)v20;
+      *(_DWORD *)(v19 + 24) = *(_DWORD *)v21;
+      v22 = UFG::qPropertySet::Get<long>(v4, (UFG::qArray<unsigned long,0> *)&qSymbol_OnTime, DEPTH_RECURSE);
+      v23 = &v30;
+      if ( v22 )
+        v23 = v22;
+      *(_DWORD *)(v19 + 16) = *v23;
+      v24 = UFG::qPropertySet::Get<long>(v4, (UFG::qArray<unsigned long,0> *)&qSymbol_OffTime, DEPTH_RECURSE);
+      v25 = &v31;
+      if ( v24 )
+        v25 = v24;
+      *(_DWORD *)(v19 + 20) = *v25;
+      v26 = UFG::qPropertySet::Get<UFG::qSymbol>(v4, (UFG::qArray<unsigned long,0> *)&qSymbol_SpawnSet, DEPTH_RECURSE);
+      v27 = &UFG::gNullQSymbol;
+      if ( v26 )
+        v27 = v26;
+      *(UFG::qSymbol *)v19 = (UFG::qSymbol)v27->mUID;
+      *(_QWORD *)(v19 + 8) = UFG::PropertySetManager::GetPropertySet((UFG::qSymbol *)v19);
+      ++v13;
       v4 = 0i64;
     }
-    while ( v14 < v10 );
+    while ( v13 < mNumElements );
   }
-  UFG::qBaseTreeRB::Add(&v29->mTimeSets.mTree, (UFG::qBaseNodeRB *)v12);
-  return (UFG::qBaseTreeRB *)v12;
-}
+  UFG::qBaseTreeRB::Add(&this->mTimeSets.mTree, (UFG::qBaseNodeRB *)v11);
+  return (UFG::qBaseTreeRB *)v11;
+}mElements );
+  }
+  UFG::qBaseTreeRB::Add(&this->mTimeSets.mTree, (U
 

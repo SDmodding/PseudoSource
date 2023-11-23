@@ -1,141 +1,132 @@
 // File Line: 48
 // RVA: 0x44AAC0
-void __fastcall UFG::PhysicsMotorBike::PhysicsMotorBike(UFG::PhysicsMotorBike *this, UFG::VehicleParams *param, UFG::qMatrix44 *transform, UFG::qVector3 *velocity, UFG::qVector3 *wheelPositions)
+void __fastcall UFG::PhysicsMotorBike::PhysicsMotorBike(
+        UFG::PhysicsMotorBike *this,
+        UFG::VehicleParams *param,
+        UFG::qMatrix44 *transform,
+        UFG::qVector3 *velocity,
+        UFG::qVector3 *wheelPositions)
 {
-  UFG::PhysicsMotorBike *v5; // rbx
   UFG::qPidController *v6; // rdi
   UFG::allocator::free_link *v7; // rax
   UFG::qPidController *v8; // rax
   UFG::allocator::free_link *v9; // rax
   UFG::qPidController *v10; // rax
 
-  v5 = this;
-  UFG::PhysicsWheeledVehicle::PhysicsWheeledVehicle(
-    (UFG::PhysicsWheeledVehicle *)&this->vfptr,
-    param,
-    transform,
-    velocity,
-    wheelPositions);
-  v5->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::PhysicsMotorBike::`vftable;
+  UFG::PhysicsWheeledVehicle::PhysicsWheeledVehicle(this, param, transform, velocity, wheelPositions);
+  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::PhysicsMotorBike::`vftable;
   v6 = 0i64;
-  v5->mLeanAngle = 0.0;
-  v5->mWheelieTorqueBoostCounter = 0.0;
-  *(_WORD *)&v5->mDidStabilizationJustSwitchOff = 0;
-  v5->mRotMassScaleForCollisions = 3.0;
+  this->mLeanAngle = 0.0;
+  this->mWheelieTorqueBoostCounter = 0.0;
+  *(_WORD *)&this->mDidStabilizationJustSwitchOff = 0;
+  this->mRotMassScaleForCollisions = 3.0;
   v7 = UFG::qMalloc(0xB0ui64, "WheeliePidController", 0i64);
   if ( v7 )
     UFG::qPidController::qPidController((UFG::qPidController *)v7);
   else
     v8 = 0i64;
-  v5->mWheeliePidController = v8;
+  this->mWheeliePidController = v8;
   v9 = UFG::qMalloc(0xB0ui64, "mLeanPidController", 0i64);
   if ( v9 )
   {
     UFG::qPidController::qPidController((UFG::qPidController *)v9);
     v6 = v10;
   }
-  v5->mLeanPidController = v6;
-  UFG::PhysicsMotorBike::LoadProperties(v5);
-  v5->mDefaultCentreOfMass = v5->mRigidBody->mBody->m_motion.m_motionState.m_sweptTransform.m_centerOfMassLocal;
-  UFG::PhysicsMotorBike::SetupConstraints(v5, UFG::BasePhysicsSystem::mInstance->mWorld);
+  this->mLeanPidController = v6;
+  UFG::PhysicsMotorBike::LoadProperties(this);
+  this->mDefaultCentreOfMass = this->mRigidBody->mBody->m_motion.m_motionState.m_sweptTransform.m_centerOfMassLocal;
+  UFG::PhysicsMotorBike::SetupConstraints(this, UFG::BasePhysicsSystem::mInstance->mWorld);
 }
 
 // File Line: 65
 // RVA: 0x4503D0
 void __fastcall UFG::PhysicsMotorBike::~PhysicsMotorBike(UFG::PhysicsMotorBike *this)
 {
-  UFG::PhysicsMotorBike *v1; // rbx
-  UFG::qPidController *v2; // rdi
-  UFG::qPidControllerCore *v3; // rdi
-  hkpConstraintInstance *v4; // rdx
+  UFG::qPidController *mWheeliePidController; // rdi
+  UFG::qPidController *mLeanPidController; // rdi
+  hkpConstraintInstance *mConstraint; // rdx
 
-  v1 = this;
   this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::PhysicsMotorBike::`vftable;
-  v2 = this->mWheeliePidController;
-  if ( v2 )
+  mWheeliePidController = this->mWheeliePidController;
+  if ( mWheeliePidController )
   {
-    UFG::qPidControllerCore::~qPidControllerCore((UFG::qPidControllerCore *)&v2->m_Parameters);
-    operator delete[](v2);
+    UFG::qPidControllerCore::~qPidControllerCore(mWheeliePidController);
+    operator delete[](mWheeliePidController);
   }
-  v3 = (UFG::qPidControllerCore *)&v1->mLeanPidController->m_Parameters;
-  if ( v3 )
+  mLeanPidController = this->mLeanPidController;
+  if ( mLeanPidController )
   {
-    UFG::qPidControllerCore::~qPidControllerCore(v3);
-    operator delete[](v3);
+    UFG::qPidControllerCore::~qPidControllerCore(mLeanPidController);
+    operator delete[](mLeanPidController);
   }
-  v4 = v1->mConstraint;
-  if ( v4 )
+  mConstraint = this->mConstraint;
+  if ( mConstraint )
   {
-    UFG::BasePhysicsSystem::RemoveConstraint(UFG::BasePhysicsSystem::mInstance, v4);
-    hkReferencedObject::removeReference((hkReferencedObject *)&v1->mConstraint->vfptr);
-    v1->mConstraint = 0i64;
+    UFG::BasePhysicsSystem::RemoveConstraint(UFG::BasePhysicsSystem::mInstance, mConstraint);
+    hkReferencedObject::removeReference(this->mConstraint);
+    this->mConstraint = 0i64;
   }
-  v1->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::PhysicsWheeledVehicle::`vftable;
-  UFG::PhysicsWheeledVehicle::DeleteWheeledVehicleComponents((UFG::PhysicsWheeledVehicle *)&v1->vfptr);
-  UFG::PhysicsVehicle::~PhysicsVehicle((UFG::PhysicsVehicle *)&v1->vfptr);
+  this->vfptr = (UFG::BasePhysicsObjectVtbl *)&UFG::PhysicsWheeledVehicle::`vftable;
+  UFG::PhysicsWheeledVehicle::DeleteWheeledVehicleComponents(this);
+  UFG::PhysicsVehicle::~PhysicsVehicle(this);
 }
 
 // File Line: 84
 // RVA: 0x472BA0
 void __fastcall UFG::PhysicsMotorBike::Reload(UFG::PhysicsMotorBike *this, UFG::qSymbol *propertySetName)
 {
-  UFG::PhysicsMotorBike *v2; // rbx
-
-  v2 = this;
-  UFG::PhysicsWheeledVehicle::Reload((UFG::PhysicsWheeledVehicle *)&this->vfptr, propertySetName);
-  UFG::PhysicsMotorBike::LoadProperties(v2);
+  UFG::PhysicsWheeledVehicle::Reload(this, propertySetName);
+  UFG::PhysicsMotorBike::LoadProperties(this);
 }
 
 // File Line: 92
 // RVA: 0x46B8D0
 void __fastcall UFG::PhysicsMotorBike::LoadProperties(UFG::PhysicsMotorBike *this)
 {
-  UFG::PhysicsMotorBike *v1; // rbx
-  UFG::BikePhysicsDef *v2; // rcx
-  float v3; // xmm2_4
-  float v4; // xmm1_4
-  float *v5; // rax
+  UFG::BikePhysicsDef *mData; // rcx
+  float lean_PID_d; // xmm2_4
+  float mLeanPID_i; // xmm1_4
+  UFG::qPidController *mLeanPidController; // rax
   UFG::BikePhysicsDef *v6; // rcx
-  float v7; // xmm2_4
-  float v8; // xmm1_4
-  float *v9; // rax
-  UFG::qReflectHandleBase v10; // [rsp+28h] [rbp-30h]
+  float wheelie_PID_d; // xmm2_4
+  float mWheeliePID_i; // xmm1_4
+  UFG::qPidController *mWheeliePidController; // rax
+  UFG::qReflectHandleBase v10; // [rsp+28h] [rbp-30h] BYREF
 
-  v1 = this;
   UFG::qReflectHandleBase::qReflectHandleBase(&v10);
   v10.mTypeUID = UFG::qStringHash64("UFG::BikePhysicsDef", 0xFFFFFFFFFFFFFFFFui64);
-  UFG::qReflectHandleBase::Init(&v10, v10.mTypeUID, v1->mDnaDefinition.mData->mBaseNode.mUID);
-  v2 = (UFG::BikePhysicsDef *)v10.mData;
-  v1->mLeanDesiredLo = (float)(*((float *)v10.mData[8].mBaseNode.mNeighbours + 1) * 3.1415927) * 0.0055555557;
-  v1->mLeanDesiredHi = (float)(v2->lean_DesiredHi * 3.1415927) * 0.0055555557;
-  v1->mLeanMinSpeed = v2->lean_MinSpeed;
-  v1->mLeanMaxSpeed = v2->lean_MaxSpeed;
-  v1->mLeanPID_p = v2->lean_PID_p;
-  v1->mLeanPID_i = v2->lean_PID_i;
-  v3 = v2->lean_PID_d;
-  v1->mLeanPID_d = v3;
-  v4 = v1->mLeanPID_i;
-  v5 = (float *)v1->mLeanPidController;
-  v5[38] = v1->mLeanPID_p;
-  v5[39] = v4;
-  v5[40] = v3;
+  UFG::qReflectHandleBase::Init(&v10, v10.mTypeUID, this->mDnaDefinition.mData->mBaseNode.mUID);
+  mData = (UFG::BikePhysicsDef *)v10.mData;
+  this->mLeanDesiredLo = (float)(*((float *)v10.mData[8].mBaseNode.mNeighbours + 1) * 3.1415927) * 0.0055555557;
+  this->mLeanDesiredHi = (float)(mData->lean_DesiredHi * 3.1415927) * 0.0055555557;
+  this->mLeanMinSpeed = mData->lean_MinSpeed;
+  this->mLeanMaxSpeed = mData->lean_MaxSpeed;
+  this->mLeanPID_p = mData->lean_PID_p;
+  this->mLeanPID_i = mData->lean_PID_i;
+  lean_PID_d = mData->lean_PID_d;
+  this->mLeanPID_d = lean_PID_d;
+  mLeanPID_i = this->mLeanPID_i;
+  mLeanPidController = this->mLeanPidController;
+  mLeanPidController->m_ParameterBlock.m_P_Coefficient = this->mLeanPID_p;
+  mLeanPidController->m_ParameterBlock.m_I_Coefficient = mLeanPID_i;
+  mLeanPidController->m_ParameterBlock.m_D_Coefficient = lean_PID_d;
   v6 = (UFG::BikePhysicsDef *)v10.mData;
-  v1->mWheelieSteerRate = *(float *)&v10.mData[8].mHandles.mNode.mNext;
-  v1->mWheelieAngle = (float)(v6->wheelie_Angle * 3.1415927) * 0.0055555557;
-  v1->mBrakingWheelieAngle = (float)(v6->wheelie_BrakingAngle * 3.1415927) * 0.0055555557;
-  v1->mBrakingWheelieYaw = v6->wheelie_BrakingYaw;
-  v1->mWheelieTorqueBoost = v6->wheelie_TorqueBoost;
-  v1->mWheelieTorqueBoostTime = v6->wheelie_TorqueBoostTime;
-  v1->mWheeliePID_p = v6->wheelie_PID_p;
-  v1->mWheeliePID_i = v6->wheelie_PID_i;
-  v7 = v6->wheelie_PID_d;
-  v1->mWheeliePID_d = v7;
-  v8 = v1->mWheeliePID_i;
-  v9 = (float *)v1->mWheeliePidController;
-  v9[38] = v1->mWheeliePID_p;
-  v9[39] = v8;
-  v9[40] = v7;
-  v1->mTuckDragBoost = *(float *)v10.mData[8].mBaseNode.mNeighbours;
+  this->mWheelieSteerRate = *(float *)&v10.mData[8].mHandles.mNode.mNext;
+  this->mWheelieAngle = (float)(v6->wheelie_Angle * 3.1415927) * 0.0055555557;
+  this->mBrakingWheelieAngle = (float)(v6->wheelie_BrakingAngle * 3.1415927) * 0.0055555557;
+  this->mBrakingWheelieYaw = v6->wheelie_BrakingYaw;
+  this->mWheelieTorqueBoost = v6->wheelie_TorqueBoost;
+  this->mWheelieTorqueBoostTime = v6->wheelie_TorqueBoostTime;
+  this->mWheeliePID_p = v6->wheelie_PID_p;
+  this->mWheeliePID_i = v6->wheelie_PID_i;
+  wheelie_PID_d = v6->wheelie_PID_d;
+  this->mWheeliePID_d = wheelie_PID_d;
+  mWheeliePID_i = this->mWheeliePID_i;
+  mWheeliePidController = this->mWheeliePidController;
+  mWheeliePidController->m_ParameterBlock.m_P_Coefficient = this->mWheeliePID_p;
+  mWheeliePidController->m_ParameterBlock.m_I_Coefficient = mWheeliePID_i;
+  mWheeliePidController->m_ParameterBlock.m_D_Coefficient = wheelie_PID_d;
+  this->mTuckDragBoost = *(float *)v10.mData[8].mBaseNode.mNeighbours;
   UFG::qReflectHandleBase::~qReflectHandleBase(&v10);
 }
 
@@ -143,54 +134,45 @@ void __fastcall UFG::PhysicsMotorBike::LoadProperties(UFG::PhysicsMotorBike *thi
 // RVA: 0x475930
 void __fastcall UFG::PhysicsMotorBike::SetupConstraints(UFG::PhysicsMotorBike *this, hkpWorld *world)
 {
-  hkpWorld *v2; // rsi
-  UFG::PhysicsMotorBike *v3; // rdi
-  signed __int64 v4; // rbx
+  __int64 v4; // rbx
   char v5; // r8
-  __int64 v6; // rax
-  char v7; // cl
-  _QWORD **v8; // rax
+  char v6; // cl
+  _QWORD **Value; // rax
+  hkpGenericConstraintData *v8; // rax
   hkpGenericConstraintData *v9; // rax
-  hkpGenericConstraintData *v10; // rax
-  char v11; // al
-  char v12; // dl
-  __int64 v13; // rax
-  char v14; // cl
-  _QWORD **v15; // rax
-  hkpConstraintInstance *v16; // rax
-  hkpConstraintInstance *v17; // rax
-  char v18; // al
-  hkpConstraintConstructionKit v19; // [rsp+30h] [rbp-98h]
-  __int64 v20; // [rsp+58h] [rbp-70h]
-  hkMatrix3f dofBasis; // [rsp+60h] [rbp-68h]
-  hkMatrix3f v22; // [rsp+90h] [rbp-38h]
+  char v10; // al
+  char v11; // dl
+  char v12; // cl
+  _QWORD **v13; // rax
+  hkpConstraintInstance *v14; // rax
+  hkpConstraintInstance *v15; // rax
+  char v16; // al
+  hkpConstraintConstructionKit v17; // [rsp+30h] [rbp-98h] BYREF
+  __int64 v18; // [rsp+58h] [rbp-70h]
+  hkMatrix3f dofBasis; // [rsp+60h] [rbp-68h] BYREF
+  hkMatrix3f v20; // [rsp+90h] [rbp-38h] BYREF
 
-  v20 = -2i64;
-  v2 = world;
-  v3 = this;
+  v18 = -2i64;
   v4 = *((_QWORD *)NtCurrentTeb()->Reserved1[11] + tls_index) + 16i64;
   v5 = ++*(_BYTE *)(v4 + 80);
-  v6 = v5;
-  *(_DWORD *)(v4 + 4 * v6) = 3;
-  *(_QWORD *)(v4 + 8 * v6 + 16) = "hkpGenericConstraintData";
-  *(_QWORD *)(v4 + 8 * v6 + 48) = 0i64;
-  v7 = *(_BYTE *)(v4 + 81);
-  if ( v5 > v7 )
-    v7 = v5;
-  *(_BYTE *)(v4 + 81) = v7;
-  v8 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v9 = (hkpGenericConstraintData *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v8[11] + 8i64))(
-                                     v8[11],
-                                     144i64);
-  if ( v9 )
-    hkpGenericConstraintData::hkpGenericConstraintData(v9);
+  *(_DWORD *)(v4 + 4i64 * v5) = 3;
+  *(_QWORD *)(v4 + 8i64 * v5 + 16) = "hkpGenericConstraintData";
+  *(_QWORD *)(v4 + 8i64 * v5 + 48) = 0i64;
+  v6 = *(_BYTE *)(v4 + 81);
+  if ( v5 > v6 )
+    v6 = v5;
+  *(_BYTE *)(v4 + 81) = v6;
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v8 = (hkpGenericConstraintData *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 144i64);
+  if ( v8 )
+    hkpGenericConstraintData::hkpGenericConstraintData(v8);
   else
-    v10 = 0i64;
-  v3->mGenericConstraintData = v10;
-  v11 = *(_BYTE *)(v4 + 80);
-  if ( v11 > 0 )
+    v9 = 0i64;
+  this->mGenericConstraintData = v9;
+  v10 = *(_BYTE *)(v4 + 80);
+  if ( v10 > 0 )
   {
-    *(_BYTE *)(v4 + 80) = v11 - 1;
+    *(_BYTE *)(v4 + 80) = v10 - 1;
   }
   else
   {
@@ -199,44 +181,41 @@ void __fastcall UFG::PhysicsMotorBike::SetupConstraints(UFG::PhysicsMotorBike *t
     *(_QWORD *)(v4 + 16) = 0i64;
     *(_QWORD *)(v4 + 48) = 0i64;
   }
-  hkpConstraintConstructionKit::begin(&v19, v3->mGenericConstraintData);
+  hkpConstraintConstructionKit::begin(&v17, this->mGenericConstraintData);
   dofBasis.m_col0 = (hkVector4f)transform.m_quad;
   dofBasis.m_col1 = (hkVector4f)direction.m_quad;
   dofBasis.m_col2 = (hkVector4f)stru_141A71280.m_quad;
-  v22.m_col0 = (hkVector4f)transform.m_quad;
-  v22.m_col1 = (hkVector4f)direction.m_quad;
-  v22.m_col2 = (hkVector4f)stru_141A71280.m_quad;
-  v3->mBasisIndexA = hkpConstraintConstructionKit::setAngularBasisA(&v19, &dofBasis);
-  v3->mBasisIndexB = hkpConstraintConstructionKit::setAngularBasisB(&v19, &v22);
-  hkpConstraintConstructionKit::setAngularLimit(&v19, 0, 0.001, -0.001);
-  hkpConstraintConstructionKit::end(&v19);
-  v12 = ++*(_BYTE *)(v4 + 80);
-  v13 = v12;
-  *(_DWORD *)(v4 + 4 * v13) = 3;
-  *(_QWORD *)(v4 + 8 * v13 + 16) = "hkpConstraintInstance";
-  *(_QWORD *)(v4 + 8 * v13 + 48) = 0i64;
-  v14 = *(_BYTE *)(v4 + 81);
-  if ( v12 > v14 )
-    v14 = v12;
-  *(_BYTE *)(v4 + 81) = v14;
-  v15 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v16 = (hkpConstraintInstance *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v15[11] + 8i64))(
-                                   v15[11],
-                                   112i64);
-  if ( v16 )
+  v20.m_col0 = (hkVector4f)transform.m_quad;
+  v20.m_col1 = (hkVector4f)direction.m_quad;
+  v20.m_col2 = (hkVector4f)stru_141A71280.m_quad;
+  this->mBasisIndexA = hkpConstraintConstructionKit::setAngularBasisA(&v17, &dofBasis);
+  this->mBasisIndexB = hkpConstraintConstructionKit::setAngularBasisB(&v17, &v20);
+  hkpConstraintConstructionKit::setAngularLimit(&v17, 0, 0.001, -0.001);
+  hkpConstraintConstructionKit::end(&v17);
+  v11 = ++*(_BYTE *)(v4 + 80);
+  *(_DWORD *)(v4 + 4i64 * v11) = 3;
+  *(_QWORD *)(v4 + 8i64 * v11 + 16) = "hkpConstraintInstance";
+  *(_QWORD *)(v4 + 8i64 * v11 + 48) = 0i64;
+  v12 = *(_BYTE *)(v4 + 81);
+  if ( v11 > v12 )
+    v12 = v11;
+  *(_BYTE *)(v4 + 81) = v12;
+  v13 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v14 = (hkpConstraintInstance *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v13[11] + 8i64))(v13[11], 112i64);
+  if ( v14 )
     hkpConstraintInstance::hkpConstraintInstance(
-      v16,
-      (hkpEntity *)&v2->m_fixedRigidBody->vfptr,
-      (hkpEntity *)&v3->mRigidBody->mBody->vfptr,
-      (hkpConstraintData *)&v3->mGenericConstraintData->vfptr,
+      v14,
+      world->m_fixedRigidBody,
+      this->mRigidBody->mBody,
+      this->mGenericConstraintData,
       PRIORITY_PSI);
   else
-    v17 = 0i64;
-  v3->mConstraint = v17;
-  v18 = *(_BYTE *)(v4 + 80);
-  if ( v18 > 0 )
+    v15 = 0i64;
+  this->mConstraint = v15;
+  v16 = *(_BYTE *)(v4 + 80);
+  if ( v16 > 0 )
   {
-    *(_BYTE *)(v4 + 80) = v18 - 1;
+    *(_BYTE *)(v4 + 80) = v16 - 1;
   }
   else
   {
@@ -245,28 +224,26 @@ void __fastcall UFG::PhysicsMotorBike::SetupConstraints(UFG::PhysicsMotorBike *t
     *(_QWORD *)(v4 + 16) = 0i64;
     *(_QWORD *)(v4 + 48) = 0i64;
   }
-  hkReferencedObject::removeReference((hkReferencedObject *)&v3->mGenericConstraintData->vfptr);
+  hkReferencedObject::removeReference(this->mGenericConstraintData);
 }
 
 // File Line: 161
 // RVA: 0x47E5C0
 void __fastcall UFG::PhysicsMotorBike::UpdateConstraints(UFG::PhysicsMotorBike *this, float deltaTime)
 {
-  hkpConstraintInstance *v2; // rdx
-  UFG::PhysicsMotorBike *v3; // rbx
-  UFG::RigidBodyComponent *v4; // rax
+  hkpConstraintInstance *mConstraint; // rdx
+  UFG::RigidBodyComponent *mRigidBody; // rax
   hkQuaternionf *v5; // rcx
-  float v6; // xmm7_4
   hkpConstraintInstance *v7; // rdx
-  __m128 v8; // xmm8
+  __m128 m_quad; // xmm8
   __m128 v9; // xmm1
   __m128 v10; // xmm3
   __m128 v11; // xmm2
   __m128 v12; // xmm6
   __m128 v13; // xmm3
   float v14; // xmm2_4
-  int v15; // edx
-  hkpGenericConstraintData *v16; // rcx
+  int mBasisIndexA; // edx
+  hkpGenericConstraintData *mGenericConstraintData; // rcx
   __m128 v17; // xmm5
   __m128 v18; // xmm8
   __m128 v19; // xmm8
@@ -278,42 +255,40 @@ void __fastcall UFG::PhysicsMotorBike::UpdateConstraints(UFG::PhysicsMotorBike *
   __m128 v25; // xmm1
   __m128 v26; // xmm2
   __m128 v27; // xmm1
-  UFG::VehicleInstance *v28; // rax
-  float v29; // xmm4_4
+  UFG::VehicleInstance *mHavokVehicle; // rax
+  float m_mainSteeringAngle; // xmm4_4
   float v30; // xmm1_4
-  float v31; // xmm0_4
-  float v32; // xmm2_4
+  float mLeanDesiredHi; // xmm0_4
+  float mLeanDesiredLo; // xmm2_4
   float v33; // xmm3_4
   float v34; // xmm8_4
   float v35; // xmm5_4
   float v36; // xmm9_4
   float v37; // xmm6_4
   float v38; // xmm6_4
-  float v39; // xmm0_4
-  float v40; // xmm1_4
+  float Output; // xmm0_4
+  float mLeanAngle; // xmm1_4
   float v41; // xmm0_4
   float v42; // xmm1_4
   hkpGenericConstraintData *v43; // rcx
   int v44; // edx
   __m128 v45; // xmm2
-  hkVector4f direction; // [rsp+20h] [rbp-79h]
-  hkVector4f v47; // [rsp+30h] [rbp-69h]
-  hkVector4f newValues; // [rsp+40h] [rbp-59h]
-  hkVector4f axis; // [rsp+50h] [rbp-49h]
-  hkVector4f v50; // [rsp+60h] [rbp-39h]
-  hkQuaternionf quat; // [rsp+70h] [rbp-29h]
+  hkVector4f direction; // [rsp+20h] [rbp-79h] BYREF
+  hkVector4f v47; // [rsp+30h] [rbp-69h] BYREF
+  hkVector4f newValues; // [rsp+40h] [rbp-59h] BYREF
+  hkVector4f axis; // [rsp+50h] [rbp-49h] BYREF
+  hkVector4f v50; // [rsp+60h] [rbp-39h] BYREF
+  hkQuaternionf quat; // [rsp+70h] [rbp-29h] BYREF
 
-  v2 = this->mConstraint;
-  v3 = this;
-  v4 = this->mRigidBody;
-  v5 = (hkQuaternionf *)v2->m_entities[1];
-  v6 = deltaTime;
-  if ( v4->mBody->m_world )
+  mConstraint = this->mConstraint;
+  mRigidBody = this->mRigidBody;
+  v5 = (hkQuaternionf *)mConstraint->m_entities[1];
+  if ( mRigidBody->mBody->m_world )
   {
-    if ( v3->mDisableConstraint )
+    if ( this->mDisableConstraint )
     {
-      if ( v2->m_owner )
-        UFG::BasePhysicsSystem::RemoveConstraint(UFG::BasePhysicsSystem::mInstance, v2);
+      if ( mConstraint->m_owner )
+        UFG::BasePhysicsSystem::RemoveConstraint(UFG::BasePhysicsSystem::mInstance, mConstraint);
       return;
     }
     axis.m_quad = (__m128)_xmm;
@@ -322,48 +297,48 @@ void __fastcall UFG::PhysicsMotorBike::UpdateConstraints(UFG::PhysicsMotorBike *
     v50.m_quad = _xmm;
     v47.m_quad = _xmm;
     hkVector4f::setRotatedDir(&direction, v5 + 30, &direction);
-    v7 = v3->mConstraint;
+    v7 = this->mConstraint;
     direction.m_quad.m128_i32[3] = 0;
-    v8 = v47.m_quad;
+    m_quad = v47.m_quad;
     v9 = _mm_mul_ps(direction.m_quad, direction.m_quad);
     v10 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v9, v9, 85), _mm_shuffle_ps(v9, v9, 0)), _mm_shuffle_ps(v9, v9, 170));
     v11 = _mm_rsqrt_ps(v10);
     v12 = _mm_mul_ps(
             direction.m_quad,
             _mm_andnot_ps(
-              _mm_cmpleps(v10, (__m128)0i64),
+              _mm_cmple_ps(v10, (__m128)0i64),
               _mm_mul_ps(
                 _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v11, v10), v11)),
                 _mm_mul_ps(v11, *(__m128 *)_xmm))));
     v13 = _mm_mul_ps(v47.m_quad, v12);
     direction.m_quad = v12;
     LODWORD(v14) = COERCE_UNSIGNED_INT(
-                     (float)(COERCE_FLOAT(_mm_shuffle_ps(v13, v13, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v13, v13, 0)))
-                   + COERCE_FLOAT(_mm_shuffle_ps(v13, v13, 170))) & _xmm;
+                     (float)(_mm_shuffle_ps(v13, v13, 85).m128_f32[0] + _mm_shuffle_ps(v13, v13, 0).m128_f32[0])
+                   + _mm_shuffle_ps(v13, v13, 170).m128_f32[0]) & _xmm;
     if ( v7->m_owner )
     {
       if ( v14 <= 0.94999999 )
         goto LABEL_13;
       UFG::BasePhysicsSystem::RemoveConstraint(UFG::BasePhysicsSystem::mInstance, v7);
-      v3->mDidStabilizationJustSwitchOff = 1;
+      this->mDidStabilizationJustSwitchOff = 1;
     }
     else
     {
-      if ( v3->mDidStabilizationJustSwitchOff
+      if ( this->mDidStabilizationJustSwitchOff
         || COERCE_FLOAT(COERCE_UNSIGNED_INT(
-                          (float)(COERCE_FLOAT(_mm_shuffle_ps(v13, v13, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v13, v13, 0)))
-                        + COERCE_FLOAT(_mm_shuffle_ps(v13, v13, 170))) & _xmm) > 0.5 )
+                          (float)(_mm_shuffle_ps(v13, v13, 85).m128_f32[0] + _mm_shuffle_ps(v13, v13, 0).m128_f32[0])
+                        + _mm_shuffle_ps(v13, v13, 170).m128_f32[0]) & _xmm) > 0.5 )
       {
 LABEL_12:
         if ( v14 > 0.94999999 )
           return;
 LABEL_13:
-        if ( v6 <= 0.0 )
+        if ( deltaTime <= 0.0 )
           return;
-        v15 = v3->mBasisIndexA;
-        v16 = v3->mGenericConstraintData;
+        mBasisIndexA = this->mBasisIndexA;
+        mGenericConstraintData = this->mGenericConstraintData;
         v17 = _mm_shuffle_ps(v12, v12, 201);
-        v18 = _mm_sub_ps(_mm_mul_ps(v8, v17), _mm_mul_ps(_mm_shuffle_ps(v8, v8, 201), v12));
+        v18 = _mm_sub_ps(_mm_mul_ps(m_quad, v17), _mm_mul_ps(_mm_shuffle_ps(m_quad, m_quad, 201), v12));
         v19 = _mm_shuffle_ps(v18, v18, 201);
         v20 = _mm_mul_ps(v19, v19);
         v21 = _mm_add_ps(
@@ -373,7 +348,7 @@ LABEL_13:
         newValues.m_quad = _mm_mul_ps(
                              v19,
                              _mm_andnot_ps(
-                               _mm_cmpleps(v21, (__m128)0i64),
+                               _mm_cmple_ps(v21, (__m128)0i64),
                                _mm_mul_ps(
                                  _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v22, v21), v22)),
                                  _mm_mul_ps(v22, *(__m128 *)_xmm))));
@@ -389,364 +364,351 @@ LABEL_13:
         v47.m_quad = _mm_mul_ps(
                        v24,
                        _mm_andnot_ps(
-                         _mm_cmpleps(v26, (__m128)0i64),
+                         _mm_cmple_ps(v26, (__m128)0i64),
                          _mm_mul_ps(
                            _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v27, v26), v27)),
                            _mm_mul_ps(v27, *(__m128 *)_xmm))));
-        hkpGenericConstraintData::setParameters(v16, v15, 1, &direction);
-        hkpGenericConstraintData::setParameters(v3->mGenericConstraintData, v3->mBasisIndexA + 1, 1, &newValues);
-        hkpGenericConstraintData::setParameters(v3->mGenericConstraintData, v3->mBasisIndexA + 2, 1, &v47);
-        v28 = v3->mHavokVehicle;
-        v29 = v28->m_mainSteeringAngle;
-        v30 = *(float *)&v28->m_steering[3].m_memSizeAndFlags;
+        hkpGenericConstraintData::setParameters(mGenericConstraintData, mBasisIndexA, 1, &direction);
+        hkpGenericConstraintData::setParameters(this->mGenericConstraintData, this->mBasisIndexA + 1, 1, &newValues);
+        hkpGenericConstraintData::setParameters(this->mGenericConstraintData, this->mBasisIndexA + 2, 1, &v47);
+        mHavokVehicle = this->mHavokVehicle;
+        m_mainSteeringAngle = mHavokVehicle->m_mainSteeringAngle;
+        v30 = *(float *)&mHavokVehicle->m_steering[3].m_memSizeAndFlags;
         if ( COERCE_FLOAT(LODWORD(v30) & _xmm) > 0.001 )
-          v29 = v29 / v30;
-        v31 = v3->mLeanDesiredHi;
-        v32 = v3->mLeanDesiredLo;
-        v33 = v3->mLeanMinSpeed * v3->mLeanMinSpeed;
-        if ( v32 >= v31 )
-          v34 = v3->mLeanDesiredHi;
+          m_mainSteeringAngle = m_mainSteeringAngle / v30;
+        mLeanDesiredHi = this->mLeanDesiredHi;
+        mLeanDesiredLo = this->mLeanDesiredLo;
+        v33 = this->mLeanMinSpeed * this->mLeanMinSpeed;
+        if ( mLeanDesiredLo >= mLeanDesiredHi )
+          v34 = this->mLeanDesiredHi;
         else
-          v34 = v3->mLeanDesiredLo;
-        if ( v32 <= v31 )
-          v35 = v3->mLeanDesiredHi;
+          v34 = this->mLeanDesiredLo;
+        if ( mLeanDesiredLo <= mLeanDesiredHi )
+          v35 = this->mLeanDesiredHi;
         else
-          v35 = v3->mLeanDesiredLo;
+          v35 = this->mLeanDesiredLo;
         v36 = FLOAT_0_000099999997;
-        if ( (float)((float)(v3->mLeanMaxSpeed * v3->mLeanMaxSpeed) - v33) >= 0.000099999997 )
-          v36 = (float)(v3->mLeanMaxSpeed * v3->mLeanMaxSpeed) - v33;
-        v37 = (float)((float)((float)(v3->mSpeedKPH * v3->mSpeedKPH) - v33) * (float)((float)(v31 - v32) / v36)) + v32;
+        if ( (float)((float)(this->mLeanMaxSpeed * this->mLeanMaxSpeed) - v33) >= 0.000099999997 )
+          v36 = (float)(this->mLeanMaxSpeed * this->mLeanMaxSpeed) - v33;
+        v37 = (float)((float)((float)(this->mSpeedKPH * this->mSpeedKPH) - v33)
+                    * (float)((float)(mLeanDesiredHi - mLeanDesiredLo) / v36))
+            + mLeanDesiredLo;
         if ( v37 <= v34 )
           v37 = v34;
         if ( v37 >= v35 )
           v37 = v35;
-        LODWORD(v38) = COERCE_UNSIGNED_INT(v37 * v29) ^ _xmm[0];
-        UFG::qPidControllerCore::Record(
-          (UFG::qPidControllerCore *)&v3->mLeanPidController->m_Parameters,
-          v38 - v3->mLeanAngle,
-          v6,
-          0i64);
-        v39 = UFG::qPidControllerCore::GetOutput((UFG::qPidControllerCore *)&v3->mLeanPidController->m_Parameters);
-        v40 = v3->mLeanAngle;
-        v41 = v39 * (float)(v6 * 29.999998);
-        if ( v40 >= v38 )
+        LODWORD(v38) = COERCE_UNSIGNED_INT(v37 * m_mainSteeringAngle) ^ _xmm[0];
+        UFG::qPidControllerCore::Record(this->mLeanPidController, v38 - this->mLeanAngle, deltaTime, 0i64);
+        Output = UFG::qPidControllerCore::GetOutput(this->mLeanPidController);
+        mLeanAngle = this->mLeanAngle;
+        v41 = Output * (float)(deltaTime * 29.999998);
+        if ( mLeanAngle >= v38 )
         {
-          if ( v40 <= v38 )
+          if ( mLeanAngle <= v38 )
             goto LABEL_31;
-          v42 = v40 + v41;
+          v42 = mLeanAngle + v41;
           if ( v42 < v38 )
           {
 LABEL_30:
-            v3->mLeanAngle = v38;
+            this->mLeanAngle = v38;
 LABEL_31:
-            hkQuaternionf::setAxisAngle(&quat, &axis, v3->mLeanAngle);
+            hkQuaternionf::setAxisAngle(&quat, &axis, this->mLeanAngle);
             hkVector4f::setRotatedDir(&v47, &quat, &v50);
-            v43 = v3->mGenericConstraintData;
-            v44 = v3->mBasisIndexB + 1;
+            v43 = this->mGenericConstraintData;
+            v44 = this->mBasisIndexB + 1;
             v45 = _mm_sub_ps(
                     _mm_mul_ps(_mm_shuffle_ps(axis.m_quad, axis.m_quad, 201), v47.m_quad),
                     _mm_mul_ps(_mm_shuffle_ps(v47.m_quad, v47.m_quad, 201), axis.m_quad));
             newValues.m_quad = _mm_shuffle_ps(v45, v45, 201);
             hkpGenericConstraintData::setParameters(v43, v44, 1, &newValues);
-            hkpGenericConstraintData::setParameters(v3->mGenericConstraintData, v3->mBasisIndexB + 2, 1, &v47);
+            hkpGenericConstraintData::setParameters(this->mGenericConstraintData, this->mBasisIndexB + 2, 1, &v47);
             return;
           }
         }
         else
         {
-          v42 = v40 + v41;
+          v42 = mLeanAngle + v41;
           if ( v42 > v38 )
             goto LABEL_30;
         }
-        v3->mLeanAngle = v42;
+        this->mLeanAngle = v42;
         goto LABEL_31;
       }
       UFG::BasePhysicsSystem::AddConstraint(UFG::BasePhysicsSystem::mInstance, v7);
     }
-    v8 = v47.m_quad;
+    m_quad = v47.m_quad;
     v12 = direction.m_quad;
     goto LABEL_12;
   }
-}nAngle = v42;
-  
+}
 
 // File Line: 291
 // RVA: 0x47EE20
-int UFG::PhysicsMotorBike::UpdateHighLod(...)
+// local variable allocation has failed, the output may be wrong!
+void __fastcall UFG::PhysicsMotorBike::UpdateHighLod(
+        UFG::PhysicsMotorBike *this,
+        UFG::VehicleInput *input,
+        double deltaTime)
 {
-  UFG::PhysicsMotorBike *v3; // rdi
-  UFG::VehicleInput *v4; // rsi
   __int128 v5; // xmm9
-  hkpVehicleAerodynamics *v6; // rcx
+  hkpVehicleAerodynamics *m_aerodynamics; // rcx
   __m128 v7; // xmm6
   char v8; // bp
-  float v9; // xmm0_4
+  float z; // xmm0_4
   float v10; // xmm7_4
   float v11; // xmm0_4
-  UFG::VehicleInstance *v12; // rax
+  UFG::VehicleInstance *mHavokVehicle; // rax
   int v13; // edx
-  hkpVehicleEngine *v14; // rcx
+  hkpVehicleEngine *m_engine; // rcx
   float v15; // xmm0_4
-  bool v16; // cf
-  bool v17; // zf
-  hkpVehicleInstance::WheelInfo *v18; // rcx
-  UFG::RigidBodyComponent *v19; // rax
-  hkpEntity *v20; // rbx
-  __int64 v21; // rdx
+  bool v16; // cc
+  hkpVehicleInstance::WheelInfo *m_data; // rcx
+  UFG::RigidBodyComponent *mRigidBody; // rax
+  hkpRigidBody *mBody; // rbx
+  __int64 v20; // rdx
+  float mForwardWeightShift; // xmm0_4
   float v22; // xmm0_4
-  float v23; // xmm0_4
-  int v24; // eax
-  int v25; // edx
-  unsigned int v26; // eax
-  UFG::VehicleInstance *v27; // r8
-  __int64 v28; // rcx
-  __int64 v29; // r9
-  float v30; // xmm2_4
-  float v31; // xmm11_4
-  __int128 v32; // xmm0
-  int v33; // eax
-  __m128 v34; // xmm6
-  signed __int64 v35; // r9
-  UFG::RigidBodyComponent *v36; // rax
-  hkpRigidBody *v37; // rbx
-  __int64 v38; // rdx
-  UFG::VehicleInstance *v39; // rcx
-  float v40; // xmm0_4
-  __m128 v41; // xmm3
-  __m128 v42; // xmm5
-  __m128 v43; // xmm2
-  UFG::RigidBodyComponent *v44; // rax
-  float v45; // xmm10_4
-  __m128 v46; // xmm4
-  hkpRigidBody *v47; // rbx
-  __int64 v48; // rdx
-  UFG::VehicleInstance *v49; // rax
-  hkpVehicleDriverInputStatus *v50; // rcx
-  hkVector4f centerOfMass; // [rsp+30h] [rbp-B8h]
-  hkVector4f direction; // [rsp+40h] [rbp-A8h]
-  hkVector4f v53; // [rsp+50h] [rbp-98h]
-  __m128 v54; // [rsp+60h] [rbp-88h]
+  int v23; // edx
+  unsigned int v24; // eax
+  UFG::VehicleInstance *v25; // r8
+  __int64 v26; // rcx
+  __int64 v27; // r9
+  float mRotMassScaleForCollisions; // xmm2_4
+  float v29; // xmm11_4
+  __int128 v30; // xmm0
+  int v31; // eax
+  __m128 v32; // xmm6
+  __int64 v33; // r9
+  UFG::RigidBodyComponent *v34; // rax
+  hkpEntity *v35; // rbx
+  __int64 v36; // rdx
+  UFG::VehicleInstance *v37; // rcx
+  float v38; // xmm0_4
+  __m128 z_low; // xmm3
+  __m128 x_low; // xmm5
+  __m128 w_low; // xmm2
+  UFG::RigidBodyComponent *v42; // rax
+  float v43; // xmm10_4
+  __m128 y_low; // xmm4
+  hkpEntity *v45; // rbx
+  __int64 v46; // rdx
+  UFG::VehicleInstance *v47; // rax
+  hkpVehicleDriverInputStatus *m_deviceStatus; // rcx
+  hkVector4f centerOfMass; // [rsp+30h] [rbp-B8h] BYREF
+  hkVector4f direction; // [rsp+40h] [rbp-A8h] BYREF
+  hkVector4f v51; // [rsp+50h] [rbp-98h] BYREF
+  __m128 v52; // [rsp+60h] [rbp-88h] BYREF
 
-  v3 = this;
-  v4 = input;
-  v5 = deltaTime;
-  v6 = this->mHavokVehicle->m_aerodynamics;
-  LODWORD(v6[3].vfptr) = 0;
+  v5 = *(_OWORD *)&deltaTime;
+  m_aerodynamics = this->mHavokVehicle->m_aerodynamics;
+  LODWORD(m_aerodynamics[3].vfptr) = 0;
   if ( input->mForwardWeightShift > 0.25 )
-    *(float *)&v6[3].vfptr = v3->mTuckDragBoost;
+    *(float *)&m_aerodynamics[3].vfptr = this->mTuckDragBoost;
   v7 = (__m128)(unsigned int)FLOAT_1_0;
-  centerOfMass.m_quad = (__m128)v3->mDefaultCentreOfMass;
+  centerOfMass.m_quad = (__m128)this->mDefaultCentreOfMass;
   v8 = 0;
-  v9 = v3->mBodyTransform.v0.z;
+  z = this->mBodyTransform.v0.z;
   v10 = 0.0;
-  if ( v9 <= -1.0 )
+  if ( z <= -1.0 )
   {
-    v9 = FLOAT_N1_0;
+    z = FLOAT_N1_0;
   }
-  else if ( v9 >= 1.0 )
+  else if ( z >= 1.0 )
   {
-    v9 = *(float *)&FLOAT_1_0;
+    z = *(float *)&FLOAT_1_0;
   }
-  v11 = asinf(v9);
-  v12 = v3->mHavokVehicle;
-  v13 = *((_DWORD *)v4 + 4);
-  v14 = v12->m_engine;
-  if ( !(v13 & 8) || _bittest(&v13, 8u) )
+  v11 = asinf(z);
+  mHavokVehicle = this->mHavokVehicle;
+  v13 = *((_DWORD *)input + 4);
+  m_engine = mHavokVehicle->m_engine;
+  if ( (v13 & 8) == 0 || (v13 & 0x100) != 0 )
   {
-    v3->mWheelieTorqueBoostCounter = 0.0;
-    if ( *((_BYTE *)v4 + 16) & 0x10 )
+    this->mWheelieTorqueBoostCounter = 0.0;
+    if ( (*((_BYTE *)input + 16) & 0x10) != 0 )
     {
       v8 = 1;
-      v10 = (float)(v3->mBrakingWheelieAngle * v4->mForwardWeightShift) + v11;
-      if ( v12 )
+      v10 = (float)(this->mBrakingWheelieAngle * input->mForwardWeightShift) + v11;
+      if ( mHavokVehicle )
       {
-        v18 = v12->m_wheelsInfo.m_data;
-        if ( !v18[1].m_contactBody )
+        m_data = mHavokVehicle->m_wheelsInfo.hkpVehicleInstance::m_data;
+        if ( !m_data[1].m_contactBody )
         {
-          if ( v18->m_contactBody )
+          if ( m_data->m_contactBody )
           {
-            if ( v4->mSteering <= 0.0 )
+            if ( input->mSteering <= 0.0 )
             {
-              if ( v4->mSteering >= 0.0 )
+              if ( input->mSteering >= 0.0 )
                 v7 = 0i64;
               else
                 v7 = (__m128)LODWORD(FLOAT_N1_0);
             }
-            v7.m128_f32[0] = v7.m128_f32[0] * v3->mBrakingWheelieYaw;
-            v19 = v3->mRigidBody;
+            v7.m128_f32[0] = v7.m128_f32[0] * this->mBrakingWheelieYaw;
+            mRigidBody = this->mRigidBody;
             direction.m_quad = _mm_unpacklo_ps(
                                  _mm_unpacklo_ps((__m128)0i64, _mm_xor_ps(v7, *(__m128 *)_xmm)),
                                  (__m128)0i64);
             hkVector4f::setRotatedDir(
-              &v53,
-              &v19->mBody->m_motion.m_motionState.m_sweptTransform.m_rotation1,
+              &v51,
+              &mRigidBody->mBody->m_motion.m_motionState.m_sweptTransform.m_rotation1,
               &direction);
-            v20 = (hkpEntity *)&v3->mRigidBody->mBody->vfptr;
-            hkpEntity::activate(v20);
-            ((void (__fastcall *)(hkpMaxSizeMotion *, __int64, hkVector4f *))v20->m_motion.vfptr[13].__first_virtual_table_function__)(
-              &v20->m_motion,
-              v21,
-              &v53);
-            v7.m128_i32[0] = (signed int)FLOAT_1_0;
+            mBody = this->mRigidBody->mBody;
+            hkpEntity::activate(mBody);
+            ((void (__fastcall *)(hkpMaxSizeMotion *, __int64, hkVector4f *))mBody->m_motion.hkpEntity::vfptr[13].__first_virtual_table_function__)(
+              &mBody->m_motion,
+              v20,
+              &v51);
+            v7.m128_i32[0] = (int)FLOAT_1_0;
           }
         }
       }
     }
-    if ( v3->mSpeedKPH < 5.0 )
+    if ( this->mSpeedKPH < 5.0 )
     {
-      v22 = v4->mForwardWeightShift;
-      if ( v22 <= 0.25 )
+      mForwardWeightShift = input->mForwardWeightShift;
+      if ( mForwardWeightShift <= 0.25 )
       {
-        if ( v22 >= -0.25 )
+        if ( mForwardWeightShift >= -0.25 )
           goto LABEL_26;
-        v23 = centerOfMass.m_quad.m128_f32[0] + -0.1;
+        v22 = centerOfMass.m_quad.m128_f32[0] + -0.1;
       }
       else
       {
-        v23 = centerOfMass.m_quad.m128_f32[0] + 0.1;
+        v22 = centerOfMass.m_quad.m128_f32[0] + 0.1;
       }
-      centerOfMass.m_quad.m128_f32[0] = v23;
+      centerOfMass.m_quad.m128_f32[0] = v22;
     }
   }
   else
   {
     v8 = 1;
-    v10 = (float)(v3->mWheelieAngle * v4->mForwardWeightShift) + v11;
-    v15 = *(float *)&deltaTime + v3->mWheelieTorqueBoostCounter;
-    v16 = v15 < v3->mWheelieTorqueBoostTime;
-    v17 = v15 == v3->mWheelieTorqueBoostTime;
-    v3->mWheelieTorqueBoostCounter = v15;
-    if ( v16 || v17 )
-      *(float *)(&v14[4].m_referenceCount + 1) = v3->mWheelieTorqueBoost + *(float *)(&v14[4].m_referenceCount + 1);
+    v10 = (float)(this->mWheelieAngle * input->mForwardWeightShift) + v11;
+    v15 = *(float *)&deltaTime + this->mWheelieTorqueBoostCounter;
+    v16 = v15 <= this->mWheelieTorqueBoostTime;
+    this->mWheelieTorqueBoostCounter = v15;
+    if ( v16 )
+      *(float *)(&m_engine[4].m_referenceCount + 1) = this->mWheelieTorqueBoost
+                                                    + *(float *)(&m_engine[4].m_referenceCount + 1);
   }
 LABEL_26:
-  v24 = *((_DWORD *)&v3->0 + 151);
-  if ( !(v24 & 0x10) )
+  if ( (*((_DWORD *)&this->UFG::PhysicsVehicle + 151) & 0x10) == 0 )
   {
-    v25 = 0;
-    v26 = *((_DWORD *)&v3->0 + 151) & 7;
-    if ( !v26 )
-      goto LABEL_62;
-    v27 = v3->mHavokVehicle;
-    v28 = 0i64;
-    v29 = v26;
+    v23 = 0;
+    v24 = *((_DWORD *)&this->UFG::PhysicsVehicle + 151) & 7;
+    if ( !v24 )
+      goto LABEL_35;
+    v25 = this->mHavokVehicle;
+    v26 = 0i64;
+    v27 = v24;
     do
     {
-      if ( !v27 || v27->m_wheelsInfo.m_data[v28].m_contactBody != 0i64 )
-        ++v25;
-      ++v28;
-      --v29;
+      if ( !v25 || v25->m_wheelsInfo.hkpVehicleInstance::m_data[v26].m_contactBody )
+        ++v23;
+      ++v26;
+      --v27;
     }
-    while ( v29 );
-    if ( v25 == 1 )
-      v30 = FLOAT_10_0;
+    while ( v27 );
+    if ( v23 == 1 )
+      mRotMassScaleForCollisions = FLOAT_10_0;
     else
-LABEL_62:
-      v30 = v3->mRotMassScaleForCollisions;
-    UFG::PhysicsVehicle::SetMassScaleForCollisions((UFG::PhysicsVehicle *)&v3->vfptr, v7.m128_f32[0], v30);
-    v7.m128_i32[0] = (signed int)FLOAT_1_0;
+LABEL_35:
+      mRotMassScaleForCollisions = this->mRotMassScaleForCollisions;
+    UFG::PhysicsVehicle::SetMassScaleForCollisions(this, v7.m128_f32[0], mRotMassScaleForCollisions);
+    v7.m128_i32[0] = (int)FLOAT_1_0;
   }
   if ( !v8 )
   {
-    UFG::qPidControllerCore::Clear((UFG::qPidControllerCore *)&v3->mWheeliePidController->m_Parameters);
-    v3->mWheelieBlend = 0.0;
+    UFG::qPidControllerCore::Clear(this->mWheeliePidController);
+    this->mWheelieBlend = 0.0;
     goto LABEL_48;
   }
-  v32 = v5;
-  v31 = FLOAT_N20000_0;
-  *(float *)&v32 = *(float *)&v5 + v3->mWheelieBlend;
-  LODWORD(v3->mWheelieBlend) = v32;
-  if ( *(float *)&v32 > v7.m128_f32[0] )
-    v3->mWheelieBlend = 1.0;
-  UFG::qPidControllerCore::Record(
-    (UFG::qPidControllerCore *)&v3->mWheeliePidController->m_Parameters,
-    v10,
-    *(float *)&v5,
-    0i64);
-  *(float *)&v32 = UFG::qPidControllerCore::GetOutput((UFG::qPidControllerCore *)&v3->mWheeliePidController->m_Parameters);
-  v33 = *((_DWORD *)v4 + 4);
-  v34 = (__m128)v32;
-  if ( v33 & 8 && !_bittest(&v33, 8u) )
+  v30 = v5;
+  v29 = FLOAT_N20000_0;
+  *(float *)&v30 = *(float *)&v5 + this->mWheelieBlend;
+  LODWORD(this->mWheelieBlend) = v30;
+  if ( *(float *)&v30 > v7.m128_f32[0] )
+    this->mWheelieBlend = 1.0;
+  UFG::qPidControllerCore::Record(this->mWheeliePidController, v10, *(float *)&v5, 0i64);
+  *(float *)&v30 = UFG::qPidControllerCore::GetOutput(this->mWheeliePidController);
+  v31 = *((_DWORD *)input + 4);
+  v32 = (__m128)v30;
+  if ( (v31 & 8) != 0 && (v31 & 0x100) == 0 )
   {
-    v35 = 0i64;
+    v33 = 0i64;
 LABEL_45:
-    ((void (__fastcall *)(UFG::VehicleInstance *, hkpRigidBody *, hkpVehicleSuspension *, signed __int64, hkVector4f *, hkVector4f *))v3->mHavokVehicle->vfptr[5].__first_virtual_table_function__)(
-      v3->mHavokVehicle,
-      v3->mRigidBody->mBody,
-      v3->mHavokVehicle->m_suspension,
-      v35,
+    ((void (__fastcall *)(UFG::VehicleInstance *, hkpRigidBody *, hkpVehicleSuspension *, __int64, hkVector4f *, hkVector4f *))this->mHavokVehicle->UFG::PhysicsWheeledVehicle::vfptr[5].__first_virtual_table_function__)(
+      this->mHavokVehicle,
+      this->mRigidBody->mBody,
+      this->mHavokVehicle->m_suspension,
+      v33,
       &direction,
-      &v53);
+      &v51);
     goto LABEL_46;
   }
-  if ( v33 & 0x10 )
+  if ( (v31 & 0x10) != 0 )
   {
-    v31 = FLOAT_10000_0;
-    v35 = 1i64;
+    v29 = FLOAT_10000_0;
+    v33 = 1i64;
     goto LABEL_45;
   }
 LABEL_46:
-  v36 = v3->mRigidBody;
-  v34.m128_f32[0] = (float)(*(float *)&v32 * v31) * v3->mWheelieBlend;
-  v54 = _mm_unpacklo_ps(_mm_unpacklo_ps((__m128)0i64, v34), (__m128)0i64);
-  v37 = v36->mBody;
-  hkpEntity::activate((hkpEntity *)&v36->mBody->vfptr);
-  ((void (__fastcall *)(hkpMaxSizeMotion *, __int64, __m128 *, hkVector4f *))v37->m_motion.vfptr[12].__first_virtual_table_function__)(
-    &v37->m_motion,
-    v38,
-    &v54,
+  v34 = this->mRigidBody;
+  v32.m128_f32[0] = (float)(*(float *)&v30 * v29) * this->mWheelieBlend;
+  v52 = _mm_unpacklo_ps(_mm_unpacklo_ps((__m128)0i64, v32), (__m128)0i64);
+  v35 = v34->mBody;
+  hkpEntity::activate(v35);
+  ((void (__fastcall *)(hkpMaxSizeMotion *, __int64, __m128 *, hkVector4f *))v35->m_motion.vfptr[12].__first_virtual_table_function__)(
+    &v35->m_motion,
+    v36,
+    &v52,
     &direction);
 LABEL_48:
-  hkpRigidBody::setCenterOfMassLocal(v3->mRigidBody->mBody, &centerOfMass);
-  v39 = v3->mHavokVehicle;
-  if ( v39 )
+  hkpRigidBody::setCenterOfMassLocal(this->mRigidBody->mBody, &centerOfMass);
+  v37 = this->mHavokVehicle;
+  if ( v37 )
   {
-    if ( v39->m_wheelsInfo.m_data[1].m_contactBody != 0i64 )
+    if ( v37->m_wheelsInfo.hkpVehicleInstance::m_data[1].m_contactBody )
     {
-      if ( v39 )
+      if ( !v37->m_wheelsInfo.hkpVehicleInstance::m_data->m_contactBody )
       {
-        if ( v39->m_wheelsInfo.m_data->m_contactBody == 0i64 )
+        LODWORD(v38) = LODWORD(input->mSteering) & _xmm;
+        if ( v38 > 0.25 )
         {
-          LODWORD(v40) = LODWORD(v4->mSteering) & _xmm;
-          if ( v40 > 0.25 )
-          {
-            v41 = (__m128)LODWORD(v3->mBodyTransform.v1.z);
-            v42 = (__m128)LODWORD(v3->mBodyTransform.v1.x);
-            v43 = (__m128)LODWORD(v3->mBodyTransform.v1.w);
-            v44 = v3->mRigidBody;
-            v45 = (float)((float)(-1.0 / v40) * v4->mSteering) * v3->mWheelieSteerRate;
-            v46 = (__m128)LODWORD(v3->mBodyTransform.v1.y);
-            v42.m128_f32[0] = (float)((float)((float)(v42.m128_f32[0] + v3->mBodyTransform.v0.x) * 0.0)
-                                    + (float)(v45 * v3->mBodyTransform.v2.x))
-                            + (float)(v3->mBodyTransform.v3.x * 0.0);
-            v46.m128_f32[0] = (float)((float)((float)(v46.m128_f32[0] + v3->mBodyTransform.v0.y) * 0.0)
-                                    + (float)(v45 * v3->mBodyTransform.v2.y))
-                            + (float)(v3->mBodyTransform.v3.y * 0.0);
-            v41.m128_f32[0] = (float)((float)((float)(v41.m128_f32[0] + v3->mBodyTransform.v0.z) * 0.0)
-                                    + (float)(v45 * v3->mBodyTransform.v2.z))
-                            + (float)(v3->mBodyTransform.v3.z * 0.0);
-            v43.m128_f32[0] = (float)((float)((float)(v43.m128_f32[0] + v3->mBodyTransform.v0.w) * 0.0)
-                                    + (float)(v45 * v3->mBodyTransform.v2.w))
-                            + (float)(v3->mBodyTransform.v3.w * 0.0);
-            v54 = _mm_unpacklo_ps(_mm_unpacklo_ps(v42, v41), _mm_unpacklo_ps(v46, v43));
-            v47 = v44->mBody;
-            hkpEntity::activate((hkpEntity *)&v44->mBody->vfptr);
-            ((void (__fastcall *)(hkpMaxSizeMotion *, __int64, __m128 *))v47->m_motion.vfptr[13].__first_virtual_table_function__)(
-              &v47->m_motion,
-              v48,
-              &v54);
-          }
+          z_low = (__m128)LODWORD(this->mBodyTransform.v1.z);
+          x_low = (__m128)LODWORD(this->mBodyTransform.v1.x);
+          w_low = (__m128)LODWORD(this->mBodyTransform.v1.w);
+          v42 = this->mRigidBody;
+          v43 = (float)((float)(-1.0 / v38) * input->mSteering) * this->mWheelieSteerRate;
+          y_low = (__m128)LODWORD(this->mBodyTransform.v1.y);
+          x_low.m128_f32[0] = (float)((float)((float)(x_low.m128_f32[0] + this->mBodyTransform.v0.x) * 0.0)
+                                    + (float)(v43 * this->mBodyTransform.v2.x))
+                            + (float)(this->mBodyTransform.v3.x * 0.0);
+          y_low.m128_f32[0] = (float)((float)((float)(y_low.m128_f32[0] + this->mBodyTransform.v0.y) * 0.0)
+                                    + (float)(v43 * this->mBodyTransform.v2.y))
+                            + (float)(this->mBodyTransform.v3.y * 0.0);
+          z_low.m128_f32[0] = (float)((float)((float)(z_low.m128_f32[0] + this->mBodyTransform.v0.z) * 0.0)
+                                    + (float)(v43 * this->mBodyTransform.v2.z))
+                            + (float)(this->mBodyTransform.v3.z * 0.0);
+          w_low.m128_f32[0] = (float)((float)((float)(w_low.m128_f32[0] + this->mBodyTransform.v0.w) * 0.0)
+                                    + (float)(v43 * this->mBodyTransform.v2.w))
+                            + (float)(this->mBodyTransform.v3.w * 0.0);
+          v52 = _mm_unpacklo_ps(_mm_unpacklo_ps(x_low, z_low), _mm_unpacklo_ps(y_low, w_low));
+          v45 = v42->mBody;
+          hkpEntity::activate(v45);
+          ((void (__fastcall *)(hkpMaxSizeMotion *, __int64, __m128 *))v45->m_motion.vfptr[13].__first_virtual_table_function__)(
+            &v45->m_motion,
+            v46,
+            &v52);
         }
       }
     }
   }
-  v49 = v3->mHavokVehicle;
-  v50 = v49->m_deviceStatus;
-  if ( v49 && v49->m_wheelsInfo.m_data->m_contactBody == 0i64 || *((_BYTE *)v4 + 16) & 0x10 )
-    LODWORD(v50[1].vfptr) = 0;
+  v47 = this->mHavokVehicle;
+  m_deviceStatus = v47->m_deviceStatus;
+  if ( v47 && !v47->m_wheelsInfo.hkpVehicleInstance::m_data->m_contactBody || (*((_BYTE *)input + 16) & 0x10) != 0 )
+    LODWORD(m_deviceStatus[1].vfptr) = 0;
   else
-    *(float *)&v50[1].vfptr = v4->mSteering;
-  UFG::PhysicsMotorBike::UpdateConstraints(v3, *(float *)&v5);
+    *(float *)&m_deviceStatus[1].vfptr = input->mSteering;
+  UFG::PhysicsMotorBike::UpdateConstraints(this, *(float *)&v5);
 }
 
 // File Line: 441
@@ -754,39 +716,35 @@ LABEL_48:
 void __fastcall UFG::PhysicsMotorBike::Reset(UFG::PhysicsMotorBike *this, UFG::VehicleResetOptions options)
 {
   __int64 v2; // rbx
-  UFG::VehicleResetOptions v3; // esi
-  hkpConstraintInstance *v4; // rdx
-  UFG::PhysicsMotorBike *v5; // rdi
-  hkpVehicleWheelCollide *v6; // rcx
+  hkpConstraintInstance *mConstraint; // rdx
+  hkpVehicleWheelCollide *mWheelCollider; // rcx
 
   v2 = 0i64;
-  v3 = options;
-  v4 = this->mConstraint;
-  v5 = this;
+  mConstraint = this->mConstraint;
   this->mLeanAngle = 0.0;
-  if ( v4 )
-    UFG::BasePhysicsSystem::RemoveConstraint(UFG::BasePhysicsSystem::mInstance, v4);
-  UFG::PhysicsVehicle::Reset((UFG::PhysicsVehicle *)&v5->vfptr, v3);
-  if ( *((_BYTE *)&v5->0 + 604) & 7 )
+  if ( mConstraint )
+    UFG::BasePhysicsSystem::RemoveConstraint(UFG::BasePhysicsSystem::mInstance, mConstraint);
+  UFG::PhysicsVehicle::Reset(this, options);
+  if ( (*((_BYTE *)&this->UFG::PhysicsVehicle + 604) & 7) != 0 )
   {
     do
     {
-      v6 = v5->mWheelCollider;
-      if ( v6 )
+      mWheelCollider = this->mWheelCollider;
+      if ( mWheelCollider )
       {
-        if ( (*((_DWORD *)&v5->0 + 151) & 7) == 2 )
-          *((_DWORD *)&v6[8].m_memSizeAndFlags + v2) = 1065353216;
+        if ( (*((_DWORD *)&this->UFG::PhysicsVehicle + 151) & 7) == 2 )
+          *((_DWORD *)&mWheelCollider[8].m_memSizeAndFlags + v2) = 1065353216;
         else
-          *((_DWORD *)&v6[7].m_alreadyUsed.m_bool + v2) = 1065353216;
+          *((_DWORD *)&mWheelCollider[7].m_alreadyUsed.m_bool + v2) = 1065353216;
       }
       v2 = (unsigned int)(v2 + 1);
     }
-    while ( (unsigned int)v2 < (*((_DWORD *)&v5->0 + 151) & 7u) );
-    v5->mDisableConstraint = 0;
+    while ( (unsigned int)v2 < (*((_DWORD *)&this->UFG::PhysicsVehicle + 151) & 7u) );
+    this->mDisableConstraint = 0;
   }
   else
   {
-    v5->mDisableConstraint = 0;
+    this->mDisableConstraint = 0;
   }
 }
 
@@ -827,27 +785,24 @@ void __fastcall UFG::PhysicsMotorBike::ResetStabilization(UFG::PhysicsMotorBike 
 
 // File Line: 488
 // RVA: 0x474D20
-void __fastcall UFG::PhysicsMotorBike::SetLevelOfDetailInternal(UFG::PhysicsMotorBike *this, UFG::PhysicsVehicle::Lod lod)
+void __fastcall UFG::PhysicsMotorBike::SetLevelOfDetailInternal(
+        UFG::PhysicsMotorBike *this,
+        UFG::PhysicsVehicle::Lod lod)
 {
-  UFG::PhysicsVehicle::Lod v2; // ebx
-  UFG::PhysicsMotorBike *v3; // rdi
-
-  v2 = lod;
-  v3 = this;
-  UFG::PhysicsWheeledVehicle::SetLevelOfDetailInternal((UFG::PhysicsWheeledVehicle *)&this->vfptr, lod);
-  if ( (signed int)v2 > 0 )
+  UFG::PhysicsWheeledVehicle::SetLevelOfDetailInternal(this, lod);
+  if ( lod > LOD_UNINITIALIZED )
   {
-    if ( (signed int)v2 <= 2 )
-      goto LABEL_10;
-    if ( v2 == 3 )
+    if ( lod <= LOD_MEDIUM )
+      goto LABEL_5;
+    if ( lod == LOD_HIGH )
     {
-      UFG::qPidControllerCore::Clear((UFG::qPidControllerCore *)&v3->mWheeliePidController->m_Parameters);
-      UFG::qPidControllerCore::Clear((UFG::qPidControllerCore *)&v3->mLeanPidController->m_Parameters);
+      UFG::qPidControllerCore::Clear(this->mWheeliePidController);
+      UFG::qPidControllerCore::Clear(this->mLeanPidController);
       return;
     }
-    if ( v2 == 4 )
-LABEL_10:
-      UFG::BasePhysicsSystem::RemoveConstraint(UFG::BasePhysicsSystem::mInstance, v3->mConstraint);
+    if ( lod == LOD_NIS )
+LABEL_5:
+      UFG::BasePhysicsSystem::RemoveConstraint(UFG::BasePhysicsSystem::mInstance, this->mConstraint);
   }
 }
 
@@ -855,35 +810,31 @@ LABEL_10:
 // RVA: 0x476360
 void __fastcall UFG::PhysicsMotorBike::Suspend(UFG::PhysicsMotorBike *this)
 {
-  UFG::PhysicsMotorBike *v1; // rbx
-  hkpConstraintInstance *v2; // rdx
+  hkpConstraintInstance *mConstraint; // rdx
 
-  v1 = this;
-  UFG::PhysicsWheeledVehicle::Suspend((UFG::PhysicsWheeledVehicle *)&this->vfptr);
-  v2 = v1->mConstraint;
-  if ( v2 )
-    UFG::BasePhysicsSystem::RemoveConstraint(UFG::BasePhysicsSystem::mInstance, v2);
+  UFG::PhysicsWheeledVehicle::Suspend(this);
+  mConstraint = this->mConstraint;
+  if ( mConstraint )
+    UFG::BasePhysicsSystem::RemoveConstraint(UFG::BasePhysicsSystem::mInstance, mConstraint);
 }
 
 // File Line: 521
 // RVA: 0x473C00
-void __fastcall UFG::PhysicsMotorBike::ResourceUnloaded(UFG::PhysicsMotorBike *this, UFG::PhysicsResourceHandle *resource)
+void __fastcall UFG::PhysicsMotorBike::ResourceUnloaded(
+        UFG::PhysicsMotorBike *this,
+        UFG::PhysicsResourceHandle *resource)
 {
-  UFG::PhysicsResourceHandle *v2; // rdi
-  hkpConstraintInstance *v3; // rdx
-  UFG::PhysicsMotorBike *v4; // rbx
+  hkpConstraintInstance *mConstraint; // rdx
 
-  v2 = resource;
-  v3 = this->mConstraint;
-  v4 = this;
-  if ( v3 )
+  mConstraint = this->mConstraint;
+  if ( mConstraint )
   {
-    UFG::BasePhysicsSystem::RemoveConstraint(UFG::BasePhysicsSystem::mInstance, v3);
-    hkReferencedObject::removeReference((hkReferencedObject *)&v4->mConstraint->vfptr);
-    v4->mConstraint = 0i64;
+    UFG::BasePhysicsSystem::RemoveConstraint(UFG::BasePhysicsSystem::mInstance, mConstraint);
+    hkReferencedObject::removeReference(this->mConstraint);
+    this->mConstraint = 0i64;
   }
-  v4->mDesiredLod = 5;
-  UFG::PhysicsWheeledVehicle::DeleteWheeledVehicleComponents((UFG::PhysicsWheeledVehicle *)&v4->vfptr);
-  UFG::PhysicsVehicle::ResourceUnloaded((UFG::PhysicsVehicle *)&v4->vfptr, v2);
+  this->mDesiredLod = LOD_RESOURCES_UNLOADED;
+  UFG::PhysicsWheeledVehicle::DeleteWheeledVehicleComponents(this);
+  UFG::PhysicsVehicle::ResourceUnloaded(this, resource);
 }
 

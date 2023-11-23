@@ -13,82 +13,63 @@ __int64 dynamic_initializer_for__NISActorNode::sClassNameUID__()
 // RVA: 0x3DFD60
 void __fastcall NISActorNode::NISActorNode(NISActorNode *this)
 {
-  NISActorNode *v1; // rbx
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v2; // [rsp+48h] [rbp+10h]
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v3; // [rsp+48h] [rbp+10h]
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v4; // [rsp+48h] [rbp+10h]
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v5; // [rsp+48h] [rbp+10h]
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v6; // [rsp+48h] [rbp+10h]
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v7; // [rsp+48h] [rbp+10h]
-
-  v1 = this;
-  ActionNodeImplementation::ActionNodeImplementation((ActionNodeImplementation *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ActionNodePlayable::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&NISActorNode::`vftable;
-  v2 = &v1->mRightHandEquipSlot;
-  v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->mRightHandEquipSlot.m_pPointer = 0i64;
-  v3 = &v1->mLeftHandEquipSlot;
-  v3->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v3->mPrev;
-  v3->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v3->mPrev;
-  v1->mLeftHandEquipSlot.m_pPointer = 0i64;
-  v4 = &v1->mHatEquipSlot;
-  v4->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v4->mPrev;
-  v4->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v4->mPrev;
-  v1->mHatEquipSlot.m_pPointer = 0i64;
-  v5 = &v1->mGlassesEquipSlot;
-  v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v5->mPrev;
-  v5->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v5->mPrev;
-  v1->mGlassesEquipSlot.m_pPointer = 0i64;
-  v6 = &v1->mStowed1HSlot;
-  v6->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v6->mPrev;
-  v6->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v6->mPrev;
-  v1->mStowed1HSlot.m_pPointer = 0i64;
-  v7 = &v1->mStowed2HSlot;
-  v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v7->mPrev;
-  v7->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v7->mPrev;
-  v1->mStowed2HSlot.m_pPointer = 0i64;
-  *(_QWORD *)&v1->mCachedRootPosition.x = 0i64;
-  *(_QWORD *)&v1->mCachedRootPosition.z = 0i64;
-  *(_QWORD *)&v1->mCachedHipsPosition.y = 0i64;
-  *(_QWORD *)&v1->mActorID.mUID = -1i64;
-  *(_DWORD *)&v1->mResetActorOnStart = 65537;
-  *(_DWORD *)&v1->mDisableCharacterCollision = 257;
-  v1->mCachedPositions = 0;
+  ActionNodeImplementation::ActionNodeImplementation(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&ActionNodePlayable::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&NISActorNode::`vftable;
+  this->mRightHandEquipSlot.mPrev = &this->mRightHandEquipSlot;
+  this->mRightHandEquipSlot.mNext = &this->mRightHandEquipSlot;
+  this->mRightHandEquipSlot.m_pPointer = 0i64;
+  this->mLeftHandEquipSlot.mPrev = &this->mLeftHandEquipSlot;
+  this->mLeftHandEquipSlot.mNext = &this->mLeftHandEquipSlot;
+  this->mLeftHandEquipSlot.m_pPointer = 0i64;
+  this->mHatEquipSlot.mPrev = &this->mHatEquipSlot;
+  this->mHatEquipSlot.mNext = &this->mHatEquipSlot;
+  this->mHatEquipSlot.m_pPointer = 0i64;
+  this->mGlassesEquipSlot.mPrev = &this->mGlassesEquipSlot;
+  this->mGlassesEquipSlot.mNext = &this->mGlassesEquipSlot;
+  this->mGlassesEquipSlot.m_pPointer = 0i64;
+  this->mStowed1HSlot.mPrev = &this->mStowed1HSlot;
+  this->mStowed1HSlot.mNext = &this->mStowed1HSlot;
+  this->mStowed1HSlot.m_pPointer = 0i64;
+  this->mStowed2HSlot.mPrev = &this->mStowed2HSlot;
+  this->mStowed2HSlot.mNext = &this->mStowed2HSlot;
+  this->mStowed2HSlot.m_pPointer = 0i64;
+  *(_QWORD *)&this->mCachedRootPosition.x = 0i64;
+  *(_QWORD *)&this->mCachedRootPosition.z = 0i64;
+  *(_QWORD *)&this->mCachedHipsPosition.y = 0i64;
+  *(_QWORD *)&this->mActorID.mUID = -1i64;
+  *(_DWORD *)&this->mResetActorOnStart = 65537;
+  *(_DWORD *)&this->mDisableCharacterCollision = 257;
+  this->mCachedPositions = 0;
 }
 
 // File Line: 150
 // RVA: 0x3E56B0
 void __fastcall NISActorNode::SetupActor(NISActorNode *this, const bool bHighDef)
 {
-  bool v2; // si
-  NISActorNode *v3; // rbx
-  UFG::qBaseNodeRB *v4; // rax
+  UFG::qBaseNodeRB *SimObject; // rax
   UFG::SimObject *v5; // rdi
 
-  v2 = bHighDef;
-  v3 = this;
   if ( !this->mPreloaded )
   {
-    v4 = UFG::Simulation::GetSimObject(&UFG::gSim, &this->mActorID);
-    v5 = (UFG::SimObject *)v4;
-    if ( v4 )
+    SimObject = UFG::Simulation::GetSimObject(&UFG::gSim, &this->mActorID);
+    v5 = (UFG::SimObject *)SimObject;
+    if ( SimObject )
     {
-      v3->mDeleteActorOnEnd = 0;
-      NISActorNode::SaveEquippedItems(v3, (UFG::SimObject *)v4);
-      if ( v2 )
+      this->mDeleteActorOnEnd = 0;
+      NISActorNode::SaveEquippedItems(this, (UFG::SimObjectGame *)SimObject);
+      if ( bHighDef )
       {
-        v3->mDowngradeModelOnCleanup = 1;
+        this->mDowngradeModelOnCleanup = 1;
         UFG::SimObjectUtility::UpgradeModelResolution(v5);
       }
     }
     else
     {
-      UFG::SpawnInfoInterface::SpawnObject(&v3->mActorID, &v3->mPropertySet, 0, 0i64, 0i64, 0i64);
-      v3->mDeleteActorOnEnd = 1;
+      UFG::SpawnInfoInterface::SpawnObject(&this->mActorID, &this->mPropertySet, UnReferenced, 0i64, 0i64, 0i64);
+      this->mDeleteActorOnEnd = 1;
     }
-    *(_WORD *)&v3->mPreloaded = 1;
+    *(_WORD *)&this->mPreloaded = 1;
   }
 }
 
@@ -96,286 +77,221 @@ void __fastcall NISActorNode::SetupActor(NISActorNode *this, const bool bHighDef
 // RVA: 0x3E3850
 void __fastcall NISActorNode::Play(NISActorNode *this)
 {
-  NISActorNode *v1; // rdi
-  UFG::qBaseNodeRB *v2; // rax
+  UFG::qBaseNodeRB *SimObject; // rax
   UFG::SimObjectGame *v3; // rbx
-  unsigned __int16 v4; // r8
-  UFG::SimComponent *v5; // rax
+  __int16 m_Flags; // r8
+  UFG::SimComponent *m_pComponent; // rax
 
-  v1 = this;
-  v2 = UFG::Simulation::GetSimObject(&UFG::gSim, &this->mActorID);
-  v3 = (UFG::SimObjectGame *)v2;
-  if ( v2 )
+  SimObject = UFG::Simulation::GetSimObject(&UFG::gSim, &this->mActorID);
+  v3 = (UFG::SimObjectGame *)SimObject;
+  if ( SimObject )
   {
-    NISActorNode::setupActorForNIS(v1, (UFG::SimObject *)v2);
-    v4 = v3->m_Flags;
-    if ( (v4 >> 14) & 1 )
+    NISActorNode::setupActorForNIS(this, (UFG::SimObject *)SimObject);
+    m_Flags = v3->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v5 = v3->m_Components.p[7].m_pComponent;
+      m_pComponent = v3->m_Components.p[7].m_pComponent;
     }
-    else if ( (v4 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v4 >> 13) & 1 )
+      if ( (m_Flags & 0x2000) != 0 )
       {
-        v5 = v3->m_Components.p[6].m_pComponent;
+        m_pComponent = v3->m_Components.p[6].m_pComponent;
       }
-      else if ( (v4 >> 12) & 1 )
+      else if ( (m_Flags & 0x1000) != 0 )
       {
-        v5 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::ActionTreeComponent::_TypeUID);
+        m_pComponent = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::ActionTreeComponent::_TypeUID);
       }
       else
       {
-        v5 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::ActionTreeComponent::_TypeUID);
+        m_pComponent = UFG::SimObject::GetComponentOfType(v3, UFG::ActionTreeComponent::_TypeUID);
       }
     }
     else
     {
-      v5 = v3->m_Components.p[7].m_pComponent;
+      m_pComponent = v3->m_Components.p[7].m_pComponent;
     }
-    if ( v5 )
+    if ( m_pComponent )
     {
-      LOBYTE(v5[2].m_pSimObject) = 1;
-      ActionController::Play((ActionController *)&v5[3], (ActionNodePlayable *)&v1->vfptr);
+      LOBYTE(m_pComponent[2].m_pSimObject) = 1;
+      ActionController::Play((ActionController *)&m_pComponent[3], this);
     }
   }
 }
 
 // File Line: 224
 // RVA: 0x3E8050
-void __fastcall NISActorNode::setupActorForNIS(NISActorNode *this, UFG::SimObject *simActorObject)
+void __fastcall NISActorNode::setupActorForNIS(NISActorNode *this, UFG::SimObjectCVBase *simActorObject)
 {
-  UFG::SimObjectCVBase *v2; // rbx
-  NISActorNode *v3; // rsi
-  UFG::qPropertySet *v4; // rax
+  UFG::qPropertySet *PropertySet; // rax
   UFG::qPropertySet *v5; // rax
   UFG::SimComponent *v6; // rbp
-  char *v7; // rax
+  char *MemImagePtr; // rax
   bool v8; // di
-  UFG::PedSpawnManager *v9; // rax
-  unsigned __int16 v10; // cx
-  UFG::RagdollComponent *v11; // rax
-  unsigned __int16 v12; // cx
-  UFG::ActionTreeComponent *v13; // rax
-  __int64 v14; // rax
-  signed __int64 v15; // rcx
-  unsigned __int16 v16; // cx
+  UFG::PedSpawnManager *Instance; // rax
+  signed __int16 m_Flags; // cx
+  UFG::RagdollComponent *m_pComponent; // rax
+  signed __int16 v12; // cx
+  UFG::ActionTreeComponent *ComponentOfTypeHK; // rax
+  __int64 mOffset; // rax
+  char *v15; // rcx
+  signed __int16 v16; // cx
   UFG::SimComponent *v17; // rcx
-  UFG::SimComponent *v18; // rax
+  UFG::SimComponent *ComponentOfType; // rax
   __int64 v19; // rcx
   UFG::RigidBody *v20; // rax
   unsigned int v21; // edi
-  unsigned __int16 v22; // cx
+  signed __int16 v22; // cx
   UFG::CharacterPhysicsComponent *v23; // rax
-  unsigned __int16 v24; // cx
+  signed __int16 v24; // cx
   UFG::SimComponent *v25; // rax
-  UFG::SceneObjectProperties *v26; // rsi
-  UFG::qMemoryPool *v27; // rax
+  UFG::SceneObjectProperties *m_pSceneObj; // rsi
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
   UFG::allocator::free_link *v28; // rax
   UFG::SimComponent *v29; // rax
-  unsigned __int16 v30; // cx
-  unsigned __int16 v31; // cx
+  signed __int16 v30; // cx
+  signed __int16 v31; // cx
   UFG::CharacterAnimationComponent *v32; // rax
   UFG::CharacterAnimationComponent *v33; // rdi
-  unsigned __int16 v34; // cx
+  signed __int16 v34; // cx
   UFG::SimComponent *v35; // rcx
   UFG::SimComponent *v36; // rax
-  unsigned __int16 v37; // cx
+  signed __int16 v37; // cx
   UFG::AnimationLODComponent *v38; // rsi
   UFG::SimComponent *v39; // rax
-  unsigned __int16 v40; // cx
+  signed __int16 v40; // cx
   UFG::FacialActionTreeComponent *v41; // rax
-  Creature *v42; // rcx
-  unsigned __int16 v43; // cx
+  Creature *mCreature; // rcx
+  signed __int16 v43; // cx
   UFG::SimComponent *v44; // rax
-  unsigned __int16 v45; // cx
+  signed __int16 v45; // cx
   UFG::SimComponent *v46; // rax
-  unsigned __int16 v47; // cx
+  signed __int16 v47; // cx
   UFG::CompositeLookComponent *v48; // rax
-  UFG::SimObjectModifier v49; // [rsp+38h] [rbp-40h]
-  unsigned int v50; // [rsp+88h] [rbp+10h]
+  UFG::SimObjectModifier v49; // [rsp+38h] [rbp-40h] BYREF
+  UFG::qSymbol v50; // [rsp+88h] [rbp+10h] BYREF
   UFG::allocator::free_link *v51; // [rsp+90h] [rbp+18h]
 
   if ( !simActorObject )
     return;
-  v2 = (UFG::SimObjectCVBase *)simActorObject;
-  v3 = this;
-  v50 = this->mPropertySet.mUID;
-  v4 = UFG::PropertySetManager::FindPropertySet((UFG::qSymbol *)&v50);
+  v50.mUID = this->mPropertySet.mUID;
+  PropertySet = UFG::PropertySetManager::FindPropertySet(&v50);
   v5 = UFG::qPropertySet::Get<UFG::qPropertySet>(
-         v4,
-         (UFG::qSymbol *)&component_Ragdoll::sPropertyName.mUID,
+         PropertySet,
+         (UFG::qArray<unsigned long,0> *)&component_Ragdoll::sPropertyName,
          DEPTH_RECURSE);
   v6 = 0i64;
   if ( v5 )
-    v7 = UFG::qPropertySet::GetMemImagePtr(v5);
+    MemImagePtr = UFG::qPropertySet::GetMemImagePtr(v5);
   else
-    v7 = 0i64;
-  v8 = v7 != 0i64;
-  v9 = UFG::PedSpawnManager::GetInstance();
+    MemImagePtr = 0i64;
+  v8 = MemImagePtr != 0i64;
+  Instance = UFG::PedSpawnManager::GetInstance();
   if ( !UFG::PedSpawnManager::ChangeActiveStatusOfSimObj(
-          v9,
+          Instance,
           Active,
-          (UFG::SimObject *)&v2->vfptr,
+          simActorObject,
           "d:\\ufg\\madscience\\project\\builds\\sdhd\\sdhd_pc\\source\\nis\\nisnodes.cpp",
           238) )
-    UFG::SimObject::Restore((UFG::SimObject *)&v2->vfptr);
-  if ( v3->mResetActorOnStart )
-    UFG::SimObjectUtility::ResetState((UFG::SimObject *)&v2->vfptr, 0, 0);
-  v10 = v2->m_Flags;
-  if ( (v10 >> 14) & 1 )
+    UFG::SimObject::Restore(simActorObject);
+  if ( this->mResetActorOnStart )
+    UFG::SimObjectUtility::ResetState(simActorObject, 0, 0);
+  m_Flags = simActorObject->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 )
   {
-    v11 = (UFG::RagdollComponent *)v2->m_Components.p[42].m_pComponent;
+    m_pComponent = (UFG::RagdollComponent *)simActorObject->m_Components.p[42].m_pComponent;
   }
-  else if ( (v10 & 0x8000u) == 0 )
+  else if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
   {
-    if ( (v10 >> 13) & 1 )
-    {
-      v11 = (UFG::RagdollComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                       (UFG::SimObjectGame *)&v2->vfptr,
-                                       UFG::RagdollComponent::_TypeUID);
-    }
-    else if ( (v10 >> 12) & 1 )
-    {
-      v11 = (UFG::RagdollComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                       (UFG::SimObjectGame *)&v2->vfptr,
-                                       UFG::RagdollComponent::_TypeUID);
-    }
-    else
-    {
-      v11 = (UFG::RagdollComponent *)UFG::SimObject::GetComponentOfType(
-                                       (UFG::SimObject *)&v2->vfptr,
-                                       UFG::RagdollComponent::_TypeUID);
-    }
+    m_pComponent = (UFG::RagdollComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                              simActorObject,
+                                              UFG::RagdollComponent::_TypeUID);
   }
   else
   {
-    v11 = (UFG::RagdollComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                     (UFG::SimObjectGame *)&v2->vfptr,
-                                     UFG::RagdollComponent::_TypeUID);
+    m_pComponent = (UFG::RagdollComponent *)UFG::SimObject::GetComponentOfType(
+                                              simActorObject,
+                                              UFG::RagdollComponent::_TypeUID);
   }
-  if ( !v11 )
+  if ( !m_pComponent )
   {
     if ( !v8 )
-      goto LABEL_22;
-    v11 = (UFG::RagdollComponent *)UFG::RagdollComponent::Acquire((UFG::SimObject *)&v2->vfptr);
+      goto LABEL_21;
+    m_pComponent = (UFG::RagdollComponent *)UFG::RagdollComponent::Acquire(simActorObject);
   }
-  UFG::RagdollComponent::SetCollisionState(v11, CS_KEYFRAMED_NO_COLLISION);
-LABEL_22:
-  v12 = v2->m_Flags;
-  if ( (v12 >> 14) & 1 )
+  UFG::RagdollComponent::SetCollisionState(m_pComponent, CS_KEYFRAMED_NO_COLLISION);
+LABEL_21:
+  v12 = simActorObject->m_Flags;
+  if ( (v12 & 0x4000) != 0 )
   {
-    v13 = (UFG::ActionTreeComponent *)v2->m_Components.p[7].m_pComponent;
+    ComponentOfTypeHK = (UFG::ActionTreeComponent *)simActorObject->m_Components.p[7].m_pComponent;
   }
-  else if ( (v12 & 0x8000u) == 0 )
+  else if ( v12 >= 0 )
   {
-    if ( (v12 >> 13) & 1 )
+    if ( (v12 & 0x2000) != 0 )
     {
-      v13 = (UFG::ActionTreeComponent *)v2->m_Components.p[6].m_pComponent;
+      ComponentOfTypeHK = (UFG::ActionTreeComponent *)simActorObject->m_Components.p[6].m_pComponent;
     }
-    else if ( (v12 >> 12) & 1 )
+    else if ( (v12 & 0x1000) != 0 )
     {
-      v13 = (UFG::ActionTreeComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                          (UFG::SimObjectGame *)&v2->vfptr,
-                                          UFG::ActionTreeComponent::_TypeUID);
+      ComponentOfTypeHK = (UFG::ActionTreeComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                        simActorObject,
+                                                        UFG::ActionTreeComponent::_TypeUID);
     }
     else
     {
-      v13 = (UFG::ActionTreeComponent *)UFG::SimObject::GetComponentOfType(
-                                          (UFG::SimObject *)&v2->vfptr,
-                                          UFG::ActionTreeComponent::_TypeUID);
+      ComponentOfTypeHK = (UFG::ActionTreeComponent *)UFG::SimObject::GetComponentOfType(
+                                                        simActorObject,
+                                                        UFG::ActionTreeComponent::_TypeUID);
     }
   }
   else
   {
-    v13 = (UFG::ActionTreeComponent *)v2->m_Components.p[7].m_pComponent;
+    ComponentOfTypeHK = (UFG::ActionTreeComponent *)simActorObject->m_Components.p[7].m_pComponent;
   }
-  if ( v13 )
-    UFG::ActionTreeComponent::Reset(v13);
-  v14 = v3->mParent.mOffset;
-  if ( v14 )
+  if ( ComponentOfTypeHK )
+    UFG::ActionTreeComponent::Reset(ComponentOfTypeHK);
+  mOffset = this->mParent.mOffset;
+  if ( mOffset )
   {
-    v15 = (signed __int64)&v3->mParent + v14;
+    v15 = (char *)&this->mParent + mOffset;
     if ( v15 )
     {
-      if ( *(_BYTE *)(v15 + 105) )
+      if ( v15[105] )
       {
-        v16 = v2->m_Flags;
-        if ( (v16 >> 14) & 1 )
+        v16 = simActorObject->m_Flags;
+        if ( (v16 & 0x4000) != 0 )
         {
-          v17 = v2->m_Components.p[27].m_pComponent;
+          v17 = simActorObject->m_Components.p[27].m_pComponent;
         }
         else
         {
-          if ( (v16 & 0x8000u) == 0 )
-          {
-            if ( (v16 >> 13) & 1 )
-            {
-              v18 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                      (UFG::SimObjectGame *)&v2->vfptr,
-                      UFG::CharacterPhysicsComponent::_TypeUID);
-            }
-            else if ( (v16 >> 12) & 1 )
-            {
-              v18 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                      (UFG::SimObjectGame *)&v2->vfptr,
-                      UFG::CharacterPhysicsComponent::_TypeUID);
-            }
-            else
-            {
-              v18 = UFG::SimObject::GetComponentOfType(
-                      (UFG::SimObject *)&v2->vfptr,
-                      UFG::CharacterPhysicsComponent::_TypeUID);
-            }
-          }
+          if ( v16 < 0 || (v16 & 0x2000) != 0 || (v16 & 0x1000) != 0 )
+            ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                simActorObject,
+                                UFG::CharacterPhysicsComponent::_TypeUID);
           else
-          {
-            v18 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                    (UFG::SimObjectGame *)&v2->vfptr,
-                    UFG::CharacterPhysicsComponent::_TypeUID);
-          }
-          v17 = v18;
+            ComponentOfType = UFG::SimObject::GetComponentOfType(
+                                simActorObject,
+                                UFG::CharacterPhysicsComponent::_TypeUID);
+          v17 = ComponentOfType;
         }
         if ( v17 )
         {
           LODWORD(v17[9].m_SafePointerList.mNode.mPrev) = 0;
-          v17[9].m_NameUID = v17[9].m_NameUID & 0xFFFFFFEF | 1;
+          v17[9].m_NameUID = v17[9].m_NameUID & 0xFFFFFFEE | 1;
         }
         else
         {
-          v19 = v2->m_Flags;
-          if ( ((unsigned __int16)v19 >> 14) & 1 )
-          {
+          v19 = simActorObject->m_Flags;
+          if ( (v19 & 0x4000) != 0 || (v19 & 0x8000u) != 0i64 || (v19 & 0x2000) != 0 || (v19 & 0x1000) != 0 )
             v20 = (UFG::RigidBody *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                      (UFG::SimObjectGame *)&v2->vfptr,
+                                      simActorObject,
                                       UFG::RigidBodyComponent::_TypeUID);
-          }
-          else if ( (v19 & 0x8000u) == 0i64 )
-          {
-            if ( ((unsigned __int16)v19 >> 13) & 1 )
-            {
-              v20 = (UFG::RigidBody *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                        (UFG::SimObjectGame *)&v2->vfptr,
-                                        UFG::RigidBodyComponent::_TypeUID);
-            }
-            else if ( ((unsigned __int16)v19 >> 12) & 1 )
-            {
-              v20 = (UFG::RigidBody *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                        (UFG::SimObjectGame *)&v2->vfptr,
-                                        UFG::RigidBodyComponent::_TypeUID);
-            }
-            else
-            {
-              v20 = (UFG::RigidBody *)UFG::SimObject::GetComponentOfType(
-                                        (UFG::SimObject *)&v2->vfptr,
-                                        UFG::RigidBodyComponent::_TypeUID);
-            }
-          }
           else
-          {
-            v20 = (UFG::RigidBody *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                      (UFG::SimObjectGame *)&v2->vfptr,
+            v20 = (UFG::RigidBody *)UFG::SimObject::GetComponentOfType(
+                                      simActorObject,
                                       UFG::RigidBodyComponent::_TypeUID);
-          }
           if ( v20 )
             UFG::RigidBody::SetMotionType(v20, 0x100u);
         }
@@ -383,116 +299,96 @@ LABEL_22:
     }
   }
   v21 = 6;
-  if ( v3->mDisableCharacterCollision )
+  if ( this->mDisableCharacterCollision )
   {
-    v22 = v2->m_Flags;
-    if ( (v22 >> 14) & 1 )
-    {
-      v23 = (UFG::CharacterPhysicsComponent *)v2->m_Components.p[27].m_pComponent;
-    }
-    else if ( (v22 & 0x8000u) == 0 )
-    {
-      if ( (v22 >> 13) & 1 )
-        v23 = (UFG::CharacterPhysicsComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                  (UFG::SimObjectGame *)&v2->vfptr,
-                                                  UFG::CharacterPhysicsComponent::_TypeUID);
-      else
-        v23 = (UFG::CharacterPhysicsComponent *)((v22 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                     (UFG::SimObjectGame *)&v2->vfptr,
-                                                                     UFG::CharacterPhysicsComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::CharacterPhysicsComponent::_TypeUID));
-    }
+    v22 = simActorObject->m_Flags;
+    if ( (v22 & 0x4000) != 0 )
+      v23 = (UFG::CharacterPhysicsComponent *)simActorObject->m_Components.p[27].m_pComponent;
     else
-    {
-      v23 = (UFG::CharacterPhysicsComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                (UFG::SimObjectGame *)&v2->vfptr,
-                                                UFG::CharacterPhysicsComponent::_TypeUID);
-    }
+      v23 = (UFG::CharacterPhysicsComponent *)(v22 < 0 || (v22 & 0x2000) != 0 || (v22 & 0x1000) != 0
+                                             ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                 simActorObject,
+                                                 UFG::CharacterPhysicsComponent::_TypeUID)
+                                             : UFG::SimObject::GetComponentOfType(
+                                                 simActorObject,
+                                                 UFG::CharacterPhysicsComponent::_TypeUID));
     if ( v23 )
       UFG::CharacterPhysicsComponent::SetCollisionModel(v23, CP_DISABLED);
   }
-  v24 = v2->m_Flags;
-  if ( (v24 >> 14) & 1 )
+  v24 = simActorObject->m_Flags;
+  if ( (v24 & 0x4000) != 0 )
   {
-    v25 = v2->m_Components.p[7].m_pComponent;
+    v25 = simActorObject->m_Components.p[7].m_pComponent;
   }
-  else if ( (v24 & 0x8000u) == 0 )
+  else if ( v24 >= 0 )
   {
-    if ( (v24 >> 13) & 1 )
+    if ( (v24 & 0x2000) != 0 )
     {
-      v25 = v2->m_Components.p[6].m_pComponent;
+      v25 = simActorObject->m_Components.p[6].m_pComponent;
     }
-    else if ( (v24 >> 12) & 1 )
+    else if ( (v24 & 0x1000) != 0 )
     {
-      v25 = UFG::SimObjectGame::GetComponentOfTypeHK(
-              (UFG::SimObjectGame *)&v2->vfptr,
-              UFG::ActionTreeComponent::_TypeUID);
+      v25 = UFG::SimObjectGame::GetComponentOfTypeHK(simActorObject, UFG::ActionTreeComponent::_TypeUID);
     }
     else
     {
-      v25 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::ActionTreeComponent::_TypeUID);
+      v25 = UFG::SimObject::GetComponentOfType(simActorObject, UFG::ActionTreeComponent::_TypeUID);
     }
   }
   else
   {
-    v25 = v2->m_Components.p[7].m_pComponent;
+    v25 = simActorObject->m_Components.p[7].m_pComponent;
   }
   if ( !v25 )
   {
-    v26 = v2->m_pSceneObj;
-    v27 = UFG::GetSimulationMemoryPool();
-    v28 = UFG::qMemoryPool::Allocate(v27, 0x560ui64, "NISActorNode::setupActorForNIS", 0i64, 1u);
+    m_pSceneObj = simActorObject->m_pSceneObj;
+    SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+    v28 = UFG::qMemoryPool::Allocate(SimulationMemoryPool, 0x560ui64, "NISActorNode::setupActorForNIS", 0i64, 1u);
     v51 = v28;
     if ( v28 )
     {
-      UFG::ActionTreeComponent::ActionTreeComponent((UFG::ActionTreeComponent *)v28, v26, 0, 0i64);
+      UFG::ActionTreeComponent::ActionTreeComponent((UFG::ActionTreeComponent *)v28, m_pSceneObj, 0, 0i64);
       v6 = v29;
     }
-    v30 = v2->m_Flags;
-    if ( (v30 >> 14) & 1 )
+    v30 = simActorObject->m_Flags;
+    if ( (v30 & 0x4000) != 0 )
     {
       v21 = 7;
     }
-    else if ( (v30 & 0x8000u) == 0 )
+    else if ( v30 >= 0 )
     {
-      if ( !((v30 >> 13) & 1) )
+      if ( (v30 & 0x2000) == 0 )
         v21 = -1;
     }
     else
     {
       v21 = 7;
     }
-    UFG::SimObjectModifier::SimObjectModifier(&v49, (UFG::SimObject *)&v2->vfptr, 1);
+    UFG::SimObjectModifier::SimObjectModifier(&v49, simActorObject, 1);
     UFG::SimObjectModifier::AttachComponent(&v49, v6, v21);
     UFG::SimObjectModifier::Close(&v49);
     UFG::SimObjectModifier::~SimObjectModifier(&v49);
   }
-  v31 = v2->m_Flags;
-  if ( (v31 >> 14) & 1 )
+  v31 = simActorObject->m_Flags;
+  if ( (v31 & 0x4000) != 0 || v31 < 0 )
   {
-    v32 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v2);
+    v32 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(simActorObject);
   }
-  else if ( (v31 & 0x8000u) == 0 )
+  else if ( (v31 & 0x2000) != 0 )
   {
-    if ( (v31 >> 13) & 1 )
-    {
-      v32 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v2);
-    }
-    else if ( (v31 >> 12) & 1 )
-    {
-      v32 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                  (UFG::SimObjectGame *)&v2->vfptr,
-                                                  UFG::CharacterAnimationComponent::_TypeUID);
-    }
-    else
-    {
-      v32 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                  (UFG::SimObject *)&v2->vfptr,
-                                                  UFG::CharacterAnimationComponent::_TypeUID);
-    }
+    v32 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)simActorObject);
+  }
+  else if ( (v31 & 0x1000) != 0 )
+  {
+    v32 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                simActorObject,
+                                                UFG::CharacterAnimationComponent::_TypeUID);
   }
   else
   {
-    v32 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v2);
+    v32 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                simActorObject,
+                                                UFG::CharacterAnimationComponent::_TypeUID);
   }
   v33 = v32;
   if ( v32 )
@@ -500,92 +396,59 @@ LABEL_22:
     v32->mEnableUpdateTransforms = 1;
     v32->mUpdatedFromNIS = 1;
   }
-  v34 = v2->m_Flags;
-  if ( (v34 >> 14) & 1 )
+  v34 = simActorObject->m_Flags;
+  if ( (v34 & 0x4000) != 0 )
   {
-    v35 = v2->m_Components.p[28].m_pComponent;
+    v35 = simActorObject->m_Components.p[28].m_pComponent;
   }
   else
   {
-    if ( (v34 & 0x8000u) == 0 )
-    {
-      if ( (v34 >> 13) & 1 )
-      {
-        v36 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                (UFG::SimObjectGame *)&v2->vfptr,
-                UFG::WorldContextComponent::_TypeUID);
-      }
-      else if ( (v34 >> 12) & 1 )
-      {
-        v36 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                (UFG::SimObjectGame *)&v2->vfptr,
-                UFG::WorldContextComponent::_TypeUID);
-      }
-      else
-      {
-        v36 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::WorldContextComponent::_TypeUID);
-      }
-    }
+    if ( v34 < 0 || (v34 & 0x2000) != 0 || (v34 & 0x1000) != 0 )
+      v36 = UFG::SimObjectGame::GetComponentOfTypeHK(simActorObject, UFG::WorldContextComponent::_TypeUID);
     else
-    {
-      v36 = UFG::SimObjectGame::GetComponentOfTypeHK(
-              (UFG::SimObjectGame *)&v2->vfptr,
-              UFG::WorldContextComponent::_TypeUID);
-    }
+      v36 = UFG::SimObject::GetComponentOfType(simActorObject, UFG::WorldContextComponent::_TypeUID);
     v35 = v36;
   }
   if ( v35 )
-    ((void (*)(void))v35->vfptr[8].__vecDelDtor)();
-  v37 = v2->m_Flags;
-  if ( (v37 >> 14) & 1 )
+    ((void (__fastcall *)(UFG::SimComponent *))v35->vfptr[8].__vecDelDtor)(v35);
+  v37 = simActorObject->m_Flags;
+  if ( (v37 & 0x4000) != 0 )
   {
-    v38 = (UFG::AnimationLODComponent *)v2->m_Components.p[13].m_pComponent;
+    v38 = (UFG::AnimationLODComponent *)simActorObject->m_Components.p[13].m_pComponent;
   }
-  else if ( (v37 & 0x8000u) == 0 )
+  else if ( v37 >= 0 )
   {
-    if ( (v37 >> 13) & 1 )
-    {
-      v39 = UFG::SimObjectGame::GetComponentOfTypeHK(
-              (UFG::SimObjectGame *)&v2->vfptr,
-              UFG::AnimationLODComponent::_TypeUID);
-    }
-    else if ( (v37 >> 12) & 1 )
-    {
-      v39 = UFG::SimObjectGame::GetComponentOfTypeHK(
-              (UFG::SimObjectGame *)&v2->vfptr,
-              UFG::AnimationLODComponent::_TypeUID);
-    }
+    if ( (v37 & 0x2000) != 0 || (v37 & 0x1000) != 0 )
+      v39 = UFG::SimObjectGame::GetComponentOfTypeHK(simActorObject, UFG::AnimationLODComponent::_TypeUID);
     else
-    {
-      v39 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::AnimationLODComponent::_TypeUID);
-    }
+      v39 = UFG::SimObject::GetComponentOfType(simActorObject, UFG::AnimationLODComponent::_TypeUID);
     v38 = (UFG::AnimationLODComponent *)v39;
   }
   else
   {
-    v38 = (UFG::AnimationLODComponent *)v2->m_Components.p[13].m_pComponent;
+    v38 = (UFG::AnimationLODComponent *)simActorObject->m_Components.p[13].m_pComponent;
   }
   if ( v38 )
   {
     UFG::AnimationLODComponent::MakeHighLOD(v38);
     ((void (__fastcall *)(UFG::AnimationLODComponent *))v38->vfptr[8].__vecDelDtor)(v38);
   }
-  v40 = v2->m_Flags;
-  if ( (v40 >> 14) & 1 )
+  v40 = simActorObject->m_Flags;
+  if ( (v40 & 0x4000) != 0 )
   {
-    v41 = (UFG::FacialActionTreeComponent *)v2->m_Components.p[31].m_pComponent;
+    v41 = (UFG::FacialActionTreeComponent *)simActorObject->m_Components.p[31].m_pComponent;
   }
   else
   {
-    if ( (v40 & 0x8000u) != 0 || (v40 >> 13) & 1 )
-      goto LABEL_136;
-    if ( (v40 >> 12) & 1 )
+    if ( v40 < 0 || (v40 & 0x2000) != 0 )
+      goto LABEL_128;
+    if ( (v40 & 0x1000) != 0 )
       v41 = (UFG::FacialActionTreeComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                (UFG::SimObjectGame *)&v2->vfptr,
+                                                simActorObject,
                                                 UFG::FacialActionTreeComponent::_TypeUID);
     else
       v41 = (UFG::FacialActionTreeComponent *)UFG::SimObject::GetComponentOfType(
-                                                (UFG::SimObject *)&v2->vfptr,
+                                                simActorObject,
                                                 UFG::FacialActionTreeComponent::_TypeUID);
   }
   if ( v41 )
@@ -593,95 +456,58 @@ LABEL_22:
     UFG::FacialActionTreeComponent::Disable(v41);
     if ( v33 )
     {
-      v42 = v33->mCreature;
-      if ( v42 )
-        Creature::KillBlendTree(v42);
+      mCreature = v33->mCreature;
+      if ( mCreature )
+        Creature::KillBlendTree(mCreature);
     }
   }
-LABEL_136:
-  v43 = v2->m_Flags;
-  if ( !((v43 >> 14) & 1) )
+LABEL_128:
+  v43 = simActorObject->m_Flags;
+  if ( (v43 & 0x4000) == 0 )
   {
-    if ( (v43 & 0x8000u) != 0 )
+    if ( v43 < 0 )
     {
-      v44 = v2->m_Components.p[34].m_pComponent;
-      goto LABEL_143;
+      v44 = simActorObject->m_Components.p[34].m_pComponent;
+      goto LABEL_135;
     }
-    if ( !((v43 >> 13) & 1) )
+    if ( (v43 & 0x2000) == 0 )
     {
-      if ( (v43 >> 12) & 1 )
-        v44 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                (UFG::SimObjectGame *)&v2->vfptr,
-                UFG::PhysicsMoverInterface::_TypeUID);
+      if ( (v43 & 0x1000) != 0 )
+        v44 = UFG::SimObjectGame::GetComponentOfTypeHK(simActorObject, UFG::PhysicsMoverInterface::_TypeUID);
       else
-        v44 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::PhysicsMoverInterface::_TypeUID);
-LABEL_143:
+        v44 = UFG::SimObject::GetComponentOfType(simActorObject, UFG::PhysicsMoverInterface::_TypeUID);
+LABEL_135:
       if ( v44 )
         LODWORD(v44[14].vfptr) |= 8u;
-      goto LABEL_145;
     }
   }
-LABEL_145:
-  v45 = v2->m_Flags;
-  if ( (v45 >> 14) & 1 )
+  v45 = simActorObject->m_Flags;
+  if ( (v45 & 0x4000) != 0 )
   {
-    v46 = v2->m_Components.p[17].m_pComponent;
+    v46 = simActorObject->m_Components.p[17].m_pComponent;
   }
-  else if ( (v45 & 0x8000u) == 0 )
+  else if ( v45 >= 0 )
   {
-    if ( (v45 >> 13) & 1 )
-    {
-      v46 = UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)&v2->vfptr, UFG::CopUnitComponent::_TypeUID);
-    }
-    else if ( (v45 >> 12) & 1 )
-    {
-      v46 = UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)&v2->vfptr, UFG::CopUnitComponent::_TypeUID);
-    }
+    if ( (v45 & 0x2000) != 0 || (v45 & 0x1000) != 0 )
+      v46 = UFG::SimObjectGame::GetComponentOfTypeHK(simActorObject, UFG::CopUnitComponent::_TypeUID);
     else
-    {
-      v46 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::CopUnitComponent::_TypeUID);
-    }
+      v46 = UFG::SimObject::GetComponentOfType(simActorObject, UFG::CopUnitComponent::_TypeUID);
   }
   else
   {
-    v46 = v2->m_Components.p[17].m_pComponent;
+    v46 = simActorObject->m_Components.p[17].m_pComponent;
   }
   if ( v46 )
-    LOBYTE(v46[7].m_Flags) &= 0xFDu;
-  v47 = v2->m_Flags;
-  if ( (v47 >> 14) & 1 )
-  {
+    LOBYTE(v46[7].m_Flags) &= ~2u;
+  v47 = simActorObject->m_Flags;
+  if ( (v47 & 0x4000) != 0 || v47 < 0 || (v47 & 0x2000) != 0 || (v47 & 0x1000) != 0 )
     v48 = (UFG::CompositeLookComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                           (UFG::SimObjectGame *)&v2->vfptr,
+                                           simActorObject,
                                            UFG::CompositeLookComponent::_TypeUID);
-  }
-  else if ( (v47 & 0x8000u) == 0 )
-  {
-    if ( (v47 >> 13) & 1 )
-    {
-      v48 = (UFG::CompositeLookComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                             (UFG::SimObjectGame *)&v2->vfptr,
-                                             UFG::CompositeLookComponent::_TypeUID);
-    }
-    else if ( (v47 >> 12) & 1 )
-    {
-      v48 = (UFG::CompositeLookComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                             (UFG::SimObjectGame *)&v2->vfptr,
-                                             UFG::CompositeLookComponent::_TypeUID);
-    }
-    else
-    {
-      v48 = (UFG::CompositeLookComponent *)UFG::SimObject::GetComponentOfType(
-                                             (UFG::SimObject *)&v2->vfptr,
-                                             UFG::CompositeLookComponent::_TypeUID);
-    }
-  }
   else
-  {
-    v48 = (UFG::CompositeLookComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                           (UFG::SimObjectGame *)&v2->vfptr,
+    v48 = (UFG::CompositeLookComponent *)UFG::SimObject::GetComponentOfType(
+                                           simActorObject,
                                            UFG::CompositeLookComponent::_TypeUID);
-  }
   if ( v48 )
     UFG::CompositeLookComponent::ForceVisibleTransparency(v48);
 }
@@ -690,173 +516,125 @@ LABEL_145:
 // RVA: 0x3E7A80
 void __fastcall NISActorNode::nodeCleanup(NISActorNode *this)
 {
-  NISActorNode *v1; // rsi
-  UFG::SimObjectCVBase *v2; // rbx
-  UFG::PedSpawnManager *v3; // rax
-  unsigned __int16 v4; // cx
-  UFG::SimComponent *v5; // rax
-  __int64 v6; // rax
-  signed __int64 v7; // rcx
-  unsigned __int16 v8; // cx
-  UFG::SimComponent *v9; // rax
-  unsigned __int16 v10; // cx
-  UFG::SimComponent *v11; // rax
+  UFG::SimObjectCVBase *SimObject; // rbx
+  UFG::PedSpawnManager *Instance; // rax
+  __int16 m_Flags; // cx
+  UFG::SimComponent *m_pComponent; // rax
+  __int64 mOffset; // rax
+  char *v7; // rcx
+  __int16 v8; // cx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
+  __int16 v10; // cx
+  UFG::SimComponent *ComponentOfType; // rax
   UFG::RigidBody *v12; // rdi
   UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject> *v13; // rcx
-  const char *v14; // rax
-  UFG::CollisionMeshData *v15; // rdx
-  unsigned __int16 v16; // cx
+  const char *TypeName; // rax
+  UFG::CollisionMeshData *mCollisionMeshData; // rdx
+  __int16 v16; // cx
   UFG::CharacterPhysicsComponent *v17; // rdi
   UFG::SimComponent *v18; // rax
-  unsigned __int16 v19; // cx
+  __int16 v19; // cx
   UFG::CharacterAnimationComponent *v20; // rax
-  Creature *v21; // rcx
-  unsigned __int16 v22; // cx
+  Creature *mCreature; // rcx
+  __int16 v22; // cx
   UFG::SimComponent *v23; // rcx
   UFG::SimComponent *v24; // rax
-  unsigned __int16 v25; // cx
+  __int16 v25; // cx
   UFG::SimComponent *v26; // rcx
   UFG::SimComponent *v27; // rax
-  unsigned __int16 v28; // cx
+  __int16 v28; // cx
   UFG::FacialActionTreeComponent *v29; // rax
-  unsigned __int16 v30; // cx
+  __int16 v30; // cx
   UFG::SimComponent *v31; // rax
-  unsigned __int16 v32; // cx
+  __int16 v32; // cx
   UFG::SimComponent *v33; // rax
-  UFG::qReflectHandleBase v34; // [rsp+38h] [rbp-30h]
+  UFG::qReflectHandleBase v34; // [rsp+38h] [rbp-30h] BYREF
 
-  v1 = this;
-  v2 = (UFG::SimObjectCVBase *)UFG::Simulation::GetSimObject(&UFG::gSim, &this->mActorID);
-  if ( !v2 )
+  SimObject = (UFG::SimObjectCVBase *)UFG::Simulation::GetSimObject(&UFG::gSim, &this->mActorID);
+  if ( !SimObject )
     return;
-  v3 = UFG::PedSpawnManager::GetInstance();
+  Instance = UFG::PedSpawnManager::GetInstance();
   if ( !UFG::PedSpawnManager::ChangeActiveStatusOfSimObj(
-          v3,
+          Instance,
           Active,
-          (UFG::SimObject *)&v2->vfptr,
+          SimObject,
           "d:\\ufg\\madscience\\project\\builds\\sdhd\\sdhd_pc\\source\\nis\\nisnodes.cpp",
           396) )
-    UFG::SimObject::Restore((UFG::SimObject *)&v2->vfptr);
-  v4 = v2->m_Flags;
-  if ( (v4 >> 14) & 1 )
+    UFG::SimObject::Restore(SimObject);
+  m_Flags = SimObject->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 )
   {
-    v5 = v2->m_Components.p[7].m_pComponent;
+    m_pComponent = SimObject->m_Components.p[7].m_pComponent;
   }
-  else if ( (v4 & 0x8000u) == 0 )
+  else if ( m_Flags >= 0 )
   {
-    if ( (v4 >> 13) & 1 )
+    if ( (m_Flags & 0x2000) != 0 )
     {
-      v5 = v2->m_Components.p[6].m_pComponent;
+      m_pComponent = SimObject->m_Components.p[6].m_pComponent;
     }
-    else if ( (v4 >> 12) & 1 )
+    else if ( (m_Flags & 0x1000) != 0 )
     {
-      v5 = UFG::SimObjectGame::GetComponentOfTypeHK(
-             (UFG::SimObjectGame *)&v2->vfptr,
-             UFG::ActionTreeComponent::_TypeUID);
+      m_pComponent = UFG::SimObjectGame::GetComponentOfTypeHK(SimObject, UFG::ActionTreeComponent::_TypeUID);
     }
     else
     {
-      v5 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::ActionTreeComponent::_TypeUID);
+      m_pComponent = UFG::SimObject::GetComponentOfType(SimObject, UFG::ActionTreeComponent::_TypeUID);
     }
   }
   else
   {
-    v5 = v2->m_Components.p[7].m_pComponent;
+    m_pComponent = SimObject->m_Components.p[7].m_pComponent;
   }
-  if ( v5 )
+  if ( m_pComponent )
   {
-    LOBYTE(v5[2].m_pSimObject) = 0;
-    if ( v1->mResetActorOnEnd )
-      ActionController::Stop((ActionController *)&v5[3]);
+    LOBYTE(m_pComponent[2].m_pSimObject) = 0;
+    if ( this->mResetActorOnEnd )
+      ActionController::Stop((ActionController *)&m_pComponent[3]);
   }
-  v6 = v1->mParent.mOffset;
-  if ( v6 )
+  mOffset = this->mParent.mOffset;
+  if ( mOffset )
   {
-    v7 = (signed __int64)&v1->mParent + v6;
+    v7 = (char *)&this->mParent + mOffset;
     if ( v7 )
     {
-      if ( *(_BYTE *)(v7 + 105) )
+      if ( v7[105] )
       {
-        v8 = v2->m_Flags;
-        if ( (v8 >> 14) & 1 )
+        v8 = SimObject->m_Flags;
+        if ( (v8 & 0x4000) != 0 )
         {
-          v9 = v2->m_Components.p[27].m_pComponent;
+          ComponentOfTypeHK = SimObject->m_Components.p[27].m_pComponent;
         }
-        else if ( (v8 & 0x8000u) == 0 )
+        else if ( v8 < 0 || (v8 & 0x2000) != 0 || (v8 & 0x1000) != 0 )
         {
-          if ( (v8 >> 13) & 1 )
-          {
-            v9 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                   (UFG::SimObjectGame *)&v2->vfptr,
-                   UFG::CharacterPhysicsComponent::_TypeUID);
-          }
-          else if ( (v8 >> 12) & 1 )
-          {
-            v9 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                   (UFG::SimObjectGame *)&v2->vfptr,
-                   UFG::CharacterPhysicsComponent::_TypeUID);
-          }
-          else
-          {
-            v9 = UFG::SimObject::GetComponentOfType(
-                   (UFG::SimObject *)&v2->vfptr,
-                   UFG::CharacterPhysicsComponent::_TypeUID);
-          }
+          ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                SimObject,
+                                UFG::CharacterPhysicsComponent::_TypeUID);
         }
         else
         {
-          v9 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                 (UFG::SimObjectGame *)&v2->vfptr,
-                 UFG::CharacterPhysicsComponent::_TypeUID);
+          ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(SimObject, UFG::CharacterPhysicsComponent::_TypeUID);
         }
-        if ( v9 )
+        if ( ComponentOfTypeHK )
         {
-          LODWORD(v9[9].m_SafePointerList.mNode.mPrev) = 1092416963;
-          v9[9].m_NameUID &= 0xFFFFFFFE;
+          LODWORD(ComponentOfTypeHK[9].m_SafePointerList.mNode.mPrev) = 1092416963;
+          ComponentOfTypeHK[9].m_NameUID &= ~1u;
         }
         else
         {
-          v10 = v2->m_Flags;
-          if ( (v10 >> 14) & 1 )
-          {
-            v11 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                    (UFG::SimObjectGame *)&v2->vfptr,
-                    UFG::RigidBodyComponent::_TypeUID);
-          }
-          else if ( (v10 & 0x8000u) == 0 )
-          {
-            if ( (v10 >> 13) & 1 )
-            {
-              v11 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                      (UFG::SimObjectGame *)&v2->vfptr,
-                      UFG::RigidBodyComponent::_TypeUID);
-            }
-            else if ( (v10 >> 12) & 1 )
-            {
-              v11 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                      (UFG::SimObjectGame *)&v2->vfptr,
-                      UFG::RigidBodyComponent::_TypeUID);
-            }
-            else
-            {
-              v11 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::RigidBodyComponent::_TypeUID);
-            }
-          }
+          v10 = SimObject->m_Flags;
+          if ( (v10 & 0x4000) != 0 || v10 < 0 || (v10 & 0x2000) != 0 || (v10 & 0x1000) != 0 )
+            ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(SimObject, UFG::RigidBodyComponent::_TypeUID);
           else
-          {
-            v11 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                    (UFG::SimObjectGame *)&v2->vfptr,
-                    UFG::RigidBodyComponent::_TypeUID);
-          }
-          v12 = (UFG::RigidBody *)v11;
-          if ( v11 )
+            ComponentOfType = UFG::SimObject::GetComponentOfType(SimObject, UFG::RigidBodyComponent::_TypeUID);
+          v12 = (UFG::RigidBody *)ComponentOfType;
+          if ( ComponentOfType )
           {
             UFG::qReflectHandleBase::qReflectHandleBase(&v34);
-            v14 = UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject>::GetTypeName(v13);
-            v34.mTypeUID = UFG::qStringHash64(v14, 0xFFFFFFFFFFFFFFFFui64);
-            v15 = v12->mCollisionMeshData;
-            if ( v15 )
-              UFG::qReflectHandleBase::operator=(&v34, (UFG::qReflectHandleBase *)&v15->mObjectProperties.mPrev);
+            TypeName = UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject>::GetTypeName(v13);
+            v34.mTypeUID = UFG::qStringHash64(TypeName, 0xFFFFFFFFFFFFFFFFui64);
+            mCollisionMeshData = v12->mCollisionMeshData;
+            if ( mCollisionMeshData )
+              UFG::qReflectHandleBase::operator=(&v34, &mCollisionMeshData->mObjectProperties);
             if ( v34.mData && LODWORD(v34.mData[2].mBaseNode.mChildren[1]) == 2 )
               UFG::RigidBody::SetMotionType(v12, 0x80u);
             UFG::qReflectHandleBase::~qReflectHandleBase(&v34);
@@ -865,34 +643,18 @@ void __fastcall NISActorNode::nodeCleanup(NISActorNode *this)
       }
     }
   }
-  if ( v1->mDisableCharacterCollision )
+  if ( this->mDisableCharacterCollision )
   {
-    v16 = v2->m_Flags;
-    if ( (v16 >> 14) & 1 )
+    v16 = SimObject->m_Flags;
+    if ( (v16 & 0x4000) != 0 )
     {
-      v17 = (UFG::CharacterPhysicsComponent *)v2->m_Components.p[27].m_pComponent;
+      v17 = (UFG::CharacterPhysicsComponent *)SimObject->m_Components.p[27].m_pComponent;
     }
     else
     {
-      if ( (v16 & 0x8000u) == 0 )
-      {
-        if ( (v16 >> 13) & 1 )
-          v18 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                  (UFG::SimObjectGame *)&v2->vfptr,
-                  UFG::CharacterPhysicsComponent::_TypeUID);
-        else
-          v18 = (v16 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                    (UFG::SimObjectGame *)&v2->vfptr,
-                                    UFG::CharacterPhysicsComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(
-                                                                                  (UFG::SimObject *)&v2->vfptr,
-                                                                                  UFG::CharacterPhysicsComponent::_TypeUID);
-      }
-      else
-      {
-        v18 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                (UFG::SimObjectGame *)&v2->vfptr,
-                UFG::CharacterPhysicsComponent::_TypeUID);
-      }
+      v18 = v16 < 0 || (v16 & 0x2000) != 0 || (v16 & 0x1000) != 0
+          ? UFG::SimObjectGame::GetComponentOfTypeHK(SimObject, UFG::CharacterPhysicsComponent::_TypeUID)
+          : UFG::SimObject::GetComponentOfType(SimObject, UFG::CharacterPhysicsComponent::_TypeUID);
       v17 = (UFG::CharacterPhysicsComponent *)v18;
     }
     if ( v17 )
@@ -901,271 +663,210 @@ void __fastcall NISActorNode::nodeCleanup(NISActorNode *this)
       UFG::CharacterPhysicsComponent::PlaceOnGroundAfterNIS(v17);
     }
   }
-  v19 = v2->m_Flags;
-  if ( (v19 >> 14) & 1 )
+  v19 = SimObject->m_Flags;
+  if ( (v19 & 0x4000) != 0 || v19 < 0 )
   {
-    v20 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v2);
+    v20 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(SimObject);
   }
-  else if ( (v19 & 0x8000u) == 0 )
+  else if ( (v19 & 0x2000) != 0 )
   {
-    if ( (v19 >> 13) & 1 )
-    {
-      v20 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v2);
-    }
-    else if ( (v19 >> 12) & 1 )
-    {
-      v20 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                  (UFG::SimObjectGame *)&v2->vfptr,
-                                                  UFG::CharacterAnimationComponent::_TypeUID);
-    }
-    else
-    {
-      v20 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                  (UFG::SimObject *)&v2->vfptr,
-                                                  UFG::CharacterAnimationComponent::_TypeUID);
-    }
+    v20 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)SimObject);
+  }
+  else if ( (v19 & 0x1000) != 0 )
+  {
+    v20 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                SimObject,
+                                                UFG::CharacterAnimationComponent::_TypeUID);
   }
   else
   {
-    v20 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v2);
+    v20 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                SimObject,
+                                                UFG::CharacterAnimationComponent::_TypeUID);
   }
   if ( v20 )
     v20->mUpdatedFromNIS = 0;
-  if ( v1->mResetActorOnEnd )
+  if ( this->mResetActorOnEnd )
   {
     if ( v20 )
     {
-      v21 = v20->mCreature;
-      if ( v21 )
-        Creature::KillBlendTree(v21);
+      mCreature = v20->mCreature;
+      if ( mCreature )
+        Creature::KillBlendTree(mCreature);
     }
-    UFG::SimObjectUtility::ResetState((UFG::SimObject *)&v2->vfptr, 0, 0);
+    UFG::SimObjectUtility::ResetState(SimObject, 0, 0);
   }
-  v22 = v2->m_Flags;
-  if ( (v22 >> 14) & 1 )
+  v22 = SimObject->m_Flags;
+  if ( (v22 & 0x4000) != 0 )
   {
-    v23 = v2->m_Components.p[28].m_pComponent;
+    v23 = SimObject->m_Components.p[28].m_pComponent;
   }
   else
   {
-    if ( (v22 & 0x8000u) == 0 )
-    {
-      if ( (v22 >> 13) & 1 )
-      {
-        v24 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                (UFG::SimObjectGame *)&v2->vfptr,
-                UFG::WorldContextComponent::_TypeUID);
-      }
-      else if ( (v22 >> 12) & 1 )
-      {
-        v24 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                (UFG::SimObjectGame *)&v2->vfptr,
-                UFG::WorldContextComponent::_TypeUID);
-      }
-      else
-      {
-        v24 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::WorldContextComponent::_TypeUID);
-      }
-    }
+    if ( v22 < 0 || (v22 & 0x2000) != 0 || (v22 & 0x1000) != 0 )
+      v24 = UFG::SimObjectGame::GetComponentOfTypeHK(SimObject, UFG::WorldContextComponent::_TypeUID);
     else
-    {
-      v24 = UFG::SimObjectGame::GetComponentOfTypeHK(
-              (UFG::SimObjectGame *)&v2->vfptr,
-              UFG::WorldContextComponent::_TypeUID);
-    }
+      v24 = UFG::SimObject::GetComponentOfType(SimObject, UFG::WorldContextComponent::_TypeUID);
     v23 = v24;
   }
   if ( v23 )
-    ((void (*)(void))v23->vfptr[9].__vecDelDtor)();
-  v25 = v2->m_Flags;
-  if ( (v25 >> 14) & 1 )
+    ((void (__fastcall *)(UFG::SimComponent *))v23->vfptr[9].__vecDelDtor)(v23);
+  v25 = SimObject->m_Flags;
+  if ( (v25 & 0x4000) != 0 )
   {
-    v26 = v2->m_Components.p[13].m_pComponent;
+    v26 = SimObject->m_Components.p[13].m_pComponent;
   }
-  else if ( (v25 & 0x8000u) == 0 )
+  else if ( v25 >= 0 )
   {
-    if ( (v25 >> 13) & 1 )
-    {
-      v27 = UFG::SimObjectGame::GetComponentOfTypeHK(
-              (UFG::SimObjectGame *)&v2->vfptr,
-              UFG::AnimationLODComponent::_TypeUID);
-    }
-    else if ( (v25 >> 12) & 1 )
-    {
-      v27 = UFG::SimObjectGame::GetComponentOfTypeHK(
-              (UFG::SimObjectGame *)&v2->vfptr,
-              UFG::AnimationLODComponent::_TypeUID);
-    }
+    if ( (v25 & 0x2000) != 0 || (v25 & 0x1000) != 0 )
+      v27 = UFG::SimObjectGame::GetComponentOfTypeHK(SimObject, UFG::AnimationLODComponent::_TypeUID);
     else
-    {
-      v27 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::AnimationLODComponent::_TypeUID);
-    }
+      v27 = UFG::SimObject::GetComponentOfType(SimObject, UFG::AnimationLODComponent::_TypeUID);
     v26 = v27;
   }
   else
   {
-    v26 = v2->m_Components.p[13].m_pComponent;
+    v26 = SimObject->m_Components.p[13].m_pComponent;
   }
   if ( v26 )
-    ((void (*)(void))v26->vfptr[9].__vecDelDtor)();
-  v28 = v2->m_Flags;
-  if ( (v28 >> 14) & 1 )
+    ((void (__fastcall *)(UFG::SimComponent *))v26->vfptr[9].__vecDelDtor)(v26);
+  v28 = SimObject->m_Flags;
+  if ( (v28 & 0x4000) != 0 )
   {
-    v29 = (UFG::FacialActionTreeComponent *)v2->m_Components.p[31].m_pComponent;
+    v29 = (UFG::FacialActionTreeComponent *)SimObject->m_Components.p[31].m_pComponent;
   }
   else
   {
-    if ( (v28 & 0x8000u) != 0 || (v28 >> 13) & 1 )
-      goto LABEL_108;
-    if ( (v28 >> 12) & 1 )
+    if ( v28 < 0 || (v28 & 0x2000) != 0 )
+      goto LABEL_101;
+    if ( (v28 & 0x1000) != 0 )
       v29 = (UFG::FacialActionTreeComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                (UFG::SimObjectGame *)&v2->vfptr,
+                                                SimObject,
                                                 UFG::FacialActionTreeComponent::_TypeUID);
     else
       v29 = (UFG::FacialActionTreeComponent *)UFG::SimObject::GetComponentOfType(
-                                                (UFG::SimObject *)&v2->vfptr,
+                                                SimObject,
                                                 UFG::FacialActionTreeComponent::_TypeUID);
   }
   if ( v29 )
     UFG::FacialActionTreeComponent::Enable(v29);
-LABEL_108:
-  v30 = v2->m_Flags;
-  if ( !((v30 >> 14) & 1) )
+LABEL_101:
+  v30 = SimObject->m_Flags;
+  if ( (v30 & 0x4000) == 0 )
   {
-    if ( (v30 & 0x8000u) != 0 )
+    if ( v30 < 0 )
     {
-      v31 = v2->m_Components.p[34].m_pComponent;
-      goto LABEL_115;
+      v31 = SimObject->m_Components.p[34].m_pComponent;
+      goto LABEL_108;
     }
-    if ( !((v30 >> 13) & 1) )
+    if ( (v30 & 0x2000) == 0 )
     {
-      if ( (v30 >> 12) & 1 )
-        v31 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                (UFG::SimObjectGame *)&v2->vfptr,
-                UFG::PhysicsMoverInterface::_TypeUID);
+      if ( (v30 & 0x1000) != 0 )
+        v31 = UFG::SimObjectGame::GetComponentOfTypeHK(SimObject, UFG::PhysicsMoverInterface::_TypeUID);
       else
-        v31 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::PhysicsMoverInterface::_TypeUID);
-LABEL_115:
+        v31 = UFG::SimObject::GetComponentOfType(SimObject, UFG::PhysicsMoverInterface::_TypeUID);
+LABEL_108:
       if ( v31 )
-        LODWORD(v31[14].vfptr) &= 0xFFFFFFF7;
-      goto LABEL_117;
+        LODWORD(v31[14].vfptr) &= ~8u;
     }
   }
-LABEL_117:
-  v32 = v2->m_Flags;
-  if ( (v32 >> 14) & 1 )
+  v32 = SimObject->m_Flags;
+  if ( (v32 & 0x4000) != 0 )
   {
-    v33 = v2->m_Components.p[17].m_pComponent;
+    v33 = SimObject->m_Components.p[17].m_pComponent;
   }
-  else if ( (v32 & 0x8000u) == 0 )
+  else if ( v32 >= 0 )
   {
-    if ( (v32 >> 13) & 1 )
-    {
-      v33 = UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)&v2->vfptr, UFG::CopUnitComponent::_TypeUID);
-    }
-    else if ( (v32 >> 12) & 1 )
-    {
-      v33 = UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)&v2->vfptr, UFG::CopUnitComponent::_TypeUID);
-    }
+    if ( (v32 & 0x2000) != 0 || (v32 & 0x1000) != 0 )
+      v33 = UFG::SimObjectGame::GetComponentOfTypeHK(SimObject, UFG::CopUnitComponent::_TypeUID);
     else
-    {
-      v33 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::CopUnitComponent::_TypeUID);
-    }
+      v33 = UFG::SimObject::GetComponentOfType(SimObject, UFG::CopUnitComponent::_TypeUID);
   }
   else
   {
-    v33 = v2->m_Components.p[17].m_pComponent;
+    v33 = SimObject->m_Components.p[17].m_pComponent;
   }
   if ( v33 )
     LOBYTE(v33[7].m_Flags) |= 2u;
-  NISActorNode::RestoreEquippedItems(v1, (UFG::SimObject *)&v2->vfptr);
-  if ( v1->mDeleteActorOnEnd )
-    UFG::Simulation::DestroySimObject(&UFG::gSim, (UFG::SimObject *)&v2->vfptr);
+  NISActorNode::RestoreEquippedItems(this, SimObject);
+  if ( this->mDeleteActorOnEnd )
+    UFG::Simulation::DestroySimObject(&UFG::gSim, SimObject);
 }
 
 // File Line: 518
 // RVA: 0x3E5040
 void __fastcall NISActorNode::SetPlayTime(NISActorNode *this, float timeAbsolute, bool fixedTimeMode)
 {
-  bool v3; // si
-  UFG::SimObjectGame *v4; // rax
+  UFG::SimObjectGame *SimObject; // rax
   UFG::SimObjectCVBase *v5; // rbx
-  unsigned __int16 v6; // dx
-  UFG::SimComponent *v7; // rax
-  unsigned __int16 v8; // cx
-  UFG::CharacterAnimationComponent *v9; // rax
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rax
+  __int16 v8; // cx
+  UFG::CharacterAnimationComponent *ComponentOfTypeHK; // rax
   UFG::CharacterAnimationComponent *v10; // rbx
-  Creature *v11; // rdi
+  Creature *mCreature; // rdi
 
-  v3 = fixedTimeMode;
   if ( this->mIsPlaying )
   {
-    v4 = (UFG::SimObjectGame *)UFG::Simulation::GetSimObject(&UFG::gSim, &this->mActorID);
-    v5 = (UFG::SimObjectCVBase *)v4;
-    if ( v4 )
+    SimObject = (UFG::SimObjectGame *)UFG::Simulation::GetSimObject(&UFG::gSim, &this->mActorID);
+    v5 = (UFG::SimObjectCVBase *)SimObject;
+    if ( SimObject )
     {
-      v6 = v4->m_Flags;
-      if ( (v6 >> 14) & 1 )
+      m_Flags = SimObject->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
       {
-        v7 = v4->m_Components.p[7].m_pComponent;
+        m_pComponent = SimObject->m_Components.p[7].m_pComponent;
       }
-      else if ( (v6 & 0x8000u) == 0 )
+      else if ( m_Flags >= 0 )
       {
-        if ( (v6 >> 13) & 1 )
+        if ( (m_Flags & 0x2000) != 0 )
         {
-          v7 = v4->m_Components.p[6].m_pComponent;
+          m_pComponent = SimObject->m_Components.p[6].m_pComponent;
         }
-        else if ( (v6 >> 12) & 1 )
+        else if ( (m_Flags & 0x1000) != 0 )
         {
-          v7 = UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::ActionTreeComponent::_TypeUID);
+          m_pComponent = UFG::SimObjectGame::GetComponentOfTypeHK(SimObject, UFG::ActionTreeComponent::_TypeUID);
         }
         else
         {
-          v7 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v4->vfptr, UFG::ActionTreeComponent::_TypeUID);
+          m_pComponent = UFG::SimObject::GetComponentOfType(SimObject, UFG::ActionTreeComponent::_TypeUID);
         }
       }
       else
       {
-        v7 = v4->m_Components.p[7].m_pComponent;
+        m_pComponent = SimObject->m_Components.p[7].m_pComponent;
       }
-      if ( v7 )
-        TimePlotPoint::SetTimeValue((UFG::TimeOfDayManager *)&v7[3], timeAbsolute);
+      if ( m_pComponent )
+        TimePlotPoint::SetTimeValue((UFG::TimeOfDayManager *)&m_pComponent[3], timeAbsolute);
       v8 = v5->m_Flags;
-      if ( (v8 >> 14) & 1 )
+      if ( (v8 & 0x4000) != 0 || v8 < 0 )
       {
-        v9 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v5);
+        ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v5);
       }
-      else if ( (v8 & 0x8000u) == 0 )
+      else if ( (v8 & 0x2000) != 0 )
       {
-        if ( (v8 >> 13) & 1 )
-        {
-          v9 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v5);
-        }
-        else if ( (v8 >> 12) & 1 )
-        {
-          v9 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                     (UFG::SimObjectGame *)&v5->vfptr,
-                                                     UFG::CharacterAnimationComponent::_TypeUID);
-        }
-        else
-        {
-          v9 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                     (UFG::SimObject *)&v5->vfptr,
-                                                     UFG::CharacterAnimationComponent::_TypeUID);
-        }
+        ComponentOfTypeHK = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v5);
+      }
+      else if ( (v8 & 0x1000) != 0 )
+      {
+        ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                  v5,
+                                                                  UFG::CharacterAnimationComponent::_TypeUID);
       }
       else
       {
-        v9 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v5);
+        ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                  v5,
+                                                                  UFG::CharacterAnimationComponent::_TypeUID);
       }
-      v10 = v9;
-      if ( v9 )
+      v10 = ComponentOfTypeHK;
+      if ( ComponentOfTypeHK )
       {
-        v11 = v9->mCreature;
-        if ( v11 )
+        mCreature = ComponentOfTypeHK->mCreature;
+        if ( mCreature )
         {
-          Creature::SetPoseOnFrameBoundaries(v9->mCreature, v3);
-          Creature::SetBlendTreePlayTime(v11, timeAbsolute);
+          Creature::SetPoseOnFrameBoundaries(ComponentOfTypeHK->mCreature, fixedTimeMode);
+          Creature::SetBlendTreePlayTime(mCreature, timeAbsolute);
           ((void (__fastcall *)(UFG::CharacterAnimationComponent *))v10->vfptr[16].__vecDelDtor)(v10);
         }
       }
@@ -1177,48 +878,46 @@ void __fastcall NISActorNode::SetPlayTime(NISActorNode *this, float timeAbsolute
 // RVA: 0x3E66A0
 void __fastcall NISActorNode::Update(NISActorNode *this, float deltaTime)
 {
-  NISActorNode *v2; // rbx
-  UFG::SimObjectGame *v3; // rax
-  unsigned __int16 v4; // r8
-  UFG::SimComponent *v5; // rcx
-  UFG::SimComponent *v6; // rax
+  UFG::SimObjectGame *SimObject; // rax
+  __int16 m_Flags; // r8
+  UFG::SimComponent *m_pComponent; // rcx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   bool v7; // al
 
-  v2 = this;
   this->mIsPlaying = 0;
-  v3 = (UFG::SimObjectGame *)UFG::Simulation::GetSimObject(&UFG::gSim, &this->mActorID);
-  if ( v3 )
+  SimObject = (UFG::SimObjectGame *)UFG::Simulation::GetSimObject(&UFG::gSim, &this->mActorID);
+  if ( SimObject )
   {
-    v4 = v3->m_Flags;
-    if ( (v4 >> 14) & 1 )
+    m_Flags = SimObject->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v5 = v3->m_Components.p[7].m_pComponent;
+      m_pComponent = SimObject->m_Components.p[7].m_pComponent;
     }
-    else if ( (v4 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v4 >> 13) & 1 )
+      if ( (m_Flags & 0x2000) != 0 )
       {
-        v5 = v3->m_Components.p[6].m_pComponent;
+        m_pComponent = SimObject->m_Components.p[6].m_pComponent;
       }
       else
       {
-        if ( (v4 >> 12) & 1 )
-          v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::ActionTreeComponent::_TypeUID);
+        if ( (m_Flags & 0x1000) != 0 )
+          ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(SimObject, UFG::ActionTreeComponent::_TypeUID);
         else
-          v6 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::ActionTreeComponent::_TypeUID);
-        v5 = v6;
+          ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(SimObject, UFG::ActionTreeComponent::_TypeUID);
+        m_pComponent = ComponentOfTypeHK;
       }
     }
     else
     {
-      v5 = v3->m_Components.p[7].m_pComponent;
+      m_pComponent = SimObject->m_Components.p[7].m_pComponent;
     }
-    if ( v5 )
+    if ( m_pComponent )
     {
-      v7 = v5[3].m_SafePointerList.mNode.mNext == (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)v2;
-      v2->mIsPlaying = v7;
+      v7 = m_pComponent[3].m_SafePointerList.mNode.mNext == (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)this;
+      this->mIsPlaying = v7;
       if ( v7 )
-        ((void (*)(void))v5->vfptr[15].__vecDelDtor)();
+        ((void (__fastcall *)(UFG::SimComponent *))m_pComponent->vfptr[15].__vecDelDtor)(m_pComponent);
     }
   }
 }
@@ -1227,132 +926,132 @@ void __fastcall NISActorNode::Update(NISActorNode *this, float deltaTime)
 // RVA: 0x3E7620
 void __fastcall NISActorNode::UpdateTransforms(NISActorNode *this, float deltaTime)
 {
-  NISActorNode *v2; // rdi
-  UFG::SimObjectCVBase *v3; // rax
+  UFG::SimObjectCVBase *SimObject; // rax
   UFG::SimObjectGame *v4; // rbx
-  unsigned __int16 v5; // cx
+  __int16 m_Flags; // cx
   UFG::CharacterAnimationComponent *v6; // rax
   UFG::CharacterAnimationComponent *v7; // rsi
-  Creature *v8; // rcx
-  hkQsTransformf *v9; // rax
+  Creature *mCreature; // rcx
+  hkQsTransformf *Root; // rax
   float v10; // xmm8_4
   __int128 v11; // xmm9
   float v12; // xmm10_4
   __m128 v13; // xmm2
-  __m128 v14; // xmm3
+  __m128 y_low; // xmm3
   hkQsTransformf *v15; // rax
-  unsigned __int16 v16; // cx
-  UFG::CompositeDrawableComponent *v17; // rax
-  float v18; // xmm0_4
-  float v19; // xmm1_4
-  float v20; // xmm0_4
-  UFG::qVector3 result; // [rsp+20h] [rbp-A8h]
-  UFG::qMatrix44 d; // [rsp+30h] [rbp-98h]
+  __int16 v16; // cx
+  UFG::CompositeDrawableComponent *m_pComponent; // rax
+  float x; // xmm0_4
+  float y; // xmm1_4
+  float z; // xmm0_4
+  UFG::qVector3 result; // [rsp+20h] [rbp-A8h] BYREF
+  UFG::qMatrix44 d; // [rsp+30h] [rbp-98h] BYREF
 
-  v2 = this;
   if ( this->mIsPlaying )
   {
-    v3 = (UFG::SimObjectCVBase *)UFG::Simulation::GetSimObject(&UFG::gSim, &this->mActorID);
-    v4 = (UFG::SimObjectGame *)&v3->vfptr;
-    if ( v3 )
+    SimObject = (UFG::SimObjectCVBase *)UFG::Simulation::GetSimObject(&UFG::gSim, &this->mActorID);
+    v4 = SimObject;
+    if ( SimObject )
     {
-      v5 = v3->m_Flags;
-      if ( (v5 >> 14) & 1 )
+      m_Flags = SimObject->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
       {
-        v6 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v3);
+        v6 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(SimObject);
       }
-      else if ( (v5 & 0x8000u) == 0 )
+      else if ( (m_Flags & 0x2000) != 0 )
       {
-        if ( (v5 >> 13) & 1 )
-          v6 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v3);
-        else
-          v6 = (UFG::CharacterAnimationComponent *)((v5 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                       (UFG::SimObjectGame *)&v3->vfptr,
-                                                                       UFG::CharacterAnimationComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::CharacterAnimationComponent::_TypeUID));
+        v6 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)SimObject);
       }
       else
       {
-        v6 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v3);
+        v6 = (UFG::CharacterAnimationComponent *)((m_Flags & 0x1000) != 0
+                                                ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                    SimObject,
+                                                    UFG::CharacterAnimationComponent::_TypeUID)
+                                                : UFG::SimObject::GetComponentOfType(
+                                                    SimObject,
+                                                    UFG::CharacterAnimationComponent::_TypeUID));
       }
       v7 = v6;
       if ( v6 )
       {
-        v8 = v6->mCreature;
-        if ( v8 )
+        mCreature = v6->mCreature;
+        if ( mCreature )
         {
-          v9 = SkeletalPose::GetRoot(&v8->mPose);
-          v10 = v9->m_translation.m_quad.m128_f32[0];
-          v11 = v9->m_translation.m_quad.m128_u32[1];
-          v12 = v9->m_translation.m_quad.m128_f32[2];
+          Root = SkeletalPose::GetRoot(&mCreature->mPose);
+          v10 = Root->m_translation.m_quad.m128_f32[0];
+          v11 = Root->m_translation.m_quad.m128_u32[1];
+          v12 = Root->m_translation.m_quad.m128_f32[2];
           Creature::GetTranslation(v7->mCreature, &result, 1);
-          if ( v2->mCachedPositions && deltaTime > 0.0 )
+          if ( this->mCachedPositions && deltaTime > 0.0 )
           {
-            v14 = (__m128)LODWORD(result.y);
+            y_low = (__m128)LODWORD(result.y);
             v13 = (__m128)v11;
-            v14.m128_f32[0] = result.y - v2->mCachedHipsPosition.y;
-            v13.m128_f32[0] = (float)((float)((float)(*(float *)&v11 - v2->mCachedRootPosition.y)
-                                            * (float)(*(float *)&v11 - v2->mCachedRootPosition.y))
-                                    + (float)((float)(v10 - v2->mCachedRootPosition.x)
-                                            * (float)(v10 - v2->mCachedRootPosition.x)))
-                            + (float)((float)(v12 - v2->mCachedRootPosition.z) * (float)(v12 - v2->mCachedRootPosition.z));
-            if ( (float)(COERCE_FLOAT(_mm_sqrt_ps(v13)) * (float)(1.0 / deltaTime)) <= gMetersPerSecondBeforeTeleportCalled )
+            y_low.m128_f32[0] = result.y - this->mCachedHipsPosition.y;
+            v13.m128_f32[0] = (float)((float)((float)(*(float *)&v11 - this->mCachedRootPosition.y)
+                                            * (float)(*(float *)&v11 - this->mCachedRootPosition.y))
+                                    + (float)((float)(v10 - this->mCachedRootPosition.x)
+                                            * (float)(v10 - this->mCachedRootPosition.x)))
+                            + (float)((float)(v12 - this->mCachedRootPosition.z)
+                                    * (float)(v12 - this->mCachedRootPosition.z));
+            if ( (float)(_mm_sqrt_ps(v13).m128_f32[0] * (float)(1.0 / deltaTime)) <= gMetersPerSecondBeforeTeleportCalled )
             {
-              v14.m128_f32[0] = (float)((float)(v14.m128_f32[0] * v14.m128_f32[0])
-                                      + (float)((float)(result.x - v2->mCachedHipsPosition.x)
-                                              * (float)(result.x - v2->mCachedHipsPosition.x)))
-                              + (float)((float)(result.z - v2->mCachedHipsPosition.z)
-                                      * (float)(result.z - v2->mCachedHipsPosition.z));
-              if ( (float)(COERCE_FLOAT(_mm_sqrt_ps(v14)) * (float)(1.0 / deltaTime)) > gMetersPerSecondBeforeClothReset )
+              y_low.m128_f32[0] = (float)((float)(y_low.m128_f32[0] * y_low.m128_f32[0])
+                                        + (float)((float)(result.x - this->mCachedHipsPosition.x)
+                                                * (float)(result.x - this->mCachedHipsPosition.x)))
+                                + (float)((float)(result.z - this->mCachedHipsPosition.z)
+                                        * (float)(result.z - this->mCachedHipsPosition.z));
+              if ( (float)(_mm_sqrt_ps(y_low).m128_f32[0] * (float)(1.0 / deltaTime)) > gMetersPerSecondBeforeClothReset )
               {
                 v16 = v4->m_Flags;
-                if ( (v16 >> 14) & 1 )
+                if ( (v16 & 0x4000) != 0 )
                 {
-                  v17 = (UFG::CompositeDrawableComponent *)v4->m_Components.p[14].m_pComponent;
+                  m_pComponent = (UFG::CompositeDrawableComponent *)v4->m_Components.p[14].m_pComponent;
                 }
-                else if ( (v16 & 0x8000u) == 0 )
+                else if ( v16 >= 0 )
                 {
-                  if ( (v16 >> 13) & 1 )
+                  if ( (v16 & 0x2000) != 0 )
                   {
-                    v17 = (UFG::CompositeDrawableComponent *)v4->m_Components.p[9].m_pComponent;
+                    m_pComponent = (UFG::CompositeDrawableComponent *)v4->m_Components.p[9].m_pComponent;
                   }
-                  else if ( (v16 >> 12) & 1 )
+                  else if ( (v16 & 0x1000) != 0 )
                   {
-                    v17 = (UFG::CompositeDrawableComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                               v4,
-                                                               UFG::CompositeDrawableComponent::_TypeUID);
+                    m_pComponent = (UFG::CompositeDrawableComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                        v4,
+                                                                        UFG::CompositeDrawableComponent::_TypeUID);
                   }
                   else
                   {
-                    v17 = (UFG::CompositeDrawableComponent *)UFG::SimObject::GetComponentOfType(
-                                                               (UFG::SimObject *)&v4->vfptr,
-                                                               UFG::CompositeDrawableComponent::_TypeUID);
+                    m_pComponent = (UFG::CompositeDrawableComponent *)UFG::SimObject::GetComponentOfType(
+                                                                        v4,
+                                                                        UFG::CompositeDrawableComponent::_TypeUID);
                   }
                 }
                 else
                 {
-                  v17 = (UFG::CompositeDrawableComponent *)v4->m_Components.p[14].m_pComponent;
+                  m_pComponent = (UFG::CompositeDrawableComponent *)v4->m_Components.p[14].m_pComponent;
                 }
-                if ( v17 )
-                  UFG::CompositeDrawableComponent::TeleportEventHandler(v17, 0i64);
+                if ( m_pComponent )
+                  UFG::CompositeDrawableComponent::TeleportEventHandler(m_pComponent, 0i64);
               }
             }
             else
             {
               v15 = SkeletalPose::GetRoot(&v7->mCreature->mPose);
               hkQsTransformf::get4x4ColumnMajor(v15, &d.v0.x);
-              UFG::SimObjectUtility::Teleport((UFG::SimObject *)&v4->vfptr, &d);
+              UFG::SimObjectUtility::Teleport(v4, &d);
             }
           }
-          v18 = result.x;
-          v19 = result.y;
-          v2->mCachedPositions = 1;
-          v2->mCachedRootPosition.x = v10;
-          LODWORD(v2->mCachedRootPosition.y) = v11;
-          v2->mCachedRootPosition.z = v12;
-          v2->mCachedHipsPosition.x = v18;
-          v20 = result.z;
-          v2->mCachedHipsPosition.y = v19;
-          v2->mCachedHipsPosition.z = v20;
+          x = result.x;
+          y = result.y;
+          this->mCachedPositions = 1;
+          this->mCachedRootPosition.x = v10;
+          LODWORD(this->mCachedRootPosition.y) = v11;
+          this->mCachedRootPosition.z = v12;
+          this->mCachedHipsPosition.x = x;
+          z = result.z;
+          this->mCachedHipsPosition.y = y;
+          this->mCachedHipsPosition.z = z;
         }
       }
     }
@@ -1365,51 +1064,49 @@ void __fastcall NISActorNode::UpdateTransforms(NISActorNode *this, float deltaTi
 
 // File Line: 633
 // RVA: 0x3E4A30
-void __fastcall NISActorNode::SaveEquippedItems(NISActorNode *this, UFG::SimObject *simActorObject)
+void __fastcall NISActorNode::SaveEquippedItems(NISActorNode *this, UFG::SimObjectGame *simActorObject)
 {
-  NISActorNode *v2; // rbp
-  unsigned __int16 v3; // cx
-  UFG::SimObjectGame *v4; // rbx
-  UFG::SimComponent *v5; // rsi
+  signed __int16 m_Flags; // cx
+  UFG::SimComponent *m_pComponent; // rsi
   UFG::SimComponent *v6; // rax
-  unsigned __int16 v7; // cx
+  signed __int16 v7; // cx
   UFG::InventoryComponent *v8; // r14
   UFG::SimComponent *v9; // rax
   UFG::SimObject *v10; // r8
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v11; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v12; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v13; // rax
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mRightHandEquipSlot; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v14; // rax
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v15; // rbx
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mLeftHandEquipSlot; // rbx
   UFG::SimObject *v16; // r8
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v17; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v18; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v19; // rax
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v20; // rdi
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mHatEquipSlot; // rdi
   UFG::SimObject *v21; // r8
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v22; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v23; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v24; // rax
   UFG::SimObject *v25; // r8
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v26; // rdx
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mGlassesEquipSlot; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v27; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v28; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v29; // rax
   UFG::SimObject *v30; // r8
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v31; // rdx
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mStowed1HSlot; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v32; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v33; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v34; // rax
-  unsigned int v35; // eax
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v36; // r8
+  unsigned int SlotTarget; // eax
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mStowed2HSlot; // r8
   UFG::SimObject *v37; // r9
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v38; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v39; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v40; // rax
-  UFG::SimObject *v41; // rcx
+  UFG::SimObject *m_pPointer; // rcx
   UFG::SimObject *v42; // rcx
   UFG::SimObject *v43; // r8
-  unsigned __int16 v44; // cx
+  __int16 v44; // cx
   UFG::SimComponent *v45; // rax
   bool v46; // zf
   UFG::SimObjectGame *v47; // rcx
@@ -1417,7 +1114,7 @@ void __fastcall NISActorNode::SaveEquippedItems(NISActorNode *this, UFG::SimObje
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v49; // rax
   UFG::SimObject *v50; // rcx
   UFG::SimObject *v51; // r8
-  unsigned __int16 v52; // cx
+  __int16 v52; // cx
   UFG::SimComponent *v53; // rax
   UFG::SimObjectGame *v54; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v55; // rcx
@@ -1428,299 +1125,278 @@ void __fastcall NISActorNode::SaveEquippedItems(NISActorNode *this, UFG::SimObje
 
   if ( simActorObject )
   {
-    v2 = this;
-    v3 = simActorObject->m_Flags;
-    v4 = (UFG::SimObjectGame *)simActorObject;
-    if ( (simActorObject->m_Flags >> 14) & 1 )
+    m_Flags = simActorObject->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v5 = simActorObject->m_Components.p[20].m_pComponent;
+      m_pComponent = simActorObject->m_Components.p[20].m_pComponent;
     }
-    else if ( (v3 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v3 >> 13) & 1 )
-        v6 = UFG::SimObjectGame::GetComponentOfTypeHK(
-               (UFG::SimObjectGame *)simActorObject,
-               UFG::TargetingSystemBaseComponent::_TypeUID);
-      else
-        v6 = (v3 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                (UFG::SimObjectGame *)simActorObject,
-                                UFG::TargetingSystemBaseComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(
-                                                                                 simActorObject,
-                                                                                 UFG::TargetingSystemBaseComponent::_TypeUID);
-      v5 = v6;
+      v6 = (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+         ? UFG::SimObjectGame::GetComponentOfTypeHK(simActorObject, UFG::TargetingSystemBaseComponent::_TypeUID)
+         : UFG::SimObject::GetComponentOfType(simActorObject, UFG::TargetingSystemBaseComponent::_TypeUID);
+      m_pComponent = v6;
     }
     else
     {
-      v5 = simActorObject->m_Components.p[20].m_pComponent;
+      m_pComponent = simActorObject->m_Components.p[20].m_pComponent;
     }
-    v7 = v4->m_Flags;
-    if ( (v7 >> 14) & 1 )
+    v7 = simActorObject->m_Flags;
+    if ( (v7 & 0x4000) != 0 )
     {
-      v8 = (UFG::InventoryComponent *)v4->m_Components.p[39].m_pComponent;
+      v8 = (UFG::InventoryComponent *)simActorObject->m_Components.p[39].m_pComponent;
     }
     else
     {
-      if ( (v7 & 0x8000u) == 0 )
-      {
-        if ( (v7 >> 13) & 1 )
-          v9 = UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::InventoryComponent::_TypeUID);
-        else
-          v9 = (v7 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::InventoryComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v4->vfptr, UFG::InventoryComponent::_TypeUID);
-      }
-      else
-      {
-        v9 = UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::InventoryComponent::_TypeUID);
-      }
+      v9 = v7 < 0 || (v7 & 0x2000) != 0 || (v7 & 0x1000) != 0
+         ? UFG::SimObjectGame::GetComponentOfTypeHK(simActorObject, UFG::InventoryComponent::_TypeUID)
+         : UFG::SimObject::GetComponentOfType(simActorObject, UFG::InventoryComponent::_TypeUID);
       v8 = (UFG::InventoryComponent *)v9;
     }
-    if ( v5 && v8 )
+    if ( m_pComponent && v8 )
     {
       v10 = *(UFG::SimObject **)(56i64
-                               * *(unsigned __int8 *)((unsigned int)UFG::InventoryComponent::GetSlotTarget(0)
-                                                    + *(_QWORD *)&v5[1].m_Flags
+                               * *(unsigned __int8 *)((unsigned int)UFG::InventoryComponent::GetSlotTarget(eINVENTORY_EQUIP_SLOT_RIGHT_HAND)
+                                                    + *(_QWORD *)&m_pComponent[1].m_Flags
                                                     + 8i64)
-                               + *(_QWORD *)&v5[1].m_TypeUID
+                               + *(_QWORD *)&m_pComponent[1].m_TypeUID
                                + 40);
-      v11 = &v2->mRightHandEquipSlot;
-      if ( v2->mRightHandEquipSlot.m_pPointer )
+      p_mRightHandEquipSlot = &this->mRightHandEquipSlot;
+      if ( this->mRightHandEquipSlot.m_pPointer )
       {
-        v12 = v11->mPrev;
-        v13 = v2->mRightHandEquipSlot.mNext;
-        v12->mNext = v13;
-        v13->mPrev = v12;
-        v11->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v11->mPrev;
-        v2->mRightHandEquipSlot.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mRightHandEquipSlot.mPrev;
+        mPrev = p_mRightHandEquipSlot->mPrev;
+        mNext = this->mRightHandEquipSlot.mNext;
+        mPrev->mNext = mNext;
+        mNext->mPrev = mPrev;
+        p_mRightHandEquipSlot->mPrev = p_mRightHandEquipSlot;
+        this->mRightHandEquipSlot.mNext = &this->mRightHandEquipSlot;
       }
-      v2->mRightHandEquipSlot.m_pPointer = v10;
+      this->mRightHandEquipSlot.m_pPointer = v10;
       if ( v10 )
       {
-        v14 = v10->m_SafePointerList.mNode.mPrev;
-        v14->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v11->mPrev;
-        v11->mPrev = v14;
-        v2->mRightHandEquipSlot.mNext = &v10->m_SafePointerList.mNode;
-        v10->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v11->mPrev;
+        v14 = v10->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+        v14->mNext = p_mRightHandEquipSlot;
+        p_mRightHandEquipSlot->mPrev = v14;
+        this->mRightHandEquipSlot.mNext = &v10->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+        v10->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = p_mRightHandEquipSlot;
       }
-      v15 = &v2->mLeftHandEquipSlot;
+      p_mLeftHandEquipSlot = &this->mLeftHandEquipSlot;
       v16 = *(UFG::SimObject **)(56i64
                                * *(unsigned __int8 *)((unsigned int)UFG::InventoryComponent::GetSlotTarget(eINVENTORY_EQUIP_SLOT_LEFT_HAND)
-                                                    + *(_QWORD *)&v5[1].m_Flags
+                                                    + *(_QWORD *)&m_pComponent[1].m_Flags
                                                     + 8i64)
-                               + *(_QWORD *)&v5[1].m_TypeUID
+                               + *(_QWORD *)&m_pComponent[1].m_TypeUID
                                + 40);
-      if ( v2->mLeftHandEquipSlot.m_pPointer )
+      if ( this->mLeftHandEquipSlot.m_pPointer )
       {
-        v17 = v15->mPrev;
-        v18 = v2->mLeftHandEquipSlot.mNext;
+        v17 = p_mLeftHandEquipSlot->mPrev;
+        v18 = this->mLeftHandEquipSlot.mNext;
         v17->mNext = v18;
         v18->mPrev = v17;
-        v15->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v15->mPrev;
-        v2->mLeftHandEquipSlot.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mLeftHandEquipSlot.mPrev;
+        p_mLeftHandEquipSlot->mPrev = p_mLeftHandEquipSlot;
+        this->mLeftHandEquipSlot.mNext = &this->mLeftHandEquipSlot;
       }
-      v2->mLeftHandEquipSlot.m_pPointer = v16;
+      this->mLeftHandEquipSlot.m_pPointer = v16;
       if ( v16 )
       {
-        v19 = v16->m_SafePointerList.mNode.mPrev;
-        v19->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v15->mPrev;
-        v15->mPrev = v19;
-        v2->mLeftHandEquipSlot.mNext = &v16->m_SafePointerList.mNode;
-        v16->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v15->mPrev;
+        v19 = v16->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+        v19->mNext = p_mLeftHandEquipSlot;
+        p_mLeftHandEquipSlot->mPrev = v19;
+        this->mLeftHandEquipSlot.mNext = &v16->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+        v16->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = p_mLeftHandEquipSlot;
       }
-      v20 = &v2->mHatEquipSlot;
+      p_mHatEquipSlot = &this->mHatEquipSlot;
       v21 = *(UFG::SimObject **)(56i64
                                * *(unsigned __int8 *)((unsigned int)UFG::InventoryComponent::GetSlotTarget(eINVENTORY_EQUIP_SLOT_HAT)
-                                                    + *(_QWORD *)&v5[1].m_Flags
+                                                    + *(_QWORD *)&m_pComponent[1].m_Flags
                                                     + 8i64)
-                               + *(_QWORD *)&v5[1].m_TypeUID
+                               + *(_QWORD *)&m_pComponent[1].m_TypeUID
                                + 40);
-      if ( v2->mHatEquipSlot.m_pPointer )
+      if ( this->mHatEquipSlot.m_pPointer )
       {
-        v22 = v20->mPrev;
-        v23 = v2->mHatEquipSlot.mNext;
+        v22 = p_mHatEquipSlot->mPrev;
+        v23 = this->mHatEquipSlot.mNext;
         v22->mNext = v23;
         v23->mPrev = v22;
-        v20->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v20->mPrev;
-        v2->mHatEquipSlot.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mHatEquipSlot.mPrev;
+        p_mHatEquipSlot->mPrev = p_mHatEquipSlot;
+        this->mHatEquipSlot.mNext = &this->mHatEquipSlot;
       }
-      v2->mHatEquipSlot.m_pPointer = v21;
+      this->mHatEquipSlot.m_pPointer = v21;
       if ( v21 )
       {
-        v24 = v21->m_SafePointerList.mNode.mPrev;
-        v24->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v20->mPrev;
-        v20->mPrev = v24;
-        v2->mHatEquipSlot.mNext = &v21->m_SafePointerList.mNode;
-        v21->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v20->mPrev;
+        v24 = v21->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+        v24->mNext = p_mHatEquipSlot;
+        p_mHatEquipSlot->mPrev = v24;
+        this->mHatEquipSlot.mNext = &v21->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+        v21->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = p_mHatEquipSlot;
       }
       v25 = *(UFG::SimObject **)(56i64
                                * *(unsigned __int8 *)((unsigned int)UFG::InventoryComponent::GetSlotTarget(eINVENTORY_EQUIP_SLOT_GLASSES)
-                                                    + *(_QWORD *)&v5[1].m_Flags
+                                                    + *(_QWORD *)&m_pComponent[1].m_Flags
                                                     + 8i64)
-                               + *(_QWORD *)&v5[1].m_TypeUID
+                               + *(_QWORD *)&m_pComponent[1].m_TypeUID
                                + 40);
-      v26 = &v2->mGlassesEquipSlot;
-      if ( v2->mGlassesEquipSlot.m_pPointer )
+      p_mGlassesEquipSlot = &this->mGlassesEquipSlot;
+      if ( this->mGlassesEquipSlot.m_pPointer )
       {
-        v27 = v26->mPrev;
-        v28 = v2->mGlassesEquipSlot.mNext;
+        v27 = p_mGlassesEquipSlot->mPrev;
+        v28 = this->mGlassesEquipSlot.mNext;
         v27->mNext = v28;
         v28->mPrev = v27;
-        v26->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v26->mPrev;
-        v2->mGlassesEquipSlot.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mGlassesEquipSlot.mPrev;
+        p_mGlassesEquipSlot->mPrev = p_mGlassesEquipSlot;
+        this->mGlassesEquipSlot.mNext = &this->mGlassesEquipSlot;
       }
-      v2->mGlassesEquipSlot.m_pPointer = v25;
+      this->mGlassesEquipSlot.m_pPointer = v25;
       if ( v25 )
       {
-        v29 = v25->m_SafePointerList.mNode.mPrev;
-        v29->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v26->mPrev;
-        v26->mPrev = v29;
-        v2->mGlassesEquipSlot.mNext = &v25->m_SafePointerList.mNode;
-        v25->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v26->mPrev;
+        v29 = v25->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+        v29->mNext = p_mGlassesEquipSlot;
+        p_mGlassesEquipSlot->mPrev = v29;
+        this->mGlassesEquipSlot.mNext = &v25->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+        v25->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = p_mGlassesEquipSlot;
       }
       v30 = *(UFG::SimObject **)(56i64
                                * *(unsigned __int8 *)((unsigned int)UFG::InventoryComponent::GetSlotTarget(eINVENTORY_EQUIP_SLOT_STOWED_1H)
-                                                    + *(_QWORD *)&v5[1].m_Flags
+                                                    + *(_QWORD *)&m_pComponent[1].m_Flags
                                                     + 8i64)
-                               + *(_QWORD *)&v5[1].m_TypeUID
+                               + *(_QWORD *)&m_pComponent[1].m_TypeUID
                                + 40);
-      v31 = &v2->mStowed1HSlot;
-      if ( v2->mStowed1HSlot.m_pPointer )
+      p_mStowed1HSlot = &this->mStowed1HSlot;
+      if ( this->mStowed1HSlot.m_pPointer )
       {
-        v32 = v31->mPrev;
-        v33 = v2->mStowed1HSlot.mNext;
+        v32 = p_mStowed1HSlot->mPrev;
+        v33 = this->mStowed1HSlot.mNext;
         v32->mNext = v33;
         v33->mPrev = v32;
-        v31->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v31->mPrev;
-        v2->mStowed1HSlot.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mStowed1HSlot.mPrev;
+        p_mStowed1HSlot->mPrev = p_mStowed1HSlot;
+        this->mStowed1HSlot.mNext = &this->mStowed1HSlot;
       }
-      v2->mStowed1HSlot.m_pPointer = v30;
+      this->mStowed1HSlot.m_pPointer = v30;
       if ( v30 )
       {
-        v34 = v30->m_SafePointerList.mNode.mPrev;
-        v34->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v31->mPrev;
-        v31->mPrev = v34;
-        v2->mStowed1HSlot.mNext = &v30->m_SafePointerList.mNode;
-        v30->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v31->mPrev;
+        v34 = v30->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+        v34->mNext = p_mStowed1HSlot;
+        p_mStowed1HSlot->mPrev = v34;
+        this->mStowed1HSlot.mNext = &v30->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+        v30->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = p_mStowed1HSlot;
       }
-      v35 = UFG::InventoryComponent::GetSlotTarget(eINVENTORY_EQUIP_SLOT_STOWED_2H);
-      v36 = &v2->mStowed2HSlot;
-      v37 = *(UFG::SimObject **)(56i64 * *(unsigned __int8 *)(v35 + *(_QWORD *)&v5[1].m_Flags + 8i64)
-                               + *(_QWORD *)&v5[1].m_TypeUID
+      SlotTarget = UFG::InventoryComponent::GetSlotTarget(eINVENTORY_EQUIP_SLOT_STOWED_2H);
+      p_mStowed2HSlot = &this->mStowed2HSlot;
+      v37 = *(UFG::SimObject **)(56i64 * *(unsigned __int8 *)(SlotTarget + *(_QWORD *)&m_pComponent[1].m_Flags + 8i64)
+                               + *(_QWORD *)&m_pComponent[1].m_TypeUID
                                + 40);
-      if ( v2->mStowed2HSlot.m_pPointer )
+      if ( this->mStowed2HSlot.m_pPointer )
       {
-        v38 = v36->mPrev;
-        v39 = v2->mStowed2HSlot.mNext;
+        v38 = p_mStowed2HSlot->mPrev;
+        v39 = this->mStowed2HSlot.mNext;
         v38->mNext = v39;
         v39->mPrev = v38;
-        v36->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v36->mPrev;
-        v2->mStowed2HSlot.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mStowed2HSlot.mPrev;
+        p_mStowed2HSlot->mPrev = p_mStowed2HSlot;
+        this->mStowed2HSlot.mNext = &this->mStowed2HSlot;
       }
-      v2->mStowed2HSlot.m_pPointer = v37;
+      this->mStowed2HSlot.m_pPointer = v37;
       if ( v37 )
       {
-        v40 = v37->m_SafePointerList.mNode.mPrev;
-        v40->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v36->mPrev;
-        v36->mPrev = v40;
-        v2->mStowed2HSlot.mNext = &v37->m_SafePointerList.mNode;
-        v37->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v36->mPrev;
+        v40 = v37->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+        v40->mNext = p_mStowed2HSlot;
+        p_mStowed2HSlot->mPrev = v40;
+        this->mStowed2HSlot.mNext = &v37->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+        v37->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = p_mStowed2HSlot;
       }
-      UFG::InventoryComponent::UnEquip(v8, 0, 0);
+      UFG::InventoryComponent::UnEquip(v8, eINVENTORY_EQUIP_SLOT_RIGHT_HAND, 0);
       UFG::InventoryComponent::UnEquip(v8, eINVENTORY_EQUIP_SLOT_LEFT_HAND, 0);
       UFG::InventoryComponent::UnEquip(v8, eINVENTORY_EQUIP_SLOT_HAT, 0);
       UFG::InventoryComponent::UnEquip(v8, eINVENTORY_EQUIP_SLOT_GLASSES, 0);
       UFG::InventoryComponent::UnEquip(v8, eINVENTORY_EQUIP_SLOT_STOWED_1H, 0);
       UFG::InventoryComponent::UnEquip(v8, eINVENTORY_EQUIP_SLOT_STOWED_2H, 0);
-      v41 = v2->mRightHandEquipSlot.m_pPointer;
-      if ( v41 )
-        UFG::SimObject::Suspend(v41);
-      v42 = v2->mLeftHandEquipSlot.m_pPointer;
+      m_pPointer = this->mRightHandEquipSlot.m_pPointer;
+      if ( m_pPointer )
+        UFG::SimObject::Suspend(m_pPointer);
+      v42 = this->mLeftHandEquipSlot.m_pPointer;
       if ( v42 )
       {
         UFG::SimObject::Suspend(v42);
-        v43 = v2->mLeftHandEquipSlot.m_pPointer;
+        v43 = this->mLeftHandEquipSlot.m_pPointer;
         if ( v43 )
         {
           v44 = v43->m_Flags;
-          if ( !((v44 >> 14) & 1) && (v44 & 0x8000u) == 0 )
+          if ( (v44 & 0x4000) == 0 && v44 >= 0 )
           {
-            if ( (v44 >> 13) & 1 )
+            if ( (v44 & 0x2000) != 0 )
             {
               v45 = v43->m_Components.p[11].m_pComponent;
             }
             else
             {
-              v46 = ((v44 >> 12) & 1) == 0;
-              v47 = (UFG::SimObjectGame *)v2->mLeftHandEquipSlot.m_pPointer;
-              v45 = v46 ? UFG::SimObject::GetComponentOfType(
-                            (UFG::SimObject *)&v47->vfptr,
-                            UFG::InventoryItemComponent::_TypeUID) : UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                       v47,
-                                                                       UFG::InventoryItemComponent::_TypeUID);
+              v46 = (v44 & 0x1000) == 0;
+              v47 = (UFG::SimObjectGame *)this->mLeftHandEquipSlot.m_pPointer;
+              v45 = v46
+                  ? UFG::SimObject::GetComponentOfType(v47, UFG::InventoryItemComponent::_TypeUID)
+                  : UFG::SimObjectGame::GetComponentOfTypeHK(v47, UFG::InventoryItemComponent::_TypeUID);
             }
             if ( v45 && LODWORD(v45[1].m_pSimObject) == 106 )
             {
-              UFG::Simulation::DestroySimObject(&UFG::gSim, v2->mLeftHandEquipSlot.m_pPointer);
-              if ( v2->mLeftHandEquipSlot.m_pPointer )
+              UFG::Simulation::DestroySimObject(&UFG::gSim, this->mLeftHandEquipSlot.m_pPointer);
+              if ( this->mLeftHandEquipSlot.m_pPointer )
               {
-                v48 = v15->mPrev;
-                v49 = v2->mLeftHandEquipSlot.mNext;
+                v48 = p_mLeftHandEquipSlot->mPrev;
+                v49 = this->mLeftHandEquipSlot.mNext;
                 v48->mNext = v49;
                 v49->mPrev = v48;
-                v15->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v15->mPrev;
-                v2->mLeftHandEquipSlot.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mLeftHandEquipSlot.mPrev;
+                p_mLeftHandEquipSlot->mPrev = p_mLeftHandEquipSlot;
+                this->mLeftHandEquipSlot.mNext = &this->mLeftHandEquipSlot;
               }
-              v2->mLeftHandEquipSlot.m_pPointer = 0i64;
+              this->mLeftHandEquipSlot.m_pPointer = 0i64;
             }
           }
         }
       }
-      v50 = v2->mHatEquipSlot.m_pPointer;
+      v50 = this->mHatEquipSlot.m_pPointer;
       if ( v50 )
       {
         UFG::SimObject::Suspend(v50);
-        v51 = v2->mHatEquipSlot.m_pPointer;
+        v51 = this->mHatEquipSlot.m_pPointer;
         if ( v51 )
         {
           v52 = v51->m_Flags;
-          if ( !((v52 >> 14) & 1) && (v52 & 0x8000u) == 0 )
+          if ( (v52 & 0x4000) == 0 && v52 >= 0 )
           {
-            if ( (v52 >> 13) & 1 )
+            if ( (v52 & 0x2000) != 0 )
             {
               v53 = v51->m_Components.p[11].m_pComponent;
             }
             else
             {
-              v46 = ((v52 >> 12) & 1) == 0;
-              v54 = (UFG::SimObjectGame *)v2->mHatEquipSlot.m_pPointer;
-              v53 = v46 ? UFG::SimObject::GetComponentOfType(
-                            (UFG::SimObject *)&v54->vfptr,
-                            UFG::InventoryItemComponent::_TypeUID) : UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                       v54,
-                                                                       UFG::InventoryItemComponent::_TypeUID);
+              v46 = (v52 & 0x1000) == 0;
+              v54 = (UFG::SimObjectGame *)this->mHatEquipSlot.m_pPointer;
+              v53 = v46
+                  ? UFG::SimObject::GetComponentOfType(v54, UFG::InventoryItemComponent::_TypeUID)
+                  : UFG::SimObjectGame::GetComponentOfTypeHK(v54, UFG::InventoryItemComponent::_TypeUID);
             }
             if ( v53 && LODWORD(v53[1].m_pSimObject) == 111 )
             {
-              UFG::Simulation::DestroySimObject(&UFG::gSim, v2->mHatEquipSlot.m_pPointer);
-              if ( v2->mHatEquipSlot.m_pPointer )
+              UFG::Simulation::DestroySimObject(&UFG::gSim, this->mHatEquipSlot.m_pPointer);
+              if ( this->mHatEquipSlot.m_pPointer )
               {
-                v55 = v20->mPrev;
-                v56 = v2->mHatEquipSlot.mNext;
+                v55 = p_mHatEquipSlot->mPrev;
+                v56 = this->mHatEquipSlot.mNext;
                 v55->mNext = v56;
                 v56->mPrev = v55;
-                v20->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v20->mPrev;
-                v2->mHatEquipSlot.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mHatEquipSlot.mPrev;
+                p_mHatEquipSlot->mPrev = p_mHatEquipSlot;
+                this->mHatEquipSlot.mNext = &this->mHatEquipSlot;
               }
-              v2->mHatEquipSlot.m_pPointer = 0i64;
+              this->mHatEquipSlot.m_pPointer = 0i64;
             }
           }
         }
       }
-      v57 = v2->mGlassesEquipSlot.m_pPointer;
+      v57 = this->mGlassesEquipSlot.m_pPointer;
       if ( v57 )
         UFG::SimObject::Suspend(v57);
-      v58 = v2->mStowed1HSlot.m_pPointer;
+      v58 = this->mStowed1HSlot.m_pPointer;
       if ( v58 )
         UFG::SimObject::Suspend(v58);
-      v59 = v2->mStowed2HSlot.m_pPointer;
+      v59 = this->mStowed2HSlot.m_pPointer;
       if ( v59 )
         UFG::SimObject::Suspend(v59);
     }
@@ -1729,13 +1405,12 @@ void __fastcall NISActorNode::SaveEquippedItems(NISActorNode *this, UFG::SimObje
 
 // File Line: 710
 // RVA: 0x3E48A0
-void __fastcall NISActorNode::RestoreEquippedItems(NISActorNode *this, UFG::SimObject *simActorObject)
+void __fastcall NISActorNode::RestoreEquippedItems(NISActorNode *this, UFG::SimObjectGame *simActorObject)
 {
-  NISActorNode *v2; // rbx
-  unsigned __int16 v3; // cx
-  UFG::InventoryComponent *v4; // rdi
+  signed __int16 m_Flags; // cx
+  UFG::InventoryComponent *m_pComponent; // rdi
   UFG::SimComponent *v5; // rax
-  UFG::SimObject *v6; // rcx
+  UFG::SimObject *m_pPointer; // rcx
   UFG::SimObject *v7; // rcx
   UFG::SimObject *v8; // rcx
   UFG::SimObject *v9; // rcx
@@ -1744,72 +1419,63 @@ void __fastcall NISActorNode::RestoreEquippedItems(NISActorNode *this, UFG::SimO
 
   if ( simActorObject )
   {
-    v2 = this;
-    v3 = simActorObject->m_Flags;
-    if ( (simActorObject->m_Flags >> 14) & 1 )
+    m_Flags = simActorObject->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v4 = (UFG::InventoryComponent *)simActorObject->m_Components.p[39].m_pComponent;
+      m_pComponent = (UFG::InventoryComponent *)simActorObject->m_Components.p[39].m_pComponent;
     }
     else
     {
-      if ( (v3 & 0x8000u) == 0 )
-      {
-        if ( (v3 >> 13) & 1 )
-          v5 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                 (UFG::SimObjectGame *)simActorObject,
-                 UFG::InventoryComponent::_TypeUID);
-        else
-          v5 = (v3 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                  (UFG::SimObjectGame *)simActorObject,
-                                  UFG::InventoryComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(
-                                                                         simActorObject,
-                                                                         UFG::InventoryComponent::_TypeUID);
-      }
-      else
-      {
-        v5 = UFG::SimObjectGame::GetComponentOfTypeHK(
-               (UFG::SimObjectGame *)simActorObject,
-               UFG::InventoryComponent::_TypeUID);
-      }
-      v4 = (UFG::InventoryComponent *)v5;
+      v5 = m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+         ? UFG::SimObjectGame::GetComponentOfTypeHK(simActorObject, UFG::InventoryComponent::_TypeUID)
+         : UFG::SimObject::GetComponentOfType(simActorObject, UFG::InventoryComponent::_TypeUID);
+      m_pComponent = (UFG::InventoryComponent *)v5;
     }
-    if ( v4 )
+    if ( m_pComponent )
     {
-      v6 = v2->mRightHandEquipSlot.m_pPointer;
-      if ( v6 )
+      m_pPointer = this->mRightHandEquipSlot.m_pPointer;
+      if ( m_pPointer )
       {
-        UFG::SimObject::Restore(v6);
-        UFG::InventoryComponent::Equip(v4, v2->mRightHandEquipSlot.m_pPointer, 1, 0);
+        UFG::SimObject::Restore(m_pPointer);
+        UFG::InventoryComponent::Equip(
+          m_pComponent,
+          this->mRightHandEquipSlot.m_pPointer,
+          1,
+          eINVENTORY_EQUIP_SLOT_RIGHT_HAND);
       }
-      v7 = v2->mLeftHandEquipSlot.m_pPointer;
+      v7 = this->mLeftHandEquipSlot.m_pPointer;
       if ( v7 )
       {
         UFG::SimObject::Restore(v7);
-        UFG::InventoryComponent::Equip(v4, v2->mLeftHandEquipSlot.m_pPointer, 1, eINVENTORY_EQUIP_SLOT_LEFT_HAND);
+        UFG::InventoryComponent::Equip(
+          m_pComponent,
+          this->mLeftHandEquipSlot.m_pPointer,
+          1,
+          eINVENTORY_EQUIP_SLOT_LEFT_HAND);
       }
-      v8 = v2->mHatEquipSlot.m_pPointer;
+      v8 = this->mHatEquipSlot.m_pPointer;
       if ( v8 )
       {
         UFG::SimObject::Restore(v8);
-        UFG::InventoryComponent::Equip(v4, v2->mHatEquipSlot.m_pPointer);
+        UFG::InventoryComponent::Equip(m_pComponent, this->mHatEquipSlot.m_pPointer);
       }
-      v9 = v2->mGlassesEquipSlot.m_pPointer;
+      v9 = this->mGlassesEquipSlot.m_pPointer;
       if ( v9 )
       {
         UFG::SimObject::Restore(v9);
-        UFG::InventoryComponent::Equip(v4, v2->mGlassesEquipSlot.m_pPointer);
+        UFG::InventoryComponent::Equip(m_pComponent, this->mGlassesEquipSlot.m_pPointer);
       }
-      v10 = v2->mStowed1HSlot.m_pPointer;
+      v10 = this->mStowed1HSlot.m_pPointer;
       if ( v10 )
       {
         UFG::SimObject::Restore(v10);
-        UFG::InventoryComponent::Equip(v4, v2->mStowed1HSlot.m_pPointer, 1, eINVENTORY_EQUIP_SLOT_STOWED_1H);
+        UFG::InventoryComponent::Equip(m_pComponent, this->mStowed1HSlot.m_pPointer, 1, eINVENTORY_EQUIP_SLOT_STOWED_1H);
       }
-      v11 = v2->mStowed2HSlot.m_pPointer;
+      v11 = this->mStowed2HSlot.m_pPointer;
       if ( v11 )
       {
         UFG::SimObject::Restore(v11);
-        UFG::InventoryComponent::Equip(v4, v2->mStowed2HSlot.m_pPointer, 1, eINVENTORY_EQUIP_SLOT_STOWED_2H);
+        UFG::InventoryComponent::Equip(m_pComponent, this->mStowed2HSlot.m_pPointer, 1, eINVENTORY_EQUIP_SLOT_STOWED_2H);
       }
     }
   }
@@ -1831,7 +1497,7 @@ const char *dynamic_initializer_for__sNISActorFactoryList__()
 __int64 dynamic_initializer_for__gNISActorFactory__()
 {
   Expression::MemberMapFactory::MemberMapFactory(&gNISActorFactory, sNISActorFactoryList, sNISActorFactoryListNum);
-  return atexit(dynamic_atexit_destructor_for__gNISActorFactory__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gNISActorFactory__);
 }
 
 // File Line: 770
@@ -1849,49 +1515,47 @@ __int64 dynamic_initializer_for__NISNode::sClassNameUID__()
 // RVA: 0x3E02F0
 void __fastcall NISNode::NISNode(NISNode *this)
 {
-  NISNode *v1; // rdi
   char *v2; // rbx
   char *v3; // rax
-  UFG::qOffset64<TrackGroup *> *v4; // rcx
-  signed __int64 v5; // rax
+  UFG::qOffset64<TrackGroup *> *p_mTracksAction; // rcx
+  __int64 v5; // rax
 
-  v1 = this;
-  ActionNodeImplementation::ActionNodeImplementation((ActionNodeImplementation *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ActionNodePlayable::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&NISNode::`vftable;
-  v1->mIsPlaceHolder = 0;
-  v1->mPlaceHolderMessage.mOffset = 1i64;
-  BinString::Set(&v1->mPlaceHolderMessage, &customWorldMapCaption);
-  *(_DWORD *)&v1->mCanSkip = 16843009;
-  *(_DWORD *)&v1->mDisableHUD = 1;
-  *(_DWORD *)&v1->mAllowLetterbox = 16842753;
-  *(_QWORD *)&v1->mTimeBeforeCanSkip = 1065353216i64;
+  ActionNodeImplementation::ActionNodeImplementation(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&ActionNodePlayable::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&NISNode::`vftable;
+  this->mIsPlaceHolder = 0;
+  this->mPlaceHolderMessage.mOffset = 1i64;
+  BinString::Set(&this->mPlaceHolderMessage, &customCaption);
+  *(_DWORD *)&this->mCanSkip = 16843009;
+  *(_DWORD *)&this->mDisableHUD = 1;
+  *(_DWORD *)&this->mAllowLetterbox = 16842753;
+  *(_QWORD *)&this->mTimeBeforeCanSkip = 1065353216i64;
   v2 = 0i64;
-  v1->mPostNISTOD = -1.0;
-  v1->mTODTime = -1.0;
-  v1->mWeatherWetness = -1.0;
-  v1->mGI_Irradiance = 1.0;
-  v1->mFadeOutDuration = -1.0;
-  v1->mFadeInDuration = -1.0;
-  v1->mWeatherType.mValue = 0;
-  v1->mAnimationGroupName.mOffset = 1i64;
-  BinString::Set(&v1->mAnimationGroupName, &customWorldMapCaption);
-  v1->mFacialAnimGroupName.mOffset = 1i64;
-  BinString::Set(&v1->mFacialAnimGroupName, &customWorldMapCaption);
-  v1->mExtraFacialAnimGroupName.mOffset = 1i64;
-  BinString::Set(&v1->mExtraFacialAnimGroupName, &customWorldMapCaption);
-  v1->mPostNISMarkerName.mOffset = 1i64;
-  BinString::Set(&v1->mPostNISMarkerName, &customWorldMapCaption);
-  v1->mLightLayerDisableName.mOffset = 1i64;
-  BinString::Set(&v1->mLightLayerDisableName, &customWorldMapCaption);
-  v1->mTODEnvSetting.mOffset = 1i64;
-  BinString::Set(&v1->mTODEnvSetting, &customWorldMapCaption);
-  v1->mSoundbank.mOffset = 1i64;
-  BinString::Set(&v1->mSoundbank, &customWorldMapCaption);
-  v1->mNISName.mOffset = 1i64;
-  BinString::Set(&v1->mNISName, &customWorldMapCaption);
-  v1->mPrimaryCameraAnimationTrack = 0i64;
-  v1->mLightGroupObject = 0i64;
+  this->mPostNISTOD = -1.0;
+  this->mTODTime = -1.0;
+  this->mWeatherWetness = -1.0;
+  this->mGI_Irradiance = 1.0;
+  this->mFadeOutDuration = -1.0;
+  this->mFadeInDuration = -1.0;
+  this->mWeatherType.mValue = 0;
+  this->mAnimationGroupName.mOffset = 1i64;
+  BinString::Set(&this->mAnimationGroupName, &customCaption);
+  this->mFacialAnimGroupName.mOffset = 1i64;
+  BinString::Set(&this->mFacialAnimGroupName, &customCaption);
+  this->mExtraFacialAnimGroupName.mOffset = 1i64;
+  BinString::Set(&this->mExtraFacialAnimGroupName, &customCaption);
+  this->mPostNISMarkerName.mOffset = 1i64;
+  BinString::Set(&this->mPostNISMarkerName, &customCaption);
+  this->mLightLayerDisableName.mOffset = 1i64;
+  BinString::Set(&this->mLightLayerDisableName, &customCaption);
+  this->mTODEnvSetting.mOffset = 1i64;
+  BinString::Set(&this->mTODEnvSetting, &customCaption);
+  this->mSoundbank.mOffset = 1i64;
+  BinString::Set(&this->mSoundbank, &customCaption);
+  this->mNISName.mOffset = 1i64;
+  BinString::Set(&this->mNISName, &customCaption);
+  this->mPrimaryCameraAnimationTrack = 0i64;
+  this->mLightGroupObject = 0i64;
   v3 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0x20ui64, "ActionNodeImplementation.mTracksAction", 0i64, 1u);
   if ( v3 )
   {
@@ -1905,27 +1569,26 @@ void __fastcall NISNode::NISNode(NISNode *this)
   {
     v3 = 0i64;
   }
-  v4 = &v1->mTracksAction;
+  p_mTracksAction = &this->mTracksAction;
   if ( v3 )
-    v5 = v3 - (char *)v4;
+    v5 = v3 - (char *)p_mTracksAction;
   else
     v5 = 0i64;
-  v4->mOffset = v5;
+  p_mTracksAction->mOffset = v5;
   if ( v5 )
-    v2 = (char *)v4 + v5;
-  (*(void (__fastcall **)(char *, NISNode *))(*(_QWORD *)v2 + 64i64))(v2, v1);
-  UFG::qMemSet(v1->m_audioTagId, 0, 0x10u);
-  UFG::qMemSet(v1->m_audioTagUID, 0, 0x10u);
+    v2 = (char *)p_mTracksAction + v5;
+  (*(void (__fastcall **)(char *, NISNode *))(*(_QWORD *)v2 + 64i64))(v2, this);
+  UFG::qMemSet(this->m_audioTagId, 0, 0x10u);
+  UFG::qMemSet(this->m_audioTagUID, 0, 0x10u);
 }
 
 // File Line: 896
 // RVA: 0x3E0D70
 void __fastcall NISNode::~NISNode(NISNode *this)
 {
-  NISNode *v1; // rbx
-  __int64 v2; // rax
+  __int64 mOffset; // rax
   char *v3; // rcx
-  NISLightGroup *v4; // rdi
+  NISLightGroup *mLightGroupObject; // rdi
   char *v5; // rcx
   char *v6; // rcx
   char *v7; // rcx
@@ -1936,125 +1599,98 @@ void __fastcall NISNode::~NISNode(NISNode *this)
   char *v12; // rcx
   char *v13; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&NISNode::`vftable;
-  v2 = this->mTracksAction.mOffset;
-  if ( v2 )
+  mOffset = this->mTracksAction.mOffset;
+  if ( mOffset )
   {
-    v3 = (char *)&this->mTracksAction + v2;
+    v3 = (char *)&this->mTracksAction + mOffset;
     if ( v3 )
-      (*(void (__fastcall **)(char *, signed __int64))(*(_QWORD *)v3 + 8i64))(v3, 1i64);
+      (*(void (__fastcall **)(char *, __int64))(*(_QWORD *)v3 + 8i64))(v3, 1i64);
   }
-  v4 = v1->mLightGroupObject;
-  if ( v4 )
+  mLightGroupObject = this->mLightGroupObject;
+  if ( mLightGroupObject )
   {
-    NISLightGroup::~NISLightGroup(v1->mLightGroupObject);
-    operator delete[](v4);
+    NISLightGroup::~NISLightGroup(this->mLightGroupObject);
+    operator delete[](mLightGroupObject);
   }
-  if ( !(~LOBYTE(v1->mNISName.mOffset) & 1) )
+  if ( (this->mNISName.mOffset & 1) != 0 && (this->mNISName.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v1->mNISName.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v5 = (char *)&v1->mNISName + (v1->mNISName.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v5 != BinString::sEmptyString )
-        operator delete[](v5);
-    }
+    v5 = (char *)&this->mNISName + (this->mNISName.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v5 != BinString::sEmptyString )
+      operator delete[](v5);
   }
-  if ( !(~LOBYTE(v1->mSoundbank.mOffset) & 1) )
+  if ( (this->mSoundbank.mOffset & 1) != 0 && (this->mSoundbank.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v1->mSoundbank.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v6 = (char *)&v1->mSoundbank + (v1->mSoundbank.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v6 != BinString::sEmptyString )
-        operator delete[](v6);
-    }
+    v6 = (char *)&this->mSoundbank + (this->mSoundbank.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v6 != BinString::sEmptyString )
+      operator delete[](v6);
   }
-  if ( !(~LOBYTE(v1->mTODEnvSetting.mOffset) & 1) )
+  if ( (this->mTODEnvSetting.mOffset & 1) != 0 && (this->mTODEnvSetting.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v1->mTODEnvSetting.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v7 = (char *)&v1->mTODEnvSetting + (v1->mTODEnvSetting.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v7 != BinString::sEmptyString )
-        operator delete[](v7);
-    }
+    v7 = (char *)&this->mTODEnvSetting + (this->mTODEnvSetting.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v7 != BinString::sEmptyString )
+      operator delete[](v7);
   }
-  if ( !(~LOBYTE(v1->mLightLayerDisableName.mOffset) & 1) )
+  if ( (this->mLightLayerDisableName.mOffset & 1) != 0
+    && (this->mLightLayerDisableName.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v1->mLightLayerDisableName.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v8 = (char *)&v1->mLightLayerDisableName + (v1->mLightLayerDisableName.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v8 != BinString::sEmptyString )
-        operator delete[](v8);
-    }
+    v8 = (char *)&this->mLightLayerDisableName + (this->mLightLayerDisableName.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v8 != BinString::sEmptyString )
+      operator delete[](v8);
   }
-  if ( !(~LOBYTE(v1->mPostNISMarkerName.mOffset) & 1) )
+  if ( (this->mPostNISMarkerName.mOffset & 1) != 0 && (this->mPostNISMarkerName.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v1->mPostNISMarkerName.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v9 = (char *)&v1->mPostNISMarkerName + (v1->mPostNISMarkerName.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v9 != BinString::sEmptyString )
-        operator delete[](v9);
-    }
+    v9 = (char *)&this->mPostNISMarkerName + (this->mPostNISMarkerName.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v9 != BinString::sEmptyString )
+      operator delete[](v9);
   }
-  if ( !(~LOBYTE(v1->mExtraFacialAnimGroupName.mOffset) & 1) )
+  if ( (this->mExtraFacialAnimGroupName.mOffset & 1) != 0
+    && (this->mExtraFacialAnimGroupName.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v1->mExtraFacialAnimGroupName.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v10 = (char *)&v1->mExtraFacialAnimGroupName + (v1->mExtraFacialAnimGroupName.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v10 != BinString::sEmptyString )
-        operator delete[](v10);
-    }
+    v10 = (char *)&this->mExtraFacialAnimGroupName + (this->mExtraFacialAnimGroupName.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v10 != BinString::sEmptyString )
+      operator delete[](v10);
   }
-  if ( !(~LOBYTE(v1->mFacialAnimGroupName.mOffset) & 1) )
+  if ( (this->mFacialAnimGroupName.mOffset & 1) != 0
+    && (this->mFacialAnimGroupName.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v1->mFacialAnimGroupName.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v11 = (char *)&v1->mFacialAnimGroupName + (v1->mFacialAnimGroupName.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v11 != BinString::sEmptyString )
-        operator delete[](v11);
-    }
+    v11 = (char *)&this->mFacialAnimGroupName + (this->mFacialAnimGroupName.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v11 != BinString::sEmptyString )
+      operator delete[](v11);
   }
-  if ( !(~LOBYTE(v1->mAnimationGroupName.mOffset) & 1) )
+  if ( (this->mAnimationGroupName.mOffset & 1) != 0 && (this->mAnimationGroupName.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v1->mAnimationGroupName.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v12 = (char *)&v1->mAnimationGroupName + (v1->mAnimationGroupName.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v12 != BinString::sEmptyString )
-        operator delete[](v12);
-    }
+    v12 = (char *)&this->mAnimationGroupName + (this->mAnimationGroupName.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v12 != BinString::sEmptyString )
+      operator delete[](v12);
   }
-  if ( !(~LOBYTE(v1->mPlaceHolderMessage.mOffset) & 1) )
+  if ( (this->mPlaceHolderMessage.mOffset & 1) != 0 && (this->mPlaceHolderMessage.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v1->mPlaceHolderMessage.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v13 = (char *)&v1->mPlaceHolderMessage + (v1->mPlaceHolderMessage.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v13 != BinString::sEmptyString )
-        operator delete[](v13);
-    }
+    v13 = (char *)&this->mPlaceHolderMessage + (this->mPlaceHolderMessage.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v13 != BinString::sEmptyString )
+      operator delete[](v13);
   }
-  ActionNodeImplementation::~ActionNodeImplementation((ActionNodeImplementation *)&v1->vfptr);
+  ActionNodeImplementation::~ActionNodeImplementation(this);
 }
 
 // File Line: 902
 // RVA: 0x3E61E0
 void __fastcall NISNode::Trim(NISNode *this, bool force)
 {
-  NISNode *v2; // rbx
-  __int64 v3; // rax
+  __int64 mOffset; // rax
   _DWORD *v4; // rcx
 
-  v2 = this;
-  ActionNodeImplementation::Trim((ActionNodeImplementation *)&this->vfptr, force);
-  v3 = v2->mTracksAction.mOffset;
-  if ( v3 )
+  ActionNodeImplementation::Trim(this, force);
+  mOffset = this->mTracksAction.mOffset;
+  if ( mOffset )
   {
-    v4 = (_DWORD *)((char *)&v2->mTracksAction + v3);
+    v4 = (_DWORD *)((char *)&this->mTracksAction + mOffset);
     if ( v4 )
     {
-      if ( !(v4[4] & 0x7FFFFFFF) )
+      if ( (v4[4] & 0x7FFFFFFF) == 0 )
       {
-        (*(void (__fastcall **)(_DWORD *, signed __int64))(*(_QWORD *)v4 + 8i64))(v4, 1i64);
-        v2->mTracksAction.mOffset = 0i64;
+        (*(void (__fastcall **)(_DWORD *, __int64))(*(_QWORD *)v4 + 8i64))(v4, 1i64);
+        this->mTracksAction.mOffset = 0i64;
       }
     }
   }
@@ -2064,17 +1700,15 @@ void __fastcall NISNode::Trim(NISNode *this, bool force)
 // RVA: 0x3E4FB0
 void __fastcall NISNode::Serialize(NISNode *this, IActionTreeSerializer *serializer)
 {
-  __int64 v2; // rax
-  IActionTreeSerializer *v3; // r8
+  __int64 mOffset; // rax
   Expression::IMemberMap *v4; // rdx
 
-  v2 = this->mTracksAction.mOffset;
-  v3 = serializer;
-  if ( v2 )
+  mOffset = this->mTracksAction.mOffset;
+  if ( mOffset )
   {
-    v4 = (Expression::IMemberMap *)((char *)&this->mTracksAction + v2);
+    v4 = (Expression::IMemberMap *)((char *)&this->mTracksAction + mOffset);
     if ( v4 )
-      IActionTreeSerializer::PushObjectToSerialize(v3, v4);
+      IActionTreeSerializer::PushObjectToSerialize(serializer, v4);
   }
 }
 
@@ -2082,39 +1716,35 @@ void __fastcall NISNode::Serialize(NISNode *this, IActionTreeSerializer *seriali
 // RVA: 0x3E47B0
 void __fastcall NISNode::ResolveReferences(NISNode *this)
 {
-  NISNode *v1; // rdi
-  __int64 v2; // rax
-  signed __int64 v3; // rcx
-  signed __int64 v4; // r14
+  __int64 mOffset; // rax
+  char *v3; // rcx
+  char *v4; // r14
   unsigned int i; // ebx
   __int64 v6; // rax
-  signed __int64 v7; // rcx
-  char *v8; // rcx
-  CameraAnimationTrack *v9; // rsi
+  char *v7; // rcx
+  CameraAnimationTrack *v8; // rsi
 
-  v1 = this;
   this->mPrimaryCameraAnimationTrack = 0i64;
-  ActionNode::ResolveReferences((ActionNode *)&this->vfptr);
-  v2 = v1->mTracksAction.mOffset;
-  if ( v2 )
+  ActionNode::ResolveReferences(this);
+  mOffset = this->mTracksAction.mOffset;
+  if ( mOffset )
   {
-    v3 = (signed __int64)&v1->mTracksAction + v2;
+    v3 = (char *)&this->mTracksAction + mOffset;
     if ( v3 )
     {
-      v4 = v3 + *(_QWORD *)(v3 + 24) + 24i64;
+      v4 = &v3[*((_QWORD *)v3 + 3) + 24];
       for ( i = 0; ; ++i )
       {
-        v6 = v1->mTracksAction.mOffset;
-        v7 = (signed __int64)(v6 ? (UFG::qOffset64<TrackGroup *> *)((char *)&v1->mTracksAction + v6) : 0i64);
-        if ( i >= (*(_DWORD *)(v7 + 16) & 0x7FFFFFFFu) )
+        v6 = this->mTracksAction.mOffset;
+        v7 = v6 ? (char *)&this->mTracksAction + v6 : 0i64;
+        if ( i >= (*((_DWORD *)v7 + 4) & 0x7FFFFFFFu) )
           break;
-        v8 = (char *)(v4 + 8i64 * i);
-        v9 = (CameraAnimationTrack *)&v8[*(_QWORD *)v8];
-        v9->vfptr[1].__vecDelDtor((Expression::IMemberMap *)&v8[*(_QWORD *)v8], (unsigned int)v1);
-        if ( CameraAnimationTrack::sClassNameUID == v9->vfptr->GetClassNameUID((Expression::IMemberMap *)&v9->vfptr)
-          && !v1->mPrimaryCameraAnimationTrack )
+        v8 = (CameraAnimationTrack *)&v4[8 * i + *(_QWORD *)&v4[8 * i]];
+        v8->vfptr[1].__vecDelDtor(v8, (unsigned int)this);
+        if ( CameraAnimationTrack::sClassNameUID == v8->vfptr->GetClassNameUID(v8)
+          && !this->mPrimaryCameraAnimationTrack )
         {
-          v1->mPrimaryCameraAnimationTrack = v9;
+          this->mPrimaryCameraAnimationTrack = v8;
         }
       }
     }
@@ -2125,71 +1755,70 @@ void __fastcall NISNode::ResolveReferences(NISNode *this)
 // RVA: 0x3E5570
 void __fastcall NISNode::SetPlayTime(NISNode *this, float timeAbsolute, bool fixedTimeMode)
 {
-  bool v3; // bp
-  NISNode *v4; // rsi
-  UFG::SimObject *v5; // rcx
-  UFG::SimComponent *v6; // rax
+  UFG::SimObject *m_pSimObject; // rcx
+  UFG::SimComponent *ComponentOfType; // rax
   UFG::SimComponent *v7; // rbx
   Creature *v8; // rdi
-  NISLightGroup *v9; // rax
-  UFG::SimObject *v10; // rcx
+  NISLightGroup *mLightGroupObject; // rax
+  UFG::SimObject *m_pPointer; // rcx
   UFG::SimComponent *v11; // rax
   UFG::SimComponent *v12; // rbx
   Creature *v13; // rdi
   __int64 v14; // rax
   _DWORD *v15; // rdi
   __int64 v16; // rbx
-  signed __int64 v17; // rsi
+  __int64 v17; // rsi
 
-  v3 = fixedTimeMode;
-  v4 = this;
-  v5 = UFG::Director::Get()->mCurrentCamera->m_pSimObject;
-  if ( v5 )
+  m_pSimObject = UFG::Director::Get()->mCurrentCamera->m_pSimObject;
+  if ( m_pSimObject )
   {
-    v6 = UFG::SimObject::GetComponentOfType(v5, UFG::CameraAnimationComponent::_TypeUID);
-    v7 = v6;
-    if ( v6 )
+    ComponentOfType = UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::CameraAnimationComponent::_TypeUID);
+    v7 = ComponentOfType;
+    if ( ComponentOfType )
     {
-      v8 = *(Creature **)&v6[2].m_TypeUID;
+      v8 = *(Creature **)&ComponentOfType[2].m_TypeUID;
       if ( v8 )
       {
-        Creature::SetPoseOnFrameBoundaries(*(Creature **)&v6[2].m_TypeUID, v3);
+        Creature::SetPoseOnFrameBoundaries(*(Creature **)&ComponentOfType[2].m_TypeUID, fixedTimeMode);
         Creature::SetBlendTreePlayTime(v8, timeAbsolute);
       }
       ((void (__fastcall *)(UFG::SimComponent *))v7->vfptr[16].__vecDelDtor)(v7);
     }
   }
-  v9 = v4->mLightGroupObject;
-  if ( v9 )
+  mLightGroupObject = this->mLightGroupObject;
+  if ( mLightGroupObject )
   {
-    v10 = v9->mSimObject.m_pPointer;
-    if ( v10 )
+    m_pPointer = mLightGroupObject->mSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      v11 = UFG::SimObject::GetComponentOfType(v10, UFG::LightGroupAnimationComponent::_TypeUID);
+      v11 = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::LightGroupAnimationComponent::_TypeUID);
       v12 = v11;
       if ( v11 )
       {
         v13 = *(Creature **)&v11[2].m_TypeUID;
         if ( v13 )
         {
-          Creature::SetPoseOnFrameBoundaries(*(Creature **)&v11[2].m_TypeUID, v3);
+          Creature::SetPoseOnFrameBoundaries(*(Creature **)&v11[2].m_TypeUID, fixedTimeMode);
           Creature::SetBlendTreePlayTime(v13, timeAbsolute);
           ((void (__fastcall *)(UFG::SimComponent *))v12->vfptr[16].__vecDelDtor)(v12);
         }
       }
     }
   }
-  v14 = ((__int64 (__fastcall *)(NISNode *))v4->vfptr[1].GetResourcePath)(v4);
+  v14 = ((__int64 (__fastcall *)(NISNode *))this->vfptr[1].GetResourcePath)(this);
   v15 = (_DWORD *)v14;
   if ( v14 )
   {
     v16 = 0i64;
     v17 = v14 + *(_QWORD *)(v14 + 8) + 8i64;
-    if ( *(_DWORD *)v14 & 0x7FFFFFFF )
+    if ( (*(_DWORD *)v14 & 0x7FFFFFFF) != 0 )
     {
       do
       {
-        NISActorNode::SetPlayTime((NISActorNode *)(*(_QWORD *)(v17 + 8 * v16) + v17 + 8 * v16), timeAbsolute, v3);
+        NISActorNode::SetPlayTime(
+          (NISActorNode *)(*(_QWORD *)(v17 + 8 * v16) + v17 + 8 * v16),
+          timeAbsolute,
+          fixedTimeMode);
         v16 = (unsigned int)(v16 + 1);
       }
       while ( (unsigned int)v16 < (*v15 & 0x7FFFFFFFu) );

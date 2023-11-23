@@ -2,42 +2,40 @@
 // RVA: 0x6D15E0
 void __fastcall Scaleform::GFx::AS2::FunctionRef::~FunctionRef(Scaleform::GFx::AS2::FunctionRef *this)
 {
-  Scaleform::GFx::AS2::FunctionRef *v1; // rbx
-  Scaleform::GFx::AS2::FunctionObject *v2; // rcx
-  unsigned int v3; // eax
+  Scaleform::GFx::AS2::FunctionObject *Function; // rcx
+  unsigned int RefCount; // eax
   bool v4; // zf
-  Scaleform::GFx::AS2::RefCountBaseGC<323> *v5; // rcx
+  Scaleform::GFx::AS2::LocalFrame *pLocalFrame; // rcx
   unsigned int v6; // eax
 
-  v1 = this;
-  if ( !(this->Flags & 2) )
+  if ( (this->Flags & 2) == 0 )
   {
-    v2 = this->Function;
-    if ( v2 )
+    Function = this->Function;
+    if ( Function )
     {
-      v3 = v2->RefCount;
-      if ( v3 & 0x3FFFFFF )
+      RefCount = Function->RefCount;
+      if ( (RefCount & 0x3FFFFFF) != 0 )
       {
-        v2->RefCount = v3 - 1;
-        Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v2->vfptr);
+        Function->RefCount = RefCount - 1;
+        Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(Function);
       }
     }
   }
-  v4 = (v1->Flags & 1) == 0;
-  v1->Function = 0i64;
+  v4 = (this->Flags & 1) == 0;
+  this->Function = 0i64;
   if ( v4 )
   {
-    v5 = (Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v1->pLocalFrame->vfptr;
-    if ( v5 )
+    pLocalFrame = this->pLocalFrame;
+    if ( pLocalFrame )
     {
-      v6 = v5->RefCount;
-      if ( v6 & 0x3FFFFFF )
+      v6 = pLocalFrame->RefCount;
+      if ( (v6 & 0x3FFFFFF) != 0 )
       {
-        v5->RefCount = v6 - 1;
-        Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v5);
+        pLocalFrame->RefCount = v6 - 1;
+        Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(pLocalFrame);
       }
     }
   }
-  v1->pLocalFrame = 0i64;
+  this->pLocalFrame = 0i64;
 }
 

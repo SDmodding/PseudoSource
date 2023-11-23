@@ -1,315 +1,327 @@
 // File Line: 68
 // RVA: 0x4CB9D0
-void __fastcall UFG::TSScriptedDialogue::TSScriptedDialogue(UFG::TSScriptedDialogue *this, UFG::ScriptedConversation *conv, ASymbol *name, SSActorClass *pClass)
+void __fastcall UFG::TSScriptedDialogue::TSScriptedDialogue(
+        UFG::TSScriptedDialogue *this,
+        UFG::ScriptedConversation *conv,
+        ASymbol *name,
+        SSActorClass *pClass)
 {
-  UFG::ScriptedConversation *v4; // rbx
-  UFG::TSScriptedDialogue *v5; // rdi
-
-  v4 = conv;
-  v5 = this;
-  SSActor::SSActor((SSActor *)&this->vfptr, name, pClass, 1);
-  v5->vfptr = (SSObjectBaseVtbl *)&UFG::TSScriptedDialogue::`vftable;
-  v5->m_conversation = v4;
+  SSActor::SSActor(this, name, pClass, 1);
+  this->vfptr = (SSObjectBaseVtbl *)&UFG::TSScriptedDialogue::`vftable;
+  this->m_conversation = conv;
 }
 
 // File Line: 92
 // RVA: 0x4D59F0
 void UFG::TSScriptedDialogue::BindAtomics(void)
 {
+  ASymbol rebind; // [rsp+20h] [rbp-18h]
+  ASymbol rebinda; // [rsp+20h] [rbp-18h]
+  ASymbol rebindb; // [rsp+20h] [rbp-18h]
+  ASymbol rebindc; // [rsp+20h] [rbp-18h]
+  ASymbol rebindd; // [rsp+20h] [rbp-18h]
+  ASymbol rebinde; // [rsp+20h] [rbp-18h]
+
   UFG::TSScriptedDialogue::mspScriptedDialogueClass = (SSActorClass *)SSBrain::get_class("ScriptedDialogue");
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "add_element",
     UFG::TSScriptedDialogue::Mthd_add_element,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "get_element",
     UFG::TSScriptedDialogue::Mthd_get_element,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "add_element_by_reference",
     UFG::TSScriptedDialogue::Mthd_add_element_by_reference,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "add_interrupt_elements",
     (void (__fastcall *)(SSInvokedMethod *, SSInstance **))_,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "add_resume_elements",
     (void (__fastcall *)(SSInvokedMethod *, SSInstance **))_,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "interrupt",
     (void (__fastcall *)(SSInvokedMethod *, SSInstance **))_,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "is_finished",
     UFG::TSScriptedDialogue::Mthd_is_finished,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "is_interrupted",
     UFG::TSScriptedDialogue::Mthd_is_interrupted,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "is_stopped",
     UFG::TSScriptedDialogue::Mthd_is_stopped,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "is_playing",
     UFG::TSScriptedDialogue::Mthd_is_playing,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "is_inactive",
     UFG::TSScriptedDialogue::Mthd_is_inactive,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "destroy",
     UFG::TSScriptedDialogue::Mthd_destroy,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "stop",
     UFG::TSScriptedDialogue::Mthd_stop,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "stop_after_line",
     UFG::TSScriptedDialogue::Mthd_stop_after_line,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "play",
     UFG::TSScriptedDialogue::Mthd_play,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "next_line",
     UFG::TSScriptedDialogue::Mthd_next_line,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "first_line_of_next_group",
     UFG::TSScriptedDialogue::Mthd_move_to_next_group,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "prev_line",
     UFG::TSScriptedDialogue::Mthd_prev_line,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "reset",
     UFG::TSScriptedDialogue::Mthd_reset,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "restart",
     UFG::TSScriptedDialogue::Mthd_restart,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "auto_delete",
     UFG::TSScriptedDialogue::Mthd_auto_delete,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "is_tag_interruptable",
     UFG::TSScriptedDialogue::Mthd_set_tag_interruptable,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "set_topic",
     UFG::TSScriptedDialogue::Mthd_set_topic,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "disable_distance_cutoff",
     UFG::TSScriptedDialogue::Mthd_disable_distance_cutoff,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "enable_distance_cutoff",
     UFG::TSScriptedDialogue::Mthd_enable_distance_cutoff,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "disable_interrupts",
     UFG::TSScriptedDialogue::Mthd_disable_interrupts,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "enable_interrupts",
     UFG::TSScriptedDialogue::Mthd_enable_interrupts,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "disable_car_exit_interrupts",
     UFG::TSScriptedDialogue::Mthd_disable_car_exit_interrupts,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "enable_car_exit_interrupts",
     UFG::TSScriptedDialogue::Mthd_enable_car_exit_interrupts,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "disable_subtitles",
     UFG::TSScriptedDialogue::Mthd_disable_subtitles,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "enable_subtitles",
     UFG::TSScriptedDialogue::Mthd_enable_subtitles,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "set_cutoff_distance",
     UFG::TSScriptedDialogue::Mthd_set_cutoff_distance,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "get_cutoff_distance",
     UFG::TSScriptedDialogue::Mthd_get_cutoff_distance,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "set_avoid_repeating",
     UFG::TSScriptedDialogue::Mthd_set_avoid_repeating_last,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "set_shuffle",
     UFG::TSScriptedDialogue::Mthd_set_shuffle,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "set_priority",
     UFG::TSScriptedDialogue::Mthd_set_priority,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "get_elements_group_count",
     UFG::TSScriptedDialogue::Mthd_num_element_groups,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "is_playing_last_line_in_group",
     UFG::TSScriptedDialogue::Mthd_is_playing_last_line_in_group,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "is_in_last_group",
     UFG::TSScriptedDialogue::Mthd_is_in_last_group,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "add_animation_bank",
     UFG::TSScriptedDialogue::Mthd_add_animation_bank,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "set_external_source_playback_event",
     UFG::TSScriptedDialogue::Mthd_set_external_source_playback_event,
-    0);
+    SSBindFlag_instance_no_rebind);
+  LOBYTE(rebind.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "force_finish_all_scripted_conversations",
     UFG::TSScriptedDialogue::Mthd_force_finish_all_scripted_conversations,
     1,
-    0);
+    rebind);
   SSClass::register_coroutine_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "_wait_until_finished",
     UFG::TSScriptedDialogue::Coro_wait_until_finished,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_coroutine_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "_wait_until_stopped",
     UFG::TSScriptedDialogue::Coro_wait_until_stopped,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_coroutine_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "_play_until_finished",
     UFG::TSScriptedDialogue::Coro_play_finished,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_coroutine_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "_play_until_stopped",
     UFG::TSScriptedDialogue::Coro_play_stopped,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_coroutine_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "_play_until_stopped_or_finished",
     UFG::TSScriptedDialogue::Coro_play_stopped_or_finished,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_coroutine_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "_stop",
     UFG::TSScriptedDialogue::Coro_stop,
-    0);
+    SSBindFlag_instance_no_rebind);
+  LOBYTE(rebinda.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "create",
     UFG::TSScriptedDialogue::MthdC_create,
     1,
-    0);
+    rebinda);
+  LOBYTE(rebindb.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "find_named",
     UFG::TSScriptedDialogue::MthdC_find_named,
     1,
-    0);
+    rebindb);
+  LOBYTE(rebindc.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "get_named",
     UFG::TSScriptedDialogue::MthdC_get_named,
     1,
-    0);
+    rebindc);
+  LOBYTE(rebindd.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "query_context",
     UFG::TSScriptedDialogue::MthdC_query_context,
     1,
-    0);
+    rebindd);
+  LOBYTE(rebinde.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogue::mspScriptedDialogueClass->vfptr,
+    UFG::TSScriptedDialogue::mspScriptedDialogueClass,
     "query_context_character",
     UFG::TSScriptedDialogue::MthdC_query_context_character,
     1,
-    0);
+    rebinde);
 }
 
 // File Line: 165
 // RVA: 0x4F4150
 void __fastcall UFG::TSScriptedDialogue::Mthd_add_element_by_reference(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // r8
-  SSInstance *v3; // rbx
-  SSObjectBase *v4; // rcx
+  SSInstance *i_data_p; // rbx
+  SSObjectBase *i_obj_p; // rcx
   const char *v5; // rax
 
-  v2 = pScope;
-  v3 = (*pScope->i_data.i_array_p)->i_data_p;
-  if ( v3 && (SSActorClass *)v3->i_class_p == UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass )
+  i_data_p = (*pScope->i_data.i_array_p)->i_data_p;
+  if ( i_data_p && i_data_p->i_class_p == UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass )
   {
-    v4 = pScope->i_scope_p.i_obj_p;
-    if ( !v4 || v2->i_scope_p.i_ptr_id != v4->i_ptr_id )
-      v4 = 0i64;
-    UFG::Conversation::AddElement((UFG::Conversation *)v4[8].vfptr, (UFG::ConversationElement *)v3[2].i_user_data);
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    UFG::Conversation::AddElement(
+      (UFG::Conversation *)i_obj_p[8].vfptr,
+      (UFG::ConversationElement *)i_data_p[2].i_user_data);
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v5 = UFG::ConversationElement::ToString((UFG::ConversationElement *)v3[2].i_user_data);
+      v5 = UFG::ConversationElement::ToString((UFG::ConversationElement *)i_data_p[2].i_user_data);
       UFG::qPrintf("Dlg Trc: %s : %s\n", "add_element", v5);
     }
   }
@@ -319,18 +331,17 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_add_element_by_reference(SSInvoked
 // RVA: 0x4F3E10
 void __fastcall UFG::TSScriptedDialogue::Mthd_add_element(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // r14
-  SSActor *v3; // rsi
-  SSClass *v4; // rbx
+  SSActor *i_data_p; // rsi
+  SSClass *i_class_p; // rbx
   SSActor *v5; // rbp
   SSClass *v6; // rbx
-  SSData **v7; // rcx
+  SSData **i_array_p; // rcx
   SSInstance *v8; // r13
-  unsigned __int64 v9; // rax
-  unsigned int v10; // er15
+  unsigned __int64 i_user_data; // rax
+  unsigned int v10; // r15d
   __int64 v11; // rdi
-  unsigned int v12; // ebx
-  SSObjectBase *v13; // rdi
+  unsigned int i; // ebx
+  SSObjectBase *i_obj_p; // rdi
   UFG::allocator::free_link *v14; // rax
   UFG::allocator::free_link *v15; // rbx
   SSInstance *v16; // r15
@@ -344,87 +355,80 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_add_element(SSInvokedMethod *pScop
   __int64 v24; // rax
   const char *v25; // rax
   const char *v26; // rax
-  UFG::qString v27; // [rsp+38h] [rbp-50h]
+  UFG::qString v27; // [rsp+38h] [rbp-50h] BYREF
 
-  v2 = pScope;
-  v3 = (SSActor *)(*pScope->i_data.i_array_p)->i_data_p;
-  if ( !v3 )
+  i_data_p = (SSActor *)(*pScope->i_data.i_array_p)->i_data_p;
+  if ( !i_data_p )
     goto LABEL_6;
-  v4 = v3->i_class_p;
-  if ( !v4->vfptr->is_actor_class((SSClassDescBase *)v3->i_class_p) )
+  i_class_p = i_data_p->i_class_p;
+  if ( !i_class_p->vfptr->is_actor_class(i_class_p) )
   {
-    if ( v4 == SSBrain::c_symbol_class_p && LODWORD(v3->i_user_data) != -1 )
+    if ( i_class_p == SSBrain::c_symbol_class_p && LODWORD(i_data_p->i_user_data) != -1 )
     {
-      v3 = SSActor::find((ASymbol *)&v3->i_user_data);
+      i_data_p = SSActor::find((ASymbol *)&i_data_p->i_user_data);
       goto LABEL_7;
     }
 LABEL_6:
-    v3 = 0i64;
+    i_data_p = 0i64;
   }
 LABEL_7:
-  v5 = *(SSActor **)(*((_QWORD *)v2->i_data.i_array_p + 1) + 8i64);
+  v5 = *(SSActor **)(*((_QWORD *)pScope->i_data.i_array_p + 1) + 8i64);
   if ( !v5 )
-    goto LABEL_48;
+    goto LABEL_12;
   v6 = v5->i_class_p;
-  if ( v6->vfptr->is_actor_class((SSClassDescBase *)v5->i_class_p) )
+  if ( v6->vfptr->is_actor_class(v6) )
     goto LABEL_13;
   if ( v6 == SSBrain::c_symbol_class_p && LODWORD(v5->i_user_data) != -1 )
     v5 = SSActor::find((ASymbol *)&v5->i_user_data);
   else
-LABEL_48:
+LABEL_12:
     v5 = 0i64;
 LABEL_13:
-  v7 = v2->i_data.i_array_p;
-  v8 = v7[2]->i_data_p;
-  v9 = v7[3]->i_data_p->i_user_data;
-  v10 = *(_DWORD *)v9;
-  v11 = *(_QWORD *)(v9 + 8);
-  UFG::qString::qString(&v27, &customWorldMapCaption);
-  v12 = 0;
-  if ( v10 )
+  i_array_p = pScope->i_data.i_array_p;
+  v8 = i_array_p[2]->i_data_p;
+  i_user_data = i_array_p[3]->i_data_p->i_user_data;
+  v10 = *(_DWORD *)i_user_data;
+  v11 = *(_QWORD *)(i_user_data + 8);
+  UFG::qString::qString(&v27, &customCaption);
+  for ( i = 0; i < v10; v11 += 8i64 )
   {
-    do
-    {
-      UFG::qString::operator+=(&v27, **(const char ***)(*(_QWORD *)v11 + 32i64));
-      if ( v12 < v10 - 1 )
-        UFG::qString::operator+=(&v27, ".");
-      ++v12;
-      v11 += 8i64;
-    }
-    while ( v12 < v10 );
+    UFG::qString::operator+=(&v27, **(const char ***)(*(_QWORD *)v11 + 32i64));
+    if ( i < v10 - 1 )
+      UFG::qString::operator+=(&v27, ".");
+    ++i;
   }
-  v13 = v2->i_scope_p.i_obj_p;
-  if ( !v13 || v2->i_scope_p.i_ptr_id != v13->i_ptr_id )
-    v13 = 0i64;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
   v14 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0xC0ui64, "add_element.ScriptedConversationElement", 0i64, 1u);
   v15 = v14;
   if ( v14 )
   {
-    UFG::ConversationElement::ConversationElement((UFG::ConversationElement *)v14, 0);
+    UFG::ConversationElement::ConversationElement((UFG::ConversationElement *)v14, eConversationElementType_Scripted);
     v15->mNext = (UFG::allocator::free_link *)&UFG::ScriptedConversationElement::`vftable;
     v15[20].mNext = 0i64;
     v15[21].mNext = 0i64;
     v15[22].mNext = 0i64;
     v15[23].mNext = 0i64;
-    UFG::ScriptedConversationElement::SetupScript((UFG::ScriptedConversationElement *)v15, (ASymbol *)&v13[4].i_ptr_id);
+    UFG::ScriptedConversationElement::SetupScript(
+      (UFG::ScriptedConversationElement *)v15,
+      (ASymbol *)&i_obj_p[4].i_ptr_id);
   }
   else
   {
     v15 = 0i64;
   }
-  v16 = (*v2->i_data.i_array_p)->i_data_p;
-  if ( v16
-    && (v17 = v16->i_class_p) != 0i64
-    && (((unsigned __int8 (*)(void))v17->vfptr->is_actor_class)() || LODWORD(v16->i_user_data) != -1) )
+  v16 = (*pScope->i_data.i_array_p)->i_data_p;
+  if ( v16 && (v17 = v16->i_class_p) != 0i64 && (v17->vfptr->is_actor_class(v17) || LODWORD(v16->i_user_data) != -1) )
   {
-    if ( v3 && (v18 = *(UFG::SimObject **)&v3[1].i_icoroutines_to_update.i_count) != 0i64 )
+    if ( i_data_p && (v18 = *(UFG::SimObject **)&i_data_p[1].i_icoroutines_to_update.i_count) != 0i64 )
     {
       UFG::ConversationElement::SetSpeaker((UFG::ConversationElement *)v15, v18);
     }
     else
     {
-      v15[22].mNext = (UFG::allocator::free_link *)(*v2->i_data.i_array_p)->i_data_p;
-      v19 = (*v2->i_data.i_array_p)->i_data_p;
+      v15[22].mNext = (UFG::allocator::free_link *)(*pScope->i_data.i_array_p)->i_data_p;
+      v19 = (*pScope->i_data.i_array_p)->i_data_p;
       ++v19->i_ref_count;
     }
   }
@@ -433,10 +437,10 @@ LABEL_13:
     v20 = UFG::ConversationElement::ToString((UFG::ConversationElement *)v15);
     UFG::qPrintf("TSScriptedDialogue: possible error adding -> %s\n", v20);
   }
-  v21 = *(_QWORD *)(*((_QWORD *)v2->i_data.i_array_p + 1) + 8i64);
+  v21 = *(_QWORD *)(*((_QWORD *)pScope->i_data.i_array_p + 1) + 8i64);
   if ( v21
     && (v22 = *(_QWORD *)(v21 + 24)) != 0
-    && ((*(unsigned __int8 (**)(void))(*(_QWORD *)v22 + 64i64))() || *(_DWORD *)(v21 + 32) != -1) )
+    && ((*(unsigned __int8 (__fastcall **)(__int64))(*(_QWORD *)v22 + 64i64))(v22) || *(_DWORD *)(v21 + 32) != -1) )
   {
     if ( v5 && (v23 = *(UFG::SimObject **)&v5[1].i_icoroutines_to_update.i_count) != 0i64 )
     {
@@ -444,8 +448,8 @@ LABEL_13:
     }
     else
     {
-      v15[23].mNext = *(UFG::allocator::free_link **)(*((_QWORD *)v2->i_data.i_array_p + 1) + 8i64);
-      v24 = *(_QWORD *)(*((_QWORD *)v2->i_data.i_array_p + 1) + 8i64);
+      v15[23].mNext = *(UFG::allocator::free_link **)(*((_QWORD *)pScope->i_data.i_array_p + 1) + 8i64);
+      v24 = *(_QWORD *)(*((_QWORD *)pScope->i_data.i_array_p + 1) + 8i64);
       ++*(_DWORD *)(v24 + 16);
     }
   }
@@ -456,14 +460,14 @@ LABEL_13:
   }
   UFG::qString::Set((UFG::qString *)&v15[4], v27.mData, v27.mLength, 0i64, 0);
   LODWORD(v15[9].mNext) = v8->i_user_data;
-  if ( v13[8].vfptr )
+  if ( i_obj_p[8].vfptr )
   {
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
       v26 = UFG::ConversationElement::ToString((UFG::ConversationElement *)v15);
       UFG::qPrintf("Dlg Trc: %s : %s\n", "add_element", v26);
     }
-    UFG::Conversation::AddElement((UFG::Conversation *)v13[8].vfptr, (UFG::ConversationElement *)v15);
+    UFG::Conversation::AddElement((UFG::Conversation *)i_obj_p[8].vfptr, (UFG::ConversationElement *)v15);
   }
   UFG::qString::~qString(&v27);
 }
@@ -472,28 +476,28 @@ LABEL_13:
 // RVA: 0x50A810
 void __fastcall UFG::TSScriptedDialogue::Mthd_set_tag_interruptable(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rdx
+  SSObjectBase *i_obj_p; // rdx
   bool v3; // bl
-  SSObjectBaseVtbl *v4; // rcx
+  SSObjectBaseVtbl *vfptr; // rcx
   char *v5; // rax
   __int64 v6; // rax
-  UFG::qString v7; // [rsp+28h] [rbp-30h]
+  UFG::qString v7; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
   v3 = (*pScope->i_data.i_array_p)->i_data_p->i_user_data != 0;
-  v4 = v2[8].vfptr;
-  if ( v4 )
+  vfptr = i_obj_p[8].vfptr;
+  if ( vfptr )
   {
-    LOBYTE(v4[2].set_data_by_name) &= 0xFBu;
-    LOBYTE(v4[2].set_data_by_name) |= 4 * v3;
+    LOBYTE(vfptr[2].set_data_by_name) &= ~4u;
+    LOBYTE(vfptr[2].set_data_by_name) |= 4 * v3;
   }
   if ( UFG::ConversationManager::sm_traceScrConversations )
   {
-    v5 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[4].i_ptr_id);
-    UFG::qString::qString(&v7, "%s : %d", v5, v3, -2i64);
-    UFG::qPrintf("Dlg Trc: %s : %s\n", "set_tag_interruptable", *(_QWORD *)(v6 + 24));
+    v5 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
+    UFG::qString::qString(&v7, "%s : %d", v5, v3);
+    UFG::qPrintf("Dlg Trc: %s : %s\n", "set_tag_interruptable", *(const char **)(v6 + 24));
     UFG::qString::~qString(&v7);
   }
 }
@@ -502,30 +506,30 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_set_tag_interruptable(SSInvokedMet
 // RVA: 0x50AFB0
 void __fastcall UFG::TSScriptedDialogue::Mthd_set_topic(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rdi
+  SSObjectBase *i_obj_p; // rdi
   char *v3; // rbx
   char *v4; // rax
   __int64 v5; // rax
-  SSObjectBaseVtbl *v6; // rbx
-  UFG::qString v7; // [rsp+28h] [rbp-30h]
-  UFG::qSymbolUC v8; // [rsp+60h] [rbp+8h]
+  SSObjectBaseVtbl *vfptr; // rbx
+  UFG::qString v7; // [rsp+28h] [rbp-30h] BYREF
+  UFG::qSymbolUC v8; // [rsp+60h] [rbp+8h] BYREF
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
   v8.mUID = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
-  if ( v2[8].vfptr )
+  if ( i_obj_p[8].vfptr )
   {
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[4].i_ptr_id);
+      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
       v4 = UFG::qSymbol::as_cstr_dbg(&v8);
-      UFG::qString::qString(&v7, "%s : %s", v3, v4, -2i64);
-      UFG::qPrintf("Dlg Trc: %s : %s\n", "set_topic", *(_QWORD *)(v5 + 24));
+      UFG::qString::qString(&v7, "%s : %s", v3, v4);
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "set_topic", *(const char **)(v5 + 24));
       UFG::qString::~qString(&v7);
     }
-    v6 = v2[8].vfptr;
-    LODWORD(v6[2].is_actor) = UFG::Conversation::LookupTopic((UFG::qSymbol *)&v8);
+    vfptr = i_obj_p[8].vfptr;
+    LODWORD(vfptr[2].is_actor) = UFG::Conversation::LookupTopic((UFG::qSymbol *)&v8);
   }
 }
 
@@ -533,32 +537,30 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_set_topic(SSInvokedMethod *pScope,
 // RVA: 0x4FCBE0
 void __fastcall UFG::TSScriptedDialogue::Mthd_get_element(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  SSInstance **v3; // rbx
-  SSInstance *v4; // rax
-  UFG::Conversation *v5; // rcx
-  UFG::ConversationElement *v6; // rax
+  SSObjectBase *i_obj_p; // r8
+  SSInstance *i_data_p; // rax
+  UFG::Conversation *vfptr; // rcx
+  UFG::ConversationElement *Element; // rax
   SSInstance *v7; // rax
   SSInstance *v8; // rax
 
   if ( ppResult )
   {
-    v2 = pScope->i_scope_p.i_obj_p;
-    v3 = ppResult;
-    if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-      v2 = 0i64;
-    v4 = (*pScope->i_data.i_array_p)->i_data_p;
-    v5 = (UFG::Conversation *)v2[8].vfptr;
-    if ( v5 && (v6 = UFG::Conversation::GetElement(v5, v4->i_user_data)) != 0i64 )
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    i_data_p = (*pScope->i_data.i_array_p)->i_data_p;
+    vfptr = (UFG::Conversation *)i_obj_p[8].vfptr;
+    if ( vfptr && (Element = UFG::Conversation::GetElement(vfptr, i_data_p->i_user_data)) != 0i64 )
     {
-      v7 = (SSInstance *)v6[1].vfptr;
-      *v3 = v7;
+      v7 = (SSInstance *)Element[1].vfptr;
+      *ppResult = v7;
       ++v7->i_ref_count;
     }
     else
     {
       v8 = SSBrain::c_nil_p;
-      *v3 = SSBrain::c_nil_p;
+      *ppResult = SSBrain::c_nil_p;
       ++v8->i_ref_count;
     }
   }
@@ -568,150 +570,150 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_get_element(SSInvokedMethod *pScop
 // RVA: 0x502AD0
 void __fastcall UFG::TSScriptedDialogue::Mthd_is_playing(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  SSObjectBaseVtbl *v3; // rax
+  SSObjectBase *i_obj_p; // r8
+  SSObjectBaseVtbl *vfptr; // rax
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  v3 = v2[8].vfptr;
-  if ( v3 )
-    *ppResult = (SSInstance *)SSBoolean::pool_new(LODWORD(v3->get_scope_context) == 1);
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  vfptr = i_obj_p[8].vfptr;
+  if ( vfptr )
+    *ppResult = SSBoolean::pool_new(LODWORD(vfptr->get_scope_context) == 1);
 }
 
 // File Line: 367
 // RVA: 0x5013D0
 void __fastcall UFG::TSScriptedDialogue::Mthd_is_finished(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  SSObjectBaseVtbl *v3; // rax
+  SSObjectBase *i_obj_p; // r8
+  SSObjectBaseVtbl *vfptr; // rax
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  v3 = v2[8].vfptr;
-  if ( v3 )
-    *ppResult = (SSInstance *)SSBoolean::pool_new(LODWORD(v3->get_scope_context) == 7);
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  vfptr = i_obj_p[8].vfptr;
+  if ( vfptr )
+    *ppResult = SSBoolean::pool_new(LODWORD(vfptr->get_scope_context) == 7);
 }
 
 // File Line: 379
 // RVA: 0x502470
 void __fastcall UFG::TSScriptedDialogue::Mthd_is_interrupted(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  SSObjectBaseVtbl *v3; // rax
+  SSObjectBase *i_obj_p; // r8
+  SSObjectBaseVtbl *vfptr; // rax
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  v3 = v2[8].vfptr;
-  if ( v3 )
-    *ppResult = (SSInstance *)SSBoolean::pool_new(LODWORD(v3->get_scope_context) == 3);
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  vfptr = i_obj_p[8].vfptr;
+  if ( vfptr )
+    *ppResult = SSBoolean::pool_new(LODWORD(vfptr->get_scope_context) == 3);
 }
 
 // File Line: 391
 // RVA: 0x5032B0
 void __fastcall UFG::TSScriptedDialogue::Mthd_is_stopped(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  SSObjectBaseVtbl *v3; // rax
+  SSObjectBase *i_obj_p; // r8
+  SSObjectBaseVtbl *vfptr; // rax
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  v3 = v2[8].vfptr;
-  if ( v3 )
-    *ppResult = (SSInstance *)SSBoolean::pool_new(LODWORD(v3->get_scope_context) == 6);
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  vfptr = i_obj_p[8].vfptr;
+  if ( vfptr )
+    *ppResult = SSBoolean::pool_new(LODWORD(vfptr->get_scope_context) == 6);
 }
 
 // File Line: 405
 // RVA: 0x5023D0
 void __fastcall UFG::TSScriptedDialogue::Mthd_is_inactive(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  SSObjectBaseVtbl *v3; // rax
+  SSObjectBase *i_obj_p; // r8
+  SSObjectBaseVtbl *vfptr; // rax
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  v3 = v2[8].vfptr;
-  if ( v3 )
-    *ppResult = (SSInstance *)SSBoolean::pool_new(LODWORD(v3->get_scope_context) == 0);
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  vfptr = i_obj_p[8].vfptr;
+  if ( vfptr )
+    *ppResult = SSBoolean::pool_new(LODWORD(vfptr->get_scope_context) == 0);
 }
 
 // File Line: 417
 // RVA: 0x4F7D10
 void __fastcall UFG::TSScriptedDialogue::Mthd_destroy(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rbx
+  SSObjectBase *i_obj_p; // rbx
   char *v3; // rax
   __int64 v4; // rax
-  UFG::Conversation *v5; // rcx
-  UFG::qString v6; // [rsp+28h] [rbp-30h]
+  UFG::Conversation *vfptr; // rcx
+  UFG::qString v6; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
   if ( UFG::ConversationManager::sm_traceScrConversations )
   {
-    v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[4].i_ptr_id);
+    v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
     UFG::qString::qString(&v6, "%s ", v3);
-    UFG::qPrintf("Dlg Trc: %s : %s\n", "destroy", *(_QWORD *)(v4 + 24));
+    UFG::qPrintf("Dlg Trc: %s : %s\n", "destroy", *(const char **)(v4 + 24));
     UFG::qString::~qString(&v6);
   }
-  v5 = (UFG::Conversation *)v2[8].vfptr;
-  if ( v5 )
-    UFG::ConversationManager::RemoveConversation(v5);
+  vfptr = (UFG::Conversation *)i_obj_p[8].vfptr;
+  if ( vfptr )
+    UFG::ConversationManager::RemoveConversation(vfptr);
 }
 
 // File Line: 427
 // RVA: 0x50C150
 void __fastcall UFG::TSScriptedDialogue::Mthd_stop(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rbx
+  SSObjectBase *i_obj_p; // rbx
   char *v3; // rax
   __int64 v4; // rax
-  UFG::qString v5; // [rsp+28h] [rbp-30h]
+  UFG::qString v5; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  if ( v2[8].vfptr )
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  if ( i_obj_p[8].vfptr )
   {
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[4].i_ptr_id);
+      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
       UFG::qString::qString(&v5, "%s ", v3);
-      UFG::qPrintf("Dlg Trc: %s : %s\n", "stop", *(_QWORD *)(v4 + 24));
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "stop", *(const char **)(v4 + 24));
       UFG::qString::~qString(&v5);
     }
-    UFG::Conversation::Stop((UFG::Conversation *)v2[8].vfptr, 0);
+    UFG::Conversation::Stop((UFG::Conversation *)i_obj_p[8].vfptr, 0);
   }
 }
 
 // File Line: 439
 // RVA: 0x502ED0
-void __fastcall UFG::TSScriptedDialogue::Mthd_is_playing_last_line_in_group(SSInvokedMethod *pScope, SSInstance **ppResult)
+void __fastcall UFG::TSScriptedDialogue::Mthd_is_playing_last_line_in_group(
+        SSInvokedMethod *pScope,
+        SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  SSInstance **v3; // rbx
-  bool v4; // dl
-  SSObjectBaseVtbl *v5; // rcx
+  SSObjectBase *i_obj_p; // r8
+  bool IsLastLineInGroup; // dl
+  SSObjectBaseVtbl *vfptr; // rcx
 
   if ( ppResult )
   {
-    v2 = pScope->i_scope_p.i_obj_p;
-    v3 = ppResult;
-    v4 = 0;
-    if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-      v2 = 0i64;
-    v5 = v2[8].vfptr;
-    if ( v5 )
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    IsLastLineInGroup = 0;
+    if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    vfptr = i_obj_p[8].vfptr;
+    if ( vfptr )
     {
-      if ( LODWORD(v5->get_scope_context) == 1 )
-        v4 = UFG::Conversation::IsLastLineInGroup((UFG::Conversation *)v5);
+      if ( LODWORD(vfptr->get_scope_context) == 1 )
+        IsLastLineInGroup = UFG::Conversation::IsLastLineInGroup((UFG::Conversation *)vfptr);
     }
-    *v3 = (SSInstance *)SSBoolean::pool_new(v4);
+    *ppResult = SSBoolean::pool_new(IsLastLineInGroup);
   }
 }
 
@@ -719,22 +721,20 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_is_playing_last_line_in_group(SSIn
 // RVA: 0x501AA0
 void __fastcall UFG::TSScriptedDialogue::Mthd_is_in_last_group(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  SSInstance **v3; // rbx
-  bool v4; // dl
-  UFG::Conversation *v5; // rcx
+  SSObjectBase *i_obj_p; // r8
+  bool IsLast; // dl
+  UFG::Conversation *vfptr; // rcx
 
   if ( ppResult )
   {
-    v2 = pScope->i_scope_p.i_obj_p;
-    v3 = ppResult;
-    v4 = 0;
-    if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-      v2 = 0i64;
-    v5 = (UFG::Conversation *)v2[8].vfptr;
-    if ( v5 )
-      v4 = UFG::Conversation::CurrentGroupIsLast(v5);
-    *v3 = (SSInstance *)SSBoolean::pool_new(v4);
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    IsLast = 0;
+    if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    vfptr = (UFG::Conversation *)i_obj_p[8].vfptr;
+    if ( vfptr )
+      IsLast = UFG::Conversation::CurrentGroupIsLast(vfptr);
+    *ppResult = SSBoolean::pool_new(IsLast);
   }
 }
 
@@ -742,59 +742,61 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_is_in_last_group(SSInvokedMethod *
 // RVA: 0x4F3B00
 void __fastcall UFG::TSScriptedDialogue::Mthd_add_animation_bank(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance *v2; // rdi
-  SSObjectBase *v3; // rbx
+  SSInstance *i_data_p; // rdi
+  SSObjectBase *i_obj_p; // rbx
   UFG::allocator::free_link *v4; // rax
   UFG::allocator::free_link *v5; // rdx
-  int v6; // ecx
-  void (__fastcall **v7)(SSObjectBase *, ASymbol *, SSInstance *); // rcx
+  int i_user_data; // ecx
+  void (__fastcall **p_set_data_by_name)(SSObjectBase *, ASymbol *, SSInstance *); // rcx
   UFG::allocator::free_link *v8; // rax
 
-  v2 = (*pScope->i_data.i_array_p)->i_data_p;
-  v3 = pScope->i_scope_p.i_obj_p;
-  if ( !v3 || pScope->i_scope_p.i_ptr_id != v3->i_ptr_id )
-    v3 = 0i64;
-  if ( v3[8].vfptr )
+  i_data_p = (*pScope->i_data.i_array_p)->i_data_p;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  if ( i_obj_p[8].vfptr )
   {
     v4 = UFG::qMalloc(0x18ui64, UFG::gGlobalNewName, 0i64);
     v5 = v4;
     if ( v4 )
     {
-      v6 = v2->i_user_data;
+      i_user_data = i_data_p->i_user_data;
       v4->mNext = v4;
       v4[1].mNext = v4;
       LODWORD(v4[2].mNext) = -1;
-      LODWORD(v4[2].mNext) = v6;
+      LODWORD(v4[2].mNext) = i_user_data;
     }
     else
     {
       v5 = 0i64;
     }
-    v7 = &v3[8].vfptr[1].set_data_by_name;
-    v8 = (UFG::allocator::free_link *)*v7;
+    p_set_data_by_name = &i_obj_p[8].vfptr[1].set_data_by_name;
+    v8 = (UFG::allocator::free_link *)*p_set_data_by_name;
     v8[1].mNext = v5;
     v5->mNext = v8;
-    v5[1].mNext = (UFG::allocator::free_link *)v7;
-    *v7 = (void (__fastcall *)(SSObjectBase *, ASymbol *, SSInstance *))v5;
+    v5[1].mNext = (UFG::allocator::free_link *)p_set_data_by_name;
+    *p_set_data_by_name = (void (__fastcall *)(SSObjectBase *, ASymbol *, SSInstance *))v5;
   }
 }
 
 // File Line: 486
 // RVA: 0x507E70
-void __fastcall UFG::TSScriptedDialogue::Mthd_set_external_source_playback_event(SSInvokedMethod *pScope, SSInstance **ppResult)
+void __fastcall UFG::TSScriptedDialogue::Mthd_set_external_source_playback_event(
+        SSInvokedMethod *pScope,
+        SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rbx
-  UFG::qWiseSymbol result; // [rsp+40h] [rbp+8h]
+  SSObjectBase *i_obj_p; // rbx
+  UFG::qWiseSymbol result; // [rsp+40h] [rbp+8h] BYREF
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  if ( v2[8].vfptr )
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  if ( i_obj_p[8].vfptr )
   {
     if ( (*pScope->i_data.i_array_p)->i_data_p != (SSInstance *)-32i64 )
     {
       UFG::qWiseSymbol::create_from_string(&result, *(const char **)(*pScope->i_data.i_array_p)->i_data_p->i_user_data);
-      LODWORD(v2[8].vfptr[1].get_topmost_scope) = result;
+      LODWORD(i_obj_p[8].vfptr[1].get_topmost_scope) = result;
       _((AMD_HD3D *)result.mUID);
     }
   }
@@ -804,24 +806,24 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_set_external_source_playback_event
 // RVA: 0x50C240
 void __fastcall UFG::TSScriptedDialogue::Mthd_stop_after_line(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rbx
+  SSObjectBase *i_obj_p; // rbx
   char *v3; // rax
   __int64 v4; // rax
-  UFG::qString v5; // [rsp+28h] [rbp-30h]
+  UFG::qString v5; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  if ( v2[8].vfptr )
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  if ( i_obj_p[8].vfptr )
   {
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[4].i_ptr_id);
+      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
       UFG::qString::qString(&v5, "%s ", v3);
-      UFG::qPrintf("Dlg Trc: %s : %s\n", "stop_after_line", *(_QWORD *)(v4 + 24));
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "stop_after_line", *(const char **)(v4 + 24));
       UFG::qString::~qString(&v5);
     }
-    UFG::Conversation::StopAfterCurrentLine((UFG::Conversation *)v2[8].vfptr);
+    UFG::Conversation::StopAfterCurrentLine((UFG::Conversation *)i_obj_p[8].vfptr);
   }
 }
 
@@ -829,24 +831,24 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_stop_after_line(SSInvokedMethod *p
 // RVA: 0x505CC0
 void __fastcall UFG::TSScriptedDialogue::Mthd_play(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rbx
+  SSObjectBase *i_obj_p; // rbx
   char *v3; // rax
   __int64 v4; // rax
-  UFG::qString v5; // [rsp+28h] [rbp-30h]
+  UFG::qString v5; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  if ( v2[8].vfptr )
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  if ( i_obj_p[8].vfptr )
   {
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[4].i_ptr_id);
+      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
       UFG::qString::qString(&v5, "%s ", v3);
-      UFG::qPrintf("Dlg Trc: %s : %s\n", "play", *(_QWORD *)(v4 + 24));
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "play", *(const char **)(v4 + 24));
       UFG::qString::~qString(&v5);
     }
-    UFG::Conversation::Start((UFG::Conversation *)v2[8].vfptr);
+    UFG::Conversation::Start((UFG::Conversation *)i_obj_p[8].vfptr);
   }
 }
 
@@ -854,24 +856,24 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_play(SSInvokedMethod *pScope, SSIn
 // RVA: 0x504EF0
 void __fastcall UFG::TSScriptedDialogue::Mthd_next_line(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rbx
+  SSObjectBase *i_obj_p; // rbx
   char *v3; // rax
   __int64 v4; // rax
-  UFG::qString v5; // [rsp+28h] [rbp-30h]
+  UFG::qString v5; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  if ( v2[8].vfptr )
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  if ( i_obj_p[8].vfptr )
   {
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[4].i_ptr_id);
+      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
       UFG::qString::qString(&v5, "%s ", v3);
-      UFG::qPrintf("Dlg Trc: %s : %s\n", "next_line", *(_QWORD *)(v4 + 24));
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "next_line", *(const char **)(v4 + 24));
       UFG::qString::~qString(&v5);
     }
-    UFG::Conversation::NextLine((UFG::Conversation *)v2[8].vfptr);
+    UFG::Conversation::NextLine((UFG::Conversation *)i_obj_p[8].vfptr);
   }
 }
 
@@ -879,24 +881,24 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_next_line(SSInvokedMethod *pScope,
 // RVA: 0x506110
 void __fastcall UFG::TSScriptedDialogue::Mthd_prev_line(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rbx
+  SSObjectBase *i_obj_p; // rbx
   char *v3; // rax
   __int64 v4; // rax
-  UFG::qString v5; // [rsp+28h] [rbp-30h]
+  UFG::qString v5; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  if ( v2[8].vfptr )
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  if ( i_obj_p[8].vfptr )
   {
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[4].i_ptr_id);
+      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
       UFG::qString::qString(&v5, "%s ", v3);
-      UFG::qPrintf("Dlg Trc: %s : %s\n", "prev_line", *(_QWORD *)(v4 + 24));
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "prev_line", *(const char **)(v4 + 24));
       UFG::qString::~qString(&v5);
     }
-    UFG::Conversation::PrevLine((UFG::Conversation *)v2[8].vfptr);
+    UFG::Conversation::PrevLine((UFG::Conversation *)i_obj_p[8].vfptr);
   }
 }
 
@@ -904,24 +906,24 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_prev_line(SSInvokedMethod *pScope,
 // RVA: 0x506970
 void __fastcall UFG::TSScriptedDialogue::Mthd_restart(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rbx
+  SSObjectBase *i_obj_p; // rbx
   char *v3; // rax
   __int64 v4; // rax
-  UFG::qString v5; // [rsp+28h] [rbp-30h]
+  UFG::qString v5; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  if ( v2[8].vfptr )
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  if ( i_obj_p[8].vfptr )
   {
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[4].i_ptr_id);
+      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
       UFG::qString::qString(&v5, "%s ", v3);
-      UFG::qPrintf("Dlg Trc: %s : %s\n", "restart", *(_QWORD *)(v4 + 24));
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "restart", *(const char **)(v4 + 24));
       UFG::qString::~qString(&v5);
     }
-    UFG::Conversation::Restart((UFG::Conversation *)v2[8].vfptr);
+    UFG::Conversation::Restart((UFG::Conversation *)i_obj_p[8].vfptr);
   }
 }
 
@@ -929,24 +931,24 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_restart(SSInvokedMethod *pScope, S
 // RVA: 0x506800
 void __fastcall UFG::TSScriptedDialogue::Mthd_reset(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rbx
+  SSObjectBase *i_obj_p; // rbx
   char *v3; // rax
   __int64 v4; // rax
-  UFG::qString v5; // [rsp+28h] [rbp-30h]
+  UFG::qString v5; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  if ( v2[8].vfptr )
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  if ( i_obj_p[8].vfptr )
   {
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[4].i_ptr_id);
+      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
       UFG::qString::qString(&v5, "%s ", v3);
-      UFG::qPrintf("Dlg Trc: %s : %s\n", "reset", *(_QWORD *)(v4 + 24));
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "reset", *(const char **)(v4 + 24));
       UFG::qString::~qString(&v5);
     }
-    UFG::Conversation::Reset((UFG::Conversation *)v2[8].vfptr);
+    UFG::Conversation::Reset((UFG::Conversation *)i_obj_p[8].vfptr);
   }
 }
 
@@ -954,22 +956,20 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_reset(SSInvokedMethod *pScope, SSI
 // RVA: 0x505020
 void __fastcall UFG::TSScriptedDialogue::Mthd_num_element_groups(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  unsigned int v3; // er9
-  SSInstance **v4; // rbx
-  UFG::Conversation *v5; // rcx
+  SSObjectBase *i_obj_p; // r8
+  unsigned int GroupCount; // r9d
+  UFG::Conversation *vfptr; // rcx
 
   if ( ppResult )
   {
-    v2 = pScope->i_scope_p.i_obj_p;
-    v3 = 0;
-    v4 = ppResult;
-    if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-      v2 = 0i64;
-    v5 = (UFG::Conversation *)v2[8].vfptr;
-    if ( v5 )
-      v3 = UFG::Conversation::GetGroupCount(v5);
-    *v4 = SSInstance::pool_new(SSBrain::c_integer_class_p, v3);
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    GroupCount = 0;
+    if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    vfptr = (UFG::Conversation *)i_obj_p[8].vfptr;
+    if ( vfptr )
+      GroupCount = UFG::Conversation::GetGroupCount(vfptr);
+    *ppResult = SSInstance::pool_new(SSBrain::c_integer_class_p, GroupCount);
   }
 }
 
@@ -977,12 +977,15 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_num_element_groups(SSInvokedMethod
 // RVA: 0x504EC0
 void __fastcall UFG::TSScriptedDialogue::Mthd_move_to_next_group(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rdx
+  SSObjectBase *i_obj_p; // rdx
+  UFG::Conversation *vfptr; // rcx
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  JUMPOUT(v2[8].vfptr, 0i64, UFG::Conversation::MoveToNextGroup);
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  vfptr = (UFG::Conversation *)i_obj_p[8].vfptr;
+  if ( vfptr )
+    UFG::Conversation::MoveToNextGroup(vfptr);
 }
 
 // File Line: 622
@@ -990,28 +993,28 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_move_to_next_group(SSInvokedMethod
 void __fastcall UFG::TSScriptedDialogue::Mthd_auto_delete(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
   bool v2; // di
-  SSObjectBase *v3; // rbx
+  SSObjectBase *i_obj_p; // rbx
   char *v4; // rax
   __int64 v5; // rax
-  SSObjectBaseVtbl *v6; // rax
-  UFG::qString v7; // [rsp+28h] [rbp-30h]
+  SSObjectBaseVtbl *vfptr; // rax
+  UFG::qString v7; // [rsp+28h] [rbp-30h] BYREF
 
   v2 = (*pScope->i_data.i_array_p)->i_data_p->i_user_data != 0;
-  v3 = pScope->i_scope_p.i_obj_p;
-  if ( !v3 || pScope->i_scope_p.i_ptr_id != v3->i_ptr_id )
-    v3 = 0i64;
-  if ( v3[8].vfptr )
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  if ( i_obj_p[8].vfptr )
   {
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v3[4].i_ptr_id);
-      UFG::qString::qString(&v7, "%s : %d", v4, v2, -2i64);
-      UFG::qPrintf("Dlg Trc: %s : %s\n", "set_auto_delete", *(_QWORD *)(v5 + 24));
+      v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
+      UFG::qString::qString(&v7, "%s : %d", v4, v2);
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "set_auto_delete", *(const char **)(v5 + 24));
       UFG::qString::~qString(&v7);
     }
-    v6 = v3[8].vfptr;
-    LOBYTE(v6[2].set_data_by_name) &= 0xFDu;
-    LOBYTE(v6[2].set_data_by_name) |= 2 * v2;
+    vfptr = i_obj_p[8].vfptr;
+    LOBYTE(vfptr[2].set_data_by_name) &= ~2u;
+    LOBYTE(vfptr[2].set_data_by_name) |= 2 * v2;
   }
 }
 
@@ -1019,24 +1022,24 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_auto_delete(SSInvokedMethod *pScop
 // RVA: 0x4F83C0
 void __fastcall UFG::TSScriptedDialogue::Mthd_disable_distance_cutoff(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rbx
+  SSObjectBase *i_obj_p; // rbx
   char *v3; // rax
   __int64 v4; // rax
-  UFG::qString v5; // [rsp+28h] [rbp-30h]
+  UFG::qString v5; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  if ( v2[8].vfptr )
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  if ( i_obj_p[8].vfptr )
   {
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[4].i_ptr_id);
+      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
       UFG::qString::qString(&v5, "%s ", v3);
-      UFG::qPrintf("Dlg Trc: %s : %s\n", "disable_distance_cutoff", *(_QWORD *)(v4 + 24));
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "disable_distance_cutoff", *(const char **)(v4 + 24));
       UFG::qString::~qString(&v5);
     }
-    LOBYTE(v2[8].vfptr[2].set_data_by_name) |= 8u;
+    LOBYTE(i_obj_p[8].vfptr[2].set_data_by_name) |= 8u;
   }
 }
 
@@ -1044,24 +1047,24 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_disable_distance_cutoff(SSInvokedM
 // RVA: 0x4F8A60
 void __fastcall UFG::TSScriptedDialogue::Mthd_enable_distance_cutoff(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rbx
+  SSObjectBase *i_obj_p; // rbx
   char *v3; // rax
   __int64 v4; // rax
-  UFG::qString v5; // [rsp+28h] [rbp-30h]
+  UFG::qString v5; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  if ( v2[8].vfptr )
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  if ( i_obj_p[8].vfptr )
   {
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[4].i_ptr_id);
+      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
       UFG::qString::qString(&v5, "%s ", v3);
-      UFG::qPrintf("Dlg Trc: %s : %s\n", "enable_distance_cutoff", *(_QWORD *)(v4 + 24));
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "enable_distance_cutoff", *(const char **)(v4 + 24));
       UFG::qString::~qString(&v5);
     }
-    LOBYTE(v2[8].vfptr[2].set_data_by_name) &= 0xF7u;
+    LOBYTE(i_obj_p[8].vfptr[2].set_data_by_name) &= ~8u;
   }
 }
 
@@ -1069,24 +1072,24 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_enable_distance_cutoff(SSInvokedMe
 // RVA: 0x4F8580
 void __fastcall UFG::TSScriptedDialogue::Mthd_disable_subtitles(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rbx
+  SSObjectBase *i_obj_p; // rbx
   char *v3; // rax
   __int64 v4; // rax
-  UFG::qString v5; // [rsp+28h] [rbp-30h]
+  UFG::qString v5; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  if ( v2[8].vfptr )
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  if ( i_obj_p[8].vfptr )
   {
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[4].i_ptr_id);
+      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
       UFG::qString::qString(&v5, "%s ", v3);
-      UFG::qPrintf("Dlg Trc: %s : %s\n", "disable_subtitles", *(_QWORD *)(v4 + 24));
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "disable_subtitles", *(const char **)(v4 + 24));
       UFG::qString::~qString(&v5);
     }
-    LOBYTE(v2[8].vfptr[2].set_data_by_name) &= 0x7Fu;
+    LOBYTE(i_obj_p[8].vfptr[2].set_data_by_name) &= ~0x80u;
   }
 }
 
@@ -1094,24 +1097,24 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_disable_subtitles(SSInvokedMethod 
 // RVA: 0x4F91B0
 void __fastcall UFG::TSScriptedDialogue::Mthd_enable_subtitles(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rbx
+  SSObjectBase *i_obj_p; // rbx
   char *v3; // rax
   __int64 v4; // rax
-  UFG::qString v5; // [rsp+28h] [rbp-30h]
+  UFG::qString v5; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  if ( v2[8].vfptr )
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  if ( i_obj_p[8].vfptr )
   {
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[4].i_ptr_id);
+      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
       UFG::qString::qString(&v5, "%s ", v3);
-      UFG::qPrintf("Dlg Trc: %s : %s\n", "enable_subtitles", *(_QWORD *)(v4 + 24));
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "enable_subtitles", *(const char **)(v4 + 24));
       UFG::qString::~qString(&v5);
     }
-    LOBYTE(v2[8].vfptr[2].set_data_by_name) |= 0x80u;
+    LOBYTE(i_obj_p[8].vfptr[2].set_data_by_name) |= 0x80u;
   }
 }
 
@@ -1119,24 +1122,24 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_enable_subtitles(SSInvokedMethod *
 // RVA: 0x4F8470
 void __fastcall UFG::TSScriptedDialogue::Mthd_disable_interrupts(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rbx
+  SSObjectBase *i_obj_p; // rbx
   char *v3; // rax
   __int64 v4; // rax
-  UFG::qString v5; // [rsp+28h] [rbp-30h]
+  UFG::qString v5; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  if ( v2[8].vfptr )
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  if ( i_obj_p[8].vfptr )
   {
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[4].i_ptr_id);
+      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
       UFG::qString::qString(&v5, "%s ", v3);
-      UFG::qPrintf("Dlg Trc: %s : %s\n", "disable_interrupts", *(_QWORD *)(v4 + 24));
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "disable_interrupts", *(const char **)(v4 + 24));
       UFG::qString::~qString(&v5);
     }
-    BYTE1(v2[8].vfptr[2].set_data_by_name) |= 4u;
+    BYTE1(i_obj_p[8].vfptr[2].set_data_by_name) |= 4u;
   }
 }
 
@@ -1144,74 +1147,78 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_disable_interrupts(SSInvokedMethod
 // RVA: 0x4F8C20
 void __fastcall UFG::TSScriptedDialogue::Mthd_enable_interrupts(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rbx
+  SSObjectBase *i_obj_p; // rbx
   char *v3; // rax
   __int64 v4; // rax
-  UFG::qString v5; // [rsp+28h] [rbp-30h]
+  UFG::qString v5; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  if ( v2[8].vfptr )
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  if ( i_obj_p[8].vfptr )
   {
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[4].i_ptr_id);
+      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
       UFG::qString::qString(&v5, "%s ", v3);
-      UFG::qPrintf("Dlg Trc: %s : %s\n", "enable_interrupts", *(_QWORD *)(v4 + 24));
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "enable_interrupts", *(const char **)(v4 + 24));
       UFG::qString::~qString(&v5);
     }
-    BYTE1(v2[8].vfptr[2].set_data_by_name) &= 0xFBu;
+    BYTE1(i_obj_p[8].vfptr[2].set_data_by_name) &= ~4u;
   }
 }
 
 // File Line: 705
 // RVA: 0x4F8330
-void __fastcall UFG::TSScriptedDialogue::Mthd_disable_car_exit_interrupts(SSInvokedMethod *pScope, SSInstance **ppResult)
+void __fastcall UFG::TSScriptedDialogue::Mthd_disable_car_exit_interrupts(
+        SSInvokedMethod *pScope,
+        SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rbx
+  SSObjectBase *i_obj_p; // rbx
   char *v3; // rax
   __int64 v4; // rax
-  UFG::qString v5; // [rsp+28h] [rbp-30h]
+  UFG::qString v5; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  if ( v2[8].vfptr )
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  if ( i_obj_p[8].vfptr )
   {
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[4].i_ptr_id);
+      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
       UFG::qString::qString(&v5, "%s ", v3);
-      UFG::qPrintf("Dlg Trc: %s : %s\n", "disable_car_exit_interrupts", *(_QWORD *)(v4 + 24));
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "disable_car_exit_interrupts", *(const char **)(v4 + 24));
       UFG::qString::~qString(&v5);
     }
-    BYTE1(v2[8].vfptr[2].set_data_by_name) &= 0xF7u;
+    BYTE1(i_obj_p[8].vfptr[2].set_data_by_name) &= ~8u;
   }
 }
 
 // File Line: 716
 // RVA: 0x4F88E0
-void __fastcall UFG::TSScriptedDialogue::Mthd_enable_car_exit_interrupts(SSInvokedMethod *pScope, SSInstance **ppResult)
+void __fastcall UFG::TSScriptedDialogue::Mthd_enable_car_exit_interrupts(
+        SSInvokedMethod *pScope,
+        SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rbx
+  SSObjectBase *i_obj_p; // rbx
   char *v3; // rax
   __int64 v4; // rax
-  UFG::qString v5; // [rsp+28h] [rbp-30h]
+  UFG::qString v5; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  if ( v2[8].vfptr )
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  if ( i_obj_p[8].vfptr )
   {
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[4].i_ptr_id);
+      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
       UFG::qString::qString(&v5, "%s ", v3);
-      UFG::qPrintf("Dlg Trc: %s : %s\n", "enable_car_exit_interrupts", *(_QWORD *)(v4 + 24));
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "enable_car_exit_interrupts", *(const char **)(v4 + 24));
       UFG::qString::~qString(&v5);
     }
-    BYTE1(v2[8].vfptr[2].set_data_by_name) |= 8u;
+    BYTE1(i_obj_p[8].vfptr[2].set_data_by_name) |= 8u;
   }
 }
 
@@ -1219,26 +1226,26 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_enable_car_exit_interrupts(SSInvok
 // RVA: 0x507D20
 void __fastcall UFG::TSScriptedDialogue::Mthd_set_cutoff_distance(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance *v2; // rdi
-  SSObjectBase *v3; // rbx
+  SSInstance *i_data_p; // rdi
+  SSObjectBase *i_obj_p; // rbx
   char *v4; // rax
   __int64 v5; // rax
-  UFG::qString v6; // [rsp+28h] [rbp-30h]
+  UFG::qString v6; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = (*pScope->i_data.i_array_p)->i_data_p;
-  v3 = pScope->i_scope_p.i_obj_p;
-  if ( !v3 || pScope->i_scope_p.i_ptr_id != v3->i_ptr_id )
-    v3 = 0i64;
-  if ( v3[8].vfptr )
+  i_data_p = (*pScope->i_data.i_array_p)->i_data_p;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  if ( i_obj_p[8].vfptr )
   {
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v3[4].i_ptr_id);
-      UFG::qString::qString(&v6, "%s : %d", v4, *(float *)&v2->i_user_data, -2i64);
-      UFG::qPrintf("Dlg Trc: %s : %s\n", "set_cutoff_distance", *(_QWORD *)(v5 + 24));
+      v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
+      UFG::qString::qString(&v6, "%s : %d", v4, *(float *)&i_data_p->i_user_data);
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "set_cutoff_distance", *(const char **)(v5 + 24));
       UFG::qString::~qString(&v6);
     }
-    LODWORD(v3[8].vfptr[2].as_instance) = v2->i_user_data;
+    LODWORD(i_obj_p[8].vfptr[2].as_instance) = i_data_p->i_user_data;
   }
 }
 
@@ -1246,26 +1253,26 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_set_cutoff_distance(SSInvokedMetho
 // RVA: 0x5072D0
 void __fastcall UFG::TSScriptedDialogue::Mthd_set_avoid_repeating_last(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance *v2; // rdi
-  SSObjectBase *v3; // rbx
+  SSInstance *i_data_p; // rdi
+  SSObjectBase *i_obj_p; // rbx
   char *v4; // rax
   __int64 v5; // rax
-  UFG::qString v6; // [rsp+28h] [rbp-30h]
+  UFG::qString v6; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = (*pScope->i_data.i_array_p)->i_data_p;
-  v3 = pScope->i_scope_p.i_obj_p;
-  if ( !v3 || pScope->i_scope_p.i_ptr_id != v3->i_ptr_id )
-    v3 = 0i64;
-  if ( v3[8].vfptr )
+  i_data_p = (*pScope->i_data.i_array_p)->i_data_p;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  if ( i_obj_p[8].vfptr )
   {
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v3[4].i_ptr_id);
-      UFG::qString::qString(&v6, "%s : %u", v4, LODWORD(v2->i_user_data), -2i64);
-      UFG::qPrintf("Dlg Trc: %s : %s\n", "set_avoid_repeating_last", *(_QWORD *)(v5 + 24));
+      v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
+      UFG::qString::qString(&v6, "%s : %u", v4, LODWORD(i_data_p->i_user_data));
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "set_avoid_repeating_last", *(const char **)(v5 + 24));
       UFG::qString::~qString(&v6);
     }
-    WORD2(v3[8].vfptr[2].get_data_by_name) = v2->i_user_data;
+    WORD2(i_obj_p[8].vfptr[2].get_data_by_name) = i_data_p->i_user_data;
   }
 }
 
@@ -1274,28 +1281,28 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_set_avoid_repeating_last(SSInvoked
 void __fastcall UFG::TSScriptedDialogue::Mthd_set_shuffle(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
   bool v2; // di
-  SSObjectBase *v3; // rbx
+  SSObjectBase *i_obj_p; // rbx
   char *v4; // rax
   __int64 v5; // rax
-  SSObjectBaseVtbl *v6; // rax
-  UFG::qString v7; // [rsp+28h] [rbp-30h]
+  SSObjectBaseVtbl *vfptr; // rax
+  UFG::qString v7; // [rsp+28h] [rbp-30h] BYREF
 
   v2 = (*pScope->i_data.i_array_p)->i_data_p->i_user_data != 0;
-  v3 = pScope->i_scope_p.i_obj_p;
-  if ( !v3 || pScope->i_scope_p.i_ptr_id != v3->i_ptr_id )
-    v3 = 0i64;
-  if ( v3[8].vfptr )
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  if ( i_obj_p[8].vfptr )
   {
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v3[4].i_ptr_id);
-      UFG::qString::qString(&v7, "%s : %d", v4, v2, -2i64);
-      UFG::qPrintf("Dlg Trc: %s : %s\n", "set_shuffle", *(_QWORD *)(v5 + 24));
+      v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
+      UFG::qString::qString(&v7, "%s : %d", v4, v2);
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "set_shuffle", *(const char **)(v5 + 24));
       UFG::qString::~qString(&v7);
     }
-    v6 = v3[8].vfptr;
-    LOBYTE(v6[2].set_data_by_name) &= 0xDFu;
-    LOBYTE(v6[2].set_data_by_name) |= 32 * v2;
+    vfptr = i_obj_p[8].vfptr;
+    LOBYTE(vfptr[2].set_data_by_name) &= ~0x20u;
+    LOBYTE(vfptr[2].set_data_by_name) |= 32 * v2;
   }
 }
 
@@ -1303,26 +1310,26 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_set_shuffle(SSInvokedMethod *pScop
 // RVA: 0x509F30
 void __fastcall UFG::TSScriptedDialogue::Mthd_set_priority(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance *v2; // rdi
-  SSObjectBase *v3; // rbx
+  SSInstance *i_data_p; // rdi
+  SSObjectBase *i_obj_p; // rbx
   char *v4; // rax
   __int64 v5; // rax
-  UFG::qString v6; // [rsp+28h] [rbp-30h]
+  UFG::qString v6; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = (*pScope->i_data.i_array_p)->i_data_p;
-  v3 = pScope->i_scope_p.i_obj_p;
-  if ( !v3 || pScope->i_scope_p.i_ptr_id != v3->i_ptr_id )
-    v3 = 0i64;
-  if ( v3[8].vfptr )
+  i_data_p = (*pScope->i_data.i_array_p)->i_data_p;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  if ( i_obj_p[8].vfptr )
   {
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v3[4].i_ptr_id);
-      UFG::qString::qString(&v6, "%s : %d", v4, LODWORD(v2->i_user_data), -2i64);
-      UFG::qPrintf("Dlg Trc: %s : %s\n", "set_priority", *(_QWORD *)(v5 + 24));
+      v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
+      UFG::qString::qString(&v6, "%s : %d", v4, LODWORD(i_data_p->i_user_data));
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "set_priority", *(const char **)(v5 + 24));
       UFG::qString::~qString(&v6);
     }
-    WORD2(v3[8].vfptr->get_topmost_scope) = v2->i_user_data;
+    WORD2(i_obj_p[8].vfptr->get_topmost_scope) = i_data_p->i_user_data;
   }
 }
 
@@ -1330,86 +1337,82 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_set_priority(SSInvokedMethod *pSco
 // RVA: 0x4FC3D0
 void __fastcall UFG::TSScriptedDialogue::Mthd_get_cutoff_distance(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  SSObjectBaseVtbl *v3; // rax
+  SSObjectBase *i_obj_p; // r8
+  SSObjectBaseVtbl *vfptr; // rax
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  v3 = v2[8].vfptr;
-  if ( v3 )
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  vfptr = i_obj_p[8].vfptr;
+  if ( vfptr )
     *ppResult = SSInstance::pool_new(
                   SSBrain::c_integer_class_p,
-                  WORD1(v3->get_topmost_scope) - (unsigned int)LOWORD(v3->get_topmost_scope) - 1);
+                  WORD1(vfptr->get_topmost_scope) - (unsigned int)LOWORD(vfptr->get_topmost_scope) - 1);
 }
 
 // File Line: 802
 // RVA: 0x4E4890
 void __fastcall UFG::TSScriptedDialogue::MthdC_create(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance **v2; // rdi
-  ASymbol *v3; // rbx
+  unsigned __int64 *p_i_user_data; // rbx
   UFG::ScriptedConversation *v4; // rsi
   char *v5; // rax
   __int64 v6; // rax
-  SSInstance *v7; // rax
+  SSInstance *m_script; // rax
   char *v8; // rax
   __int64 v9; // rax
-  UFG::qString v10; // [rsp+28h] [rbp-30h]
+  UFG::qString v10; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = ppResult;
-  v3 = (ASymbol *)&(*pScope->i_data.i_array_p)->i_data_p->i_user_data;
-  v4 = UFG::ConversationManager::AddScriptedConversation(v3);
+  p_i_user_data = &(*pScope->i_data.i_array_p)->i_data_p->i_user_data;
+  v4 = UFG::ConversationManager::AddScriptedConversation((ASymbol *)p_i_user_data);
   if ( v4 )
   {
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v5 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)v3);
+      v5 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)p_i_user_data);
       UFG::qString::qString(&v10, "%s ", v5);
-      UFG::qPrintf("Dlg Trc: %s : %s\n", "create_conversation", *(_QWORD *)(v6 + 24));
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "create_conversation", *(const char **)(v6 + 24));
       UFG::qString::~qString(&v10);
     }
-    v7 = (SSInstance *)&v4->m_script->vfptr;
-    if ( v7 )
-      ++v7->i_ref_count;
+    m_script = v4->m_script;
+    if ( m_script )
+      ++m_script->i_ref_count;
   }
   else
   {
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v8 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)v3);
+      v8 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)p_i_user_data);
       UFG::qString::qString(&v10, "%s ", v8);
-      UFG::qPrintf("Dlg Trc: %s : %s\n", "** FAIL *** create_conversation", *(_QWORD *)(v9 + 24));
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "** FAIL *** create_conversation", *(const char **)(v9 + 24));
       UFG::qString::~qString(&v10);
     }
-    v7 = SSBrain::c_nil_p;
+    m_script = SSBrain::c_nil_p;
   }
-  *v2 = v7;
+  *ppResult = m_script;
 }
 
 // File Line: 831
 // RVA: 0x4E65D0
 void __fastcall UFG::TSScriptedDialogue::MthdC_find_named(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance **v2; // rbx
-  unsigned int v3; // edx
+  unsigned int i_user_data; // edx
   UFG::qBaseTreeRB *v4; // rax
-  signed __int64 v5; // rax
+  int *p_mCount; // rax
   SSInstance *v6; // rax
 
   if ( ppResult )
   {
-    v2 = ppResult;
-    v3 = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
-    if ( v3
-      && (v4 = UFG::qBaseTreeRB::Get(&UFG::ConversationManager::sm_conversationDb.mTree, v3)) != 0i64
-      && (v5 = (signed __int64)&v4[-1].mCount) != 0 )
+    i_user_data = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
+    if ( i_user_data
+      && (v4 = UFG::qBaseTreeRB::Get(&UFG::ConversationManager::sm_conversationDb.mTree, i_user_data)) != 0i64
+      && (p_mCount = &v4[-1].mCount) != 0i64 )
     {
-      v6 = *(SSInstance **)(v5 + 176);
+      v6 = (SSInstance *)*((_QWORD *)p_mCount + 22);
       if ( v6 )
       {
         ++v6->i_ref_count;
-        *v2 = v6;
+        *ppResult = v6;
         return;
       }
     }
@@ -1417,7 +1420,7 @@ void __fastcall UFG::TSScriptedDialogue::MthdC_find_named(SSInvokedMethod *pScop
     {
       v6 = SSBrain::c_nil_p;
     }
-    *v2 = v6;
+    *ppResult = v6;
   }
 }
 
@@ -1425,24 +1428,27 @@ void __fastcall UFG::TSScriptedDialogue::MthdC_find_named(SSInvokedMethod *pScop
 // RVA: 0x4E8350
 void __fastcall UFG::TSScriptedDialogue::MthdC_get_named(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance **v2; // rbx
-  unsigned int v3; // edx
+  unsigned int i_user_data; // edx
   UFG::qBaseTreeRB *v4; // rax
-  signed __int64 v5; // rax
+  int *p_mCount; // rax
   SSInstance *v6; // rcx
 
   if ( ppResult )
   {
-    v2 = ppResult;
-    v3 = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
-    if ( v3 && (v4 = UFG::qBaseTreeRB::Get(&UFG::ConversationManager::sm_conversationDb.mTree, v3)) != 0i64 )
-      v5 = (signed __int64)&v4[-1].mCount;
+    i_user_data = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
+    if ( i_user_data
+      && (v4 = UFG::qBaseTreeRB::Get(&UFG::ConversationManager::sm_conversationDb.mTree, i_user_data)) != 0i64 )
+    {
+      p_mCount = &v4[-1].mCount;
+    }
     else
-      v5 = 0i64;
-    v6 = *(SSInstance **)(v5 + 176);
+    {
+      p_mCount = 0i64;
+    }
+    v6 = (SSInstance *)*((_QWORD *)p_mCount + 22);
     if ( v6 )
       ++v6->i_ref_count;
-    *v2 = v6;
+    *ppResult = v6;
   }
 }
 
@@ -1450,343 +1456,297 @@ void __fastcall UFG::TSScriptedDialogue::MthdC_get_named(SSInvokedMethod *pScope
 // RVA: 0x4DEE20
 char __fastcall UFG::TSScriptedDialogue::Coro_wait_until_finished(SSInvokedCoroutine *pScope)
 {
-  SSInvokedCoroutine *v1; // rdx
-  SSObjectBase *v2; // rcx
+  SSObjectBase *i_obj_p; // rcx
   char *v3; // rax
   __int64 v4; // rax
-  char result; // al
-  SSObjectBaseVtbl *v6; // rax
+  SSObjectBaseVtbl *vfptr; // rax
   char v7; // bl
   char *v8; // rax
   __int64 v9; // rax
-  UFG::qString v10; // [rsp+28h] [rbp-30h]
+  UFG::qString v10; // [rsp+28h] [rbp-30h] BYREF
 
-  v1 = pScope;
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || v1->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  if ( v1->i_update_count )
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  if ( pScope->i_update_count )
   {
-    v6 = v2[8].vfptr;
-    if ( v6 && LODWORD(v6->get_scope_context) != 7 )
+    vfptr = i_obj_p[8].vfptr;
+    if ( vfptr && LODWORD(vfptr->get_scope_context) != 7 )
+      return 0;
+    v7 = 1;
+    if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v7 = 0;
+      v8 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
+      UFG::qString::qString(&v10, "%s ", v8);
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "_wait_until_finished : finished", *(const char **)(v9 + 24));
+      UFG::qString::~qString(&v10);
     }
-    else
-    {
-      v7 = 1;
-      if ( UFG::ConversationManager::sm_traceScrConversations )
-      {
-        v8 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[4].i_ptr_id);
-        UFG::qString::qString(&v10, "%s ", v8);
-        UFG::qPrintf("Dlg Trc: %s : %s\n", "_wait_until_finished : finished", *(_QWORD *)(v9 + 24));
-        UFG::qString::~qString(&v10);
-      }
-    }
-    result = v7;
+    return v7;
   }
   else
   {
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[4].i_ptr_id);
+      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
       UFG::qString::qString(&v10, "%s ", v3);
-      UFG::qPrintf("Dlg Trc: %s : %s\n", "_wait_until_finished : start", *(_QWORD *)(v4 + 24));
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "_wait_until_finished : start", *(const char **)(v4 + 24));
       UFG::qString::~qString(&v10);
     }
-    result = 0;
+    return 0;
   }
-  return result;
 }
 
 // File Line: 903
 // RVA: 0x4DC770
 char __fastcall UFG::TSScriptedDialogue::Coro_play_finished(SSInvokedCoroutine *pScope)
 {
-  SSObjectBase *v1; // rbx
+  SSObjectBase *i_obj_p; // rbx
   char *v2; // rax
   __int64 v3; // rax
-  char result; // al
-  SSObjectBaseVtbl *v5; // rax
+  SSObjectBaseVtbl *vfptr; // rax
   char v6; // di
   char *v7; // rax
   __int64 v8; // rax
-  UFG::qString v9; // [rsp+28h] [rbp-30h]
+  UFG::qString v9; // [rsp+28h] [rbp-30h] BYREF
 
-  v1 = pScope->i_scope_p.i_obj_p;
-  if ( !v1 || pScope->i_scope_p.i_ptr_id != v1->i_ptr_id )
-    v1 = 0i64;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
   if ( pScope->i_update_count )
   {
-    v5 = v1[8].vfptr;
-    if ( v5 && LODWORD(v5->get_scope_context) != 7 )
+    vfptr = i_obj_p[8].vfptr;
+    if ( vfptr && LODWORD(vfptr->get_scope_context) != 7 )
+      return 0;
+    v6 = 1;
+    if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v6 = 0;
+      v7 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
+      UFG::qString::qString(&v9, "%s ", v7);
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "_play : finished", *(const char **)(v8 + 24));
+      UFG::qString::~qString(&v9);
     }
-    else
-    {
-      v6 = 1;
-      if ( UFG::ConversationManager::sm_traceScrConversations )
-      {
-        v7 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v1[4].i_ptr_id);
-        UFG::qString::qString(&v9, "%s ", v7);
-        UFG::qPrintf("Dlg Trc: %s : %s\n", "_play : finished", *(_QWORD *)(v8 + 24));
-        UFG::qString::~qString(&v9);
-      }
-    }
-    result = v6;
+    return v6;
   }
   else
   {
-    if ( v1[8].vfptr )
+    if ( i_obj_p[8].vfptr )
     {
       if ( UFG::ConversationManager::sm_traceScrConversations )
       {
-        v2 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v1[4].i_ptr_id);
+        v2 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
         UFG::qString::qString(&v9, "%s ", v2);
-        UFG::qPrintf("Dlg Trc: %s : %s\n", "_play : start", *(_QWORD *)(v3 + 24));
+        UFG::qPrintf("Dlg Trc: %s : %s\n", "_play : start", *(const char **)(v3 + 24));
         UFG::qString::~qString(&v9);
       }
-      UFG::Conversation::Start((UFG::Conversation *)v1[8].vfptr);
+      UFG::Conversation::Start((UFG::Conversation *)i_obj_p[8].vfptr);
     }
-    result = 0;
+    return 0;
   }
-  return result;
 }
 
 // File Line: 935
 // RVA: 0x4DC8F0
 char __fastcall UFG::TSScriptedDialogue::Coro_play_stopped(SSInvokedCoroutine *pScope)
 {
-  SSObjectBase *v1; // rbx
+  SSObjectBase *i_obj_p; // rbx
   char *v2; // rax
   __int64 v3; // rax
-  char result; // al
-  SSObjectBaseVtbl *v5; // rax
+  SSObjectBaseVtbl *vfptr; // rax
   char v6; // di
   char *v7; // rax
   __int64 v8; // rax
-  UFG::qString v9; // [rsp+28h] [rbp-30h]
+  UFG::qString v9; // [rsp+28h] [rbp-30h] BYREF
 
-  v1 = pScope->i_scope_p.i_obj_p;
-  if ( !v1 || pScope->i_scope_p.i_ptr_id != v1->i_ptr_id )
-    v1 = 0i64;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
   if ( pScope->i_update_count )
   {
-    v5 = v1[8].vfptr;
-    if ( v5 && LODWORD(v5->get_scope_context) != 6 )
+    vfptr = i_obj_p[8].vfptr;
+    if ( vfptr && LODWORD(vfptr->get_scope_context) != 6 )
+      return 0;
+    v6 = 1;
+    if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v6 = 0;
+      v7 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
+      UFG::qString::qString(&v9, "%s ", v7);
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "_play : stopped", *(const char **)(v8 + 24));
+      UFG::qString::~qString(&v9);
     }
-    else
-    {
-      v6 = 1;
-      if ( UFG::ConversationManager::sm_traceScrConversations )
-      {
-        v7 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v1[4].i_ptr_id);
-        UFG::qString::qString(&v9, "%s ", v7);
-        UFG::qPrintf("Dlg Trc: %s : %s\n", "_play : stopped", *(_QWORD *)(v8 + 24));
-        UFG::qString::~qString(&v9);
-      }
-    }
-    result = v6;
+    return v6;
   }
   else
   {
-    if ( v1[8].vfptr )
+    if ( i_obj_p[8].vfptr )
     {
       if ( UFG::ConversationManager::sm_traceScrConversations )
       {
-        v2 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v1[4].i_ptr_id);
+        v2 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
         UFG::qString::qString(&v9, "%s ", v2);
-        UFG::qPrintf("Dlg Trc: %s : %s\n", "_play : start", *(_QWORD *)(v3 + 24));
+        UFG::qPrintf("Dlg Trc: %s : %s\n", "_play : start", *(const char **)(v3 + 24));
         UFG::qString::~qString(&v9);
       }
-      UFG::Conversation::Start((UFG::Conversation *)v1[8].vfptr);
+      UFG::Conversation::Start((UFG::Conversation *)i_obj_p[8].vfptr);
     }
-    result = 0;
+    return 0;
   }
-  return result;
 }
 
 // File Line: 967
 // RVA: 0x4DCA00
 char __fastcall UFG::TSScriptedDialogue::Coro_play_stopped_or_finished(SSInvokedCoroutine *pScope)
 {
-  SSObjectBase *v1; // rbx
+  SSObjectBase *i_obj_p; // rbx
   char *v2; // rax
   __int64 v3; // rax
-  char result; // al
-  SSObjectBaseVtbl *v5; // rax
+  SSObjectBaseVtbl *vfptr; // rax
   char v6; // di
   char *v7; // rax
   __int64 v8; // rax
-  UFG::qString v9; // [rsp+28h] [rbp-30h]
+  UFG::qString v9; // [rsp+28h] [rbp-30h] BYREF
 
-  v1 = pScope->i_scope_p.i_obj_p;
-  if ( !v1 || pScope->i_scope_p.i_ptr_id != v1->i_ptr_id )
-    v1 = 0i64;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
   if ( pScope->i_update_count )
   {
-    v5 = v1[8].vfptr;
-    if ( v5 && (unsigned int)(LODWORD(v5->get_scope_context) - 6) > 1 )
+    vfptr = i_obj_p[8].vfptr;
+    if ( vfptr && (unsigned int)(LODWORD(vfptr->get_scope_context) - 6) > 1 )
+      return 0;
+    v6 = 1;
+    if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v6 = 0;
+      v7 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
+      UFG::qString::qString(&v9, "%s ", v7);
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "_play : stopped or finished", *(const char **)(v8 + 24));
+      UFG::qString::~qString(&v9);
     }
-    else
-    {
-      v6 = 1;
-      if ( UFG::ConversationManager::sm_traceScrConversations )
-      {
-        v7 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v1[4].i_ptr_id);
-        UFG::qString::qString(&v9, "%s ", v7);
-        UFG::qPrintf("Dlg Trc: %s : %s\n", "_play : stopped or finished", *(_QWORD *)(v8 + 24));
-        UFG::qString::~qString(&v9);
-      }
-    }
-    result = v6;
+    return v6;
   }
   else
   {
-    if ( v1[8].vfptr )
+    if ( i_obj_p[8].vfptr )
     {
       if ( UFG::ConversationManager::sm_traceScrConversations )
       {
-        v2 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v1[4].i_ptr_id);
+        v2 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
         UFG::qString::qString(&v9, "%s ", v2);
-        UFG::qPrintf("Dlg Trc: %s : %s\n", "_play : start", *(_QWORD *)(v3 + 24));
+        UFG::qPrintf("Dlg Trc: %s : %s\n", "_play : start", *(const char **)(v3 + 24));
         UFG::qString::~qString(&v9);
       }
-      UFG::Conversation::Start((UFG::Conversation *)v1[8].vfptr);
+      UFG::Conversation::Start((UFG::Conversation *)i_obj_p[8].vfptr);
     }
-    result = 0;
+    return 0;
   }
-  return result;
 }
 
 // File Line: 1000
 // RVA: 0x4DE000
 char __fastcall UFG::TSScriptedDialogue::Coro_stop(SSInvokedCoroutine *pScope)
 {
-  SSObjectBase *v1; // rbx
+  SSObjectBase *i_obj_p; // rbx
   UFG::Conversation *v2; // rcx
   char *v3; // rax
   __int64 v4; // rax
-  char result; // al
-  SSObjectBaseVtbl *v6; // rax
+  SSObjectBaseVtbl *vfptr; // rax
   char v7; // di
   char *v8; // rax
   __int64 v9; // rax
-  UFG::qString v10; // [rsp+28h] [rbp-30h]
+  UFG::qString v10; // [rsp+28h] [rbp-30h] BYREF
 
-  v1 = pScope->i_scope_p.i_obj_p;
-  if ( !v1 || pScope->i_scope_p.i_ptr_id != v1->i_ptr_id )
-    v1 = 0i64;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
   if ( pScope->i_update_count )
   {
-    v6 = v1[8].vfptr;
-    if ( v6 && LODWORD(v6->get_scope_context) != 6 )
+    vfptr = i_obj_p[8].vfptr;
+    if ( vfptr && LODWORD(vfptr->get_scope_context) != 6 )
+      return 0;
+    v7 = 1;
+    if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v7 = 0;
+      v8 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
+      UFG::qString::qString(&v10, "%s ", v8);
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "_stop : finished", *(const char **)(v9 + 24));
+      UFG::qString::~qString(&v10);
     }
-    else
-    {
-      v7 = 1;
-      if ( UFG::ConversationManager::sm_traceScrConversations )
-      {
-        v8 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v1[4].i_ptr_id);
-        UFG::qString::qString(&v10, "%s ", v8);
-        UFG::qPrintf("Dlg Trc: %s : %s\n", "_stop : finished", *(_QWORD *)(v9 + 24));
-        UFG::qString::~qString(&v10);
-      }
-    }
-    result = v7;
+    return v7;
   }
   else
   {
-    v2 = (UFG::Conversation *)v1[8].vfptr;
+    v2 = (UFG::Conversation *)i_obj_p[8].vfptr;
     if ( v2 )
       UFG::Conversation::Stop(v2, 0);
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v1[4].i_ptr_id);
+      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
       UFG::qString::qString(&v10, "%s ", v3);
-      UFG::qPrintf("Dlg Trc: %s : %s\n", "_stop : start", *(_QWORD *)(v4 + 24));
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "_stop : start", *(const char **)(v4 + 24));
       UFG::qString::~qString(&v10);
     }
-    result = 0;
+    return 0;
   }
-  return result;
 }
 
 // File Line: 1069
 // RVA: 0x4DF220
 char __fastcall UFG::TSScriptedDialogue::Coro_wait_until_stopped(SSInvokedCoroutine *pScope)
 {
-  SSInvokedCoroutine *v1; // rdx
-  SSObjectBase *v2; // rcx
+  SSObjectBase *i_obj_p; // rcx
   char *v3; // rax
   __int64 v4; // rax
-  char result; // al
-  SSObjectBaseVtbl *v6; // rax
+  SSObjectBaseVtbl *vfptr; // rax
   char v7; // bl
   char *v8; // rax
   __int64 v9; // rax
-  UFG::qString v10; // [rsp+28h] [rbp-30h]
+  UFG::qString v10; // [rsp+28h] [rbp-30h] BYREF
 
-  v1 = pScope;
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || v1->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  if ( v1->i_update_count )
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  if ( pScope->i_update_count )
   {
-    v6 = v2[8].vfptr;
-    if ( v6 && LODWORD(v6->get_scope_context) != 6 )
+    vfptr = i_obj_p[8].vfptr;
+    if ( vfptr && LODWORD(vfptr->get_scope_context) != 6 )
+      return 0;
+    v7 = 1;
+    if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v7 = 0;
+      v8 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
+      UFG::qString::qString(&v10, "%s ", v8);
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "_wait_until_stopped : finished", *(const char **)(v9 + 24));
+      UFG::qString::~qString(&v10);
     }
-    else
-    {
-      v7 = 1;
-      if ( UFG::ConversationManager::sm_traceScrConversations )
-      {
-        v8 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[4].i_ptr_id);
-        UFG::qString::qString(&v10, "%s ", v8);
-        UFG::qPrintf("Dlg Trc: %s : %s\n", "_wait_until_stopped : finished", *(_QWORD *)(v9 + 24));
-        UFG::qString::~qString(&v10);
-      }
-    }
-    result = v7;
+    return v7;
   }
   else
   {
     if ( UFG::ConversationManager::sm_traceScrConversations )
     {
-      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[4].i_ptr_id);
+      v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
       UFG::qString::qString(&v10, "%s ", v3);
-      UFG::qPrintf("Dlg Trc: %s : %s\n", "_wait_until_stopped : start", *(_QWORD *)(v4 + 24));
+      UFG::qPrintf("Dlg Trc: %s : %s\n", "_wait_until_stopped : start", *(const char **)(v4 + 24));
       UFG::qString::~qString(&v10);
     }
-    result = 0;
+    return 0;
   }
-  return result;
 }
 
 // File Line: 1098
 // RVA: 0x5125A0
 void __fastcall UFG::TSScriptedDialogue::on_no_references(UFG::TSScriptedDialogueElement *this)
 {
-  UFG::TSScriptedDialogueElement *v1; // rbx
-
-  v1 = this;
-  SSInstance::call_destructor((SSInstance *)&this->vfptr);
-  if ( v1 )
-    v1->vfptr->__vecDelDtor((SSObjectBase *)&v1->vfptr, 1u);
+  SSInstance::call_destructor(this);
+  if ( this )
+    this->vfptr->__vecDelDtor(this, 1i64);
 }
 
 // File Line: 1157
 // RVA: 0x4FA1C0
-void __fastcall UFG::TSScriptedDialogue::Mthd_force_finish_all_scripted_conversations(SSInvokedMethod *pScope, SSInstance **ppResult)
+// attributes: thunk
+void __fastcall UFG::TSScriptedDialogue::Mthd_force_finish_all_scripted_conversations(
+        SSInvokedMethod *pScope,
+        SSInstance **ppResult)
 {
   UFG::ConversationManager::StopAllScriptedConversations();
 }
@@ -1795,9 +1755,8 @@ void __fastcall UFG::TSScriptedDialogue::Mthd_force_finish_all_scripted_conversa
 // RVA: 0x4EB9D0
 void __fastcall UFG::TSScriptedDialogue::MthdC_query_context(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // rbx
-  SSData **v3; // rdx
-  unsigned __int64 v4; // rax
+  SSData **i_array_p; // rdx
+  unsigned __int64 i_user_data; // rax
   int v5; // ecx
   _QWORD *v6; // rsi
   int v7; // eax
@@ -1805,17 +1764,16 @@ void __fastcall UFG::TSScriptedDialogue::MthdC_query_context(SSInvokedMethod *pS
   int v9; // ebx
   int v10; // edi
   UFG::allocator::free_link *v11; // rax
-  UFG::qNode<UFG::KeyValue,UFG::KeyValue> *v12; // rcx
-  UFG::Query query; // [rsp+28h] [rbp-30h]
+  UFG::qNode<UFG::KeyValue,UFG::KeyValue> *mPrev; // rcx
+  UFG::Query query; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = pScope;
   UFG::Query::Query(&query);
-  v3 = v2->i_data.i_array_p;
-  query.m_concept.mUID = (*v3)->i_data_p->i_user_data;
-  v4 = v3[1]->i_data_p->i_user_data;
-  v5 = *(_DWORD *)v4;
-  v6 = *(_QWORD **)(v4 + 8);
-  v7 = *(_DWORD *)v4 - 1;
+  i_array_p = pScope->i_data.i_array_p;
+  query.m_concept.mUID = (*i_array_p)->i_data_p->i_user_data;
+  i_user_data = i_array_p[1]->i_data_p->i_user_data;
+  v5 = *(_DWORD *)i_user_data;
+  v6 = *(_QWORD **)(i_user_data + 8);
+  v7 = *(_DWORD *)i_user_data - 1;
   if ( v5 != 1 )
   {
     v8 = ((unsigned int)(v7 - 1) >> 1) + 1;
@@ -1832,9 +1790,9 @@ void __fastcall UFG::TSScriptedDialogue::MthdC_query_context(SSInvokedMethod *pS
       }
       LODWORD(v11[2].mNext) = v9;
       HIDWORD(v11[2].mNext) = v10;
-      v12 = query.m_facts.mNode.mPrev;
+      mPrev = query.m_facts.mNode.mPrev;
       query.m_facts.mNode.mPrev->mNext = (UFG::qNode<UFG::KeyValue,UFG::KeyValue> *)v11;
-      v11->mNext = (UFG::allocator::free_link *)v12;
+      v11->mNext = (UFG::allocator::free_link *)mPrev;
       v11[1].mNext = (UFG::allocator::free_link *)&query.m_facts;
       query.m_facts.mNode.mPrev = (UFG::qNode<UFG::KeyValue,UFG::KeyValue> *)v11;
       v6 += 2;
@@ -1850,30 +1808,28 @@ void __fastcall UFG::TSScriptedDialogue::MthdC_query_context(SSInvokedMethod *pS
 // RVA: 0x4EBAC0
 void __fastcall UFG::TSScriptedDialogue::MthdC_query_context_character(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // rbx
-  SSData **v3; // r8
-  SSInstance *v4; // rcx
-  unsigned __int64 v5; // rax
+  SSData **i_array_p; // r8
+  SSInstance *i_data_p; // rcx
+  unsigned __int64 i_user_data; // rax
   _QWORD *v6; // rsi
   int v7; // eax
   __int64 v8; // rbp
   int v9; // ebx
   int v10; // edi
   UFG::allocator::free_link *v11; // rax
-  UFG::qNode<UFG::KeyValue,UFG::KeyValue> *v12; // rcx
-  UFG::Query query; // [rsp+28h] [rbp-30h]
+  UFG::qNode<UFG::KeyValue,UFG::KeyValue> *mPrev; // rcx
+  UFG::Query query; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = pScope;
   UFG::Query::Query(&query);
-  v3 = v2->i_data.i_array_p;
-  v4 = v3[1]->i_data_p;
-  query.m_concept.mUID = (*v3)->i_data_p->i_user_data;
-  query.m_character.mUID = v4->i_user_data;
-  v5 = v3[1]->i_data_p->i_user_data;
-  LODWORD(v4) = *(_DWORD *)v5;
-  v6 = *(_QWORD **)(v5 + 8);
-  v7 = *(_DWORD *)v5 - 1;
-  if ( (_DWORD)v4 != 1 )
+  i_array_p = pScope->i_data.i_array_p;
+  i_data_p = i_array_p[1]->i_data_p;
+  query.m_concept.mUID = (*i_array_p)->i_data_p->i_user_data;
+  query.m_character.mUID = i_data_p->i_user_data;
+  i_user_data = i_array_p[1]->i_data_p->i_user_data;
+  LODWORD(i_data_p) = *(_DWORD *)i_user_data;
+  v6 = *(_QWORD **)(i_user_data + 8);
+  v7 = *(_DWORD *)i_user_data - 1;
+  if ( (_DWORD)i_data_p != 1 )
   {
     v8 = ((unsigned int)(v7 - 1) >> 1) + 1;
     do
@@ -1889,9 +1845,9 @@ void __fastcall UFG::TSScriptedDialogue::MthdC_query_context_character(SSInvoked
       }
       LODWORD(v11[2].mNext) = v9;
       HIDWORD(v11[2].mNext) = v10;
-      v12 = query.m_facts.mNode.mPrev;
+      mPrev = query.m_facts.mNode.mPrev;
       query.m_facts.mNode.mPrev->mNext = (UFG::qNode<UFG::KeyValue,UFG::KeyValue> *)v11;
-      v11->mNext = (UFG::allocator::free_link *)v12;
+      v11->mNext = (UFG::allocator::free_link *)mPrev;
       v11[1].mNext = (UFG::allocator::free_link *)&query.m_facts;
       query.m_facts.mNode.mPrev = (UFG::qNode<UFG::KeyValue,UFG::KeyValue> *)v11;
       v6 += 2;
@@ -1905,149 +1861,151 @@ void __fastcall UFG::TSScriptedDialogue::MthdC_query_context_character(SSInvoked
 
 // File Line: 1257
 // RVA: 0x4CBA30
-void __fastcall UFG::TSScriptedDialogueElement::TSScriptedDialogueElement(UFG::TSScriptedDialogueElement *this, UFG::ScriptedConversationElement *conv, ASymbol *name, SSActorClass *pClass)
+void __fastcall UFG::TSScriptedDialogueElement::TSScriptedDialogueElement(
+        UFG::TSScriptedDialogueElement *this,
+        UFG::ScriptedConversationElement *conv,
+        ASymbol *name,
+        SSActorClass *pClass)
 {
-  UFG::ScriptedConversationElement *v4; // rbx
-  UFG::TSScriptedDialogueElement *v5; // rdi
-
-  v4 = conv;
-  v5 = this;
-  SSActor::SSActor((SSActor *)&this->vfptr, name, pClass, 1);
-  v5->vfptr = (SSObjectBaseVtbl *)&UFG::TSScriptedDialogueElement::`vftable;
-  v5->m_element = v4;
+  SSActor::SSActor(this, name, pClass, 1);
+  this->vfptr = (SSObjectBaseVtbl *)&UFG::TSScriptedDialogueElement::`vftable;
+  this->m_element = conv;
 }
 
 // File Line: 1294
 // RVA: 0x4D6030
 void UFG::TSScriptedDialogueElement::BindAtomics(void)
 {
+  ASymbol rebind; // [rsp+20h] [rbp-18h]
+  ASymbol rebinda; // [rsp+20h] [rbp-18h]
+
   UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass = (SSActorClass *)SSBrain::get_class("ScriptedDialogueElement");
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass->vfptr,
+    UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass,
     "set_speaker",
     UFG::TSScriptedDialogueElement::Mthd_set_speaker,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass->vfptr,
+    UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass,
     "set_target",
     UFG::TSScriptedDialogueElement::Mthd_set_target,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass->vfptr,
+    UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass,
     "set_args",
     UFG::TSScriptedDialogueElement::Mthd_set_args,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass->vfptr,
+    UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass,
     "set_pre_delay",
     UFG::TSScriptedDialogueElement::Mthd_set_pre_delay,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass->vfptr,
+    UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass,
     "add_interruption_point",
     UFG::TSScriptedDialogueElement::Mthd_add_interruption_point,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass->vfptr,
+    UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass,
     "remove_interruption_point",
     UFG::TSScriptedDialogueElement::Mthd_remove_interruption_point,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass->vfptr,
+    UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass,
     "set_interjection_point",
     UFG::TSScriptedDialogueElement::Mthd_set_interjection_point,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass->vfptr,
+    UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass,
     "stop_after_play",
     UFG::TSScriptedDialogueElement::Mthd_stop_after_play,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass->vfptr,
+    UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass,
     "set_resume_checkpoint",
     UFG::TSScriptedDialogueElement::Mthd_set_resume_checkpoint,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass->vfptr,
+    UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass,
     "set_playback_event",
     UFG::TSScriptedDialogueElement::Mthd_set_playback_event,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass->vfptr,
+    UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass,
     "kill_on_interruption_point",
     UFG::TSScriptedDialogueElement::Mthd_kill_on_interrupt,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass->vfptr,
+    UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass,
     "set_is_highest_priority",
     UFG::TSScriptedDialogueElement::Mthd_set_is_highest_priority,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass->vfptr,
+    UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass,
     "play_from_position",
     UFG::TSScriptedDialogueElement::Mthd_play_from_position,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass->vfptr,
+    UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass,
     "speaker_emotion",
     UFG::TSScriptedDialogueElement::Mthd_speaker_emotion,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass->vfptr,
+    UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass,
     "listener_emotion",
     UFG::TSScriptedDialogueElement::Mthd_listener_emotion,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass->vfptr,
+    UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass,
     "speaker_action_request",
     UFG::TSScriptedDialogueElement::Mthd_speaker_action_request,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass->vfptr,
+    UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass,
     "listener_action_request",
     UFG::TSScriptedDialogueElement::Mthd_listener_action_request,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_coroutine_func(
-    (SSClass *)&UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass->vfptr,
+    UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass,
     "_wait_on_interruption_point",
     UFG::TSScriptedDialogueElement::Coro_wait_on_interruption_point,
-    0);
+    SSBindFlag_instance_no_rebind);
+  LOBYTE(rebind.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass->vfptr,
+    UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass,
     "create",
     UFG::TSScriptedDialogueElement::MthdC_create,
     1,
-    0);
+    rebind);
+  LOBYTE(rebinda.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass->vfptr,
+    UFG::TSScriptedDialogueElement::mspScriptedDialogueElementClass,
     "get_named",
     UFG::TSAudio::MthdC_get_named,
     1,
-    0);
+    rebinda);
 }
 
 // File Line: 1332
 // RVA: 0x4E4990
 void __fastcall UFG::TSScriptedDialogueElement::MthdC_create(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance **v2; // rdi
-  SSInstance *v3; // rsi
+  SSInstance *i_data_p; // rsi
   UFG::allocator::free_link *v4; // rax
   __int64 v5; // rax
   __int64 v6; // rbx
   char *v7; // rax
   __int64 v8; // rax
   SSInstance *v9; // rax
-  UFG::qString v10; // [rsp+38h] [rbp-30h]
+  UFG::qString v10; // [rsp+38h] [rbp-30h] BYREF
 
-  v2 = ppResult;
-  v3 = (*pScope->i_data.i_array_p)->i_data_p;
+  i_data_p = (*pScope->i_data.i_array_p)->i_data_p;
   v4 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0xC0ui64, "create.ScriptedConversationElement", 0i64, 1u);
   if ( v4 )
   {
     UFG::ScriptedConversationElement::ScriptedConversationElement(
       (UFG::ScriptedConversationElement *)v4,
-      (ASymbol *)&v3->i_user_data);
+      (ASymbol *)&i_data_p->i_user_data);
     v6 = v5;
   }
   else
@@ -2056,9 +2014,9 @@ void __fastcall UFG::TSScriptedDialogueElement::MthdC_create(SSInvokedMethod *pS
   }
   if ( UFG::ConversationManager::sm_traceScrConversations )
   {
-    v7 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v3->i_user_data);
+    v7 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_data_p->i_user_data);
     UFG::qString::qString(&v10, "%s ", v7);
-    UFG::qPrintf("Dlg Trc: %s : %s\n", "create element", *(_QWORD *)(v8 + 24));
+    UFG::qPrintf("Dlg Trc: %s : %s\n", "create element", *(const char **)(v8 + 24));
     UFG::qString::~qString(&v10);
   }
   if ( v6 )
@@ -2071,17 +2029,16 @@ void __fastcall UFG::TSScriptedDialogueElement::MthdC_create(SSInvokedMethod *pS
   {
     v9 = SSBrain::c_nil_p;
   }
-  *v2 = v9;
+  *ppResult = v9;
 }
 
 // File Line: 1372
 // RVA: 0x50A520
 void __fastcall UFG::TSScriptedDialogueElement::Mthd_set_speaker(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // rdi
-  SSObjectBase *v3; // rsi
-  SSActor *v4; // rbx
-  SSClass *v5; // r14
+  SSObjectBase *i_obj_p; // rsi
+  SSActor *i_data_p; // rbx
+  SSClass *i_class_p; // r14
   SSInstance *v6; // rbp
   SSClass *v7; // rcx
   UFG::SimObject *v8; // rdx
@@ -2092,56 +2049,57 @@ void __fastcall UFG::TSScriptedDialogueElement::Mthd_set_speaker(SSInvokedMethod
   SSInstance *v13; // rbx
   char *v14; // rax
   __int64 v15; // rax
-  UFG::qString v16; // [rsp+28h] [rbp-30h]
+  UFG::qString v16; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = pScope;
-  v3 = pScope->i_scope_p.i_obj_p;
-  if ( !v3 || pScope->i_scope_p.i_ptr_id != v3->i_ptr_id )
-    v3 = 0i64;
-  v4 = (SSActor *)(*pScope->i_data.i_array_p)->i_data_p;
-  if ( !v4 )
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  i_data_p = (SSActor *)(*pScope->i_data.i_array_p)->i_data_p;
+  if ( !i_data_p )
     goto LABEL_9;
-  v5 = v4->i_class_p;
-  if ( !((unsigned __int8 (__fastcall *)(SSClass *, SSInstance **))v5->vfptr->is_actor_class)(v4->i_class_p, ppResult) )
+  i_class_p = i_data_p->i_class_p;
+  if ( !((unsigned __int8 (__fastcall *)(SSClass *, SSInstance **))i_class_p->vfptr->is_actor_class)(
+          i_class_p,
+          ppResult) )
   {
-    if ( v5 == SSBrain::c_symbol_class_p && LODWORD(v4->i_user_data) != -1 )
+    if ( i_class_p == SSBrain::c_symbol_class_p && LODWORD(i_data_p->i_user_data) != -1 )
     {
-      v4 = SSActor::find((ASymbol *)&v4->i_user_data);
+      i_data_p = SSActor::find((ASymbol *)&i_data_p->i_user_data);
       goto LABEL_10;
     }
 LABEL_9:
-    v4 = 0i64;
+    i_data_p = 0i64;
   }
 LABEL_10:
-  v6 = (*v2->i_data.i_array_p)->i_data_p;
+  v6 = (*pScope->i_data.i_array_p)->i_data_p;
   if ( v6 )
   {
     v7 = v6->i_class_p;
     if ( v7 )
     {
-      if ( ((unsigned __int8 (__cdecl *)(SSClass *))v7->vfptr->is_actor_class)(v7) || LODWORD(v6->i_user_data) != -1 )
+      if ( v7->vfptr->is_actor_class(v7) || LODWORD(v6->i_user_data) != -1 )
       {
-        if ( v4 && (v8 = *(UFG::SimObject **)&v4[1].i_icoroutines_to_update.i_count) != 0i64 )
+        if ( i_data_p && (v8 = *(UFG::SimObject **)&i_data_p[1].i_icoroutines_to_update.i_count) != 0i64 )
         {
-          UFG::ConversationElement::SetSpeaker((UFG::ConversationElement *)v3[8].vfptr, v8);
+          UFG::ConversationElement::SetSpeaker((UFG::ConversationElement *)i_obj_p[8].vfptr, v8);
           if ( !UFG::ConversationManager::sm_traceScrConversations )
             return;
-          v9 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v4->i_name);
-          v10 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v3[4].i_ptr_id);
-          UFG::qString::qString(&v16, "%s : %s ", v10, v9, -2i64);
-          UFG::qPrintf("Dlg Trc: %s : %s\n", "set_speaker", *(_QWORD *)(v11 + 24));
+          v9 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_data_p->ANamed);
+          v10 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
+          UFG::qString::qString(&v16, "%s : %s ", v10, v9);
+          UFG::qPrintf("Dlg Trc: %s : %s\n", "set_speaker", *(const char **)(v11 + 24));
         }
         else
         {
-          v3[8].vfptr[2].get_scope_context = (SSInvokedContextBase *(__fastcall *)(SSObjectBase *))(*v2->i_data.i_array_p)->i_data_p;
-          v12 = (*v2->i_data.i_array_p)->i_data_p;
+          i_obj_p[8].vfptr[2].get_scope_context = (SSInvokedContextBase *(__fastcall *)(SSObjectBase *))(*pScope->i_data.i_array_p)->i_data_p;
+          v12 = (*pScope->i_data.i_array_p)->i_data_p;
           ++v12->i_ref_count;
           if ( !UFG::ConversationManager::sm_traceScrConversations )
             return;
-          v13 = (*v2->i_data.i_array_p)->i_data_p;
-          v14 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v3[4].i_ptr_id);
-          UFG::qString::qString(&v16, "%s : %s ", v14, &v13->i_user_data, -2i64);
-          UFG::qPrintf("Dlg Trc: %s : %s\n", "set_speaker", *(_QWORD *)(v15 + 24));
+          v13 = (*pScope->i_data.i_array_p)->i_data_p;
+          v14 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
+          UFG::qString::qString(&v16, "%s : %s ", v14, (const char *)&v13->i_user_data);
+          UFG::qPrintf("Dlg Trc: %s : %s\n", "set_speaker", *(const char **)(v15 + 24));
         }
         UFG::qString::~qString(&v16);
       }
@@ -2153,10 +2111,9 @@ LABEL_10:
 // RVA: 0x50AA80
 void __fastcall UFG::TSScriptedDialogueElement::Mthd_set_target(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // rsi
-  SSObjectBase *v3; // rbp
-  SSActor *v4; // rdi
-  SSClass *v5; // rbx
+  SSObjectBase *i_obj_p; // rbp
+  SSActor *i_data_p; // rdi
+  SSClass *i_class_p; // rbx
   char *v6; // rbx
   char *v7; // rax
   __int64 v8; // rax
@@ -2164,53 +2121,54 @@ void __fastcall UFG::TSScriptedDialogueElement::Mthd_set_target(SSInvokedMethod 
   SSClass *v10; // rcx
   UFG::SimObject *v11; // rdx
   SSInstance *v12; // rax
-  UFG::qString v13; // [rsp+28h] [rbp-30h]
+  UFG::qString v13; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = pScope;
-  v3 = pScope->i_scope_p.i_obj_p;
-  if ( !v3 || pScope->i_scope_p.i_ptr_id != v3->i_ptr_id )
-    v3 = 0i64;
-  v4 = (SSActor *)(*pScope->i_data.i_array_p)->i_data_p;
-  if ( !v4 )
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  i_data_p = (SSActor *)(*pScope->i_data.i_array_p)->i_data_p;
+  if ( !i_data_p )
     goto LABEL_12;
-  v5 = v4->i_class_p;
-  if ( !((unsigned __int8 (__fastcall *)(SSClass *, SSInstance **))v5->vfptr->is_actor_class)(v4->i_class_p, ppResult) )
+  i_class_p = i_data_p->i_class_p;
+  if ( !((unsigned __int8 (__fastcall *)(SSClass *, SSInstance **))i_class_p->vfptr->is_actor_class)(
+          i_class_p,
+          ppResult) )
   {
-    if ( v5 == SSBrain::c_symbol_class_p && LODWORD(v4->i_user_data) != -1 )
+    if ( i_class_p == SSBrain::c_symbol_class_p && LODWORD(i_data_p->i_user_data) != -1 )
     {
-      v4 = SSActor::find((ASymbol *)&v4->i_user_data);
+      i_data_p = SSActor::find((ASymbol *)&i_data_p->i_user_data);
       goto LABEL_9;
     }
 LABEL_12:
-    v4 = 0i64;
+    i_data_p = 0i64;
     goto LABEL_13;
   }
 LABEL_9:
-  if ( v4 && UFG::ConversationManager::sm_traceScrConversations )
+  if ( i_data_p && UFG::ConversationManager::sm_traceScrConversations )
   {
-    v6 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v4->i_name);
-    v7 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v3[4].i_ptr_id);
-    UFG::qString::qString(&v13, "%s : %s ", v7, v6, -2i64);
-    UFG::qPrintf("Dlg Trc: %s : %s\n", "set_target", *(_QWORD *)(v8 + 24));
+    v6 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_data_p->ANamed);
+    v7 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
+    UFG::qString::qString(&v13, "%s : %s ", v7, v6);
+    UFG::qPrintf("Dlg Trc: %s : %s\n", "set_target", *(const char **)(v8 + 24));
     UFG::qString::~qString(&v13);
   }
 LABEL_13:
-  v9 = (*v2->i_data.i_array_p)->i_data_p;
+  v9 = (*pScope->i_data.i_array_p)->i_data_p;
   if ( v9 )
   {
     v10 = v9->i_class_p;
     if ( v10 )
     {
-      if ( ((unsigned __int8 (__cdecl *)(SSClass *))v10->vfptr->is_actor_class)(v10) || LODWORD(v9->i_user_data) != -1 )
+      if ( v10->vfptr->is_actor_class(v10) || LODWORD(v9->i_user_data) != -1 )
       {
-        if ( v4 && (v11 = *(UFG::SimObject **)&v4[1].i_icoroutines_to_update.i_count) != 0i64 )
+        if ( i_data_p && (v11 = *(UFG::SimObject **)&i_data_p[1].i_icoroutines_to_update.i_count) != 0i64 )
         {
-          UFG::ConversationElement::SetTarget((UFG::ConversationElement *)v3[8].vfptr, v11);
+          UFG::ConversationElement::SetTarget((UFG::ConversationElement *)i_obj_p[8].vfptr, v11);
         }
         else
         {
-          v3[8].vfptr[2].get_topmost_scope = (SSInstance *(__fastcall *)(SSObjectBase *))(*v2->i_data.i_array_p)->i_data_p;
-          v12 = (*v2->i_data.i_array_p)->i_data_p;
+          i_obj_p[8].vfptr[2].get_topmost_scope = (SSInstance *(__fastcall *)(SSObjectBase *))(*pScope->i_data.i_array_p)->i_data_p;
+          v12 = (*pScope->i_data.i_array_p)->i_data_p;
           ++v12->i_ref_count;
         }
       }
@@ -2222,36 +2180,28 @@ LABEL_13:
 // RVA: 0x507010
 void __fastcall UFG::TSScriptedDialogueElement::Mthd_set_args(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // rbp
-  unsigned __int64 v3; // rdx
+  unsigned __int64 i_user_data; // rdx
   unsigned int v4; // esi
   __int64 v5; // rdi
-  unsigned int v6; // ebx
-  SSObjectBase *v7; // rcx
-  UFG::qString v8; // [rsp+38h] [rbp-30h]
+  unsigned int i; // ebx
+  SSObjectBase *i_obj_p; // rcx
+  UFG::qString v8; // [rsp+38h] [rbp-30h] BYREF
 
-  v2 = pScope;
-  v3 = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
-  v4 = *(_DWORD *)v3;
-  v5 = *(_QWORD *)(v3 + 8);
-  UFG::qString::qString(&v8, &customWorldMapCaption);
-  v6 = 0;
-  if ( v4 )
+  i_user_data = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
+  v4 = *(_DWORD *)i_user_data;
+  v5 = *(_QWORD *)(i_user_data + 8);
+  UFG::qString::qString(&v8, &customCaption);
+  for ( i = 0; i < v4; v5 += 8i64 )
   {
-    do
-    {
-      UFG::qString::operator+=(&v8, **(const char ***)(*(_QWORD *)v5 + 32i64));
-      if ( v6 < v4 - 1 )
-        UFG::qString::operator+=(&v8, ".");
-      ++v6;
-      v5 += 8i64;
-    }
-    while ( v6 < v4 );
+    UFG::qString::operator+=(&v8, **(const char ***)(*(_QWORD *)v5 + 32i64));
+    if ( i < v4 - 1 )
+      UFG::qString::operator+=(&v8, ".");
+    ++i;
   }
-  v7 = v2->i_scope_p.i_obj_p;
-  if ( !v7 || v2->i_scope_p.i_ptr_id != v7->i_ptr_id )
-    v7 = 0i64;
-  UFG::qString::Set((UFG::qString *)&v7[8].vfptr->get_data_by_name, v8.mData, v8.mLength, 0i64, 0);
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  UFG::qString::Set((UFG::qString *)&i_obj_p[8].vfptr->get_data_by_name, v8.mData, v8.mLength, 0i64, 0);
   UFG::qString::~qString(&v8);
 }
 
@@ -2259,54 +2209,56 @@ void __fastcall UFG::TSScriptedDialogueElement::Mthd_set_args(SSInvokedMethod *p
 // RVA: 0x509E90
 void __fastcall UFG::TSScriptedDialogueElement::Mthd_set_pre_delay(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rdx
-  SSInstance *v3; // rbx
+  SSObjectBase *i_obj_p; // rdx
+  SSInstance *i_data_p; // rbx
   char *v4; // rax
   __int64 v5; // rax
-  UFG::qString v6; // [rsp+28h] [rbp-30h]
+  UFG::qString v6; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  v3 = (*pScope->i_data.i_array_p)->i_data_p;
-  LODWORD(v2[8].vfptr[1].get_obj_type) = v3->i_user_data;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  i_data_p = (*pScope->i_data.i_array_p)->i_data_p;
+  LODWORD(i_obj_p[8].vfptr[1].get_obj_type) = i_data_p->i_user_data;
   if ( UFG::ConversationManager::sm_traceScrConversations )
   {
-    v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[4].i_ptr_id);
-    UFG::qString::qString(&v6, "%s : %d ", v4, *(float *)&v3->i_user_data, -2i64);
-    UFG::qPrintf("Dlg Trc: %s : %s\n", "set_pre_delay", *(_QWORD *)(v5 + 24));
+    v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
+    UFG::qString::qString(&v6, "%s : %d ", v4, *(float *)&i_data_p->i_user_data);
+    UFG::qPrintf("Dlg Trc: %s : %s\n", "set_pre_delay", *(const char **)(v5 + 24));
     UFG::qString::~qString(&v6);
   }
 }
 
 // File Line: 1479
 // RVA: 0x4F4280
-void __fastcall UFG::TSScriptedDialogueElement::Mthd_add_interruption_point(SSInvokedMethod *pScope, SSInstance **ppResult)
+void __fastcall UFG::TSScriptedDialogueElement::Mthd_add_interruption_point(
+        SSInvokedMethod *pScope,
+        SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rbx
-  SSData **v3; // rcx
-  SSInstance *v4; // rdi
+  SSObjectBase *i_obj_p; // rbx
+  SSData **i_array_p; // rcx
+  SSInstance *i_data_p; // rdi
   SSInstance *v5; // rsi
   char *v6; // rax
   __int64 v7; // rax
-  UFG::qString v8; // [rsp+38h] [rbp-30h]
+  UFG::qString v8; // [rsp+38h] [rbp-30h] BYREF
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  v3 = pScope->i_data.i_array_p;
-  v4 = (*v3)->i_data_p;
-  v5 = v3[1]->i_data_p;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  i_array_p = pScope->i_data.i_array_p;
+  i_data_p = (*i_array_p)->i_data_p;
+  v5 = i_array_p[1]->i_data_p;
   if ( UFG::ConversationManager::sm_traceScrConversations )
   {
-    v6 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[4].i_ptr_id);
-    UFG::qString::qString(&v8, "%s : %u %d ", v6, LODWORD(v4->i_user_data), *(float *)&v5->i_user_data);
-    UFG::qPrintf("Dlg Trc: %s : %s\n", "add_interruption_point", *(_QWORD *)(v7 + 24));
+    v6 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
+    UFG::qString::qString(&v8, "%s : %u %d ", v6, LODWORD(i_data_p->i_user_data), *(float *)&v5->i_user_data);
+    UFG::qPrintf("Dlg Trc: %s : %s\n", "add_interruption_point", *(const char **)(v7 + 24));
     UFG::qString::~qString(&v8);
   }
   UFG::ConversationElement::AddInterruptPoint(
-    (UFG::ConversationElement *)v2[8].vfptr,
-    v4->i_user_data,
+    (UFG::ConversationElement *)i_obj_p[8].vfptr,
+    i_data_p->i_user_data,
     *(float *)&v5->i_user_data);
 }
 
@@ -2314,34 +2266,34 @@ void __fastcall UFG::TSScriptedDialogueElement::Mthd_add_interruption_point(SSIn
 // RVA: 0x50B870
 void __fastcall UFG::TSScriptedDialogueElement::Mthd_speaker_emotion(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rdi
-  SSData **v3; // rcx
-  SSInstance *v4; // r15
+  SSObjectBase *i_obj_p; // rdi
+  SSData **i_array_p; // rcx
+  SSInstance *i_data_p; // r15
   SSInstance *v5; // rsi
   SSInstance *v6; // r14
   __int64 v7; // rbx
   char *v8; // rax
   __int64 v9; // rax
-  UFG::qString v10; // [rsp+38h] [rbp-30h]
+  UFG::qString v10; // [rsp+38h] [rbp-30h] BYREF
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  v3 = pScope->i_data.i_array_p;
-  v4 = (*v3)->i_data_p;
-  v5 = v3[1]->i_data_p;
-  v6 = v3[2]->i_data_p;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  i_array_p = pScope->i_data.i_array_p;
+  i_data_p = (*i_array_p)->i_data_p;
+  v5 = i_array_p[1]->i_data_p;
+  v6 = i_array_p[2]->i_data_p;
   if ( UFG::ConversationManager::sm_traceScrConversations )
   {
     v7 = *(_QWORD *)v6->i_user_data;
-    v8 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[4].i_ptr_id);
+    v8 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
     UFG::qString::qString(&v10, "%s : %f %s", v8, *(float *)&v5->i_user_data, v7);
-    UFG::qPrintf("Dlg Trc: %s : %s\n", "add_speaker_emotion", *(_QWORD *)(v9 + 24));
+    UFG::qPrintf("Dlg Trc: %s : %s\n", "add_speaker_emotion", *(const char **)(v9 + 24));
     UFG::qString::~qString(&v10);
   }
   UFG::ConversationElement::AddEmotionRequest(
-    (UFG::ConversationElement *)v2[8].vfptr,
-    v4->i_user_data,
+    (UFG::ConversationElement *)i_obj_p[8].vfptr,
+    i_data_p->i_user_data,
     *(float *)&v5->i_user_data,
     *(const char **)v6->i_user_data,
     0);
@@ -2351,34 +2303,34 @@ void __fastcall UFG::TSScriptedDialogueElement::Mthd_speaker_emotion(SSInvokedMe
 // RVA: 0x504950
 void __fastcall UFG::TSScriptedDialogueElement::Mthd_listener_emotion(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rdi
-  SSData **v3; // rcx
-  SSInstance *v4; // r15
+  SSObjectBase *i_obj_p; // rdi
+  SSData **i_array_p; // rcx
+  SSInstance *i_data_p; // r15
   SSInstance *v5; // rsi
   SSInstance *v6; // r14
   __int64 v7; // rbx
   char *v8; // rax
   __int64 v9; // rax
-  UFG::qString v10; // [rsp+38h] [rbp-30h]
+  UFG::qString v10; // [rsp+38h] [rbp-30h] BYREF
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  v3 = pScope->i_data.i_array_p;
-  v4 = (*v3)->i_data_p;
-  v5 = v3[1]->i_data_p;
-  v6 = v3[2]->i_data_p;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  i_array_p = pScope->i_data.i_array_p;
+  i_data_p = (*i_array_p)->i_data_p;
+  v5 = i_array_p[1]->i_data_p;
+  v6 = i_array_p[2]->i_data_p;
   if ( UFG::ConversationManager::sm_traceScrConversations )
   {
     v7 = *(_QWORD *)v6->i_user_data;
-    v8 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[4].i_ptr_id);
+    v8 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
     UFG::qString::qString(&v10, "%s : %f %s", v8, *(float *)&v5->i_user_data, v7);
-    UFG::qPrintf("Dlg Trc: %s : %s\n", "add_listener_emotion", *(_QWORD *)(v9 + 24));
+    UFG::qPrintf("Dlg Trc: %s : %s\n", "add_listener_emotion", *(const char **)(v9 + 24));
     UFG::qString::~qString(&v10);
   }
   UFG::ConversationElement::AddEmotionRequest(
-    (UFG::ConversationElement *)v2[8].vfptr,
-    v4->i_user_data,
+    (UFG::ConversationElement *)i_obj_p[8].vfptr,
+    i_data_p->i_user_data,
     *(float *)&v5->i_user_data,
     *(const char **)v6->i_user_data,
     1);
@@ -2386,12 +2338,13 @@ void __fastcall UFG::TSScriptedDialogueElement::Mthd_listener_emotion(SSInvokedM
 
 // File Line: 1527
 // RVA: 0x50B6D0
-void __fastcall UFG::TSScriptedDialogueElement::Mthd_speaker_action_request(SSInvokedMethod *pScope, SSInstance **ppResult)
+void __fastcall UFG::TSScriptedDialogueElement::Mthd_speaker_action_request(
+        SSInvokedMethod *pScope,
+        SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // rdi
-  SSObjectBase *v3; // rsi
-  SSData **v4; // rcx
-  SSInstance *v5; // r15
+  SSObjectBase *i_obj_p; // rsi
+  SSData **i_array_p; // rcx
+  SSInstance *i_data_p; // r15
   SSInstance *v6; // rbp
   SSInstance *v7; // r14
   __int64 v8; // rbx
@@ -2399,42 +2352,41 @@ void __fastcall UFG::TSScriptedDialogueElement::Mthd_speaker_action_request(SSIn
   __int64 v10; // rax
   UFG::ConversationElementActionRequest *v11; // rbp
   SSActor *v12; // rbx
-  SSClass *v13; // rsi
+  SSClass *i_class_p; // rsi
   __int64 v14; // rsi
   __int64 v15; // rcx
   UFG::SimObject *v16; // rax
   __int64 v17; // rax
-  UFG::qString v18; // [rsp+38h] [rbp-40h]
+  UFG::qString v18; // [rsp+38h] [rbp-40h] BYREF
 
-  v2 = pScope;
-  v3 = pScope->i_scope_p.i_obj_p;
-  if ( !v3 || pScope->i_scope_p.i_ptr_id != v3->i_ptr_id )
-    v3 = 0i64;
-  v4 = pScope->i_data.i_array_p;
-  v5 = (*v4)->i_data_p;
-  v6 = v4[1]->i_data_p;
-  v7 = v4[2]->i_data_p;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  i_array_p = pScope->i_data.i_array_p;
+  i_data_p = (*i_array_p)->i_data_p;
+  v6 = i_array_p[1]->i_data_p;
+  v7 = i_array_p[2]->i_data_p;
   if ( UFG::ConversationManager::sm_traceScrConversations )
   {
     v8 = *(_QWORD *)v7->i_user_data;
-    v9 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v3[4].i_ptr_id);
+    v9 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
     UFG::qString::qString(&v18, "%s : %f %s", v9, *(float *)&v6->i_user_data, v8);
-    UFG::qPrintf("Dlg Trc: %s : %s\n", "add_action_request", *(_QWORD *)(v10 + 24));
+    UFG::qPrintf("Dlg Trc: %s : %s\n", "add_action_request", *(const char **)(v10 + 24));
     UFG::qString::~qString(&v18);
   }
   v11 = UFG::ConversationElement::AddActionRequest(
-          (UFG::ConversationElement *)v3[8].vfptr,
-          v5->i_user_data,
+          (UFG::ConversationElement *)i_obj_p[8].vfptr,
+          i_data_p->i_user_data,
           *(float *)&v6->i_user_data,
           *(const char **)v7->i_user_data,
           0);
-  v12 = *(SSActor **)(*((_QWORD *)v2->i_data.i_array_p + 3) + 8i64);
+  v12 = *(SSActor **)(*((_QWORD *)pScope->i_data.i_array_p + 3) + 8i64);
   if ( !v12 )
     goto LABEL_11;
-  v13 = v12->i_class_p;
-  if ( !v13->vfptr->is_actor_class((SSClassDescBase *)v12->i_class_p) )
+  i_class_p = v12->i_class_p;
+  if ( !i_class_p->vfptr->is_actor_class(i_class_p) )
   {
-    if ( v13 == SSBrain::c_symbol_class_p && LODWORD(v12->i_user_data) != -1 )
+    if ( i_class_p == SSBrain::c_symbol_class_p && LODWORD(v12->i_user_data) != -1 )
     {
       v12 = SSActor::find((ASymbol *)&v12->i_user_data);
       goto LABEL_12;
@@ -2443,13 +2395,13 @@ LABEL_11:
     v12 = 0i64;
   }
 LABEL_12:
-  v14 = *(_QWORD *)(*((_QWORD *)v2->i_data.i_array_p + 3) + 8i64);
+  v14 = *(_QWORD *)(*((_QWORD *)pScope->i_data.i_array_p + 3) + 8i64);
   if ( v14 )
   {
     v15 = *(_QWORD *)(v14 + 24);
     if ( v15 )
     {
-      if ( (*(unsigned __int8 (**)(void))(*(_QWORD *)v15 + 64i64))() || *(_DWORD *)(v14 + 32) != -1 )
+      if ( (*(unsigned __int8 (__fastcall **)(__int64))(*(_QWORD *)v15 + 64i64))(v15) || *(_DWORD *)(v14 + 32) != -1 )
       {
         if ( v12 && (v16 = *(UFG::SimObject **)&v12[1].i_icoroutines_to_update.i_count) != 0i64 )
         {
@@ -2457,8 +2409,8 @@ LABEL_12:
         }
         else
         {
-          v11->m_targetInst = *(SSInstance **)(*((_QWORD *)v2->i_data.i_array_p + 3) + 8i64);
-          v17 = *(_QWORD *)(*((_QWORD *)v2->i_data.i_array_p + 3) + 8i64);
+          v11->m_targetInst = *(SSInstance **)(*((_QWORD *)pScope->i_data.i_array_p + 3) + 8i64);
+          v17 = *(_QWORD *)(*((_QWORD *)pScope->i_data.i_array_p + 3) + 8i64);
           ++*(_DWORD *)(v17 + 16);
         }
       }
@@ -2468,12 +2420,13 @@ LABEL_12:
 
 // File Line: 1560
 // RVA: 0x5047B0
-void __fastcall UFG::TSScriptedDialogueElement::Mthd_listener_action_request(SSInvokedMethod *pScope, SSInstance **ppResult)
+void __fastcall UFG::TSScriptedDialogueElement::Mthd_listener_action_request(
+        SSInvokedMethod *pScope,
+        SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // rdi
-  SSObjectBase *v3; // rsi
-  SSData **v4; // rcx
-  SSInstance *v5; // r15
+  SSObjectBase *i_obj_p; // rsi
+  SSData **i_array_p; // rcx
+  SSInstance *i_data_p; // r15
   SSInstance *v6; // rbp
   SSInstance *v7; // r14
   __int64 v8; // rbx
@@ -2481,42 +2434,41 @@ void __fastcall UFG::TSScriptedDialogueElement::Mthd_listener_action_request(SSI
   __int64 v10; // rax
   UFG::ConversationElementActionRequest *v11; // rbp
   SSActor *v12; // rbx
-  SSClass *v13; // rsi
+  SSClass *i_class_p; // rsi
   __int64 v14; // rsi
   __int64 v15; // rcx
   UFG::SimObject *v16; // rax
   __int64 v17; // rax
-  UFG::qString v18; // [rsp+38h] [rbp-40h]
+  UFG::qString v18; // [rsp+38h] [rbp-40h] BYREF
 
-  v2 = pScope;
-  v3 = pScope->i_scope_p.i_obj_p;
-  if ( !v3 || pScope->i_scope_p.i_ptr_id != v3->i_ptr_id )
-    v3 = 0i64;
-  v4 = pScope->i_data.i_array_p;
-  v5 = (*v4)->i_data_p;
-  v6 = v4[1]->i_data_p;
-  v7 = v4[2]->i_data_p;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  i_array_p = pScope->i_data.i_array_p;
+  i_data_p = (*i_array_p)->i_data_p;
+  v6 = i_array_p[1]->i_data_p;
+  v7 = i_array_p[2]->i_data_p;
   if ( UFG::ConversationManager::sm_traceScrConversations )
   {
     v8 = *(_QWORD *)v7->i_user_data;
-    v9 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v3[4].i_ptr_id);
+    v9 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
     UFG::qString::qString(&v18, "%s : %f %s ", v9, *(float *)&v6->i_user_data, v8);
-    UFG::qPrintf("Dlg Trc: %s : %s\n", "add_action_request", *(_QWORD *)(v10 + 24));
+    UFG::qPrintf("Dlg Trc: %s : %s\n", "add_action_request", *(const char **)(v10 + 24));
     UFG::qString::~qString(&v18);
   }
   v11 = UFG::ConversationElement::AddActionRequest(
-          (UFG::ConversationElement *)v3[8].vfptr,
-          v5->i_user_data,
+          (UFG::ConversationElement *)i_obj_p[8].vfptr,
+          i_data_p->i_user_data,
           *(float *)&v6->i_user_data,
           *(const char **)v7->i_user_data,
           1);
-  v12 = *(SSActor **)(*((_QWORD *)v2->i_data.i_array_p + 3) + 8i64);
+  v12 = *(SSActor **)(*((_QWORD *)pScope->i_data.i_array_p + 3) + 8i64);
   if ( !v12 )
     goto LABEL_11;
-  v13 = v12->i_class_p;
-  if ( !v13->vfptr->is_actor_class((SSClassDescBase *)v12->i_class_p) )
+  i_class_p = v12->i_class_p;
+  if ( !i_class_p->vfptr->is_actor_class(i_class_p) )
   {
-    if ( v13 == SSBrain::c_symbol_class_p && LODWORD(v12->i_user_data) != -1 )
+    if ( i_class_p == SSBrain::c_symbol_class_p && LODWORD(v12->i_user_data) != -1 )
     {
       v12 = SSActor::find((ASymbol *)&v12->i_user_data);
       goto LABEL_12;
@@ -2525,13 +2477,13 @@ LABEL_11:
     v12 = 0i64;
   }
 LABEL_12:
-  v14 = *(_QWORD *)(*((_QWORD *)v2->i_data.i_array_p + 3) + 8i64);
+  v14 = *(_QWORD *)(*((_QWORD *)pScope->i_data.i_array_p + 3) + 8i64);
   if ( v14 )
   {
     v15 = *(_QWORD *)(v14 + 24);
     if ( v15 )
     {
-      if ( (*(unsigned __int8 (**)(void))(*(_QWORD *)v15 + 64i64))() || *(_DWORD *)(v14 + 32) != -1 )
+      if ( (*(unsigned __int8 (__fastcall **)(__int64))(*(_QWORD *)v15 + 64i64))(v15) || *(_DWORD *)(v14 + 32) != -1 )
       {
         if ( v12 && (v16 = *(UFG::SimObject **)&v12[1].i_icoroutines_to_update.i_count) != 0i64 )
         {
@@ -2539,8 +2491,8 @@ LABEL_12:
         }
         else
         {
-          v11->m_targetInst = *(SSInstance **)(*((_QWORD *)v2->i_data.i_array_p + 3) + 8i64);
-          v17 = *(_QWORD *)(*((_QWORD *)v2->i_data.i_array_p + 3) + 8i64);
+          v11->m_targetInst = *(SSInstance **)(*((_QWORD *)pScope->i_data.i_array_p + 3) + 8i64);
+          v17 = *(_QWORD *)(*((_QWORD *)pScope->i_data.i_array_p + 3) + 8i64);
           ++*(_DWORD *)(v17 + 16);
         }
       }
@@ -2550,157 +2502,155 @@ LABEL_12:
 
 // File Line: 1593
 // RVA: 0x506650
-void __fastcall UFG::TSScriptedDialogueElement::Mthd_remove_interruption_point(SSInvokedMethod *pScope, SSInstance **ppResult)
+void __fastcall UFG::TSScriptedDialogueElement::Mthd_remove_interruption_point(
+        SSInvokedMethod *pScope,
+        SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rbx
-  SSInstance *v3; // rdi
+  SSObjectBase *i_obj_p; // rbx
+  SSInstance *i_data_p; // rdi
   char *v4; // rax
   __int64 v5; // rax
-  UFG::qString v6; // [rsp+28h] [rbp-30h]
+  UFG::qString v6; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  v3 = (*pScope->i_data.i_array_p)->i_data_p;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  i_data_p = (*pScope->i_data.i_array_p)->i_data_p;
   if ( UFG::ConversationManager::sm_traceScrConversations )
   {
-    v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[4].i_ptr_id);
-    UFG::qString::qString(&v6, "%s : %u ", v4, LODWORD(v3->i_user_data), -2i64);
-    UFG::qPrintf("Dlg Trc: %s : %s\n", "remove_interruption_point", *(_QWORD *)(v5 + 24));
+    v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i_obj_p[4].i_ptr_id);
+    UFG::qString::qString(&v6, "%s : %u ", v4, LODWORD(i_data_p->i_user_data));
+    UFG::qPrintf("Dlg Trc: %s : %s\n", "remove_interruption_point", *(const char **)(v5 + 24));
     UFG::qString::~qString(&v6);
   }
-  UFG::ConversationElement::RemoveInterruptPoint((UFG::ConversationElement *)v2[8].vfptr, v3->i_user_data);
+  UFG::ConversationElement::RemoveInterruptPoint((UFG::ConversationElement *)i_obj_p[8].vfptr, i_data_p->i_user_data);
 }
 
 // File Line: 1606
 // RVA: 0x508990
-void __fastcall UFG::TSScriptedDialogueElement::Mthd_set_interjection_point(SSInvokedMethod *pScope, SSInstance **ppResult)
+void __fastcall UFG::TSScriptedDialogueElement::Mthd_set_interjection_point(
+        SSInvokedMethod *pScope,
+        SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rdx
+  SSObjectBase *i_obj_p; // rdx
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  HIDWORD(v2[8].vfptr[1].get_obj_type) = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  HIDWORD(i_obj_p[8].vfptr[1].get_obj_type) = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
 }
 
 // File Line: 1617
 // RVA: 0x50C2D0
 void __fastcall UFG::TSScriptedDialogueElement::Mthd_stop_after_play(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rdx
+  SSObjectBase *i_obj_p; // rdx
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  BYTE4(v2[8].vfptr[2].as_instance) ^= (BYTE4(v2[8].vfptr[2].as_instance) ^ ((*pScope->i_data.i_array_p)->i_data_p->i_user_data != 0)) & 1;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  BYTE4(i_obj_p[8].vfptr[2].as_instance) ^= (BYTE4(i_obj_p[8].vfptr[2].as_instance) ^ ((*pScope->i_data.i_array_p)->i_data_p->i_user_data != 0)) & 1;
 }
 
 // File Line: 1628
 // RVA: 0x50A320
-void __fastcall UFG::TSScriptedDialogueElement::Mthd_set_resume_checkpoint(SSInvokedMethod *pScope, SSInstance **ppResult)
+void __fastcall UFG::TSScriptedDialogueElement::Mthd_set_resume_checkpoint(
+        SSInvokedMethod *pScope,
+        SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rdx
+  SSObjectBase *i_obj_p; // rdx
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  BYTE4(v2[8].vfptr[2].as_instance) ^= (BYTE4(v2[8].vfptr[2].as_instance) ^ 16
-                                                                          * ((*pScope->i_data.i_array_p)->i_data_p->i_user_data != 0)) & 0x10;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  BYTE4(i_obj_p[8].vfptr[2].as_instance) ^= (BYTE4(i_obj_p[8].vfptr[2].as_instance) ^ (16
+                                                                                     * ((*pScope->i_data.i_array_p)->i_data_p->i_user_data != 0))) & 0x10;
 }
 
 // File Line: 1639
 // RVA: 0x509370
 void __fastcall UFG::TSScriptedDialogueElement::Mthd_set_playback_event(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // rdx
-  SSObjectBase *v3; // rcx
+  SSObjectBase *i_obj_p; // rcx
 
-  v2 = pScope;
-  v3 = pScope->i_scope_p.i_obj_p;
-  if ( !v3 || v2->i_scope_p.i_ptr_id != v3->i_ptr_id )
-    v3 = 0i64;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
   UFG::ScriptedConversationElement::SetPlaybackEvent(
-    (UFG::ScriptedConversationElement *)v3[8].vfptr,
-    *(const char **)(*v2->i_data.i_array_p)->i_data_p->i_user_data);
+    (UFG::ScriptedConversationElement *)i_obj_p[8].vfptr,
+    *(const char **)(*pScope->i_data.i_array_p)->i_data_p->i_user_data);
 }
 
 // File Line: 1649
 // RVA: 0x503F40
 void __fastcall UFG::TSScriptedDialogueElement::Mthd_kill_on_interrupt(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rdx
+  SSObjectBase *i_obj_p; // rdx
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  BYTE4(v2[8].vfptr[2].as_instance) ^= (BYTE4(v2[8].vfptr[2].as_instance) ^ 2
-                                                                          * ((*pScope->i_data.i_array_p)->i_data_p->i_user_data != 0)) & 2;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  BYTE4(i_obj_p[8].vfptr[2].as_instance) ^= (BYTE4(i_obj_p[8].vfptr[2].as_instance) ^ (2
+                                                                                     * ((*pScope->i_data.i_array_p)->i_data_p->i_user_data != 0))) & 2;
 }
 
 // File Line: 1660
 // RVA: 0x508A60
-void __fastcall UFG::TSScriptedDialogueElement::Mthd_set_is_highest_priority(SSInvokedMethod *pScope, SSInstance **ppResult)
+void __fastcall UFG::TSScriptedDialogueElement::Mthd_set_is_highest_priority(
+        SSInvokedMethod *pScope,
+        SSInstance **ppResult)
 {
-  SSObjectBase *v2; // rdx
+  SSObjectBase *i_obj_p; // rdx
 
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  BYTE4(v2[8].vfptr[2].as_instance) ^= (BYTE4(v2[8].vfptr[2].as_instance) ^ 8
-                                                                          * ((*pScope->i_data.i_array_p)->i_data_p->i_user_data != 0)) & 8;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  BYTE4(i_obj_p[8].vfptr[2].as_instance) ^= (BYTE4(i_obj_p[8].vfptr[2].as_instance) ^ (8
+                                                                                     * ((*pScope->i_data.i_array_p)->i_data_p->i_user_data != 0))) & 8;
 }
 
 // File Line: 1670
 // RVA: 0x505E10
 void __fastcall UFG::TSScriptedDialogueElement::Mthd_play_from_position(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // rdx
-  SSObjectBase *v3; // rcx
+  SSObjectBase *i_obj_p; // rcx
 
-  v2 = pScope;
-  v3 = pScope->i_scope_p.i_obj_p;
-  if ( !v3 || v2->i_scope_p.i_ptr_id != v3->i_ptr_id )
-    v3 = 0i64;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
   UFG::ScriptedConversationElement::CreateNonCharacterContainer(
-    (UFG::ScriptedConversationElement *)v3[8].vfptr,
-    (UFG::qVector3 *)(*v2->i_data.i_array_p)->i_data_p->i_user_data);
+    (UFG::ScriptedConversationElement *)i_obj_p[8].vfptr,
+    (UFG::qVector3 *)(*pScope->i_data.i_array_p)->i_data_p->i_user_data);
 }
 
 // File Line: 1680
 // RVA: 0x4DEB50
 bool __fastcall UFG::TSScriptedDialogueElement::Coro_wait_on_interruption_point(SSInvokedCoroutine *pScope)
 {
-  SSInvokedCoroutine *v1; // rdx
-  SSObjectBase *v2; // rcx
+  SSObjectBase *i_obj_p; // rcx
 
-  v1 = pScope;
-  v2 = pScope->i_scope_p.i_obj_p;
-  if ( !v2 || v1->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
   return UFG::ConversationElement::InterruptPointReached(
-           (UFG::ConversationElement *)v2[8].vfptr,
-           (*v1->i_data.i_array_p)->i_data_p->i_user_data);
+           (UFG::ConversationElement *)i_obj_p[8].vfptr,
+           (*pScope->i_data.i_array_p)->i_data_p->i_user_data);
 }
 
 // File Line: 1691
 // RVA: 0x4E16F0
 UFG::qBaseNodeRB *__fastcall UFG::TSScriptedDialogueElement::GetSimObjectFromSymbol(SSInstance *instance)
 {
-  SSInstance *v1; // rbx
-  UFG::qBaseNodeRB *result; // rax
   SSActor *v3; // rax
 
-  v1 = instance;
-  if ( ((unsigned __int8 (*)(void))instance->vfptr->is_actor)() )
-    return *(UFG::qBaseNodeRB **)&v1[4].i_ref_count;
-  if ( v1->i_class_p != SSBrain::c_symbol_class_p )
+  if ( instance->vfptr->is_actor(instance) )
+    return *(UFG::qBaseNodeRB **)&instance[4].i_ref_count;
+  if ( instance->i_class_p != SSBrain::c_symbol_class_p )
     return 0i64;
-  v3 = SSActor::find((ASymbol *)&v1->i_user_data);
+  v3 = SSActor::find((ASymbol *)&instance->i_user_data);
   if ( v3 )
-    result = *(UFG::qBaseNodeRB **)&v3[1].i_icoroutines_to_update.i_count;
+    return *(UFG::qBaseNodeRB **)&v3[1].i_icoroutines_to_update.i_count;
   else
-    result = UFG::Simulation::GetSimObject(&UFG::gSim, (UFG::qSymbol *)&v1->i_user_data);
-  return result;
+    return UFG::Simulation::GetSimObject(&UFG::gSim, (UFG::qSymbol *)&instance->i_user_data);
 }
 

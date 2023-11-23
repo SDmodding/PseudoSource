@@ -7,10 +7,10 @@ bool __fastcall ValidateImageBase(char *pImageBase)
 
   if ( *(_WORD *)pImageBase != 23117 )
     return 0;
-  v2 = &pImageBase[*((signed int *)pImageBase + 15)];
+  v2 = &pImageBase[*((int *)pImageBase + 15)];
   result = 0;
   if ( *(_DWORD *)v2 == 17744 )
-    result = *((_WORD *)v2 + 12) == 523;
+    return *((_WORD *)v2 + 12) == 523;
   return result;
 }
 
@@ -18,22 +18,20 @@ bool __fastcall ValidateImageBase(char *pImageBase)
 // RVA: 0x12CCA60
 _IMAGE_SECTION_HEADER *__fastcall FindPESection(char *pImageBase, unsigned __int64 rva)
 {
-  unsigned int v2; // er9
-  unsigned __int64 v3; // r10
+  unsigned int v2; // r9d
   char *v4; // r8
   _IMAGE_SECTION_HEADER *result; // rax
-  unsigned __int64 v6; // rdx
+  unsigned __int64 VirtualAddress; // rdx
 
   v2 = 0;
-  v3 = rva;
-  v4 = &pImageBase[*((signed int *)pImageBase + 15)];
+  v4 = &pImageBase[*((int *)pImageBase + 15)];
   result = (_IMAGE_SECTION_HEADER *)&v4[*((unsigned __int16 *)v4 + 10) + 24];
   if ( !*((_WORD *)v4 + 3) )
     return 0i64;
   while ( 1 )
   {
-    v6 = result->VirtualAddress;
-    if ( v3 >= v6 && v3 < (unsigned int)(v6 + result->Misc.PhysicalAddress) )
+    VirtualAddress = result->VirtualAddress;
+    if ( rva >= VirtualAddress && rva < (unsigned int)(VirtualAddress + result->Misc.PhysicalAddress) )
       break;
     ++v2;
     ++result;
@@ -47,18 +45,16 @@ _IMAGE_SECTION_HEADER *__fastcall FindPESection(char *pImageBase, unsigned __int
 // RVA: 0x12CCAB0
 int __fastcall IsNonwritableInCurrentImage(char *pTarget)
 {
-  char *v1; // rbx
-  _IMAGE_SECTION_HEADER *v2; // rax
+  _IMAGE_SECTION_HEADER *PESection; // rax
 
-  v1 = pTarget;
-  LODWORD(v2) = ValidateImageBase((char *)0x140000000i64);
-  if ( (_DWORD)v2 )
+  LODWORD(PESection) = ValidateImageBase((char *)0x140000000i64);
+  if ( (_DWORD)PESection )
   {
-    v2 = FindPESection((char *)0x140000000i64, (unsigned __int64)(v1 - 5368709120i64));
-    if ( v2 )
-      LODWORD(v2) = (v2->Characteristics & 0x80000000) == 0;
+    PESection = FindPESection((char *)0x140000000i64, (unsigned __int64)(pTarget - 0x140000000i64));
+    if ( PESection )
+      LODWORD(PESection) = (PESection->Characteristics & 0x80000000) == 0;
   }
-  return (signed int)v2;
+  return (int)PESection;
 }
 
 // File Line: 181

@@ -36,7 +36,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243C570 = v1;
-  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_display::Sprite,2,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>>::Method = Scaleform::GFx::AS3::Instances::fl_display::Sprite::dropTargetGet;
+  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_display::Sprite,2,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_display::Sprite *, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *))Scaleform::GFx::AS3::Instances::fl_display::Sprite::dropTargetGet;
   return result;
 }
 
@@ -64,7 +64,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243C590 = v1;
-  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_display::Sprite,4,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::Sprite>>::Method = Scaleform::GFx::AS3::Instances::fl_display::Sprite::hitAreaGet;
+  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_display::Sprite,4,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::Sprite>>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_display::Sprite *, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::Sprite> *))Scaleform::GFx::AS3::Instances::fl_display::Sprite::hitAreaGet;
   return result;
 }
 
@@ -176,7 +176,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc3_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243C610 = v1;
-  Scaleform::GFx::AS3::ThunkFunc3<Scaleform::GFx::AS3::Instances::fl_display::Sprite,12,Scaleform::GFx::AS3::Value const,long,bool,Scaleform::GFx::AS3::Instances::fl_geom::Rectangle *>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_display::Sprite *, Scaleform::GFx::AS3::Value *, int, bool, Scaleform::GFx::AS3::Instances::fl_geom::Rectangle *))Scaleform::GFx::AS3::Instances::fl_display::Sprite::startTouchDrag;
+  Scaleform::GFx::AS3::ThunkFunc3<Scaleform::GFx::AS3::Instances::fl_display::Sprite,12,Scaleform::GFx::AS3::Value const,long,bool,Scaleform::GFx::AS3::Instances::fl_geom::Rectangle *>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_display::Sprite *, Scaleform::GFx::AS3::Value *, int, bool, Scaleform::GFx::AS3::Instances::fl_geom::Rectangle *))Scaleform::GFx::AS3::Instances::fl_display::Sprite::startTouchDrag;
   return result;
 }
 
@@ -196,224 +196,221 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
 
 // File Line: 81
 // RVA: 0x82E410
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::buttonModeGet(Scaleform::GFx::AS3::Instances::fl_display::Sprite *this, bool *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::buttonModeGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Sprite *this,
+        bool *result)
 {
-  Scaleform::GFx::DisplayObject *v2; // r8
+  Scaleform::GFx::DisplayObject *pObject; // r8
 
-  v2 = this->pDispObj.pObject;
-  if ( v2 )
-    *result = *(_BYTE *)(&v2->ClipDepth + 2 * (unsigned __int8)v2->AvmObjOffset) & 1;
+  pObject = this->pDispObj.pObject;
+  if ( pObject )
+    *result = *(_BYTE *)(&pObject->ClipDepth + 2 * (unsigned __int8)pObject->AvmObjOffset) & 1;
   else
     *result = 0;
 }
 
 // File Line: 91
 // RVA: 0x82E430
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::buttonModeSet(Scaleform::GFx::AS3::Instances::fl_display::Sprite *this, Scaleform::GFx::AS3::Value *result, bool value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::buttonModeSet(
+        Scaleform::GFx::AS3::Instances::fl_display::Sprite *this,
+        Scaleform::GFx::AS3::Value *result,
+        bool value)
 {
-  Scaleform::GFx::DisplayObject *v3; // rdx
-  signed __int64 v4; // rax
+  Scaleform::GFx::DisplayObject *pObject; // rdx
+  char *v4; // rax
 
-  v3 = this->pDispObj.pObject;
-  if ( v3 )
-    v4 = (signed __int64)v3 + 4 * (unsigned __int8)v3->AvmObjOffset;
+  pObject = this->pDispObj.pObject;
+  if ( pObject )
+    v4 = (char *)pObject + 4 * (unsigned __int8)pObject->AvmObjOffset;
   else
     v4 = 0i64;
   if ( value )
-    *(_BYTE *)(v4 + 104) |= 1u;
+    v4[104] |= 1u;
   else
-    *(_BYTE *)(v4 + 104) &= 0xFEu;
+    v4[104] &= ~1u;
 }
 
 // File Line: 99
 // RVA: 0x838210
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::dropTargetGet(Scaleform::GFx::AS3::Instances::fl_display::Sprite *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::dropTargetGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Sprite *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *result)
 {
-  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *v2; // rdi
-  Scaleform::GFx::InteractiveObject *ignoreMC; // ST20_8
-  Scaleform::GFx::MovieImpl *v4; // rcx
-  float v5; // xmm1_4
-  Scaleform::GFx::InteractiveObject *v6; // rax
-  Scaleform::GFx::InteractiveObject *v7; // rsi
-  __int64 v8; // rax
-  __int64 v9; // rdx
-  signed __int64 v10; // rbx
-  signed __int64 v11; // rcx
+  Scaleform::GFx::MovieImpl *pMovieImpl; // rcx
+  float y; // xmm1_4
+  Scaleform::GFx::InteractiveObject *TopMostEntity; // rax
+  Scaleform::GFx::InteractiveObject *v6; // rsi
+  __int64 v7; // rax
+  __int64 v8; // rdx
+  __int64 v9; // rbx
+  __int64 v10; // rcx
+  char *v11; // rcx
   __int64 v12; // rax
   Scaleform::GFx::AS3::Instances::fl::XMLList *v13; // rdx
-  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> v14; // rcx
-  unsigned int v15; // eax
-  Scaleform::Render::Point<float> mousePos; // [rsp+40h] [rbp+8h]
+  Scaleform::GFx::AS3::Instances::fl::XMLList *pObject; // rcx
+  unsigned int RefCount; // eax
+  Scaleform::GFx::InteractiveObject *ignoreMC; // [rsp+20h] [rbp-18h]
+  Scaleform::Render::Point<float> mousePos; // [rsp+40h] [rbp+8h] BYREF
 
-  v2 = result;
   ignoreMC = (Scaleform::GFx::InteractiveObject *)this->pDispObj.pObject;
-  v4 = this->pDispObj.pObject->pASRoot->pMovieImpl;
-  v5 = v4->mMouseState[0].LastPosition.y;
-  mousePos.x = v4->mMouseState[0].LastPosition.x;
-  mousePos.y = v5;
-  v6 = Scaleform::GFx::MovieImpl::GetTopMostEntity(v4, &mousePos, 0, 1, ignoreMC);
-  v7 = v6;
-  if ( v6 )
+  pMovieImpl = ignoreMC->pASRoot->pMovieImpl;
+  y = pMovieImpl->mMouseState[0].LastPosition.y;
+  mousePos.x = pMovieImpl->mMouseState[0].LastPosition.x;
+  mousePos.y = y;
+  TopMostEntity = Scaleform::GFx::MovieImpl::GetTopMostEntity(pMovieImpl, &mousePos, 0, 1, ignoreMC);
+  v6 = TopMostEntity;
+  if ( TopMostEntity )
   {
-    v8 = ((__int64 (__fastcall *)(signed __int64))(*(Scaleform::RefCountNTSImplCoreVtbl **)((char *)&v6->vfptr
-                                                                                          + 4
-                                                                                          * (unsigned __int8)v6->AvmObjOffset))[1].__vecDelDtor)((signed __int64)v6 + 4 * (unsigned __int8)v6->AvmObjOffset);
-    v10 = 0i64;
-    v11 = v8 - 56;
-    if ( !v8 )
-      v11 = 0i64;
-    LOBYTE(v9) = 1;
-    (*(void (__fastcall **)(signed __int64, __int64))(*(_QWORD *)v11 + 112i64))(v11, v9);
-    v12 = ((__int64 (__fastcall *)(signed __int64))(*(Scaleform::RefCountNTSImplCoreVtbl **)((char *)&v7->vfptr
-                                                                                           + 4
-                                                                                           * (unsigned __int8)v7->AvmObjOffset))[1].__vecDelDtor)((signed __int64)v7 + 4 * (unsigned __int8)v7->AvmObjOffset);
+    v7 = ((__int64 (__fastcall *)(__int64))(*(Scaleform::RefCountNTSImplCoreVtbl **)((char *)&TopMostEntity->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr
+                                                                                   + 4
+                                                                                   * (unsigned __int8)TopMostEntity->AvmObjOffset))[1].__vecDelDtor)((__int64)TopMostEntity + 4 * (unsigned __int8)TopMostEntity->AvmObjOffset);
+    v9 = 0i64;
+    v10 = v7 - 56;
+    if ( !v7 )
+      v10 = 0i64;
+    LOBYTE(v8) = 1;
+    (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)v10 + 112i64))(v10, v8);
+    v11 = (char *)v6 + 4 * (unsigned __int8)v6->AvmObjOffset;
+    v12 = (*(__int64 (__fastcall **)(char *))(*(_QWORD *)v11 + 8i64))(v11);
     if ( v12 )
-      v10 = v12 - 56;
-    v13 = *(Scaleform::GFx::AS3::Instances::fl::XMLList **)(v10 + 16);
+      v9 = v12 - 56;
+    v13 = *(Scaleform::GFx::AS3::Instances::fl::XMLList **)(v9 + 16);
     if ( !v13 )
-      v13 = *(Scaleform::GFx::AS3::Instances::fl::XMLList **)(v10 + 8);
-    if ( (unsigned __int8)v13 & 1 )
+      v13 = *(Scaleform::GFx::AS3::Instances::fl::XMLList **)(v9 + 8);
+    if ( ((unsigned __int8)v13 & 1) != 0 )
       v13 = (Scaleform::GFx::AS3::Instances::fl::XMLList *)((char *)v13 - 1);
-    Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(
-      (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)v2,
-      v13);
+    Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(result, v13);
   }
   else
   {
-    v14.pObject = (Scaleform::GFx::AS3::Instances::fl::XMLList *)v2->pObject;
-    if ( v2->pObject )
+    pObject = result->pObject;
+    if ( result->pObject )
     {
-      if ( (_QWORD)v14.pObject & 1 )
+      if ( ((unsigned __int8)pObject & 1) != 0 )
       {
-        v2->pObject = (Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *)((char *)&v14.pObject[-1].List.Data.Policy.Capacity
-                                                                                  + 7);
+        result->pObject = (Scaleform::GFx::AS3::Instances::fl::XMLList *)((char *)pObject - 1);
       }
       else
       {
-        v15 = v14.pObject->RefCount;
-        if ( v15 & 0x3FFFFF )
+        RefCount = pObject->RefCount;
+        if ( (RefCount & 0x3FFFFF) != 0 )
         {
-          v14.pObject->RefCount = v15 - 1;
-          Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v14.pObject->vfptr);
+          pObject->RefCount = RefCount - 1;
+          Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(pObject);
         }
       }
-      v2->pObject = 0i64;
+      result->pObject = 0i64;
     }
   }
 }
 
 // File Line: 123
 // RVA: 0x84DC20
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::graphicsGet(Scaleform::GFx::AS3::Instances::fl_display::Sprite *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::Graphics> *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::graphicsGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Sprite *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::Graphics> *result)
 {
-  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::Graphics> *v2; // rbx
-  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::Graphics> *v3; // rdi
-  Scaleform::GFx::AS3::Instances::fl_display::Sprite *v4; // rsi
-  Scaleform::GFx::AS3::Instances::fl_display::Graphics *v5; // r14
+  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::Graphics> *p_pGraphics; // rbx
+  Scaleform::GFx::AS3::Instances::fl_display::Graphics *pObject; // r14
   __int64 v6; // rax
   __int64 v7; // rbp
   Scaleform::RefCountNTSImpl *v8; // rcx
   Scaleform::GFx::AS3::Instances::fl_display::Graphics *v9; // rcx
-  unsigned int v10; // eax
+  unsigned int RefCount; // eax
 
-  v2 = &this->pGraphics;
-  v3 = result;
-  v4 = this;
+  p_pGraphics = &this->pGraphics;
   if ( !this->pGraphics.pObject
     && (unsigned __int8)Scaleform::GFx::AS3::ASVM::_constructInstance(
                           (Scaleform::GFx::AS3::ASVM *)this->pTraits.pObject->pVM,
-                          (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Object> *)&this->pGraphics,
+                          (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&this->pGraphics,
                           *(Scaleform::GFx::AS3::Object **)&this->pTraits.pObject->pVM[1].Initialized,
                           0,
                           0i64) )
   {
-    v5 = v2->pObject;
-    v6 = ((__int64 (*)(void))v4->pDispObj.pObject->vfptr[83].__vecDelDtor)();
+    pObject = p_pGraphics->pObject;
+    v6 = ((__int64 (__fastcall *)(Scaleform::GFx::DisplayObject *))this->pDispObj.pObject->Scaleform::GFx::AS3::Instances::fl_display::DisplayObjectContainer::Scaleform::GFx::AS3::Instances::fl_display::InteractiveObject::Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::vfptr[83].__vecDelDtor)(this->pDispObj.pObject);
     v7 = v6;
     if ( v6 )
       ++*(_DWORD *)(v6 + 8);
-    v8 = (Scaleform::RefCountNTSImpl *)&v5->pDrawing.pObject->vfptr;
+    v8 = pObject->pDrawing.pObject;
     if ( v8 )
       Scaleform::RefCountNTSImpl::Release(v8);
-    v5->pDrawing.pObject = (Scaleform::GFx::DrawingContext *)v7;
-    v2->pObject->pDispObj = v4->pDispObj.pObject;
+    pObject->pDrawing.pObject = (Scaleform::GFx::DrawingContext *)v7;
+    p_pGraphics->pObject->pDispObj = this->pDispObj.pObject;
   }
-  if ( v2 != v3 )
+  if ( p_pGraphics != result )
   {
-    if ( v2->pObject )
-      v2->pObject->RefCount = (v2->pObject->RefCount + 1) & 0x8FBFFFFF;
-    v9 = v3->pObject;
-    if ( v3->pObject )
+    if ( p_pGraphics->pObject )
+      p_pGraphics->pObject->RefCount = (p_pGraphics->pObject->RefCount + 1) & 0x8FBFFFFF;
+    v9 = result->pObject;
+    if ( result->pObject )
     {
-      if ( (unsigned __int8)v9 & 1 )
+      if ( ((unsigned __int8)v9 & 1) != 0 )
       {
-        v3->pObject = (Scaleform::GFx::AS3::Instances::fl_display::Graphics *)((char *)v9 - 1);
-        v3->pObject = v2->pObject;
+        result->pObject = (Scaleform::GFx::AS3::Instances::fl_display::Graphics *)((char *)v9 - 1);
+        result->pObject = p_pGraphics->pObject;
         return;
       }
-      v10 = v9->RefCount;
-      if ( v10 & 0x3FFFFF )
+      RefCount = v9->RefCount;
+      if ( (RefCount & 0x3FFFFF) != 0 )
       {
-        v9->RefCount = v10 - 1;
-        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v9->vfptr);
+        v9->RefCount = RefCount - 1;
+        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(v9);
       }
     }
-    v3->pObject = v2->pObject;
+    result->pObject = p_pGraphics->pObject;
   }
 }
 
 // File Line: 140
 // RVA: 0x84E940
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::hitAreaGet(Scaleform::GFx::AS3::Instances::fl_display::Sprite *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::Sprite> *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::hitAreaGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Sprite *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *result)
 {
-  Scaleform::GFx::DisplayObject *v2; // rcx
-  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::Sprite> *v3; // rbx
+  Scaleform::GFx::DisplayObject *pObject; // rcx
   __int64 v4; // rax
   __int64 v5; // rcx
   Scaleform::GFx::AS3::Instances::fl::XMLList *v6; // rdx
-  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> v7; // rcx
-  unsigned int v8; // eax
+  Scaleform::GFx::AS3::Instances::fl::XMLList *v7; // rcx
+  unsigned int RefCount; // eax
 
-  v2 = this->pDispObj.pObject;
-  v3 = result;
-  if ( !v2 )
-    goto LABEL_18;
-  v4 = ((__int64 (*)(void))v2->vfptr[120].__vecDelDtor)();
+  pObject = this->pDispObj.pObject;
+  if ( !pObject )
+    goto LABEL_10;
+  v4 = ((__int64 (__fastcall *)(Scaleform::GFx::DisplayObject *))pObject->Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[120].__vecDelDtor)(pObject);
   if ( !v4 )
-    goto LABEL_18;
+    goto LABEL_10;
   v5 = *(unsigned __int8 *)(v4 + 109);
   v6 = *(Scaleform::GFx::AS3::Instances::fl::XMLList **)(v4 + 4 * v5 + 16);
   if ( !v6 )
     v6 = *(Scaleform::GFx::AS3::Instances::fl::XMLList **)(v4 + 4 * v5 + 8);
-  if ( (unsigned __int8)v6 & 1 )
+  if ( ((unsigned __int8)v6 & 1) != 0 )
     v6 = (Scaleform::GFx::AS3::Instances::fl::XMLList *)((char *)v6 - 1);
   if ( v6 && (unsigned int)(v6->pTraits.pObject->TraitsType - 30) <= 1 )
   {
-    Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(
-      (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)v3,
-      v6);
+    Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(result, v6);
   }
   else
   {
-LABEL_18:
-    v7.pObject = (Scaleform::GFx::AS3::Instances::fl::XMLList *)v3->pObject;
-    if ( v3->pObject )
+LABEL_10:
+    v7 = result->pObject;
+    if ( result->pObject )
     {
-      if ( (_QWORD)v7.pObject & 1 )
+      if ( ((unsigned __int8)v7 & 1) != 0 )
       {
-        v3->pObject = (Scaleform::GFx::AS3::Instances::fl_display::Sprite *)((char *)&v7.pObject[-1].List.Data.Policy.Capacity
-                                                                           + 7);
-        v3->pObject = 0i64;
+        result->pObject = (Scaleform::GFx::AS3::Instances::fl::XMLList *)((char *)v7 - 1);
+        result->pObject = 0i64;
       }
       else
       {
-        v8 = v7.pObject->RefCount;
-        if ( v8 & 0x3FFFFF )
+        RefCount = v7->RefCount;
+        if ( (RefCount & 0x3FFFFF) != 0 )
         {
-          v7.pObject->RefCount = v8 - 1;
-          Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v7.pObject->vfptr);
+          v7->RefCount = RefCount - 1;
+          Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(v7);
         }
-        v3->pObject = 0i64;
+        result->pObject = 0i64;
       }
     }
   }
@@ -421,13 +418,11 @@ LABEL_18:
 
 // File Line: 162
 // RVA: 0x84E9E0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::hitAreaSet(Scaleform::GFx::AS3::Instances::fl_display::Sprite *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Instances::fl_display::Sprite *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::hitAreaSet(
+        Scaleform::GFx::AS3::Instances::fl_display::Sprite *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Instances::fl_display::Sprite *value)
 {
-  Scaleform::GFx::AS3::Instances::fl_display::Sprite *v3; // rbx
-  Scaleform::GFx::AS3::Instances::fl_display::Sprite *v4; // rdi
-
-  v3 = value;
-  v4 = this;
   if ( value )
   {
     if ( !value->pDispObj.pObject )
@@ -435,8 +430,8 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::hitAreaSet(S
         value,
         result);
     Scaleform::GFx::Sprite::SetHitArea(
-      (Scaleform::GFx::Sprite *)v4->pDispObj.pObject,
-      (Scaleform::GFx::Sprite *)v3->pDispObj.pObject);
+      (Scaleform::GFx::Sprite *)this->pDispObj.pObject,
+      (Scaleform::GFx::Sprite *)value->pDispObj.pObject);
   }
   else
   {
@@ -446,125 +441,139 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::hitAreaSet(S
 
 // File Line: 180
 // RVA: 0x85F740
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::soundTransformGet(Scaleform::GFx::AS3::Instances::fl_display::Sprite *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_media::SoundTransform> *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::soundTransformGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Sprite *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_media::SoundTransform> *result)
 {
-  Scaleform::GFx::AS3::FlashUI *v2; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v2 = this->pTraits.pObject->pVM->UI;
-  v2->vfptr->Output(v2, Output_Warning, "The method Sprite::soundTransformGet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method Sprite::soundTransformGet() is not implemented\n");
 }
 
 // File Line: 187
 // RVA: 0x85F7D0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::soundTransformSet(Scaleform::GFx::AS3::Instances::fl_display::Sprite *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::soundTransformSet(
+        Scaleform::GFx::AS3::Instances::fl_display::Sprite *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *value)
 {
-  Scaleform::GFx::AS3::FlashUI *v3; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v3 = this->pTraits.pObject->pVM->UI;
-  v3->vfptr->Output(v3, Output_Warning, "The method Sprite::soundTransformSet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method Sprite::soundTransformSet() is not implemented\n");
 }
 
 // File Line: 210
 // RVA: 0x85FEE0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::startDrag(Scaleform::GFx::AS3::Instances::fl_display::Sprite *this, Scaleform::GFx::AS3::Value *result, bool lockCenter, Scaleform::GFx::AS3::Instances::fl_geom::Rectangle *bounds)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::startDrag(
+        Scaleform::GFx::AS3::Instances::fl_display::Sprite *this,
+        Scaleform::GFx::AS3::Value *result,
+        bool lockCenter,
+        Scaleform::GFx::AS3::Instances::fl_geom::Rectangle *bounds)
 {
-  Scaleform::GFx::AS3::Instances::fl_display::Sprite *v4; // rdi
-  Scaleform::GFx::AS3::Instances::fl_geom::Rectangle *v5; // rbx
-  bool v6; // bp
-  Scaleform::GFx::MovieImpl *v7; // rsi
-  double v8; // xmm1_8
-  double v9; // xmm2_8
+  Scaleform::GFx::MovieImpl *pMovieImpl; // rsi
+  long double x; // xmm1_8
+  long double y; // xmm2_8
   long double v10; // xmm1_8
   float v11; // xmm0_4
   long double v12; // xmm1_8
   __int64 v13; // rdx
-  Scaleform::GFx::InteractiveObject *v14; // rbx
-  int v15; // eax
-  Scaleform::GFx::MovieImpl::DragState st; // [rsp+20h] [rbp-38h]
+  Scaleform::GFx::InteractiveObject *pObject; // rbx
+  unsigned int Flags; // ecx
+  int v16; // eax
+  Scaleform::GFx::MovieImpl::DragState st; // [rsp+20h] [rbp-38h] BYREF
 
-  v4 = this;
-  v5 = bounds;
-  v6 = lockCenter;
-  v7 = this->pDispObj.pObject->pASRoot->pMovieImpl;
-  if ( !Scaleform::GFx::MovieImpl::IsDragging(v7, 0) )
+  pMovieImpl = this->pDispObj.pObject->pASRoot->pMovieImpl;
+  if ( !Scaleform::GFx::MovieImpl::IsDragging(pMovieImpl, 0) )
   {
     st.pTopmostEntity = 0i64;
     *(_WORD *)&st.LockCenter = 0;
-    st.BoundLT = 0i64;
-    st.BoundRB = 0i64;
-    st.CenterDelta = 0i64;
+    memset(&st.BoundLT, 0, 24);
     st.MouseIndex = -1;
-    if ( v5 )
+    if ( bounds )
     {
-      v8 = v5->x;
-      v9 = v5->y;
+      x = bounds->x;
+      y = bounds->y;
       st.Bound = 1;
-      *(float *)&v8 = v8;
-      *(float *)&v9 = v9;
-      st.BoundLT.x = *(float *)&v8 * 20.0;
-      v10 = *(float *)&v8 + v5->width;
-      st.BoundLT.y = *(float *)&v9 * 20.0;
+      *(float *)&x = x;
+      *(float *)&y = y;
+      st.BoundLT.x = *(float *)&x * 20.0;
+      v10 = *(float *)&x + bounds->width;
+      st.BoundLT.y = *(float *)&y * 20.0;
       v11 = v10;
-      v12 = *(float *)&v9 + v5->height;
+      v12 = *(float *)&y + bounds->height;
       st.BoundRB.x = v11 * 20.0;
       st.BoundRB.y = (float)v12 * 20.0;
     }
-    st.pCharacter = (Scaleform::GFx::InteractiveObject *)v4->pDispObj.pObject;
-    Scaleform::GFx::MovieImpl::DragState::InitCenterDelta(&st, v6, 0);
-    Scaleform::GFx::MovieImpl::SetDragState(v7, &st);
-    v14 = (Scaleform::GFx::InteractiveObject *)v4->pDispObj.pObject;
-    if ( !((v14->Flags >> 21) & 1) || (v14->Flags >> 22) & 1 )
+    st.pCharacter = (Scaleform::GFx::InteractiveObject *)this->pDispObj.pObject;
+    Scaleform::GFx::MovieImpl::DragState::InitCenterDelta(&st, lockCenter, 0);
+    Scaleform::GFx::MovieImpl::SetDragState(pMovieImpl, &st);
+    pObject = (Scaleform::GFx::InteractiveObject *)this->pDispObj.pObject;
+    Flags = pObject->Flags;
+    if ( (Flags & 0x200000) == 0 || (Flags & 0x400000) != 0 )
       v13 = 0i64;
     else
       LOBYTE(v13) = 1;
-    v15 = (__int64)v14->vfptr[103].__vecDelDtor((Scaleform::RefCountNTSImplCore *)v4->pDispObj.pObject, v13);
-    if ( v15 == -1 )
+    v16 = (int)pObject->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[103].__vecDelDtor(
+                 this->pDispObj.pObject,
+                 v13);
+    if ( v16 == -1 )
     {
-      v14->Flags |= 0x400000u;
+      pObject->Flags |= 0x400000u;
     }
-    else if ( v15 == 1 )
+    else if ( v16 == 1 )
     {
-      Scaleform::GFx::InteractiveObject::AddToOptimizedPlayList(v14);
+      Scaleform::GFx::InteractiveObject::AddToOptimizedPlayList(pObject);
     }
   }
 }
 
 // File Line: 241
 // RVA: 0x8600E0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::stopDrag(Scaleform::GFx::AS3::Instances::fl_display::Sprite *this, Scaleform::GFx::AS3::Value *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::stopDrag(
+        Scaleform::GFx::AS3::Instances::fl_display::Sprite *this,
+        Scaleform::GFx::AS3::Value *result)
 {
-  Scaleform::GFx::AS3::Instances::fl_display::Sprite *v2; // rbx
   __int64 v3; // rdx
-  Scaleform::GFx::InteractiveObject *v4; // rbx
-  int v5; // eax
+  Scaleform::GFx::InteractiveObject *pObject; // rbx
+  unsigned int Flags; // ecx
+  int v6; // eax
 
-  v2 = this;
   Scaleform::GFx::MovieImpl::StopDrag(this->pDispObj.pObject->pASRoot->pMovieImpl, 0);
-  v4 = (Scaleform::GFx::InteractiveObject *)v2->pDispObj.pObject;
-  if ( !((v4->Flags >> 21) & 1) || (v4->Flags >> 22) & 1 )
+  pObject = (Scaleform::GFx::InteractiveObject *)this->pDispObj.pObject;
+  Flags = pObject->Flags;
+  if ( (Flags & 0x200000) == 0 || (Flags & 0x400000) != 0 )
     v3 = 0i64;
   else
     LOBYTE(v3) = 1;
-  v5 = (__int64)v4->vfptr[103].__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v4->vfptr, v3);
-  if ( v5 == -1 )
+  v6 = (int)pObject->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[103].__vecDelDtor(
+              pObject,
+              v3);
+  if ( v6 == -1 )
   {
-    v4->Flags |= 0x400000u;
+    pObject->Flags |= 0x400000u;
   }
-  else if ( v5 == 1 )
+  else if ( v6 == 1 )
   {
-    Scaleform::GFx::InteractiveObject::AddToOptimizedPlayList(v4);
+    Scaleform::GFx::InteractiveObject::AddToOptimizedPlayList(pObject);
   }
 }
 
 // File Line: 254
 // RVA: 0x860040
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::startTouchDrag(Scaleform::GFx::AS3::Instances::fl_display::Sprite *this, Scaleform::GFx::AS3::Value *result, int touchPointID, __int64 lockCenter, Scaleform::GFx::AS3::Instances::fl_geom::Rectangle *bounds)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::startTouchDrag(
+        Scaleform::GFx::AS3::Instances::fl_display::Sprite *this,
+        Scaleform::GFx::AS3::Value *result,
+        int touchPointID,
+        __int64 lockCenter,
+        Scaleform::GFx::AS3::Instances::fl_geom::Rectangle *bounds)
 {
-  Scaleform::GFx::AS3::FlashUI *v5; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v5 = this->pTraits.pObject->pVM->UI;
-  ((void (__fastcall *)(Scaleform::GFx::AS3::FlashUI *, signed __int64, const char *, __int64))v5->vfptr->Output)(
-    v5,
+  UI = this->pTraits.pObject->pVM->UI;
+  ((void (__fastcall *)(Scaleform::GFx::AS3::FlashUI *, __int64, const char *, __int64))UI->vfptr->Output)(
+    UI,
     2i64,
     "The method Sprite::startTouchDrag() - multitouch support is OFF is not implemented\n",
     lockCenter);
@@ -572,71 +581,76 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::startTouchDr
 
 // File Line: 294
 // RVA: 0x860170
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::stopTouchDrag(Scaleform::GFx::AS3::Instances::fl_display::Sprite *this, Scaleform::GFx::AS3::Value *result, int touchPointID)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::stopTouchDrag(
+        Scaleform::GFx::AS3::Instances::fl_display::Sprite *this,
+        Scaleform::GFx::AS3::Value *result,
+        int touchPointID)
 {
-  Scaleform::GFx::AS3::FlashUI *v3; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v3 = this->pTraits.pObject->pVM->UI;
-  v3->vfptr->Output(
-    v3,
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(
+    UI,
     Output_Warning,
     "The method Sprite::stopTouchDrag() - multitouch support is OFF is not implemented\n");
 }
 
 // File Line: 335
 // RVA: 0x78E100
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::~Sprite(Scaleform::GFx::AS3::Instances::fl_display::Sprite *this)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::~Sprite(
+        Scaleform::GFx::AS3::Instances::fl_display::Sprite *this)
 {
-  Scaleform::GFx::AS3::Instances::fl_display::Sprite *v1; // rbx
-  Scaleform::GFx::AS3::Instances::fl_display::Graphics *v2; // rcx
-  unsigned int v3; // eax
+  Scaleform::GFx::AS3::Instances::fl_display::Graphics *pObject; // rcx
+  unsigned int RefCount; // eax
   Scaleform::GFx::AS3::Instances::fl::Object *v4; // rcx
   unsigned int v5; // eax
 
-  v1 = this;
   this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_display::Sprite::`vftable;
-  v2 = this->pGraphics.pObject;
-  if ( v2 )
+  pObject = this->pGraphics.pObject;
+  if ( pObject )
   {
-    if ( (unsigned __int8)v2 & 1 )
+    if ( ((unsigned __int8)pObject & 1) != 0 )
     {
-      v1->pGraphics.pObject = (Scaleform::GFx::AS3::Instances::fl_display::Graphics *)((char *)v2 - 1);
+      this->pGraphics.pObject = (Scaleform::GFx::AS3::Instances::fl_display::Graphics *)((char *)pObject - 1);
     }
     else
     {
-      v3 = v2->RefCount;
-      if ( v3 & 0x3FFFFF )
+      RefCount = pObject->RefCount;
+      if ( (RefCount & 0x3FFFFF) != 0 )
       {
-        v2->RefCount = v3 - 1;
-        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v2->vfptr);
+        pObject->RefCount = RefCount - 1;
+        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(pObject);
       }
     }
   }
-  v1->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_display::DisplayObjectContainer::`vftable;
-  v1->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_display::InteractiveObject::`vftable;
-  v4 = v1->pContextMenu.pObject;
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_display::DisplayObjectContainer::`vftable;
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_display::InteractiveObject::`vftable;
+  v4 = this->pContextMenu.pObject;
   if ( v4 )
   {
-    if ( (unsigned __int8)v4 & 1 )
+    if ( ((unsigned __int8)v4 & 1) != 0 )
     {
-      v1->pContextMenu.pObject = (Scaleform::GFx::AS3::Instances::fl::Object *)((char *)v4 - 1);
+      this->pContextMenu.pObject = (Scaleform::GFx::AS3::Instances::fl::Object *)((char *)v4 - 1);
     }
     else
     {
       v5 = v4->RefCount;
-      if ( v5 & 0x3FFFFF )
+      if ( (v5 & 0x3FFFFF) != 0 )
       {
         v4->RefCount = v5 - 1;
-        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v4->vfptr);
+        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(v4);
       }
     }
   }
-  Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::~DisplayObject((Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *)&v1->vfptr);
+  Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::~DisplayObject(this);
 }
 
 // File Line: 340
 // RVA: 0x799480
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::AS3Constructor(Scaleform::GFx::AS3::Instances::fl_display::Sprite *this, unsigned int argc, Scaleform::GFx::AS3::Value *argv)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::AS3Constructor(
+        Scaleform::GFx::AS3::Instances::fl_display::Sprite *this,
+        unsigned int argc,
+        Scaleform::GFx::AS3::Value *argv)
 {
   Scaleform::GFx::AS3::AvmSprite::CreateChildren((Scaleform::GFx::AS3::AvmSprite *)((char *)this->pDispObj.pObject
                                                                                   + 4
@@ -645,217 +659,202 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::AS3Construct
 
 // File Line: 350
 // RVA: 0x7F2E70
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::InitInstance(Scaleform::GFx::AS3::Instances::fl_display::Sprite *this, bool extCall)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::InitInstance(
+        Scaleform::GFx::AS3::Instances::fl_display::Sprite *this,
+        bool extCall)
 {
-  Scaleform::GFx::DisplayObjContainer **v2; // rbx
-
-  v2 = (Scaleform::GFx::DisplayObjContainer **)this;
   if ( !extCall )
   {
     Scaleform::GFx::AS3::Instances::fl_display::Sprite::CreateStageObject(this);
     Scaleform::GFx::AS3::MovieRoot::AddScriptableMovieClip(
-      (Scaleform::GFx::AS3::MovieRoot *)(*(Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl **)((char *)&v2[11]->vfptr + 4 * (unsigned __int8)v2[11]->AvmObjOffset))[2].__vecDelDtor,
-      v2[11]);
+      (Scaleform::GFx::AS3::MovieRoot *)(*(Scaleform::GFx::LogBase<Scaleform::GFx::DisplayObjectBase>Vtbl **)((char *)&this->pDispObj.pObject->vfptr + 4 * (unsigned __int8)this->pDispObj.pObject->AvmObjOffset))[2].__vecDelDtor,
+      (Scaleform::GFx::DisplayObjContainer *)this->pDispObj.pObject);
   }
-  if ( (*(unsigned __int8 (__fastcall **)(Scaleform::GFx::DisplayObjContainer **))&(*v2)->Flags)(v2) )
-    v2[11]->Flags |= 0x800u;
+  if ( ((unsigned __int8 (__fastcall *)(Scaleform::GFx::AS3::Instances::fl_display::Sprite *))this->vfptr[7].Finalize_GC)(this) )
+    this->pDispObj.pObject->Flags |= 0x800u;
 }
 
 // File Line: 381
 // RVA: 0x7BF210
-Scaleform::GFx::DisplayObject *__fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::CreateStageObject(Scaleform::GFx::AS3::Instances::fl_display::Sprite *this)
+Scaleform::GFx::DisplayObject *__fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::CreateStageObject(
+        Scaleform::GFx::AS3::Instances::fl_display::Sprite *this)
 {
-  Scaleform::GFx::AS3::Instances::fl_display::Sprite *v1; // rbx
-  Scaleform::GFx::AS3::ASVM *v2; // rcx
-  Scaleform::GFx::AS3::MovieRoot *v3; // rsi
-  Scaleform::GFx::MovieDefImpl *v4; // rax
+  Scaleform::GFx::AS3::ASVM *pVM; // rcx
+  Scaleform::GFx::AS3::MovieRoot *pMovieRoot; // rsi
+  Scaleform::GFx::MovieDefImpl *ResourceMovieDef; // rax
   Scaleform::GFx::MovieDefImpl *v5; // rbp
   Scaleform::GFx::MovieDefRootNode *i; // rdi
-  signed __int64 v7; // rax
-  Scaleform::GFx::CharacterCreateInfo *v8; // rax
-  Scaleform::GFx::AS3::VM *v9; // rax
-  Scaleform::GFx::ASSupport *v10; // rcx
-  __int64 v11; // rax
-  Scaleform::RefCountNTSImpl *v12; // rcx
-  Scaleform::GFx::DisplayObject *v13; // rdi
-  _QWORD *v14; // rdi
-  Scaleform::GFx::AS3::RefCountBaseGC<328> *v15; // rcx
-  unsigned int v16; // eax
-  Scaleform::GFx::AS3::Traits *v17; // rsi
-  __int64 v18; // rax
-  Scaleform::GFx::AS3::VMAppDomain *v19; // rax
-  Scaleform::GFx::CharacterCreateInfo pccinfo; // [rsp+30h] [rbp-48h]
-  Scaleform::GFx::CharacterCreateInfo result; // [rsp+48h] [rbp-30h]
-  Scaleform::GFx::ResourceId rid; // [rsp+80h] [rbp+8h]
+  __int64 v7; // rax
+  Scaleform::GFx::AS3::VM *v8; // rax
+  Scaleform::GFx::ASSupport *pObject; // rcx
+  __int64 v10; // rax
+  Scaleform::GFx::DisplayObject *v11; // rcx
+  Scaleform::GFx::DisplayObject *v12; // rdi
+  _QWORD *v13; // rdi
+  Scaleform::GFx::AS3::RefCountBaseGC<328> *v14; // rcx
+  unsigned int RefCount; // eax
+  Scaleform::GFx::AS3::Traits *v16; // rsi
+  __int64 v17; // rax
+  Scaleform::GFx::AS3::VMAppDomain *v18; // rax
+  Scaleform::GFx::CharacterCreateInfo pccinfo; // [rsp+30h] [rbp-48h] BYREF
+  Scaleform::GFx::CharacterCreateInfo result; // [rsp+48h] [rbp-30h] BYREF
+  Scaleform::GFx::ResourceId rid; // [rsp+80h] [rbp+8h] BYREF
 
-  v1 = this;
   if ( this->pDispObj.pObject )
     return this->pDispObj.pObject;
-  v2 = (Scaleform::GFx::AS3::ASVM *)this->pTraits.pObject->pVM;
-  v3 = v2->pMovieRoot;
-  v4 = Scaleform::GFx::AS3::ASVM::GetResourceMovieDef(v2, (Scaleform::GFx::AS3::Instances::fl::Object *)&v1->vfptr);
-  v5 = v4;
-  if ( !v4 )
-    return v1->pDispObj.pObject;
-  pccinfo.pResource = 0i64;
-  *(_OWORD *)&pccinfo.pCharDef = 0ui64;
-  Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::FindLibarySymbol(
-    (Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *)&v1->vfptr,
-    &pccinfo,
-    v4);
+  pVM = (Scaleform::GFx::AS3::ASVM *)this->pTraits.pObject->pVM;
+  pMovieRoot = pVM->pMovieRoot;
+  ResourceMovieDef = Scaleform::GFx::AS3::ASVM::GetResourceMovieDef(pVM, this);
+  v5 = ResourceMovieDef;
+  if ( !ResourceMovieDef )
+    return this->pDispObj.pObject;
+  memset(&pccinfo, 0, sizeof(pccinfo));
+  Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::FindLibarySymbol(this, &pccinfo, ResourceMovieDef);
   if ( !pccinfo.pCharDef )
   {
-    for ( i = v3->pMovieImpl->RootMovieDefNodes.Root.pNext; ; i = i->pNext )
+    for ( i = pMovieRoot->pMovieImpl->RootMovieDefNodes.Root.pNext; ; i = i->pNext )
     {
-      v7 = (signed __int64)(v3->pMovieImpl == (Scaleform::GFx::MovieImpl *)-112i64 ? 0i64 : &v3->pMovieImpl->MovieLevels.Data.Policy);
+      v7 = pMovieRoot->pMovieImpl == (Scaleform::GFx::MovieImpl *)-112i64
+         ? 0i64
+         : (__int64)&pMovieRoot->pMovieImpl->MovieLevels.Data.Policy;
       if ( i == (Scaleform::GFx::MovieDefRootNode *)v7 )
         break;
-      if ( Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::FindLibarySymbol(
-             (Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *)&v1->vfptr,
-             &pccinfo,
-             i->pDefImpl) )
-      {
+      if ( Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::FindLibarySymbol(this, &pccinfo, i->pDefImpl) )
         goto LABEL_14;
-      }
     }
     rid.Id = 65537;
-    v8 = Scaleform::GFx::MovieDefImpl::GetCharacterCreateInfo(v5, &result, (Scaleform::GFx::ResourceId)&rid);
-    pccinfo.pCharDef = v8->pCharDef;
-    pccinfo.pBindDefImpl = v8->pBindDefImpl;
-    pccinfo.pResource = v8->pResource;
-    v9 = v1->pTraits.pObject->pVM;
-    if ( v9->CallStack.Size <= 0 )
-      pccinfo.pBindDefImpl = v5;
+    pccinfo = *Scaleform::GFx::MovieDefImpl::GetCharacterCreateInfo(v5, &result, (Scaleform::GFx::ResourceId)&rid);
+    v8 = this->pTraits.pObject->pVM;
+    if ( v8->CallStack.Size )
+      pccinfo.pBindDefImpl = (Scaleform::GFx::MovieDefImpl *)v8->CallStack.Pages[(v8->CallStack.Size - 1) >> 6][((unsigned int)v8->CallStack.Size - 1) & 0x3F].pFile->File.pObject[1].vfptr;
     else
-      pccinfo.pBindDefImpl = (Scaleform::GFx::MovieDefImpl *)v9->CallStack.Pages[(v9->CallStack.Size - 1) >> 6][(LODWORD(v9->CallStack.Size) - 1) & 0x3F].pFile->File.pObject[1].vfptr;
+      pccinfo.pBindDefImpl = v5;
   }
 LABEL_14:
-  v10 = v3->pASSupport.pObject;
+  pObject = pMovieRoot->pASSupport.pObject;
   rid.Id = 0x40000;
-  v11 = ((__int64 (__fastcall *)(Scaleform::GFx::ASSupport *, Scaleform::GFx::MovieImpl *, Scaleform::GFx::CharacterCreateInfo *, _QWORD, Scaleform::GFx::ResourceId *, signed int))v10->vfptr[4].__vecDelDtor)(
-          v10,
-          v3->pMovieImpl,
+  v10 = ((__int64 (__fastcall *)(Scaleform::GFx::ASSupport *, Scaleform::GFx::MovieImpl *, Scaleform::GFx::CharacterCreateInfo *, _QWORD, Scaleform::GFx::ResourceId *, int))pObject->vfptr[4].__vecDelDtor)(
+          pObject,
+          pMovieRoot->pMovieImpl,
           &pccinfo,
           0i64,
           &rid,
           3);
-  v12 = (Scaleform::RefCountNTSImpl *)&v1->pDispObj.pObject->vfptr;
-  v13 = (Scaleform::GFx::DisplayObject *)v11;
+  v11 = this->pDispObj.pObject;
+  v12 = (Scaleform::GFx::DisplayObject *)v10;
+  if ( v11 )
+    Scaleform::RefCountNTSImpl::Release(v11);
+  this->pDispObj.pObject = v12;
   if ( v12 )
-    Scaleform::RefCountNTSImpl::Release(v12);
-  v1->pDispObj.pObject = v13;
-  if ( v13 )
-    v14 = (Scaleform::RefCountNTSImplCoreVtbl **)((char *)&v13->vfptr + 4 * (unsigned __int8)v13->AvmObjOffset);
+    v13 = (Scaleform::RefCountNTSImplCoreVtbl **)((char *)&v12->Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr
+                                                + 4 * (unsigned __int8)v12->AvmObjOffset);
   else
-    v14 = 0i64;
-  v14[2] = v1;
-  v15 = (Scaleform::GFx::AS3::RefCountBaseGC<328> *)v14[1];
-  if ( v15 )
+    v13 = 0i64;
+  v13[2] = this;
+  v14 = (Scaleform::GFx::AS3::RefCountBaseGC<328> *)v13[1];
+  if ( v14 )
   {
-    if ( (unsigned __int8)v15 & 1 )
+    if ( ((unsigned __int8)v14 & 1) != 0 )
     {
-      v14[1] = (char *)v15 - 1;
+      v13[1] = (char *)v14 - 1;
     }
     else
     {
-      v16 = v15->RefCount;
-      if ( v16 & 0x3FFFFF )
+      RefCount = v14->RefCount;
+      if ( (RefCount & 0x3FFFFF) != 0 )
       {
-        v15->RefCount = v16 - 1;
-        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(v15);
+        v14->RefCount = RefCount - 1;
+        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(v14);
       }
     }
-    v14[1] = 0i64;
+    v13[1] = 0i64;
   }
-  v17 = v1->pTraits.pObject;
-  v18 = ((__int64 (__fastcall *)(Scaleform::GFx::AS3::Traits *))v17->vfptr[2].~RefCountBaseGC<328>)(v17);
-  if ( v18 )
-    v19 = *(Scaleform::GFx::AS3::VMAppDomain **)(v18 + 48);
+  v16 = this->pTraits.pObject;
+  v17 = ((__int64 (__fastcall *)(Scaleform::GFx::AS3::Traits *))v16->vfptr[2].~RefCountBaseGC<328>)(v16);
+  if ( v17 )
+    v18 = *(Scaleform::GFx::AS3::VMAppDomain **)(v17 + 48);
   else
-    v19 = v17->pVM->SystemDomain.pObject;
+    v18 = v16->pVM->SystemDomain.pObject;
   if ( Scaleform::GFx::AS3::VMAppDomain::Enabled )
-    v14[5] = v19;
-  return v1->pDispObj.pObject;
+    v13[5] = v18;
+  return this->pDispObj.pObject;
 }
 
 // File Line: 481
 // RVA: 0x8000F0
-void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl_display::Sprite::MakeObject(Scaleform::GFx::AS3::InstanceTraits::fl_display::Sprite *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::InstanceTraits::Traits *t)
+void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl_display::Sprite::MakeObject(
+        Scaleform::GFx::AS3::InstanceTraits::fl_display::Sprite *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::InstanceTraits::fl_display::Sprite *t)
 {
-  Scaleform::GFx::AS3::Value *v3; // rbx
-  Scaleform::GFx::AS3::Object **v4; // rax
-  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_display::Sprite> resulta; // [rsp+48h] [rbp+20h]
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_display::Sprite> *Instance; // rax
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_display::Sprite> resulta; // [rsp+48h] [rbp+20h] BYREF
 
-  v3 = result;
-  v4 = (Scaleform::GFx::AS3::Object **)Scaleform::GFx::AS3::InstanceTraits::fl_display::Sprite::MakeInstance(
-                                         &resulta,
-                                         (Scaleform::GFx::AS3::InstanceTraits::fl_display::Sprite *)t);
-  Scaleform::GFx::AS3::Value::Pick(v3, *v4);
+  Instance = Scaleform::GFx::AS3::InstanceTraits::fl_display::Sprite::MakeInstance(&resulta, t);
+  Scaleform::GFx::AS3::Value::Pick(result, Instance->pV);
 }
 
 // File Line: 504
 // RVA: 0x74AB50
-Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl_display::Sprite::MakeClassTraits(Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result, Scaleform::GFx::AS3::VM *vm)
+Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl_display::Sprite::MakeClassTraits(
+        Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result,
+        Scaleform::GFx::AS3::VM *vm)
 {
-  Scaleform::GFx::AS3::VM *v2; // rbp
-  Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *v3; // rdi
-  Scaleform::MemoryHeap *v4; // rsi
+  Scaleform::MemoryHeap *MHeap; // rsi
   Scaleform::GFx::AS3::ClassTraits::Traits *v5; // rax
   Scaleform::GFx::AS3::ClassTraits::Traits *v6; // rbx
   Scaleform::GFx::AS3::InstanceTraits::CTraits *v7; // rax
   Scaleform::Pickable<Scaleform::GFx::AS3::InstanceTraits::Traits> v8; // rbx
   Scaleform::GFx::AS3::Class *v9; // rax
 
-  v2 = vm;
-  v3 = result;
-  v4 = vm->MHeap;
-  v5 = (Scaleform::GFx::AS3::ClassTraits::Traits *)v4->vfptr->Alloc(v4, 208ui64, 0i64);
+  MHeap = vm->MHeap;
+  v5 = (Scaleform::GFx::AS3::ClassTraits::Traits *)MHeap->vfptr->Alloc(MHeap, 208ui64, 0i64);
   v6 = v5;
   if ( v5 )
   {
-    Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl_display::SpriteCI);
+    Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, vm, &Scaleform::GFx::AS3::fl_display::SpriteCI);
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_events::EventDispatcher::`vftable;
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_display::DisplayObject::`vftable;
-    v6->TraitsType = 22;
+    v6->TraitsType = Traits_DisplayObject_Begin;
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_display::InteractiveObject::`vftable;
-    v6->TraitsType = 23;
+    v6->TraitsType = Traits_InteractiveObject;
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_display::DisplayObjectContainer::`vftable;
-    v6->TraitsType = 29;
+    v6->TraitsType = Traits_DisplayObjectContainer;
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_display::Sprite::`vftable;
-    v6->TraitsType = 30;
+    v6->TraitsType = Traits_Sprite;
   }
   else
   {
     v6 = 0i64;
   }
-  v3->pV = v6;
-  v7 = (Scaleform::GFx::AS3::InstanceTraits::CTraits *)v4->vfptr->Alloc(v4, 240ui64, 0i64);
-  v8.pV = (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v7->vfptr;
+  result->pV = v6;
+  v7 = (Scaleform::GFx::AS3::InstanceTraits::CTraits *)MHeap->vfptr->Alloc(MHeap, 240ui64, 0i64);
+  v8.pV = v7;
   if ( v7 )
   {
-    Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, v2, &Scaleform::GFx::AS3::fl_display::SpriteCI);
+    Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, vm, &Scaleform::GFx::AS3::fl_display::SpriteCI);
     v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
     v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_events::EventDispatcher::`vftable;
     v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_display::DisplayObject::`vftable;
-    v8.pV->TraitsType = 22;
+    v8.pV->TraitsType = Traits_DisplayObject_Begin;
     v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_display::InteractiveObject::`vftable;
-    v8.pV->TraitsType = 23;
+    v8.pV->TraitsType = Traits_InteractiveObject;
     v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_display::DisplayObjectContainer::`vftable;
-    v8.pV->TraitsType = 29;
+    v8.pV->TraitsType = Traits_DisplayObjectContainer;
     v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_display::Sprite::`vftable;
-    v8.pV->TraitsType = 30;
+    v8.pV->TraitsType = Traits_Sprite;
   }
   else
   {
     v8.pV = 0i64;
   }
-  Scaleform::GFx::AS3::ClassTraits::Traits::SetInstanceTraits(v3->pV, v8);
-  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))v4->vfptr->Alloc)(
-                                       v4,
+  Scaleform::GFx::AS3::ClassTraits::Traits::SetInstanceTraits(result->pV, v8);
+  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))MHeap->vfptr->Alloc)(
+                                       MHeap,
                                        72i64);
   if ( v9 )
-    Scaleform::GFx::AS3::Class::Class(v9, v3->pV);
-  return v3;
+    Scaleform::GFx::AS3::Class::Class(v9, result->pV);
+  return result;
 }
 

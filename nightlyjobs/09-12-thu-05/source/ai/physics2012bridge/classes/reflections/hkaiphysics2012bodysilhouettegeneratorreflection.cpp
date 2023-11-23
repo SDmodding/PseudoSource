@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkaiPhysics2012BodySilhouetteGeneratorClass__()
     0i64,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 60
@@ -28,23 +28,26 @@ hkClass *__fastcall hkaiPhysics2012BodySilhouetteGenerator::staticClass()
 
 // File Line: 67
 // RVA: 0xC2E3D0
-void __fastcall finishLoadedObjecthkaiPhysics2012BodySilhouetteGenerator(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiPhysics2012BodySilhouetteGenerator(
+        hkaiPhysics2012BodySilhouetteGenerator *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiPhysics2012BodySilhouetteGenerator::hkaiPhysics2012BodySilhouetteGenerator);
+  if ( p )
+    hkaiPhysics2012BodySilhouetteGenerator::hkaiPhysics2012BodySilhouetteGenerator(p, finishing);
 }
 
 // File Line: 73
 // RVA: 0xC2E3F0
-void __fastcall cleanupLoadedObjecthkaiPhysics2012BodySilhouetteGenerator(void *p)
+void __fastcall cleanupLoadedObjecthkaiPhysics2012BodySilhouetteGenerator(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 77
 // RVA: 0xC2E400
 hkBaseObjectVtbl *__fastcall getVtablehkaiPhysics2012BodySilhouetteGenerator()
 {
-  hkaiPhysics2012BodySilhouetteGenerator v1; // [rsp+20h] [rbp-C8h]
+  hkaiPhysics2012BodySilhouetteGenerator v1; // [rsp+20h] [rbp-C8h] BYREF
 
   hkaiPhysics2012BodySilhouetteGenerator::hkaiPhysics2012BodySilhouetteGenerator(&v1, 0);
   return v1.vfptr;
@@ -61,8 +64,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiPhysics2012BodySilhouetteGenerato
   hkaiPhysics2012BodySilhouetteGeneratorTypeInfo.m_typeName = "hkaiPhysics2012BodySilhouetteGenerator";
   hkaiPhysics2012BodySilhouetteGeneratorTypeInfo.m_vtable = result;
   hkaiPhysics2012BodySilhouetteGeneratorTypeInfo.m_scopedName = "!hkaiPhysics2012BodySilhouetteGenerator";
-  hkaiPhysics2012BodySilhouetteGeneratorTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiPhysics2012BodySilhouetteGenerator;
-  hkaiPhysics2012BodySilhouetteGeneratorTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiPhysics2012BodySilhouetteGenerator;
+  hkaiPhysics2012BodySilhouetteGeneratorTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiPhysics2012BodySilhouetteGenerator;
+  hkaiPhysics2012BodySilhouetteGeneratorTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiPhysics2012BodySilhouetteGenerator;
   return result;
 }
 

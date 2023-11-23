@@ -1,51 +1,54 @@
 // File Line: 21
 // RVA: 0x140CE0
-void __fastcall UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::~WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>(UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *this)
+void __fastcall UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::~WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>(
+        UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *this)
 {
-  this->vfptr = (AK::StreamMgr::IAkFileLocationResolverVtbl *)&UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::`vftable{for `AK::StreamMgr::IAkFileLocationResolver};
-  this->vfptr = (AK::StreamMgr::IAkLowLevelIOHookVtbl *)&UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::`vftable{for `AK::StreamMgr::IAkIOHookDeferred};
-  this->vfptr = (UFG::WwiseFileLocationBaseVtbl *)&UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::`vftable{for `UFG::WwiseFileLocationBase};
-  UFG::WwiseDefaultIOHookDeferred::~WwiseDefaultIOHookDeferred((UFG::WwiseDefaultIOHookDeferred *)&this->vfptr);
+  this->UFG::WwiseDefaultIOHookDeferred::UFG::WwiseDefaultIOHookDeferredBase::AK::StreamMgr::IAkFileLocationResolver::vfptr = (AK::StreamMgr::IAkFileLocationResolverVtbl *)&UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::`vftable{for `AK::StreamMgr::IAkFileLocationResolver};
+  this->UFG::WwiseDefaultIOHookDeferred::UFG::WwiseDefaultIOHookDeferredBase::AK::StreamMgr::IAkIOHookDeferred::AK::StreamMgr::IAkLowLevelIOHook::vfptr = (AK::StreamMgr::IAkLowLevelIOHookVtbl *)&UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::`vftable{for `AK::StreamMgr::IAkIOHookDeferred};
+  this->UFG::WwiseDefaultIOHookDeferred::UFG::WwiseDefaultIOHookDeferredBase::UFG::WwiseFileLocationBase::vfptr = (UFG::WwiseFileLocationBaseVtbl *)&UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::`vftable{for `UFG::WwiseFileLocationBase};
+  UFG::WwiseDefaultIOHookDeferred::~WwiseDefaultIOHookDeferred(this);
 }
 
 // File Line: 43
 // RVA: 0x149B70
-signed __int64 __fastcall UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::Open(UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *this, const wchar_t *in_pszFileName, AkOpenMode in_eOpenMode, AkFileSystemFlags *in_pFlags, bool *io_bSyncOpen, AkFileDesc *out_fileDesc)
+signed __int64 __fastcall UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::Open(
+        UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *this,
+        const wchar_t *in_pszFileName,
+        AkOpenMode in_eOpenMode,
+        AkFileSystemFlags *in_pFlags,
+        bool *io_bSyncOpen,
+        AkFileDesc *out_fileDesc)
 {
-  AkFileSystemFlags *v6; // rdi
-  const wchar_t *v7; // rbp
-  UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *v8; // rsi
-  UFG::TidoFilePackage *v9; // rbx
-  unsigned int v10; // eax
+  UFG::TidoFilePackage *m_pFirst; // rbx
+  unsigned int SoundBankID; // eax
 
-  v6 = in_pFlags;
-  v7 = in_pszFileName;
-  v8 = this;
   if ( in_eOpenMode )
     return 2i64;
   if ( !in_pFlags )
     return 2i64;
-  if ( *(_QWORD *)&in_pFlags->uCompanyID )
+  if ( in_pFlags->uCompanyID )
     return 2i64;
-  v9 = this->m_packages.m_pFirst;
-  if ( !v9 )
+  if ( in_pFlags->uCodecID )
+    return 2i64;
+  m_pFirst = this->m_packages.m_pFirst;
+  if ( !m_pFirst )
     return 2i64;
   while ( 1 )
   {
-    v10 = UFG::AudioFilePackageLUT::GetSoundBankID(&v9->lut, v7);
-    if ( v10 != -1
+    SoundBankID = UFG::AudioFilePackageLUT::GetSoundBankID(&m_pFirst->lut, in_pszFileName);
+    if ( SoundBankID != -1
       && (unsigned int)UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::FindPackagedFile(
-                         v8,
-                         v9,
-                         v10,
-                         v6,
+                         this,
+                         m_pFirst,
+                         SoundBankID,
+                         in_pFlags,
                          out_fileDesc,
-                         0) == 1 )
+                         eFindPackagedFile_Open) == 1 )
     {
       break;
     }
-    v9 = v9->pNextItem;
-    if ( !v9 )
+    m_pFirst = m_pFirst->pNextItem;
+    if ( !m_pFirst )
       return 2i64;
   }
   *io_bSyncOpen = 1;
@@ -54,33 +57,33 @@ signed __int64 __fastcall UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHoo
 
 // File Line: 91
 // RVA: 0x1499B0
-signed __int64 __fastcall UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::Open(UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *this, unsigned int in_fileID, AkOpenMode in_eOpenMode, AkFileSystemFlags *in_pFlags, bool *io_bSyncOpen, AkFileDesc *out_fileDesc)
+__int64 __fastcall UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::Open(
+        UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *this,
+        unsigned int in_fileID,
+        AkOpenMode in_eOpenMode,
+        AkFileSystemFlags *in_pFlags,
+        bool *io_bSyncOpen,
+        AkFileDesc *out_fileDesc)
 {
-  AkFileSystemFlags *v6; // r15
-  unsigned int v7; // esi
-  UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *v8; // r13
   UFG::TidoFilePackage *in_pPackage; // rbx
-  unsigned int v10; // er14
-  UFG::AudioFilePackageLUT::FileLUT *v11; // r8
+  unsigned int uCodecID; // r14d
+  UFG::AudioFilePackageLUT::FileLUT *m_pSoundBanks; // r8
   UFG::AudioFilePackageLUT::FileLUT *v12; // rbp
-  UFG::AudioFilePackageLUT::FileLUT *v13; // rax
-  signed __int64 v14; // r10
-  int v15; // er8
-  int v16; // er9
+  UFG::AudioFilePackageLUT::FileLUT *m_pStmFiles; // rax
+  UFG::AudioFilePackageLUT::FileLUT *v14; // r10
+  int v15; // r8d
+  int v16; // r9d
   int v17; // eax
-  unsigned int v18; // ecx
-  signed int v19; // edi
+  unsigned int m_uNumFiles; // ecx
+  WWiseOSFileWrapper::QUEUE_CLASS m_priority; // edi
   UFG::qBaseTreeRB *v20; // rax
-  signed __int64 v21; // rcx
+  int *p_mCount; // rcx
   __int64 v22; // rax
   unsigned int v23; // edx
   unsigned int v24; // eax
-  signed __int64 result; // rax
+  __int64 result; // rax
   char *v26; // rax
 
-  v6 = in_pFlags;
-  v7 = in_fileID;
-  v8 = this;
   if ( in_eOpenMode )
     return 2i64;
   if ( !in_pFlags )
@@ -92,56 +95,60 @@ signed __int64 __fastcall UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHoo
     return 2i64;
   while ( 2 )
   {
-    v10 = v6->uCodecID;
-    if ( !v10 )
+    uCodecID = in_pFlags->uCodecID;
+    if ( !uCodecID )
     {
-      v11 = in_pPackage->lut.m_pSoundBanks;
-      if ( v11 )
+      m_pSoundBanks = in_pPackage->lut.m_pSoundBanks;
+      if ( m_pSoundBanks )
       {
-        if ( v11->m_uNumFiles > 0 )
+        if ( m_pSoundBanks->m_uNumFiles )
         {
-          v12 = UFG::AudioFilePackageLUT::LookupFile(&in_pPackage->lut, v7, v11, v6->bIsLanguageSpecific);
+          v12 = UFG::AudioFilePackageLUT::LookupFile(
+                  &in_pPackage->lut,
+                  in_fileID,
+                  m_pSoundBanks,
+                  in_pFlags->bIsLanguageSpecific);
           goto LABEL_18;
         }
       }
     }
-    v13 = in_pPackage->lut.m_pStmFiles;
-    if ( !v13 || v13->m_uNumFiles <= 0 )
+    m_pStmFiles = in_pPackage->lut.m_pStmFiles;
+    if ( !m_pStmFiles || !m_pStmFiles->m_uNumFiles )
     {
 LABEL_17:
       v12 = 0i64;
       goto LABEL_18;
     }
-    v14 = (signed __int64)&v13[1];
+    v14 = m_pStmFiles + 1;
     v15 = 0;
-    v16 = v13->m_uNumFiles - 1;
+    v16 = m_pStmFiles->m_uNumFiles - 1;
     while ( 1 )
     {
       v17 = v15 + (v16 - v15) / 2;
-      v18 = *(_DWORD *)(v14 + 24i64 * v17);
-      if ( v18 <= v7 )
+      m_uNumFiles = v14[6 * v17].m_uNumFiles;
+      if ( m_uNumFiles <= in_fileID )
         break;
       v16 = v17 - 1;
 LABEL_16:
       if ( v15 > v16 )
         goto LABEL_17;
     }
-    if ( v18 < v7 )
+    if ( m_uNumFiles < in_fileID )
     {
       v15 = v17 + 1;
       goto LABEL_16;
     }
-    v12 = (UFG::AudioFilePackageLUT::FileLUT *)(v14 + 24i64 * v17);
+    v12 = &v14[6 * v17];
 LABEL_18:
-    v19 = v8->m_priority;
-    if ( !v10 )
+    m_priority = this->m_priority;
+    if ( !uCodecID )
     {
-      if ( v7
-        && (v20 = UFG::qBaseTreeRB::Get(&UFG::SoundBankManager::sm_soundBank_Tree.mTree, v7)) != 0i64
-        && (v21 = (signed __int64)&v20[-1].mCount, v20 != (UFG::qBaseTreeRB *)8) )
+      if ( in_fileID
+        && (v20 = UFG::qBaseTreeRB::Get(&UFG::SoundBankManager::sm_soundBank_Tree.mTree, in_fileID)) != 0i64
+        && (p_mCount = &v20[-1].mCount, v20 != (UFG::qBaseTreeRB *)8) )
       {
-        v22 = *(_QWORD *)(v21 + 120);
-        v23 = *(_DWORD *)(v21 + 80);
+        v22 = *((_QWORD *)p_mCount + 15);
+        v23 = p_mCount[20];
         if ( v22 )
         {
           v24 = *(_DWORD *)(v22 + 96);
@@ -149,11 +156,11 @@ LABEL_18:
             v23 = v24;
         }
         if ( v23 >= 8 )
-          v19 = 0;
+          m_priority = STREAM_AUDIO_HIGH_PRIORITY;
       }
       else
       {
-        v19 = 1;
+        m_priority = STREAM_AUDIO_LOW_PRIORITY;
       }
     }
     if ( !v12 )
@@ -166,17 +173,17 @@ LABEL_18:
     break;
   }
   v26 = UFG::StreamFileWrapper::OnPackedAudioFileOpen(
-          v7,
+          in_fileID,
           in_pPackage->m_hFile,
           *(_QWORD *)&v12[2].m_uNumFiles,
           v12[4].m_uNumFiles,
           in_pPackage);
-  out_fileDesc->deviceID = v8->m_WwiseDevice;
+  out_fileDesc->deviceID = this->m_WwiseDevice;
   out_fileDesc->hFile = v26;
   out_fileDesc->iFileSize = *(_QWORD *)&v12[2].m_uNumFiles;
   result = 1i64;
   out_fileDesc->uSector = v12[4].m_uNumFiles;
-  out_fileDesc->pCustomParam = (void *)v19;
+  out_fileDesc->pCustomParam = (void *)m_priority;
   out_fileDesc->uCustomParamSize = v12[1].m_uNumFiles;
   *io_bSyncOpen = 1;
   return result;
@@ -184,63 +191,64 @@ LABEL_18:
 
 // File Line: 130
 // RVA: 0x143CF0
-AKRESULT __fastcall UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::Close(UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *this, AkFileDesc *in_fileDesc)
+AKRESULT __fastcall UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::Close(
+        UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *this,
+        AkFileDesc *in_fileDesc)
 {
   if ( !in_fileDesc->uCustomParamSize )
-    return UFG::WwiseDefaultIOHookDeferred::Close((UFG::WwiseDefaultIOHookDeferred *)&this->vfptr, in_fileDesc);
+    return UFG::WwiseDefaultIOHookDeferred::Close(this, in_fileDesc);
   UFG::StreamFileWrapper::OnPackedAudioFileClose(in_fileDesc->hFile);
   return 1;
 }
 
 // File Line: 150
 // RVA: 0x1454D0
-void *(__fastcall *__fastcall UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::FindFileSize(UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *this, unsigned int in_fileID, AkFileSystemFlags *in_pFlags))(UFG::AudioFilePackageLUT *this, unsigned int)
+void *(__fastcall *__fastcall UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::FindFileSize(
+        UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *this,
+        unsigned int in_fileID,
+        AkFileSystemFlags *in_pFlags))(UFG::AudioFilePackageLUT *this, unsigned int)
 {
-  UFG::TidoFilePackage *v3; // rbx
-  AkFileSystemFlags *v4; // rbp
-  unsigned int v5; // edi
-  unsigned int v6; // er11
-  UFG::AudioFilePackageLUT::FileLUT *v7; // rax
-  int v8; // er8
-  signed __int64 v9; // r10
-  int v10; // er9
+  UFG::TidoFilePackage *m_pFirst; // rbx
+  unsigned int uCodecID; // r11d
+  UFG::AudioFilePackageLUT::FileLUT *m_pSoundBanks; // rax
+  int v8; // r8d
+  UFG::AudioFilePackageLUT::FileLUT *v9; // r10
+  int v10; // r9d
   int v11; // eax
-  unsigned int v12; // ecx
+  unsigned int m_uNumFiles; // ecx
   UFG::AudioFilePackageLUT::AkFileEntry *v13; // rsi
-  UFG::AudioFilePackageLUT::FileLUT *v15; // rax
-  int v16; // er8
-  signed __int64 v17; // r10
-  int v18; // er9
+  UFG::AudioFilePackageLUT::FileLUT *m_pStmFiles; // rax
+  int v16; // r8d
+  UFG::AudioFilePackageLUT::FileLUT *v17; // r10
+  int v18; // r9d
   int v19; // eax
   unsigned int v20; // ecx
 
-  v3 = this->m_packages.m_pFirst;
-  v4 = in_pFlags;
-  v5 = in_fileID;
-  if ( !v3 )
+  m_pFirst = this->m_packages.m_pFirst;
+  if ( !m_pFirst )
     return 0i64;
   while ( 2 )
   {
-    v6 = v4->uCodecID;
-    if ( !v6 )
+    uCodecID = in_pFlags->uCodecID;
+    if ( !uCodecID )
     {
-      v7 = v3->lut.m_pSoundBanks;
-      if ( v7 )
+      m_pSoundBanks = m_pFirst->lut.m_pSoundBanks;
+      if ( m_pSoundBanks )
       {
-        if ( v7->m_uNumFiles > 0 )
+        if ( m_pSoundBanks->m_uNumFiles )
         {
           v8 = 0;
-          v9 = (signed __int64)&v7[1];
-          v10 = v7->m_uNumFiles - 1;
+          v9 = m_pSoundBanks + 1;
+          v10 = m_pSoundBanks->m_uNumFiles - 1;
           while ( 1 )
           {
             v11 = v8 + (v10 - v8) / 2;
-            v12 = *(_DWORD *)(v9 + 24i64 * v11);
-            if ( v12 <= v5 )
+            m_uNumFiles = v9[6 * v11].m_uNumFiles;
+            if ( m_uNumFiles <= in_fileID )
             {
-              if ( v12 >= v5 )
+              if ( m_uNumFiles >= in_fileID )
               {
-                v13 = (UFG::AudioFilePackageLUT::AkFileEntry *)(v9 + 24i64 * v11);
+                v13 = (UFG::AudioFilePackageLUT::AkFileEntry *)&v9[6 * v11];
                 goto LABEL_12;
               }
               v8 = v11 + 1;
@@ -255,43 +263,43 @@ void *(__fastcall *__fastcall UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultI
         }
       }
     }
-    v15 = v3->lut.m_pStmFiles;
-    if ( !v15 || !v15->m_uNumFiles )
+    m_pStmFiles = m_pFirst->lut.m_pStmFiles;
+    if ( !m_pStmFiles || !m_pStmFiles->m_uNumFiles )
     {
 LABEL_11:
       v13 = 0i64;
       goto LABEL_12;
     }
     v16 = 0;
-    v17 = (signed __int64)&v15[1];
-    v18 = v15->m_uNumFiles - 1;
+    v17 = m_pStmFiles + 1;
+    v18 = m_pStmFiles->m_uNumFiles - 1;
     while ( 1 )
     {
       v19 = v16 + (v18 - v16) / 2;
-      v20 = *(_DWORD *)(v17 + 24i64 * v19);
-      if ( v20 <= v5 )
+      v20 = v17[6 * v19].m_uNumFiles;
+      if ( v20 <= in_fileID )
         break;
       v18 = v19 - 1;
-LABEL_27:
+LABEL_26:
       if ( v16 > v18 )
         goto LABEL_11;
     }
-    if ( v20 < v5 )
+    if ( v20 < in_fileID )
     {
       v16 = v19 + 1;
-      goto LABEL_27;
+      goto LABEL_26;
     }
-    v13 = (UFG::AudioFilePackageLUT::AkFileEntry *)(v17 + 24i64 * v19);
+    v13 = (UFG::AudioFilePackageLUT::AkFileEntry *)&v17[6 * v19];
 LABEL_12:
-    if ( !v6 )
+    if ( !uCodecID )
     {
-      if ( v5 )
-        UFG::qBaseTreeRB::Get(&UFG::SoundBankManager::sm_soundBank_Tree.mTree, v5);
+      if ( in_fileID )
+        UFG::qBaseTreeRB::Get(&UFG::SoundBankManager::sm_soundBank_Tree.mTree, in_fileID);
     }
     if ( !v13 )
     {
-      v3 = v3->pNextItem;
-      if ( !v3 )
+      m_pFirst = m_pFirst->pNextItem;
+      if ( !m_pFirst )
         return 0i64;
       continue;
     }
@@ -301,37 +309,34 @@ LABEL_12:
 
 // File Line: 181
 // RVA: 0x145620
-__int64 __fastcall UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::FindFileSize(UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *this, const wchar_t *in_pszFileName, AkFileSystemFlags *in_pFlags)
+__int64 __fastcall UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::FindFileSize(
+        UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *this,
+        const wchar_t *in_pszFileName,
+        AkFileSystemFlags *in_pFlags)
 {
-  UFG::TidoFilePackage *v3; // rbx
-  AkFileSystemFlags *v4; // rbp
-  const wchar_t *v5; // rdi
-  UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *v6; // rsi
-  unsigned int v7; // eax
-  AkFileDesc out_fileDesc; // [rsp+30h] [rbp-38h]
+  UFG::TidoFilePackage *m_pFirst; // rbx
+  unsigned int SoundBankID; // eax
+  AkFileDesc out_fileDesc; // [rsp+30h] [rbp-38h] BYREF
 
-  v3 = this->m_packages.m_pFirst;
-  v4 = in_pFlags;
-  v5 = in_pszFileName;
-  v6 = this;
-  if ( !v3 )
+  m_pFirst = this->m_packages.m_pFirst;
+  if ( !m_pFirst )
     return 0i64;
   while ( 1 )
   {
-    v7 = UFG::AudioFilePackageLUT::GetSoundBankID(&v3->lut, v5);
-    if ( v7 != -1
+    SoundBankID = UFG::AudioFilePackageLUT::GetSoundBankID(&m_pFirst->lut, in_pszFileName);
+    if ( SoundBankID != -1
       && (unsigned int)UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::FindPackagedFile(
-                         v6,
-                         v3,
-                         v7,
-                         v4,
+                         this,
+                         m_pFirst,
+                         SoundBankID,
+                         in_pFlags,
                          &out_fileDesc,
                          eFindPackagedFile_GetInfo) == 1 )
     {
       break;
     }
-    v3 = v3->pNextItem;
-    if ( !v3 )
+    m_pFirst = m_pFirst->pNextItem;
+    if ( !m_pFirst )
       return 0i64;
   }
   return out_fileDesc.iFileSize;
@@ -339,340 +344,342 @@ __int64 __fastcall UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferr
 
 // File Line: 214
 // RVA: 0x145C20
-__int64 __fastcall UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::GetBlockSize(UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *this, AkFileDesc *in_fileDesc)
+unsigned int __fastcall UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::GetBlockSize(
+        UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *this,
+        AkFileDesc *in_fileDesc)
 {
-  __int64 result; // rax
+  unsigned int result; // eax
 
   result = in_fileDesc->uCustomParamSize;
-  JUMPOUT(result, 0, UFG::WwiseDefaultIOHookDeferred::GetBlockSize);
+  if ( !result )
+    return UFG::WwiseDefaultIOHookDeferred::GetBlockSize(this, in_fileDesc);
   return result;
 }
 
 // File Line: 261
 // RVA: 0x1459B0
-signed __int64 __fastcall UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::FindPackagedFile(UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *this, UFG::TidoFilePackage *in_pPackage, unsigned int in_fileID, AkFileSystemFlags *in_pFlags, AkFileDesc *out_fileDesc, UFG::eFindPackagedFile_Mode mode)
+signed __int64 __fastcall UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::FindPackagedFile(
+        UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *this,
+        UFG::TidoFilePackage *in_pPackage,
+        unsigned int in_fileID,
+        AkFileSystemFlags *in_pFlags,
+        AkFileDesc *out_fileDesc,
+        UFG::eFindPackagedFile_Mode mode)
 {
-  unsigned int v6; // er14
+  unsigned int uCodecID; // r14d
   char *v7; // rbp
-  UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *v8; // r15
-  unsigned int v9; // esi
-  UFG::TidoFilePackage *v10; // r13
-  UFG::AudioFilePackageLUT *v11; // rcx
-  UFG::AudioFilePackageLUT::FileLUT *v12; // r8
-  UFG::AudioFilePackageLUT::FileLUT *v13; // rdi
-  UFG::AudioFilePackageLUT::FileLUT *v14; // r8
-  signed int v15; // ebx
-  UFG::qBaseTreeRB *v16; // rax
-  signed __int64 v17; // rcx
-  __int64 v18; // rax
-  unsigned int v19; // edx
-  unsigned int v20; // eax
+  UFG::AudioFilePackageLUT::FileLUT *m_pSoundBanks; // r8
+  UFG::AudioFilePackageLUT::FileLUT *v12; // rdi
+  WWiseOSFileWrapper::QUEUE_CLASS m_priority; // ebx
+  UFG::qBaseTreeRB *v14; // rax
+  int *p_mCount; // rcx
+  __int64 v16; // rax
+  unsigned int v17; // edx
+  unsigned int v18; // eax
   signed __int64 result; // rax
 
-  v6 = in_pFlags->uCodecID;
+  uCodecID = in_pFlags->uCodecID;
   v7 = 0i64;
-  v8 = this;
-  v9 = in_fileID;
-  v10 = in_pPackage;
-  v11 = &in_pPackage->lut;
-  if ( v6 || (v12 = in_pPackage->lut.m_pSoundBanks) == 0i64 || v12->m_uNumFiles <= 0 )
+  if ( !uCodecID && (m_pSoundBanks = in_pPackage->lut.m_pSoundBanks) != 0i64 && m_pSoundBanks->m_uNumFiles
+    || (m_pSoundBanks = in_pPackage->lut.m_pStmFiles) != 0i64 && m_pSoundBanks->m_uNumFiles )
   {
-    v14 = in_pPackage->lut.m_pStmFiles;
-    if ( v14 && v14->m_uNumFiles > 0 )
-      v13 = UFG::AudioFilePackageLUT::LookupFile(v11, v9, v14, in_pFlags->bIsLanguageSpecific);
-    else
-      v13 = 0i64;
+    v12 = UFG::AudioFilePackageLUT::LookupFile(
+            &in_pPackage->lut,
+            in_fileID,
+            m_pSoundBanks,
+            in_pFlags->bIsLanguageSpecific);
   }
   else
   {
-    v13 = UFG::AudioFilePackageLUT::LookupFile(v11, v9, v12, in_pFlags->bIsLanguageSpecific);
+    v12 = 0i64;
   }
-  v15 = v8->m_priority;
-  if ( !v6 )
+  m_priority = this->m_priority;
+  if ( !uCodecID )
   {
-    if ( v9
-      && (v16 = UFG::qBaseTreeRB::Get(&UFG::SoundBankManager::sm_soundBank_Tree.mTree, v9)) != 0i64
-      && (v17 = (signed __int64)&v16[-1].mCount, v16 != (UFG::qBaseTreeRB *)8) )
+    if ( in_fileID
+      && (v14 = UFG::qBaseTreeRB::Get(&UFG::SoundBankManager::sm_soundBank_Tree.mTree, in_fileID)) != 0i64
+      && (p_mCount = &v14[-1].mCount, v14 != (UFG::qBaseTreeRB *)8) )
     {
-      v18 = *(_QWORD *)(v17 + 120);
-      v19 = *(_DWORD *)(v17 + 80);
-      if ( v18 )
+      v16 = *((_QWORD *)p_mCount + 15);
+      v17 = p_mCount[20];
+      if ( v16 )
       {
-        v20 = *(_DWORD *)(v18 + 96);
-        if ( v20 > v19 )
-          v19 = v20;
+        v18 = *(_DWORD *)(v16 + 96);
+        if ( v18 > v17 )
+          v17 = v18;
       }
-      if ( v19 >= 8 )
-        v15 = 0;
+      if ( v17 >= 8 )
+        m_priority = STREAM_AUDIO_HIGH_PRIORITY;
     }
     else
     {
-      v15 = 1;
+      m_priority = STREAM_AUDIO_LOW_PRIORITY;
     }
   }
-  if ( !v13 )
+  if ( !v12 )
     return 66i64;
   if ( mode == eFindPackagedFile_Open )
     v7 = UFG::StreamFileWrapper::OnPackedAudioFileOpen(
-           v9,
-           v10->m_hFile,
-           *(_QWORD *)&v13[2].m_uNumFiles,
-           v13[4].m_uNumFiles,
-           v10);
+           in_fileID,
+           in_pPackage->m_hFile,
+           *(_QWORD *)&v12[2].m_uNumFiles,
+           v12[4].m_uNumFiles,
+           in_pPackage);
   result = 1i64;
-  out_fileDesc->deviceID = v8->m_WwiseDevice;
+  out_fileDesc->deviceID = this->m_WwiseDevice;
   out_fileDesc->hFile = v7;
-  out_fileDesc->iFileSize = *(_QWORD *)&v13[2].m_uNumFiles;
-  out_fileDesc->uSector = v13[4].m_uNumFiles;
-  out_fileDesc->pCustomParam = (void *)v15;
-  out_fileDesc->uCustomParamSize = v13[1].m_uNumFiles;
+  out_fileDesc->iFileSize = *(_QWORD *)&v12[2].m_uNumFiles;
+  out_fileDesc->uSector = v12[4].m_uNumFiles;
+  out_fileDesc->pCustomParam = (void *)m_priority;
+  out_fileDesc->uCustomParamSize = v12[1].m_uNumFiles;
   return result;
 }
 
 // File Line: 312
 // RVA: 0x148730
-__int64 __fastcall UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::LoadFilePackage(UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *this, const wchar_t *in_pszFilePackageName, unsigned int *out_uPackageID, UFG::WwiseFilePackageType filePackageType)
+__int64 __fastcall UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::LoadFilePackage(
+        UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *this,
+        const wchar_t *in_pszFilePackageName,
+        unsigned int *out_uPackageID,
+        UFG::WwiseFilePackageType filePackageType)
 {
-  const wchar_t *v4; // rsi
-  UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *v5; // rdi
-  char v6; // al
-  AKRESULT v7; // ebx
-  unsigned int v8; // er8
-  unsigned __int64 v9; // rax
-  void *v10; // rsp
-  char *v11; // r14
-  unsigned int *v12; // r12
-  int v13; // eax
-  unsigned int v14; // ebx
-  unsigned int v15; // eax
-  UFG::TidoFilePackage *v16; // rsi
-  char *v17; // r13
-  unsigned int v18; // er15
-  unsigned int v19; // ebx
-  unsigned int v20; // er8
-  UFG::TidoFilePackage *v21; // rax
-  char v23; // [rsp+40h] [rbp-10h]
-  UFG::BIGFileSize v24; // [rsp+50h] [rbp+0h]
-  UFG::BIGFileSize fileSize; // [rsp+60h] [rbp+10h]
-  AkFileDesc __formal; // [rsp+70h] [rbp+20h]
-  UFG::WwiseDefaultIOHookDeferred *v27; // [rsp+98h] [rbp+48h]
-  char *out_pHeaderBuffer; // [rsp+A0h] [rbp+50h]
-  AkFileSystemFlags in_pFlags; // [rsp+A8h] [rbp+58h]
-  __int64 v30; // [rsp+C8h] [rbp+78h]
-  UFG::qString out_FullFilePath; // [rsp+D0h] [rbp+80h]
-  bool io_bSyncOpen; // [rsp+150h] [rbp+100h]
-  unsigned int *v33; // [rsp+160h] [rbp+110h]
-  char v34; // [rsp+168h] [rbp+118h]
+  AKRESULT v6; // ebx
+  unsigned int m_blockSize; // r8d
+  unsigned __int64 v8; // rax
+  void *v9; // rsp
+  char *v10; // r14
+  unsigned int *v11; // r12
+  int v12; // eax
+  unsigned int v13; // ebx
+  unsigned int BlockSize; // eax
+  UFG::TidoFilePackage *v15; // rsi
+  char *v16; // r13
+  unsigned int v17; // r15d
+  unsigned int v18; // ebx
+  unsigned int v19; // r8d
+  UFG::TidoFilePackage *m_pFirst; // rax
+  char v22; // [rsp+40h] [rbp-10h] BYREF
+  UFG::BIGFileSize v23; // [rsp+50h] [rbp+0h] BYREF
+  UFG::BIGFileSize fileSize; // [rsp+60h] [rbp+10h] BYREF
+  AkFileDesc __formal; // [rsp+70h] [rbp+20h] BYREF
+  UFG::WwiseDefaultIOHookDeferred *v26; // [rsp+98h] [rbp+48h]
+  char *out_pHeaderBuffer; // [rsp+A0h] [rbp+50h] BYREF
+  AkFileSystemFlags in_pFlags; // [rsp+A8h] [rbp+58h] BYREF
+  __int64 v29; // [rsp+C8h] [rbp+78h]
+  UFG::qString out_FullFilePath; // [rsp+D0h] [rbp+80h] BYREF
+  bool io_bSyncOpen; // [rsp+150h] [rbp+100h] BYREF
+  unsigned int *v32; // [rsp+160h] [rbp+110h]
+  bool v33; // [rsp+168h] [rbp+118h] BYREF
 
-  v33 = out_uPackageID;
-  v30 = -2i64;
-  v4 = in_pszFilePackageName;
-  v5 = this;
+  v32 = out_uPackageID;
+  v29 = -2i64;
   in_pFlags.uCacheID = -1;
   *(_QWORD *)&in_pFlags.uCompanyID = 0i64;
   in_pFlags.bIsLanguageSpecific = 0;
-  v6 = 0;
-  if ( filePackageType == 1 )
-    v6 = 1;
-  v34 = v6;
+  v33 = filePackageType == eWwiseFilePackageType_DLC;
   in_pFlags.uCustomParamSize = 1;
-  in_pFlags.pCustomParam = &v34;
+  in_pFlags.pCustomParam = &v33;
   UFG::qString::qString(&out_FullFilePath);
-  v7 = (unsigned int)UFG::WwiseFileLocationBase::BuildFilePath(
-                       (UFG::WwiseFileLocationBase *)&v5->vfptr,
-                       v4,
+  v6 = (unsigned int)UFG::WwiseFileLocationBase::BuildFilePath(
+                       &this->UFG::WwiseFileLocationBase,
+                       in_pszFilePackageName,
                        &in_pFlags,
                        &out_FullFilePath);
-  if ( v7 == 1 )
+  if ( v6 == AK_Success )
   {
     io_bSyncOpen = 1;
-    v7 = (unsigned int)UFG::WwiseDefaultIOHookDeferred::Open(
-                         (UFG::WwiseDefaultIOHookDeferred *)&v5->vfptr,
-                         v4,
-                         0,
+    v6 = (unsigned int)UFG::WwiseDefaultIOHookDeferred::Open(
+                         this,
+                         in_pszFilePackageName,
+                         AK_OpenModeRead,
                          &in_pFlags,
                          &io_bSyncOpen,
                          &__formal);
-    if ( v7 != 1 )
+    if ( v6 != AK_Success )
     {
-      UFG::WwiseDefaultIOHookDeferred::Close((UFG::WwiseDefaultIOHookDeferred *)&v5->vfptr, &__formal.hFile);
-      goto LABEL_30;
+      UFG::WwiseDefaultIOHookDeferred::Close(this, &__formal.hFile);
+      goto LABEL_28;
     }
-    v8 = v5->m_blockSize;
-    if ( 8ui64 % v5->m_blockSize )
+    m_blockSize = this->m_blockSize;
+    if ( 8ui64 % m_blockSize )
     {
-      v9 = 2 * v8 + 15i64;
-      if ( v9 <= 2 * v8 )
-        v9 = 0xFFFFFFFFFFFFFF0i64;
-      v10 = alloca(v9);
-      v11 = (char *)&v24 + v8 - v24.load_offset % v8;
+      v8 = 2 * m_blockSize + 15i64;
+      if ( v8 <= 2 * m_blockSize )
+        v8 = 0xFFFFFFFFFFFFFF0i64;
+      v9 = alloca(v8 & 0xFFFFFFFFFFFFFFF0ui64);
+      v10 = (char *)&v23 + m_blockSize - v23.load_offset % m_blockSize;
     }
     else
     {
-      v11 = &v23;
-      v8 = 8;
+      v10 = &v22;
+      m_blockSize = 8;
     }
     fileSize.load_offset = 0;
-    fileSize.compressed_size = v8;
-    fileSize.uncompressed_size = v8;
+    fileSize.compressed_size = m_blockSize;
+    fileSize.uncompressed_size = m_blockSize;
     fileSize.compressed_extra = 0;
-    *(_QWORD *)&v24.load_offset = UFG::StreamFileWrapper::Read(
+    *(_QWORD *)&v23.load_offset = UFG::StreamFileWrapper::Read(
                                     __formal.hFile,
                                     STREAM_AUDIO_LOW_PRIORITY,
-                                    v11,
+                                    v10,
                                     &fileSize,
                                     0i64,
-                                    0,
+                                    QSEEK_SET,
                                     0i64,
                                     0i64,
                                     0);
-    if ( v24.load_offset < 8
-      || *(_DWORD *)v11 != 0x4B504B41
-      || (v12 = (unsigned int *)(v11 + 4), (v13 = *((_DWORD *)v11 + 1)) == 0)
-      || (v14 = v5->m_blockSize * ((v5->m_blockSize + v13 + 7) / v5->m_blockSize),
-          v27 = (UFG::WwiseDefaultIOHookDeferred *)&v5->vfptr,
-          v15 = UFG::WwiseDefaultIOHookDeferred::GetBlockSize((UFG::WwiseDefaultIOHookDeferred *)&v5->vfptr, &__formal),
-          (v16 = UFG::TidoFilePackage::Create(&__formal.hFile, v4, v14, v15, &out_pHeaderBuffer)) == 0i64)
-      || (v17 = out_pHeaderBuffer) == 0i64 )
+    if ( v23.load_offset < 8
+      || *(_DWORD *)v10 != 0x4B504B41
+      || (v11 = (unsigned int *)(v10 + 4), (v12 = *((_DWORD *)v10 + 1)) == 0)
+      || (v13 = this->m_blockSize * ((this->m_blockSize + v12 + 7) / this->m_blockSize),
+          v26 = (UFG::WwiseDefaultIOHookDeferred *)&this->AK::StreamMgr::IAkIOHookDeferred,
+          BlockSize = UFG::WwiseDefaultIOHookDeferred::GetBlockSize(
+                        (UFG::WwiseDefaultIOHookDeferred *)&this->AK::StreamMgr::IAkIOHookDeferred,
+                        &__formal),
+          (v15 = UFG::TidoFilePackage::Create(
+                   &__formal.hFile,
+                   in_pszFilePackageName,
+                   v13,
+                   BlockSize,
+                   &out_pHeaderBuffer)) == 0i64)
+      || (v16 = out_pHeaderBuffer) == 0i64 )
     {
-      UFG::WwiseDefaultIOHookDeferred::Close((UFG::WwiseDefaultIOHookDeferred *)&v5->vfptr, &__formal.hFile);
-      goto LABEL_29;
+      UFG::WwiseDefaultIOHookDeferred::Close(this, &__formal.hFile);
+      goto LABEL_27;
     }
-    v18 = *v12;
-    if ( v24.load_offset <= 8 )
+    v17 = *v11;
+    if ( v23.load_offset <= 8 )
     {
-      v20 = 8;
+      v19 = 8;
     }
     else
     {
-      v19 = v24.load_offset - 8;
-      memmove(out_pHeaderBuffer + 8, v11 + 8, v24.load_offset - 8);
-      v20 = v19 + 8;
-      v18 = v5->m_blockSize * ((v18 + v5->m_blockSize - v19 - 1) / v5->m_blockSize);
+      v18 = v23.load_offset - 8;
+      memmove(out_pHeaderBuffer + 8, v10 + 8, v23.load_offset - 8);
+      v19 = v18 + 8;
+      v17 = this->m_blockSize * ((v17 + this->m_blockSize - v18 - 1) / this->m_blockSize);
     }
-    if ( v18 )
+    if ( v17 )
     {
-      v24.load_offset = 0;
-      v24.compressed_size = v18;
-      v24.uncompressed_size = v18;
-      v24.compressed_extra = 0;
+      v23.load_offset = 0;
+      v23.compressed_size = v17;
+      v23.uncompressed_size = v17;
+      v23.compressed_extra = 0;
       if ( (unsigned int)UFG::StreamFileWrapper::Read(
                            __formal.hFile,
                            STREAM_AUDIO_LOW_PRIORITY,
-                           &v17[v20],
-                           &v24,
-                           v20,
-                           0,
+                           &v16[v19],
+                           &v23,
+                           v19,
+                           QSEEK_SET,
                            0i64,
                            0i64,
-                           0) < v18 )
+                           0) < v17 )
       {
-        UFG::WwiseDefaultIOHookDeferred::Close((UFG::WwiseDefaultIOHookDeferred *)&v5->vfptr, &__formal.hFile);
-        UFG::WwiseDefaultIOHookDeferred::Close((UFG::WwiseDefaultIOHookDeferred *)&v5->vfptr, &__formal);
-        UFG::TidoFilePackage::Destroy(v16);
-LABEL_29:
-        v7 = 2;
-        goto LABEL_30;
+        UFG::WwiseDefaultIOHookDeferred::Close(this, &__formal.hFile);
+        UFG::WwiseDefaultIOHookDeferred::Close(
+          (UFG::WwiseDefaultIOHookDeferred *)&this->AK::StreamMgr::IAkIOHookDeferred,
+          &__formal);
+        UFG::TidoFilePackage::Destroy(v15);
+LABEL_27:
+        v6 = AK_Fail;
+        goto LABEL_28;
       }
     }
-    v7 = (unsigned int)UFG::AudioFilePackageLUT::Setup(&v16->lut, v17, *v12 + 8);
-    if ( v7 == 1 )
+    v6 = (unsigned int)UFG::AudioFilePackageLUT::Setup(&v15->lut, v16, *v11 + 8);
+    if ( v6 == AK_Success )
     {
-      v21 = v5->m_packages.m_pFirst;
-      if ( v21 )
+      m_pFirst = this->m_packages.m_pFirst;
+      if ( m_pFirst )
       {
-        v16->pNextItem = v21;
-        v5->m_packages.m_pFirst = v16;
+        v15->pNextItem = m_pFirst;
+        this->m_packages.m_pFirst = v15;
       }
       else
       {
-        v5->m_packages.m_pFirst = v16;
-        v16->pNextItem = 0i64;
+        this->m_packages.m_pFirst = v15;
+        v15->pNextItem = 0i64;
       }
-      *v33 = v16->m_uPackageID;
-      v7 = UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::SetLanguageLUT(v5, v16);
+      *v32 = v15->m_uPackageID;
+      v6 = UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::SetLanguageLUT(this, v15);
     }
     else
     {
-      UFG::WwiseDefaultIOHookDeferred::Close(v27, &__formal);
-      UFG::TidoFilePackage::Destroy(v16);
+      UFG::WwiseDefaultIOHookDeferred::Close(v26, &__formal);
+      UFG::TidoFilePackage::Destroy(v15);
     }
   }
-LABEL_30:
+LABEL_28:
   UFG::qString::~qString(&out_FullFilePath);
-  return (unsigned int)v7;
+  return (unsigned int)v6;
 }
 
 // File Line: 527
 // RVA: 0x14CD90
-void __fastcall UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::UnloadAllFilePackages(UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *this)
+void __fastcall UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::UnloadAllFilePackages(
+        UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *this)
 {
-  UFG::TidoFilePackage *v1; // rbx
+  UFG::TidoFilePackage *m_pFirst; // rbx
   __int64 v2; // rax
-  UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *v3; // rbp
-  UFG::TidoFilePackage *v4; // rdi
-  int v5; // esi
-  void *v6; // r14
-  __m128i v7; // [rsp+20h] [rbp-28h]
-  __m128i v8; // [rsp+30h] [rbp-18h]
+  UFG::TidoFilePackage *pNextItem; // rdi
+  int m_poolID; // esi
+  void *m_pToRelease; // r14
+  __int64 v7; // [rsp+28h] [rbp-20h]
 
-  v1 = this->m_packages.m_pFirst;
+  m_pFirst = this->m_packages.m_pFirst;
   v2 = 0i64;
-  v3 = this;
-  if ( v1 )
+  if ( m_pFirst )
   {
     while ( 1 )
     {
-      v4 = v1->pNextItem;
-      v7.m128i_i64[1] = v2;
-      v7.m128i_i64[0] = (__int64)v1->pNextItem;
-      if ( v1 == v3->m_packages.m_pFirst )
-        v3->m_packages.m_pFirst = v4;
+      pNextItem = m_pFirst->pNextItem;
+      v7 = v2;
+      if ( m_pFirst == this->m_packages.m_pFirst )
+        this->m_packages.m_pFirst = pNextItem;
       else
-        *(_QWORD *)(v2 + 8) = v4;
-      _mm_store_si128(&v8, v7);
-      UFG::WwiseDefaultIOHookDeferred::Close((UFG::WwiseDefaultIOHookDeferred *)&v3->vfptr, &v1->m_hFile);
-      v5 = v1->m_poolID;
-      v6 = v1->m_pToRelease;
-      v1->vfptr->__vecDelDtor(v1, 0);
-      if ( v5 != -1 )
+        *(_QWORD *)(v2 + 8) = pNextItem;
+      UFG::WwiseDefaultIOHookDeferred::Close(this, &m_pFirst->m_hFile);
+      m_poolID = m_pFirst->m_poolID;
+      m_pToRelease = m_pFirst->m_pToRelease;
+      m_pFirst->vfptr->__vecDelDtor(m_pFirst, 0);
+      if ( m_poolID != -1 )
       {
-        if ( v6 )
-          AK::MemoryMgr::ReleaseBlock(v5, v6);
-        AK::MemoryMgr::DestroyPool(v5);
+        if ( m_pToRelease )
+          AK::MemoryMgr::ReleaseBlock(m_poolID, m_pToRelease);
+        AK::MemoryMgr::DestroyPool(m_poolID);
       }
-      if ( !v4 )
+      if ( !pNextItem )
         break;
-      v2 = v8.m128i_i64[1];
-      v1 = (UFG::TidoFilePackage *)v8.m128i_i64[0];
+      v2 = v7;
+      m_pFirst = pNextItem;
     }
   }
 }
 
 // File Line: 553
 // RVA: 0x14BF40
-signed __int64 __fastcall UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::SetLanguageLUT(UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *this, UFG::TidoFilePackage *in_pPackage)
+__int64 __fastcall UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred>::SetLanguageLUT(
+        UFG::WwiseFilePackageLowLevelIO<UFG::WwiseDefaultIOHookDeferred> *this,
+        UFG::TidoFilePackage *in_pPackage)
 {
-  UFG::TidoFilePackage *v2; // rbx
-  const wchar_t *v3; // rax
-  UFG::AudioFilePackageLUT::StringMap *v4; // rcx
-  unsigned __int16 v5; // ax
+  const wchar_t *WideName; // rax
+  UFG::AudioFilePackageLUT::StringMap *m_pLangMap; // rcx
+  unsigned __int16 ID; // ax
 
-  v2 = in_pPackage;
   if ( this->m_WwiseLangPath.mLength <= 0 )
   {
     in_pPackage->lut.m_curLangID = 0;
     return 1i64;
   }
-  v3 = UFG::qString::GetWideName(&this->m_WwiseLangPath);
-  v2->lut.m_curLangID = 0;
-  v4 = v2->lut.m_pLangMap;
-  if ( !v4 || !v3 )
+  WideName = UFG::qString::GetWideName(&this->m_WwiseLangPath);
+  in_pPackage->lut.m_curLangID = 0;
+  m_pLangMap = in_pPackage->lut.m_pLangMap;
+  if ( !m_pLangMap || !WideName )
     return 1i64;
-  v5 = UFG::AudioFilePackageLUT::StringMap::GetID(v4, v3);
-  if ( !v5 )
+  ID = UFG::AudioFilePackageLUT::StringMap::GetID(m_pLangMap, WideName);
+  if ( !ID )
     return 22i64;
-  v2->lut.m_curLangID = v5;
+  in_pPackage->lut.m_curLangID = ID;
   return 1i64;
 }
 

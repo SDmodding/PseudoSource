@@ -63,17 +63,17 @@ hkClass *__fastcall hkpSerializedDisplayRbTransforms::staticClass()
 
 // File Line: 112
 // RVA: 0xE0BB10
-void __fastcall finishLoadedObjecthkpSerializedDisplayRbTransforms(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpSerializedDisplayRbTransforms(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpSerializedDisplayRbTransforms::`vftable;
+    *p = &hkpSerializedDisplayRbTransforms::`vftable;
 }
 
 // File Line: 118
 // RVA: 0xE0BB30
-void __fastcall cleanupLoadedObjecthkpSerializedDisplayRbTransforms(void *p)
+void __fastcall cleanupLoadedObjecthkpSerializedDisplayRbTransforms(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 122
@@ -94,8 +94,8 @@ void **dynamic_initializer_for__hkpSerializedDisplayRbTransformsTypeInfo__()
   hkpSerializedDisplayRbTransformsTypeInfo.m_typeName = "hkpSerializedDisplayRbTransforms";
   hkpSerializedDisplayRbTransformsTypeInfo.m_vtable = result;
   hkpSerializedDisplayRbTransformsTypeInfo.m_scopedName = "!hkpSerializedDisplayRbTransforms";
-  hkpSerializedDisplayRbTransformsTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpSerializedDisplayRbTransforms;
-  hkpSerializedDisplayRbTransformsTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpSerializedDisplayRbTransforms;
+  hkpSerializedDisplayRbTransformsTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpSerializedDisplayRbTransforms;
+  hkpSerializedDisplayRbTransformsTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpSerializedDisplayRbTransforms;
   return result;
 }
 

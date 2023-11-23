@@ -27,7 +27,7 @@ void dynamic_initializer_for__hkpBvCompressedMeshShapeClass__()
     &hkpBvCompressedMeshShape_Default,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 128
@@ -39,26 +39,29 @@ hkClass *__fastcall hkpBvCompressedMeshShape::staticClass()
 
 // File Line: 135
 // RVA: 0xD99030
-void __fastcall finishLoadedObjecthkpBvCompressedMeshShape(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpBvCompressedMeshShape(
+        hkpBvCompressedMeshShape *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpBvCompressedMeshShape::hkpBvCompressedMeshShape);
+  if ( p )
+    hkpBvCompressedMeshShape::hkpBvCompressedMeshShape(p, finishing);
 }
 
 // File Line: 141
 // RVA: 0xD99050
-void __fastcall cleanupLoadedObjecthkpBvCompressedMeshShape(void *p)
+void __fastcall cleanupLoadedObjecthkpBvCompressedMeshShape(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 145
 // RVA: 0xD99060
 hkBaseObjectVtbl *__fastcall getVtablehkpBvCompressedMeshShape()
 {
-  hkpBvCompressedMeshShape v1; // [rsp+20h] [rbp-118h]
+  hkpBvCompressedMeshShape v1; // [rsp+20h] [rbp-118h] BYREF
 
   hkpBvCompressedMeshShape::hkpBvCompressedMeshShape(&v1, 0);
-  return v1.vfptr;
+  return v1.hkpBvTreeShape::hkpShape::hkpShapeBase::hkcdShape::hkReferencedObject::hkBaseObject::vfptr;
 }
 
 // File Line: 167
@@ -72,8 +75,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpBvCompressedMeshShapeTypeInfo__()
   hkpBvCompressedMeshShapeTypeInfo.m_typeName = "hkpBvCompressedMeshShape";
   hkpBvCompressedMeshShapeTypeInfo.m_vtable = result;
   hkpBvCompressedMeshShapeTypeInfo.m_scopedName = "!hkpBvCompressedMeshShape";
-  hkpBvCompressedMeshShapeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpBvCompressedMeshShape;
-  hkpBvCompressedMeshShapeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpBvCompressedMeshShape;
+  hkpBvCompressedMeshShapeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpBvCompressedMeshShape;
+  hkpBvCompressedMeshShapeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpBvCompressedMeshShape;
   return result;
 }
 

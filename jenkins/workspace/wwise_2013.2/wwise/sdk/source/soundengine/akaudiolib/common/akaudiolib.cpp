@@ -3,14 +3,14 @@
 __int64 dynamic_initializer_for__g_csMain__()
 {
   InitializeCriticalSection(&g_csMain.m_csLock);
-  return atexit(dynamic_atexit_destructor_for__g_csMain__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__g_csMain__);
 }
 
 // File Line: 106
 // RVA: 0x15BDF00
 __int64 dynamic_initializer_for__g_aBehavioralExtensions__()
 {
-  return atexit(dynamic_atexit_destructor_for__g_aBehavioralExtensions__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__g_aBehavioralExtensions__);
 }
 
 // File Line: 191
@@ -19,15 +19,15 @@ signed __int64 __fastcall AK::SoundEngine::GetIDFromString(const wchar_t *in_psz
 {
   signed __int64 result; // rax
   unsigned __int64 v2; // rbx
-  signed __int64 v3; // rax
-  signed __int64 v4; // rax
+  __int64 v3; // rax
+  __int64 v4; // rax
   int v5; // eax
   unsigned __int64 v6; // rdi
   char v7; // cl
   char *v8; // rdx
   char *v9; // r8
   int v10; // ecx
-  char MultiByteStr[259]; // [rsp+40h] [rbp-118h]
+  char MultiByteStr[259]; // [rsp+40h] [rbp-118h] BYREF
   char v12; // [rsp+143h] [rbp-15h]
 
   if ( !in_pszString )
@@ -85,20 +85,18 @@ signed __int64 __fastcall AK::SoundEngine::GetIDFromString(const wchar_t *in_psz
 // RVA: 0xA41FD0
 signed __int64 __fastcall AK::SoundEngine::GetIDFromString(const char *in_pszString)
 {
-  const char *v1; // rsi
   signed __int64 result; // rax
   unsigned __int64 v3; // rbx
-  signed __int64 v4; // rax
+  __int64 v4; // rax
   unsigned __int64 v5; // rdi
-  signed __int64 v6; // rdi
-  unsigned __int64 v7; // rcx
+  __int64 v6; // rdi
+  unsigned __int64 i; // rcx
   char v8; // dl
   char *v9; // r8
   char *v10; // rdx
   int v11; // ecx
-  char _Dst[280]; // [rsp+20h] [rbp-118h]
+  char _Dst[280]; // [rsp+20h] [rbp-118h] BYREF
 
-  v1 = in_pszString;
   if ( !in_pszString )
     return 0i64;
   v3 = -1i64;
@@ -119,18 +117,12 @@ signed __int64 __fastcall AK::SoundEngine::GetIDFromString(const char *in_pszStr
   _Dst[v5] = 0;
   do
     ++v3;
-  while ( v1[v3] );
-  v7 = 0i64;                                    // Converts string to lowercase
-  if ( v3 )
+  while ( in_pszString[v3] );
+  for ( i = 0i64; i < v3; ++i )
   {
-    do
-    {
-      v8 = _Dst[v7];
-      if ( (unsigned __int8)(v8 - 0x41) <= 0x19u )
-        _Dst[v7] = v8 + 0x20;
-      ++v7;
-    }
-    while ( v7 < v3 );
+    v8 = _Dst[i];
+    if ( (unsigned __int8)(v8 - 0x41) <= 0x19u )
+      _Dst[i] = v8 + 0x20;
   }
   v9 = &_Dst[(unsigned int)v3];
   v10 = _Dst;
@@ -138,6 +130,9 @@ signed __int64 __fastcall AK::SoundEngine::GetIDFromString(const char *in_pszStr
     v11 = (unsigned __int8)*v10++;
   return result;
 }
+/* Orphan comments:
+Converts string to lowercase
+*/
 
 // File Line: 230
 // RVA: 0xA42490
@@ -148,15 +143,15 @@ _BOOL8 __fastcall AK::SoundEngine::IsInitialized()
 
 // File Line: 238
 // RVA: 0xA421F0
-signed __int64 __fastcall AK::SoundEngine::Init(AkInitSettings *in_pSettings, AkPlatformInitSettings *in_pPlatformSettings)
+signed __int64 __fastcall AK::SoundEngine::Init(
+        AkInitSettings *in_pSettings,
+        AkPlatformInitSettings *in_pPlatformSettings)
 {
-  AkPlatformInitSettings *v2; // rbx
-  AkInitSettings *v3; // rdi
-  unsigned int v5; // esi
-  AKRESULT v6; // ebx
-  int v7; // eax
+  unsigned int uDefaultPoolSize; // esi
+  AKRESULT inited; // ebx
+  int Pool; // eax
   AK::SoundEngine *v8; // rcx
-  char Dest; // [rsp+30h] [rbp-38h]
+  char Dest; // [rsp+30h] [rbp-38h] BYREF
   __int64 v10; // [rsp+31h] [rbp-37h]
   __int64 v11; // [rsp+39h] [rbp-2Fh]
   __int64 v12; // [rsp+41h] [rbp-27h]
@@ -164,64 +159,59 @@ signed __int64 __fastcall AK::SoundEngine::Init(AkInitSettings *in_pSettings, Ak
   __int16 v14; // [rsp+51h] [rbp-17h]
   char v15; // [rsp+53h] [rbp-15h]
 
-  v2 = in_pPlatformSettings;
-  v3 = in_pSettings;
-  g_eVolumeThresholdPriority = 3;
-  g_eNumVoicesPriority = 3;
+  g_eVolumeThresholdPriority = AkCommandPriority_None;
+  g_eNumVoicesPriority = AkCommandPriority_None;
   if ( !AK::MemoryMgr::IsInitialized() )
     return 74i64;
   if ( !AK::IAkStreamMgr::m_pStreamMgr )
     return 75i64;
-  v5 = 0x1000000;
-  if ( v3 )
+  uDefaultPoolSize = 0x1000000;
+  if ( in_pSettings )
   {
-    *(_OWORD *)&g_settings.pfnAssertHook = *(_OWORD *)&v3->pfnAssertHook;
-    *(_OWORD *)&in_ulMemSize = *(_OWORD *)&v3->uDefaultPoolSize;
-    unk_14249E980 = *(_OWORD *)&v3->bEnableGameSyncPreparation;
-    *(_OWORD *)&in_eSinkType = *(_OWORD *)&v3->eMainOutputType;
+    g_settings = *in_pSettings;
   }
   else
   {
     g_settings.pfnAssertHook = 0i64;
-    in_uMaxNumPath = 255;
-    in_uMaxNumTransitions = 255;
-    unk_14249E974 = (_DWORD)FLOAT_1_0;
-    in_ulMemSize = 0x1000000;
-    unk_14249E978 = 0x40000;
-    in_PoolId = -1;
-    unk_14249E980 = 0;
-    unk_14249E984 = 1;
-    unk_14249E988 = 0x40000;
-    unk_14249E98C = 0x10000i64;
-    CAkLEngine::GetDefaultOutputSettings(0, &in_outputSettings);
+    g_settings.uMaxNumPaths = 255;
+    g_settings.uMaxNumTransitions = 255;
+    LODWORD(g_settings.fDefaultPoolRatioThreshold) = (_DWORD)FLOAT_1_0;
+    g_settings.uDefaultPoolSize = 0x1000000;
+    g_settings.uCommandQueueSize = 0x40000;
+    g_settings.uPrepareEventMemoryPoolID = -1;
+    g_settings.bEnableGameSyncPreparation = 0;
+    g_settings.uContinuousPlaybackLookAhead = 1;
+    g_settings.uMonitorPoolSize = 0x40000;
+    *(_QWORD *)&g_settings.uMonitorQueuePoolSize = 0x10000i64;
+    CAkLEngine::GetDefaultOutputSettings(AkSink_Main, &g_settings.settingsMainOutput);
   }
   g_pAssertHook = g_settings.pfnAssertHook;
-  CAkLEngine::ApplyGlobalSettings(v2);
-  v6 = 2;
+  CAkLEngine::ApplyGlobalSettings(in_pPlatformSettings);
+  inited = AK_Fail;
   if ( !s_bInitialized )
   {
     if ( g_DefaultPoolId == -1 )
     {
-      if ( in_ulMemSize > 0x40 )
-        v5 = in_ulMemSize;
-      v7 = AK::MemoryMgr::CreatePool(0i64, v5, 0x40u, 1u, 0);
-      g_DefaultPoolId = v7;
-      AkFXMemAlloc::m_instanceUpper.m_poolId = v7;
-      if ( v7 == -1 )
+      if ( g_settings.uDefaultPoolSize > 0x40 )
+        uDefaultPoolSize = g_settings.uDefaultPoolSize;
+      Pool = AK::MemoryMgr::CreatePool(0i64, uDefaultPoolSize, 0x40u, 1u, 0);
+      g_DefaultPoolId = Pool;
+      AkFXMemAlloc::m_instanceUpper.m_poolId = Pool;
+      if ( Pool == -1 )
       {
-        v6 = 52;
+        inited = AK_InsufficientMemory;
         goto LABEL_18;
       }
     }
-    v6 = (unsigned int)AK::SoundEngine::PreInit(v3);
-    if ( v6 != 1 || (v6 = AK::SoundEngine::InitRenderer(), v6 != 1) )
+    inited = (unsigned int)AK::SoundEngine::PreInit(in_pSettings);
+    if ( inited != AK_Success || (inited = AK::SoundEngine::InitRenderer(), inited != AK_Success) )
     {
       AK::SoundEngine::Term(v8);
-      v7 = g_DefaultPoolId;
+      Pool = g_DefaultPoolId;
 LABEL_18:
-      if ( !s_bInitialized && v7 != -1 )
+      if ( !s_bInitialized && Pool != -1 )
       {
-        AK::MemoryMgr::DestroyPool(v7);
+        AK::MemoryMgr::DestroyPool(Pool);
         g_DefaultPoolId = -1;
       }
       goto LABEL_21;
@@ -237,7 +227,7 @@ LABEL_21:
   v14 = 0;
   v15 = 0;
   strncpy(&Dest, "779AD1D9-3419-4cbf-933B-B038DF5A2818", 0x24ui64);
-  return (unsigned int)v6;
+  return (unsigned int)inited;
 }
 
 // File Line: 326
@@ -255,11 +245,12 @@ void __fastcall AK::SoundEngine::GetDefaultInitSettings(AkInitSettings *out_sett
   out_settings->uContinuousPlaybackLookAhead = 1;
   out_settings->uMonitorPoolSize = 0x40000;
   *(_QWORD *)&out_settings->uMonitorQueuePoolSize = 0x10000i64;
-  CAkLEngine::GetDefaultOutputSettings(0, &out_settings->settingsMainOutput);
+  CAkLEngine::GetDefaultOutputSettings(AkSink_Main, &out_settings->settingsMainOutput);
 }
 
 // File Line: 349
 // RVA: 0xA41FC0
+// attributes: thunk
 void __fastcall AK::SoundEngine::GetDefaultPlatformInitSettings(AkPlatformInitSettings *out_platformSettings)
 {
   CAkLEngine::GetDefaultPlatformInitSettings(out_platformSettings);
@@ -285,7 +276,7 @@ void __fastcall AK::SoundEngine::Term(AK::SoundEngine *this)
   int v14; // edi
   CAkPlayingMgr *v15; // rbx
   int v16; // edi
-  void *v17; // rcx
+  void *m_Event; // rcx
   CAkPositionRepository *v18; // rbx
   int v19; // edi
   CAkRTPCMgr *v20; // rbx
@@ -395,9 +386,9 @@ void __fastcall AK::SoundEngine::Term(AK::SoundEngine *this)
     if ( g_pPlayingMgr )
     {
       CAkBusCallbackMgr::~CAkBusCallbackMgr(&g_pPlayingMgr->m_BusCallbackMgr);
-      v17 = v15->m_CallbackEvent.m_Event;
-      if ( v17 )
-        CloseHandle(v17);
+      m_Event = v15->m_CallbackEvent.m_Event;
+      if ( m_Event )
+        CloseHandle(m_Event);
       DeleteCriticalSection(&v15->m_csMapLock.m_csLock);
       AK::MemoryMgr::Free(v16, v15);
     }
@@ -470,14 +461,25 @@ signed __int64 __fastcall AK::SoundEngine::RenderAudio()
 
 // File Line: 506
 // RVA: 0xA42D50
-AKRESULT __fastcall AK::SoundEngine::RegisterPlugin(AkPluginType in_eType, unsigned int in_ulCompanyID, unsigned int in_ulPluginID, AK::IAkPlugin *(__fastcall *in_pCreateFunc)(AK::IAkPluginMemAlloc *), AK::IAkPluginParam *(__fastcall *in_pCreateParamFunc)(AK::IAkPluginMemAlloc *))
+// attributes: thunk
+AKRESULT __fastcall AK::SoundEngine::RegisterPlugin(
+        AkPluginType in_eType,
+        unsigned int in_ulCompanyID,
+        unsigned int in_ulPluginID,
+        AK::IAkPlugin *(__fastcall *in_pCreateFunc)(AK::IAkPluginMemAlloc *),
+        AK::IAkPluginParam *(__fastcall *in_pCreateParamFunc)(AK::IAkPluginMemAlloc *))
 {
   return CAkEffectsMgr::RegisterPlugin(in_eType, in_ulCompanyID, in_ulPluginID, in_pCreateFunc, in_pCreateParamFunc);
 }
 
 // File Line: 516
 // RVA: 0xA42CD0
-AKRESULT __fastcall AK::SoundEngine::RegisterCodec(unsigned int in_ulCompanyID, unsigned int in_ulPluginID, IAkSoftwareCodec *(__fastcall *in_pFileCreateFunc)(void *), IAkSoftwareCodec *(__fastcall *in_pBankCreateFunc)(void *))
+// attributes: thunk
+AKRESULT __fastcall AK::SoundEngine::RegisterCodec(
+        unsigned int in_ulCompanyID,
+        unsigned int in_ulPluginID,
+        IAkSoftwareCodec *(__fastcall *in_pFileCreateFunc)(void *),
+        IAkSoftwareCodec *(__fastcall *in_pBankCreateFunc)(void *))
 {
   return CAkEffectsMgr::RegisterCodec(in_ulCompanyID, in_ulPluginID, in_pFileCreateFunc, in_pBankCreateFunc);
 }
@@ -488,8 +490,8 @@ __int64 __fastcall AK::SoundEngine::SetPosition(unsigned __int64 in_GameObj, AkS
 {
   __int128 v3; // xmm0
   void *v4; // xmm1_8
-  unsigned __int16 v5; // ax
-  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h]
+  unsigned __int16 Size; // ax
+  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h] BYREF
 
   if ( !in_GameObj )
     return 2i64;
@@ -499,41 +501,39 @@ __int64 __fastcall AK::SoundEngine::SetPosition(unsigned __int64 in_GameObj, AkS
   in_rItem.event.GameObjID = in_GameObj;
   *(_OWORD *)(&in_rItem.unreggameobj + 1) = v3;
   in_rItem.processMode.pUserData = v4;
-  v5 = Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_GetColorBoundsRect,Scaleform::Render::DICommand>::GetSize();
-  return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, v5);
+  Size = Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_GetColorBoundsRect,Scaleform::Render::DICommand>::GetSize();
+  return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, Size);
 }
 
 // File Line: 688
 // RVA: 0xA43130
 __int64 __fastcall AK::SoundEngine::SetListenerPosition(AkListenerPosition *in_Position, unsigned int in_ulIndex)
 {
-  unsigned int v2; // edi
-  AkListenerPosition *v3; // rsi
   float v4; // xmm2_4
   float v5; // xmm0_4
   float v6; // xmm3_4
-  float v7; // xmm1_4
+  float Y; // xmm1_4
   unsigned __int16 v8; // ax
-  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h]
+  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h] BYREF
 
-  v2 = in_ulIndex;
-  v3 = in_Position;
   in_rItem.type = 16;
   v4 = AkMath::DotProduct(&in_Position->OrientationFront, &in_Position->OrientationTop);
-  v5 = v4 * v3->OrientationTop.Z;
-  v6 = v4 * v3->OrientationTop.Y;
-  in_rItem.rtpc.Value = v3->OrientationFront.X - (float)(v4 * v3->OrientationTop.X);
-  in_rItem.gameobjpos.Position.Position.X = v3->OrientationFront.Y - v6;
-  *(_QWORD *)(&in_rItem.gameobjactcontroller.uActiveControllerMask + 1) = __PAIR__(
-                                                                            LODWORD(v3->OrientationTop.X),
-                                                                            (float)(v3->OrientationFront.Z - v5));
-  *(_QWORD *)((char *)&in_rItem.resetrtpcvalue + 20) = *(_QWORD *)&v3->OrientationTop.Y;
-  AkMath::Normalise((AkVector *)&in_rItem.setstate.StateID);
-  AkMath::Normalise((AkVector *)(&in_rItem.gameobjdrylevel + 1));
-  in_rItem.rtpc.ID = v2;
-  v7 = v3->Position.Y;
-  in_rItem.eventAction.TargetPlayingID = LODWORD(v3->Position.X);
-  in_rItem.event.CustomParam.pExternalSrcs = (AkExternalSourceArray *)__PAIR__(LODWORD(v3->Position.Z), LODWORD(v7));
+  v5 = v4 * in_Position->OrientationTop.Z;
+  v6 = v4 * in_Position->OrientationTop.Y;
+  in_rItem.rtpc.Value = in_Position->OrientationFront.X - (float)(v4 * in_Position->OrientationTop.X);
+  in_rItem.gameobjpos.Position.Position.X = in_Position->OrientationFront.Y - v6;
+  *(_QWORD *)(&in_rItem.gameobjactcontroller.uActiveControllerMask + 1) = __PAIR64__(
+                                                                            LODWORD(in_Position->OrientationTop.X),
+                                                                            in_Position->OrientationFront.Z - v5);
+  *(_QWORD *)((char *)&in_rItem.resetrtpcvalue + 20) = *(_QWORD *)&in_Position->OrientationTop.Y;
+  AkMath::Normalise(&in_rItem.listpos.Position.OrientationFront);
+  AkMath::Normalise(&in_rItem.gameObjMultiPos.aMultiPosition[0].Position);
+  in_rItem.rtpc.ID = in_ulIndex;
+  Y = in_Position->Position.Y;
+  in_rItem.gameobjenvvalues.EnvValues[2].auxBusID = LODWORD(in_Position->Position.X);
+  in_rItem.event.CustomParam.pExternalSrcs = (AkExternalSourceArray *)__PAIR64__(
+                                                                        LODWORD(in_Position->Position.Z),
+                                                                        LODWORD(Y));
   v8 = AkQueuedMsg::Sizeof_ListenerPosition();
   return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, v8);
 }
@@ -542,52 +542,60 @@ __int64 __fastcall AK::SoundEngine::SetListenerPosition(AkListenerPosition *in_P
 // RVA: 0xA430F0
 __int64 __fastcall AK::SoundEngine::SetListenerPipeline(unsigned int in_uIndex, bool in_bAudio, bool in_bFeedback)
 {
-  unsigned __int16 v3; // ax
-  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h]
+  unsigned __int16 Size; // ax
+  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h] BYREF
 
   in_rItem.rtpc.ID = in_uIndex;
   in_rItem.listpipe.bAudio = in_bAudio;
   in_rItem.type = 26;
   in_rItem.listpipe.bFeedback = in_bFeedback;
-  v3 = Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_CreateTexture,Scaleform::Render::DICommand>::GetSize();
-  return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, v3);
+  Size = Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_CreateTexture,Scaleform::Render::DICommand>::GetSize();
+  return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, Size);
 }
 
 // File Line: 788
 // RVA: 0xA43340
-__int64 __fastcall AK::SoundEngine::SetRTPCValue(unsigned int in_rtpcID, float in_value, unsigned __int64 in_gameObjectID, int in_uValueChangeDuration, AkCurveInterpolation in_eFadeCurve)
+__int64 __fastcall AK::SoundEngine::SetRTPCValue(
+        unsigned int in_rtpcID,
+        float in_value,
+        unsigned __int64 in_gameObjectID,
+        unsigned int in_uValueChangeDuration,
+        unsigned int in_eFadeCurve)
 {
-  unsigned __int16 v5; // ax
-  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h]
+  unsigned __int16 ClassSize; // ax
+  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h] BYREF
 
-  in_rItem.event.GameObjID = __PAIR__(LODWORD(in_value), in_rtpcID);
+  in_rItem.event.GameObjID = __PAIR64__(LODWORD(in_value), in_rtpcID);
   in_rItem.rtpc.GameObjID = in_gameObjectID;
   if ( in_uValueChangeDuration )
   {
-    in_rItem.event.CustomParam.customParam = __PAIR__(in_eFadeCurve, in_uValueChangeDuration);
+    in_rItem.event.CustomParam.customParam = __PAIR64__(in_eFadeCurve, in_uValueChangeDuration);
     in_rItem.type = 3;
-    v5 = UEL::ArgumentUsageExpression::GetClassSize();
+    ClassSize = UEL::ArgumentUsageExpression::GetClassSize();
   }
   else
   {
     in_rItem.type = 2;
-    v5 = Scaleform::GFx::AS2::ExternalInterface::GetObjectType();
+    ClassSize = Scaleform::GFx::AS2::ExternalInterface::GetObjectType();
   }
-  return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, v5);
+  return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, ClassSize);
 }
 
 // File Line: 855
 // RVA: 0xA43450
-__int64 __fastcall AK::SoundEngine::SetSwitch(unsigned int in_SwitchGroup, unsigned int in_SwitchState, unsigned __int64 in_GameObj)
+__int64 __fastcall AK::SoundEngine::SetSwitch(
+        unsigned int in_SwitchGroup,
+        unsigned int in_SwitchState,
+        unsigned __int64 in_GameObj)
 {
-  unsigned __int16 v3; // ax
-  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h]
+  unsigned __int16 ObjectType; // ax
+  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h] BYREF
 
   in_rItem.event.GameObjID = in_GameObj;
-  in_rItem.rtpc.GameObjID = __PAIR__(in_SwitchState, in_SwitchGroup);
+  in_rItem.rtpc.GameObjID = __PAIR64__(in_SwitchState, in_SwitchGroup);
   in_rItem.type = 8;
-  v3 = Scaleform::GFx::AS2::ExternalInterface::GetObjectType();
-  return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, v3);
+  ObjectType = Scaleform::GFx::AS2::ExternalInterface::GetObjectType();
+  return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, ObjectType);
 }
 
 // File Line: 959
@@ -595,7 +603,7 @@ __int64 __fastcall AK::SoundEngine::SetSwitch(unsigned int in_SwitchGroup, unsig
 __int64 __fastcall AK::SoundEngine::SetState(unsigned int in_StateGroup, unsigned int in_State)
 {
   unsigned __int16 v2; // ax
-  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h]
+  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h] BYREF
 
   in_rItem.rtpc.ID = in_StateGroup;
   in_rItem.type = 7;
@@ -609,10 +617,14 @@ __int64 __fastcall AK::SoundEngine::SetState(unsigned int in_StateGroup, unsigne
 
 // File Line: 964
 // RVA: 0xA43400
-__int64 __fastcall AK::SoundEngine::SetState(unsigned int in_StateGroup, unsigned int in_State, bool in_bSkipTransitionTime, bool in_bSkipExtension)
+__int64 __fastcall AK::SoundEngine::SetState(
+        unsigned int in_StateGroup,
+        unsigned int in_State,
+        bool in_bSkipTransitionTime,
+        bool in_bSkipExtension)
 {
   unsigned __int16 v4; // ax
-  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h]
+  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h] BYREF
 
   in_rItem.rtpc.ID = in_StateGroup;
   in_rItem.setstate.bSkipTransition = in_bSkipTransitionTime;
@@ -627,11 +639,14 @@ __int64 __fastcall AK::SoundEngine::SetState(unsigned int in_StateGroup, unsigne
 
 // File Line: 1101
 // RVA: 0xA43050
-__int64 __fastcall AK::SoundEngine::SetGameObjectAuxSendValues(unsigned __int64 in_GameObj, AkAuxSendValue *in_aEnvironmentValues, unsigned int in_uNumEnvValues)
+__int64 __fastcall AK::SoundEngine::SetGameObjectAuxSendValues(
+        unsigned __int64 in_GameObj,
+        AkAuxSendValue *in_aEnvironmentValues,
+        unsigned int in_uNumEnvValues)
 {
   hkpSphereShape *v4; // rcx
-  unsigned __int16 v5; // ax
-  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h]
+  unsigned __int16 Size; // ax
+  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h] BYREF
 
   if ( in_uNumEnvValues > 4 )
     return 31i64;
@@ -639,46 +654,50 @@ __int64 __fastcall AK::SoundEngine::SetGameObjectAuxSendValues(unsigned __int64 
   in_rItem.event.PlayingID = in_uNumEnvValues;
   in_rItem.type = 18;
   memmove(&in_rItem.gameobjactcontroller.uActiveControllerMask + 1, in_aEnvironmentValues, 8 * in_uNumEnvValues);
-  v5 = Scaleform::Render::DICommand_SourceRectImpl<Scaleform::Render::DICommand_Scroll>::GetSize(v4);
-  return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, v5);
+  Size = Scaleform::Render::DICommand_SourceRectImpl<Scaleform::Render::DICommand_Scroll>::GetSize(v4);
+  return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, Size);
 }
 
 // File Line: 1143
 // RVA: 0xA430B0
 __int64 __fastcall AK::SoundEngine::SetGameObjectOutputBusVolume(unsigned __int64 in_GameObj, float in_fControlValue)
 {
-  unsigned __int16 v2; // ax
-  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h]
+  unsigned __int16 ObjectType; // ax
+  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h] BYREF
 
   in_rItem.gameobjpos.Position.Position.X = in_fControlValue;
   in_rItem.event.GameObjID = in_GameObj;
   in_rItem.type = 19;
-  v2 = Scaleform::GFx::AS2::ExternalInterface::GetObjectType();
-  return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, v2);
+  ObjectType = Scaleform::GFx::AS2::ExternalInterface::GetObjectType();
+  return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, ObjectType);
 }
 
 // File Line: 1164
 // RVA: 0xA43250
-__int64 __fastcall AK::SoundEngine::SetObjectObstructionAndOcclusion(unsigned __int64 in_ObjectID, unsigned int in_uListener, float in_fObstructionLevel, float in_fOcclusionLevel)
+__int64 __fastcall AK::SoundEngine::SetObjectObstructionAndOcclusion(
+        unsigned __int64 in_ObjectID,
+        unsigned int in_uListener,
+        float in_fObstructionLevel,
+        float in_fOcclusionLevel)
 {
-  unsigned __int16 v4; // ax
-  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h]
+  unsigned __int16 ClassSize; // ax
+  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h] BYREF
 
   in_rItem.gameobjpos.Position.Position.Z = in_fOcclusionLevel;
   in_rItem.event.GameObjID = in_ObjectID;
-  in_rItem.rtpc.GameObjID = __PAIR__(LODWORD(in_fObstructionLevel), in_uListener);
+  in_rItem.rtpc.GameObjID = __PAIR64__(LODWORD(in_fObstructionLevel), in_uListener);
   in_rItem.type = 20;
-  v4 = UEL::ArgumentUsageExpression::GetClassSize();
-  return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, v4);
+  ClassSize = UEL::ArgumentUsageExpression::GetClassSize();
+  return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, ClassSize);
 }
 
 // File Line: 1188
 // RVA: 0xA43490
-signed __int64 __fastcall AK::SoundEngine::SetVolumeThresholdInternal(float in_fVolumeThresholdDB, AK::SoundEngine::AkCommandPriority in_uReserved)
+signed __int64 __fastcall AK::SoundEngine::SetVolumeThresholdInternal(
+        float in_fVolumeThresholdDB,
+        AK::SoundEngine::AkCommandPriority in_uReserved)
 {
-  float v2; // xmm8_4
   float v3; // xmm7_4
-  float v4; // xmm9_4
   float v5; // xmm9_4
   __m128 v6; // xmm0
   int v7; // edx
@@ -687,12 +706,8 @@ signed __int64 __fastcall AK::SoundEngine::SetVolumeThresholdInternal(float in_f
   float v10; // xmm4_4
   float v11; // xmm9_4
   int v12; // ecx
-  __m128 v13; // xmm0
-  float v14; // xmm0_4
-  __m128 v16; // [rsp+20h] [rbp-68h]
-  __m128 v17; // [rsp+30h] [rbp-58h]
+  __m128 v14; // [rsp+20h] [rbp-68h]
 
-  v2 = in_fVolumeThresholdDB;
   if ( in_fVolumeThresholdDB < -96.300003 )
     return 31i64;
   v3 = 0.0;
@@ -701,15 +716,14 @@ signed __int64 __fastcall AK::SoundEngine::SetVolumeThresholdInternal(float in_f
   if ( in_uReserved <= g_eVolumeThresholdPriority )
   {
     g_eVolumeThresholdPriority = in_uReserved;
-    v4 = in_fVolumeThresholdDB;
     v6 = (__m128)LODWORD(FLOAT_10_0);
-    v5 = v4 * 0.050000001;
+    v5 = in_fVolumeThresholdDB * 0.050000001;
     v6.m128_f32[0] = powf(10.0, v5);
     v7 = `AkMath::FastPow10::`4::`local static guard;
     v8 = v6.m128_f32[0];
     if ( v5 >= -37.0 )
     {
-      if ( `AkMath::FastPow10::`4::`local static guard & 1 )
+      if ( (`AkMath::FastPow10::`4::`local static guard & 1) != 0 )
       {
         v9 = *(float *)&`AkMath::FastPow10::`4::SCALE;
       }
@@ -721,26 +735,23 @@ signed __int64 __fastcall AK::SoundEngine::SetVolumeThresholdInternal(float in_f
         `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
       }
       v11 = (float)(v5 * v9) + 1065353200.0;
-      v12 = (signed int)v11 & 0x7FFFFF;
+      v12 = (int)v11 & 0x7FFFFF;
       v6 = (__m128)(unsigned int)(v12 + 1065353216);
       v10 = (float)((float)((float)((float)(COERCE_FLOAT(v12 + 1065353216) * 0.32518977) + 0.020805772)
                           * COERCE_FLOAT(v12 + 1065353216))
                   + 0.65304345)
-          * COERCE_FLOAT((signed int)v11 & 0xFF800000);
+          * COERCE_FLOAT((int)v11 & 0xFF800000);
     }
     else
     {
       v9 = *(float *)&`AkMath::FastPow10::`4::SCALE;
       v10 = 0.0;
     }
-    v6.m128_f32[0] = v2;
-    v13 = _mm_shuffle_ps(v6, v6, 0);
-    v16 = v13;
-    v17 = v13;
-    v14 = v13.m128_f32[0] * 0.050000001;
-    if ( v14 >= -37.0 )
+    v6.m128_f32[0] = in_fVolumeThresholdDB;
+    v14 = _mm_shuffle_ps(v6, v6, 0);
+    if ( (float)(v14.m128_f32[0] * 0.050000001) >= -37.0 )
     {
-      if ( !(v7 & 1) )
+      if ( (v7 & 1) == 0 )
       {
         v9 = FLOAT_2_7866352e7;
         v7 |= 1u;
@@ -748,51 +759,54 @@ signed __int64 __fastcall AK::SoundEngine::SetVolumeThresholdInternal(float in_f
         `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
       }
       v3 = (float)((float)((float)((float)(COERCE_FLOAT(
-                                             ((signed int)(float)((float)(v9 * v14) + 1065353200.0) & 0x7FFFFF)
+                                             ((int)(float)((float)(v9 * (float)(v14.m128_f32[0] * 0.050000001))
+                                                         + 1065353200.0) & 0x7FFFFF)
                                            + 1065353216)
                                          * 0.32518977)
                                  + 0.020805772)
-                         * COERCE_FLOAT(((signed int)(float)((float)(v9 * v14) + 1065353200.0) & 0x7FFFFF) + 1065353216))
+                         * COERCE_FLOAT(
+                             ((int)(float)((float)(v9 * (float)(v14.m128_f32[0] * 0.050000001)) + 1065353200.0) & 0x7FFFFF)
+                           + 1065353216))
                  + 0.65304345)
-         * COERCE_FLOAT((signed int)(float)((float)(v9 * v14) + 1065353200.0) & 0xFF800000);
+         * COERCE_FLOAT((int)(float)((float)(v9 * (float)(v14.m128_f32[0] * 0.050000001)) + 1065353200.0) & 0xFF800000);
     }
-    if ( (float)(v16.m128_f32[1] * 0.050000001) >= -37.0 && !(v7 & 1) )
+    if ( (float)(v14.m128_f32[1] * 0.050000001) >= -37.0 && (v7 & 1) == 0 )
     {
       v7 |= 1u;
       `AkMath::FastPow10::`4::SCALE = 1272224376;
       `AkMath::FastPow10::`4::`local static guard = v7;
     }
-    if ( (float)(v16.m128_f32[2] * 0.050000001) >= -37.0 && !(v7 & 1) )
+    if ( (float)(v14.m128_f32[2] * 0.050000001) >= -37.0 && (v7 & 1) == 0 )
     {
       v7 |= 1u;
       `AkMath::FastPow10::`4::SCALE = 1272224376;
       `AkMath::FastPow10::`4::`local static guard = v7;
     }
-    if ( (float)(v17.m128_f32[3] * 0.050000001) >= -37.0 && !(v7 & 1) )
+    if ( (float)(v14.m128_f32[3] * 0.050000001) >= -37.0 && (v7 & 1) == 0 )
     {
       v7 |= 1u;
       `AkMath::FastPow10::`4::SCALE = 1272224376;
       `AkMath::FastPow10::`4::`local static guard = v7;
     }
-    if ( (float)(v16.m128_f32[3] * 0.050000001) >= -37.0 && !(v7 & 1) )
+    if ( (float)(v14.m128_f32[3] * 0.050000001) >= -37.0 && (v7 & 1) == 0 )
     {
       v7 |= 1u;
       `AkMath::FastPow10::`4::SCALE = 1272224376;
       `AkMath::FastPow10::`4::`local static guard = v7;
     }
-    if ( (float)(v17.m128_f32[0] * 0.050000001) >= -37.0 && !(v7 & 1) )
+    if ( (float)(v14.m128_f32[0] * 0.050000001) >= -37.0 && (v7 & 1) == 0 )
     {
       v7 |= 1u;
       `AkMath::FastPow10::`4::SCALE = 1272224376;
       `AkMath::FastPow10::`4::`local static guard = v7;
     }
-    if ( (float)(v17.m128_f32[1] * 0.050000001) >= -37.0 && !(v7 & 1) )
+    if ( (float)(v14.m128_f32[1] * 0.050000001) >= -37.0 && (v7 & 1) == 0 )
     {
       v7 |= 1u;
       `AkMath::FastPow10::`4::SCALE = 1272224376;
       `AkMath::FastPow10::`4::`local static guard = v7;
     }
-    if ( (float)(v17.m128_f32[2] * 0.050000001) >= -37.0 && !(v7 & 1) )
+    if ( (float)(v14.m128_f32[2] * 0.050000001) >= -37.0 && (v7 & 1) == 0 )
     {
       `AkMath::FastPow10::`4::SCALE = 1272224376;
       `AkMath::FastPow10::`4::`local static guard = v7 | 1;
@@ -802,18 +816,20 @@ signed __int64 __fastcall AK::SoundEngine::SetVolumeThresholdInternal(float in_f
     if ( v8 > v3 )
     {
       g_fVolumeThreshold = v8;
-      g_fVolumeThresholdDB = v2;
+      g_fVolumeThresholdDB = in_fVolumeThresholdDB;
       return 1i64;
     }
     g_fVolumeThreshold = v3;
-    g_fVolumeThresholdDB = v2;
+    g_fVolumeThresholdDB = in_fVolumeThresholdDB;
   }
   return 1i64;
 }
 
 // File Line: 1315
 // RVA: 0xA43220
-signed __int64 __fastcall AK::SoundEngine::SetMaxNumVoicesLimitInternal(unsigned __int16 in_maxNumberVoices, AK::SoundEngine::AkCommandPriority in_uReserved)
+signed __int64 __fastcall AK::SoundEngine::SetMaxNumVoicesLimitInternal(
+        unsigned __int16 in_maxNumberVoices,
+        AK::SoundEngine::AkCommandPriority in_uReserved)
 {
   if ( !in_maxNumberVoices )
     return 31i64;
@@ -827,29 +843,29 @@ signed __int64 __fastcall AK::SoundEngine::SetMaxNumVoicesLimitInternal(unsigned
 
 // File Line: 1376
 // RVA: 0xA426F0
-AkExternalSourceArray *__fastcall AK::SoundEngine::PostEvent(unsigned int in_ulEventID, unsigned __int64 in_GameObjID, unsigned int in_uiFlags, void (__fastcall *in_pfnCallback)(AkCallbackType, AkCallbackInfo *), void *in_pCookie, unsigned int in_cExternals, AkExternalSourceInfo *in_pExternalSources, unsigned int in_PlayingID)
+AkExternalSourceArray *__fastcall AK::SoundEngine::PostEvent(
+        unsigned int in_ulEventID,
+        unsigned __int64 in_GameObjID,
+        unsigned int in_uiFlags,
+        void (__fastcall *in_pfnCallback)(AkCallbackType, AkCallbackInfo *),
+        void *in_pCookie,
+        unsigned int in_cExternals,
+        AkExternalSourceInfo *in_pExternalSources,
+        unsigned int in_PlayingID)
 {
   AkCustomParamType *in_pCustomParam; // r10
-  void (__fastcall *v9)(AkCallbackType, AkCallbackInfo *); // rsi
-  unsigned int v10; // ebp
-  unsigned __int64 v11; // r14
-  unsigned int v12; // er15
   AkExternalSourceArray *result; // rax
-  AkExternalSourceArray *v14; // rbx
+  AkExternalSourceArray *pExternalSrcs; // rbx
   unsigned int v15; // esi
-  AkCustomParamType v16; // [rsp+40h] [rbp-28h]
+  AkCustomParamType v16; // [rsp+40h] [rbp-28h] BYREF
 
   in_pCustomParam = 0i64;
-  v9 = in_pfnCallback;
-  v10 = in_uiFlags;
-  v11 = in_GameObjID;
-  v12 = in_ulEventID;
   if ( in_cExternals )
   {
     v16.customParam = 0i64;
     v16.ui32Reserved = 0;
     result = AkExternalSourceArray::Create(in_cExternals, in_pExternalSources);
-    v14 = result;
+    pExternalSrcs = result;
     v16.pExternalSrcs = result;
     if ( !result )
       return result;
@@ -857,133 +873,139 @@ AkExternalSourceArray *__fastcall AK::SoundEngine::PostEvent(unsigned int in_ulE
   }
   else
   {
-    v14 = v16.pExternalSrcs;
+    pExternalSrcs = v16.pExternalSrcs;
   }
-  v15 = AK::SoundEngine::PostEvent(v12, v11, v10, v9, in_pCookie, in_pCustomParam, in_PlayingID);
+  v15 = AK::SoundEngine::PostEvent(
+          in_ulEventID,
+          in_GameObjID,
+          in_uiFlags,
+          in_pfnCallback,
+          in_pCookie,
+          in_pCustomParam,
+          in_PlayingID);
   if ( !v15 )
   {
     if ( in_cExternals )
-      AkExternalSourceArray::Release(v14);
+      AkExternalSourceArray::Release(pExternalSrcs);
   }
   return (AkExternalSourceArray *)v15;
 }
 
 // File Line: 1406
 // RVA: 0xA427C0
-__int64 __fastcall AK::SoundEngine::PostEvent(unsigned int in_ulEventID, unsigned __int64 in_GameObjID, unsigned int in_uiFlags, void (__fastcall *in_pfnCallback)(AkCallbackType, AkCallbackInfo *), void *in_pCookie, AkCustomParamType *in_pCustomParam, unsigned int in_PlayingID)
+__int64 __fastcall AK::SoundEngine::PostEvent(
+        unsigned int in_ulEventID,
+        unsigned __int64 in_GameObjID,
+        unsigned int in_uiFlags,
+        void (__fastcall *in_pfnCallback)(AkCallbackType, AkCallbackInfo *),
+        void *in_pCookie,
+        AkCustomParamType *in_pCustomParam,
+        unsigned int in_PlayingID)
 {
-  unsigned __int64 v7; // rbp
-  void (__fastcall *v8)(AkCallbackType, AkCallbackInfo *); // rdi
-  unsigned int in_uiRegisteredNotif; // esi
-  AkExternalSourceArray *v10; // rax
+  AkExternalSourceArray *pExternalSrcs; // rax
   hkpSphereShape *v11; // rcx
-  unsigned __int16 v13; // ax
-  AkQueuedMsg in_rItem; // [rsp+30h] [rbp-48h]
+  unsigned __int16 Size; // ax
+  AkQueuedMsg in_rItem; // [rsp+30h] [rbp-48h] BYREF
 
-  v7 = in_GameObjID;
-  v8 = in_pfnCallback;
-  in_uiRegisteredNotif = in_uiFlags;
   in_rItem.type = 1;
   if ( in_pCustomParam )
   {
     *((_OWORD *)&in_rItem.gameobjdrylevel + 1) = *(_OWORD *)&in_pCustomParam->customParam;
-    v10 = in_pCustomParam->pExternalSrcs;
+    pExternalSrcs = in_pCustomParam->pExternalSrcs;
   }
   else
   {
-    v10 = 0i64;
+    pExternalSrcs = 0i64;
     in_rItem.event.CustomParam.customParam = 0i64;
     in_rItem.event.CustomParam.ui32Reserved = 0;
   }
-  in_rItem.event.CustomParam.pExternalSrcs = v10;
+  in_rItem.event.CustomParam.pExternalSrcs = pExternalSrcs;
   in_rItem.event.Event = (CAkEvent *)CAkIndexItem<CAkFxShareSet *>::GetPtrAndAddRef(
                                        (CAkIndexItem<CAkFxShareSet *> *)&g_pIndex->m_idxEvents,
                                        in_ulEventID);
   if ( !in_rItem.event.Event )
     return 0i64;
-  in_rItem.event.GameObjID = v7;
-  in_rItem.rtpc.GameObjID = __PAIR__(in_PlayingID, _InterlockedIncrement((volatile signed __int32 *)&g_PlayingID));
+  in_rItem.event.GameObjID = in_GameObjID;
+  in_rItem.rtpc.GameObjID = __PAIR64__(in_PlayingID, _InterlockedIncrement((volatile signed __int32 *)&g_PlayingID));
   if ( (unsigned int)CAkPlayingMgr::AddPlayingID(
                        g_pPlayingMgr,
-                       (AkQueuedMsg_EventBase *)&in_rItem.event.GameObjID,
-                       v8,
+                       &in_rItem.event,
+                       in_pfnCallback,
                        in_pCookie,
-                       in_uiRegisteredNotif,
+                       in_uiFlags,
                        in_rItem.event.Event->key) != 1 )
   {
-    ((void (*)(void))in_rItem.event.Event->vfptr->Release)();
+    in_rItem.event.Event->vfptr->Release(in_rItem.event.Event);
     return 0i64;
   }
-  v13 = Scaleform::Render::DICommand_SourceRectImpl<Scaleform::Render::DICommand_Scroll>::GetSize(v11);
-  CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, v13);
+  Size = Scaleform::Render::DICommand_SourceRectImpl<Scaleform::Render::DICommand_Scroll>::GetSize(v11);
+  CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, Size);
   return in_rItem.event.PlayingID;
 }
 
 // File Line: 1584
 // RVA: 0xA41EB0
-__int64 __fastcall AK::SoundEngine::ExecuteActionOnEvent(unsigned int in_eventID, AK::SoundEngine::AkActionOnEventType in_ActionType, unsigned __int64 in_gameObjectID, int in_uTransitionDuration, AkCurveInterpolation in_eFadeCurve, unsigned int in_PlayingID)
+__int64 __fastcall AK::SoundEngine::ExecuteActionOnEvent(
+        unsigned int in_eventID,
+        int in_ActionType,
+        unsigned __int64 in_gameObjectID,
+        unsigned int in_uTransitionDuration,
+        unsigned int in_eFadeCurve,
+        unsigned int in_PlayingID)
 {
-  int v6; // esi
-  int v7; // ebx
-  unsigned __int64 v8; // rdi
-  unsigned __int16 v9; // ax
-  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h]
+  unsigned __int16 Size; // ax
+  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h] BYREF
 
-  v6 = in_ActionType;
-  v7 = in_uTransitionDuration;
-  v8 = in_gameObjectID;
   in_rItem.type = 31;
   in_rItem.event.GameObjID = (unsigned __int64)CAkIndexItem<CAkFxShareSet *>::GetPtrAndAddRef(
                                                  (CAkIndexItem<CAkFxShareSet *> *)&g_pIndex->m_idxEvents,
                                                  in_eventID);
   if ( !in_rItem.event.GameObjID )
     return 2i64;
-  in_rItem.rtpc.GameObjID = v8;
-  in_rItem.rtpcWithTransition.transParams.TransitionTime = v6;
-  *(_QWORD *)((char *)&in_rItem.resetrtpcvalue + 20) = __PAIR__(in_eFadeCurve, v7);
-  in_rItem.eventAction.TargetPlayingID = in_PlayingID;
-  v9 = Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_GetColorBoundsRect,Scaleform::Render::DICommand>::GetSize();
-  return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, v9);
+  in_rItem.rtpc.GameObjID = in_gameObjectID;
+  in_rItem.rtpcWithTransition.transParams.TransitionTime = in_ActionType;
+  *(_QWORD *)((char *)&in_rItem.resetrtpcvalue + 20) = __PAIR64__(in_eFadeCurve, in_uTransitionDuration);
+  in_rItem.gameobjenvvalues.EnvValues[2].auxBusID = in_PlayingID;
+  Size = Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_GetColorBoundsRect,Scaleform::Render::DICommand>::GetSize();
+  return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, Size);
 }
 
 // File Line: 1642
 // RVA: 0xA42F10
-__int64 __fastcall AK::SoundEngine::SeekOnEvent(unsigned int in_eventID, unsigned __int64 in_gameObjectID, int in_iPosition, bool in_bSeekToNearestMarker)
+__int64 __fastcall AK::SoundEngine::SeekOnEvent(
+        unsigned int in_eventID,
+        unsigned __int64 in_gameObjectID,
+        int in_iPosition,
+        bool in_bSeekToNearestMarker)
 {
-  unsigned __int64 v4; // rsi
-  bool v5; // bl
-  int v6; // edi
-  unsigned __int16 v7; // ax
-  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h]
+  unsigned __int16 ClassSize; // ax
+  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h] BYREF
 
-  v4 = in_gameObjectID;
-  v5 = in_bSeekToNearestMarker;
-  v6 = in_iPosition;
   in_rItem.type = 35;
   in_rItem.event.GameObjID = (unsigned __int64)CAkIndexItem<CAkFxShareSet *>::GetPtrAndAddRef(
                                                  (CAkIndexItem<CAkFxShareSet *> *)&g_pIndex->m_idxEvents,
                                                  in_eventID);
   if ( !in_rItem.event.GameObjID )
     return 2i64;
-  in_rItem.rtpc.GameObjID = v4;
+  in_rItem.rtpc.GameObjID = in_gameObjectID;
   in_rItem.seek.bIsSeekRelativeToDuration = 0;
-  in_rItem.rtpcWithTransition.transParams.TransitionTime = v6;
-  in_rItem.seek.bSnapToMarker = v5;
-  v7 = UEL::ArgumentUsageExpression::GetClassSize();
-  return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, v7);
+  in_rItem.rtpcWithTransition.transParams.TransitionTime = in_iPosition;
+  in_rItem.seek.bSnapToMarker = in_bSeekToNearestMarker;
+  ClassSize = UEL::ArgumentUsageExpression::GetClassSize();
+  return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, ClassSize);
 }
 
 // File Line: 1695
 // RVA: 0xA42FB0
-__int64 __fastcall AK::SoundEngine::SeekOnEvent(unsigned int in_eventID, unsigned __int64 in_gameObjectID, float in_fPercent, bool in_bSeekToNearestMarker)
+__int64 __fastcall AK::SoundEngine::SeekOnEvent(
+        unsigned int in_eventID,
+        unsigned __int64 in_gameObjectID,
+        float in_fPercent,
+        bool in_bSeekToNearestMarker)
 {
-  unsigned __int64 v4; // rdi
-  bool v5; // bl
-  unsigned __int16 v6; // ax
-  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-58h]
+  unsigned __int16 ClassSize; // ax
+  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-58h] BYREF
 
-  v4 = in_gameObjectID;
-  v5 = in_bSeekToNearestMarker;
   in_rItem.type = 35;
   in_rItem.event.GameObjID = (unsigned __int64)CAkIndexItem<CAkFxShareSet *>::GetPtrAndAddRef(
                                                  (CAkIndexItem<CAkFxShareSet *> *)&g_pIndex->m_idxEvents,
@@ -991,127 +1013,124 @@ __int64 __fastcall AK::SoundEngine::SeekOnEvent(unsigned int in_eventID, unsigne
   if ( !in_rItem.event.GameObjID )
     return 2i64;
   in_rItem.gameobjpos.Position.Position.Z = in_fPercent;
-  in_rItem.rtpc.GameObjID = v4;
+  in_rItem.rtpc.GameObjID = in_gameObjectID;
   in_rItem.seek.bIsSeekRelativeToDuration = 1;
-  in_rItem.seek.bSnapToMarker = v5;
-  v6 = UEL::ArgumentUsageExpression::GetClassSize();
-  return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, v6);
+  in_rItem.seek.bSnapToMarker = in_bSeekToNearestMarker;
+  ClassSize = UEL::ArgumentUsageExpression::GetClassSize();
+  return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, ClassSize);
 }
 
 // File Line: 1760
 // RVA: 0xA421D0
-AKRESULT __fastcall AK::SoundEngine::GetSourcePlayPosition(unsigned int in_PlayingID, int *out_puPosition, bool in_bExtrapolate)
+AKRESULT __fastcall AK::SoundEngine::GetSourcePlayPosition(
+        unsigned int in_PlayingID,
+        int *out_puPosition,
+        bool in_bExtrapolate)
 {
-  AKRESULT result; // eax
-
   if ( out_puPosition )
-    result = CAkPositionRepository::GetCurrPosition(
-               g_pPositionRepository,
-               in_PlayingID,
-               out_puPosition,
-               in_bExtrapolate);
+    return CAkPositionRepository::GetCurrPosition(g_pPositionRepository, in_PlayingID, out_puPosition, in_bExtrapolate);
   else
-    result = 31;
-  return result;
+    return 31;
 }
 
 // File Line: 1779
 // RVA: 0xA42E90
-CAkIndexable *__fastcall AK::SoundEngine::DynamicDialogue::ResolveDialogueEvent(unsigned int in_eventID, unsigned int *in_aArgumentValues, unsigned int in_uNumArguments, unsigned int in_idSequence)
+CAkIndexable *__fastcall AK::SoundEngine::DynamicDialogue::ResolveDialogueEvent(
+        unsigned int in_eventID,
+        unsigned int *in_aArgumentValues,
+        unsigned int in_uNumArguments,
+        unsigned int in_idSequence)
 {
-  unsigned int *v4; // rbp
-  unsigned int v5; // ebx
-  unsigned int v6; // esi
   CAkIndexable *result; // rax
   CAkIndexable *v8; // rdi
   unsigned int v9; // ebx
 
-  v4 = in_aArgumentValues;
-  v5 = in_idSequence;
-  v6 = in_uNumArguments;
   result = CAkIndexItem<CAkFxShareSet *>::GetPtrAndAddRef(
              (CAkIndexItem<CAkFxShareSet *> *)&g_pIndex->m_idxDialogueEvents,
              in_eventID);
   v8 = result;
   if ( result )
   {
-    v9 = AkDecisionTree::ResolvePath((AkDecisionTree *)&result[1], result->key, v4, v6, v5);
+    v9 = AkDecisionTree::ResolvePath(
+           (AkDecisionTree *)&result[1],
+           result->key,
+           in_aArgumentValues,
+           in_uNumArguments,
+           in_idSequence);
     v8->vfptr->Release(v8);
-    result = (CAkIndexable *)v9;
+    return (CAkIndexable *)v9;
   }
   return result;
 }
 
 // File Line: 1868
 // RVA: 0xA42570
-__int64 __fastcall AK::SoundEngine::DynamicSequence::Open(unsigned __int64 in_gameObjectID, unsigned int in_uiFlags, void (__fastcall *in_pfnCallback)(AkCallbackType, AkCallbackInfo *), void *in_pCookie, AK::SoundEngine::DynamicSequence::DynamicSequenceType in_eDynamicSequenceType)
+__int64 __fastcall AK::SoundEngine::DynamicSequence::Open(
+        unsigned __int64 in_gameObjectID,
+        unsigned int in_uiFlags,
+        void (__fastcall *in_pfnCallback)(AkCallbackType, AkCallbackInfo *),
+        void *in_pCookie,
+        AK::SoundEngine::DynamicSequence::DynamicSequenceType in_eDynamicSequenceType)
 {
-  unsigned __int64 v5; // rbp
-  void *v6; // rbx
-  void (__fastcall *v7)(AkCallbackType, AkCallbackInfo *); // rdi
-  unsigned int in_uiRegisteredNotif; // esi
   unsigned int v9; // ecx
   hkpSphereShape *v10; // rcx
-  unsigned __int16 v12; // ax
-  AkQueuedMsg in_rItem; // [rsp+30h] [rbp-48h]
+  unsigned __int16 Size; // ax
+  AkQueuedMsg in_rItem; // [rsp+30h] [rbp-48h] BYREF
 
-  v5 = in_gameObjectID;
-  v6 = in_pCookie;
-  v7 = in_pfnCallback;
-  in_uiRegisteredNotif = in_uiFlags;
   in_rItem.type = 22;
   v9 = _InterlockedIncrement((volatile signed __int32 *)&g_PlayingID);
   in_rItem.rtpc.GameObjID = v9;
   in_rItem.event.Event = (CAkEvent *)CAkDynamicSequence::Create(v9, in_eDynamicSequenceType);
   if ( !in_rItem.event.Event )
     return 0i64;
-  in_rItem.event.GameObjID = v5;
+  in_rItem.event.GameObjID = in_gameObjectID;
   in_rItem.event.CustomParam.customParam = 0i64;
   in_rItem.event.CustomParam.ui32Reserved = 0;
   in_rItem.event.CustomParam.pExternalSrcs = 0i64;
   if ( (unsigned int)CAkPlayingMgr::AddPlayingID(
                        g_pPlayingMgr,
-                       (AkQueuedMsg_EventBase *)&in_rItem.event.GameObjID,
-                       v7,
-                       v6,
-                       in_uiRegisteredNotif,
+                       &in_rItem.event,
+                       in_pfnCallback,
+                       in_pCookie,
+                       in_uiFlags,
                        0) != 1 )
   {
-    ((void (*)(void))in_rItem.event.Event->vfptr->Release)();
+    in_rItem.event.Event->vfptr->Release(in_rItem.event.Event);
     return 0i64;
   }
-  v12 = Scaleform::Render::DICommand_SourceRectImpl<Scaleform::Render::DICommand_Scroll>::GetSize(v10);
-  CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, v12);
+  Size = Scaleform::Render::DICommand_SourceRectImpl<Scaleform::Render::DICommand_Scroll>::GetSize(v10);
+  CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, Size);
   return in_rItem.event.PlayingID;
 }
 
 // File Line: 1954
 // RVA: 0xA42660
-__int64 __fastcall AK::SoundEngine::DynamicSequence::Play(unsigned int in_playingID, int in_uTransitionDuration, AkCurveInterpolation in_eFadeCurve)
+__int64 __fastcall AK::SoundEngine::DynamicSequence::Play(
+        unsigned int in_playingID,
+        unsigned int in_uTransitionDuration,
+        unsigned int in_eFadeCurve)
 {
-  int v3; // edi
-  AkCurveInterpolation v4; // ebx
-  CAkIndexable *v5; // rax
-  unsigned __int16 v6; // ax
-  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h]
+  CAkIndexable *PtrAndAddRef; // rax
+  unsigned __int16 ClassSize; // ax
+  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h] BYREF
 
-  v3 = in_uTransitionDuration;
-  v4 = in_eFadeCurve;
   in_rItem.type = 23;
-  v5 = CAkIndexItem<CAkFxShareSet *>::GetPtrAndAddRef(
-         (CAkIndexItem<CAkFxShareSet *> *)&g_pIndex->m_idxDynamicSequences,
-         in_playingID);
-  in_rItem.event.GameObjID = (unsigned __int64)v5;
-  if ( v5 )
+  PtrAndAddRef = CAkIndexItem<CAkFxShareSet *>::GetPtrAndAddRef(
+                   (CAkIndexItem<CAkFxShareSet *> *)&g_pIndex->m_idxDynamicSequences,
+                   in_playingID);
+  in_rItem.event.GameObjID = (unsigned __int64)PtrAndAddRef;
+  if ( PtrAndAddRef )
   {
-    if ( !LOBYTE(v5[5].pNextItem) )
+    if ( !LOBYTE(PtrAndAddRef[5].pNextItem) )
     {
       in_rItem.event.PlayingID = 0;
-      *(_QWORD *)(&in_rItem.gameobjactcontroller.uActiveControllerMask + 1) = __PAIR__(v4, v3);
-      v6 = UEL::ArgumentUsageExpression::GetClassSize();
-      return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, v6);
+      *(_QWORD *)(&in_rItem.gameobjactcontroller.uActiveControllerMask + 1) = __PAIR64__(
+                                                                                in_eFadeCurve,
+                                                                                in_uTransitionDuration);
+      ClassSize = UEL::ArgumentUsageExpression::GetClassSize();
+      return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, ClassSize);
     }
-    v5->vfptr->Release(v5);
+    PtrAndAddRef->vfptr->Release(PtrAndAddRef);
   }
   return 2i64;
 }
@@ -1120,26 +1139,26 @@ __int64 __fastcall AK::SoundEngine::DynamicSequence::Play(unsigned int in_playin
 // RVA: 0xA41CB0
 __int64 __fastcall AK::SoundEngine::DynamicSequence::Close(unsigned int in_playingID)
 {
-  CAkIndexable *v1; // rax
-  unsigned __int16 v2; // ax
-  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h]
+  CAkIndexable *PtrAndAddRef; // rax
+  unsigned __int16 ClassSize; // ax
+  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h] BYREF
 
   in_rItem.type = 23;
-  v1 = CAkIndexItem<CAkFxShareSet *>::GetPtrAndAddRef(
-         (CAkIndexItem<CAkFxShareSet *> *)&g_pIndex->m_idxDynamicSequences,
-         in_playingID);
-  in_rItem.event.GameObjID = (unsigned __int64)v1;
-  if ( v1 )
+  PtrAndAddRef = CAkIndexItem<CAkFxShareSet *>::GetPtrAndAddRef(
+                   (CAkIndexItem<CAkFxShareSet *> *)&g_pIndex->m_idxDynamicSequences,
+                   in_playingID);
+  in_rItem.event.GameObjID = (unsigned __int64)PtrAndAddRef;
+  if ( PtrAndAddRef )
   {
-    if ( !LOBYTE(v1[5].pNextItem) )
+    if ( !LOBYTE(PtrAndAddRef[5].pNextItem) )
     {
-      LOBYTE(v1[5].pNextItem) = 1;
+      LOBYTE(PtrAndAddRef[5].pNextItem) = 1;
       in_rItem.rtpc.GameObjID = 3i64;
       in_rItem.rtpcWithTransition.transParams.TransitionTime = 4;
-      v2 = UEL::ArgumentUsageExpression::GetClassSize();
-      return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, v2);
+      ClassSize = UEL::ArgumentUsageExpression::GetClassSize();
+      return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, ClassSize);
     }
-    v1->vfptr->Release(v1);
+    PtrAndAddRef->vfptr->Release(PtrAndAddRef);
   }
   return 2i64;
 }
@@ -1159,35 +1178,38 @@ CAkIndexable *__fastcall AK::SoundEngine::DynamicSequence::LockPlaylist(unsigned
   {
     EnterCriticalSection((LPCRITICAL_SECTION)&result[1].key);
     ((void (__fastcall *)(AK::SoundEngine::DynamicSequence::Playlist *))v2->m_pItems->pExternalSrcs)(v2);
-    result = (CAkIndexable *)&v2[1].m_uLength;
+    return (CAkIndexable *)&v2[1].m_uLength;
   }
   return result;
 }
 
 // File Line: 2008
 // RVA: 0xA43CC0
-signed __int64 __fastcall AK::SoundEngine::DynamicSequence::UnlockPlaylist(unsigned int in_playingID)
+__int64 __fastcall AK::SoundEngine::DynamicSequence::UnlockPlaylist(unsigned int in_playingID)
 {
-  CAkDynamicSequence *v1; // rax
+  CAkDynamicSequence *PtrAndAddRef; // rax
   CAkDynamicSequence *v2; // rbx
 
-  v1 = (CAkDynamicSequence *)CAkIndexItem<CAkFxShareSet *>::GetPtrAndAddRef(
-                               (CAkIndexItem<CAkFxShareSet *> *)&g_pIndex->m_idxDynamicSequences,
-                               in_playingID);
-  v2 = v1;
-  if ( !v1 )
+  PtrAndAddRef = (CAkDynamicSequence *)CAkIndexItem<CAkFxShareSet *>::GetPtrAndAddRef(
+                                         (CAkIndexItem<CAkFxShareSet *> *)&g_pIndex->m_idxDynamicSequences,
+                                         in_playingID);
+  v2 = PtrAndAddRef;
+  if ( !PtrAndAddRef )
     return 2i64;
-  CAkDynamicSequence::UnlockPlaylist(v1);
-  v2->vfptr->Release((CAkIndexable *)&v2->vfptr);
+  CAkDynamicSequence::UnlockPlaylist(PtrAndAddRef);
+  v2->vfptr->Release(v2);
   return 1i64;
 }
 
 // File Line: 2046
 // RVA: 0xA42CE0
-__int64 __fastcall AK::SoundEngine::RegisterGameObj(unsigned __int64 in_GameObj, const char *in_pszObjName, unsigned int in_uListenerMask)
+__int64 __fastcall AK::SoundEngine::RegisterGameObj(
+        unsigned __int64 in_GameObj,
+        const char *in_pszObjName,
+        unsigned int in_uListenerMask)
 {
-  unsigned __int16 v3; // ax
-  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h]
+  unsigned __int16 ClassSize; // ax
+  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h] BYREF
 
   if ( in_GameObj - 1 > 0xFFFFFFFFFFFFFFFDui64 )
     return 2i64;
@@ -1195,28 +1217,33 @@ __int64 __fastcall AK::SoundEngine::RegisterGameObj(unsigned __int64 in_GameObj,
   in_rItem.event.PlayingID = in_uListenerMask;
   in_rItem.type = 11;
   in_rItem.event.CustomParam.customParam = 0i64;
-  v3 = UEL::ArgumentUsageExpression::GetClassSize();
-  return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, v3);
+  ClassSize = UEL::ArgumentUsageExpression::GetClassSize();
+  return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, ClassSize);
 }
 
 // File Line: 2068
 // RVA: 0xA43D10
 __int64 __fastcall AK::SoundEngine::UnregisterGameObj(unsigned __int64 in_GameObj)
 {
-  unsigned __int16 v2; // ax
-  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h]
+  unsigned __int16 Size; // ax
+  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h] BYREF
 
   if ( !in_GameObj )
     return 2i64;
   in_rItem.event.GameObjID = in_GameObj;
   in_rItem.type = 12;
-  v2 = Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_CreateTexture,Scaleform::Render::DICommand>::GetSize();
-  return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, v2);
+  Size = Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_CreateTexture,Scaleform::Render::DICommand>::GetSize();
+  return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, Size);
 }
 
 // File Line: 2098
 // RVA: 0xA41E90
-void __fastcall AK::SoundEngine::DefaultBankCallbackFunc(unsigned int __formal, const void *a2, AKRESULT in_eLoadResult, int in_memPoolId, void *in_pCookie)
+void __fastcall AK::SoundEngine::DefaultBankCallbackFunc(
+        unsigned int __formal,
+        const void *a2,
+        AKRESULT in_eLoadResult,
+        int in_memPoolId,
+        void *in_pCookie)
 {
   *(_DWORD *)in_pCookie = in_eLoadResult;
   *((_DWORD *)in_pCookie + 4) = in_memPoolId;
@@ -1229,16 +1256,10 @@ signed __int64 __fastcall AK::SoundEngine::ClearBanks()
 {
   signed __int64 result; // rax
   unsigned int v1; // ebx
-  unsigned int v2; // [rsp+20h] [rbp-98h]
+  unsigned int v2; // [rsp+20h] [rbp-98h] BYREF
   HANDLE hObject; // [rsp+28h] [rbp-90h]
-  __int128 v4; // [rsp+38h] [rbp-80h]
-  __int128 v5; // [rsp+48h] [rbp-70h]
-  __int128 v6; // [rsp+58h] [rbp-60h]
-  __int64 v7; // [rsp+68h] [rbp-50h]
-  __int128 v8; // [rsp+70h] [rbp-48h]
-  __int128 v9; // [rsp+80h] [rbp-38h]
-  __int128 v10; // [rsp+90h] [rbp-28h]
-  __int64 v11; // [rsp+A0h] [rbp-18h]
+  CAkBankMgr::AkBankQueueItem v4; // [rsp+38h] [rbp-80h]
+  CAkBankMgr::AkBankQueueItem v5; // [rsp+70h] [rbp-48h] BYREF
 
   if ( !g_pBankManager )
     return 2i64;
@@ -1248,81 +1269,74 @@ signed __int64 __fastcall AK::SoundEngine::ClearBanks()
     hObject = CreateEventW(0i64, 0, 0, 0i64);
     if ( !hObject )
       return 2i64;
-    LODWORD(v4) = 8;
-    *((_QWORD *)&v4 + 1) = AK::SoundEngine::DefaultBankCallbackFunc;
-    DWORD2(v5) = 0;
-    *(_QWORD *)&v5 = &v2;
-    v8 = v4;
-    v10 = v6;
-    v9 = v5;
-    v11 = v7;
-    v1 = CAkBankMgr::QueueBankCommand(g_pBankManager, (CAkBankMgr::AkBankQueueItem *)&v8);
+    v4.eType = QueueItemClearBanks;
+    v4.callbackInfo.pfnBankCallback = AK::SoundEngine::DefaultBankCallbackFunc;
+    v4.bankLoadFlag = AkBankLoadFlag_None;
+    v4.callbackInfo.pCookie = &v2;
+    v5 = v4;
+    v1 = CAkBankMgr::QueueBankCommand(g_pBankManager, &v5);
     if ( v1 == 1 )
     {
       WaitForSingleObject(hObject, 0xFFFFFFFF);
       if ( hObject )
         CloseHandle(hObject);
-      v1 = v2;
+      return v2;
     }
     else if ( hObject )
     {
       CloseHandle(hObject);
       return v1;
     }
-    result = v1;
+    return v1;
   }
   return result;
 }
 
 // File Line: 2518
 // RVA: 0xA424A0
-__int64 __fastcall AK::SoundEngine::LoadBank(unsigned int in_bankID, void (__fastcall *in_pfnBankCallback)(unsigned int, const void *, AKRESULT, int, void *), void *in_pCookie, int in_memPoolId)
+__int64 __fastcall AK::SoundEngine::LoadBank(
+        unsigned int in_bankID,
+        void (__fastcall *in_pfnBankCallback)(unsigned int, const void *, AKRESULT, int, void *),
+        void *in_pCookie,
+        unsigned int in_memPoolId)
 {
   __int128 v5; // [rsp+20h] [rbp-88h]
   __int128 v6; // [rsp+30h] [rbp-78h]
-  __int64 v7; // [rsp+50h] [rbp-58h]
-  __int128 v8; // [rsp+60h] [rbp-48h]
-  __int128 v9; // [rsp+70h] [rbp-38h]
-  __int128 v10; // [rsp+80h] [rbp-28h]
-  __int64 v11; // [rsp+90h] [rbp-18h]
+  unsigned int *v7; // [rsp+50h] [rbp-58h]
+  CAkBankMgr::AkBankQueueItem v8; // [rsp+60h] [rbp-48h] BYREF
 
   LODWORD(v5) = 0;
   *((_QWORD *)&v5 + 1) = in_pfnBankCallback;
   *(_QWORD *)&v6 = in_pCookie;
   LODWORD(v7) = 0;
   DWORD2(v6) = 2;
-  v8 = v5;
-  v9 = v6;
-  v10 = __PAIR__((unsigned int)in_memPoolId, in_bankID);
-  v11 = v7;
-  return CAkBankMgr::QueueBankCommand(g_pBankManager, (CAkBankMgr::AkBankQueueItem *)&v8);
+  *(_OWORD *)&v8.eType = v5;
+  *(_OWORD *)&v8.callbackInfo.pCookie = v6;
+  v8.prepare = (AkPrepareEventQueueItemLoad)__PAIR64__(in_memPoolId, in_bankID);
+  v8.gameSync.pGameSyncID = v7;
+  return CAkBankMgr::QueueBankCommand(g_pBankManager, &v8);
 }
 
 // File Line: 2659
 // RVA: 0xA43C40
-__int64 __fastcall AK::SoundEngine::UnloadBank(unsigned int in_bankID, const void *in_pInMemoryBankPtr, void (__fastcall *in_pfnBankCallback)(unsigned int, const void *, AKRESULT, int, void *), void *in_pCookie)
+__int64 __fastcall AK::SoundEngine::UnloadBank(
+        unsigned int in_bankID,
+        unsigned int *in_pInMemoryBankPtr,
+        void (__fastcall *in_pfnBankCallback)(unsigned int, const void *, AKRESULT, int, void *),
+        void *in_pCookie)
 {
-  __int128 v4; // ST40_16
-  __int128 v6; // [rsp+20h] [rbp-88h]
-  __int128 v7; // [rsp+30h] [rbp-78h]
-  __int64 v8; // [rsp+50h] [rbp-58h]
-  __int128 v9; // [rsp+60h] [rbp-48h]
-  __int128 v10; // [rsp+70h] [rbp-38h]
-  __int128 v11; // [rsp+80h] [rbp-28h]
-  __int64 v12; // [rsp+90h] [rbp-18h]
+  CAkBankMgr::AkBankQueueItem v5; // [rsp+20h] [rbp-88h]
+  CAkBankMgr::AkBankQueueItem v6; // [rsp+60h] [rbp-48h] BYREF
 
-  *(_QWORD *)&v4 = __PAIR__(-1, in_bankID);
-  LODWORD(v6) = 1;
-  *((_QWORD *)&v4 + 1) = in_pInMemoryBankPtr;
-  *((_QWORD *)&v6 + 1) = in_pfnBankCallback;
-  *(_QWORD *)&v7 = in_pCookie;
-  LODWORD(v8) = 0;
-  v9 = v6;
-  DWORD2(v7) = in_pInMemoryBankPtr != 0i64;
-  v10 = v7;
-  v11 = v4;
-  v12 = v8;
-  return CAkBankMgr::QueueBankCommand(g_pBankManager, (CAkBankMgr::AkBankQueueItem *)&v9);
+  *(_QWORD *)&v5.prepare.numEvents = in_bankID | 0xFFFFFFFF00000000ui64;
+  v5.eType = QueueItemUnload;
+  v5.prepare.pEventID = in_pInMemoryBankPtr;
+  v5.callbackInfo.pfnBankCallback = in_pfnBankCallback;
+  v5.callbackInfo.pCookie = in_pCookie;
+  v5.load.ui32InMemoryBankSize = 0;
+  v5.bankLoadFlag = in_pInMemoryBankPtr != 0i64;
+  v6 = v5;
+  return CAkBankMgr::QueueBankCommand(g_pBankManager, &v6);
 }
 
 // File Line: 2983
@@ -1330,35 +1344,26 @@ __int64 __fastcall AK::SoundEngine::UnloadBank(unsigned int in_bankID, const voi
 signed __int64 __fastcall AK::SoundEngine::ClearPreparedEvents()
 {
   unsigned int v1; // ebx
-  unsigned int v2; // [rsp+20h] [rbp-98h]
+  unsigned int v2; // [rsp+20h] [rbp-98h] BYREF
   HANDLE hObject; // [rsp+28h] [rbp-90h]
-  __int128 v4; // [rsp+38h] [rbp-80h]
-  __int128 v5; // [rsp+48h] [rbp-70h]
-  __int128 v6; // [rsp+58h] [rbp-60h]
-  __int64 v7; // [rsp+68h] [rbp-50h]
-  __int128 v8; // [rsp+70h] [rbp-48h]
-  __int128 v9; // [rsp+80h] [rbp-38h]
-  __int128 v10; // [rsp+90h] [rbp-28h]
-  __int64 v11; // [rsp+A0h] [rbp-18h]
+  CAkBankMgr::AkBankQueueItem v4; // [rsp+38h] [rbp-80h]
+  CAkBankMgr::AkBankQueueItem v5; // [rsp+70h] [rbp-48h] BYREF
 
   hObject = CreateEventW(0i64, 0, 0, 0i64);
   if ( !hObject )
     return 2i64;
-  LODWORD(v4) = 5;
-  *((_QWORD *)&v4 + 1) = AK::SoundEngine::DefaultBankCallbackFunc;
-  DWORD2(v5) = 0;
-  *(_QWORD *)&v5 = &v2;
-  v8 = v4;
-  v10 = v6;
-  v9 = v5;
-  v11 = v7;
-  v1 = CAkBankMgr::QueueBankCommand(g_pBankManager, (CAkBankMgr::AkBankQueueItem *)&v8);
+  v4.eType = QueueItemUnprepareAllEvents;
+  v4.callbackInfo.pfnBankCallback = AK::SoundEngine::DefaultBankCallbackFunc;
+  v4.bankLoadFlag = AkBankLoadFlag_None;
+  v4.callbackInfo.pCookie = &v2;
+  v5 = v4;
+  v1 = CAkBankMgr::QueueBankCommand(g_pBankManager, &v5);
   if ( v1 == 1 )
   {
     WaitForSingleObject(hObject, 0xFFFFFFFF);
     if ( hObject )
       CloseHandle(hObject);
-    v1 = v2;
+    return v2;
   }
   else if ( hObject )
   {
@@ -1370,47 +1375,45 @@ signed __int64 __fastcall AK::SoundEngine::ClearPreparedEvents()
 
 // File Line: 3366
 // RVA: 0xA41920
-signed __int64 __fastcall AK::SoundEngine::AddBehavioralExtension(void (__fastcall *in_pCallback)(bool))
+__int64 __fastcall AK::SoundEngine::AddBehavioralExtension(void (__fastcall *in_pCallback)(bool))
 {
   unsigned __int64 v1; // r8
-  unsigned int v2; // esi
+  unsigned int m_ulReserved; // esi
   void (__fastcall **v3)(bool); // rbx
-  void (__fastcall *v4)(bool); // r14
-  unsigned __int64 v5; // rbp
-  void (__fastcall **v6)(bool); // rdi
+  unsigned __int64 m_uLength; // rbp
+  void (__fastcall **m_pItems)(bool); // rdi
   void (__fastcall **v7)(bool); // rdx
   unsigned __int64 v8; // rcx
   void (__fastcall *v9)(bool); // rax
-  signed __int64 result; // rax
+  __int64 result; // rax
 
   LODWORD(v1) = g_aBehavioralExtensions.m_uLength;
-  v2 = g_aBehavioralExtensions.m_ulReserved;
+  m_ulReserved = g_aBehavioralExtensions.m_ulReserved;
   v3 = 0i64;
-  v4 = in_pCallback;
-  v5 = g_aBehavioralExtensions.m_uLength;
+  m_uLength = g_aBehavioralExtensions.m_uLength;
   if ( g_aBehavioralExtensions.m_uLength < (unsigned __int64)g_aBehavioralExtensions.m_ulReserved )
   {
-    v6 = g_aBehavioralExtensions.m_pItems;
+    m_pItems = g_aBehavioralExtensions.m_pItems;
   }
   else
   {
-    v2 = g_aBehavioralExtensions.m_ulReserved + 1;
-    v6 = (void (__fastcall **)(bool))AK::MemoryMgr::Malloc(
-                                       g_DefaultPoolId,
-                                       8i64 * (g_aBehavioralExtensions.m_ulReserved + 1));
-    if ( !v6 )
+    m_ulReserved = g_aBehavioralExtensions.m_ulReserved + 1;
+    m_pItems = (void (__fastcall **)(bool))AK::MemoryMgr::Malloc(
+                                             g_DefaultPoolId,
+                                             8i64 * (g_aBehavioralExtensions.m_ulReserved + 1));
+    if ( !m_pItems )
       goto LABEL_12;
     v7 = g_aBehavioralExtensions.m_pItems;
     v1 = g_aBehavioralExtensions.m_uLength;
     if ( g_aBehavioralExtensions.m_pItems )
     {
       v8 = 0i64;
-      if ( (_DWORD)v1 )
+      if ( g_aBehavioralExtensions.m_uLength )
       {
         do
         {
           v9 = v7[v8++];
-          v6[v8 - 1] = v9;
+          m_pItems[v8 - 1] = v9;
           v7 = g_aBehavioralExtensions.m_pItems;
         }
         while ( v8 < v1 );
@@ -1418,53 +1421,53 @@ signed __int64 __fastcall AK::SoundEngine::AddBehavioralExtension(void (__fastca
       AK::MemoryMgr::Free(g_DefaultPoolId, v7);
       LODWORD(v1) = g_aBehavioralExtensions.m_uLength;
     }
-    g_aBehavioralExtensions.m_pItems = v6;
-    g_aBehavioralExtensions.m_ulReserved = v2;
+    g_aBehavioralExtensions.m_pItems = m_pItems;
+    g_aBehavioralExtensions.m_ulReserved = m_ulReserved;
   }
-  if ( v5 < v2 )
+  if ( m_uLength < m_ulReserved )
   {
-    v3 = &v6[(unsigned int)v1];
+    v3 = &m_pItems[(unsigned int)v1];
     g_aBehavioralExtensions.m_uLength = v1 + 1;
     if ( v3 )
-      *v3 = v4;
+      *v3 = in_pCallback;
   }
 LABEL_12:
   result = 52i64;
   if ( v3 )
-    result = 1i64;
+    return 1i64;
   return result;
 }
 
 // File Line: 3373
 // RVA: 0xA42DC0
-signed __int64 __fastcall AK::SoundEngine::RemoveBehavioralExtension(void (__fastcall *in_pCallback)(bool))
+__int64 __fastcall AK::SoundEngine::RemoveBehavioralExtension(void (__fastcall *in_pCallback)(bool))
 {
-  void (__fastcall **v1)(bool); // rdi
-  unsigned int v2; // edx
+  void (__fastcall **m_pItems)(bool); // rdi
+  unsigned int m_uLength; // edx
   void (__fastcall **v3)(bool); // rax
-  signed __int64 result; // rax
+  __int64 result; // rax
 
-  v1 = g_aBehavioralExtensions.m_pItems;
-  v2 = g_aBehavioralExtensions.m_uLength;
+  m_pItems = g_aBehavioralExtensions.m_pItems;
+  m_uLength = g_aBehavioralExtensions.m_uLength;
   v3 = &g_aBehavioralExtensions.m_pItems[g_aBehavioralExtensions.m_uLength];
   if ( g_aBehavioralExtensions.m_pItems == v3 )
     return 2i64;
   do
   {
-    if ( *v1 == in_pCallback )
+    if ( *m_pItems == in_pCallback )
       break;
-    ++v1;
+    ++m_pItems;
   }
-  while ( v1 != v3 );
-  if ( v1 == v3 )
+  while ( m_pItems != v3 );
+  if ( m_pItems == v3 )
     return 2i64;
-  if ( v1 < v3 - 1 )
+  if ( m_pItems < v3 - 1 )
   {
-    qmemcpy(v1, v1 + 1, 8 * (((unsigned __int64)((char *)(v3 - 1) - (char *)v1 - 1) >> 3) + 1));
-    v2 = g_aBehavioralExtensions.m_uLength;
+    qmemcpy(m_pItems, m_pItems + 1, 8 * (((unsigned __int64)((char *)(v3 - 1) - (char *)m_pItems - 1) >> 3) + 1));
+    m_uLength = g_aBehavioralExtensions.m_uLength;
   }
   result = 1i64;
-  g_aBehavioralExtensions.m_uLength = v2 - 1;
+  g_aBehavioralExtensions.m_uLength = m_uLength - 1;
   return result;
 }
 
@@ -1477,7 +1480,8 @@ void __fastcall AK::SoundEngine::AddExternalStateHandler(bool (__fastcall *in_pC
 
 // File Line: 3398
 // RVA: 0xA41A20
-void __fastcall AK::SoundEngine::AddExternalBankHandler(AKRESULT (__fastcall *in_pCallback)(AkBank::AKBKSubHircSection *, CAkUsageSlot *, unsigned int))
+void __fastcall AK::SoundEngine::AddExternalBankHandler(
+        AKRESULT (__fastcall *in_pCallback)(AkBank::AKBKSubHircSection *, CAkUsageSlot *, unsigned int))
 {
   g_pExternalBankHandlerCallback = in_pCallback;
 }
@@ -1486,7 +1490,6 @@ void __fastcall AK::SoundEngine::AddExternalBankHandler(AKRESULT (__fastcall *in
 // RVA: 0xA428D0
 __int64 __fastcall AK::SoundEngine::PreInit(AkInitSettings *io_pSettings)
 {
-  AkInitSettings *v1; // rsi
   unsigned int v2; // ebx
   CAkAudioLibIndex *v3; // rax
   CAkAudioLibIndex *v4; // rax
@@ -1508,15 +1511,11 @@ __int64 __fastcall AK::SoundEngine::PreInit(AkInitSettings *io_pSettings)
   CAkStateMgr *v20; // rax
   CAkStateMgr *v21; // rax
   __int64 result; // rax
-  LARGE_INTEGER Frequency; // [rsp+30h] [rbp+8h]
+  LARGE_INTEGER Frequency; // [rsp+30h] [rbp+8h] BYREF
 
-  v1 = io_pSettings;
   v2 = 1;
   QueryPerformanceFrequency(&Frequency);
-  AK::g_fFreqRatio = (float)(signed int)(((unsigned __int64)((unsigned __int128)(Frequency.QuadPart
-                                                                               * (signed __int128)2361183241434822607i64) >> 64) >> 63)
-                                       + ((signed __int64)((unsigned __int128)(Frequency.QuadPart
-                                                                             * (signed __int128)2361183241434822607i64) >> 64) >> 7));
+  AK::g_fFreqRatio = (float)(int)(Frequency.QuadPart / 1000);
   if ( !g_pIndex )
   {
     v3 = (CAkAudioLibIndex *)AK::MemoryMgr::Malloc(g_DefaultPoolId, 0x4468ui64);
@@ -1644,7 +1643,7 @@ __int64 __fastcall AK::SoundEngine::PreInit(AkInitSettings *io_pSettings)
     g_pTransitionManager = v17;
     if ( !v17 )
       goto LABEL_50;
-    v2 = CAkTransitionManager::Init(v17, in_uMaxNumTransitions);
+    v2 = CAkTransitionManager::Init(v17, g_settings.uMaxNumTransitions);
     if ( v2 != 1 )
       goto $preinit_failure;
   }
@@ -1660,7 +1659,7 @@ __int64 __fastcall AK::SoundEngine::PreInit(AkInitSettings *io_pSettings)
   g_pPathManager = v19;
   if ( v19 )
   {
-    v2 = CAkPathManager::Init(v19, in_uMaxNumPath);
+    v2 = CAkPathManager::Init(v19, g_settings.uMaxNumPaths);
     if ( v2 != 1 )
       goto $preinit_failure;
 LABEL_36:
@@ -1686,13 +1685,8 @@ LABEL_50:
   v2 = 52;
 $preinit_failure:
   result = v2;
-  if ( v1 )
-  {
-    *(_OWORD *)&v1->pfnAssertHook = *(_OWORD *)&g_settings.pfnAssertHook;
-    *(_OWORD *)&v1->uDefaultPoolSize = *(_OWORD *)&in_ulMemSize;
-    *(_OWORD *)&v1->bEnableGameSyncPreparation = unk_14249E980;
-    *(_OWORD *)&v1->eMainOutputType = *(_OWORD *)&in_eSinkType;
-  }
+  if ( io_pSettings )
+    *io_pSettings = g_settings;
   return result;
 }
 
@@ -1705,7 +1699,7 @@ AKRESULT __fastcall AK::SoundEngine::InitRenderer()
   CAkAudioMgr *v2; // rax
 
   result = CAkURenderer::Init();
-  if ( !g_pAudioMgr && result == 1 )
+  if ( !g_pAudioMgr && result == AK_Success )
   {
     v1 = (CAkAudioMgr *)AK::MemoryMgr::Malloc(g_DefaultPoolId, 0xF0ui64);
     if ( v1 )
@@ -1715,8 +1709,8 @@ AKRESULT __fastcall AK::SoundEngine::InitRenderer()
       if ( v2 )
       {
         result = CAkAudioMgr::Init(v2);
-        if ( result == 1 )
-          result = CAkAudioMgr::Start(g_pAudioMgr);
+        if ( result == AK_Success )
+          return CAkAudioMgr::Start(g_pAudioMgr);
         return result;
       }
     }
@@ -1724,7 +1718,7 @@ AKRESULT __fastcall AK::SoundEngine::InitRenderer()
     {
       g_pAudioMgr = 0i64;
     }
-    result = 52;
+    return 52;
   }
   return result;
 }
@@ -1733,25 +1727,28 @@ AKRESULT __fastcall AK::SoundEngine::InitRenderer()
 // RVA: 0xA437F0
 void __fastcall AK::SoundEngine::StopAll(unsigned __int64 in_gameObjectID)
 {
-  unsigned __int16 v1; // ax
-  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h]
+  unsigned __int16 Size; // ax
+  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h] BYREF
 
   in_rItem.event.GameObjID = in_gameObjectID;
   in_rItem.type = 25;
-  v1 = Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_CreateTexture,Scaleform::Render::DICommand>::GetSize();
-  CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, v1);
+  Size = Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_CreateTexture,Scaleform::Render::DICommand>::GetSize();
+  CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, Size);
 }
 
 // File Line: 3689
 // RVA: 0xA43830
-void __fastcall AK::SoundEngine::StopPlayingID(unsigned int in_playingID, int in_uTransitionDuration, AkCurveInterpolation in_eFadeCurve)
+void __fastcall AK::SoundEngine::StopPlayingID(
+        unsigned int in_playingID,
+        unsigned int in_uTransitionDuration,
+        unsigned int in_eFadeCurve)
 {
   unsigned __int16 v3; // ax
-  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h]
+  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h] BYREF
 
   if ( in_playingID )
   {
-    in_rItem.event.GameObjID = __PAIR__(in_uTransitionDuration, in_playingID);
+    in_rItem.event.GameObjID = __PAIR64__(in_uTransitionDuration, in_playingID);
     in_rItem.type = 30;
     in_rItem.event.PlayingID = in_eFadeCurve;
     v3 = UFG::SocialLogData_NewHighScore::VariableBindingListSize();
@@ -1761,118 +1758,125 @@ void __fastcall AK::SoundEngine::StopPlayingID(unsigned int in_playingID, int in
 
 // File Line: 3889
 // RVA: 0xA41A40
-__int64 __fastcall AK::MotionEngine::AddPlayerMotionDevice(char in_iPlayerID, unsigned int in_iCompanyID, unsigned int in_iDevicePluginID, void *in_pDevice)
+__int64 __fastcall AK::MotionEngine::AddPlayerMotionDevice(
+        unsigned __int8 in_iPlayerID,
+        unsigned int in_iCompanyID,
+        unsigned __int16 in_iDevicePluginID,
+        unsigned __int64 in_pDevice)
 {
-  unsigned __int16 v5; // ax
-  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h]
+  unsigned __int16 Size; // ax
+  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h] BYREF
 
-  if ( (unsigned __int8)in_iPlayerID > 3u )
+  if ( in_iPlayerID > 3u )
     return 2i64;
-  in_rItem.rtpc.GameObjID = (unsigned __int64)in_pDevice;
+  in_rItem.rtpc.GameObjID = in_pDevice;
   in_rItem.playerdevice.bAdd = 1;
   in_rItem.type = 27;
-  in_rItem.playerdevice.iPlayer = (unsigned __int8)in_iPlayerID;
-  in_rItem.rtpcWithTransition.transParams.TransitionTime = (unsigned __int16)in_iDevicePluginID;
-  v5 = Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_GetColorBoundsRect,Scaleform::Render::DICommand>::GetSize();
-  return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, v5);
+  in_rItem.gameobjenvvalues.EnvValues[1].auxBusID = in_iPlayerID;
+  in_rItem.rtpcWithTransition.transParams.TransitionTime = in_iDevicePluginID;
+  Size = Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_GetColorBoundsRect,Scaleform::Render::DICommand>::GetSize();
+  return CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, Size);
 }
 
 // File Line: 3920
 // RVA: 0xA42E30
-void __fastcall AK::MotionEngine::RemovePlayerMotionDevice(char in_iPlayerID, unsigned int in_iCompanyID, unsigned int in_iDevicePluginID)
+void __fastcall AK::MotionEngine::RemovePlayerMotionDevice(
+        unsigned __int8 in_iPlayerID,
+        unsigned int in_iCompanyID,
+        unsigned __int16 in_iDevicePluginID)
 {
-  unsigned __int16 v3; // ax
-  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h]
+  unsigned __int16 Size; // ax
+  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h] BYREF
 
-  if ( (unsigned __int8)in_iPlayerID <= 3u )
+  if ( in_iPlayerID <= 3u )
   {
     in_rItem.rtpc.GameObjID = 0i64;
     in_rItem.playerdevice.bAdd = 0;
     in_rItem.type = 27;
-    in_rItem.playerdevice.iPlayer = (unsigned __int8)in_iPlayerID;
-    in_rItem.rtpcWithTransition.transParams.TransitionTime = (unsigned __int16)in_iDevicePluginID;
-    v3 = Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_GetColorBoundsRect,Scaleform::Render::DICommand>::GetSize();
-    CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, v3);
+    in_rItem.gameobjenvvalues.EnvValues[1].auxBusID = in_iPlayerID;
+    in_rItem.rtpcWithTransition.transParams.TransitionTime = in_iDevicePluginID;
+    Size = Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_GetColorBoundsRect,Scaleform::Render::DICommand>::GetSize();
+    CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, Size);
   }
 }
 
 // File Line: 3939
 // RVA: 0xA42D40
-void __fastcall AK::MotionEngine::RegisterMotionDevice(unsigned int in_ulCompanyID, unsigned int in_ulPluginID, AK::IAkPlugin *(__fastcall *in_pCreateFunc)(AK::IAkPluginMemAlloc *))
+// attributes: thunk
+void __fastcall AK::MotionEngine::RegisterMotionDevice(
+        unsigned int in_ulCompanyID,
+        unsigned int in_ulPluginID,
+        AK::IAkPlugin *(__fastcall *in_pCreateFunc)(AK::IAkPluginMemAlloc *))
 {
   CAkEffectsMgr::RegisterFeedbackBus(in_ulCompanyID, in_ulPluginID, in_pCreateFunc);
 }
 
 // File Line: 3956
 // RVA: 0xA432A0
-void __fastcall AK::MotionEngine::SetPlayerVolume(char in_iPlayerID, float in_fVolume)
+void __fastcall AK::MotionEngine::SetPlayerVolume(unsigned __int8 in_iPlayerID, float in_fVolume)
 {
-  unsigned __int16 v2; // ax
-  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h]
+  unsigned __int16 Size; // ax
+  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h] BYREF
 
   in_rItem.playervolume.fVolume = in_fVolume;
   in_rItem.type = 29;
-  in_rItem.setstate.StateID = (unsigned __int8)in_iPlayerID;
-  v2 = Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_CreateTexture,Scaleform::Render::DICommand>::GetSize();
-  CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, v2);
+  in_rItem.setstate.StateID = in_iPlayerID;
+  Size = Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_CreateTexture,Scaleform::Render::DICommand>::GetSize();
+  CAkAudioMgr::Enqueue(g_pAudioMgr, &in_rItem, Size);
 }
 
 // File Line: 4065
 // RVA: 0xA41D30
 AkExternalSourceArray *__fastcall AkExternalSourceArray::Create(unsigned int in_nCount, AkExternalSourceInfo *in_pSrcs)
 {
-  AkExternalSourceInfo *v2; // r14
-  unsigned int v3; // er15
   AkExternalSourceArray *result; // rax
   AkExternalSourceArray *v5; // rsi
   unsigned int v6; // edi
   unsigned int v7; // ebp
-  signed __int64 v8; // rbx
-  char *v9; // r12
-  signed __int64 v10; // rax
+  wchar_t **p_szFile; // rbx
+  signed __int64 v9; // r12
+  __int64 v10; // rax
   bool v11; // zf
-  unsigned int v12; // er14
-  void *v13; // rax
-  wchar_t *v14; // rdx
+  unsigned int v12; // r14d
+  wchar_t *v13; // rax
+  wchar_t *szFile; // rdx
 
-  v2 = in_pSrcs;
-  v3 = in_nCount;
   result = (AkExternalSourceArray *)AK::MemoryMgr::Malloc(g_DefaultPoolId, 32 * (in_nCount - 1) + 40);
   v5 = result;
   if ( !result )
     return result;
   v6 = 0;
   result->m_cRefCount = 1;
-  result->m_nCount = v3;
+  result->m_nCount = in_nCount;
   v7 = 0;
-  if ( !v3 )
+  if ( !in_nCount )
     return v5;
-  v8 = (signed __int64)&v2->szFile;
-  v9 = (char *)((char *)result - (char *)v2);
+  p_szFile = &in_pSrcs->szFile;
+  v9 = (char *)result - (char *)in_pSrcs;
   while ( 1 )
   {
-    *(_QWORD *)&v9[v8] = *(_QWORD *)(v8 - 8);
-    *(_QWORD *)&v9[v8 + 8] = *(_QWORD *)v8;
-    *(_QWORD *)&v9[v8 + 16] = *(_QWORD *)(v8 + 8);
-    *(_QWORD *)&v9[v8 + 24] = *(_QWORD *)(v8 + 16);
-    if ( *(_QWORD *)v8 )
+    *(wchar_t **)((char *)p_szFile + v9) = *(p_szFile - 1);
+    *(wchar_t **)((char *)p_szFile + v9 + 8) = *p_szFile;
+    *(wchar_t **)((char *)p_szFile + v9 + 16) = p_szFile[1];
+    *(wchar_t **)((char *)p_szFile + v9 + 24) = p_szFile[2];
+    if ( *p_szFile )
       break;
 LABEL_9:
     ++v7;
-    v8 += 32i64;
-    if ( v7 >= v3 )
+    p_szFile += 4;
+    if ( v7 >= in_nCount )
       return v5;
   }
   v10 = -1i64;
   do
-    v11 = *(_WORD *)(*(_QWORD *)v8 + 2 * v10++ + 2) == 0;
+    v11 = (*p_szFile)[++v10] == 0;
   while ( !v11 );
   v12 = 2 * v10 + 2;
-  v13 = AK::MemoryMgr::Malloc(g_DefaultPoolId, v12);
-  *(_QWORD *)&v9[v8 + 8] = v13;
+  v13 = (wchar_t *)AK::MemoryMgr::Malloc(g_DefaultPoolId, v12);
+  *(wchar_t **)((char *)p_szFile + v9 + 8) = v13;
   if ( v13 )
   {
-    memmove(v13, *(const void **)v8, v12);
+    memmove(v13, *p_szFile, v12);
     goto LABEL_9;
   }
   v11 = v5->m_cRefCount-- == 1;
@@ -1883,9 +1887,9 @@ LABEL_9:
     {
       do
       {
-        v14 = v5->m_pSrcs[v6].szFile;
-        if ( v14 )
-          AK::MemoryMgr::Free(g_DefaultPoolId, v14);
+        szFile = v5->m_pSrcs[v6].szFile;
+        if ( szFile )
+          AK::MemoryMgr::Free(g_DefaultPoolId, szFile);
         ++v6;
       }
       while ( v6 < v5->m_nCount );
@@ -1899,28 +1903,18 @@ LABEL_9:
 // RVA: 0xA42D60
 void __fastcall AkExternalSourceArray::Release(AkExternalSourceArray *this)
 {
-  bool v1; // zf
-  AkExternalSourceArray *v2; // rdi
-  unsigned int v3; // ebx
-  wchar_t *v4; // rdx
+  unsigned int i; // ebx
+  wchar_t *szFile; // rdx
 
-  v1 = this->m_cRefCount-- == 1;
-  v2 = this;
-  if ( v1 )
+  if ( this->m_cRefCount-- == 1 )
   {
-    v3 = 0;
-    if ( this->m_nCount )
+    for ( i = 0; i < this->m_nCount; ++i )
     {
-      do
-      {
-        v4 = v2->m_pSrcs[v3].szFile;
-        if ( v4 )
-          AK::MemoryMgr::Free(g_DefaultPoolId, v4);
-        ++v3;
-      }
-      while ( v3 < v2->m_nCount );
+      szFile = this->m_pSrcs[i].szFile;
+      if ( szFile )
+        AK::MemoryMgr::Free(g_DefaultPoolId, szFile);
     }
-    AK::MemoryMgr::Free(g_DefaultPoolId, v2);
+    AK::MemoryMgr::Free(g_DefaultPoolId, this);
   }
 }
 

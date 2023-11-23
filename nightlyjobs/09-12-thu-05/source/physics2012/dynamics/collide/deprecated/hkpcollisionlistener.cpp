@@ -2,35 +2,30 @@
 // RVA: 0x132E300
 void __fastcall hkpCollisionListener::contactPointCallback(hkpCollisionListener *this, hkpContactPointEvent *event)
 {
-  hkpContactPointEvent *v2; // rbx
-  hkpCollisionListener *v3; // rsi
-  hkpContactPointEvent::Type v4; // eax
-  signed int v5; // edi
+  hkpContactPointEvent::Type m_type; // eax
+  int v5; // edi
   int v6; // xmm6_4
-  float *v7; // rax
-  __m128 v8; // xmm0
-  __int64 v9; // rdx
-  __int64 v10; // r8
-  hkpCollisionEvent::CallbackSource v11; // ecx
-  hkSimdFloat32 result; // [rsp+30h] [rbp-68h]
-  __int64 v13; // [rsp+40h] [rbp-58h]
-  __int64 v14; // [rsp+48h] [rbp-50h]
-  __int64 v15; // [rsp+50h] [rbp-48h]
-  hkContactPoint *v16; // [rsp+58h] [rbp-40h]
-  hkpContactPointProperties *v17; // [rsp+60h] [rbp-38h]
-  int v18; // [rsp+68h] [rbp-30h]
-  int v19; // [rsp+6Ch] [rbp-2Ch]
-  int v20; // [rsp+70h] [rbp-28h]
-  hkpSimpleContactConstraintData *v21; // [rsp+78h] [rbp-20h]
+  float *m_separatingVelocity; // rax
+  __m128 m_real; // xmm0
+  hkpRigidBody *v9; // rdx
+  hkpRigidBody *v10; // r8
+  hkpCollisionEvent::CallbackSource m_source; // ecx
+  hkSimdFloat32 result; // [rsp+30h] [rbp-68h] BYREF
+  __int64 v13[2]; // [rsp+40h] [rbp-58h] BYREF
+  hkpRigidBody *v14; // [rsp+50h] [rbp-48h]
+  hkContactPoint *m_contactPoint; // [rsp+58h] [rbp-40h]
+  hkpContactPointProperties *m_contactPointProperties; // [rsp+60h] [rbp-38h]
+  int v17; // [rsp+68h] [rbp-30h]
+  int v18; // [rsp+6Ch] [rbp-2Ch]
+  int v19; // [rsp+70h] [rbp-28h]
+  hkpSimpleContactConstraintData *p_m_contactConstraintData; // [rsp+78h] [rbp-20h]
 
-  v2 = event;
-  v3 = this;
-  if ( event->m_contactPointProperties->m_flags & 1 )
+  if ( (event->m_contactPointProperties->m_flags & 1) != 0 )
   {
-    v4 = event->m_type;
-    if ( v4 != 3 )
+    m_type = event->m_type;
+    if ( m_type != 3 )
     {
-      if ( (signed int)v4 > 0 )
+      if ( m_type > TYPE_TOI )
       {
         v5 = 1;
         v6 = 0;
@@ -40,43 +35,43 @@ void __fastcall hkpCollisionListener::contactPointCallback(hkpCollisionListener 
         v5 = 0;
         v6 = *(_DWORD *)event->m_rotateNormal;
       }
-      v7 = event->m_separatingVelocity;
-      if ( v7 )
-        v8.m128_f32[0] = *v7;
+      m_separatingVelocity = event->m_separatingVelocity;
+      if ( m_separatingVelocity )
+        m_real.m128_f32[0] = *m_separatingVelocity;
       else
-        v8 = hkpSimpleContactConstraintUtil::calculateSeparatingVelocity(
-               &result,
-               event->m_bodies[0],
-               event->m_bodies[1],
-               &event->m_bodies[0]->m_motion.m_motionState.m_sweptTransform.m_centerOfMass1,
-               &event->m_bodies[1]->m_motion.m_motionState.m_sweptTransform.m_centerOfMass1,
-               event->m_contactPoint)->m_real;
-      v9 = (__int64)v2->m_bodies[0];
-      v10 = (__int64)v2->m_bodies[1];
-      v11 = v2->m_source;
-      v18 = v6;
-      v19 = v8.m128_i32[0];
-      v20 = v5;
-      v13 = v9 + 32;
-      v14 = v10 + 32;
-      v16 = v2->m_contactPoint;
-      v17 = v2->m_contactPointProperties;
-      v21 = &v2->m_contactMgr->m_contactConstraintData;
-      if ( v11 )
+        m_real = hkpSimpleContactConstraintUtil::calculateSeparatingVelocity(
+                   &result,
+                   event->m_bodies[0],
+                   event->m_bodies[1],
+                   &event->m_bodies[0]->m_motion.m_motionState.m_sweptTransform.m_centerOfMass1,
+                   &event->m_bodies[1]->m_motion.m_motionState.m_sweptTransform.m_centerOfMass1,
+                   event->m_contactPoint)->m_real;
+      v9 = event->m_bodies[0];
+      v10 = event->m_bodies[1];
+      m_source = event->m_source;
+      v17 = v6;
+      v18 = m_real.m128_i32[0];
+      v19 = v5;
+      v13[0] = (__int64)&v9->m_collidable;
+      v13[1] = (__int64)&v10->m_collidable;
+      m_contactPoint = event->m_contactPoint;
+      m_contactPointProperties = event->m_contactPointProperties;
+      p_m_contactConstraintData = &event->m_contactMgr->m_contactConstraintData;
+      if ( m_source )
       {
-        if ( v11 == 1 )
-          v15 = v10;
+        if ( m_source == SOURCE_B )
+          v14 = v10;
         else
-          v15 = 0i64;
+          v14 = 0i64;
       }
       else
       {
-        v15 = v9;
+        v14 = v9;
       }
-      v3->vfptr[1].contactPointCallback((hkpContactListener *)&v3->vfptr, (hkpContactPointEvent *)&v13);
-      *(_DWORD *)v2->m_separatingVelocity = v19;
-      if ( v2->m_type <= 0 )
-        *(_DWORD *)v2->m_rotateNormal = v18;
+      this->vfptr[1].contactPointCallback(this, (hkpContactPointEvent *)v13);
+      *(_DWORD *)event->m_separatingVelocity = v18;
+      if ( event->m_type <= TYPE_TOI )
+        *(_DWORD *)event->m_rotateNormal = v17;
     }
   }
 }

@@ -1,6 +1,11 @@
 // File Line: 38
 // RVA: 0x105FF0
-void __fastcall SSMethodFunc::SSMethodFunc(SSMethodFunc *this, ASymbol *name, SSClass *scope_p, SSParameters *params_p, void (__fastcall *atomic_f)(SSInvokedMethod *, SSInstance **))
+void __fastcall SSMethodFunc::SSMethodFunc(
+        SSMethodFunc *this,
+        ASymbol *name,
+        SSClass *scope_p,
+        SSParameters *params_p,
+        void (__fastcall *atomic_f)(SSInvokedMethod *, SSInstance **))
 {
   this->i_name = (ASymbol)name->i_uid;
   this->i_scope_p = scope_p;

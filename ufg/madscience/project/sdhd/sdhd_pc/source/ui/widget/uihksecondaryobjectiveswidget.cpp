@@ -1,78 +1,75 @@
 // File Line: 23
 // RVA: 0x5F4A00
-void __fastcall UFG::UIHKSecondaryObjective::Populate(UFG::UIHKSecondaryObjective *this, UFG::SecondaryObjective *objective)
+void __fastcall UFG::UIHKSecondaryObjective::Populate(
+        UFG::UIHKSecondaryObjective *this,
+        UFG::SecondaryObjective *objective)
 {
-  UFG::SecondaryObjective *v2; // rdi
-  UFG::UIHKSecondaryObjective *v3; // rbx
-  unsigned int v4; // eax
-  UFG::SecondaryObjective::eStatus v5; // eax
-  UFG::SecondaryObjective::eStatus v6; // ecx
+  unsigned int mMaxProgress; // eax
+  UFG::SecondaryObjective::eStatus mStatus; // eax
+  UFG::SecondaryObjective::eStatus Status; // ecx
 
-  v2 = objective;
-  v3 = this;
-  if ( *(_QWORD *)&this->Progress != *(_QWORD *)&objective->mProgress
+  if ( this->Progress != objective->mProgress
+    || this->MaxProgress != objective->mMaxProgress
     || (unsigned int)UFG::qStringCompare(this->Caption.mData, objective->mCaption.mData, -1) )
   {
-    UFG::qString::Set(&v3->Caption, v2->mCaption.mData, v2->mCaption.mLength, 0i64, 0);
-    v3->Progress = v2->mProgress;
-    v4 = v2->mMaxProgress;
-    v3->CaptionChanged = 1;
-    v3->MaxProgress = v4;
+    UFG::qString::Set(&this->Caption, objective->mCaption.mData, objective->mCaption.mLength, 0i64, 0);
+    this->Progress = objective->mProgress;
+    mMaxProgress = objective->mMaxProgress;
+    this->CaptionChanged = 1;
+    this->MaxProgress = mMaxProgress;
   }
-  v5 = v2->mStatus;
-  v6 = v3->Status;
-  v3->Status = v2->mStatus;
-  v3->StatusChanged |= v6 != v5;
+  mStatus = objective->mStatus;
+  Status = this->Status;
+  this->Status = objective->mStatus;
+  this->StatusChanged |= Status != mStatus;
 }
 
 // File Line: 41
 // RVA: 0x5C7F30
-void __fastcall UFG::UIHKSecondaryObjectivesWidget::UIHKSecondaryObjectivesWidget(UFG::UIHKSecondaryObjectivesWidget *this)
+void __fastcall UFG::UIHKSecondaryObjectivesWidget::UIHKSecondaryObjectivesWidget(
+        UFG::UIHKSecondaryObjectivesWidget *this)
 {
-  UFG::UIHKSecondaryObjectivesWidget *v1; // rdi
-  UFG::UIHKSecondaryObjective *v2; // rbx
+  UFG::UIHKSecondaryObjective *p_mCopObjective; // rbx
 
-  v1 = this;
-  v2 = &this->mCopObjective;
+  p_mCopObjective = &this->mCopObjective;
   UFG::qString::qString(&this->mCopObjective.Caption);
-  *(_WORD *)&v2->CaptionChanged = 0;
-  *(_QWORD *)&v2->Progress = 0i64;
-  *(_QWORD *)&v2->HideTimer = 0i64;
-  UFG::qString::qString(&v1->mTriadObjective.Caption);
-  *(_WORD *)&v1->mTriadObjective.CaptionChanged = 0;
-  *(_QWORD *)&v1->mTriadObjective.Progress = 0i64;
-  *(_QWORD *)&v1->mTriadObjective.HideTimer = 0i64;
-  UFG::UIHKSecondaryObjectivesWidget::Refresh(v1);
+  *(_WORD *)&p_mCopObjective->CaptionChanged = 0;
+  *(_QWORD *)&p_mCopObjective->Progress = 0i64;
+  *(_QWORD *)&p_mCopObjective->HideTimer = 0i64;
+  UFG::qString::qString(&this->mTriadObjective.Caption);
+  *(_WORD *)&this->mTriadObjective.CaptionChanged = 0;
+  *(_QWORD *)&this->mTriadObjective.Progress = 0i64;
+  *(_QWORD *)&this->mTriadObjective.HideTimer = 0i64;
+  UFG::UIHKSecondaryObjectivesWidget::Refresh(this);
 }
 
 // File Line: 64
 // RVA: 0x61B7A0
-void __fastcall UFG::UIHKSecondaryObjectivesWidget::UpdateObjective(UFG::UIHKSecondaryObjectivesWidget *this, UFG::UIScreen *pScreen, float elapsed, UFG::UIHKSecondaryObjective *objective, bool isCop)
+void __fastcall UFG::UIHKSecondaryObjectivesWidget::UpdateObjective(
+        UFG::UIHKSecondaryObjectivesWidget *this,
+        UFG::UIScreen *pScreen,
+        float elapsed,
+        UFG::UIHKSecondaryObjective *objective,
+        bool isCop)
 {
-  UFG::UIHKSecondaryObjective *v5; // rbx
-  UFG::UIScreen *v6; // rsi
-  UFG::UIHKSecondaryObjectivesWidget *v7; // rbp
-  UFG::SecondaryObjective::eStatus v8; // er8
-  int v9; // er8
-  int v10; // er8
+  UFG::SecondaryObjective::eStatus Status; // r8d
+  __int32 v9; // r8d
+  __int32 v10; // r8d
   float v11; // xmm1_4
-  UFG::SecondaryObjectiveTracker *v12; // rcx
+  UFG::SecondaryObjectiveTracker *p_mSecondaryObjectiveTracker; // rcx
   float v13; // xmm1_4
 
-  v5 = objective;
-  v6 = pScreen;
-  v7 = this;
   if ( objective->StatusChanged )
   {
-    v8 = objective->Status;
+    Status = objective->Status;
     *(_WORD *)&objective->CaptionChanged = 0;
-    if ( v8 == STATUS_INACTIVE )
+    if ( Status == STATUS_INACTIVE )
     {
       UFG::UIHKSecondaryObjectivesWidget::Flash_HideObjective(this, pScreen, isCop);
-      v5->WidgetState = 0;
+      objective->WidgetState = STATE_IDLE;
       goto LABEL_13;
     }
-    v9 = v8 - 1;
+    v9 = Status - 1;
     if ( v9 )
     {
       v10 = v9 - 1;
@@ -81,12 +78,12 @@ void __fastcall UFG::UIHKSecondaryObjectivesWidget::UpdateObjective(UFG::UIHKSec
         if ( v10 != 1 )
           goto LABEL_13;
         UFG::UIHKSecondaryObjectivesWidget::Flash_ShowObjective(this, pScreen, "$HUD_FAILED", 0, 0, isCop);
-        v5->WidgetState = 3;
+        objective->WidgetState = STATE_TEXT_INBOX;
       }
       else
       {
         UFG::UIHKSecondaryObjectivesWidget::Flash_ShowObjective(this, pScreen, "$HUD_SUCCESS", 0, 0, isCop);
-        v5->WidgetState = 3;
+        objective->WidgetState = STATE_TEXT_INBOX;
       }
       goto LABEL_12;
     }
@@ -104,31 +101,31 @@ void __fastcall UFG::UIHKSecondaryObjectivesWidget::UpdateObjective(UFG::UIHKSec
     objective->Progress,
     objective->MaxProgress,
     isCop);
-  v5->WidgetState = 2;
+  objective->WidgetState = STATE_PHONE_CONTACTS;
 LABEL_12:
-  v5->HideTimer = 10.0;
+  objective->HideTimer = 10.0;
 LABEL_13:
-  if ( v5->WidgetState == 2 )
+  if ( objective->WidgetState == STATE_PHONE_CONTACTS )
   {
-    v13 = v5->HideTimer - elapsed;
-    v5->HideTimer = v13;
+    v13 = objective->HideTimer - elapsed;
+    objective->HideTimer = v13;
     if ( v13 <= 0.0 )
     {
-      UFG::UIHKSecondaryObjectivesWidget::Flash_HideObjective(v7, v6, isCop);
-      v5->WidgetState = 1;
+      UFG::UIHKSecondaryObjectivesWidget::Flash_HideObjective(this, pScreen, isCop);
+      objective->WidgetState = STATE_ROOT_MENU;
     }
   }
-  else if ( v5->WidgetState == 3 )
+  else if ( objective->WidgetState == STATE_TEXT_INBOX )
   {
-    v11 = v5->HideTimer - elapsed;
-    v5->HideTimer = v11;
+    v11 = objective->HideTimer - elapsed;
+    objective->HideTimer = v11;
     if ( v11 <= 0.0 )
     {
-      v12 = &UFG::ProgressionTracker::Instance()->mSecondaryObjectiveTracker;
+      p_mSecondaryObjectiveTracker = &UFG::ProgressionTracker::Instance()->mSecondaryObjectiveTracker;
       if ( isCop )
-        UFG::SecondaryObjectiveTracker::RemoveObjective(v12, 0);
+        UFG::SecondaryObjectiveTracker::RemoveObjective(p_mSecondaryObjectiveTracker, 0);
       else
-        UFG::SecondaryObjectiveTracker::RemoveObjective(v12, ID_TRIAD_OBJECTIVE);
+        UFG::SecondaryObjectiveTracker::RemoveObjective(p_mSecondaryObjectiveTracker, 1);
     }
   }
 }
@@ -137,106 +134,101 @@ LABEL_13:
 // RVA: 0x5FFF00
 void __fastcall UFG::UIHKSecondaryObjectivesWidget::Refresh(UFG::UIHKSecondaryObjectivesWidget *this)
 {
-  UFG::UIHKSecondaryObjectivesWidget *v1; // rsi
   UFG::ProgressionTracker *v2; // rbx
-  UFG::SecondaryObjective *v3; // rdi
-  UFG::SecondaryObjective *v4; // rbx
+  UFG::SecondaryObjectiveTracker *Objective; // rdi
+  UFG::SecondaryObjectiveTracker *v4; // rbx
 
-  v1 = this;
   v2 = UFG::ProgressionTracker::Instance();
-  v3 = UFG::SecondaryObjectiveTracker::GetObjective(&v2->mSecondaryObjectiveTracker, 0);
+  Objective = UFG::SecondaryObjectiveTracker::GetObjective(&v2->mSecondaryObjectiveTracker, ID_COP_OBJECTIVE);
   v4 = UFG::SecondaryObjectiveTracker::GetObjective(&v2->mSecondaryObjectiveTracker, ID_TRIAD_OBJECTIVE);
-  UFG::UIHKSecondaryObjective::Populate(&v1->mCopObjective, v3);
-  UFG::UIHKSecondaryObjective::Populate(&v1->mTriadObjective, v4);
+  UFG::UIHKSecondaryObjective::Populate(&this->mCopObjective, Objective->mObjectives);
+  UFG::UIHKSecondaryObjective::Populate(&this->mTriadObjective, v4->mObjectives);
 }
 
 // File Line: 170
 // RVA: 0x5E4AD0
-void __fastcall UFG::UIHKSecondaryObjectivesWidget::Flash_ShowObjective(UFG::UIHKSecondaryObjectivesWidget *this, UFG::UIScreen *pScreen, const char *caption, unsigned int progress, unsigned int maxProgress, bool isCop)
+void __fastcall UFG::UIHKSecondaryObjectivesWidget::Flash_ShowObjective(
+        UFG::UIHKSecondaryObjectivesWidget *this,
+        UFG::UIScreen *pScreen,
+        const char *caption,
+        unsigned int progress,
+        unsigned int maxProgress,
+        bool isCop)
 {
-  unsigned int v6; // esi
-  const char *v7; // rbx
-  Scaleform::GFx::Movie *v8; // rdi
-  char *v9; // rbx
-  void (__fastcall *pDtor)(void *); // [rsp+20h] [rbp-A8h]
-  char ptr; // [rsp+30h] [rbp-98h]
-  __int64 v12; // [rsp+40h] [rbp-88h]
-  unsigned int v13; // [rsp+48h] [rbp-80h]
-  char *v14; // [rsp+50h] [rbp-78h]
-  char v15; // [rsp+60h] [rbp-68h]
-  __int64 v16; // [rsp+70h] [rbp-58h]
-  unsigned int v17; // [rsp+78h] [rbp-50h]
-  __int64 v18; // [rsp+80h] [rbp-48h]
-  UFG::qString v19; // [rsp+90h] [rbp-38h]
-  __int64 v20; // [rsp+B8h] [rbp-10h]
+  Scaleform::GFx::Movie *pObject; // rdi
+  char *mData; // rbx
+  Scaleform::GFx::Value ptr; // [rsp+30h] [rbp-98h] BYREF
+  char v11[16]; // [rsp+60h] [rbp-68h] BYREF
+  __int64 v12; // [rsp+70h] [rbp-58h]
+  int v13; // [rsp+78h] [rbp-50h]
+  __int64 v14; // [rsp+80h] [rbp-48h]
+  UFG::qString v15; // [rsp+90h] [rbp-38h] BYREF
+  __int64 v16; // [rsp+B8h] [rbp-10h]
 
   if ( pScreen )
   {
-    v20 = -2i64;
-    v6 = progress;
-    v7 = caption;
-    v8 = pScreen->mRenderable->m_movie.pObject;
-    if ( v8 )
+    v16 = -2i64;
+    pObject = pScreen->mRenderable->m_movie.pObject;
+    if ( pObject )
     {
-      UFG::qString::qString(&v19);
+      UFG::qString::qString(&v15);
       if ( maxProgress )
-      {
-        LODWORD(pDtor) = maxProgress;
-        UFG::qString::Format(&v19, "%s %d/%d", v7, v6, pDtor);
-      }
+        UFG::qString::Format(&v15, "%s %d/%d", caption, progress, maxProgress);
       else
-      {
-        UFG::qString::Set(&v19, v7);
-      }
+        UFG::qString::Set(&v15, caption);
       `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-      v9 = v19.mData;
-      if ( (v13 >> 6) & 1 )
+      mData = v15.mData;
+      if ( (ptr.Type & 0x40) != 0 )
       {
-        (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v12 + 16i64))(v12, &ptr, v14);
+        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&ptr.pObjectInterface->vfptr->gap8[8])(
+          ptr.pObjectInterface,
+          &ptr,
+          ptr.mValue);
+        ptr.pObjectInterface = 0i64;
+      }
+      ptr.Type = VT_String;
+      ptr.mValue.pString = mData;
+      if ( (v13 & 0x40) != 0 )
+      {
+        (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v12 + 16i64))(v12, v11, v14);
         v12 = 0i64;
       }
-      v13 = 6;
-      v14 = v9;
-      if ( (v17 >> 6) & 1 )
-      {
-        (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v16 + 16i64))(v16, &v15, v18);
-        v16 = 0i64;
-      }
-      v17 = 2;
-      LOBYTE(v18) = isCop;
-      Scaleform::GFx::Movie::Invoke(v8, "SecondaryObjective_Show", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
+      v13 = 2;
+      LOBYTE(v14) = isCop;
+      Scaleform::GFx::Movie::Invoke(pObject, "SecondaryObjective_Show", 0i64, &ptr, 2u);
       `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
-      UFG::qString::~qString(&v19);
+      UFG::qString::~qString(&v15);
     }
   }
 }
 
 // File Line: 198
 // RVA: 0x5DBDA0
-void __fastcall UFG::UIHKSecondaryObjectivesWidget::Flash_HideObjective(UFG::UIHKSecondaryObjectivesWidget *this, UFG::UIScreen *pScreen, bool isCop)
+void __fastcall UFG::UIHKSecondaryObjectivesWidget::Flash_HideObjective(
+        UFG::UIHKSecondaryObjectivesWidget *this,
+        UFG::UIScreen *pScreen,
+        bool isCop)
 {
-  bool v3; // di
-  Scaleform::GFx::Movie *v4; // rbx
-  Scaleform::GFx::Value pargs; // [rsp+38h] [rbp-40h]
+  Scaleform::GFx::Movie *pObject; // rbx
+  Scaleform::GFx::Value pargs; // [rsp+38h] [rbp-40h] BYREF
 
   if ( pScreen )
   {
-    v3 = isCop;
-    v4 = pScreen->mRenderable->m_movie.pObject;
-    if ( v4 )
+    pObject = pScreen->mRenderable->m_movie.pObject;
+    if ( pObject )
     {
       `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-      if ( ((unsigned int)pargs.Type >> 6) & 1 )
+      if ( (pargs.Type & 0x40) != 0 )
       {
-        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
+        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&pargs.pObjectInterface->vfptr->gap8[8])(
           pargs.pObjectInterface,
           &pargs,
-          *(_QWORD *)&pargs.mValue.NValue);
+          pargs.mValue);
         pargs.pObjectInterface = 0i64;
       }
-      pargs.Type = 2;
-      pargs.mValue.BValue = v3;
-      Scaleform::GFx::Movie::Invoke(v4, "SecondaryObjective_Hide", 0i64, &pargs, 1u);
+      pargs.Type = VT_Boolean;
+      pargs.mValue.BValue = isCop;
+      Scaleform::GFx::Movie::Invoke(pObject, "SecondaryObjective_Hide", 0i64, &pargs, 1u);
       `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     }
   }

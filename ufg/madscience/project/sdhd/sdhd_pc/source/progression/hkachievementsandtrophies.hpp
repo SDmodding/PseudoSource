@@ -1,6 +1,6 @@
 // File Line: 116
 // RVA: 0x4C9B30
-signed __int64 __fastcall UFG::HKAchievementTrophyManager::mapAchievmentStringToID(unsigned int achievemntHashUpper32)
+__int64 __fastcall UFG::HKAchievementTrophyManager::mapAchievmentStringToID(unsigned int achievemntHashUpper32)
 {
   if ( achievemntHashUpper32 <= 0x6CA229E3 )
   {

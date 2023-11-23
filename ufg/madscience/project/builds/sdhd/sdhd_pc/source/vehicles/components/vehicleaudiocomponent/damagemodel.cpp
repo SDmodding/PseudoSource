@@ -13,101 +13,94 @@ signed __int64 UFG::_dynamic_initializer_for__Play_engine_blown_id__()
 // RVA: 0x667EC0
 void __fastcall UFG::DamageModel::DamageModel(UFG::DamageModel *this, UFG::VehicleAudioComponent *component)
 {
-  UFG::DamageModel *v2; // rdi
   int v3; // ebx
-  UFG::SimObject *v4; // rax
-  UFG::PhysicsMoverInterface *v5; // rax
+  UFG::SimObject *m_pSimObject; // rax
+  UFG::PhysicsMoverInterface *m_pComponent; // rax
   UFG::SimObject *v6; // rax
-  UFG::SimComponent *v7; // rsi
-  float v8; // xmm1_4
-  float v9; // xmm2_4
-  bool *v10; // rcx
-  signed __int64 v11; // rdx
-  signed __int64 v12; // r8
-  UFG::PhysicsMoverInterface *v13; // rax
+  UFG::TransformNodeComponent *v7; // rsi
+  float y; // xmm1_4
+  float z; // xmm2_4
+  bool *m_tireBlown; // rcx
+  __int64 v11; // rdx
+  __int64 v12; // r8
+  UFG::PhysicsMoverInterface *m_mover; // rax
 
-  v2 = this;
   v3 = 0;
   this->m_ecEngineSteam.m_pEvent = 0i64;
   this->m_ecEngineClank.m_pEvent = 0i64;
   this->m_ecDrivingOnRim.m_pEvent = 0i64;
   this->m_pVehAudComponent = component;
-  v4 = component->m_pSimObject;
-  if ( v4 )
-    v5 = (UFG::PhysicsMoverInterface *)v4->m_Components.p[34].m_pComponent;
+  m_pSimObject = component->m_pSimObject;
+  if ( m_pSimObject )
+    m_pComponent = (UFG::PhysicsMoverInterface *)m_pSimObject->m_Components.p[34].m_pComponent;
   else
-    v5 = 0i64;
-  this->m_mover = v5;
+    m_pComponent = 0i64;
+  this->m_mover = m_pComponent;
   v6 = component->m_pSimObject;
   if ( v6 )
-    v7 = v6->m_Components.p[2].m_pComponent;
+    v7 = (UFG::TransformNodeComponent *)v6->m_Components.p[2].m_pComponent;
   else
     v7 = 0i64;
-  this->m_transformNode = (UFG::TransformNodeComponent *)v7;
-  UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v7);
-  v8 = *((float *)&v7[2].m_BoundComponentHandles.mNode.mPrev + 1);
-  v9 = *(float *)&v7[2].m_BoundComponentHandles.mNode.mNext;
-  v2->m_lastTireFlapPos.x = *(float *)&v7[2].m_BoundComponentHandles.mNode.mPrev;
-  v2->m_lastTireFlapPos.y = v8;
-  v2->m_lastTireFlapPos.z = v9;
-  v10 = v2->m_tireBlown;
+  this->m_transformNode = v7;
+  UFG::TransformNodeComponent::UpdateWorldTransform(v7);
+  y = v7->mWorldTransform.v3.y;
+  z = v7->mWorldTransform.v3.z;
+  this->m_lastTireFlapPos.x = v7->mWorldTransform.v3.x;
+  this->m_lastTireFlapPos.y = y;
+  this->m_lastTireFlapPos.z = z;
+  m_tireBlown = this->m_tireBlown;
   v11 = 160i64;
   v12 = 4i64;
   do
   {
-    v13 = v2->m_mover;
-    if ( v3 >= v13->mNumWheels )
-      *v10 = 0;
-    else
-      *v10 = 1.0 <= *(float *)((char *)&v13->vfptr + v11);
-    ++v3;
+    m_mover = this->m_mover;
+    *m_tireBlown = v3++ < m_mover->mNumWheels
+                && *(float *)((char *)&m_mover->UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr + v11) >= 1.0;
     v11 += 4i64;
-    ++v10;
+    ++m_tireBlown;
     --v12;
   }
   while ( v12 );
-  v2->m_engineBlown = v2->m_mover->mDamageState.engineDamage >= 1.0;
-  v2->m_lastEngineDamage = -1.0;
+  this->m_engineBlown = this->m_mover->mDamageState.engineDamage >= 1.0;
+  this->m_lastEngineDamage = -1.0;
 }
 
 // File Line: 44
 // RVA: 0x66C750
 void __fastcall UFG::DamageModel::~DamageModel(UFG::DamageModel *this)
 {
-  UFG::DamageModel *v1; // rbx
-  UFG::AudioEvent *v2; // rcx
+  UFG::AudioEvent *m_pEvent; // rcx
   UFG::AudioEvent *v3; // rcx
   UFG::AudioEvent *v4; // rcx
   UFG::AudioEvent *v5; // rcx
   UFG::AudioEvent *v6; // rcx
   UFG::AudioEvent *v7; // rcx
 
-  v1 = this;
   if ( this->m_ecEngineSteam.m_pEvent )
   {
-    v2 = this->m_ecEngineSteam.m_pEvent;
-    if ( v2 )
-      UFG::AudioEvent::StopAndForget(v2, 0xFAu);
+    m_pEvent = this->m_ecEngineSteam.m_pEvent;
+    if ( m_pEvent )
+      UFG::AudioEvent::StopAndForget(m_pEvent, 250);
   }
-  if ( v1->m_ecEngineClank.m_pEvent )
+  if ( this->m_ecEngineClank.m_pEvent )
   {
-    v3 = v1->m_ecEngineClank.m_pEvent;
+    v3 = this->m_ecEngineClank.m_pEvent;
     if ( v3 )
-      UFG::AudioEvent::StopAndForget(v3, 0xFAu);
+      UFG::AudioEvent::StopAndForget(v3, 250);
   }
-  if ( v1->m_ecDrivingOnRim.m_pEvent )
+  if ( this->m_ecDrivingOnRim.m_pEvent )
   {
-    v4 = v1->m_ecDrivingOnRim.m_pEvent;
+    v4 = this->m_ecDrivingOnRim.m_pEvent;
     if ( v4 )
-      UFG::AudioEvent::StopAndForget(v4, 0xFAu);
+      UFG::AudioEvent::StopAndForget(v4, 250);
   }
-  v5 = v1->m_ecDrivingOnRim.m_pEvent;
+  v5 = this->m_ecDrivingOnRim.m_pEvent;
   if ( v5 )
     UFG::AudioEvent::OnControllerDestroy(v5);
-  v6 = v1->m_ecEngineClank.m_pEvent;
+  v6 = this->m_ecEngineClank.m_pEvent;
   if ( v6 )
     UFG::AudioEvent::OnControllerDestroy(v6);
-  v7 = v1->m_ecEngineSteam.m_pEvent;
+  v7 = this->m_ecEngineSteam.m_pEvent;
   if ( v7 )
     UFG::AudioEvent::OnControllerDestroy(v7);
 }
@@ -116,48 +109,46 @@ void __fastcall UFG::DamageModel::~DamageModel(UFG::DamageModel *this)
 // RVA: 0x67BE60
 void __fastcall UFG::DamageModel::HandleDamagedTires(UFG::DamageModel *this)
 {
-  UFG::DamageModel *v1; // rbx
-  UFG::qPropertySet *v2; // rdi
-  char *v3; // r13
-  signed __int64 v4; // rbp
-  signed int v5; // ecx
+  UFG::qPropertySet *mpPropertySet; // rdi
+  char *MemImagePtr; // r13
+  __int64 v4; // rbp
+  int mNumWheels; // ecx
   __int64 v6; // rdx
   __int64 v7; // rdi
-  signed __int64 v8; // rcx
+  __int64 v8; // rcx
   char v9; // r15
   char v10; // r14
   int v11; // esi
-  UFG::PhysicsMoverInterface *v12; // rcx
-  UFG::PhysicsVehicle *v13; // rax
+  UFG::PhysicsMoverInterface *m_mover; // rcx
+  UFG::PhysicsVehicle *mPhysicsVehicle; // rax
   UFG::PhysicsWheeledVehicle *v14; // rcx
-  bool v15; // al
-  UFG::VehicleAudioComponent *v16; // rax
-  __m128 v17; // xmm2
-  float v18; // xmm3_4
-  float v19; // xmm4_4
-  float v20; // xmm5_4
+  bool IsWheelOnGround; // al
+  UFG::VehicleAudioComponent *m_pVehAudComponent; // rax
+  __m128 y_low; // xmm2
+  float x; // xmm3_4
+  float y; // xmm4_4
+  float z; // xmm5_4
   UFG::VehicleAudioComponent *v21; // rcx
-  UFG::AudioEvent *v22; // rcx
+  UFG::AudioEvent *m_pEvent; // rcx
 
-  v1 = this;
-  v2 = this->m_pVehAudComponent->m_pSubTypeParameters->mpPropertySet;
-  if ( Vehicles_Audio_Base_BaseVehicleBase::IsClass(v2->mSchemaName.mUID) )
-    v3 = UFG::qPropertySet::GetMemImagePtr(v2);
+  mpPropertySet = this->m_pVehAudComponent->m_pSubTypeParameters->mpPropertySet;
+  if ( Vehicles_Audio_Base_BaseVehicleBase::IsClass(mpPropertySet->mSchemaName.mUID) )
+    MemImagePtr = UFG::qPropertySet::GetMemImagePtr(mpPropertySet);
   else
-    v3 = 0i64;
+    MemImagePtr = 0i64;
   v4 = 160i64;
-  v5 = v1->m_mover->mNumWheels;
-  if ( v5 > 4 )
-    v5 = 4;
+  mNumWheels = this->m_mover->mNumWheels;
+  if ( mNumWheels > 4 )
+    mNumWheels = 4;
   v6 = 0i64;
-  v7 = v5;
-  if ( v5 > 0 )
+  v7 = mNumWheels;
+  if ( mNumWheels > 0 )
   {
     v8 = 160i64;
     do
     {
-      if ( *(float *)((char *)&v1->m_mover->vfptr + v8) >= 1.0 && !v1->m_tireBlown[v6] )
-        v1->m_tireBlown[v6] = 1;
+      if ( *(float *)((char *)&this->m_mover->vfptr + v8) >= 1.0 && !this->m_tireBlown[v6] )
+        this->m_tireBlown[v6] = 1;
       ++v6;
       v8 += 4i64;
     }
@@ -167,23 +158,23 @@ void __fastcall UFG::DamageModel::HandleDamagedTires(UFG::DamageModel *this)
   v10 = 0;
   v11 = 0;
   if ( v7 <= 0 )
-    goto LABEL_36;
+    goto LABEL_31;
   do
   {
-    v12 = v1->m_mover;
-    v9 |= 1.0 <= *(float *)((char *)&v12->vfptr + v4);
-    v13 = v12->mPhysicsVehicle;
-    if ( !v13 )
-      goto LABEL_37;
+    m_mover = this->m_mover;
+    v9 |= *(float *)((char *)&m_mover->UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr + v4) >= 1.0;
+    mPhysicsVehicle = m_mover->mPhysicsVehicle;
+    if ( !mPhysicsVehicle )
+      goto LABEL_18;
     v14 = 0i64;
-    if ( *((_BYTE *)v13 + 604) & 7 )
-      v14 = (UFG::PhysicsWheeledVehicle *)v13;
+    if ( (*((_BYTE *)mPhysicsVehicle + 604) & 7) != 0 )
+      v14 = (UFG::PhysicsWheeledVehicle *)mPhysicsVehicle;
     if ( v14 )
-      v15 = UFG::PhysicsWheeledVehicle::IsWheelOnGround(v14, v11);
+      IsWheelOnGround = UFG::PhysicsWheeledVehicle::IsWheelOnGround(v14, v11);
     else
-LABEL_37:
-      v15 = 1;
-    v10 |= v15;
+LABEL_18:
+      IsWheelOnGround = 1;
+    v10 |= IsWheelOnGround;
     ++v11;
     v4 += 4i64;
     --v7;
@@ -191,32 +182,41 @@ LABEL_37:
   while ( v7 );
   if ( v9 && v10 )
   {
-    v16 = v1->m_pVehAudComponent;
-    v17 = (__m128)LODWORD(v1->m_lastTireFlapPos.y);
-    v18 = v1->m_pVehAudComponent->m_WorldMatrix.v3.x;
-    v19 = v1->m_pVehAudComponent->m_WorldMatrix.v3.y;
-    v20 = v1->m_pVehAudComponent->m_WorldMatrix.v3.z;
-    v17.m128_f32[0] = (float)((float)((float)(v17.m128_f32[0] - v19) * (float)(v17.m128_f32[0] - v19))
-                            + (float)((float)(v1->m_lastTireFlapPos.x - v18) * (float)(v1->m_lastTireFlapPos.x - v18)))
-                    + (float)((float)(v1->m_lastTireFlapPos.z - v20) * (float)(v1->m_lastTireFlapPos.z - v20));
-    if ( COERCE_FLOAT(_mm_sqrt_ps(v17)) > *((float *)v3 + 7) )
+    m_pVehAudComponent = this->m_pVehAudComponent;
+    y_low = (__m128)LODWORD(this->m_lastTireFlapPos.y);
+    x = this->m_pVehAudComponent->m_WorldMatrix.v3.x;
+    y = this->m_pVehAudComponent->m_WorldMatrix.v3.y;
+    z = this->m_pVehAudComponent->m_WorldMatrix.v3.z;
+    y_low.m128_f32[0] = (float)((float)((float)(y_low.m128_f32[0] - y) * (float)(y_low.m128_f32[0] - y))
+                              + (float)((float)(this->m_lastTireFlapPos.x - x) * (float)(this->m_lastTireFlapPos.x - x)))
+                      + (float)((float)(this->m_lastTireFlapPos.z - z) * (float)(this->m_lastTireFlapPos.z - z));
+    if ( _mm_sqrt_ps(y_low).m128_f32[0] > *((float *)MemImagePtr + 7) )
     {
-      v1->m_lastTireFlapPos.x = v18;
-      v1->m_lastTireFlapPos.y = v19;
-      v1->m_lastTireFlapPos.z = v20;
-      if ( v16->m_eDriverType <= 1 || v16->m_fDistance2ToListener < 400.0 )
-        UFG::AudioEntity::CreateAndPlayEvent((UFG::AudioEntity *)&v16->vfptr, *((_DWORD *)v3 + 8), 0i64, 0, 0i64);
-    }
-    if ( !v1->m_ecDrivingOnRim.m_pEvent )
-    {
-      v21 = v1->m_pVehAudComponent;
-      if ( (v1->m_pVehAudComponent->m_eDriverType <= 1 || v21->m_fDistance2ToListener < 400.0)
-        && v1->m_pVehAudComponent->m_rateLimitedSpeed.m_targetValue > 0.001 )
+      this->m_lastTireFlapPos.x = x;
+      this->m_lastTireFlapPos.y = y;
+      this->m_lastTireFlapPos.z = z;
+      if ( m_pVehAudComponent->m_eDriverType <= (unsigned int)eDriverType_PlayerPassenger
+        || m_pVehAudComponent->m_fDistance2ToListener < 400.0 )
       {
         UFG::AudioEntity::CreateAndPlayEvent(
-          (UFG::AudioEntity *)&v21->vfptr,
+          &m_pVehAudComponent->UFG::AudioEntity,
+          *((_DWORD *)MemImagePtr + 8),
+          0i64,
+          0,
+          0i64);
+      }
+    }
+    if ( !this->m_ecDrivingOnRim.m_pEvent )
+    {
+      v21 = this->m_pVehAudComponent;
+      if ( (this->m_pVehAudComponent->m_eDriverType <= (unsigned int)eDriverType_PlayerPassenger
+         || v21->m_fDistance2ToListener < 400.0)
+        && this->m_pVehAudComponent->m_rateLimitedSpeed.m_targetValue > 0.001 )
+      {
+        UFG::AudioEntity::CreateAndPlayEvent(
+          &v21->UFG::AudioEntity,
           play_veh_tire_drive_rim_01.mUID,
-          &v1->m_ecDrivingOnRim,
+          &this->m_ecDrivingOnRim,
           0i64,
           0,
           0i64);
@@ -225,10 +225,10 @@ LABEL_37:
   }
   else
   {
-LABEL_36:
-    v22 = v1->m_ecDrivingOnRim.m_pEvent;
-    if ( v22 && v1->m_pVehAudComponent->m_rateLimitedSpeed.m_targetValue < 0.001 )
-      UFG::AudioEvent::StopAndForget(v22, 0x64u);
+LABEL_31:
+    m_pEvent = this->m_ecDrivingOnRim.m_pEvent;
+    if ( m_pEvent && this->m_pVehAudComponent->m_rateLimitedSpeed.m_targetValue < 0.001 )
+      UFG::AudioEvent::StopAndForget(m_pEvent, 100);
   }
 }
 
@@ -236,27 +236,28 @@ LABEL_36:
 // RVA: 0x67BC00
 void __fastcall UFG::DamageModel::HandleDamagedEngine(UFG::DamageModel *this)
 {
-  UFG::DamageModel *v1; // rbx
-  UFG::AudioEvent *v2; // rcx
+  UFG::AudioEvent *m_pEvent; // rcx
   UFG::AudioEvent *v3; // rcx
-  float v4; // xmm0_4
+  float engineDamage; // xmm0_4
   UFG::AudioEvent *v5; // rcx
   float v6; // xmm2_4
 
-  v1 = this;
   if ( this->m_mover->mDamageState.engineDamage < 0.5 )
   {
-    v2 = this->m_ecEngineSteam.m_pEvent;
-    if ( v2 )
-      UFG::AudioEvent::StopAndForget(v2, 0xFAu);
-    v3 = v1->m_ecEngineClank.m_pEvent;
+    m_pEvent = this->m_ecEngineSteam.m_pEvent;
+    if ( m_pEvent )
+      UFG::AudioEvent::StopAndForget(m_pEvent, 250);
+    v3 = this->m_ecEngineClank.m_pEvent;
     if ( v3 )
-      UFG::AudioEvent::StopAndForget(v3, 0xFAu);
+      UFG::AudioEvent::StopAndForget(v3, 250);
   }
-  v4 = v1->m_mover->mDamageState.engineDamage;
-  if ( v4 >= 0.5 && v4 < 1.0 && *((_BYTE *)v1->m_pVehAudComponent + 636) & 1 && !v1->m_ecEngineClank.m_pEvent )
+  engineDamage = this->m_mover->mDamageState.engineDamage;
+  if ( engineDamage >= 0.5
+    && engineDamage < 1.0
+    && (*((_BYTE *)this->m_pVehAudComponent + 636) & 1) != 0
+    && !this->m_ecEngineClank.m_pEvent )
   {
-    if ( !(_S13_8 & 1) )
+    if ( (_S13_8 & 1) == 0 )
     {
       _S13_8 |= 1u;
       play_engine_clank.mUID = UFG::qWiseSymbolUIDFromString("play_engine_clank", 0x811C9DC5);
@@ -264,28 +265,28 @@ void __fastcall UFG::DamageModel::HandleDamagedEngine(UFG::DamageModel *this)
       atexit(UFG::DamageModel::HandleDamagedEngine_::_20_::_dynamic_atexit_destructor_for__play_engine_clank__);
     }
     UFG::AudioEntity::CreateAndPlayEvent(
-      (UFG::AudioEntity *)&v1->m_pVehAudComponent->vfptr,
+      &this->m_pVehAudComponent->UFG::AudioEntity,
       play_engine_clank.mUID,
-      &v1->m_ecEngineClank,
+      &this->m_ecEngineClank,
       0i64,
       0,
       0i64);
   }
-  if ( v1->m_mover->mDamageState.engineDamage >= 1.0 )
+  if ( this->m_mover->mDamageState.engineDamage >= 1.0 )
   {
-    if ( !v1->m_engineBlown )
+    if ( !this->m_engineBlown )
     {
       UFG::AudioEntity::CreateAndPlayEvent(
-        (UFG::AudioEntity *)&v1->m_pVehAudComponent->vfptr,
+        &this->m_pVehAudComponent->UFG::AudioEntity,
         Play_engine_blown_id,
         0i64,
         0,
         0i64);
-      v1->m_engineBlown = 1;
+      this->m_engineBlown = 1;
     }
-    if ( v1->m_pVehAudComponent->m_eDriverType == eDriverType_Player && !v1->m_ecEngineSteam.m_pEvent )
+    if ( this->m_pVehAudComponent->m_eDriverType == eDriverType_Player && !this->m_ecEngineSteam.m_pEvent )
     {
-      if ( !(_S13_8 & 2) )
+      if ( (_S13_8 & 2) == 0 )
       {
         _S13_8 |= 2u;
         play_steam.mUID = UFG::qWiseSymbolUIDFromString("play_steam", 0x811C9DC5);
@@ -293,32 +294,32 @@ void __fastcall UFG::DamageModel::HandleDamagedEngine(UFG::DamageModel *this)
         atexit(UFG::DamageModel::HandleDamagedEngine_::_29_::_dynamic_atexit_destructor_for__play_steam__);
       }
       UFG::AudioEntity::CreateAndPlayEvent(
-        (UFG::AudioEntity *)&v1->m_pVehAudComponent->vfptr,
+        &this->m_pVehAudComponent->UFG::AudioEntity,
         play_steam.mUID,
-        &v1->m_ecEngineSteam,
+        &this->m_ecEngineSteam,
         0i64,
         0,
         0i64);
     }
   }
-  if ( !(*((_BYTE *)v1->m_pVehAudComponent + 636) & 1) )
+  if ( (*((_BYTE *)this->m_pVehAudComponent + 636) & 1) == 0 )
   {
-    v5 = v1->m_ecEngineClank.m_pEvent;
+    v5 = this->m_ecEngineClank.m_pEvent;
     if ( v5 )
-      UFG::AudioEvent::StopAndForget(v5, 0xFAu);
+      UFG::AudioEvent::StopAndForget(v5, 250);
   }
-  if ( !(_S13_8 & 4) )
+  if ( (_S13_8 & 4) == 0 )
   {
     _S13_8 |= 4u;
     engine_damage.mUID = UFG::qWiseSymbolUIDFromString("engine_damage", 0x811C9DC5);
     _((AMD_HD3D *)engine_damage.mUID);
     atexit(UFG::DamageModel::HandleDamagedEngine_::_35_::_dynamic_atexit_destructor_for__engine_damage__);
   }
-  v6 = v1->m_mover->mDamageState.engineDamage;
-  if ( v6 != v1->m_lastEngineDamage )
+  v6 = this->m_mover->mDamageState.engineDamage;
+  if ( v6 != this->m_lastEngineDamage )
   {
-    UFG::AudioEntity::SetRtpcValue((UFG::AudioEntity *)&v1->m_pVehAudComponent->vfptr, engine_damage.mUID, v6);
-    v1->m_lastEngineDamage = v1->m_mover->mDamageState.engineDamage;
+    UFG::AudioEntity::SetRtpcValue(&this->m_pVehAudComponent->UFG::AudioEntity, engine_damage.mUID, v6);
+    this->m_lastEngineDamage = this->m_mover->mDamageState.engineDamage;
   }
 }
 

@@ -2,11 +2,9 @@
 // RVA: 0x93F7B0
 void __fastcall Scaleform::MemoryHeap::MemoryHeap(Scaleform::MemoryHeap *this)
 {
-  Scaleform::MemoryHeap *v1; // rbx
-  signed __int64 v2; // rax
-  _QWORD *v3; // rcx
+  Scaleform::MemoryHeap *v2; // rax
+  Scaleform::List<Scaleform::MemoryHeap,Scaleform::MemoryHeap> *p_ChildHeaps; // rcx
 
-  v1 = this;
   this->vfptr = (Scaleform::MemoryHeapVtbl *)&Scaleform::MemoryHeap::`vftable;
   v2 = 0i64;
   this->SelfSize = 0i64;
@@ -21,14 +19,14 @@ void __fastcall Scaleform::MemoryHeap::MemoryHeap(Scaleform::MemoryHeap *this)
   this->Info.Desc.Limit = 0i64;
   this->Info.Desc.HeapId = 0i64;
   this->Info.Desc.Arena = 0i64;
-  v3 = &this->ChildHeaps.Root.pPrev;
-  if ( v3 )
-    v2 = (signed __int64)(v3 - 1);
-  *v3 = v2;
-  v3[1] = v2;
-  Scaleform::Lock::Lock(&v1->HeapLock, 0);
-  *(_WORD *)&v1->UseLocks = 257;
-  memset(&v1->Info, 0, 0x50ui64);
+  p_ChildHeaps = &this->ChildHeaps;
+  if ( p_ChildHeaps )
+    v2 = (Scaleform::MemoryHeap *)&p_ChildHeaps[-1].Root.8;
+  p_ChildHeaps->Root.pPrev = v2;
+  p_ChildHeaps->Root.pNext = v2;
+  Scaleform::Lock::Lock(&this->HeapLock, 0);
+  *(_WORD *)&this->UseLocks = 257;
+  memset(&this->Info, 0, sizeof(this->Info));
 }
 
 // File Line: 86

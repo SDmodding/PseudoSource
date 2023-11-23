@@ -1,18 +1,19 @@
 // File Line: 280
 // RVA: 0xDF28D0
-hkSimdFloat32 *__fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::computeCost(hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *this, hkSimdFloat32 *result)
+hkSimdFloat32 *__fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::computeCost(
+        hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *this,
+        hkSimdFloat32 *result)
 {
-  unsigned __int64 v2; // rsi
-  hkSimdFloat32 *v3; // r14
+  unsigned __int64 m_root; // rsi
   float v4; // xmm7_4
-  hkcdDynamicTree::CodecRawUlong *v5; // rdx
+  hkcdDynamicTree::CodecRawUlong *m_data; // rdx
   unsigned __int64 v6; // rbp
   __m128 v7; // xmm0
   __m128 v8; // xmm1
   __m128 v9; // xmm6
   __int64 v10; // r11
   __int64 v11; // rbx
-  signed int v12; // edi
+  int v12; // edi
   __m128 v13; // xmm0
   __m128 v14; // xmm1
   __m128 v15; // xmm0
@@ -22,9 +23,9 @@ hkSimdFloat32 *__fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorageP
   unsigned __int64 v19; // r9
   unsigned __int64 v20; // r10
   int v21; // ecx
-  unsigned __int64 v22; // rcx
+  unsigned __int64 m_parent; // rcx
   unsigned __int64 i; // r8
-  signed int v24; // er11
+  int v24; // r11d
   __m128 v25; // xmm5
   unsigned __int64 v26; // r9
   unsigned __int64 v27; // r10
@@ -35,35 +36,28 @@ hkSimdFloat32 *__fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorageP
   unsigned __int64 v32; // rcx
   unsigned __int64 v33; // r8
 
-  v2 = this->m_root;
-  v3 = result;
+  m_root = this->m_root;
   *result = 0i64;
-  LODWORD(v4) = (unsigned __int128)_mm_shuffle_ps((__m128)LODWORD(FLOAT_1_0eN7), (__m128)LODWORD(FLOAT_1_0eN7), 0);
-  if ( v2 )
+  LODWORD(v4) = _mm_shuffle_ps((__m128)LODWORD(FLOAT_1_0eN7), (__m128)LODWORD(FLOAT_1_0eN7), 0).m128_u32[0];
+  if ( m_root )
   {
-    v5 = this->m_nodes.m_data;
+    m_data = this->m_nodes.m_data;
     do
     {
-      v6 = v2 << 6;
-      if ( !LODWORD(v5[v2].m_children[0]) )
-        goto LABEL_55;
-      v7 = _mm_sub_ps(
-             *(__m128 *)((char *)&v5->m_aabb.m_max.m_quad + v6),
-             *(__m128 *)((char *)&v5->m_aabb.m_min.m_quad + v6));
+      v6 = m_root << 6;
+      if ( !LODWORD(m_data[m_root].m_children[0]) )
+        goto LABEL_42;
+      v7 = _mm_sub_ps(m_data[m_root].m_aabb.m_max.m_quad, m_data[m_root].m_aabb.m_min.m_quad);
       v8 = _mm_mul_ps(_mm_shuffle_ps(v7, v7, 201), v7);
       v9 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v8, v8, 85), _mm_shuffle_ps(v8, v8, 0)), _mm_shuffle_ps(v8, v8, 170));
       if ( v9.m128_f32[0] > v4 )
       {
-        v10 = *(unsigned __int64 *)((char *)v5->m_children + v6);
-        v11 = *(unsigned __int64 *)((char *)&v5->m_children[1] + v6);
+        v10 = *(unsigned __int64 *)((char *)m_data->m_children + v6);
+        v11 = *(unsigned __int64 *)((char *)&m_data->m_children[1] + v6);
         v12 = 0;
-        v13 = _mm_sub_ps(
-                v5[*(unsigned __int64 *)((char *)v5->m_children + v6)].m_aabb.m_max.m_quad,
-                v5[*(unsigned __int64 *)((char *)v5->m_children + v6)].m_aabb.m_min.m_quad);
+        v13 = _mm_sub_ps(m_data[v10].m_aabb.m_max.m_quad, m_data[v10].m_aabb.m_min.m_quad);
         v14 = _mm_mul_ps(_mm_shuffle_ps(v13, v13, 201), v13);
-        v15 = _mm_sub_ps(
-                v5[*(unsigned __int64 *)((char *)&v5->m_children[1] + v6)].m_aabb.m_max.m_quad,
-                v5[*(unsigned __int64 *)((char *)&v5->m_children[1] + v6)].m_aabb.m_min.m_quad);
+        v15 = _mm_sub_ps(m_data[v11].m_aabb.m_max.m_quad, m_data[v11].m_aabb.m_min.m_quad);
         v16 = _mm_add_ps(
                 _mm_add_ps(_mm_shuffle_ps(v14, v14, 85), _mm_shuffle_ps(v14, v14, 0)),
                 _mm_shuffle_ps(v14, v14, 170));
@@ -73,32 +67,32 @@ hkSimdFloat32 *__fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorageP
                 _mm_shuffle_ps(v17, v17, 170));
         if ( v10 )
         {
-          if ( LODWORD(v5[v10].m_children[0]) )
+          if ( LODWORD(m_data[v10].m_children[0]) )
           {
-            v19 = v5[v10].m_children[0];
+            v19 = m_data[v10].m_children[0];
             while ( v19 )
             {
               v20 = v19 << 6;
-              v21 = v5[v19].m_children[0];
+              v21 = m_data[v19].m_children[0];
               v12 += v21 == 0;
               if ( v21 )
               {
-                v19 = *(unsigned __int64 *)((char *)v5->m_children + v20);
+                v19 = *(unsigned __int64 *)((char *)m_data->m_children + v20);
               }
               else
               {
-                v22 = *(unsigned __int64 *)((char *)&v5->m_parent + v20);
-                for ( i = v19; v22 != v10; v22 = v5[v22].m_parent )
+                m_parent = *(unsigned __int64 *)((char *)&m_data->m_parent + v20);
+                for ( i = v19; m_parent != v10; m_parent = m_data[m_parent].m_parent )
                 {
-                  if ( v5[v22].m_children[1] != i )
+                  if ( m_data[m_parent].m_children[1] != i )
                     break;
-                  i = v22;
+                  i = m_parent;
                 }
-                if ( v22 )
-                  v19 = v5[v22].m_children[1];
+                if ( m_parent )
+                  v19 = m_data[m_parent].m_children[1];
                 else
                   v19 = i;
-                if ( v22 == v10 && v19 == i )
+                if ( m_parent == v10 && v19 == i )
                   v19 = 0i64;
               }
             }
@@ -112,29 +106,29 @@ hkSimdFloat32 *__fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorageP
         v25 = _mm_shuffle_ps((__m128)COERCE_UNSIGNED_INT((float)v12), (__m128)COERCE_UNSIGNED_INT((float)v12), 0);
         if ( v11 )
         {
-          if ( LODWORD(v5[v11].m_children[0]) )
+          if ( LODWORD(m_data[v11].m_children[0]) )
           {
-            v26 = v5[v11].m_children[0];
+            v26 = m_data[v11].m_children[0];
             while ( v26 )
             {
               v27 = v26 << 6;
-              v28 = v5[v26].m_children[0];
+              v28 = m_data[v26].m_children[0];
               v24 += v28 == 0;
               if ( v28 )
               {
-                v26 = *(unsigned __int64 *)((char *)v5->m_children + v27);
+                v26 = *(unsigned __int64 *)((char *)m_data->m_children + v27);
               }
               else
               {
-                v29 = *(unsigned __int64 *)((char *)&v5->m_parent + v27);
-                for ( j = v26; v29 != v11; v29 = v5[v29].m_parent )
+                v29 = *(unsigned __int64 *)((char *)&m_data->m_parent + v27);
+                for ( j = v26; v29 != v11; v29 = m_data[v29].m_parent )
                 {
-                  if ( v5[v29].m_children[1] != j )
+                  if ( m_data[v29].m_children[1] != j )
                     break;
                   j = v29;
                 }
                 if ( v29 )
-                  v26 = v5[v29].m_children[1];
+                  v26 = m_data[v29].m_children[1];
                 else
                   v26 = j;
                 if ( v29 == v11 && v26 == j )
@@ -148,95 +142,98 @@ hkSimdFloat32 *__fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorageP
           }
         }
         v31 = _mm_rcp_ps(v9);
-        v3->m_real = _mm_add_ps(
-                       _mm_add_ps(
-                         _mm_mul_ps(
-                           _mm_mul_ps(_mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v31, v9)), v31), v16),
-                           v25),
-                         v3->m_real),
-                       _mm_mul_ps(
-                         _mm_mul_ps(_mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v31, v9)), v31), v18),
-                         _mm_shuffle_ps(
-                           (__m128)COERCE_UNSIGNED_INT((float)v24),
-                           (__m128)COERCE_UNSIGNED_INT((float)v24),
-                           0)));
+        result->m_real = _mm_add_ps(
+                           _mm_add_ps(
+                             _mm_mul_ps(
+                               _mm_mul_ps(_mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v31, v9)), v31), v16),
+                               v25),
+                             result->m_real),
+                           _mm_mul_ps(
+                             _mm_mul_ps(_mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v31, v9)), v31), v18),
+                             _mm_shuffle_ps(
+                               (__m128)COERCE_UNSIGNED_INT((float)v24),
+                               (__m128)COERCE_UNSIGNED_INT((float)v24),
+                               0)));
       }
-      if ( *(_DWORD *)((char *)v5->m_children + v6) )
+      if ( *(_DWORD *)((char *)m_data->m_children + v6) )
       {
-        v2 = *(unsigned __int64 *)((char *)v5->m_children + v6);
+        m_root = *(unsigned __int64 *)((char *)m_data->m_children + v6);
       }
       else
       {
-LABEL_55:
-        v32 = *(unsigned __int64 *)((char *)&v5->m_parent + v6);
-        v33 = v2;
-        if ( !v32 )
-          goto LABEL_45;
-        while ( v5[v32].m_children[1] == v33 )
-        {
-          v33 = v32;
-          v32 = v5[v32].m_parent;
-          if ( !v32 )
-            goto LABEL_45;
-        }
+LABEL_42:
+        v32 = *(unsigned __int64 *)((char *)&m_data->m_parent + v6);
+        v33 = m_root;
         if ( v32 )
-          v2 = v5[v32].m_children[1];
+        {
+          while ( m_data[v32].m_children[1] == v33 )
+          {
+            v33 = v32;
+            v32 = m_data[v32].m_parent;
+            if ( !v32 )
+              goto LABEL_45;
+          }
+          m_root = m_data[v32].m_children[1];
+        }
         else
+        {
 LABEL_45:
-          v2 = v33;
-        if ( !v32 && v2 == v33 )
-          v2 = 0i64;
+          m_root = v33;
+        }
+        if ( !v32 && m_root == v33 )
+          m_root = 0i64;
       }
     }
-    while ( v2 );
+    while ( m_root );
   }
-  return v3;
+  return result;
 }
 
 // File Line: 305
 // RVA: 0xDA4BA0
-void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorage16>::optimizeIncremental(hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorage16> *this, int passes, int lookahead)
+void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorage16>::optimizeIncremental(
+        hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorage16> *this,
+        int passes,
+        int lookahead)
 {
-  unsigned __int16 v3; // ax
-  int v4; // er15
-  int v5; // er12
-  hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorage16> *v6; // rsi
-  unsigned int v7; // ecx
+  unsigned __int16 m_root; // ax
+  int v5; // r12d
+  unsigned int m_path; // ecx
   __int64 v8; // r8
-  hkcdDynamicTree::Codec32 *v9; // rdx
-  signed __int64 v10; // rdi
+  hkcdDynamicTree::Codec32 *m_data; // rdx
+  hkcdDynamicTree::Codec32 *v10; // rdi
   char v11; // al
-  signed __int64 v12; // rdi
-  signed __int64 v13; // r14
-  signed __int64 v14; // rbx
-  __m128 v15; // xmm5
+  __int64 v12; // rdi
+  unsigned __int64 v13; // r14
+  hkcdDynamicTree::Codec32 *v14; // rbx
+  __m128 m_quad; // xmm5
   __m128 v16; // xmm4
-  signed __int64 v17; // rbp
+  hkcdDynamicTree::Codec32 *v17; // rbp
   unsigned __int16 v18; // ax
-  signed __int64 v19; // r11
+  hkcdDynamicTree::Codec32 *v19; // r11
   unsigned __int16 v20; // r8
   hkcdDynamicTree::Codec32 *v21; // rdx
-  signed __int64 v22; // rbx
+  hkcdDynamicTree::Codec32 *v22; // rbx
   unsigned __int16 v23; // r8
-  signed __int64 v24; // rbx
-  __m128 *v25; // rcx
-  signed __int64 v26; // rax
+  __int64 v24; // rbx
+  __m128 *p_m_quad; // rcx
+  __int64 v26; // rax
   __m128 v27; // xmm3
   __m128 v28; // xmm2
-  signed __int64 v29; // rax
+  __int64 v29; // rax
   __m128 v30; // xmm0
   __m128 v31; // xmm3
   int i; // ecx
   hkcdDynamicTree::Codec32 *v33; // rcx
-  __m128 v34; // xmm9
+  hkVector4f v34; // xmm9
   __m128 v35; // xmm8
-  __m128 *v36; // r9
-  __m128 *v37; // r10
+  hkcdDynamicTree::Codec32 *v36; // r9
+  hkcdDynamicTree::Codec32 *v37; // r10
   unsigned __int16 v38; // cx
   __m128 v39; // xmm10
   __m128 v40; // xmm11
-  __m128 *v41; // rcx
-  __m128 *v42; // rdx
+  hkcdDynamicTree::Codec32 *v41; // rcx
+  hkcdDynamicTree::Codec32 *v42; // rdx
   __m128 v43; // xmm4
   __m128 v44; // xmm3
   __m128 v45; // xmm4
@@ -249,77 +246,72 @@ void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorage16>::optimi
   __m128 v52; // xmm5
   __m128 v53; // xmm5
   unsigned __int16 v54; // ax
-  signed __int64 v55; // r11
+  __int64 v55; // r11
   __int64 v56; // rax
   int v57; // ecx
   __m128 v58; // xmm1
   __m128 v59; // xmm2
-  __m128 *v60; // [rsp+20h] [rbp-98h]
-  __m128 *v61; // [rsp+28h] [rbp-90h]
-  hkResult result; // [rsp+C8h] [rbp+10h]
+  __int64 v60[2]; // [rsp+20h] [rbp-98h]
+  hkResult result; // [rsp+C8h] [rbp+10h] BYREF
 
   if ( passes > 0 )
   {
-    v3 = this->m_root;
-    v4 = lookahead;
+    m_root = this->m_root;
     v5 = passes;
-    v6 = this;
-    if ( v3 )
+    if ( m_root )
     {
-      if ( this->m_nodes.m_data[v3].m_aabb.m_max.m_quad.m128_i16[6] )
+      if ( this->m_nodes.m_data[m_root].m_aabb.m_max.m_quad.m128_i16[6] )
       {
         do
         {
-          v7 = v6->m_path;
-          v8 = v6->m_root;
-          v9 = v6->m_nodes.m_data;
-          v6->m_path = v7 + 1;
-          v10 = (signed __int64)&v9[v8];
+          m_path = this->m_path;
+          v8 = this->m_root;
+          m_data = this->m_nodes.m_data;
+          this->m_path = m_path + 1;
+          v10 = &m_data[v8];
           do
           {
-            v11 = v7;
-            v7 = __ROR4__(v7, 1);
-            v10 = (signed __int64)&v9[*(unsigned __int16 *)(v10 + 2i64 * (v11 & 1) + 28)];
+            v11 = m_path;
+            m_path = __ROR4__(m_path, 1);
+            v10 = &m_data[v10->m_aabb.m_max.m_quad.m128_u16[(v11 & 1) + 6]];
           }
-          while ( *(_WORD *)(v10 + 28) );
-          v12 = (v10 - (signed __int64)v9) >> 5;
+          while ( v10->m_aabb.m_max.m_quad.m128_i16[6] );
+          v12 = v10 - m_data;
           v13 = (unsigned __int16)v12;
-          v14 = (signed __int64)&v9[v13];
-          v15 = v9[v13].m_aabb.m_min.m_quad;
+          v14 = &m_data[v13];
+          m_quad = m_data[v13].m_aabb.m_min.m_quad;
           v16 = _mm_shuffle_ps(
-                  v9[v13].m_aabb.m_max.m_quad,
-                  _mm_unpackhi_ps(v9[v13].m_aabb.m_max.m_quad, (__m128)0i64),
+                  m_data[v13].m_aabb.m_max.m_quad,
+                  _mm_unpackhi_ps(m_data[v13].m_aabb.m_max.m_quad, (__m128)0i64),
                   196);
           if ( (_WORD)v12 == (_WORD)v8 )
           {
-            v6->m_root = 0;
+            this->m_root = 0;
           }
           else
           {
-            v17 = (signed __int64)&v9[*(unsigned __int16 *)(v14 + 12)];
-            v18 = *(_WORD *)(v17 + 12);
-            v19 = (signed __int64)&v9[*(unsigned __int16 *)(v17 + 2 * (15i64 - (*(_WORD *)(v17 + 30) == (_WORD)v12)))];
+            v17 = &m_data[v14->m_aabb.m_min.m_quad.m128_u16[6]];
+            v18 = v17->m_aabb.m_min.m_quad.m128_u16[6];
+            v19 = &m_data[v17->m_aabb.m_min.m_quad.m128_u16[15i64
+                                                          - (v17->m_aabb.m_max.m_quad.m128_i16[7] == (unsigned __int16)v12)]];
             if ( v18 )
             {
-              *(_DWORD *)(v19 + 12) = v18 | 0x3F000000;
-              v6->m_nodes.m_data->m_aabb.m_max.m_quad.m128_i16[16i64 * *(unsigned __int16 *)(v17 + 12)
-                                                             + (v6->m_nodes.m_data[*(unsigned __int16 *)(v17 + 12)].m_aabb.m_max.m_quad.m128_i16[7] == *(_WORD *)(v14 + 12))
-                                                             + 6] = (signed __int64)(v19
-                                                                                   - (unsigned __int64)v6->m_nodes.m_data) >> 5;
-              v20 = *(_WORD *)(v14 + 12);
-              v6->m_nodes.m_data[*(unsigned __int16 *)(v14 + 12)].m_aabb.m_min.m_quad.m128_i16[0] = v6->m_firstFree;
-              v21 = v6->m_nodes.m_data;
-              v6->m_firstFree = v20;
-              v22 = (signed __int64)&v21[*(unsigned __int16 *)(v19 + 12)];
+              v19->m_aabb.m_min.m_quad.m128_i32[3] = v18 | 0x3F000000;
+              this->m_nodes.m_data[v17->m_aabb.m_min.m_quad.m128_u16[6]].m_aabb.m_max.m_quad.m128_i16[(this->m_nodes.m_data[v17->m_aabb.m_min.m_quad.m128_u16[6]].m_aabb.m_max.m_quad.m128_i16[7] == v14->m_aabb.m_min.m_quad.m128_i16[6]) + 6] = v19 - this->m_nodes.m_data;
+              v20 = v14->m_aabb.m_min.m_quad.m128_u16[6];
+              this->m_nodes.m_data[v20].m_aabb.m_min.m_quad.m128_i16[0] = this->m_firstFree;
+              v21 = this->m_nodes.m_data;
+              this->m_firstFree = v20;
+              v22 = &v21[v19->m_aabb.m_min.m_quad.m128_u16[6]];
               while ( 1 )
               {
-                v23 = *(_WORD *)(v22 + 12);
-                v24 = (v22 - (signed __int64)v21) >> 5;
-                v25 = &v21[(unsigned __int16)v24].m_aabb.m_min.m_quad;
-                v26 = v25[1].m128_u16[6];
+                v23 = v22->m_aabb.m_min.m_quad.m128_u16[6];
+                v24 = v22 - v21;
+                p_m_quad = &v21[(unsigned __int16)v24].m_aabb.m_min.m_quad;
+                v26 = p_m_quad[1].m128_u16[6];
                 v27 = v21[v26].m_aabb.m_max.m_quad;
                 v28 = v21[v26].m_aabb.m_min.m_quad;
-                v29 = v25[1].m128_u16[7];
+                v29 = p_m_quad[1].m128_u16[7];
                 v30 = _mm_min_ps(v28, v21[v29].m_aabb.m_min.m_quad);
                 v31 = _mm_max_ps(
                         _mm_shuffle_ps(v27, _mm_unpackhi_ps(v27, (__m128)0i64), 196),
@@ -327,119 +319,134 @@ void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorage16>::optimi
                           v21[v29].m_aabb.m_max.m_quad,
                           _mm_unpackhi_ps(v21[v29].m_aabb.m_max.m_quad, (__m128)0i64),
                           196));
-                *v25 = _mm_shuffle_ps(v30, _mm_unpackhi_ps(v30, *v25), 196);
-                v25[1] = _mm_shuffle_ps(v31, _mm_unpackhi_ps(v31, v25[1]), 196);
-                if ( (_mm_movemask_ps(_mm_and_ps(_mm_cmpleps(v16, v31), _mm_cmpleps(v30, v15))) & 7) == 7 )
+                *p_m_quad = _mm_shuffle_ps(v30, _mm_unpackhi_ps(v30, *p_m_quad), 196);
+                p_m_quad[1] = _mm_shuffle_ps(v31, _mm_unpackhi_ps(v31, p_m_quad[1]), 196);
+                if ( (_mm_movemask_ps(_mm_and_ps(_mm_cmple_ps(v16, v31), _mm_cmple_ps(v30, m_quad))) & 7) == 7 )
                   goto LABEL_16;
                 if ( v23 )
                 {
-                  v21 = v6->m_nodes.m_data;
-                  v22 = (signed __int64)&v6->m_nodes.m_data[v23];
+                  v21 = this->m_nodes.m_data;
+                  v22 = &this->m_nodes.m_data[v23];
                   if ( v22 )
                     continue;
                 }
                 goto LABEL_15;
               }
             }
-            v9[v8].m_aabb.m_min.m_quad.m128_i16[0] = v6->m_firstFree;
-            v6->m_firstFree = v8;
-            v6->m_root = (signed __int64)(unsigned int)(v19 - LODWORD(v6->m_nodes.m_data)) >> 5;
-            *(_DWORD *)(v19 + 12) = 1056964608;
+            m_data[v8].m_aabb.m_min.m_quad.m128_i16[0] = this->m_firstFree;
+            this->m_firstFree = v8;
+            this->m_root = (__int64)(unsigned int)((_DWORD)v19 - LODWORD(this->m_nodes.m_data)) >> 5;
+            v19->m_aabb.m_min.m_quad.m128_i32[3] = 1056964608;
           }
 LABEL_15:
-          LOWORD(v24) = v6->m_root;
+          LOWORD(v24) = this->m_root;
 LABEL_16:
           if ( (_WORD)v24 )
           {
-            if ( v4 < 0 )
+            if ( lookahead < 0 )
             {
-              LOWORD(v24) = v6->m_root;
+              LOWORD(v24) = this->m_root;
             }
             else
             {
-              for ( i = v4; i; LOWORD(v24) = v6->m_nodes.m_data[(unsigned __int16)v24].m_aabb.m_min.m_quad.m128_i16[6] )
+              for ( i = lookahead;
+                    i;
+                    LOWORD(v24) = this->m_nodes.m_data[(unsigned __int16)v24].m_aabb.m_min.m_quad.m128_i16[6] )
               {
                 --i;
-                if ( 0 == v6->m_nodes.m_data[(unsigned __int16)v24].m_aabb.m_min.m_quad.m128_i16[6] )
+                if ( !this->m_nodes.m_data[(unsigned __int16)v24].m_aabb.m_min.m_quad.m128_i16[6] )
                   break;
               }
             }
           }
-          v33 = v6->m_nodes.m_data;
-          v34 = v6->m_nodes.m_data[v13].m_aabb.m_min.m_quad;
+          v33 = this->m_nodes.m_data;
+          v34.m_quad = (__m128)this->m_nodes.m_data[(unsigned __int16)v12].m_aabb.m_min;
           v35 = _mm_shuffle_ps(
-                  v6->m_nodes.m_data[v13].m_aabb.m_max.m_quad,
-                  _mm_unpackhi_ps(v6->m_nodes.m_data[v13].m_aabb.m_max.m_quad, (__m128)0i64),
+                  this->m_nodes.m_data[v13].m_aabb.m_max.m_quad,
+                  _mm_unpackhi_ps(this->m_nodes.m_data[v13].m_aabb.m_max.m_quad, (__m128)0i64),
                   196);
           if ( (_WORD)v24 )
           {
-            if ( !v6->m_firstFree )
+            if ( !this->m_firstFree )
               hkcdDynamicTree::DynamicStorage<0,hkcdDynamicTree::AnisotropicMetric,hkcdDynamicTree::Codec32>::reserveNodes(
-                (hkcdDynamicTree::DynamicStorage<0,hkcdDynamicTree::AnisotropicMetric,hkcdDynamicTree::Codec32> *)&v6->m_nodes,
+                this,
                 &result,
                 1);
-            v36 = &v6->m_nodes.m_data[(unsigned __int16)v24].m_aabb.m_min.m_quad;
-            v37 = &v6->m_nodes.m_data[v6->m_firstFree].m_aabb.m_min.m_quad;
-            v6->m_firstFree = v37->m128_u64[0];
-            v38 = v36[1].m128_u16[6];
+            v36 = &this->m_nodes.m_data[(unsigned __int16)v24];
+            v37 = &this->m_nodes.m_data[this->m_firstFree];
+            this->m_firstFree = v37->m_aabb.m_min.m_quad.m128_i16[0];
+            v38 = v36->m_aabb.m_max.m_quad.m128_u16[6];
             if ( v38 )
             {
-              v39 = _mm_add_ps(v34, v35);
-              v40 = _mm_sub_ps(v35, v34);
+              v39 = _mm_add_ps(v34.m_quad, v35);
+              v40 = _mm_sub_ps(v35, v34.m_quad);
               do
               {
-                v41 = &v6->m_nodes.m_data[v38].m_aabb.m_min.m_quad;
-                v42 = &v6->m_nodes.m_data[v36[1].m128_u16[7]].m_aabb.m_min.m_quad;
-                v43 = _mm_min_ps(v34, *v36);
-                v44 = _mm_max_ps(v35, _mm_shuffle_ps(v36[1], _mm_unpackhi_ps(v36[1], (__m128)0i64), 196));
-                v60 = v41;
-                v61 = v42;
-                *v36 = _mm_shuffle_ps(v43, _mm_unpackhi_ps(v43, *v36), 196);
-                v36[1] = _mm_shuffle_ps(v44, _mm_unpackhi_ps(v44, v36[1]), 196);
-                v45 = _mm_shuffle_ps(v41[1], _mm_unpackhi_ps(v41[1], (__m128)0i64), 196);
-                v46 = _mm_shuffle_ps(v42[1], _mm_unpackhi_ps(v42[1], (__m128)0i64), 196);
-                v47 = _mm_sub_ps(_mm_add_ps(*v41, v45), v39);
-                v48 = _mm_add_ps(*v42, v46);
+                v41 = &this->m_nodes.m_data[v38];
+                v42 = &this->m_nodes.m_data[v36->m_aabb.m_max.m_quad.m128_u16[7]];
+                v43 = _mm_min_ps(v34.m_quad, v36->m_aabb.m_min.m_quad);
+                v44 = _mm_max_ps(
+                        v35,
+                        _mm_shuffle_ps(
+                          v36->m_aabb.m_max.m_quad,
+                          _mm_unpackhi_ps(v36->m_aabb.m_max.m_quad, (__m128)0i64),
+                          196));
+                v60[0] = (__int64)v41;
+                v60[1] = (__int64)v42;
+                v36->m_aabb.m_min.m_quad = _mm_shuffle_ps(v43, _mm_unpackhi_ps(v43, v36->m_aabb.m_min.m_quad), 196);
+                v36->m_aabb.m_max.m_quad = _mm_shuffle_ps(v44, _mm_unpackhi_ps(v44, v36->m_aabb.m_max.m_quad), 196);
+                v45 = _mm_shuffle_ps(
+                        v41->m_aabb.m_max.m_quad,
+                        _mm_unpackhi_ps(v41->m_aabb.m_max.m_quad, (__m128)0i64),
+                        196);
+                v46 = _mm_shuffle_ps(
+                        v42->m_aabb.m_max.m_quad,
+                        _mm_unpackhi_ps(v42->m_aabb.m_max.m_quad, (__m128)0i64),
+                        196);
+                v47 = _mm_sub_ps(_mm_add_ps(v41->m_aabb.m_min.m_quad, v45), v39);
+                v48 = _mm_add_ps(v42->m_aabb.m_min.m_quad, v46);
                 v49 = _mm_mul_ps(v47, v47);
-                v50 = _mm_add_ps(_mm_sub_ps(v45, *v41), v40);
-                v51 = _mm_add_ps(_mm_sub_ps(v46, *v42), v40);
+                v50 = _mm_add_ps(_mm_sub_ps(v45, v41->m_aabb.m_min.m_quad), v40);
+                v51 = _mm_add_ps(_mm_sub_ps(v46, v42->m_aabb.m_min.m_quad), v40);
                 v52 = _mm_sub_ps(v48, v39);
                 v53 = _mm_mul_ps(v52, v52);
-                v36 = *(&v60
-                      + ((float)((float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v50, v50, 85))
-                                               + COERCE_FLOAT(_mm_shuffle_ps(v50, v50, 0)))
-                                       + COERCE_FLOAT(_mm_shuffle_ps(v50, v50, 170)))
-                               * (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v49, v49, 85))
-                                               + COERCE_FLOAT(_mm_shuffle_ps(v49, v49, 0)))
-                                       + COERCE_FLOAT(_mm_shuffle_ps(v49, v49, 170)))) > (float)((float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v51, v51, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v51, v51, 0))) + COERCE_FLOAT(_mm_shuffle_ps(v51, v51, 170)))
-                                                                                               * (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v53, v53, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v53, v53, 0))) + COERCE_FLOAT(_mm_shuffle_ps(v53, v53, 170))))));
-                v38 = v36[1].m128_u16[6];
+                v36 = (hkcdDynamicTree::Codec32 *)v60[(float)((float)((float)(_mm_shuffle_ps(v50, v50, 85).m128_f32[0]
+                                                                            + _mm_shuffle_ps(v50, v50, 0).m128_f32[0])
+                                                                    + _mm_shuffle_ps(v50, v50, 170).m128_f32[0])
+                                                            * (float)((float)(_mm_shuffle_ps(v49, v49, 85).m128_f32[0]
+                                                                            + _mm_shuffle_ps(v49, v49, 0).m128_f32[0])
+                                                                    + _mm_shuffle_ps(v49, v49, 170).m128_f32[0])) > (float)((float)((float)(_mm_shuffle_ps(v51, v51, 85).m128_f32[0] + _mm_shuffle_ps(v51, v51, 0).m128_f32[0]) + _mm_shuffle_ps(v51, v51, 170).m128_f32[0]) * (float)((float)(_mm_shuffle_ps(v53, v53, 85).m128_f32[0] + _mm_shuffle_ps(v53, v53, 0).m128_f32[0]) + _mm_shuffle_ps(v53, v53, 170).m128_f32[0]))];
+                v38 = v36->m_aabb.m_max.m_quad.m128_u16[6];
               }
               while ( v38 );
             }
-            v54 = WORD2(v36->m128_u64[1]);
-            v55 = ((char *)v37 - (char *)v6->m_nodes.m_data) >> 5;
+            v54 = v36->m_aabb.m_min.m_quad.m128_u16[6];
+            v55 = v37 - this->m_nodes.m_data;
             if ( v54 )
-              v6->m_nodes.m_data->m_aabb.m_max.m_quad.m128_i16[16i64 * v54
-                                                             + (v6->m_nodes.m_data[v54].m_aabb.m_max.m_quad.m128_i16[7] == (unsigned __int16)(((char *)v36 - (char *)v6->m_nodes.m_data) >> 5))
-                                                             + 6] = v55;
+              this->m_nodes.m_data[v54].m_aabb.m_max.m_quad.m128_i16[(this->m_nodes.m_data[v54].m_aabb.m_max.m_quad.m128_i16[7] == (unsigned __int16)(v36 - this->m_nodes.m_data))
+                                                                   + 6] = v55;
             else
-              v6->m_root = v55;
-            HIDWORD(v37->m128_u64[1]) = WORD2(v36->m128_u64[1]) | 0x3F000000;
-            v56 = (unsigned int)((_DWORD)v36 - LODWORD(v6->m_nodes.m_data));
-            v37[1].m128_i16[7] = v12;
+              this->m_root = v55;
+            v37->m_aabb.m_min.m_quad.m128_i32[3] = v36->m_aabb.m_min.m_quad.m128_u16[6] | 0x3F000000;
+            v56 = (unsigned int)((_DWORD)v36 - LODWORD(this->m_nodes.m_data));
+            v37->m_aabb.m_max.m_quad.m128_i16[7] = v12;
             v57 = (unsigned __int16)v55 | 0x3F000000;
-            v37[1].m128_i16[6] = v56 >> 5;
-            HIDWORD(v36->m128_u64[1]) = v57;
-            v6->m_nodes.m_data[v13].m_aabb.m_min.m_quad.m128_i32[3] = v57;
-            v58 = _mm_min_ps(*v36, v34);
-            v59 = _mm_max_ps(_mm_shuffle_ps(v36[1], _mm_unpackhi_ps(v36[1], (__m128)0i64), 196), v35);
-            *v37 = _mm_shuffle_ps(v58, _mm_unpackhi_ps(v58, *v37), 196);
-            v37[1] = _mm_shuffle_ps(v59, _mm_unpackhi_ps(v59, v37[1]), 196);
+            v37->m_aabb.m_max.m_quad.m128_i16[6] = v56 >> 5;
+            v36->m_aabb.m_min.m_quad.m128_i32[3] = v57;
+            this->m_nodes.m_data[v13].m_aabb.m_min.m_quad.m128_i32[3] = v57;
+            v58 = _mm_min_ps(v36->m_aabb.m_min.m_quad, v34.m_quad);
+            v59 = _mm_max_ps(
+                    _mm_shuffle_ps(
+                      v36->m_aabb.m_max.m_quad,
+                      _mm_unpackhi_ps(v36->m_aabb.m_max.m_quad, (__m128)0i64),
+                      196),
+                    v35);
+            v37->m_aabb.m_min.m_quad = _mm_shuffle_ps(v58, _mm_unpackhi_ps(v58, v37->m_aabb.m_min.m_quad), 196);
+            v37->m_aabb.m_max.m_quad = _mm_shuffle_ps(v59, _mm_unpackhi_ps(v59, v37->m_aabb.m_max.m_quad), 196);
           }
           else
           {
-            v6->m_root = v12;
+            this->m_root = v12;
             v33[v13].m_aabb.m_min.m_quad.m128_i32[3] = 1056964608;
           }
           --v5;
@@ -452,318 +459,315 @@ LABEL_16:
 
 // File Line: 344
 // RVA: 0xCC0120
-void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildBranchSAH(hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *this, unsigned __int64 branch, hkBool minimize, int numBins, int bottomUpThreshold)
+void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildBranchSAH(
+        hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *this,
+        unsigned __int64 branch,
+        hkBool minimize,
+        int numBins,
+        int bottomUpThreshold)
 {
-  __int64 v5; // rsi
+  char *v5; // rsi
   unsigned __int64 v6; // rdi
   hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *v7; // r15
   unsigned __int64 v8; // r14
-  _QWORD **v9; // rax
+  _QWORD **Value; // rax
   __int64 v10; // rax
-  void *v11; // rbx
-  int v12; // ecx
-  hkcdDynamicTree::CodecRawUlong *v13; // rcx
+  char *v11; // rbx
+  int m_size; // ecx
+  hkcdDynamicTree::CodecRawUlong *m_data; // rcx
   __int64 v14; // rax
   __m128 v15; // xmm10
   __m128 v16; // xmm11
   int v17; // edx
   hkcdDynamicTree::CodecRawUlong *v18; // rbx
   unsigned __int64 v19; // rdi
-  signed __int64 v20; // rbx
-  _DWORD *v21; // rbx
+  __int64 v20; // rbx
+  char *v21; // rbx
   int v22; // edx
-  __int64 v23; // r8
+  char *v23; // r8
   __m128 v24; // xmm13
   __m128 v25; // xmm14
-  int v26; // er9
-  __int64 v27; // r13
-  __int64 v28; // r14
-  __int64 v29; // rdi
-  int *v30; // rbx
-  int v31; // er8
-  int v32; // eax
-  signed __int64 v33; // rcx
-  __int64 v34; // rdx
-  int v35; // er9
-  __int64 v36; // rdi
-  int *v37; // rbx
-  int v38; // er8
-  __int64 v39; // rcx
-  __int64 v40; // rdx
-  int v41; // er9
-  __int64 v42; // rdi
-  int *v43; // rbx
-  int v44; // er8
-  __int64 v45; // rcx
-  __int64 v46; // rdx
-  int v47; // edx
-  __int64 v48; // r12
-  __int64 v49; // rax
-  float v50; // xmm5_4
-  signed int v51; // er10
-  signed int v52; // er9
-  signed int v53; // ebx
-  __int128 v54; // xmm7
-  signed __int64 v55; // r13
-  __m128 v56; // xmm6
-  hkcdDynamicTree::CodecRawUlong *v57; // rsi
-  unsigned __int64 *v58; // rdi
-  __int64 v59; // rdx
-  signed __int64 v60; // r11
-  int v61; // ecx
-  unsigned __int64 v62; // rax
-  __m128 v63; // xmm8
-  __m128 v64; // xmm9
-  _QWORD *v65; // rdx
-  signed __int64 v66; // r8
-  __int64 v67; // rax
+  char *v26; // r13
+  __int64 v27; // r14
+  __int64 v28; // rdi
+  int *v29; // rbx
+  int v30; // r8d
+  int v31; // eax
+  char *v32; // rcx
+  __int64 v33; // rdx
+  int v34; // r9d
+  __int64 v35; // rdi
+  int *v36; // rbx
+  int v37; // r8d
+  __int64 v38; // rcx
+  char *v39; // rdx
+  int v40; // r9d
+  __int64 v41; // rdi
+  int *v42; // rbx
+  int v43; // r8d
+  __int64 v44; // rcx
+  char *v45; // rdx
+  int v46; // edx
+  char *v47; // r12
+  __int64 v48; // rax
+  float v49; // xmm5_4
+  int v50; // r10d
+  int v51; // r9d
+  int v52; // ebx
+  __int128 v53; // xmm7
+  __int64 v54; // r13
+  __m128 v55; // xmm6
+  hkcdDynamicTree::CodecRawUlong *v56; // rsi
+  unsigned __int64 *v57; // rdi
+  __int64 v58; // rdx
+  __int64 v59; // r11
+  int v60; // ecx
+  unsigned __int64 v61; // rax
+  __m128 v62; // xmm8
+  __m128 v63; // xmm9
+  _QWORD *v64; // rdx
+  __int64 v65; // r8
+  __int64 v66; // rax
+  __m128 v67; // xmm4
   __m128 v68; // xmm3
-  __m128 v69; // xmm4
-  __m128 v70; // xmm3
-  __m128 v71; // xmm0
-  __m128 v72; // xmm1
-  float v73; // xmm2_4
-  __int64 v74; // r14
-  unsigned __int64 v75; // rdi
-  unsigned __int64 v76; // rsi
-  unsigned __int64 v77; // r8
-  hkcdDynamicTree::CodecRawUlong *v78; // rdx
-  unsigned __int64 v79; // rcx
-  __int64 v80; // rax
-  unsigned __int64 v81; // r8
-  __m128 v82; // xmm7
-  __int64 v83; // rdx
-  __m128 v84; // xmm6
-  hkcdDynamicTree::CodecRawUlong *v85; // r8
-  unsigned __int64 *v86; // rcx
-  unsigned __int64 v87; // rax
-  __m128 v88; // xmm9
-  __m128 v89; // xmm1
-  __m128 v90; // xmm8
-  __int64 v91; // rbx
-  hkcdDynamicTree::CodecRawUlong *v92; // rcx
-  unsigned __int64 v93; // rdx
-  __int64 v94; // rax
+  __m128 v69; // xmm0
+  __m128 v70; // xmm1
+  float v71; // xmm2_4
+  __int64 v72; // r14
+  unsigned __int64 v73; // rdi
+  unsigned __int64 v74; // rsi
+  unsigned __int64 v75; // r8
+  hkcdDynamicTree::CodecRawUlong *v76; // rdx
+  unsigned __int64 v77; // rcx
+  __int64 v78; // rax
+  unsigned __int64 v79; // r8
+  __m128 v80; // xmm7
+  __int64 v81; // rdx
+  __m128 v82; // xmm6
+  hkcdDynamicTree::CodecRawUlong *v83; // r8
+  unsigned __int64 *v84; // rcx
+  __int64 v85; // rax
+  __m128 v86; // xmm9
+  __m128 v87; // xmm1
+  __m128 v88; // xmm8
+  __int64 m_firstFree; // rbx
+  hkcdDynamicTree::CodecRawUlong *v90; // rcx
+  __int64 v91; // rdx
+  __int64 v92; // rax
+  _QWORD **v93; // rax
+  hkArrayBase<char *> *v94; // rsi
   _QWORD **v95; // rax
-  hkArrayBase<char *> *v96; // rsi
-  _QWORD **v97; // rax
-  hkArrayBase<char *> *v98; // rdi
+  hkArrayBase<char *> *v96; // rdi
+  int m_capacityAndFlags; // eax
+  int v98; // r9d
   int v99; // eax
-  int v100; // er9
-  int v101; // eax
+  int v100; // eax
+  int v101; // r9d
   int v102; // eax
-  int v103; // er9
-  int v104; // eax
-  int v105; // eax
-  __int64 v106; // rcx
-  __int64 v107; // rdx
-  __int64 v108; // rax
-  __int64 v109; // rax
-  __int64 v110; // rax
-  bool v111; // zf
-  bool v112; // sf
-  __m128 v113; // xmm6
-  int v114; // er14
-  __int64 v115; // rdi
-  __m128 *v116; // rcx
-  __m128 v117; // xmm4
-  __m128 v118; // xmm3
-  __m128 v119; // xmm1
-  __m128i v120; // xmm2
-  __int64 v121; // rax
-  signed __int64 v122; // rcx
+  int v103; // eax
+  __int64 v104; // rcx
+  char *v105; // rdx
+  char *v106; // rax
+  char *v107; // rax
+  char *v108; // rax
+  bool v109; // cc
+  __m128 v110; // xmm6
+  int v111; // r14d
+  __int64 v112; // rdi
+  hkcdDynamicTree::CodecRawUlong *v113; // rcx
+  __m128 m_quad; // xmm4
+  __m128 v115; // xmm3
+  __m128 v116; // xmm1
+  __m128i v117; // xmm2
+  char *v118; // rax
+  __int64 v119; // rcx
+  __m128 v120; // xmm1
+  char *v121; // rax
+  __int64 v122; // rsi
   __m128 v123; // xmm1
-  __int64 v124; // rax
-  signed __int64 v125; // rsi
+  char *v124; // rax
+  __int64 v125; // r13
   __m128 v126; // xmm1
-  __int64 v127; // rax
-  signed __int64 v128; // r13
-  __m128 v129; // xmm1
-  _DWORD *v130; // rbx
-  __int64 v131; // rbx
-  unsigned __int64 *v132; // rsi
+  const void **v127; // rbx
+  char *v128; // rbx
+  unsigned __int64 *v129; // rsi
+  char *v130; // rbx
+  char **v131; // rax
+  int v132; // r14d
   __int64 v133; // rbx
-  __int64 *v134; // rax
-  signed int v135; // er14
-  __int64 v136; // rbx
-  int v137; // edi
-  float v138; // xmm3_4
-  signed int v139; // er9
-  __int64 v140; // r8
-  int v141; // edx
-  signed int v142; // er13
-  __int64 v143; // rcx
-  __m128 v144; // xmm4
-  __m128 v145; // xmm5
-  __m128 v146; // xmm6
-  __m128 v147; // xmm7
-  signed __int64 v148; // rsi
-  __int64 v149; // r11
-  signed int v150; // er13
-  __m128 *v151; // rcx
-  __m128 *v152; // r10
-  signed int v153; // eax
-  signed __int64 v154; // r11
-  __m128 v155; // xmm0
-  __m128 v156; // xmm2
-  __m128 v157; // xmm0
-  __m128 v158; // xmm2
-  int v159; // er10
-  signed __int64 v160; // rcx
-  float *v161; // rax
-  signed __int64 v162; // rbx
-  __int64 v163; // r13
-  hkArrayBase<char *> *v164; // r12
-  __int64 v165; // r15
-  int v166; // eax
-  hkArrayBase<char *> *v167; // r15
-  signed __int64 v168; // rdi
-  __int64 v169; // rsi
-  int v170; // ecx
-  int v171; // edx
-  __int64 v172; // rax
-  __int64 v173; // r13
-  int v174; // edi
-  unsigned __int64 *v175; // rsi
-  hkArrayBase<char *> *v176; // rcx
-  char *const *v177; // r8
-  int v178; // er9
-  __int64 v179; // r8
-  __int64 v180; // r13
-  int v181; // er8
-  _QWORD **v182; // rax
-  __int64 v183; // rdi
-  __int64 v184; // rax
-  hkcdDynamicTree::CodecRawUlong *v185; // r9
-  char v186; // r8
-  unsigned __int64 v187; // rbx
-  unsigned __int64 v188; // rsi
-  __m128 *v189; // rdi
-  __m128 *v190; // r11
-  __m128 v191; // xmm0
-  __m128 v192; // xmm2
-  __m128 v193; // xmm1
-  __m128 v194; // xmm3
-  float v195; // xmm12_4
-  __m128 *v196; // r8
-  unsigned __int64 *v197; // r10
-  signed __int64 v198; // r14
-  unsigned __int64 v199; // rcx
-  unsigned __int64 v200; // rdx
-  __m128 *v201; // rcx
-  __m128 *v202; // rdx
+  int v134; // edi
+  float v135; // xmm3_4
+  int v136; // r9d
+  __int64 v137; // r8
+  int v138; // edx
+  int v139; // r13d
+  char *v140; // rcx
+  __m128 v141; // xmm4
+  __m128 v142; // xmm5
+  __m128 v143; // xmm6
+  __m128 v144; // xmm7
+  __int64 v145; // rsi
+  __int64 v146; // r11
+  int v147; // r13d
+  __m128 *v148; // rcx
+  __m128 *v149; // r10
+  int v150; // eax
+  __int64 v151; // r11
+  __m128 v152; // xmm0
+  __m128 v153; // xmm2
+  __m128 v154; // xmm0
+  __m128 v155; // xmm2
+  int v156; // r10d
+  __int64 v157; // rcx
+  float *v158; // rax
+  __int64 v159; // rsi
+  __int64 v160; // rbx
+  __int64 v161; // r13
+  hkArrayBase<char *> *v162; // r12
+  __int64 v163; // r15
+  int v164; // eax
+  hkArrayBase<char *> *v165; // r15
+  __int64 v166; // rdi
+  char *v167; // rsi
+  int v168; // ecx
+  int v169; // edx
+  char *v170; // rax
+  __int64 v171; // r13
+  int v172; // edi
+  unsigned __int64 *v173; // rsi
+  hkArrayBase<char *> *v174; // rcx
+  char *const *v175; // r8
+  int v176; // r9d
+  char *v177; // r8
+  __int64 v178; // r13
+  int v179; // r8d
+  _QWORD **v180; // rax
+  __int64 v181; // rdi
+  char *v182; // rax
+  hkcdDynamicTree::CodecRawUlong *v183; // r9
+  char m_enum; // r8
+  unsigned __int64 v185; // rbx
+  unsigned __int64 v186; // rsi
+  __m128 *p_m_quad; // rdi
+  __m128 *v188; // r11
+  __m128 v189; // xmm0
+  __m128 v190; // xmm2
+  __m128 v191; // xmm1
+  __m128 v192; // xmm3
+  float v193; // xmm12_4
+  __m128 *v194; // r8
+  unsigned __int64 *v195; // r10
+  __int64 v196; // r14
+  unsigned __int64 v197; // rcx
+  unsigned __int64 v198; // rdx
+  __m128 *v199; // rcx
+  __m128 *v200; // rdx
+  __m128 v201; // xmm1
+  __m128 v202; // xmm0
   __m128 v203; // xmm1
-  __m128 v204; // xmm0
-  __m128 v205; // xmm1
+  __m128 v204; // xmm3
+  __m128 v205; // xmm7
   __m128 v206; // xmm11
   __m128 v207; // xmm9
-  __m128 v208; // xmm3
-  __m128 v209; // xmm7
+  __m128 v208; // xmm1
+  __m128 v209; // xmm2
   __m128 v210; // xmm3
-  __m128 v211; // xmm7
-  __m128 v212; // xmm11
-  __m128 v213; // xmm9
-  __m128 v214; // xmm1
-  __m128 v215; // xmm2
-  __m128 v216; // xmm3
-  __m128 v217; // xmm4
-  __m128 v218; // xmm1
-  BOOL v219; // er10
-  _BOOL8 v220; // rcx
-  __int64 v221; // rcx
-  signed __int64 v222; // rdx
-  __m128 v223; // xmm1
-  int v224; // eax
-  __m128 v225; // xmm0
-  __m128 v226; // xmm1
-  unsigned __int64 v227; // rcx
+  __m128 v211; // xmm4
+  __m128 v212; // xmm1
+  BOOL v213; // r10d
+  _BOOL8 v214; // rcx
+  __int64 v215; // rcx
+  __int64 v216; // rdx
+  __m128 v217; // xmm1
+  int v218; // eax
+  __m128 v219; // xmm0
+  __m128 v220; // xmm1
+  unsigned __int64 m_parent; // rcx
   unsigned __int64 i; // rdx
-  hkcdDynamicTree::CodecRawUlong *v229; // rdx
-  unsigned __int64 v230; // r10
-  unsigned __int64 v231; // r9
-  unsigned __int64 v232; // r8
-  __m128 v233; // xmm0
-  __m128 v234; // xmm3
-  __m128 v235; // xmm1
-  __m128 v236; // xmm2
-  unsigned __int64 v237; // rcx
+  hkcdDynamicTree::CodecRawUlong *v223; // rdx
+  unsigned __int64 v224; // r10
+  unsigned __int64 v225; // r9
+  unsigned __int64 v226; // r8
+  __m128 v227; // xmm0
+  __m128 v228; // xmm3
+  __m128 v229; // xmm1
+  __m128 v230; // xmm2
+  unsigned __int64 v231; // rcx
   unsigned __int64 j; // r8
-  __int64 v239; // r8
-  __int64 v240; // rdx
-  hkcdDynamicTree::CodecRawUlong *v241; // rdx
-  __int64 v242; // r8
-  unsigned __int64 v243; // rax
-  unsigned __int64 v244; // rcx
-  __m128 v245; // xmm2
-  int *v246; // rsi
-  int v247; // eax
-  __int64 v248; // rcx
-  int v249; // eax
-  __int64 v250; // rdi
-  int *v251; // rbx
-  int v252; // er8
-  int v253; // er8
-  __int64 v254; // [rsp+30h] [rbp-B0h]
-  unsigned __int64 *v255; // [rsp+30h] [rbp-B0h]
-  unsigned __int64 *v256; // [rsp+30h] [rbp-B0h]
-  __int64 v257; // [rsp+30h] [rbp-B0h]
-  void **array; // [rsp+38h] [rbp-A8h]
-  int v259; // [rsp+40h] [rbp-A0h]
-  int v260; // [rsp+44h] [rbp-9Ch]
-  __int64 v261; // [rsp+48h] [rbp-98h]
-  __int64 v262; // [rsp+50h] [rbp-90h]
-  int v263; // [rsp+58h] [rbp-88h]
-  int v264; // [rsp+5Ch] [rbp-84h]
-  __int64 v265; // [rsp+60h] [rbp-80h]
-  hkArrayBase<char *> *v266; // [rsp+68h] [rbp-78h]
-  __int64 v267; // [rsp+70h] [rbp-70h]
-  __int64 *v268; // [rsp+78h] [rbp-68h]
-  hkArrayBase<char *> *v269; // [rsp+80h] [rbp-60h]
-  int v270; // [rsp+88h] [rbp-58h]
-  __int64 v271; // [rsp+90h] [rbp-50h]
-  hkResult v272; // [rsp+98h] [rbp-48h]
-  int v273; // [rsp+9Ch] [rbp-44h]
-  __int64 v274; // [rsp+A0h] [rbp-40h]
-  char *a; // [rsp+A8h] [rbp-38h]
-  hkArrayBase<char *> *v276; // [rsp+B0h] [rbp-30h]
-  hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::SAHBin::Sorter v277; // [rsp+C0h] [rbp-20h]
-  __m128 v278; // [rsp+E0h] [rbp+0h]
-  __int64 v279; // [rsp+F0h] [rbp+10h]
-  hkResult v280; // [rsp+F8h] [rbp+18h]
-  hkResult v281; // [rsp+FCh] [rbp+1Ch]
-  __m128i v282; // [rsp+100h] [rbp+20h]
-  __m128 v283; // [rsp+110h] [rbp+30h]
-  __m128 v284; // [rsp+120h] [rbp+40h]
-  __m128 v285; // [rsp+130h] [rbp+50h]
-  __m128 v286; // [rsp+140h] [rbp+60h]
-  __m128 v287; // [rsp+150h] [rbp+70h]
-  __m128 v288; // [rsp+160h] [rbp+80h]
-  __m128 v289; // [rsp+170h] [rbp+90h]
-  __m128 v290; // [rsp+180h] [rbp+A0h]
-  __m128 v291; // [rsp+190h] [rbp+B0h]
-  __m128 v292; // [rsp+1A0h] [rbp+C0h]
-  __m128 v293; // [rsp+1B0h] [rbp+D0h]
-  __m128 v294; // [rsp+1C0h] [rbp+E0h]
-  __m128 v295; // [rsp+1D0h] [rbp+F0h]
-  __m128 v296; // [rsp+1E0h] [rbp+100h]
-  __m128 v297; // [rsp+1F0h] [rbp+110h]
-  __m128 v298; // [rsp+200h] [rbp+120h]
-  __m128 v299; // [rsp+210h] [rbp+130h]
-  __m128 v300; // [rsp+220h] [rbp+140h]
-  char *v301; // [rsp+230h] [rbp+150h]
-  int v302; // [rsp+238h] [rbp+158h]
-  int v303; // [rsp+23Ch] [rbp+15Ch]
-  char v304; // [rsp+240h] [rbp+160h]
-  __m128 v305; // [rsp+440h] [rbp+360h]
-  hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *v306; // [rsp+540h] [rbp+460h]
-  hkResult result; // [rsp+548h] [rbp+468h]
+  __int64 v233; // r8
+  __int64 v234; // rdx
+  hkcdDynamicTree::CodecRawUlong *v235; // rdx
+  __int64 v236; // r8
+  unsigned __int64 v237; // rax
+  unsigned __int64 v238; // rcx
+  __m128 v239; // xmm2
+  int *v240; // rsi
+  int v241; // eax
+  __int64 v242; // rcx
+  int v243; // eax
+  __int64 v244; // rdi
+  int *v245; // rbx
+  int v246; // r8d
+  int v247; // r8d
+  bool v248; // sf
+  __int64 v249; // [rsp+30h] [rbp-B0h]
+  unsigned __int64 *v250; // [rsp+30h] [rbp-B0h]
+  unsigned __int64 *v251; // [rsp+30h] [rbp-B0h]
+  char *v252; // [rsp+30h] [rbp-B0h]
+  hkArrayBase<char *> array; // [rsp+38h] [rbp-A8h] BYREF
+  __int64 v254; // [rsp+48h] [rbp-98h]
+  char *v255; // [rsp+50h] [rbp-90h] BYREF
+  int v256; // [rsp+58h] [rbp-88h]
+  int v257; // [rsp+5Ch] [rbp-84h]
+  char *v258; // [rsp+60h] [rbp-80h] BYREF
+  hkArrayBase<char *> *v259; // [rsp+68h] [rbp-78h] BYREF
+  char *v260; // [rsp+70h] [rbp-70h] BYREF
+  unsigned __int64 v261; // [rsp+78h] [rbp-68h]
+  hkArrayBase<char *> *v262; // [rsp+80h] [rbp-60h]
+  int v263; // [rsp+88h] [rbp-58h]
+  char *v264; // [rsp+90h] [rbp-50h]
+  hkResult v265; // [rsp+98h] [rbp-48h] BYREF
+  int v266; // [rsp+9Ch] [rbp-44h]
+  __int64 v267; // [rsp+A0h] [rbp-40h]
+  char *a[3]; // [rsp+A8h] [rbp-38h] BYREF
+  hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::SAHBin::Sorter v269; // [rsp+C0h] [rbp-20h] BYREF
+  __m128 v270; // [rsp+E0h] [rbp+0h]
+  __int64 v271; // [rsp+F0h] [rbp+10h]
+  hkResult v272; // [rsp+F8h] [rbp+18h] BYREF
+  hkResult v273; // [rsp+FCh] [rbp+1Ch] BYREF
+  hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::SAHBin::Sorter v274; // [rsp+100h] [rbp+20h]
+  __m128 v275; // [rsp+110h] [rbp+30h]
+  __m128 v276; // [rsp+120h] [rbp+40h]
+  __m128 v277; // [rsp+130h] [rbp+50h]
+  __m128 v278; // [rsp+140h] [rbp+60h]
+  __m128 v279; // [rsp+150h] [rbp+70h]
+  __m128 v280; // [rsp+160h] [rbp+80h]
+  __m128 v281; // [rsp+170h] [rbp+90h]
+  __m128 v282; // [rsp+180h] [rbp+A0h]
+  __m128 v283; // [rsp+190h] [rbp+B0h]
+  __m128 v284; // [rsp+1A0h] [rbp+C0h]
+  __m128 v285; // [rsp+1B0h] [rbp+D0h]
+  __m128 v286; // [rsp+1C0h] [rbp+E0h]
+  __m128 v287; // [rsp+1D0h] [rbp+F0h]
+  __m128 v288; // [rsp+1E0h] [rbp+100h]
+  __m128 v289; // [rsp+1F0h] [rbp+110h]
+  __m128 v290; // [rsp+200h] [rbp+120h] BYREF
+  __m128 v291; // [rsp+210h] [rbp+130h]
+  __m128 v292; // [rsp+220h] [rbp+140h]
+  char *v293; // [rsp+230h] [rbp+150h] BYREF
+  int v294; // [rsp+238h] [rbp+158h]
+  int v295; // [rsp+23Ch] [rbp+15Ch]
+  char v296; // [rsp+240h] [rbp+160h] BYREF
+  __m128 v297; // [rsp+440h] [rbp+360h]
+  hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *v298; // [rsp+540h] [rbp+460h]
+  hkResult result; // [rsp+548h] [rbp+468h] BYREF
   char vars0; // [rsp+550h] [rbp+470h]
-  hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *v309; // [rsp+560h] [rbp+480h]
+  int v301; // [rsp+560h] [rbp+480h]
 
   if ( branch )
   {
-    v309 = this;
-    v5 = numBins;
+    v301 = (int)this;
+    v5 = (char *)numBins;
     v6 = branch;
     v7 = this;
     if ( this->m_numLeaves > 2 )
@@ -771,17 +775,17 @@ void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebui
       v8 = branch << 6;
       if ( LODWORD(this->m_nodes.m_data[branch].m_children[0]) )
       {
-        v260 = 2147483648;
-        array = 0i64;
-        v259 = 0;
-        v9 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-        v10 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v9[11] + 8i64))(v9[11], 32i64);
-        v11 = (void *)v10;
+        array.m_capacityAndFlags = 0x80000000;
+        array.m_data = 0i64;
+        array.m_size = 0;
+        Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+        v10 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 32i64);
+        v11 = (char *)v10;
         if ( v10 )
         {
           *(_QWORD *)v10 = 0i64;
           *(_DWORD *)(v10 + 8) = 0;
-          *(_DWORD *)(v10 + 12) = 2147483648;
+          *(_DWORD *)(v10 + 12) = 0x80000000;
           *(_QWORD *)(v10 + 16) = 0i64;
           *(_DWORD *)(v10 + 24) = -1;
         }
@@ -789,1336 +793,1269 @@ void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebui
         {
           v11 = 0i64;
         }
-        v12 = v259;
-        if ( v259 == (v260 & 0x3FFFFFFF) )
+        m_size = array.m_size;
+        if ( array.m_size == (array.m_capacityAndFlags & 0x3FFFFFFF) )
         {
-          hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, 8);
-          v12 = v259;
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&array.m_data, 8);
+          m_size = array.m_size;
         }
-        array[v12] = v11;
-        ++v259;
-        v13 = v7->m_nodes.m_data;
+        array.m_data[m_size] = v11;
+        ++array.m_size;
+        m_data = v7->m_nodes.m_data;
         v14 = *(unsigned __int64 *)((char *)&v7->m_nodes.m_data->m_parent + v8);
-        v279 = v14;
+        v271 = v14;
         v15 = (__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 0);
         v16 = _mm_xor_ps((__m128)xmmword_141A712A0, v15);
         if ( v14 )
-          LODWORD(v265) = v13[v14].m_children[1] == v6;
+          LODWORD(v258) = m_data[v14].m_children[1] == v6;
         else
-          LODWORD(v265) = 0;
-        v261 = 0i64;
+          LODWORD(v258) = 0;
+        v254 = 0i64;
         v17 = 0;
-        v301 = &v304;
-        v303 = -2147483584;
+        v293 = &v296;
+        v295 = -2147483584;
         while ( 1 )
         {
-          v302 = v17;
+          v294 = v17;
           while ( 1 )
           {
             v18 = &v7->m_nodes.m_data[v6];
             if ( !LODWORD(v18->m_children[0]) )
               break;
             v19 = v18->m_children[1];
-            if ( v17 == (v303 & 0x3FFFFFFF) )
+            if ( v17 == (v295 & 0x3FFFFFFF) )
             {
-              hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v301, 8);
-              v17 = v302;
+              hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&v293, 8);
+              v17 = v294;
             }
-            *(_QWORD *)&v301[8 * v17] = v19;
-            ++v302;
+            *(_QWORD *)&v293[8 * v17] = v19;
+            ++v294;
             v6 = v18->m_children[0];
             v20 = v18 - v7->m_nodes.m_data;
-            v7->m_nodes.m_data[(signed __int64)(signed int)v20].m_aabb.m_min.m_quad.m128_u64[0] = v7->m_firstFree;
-            v17 = v302;
+            v7->m_nodes.m_data[(__int64)(int)v20].m_aabb.m_min.m_quad.m128_u64[0] = v7->m_firstFree;
+            v17 = v294;
             v7->m_firstFree = v20;
           }
-          v21 = *array;
-          if ( *((_DWORD *)*array + 2) == (*((_DWORD *)*array + 3) & 0x3FFFFFFF) )
-            hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, *array, 8);
-          *(_QWORD *)(*(_QWORD *)v21 + 8i64 * (signed int)v21[2]++) = v6;
-          if ( !v302 )
+          v21 = *array.m_data;
+          if ( *((_DWORD *)*array.m_data + 2) == (*((_DWORD *)*array.m_data + 3) & 0x3FFFFFFF) )
+            hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, *(const void ***)array.m_data, 8);
+          *(_QWORD *)(*(_QWORD *)v21 + 8i64 * (int)(*((_DWORD *)v21 + 2))++) = v6;
+          if ( !v294 )
             break;
-          v6 = *(_QWORD *)&v301[8 * v302 - 8];
-          v17 = v302 - 1;
+          v6 = *(_QWORD *)&v293[8 * v294 - 8];
+          v17 = v294 - 1;
         }
-        v302 = 0;
-        if ( v303 >= 0 )
-          hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-            (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-            v301,
-            8 * v303);
+        v294 = 0;
+        if ( v295 >= 0 )
+          hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v293, 8 * v295);
         v22 = 0;
         v23 = 0i64;
-        v262 = 0i64;
-        v264 = 2147483648;
-        v263 = 0;
-        v265 = 0i64;
-        v266 = (hkArrayBase<char *> *)0x8000000000000000i64;
+        v255 = 0i64;
+        v257 = 0x80000000;
+        v256 = 0;
+        v258 = 0i64;
+        v259 = (hkArrayBase<char *> *)0x8000000000000000i64;
         v24 = _mm_shuffle_ps(
-                (__m128)COERCE_UNSIGNED_INT((float)(signed int)v5),
-                (__m128)COERCE_UNSIGNED_INT((float)(signed int)v5),
+                (__m128)COERCE_UNSIGNED_INT((float)(int)v5),
+                (__m128)COERCE_UNSIGNED_INT((float)(int)v5),
                 0);
-        v267 = 0i64;
-        v268 = (__int64 *)0x8000000000000000i64;
+        v260 = 0i64;
+        v261 = 0x8000000000000000ui64;
         v25 = _mm_shuffle_ps(
-                (__m128)COERCE_UNSIGNED_INT((float)(v5 - 1)),
-                (__m128)COERCE_UNSIGNED_INT((float)(v5 - 1)),
+                (__m128)COERCE_UNSIGNED_INT((float)((int)v5 - 1)),
+                (__m128)COERCE_UNSIGNED_INT((float)((int)v5 - 1)),
                 0);
-        if ( (signed int)v5 > 0 )
+        if ( (int)v5 > 0 )
         {
-          v26 = v5;
-          if ( (signed int)v5 < 0 )
-            v26 = 0;
-          hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v262, v26, 64);
-          v22 = v263;
-          v23 = v262;
+          hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&v255, (int)v5, 64);
+          v22 = v256;
+          v23 = v255;
         }
-        v27 = v5;
-        v28 = v5 << 6;
-        v267 = v5;
-        v29 = v22 - (signed int)v5 - 1;
-        if ( v22 - (signed int)v5 - 1 >= 0 )
+        v26 = v5;
+        v27 = (_QWORD)v5 << 6;
+        v260 = v5;
+        v28 = v22 - (int)v5 - 1;
+        if ( v22 - (int)v5 - 1 >= 0 )
         {
-          v30 = (int *)((v29 << 6) + v23 + 12 + v28);
+          v29 = (int *)&v23[64 * v28 + 12 + v27];
           do
           {
-            v31 = *v30;
-            *(v30 - 1) = 0;
-            if ( v31 >= 0 )
+            v30 = *v29;
+            *(v29 - 1) = 0;
+            if ( v30 >= 0 )
               hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-                (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-                *(void **)(v30 - 3),
-                8 * v31);
-            *(_QWORD *)(v30 - 3) = 0i64;
-            *v30 = 2147483648;
-            v30 -= 16;
-            --v29;
+                &hkContainerHeapAllocator::s_alloc,
+                *(void **)(v29 - 3),
+                8 * v30);
+            *(_QWORD *)(v29 - 3) = 0i64;
+            *v29 = 0x80000000;
+            v29 -= 16;
+            --v28;
           }
-          while ( v29 >= 0 );
-          v22 = v263;
-          v23 = v262;
+          while ( v28 >= 0 );
+          v22 = v256;
+          v23 = v255;
         }
-        v32 = v5 - v22;
-        v33 = v23 + ((signed __int64)v22 << 6);
-        v34 = (signed int)v5 - v22;
-        if ( v32 > 0 )
+        v31 = (_DWORD)v5 - v22;
+        v32 = &v23[64 * (__int64)v22];
+        v33 = (int)v5 - v22;
+        if ( v31 > 0 )
         {
           do
           {
-            if ( v33 )
+            if ( v32 )
             {
-              *(_QWORD *)v33 = 0i64;
-              *(_DWORD *)(v33 + 8) = 0;
-              *(_DWORD *)(v33 + 12) = 2147483648;
+              *(_QWORD *)v32 = 0i64;
+              *((_DWORD *)v32 + 2) = 0;
+              *((_DWORD *)v32 + 3) = 0x80000000;
             }
-            v33 += 64i64;
-            --v34;
+            v32 += 64;
+            --v33;
           }
-          while ( v34 );
+          while ( v33 );
         }
-        v263 = v5;
-        if ( (HIDWORD(v266) & 0x3FFFFFFF) < (signed int)v5 )
+        v256 = (int)v5;
+        if ( (HIDWORD(v259) & 0x3FFFFFFF) < (int)v5 )
         {
-          v35 = v5;
-          if ( (signed int)v5 < 2 * (HIDWORD(v266) & 0x3FFFFFFF) )
-            v35 = 2 * (HIDWORD(v266) & 0x3FFFFFFF);
-          hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v265, v35, 64);
+          v34 = (int)v5;
+          if ( (int)v5 < 2 * (HIDWORD(v259) & 0x3FFFFFFF) )
+            v34 = 2 * (HIDWORD(v259) & 0x3FFFFFFF);
+          hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&v258, v34, 64);
         }
-        v36 = (signed int)v266 - (signed int)v5 - 1;
-        if ( (signed int)v266 - (signed int)v5 - 1 >= 0 )
+        v35 = (int)v259 - (int)v5 - 1;
+        if ( (int)v259 - (int)v5 - 1 >= 0 )
         {
-          v37 = (int *)((v36 << 6) + v265 + 12 + v28);
+          v36 = (int *)&v258[64 * v35 + 12 + v27];
           do
           {
-            v38 = *v37;
-            *(v37 - 1) = 0;
-            if ( v38 >= 0 )
+            v37 = *v36;
+            *(v36 - 1) = 0;
+            if ( v37 >= 0 )
               hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-                (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-                *(void **)(v37 - 3),
-                8 * v38);
-            *(_QWORD *)(v37 - 3) = 0i64;
-            *v37 = 2147483648;
-            v37 -= 16;
-            --v36;
+                &hkContainerHeapAllocator::s_alloc,
+                *(void **)(v36 - 3),
+                8 * v37);
+            *(_QWORD *)(v36 - 3) = 0i64;
+            *v36 = 0x80000000;
+            v36 -= 16;
+            --v35;
           }
-          while ( v36 >= 0 );
+          while ( v35 >= 0 );
         }
-        v39 = (signed int)v5 - (signed int)v266;
-        v40 = v265 + ((signed __int64)(signed int)v266 << 6);
-        if ( (signed int)v5 - (signed int)v266 > 0 )
+        v38 = (int)v5 - (int)v259;
+        v39 = &v258[64 * (__int64)(int)v259];
+        if ( (int)v5 - (int)v259 > 0 )
         {
           do
           {
-            if ( v40 )
+            if ( v39 )
             {
-              *(_QWORD *)v40 = 0i64;
-              *(_DWORD *)(v40 + 8) = 0;
-              *(_DWORD *)(v40 + 12) = 2147483648;
+              *(_QWORD *)v39 = 0i64;
+              *((_DWORD *)v39 + 2) = 0;
+              *((_DWORD *)v39 + 3) = 0x80000000;
             }
-            v40 += 64i64;
-            --v39;
+            v39 += 64;
+            --v38;
           }
-          while ( v39 );
+          while ( v38 );
         }
-        LODWORD(v266) = v5;
-        if ( (HIDWORD(v268) & 0x3FFFFFFF) < (signed int)v5 )
+        LODWORD(v259) = (_DWORD)v5;
+        if ( (HIDWORD(v261) & 0x3FFFFFFF) < (int)v5 )
         {
-          v41 = v5;
-          if ( (signed int)v5 < 2 * (HIDWORD(v268) & 0x3FFFFFFF) )
-            v41 = 2 * (HIDWORD(v268) & 0x3FFFFFFF);
-          hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v267, v41, 64);
+          v40 = (int)v5;
+          if ( (int)v5 < 2 * (HIDWORD(v261) & 0x3FFFFFFF) )
+            v40 = 2 * (HIDWORD(v261) & 0x3FFFFFFF);
+          hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&v260, v40, 64);
         }
-        v42 = (signed int)v268 - (signed int)v5 - 1;
-        if ( (signed int)v268 - (signed int)v5 - 1 >= 0 )
+        v41 = (int)v261 - (int)v5 - 1;
+        if ( (int)v261 - (int)v5 - 1 >= 0 )
         {
-          v43 = (int *)((v42 << 6) + v267 + 12 + v28);
+          v42 = (int *)&v260[64 * v41 + 12 + v27];
           do
           {
-            v44 = *v43;
-            *(v43 - 1) = 0;
-            if ( v44 >= 0 )
+            v43 = *v42;
+            *(v42 - 1) = 0;
+            if ( v43 >= 0 )
               hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-                (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-                *(void **)(v43 - 3),
-                8 * v44);
-            *(_QWORD *)(v43 - 3) = 0i64;
-            *v43 = 2147483648;
-            v43 -= 16;
-            --v42;
+                &hkContainerHeapAllocator::s_alloc,
+                *(void **)(v42 - 3),
+                8 * v43);
+            *(_QWORD *)(v42 - 3) = 0i64;
+            *v42 = 0x80000000;
+            v42 -= 16;
+            --v41;
           }
-          while ( v42 >= 0 );
+          while ( v41 >= 0 );
         }
-        v45 = (signed int)v5 - (signed int)v268;
-        v46 = v267 + ((signed __int64)(signed int)v268 << 6);
-        if ( (signed int)v5 - (signed int)v268 > 0 )
+        v44 = (int)v5 - (int)v261;
+        v45 = &v260[64 * (__int64)(int)v261];
+        if ( (int)v5 - (int)v261 > 0 )
         {
           do
           {
-            if ( v46 )
+            if ( v45 )
             {
-              *(_QWORD *)v46 = 0i64;
-              *(_DWORD *)(v46 + 8) = 0;
-              *(_DWORD *)(v46 + 12) = 2147483648;
+              *(_QWORD *)v45 = 0i64;
+              *((_DWORD *)v45 + 2) = 0;
+              *((_DWORD *)v45 + 3) = 0x80000000;
             }
-            v46 += 64i64;
-            --v45;
+            v45 += 64;
+            --v44;
           }
-          while ( v45 );
+          while ( v44 );
         }
-        v47 = v259;
-        v274 = 2i64;
-        LODWORD(v268) = v5;
+        v46 = array.m_size;
+        v267 = 2i64;
+        LODWORD(v261) = (_DWORD)v5;
         do
         {
-          v48 = (__int64)array[v47 - 1];
-          v259 = v47 - 1;
-          v49 = *(signed int *)(v48 + 8);
-          v271 = v48;
-          if ( (signed int)v49 > (signed int)v309 || *(_DWORD *)(v48 + 24) == -1 )
+          v47 = array.m_data[v46 - 1];
+          array.m_size = v46 - 1;
+          v48 = *((int *)v47 + 2);
+          v264 = v47;
+          if ( (int)v48 > v301 || *((_DWORD *)v47 + 6) == -1 )
           {
-            v82 = (__m128)xmmword_141A712A0;
-            v83 = v49;
-            v84 = _mm_xor_ps(v15, (__m128)xmmword_141A712A0);
-            if ( (signed int)v49 > 0 )
+            v80 = (__m128)xmmword_141A712A0;
+            v81 = v48;
+            v82 = _mm_xor_ps(v15, (__m128)xmmword_141A712A0);
+            if ( (int)v48 > 0 )
             {
-              v85 = v7->m_nodes.m_data;
-              v86 = *(unsigned __int64 **)v48;
+              v83 = v7->m_nodes.m_data;
+              v84 = *(unsigned __int64 **)v47;
               do
               {
-                v87 = *v86;
-                ++v86;
-                v87 <<= 6;
-                v82 = _mm_min_ps(v82, *(__m128 *)((char *)&v85->m_aabb.m_min.m_quad + v87));
-                v84 = _mm_max_ps(v84, *(__m128 *)((char *)&v85->m_aabb.m_max.m_quad + v87));
-                --v83;
+                v85 = *v84++;
+                v85 <<= 6;
+                v80 = _mm_min_ps(v80, *(__m128 *)((char *)&v83->m_aabb.m_min.m_quad + v85));
+                v82 = _mm_max_ps(v82, *(__m128 *)((char *)&v83->m_aabb.m_max.m_quad + v85));
+                --v81;
               }
-              while ( v83 );
+              while ( v81 );
             }
-            v88 = 0i64;
-            v89 = _mm_sub_ps(v84, v82);
-            v90 = _mm_mul_ps(
+            v86 = 0i64;
+            v87 = _mm_sub_ps(v82, v80);
+            v88 = _mm_mul_ps(
                     (__m128)_mm_srli_si128(
                               _mm_slli_si128(
-                                (__m128i)_mm_andnot_ps(_mm_cmpeqps(v89, (__m128)0i64), _mm_div_ps(query.m_quad, v89)),
+                                (__m128i)_mm_andnot_ps(_mm_cmpeq_ps(v87, (__m128)0i64), _mm_div_ps(query.m_quad, v87)),
                                 4),
                               4),
                     v24);
             if ( !v7->m_firstFree )
               hkcdDynamicTree::DynamicStorage<0,hkcdDynamicTree::AnisotropicMetric,hkcdDynamicTree::CodecRawUlong>::reserveNodes(
-                (hkcdDynamicTree::DynamicStorage<0,hkcdDynamicTree::AnisotropicMetric,hkcdDynamicTree::CodecRawUlong> *)&v7->m_nodes,
-                &v281,
+                v7,
+                &v273,
                 1);
-            v91 = v7->m_firstFree;
-            v92 = v7->m_nodes.m_data;
-            v93 = v7->m_firstFree << 6;
-            v7->m_firstFree = v7->m_nodes.m_data[(signed __int64)(signed int)v91].m_aabb.m_min.m_quad.m128_u64[0];
-            *(__m128 *)((char *)&v92->m_aabb.m_min.m_quad + v93) = v82;
-            *(__m128 *)((char *)&v92->m_aabb.m_max.m_quad + v93) = v84;
-            *(unsigned __int64 *)((char *)&v7->m_nodes.m_data->m_parent + v93) = *(_QWORD *)(v48 + 16);
-            v94 = *(signed int *)(v48 + 24);
-            if ( (_DWORD)v94 == -1 )
-              v261 = v91;
+            m_firstFree = v7->m_firstFree;
+            v90 = v7->m_nodes.m_data;
+            v91 = m_firstFree << 6;
+            v7->m_firstFree = v7->m_nodes.m_data[(__int64)(int)m_firstFree].m_aabb.m_min.m_quad.m128_u64[0];
+            *(__m128 *)((char *)&v90->m_aabb.m_min.m_quad + v91) = v80;
+            *(__m128 *)((char *)&v90->m_aabb.m_max.m_quad + v91) = v82;
+            *(unsigned __int64 *)((char *)&v7->m_nodes.m_data->m_parent + v91) = *((_QWORD *)v47 + 2);
+            v92 = *((int *)v47 + 6);
+            if ( (_DWORD)v92 == -1 )
+              v254 = m_firstFree;
             else
-              v7->m_nodes.m_data->m_children[v94 + 8i64 * *(_QWORD *)(v48 + 16)] = v91;
+              v7->m_nodes.m_data[*((_QWORD *)v47 + 2)].m_children[v92] = m_firstFree;
+            v93 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+            v94 = (hkArrayBase<char *> *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v93[11] + 8i64))(
+                                           v93[11],
+                                           32i64);
+            v259 = v94;
+            if ( v94 )
+            {
+              v94->m_capacityAndFlags = 0x80000000;
+              v94->m_data = 0i64;
+              v94->m_size = 0;
+              v94[1].m_data = (char **)m_firstFree;
+              v94[1].m_size = 0;
+            }
+            else
+            {
+              v94 = 0i64;
+              v259 = 0i64;
+            }
+            a[0] = (char *)v94;
             v95 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-            v96 = (hkArrayBase<char *> *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v95[11] + 8i64))(
+            v96 = (hkArrayBase<char *> *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v95[11] + 8i64))(
                                            v95[11],
                                            32i64);
-            v266 = v96;
+            v262 = v96;
             if ( v96 )
             {
-              v96->m_capacityAndFlags = 2147483648;
+              v96->m_capacityAndFlags = 0x80000000;
               v96->m_data = 0i64;
               v96->m_size = 0;
-              v96[1].m_data = (char **)v91;
-              v96[1].m_size = 0;
+              v96[1].m_data = (char **)m_firstFree;
+              v96[1].m_size = 1;
             }
             else
             {
               v96 = 0i64;
-              v266 = 0i64;
+              v262 = 0i64;
             }
-            a = (char *)v96;
-            v97 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-            v98 = (hkArrayBase<char *> *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v97[11] + 8i64))(
-                                           v97[11],
-                                           32i64);
-            v269 = v98;
-            if ( v98 )
+            m_capacityAndFlags = v94->m_capacityAndFlags;
+            v98 = *((_DWORD *)v47 + 2);
+            a[1] = (char *)v96;
+            v99 = m_capacityAndFlags & 0x3FFFFFFF;
+            if ( v99 >= v98 )
             {
-              v98->m_capacityAndFlags = 2147483648;
-              v98->m_data = 0i64;
-              v98->m_size = 0;
-              v98[1].m_data = (char **)v91;
-              v98[1].m_size = 1;
+              result.m_enum = HK_SUCCESS;
             }
             else
             {
-              v98 = 0i64;
-              v269 = 0i64;
+              v100 = 2 * v99;
+              if ( v98 < v100 )
+                v98 = v100;
+              hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&v94->m_data, v98, 8);
             }
-            v99 = v96->m_capacityAndFlags;
-            v100 = *(_DWORD *)(v48 + 8);
-            v276 = v98;
-            v101 = v99 & 0x3FFFFFFF;
-            if ( v101 >= v100 )
+            v101 = *((_DWORD *)v47 + 2);
+            v102 = v96->m_capacityAndFlags & 0x3FFFFFFF;
+            if ( v102 >= v101 )
             {
-              LODWORD(v96) = 0;
-              result.m_enum = 0;
-            }
-            else
-            {
-              v102 = 2 * v101;
-              if ( v100 < v102 )
-                v100 = v102;
-              hkArrayUtil::_reserve(
-                &result,
-                (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-                v96,
-                v100,
-                8);
-              LODWORD(v96) = 0;
-            }
-            v103 = *(_DWORD *)(v48 + 8);
-            v104 = v98->m_capacityAndFlags & 0x3FFFFFFF;
-            if ( v104 >= v103 )
-            {
-              v272.m_enum = 0;
+              v265.m_enum = HK_SUCCESS;
             }
             else
             {
-              v105 = 2 * v104;
-              if ( v103 < v105 )
-                v103 = v105;
-              hkArrayUtil::_reserve(&v272, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v98, v103, 8);
+              v103 = 2 * v102;
+              if ( v101 < v103 )
+                v101 = v103;
+              hkArrayUtil::_reserve(&v265, &hkContainerHeapAllocator::s_alloc, (const void **)&v96->m_data, v101, 8);
             }
-            hkArrayBase<unsigned __int64>::_append(
-              (hkArrayBase<char *> *)&array,
-              (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-              &a,
-              2);
-            if ( v27 > 0 )
+            hkArrayBase<unsigned __int64>::_append(&array, &hkContainerHeapAllocator::s_alloc, a, 2);
+            if ( (__int64)v26 > 0 )
             {
-              v106 = 0i64;
-              v107 = v27;
+              v104 = 0i64;
+              v105 = v26;
               do
               {
-                v108 = v262;
-                v106 += 64i64;
-                *(_DWORD *)(v262 + v106 - 56) = 0;
-                *(_OWORD *)(v108 + v106 - 48) = xmmword_141A712A0;
-                *(__m128 *)(v108 + v106 - 32) = _mm_xor_ps(v15, (__m128)xmmword_141A712A0);
-                *(_DWORD *)(v108 + v106 - 16) = 0;
-                v109 = v265;
-                *(_DWORD *)(v265 + v106 - 56) = 0;
-                *(_OWORD *)(v109 + v106 - 48) = xmmword_141A712A0;
-                *(__m128 *)(v109 + v106 - 32) = _mm_xor_ps((__m128)xmmword_141A712A0, v15);
-                *(_DWORD *)(v109 + v106 - 16) = 0;
-                v110 = v267;
-                *(_DWORD *)(v267 + v106 - 56) = 0;
-                *(_OWORD *)(v110 + v106 - 48) = xmmword_141A712A0;
-                *(__m128 *)(v110 + v106 - 32) = _mm_xor_ps(v15, (__m128)xmmword_141A712A0);
-                *(_DWORD *)(v110 + v106 - 16) = 0;
-                --v107;
+                v106 = v255;
+                v104 += 64i64;
+                *(_DWORD *)&v255[v104 - 56] = 0;
+                *(_OWORD *)&v106[v104 - 48] = xmmword_141A712A0;
+                *(__m128 *)&v106[v104 - 32] = _mm_xor_ps(v15, (__m128)xmmword_141A712A0);
+                *(_DWORD *)&v106[v104 - 16] = 0;
+                v107 = v258;
+                *(_DWORD *)&v258[v104 - 56] = 0;
+                *(_OWORD *)&v107[v104 - 48] = xmmword_141A712A0;
+                *(__m128 *)&v107[v104 - 32] = _mm_xor_ps((__m128)xmmword_141A712A0, v15);
+                *(_DWORD *)&v107[v104 - 16] = 0;
+                v108 = v260;
+                *(_DWORD *)&v260[v104 - 56] = 0;
+                *(_OWORD *)&v108[v104 - 48] = xmmword_141A712A0;
+                *(__m128 *)&v108[v104 - 32] = _mm_xor_ps(v15, (__m128)xmmword_141A712A0);
+                *(_DWORD *)&v108[v104 - 16] = 0;
+                --v105;
               }
-              while ( v107 );
+              while ( v105 );
             }
-            v111 = *(_DWORD *)(v48 + 8) == 0;
-            v112 = *(_DWORD *)(v48 + 8) < 0;
-            v113 = v24;
-            v278 = 0i64;
-            v114 = 0;
-            v284 = v24;
-            if ( !v112 && !v111 )
+            v109 = *((_DWORD *)v47 + 2) <= 0;
+            v110 = v24;
+            v270 = 0i64;
+            v111 = 0;
+            v276 = v24;
+            if ( !v109 )
             {
-              v115 = 0i64;
+              v112 = 0i64;
               do
               {
-                v116 = &v7->m_nodes.m_data[*(_QWORD *)(v115 * 8 + *(_QWORD *)v48)].m_aabb.m_min.m_quad;
-                v117 = v116[1];
-                v118 = *v116;
-                v119 = _mm_min_ps(
+                v113 = &v7->m_nodes.m_data[*(_QWORD *)(v112 * 8 + *(_QWORD *)v47)];
+                m_quad = v113->m_aabb.m_max.m_quad;
+                v115 = v113->m_aabb.m_min.m_quad;
+                v116 = _mm_min_ps(
                          _mm_max_ps(
                            _mm_add_ps(
                              _mm_mul_ps(
-                               _mm_sub_ps(_mm_mul_ps(_mm_add_ps(v116[1], *v116), (__m128)xmmword_141A711B0), v82),
-                               v90),
+                               _mm_sub_ps(
+                                 _mm_mul_ps(_mm_add_ps(m_quad, v113->m_aabb.m_min.m_quad), (__m128)xmmword_141A711B0),
+                                 v80),
+                               v88),
                              (__m128)xmmword_141A711B0),
                            aabbOut.m_quad),
                          v25);
-                v88 = _mm_max_ps(v119, v88);
-                v113 = _mm_min_ps(v119, v113);
-                v120 = _mm_xor_si128(
-                         (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v119),
-                         _mm_cvttps_epi32(v119));
-                v121 = v262;
-                v122 = (signed __int64)_mm_cvtsi128_si32(v120) << 6;
-                v123 = _mm_max_ps(*(__m128 *)(v262 + v122 + 32), v117);
-                *(__m128 *)(v262 + v122 + 16) = _mm_min_ps(*(__m128 *)(v262 + v122 + 16), v118);
-                *(__m128 *)(v121 + v122 + 32) = v123;
-                v124 = v265;
-                v125 = (signed __int64)_mm_cvtsi128_si32(_mm_srli_si128(v120, 4)) << 6;
-                v126 = _mm_max_ps(*(__m128 *)(v265 + v125 + 32), v117);
-                *(__m128 *)(v265 + v125 + 16) = _mm_min_ps(*(__m128 *)(v265 + v125 + 16), v118);
-                *(__m128 *)(v124 + v125 + 32) = v126;
-                v127 = v267;
-                v128 = (signed __int64)_mm_cvtsi128_si32(_mm_srli_si128(v120, 8)) << 6;
-                v129 = _mm_max_ps(*(__m128 *)(v267 + v128 + 32), v117);
-                *(__m128 *)(v267 + v128 + 16) = _mm_min_ps(*(__m128 *)(v267 + v128 + 16), v118);
-                *(__m128 *)(v127 + v128 + 32) = v129;
-                v130 = (_DWORD *)(v122 + v262);
-                v255 = *(unsigned __int64 **)v48;
-                if ( *(_DWORD *)(v122 + v262 + 8) == (*(_DWORD *)(v122 + v262 + 12) & 0x3FFFFFFF) )
-                  hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v130, 8);
-                *(_QWORD *)(*(_QWORD *)v130 + 8i64 * (signed int)v130[2]++) = v255[v115];
-                v256 = *(unsigned __int64 **)v48;
-                v131 = v125 + v265;
-                if ( *(_DWORD *)(v125 + v265 + 8) == (*(_DWORD *)(v125 + v265 + 12) & 0x3FFFFFFF) )
-                  hkArrayUtil::_reserveMore(
-                    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-                    (void *)(v125 + v265),
-                    8);
-                *(_QWORD *)(*(_QWORD *)v131 + 8i64 * (signed int)(*(_DWORD *)(v131 + 8))++) = v256[v115];
-                v132 = *(unsigned __int64 **)v48;
-                v133 = v128 + v267;
-                if ( *(_DWORD *)(v128 + v267 + 8) == (*(_DWORD *)(v128 + v267 + 12) & 0x3FFFFFFF) )
-                  hkArrayUtil::_reserveMore(
-                    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-                    (void *)(v128 + v267),
-                    8);
-                *(_QWORD *)(*(_QWORD *)v133 + 8i64 * (signed int)(*(_DWORD *)(v133 + 8))++) = v132[v115];
-                ++v114;
-                ++v115;
+                v86 = _mm_max_ps(v116, v86);
+                v110 = _mm_min_ps(v116, v110);
+                v117 = _mm_xor_si128(
+                         (__m128i)_mm_cmple_ps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v116),
+                         _mm_cvttps_epi32(v116));
+                v118 = v255;
+                v119 = (__int64)_mm_cvtsi128_si32(v117) << 6;
+                v120 = _mm_max_ps(*(__m128 *)&v255[v119 + 32], m_quad);
+                *(__m128 *)&v255[v119 + 16] = _mm_min_ps(*(__m128 *)&v255[v119 + 16], v115);
+                *(__m128 *)&v118[v119 + 32] = v120;
+                v121 = v258;
+                v122 = (__int64)_mm_cvtsi128_si32(_mm_srli_si128(v117, 4)) << 6;
+                v123 = _mm_max_ps(*(__m128 *)&v258[v122 + 32], m_quad);
+                *(__m128 *)&v258[v122 + 16] = _mm_min_ps(*(__m128 *)&v258[v122 + 16], v115);
+                *(__m128 *)&v121[v122 + 32] = v123;
+                v124 = v260;
+                v125 = (__int64)_mm_cvtsi128_si32(_mm_srli_si128(v117, 8)) << 6;
+                v126 = _mm_max_ps(*(__m128 *)&v260[v125 + 32], m_quad);
+                *(__m128 *)&v260[v125 + 16] = _mm_min_ps(*(__m128 *)&v260[v125 + 16], v115);
+                *(__m128 *)&v124[v125 + 32] = v126;
+                v127 = (const void **)&v255[v119];
+                v250 = *(unsigned __int64 **)v47;
+                if ( *(_DWORD *)&v255[v119 + 8] == (*(_DWORD *)&v255[v119 + 12] & 0x3FFFFFFF) )
+                  hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, v127, 8);
+                *((_QWORD *)*v127 + (int)(*((_DWORD *)v127 + 2))++) = v250[v112];
+                v251 = *(unsigned __int64 **)v47;
+                v128 = &v258[v122];
+                if ( *(_DWORD *)&v258[v122 + 8] == (*(_DWORD *)&v258[v122 + 12] & 0x3FFFFFFF) )
+                  hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&v258[v122], 8);
+                *(_QWORD *)(*(_QWORD *)v128 + 8i64 * (int)(*((_DWORD *)v128 + 2))++) = v251[v112];
+                v129 = *(unsigned __int64 **)v47;
+                v130 = &v260[v125];
+                if ( *(_DWORD *)&v260[v125 + 8] == (*(_DWORD *)&v260[v125 + 12] & 0x3FFFFFFF) )
+                  hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&v260[v125], 8);
+                *(_QWORD *)(*(_QWORD *)v130 + 8i64 * (int)(*((_DWORD *)v130 + 2))++) = v129[v112];
+                ++v111;
+                ++v112;
               }
-              while ( v114 < *(_DWORD *)(v48 + 8) );
-              v284 = v113;
-              v278 = v88;
-              LODWORD(v96) = 0;
+              while ( v111 < *((_DWORD *)v47 + 2) );
+              v276 = v110;
+              v270 = v86;
             }
-            v134 = &v262;
-            v135 = 0;
-            v136 = 0i64;
-            v137 = -1;
-            v138 = FLOAT_3_40282e38;
-            v139 = 0;
-            v268 = &v262;
-            v140 = 0i64;
+            v131 = &v255;
+            v132 = 0;
+            v133 = 0i64;
+            v134 = -1;
+            v135 = FLOAT_3_40282e38;
+            v136 = 0;
+            v261 = (unsigned __int64)&v255;
+            v137 = 0i64;
             do
             {
-              v141 = (signed int)v284.m128_f32[v140];
-              v142 = (signed int)v278.m128_f32[v140];
-              v143 = *v134;
-              v270 = (signed int)v96;
-              v273 = (signed int)v96;
-              v144 = (__m128)xmmword_141A712A0;
-              v145 = v16;
-              v146 = (__m128)xmmword_141A712A0;
-              v147 = v16;
-              v148 = v141;
-              v149 = v142;
-              v257 = v143;
-              if ( v141 <= (signed __int64)v142 )
+              v138 = (int)v276.m128_f32[v137];
+              v139 = (int)v270.m128_f32[v137];
+              v140 = *v131;
+              v263 = 0;
+              v266 = 0;
+              v141 = (__m128)xmmword_141A712A0;
+              v142 = v16;
+              v143 = (__m128)xmmword_141A712A0;
+              v144 = v16;
+              v145 = v138;
+              v146 = v139;
+              v252 = v140;
+              if ( v138 <= (__int64)v139 )
               {
-                v150 = v273;
-                v151 = (__m128 *)((v149 << 6) + 16 + v143);
-                v152 = (__m128 *)(((signed __int64)v141 << 6) + v257 + 16);
-                v153 = v270;
-                v154 = v149 - v141 + 1;
+                v147 = v266;
+                v148 = (__m128 *)&v140[64 * v146 + 16];
+                v149 = (__m128 *)&v252[64 * (__int64)v138 + 16];
+                v150 = v263;
+                v151 = v146 - v138 + 1;
                 do
                 {
-                  v145 = _mm_max_ps(v145, v152[1]);
-                  v144 = _mm_min_ps(v144, *v152);
-                  v153 += v152[-1].m128_i32[2];
-                  v150 += v151[-1].m128_i32[2];
-                  v152 += 4;
-                  v147 = _mm_max_ps(v147, v151[1]);
-                  v146 = _mm_min_ps(v146, *v151);
-                  v155 = _mm_sub_ps(v145, v144);
-                  v151 -= 4;
-                  v156 = _mm_mul_ps(_mm_shuffle_ps(v155, v155, 201), v155);
-                  v157 = _mm_sub_ps(v147, v146);
-                  v152[-2].m128_f32[0] = (float)((float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v156, v156, 85))
-                                                               + COERCE_FLOAT(_mm_shuffle_ps(v156, v156, 0)))
-                                                       + COERCE_FLOAT(_mm_shuffle_ps(v156, v156, 170)))
-                                               * (float)v153)
-                                       + v152[-2].m128_f32[0];
-                  v158 = _mm_mul_ps(_mm_shuffle_ps(v157, v157, 201), v157);
-                  v151[6].m128_f32[0] = (float)((float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v158, v158, 85))
-                                                              + COERCE_FLOAT(_mm_shuffle_ps(v158, v158, 0)))
-                                                      + COERCE_FLOAT(_mm_shuffle_ps(v158, v158, 170)))
-                                              * (float)v150)
-                                      + v151[6].m128_f32[0];
-                  --v154;
+                  v142 = _mm_max_ps(v142, v149[1]);
+                  v141 = _mm_min_ps(v141, *v149);
+                  v150 += v149[-1].m128_i32[2];
+                  v147 += v148[-1].m128_i32[2];
+                  v149 += 4;
+                  v144 = _mm_max_ps(v144, v148[1]);
+                  v143 = _mm_min_ps(v143, *v148);
+                  v152 = _mm_sub_ps(v142, v141);
+                  v148 -= 4;
+                  v153 = _mm_mul_ps(_mm_shuffle_ps(v152, v152, 201), v152);
+                  v154 = _mm_sub_ps(v144, v143);
+                  v149[-2].m128_f32[0] = (float)((float)((float)(_mm_shuffle_ps(v153, v153, 85).m128_f32[0]
+                                                               + _mm_shuffle_ps(v153, v153, 0).m128_f32[0])
+                                                       + _mm_shuffle_ps(v153, v153, 170).m128_f32[0])
+                                               * (float)v150)
+                                       + v149[-2].m128_f32[0];
+                  v155 = _mm_mul_ps(_mm_shuffle_ps(v154, v154, 201), v154);
+                  v148[6].m128_f32[0] = (float)((float)((float)(_mm_shuffle_ps(v155, v155, 85).m128_f32[0]
+                                                              + _mm_shuffle_ps(v155, v155, 0).m128_f32[0])
+                                                      + _mm_shuffle_ps(v155, v155, 170).m128_f32[0])
+                                              * (float)v147)
+                                      + v148[6].m128_f32[0];
+                  --v151;
                 }
-                while ( v154 );
-                v142 = (signed int)v278.m128_f32[v140];
-                v143 = v257;
-                v134 = v268;
+                while ( v151 );
+                v139 = (int)v270.m128_f32[v137];
+                v140 = v252;
+                v131 = (char **)v261;
               }
-              if ( v141 <= v142 )
+              if ( v138 <= v139 )
               {
-                if ( v142 - v141 + 1 >= 4 )
+                if ( v139 - v138 + 1 >= 4 )
                 {
-                  v159 = v141 + 2;
-                  v160 = ((signed __int64)v141 << 6) + v143 + 48;
-                  v148 = v141 + 4i64 * (((unsigned int)(v142 - 3 - v141) >> 2) + 1);
+                  v156 = v138 + 2;
+                  v157 = (__int64)&v140[64 * (__int64)v138 + 48];
+                  v145 = v138 + 4i64 * (((unsigned int)(v139 - 3 - v138) >> 2) + 1);
                   do
                   {
-                    if ( *(_DWORD *)(v160 - 40) && *(float *)v160 < v138 )
+                    if ( *(_DWORD *)(v157 - 40) && *(float *)v157 < v135 )
                     {
-                      v135 = v139;
-                      v136 = v140;
-                      v138 = *(float *)v160;
-                      v137 = v141;
+                      v132 = v136;
+                      v133 = v137;
+                      v135 = *(float *)v157;
+                      v134 = v138;
                     }
-                    if ( *(_DWORD *)(v160 + 24) && *(float *)(v160 + 64) < v138 )
+                    if ( *(_DWORD *)(v157 + 24) && *(float *)(v157 + 64) < v135 )
                     {
-                      v135 = v139;
-                      v136 = v140;
-                      v138 = *(float *)(v160 + 64);
-                      v137 = v159 - 1;
+                      v132 = v136;
+                      v133 = v137;
+                      v135 = *(float *)(v157 + 64);
+                      v134 = v156 - 1;
                     }
-                    if ( *(_DWORD *)(v160 + 88) && *(float *)(v160 + 128) < v138 )
+                    if ( *(_DWORD *)(v157 + 88) && *(float *)(v157 + 128) < v135 )
                     {
-                      v135 = v139;
-                      v136 = v140;
-                      v138 = *(float *)(v160 + 128);
-                      v137 = v159;
+                      v132 = v136;
+                      v133 = v137;
+                      v135 = *(float *)(v157 + 128);
+                      v134 = v156;
                     }
-                    if ( *(_DWORD *)(v160 + 152) && *(float *)(v160 + 192) < v138 )
+                    if ( *(_DWORD *)(v157 + 152) && *(float *)(v157 + 192) < v135 )
                     {
-                      v135 = v139;
-                      v136 = v140;
-                      v138 = *(float *)(v160 + 192);
-                      v137 = v159 + 1;
+                      v132 = v136;
+                      v133 = v137;
+                      v135 = *(float *)(v157 + 192);
+                      v134 = v156 + 1;
                     }
-                    v141 += 4;
-                    v160 += 256i64;
-                    v159 += 4;
+                    v138 += 4;
+                    v157 += 256i64;
+                    v156 += 4;
                   }
-                  while ( v141 <= v142 - 3 );
+                  while ( v138 <= v139 - 3 );
                 }
-                if ( v141 <= v142 )
+                if ( v138 <= v139 )
                 {
-                  v161 = (float *)((v148 << 6) + v257 + 48);
+                  v158 = (float *)&v252[64 * v145 + 48];
                   do
                   {
-                    if ( *((_DWORD *)v161 - 10) && *v161 < v138 )
+                    if ( *((_DWORD *)v158 - 10) && *v158 < v135 )
                     {
-                      v135 = v139;
-                      v136 = v140;
-                      v138 = *v161;
-                      v137 = v141;
+                      v132 = v136;
+                      v133 = v137;
+                      v135 = *v158;
+                      v134 = v138;
                     }
-                    ++v141;
-                    v161 += 16;
+                    ++v138;
+                    v158 += 16;
                   }
-                  while ( v141 <= v142 );
+                  while ( v138 <= v139 );
                 }
-                v134 = v268;
+                v131 = (char **)v261;
               }
-              v134 += 2;
-              ++v139;
-              ++v140;
-              v268 = v134;
-              v96 = 0i64;
+              v131 += 2;
+              ++v136;
+              ++v137;
+              v261 = (unsigned __int64)v131;
+              v159 = 0i64;
             }
-            while ( v139 < 3 );
-            v162 = 2 * v136;
-            v163 = v137;
-            if ( v137 > 0 )
+            while ( v136 < 3 );
+            v160 = 2 * v133;
+            v161 = v134;
+            if ( v134 > 0 )
             {
-              v164 = v266;
-              v165 = v137;
+              v162 = v259;
+              v163 = v134;
               do
               {
                 hkArrayBase<unsigned __int64>::_append(
-                  v164,
-                  (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-                  *(char *const **)((char *)&v96->m_data + *(&v262 + v162)),
-                  *(int *)((char *)&v96->m_size + *(&v262 + v162)));
-                v96 += 4;
-                --v165;
+                  v162,
+                  &hkContainerHeapAllocator::s_alloc,
+                  *(char *const **)&(&v255)[v160][v159],
+                  *(_DWORD *)&(&v255)[v160][v159 + 8]);
+                v159 += 64i64;
+                --v163;
               }
-              while ( v165 );
-              v7 = v306;
-              v48 = v271;
+              while ( v163 );
+              v7 = v298;
+              v47 = v264;
             }
-            v166 = v137 + 1;
-            if ( v137 + 1 < v267 )
+            v164 = v134 + 1;
+            if ( v134 + 1 < (__int64)v260 )
             {
-              v167 = v269;
-              v168 = (signed __int64)v166 << 6;
-              v169 = v267 - v166;
+              v165 = v262;
+              v166 = (__int64)v164 << 6;
+              v167 = &v260[-v164];
               do
               {
                 hkArrayBase<unsigned __int64>::_append(
-                  v167,
-                  (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-                  *(char *const **)(v168 + *(&v262 + v162)),
-                  *(_DWORD *)(v168 + *(&v262 + v162) + 8));
-                v168 += 64i64;
-                --v169;
+                  v165,
+                  &hkContainerHeapAllocator::s_alloc,
+                  *(char *const **)&(&v255)[v160][v166],
+                  *(_DWORD *)&(&v255)[v160][v166 + 8]);
+                v166 += 64i64;
+                --v167;
               }
-              while ( v169 );
-              v7 = v306;
+              while ( v167 );
+              v7 = v298;
             }
-            v170 = v266->m_size;
-            v171 = v269->m_size;
-            if ( v170 && v171 || !(v170 | v171) )
+            v168 = v259->m_size;
+            v169 = v262->m_size;
+            if ( v168 && v169 || !(v168 | v169) )
             {
-              v172 = *(&v262 + v162);
-              v173 = v163 << 6;
-              v282.m128i_i32[0] = v135;
-              v174 = *(_DWORD *)(v173 + v172 + 8);
-              v175 = *(unsigned __int64 **)(v173 + v172);
-              v282.m128i_i64[1] = (__int64)v7;
-              _mm_store_si128((__m128i *)&v277, v282);
+              v170 = (&v255)[v160];
+              v171 = v161 << 6;
+              v274.m_axis = v132;
+              v172 = *(_DWORD *)&v170[v171 + 8];
+              v173 = *(unsigned __int64 **)&v170[v171];
+              v274.m_tree = v7;
+              v269 = v274;
               hkAlgorithm::explicitStackQuickSort<unsigned __int64,hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::SAHBin::Sorter>(
-                v175,
-                v174,
-                &v277);
+                v173,
+                v172,
+                &v269);
               hkArrayBase<unsigned __int64>::_append(
-                v266,
-                (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-                (char *const *)v175,
-                v174 >> 1);
-              v176 = v269;
-              v177 = (char *const *)&v175[v174 >> 1];
-              v178 = v174 - (v174 >> 1);
+                v259,
+                &hkContainerHeapAllocator::s_alloc,
+                (char *const *)v173,
+                v172 >> 1);
+              v174 = v262;
+              v175 = (char *const *)&v173[v172 >> 1];
+              v176 = v172 - (v172 >> 1);
             }
             else
             {
-              v179 = *(&v262 + v162);
-              v180 = v163 << 6;
-              v178 = *(_DWORD *)(v180 + v179 + 8);
-              v177 = *(char *const **)(v180 + v179);
-              v176 = (hkArrayBase<char *> *)(&a)[v171 == 0];
+              v177 = (&v255)[v160];
+              v178 = v161 << 6;
+              v176 = *(_DWORD *)&v177[v178 + 8];
+              v175 = *(char *const **)&v177[v178];
+              v174 = (hkArrayBase<char *> *)a[v169 == 0];
             }
-            hkArrayBase<unsigned __int64>::_append(
-              v176,
-              (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-              v177,
-              v178);
+            hkArrayBase<unsigned __int64>::_append(v174, &hkContainerHeapAllocator::s_alloc, v175, v176);
           }
           else
           {
-            for ( ; (signed int)v49 > 1; LODWORD(v49) = *(_DWORD *)(v48 + 8) )
+            for ( ; (int)v48 > 1; LODWORD(v48) = *((_DWORD *)v47 + 2) )
             {
-              v50 = *(float *)&xmmword_141A712A0;
-              v51 = -1;
-              v52 = 0;
-              v53 = -1;
-              v54 = xmmword_141A712A0;
-              v55 = (signed int)v49;
-              v56 = _mm_xor_ps((__m128)xmmword_141A712A0, v15);
-              if ( (signed int)v49 > 0 )
+              v49 = 3.40282e38;
+              v50 = -1;
+              v51 = 0;
+              v52 = -1;
+              v53 = xmmword_141A712A0;
+              v54 = (int)v48;
+              v55 = _mm_xor_ps((__m128)xmmword_141A712A0, v15);
+              v56 = v7->m_nodes.m_data;
+              v57 = *(unsigned __int64 **)v47;
+              v58 = (int)v48;
+              v249 = (int)v48;
+              v59 = 1i64;
+              do
               {
-                v57 = v7->m_nodes.m_data;
-                v58 = *(unsigned __int64 **)v48;
-                v59 = (signed int)v49;
-                v254 = (signed int)v49;
-                v60 = 1i64;
-                do
+                v60 = v51 + 1;
+                v61 = *v57 << 6;
+                v62 = *(__m128 *)((char *)&v56->m_aabb.m_min.m_quad + v61);
+                v63 = *(__m128 *)((char *)&v56->m_aabb.m_max.m_quad + v61);
+                if ( v59 < v54 )
                 {
-                  v61 = v52 + 1;
-                  v62 = *v58 << 6;
-                  v63 = *(__m128 *)((char *)&v57->m_aabb.m_min.m_quad + v62);
-                  v64 = *(__m128 *)((char *)&v57->m_aabb.m_max.m_quad + v62);
-                  if ( v60 < v55 )
+                  v64 = v57 + 1;
+                  v65 = v54 - v59;
+                  do
                   {
-                    v65 = v58 + 1;
-                    v66 = v55 - v60;
-                    do
+                    v66 = *v64 << 6;
+                    v67 = _mm_max_ps(*(__m128 *)((char *)&v56->m_aabb.m_max.m_quad + v66), v63);
+                    v297 = *(__m128 *)((char *)&v56->m_aabb.m_min.m_quad + v66);
+                    v68 = _mm_min_ps(v297, v62);
+                    v69 = _mm_sub_ps(v67, v68);
+                    v70 = _mm_mul_ps(_mm_shuffle_ps(v69, v69, 201), v69);
+                    v71 = (float)(_mm_shuffle_ps(v70, v70, 85).m128_f32[0] + _mm_shuffle_ps(v70, v70, 0).m128_f32[0])
+                        + _mm_shuffle_ps(v70, v70, 170).m128_f32[0];
+                    if ( v71 < v49 )
                     {
-                      v67 = *v65 << 6;
-                      v68 = *(__m128 *)((char *)&v57->m_aabb.m_min.m_quad + v67);
-                      v69 = _mm_max_ps(*(__m128 *)((char *)&v57->m_aabb.m_max.m_quad + v67), v64);
-                      v305 = v68;
-                      v70 = _mm_min_ps(v68, v63);
-                      v71 = _mm_sub_ps(v69, v70);
-                      v72 = _mm_mul_ps(_mm_shuffle_ps(v71, v71, 201), v71);
-                      v73 = (float)(COERCE_FLOAT(_mm_shuffle_ps(v72, v72, 85))
-                                  + COERCE_FLOAT(_mm_shuffle_ps(v72, v72, 0)))
-                          + COERCE_FLOAT(_mm_shuffle_ps(v72, v72, 170));
-                      if ( v73 < v50 )
-                      {
-                        v50 = v73;
-                        v54 = (__int128)v70;
-                        v56 = v69;
-                        v51 = v52;
-                        v53 = v61;
-                      }
-                      ++v61;
-                      ++v65;
-                      --v66;
+                      v49 = v71;
+                      v53 = (__int128)v68;
+                      v55 = v67;
+                      v50 = v51;
+                      v52 = v60;
                     }
-                    while ( v66 );
-                    v59 = v254;
+                    ++v60;
+                    ++v64;
+                    --v65;
                   }
-                  ++v52;
-                  ++v58;
-                  ++v60;
-                  v254 = --v59;
+                  while ( v65 );
+                  v58 = v249;
                 }
-                while ( v59 );
+                ++v51;
+                ++v57;
+                ++v59;
+                v249 = --v58;
               }
-              v74 = v51;
-              v75 = *(_QWORD *)(*(_QWORD *)v48 + 8i64 * v51);
-              v76 = *(_QWORD *)(*(_QWORD *)v48 + 8i64 * v53);
+              while ( v58 );
+              v72 = v50;
+              v73 = *(_QWORD *)(*(_QWORD *)v47 + 8i64 * v50);
+              v74 = *(_QWORD *)(*(_QWORD *)v47 + 8i64 * v52);
               if ( !v7->m_firstFree )
                 hkcdDynamicTree::DynamicStorage<0,hkcdDynamicTree::AnisotropicMetric,hkcdDynamicTree::CodecRawUlong>::reserveNodes(
-                  (hkcdDynamicTree::DynamicStorage<0,hkcdDynamicTree::AnisotropicMetric,hkcdDynamicTree::CodecRawUlong> *)&v7->m_nodes,
-                  &v280,
+                  v7,
+                  &v272,
                   1);
-              v77 = v7->m_firstFree;
-              v78 = v7->m_nodes.m_data;
-              v79 = v7->m_firstFree << 6;
-              v7->m_firstFree = v7->m_nodes.m_data[(signed __int64)(signed int)v77].m_aabb.m_min.m_quad.m128_u64[0];
-              *(hkVector4f *)((char *)&v78->m_aabb.m_min + v79) = (hkVector4f)v54;
-              *(__m128 *)((char *)&v78->m_aabb.m_max.m_quad + v79) = v56;
-              *(unsigned __int64 *)((char *)v7->m_nodes.m_data->m_children + v79) = v75;
-              *(unsigned __int64 *)((char *)&v7->m_nodes.m_data->m_children[1] + v79) = v76;
-              v7->m_nodes.m_data[v75].m_parent = v77;
-              v7->m_nodes.m_data[v76].m_parent = v77;
-              v80 = (signed int)--*(_DWORD *)(v48 + 8);
-              if ( (_DWORD)v80 != v53 )
-                *(_QWORD *)(*(_QWORD *)v48 + 8i64 * v53) = *(_QWORD *)(*(_QWORD *)v48 + 8 * v80);
-              *(_QWORD *)(*(_QWORD *)v48 + 8 * v74) = v77;
+              v75 = v7->m_firstFree;
+              v76 = v7->m_nodes.m_data;
+              v77 = v75 << 6;
+              v7->m_firstFree = v7->m_nodes.m_data[(__int64)(int)v75].m_aabb.m_min.m_quad.m128_u64[0];
+              *(hkVector4f *)((char *)&v76->m_aabb.m_min + v77) = (hkVector4f)v53;
+              *(__m128 *)((char *)&v76->m_aabb.m_max.m_quad + v77) = v55;
+              *(unsigned __int64 *)((char *)v7->m_nodes.m_data->m_children + v77) = v73;
+              *(unsigned __int64 *)((char *)&v7->m_nodes.m_data->m_children[1] + v77) = v74;
+              v7->m_nodes.m_data[v73].m_parent = v75;
+              v7->m_nodes.m_data[v74].m_parent = v75;
+              v78 = (int)--*((_DWORD *)v47 + 2);
+              if ( (_DWORD)v78 != v52 )
+                *(_QWORD *)(*(_QWORD *)v47 + 8i64 * v52) = *(_QWORD *)(*(_QWORD *)v47 + 8 * v78);
+              *(_QWORD *)(*(_QWORD *)v47 + 8 * v72) = v75;
             }
-            v81 = **(_QWORD **)v48;
-            v7->m_nodes.m_data[**(_QWORD **)v48].m_parent = *(_QWORD *)(v48 + 16);
-            v7->m_nodes.m_data->m_children[*(signed int *)(v48 + 24) + 8i64 * *(_QWORD *)(v48 + 16)] = v81;
+            v79 = **(_QWORD **)v47;
+            v7->m_nodes.m_data[v79].m_parent = *((_QWORD *)v47 + 2);
+            v7->m_nodes.m_data[*((_QWORD *)v47 + 2)].m_children[*((int *)v47 + 6)] = v79;
           }
-          v181 = *(_DWORD *)(v48 + 12);
-          *(_DWORD *)(v48 + 8) = 0;
-          if ( v181 >= 0 )
+          v179 = *((_DWORD *)v47 + 3);
+          *((_DWORD *)v47 + 2) = 0;
+          if ( v179 >= 0 )
             hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-              (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-              *(void **)v48,
-              8 * v181);
-          *(_QWORD *)v48 = 0i64;
-          *(_DWORD *)(v48 + 12) = 2147483648;
-          v182 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-          (*(void (__fastcall **)(_QWORD *, __int64, signed __int64))(*v182[11] + 16i64))(v182[11], v48, 32i64);
-          v47 = v259;
-          v27 = v267;
+              &hkContainerHeapAllocator::s_alloc,
+              *(void **)v47,
+              8 * v179);
+          *(_QWORD *)v47 = 0i64;
+          *((_DWORD *)v47 + 3) = 0x80000000;
+          v180 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+          (*(void (__fastcall **)(_QWORD *, char *, __int64))(*v180[11] + 16i64))(v180[11], v47, 32i64);
+          v46 = array.m_size;
+          v26 = v260;
         }
-        while ( v259 );
+        while ( array.m_size );
         if ( vars0 )
         {
-          v183 = v261;
-          v184 = v261 << 6;
-          v267 = v261 << 6;
+          v181 = v254;
+          v182 = (char *)(v254 << 6);
+          v260 = (char *)(v254 << 6);
           do
           {
-            v185 = v7->m_nodes.m_data;
-            v186 = 0;
-            v187 = *(unsigned __int64 *)((char *)v7->m_nodes.m_data->m_children + v184);
+            v183 = v7->m_nodes.m_data;
+            m_enum = 0;
+            v185 = *(unsigned __int64 *)((char *)v7->m_nodes.m_data->m_children + (unsigned __int64)v182);
             LOBYTE(result.m_enum) = 0;
-            if ( !v187 )
+            if ( !v185 )
               break;
             do
             {
-              v188 = v187 << 6;
-              if ( LODWORD(v185[v187].m_children[0]) )
+              v186 = v185 << 6;
+              if ( LODWORD(v183[v185].m_children[0]) )
               {
-                v189 = &v185[*(unsigned __int64 *)((char *)v185->m_children + v188)].m_aabb.m_min.m_quad;
-                v190 = &v185[*(unsigned __int64 *)((char *)&v185->m_children[1] + v188)].m_aabb.m_min.m_quad;
-                v191 = _mm_sub_ps(v190[1], *v190);
-                v192 = _mm_sub_ps(v189[1], *v189);
-                v193 = _mm_mul_ps(_mm_shuffle_ps(v192, v192, 201), v192);
-                v194 = _mm_mul_ps(_mm_shuffle_ps(v191, v191, 201), v191);
-                v195 = (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v193, v193, 85))
-                                     + COERCE_FLOAT(_mm_shuffle_ps(v193, v193, 0)))
-                             + COERCE_FLOAT(_mm_shuffle_ps(v193, v193, 170)))
-                     + (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v194, v194, 85))
-                                     + COERCE_FLOAT(_mm_shuffle_ps(v194, v194, 0)))
-                             + COERCE_FLOAT(_mm_shuffle_ps(v194, v194, 170)));
-                if ( v189[2].m128_i32[2] && v190[2].m128_i32[2] )
+                p_m_quad = &v183[*(unsigned __int64 *)((char *)v183->m_children + v186)].m_aabb.m_min.m_quad;
+                v188 = &v183[*(unsigned __int64 *)((char *)&v183->m_children[1] + v186)].m_aabb.m_min.m_quad;
+                v189 = _mm_sub_ps(v188[1], *v188);
+                v190 = _mm_sub_ps(p_m_quad[1], *p_m_quad);
+                v191 = _mm_mul_ps(_mm_shuffle_ps(v190, v190, 201), v190);
+                v192 = _mm_mul_ps(_mm_shuffle_ps(v189, v189, 201), v189);
+                v193 = (float)((float)(_mm_shuffle_ps(v191, v191, 85).m128_f32[0]
+                                     + _mm_shuffle_ps(v191, v191, 0).m128_f32[0])
+                             + _mm_shuffle_ps(v191, v191, 170).m128_f32[0])
+                     + (float)((float)(_mm_shuffle_ps(v192, v192, 85).m128_f32[0]
+                                     + _mm_shuffle_ps(v192, v192, 0).m128_f32[0])
+                             + _mm_shuffle_ps(v192, v192, 170).m128_f32[0]);
+                if ( p_m_quad[2].m128_i32[2] && v188[2].m128_i32[2] )
                 {
-                  v196 = &v298;
-                  v197 = &v190[2].m128_u64[1];
-                  v198 = 2i64;
+                  v194 = &v290;
+                  v195 = &v188[2].m128_u64[1];
+                  v196 = 2i64;
                   do
                   {
-                    v196 += 2;
-                    v199 = *(unsigned __int64 *)((char *)v197 + (char *)v189 - (char *)v190) << 6;
-                    v200 = *v197 << 6;
-                    ++v197;
-                    v201 = (__m128 *)((char *)&v185->m_aabb.m_min.m_quad + v199);
-                    v202 = (__m128 *)((char *)&v185->m_aabb.m_min.m_quad + v200);
-                    *(unsigned __int64 *)((char *)v197 + (char *)&v272 - (char *)v190 - 8) = (unsigned __int64)v201;
-                    *(unsigned __int64 *)((char *)v197 + (char *)&a - (char *)v190 - 8) = (unsigned __int64)v202;
-                    v203 = v201[1];
-                    v196[-7] = *v201;
-                    v204 = *v202;
-                    v196[-6] = v203;
-                    v205 = v202[1];
-                    v196[-3] = v204;
-                    v196[-2] = v205;
-                    --v198;
+                    v194 += 2;
+                    v197 = *(unsigned __int64 *)((char *)v195 + (char *)p_m_quad - (char *)v188) << 6;
+                    v198 = *v195++ << 6;
+                    v199 = (__m128 *)((char *)&v183->m_aabb.m_min.m_quad + v197);
+                    v200 = (__m128 *)((char *)&v183->m_aabb.m_min.m_quad + v198);
+                    *(unsigned __int64 *)((char *)v195 + (char *)&v265 - (char *)v188 - 8) = (unsigned __int64)v199;
+                    *(unsigned __int64 *)((char *)v195 + (char *)a - (char *)v188 - 8) = (unsigned __int64)v200;
+                    v201 = v199[1];
+                    v194[-7] = *v199;
+                    v202 = *v200;
+                    v194[-6] = v201;
+                    v203 = v200[1];
+                    v194[-3] = v202;
+                    v194[-2] = v203;
+                    --v196;
                   }
-                  while ( v198 );
-                  v7 = v306;
-                  v206 = _mm_max_ps(v294, v300);
-                  v207 = _mm_max_ps(v296, v298);
-                  v290 = v206;
-                  v208 = _mm_max_ps(v296, v300);
-                  v209 = _mm_max_ps(v294, v298);
-                  v288 = v208;
-                  v286 = v209;
-                  v292 = v207;
-                  v289 = _mm_min_ps(v293, v299);
-                  v287 = _mm_min_ps(v295, v299);
-                  v285 = _mm_min_ps(v293, v297);
-                  v291 = _mm_min_ps(v295, v297);
-                  v210 = _mm_sub_ps(v208, v287);
-                  v211 = _mm_sub_ps(v209, v285);
-                  v212 = _mm_sub_ps(v206, v289);
-                  v213 = _mm_sub_ps(v207, v291);
-                  v214 = _mm_mul_ps(_mm_shuffle_ps(v210, v210, 201), v210);
-                  v215 = _mm_mul_ps(_mm_shuffle_ps(v211, v211, 201), v211);
-                  v216 = _mm_mul_ps(_mm_shuffle_ps(v213, v213, 201), v213);
-                  v217 = _mm_add_ps(
+                  while ( v196 );
+                  v7 = v298;
+                  v282 = _mm_max_ps(v286, v292);
+                  v280 = _mm_max_ps(v288, v292);
+                  v278 = _mm_max_ps(v286, v290);
+                  v284 = _mm_max_ps(v288, v290);
+                  v281 = _mm_min_ps(v285, v291);
+                  v279 = _mm_min_ps(v287, v291);
+                  v277 = _mm_min_ps(v285, v289);
+                  v283 = _mm_min_ps(v287, v289);
+                  v204 = _mm_sub_ps(v280, v279);
+                  v205 = _mm_sub_ps(v278, v277);
+                  v206 = _mm_sub_ps(v282, v281);
+                  v207 = _mm_sub_ps(v284, v283);
+                  v208 = _mm_mul_ps(_mm_shuffle_ps(v204, v204, 201), v204);
+                  v209 = _mm_mul_ps(_mm_shuffle_ps(v205, v205, 201), v205);
+                  v210 = _mm_mul_ps(_mm_shuffle_ps(v207, v207, 201), v207);
+                  v211 = _mm_add_ps(
                            _mm_add_ps(
-                             _mm_add_ps(_mm_shuffle_ps(v214, v214, 85), _mm_shuffle_ps(v214, v214, 0)),
-                             _mm_shuffle_ps(v214, v214, 170)),
+                             _mm_add_ps(_mm_shuffle_ps(v208, v208, 85), _mm_shuffle_ps(v208, v208, 0)),
+                             _mm_shuffle_ps(v208, v208, 170)),
                            _mm_add_ps(
-                             _mm_add_ps(_mm_shuffle_ps(v215, v215, 85), _mm_shuffle_ps(v215, v215, 0)),
-                             _mm_shuffle_ps(v215, v215, 170)));
-                  v218 = _mm_mul_ps(_mm_shuffle_ps(v212, v212, 201), v212);
-                  v282 = (__m128i)v217;
-                  v283 = _mm_add_ps(
+                             _mm_add_ps(_mm_shuffle_ps(v209, v209, 85), _mm_shuffle_ps(v209, v209, 0)),
+                             _mm_shuffle_ps(v209, v209, 170)));
+                  v212 = _mm_mul_ps(_mm_shuffle_ps(v206, v206, 201), v206);
+                  v274 = (hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::SAHBin::Sorter)v211;
+                  v275 = _mm_add_ps(
                            _mm_add_ps(
-                             _mm_add_ps(_mm_shuffle_ps(v218, v218, 85), _mm_shuffle_ps(v218, v218, 0)),
-                             _mm_shuffle_ps(v218, v218, 170)),
+                             _mm_add_ps(_mm_shuffle_ps(v212, v212, 85), _mm_shuffle_ps(v212, v212, 0)),
+                             _mm_shuffle_ps(v212, v212, 170)),
                            _mm_add_ps(
-                             _mm_add_ps(_mm_shuffle_ps(v216, v216, 85), _mm_shuffle_ps(v216, v216, 0)),
-                             _mm_shuffle_ps(v216, v216, 170)));
-                  v219 = v217.m128_f32[0] >= v283.m128_f32[0];
-                  v220 = v217.m128_f32[0] >= v283.m128_f32[0];
-                  if ( COERCE_FLOAT(*((_OWORD *)&v282 + v220)) >= v195 )
+                             _mm_add_ps(_mm_shuffle_ps(v210, v210, 85), _mm_shuffle_ps(v210, v210, 0)),
+                             _mm_shuffle_ps(v210, v210, 170)));
+                  v213 = v211.m128_f32[0] >= v275.m128_f32[0];
+                  v214 = v211.m128_f32[0] >= v275.m128_f32[0];
+                  if ( COERCE_FLOAT(*((_OWORD *)&v274 + v214)) >= v193 )
                   {
-                    v186 = result.m_enum;
+                    m_enum = result.m_enum;
                   }
                   else
                   {
-                    v189[3].m128_u64[0] = (*((_QWORD *)&v277.m_axis
-                                           + (signed int)`hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildBranchSAH::`77::lut[v220][0])
-                                         - (_QWORD)v185) >> 6;
-                    v190[2].m128_u64[1] = (signed __int64)(*((_QWORD *)&v277.m_axis
-                                                           + (signed int)`hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildBranchSAH::`77::lut[v220][1])
-                                                         - (unsigned __int64)v7->m_nodes.m_data) >> 6;
-                    v190[3].m128_u64[0] = (signed __int64)(*((_QWORD *)&v277.m_axis
-                                                           + (signed int)`hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildBranchSAH::`77::lut[v220][2])
-                                                         - (unsigned __int64)v7->m_nodes.m_data) >> 6;
-                    *(_QWORD *)(*((_QWORD *)&v277.m_axis
-                                + (signed int)`hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildBranchSAH::`77::lut[v220][0])
-                              + 32i64) = ((char *)v189 - (char *)v7->m_nodes.m_data) >> 6;
-                    *(_QWORD *)(*((_QWORD *)&v277.m_axis
-                                + (signed int)`hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildBranchSAH::`77::lut[v220][1])
-                              + 32i64) = ((char *)v190 - (char *)v7->m_nodes.m_data) >> 6;
-                    v221 = *((_QWORD *)&v277.m_axis
-                           + (signed int)`hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildBranchSAH::`77::lut[v220][2]);
-                    v186 = 1;
-                    v222 = ((char *)v190 - (char *)v7->m_nodes.m_data) >> 6;
+                    p_m_quad[3].m128_u64[0] = (__int64)(*((_QWORD *)&v269.m_axis
+                                                        + (int)`hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildBranchSAH::`77::lut[v214][0])
+                                                      - (_QWORD)v183) >> 6;
+                    v188[2].m128_u64[1] = (__int64)(*((_QWORD *)&v269.m_axis
+                                                    + (int)`hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildBranchSAH::`77::lut[v214][1])
+                                                  - (unsigned __int64)v7->m_nodes.m_data) >> 6;
+                    v188[3].m128_u64[0] = (__int64)(*((_QWORD *)&v269.m_axis
+                                                    + (int)`hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildBranchSAH::`77::lut[v214][2])
+                                                  - (unsigned __int64)v7->m_nodes.m_data) >> 6;
+                    *(_QWORD *)(*((_QWORD *)&v269.m_axis
+                                + (int)`hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildBranchSAH::`77::lut[v214][0])
+                              + 32i64) = ((char *)p_m_quad - (char *)v7->m_nodes.m_data) >> 6;
+                    *(_QWORD *)(*((_QWORD *)&v269.m_axis
+                                + (int)`hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildBranchSAH::`77::lut[v214][1])
+                              + 32i64) = ((char *)v188 - (char *)v7->m_nodes.m_data) >> 6;
+                    v215 = *((_QWORD *)&v269.m_axis
+                           + (int)`hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildBranchSAH::`77::lut[v214][2]);
+                    m_enum = 1;
+                    v216 = ((char *)v188 - (char *)v7->m_nodes.m_data) >> 6;
                     LOBYTE(result.m_enum) = 1;
-                    *(_QWORD *)(v221 + 32) = v222;
-                    v223 = *(&v286 + 4 * v219);
-                    v224 = 2 * v219 + 1;
-                    *v189 = *(&v285 + 4 * v219);
-                    v225 = *(&v285 + 2 * v224);
-                    v189[1] = v223;
-                    v226 = *(&v286 + 2 * v224);
-                    *v190 = v225;
-                    v190[1] = v226;
+                    *(_QWORD *)(v215 + 32) = v216;
+                    v217 = *(&v278 + 4 * v213);
+                    v218 = 2 * v213 + 1;
+                    *p_m_quad = *(&v277 + 4 * v213);
+                    v219 = *(&v277 + 2 * v218);
+                    p_m_quad[1] = v217;
+                    v220 = *(&v278 + 2 * v218);
+                    *v188 = v219;
+                    v188[1] = v220;
                   }
                 }
-                v183 = v261;
+                v181 = v254;
               }
-              v185 = v7->m_nodes.m_data;
-              if ( *(_DWORD *)((char *)v7->m_nodes.m_data->m_children + v188) )
+              v183 = v7->m_nodes.m_data;
+              if ( *(_DWORD *)((char *)v7->m_nodes.m_data->m_children + v186) )
               {
-                v187 = *(unsigned __int64 *)((char *)v185->m_children + v188);
+                v185 = *(unsigned __int64 *)((char *)v183->m_children + v186);
               }
               else
               {
-                v227 = *(unsigned __int64 *)((char *)&v185->m_parent + v188);
-                for ( i = v187; v227 != v183; v227 = v185[v227].m_parent )
+                m_parent = *(unsigned __int64 *)((char *)&v183->m_parent + v186);
+                for ( i = v185; m_parent != v181; m_parent = v183[m_parent].m_parent )
                 {
-                  if ( v185[v227].m_children[1] != i )
+                  if ( v183[m_parent].m_children[1] != i )
                     break;
-                  i = v227;
+                  i = m_parent;
                 }
-                if ( v227 )
-                  v187 = v185[v227].m_children[1];
+                if ( m_parent )
+                  v185 = v183[m_parent].m_children[1];
                 else
-                  v187 = i;
-                if ( v227 == v183 && v187 == i )
-                  v187 = 0i64;
+                  v185 = i;
+                if ( m_parent == v181 && v185 == i )
+                  v185 = 0i64;
               }
             }
-            while ( v187 );
-            v184 = v267;
+            while ( v185 );
+            v182 = v260;
           }
-          while ( v186 );
-          v229 = v7->m_nodes.m_data;
-          v230 = *(unsigned __int64 *)((char *)v7->m_nodes.m_data->m_children + v184);
-          while ( v230 )
+          while ( m_enum );
+          v223 = v7->m_nodes.m_data;
+          v224 = *(unsigned __int64 *)((char *)v7->m_nodes.m_data->m_children + (unsigned __int64)v182);
+          while ( v224 )
           {
-            v231 = v230 << 6;
-            if ( LODWORD(v229[v230].m_children[0]) )
+            v225 = v224 << 6;
+            if ( LODWORD(v223[v224].m_children[0]) )
             {
-              v232 = *(unsigned __int64 *)((char *)v229->m_children + v231);
-              v233 = _mm_sub_ps(
-                       v229[*(unsigned __int64 *)((char *)v229->m_children + v231)].m_aabb.m_max.m_quad,
-                       v229[*(unsigned __int64 *)((char *)v229->m_children + v231)].m_aabb.m_min.m_quad);
-              v234 = _mm_sub_ps(
-                       v229[*(unsigned __int64 *)((char *)&v229->m_children[1] + v231)].m_aabb.m_max.m_quad,
-                       v229[*(unsigned __int64 *)((char *)&v229->m_children[1] + v231)].m_aabb.m_min.m_quad);
-              v235 = _mm_mul_ps(_mm_shuffle_ps(v233, v233, 201), v233);
-              v236 = _mm_mul_ps(_mm_shuffle_ps(v234, v234, 201), v234);
-              if ( (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v236, v236, 85))
-                                 + COERCE_FLOAT(_mm_shuffle_ps(v236, v236, 0)))
-                         + COERCE_FLOAT(_mm_shuffle_ps(v236, v236, 170))) > (float)((float)(COERCE_FLOAT(
-                                                                                              _mm_shuffle_ps(
-                                                                                                v235,
-                                                                                                v235,
-                                                                                                85))
-                                                                                          + COERCE_FLOAT(
-                                                                                              _mm_shuffle_ps(
-                                                                                                v235,
-                                                                                                v235,
-                                                                                                0)))
-                                                                                  + COERCE_FLOAT(_mm_shuffle_ps(v235, v235, 170))) )
+              v226 = *(unsigned __int64 *)((char *)v223->m_children + v225);
+              v227 = _mm_sub_ps(v223[v226].m_aabb.m_max.m_quad, v223[v226].m_aabb.m_min.m_quad);
+              v228 = _mm_sub_ps(
+                       v223[*(unsigned __int64 *)((char *)&v223->m_children[1] + v225)].m_aabb.m_max.m_quad,
+                       v223[*(unsigned __int64 *)((char *)&v223->m_children[1] + v225)].m_aabb.m_min.m_quad);
+              v229 = _mm_mul_ps(_mm_shuffle_ps(v227, v227, 201), v227);
+              v230 = _mm_mul_ps(_mm_shuffle_ps(v228, v228, 201), v228);
+              if ( (float)((float)(_mm_shuffle_ps(v230, v230, 85).m128_f32[0] + _mm_shuffle_ps(v230, v230, 0).m128_f32[0])
+                         + _mm_shuffle_ps(v230, v230, 170).m128_f32[0]) > (float)((float)(_mm_shuffle_ps(v229, v229, 85).m128_f32[0]
+                                                                                        + _mm_shuffle_ps(v229, v229, 0).m128_f32[0])
+                                                                                + _mm_shuffle_ps(v229, v229, 170).m128_f32[0]) )
               {
-                *(unsigned __int64 *)((char *)v229->m_children + v231) = *(unsigned __int64 *)((char *)&v229->m_children[1]
-                                                                                             + v231);
-                *(unsigned __int64 *)((char *)&v229->m_children[1] + v231) = v232;
+                *(unsigned __int64 *)((char *)v223->m_children + v225) = *(unsigned __int64 *)((char *)&v223->m_children[1]
+                                                                                             + v225);
+                *(unsigned __int64 *)((char *)&v223->m_children[1] + v225) = v226;
               }
             }
-            v229 = v7->m_nodes.m_data;
-            if ( *(_DWORD *)((char *)v7->m_nodes.m_data->m_children + v231) )
+            v223 = v7->m_nodes.m_data;
+            if ( *(_DWORD *)((char *)v7->m_nodes.m_data->m_children + v225) )
             {
-              v230 = *(unsigned __int64 *)((char *)v229->m_children + v231);
+              v224 = *(unsigned __int64 *)((char *)v223->m_children + v225);
             }
             else
             {
-              v237 = *(unsigned __int64 *)((char *)&v229->m_parent + v231);
-              for ( j = v230; v237 != v183; v237 = v229[v237].m_parent )
+              v231 = *(unsigned __int64 *)((char *)&v223->m_parent + v225);
+              for ( j = v224; v231 != v181; v231 = v223[v231].m_parent )
               {
-                if ( v229[v237].m_children[1] != j )
+                if ( v223[v231].m_children[1] != j )
                   break;
-                j = v237;
+                j = v231;
               }
-              if ( v237 )
-                v230 = v229[v237].m_children[1];
+              if ( v231 )
+                v224 = v223[v231].m_children[1];
               else
-                v230 = j;
-              if ( v237 == v183 && v230 == j )
-                v230 = 0i64;
+                v224 = j;
+              if ( v231 == v181 && v224 == j )
+                v224 = 0i64;
             }
           }
         }
-        v239 = v279;
-        v240 = v261;
-        v7->m_nodes.m_data[v261].m_parent = v279;
-        if ( v239 )
+        v233 = v271;
+        v234 = v254;
+        v7->m_nodes.m_data[v254].m_parent = v271;
+        if ( v233 )
         {
-          v7->m_nodes.m_data->m_children[(signed int)v265 + 8 * v239] = v240;
-          v241 = v7->m_nodes.m_data;
+          v7->m_nodes.m_data[v233].m_children[(int)v258] = v234;
+          v235 = v7->m_nodes.m_data;
           do
           {
-            v242 = v239 << 6;
-            v243 = *(unsigned __int64 *)((char *)v241->m_children + v242) << 6;
-            v244 = *(unsigned __int64 *)((char *)&v241->m_children[1] + v242) << 6;
-            v245 = _mm_max_ps(
-                     *(__m128 *)((char *)&v241->m_aabb.m_max.m_quad + v243),
-                     *(__m128 *)((char *)&v241->m_aabb.m_max.m_quad + v244));
-            *(__m128 *)((char *)&v241->m_aabb.m_min.m_quad + v242) = _mm_min_ps(
-                                                                       *(__m128 *)((char *)&v241->m_aabb.m_min.m_quad
-                                                                                 + v243),
-                                                                       *(__m128 *)((char *)&v241->m_aabb.m_min.m_quad
-                                                                                 + v244));
-            *(__m128 *)((char *)&v241->m_aabb.m_max.m_quad + v242) = v245;
-            v241 = v7->m_nodes.m_data;
-            v239 = *(unsigned __int64 *)((char *)&v7->m_nodes.m_data->m_parent + v242);
+            v236 = v233 << 6;
+            v237 = *(unsigned __int64 *)((char *)v235->m_children + v236) << 6;
+            v238 = *(unsigned __int64 *)((char *)&v235->m_children[1] + v236) << 6;
+            v239 = _mm_max_ps(
+                     *(__m128 *)((char *)&v235->m_aabb.m_max.m_quad + v237),
+                     *(__m128 *)((char *)&v235->m_aabb.m_max.m_quad + v238));
+            *(__m128 *)((char *)&v235->m_aabb.m_min.m_quad + v236) = _mm_min_ps(
+                                                                       *(__m128 *)((char *)&v235->m_aabb.m_min.m_quad
+                                                                                 + v237),
+                                                                       *(__m128 *)((char *)&v235->m_aabb.m_min.m_quad
+                                                                                 + v238));
+            *(__m128 *)((char *)&v235->m_aabb.m_max.m_quad + v236) = v239;
+            v235 = v7->m_nodes.m_data;
+            v233 = *(unsigned __int64 *)((char *)&v7->m_nodes.m_data->m_parent + v236);
           }
-          while ( v239 );
+          while ( v233 );
         }
         else
         {
-          v7->m_root = v240;
+          v7->m_root = v234;
         }
-        v246 = (int *)((char *)&v266 + 4);
+        v240 = (int *)&v259 + 1;
         do
         {
-          v247 = *(v246 - 5);
-          v248 = *(_QWORD *)(v246 - 7);
-          v246 -= 4;
-          v249 = v247 - 1;
-          v250 = v249;
-          if ( v249 >= 0 )
+          v241 = *(v240 - 5);
+          v242 = *(_QWORD *)(v240 - 7);
+          v240 -= 4;
+          v243 = v241 - 1;
+          v244 = v243;
+          if ( v243 >= 0 )
           {
-            v251 = (int *)(((signed __int64)v249 << 6) + v248 + 12);
+            v245 = (int *)(((__int64)v243 << 6) + v242 + 12);
             do
             {
-              v252 = *v251;
-              *(v251 - 1) = 0;
-              if ( v252 >= 0 )
+              v246 = *v245;
+              *(v245 - 1) = 0;
+              if ( v246 >= 0 )
                 hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-                  (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-                  *(void **)(v251 - 3),
-                  8 * v252);
-              *(_QWORD *)(v251 - 3) = 0i64;
-              *v251 = 2147483648;
-              v251 -= 16;
-              --v250;
+                  &hkContainerHeapAllocator::s_alloc,
+                  *(void **)(v245 - 3),
+                  8 * v246);
+              *(_QWORD *)(v245 - 3) = 0i64;
+              *v245 = 0x80000000;
+              v245 -= 16;
+              --v244;
             }
-            while ( v250 >= 0 );
+            while ( v244 >= 0 );
           }
-          v253 = *v246;
-          *(v246 - 1) = 0;
-          if ( v253 >= 0 )
+          v247 = *v240;
+          *(v240 - 1) = 0;
+          if ( v247 >= 0 )
             hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-              (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-              *(void **)(v246 - 3),
-              v253 << 6);
-          v112 = (signed int)v274 - 1 < 0;
-          LODWORD(v274) = v274 - 1;
-          *(_QWORD *)(v246 - 3) = 0i64;
-          *v246 = 2147483648;
+              &hkContainerHeapAllocator::s_alloc,
+              *(void **)(v240 - 3),
+              v247 << 6);
+          v248 = (int)v267 - 1 < 0;
+          LODWORD(v267) = v267 - 1;
+          *(_QWORD *)(v240 - 3) = 0i64;
+          *v240 = 0x80000000;
         }
-        while ( !v112 );
-        v259 = 0;
-        if ( v260 >= 0 )
+        while ( !v248 );
+        array.m_size = 0;
+        if ( array.m_capacityAndFlags >= 0 )
           hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-            (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-            array,
-            8 * v260);
+            &hkContainerHeapAllocator::s_alloc,
+            array.m_data,
+            8 * array.m_capacityAndFlags);
       }
     }
   }
+}        array.m_data,
+            8 * array.m_capacityAndFlags);
+      }
+    }
+  }
 }
 
 // File Line: 661
 // RVA: 0xDF4730
-void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildGlobalSAH(hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *this, int minBins, int maxBins, int step)
+void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildGlobalSAH(
+        hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *this,
+        int minBins,
+        int maxBins,
+        int step)
 {
-  int v4; // ebx
-  int v5; // er14
-  int v6; // esi
-  hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::DynamicTree *v7; // rdi
   float v8; // xmm7_4
   float v9; // xmm6_4
   hkOstream *v10; // rax
   hkOstream *v11; // rax
   hkOstream *v12; // rax
-  hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::DynamicTree output; // [rsp+30h] [rbp-C8h]
-  hkSimdFloat32 result; // [rsp+60h] [rbp-98h]
-  hkErrStream v15; // [rsp+70h] [rbp-88h]
-  char buf; // [rsp+88h] [rbp-70h]
+  hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::DynamicTree output; // [rsp+30h] [rbp-C8h] BYREF
+  hkSimdFloat32 result; // [rsp+60h] [rbp-98h] BYREF
+  hkErrStream v15; // [rsp+70h] [rbp-88h] BYREF
+  char buf[520]; // [rsp+88h] [rbp-70h] BYREF
 
-  v4 = minBins;
-  v5 = step;
-  v6 = maxBins;
-  v7 = (hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::DynamicTree *)this;
-  output.m_nodes.m_capacityAndFlags = 2147483648;
+  output.m_nodes.m_capacityAndFlags = 0x80000000;
   output.m_nodes.m_size = 0;
   output.m_nodes.m_data = 0i64;
-  output.m_firstFree = 0i64;
-  output.m_root = 0i64;
-  *(_QWORD *)&output.m_numLeaves = 0i64;
+  memset(&output.m_firstFree, 0, 24);
   hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::copyTo<hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>>(
     this,
     &output);
-  hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::computeCost(
-    (hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *)&output.m_nodes,
-    &result);
-  if ( v4 <= v6 )
+  hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::computeCost(&output, &result);
+  if ( minBins <= maxBins )
   {
     v8 = result.m_real.m128_f32[0];
     do
     {
       hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rebuildBranchSAH(
-        (hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *)&v7->m_nodes,
-        v7->m_root,
+        this,
+        this->m_root,
         (hkBool)1,
-        v4,
+        minBins,
         16);
-      hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::computeCost(
-        (hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *)&v7->m_nodes,
-        &result);
+      hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::computeCost(this, &result);
       v9 = result.m_real.m128_f32[0];
       if ( result.m_real.m128_f32[0] < v8 )
       {
-        hkErrStream::hkErrStream(&v15, &buf, 512);
-        v10 = hkOstream::operator<<((hkOstream *)&v15.vfptr, "#");
-        v11 = hkOstream::operator<<(v10, v4, (int)v10);
+        hkErrStream::hkErrStream(&v15, buf, 512);
+        v10 = hkOstream::operator<<(&v15, "#");
+        v11 = hkOstream::operator<<(v10, minBins);
         v12 = hkOstream::operator<<(v11, ": ");
-        hkOstream::operator<<(v12, v9, (int)v12);
+        hkOstream::operator<<(v12, v9);
         hkError::messageReport(
-          -1,
-          &buf,
+          0xFFFFFFFF,
+          buf,
           "Y:\\NightlyJobs\\09-12-Thu-05\\Source\\Geometry/Internal/DataStructures/DynamicTree/hkcdDynamicTree.inl",
           670);
-        hkOstream::~hkOstream((hkOstream *)&v15.vfptr);
+        hkOstream::~hkOstream(&v15);
         hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::copyTo<hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>>(
-          (hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *)&v7->m_nodes,
+          this,
           &output);
         v8 = v9;
       }
-      v4 += v5;
+      minBins += step;
     }
-    while ( v4 <= v6 );
+    while ( minBins <= maxBins );
   }
   hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::copyTo<hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>>(
-    (hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *)&output.m_nodes,
-    v7);
+    &output,
+    (hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::DynamicTree *)this);
   output.m_nodes.m_size = 0;
   if ( output.m_nodes.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       output.m_nodes.m_data,
       output.m_nodes.m_capacityAndFlags << 6);
 }
 
 // File Line: 711
 // RVA: 0xCBED00
-void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::copyTo<hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>>(hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *this, hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::DynamicTree *output)
+void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::copyTo<hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>>(
+        hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *this,
+        hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::DynamicTree *output)
 {
-  int v2; // er8
-  hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::DynamicTree *v3; // rbx
-  hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *v4; // r15
-  int v5; // esi
+  int m_capacityAndFlags; // r8d
+  int m_size; // esi
   int v6; // eax
-  int v7; // er9
-  unsigned __int64 v8; // rsi
-  signed __int64 v9; // r14
-  unsigned __int64 v10; // rdi
-  unsigned __int64 v11; // rsi
-  hkcdDynamicTree::CodecRawUlong *v12; // rdi
-  hkVector4f v13; // xmm6
-  hkVector4f v14; // xmm7
-  unsigned __int64 v15; // rdx
-  hkcdDynamicTree::CodecRawUlong *v16; // r8
-  __int64 v17; // r14
-  int v18; // ecx
-  _QWORD *array; // [rsp+30h] [rbp-D0h]
-  int v20; // [rsp+38h] [rbp-C8h]
-  int v21; // [rsp+3Ch] [rbp-C4h]
-  __int64 *v22; // [rsp+40h] [rbp-C0h]
-  int v23; // [rsp+48h] [rbp-B8h]
-  int v24; // [rsp+4Ch] [rbp-B4h]
-  __int64 v25; // [rsp+50h] [rbp-B0h]
-  hkResult result; // [rsp+2A0h] [rbp+1A0h]
+  unsigned __int64 m_root; // rsi
+  __int64 v8; // r14
+  unsigned __int64 v9; // rdi
+  unsigned __int64 v10; // rsi
+  hkcdDynamicTree::CodecRawUlong *v11; // rdi
+  hkVector4f v12; // xmm6
+  hkVector4f v13; // xmm7
+  unsigned __int64 m_firstFree; // rdx
+  hkcdDynamicTree::CodecRawUlong *v15; // r8
+  __int64 v16; // r14
+  int v17; // ecx
+  _QWORD *array; // [rsp+30h] [rbp-D0h] BYREF
+  int v19; // [rsp+38h] [rbp-C8h]
+  int v20; // [rsp+3Ch] [rbp-C4h]
+  __int64 *v21; // [rsp+40h] [rbp-C0h] BYREF
+  int v22; // [rsp+48h] [rbp-B8h]
+  int v23; // [rsp+4Ch] [rbp-B4h]
+  __int64 v24; // [rsp+50h] [rbp-B0h] BYREF
+  hkResult result; // [rsp+2A0h] [rbp+1A0h] BYREF
 
-  v2 = output->m_nodes.m_capacityAndFlags;
-  v3 = output;
-  v4 = this;
+  m_capacityAndFlags = output->m_nodes.m_capacityAndFlags;
   output->m_nodes.m_size = 0;
-  if ( v2 >= 0 )
+  if ( m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       output->m_nodes.m_data,
-      v2 << 6);
-  v3->m_nodes.m_data = 0i64;
-  v3->m_nodes.m_capacityAndFlags = 2147483648;
-  v3->m_firstFree = 0i64;
-  v3->m_root = 0i64;
-  *(_QWORD *)&v3->m_numLeaves = 0i64;
+      m_capacityAndFlags << 6);
+  output->m_nodes.m_data = 0i64;
+  output->m_nodes.m_capacityAndFlags = 0x80000000;
+  output->m_firstFree = 0i64;
+  output->m_root = 0i64;
+  *(_QWORD *)&output->m_numLeaves = 0i64;
   hkcdDynamicTree::DynamicStorage<0,hkcdDynamicTree::AnisotropicMetric,hkcdDynamicTree::CodecRawUlong>::reserveNodes(
-    (hkcdDynamicTree::DynamicStorage<0,hkcdDynamicTree::AnisotropicMetric,hkcdDynamicTree::CodecRawUlong> *)&v3->m_nodes,
+    output,
     &result,
-    2 * v4->m_numLeaves);
-  if ( v4->m_root )
+    2 * this->m_numLeaves);
+  if ( this->m_root )
   {
-    v5 = v4->m_nodes.m_size;
+    m_size = this->m_nodes.m_size;
     v6 = 0;
     array = 0i64;
-    v21 = 2147483648;
-    v20 = 0;
-    if ( v5 > 0 )
+    v20 = 0x80000000;
+    v19 = 0;
+    if ( m_size > 0 )
     {
-      v7 = v5;
-      if ( v5 < 0 )
-        v7 = 0;
-      hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, v7, 8);
-      v6 = v20;
+      hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&array, m_size, 8);
+      v6 = v19;
     }
-    if ( v5 - v6 > 0 )
-      memset(&array[v6], 0, 8i64 * (v5 - v6));
-    v20 = v5;
-    v8 = v4->m_root;
-    v22 = &v25;
-    v24 = -2147483584;
-    v25 = 0i64;
-    v23 = 1;
-    v9 = 0i64;
+    if ( m_size - v6 > 0 )
+      memset(&array[v6], 0, 8i64 * (m_size - v6));
+    v19 = m_size;
+    m_root = this->m_root;
+    v21 = &v24;
+    v23 = -2147483584;
+    v24 = 0i64;
+    v22 = 1;
+    v8 = 0i64;
     do
     {
-      v10 = v8;
-      v11 = array[(signed int)v8];
-      v12 = &v4->m_nodes.m_data[v10];
-      v13.m_quad = (__m128)v12->m_aabb.m_min;
-      v14.m_quad = (__m128)v12->m_aabb.m_max;
-      if ( !v3->m_firstFree )
+      v9 = m_root;
+      v10 = array[(int)m_root];
+      v11 = &this->m_nodes.m_data[v9];
+      v12.m_quad = (__m128)v11->m_aabb.m_min;
+      v13.m_quad = (__m128)v11->m_aabb.m_max;
+      if ( !output->m_firstFree )
         hkcdDynamicTree::DynamicStorage<0,hkcdDynamicTree::AnisotropicMetric,hkcdDynamicTree::CodecRawUlong>::reserveNodes(
-          (hkcdDynamicTree::DynamicStorage<0,hkcdDynamicTree::AnisotropicMetric,hkcdDynamicTree::CodecRawUlong> *)&v3->m_nodes,
+          output,
           &result,
           1);
-      v15 = v3->m_firstFree;
-      v16 = &v3->m_nodes.m_data[v3->m_firstFree];
-      v3->m_firstFree = v3->m_nodes.m_data[(signed __int64)(signed int)v15].m_aabb.m_min.m_quad.m128_u64[0];
-      v16->m_parent = v11;
-      v16->m_aabb.m_min = (hkVector4f)v13.m_quad;
-      v16->m_aabb.m_max = (hkVector4f)v14.m_quad;
-      if ( v11 )
-        v3->m_nodes.m_data->m_children[v9 + 8 * v11] = v15;
+      m_firstFree = output->m_firstFree;
+      v15 = &output->m_nodes.m_data[m_firstFree];
+      output->m_firstFree = output->m_nodes.m_data[(__int64)(int)m_firstFree].m_aabb.m_min.m_quad.m128_u64[0];
+      v15->m_parent = v10;
+      v15->m_aabb.m_min = (hkVector4f)v12.m_quad;
+      v15->m_aabb.m_max = (hkVector4f)v13.m_quad;
+      if ( v10 )
+        output->m_nodes.m_data[v10].m_children[v8] = m_firstFree;
       else
-        v3->m_root = v15;
-      v8 = v12->m_children[0];
-      v17 = v12->m_children[1];
-      if ( (_DWORD)v8 )
+        output->m_root = m_firstFree;
+      m_root = v11->m_children[0];
+      v16 = v11->m_children[1];
+      if ( (_DWORD)m_root )
       {
-        array[(signed int)v8] = v15;
-        array[(signed int)v17] = v15;
-        v18 = v23;
-        if ( v23 == (v24 & 0x3FFFFFFF) )
+        array[(int)m_root] = m_firstFree;
+        array[(int)v16] = m_firstFree;
+        v17 = v22;
+        if ( v22 == (v23 & 0x3FFFFFFF) )
         {
-          hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v22, 8);
-          v18 = v23;
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&v21, 8);
+          v17 = v22;
         }
-        v22[v18] = v17;
-        ++v23;
-        v9 = 0i64;
+        v21[v17] = v16;
+        ++v22;
+        v8 = 0i64;
       }
       else
       {
-        v16->m_children[1] = v17;
-        v16->m_children[0] = v8;
-        v9 = 1i64;
-        v8 = v22[v23-- - 1];
+        v15->m_children[1] = v16;
+        v15->m_children[0] = m_root;
+        v8 = 1i64;
+        m_root = v21[--v22];
       }
     }
-    while ( v8 );
-    v23 = 0;
-    if ( v24 >= 0 )
-      hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-        v22,
-        8 * v24);
-    v22 = 0i64;
-    v24 = 2147483648;
-    v20 = 0;
-    if ( v21 >= 0 )
-      hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-        array,
-        8 * v21);
+    while ( m_root );
+    v22 = 0;
+    if ( v23 >= 0 )
+      hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v21, 8 * v23);
+    v21 = 0i64;
+    v23 = 0x80000000;
+    v19 = 0;
+    if ( v20 >= 0 )
+      hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, array, 8 * v20);
   }
-  v3->m_numLeaves = v4->m_numLeaves;
-  v3->m_path = v4->m_path;
+  output->m_numLeaves = this->m_numLeaves;
+  output->m_path = this->m_path;
 }
 
 // File Line: 770
 // RVA: 0xCBFD20
-void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::compactIndices(hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *this)
+void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::compactIndices(
+        hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *this)
 {
-  hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *v1; // rbx
-  hkRelocationInfo::Import *v2; // rax
-  int v3; // er8
-  hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> v4; // [rsp+20h] [rbp-38h]
-  __int128 v5; // [rsp+30h] [rbp-28h]
-  __int64 v6; // [rsp+40h] [rbp-18h]
+  unsigned __int64 m_firstFree; // rax
+  int m_capacityAndFlags; // r8d
+  hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::DynamicTree v4; // [rsp+20h] [rbp-38h] BYREF
 
-  v1 = (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)this;
   if ( this->m_root )
   {
-    v4.m_size = 0;
-    v4.m_data = 0i64;
-    v5 = 0ui64;
-    v6 = 0i64;
-    v4.m_capacityAndFlags = 2147483648;
+    v4.m_nodes.m_size = 0;
+    v4.m_nodes.m_data = 0i64;
+    memset(&v4.m_firstFree, 0, 24);
+    v4.m_nodes.m_capacityAndFlags = 0x80000000;
     hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::copyTo<hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>>(
       this,
-      (hkcdStaticMeshTree<hkcdStaticMeshTreeCommonConfig<unsigned int,unsigned __int64,11,21>,hkpBvCompressedMeshShapeTreeDataRun>::DynamicTree *)&v4);
-    hkArray<hkpTreeBroadPhase32::Handle,hkContainerHeapAllocator>::swap(&v4, v1);
-    v2 = v1[1].m_data;
-    v3 = v4.m_capacityAndFlags;
-    v1[1].m_data = (hkRelocationInfo::Import *)v5;
-    v4.m_size = 0;
-    v1[2].m_data = (hkRelocationInfo::Import *)1;
-    *(_QWORD *)&v5 = v2;
-    if ( v3 >= 0 )
+      &v4);
+    hkArray<hkpTreeBroadPhase32::Handle,hkContainerHeapAllocator>::swap(
+      (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&v4,
+      (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)this);
+    m_firstFree = this->m_firstFree;
+    m_capacityAndFlags = v4.m_nodes.m_capacityAndFlags;
+    this->m_firstFree = v4.m_firstFree;
+    v4.m_nodes.m_size = 0;
+    this->m_root = 1i64;
+    v4.m_firstFree = m_firstFree;
+    if ( m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-        v4.m_data,
-        v3 << 6);
+        &hkContainerHeapAllocator::s_alloc,
+        v4.m_nodes.m_data,
+        m_capacityAndFlags << 6);
   }
 }
 
 // File Line: 783
 // RVA: 0xDF2C50
-void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::detachBranch(hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *this, unsigned __int64 node, unsigned __int64 leafData, hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *branchOut)
+void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::detachBranch(
+        hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *this,
+        unsigned __int64 node,
+        __int64 leafData,
+        hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *branchOut)
 {
-  int v4; // er8
-  hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *v5; // rsi
-  unsigned __int64 v6; // rdi
-  hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *v7; // r14
-  int v8; // er8
-  hkcdDynamicTree::CodecRawUlong *v9; // rax
+  int m_capacityAndFlags; // r8d
+  int v8; // r8d
+  hkcdDynamicTree::CodecRawUlong *m_data; // rax
   unsigned __int64 v10; // rbx
   hkcdDynamicTree::CodecRawUlong *v11; // r9
   unsigned __int64 v12; // rax
-  unsigned __int64 v13; // rax
+  unsigned __int64 m_parent; // rax
   unsigned __int64 i; // rdx
   int v15; // eax
-  int v16; // er12
+  int v16; // r12d
   __int64 j; // r15
-  signed int *v18; // rdx
+  _QWORD *v18; // rdx
   unsigned __int64 v19; // r13
   hkcdDynamicTree::CodecRawUlong *v20; // rax
   unsigned __int64 v21; // r9
@@ -2128,150 +2065,139 @@ void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::detac
   hkVector4f v25; // xmm1
   unsigned __int64 v26; // rdx
   unsigned __int64 v27; // rax
-  __int64 v28; // r9
-  __int64 v29; // r8
+  unsigned __int64 v28; // r9
+  hkcdDynamicTree::CodecRawUlong *v29; // r8
   int v30; // edi
   __int64 v31; // r14
-  int v32; // eax
-  signed __int64 v33; // rbx
-  int v34; // eax
+  unsigned int Key; // eax
+  hkcdDynamicTree::CodecRawUlong *v33; // rbx
+  unsigned int v34; // eax
   unsigned __int64 v35; // rdx
-  int v36; // eax
-  signed int *array; // [rsp+20h] [rbp-50h]
+  unsigned int v36; // eax
+  _QWORD *array; // [rsp+20h] [rbp-50h] BYREF
   int v38; // [rsp+28h] [rbp-48h]
   int v39; // [rsp+2Ch] [rbp-44h]
-  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > v40; // [rsp+30h] [rbp-40h]
-  hkResult result; // [rsp+88h] [rbp+18h]
-  unsigned __int64 v42; // [rsp+90h] [rbp+20h]
-  __int64 v43; // [rsp+98h] [rbp+28h]
+  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > v40; // [rsp+30h] [rbp-40h] BYREF
+  hkResult result; // [rsp+88h] [rbp+18h] BYREF
+  __int64 v42; // [rsp+90h] [rbp+20h]
+  unsigned __int64 m_firstFree; // [rsp+98h] [rbp+28h]
 
   v42 = leafData;
-  v4 = branchOut->m_nodes.m_capacityAndFlags;
-  v5 = branchOut;
-  v6 = node;
+  m_capacityAndFlags = branchOut->m_nodes.m_capacityAndFlags;
   branchOut->m_nodes.m_size = 0;
-  v7 = this;
-  if ( v4 >= 0 )
+  if ( m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       branchOut->m_nodes.m_data,
-      v4 << 6);
-  v5->m_nodes.m_data = 0i64;
-  v5->m_nodes.m_capacityAndFlags = 2147483648;
-  v5->m_firstFree = 0i64;
-  v5->m_root = 0i64;
-  *(_QWORD *)&v5->m_numLeaves = 0i64;
+      m_capacityAndFlags << 6);
+  branchOut->m_nodes.m_data = 0i64;
+  branchOut->m_nodes.m_capacityAndFlags = 0x80000000;
+  branchOut->m_firstFree = 0i64;
+  branchOut->m_root = 0i64;
+  *(_QWORD *)&branchOut->m_numLeaves = 0i64;
   array = 0i64;
   v8 = 0;
   v38 = 0;
-  v39 = 2147483648;
-  if ( v6 )
+  v39 = 0x80000000;
+  if ( node )
   {
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, 8);
-    *(_QWORD *)&array[2 * v38] = v6;
-    v9 = v7->m_nodes.m_data;
-    v8 = v38++ + 1;
-    if ( LODWORD(v9[v6].m_children[0]) )
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&array, 8);
+    array[v38] = node;
+    m_data = this->m_nodes.m_data;
+    v8 = ++v38;
+    if ( LODWORD(m_data[node].m_children[0]) )
     {
-      v10 = v9[v6].m_children[0];
-      if ( v10 )
+      v10 = m_data[node].m_children[0];
+      while ( v10 )
       {
-        while ( 1 )
+        if ( v8 == (v39 & 0x3FFFFFFF) )
         {
-          if ( v8 == (v39 & 0x3FFFFFFF) )
-          {
-            hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, 8);
-            v8 = v38;
-          }
-          *(_QWORD *)&array[2 * v8] = v10;
-          v8 = v38++ + 1;
-          if ( !v10 )
-            goto LABEL_19;
-          v11 = v7->m_nodes.m_data;
-          v12 = v10 << 6;
-          if ( !LODWORD(v7->m_nodes.m_data[v10].m_children[0]) )
-            break;
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&array, 8);
+          v8 = v38;
+        }
+        array[v8] = v10;
+        v8 = ++v38;
+        v11 = this->m_nodes.m_data;
+        v12 = v10 << 6;
+        if ( LODWORD(this->m_nodes.m_data[v10].m_children[0]) )
+        {
           v10 = *(unsigned __int64 *)((char *)v11->m_children + v12);
-LABEL_20:
-          if ( !v10 )
-            goto LABEL_21;
         }
-        v13 = *(unsigned __int64 *)((char *)&v11->m_parent + v12);
-        for ( i = v10; v13 != v6; v13 = v11[v13].m_parent )
-        {
-          if ( v11[v13].m_children[1] != i )
-            break;
-          i = v13;
-        }
-        if ( v13 )
-          v10 = v11[v13].m_children[1];
         else
-          v10 = i;
-        if ( v13 != v6 || v10 != i )
-          goto LABEL_20;
-LABEL_19:
-        v10 = 0i64;
-        goto LABEL_20;
+        {
+          m_parent = *(unsigned __int64 *)((char *)&v11->m_parent + v12);
+          for ( i = v10; m_parent != node; m_parent = v11[m_parent].m_parent )
+          {
+            if ( v11[m_parent].m_children[1] != i )
+              break;
+            i = m_parent;
+          }
+          if ( m_parent )
+            v10 = v11[m_parent].m_children[1];
+          else
+            v10 = i;
+          if ( m_parent == node && v10 == i )
+            v10 = 0i64;
+        }
       }
     }
   }
-LABEL_21:
   v40.m_elem = 0i64;
   v40.m_numElems = 0;
   v40.m_hashMod = -1;
   hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::reserve(
     &v40,
-    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
+    &hkContainerHeapAllocator::s_alloc,
     v8);
   v15 = v38;
   v16 = 0;
   for ( j = 0i64; v16 < v38; ++j )
   {
     v18 = array;
-    v19 = *(_QWORD *)&array[2 * j];
-    if ( !v5->m_firstFree )
+    v19 = array[j];
+    if ( !branchOut->m_firstFree )
     {
       hkcdDynamicTree::DynamicStorage<0,hkcdDynamicTree::AnisotropicMetric,hkcdDynamicTree::CodecRawUlong>::reserveNodes(
-        (hkcdDynamicTree::DynamicStorage<0,hkcdDynamicTree::AnisotropicMetric,hkcdDynamicTree::CodecRawUlong> *)&v5->m_nodes,
+        branchOut,
         &result,
         1);
       v18 = array;
     }
-    v20 = v5->m_nodes.m_data;
-    v43 = v5->m_firstFree;
-    v21 = (signed int)v43;
-    v5->m_firstFree = v20[(signed __int64)(signed int)v43].m_aabb.m_min.m_quad.m128_u64[0];
-    v22 = &v7->m_nodes.m_data[v19];
+    v20 = branchOut->m_nodes.m_data;
+    m_firstFree = branchOut->m_firstFree;
+    v21 = (int)m_firstFree;
+    branchOut->m_firstFree = v20[(__int64)(int)m_firstFree].m_aabb.m_min.m_quad.m128_u64[0];
+    v22 = &this->m_nodes.m_data[v19];
     v23 = LODWORD(v22->m_children[0]) == 0;
     hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::insert(
       &v40,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      v18[2 * j],
+      &hkContainerHeapAllocator::s_alloc,
+      SLODWORD(v18[j]),
       v21);
     v24 = v22->m_parent;
     v25.m_quad = (__m128)v22->m_aabb.m_max;
     v26 = v22->m_children[0];
     v27 = v22->m_children[1];
-    v28 = v43;
-    v29 = (__int64)&v5->m_nodes.m_data[v43];
-    *(hkVector4f *)v29 = v22->m_aabb.m_min;
-    *(hkVector4f *)(v29 + 16) = (hkVector4f)v25.m_quad;
-    *(_QWORD *)(v29 + 32) = v24;
-    *(_QWORD *)(v29 + 40) = v26;
-    *(_QWORD *)(v29 + 48) = v27;
-    v5->m_numLeaves += v23;
-    v7->m_numLeaves -= v23;
+    v28 = m_firstFree;
+    v29 = &branchOut->m_nodes.m_data[m_firstFree];
+    v29->m_aabb.m_min = v22->m_aabb.m_min;
+    v29->m_aabb.m_max = (hkVector4f)v25.m_quad;
+    v29->m_parent = v24;
+    v29->m_children[0] = v26;
+    v29->m_children[1] = v27;
+    branchOut->m_numLeaves += v23;
+    this->m_numLeaves -= v23;
     if ( j )
     {
-      v7->m_nodes.m_data[(signed __int64)(signed int)v19].m_aabb.m_min.m_quad.m128_u64[0] = v7->m_firstFree;
-      v7->m_firstFree = v19;
+      this->m_nodes.m_data[(__int64)(int)v19].m_aabb.m_min.m_quad.m128_u64[0] = this->m_firstFree;
+      this->m_firstFree = v19;
     }
     else
     {
-      ++v7->m_numLeaves;
+      ++this->m_numLeaves;
       v22->m_children[1] = v42;
       v22->m_children[0] = 0i64;
-      v5->m_root = v28;
+      branchOut->m_root = v28;
     }
     v15 = v38;
     ++v16;
@@ -2282,193 +2208,196 @@ LABEL_21:
     v31 = 0i64;
     do
     {
-      v32 = (unsigned __int64)hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::findKey(
-                                &v40,
-                                array[v31]);
-      v33 = (signed __int64)&v5->m_nodes.m_data[(signed __int64)SLODWORD(v40.m_elem[v32].val)];
-      *(_QWORD *)(v33 + 32) = (signed int)hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::getWithDefault(
-                                            &v40,
-                                            *(signed int *)(v33 + 32),
-                                            0i64);
-      if ( *(_DWORD *)(v33 + 40) )
+      Key = (unsigned int)hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::findKey(
+                            &v40,
+                            SLODWORD(array[v31]));
+      v33 = &branchOut->m_nodes.m_data[(__int64)SLODWORD(v40.m_elem[Key].val)];
+      v33->m_parent = (int)hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::getWithDefault(
+                             &v40,
+                             SLODWORD(v33->m_parent),
+                             0i64);
+      if ( LODWORD(v33->m_children[0]) )
       {
-        v34 = (unsigned __int64)hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::findKey(
-                                  &v40,
-                                  *(signed int *)(v33 + 40));
-        v35 = *(signed int *)(v33 + 48);
-        *(_QWORD *)(v33 + 40) = SLODWORD(v40.m_elem[v34].val);
-        v36 = (unsigned __int64)hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::findKey(
-                                  &v40,
-                                  v35);
-        *(_QWORD *)(v33 + 48) = SLODWORD(v40.m_elem[v36].val);
+        v34 = (unsigned int)hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::findKey(
+                              &v40,
+                              SLODWORD(v33->m_children[0]));
+        v35 = SLODWORD(v33->m_children[1]);
+        v33->m_children[0] = SLODWORD(v40.m_elem[v34].val);
+        v36 = (unsigned int)hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::findKey(
+                              &v40,
+                              v35);
+        v33->m_children[1] = SLODWORD(v40.m_elem[v36].val);
       }
       ++v30;
-      v31 += 2i64;
+      ++v31;
     }
     while ( v30 < v38 );
   }
   hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::clearAndDeallocate(
     &v40,
-    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr);
+    &hkContainerHeapAllocator::s_alloc);
   v38 = 0;
   if ( v39 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      array,
-      8 * v39);
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, array, 8 * v39);
 }
 
 // File Line: 862
 // RVA: 0xDF4A20
-signed __int64 __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rotateLeft(hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *this, unsigned __int64 node)
+unsigned __int64 __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rotateLeft(
+        hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *this,
+        unsigned __int64 node)
 {
-  hkcdDynamicTree::CodecRawUlong *v2; // r11
-  hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *v3; // r10
+  hkcdDynamicTree::CodecRawUlong *m_data; // r11
   hkcdDynamicTree::CodecRawUlong *v4; // r8
-  signed __int64 result; // rax
+  unsigned __int64 result; // rax
   hkcdDynamicTree::CodecRawUlong *v6; // r9
-  unsigned __int64 v7; // rdi
+  unsigned __int64 m_parent; // rdi
   hkcdDynamicTree::CodecRawUlong *v8; // rcx
-  unsigned __int64 v9; // r8
-  __int64 v10; // rax
-  __int64 v11; // rcx
+  __m128 *v9; // r8
+  unsigned __int64 v10; // rax
+  unsigned __int64 v11; // rcx
   __m128 v12; // xmm1
-  unsigned __int64 v13; // r8
-  __int64 v14; // rax
-  __int64 v15; // rcx
+  __m128 *v13; // r8
+  unsigned __int64 v14; // rax
+  unsigned __int64 v15; // rcx
   __m128 v16; // xmm2
 
-  v2 = this->m_nodes.m_data;
-  v3 = this;
+  m_data = this->m_nodes.m_data;
   v4 = &this->m_nodes.m_data[node];
   if ( !LODWORD(v4->m_children[0]) )
     return 0i64;
-  v6 = &v2[v4->m_children[1]];
+  v6 = &m_data[v4->m_children[1]];
   if ( !LODWORD(v6->m_children[0]) )
     return 0i64;
-  v7 = v4->m_parent;
-  v8 = &v2[v6->m_children[0]];
-  v8->m_parent = v4 - v2;
-  v4->m_children[1] = v8 - v3->m_nodes.m_data;
-  v4->m_parent = v6 - v3->m_nodes.m_data;
-  v6->m_children[0] = v4 - v3->m_nodes.m_data;
-  v6->m_parent = v7;
-  v9 = (unsigned __int64)v3->m_nodes.m_data + (((char *)v4 - (char *)v3->m_nodes.m_data) & 0xFFFFFFFFFFFFFFC0ui64);
-  v10 = *(_QWORD *)(v9 + 40) << 6;
-  v11 = *(_QWORD *)(v9 + 48) << 6;
+  m_parent = v4->m_parent;
+  v8 = &m_data[v6->m_children[0]];
+  v8->m_parent = v4 - m_data;
+  v4->m_children[1] = v8 - this->m_nodes.m_data;
+  v4->m_parent = v6 - this->m_nodes.m_data;
+  v6->m_children[0] = v4 - this->m_nodes.m_data;
+  v6->m_parent = m_parent;
+  v9 = (__m128 *)((char *)&this->m_nodes.m_data->m_aabb.m_min.m_quad
+                + (((char *)v4 - (char *)this->m_nodes.m_data) & 0xFFFFFFFFFFFFFFC0ui64));
+  v10 = v9[2].m128_u64[1] << 6;
+  v11 = v9[3].m128_u64[0] << 6;
   v12 = _mm_min_ps(
-          *(__m128 *)((char *)&v3->m_nodes.m_data->m_aabb.m_min.m_quad + v10),
-          *(__m128 *)((char *)&v3->m_nodes.m_data->m_aabb.m_min.m_quad + v11));
-  *(__m128 *)(v9 + 16) = _mm_max_ps(
-                           *(__m128 *)((char *)&v3->m_nodes.m_data->m_aabb.m_max.m_quad + v10),
-                           *(__m128 *)((char *)&v3->m_nodes.m_data->m_aabb.m_max.m_quad + v11));
-  *(__m128 *)v9 = v12;
-  v13 = (unsigned __int64)v3->m_nodes.m_data + (((char *)v6 - (char *)v3->m_nodes.m_data) & 0xFFFFFFFFFFFFFFC0ui64);
-  v14 = *(_QWORD *)(v13 + 40) << 6;
-  v15 = *(_QWORD *)(v13 + 48) << 6;
+          *(__m128 *)((char *)&this->m_nodes.m_data->m_aabb.m_min.m_quad + v10),
+          *(__m128 *)((char *)&this->m_nodes.m_data->m_aabb.m_min.m_quad + v11));
+  v9[1] = _mm_max_ps(
+            *(__m128 *)((char *)&this->m_nodes.m_data->m_aabb.m_max.m_quad + v10),
+            *(__m128 *)((char *)&this->m_nodes.m_data->m_aabb.m_max.m_quad + v11));
+  *v9 = v12;
+  v13 = (__m128 *)((char *)&this->m_nodes.m_data->m_aabb.m_min.m_quad
+                 + (((char *)v6 - (char *)this->m_nodes.m_data) & 0xFFFFFFFFFFFFFFC0ui64));
+  v14 = v13[2].m128_u64[1] << 6;
+  v15 = v13[3].m128_u64[0] << 6;
   v16 = _mm_max_ps(
-          *(__m128 *)((char *)&v3->m_nodes.m_data->m_aabb.m_max.m_quad + v14),
-          *(__m128 *)((char *)&v3->m_nodes.m_data->m_aabb.m_max.m_quad + v15));
-  *(__m128 *)v13 = _mm_min_ps(
-                     *(__m128 *)((char *)&v3->m_nodes.m_data->m_aabb.m_min.m_quad + v14),
-                     *(__m128 *)((char *)&v3->m_nodes.m_data->m_aabb.m_min.m_quad + v15));
-  *(__m128 *)(v13 + 16) = v16;
-  if ( v7 )
+          *(__m128 *)((char *)&this->m_nodes.m_data->m_aabb.m_max.m_quad + v14),
+          *(__m128 *)((char *)&this->m_nodes.m_data->m_aabb.m_max.m_quad + v15));
+  *v13 = _mm_min_ps(
+           *(__m128 *)((char *)&this->m_nodes.m_data->m_aabb.m_min.m_quad + v14),
+           *(__m128 *)((char *)&this->m_nodes.m_data->m_aabb.m_min.m_quad + v15));
+  v13[1] = v16;
+  if ( m_parent )
   {
-    v3->m_nodes.m_data->m_children[(v3->m_nodes.m_data[v7].m_children[1] == node) + 8 * v7] = v6 - v3->m_nodes.m_data;
-    result = v6 - v3->m_nodes.m_data;
+    this->m_nodes.m_data[m_parent].m_children[this->m_nodes.m_data[m_parent].m_children[1] == node] = v6 - this->m_nodes.m_data;
+    return v6 - this->m_nodes.m_data;
   }
   else
   {
-    result = v6 - v3->m_nodes.m_data;
-    v3->m_root = result;
+    result = v6 - this->m_nodes.m_data;
+    this->m_root = result;
   }
   return result;
 }
 
 // File Line: 891
 // RVA: 0xDF4B80
-signed __int64 __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rotateRight(hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *this, unsigned __int64 node)
+unsigned __int64 __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rotateRight(
+        hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *this,
+        unsigned __int64 node)
 {
-  hkcdDynamicTree::CodecRawUlong *v2; // r11
-  hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *v3; // r10
+  hkcdDynamicTree::CodecRawUlong *m_data; // r11
   hkcdDynamicTree::CodecRawUlong *v4; // r8
-  signed __int64 result; // rax
+  unsigned __int64 result; // rax
   hkcdDynamicTree::CodecRawUlong *v6; // r9
-  unsigned __int64 v7; // rdi
+  unsigned __int64 m_parent; // rdi
   hkcdDynamicTree::CodecRawUlong *v8; // rcx
-  unsigned __int64 v9; // r8
-  __int64 v10; // rax
-  __int64 v11; // rcx
+  __m128 *v9; // r8
+  unsigned __int64 v10; // rax
+  unsigned __int64 v11; // rcx
   __m128 v12; // xmm1
-  unsigned __int64 v13; // r8
-  __int64 v14; // rax
-  __int64 v15; // rcx
+  __m128 *v13; // r8
+  unsigned __int64 v14; // rax
+  unsigned __int64 v15; // rcx
   __m128 v16; // xmm2
 
-  v2 = this->m_nodes.m_data;
-  v3 = this;
+  m_data = this->m_nodes.m_data;
   v4 = &this->m_nodes.m_data[node];
   if ( !LODWORD(v4->m_children[0]) )
     return 0i64;
-  v6 = &v2[v4->m_children[0]];
+  v6 = &m_data[v4->m_children[0]];
   if ( !LODWORD(v6->m_children[0]) )
     return 0i64;
-  v7 = v4->m_parent;
-  v8 = &v2[v6->m_children[1]];
-  v8->m_parent = v4 - v2;
-  v4->m_children[0] = v8 - v3->m_nodes.m_data;
-  v4->m_parent = v6 - v3->m_nodes.m_data;
-  v6->m_children[1] = v4 - v3->m_nodes.m_data;
-  v6->m_parent = v7;
-  v9 = (unsigned __int64)v3->m_nodes.m_data + (((char *)v4 - (char *)v3->m_nodes.m_data) & 0xFFFFFFFFFFFFFFC0ui64);
-  v10 = *(_QWORD *)(v9 + 40) << 6;
-  v11 = *(_QWORD *)(v9 + 48) << 6;
+  m_parent = v4->m_parent;
+  v8 = &m_data[v6->m_children[1]];
+  v8->m_parent = v4 - m_data;
+  v4->m_children[0] = v8 - this->m_nodes.m_data;
+  v4->m_parent = v6 - this->m_nodes.m_data;
+  v6->m_children[1] = v4 - this->m_nodes.m_data;
+  v6->m_parent = m_parent;
+  v9 = (__m128 *)((char *)&this->m_nodes.m_data->m_aabb.m_min.m_quad
+                + (((char *)v4 - (char *)this->m_nodes.m_data) & 0xFFFFFFFFFFFFFFC0ui64));
+  v10 = v9[2].m128_u64[1] << 6;
+  v11 = v9[3].m128_u64[0] << 6;
   v12 = _mm_min_ps(
-          *(__m128 *)((char *)&v3->m_nodes.m_data->m_aabb.m_min.m_quad + v10),
-          *(__m128 *)((char *)&v3->m_nodes.m_data->m_aabb.m_min.m_quad + v11));
-  *(__m128 *)(v9 + 16) = _mm_max_ps(
-                           *(__m128 *)((char *)&v3->m_nodes.m_data->m_aabb.m_max.m_quad + v10),
-                           *(__m128 *)((char *)&v3->m_nodes.m_data->m_aabb.m_max.m_quad + v11));
-  *(__m128 *)v9 = v12;
-  v13 = (unsigned __int64)v3->m_nodes.m_data + (((char *)v6 - (char *)v3->m_nodes.m_data) & 0xFFFFFFFFFFFFFFC0ui64);
-  v14 = *(_QWORD *)(v13 + 40) << 6;
-  v15 = *(_QWORD *)(v13 + 48) << 6;
+          *(__m128 *)((char *)&this->m_nodes.m_data->m_aabb.m_min.m_quad + v10),
+          *(__m128 *)((char *)&this->m_nodes.m_data->m_aabb.m_min.m_quad + v11));
+  v9[1] = _mm_max_ps(
+            *(__m128 *)((char *)&this->m_nodes.m_data->m_aabb.m_max.m_quad + v10),
+            *(__m128 *)((char *)&this->m_nodes.m_data->m_aabb.m_max.m_quad + v11));
+  *v9 = v12;
+  v13 = (__m128 *)((char *)&this->m_nodes.m_data->m_aabb.m_min.m_quad
+                 + (((char *)v6 - (char *)this->m_nodes.m_data) & 0xFFFFFFFFFFFFFFC0ui64));
+  v14 = v13[2].m128_u64[1] << 6;
+  v15 = v13[3].m128_u64[0] << 6;
   v16 = _mm_max_ps(
-          *(__m128 *)((char *)&v3->m_nodes.m_data->m_aabb.m_max.m_quad + v14),
-          *(__m128 *)((char *)&v3->m_nodes.m_data->m_aabb.m_max.m_quad + v15));
-  *(__m128 *)v13 = _mm_min_ps(
-                     *(__m128 *)((char *)&v3->m_nodes.m_data->m_aabb.m_min.m_quad + v14),
-                     *(__m128 *)((char *)&v3->m_nodes.m_data->m_aabb.m_min.m_quad + v15));
-  *(__m128 *)(v13 + 16) = v16;
-  if ( v7 )
+          *(__m128 *)((char *)&this->m_nodes.m_data->m_aabb.m_max.m_quad + v14),
+          *(__m128 *)((char *)&this->m_nodes.m_data->m_aabb.m_max.m_quad + v15));
+  *v13 = _mm_min_ps(
+           *(__m128 *)((char *)&this->m_nodes.m_data->m_aabb.m_min.m_quad + v14),
+           *(__m128 *)((char *)&this->m_nodes.m_data->m_aabb.m_min.m_quad + v15));
+  v13[1] = v16;
+  if ( m_parent )
   {
-    v3->m_nodes.m_data->m_children[(v3->m_nodes.m_data[v7].m_children[1] == node) + 8 * v7] = v6 - v3->m_nodes.m_data;
-    result = v6 - v3->m_nodes.m_data;
+    this->m_nodes.m_data[m_parent].m_children[this->m_nodes.m_data[m_parent].m_children[1] == node] = v6 - this->m_nodes.m_data;
+    return v6 - this->m_nodes.m_data;
   }
   else
   {
-    result = v6 - v3->m_nodes.m_data;
-    v3->m_root = result;
+    result = v6 - this->m_nodes.m_data;
+    this->m_root = result;
   }
   return result;
 }
 
 // File Line: 920
 // RVA: 0xDF22F0
-void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::balance(hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *this, int maxDelta, unsigned __int64 node)
+void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::balance(
+        hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *this,
+        int maxDelta,
+        unsigned __int64 node)
 {
-  unsigned __int64 v3; // rbp
-  int v4; // esi
+  unsigned __int64 m_root; // rbp
   hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *v5; // rdi
   hkcdDynamicTree::CodecRawUlong *v6; // rbx
-  hkcdDynamicTree::CodecRawUlong *v7; // rdx
+  hkcdDynamicTree::CodecRawUlong *m_data; // rdx
   int v8; // esi
   hkcdDynamicTree::CodecRawUlong *v9; // rdi
   unsigned __int64 v10; // r11
   int v11; // ebx
   unsigned __int64 v12; // r9
-  unsigned __int64 v13; // rax
+  unsigned __int64 m_parent; // rax
   unsigned __int64 v14; // rcx
   unsigned __int64 v15; // r9
   hkcdDynamicTree::CodecRawUlong *v16; // r10
@@ -2486,60 +2415,55 @@ void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::balan
   unsigned __int64 v28; // rcx
   hkcdDynamicTree::CodecRawUlong *v29; // r9
   unsigned __int64 v30; // rax
-  int k; // er8
-  int v32; // er8
+  int k; // r8d
+  int v32; // r8d
   unsigned __int64 v33; // rax
-  unsigned __int64 l; // r8
-  int m; // ebx
+  unsigned __int64 m; // r8
+  int n; // ebx
   int v36; // esi
-  int v37; // eax
+  signed int v37; // eax
   unsigned __int64 v38; // rax
-  hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr> *v39; // [rsp+50h] [rbp+8h]
-  int v40; // [rsp+58h] [rbp+10h]
-  int v41; // [rsp+60h] [rbp+18h]
+  signed int v41; // [rsp+60h] [rbp+18h]
 
-  v40 = maxDelta;
-  v39 = this;
-  v3 = node;
-  v4 = maxDelta;
+  m_root = node;
   v5 = this;
-  if ( node || (v3 = this->m_root) != 0 )
+  if ( node || (m_root = this->m_root) != 0 )
   {
-    v6 = &this->m_nodes.m_data[v3];
+    v6 = &this->m_nodes.m_data[m_root];
     if ( LODWORD(v6->m_children[0]) )
     {
       hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::balance(this, maxDelta, v6->m_children[0]);
-      hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::balance(v5, v4, v6->m_children[1]);
+      hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::balance(v5, maxDelta, v6->m_children[1]);
       v41 = 0;
-      if ( v3 )
+      if ( m_root )
       {
         do
         {
-          v7 = v5->m_nodes.m_data;
+          m_data = v5->m_nodes.m_data;
           v8 = 0;
-          v9 = &v5->m_nodes.m_data[v3];
+          v9 = &v5->m_nodes.m_data[m_root];
           v10 = v9->m_children[0];
           if ( v10 )
           {
             v11 = 0;
             v12 = v10 << 6;
-            v13 = v7[v10].m_parent;
-            if ( v13 )
+            m_parent = m_data[v10].m_parent;
+            if ( m_parent )
             {
-              v14 = v7[v10].m_parent;
+              v14 = m_data[v10].m_parent;
               do
               {
                 ++v11;
-                v14 = v7[v14].m_parent;
+                v14 = m_data[v14].m_parent;
               }
               while ( v14 );
             }
-            if ( *(_DWORD *)((char *)v7->m_children + v12) )
+            if ( *(_DWORD *)((char *)m_data->m_children + v12) )
             {
-              v15 = *(unsigned __int64 *)((char *)v7->m_children + v12);
+              v15 = *(unsigned __int64 *)((char *)m_data->m_children + v12);
               while ( v15 )
               {
-                v16 = &v7[v15];
+                v16 = &m_data[v15];
                 if ( LODWORD(v16->m_children[0]) )
                 {
                   v15 = v16->m_children[0];
@@ -2547,21 +2471,21 @@ void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::balan
                 else
                 {
                   v17 = v16->m_parent;
-                  for ( i = 0; v17; v17 = v7[v17].m_parent )
+                  for ( i = 0; v17; v17 = m_data[v17].m_parent )
                     ++i;
                   v19 = i - v11;
                   if ( v8 > v19 )
                     v19 = v8;
                   v8 = v19;
                   v20 = v16->m_parent;
-                  for ( j = v15; v20 != v10; v20 = v7[v20].m_parent )
+                  for ( j = v15; v20 != v10; v20 = m_data[v20].m_parent )
                   {
-                    if ( v7[v20].m_children[1] != j )
+                    if ( m_data[v20].m_children[1] != j )
                       break;
                     j = v20;
                   }
                   if ( v20 )
-                    v15 = v7[v20].m_children[1];
+                    v15 = m_data[v20].m_children[1];
                   else
                     v15 = j;
                   if ( v20 == v10 && v15 == j )
@@ -2571,7 +2495,7 @@ void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::balan
             }
             else
             {
-              for ( ; v13; v13 = v7[v13].m_parent )
+              for ( ; m_parent; m_parent = m_data[m_parent].m_parent )
                 ++v8;
               v8 -= v11;
               if ( v8 < 0 )
@@ -2584,23 +2508,23 @@ void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::balan
           {
             v24 = 0;
             v25 = v22 << 6;
-            v26 = v7[v22].m_parent;
+            v26 = m_data[v22].m_parent;
             if ( v26 )
             {
-              v27 = v7[v22].m_parent;
+              v27 = m_data[v22].m_parent;
               do
               {
                 ++v24;
-                v27 = v7[v27].m_parent;
+                v27 = m_data[v27].m_parent;
               }
               while ( v27 );
             }
-            if ( *(_DWORD *)((char *)v7->m_children + v25) )
+            if ( *(_DWORD *)((char *)m_data->m_children + v25) )
             {
-              v28 = *(unsigned __int64 *)((char *)v7->m_children + v25);
+              v28 = *(unsigned __int64 *)((char *)m_data->m_children + v25);
               while ( v28 )
               {
-                v29 = &v7[v28];
+                v29 = &m_data[v28];
                 if ( LODWORD(v29->m_children[0]) )
                 {
                   v28 = v29->m_children[0];
@@ -2608,45 +2532,47 @@ void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::balan
                 else
                 {
                   v30 = v29->m_parent;
-                  for ( k = 0; v30; v30 = v7[v30].m_parent )
+                  for ( k = 0; v30; v30 = m_data[v30].m_parent )
                     ++k;
                   v32 = k - v24;
                   if ( v23 > v32 )
                     v32 = v23;
                   v23 = v32;
                   v33 = v29->m_parent;
-                  for ( l = v28; v33 != v22; v33 = v7[v33].m_parent )
+                  for ( m = v28; v33 != v22; v33 = m_data[v33].m_parent )
                   {
-                    if ( v7[v33].m_children[1] != l )
+                    if ( m_data[v33].m_children[1] != m )
                       break;
-                    l = v33;
+                    m = v33;
                   }
                   if ( v33 )
-                    v28 = v7[v33].m_children[1];
+                    v28 = m_data[v33].m_children[1];
                   else
-                    v28 = l;
-                  if ( v33 == v22 && v28 == l )
+                    v28 = m;
+                  if ( v33 == v22 && v28 == m )
                     v28 = 0i64;
                 }
               }
             }
             else
             {
-              for ( m = 0; v26; v26 = v7[v26].m_parent )
-                ++m;
-              v23 = m - v24;
+              for ( n = 0; v26; v26 = m_data[v26].m_parent )
+                ++n;
+              v23 = n - v24;
               if ( v23 < 0 )
                 v23 = 0;
             }
           }
           v36 = v8 - v23;
-          v37 = abs(v36);
-          if ( v37 <= v41 || v37 <= v40 )
+          v37 = abs32(v36);
+          if ( v37 <= v41 || v37 <= maxDelta )
             break;
-          v5 = v39;
+          v5 = this;
           v41 = v37;
-          v38 = v36 >= 0 ? hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rotateRight(v39, v3) : hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rotateLeft(v39, v3);
-          v3 = v38;
+          v38 = v36 >= 0
+              ? hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rotateRight(this, m_root)
+              : hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::rotateLeft(this, m_root);
+          m_root = v38;
         }
         while ( v38 );
       }
@@ -2656,44 +2582,38 @@ void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStoragePtr>::balan
 
 // File Line: 1138
 // RVA: 0xDA19D0
-void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorage16>::sortBranch<hkpTreeBroadPhaseInternals::MappingUpdater>(hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorage16> *this, unsigned int branch, hkpTreeBroadPhaseInternals::MappingUpdater *mapping, int maxDepth)
+void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorage16>::sortBranch<hkpTreeBroadPhaseInternals::MappingUpdater>(
+        hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorage16> *this,
+        unsigned int branch,
+        hkpTreeBroadPhaseInternals::MappingUpdater *mapping,
+        int maxDepth)
 {
-  unsigned __int16 v4; // bx
-  int v5; // er14
-  hkpTreeBroadPhaseInternals::MappingUpdater *v6; // r12
-  unsigned int v7; // er15
-  hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorage16> *v8; // rdi
+  unsigned __int16 m_root; // bx
   hkcdDynamicTree::Codec32 *i; // rax
-  int v10; // ecx
   unsigned __int16 v11; // r10
   unsigned __int16 v12; // r11
   __int16 v13; // cx
-  __m128i v14; // xmm2
-  signed __int64 v15; // rbp
-  hkVector4f v16; // xmm3
+  __m128i m_min; // xmm2
+  hkcdDynamicTree::Codec32 *v15; // rbp
+  __m128i m_max; // xmm3
   unsigned __int64 v17; // xmm1_8
   unsigned __int64 v18; // rdx
-  int v19; // er8
-  signed __int64 v20; // r8
+  int v19; // r8d
+  hkpTreeBroadPhase32::Handle *v20; // r8
   int v21; // esi
-  __int64 v22; // xmm0_8
+  unsigned __int64 v22; // xmm0_8
   char v23; // al
   hkVector4f v24; // [rsp+10h] [rbp-58h]
   hkVector4f v25; // [rsp+20h] [rbp-48h]
   unsigned __int16 v26; // [rsp+70h] [rbp+8h]
   __int16 v27; // [rsp+72h] [rbp+Ah]
 
-  v4 = this->m_root;
-  v5 = maxDepth;
-  v6 = mapping;
-  v7 = branch;
-  v8 = this;
-  if ( v4 )
+  m_root = this->m_root;
+  if ( m_root )
   {
-    for ( i = &this->m_nodes.m_data[v4]; i->m_aabb.m_max.m_quad.m128_i16[6]; i = &v8->m_nodes.m_data[*(&v26 + (v23 & 1))] )
+    for ( i = &this->m_nodes.m_data[m_root]; i->m_aabb.m_max.m_quad.m128_i16[6]; i = &this->m_nodes.m_data[m_root] )
     {
-      v10 = v5--;
-      if ( !v10 )
+      if ( !maxDepth-- )
         break;
       v11 = i->m_aabb.m_max.m_quad.m128_u16[6];
       v12 = i->m_aabb.m_max.m_quad.m128_u16[7];
@@ -2709,45 +2629,44 @@ void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorage16>::sortBr
         v27 = v13;
         i->m_aabb.m_max.m_quad.m128_i16[7] = v13;
       }
-      if ( v11 < v4 )
+      if ( v11 < m_root )
       {
-        v14 = (__m128i)i->m_aabb.m_min;
-        v15 = (signed __int64)&v8->m_nodes.m_data[v11];
-        v16.m_quad = *(__m128 *)(v15 + 16);
-        v25.m_quad = *(__m128 *)v15;
-        v17 = (unsigned __int128)_mm_srli_si128(*(__m128i *)(v15 + 16), 8);
+        m_min = (__m128i)i->m_aabb.m_min;
+        v15 = &this->m_nodes.m_data[v11];
+        m_max = (__m128i)v15->m_aabb.m_max;
+        v25.m_quad = (__m128)v15->m_aabb.m_min;
+        v17 = _mm_srli_si128(m_max, 8).m128i_u64[0];
         v24.m_quad = (__m128)i->m_aabb.m_max;
-        v18 = v17 >> 48;
+        v18 = HIWORD(v17);
         if ( WORD2(v17) )
         {
-          v19 = v4 | 0x3F000000;
-          v8->m_nodes.m_data[WORD2(v17)].m_aabb.m_min.m_quad.m128_i32[3] = v19;
-          v8->m_nodes.m_data[v18].m_aabb.m_min.m_quad.m128_i32[3] = v19;
+          v19 = m_root | 0x3F000000;
+          this->m_nodes.m_data[WORD2(v17)].m_aabb.m_min.m_quad.m128_i32[3] = v19;
+          this->m_nodes.m_data[v18].m_aabb.m_min.m_quad.m128_i32[3] = v19;
         }
         else
         {
-          v20 = (signed __int64)&v6->m_handles[v18];
-          *(_DWORD *)(v20 + 8) &= 0xFFE00000;
-          *(_DWORD *)(v20 + 8) |= v4;
+          v20 = &mapping->m_handles[v18];
+          *((_DWORD *)v20 + 2) &= 0xFFE00000;
+          *((_DWORD *)v20 + 2) |= m_root;
         }
         v21 = v11 | 0x3F000000;
-        v25.m_quad.m128_i32[3] = v11 | 0x3F000000;
-        v22 = (unsigned __int128)_mm_srli_si128(v14, 8);
+        v25.m_quad.m128_i32[3] = v21;
+        v22 = _mm_srli_si128(m_min, 8).m128i_u64[0];
         if ( WORD2(v22) )
-          v8->m_nodes.m_data->m_aabb.m_max.m_quad.m128_i16[16i64 * WORD2(v22)
-                                                         + (v8->m_nodes.m_data[WORD2(v22)].m_aabb.m_max.m_quad.m128_i16[7] == v4)
-                                                         + 6] = v11;
+          this->m_nodes.m_data[WORD2(v22)].m_aabb.m_max.m_quad.m128_i16[(this->m_nodes.m_data[WORD2(v22)].m_aabb.m_max.m_quad.m128_i16[7] == m_root)
+                                                                      + 6] = v11;
         else
-          v8->m_root = v11;
-        v24.m_quad.m128_i16[6] = v4;
-        v11 = v4;
-        v8->m_nodes.m_data[v24.m_quad.m128_u16[7]].m_aabb.m_min.m_quad.m128_i32[3] = v21;
-        v26 = v4;
+          this->m_root = v11;
+        v24.m_quad.m128_i16[6] = m_root;
+        v11 = m_root;
+        this->m_nodes.m_data[v24.m_quad.m128_u16[7]].m_aabb.m_min.m_quad.m128_i32[3] = v21;
+        v26 = m_root;
         i->m_aabb.m_min = (hkVector4f)v25.m_quad;
-        i->m_aabb.m_max = (hkVector4f)v16.m_quad;
-        i = (hkcdDynamicTree::Codec32 *)v15;
-        *(hkVector4f *)(v15 + 16) = (hkVector4f)v24.m_quad;
-        *(__m128i *)v15 = v14;
+        i->m_aabb.m_max = (hkVector4f)m_max;
+        i = v15;
+        v15->m_aabb.m_max = (hkVector4f)v24.m_quad;
+        v15->m_aabb.m_min = (hkVector4f)m_min;
       }
       if ( v12 < v11 )
       {
@@ -2756,9 +2675,9 @@ void __fastcall hkcdDynamicTree::Tree<hkcdDynamicTree::DynamicStorage16>::sortBr
         i->m_aabb.m_max.m_quad.m128_i16[6] = v12;
         i->m_aabb.m_max.m_quad.m128_i16[7] = v11;
       }
-      v23 = v7;
-      v7 >>= 1;
-      v4 = *(&v26 + (v23 & 1));
+      v23 = branch;
+      branch >>= 1;
+      m_root = *(&v26 + (v23 & 1));
     }
   }
 }

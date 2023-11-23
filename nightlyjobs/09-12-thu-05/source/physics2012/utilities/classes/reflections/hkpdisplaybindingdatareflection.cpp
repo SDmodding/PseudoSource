@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkpDisplayBindingDataRigidBodyClass__()
     0i64,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 62
@@ -28,17 +28,17 @@ hkClass *__fastcall hkpDisplayBindingData::RigidBody::staticClass()
 
 // File Line: 69
 // RVA: 0xE0AA60
-void __fastcall finishLoadedObjecthkpDisplayBindingDataRigidBody(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpDisplayBindingDataRigidBody(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpDisplayBindingData::RigidBody::`vftable;
+    *p = &hkpDisplayBindingData::RigidBody::`vftable;
 }
 
 // File Line: 75
 // RVA: 0xE0AA80
-void __fastcall cleanupLoadedObjecthkpDisplayBindingDataRigidBody(void *p)
+void __fastcall cleanupLoadedObjecthkpDisplayBindingDataRigidBody(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 79
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkpDisplayBindingDataRigidBodyTypeInfo__()
   hkpDisplayBindingDataRigidBodyTypeInfo.m_typeName = "hkpDisplayBindingDataRigidBody";
   hkpDisplayBindingDataRigidBodyTypeInfo.m_vtable = result;
   hkpDisplayBindingDataRigidBodyTypeInfo.m_scopedName = "!hkpDisplayBindingData::RigidBody";
-  hkpDisplayBindingDataRigidBodyTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpDisplayBindingDataRigidBody;
-  hkpDisplayBindingDataRigidBodyTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpDisplayBindingDataRigidBody;
+  hkpDisplayBindingDataRigidBodyTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpDisplayBindingDataRigidBody;
+  hkpDisplayBindingDataRigidBodyTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpDisplayBindingDataRigidBody;
   return result;
 }
 
@@ -82,7 +82,7 @@ void dynamic_initializer_for__hkpDisplayBindingDataPhysicsSystemClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 130
@@ -94,17 +94,17 @@ hkClass *__fastcall hkpDisplayBindingData::PhysicsSystem::staticClass()
 
 // File Line: 137
 // RVA: 0xE0AAA0
-void __fastcall finishLoadedObjecthkpDisplayBindingDataPhysicsSystem(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpDisplayBindingDataPhysicsSystem(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpDisplayBindingData::PhysicsSystem::`vftable;
+    *p = &hkpDisplayBindingData::PhysicsSystem::`vftable;
 }
 
 // File Line: 143
 // RVA: 0xE0AAC0
-void __fastcall cleanupLoadedObjecthkpDisplayBindingDataPhysicsSystem(void *p)
+void __fastcall cleanupLoadedObjecthkpDisplayBindingDataPhysicsSystem(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 147
@@ -125,8 +125,8 @@ void **dynamic_initializer_for__hkpDisplayBindingDataPhysicsSystemTypeInfo__()
   hkpDisplayBindingDataPhysicsSystemTypeInfo.m_typeName = "hkpDisplayBindingDataPhysicsSystem";
   hkpDisplayBindingDataPhysicsSystemTypeInfo.m_vtable = result;
   hkpDisplayBindingDataPhysicsSystemTypeInfo.m_scopedName = "!hkpDisplayBindingData::PhysicsSystem";
-  hkpDisplayBindingDataPhysicsSystemTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpDisplayBindingDataPhysicsSystem;
-  hkpDisplayBindingDataPhysicsSystemTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpDisplayBindingDataPhysicsSystem;
+  hkpDisplayBindingDataPhysicsSystemTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpDisplayBindingDataPhysicsSystem;
+  hkpDisplayBindingDataPhysicsSystemTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpDisplayBindingDataPhysicsSystem;
   return result;
 }
 
@@ -148,7 +148,7 @@ void dynamic_initializer_for__hkpDisplayBindingDataClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 199
@@ -160,17 +160,17 @@ hkClass *__fastcall hkpDisplayBindingData::staticClass()
 
 // File Line: 206
 // RVA: 0xE0AAE0
-void __fastcall finishLoadedObjecthkpDisplayBindingData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpDisplayBindingData(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpDisplayBindingData::`vftable;
+    *p = &hkpDisplayBindingData::`vftable;
 }
 
 // File Line: 212
 // RVA: 0xE0AB00
-void __fastcall cleanupLoadedObjecthkpDisplayBindingData(void *p)
+void __fastcall cleanupLoadedObjecthkpDisplayBindingData(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 216
@@ -191,8 +191,8 @@ void **dynamic_initializer_for__hkpDisplayBindingDataTypeInfo__()
   hkpDisplayBindingDataTypeInfo.m_typeName = "hkpDisplayBindingData";
   hkpDisplayBindingDataTypeInfo.m_vtable = result;
   hkpDisplayBindingDataTypeInfo.m_scopedName = "!hkpDisplayBindingData";
-  hkpDisplayBindingDataTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpDisplayBindingData;
-  hkpDisplayBindingDataTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpDisplayBindingData;
+  hkpDisplayBindingDataTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpDisplayBindingData;
+  hkpDisplayBindingDataTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpDisplayBindingData;
   return result;
 }
 

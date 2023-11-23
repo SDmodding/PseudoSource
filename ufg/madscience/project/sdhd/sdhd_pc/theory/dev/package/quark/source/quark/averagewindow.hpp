@@ -3,16 +3,16 @@
 float __fastcall UFG::qAverageWindow<float>::GetAverage(UFG::qAverageWindow<float> *this)
 {
   float result; // xmm0_4
-  float v2; // xmm1_4
+  float m_RunningSumTime; // xmm1_4
 
   result = 0.0;
   if ( this->m_StartIndex != this->m_EndIndex )
   {
-    v2 = this->m_RunningSumTime;
-    if ( v2 > 0.0 )
-      result = this->m_RunningSum / v2;
+    m_RunningSumTime = this->m_RunningSumTime;
+    if ( m_RunningSumTime > 0.0 )
+      return this->m_RunningSum / m_RunningSumTime;
     else
-      result = FLOAT_3_4028235e38;
+      return FLOAT_3_4028235e38;
   }
   return result;
 }
@@ -21,11 +21,11 @@ float __fastcall UFG::qAverageWindow<float>::GetAverage(UFG::qAverageWindow<floa
 // RVA: 0x167890
 bool __fastcall UFG::qAverageWindow<float>::AtLeastOneEntry(UFG::qAverageWindow<float> *this)
 {
-  int v1; // eax
-  int v2; // er8
+  int m_StartIndex; // eax
+  int m_EndIndex; // r8d
 
-  v1 = this->m_StartIndex;
-  v2 = this->m_EndIndex;
-  return v1 != v2 && (v1 + 1) % this->m_BufferSize != v2;
+  m_StartIndex = this->m_StartIndex;
+  m_EndIndex = this->m_EndIndex;
+  return m_StartIndex != m_EndIndex && (m_StartIndex + 1) % this->m_BufferSize != m_EndIndex;
 }
 

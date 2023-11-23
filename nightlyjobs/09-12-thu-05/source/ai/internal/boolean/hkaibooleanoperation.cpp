@@ -1,6 +1,9 @@
 // File Line: 162
 // RVA: 0xB9FD50
-__int64 __fastcall hkaiBooleanOperation::_calculateIntersect2(hkaiBooleanOperation::ShadowResult *ab, hkaiBooleanOperation::ShadowResult *ba, hkaiBooleanOperation::ShadowResult *res)
+__int64 __fastcall hkaiBooleanOperation::_calculateIntersect2(
+        hkaiBooleanOperation::ShadowResult *ab,
+        hkaiBooleanOperation::ShadowResult *ba,
+        hkaiBooleanOperation::ShadowResult *res)
 {
   hkVector4f v3; // xmm3
   hkVector4f v4; // xmm5
@@ -19,13 +22,11 @@ __int64 __fastcall hkaiBooleanOperation::_calculateIntersect2(hkaiBooleanOperati
   v5.m_quad = (__m128)ba->m_shadowee;
   v6.m_quad = (__m128)ba->m_shadower;
   v7 = _mm_sub_ps(_mm_shuffle_ps(v6.m_quad, v6.m_quad, 85), _mm_shuffle_ps(v5.m_quad, v5.m_quad, 85));
-  v8 = _mm_sub_ps(
-         v7,
-         _mm_sub_ps(_mm_shuffle_ps(v4.m_quad, v4.m_quad, 85), _mm_shuffle_ps(ab->m_shadower.m_quad, v3.m_quad, 85)));
-  v9 = _mm_sub_ps((__m128)0i64, _mm_andnot_ps(_mm_cmpeqps((__m128)0i64, v8), _mm_div_ps(v7, v8)));
-  v10 = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(ba->m_shadowee.m_quad, v3.m_quad), v9), v5.m_quad);
-  v11 = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(ba->m_shadower.m_quad, v4.m_quad), v9), v6.m_quad);
-  v12 = _mm_cmpleps(_mm_shuffle_ps(v10, v10, 170), _mm_shuffle_ps(v11, v11, 170));
+  v8 = _mm_sub_ps(v7, _mm_sub_ps(_mm_shuffle_ps(v4.m_quad, v4.m_quad, 85), _mm_shuffle_ps(v3.m_quad, v3.m_quad, 85)));
+  v9 = _mm_sub_ps((__m128)0i64, _mm_andnot_ps(_mm_cmpeq_ps((__m128)0i64, v8), _mm_div_ps(v7, v8)));
+  v10 = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(v5.m_quad, v3.m_quad), v9), v5.m_quad);
+  v11 = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(v6.m_quad, v4.m_quad), v9), v6.m_quad);
+  v12 = _mm_cmple_ps(_mm_shuffle_ps(v10, v10, 170), _mm_shuffle_ps(v11, v11, 170));
   res->m_shadower.m_quad = _mm_or_ps(_mm_and_ps(v12, v11), _mm_andnot_ps(v12, v10));
   res->m_shadowee.m_quad = _mm_or_ps(_mm_andnot_ps(v12, v11), _mm_and_ps(v12, v10));
   if ( _mm_movemask_ps(v12) )
@@ -36,14 +37,17 @@ __int64 __fastcall hkaiBooleanOperation::_calculateIntersect2(hkaiBooleanOperati
   else
   {
     res->m_s = 0;
-    result = 0i64;
+    return 0i64;
   }
   return result;
 }
 
 // File Line: 208
 // RVA: 0xB9FE50
-void __fastcall hkaiBooleanOperation::_calculateIntersect3(hkaiBooleanOperation::ShadowResult *ab, hkaiBooleanOperation::ShadowResult *ba, hkVector4f *res)
+void __fastcall hkaiBooleanOperation::_calculateIntersect3(
+        hkaiBooleanOperation::ShadowResult *ab,
+        hkaiBooleanOperation::ShadowResult *ba,
+        hkVector4f *res)
 {
   hkVector4f v3; // xmm5
   hkVector4f v4; // xmm3
@@ -62,8 +66,8 @@ void __fastcall hkaiBooleanOperation::_calculateIntersect3(hkaiBooleanOperation:
            _mm_shuffle_ps(v4.m_quad, v4.m_quad, 170)));
   res->m_quad = _mm_add_ps(
                   _mm_mul_ps(
-                    _mm_sub_ps((__m128)0i64, _mm_andnot_ps(_mm_cmpeqps((__m128)0i64, v6), _mm_div_ps(v5, v6))),
-                    _mm_sub_ps(ba->m_shadowee.m_quad, v4.m_quad)),
+                    _mm_sub_ps((__m128)0i64, _mm_andnot_ps(_mm_cmpeq_ps((__m128)0i64, v6), _mm_div_ps(v5, v6))),
+                    _mm_sub_ps(v3.m_quad, v4.m_quad)),
                   v3.m_quad);
 }
 
@@ -71,8 +75,8 @@ void __fastcall hkaiBooleanOperation::_calculateIntersect3(hkaiBooleanOperation:
 // RVA: 0xB9F8C0
 int __fastcall hkaiBooleanOperation::_s11(hkVector4f *vs_ea, hkVector4f *ve_ea, hkVector4f *vs_eb, hkVector4f *ve_eb)
 {
-  hkVector4f v4; // xmm2
-  __m128 v5; // xmm11
+  __m128 v4; // xmm2
+  __m128 m_quad; // xmm11
   __m128 v6; // xmm12
   __m128 v7; // xmm13
   __m128 v8; // xmm9
@@ -80,7 +84,7 @@ int __fastcall hkaiBooleanOperation::_s11(hkVector4f *vs_ea, hkVector4f *ve_ea, 
   __m128 v10; // xmm8
   __m128 v11; // xmm1
   hkVector4f v12; // xmm5
-  unsigned int v13; // er8
+  unsigned int v13; // r8d
   int v14; // edx
   __m128 v15; // xmm3
   __m128 v16; // xmm4
@@ -93,7 +97,7 @@ int __fastcall hkaiBooleanOperation::_s11(hkVector4f *vs_ea, hkVector4f *ve_ea, 
   __m128 v23; // xmm10
   __m128 v24; // xmm6
   __m128 v25; // xmm1
-  unsigned int v26; // er8
+  unsigned int v26; // r8d
   int v27; // ecx
   int v28; // eax
   __m128 v29; // xmm3
@@ -103,7 +107,7 @@ int __fastcall hkaiBooleanOperation::_s11(hkVector4f *vs_ea, hkVector4f *ve_ea, 
   __m128 v33; // xmm1
   int v34; // edx
   __m128 v35; // xmm1
-  unsigned int v36; // er8
+  unsigned int v36; // r8d
   int v37; // ecx
   int v38; // eax
   __m128 v39; // xmm2
@@ -116,7 +120,7 @@ int __fastcall hkaiBooleanOperation::_s11(hkVector4f *vs_ea, hkVector4f *ve_ea, 
   __m128 v46; // xmm5
   int v47; // edx
   __m128 v48; // xmm6
-  unsigned int v49; // er8
+  unsigned int v49; // r8d
   int v50; // ecx
   int v51; // eax
   __m128 v52; // xmm2
@@ -128,57 +132,55 @@ int __fastcall hkaiBooleanOperation::_s11(hkVector4f *vs_ea, hkVector4f *ve_ea, 
   __m128 v58; // xmm2
   __m128 v59; // xmm3
   int v60; // edx
-  hkaiBooleanOperation::ShadowResult ba; // [rsp+20h] [rbp-89h]
+  hkaiBooleanOperation::ShadowResult ba; // [rsp+20h] [rbp-89h] BYREF
   __m128 v63; // [rsp+58h] [rbp-51h]
   __m128 v64; // [rsp+68h] [rbp-41h]
   hkaiBooleanOperation::ShadowResult *v65; // [rsp+128h] [rbp+7Fh]
 
-  v4.m_quad = 0i64;
-  ba.m_shadowee.m_quad.m128_i32[2] = 0;
+  v4 = 0i64;
   ba.m_x = 0;
-  v5 = ve_eb->m_quad;
+  m_quad = ve_eb->m_quad;
   v6 = vs_eb->m_quad;
   v7 = ve_ea->m_quad;
-  v8 = _mm_shuffle_ps(v5, v5, 0);
+  v8 = _mm_shuffle_ps(m_quad, m_quad, 0);
   v63 = 0i64;
   v9 = _mm_shuffle_ps(v7, v7, 0);
   v10 = _mm_shuffle_ps(v6, v6, 0);
   v64 = 0i64;
-  v11 = _mm_cmpleps(v9, v10);
-  ba.m_shadower = 0i64;
-  *(hkVector4f *)((char *)&ba.m_shadower + 8) = 0i64;
+  v11 = _mm_cmple_ps(v9, v10);
+  memset(&ba.m_shadower, 0, 28);
   v12.m_quad = 0i64;
-  v13 = (_mm_movemask_ps(_mm_cmpleps(v9, v8)) != 0) - (_mm_movemask_ps(v11) != 0);
+  v13 = (_mm_movemask_ps(_mm_cmple_ps(v9, v8)) != 0) - (_mm_movemask_ps(v11) != 0);
   if ( v13 )
   {
     v14 = 0;
-    v15 = _mm_or_ps(_mm_and_ps(v6, v11), _mm_andnot_ps(v11, v5));
-    v16 = _mm_or_ps(_mm_and_ps(v5, v11), _mm_andnot_ps(v11, v6));
+    v15 = _mm_or_ps(_mm_and_ps(v6, v11), _mm_andnot_ps(v11, m_quad));
+    v16 = _mm_or_ps(_mm_and_ps(m_quad, v11), _mm_andnot_ps(v11, v6));
     v17 = _mm_shuffle_ps(v15, v15, 0);
     v18 = _mm_add_ps(
             _mm_mul_ps(
               _mm_sub_ps(v16, v15),
               _mm_div_ps(_mm_sub_ps(v9, v17), _mm_sub_ps(_mm_shuffle_ps(v16, v16, 0), v17))),
             v15);
-    v19 = _mm_cmpleps(_mm_shuffle_ps(v7, v7, 85), _mm_shuffle_ps(v18, v18, 85));
+    v19 = _mm_cmple_ps(_mm_shuffle_ps(v7, v7, 85), _mm_shuffle_ps(v18, v18, 85));
     v20 = _mm_and_ps(v18, v19);
     v21 = _mm_andnot_ps(v19, v7);
     v22 = _mm_and_ps(v7, v19);
     if ( _mm_movemask_ps(v19) == 15 )
       v14 = v13;
-    v4.m_quad = _mm_or_ps(v21, v20);
+    v4 = _mm_or_ps(v21, v20);
     v12.m_quad = _mm_or_ps(v22, _mm_andnot_ps(v19, v18));
     if ( v14 )
     {
       ba.m_x = v13;
       ba.m_s = v14;
-      ba.m_shadower = (hkVector4f)v4.m_quad;
+      ba.m_shadower.m_quad.m128_u64[0] = v4.m128_u64[0];
       *(hkVector4f *)((char *)&ba.m_shadower + 8) = (hkVector4f)v12.m_quad;
     }
     else
     {
       ba.m_shadowee.m_quad.m128_u64[1] = v13;
-      v63 = v4.m_quad;
+      v63 = v4;
       v64 = v12.m_quad;
     }
   }
@@ -188,21 +190,21 @@ int __fastcall hkaiBooleanOperation::_s11(hkVector4f *vs_ea, hkVector4f *ve_ea, 
   }
   v23 = vs_ea->m_quad;
   v24 = _mm_shuffle_ps(v23, v23, 0);
-  v25 = _mm_cmpleps(v24, v10);
-  v26 = (_mm_movemask_ps(_mm_cmpleps(v24, v8)) != 0) - (_mm_movemask_ps(v25) != 0);
+  v25 = _mm_cmple_ps(v24, v10);
+  v26 = (_mm_movemask_ps(_mm_cmple_ps(v24, v8)) != 0) - (_mm_movemask_ps(v25) != 0);
   if ( v26 )
   {
     v27 = 0;
-    v29 = _mm_or_ps(_mm_andnot_ps(v25, v5), _mm_and_ps(v6, v25));
-    v30 = _mm_or_ps(_mm_andnot_ps(v25, v6), _mm_and_ps(v5, v25));
+    v29 = _mm_or_ps(_mm_andnot_ps(v25, m_quad), _mm_and_ps(v6, v25));
+    v30 = _mm_or_ps(_mm_andnot_ps(v25, v6), _mm_and_ps(m_quad, v25));
     v31 = _mm_shuffle_ps(v29, v29, 0);
     v32 = _mm_add_ps(
             _mm_mul_ps(
               _mm_sub_ps(v30, v29),
               _mm_div_ps(_mm_sub_ps(v24, v31), _mm_sub_ps(_mm_shuffle_ps(v30, v30, 0), v31))),
             v29);
-    v33 = _mm_cmpleps(_mm_shuffle_ps(v23, v23, 85), _mm_shuffle_ps(v32, v32, 85));
-    v4.m_quad = _mm_or_ps(_mm_andnot_ps(v33, v23), _mm_and_ps(v32, v33));
+    v33 = _mm_cmple_ps(_mm_shuffle_ps(v23, v23, 85), _mm_shuffle_ps(v32, v32, 85));
+    v4 = _mm_or_ps(_mm_andnot_ps(v33, v23), _mm_and_ps(v32, v33));
     if ( _mm_movemask_ps(v33) == 15 )
       v27 = v26;
     v28 = v27;
@@ -220,18 +222,18 @@ int __fastcall hkaiBooleanOperation::_s11(hkVector4f *vs_ea, hkVector4f *ve_ea, 
     {
       ba.m_x = v26;
       ba.m_s = v27;
-      ba.m_shadower = (hkVector4f)v4.m_quad;
+      ba.m_shadower.m_quad.m128_u64[0] = v4.m128_u64[0];
       *(hkVector4f *)((char *)&ba.m_shadower + 8) = (hkVector4f)v12.m_quad;
     }
     else
     {
       ba.m_shadowee.m_quad.m128_u64[1] = v26;
-      v63 = v4.m_quad;
+      v63 = v4;
       v64 = v12.m_quad;
     }
   }
-  v35 = _mm_cmpleps(v24, v8);
-  v36 = (_mm_movemask_ps(v35) != 0) - (_mm_movemask_ps(_mm_cmpleps(v9, v8)) != 0);
+  v35 = _mm_cmple_ps(v24, v8);
+  v36 = (_mm_movemask_ps(v35) != 0) - (_mm_movemask_ps(_mm_cmple_ps(v9, v8)) != 0);
   if ( v36 )
   {
     v37 = 0;
@@ -243,15 +245,15 @@ int __fastcall hkaiBooleanOperation::_s11(hkVector4f *vs_ea, hkVector4f *ve_ea, 
               _mm_sub_ps(v40, v39),
               _mm_div_ps(_mm_sub_ps(v8, v41), _mm_sub_ps(_mm_shuffle_ps(v40, v40, 0), v41))),
             v39);
-    v43 = _mm_cmpleps(_mm_shuffle_ps(v42, v42, 85), _mm_shuffle_ps(v5, v5, 85));
+    v43 = _mm_cmple_ps(_mm_shuffle_ps(v42, v42, 85), _mm_shuffle_ps(m_quad, m_quad, 85));
     v44 = _mm_andnot_ps(v43, v42);
-    v45 = _mm_and_ps(v43, v5);
+    v45 = _mm_and_ps(v43, m_quad);
     v46 = _mm_and_ps(v42, v43);
     if ( _mm_movemask_ps(v43) == 15 )
       v37 = v36;
     v38 = v37;
-    v4.m_quad = _mm_or_ps(v45, v44);
-    v12.m_quad = _mm_or_ps(v46, _mm_andnot_ps(v43, v5));
+    v4 = _mm_or_ps(v45, v44);
+    v12.m_quad = _mm_or_ps(v46, _mm_andnot_ps(v43, m_quad));
   }
   else
   {
@@ -265,18 +267,18 @@ int __fastcall hkaiBooleanOperation::_s11(hkVector4f *vs_ea, hkVector4f *ve_ea, 
     {
       ba.m_x = v36;
       ba.m_s = v37;
-      ba.m_shadower = (hkVector4f)v4.m_quad;
+      ba.m_shadower.m_quad.m128_u64[0] = v4.m128_u64[0];
       *(hkVector4f *)((char *)&ba.m_shadower + 8) = (hkVector4f)v12.m_quad;
     }
     else
     {
       ba.m_shadowee.m_quad.m128_u64[1] = v36;
-      v63 = v4.m_quad;
+      v63 = v4;
       v64 = v12.m_quad;
     }
   }
-  v48 = _mm_cmpleps(v24, v10);
-  v49 = (_mm_movemask_ps(v48) != 0) - (_mm_movemask_ps(_mm_cmpleps(v9, v10)) != 0);
+  v48 = _mm_cmple_ps(v24, v10);
+  v49 = (_mm_movemask_ps(v48) != 0) - (_mm_movemask_ps(_mm_cmple_ps(v9, v10)) != 0);
   if ( v49 )
   {
     v50 = 0;
@@ -288,14 +290,14 @@ int __fastcall hkaiBooleanOperation::_s11(hkVector4f *vs_ea, hkVector4f *ve_ea, 
               _mm_sub_ps(v53, v52),
               _mm_div_ps(_mm_sub_ps(v10, v54), _mm_sub_ps(_mm_shuffle_ps(v53, v53, 0), v54))),
             v52);
-    v56 = _mm_cmpleps(_mm_shuffle_ps(v55, v55, 85), _mm_shuffle_ps(v6, v6, 85));
+    v56 = _mm_cmple_ps(_mm_shuffle_ps(v55, v55, 85), _mm_shuffle_ps(v6, v6, 85));
     v57 = _mm_andnot_ps(v56, v55);
     v58 = _mm_and_ps(v56, v6);
     v59 = _mm_and_ps(v55, v56);
     if ( _mm_movemask_ps(v56) == 15 )
       v50 = v49;
     v51 = v50;
-    v4.m_quad = _mm_or_ps(v58, v57);
+    v4 = _mm_or_ps(v58, v57);
     v12.m_quad = _mm_or_ps(_mm_andnot_ps(v56, v6), v59);
   }
   else
@@ -310,20 +312,20 @@ int __fastcall hkaiBooleanOperation::_s11(hkVector4f *vs_ea, hkVector4f *ve_ea, 
     {
       ba.m_x = v49;
       ba.m_s = v50;
-      ba.m_shadower = (hkVector4f)v4.m_quad;
+      ba.m_shadower.m_quad.m128_u64[0] = v4.m128_u64[0];
       *(hkVector4f *)((char *)&ba.m_shadower + 8) = (hkVector4f)v12.m_quad;
     }
     else
     {
       ba.m_shadowee.m_quad.m128_u64[1] = v49;
-      v63 = v4.m_quad;
+      v63 = v4;
       v64 = v12.m_quad;
     }
   }
   v65->m_x = v60;
   if ( v60 )
     return hkaiBooleanOperation::_calculateIntersect2(
-             (hkaiBooleanOperation::ShadowResult *)((char *)&ba + 40),
+             (hkaiBooleanOperation::ShadowResult *)&ba.m_shadowee.m_quad.m128_u16[4],
              &ba,
              v65);
   v65->m_s = 0;
@@ -332,10 +334,14 @@ int __fastcall hkaiBooleanOperation::_s11(hkVector4f *vs_ea, hkVector4f *ve_ea, 
 
 // File Line: 277
 // RVA: 0xB9FEB0
-__int64 __fastcall hkaiBooleanOperation::_calculate2dLineIntersect(hkVector4f *vs_ea, hkVector4f *ve_ea, hkVector4f *vs_eb, hkVector4f *ve_eb)
+__int64 __fastcall hkaiBooleanOperation::_calculate2dLineIntersect(
+        hkVector4f *vs_ea,
+        hkVector4f *ve_ea,
+        hkVector4f *vs_eb,
+        hkVector4f *ve_eb)
 {
-  hkVector4f v4; // xmm2
-  __m128 v5; // xmm11
+  __m128 v4; // xmm2
+  __m128 m_quad; // xmm11
   __m128 v6; // xmm12
   __m128 v7; // xmm13
   __m128 v8; // xmm9
@@ -343,7 +349,7 @@ __int64 __fastcall hkaiBooleanOperation::_calculate2dLineIntersect(hkVector4f *v
   __m128 v10; // xmm8
   __m128 v11; // xmm1
   hkVector4f v12; // xmm5
-  unsigned int v13; // er8
+  unsigned int v13; // r8d
   int v14; // edx
   __m128 v15; // xmm3
   __m128 v16; // xmm4
@@ -356,7 +362,7 @@ __int64 __fastcall hkaiBooleanOperation::_calculate2dLineIntersect(hkVector4f *v
   __m128 v23; // xmm10
   __m128 v24; // xmm6
   __m128 v25; // xmm1
-  unsigned int v26; // er8
+  unsigned int v26; // r8d
   int v27; // ecx
   int v28; // eax
   __m128 v29; // xmm3
@@ -366,7 +372,7 @@ __int64 __fastcall hkaiBooleanOperation::_calculate2dLineIntersect(hkVector4f *v
   __m128 v33; // xmm1
   int v34; // edx
   __m128 v35; // xmm1
-  unsigned int v36; // er8
+  unsigned int v36; // r8d
   int v37; // ecx
   int v38; // eax
   __m128 v39; // xmm2
@@ -379,7 +385,7 @@ __int64 __fastcall hkaiBooleanOperation::_calculate2dLineIntersect(hkVector4f *v
   __m128 v46; // xmm5
   int v47; // edx
   __m128 v48; // xmm6
-  unsigned int v49; // er8
+  unsigned int v49; // r8d
   int v50; // ecx
   int v51; // eax
   __m128 v52; // xmm2
@@ -391,58 +397,55 @@ __int64 __fastcall hkaiBooleanOperation::_calculate2dLineIntersect(hkVector4f *v
   __m128 v58; // xmm2
   __m128 v59; // xmm3
   int v60; // edx
-  __int64 result; // rax
-  hkaiBooleanOperation::ShadowResult ba; // [rsp+20h] [rbp-89h]
+  hkaiBooleanOperation::ShadowResult ba; // [rsp+20h] [rbp-89h] BYREF
   __m128 v63; // [rsp+58h] [rbp-51h]
   __m128 v64; // [rsp+68h] [rbp-41h]
   hkaiBooleanOperation::ShadowResult *v65; // [rsp+128h] [rbp+7Fh]
 
-  v4.m_quad = 0i64;
-  ba.m_shadowee.m_quad.m128_i32[2] = 0;
+  v4 = 0i64;
   ba.m_x = 0;
-  v5 = ve_eb->m_quad;
+  m_quad = ve_eb->m_quad;
   v6 = vs_eb->m_quad;
   v7 = ve_ea->m_quad;
-  v8 = _mm_shuffle_ps(v5, v5, 0);
+  v8 = _mm_shuffle_ps(m_quad, m_quad, 0);
   v63 = 0i64;
   v9 = _mm_shuffle_ps(v7, v7, 0);
   v10 = _mm_shuffle_ps(v6, v6, 0);
   v64 = 0i64;
-  v11 = _mm_cmpleps(v9, v10);
-  ba.m_shadower = 0i64;
-  *(hkVector4f *)((char *)&ba.m_shadower + 8) = 0i64;
+  v11 = _mm_cmple_ps(v9, v10);
+  memset(&ba.m_shadower, 0, 28);
   v12.m_quad = 0i64;
-  v13 = (_mm_movemask_ps(_mm_cmpleps(v9, v8)) != 0) - (_mm_movemask_ps(v11) != 0);
+  v13 = (_mm_movemask_ps(_mm_cmple_ps(v9, v8)) != 0) - (_mm_movemask_ps(v11) != 0);
   if ( v13 )
   {
     v14 = 0;
-    v15 = _mm_or_ps(_mm_and_ps(v6, v11), _mm_andnot_ps(v11, v5));
-    v16 = _mm_or_ps(_mm_and_ps(v5, v11), _mm_andnot_ps(v11, v6));
+    v15 = _mm_or_ps(_mm_and_ps(v6, v11), _mm_andnot_ps(v11, m_quad));
+    v16 = _mm_or_ps(_mm_and_ps(m_quad, v11), _mm_andnot_ps(v11, v6));
     v17 = _mm_shuffle_ps(v15, v15, 0);
     v18 = _mm_add_ps(
             _mm_mul_ps(
               _mm_sub_ps(v16, v15),
               _mm_div_ps(_mm_sub_ps(v9, v17), _mm_sub_ps(_mm_shuffle_ps(v16, v16, 0), v17))),
             v15);
-    v19 = _mm_cmpleps(_mm_shuffle_ps(v7, v7, 85), _mm_shuffle_ps(v18, v18, 85));
+    v19 = _mm_cmple_ps(_mm_shuffle_ps(v7, v7, 85), _mm_shuffle_ps(v18, v18, 85));
     v20 = _mm_and_ps(v18, v19);
     v21 = _mm_andnot_ps(v19, v7);
     v22 = _mm_and_ps(v7, v19);
     if ( _mm_movemask_ps(v19) == 15 )
       v14 = v13;
-    v4.m_quad = _mm_or_ps(v21, v20);
+    v4 = _mm_or_ps(v21, v20);
     v12.m_quad = _mm_or_ps(v22, _mm_andnot_ps(v19, v18));
     if ( v14 )
     {
       ba.m_x = v13;
       ba.m_s = v14;
-      ba.m_shadower = (hkVector4f)v4.m_quad;
+      ba.m_shadower.m_quad.m128_u64[0] = v4.m128_u64[0];
       *(hkVector4f *)((char *)&ba.m_shadower + 8) = (hkVector4f)v12.m_quad;
     }
     else
     {
       ba.m_shadowee.m_quad.m128_u64[1] = v13;
-      v63 = v4.m_quad;
+      v63 = v4;
       v64 = v12.m_quad;
     }
   }
@@ -452,21 +455,21 @@ __int64 __fastcall hkaiBooleanOperation::_calculate2dLineIntersect(hkVector4f *v
   }
   v23 = vs_ea->m_quad;
   v24 = _mm_shuffle_ps(v23, v23, 0);
-  v25 = _mm_cmpleps(v24, v10);
-  v26 = (_mm_movemask_ps(_mm_cmpleps(v24, v8)) != 0) - (_mm_movemask_ps(v25) != 0);
+  v25 = _mm_cmple_ps(v24, v10);
+  v26 = (_mm_movemask_ps(_mm_cmple_ps(v24, v8)) != 0) - (_mm_movemask_ps(v25) != 0);
   if ( v26 )
   {
     v27 = 0;
-    v29 = _mm_or_ps(_mm_andnot_ps(v25, v5), _mm_and_ps(v6, v25));
-    v30 = _mm_or_ps(_mm_andnot_ps(v25, v6), _mm_and_ps(v5, v25));
+    v29 = _mm_or_ps(_mm_andnot_ps(v25, m_quad), _mm_and_ps(v6, v25));
+    v30 = _mm_or_ps(_mm_andnot_ps(v25, v6), _mm_and_ps(m_quad, v25));
     v31 = _mm_shuffle_ps(v29, v29, 0);
     v32 = _mm_add_ps(
             _mm_mul_ps(
               _mm_sub_ps(v30, v29),
               _mm_div_ps(_mm_sub_ps(v24, v31), _mm_sub_ps(_mm_shuffle_ps(v30, v30, 0), v31))),
             v29);
-    v33 = _mm_cmpleps(_mm_shuffle_ps(v23, v23, 85), _mm_shuffle_ps(v32, v32, 85));
-    v4.m_quad = _mm_or_ps(_mm_andnot_ps(v33, v23), _mm_and_ps(v32, v33));
+    v33 = _mm_cmple_ps(_mm_shuffle_ps(v23, v23, 85), _mm_shuffle_ps(v32, v32, 85));
+    v4 = _mm_or_ps(_mm_andnot_ps(v33, v23), _mm_and_ps(v32, v33));
     if ( _mm_movemask_ps(v33) == 15 )
       v27 = v26;
     v28 = v27;
@@ -484,18 +487,18 @@ __int64 __fastcall hkaiBooleanOperation::_calculate2dLineIntersect(hkVector4f *v
     {
       ba.m_x = v26;
       ba.m_s = v27;
-      ba.m_shadower = (hkVector4f)v4.m_quad;
+      ba.m_shadower.m_quad.m128_u64[0] = v4.m128_u64[0];
       *(hkVector4f *)((char *)&ba.m_shadower + 8) = (hkVector4f)v12.m_quad;
     }
     else
     {
       ba.m_shadowee.m_quad.m128_u64[1] = v26;
-      v63 = v4.m_quad;
+      v63 = v4;
       v64 = v12.m_quad;
     }
   }
-  v35 = _mm_cmpleps(v24, v8);
-  v36 = (_mm_movemask_ps(v35) != 0) - (_mm_movemask_ps(_mm_cmpleps(v9, v8)) != 0);
+  v35 = _mm_cmple_ps(v24, v8);
+  v36 = (_mm_movemask_ps(v35) != 0) - (_mm_movemask_ps(_mm_cmple_ps(v9, v8)) != 0);
   if ( v36 )
   {
     v37 = 0;
@@ -507,15 +510,15 @@ __int64 __fastcall hkaiBooleanOperation::_calculate2dLineIntersect(hkVector4f *v
               _mm_sub_ps(v40, v39),
               _mm_div_ps(_mm_sub_ps(v8, v41), _mm_sub_ps(_mm_shuffle_ps(v40, v40, 0), v41))),
             v39);
-    v43 = _mm_cmpleps(_mm_shuffle_ps(v42, v42, 85), _mm_shuffle_ps(v5, v5, 85));
+    v43 = _mm_cmple_ps(_mm_shuffle_ps(v42, v42, 85), _mm_shuffle_ps(m_quad, m_quad, 85));
     v44 = _mm_andnot_ps(v43, v42);
-    v45 = _mm_and_ps(v43, v5);
+    v45 = _mm_and_ps(v43, m_quad);
     v46 = _mm_and_ps(v42, v43);
     if ( _mm_movemask_ps(v43) == 15 )
       v37 = v36;
     v38 = v37;
-    v4.m_quad = _mm_or_ps(v45, v44);
-    v12.m_quad = _mm_or_ps(v46, _mm_andnot_ps(v43, v5));
+    v4 = _mm_or_ps(v45, v44);
+    v12.m_quad = _mm_or_ps(v46, _mm_andnot_ps(v43, m_quad));
   }
   else
   {
@@ -529,18 +532,18 @@ __int64 __fastcall hkaiBooleanOperation::_calculate2dLineIntersect(hkVector4f *v
     {
       ba.m_x = v36;
       ba.m_s = v37;
-      ba.m_shadower = (hkVector4f)v4.m_quad;
+      ba.m_shadower.m_quad.m128_u64[0] = v4.m128_u64[0];
       *(hkVector4f *)((char *)&ba.m_shadower + 8) = (hkVector4f)v12.m_quad;
     }
     else
     {
       ba.m_shadowee.m_quad.m128_u64[1] = v36;
-      v63 = v4.m_quad;
+      v63 = v4;
       v64 = v12.m_quad;
     }
   }
-  v48 = _mm_cmpleps(v24, v10);
-  v49 = (_mm_movemask_ps(v48) != 0) - (_mm_movemask_ps(_mm_cmpleps(v9, v10)) != 0);
+  v48 = _mm_cmple_ps(v24, v10);
+  v49 = (_mm_movemask_ps(v48) != 0) - (_mm_movemask_ps(_mm_cmple_ps(v9, v10)) != 0);
   if ( v49 )
   {
     v50 = 0;
@@ -552,14 +555,14 @@ __int64 __fastcall hkaiBooleanOperation::_calculate2dLineIntersect(hkVector4f *v
               _mm_sub_ps(v53, v52),
               _mm_div_ps(_mm_sub_ps(v10, v54), _mm_sub_ps(_mm_shuffle_ps(v53, v53, 0), v54))),
             v52);
-    v56 = _mm_cmpleps(_mm_shuffle_ps(v55, v55, 85), _mm_shuffle_ps(v6, v6, 85));
+    v56 = _mm_cmple_ps(_mm_shuffle_ps(v55, v55, 85), _mm_shuffle_ps(v6, v6, 85));
     v57 = _mm_andnot_ps(v56, v55);
     v58 = _mm_and_ps(v56, v6);
     v59 = _mm_and_ps(v55, v56);
     if ( _mm_movemask_ps(v56) == 15 )
       v50 = v49;
     v51 = v50;
-    v4.m_quad = _mm_or_ps(v58, v57);
+    v4 = _mm_or_ps(v58, v57);
     v12.m_quad = _mm_or_ps(_mm_andnot_ps(v56, v6), v59);
   }
   else
@@ -574,40 +577,45 @@ __int64 __fastcall hkaiBooleanOperation::_calculate2dLineIntersect(hkVector4f *v
     {
       ba.m_x = v49;
       ba.m_s = v50;
-      ba.m_shadower = (hkVector4f)v4.m_quad;
+      ba.m_shadower.m_quad.m128_u64[0] = v4.m128_u64[0];
       *(hkVector4f *)((char *)&ba.m_shadower + 8) = (hkVector4f)v12.m_quad;
     }
     else
     {
       ba.m_shadowee.m_quad.m128_u64[1] = v49;
-      v63 = v4.m_quad;
+      v63 = v4;
       v64 = v12.m_quad;
     }
   }
   v65->m_x = v60;
   if ( v60 )
   {
-    hkaiBooleanOperation::_calculateIntersect2((hkaiBooleanOperation::ShadowResult *)((char *)&ba + 40), &ba, v65);
-    result = (unsigned int)v65->m_x;
+    hkaiBooleanOperation::_calculateIntersect2(
+      (hkaiBooleanOperation::ShadowResult *)&ba.m_shadowee.m_quad.m128_u16[4],
+      &ba,
+      v65);
+    return (unsigned int)v65->m_x;
   }
   else
   {
     v65->m_s = 0;
-    result = 0i64;
+    return 0i64;
   }
-  return result;
 }
 
 // File Line: 320
 // RVA: 0xBA0350
-__int64 __fastcall hkaiBooleanOperation::_s02(hkaiBooleanOperation *this, hkVector4f *va, int faceBIndex, hkaiBooleanOperation::ShadowResult *res)
+__int64 __fastcall hkaiBooleanOperation::_s02(
+        hkaiBooleanOperation *this,
+        hkVector4f *va,
+        int faceBIndex,
+        hkaiBooleanOperation::ShadowResult *res)
 {
-  hkVector4f *v4; // rbx
-  hkaiEdgeGeometry::Edge *const **v5; // rax
+  hkaiEdgeGeometry::Edge *const **m_data; // rax
   unsigned int **v6; // r10
   unsigned int **v7; // r11
-  hkVector4f *v8; // r8
-  __m128 v9; // xmm8
+  hkVector4f *m_vertices; // r8
+  __m128 m_quad; // xmm8
   hkVector4f v10; // xmm2
   hkVector4f v11; // xmm5
   __m128 v12; // xmm3
@@ -625,33 +633,30 @@ __int64 __fastcall hkaiBooleanOperation::_s02(hkaiBooleanOperation *this, hkVect
   __m128 v24; // xmm2
   __m128 v25; // xmm0
   __m128 v26; // xmm5
-  hkaiBooleanOperation::ShadowResult ba; // [rsp+20h] [rbp-A8h]
-  hkaiBooleanOperation::ShadowResult ab; // [rsp+50h] [rbp-78h]
+  hkaiBooleanOperation::ShadowResult ba; // [rsp+20h] [rbp-A8h] BYREF
+  hkaiBooleanOperation::ShadowResult ab; // [rsp+50h] [rbp-78h] BYREF
 
   res->m_x = 0;
   ab.m_x = 0;
-  v4 = va;
   ba.m_x = 0;
-  ab.m_shadower = 0i64;
-  ab.m_shadowee = 0i64;
-  ba.m_shadower = 0i64;
-  v5 = this->m_b.m_faceEdges.m_faceStartEdges.m_data;
-  ba.m_shadowee = 0i64;
-  v6 = (unsigned int **)v5[faceBIndex];
-  v7 = (unsigned int **)v5[faceBIndex + 1];
-  v8 = this->m_b.m_vertices;
+  memset(&ab.m_shadower, 0, 32);
+  memset(&ba.m_shadower, 0, 32);
+  m_data = this->m_b.m_faceEdges.m_faceStartEdges.m_data;
+  v6 = (unsigned int **)m_data[faceBIndex];
+  v7 = (unsigned int **)m_data[faceBIndex + 1];
+  m_vertices = this->m_b.m_vertices;
   if ( v6 != v7 )
   {
     do
     {
-      v9 = v4->m_quad;
+      m_quad = va->m_quad;
       v10.m_quad = 0i64;
       v11.m_quad = 0i64;
-      v12 = _mm_shuffle_ps(v9, v9, 0);
-      v13 = v8[(*v6)[1]].m_quad;
-      v14 = v8[**v6].m_quad;
-      v15 = _mm_cmpleps(v12, _mm_shuffle_ps(v14, v14, 0));
-      v16 = (_mm_movemask_ps(_mm_cmpleps(v12, _mm_shuffle_ps(v13, v13, 0))) != 0) - (_mm_movemask_ps(v15) != 0);
+      v12 = _mm_shuffle_ps(m_quad, m_quad, 0);
+      v13 = m_vertices[(*v6)[1]].m_quad;
+      v14 = m_vertices[**v6].m_quad;
+      v15 = _mm_cmple_ps(v12, _mm_shuffle_ps(v14, v14, 0));
+      v16 = (_mm_movemask_ps(_mm_cmple_ps(v12, _mm_shuffle_ps(v13, v13, 0))) != 0) - (_mm_movemask_ps(v15) != 0);
       if ( v16 )
       {
         v17 = 0;
@@ -663,10 +668,10 @@ __int64 __fastcall hkaiBooleanOperation::_s02(hkaiBooleanOperation *this, hkVect
                   _mm_sub_ps(v20, v19),
                   _mm_div_ps(_mm_sub_ps(v12, v21), _mm_sub_ps(_mm_shuffle_ps(v20, v20, 0), v21))),
                 v19);
-        v23 = _mm_cmpleps(_mm_shuffle_ps(v9, v9, 85), _mm_shuffle_ps(v22, v22, 85));
+        v23 = _mm_cmple_ps(_mm_shuffle_ps(m_quad, m_quad, 85), _mm_shuffle_ps(v22, v22, 85));
         v24 = _mm_and_ps(v22, v23);
-        v25 = _mm_andnot_ps(v23, v9);
-        v26 = _mm_and_ps(v9, v23);
+        v25 = _mm_andnot_ps(v23, m_quad);
+        v26 = _mm_and_ps(m_quad, v23);
         if ( _mm_movemask_ps(v23) == 15 )
           v17 = v16;
         v18 = v17;
@@ -710,14 +715,17 @@ __int64 __fastcall hkaiBooleanOperation::_s02(hkaiBooleanOperation *this, hkVect
 
 // File Line: 355
 // RVA: 0xBA0550
-__int64 __fastcall hkaiBooleanOperation::_s20(hkaiBooleanOperation *this, int faceAIndex, hkVector4f *vb, hkaiBooleanOperation::ShadowResult *res)
+__int64 __fastcall hkaiBooleanOperation::_s20(
+        hkaiBooleanOperation *this,
+        int faceAIndex,
+        hkVector4f *vb,
+        hkaiBooleanOperation::ShadowResult *res)
 {
-  hkaiEdgeGeometry::Edge *const **v4; // rax
-  hkVector4f *v5; // r10
+  hkaiEdgeGeometry::Edge *const **m_data; // rax
+  hkVector4f *m_vertices; // r10
   unsigned int **v6; // r11
-  hkVector4f *v7; // rbx
   unsigned int **v8; // r8
-  __m128 v9; // xmm6
+  __m128 m_quad; // xmm6
   hkVector4f v10; // xmm2
   hkVector4f v11; // xmm3
   __m128 v12; // xmm4
@@ -735,33 +743,30 @@ __int64 __fastcall hkaiBooleanOperation::_s20(hkaiBooleanOperation *this, int fa
   __m128 v24; // xmm2
   __m128 v25; // xmm0
   __m128 v26; // xmm3
-  hkaiBooleanOperation::ShadowResult ba; // [rsp+20h] [rbp-98h]
-  hkaiBooleanOperation::ShadowResult ab; // [rsp+50h] [rbp-68h]
+  hkaiBooleanOperation::ShadowResult ba; // [rsp+20h] [rbp-98h] BYREF
+  hkaiBooleanOperation::ShadowResult ab; // [rsp+50h] [rbp-68h] BYREF
 
   res->m_x = 0;
-  v4 = this->m_a.m_faceEdges.m_faceStartEdges.m_data;
-  v5 = this->m_a.m_vertices;
-  ba.m_shadower = 0i64;
-  ba.m_shadowee = 0i64;
-  ab.m_shadower = 0i64;
-  v6 = (unsigned int **)v4[faceAIndex + 1];
-  v7 = vb;
-  v8 = (unsigned int **)v4[faceAIndex];
-  ab.m_shadowee = 0i64;
+  m_data = this->m_a.m_faceEdges.m_faceStartEdges.m_data;
+  m_vertices = this->m_a.m_vertices;
+  memset(&ba.m_shadower, 0, 32);
+  memset(&ab.m_shadower, 0, 32);
+  v6 = (unsigned int **)m_data[faceAIndex + 1];
+  v8 = (unsigned int **)m_data[faceAIndex];
   ba.m_x = 0;
   ab.m_x = 0;
   if ( v8 != v6 )
   {
     do
     {
-      v9 = v7->m_quad;
+      m_quad = vb->m_quad;
       v10.m_quad = 0i64;
       v11.m_quad = 0i64;
-      v12 = _mm_shuffle_ps(v9, v9, 0);
-      v13 = v5[(*v8)[1]].m_quad;
-      v14 = v5[**v8].m_quad;
-      v15 = _mm_cmpleps(_mm_shuffle_ps(v14, v14, 0), v12);
-      v16 = (_mm_movemask_ps(v15) != 0) - (_mm_movemask_ps(_mm_cmpleps(_mm_shuffle_ps(v13, v13, 0), v12)) != 0);
+      v12 = _mm_shuffle_ps(m_quad, m_quad, 0);
+      v13 = m_vertices[(*v8)[1]].m_quad;
+      v14 = m_vertices[**v8].m_quad;
+      v15 = _mm_cmple_ps(_mm_shuffle_ps(v14, v14, 0), v12);
+      v16 = (_mm_movemask_ps(v15) != 0) - (_mm_movemask_ps(_mm_cmple_ps(_mm_shuffle_ps(v13, v13, 0), v12)) != 0);
       if ( v16 )
       {
         v17 = 0;
@@ -773,15 +778,15 @@ __int64 __fastcall hkaiBooleanOperation::_s20(hkaiBooleanOperation *this, int fa
                   _mm_sub_ps(v20, v19),
                   _mm_div_ps(_mm_sub_ps(v12, v21), _mm_sub_ps(_mm_shuffle_ps(v20, v20, 0), v21))),
                 v19);
-        v23 = _mm_cmpleps(_mm_shuffle_ps(v22, v22, 85), _mm_shuffle_ps(v9, v9, 85));
-        v24 = _mm_and_ps(v9, v23);
+        v23 = _mm_cmple_ps(_mm_shuffle_ps(v22, v22, 85), _mm_shuffle_ps(m_quad, m_quad, 85));
+        v24 = _mm_and_ps(m_quad, v23);
         v25 = _mm_andnot_ps(v23, v22);
         v26 = _mm_and_ps(v22, v23);
         if ( _mm_movemask_ps(v23) == 15 )
           v17 = v16;
         v18 = v17;
         v10.m_quad = _mm_or_ps(v24, v25);
-        v11.m_quad = _mm_or_ps(v26, _mm_andnot_ps(v23, v9));
+        v11.m_quad = _mm_or_ps(v26, _mm_andnot_ps(v23, m_quad));
       }
       else
       {
@@ -820,46 +825,41 @@ __int64 __fastcall hkaiBooleanOperation::_s20(hkaiBooleanOperation *this, int fa
 
 // File Line: 389
 // RVA: 0xBA0740
-__int64 __fastcall hkaiBooleanOperation::_x12(hkaiBooleanOperation *this, hkaiEdgeGeometry::Edge *edgeA, int faceBIndex, hkVector4f *res)
+__int64 __fastcall hkaiBooleanOperation::_x12(
+        hkaiBooleanOperation *this,
+        hkaiEdgeGeometry::Edge *edgeA,
+        int faceBIndex,
+        hkVector4f *res)
 {
-  hkVector4f *v4; // rsi
+  hkVector4f *m_vertices; // rsi
   hkVector4f *v5; // rax
-  hkaiEdgeGeometry::Edge *v6; // rbx
-  __int64 v7; // rdx
+  __int64 m_b; // rdx
   __int64 v8; // r13
-  hkaiBooleanOperation *v9; // r12
   int v10; // edi
   unsigned int v11; // edi
-  __int64 v12; // r14
+  __int64 m_a; // r14
   __int64 v13; // r15
-  hkaiEdgeGeometry::Edge *const **v14; // rax
+  hkaiEdgeGeometry::Edge *const **m_data; // rax
   unsigned int **v15; // rbx
   hkVector4f *v16; // r14
   hkVector4f *v17; // r15
   unsigned int **i; // rsi
-  hkaiBooleanOperation::ShadowResult resa; // [rsp+30h] [rbp-69h]
-  hkaiBooleanOperation::ShadowResult ba; // [rsp+60h] [rbp-39h]
-  hkaiBooleanOperation::ShadowResult ab; // [rsp+90h] [rbp-9h]
+  hkaiBooleanOperation::ShadowResult resa; // [rsp+30h] [rbp-69h] BYREF
+  hkaiBooleanOperation::ShadowResult ba; // [rsp+60h] [rbp-39h] BYREF
+  hkaiBooleanOperation::ShadowResult ab; // [rsp+90h] [rbp-9h] BYREF
   hkVector4f *v23; // [rsp+100h] [rbp+67h]
-  hkVector4f *v24; // [rsp+118h] [rbp+7Fh]
 
-  v24 = res;
-  v4 = this->m_a.m_vertices;
+  m_vertices = this->m_a.m_vertices;
   v5 = this->m_b.m_vertices;
-  v6 = edgeA;
-  v7 = edgeA->m_b;
+  m_b = edgeA->m_b;
   v8 = faceBIndex;
-  ba.m_shadower = 0i64;
-  ba.m_shadowee = 0i64;
-  ab.m_shadower = 0i64;
-  ab.m_shadowee = 0i64;
-  resa.m_shadower = 0i64;
-  resa.m_shadowee = 0i64;
-  v9 = this;
+  memset(&ba.m_shadower, 0, 32);
+  memset(&ab.m_shadower, 0, 32);
+  memset(&resa.m_shadower, 0, 32);
   ba.m_x = 0;
   ab.m_x = 0;
   v23 = v5;
-  v10 = -(signed int)hkaiBooleanOperation::_s02(this, &v4[v7], faceBIndex, &resa);
+  v10 = -(int)hkaiBooleanOperation::_s02(this, &m_vertices[m_b], faceBIndex, &resa);
   if ( resa.m_x )
   {
     if ( resa.m_s )
@@ -877,7 +877,7 @@ __int64 __fastcall hkaiBooleanOperation::_x12(hkaiBooleanOperation *this, hkaiEd
       ab.m_shadowee = resa.m_shadowee;
     }
   }
-  v11 = (unsigned __int64)hkaiBooleanOperation::_s02(v9, &v4[v6->m_a], v8, &resa) + v10;
+  v11 = hkaiBooleanOperation::_s02(this, &m_vertices[edgeA->m_a], v8, &resa) + v10;
   if ( resa.m_x )
   {
     if ( resa.m_s )
@@ -895,13 +895,13 @@ __int64 __fastcall hkaiBooleanOperation::_x12(hkaiBooleanOperation *this, hkaiEd
       ab.m_shadowee = resa.m_shadowee;
     }
   }
-  v12 = v6->m_a;
-  v13 = v6->m_b;
-  v14 = v9->m_b.m_faceEdges.m_faceStartEdges.m_data;
-  v15 = (unsigned int **)v14[v8];
-  v16 = &v4[v12];
-  v17 = &v4[v13];
-  for ( i = (unsigned int **)v14[v8 + 1]; v15 != i; ++v15 )
+  m_a = edgeA->m_a;
+  v13 = edgeA->m_b;
+  m_data = this->m_b.m_faceEdges.m_faceStartEdges.m_data;
+  v15 = (unsigned int **)m_data[v8];
+  v16 = &m_vertices[m_a];
+  v17 = &m_vertices[v13];
+  for ( i = (unsigned int **)m_data[v8 + 1]; v15 != i; ++v15 )
   {
     v11 -= hkaiBooleanOperation::_s11(v16, v17, &v23[**v15], &v23[(*v15)[1]]);
     if ( resa.m_x )
@@ -924,52 +924,47 @@ __int64 __fastcall hkaiBooleanOperation::_x12(hkaiBooleanOperation *this, hkaiEd
   }
   if ( !v11 )
     return 0i64;
-  hkaiBooleanOperation::_calculateIntersect3(&ab, &ba, v24);
+  hkaiBooleanOperation::_calculateIntersect3(&ab, &ba, res);
   return v11;
 }
 
 // File Line: 434
 // RVA: 0xBA0920
-__int64 __fastcall hkaiBooleanOperation::_x21(hkaiBooleanOperation *this, int faceAIndex, hkaiEdgeGeometry::Edge *edgeB, hkVector4f *res)
+__int64 __fastcall hkaiBooleanOperation::_x21(
+        hkaiBooleanOperation *this,
+        int faceAIndex,
+        hkaiEdgeGeometry::Edge *edgeB,
+        hkVector4f *res)
 {
-  hkVector4f *v4; // r12
+  hkVector4f *m_vertices; // r12
   hkVector4f *v5; // rax
-  hkaiEdgeGeometry::Edge *v6; // rbx
-  __int64 v7; // r8
+  __int64 m_b; // r8
   __int64 v8; // r13
-  hkaiBooleanOperation *v9; // rsi
   int v10; // edi
   unsigned int v11; // edi
-  hkaiEdgeGeometry::Edge *const **v12; // rax
-  __int64 v13; // r14
+  hkaiEdgeGeometry::Edge *const **m_data; // rax
+  __int64 m_a; // r14
   __int64 v14; // r15
   unsigned int **v15; // rbx
   unsigned int **v16; // rsi
   hkVector4f *v17; // r14
   hkVector4f *i; // r15
-  hkaiBooleanOperation::ShadowResult resa; // [rsp+30h] [rbp-69h]
-  hkaiBooleanOperation::ShadowResult ba; // [rsp+60h] [rbp-39h]
-  hkaiBooleanOperation::ShadowResult ab; // [rsp+90h] [rbp-9h]
+  hkaiBooleanOperation::ShadowResult resa; // [rsp+30h] [rbp-69h] BYREF
+  hkaiBooleanOperation::ShadowResult ba; // [rsp+60h] [rbp-39h] BYREF
+  hkaiBooleanOperation::ShadowResult ab; // [rsp+90h] [rbp-9h] BYREF
   hkVector4f *v23; // [rsp+100h] [rbp+67h]
-  hkVector4f *v24; // [rsp+118h] [rbp+7Fh]
 
-  v24 = res;
-  v4 = this->m_b.m_vertices;
+  m_vertices = this->m_b.m_vertices;
   v5 = this->m_a.m_vertices;
-  v6 = edgeB;
-  v7 = edgeB->m_b;
+  m_b = edgeB->m_b;
   v8 = faceAIndex;
-  ba.m_shadower = 0i64;
-  ba.m_shadowee = 0i64;
-  ab.m_shadower = 0i64;
-  ab.m_shadowee = 0i64;
-  resa.m_shadower = 0i64;
-  resa.m_shadowee = 0i64;
-  v9 = this;
+  memset(&ba.m_shadower, 0, 32);
+  memset(&ab.m_shadower, 0, 32);
+  memset(&resa.m_shadower, 0, 32);
   ba.m_x = 0;
   ab.m_x = 0;
   v23 = v5;
-  v10 = hkaiBooleanOperation::_s20(this, faceAIndex, &v4[v7], &resa);
+  v10 = hkaiBooleanOperation::_s20(this, faceAIndex, &m_vertices[m_b], &resa);
   if ( resa.m_x )
   {
     if ( resa.m_s )
@@ -987,7 +982,7 @@ __int64 __fastcall hkaiBooleanOperation::_x21(hkaiBooleanOperation *this, int fa
       ab.m_shadowee = resa.m_shadowee;
     }
   }
-  v11 = v10 - (unsigned __int64)hkaiBooleanOperation::_s20(v9, v8, &v4[v6->m_a], &resa);
+  v11 = v10 - hkaiBooleanOperation::_s20(this, v8, &m_vertices[edgeB->m_a], &resa);
   if ( resa.m_x )
   {
     if ( resa.m_s )
@@ -1005,13 +1000,13 @@ __int64 __fastcall hkaiBooleanOperation::_x21(hkaiBooleanOperation *this, int fa
       ab.m_shadowee = resa.m_shadowee;
     }
   }
-  v12 = v9->m_a.m_faceEdges.m_faceStartEdges.m_data;
-  v13 = v6->m_a;
-  v14 = v6->m_b;
-  v15 = (unsigned int **)v12[v8];
-  v16 = (unsigned int **)v12[v8 + 1];
-  v17 = &v4[v13];
-  for ( i = &v4[v14]; v15 != v16; ++v15 )
+  m_data = this->m_a.m_faceEdges.m_faceStartEdges.m_data;
+  m_a = edgeB->m_a;
+  v14 = edgeB->m_b;
+  v15 = (unsigned int **)m_data[v8];
+  v16 = (unsigned int **)m_data[v8 + 1];
+  v17 = &m_vertices[m_a];
+  for ( i = &m_vertices[v14]; v15 != v16; ++v15 )
   {
     v11 -= hkaiBooleanOperation::_s11(&v23[**v15], &v23[(*v15)[1]], v17, i);
     if ( resa.m_x )
@@ -1034,192 +1029,188 @@ __int64 __fastcall hkaiBooleanOperation::_x21(hkaiBooleanOperation *this, int fa
   }
   if ( !v11 )
     return 0i64;
-  hkaiBooleanOperation::_calculateIntersect3(&ab, &ba, v24);
+  hkaiBooleanOperation::_calculateIntersect3(&ab, &ba, res);
   return v11;
 }
 
 // File Line: 480
 // RVA: 0xBA1890
-hkResult *__fastcall hkaiBooleanOperation::_addStartEndVertices(hkaiBooleanOperation *this, hkResult *result, unsigned int feature, unsigned int a, int index, int count)
+hkResult *__fastcall hkaiBooleanOperation::_addStartEndVertices(
+        hkaiBooleanOperation *this,
+        hkResult *result,
+        unsigned int feature,
+        unsigned int a,
+        int index,
+        int count)
 {
   int v6; // esi
-  unsigned int v7; // er14
-  hkResult *v8; // rbx
-  unsigned int v9; // er15
-  int v10; // er9
-  int v11; // er9
-  hkArray<hkaiBooleanOperation::SortVertex,hkContainerHeapAllocator> *v12; // rdi
+  unsigned int v10; // r9d
+  int v11; // r9d
+  hkArray<hkaiBooleanOperation::SortVertex,hkContainerHeapAllocator> *p_m_startVertices; // rdi
   int v13; // eax
   int v14; // eax
   int v15; // eax
-  unsigned int *v16; // rcx
-  __int64 v17; // r12
-  int v18; // er9
+  hkaiBooleanOperation::SortVertex *v16; // rcx
+  __int64 m_size; // r12
+  int v18; // r9d
   hkResult *v19; // rcx
-  int v20; // er9
+  int v20; // r9d
   int v21; // eax
   int v22; // eax
-  unsigned int *v23; // rcx
-  int v24; // eax
-  int *v25; // rax
-  __int64 v26; // rcx
-  hkResult resulta; // [rsp+30h] [rbp-28h]
-  char v29; // [rsp+34h] [rbp-24h]
-  hkResult v30; // [rsp+38h] [rbp-20h]
+  int v23; // eax
+  int *p_m_index; // rax
+  __int64 v25; // rcx
+  hkResult resulta; // [rsp+30h] [rbp-28h] BYREF
+  char v28; // [rsp+34h] [rbp-24h] BYREF
+  hkResult v29; // [rsp+38h] [rbp-20h] BYREF
 
   v6 = count;
-  v7 = a;
-  v8 = result;
-  v9 = feature;
-  v10 = abs(count);
+  v10 = abs32(count);
   if ( count <= 0 )
   {
     v20 = this->m_startVertices.m_size + v10;
-    v12 = &this->m_startVertices;
+    p_m_startVertices = &this->m_startVertices;
     v21 = this->m_startVertices.m_capacityAndFlags & 0x3FFFFFFF;
     if ( v21 >= v20 )
     {
-      resulta.m_enum = 0;
+      resulta.m_enum = HK_SUCCESS;
     }
     else
     {
       v22 = 2 * v21;
       if ( v20 < v22 )
         v20 = v22;
-      hkArrayUtil::_reserve(&resulta, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v12, v20, 16);
+      hkArrayUtil::_reserve(&resulta, &hkContainerHeapAllocator::s_alloc, p_m_startVertices, v20, 16);
       if ( resulta.m_enum )
       {
-        v8->m_enum = 1;
-        return v8;
+        result->m_enum = HK_FAILURE;
+        return result;
       }
     }
-    v15 = v12->m_capacityAndFlags & 0x3FFFFFFF;
+    v15 = p_m_startVertices->m_capacityAndFlags & 0x3FFFFFFF;
     if ( v6 == -1 )
     {
-      if ( v12->m_size == v15 )
-        hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v12, 16);
-      v23 = &v12->m_data[v12->m_size++].m_feature;
-      *v23 = v9;
-      v23[2] = v7;
-      v23[3] = 0;
-      v23[1] = index;
-      goto LABEL_32;
+      if ( p_m_startVertices->m_size == v15 )
+        hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, p_m_startVertices, 16);
+      goto LABEL_11;
     }
-    v17 = v12->m_size;
+    m_size = p_m_startVertices->m_size;
     v6 = -v6;
-    v18 = v17 + v6;
-    if ( v15 >= (signed int)v17 + v6 )
-      goto LABEL_29;
-    v19 = &v30;
-    goto LABEL_26;
+    v18 = m_size + v6;
+    if ( v15 < (int)m_size + v6 )
+    {
+      v19 = &v29;
+      goto LABEL_26;
+    }
+LABEL_29:
+    p_m_startVertices->m_size += v6;
+    if ( v6 > 0 )
+    {
+      p_m_index = &p_m_startVertices->m_data[m_size].m_index;
+      v25 = (unsigned int)v6;
+      do
+      {
+        *(p_m_index - 1) = feature;
+        p_m_index[1] = a;
+        *p_m_index = index;
+        p_m_index += 4;
+        --v25;
+      }
+      while ( v25 );
+    }
+    goto LABEL_32;
   }
   v11 = this->m_endVertices.m_size + v10;
-  v12 = &this->m_endVertices;
+  p_m_startVertices = &this->m_endVertices;
   v13 = this->m_endVertices.m_capacityAndFlags & 0x3FFFFFFF;
   if ( v13 >= v11 )
   {
     count = 0;
-LABEL_8:
-    v15 = v12->m_capacityAndFlags & 0x3FFFFFFF;
-    if ( v6 == 1 )
-    {
-      if ( v12->m_size == v15 )
-        hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v12, 16);
-      v16 = &v12->m_data[v12->m_size++].m_feature;
-      *v16 = v9;
-      v16[2] = v7;
-      v16[3] = 0;
-      v16[1] = index;
-LABEL_32:
-      v8->m_enum = 0;
-      return v8;
-    }
-    v17 = v12->m_size;
-    v18 = v17 + v6;
-    if ( v15 >= (signed int)v17 + v6 )
-    {
-LABEL_29:
-      v12->m_size += v6;
-      if ( v6 > 0 )
-      {
-        v25 = &v12->m_data[v17].m_index;
-        v26 = (unsigned int)v6;
-        do
-        {
-          *(v25 - 1) = v9;
-          v25[1] = v7;
-          *v25 = index;
-          v25 += 4;
-          --v26;
-        }
-        while ( v26 );
-      }
-      goto LABEL_32;
-    }
-    v19 = (hkResult *)&v29;
-LABEL_26:
-    v24 = 2 * v15;
-    if ( v18 < v24 )
-      v18 = v24;
-    hkArrayUtil::_reserve(v19, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v12, v18, 16);
-    goto LABEL_29;
+    goto LABEL_8;
   }
   v14 = 2 * v13;
   if ( v11 < v14 )
     v11 = v14;
-  hkArrayUtil::_reserve((hkResult *)&count, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v12, v11, 16);
+  hkArrayUtil::_reserve((hkResult *)&count, &hkContainerHeapAllocator::s_alloc, p_m_startVertices, v11, 16);
   if ( !count )
-    goto LABEL_8;
-  v8->m_enum = 1;
-  return v8;
+  {
+LABEL_8:
+    v15 = p_m_startVertices->m_capacityAndFlags & 0x3FFFFFFF;
+    if ( v6 == 1 )
+    {
+      if ( p_m_startVertices->m_size == v15 )
+        hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, p_m_startVertices, 16);
+LABEL_11:
+      v16 = &p_m_startVertices->m_data[p_m_startVertices->m_size++];
+      v16->m_feature = feature;
+      v16->m_vertexIndex = a;
+      v16->m_dist = 0.0;
+      v16->m_index = index;
+LABEL_32:
+      result->m_enum = HK_SUCCESS;
+      return result;
+    }
+    m_size = p_m_startVertices->m_size;
+    v18 = m_size + v6;
+    if ( v15 < (int)m_size + v6 )
+    {
+      v19 = (hkResult *)&v28;
+LABEL_26:
+      v23 = 2 * v15;
+      if ( v18 < v23 )
+        v18 = v23;
+      hkArrayUtil::_reserve(v19, &hkContainerHeapAllocator::s_alloc, p_m_startVertices, v18, 16);
+      goto LABEL_29;
+    }
+    goto LABEL_29;
+  }
+  result->m_enum = HK_FAILURE;
+  return result;
 }
 
 // File Line: 590
 // RVA: 0xBA2900
-hkResult *__fastcall hkaiBooleanOperation::_simpleClassifyFaceAEdgeB(hkaiBooleanOperation *this, hkResult *result, hkaiBooleanFilter *filter)
+hkResult *__fastcall hkaiBooleanOperation::_simpleClassifyFaceAEdgeB(
+        hkaiBooleanOperation *this,
+        hkResult *result,
+        hkaiBooleanFilter *filter)
 {
-  hkaiEdgeGeometry *v3; // r12
+  hkaiEdgeGeometry *m_geometry; // r12
   hkVector4f v4; // xmm6
   unsigned int v5; // edi
   __int64 v6; // rbx
   hkVector4f v7; // xmm7
-  hkaiBooleanFilter *v8; // r15
-  hkResult *v9; // r14
-  hkaiBooleanOperation *v10; // rsi
   __int64 v11; // rbp
-  signed int *v12; // rdx
-  hkVector4f *v13; // rcx
-  hkResult resulta; // [rsp+70h] [rbp+8h]
-  hkKeyPair pair; // [rsp+88h] [rbp+20h]
+  int *v12; // rdx
+  hkVector4f *m_data; // rcx
+  hkResult resulta; // [rsp+70h] [rbp+8h] BYREF
+  hkKeyPair pair; // [rsp+88h] [rbp+20h] BYREF
 
-  v3 = this->m_b.m_geometry;
+  m_geometry = this->m_b.m_geometry;
   v4.m_quad = (__m128)this->m_a.m_aabb.m_min;
   v5 = 0;
   v6 = 0i64;
   v7.m_quad = (__m128)this->m_a.m_aabb.m_max;
-  v8 = filter;
-  v9 = result;
-  v10 = this;
   v11 = this->m_b.m_uniqueEdges.m_startUniqueEdge.m_size - 1;
   if ( this->m_b.m_uniqueEdges.m_startUniqueEdge.m_size - 1 <= 0 )
   {
 LABEL_5:
-    v9->m_enum = 0;
+    result->m_enum = HK_SUCCESS;
   }
   else
   {
     while ( 1 )
     {
-      v12 = (signed int *)*v10->m_b.m_uniqueEdges.m_startUniqueEdge.m_data[v6];
-      v13 = v3->m_vertices.m_data;
+      v12 = (int *)*this->m_b.m_uniqueEdges.m_startUniqueEdge.m_data[v6];
+      m_data = m_geometry->m_vertices.m_data;
       if ( (_mm_movemask_ps(
               _mm_and_ps(
-                _mm_cmpleps(v4.m_quad, _mm_max_ps(v13[*v12].m_quad, v13[v12[1]].m_quad)),
-                _mm_cmpleps(_mm_min_ps(v13[*v12].m_quad, v13[v12[1]].m_quad), v7.m_quad))) & 7) == 7 )
+                _mm_cmple_ps(v4.m_quad, _mm_max_ps(m_data[*v12].m_quad, m_data[v12[1]].m_quad)),
+                _mm_cmple_ps(_mm_min_ps(m_data[*v12].m_quad, m_data[v12[1]].m_quad), v7.m_quad))) & 7) == 7 )
       {
         pair.m_keyA = 1;
         pair.m_keyB = v5;
-        hkaiBooleanOperation::_classifyFaceAEdgeB(v10, &resulta, &pair, v8);
+        hkaiBooleanOperation::_classifyFaceAEdgeB(this, &resulta, &pair, filter);
         if ( resulta.m_enum )
           break;
       }
@@ -1228,105 +1219,99 @@ LABEL_5:
       if ( v6 >= v11 )
         goto LABEL_5;
     }
-    v9->m_enum = 1;
+    result->m_enum = HK_FAILURE;
   }
-  return v9;
+  return result;
 }
 
 // File Line: 621
 // RVA: 0xBA2A20
-hkResult *__fastcall hkaiBooleanOperation::_simpleClassifyEdgeAFaceB(hkaiBooleanOperation *this, hkResult *result, hkaiBooleanFilter *filter)
+hkResult *__fastcall hkaiBooleanOperation::_simpleClassifyEdgeAFaceB(
+        hkaiBooleanOperation *this,
+        hkResult *result,
+        hkaiBooleanFilter *filter)
 {
-  hkaiBooleanOperation *v3; // rbp
-  hkaiBooleanFilter *v4; // r15
-  hkVector4f *v5; // rcx
+  hkVector4f *m_data; // rcx
   hkaiEdgeGeometry::Edge *const **v6; // r10
-  hkResult *v7; // r13
   char *v8; // r9
-  signed __int64 v9; // r11
+  __int64 v9; // r11
   hkaiEdgeGeometry::Edge *const *v10; // rax
-  __m128 v11; // xmm2
-  signed __int64 v12; // rax
+  __m128 m_quad; // xmm2
+  __int64 m_b; // rax
   __m128 v13; // xmm0
   __m128 v14; // xmm2
   unsigned int v15; // esi
-  __int64 *v16; // rcx
-  signed __int64 v17; // r12
-  signed __int64 v18; // r14
+  hkArray<hkVector4f,hkContainerHeapAllocator> *p_m_vertices; // rcx
+  __int64 v17; // r12
+  __int64 v18; // r14
   hkaiEdgeGeometry::Edge *const **v19; // rax
-  __int64 v20; // r9
+  hkVector4f *v20; // r9
   hkaiEdgeGeometry::Edge *const *v21; // rdx
-  unsigned __int64 v22; // r8
+  hkaiEdgeGeometry::Edge *const *v22; // r8
   hkaiEdgeGeometry::Edge *v23; // rax
-  signed int **v24; // rdx
+  int **v24; // rdx
   __m128 v25; // xmm6
   __m128 i; // xmm7
-  signed int *v27; // rax
+  int *v27; // rax
   signed int v28; // ebx
   __m128 *v29; // rdi
-  signed __int64 v31; // [rsp+20h] [rbp-C8h]
-  char v32; // [rsp+30h] [rbp-B8h]
-  hkResult resulta; // [rsp+F0h] [rbp+8h]
-  hkKeyPair pair; // [rsp+108h] [rbp+20h]
+  hkArray<hkVector4f,hkContainerHeapAllocator> *v31; // [rsp+20h] [rbp-C8h]
+  char v32[96]; // [rsp+30h] [rbp-B8h] BYREF
+  hkResult resulta; // [rsp+F0h] [rbp+8h] BYREF
+  hkKeyPair pair; // [rsp+108h] [rbp+20h] BYREF
 
-  v3 = this;
-  v4 = filter;
-  v5 = this->m_a.m_geometry->m_vertices.m_data;
-  v6 = v3->m_a.m_uniqueEdges.m_startUniqueEdge.m_data;
-  v7 = result;
-  v8 = &v32;
+  m_data = this->m_a.m_geometry->m_vertices.m_data;
+  v6 = this->m_a.m_uniqueEdges.m_startUniqueEdge.m_data;
+  v8 = v32;
   v9 = 3i64;
   do
   {
     v10 = *v6;
     v8 += 32;
     ++v6;
-    v11 = v5[**(signed int **)v10].m_quad;
-    v12 = (signed int)(*v10)->m_b;
-    v13 = _mm_min_ps(v11, v5[v12].m_quad);
-    v14 = _mm_max_ps(v11, v5[v12].m_quad);
+    m_quad = m_data[**(int **)v10].m_quad;
+    m_b = (int)(*v10)->m_b;
+    v13 = _mm_min_ps(m_quad, m_data[m_b].m_quad);
+    v14 = _mm_max_ps(m_quad, m_data[m_b].m_quad);
     *((__m128 *)v8 - 2) = v13;
     *((__m128 *)v8 - 1) = v14;
     --v9;
   }
   while ( v9 );
   v15 = 1;
-  v16 = (__int64 *)&v3->m_b.m_geometry->m_vertices;
-  v17 = v3->m_b.m_faceEdges.m_faceStartEdges.m_size - 1;
-  v31 = (signed __int64)&v3->m_b.m_geometry->m_vertices;
+  p_m_vertices = &this->m_b.m_geometry->m_vertices;
+  v17 = this->m_b.m_faceEdges.m_faceStartEdges.m_size - 1;
+  v31 = p_m_vertices;
   v18 = 1i64;
   if ( v17 <= 1 )
   {
 LABEL_13:
-    v7->m_enum = 0;
+    result->m_enum = HK_SUCCESS;
   }
   else
   {
 LABEL_4:
-    v19 = v3->m_b.m_faceEdges.m_faceStartEdges.m_data;
-    v20 = *v16;
+    v19 = this->m_b.m_faceEdges.m_faceStartEdges.m_data;
+    v20 = p_m_vertices->m_data;
     v21 = v19[v18];
-    v22 = (unsigned __int64)v19[v18 + 1];
+    v22 = v19[v18 + 1];
     v23 = *v21;
-    v24 = (signed int **)(v21 + 1);
-    v25 = *(__m128 *)(*v16 + 16i64 * (signed int)v23->m_a);
-    for ( i = *(__m128 *)(*v16 + 16i64 * (signed int)v23->m_a);
-          (unsigned __int64)v24 < v22;
-          i = _mm_max_ps(i, *(__m128 *)(v20 + 16i64 * *v27)) )
+    v24 = (int **)(v21 + 1);
+    v25 = p_m_vertices->m_data[v23->m_a].m_quad;
+    for ( i = v25; v24 < (int **)v22; i = _mm_max_ps(i, v20[*v27].m_quad) )
     {
-      v27 = *v24;
-      ++v24;
-      v25 = _mm_min_ps(v25, *(__m128 *)(v20 + 16i64 * *v27));
+      v27 = *v24++;
+      v25 = _mm_min_ps(v25, v20[*v27].m_quad);
     }
     v28 = 0;
-    v29 = (__m128 *)&v32;
+    v29 = (__m128 *)v32;
     while ( 1 )
     {
-      if ( (_mm_movemask_ps(_mm_and_ps(_mm_cmpleps(v25, v29[1]), _mm_cmpleps(*v29, i))) & 7) == 7 )
+      if ( (_mm_movemask_ps(_mm_and_ps(_mm_cmple_ps(v25, v29[1]), _mm_cmple_ps(*v29, i))) & 7) == 7 )
       {
         pair.m_keyA = v28;
         pair.m_keyB = v15;
-        hkaiBooleanOperation::_classifyEdgeAFaceB(v3, &resulta, &pair, v4);
+        hkaiBooleanOperation::_classifyEdgeAFaceB(this, &resulta, &pair, filter);
         if ( resulta.m_enum )
           break;
       }
@@ -1338,55 +1323,54 @@ LABEL_4:
         ++v15;
         if ( v18 >= v17 )
           goto LABEL_13;
-        v16 = (__int64 *)v31;
+        p_m_vertices = v31;
         goto LABEL_4;
       }
     }
-    v7->m_enum = 1;
+    result->m_enum = HK_FAILURE;
   }
-  return v7;
+  return result;
 }
 
 // File Line: 678
 // RVA: 0xBA26E0
-hkResult *__fastcall hkaiBooleanOperation::_sweepAndPruneClassifyEdgeAFaceB(hkaiBooleanOperation *this, hkResult *result, hkaiBooleanFilter *filter, hkArray<hk1AxisSweep::AabbInt,hkContainerTempAllocator> *edgeAabbsA, hkArray<hk1AxisSweep::AabbInt,hkContainerTempAllocator> *faceAabbsB)
+hkResult *__fastcall hkaiBooleanOperation::_sweepAndPruneClassifyEdgeAFaceB(
+        hkaiBooleanOperation *this,
+        hkResult *result,
+        hkaiBooleanFilter *filter,
+        hkArray<hk1AxisSweep::AabbInt,hkContainerTempAllocator> *edgeAabbsA,
+        hkArray<hk1AxisSweep::AabbInt,hkContainerTempAllocator> *faceAabbsB)
 {
-  hk1AxisSweep::AabbInt *v5; // r11
+  hk1AxisSweep::AabbInt *m_data; // r11
   hk1AxisSweep::AabbInt *v6; // rdi
-  hkResult *v7; // rbx
-  hkaiBooleanFilter *v8; // rsi
-  hkaiBooleanOperation *v9; // rbp
   unsigned int v10; // eax
   bool v11; // cf
   bool v12; // zf
-  hk1AxisSweep::AabbInt *v13; // rax
-  hk1AxisSweep::AabbInt *v14; // rcx
-  hk1AxisSweep::IteratorAB v16; // [rsp+20h] [rbp-38h]
-  hkKeyPair pair; // [rsp+78h] [rbp+20h]
+  hk1AxisSweep::AabbInt *m_potentialPtr; // rax
+  hk1AxisSweep::AabbInt *m_pb; // rcx
+  hk1AxisSweep::IteratorAB v16; // [rsp+20h] [rbp-38h] BYREF
+  hkKeyPair pair; // [rsp+78h] [rbp+20h] BYREF
 
-  v5 = edgeAabbsA->m_data;
+  m_data = edgeAabbsA->m_data;
   v6 = faceAabbsB->m_data;
-  v7 = result;
   v16.m_numA = edgeAabbsA->m_size - 4;
-  v8 = filter;
-  v9 = this;
   v16.m_numB = faceAabbsB->m_size - 4;
   v10 = v6->m_min[0];
-  v16.m_pa = v5;
-  v11 = v5->m_min[0] < v10;
-  v12 = v5->m_min[0] == v10;
+  v16.m_pa = m_data;
+  v11 = m_data->m_min[0] < v10;
+  v12 = m_data->m_min[0] == v10;
   v16.m_pb = v6;
   v16.m_aIsBigger = !v11 && !v12;
   if ( v11 || v12 )
   {
-    v16.m_currentPtr = v5;
-    v5 = v6;
+    v16.m_currentPtr = m_data;
+    m_data = v6;
   }
   else
   {
     v16.m_currentPtr = v6;
   }
-  v16.m_potentialPtr = v5 - 1;
+  v16.m_potentialPtr = m_data - 1;
   while ( 1 )
   {
     hk1AxisSweep::IteratorAB::next(&v16);
@@ -1394,67 +1378,66 @@ hkResult *__fastcall hkaiBooleanOperation::_sweepAndPruneClassifyEdgeAFaceB(hkai
       break;
     if ( v16.m_aIsBigger )
     {
-      v13 = v16.m_potentialPtr;
-      v14 = v16.m_pb;
+      m_potentialPtr = v16.m_potentialPtr;
+      m_pb = v16.m_pb;
     }
     else
     {
-      v13 = v16.m_pa;
-      v14 = v16.m_potentialPtr;
+      m_potentialPtr = v16.m_pa;
+      m_pb = v16.m_potentialPtr;
     }
-    pair.m_keyA = *(_DWORD *)v13->m_expansionMin;
-    pair.m_keyB = *(_DWORD *)v14->m_expansionMin;
-    hkaiBooleanOperation::_classifyEdgeAFaceB(v9, (hkResult *)&faceAabbsB, &pair, v8);
+    pair.m_keyA = *(_DWORD *)m_potentialPtr->m_expansionMin;
+    pair.m_keyB = *(_DWORD *)m_pb->m_expansionMin;
+    hkaiBooleanOperation::_classifyEdgeAFaceB(this, (hkResult *)&faceAabbsB, &pair, filter);
     if ( (_DWORD)faceAabbsB )
     {
-      v7->m_enum = 1;
-      return v7;
+      result->m_enum = HK_FAILURE;
+      return result;
     }
   }
-  v7->m_enum = 0;
-  return v7;
+  result->m_enum = HK_SUCCESS;
+  return result;
 }
 
 // File Line: 704
 // RVA: 0xBA27F0
-hkResult *__fastcall hkaiBooleanOperation::_sweepAndPruneClassifyFaceAEdgeB(hkaiBooleanOperation *this, hkResult *result, hkaiBooleanFilter *filter, hkArray<hk1AxisSweep::AabbInt,hkContainerTempAllocator> *faceAabbsA, hkArray<hk1AxisSweep::AabbInt,hkContainerTempAllocator> *edgeAabbsB)
+hkResult *__fastcall hkaiBooleanOperation::_sweepAndPruneClassifyFaceAEdgeB(
+        hkaiBooleanOperation *this,
+        hkResult *result,
+        hkaiBooleanFilter *filter,
+        hkArray<hk1AxisSweep::AabbInt,hkContainerTempAllocator> *faceAabbsA,
+        hkArray<hk1AxisSweep::AabbInt,hkContainerTempAllocator> *edgeAabbsB)
 {
-  hk1AxisSweep::AabbInt *v5; // r11
+  hk1AxisSweep::AabbInt *m_data; // r11
   hk1AxisSweep::AabbInt *v6; // rdi
-  hkResult *v7; // rbx
-  hkaiBooleanFilter *v8; // rsi
-  hkaiBooleanOperation *v9; // rbp
   unsigned int v10; // eax
   bool v11; // cf
   bool v12; // zf
-  hk1AxisSweep::AabbInt *v13; // rax
-  hk1AxisSweep::AabbInt *v14; // rcx
-  hk1AxisSweep::IteratorAB v16; // [rsp+20h] [rbp-38h]
-  hkKeyPair pair; // [rsp+78h] [rbp+20h]
+  hk1AxisSweep::AabbInt *m_potentialPtr; // rax
+  hk1AxisSweep::AabbInt *m_pb; // rcx
+  hk1AxisSweep::IteratorAB v16; // [rsp+20h] [rbp-38h] BYREF
+  hkKeyPair pair; // [rsp+78h] [rbp+20h] BYREF
 
-  v5 = faceAabbsA->m_data;
+  m_data = faceAabbsA->m_data;
   v6 = edgeAabbsB->m_data;
-  v7 = result;
   v16.m_numA = faceAabbsA->m_size - 4;
-  v8 = filter;
-  v9 = this;
   v16.m_numB = edgeAabbsB->m_size - 4;
   v10 = v6->m_min[0];
-  v16.m_pa = v5;
-  v11 = v5->m_min[0] < v10;
-  v12 = v5->m_min[0] == v10;
+  v16.m_pa = m_data;
+  v11 = m_data->m_min[0] < v10;
+  v12 = m_data->m_min[0] == v10;
   v16.m_pb = v6;
   v16.m_aIsBigger = !v11 && !v12;
   if ( v11 || v12 )
   {
-    v16.m_currentPtr = v5;
-    v5 = v6;
+    v16.m_currentPtr = m_data;
+    m_data = v6;
   }
   else
   {
     v16.m_currentPtr = v6;
   }
-  v16.m_potentialPtr = v5 - 1;
+  v16.m_potentialPtr = m_data - 1;
   while ( 1 )
   {
     hk1AxisSweep::IteratorAB::next(&v16);
@@ -1462,101 +1445,98 @@ hkResult *__fastcall hkaiBooleanOperation::_sweepAndPruneClassifyFaceAEdgeB(hkai
       break;
     if ( v16.m_aIsBigger )
     {
-      v13 = v16.m_potentialPtr;
-      v14 = v16.m_pb;
+      m_potentialPtr = v16.m_potentialPtr;
+      m_pb = v16.m_pb;
     }
     else
     {
-      v13 = v16.m_pa;
-      v14 = v16.m_potentialPtr;
+      m_potentialPtr = v16.m_pa;
+      m_pb = v16.m_potentialPtr;
     }
-    pair.m_keyA = *(_DWORD *)v13->m_expansionMin;
-    pair.m_keyB = *(_DWORD *)v14->m_expansionMin;
-    hkaiBooleanOperation::_classifyFaceAEdgeB(v9, (hkResult *)&edgeAabbsB, &pair, v8);
+    pair.m_keyA = *(_DWORD *)m_potentialPtr->m_expansionMin;
+    pair.m_keyB = *(_DWORD *)m_pb->m_expansionMin;
+    hkaiBooleanOperation::_classifyFaceAEdgeB(this, (hkResult *)&edgeAabbsB, &pair, filter);
     if ( (_DWORD)edgeAabbsB )
     {
-      v7->m_enum = 1;
-      return v7;
+      result->m_enum = HK_FAILURE;
+      return result;
     }
   }
-  v7->m_enum = 0;
-  return v7;
+  result->m_enum = HK_SUCCESS;
+  return result;
 }
 
 // File Line: 728
 // RVA: 0xBA2390
-hkResult *__fastcall hkaiBooleanOperation::_classifyEdgeAFaceB(hkaiBooleanOperation *this, hkResult *result, hkKeyPair *pair, hkaiBooleanFilter *filter)
+hkResult *__fastcall hkaiBooleanOperation::_classifyEdgeAFaceB(
+        hkaiBooleanOperation *this,
+        hkResult *result,
+        hkKeyPair *pair,
+        hkaiBooleanFilter *filter)
 {
-  hkaiEdgeGeometry::Edge *const **v4; // rax
-  __int64 v5; // r10
-  unsigned int v6; // er13
+  hkaiEdgeGeometry::Edge *const **m_data; // rax
+  __int64 m_keyA; // r10
+  unsigned int m_keyB; // r13d
   hkaiEdgeGeometry::Edge **v7; // r14
-  hkaiBooleanOperation *v8; // rsi
   hkaiEdgeGeometry::Edge *const *v9; // rbp
   hkaiEdgeGeometry::Edge *v10; // r15
-  hkaiBooleanFilter *v11; // r12
-  hkResult *v12; // rdi
   hkaiEdgeGeometry::Edge **v13; // rbx
-  int v14; // er15
-  hkaiEdgeGeometry *v15; // rcx
+  int v14; // r15d
+  hkaiEdgeGeometry *m_geometry; // rcx
   __int64 v16; // rax
   hkaiEdgeGeometry::Edge *const **v17; // rcx
   hkaiEdgeGeometry::Edge *v18; // rbp
-  unsigned int v19; // er9
-  int count; // er15
+  unsigned int v19; // r9d
+  int count; // r15d
   __int64 index; // rbx
   unsigned int *v22; // r8
   unsigned __int64 v23; // rbx
-  unsigned __int64 v24; // r13
-  int v25; // er9
-  hkArray<hkVector4f,hkContainerHeapAllocator> *v26; // rsi
-  int v27; // er9
+  unsigned __int64 m_faceFaceFeatureCount; // r13
+  int m_size; // r9d
+  hkArray<hkVector4f,hkContainerHeapAllocator> *p_m_intersectVertices; // rsi
+  int v27; // r9d
   int v28; // eax
   int v29; // eax
   int v31; // [rsp+30h] [rbp-88h]
-  hkResult v32; // [rsp+34h] [rbp-84h]
+  hkResult v32; // [rsp+34h] [rbp-84h] BYREF
   int v33; // [rsp+38h] [rbp-80h]
   unsigned int v34; // [rsp+3Ch] [rbp-7Ch]
-  hkResult v35[2]; // [rsp+40h] [rbp-78h]
-  hkResult v36[2]; // [rsp+48h] [rbp-70h]
-  hkResult resulta; // [rsp+50h] [rbp-68h]
+  hkResult v35[2]; // [rsp+40h] [rbp-78h] BYREF
+  hkResult v36[2]; // [rsp+48h] [rbp-70h] BYREF
+  hkResult resulta; // [rsp+50h] [rbp-68h] BYREF
   __int64 v38; // [rsp+58h] [rbp-60h]
   hkaiEdgeGeometry::Edge **v39; // [rsp+60h] [rbp-58h]
-  hkVector4f res; // [rsp+70h] [rbp-48h]
-  unsigned int a; // [rsp+C0h] [rbp+8h]
+  hkVector4f res; // [rsp+70h] [rbp-48h] BYREF
+  unsigned int a; // [rsp+C0h] [rbp+8h] BYREF
   int v42; // [rsp+D0h] [rbp+18h]
 
-  v4 = this->m_a.m_uniqueEdges.m_startUniqueEdge.m_data;
-  v5 = (signed int)pair->m_keyA;
-  v6 = pair->m_keyB;
-  v7 = (hkaiEdgeGeometry::Edge **)v4[v5];
-  v8 = this;
-  v9 = v4[v5 + 1];
+  m_data = this->m_a.m_uniqueEdges.m_startUniqueEdge.m_data;
+  m_keyA = (int)pair->m_keyA;
+  m_keyB = pair->m_keyB;
+  v7 = (hkaiEdgeGeometry::Edge **)m_data[m_keyA];
+  v9 = m_data[m_keyA + 1];
   v10 = *v7;
-  v11 = filter;
-  v12 = result;
-  v34 = pair->m_keyB;
+  v34 = m_keyB;
   v13 = v7;
   *(_QWORD *)&v36[0].m_enum = v10;
-  *(_QWORD *)&v35[0].m_enum = 8 * v5 + 8;
+  *(_QWORD *)&v35[0].m_enum = 8 * m_keyA + 8;
   if ( v7 != v9 )
   {
-    while ( !v11->vfptr->canFacesIntersect(v11, (*v13)->m_face, v6) )
+    while ( !filter->vfptr->canFacesIntersect(filter, (*v13)->m_face, m_keyB) )
     {
-      ++v13;
-      if ( v13 == v9 )
+      if ( ++v13 == v9 )
         goto LABEL_28;
     }
-    v14 = hkaiBooleanOperation::_x12(v8, v10, v6, &res);
+    v14 = hkaiBooleanOperation::_x12(this, v10, m_keyB, &res);
     v42 = v14;
     if ( v14 )
     {
-      v15 = v8->m_a.m_geometry;
-      a = v8->m_intersectVertices.m_size + v8->m_intersectBase;
+      m_geometry = this->m_a.m_geometry;
+      a = this->m_intersectVertices.m_size + this->m_intersectBase;
       v33 = **(_DWORD **)&v36[0].m_enum;
       v31 = 0;
-      v16 = (__int64)v15->m_edges.m_data;
-      v17 = v8->m_a.m_uniqueEdges.m_startUniqueEdge.m_data;
+      v16 = (__int64)m_geometry->m_edges.m_data;
+      v17 = this->m_a.m_uniqueEdges.m_startUniqueEdge.m_data;
       v38 = v16;
       v39 = *(hkaiEdgeGeometry::Edge ***)((char *)v17 + *(_QWORD *)&v35[0].m_enum);
       if ( v7 != v39 )
@@ -1564,45 +1544,45 @@ hkResult *__fastcall hkaiBooleanOperation::_classifyEdgeAFaceB(hkaiBooleanOperat
         do
         {
           v18 = *v7;
-          if ( v11->vfptr->canFacesIntersect(v11, (*v7)->m_face, v6) )
+          if ( filter->vfptr->canFacesIntersect(filter, (*v7)->m_face, m_keyB) )
           {
             v19 = a;
             ++v31;
             count = -v14;
-            index = ((signed __int64)v18 - v38) >> 4;
-            v22 = &v8->m_edgeAIntersected.m_storage.m_words.m_data[(signed __int64)(signed int)index >> 5];
+            index = ((__int64)v18 - v38) >> 4;
+            v22 = &this->m_edgeAIntersected.m_storage.m_words.m_data[(__int64)(int)index >> 5];
             *v22 |= 1 << (index & 0x1F);
-            hkaiBooleanOperation::_addStartEndVertices(v8, &resulta, index, v19, index, count);
+            hkaiBooleanOperation::_addStartEndVertices(this, &resulta, index, v19, index, count);
             if ( resulta.m_enum )
               goto LABEL_23;
-            hkaiBooleanOperation::_addStartEndVertices(v8, v35, index, a, index, v42);
+            hkaiBooleanOperation::_addStartEndVertices(this, v35, index, a, index, v42);
             if ( v35[0].m_enum )
               goto LABEL_23;
-            v32.m_enum = 0;
-            v23 = v6 | ((unsigned __int64)v18->m_face << 32);
-            LODWORD(v24) = hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::getWithDefault(
-                             (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&v8->m_faceFaceFeatureMap.m_map.m_elem,
-                             v23,
-                             0xFFFFFFFFFFFFFFFFui64);
-            if ( (v24 & 0x80000000) != 0i64 )
+            v32.m_enum = HK_SUCCESS;
+            v23 = m_keyB | ((unsigned __int64)v18->m_face << 32);
+            LODWORD(m_faceFaceFeatureCount) = hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::getWithDefault(
+                                                &this->m_faceFaceFeatureMap.m_map,
+                                                v23,
+                                                0xFFFFFFFFFFFFFFFFui64);
+            if ( (m_faceFaceFeatureCount & 0x80000000) != 0i64 )
             {
-              v24 = (signed int)v8->m_faceFaceFeatureCount;
-              v8->m_faceFaceFeatureCount = v24 + 1;
+              m_faceFaceFeatureCount = (int)this->m_faceFaceFeatureCount;
+              this->m_faceFaceFeatureCount = m_faceFaceFeatureCount + 1;
               hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::tryInsert(
-                (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&v8->m_faceFaceFeatureMap.m_map.m_elem,
-                (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
+                &this->m_faceFaceFeatureMap.m_map,
+                &hkContainerHeapAllocator::s_alloc,
                 v23,
-                v24,
+                m_faceFaceFeatureCount,
                 &v32);
             }
             if ( v32.m_enum )
               goto LABEL_23;
             if ( v33 == v18->m_a )
               count = v42;
-            hkaiBooleanOperation::_addStartEndVertices(v8, v36, v24, a, v18->m_face, -count);
+            hkaiBooleanOperation::_addStartEndVertices(this, v36, m_faceFaceFeatureCount, a, v18->m_face, -count);
             if ( v36[0].m_enum )
               goto LABEL_23;
-            v6 = v34;
+            m_keyB = v34;
             v14 = v42;
           }
           ++v7;
@@ -1610,10 +1590,10 @@ hkResult *__fastcall hkaiBooleanOperation::_classifyEdgeAFaceB(hkaiBooleanOperat
         while ( v7 != v39 );
         if ( !v31 )
           goto LABEL_28;
-        v25 = v8->m_intersectVertices.m_size;
-        v26 = &v8->m_intersectVertices;
-        v27 = v25 + 16;
-        v28 = v26->m_capacityAndFlags & 0x3FFFFFFF;
+        m_size = this->m_intersectVertices.m_size;
+        p_m_intersectVertices = &this->m_intersectVertices;
+        v27 = m_size + 16;
+        v28 = p_m_intersectVertices->m_capacityAndFlags & 0x3FFFFFFF;
         if ( v28 >= v27 )
         {
           a = 0;
@@ -1623,117 +1603,109 @@ hkResult *__fastcall hkaiBooleanOperation::_classifyEdgeAFaceB(hkaiBooleanOperat
           v29 = 2 * v28;
           if ( v27 < v29 )
             v27 = v29;
-          hkArrayUtil::_reserve(
-            (hkResult *)&a,
-            (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-            v26,
-            v27,
-            16);
+          hkArrayUtil::_reserve((hkResult *)&a, &hkContainerHeapAllocator::s_alloc, p_m_intersectVertices, v27, 16);
           if ( a )
           {
 LABEL_23:
-            v12->m_enum = 1;
-            return v12;
+            result->m_enum = HK_FAILURE;
+            return result;
           }
         }
-        if ( v26->m_size == (v26->m_capacityAndFlags & 0x3FFFFFFF) )
-          hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v26, 16);
-        v26->m_data[v26->m_size++] = (hkVector4f)res.m_quad;
+        if ( p_m_intersectVertices->m_size == (p_m_intersectVertices->m_capacityAndFlags & 0x3FFFFFFF) )
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, p_m_intersectVertices, 16);
+        p_m_intersectVertices->m_data[p_m_intersectVertices->m_size++] = (hkVector4f)res.m_quad;
       }
     }
   }
 LABEL_28:
-  v12->m_enum = 0;
-  return v12;
+  result->m_enum = HK_SUCCESS;
+  return result;
 }
 
 // File Line: 831
 // RVA: 0xBA2100
-hkResult *__fastcall hkaiBooleanOperation::_classifyFaceAEdgeB(hkaiBooleanOperation *this, hkResult *result, hkKeyPair *pair, hkaiBooleanFilter *filter)
+hkResult *__fastcall hkaiBooleanOperation::_classifyFaceAEdgeB(
+        hkaiBooleanOperation *this,
+        hkResult *result,
+        hkKeyPair *pair,
+        hkaiBooleanFilter *filter)
 {
-  hkaiEdgeGeometry::Edge *const **v4; // rax
-  __int64 v5; // r10
-  __int64 v6; // r15
+  hkaiEdgeGeometry::Edge *const **m_data; // rax
+  __int64 m_keyB; // r10
+  __int64 m_keyA; // r15
   hkaiEdgeGeometry::Edge **v7; // rdi
-  signed __int64 v8; // r13
-  hkaiBooleanOperation *v9; // rbp
+  __int64 v8; // r13
   hkaiEdgeGeometry::Edge **v10; // r14
-  hkaiBooleanFilter *v11; // r12
-  hkResult *v12; // rsi
-  hkaiEdgeGeometry::Edge *const *v13; // rbx
-  int v15; // eax
+  hkaiEdgeGeometry::Edge **v13; // rbx
+  int m_intersectBase; // eax
   hkaiEdgeGeometry::Edge *const **v16; // rcx
   hkaiEdgeGeometry::Edge *v17; // rbx
   unsigned __int64 v18; // r14
-  unsigned __int64 v19; // r13
+  unsigned __int64 m_faceFaceFeatureCount; // r13
   int count; // eax
-  int v21; // er9
+  int v21; // r9d
   int v22; // eax
   int v23; // eax
   int v24; // [rsp+30h] [rbp-68h]
-  int a; // [rsp+34h] [rbp-64h]
-  hkResult resulta; // [rsp+38h] [rbp-60h]
+  unsigned int a; // [rsp+34h] [rbp-64h]
+  hkResult resulta; // [rsp+38h] [rbp-60h] BYREF
   hkaiEdgeGeometry::Edge *edgeB; // [rsp+40h] [rbp-58h]
   hkaiEdgeGeometry::Edge **v28; // [rsp+48h] [rbp-50h]
-  hkVector4f res; // [rsp+50h] [rbp-48h]
-  hkResult v30; // [rsp+A0h] [rbp+8h]
-  hkResult v31; // [rsp+B0h] [rbp+18h]
+  hkVector4f res; // [rsp+50h] [rbp-48h] BYREF
+  hkResult v30; // [rsp+A0h] [rbp+8h] BYREF
+  hkResult v31; // [rsp+B0h] [rbp+18h] BYREF
 
-  v4 = this->m_b.m_uniqueEdges.m_startUniqueEdge.m_data;
-  v5 = (signed int)pair->m_keyB;
-  v6 = pair->m_keyA;
-  v7 = (hkaiEdgeGeometry::Edge **)v4[v5];
-  v8 = 8 * v5 + 8;
-  v9 = this;
-  v10 = *(hkaiEdgeGeometry::Edge ***)((char *)v4 + v8);
-  v11 = filter;
-  v12 = result;
-  v13 = v4[v5];
+  m_data = this->m_b.m_uniqueEdges.m_startUniqueEdge.m_data;
+  m_keyB = (int)pair->m_keyB;
+  m_keyA = pair->m_keyA;
+  v7 = (hkaiEdgeGeometry::Edge **)m_data[m_keyB];
+  v8 = 8 * m_keyB + 8;
+  v10 = *(hkaiEdgeGeometry::Edge ***)((char *)m_data + v8);
+  v13 = v7;
   edgeB = *v7;
   if ( v7 == v10 )
   {
 LABEL_4:
-    v12->m_enum = 0;
+    result->m_enum = HK_SUCCESS;
   }
   else
   {
-    while ( !v11->vfptr->canFacesIntersect(v11, v6, (*v13)->m_face) )
+    while ( !filter->vfptr->canFacesIntersect(filter, m_keyA, (*v13)->m_face) )
     {
-      ++v13;
-      if ( v13 == v10 )
+      if ( ++v13 == v10 )
         goto LABEL_4;
     }
-    v24 = hkaiBooleanOperation::_x21(v9, v6, edgeB, &res);
+    v24 = hkaiBooleanOperation::_x21(this, m_keyA, edgeB, &res);
     if ( v24 )
     {
-      v15 = v9->m_intersectBase;
-      v16 = v9->m_b.m_uniqueEdges.m_startUniqueEdge.m_data;
-      v30.m_enum = 0;
-      a = v9->m_intersectVertices.m_size + v15;
+      m_intersectBase = this->m_intersectBase;
+      v16 = this->m_b.m_uniqueEdges.m_startUniqueEdge.m_data;
+      v30.m_enum = HK_SUCCESS;
+      a = this->m_intersectVertices.m_size + m_intersectBase;
       v28 = *(hkaiEdgeGeometry::Edge ***)((char *)v16 + v8);
       if ( v7 != v28 )
       {
         do
         {
           v17 = *v7;
-          if ( v11->vfptr->canFacesIntersect(v11, v6, (*v7)->m_face) )
+          if ( filter->vfptr->canFacesIntersect(filter, m_keyA, (*v7)->m_face) )
           {
             ++v30.m_enum;
-            v31.m_enum = 0;
-            v18 = v17->m_face | (unsigned __int64)(v6 << 32);
-            LODWORD(v19) = hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::getWithDefault(
-                             (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&v9->m_faceFaceFeatureMap.m_map.m_elem,
-                             v18,
-                             0xFFFFFFFFFFFFFFFFui64);
-            if ( (v19 & 0x80000000) != 0i64 )
+            v31.m_enum = HK_SUCCESS;
+            v18 = v17->m_face | (unsigned __int64)(m_keyA << 32);
+            LODWORD(m_faceFaceFeatureCount) = hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::getWithDefault(
+                                                &this->m_faceFaceFeatureMap.m_map,
+                                                v18,
+                                                0xFFFFFFFFFFFFFFFFui64);
+            if ( (m_faceFaceFeatureCount & 0x80000000) != 0i64 )
             {
-              v19 = (signed int)v9->m_faceFaceFeatureCount;
-              v9->m_faceFaceFeatureCount = v19 + 1;
+              m_faceFaceFeatureCount = (int)this->m_faceFaceFeatureCount;
+              this->m_faceFaceFeatureCount = m_faceFaceFeatureCount + 1;
               hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::tryInsert(
-                (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&v9->m_faceFaceFeatureMap.m_map.m_elem,
-                (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
+                &this->m_faceFaceFeatureMap.m_map,
+                &hkContainerHeapAllocator::s_alloc,
                 v18,
-                v19,
+                m_faceFaceFeatureCount,
                 &v31);
             }
             if ( v31.m_enum )
@@ -1741,7 +1713,7 @@ LABEL_4:
             count = v24;
             if ( edgeB->m_a != v17->m_a )
               count = -v24;
-            hkaiBooleanOperation::_addStartEndVertices(v9, &resulta, v19, a, v6, count);
+            hkaiBooleanOperation::_addStartEndVertices(this, &resulta, m_faceFaceFeatureCount, a, m_keyA, count);
             if ( resulta.m_enum )
               goto LABEL_21;
           }
@@ -1750,126 +1722,116 @@ LABEL_4:
         while ( v7 != v28 );
         if ( v30.m_enum == HK_SUCCESS )
           goto LABEL_26;
-        v21 = v9->m_intersectVertices.m_size + 16;
-        v22 = v9->m_intersectVertices.m_capacityAndFlags & 0x3FFFFFFF;
+        v21 = this->m_intersectVertices.m_size + 16;
+        v22 = this->m_intersectVertices.m_capacityAndFlags & 0x3FFFFFFF;
         if ( v22 >= v21 )
         {
-          v30.m_enum = 0;
+          v30.m_enum = HK_SUCCESS;
         }
         else
         {
           v23 = 2 * v22;
           if ( v21 < v23 )
             v21 = v23;
-          hkArrayUtil::_reserve(
-            &v30,
-            (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-            &v9->m_intersectVertices,
-            v21,
-            16);
+          hkArrayUtil::_reserve(&v30, &hkContainerHeapAllocator::s_alloc, &this->m_intersectVertices, v21, 16);
           if ( v30.m_enum )
           {
 LABEL_21:
-            v12->m_enum = 1;
-            return v12;
+            result->m_enum = HK_FAILURE;
+            return result;
           }
         }
-        if ( v9->m_intersectVertices.m_size == (v9->m_intersectVertices.m_capacityAndFlags & 0x3FFFFFFF) )
-          hkArrayUtil::_reserveMore(
-            (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-            &v9->m_intersectVertices,
-            16);
-        v9->m_intersectVertices.m_data[v9->m_intersectVertices.m_size++] = (hkVector4f)res.m_quad;
+        if ( this->m_intersectVertices.m_size == (this->m_intersectVertices.m_capacityAndFlags & 0x3FFFFFFF) )
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &this->m_intersectVertices, 16);
+        this->m_intersectVertices.m_data[this->m_intersectVertices.m_size++] = (hkVector4f)res.m_quad;
       }
     }
 LABEL_26:
-    v12->m_enum = 0;
+    result->m_enum = HK_SUCCESS;
   }
-  return v12;
+  return result;
 }
 
 // File Line: 915
 // RVA: 0xBA0BE0
-hkResult *__fastcall hkaiBooleanOperation::_addCompleteEdges(hkaiBooleanOperation *this, hkResult *result, hkaiBooleanFilter *filter, hkaiEdgeGeometry *geomOut)
+hkResult *__fastcall hkaiBooleanOperation::_addCompleteEdges(
+        hkaiBooleanOperation *this,
+        hkResult *result,
+        hkaiBooleanFilter *filter,
+        hkaiEdgeGeometry *geomOut)
 {
-  hkaiEdgeGeometry *v4; // rax
-  unsigned int *v5; // r8
+  hkaiEdgeGeometry *m_geometry; // rax
+  unsigned int *m_data; // r8
   hkaiBooleanOperation *v6; // rsi
-  int v7; // er12
+  int m_size; // r12d
   hkResult *v8; // r13
   char v9; // cl
-  int v10; // er14
-  hkaiEdgeGeometry *v11; // rbx
+  int v10; // r14d
   int v12; // edx
   __int64 v13; // rcx
-  __m128i v14; // xmm2
+  __m128i si128; // xmm2
   __m128i v15; // xmm3
   __m128i v16; // xmm4
   int v17; // eax
-  __m128i v18; // xmm0
-  __m128i v19; // xmm1
+  __m128i v18; // xmm1
+  __m128i v19; // xmm0
   __m128i v20; // xmm0
   __m128i v21; // xmm1
   int v22; // edi
   int v23; // eax
-  int v24; // er9
+  int v24; // r9d
   int v25; // eax
-  hkArray<hkaiBooleanOperation::SortVertex,hkContainerHeapAllocator> *v26; // r15
-  int v27; // er9
+  hkArray<hkaiBooleanOperation::SortVertex,hkContainerHeapAllocator> *p_m_startVertices; // r15
+  int v27; // r9d
   int v28; // eax
   int v29; // eax
-  hkArray<hkaiBooleanOperation::SortVertex,hkContainerHeapAllocator> *v30; // rbp
-  int v31; // er9
+  hkArray<hkaiBooleanOperation::SortVertex,hkContainerHeapAllocator> *p_m_endVertices; // rbp
+  int v31; // r9d
   int v32; // eax
   int v33; // eax
-  hkResultEnum v34; // eax
+  hkResultEnum m_enum; // eax
   __int64 v35; // r14
-  int v36; // er9
+  int v36; // r9d
   int v37; // eax
   int v38; // eax
-  signed __int64 v39; // r14
-  hkaiEdgeGeometry::Edge *v40; // rdi
+  hkaiEdgeGeometry::Edge *v39; // r14
+  unsigned int *p_m_a; // rdi
   int v41; // ebx
-  int v42; // er13
+  int v42; // r13d
   __int64 v43; // r12
   hkaiBooleanOperation::SortVertex *v44; // rsi
   hkaiBooleanOperation::SortVertex *v45; // rcx
-  hkResult resulta; // [rsp+30h] [rbp-58h]
-  hkResult v48; // [rsp+34h] [rbp-54h]
+  hkResult resulta; // [rsp+30h] [rbp-58h] BYREF
+  hkResult v48; // [rsp+34h] [rbp-54h] BYREF
   int v49; // [rsp+38h] [rbp-50h]
-  hkResult v50; // [rsp+3Ch] [rbp-4Ch]
-  hkArray<hkaiEdgeGeometry::Edge,hkContainerHeapAllocator> *v51; // [rsp+40h] [rbp-48h]
-  hkaiBooleanOperation *v52; // [rsp+90h] [rbp+8h]
-  hkResult *v53; // [rsp+98h] [rbp+10h]
-  hkResult v54; // [rsp+A8h] [rbp+20h]
+  hkResult v50; // [rsp+3Ch] [rbp-4Ch] BYREF
+  hkArray<hkaiEdgeGeometry::Edge,hkContainerHeapAllocator> *p_m_edges; // [rsp+40h] [rbp-48h]
+  hkResult v54; // [rsp+A8h] [rbp+20h] BYREF
 
-  v53 = result;
-  v52 = this;
-  v4 = this->m_a.m_geometry;
-  v5 = this->m_edgeAIntersected.m_storage.m_words.m_data;
+  m_geometry = this->m_a.m_geometry;
+  m_data = this->m_edgeAIntersected.m_storage.m_words.m_data;
   v6 = this;
-  v7 = v4->m_edges.m_size;
+  m_size = m_geometry->m_edges.m_size;
   v8 = result;
   v9 = (this->m_edgeAIntersected.m_storage.m_numBits - 1) & 0x1F;
-  v51 = &v4->m_edges;
-  LODWORD(v4) = v6->m_edgeAIntersected.m_storage.m_words.m_size;
+  p_m_edges = &m_geometry->m_edges;
+  LODWORD(m_geometry) = v6->m_edgeAIntersected.m_storage.m_words.m_size;
   v10 = 0;
-  v11 = geomOut;
-  v49 = v7;
-  v12 = 2 * ~(-1 << v9) | 1;
-  LODWORD(v4) = (_DWORD)v4 - 1;
-  v13 = (signed int)v4;
-  if ( (signed int)v4 >= 0 )
+  v49 = m_size;
+  v12 = (2 * ~(-1 << v9)) | 1;
+  LODWORD(m_geometry) = (_DWORD)m_geometry - 1;
+  v13 = (int)m_geometry;
+  if ( (int)m_geometry >= 0 )
   {
-    v14 = _mm_load_si128((const __m128i *)&_xmm);
+    si128 = _mm_load_si128((const __m128i *)&_xmm);
     v15 = _mm_load_si128((const __m128i *)&_xmm);
     v16 = _mm_load_si128((const __m128i *)&_xmm);
     do
     {
-      v17 = v12 & v5[v13];
+      v17 = v12 & m_data[v13];
       v12 = -1;
       v18 = _mm_cvtsi32_si128(v17);
-      v19 = _mm_add_epi8(_mm_and_si128(_mm_srli_epi16(v18, 1u), v14), _mm_and_si128(v18, v14));
+      v19 = _mm_add_epi8(_mm_and_si128(_mm_srli_epi16(v18, 1u), si128), _mm_and_si128(v18, si128));
       v20 = _mm_add_epi8(_mm_and_si128(_mm_srli_epi16(v19, 2u), v15), _mm_and_si128(v19, v15));
       v21 = _mm_sad_epu8(_mm_and_si128(_mm_add_epi8(_mm_srli_epi16(v20, 4u), v20), v16), (__m128i)0i64);
       v10 += _mm_cvtsi128_si32(_mm_add_epi32(_mm_shuffle_epi32(v21, 78), v21));
@@ -1877,292 +1839,280 @@ hkResult *__fastcall hkaiBooleanOperation::_addCompleteEdges(hkaiBooleanOperatio
     }
     while ( v13 >= 0 );
   }
-  v22 = v7 - v10;
+  v22 = m_size - v10;
   v23 = geomOut->m_edges.m_capacityAndFlags & 0x3FFFFFFF;
-  v24 = v7 - v10 + geomOut->m_edges.m_size;
+  v24 = m_size - v10 + geomOut->m_edges.m_size;
   if ( v23 >= v24 )
   {
-    resulta.m_enum = 0;
+    resulta.m_enum = HK_SUCCESS;
   }
   else
   {
     v25 = 2 * v23;
     if ( v24 < v25 )
       v24 = v25;
-    hkArrayUtil::_reserve(
-      &resulta,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &v11->m_edges,
-      v24,
-      16);
+    hkArrayUtil::_reserve(&resulta, &hkContainerHeapAllocator::s_alloc, &geomOut->m_edges, v24, 16);
   }
-  v26 = &v6->m_startVertices;
+  p_m_startVertices = &v6->m_startVertices;
   v27 = v10 + v6->m_startVertices.m_size;
   v28 = v6->m_startVertices.m_capacityAndFlags & 0x3FFFFFFF;
   if ( v28 >= v27 )
   {
-    v48.m_enum = 0;
+    v48.m_enum = HK_SUCCESS;
   }
   else
   {
     v29 = 2 * v28;
     if ( v27 < v29 )
       v27 = v29;
-    hkArrayUtil::_reserve(
-      &v48,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &v6->m_startVertices,
-      v27,
-      16);
+    hkArrayUtil::_reserve(&v48, &hkContainerHeapAllocator::s_alloc, &v6->m_startVertices, v27, 16);
   }
-  v30 = &v6->m_endVertices;
+  p_m_endVertices = &v6->m_endVertices;
   v31 = v10 + v6->m_endVertices.m_size;
   v32 = v6->m_endVertices.m_capacityAndFlags & 0x3FFFFFFF;
   if ( v32 >= v31 )
   {
-    v34 = 0;
-    v54.m_enum = 0;
+    m_enum = HK_SUCCESS;
+    v54.m_enum = HK_SUCCESS;
   }
   else
   {
     v33 = 2 * v32;
     if ( v31 < v33 )
       v31 = v33;
-    hkArrayUtil::_reserve(
-      &v54,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &v6->m_endVertices,
-      v31,
-      16);
-    v34 = v54.m_enum;
+    hkArrayUtil::_reserve(&v54, &hkContainerHeapAllocator::s_alloc, &v6->m_endVertices, v31, 16);
+    m_enum = v54.m_enum;
   }
-  if ( resulta.m_enum || v48.m_enum || v34 )
+  if ( resulta.m_enum || v48.m_enum || m_enum )
   {
-    v8->m_enum = 1;
+    v8->m_enum = HK_FAILURE;
   }
   else
   {
-    v35 = v11->m_edges.m_size;
+    v35 = geomOut->m_edges.m_size;
     v36 = v35 + v22;
-    v37 = v11->m_edges.m_capacityAndFlags & 0x3FFFFFFF;
-    if ( v37 < (signed int)v35 + v22 )
+    v37 = geomOut->m_edges.m_capacityAndFlags & 0x3FFFFFFF;
+    if ( v37 < (int)v35 + v22 )
     {
       v38 = 2 * v37;
       if ( v36 < v38 )
         v36 = v38;
-      hkArrayUtil::_reserve(&v50, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v11->m_edges, v36, 16);
+      hkArrayUtil::_reserve(&v50, &hkContainerHeapAllocator::s_alloc, &geomOut->m_edges, v36, 16);
     }
-    v11->m_edges.m_size += v22;
-    v39 = (signed __int64)&v11->m_edges.m_data[v35];
-    v40 = v51->m_data;
+    geomOut->m_edges.m_size += v22;
+    v39 = &geomOut->m_edges.m_data[v35];
+    p_m_a = &p_m_edges->m_data->m_a;
     v41 = 0;
-    if ( v7 > 0 )
+    if ( m_size > 0 )
     {
       v42 = v49;
       v43 = 0i64;
       do
       {
-        if ( (v6->m_edgeAIntersected.m_storage.m_words.m_data[v43 >> 5] >> (v41 & 0x1F)) & 1 )
+        if ( ((v6->m_edgeAIntersected.m_storage.m_words.m_data[v43 >> 5] >> (v41 & 0x1F)) & 1) != 0 )
         {
-          if ( v30->m_size == (v30->m_capacityAndFlags & 0x3FFFFFFF) )
-            hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v30, 16);
-          v44 = &v30->m_data[v30->m_size++];
-          if ( v26->m_size == (v26->m_capacityAndFlags & 0x3FFFFFFF) )
-            hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v26, 16);
-          v45 = &v26->m_data[v26->m_size++];
+          if ( p_m_endVertices->m_size == (p_m_endVertices->m_capacityAndFlags & 0x3FFFFFFF) )
+            hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, p_m_endVertices, 16);
+          v44 = &p_m_endVertices->m_data[p_m_endVertices->m_size++];
+          if ( p_m_startVertices->m_size == (p_m_startVertices->m_capacityAndFlags & 0x3FFFFFFF) )
+            hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, p_m_startVertices, 16);
+          v45 = &p_m_startVertices->m_data[p_m_startVertices->m_size++];
           v45->m_feature = v41;
           v45->m_index = v41;
-          v45->m_vertexIndex = v40->m_a;
+          v45->m_vertexIndex = *p_m_a;
           v44->m_feature = v41;
           v44->m_index = v41;
-          v44->m_vertexIndex = v40->m_b;
-          v6 = v52;
+          v44->m_vertexIndex = p_m_a[1];
+          v6 = this;
         }
         else
         {
-          v39 += 16i64;
-          *(_DWORD *)(v39 - 16) = v40->m_a;
-          *(_DWORD *)(v39 - 12) = v40->m_b;
-          *(_DWORD *)(v39 - 8) = v40->m_face;
-          *(_DWORD *)(v39 - 4) = v40->m_data;
+          ++v39;
+          v39[-1].m_a = *p_m_a;
+          v39[-1].m_b = p_m_a[1];
+          v39[-1].m_face = p_m_a[2];
+          v39[-1].m_data = p_m_a[3];
         }
         ++v41;
         ++v43;
-        ++v40;
+        p_m_a += 4;
       }
       while ( v41 < v42 );
-      v8 = v53;
+      v8 = result;
     }
-    v8->m_enum = 0;
+    v8->m_enum = HK_SUCCESS;
   }
   return v8;
 }
 
 // File Line: 972
 // RVA: 0xBA3D90
-bool __fastcall hkaiBooleanOperation_orderFeatures(hkaiBooleanOperation::SortVertex *a, hkaiBooleanOperation::SortVertex *b)
+bool __fastcall hkaiBooleanOperation_orderFeatures(
+        hkaiBooleanOperation::SortVertex *a,
+        hkaiBooleanOperation::SortVertex *b)
 {
-  bool result; // al
-
   if ( a->m_feature == b->m_feature )
-    result = a->m_index < b->m_index;
+    return a->m_index < b->m_index;
   else
-    result = a->m_feature < b->m_feature;
-  return result;
+    return a->m_feature < b->m_feature;
 }
 
 // File Line: 981
 // RVA: 0xBA3DC0
-bool __fastcall hkaiBooleanOperation_compareDist(hkaiBooleanOperation::SortVertex *a, hkaiBooleanOperation::SortVertex *b)
+bool __fastcall hkaiBooleanOperation_compareDist(
+        hkaiBooleanOperation::SortVertex *a,
+        hkaiBooleanOperation::SortVertex *b)
 {
   return a->m_dist < b->m_dist;
 }
 
 // File Line: 1011
 // RVA: 0xBA0F60
-hkResult *__fastcall hkaiBooleanOperation::_addPartialEdges(hkaiBooleanOperation *this, hkResult *result, hkArray<hkVector4f,hkContainerHeapAllocator> *faceNormals, hkaiEdgeGeometry *geomOut, hkaiBooleanFaceFaceIntersects *intersects)
+hkResult *__fastcall hkaiBooleanOperation::_addPartialEdges(
+        hkaiBooleanOperation *this,
+        hkResult *result,
+        hkArray<hkVector4f,hkContainerHeapAllocator> *faceNormals,
+        hkaiEdgeGeometry *geomOut,
+        hkaiBooleanFaceFaceIntersects *intersects)
 {
-  int v5; // er8
+  int m_size; // r8d
   hkaiEdgeGeometry *v6; // r14
   hkResult *v7; // r12
   hkaiBooleanOperation *v8; // r13
-  signed int v9; // er8
+  int v9; // r8d
   int v10; // ebx
-  int v11; // er9
-  __int64 v12; // r8
-  int v13; // edx
-  __int64 v14; // rcx
-  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> >::Pair *v15; // rax
-  int v16; // er9
-  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> >::Pair *v17; // rax
-  unsigned __int64 v18; // r8
-  char *v19; // rdx
-  unsigned __int64 v20; // rax
-  __int64 v21; // r8
-  int v22; // edx
-  __int64 v23; // rcx
-  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> >::Pair *v24; // rax
-  hkArray<hkaiBooleanOperation::SortVertex,hkContainerHeapAllocator> *v25; // rbx
-  int v26; // er9
-  int v27; // eax
-  int v28; // eax
-  int v29; // er8
-  int v31; // eax
-  hkArray<hkaiEdgeGeometry::Edge,hkContainerHeapAllocator> *v32; // r9
-  __int64 v33; // rcx
-  hkaiBooleanOperation::SortVertex *v34; // rcx
-  hkaiBooleanOperation::SortVertex *v35; // rbx
-  hkaiBooleanOperation::SortVertex *v36; // rsi
-  __int64 v37; // rcx
-  unsigned int v38; // edi
-  hkaiBooleanOperation::SortVertex *v39; // rax
-  unsigned int v40; // er15
-  signed __int64 v41; // r14
-  signed int *v42; // r13
-  int v43; // er9
-  int v44; // er9
-  int v45; // eax
+  __int64 m_hashMod; // r8
+  int v12; // edx
+  __int64 v13; // rcx
+  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> >::Pair *m_elem; // rax
+  int v15; // r9d
+  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> >::Pair *v16; // rax
+  unsigned __int64 key; // r8
+  char *v18; // rdx
+  __int64 v19; // r8
+  int v20; // edx
+  __int64 v21; // rcx
+  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> >::Pair *v22; // rax
+  hkArray<hkaiBooleanOperation::SortVertex,hkContainerHeapAllocator> *p_m_startVertices; // rbx
+  int v24; // r9d
+  int v25; // eax
+  int v26; // eax
+  int v27; // r8d
+  int v29; // eax
+  hkArray<hkaiEdgeGeometry::Edge,hkContainerHeapAllocator> *p_m_faceFaceEdges; // r9
+  hkaiBooleanOperation::SortVertex *v31; // rcx
+  hkaiBooleanOperation::SortVertex *m_data; // rbx
+  hkaiBooleanOperation::SortVertex *v33; // rsi
+  __int64 v34; // rcx
+  unsigned int m_feature; // edi
+  hkaiBooleanOperation::SortVertex *v36; // rax
+  int v37; // r15d
+  __int64 v38; // r14
+  int *v39; // r13
+  int v40; // r9d
+  int v41; // r9d
+  int v42; // eax
+  int v43; // eax
+  __int64 v44; // r12
+  int v45; // r9d
   int v46; // eax
-  __int64 v47; // r12
-  int v48; // er9
-  int v49; // eax
-  int v50; // eax
-  unsigned int *v51; // r12
-  int v52; // er13
-  unsigned int v53; // eax
-  int v54; // er8
-  unsigned int v55; // eax
-  hkaiEdgeGeometry *v56; // rdi
-  signed __int64 v57; // r10
-  hkVector4f *v58; // rdx
-  __m128 v59; // xmm0
-  __m128 v60; // xmm3
-  signed __int64 v61; // rcx
-  signed __int64 v62; // r8
-  __int64 v63; // rax
-  __m128 v64; // xmm3
-  int v65; // er9
-  signed __int64 v66; // r11
-  signed __int64 v67; // rcx
-  signed __int64 v68; // rdx
-  __m128 v69; // xmm2
-  __m128 v70; // xmm2
-  int v71; // er8
-  int *v72; // rcx
-  __int64 v73; // rdx
-  int v74; // eax
-  unsigned int v75; // eax
-  __int64 v76; // rdi
-  hkVector4f *v77; // rdx
-  signed __int64 v78; // r10
-  _DWORD *v79; // r12
-  __m128 v80; // xmm0
-  __m128 v81; // xmm3
-  signed __int64 v82; // rcx
-  signed __int64 v83; // r8
-  __int64 v84; // rax
-  __m128 v85; // xmm3
-  int v86; // er9
-  signed __int64 v87; // r11
-  signed __int64 v88; // rcx
-  signed __int64 v89; // rdx
-  __m128 v90; // xmm2
-  __m128 v91; // xmm2
-  signed __int64 v92; // rax
-  hkaiBooleanOperation::SortVertex *v93; // r10
-  unsigned int v94; // ecx
-  int v95; // edx
-  unsigned int v96; // er8
-  float v97; // er9
-  int v98; // er8
-  signed __int64 v99; // r14
-  signed __int64 v100; // rcx
-  hkaiBooleanOperation::SortVertex *v101; // r10
-  unsigned int v102; // ecx
-  int v103; // edx
-  unsigned int v104; // er8
-  float v105; // er9
-  _DWORD *v106; // r14
-  int v107; // er9
-  int v108; // eax
+  int v47; // eax
+  unsigned int *v48; // r12
+  int v49; // r13d
+  unsigned int v50; // eax
+  int v51; // r8d
+  unsigned int v52; // eax
+  hkaiEdgeGeometry *v53; // rdi
+  unsigned int *v54; // r10
+  hkVector4f *v55; // rdx
+  __m128 v56; // xmm0
+  __m128 v57; // xmm3
+  unsigned int *v58; // rcx
+  __int64 v59; // r8
+  __int64 v60; // rax
+  __m128 v61; // xmm3
+  int v62; // r9d
+  __int64 v63; // r11
+  __int64 v64; // rcx
+  __int64 v65; // rdx
+  __m128 v66; // xmm2
+  __m128 v67; // xmm2
+  int v68; // r8d
+  int *v69; // rcx
+  __int64 v70; // rdx
+  int v71; // eax
+  unsigned int v72; // eax
+  __int64 v73; // rdi
+  hkVector4f *v74; // rdx
+  unsigned int *p_m_vertexIndex; // r10
+  _DWORD *v76; // r12
+  __m128 m_quad; // xmm0
+  __m128 v78; // xmm3
+  unsigned int *v79; // rcx
+  __int64 v80; // r8
+  __int64 v81; // rax
+  __m128 v82; // xmm3
+  int v83; // r9d
+  __int64 v84; // r11
+  __int64 v85; // rcx
+  __int64 v86; // rdx
+  __m128 v87; // xmm2
+  __m128 v88; // xmm2
+  __int64 v89; // rax
+  hkaiBooleanOperation::SortVertex *v90; // r10
+  unsigned int v91; // ecx
+  int m_index; // edx
+  unsigned int m_vertexIndex; // r8d
+  float m_dist; // r9d
+  int v95; // r8d
+  __int64 v96; // r14
+  __int64 v97; // rcx
+  hkaiBooleanOperation::SortVertex *v98; // r10
+  unsigned int v99; // ecx
+  int v100; // edx
+  unsigned int v101; // r8d
+  float v102; // r9d
+  _DWORD *v103; // r14
+  int v104; // r9d
+  int v105; // eax
+  int v106; // eax
+  __int64 v107; // rdi
+  int v108; // r9d
   int v109; // eax
-  __int64 v110; // rdi
-  int v111; // er9
-  int v112; // eax
-  int v113; // eax
-  unsigned int *v114; // rcx
-  __int64 v115; // rdx
-  unsigned int v116; // eax
-  hkResult *v117; // rbx
-  int v118; // er8
-  hkResult v119; // [rsp+30h] [rbp-31h]
-  int v120; // [rsp+34h] [rbp-2Dh]
-  hkResult v121; // [rsp+38h] [rbp-29h]
-  hkResult v122; // [rsp+3Ch] [rbp-25h]
-  hkResult resulta; // [rsp+40h] [rbp-21h]
-  __int64 v124; // [rsp+48h] [rbp-19h]
-  void *v125; // [rsp+50h] [rbp-11h]
-  char *array; // [rsp+58h] [rbp-9h]
-  int v127; // [rsp+60h] [rbp-1h]
-  int v128; // [rsp+64h] [rbp+3h]
-  hkaiBooleanOperation *v129; // [rsp+C0h] [rbp+5Fh]
-  hkResult *v130; // [rsp+C8h] [rbp+67h]
+  int v110; // eax
+  unsigned int *v111; // rcx
+  __int64 v112; // rdx
+  unsigned int v113; // eax
+  hkResult *v114; // rbx
+  int v115; // r8d
+  hkResult v116; // [rsp+30h] [rbp-31h] BYREF
+  int v117; // [rsp+34h] [rbp-2Dh]
+  hkResult v118; // [rsp+38h] [rbp-29h] BYREF
+  hkResult v119; // [rsp+3Ch] [rbp-25h] BYREF
+  hkResult resulta; // [rsp+40h] [rbp-21h] BYREF
+  __int64 v121; // [rsp+48h] [rbp-19h]
+  void *v122; // [rsp+50h] [rbp-11h]
+  char *array; // [rsp+58h] [rbp-9h] BYREF
+  int v124; // [rsp+60h] [rbp-1h]
+  int v125; // [rsp+64h] [rbp+3h]
+  hkaiBooleanOperation *v126; // [rsp+C0h] [rbp+5Fh] BYREF
+  hkResult *v127; // [rsp+C8h] [rbp+67h]
   hkArray<hkVector4f,hkContainerHeapAllocator> *faceNormalsa; // [rsp+D0h] [rbp+6Fh]
-  hkaiEdgeGeometry *v132; // [rsp+D8h] [rbp+77h]
+  hkaiEdgeGeometry *v129; // [rsp+D8h] [rbp+77h]
 
-  v132 = geomOut;
+  v129 = geomOut;
   faceNormalsa = faceNormals;
-  v130 = result;
-  v129 = this;
-  v5 = this->m_startVertices.m_size;
+  v127 = result;
+  v126 = this;
+  m_size = this->m_startVertices.m_size;
   v6 = geomOut;
   v7 = result;
   v8 = this;
-  if ( v5 > 1 )
+  if ( m_size > 1 )
     hkAlgorithm::quickSortRecursive<hkaiBooleanOperation::SortVertex,bool (*)(hkaiBooleanOperation::SortVertex const &,hkaiBooleanOperation::SortVertex const &)>(
       this->m_startVertices.m_data,
       0,
-      v5 - 1,
+      m_size - 1,
       hkaiBooleanOperation_orderFeatures);
   v9 = v8->m_endVertices.m_size;
   if ( v9 > 1 )
@@ -2171,550 +2121,527 @@ hkResult *__fastcall hkaiBooleanOperation::_addPartialEdges(hkaiBooleanOperation
       0,
       v9 - 1,
       hkaiBooleanOperation_orderFeatures);
-  v128 = 2147483648;
+  v125 = 0x80000000;
   array = 0i64;
-  v127 = 0;
+  v124 = 0;
   if ( intersects )
   {
     v10 = v8->m_faceFaceFeatureMap.m_map.m_numElems & 0x7FFFFFFF;
-    if ( v10 > 0 )
+    if ( v10 )
+      hkArrayUtil::_reserve(
+        &resulta,
+        &hkContainerHeapAllocator::s_alloc,
+        &array,
+        v8->m_faceFaceFeatureMap.m_map.m_numElems & 0x7FFFFFFF,
+        8);
+    m_hashMod = v8->m_faceFaceFeatureMap.m_map.m_hashMod;
+    v124 = v10;
+    v12 = 0;
+    v13 = 0i64;
+    if ( m_hashMod >= 0 )
     {
-      v11 = v8->m_faceFaceFeatureMap.m_map.m_numElems & 0x7FFFFFFF;
-      if ( v10 < 0 )
-        v11 = 0;
-      hkArrayUtil::_reserve(&resulta, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, v11, 8);
-    }
-    v12 = v8->m_faceFaceFeatureMap.m_map.m_hashMod;
-    v127 = v10;
-    v13 = 0;
-    v14 = 0i64;
-    if ( v12 >= 0 )
-    {
-      v15 = v8->m_faceFaceFeatureMap.m_map.m_elem;
+      m_elem = v8->m_faceFaceFeatureMap.m_map.m_elem;
       do
       {
-        if ( v15->key != -1i64 )
+        if ( m_elem->key != -1i64 )
           break;
-        ++v14;
         ++v13;
-        ++v15;
+        ++v12;
+        ++m_elem;
       }
-      while ( v14 <= v12 );
+      while ( v13 <= m_hashMod );
     }
-    v16 = v13;
-    if ( v13 <= v8->m_faceFaceFeatureMap.m_map.m_hashMod )
+    v15 = v12;
+    if ( v12 <= v8->m_faceFaceFeatureMap.m_map.m_hashMod )
     {
       do
       {
-        v17 = v8->m_faceFaceFeatureMap.m_map.m_elem;
-        v18 = v17[v16].key;
-        v19 = &array[8 * (LODWORD(v17[v16].val) - v8->m_faceFaceFeatureBase)];
-        v20 = v17[v16].key >> 32;
-        *((_DWORD *)v19 + 1) = v18;
-        *(_DWORD *)v19 = v20;
-        v21 = v8->m_faceFaceFeatureMap.m_map.m_hashMod;
-        v22 = v16 + 1;
-        v23 = v16 + 1;
-        if ( v23 <= v21 )
+        v16 = v8->m_faceFaceFeatureMap.m_map.m_elem;
+        key = v16[v15].key;
+        v18 = &array[8 * (LODWORD(v16[v15].val) - v8->m_faceFaceFeatureBase)];
+        *((_DWORD *)v18 + 1) = key;
+        *(_DWORD *)v18 = HIDWORD(key);
+        v19 = v8->m_faceFaceFeatureMap.m_map.m_hashMod;
+        v20 = v15 + 1;
+        v21 = v15 + 1;
+        if ( v21 <= v19 )
         {
-          v24 = &v8->m_faceFaceFeatureMap.m_map.m_elem[v22];
+          v22 = &v8->m_faceFaceFeatureMap.m_map.m_elem[v20];
           do
           {
-            if ( v24->key != -1i64 )
+            if ( v22->key != -1i64 )
               break;
-            ++v23;
+            ++v21;
+            ++v20;
             ++v22;
-            ++v24;
           }
-          while ( v23 <= v21 );
+          while ( v21 <= v19 );
         }
-        v16 = v22;
+        v15 = v20;
       }
-      while ( v22 <= v8->m_faceFaceFeatureMap.m_map.m_hashMod );
+      while ( v20 <= v8->m_faceFaceFeatureMap.m_map.m_hashMod );
     }
   }
-  v25 = &v8->m_startVertices;
-  v26 = v8->m_startVertices.m_size + 1;
-  v27 = v8->m_startVertices.m_capacityAndFlags & 0x3FFFFFFF;
-  if ( v27 >= v26 )
+  p_m_startVertices = &v8->m_startVertices;
+  v24 = v8->m_startVertices.m_size + 1;
+  v25 = v8->m_startVertices.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v25 >= v24 )
   {
-    v119.m_enum = 0;
+    v116.m_enum = HK_SUCCESS;
   }
   else
   {
-    v28 = 2 * v27;
-    if ( v26 < v28 )
-      v26 = v28;
-    hkArrayUtil::_reserve(
-      &v119,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &v8->m_startVertices,
-      v26,
-      16);
-    if ( v119.m_enum )
+    v26 = 2 * v25;
+    if ( v24 < v26 )
+      v24 = v26;
+    hkArrayUtil::_reserve(&v116, &hkContainerHeapAllocator::s_alloc, &v8->m_startVertices, v24, 16);
+    if ( v116.m_enum )
     {
-      v29 = v128;
-      v7->m_enum = 1;
-      v127 = 0;
-      if ( v29 >= 0 )
-        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-          array,
-          8 * v29);
+      v27 = v125;
+      v7->m_enum = HK_FAILURE;
+      v124 = 0;
+      if ( v27 >= 0 )
+        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, array, 8 * v27);
       return v7;
     }
   }
   if ( v8->m_startVertices.m_size == (v8->m_startVertices.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v8->m_startVertices, 16);
-  v31 = v8->m_startVertices.m_size;
-  v32 = &v8->m_faceFaceEdges;
-  v33 = v8->m_startVertices.m_size;
-  v125 = &v8->m_faceFaceEdges;
-  v34 = &v25->m_data[v33];
-  v8->m_startVertices.m_size = v31 + 1;
-  v34->m_feature = -1;
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &v8->m_startVertices, 16);
+  v29 = v8->m_startVertices.m_size;
+  p_m_faceFaceEdges = &v8->m_faceFaceEdges;
+  v122 = &v8->m_faceFaceEdges;
+  v31 = &p_m_startVertices->m_data[v29];
+  v8->m_startVertices.m_size = v29 + 1;
+  v31->m_feature = -1;
   --v8->m_startVertices.m_size;
-  v35 = v25->m_data;
-  v36 = v8->m_endVertices.m_data;
-  v37 = (__int64)v8->m_a.m_geometry->m_edges.m_data;
+  m_data = p_m_startVertices->m_data;
+  v33 = v8->m_endVertices.m_data;
+  v34 = (__int64)v8->m_a.m_geometry->m_edges.m_data;
   v8->m_faceFaceEdges.m_size = 0;
-  v38 = v35->m_feature;
-  v124 = v37;
-  if ( v38 != -1 )
+  m_feature = m_data->m_feature;
+  v121 = v34;
+  if ( m_feature != -1 )
   {
     while ( 1 )
     {
-      v39 = v35;
-      v40 = 0;
-      v41 = 0i64;
+      v36 = m_data;
+      v37 = 0;
+      v38 = 0i64;
       do
       {
-        ++v39;
-        ++v40;
-        ++v41;
+        ++v36;
+        ++v37;
+        ++v38;
       }
-      while ( v39->m_feature == v38 );
-      if ( v38 < v8->m_faceFaceFeatureBase )
+      while ( v36->m_feature == m_feature );
+      if ( m_feature < v8->m_faceFaceFeatureBase )
       {
-        if ( v38 >= v8->m_edgeBFeatureBase )
-          goto LABEL_62;
-        v76 = (__int64)v132;
-        v77 = v132->m_vertices.m_data;
-        v78 = (signed __int64)&v36->m_vertexIndex;
-        v79 = (_DWORD *)(v37 + 16i64 * v35->m_index);
-        v80 = v77[v35->m_vertexIndex].m_quad;
-        v81 = v77[v36->m_vertexIndex].m_quad;
-        if ( v41 > 1 )
+        if ( m_feature >= v8->m_edgeBFeatureBase )
+          goto LABEL_60;
+        v73 = (__int64)v129;
+        v74 = v129->m_vertices.m_data;
+        p_m_vertexIndex = &v33->m_vertexIndex;
+        v76 = (_DWORD *)(v34 + 16i64 * m_data->m_index);
+        m_quad = v74[m_data->m_vertexIndex].m_quad;
+        v78 = v74[v33->m_vertexIndex].m_quad;
+        if ( v38 > 1 )
         {
-          v82 = (signed __int64)&v36[1].m_vertexIndex;
-          v83 = v41 - 1;
+          v79 = &v33[1].m_vertexIndex;
+          v80 = v38 - 1;
           do
           {
-            v84 = *(signed int *)(v82 + (char *)v35 - (char *)v36);
-            v82 += 16i64;
-            v80 = _mm_add_ps(v80, v77[v84].m_quad);
-            v81 = _mm_add_ps(v81, v77[*(signed int *)(v82 - 16)].m_quad);
-            --v83;
+            v81 = *(int *)((char *)v79 + (char *)m_data - (char *)v33);
+            v79 += 4;
+            m_quad = _mm_add_ps(m_quad, v74[v81].m_quad);
+            v78 = _mm_add_ps(v78, v74[*(v79 - 4)].m_quad);
+            --v80;
           }
-          while ( v83 );
+          while ( v80 );
         }
-        v85 = _mm_sub_ps(v81, v80);
-        v86 = 0;
-        if ( v41 > 0 )
+        v82 = _mm_sub_ps(v78, m_quad);
+        v83 = 0;
+        if ( v38 > 0 )
         {
-          v87 = v41;
+          v84 = v38;
           do
           {
-            v88 = 2i64 * *(signed int *)(v78 + (char *)v35 - (char *)v36);
-            v89 = v86++;
-            v78 += 16i64;
-            v90 = _mm_mul_ps(*(__m128 *)(*(_QWORD *)(v76 + 48) + 8 * v88), v85);
-            v35[v89].m_dist = (float)(COERCE_FLOAT(_mm_shuffle_ps(v90, v90, 85))
-                                    + COERCE_FLOAT(_mm_shuffle_ps(v90, v90, 0)))
-                            + COERCE_FLOAT(_mm_shuffle_ps(v90, v90, 170));
-            v91 = _mm_mul_ps(*(__m128 *)(*(_QWORD *)(v76 + 48) + 16i64 * *(signed int *)(v78 - 16)), v85);
-            v36[v89].m_dist = (float)(COERCE_FLOAT(_mm_shuffle_ps(v91, v91, 85))
-                                    + COERCE_FLOAT(_mm_shuffle_ps(v91, v91, 0)))
-                            + COERCE_FLOAT(_mm_shuffle_ps(v91, v91, 170));
-            --v87;
+            v85 = 2i64 * *(int *)((char *)p_m_vertexIndex + (char *)m_data - (char *)v33);
+            v86 = v83++;
+            p_m_vertexIndex += 4;
+            v87 = _mm_mul_ps(*(__m128 *)(*(_QWORD *)(v73 + 48) + 8 * v85), v82);
+            m_data[v86].m_dist = (float)(_mm_shuffle_ps(v87, v87, 85).m128_f32[0]
+                                       + _mm_shuffle_ps(v87, v87, 0).m128_f32[0])
+                               + _mm_shuffle_ps(v87, v87, 170).m128_f32[0];
+            v88 = _mm_mul_ps(*(__m128 *)(*(_QWORD *)(v73 + 48) + 16i64 * (int)*(p_m_vertexIndex - 4)), v82);
+            v33[v86].m_dist = (float)(_mm_shuffle_ps(v88, v88, 85).m128_f32[0] + _mm_shuffle_ps(v88, v88, 0).m128_f32[0])
+                            + _mm_shuffle_ps(v88, v88, 170).m128_f32[0];
+            --v84;
           }
-          while ( v87 );
+          while ( v84 );
         }
-        if ( v41 > 1 )
+        if ( v38 > 1 )
         {
           hkAlgorithm::quickSortRecursive<hkaiBooleanOperation::SortVertex,bool (*)(hkaiBooleanOperation::SortVertex const &,hkaiBooleanOperation::SortVertex const &)>(
-            v35,
+            m_data,
             0,
-            v40 - 1,
+            v37 - 1,
             hkaiBooleanOperation_compareDist);
           hkAlgorithm::quickSortRecursive<hkaiBooleanOperation::SortVertex,bool (*)(hkaiBooleanOperation::SortVertex const &,hkaiBooleanOperation::SortVertex const &)>(
-            v36,
+            v33,
             0,
-            v40 - 1,
+            v37 - 1,
             hkaiBooleanOperation_compareDist);
-          v76 = (__int64)v132;
+          v73 = (__int64)v129;
         }
-        if ( v35->m_vertexIndex != *v79 )
+        if ( m_data->m_vertexIndex != *v76 )
         {
-          v92 = 1i64;
-          if ( v41 > 1 )
+          v89 = 1i64;
+          if ( v38 > 1 )
           {
-            v93 = v35 + 1;
-            while ( v93->m_vertexIndex != *v79 )
+            v90 = m_data + 1;
+            while ( v90->m_vertexIndex != *v76 )
             {
-              ++v92;
-              ++v93;
-              if ( v92 >= v41 )
-                goto LABEL_82;
+              ++v89;
+              ++v90;
+              if ( v89 >= v38 )
+                goto LABEL_80;
             }
-            v94 = v93->m_feature;
-            v95 = v93->m_index;
-            v96 = v93->m_vertexIndex;
-            v97 = v93->m_dist;
-            v93->m_feature = v35->m_feature;
-            v93->m_index = v35->m_index;
-            v93->m_vertexIndex = v35->m_vertexIndex;
-            v93->m_dist = v35->m_dist;
-            v35->m_feature = v94;
-            v35->m_index = v95;
-            v35->m_vertexIndex = v96;
-            v35->m_dist = v97;
+            v91 = v90->m_feature;
+            m_index = v90->m_index;
+            m_vertexIndex = v90->m_vertexIndex;
+            m_dist = v90->m_dist;
+            v90->m_feature = m_data->m_feature;
+            v90->m_index = m_data->m_index;
+            v90->m_vertexIndex = m_data->m_vertexIndex;
+            v90->m_dist = m_data->m_dist;
+            m_data->m_feature = v91;
+            m_data->m_index = m_index;
+            m_data->m_vertexIndex = m_vertexIndex;
+            m_data->m_dist = m_dist;
           }
         }
-LABEL_82:
-        v98 = v79[1];
-        v99 = v41;
-        if ( *((_DWORD *)&v36[v99] - 2) != v98 )
+LABEL_80:
+        v95 = v76[1];
+        v96 = v38;
+        if ( v33[v96 - 1].m_vertexIndex != v95 )
         {
-          v100 = 0i64;
-          if ( (signed int)(v40 - 1) > 0 )
+          v97 = 0i64;
+          if ( v37 - 1 > 0 )
           {
-            v101 = v36;
-            while ( v101->m_vertexIndex != v98 )
+            v98 = v33;
+            while ( v98->m_vertexIndex != v95 )
             {
-              ++v100;
-              ++v101;
-              if ( v100 >= (signed int)(v40 - 1) )
-                goto LABEL_89;
+              ++v97;
+              ++v98;
+              if ( v97 >= v37 - 1 )
+                goto LABEL_87;
             }
-            v102 = v101->m_feature;
-            v103 = v101->m_index;
-            v104 = v101->m_vertexIndex;
-            v105 = v101->m_dist;
-            v101->m_feature = v36[v99 - 1].m_feature;
-            v101->m_index = *((_DWORD *)&v36[v99] - 3);
-            v101->m_vertexIndex = *((_DWORD *)&v36[v99] - 2);
-            v101->m_dist = *((float *)&v36[v99] - 1);
-            v36[v99 - 1].m_feature = v102;
-            *((_DWORD *)&v36[v99] - 3) = v103;
-            *((_DWORD *)&v36[v99] - 2) = v104;
-            *((float *)&v36[v99] - 1) = v105;
+            v99 = v98->m_feature;
+            v100 = v98->m_index;
+            v101 = v98->m_vertexIndex;
+            v102 = v98->m_dist;
+            v98->m_feature = v33[v96 - 1].m_feature;
+            v98->m_index = v33[v96 - 1].m_index;
+            v98->m_vertexIndex = v33[v96 - 1].m_vertexIndex;
+            v98->m_dist = v33[v96 - 1].m_dist;
+            v33[v96 - 1].m_feature = v99;
+            v33[v96 - 1].m_index = v100;
+            v33[v96 - 1].m_vertexIndex = v101;
+            v33[v96 - 1].m_dist = v102;
           }
         }
-LABEL_89:
-        v106 = (_DWORD *)(v76 + 16);
-        v107 = v40 + *(_DWORD *)(v76 + 24);
-        v108 = *(_DWORD *)(v76 + 28) & 0x3FFFFFFF;
-        if ( v108 >= v107 )
+LABEL_87:
+        v103 = (_DWORD *)(v73 + 16);
+        v104 = v37 + *(_DWORD *)(v73 + 24);
+        v105 = *(_DWORD *)(v73 + 28) & 0x3FFFFFFF;
+        if ( v105 >= v104 )
         {
-          v121.m_enum = 0;
+          v118.m_enum = HK_SUCCESS;
         }
         else
         {
-          v109 = 2 * v108;
-          if ( v107 < v109 )
-            v107 = v109;
-          hkArrayUtil::_reserve(
-            &v121,
-            (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-            (void *)(v76 + 16),
-            v107,
-            16);
-          if ( v121.m_enum )
+          v106 = 2 * v105;
+          if ( v104 < v106 )
+            v104 = v106;
+          hkArrayUtil::_reserve(&v118, &hkContainerHeapAllocator::s_alloc, (void *)(v73 + 16), v104, 16);
+          if ( v118.m_enum )
           {
-            v117 = v130;
-            v118 = v128;
-            v130->m_enum = 1;
-            v127 = 0;
-            if ( v118 >= 0 )
-              hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-                (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-                array,
-                8 * v118);
-            return v117;
+            v114 = v127;
+            v115 = v125;
+            v127->m_enum = HK_FAILURE;
+            v124 = 0;
+            if ( v115 >= 0 )
+              hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, array, 8 * v115);
+            return v114;
           }
         }
-        v110 = *(signed int *)(v76 + 24);
-        v111 = v110 + v40;
-        v112 = v106[3] & 0x3FFFFFFF;
-        if ( v112 >= (signed int)(v110 + v40) )
+        v107 = *(int *)(v73 + 24);
+        v108 = v107 + v37;
+        v109 = v103[3] & 0x3FFFFFFF;
+        if ( v109 >= (int)v107 + v37 )
         {
-          resulta.m_enum = 0;
+          resulta.m_enum = HK_SUCCESS;
         }
         else
         {
-          v113 = 2 * v112;
-          if ( v111 < v113 )
-            v111 = v113;
-          hkArrayUtil::_reserve(&resulta, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v106, v111, 16);
+          v110 = 2 * v109;
+          if ( v108 < v110 )
+            v108 = v110;
+          hkArrayUtil::_reserve(&resulta, &hkContainerHeapAllocator::s_alloc, v103, v108, 16);
         }
-        v106[2] += v40;
-        v114 = (unsigned int *)(*(_QWORD *)v106 + 16 * v110);
-        if ( (signed int)v40 > 0 )
+        v103[2] += v37;
+        v111 = (unsigned int *)(*(_QWORD *)v103 + 16 * v107);
+        if ( v37 > 0 )
         {
-          v115 = v40;
+          v112 = (unsigned int)v37;
           do
           {
-            v116 = v35->m_vertexIndex;
-            ++v35;
-            ++v36;
-            *v114 = v116;
-            v114 += 4;
-            *(v114 - 3) = v36[-1].m_vertexIndex;
-            *(v114 - 2) = v79[2];
-            *(v114 - 1) = v79[3];
-            --v115;
+            v113 = m_data->m_vertexIndex;
+            ++m_data;
+            ++v33;
+            *v111 = v113;
+            v111 += 4;
+            *(v111 - 3) = v33[-1].m_vertexIndex;
+            *(v111 - 2) = v76[2];
+            *(v111 - 1) = v76[3];
+            --v112;
           }
-          while ( v115 );
+          while ( v112 );
         }
       }
       else
       {
-        v42 = (signed int *)v125;
-        v43 = *((_DWORD *)v125 + 2);
-        v120 = v35->m_index;
-        v44 = v40 + v43;
-        v45 = *((_DWORD *)v125 + 3) & 0x3FFFFFFF;
-        if ( v45 >= v44 )
+        v39 = (int *)v122;
+        v40 = *((_DWORD *)v122 + 2);
+        v117 = m_data->m_index;
+        v41 = v37 + v40;
+        v42 = *((_DWORD *)v122 + 3) & 0x3FFFFFFF;
+        if ( v42 >= v41 )
         {
-          v119.m_enum = 0;
+          v116.m_enum = HK_SUCCESS;
         }
         else
         {
-          v46 = 2 * v45;
-          if ( v44 < v46 )
-            v44 = v46;
-          hkArrayUtil::_reserve(&v119, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v125, v44, 16);
-          if ( v119.m_enum )
+          v43 = 2 * v42;
+          if ( v41 < v43 )
+            v41 = v43;
+          hkArrayUtil::_reserve(&v116, &hkContainerHeapAllocator::s_alloc, v122, v41, 16);
+          if ( v116.m_enum )
           {
-            v7 = v130;
-            v130->m_enum = 1;
-            goto LABEL_109;
+            v7 = v127;
+            v127->m_enum = HK_FAILURE;
+            goto LABEL_107;
           }
         }
-        v47 = v42[2];
-        v48 = v47 + v40;
-        v49 = v42[3] & 0x3FFFFFFF;
-        if ( v49 >= (signed int)(v47 + v40) )
+        v44 = v39[2];
+        v45 = v44 + v37;
+        v46 = v39[3] & 0x3FFFFFFF;
+        if ( v46 >= (int)v44 + v37 )
         {
-          v122.m_enum = 0;
+          v119.m_enum = HK_SUCCESS;
         }
         else
         {
-          v50 = 2 * v49;
-          if ( v48 < v50 )
-            v48 = v50;
-          hkArrayUtil::_reserve(&v122, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v42, v48, 16);
+          v47 = 2 * v46;
+          if ( v45 < v47 )
+            v45 = v47;
+          hkArrayUtil::_reserve(&v119, &hkContainerHeapAllocator::s_alloc, v39, v45, 16);
         }
-        v42[2] += v40;
-        v51 = (unsigned int *)(*(_QWORD *)v42 + 16 * v47);
-        v52 = 0;
+        v39[2] += v37;
+        v48 = (unsigned int *)(*(_QWORD *)v39 + 16 * v44);
+        v49 = 0;
         if ( intersects )
-          v52 = *(_DWORD *)&array[8 * (v38 - v129->m_faceFaceFeatureBase) + 4];
-        if ( v41 == 1 )
+          v49 = *(_DWORD *)&array[8 * (m_feature - v126->m_faceFaceFeatureBase) + 4];
+        if ( v38 == 1 )
         {
-          v53 = v35->m_vertexIndex;
-          v54 = v120;
-          ++v35;
-          *v51 = v53;
-          v55 = v36->m_vertexIndex;
-          v51[2] = v54;
-          v51[3] = v52;
-          ++v36;
-          v51[1] = v55;
+          v50 = m_data->m_vertexIndex;
+          v51 = v117;
+          ++m_data;
+          *v48 = v50;
+          v52 = v33->m_vertexIndex;
+          v48[2] = v51;
+          v48[3] = v49;
+          ++v33;
+          v48[1] = v52;
         }
         else
         {
-          v56 = v132;
-          v57 = (signed __int64)&v36->m_vertexIndex;
-          v58 = v132->m_vertices.m_data;
-          v59 = v58[v35->m_vertexIndex].m_quad;
-          v60 = v58[v36->m_vertexIndex].m_quad;
-          if ( v41 > 1 )
+          v53 = v129;
+          v54 = &v33->m_vertexIndex;
+          v55 = v129->m_vertices.m_data;
+          v56 = v55[m_data->m_vertexIndex].m_quad;
+          v57 = v55[v33->m_vertexIndex].m_quad;
+          if ( v38 > 1 )
           {
-            v61 = (signed __int64)&v36[1].m_vertexIndex;
-            v62 = v41 - 1;
+            v58 = &v33[1].m_vertexIndex;
+            v59 = v38 - 1;
             do
             {
-              v63 = *(signed int *)((char *)v35 - (char *)v36 + v61);
-              v61 += 16i64;
-              v59 = _mm_add_ps(v59, v58[v63].m_quad);
-              v60 = _mm_add_ps(v60, v58[*(signed int *)(v61 - 16)].m_quad);
-              --v62;
+              v60 = *(int *)((char *)v58 + (char *)m_data - (char *)v33);
+              v58 += 4;
+              v56 = _mm_add_ps(v56, v55[v60].m_quad);
+              v57 = _mm_add_ps(v57, v55[*(v58 - 4)].m_quad);
+              --v59;
             }
-            while ( v62 );
+            while ( v59 );
           }
-          v64 = _mm_sub_ps(v60, v59);
-          v65 = 0;
-          if ( v41 > 0 )
+          v61 = _mm_sub_ps(v57, v56);
+          v62 = 0;
+          if ( v38 > 0 )
           {
-            v66 = v41;
+            v63 = v38;
             do
             {
-              v67 = *(signed int *)(v57 + (char *)v35 - (char *)v36);
-              v68 = v65++;
-              v57 += 16i64;
-              v69 = _mm_mul_ps(v56->m_vertices.m_data[v67].m_quad, v64);
-              v35[v68].m_dist = (float)(COERCE_FLOAT(_mm_shuffle_ps(v69, v69, 85))
-                                      + COERCE_FLOAT(_mm_shuffle_ps(v69, v69, 0)))
-                              + COERCE_FLOAT(_mm_shuffle_ps(v69, v69, 170));
-              v70 = _mm_mul_ps(v56->m_vertices.m_data[*(signed int *)(v57 - 16)].m_quad, v64);
-              v36[v68].m_dist = (float)(COERCE_FLOAT(_mm_shuffle_ps(v70, v70, 85))
-                                      + COERCE_FLOAT(_mm_shuffle_ps(v70, v70, 0)))
-                              + COERCE_FLOAT(_mm_shuffle_ps(v70, v70, 170));
-              --v66;
+              v64 = *(int *)((char *)v54 + (char *)m_data - (char *)v33);
+              v65 = v62++;
+              v54 += 4;
+              v66 = _mm_mul_ps(v53->m_vertices.m_data[v64].m_quad, v61);
+              m_data[v65].m_dist = (float)(_mm_shuffle_ps(v66, v66, 85).m128_f32[0]
+                                         + _mm_shuffle_ps(v66, v66, 0).m128_f32[0])
+                                 + _mm_shuffle_ps(v66, v66, 170).m128_f32[0];
+              v67 = _mm_mul_ps(v53->m_vertices.m_data[*(v54 - 4)].m_quad, v61);
+              v33[v65].m_dist = (float)(_mm_shuffle_ps(v67, v67, 85).m128_f32[0]
+                                      + _mm_shuffle_ps(v67, v67, 0).m128_f32[0])
+                              + _mm_shuffle_ps(v67, v67, 170).m128_f32[0];
+              --v63;
             }
-            while ( v66 );
+            while ( v63 );
           }
-          if ( v41 > 1 )
+          if ( v38 > 1 )
           {
             hkAlgorithm::quickSortRecursive<hkaiBooleanOperation::SortVertex,bool (*)(hkaiBooleanOperation::SortVertex const &,hkaiBooleanOperation::SortVertex const &)>(
-              v35,
+              m_data,
               0,
-              v40 - 1,
+              v37 - 1,
               hkaiBooleanOperation_compareDist);
             hkAlgorithm::quickSortRecursive<hkaiBooleanOperation::SortVertex,bool (*)(hkaiBooleanOperation::SortVertex const &,hkaiBooleanOperation::SortVertex const &)>(
-              v36,
+              v33,
               0,
-              v40 - 1,
+              v37 - 1,
               hkaiBooleanOperation_compareDist);
           }
-          if ( (signed int)v40 > 0 )
+          if ( v37 > 0 )
           {
-            v71 = v120;
-            v72 = (int *)(v51 + 2);
-            v73 = v40;
+            v68 = v117;
+            v69 = (int *)(v48 + 2);
+            v70 = (unsigned int)v37;
             do
             {
-              v74 = v35->m_vertexIndex;
-              ++v35;
-              ++v36;
-              *(v72 - 2) = v74;
-              v75 = v36[-1].m_vertexIndex;
-              *v72 = v71;
-              v72[1] = v52;
-              *(v72 - 1) = v75;
-              v72 += 4;
-              --v73;
+              v71 = m_data->m_vertexIndex;
+              ++m_data;
+              ++v33;
+              *(v69 - 2) = v71;
+              v72 = v33[-1].m_vertexIndex;
+              *v69 = v68;
+              v69[1] = v49;
+              *(v69 - 1) = v72;
+              v69 += 4;
+              --v70;
             }
-            while ( v73 );
+            while ( v70 );
           }
         }
-        v8 = v129;
+        v8 = v126;
       }
-      v37 = v124;
-LABEL_62:
-      v38 = v35->m_feature;
-      if ( v35->m_feature == -1 )
+      v34 = v121;
+LABEL_60:
+      m_feature = m_data->m_feature;
+      if ( m_data->m_feature == -1 )
       {
-        v6 = v132;
-        v7 = v130;
-        v32 = &v8->m_faceFaceEdges;
+        v6 = v129;
+        v7 = v127;
+        p_m_faceFaceEdges = &v8->m_faceFaceEdges;
         break;
       }
     }
   }
-  hkaiBooleanOperation::_addFaceFaceIntersections(v8, (hkResult *)&v129, faceNormalsa, v32, intersects, v6);
-  if ( (_DWORD)v129 )
-    v7->m_enum = 1;
+  hkaiBooleanOperation::_addFaceFaceIntersections(
+    v8,
+    (hkResult *)&v126,
+    faceNormalsa,
+    p_m_faceFaceEdges,
+    intersects,
+    v6);
+  if ( (_DWORD)v126 )
+    v7->m_enum = HK_FAILURE;
   else
-    v7->m_enum = 0;
-LABEL_109:
-  v127 = 0;
-  if ( v128 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      array,
-      8 * v128);
+    v7->m_enum = HK_SUCCESS;
+LABEL_107:
+  v124 = 0;
+  if ( v125 >= 0 )
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, array, 8 * v125);
   return v7;
 }
 
 // File Line: 1214
 // RVA: 0xBA2C00
-__int64 __fastcall hkaiBooleanOperation::_linesIntersect(hkaiBooleanOperation *this, hkVector4f *points, hkVector4f *intersectPosition)
+__int64 __fastcall hkaiBooleanOperation::_linesIntersect(
+        hkaiBooleanOperation *this,
+        hkVector4f *points,
+        hkVector4f *intersectPosition)
 {
-  __m128 v3; // xmm1
+  __m128 m_quad; // xmm1
   __m128 v4; // xmm3
   __m128 v5; // xmm2
-  hkVector4f *v6; // rdi
-  hkVector4f *v7; // rbx
-  int v8; // er8
+  int v8; // r8d
   __int64 result; // rax
-  hkaiBooleanOperation::ShadowResult v10; // [rsp+30h] [rbp-38h]
 
-  v3 = points->m_quad;
+  m_quad = points->m_quad;
   v4 = points[2].m_quad;
   v5 = points[3].m_quad;
-  v6 = points;
-  v7 = intersectPosition;
   v8 = 0;
-  if ( ((_mm_movemask_ps(_mm_cmpeqps(points->m_quad, v5)) & 3) == 3) | ((_mm_movemask_ps(_mm_cmpeqps(points->m_quad, v4)) & 3) == 3)
-    || (v3 = points[1].m_quad,
-        LOBYTE(v8) = (_mm_movemask_ps(_mm_cmpeqps(points[1].m_quad, v5)) & 3) == 3,
-        v8 | ((_mm_movemask_ps(_mm_cmpeqps(points[1].m_quad, v4)) & 3) == 3)) )
+  if ( ((_mm_movemask_ps(_mm_cmpeq_ps(points->m_quad, v5)) & 3) == 3) | ((_mm_movemask_ps(_mm_cmpeq_ps(points->m_quad, v4)) & 3) == 3)
+    || (m_quad = points[1].m_quad,
+        LOBYTE(v8) = (_mm_movemask_ps(_mm_cmpeq_ps(m_quad, v5)) & 3) == 3,
+        v8 | ((_mm_movemask_ps(_mm_cmpeq_ps(m_quad, v4)) & 3) == 3)) )
   {
-    *v7 = (hkVector4f)v3;
-    result = 1i64;
+    *intersectPosition = (hkVector4f)m_quad;
+    return 1i64;
   }
-  else
+  else if ( (unsigned int)hkaiBooleanOperation::_calculate2dLineIntersect(points, points + 1, points + 2, points + 3)
+         || (result = hkaiBooleanOperation::_calculate2dLineIntersect(points + 2, points + 3, points, points + 1),
+             (_DWORD)result) )
   {
-    v10.m_shadower = 0i64;
-    v10.m_shadowee = 0i64;
-    if ( (unsigned int)hkaiBooleanOperation::_calculate2dLineIntersect(points, points + 1, points + 2, points + 3)
-      || (result = hkaiBooleanOperation::_calculate2dLineIntersect(v6 + 2, v6 + 3, v6, v6 + 1), (_DWORD)result) )
-    {
-      result = 1i64;
-      *v7 = v10.m_shadower;
-    }
+    result = 1i64;
+    *intersectPosition = 0i64;
   }
   return result;
 }
 
 // File Line: 1269
 // RVA: 0xBA3DE0
-bool __fastcall hkaiBooleanOperation_orderEdgeEdgeIntersect(hkaiBooleanOperation::EdgeEdgeIntersect *a, hkaiBooleanOperation::EdgeEdgeIntersect *b)
+bool __fastcall hkaiBooleanOperation_orderEdgeEdgeIntersect(
+        hkaiBooleanOperation::EdgeEdgeIntersect *a,
+        hkaiBooleanOperation::EdgeEdgeIntersect *b)
 {
-  bool result; // al
-
   if ( a->m_edgeIndex == b->m_edgeIndex )
-    result = a->m_dist < b->m_dist;
+    return a->m_dist < b->m_dist;
   else
-    result = a->m_edgeIndex < b->m_edgeIndex;
-  return result;
+    return a->m_edgeIndex < b->m_edgeIndex;
 }
 
 // File Line: 1278
 // RVA: 0xBA3E10
 hkVector4f *__fastcall hkaiBooleanOperation_faceSwizzle(hkVector4f *result, hkVector4f *v, const int majorAxis)
 {
-  __m128 v3; // xmm0
+  __m128 m_quad; // xmm0
   hkVector4f *v4; // rax
 
-  v3 = v->m_quad;
+  m_quad = v->m_quad;
   v4 = result;
   if ( majorAxis )
   {
     if ( majorAxis == 1 )
     {
-      result->m_quad = _mm_shuffle_ps(v3, v3, 216);
+      result->m_quad = _mm_shuffle_ps(m_quad, m_quad, 216);
       return v4;
     }
   }
   else
   {
-    v3 = _mm_shuffle_ps(v3, v3, 201);
+    m_quad = _mm_shuffle_ps(m_quad, m_quad, 201);
   }
-  *result = (hkVector4f)v3;
+  *result = (hkVector4f)m_quad;
   return v4;
 }
 
@@ -2722,227 +2649,221 @@ hkVector4f *__fastcall hkaiBooleanOperation_faceSwizzle(hkVector4f *result, hkVe
 // RVA: 0xBA3E40
 hkVector4f *__fastcall hkaiBooleanOperation_faceDeswizzle(hkVector4f *result, hkVector4f *v, const int majorAxis)
 {
-  __m128 v3; // xmm0
+  __m128 m_quad; // xmm0
   hkVector4f *v4; // rax
 
-  v3 = v->m_quad;
+  m_quad = v->m_quad;
   v4 = result;
   if ( majorAxis )
   {
     if ( majorAxis == 1 )
     {
-      result->m_quad = _mm_shuffle_ps(v3, v3, 216);
+      result->m_quad = _mm_shuffle_ps(m_quad, m_quad, 216);
       return v4;
     }
   }
   else
   {
-    v3 = _mm_shuffle_ps(v3, v3, 210);
+    m_quad = _mm_shuffle_ps(m_quad, m_quad, 210);
   }
-  *result = (hkVector4f)v3;
+  *result = (hkVector4f)m_quad;
   return v4;
 }
 
 // File Line: 1302
 // RVA: 0xBA2D20
-hkResult *__fastcall hkaiBooleanOperation::_addFaceIntersections(hkaiBooleanOperation *this, hkResult *result, hkVector4f *faceNormalIn, hkaiEdgeGeometry::Edge *edges, int numEdges, hkaiBooleanFaceFaceIntersects *intersects, hkaiEdgeGeometry *geomOut)
+hkResult *__fastcall hkaiBooleanOperation::_addFaceIntersections(
+        hkaiBooleanOperation *this,
+        hkResult *result,
+        const __m128i *faceNormalIn,
+        hkaiEdgeGeometry::Edge *edges,
+        int numEdges,
+        hkaiBooleanFaceFaceIntersects *intersects,
+        hkaiEdgeGeometry *geomOut)
 {
-  unsigned int v7; // er12
-  hkVector4f *v8; // rdi
+  unsigned int m_face; // r12d
   hkResult *v9; // r14
   hkaiEdgeGeometry::Edge *v10; // rbx
-  int v11; // eax
+  int m_capacityAndFlags; // eax
   int v12; // eax
   int v13; // eax
-  int v14; // er9
+  int v14; // r9d
   __int64 v16; // r13
   __m128 v17; // xmm3
-  hkArray<hkaiEdgeGeometry::Edge,hkContainerHeapAllocator> *v18; // r15
+  hkArray<hkaiEdgeGeometry::Edge,hkContainerHeapAllocator> *p_m_edges; // r15
   int v19; // esi
-  int v20; // er9
-  int v21; // er8
-  int v22; // edi
-  __m128 v23; // xmm6
-  _QWORD *v24; // rsi
-  __int64 v25; // r14
-  hkVector4f v26; // xmm1
-  signed __int64 v27; // rcx
+  int v20; // r8d
+  int v21; // edi
+  __m128 v22; // xmm6
+  _QWORD *v23; // rsi
+  __int64 v24; // r14
+  hkVector4f v25; // xmm1
+  __int64 v26; // rcx
+  int v27; // eax
   int v28; // eax
-  int v29; // er9
-  int v30; // eax
-  int v31; // eax
-  int v32; // er9
-  int v33; // er8
-  hk1AxisSweep::AabbInt *v34; // rdi
-  hkResultEnum v35; // er13
-  hkResultEnum v36; // esi
-  int v37; // ebx
-  signed __int64 v38; // rcx
-  unsigned int v39; // er8
-  hk1AxisSweep::AabbInt *v40; // rdx
-  hkaiEdgeGeometry::Edge *v41; // r13
-  int v42; // er14
-  signed __int64 v43; // r9
-  unsigned int v44; // er10
-  __int64 v45; // rdx
-  __int64 v46; // r8
-  signed __int64 v47; // rax
-  __m128 v48; // xmm1
-  __m128 v49; // xmm0
-  __m128 v50; // xmm9
-  __m128 v51; // xmm0
-  __m128 v52; // xmm9
-  signed __int64 v53; // rax
-  __int64 v54; // r9
-  __m128 v55; // xmm2
-  __m128 v56; // xmm9
-  unsigned int v57; // ecx
-  __m128 v58; // xmm8
-  __m128 v59; // xmm0
-  __m128 v60; // xmm7
-  __m128 v61; // xmm0
-  hkVector4f v62; // xmm6
-  _DWORD *v63; // r14
-  int v64; // eax
-  int v65; // er9
-  int v66; // eax
-  int v67; // eax
-  int v68; // er8
-  hkResult *v69; // rbx
-  _DWORD *v70; // rdx
+  int v29; // eax
+  int v30; // r9d
+  int v31; // r8d
+  hk1AxisSweep::AabbInt *v32; // rdi
+  hkResultEnum v33; // r13d
+  hkResultEnum v34; // esi
+  int v35; // ebx
+  __int64 v36; // rcx
+  unsigned int v37; // r8d
+  hk1AxisSweep::AabbInt *v38; // rdx
+  hkaiEdgeGeometry::Edge *v39; // r13
+  int v40; // r14d
+  __int64 v41; // r9
+  signed int m_a; // r10d
+  __int64 v43; // rdx
+  __int64 m_b; // r8
+  __m128 v45; // xmm1
+  __m128 v46; // xmm0
+  __m128 v47; // xmm9
+  __m128 v48; // xmm0
+  __m128 v49; // xmm9
+  __int64 v50; // rax
+  __int64 v51; // r9
+  __m128 v52; // xmm2
+  __m128 v53; // xmm9
+  unsigned int v54; // ecx
+  __m128 v55; // xmm8
+  __m128 v56; // xmm0
+  __m128 v57; // xmm7
+  __m128 v58; // xmm0
+  hkVector4f v59; // xmm6
+  _DWORD *v60; // r14
+  int v61; // r9d
+  int v62; // eax
+  int v63; // eax
+  int v64; // r8d
+  hkResult *v65; // rbx
+  _DWORD *v66; // rdx
+  __m128 v67; // xmm7
+  __m128 v68; // xmm2
+  int v69; // r9d
+  int v70; // eax
   __m128 v71; // xmm7
-  __m128 v72; // xmm2
-  int v73; // er9
-  int v74; // eax
-  __m128 v75; // xmm7
+  int v72; // eax
+  __int64 v73; // r14
+  int v74; // r9d
+  int v75; // eax
   int v76; // eax
-  __int64 v77; // r14
-  int v78; // er9
-  int v79; // eax
-  int v80; // eax
-  __int64 v81; // rax
+  __int64 v77; // rax
+  __m128 v78; // xmm2
+  __m128 v79; // xmm2
+  __int64 v80; // rdx
+  __m128 v81; // xmm1
   __m128 v82; // xmm2
   __m128 v83; // xmm2
-  signed __int64 v84; // rdx
-  __m128 v85; // xmm1
-  __m128 v86; // xmm2
-  __m128 v87; // xmm2
-  __m128 v88; // xmm1
-  signed __int64 v89; // rcx
-  unsigned int v90; // er8
-  hk1AxisSweep::AabbInt *v91; // rdx
-  _DWORD *v92; // rbx
-  int v93; // er9
-  int v94; // eax
-  int v95; // eax
-  __int64 v96; // rdx
-  hkaiBooleanOperation::EdgeEdgeIntersect *v97; // rcx
-  signed int v98; // er8
-  char *v99; // rbx
-  int v100; // esi
-  __int32 v101; // eax
-  hkaiBooleanFaceFaceIntersects *v102; // r14
-  hkResultEnum v103; // edi
+  __m128 v84; // xmm1
+  __int64 v85; // rcx
+  unsigned int v86; // r8d
+  hk1AxisSweep::AabbInt *v87; // rdx
+  _DWORD *v88; // rbx
+  int v89; // r9d
+  int v90; // eax
+  int v91; // eax
+  __int64 v92; // rdx
+  hkaiBooleanOperation::EdgeEdgeIntersect *v93; // rcx
+  int v94; // r8d
+  char *v95; // rbx
+  int v96; // esi
+  __int32 v97; // eax
+  hkaiBooleanFaceFaceIntersects *v98; // r14
+  hkResultEnum m_size; // edi
   char *i; // rdi
-  unsigned __int64 v105; // rdx
-  unsigned __int64 v106; // rsi
-  int v107; // er13
+  __int64 v101; // rsi
+  int v102; // r13d
+  int v103; // eax
+  int v104; // r9d
+  int v105; // eax
+  int v106; // r9d
+  int v107; // eax
   int v108; // eax
-  int v109; // er9
-  int v110; // eax
-  int v111; // eax
-  int v112; // er9
-  int v113; // eax
-  int v114; // eax
-  hkaiEdgeGeometry::Edge *v115; // r13
-  hkaiEdgeGeometry::Edge *v116; // rcx
+  hkaiEdgeGeometry::Edge *v109; // r13
+  hkaiEdgeGeometry::Edge *v110; // rcx
+  unsigned int v111; // eax
+  unsigned int v112; // eax
+  __int64 v113; // rdx
+  unsigned int v114; // eax
+  unsigned int v115; // eax
+  unsigned int v116; // eax
   unsigned int v117; // eax
   unsigned int v118; // eax
-  __int64 v119; // rdx
-  unsigned int v120; // eax
-  unsigned int v121; // eax
-  unsigned int v122; // eax
-  unsigned int v123; // eax
-  unsigned int v124; // eax
-  int v125; // er9
-  int v126; // eax
-  int v127; // eax
-  __int64 v128; // r13
-  int v129; // er9
-  int v130; // eax
+  int v119; // r9d
+  int v120; // eax
+  int v121; // eax
+  __int64 v122; // r13
+  int v123; // r9d
+  int v124; // eax
+  int v125; // eax
+  __int64 v126; // rcx
+  hkaiEdgeGeometry::Edge *v127; // rcx
+  unsigned int v128; // eax
+  unsigned int v129; // eax
+  hkaiBooleanFaceFaceIntersects::Intersect *v130; // rcx
   int v131; // eax
-  __int64 v132; // rcx
-  unsigned int *v133; // rcx
-  unsigned int v134; // eax
-  unsigned int v135; // eax
-  hkaiBooleanFaceFaceIntersects::Intersect *v136; // rcx
-  int v137; // eax
-  int v138; // er8
-  hkResult resulta; // [rsp+30h] [rbp-D0h]
-  hkArrayBase<hkRadixSort::SortData32> sortArray; // [rsp+38h] [rbp-C8h]
-  hkArrayBase<hk1AxisSweep::AabbInt> sortedAabbs; // [rsp+48h] [rbp-B8h]
-  hkResult v142; // [rsp+58h] [rbp-A8h]
-  hk1AxisSweep::AabbInt *array; // [rsp+60h] [rbp-A0h]
-  int v144; // [rsp+68h] [rbp-98h]
-  int v145; // [rsp+6Ch] [rbp-94h]
-  hkResult v146; // [rsp+70h] [rbp-90h]
-  hkResult v147; // [rsp+74h] [rbp-8Ch]
-  __int64 v148; // [rsp+78h] [rbp-88h]
-  void *v149; // [rsp+80h] [rbp-80h]
-  hkResult v150; // [rsp+88h] [rbp-78h]
-  void *v151; // [rsp+90h] [rbp-70h]
-  int v152; // [rsp+98h] [rbp-68h]
-  hkResult v153; // [rsp+9Ch] [rbp-64h]
-  __int64 v154; // [rsp+A0h] [rbp-60h]
-  hkAabb aabbIn; // [rsp+B0h] [rbp-50h]
-  hkVector4f points; // [rsp+D0h] [rbp-30h]
-  __m128 v157; // [rsp+E0h] [rbp-20h]
-  __m128 v158; // [rsp+F0h] [rbp-10h]
-  __m128 v159; // [rsp+100h] [rbp+0h]
-  hkaiBooleanOperation *v160; // [rsp+1A0h] [rbp+A0h]
-  hkResult *v161; // [rsp+1A8h] [rbp+A8h]
-  hkaiEdgeGeometry::Edge *v162; // [rsp+1B8h] [rbp+B8h]
+  int v132; // r8d
+  hkResult resulta; // [rsp+30h] [rbp-D0h] BYREF
+  hkArrayBase<hkRadixSort::SortData32> sortArray; // [rsp+38h] [rbp-C8h] BYREF
+  hkArrayBase<hk1AxisSweep::AabbInt> sortedAabbs; // [rsp+48h] [rbp-B8h] BYREF
+  hkResult v136; // [rsp+58h] [rbp-A8h] BYREF
+  hk1AxisSweep::AabbInt *array; // [rsp+60h] [rbp-A0h] BYREF
+  int v138; // [rsp+68h] [rbp-98h]
+  int v139; // [rsp+6Ch] [rbp-94h]
+  hkResult v140; // [rsp+70h] [rbp-90h] BYREF
+  hkResult v141; // [rsp+74h] [rbp-8Ch] BYREF
+  __int64 v142; // [rsp+78h] [rbp-88h] BYREF
+  void *p_m_vertices; // [rsp+80h] [rbp-80h]
+  hkResult v144; // [rsp+88h] [rbp-78h] BYREF
+  void *p_m_edgeEdgeIntersects; // [rsp+90h] [rbp-70h]
+  int v146; // [rsp+98h] [rbp-68h]
+  hkResult v147; // [rsp+9Ch] [rbp-64h] BYREF
+  __int64 v148; // [rsp+A0h] [rbp-60h]
+  hkAabb aabbIn; // [rsp+B0h] [rbp-50h] BYREF
+  hkVector4f points; // [rsp+D0h] [rbp-30h] BYREF
+  __m128 v151; // [rsp+E0h] [rbp-20h]
+  __m128 v152; // [rsp+F0h] [rbp-10h]
+  __m128 v153; // [rsp+100h] [rbp+0h]
+  hkaiBooleanOperation *v154; // [rsp+1A0h] [rbp+A0h] BYREF
+  hkResult *v155; // [rsp+1A8h] [rbp+A8h]
+  hkaiEdgeGeometry::Edge *v156; // [rsp+1B8h] [rbp+B8h]
 
-  v162 = edges;
-  v161 = result;
-  v160 = this;
-  v7 = edges->m_face;
-  v8 = faceNormalIn;
+  v156 = edges;
+  v155 = result;
+  v154 = this;
+  m_face = edges->m_face;
   v9 = result;
   v10 = edges;
   this->m_edgeEdgeIntersects.m_size = 0;
-  v11 = this->m_edgeEdgeIntersects.m_capacityAndFlags;
-  v151 = &this->m_edgeEdgeIntersects;
-  v12 = v11 & 0x3FFFFFFF;
+  m_capacityAndFlags = this->m_edgeEdgeIntersects.m_capacityAndFlags;
+  p_m_edgeEdgeIntersects = &this->m_edgeEdgeIntersects;
+  v12 = m_capacityAndFlags & 0x3FFFFFFF;
   if ( v12 < 32 )
   {
     v13 = 2 * v12;
     v14 = 32;
     if ( v13 > 32 )
       v14 = v13;
-    hkArrayUtil::_reserve(
-      &resulta,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &this->m_edgeEdgeIntersects,
-      v14,
-      12);
+    hkArrayUtil::_reserve(&resulta, &hkContainerHeapAllocator::s_alloc, &this->m_edgeEdgeIntersects, v14, 12);
     if ( resulta.m_enum )
     {
-      v9->m_enum = 1;
+      v9->m_enum = HK_FAILURE;
       return v9;
     }
   }
   v16 = numEdges;
-  v17 = (__m128)_mm_srli_epi32(_mm_slli_epi32(_mm_load_si128((const __m128i *)v8), 1u), 1u);
-  v18 = &geomOut->m_edges;
+  v17 = (__m128)_mm_srli_epi32(_mm_slli_epi32(_mm_load_si128(faceNormalIn), 1u), 1u);
+  p_m_edges = &geomOut->m_edges;
   v19 = numEdges + 4;
-  v149 = &geomOut->m_vertices;
+  p_m_vertices = &geomOut->m_vertices;
   array = 0i64;
-  v144 = 0;
-  v145 = 2147483648;
-  v152 = (unsigned __int8)hkVector4Comparison_maskToLastIndex[_mm_movemask_ps(
+  v138 = 0;
+  v139 = 0x80000000;
+  v146 = (unsigned __int8)hkVector4Comparison_maskToLastIndex[_mm_movemask_ps(
                                                                 _mm_and_ps(
-                                                                  _mm_cmpleps(
+                                                                  _mm_cmple_ps(
                                                                     _mm_max_ps(
                                                                       _mm_shuffle_ps(v17, v17, 170),
                                                                       _mm_max_ps(
@@ -2952,606 +2873,571 @@ hkResult *__fastcall hkaiBooleanOperation::_addFaceIntersections(hkaiBooleanOper
                                                                   (__m128)xmmword_141A4E0F0))];
   if ( numEdges + 4 <= 0 )
   {
-    v150.m_enum = 0;
+    v144.m_enum = HK_SUCCESS;
   }
   else
   {
-    v20 = numEdges + 4;
-    if ( v19 < 0 )
-      v20 = 0;
-    hkArrayUtil::_reserve(&v150, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, &array, v20, 32);
-    if ( v150.m_enum )
+    hkArrayUtil::_reserve(&v144, &hkContainerTempAllocator::s_alloc, &array, numEdges + 4, 32);
+    if ( v144.m_enum )
     {
-      v21 = v145;
-      v9->m_enum = 1;
-      v144 = 0;
-      if ( v21 >= 0 )
-        hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-          array,
-          32 * v21);
+      v20 = v139;
+      v9->m_enum = HK_FAILURE;
+      v138 = 0;
+      if ( v20 >= 0 )
+        hkContainerTempAllocator::s_alloc.vfptr->bufFree(&hkContainerTempAllocator::s_alloc, array, 32 * v20);
       return v9;
     }
   }
-  v144 = v19;
+  v138 = v19;
   resulta.m_enum = LODWORD(FLOAT_0_001);
-  v22 = 0;
-  v23 = _mm_shuffle_ps((__m128)(unsigned int)resulta.m_enum, (__m128)(unsigned int)resulta.m_enum, 0);
-  if ( (signed int)v16 > 0 )
+  v21 = 0;
+  v22 = _mm_shuffle_ps((__m128)(unsigned int)resulta.m_enum, (__m128)(unsigned int)resulta.m_enum, 0);
+  if ( (int)v16 > 0 )
   {
-    v24 = v149;
-    v25 = 0i64;
+    v23 = p_m_vertices;
+    v24 = 0i64;
     do
     {
-      v26.m_quad = _mm_sub_ps(
-                     _mm_min_ps(
-                       *(__m128 *)(*v24 + 16i64 * (signed int)v10->m_a),
-                       *(__m128 *)(*v24 + 16i64 * (signed int)v10->m_b)),
-                     v23);
+      v25.m_quad = _mm_sub_ps(
+                     _mm_min_ps(*(__m128 *)(*v23 + 16i64 * (int)v10->m_a), *(__m128 *)(*v23 + 16i64 * (int)v10->m_b)),
+                     v22);
       aabbIn.m_max.m_quad = _mm_add_ps(
                               _mm_max_ps(
-                                *(__m128 *)(*v24 + 16i64 * (signed int)v10->m_a),
-                                *(__m128 *)(*v24 + 16i64 * (signed int)v10->m_b)),
-                              v23);
-      aabbIn.m_min = (hkVector4f)v26.m_quad;
-      hk1AxisSweep::AabbInt::set(&array[v25], &aabbIn, v22++);
-      ++v25;
+                                *(__m128 *)(*v23 + 16i64 * (int)v10->m_a),
+                                *(__m128 *)(*v23 + 16i64 * (int)v10->m_b)),
+                              v22);
+      aabbIn.m_min = (hkVector4f)v25.m_quad;
+      hk1AxisSweep::AabbInt::set(&array[v24++], &aabbIn, v21++);
       ++v10;
     }
-    while ( v22 < (signed int)v16 );
-    v9 = v161;
+    while ( v21 < (int)v16 );
+    v9 = v155;
     v19 = v16 + 4;
   }
-  v27 = v16;
-  v154 = v16;
-  array[v27].m_min[0] = -1;
-  array[v27 + 1].m_min[0] = -1;
+  v26 = v16;
+  v148 = v16;
+  array[v26].m_min[0] = -1;
+  array[v26 + 1].m_min[0] = -1;
   array[v16 + 2].m_min[0] = -1;
   array[v16 + 3].m_min[0] = -1;
-  v28 = 2147483648;
+  v27 = 0x80000000;
   sortedAabbs.m_data = 0i64;
   sortedAabbs.m_size = 0;
-  sortedAabbs.m_capacityAndFlags = 2147483648;
+  sortedAabbs.m_capacityAndFlags = 0x80000000;
   sortArray.m_data = 0i64;
-  sortArray.m_capacityAndFlags = 2147483648;
+  sortArray.m_capacityAndFlags = 0x80000000;
   sortArray.m_size = 0;
   if ( v19 <= 0 )
   {
-    v142.m_enum = 0;
+    v136.m_enum = HK_SUCCESS;
   }
   else
   {
-    v29 = v19;
-    if ( v19 < 0 )
-      v29 = 0;
-    hkArrayUtil::_reserve(&v142, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, &sortedAabbs, v29, 32);
-    if ( v142.m_enum )
-      goto LABEL_28;
-    v28 = sortArray.m_capacityAndFlags;
-  }
-  v30 = v28 & 0x3FFFFFFF;
-  sortedAabbs.m_size = v19;
-  if ( v30 < v19 )
-  {
-    v31 = 2 * v30;
-    v32 = v19;
-    if ( v19 < v31 )
-      v32 = v31;
-    hkArrayUtil::_reserve(&resulta, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, &sortArray, v32, 8);
-    if ( resulta.m_enum )
+    hkArrayUtil::_reserve(&v136, &hkContainerTempAllocator::s_alloc, &sortedAabbs, v19, 32);
+    if ( v136.m_enum )
     {
-LABEL_28:
-      v33 = sortArray.m_capacityAndFlags;
+LABEL_24:
+      v31 = sortArray.m_capacityAndFlags;
       sortArray.m_size = 0;
-      v9->m_enum = 1;
-      if ( v33 >= 0 )
-        hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-          sortArray.m_data,
-          8 * v33);
+      v9->m_enum = HK_FAILURE;
+      if ( v31 >= 0 )
+        hkContainerTempAllocator::s_alloc.vfptr->bufFree(&hkContainerTempAllocator::s_alloc, sortArray.m_data, 8 * v31);
       sortedAabbs.m_size = 0;
-      sortArray.m_capacityAndFlags = 2147483648;
+      sortArray.m_capacityAndFlags = 0x80000000;
       sortArray.m_data = 0i64;
       if ( sortedAabbs.m_capacityAndFlags >= 0 )
         hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
+          &hkContainerTempAllocator::s_alloc,
           sortedAabbs.m_data,
           32 * sortedAabbs.m_capacityAndFlags);
       sortedAabbs.m_data = 0i64;
-      sortedAabbs.m_capacityAndFlags = 2147483648;
-      v144 = 0;
-      if ( v145 >= 0 )
-        hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-          array,
-          32 * v145);
+      sortedAabbs.m_capacityAndFlags = 0x80000000;
+      v138 = 0;
+      if ( v139 >= 0 )
+        hkContainerTempAllocator::s_alloc.vfptr->bufFree(&hkContainerTempAllocator::s_alloc, array, 32 * v139);
       return v9;
     }
+    v27 = sortArray.m_capacityAndFlags;
+  }
+  v28 = v27 & 0x3FFFFFFF;
+  sortedAabbs.m_size = v19;
+  if ( v28 < v19 )
+  {
+    v29 = 2 * v28;
+    v30 = v19;
+    if ( v19 < v29 )
+      v30 = v29;
+    hkArrayUtil::_reserve(&resulta, &hkContainerTempAllocator::s_alloc, &sortArray, v30, 8);
+    if ( resulta.m_enum )
+      goto LABEL_24;
   }
   sortArray.m_size = v19;
   hk1AxisSweep::sortAabbs(array, v16, &sortArray, &sortedAabbs);
-  v34 = array;
-  v35 = v16 - 1;
-  v36 = 0;
-  v37 = 1;
-  v142.m_enum = v35;
-  if ( (signed int)v35 > 0 )
+  v32 = array;
+  v33 = v16 - 1;
+  v34 = HK_SUCCESS;
+  v35 = 1;
+  v136.m_enum = v33;
+  if ( v33 > HK_SUCCESS )
   {
     while ( 1 )
     {
-      v38 = v36;
-      v39 = array[v38].m_max[0];
-      v40 = &array[v37];
-      if ( v40->m_min[0] <= v39 )
+      v36 = v34;
+      v37 = array[v36].m_max[0];
+      v38 = &array[v35];
+      if ( v38->m_min[0] <= v37 )
         break;
-LABEL_39:
-      v37 = ++v36 + 1;
-      if ( v36 >= v35 )
-        goto LABEL_40;
+LABEL_35:
+      v35 = ++v34 + 1;
+      if ( v34 >= v33 )
+        goto LABEL_36;
     }
-    while ( (((v40->m_max[2] - array[v38].m_min[2]) | (v40->m_max[1] - array[v38].m_min[1]) | (array[v38].m_max[2]
-                                                                                             - v40->m_min[2]) | (array[v38].m_max[1] - v40->m_min[1])) & 0x80000000) != 0 )
+    while ( (((v38->m_max[2] - array[v36].m_min[2]) | (v38->m_max[1] - array[v36].m_min[1]) | (array[v36].m_max[2]
+                                                                                             - v38->m_min[2]) | (array[v36].m_max[1] - v38->m_min[1])) & 0x80000000) != 0 )
     {
-      v40 = &array[++v37];
-      if ( v40->m_min[0] > v39 )
-        goto LABEL_39;
+      v38 = &array[++v35];
+      if ( v38->m_min[0] > v37 )
+        goto LABEL_35;
     }
   }
-LABEL_40:
-  if ( v36 < v35 )
+LABEL_36:
+  if ( v34 < v33 )
   {
-    v41 = v162;
+    v39 = v156;
     do
     {
-      v42 = v152;
-      LODWORD(v148) = *(_DWORD *)v34[v36].m_expansionMin;
-      v43 = *(signed int *)v34[v37].m_expansionMin;
-      v44 = v41[(signed int)v148].m_a;
-      v45 = *(_QWORD *)v149;
-      v46 = (signed int)v41[(signed int)v148].m_b;
-      v47 = 2i64 * (signed int)v41[(signed int)v148].m_a;
-      v147.m_enum = *(_DWORD *)v34[v37].m_expansionMin;
-      v48 = *(__m128 *)(v45 + 8 * v47);
-      v49 = *(__m128 *)(v45 + 8 * v47);
-      v50 = *(__m128 *)(v45 + 16 * v46);
-      if ( v152 )
+      v40 = v146;
+      LODWORD(v142) = *(_DWORD *)v32[v34].m_expansionMin;
+      v41 = *(int *)v32[v35].m_expansionMin;
+      m_a = v39[(int)v142].m_a;
+      v43 = *(_QWORD *)p_m_vertices;
+      m_b = (int)v39[(int)v142].m_b;
+      v141.m_enum = *(_DWORD *)v32[v35].m_expansionMin;
+      v45 = *(__m128 *)(v43 + 16i64 * m_a);
+      v46 = v45;
+      v47 = *(__m128 *)(v43 + 16 * m_b);
+      if ( v146 )
       {
-        if ( v152 == 1 )
-          v49 = _mm_shuffle_ps(v48, v48, 216);
+        if ( v146 == 1 )
+          v46 = _mm_shuffle_ps(v45, v45, 216);
       }
       else
       {
-        v49 = _mm_shuffle_ps(v48, v48, 201);
+        v46 = _mm_shuffle_ps(v45, v45, 201);
       }
-      points.m_quad = v49;
-      v51 = v50;
-      if ( v152 )
+      points.m_quad = v46;
+      v48 = v47;
+      if ( v146 )
       {
-        if ( v152 == 1 )
-          v51 = _mm_shuffle_ps(v50, v50, 216);
+        if ( v146 == 1 )
+          v48 = _mm_shuffle_ps(v47, v47, 216);
       }
       else
       {
-        v51 = _mm_shuffle_ps(v50, v50, 201);
+        v48 = _mm_shuffle_ps(v47, v47, 201);
       }
-      v52 = _mm_sub_ps(v50, v48);
-      v157 = v51;
-      v53 = v43;
-      v54 = (signed int)v41[v43].m_a;
-      v55 = _mm_mul_ps(v52, v48);
-      v56 = _mm_shuffle_ps(
-              v52,
+      v49 = _mm_sub_ps(v47, v45);
+      v151 = v48;
+      v50 = v41;
+      v51 = (int)v39[v41].m_a;
+      v52 = _mm_mul_ps(v49, v45);
+      v53 = _mm_shuffle_ps(
+              v49,
               _mm_unpackhi_ps(
-                v52,
+                v49,
                 _mm_sub_ps(
                   (__m128)0i64,
                   _mm_add_ps(
-                    _mm_add_ps(_mm_shuffle_ps(v55, v55, 85), _mm_shuffle_ps(v55, v55, 0)),
-                    _mm_shuffle_ps(v55, v55, 170)))),
+                    _mm_add_ps(_mm_shuffle_ps(v52, v52, 85), _mm_shuffle_ps(v52, v52, 0)),
+                    _mm_shuffle_ps(v52, v52, 170)))),
               196);
-      if ( v44 != (_DWORD)v54 )
+      if ( m_a != (_DWORD)v51 )
       {
-        v57 = v41[v53].m_b;
-        if ( v44 != v57 && (_DWORD)v46 != (_DWORD)v54 && (_DWORD)v46 != v57 )
+        v54 = v39[v50].m_b;
+        if ( m_a != v54 && (_DWORD)m_b != (_DWORD)v51 && (_DWORD)m_b != v54 )
         {
-          v58 = *(__m128 *)(v45 + 16 * v54);
-          v59 = *(__m128 *)(v45 + 16 * v54);
-          v60 = *(__m128 *)(v45 + 16i64 * (signed int)v41[v53].m_b);
-          if ( v152 )
+          v55 = *(__m128 *)(v43 + 16 * v51);
+          v56 = v55;
+          v57 = *(__m128 *)(v43 + 16i64 * (int)v39[v50].m_b);
+          if ( v146 )
           {
-            if ( v152 == 1 )
-              v59 = _mm_shuffle_ps(v59, v58, 216);
+            if ( v146 == 1 )
+              v56 = _mm_shuffle_ps(v55, v55, 216);
           }
           else
           {
-            v59 = _mm_shuffle_ps(v59, v58, 201);
+            v56 = _mm_shuffle_ps(v55, v55, 201);
           }
-          v158 = v59;
-          v61 = v60;
-          if ( v152 )
+          v152 = v56;
+          v58 = v57;
+          if ( v146 )
           {
-            if ( v152 == 1 )
-              v61 = _mm_shuffle_ps(v60, v60, 216);
+            if ( v146 == 1 )
+              v58 = _mm_shuffle_ps(v57, v57, 216);
           }
           else
           {
-            v61 = _mm_shuffle_ps(v60, v60, 201);
+            v58 = _mm_shuffle_ps(v57, v57, 201);
           }
-          v159 = v61;
-          if ( (unsigned int)hkaiBooleanOperation::_linesIntersect(v160, &points, &aabbIn.m_min) )
+          v153 = v58;
+          if ( (unsigned int)hkaiBooleanOperation::_linesIntersect(v154, &points, &aabbIn.m_min) )
           {
-            v62.m_quad = (__m128)aabbIn.m_min;
-            if ( v42 )
+            v59.m_quad = (__m128)aabbIn.m_min;
+            if ( v40 )
             {
-              if ( v42 == 1 )
-                v62.m_quad = _mm_shuffle_ps(aabbIn.m_min.m_quad, aabbIn.m_min.m_quad, 216);
+              if ( v40 == 1 )
+                v59.m_quad = _mm_shuffle_ps(aabbIn.m_min.m_quad, aabbIn.m_min.m_quad, 216);
             }
             else
             {
-              v62.m_quad = _mm_shuffle_ps(aabbIn.m_min.m_quad, aabbIn.m_min.m_quad, 210);
+              v59.m_quad = _mm_shuffle_ps(aabbIn.m_min.m_quad, aabbIn.m_min.m_quad, 210);
             }
-            v63 = v149;
-            v64 = *((_DWORD *)v149 + 2);
-            HIDWORD(v148) = v64;
-            v65 = v64 + 16;
-            v66 = *((_DWORD *)v149 + 3) & 0x3FFFFFFF;
-            if ( v66 >= v65 )
+            v60 = p_m_vertices;
+            HIDWORD(v142) = *((_DWORD *)p_m_vertices + 2);
+            v61 = HIDWORD(v142) + 16;
+            v62 = *((_DWORD *)p_m_vertices + 3) & 0x3FFFFFFF;
+            if ( v62 >= HIDWORD(v142) + 16 )
             {
-              v146.m_enum = 0;
+              v140.m_enum = HK_SUCCESS;
             }
             else
             {
-              v67 = 2 * v66;
-              if ( v65 < v67 )
-                v65 = v67;
-              hkArrayUtil::_reserve(&v146, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v149, v65, 16);
-              if ( v146.m_enum )
-                goto LABEL_71;
+              v63 = 2 * v62;
+              if ( v61 < v63 )
+                v61 = v63;
+              hkArrayUtil::_reserve(&v140, &hkContainerHeapAllocator::s_alloc, p_m_vertices, v61, 16);
+              if ( v140.m_enum )
+                goto LABEL_67;
             }
-            if ( v63[2] == (v63[3] & 0x3FFFFFFF) )
-              hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v63, 16);
-            v70 = v151;
-            v71 = _mm_sub_ps(v60, v58);
-            v72 = _mm_mul_ps(v71, v58);
-            *(hkVector4f *)(*(_QWORD *)v63 + 16i64 * (signed int)v63[2]++) = (hkVector4f)v62.m_quad;
-            v73 = v70[2] + 16;
-            v74 = v70[3] & 0x3FFFFFFF;
-            v75 = _mm_shuffle_ps(
-                    v71,
+            if ( v60[2] == (v60[3] & 0x3FFFFFFF) )
+              hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, v60, 16);
+            v66 = p_m_edgeEdgeIntersects;
+            v67 = _mm_sub_ps(v57, v55);
+            v68 = _mm_mul_ps(v67, v55);
+            *(hkVector4f *)(*(_QWORD *)v60 + 16i64 * (int)v60[2]++) = (hkVector4f)v59.m_quad;
+            v69 = v66[2] + 16;
+            v70 = v66[3] & 0x3FFFFFFF;
+            v71 = _mm_shuffle_ps(
+                    v67,
                     _mm_unpackhi_ps(
-                      v71,
+                      v67,
                       _mm_sub_ps(
                         (__m128)0i64,
                         _mm_add_ps(
-                          _mm_add_ps(_mm_shuffle_ps(v72, v72, 85), _mm_shuffle_ps(v72, v72, 0)),
-                          _mm_shuffle_ps(v72, v72, 170)))),
+                          _mm_add_ps(_mm_shuffle_ps(v68, v68, 85), _mm_shuffle_ps(v68, v68, 0)),
+                          _mm_shuffle_ps(v68, v68, 170)))),
                     196);
-            if ( v74 >= v73 )
+            if ( v70 >= v69 )
             {
-              resulta.m_enum = 0;
+              resulta.m_enum = HK_SUCCESS;
             }
             else
             {
-              v76 = 2 * v74;
-              if ( v73 < v76 )
-                v73 = v76;
-              hkArrayUtil::_reserve(
-                &resulta,
-                (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-                v70,
-                v73,
-                12);
+              v72 = 2 * v70;
+              if ( v69 < v72 )
+                v69 = v72;
+              hkArrayUtil::_reserve(&resulta, &hkContainerHeapAllocator::s_alloc, v66, v69, 12);
               if ( resulta.m_enum )
-                goto LABEL_71;
-              v70 = v151;
+                goto LABEL_67;
+              v66 = p_m_edgeEdgeIntersects;
             }
-            v77 = (signed int)v70[2];
-            v78 = v77 + 2;
-            v79 = v70[3] & 0x3FFFFFFF;
-            if ( v79 >= (signed int)v77 + 2 )
+            v73 = (int)v66[2];
+            v74 = v73 + 2;
+            v75 = v66[3] & 0x3FFFFFFF;
+            if ( v75 >= (int)v73 + 2 )
             {
-              v153.m_enum = 0;
+              v147.m_enum = HK_SUCCESS;
             }
             else
             {
-              v80 = 2 * v79;
-              if ( v78 < v80 )
-                v78 = v80;
-              hkArrayUtil::_reserve(&v153, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v70, v78, 12);
-              v70 = v151;
+              v76 = 2 * v75;
+              if ( v74 < v76 )
+                v74 = v76;
+              hkArrayUtil::_reserve(&v147, &hkContainerHeapAllocator::s_alloc, v66, v74, 12);
+              v66 = p_m_edgeEdgeIntersects;
             }
-            v81 = *(_QWORD *)v70;
-            v70[2] += 2;
-            v82 = _mm_mul_ps(v62.m_quad, v56);
-            v83 = _mm_shuffle_ps(v82, _mm_unpackhi_ps(v82, v56), 196);
-            v84 = v81 + 12 * v77;
-            LODWORD(v81) = HIDWORD(v148);
-            *(_QWORD *)v84 = v148;
-            v85 = _mm_add_ps(_mm_shuffle_ps(v83, v83, 78), v83);
-            v86 = _mm_mul_ps(v75, v62.m_quad);
-            *(float *)(v84 + 8) = COERCE_FLOAT(_mm_shuffle_ps(v85, v85, 177)) + v85.m128_f32[0];
-            *(_DWORD *)(v84 + 16) = v81;
-            *(hkResult *)(v84 + 12) = v147;
-            v87 = _mm_shuffle_ps(v86, _mm_unpackhi_ps(v86, v75), 196);
-            v88 = _mm_add_ps(_mm_shuffle_ps(v87, v87, 78), v87);
-            *(float *)(v84 + 20) = COERCE_FLOAT(_mm_shuffle_ps(v88, v88, 177)) + v88.m128_f32[0];
+            v77 = *(_QWORD *)v66;
+            v66[2] += 2;
+            v78 = _mm_mul_ps(v59.m_quad, v53);
+            v79 = _mm_shuffle_ps(v78, _mm_unpackhi_ps(v78, v53), 196);
+            v80 = v77 + 12 * v73;
+            LODWORD(v77) = HIDWORD(v142);
+            *(_QWORD *)v80 = v142;
+            v81 = _mm_add_ps(_mm_shuffle_ps(v79, v79, 78), v79);
+            v82 = _mm_mul_ps(v71, v59.m_quad);
+            *(float *)(v80 + 8) = _mm_shuffle_ps(v81, v81, 177).m128_f32[0] + v81.m128_f32[0];
+            *(_DWORD *)(v80 + 16) = v77;
+            *(hkResult *)(v80 + 12) = v141;
+            v83 = _mm_shuffle_ps(v82, _mm_unpackhi_ps(v82, v71), 196);
+            v84 = _mm_add_ps(_mm_shuffle_ps(v83, v83, 78), v83);
+            *(float *)(v80 + 20) = _mm_shuffle_ps(v84, v84, 177).m128_f32[0] + v84.m128_f32[0];
           }
         }
       }
-      ++v37;
-      if ( v36 >= v142.m_enum )
+      ++v35;
+      if ( v34 >= v136.m_enum )
         break;
       while ( 1 )
       {
-        v89 = v36;
-        v90 = v34[v89].m_max[0];
-        v91 = &v34[v37];
-        if ( v91->m_min[0] <= v90 )
+        v85 = v34;
+        v86 = v32[v85].m_max[0];
+        v87 = &v32[v35];
+        if ( v87->m_min[0] <= v86 )
           break;
-LABEL_95:
-        v37 = ++v36 + 1;
-        if ( v36 >= v142.m_enum )
-          goto LABEL_96;
+LABEL_91:
+        v35 = ++v34 + 1;
+        if ( v34 >= v136.m_enum )
+          goto LABEL_92;
       }
-      while ( (((v91->m_max[2] - v34[v89].m_min[2]) | (v91->m_max[1] - v34[v89].m_min[1]) | (v34[v89].m_max[2]
-                                                                                           - v91->m_min[2]) | (v34[v89].m_max[1] - v91->m_min[1])) & 0x80000000) != 0 )
+      while ( (((v87->m_max[2] - v32[v85].m_min[2]) | (v87->m_max[1] - v32[v85].m_min[1]) | (v32[v85].m_max[2]
+                                                                                           - v87->m_min[2]) | (v32[v85].m_max[1] - v87->m_min[1])) & 0x80000000) != 0 )
       {
-        v91 = &v34[++v37];
-        if ( v91->m_min[0] > v90 )
-          goto LABEL_95;
+        v87 = &v32[++v35];
+        if ( v87->m_min[0] > v86 )
+          goto LABEL_91;
       }
     }
-    while ( v36 < v142.m_enum );
+    while ( v34 < v136.m_enum );
   }
-LABEL_96:
-  v92 = v151;
-  v93 = *((_DWORD *)v151 + 2) + 1;
-  v94 = *((_DWORD *)v151 + 3) & 0x3FFFFFFF;
-  if ( v94 >= v93 )
-    goto LABEL_153;
-  v95 = 2 * v94;
-  if ( v93 < v95 )
-    v93 = v95;
-  hkArrayUtil::_reserve((hkResult *)&v160, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v151, v93, 12);
-  if ( (_DWORD)v160 )
+LABEL_92:
+  v88 = p_m_edgeEdgeIntersects;
+  v89 = *((_DWORD *)p_m_edgeEdgeIntersects + 2) + 1;
+  v90 = *((_DWORD *)p_m_edgeEdgeIntersects + 3) & 0x3FFFFFFF;
+  if ( v90 >= v89 )
+    goto LABEL_96;
+  v91 = 2 * v90;
+  if ( v89 < v91 )
+    v89 = v91;
+  hkArrayUtil::_reserve((hkResult *)&v154, &hkContainerHeapAllocator::s_alloc, p_m_edgeEdgeIntersects, v89, 12);
+  if ( (_DWORD)v154 )
   {
-LABEL_71:
-    v68 = sortArray.m_capacityAndFlags;
-    v69 = v161;
-    v161->m_enum = 1;
+LABEL_67:
+    v64 = sortArray.m_capacityAndFlags;
+    v65 = v155;
+    v155->m_enum = HK_FAILURE;
     sortArray.m_size = 0;
-    if ( v68 >= 0 )
-      hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-        sortArray.m_data,
-        8 * v68);
+    if ( v64 >= 0 )
+      hkContainerTempAllocator::s_alloc.vfptr->bufFree(&hkContainerTempAllocator::s_alloc, sortArray.m_data, 8 * v64);
     sortArray.m_data = 0i64;
-    sortArray.m_capacityAndFlags = 2147483648;
+    sortArray.m_capacityAndFlags = 0x80000000;
     sortedAabbs.m_size = 0;
     if ( sortedAabbs.m_capacityAndFlags >= 0 )
       hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
+        &hkContainerTempAllocator::s_alloc,
         sortedAabbs.m_data,
         32 * sortedAabbs.m_capacityAndFlags);
     sortedAabbs.m_data = 0i64;
-    v144 = 0;
+    v138 = 0;
   }
   else
   {
-LABEL_153:
-    if ( v92[2] == (v92[3] & 0x3FFFFFFF) )
-      hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v92, 12);
-    v96 = (signed int)v92[2];
-    v97 = *(hkaiBooleanOperation::EdgeEdgeIntersect **)v92;
-    v92[2] = v96 + 1;
-    v97[v96].m_edgeIndex = -1;
-    v98 = --v92[2];
-    if ( v98 > 1 )
+LABEL_96:
+    if ( v88[2] == (v88[3] & 0x3FFFFFFF) )
+      hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, v88, 12);
+    v92 = (int)v88[2];
+    v93 = *(hkaiBooleanOperation::EdgeEdgeIntersect **)v88;
+    v88[2] = v92 + 1;
+    v93[v92].m_edgeIndex = -1;
+    v94 = --v88[2];
+    if ( v94 > 1 )
       hkAlgorithm::quickSortRecursive<hkaiBooleanOperation::EdgeEdgeIntersect,unsigned int (*)(hkaiBooleanOperation::EdgeEdgeIntersect const &,hkaiBooleanOperation::EdgeEdgeIntersect const &)>(
-        *(hkaiBooleanOperation::EdgeEdgeIntersect **)v92,
+        *(hkaiBooleanOperation::EdgeEdgeIntersect **)v88,
         0,
-        v98 - 1,
+        v94 - 1,
         hkaiBooleanOperation_orderEdgeEdgeIntersect);
-    v99 = *(char **)v92;
-    v100 = *(_DWORD *)v99;
-    v101 = 0;
-    v149 = 0i64;
-    v142.m_enum = 0;
-    if ( v154 > 0 )
+    v95 = *(char **)v88;
+    v96 = *(_DWORD *)v95;
+    v97 = 0;
+    p_m_vertices = 0i64;
+    v136.m_enum = HK_SUCCESS;
+    if ( v148 > 0 )
     {
-      v102 = intersects;
+      v98 = intersects;
       do
       {
-        v103 = v18->m_size;
-        resulta.m_enum = v18->m_size;
-        if ( v100 == v101 )
+        m_size = p_m_edges->m_size;
+        resulta.m_enum = m_size;
+        if ( v96 == v97 )
         {
-          for ( i = v99 + 12; *(_DWORD *)i == v100; i += 12 )
+          for ( i = v95 + 12; *(_DWORD *)i == v96; i += 12 )
             ;
-          v105 = (unsigned __int128)((i - v99) * (signed __int128)3074457345618258603i64) >> 64;
-          v106 = (v105 >> 63) + ((signed __int64)v105 >> 1);
-          v107 = 2 * v106 + 2;
-          v108 = v18->m_capacityAndFlags & 0x3FFFFFFF;
-          v109 = v107 + resulta.m_enum;
-          if ( v108 >= v107 + resulta.m_enum )
+          v101 = (i - v95) / 12;
+          v102 = 2 * v101 + 2;
+          v103 = p_m_edges->m_capacityAndFlags & 0x3FFFFFFF;
+          v104 = v102 + resulta.m_enum;
+          if ( v103 >= v102 + resulta.m_enum )
           {
-            LODWORD(v160) = 0;
+            LODWORD(v154) = 0;
           }
           else
           {
-            v110 = 2 * v108;
-            if ( v109 < v110 )
-              v109 = v110;
-            hkArrayUtil::_reserve(
-              (hkResult *)&v160,
-              (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-              v18,
-              v109,
-              16);
-            if ( (_DWORD)v160 )
-              goto LABEL_71;
+            v105 = 2 * v103;
+            if ( v104 < v105 )
+              v104 = v105;
+            hkArrayUtil::_reserve((hkResult *)&v154, &hkContainerHeapAllocator::s_alloc, p_m_edges, v104, 16);
+            if ( (_DWORD)v154 )
+              goto LABEL_67;
           }
-          v111 = v18->m_size;
-          LODWORD(v148) = v111;
-          v112 = v111 + v107;
-          v113 = v18->m_capacityAndFlags & 0x3FFFFFFF;
-          if ( v113 >= v112 )
+          LODWORD(v142) = p_m_edges->m_size;
+          v106 = v142 + v102;
+          v107 = p_m_edges->m_capacityAndFlags & 0x3FFFFFFF;
+          if ( v107 >= (int)v142 + v102 )
           {
-            v147.m_enum = 0;
+            v141.m_enum = HK_SUCCESS;
           }
           else
           {
-            v114 = 2 * v113;
-            if ( v112 < v114 )
-              v112 = v114;
-            hkArrayUtil::_reserve(&v147, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v18, v112, 16);
+            v108 = 2 * v107;
+            if ( v106 < v108 )
+              v106 = v108;
+            hkArrayUtil::_reserve(&v141, &hkContainerHeapAllocator::s_alloc, p_m_edges, v106, 16);
           }
-          v18->m_size += v107;
-          v115 = v162;
-          v116 = &v18->m_data[(signed int)v148 + 2];
-          v116[-2].m_a = v162->m_a;
-          v117 = *((_DWORD *)v99 + 1);
-          v116[-2].m_face = v7;
-          v116[-2].m_b = v117;
-          v116[-2].m_data = 0;
-          v116[-1].m_a = *((_DWORD *)v99 + 1);
-          v118 = v115->m_a;
-          v116[-1].m_face = v7;
-          v116[-1].m_b = v118;
-          v116[-1].m_data = 0;
-          if ( (signed int)v106 - 1 > 0 )
+          p_m_edges->m_size += v102;
+          v109 = v156;
+          v110 = &p_m_edges->m_data[(int)v142 + 2];
+          v110[-2].m_a = v156->m_a;
+          v111 = *((_DWORD *)v95 + 1);
+          v110[-2].m_face = m_face;
+          v110[-2].m_b = v111;
+          v110[-2].m_data = 0;
+          v110[-1].m_a = *((_DWORD *)v95 + 1);
+          v112 = v109->m_a;
+          v110[-1].m_face = m_face;
+          v110[-1].m_b = v112;
+          v110[-1].m_data = 0;
+          if ( (int)v101 - 1 > 0 )
           {
-            v119 = (unsigned int)(v106 - 1);
+            v113 = (unsigned int)(v101 - 1);
             do
             {
-              v120 = *((_DWORD *)v99 + 1);
-              v116 += 2;
-              v99 += 12;
-              v116[-2].m_a = v120;
-              v121 = *((_DWORD *)v99 + 1);
-              v116[-2].m_face = v7;
-              v116[-2].m_data = 0;
-              v116[-2].m_b = v121;
-              v116[-1].m_a = *((_DWORD *)v99 + 1);
-              v122 = *((_DWORD *)v99 - 2);
-              v116[-1].m_face = v7;
-              v116[-1].m_data = 0;
-              v116[-1].m_b = v122;
-              --v119;
+              v114 = *((_DWORD *)v95 + 1);
+              v110 += 2;
+              v95 += 12;
+              v110[-2].m_a = v114;
+              v115 = *((_DWORD *)v95 + 1);
+              v110[-2].m_face = m_face;
+              v110[-2].m_data = 0;
+              v110[-2].m_b = v115;
+              v110[-1].m_a = *((_DWORD *)v95 + 1);
+              v116 = *((_DWORD *)v95 - 2);
+              v110[-1].m_face = m_face;
+              v110[-1].m_data = 0;
+              v110[-1].m_b = v116;
+              --v113;
             }
-            while ( v119 );
+            while ( v113 );
           }
-          v116->m_a = *((_DWORD *)v99 + 1);
-          v123 = v115->m_b;
-          v116->m_face = v7;
-          v116->m_b = v123;
-          v116->m_data = 0;
-          v116[1].m_a = v115->m_b;
-          v124 = *((_DWORD *)v99 + 1);
-          v116[1].m_face = v7;
-          v116[1].m_data = 0;
-          v116[1].m_b = v124;
-          v100 = *(_DWORD *)i;
-          v99 = i;
-          v103 = resulta.m_enum;
+          v110->m_a = *((_DWORD *)v95 + 1);
+          v117 = v109->m_b;
+          v110->m_face = m_face;
+          v110->m_b = v117;
+          v110->m_data = 0;
+          v110[1].m_a = v109->m_b;
+          v118 = *((_DWORD *)v95 + 1);
+          v110[1].m_face = m_face;
+          v110[1].m_data = 0;
+          v110[1].m_b = v118;
+          v96 = *(_DWORD *)i;
+          v95 = i;
+          m_size = resulta.m_enum;
         }
         else
         {
-          v125 = v103 + 2;
-          v126 = v18->m_capacityAndFlags & 0x3FFFFFFF;
-          if ( v126 >= v103 + 2 )
+          v119 = m_size + 2;
+          v120 = p_m_edges->m_capacityAndFlags & 0x3FFFFFFF;
+          if ( v120 >= m_size + 2 )
           {
-            v146.m_enum = 0;
+            v140.m_enum = HK_SUCCESS;
           }
           else
           {
-            v127 = 2 * v126;
-            if ( v125 < v127 )
-              v125 = v127;
-            hkArrayUtil::_reserve(&v146, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v18, v125, 16);
-            if ( v146.m_enum )
-              goto LABEL_71;
+            v121 = 2 * v120;
+            if ( v119 < v121 )
+              v119 = v121;
+            hkArrayUtil::_reserve(&v140, &hkContainerHeapAllocator::s_alloc, p_m_edges, v119, 16);
+            if ( v140.m_enum )
+              goto LABEL_67;
           }
-          v128 = v18->m_size;
-          v129 = v128 + 2;
-          v130 = v18->m_capacityAndFlags & 0x3FFFFFFF;
-          if ( v130 >= (signed int)v128 + 2 )
+          v122 = p_m_edges->m_size;
+          v123 = v122 + 2;
+          v124 = p_m_edges->m_capacityAndFlags & 0x3FFFFFFF;
+          if ( v124 >= (int)v122 + 2 )
           {
-            HIDWORD(v148) = 0;
+            HIDWORD(v142) = 0;
           }
           else
           {
-            v131 = 2 * v130;
-            if ( v129 < v131 )
-              v129 = v131;
-            hkArrayUtil::_reserve(
-              (hkResult *)&v148 + 1,
-              (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-              v18,
-              v129,
-              16);
+            v125 = 2 * v124;
+            if ( v123 < v125 )
+              v123 = v125;
+            hkArrayUtil::_reserve((hkResult *)&v142 + 1, &hkContainerHeapAllocator::s_alloc, p_m_edges, v123, 16);
           }
-          v18->m_size += 2;
-          v132 = v128;
-          v115 = v162;
-          v133 = &v18->m_data[v132].m_a;
-          *v133 = v162->m_a;
-          v134 = v115->m_b;
-          v133[2] = v7;
-          v133[1] = v134;
-          v133[3] = 0;
-          v133[4] = v115->m_b;
-          v135 = v115->m_a;
-          v133[6] = v7;
-          v133[5] = v135;
-          v133[7] = 0;
+          p_m_edges->m_size += 2;
+          v126 = v122;
+          v109 = v156;
+          v127 = &p_m_edges->m_data[v126];
+          v127->m_a = v156->m_a;
+          v128 = v109->m_b;
+          v127->m_face = m_face;
+          v127->m_b = v128;
+          v127->m_data = 0;
+          v127[1].m_a = v109->m_b;
+          v129 = v109->m_a;
+          v127[1].m_face = m_face;
+          v127[1].m_b = v129;
+          v127[1].m_data = 0;
         }
-        if ( v102 )
+        if ( v98 )
         {
-          if ( v102->m_intersects.m_size == (v102->m_intersects.m_capacityAndFlags & 0x3FFFFFFF) )
-            hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v102, 16);
-          v136 = &v102->m_intersects.m_data[v102->m_intersects.m_size++];
-          v136->m_faceA = v7;
-          v136->m_faceB = v115->m_data;
-          v137 = v18->m_size;
-          v136->m_startEdgeIndex = v103;
-          v136->m_numEdges = v137 - v103;
+          if ( v98->m_intersects.m_size == (v98->m_intersects.m_capacityAndFlags & 0x3FFFFFFF) )
+            hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, v98, 16);
+          v130 = &v98->m_intersects.m_data[v98->m_intersects.m_size++];
+          v130->m_faceA = m_face;
+          v130->m_faceB = v109->m_data;
+          v131 = p_m_edges->m_size;
+          v130->m_startEdgeIndex = m_size;
+          v130->m_numEdges = v131 - m_size;
         }
-        v101 = v142.m_enum + 1;
-        v162 = v115 + 1;
-        ++v142.m_enum;
-        v149 = (char *)v149 + 1;
+        v97 = v136.m_enum + 1;
+        v156 = v109 + 1;
+        ++v136.m_enum;
+        p_m_vertices = (char *)p_m_vertices + 1;
       }
-      while ( (signed __int64)v149 < v154 );
+      while ( (__int64)p_m_vertices < v148 );
     }
-    v69 = v161;
-    v138 = sortArray.m_capacityAndFlags;
+    v65 = v155;
+    v132 = sortArray.m_capacityAndFlags;
     sortArray.m_size = 0;
-    v161->m_enum = 0;
-    if ( v138 >= 0 )
-      hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-        sortArray.m_data,
-        8 * v138);
+    v155->m_enum = HK_SUCCESS;
+    if ( v132 >= 0 )
+      hkContainerTempAllocator::s_alloc.vfptr->bufFree(&hkContainerTempAllocator::s_alloc, sortArray.m_data, 8 * v132);
     sortArray.m_data = 0i64;
-    sortArray.m_capacityAndFlags = 2147483648;
+    sortArray.m_capacityAndFlags = 0x80000000;
     sortedAabbs.m_size = 0;
     if ( sortedAabbs.m_capacityAndFlags >= 0 )
       hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
+        &hkContainerTempAllocator::s_alloc,
         sortedAabbs.m_data,
         32 * sortedAabbs.m_capacityAndFlags);
     sortedAabbs.m_data = 0i64;
-    v144 = 0;
+    v138 = 0;
   }
-  sortedAabbs.m_capacityAndFlags = 2147483648;
-  if ( v145 >= 0 )
-    hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-      array,
-      32 * v145);
-  return v69;
+  sortedAabbs.m_capacityAndFlags = 0x80000000;
+  if ( v139 >= 0 )
+    hkContainerTempAllocator::s_alloc.vfptr->bufFree(&hkContainerTempAllocator::s_alloc, array, 32 * v139);
+  return v65;
 }
+    v155->m_enum = HK_SUCCESS;
+    if ( v132 >= 0 )
+      hkContainerTempAllocator::s_alloc.vfptr->bufFree(&hkContainerTempAllocator::s_alloc, sortArray.m_data, 8 * v132);
+    sortArray.m_data = 0i64;
+    sortArray.m_capacityAndFlags = 0x80000000;
+    sortedAabbs.m_size = 0;
+    if ( sortedAabbs.m_capacityAndFlags >= 0 )
+      hkContainerTempAllocator::s_alloc.vfptr->bufFree(
+        &hkContainerTempAllocator::s_alloc,
+        sortedAabbs.m_data,
+        32 * sortedAabb
 
 // File Line: 1627
 // RVA: 0xBA3E70
@@ -3562,64 +3448,62 @@ _BOOL8 __fastcall hkaiBooleanOperation_orderByFace(hkaiEdgeGeometry::Edge *a, hk
 
 // File Line: 1633
 // RVA: 0xBA3B30
-hkResult *__fastcall hkaiBooleanOperation::_addFaceFaceIntersections(hkaiBooleanOperation *this, hkResult *result, hkArray<hkVector4f,hkContainerHeapAllocator> *faceNormals, hkArray<hkaiEdgeGeometry::Edge,hkContainerHeapAllocator> *faceFaceEdges, hkaiBooleanFaceFaceIntersects *intersects, hkaiEdgeGeometry *geomOut)
+hkResult *__fastcall hkaiBooleanOperation::_addFaceFaceIntersections(
+        hkaiBooleanOperation *this,
+        hkResult *result,
+        hkArray<hkVector4f,hkContainerHeapAllocator> *faceNormals,
+        hkArray<hkaiEdgeGeometry::Edge,hkContainerHeapAllocator> *faceFaceEdges,
+        hkaiBooleanFaceFaceIntersects *intersects,
+        hkaiEdgeGeometry *geomOut)
 {
-  hkArray<hkaiEdgeGeometry::Edge,hkContainerHeapAllocator> *v6; // rbx
-  hkArray<hkVector4f,hkContainerHeapAllocator> *v7; // r15
-  int v8; // er9
-  hkResult *v9; // rsi
+  int v8; // r9d
   int v10; // eax
-  hkaiBooleanOperation *v11; // r12
   int v12; // eax
-  signed __int64 v14; // rcx
-  signed int v15; // er8
-  hkaiEdgeGeometry::Edge *v16; // r9
-  unsigned __int64 v17; // rdi
+  hkaiEdgeGeometry::Edge *v14; // rcx
+  int v15; // r8d
+  hkaiEdgeGeometry::Edge *m_data; // r9
+  hkaiEdgeGeometry::Edge *v17; // rdi
   hkaiEdgeGeometry *v18; // rbp
   hkaiBooleanFaceFaceIntersects *v19; // r14
-  __int64 v20; // rcx
-  unsigned __int64 v21; // rbx
-  hkResult resulta; // [rsp+88h] [rbp+20h]
+  __int64 m_face; // rcx
+  hkaiEdgeGeometry::Edge *v21; // rbx
+  hkResult resulta; // [rsp+88h] [rbp+20h] BYREF
 
-  v6 = faceFaceEdges;
-  v7 = faceNormals;
   v8 = faceFaceEdges->m_size + 1;
-  v9 = result;
-  v10 = v6->m_capacityAndFlags & 0x3FFFFFFF;
-  v11 = this;
+  v10 = faceFaceEdges->m_capacityAndFlags & 0x3FFFFFFF;
   if ( v10 >= v8 )
   {
-    resulta.m_enum = 0;
+    resulta.m_enum = HK_SUCCESS;
   }
   else
   {
     v12 = 2 * v10;
     if ( v8 < v12 )
       v8 = v12;
-    hkArrayUtil::_reserve(&resulta, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v6, v8, 16);
+    hkArrayUtil::_reserve(&resulta, &hkContainerHeapAllocator::s_alloc, faceFaceEdges, v8, 16);
     if ( resulta.m_enum )
     {
-      v9->m_enum = 1;
-      return v9;
+      result->m_enum = HK_FAILURE;
+      return result;
     }
   }
-  if ( v6->m_size == (v6->m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v6, 16);
-  v14 = (signed __int64)&v6->m_data[v6->m_size++];
-  *(_DWORD *)(v14 + 8) = -1;
-  v15 = --v6->m_size;
+  if ( faceFaceEdges->m_size == (faceFaceEdges->m_capacityAndFlags & 0x3FFFFFFF) )
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, faceFaceEdges, 16);
+  v14 = &faceFaceEdges->m_data[faceFaceEdges->m_size++];
+  v14->m_face = -1;
+  v15 = --faceFaceEdges->m_size;
   if ( v15 > 1 )
     hkAlgorithm::quickSortRecursive<hkaiEdgeGeometry::Edge,unsigned int (*)(hkaiEdgeGeometry::Edge const &,hkaiEdgeGeometry::Edge const &)>(
-      v6->m_data,
+      faceFaceEdges->m_data,
       0,
       v15 - 1,
       hkaiBooleanOperation_orderByFace);
-  v16 = v6->m_data;
-  v17 = (unsigned __int64)&v6->m_data[v6->m_size];
-  if ( v6->m_data >= (hkaiEdgeGeometry::Edge *)v17 )
+  m_data = faceFaceEdges->m_data;
+  v17 = &faceFaceEdges->m_data[faceFaceEdges->m_size];
+  if ( faceFaceEdges->m_data >= v17 )
   {
 LABEL_17:
-    v9->m_enum = 0;
+    result->m_enum = HK_SUCCESS;
   }
   else
   {
@@ -3627,364 +3511,148 @@ LABEL_17:
     v19 = intersects;
     while ( 1 )
     {
-      v20 = (signed int)v16->m_face;
-      v21 = (unsigned __int64)&v16[1];
-      if ( v16[1].m_face == (_DWORD)v20 )
+      m_face = (int)m_data->m_face;
+      v21 = m_data + 1;
+      if ( m_data[1].m_face == (_DWORD)m_face )
       {
         do
-          v21 += 16i64;
-        while ( *(_DWORD *)(v21 + 8) == (_DWORD)v20 );
+          ++v21;
+        while ( v21->m_face == (_DWORD)m_face );
       }
       hkaiBooleanOperation::_addFaceIntersections(
-        v11,
+        this,
         &resulta,
-        &v7->m_data[v20],
-        v16,
-        (signed __int64)(v21 - (_QWORD)v16) >> 4,
+        (const __m128i *)&faceNormals->m_data[m_face],
+        m_data,
+        v21 - m_data,
         v19,
         v18);
       if ( resulta.m_enum )
         break;
-      v16 = (hkaiEdgeGeometry::Edge *)v21;
+      m_data = v21;
       if ( v21 >= v17 )
         goto LABEL_17;
     }
-    v9->m_enum = 1;
+    result->m_enum = HK_FAILURE;
   }
-  return v9;
+  return result;
 }
 
 // File Line: 1668
 // RVA: 0xBA0B00
-hkResult *__fastcall hkaiBooleanOperation::_setGeometry(hkaiBooleanOperation *this, hkResult *result, hkaiBooleanOperation::GeometricInfo *info, hkaiEdgeGeometry *geom)
+hkResult *__fastcall hkaiBooleanOperation::_setGeometry(
+        hkaiBooleanOperation *this,
+        hkResult *result,
+        hkaiBooleanOperation::GeometricInfo *info,
+        hkaiEdgeGeometry *geom)
 {
-  hkVector4f *v4; // rax
-  hkResult *v5; // rbx
-  hkaiBooleanOperation::GeometricInfo *v6; // rdi
-  hkaiEdgeGeometry *v7; // rsi
-  hkResult *v8; // rax
-  __m128 v9; // xmm2
+  hkVector4f *m_data; // rax
+  hkVector4f v9; // xmm2
   int v10; // edx
-  __m128 v11; // xmm0
+  hkVector4f v11; // xmm0
   __int64 v12; // rcx
   hkVector4f *v13; // rax
-  hkResult resulta; // [rsp+40h] [rbp+18h]
-  hkResult v15; // [rsp+48h] [rbp+20h]
+  hkResult resulta; // [rsp+40h] [rbp+18h] BYREF
+  hkResult v15; // [rsp+48h] [rbp+20h] BYREF
 
-  v4 = geom->m_vertices.m_data;
-  v5 = result;
-  v6 = info;
+  m_data = geom->m_vertices.m_data;
   info->m_geometry = geom;
-  info->m_vertices = v4;
-  v7 = geom;
+  info->m_vertices = m_data;
   hkaiUniqueEdges::setGeometry(&info->m_uniqueEdges, &resulta, geom);
-  if ( resulta.m_enum || (hkaiFaceEdges::setGeometry(&v6->m_faceEdges, &v15, v7), v15.m_enum) )
+  if ( resulta.m_enum || (hkaiFaceEdges::setGeometry(&info->m_faceEdges, &v15, geom), v15.m_enum) )
   {
-    v5->m_enum = 1;
-    v8 = v5;
+    result->m_enum = HK_FAILURE;
+    return result;
   }
   else
   {
-    v6->m_aabb.m_min = (hkVector4f)xmmword_141A712A0;
-    v9 = (__m128)xmmword_141A712A0;
+    info->m_aabb.m_min = (hkVector4f)xmmword_141A712A0;
+    v9.m_quad = (__m128)xmmword_141A712A0;
     v10 = 0;
-    v11 = _mm_xor_ps(
-            (__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 0),
-            (__m128)xmmword_141A712A0);
-    v6->m_aabb.m_max.m_quad = v11;
-    if ( v7->m_vertices.m_size > 0 )
+    v11.m_quad = _mm_xor_ps(
+                   (__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 0),
+                   (__m128)xmmword_141A712A0);
+    info->m_aabb.m_max = (hkVector4f)v11.m_quad;
+    if ( geom->m_vertices.m_size > 0 )
     {
       v12 = 0i64;
       do
       {
-        v13 = v7->m_vertices.m_data;
+        v13 = geom->m_vertices.m_data;
         ++v10;
-        ++v12;
-        v9 = _mm_min_ps(v9, v13[v12 - 1].m_quad);
-        v6->m_aabb.m_min.m_quad = v9;
-        v11 = _mm_max_ps(v11, v13[v12 - 1].m_quad);
-        v6->m_aabb.m_max.m_quad = v11;
+        v9.m_quad = _mm_min_ps(v9.m_quad, v13[v12++].m_quad);
+        info->m_aabb.m_min = (hkVector4f)v9.m_quad;
+        v11.m_quad = _mm_max_ps(v11.m_quad, v13[v12 - 1].m_quad);
+        info->m_aabb.m_max = (hkVector4f)v11.m_quad;
       }
-      while ( v10 < v7->m_vertices.m_size );
+      while ( v10 < geom->m_vertices.m_size );
     }
-    v5->m_enum = 0;
-    v8 = v5;
+    result->m_enum = HK_SUCCESS;
+    return result;
   }
-  return v8;
 }
 
 // File Line: 1692
 // RVA: 0xBA1DE0
-hkResult *__fastcall hkaiBooleanOperation::_calculateFaceAabbs(hkResult *result, hkArray<hkVector4f,hkContainerHeapAllocator> *verticesIn, hkaiFaceEdges *faceEdges, hkAabb *otherAabb, hkArray<hk1AxisSweep::AabbInt,hkContainerTempAllocator> *faceAabbsOut)
+hkResult *__fastcall hkaiBooleanOperation::_calculateFaceAabbs(
+        hkResult *result,
+        hkArray<hkVector4f,hkContainerHeapAllocator> *verticesIn,
+        hkaiFaceEdges *faceEdges,
+        hkAabb *otherAabb,
+        hkArray<hk1AxisSweep::AabbInt,hkContainerTempAllocator> *faceAabbsOut)
 {
   hkArray<hk1AxisSweep::AabbInt,hkContainerTempAllocator> *v5; // r12
-  signed __int64 v6; // r13
-  hkArray<hkVector4f,hkContainerHeapAllocator> *v7; // r15
+  int v6; // r13d
   int v8; // ebx
   int v9; // eax
   hkResult *v10; // r14
   int v11; // eax
-  int v12; // er9
-  int v13; // eax
-  int v14; // er9
+  int v12; // r9d
+  int m_capacityAndFlags; // eax
+  int v14; // eax
   int v15; // eax
-  int v16; // eax
-  int v17; // er9
-  int v18; // er8
-  hkVector4f *v19; // r15
-  int v20; // edi
-  hk1AxisSweep::AabbInt *v21; // rbx
-  signed __int64 v22; // rsi
-  __m128 *v23; // r12
-  __int64 v24; // r14
-  __int64 v25; // rax
-  unsigned int **v26; // rdx
-  unsigned __int64 v27; // r8
-  unsigned int *v28; // rax
-  unsigned int **v29; // rdx
-  hkVector4f v30; // xmm2
-  hkVector4f v31; // xmm1
-  unsigned int *v32; // rax
-  signed __int64 v33; // rcx
-  int v34; // eax
-  signed __int64 v35; // rbx
-  int v36; // eax
-  int v37; // er9
-  hk1AxisSweep::AabbInt *v38; // rcx
-  int v39; // er8
-  hkResult resulta; // [rsp+30h] [rbp-50h]
-  hkResult v42; // [rsp+34h] [rbp-4Ch]
-  hkResult v43; // [rsp+38h] [rbp-48h]
-  hkArrayBase<hkRadixSort::SortData32> sortArray; // [rsp+40h] [rbp-40h]
-  void *array; // [rsp+50h] [rbp-30h]
-  int v46; // [rsp+58h] [rbp-28h]
-  int v47; // [rsp+5Ch] [rbp-24h]
-  hkAabb aabbIn; // [rsp+60h] [rbp-20h]
-  hkResult *v49; // [rsp+C0h] [rbp+40h]
-  hkaiFaceEdges *v50; // [rsp+D0h] [rbp+50h]
-  hkAabb *v51; // [rsp+D8h] [rbp+58h]
+  int v16; // r9d
+  int v17; // r8d
+  hkVector4f *m_data; // r15
+  int v19; // edi
+  hk1AxisSweep::AabbInt *v20; // rbx
+  __int64 v21; // rsi
+  __m128 *p_m_quad; // r12
+  __int64 v23; // r14
+  __int64 v24; // rax
+  unsigned int **v25; // rdx
+  unsigned __int64 v26; // r8
+  unsigned int *v27; // rax
+  unsigned int **v28; // rdx
+  hkVector4f v29; // xmm2
+  hkVector4f v30; // xmm1
+  unsigned int *v31; // rax
+  __int64 v32; // rcx
+  int v33; // eax
+  __int64 v34; // rbx
+  int v35; // eax
+  int v36; // r9d
+  hk1AxisSweep::AabbInt *v37; // rcx
+  int v38; // r8d
+  hkResult resulta; // [rsp+30h] [rbp-50h] BYREF
+  hkResult v41; // [rsp+34h] [rbp-4Ch] BYREF
+  hkResult v42; // [rsp+38h] [rbp-48h] BYREF
+  hkArrayBase<hkRadixSort::SortData32> sortArray; // [rsp+40h] [rbp-40h] BYREF
+  hkArrayBase<hk1AxisSweep::AabbInt> array; // [rsp+50h] [rbp-30h] BYREF
+  hkAabb aabbIn; // [rsp+60h] [rbp-20h] BYREF
+  hkaiFaceEdges *v47; // [rsp+D0h] [rbp+50h] BYREF
+  hkAabb *v48; // [rsp+D8h] [rbp+58h]
 
-  v51 = otherAabb;
-  v50 = faceEdges;
-  v49 = result;
+  v48 = otherAabb;
+  v47 = faceEdges;
   v5 = faceAabbsOut;
-  LODWORD(v6) = faceEdges->m_faceStartEdges.m_size - 1;
-  v7 = verticesIn;
+  v6 = faceEdges->m_faceStartEdges.m_size - 1;
   v8 = v6 + 4;
   v9 = faceAabbsOut->m_capacityAndFlags & 0x3FFFFFFF;
   v10 = result;
-  if ( v9 >= (signed int)v6 + 4 )
-  {
-    resulta.m_enum = 0;
-  }
-  else
-  {
-    v11 = 2 * v9;
-    v12 = v6 + 4;
-    if ( v8 < v11 )
-      v12 = v11;
-    hkArrayUtil::_reserve(
-      &resulta,
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr,
-      faceAabbsOut,
-      v12,
-      32);
-    if ( resulta.m_enum )
-    {
-      v10->m_enum = 1;
-      return v10;
-    }
-  }
-  v13 = 2147483648;
-  v5->m_size = v8;
-  array = 0i64;
-  v46 = 0;
-  v47 = 2147483648;
-  sortArray.m_data = 0i64;
-  sortArray.m_capacityAndFlags = 2147483648;
-  sortArray.m_size = 0;
-  if ( v8 <= 0 )
-  {
-    v42.m_enum = 0;
-  }
-  else
-  {
-    v14 = v6 + 4;
-    if ( v8 < 0 )
-      v14 = 0;
-    hkArrayUtil::_reserve(&v42, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, &array, v14, 32);
-    if ( v42.m_enum )
-      goto LABEL_17;
-    v13 = sortArray.m_capacityAndFlags;
-  }
-  v15 = v13 & 0x3FFFFFFF;
-  v46 = v6 + 4;
-  if ( v15 >= v8 )
-    goto LABEL_40;
-  v16 = 2 * v15;
-  v17 = v6 + 4;
-  if ( v8 < v16 )
-    v17 = v16;
-  hkArrayUtil::_reserve(&v43, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, &sortArray, v17, 8);
-  if ( v43.m_enum == HK_SUCCESS )
-  {
-LABEL_40:
-    v19 = v7->m_data;
-    v20 = 1;
-    v6 = (signed int)v6;
-    sortArray.m_size = v6 + 4;
-    v21 = v5->m_data;
-    v22 = 1i64;
-    if ( (signed int)v6 > 1i64 )
-    {
-      v23 = &v51->m_min.m_quad;
-      v24 = (__int64)v50;
-      do
-      {
-        v25 = *(_QWORD *)(v24 + 16);
-        v26 = *(unsigned int ***)(v25 + 8 * v22);
-        v27 = *(_QWORD *)(v25 + 8 * v22 + 8);
-        v28 = *v26;
-        v29 = v26 + 1;
-        v30.m_quad = (__m128)v19[*v28];
-        aabbIn.m_max = (hkVector4f)v30.m_quad;
-        v31.m_quad = v30.m_quad;
-        for ( aabbIn.m_min = (hkVector4f)v30.m_quad; (unsigned __int64)v29 < v27; aabbIn.m_max = (hkVector4f)v30.m_quad )
-        {
-          v32 = *v29;
-          ++v29;
-          v33 = *v32;
-          v31.m_quad = _mm_min_ps(v31.m_quad, v19[*v32].m_quad);
-          aabbIn.m_min = (hkVector4f)v31.m_quad;
-          v30.m_quad = _mm_max_ps(v30.m_quad, v19[v33].m_quad);
-        }
-        if ( (_mm_movemask_ps(_mm_and_ps(_mm_cmpleps(*v23, v30.m_quad), _mm_cmpleps(v31.m_quad, v23[1]))) & 7) == 7 )
-        {
-          hk1AxisSweep::AabbInt::set(v21, &aabbIn, v20);
-          ++v21;
-        }
-        ++v22;
-        ++v20;
-      }
-      while ( v22 < v6 );
-      v10 = v49;
-      v5 = faceAabbsOut;
-    }
-    v21->m_min[0] = -1;
-    v21[1].m_min[0] = -1;
-    v21[2].m_min[0] = -1;
-    v21[3].m_min[0] = -1;
-    v34 = v5->m_capacityAndFlags & 0x3FFFFFFF;
-    v35 = &v21[4] - v5->m_data;
-    if ( v34 < (signed int)v35 )
-    {
-      v36 = 2 * v34;
-      v37 = v35;
-      if ( (signed int)v35 < v36 )
-        v37 = v36;
-      hkArrayUtil::_reserve(
-        (hkResult *)&v50,
-        (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr,
-        v5,
-        v37,
-        32);
-    }
-    v38 = v5->m_data;
-    v5->m_size = v35;
-    hk1AxisSweep::sortAabbs(v38, v35 - 4, &sortArray, (hkArrayBase<hk1AxisSweep::AabbInt> *)&array);
-    v39 = sortArray.m_capacityAndFlags;
-    v10->m_enum = 0;
-    sortArray.m_size = 0;
-    if ( v39 >= 0 )
-      hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-        sortArray.m_data,
-        8 * v39);
-    sortArray.m_data = 0i64;
-    v46 = 0;
-    goto LABEL_35;
-  }
-LABEL_17:
-  v18 = sortArray.m_capacityAndFlags;
-  sortArray.m_size = 0;
-  v10->m_enum = 1;
-  if ( v18 >= 0 )
-    hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-      sortArray.m_data,
-      8 * v18);
-  sortArray.m_data = 0i64;
-  v46 = 0;
-LABEL_35:
-  sortArray.m_capacityAndFlags = 2147483648;
-  if ( v47 >= 0 )
-    hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-      array,
-      32 * v47);
-  return v10;
-}
-
-// File Line: 1774
-// RVA: 0xBA1AD0
-hkResult *__fastcall hkaiBooleanOperation::_calculateEdgeAabbs(hkResult *result, hkArray<hkVector4f,hkContainerHeapAllocator> *verticesIn, hkaiUniqueEdges *edgeList, hkAabb *otherAabb, hkArray<hk1AxisSweep::AabbInt,hkContainerTempAllocator> *edgeAabbs)
-{
-  hkArray<hk1AxisSweep::AabbInt,hkContainerTempAllocator> *v5; // r15
-  int v6; // er13
-  hkArray<hkVector4f,hkContainerHeapAllocator> *v7; // rdi
-  int v8; // ebx
-  int v9; // eax
-  hkResult *v10; // r14
-  int v11; // eax
-  int v12; // er9
-  int v13; // eax
-  int v14; // er9
-  int v15; // eax
-  int v16; // eax
-  int v17; // er9
-  int v18; // er8
-  hkVector4f *v19; // r8
-  hk1AxisSweep::AabbInt *v20; // rbx
-  int v21; // esi
-  __int64 v22; // rdi
-  __int64 v23; // r12
-  __int64 v24; // r13
-  __int64 v25; // r15
-  __m128 v26; // xmm0
-  unsigned int **v27; // rcx
-  __int64 v28; // rdx
-  hkVector4f v29; // xmm2
-  signed __int64 v30; // rax
-  hkVector4f v31; // xmm1
-  __m128 v32; // xmm1
-  int v33; // eax
-  signed __int64 v34; // rbx
-  int v35; // eax
-  int v36; // er9
-  hk1AxisSweep::AabbInt *v37; // rcx
-  int v38; // er8
-  hkResult resulta; // [rsp+30h] [rbp-50h]
-  hkResult v41; // [rsp+34h] [rbp-4Ch]
-  hkResult v42[2]; // [rsp+38h] [rbp-48h]
-  hkArrayBase<hkRadixSort::SortData32> sortArray; // [rsp+40h] [rbp-40h]
-  void *array; // [rsp+50h] [rbp-30h]
-  int v45; // [rsp+58h] [rbp-28h]
-  int v46; // [rsp+5Ch] [rbp-24h]
-  hkAabb aabbIn; // [rsp+60h] [rbp-20h]
-  hkaiUniqueEdges *v48; // [rsp+D0h] [rbp+50h]
-  hkAabb *v49; // [rsp+D8h] [rbp+58h]
-
-  v49 = otherAabb;
-  v48 = edgeList;
-  v5 = edgeAabbs;
-  v6 = edgeList->m_startUniqueEdge.m_size - 1;
-  v7 = verticesIn;
-  v8 = v6 + 4;
-  v9 = edgeAabbs->m_capacityAndFlags & 0x3FFFFFFF;
-  v10 = result;
   if ( v9 >= v6 + 4 )
   {
-    resulta.m_enum = 0;
+    resulta.m_enum = HK_SUCCESS;
   }
   else
   {
@@ -3992,82 +3660,79 @@ hkResult *__fastcall hkaiBooleanOperation::_calculateEdgeAabbs(hkResult *result,
     v12 = v6 + 4;
     if ( v8 < v11 )
       v12 = v11;
-    hkArrayUtil::_reserve(&resulta, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, edgeAabbs, v12, 32);
+    hkArrayUtil::_reserve(&resulta, &hkContainerTempAllocator::s_alloc, faceAabbsOut, v12, 32);
     if ( resulta.m_enum )
     {
-      v10->m_enum = 1;
+      v10->m_enum = HK_FAILURE;
       return v10;
     }
   }
-  v13 = 2147483648;
+  m_capacityAndFlags = 0x80000000;
   v5->m_size = v8;
-  array = 0i64;
-  v45 = 0;
-  v46 = 2147483648;
+  array.m_data = 0i64;
+  array.m_size = 0;
+  array.m_capacityAndFlags = 0x80000000;
   sortArray.m_data = 0i64;
-  sortArray.m_capacityAndFlags = 2147483648;
+  sortArray.m_capacityAndFlags = 0x80000000;
   sortArray.m_size = 0;
   if ( v8 <= 0 )
   {
-    v41.m_enum = 0;
+    v41.m_enum = HK_SUCCESS;
   }
   else
   {
-    v14 = v6 + 4;
-    if ( v8 < 0 )
-      v14 = 0;
-    hkArrayUtil::_reserve(&v41, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, &array, v14, 32);
+    hkArrayUtil::_reserve(&v41, &hkContainerTempAllocator::s_alloc, &array, v6 + 4, 32);
     if ( v41.m_enum )
-      goto LABEL_17;
-    v13 = sortArray.m_capacityAndFlags;
+      goto LABEL_15;
+    m_capacityAndFlags = sortArray.m_capacityAndFlags;
   }
-  v15 = v13 & 0x3FFFFFFF;
-  v45 = v6 + 4;
-  if ( v15 >= v8 )
-    goto LABEL_38;
-  v16 = 2 * v15;
-  v17 = v6 + 4;
-  if ( v8 < v16 )
-    v17 = v16;
-  hkArrayUtil::_reserve(v42, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, &sortArray, v17, 8);
-  if ( v42[0].m_enum == HK_SUCCESS )
+  v14 = m_capacityAndFlags & 0x3FFFFFFF;
+  array.m_size = v6 + 4;
+  if ( v14 >= v8 )
+    goto LABEL_18;
+  v15 = 2 * v14;
+  v16 = v6 + 4;
+  if ( v8 < v15 )
+    v16 = v15;
+  hkArrayUtil::_reserve(&v42, &hkContainerTempAllocator::s_alloc, &sortArray, v16, 8);
+  if ( v42.m_enum == HK_SUCCESS )
   {
-LABEL_38:
-    v19 = v7->m_data;
+LABEL_18:
+    m_data = verticesIn->m_data;
+    v19 = 1;
     sortArray.m_size = v6 + 4;
     v20 = v5->m_data;
-    v21 = 0;
-    v22 = 0i64;
-    *(_QWORD *)&v42[0].m_enum = v19;
-    v23 = v6;
-    if ( v6 > 0 )
+    v21 = 1i64;
+    if ( v6 > 1i64 )
     {
-      v24 = (__int64)v48;
-      v25 = (__int64)v49;
+      p_m_quad = &v48->m_min.m_quad;
+      v23 = (__int64)v47;
       do
       {
-        v26 = *(__m128 *)v25;
-        v27 = *(unsigned int ***)(*(_QWORD *)(v24 + 16) + 8 * v22);
-        v28 = (__int64)*v27;
-        v29.m_quad = (__m128)v19[**v27];
-        aabbIn.m_min = (hkVector4f)v29.m_quad;
+        v24 = *(_QWORD *)(v23 + 16);
+        v25 = *(unsigned int ***)(v24 + 8 * v21);
+        v26 = *(_QWORD *)(v24 + 8 * v21 + 8);
+        v27 = *v25;
+        v28 = v25 + 1;
+        v29.m_quad = (__m128)m_data[*v27];
         aabbIn.m_max = (hkVector4f)v29.m_quad;
-        v30 = *(unsigned int *)(v28 + 4);
-        v31.m_quad = _mm_min_ps(v29.m_quad, v19[*(unsigned int *)(v28 + 4)].m_quad);
-        aabbIn.m_min = (hkVector4f)v31.m_quad;
-        v32 = _mm_cmpleps(v31.m_quad, *(__m128 *)(v25 + 16));
-        aabbIn.m_max.m_quad = _mm_max_ps(v29.m_quad, v19[v30].m_quad);
-        if ( (_mm_movemask_ps(_mm_and_ps(_mm_cmpleps(v26, aabbIn.m_max.m_quad), v32)) & 7) == 7 )
+        v30.m_quad = v29.m_quad;
+        for ( aabbIn.m_min = (hkVector4f)v29.m_quad; (unsigned __int64)v28 < v26; aabbIn.m_max = (hkVector4f)v29.m_quad )
         {
-          hk1AxisSweep::AabbInt::set(v20, &aabbIn, v21);
-          v19 = *(hkVector4f **)&v42[0].m_enum;
-          ++v20;
+          v31 = *v28++;
+          v32 = *v31;
+          v30.m_quad = _mm_min_ps(v30.m_quad, m_data[*v31].m_quad);
+          aabbIn.m_min = (hkVector4f)v30.m_quad;
+          v29.m_quad = _mm_max_ps(v29.m_quad, m_data[v32].m_quad);
         }
-        ++v22;
+        if ( (_mm_movemask_ps(_mm_and_ps(_mm_cmple_ps(*p_m_quad, v29.m_quad), _mm_cmple_ps(v30.m_quad, p_m_quad[1]))) & 7) == 7 )
+          hk1AxisSweep::AabbInt::set(v20++, &aabbIn, v19);
         ++v21;
+        ++v19;
       }
-      while ( v22 < v23 );
-      v5 = edgeAabbs;
+      while ( v21 < v6 );
+      v10 = result;
+      v5 = faceAabbsOut;
     }
     v20->m_min[0] = -1;
     v20[1].m_min[0] = -1;
@@ -4075,137 +3740,308 @@ LABEL_38:
     v20[3].m_min[0] = -1;
     v33 = v5->m_capacityAndFlags & 0x3FFFFFFF;
     v34 = &v20[4] - v5->m_data;
-    if ( v33 < (signed int)v34 )
+    if ( v33 < (int)v34 )
     {
       v35 = 2 * v33;
       v36 = v34;
-      if ( (signed int)v34 < v35 )
+      if ( (int)v34 < v35 )
         v36 = v35;
-      hkArrayUtil::_reserve(
-        (hkResult *)&v48,
-        (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr,
-        v5,
-        v36,
-        32);
+      hkArrayUtil::_reserve((hkResult *)&v47, &hkContainerTempAllocator::s_alloc, v5, v36, 32);
     }
     v37 = v5->m_data;
     v5->m_size = v34;
-    hk1AxisSweep::sortAabbs(v37, v34 - 4, &sortArray, (hkArrayBase<hk1AxisSweep::AabbInt> *)&array);
+    hk1AxisSweep::sortAabbs(v37, v34 - 4, &sortArray, &array);
     v38 = sortArray.m_capacityAndFlags;
-    v10->m_enum = 0;
+    v10->m_enum = HK_SUCCESS;
     sortArray.m_size = 0;
     if ( v38 >= 0 )
-      hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-        sortArray.m_data,
-        8 * v38);
+      hkContainerTempAllocator::s_alloc.vfptr->bufFree(&hkContainerTempAllocator::s_alloc, sortArray.m_data, 8 * v38);
     sortArray.m_data = 0i64;
-    v45 = 0;
+    array.m_size = 0;
     goto LABEL_33;
   }
-LABEL_17:
-  v18 = sortArray.m_capacityAndFlags;
-  v10->m_enum = 1;
+LABEL_15:
+  v17 = sortArray.m_capacityAndFlags;
   sortArray.m_size = 0;
-  if ( v18 >= 0 )
-    hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-      sortArray.m_data,
-      8 * v18);
+  v10->m_enum = HK_FAILURE;
+  if ( v17 >= 0 )
+    hkContainerTempAllocator::s_alloc.vfptr->bufFree(&hkContainerTempAllocator::s_alloc, sortArray.m_data, 8 * v17);
   sortArray.m_data = 0i64;
-  v45 = 0;
+  array.m_size = 0;
 LABEL_33:
-  sortArray.m_capacityAndFlags = 2147483648;
-  if ( v46 >= 0 )
+  sortArray.m_capacityAndFlags = 0x80000000;
+  if ( array.m_capacityAndFlags >= 0 )
     hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-      array,
-      32 * v46);
+      &hkContainerTempAllocator::s_alloc,
+      array.m_data,
+      32 * array.m_capacityAndFlags);
   return v10;
+}
+
+// File Line: 1774
+// RVA: 0xBA1AD0
+hkResult *__fastcall hkaiBooleanOperation::_calculateEdgeAabbs(
+        hkResult *result,
+        hkArray<hkVector4f,hkContainerHeapAllocator> *verticesIn,
+        hkaiUniqueEdges *edgeList,
+        hkAabb *otherAabb,
+        hkArray<hk1AxisSweep::AabbInt,hkContainerTempAllocator> *edgeAabbs)
+{
+  hkArray<hk1AxisSweep::AabbInt,hkContainerTempAllocator> *v5; // r15
+  int v6; // r13d
+  int v8; // ebx
+  int v9; // eax
+  int v11; // eax
+  int v12; // r9d
+  int m_capacityAndFlags; // eax
+  int v14; // eax
+  int v15; // eax
+  int v16; // r9d
+  int v17; // r8d
+  hkVector4f *m_data; // r8
+  hk1AxisSweep::AabbInt *v19; // rbx
+  int v20; // esi
+  __int64 v21; // rdi
+  __int64 v22; // r12
+  __int64 v23; // r13
+  __int64 v24; // r15
+  __m128 v25; // xmm0
+  unsigned int **v26; // rcx
+  __int64 v27; // rdx
+  hkVector4f v28; // xmm2
+  __int64 v29; // rax
+  __m128 v30; // xmm1
+  int v31; // eax
+  __int64 v32; // rbx
+  int v33; // eax
+  int v34; // r9d
+  hk1AxisSweep::AabbInt *v35; // rcx
+  int v36; // r8d
+  hkResult resulta; // [rsp+30h] [rbp-50h] BYREF
+  hkResult v39; // [rsp+34h] [rbp-4Ch] BYREF
+  hkResult v40[2]; // [rsp+38h] [rbp-48h] BYREF
+  hkArrayBase<hkRadixSort::SortData32> sortArray; // [rsp+40h] [rbp-40h] BYREF
+  hkArrayBase<hk1AxisSweep::AabbInt> array; // [rsp+50h] [rbp-30h] BYREF
+  hkAabb aabbIn; // [rsp+60h] [rbp-20h] BYREF
+  hkaiUniqueEdges *v44; // [rsp+D0h] [rbp+50h] BYREF
+  hkAabb *v45; // [rsp+D8h] [rbp+58h]
+
+  v45 = otherAabb;
+  v44 = edgeList;
+  v5 = edgeAabbs;
+  v6 = edgeList->m_startUniqueEdge.m_size - 1;
+  v8 = v6 + 4;
+  v9 = edgeAabbs->m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v9 >= v6 + 4 )
+  {
+    resulta.m_enum = HK_SUCCESS;
+  }
+  else
+  {
+    v11 = 2 * v9;
+    v12 = v6 + 4;
+    if ( v8 < v11 )
+      v12 = v11;
+    hkArrayUtil::_reserve(&resulta, &hkContainerTempAllocator::s_alloc, edgeAabbs, v12, 32);
+    if ( resulta.m_enum )
+    {
+      result->m_enum = HK_FAILURE;
+      return result;
+    }
+  }
+  m_capacityAndFlags = 0x80000000;
+  v5->m_size = v8;
+  array.m_data = 0i64;
+  array.m_size = 0;
+  array.m_capacityAndFlags = 0x80000000;
+  sortArray.m_data = 0i64;
+  sortArray.m_capacityAndFlags = 0x80000000;
+  sortArray.m_size = 0;
+  if ( v8 <= 0 )
+  {
+    v39.m_enum = HK_SUCCESS;
+  }
+  else
+  {
+    hkArrayUtil::_reserve(&v39, &hkContainerTempAllocator::s_alloc, &array, v6 + 4, 32);
+    if ( v39.m_enum )
+      goto LABEL_15;
+    m_capacityAndFlags = sortArray.m_capacityAndFlags;
+  }
+  v14 = m_capacityAndFlags & 0x3FFFFFFF;
+  array.m_size = v6 + 4;
+  if ( v14 >= v8 )
+    goto LABEL_18;
+  v15 = 2 * v14;
+  v16 = v6 + 4;
+  if ( v8 < v15 )
+    v16 = v15;
+  hkArrayUtil::_reserve(v40, &hkContainerTempAllocator::s_alloc, &sortArray, v16, 8);
+  if ( v40[0].m_enum == HK_SUCCESS )
+  {
+LABEL_18:
+    m_data = verticesIn->m_data;
+    sortArray.m_size = v6 + 4;
+    v19 = v5->m_data;
+    v20 = 0;
+    v21 = 0i64;
+    *(_QWORD *)&v40[0].m_enum = m_data;
+    v22 = v6;
+    if ( v6 > 0 )
+    {
+      v23 = (__int64)v44;
+      v24 = (__int64)v45;
+      do
+      {
+        v25 = *(__m128 *)v24;
+        v26 = *(unsigned int ***)(*(_QWORD *)(v23 + 16) + 8 * v21);
+        v27 = (__int64)*v26;
+        v28.m_quad = (__m128)m_data[**v26];
+        aabbIn.m_min = (hkVector4f)v28.m_quad;
+        aabbIn.m_max = (hkVector4f)v28.m_quad;
+        v29 = *(unsigned int *)(v27 + 4);
+        aabbIn.m_min.m_quad = _mm_min_ps(v28.m_quad, m_data[*(unsigned int *)(v27 + 4)].m_quad);
+        v30 = _mm_cmple_ps(aabbIn.m_min.m_quad, *(__m128 *)(v24 + 16));
+        aabbIn.m_max.m_quad = _mm_max_ps(v28.m_quad, m_data[v29].m_quad);
+        if ( (_mm_movemask_ps(_mm_and_ps(_mm_cmple_ps(v25, aabbIn.m_max.m_quad), v30)) & 7) == 7 )
+        {
+          hk1AxisSweep::AabbInt::set(v19, &aabbIn, v20);
+          m_data = *(hkVector4f **)&v40[0].m_enum;
+          ++v19;
+        }
+        ++v21;
+        ++v20;
+      }
+      while ( v21 < v22 );
+      v5 = edgeAabbs;
+    }
+    v19->m_min[0] = -1;
+    v19[1].m_min[0] = -1;
+    v19[2].m_min[0] = -1;
+    v19[3].m_min[0] = -1;
+    v31 = v5->m_capacityAndFlags & 0x3FFFFFFF;
+    v32 = &v19[4] - v5->m_data;
+    if ( v31 < (int)v32 )
+    {
+      v33 = 2 * v31;
+      v34 = v32;
+      if ( (int)v32 < v33 )
+        v34 = v33;
+      hkArrayUtil::_reserve((hkResult *)&v44, &hkContainerTempAllocator::s_alloc, v5, v34, 32);
+    }
+    v35 = v5->m_data;
+    v5->m_size = v32;
+    hk1AxisSweep::sortAabbs(v35, v32 - 4, &sortArray, &array);
+    v36 = sortArray.m_capacityAndFlags;
+    result->m_enum = HK_SUCCESS;
+    sortArray.m_size = 0;
+    if ( v36 >= 0 )
+      hkContainerTempAllocator::s_alloc.vfptr->bufFree(&hkContainerTempAllocator::s_alloc, sortArray.m_data, 8 * v36);
+    sortArray.m_data = 0i64;
+    array.m_size = 0;
+    goto LABEL_31;
+  }
+LABEL_15:
+  v17 = sortArray.m_capacityAndFlags;
+  result->m_enum = HK_FAILURE;
+  sortArray.m_size = 0;
+  if ( v17 >= 0 )
+    hkContainerTempAllocator::s_alloc.vfptr->bufFree(&hkContainerTempAllocator::s_alloc, sortArray.m_data, 8 * v17);
+  sortArray.m_data = 0i64;
+  array.m_size = 0;
+LABEL_31:
+  sortArray.m_capacityAndFlags = 0x80000000;
+  if ( array.m_capacityAndFlags >= 0 )
+    hkContainerTempAllocator::s_alloc.vfptr->bufFree(
+      &hkContainerTempAllocator::s_alloc,
+      array.m_data,
+      32 * array.m_capacityAndFlags);
+  return result;
 }
 
 // File Line: 1854
 // RVA: 0xB9EFC0
-hkResult *__fastcall hkaiBooleanOperation::subtract(hkaiBooleanOperation *this, hkResult *result, hkaiEdgeGeometry *a, hkaiEdgeGeometry *b, hkaiEdgeGeometry *geomOut, hkaiBooleanFaceFaceIntersects *intersects, hkaiBooleanFilter *filter)
+hkResult *__fastcall hkaiBooleanOperation::subtract(
+        hkaiBooleanOperation *this,
+        hkResult *result,
+        hkaiEdgeGeometry *a,
+        hkaiEdgeGeometry *b,
+        hkaiEdgeGeometry *geomOut,
+        hkaiBooleanFaceFaceIntersects *intersects,
+        hkaiBooleanFilter *filter)
 {
-  hkaiEdgeGeometry *v7; // rdi
-  hkaiEdgeGeometry *v8; // r14
   hkResult *v9; // rbx
-  hkaiBooleanOperation *v10; // rsi
   hkaiBooleanFaceFaceIntersects *v11; // rax
   hkaiBooleanFilter *v12; // r12
-  signed __int64 v13; // r15
+  hkaiFaceEdges *p_m_faceEdges; // r15
   hkaiEdgeGeometry *v14; // rdi
-  int v15; // er9
+  int m_size; // r9d
   int v16; // eax
   __int64 v17; // rax
-  hkaiEdgeGeometry::Face *v18; // rcx
+  hkaiEdgeGeometry::Face *m_data; // rcx
   __int64 v19; // rdi
   char *v20; // rdx
   unsigned int v21; // eax
-  hkBitField *v22; // rdi
-  int v23; // er13
-  int v24; // er15
+  hkBitField *p_m_edgeAIntersected; // rdi
+  int v23; // r13d
+  int v24; // r15d
   __int32 v25; // ecx
   unsigned int *v26; // r8
-  unsigned int v27; // eax
+  int v27; // eax
   int v28; // eax
   int v29; // eax
-  int v30; // er9
+  int v30; // r9d
   __int64 v31; // rcx
   unsigned int *v32; // rdi
   int v33; // ecx
   int v34; // eax
-  int v35; // ecx
-  hkArray<hkVector4f,hkContainerHeapAllocator> *v36; // rdx
-  hkArray<hkVector4f,hkContainerHeapAllocator> *v37; // rdx
+  unsigned int v35; // ecx
+  hkArray<hkVector4f,hkContainerHeapAllocator> *p_m_vertices; // rdx
+  hkaiEdgeGeometry *m_geometry; // rdx
   hkVector4f v38; // xmm1
-  int v39; // er8
+  int m_capacityAndFlags; // r8d
   hkArray<hkVector4f,hkContainerHeapAllocator> *v40; // rdx
-  hkArray<hkVector4f,hkContainerHeapAllocator> *v41; // rdx
+  hkaiEdgeGeometry *v41; // rdx
   hkVector4f v42; // xmm1
   hk1AxisSweep::AabbInt *v43; // rdx
-  hkMemoryAllocatorVtbl *v44; // rax
+  hkMemoryAllocatorVtbl *vfptr; // rax
   hkContainerTempAllocator::Allocator *v45; // rcx
-  int v46; // er15
-  int v47; // er9
-  signed __int64 v48; // rdi
-  signed int v49; // er12
-  hkaiEdgeGeometry *v50; // r13
-  int v51; // edi
-  int v52; // eax
+  int v46; // r15d
+  int v47; // r15d
+  int v48; // r9d
+  __int64 v49; // rdi
+  int v50; // r12d
+  hkaiEdgeGeometry *v51; // r13
+  int v52; // edi
   int v53; // eax
-  int v54; // er9
-  int v55; // er8
-  int v57; // eax
-  __m128 *v58; // r8
-  __m128 *v59; // r9
-  __int64 v60; // r10
-  int v61; // edx
-  int v62; // edi
-  int v63; // eax
+  int v54; // eax
+  int v55; // r9d
+  int v56; // r8d
+  int v58; // eax
+  hkVector4f *v59; // r8
+  __m128 *p_m_quad; // r9
+  __int64 v61; // r10
+  int v62; // edx
+  int v63; // edi
   int v64; // eax
-  __m128 *v65; // r10
-  __m128 *v66; // r8
-  __int64 v67; // r11
-  int v68; // edx
-  int v69; // edi
-  int v70; // eax
-  hkArray<hk1AxisSweep::AabbInt,hkContainerTempAllocator> faceAabbsOut; // [rsp+30h] [rbp-91h]
-  hkArray<hk1AxisSweep::AabbInt,hkContainerTempAllocator> edgeAabbs; // [rsp+40h] [rbp-81h]
-  hkResult v73; // [rsp+50h] [rbp-71h]
-  hkAabb otherAabb; // [rsp+60h] [rbp-61h]
-  hk1AxisSweep::AabbInt *array; // [rsp+80h] [rbp-41h]
-  int v76; // [rsp+88h] [rbp-39h]
-  hkaiEdgeGeometry *geom; // [rsp+8Ch] [rbp-35h]
-  hkResult *v78; // [rsp+118h] [rbp+57h]
-  hkResult resulta; // [rsp+128h] [rbp+67h]
+  int v65; // eax
+  hkVector4f *v66; // r10
+  __m128 *v67; // r8
+  __int64 v68; // r11
+  int v69; // edx
+  int v70; // edi
+  int v71; // eax
+  hkArray<hk1AxisSweep::AabbInt,hkContainerTempAllocator> faceAabbsOut; // [rsp+30h] [rbp-91h] BYREF
+  hkArray<hk1AxisSweep::AabbInt,hkContainerTempAllocator> edgeAabbs; // [rsp+40h] [rbp-81h] BYREF
+  hkResult v74; // [rsp+50h] [rbp-71h] BYREF
+  hkAabb otherAabb; // [rsp+60h] [rbp-61h] BYREF
+  hkaiEdgeGeometry **array; // [rsp+80h] [rbp-41h] BYREF
+  int v77; // [rsp+88h] [rbp-39h]
+  int geom; // [rsp+8Ch] [rbp-35h]
+  hkaiEdgeGeometry *geom_4; // [rsp+90h] [rbp-31h] BYREF
+  hkResult resulta; // [rsp+128h] [rbp+67h] BYREF
 
-  v78 = result;
-  v7 = b;
-  v8 = a;
   v9 = result;
-  v10 = this;
   if ( b->m_edges.m_size <= 0 || a->m_edges.m_size <= 0 )
   {
     hkaiEdgeGeometry::set(geomOut, &resulta, a);
@@ -4221,395 +4057,378 @@ hkResult *__fastcall hkaiBooleanOperation::subtract(hkaiBooleanOperation *this, 
   hkaiBooleanOperation::_setGeometry(this, &resulta, &this->m_a, a);
   if ( resulta.m_enum == HK_SUCCESS )
   {
-    hkaiBooleanOperation::_setGeometry(v10, &resulta, &v10->m_b, v7);
+    hkaiBooleanOperation::_setGeometry(this, &resulta, &this->m_b, b);
     if ( resulta.m_enum == HK_SUCCESS )
     {
       v12 = filter;
-      v13 = (signed __int64)&v10->m_a.m_faceEdges;
-      filter->vfptr->setFaceEdges(filter, &v73, &v10->m_a.m_faceEdges, &v10->m_b.m_faceEdges);
-      if ( v73.m_enum == HK_SUCCESS )
+      p_m_faceEdges = &this->m_a.m_faceEdges;
+      filter->vfptr->setFaceEdges(filter, &v74, &this->m_a.m_faceEdges, &this->m_b.m_faceEdges);
+      if ( v74.m_enum == HK_SUCCESS )
       {
         v14 = geomOut;
         geomOut->m_edges.m_size = 0;
-        v15 = v8->m_faces.m_size;
-        if ( (v14->m_faces.m_capacityAndFlags & 0x3FFFFFFF) >= v15 )
+        m_size = a->m_faces.m_size;
+        if ( (v14->m_faces.m_capacityAndFlags & 0x3FFFFFFF) >= m_size )
         {
-          resulta.m_enum = 0;
+          resulta.m_enum = HK_SUCCESS;
           goto LABEL_13;
         }
-        hkArrayUtil::_reserve(
-          &resulta,
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-          &v14->m_faces,
-          v15,
-          12);
+        hkArrayUtil::_reserve(&resulta, &hkContainerHeapAllocator::s_alloc, &v14->m_faces, m_size, 12);
         if ( resulta.m_enum == HK_SUCCESS )
         {
 LABEL_13:
           v16 = v14->m_faces.m_capacityAndFlags & 0x3FFFFFFF;
-          if ( v16 < v8->m_faces.m_size )
+          if ( v16 < a->m_faces.m_size )
           {
             if ( v14->m_faces.m_capacityAndFlags >= 0 )
               hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-                (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+                &hkContainerHeapAllocator::s_alloc,
                 v14->m_faces.m_data,
                 12 * v16);
-            v73.m_enum = 12 * v8->m_faces.m_size;
+            v74.m_enum = 12 * a->m_faces.m_size;
             v14->m_faces.m_data = (hkaiEdgeGeometry::Face *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
-                                                              (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-                                                              (int *)&v73);
-            v14->m_faces.m_capacityAndFlags = v73.m_enum / 12;
+                                                              &hkContainerHeapAllocator::s_alloc,
+                                                              &v74);
+            v14->m_faces.m_capacityAndFlags = v74.m_enum / 12;
           }
-          v17 = v8->m_faces.m_size;
-          v18 = v14->m_faces.m_data;
+          v17 = a->m_faces.m_size;
+          m_data = v14->m_faces.m_data;
           v14->m_faces.m_size = v17;
           v19 = v17;
-          if ( (signed int)v17 > 0 )
+          if ( (int)v17 > 0 )
           {
-            v20 = (char *)((char *)v8->m_faces.m_data - (char *)v18);
+            v20 = (char *)((char *)a->m_faces.m_data - (char *)m_data);
             do
             {
-              v21 = *(unsigned int *)((char *)&v18->m_data + (_QWORD)v20);
-              ++v18;
-              v18[-1].m_data = v21;
-              v18[-1].m_faceIndex = *(_DWORD *)((char *)v18 + (_QWORD)v20 - 8);
-              *(_DWORD *)&v18[-1].m_flags.m_storage = *(_DWORD *)((char *)v18 + (_QWORD)v20 - 4);
+              v21 = *(unsigned int *)((char *)&m_data->m_data + (_QWORD)v20);
+              ++m_data;
+              m_data[-1].m_data = v21;
+              m_data[-1].m_faceIndex = *(_DWORD *)((char *)m_data + (_QWORD)v20 - 8);
+              *(_DWORD *)&m_data[-1].m_flags.m_storage = *(_DWORD *)((char *)m_data + (_QWORD)v20 - 4);
               --v19;
             }
             while ( v19 );
           }
           if ( resulta.m_enum )
             goto LABEL_41;
-          v22 = &v10->m_edgeAIntersected;
-          v23 = v10->m_a.m_geometry->m_edges.m_size;
-          if ( v10 != (hkaiBooleanOperation *)-256i64 )
+          p_m_edgeAIntersected = &this->m_edgeAIntersected;
+          v23 = this->m_a.m_geometry->m_edges.m_size;
+          if ( this != (hkaiBooleanOperation *)-256i64 )
           {
-            v10->m_edgeAIntersected.m_storage.m_words.m_capacityAndFlags = 2147483648;
+            this->m_edgeAIntersected.m_storage.m_words.m_capacityAndFlags = 0x80000000;
             v24 = (v23 + 31) >> 5;
-            v22->m_storage.m_words.m_data = 0i64;
-            v10->m_edgeAIntersected.m_storage.m_words.m_size = 0;
+            p_m_edgeAIntersected->m_storage.m_words.m_data = 0i64;
+            this->m_edgeAIntersected.m_storage.m_words.m_size = 0;
             v25 = v24;
             if ( v24 )
             {
               resulta.m_enum = 4 * v24;
               v26 = (unsigned int *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
-                                      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-                                      (int *)&resulta);
+                                      &hkContainerHeapAllocator::s_alloc,
+                                      &resulta);
               v25 = resulta.m_enum / 4;
             }
             else
             {
               v26 = 0i64;
             }
-            v22->m_storage.m_words.m_data = v26;
-            v10->m_edgeAIntersected.m_storage.m_words.m_size = v24;
-            v27 = 2147483648;
+            p_m_edgeAIntersected->m_storage.m_words.m_data = v26;
+            this->m_edgeAIntersected.m_storage.m_words.m_size = v24;
+            v27 = 0x80000000;
             if ( v25 )
               v27 = v25;
-            v10->m_edgeAIntersected.m_storage.m_words.m_capacityAndFlags = v27;
-            v10->m_edgeAIntersected.m_storage.m_numBits = v23;
-            v28 = v10->m_edgeAIntersected.m_storage.m_words.m_capacityAndFlags & 0x3FFFFFFF;
+            this->m_edgeAIntersected.m_storage.m_words.m_capacityAndFlags = v27;
+            this->m_edgeAIntersected.m_storage.m_numBits = v23;
+            v28 = this->m_edgeAIntersected.m_storage.m_words.m_capacityAndFlags & 0x3FFFFFFF;
             if ( v28 < v24 )
             {
               v29 = 2 * v28;
               v30 = (v23 + 31) >> 5;
               if ( v24 < v29 )
                 v30 = v29;
-              hkArrayUtil::_reserve(
-                &v73,
-                (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-                &v10->m_edgeAIntersected,
-                v30,
-                4);
+              hkArrayUtil::_reserve(&v74, &hkContainerHeapAllocator::s_alloc, &this->m_edgeAIntersected, v30, 4);
             }
-            v10->m_edgeAIntersected.m_storage.m_words.m_size = v24;
-            v13 = (signed __int64)&v10->m_a.m_faceEdges;
+            this->m_edgeAIntersected.m_storage.m_words.m_size = v24;
+            p_m_faceEdges = &this->m_a.m_faceEdges;
           }
-          if ( !v22->m_storage.m_words.m_data )
+          if ( !p_m_edgeAIntersected->m_storage.m_words.m_data )
             goto LABEL_41;
-          if ( v10->m_edgeAIntersected.m_storage.m_words.m_size - 1 >= 0 )
+          if ( this->m_edgeAIntersected.m_storage.m_words.m_size - 1 >= 0 )
           {
-            v31 = (unsigned int)v10->m_edgeAIntersected.m_storage.m_words.m_size;
-            v32 = v22->m_storage.m_words.m_data;
+            v31 = (unsigned int)this->m_edgeAIntersected.m_storage.m_words.m_size;
+            v32 = p_m_edgeAIntersected->m_storage.m_words.m_data;
             while ( v31 )
             {
-              *v32 = 0;
-              ++v32;
+              *v32++ = 0;
               --v31;
             }
           }
-          v33 = v10->m_a.m_geometry->m_edges.m_size;
-          v34 = v10->m_b.m_uniqueEdges.m_startUniqueEdge.m_size;
-          v10->m_edgeBFeatureBase = v33;
+          v33 = this->m_a.m_geometry->m_edges.m_size;
+          v34 = this->m_b.m_uniqueEdges.m_startUniqueEdge.m_size;
+          this->m_edgeBFeatureBase = v33;
           v35 = v34 - 1 + v33;
-          v10->m_faceFaceFeatureBase = v35;
-          v10->m_faceFaceFeatureCount = v35;
-          hkMultiMap<unsigned __int64,unsigned __int64,hkMultiMapOperations<unsigned __int64>,hkContainerHeapAllocator>::clear((hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&v10->m_faceFaceFeatureMap.m_map.m_elem);
-          v10->m_intersectBase = v8->m_vertices.m_size;
-          if ( v10->m_a.m_faceEdges.m_faceStartEdges.m_size == 3 && v10->m_a.m_geometry->m_edges.m_size == 3 )
+          this->m_faceFaceFeatureBase = v35;
+          this->m_faceFaceFeatureCount = v35;
+          hkMultiMap<unsigned __int64,unsigned __int64,hkMultiMapOperations<unsigned __int64>,hkContainerHeapAllocator>::clear(&this->m_faceFaceFeatureMap.m_map);
+          this->m_intersectBase = a->m_vertices.m_size;
+          if ( this->m_a.m_faceEdges.m_faceStartEdges.m_size == 3 && this->m_a.m_geometry->m_edges.m_size == 3 )
           {
-            hkaiBooleanOperation::_simpleClassifyEdgeAFaceB(v10, &resulta, v12);
+            hkaiBooleanOperation::_simpleClassifyEdgeAFaceB(this, &resulta, v12);
             if ( resulta.m_enum )
               goto LABEL_41;
-            hkaiBooleanOperation::_simpleClassifyFaceAEdgeB(v10, &resulta, v12);
+            hkaiBooleanOperation::_simpleClassifyFaceAEdgeB(this, &resulta, v12);
             if ( resulta.m_enum )
               goto LABEL_41;
 LABEL_65:
-            v46 = *(_DWORD *)(v13 + 24);
-            v76 = 0;
-            LODWORD(v13) = v46 - 1;
-            array = (hk1AxisSweep::AabbInt *)((char *)&geom + 4);
-            LODWORD(geom) = -2147483644;
-            if ( (signed int)v13 <= 4 )
+            v46 = p_m_faceEdges->m_faceStartEdges.m_size;
+            v77 = 0;
+            v47 = v46 - 1;
+            array = &geom_4;
+            geom = -2147483644;
+            if ( v47 <= 4 )
             {
-              resulta.m_enum = 0;
+              resulta.m_enum = HK_SUCCESS;
             }
             else
             {
-              v47 = v13;
-              if ( (signed int)v13 < 8 )
-                v47 = 8;
-              hkArrayUtil::_reserve(
-                &resulta,
-                (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-                &array,
-                v47,
-                16);
+              v48 = v47;
+              if ( v47 < 8 )
+                v48 = 8;
+              hkArrayUtil::_reserve(&resulta, &hkContainerHeapAllocator::s_alloc, &array, v48, 16);
               if ( resulta.m_enum )
               {
-                v76 = 0;
+                v77 = 0;
 LABEL_80:
-                v55 = (signed int)geom;
-                v9->m_enum = 1;
+                v56 = geom;
+                v9->m_enum = HK_FAILURE;
 LABEL_81:
-                if ( v55 < 0 )
+                if ( v56 < 0 )
                   return v9;
-                v44 = hkContainerHeapAllocator::s_alloc.vfptr;
-                v43 = array;
+                vfptr = hkContainerHeapAllocator::s_alloc.vfptr;
+                v43 = (hk1AxisSweep::AabbInt *)array;
                 v45 = (hkContainerTempAllocator::Allocator *)&hkContainerHeapAllocator::s_alloc;
                 goto LABEL_83;
               }
             }
-            v48 = 1i64;
-            v76 = v13;
-            v13 = (signed int)v13;
-            v49 = 1;
-            if ( (signed int)v13 > 1i64 )
+            v49 = 1i64;
+            v77 = v47;
+            v50 = 1;
+            if ( v47 > 1i64 )
             {
               do
               {
                 hkaiEdgeGeometry::calculateFaceNormal(
-                  v8,
-                  v10->m_a.m_faceEdges.m_faceStartEdges.m_data[v48],
-                  v10->m_a.m_faceEdges.m_faceStartEdges.m_data[v48 + 1],
-                  (hkVector4f *)array + v49);
-                ++v48;
+                  a,
+                  this->m_a.m_faceEdges.m_faceStartEdges.m_data[v49],
+                  this->m_a.m_faceEdges.m_faceStartEdges.m_data[v49 + 1],
+                  (hkVector4f *)&array[2 * v50]);
                 ++v49;
+                ++v50;
               }
-              while ( v48 < v13 );
-              v9 = v78;
+              while ( v49 < v47 );
+              v9 = result;
             }
-            v50 = geomOut;
-            hkaiBooleanOperation::_addCompleteEdges(v10, &resulta, filter, geomOut);
+            v51 = geomOut;
+            hkaiBooleanOperation::_addCompleteEdges(this, &resulta, filter, geomOut);
             if ( resulta.m_enum == HK_SUCCESS )
             {
-              v51 = v10->m_intersectVertices.m_size + v8->m_vertices.m_size;
-              v52 = v50->m_vertices.m_capacityAndFlags & 0x3FFFFFFF;
-              if ( v52 >= v51 )
+              v52 = this->m_intersectVertices.m_size + a->m_vertices.m_size;
+              v53 = v51->m_vertices.m_capacityAndFlags & 0x3FFFFFFF;
+              if ( v53 >= v52 )
               {
-                resulta.m_enum = 0;
+                resulta.m_enum = HK_SUCCESS;
               }
               else
               {
-                v53 = 2 * v52;
-                v54 = v10->m_intersectVertices.m_size + v8->m_vertices.m_size;
-                if ( v51 < v53 )
-                  v54 = v53;
-                hkArrayUtil::_reserve(
-                  &resulta,
-                  (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-                  &v50->m_vertices,
-                  v54,
-                  16);
+                v54 = 2 * v53;
+                v55 = this->m_intersectVertices.m_size + a->m_vertices.m_size;
+                if ( v52 < v54 )
+                  v55 = v54;
+                hkArrayUtil::_reserve(&resulta, &hkContainerHeapAllocator::s_alloc, &v51->m_vertices, v55, 16);
                 if ( resulta.m_enum )
                   goto LABEL_79;
               }
-              v50->m_vertices.m_size = v51;
-              v57 = v8->m_vertices.m_size;
-              v58 = &v8->m_vertices.m_data->m_quad;
-              v59 = &v50->m_vertices.m_data->m_quad;
-              if ( v57 > 0 )
+              v51->m_vertices.m_size = v52;
+              v58 = a->m_vertices.m_size;
+              v59 = a->m_vertices.m_data;
+              p_m_quad = &v51->m_vertices.m_data->m_quad;
+              if ( v58 > 0 )
               {
-                v60 = (unsigned int)v57;
+                v61 = (unsigned int)v58;
                 do
                 {
-                  v61 = v58->m128_u64[1];
-                  v62 = HIDWORD(v58->m128_u64[1]);
-                  v63 = v58->m128_u64[0];
-                  HIDWORD(v59->m128_u64[0]) = HIDWORD(v58->m128_u64[0]);
-                  LODWORD(v59->m128_u64[1]) = v61;
-                  HIDWORD(v59->m128_u64[1]) = v62;
-                  LODWORD(v59->m128_u64[0]) = v63;
+                  v62 = v59->m_quad.m128_i32[2];
+                  v63 = v59->m_quad.m128_i32[3];
+                  v64 = v59->m_quad.m128_i32[0];
+                  p_m_quad->m128_i32[1] = v59->m_quad.m128_i32[1];
+                  p_m_quad->m128_i32[2] = v62;
+                  p_m_quad->m128_i32[3] = v63;
+                  p_m_quad->m128_i32[0] = v64;
+                  ++p_m_quad;
                   ++v59;
-                  ++v58;
-                  --v60;
+                  --v61;
                 }
-                while ( v60 );
+                while ( v61 );
               }
-              v64 = v10->m_intersectVertices.m_size;
-              v65 = &v10->m_intersectVertices.m_data->m_quad;
-              v66 = &v50->m_vertices.m_data[v8->m_vertices.m_size].m_quad;
-              if ( v64 > 0 )
+              v65 = this->m_intersectVertices.m_size;
+              v66 = this->m_intersectVertices.m_data;
+              v67 = &v51->m_vertices.m_data[a->m_vertices.m_size].m_quad;
+              if ( v65 > 0 )
               {
-                v67 = (unsigned int)v64;
+                v68 = (unsigned int)v65;
                 do
                 {
-                  v68 = v65->m128_u64[1];
-                  v69 = HIDWORD(v65->m128_u64[1]);
-                  v70 = v65->m128_u64[0];
-                  HIDWORD(v66->m128_u64[0]) = HIDWORD(v65->m128_u64[0]);
-                  LODWORD(v66->m128_u64[1]) = v68;
-                  HIDWORD(v66->m128_u64[1]) = v69;
-                  LODWORD(v66->m128_u64[0]) = v70;
+                  v69 = v66->m_quad.m128_i32[2];
+                  v70 = v66->m_quad.m128_i32[3];
+                  v71 = v66->m_quad.m128_i32[0];
+                  v67->m128_i32[1] = v66->m_quad.m128_i32[1];
+                  v67->m128_i32[2] = v69;
+                  v67->m128_i32[3] = v70;
+                  v67->m128_i32[0] = v71;
+                  ++v67;
                   ++v66;
-                  ++v65;
-                  --v67;
+                  --v68;
                 }
-                while ( v67 );
+                while ( v68 );
               }
               hkaiBooleanOperation::_addPartialEdges(
-                v10,
+                this,
                 &resulta,
                 (hkArray<hkVector4f,hkContainerHeapAllocator> *)&array,
-                v50,
+                v51,
                 intersects);
-              v55 = (signed int)geom;
-              v76 = 0;
+              v56 = geom;
+              v77 = 0;
               if ( resulta.m_enum )
-                v9->m_enum = 1;
+                v9->m_enum = HK_FAILURE;
               else
-                v9->m_enum = 0;
+                v9->m_enum = HK_SUCCESS;
               goto LABEL_81;
             }
 LABEL_79:
-            v76 = 0;
+            v77 = 0;
             goto LABEL_80;
           }
-          v36 = &v10->m_a.m_geometry->m_vertices;
+          p_m_vertices = &this->m_a.m_geometry->m_vertices;
           edgeAabbs.m_data = 0i64;
           edgeAabbs.m_size = 0;
-          edgeAabbs.m_capacityAndFlags = 2147483648;
+          edgeAabbs.m_capacityAndFlags = 0x80000000;
           hkaiBooleanOperation::_calculateEdgeAabbs(
             &resulta,
-            v36,
-            &v10->m_a.m_uniqueEdges,
-            &v10->m_b.m_aabb,
+            p_m_vertices,
+            &this->m_a.m_uniqueEdges,
+            &this->m_b.m_aabb,
             &edgeAabbs);
           if ( resulta.m_enum )
           {
-            v9->m_enum = 1;
+            v9->m_enum = HK_FAILURE;
 LABEL_59:
             edgeAabbs.m_size = 0;
             if ( edgeAabbs.m_capacityAndFlags < 0 )
               return v9;
             v43 = edgeAabbs.m_data;
-            v44 = hkContainerTempAllocator::s_alloc.vfptr;
+            vfptr = hkContainerTempAllocator::s_alloc.vfptr;
             v45 = &hkContainerTempAllocator::s_alloc;
 LABEL_83:
-            ((void (__fastcall *)(hkContainerTempAllocator::Allocator *, hk1AxisSweep::AabbInt *))v44->bufFree)(
+            ((void (__fastcall *)(hkContainerTempAllocator::Allocator *, hk1AxisSweep::AabbInt *))vfptr->bufFree)(
               v45,
               v43);
             return v9;
           }
-          v37 = (hkArray<hkVector4f,hkContainerHeapAllocator> *)v10->m_b.m_geometry;
-          v38.m_quad = (__m128)v10->m_a.m_aabb.m_max;
-          otherAabb.m_min = v10->m_a.m_aabb.m_min;
+          m_geometry = this->m_b.m_geometry;
+          v38.m_quad = (__m128)this->m_a.m_aabb.m_max;
+          otherAabb.m_min = this->m_a.m_aabb.m_min;
           otherAabb.m_max = (hkVector4f)v38.m_quad;
           faceAabbsOut.m_data = 0i64;
           faceAabbsOut.m_size = 0;
-          faceAabbsOut.m_capacityAndFlags = 2147483648;
+          faceAabbsOut.m_capacityAndFlags = 0x80000000;
           otherAabb.m_max.m_quad.m128_i32[2] = 2139095022;
           otherAabb.m_min.m_quad.m128_i32[2] = -8388626;
-          hkaiBooleanOperation::_calculateFaceAabbs(&resulta, v37 + 3, &v10->m_b.m_faceEdges, &otherAabb, &faceAabbsOut);
+          hkaiBooleanOperation::_calculateFaceAabbs(
+            &resulta,
+            &m_geometry->m_vertices,
+            &this->m_b.m_faceEdges,
+            &otherAabb,
+            &faceAabbsOut);
           if ( resulta.m_enum )
           {
-            v39 = faceAabbsOut.m_capacityAndFlags;
+            m_capacityAndFlags = faceAabbsOut.m_capacityAndFlags;
             faceAabbsOut.m_size = 0;
           }
           else
           {
-            hkaiBooleanOperation::_sweepAndPruneClassifyEdgeAFaceB(v10, &resulta, v12, &edgeAabbs, &faceAabbsOut);
-            v39 = faceAabbsOut.m_capacityAndFlags;
+            hkaiBooleanOperation::_sweepAndPruneClassifyEdgeAFaceB(this, &resulta, v12, &edgeAabbs, &faceAabbsOut);
+            m_capacityAndFlags = faceAabbsOut.m_capacityAndFlags;
             faceAabbsOut.m_size = 0;
             if ( resulta.m_enum == HK_SUCCESS )
             {
               if ( faceAabbsOut.m_capacityAndFlags >= 0 )
                 hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-                  (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
+                  &hkContainerTempAllocator::s_alloc,
                   faceAabbsOut.m_data,
                   32 * faceAabbsOut.m_capacityAndFlags);
               faceAabbsOut.m_data = 0i64;
-              faceAabbsOut.m_capacityAndFlags = 2147483648;
+              faceAabbsOut.m_capacityAndFlags = 0x80000000;
               edgeAabbs.m_size = 0;
               if ( edgeAabbs.m_capacityAndFlags >= 0 )
                 hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-                  (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
+                  &hkContainerTempAllocator::s_alloc,
                   edgeAabbs.m_data,
                   32 * edgeAabbs.m_capacityAndFlags);
-              v40 = &v10->m_b.m_geometry->m_vertices;
+              v40 = &this->m_b.m_geometry->m_vertices;
               edgeAabbs.m_data = 0i64;
               edgeAabbs.m_size = 0;
-              edgeAabbs.m_capacityAndFlags = 2147483648;
+              edgeAabbs.m_capacityAndFlags = 0x80000000;
               hkaiBooleanOperation::_calculateEdgeAabbs(
                 &resulta,
                 v40,
-                &v10->m_b.m_uniqueEdges,
-                &v10->m_a.m_aabb,
+                &this->m_b.m_uniqueEdges,
+                &this->m_a.m_aabb,
                 &edgeAabbs);
               if ( resulta.m_enum )
               {
-                v9->m_enum = 1;
+                v9->m_enum = HK_FAILURE;
                 goto LABEL_59;
               }
-              v41 = (hkArray<hkVector4f,hkContainerHeapAllocator> *)v10->m_a.m_geometry;
-              v42.m_quad = (__m128)v10->m_b.m_aabb.m_max;
-              v13 = (signed __int64)&v10->m_a.m_faceEdges;
-              otherAabb.m_min = v10->m_b.m_aabb.m_min;
+              v41 = this->m_a.m_geometry;
+              v42.m_quad = (__m128)this->m_b.m_aabb.m_max;
+              p_m_faceEdges = &this->m_a.m_faceEdges;
+              otherAabb.m_min = this->m_b.m_aabb.m_min;
               otherAabb.m_max = (hkVector4f)v42.m_quad;
               faceAabbsOut.m_data = 0i64;
               faceAabbsOut.m_size = 0;
-              faceAabbsOut.m_capacityAndFlags = 2147483648;
+              faceAabbsOut.m_capacityAndFlags = 0x80000000;
               otherAabb.m_max.m_quad.m128_i32[2] = 2139095022;
               otherAabb.m_min.m_quad.m128_i32[2] = -8388626;
               hkaiBooleanOperation::_calculateFaceAabbs(
                 &resulta,
-                v41 + 3,
-                &v10->m_a.m_faceEdges,
+                &v41->m_vertices,
+                &this->m_a.m_faceEdges,
                 &otherAabb,
                 &faceAabbsOut);
               if ( resulta.m_enum )
               {
-                v39 = faceAabbsOut.m_capacityAndFlags;
+                m_capacityAndFlags = faceAabbsOut.m_capacityAndFlags;
                 faceAabbsOut.m_size = 0;
               }
               else
               {
-                hkaiBooleanOperation::_sweepAndPruneClassifyFaceAEdgeB(v10, &resulta, v12, &faceAabbsOut, &edgeAabbs);
-                v39 = faceAabbsOut.m_capacityAndFlags;
+                hkaiBooleanOperation::_sweepAndPruneClassifyFaceAEdgeB(this, &resulta, v12, &faceAabbsOut, &edgeAabbs);
+                m_capacityAndFlags = faceAabbsOut.m_capacityAndFlags;
                 faceAabbsOut.m_size = 0;
                 if ( resulta.m_enum == HK_SUCCESS )
                 {
                   if ( faceAabbsOut.m_capacityAndFlags >= 0 )
                     hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-                      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
+                      &hkContainerTempAllocator::s_alloc,
                       faceAabbsOut.m_data,
                       32 * faceAabbsOut.m_capacityAndFlags);
                   faceAabbsOut.m_data = 0i64;
-                  faceAabbsOut.m_capacityAndFlags = 2147483648;
+                  faceAabbsOut.m_capacityAndFlags = 0x80000000;
                   edgeAabbs.m_size = 0;
                   if ( edgeAabbs.m_capacityAndFlags >= 0 )
                     hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-                      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
+                      &hkContainerTempAllocator::s_alloc,
                       edgeAabbs.m_data,
                       32 * edgeAabbs.m_capacityAndFlags);
                   goto LABEL_65;
@@ -4617,23 +4436,23 @@ LABEL_83:
               }
             }
           }
-          v9->m_enum = 1;
-          if ( v39 >= 0 )
+          v9->m_enum = HK_FAILURE;
+          if ( m_capacityAndFlags >= 0 )
             hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-              (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
+              &hkContainerTempAllocator::s_alloc,
               faceAabbsOut.m_data,
-              32 * v39);
+              32 * m_capacityAndFlags);
           faceAabbsOut.m_data = 0i64;
-          faceAabbsOut.m_capacityAndFlags = 2147483648;
+          faceAabbsOut.m_capacityAndFlags = 0x80000000;
           goto LABEL_59;
         }
       }
 LABEL_41:
-      v9->m_enum = 1;
+      v9->m_enum = HK_FAILURE;
       return v9;
     }
   }
-  v9->m_enum = 1;
+  v9->m_enum = HK_FAILURE;
   return v9;
 }
 
@@ -4641,46 +4460,42 @@ LABEL_41:
 // RVA: 0xB9F860
 void __fastcall hkaiBooleanOperation::GeometricInfo::clear(hkaiBooleanOperation::GeometricInfo *this)
 {
-  hkaiBooleanOperation::GeometricInfo *v1; // rbx
-  hkaiUniqueEdges *v2; // rcx
+  hkaiUniqueEdges *p_m_uniqueEdges; // rcx
 
-  v1 = this;
-  v2 = &this->m_uniqueEdges;
-  v2[-1].m_startUniqueEdge.m_data = 0i64;
-  *(_QWORD *)&v2[-1].m_startUniqueEdge.m_size = 0i64;
-  hkaiUniqueEdges::clear(v2);
-  hkaiFaceEdges::clear(&v1->m_faceEdges);
-  v1->m_aabb.m_min = (hkVector4f)xmmword_141A712A0;
-  v1->m_aabb.m_max.m_quad = _mm_xor_ps(
-                              (__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 0),
-                              v1->m_aabb.m_min.m_quad);
+  p_m_uniqueEdges = &this->m_uniqueEdges;
+  p_m_uniqueEdges[-1].m_startUniqueEdge.m_data = 0i64;
+  *(_QWORD *)&p_m_uniqueEdges[-1].m_startUniqueEdge.m_size = 0i64;
+  hkaiUniqueEdges::clear(p_m_uniqueEdges);
+  hkaiFaceEdges::clear(&this->m_faceEdges);
+  this->m_aabb.m_min = (hkVector4f)xmmword_141A712A0;
+  this->m_aabb.m_max.m_quad = _mm_xor_ps(
+                                (__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 0),
+                                this->m_aabb.m_min.m_quad);
 }
 
 // File Line: 2165
 // RVA: 0xBA3CD0
 void __fastcall hkaiBooleanOperation::clear(hkaiBooleanOperation *this)
 {
-  hkaiBooleanOperation *v1; // rbx
-  int v2; // er8
+  int m_capacityAndFlags; // r8d
 
-  v1 = this;
   hkaiBooleanOperation::GeometricInfo::clear(&this->m_a);
-  hkaiBooleanOperation::GeometricInfo::clear(&v1->m_b);
-  hkMultiMap<unsigned __int64,unsigned __int64,hkMultiMapOperations<unsigned __int64>,hkContainerHeapAllocator>::clear((hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&v1->m_faceFaceFeatureMap.m_map.m_elem);
-  *(_QWORD *)&v1->m_faceFaceFeatureCount = 0i64;
-  *(_QWORD *)&v1->m_edgeBFeatureBase = 0i64;
-  v1->m_edgeAIntersected.m_storage.m_numBits = 0;
-  v2 = v1->m_edgeAIntersected.m_storage.m_words.m_capacityAndFlags;
-  v1->m_edgeAIntersected.m_storage.m_words.m_size = 0;
-  if ( v2 >= 0 )
+  hkaiBooleanOperation::GeometricInfo::clear(&this->m_b);
+  hkMultiMap<unsigned __int64,unsigned __int64,hkMultiMapOperations<unsigned __int64>,hkContainerHeapAllocator>::clear(&this->m_faceFaceFeatureMap.m_map);
+  *(_QWORD *)&this->m_faceFaceFeatureCount = 0i64;
+  *(_QWORD *)&this->m_edgeBFeatureBase = 0i64;
+  this->m_edgeAIntersected.m_storage.m_numBits = 0;
+  m_capacityAndFlags = this->m_edgeAIntersected.m_storage.m_words.m_capacityAndFlags;
+  this->m_edgeAIntersected.m_storage.m_words.m_size = 0;
+  if ( m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_edgeAIntersected.m_storage.m_words.m_data,
-      4 * v2);
-  v1->m_edgeAIntersected.m_storage.m_words.m_data = 0i64;
-  v1->m_edgeAIntersected.m_storage.m_words.m_capacityAndFlags = 2147483648;
-  v1->m_intersectVertices.m_size = 0;
-  v1->m_startVertices.m_size = 0;
-  v1->m_endVertices.m_size = 0;
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_edgeAIntersected.m_storage.m_words.m_data,
+      4 * m_capacityAndFlags);
+  this->m_edgeAIntersected.m_storage.m_words.m_data = 0i64;
+  this->m_edgeAIntersected.m_storage.m_words.m_capacityAndFlags = 0x80000000;
+  this->m_intersectVertices.m_size = 0;
+  this->m_startVertices.m_size = 0;
+  this->m_endVertices.m_size = 0;
 }
 

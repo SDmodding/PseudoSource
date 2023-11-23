@@ -2,17 +2,15 @@
 // RVA: 0x8A60A0
 void __fastcall Scaleform::GFx::Movie::~Movie(Scaleform::GFx::Movie *this)
 {
-  Scaleform::GFx::Movie *v1; // rbx
-  Scaleform::Render::RenderBuffer *v2; // rcx
+  Scaleform::Render::RenderBuffer *pObject; // rcx
 
-  v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Movie::`vftable{for `Scaleform::RefCountBase<Scaleform::GFx::Movie,327>};
-  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::Movie::`vftable{for `Scaleform::GFx::StateBag};
-  v2 = (Scaleform::Render::RenderBuffer *)this->pASMovieRoot.pObject;
-  if ( v2 )
-    Scaleform::RefCountImpl::Release(v2);
-  v1->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBag::`vftable;
-  Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&v1->vfptr);
+  this->Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Movie::`vftable{for `Scaleform::RefCountBase<Scaleform::GFx::Movie,327>};
+  this->Scaleform::GFx::StateBag::vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::Movie::`vftable{for `Scaleform::GFx::StateBag};
+  pObject = (Scaleform::Render::RenderBuffer *)this->pASMovieRoot.pObject;
+  if ( pObject )
+    Scaleform::RefCountImpl::Release(pObject);
+  this->Scaleform::GFx::StateBag::vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBag::`vftable;
+  Scaleform::RefCountImplCore::~RefCountImplCore(this);
 }
 
 // File Line: 212
@@ -24,7 +22,10 @@ __int64 __fastcall Scaleform::GFx::Movie::GetAVMVersion(Scaleform::GFx::Movie *t
 
 // File Line: 217
 // RVA: 0x8E1520
-__int64 __fastcall Scaleform::GFx::Movie::GetVariable(Scaleform::GFx::Movie *this, Scaleform::GFx::Value *pval, const char *ppathToVar)
+__int64 __fastcall Scaleform::GFx::Movie::GetVariable(
+        Scaleform::GFx::Movie *this,
+        Scaleform::GFx::Value *pval,
+        const char *ppathToVar)
 {
   return ((__int64 (__fastcall *)(Scaleform::GFx::ASMovieRootBase *, Scaleform::GFx::Value *, const char *))this->pASMovieRoot.pObject->vfptr[49].__vecDelDtor)(
            this->pASMovieRoot.pObject,
@@ -34,7 +35,11 @@ __int64 __fastcall Scaleform::GFx::Movie::GetVariable(Scaleform::GFx::Movie *thi
 
 // File Line: 223
 // RVA: 0x90E8B0
-__int64 __fastcall Scaleform::GFx::Movie::SetVariable(Scaleform::GFx::Movie *this, const char *ppathToVar, Scaleform::GFx::Value *value, __int64 setType)
+__int64 __fastcall Scaleform::GFx::Movie::SetVariable(
+        Scaleform::GFx::Movie *this,
+        const char *ppathToVar,
+        Scaleform::GFx::Value *value,
+        __int64 setType)
 {
   return ((__int64 (__fastcall *)(Scaleform::GFx::ASMovieRootBase *, const char *, Scaleform::GFx::Value *, __int64))this->pASMovieRoot.pObject->vfptr[48].__vecDelDtor)(
            this->pASMovieRoot.pObject,
@@ -45,7 +50,12 @@ __int64 __fastcall Scaleform::GFx::Movie::SetVariable(Scaleform::GFx::Movie *thi
 
 // File Line: 255
 // RVA: 0x8E6DE0
-__int64 __fastcall Scaleform::GFx::Movie::Invoke(Scaleform::GFx::Movie *this, const char *pmethodName, Scaleform::GFx::Value *presult, Scaleform::GFx::Value *pargs, unsigned int numArgs)
+__int64 __fastcall Scaleform::GFx::Movie::Invoke(
+        Scaleform::GFx::Movie *this,
+        const char *pmethodName,
+        Scaleform::GFx::Value *presult,
+        Scaleform::GFx::Value *pargs,
+        unsigned int numArgs)
 {
   return ((__int64 (__fastcall *)(Scaleform::GFx::ASMovieRootBase *, const char *, Scaleform::GFx::Value *, Scaleform::GFx::Value *))this->pASMovieRoot.pObject->vfptr[56].__vecDelDtor)(
            this->pASMovieRoot.pObject,
@@ -56,7 +66,12 @@ __int64 __fastcall Scaleform::GFx::Movie::Invoke(Scaleform::GFx::Movie *this, co
 
 // File Line: 261
 // RVA: 0x8E6DB0
-__int64 Scaleform::GFx::Movie::Invoke(Scaleform::GFx::Movie *this, const char *pmethodName, Scaleform::GFx::Value *presult, const char *pargFmt, ...)
+__int64 Scaleform::GFx::Movie::Invoke(
+        Scaleform::GFx::Movie *this,
+        const char *pmethodName,
+        Scaleform::GFx::Value *presult,
+        const char *pargFmt,
+        ...)
 {
   return ((__int64 (__fastcall *)(Scaleform::GFx::ASMovieRootBase *, const char *, Scaleform::GFx::Value *))this->pASMovieRoot.pObject->vfptr[57].__vecDelDtor)(
            this->pASMovieRoot.pObject,
@@ -66,7 +81,12 @@ __int64 Scaleform::GFx::Movie::Invoke(Scaleform::GFx::Movie *this, const char *p
 
 // File Line: 272
 // RVA: 0x8E6DF0
-__int64 __fastcall Scaleform::GFx::Movie::InvokeArgs(Scaleform::GFx::Movie *this, const char *pmethodName, Scaleform::GFx::Value *presult, const char *pargFmt, char *args)
+__int64 __fastcall Scaleform::GFx::Movie::InvokeArgs(
+        Scaleform::GFx::Movie *this,
+        const char *pmethodName,
+        Scaleform::GFx::Value *presult,
+        const char *pargFmt,
+        char *args)
 {
   return ((__int64 (__fastcall *)(Scaleform::GFx::ASMovieRootBase *, const char *, Scaleform::GFx::Value *, const char *))this->pASMovieRoot.pObject->vfptr[57].__vecDelDtor)(
            this->pASMovieRoot.pObject,
@@ -77,7 +97,10 @@ __int64 __fastcall Scaleform::GFx::Movie::InvokeArgs(Scaleform::GFx::Movie *this
 
 // File Line: 278
 // RVA: 0x8C3AB0
-void __fastcall Scaleform::GFx::Movie::CreateString(Scaleform::GFx::Movie *this, Scaleform::GFx::Value *pvalue, const char *pstring)
+void __fastcall Scaleform::GFx::Movie::CreateString(
+        Scaleform::GFx::Movie *this,
+        Scaleform::GFx::Value *pvalue,
+        const char *pstring)
 {
   ((void (__fastcall *)(Scaleform::GFx::ASMovieRootBase *, Scaleform::GFx::Value *, const char *))this->pASMovieRoot.pObject->vfptr[43].__vecDelDtor)(
     this->pASMovieRoot.pObject,
@@ -87,29 +110,29 @@ void __fastcall Scaleform::GFx::Movie::CreateString(Scaleform::GFx::Movie *this,
 
 // File Line: 305
 // RVA: 0x907050
-void __fastcall Scaleform::GFx::Movie::SetExternalInterfaceRetVal(Scaleform::GFx::Movie *this, Scaleform::GFx::Value *v)
+void __fastcall Scaleform::GFx::Movie::SetExternalInterfaceRetVal(
+        Scaleform::GFx::Movie *this,
+        Scaleform::GFx::Value *v)
 {
-  this->pASMovieRoot.pObject->vfptr[40].__vecDelDtor(
-    (Scaleform::RefCountImplCore *)this->pASMovieRoot.pObject,
-    (unsigned int)v);
+  this->pASMovieRoot.pObject->vfptr[40].__vecDelDtor(this->pASMovieRoot.pObject, (unsigned int)v);
 }
 
 // File Line: 310
 // RVA: 0x8FE630
 void __fastcall Scaleform::GFx::Movie::Release(Scaleform::GFx::Movie *this)
 {
-  Scaleform::GFx::Movie *v1; // rdi
   Scaleform::GFx::Resource *v2; // rax
   Scaleform::Render::RenderBuffer *v3; // rbx
 
-  v1 = this;
   if ( !_InterlockedDecrement(&this->RefCount) )
   {
-    v2 = (Scaleform::GFx::Resource *)((__int64 (__cdecl *)(Scaleform::GFx::ASMovieRootBase *))this->pASMovieRoot.pObject->vfptr[58].__vecDelDtor)(this->pASMovieRoot.pObject);
+    v2 = (Scaleform::GFx::Resource *)((__int64 (__fastcall *)(Scaleform::GFx::ASMovieRootBase *))this->pASMovieRoot.pObject->vfptr[58].__vecDelDtor)(this->pASMovieRoot.pObject);
     v3 = (Scaleform::Render::RenderBuffer *)v2;
     if ( v2 )
       Scaleform::Render::RenderBuffer::AddRef(v2);
-    v1->vfptr->__vecDelDtor((Scaleform::RefCountImplCore *)&v1->vfptr, 1u);
+    this->Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr->__vecDelDtor(
+      this,
+      1i64);
     if ( v3 )
       Scaleform::RefCountImpl::Release(v3);
   }
@@ -119,514 +142,497 @@ void __fastcall Scaleform::GFx::Movie::Release(Scaleform::GFx::Movie *this)
 // RVA: 0x89B3D0
 void __fastcall Scaleform::GFx::MovieImpl::MovieImpl(Scaleform::GFx::MovieImpl *this, Scaleform::MemoryHeap *pheap)
 {
-  Scaleform::GFx::MovieImpl *v2; // rbx
-  Scaleform::ArrayLH<Scaleform::GFx::MovieImpl::LevelInfo,327,Scaleform::ArrayDefaultPolicy> *v3; // rax
-  Scaleform::List<Scaleform::GFx::MovieDefRootNode,Scaleform::GFx::MovieDefRootNode> *v4; // rax
-  bool v5; // zf
-  Scaleform::ArrayDefaultPolicy *v6; // rcx
-  Scaleform::Render::RenderBuffer **v7; // r14
-  Scaleform::ArrayLH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,327,Scaleform::ArrayDefaultPolicy> *v8; // rax
-  Scaleform::ArrayLH<Scaleform::Ptr<Scaleform::GFx::ASIntervalTimerIntf>,327,Scaleform::ArrayDefaultPolicy> *v9; // rax
-  Scaleform::ArrayLH<Scaleform::GFx::MovieImpl::FontDesc,2,Scaleform::ArrayDefaultPolicy> *v10; // rax
-  signed __int64 v11; // rax
-  Scaleform::Array<Scaleform::GFx::MovieImpl::MDKillListEntry,327,Scaleform::ArrayDefaultPolicy> *v12; // rax
-  Scaleform::ArrayLH<Scaleform::GFx::MovieImpl::IndirectTransPair,2,Scaleform::ArrayDefaultPolicy> *v13; // rax
-  Scaleform::Render::TreeRoot::NodeData *v14; // rax
-  Scaleform::Render::ContextImpl::EntryData *v15; // rdi
-  Scaleform::Render::ContextImpl::Entry *v16; // rdi
-  Scaleform::Render::ContextImpl::Entry *v17; // rcx
-  Scaleform::Render::ContextImpl::RTHandle::HandleData *v18; // rax
-  Scaleform::Render::TreeNode *v19; // rdi
-  Scaleform::Render::ContextImpl::Entry *v20; // rcx
-  Scaleform::Render::ContextImpl::RTHandle::HandleData *v21; // rax
+  Scaleform::List<Scaleform::GFx::MovieDefRootNode,Scaleform::GFx::MovieDefRootNode> *p_RootMovieDefNodes; // rax
+  bool v4; // zf
+  Scaleform::ArrayDefaultPolicy *p_Policy; // rcx
+  Scaleform::Render::RenderBuffer **p_hDisplayRoot; // r14
+  unsigned __int64 *p_Size; // rax
+  Scaleform::Render::TreeRoot::NodeData *v8; // rax
+  Scaleform::Render::ContextImpl::EntryData *v9; // rdi
+  Scaleform::Render::TreeRoot *EntryHelper; // rdi
+  Scaleform::Render::TreeRoot *pObject; // rcx
+  Scaleform::Render::ContextImpl::RTHandle::HandleData *v12; // rax
+  Scaleform::Render::TreeContainer *v13; // rdi
+  Scaleform::Render::TreeContainer *v14; // rcx
+  Scaleform::Render::ContextImpl::RTHandle::HandleData *v15; // rax
+  Scaleform::GFx::StateBagImpl *v16; // rax
+  Scaleform::GFx::StateBagImpl *v17; // rdi
+  Scaleform::Render::RenderBuffer *v18; // rcx
+  char v19; // al
+  char *p_KeyboardIndex; // rcx
+  __int64 v21; // rdi
   Scaleform::GFx::StateBagImpl *v22; // rax
-  Scaleform::GFx::StateBagImpl *v23; // rdi
-  Scaleform::Render::RenderBuffer *v24; // rcx
-  char v25; // al
-  char *v26; // rcx
-  __int64 v27; // rdi
-  Scaleform::GFx::StateBagImpl *v28; // rax
-  signed __int64 v29; // rax
-  Scaleform::RefCountNTSImpl *v30; // rcx
-  unsigned __int64 v31; // rax
-  Scaleform::Render::ContextImpl::RTHandle v32; // [rsp+88h] [rbp+48h]
-  Scaleform::ArrayLH<Scaleform::GFx::MovieImpl::IndirectTransPair,2,Scaleform::ArrayDefaultPolicy> *v33; // [rsp+90h] [rbp+50h]
-  Scaleform::ArrayLH<Scaleform::GFx::MovieImpl::LevelInfo,327,Scaleform::ArrayDefaultPolicy> *v34; // [rsp+98h] [rbp+58h]
+  Scaleform::GFx::StateBag *v23; // rax
+  Scaleform::GFx::FontManagerStates *v24; // rcx
+  Scaleform::Render::ContextImpl::RTHandle v25; // [rsp+88h] [rbp+48h] BYREF
+  void *p_MovieLevels; // [rsp+90h] [rbp+50h]
+  void *p_IntervalTimers; // [rsp+98h] [rbp+58h]
 
-  v2 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
+  this->Scaleform::GFx::Movie::Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::`vftable;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::`vftable;
-  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBag::`vftable;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Movie::`vftable{for `Scaleform::RefCountBase<Scaleform::GFx::Movie,327>};
-  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::Movie::`vftable{for `Scaleform::GFx::StateBag};
+  this->Scaleform::GFx::Movie::Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
+  this->Scaleform::GFx::Movie::Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::`vftable;
+  this->Scaleform::GFx::Movie::Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::`vftable;
+  this->Scaleform::GFx::Movie::Scaleform::GFx::StateBag::vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBag::`vftable;
+  this->Scaleform::GFx::Movie::Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Movie::`vftable{for `Scaleform::RefCountBase<Scaleform::GFx::Movie,327>};
+  this->Scaleform::GFx::Movie::Scaleform::GFx::StateBag::vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::Movie::`vftable{for `Scaleform::GFx::StateBag};
   this->pASMovieRoot.pObject = 0i64;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::MovieImpl::`vftable{for `Scaleform::RefCountBase<Scaleform::GFx::Movie,327>};
-  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::MovieImpl::`vftable{for `Scaleform::GFx::StateBag};
+  this->Scaleform::GFx::Movie::Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::MovieImpl::`vftable{for `Scaleform::RefCountBase<Scaleform::GFx::Movie,327>};
+  this->Scaleform::GFx::Movie::Scaleform::GFx::StateBag::vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::MovieImpl::`vftable{for `Scaleform::GFx::StateBag};
   this->AdvanceStats.pObject = 0i64;
   this->pHeap = pheap;
   this->pMainMovieDef.pObject = 0i64;
-  v3 = &this->MovieLevels;
-  v33 = (Scaleform::ArrayLH<Scaleform::GFx::MovieImpl::IndirectTransPair,2,Scaleform::ArrayDefaultPolicy> *)v3;
-  v34 = &this->MovieLevels;
-  v3->Data.Data = 0i64;
-  v3->Data.Size = 0i64;
-  v3->Data.Policy.Capacity = 0i64;
-  v4 = &this->RootMovieDefNodes;
-  v5 = &this->RootMovieDefNodes == 0i64;
-  v6 = &this->MovieLevels.Data.Policy;
-  if ( v5 )
-    v6 = 0i64;
-  v4->Root.pPrev = (Scaleform::GFx::MovieDefRootNode *)v6;
-  v4->Root.pNext = (Scaleform::GFx::MovieDefRootNode *)v6;
-  v2->pStateBag.pObject = 0i64;
-  v2->pRenderRoot.pObject = 0i64;
-  v7 = (Scaleform::Render::RenderBuffer **)&v2->hDisplayRoot;
-  v33 = (Scaleform::ArrayLH<Scaleform::GFx::MovieImpl::IndirectTransPair,2,Scaleform::ArrayDefaultPolicy> *)v7;
-  *v7 = 0i64;
-  v2->pTopMostRoot.pObject = 0i64;
-  *(_QWORD *)&v2->mViewport.BufferWidth = 0i64;
-  *(_QWORD *)&v2->mViewport.Left = 0i64;
-  v2->mViewport.Height = 1;
-  v2->mViewport.Width = 1;
-  *(_QWORD *)&v2->mViewport.ScissorWidth = 0i64;
-  *(_QWORD *)&v2->mViewport.ScissorLeft = 0i64;
-  v2->mViewport.Flags = 0;
-  v2->mViewport.AspectRatio = 1.0;
-  v2->mViewport.Scale = 1.0;
-  v2->PixelScale = 1.0;
-  *(_QWORD *)&v2->VisibleFrameRect.x1 = 0i64;
-  *(_QWORD *)&v2->VisibleFrameRect.x2 = 0i64;
-  *(_QWORD *)&v2->SafeRect.x1 = 0i64;
-  *(_QWORD *)&v2->SafeRect.x2 = 0i64;
-  *(_QWORD *)&v2->ViewportMatrix.M[0][0] = 1065353216i64;
-  *(_QWORD *)&v2->ViewportMatrix.M[0][2] = 0i64;
-  v2->ViewportMatrix.M[1][0] = 0.0;
-  *(_QWORD *)&v2->ViewportMatrix.M[1][1] = 1065353216i64;
-  v2->ViewportMatrix.M[1][3] = 0.0;
-  Scaleform::Render::ScreenToWorld::ScreenToWorld(&v2->ScreenToWorld);
-  v2->pCachedLog.pObject = 0i64;
-  v2->pUserEventHandler.pObject = 0i64;
-  v2->pFSCommandHandler.pObject = 0i64;
-  v2->pExtIntfHandler.pObject = 0i64;
-  v2->pFontManagerStates.pObject = 0i64;
-  v2->pXMLObjectManager = 0i64;
-  v2->InputEventsQueue.StartPos = 0i64;
-  v2->InputEventsQueue.UsedEntries = 0i64;
-  v2->InputEventsQueue.LastMousePosMask = 0;
-  *(_WORD *)&v2->BackgroundColor.Channels.Green = 0;
-  v2->BackgroundColor.Channels.Blue = 0;
-  v2->BackgroundColor.Channels.Alpha = -1;
+  p_MovieLevels = &this->MovieLevels;
+  p_IntervalTimers = &this->MovieLevels;
+  this->MovieLevels.Data.Data = 0i64;
+  this->MovieLevels.Data.Size = 0i64;
+  this->MovieLevels.Data.Policy.Capacity = 0i64;
+  p_RootMovieDefNodes = &this->RootMovieDefNodes;
+  v4 = &this->RootMovieDefNodes == 0i64;
+  p_Policy = &this->MovieLevels.Data.Policy;
+  if ( v4 )
+    p_Policy = 0i64;
+  p_RootMovieDefNodes->Root.pPrev = (Scaleform::GFx::MovieDefRootNode *)p_Policy;
+  p_RootMovieDefNodes->Root.pNext = (Scaleform::GFx::MovieDefRootNode *)p_Policy;
+  this->pStateBag.pObject = 0i64;
+  this->pRenderRoot.pObject = 0i64;
+  p_hDisplayRoot = (Scaleform::Render::RenderBuffer **)&this->hDisplayRoot;
+  p_MovieLevels = &this->hDisplayRoot;
+  this->hDisplayRoot.pData.pObject = 0i64;
+  this->pTopMostRoot.pObject = 0i64;
+  *(_QWORD *)&this->mViewport.BufferWidth = 0i64;
+  *(_QWORD *)&this->mViewport.Left = 0i64;
+  this->mViewport.Height = 1;
+  this->mViewport.Width = 1;
+  *(_QWORD *)&this->mViewport.ScissorWidth = 0i64;
+  *(_QWORD *)&this->mViewport.ScissorLeft = 0i64;
+  this->mViewport.Flags = 0;
+  this->mViewport.AspectRatio = 1.0;
+  this->mViewport.Scale = 1.0;
+  this->PixelScale = 1.0;
+  *(_QWORD *)&this->VisibleFrameRect.x1 = 0i64;
+  *(_QWORD *)&this->VisibleFrameRect.x2 = 0i64;
+  *(_QWORD *)&this->SafeRect.x1 = 0i64;
+  *(_QWORD *)&this->SafeRect.x2 = 0i64;
+  *(_QWORD *)&this->ViewportMatrix.M[0][0] = 1065353216i64;
+  *(_QWORD *)&this->ViewportMatrix.M[0][2] = 0i64;
+  this->ViewportMatrix.M[1][0] = 0.0;
+  *(_QWORD *)&this->ViewportMatrix.M[1][1] = 1065353216i64;
+  this->ViewportMatrix.M[1][3] = 0.0;
+  Scaleform::Render::ScreenToWorld::ScreenToWorld(&this->ScreenToWorld);
+  this->pCachedLog.pObject = 0i64;
+  this->pUserEventHandler.pObject = 0i64;
+  this->pFSCommandHandler.pObject = 0i64;
+  this->pExtIntfHandler.pObject = 0i64;
+  this->pFontManagerStates.pObject = 0i64;
+  this->pXMLObjectManager = 0i64;
+  this->InputEventsQueue.StartPos = 0i64;
+  this->InputEventsQueue.UsedEntries = 0i64;
+  this->InputEventsQueue.LastMousePosMask = 0;
+  *(_WORD *)&this->BackgroundColor.Channels.Green = 0;
+  this->BackgroundColor.Channels.Blue = 0;
+  this->BackgroundColor.Channels.Alpha = -1;
   `eh vector constructor iterator(
-    v2->mMouseState,
+    this->mMouseState,
     0x50ui64,
     6,
     (void (__fastcall *)(void *))Scaleform::GFx::MouseState::MouseState);
-  v2->MouseCursorCount = 1;
-  v2->ControllerCount = 1;
-  v2->UserData = 0i64;
+  this->MouseCursorCount = 1;
+  this->ControllerCount = 1;
+  this->UserData = 0i64;
   `eh vector constructor iterator(
-    v2->KeyboardStates,
+    this->KeyboardStates,
     0x688ui64,
     6,
     (void (__fastcall *)(void *))Scaleform::GFx::KeyboardState::KeyboardState);
-  v2->CurrentDragStates[0].pCharacter = 0i64;
-  v2->CurrentDragStates[0].pTopmostEntity = 0i64;
-  *(_WORD *)&v2->CurrentDragStates[0].LockCenter = 0;
-  v2->CurrentDragStates[0].BoundLT = 0i64;
-  v2->CurrentDragStates[0].BoundRB = 0i64;
-  v2->CurrentDragStates[0].CenterDelta = 0i64;
-  v2->CurrentDragStates[0].MouseIndex = -1;
-  v2->CurrentDragStates[1].pCharacter = 0i64;
-  v2->CurrentDragStates[1].pTopmostEntity = 0i64;
-  *(_WORD *)&v2->CurrentDragStates[1].LockCenter = 0;
-  v2->CurrentDragStates[1].BoundLT = 0i64;
-  v2->CurrentDragStates[1].BoundRB = 0i64;
-  v2->CurrentDragStates[1].CenterDelta = 0i64;
-  v2->CurrentDragStates[1].MouseIndex = -1;
-  v2->CurrentDragStates[2].pCharacter = 0i64;
-  v2->CurrentDragStates[2].pTopmostEntity = 0i64;
-  *(_WORD *)&v2->CurrentDragStates[2].LockCenter = 0;
-  v2->CurrentDragStates[2].BoundLT = 0i64;
-  v2->CurrentDragStates[2].BoundRB = 0i64;
-  v2->CurrentDragStates[2].CenterDelta = 0i64;
-  v2->CurrentDragStates[2].MouseIndex = -1;
-  v2->CurrentDragStates[3].pCharacter = 0i64;
-  v2->CurrentDragStates[3].pTopmostEntity = 0i64;
-  *(_WORD *)&v2->CurrentDragStates[3].LockCenter = 0;
-  v2->CurrentDragStates[3].BoundLT = 0i64;
-  v2->CurrentDragStates[3].BoundRB = 0i64;
-  v2->CurrentDragStates[3].CenterDelta = 0i64;
-  v2->CurrentDragStates[3].MouseIndex = -1;
-  v2->CurrentDragStates[4].pCharacter = 0i64;
-  v2->CurrentDragStates[4].pTopmostEntity = 0i64;
-  *(_WORD *)&v2->CurrentDragStates[4].LockCenter = 0;
-  v2->CurrentDragStates[4].BoundLT = 0i64;
-  v2->CurrentDragStates[4].BoundRB = 0i64;
-  v2->CurrentDragStates[4].CenterDelta = 0i64;
-  v2->CurrentDragStates[4].MouseIndex = -1;
-  v2->CurrentDragStates[5].pCharacter = 0i64;
-  v2->CurrentDragStates[5].pTopmostEntity = 0i64;
-  *(_WORD *)&v2->CurrentDragStates[5].LockCenter = 0;
-  v2->CurrentDragStates[5].BoundLT = 0i64;
-  v2->CurrentDragStates[5].BoundRB = 0i64;
-  v2->CurrentDragStates[5].CenterDelta = 0i64;
-  v2->CurrentDragStates[5].MouseIndex = -1;
-  v2->StickyVariables.mHash.pTable = 0i64;
-  v8 = &v2->TopmostLevelCharacters;
-  v8->Data.Data = 0i64;
-  v8->Data.Size = 0i64;
-  v8->Data.Policy.Capacity = 0i64;
-  v9 = &v2->IntervalTimers;
-  v33 = (Scaleform::ArrayLH<Scaleform::GFx::MovieImpl::IndirectTransPair,2,Scaleform::ArrayDefaultPolicy> *)v9;
-  v34 = (Scaleform::ArrayLH<Scaleform::GFx::MovieImpl::LevelInfo,327,Scaleform::ArrayDefaultPolicy> *)&v2->IntervalTimers;
-  v9->Data.Data = 0i64;
-  v9->Data.Size = 0i64;
-  v9->Data.Policy.Capacity = 0i64;
-  v2->FocusRectContainerNode.pObject = 0i64;
+  this->CurrentDragStates[0].pCharacter = 0i64;
+  this->CurrentDragStates[0].pTopmostEntity = 0i64;
+  *(_WORD *)&this->CurrentDragStates[0].LockCenter = 0;
+  this->CurrentDragStates[0].BoundLT = 0i64;
+  this->CurrentDragStates[0].BoundRB = 0i64;
+  this->CurrentDragStates[0].CenterDelta = 0i64;
+  this->CurrentDragStates[0].MouseIndex = -1;
+  this->CurrentDragStates[1].pCharacter = 0i64;
+  this->CurrentDragStates[1].pTopmostEntity = 0i64;
+  *(_WORD *)&this->CurrentDragStates[1].LockCenter = 0;
+  this->CurrentDragStates[1].BoundLT = 0i64;
+  this->CurrentDragStates[1].BoundRB = 0i64;
+  this->CurrentDragStates[1].CenterDelta = 0i64;
+  this->CurrentDragStates[1].MouseIndex = -1;
+  this->CurrentDragStates[2].pCharacter = 0i64;
+  this->CurrentDragStates[2].pTopmostEntity = 0i64;
+  *(_WORD *)&this->CurrentDragStates[2].LockCenter = 0;
+  this->CurrentDragStates[2].BoundLT = 0i64;
+  this->CurrentDragStates[2].BoundRB = 0i64;
+  this->CurrentDragStates[2].CenterDelta = 0i64;
+  this->CurrentDragStates[2].MouseIndex = -1;
+  this->CurrentDragStates[3].pCharacter = 0i64;
+  this->CurrentDragStates[3].pTopmostEntity = 0i64;
+  *(_WORD *)&this->CurrentDragStates[3].LockCenter = 0;
+  this->CurrentDragStates[3].BoundLT = 0i64;
+  this->CurrentDragStates[3].BoundRB = 0i64;
+  this->CurrentDragStates[3].CenterDelta = 0i64;
+  this->CurrentDragStates[3].MouseIndex = -1;
+  this->CurrentDragStates[4].pCharacter = 0i64;
+  this->CurrentDragStates[4].pTopmostEntity = 0i64;
+  *(_WORD *)&this->CurrentDragStates[4].LockCenter = 0;
+  this->CurrentDragStates[4].BoundLT = 0i64;
+  this->CurrentDragStates[4].BoundRB = 0i64;
+  this->CurrentDragStates[4].CenterDelta = 0i64;
+  this->CurrentDragStates[4].MouseIndex = -1;
+  this->CurrentDragStates[5].pCharacter = 0i64;
+  this->CurrentDragStates[5].pTopmostEntity = 0i64;
+  *(_WORD *)&this->CurrentDragStates[5].LockCenter = 0;
+  this->CurrentDragStates[5].BoundLT = 0i64;
+  this->CurrentDragStates[5].BoundRB = 0i64;
+  this->CurrentDragStates[5].CenterDelta = 0i64;
+  this->CurrentDragStates[5].MouseIndex = -1;
+  this->StickyVariables.mHash.pTable = 0i64;
+  this->TopmostLevelCharacters.Data.Data = 0i64;
+  this->TopmostLevelCharacters.Data.Size = 0i64;
+  this->TopmostLevelCharacters.Data.Policy.Capacity = 0i64;
+  p_MovieLevels = &this->IntervalTimers;
+  p_IntervalTimers = &this->IntervalTimers;
+  this->IntervalTimers.Data.Data = 0i64;
+  this->IntervalTimers.Data.Size = 0i64;
+  this->IntervalTimers.Data.Policy.Capacity = 0i64;
+  this->FocusRectContainerNode.pObject = 0i64;
   `eh vector constructor iterator(
-    v2->FocusGroups,
+    this->FocusGroups,
     0x60ui64,
     16,
     (void (__fastcall *)(void *))Scaleform::GFx::FocusGroupDescr::`default constructor closure);
-  *(_QWORD *)&v2->Flags = 0i64;
-  v10 = &v2->RegisteredFonts;
-  v33 = (Scaleform::ArrayLH<Scaleform::GFx::MovieImpl::IndirectTransPair,2,Scaleform::ArrayDefaultPolicy> *)v10;
-  v34 = (Scaleform::ArrayLH<Scaleform::GFx::MovieImpl::LevelInfo,327,Scaleform::ArrayDefaultPolicy> *)&v2->RegisteredFonts;
-  v10->Data.Data = 0i64;
-  v10->Data.Size = 0i64;
-  v10->Data.Policy.Capacity = 0i64;
-  v11 = (signed __int64)&v2->RegisteredFonts.Data.Size;
-  if ( v2 == (Scaleform::GFx::MovieImpl *)-21248i64 )
-    v11 = 0i64;
-  v2->DrawingContextList.Root.pPrev = (Scaleform::GFx::DrawingContext *)v11;
-  v2->DrawingContextList.Root.pNext = (Scaleform::GFx::DrawingContext *)v11;
-  v12 = &v2->MovieDefKillList;
-  v33 = (Scaleform::ArrayLH<Scaleform::GFx::MovieImpl::IndirectTransPair,2,Scaleform::ArrayDefaultPolicy> *)v12;
-  v34 = (Scaleform::ArrayLH<Scaleform::GFx::MovieImpl::LevelInfo,327,Scaleform::ArrayDefaultPolicy> *)&v2->MovieDefKillList;
-  v12->Data.Data = 0i64;
-  v12->Data.Size = 0i64;
-  v12->Data.Policy.Capacity = 0i64;
-  v2->pSavedASMovieRoot.pObject = 0i64;
-  Scaleform::Render::ContextImpl::Context::Context(&v2->RenderContext, Scaleform::Memory::pGlobalHeap);
-  v2->DIContext.pObject = 0i64;
-  v2->pRTCommandQueue = 0i64;
-  v2->MultitouchHAL.pObject = 0i64;
-  v2->GestureTopMostChar.pObject = 0i64;
-  v13 = &v2->IndirectTransformPairs;
-  v33 = v13;
-  v34 = (Scaleform::ArrayLH<Scaleform::GFx::MovieImpl::LevelInfo,327,Scaleform::ArrayDefaultPolicy> *)&v2->IndirectTransformPairs;
-  v13->Data.Data = 0i64;
-  v13->Data.Size = 0i64;
-  v13->Data.Policy.Capacity = 0i64;
-  v14 = (Scaleform::Render::TreeRoot::NodeData *)v2->RenderContext.pHeap->vfptr->Alloc(
-                                                   v2->RenderContext.pHeap,
-                                                   208ui64,
-                                                   0i64);
-  v15 = (Scaleform::Render::ContextImpl::EntryData *)&v14->vfptr;
-  v33 = (Scaleform::ArrayLH<Scaleform::GFx::MovieImpl::IndirectTransPair,2,Scaleform::ArrayDefaultPolicy> *)v14;
-  v34 = (Scaleform::ArrayLH<Scaleform::GFx::MovieImpl::LevelInfo,327,Scaleform::ArrayDefaultPolicy> *)v14;
+  *(_QWORD *)&this->Flags = 0i64;
+  p_MovieLevels = &this->RegisteredFonts;
+  p_IntervalTimers = &this->RegisteredFonts;
+  this->RegisteredFonts.Data.Data = 0i64;
+  this->RegisteredFonts.Data.Size = 0i64;
+  this->RegisteredFonts.Data.Policy.Capacity = 0i64;
+  p_Size = &this->RegisteredFonts.Data.Size;
+  if ( this == (Scaleform::GFx::MovieImpl *)-21248i64 )
+    p_Size = 0i64;
+  this->DrawingContextList.Root.pPrev = (Scaleform::GFx::DrawingContext *)p_Size;
+  this->DrawingContextList.Root.pNext = (Scaleform::GFx::DrawingContext *)p_Size;
+  p_MovieLevels = &this->MovieDefKillList;
+  p_IntervalTimers = &this->MovieDefKillList;
+  this->MovieDefKillList.Data.Data = 0i64;
+  this->MovieDefKillList.Data.Size = 0i64;
+  this->MovieDefKillList.Data.Policy.Capacity = 0i64;
+  this->pSavedASMovieRoot.pObject = 0i64;
+  Scaleform::Render::ContextImpl::Context::Context(&this->RenderContext, Scaleform::Memory::pGlobalHeap);
+  this->DIContext.pObject = 0i64;
+  this->pRTCommandQueue = 0i64;
+  this->MultitouchHAL.pObject = 0i64;
+  this->GestureTopMostChar.pObject = 0i64;
+  p_MovieLevels = &this->IndirectTransformPairs;
+  p_IntervalTimers = &this->IndirectTransformPairs;
+  this->IndirectTransformPairs.Data.Data = 0i64;
+  this->IndirectTransformPairs.Data.Size = 0i64;
+  this->IndirectTransformPairs.Data.Policy.Capacity = 0i64;
+  v8 = (Scaleform::Render::TreeRoot::NodeData *)this->RenderContext.pHeap->vfptr->Alloc(
+                                                  this->RenderContext.pHeap,
+                                                  208i64,
+                                                  0i64);
+  v9 = v8;
+  p_MovieLevels = v8;
+  p_IntervalTimers = v8;
+  if ( v8 )
+    Scaleform::Render::TreeRoot::NodeData::NodeData(v8);
+  EntryHelper = (Scaleform::Render::TreeRoot *)Scaleform::Render::ContextImpl::Context::createEntryHelper(
+                                                 &this->RenderContext,
+                                                 v9);
+  pObject = this->pRenderRoot.pObject;
+  if ( pObject )
+  {
+    v4 = pObject->RefCount-- == 1;
+    if ( v4 )
+      Scaleform::Render::ContextImpl::Entry::destroyHelper(pObject);
+  }
+  this->pRenderRoot.pObject = EntryHelper;
+  Scaleform::Render::ContextImpl::RTHandle::RTHandle(&v25, EntryHelper);
+  v12 = v25.pData.pObject;
+  if ( v25.pData.pObject )
+  {
+    Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)v25.pData.pObject);
+    v12 = v25.pData.pObject;
+  }
+  if ( *p_hDisplayRoot )
+  {
+    Scaleform::RefCountImpl::Release(*p_hDisplayRoot);
+    v12 = v25.pData.pObject;
+  }
+  *p_hDisplayRoot = (Scaleform::Render::RenderBuffer *)v12;
+  Scaleform::Render::ContextImpl::RTHandle::~RTHandle(&v25);
+  v13 = Scaleform::Render::ContextImpl::Context::CreateEntry<Scaleform::Render::TreeContainer>(&this->RenderContext);
+  v14 = this->pTopMostRoot.pObject;
   if ( v14 )
-    Scaleform::Render::TreeRoot::NodeData::NodeData(v14);
-  v16 = Scaleform::Render::ContextImpl::Context::createEntryHelper(&v2->RenderContext, v15);
-  v17 = (Scaleform::Render::ContextImpl::Entry *)&v2->pRenderRoot.pObject->0;
-  if ( v17 )
   {
-    v5 = v17->RefCount-- == 1;
-    if ( v5 )
-      Scaleform::Render::ContextImpl::Entry::destroyHelper(v17);
+    v4 = v14->RefCount-- == 1;
+    if ( v4 )
+      Scaleform::Render::ContextImpl::Entry::destroyHelper(v14);
   }
-  v2->pRenderRoot.pObject = (Scaleform::Render::TreeRoot *)v16;
-  Scaleform::Render::ContextImpl::RTHandle::RTHandle(&v32, v16);
-  v18 = v32.pData.pObject;
-  if ( v32.pData.pObject )
-  {
-    Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)v32.pData.pObject);
-    v18 = v32.pData.pObject;
-  }
-  if ( *v7 )
-  {
-    Scaleform::RefCountImpl::Release(*v7);
-    v18 = v32.pData.pObject;
-  }
-  *v7 = (Scaleform::Render::RenderBuffer *)v18;
-  Scaleform::Render::ContextImpl::RTHandle::~RTHandle(&v32);
-  v19 = (Scaleform::Render::TreeNode *)Scaleform::Render::ContextImpl::Context::CreateEntry<Scaleform::Render::TreeContainer>(&v2->RenderContext);
-  v20 = (Scaleform::Render::ContextImpl::Entry *)&v2->pTopMostRoot.pObject->0;
-  if ( v20 )
-  {
-    v5 = v20->RefCount-- == 1;
-    if ( v5 )
-      Scaleform::Render::ContextImpl::Entry::destroyHelper(v20);
-  }
-  v2->pTopMostRoot.pObject = (Scaleform::Render::TreeContainer *)v19;
-  Scaleform::Render::TreeContainer::Add((Scaleform::Render::TreeContainer *)&v2->pRenderRoot.pObject->0, v19);
-  Scaleform::Render::ContextImpl::Context::Capture(&v2->RenderContext);
-  v2->pMainMovie = 0i64;
-  v2->Flags |= 0x40180u;
-  v2->pPlayListOptHead = 0i64;
-  v2->pPlayListHead = 0i64;
-  v2->TimeElapsed = 0i64;
-  v2->TimeRemainder = 0.0;
-  *(_QWORD *)&v2->FrameTime = 1034594987i64;
-  v2->pLoadQueueHead = 0i64;
-  v2->pLoadQueueMTHead = 0i64;
-  v21 = (Scaleform::Render::ContextImpl::RTHandle::HandleData *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))v2->pHeap->vfptr->Alloc)(
-                                                                  v2->pHeap,
+  this->pTopMostRoot.pObject = v13;
+  Scaleform::Render::TreeContainer::Add(this->pRenderRoot.pObject, v13);
+  Scaleform::Render::ContextImpl::Context::Capture(&this->RenderContext);
+  this->pMainMovie = 0i64;
+  this->Flags |= 0x40180u;
+  this->pPlayListOptHead = 0i64;
+  this->pPlayListHead = 0i64;
+  this->TimeElapsed = 0i64;
+  this->TimeRemainder = 0.0;
+  *(_QWORD *)&this->FrameTime = 1034594987i64;
+  this->pLoadQueueHead = 0i64;
+  this->pLoadQueueMTHead = 0i64;
+  v15 = (Scaleform::Render::ContextImpl::RTHandle::HandleData *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))this->pHeap->vfptr->Alloc)(
+                                                                  this->pHeap,
                                                                   88i64);
-  v32.pData.pObject = v21;
-  if ( v21 )
+  v25.pData.pObject = v15;
+  if ( v15 )
   {
-    Scaleform::GFx::StateBagImpl::StateBagImpl((Scaleform::GFx::StateBagImpl *)v21, 0i64);
-    v23 = v22;
+    Scaleform::GFx::StateBagImpl::StateBagImpl((Scaleform::GFx::StateBagImpl *)v15, 0i64);
+    v17 = v16;
   }
   else
   {
-    v23 = 0i64;
+    v17 = 0i64;
   }
-  v24 = (Scaleform::Render::RenderBuffer *)v2->pStateBag.pObject;
-  if ( v24 )
-    Scaleform::RefCountImpl::Release(v24);
-  v2->pStateBag.pObject = v23;
-  v25 = 0;
-  v26 = &v2->KeyboardStates[0].KeyboardIndex;
+  v18 = (Scaleform::Render::RenderBuffer *)this->pStateBag.pObject;
+  if ( v18 )
+    Scaleform::RefCountImpl::Release(v18);
+  this->pStateBag.pObject = v17;
+  v19 = 0;
+  p_KeyboardIndex = &this->KeyboardStates[0].KeyboardIndex;
   do
   {
-    *v26 = v25++;
-    v26 += 1672;
+    *p_KeyboardIndex = v19++;
+    p_KeyboardIndex += 1672;
   }
-  while ( (unsigned __int8)v25 < 6u );
-  v2->pRetValHolder = 0i64;
-  v27 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))v2->pHeap->vfptr->Alloc)(v2->pHeap, 64i64);
-  v32.pData.pObject = (Scaleform::Render::ContextImpl::RTHandle::HandleData *)v27;
-  if ( v27 )
+  while ( (unsigned __int8)v19 < 6u );
+  this->pRetValHolder = 0i64;
+  v21 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))this->pHeap->vfptr->Alloc)(this->pHeap, 64i64);
+  v25.pData.pObject = (Scaleform::Render::ContextImpl::RTHandle::HandleData *)v21;
+  if ( v21 )
   {
-    v28 = v2->pStateBag.pObject;
-    if ( v28 )
-      v29 = (signed __int64)&v28->vfptr;
+    v22 = this->pStateBag.pObject;
+    if ( v22 )
+      v23 = &v22->Scaleform::GFx::StateBag;
     else
-      v29 = 0i64;
-    *(_QWORD *)v27 = &Scaleform::RefCountNTSImplCore::`vftable;
-    *(_DWORD *)(v27 + 8) = 1;
-    *(_QWORD *)v27 = &Scaleform::RefCountNTSImpl::`vftable;
-    *(_QWORD *)v27 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,327>::`vftable;
-    *(_QWORD *)v27 = &Scaleform::RefCountBaseNTS<Scaleform::GFx::FontManagerStates,327>::`vftable;
-    *(_QWORD *)(v27 + 16) = &Scaleform::GFx::StateBag::`vftable;
-    *(_QWORD *)v27 = &Scaleform::GFx::FontManagerStates::`vftable{for `Scaleform::RefCountBaseNTS<Scaleform::GFx::FontManagerStates,327>};
-    *(_QWORD *)(v27 + 16) = &Scaleform::GFx::FontManagerStates::`vftable{for `Scaleform::GFx::StateBag};
-    *(_QWORD *)(v27 + 24) = 0i64;
-    *(_QWORD *)(v27 + 32) = 0i64;
-    *(_QWORD *)(v27 + 40) = 0i64;
-    *(_QWORD *)(v27 + 48) = 0i64;
-    *(_QWORD *)(v27 + 56) = v29;
+      v23 = 0i64;
+    *(_QWORD *)v21 = &Scaleform::RefCountNTSImplCore::`vftable;
+    *(_DWORD *)(v21 + 8) = 1;
+    *(_QWORD *)v21 = &Scaleform::RefCountNTSImpl::`vftable;
+    *(_QWORD *)v21 = &Scaleform::RefCountBaseStatImpl<Scaleform::RefCountNTSImpl,327>::`vftable;
+    *(_QWORD *)v21 = &Scaleform::RefCountBaseNTS<Scaleform::GFx::FontManagerStates,327>::`vftable;
+    *(_QWORD *)(v21 + 16) = &Scaleform::GFx::StateBag::`vftable;
+    *(_QWORD *)v21 = &Scaleform::GFx::FontManagerStates::`vftable{for `Scaleform::RefCountBaseNTS<Scaleform::GFx::FontManagerStates,327>};
+    *(_QWORD *)(v21 + 16) = &Scaleform::GFx::FontManagerStates::`vftable{for `Scaleform::GFx::StateBag};
+    *(_QWORD *)(v21 + 24) = 0i64;
+    *(_QWORD *)(v21 + 32) = 0i64;
+    *(_QWORD *)(v21 + 40) = 0i64;
+    *(_QWORD *)(v21 + 48) = 0i64;
+    *(_QWORD *)(v21 + 56) = v23;
   }
   else
   {
-    v27 = 0i64;
+    v21 = 0i64;
   }
-  v30 = (Scaleform::RefCountNTSImpl *)&v2->pFontManagerStates.pObject->vfptr;
-  if ( v30 )
-    Scaleform::RefCountNTSImpl::Release(v30);
-  v2->pFontManagerStates.pObject = (Scaleform::GFx::FontManagerStates *)v27;
-  v2->InstanceNameCount = 0;
-  v2->ViewScaleX = 1.0;
-  *(_QWORD *)&v2->ViewScaleY = 1065353216i64;
-  v2->ViewOffsetY = 0.0;
-  *(_QWORD *)&v2->ViewScaleMode = 1i64;
-  v2->FocusGroupsCnt = 1;
-  *(_QWORD *)v2->FocusGroupIndexes = 0i64;
-  *(_QWORD *)&v2->FocusGroupIndexes[8] = 0i64;
-  v2->LastIntervalTimerId = 0;
-  v2->pIMECandidateListStyle = 0i64;
-  v31 = Scaleform::Timer::GetTicks();
-  v2->StartTickMs = (unsigned __int64)((v31 * (unsigned __int128)0x624DD2F1A9FBE77ui64 >> 64)
-                                     + ((unsigned __int64)(v31 - (v31 * (unsigned __int128)0x624DD2F1A9FBE77ui64 >> 64)) >> 1)) >> 9;
-  v2->PauseTickMs = 0i64;
-  *(_QWORD *)&v2->SafeRect.x1 = 0i64;
-  *(_QWORD *)&v2->SafeRect.x2 = 0i64;
-  v2->pObjectInterface = 0i64;
-  v2->LastLoadQueueEntryCnt = 0;
-  v2->pUnloadListHead = 0i64;
-  v2->MultitouchMode = 0;
-  v2->FocusRectChanged = 1;
-  v2->PreviouslyCaptured = 0;
+  v24 = this->pFontManagerStates.pObject;
+  if ( v24 )
+    Scaleform::RefCountNTSImpl::Release(v24);
+  this->pFontManagerStates.pObject = (Scaleform::GFx::FontManagerStates *)v21;
+  this->InstanceNameCount = 0;
+  this->ViewScaleX = 1.0;
+  *(_QWORD *)&this->ViewScaleY = 1065353216i64;
+  this->ViewOffsetY = 0.0;
+  *(_QWORD *)&this->ViewScaleMode = 1i64;
+  this->FocusGroupsCnt = 1;
+  *(_QWORD *)this->FocusGroupIndexes = 0i64;
+  *(_QWORD *)&this->FocusGroupIndexes[8] = 0i64;
+  this->LastIntervalTimerId = 0;
+  this->pIMECandidateListStyle = 0i64;
+  this->StartTickMs = Scaleform::Timer::GetTicks() / 0x3E8;
+  this->PauseTickMs = 0i64;
+  *(_QWORD *)&this->SafeRect.x1 = 0i64;
+  *(_QWORD *)&this->SafeRect.x2 = 0i64;
+  this->pObjectInterface = 0i64;
+  this->LastLoadQueueEntryCnt = 0;
+  this->pUnloadListHead = 0i64;
+  this->MultitouchMode = MTI_None;
+  this->FocusRectChanged = 1;
+  this->PreviouslyCaptured = 0;
 }
 
 // File Line: 544
 // RVA: 0x8A66B0
 void __fastcall Scaleform::GFx::MovieImpl::~MovieImpl(Scaleform::GFx::MovieImpl *this)
 {
-  Scaleform::GFx::MovieImpl *v1; // rdi
-  Scaleform::Render::TreeContainer *v2; // rbx
-  signed __int64 v3; // rax
+  Scaleform::Render::TreeContainer *pObject; // rbx
+  __int64 Size; // rax
   unsigned int i; // ebx
-  signed __int64 v5; // rsi
-  Scaleform::Render::ContextImpl::Entry *v6; // rcx
+  __int64 v5; // rsi
+  Scaleform::Render::TreeShape *v6; // rcx
   bool v7; // zf
-  Scaleform::Render::ContextImpl::Entry *v8; // rcx
+  Scaleform::Render::TreeContainer *v8; // rcx
   Scaleform::GFx::DrawingContext *j; // rcx
-  signed __int64 v10; // rax
-  Scaleform::GFx::DrawingContext *v11; // rax
-  signed __int64 v12; // rax
-  Scaleform::Render::ContextImpl::Entry *v13; // rcx
-  Scaleform::RefCountNTSImpl *v14; // rcx
+  unsigned __int64 *p_Size; // rax
+  Scaleform::GFx::DrawingContext *pNext; // rax
+  unsigned __int64 *v12; // rax
+  Scaleform::Render::TreeRoot *v13; // rcx
+  Scaleform::GFx::FontManagerStates *v14; // rcx
   unsigned __int64 v15; // rbx
   unsigned __int64 v16; // rsi
   Scaleform::GFx::ASIntervalTimerIntf *v17; // rcx
-  void **v18; // r13
-  Scaleform::GFx::MovieImpl::ReturnValueHolder *v19; // rbx
-  Scaleform::GFx::LoadQueueEntryMT *v20; // rcx
+  Scaleform::ArrayLH<Scaleform::Ptr<Scaleform::GFx::ASIntervalTimerIntf>,327,Scaleform::ArrayDefaultPolicy> *p_IntervalTimers; // r13
+  Scaleform::GFx::MovieImpl::ReturnValueHolder *pRetValHolder; // rbx
+  Scaleform::GFx::LoadQueueEntryMT *pLoadQueueMTHead; // rcx
   unsigned int v21; // ebp
   unsigned int v22; // esi
   Scaleform::GFx::LoadQueueEntryMT *k; // rbx
-  Scaleform::GFx::LoadQueueEntry *v24; // rcx
+  Scaleform::GFx::LoadQueueEntry *pLoadQueueHead; // rcx
   Scaleform::GFx::LoadQueueEntryMT *v25; // rcx
-  Scaleform::GFx::Value::ObjectInterface *v26; // rbx
-  signed __int64 v27; // rax
+  Scaleform::GFx::Value::ObjectInterface *pObjectInterface; // rbx
+  Scaleform::List<Scaleform::GFx::Value,Scaleform::GFx::Value> *p_ExternalObjRefs; // rax
   Scaleform::GFx::Value *v28; // rbx
-  void **v29; // r15
+  Scaleform::ArrayLH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,327,Scaleform::ArrayDefaultPolicy> *p_TopmostLevelCharacters; // r15
   Scaleform::GFx::Value::ObjectInterface *v30; // rcx
   Scaleform::Render::RenderBuffer *v31; // rcx
-  Scaleform::Render::ContextImpl::Entry *v32; // rcx
+  Scaleform::Render::TreeContainer *v32; // rcx
   Scaleform::Render::RenderBuffer *v33; // rcx
   unsigned __int64 v34; // rsi
-  signed __int64 l; // rbx
+  Scaleform::GFx::MovieImpl::IndirectTransPair *m; // rbx
   Scaleform::RefCountNTSImpl *v36; // rcx
   Scaleform::RefCountNTSImpl *v37; // rcx
   Scaleform::Render::ContextImpl::Entry *v38; // rcx
-  Scaleform::RefCountNTSImpl *v39; // rcx
+  Scaleform::GFx::InteractiveObject *v39; // rcx
   Scaleform::Render::RenderBuffer *v40; // rcx
   Scaleform::Render::RenderBuffer *v41; // rcx
   Scaleform::Render::RenderBuffer *v42; // rcx
   unsigned __int64 v43; // rsi
-  Scaleform::GFx::MovieImpl::FontDesc *m; // rbx
-  Scaleform::Render::ContextImpl::Entry *v45; // rcx
+  Scaleform::GFx::MovieImpl::FontDesc *n; // rbx
+  Scaleform::Render::TreeContainer *v45; // rcx
   unsigned __int64 v46; // rsi
-  Scaleform::Render::RenderBuffer **n; // rbx
+  Scaleform::Render::RenderBuffer **ii; // rbx
   unsigned __int64 v48; // rsi
-  Scaleform::RefCountNTSImpl **ii; // rbx
-  Scaleform::RefCountNTSImpl *v50; // rcx
+  Scaleform::RefCountNTSImpl **jj; // rbx
+  Scaleform::GFx::FontManagerStates *v50; // rcx
   Scaleform::Render::RenderBuffer *v51; // rcx
   Scaleform::Render::RenderBuffer *v52; // rcx
   Scaleform::Render::RenderBuffer *v53; // rcx
   Scaleform::Render::RenderBuffer *v54; // rcx
-  Scaleform::Render::ContextImpl::Entry *v55; // rcx
-  Scaleform::Render::ContextImpl::Entry *v56; // rcx
+  Scaleform::Render::TreeContainer *v55; // rcx
+  Scaleform::Render::TreeRoot *v56; // rcx
   Scaleform::Render::RenderBuffer *v57; // rcx
   unsigned __int64 v58; // rsi
-  signed __int64 jj; // rbx
+  Scaleform::GFx::MovieImpl::LevelInfo *kk; // rbx
   Scaleform::RefCountNTSImpl *v60; // rcx
   Scaleform::GFx::MovieDefImpl *v61; // rbx
-  Scaleform::GFx::ResourceLibBase *v62; // rcx
+  Scaleform::GFx::ResourceLibBase *pLib; // rcx
   Scaleform::Render::RenderBuffer *v63; // rcx
   Scaleform::Render::RenderBuffer *v64; // rcx
 
-  v1 = this;
-  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::MovieImpl::`vftable{for `Scaleform::RefCountBase<Scaleform::GFx::Movie,327>};
-  this->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::MovieImpl::`vftable{for `Scaleform::GFx::StateBag};
-  v2 = this->FocusRectContainerNode.pObject;
-  if ( v2 )
+  this->Scaleform::GFx::Movie::Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::MovieImpl::`vftable{for `Scaleform::RefCountBase<Scaleform::GFx::Movie,327>};
+  this->Scaleform::GFx::Movie::Scaleform::GFx::StateBag::vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::MovieImpl::`vftable{for `Scaleform::GFx::StateBag};
+  pObject = this->FocusRectContainerNode.pObject;
+  if ( pObject )
   {
-    v3 = Scaleform::Render::TreeContainer::GetSize(this->FocusRectContainerNode.pObject);
-    Scaleform::Render::TreeContainer::Remove(v2, 0i64, v3);
-    for ( i = 0; i < v1->FocusGroupsCnt; ++i )
+    Size = Scaleform::Render::TreeContainer::GetSize(this->FocusRectContainerNode.pObject);
+    Scaleform::Render::TreeContainer::Remove(pObject, 0i64, Size);
+    for ( i = 0; i < this->FocusGroupsCnt; ++i )
     {
       v5 = i;
-      v6 = (Scaleform::Render::ContextImpl::Entry *)&v1->FocusGroups[v5].FocusRectNode.pObject->0;
+      v6 = this->FocusGroups[v5].FocusRectNode.pObject;
       if ( v6 )
       {
         v7 = v6->RefCount-- == 1;
         if ( v7 )
           Scaleform::Render::ContextImpl::Entry::destroyHelper(v6);
       }
-      v1->FocusGroups[v5].FocusRectNode.pObject = 0i64;
+      this->FocusGroups[v5].FocusRectNode.pObject = 0i64;
     }
-    v8 = (Scaleform::Render::ContextImpl::Entry *)&v1->FocusRectContainerNode.pObject->0;
+    v8 = this->FocusRectContainerNode.pObject;
     if ( v8 )
     {
       v7 = v8->RefCount-- == 1;
       if ( v7 )
         Scaleform::Render::ContextImpl::Entry::destroyHelper(v8);
     }
-    v1->FocusRectContainerNode.pObject = 0i64;
+    this->FocusRectContainerNode.pObject = 0i64;
   }
-  for ( j = v1->DrawingContextList.Root.pNext; ; j = v11 )
+  for ( j = this->DrawingContextList.Root.pNext; ; j = pNext )
   {
-    v10 = (signed __int64)&v1->RegisteredFonts.Data.Size;
-    if ( v1 == (Scaleform::GFx::MovieImpl *)-21248i64 )
-      v10 = 0i64;
-    if ( j == (Scaleform::GFx::DrawingContext *)v10 )
+    p_Size = &this->RegisteredFonts.Data.Size;
+    if ( this == (Scaleform::GFx::MovieImpl *)-21248i64 )
+      p_Size = 0i64;
+    if ( j == (Scaleform::GFx::DrawingContext *)p_Size )
       break;
-    v11 = j->pNext;
+    pNext = j->pNext;
     j->pNext = 0i64;
     j->pPrev = 0i64;
   }
-  v12 = (signed __int64)&v1->RegisteredFonts.Data.Size;
-  if ( v1 == (Scaleform::GFx::MovieImpl *)-21248i64 )
+  v12 = &this->RegisteredFonts.Data.Size;
+  if ( this == (Scaleform::GFx::MovieImpl *)-21248i64 )
     v12 = 0i64;
-  v1->DrawingContextList.Root.pPrev = (Scaleform::GFx::DrawingContext *)v12;
-  v1->DrawingContextList.Root.pNext = (Scaleform::GFx::DrawingContext *)v12;
-  Scaleform::GFx::MovieImpl::ProcessUnloadQueue(v1);
-  v13 = (Scaleform::Render::ContextImpl::Entry *)&v1->pRenderRoot.pObject->0;
+  this->DrawingContextList.Root.pPrev = (Scaleform::GFx::DrawingContext *)v12;
+  this->DrawingContextList.Root.pNext = (Scaleform::GFx::DrawingContext *)v12;
+  Scaleform::GFx::MovieImpl::ProcessUnloadQueue(this);
+  v13 = this->pRenderRoot.pObject;
   if ( v13 )
   {
     v7 = v13->RefCount-- == 1;
     if ( v7 )
       Scaleform::Render::ContextImpl::Entry::destroyHelper(v13);
   }
-  v1->pRenderRoot.pObject = 0i64;
-  v14 = (Scaleform::RefCountNTSImpl *)&v1->pFontManagerStates.pObject->vfptr;
+  this->pRenderRoot.pObject = 0i64;
+  v14 = this->pFontManagerStates.pObject;
   if ( v14 )
     Scaleform::RefCountNTSImpl::Release(v14);
-  v1->pFontManagerStates.pObject = 0i64;
+  this->pFontManagerStates.pObject = 0i64;
   v15 = 0i64;
-  v16 = v1->IntervalTimers.Data.Size;
+  v16 = this->IntervalTimers.Data.Size;
   if ( v16 )
   {
     do
     {
-      v17 = v1->IntervalTimers.Data.Data[v15].pObject;
-      ((void (__cdecl *)(Scaleform::GFx::ASIntervalTimerIntf *))v17->vfptr[4].__vecDelDtor)(v17);
+      v17 = this->IntervalTimers.Data.Data[v15].pObject;
+      ((void (__fastcall *)(Scaleform::GFx::ASIntervalTimerIntf *))v17->vfptr[4].__vecDelDtor)(v17);
       ++v15;
     }
     while ( v15 < v16 );
   }
-  v18 = (void **)&v1->IntervalTimers.Data.Data;
+  p_IntervalTimers = &this->IntervalTimers;
   Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::ASIntervalTimerIntf>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::ASIntervalTimerIntf>,327>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
-    (Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::ASIntervalTimerIntf>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::ASIntervalTimerIntf>,327>,Scaleform::ArrayDefaultPolicy> *)&v1->IntervalTimers.Data.Data,
-    &v1->IntervalTimers,
+    &this->IntervalTimers.Data,
+    &this->IntervalTimers,
     0i64);
-  v1->Flags |= 0x80000u;
-  ((void (__cdecl *)(Scaleform::GFx::ASMovieRootBase *))v1->pASMovieRoot.pObject->vfptr[5].__vecDelDtor)(v1->pASMovieRoot.pObject);
-  Scaleform::GFx::MovieImpl::ClearIndirectTransformPairs(v1);
-  Scaleform::GFx::MovieImpl::ClearStickyVariables(v1);
-  v19 = v1->pRetValHolder;
-  if ( v19 )
+  this->Flags |= 0x80000u;
+  ((void (__fastcall *)(Scaleform::GFx::ASMovieRootBase *))this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[5].__vecDelDtor)(this->pASMovieRoot.pObject);
+  Scaleform::GFx::MovieImpl::ClearIndirectTransformPairs(this);
+  Scaleform::GFx::MovieImpl::ClearStickyVariables(this);
+  pRetValHolder = this->pRetValHolder;
+  if ( pRetValHolder )
   {
-    if ( v19->CharBuffer )
-      ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
-    Scaleform::ArrayDataCC<Scaleform::GFx::ASString,Scaleform::AllocatorLH<Scaleform::GFx::ASString,323>,Scaleform::ArrayDefaultPolicy>::~ArrayDataCC<Scaleform::GFx::ASString,Scaleform::AllocatorLH<Scaleform::GFx::ASString,323>,Scaleform::ArrayDefaultPolicy>(&v19->StringArray.Data);
-    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v19);
+    if ( pRetValHolder->CharBuffer )
+      ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+    Scaleform::ArrayDataCC<Scaleform::GFx::ASString,Scaleform::AllocatorLH<Scaleform::GFx::ASString,323>,Scaleform::ArrayDefaultPolicy>::~ArrayDataCC<Scaleform::GFx::ASString,Scaleform::AllocatorLH<Scaleform::GFx::ASString,323>,Scaleform::ArrayDefaultPolicy>(&pRetValHolder->StringArray.Data);
+    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, pRetValHolder);
   }
-  v20 = v1->pLoadQueueMTHead;
+  pLoadQueueMTHead = this->pLoadQueueMTHead;
   v21 = 0;
-  if ( v20 )
+  if ( pLoadQueueMTHead )
   {
     do
     {
       ++v21;
-      v20->pQueueEntry->Canceled = 1;
-      v20 = v20->pNext;
+      pLoadQueueMTHead->pQueueEntry->Canceled = 1;
+      pLoadQueueMTHead = pLoadQueueMTHead->pNext;
     }
-    while ( v20 );
+    while ( pLoadQueueMTHead );
     if ( v21 )
     {
       do
       {
         v22 = 0;
-        for ( k = v1->pLoadQueueMTHead; k; k = k->pNext )
+        for ( k = this->pLoadQueueMTHead; k; k = k->pNext )
         {
           if ( k->vfptr->LoadFinished(k) )
             ++v22;
@@ -635,234 +641,235 @@ void __fastcall Scaleform::GFx::MovieImpl::~MovieImpl(Scaleform::GFx::MovieImpl 
       while ( v21 > v22 );
     }
   }
-  while ( v1->pLoadQueueHead )
+  while ( this->pLoadQueueHead )
   {
-    v24 = v1->pLoadQueueHead;
-    v1->pLoadQueueHead = v24->pNext;
-    v24->vfptr->__vecDelDtor(v24, 1u);
+    pLoadQueueHead = this->pLoadQueueHead;
+    this->pLoadQueueHead = pLoadQueueHead->pNext;
+    pLoadQueueHead->vfptr->__vecDelDtor(pLoadQueueHead, 1u);
   }
-  while ( v1->pLoadQueueMTHead )
+  while ( this->pLoadQueueMTHead )
   {
-    v25 = v1->pLoadQueueMTHead;
-    v1->pLoadQueueMTHead = v25->pNext;
+    v25 = this->pLoadQueueMTHead;
+    this->pLoadQueueMTHead = v25->pNext;
     v25->vfptr->__vecDelDtor(v25, 1u);
   }
-  v26 = v1->pObjectInterface;
-  if ( v26 )
+  pObjectInterface = this->pObjectInterface;
+  if ( pObjectInterface )
   {
-    v27 = (signed __int64)&v26->ExternalObjRefs;
-    if ( (Scaleform::List<Scaleform::GFx::Value,Scaleform::GFx::Value> *)v26->ExternalObjRefs.Root.pNext != &v26->ExternalObjRefs )
+    p_ExternalObjRefs = &pObjectInterface->ExternalObjRefs;
+    if ( (Scaleform::List<Scaleform::GFx::Value,Scaleform::GFx::Value> *)pObjectInterface->ExternalObjRefs.Root.pNext != &pObjectInterface->ExternalObjRefs )
     {
-      v28 = v26->ExternalObjRefs.Root.pNext;
-      if ( v28 != (Scaleform::GFx::Value *)v27 )
+      v28 = pObjectInterface->ExternalObjRefs.Root.pNext;
+      if ( v28 != (Scaleform::GFx::Value *)p_ExternalObjRefs )
       {
         do
         {
-          if ( ((unsigned int)v28->Type >> 6) & 1 )
+          if ( (v28->Type & 0x40) != 0 )
           {
-            (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&v28->pObjectInterface->vfptr->gap8[8])(
+            (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&v28->pObjectInterface->vfptr->gap8[8])(
               v28->pObjectInterface,
               v28,
-              *(_QWORD *)&v28->mValue.NValue);
+              v28->mValue);
             v28->pObjectInterface = 0i64;
           }
           v28->Type = 32;
           v28 = v28->pNext;
         }
-        while ( v28 != (Scaleform::GFx::Value *)&v1->pObjectInterface->ExternalObjRefs );
+        while ( v28 != (Scaleform::GFx::Value *)&this->pObjectInterface->ExternalObjRefs );
       }
     }
   }
-  v29 = (void **)&v1->TopmostLevelCharacters.Data.Data;
+  p_TopmostLevelCharacters = &this->TopmostLevelCharacters;
   Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::Sprite>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::Sprite>,327>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
-    (Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::Sprite>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::Sprite>,327>,Scaleform::ArrayDefaultPolicy> *)&v1->TopmostLevelCharacters,
-    &v1->TopmostLevelCharacters,
+    (Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::Sprite>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::Sprite>,327>,Scaleform::ArrayDefaultPolicy> *)&this->TopmostLevelCharacters,
+    &this->TopmostLevelCharacters,
     0i64);
-  v30 = v1->pObjectInterface;
+  v30 = this->pObjectInterface;
   if ( v30 )
     v30->vfptr->__vecDelDtor(v30, 1u);
-  ((void (__cdecl *)(Scaleform::GFx::ASMovieRootBase *))v1->pASMovieRoot.pObject->vfptr[42].__vecDelDtor)(v1->pASMovieRoot.pObject);
-  v31 = (Scaleform::Render::RenderBuffer *)v1->pASMovieRoot.pObject;
+  ((void (__fastcall *)(Scaleform::GFx::ASMovieRootBase *))this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[42].__vecDelDtor)(this->pASMovieRoot.pObject);
+  v31 = (Scaleform::Render::RenderBuffer *)this->pASMovieRoot.pObject;
   if ( v31 )
     Scaleform::RefCountImpl::Release(v31);
-  v1->pASMovieRoot.pObject = 0i64;
-  v32 = (Scaleform::Render::ContextImpl::Entry *)&v1->pTopMostRoot.pObject->0;
+  this->pASMovieRoot.pObject = 0i64;
+  v32 = this->pTopMostRoot.pObject;
   if ( v32 )
   {
     v7 = v32->RefCount-- == 1;
     if ( v7 )
       Scaleform::Render::ContextImpl::Entry::destroyHelper(v32);
   }
-  v1->pTopMostRoot.pObject = 0i64;
-  Scaleform::Render::ContextImpl::Context::Shutdown(&v1->RenderContext, 1);
-  v33 = (Scaleform::Render::RenderBuffer *)v1->hDisplayRoot.pData.pObject;
+  this->pTopMostRoot.pObject = 0i64;
+  Scaleform::Render::ContextImpl::Context::Shutdown(&this->RenderContext, 1);
+  v33 = (Scaleform::Render::RenderBuffer *)this->hDisplayRoot.pData.pObject;
   if ( v33 )
     Scaleform::RefCountImpl::Release(v33);
-  v1->hDisplayRoot.pData.pObject = 0i64;
-  v34 = v1->IndirectTransformPairs.Data.Size;
-  for ( l = (signed __int64)&v1->IndirectTransformPairs.Data.Data[v1->IndirectTransformPairs.Data.Size - 1]; v34; --v34 )
+  this->hDisplayRoot.pData.pObject = 0i64;
+  v34 = this->IndirectTransformPairs.Data.Size;
+  for ( m = &this->IndirectTransformPairs.Data.Data[v34 - 1]; v34; --v34 )
   {
-    v36 = *(Scaleform::RefCountNTSImpl **)(l + 16);
+    v36 = m->OriginalParent.pObject;
     if ( v36 )
       Scaleform::RefCountNTSImpl::Release(v36);
-    v37 = *(Scaleform::RefCountNTSImpl **)(l + 8);
+    v37 = m->Obj.pObject;
     if ( v37 )
       Scaleform::RefCountNTSImpl::Release(v37);
-    v38 = *(Scaleform::Render::ContextImpl::Entry **)l;
-    if ( *(_QWORD *)l )
+    v38 = m->TransformParent.pObject;
+    if ( m->TransformParent.pObject )
     {
       v7 = v38->RefCount-- == 1;
       if ( v7 )
         Scaleform::Render::ContextImpl::Entry::destroyHelper(v38);
     }
-    l -= 32i64;
+    --m;
   }
-  Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->IndirectTransformPairs.Data.Data);
-  v39 = (Scaleform::RefCountNTSImpl *)&v1->GestureTopMostChar.pObject->vfptr;
+  Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, this->IndirectTransformPairs.Data.Data);
+  v39 = this->GestureTopMostChar.pObject;
   if ( v39 )
     Scaleform::RefCountNTSImpl::Release(v39);
-  v40 = (Scaleform::Render::RenderBuffer *)v1->MultitouchHAL.pObject;
+  v40 = (Scaleform::Render::RenderBuffer *)this->MultitouchHAL.pObject;
   if ( v40 )
     Scaleform::RefCountImpl::Release(v40);
-  v41 = (Scaleform::Render::RenderBuffer *)v1->DIContext.pObject;
+  v41 = (Scaleform::Render::RenderBuffer *)this->DIContext.pObject;
   if ( v41 )
     Scaleform::RefCountImpl::Release(v41);
-  Scaleform::Render::ContextImpl::Context::~Context(&v1->RenderContext);
-  v42 = (Scaleform::Render::RenderBuffer *)v1->pSavedASMovieRoot.pObject;
+  Scaleform::Render::ContextImpl::Context::~Context(&this->RenderContext);
+  v42 = (Scaleform::Render::RenderBuffer *)this->pSavedASMovieRoot.pObject;
   if ( v42 )
     Scaleform::RefCountImpl::Release(v42);
   Scaleform::ConstructorMov<Scaleform::GFx::MovieImpl::MDKillListEntry>::DestructArray(
-    v1->MovieDefKillList.Data.Data,
-    v1->MovieDefKillList.Data.Size);
-  if ( v1->MovieDefKillList.Data.Data )
-    ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
-  v43 = v1->RegisteredFonts.Data.Size;
-  for ( m = &v1->RegisteredFonts.Data.Data[v1->RegisteredFonts.Data.Size - 1]; v43; --v43 )
-  {
-    Scaleform::GFx::MovieImpl::FontDesc::~FontDesc(m);
-    --m;
-  }
-  Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->RegisteredFonts.Data.Data);
+    this->MovieDefKillList.Data.Data,
+    this->MovieDefKillList.Data.Size);
+  if ( this->MovieDefKillList.Data.Data )
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+  v43 = this->RegisteredFonts.Data.Size;
+  for ( n = &this->RegisteredFonts.Data.Data[v43 - 1]; v43; --v43 )
+    Scaleform::GFx::MovieImpl::FontDesc::~FontDesc(n--);
+  Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, this->RegisteredFonts.Data.Data);
   `eh vector destructor iterator(
-    v1->FocusGroups,
+    this->FocusGroups,
     0x60ui64,
     16,
     (void (__fastcall *)(void *))Scaleform::GFx::FocusGroupDescr::~FocusGroupDescr);
-  v45 = (Scaleform::Render::ContextImpl::Entry *)&v1->FocusRectContainerNode.pObject->0;
+  v45 = this->FocusRectContainerNode.pObject;
   if ( v45 )
   {
     v7 = v45->RefCount-- == 1;
     if ( v7 )
       Scaleform::Render::ContextImpl::Entry::destroyHelper(v45);
   }
-  v46 = v1->IntervalTimers.Data.Size;
-  for ( n = (Scaleform::Render::RenderBuffer **)((char *)*v18 + 8 * (v46 - 1)); v46; --v46 )
-  {
-    if ( *n )
-      Scaleform::RefCountImpl::Release(*n);
-    --n;
-  }
-  Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, *v18);
-  v48 = v1->TopmostLevelCharacters.Data.Size;
-  for ( ii = (Scaleform::RefCountNTSImpl **)((char *)*v29 + 8 * (v48 - 1)); v48; --v48 )
+  v46 = this->IntervalTimers.Data.Size;
+  for ( ii = (Scaleform::Render::RenderBuffer **)&p_IntervalTimers->Data.Data[v46 - 1]; v46; --v46 )
   {
     if ( *ii )
-      Scaleform::RefCountNTSImpl::Release(*ii);
+      Scaleform::RefCountImpl::Release(*ii);
     --ii;
   }
-  Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, *v29);
-  Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeHashF>>::~HashSetBase<Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeHashF>>((Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF> > *)&v1->StickyVariables.mHash.pTable);
-  `eh vector destructor iterator(v1->KeyboardStates, 0x688ui64, 6, (void (__fastcall *)(void *))Scaleform::File::~File);
+  Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, p_IntervalTimers->Data.Data);
+  v48 = this->TopmostLevelCharacters.Data.Size;
+  for ( jj = &p_TopmostLevelCharacters->Data.Data[v48 - 1].pObject; v48; --v48 )
+  {
+    if ( *jj )
+      Scaleform::RefCountNTSImpl::Release(*jj);
+    --jj;
+  }
+  Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, p_TopmostLevelCharacters->Data.Data);
+  Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeHashF>>::~HashSetBase<Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeHashF>>(&this->StickyVariables.mHash);
   `eh vector destructor iterator(
-    v1->mMouseState,
+    this->KeyboardStates,
+    0x688ui64,
+    6,
+    (void (__fastcall *)(void *))Scaleform::File::~File);
+  `eh vector destructor iterator(
+    this->mMouseState,
     0x50ui64,
     6,
     (void (__fastcall *)(void *))Scaleform::GFx::MouseState::~MouseState);
-  v50 = (Scaleform::RefCountNTSImpl *)&v1->pFontManagerStates.pObject->vfptr;
+  v50 = this->pFontManagerStates.pObject;
   if ( v50 )
     Scaleform::RefCountNTSImpl::Release(v50);
-  v51 = (Scaleform::Render::RenderBuffer *)v1->pExtIntfHandler.pObject;
+  v51 = (Scaleform::Render::RenderBuffer *)this->pExtIntfHandler.pObject;
   if ( v51 )
     Scaleform::RefCountImpl::Release(v51);
-  v52 = (Scaleform::Render::RenderBuffer *)v1->pFSCommandHandler.pObject;
+  v52 = (Scaleform::Render::RenderBuffer *)this->pFSCommandHandler.pObject;
   if ( v52 )
     Scaleform::RefCountImpl::Release(v52);
-  v53 = (Scaleform::Render::RenderBuffer *)v1->pUserEventHandler.pObject;
+  v53 = (Scaleform::Render::RenderBuffer *)this->pUserEventHandler.pObject;
   if ( v53 )
     Scaleform::RefCountImpl::Release(v53);
-  v54 = (Scaleform::Render::RenderBuffer *)v1->pCachedLog.pObject;
+  v54 = (Scaleform::Render::RenderBuffer *)this->pCachedLog.pObject;
   if ( v54 )
     Scaleform::RefCountImpl::Release(v54);
-  v55 = (Scaleform::Render::ContextImpl::Entry *)&v1->pTopMostRoot.pObject->0;
+  v55 = this->pTopMostRoot.pObject;
   if ( v55 )
   {
     v7 = v55->RefCount-- == 1;
     if ( v7 )
       Scaleform::Render::ContextImpl::Entry::destroyHelper(v55);
   }
-  Scaleform::Render::ContextImpl::RTHandle::~RTHandle((Scaleform::Render::ContextImpl::RTHandle *)&v1->hDisplayRoot.pData);
-  v56 = (Scaleform::Render::ContextImpl::Entry *)&v1->pRenderRoot.pObject->0;
+  Scaleform::Render::ContextImpl::RTHandle::~RTHandle(&this->hDisplayRoot);
+  v56 = this->pRenderRoot.pObject;
   if ( v56 )
   {
     v7 = v56->RefCount-- == 1;
     if ( v7 )
       Scaleform::Render::ContextImpl::Entry::destroyHelper(v56);
   }
-  v57 = (Scaleform::Render::RenderBuffer *)v1->pStateBag.pObject;
+  v57 = (Scaleform::Render::RenderBuffer *)this->pStateBag.pObject;
   if ( v57 )
     Scaleform::RefCountImpl::Release(v57);
-  v58 = v1->MovieLevels.Data.Size;
-  for ( jj = (signed __int64)&v1->MovieLevels.Data.Data[v1->MovieLevels.Data.Size - 1]; v58; --v58 )
+  v58 = this->MovieLevels.Data.Size;
+  for ( kk = &this->MovieLevels.Data.Data[v58 - 1]; v58; --v58 )
   {
-    v60 = *(Scaleform::RefCountNTSImpl **)(jj + 8);
+    v60 = kk->pSprite.pObject;
     if ( v60 )
       Scaleform::RefCountNTSImpl::Release(v60);
-    jj -= 16i64;
+    --kk;
   }
-  Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->MovieLevels.Data.Data);
-  v61 = v1->pMainMovieDef.pObject;
+  Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, this->MovieLevels.Data.Data);
+  v61 = this->pMainMovieDef.pObject;
   if ( v61 && !_InterlockedDecrement(&v61->RefCount.Value) )
   {
-    v62 = v61->pLib;
-    if ( v62 )
+    pLib = v61->pLib;
+    if ( pLib )
     {
-      v62->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v62->vfptr, (unsigned int)v61);
+      pLib->vfptr[1].__vecDelDtor(pLib, (unsigned int)v61);
       v61->pLib = 0i64;
     }
-    v61->vfptr->__vecDelDtor((Scaleform::GFx::Resource *)&v61->vfptr, 1u);
+    v61->Scaleform::GFx::MovieDef::Scaleform::GFx::Resource::vfptr->__vecDelDtor(v61, 1u);
   }
-  v63 = (Scaleform::Render::RenderBuffer *)v1->AdvanceStats.pObject;
+  v63 = (Scaleform::Render::RenderBuffer *)this->AdvanceStats.pObject;
   if ( v63 )
     Scaleform::RefCountImpl::Release(v63);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Movie::`vftable{for `Scaleform::RefCountBase<Scaleform::GFx::Movie,327>};
-  v1->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::Movie::`vftable{for `Scaleform::GFx::StateBag};
-  v64 = (Scaleform::Render::RenderBuffer *)v1->pASMovieRoot.pObject;
+  this->Scaleform::GFx::Movie::Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::Movie::`vftable{for `Scaleform::RefCountBase<Scaleform::GFx::Movie,327>};
+  this->Scaleform::GFx::Movie::Scaleform::GFx::StateBag::vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::Movie::`vftable{for `Scaleform::GFx::StateBag};
+  v64 = (Scaleform::Render::RenderBuffer *)this->pASMovieRoot.pObject;
   if ( v64 )
     Scaleform::RefCountImpl::Release(v64);
-  v1->vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBag::`vftable;
-  Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&v1->vfptr);
+  this->Scaleform::GFx::Movie::Scaleform::GFx::StateBag::vfptr = (Scaleform::GFx::StateBagVtbl *)&Scaleform::GFx::StateBag::`vftable;
+  Scaleform::RefCountImplCore::~RefCountImplCore(this);
 }
 
 // File Line: 723
 // RVA: 0x8BC510
 void __fastcall Scaleform::GFx::MovieImpl::ClearPlayList(Scaleform::GFx::MovieImpl *this)
 {
-  Scaleform::GFx::InteractiveObject *v1; // r8
-  Scaleform::GFx::InteractiveObject *v2; // rdx
+  Scaleform::GFx::InteractiveObject *pPlayListHead; // r8
+  Scaleform::GFx::InteractiveObject *pPlayNext; // rdx
 
-  v1 = this->pPlayListHead;
-  if ( v1 )
+  pPlayListHead = this->pPlayListHead;
+  if ( pPlayListHead )
   {
     do
     {
-      v2 = v1->pPlayNext;
-      v1->pPlayPrevOpt = 0i64;
-      v1->pPlayNextOpt = 0i64;
-      v1->pPlayPrev = 0i64;
-      v1->pPlayNext = 0i64;
-      v1 = v2;
+      pPlayNext = pPlayListHead->pPlayNext;
+      pPlayListHead->pPlayPrevOpt = 0i64;
+      pPlayListHead->pPlayNextOpt = 0i64;
+      pPlayListHead->pPlayPrev = 0i64;
+      pPlayListHead->pPlayNext = 0i64;
+      pPlayListHead = pPlayNext;
     }
-    while ( v2 );
+    while ( pPlayNext );
   }
   this->pPlayListHead = 0i64;
   this->pPlayListOptHead = 0i64;
@@ -870,53 +877,53 @@ void __fastcall Scaleform::GFx::MovieImpl::ClearPlayList(Scaleform::GFx::MovieIm
 
 // File Line: 734
 // RVA: 0x906010
-void __fastcall Scaleform::GFx::MovieImpl::SetASMovieRoot(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::ASMovieRootBase *pasmgr)
+void __fastcall Scaleform::GFx::MovieImpl::SetASMovieRoot(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::Resource *pasmgr)
 {
-  Scaleform::GFx::Resource *v2; // rdi
-  Scaleform::GFx::MovieImpl *v3; // rbx
-  Scaleform::Render::RenderBuffer *v4; // rcx
+  Scaleform::Render::RenderBuffer *pObject; // rcx
   Scaleform::Render::RenderBuffer *v5; // rcx
 
-  v2 = (Scaleform::GFx::Resource *)pasmgr;
-  v3 = this;
   if ( pasmgr )
-    Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)pasmgr);
-  v4 = (Scaleform::Render::RenderBuffer *)v3->pSavedASMovieRoot.pObject;
-  if ( v4 )
-    Scaleform::RefCountImpl::Release(v4);
-  v3->pSavedASMovieRoot.pObject = (Scaleform::GFx::ASMovieRootBase *)v2;
-  if ( v2 )
-    Scaleform::Render::RenderBuffer::AddRef(v2);
-  v5 = (Scaleform::Render::RenderBuffer *)v3->pASMovieRoot.pObject;
+    Scaleform::Render::RenderBuffer::AddRef(pasmgr);
+  pObject = (Scaleform::Render::RenderBuffer *)this->pSavedASMovieRoot.pObject;
+  if ( pObject )
+    Scaleform::RefCountImpl::Release(pObject);
+  this->pSavedASMovieRoot.pObject = (Scaleform::GFx::ASMovieRootBase *)pasmgr;
+  if ( pasmgr )
+    Scaleform::Render::RenderBuffer::AddRef(pasmgr);
+  v5 = (Scaleform::Render::RenderBuffer *)this->pASMovieRoot.pObject;
   if ( v5 )
     Scaleform::RefCountImpl::Release(v5);
-  v3->pASMovieRoot.pObject = v3->pSavedASMovieRoot.pObject;
+  this->pASMovieRoot.pObject = this->pSavedASMovieRoot.pObject;
 }
 
 // File Line: 773
 // RVA: 0x8B1AD0
-void __fastcall Scaleform::GFx::MovieImpl::AddLoadQueueEntry(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::LoadQueueEntry *pentry)
+void __fastcall Scaleform::GFx::MovieImpl::AddLoadQueueEntry(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::LoadQueueEntry *pentry)
 {
-  Scaleform::GFx::LoadQueueEntry *v2; // r8
-  signed __int64 v3; // rax
+  Scaleform::GFx::LoadQueueEntry *pLoadQueueHead; // r8
+  __int64 p_pNext; // rax
   bool v4; // zf
 
   pentry->EntryTime = ++this->LastLoadQueueEntryCnt;
-  v2 = this->pLoadQueueHead;
-  if ( v2 )
+  pLoadQueueHead = this->pLoadQueueHead;
+  if ( pLoadQueueHead )
   {
-    v3 = (signed __int64)&v2->pNext;
-    if ( v2->pNext )
+    p_pNext = (__int64)&pLoadQueueHead->pNext;
+    if ( pLoadQueueHead->pNext )
     {
       do
       {
-        v2 = *(Scaleform::GFx::LoadQueueEntry **)v3;
-        v4 = *(_QWORD *)(*(_QWORD *)v3 + 8i64) == 0i64;
-        v3 = *(_QWORD *)v3 + 8i64;
+        pLoadQueueHead = *(Scaleform::GFx::LoadQueueEntry **)p_pNext;
+        v4 = *(_QWORD *)(*(_QWORD *)p_pNext + 8i64) == 0i64;
+        p_pNext = *(_QWORD *)p_pNext + 8i64;
       }
       while ( !v4 );
     }
-    v2->pNext = pentry;
+    pLoadQueueHead->pNext = pentry;
   }
   else
   {
@@ -926,29 +933,31 @@ void __fastcall Scaleform::GFx::MovieImpl::AddLoadQueueEntry(Scaleform::GFx::Mov
 
 // File Line: 792
 // RVA: 0x8B1B10
-void __fastcall Scaleform::GFx::MovieImpl::AddLoadQueueEntryMT(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::LoadQueueEntryMT *pentryMT)
+void __fastcall Scaleform::GFx::MovieImpl::AddLoadQueueEntryMT(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::LoadQueueEntryMT *pentryMT)
 {
-  Scaleform::GFx::LoadQueueEntryMT *v2; // r8
-  signed __int64 v3; // rax
+  Scaleform::GFx::LoadQueueEntryMT *pLoadQueueMTHead; // r8
+  __int64 p_pNext; // rax
   bool v4; // zf
 
   pentryMT->pQueueEntry->EntryTime = ++this->LastLoadQueueEntryCnt;
-  v2 = this->pLoadQueueMTHead;
-  if ( v2 )
+  pLoadQueueMTHead = this->pLoadQueueMTHead;
+  if ( pLoadQueueMTHead )
   {
-    v3 = (signed __int64)&v2->pNext;
-    if ( v2->pNext )
+    p_pNext = (__int64)&pLoadQueueMTHead->pNext;
+    if ( pLoadQueueMTHead->pNext )
     {
       do
       {
-        v2 = *(Scaleform::GFx::LoadQueueEntryMT **)v3;
-        v4 = *(_QWORD *)(*(_QWORD *)v3 + 8i64) == 0i64;
-        v3 = *(_QWORD *)v3 + 8i64;
+        pLoadQueueMTHead = *(Scaleform::GFx::LoadQueueEntryMT **)p_pNext;
+        v4 = *(_QWORD *)(*(_QWORD *)p_pNext + 8i64) == 0i64;
+        p_pNext = *(_QWORD *)p_pNext + 8i64;
       }
       while ( !v4 );
     }
-    v2->pNext = pentryMT;
-    pentryMT->pPrev = v2;
+    pLoadQueueMTHead->pNext = pentryMT;
+    pentryMT->pPrev = pLoadQueueMTHead;
   }
   else
   {
@@ -958,39 +967,36 @@ void __fastcall Scaleform::GFx::MovieImpl::AddLoadQueueEntryMT(Scaleform::GFx::M
 
 // File Line: 815
 // RVA: 0x8C00B0
-Scaleform::GFx::MovieDefImpl *__fastcall Scaleform::GFx::MovieImpl::CreateImageMovieDef(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::ImageResource *pimageResource, bool bilinear, const char *purl, Scaleform::GFx::LoadStates *pls)
+Scaleform::GFx::MovieDefImpl *__fastcall Scaleform::GFx::MovieImpl::CreateImageMovieDef(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::ImageResource *pimageResource,
+        bool bilinear,
+        const char *purl,
+        Scaleform::Render::RenderBuffer *pls)
 {
-  const char *v5; // rbx
-  bool v6; // r13
-  Scaleform::GFx::ImageResource *v7; // r12
-  Scaleform::GFx::MovieImpl *v8; // r15
   __int64 v9; // rdi
   __int64 v10; // rbp
-  Scaleform::GFx::LoadStates *v11; // rsi
+  Scaleform::Render::RenderBuffer *v11; // rsi
   Scaleform::GFx::LoadStates *v12; // r10
-  Scaleform::GFx::StateBagImpl *v13; // rcx
-  Scaleform::GFx::StateBag *v14; // r8
-  Scaleform::GFx::LoadStates *v15; // rax
-  Scaleform::MemoryHeap *v16; // r14
-  Scaleform::GFx::LoadStates *v17; // rcx
+  Scaleform::GFx::StateBagImpl *pObject; // rcx
+  Scaleform::GFx::ResourceLibBase **v14; // r8
+  Scaleform::Render::RenderBuffer *v15; // rax
+  Scaleform::MemoryHeap *pHeap; // r14
+  Scaleform::MemoryHeap *v17; // rcx
   Scaleform::GFx::MovieDataDef *v18; // rax
   Scaleform::GFx::MovieDataDef *v19; // rax
   Scaleform::GFx::MovieDataDef *v20; // rbx
-  Scaleform::Ptr<Scaleform::GFx::ImageCreator> *v21; // rbp
-  Scaleform::GFx::LogState *v22; // rax
-  Scaleform::Log *v23; // rax
+  Scaleform::Ptr<Scaleform::GFx::ImageCreator> *ImageCreator; // rbp
+  Scaleform::Render::RenderBufferManager *pManager; // rax
+  Scaleform::Log *vfptr; // rax
   bool v24; // bp
   Scaleform::GFx::MovieDefImpl *v25; // r10
   __int64 v26; // rax
-  Scaleform::GFx::ResourceLibBase *v27; // rcx
+  Scaleform::GFx::ResourceLibBase *pLib; // rcx
   Scaleform::GFx::ResourceLibBase *v28; // rcx
-  Scaleform::GFx::ResourceKey result; // [rsp+70h] [rbp-38h]
+  Scaleform::GFx::ResourceKey result; // [rsp+70h] [rbp-38h] BYREF
   Scaleform::Render::RenderBuffer *v31; // [rsp+B8h] [rbp+10h]
 
-  v5 = purl;
-  v6 = bilinear;
-  v7 = pimageResource;
-  v8 = this;
   v9 = 0i64;
   v10 = 0i64;
   v31 = 0i64;
@@ -999,36 +1005,42 @@ Scaleform::GFx::MovieDefImpl *__fastcall Scaleform::GFx::MovieImpl::CreateImageM
   {
     v12 = (Scaleform::GFx::LoadStates *)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(
                                           Scaleform::Memory::pGlobalHeap,
-                                          144ui64,
+                                          144i64,
                                           0i64);
-    pls = v12;
+    pls = (Scaleform::Render::RenderBuffer *)v12;
     if ( v12 )
     {
-      v13 = v8->pStateBag.pObject;
-      v14 = (Scaleform::GFx::StateBag *)&v13->vfptr;
-      if ( !v13 )
+      pObject = this->pStateBag.pObject;
+      v14 = (Scaleform::GFx::ResourceLibBase **)&pObject->Scaleform::GFx::StateBag;
+      if ( !pObject )
         v14 = 0i64;
-      Scaleform::GFx::LoadStates::LoadStates(v12, v8->pMainMovieDef.pObject->pLoaderImpl.pObject, v14, 0i64);
+      Scaleform::GFx::LoadStates::LoadStates(
+        v12,
+        (Scaleform::GFx::Resource *)this->pMainMovieDef.pObject->pLoaderImpl.pObject,
+        v14,
+        0i64);
       v11 = v15;
     }
     else
     {
       v11 = 0i64;
     }
-    v31 = (Scaleform::Render::RenderBuffer *)v11;
+    v31 = v11;
   }
-  if ( !v7 )
+  if ( !pimageResource )
     goto LABEL_40;
-  Scaleform::GFx::MovieDataDef::CreateMovieFileKey(&result, v5, 0i64, 0i64, 0i64);
-  v16 = v8->pHeap;
-  v17 = (Scaleform::GFx::LoadStates *)Scaleform::Memory::pGlobalHeap;
-  if ( v16 )
-    v17 = (Scaleform::GFx::LoadStates *)v8->pHeap;
-  pls = v17;
-  v18 = (Scaleform::GFx::MovieDataDef *)v17->vfptr[10].__vecDelDtor((Scaleform::RefCountImplCore *)&v17->vfptr, 72u);
+  Scaleform::GFx::MovieDataDef::CreateMovieFileKey(&result, purl, 0i64, 0i64, 0i64);
+  pHeap = this->pHeap;
+  v17 = Scaleform::Memory::pGlobalHeap;
+  if ( pHeap )
+    v17 = this->pHeap;
+  pls = (Scaleform::Render::RenderBuffer *)v17;
+  v18 = (Scaleform::GFx::MovieDataDef *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))v17->vfptr->Alloc)(
+                                          v17,
+                                          72i64);
   if ( v18 )
   {
-    Scaleform::GFx::MovieDataDef::MovieDataDef(v18, &result, MT_Image, v5, v16, 0, 0i64);
+    Scaleform::GFx::MovieDataDef::MovieDataDef(v18, &result, MT_Image, purl, pHeap, 0, 0i64);
     v20 = v19;
   }
   else
@@ -1037,49 +1049,49 @@ Scaleform::GFx::MovieDefImpl *__fastcall Scaleform::GFx::MovieImpl::CreateImageM
   }
   if ( v20 )
   {
-    v21 = Scaleform::GFx::StateBag::GetImageCreator(
-            (Scaleform::GFx::StateBag *)&v8->vfptr,
-            (Scaleform::Ptr<Scaleform::GFx::ImageCreator> *)&pls);
-    v22 = v11->pLog.pObject;
-    if ( v22 )
+    ImageCreator = Scaleform::GFx::StateBag::GetImageCreator(
+                     &this->Scaleform::GFx::StateBag,
+                     (Scaleform::Ptr<Scaleform::GFx::ImageCreator> *)&pls);
+    pManager = v11->pManager;
+    if ( pManager )
     {
-      v23 = v22->pLog.pObject;
-      if ( !v23 )
-        v23 = Scaleform::Log::GetGlobalLog();
+      vfptr = (Scaleform::Log *)pManager[2].vfptr;
+      if ( !vfptr )
+        vfptr = Scaleform::Log::GetGlobalLog();
     }
     else
     {
-      v23 = 0i64;
+      vfptr = 0i64;
     }
-    v24 = Scaleform::GFx::MovieDataDef::LoadTaskData::InitImageFileMovieDef(
-            v20->pData.pObject,
-            0,
-            v7,
-            v21->pObject,
-            v23,
-            v6) == 0;
+    v24 = !Scaleform::GFx::MovieDataDef::LoadTaskData::InitImageFileMovieDef(
+             v20->pData.pObject,
+             0,
+             pimageResource,
+             ImageCreator->pObject,
+             vfptr,
+             bilinear);
     if ( pls )
-      Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)pls);
+      Scaleform::RefCountImpl::Release(pls);
     if ( !v24 )
     {
       Scaleform::String::operator=(
-        &v11->RelativePath,
+        (Scaleform::String *)&v11[2].RefCount,
         (const char *)((v20->pData.pObject->FileURL.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12));
-      if ( !Scaleform::GFx::URLBuilder::ExtractFilePath(&v11->RelativePath) )
-        Scaleform::String::Clear(&v11->RelativePath);
-      v25 = (Scaleform::GFx::MovieDefImpl *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))v16->vfptr->Alloc)(
-                                              v16,
+      if ( !Scaleform::GFx::URLBuilder::ExtractFilePath((Scaleform::String *)&v11[2].RefCount) )
+        Scaleform::String::Clear((Scaleform::String *)&v11[2].RefCount);
+      v25 = (Scaleform::GFx::MovieDefImpl *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))pHeap->vfptr->Alloc)(
+                                              pHeap,
                                               112i64);
       if ( v25 )
       {
         Scaleform::GFx::MovieDefImpl::MovieDefImpl(
           v25,
           v20,
-          v11->pBindStates.pObject,
-          v11->pLoaderImpl.pObject,
+          *(Scaleform::GFx::Resource **)&v11->Type,
+          (Scaleform::GFx::Resource *)v11[2].vfptr,
           0,
-          v8->pStateBag.pObject->pDelegate.pObject,
-          v16,
+          this->pStateBag.pObject->pDelegate.pObject,
+          pHeap,
           1,
           0i64);
         v10 = v26;
@@ -1090,13 +1102,15 @@ Scaleform::GFx::MovieDefImpl *__fastcall Scaleform::GFx::MovieImpl::CreateImageM
       }
       if ( !_InterlockedDecrement(&v20->RefCount.Value) )
       {
-        v27 = v20->pLib;
-        if ( v27 )
+        pLib = v20->pLib;
+        if ( pLib )
         {
-          v27->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v27->vfptr, (unsigned int)v20);
+          pLib->vfptr[1].__vecDelDtor(pLib, (unsigned int)v20);
           v20->pLib = 0i64;
         }
-        v20->vfptr->__vecDelDtor((Scaleform::GFx::Resource *)&v20->vfptr, 1u);
+        v20->Scaleform::GFx::TimelineDef::Scaleform::GFx::CharacterDef::Scaleform::GFx::Resource::vfptr->__vecDelDtor(
+          v20,
+          1u);
       }
       if ( result.pKeyInterface )
         result.pKeyInterface->vfptr->Release(result.pKeyInterface, result.hKeyData);
@@ -1110,10 +1124,12 @@ LABEL_40:
     v28 = v20->pLib;
     if ( v28 )
     {
-      v28->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v28->vfptr, (unsigned int)v20);
+      v28->vfptr[1].__vecDelDtor(v28, (unsigned int)v20);
       v20->pLib = 0i64;
     }
-    v20->vfptr->__vecDelDtor((Scaleform::GFx::Resource *)&v20->vfptr, 1u);
+    v20->Scaleform::GFx::TimelineDef::Scaleform::GFx::CharacterDef::Scaleform::GFx::Resource::vfptr->__vecDelDtor(
+      v20,
+      1u);
   }
   if ( result.pKeyInterface )
     result.pKeyInterface->vfptr->Release(result.pKeyInterface, result.hKeyData);
@@ -1127,81 +1143,83 @@ LABEL_41:
 // RVA: 0x8F3580
 void __fastcall Scaleform::GFx::MovieImpl::ProcessLoadQueue(Scaleform::GFx::MovieImpl *this)
 {
-  Scaleform::GFx::MovieImpl *v1; // rdi
-  unsigned int v2; // ebp
-  Scaleform::GFx::LoadQueueEntry *v3; // rsi
+  unsigned int LastLoadQueueEntryCnt; // ebp
+  Scaleform::GFx::LoadQueueEntry *pLoadQueueHead; // rsi
   Scaleform::GFx::LoadStates *v4; // r10
-  Scaleform::GFx::StateBagImpl *v5; // rcx
-  Scaleform::GFx::StateBag *v6; // r8
+  Scaleform::GFx::StateBagImpl *pObject; // rcx
+  Scaleform::GFx::ResourceLibBase **v6; // r8
   Scaleform::Render::RenderBuffer *v7; // rax
   Scaleform::Render::RenderBuffer *v8; // rbx
-  Scaleform::GFx::LoadQueueEntryMT *v9; // rbx
+  Scaleform::GFx::LoadQueueEntryMT *pLoadQueueMTHead; // rbx
   Scaleform::GFx::LoadQueueEntryMT *v10; // rbx
-  Scaleform::GFx::LoadQueueEntryMT *v11; // rsi
-  Scaleform::GFx::LoadQueueEntryMT *v12; // rax
+  Scaleform::GFx::LoadQueueEntryMT *pNext; // rsi
+  Scaleform::GFx::LoadQueueEntryMT *pPrev; // rax
 
-  v1 = this;
-  v2 = this->LastLoadQueueEntryCnt;
-  while ( v1->pLoadQueueHead )
+  LastLoadQueueEntryCnt = this->LastLoadQueueEntryCnt;
+  while ( this->pLoadQueueHead )
   {
-    v3 = v1->pLoadQueueHead;
-    if ( v3->EntryTime > v2 )
+    pLoadQueueHead = this->pLoadQueueHead;
+    if ( pLoadQueueHead->EntryTime > LastLoadQueueEntryCnt )
       break;
-    v1->pLoadQueueHead = v3->pNext;
+    this->pLoadQueueHead = pLoadQueueHead->pNext;
     v4 = (Scaleform::GFx::LoadStates *)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(
                                          Scaleform::Memory::pGlobalHeap,
-                                         144ui64,
+                                         144i64,
                                          0i64);
     if ( v4 )
     {
-      v5 = v1->pStateBag.pObject;
-      if ( v5 )
-        v6 = (Scaleform::GFx::StateBag *)&v5->vfptr;
+      pObject = this->pStateBag.pObject;
+      if ( pObject )
+        v6 = (Scaleform::GFx::ResourceLibBase **)&pObject->Scaleform::GFx::StateBag;
       else
         v6 = 0i64;
-      Scaleform::GFx::LoadStates::LoadStates(v4, v1->pMainMovieDef.pObject->pLoaderImpl.pObject, v6, 0i64);
+      Scaleform::GFx::LoadStates::LoadStates(
+        v4,
+        (Scaleform::GFx::Resource *)this->pMainMovieDef.pObject->pLoaderImpl.pObject,
+        v6,
+        0i64);
       v8 = v7;
     }
     else
     {
       v8 = 0i64;
     }
-    ((void (__fastcall *)(Scaleform::GFx::ASMovieRootBase *, Scaleform::GFx::LoadQueueEntry *, Scaleform::Render::RenderBuffer *))v1->pASMovieRoot.pObject->vfptr[35].__vecDelDtor)(
-      v1->pASMovieRoot.pObject,
-      v3,
+    ((void (__fastcall *)(Scaleform::GFx::ASMovieRootBase *, Scaleform::GFx::LoadQueueEntry *, Scaleform::Render::RenderBuffer *))this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[35].__vecDelDtor)(
+      this->pASMovieRoot.pObject,
+      pLoadQueueHead,
       v8);
-    v3->vfptr->__vecDelDtor(v3, 1u);
+    pLoadQueueHead->vfptr->__vecDelDtor(pLoadQueueHead, 1u);
     if ( v8 )
       Scaleform::RefCountImpl::Release(v8);
   }
-  v9 = v1->pLoadQueueMTHead;
-  if ( v9 )
+  pLoadQueueMTHead = this->pLoadQueueMTHead;
+  if ( pLoadQueueMTHead )
   {
-    while ( v9->vfptr->IsPreloadingFinished(v9) )
+    while ( pLoadQueueMTHead->vfptr->IsPreloadingFinished(pLoadQueueMTHead) )
     {
-      v9 = v9->pNext;
-      if ( !v9 )
+      pLoadQueueMTHead = pLoadQueueMTHead->pNext;
+      if ( !pLoadQueueMTHead )
         goto LABEL_15;
     }
   }
   else
   {
 LABEL_15:
-    v10 = v1->pLoadQueueMTHead;
+    v10 = this->pLoadQueueMTHead;
     while ( v10 )
     {
       if ( v10->vfptr->LoadFinished(v10) )
       {
-        v11 = v10->pNext;
-        if ( v11 )
-          v11->pPrev = v10->pPrev;
-        v12 = v10->pPrev;
-        if ( v12 )
-          v12->pNext = v11;
-        if ( v1->pLoadQueueMTHead == v10 )
-          v1->pLoadQueueMTHead = v11;
+        pNext = v10->pNext;
+        if ( pNext )
+          pNext->pPrev = v10->pPrev;
+        pPrev = v10->pPrev;
+        if ( pPrev )
+          pPrev->pNext = pNext;
+        if ( this->pLoadQueueMTHead == v10 )
+          this->pLoadQueueMTHead = pNext;
         v10->vfptr->__vecDelDtor(v10, 1u);
-        v10 = v11;
+        v10 = pNext;
       }
       else
       {
@@ -1213,12 +1231,14 @@ LABEL_15:
 
 // File Line: 930
 // RVA: 0x8E3D60
-void __fastcall Scaleform::GFx::MovieImpl::DragState::InitCenterDelta(Scaleform::GFx::MovieImpl::DragState *this, bool lockCenter, unsigned int mouseIndex)
+void __fastcall Scaleform::GFx::MovieImpl::DragState::InitCenterDelta(
+        Scaleform::GFx::MovieImpl::DragState *this,
+        bool lockCenter,
+        unsigned int mouseIndex)
 {
   __int64 v3; // rsi
-  Scaleform::GFx::MovieImpl::DragState *v4; // rdi
-  Scaleform::GFx::InteractiveObject *v5; // r14
-  Scaleform::GFx::InteractiveObject *v6; // rbx
+  Scaleform::GFx::InteractiveObject *pCharacter; // r14
+  Scaleform::GFx::InteractiveObject *pParent; // rbx
   Scaleform::GFx::DisplayObjectBase *v7; // rcx
   float *v8; // rax
   float v9; // xmm1_4
@@ -1233,41 +1253,39 @@ void __fastcall Scaleform::GFx::MovieImpl::DragState::InitCenterDelta(Scaleform:
   float v18; // xmm7_4
   float v19; // xmm6_4
   float v20; // xmm10_4
-  float v21; // xmm2_4
-  float v22; // xmm0_4
-  float v23; // xmm1_4
-  float *v24; // rax
-  signed __int64 v25; // rax
-  float v26; // xmm9_4
-  float v27; // xmm8_4
-  float v28; // xmm7_4
-  float v29; // xmm6_4
-  __int64 v30; // rax
-  float v31; // xmm1_4
-  Scaleform::Render::Matrix2x4<float> pmat; // [rsp+18h] [rbp-59h]
-  Scaleform::Render::Matrix2x4<float> m; // [rsp+38h] [rbp-39h]
+  float v21; // xmm0_4
+  float v22; // xmm1_4
+  float *v23; // rax
+  __int64 v24; // rax
+  float v25; // xmm9_4
+  float v26; // xmm8_4
+  float v27; // xmm7_4
+  float v28; // xmm6_4
+  __int64 v29; // rax
+  float v30; // xmm1_4
+  Scaleform::Render::Matrix2x4<float> pmat; // [rsp+18h] [rbp-59h] BYREF
+  Scaleform::Render::Matrix2x4<float> m; // [rsp+38h] [rbp-39h] BYREF
 
   v3 = mouseIndex;
-  v4 = this;
   this->LockCenter = lockCenter;
   this->MouseIndex = mouseIndex;
   if ( !lockCenter )
   {
-    v5 = this->pCharacter;
-    v6 = this->pCharacter->pParent;
+    pCharacter = this->pCharacter;
+    pParent = this->pCharacter->pParent;
     *(_OWORD *)&pmat.M[0][0] = _xmm;
     *(__m128 *)&pmat.M[1][0] = _xmm;
-    if ( v6 )
+    if ( pParent )
     {
       *(_OWORD *)&pmat.M[0][0] = _xmm;
       *(__m128 *)&pmat.M[1][0] = _xmm;
-      v7 = v6->pParentChar;
+      v7 = pParent->pParent;
       if ( v7 )
       {
         Scaleform::GFx::DisplayObjectBase::GetWorldMatrix(v7, &pmat);
-        v8 = (float *)((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))v6->vfptr[2].__vecDelDtor)(v6);
-        v10 = pmat.M[0][1];
+        v8 = (float *)((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))pParent->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[2].__vecDelDtor)(pParent);
         v9 = pmat.M[0][0];
+        v10 = pmat.M[0][1];
         v11 = pmat.M[1][0];
         v12 = 0.0;
         v13 = pmat.M[0][0];
@@ -1275,149 +1293,147 @@ void __fastcall Scaleform::GFx::MovieImpl::DragState::InitCenterDelta(Scaleform:
         v15 = pmat.M[1][0];
         v16 = 0.0;
         v17 = (float)(pmat.M[0][0] * *v8) + (float)(pmat.M[0][1] * v8[4]);
-        pmat.M[0][0] = (float)(pmat.M[0][0] * *v8) + (float)(pmat.M[0][1] * v8[4]);
+        pmat.M[0][0] = v17;
         v18 = (float)(pmat.M[1][0] * *v8) + (float)(pmat.M[1][1] * v8[4]);
-        pmat.M[1][0] = (float)(pmat.M[1][0] * *v8) + (float)(pmat.M[1][1] * v8[4]);
+        pmat.M[1][0] = v18;
         v19 = (float)(v13 * v8[1]) + (float)(pmat.M[0][1] * v8[5]);
         *(_QWORD *)&pmat.M[0][1] = LODWORD(v19);
         v20 = (float)(v15 * v8[1]) + (float)(pmat.M[1][1] * v8[5]);
         *(_QWORD *)&pmat.M[1][1] = LODWORD(v20);
-        v21 = (float)(v10 * v8[7]) + (float)(v9 * v8[3]);
-        v22 = pmat.M[0][3] + v21;
-        pmat.M[0][3] = pmat.M[0][3] + v21;
-        v23 = pmat.M[1][3] + (float)((float)(v14 * v8[7]) + (float)(v11 * v8[3]));
+        v21 = pmat.M[0][3] + (float)((float)(v10 * v8[7]) + (float)(v9 * v8[3]));
+        pmat.M[0][3] = v21;
+        v22 = pmat.M[1][3] + (float)((float)(v14 * v8[7]) + (float)(v11 * v8[3]));
       }
       else
       {
-        v24 = (float *)((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))v6->vfptr[2].__vecDelDtor)(v6);
-        v17 = *v24;
-        pmat.M[0][0] = *v24;
-        v19 = v24[1];
-        pmat.M[0][1] = v24[1];
-        v16 = v24[2];
-        pmat.M[0][2] = v24[2];
-        v22 = v24[3];
-        pmat.M[0][3] = v24[3];
-        v18 = v24[4];
-        pmat.M[1][0] = v24[4];
-        v20 = v24[5];
-        pmat.M[1][1] = v24[5];
-        v12 = v24[6];
-        pmat.M[1][2] = v24[6];
-        v23 = v24[7];
+        v23 = (float *)((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))pParent->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[2].__vecDelDtor)(pParent);
+        v17 = *v23;
+        pmat.M[0][0] = *v23;
+        v19 = v23[1];
+        pmat.M[0][1] = v19;
+        v16 = v23[2];
+        pmat.M[0][2] = v16;
+        v21 = v23[3];
+        pmat.M[0][3] = v21;
+        v18 = v23[4];
+        pmat.M[1][0] = v18;
+        v20 = v23[5];
+        pmat.M[1][1] = v20;
+        v12 = v23[6];
+        pmat.M[1][2] = v12;
+        v22 = v23[7];
       }
     }
     else
     {
-      v23 = pmat.M[1][3];
+      v22 = pmat.M[1][3];
       v12 = pmat.M[1][2];
       v20 = pmat.M[1][1];
       v18 = pmat.M[1][0];
-      v22 = pmat.M[0][3];
+      v21 = pmat.M[0][3];
       v16 = pmat.M[0][2];
       v19 = pmat.M[0][1];
       v17 = pmat.M[0][0];
     }
     if ( (unsigned int)v3 < 6 )
-      v25 = (signed __int64)&v5->pASRoot->pMovieImpl->mMouseState[v3];
+      v24 = (__int64)&pCharacter->pASRoot->pMovieImpl->mMouseState[v3];
     else
-      v25 = 0i64;
-    v26 = *(float *)(v25 + 56);
-    v27 = *(float *)(v25 + 60);
-    *(_QWORD *)&pmat.M[0][2] = __PAIR__(LODWORD(v22), LODWORD(v16));
-    *(_QWORD *)&pmat.M[1][0] = __PAIR__(LODWORD(v20), LODWORD(v18));
-    *(_QWORD *)&pmat.M[1][2] = __PAIR__(LODWORD(v23), LODWORD(v12));
-    *(_QWORD *)&m.M[0][0] = __PAIR__(LODWORD(v19), LODWORD(v17));
-    *(_QWORD *)&m.M[0][2] = __PAIR__(LODWORD(v22), LODWORD(v16));
-    *(_QWORD *)&m.M[1][0] = __PAIR__(LODWORD(v20), LODWORD(v18));
-    *(_QWORD *)&m.M[1][2] = __PAIR__(LODWORD(v23), LODWORD(v12));
+      v24 = 0i64;
+    v25 = *(float *)(v24 + 56);
+    v26 = *(float *)(v24 + 60);
+    *(_QWORD *)&pmat.M[0][2] = __PAIR64__(LODWORD(v21), LODWORD(v16));
+    *(_QWORD *)&pmat.M[1][0] = __PAIR64__(LODWORD(v20), LODWORD(v18));
+    *(_QWORD *)&pmat.M[1][2] = __PAIR64__(LODWORD(v22), LODWORD(v12));
+    *(_QWORD *)&m.M[0][0] = __PAIR64__(LODWORD(v19), LODWORD(v17));
+    *(_QWORD *)&m.M[0][2] = __PAIR64__(LODWORD(v21), LODWORD(v16));
+    *(_QWORD *)&m.M[1][0] = __PAIR64__(LODWORD(v20), LODWORD(v18));
+    *(_QWORD *)&m.M[1][2] = __PAIR64__(LODWORD(v22), LODWORD(v12));
     Scaleform::Render::Matrix2x4<float>::SetInverse(&pmat, &m);
-    v28 = (float)((float)(pmat.M[0][1] * v27) + (float)(pmat.M[0][0] * v26)) + pmat.M[0][3];
-    v29 = (float)((float)(pmat.M[1][1] * v27) + (float)(pmat.M[1][0] * v26)) + pmat.M[1][3];
-    v30 = ((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))v5->vfptr[2].__vecDelDtor)(v5);
-    v31 = *(float *)(v30 + 28) - v29;
-    v4->CenterDelta.x = *(float *)(v30 + 12) - v28;
-    v4->CenterDelta.y = v31;
+    v27 = (float)((float)(pmat.M[0][1] * v26) + (float)(pmat.M[0][0] * v25)) + pmat.M[0][3];
+    v28 = (float)((float)(pmat.M[1][1] * v26) + (float)(pmat.M[1][0] * v25)) + pmat.M[1][3];
+    v29 = ((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))pCharacter->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[2].__vecDelDtor)(pCharacter);
+    v30 = *(float *)(v29 + 28) - v28;
+    this->CenterDelta.x = *(float *)(v29 + 12) - v27;
+    this->CenterDelta.y = v30;
   }
 }
 
 // File Line: 966
 // RVA: 0x90EE40
-void __fastcall Scaleform::GFx::MovieImpl::SetViewport(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::Viewport *viewDesc)
+void __fastcall Scaleform::GFx::MovieImpl::SetViewport(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::Viewport *viewDesc)
 {
-  Scaleform::Render::Viewport *v2; // rdi
-  Scaleform::GFx::Viewport *v3; // rsi
-  Scaleform::GFx::MovieImpl *v4; // rbx
-  int v5; // ebp
-  int v6; // er12
-  int v7; // er14
-  int v8; // er15
-  float v9; // xmm7_4
-  float v10; // xmm11_4
-  float v11; // xmm6_4
-  float v12; // xmm9_4
-  float v13; // xmm8_4
-  float v14; // xmm10_4
-  Scaleform::GFx::Movie::ScaleModeType v15; // eax
+  Scaleform::GFx::Viewport *p_mViewport; // rdi
+  int Height; // ebp
+  int Left; // r12d
+  int Width; // r14d
+  int Top; // r15d
+  float AspectRatio; // xmm7_4
+  float Scale; // xmm11_4
+  float x1; // xmm6_4
+  float y1; // xmm9_4
+  float x2; // xmm8_4
+  float y2; // xmm10_4
+  Scaleform::GFx::Movie::ScaleModeType ViewScaleMode; // eax
 
-  v2 = (Scaleform::Render::Viewport *)&this->mViewport.BufferWidth;
-  v3 = viewDesc;
-  v4 = this;
+  p_mViewport = &this->mViewport;
   if ( memcmp(viewDesc, &this->mViewport, 0x34ui64) )
   {
-    v5 = v4->mViewport.Height;
-    v6 = v4->mViewport.Left;
-    v7 = v4->mViewport.Width;
-    v8 = v4->mViewport.Top;
-    v9 = v4->mViewport.AspectRatio;
-    v10 = v4->mViewport.Scale;
-    v4->Flags |= 1u;
-    v2->BufferWidth = v3->BufferWidth;
-    v2->BufferHeight = v3->BufferHeight;
-    v2->Left = v3->Left;
-    v2->Top = v3->Top;
-    v2->Width = v3->Width;
-    v2->Height = v3->Height;
-    v2->ScissorLeft = v3->ScissorLeft;
-    v2->ScissorTop = v3->ScissorTop;
-    v2->ScissorWidth = v3->ScissorWidth;
-    v2->ScissorHeight = v3->ScissorHeight;
-    v2->Flags = v3->Flags;
-    v2[1].BufferWidth = LODWORD(v3->Scale);
-    v2[1].BufferHeight = LODWORD(v3->AspectRatio);
-    v11 = v4->VisibleFrameRect.x1;
-    v12 = v4->VisibleFrameRect.y1;
-    v13 = v4->VisibleFrameRect.x2;
-    v14 = v4->VisibleFrameRect.y2;
-    Scaleform::GFx::MovieImpl::UpdateViewport(v4);
-    if ( v11 != v4->VisibleFrameRect.x1
-      || v13 != v4->VisibleFrameRect.x2
-      || v12 != v4->VisibleFrameRect.y1
-      || v14 != v4->VisibleFrameRect.y2
-      || (v15 = v4->ViewScaleMode) == 0
-      && (v7 != v4->mViewport.Width
-       || v5 != v4->mViewport.Height
-       || v6 != v4->mViewport.Left
-       || v8 != v4->mViewport.Top
-       || v10 != v4->mViewport.Scale
-       || v9 != v4->mViewport.AspectRatio)
-      || v15 != 2 && (v7 != v4->mViewport.Width || v5 != v4->mViewport.Height || v9 != v4->mViewport.AspectRatio) )
+    Height = this->mViewport.Height;
+    Left = this->mViewport.Left;
+    Width = this->mViewport.Width;
+    Top = this->mViewport.Top;
+    AspectRatio = this->mViewport.AspectRatio;
+    Scale = this->mViewport.Scale;
+    this->Flags |= 1u;
+    p_mViewport->BufferWidth = viewDesc->BufferWidth;
+    p_mViewport->BufferHeight = viewDesc->BufferHeight;
+    p_mViewport->Left = viewDesc->Left;
+    p_mViewport->Top = viewDesc->Top;
+    p_mViewport->Width = viewDesc->Width;
+    p_mViewport->Height = viewDesc->Height;
+    p_mViewport->ScissorLeft = viewDesc->ScissorLeft;
+    p_mViewport->ScissorTop = viewDesc->ScissorTop;
+    p_mViewport->ScissorWidth = viewDesc->ScissorWidth;
+    p_mViewport->ScissorHeight = viewDesc->ScissorHeight;
+    p_mViewport->Flags = viewDesc->Flags;
+    p_mViewport->Scale = viewDesc->Scale;
+    p_mViewport->AspectRatio = viewDesc->AspectRatio;
+    x1 = this->VisibleFrameRect.x1;
+    y1 = this->VisibleFrameRect.y1;
+    x2 = this->VisibleFrameRect.x2;
+    y2 = this->VisibleFrameRect.y2;
+    Scaleform::GFx::MovieImpl::UpdateViewport(this);
+    if ( x1 != this->VisibleFrameRect.x1
+      || x2 != this->VisibleFrameRect.x2
+      || y1 != this->VisibleFrameRect.y1
+      || y2 != this->VisibleFrameRect.y2
+      || (ViewScaleMode = this->ViewScaleMode) == SM_NoScale
+      && (Width != this->mViewport.Width
+       || Height != this->mViewport.Height
+       || Left != this->mViewport.Left
+       || Top != this->mViewport.Top
+       || Scale != this->mViewport.Scale
+       || AspectRatio != this->mViewport.AspectRatio)
+      || ViewScaleMode != SM_ExactFit
+      && (Width != this->mViewport.Width
+       || Height != this->mViewport.Height
+       || AspectRatio != this->mViewport.AspectRatio) )
     {
-      ((void (*)(void))v4->pASMovieRoot.pObject->vfptr[19].__vecDelDtor)();
+      ((void (__fastcall *)(Scaleform::GFx::ASMovieRootBase *))this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[19].__vecDelDtor)(this->pASMovieRoot.pObject);
     }
-    Scaleform::Render::TreeRoot::SetViewport(v4->pRenderRoot.pObject, v2);
-    Scaleform::Render::TreeRoot::SetBackgroundColor(v4->pRenderRoot.pObject, &v4->BackgroundColor);
-    Scaleform::Render::TreeNode::SetMatrix(
-      (Scaleform::Render::TreeNode *)&v4->pRenderRoot.pObject->0,
-      &v4->ViewportMatrix);
+    Scaleform::Render::TreeRoot::SetViewport(this->pRenderRoot.pObject, p_mViewport);
+    Scaleform::Render::TreeRoot::SetBackgroundColor(this->pRenderRoot.pObject, &this->BackgroundColor);
+    Scaleform::Render::TreeNode::SetMatrix(this->pRenderRoot.pObject, &this->ViewportMatrix);
   }
 }
 
 // File Line: 1018
 // RVA: 0x906360
-void __fastcall Scaleform::GFx::MovieImpl::SetBackgroundColor(Scaleform::GFx::MovieImpl *this, __int64 color)
+void __fastcall Scaleform::GFx::MovieImpl::SetBackgroundColor(Scaleform::GFx::MovieImpl *this, unsigned int *color)
 {
-  this->BackgroundColor.Raw = *(_DWORD *)color;
+  this->BackgroundColor.Raw = *color;
   Scaleform::Render::TreeRoot::SetBackgroundColor(this->pRenderRoot.pObject, &this->BackgroundColor);
 }
 
@@ -1428,8 +1444,8 @@ void __fastcall Scaleform::GFx::MovieImpl::SetBackgroundAlpha(Scaleform::GFx::Mo
   char v2; // r8
 
   v2 = -1;
-  if ( (unsigned __int8)(signed int)(float)(alpha * 255.0) < 0xFFu )
-    v2 = (signed int)(float)(alpha * 255.0);
+  if ( (unsigned __int8)(int)(float)(alpha * 255.0) != 0xFF )
+    v2 = (int)(float)(alpha * 255.0);
   this->BackgroundColor.Channels.Alpha = v2;
   Scaleform::Render::TreeRoot::SetBackgroundColor(this->pRenderRoot.pObject, &this->BackgroundColor);
 }
@@ -1438,20 +1454,19 @@ void __fastcall Scaleform::GFx::MovieImpl::SetBackgroundAlpha(Scaleform::GFx::Mo
 // RVA: 0x9189B0
 void __fastcall Scaleform::GFx::MovieImpl::UpdateViewport(Scaleform::GFx::MovieImpl *this)
 {
-  Scaleform::GFx::MovieDefImpl *v1; // r8
-  float v2; // xmm6_4
-  float v3; // xmm7_4
-  Scaleform::GFx::MovieImpl *v4; // rbx
-  float v5; // xmm12_4
-  float v6; // xmm11_4
-  float v7; // xmm10_4
-  float v8; // xmm15_4
-  float v9; // xmm14_4
-  float v10; // xmm13_4
-  int v11; // edx
+  Scaleform::GFx::MovieDefImpl *pObject; // r8
+  float y2; // xmm6_4
+  float y1; // xmm7_4
+  float ViewScaleX; // xmm12_4
+  float ViewScaleY; // xmm11_4
+  float PixelScale; // xmm10_4
+  float x2; // xmm15_4
+  float ViewOffsetX; // xmm14_4
+  float ViewOffsetY; // xmm13_4
+  int Top; // edx
   float v12; // xmm1_4
   int v13; // eax
-  Scaleform::GFx::Movie::ScaleModeType v14; // edx
+  Scaleform::GFx::Movie::ScaleModeType ViewScaleMode; // edx
   float v15; // xmm8_4
   float v16; // xmm5_4
   float *v17; // rax
@@ -1468,7 +1483,7 @@ void __fastcall Scaleform::GFx::MovieImpl::UpdateViewport(Scaleform::GFx::MovieI
   float v28; // xmm3_4
   float v29; // xmm1_4
   float v30; // xmm2_4
-  float v31; // xmm2_4
+  float Scale; // xmm2_4
   float v32; // xmm5_4
   float v33; // xmm2_4
   float v34; // xmm4_4
@@ -1479,23 +1494,20 @@ void __fastcall Scaleform::GFx::MovieImpl::UpdateViewport(Scaleform::GFx::MovieI
   float v39; // xmm1_4
   float v40; // xmm2_4
   float v41; // [rsp+C0h] [rbp+8h]
-  float v42; // [rsp+C8h] [rbp+10h]
-  float v43; // [rsp+D0h] [rbp+18h]
+  float x1; // [rsp+D0h] [rbp+18h]
 
-  v1 = this->pMainMovieDef.pObject;
-  v2 = this->VisibleFrameRect.y2;
-  v3 = this->VisibleFrameRect.y1;
-  v4 = this;
-  v5 = this->ViewScaleX;
-  v6 = this->ViewScaleY;
-  v7 = this->PixelScale;
-  v8 = this->VisibleFrameRect.x2;
-  v9 = this->ViewOffsetX;
-  v10 = this->ViewOffsetY;
-  v43 = this->VisibleFrameRect.x1;
-  v42 = this->VisibleFrameRect.y1;
-  v41 = this->VisibleFrameRect.y2;
-  if ( !v1 )
+  pObject = this->pMainMovieDef.pObject;
+  y2 = this->VisibleFrameRect.y2;
+  y1 = this->VisibleFrameRect.y1;
+  ViewScaleX = this->ViewScaleX;
+  ViewScaleY = this->ViewScaleY;
+  PixelScale = this->PixelScale;
+  x2 = this->VisibleFrameRect.x2;
+  ViewOffsetX = this->ViewOffsetX;
+  ViewOffsetY = this->ViewOffsetY;
+  x1 = this->VisibleFrameRect.x1;
+  v41 = y2;
+  if ( !pObject )
   {
     this->ViewScaleY = 1.0;
     this->ViewScaleX = 1.0;
@@ -1503,65 +1515,62 @@ void __fastcall Scaleform::GFx::MovieImpl::UpdateViewport(Scaleform::GFx::MovieI
     this->PixelScale = 1.0;
     goto LABEL_47;
   }
-  v11 = this->mViewport.Top;
-  v12 = (float)v11 * 20.0;
-  v13 = v11 + this->mViewport.Height;
-  v14 = this->ViewScaleMode;
+  Top = this->mViewport.Top;
+  v12 = (float)Top * 20.0;
+  v13 = Top + this->mViewport.Height;
+  ViewScaleMode = this->ViewScaleMode;
   v15 = (float)v13;
   v16 = (float)((float)(this->mViewport.Left + this->mViewport.Width) * 20.0)
       - (float)((float)this->mViewport.Left * 20.0);
-  v17 = (float *)v1->pBindData.pObject->pDataDef.pObject->pData.pObject;
+  v17 = (float *)pObject->pBindData.pObject->pDataDef.pObject->pData.pObject;
   v18 = (float)(v15 * 20.0) - v12;
   v19 = v17[26] - v17[24];
   v20 = v17[27] - v17[25];
-  switch ( v14 )
+  switch ( ViewScaleMode )
   {
-    case 0:
-      v31 = this->mViewport.Scale;
-      v32 = (float)(v16 * this->mViewport.AspectRatio) * v31;
-      v33 = v31 * v18;
+    case SM_NoScale:
+      Scale = this->mViewport.Scale;
+      v32 = (float)(v16 * this->mViewport.AspectRatio) * Scale;
+      v33 = Scale * v18;
       switch ( this->ViewAlignment )
       {
-        case 0:
+        case Align_Center:
           this->VisibleFrameRect.x1 = (float)(20
-                                            * (signed int)(float)((float)((float)(v19 * 0.5) - (float)(v32 * 0.5))
-                                                                * 0.050000001));
+                                            * (int)(float)((float)((float)(v19 * 0.5) - (float)(v32 * 0.5)) * 0.050000001));
           v34 = (float)(v20 * 0.5) - (float)(v33 * 0.5);
           goto LABEL_35;
-        case 1:
+        case Align_TopCenter:
           this->VisibleFrameRect.y1 = 0.0;
           this->VisibleFrameRect.x1 = (float)(20
-                                            * (signed int)(float)((float)((float)(v19 * 0.5) - (float)(v32 * 0.5))
-                                                                * 0.050000001));
+                                            * (int)(float)((float)((float)(v19 * 0.5) - (float)(v32 * 0.5)) * 0.050000001));
           break;
-        case 2:
+        case Align_BottomCenter:
           this->VisibleFrameRect.y1 = v20 - v33;
           this->VisibleFrameRect.x1 = (float)(20
-                                            * (signed int)(float)((float)((float)(v19 * 0.5) - (float)(v32 * 0.5))
-                                                                * 0.050000001));
+                                            * (int)(float)((float)((float)(v19 * 0.5) - (float)(v32 * 0.5)) * 0.050000001));
           break;
-        case 3:
+        case Align_CenterLeft:
           this->VisibleFrameRect.x1 = 0.0;
           goto LABEL_34;
-        case 4:
+        case Align_CenterRight:
           this->VisibleFrameRect.x1 = v19 - v32;
 LABEL_34:
           v34 = (float)(v20 * 0.5) - (float)(v33 * 0.5);
 LABEL_35:
-          this->VisibleFrameRect.y1 = (float)(20 * (signed int)(float)(v34 * 0.050000001));
+          this->VisibleFrameRect.y1 = (float)(20 * (int)(float)(v34 * 0.050000001));
           break;
-        case 5:
+        case Align_TopLeft:
           *(_QWORD *)&this->VisibleFrameRect.x1 = 0i64;
           break;
-        case 6:
+        case Align_TopRight:
           this->VisibleFrameRect.x1 = v19 - v32;
           this->VisibleFrameRect.y1 = 0.0;
           break;
-        case 7:
+        case Align_BottomLeft:
           this->VisibleFrameRect.y1 = v20 - v33;
           this->VisibleFrameRect.x1 = 0.0;
           break;
-        case 8:
+        case Align_BottomRight:
           this->VisibleFrameRect.x1 = v19 - v32;
           this->VisibleFrameRect.y1 = v20 - v33;
           break;
@@ -1577,9 +1586,9 @@ LABEL_35:
       this->ViewScaleX = v35 * this->mViewport.AspectRatio;
       this->ViewOffsetY = v36 * 0.050000001;
       goto LABEL_37;
-    case 1:
-      goto LABEL_59;
-    case 2:
+    case SM_ShowAll:
+      goto LABEL_6;
+    case SM_ExactFit:
       *(_QWORD *)&this->VisibleFrameRect.x1 = 0i64;
       this->VisibleFrameRect.x2 = v19;
       v25 = v20 + this->VisibleFrameRect.y1;
@@ -1595,11 +1604,28 @@ LABEL_35:
       else
         this->ViewScaleY = (float)(v25 - this->VisibleFrameRect.y1) / v18;
       break;
-    case 3:
-LABEL_59:
+    case SM_NoBorder:
+LABEL_6:
       v21 = v16 * this->mViewport.AspectRatio;
-      if ( (v14 != 1 || (float)(v21 / v19) >= (float)(v18 / v20))
-        && (v14 != 3 || (float)(v21 / v19) <= (float)(v18 / v20)) )
+      if ( ViewScaleMode == SM_ShowAll && (float)(v21 / v19) < (float)(v18 / v20)
+        || ViewScaleMode == SM_NoBorder && (float)(v21 / v19) > (float)(v18 / v20) )
+      {
+        this->VisibleFrameRect.x1 = 0.0;
+        v22 = (float)(v19 * v18) / v21;
+        this->VisibleFrameRect.y1 = (float)(v20 * 0.5) - (float)(v22 * 0.5);
+        this->VisibleFrameRect.x2 = v19;
+        this->VisibleFrameRect.y2 = v22 + this->VisibleFrameRect.y1;
+        v23 = this->VisibleFrameRect.y1;
+        this->ViewOffsetX = 0.0;
+        this->ViewOffsetY = v23 * 0.050000001;
+        if ( v16 == 0.0 )
+          v24 = 0.0;
+        else
+          v24 = v19 / v16;
+        this->ViewScaleX = v24;
+        this->ViewScaleY = v24 / this->mViewport.AspectRatio;
+      }
+      else
       {
         this->VisibleFrameRect.y1 = 0.0;
         v27 = (float)(v21 * v20) * (float)(1.0 / v18);
@@ -1617,25 +1643,8 @@ LABEL_59:
         this->ViewScaleY = v30;
         this->ViewScaleX = v30 * this->mViewport.AspectRatio;
       }
-      else
-      {
-        this->VisibleFrameRect.x1 = 0.0;
-        v22 = (float)(v19 * v18) / v21;
-        this->VisibleFrameRect.y1 = (float)(v20 * 0.5) - (float)(v22 * 0.5);
-        this->VisibleFrameRect.x2 = v19;
-        this->VisibleFrameRect.y2 = v22 + this->VisibleFrameRect.y1;
-        v23 = this->VisibleFrameRect.y1;
-        this->ViewOffsetX = 0.0;
-        this->ViewOffsetY = v23 * 0.050000001;
-        if ( v16 == 0.0 )
-          v24 = 0.0;
-        else
-          v24 = v19 / v16;
-        this->ViewScaleX = v24;
-        this->ViewScaleY = v24 / this->mViewport.AspectRatio;
-      }
 LABEL_37:
-      v2 = v41;
+      y2 = v41;
       break;
   }
   v37 = this->ViewScaleY;
@@ -1649,21 +1658,20 @@ LABEL_37:
     v38 = 1.0 / v40;
   if ( v39 >= v38 )
     v38 = v39;
-  v3 = v42;
   this->PixelScale = v38;
 LABEL_47:
   Scaleform::GFx::MovieImpl::ResetViewportMatrix(this);
-  if ( v43 != v4->VisibleFrameRect.x1
-    || v8 != v4->VisibleFrameRect.x2
-    || v3 != v4->VisibleFrameRect.y1
-    || v2 != v4->VisibleFrameRect.y2
-    || v9 != v4->ViewOffsetX
-    || v10 != v4->ViewOffsetY
-    || v5 != v4->ViewScaleX
-    || v6 != v4->ViewScaleY
-    || v7 != v4->PixelScale )
+  if ( x1 != this->VisibleFrameRect.x1
+    || x2 != this->VisibleFrameRect.x2
+    || y1 != this->VisibleFrameRect.y1
+    || y2 != this->VisibleFrameRect.y2
+    || ViewOffsetX != this->ViewOffsetX
+    || ViewOffsetY != this->ViewOffsetY
+    || ViewScaleX != this->ViewScaleX
+    || ViewScaleY != this->ViewScaleY
+    || PixelScale != this->PixelScale )
   {
-    Scaleform::GFx::MovieImpl::UpdateViewAndPerspective(v4);
+    Scaleform::GFx::MovieImpl::UpdateViewAndPerspective(this);
   }
 }
 
@@ -1671,31 +1679,31 @@ LABEL_47:
 // RVA: 0x901770
 void __fastcall Scaleform::GFx::MovieImpl::ResetViewportMatrix(Scaleform::GFx::MovieImpl *this)
 {
-  float v1; // xmm4_4
-  float v2; // xmm5_4
+  float x1; // xmm4_4
+  float y1; // xmm5_4
   float v3; // xmm4_4
   float v4; // xmm5_4
-  float v5; // xmm2_4
+  float Width; // xmm2_4
   float v6; // xmm3_4
   float v7; // xmm0_4
   float v8; // xmm2_4
 
-  v1 = this->VisibleFrameRect.x1;
-  v2 = this->VisibleFrameRect.y1;
+  x1 = this->VisibleFrameRect.x1;
+  y1 = this->VisibleFrameRect.y1;
   *(_QWORD *)&this->ViewportMatrix.M[0][0] = 1065353216i64;
   *(_QWORD *)&this->ViewportMatrix.M[1][1] = 1065353216i64;
-  LODWORD(v3) = LODWORD(v1) ^ _xmm[0];
-  LODWORD(v4) = LODWORD(v2) ^ _xmm[0];
+  LODWORD(v3) = LODWORD(x1) ^ _xmm[0];
+  LODWORD(v4) = LODWORD(y1) ^ _xmm[0];
   this->ViewportMatrix.M[0][2] = 0.0;
   this->ViewportMatrix.M[1][0] = 0.0;
   this->ViewportMatrix.M[0][3] = v3;
   this->ViewportMatrix.M[1][3] = v4;
-  v5 = (float)this->mViewport.Width;
+  Width = (float)this->mViewport.Width;
   v6 = (float)this->mViewport.Height / (float)(this->VisibleFrameRect.y2 - this->VisibleFrameRect.y1);
   v7 = this->VisibleFrameRect.x2 - this->VisibleFrameRect.x1;
   this->ViewportMatrix.M[1][1] = v6;
   this->ViewportMatrix.M[1][3] = v4 * v6;
-  v8 = v5 / v7;
+  v8 = Width / v7;
   this->ViewportMatrix.M[0][0] = v8;
   this->ViewportMatrix.M[0][3] = v3 * v8;
   this->ViewportMatrix.M[0][1] = v8 * 0.0;
@@ -1708,29 +1716,29 @@ void __fastcall Scaleform::GFx::MovieImpl::ResetViewportMatrix(Scaleform::GFx::M
 // RVA: 0x9046A0
 void __fastcall Scaleform::GFx::MovieImpl::RestoreViewport(Scaleform::GFx::MovieImpl *this)
 {
-  Scaleform::GFx::MovieImpl *v1; // rbx
-
-  v1 = this;
   Scaleform::GFx::MovieImpl::ResetViewportMatrix(this);
-  Scaleform::Render::TreeNode::SetMatrix(
-    (Scaleform::Render::TreeNode *)&v1->pRenderRoot.pObject->0,
-    &v1->ViewportMatrix);
+  Scaleform::Render::TreeNode::SetMatrix(this->pRenderRoot.pObject, &this->ViewportMatrix);
 }
 
 // File Line: 1202
 // RVA: 0x8EB2D0
-void __fastcall Scaleform::GFx::MovieImpl::MakeViewAndPersp3D(Scaleform::Render::Matrix3x4<float> *matView, Scaleform::Render::Matrix4x4<float> *matPersp, Scaleform::Render::Rect<float> *frameRect, Scaleform::Render::Point<float> *projCenter, float fieldOfView, float focalLength, bool bInvertY)
+void __fastcall Scaleform::GFx::MovieImpl::MakeViewAndPersp3D(
+        Scaleform::Render::Matrix3x4<float> *matView,
+        Scaleform::Render::Matrix4x4<float> *matPersp,
+        Scaleform::Render::Rect<float> *frameRect,
+        Scaleform::Render::Point<float> *projCenter,
+        float fieldOfView,
+        float focalLength,
+        bool bInvertY)
 {
   float v7; // xmm4_4
-  Scaleform::Render::Matrix4x4<float> *v8; // rbx
-  float v9; // xmm10_4
+  float x2; // xmm10_4
   float v10; // xmm7_4
-  Scaleform::Render::Matrix3x4<float> *v11; // rsi
   float v12; // xmm8_4
   float fNearZ; // xmm9_4
   float fFarZ; // xmm6_4
-  float v15; // xmm14_4
-  __int128 v16; // xmm15
+  float x; // xmm14_4
+  __int128 y_low; // xmm15
   float viewMaxY; // xmm13_4
   float v18; // xmm8_4
   int v19; // xmm1_4
@@ -1743,16 +1751,14 @@ void __fastcall Scaleform::GFx::MovieImpl::MakeViewAndPersp3D(Scaleform::Render:
   float v26; // xmm14_4
   __m128 v27; // xmm2
   float v28; // xmm4_4
-  Scaleform::Render::Point3<float> upVec; // [rsp+40h] [rbp-D8h]
-  Scaleform::Render::Point3<float> eyePt; // [rsp+50h] [rbp-C8h]
-  Scaleform::Render::Point3<float> zAxis; // [rsp+60h] [rbp-B8h]
+  Scaleform::Render::Point3<float> upVec; // [rsp+40h] [rbp-D8h] BYREF
+  Scaleform::Render::Point3<float> eyePt; // [rsp+50h] [rbp-C8h] BYREF
+  Scaleform::Render::Point3<float> zAxis; // [rsp+60h] [rbp-B8h] BYREF
 
   v7 = *(float *)&FLOAT_1_0;
-  v8 = matPersp;
-  v9 = frameRect->x2;
+  x2 = frameRect->x2;
   v10 = focalLength;
-  v11 = matView;
-  LODWORD(v12) = COERCE_UNSIGNED_INT(v9 - frameRect->x1) & _xmm;
+  LODWORD(v12) = COERCE_UNSIGNED_INT(x2 - frameRect->x1) & _xmm;
   if ( focalLength == 0.0 )
     fNearZ = *(float *)&FLOAT_1_0;
   else
@@ -1761,20 +1767,20 @@ void __fastcall Scaleform::GFx::MovieImpl::MakeViewAndPersp3D(Scaleform::Render:
   {
     fFarZ = FLOAT_100000_0;
     if ( v12 > 100000.0 )
-      LODWORD(fFarZ) = COERCE_UNSIGNED_INT(v9 - frameRect->x1) & _xmm;
+      LODWORD(fFarZ) = COERCE_UNSIGNED_INT(x2 - frameRect->x1) & _xmm;
   }
   else
   {
     fFarZ = focalLength * 100.0;
   }
-  v15 = projCenter->x;
-  v16 = LODWORD(projCenter->y);
+  x = projCenter->x;
+  y_low = LODWORD(projCenter->y);
   viewMaxY = projCenter->y - frameRect->y1;
   v18 = v12 * 0.5;
   v19 = _xmm[0];
   LODWORD(v20) = COERCE_UNSIGNED_INT(projCenter->x - frameRect->x1) ^ _xmm[0];
-  LODWORD(v21) = COERCE_UNSIGNED_INT(frameRect->y2 - *(float *)&v16) ^ _xmm[0];
-  v22 = v9 - projCenter->x;
+  LODWORD(v21) = COERCE_UNSIGNED_INT(frameRect->y2 - *(float *)&y_low) ^ _xmm[0];
+  v22 = x2 - projCenter->x;
   if ( focalLength == 0.0 )
   {
     if ( fieldOfView > 0.0 )
@@ -1789,50 +1795,66 @@ void __fastcall Scaleform::GFx::MovieImpl::MakeViewAndPersp3D(Scaleform::Render:
       v10 = v18;
     }
   }
-  if ( v11 )
+  if ( matView )
   {
     LODWORD(v24) = LODWORD(fFarZ) ^ v19;
     if ( COERCE_FLOAT(LODWORD(v10) ^ v19) >= COERCE_FLOAT(LODWORD(fFarZ) ^ v19) )
       LODWORD(v24) = LODWORD(v10) ^ v19;
-    eyePt.x = v15;
-    LODWORD(eyePt.y) = v16;
+    eyePt.x = x;
+    LODWORD(eyePt.y) = y_low;
     eyePt.z = v24;
     if ( bInvertY )
       v25 = v7;
     else
       v25 = FLOAT_N1_0;
-    v26 = v15 - v15;
-    *(float *)&v16 = *(float *)&v16 - *(float *)&v16;
+    v26 = x - x;
+    *(float *)&y_low = *(float *)&y_low - *(float *)&y_low;
     upVec.y = v25;
     upVec.x = 0.0;
     upVec.z = 0.0;
-    v27 = (__m128)v16;
-    v27.m128_f32[0] = (float)(*(float *)&v16 * *(float *)&v16) + (float)(v26 * v26);
+    v27 = (__m128)y_low;
+    v27.m128_f32[0] = (float)(*(float *)&y_low * *(float *)&y_low) + (float)(v26 * v26);
     if ( bInvertY )
       LODWORD(v24) ^= v19;
     v27.m128_f32[0] = v27.m128_f32[0] + (float)(v24 * v24);
-    v28 = v7 / COERCE_FLOAT(_mm_sqrt_ps(v27));
+    v28 = v7 / _mm_sqrt_ps(v27).m128_f32[0];
     zAxis.x = v26 * v28;
-    zAxis.y = *(float *)&v16 * v28;
+    zAxis.y = *(float *)&y_low * v28;
     zAxis.z = v24 * v28;
-    Scaleform::Render::Matrix3x4<float>::View(v11, &eyePt, &zAxis, &upVec);
+    Scaleform::Render::Matrix3x4<float>::View(matView, &eyePt, &zAxis, &upVec);
   }
-  if ( v8 )
+  if ( matPersp )
   {
     if ( fieldOfView > 0.0 )
     {
       if ( bInvertY )
-        Scaleform::Render::Matrix4x4<float>::PerspectiveOffCenterLH(v8, v10, v20, v22, v21, viewMaxY, fNearZ, fFarZ);
+        Scaleform::Render::Matrix4x4<float>::PerspectiveOffCenterLH(
+          matPersp,
+          v10,
+          v20,
+          v22,
+          v21,
+          viewMaxY,
+          fNearZ,
+          fFarZ);
       else
-        Scaleform::Render::Matrix4x4<float>::PerspectiveOffCenterRH(v8, v10, v20, v22, v21, viewMaxY, fNearZ, fFarZ);
+        Scaleform::Render::Matrix4x4<float>::PerspectiveOffCenterRH(
+          matPersp,
+          v10,
+          v20,
+          v22,
+          v21,
+          viewMaxY,
+          fNearZ,
+          fFarZ);
     }
     else if ( bInvertY )
     {
-      Scaleform::Render::Matrix4x4<float>::OrthoOffCenterLH(v8, v20, v22, v21, viewMaxY, fNearZ, fFarZ);
+      Scaleform::Render::Matrix4x4<float>::OrthoOffCenterLH(matPersp, v20, v22, v21, viewMaxY, fNearZ, fFarZ);
     }
     else
     {
-      Scaleform::Render::Matrix4x4<float>::OrthoOffCenterRH(v8, v20, v22, v21, viewMaxY, fNearZ, fFarZ);
+      Scaleform::Render::Matrix4x4<float>::OrthoOffCenterRH(matPersp, v20, v22, v21, viewMaxY, fNearZ, fFarZ);
     }
   }
 }
@@ -1841,12 +1863,10 @@ void __fastcall Scaleform::GFx::MovieImpl::MakeViewAndPersp3D(Scaleform::Render:
 // RVA: 0x918940
 void __fastcall Scaleform::GFx::MovieImpl::UpdateViewAndPerspective(Scaleform::GFx::MovieImpl *this)
 {
-  Scaleform::GFx::MovieImpl *v1; // rdi
   unsigned int v2; // ebx
   __int64 v3; // rcx
-  Scaleform::GFx::InteractiveObject *v4; // rcx
+  Scaleform::GFx::InteractiveObject *pObject; // rcx
 
-  v1 = this;
   if ( this->VisibleFrameRect.x1 != this->VisibleFrameRect.x2 || this->VisibleFrameRect.y1 != this->VisibleFrameRect.y2 )
   {
     v2 = 0;
@@ -1855,210 +1875,181 @@ void __fastcall Scaleform::GFx::MovieImpl::UpdateViewAndPerspective(Scaleform::G
       v3 = 0i64;
       do
       {
-        v4 = v1->MovieLevels.Data.Data[v3].pSprite.pObject;
-        if ( v4 )
-          ((void (*)(void))v4->vfptr[12].__vecDelDtor)();
+        pObject = this->MovieLevels.Data.Data[v3].pSprite.pObject;
+        if ( pObject )
+          ((void (__fastcall *)(Scaleform::GFx::InteractiveObject *))pObject->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[12].__vecDelDtor)(pObject);
         v3 = ++v2;
       }
-      while ( v2 < v1->MovieLevels.Data.Size );
+      while ( v2 < this->MovieLevels.Data.Size );
     }
   }
 }
 
 // File Line: 1273
 // RVA: 0x8E1680
-void __fastcall Scaleform::GFx::MovieImpl::GetViewMatrix3D(Scaleform::GFx::MovieImpl *this, Scaleform::Render::Matrix3x4<float> *viewMat)
+void __fastcall Scaleform::GFx::MovieImpl::GetViewMatrix3D(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::Render::Matrix3x4<float> *viewMat)
 {
-  Scaleform::Render::Matrix3x4<float> *v2; // rbx
   void *v3; // rax
 
-  v2 = viewMat;
-  v3 = this->pASMovieRoot.pObject->vfptr[16].__vecDelDtor((Scaleform::RefCountImplCore *)this->pASMovieRoot.pObject, 0);
+  v3 = this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[16].__vecDelDtor(this->pASMovieRoot.pObject, 0i64);
   if ( v3 )
     (*(void (__fastcall **)(void *, Scaleform::Render::Matrix3x4<float> *, _QWORD))(*(_QWORD *)v3 + 72i64))(
       v3,
-      v2,
+      viewMat,
       0i64);
 }
 
 // File Line: 1281
 // RVA: 0x90ECB0
-void __fastcall Scaleform::GFx::MovieImpl::SetViewMatrix3D(Scaleform::GFx::MovieImpl *this, Scaleform::Render::Matrix3x4<float> *viewMat)
+void __fastcall Scaleform::GFx::MovieImpl::SetViewMatrix3D(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::Render::Matrix3x4<float> *viewMat)
 {
-  Scaleform::Render::Matrix3x4<float> *v2; // rbx
   void *v3; // rax
 
-  v2 = viewMat;
-  v3 = this->pASMovieRoot.pObject->vfptr[16].__vecDelDtor((Scaleform::RefCountImplCore *)this->pASMovieRoot.pObject, 0);
+  v3 = this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[16].__vecDelDtor(this->pASMovieRoot.pObject, 0i64);
   if ( v3 )
-    (*(void (__fastcall **)(void *, Scaleform::Render::Matrix3x4<float> *))(*(_QWORD *)v3 + 80i64))(v3, v2);
+    (*(void (__fastcall **)(void *, Scaleform::Render::Matrix3x4<float> *))(*(_QWORD *)v3 + 80i64))(v3, viewMat);
 }
 
 // File Line: 1289
 // RVA: 0x8DC510
-void __fastcall Scaleform::GFx::MovieImpl::GetProjectionMatrix3D(Scaleform::GFx::MovieImpl *this, Scaleform::Render::Matrix4x4<float> *projMat)
+void __fastcall Scaleform::GFx::MovieImpl::GetProjectionMatrix3D(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::Render::Matrix4x4<float> *projMat)
 {
-  Scaleform::Render::Matrix4x4<float> *v2; // rbx
   void *v3; // rax
 
-  v2 = projMat;
-  v3 = this->pASMovieRoot.pObject->vfptr[16].__vecDelDtor((Scaleform::RefCountImplCore *)this->pASMovieRoot.pObject, 0);
+  v3 = this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[16].__vecDelDtor(this->pASMovieRoot.pObject, 0i64);
   if ( v3 )
     (*(void (__fastcall **)(void *, Scaleform::Render::Matrix4x4<float> *, _QWORD))(*(_QWORD *)v3 + 48i64))(
       v3,
-      v2,
+      projMat,
       0i64);
 }
 
 // File Line: 1297
 // RVA: 0x90A100
-void __fastcall Scaleform::GFx::MovieImpl::SetProjectionMatrix3D(Scaleform::GFx::MovieImpl *this, Scaleform::Render::Matrix4x4<float> *projMat)
+void __fastcall Scaleform::GFx::MovieImpl::SetProjectionMatrix3D(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::Render::Matrix4x4<float> *projMat)
 {
-  Scaleform::Render::Matrix4x4<float> *v2; // rbx
   void *v3; // rax
 
-  v2 = projMat;
-  v3 = this->pASMovieRoot.pObject->vfptr[16].__vecDelDtor((Scaleform::RefCountImplCore *)this->pASMovieRoot.pObject, 0);
+  v3 = this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[16].__vecDelDtor(this->pASMovieRoot.pObject, 0i64);
   if ( v3 )
-    (*(void (__fastcall **)(void *, Scaleform::Render::Matrix4x4<float> *))(*(_QWORD *)v3 + 56i64))(v3, v2);
+    (*(void (__fastcall **)(void *, Scaleform::Render::Matrix4x4<float> *))(*(_QWORD *)v3 + 56i64))(v3, projMat);
 }
 
 // File Line: 1304
 // RVA: 0x8E1790
-void __fastcall Scaleform::GFx::MovieImpl::GetViewport(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::Viewport *pviewDesc)
+void __fastcall Scaleform::GFx::MovieImpl::GetViewport(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::Viewport *pviewDesc)
 {
-  pviewDesc->BufferWidth = this->mViewport.BufferWidth;
-  pviewDesc->BufferHeight = this->mViewport.BufferHeight;
-  pviewDesc->Left = this->mViewport.Left;
-  pviewDesc->Top = this->mViewport.Top;
-  pviewDesc->Width = this->mViewport.Width;
-  pviewDesc->Height = this->mViewport.Height;
-  pviewDesc->ScissorLeft = this->mViewport.ScissorLeft;
-  pviewDesc->ScissorTop = this->mViewport.ScissorTop;
-  pviewDesc->ScissorWidth = this->mViewport.ScissorWidth;
-  pviewDesc->ScissorHeight = this->mViewport.ScissorHeight;
-  pviewDesc->Flags = this->mViewport.Flags;
-  pviewDesc->Scale = this->mViewport.Scale;
-  pviewDesc->AspectRatio = this->mViewport.AspectRatio;
+  *pviewDesc = this->mViewport;
 }
 
 // File Line: 1309
 // RVA: 0x90ECF0
-void __fastcall Scaleform::GFx::MovieImpl::SetViewScaleMode(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::Movie::ScaleModeType scaleMode)
+void __fastcall Scaleform::GFx::MovieImpl::SetViewScaleMode(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::Movie::ScaleModeType scaleMode)
 {
-  Scaleform::GFx::MovieImpl *v2; // rbx
-  Scaleform::GFx::UserEventHandler *v3; // rcx
-  Scaleform::GFx::Movie::ScaleModeType v4; // edi
-  int v5; // xmm0_4
-  int v6; // xmm1_4
-  int v7; // eax
-  int v8; // eax
-  int v9; // [rsp+20h] [rbp-48h]
-  int v10; // [rsp+24h] [rbp-44h]
-  int v11; // [rsp+28h] [rbp-40h]
-  int v12; // [rsp+2Ch] [rbp-3Ch]
-  int v13; // [rsp+30h] [rbp-38h]
-  int v14; // [rsp+34h] [rbp-34h]
-  int v15; // [rsp+38h] [rbp-30h]
-  int v16; // [rsp+3Ch] [rbp-2Ch]
-  int v17; // [rsp+40h] [rbp-28h]
-  int v18; // [rsp+44h] [rbp-24h]
-  unsigned int v19; // [rsp+48h] [rbp-20h]
-  int v20; // [rsp+4Ch] [rbp-1Ch]
-  int v21; // [rsp+50h] [rbp-18h]
-  int v22; // [rsp+70h] [rbp+8h]
-  char v23; // [rsp+74h] [rbp+Ch]
+  Scaleform::GFx::UserEventHandler *pObject; // rcx
+  float Scale; // xmm0_4
+  float AspectRatio; // xmm1_4
+  int BufferHeight; // eax
+  int ScissorHeight; // eax
+  int v9[18]; // [rsp+20h] [rbp-48h] BYREF
+  int v10; // [rsp+70h] [rbp+8h] BYREF
+  char v11; // [rsp+74h] [rbp+Ch]
 
-  v2 = this;
-  v3 = this->pUserEventHandler.pObject;
-  v4 = scaleMode;
-  if ( v3 )
+  pObject = this->pUserEventHandler.pObject;
+  if ( pObject )
   {
-    v23 = 0;
-    v22 = 25 - (scaleMode != 0);
-    ((void (__fastcall *)(Scaleform::GFx::UserEventHandler *, Scaleform::GFx::MovieImpl *, int *))v3->vfptr[1].__vecDelDtor)(
-      v3,
-      v2,
-      &v22);
+    v11 = 0;
+    v10 = 25 - (scaleMode != SM_NoScale);
+    ((void (__fastcall *)(Scaleform::GFx::UserEventHandler *, Scaleform::GFx::MovieImpl *, int *))pObject->vfptr[1].__vecDelDtor)(
+      pObject,
+      this,
+      &v10);
   }
-  v2->ViewScaleMode = v4;
-  v5 = LODWORD(v2->mViewport.Scale);
-  v6 = LODWORD(v2->mViewport.AspectRatio);
-  v9 = v2->mViewport.BufferWidth;
-  v7 = v2->mViewport.BufferHeight;
-  v20 = v5;
-  v21 = v6;
-  v10 = v7;
-  v11 = v2->mViewport.Left;
-  v12 = v2->mViewport.Top;
-  v13 = v2->mViewport.Width;
-  v14 = v2->mViewport.Height;
-  v19 = v2->mViewport.Flags;
-  v15 = v2->mViewport.ScissorLeft;
-  v16 = v2->mViewport.ScissorTop;
-  v17 = v2->mViewport.ScissorWidth;
-  v8 = v2->mViewport.ScissorHeight;
-  ++v2->mViewport.Flags;
-  v18 = v8;
-  v2->vfptr[12].__vecDelDtor((Scaleform::RefCountImplCore *)&v2->vfptr, (unsigned int)&v9);
+  this->ViewScaleMode = scaleMode;
+  Scale = this->mViewport.Scale;
+  AspectRatio = this->mViewport.AspectRatio;
+  v9[0] = this->mViewport.BufferWidth;
+  BufferHeight = this->mViewport.BufferHeight;
+  *(float *)&v9[11] = Scale;
+  *(float *)&v9[12] = AspectRatio;
+  v9[1] = BufferHeight;
+  v9[2] = this->mViewport.Left;
+  v9[3] = this->mViewport.Top;
+  v9[4] = this->mViewport.Width;
+  v9[5] = this->mViewport.Height;
+  v9[10] = this->mViewport.Flags;
+  v9[6] = this->mViewport.ScissorLeft;
+  v9[7] = this->mViewport.ScissorTop;
+  v9[8] = this->mViewport.ScissorWidth;
+  ScissorHeight = this->mViewport.ScissorHeight;
+  ++this->mViewport.Flags;
+  v9[9] = ScissorHeight;
+  this->Scaleform::GFx::Movie::Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr[12].__vecDelDtor(
+    this,
+    (unsigned int)v9);
 }
 
 // File Line: 1321
 // RVA: 0x90E8E0
-void __fastcall Scaleform::GFx::MovieImpl::SetViewAlignment(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::Movie::AlignType align)
+void __fastcall Scaleform::GFx::MovieImpl::SetViewAlignment(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::Movie::AlignType align)
 {
-  float v2; // xmm0_4
-  float v3; // xmm1_4
-  int v4; // eax
-  int v5; // eax
-  int v6; // [rsp+20h] [rbp-48h]
-  int v7; // [rsp+24h] [rbp-44h]
-  int v8; // [rsp+28h] [rbp-40h]
-  int v9; // [rsp+2Ch] [rbp-3Ch]
-  int v10; // [rsp+30h] [rbp-38h]
-  int v11; // [rsp+34h] [rbp-34h]
-  int v12; // [rsp+38h] [rbp-30h]
-  int v13; // [rsp+3Ch] [rbp-2Ch]
-  int v14; // [rsp+40h] [rbp-28h]
-  int v15; // [rsp+44h] [rbp-24h]
-  unsigned int v16; // [rsp+48h] [rbp-20h]
-  float v17; // [rsp+4Ch] [rbp-1Ch]
-  float v18; // [rsp+50h] [rbp-18h]
+  float Scale; // xmm0_4
+  float AspectRatio; // xmm1_4
+  int BufferHeight; // eax
+  int ScissorHeight; // eax
+  int v6[18]; // [rsp+20h] [rbp-48h] BYREF
 
   this->ViewAlignment = align;
-  v2 = this->mViewport.Scale;
-  v3 = this->mViewport.AspectRatio;
-  v6 = this->mViewport.BufferWidth;
-  v4 = this->mViewport.BufferHeight;
-  v17 = v2;
-  v18 = v3;
-  v7 = v4;
-  v8 = this->mViewport.Left;
-  v9 = this->mViewport.Top;
-  v10 = this->mViewport.Width;
-  v11 = this->mViewport.Height;
-  v16 = this->mViewport.Flags;
-  v12 = this->mViewport.ScissorLeft;
-  v13 = this->mViewport.ScissorTop;
-  v14 = this->mViewport.ScissorWidth;
-  v5 = this->mViewport.ScissorHeight;
+  Scale = this->mViewport.Scale;
+  AspectRatio = this->mViewport.AspectRatio;
+  v6[0] = this->mViewport.BufferWidth;
+  BufferHeight = this->mViewport.BufferHeight;
+  *(float *)&v6[11] = Scale;
+  *(float *)&v6[12] = AspectRatio;
+  v6[1] = BufferHeight;
+  v6[2] = this->mViewport.Left;
+  v6[3] = this->mViewport.Top;
+  v6[4] = this->mViewport.Width;
+  v6[5] = this->mViewport.Height;
+  v6[10] = this->mViewport.Flags;
+  v6[6] = this->mViewport.ScissorLeft;
+  v6[7] = this->mViewport.ScissorTop;
+  v6[8] = this->mViewport.ScissorWidth;
+  ScissorHeight = this->mViewport.ScissorHeight;
   ++this->mViewport.Flags;
-  v15 = v5;
-  this->vfptr[12].__vecDelDtor((Scaleform::RefCountImplCore *)this, (unsigned int)&v6);
+  v6[9] = ScissorHeight;
+  this->Scaleform::GFx::Movie::Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr[12].__vecDelDtor(
+    this,
+    (unsigned int)v6);
 }
 
 // File Line: 1332
 // RVA: 0x8DF340
-Scaleform::GFx::InteractiveObject *__fastcall Scaleform::GFx::MovieImpl::GetTopMostEntity(Scaleform::GFx::MovieImpl *this, Scaleform::Render::Point<float> *mousePos, unsigned int controllerIdx, bool testAll, Scaleform::GFx::InteractiveObject *ignoreMC)
+Scaleform::GFx::InteractiveObject *__fastcall Scaleform::GFx::MovieImpl::GetTopMostEntity(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::Render::Point<float> *mousePos,
+        unsigned int controllerIdx,
+        bool testAll,
+        Scaleform::GFx::InteractiveObject *ignoreMC)
 {
-  Scaleform::Render::Point<float> *v5; // r15
-  unsigned int v6; // er13
-  Scaleform::GFx::MovieImpl *v7; // r14
-  bool v8; // r12
-  float v9; // xmm2_4
+  float x; // xmm2_4
   float v10; // xmm1_4
   float v11; // xmm0_4
-  Scaleform::RefCountImplCoreVtbl *v12; // rax
+  Scaleform::RefCountImplCoreVtbl *vfptr; // rax
   int v13; // xmm1_4
   int v14; // xmm0_4
   int v15; // xmm1_4
@@ -2089,60 +2080,31 @@ Scaleform::GFx::InteractiveObject *__fastcall Scaleform::GFx::MovieImpl::GetTopM
   int v40; // xmm1_4
   int v41; // eax
   __int64 v42; // rsi
-  Scaleform::GFx::InteractiveObject *v43; // rdi
-  Scaleform::GFx::InteractiveObject *v44; // rbx
+  Scaleform::GFx::InteractiveObject *pObject; // rdi
+  Scaleform::GFx::InteractiveObject *pParent; // rbx
   Scaleform::GFx::DisplayObjectBase *v45; // rcx
   float *v46; // rax
-  __int64 v47; // kr00_8
-  __int64 v48; // kr08_8
-  float v49; // xmm0_4
-  float v50; // xmm2_4
-  _OWORD *v51; // rax
-  __int64 v52; // rdi
-  signed __int64 v53; // rbx
-  __int64 v54; // rcx
-  Scaleform::Render::Matrix2x4<float> pmat; // [rsp+20h] [rbp-B1h]
-  float v57; // [rsp+40h] [rbp-91h]
-  int v58; // [rsp+44h] [rbp-8Dh]
-  int v59; // [rsp+48h] [rbp-89h]
-  int v60; // [rsp+4Ch] [rbp-85h]
-  int v61; // [rsp+50h] [rbp-81h]
-  int v62; // [rsp+54h] [rbp-7Dh]
-  int v63; // [rsp+58h] [rbp-79h]
-  int v64; // [rsp+5Ch] [rbp-75h]
-  int v65; // [rsp+60h] [rbp-71h]
-  int v66; // [rsp+64h] [rbp-6Dh]
-  int v67; // [rsp+68h] [rbp-69h]
-  int v68; // [rsp+6Ch] [rbp-65h]
-  float Dst; // [rsp+70h] [rbp-61h]
-  int v70; // [rsp+74h] [rbp-5Dh]
-  int v71; // [rsp+78h] [rbp-59h]
-  int v72; // [rsp+7Ch] [rbp-55h]
-  int v73; // [rsp+80h] [rbp-51h]
-  int v74; // [rsp+84h] [rbp-4Dh]
-  int v75; // [rsp+88h] [rbp-49h]
-  int v76; // [rsp+8Ch] [rbp-45h]
-  int v77; // [rsp+90h] [rbp-41h]
-  int v78; // [rsp+94h] [rbp-3Dh]
-  int v79; // [rsp+98h] [rbp-39h]
-  int v80; // [rsp+9Ch] [rbp-35h]
-  int v81; // [rsp+A0h] [rbp-31h]
-  int v82; // [rsp+A4h] [rbp-2Dh]
-  int v83; // [rsp+A8h] [rbp-29h]
-  int v84; // [rsp+ACh] [rbp-25h]
-  __int64 v85; // [rsp+B0h] [rbp-21h]
-  Scaleform::GFx::InteractiveObject *v86; // [rsp+C0h] [rbp-11h]
-  __int64 v87; // [rsp+C8h] [rbp-9h]
-  unsigned int v88; // [rsp+D0h] [rbp-1h]
-  bool v89; // [rsp+D4h] [rbp+3h]
-  __int64 v90; // [rsp+130h] [rbp+5Fh]
-  Scaleform::Render::Point<float> result; // [rsp+138h] [rbp+67h]
+  float v47; // xmm3_4
+  float v48; // xmm4_4
+  float v49; // xmm5_4
+  float v50; // xmm6_4
+  float v51; // xmm0_4
+  float v52; // xmm2_4
+  __int64 Size_low; // rdi
+  __int64 i; // rbx
+  __int64 v55; // rcx
+  Scaleform::Render::Matrix2x4<float> pmat; // [rsp+20h] [rbp-B1h] BYREF
+  int v58[12]; // [rsp+40h] [rbp-91h] BYREF
+  int Dst[16]; // [rsp+70h] [rbp-61h] BYREF
+  __int64 v60[2]; // [rsp+B0h] [rbp-21h] BYREF
+  Scaleform::GFx::InteractiveObject *v61; // [rsp+C0h] [rbp-11h]
+  __int64 v62; // [rsp+C8h] [rbp-9h]
+  unsigned int v63; // [rsp+D0h] [rbp-1h]
+  bool v64; // [rsp+D4h] [rbp+3h]
+  __int64 v65; // [rsp+130h] [rbp+5Fh]
+  Scaleform::Render::Point<float> result; // [rsp+138h] [rbp+67h] BYREF
 
-  v5 = mousePos;
-  v6 = controllerIdx;
-  v7 = this;
-  v8 = testAll;
-  v9 = mousePos->x;
+  x = mousePos->x;
   v10 = this->VisibleFrameRect.x2 - this->VisibleFrameRect.x1;
   v11 = this->ViewOffsetX * 20.0;
   LODWORD(this->ScreenToWorld.Sy) = COERCE_UNSIGNED_INT(
@@ -2150,122 +2112,120 @@ Scaleform::GFx::InteractiveObject *__fastcall Scaleform::GFx::MovieImpl::GetTopM
                                                     / (float)(this->VisibleFrameRect.y2 - this->VisibleFrameRect.y1))
                                             * 2.0)
                                     - 1.0) ^ _xmm[0];
-  this->ScreenToWorld.Sx = (float)((float)((float)(v9 - v11) / v10) * 2.0) - 1.0;
-  memset(&Dst, 0, 0x40ui64);
-  v12 = v7->vfptr;
-  Dst = 1.0;
-  v74 = 1065353216;
-  v79 = 1065353216;
-  v84 = 1065353216;
-  v12[62].__vecDelDtor((Scaleform::RefCountImplCore *)&v7->vfptr, (unsigned int)&Dst);
-  v13 = v70;
-  v7->ScreenToWorld.MatProj.M[0][0] = Dst;
-  v14 = v71;
-  LODWORD(v7->ScreenToWorld.MatProj.M[0][1]) = v13;
-  v15 = v72;
-  LODWORD(v7->ScreenToWorld.MatProj.M[0][2]) = v14;
-  v16 = v73;
-  LODWORD(v7->ScreenToWorld.MatProj.M[0][3]) = v15;
-  v17 = v74;
-  LODWORD(v7->ScreenToWorld.MatProj.M[1][0]) = v16;
-  v18 = v75;
-  LODWORD(v7->ScreenToWorld.MatProj.M[1][1]) = v17;
-  v19 = v76;
-  LODWORD(v7->ScreenToWorld.MatProj.M[1][2]) = v18;
-  v20 = v77;
-  LODWORD(v7->ScreenToWorld.MatProj.M[1][3]) = v19;
-  v21 = v78;
-  LODWORD(v7->ScreenToWorld.MatProj.M[2][0]) = v20;
-  v22 = v79;
-  LODWORD(v7->ScreenToWorld.MatProj.M[2][1]) = v21;
-  v23 = v80;
-  LODWORD(v7->ScreenToWorld.MatProj.M[2][2]) = v22;
-  v24 = v81;
-  LODWORD(v7->ScreenToWorld.MatProj.M[2][3]) = v23;
-  v25 = v82;
-  LODWORD(v7->ScreenToWorld.MatProj.M[3][0]) = v24;
-  v26 = v83;
-  LODWORD(v7->ScreenToWorld.MatProj.M[3][1]) = v25;
-  v27 = v84;
-  LODWORD(v7->ScreenToWorld.MatProj.M[3][2]) = v26;
-  LODWORD(v7->ScreenToWorld.MatProj.M[3][3]) = v27;
-  memset(&v57, 0, 0x30ui64);
-  v28 = v7->vfptr;
-  v57 = 1.0;
-  v62 = 1065353216;
-  v67 = 1065353216;
-  v28[60].__vecDelDtor((Scaleform::RefCountImplCore *)&v7->vfptr, (unsigned int)&v57);
-  v29 = v58;
+  this->ScreenToWorld.Sx = (float)((float)((float)(x - v11) / v10) * 2.0) - 1.0;
+  memset(Dst, 0, sizeof(Dst));
+  vfptr = this->Scaleform::GFx::Movie::Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr;
+  Dst[0] = 1065353216;
+  Dst[5] = 1065353216;
+  Dst[10] = 1065353216;
+  Dst[15] = 1065353216;
+  vfptr[62].__vecDelDtor(this, (unsigned int)Dst);
+  v13 = Dst[1];
+  LODWORD(this->ScreenToWorld.MatProj.M[0][0]) = Dst[0];
+  v14 = Dst[2];
+  LODWORD(this->ScreenToWorld.MatProj.M[0][1]) = v13;
+  v15 = Dst[3];
+  LODWORD(this->ScreenToWorld.MatProj.M[0][2]) = v14;
+  v16 = Dst[4];
+  LODWORD(this->ScreenToWorld.MatProj.M[0][3]) = v15;
+  v17 = Dst[5];
+  LODWORD(this->ScreenToWorld.MatProj.M[1][0]) = v16;
+  v18 = Dst[6];
+  LODWORD(this->ScreenToWorld.MatProj.M[1][1]) = v17;
+  v19 = Dst[7];
+  LODWORD(this->ScreenToWorld.MatProj.M[1][2]) = v18;
+  v20 = Dst[8];
+  LODWORD(this->ScreenToWorld.MatProj.M[1][3]) = v19;
+  v21 = Dst[9];
+  LODWORD(this->ScreenToWorld.MatProj.M[2][0]) = v20;
+  v22 = Dst[10];
+  LODWORD(this->ScreenToWorld.MatProj.M[2][1]) = v21;
+  v23 = Dst[11];
+  LODWORD(this->ScreenToWorld.MatProj.M[2][2]) = v22;
+  v24 = Dst[12];
+  LODWORD(this->ScreenToWorld.MatProj.M[2][3]) = v23;
+  v25 = Dst[13];
+  LODWORD(this->ScreenToWorld.MatProj.M[3][0]) = v24;
+  v26 = Dst[14];
+  LODWORD(this->ScreenToWorld.MatProj.M[3][1]) = v25;
+  v27 = Dst[15];
+  LODWORD(this->ScreenToWorld.MatProj.M[3][2]) = v26;
+  LODWORD(this->ScreenToWorld.MatProj.M[3][3]) = v27;
+  memset(v58, 0, sizeof(v58));
+  v28 = this->Scaleform::GFx::Movie::Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr;
+  v58[0] = 1065353216;
+  v58[5] = 1065353216;
+  v58[10] = 1065353216;
+  v28[60].__vecDelDtor(this, (unsigned int)v58);
+  v29 = v58[1];
   v30 = 0i64;
-  v90 = 0i64;
-  v7->ScreenToWorld.MatView.M[0][0] = v57;
-  v31 = v59;
-  LODWORD(v7->ScreenToWorld.MatView.M[0][1]) = v29;
-  v32 = v60;
-  LODWORD(v7->ScreenToWorld.MatView.M[0][2]) = v31;
-  v33 = v61;
-  LODWORD(v7->ScreenToWorld.MatView.M[0][3]) = v32;
-  v34 = v62;
-  LODWORD(v7->ScreenToWorld.MatView.M[1][0]) = v33;
-  v35 = v63;
-  LODWORD(v7->ScreenToWorld.MatView.M[1][1]) = v34;
-  v36 = v64;
-  LODWORD(v7->ScreenToWorld.MatView.M[1][2]) = v35;
-  v37 = v65;
-  LODWORD(v7->ScreenToWorld.MatView.M[1][3]) = v36;
-  v38 = v66;
-  LODWORD(v7->ScreenToWorld.MatView.M[2][0]) = v37;
-  v39 = v67;
-  LODWORD(v7->ScreenToWorld.MatView.M[2][1]) = v38;
-  v40 = v68;
-  LODWORD(v7->ScreenToWorld.MatView.M[2][2]) = v39;
-  LODWORD(v7->ScreenToWorld.MatView.M[2][3]) = v40;
-  v41 = LODWORD(v7->TopmostLevelCharacters.Data.Size) - 1;
+  v65 = 0i64;
+  LODWORD(this->ScreenToWorld.MatView.M[0][0]) = v58[0];
+  v31 = v58[2];
+  LODWORD(this->ScreenToWorld.MatView.M[0][1]) = v29;
+  v32 = v58[3];
+  LODWORD(this->ScreenToWorld.MatView.M[0][2]) = v31;
+  v33 = v58[4];
+  LODWORD(this->ScreenToWorld.MatView.M[0][3]) = v32;
+  v34 = v58[5];
+  LODWORD(this->ScreenToWorld.MatView.M[1][0]) = v33;
+  v35 = v58[6];
+  LODWORD(this->ScreenToWorld.MatView.M[1][1]) = v34;
+  v36 = v58[7];
+  LODWORD(this->ScreenToWorld.MatView.M[1][2]) = v35;
+  v37 = v58[8];
+  LODWORD(this->ScreenToWorld.MatView.M[1][3]) = v36;
+  v38 = v58[9];
+  LODWORD(this->ScreenToWorld.MatView.M[2][0]) = v37;
+  v39 = v58[10];
+  LODWORD(this->ScreenToWorld.MatView.M[2][1]) = v38;
+  v40 = v58[11];
+  LODWORD(this->ScreenToWorld.MatView.M[2][2]) = v39;
+  LODWORD(this->ScreenToWorld.MatView.M[2][3]) = v40;
+  v41 = LODWORD(this->TopmostLevelCharacters.Data.Size) - 1;
   v42 = v41;
   if ( v41 >= 0 )
   {
     while ( 1 )
     {
-      v43 = v7->TopmostLevelCharacters.Data.Data[v42].pObject;
-      v44 = v43->pParent;
-      if ( v44 )
+      pObject = this->TopmostLevelCharacters.Data.Data[v42].pObject;
+      pParent = pObject->pParent;
+      if ( pParent )
       {
         *(_OWORD *)&pmat.M[0][0] = _xmm;
         *(__m128 *)&pmat.M[1][0] = _xmm;
-        v45 = v44->pParentChar;
+        v45 = pParent->pParent;
         if ( v45 )
         {
           Scaleform::GFx::DisplayObjectBase::GetWorldMatrix(v45, &pmat);
-          v46 = (float *)((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))v44->vfptr[2].__vecDelDtor)(v44);
-          v47 = *(_QWORD *)&pmat.M[0][0];
-          v48 = *(_QWORD *)&pmat.M[1][0];
+          v46 = (float *)((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))pParent->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[2].__vecDelDtor)(pParent);
+          v47 = pmat.M[0][0];
+          v48 = pmat.M[0][1];
+          v49 = pmat.M[1][0];
+          v50 = pmat.M[1][1];
           pmat.M[0][0] = (float)(pmat.M[0][1] * v46[4]) + (float)(pmat.M[0][0] * *v46);
           pmat.M[1][0] = (float)(pmat.M[1][1] * v46[4]) + (float)(pmat.M[1][0] * *v46);
-          pmat.M[0][1] = (float)(*(float *)&v47 * v46[1]) + (float)(pmat.M[0][1] * v46[5]);
-          v49 = pmat.M[1][1] * v46[5];
-          v50 = *(float *)&v48 * v46[1];
+          pmat.M[0][1] = (float)(v47 * v46[1]) + (float)(pmat.M[0][1] * v46[5]);
+          v51 = pmat.M[1][1] * v46[5];
+          v52 = v49 * v46[1];
           pmat.M[0][2] = 0.0;
-          *(_QWORD *)&pmat.M[1][1] = COERCE_UNSIGNED_INT(v50 + v49);
-          pmat.M[0][3] = pmat.M[0][3]
-                       + (float)((float)(*((float *)&v47 + 1) * v46[7]) + (float)(*(float *)&v47 * v46[3]));
-          pmat.M[1][3] = pmat.M[1][3]
-                       + (float)((float)(*((float *)&v48 + 1) * v46[7]) + (float)(*(float *)&v48 * v46[3]));
+          *(_QWORD *)&pmat.M[1][1] = COERCE_UNSIGNED_INT(v52 + v51);
+          pmat.M[0][3] = pmat.M[0][3] + (float)((float)(v48 * v46[7]) + (float)(v47 * v46[3]));
+          pmat.M[1][3] = pmat.M[1][3] + (float)((float)(v50 * v46[7]) + (float)(v49 * v46[3]));
         }
         else
         {
-          v51 = (_OWORD *)((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))v44->vfptr[2].__vecDelDtor)(v44);
-          *(_OWORD *)&pmat.M[0][0] = *v51;
-          *(_OWORD *)&pmat.M[1][0] = v51[1];
+          pmat = *(Scaleform::Render::Matrix2x4<float> *)((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))pParent->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[2].__vecDelDtor)(pParent);
         }
-        Scaleform::Render::Matrix2x4<float>::TransformByInverse(&pmat, &result, v5);
-        v87 = 0i64;
-        v86 = ignoreMC;
-        v89 = v8;
-        v88 = v6;
-        if ( ((unsigned int (__fastcall *)(Scaleform::GFx::InteractiveObject *, Scaleform::Render::Point<float> *, __int64 *))v43->vfptr[64].__vecDelDtor)(
-               v43,
+        Scaleform::Render::Matrix2x4<float>::TransformByInverse(&pmat, &result, mousePos);
+        v62 = 0i64;
+        v61 = ignoreMC;
+        v64 = testAll;
+        v63 = controllerIdx;
+        if ( ((unsigned int (__fastcall *)(Scaleform::GFx::InteractiveObject *, Scaleform::Render::Point<float> *, __int64 *))pObject->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[64].__vecDelDtor)(
+               pObject,
                &result,
-               &v85) == 1 )
+               v60) == 1 )
           break;
       }
       if ( --v42 < 0 )
@@ -2274,178 +2234,175 @@ Scaleform::GFx::InteractiveObject *__fastcall Scaleform::GFx::MovieImpl::GetTopM
         goto LABEL_9;
       }
     }
-    v30 = v85;
-    v90 = v85;
-    if ( v85 )
+    v30 = v60[0];
+    v65 = v60[0];
+    if ( v60[0] )
       return (Scaleform::GFx::InteractiveObject *)v30;
   }
 LABEL_9:
-  v52 = SLODWORD(v7->MovieLevels.Data.Size);
-  if ( v52 <= 0 )
+  Size_low = SLODWORD(this->MovieLevels.Data.Size);
+  if ( Size_low <= 0 )
     return (Scaleform::GFx::InteractiveObject *)v30;
-  v53 = 16 * v52 - 16;
-  while ( 1 )
+  for ( i = 16 * Size_low - 16; ; i -= 16i64 )
   {
-    v54 = *(__int64 *)((char *)&v7->MovieLevels.Data.Data->pSprite.pObject + v53);
-    v87 = 0i64;
-    v86 = ignoreMC;
-    v89 = v8;
-    v88 = v6;
-    if ( (*(unsigned int (__fastcall **)(__int64, Scaleform::Render::Point<float> *, __int64 *))(*(_QWORD *)v54 + 512i64))(
-           v54,
-           v5,
-           &v85) == 1 )
+    v55 = *(__int64 *)((char *)&this->MovieLevels.Data.Data->pSprite.pObject + i);
+    v62 = 0i64;
+    v61 = ignoreMC;
+    v64 = testAll;
+    v63 = controllerIdx;
+    if ( (*(unsigned int (__fastcall **)(__int64, Scaleform::Render::Point<float> *, __int64 *))(*(_QWORD *)v55 + 512i64))(
+           v55,
+           mousePos,
+           v60) == 1 )
       break;
-    --v52;
-    v53 -= 16i64;
-    if ( v52 <= 0 )
-      return (Scaleform::GFx::InteractiveObject *)v90;
+    if ( --Size_low <= 0 )
+      return (Scaleform::GFx::InteractiveObject *)v65;
   }
-  return (Scaleform::GFx::InteractiveObject *)v85;
+  return (Scaleform::GFx::InteractiveObject *)v60[0];
 }
 
 // File Line: 1398
 // RVA: 0x8B4330
-float __usercall Scaleform::GFx::MovieImpl::Advance@<xmm0>(Scaleform::GFx::MovieImpl *this@<rcx>, float deltaT@<xmm1>, unsigned int frameCatchUpCount@<r8d>, bool capture@<r9b>, float a5@<xmm0>)
+float __fastcall Scaleform::GFx::MovieImpl::Advance(
+        Scaleform::GFx::MovieImpl *this,
+        float deltaT,
+        unsigned int frameCatchUpCount,
+        bool capture)
 {
-  float v5; // xmm7_4
-  Scaleform::GFx::MovieImpl *v6; // r13
-  Scaleform::GFx::MovieDefImpl *v8; // rcx
-  Scaleform::GFx::UserEventHandler *v10; // rbx
-  Scaleform::Render::RenderBuffer *v11; // rcx
-  Scaleform::GFx::FSCommandHandler *v12; // rbx
-  Scaleform::Render::RenderBuffer *v13; // rcx
-  Scaleform::GFx::ExternalInterface *v14; // rbx
-  Scaleform::Render::RenderBuffer *v15; // rcx
-  __int64 v16; // rbx
-  Scaleform::RefCountImplCoreVtbl *v17; // rdi
-  Scaleform::Render::RenderBuffer *v18; // rcx
-  Scaleform::Render::RenderBuffer *v19; // r14
-  Scaleform::Render::RenderBuffer *v20; // rsi
-  Scaleform::Render::RenderBuffer *v21; // rdi
-  Scaleform::Render::RenderBuffer *v22; // r15
-  unsigned __int8 v23; // r12
+  float v4; // xmm7_4
+  Scaleform::GFx::MovieDefImpl *pObject; // rcx
+  Scaleform::GFx::UserEventHandler *v9; // rbx
+  Scaleform::Render::RenderBuffer *v10; // rcx
+  Scaleform::GFx::FSCommandHandler *v11; // rbx
+  Scaleform::Render::RenderBuffer *v12; // rcx
+  Scaleform::GFx::ExternalInterface *v13; // rbx
+  Scaleform::Render::RenderBuffer *v14; // rcx
+  __int64 v15; // rbx
+  Scaleform::RefCountImplCoreVtbl *vfptr; // rdi
+  Scaleform::Render::RenderBuffer *v17; // rcx
+  Scaleform::Render::RenderBuffer *v18; // r14
+  Scaleform::Render::RenderBuffer *v19; // rsi
+  Scaleform::Render::RenderBuffer *v20; // rdi
+  Scaleform::Render::RenderBuffer *v21; // r15
+  unsigned __int8 v22; // r12
+  unsigned int Flags; // eax
   unsigned int v24; // eax
-  unsigned int v25; // eax
   Scaleform::GFx::MovieDefRootNode *i; // rbx
-  signed __int64 v27; // rax
-  unsigned int v28; // ebx
-  __int64 v29; // rcx
-  Scaleform::GFx::InteractiveObject *v30; // rcx
-  unsigned __int64 v31; // rax
-  int v32; // ebx
+  Scaleform::ArrayDefaultPolicy *v26; // rax
+  unsigned int v27; // ebx
+  __int64 v28; // rcx
+  Scaleform::GFx::InteractiveObject *v29; // rcx
+  unsigned __int64 Size; // rax
+  int v31; // ebx
+  Scaleform::GFx::InteractiveObject *v32; // rcx
   float v33; // xmm0_4
-  signed __int64 v34; // rcx
-  unsigned __int64 v35; // r12
-  float v36; // xmm13_4
+  unsigned __int64 v34; // rcx
+  unsigned __int64 ProfileTicks; // r12
+  float FrameTime; // xmm13_4
   unsigned __int64 v37; // r15
   float v38; // xmm13_4
-  signed __int64 v39; // rcx
-  signed __int64 v40; // r14
+  unsigned __int64 v39; // rcx
+  __int64 v40; // r14
   int v41; // esi
   unsigned __int64 v42; // rdi
-  Scaleform::ArrayLH<Scaleform::Ptr<Scaleform::GFx::ASIntervalTimerIntf>,327,Scaleform::ArrayDefaultPolicy> *v43; // rbx
+  Scaleform::ArrayLH<Scaleform::Ptr<Scaleform::GFx::ASIntervalTimerIntf>,327,Scaleform::ArrayDefaultPolicy> *p_IntervalTimers; // rbx
   Scaleform::GFx::ASIntervalTimerIntf *v44; // rcx
-  __int128 v45; // xmm2
-  unsigned __int64 v46; // rax
-  unsigned __int64 v47; // r15
+  unsigned __int64 v45; // rax
+  unsigned __int64 v46; // r15
   __int64 j; // rsi
-  Scaleform::GFx::ASIntervalTimerIntf *v49; // rcx
-  Scaleform::Render::RenderBuffer *v50; // rcx
-  float v51; // xmm13_4
-  float v52; // xmm2_4
-  float v53; // xmm0_4
-  unsigned int v54; // edi
-  bool v55; // si
-  float v56; // xmm6_4
+  Scaleform::GFx::ASIntervalTimerIntf *v48; // rcx
+  Scaleform::Render::RenderBuffer *v49; // rcx
+  float v50; // xmm13_4
+  float TimeRemainder; // xmm2_4
+  float v52; // xmm0_4
+  int v53; // edi
+  bool v54; // si
+  float v55; // xmm6_4
+  float v56; // xmm0_4
   float v57; // xmm0_4
-  float v58; // xmm0_4
-  float v59; // xmm2_4
-  Scaleform::RefCountNTSImpl *v60; // rbx
-  Scaleform::RefCountNTSImplCoreVtbl *v61; // rdi
-  __int64 v62; // rcx
-  __int64 v63; // rdx
-  unsigned int v64; // eax
-  unsigned int v65; // eax
+  float v58; // xmm2_4
+  Scaleform::GFx::InteractiveObject *pUnloadListHead; // rbx
+  Scaleform::GFx::InteractiveObject *pPlayNextOpt; // rdi
+  Scaleform::GFx::InteractiveObject *pParent; // rcx
+  __int64 v62; // rdx
+  unsigned int ForceFrameCatchUp; // eax
+  int v64; // eax
   Scaleform::GFx::DrawingContext *k; // rbx
-  signed __int64 v67; // rax
-  signed __int64 v68; // rdi
-  signed __int64 v69; // rbx
-  signed __int64 v70; // rax
-  float v71; // xmm0_4
-  float v72; // xmm13_4
-  Scaleform::Render::TreeRoot *v73; // rdx
-  unsigned __int64 v74; // r15
-  __int64 v75; // rsi
-  Scaleform::GFx::MovieImpl::IndirectTransPair *v76; // rbx
-  Scaleform::Render::TreeNode *v77; // r14
-  Scaleform::Render::ContextImpl::Entry *v78; // rcx
-  bool v79; // r9
+  unsigned __int64 *v66; // rax
+  __int64 m; // rdi
+  __int64 v68; // rbx
+  __int64 v69; // rax
+  float v70; // xmm0_4
+  float v71; // xmm13_4
+  Scaleform::Render::TreeRoot *v72; // rdx
+  unsigned __int64 v73; // r15
+  __int64 v74; // rsi
+  Scaleform::GFx::MovieImpl::IndirectTransPair *Data; // rbx
+  Scaleform::Render::TreeNode *RenderNode; // r14
+  Scaleform::Render::ContextImpl::Entry *pPrev; // rcx
+  bool v78; // r9
+  Scaleform::Render::TreeRoot *v79; // rcx
   Scaleform::Render::TreeRoot *v80; // rcx
-  Scaleform::Render::ContextImpl::Entry *v81; // rcx
-  Scaleform::GFx::DisplayObjectBase::IndirectTransformDataType *v82; // rcx
-  float v83; // xmm7_4
-  float v84; // xmm9_4
-  float v85; // xmm0_4
-  float v86; // xmm10_4
-  float v87; // xmm8_4
-  float v88; // xmm11_4
-  float v89; // xmm1_4
-  float v90; // xmm12_4
-  int v91; // xmm2_4
-  int v92; // xmm3_4
-  int v93; // xmm4_4
-  int v94; // xmm5_4
-  char v95; // di
-  Scaleform::Render::TreeRoot *v96; // rbx
-  __int64 v97; // r9
-  __int64 v98; // rdx
-  float v99; // xmm0_4
-  unsigned int v100; // xmm2_4
-  unsigned int v101; // xmm3_4
-  Scaleform::Render::TreeRoot *v102; // rbx
-  __int64 v103; // r9
-  __int64 v104; // rdx
-  Scaleform::Render::Matrix3x4<float> *v105; // rax
-  __int64 v106; // kr10_8
-  float v107; // xmm6_4
-  float v108; // xmm5_4
-  bool v109; // al
-  char Dst[48]; // [rsp+30h] [rbp-98h]
-  Scaleform::Render::Matrix3x4<float> v111; // [rsp+60h] [rbp-68h]
-  float v112; // [rsp+90h] [rbp-38h]
-  float v113; // [rsp+94h] [rbp-34h]
-  float v114; // [rsp+98h] [rbp-30h]
-  float v115; // [rsp+9Ch] [rbp-2Ch]
-  float v116; // [rsp+A0h] [rbp-28h]
-  float v117; // [rsp+A4h] [rbp-24h]
-  int v118; // [rsp+A8h] [rbp-20h]
-  int v119; // [rsp+ACh] [rbp-1Ch]
-  int v120; // [rsp+B0h] [rbp-18h]
-  int v121; // [rsp+B4h] [rbp-14h]
-  Scaleform::Render::Matrix3x4<float> v122; // [rsp+B8h] [rbp-10h]
-  Scaleform::Render::Matrix3x4<float> m2; // [rsp+E8h] [rbp+20h]
-  Scaleform::Render::Matrix3x4<float> m1; // [rsp+118h] [rbp+50h]
-  Scaleform::Render::Matrix3x4<float> v125; // [rsp+148h] [rbp+80h]
-  __int128 v126; // [rsp+178h] [rbp+B0h]
-  __int128 v127; // [rsp+188h] [rbp+C0h]
+  Scaleform::GFx::DisplayObjectBase::IndirectTransformDataType *pIndXFormData; // rcx
+  float v82; // xmm7_4
+  float v83; // xmm9_4
+  float v84; // xmm0_4
+  float v85; // xmm10_4
+  float v86; // xmm8_4
+  float v87; // xmm11_4
+  float v88; // xmm1_4
+  float v89; // xmm12_4
+  float v90; // xmm2_4
+  float v91; // xmm3_4
+  float v92; // xmm4_4
+  float v93; // xmm5_4
+  char IsOrig3D; // di
+  Scaleform::Render::TreeRoot *v95; // rbx
+  __int64 v96; // rdx
+  float v97; // xmm0_4
+  float v98; // xmm2_4
+  float v99; // xmm3_4
+  Scaleform::Render::TreeRoot *v100; // rbx
+  __int64 v101; // rdx
+  float v102; // xmm4_4
+  float v103; // xmm3_4
+  float v104; // xmm6_4
+  float v105; // xmm5_4
+  bool HasChanges; // al
+  Scaleform::Render::Matrix3x4<float> Dst; // [rsp+30h] [rbp-98h] BYREF
+  Scaleform::Render::Matrix3x4<float> v108; // [rsp+60h] [rbp-68h] BYREF
+  float v109; // [rsp+90h] [rbp-38h]
+  float v110; // [rsp+94h] [rbp-34h]
+  float v111; // [rsp+98h] [rbp-30h]
+  float v112; // [rsp+9Ch] [rbp-2Ch]
+  float v113; // [rsp+A0h] [rbp-28h]
+  float v114; // [rsp+A4h] [rbp-24h]
+  float v115; // [rsp+A8h] [rbp-20h]
+  float v116; // [rsp+ACh] [rbp-1Ch]
+  float v117; // [rsp+B0h] [rbp-18h]
+  float v118; // [rsp+B4h] [rbp-14h]
+  Scaleform::Render::Matrix3x4<float> v119; // [rsp+B8h] [rbp-10h] BYREF
+  Scaleform::Render::Matrix3x4<float> m2; // [rsp+E8h] [rbp+20h] BYREF
+  Scaleform::Render::Matrix3x4<float> m1; // [rsp+118h] [rbp+50h] BYREF
+  Scaleform::Render::Matrix3x4<float> v122; // [rsp+148h] [rbp+80h] BYREF
+  __int128 v123; // [rsp+178h] [rbp+B0h] BYREF
+  __int128 v124; // [rsp+188h] [rbp+C0h]
   Scaleform::GFx::FontLib *pfontLib[2]; // [rsp+198h] [rbp+D0h]
   Scaleform::GFx::FontMap *pfontMap[2]; // [rsp+1A8h] [rbp+E0h]
   Scaleform::GFx::Translator *ptranslator[2]; // [rsp+1B8h] [rbp+F0h]
-  __int64 v131; // [rsp+1C8h] [rbp+100h]
-  Scaleform::GFx::Translator *v132; // [rsp+1D0h] [rbp+108h]
-  Scaleform::GFx::FontMap *v133; // [rsp+1D8h] [rbp+110h]
-  Scaleform::GFx::FontMap *v134; // [rsp+1E0h] [rbp+118h]
-  Scaleform::GFx::FontLib *v135; // [rsp+1E8h] [rbp+120h]
-  Scaleform::Render::Matrix3x4<float> result; // [rsp+1F8h] [rbp+130h]
-  Scaleform::Render::RenderBuffer *v137; // [rsp+2F8h] [rbp+230h]
-  unsigned int v138; // [rsp+308h] [rbp+240h]
-  char v139; // [rsp+310h] [rbp+248h]
+  __int64 v128; // [rsp+1C8h] [rbp+100h]
+  Scaleform::GFx::Translator *v129; // [rsp+1D0h] [rbp+108h]
+  Scaleform::GFx::FontMap *v130; // [rsp+1D8h] [rbp+110h]
+  Scaleform::GFx::FontMap *v131; // [rsp+1E0h] [rbp+118h]
+  Scaleform::GFx::FontLib *v132; // [rsp+1E8h] [rbp+120h]
+  Scaleform::Render::Matrix3x4<float> result; // [rsp+1F8h] [rbp+130h] BYREF
+  Scaleform::Render::RenderBuffer *v134; // [rsp+2F8h] [rbp+230h]
+  int v135; // [rsp+308h] [rbp+240h]
+  char v136; // [rsp+310h] [rbp+248h]
 
-  v131 = -2i64;
-  v5 = deltaT;
-  v6 = this;
-  if ( (this->Flags >> 20) & 1 )
+  v128 = -2i64;
+  v4 = deltaT;
+  if ( (this->Flags & 0x100000) != 0 )
   {
     if ( capture )
       Scaleform::GFx::MovieImpl::Capture(this, 1);
@@ -2455,697 +2412,661 @@ float __usercall Scaleform::GFx::MovieImpl::Advance@<xmm0>(Scaleform::GFx::Movie
   {
     if ( capture )
       Scaleform::GFx::MovieImpl::Capture(this, 1);
-    v8 = v6->pMainMovieDef.pObject;
-    if ( !v8 )
+    pObject = this->pMainMovieDef.pObject;
+    if ( pObject )
+      return 1.0
+           / ((float (__fastcall *)(Scaleform::GFx::MovieDefImpl *))pObject->Scaleform::GFx::MovieDef::Scaleform::GFx::Resource::vfptr[2].GetKey)(pObject);
+    else
       return 0.0;
-    ((void (*)(void))v8->vfptr[2].GetKey)();
-    return 1.0 / a5;
   }
   Scaleform::GFx::MovieImpl::ProcessMovieDefToKillList(this);
   if ( deltaT < 0.0 )
-    v5 = 0.0;
-  v6->Flags |= 0x200u;
-  *(_QWORD *)&Dst[40] = 0i64;
-  _mm_store_si128((__m128i *)&v126, (__m128i)0i64);
-  _mm_store_si128((__m128i *)&v127, (__m128i)0i64);
-  _mm_store_si128((__m128i *)pfontLib, (__m128i)0i64);
-  _mm_store_si128((__m128i *)pfontMap, (__m128i)0i64);
-  _mm_store_si128((__m128i *)ptranslator, (__m128i)0i64);
-  v6->pStateBag.pObject->vfptr->GetStatesAddRef(
-    (Scaleform::GFx::StateBag *)&v6->pStateBag.pObject->vfptr,
-    (Scaleform::GFx::State **)&v126,
+    v4 = 0.0;
+  this->Flags |= 0x200u;
+  *(_QWORD *)&Dst.M[2][2] = 0i64;
+  v123 = 0i64;
+  v124 = 0i64;
+  *(_OWORD *)pfontLib = 0i64;
+  *(_OWORD *)pfontMap = 0i64;
+  *(_OWORD *)ptranslator = 0i64;
+  this->pStateBag.pObject->vfptr->GetStatesAddRef(
+    &this->pStateBag.pObject->Scaleform::GFx::StateBag,
+    (Scaleform::GFx::State **)&v123,
     stateQuery,
     9u);
-  v137 = 0i64;
-  v10 = (Scaleform::GFx::UserEventHandler *)v126;
-  v11 = (Scaleform::Render::RenderBuffer *)v6->pUserEventHandler.pObject;
-  if ( v11 )
-    Scaleform::RefCountImpl::Release(v11);
-  v6->pUserEventHandler.pObject = v10;
-  v12 = (Scaleform::GFx::FSCommandHandler *)*((_QWORD *)&v126 + 1);
-  v13 = (Scaleform::Render::RenderBuffer *)v6->pFSCommandHandler.pObject;
-  if ( v13 )
-    Scaleform::RefCountImpl::Release(v13);
-  v6->pFSCommandHandler.pObject = v12;
-  v14 = (Scaleform::GFx::ExternalInterface *)v127;
-  v15 = (Scaleform::Render::RenderBuffer *)v6->pExtIntfHandler.pObject;
-  if ( v15 )
-    Scaleform::RefCountImpl::Release(v15);
-  v6->pExtIntfHandler.pObject = v14;
-  v16 = *((_QWORD *)&v127 + 1);
-  *(_QWORD *)&Dst[40] = *((_QWORD *)&v127 + 1);
-  v137 = (Scaleform::Render::RenderBuffer *)pfontLib[0];
+  v134 = 0i64;
+  v9 = (Scaleform::GFx::UserEventHandler *)v123;
+  v10 = (Scaleform::Render::RenderBuffer *)this->pUserEventHandler.pObject;
+  if ( v10 )
+    Scaleform::RefCountImpl::Release(v10);
+  this->pUserEventHandler.pObject = v9;
+  v11 = (Scaleform::GFx::FSCommandHandler *)*((_QWORD *)&v123 + 1);
+  v12 = (Scaleform::Render::RenderBuffer *)this->pFSCommandHandler.pObject;
+  if ( v12 )
+    Scaleform::RefCountImpl::Release(v12);
+  this->pFSCommandHandler.pObject = v11;
+  v13 = (Scaleform::GFx::ExternalInterface *)v124;
+  v14 = (Scaleform::Render::RenderBuffer *)this->pExtIntfHandler.pObject;
+  if ( v14 )
+    Scaleform::RefCountImpl::Release(v14);
+  this->pExtIntfHandler.pObject = v13;
+  v15 = *((_QWORD *)&v124 + 1);
+  *(_QWORD *)&Dst.M[2][2] = *((_QWORD *)&v124 + 1);
+  v134 = (Scaleform::Render::RenderBuffer *)pfontLib[0];
   if ( !pfontLib[0] )
   {
-    v17 = 0i64;
+    vfptr = 0i64;
 LABEL_24:
-    if ( !v17 )
+    if ( !vfptr )
       goto LABEL_26;
     goto LABEL_25;
   }
-  v17 = pfontLib[0][1].vfptr;
-  if ( !v17 )
+  vfptr = pfontLib[0][1].vfptr;
+  if ( !vfptr )
   {
-    v17 = (Scaleform::RefCountImplCoreVtbl *)Scaleform::Log::GetGlobalLog();
+    vfptr = (Scaleform::RefCountImplCoreVtbl *)Scaleform::Log::GetGlobalLog();
     goto LABEL_24;
   }
 LABEL_25:
-  Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)v17);
+  Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)vfptr);
 LABEL_26:
-  v18 = (Scaleform::Render::RenderBuffer *)v6->pCachedLog.pObject;
-  if ( v18 )
-    Scaleform::RefCountImpl::Release(v18);
-  v6->pCachedLog.pObject = (Scaleform::Log *)v17;
-  v19 = (Scaleform::Render::RenderBuffer *)pfontLib[1];
-  v135 = pfontLib[1];
-  v20 = (Scaleform::Render::RenderBuffer *)pfontMap[0];
-  v134 = pfontMap[0];
-  v21 = (Scaleform::Render::RenderBuffer *)pfontMap[1];
-  v133 = pfontMap[1];
-  v22 = (Scaleform::Render::RenderBuffer *)ptranslator[0];
-  v132 = ptranslator[0];
-  v23 = Scaleform::GFx::FontManagerStates::CheckStateChange(
-          v6->pFontManagerStates.pObject,
+  v17 = (Scaleform::Render::RenderBuffer *)this->pCachedLog.pObject;
+  if ( v17 )
+    Scaleform::RefCountImpl::Release(v17);
+  this->pCachedLog.pObject = (Scaleform::Log *)vfptr;
+  v18 = (Scaleform::Render::RenderBuffer *)pfontLib[1];
+  v132 = pfontLib[1];
+  v19 = (Scaleform::Render::RenderBuffer *)pfontMap[0];
+  v131 = pfontMap[0];
+  v20 = (Scaleform::Render::RenderBuffer *)pfontMap[1];
+  v130 = pfontMap[1];
+  v21 = (Scaleform::Render::RenderBuffer *)ptranslator[0];
+  v129 = ptranslator[0];
+  v22 = Scaleform::GFx::FontManagerStates::CheckStateChange(
+          this->pFontManagerStates.pObject,
           pfontLib[1],
           pfontMap[0],
           (Scaleform::GFx::FontProvider *)pfontMap[1],
           ptranslator[0]);
-  if ( v22 )
-    Scaleform::RefCountImpl::Release(v22);
   if ( v21 )
     Scaleform::RefCountImpl::Release(v21);
   if ( v20 )
     Scaleform::RefCountImpl::Release(v20);
   if ( v19 )
     Scaleform::RefCountImpl::Release(v19);
-  v6->Flags |= 2u;
-  v24 = v6->Flags;
-  if ( v16 )
+  if ( v18 )
+    Scaleform::RefCountImpl::Release(v18);
+  this->Flags |= 2u;
+  Flags = this->Flags;
+  if ( v15 )
   {
-    if ( *(_BYTE *)(v16 + 24) & 1 )
-      v25 = v24 | 4;
+    if ( (*(_BYTE *)(v15 + 24) & 1) != 0 )
+      v24 = Flags | 4;
     else
-      v25 = v24 & 0xFFFFFFFB;
-    v6->Flags = v25;
-    if ( (*(_DWORD *)(v16 + 24) >> 1) & 1 )
-      v6->Flags |= 0x40u;
+      v24 = Flags & 0xFFFFFFFB;
+    this->Flags = v24;
+    if ( (*(_DWORD *)(v15 + 24) & 2) != 0 )
+      this->Flags |= 0x40u;
     else
-      v6->Flags &= 0xFFFFFFBF;
-    if ( (*(_DWORD *)(v16 + 24) >> 2) & 1 )
-      v6->Flags |= 8u;
+      this->Flags &= ~0x40u;
+    if ( (*(_DWORD *)(v15 + 24) & 4) != 0 )
+      this->Flags |= 8u;
     else
-      v6->Flags &= 0xFFFFFFF7;
-    if ( (*(_DWORD *)(v16 + 24) >> 4) & 1 )
-      v6->Flags |= 0x20u;
+      this->Flags &= ~8u;
+    if ( (*(_DWORD *)(v15 + 24) & 0x10) != 0 )
+      this->Flags |= 0x20u;
     else
-      v6->Flags &= 0xFFFFFFDF;
-    if ( (*(_DWORD *)(v16 + 24) >> 3) & 1 )
-      v6->Flags |= 0x10u;
+      this->Flags &= ~0x20u;
+    if ( (*(_DWORD *)(v15 + 24) & 8) != 0 )
+      this->Flags |= 0x10u;
     else
-      v6->Flags &= 0xFFFFFFEF;
+      this->Flags &= ~0x10u;
   }
   else
   {
-    v6->Flags = v24 & 0xFFFFFF83;
+    this->Flags = Flags & 0xFFFFFF83;
   }
-  for ( i = v6->RootMovieDefNodes.Root.pNext; ; i = i->pNext )
+  for ( i = this->RootMovieDefNodes.Root.pNext; ; i = i->pNext )
   {
-    v27 = (signed __int64)(v6 == (Scaleform::GFx::MovieImpl *)-112i64 ? 0i64 : &v6->MovieLevels.Data.Policy);
-    if ( i == (Scaleform::GFx::MovieDefRootNode *)v27 )
+    v26 = this == (Scaleform::GFx::MovieImpl *)-112i64 ? 0i64 : &this->MovieLevels.Data.Policy;
+    if ( i == (Scaleform::GFx::MovieDefRootNode *)v26 )
       break;
     if ( !i->ImportFlag )
     {
       i->BytesLoaded = i->pDefImpl->pBindData.pObject->BytesLoaded;
-      i->LoadingFrame = ((__int64 (*)(void))i->pDefImpl->vfptr[1].GetKey)();
+      i->LoadingFrame = ((__int64 (__fastcall *)(Scaleform::GFx::MovieDefImpl *))i->pDefImpl->vfptr[1].GetKey)(i->pDefImpl);
     }
-    if ( v23 )
-      ((void (*)(void))i->pFontManager.pObject->vfptr[3].__vecDelDtor)();
+    if ( v22 )
+      ((void (__fastcall *)(Scaleform::GFx::FontManager *))i->pFontManager.pObject->vfptr[3].__vecDelDtor)(i->pFontManager.pObject);
   }
-  if ( v23 || (v6->Flags2 >> 1) & 1 )
+  if ( v22 || (this->Flags2 & 2) != 0 )
   {
-    v28 = 0;
-    if ( v6->MovieLevels.Data.Size )
+    v27 = 0;
+    if ( this->MovieLevels.Data.Size )
     {
-      v29 = 0i64;
+      v28 = 0i64;
       do
       {
-        v30 = v6->MovieLevels.Data.Data[v29].pSprite.pObject;
-        v30->vfptr[79].__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v30->vfptr, v23);
-        v29 = ++v28;
+        v29 = this->MovieLevels.Data.Data[v28].pSprite.pObject;
+        v29->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[79].__vecDelDtor(
+          v29,
+          v22);
+        v28 = ++v27;
       }
-      while ( v28 < v6->MovieLevels.Data.Size );
+      while ( v27 < this->MovieLevels.Data.Size );
     }
   }
-  if ( !((unsigned int (*)(void))v6->pMainMovie->vfptr[111].__vecDelDtor)() )
+  if ( !((unsigned int (__fastcall *)(Scaleform::GFx::InteractiveObject *))this->pMainMovie->vfptr[111].__vecDelDtor)(this->pMainMovie) )
   {
-    if ( v139 )
-      Scaleform::GFx::MovieImpl::Capture(v6, 1);
-    v6->Flags &= 0xFFFFFFFD;
-    if ( v137 )
-      Scaleform::RefCountImpl::Release(v137);
-    if ( *(_QWORD *)&Dst[40] )
-      Scaleform::RefCountImpl::Release(*(Scaleform::Render::RenderBuffer **)&Dst[40]);
+    if ( v136 )
+      Scaleform::GFx::MovieImpl::Capture(this, 1);
+    this->Flags &= ~2u;
+    if ( v134 )
+      Scaleform::RefCountImpl::Release(v134);
+    if ( *(_QWORD *)&Dst.M[2][2] )
+      Scaleform::RefCountImpl::Release(*(Scaleform::Render::RenderBuffer **)&Dst.M[2][2]);
     return 0.0;
   }
-  if ( (LOWORD(v6->Flags) >> 8) & 1 && ((unsigned int (*)(void))v6->pMainMovie->vfptr[111].__vecDelDtor)() )
+  if ( (this->Flags & 0x100) != 0
+    && ((unsigned int (__fastcall *)(Scaleform::GFx::InteractiveObject *))this->pMainMovie->vfptr[111].__vecDelDtor)(this->pMainMovie) )
   {
-    v6->Flags &= 0xFFFFFEFF;
-    v31 = v6->MovieLevels.Data.Size;
-    if ( (_DWORD)v31 )
+    this->Flags &= ~0x100u;
+    Size = this->MovieLevels.Data.Size;
+    if ( (_DWORD)Size )
     {
       do
       {
-        v32 = v31 - 1;
-        ((void (*)(void))v6->MovieLevels.Data.Data[(unsigned int)(v31 - 1)].pSprite.pObject->vfptr[112].__vecDelDtor)();
-        LODWORD(v31) = v32;
+        v31 = Size - 1;
+        v32 = this->MovieLevels.Data.Data[(unsigned int)(Size - 1)].pSprite.pObject;
+        ((void (__fastcall *)(Scaleform::GFx::InteractiveObject *))v32->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[112].__vecDelDtor)(v32);
+        LODWORD(Size) = v31;
       }
-      while ( v32 );
+      while ( v31 );
     }
-    ((void (*)(void))v6->pASMovieRoot.pObject->vfptr[7].__vecDelDtor)();
-    Scaleform::GFx::MovieImpl::ProcessUnloadQueue(v6);
-    Scaleform::GFx::MovieImpl::ProcessLoadQueue(v6);
+    ((void (__fastcall *)(Scaleform::GFx::ASMovieRootBase *))this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[7].__vecDelDtor)(this->pASMovieRoot.pObject);
+    Scaleform::GFx::MovieImpl::ProcessUnloadQueue(this);
+    Scaleform::GFx::MovieImpl::ProcessLoadQueue(this);
   }
-  v33 = v5 * 1000000.0;
+  v33 = v4 * 1000000.0;
   v34 = 0i64;
-  if ( (float)(v5 * 1000000.0) >= 9.223372e18 )
+  if ( (float)(v4 * 1000000.0) >= 9.223372e18 )
   {
     v33 = v33 - 9.223372e18;
     if ( v33 < 9.223372e18 )
-      v34 = 0x8000000000000000i64;
+      v34 = 0x8000000000000000ui64;
   }
-  v6->TimeElapsed += v34 + (unsigned int)(signed int)v33;
-  v6->TimeRemainder = v5 + v6->TimeRemainder;
-  v35 = Scaleform::Timer::GetProfileTicks();
-  v36 = v6->FrameTime;
-  v37 = v6->IntervalTimers.Data.Size;
+  this->TimeElapsed += v34 + (unsigned int)(int)v33;
+  this->TimeRemainder = v4 + this->TimeRemainder;
+  ProfileTicks = Scaleform::Timer::GetProfileTicks();
+  FrameTime = this->FrameTime;
+  v37 = this->IntervalTimers.Data.Size;
   if ( v37 )
   {
-    v38 = v36 * 1000000.0;
+    v38 = FrameTime * 1000000.0;
     v39 = 0i64;
     if ( v38 >= 9.223372e18 )
     {
       v38 = v38 - 9.223372e18;
       if ( v38 < 9.223372e18 )
-        v39 = 0x8000000000000000i64;
+        v39 = 0x8000000000000000ui64;
     }
-    v40 = v39 + (unsigned int)(signed int)v38;
+    v40 = v39 + (unsigned int)(int)v38;
     v41 = 0;
     v42 = 0i64;
-    if ( v37 )
+    p_IntervalTimers = &this->IntervalTimers;
+    do
     {
-      v43 = &v6->IntervalTimers;
-      do
+      v44 = p_IntervalTimers->Data.Data[v42].pObject;
+      if ( v44
+        && ((unsigned __int8 (__fastcall *)(Scaleform::GFx::ASIntervalTimerIntf *))v44->vfptr[3].__vecDelDtor)(v44) )
       {
-        v44 = v43->Data.Data[v42].pObject;
-        if ( v44 && ((unsigned __int8 (*)(void))v44->vfptr[3].__vecDelDtor)() )
+        p_IntervalTimers->Data.Data[v42].pObject->vfptr[2].__vecDelDtor(
+          p_IntervalTimers->Data.Data[v42].pObject,
+          (unsigned int)this);
+        v45 = ((__int64 (__fastcall *)(Scaleform::GFx::ASIntervalTimerIntf *))p_IntervalTimers->Data.Data[v42].pObject->vfptr[6].__vecDelDtor)(p_IntervalTimers->Data.Data[v42].pObject)
+            - this->TimeElapsed;
+        if ( v45 < v40 )
+          v40 = v45;
+      }
+      else
+      {
+        ++v41;
+      }
+      ++v42;
+    }
+    while ( v42 < v37 );
+    if ( v41 )
+    {
+      v46 = this->IntervalTimers.Data.Size;
+      for ( j = 0i64; v46; --v46 )
+      {
+        v48 = p_IntervalTimers->Data.Data[j].pObject;
+        if ( v48
+          && ((unsigned __int8 (__fastcall *)(Scaleform::GFx::ASIntervalTimerIntf *))v48->vfptr[3].__vecDelDtor)(v48) )
         {
-          v45 = LODWORD(v6->FrameTime);
-          v43->Data.Data[v42].pObject->vfptr[2].__vecDelDtor(
-            (Scaleform::RefCountImplCore *)&v43->Data.Data[v42].pObject->vfptr,
-            (unsigned int)v6);
-          v46 = ((__int64 (*)(void))v43->Data.Data[v42].pObject->vfptr[6].__vecDelDtor)() - v6->TimeElapsed;
-          if ( v46 < v40 )
-            v40 = v46;
+          j = (unsigned int)(j + 1);
         }
         else
         {
-          ++v41;
-        }
-        ++v42;
-      }
-      while ( v42 < v37 );
-      if ( v41 )
-      {
-        v47 = v6->IntervalTimers.Data.Size;
-        for ( j = 0i64; v47; --v47 )
-        {
-          v49 = v43->Data.Data[j].pObject;
-          if ( v49 && ((unsigned __int8 (*)(void))v49->vfptr[3].__vecDelDtor)() )
+          ((void (__fastcall *)(Scaleform::GFx::ASIntervalTimerIntf *))p_IntervalTimers->Data.Data[j].pObject->vfptr[4].__vecDelDtor)(p_IntervalTimers->Data.Data[j].pObject);
+          if ( this->IntervalTimers.Data.Size == 1 )
           {
-            j = (unsigned int)(j + 1);
+            Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::ASIntervalTimerIntf>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::ASIntervalTimerIntf>,327>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
+              &this->IntervalTimers.Data,
+              &this->IntervalTimers,
+              0i64);
           }
           else
           {
-            ((void (*)(void))v43->Data.Data[j].pObject->vfptr[4].__vecDelDtor)();
-            if ( v6->IntervalTimers.Data.Size == 1 )
-            {
-              Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::ASIntervalTimerIntf>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::ASIntervalTimerIntf>,327>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
-                (Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::ASIntervalTimerIntf>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::ASIntervalTimerIntf>,327>,Scaleform::ArrayDefaultPolicy> *)&v6->IntervalTimers.Data.Data,
-                &v6->IntervalTimers,
-                0i64);
-            }
-            else
-            {
-              v50 = (Scaleform::Render::RenderBuffer *)v43->Data.Data[j].pObject;
-              if ( v50 )
-                Scaleform::RefCountImpl::Release(v50);
-              memmove(
-                &v43->Data.Data[j],
-                &v43->Data.Data[j + 1],
-                8 * (v6->IntervalTimers.Data.Size - (unsigned int)j) - 8);
-              --v6->IntervalTimers.Data.Size;
-            }
+            v49 = (Scaleform::Render::RenderBuffer *)p_IntervalTimers->Data.Data[j].pObject;
+            if ( v49 )
+              Scaleform::RefCountImpl::Release(v49);
+            memmove(
+              &p_IntervalTimers->Data.Data[j],
+              &p_IntervalTimers->Data.Data[j + 1],
+              8 * (this->IntervalTimers.Data.Size - (unsigned int)j) - 8);
+            --this->IntervalTimers.Data.Size;
           }
         }
       }
     }
-    v51 = (float)(signed int)v40;
+    v50 = (float)(int)v40;
     if ( v40 < 0 )
-      v51 = v51 + 1.8446744e19;
-    v36 = v51 * 1000000.0;
+      v50 = v50 + 1.8446744e19;
+    FrameTime = v50 * 1000000.0;
   }
-  Scaleform::GFx::MovieImpl::ProcessInput(v6);
-  v52 = v6->TimeRemainder;
-  v53 = v6->FrameTime;
-  if ( v52 < v53 )
+  Scaleform::GFx::MovieImpl::ProcessInput(this);
+  TimeRemainder = this->TimeRemainder;
+  v52 = this->FrameTime;
+  if ( TimeRemainder < v52 )
   {
-    Scaleform::GFx::MovieImpl::AdvanceFrame(v6, 0, v52 / v53);
-    v6->TimeRemainder = fmodf(v6->TimeRemainder, v6->FrameTime);
-    ((void (*)(void))v6->pASMovieRoot.pObject->vfptr[7].__vecDelDtor)();
-    Scaleform::GFx::MovieImpl::ProcessUnloadQueue(v6);
-    Scaleform::GFx::MovieImpl::ProcessLoadQueue(v6);
-    v63 = 0i64;
+    Scaleform::GFx::MovieImpl::AdvanceFrame(this, 0, TimeRemainder / v52);
+    this->TimeRemainder = fmodf(this->TimeRemainder, this->FrameTime);
+    ((void (__fastcall *)(Scaleform::GFx::ASMovieRootBase *))this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[7].__vecDelDtor)(this->pASMovieRoot.pObject);
+    Scaleform::GFx::MovieImpl::ProcessUnloadQueue(this);
+    Scaleform::GFx::MovieImpl::ProcessLoadQueue(this);
+    v62 = 0i64;
   }
   else
   {
-    ((void (*)(void))v6->pASMovieRoot.pObject->vfptr[7].__vecDelDtor)();
-    v54 = v138;
-    v55 = v138 || v6->ForceFrameCatchUp > v138;
+    ((void (__fastcall *)(Scaleform::GFx::ASMovieRootBase *))this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[7].__vecDelDtor)(this->pASMovieRoot.pObject);
+    v53 = v135;
+    v54 = v135 || this->ForceFrameCatchUp;
     do
     {
-      v56 = v6->FrameTime;
-      v57 = v6->TimeRemainder;
-      if ( v55 )
-        v58 = v57 - v56;
+      v55 = this->FrameTime;
+      v56 = this->TimeRemainder;
+      if ( v54 )
+        v57 = v56 - v55;
       else
-        v58 = fmodf(v57, v6->FrameTime);
-      v6->TimeRemainder = v58;
-      if ( v58 < v56 )
-        v59 = v58 / v56;
+        v57 = fmodf(v56, this->FrameTime);
+      this->TimeRemainder = v57;
+      if ( v57 < v55 )
+        v58 = v57 / v55;
       else
-        v59 = 0.0;
-      Scaleform::GFx::MovieImpl::AdvanceFrame(v6, 1, v59);
-      ((void (*)(void))v6->pASMovieRoot.pObject->vfptr[7].__vecDelDtor)();
-      v60 = (Scaleform::RefCountNTSImpl *)&v6->pUnloadListHead->vfptr;
-      if ( v60 )
+        v58 = 0.0;
+      Scaleform::GFx::MovieImpl::AdvanceFrame(this, 1, v58);
+      ((void (__fastcall *)(Scaleform::GFx::ASMovieRootBase *))this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[7].__vecDelDtor)(this->pASMovieRoot.pObject);
+      pUnloadListHead = this->pUnloadListHead;
+      if ( pUnloadListHead )
       {
         do
         {
-          v61 = v60[10].vfptr;
-          v60[10].vfptr = 0i64;
-          ((void (__fastcall *)(Scaleform::RefCountNTSImpl *))v60->vfptr[75].__vecDelDtor)(v60);
-          v62 = *(_QWORD *)&v60[3].RefCount;
-          if ( v62 )
-            (*(void (__fastcall **)(__int64, Scaleform::RefCountNTSImpl *))(*(_QWORD *)v62 + 936i64))(v62, v60);
-          Scaleform::RefCountNTSImpl::Release(v60);
-          v60 = (Scaleform::RefCountNTSImpl *)v61;
+          pPlayNextOpt = pUnloadListHead->pPlayNextOpt;
+          pUnloadListHead->pPlayNextOpt = 0i64;
+          ((void (__fastcall *)(Scaleform::GFx::InteractiveObject *))pUnloadListHead->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[75].__vecDelDtor)(pUnloadListHead);
+          pParent = pUnloadListHead->pParent;
+          if ( pParent )
+            pParent->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[117].__vecDelDtor(
+              pParent,
+              (unsigned int)pUnloadListHead);
+          Scaleform::RefCountNTSImpl::Release(pUnloadListHead);
+          pUnloadListHead = pPlayNextOpt;
         }
-        while ( v61 );
-        v6->pUnloadListHead = 0i64;
-        v54 = v138;
+        while ( pPlayNextOpt );
+        this->pUnloadListHead = 0i64;
+        v53 = v135;
       }
-      Scaleform::GFx::MovieImpl::ProcessLoadQueue(v6);
-      v64 = v6->ForceFrameCatchUp;
-      if ( v64 )
-        v6->ForceFrameCatchUp = v64 - 1;
-      v65 = v54--;
-      v138 = v54;
+      Scaleform::GFx::MovieImpl::ProcessLoadQueue(this);
+      ForceFrameCatchUp = this->ForceFrameCatchUp;
+      if ( ForceFrameCatchUp )
+        this->ForceFrameCatchUp = ForceFrameCatchUp - 1;
+      v64 = v53--;
+      v135 = v53;
     }
-    while ( v65 && v6->FrameTime <= v6->TimeRemainder || v6->ForceFrameCatchUp );
-    v6->Flags |= 0x80u;
-    LOBYTE(v63) = 1;
+    while ( v64 && this->FrameTime <= this->TimeRemainder || this->ForceFrameCatchUp );
+    this->Flags |= 0x80u;
+    LOBYTE(v62) = 1;
   }
-  v6->pASMovieRoot.pObject->vfptr[2].__vecDelDtor((Scaleform::RefCountImplCore *)v6->pASMovieRoot.pObject, v63);
-  for ( k = v6->DrawingContextList.Root.pNext; ; k = k->pNext )
+  this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[2].__vecDelDtor(this->pASMovieRoot.pObject, v62);
+  for ( k = this->DrawingContextList.Root.pNext; ; k = k->pNext )
   {
-    v67 = (signed __int64)(v6 == (Scaleform::GFx::MovieImpl *)-21248i64 ? 0i64 : &v6->RegisteredFonts.Data.Size);
-    if ( k == (Scaleform::GFx::DrawingContext *)v67 )
+    v66 = this == (Scaleform::GFx::MovieImpl *)-21248i64 ? 0i64 : &this->RegisteredFonts.Data.Size;
+    if ( k == (Scaleform::GFx::DrawingContext *)v66 )
       break;
     if ( k->States < 0 )
       Scaleform::GFx::DrawingContext::UpdateRenderNode(k);
   }
-  if ( v6->FocusRectChanged )
-    Scaleform::GFx::MovieImpl::UpdateFocusRectRenderNodes(v6);
-  v68 = 0i64;
-  if ( v6->FocusGroupsCnt )
+  if ( this->FocusRectChanged )
+    Scaleform::GFx::MovieImpl::UpdateFocusRectRenderNodes(this);
+  for ( m = 0i64; (unsigned int)m < this->FocusGroupsCnt; m = (unsigned int)(m + 1) )
   {
-    do
+    v68 = m;
+    if ( (this->FocusGroups[m].TabableArrayStatus & 1) != 0 )
     {
-      v69 = v68;
-      if ( v6->FocusGroups[v68].TabableArrayStatus & 1 )
-      {
-        Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,Scaleform::AllocatorDH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,327>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
-          (Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,Scaleform::AllocatorDH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,327>,Scaleform::ArrayDefaultPolicy> *)&v6->FocusGroups[v69].TabableArray.Data.Data,
-          v6->FocusGroups[v69].TabableArray.Data.pHeap,
-          0i64);
-        v6->FocusGroups[v69].TabableArrayStatus = 0;
-      }
-      v68 = (unsigned int)(v68 + 1);
+      Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,Scaleform::AllocatorDH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,327>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
+        &this->FocusGroups[v68].TabableArray.Data,
+        (__int64 *)this->FocusGroups[v68].TabableArray.Data.pHeap,
+        0i64);
+      this->FocusGroups[v68].TabableArrayStatus = 0;
     }
-    while ( (unsigned int)v68 < v6->FocusGroupsCnt );
   }
-  v6->Flags &= 0xFFFFFFFD;
-  v70 = Scaleform::Timer::GetProfileTicks() - v35;
-  v71 = (float)(signed int)v70;
-  if ( v70 < 0 )
-    v71 = v71 + 1.8446744e19;
-  v72 = v36 + (float)(v71 * -0.000001);
-  if ( v72 < 0.0 )
-    v72 = 0.0;
-  if ( v139 )
+  this->Flags &= ~2u;
+  v69 = Scaleform::Timer::GetProfileTicks() - ProfileTicks;
+  v70 = (float)(int)v69;
+  if ( v69 < 0 )
+    v70 = v70 + 1.8446744e19;
+  v71 = FrameTime + (float)(v70 * -0.000001);
+  if ( v71 < 0.0 )
+    v71 = 0.0;
+  if ( v136 )
   {
-    if ( !Scaleform::Render::ContextImpl::Context::HasChanges(&v6->RenderContext) && !v6->MovieDefKillList.Data.Size )
+    if ( !Scaleform::Render::ContextImpl::Context::HasChanges(&this->RenderContext) && !this->MovieDefKillList.Data.Size )
     {
-      if ( v6->PreviouslyCaptured > 0 )
+      if ( this->PreviouslyCaptured > 0 )
       {
-        LOBYTE(v73) = 1;
-        v6->pASMovieRoot.pObject->vfptr[11].__vecDelDtor(
-          (Scaleform::RefCountImplCore *)v6->pASMovieRoot.pObject,
-          (unsigned int)v73);
-        Scaleform::Render::ContextImpl::Context::Capture(&v6->RenderContext);
-        v6->pASMovieRoot.pObject->vfptr[11].__vecDelDtor((Scaleform::RefCountImplCore *)v6->pASMovieRoot.pObject, 0);
-        --v6->PreviouslyCaptured;
+        LOBYTE(v72) = 1;
+        this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[11].__vecDelDtor(
+          this->pASMovieRoot.pObject,
+          (unsigned int)v72);
+        Scaleform::Render::ContextImpl::Context::Capture(&this->RenderContext);
+        this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[11].__vecDelDtor(this->pASMovieRoot.pObject, 0);
+        --this->PreviouslyCaptured;
       }
-      goto LABEL_205;
+      goto LABEL_204;
     }
-    v74 = v6->IndirectTransformPairs.Data.Size;
-    if ( !v74 )
+    v73 = this->IndirectTransformPairs.Data.Size;
+    if ( !v73 )
     {
-LABEL_198:
-      if ( (v6->Flags >> 10) & 1
-        || (v109 = Scaleform::Render::ContextImpl::Context::HasChanges(&v6->RenderContext)) != 0 )
+LABEL_197:
+      if ( (this->Flags & 0x400) != 0
+        || (HasChanges = Scaleform::Render::ContextImpl::Context::HasChanges(&this->RenderContext)) )
       {
-        v109 = 1;
+        HasChanges = 1;
       }
-      if ( v109 )
-        v6->Flags |= 0x400u;
+      if ( HasChanges )
+        this->Flags |= 0x400u;
       else
-        v6->Flags &= 0xFFFFFBFF;
-      LOBYTE(v73) = 1;
-      v6->pASMovieRoot.pObject->vfptr[11].__vecDelDtor(
-        (Scaleform::RefCountImplCore *)v6->pASMovieRoot.pObject,
-        (unsigned int)v73);
-      Scaleform::Render::ContextImpl::Context::Capture(&v6->RenderContext);
-      v6->pASMovieRoot.pObject->vfptr[11].__vecDelDtor((Scaleform::RefCountImplCore *)v6->pASMovieRoot.pObject, 0);
-      v6->PreviouslyCaptured = 1;
-      goto LABEL_205;
+        this->Flags &= ~0x400u;
+      LOBYTE(v72) = 1;
+      this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[11].__vecDelDtor(
+        this->pASMovieRoot.pObject,
+        (unsigned int)v72);
+      Scaleform::Render::ContextImpl::Context::Capture(&this->RenderContext);
+      this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[11].__vecDelDtor(this->pASMovieRoot.pObject, 0);
+      this->PreviouslyCaptured = 1;
+      goto LABEL_204;
     }
-    v75 = 0i64;
+    v74 = 0i64;
     while ( 1 )
     {
-      v76 = v6->IndirectTransformPairs.Data.Data;
-      v77 = Scaleform::GFx::DisplayObjectBase::GetRenderNode(v76[v75].Obj.pObject);
-      v78 = v77->pPrev;
-      if ( v77->pPrev )
+      Data = this->IndirectTransformPairs.Data.Data;
+      RenderNode = Scaleform::GFx::DisplayObjectBase::GetRenderNode(Data[v74].Obj.pObject);
+      pPrev = RenderNode->pPrev;
+      if ( RenderNode->pPrev )
       {
-        v79 = ((_QWORD)v78->pNext & 0x80040181) != 0;
-        if ( (_QWORD)v78->pNext & 0x80040181 )
-          goto LABEL_179;
+        v78 = ((__int64)pPrev->pNext & 0x80040181) != 0;
+        if ( ((__int64)pPrev->pNext & 0x80040181) != 0 )
+          goto LABEL_178;
       }
       else
       {
-        v79 = 0;
+        v78 = 0;
       }
-      v73 = 0i64;
-      v80 = (Scaleform::Render::TreeRoot *)v76[v75].TransformParent.pObject;
-      if ( v80 )
+      v72 = 0i64;
+      v79 = (Scaleform::Render::TreeRoot *)Data[v74].TransformParent.pObject;
+      if ( v79 )
       {
-        while ( v80 != v6->pRenderRoot.pObject )
+        while ( v79 != this->pRenderRoot.pObject )
         {
-          if ( v80->pPrev && ((_QWORD)v80->pPrev->pNext & 0x80040181) != 0 )
+          if ( v79->pPrev && ((__int64)v79->pPrev->pNext & 0x80040181) != 0 )
           {
-            v79 = 1;
+            v78 = 1;
             break;
           }
-          v80 = (Scaleform::Render::TreeRoot *)v80->pParent;
-          v73 = (Scaleform::Render::TreeRoot *)(unsigned int)((_DWORD)v73 + 1);
-          if ( !v80 )
+          v79 = (Scaleform::Render::TreeRoot *)v79->pParent;
+          v72 = (Scaleform::Render::TreeRoot *)(unsigned int)((_DWORD)v72 + 1);
+          if ( !v79 )
             break;
         }
       }
-      if ( (_DWORD)v73 == v76[v75].OrigParentDepth )
+      if ( (_DWORD)v72 == Data[v74].OrigParentDepth )
       {
-        if ( !v79 )
+        if ( !v78 )
         {
-          v81 = v77->pParent;
-          if ( v81 )
+          v80 = (Scaleform::Render::TreeRoot *)RenderNode->pParent;
+          if ( v80 )
           {
-            v73 = v6->pRenderRoot.pObject;
-            while ( v81 != (Scaleform::Render::ContextImpl::Entry *)v73 )
+            v72 = this->pRenderRoot.pObject;
+            while ( v80 != v72 )
             {
-              if ( v81->pPrev && ((_QWORD)v81->pPrev->pNext & 0x80040181) != 0 )
-                goto LABEL_179;
-              v81 = v81->pParent;
-              if ( !v81 )
-                goto LABEL_197;
+              if ( v80->pPrev && ((__int64)v80->pPrev->pNext & 0x80040181) != 0 )
+                goto LABEL_178;
+              v80 = (Scaleform::Render::TreeRoot *)v80->pParent;
+              if ( !v80 )
+                goto LABEL_196;
             }
           }
-          goto LABEL_197;
+          goto LABEL_196;
         }
       }
       else
       {
-        v76[v75].OrigParentDepth = (signed int)v73;
+        Data[v74].OrigParentDepth = (int)v72;
       }
-LABEL_179:
-      v82 = v76[v75].Obj.pObject->pIndXFormData;
-      v83 = v82->OrigTransformMatrix.M[0][0];
-      v111.M[0][0] = v82->OrigTransformMatrix.M[0][0];
-      v84 = v82->OrigTransformMatrix.M[0][1];
-      v111.M[0][1] = v82->OrigTransformMatrix.M[0][1];
-      v85 = v82->OrigTransformMatrix.M[0][2];
-      v111.M[0][2] = v82->OrigTransformMatrix.M[0][2];
-      v86 = v82->OrigTransformMatrix.M[0][3];
-      v111.M[0][3] = v82->OrigTransformMatrix.M[0][3];
-      v87 = v82->OrigTransformMatrix.M[1][0];
-      v111.M[1][0] = v82->OrigTransformMatrix.M[1][0];
-      v88 = v82->OrigTransformMatrix.M[1][1];
-      v111.M[1][1] = v82->OrigTransformMatrix.M[1][1];
-      v89 = v82->OrigTransformMatrix.M[1][2];
-      v111.M[1][2] = v82->OrigTransformMatrix.M[1][2];
-      v90 = v82->OrigTransformMatrix.M[1][3];
-      v111.M[1][3] = v82->OrigTransformMatrix.M[1][3];
-      v91 = LODWORD(v82->OrigTransformMatrix.M[2][0]);
-      *(float *)&Dst[24] = v82->OrigTransformMatrix.M[2][0];
-      v92 = LODWORD(v82->OrigTransformMatrix.M[2][1]);
-      *(float *)&Dst[28] = v82->OrigTransformMatrix.M[2][1];
-      v93 = LODWORD(v82->OrigTransformMatrix.M[2][2]);
-      *(float *)&Dst[32] = v82->OrigTransformMatrix.M[2][2];
-      v94 = LODWORD(v82->OrigTransformMatrix.M[2][3]);
-      *(float *)&Dst[36] = v82->OrigTransformMatrix.M[2][3];
-      v95 = v82->IsOrig3D;
-      v96 = (Scaleform::Render::TreeRoot *)v76[v75].TransformParent.pObject;
-      if ( v96 )
-      {
-        while ( v96 != v6->pRenderRoot.pObject )
-        {
-          v97 = *(_QWORD *)(((unsigned __int64)v96 & 0xFFFFFFFFFFFFF000ui64) + 0x20);
-          v98 = *(_QWORD *)(v97
-                          + 8
-                          * (((unsigned __int64)((unsigned __int128)((signed __int64)((signed __int64)&v96[-1]
-                                                                                    - ((unsigned __int64)v96 & 0xFFFFFFFFFFFFF000ui64))
-                                                                   * (signed __int128)5270498306774157605i64) >> 64) >> 63)
-                           + (unsigned int)((signed __int64)((unsigned __int128)((signed __int64)((signed __int64)&v96[-1]
-                                                                                                - ((unsigned __int64)v96 & 0xFFFFFFFFFFFFF000ui64))
-                                                                               * (signed __int128)5270498306774157605i64) >> 64) >> 4))
-                          + 40);
-          if ( (*(_WORD *)(*(_QWORD *)(v97
-                                     + 8
-                                     * (((unsigned __int64)((unsigned __int128)((signed __int64)((signed __int64)&v96[-1]
-                                                                                               - ((unsigned __int64)v96 & 0xFFFFFFFFFFFFF000ui64))
-                                                                              * (signed __int128)5270498306774157605i64) >> 64) >> 63)
-                                      + (unsigned int)((signed __int64)((unsigned __int128)((signed __int64)((signed __int64)&v96[-1] - ((unsigned __int64)v96 & 0xFFFFFFFFFFFFF000ui64))
-                                                                                          * (signed __int128)5270498306774157605i64) >> 64) >> 4))
-                                     + 40)
-                         + 10i64) >> 9) & 1 )
-          {
-            *(_QWORD *)&v111.M[2][2] = __PAIR__(LODWORD(v84), LODWORD(v83));
-            v112 = v85;
-            v113 = v86;
-            v114 = v87;
-            v115 = v88;
-            v116 = v89;
-            v117 = v90;
-            v118 = v91;
-            v119 = v92;
-            v120 = v93;
-            v121 = v94;
-            Scaleform::Render::Matrix3x4<float>::MultiplyMatrix(
-              &v111,
-              (Scaleform::Render::Matrix3x4<float> *)(v98 + 16),
-              (Scaleform::Render::Matrix3x4<float> *)((char *)&v111 + 40));
-            v95 = 1;
-          }
-          else
-          {
-            *(_QWORD *)&m2.M[0][0] = __PAIR__(LODWORD(v84), LODWORD(v83));
-            *(_QWORD *)&m2.M[0][2] = __PAIR__(LODWORD(v86), LODWORD(v85));
-            *(_QWORD *)&m2.M[1][0] = __PAIR__(LODWORD(v88), LODWORD(v87));
-            *(_QWORD *)&m2.M[1][2] = __PAIR__(LODWORD(v90), LODWORD(v89));
-            *(_QWORD *)&m2.M[2][0] = __PAIR__(v92, v91);
-            *(_QWORD *)&m2.M[2][2] = __PAIR__(v94, v93);
-            Scaleform::Render::Matrix3x4<float>::MultiplyMatrix(
-              &v111,
-              (Scaleform::Render::Matrix2x4<float> *)(v98 + 16),
-              &m2);
-          }
-          v96 = (Scaleform::Render::TreeRoot *)v96->pParent;
-          v90 = v111.M[1][3];
-          v88 = v111.M[1][1];
-          v87 = v111.M[1][0];
-          v86 = v111.M[0][3];
-          v84 = v111.M[0][1];
-          v83 = v111.M[0][0];
-          if ( !v96 )
-            break;
-          v94 = *(_DWORD *)&Dst[36];
-          v93 = *(_DWORD *)&Dst[32];
-          v92 = *(_DWORD *)&Dst[28];
-          v91 = *(_DWORD *)&Dst[24];
-          v89 = v111.M[1][2];
-          v85 = v111.M[0][2];
-        }
-      }
-      memset(Dst, 0, 0x30ui64);
-      LODWORD(v99) = (_DWORD)FLOAT_1_0;
-      *(_DWORD *)Dst = (_DWORD)FLOAT_1_0;
-      v100 = (unsigned int)FLOAT_1_0;
-      *(_DWORD *)&Dst[20] = (_DWORD)FLOAT_1_0;
-      v101 = (unsigned int)FLOAT_1_0;
-      *(_DWORD *)&Dst[40] = (_DWORD)FLOAT_1_0;
-      v102 = (Scaleform::Render::TreeRoot *)v77->pParent;
-      if ( v102 )
-      {
-        while ( v102 != v6->pRenderRoot.pObject )
-        {
-          v103 = *(_QWORD *)(((unsigned __int64)v102 & 0xFFFFFFFFFFFFF000ui64) + 0x20);
-          v104 = *(_QWORD *)(v103
-                           + 8
-                           * (((unsigned __int64)((unsigned __int128)((signed __int64)((signed __int64)&v102[-1]
-                                                                                     - ((unsigned __int64)v102 & 0xFFFFFFFFFFFFF000ui64))
-                                                                    * (signed __int128)5270498306774157605i64) >> 64) >> 63)
-                            + (unsigned int)((signed __int64)((unsigned __int128)((signed __int64)((signed __int64)&v102[-1]
-                                                                                                 - ((unsigned __int64)v102 & 0xFFFFFFFFFFFFF000ui64))
-                                                                                * (signed __int128)5270498306774157605i64) >> 64) >> 4))
-                           + 40);
-          if ( (*(_WORD *)(*(_QWORD *)(v103
-                                     + 8
-                                     * (((unsigned __int64)((unsigned __int128)((signed __int64)((signed __int64)&v102[-1]
-                                                                                               - ((unsigned __int64)v102 & 0xFFFFFFFFFFFFF000ui64))
-                                                                              * (signed __int128)5270498306774157605i64) >> 64) >> 63)
-                                      + (unsigned int)((signed __int64)((unsigned __int128)((signed __int64)((signed __int64)&v102[-1] - ((unsigned __int64)v102 & 0xFFFFFFFFFFFFF000ui64))
-                                                                                          * (signed __int128)5270498306774157605i64) >> 64) >> 4))
-                                     + 40)
-                         + 10i64) >> 9) & 1 )
-          {
-            v122.M[0][0] = v99;
-            *(_QWORD *)&v122.M[0][1] = *(_QWORD *)&Dst[4];
-            v122.M[0][3] = *(float *)&Dst[12];
-            *(_QWORD *)&v122.M[1][0] = __PAIR__(v100, *(unsigned int *)&Dst[16]);
-            *(_QWORD *)&v122.M[1][2] = *(_QWORD *)&Dst[24];
-            *(_QWORD *)&v122.M[2][0] = *(_QWORD *)&Dst[32];
-            *(_QWORD *)&v122.M[2][2] = __PAIR__(*(unsigned int *)&Dst[44], v101);
-            Scaleform::Render::Matrix3x4<float>::MultiplyMatrix(
-              (Scaleform::Render::Matrix3x4<float> *)Dst,
-              (Scaleform::Render::Matrix3x4<float> *)(v104 + 16),
-              &v122);
-            v95 = 1;
-          }
-          else
-          {
-            v125.M[0][0] = v99;
-            *(_QWORD *)&v125.M[0][1] = *(_QWORD *)&Dst[4];
-            v125.M[0][3] = *(float *)&Dst[12];
-            *(_QWORD *)&v125.M[1][0] = __PAIR__(v100, *(unsigned int *)&Dst[16]);
-            *(_QWORD *)&v125.M[1][2] = *(_QWORD *)&Dst[24];
-            *(_QWORD *)&v125.M[2][0] = *(_QWORD *)&Dst[32];
-            *(_QWORD *)&v125.M[2][2] = __PAIR__(*(unsigned int *)&Dst[44], v101);
-            Scaleform::Render::Matrix3x4<float>::MultiplyMatrix(
-              (Scaleform::Render::Matrix3x4<float> *)Dst,
-              (Scaleform::Render::Matrix2x4<float> *)(v104 + 16),
-              &v125);
-          }
-          v102 = (Scaleform::Render::TreeRoot *)v102->pParent;
-          v100 = *(_DWORD *)&Dst[20];
-          v99 = *(float *)Dst;
-          if ( !v102 )
-            break;
-          v101 = *(_DWORD *)&Dst[40];
-        }
-        v84 = v111.M[0][1];
-        v83 = v111.M[0][0];
-        v86 = v111.M[0][3];
-        v88 = v111.M[1][1];
-        v87 = v111.M[1][0];
-        v90 = v111.M[1][3];
-      }
+LABEL_178:
+      pIndXFormData = Data[v74].Obj.pObject->pIndXFormData;
+      v82 = pIndXFormData->OrigTransformMatrix.M[0][0];
+      v108.M[0][0] = pIndXFormData->OrigTransformMatrix.M[0][0];
+      v83 = pIndXFormData->OrigTransformMatrix.M[0][1];
+      v108.M[0][1] = v83;
+      v84 = pIndXFormData->OrigTransformMatrix.M[0][2];
+      v108.M[0][2] = v84;
+      v85 = pIndXFormData->OrigTransformMatrix.M[0][3];
+      v108.M[0][3] = v85;
+      v86 = pIndXFormData->OrigTransformMatrix.M[1][0];
+      v108.M[1][0] = v86;
+      v87 = pIndXFormData->OrigTransformMatrix.M[1][1];
+      v108.M[1][1] = v87;
+      v88 = pIndXFormData->OrigTransformMatrix.M[1][2];
+      v108.M[1][2] = v88;
+      v89 = pIndXFormData->OrigTransformMatrix.M[1][3];
+      v108.M[1][3] = v89;
+      v90 = pIndXFormData->OrigTransformMatrix.M[2][0];
+      Dst.M[1][2] = v90;
+      v91 = pIndXFormData->OrigTransformMatrix.M[2][1];
+      Dst.M[1][3] = v91;
+      v92 = pIndXFormData->OrigTransformMatrix.M[2][2];
+      Dst.M[2][0] = v92;
+      v93 = pIndXFormData->OrigTransformMatrix.M[2][3];
+      Dst.M[2][1] = v93;
+      IsOrig3D = pIndXFormData->IsOrig3D;
+      v95 = (Scaleform::Render::TreeRoot *)Data[v74].TransformParent.pObject;
       if ( v95 )
       {
-        v105 = Scaleform::Render::Matrix3x4<float>::GetInverse((Scaleform::Render::Matrix3x4<float> *)Dst, &result);
-        *(_OWORD *)Dst = *(_OWORD *)&v105->M[0][0];
-        *(float *)&Dst[16] = v105->M[1][0];
-        *(float *)&Dst[20] = v105->M[1][1];
-        *(_QWORD *)&Dst[24] = *(_QWORD *)&v105->M[1][2];
-        *(_OWORD *)&Dst[32] = *(_OWORD *)&v105->M[2][0];
-        m1 = *(Scaleform::Render::Matrix3x4<float> *)Dst;
-        Scaleform::Render::Matrix3x4<float>::MultiplyMatrix((Scaleform::Render::Matrix3x4<float> *)Dst, &m1, &v111);
-        Scaleform::Render::TreeNode::SetMatrix3D(v77, (Scaleform::Render::Matrix3x4<float> *)Dst);
+        while ( v95 != this->pRenderRoot.pObject )
+        {
+          v96 = *(_QWORD *)(*(_QWORD *)(((unsigned __int64)v95 & 0xFFFFFFFFFFFFF000ui64) + 0x20)
+                          + 8i64 * (unsigned int)((int)((_DWORD)v95 - ((unsigned int)v95 & 0xFFFFF000) - 56) / 56)
+                          + 40);
+          if ( (*(_WORD *)(v96 + 10) & 0x200) != 0 )
+          {
+            *(_QWORD *)&v108.M[2][2] = __PAIR64__(LODWORD(v83), LODWORD(v82));
+            v109 = v84;
+            v110 = v85;
+            v111 = v86;
+            v112 = v87;
+            v113 = v88;
+            v114 = v89;
+            v115 = v90;
+            v116 = v91;
+            v117 = v92;
+            v118 = v93;
+            Scaleform::Render::Matrix3x4<float>::MultiplyMatrix(
+              &v108,
+              (Scaleform::Render::Matrix3x4<float> *)(v96 + 16),
+              (Scaleform::Render::Matrix3x4<float> *)&v108.M[2][2]);
+            IsOrig3D = 1;
+          }
+          else
+          {
+            *(_QWORD *)&m2.M[0][0] = __PAIR64__(LODWORD(v83), LODWORD(v82));
+            *(_QWORD *)&m2.M[0][2] = __PAIR64__(LODWORD(v85), LODWORD(v84));
+            *(_QWORD *)&m2.M[1][0] = __PAIR64__(LODWORD(v87), LODWORD(v86));
+            *(_QWORD *)&m2.M[1][2] = __PAIR64__(LODWORD(v89), LODWORD(v88));
+            *(_QWORD *)&m2.M[2][0] = __PAIR64__(LODWORD(v91), LODWORD(v90));
+            *(_QWORD *)&m2.M[2][2] = __PAIR64__(LODWORD(v93), LODWORD(v92));
+            Scaleform::Render::Matrix3x4<float>::MultiplyMatrix(
+              &v108,
+              (Scaleform::Render::Matrix2x4<float> *)(v96 + 16),
+              &m2);
+          }
+          v95 = (Scaleform::Render::TreeRoot *)v95->pParent;
+          v89 = v108.M[1][3];
+          v87 = v108.M[1][1];
+          v86 = v108.M[1][0];
+          v85 = v108.M[0][3];
+          v83 = v108.M[0][1];
+          v82 = v108.M[0][0];
+          if ( !v95 )
+            break;
+          v93 = Dst.M[2][1];
+          v92 = Dst.M[2][0];
+          v91 = Dst.M[1][3];
+          v90 = Dst.M[1][2];
+          v88 = v108.M[1][2];
+          v84 = v108.M[0][2];
+        }
+      }
+      memset(&Dst, 0, sizeof(Dst));
+      LODWORD(v97) = (_DWORD)FLOAT_1_0;
+      LODWORD(Dst.M[0][0]) = (_DWORD)FLOAT_1_0;
+      LODWORD(v98) = (_DWORD)FLOAT_1_0;
+      LODWORD(Dst.M[1][1]) = (_DWORD)FLOAT_1_0;
+      LODWORD(v99) = (_DWORD)FLOAT_1_0;
+      LODWORD(Dst.M[2][2]) = (_DWORD)FLOAT_1_0;
+      v100 = (Scaleform::Render::TreeRoot *)RenderNode->pParent;
+      if ( v100 )
+      {
+        while ( v100 != this->pRenderRoot.pObject )
+        {
+          v101 = *(_QWORD *)(*(_QWORD *)(((unsigned __int64)v100 & 0xFFFFFFFFFFFFF000ui64) + 0x20)
+                           + 8i64 * (unsigned int)((int)((_DWORD)v100 - ((unsigned int)v100 & 0xFFFFF000) - 56) / 56)
+                           + 40);
+          if ( (*(_WORD *)(v101 + 10) & 0x200) != 0 )
+          {
+            v119.M[0][0] = v97;
+            *(_QWORD *)&v119.M[0][1] = *(_QWORD *)&Dst.M[0][1];
+            v119.M[0][3] = Dst.M[0][3];
+            *(_QWORD *)&v119.M[1][0] = __PAIR64__(LODWORD(v98), LODWORD(Dst.M[1][0]));
+            *(_QWORD *)&v119.M[1][2] = *(_QWORD *)&Dst.M[1][2];
+            *(_QWORD *)&v119.M[2][0] = *(_QWORD *)&Dst.M[2][0];
+            *(_QWORD *)&v119.M[2][2] = __PAIR64__(LODWORD(Dst.M[2][3]), LODWORD(v99));
+            Scaleform::Render::Matrix3x4<float>::MultiplyMatrix(
+              &Dst,
+              (Scaleform::Render::Matrix3x4<float> *)(v101 + 16),
+              &v119);
+            IsOrig3D = 1;
+          }
+          else
+          {
+            v122.M[0][0] = v97;
+            *(_QWORD *)&v122.M[0][1] = *(_QWORD *)&Dst.M[0][1];
+            v122.M[0][3] = Dst.M[0][3];
+            *(_QWORD *)&v122.M[1][0] = __PAIR64__(LODWORD(v98), LODWORD(Dst.M[1][0]));
+            *(_QWORD *)&v122.M[1][2] = *(_QWORD *)&Dst.M[1][2];
+            *(_QWORD *)&v122.M[2][0] = *(_QWORD *)&Dst.M[2][0];
+            *(_QWORD *)&v122.M[2][2] = __PAIR64__(LODWORD(Dst.M[2][3]), LODWORD(v99));
+            Scaleform::Render::Matrix3x4<float>::MultiplyMatrix(
+              &Dst,
+              (Scaleform::Render::Matrix2x4<float> *)(v101 + 16),
+              &v122);
+          }
+          v100 = (Scaleform::Render::TreeRoot *)v100->pParent;
+          v98 = Dst.M[1][1];
+          v97 = Dst.M[0][0];
+          if ( !v100 )
+            break;
+          v99 = Dst.M[2][2];
+        }
+        v82 = v108.M[0][0];
+        v83 = v108.M[0][1];
+        v85 = v108.M[0][3];
+        v86 = v108.M[1][0];
+        v87 = v108.M[1][1];
+        v89 = v108.M[1][3];
+      }
+      if ( IsOrig3D )
+      {
+        Dst = *Scaleform::Render::Matrix3x4<float>::GetInverse(&Dst, &result);
+        m1 = Dst;
+        Scaleform::Render::Matrix3x4<float>::MultiplyMatrix(&Dst, &m1, &v108);
+        Scaleform::Render::TreeNode::SetMatrix3D(RenderNode, &Dst);
       }
       else
       {
-        *(_QWORD *)&v111.M[0][2] = __PAIR__(*(unsigned int *)&Dst[4], LODWORD(v99));
-        *(_QWORD *)&v111.M[1][0] = *(_QWORD *)&Dst[8];
-        *(_QWORD *)&v111.M[1][2] = __PAIR__(v100, *(unsigned int *)&Dst[16]);
-        *(_QWORD *)&v111.M[2][0] = *(_QWORD *)&Dst[24];
+        *(_QWORD *)&v108.M[0][2] = __PAIR64__(LODWORD(Dst.M[0][1]), LODWORD(v97));
+        *(_QWORD *)&v108.M[1][0] = *(_QWORD *)&Dst.M[0][2];
+        *(_QWORD *)&v108.M[1][2] = __PAIR64__(LODWORD(v98), LODWORD(Dst.M[1][0]));
+        *(_QWORD *)&v108.M[2][0] = *(_QWORD *)&Dst.M[1][2];
         Scaleform::Render::Matrix2x4<float>::SetInverse(
-          (Scaleform::Render::Matrix2x4<float> *)Dst,
-          (Scaleform::Render::Matrix2x4<float> *)&v111.M[0][2]);
-        v106 = *(_QWORD *)Dst;
-        v107 = *(float *)&Dst[16];
-        v108 = *(float *)&Dst[20];
-        *(float *)Dst = (float)(v87 * *(float *)&Dst[4]) + (float)(v83 * *(float *)Dst);
-        *(float *)&Dst[16] = (float)(v83 * *(float *)&Dst[16]) + (float)(v87 * *(float *)&Dst[20]);
-        *(float *)&Dst[4] = (float)(*(float *)&Dst[4] * v88) + (float)(*(float *)&v106 * v84);
-        *(float *)&Dst[20] = (float)(v107 * v84) + (float)(*(float *)&Dst[20] * v88);
-        *(_DWORD *)&Dst[24] = 0;
-        *(_DWORD *)&Dst[8] = 0;
-        *(float *)&Dst[12] = *(float *)&Dst[12]
-                           + (float)((float)(*(float *)&v106 * v86) + (float)(*((float *)&v106 + 1) * v90));
-        *(float *)&Dst[28] = *(float *)&Dst[28] + (float)((float)(v107 * v86) + (float)(v108 * v90));
-        Scaleform::Render::TreeNode::SetMatrix(v77, (Scaleform::Render::Matrix2x4<float> *)Dst);
+          (Scaleform::Render::Matrix2x4<float> *)&Dst,
+          (Scaleform::Render::Matrix2x4<float> *)&v108.M[0][2]);
+        v102 = Dst.M[0][0];
+        v103 = Dst.M[0][1];
+        v104 = Dst.M[1][0];
+        v105 = Dst.M[1][1];
+        Dst.M[0][0] = (float)(v86 * Dst.M[0][1]) + (float)(v82 * Dst.M[0][0]);
+        Dst.M[1][0] = (float)(v82 * Dst.M[1][0]) + (float)(v86 * Dst.M[1][1]);
+        Dst.M[0][1] = (float)(Dst.M[0][1] * v87) + (float)(v102 * v83);
+        Dst.M[1][1] = (float)(v104 * v83) + (float)(Dst.M[1][1] * v87);
+        Dst.M[1][2] = 0.0;
+        Dst.M[0][2] = 0.0;
+        Dst.M[0][3] = Dst.M[0][3] + (float)((float)(v102 * v85) + (float)(v103 * v89));
+        Dst.M[1][3] = Dst.M[1][3] + (float)((float)(v104 * v85) + (float)(v105 * v89));
+        Scaleform::Render::TreeNode::SetMatrix(RenderNode, (Scaleform::Render::Matrix2x4<float> *)&Dst);
       }
-LABEL_197:
-      ++v75;
-      if ( !--v74 )
-        goto LABEL_198;
+LABEL_196:
+      ++v74;
+      if ( !--v73 )
+        goto LABEL_197;
     }
   }
-LABEL_205:
-  if ( v72 >= (float)(v6->FrameTime - v6->TimeRemainder) )
-    v72 = v6->FrameTime - v6->TimeRemainder;
-  if ( v137 )
-    Scaleform::RefCountImpl::Release(v137);
-  if ( *(_QWORD *)&Dst[40] )
-    Scaleform::RefCountImpl::Release(*(Scaleform::Render::RenderBuffer **)&Dst[40]);
-  return v72;
-}RefCountImpl::Release(*(Scaleform::Render::RenderBuffer **)&Dst[40]);
-  return v72;
+LABEL_204:
+  if ( v71 >= (float)(this->FrameTime - this->TimeRemainder) )
+    v71 = this->FrameTime - this->TimeRemainder;
+  if ( v134 )
+    Scaleform::RefCountImpl::Release(v134);
+  if ( *(_QWORD *)&Dst.M[2][2] )
+    Scaleform::RefCountImpl::Release(*(Scaleform::Render::RenderBuffer **)&Dst.M[2][2]);
+  return v71;
 }
 
 // File Line: 1758
 // RVA: 0x8B98E0
-void __fastcall Scaleform::GFx::MovieImpl::Capture(Scaleform::GFx::MovieImpl *this, __int64 onChangeOnly)
+void __fastcall Scaleform::GFx::MovieImpl::Capture(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::Render::TreeRoot *onChangeOnly)
 {
-  Scaleform::GFx::MovieImpl *v2; // rdi
-  unsigned __int64 v3; // r12
+  unsigned __int64 Size; // r12
   __int64 v4; // r14
-  Scaleform::GFx::MovieImpl::IndirectTransPair *v5; // rbx
-  Scaleform::Render::TreeNode *v6; // r15
-  Scaleform::Render::ContextImpl::Entry *v7; // rcx
+  Scaleform::GFx::MovieImpl::IndirectTransPair *Data; // rbx
+  Scaleform::Render::TreeNode *RenderNode; // r15
+  Scaleform::Render::ContextImpl::Entry *pPrev; // rcx
   bool v8; // r9
   Scaleform::GFx::DisplayObjectBase *v9; // rax
   Scaleform::Render::TreeRoot *v10; // rbx
-  Scaleform::GFx::DisplayObjectBase::IndirectTransformDataType *v11; // rcx
+  Scaleform::GFx::DisplayObjectBase::IndirectTransformDataType *pIndXFormData; // rcx
   float v12; // xmm7_4
   float v13; // xmm8_4
   float v14; // xmm0_4
@@ -3158,115 +3079,104 @@ void __fastcall Scaleform::GFx::MovieImpl::Capture(Scaleform::GFx::MovieImpl *th
   float v21; // xmm3_4
   float v22; // xmm4_4
   float v23; // xmm5_4
-  char v24; // si
-  __int64 v25; // r9
-  __int64 v26; // rdx
-  Scaleform::Render::TreeRoot *v27; // rcx
-  Scaleform::Render::ContextImpl::Entry *v28; // rcx
-  Scaleform::Render::TreeRoot *v29; // rbx
-  float v30; // xmm0_4
-  float v31; // xmm2_4
-  unsigned int v32; // xmm3_4
-  __int64 v33; // r9
-  __int64 v34; // rdx
-  Scaleform::Render::Matrix3x4<float> *v35; // rax
-  float v36; // xmm10_4
-  float v37; // xmm8_4
-  float v38; // xmm6_4
-  float v39; // xmm4_4
-  float v40; // xmm2_4
-  unsigned int v41; // xmm0_4
-  float v42; // xmm4_4
-  float v43; // xmm6_4
-  unsigned int v44; // xmm1_4
-  float v45; // xmm4_4
-  float v46; // xmm2_4
-  float v47; // xmm6_4
-  bool v48; // al
-  float Dst; // [rsp+20h] [rbp-E0h]
-  __int64 v50; // [rsp+24h] [rbp-DCh]
-  float v51; // [rsp+2Ch] [rbp-D4h]
-  float v52; // [rsp+30h] [rbp-D0h]
-  float v53; // [rsp+34h] [rbp-CCh]
-  __int64 v54; // [rsp+38h] [rbp-C8h]
-  __int64 v55; // [rsp+40h] [rbp-C0h]
-  unsigned int v56; // [rsp+48h] [rbp-B8h]
-  unsigned int v57; // [rsp+4Ch] [rbp-B4h]
-  Scaleform::Render::Matrix3x4<float> v58; // [rsp+50h] [rbp-B0h]
-  Scaleform::Render::Matrix3x4<float> m2; // [rsp+80h] [rbp-80h]
-  Scaleform::Render::Matrix3x4<float> v60; // [rsp+B0h] [rbp-50h]
-  Scaleform::Render::Matrix3x4<float> v61; // [rsp+E0h] [rbp-20h]
-  Scaleform::Render::Matrix3x4<float> m1; // [rsp+110h] [rbp+10h]
-  Scaleform::Render::Matrix3x4<float> v63; // [rsp+140h] [rbp+40h]
-  Scaleform::Render::Matrix3x4<float> result; // [rsp+170h] [rbp+70h]
+  char IsOrig3D; // si
+  __int64 v25; // rdx
+  Scaleform::Render::TreeRoot *pObject; // rcx
+  Scaleform::Render::TreeRoot *pParent; // rcx
+  Scaleform::Render::TreeRoot *v28; // rbx
+  float v29; // xmm0_4
+  float v30; // xmm2_4
+  float v31; // xmm3_4
+  __int64 v32; // rdx
+  Scaleform::Render::Matrix3x4<float> *Inverse; // rax
+  float v34; // xmm10_4
+  float v35; // xmm8_4
+  float v36; // xmm6_4
+  float v37; // xmm4_4
+  float v38; // xmm2_4
+  float v39; // xmm0_4
+  float v40; // xmm4_4
+  float v41; // xmm6_4
+  unsigned int v42; // xmm1_4
+  float v43; // xmm4_4
+  unsigned int v44; // xmm2_4
+  float v45; // xmm6_4
+  bool HasChanges; // al
+  Scaleform::Render::Matrix3x4<float> Dst; // [rsp+20h] [rbp-E0h] BYREF
+  Scaleform::Render::Matrix3x4<float> v48; // [rsp+50h] [rbp-B0h] BYREF
+  Scaleform::Render::Matrix3x4<float> m2; // [rsp+80h] [rbp-80h] BYREF
+  Scaleform::Render::Matrix3x4<float> v50; // [rsp+B0h] [rbp-50h] BYREF
+  Scaleform::Render::Matrix3x4<float> v51; // [rsp+E0h] [rbp-20h] BYREF
+  Scaleform::Render::Matrix3x4<float> m1; // [rsp+110h] [rbp+10h] BYREF
+  Scaleform::Render::Matrix3x4<float> v53; // [rsp+140h] [rbp+40h] BYREF
+  Scaleform::Render::Matrix3x4<float> result; // [rsp+170h] [rbp+70h] BYREF
 
-  v2 = this;
   if ( (_BYTE)onChangeOnly
     && !Scaleform::Render::ContextImpl::Context::HasChanges(&this->RenderContext)
-    && !v2->MovieDefKillList.Data.Size )
+    && !this->MovieDefKillList.Data.Size )
   {
-    if ( v2->PreviouslyCaptured > 0 )
+    if ( this->PreviouslyCaptured > 0 )
     {
       LOBYTE(onChangeOnly) = 1;
-      v2->pASMovieRoot.pObject->vfptr[11].__vecDelDtor(
-        (Scaleform::RefCountImplCore *)v2->pASMovieRoot.pObject,
-        onChangeOnly);
-      Scaleform::Render::ContextImpl::Context::Capture(&v2->RenderContext);
-      v2->pASMovieRoot.pObject->vfptr[11].__vecDelDtor((Scaleform::RefCountImplCore *)v2->pASMovieRoot.pObject, 0);
-      --v2->PreviouslyCaptured;
+      this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[11].__vecDelDtor(
+        this->pASMovieRoot.pObject,
+        (unsigned int)onChangeOnly);
+      Scaleform::Render::ContextImpl::Context::Capture(&this->RenderContext);
+      this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[11].__vecDelDtor(this->pASMovieRoot.pObject, 0);
+      --this->PreviouslyCaptured;
     }
     return;
   }
-  v3 = v2->IndirectTransformPairs.Data.Size;
-  if ( v3 )
+  Size = this->IndirectTransformPairs.Data.Size;
+  if ( Size )
   {
     v4 = 0i64;
     do
     {
-      v5 = v2->IndirectTransformPairs.Data.Data;
-      v6 = Scaleform::GFx::DisplayObjectBase::GetRenderNode(v5[v4].Obj.pObject);
-      v7 = v6->pPrev;
-      if ( v6->pPrev )
+      Data = this->IndirectTransformPairs.Data.Data;
+      RenderNode = Scaleform::GFx::DisplayObjectBase::GetRenderNode(Data[v4].Obj.pObject);
+      pPrev = RenderNode->pPrev;
+      if ( RenderNode->pPrev )
       {
-        v8 = ((_QWORD)v7->pNext & 0x80040181) != 0;
-        if ( (_QWORD)v7->pNext & 0x80040181 )
+        v8 = ((__int64)pPrev->pNext & 0x80040181) != 0;
+        if ( ((__int64)pPrev->pNext & 0x80040181) != 0 )
           goto LABEL_10;
       }
       else
       {
         v8 = 0;
       }
-      v27 = (Scaleform::Render::TreeRoot *)v5[v4].TransformParent.pObject;
+      pObject = (Scaleform::Render::TreeRoot *)Data[v4].TransformParent.pObject;
       onChangeOnly = 0i64;
-      if ( v27 )
+      if ( pObject )
       {
-        while ( v27 != v2->pRenderRoot.pObject )
+        while ( pObject != this->pRenderRoot.pObject )
         {
-          if ( v27->pPrev && ((_QWORD)v27->pPrev->pNext & 0x80040181) != 0 )
+          if ( pObject->pPrev && ((__int64)pObject->pPrev->pNext & 0x80040181) != 0 )
           {
             v8 = 1;
             break;
           }
-          v27 = (Scaleform::Render::TreeRoot *)v27->pParent;
-          onChangeOnly = (unsigned int)(onChangeOnly + 1);
-          if ( !v27 )
+          pObject = (Scaleform::Render::TreeRoot *)pObject->pParent;
+          onChangeOnly = (Scaleform::Render::TreeRoot *)(unsigned int)((_DWORD)onChangeOnly + 1);
+          if ( !pObject )
             break;
         }
       }
-      if ( (_DWORD)onChangeOnly == v5[v4].OrigParentDepth )
+      if ( (_DWORD)onChangeOnly == Data[v4].OrigParentDepth )
       {
         if ( !v8 )
         {
-          v28 = v6->pParent;
-          if ( v28 )
+          pParent = (Scaleform::Render::TreeRoot *)RenderNode->pParent;
+          if ( pParent )
           {
-            onChangeOnly = (__int64)v2->pRenderRoot.pObject;
-            while ( v28 != (Scaleform::Render::ContextImpl::Entry *)onChangeOnly )
+            onChangeOnly = this->pRenderRoot.pObject;
+            while ( pParent != onChangeOnly )
             {
-              if ( v28->pPrev && ((_QWORD)v28->pPrev->pNext & 0x80040181) != 0 )
+              if ( pParent->pPrev && ((__int64)pParent->pPrev->pNext & 0x80040181) != 0 )
                 goto LABEL_10;
-              v28 = v28->pParent;
-              if ( !v28 )
+              pParent = (Scaleform::Render::TreeRoot *)pParent->pParent;
+              if ( !pParent )
                 goto LABEL_46;
             }
           }
@@ -3275,790 +3185,758 @@ void __fastcall Scaleform::GFx::MovieImpl::Capture(Scaleform::GFx::MovieImpl *th
       }
       else
       {
-        v5[v4].OrigParentDepth = onChangeOnly;
+        Data[v4].OrigParentDepth = (int)onChangeOnly;
       }
 LABEL_10:
-      v9 = v5[v4].Obj.pObject;
-      v10 = (Scaleform::Render::TreeRoot *)v5[v4].TransformParent.pObject;
-      v11 = v9->pIndXFormData;
-      v12 = v11->OrigTransformMatrix.M[0][0];
-      v58.M[0][0] = v11->OrigTransformMatrix.M[0][0];
-      v13 = v11->OrigTransformMatrix.M[0][1];
-      v58.M[0][1] = v11->OrigTransformMatrix.M[0][1];
-      v14 = v11->OrigTransformMatrix.M[0][2];
-      v58.M[0][2] = v11->OrigTransformMatrix.M[0][2];
-      v15 = v11->OrigTransformMatrix.M[0][3];
-      v58.M[0][3] = v11->OrigTransformMatrix.M[0][3];
-      v16 = v11->OrigTransformMatrix.M[1][0];
-      v58.M[1][0] = v11->OrigTransformMatrix.M[1][0];
-      v17 = v11->OrigTransformMatrix.M[1][1];
-      v58.M[1][1] = v11->OrigTransformMatrix.M[1][1];
-      v18 = v11->OrigTransformMatrix.M[1][2];
-      v58.M[1][2] = v11->OrigTransformMatrix.M[1][2];
-      v19 = v11->OrigTransformMatrix.M[1][3];
-      v58.M[1][3] = v11->OrigTransformMatrix.M[1][3];
-      v20 = v11->OrigTransformMatrix.M[2][0];
-      v58.M[2][0] = v11->OrigTransformMatrix.M[2][0];
-      v21 = v11->OrigTransformMatrix.M[2][1];
-      v58.M[2][1] = v11->OrigTransformMatrix.M[2][1];
-      v22 = v11->OrigTransformMatrix.M[2][2];
-      v58.M[2][2] = v11->OrigTransformMatrix.M[2][2];
-      v23 = v11->OrigTransformMatrix.M[2][3];
-      v58.M[2][3] = v11->OrigTransformMatrix.M[2][3];
-      v24 = v11->IsOrig3D;
+      v9 = Data[v4].Obj.pObject;
+      v10 = (Scaleform::Render::TreeRoot *)Data[v4].TransformParent.pObject;
+      pIndXFormData = v9->pIndXFormData;
+      v12 = pIndXFormData->OrigTransformMatrix.M[0][0];
+      v48.M[0][0] = pIndXFormData->OrigTransformMatrix.M[0][0];
+      v13 = pIndXFormData->OrigTransformMatrix.M[0][1];
+      v48.M[0][1] = v13;
+      v14 = pIndXFormData->OrigTransformMatrix.M[0][2];
+      v48.M[0][2] = v14;
+      v15 = pIndXFormData->OrigTransformMatrix.M[0][3];
+      v48.M[0][3] = v15;
+      v16 = pIndXFormData->OrigTransformMatrix.M[1][0];
+      v48.M[1][0] = v16;
+      v17 = pIndXFormData->OrigTransformMatrix.M[1][1];
+      v48.M[1][1] = v17;
+      v18 = pIndXFormData->OrigTransformMatrix.M[1][2];
+      v48.M[1][2] = v18;
+      v19 = pIndXFormData->OrigTransformMatrix.M[1][3];
+      v48.M[1][3] = v19;
+      v20 = pIndXFormData->OrigTransformMatrix.M[2][0];
+      v48.M[2][0] = v20;
+      v21 = pIndXFormData->OrigTransformMatrix.M[2][1];
+      v48.M[2][1] = v21;
+      v22 = pIndXFormData->OrigTransformMatrix.M[2][2];
+      v48.M[2][2] = v22;
+      v23 = pIndXFormData->OrigTransformMatrix.M[2][3];
+      v48.M[2][3] = v23;
+      IsOrig3D = pIndXFormData->IsOrig3D;
       if ( v10 )
       {
-        while ( v10 != v2->pRenderRoot.pObject )
+        while ( v10 != this->pRenderRoot.pObject )
         {
-          v25 = *(_QWORD *)(((unsigned __int64)v10 & 0xFFFFFFFFFFFFF000ui64) + 0x20);
-          v26 = *(_QWORD *)(v25
-                          + 8
-                          * (((unsigned __int64)((unsigned __int128)((signed __int64)((signed __int64)&v10[-1]
-                                                                                    - ((unsigned __int64)v10 & 0xFFFFFFFFFFFFF000ui64))
-                                                                   * (signed __int128)5270498306774157605i64) >> 64) >> 63)
-                           + (unsigned int)((signed __int64)((unsigned __int128)((signed __int64)((signed __int64)&v10[-1]
-                                                                                                - ((unsigned __int64)v10 & 0xFFFFFFFFFFFFF000ui64))
-                                                                               * (signed __int128)5270498306774157605i64) >> 64) >> 4))
+          v25 = *(_QWORD *)(*(_QWORD *)(((unsigned __int64)v10 & 0xFFFFFFFFFFFFF000ui64) + 0x20)
+                          + 8i64 * (unsigned int)((int)((_DWORD)v10 - ((unsigned int)v10 & 0xFFFFF000) - 56) / 56)
                           + 40);
-          if ( (*(_WORD *)(*(_QWORD *)(v25
-                                     + 8
-                                     * (((unsigned __int64)((unsigned __int128)((signed __int64)((signed __int64)&v10[-1]
-                                                                                               - ((unsigned __int64)v10 & 0xFFFFFFFFFFFFF000ui64))
-                                                                              * (signed __int128)5270498306774157605i64) >> 64) >> 63)
-                                      + (unsigned int)((signed __int64)((unsigned __int128)((signed __int64)((signed __int64)&v10[-1] - ((unsigned __int64)v10 & 0xFFFFFFFFFFFFF000ui64))
-                                                                                          * (signed __int128)5270498306774157605i64) >> 64) >> 4))
-                                     + 40)
-                         + 10i64) >> 9) & 1 )
+          if ( (*(_WORD *)(v25 + 10) & 0x200) != 0 )
           {
-            *(_QWORD *)&m2.M[0][0] = __PAIR__(LODWORD(v13), LODWORD(v12));
-            *(_QWORD *)&m2.M[0][2] = __PAIR__(LODWORD(v15), LODWORD(v14));
-            *(_QWORD *)&m2.M[1][0] = __PAIR__(LODWORD(v17), LODWORD(v16));
-            *(_QWORD *)&m2.M[1][2] = __PAIR__(LODWORD(v19), LODWORD(v18));
-            *(_QWORD *)&m2.M[2][0] = __PAIR__(LODWORD(v21), LODWORD(v20));
-            *(_QWORD *)&m2.M[2][2] = __PAIR__(LODWORD(v23), LODWORD(v22));
+            *(_QWORD *)&m2.M[0][0] = __PAIR64__(LODWORD(v13), LODWORD(v12));
+            *(_QWORD *)&m2.M[0][2] = __PAIR64__(LODWORD(v15), LODWORD(v14));
+            *(_QWORD *)&m2.M[1][0] = __PAIR64__(LODWORD(v17), LODWORD(v16));
+            *(_QWORD *)&m2.M[1][2] = __PAIR64__(LODWORD(v19), LODWORD(v18));
+            *(_QWORD *)&m2.M[2][0] = __PAIR64__(LODWORD(v21), LODWORD(v20));
+            *(_QWORD *)&m2.M[2][2] = __PAIR64__(LODWORD(v23), LODWORD(v22));
             Scaleform::Render::Matrix3x4<float>::MultiplyMatrix(
-              &v58,
-              (Scaleform::Render::Matrix3x4<float> *)(v26 + 16),
+              &v48,
+              (Scaleform::Render::Matrix3x4<float> *)(v25 + 16),
               &m2);
-            v24 = 1;
+            IsOrig3D = 1;
           }
           else
           {
-            *(_QWORD *)&v61.M[0][0] = __PAIR__(LODWORD(v13), LODWORD(v12));
-            *(_QWORD *)&v61.M[0][2] = __PAIR__(LODWORD(v15), LODWORD(v14));
-            *(_QWORD *)&v61.M[1][0] = __PAIR__(LODWORD(v17), LODWORD(v16));
-            *(_QWORD *)&v61.M[1][2] = __PAIR__(LODWORD(v19), LODWORD(v18));
-            *(_QWORD *)&v61.M[2][0] = __PAIR__(LODWORD(v21), LODWORD(v20));
-            *(_QWORD *)&v61.M[2][2] = __PAIR__(LODWORD(v23), LODWORD(v22));
+            *(_QWORD *)&v51.M[0][0] = __PAIR64__(LODWORD(v13), LODWORD(v12));
+            *(_QWORD *)&v51.M[0][2] = __PAIR64__(LODWORD(v15), LODWORD(v14));
+            *(_QWORD *)&v51.M[1][0] = __PAIR64__(LODWORD(v17), LODWORD(v16));
+            *(_QWORD *)&v51.M[1][2] = __PAIR64__(LODWORD(v19), LODWORD(v18));
+            *(_QWORD *)&v51.M[2][0] = __PAIR64__(LODWORD(v21), LODWORD(v20));
+            *(_QWORD *)&v51.M[2][2] = __PAIR64__(LODWORD(v23), LODWORD(v22));
             Scaleform::Render::Matrix3x4<float>::MultiplyMatrix(
-              &v58,
-              (Scaleform::Render::Matrix2x4<float> *)(v26 + 16),
-              &v61);
+              &v48,
+              (Scaleform::Render::Matrix2x4<float> *)(v25 + 16),
+              &v51);
           }
           v10 = (Scaleform::Render::TreeRoot *)v10->pParent;
-          v19 = v58.M[1][3];
-          v17 = v58.M[1][1];
-          v16 = v58.M[1][0];
-          v15 = v58.M[0][3];
-          v13 = v58.M[0][1];
-          v12 = v58.M[0][0];
+          v19 = v48.M[1][3];
+          v17 = v48.M[1][1];
+          v16 = v48.M[1][0];
+          v15 = v48.M[0][3];
+          v13 = v48.M[0][1];
+          v12 = v48.M[0][0];
           if ( !v10 )
             break;
-          v23 = v58.M[2][3];
-          v22 = v58.M[2][2];
-          v21 = v58.M[2][1];
-          v20 = v58.M[2][0];
-          v18 = v58.M[1][2];
-          v14 = v58.M[0][2];
+          v23 = v48.M[2][3];
+          v22 = v48.M[2][2];
+          v21 = v48.M[2][1];
+          v20 = v48.M[2][0];
+          v18 = v48.M[1][2];
+          v14 = v48.M[0][2];
         }
       }
-      memset(&Dst, 0, 0x30ui64);
-      v29 = (Scaleform::Render::TreeRoot *)v6->pParent;
-      v30 = *(float *)&FLOAT_1_0;
+      memset(&Dst, 0, sizeof(Dst));
+      v28 = (Scaleform::Render::TreeRoot *)RenderNode->pParent;
+      v29 = *(float *)&FLOAT_1_0;
+      LODWORD(v30) = (_DWORD)FLOAT_1_0;
       LODWORD(v31) = (_DWORD)FLOAT_1_0;
-      v32 = (unsigned int)FLOAT_1_0;
-      LODWORD(Dst) = (_DWORD)FLOAT_1_0;
-      v53 = *(float *)&FLOAT_1_0;
-      v56 = (unsigned int)FLOAT_1_0;
-      if ( v29 )
+      LODWORD(Dst.M[0][0]) = (_DWORD)FLOAT_1_0;
+      LODWORD(Dst.M[1][1]) = (_DWORD)FLOAT_1_0;
+      LODWORD(Dst.M[2][2]) = (_DWORD)FLOAT_1_0;
+      if ( v28 )
       {
-        while ( v29 != v2->pRenderRoot.pObject )
+        while ( v28 != this->pRenderRoot.pObject )
         {
-          v33 = *(_QWORD *)(((unsigned __int64)v29 & 0xFFFFFFFFFFFFF000ui64) + 0x20);
-          v34 = *(_QWORD *)(v33
-                          + 8
-                          * (((unsigned __int64)((unsigned __int128)((signed __int64)((signed __int64)&v29[-1]
-                                                                                    - ((unsigned __int64)v29 & 0xFFFFFFFFFFFFF000ui64))
-                                                                   * (signed __int128)5270498306774157605i64) >> 64) >> 63)
-                           + (unsigned int)((signed __int64)((unsigned __int128)((signed __int64)((signed __int64)&v29[-1]
-                                                                                                - ((unsigned __int64)v29 & 0xFFFFFFFFFFFFF000ui64))
-                                                                               * (signed __int128)5270498306774157605i64) >> 64) >> 4))
+          v32 = *(_QWORD *)(*(_QWORD *)(((unsigned __int64)v28 & 0xFFFFFFFFFFFFF000ui64) + 0x20)
+                          + 8i64 * (unsigned int)((int)((_DWORD)v28 - ((unsigned int)v28 & 0xFFFFF000) - 56) / 56)
                           + 40);
-          if ( (*(_WORD *)(*(_QWORD *)(v33
-                                     + 8
-                                     * (((unsigned __int64)((unsigned __int128)((signed __int64)((signed __int64)&v29[-1]
-                                                                                               - ((unsigned __int64)v29 & 0xFFFFFFFFFFFFF000ui64))
-                                                                              * (signed __int128)5270498306774157605i64) >> 64) >> 63)
-                                      + (unsigned int)((signed __int64)((unsigned __int128)((signed __int64)((signed __int64)&v29[-1] - ((unsigned __int64)v29 & 0xFFFFFFFFFFFFF000ui64))
-                                                                                          * (signed __int128)5270498306774157605i64) >> 64) >> 4))
-                                     + 40)
-                         + 10i64) >> 9) & 1 )
+          if ( (*(_WORD *)(v32 + 10) & 0x200) != 0 )
           {
-            v60.M[0][0] = v30;
-            *(_QWORD *)&v60.M[0][1] = v50;
-            v60.M[0][3] = v51;
-            *(_QWORD *)&v60.M[1][0] = __PAIR__(LODWORD(v31), LODWORD(v52));
-            *(_QWORD *)&v60.M[1][2] = v54;
-            *(_QWORD *)&v60.M[2][0] = v55;
-            *(_QWORD *)&v60.M[2][2] = __PAIR__(v57, v32);
+            v50.M[0][0] = v29;
+            *(_QWORD *)&v50.M[0][1] = *(_QWORD *)&Dst.M[0][1];
+            v50.M[0][3] = Dst.M[0][3];
+            *(_QWORD *)&v50.M[1][0] = __PAIR64__(LODWORD(v30), LODWORD(Dst.M[1][0]));
+            *(_QWORD *)&v50.M[1][2] = *(_QWORD *)&Dst.M[1][2];
+            *(_QWORD *)&v50.M[2][0] = *(_QWORD *)&Dst.M[2][0];
+            *(_QWORD *)&v50.M[2][2] = __PAIR64__(LODWORD(Dst.M[2][3]), LODWORD(v31));
             Scaleform::Render::Matrix3x4<float>::MultiplyMatrix(
-              (Scaleform::Render::Matrix3x4<float> *)&Dst,
-              (Scaleform::Render::Matrix3x4<float> *)(v34 + 16),
-              &v60);
-            v24 = 1;
+              &Dst,
+              (Scaleform::Render::Matrix3x4<float> *)(v32 + 16),
+              &v50);
+            IsOrig3D = 1;
           }
           else
           {
-            v63.M[0][0] = v30;
-            *(_QWORD *)&v63.M[0][1] = v50;
-            v63.M[0][3] = v51;
-            *(_QWORD *)&v63.M[1][0] = __PAIR__(LODWORD(v31), LODWORD(v52));
-            *(_QWORD *)&v63.M[1][2] = v54;
-            *(_QWORD *)&v63.M[2][0] = v55;
-            *(_QWORD *)&v63.M[2][2] = __PAIR__(v57, v32);
+            v53.M[0][0] = v29;
+            *(_QWORD *)&v53.M[0][1] = *(_QWORD *)&Dst.M[0][1];
+            v53.M[0][3] = Dst.M[0][3];
+            *(_QWORD *)&v53.M[1][0] = __PAIR64__(LODWORD(v30), LODWORD(Dst.M[1][0]));
+            *(_QWORD *)&v53.M[1][2] = *(_QWORD *)&Dst.M[1][2];
+            *(_QWORD *)&v53.M[2][0] = *(_QWORD *)&Dst.M[2][0];
+            *(_QWORD *)&v53.M[2][2] = __PAIR64__(LODWORD(Dst.M[2][3]), LODWORD(v31));
             Scaleform::Render::Matrix3x4<float>::MultiplyMatrix(
-              (Scaleform::Render::Matrix3x4<float> *)&Dst,
-              (Scaleform::Render::Matrix2x4<float> *)(v34 + 16),
-              &v63);
+              &Dst,
+              (Scaleform::Render::Matrix2x4<float> *)(v32 + 16),
+              &v53);
           }
-          v29 = (Scaleform::Render::TreeRoot *)v29->pParent;
-          v31 = v53;
-          v30 = Dst;
-          if ( !v29 )
+          v28 = (Scaleform::Render::TreeRoot *)v28->pParent;
+          v30 = Dst.M[1][1];
+          v29 = Dst.M[0][0];
+          if ( !v28 )
             break;
-          v32 = v56;
+          v31 = Dst.M[2][2];
         }
-        v13 = v58.M[0][1];
-        v12 = v58.M[0][0];
-        v15 = v58.M[0][3];
-        v17 = v58.M[1][1];
-        v16 = v58.M[1][0];
-        v19 = v58.M[1][3];
+        v12 = v48.M[0][0];
+        v13 = v48.M[0][1];
+        v15 = v48.M[0][3];
+        v16 = v48.M[1][0];
+        v17 = v48.M[1][1];
+        v19 = v48.M[1][3];
       }
-      if ( v24 )
+      if ( IsOrig3D )
       {
-        v35 = Scaleform::Render::Matrix3x4<float>::GetInverse((Scaleform::Render::Matrix3x4<float> *)&Dst, &result);
-        Dst = v35->M[0][0];
-        v36 = v35->M[0][1];
-        *(_QWORD *)&m1.M[0][0] = __PAIR__(LODWORD(v36), LODWORD(Dst));
-        *(float *)&v50 = v36;
-        HIDWORD(v50) = LODWORD(v35->M[0][2]);
-        v37 = v35->M[0][3];
-        *(_QWORD *)&m1.M[0][2] = __PAIR__(LODWORD(v37), HIDWORD(v50));
-        v51 = v37;
-        v52 = v35->M[1][0];
-        v38 = v35->M[1][1];
-        *(_QWORD *)&m1.M[1][0] = __PAIR__(LODWORD(v38), LODWORD(v52));
-        v53 = v38;
-        *(float *)&v54 = v35->M[1][2];
-        v39 = v35->M[1][3];
-        *(_QWORD *)&m1.M[1][2] = __PAIR__(LODWORD(v39), (unsigned int)v54);
-        *((float *)&v54 + 1) = v39;
-        *(float *)&v55 = v35->M[2][0];
-        v40 = v35->M[2][1];
-        *(_QWORD *)&m1.M[2][0] = __PAIR__(LODWORD(v40), (unsigned int)v55);
-        *((float *)&v55 + 1) = v40;
-        v56 = LODWORD(v35->M[2][2]);
-        v41 = LODWORD(v35->M[2][3]);
-        *(_QWORD *)&m1.M[2][2] = __PAIR__(v41, v56);
-        v57 = v41;
-        Scaleform::Render::Matrix3x4<float>::MultiplyMatrix((Scaleform::Render::Matrix3x4<float> *)&Dst, &m1, &v58);
-        Scaleform::Render::TreeNode::SetMatrix3D(v6, (Scaleform::Render::Matrix3x4<float> *)&Dst);
+        Inverse = Scaleform::Render::Matrix3x4<float>::GetInverse(&Dst, &result);
+        Dst.M[0][0] = Inverse->M[0][0];
+        v34 = Inverse->M[0][1];
+        *(_QWORD *)&m1.M[0][0] = __PAIR64__(LODWORD(v34), LODWORD(Dst.M[0][0]));
+        Dst.M[0][1] = v34;
+        Dst.M[0][2] = Inverse->M[0][2];
+        v35 = Inverse->M[0][3];
+        *(_QWORD *)&m1.M[0][2] = __PAIR64__(LODWORD(v35), LODWORD(Dst.M[0][2]));
+        Dst.M[0][3] = v35;
+        Dst.M[1][0] = Inverse->M[1][0];
+        v36 = Inverse->M[1][1];
+        *(_QWORD *)&m1.M[1][0] = __PAIR64__(LODWORD(v36), LODWORD(Dst.M[1][0]));
+        Dst.M[1][1] = v36;
+        Dst.M[1][2] = Inverse->M[1][2];
+        v37 = Inverse->M[1][3];
+        *(_QWORD *)&m1.M[1][2] = __PAIR64__(LODWORD(v37), LODWORD(Dst.M[1][2]));
+        Dst.M[1][3] = v37;
+        Dst.M[2][0] = Inverse->M[2][0];
+        v38 = Inverse->M[2][1];
+        *(_QWORD *)&m1.M[2][0] = __PAIR64__(LODWORD(v38), LODWORD(Dst.M[2][0]));
+        Dst.M[2][1] = v38;
+        Dst.M[2][2] = Inverse->M[2][2];
+        v39 = Inverse->M[2][3];
+        *(_QWORD *)&m1.M[2][2] = __PAIR64__(LODWORD(v39), LODWORD(Dst.M[2][2]));
+        Dst.M[2][3] = v39;
+        Scaleform::Render::Matrix3x4<float>::MultiplyMatrix(&Dst, &m1, &v48);
+        Scaleform::Render::TreeNode::SetMatrix3D(RenderNode, &Dst);
       }
       else
       {
-        result.M[0][0] = v30;
-        *(_QWORD *)&result.M[0][1] = v50;
-        result.M[0][3] = v51;
-        *(_QWORD *)&result.M[1][0] = __PAIR__(LODWORD(v31), LODWORD(v52));
-        *(_QWORD *)&result.M[1][2] = v54;
+        result.M[0][0] = v29;
+        *(_QWORD *)&result.M[0][1] = *(_QWORD *)&Dst.M[0][1];
+        result.M[0][3] = Dst.M[0][3];
+        *(_QWORD *)&result.M[1][0] = __PAIR64__(LODWORD(v30), LODWORD(Dst.M[1][0]));
+        *(_QWORD *)&result.M[1][2] = *(_QWORD *)&Dst.M[1][2];
         Scaleform::Render::Matrix2x4<float>::SetInverse(
           (Scaleform::Render::Matrix2x4<float> *)&Dst,
           (Scaleform::Render::Matrix2x4<float> *)&result);
-        v42 = Dst;
-        v43 = v52;
-        LODWORD(v54) = 0;
-        Dst = (float)(*(float *)&v50 * v16) + (float)(Dst * v12);
-        v52 = (float)(v52 * v12) + (float)(v53 * v16);
-        *(float *)&v44 = (float)(*(float *)&v50 * v17) + (float)(v42 * v13);
-        v45 = (float)(v42 * v15) + (float)(*(float *)&v50 * v19);
-        v50 = v44;
-        v46 = (float)(v43 * v13) + (float)(v53 * v17);
-        v47 = (float)(v43 * v15) + (float)(v53 * v19);
-        v53 = v46;
-        v51 = v51 + v45;
-        *((float *)&v54 + 1) = *((float *)&v54 + 1) + v47;
-        Scaleform::Render::TreeNode::SetMatrix(v6, (Scaleform::Render::Matrix2x4<float> *)&Dst);
+        v40 = Dst.M[0][0];
+        v41 = Dst.M[1][0];
+        Dst.M[0][0] = (float)(Dst.M[0][1] * v16) + (float)(Dst.M[0][0] * v12);
+        Dst.M[1][0] = (float)(Dst.M[1][0] * v12) + (float)(Dst.M[1][1] * v16);
+        *(float *)&v42 = (float)(Dst.M[0][1] * v17) + (float)(v40 * v13);
+        v43 = (float)(v40 * v15) + (float)(Dst.M[0][1] * v19);
+        *(_QWORD *)&Dst.M[0][1] = v42;
+        *(float *)&v44 = (float)(v41 * v13) + (float)(Dst.M[1][1] * v17);
+        v45 = (float)(v41 * v15) + (float)(Dst.M[1][1] * v19);
+        *(_QWORD *)&Dst.M[1][1] = v44;
+        Dst.M[0][3] = Dst.M[0][3] + v43;
+        Dst.M[1][3] = Dst.M[1][3] + v45;
+        Scaleform::Render::TreeNode::SetMatrix(RenderNode, (Scaleform::Render::Matrix2x4<float> *)&Dst);
       }
 LABEL_46:
       ++v4;
-      --v3;
+      --Size;
     }
-    while ( v3 );
+    while ( Size );
   }
-  if ( (v2->Flags >> 10) & 1 || (v48 = Scaleform::Render::ContextImpl::Context::HasChanges(&v2->RenderContext)) != 0 )
-    v48 = 1;
-  if ( v48 )
-    v2->Flags |= 0x400u;
+  if ( (this->Flags & 0x400) != 0
+    || (HasChanges = Scaleform::Render::ContextImpl::Context::HasChanges(&this->RenderContext)) )
+  {
+    HasChanges = 1;
+  }
+  if ( HasChanges )
+    this->Flags |= 0x400u;
   else
-    v2->Flags &= 0xFFFFFBFF;
+    this->Flags &= ~0x400u;
   LOBYTE(onChangeOnly) = 1;
-  v2->pASMovieRoot.pObject->vfptr[11].__vecDelDtor(
-    (Scaleform::RefCountImplCore *)v2->pASMovieRoot.pObject,
-    onChangeOnly);
-  Scaleform::Render::ContextImpl::Context::Capture(&v2->RenderContext);
-  v2->pASMovieRoot.pObject->vfptr[11].__vecDelDtor((Scaleform::RefCountImplCore *)v2->pASMovieRoot.pObject, 0);
-  v2->PreviouslyCaptured = 1;
+  this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[11].__vecDelDtor(
+    this->pASMovieRoot.pObject,
+    (unsigned int)onChangeOnly);
+  Scaleform::Render::ContextImpl::Context::Capture(&this->RenderContext);
+  this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[11].__vecDelDtor(this->pASMovieRoot.pObject, 0);
+  this->PreviouslyCaptured = 1;
 }
 
 // File Line: 1901
 // RVA: 0x8F30A0
 void __fastcall Scaleform::GFx::MovieImpl::ProcessInput(Scaleform::GFx::MovieImpl *this)
 {
-  Scaleform::GFx::MovieImpl *v1; // rbx
   bool v2; // r13
-  signed int v3; // er14
+  int v3; // r14d
   int v4; // esi
-  Scaleform::GFx::InputEventsQueueEntry *v5; // rax
-  Scaleform::GFx::InputEventsQueueEntry *v6; // rdx
-  Scaleform::GFx::InputEventsQueueEntry::QueueEntryType v7; // eax
-  unsigned int v8; // er12
+  Scaleform::GFx::InputEventsQueueEntry *Entry; // rdx
+  Scaleform::GFx::InputEventsQueueEntry::QueueEntryType t; // eax
+  float x; // r12d
   unsigned int i; // edi
-  signed __int64 v10; // r15
-  int v11; // xmm1_4
-  Scaleform::GFx::InteractiveObject *v12; // rax
-  Scaleform::GFx::InteractiveObject *v13; // rsi
-  __int64 v14; // [rsp+30h] [rbp-69h]
-  int v15; // [rsp+38h] [rbp-61h]
-  char v16; // [rsp+3Ch] [rbp-5Dh]
-  int v17; // [rsp+40h] [rbp-59h]
-  Scaleform::String *v18; // [rsp+48h] [rbp-51h]
-  Scaleform::String *v19; // [rsp+50h] [rbp-49h]
-  Scaleform::String *v20; // [rsp+58h] [rbp-41h]
-  Scaleform::String *v21; // [rsp+60h] [rbp-39h]
-  Scaleform::GFx::ProcessFocusKeyInfo focusKeyInfo; // [rsp+70h] [rbp-29h]
-  __int64 v23; // [rsp+B0h] [rbp+17h]
-  unsigned int miceProceededMask; // [rsp+100h] [rbp+67h]
-  int v25; // [rsp+104h] [rbp+6Bh]
-  Scaleform::GFx::InteractiveObject *v26; // [rsp+108h] [rbp+6Fh]
+  char *v9; // r15
+  float v10; // xmm1_4
+  Scaleform::GFx::InteractiveObject *TopMostEntity; // rax
+  Scaleform::GFx::InteractiveObject *v12; // rsi
+  __int64 v13; // [rsp+30h] [rbp-69h] BYREF
+  int v14; // [rsp+38h] [rbp-61h]
+  char v15; // [rsp+3Ch] [rbp-5Dh]
+  int v16; // [rsp+40h] [rbp-59h]
+  Scaleform::String *Code; // [rsp+48h] [rbp-51h]
+  Scaleform::String *Level; // [rsp+50h] [rbp-49h]
+  Scaleform::String *ExtensionId; // [rsp+58h] [rbp-41h]
+  Scaleform::String *ContextId; // [rsp+60h] [rbp-39h]
+  Scaleform::GFx::ProcessFocusKeyInfo focusKeyInfo; // [rsp+70h] [rbp-29h] BYREF
+  __int64 v22; // [rsp+B0h] [rbp+17h]
+  Scaleform::Render::Point<float> miceProceededMask; // [rsp+100h] [rbp+67h] BYREF
+  Scaleform::GFx::InteractiveObject *v24; // [rsp+108h] [rbp+6Fh]
 
-  v23 = -2i64;
-  v1 = this;
+  v22 = -2i64;
   if ( this->pMainMovie )
   {
     v2 = this->pASMovieRoot.pObject->AVMVersion == 2;
-    _mm_store_si128((__m128i *)&focusKeyInfo, (__m128i)0i64);
+    *(_OWORD *)&focusKeyInfo.pFocusGroup = 0i64;
     focusKeyInfo.CurFocusIdx = -1;
-    focusKeyInfo.Prev_aRect = 0i64;
-    *(_QWORD *)&focusKeyInfo.PrevKeyCode = 0i64;
-    *(_DWORD *)&focusKeyInfo.KeyboardIndex = 0;
-    focusKeyInfo.Initialized = 0;
-    miceProceededMask = 0;
+    memset(&focusKeyInfo.Prev_aRect, 0, 29);
+    miceProceededMask.x = 0.0;
     v3 = 1;
     v4 = (1 << this->MouseCursorCount) - 1;
-    while ( v1->InputEventsQueue.UsedEntries || v1->InputEventsQueue.LastMousePosMask )
+    while ( this->InputEventsQueue.UsedEntries || this->InputEventsQueue.LastMousePosMask )
     {
-      v5 = Scaleform::GFx::InputEventsQueue::GetEntry(&v1->InputEventsQueue);
-      v6 = v5;
-      v7 = v5->t;
-      if ( v7 == 1 )
+      Entry = Scaleform::GFx::InputEventsQueue::GetEntry(&this->InputEventsQueue);
+      t = Entry->t;
+      if ( Entry->t == QE_Key )
       {
-        Scaleform::GFx::MovieImpl::ProcessKeyboard(v1, v6, &focusKeyInfo);
+        Scaleform::GFx::MovieImpl::ProcessKeyboard(this, Entry, &focusKeyInfo);
       }
-      else if ( v7 )
+      else if ( t )
       {
-        switch ( v7 )
+        switch ( t )
         {
-          case 7:
-            v14 = 16777254i64;
+          case QE_Status:
+            v13 = 16777254i64;
+            v14 = 0;
             v15 = 0;
-            v16 = 0;
-            v17 = 65280;
-            v18 = v6->u.statusEntry.Code;
-            v19 = v6->u.statusEntry.Level;
-            v20 = v6->u.statusEntry.ExtensionId;
-            v21 = v6->u.statusEntry.ContextId;
-            v1->pASMovieRoot.pObject->vfptr[23].__vecDelDtor(
-              (Scaleform::RefCountImplCore *)&v1->pASMovieRoot.pObject->vfptr,
-              (unsigned int)&v14);
+            v16 = 65280;
+            Code = Entry->u.statusEntry.Code;
+            Level = Entry->u.statusEntry.Level;
+            ExtensionId = Entry->u.statusEntry.ExtensionId;
+            ContextId = Entry->u.statusEntry.ContextId;
+            this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[23].__vecDelDtor(
+              this->pASMovieRoot.pObject,
+              (unsigned int)&v13);
             break;
-          case 5:
-            Scaleform::GFx::MovieImpl::ProcessAccelerometer(v1, v6);
+          case QE_Accelerometer:
+            Scaleform::GFx::MovieImpl::ProcessAccelerometer(this, Entry);
             break;
-          case 6:
-            Scaleform::GFx::MovieImpl::ProcessGeolocation(v1, v6);
+          case QE_Geolocation:
+            Scaleform::GFx::MovieImpl::ProcessGeolocation(this, Entry);
             break;
         }
       }
       else
       {
-        Scaleform::GFx::MovieImpl::ProcessMouse(v1, v6, &miceProceededMask, v2);
+        Scaleform::GFx::MovieImpl::ProcessMouse(this, Entry, (unsigned int *)&miceProceededMask, v2);
       }
     }
-    if ( (v1->Flags >> 7) & 1 )
+    if ( (this->Flags & 0x80) != 0 )
     {
-      v8 = miceProceededMask;
-      if ( (miceProceededMask & v4) != v4 )
+      x = miceProceededMask.x;
+      if ( (LODWORD(miceProceededMask.x) & v4) != v4 )
       {
-        for ( i = 0; i < v1->MouseCursorCount; v3 *= 2 )
+        for ( i = 0; i < this->MouseCursorCount; v3 *= 2 )
         {
-          if ( !(v3 & v8) && *((_BYTE *)&v1->mMouseState[i] + 76) & 0x10 )
+          if ( (v3 & LODWORD(x)) == 0 && (*((_BYTE *)&this->mMouseState[i] + 76) & 0x10) != 0 )
           {
-            v10 = (signed __int64)v1 + 80 * i;
-            *(_DWORD *)(v10 + 8748) = *(_DWORD *)(v10 + 8744);
-            v11 = LODWORD(v1->mMouseState[i].LastPosition.y);
-            miceProceededMask = LODWORD(v1->mMouseState[i].LastPosition.x);
-            v25 = v11;
-            v12 = Scaleform::GFx::MovieImpl::GetTopMostEntity(
-                    v1,
-                    (Scaleform::Render::Point<float> *)&miceProceededMask,
-                    i,
-                    v2,
-                    0i64);
-            v13 = v12;
+            v9 = (char *)this + 80 * i;
+            *((_DWORD *)v9 + 2187) = *((_DWORD *)v9 + 2186);
+            v10 = *((float *)v9 + 2189);
+            miceProceededMask.x = *((float *)v9 + 2188);
+            miceProceededMask.y = v10;
+            TopMostEntity = Scaleform::GFx::MovieImpl::GetTopMostEntity(this, &miceProceededMask, i, v2, 0i64);
+            v12 = TopMostEntity;
+            if ( TopMostEntity )
+              ++TopMostEntity->RefCount;
+            v24 = TopMostEntity;
+            Scaleform::GFx::MouseState::SetTopmostEntity((Scaleform::GFx::MouseState *)(v9 + 8696), TopMostEntity);
+            Scaleform::GFx::MovieImpl::CheckMouseCursorType(this, i, v12);
+            this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[13].__vecDelDtor(this->pASMovieRoot.pObject, i);
             if ( v12 )
-              ++v12->RefCount;
-            v26 = v12;
-            Scaleform::GFx::MouseState::SetTopmostEntity((Scaleform::GFx::MouseState *)(v10 + 8696), v12);
-            Scaleform::GFx::MovieImpl::CheckMouseCursorType(v1, i, v13);
-            v1->pASMovieRoot.pObject->vfptr[13].__vecDelDtor((Scaleform::RefCountImplCore *)v1->pASMovieRoot.pObject, i);
-            if ( v13 )
-              Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v13->vfptr);
+              Scaleform::RefCountNTSImpl::Release(v12);
           }
           ++i;
         }
       }
     }
-    Scaleform::GFx::MovieImpl::FinalizeProcessFocusKey(v1, &focusKeyInfo);
-    v1->Flags &= 0xFFFFFF7F;
+    Scaleform::GFx::MovieImpl::FinalizeProcessFocusKey(this, &focusKeyInfo);
+    this->Flags &= ~0x80u;
     if ( focusKeyInfo.CurFocused.pObject )
-      Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&focusKeyInfo.CurFocused.pObject->vfptr);
+      Scaleform::RefCountNTSImpl::Release(focusKeyInfo.CurFocused.pObject);
   }
 }
 
 // File Line: 2012
 // RVA: 0x8F0D30
-void __fastcall Scaleform::GFx::MovieImpl::ProcessAccelerometer(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::InputEventsQueueEntry *qe)
+void __fastcall Scaleform::GFx::MovieImpl::ProcessAccelerometer(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::InputEventsQueueEntry *qe)
 {
-  long double v2; // xmm0_8
-  long double v3; // xmm1_8
-  float v4; // er8
-  Scaleform::GFx::ASMovieRootBase *v5; // rcx
-  long double v6; // xmm0_8
-  long double v7; // xmm1_8
-  __int64 v8; // [rsp+20h] [rbp-48h]
+  Scaleform::String *Level; // xmm0_8
+  Scaleform::String *ExtensionId; // xmm1_8
+  unsigned int WcharCode; // r8d
+  Scaleform::GFx::ASMovieRootBase *pObject; // rcx
+  Scaleform::String *ContextId; // xmm0_8
+  long double AccelerationZ; // xmm1_8
+  __int64 v8; // [rsp+20h] [rbp-48h] BYREF
   int v9; // [rsp+28h] [rbp-40h]
   char v10; // [rsp+2Ch] [rbp-3Ch]
   int v11; // [rsp+30h] [rbp-38h]
-  float v12; // [rsp+34h] [rbp-34h]
-  long double v13; // [rsp+38h] [rbp-30h]
-  long double v14; // [rsp+40h] [rbp-28h]
-  long double v15; // [rsp+48h] [rbp-20h]
+  unsigned int v12; // [rsp+34h] [rbp-34h]
+  Scaleform::String *v13; // [rsp+38h] [rbp-30h]
+  Scaleform::String *v14; // [rsp+40h] [rbp-28h]
+  Scaleform::String *v15; // [rsp+48h] [rbp-20h]
   long double v16; // [rsp+50h] [rbp-18h]
 
-  v2 = qe->u.accelerometerEntry.Timestamp;
-  v3 = qe->u.accelerometerEntry.AccelerationX;
-  v4 = qe->u.mouseEntry.PosX;
-  v5 = this->pASMovieRoot.pObject;
+  Level = qe->u.statusEntry.Level;
+  ExtensionId = qe->u.statusEntry.ExtensionId;
+  WcharCode = qe->u.keyEntry.WcharCode;
+  pObject = this->pASMovieRoot.pObject;
   v8 = 16777252i64;
-  v13 = v2;
-  v6 = qe->u.accelerometerEntry.AccelerationY;
-  v14 = v3;
+  v13 = Level;
+  ContextId = qe->u.statusEntry.ContextId;
+  v14 = ExtensionId;
   v9 = 0;
   v10 = 0;
   v11 = 65280;
-  v7 = qe->u.accelerometerEntry.AccelerationZ;
-  v15 = v6;
-  v12 = v4;
-  v16 = v7;
-  v5->vfptr[24].__vecDelDtor((Scaleform::RefCountImplCore *)&v5->vfptr, (unsigned int)&v8);
+  AccelerationZ = qe->u.accelerometerEntry.AccelerationZ;
+  v15 = ContextId;
+  v12 = WcharCode;
+  v16 = AccelerationZ;
+  pObject->vfptr[24].__vecDelDtor(pObject, (unsigned int)&v8);
 }
 
 // File Line: 2024
 // RVA: 0x8F2040
-void __fastcall Scaleform::GFx::MovieImpl::ProcessGeolocation(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::InputEventsQueueEntry *qe)
+void __fastcall Scaleform::GFx::MovieImpl::ProcessGeolocation(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::InputEventsQueueEntry *qe)
 {
-  long double v2; // xmm0_8
-  long double v3; // xmm1_8
-  float v4; // er8
-  Scaleform::GFx::ASMovieRootBase *v5; // rcx
-  long double v6; // xmm0_8
-  long double v7; // xmm1_8
-  long double v8; // xmm0_8
-  long double v9; // xmm1_8
-  long double v10; // xmm0_8
-  long double v11; // xmm1_8
-  __int64 v12; // [rsp+20h] [rbp-68h]
+  Scaleform::String *Level; // xmm0_8
+  Scaleform::String *ExtensionId; // xmm1_8
+  unsigned int WcharCode; // r8d
+  Scaleform::GFx::ASMovieRootBase *pObject; // rcx
+  Scaleform::String *ContextId; // xmm0_8
+  long double AccelerationZ; // xmm1_8
+  long double VAccuracy; // xmm0_8
+  long double Speed; // xmm1_8
+  long double Heading; // xmm0_8
+  long double Timestamp; // xmm1_8
+  __int64 v12; // [rsp+20h] [rbp-68h] BYREF
   int v13; // [rsp+28h] [rbp-60h]
   char v14; // [rsp+2Ch] [rbp-5Ch]
   int v15; // [rsp+30h] [rbp-58h]
-  float v16; // [rsp+34h] [rbp-54h]
-  long double v17; // [rsp+38h] [rbp-50h]
-  long double v18; // [rsp+40h] [rbp-48h]
-  long double v19; // [rsp+48h] [rbp-40h]
+  unsigned int v16; // [rsp+34h] [rbp-54h]
+  Scaleform::String *v17; // [rsp+38h] [rbp-50h]
+  Scaleform::String *v18; // [rsp+40h] [rbp-48h]
+  Scaleform::String *v19; // [rsp+48h] [rbp-40h]
   long double v20; // [rsp+50h] [rbp-38h]
   long double v21; // [rsp+58h] [rbp-30h]
   long double v22; // [rsp+60h] [rbp-28h]
   long double v23; // [rsp+68h] [rbp-20h]
   long double v24; // [rsp+70h] [rbp-18h]
 
-  v2 = qe->u.accelerometerEntry.Timestamp;
-  v3 = qe->u.accelerometerEntry.AccelerationX;
-  v4 = qe->u.mouseEntry.PosX;
-  v5 = this->pASMovieRoot.pObject;
+  Level = qe->u.statusEntry.Level;
+  ExtensionId = qe->u.statusEntry.ExtensionId;
+  WcharCode = qe->u.keyEntry.WcharCode;
+  pObject = this->pASMovieRoot.pObject;
   v12 = 16777253i64;
-  v17 = v2;
-  v6 = qe->u.accelerometerEntry.AccelerationY;
-  v18 = v3;
+  v17 = Level;
+  ContextId = qe->u.statusEntry.ContextId;
+  v18 = ExtensionId;
   v13 = 0;
   v14 = 0;
   v15 = 65280;
-  v7 = qe->u.accelerometerEntry.AccelerationZ;
-  v19 = v6;
-  v8 = qe->u.geolocationEntry.VAccuracy;
-  v16 = v4;
-  v20 = v7;
-  v9 = qe->u.geolocationEntry.Speed;
-  v21 = v8;
-  v10 = qe->u.geolocationEntry.Heading;
-  v22 = v9;
-  v11 = qe->u.geolocationEntry.Timestamp;
-  v23 = v10;
-  v24 = v11;
-  v5->vfptr[25].__vecDelDtor((Scaleform::RefCountImplCore *)&v5->vfptr, (unsigned int)&v12);
+  AccelerationZ = qe->u.accelerometerEntry.AccelerationZ;
+  v19 = ContextId;
+  VAccuracy = qe->u.geolocationEntry.VAccuracy;
+  v16 = WcharCode;
+  v20 = AccelerationZ;
+  Speed = qe->u.geolocationEntry.Speed;
+  v21 = VAccuracy;
+  Heading = qe->u.geolocationEntry.Heading;
+  v22 = Speed;
+  Timestamp = qe->u.geolocationEntry.Timestamp;
+  v23 = Heading;
+  v24 = Timestamp;
+  pObject->vfptr[25].__vecDelDtor(pObject, (unsigned int)&v12);
 }
 
 // File Line: 2040
 // RVA: 0x8F3320
-void __fastcall Scaleform::GFx::MovieImpl::ProcessKeyboard(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::InputEventsQueueEntry *qe, Scaleform::GFx::ProcessFocusKeyInfo *focusKeyInfo)
+void __fastcall Scaleform::GFx::MovieImpl::ProcessKeyboard(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::InputEventsQueueEntry *qe,
+        Scaleform::GFx::ProcessFocusKeyInfo *focusKeyInfo)
 {
-  Scaleform::GFx::ProcessFocusKeyInfo *v3; // r15
-  Scaleform::GFx::MovieImpl *v4; // rsi
-  signed __int64 v5; // rbp
-  unsigned int v6; // er10
-  Scaleform::GFx::InputEventsQueueEntry::KeyEntry *v7; // rdi
-  float v8; // er9
+  Scaleform::GFx::KeyboardState *v5; // rbp
+  unsigned int v6; // r10d
+  Scaleform::GFx::InputEventsQueueEntry::Entry *p_u; // rdi
+  unsigned int Code; // r9d
   unsigned __int8 v9; // al
-  Scaleform::GFx::Event::EventType v10; // er14
-  int v11; // er8
+  Scaleform::GFx::Event::EventType v10; // r14d
+  int v11; // r8d
   char v12; // al
   char v13; // dl
   char v14; // cl
-  __int64 v15; // r9
-  int v16; // ebx
-  Scaleform::GFx::InteractiveObject *v17; // rcx
-  __int64 v18; // rax
-  Scaleform::GFx::InteractiveObject *v19; // rdx
-  __int64 v20; // rcx
-  signed int v21; // eax
-  Scaleform::GFx::Sprite *v22; // rbx
-  int v23; // [rsp+30h] [rbp-48h]
-  unsigned int v24; // [rsp+34h] [rbp-44h]
-  float v25; // [rsp+38h] [rbp-40h]
-  char v26; // [rsp+3Ch] [rbp-3Ch]
-  char v27; // [rsp+40h] [rbp-38h]
-  char v28; // [rsp+41h] [rbp-37h]
-  char v29; // [rsp+42h] [rbp-36h]
-  char v30; // [rsp+43h] [rbp-35h]
-  unsigned int v31; // [rsp+88h] [rbp+10h]
-  Scaleform::Ptr<Scaleform::GFx::Sprite> result; // [rsp+98h] [rbp+20h]
+  __int64 v15; // rax
+  __int64 v16; // r9
+  int Size; // ebx
+  Scaleform::GFx::InteractiveObject *pObject; // rcx
+  __int64 v19; // rax
+  Scaleform::GFx::InteractiveObject *pMainMovie; // rdx
+  Scaleform::GFx::KeyboardState::IListener *pListener; // rcx
+  unsigned int v22; // eax
+  Scaleform::GFx::Sprite *v23; // rbx
+  int v24[3]; // [rsp+30h] [rbp-48h] BYREF
+  char AsciiCode; // [rsp+3Ch] [rbp-3Ch]
+  char v26; // [rsp+40h] [rbp-38h]
+  char WheelScrollDelta; // [rsp+41h] [rbp-37h]
+  char v28; // [rsp+42h] [rbp-36h]
+  char v29; // [rsp+43h] [rbp-35h]
+  unsigned int v30; // [rsp+88h] [rbp+10h] BYREF
+  Scaleform::Ptr<Scaleform::GFx::Sprite> result; // [rsp+98h] [rbp+20h] BYREF
 
-  v3 = focusKeyInfo;
-  v4 = this;
   v5 = 0i64;
   v6 = 0;
-  v31 = 0;
-  v7 = (Scaleform::GFx::InputEventsQueueEntry::KeyEntry *)&qe->u;
-  v8 = qe->u.mouseEntry.PosY;
-  if ( v8 == 0.0 )
-  {
-    if ( v7->WcharCode )
-    {
-      Scaleform::WeakPtr<Scaleform::GFx::DisplayObject>::operator Scaleform::Ptr<Scaleform::GFx::DisplayObject>(
-        (Scaleform::WeakPtr<Scaleform::GFx::Sprite> *)&this->FocusGroups[(unsigned __int8)this->FocusGroupIndexes[(unsigned __int8)qe->u.mouseEntry.WheelScrollDelta]].LastFocused,
-        &result);
-      v22 = result.pObject;
-      if ( result.pObject )
-      {
-        ++result.pObject->RefCount;
-        v22 = result.pObject;
-      }
-      if ( result.pObject )
-        Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&result.pObject->vfptr);
-      if ( v22 )
-        ((void (__fastcall *)(Scaleform::GFx::Sprite *, _QWORD, _QWORD))v22->vfptr[97].__vecDelDtor)(
-          v22,
-          v7->WcharCode,
-          (unsigned __int8)v7->KeyboardIndex);
-      if ( v22 )
-        Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v22->vfptr);
-    }
-  }
-  else
+  v30 = 0;
+  p_u = &qe->u;
+  Code = qe->u.keyEntry.Code;
+  if ( Code )
   {
     if ( qe->u.mouseEntry.Flags )
     {
       v9 = 64;
-      v10 = 5;
+      v10 = F3_720_512;
     }
     else
     {
-      v9 = -128;
-      v10 = 6;
+      v9 = 0x80;
+      v10 = F5_360_512;
     }
     v11 = v9;
-    v23 = v9;
-    v24 = v7->WcharCode;
-    v25 = v8;
-    v26 = qe->u.keyEntry.AsciiCode;
-    v27 = 0;
-    v30 = 0;
-    v28 = qe->u.mouseEntry.WheelScrollDelta;
+    v24[0] = v9;
+    v24[1] = p_u->keyEntry.WcharCode;
+    v24[2] = Code;
+    AsciiCode = qe->u.keyEntry.AsciiCode;
+    v26 = 0;
+    v29 = 0;
+    WheelScrollDelta = qe->u.mouseEntry.WheelScrollDelta;
     v12 = qe->u.keyEntry.KeysState | 0x80;
-    v29 = qe->u.keyEntry.KeysState | 0x80;
-    if ( !v26 )
+    v28 = v12;
+    if ( !AsciiCode )
     {
       v13 = 0;
       v14 = v12 & 1;
-      if ( v12 & 8 )
+      if ( (v12 & 8) != 0 )
         v14 = v14 == 0;
-      if ( (unsigned int)(LODWORD(v8) - 32) > 0x50 )
+      v15 = Code - 32;
+      if ( (unsigned int)v15 > 0x50 )
       {
-        v15 = (unsigned int)(LODWORD(v8) - 186);
-        if ( (unsigned int)v15 <= 0x50 )
+        v16 = Code - 186;
+        if ( (unsigned int)v16 <= 0x50 )
         {
           if ( v14 )
-            v13 = *(_BYTE *)(v15 + 5394558744i64);
+            v13 = asciiShift2[v16];
           else
-            v13 = *(_BYTE *)(v15 + 5394558704i64);
+            v13 = ascii2[v16];
         }
       }
       else if ( v14 )
       {
-        v13 = asciiShift1[LODWORD(v8) - 32];
+        v13 = asciiShift1[v15];
       }
       else
       {
-        v13 = ascii1[LODWORD(v8) - 32];
+        v13 = ascii1[v15];
       }
-      v26 = v13;
+      AsciiCode = v13;
     }
-    v16 = v4->MovieLevels.Data.Size;
-    if ( v16 )
+    Size = this->MovieLevels.Data.Size;
+    if ( Size )
     {
       do
       {
-        v17 = v4->MovieLevels.Data.Data[--v16].pSprite.pObject;
-        ((void (__fastcall *)(Scaleform::GFx::InteractiveObject *, int *, unsigned int *))v17->vfptr[101].__vecDelDtor)(
-          v17,
-          &v23,
-          &v31);
+        pObject = this->MovieLevels.Data.Data[--Size].pSprite.pObject;
+        ((void (__fastcall *)(Scaleform::GFx::InteractiveObject *, int *, unsigned int *))pObject->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[101].__vecDelDtor)(
+          pObject,
+          v24,
+          &v30);
       }
-      while ( v16 );
-      v6 = v31;
-      v11 = v23;
+      while ( Size );
+      v6 = v30;
+      v11 = v24[0];
     }
-    v18 = (unsigned __int8)v7->KeyboardIndex;
-    if ( (unsigned int)v18 < 6 )
-      v5 = (signed __int64)&v4->KeyboardStates[v18];
-    v19 = v4->pMainMovie;
-    v20 = *(_QWORD *)(v5 + 16);
-    if ( v20 )
+    v19 = (unsigned __int8)p_u->mouseEntry.WheelScrollDelta;
+    if ( (unsigned int)v19 < 6 )
+      v5 = &this->KeyboardStates[v19];
+    pMainMovie = this->pMainMovie;
+    pListener = v5->pListener;
+    if ( pListener )
     {
       if ( v11 == 64 )
       {
-        (*(void (__fastcall **)(__int64, Scaleform::GFx::InteractiveObject *, int *, _QWORD, signed __int64))(*(_QWORD *)v20 + 8i64))(
-          v20,
-          v19,
-          &v23,
+        ((void (__fastcall *)(Scaleform::GFx::KeyboardState::IListener *, Scaleform::GFx::InteractiveObject *, int *, _QWORD, __int64))pListener->vfptr->OnKeyDown)(
+          pListener,
+          pMainMovie,
+          v24,
           v6,
           -2i64);
       }
       else if ( v11 == 128 )
       {
-        (*(void (__fastcall **)(__int64, Scaleform::GFx::InteractiveObject *, int *, _QWORD, signed __int64))(*(_QWORD *)v20 + 16i64))(
-          v20,
-          v19,
-          &v23,
+        ((void (__fastcall *)(Scaleform::GFx::KeyboardState::IListener *, Scaleform::GFx::InteractiveObject *, int *, _QWORD, __int64))pListener->vfptr->OnKeyUp)(
+          pListener,
+          pMainMovie,
+          v24,
           v6,
           -2i64);
       }
     }
-    v21 = v4->Flags >> 30;
-    if ( v21 == 3 )
-      v21 = -1;
-    if ( v21 != 1 )
-      Scaleform::GFx::MovieImpl::ProcessFocusKey(v4, v10, v7, v3);
+    v22 = this->Flags >> 30;
+    if ( v22 == 3 )
+      v22 = -1;
+    if ( v22 != 1 )
+      Scaleform::GFx::MovieImpl::ProcessFocusKey(
+        this,
+        v10,
+        (Scaleform::GFx::InputEventsQueueEntry::KeyEntry *)p_u,
+        focusKeyInfo);
+  }
+  else if ( p_u->keyEntry.WcharCode )
+  {
+    Scaleform::WeakPtr<Scaleform::GFx::DisplayObject>::operator Scaleform::Ptr<Scaleform::GFx::DisplayObject>(
+      (Scaleform::WeakPtr<Scaleform::GFx::Sprite> *)&this->FocusGroups[(unsigned __int8)this->FocusGroupIndexes[(unsigned __int8)qe->u.mouseEntry.WheelScrollDelta]].LastFocused,
+      &result);
+    v23 = result.pObject;
+    if ( result.pObject )
+    {
+      ++result.pObject->RefCount;
+      v23 = result.pObject;
+    }
+    if ( result.pObject )
+      Scaleform::RefCountNTSImpl::Release(result.pObject);
+    if ( v23 )
+      ((void (__fastcall *)(Scaleform::GFx::Sprite *, _QWORD, _QWORD))v23->Scaleform::GFx::DisplayObjContainer::Scaleform::GFx::InteractiveObject::Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[97].__vecDelDtor)(
+        v23,
+        p_u->keyEntry.WcharCode,
+        (unsigned __int8)p_u->mouseEntry.WheelScrollDelta);
+    if ( v23 )
+      Scaleform::RefCountNTSImpl::Release(v23);
   }
 }
 
 // File Line: 2102
 // RVA: 0x8F36F0
-void __fastcall Scaleform::GFx::MovieImpl::ProcessMouse(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::InputEventsQueueEntry *qe, unsigned int *miceProceededMask, bool avm2)
+void __fastcall Scaleform::GFx::MovieImpl::ProcessMouse(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::InputEventsQueueEntry *qe,
+        unsigned int *miceProceededMask,
+        bool avm2)
 {
-  Scaleform::GFx::InputEventsQueueEntry *v4; // rbx
-  Scaleform::GFx::MovieImpl *v5; // rdi
-  __int64 v6; // rsi
-  signed __int64 v7; // r12
+  __int64 MouseIndex; // rsi
+  __int64 v7; // r12
   Scaleform::GFx::MouseState *v8; // r13
   char v9; // dl
-  unsigned int v10; // er8
-  unsigned __int16 v11; // cx
-  char v12; // al
+  unsigned int CurButtonsState; // r8d
+  unsigned __int16 ButtonsState; // cx
+  char Flags; // al
   char v13; // dl
-  float v14; // xmm0_4
-  float v15; // xmm1_4
-  Scaleform::GFx::InteractiveObject *v16; // rax
+  unsigned int Code; // xmm0_4
+  float PosY; // xmm1_4
+  Scaleform::GFx::InteractiveObject *TopMostEntity; // rax
   Scaleform::GFx::InteractiveObject *v17; // r14
-  Scaleform::GFx::InteractiveObject *v18; // rcx
-  signed int v19; // er15
+  Scaleform::GFx::InteractiveObject *pCharacter; // rcx
+  int v19; // r15d
   char v20; // al
-  unsigned __int64 v21; // rax
-  char v22; // r13
+  unsigned __int64 Size; // rax
+  char pObject; // r13
   __int64 v23; // r14
-  int v24; // er12
+  int v24; // r12d
   Scaleform::GFx::InteractiveObject *v25; // rsi
-  int v26; // ecx
+  unsigned int v26; // ecx
   Scaleform::GFx::Sprite *v27; // rbx
   Scaleform::GFx::InteractiveObject *v28; // [rsp+30h] [rbp-40h]
   Scaleform::GFx::MouseState *v29; // [rsp+38h] [rbp-38h]
-  __int64 v30; // [rsp+50h] [rbp-20h]
-  int v31; // [rsp+58h] [rbp-18h]
-  char v32; // [rsp+5Ch] [rbp-14h]
-  char v33; // [rsp+60h] [rbp-10h]
-  char v34; // [rsp+61h] [rbp-Fh]
-  __int16 v35; // [rsp+62h] [rbp-Eh]
-  Scaleform::Ptr<Scaleform::GFx::Sprite> result; // [rsp+B0h] [rbp+40h]
-  Scaleform::Render::Point<float> mousePos; // [rsp+B8h] [rbp+48h]
-  __int64 v38; // [rsp+C0h] [rbp+50h]
+  _BYTE v30[12]; // [rsp+50h] [rbp-20h] BYREF
+  char v31; // [rsp+5Ch] [rbp-14h]
+  char v32; // [rsp+60h] [rbp-10h]
+  char v33; // [rsp+61h] [rbp-Fh]
+  __int16 v34; // [rsp+62h] [rbp-Eh]
+  Scaleform::Ptr<Scaleform::GFx::Sprite> result; // [rsp+B0h] [rbp+40h] BYREF
+  Scaleform::Render::Point<float> mousePos; // [rsp+B8h] [rbp+48h] BYREF
+  __int64 v37; // [rsp+C0h] [rbp+50h]
 
-  v4 = qe;
-  v5 = this;
   *miceProceededMask |= 1 << qe->u.mouseEntry.MouseIndex;
-  v6 = (unsigned __int8)qe->u.mouseEntry.MouseIndex;
+  MouseIndex = (unsigned __int8)qe->u.mouseEntry.MouseIndex;
   LODWORD(result.pObject) = (unsigned __int8)qe->u.mouseEntry.MouseIndex;
-  v7 = 80 * v6;
-  v38 = 80 * v6;
-  v8 = &this->mMouseState[v6];
+  v7 = 80 * MouseIndex;
+  v37 = 80 * MouseIndex;
+  v8 = &this->mMouseState[MouseIndex];
   v29 = v8;
   *((_BYTE *)v8 + 76) |= 0x10u;
   v9 = *((_BYTE *)v8 + 76);
-  v10 = v8->CurButtonsState;
-  v8->PrevButtonsState = v10;
-  v11 = v4->u.mouseEntry.ButtonsState;
-  if ( v11 )
+  CurButtonsState = v8->CurButtonsState;
+  v8->PrevButtonsState = CurButtonsState;
+  ButtonsState = qe->u.mouseEntry.ButtonsState;
+  if ( ButtonsState )
   {
-    v12 = v4->u.mouseEntry.Flags;
-    if ( v12 & 0x40 || v12 >= 0 || !v11 )
-      v8->CurButtonsState = v10 | v11;
+    Flags = qe->u.mouseEntry.Flags;
+    if ( (Flags & 0x40) != 0 || Flags >= 0 )
+      v8->CurButtonsState = CurButtonsState | ButtonsState;
     else
-      v8->CurButtonsState = v10 & ~v11;
+      v8->CurButtonsState = CurButtonsState & ~ButtonsState;
   }
-  if ( v4->u.mouseEntry.Flags & 0x20 )
-    v8->WheelDelta = v4->u.mouseEntry.WheelScrollDelta;
+  if ( (qe->u.mouseEntry.Flags & 0x20) != 0 )
+    v8->WheelDelta = qe->u.mouseEntry.WheelScrollDelta;
   else
     v8->WheelDelta = 0;
-  if ( v4->u.accelerometerEntry.IdAcc != SLODWORD(v8->LastPosition.x)
-    || v4->u.keyEntry.Code != SLODWORD(v8->LastPosition.y) )
-  {
-    v13 = v9 | 8;
-  }
-  else
+  if ( qe->u.accelerometerEntry.IdAcc == SLODWORD(v8->LastPosition.x)
+    && qe->u.keyEntry.Code == SLODWORD(v8->LastPosition.y) )
   {
     v13 = v9 & 0xF7;
   }
-  *((_BYTE *)v8 + 76) = v13;
-  v14 = v4->u.mouseEntry.PosY;
-  v8->LastPosition.x = v4->u.mouseEntry.PosX;
-  v8->LastPosition.y = v14;
-  v15 = v4->u.mouseEntry.PosY;
-  mousePos.x = v4->u.mouseEntry.PosX;
-  mousePos.y = v15;
-  v16 = Scaleform::GFx::MovieImpl::GetTopMostEntity(v5, &mousePos, v6, avm2, 0i64);
-  v17 = v16;
-  v28 = v16;
-  if ( v16 )
-    ++v16->RefCount;
-  Scaleform::GFx::MouseState::SetTopmostEntity(v8, v16);
-  v18 = v5->CurrentDragStates[v6].pCharacter;
-  if ( v18 )
-    Scaleform::GFx::InteractiveObject::DoMouseDrag(v18, v6);
-  v19 = 0;
-  if ( v4->u.mouseEntry.ButtonsState && v4->u.keyEntry.AsciiCode & 1 )
+  else
   {
-    if ( v4->u.mouseEntry.Flags & 0xC0 || (v20 = 1, !v4->u.mouseEntry.ButtonsState) )
+    v13 = v9 | 8;
+  }
+  *((_BYTE *)v8 + 76) = v13;
+  Code = qe->u.keyEntry.Code;
+  LODWORD(v8->LastPosition.x) = qe->u.keyEntry.WcharCode;
+  LODWORD(v8->LastPosition.y) = Code;
+  PosY = qe->u.mouseEntry.PosY;
+  LODWORD(mousePos.x) = qe->u.keyEntry.WcharCode;
+  mousePos.y = PosY;
+  TopMostEntity = Scaleform::GFx::MovieImpl::GetTopMostEntity(this, &mousePos, MouseIndex, avm2, 0i64);
+  v17 = TopMostEntity;
+  v28 = TopMostEntity;
+  if ( TopMostEntity )
+    ++TopMostEntity->RefCount;
+  Scaleform::GFx::MouseState::SetTopmostEntity(v8, TopMostEntity);
+  pCharacter = this->CurrentDragStates[MouseIndex].pCharacter;
+  if ( pCharacter )
+    Scaleform::GFx::InteractiveObject::DoMouseDrag(pCharacter, MouseIndex);
+  v19 = 0;
+  if ( qe->u.mouseEntry.ButtonsState && (qe->u.keyEntry.AsciiCode & 1) != 0 )
+  {
+    if ( (qe->u.mouseEntry.Flags & 0xC0) != 0 || (v20 = 1, !qe->u.mouseEntry.ButtonsState) )
       v20 = 0;
     v19 = 32;
     if ( v20 )
       v19 = 16;
   }
-  v21 = v5->MovieLevels.Data.Size;
-  if ( (_DWORD)v21 )
+  Size = this->MovieLevels.Data.Size;
+  if ( (_DWORD)Size )
   {
-    v22 = (char)result.pObject;
-    v23 = v38;
+    pObject = (char)result.pObject;
+    v23 = v37;
     do
     {
-      v24 = v21 - 1;
-      v25 = v5->MovieLevels.Data.Data[(unsigned int)(v21 - 1)].pSprite.pObject;
+      v24 = Size - 1;
+      v25 = this->MovieLevels.Data.Data[(unsigned int)(Size - 1)].pSprite.pObject;
       if ( v19 )
       {
-        LODWORD(v30) = v19;
-        *(__int64 *)((char *)&v30 + 4) = 0i64;
-        v35 = 0;
-        v32 = 0;
-        v34 = v22;
-        v33 = 0;
-        v25->vfptr[99].__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v25->vfptr, (unsigned int)&v30);
-      }
-      if ( *((_BYTE *)v5->mMouseState + v23 + 76) & 8 )
-      {
-        v30 = 8i64;
+        *(_DWORD *)v30 = v19;
+        *(_QWORD *)&v30[4] = 0i64;
+        v34 = 0;
         v31 = 0;
-        v35 = 0;
+        v33 = pObject;
         v32 = 0;
-        v34 = v22;
-        v33 = 0;
-        v25->vfptr[99].__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v25->vfptr, (unsigned int)&v30);
+        v25->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[99].__vecDelDtor(
+          v25,
+          (unsigned int)v30);
       }
-      LODWORD(v21) = v24;
+      if ( (*((_BYTE *)this->mMouseState + v23 + 76) & 8) != 0 )
+      {
+        *(_QWORD *)v30 = 8i64;
+        *(_DWORD *)&v30[8] = 0;
+        v34 = 0;
+        v31 = 0;
+        v33 = pObject;
+        v32 = 0;
+        v25->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[99].__vecDelDtor(
+          v25,
+          (unsigned int)v30);
+      }
+      LODWORD(Size) = v24;
     }
     while ( v24 );
     v17 = v28;
     v8 = v29;
-    LODWORD(v6) = result.pObject;
-    v7 = v38;
+    LODWORD(MouseIndex) = result.pObject;
+    v7 = v37;
   }
-  if ( !((v5->Flags >> 16) & 1) && v4->u.mouseEntry.ButtonsState )
-    goto LABEL_58;
-  v26 = (v5->Flags >> 22) & 3;
+  if ( (this->Flags & 0x10000) == 0 && qe->u.mouseEntry.ButtonsState )
+    goto LABEL_38;
+  v26 = (this->Flags >> 22) & 3;
   if ( v26 == 3 )
     v26 = -1;
-  if ( v26 != 1 && *((_BYTE *)v5->mMouseState + v7 + 76) & 8 )
-LABEL_58:
-    Scaleform::GFx::MovieImpl::HideFocusRect(v5, v6);
-  if ( v4->u.mouseEntry.Flags & 0x20 && v17 )
-    v17->vfptr[98].__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v17->vfptr, v4->u.mouseEntry.WheelScrollDelta);
-  ((void (__fastcall *)(Scaleform::GFx::ASMovieRootBase *, Scaleform::GFx::InputEventsQueueEntry *, Scaleform::GFx::MouseState *, _QWORD))v5->pASMovieRoot.pObject->vfptr[18].__vecDelDtor)(
-    v5->pASMovieRoot.pObject,
-    v4,
+  if ( v26 != 1 && (*((_BYTE *)this->mMouseState + v7 + 76) & 8) != 0 )
+LABEL_38:
+    Scaleform::GFx::MovieImpl::HideFocusRect(this, MouseIndex);
+  if ( (qe->u.mouseEntry.Flags & 0x20) != 0 && v17 )
+    v17->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[98].__vecDelDtor(
+      v17,
+      qe->u.mouseEntry.WheelScrollDelta);
+  ((void (__fastcall *)(Scaleform::GFx::ASMovieRootBase *, Scaleform::GFx::InputEventsQueueEntry *, Scaleform::GFx::MouseState *, _QWORD))this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[18].__vecDelDtor)(
+    this->pASMovieRoot.pObject,
+    qe,
     v8,
-    (unsigned int)v6);
-  Scaleform::GFx::MovieImpl::CheckMouseCursorType(v5, v6, v17);
-  if ( !(v4->u.mouseEntry.Flags & 0xC0) && v4->u.mouseEntry.ButtonsState && v4->u.keyEntry.AsciiCode & 1 )
+    (unsigned int)MouseIndex);
+  Scaleform::GFx::MovieImpl::CheckMouseCursorType(this, MouseIndex, v17);
+  if ( (qe->u.mouseEntry.Flags & 0xC0) == 0 && qe->u.mouseEntry.ButtonsState && (qe->u.keyEntry.AsciiCode & 1) != 0 )
   {
     Scaleform::WeakPtr<Scaleform::GFx::DisplayObject>::operator Scaleform::Ptr<Scaleform::GFx::DisplayObject>(
-      (Scaleform::WeakPtr<Scaleform::GFx::Sprite> *)&v5->FocusGroups[(unsigned __int8)v5->FocusGroupIndexes[(unsigned int)v6]].LastFocused,
+      (Scaleform::WeakPtr<Scaleform::GFx::Sprite> *)&this->FocusGroups[(unsigned __int8)this->FocusGroupIndexes[(unsigned int)MouseIndex]].LastFocused,
       &result);
     v27 = result.pObject;
     if ( result.pObject )
@@ -4068,49 +3946,54 @@ LABEL_58:
     }
     mousePos = (Scaleform::Render::Point<float>)v27;
     if ( result.pObject )
-      Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&result.pObject->vfptr);
-    if ( v17 != (Scaleform::GFx::InteractiveObject *)v27 )
-      Scaleform::GFx::MovieImpl::QueueSetFocusTo(v5, v17, v17, v6, GFx_FocusMovedByMouse, 0i64);
+      Scaleform::RefCountNTSImpl::Release(result.pObject);
+    if ( v17 != v27 )
+      Scaleform::GFx::MovieImpl::QueueSetFocusTo(this, v17, v17, MouseIndex, GFx_FocusMovedByMouse, 0i64);
     if ( v27 )
-      Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v27->vfptr);
+      Scaleform::RefCountNTSImpl::Release(v27);
   }
-  v5->pASMovieRoot.pObject->vfptr[13].__vecDelDtor((Scaleform::RefCountImplCore *)v5->pASMovieRoot.pObject, v6);
+  this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[13].__vecDelDtor(this->pASMovieRoot.pObject, MouseIndex);
   if ( v17 )
-    Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v17->vfptr);
+    Scaleform::RefCountNTSImpl::Release(v17);
 }
 
 // File Line: 2211
 // RVA: 0x906EF0
-void __fastcall Scaleform::GFx::MovieImpl::SetDragState(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::MovieImpl::DragState *st)
+void __fastcall Scaleform::GFx::MovieImpl::SetDragState(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::MovieImpl::DragState *st)
 {
-  __int64 v2; // r8
-  float v3; // xmm0_4
+  __int64 MouseIndex; // r8
+  float y; // xmm0_4
   float v4; // xmm0_4
   float v5; // xmm0_4
 
-  v2 = st->MouseIndex;
-  this->CurrentDragStates[v2].pCharacter = st->pCharacter;
-  this->CurrentDragStates[v2].pTopmostEntity = st->pTopmostEntity;
-  this->CurrentDragStates[v2].LockCenter = st->LockCenter;
-  this->CurrentDragStates[v2].Bound = st->Bound;
-  v3 = st->BoundLT.y;
-  this->CurrentDragStates[v2].BoundLT.x = st->BoundLT.x;
-  this->CurrentDragStates[v2].BoundLT.y = v3;
+  MouseIndex = st->MouseIndex;
+  this->CurrentDragStates[MouseIndex].pCharacter = st->pCharacter;
+  this->CurrentDragStates[MouseIndex].pTopmostEntity = st->pTopmostEntity;
+  this->CurrentDragStates[MouseIndex].LockCenter = st->LockCenter;
+  this->CurrentDragStates[MouseIndex].Bound = st->Bound;
+  y = st->BoundLT.y;
+  this->CurrentDragStates[MouseIndex].BoundLT.x = st->BoundLT.x;
+  this->CurrentDragStates[MouseIndex].BoundLT.y = y;
   v4 = st->BoundRB.y;
-  this->CurrentDragStates[v2].BoundRB.x = st->BoundRB.x;
-  this->CurrentDragStates[v2].BoundRB.y = v4;
+  this->CurrentDragStates[MouseIndex].BoundRB.x = st->BoundRB.x;
+  this->CurrentDragStates[MouseIndex].BoundRB.y = v4;
   v5 = st->CenterDelta.y;
-  this->CurrentDragStates[v2].CenterDelta.x = st->CenterDelta.x;
-  this->CurrentDragStates[v2].CenterDelta.y = v5;
-  this->CurrentDragStates[v2].MouseIndex = st->MouseIndex;
+  this->CurrentDragStates[MouseIndex].CenterDelta.x = st->CenterDelta.x;
+  this->CurrentDragStates[MouseIndex].CenterDelta.y = v5;
+  this->CurrentDragStates[MouseIndex].MouseIndex = st->MouseIndex;
 }
 
 // File Line: 2217
 // RVA: 0x8D7010
-void __fastcall Scaleform::GFx::MovieImpl::GetDragState(Scaleform::GFx::MovieImpl *this, unsigned int mouseIndex, Scaleform::GFx::MovieImpl::DragState *st)
+void __fastcall Scaleform::GFx::MovieImpl::GetDragState(
+        Scaleform::GFx::MovieImpl *this,
+        unsigned int mouseIndex,
+        Scaleform::GFx::MovieImpl::DragState *st)
 {
   __int64 v3; // rdx
-  float v4; // xmm0_4
+  float y; // xmm0_4
   float v5; // xmm0_4
   float v6; // xmm0_4
 
@@ -4119,9 +4002,9 @@ void __fastcall Scaleform::GFx::MovieImpl::GetDragState(Scaleform::GFx::MovieImp
   st->pTopmostEntity = this->CurrentDragStates[v3].pTopmostEntity;
   st->LockCenter = this->CurrentDragStates[v3].LockCenter;
   st->Bound = this->CurrentDragStates[v3].Bound;
-  v4 = this->CurrentDragStates[v3].BoundLT.y;
+  y = this->CurrentDragStates[v3].BoundLT.y;
   st->BoundLT.x = this->CurrentDragStates[v3].BoundLT.x;
-  st->BoundLT.y = v4;
+  st->BoundLT.y = y;
   v5 = this->CurrentDragStates[v3].BoundRB.y;
   st->BoundRB.x = this->CurrentDragStates[v3].BoundRB.x;
   st->BoundRB.y = v5;
@@ -4133,28 +4016,33 @@ void __fastcall Scaleform::GFx::MovieImpl::GetDragState(Scaleform::GFx::MovieImp
 
 // File Line: 2223
 // RVA: 0x906F90
-void __fastcall Scaleform::GFx::MovieImpl::SetDragStateTopmostEntity(Scaleform::GFx::MovieImpl *this, unsigned int mouseIndex, Scaleform::GFx::InteractiveObject *topmostEntity)
+void __fastcall Scaleform::GFx::MovieImpl::SetDragStateTopmostEntity(
+        Scaleform::GFx::MovieImpl *this,
+        unsigned int mouseIndex,
+        Scaleform::GFx::InteractiveObject *topmostEntity)
 {
-  (&this->vfptr)[6 * (mouseIndex + 401i64)] = (Scaleform::RefCountImplCoreVtbl *)topmostEntity;
+  this->CurrentDragStates[mouseIndex].pTopmostEntity = topmostEntity;
 }
 
 // File Line: 2229
 // RVA: 0x9118B0
 void __fastcall Scaleform::GFx::MovieImpl::StopDrag(Scaleform::GFx::MovieImpl *this, unsigned int mouseIndex)
 {
-  signed __int64 v2; // rax
+  __int64 v2; // rax
   __int64 v3; // rdx
 
   v2 = mouseIndex + 401i64;
   v3 = mouseIndex;
   this->CurrentDragStates[v3].pCharacter = 0i64;
   this->CurrentDragStates[v3].MouseIndex = -1;
-  (&this->vfptr)[6 * v2] = 0i64;
+  (&this->Scaleform::GFx::Movie::Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr)[6 * v2] = 0i64;
 }
 
 // File Line: 2237
 // RVA: 0x9118F0
-void __fastcall Scaleform::GFx::MovieImpl::StopDragCharacter(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::InteractiveObject *ch)
+void __fastcall Scaleform::GFx::MovieImpl::StopDragCharacter(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::InteractiveObject *ch)
 {
   if ( this->CurrentDragStates[0].pCharacter == ch )
   {
@@ -4203,64 +4091,63 @@ _BOOL8 __fastcall Scaleform::GFx::MovieImpl::IsDragging(Scaleform::GFx::MovieImp
 
 // File Line: 2400
 // RVA: 0x8B54F0
-void __fastcall Scaleform::GFx::MovieImpl::AdvanceFrame(Scaleform::GFx::MovieImpl *this, bool nextFrame, float framePos)
+void __fastcall Scaleform::GFx::MovieImpl::AdvanceFrame(
+        Scaleform::GFx::MovieImpl *this,
+        bool nextFrame,
+        float framePos)
 {
-  bool v3; // r15
-  Scaleform::GFx::MovieImpl *v4; // rsi
-  unsigned int v5; // ecx
+  unsigned int Flags; // ecx
   unsigned __int64 v6; // rdi
-  unsigned int v8; // eax
-  char v9; // r12
+  const char *pPlayListHead; // rax
+  unsigned int Flags2; // eax
+  bool v9; // r12
   unsigned int v10; // eax
-  Scaleform::RefCountNTSImpl *i; // rbx
+  Scaleform::GFx::InteractiveObject *i; // rbx
   Scaleform::Ptr<Scaleform::GFx::InteractiveObject> *v12; // rdx
   unsigned __int64 j; // r14
-  Scaleform::GFx::InteractiveObject *v14; // rbx
+  Scaleform::GFx::InteractiveObject *pObject; // rbx
+  const char *pPlayNext; // rax
   unsigned int v16; // edx
   unsigned int v17; // edx
   unsigned int v18; // edx
-  Scaleform::Ptr<Scaleform::GFx::InteractiveObject> *v19; // rdx
-  unsigned __int64 v20; // rdi
-  Scaleform::RefCountNTSImpl **v21; // rbx
-  Scaleform::RefCountNTSImpl *k; // rbx
+  Scaleform::Ptr<Scaleform::GFx::InteractiveObject> *Data; // rdx
+  unsigned __int64 Size; // rdi
+  Scaleform::Ptr<Scaleform::GFx::InteractiveObject> *v21; // rbx
+  const char *pPlayListOptHead; // rax
+  Scaleform::GFx::InteractiveObject *k; // rbx
   Scaleform::Ptr<Scaleform::GFx::InteractiveObject> *v24; // rdx
   Scaleform::GFx::InteractiveObject *v25; // rcx
-  unsigned __int64 v27; // rdi
-  Scaleform::RefCountNTSImpl **v28; // rbx
-  Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,Scaleform::AllocatorGH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,2>,Scaleform::ArrayDefaultPolicy> pheapAddr; // [rsp+30h] [rbp-30h]
+  const char *pPlayNextOpt; // rax
+  unsigned int v27; // edx
+  unsigned __int64 v28; // rdi
+  Scaleform::Ptr<Scaleform::GFx::InteractiveObject> *v29; // rbx
+  Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,Scaleform::AllocatorGH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,2>,Scaleform::ArrayDefaultPolicy> pheapAddr; // [rsp+30h] [rbp-30h] BYREF
 
-  v3 = nextFrame;
-  v4 = this;
   if ( nextFrame )
-    ((void (__cdecl *)(Scaleform::GFx::ASMovieRootBase *))this->pASMovieRoot.pObject->vfptr[27].__vecDelDtor)(this->pASMovieRoot.pObject);
-  v5 = v4->Flags;
+    ((void (__fastcall *)(Scaleform::GFx::ASMovieRootBase *))this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[27].__vecDelDtor)(this->pASMovieRoot.pObject);
+  Flags = this->Flags;
   v6 = 0i64;
-  if ( (v4->Flags >> 19) & 1 )
+  if ( (Flags & 0x80000) != 0 )
   {
-    _RAX = v4->pPlayListHead;
-    __asm
-    {
-      prefetcht1 byte ptr [rax+0C0h]; Prefetch to all cache levels
-      prefetcht1 byte ptr [rax+0A0h]; Prefetch to all cache levels
-      prefetcht1 byte ptr [rax+80h]; Prefetch to all cache levels
-      prefetcht1 byte ptr [rax+60h]; Prefetch to all cache levels
-      prefetcht1 byte ptr [rax+40h]; Prefetch to all cache levels
-      prefetcht1 byte ptr [rax+20h]; Prefetch to all cache levels
-      prefetcht1 byte ptr [rax]; Prefetch to all cache levels
-    }
-    v4->pPlayListOptHead = 0i64;
-    v4->Flags = v5 & 0xFFF7FFFF;
-    v8 = v4->Flags2;
-    v9 = ~(unsigned __int8)(v4->Flags2 >> 3) & 1;
-    if ( v9 )
-      v10 = v8 | 8;
+    pPlayListHead = (const char *)this->pPlayListHead;
+    _mm_prefetch(pPlayListHead + 192, 2);
+    _mm_prefetch(pPlayListHead + 160, 2);
+    _mm_prefetch(pPlayListHead + 128, 2);
+    _mm_prefetch(pPlayListHead + 96, 2);
+    _mm_prefetch(pPlayListHead + 64, 2);
+    _mm_prefetch(pPlayListHead + 32, 2);
+    _mm_prefetch(pPlayListHead, 2);
+    this->pPlayListOptHead = 0i64;
+    this->Flags = Flags & 0xFFF7FFFF;
+    Flags2 = this->Flags2;
+    v9 = (Flags2 & 8) == 0;
+    if ( (Flags2 & 8) != 0 )
+      v10 = Flags2 & 0xFFFFFFF7;
     else
-      v10 = v8 & 0xFFFFFFF7;
-    v4->Flags2 = v10;
-    pheapAddr.Data = 0i64;
-    pheapAddr.Size = 0i64;
-    pheapAddr.Policy.Capacity = 0i64;
-    for ( i = (Scaleform::RefCountNTSImpl *)&v4->pPlayListHead->vfptr; i; i = (Scaleform::RefCountNTSImpl *)i[9].vfptr )
+      v10 = Flags2 | 8;
+    this->Flags2 = v10;
+    memset(&pheapAddr, 0, sizeof(pheapAddr));
+    for ( i = this->pPlayListHead; i; i = i->pPlayNext )
     {
       ++i->RefCount;
       Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,Scaleform::AllocatorGH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,2>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
@@ -4270,86 +4157,81 @@ void __fastcall Scaleform::GFx::MovieImpl::AdvanceFrame(Scaleform::GFx::MovieImp
       v12 = &pheapAddr.Data[pheapAddr.Size - 1];
       if ( v12 )
       {
-        if ( i )
-          ++i->RefCount;
-        v12->pObject = (Scaleform::GFx::InteractiveObject *)i;
+        ++i->RefCount;
+        v12->pObject = i;
       }
-      if ( i )
-        Scaleform::RefCountNTSImpl::Release(i);
+      Scaleform::RefCountNTSImpl::Release(i);
     }
     for ( j = 0i64; j < pheapAddr.Size; ++j )
     {
-      v14 = pheapAddr.Data[j].pObject;
-      _RAX = v14->pPlayNext;
-      __asm
-      {
-        prefetcht1 byte ptr [rax+0C0h]; Prefetch to all cache levels
-        prefetcht1 byte ptr [rax+0A0h]; Prefetch to all cache levels
-        prefetcht1 byte ptr [rax+80h]; Prefetch to all cache levels
-        prefetcht1 byte ptr [rax+60h]; Prefetch to all cache levels
-        prefetcht1 byte ptr [rax+40h]; Prefetch to all cache levels
-        prefetcht1 byte ptr [rax+20h]; Prefetch to all cache levels
-        prefetcht1 byte ptr [rax]; Prefetch to all cache levels
-      }
-      v16 = v14->Flags;
-      if ( !((v14->Flags >> 21) & 1) || ((unsigned __int8)(v4->Flags2 >> 3) ^ (unsigned __int8)(v16 >> 23)) & 1 )
+      pObject = pheapAddr.Data[j].pObject;
+      pPlayNext = (const char *)pObject->pPlayNext;
+      _mm_prefetch(pPlayNext + 192, 2);
+      _mm_prefetch(pPlayNext + 160, 2);
+      _mm_prefetch(pPlayNext + 128, 2);
+      _mm_prefetch(pPlayNext + 96, 2);
+      _mm_prefetch(pPlayNext + 64, 2);
+      _mm_prefetch(pPlayNext + 32, 2);
+      _mm_prefetch(pPlayNext, 2);
+      v16 = pObject->Flags;
+      if ( (v16 & 0x200000) == 0 || (((unsigned __int8)(this->Flags2 >> 3) ^ (unsigned __int8)(v16 >> 23)) & 1) != 0 )
       {
         v17 = v16 & 0xFFDFFFFF;
-        v14->Flags = v17;
+        pObject->Flags = v17;
         if ( v9 )
           v18 = v17 | 0x800000;
         else
           v18 = v17 & 0xFF7FFFFF;
-        v14->Flags = v18;
-        v14->pPlayPrevOpt = 0i64;
-        v14->pPlayNextOpt = 0i64;
+        pObject->Flags = v18;
+        pObject->pPlayPrevOpt = 0i64;
+        pObject->pPlayNextOpt = 0i64;
       }
-      if ( ~(LOBYTE(v14->Flags) >> 6) & 1 && !((LOBYTE(v14->Flags) >> 5) & 1) )
+      if ( (pObject->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Flags & 0x40) == 0
+        && (pObject->Scaleform::GFx::DisplayObject::Flags & 0x20) == 0 )
       {
-        if ( (!((v14->Flags >> 21) & 1) || ((unsigned __int8)(v4->Flags2 >> 3) ^ (unsigned __int8)(v14->Flags >> 23)) & 1)
-          && (unsigned int)v14->vfptr[103].__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v14->vfptr, 0) == 1 )
+        if ( ((pObject->Flags & 0x200000) == 0
+           || (((unsigned __int8)(this->Flags2 >> 3) ^ (unsigned __int8)(pObject->Flags >> 23)) & 1) != 0)
+          && pObject->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[103].__vecDelDtor(
+               pObject,
+               0) == (void *)1 )
         {
-          Scaleform::GFx::InteractiveObject::AddToOptimizedPlayList(v14);
+          Scaleform::GFx::InteractiveObject::AddToOptimizedPlayList(pObject);
         }
-        if ( v3 || (v14->Flags >> 20) & 1 )
-          v14->vfptr[71].__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v14->vfptr, v3);
+        if ( nextFrame || (pObject->Flags & 0x100000) != 0 )
+          pObject->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[71].__vecDelDtor(
+            pObject,
+            nextFrame);
       }
     }
-    v19 = pheapAddr.Data;
-    v20 = pheapAddr.Size;
-    v21 = (Scaleform::RefCountNTSImpl **)&pheapAddr.Data[pheapAddr.Size - 1];
+    Data = pheapAddr.Data;
+    Size = pheapAddr.Size;
+    v21 = &pheapAddr.Data[pheapAddr.Size - 1];
     if ( pheapAddr.Size )
     {
       do
       {
-        if ( *v21 )
-          Scaleform::RefCountNTSImpl::Release(*v21);
+        if ( v21->pObject )
+          Scaleform::RefCountNTSImpl::Release(v21->pObject);
         --v21;
-        --v20;
+        --Size;
       }
-      while ( v20 );
-LABEL_58:
-      v19 = pheapAddr.Data;
-      goto LABEL_59;
+      while ( Size );
+LABEL_50:
+      Data = pheapAddr.Data;
     }
   }
   else
   {
-    _RAX = v4->pPlayListOptHead;
-    __asm
-    {
-      prefetcht1 byte ptr [rax+0C0h]; Prefetch to all cache levels
-      prefetcht1 byte ptr [rax+0A0h]; Prefetch to all cache levels
-      prefetcht1 byte ptr [rax+80h]; Prefetch to all cache levels
-      prefetcht1 byte ptr [rax+60h]; Prefetch to all cache levels
-      prefetcht1 byte ptr [rax+40h]; Prefetch to all cache levels
-      prefetcht1 byte ptr [rax+20h]; Prefetch to all cache levels
-      prefetcht1 byte ptr [rax]; Prefetch to all cache levels
-    }
-    pheapAddr.Data = 0i64;
-    pheapAddr.Size = 0i64;
-    pheapAddr.Policy.Capacity = 0i64;
-    for ( k = (Scaleform::RefCountNTSImpl *)&v4->pPlayListOptHead->vfptr; k; k = (Scaleform::RefCountNTSImpl *)k[10].vfptr )
+    pPlayListOptHead = (const char *)this->pPlayListOptHead;
+    _mm_prefetch(pPlayListOptHead + 192, 2);
+    _mm_prefetch(pPlayListOptHead + 160, 2);
+    _mm_prefetch(pPlayListOptHead + 128, 2);
+    _mm_prefetch(pPlayListOptHead + 96, 2);
+    _mm_prefetch(pPlayListOptHead + 64, 2);
+    _mm_prefetch(pPlayListOptHead + 32, 2);
+    _mm_prefetch(pPlayListOptHead, 2);
+    memset(&pheapAddr, 0, sizeof(pheapAddr));
+    for ( k = this->pPlayListOptHead; k; k = k->pPlayNextOpt )
     {
       ++k->RefCount;
       Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,Scaleform::AllocatorGH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,2>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
@@ -4359,89 +4241,87 @@ LABEL_58:
       v24 = &pheapAddr.Data[pheapAddr.Size - 1];
       if ( v24 )
       {
-        if ( k )
-          ++k->RefCount;
-        v24->pObject = (Scaleform::GFx::InteractiveObject *)k;
+        ++k->RefCount;
+        v24->pObject = k;
       }
-      if ( k )
-        Scaleform::RefCountNTSImpl::Release(k);
+      Scaleform::RefCountNTSImpl::Release(k);
     }
     if ( pheapAddr.Size )
     {
       do
       {
         v25 = pheapAddr.Data[v6].pObject;
-        _RAX = v25->pPlayNextOpt;
-        __asm
-        {
-          prefetcht1 byte ptr [rax+0C0h]; Prefetch to all cache levels
-          prefetcht1 byte ptr [rax+0A0h]; Prefetch to all cache levels
-          prefetcht1 byte ptr [rax+80h]; Prefetch to all cache levels
-          prefetcht1 byte ptr [rax+60h]; Prefetch to all cache levels
-          prefetcht1 byte ptr [rax+40h]; Prefetch to all cache levels
-          prefetcht1 byte ptr [rax+20h]; Prefetch to all cache levels
-          prefetcht1 byte ptr [rax]; Prefetch to all cache levels
-        }
-        if ( (v25->Flags >> 22) & 1 )
+        pPlayNextOpt = (const char *)v25->pPlayNextOpt;
+        _mm_prefetch(pPlayNextOpt + 192, 2);
+        _mm_prefetch(pPlayNextOpt + 160, 2);
+        _mm_prefetch(pPlayNextOpt + 128, 2);
+        _mm_prefetch(pPlayNextOpt + 96, 2);
+        _mm_prefetch(pPlayNextOpt + 64, 2);
+        _mm_prefetch(pPlayNextOpt + 32, 2);
+        _mm_prefetch(pPlayNextOpt, 2);
+        v27 = v25->Flags;
+        if ( (v27 & 0x400000) != 0 )
         {
           Scaleform::GFx::InteractiveObject::RemoveFromOptimizedPlayList(v25);
         }
-        else if ( ~(LOBYTE(v25->Flags) >> 6) & 1 && (v3 || (v25->Flags >> 20) & 1) && !((LOBYTE(v25->Flags) >> 5) & 1) )
+        else if ( (v25->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Flags & 0x40) == 0
+               && (nextFrame || (v27 & 0x100000) != 0)
+               && (v25->Scaleform::GFx::DisplayObject::Flags & 0x20) == 0 )
         {
-          v25->vfptr[71].__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v25->vfptr, v3);
+          v25->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[71].__vecDelDtor(
+            v25,
+            nextFrame);
         }
         ++v6;
       }
       while ( v6 < pheapAddr.Size );
     }
-    v19 = pheapAddr.Data;
-    v27 = pheapAddr.Size;
-    v28 = (Scaleform::RefCountNTSImpl **)&pheapAddr.Data[pheapAddr.Size - 1];
+    Data = pheapAddr.Data;
+    v28 = pheapAddr.Size;
+    v29 = &pheapAddr.Data[pheapAddr.Size - 1];
     if ( pheapAddr.Size )
     {
       do
       {
-        if ( *v28 )
-          Scaleform::RefCountNTSImpl::Release(*v28);
+        if ( v29->pObject )
+          Scaleform::RefCountNTSImpl::Release(v29->pObject);
+        --v29;
         --v28;
-        --v27;
       }
-      while ( v27 );
-      goto LABEL_58;
+      while ( v28 );
+      goto LABEL_50;
     }
   }
-LABEL_59:
-  if ( v19 )
-    ((void (__cdecl *)(Scaleform::MemoryHeap *, Scaleform::Ptr<Scaleform::GFx::InteractiveObject> *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(
-      Scaleform::Memory::pGlobalHeap,
-      v19);
-  v4->Flags2 &= 0xFFFFFFFD;
-}
+  if ( Data )
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+  this->Flags2 &= ~2u;
+}      goto LABEL_50;
+    }
+  }
+  if ( Data )
+    ((void (__fastc
 
 // File Line: 2728
 // RVA: 0x8BAFB0
-void __fastcall Scaleform::GFx::MovieImpl::CheckMouseCursorType(Scaleform::GFx::MovieImpl *this, unsigned int mouseIdx, Scaleform::GFx::InteractiveObject *ptopMouseCharacter)
+void __fastcall Scaleform::GFx::MovieImpl::CheckMouseCursorType(
+        Scaleform::GFx::MovieImpl *this,
+        unsigned int mouseIdx,
+        Scaleform::GFx::InteractiveObject *ptopMouseCharacter)
 {
-  unsigned int v3; // er14
-  Scaleform::GFx::MovieImpl *v4; // r15
-  Scaleform::GFx::InteractiveObject *v5; // rdi
   char *v6; // rbp
   unsigned int v7; // ebx
   unsigned int v8; // ecx
 
-  v3 = mouseIdx;
-  v4 = this;
-  v5 = ptopMouseCharacter;
   v6 = (char *)this + 80 * mouseIdx;
   if ( Scaleform::GFx::MouseState::IsTopmostEntityChanged((Scaleform::GFx::MouseState *)(v6 + 8696)) )
   {
     v7 = 0;
-    if ( v5 )
-      v7 = ((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))v5->vfptr[116].__vecDelDtor)(v5);
+    if ( ptopMouseCharacter )
+      v7 = ((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))ptopMouseCharacter->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[116].__vecDelDtor)(ptopMouseCharacter);
     if ( *((_DWORD *)v6 + 2191) != v7 )
-      ((void (__fastcall *)(Scaleform::GFx::ASMovieRootBase *, _QWORD, _QWORD))v4->pASMovieRoot.pObject->vfptr[3].__vecDelDtor)(
-        v4->pASMovieRoot.pObject,
-        v3,
+      ((void (__fastcall *)(Scaleform::GFx::ASMovieRootBase *, _QWORD, _QWORD))this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[3].__vecDelDtor)(
+        this->pASMovieRoot.pObject,
+        mouseIdx,
         v7);
     v8 = *((_DWORD *)v6 + 2190);
     if ( v8 == -1 )
@@ -4452,461 +4332,463 @@ void __fastcall Scaleform::GFx::MovieImpl::CheckMouseCursorType(Scaleform::GFx::
 
 // File Line: 2739
 // RVA: 0x8BA3B0
-void __fastcall Scaleform::GFx::MovieImpl::ChangeMouseCursorType(Scaleform::GFx::MovieImpl *this, unsigned int mouseIdx, unsigned int newCursorType)
+void __fastcall Scaleform::GFx::MovieImpl::ChangeMouseCursorType(
+        Scaleform::GFx::MovieImpl *this,
+        unsigned int mouseIdx,
+        unsigned int newCursorType)
 {
-  unsigned int v3; // edi
   char *v4; // rbx
   unsigned int v5; // eax
 
-  v3 = newCursorType;
   v4 = (char *)this + 80 * mouseIdx;
   if ( *((_DWORD *)v4 + 2191) != newCursorType )
-    ((void (*)(void))this->pASMovieRoot.pObject->vfptr[3].__vecDelDtor)();
+    ((void (__fastcall *)(Scaleform::GFx::ASMovieRootBase *))this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[3].__vecDelDtor)(this->pASMovieRoot.pObject);
   v5 = *((_DWORD *)v4 + 2190);
   if ( v5 == -1 )
-    v5 = v3;
+    v5 = newCursorType;
   *((_DWORD *)v4 + 2191) = v5;
 }
 
 // File Line: 2747
 // RVA: 0x8E2610
-signed __int64 __fastcall Scaleform::GFx::MovieImpl::HandleEvent(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::Event *event)
+__int64 __fastcall Scaleform::GFx::MovieImpl::HandleEvent(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::Event *event)
 {
-  Scaleform::GFx::Event *v2; // rbx
-  Scaleform::GFx::MovieImpl *v3; // rdi
-  signed __int64 v4; // rax
-  signed __int64 v5; // r8
+  __int64 v4; // rax
+  Scaleform::GFx::KeyboardState *KeyboardStates; // r8
   Scaleform::GFx::Event *v6; // rbx
   __int64 v7; // rdx
-  _BYTE *v8; // rcx
-  __int64 v9; // rax
-  Scaleform::GFx::KeyboardState *v10; // rcx
-  unsigned __int8 v11; // al
-  __int64 v12; // rsi
-  float v13; // xmm1_4
-  float v14; // xmm0_4
-  float v15; // xmm1_4
-  unsigned int v16; // esi
-  float v17; // xmm1_4
-  float v18; // xmm6_4
-  signed int v19; // ebx
-  Scaleform::GFx::InputEventsQueueEntry *v20; // rax
-  float v21; // xmm0_4
-  unsigned int v22; // esi
-  float v23; // xmm1_4
-  float v24; // xmm6_4
-  signed int v25; // ebx
-  Scaleform::GFx::InputEventsQueueEntry *v26; // rax
-  float v27; // xmm0_4
-  unsigned int v28; // esi
-  float v29; // xmm1_4
-  float v30; // xmm6_4
-  signed int v31; // ebx
-  Scaleform::GFx::InputEventsQueueEntry *v32; // rax
-  float v33; // xmm0_4
-  __int64 v34; // rax
-  signed __int64 v35; // rsi
-  signed int v36; // er11
-  char v37; // r8
-  Scaleform::KeyModifiers specialKeysState; // ST28_1
-  unsigned int v39; // edx
-  __int64 v40; // rax
-  signed __int64 v41; // rsi
-  signed int v42; // er11
-  char v43; // r8
-  Scaleform::KeyModifiers v44; // ST28_1
-  Scaleform::Render::Point<float> p; // [rsp+80h] [rbp+20h]
-  Scaleform::Render::Point<float> result; // [rsp+90h] [rbp+30h]
+  __int64 States; // rax
+  Scaleform::GFx::KeyboardState *v9; // rcx
+  char v10; // al
+  __int64 Type; // rsi
+  float v12; // xmm1_4
+  float x; // xmm0_4
+  float y; // xmm1_4
+  unsigned int v15; // esi
+  float v16; // xmm1_4
+  float v17; // xmm6_4
+  int v18; // ebx
+  Scaleform::GFx::InputEventsQueue *v19; // rax
+  float v20; // xmm0_4
+  unsigned int v21; // esi
+  float v22; // xmm1_4
+  float v23; // xmm6_4
+  int v24; // ebx
+  Scaleform::GFx::InputEventsQueue *v25; // rax
+  float v26; // xmm0_4
+  unsigned int v27; // esi
+  float v28; // xmm1_4
+  float v29; // xmm6_4
+  int v30; // ebx
+  Scaleform::GFx::InputEventsQueue *v31; // rax
+  float v32; // xmm0_4
+  __int64 v33; // rax
+  Scaleform::GFx::KeyboardState *v34; // rsi
+  Scaleform::GFx::Event::EventType v35; // r11d
+  char v36; // r8
+  unsigned int v37; // edx
+  __int64 v38; // rax
+  Scaleform::GFx::KeyboardState *v39; // rsi
+  Scaleform::GFx::Event::EventType v40; // r11d
+  char v41; // r8
+  char specialKeysState; // [rsp+28h] [rbp-38h]
+  char specialKeysStatea; // [rsp+28h] [rbp-38h]
+  Scaleform::Render::Point<float> p; // [rsp+80h] [rbp+20h] BYREF
+  Scaleform::Render::Point<float> result; // [rsp+90h] [rbp+30h] BYREF
 
-  v2 = event;
-  v3 = this;
-  if ( !((unsigned __int8 (*)(void))this->vfptr[41].__vecDelDtor)() )
+  if ( !((unsigned __int8 (__fastcall *)(Scaleform::GFx::MovieImpl *))this->Scaleform::GFx::Movie::Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr[41].__vecDelDtor)(this) )
   {
-    if ( v2->Type != 8 )
+    if ( event->Type != F5_320_1024 )
       return 0i64;
     goto LABEL_5;
   }
-  if ( v2->Type == 8 )
+  if ( event->Type == F5_320_1024 )
   {
 LABEL_5:
-    v5 = (signed __int64)v3->KeyboardStates;
-    v6 = v2 + 1;
+    KeyboardStates = this->KeyboardStates;
+    v6 = event + 1;
     LODWORD(v7) = 0;
     do
     {
       if ( LOBYTE(v6->Type) )
       {
-        v8 = 0i64;
-        if ( (unsigned int)v7 < 6 )
-          v8 = (_BYTE *)v5;
-        v8[1666] = (LOBYTE(v6->Type) >> 4) & 1;
-        v8[1667] = (LOBYTE(v6->Type) >> 3) & 1;
-        v8[1668] = (LOBYTE(v6->Type) >> 5) & 1;
+        KeyboardStates->Toggled[0] = (v6->Type & 0x10) != 0;
+        KeyboardStates->Toggled[1] = (v6->Type & 8) != 0;
+        KeyboardStates->Toggled[2] = (v6->Type & 0x20) != 0;
       }
       v7 = (unsigned int)(v7 + 1);
-      v5 += 1672i64;
+      ++KeyboardStates;
       v6 = (Scaleform::GFx::Event *)((char *)v6 + 1);
     }
     while ( (unsigned int)v7 < 6 );
-    v3->Flags |= 0x40000u;
+    this->Flags |= 0x40000u;
     LOBYTE(v7) = 1;
-    ((void (__fastcall *)(Scaleform::GFx::ASMovieRootBase *, __int64, signed __int64))v3->pASMovieRoot.pObject->vfptr[26].__vecDelDtor)(
-      v3->pASMovieRoot.pObject,
+    ((void (__fastcall *)(Scaleform::GFx::ASMovieRootBase *, __int64, Scaleform::GFx::KeyboardState *))this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[26].__vecDelDtor)(
+      this->pASMovieRoot.pObject,
       v7,
-      v5);
+      KeyboardStates);
     return 1i64;
   }
-  if ( (unsigned int)(v2->Type - 5) <= 1 )
+  if ( (unsigned int)(event->Type - 5) <= 1 )
   {
-    v9 = (unsigned __int8)v2[2].Modifiers.States;
-    if ( (unsigned int)v9 < 6 )
+    States = (unsigned __int8)event[2].Modifiers.States;
+    if ( (unsigned int)States < 6 )
     {
-      v10 = &v3->KeyboardStates[v9];
-      if ( v10 )
+      v9 = &this->KeyboardStates[States];
+      if ( v9 )
       {
-        v11 = v2->Modifiers.States;
-        if ( v11 )
+        v10 = event->Modifiers.States;
+        if ( v10 )
         {
-          v10->Toggled[0] = (v11 >> 4) & 1;
-          v10->Toggled[1] = ((unsigned __int8)v2->Modifiers.States >> 3) & 1;
-          v10->Toggled[2] = ((unsigned __int8)v2->Modifiers.States >> 5) & 1;
+          v9->Toggled[0] = (v10 & 0x10) != 0;
+          v9->Toggled[1] = (event->Modifiers.States & 8) != 0;
+          v9->Toggled[2] = (event->Modifiers.States & 0x20) != 0;
         }
       }
     }
   }
-  switch ( v2->Type )
+  switch ( event->Type )
   {
-    case 1:
-      v12 = (unsigned int)v2[3].Type;
-      if ( (unsigned int)v12 >= v3->MouseCursorCount )
-        goto LABEL_74;
-      v13 = *(float *)&v2[1].Modifiers.States;
-      LODWORD(p.x) = v2[1].Type;
-      p.y = v13;
-      Scaleform::Render::Matrix2x4<float>::TransformByInverse(&v3->ViewportMatrix, &result, &p);
-      if ( (unsigned int)v12 < 6 )
+    case F5_1Pt2_512:
+      Type = (unsigned int)event[3].Type;
+      if ( (unsigned int)Type >= this->MouseCursorCount )
+        goto LABEL_72;
+      v12 = *(float *)&event[1].Modifiers.States;
+      LODWORD(p.x) = event[1].Type;
+      p.y = v12;
+      Scaleform::Render::Matrix2x4<float>::TransformByInverse(&this->ViewportMatrix, &result, &p);
+      if ( (unsigned int)Type < 6 )
       {
-        v14 = result.x;
-        v15 = result.y;
-        v3->InputEventsQueue.LastMousePosMask |= 1 << v12;
-        v3->InputEventsQueue.LastMousePos[v12].x = v14;
-        v3->InputEventsQueue.LastMousePos[v12].y = v15;
+        x = result.x;
+        y = result.y;
+        this->InputEventsQueue.LastMousePosMask |= 1 << Type;
+        this->InputEventsQueue.LastMousePos[Type].x = x;
+        this->InputEventsQueue.LastMousePos[Type].y = y;
       }
       v4 = 3i64;
       break;
-    case 2:
-      v22 = v2[3].Type;
-      if ( v22 >= v3->MouseCursorCount )
-        goto LABEL_74;
-      v23 = *(float *)&v2[1].Modifiers.States;
-      LODWORD(p.x) = v2[1].Type;
-      p.y = v23;
-      Scaleform::Render::Matrix2x4<float>::TransformByInverse(&v3->ViewportMatrix, &result, &p);
-      v24 = result.x;
-      v25 = 1 << *(_DWORD *)&v2[2].Modifiers.States;
+    case F3_1Pt44_512:
+      v21 = event[3].Type;
+      if ( v21 >= this->MouseCursorCount )
+        goto LABEL_72;
+      v22 = *(float *)&event[1].Modifiers.States;
+      LODWORD(p.x) = event[1].Type;
+      p.y = v22;
+      Scaleform::Render::Matrix2x4<float>::TransformByInverse(&this->ViewportMatrix, &result, &p);
+      v23 = result.x;
+      v24 = 1 << *(_DWORD *)&event[2].Modifiers.States;
       if ( result.x != 1.1754944e-38 )
-        v3->InputEventsQueue.LastMousePosMask &= ~(1 << v22);
-      v26 = Scaleform::GFx::InputEventsQueue::AddEmptyQueueEntry(&v3->InputEventsQueue);
-      v26->t = 0;
-      v26->u.mouseEntry.MouseIndex = v22;
-      v26->u.mouseEntry.ButtonsState = v25;
-      v27 = result.y;
-      v26->u.mouseEntry.PosX = v24;
-      v26->u.mouseEntry.PosY = v27;
-      v26->u.mouseEntry.Flags = 0;
+        this->InputEventsQueue.LastMousePosMask &= ~(1 << v21);
+      v25 = Scaleform::GFx::InputEventsQueue::AddEmptyQueueEntry(&this->InputEventsQueue);
+      v25->Queue[0].t = QE_Mouse;
+      v25->Queue[0].u.mouseEntry.MouseIndex = v21;
+      v25->Queue[0].u.mouseEntry.ButtonsState = v24;
+      v26 = result.y;
+      v25->Queue[0].u.mouseEntry.PosX = v23;
+      v25->Queue[0].u.mouseEntry.PosY = v26;
+      v25->Queue[0].u.mouseEntry.Flags = 0;
       v4 = 3i64;
       break;
-    case 3:
-      v16 = v2[3].Type;
-      if ( v16 >= v3->MouseCursorCount )
-        goto LABEL_74;
-      v17 = *(float *)&v2[1].Modifiers.States;
-      LODWORD(p.x) = v2[1].Type;
-      p.y = v17;
-      Scaleform::Render::Matrix2x4<float>::TransformByInverse(&v3->ViewportMatrix, &result, &p);
-      v18 = result.x;
-      v19 = 1 << *(_DWORD *)&v2[2].Modifiers.States;
+    case F3_2Pt88_512:
+      v15 = event[3].Type;
+      if ( v15 >= this->MouseCursorCount )
+        goto LABEL_72;
+      v16 = *(float *)&event[1].Modifiers.States;
+      LODWORD(p.x) = event[1].Type;
+      p.y = v16;
+      Scaleform::Render::Matrix2x4<float>::TransformByInverse(&this->ViewportMatrix, &result, &p);
+      v17 = result.x;
+      v18 = 1 << *(_DWORD *)&event[2].Modifiers.States;
       if ( result.x != 1.1754944e-38 )
-        v3->InputEventsQueue.LastMousePosMask &= ~(1 << v16);
-      v20 = Scaleform::GFx::InputEventsQueue::AddEmptyQueueEntry(&v3->InputEventsQueue);
-      v20->t = 0;
-      v20->u.mouseEntry.MouseIndex = v16;
-      v20->u.mouseEntry.ButtonsState = v19;
-      v21 = result.y;
-      v20->u.mouseEntry.PosX = v18;
-      v20->u.mouseEntry.PosY = v21;
-      v20->u.mouseEntry.Flags = -128;
+        this->InputEventsQueue.LastMousePosMask &= ~(1 << v15);
+      v19 = Scaleform::GFx::InputEventsQueue::AddEmptyQueueEntry(&this->InputEventsQueue);
+      v19->Queue[0].t = QE_Mouse;
+      v19->Queue[0].u.mouseEntry.MouseIndex = v15;
+      v19->Queue[0].u.mouseEntry.ButtonsState = v18;
+      v20 = result.y;
+      v19->Queue[0].u.mouseEntry.PosX = v17;
+      v19->Queue[0].u.mouseEntry.PosY = v20;
+      v19->Queue[0].u.mouseEntry.Flags = 0x80;
       v4 = 3i64;
       break;
-    case 4:
-      v28 = v2[3].Type;
-      if ( v28 >= v3->MouseCursorCount )
-        goto LABEL_74;
-      v29 = *(float *)&v2[1].Modifiers.States;
-      LODWORD(p.x) = v2[1].Type;
-      p.y = v29;
-      Scaleform::Render::Matrix2x4<float>::TransformByInverse(&v3->ViewportMatrix, &result, &p);
-      v30 = result.x;
-      v31 = (signed int)*(float *)&v2[2].Type;
+    case F3_20Pt8_512:
+      v27 = event[3].Type;
+      if ( v27 >= this->MouseCursorCount )
+        goto LABEL_72;
+      v28 = *(float *)&event[1].Modifiers.States;
+      LODWORD(p.x) = event[1].Type;
+      p.y = v28;
+      Scaleform::Render::Matrix2x4<float>::TransformByInverse(&this->ViewportMatrix, &result, &p);
+      v29 = result.x;
+      v30 = (int)*(float *)&event[2].Type;
       if ( result.x != 1.1754944e-38 )
-        v3->InputEventsQueue.LastMousePosMask &= ~(1 << v28);
-      v32 = Scaleform::GFx::InputEventsQueue::AddEmptyQueueEntry(&v3->InputEventsQueue);
-      v32->t = 0;
-      v32->u.mouseEntry.MouseIndex = v28;
-      v32->u.mouseEntry.WheelScrollDelta = v31;
-      v33 = result.y;
-      v32->u.mouseEntry.PosX = v30;
-      v32->u.mouseEntry.PosY = v33;
-      v32->u.mouseEntry.ButtonsState = 0;
-      v32->u.mouseEntry.Flags = 32;
+        this->InputEventsQueue.LastMousePosMask &= ~(1 << v27);
+      v31 = Scaleform::GFx::InputEventsQueue::AddEmptyQueueEntry(&this->InputEventsQueue);
+      v31->Queue[0].t = QE_Mouse;
+      v31->Queue[0].u.mouseEntry.MouseIndex = v27;
+      v31->Queue[0].u.mouseEntry.WheelScrollDelta = v30;
+      v32 = result.y;
+      v31->Queue[0].u.mouseEntry.PosX = v29;
+      v31->Queue[0].u.mouseEntry.PosY = v32;
+      v31->Queue[0].u.mouseEntry.ButtonsState = 0;
+      v31->Queue[0].u.mouseEntry.Flags = 32;
       v4 = 3i64;
       break;
-    case 5:
-      v34 = (unsigned __int8)v2[2].Modifiers.States;
-      if ( (unsigned int)v34 < 6 )
+    case F3_720_512:
+      v33 = (unsigned __int8)event[2].Modifiers.States;
+      if ( (unsigned int)v33 < 6 )
       {
-        v35 = (signed __int64)&v3->KeyboardStates[v34];
-        if ( v35 )
+        v34 = &this->KeyboardStates[v33];
+        if ( v34 )
         {
-          v36 = v2[1].Type;
-          v37 = v2[1].Modifiers.States;
-          if ( (unsigned int)v36 <= 0xE4 )
+          v35 = event[1].Type;
+          v36 = event[1].Modifiers.States;
+          if ( (unsigned int)v35 <= 0xE4 )
           {
-            specialKeysState.States = v2->Modifiers.States;
-            *(_BYTE *)((v36 >> 3) + v35 + 1637) |= 1 << (v36 - 8 * (v36 >> 3));
+            specialKeysState = event->Modifiers.States;
+            v34->Keymap[v35 >> 3] |= 1 << (v35 - 8 * (v35 >> 3));
             Scaleform::GFx::KeyboardState::KeyQueue::Put(
-              (Scaleform::GFx::KeyboardState::KeyQueue *)(v35 + 24),
+              &v34->KeyQueue,
+              v35,
               v36,
-              v37,
               0,
               F3_720_512,
-              specialKeysState);
+              (Scaleform::KeyModifiers)specialKeysState);
           }
-          switch ( v2[1].Type )
+          switch ( event[1].Type )
           {
-            case 0x10:
-              if ( v2->Modifiers.States & 0x40 )
-                *(_BYTE *)(v35 + 1657) |= 2u;
+            case F5_720_512:
+              if ( (event->Modifiers.States & 0x40) != 0 )
+                v34->Keymap[20] |= 2u;
               else
-                *(_BYTE *)(v35 + 1657) |= 1u;
+                v34->Keymap[20] |= 1u;
               break;
-            case 0x11:
-              if ( v2->Modifiers.States & 0x40 )
-                *(_BYTE *)(v35 + 1657) |= 8u;
+            case F3_1Pt2_512:
+              if ( (event->Modifiers.States & 0x40) != 0 )
+                v34->Keymap[20] |= 8u;
               else
-                *(_BYTE *)(v35 + 1657) |= 4u;
+                v34->Keymap[20] |= 4u;
               break;
-            case 0x12:
-              if ( v2->Modifiers.States & 0x40 )
-                *(_BYTE *)(v35 + 1657) |= 0x20u;
+            case F3_1Pt23_1024:
+              if ( (event->Modifiers.States & 0x40) != 0 )
+                v34->Keymap[20] |= 0x20u;
               else
-                *(_BYTE *)(v35 + 1657) |= 0x10u;
+                v34->Keymap[20] |= 0x10u;
               break;
           }
         }
       }
       Scaleform::GFx::InputEventsQueue::AddKeyDown(
-        &v3->InputEventsQueue,
-        v2[1].Type,
-        v2[1].Modifiers.States,
-        v2->Modifiers,
-        v2[2].Modifiers.States);
-      v39 = v2[2].Type;
-      if ( v39 == 13 || v39 >= 0x20 && v39 != 127 )
-        Scaleform::GFx::InputEventsQueue::AddCharTyped(&v3->InputEventsQueue, v39, v2[2].Modifiers.States);
+        &this->InputEventsQueue,
+        event[1].Type,
+        event[1].Modifiers.States,
+        event->Modifiers,
+        event[2].Modifiers.States);
+      v37 = event[2].Type;
+      if ( v37 == 13 || v37 >= 0x20 && v37 != 127 )
+        Scaleform::GFx::InputEventsQueue::AddCharTyped(&this->InputEventsQueue, v37, event[2].Modifiers.States);
       v4 = 3i64;
       break;
-    case 6:
-      v40 = (unsigned __int8)v2[2].Modifiers.States;
-      if ( (unsigned int)v40 < 6 )
+    case F5_360_512:
+      v38 = (unsigned __int8)event[2].Modifiers.States;
+      if ( (unsigned int)v38 < 6 )
       {
-        v41 = (signed __int64)&v3->KeyboardStates[v40];
-        if ( v41 )
+        v39 = &this->KeyboardStates[v38];
+        if ( v39 )
         {
-          v42 = v2[1].Type;
-          v43 = v2[1].Modifiers.States;
-          if ( (unsigned int)v42 <= 0xE4 )
+          v40 = event[1].Type;
+          v41 = event[1].Modifiers.States;
+          if ( (unsigned int)v40 <= 0xE4 )
           {
-            v44.States = v2->Modifiers.States;
-            *(_BYTE *)((v42 >> 3) + v41 + 1637) &= ~(1 << (v42 - 8 * (v42 >> 3)));
+            specialKeysStatea = event->Modifiers.States;
+            v39->Keymap[v40 >> 3] &= ~(1 << (v40 - 8 * (v40 >> 3)));
             Scaleform::GFx::KeyboardState::KeyQueue::Put(
-              (Scaleform::GFx::KeyboardState::KeyQueue *)(v41 + 24),
-              v42,
-              v43,
+              &v39->KeyQueue,
+              v40,
+              v41,
               0,
               F5_360_512,
-              v44);
+              (Scaleform::KeyModifiers)specialKeysStatea);
           }
-          switch ( v2[1].Type )
+          switch ( event[1].Type )
           {
-            case 0x10:
-              if ( v2->Modifiers.States & 0x40 )
-                *(_BYTE *)(v41 + 1657) &= 0xFDu;
+            case F5_720_512:
+              if ( (event->Modifiers.States & 0x40) != 0 )
+                v39->Keymap[20] &= ~2u;
               else
-                *(_BYTE *)(v41 + 1657) &= 0xFEu;
+                v39->Keymap[20] &= ~1u;
               break;
-            case 0x11:
-              if ( v2->Modifiers.States & 0x40 )
-                *(_BYTE *)(v41 + 1657) &= 0xF7u;
+            case F3_1Pt2_512:
+              if ( (event->Modifiers.States & 0x40) != 0 )
+                v39->Keymap[20] &= ~8u;
               else
-                *(_BYTE *)(v41 + 1657) &= 0xFBu;
+                v39->Keymap[20] &= ~4u;
               break;
-            case 0x12:
-              if ( v2->Modifiers.States & 0x40 )
-                *(_BYTE *)(v41 + 1657) &= 0xDFu;
+            case F3_1Pt23_1024:
+              if ( (event->Modifiers.States & 0x40) != 0 )
+                v39->Keymap[20] &= ~0x20u;
               else
-                *(_BYTE *)(v41 + 1657) &= 0xEFu;
+                v39->Keymap[20] &= ~0x10u;
               break;
           }
         }
       }
       Scaleform::GFx::InputEventsQueue::AddKeyUp(
-        &v3->InputEventsQueue,
-        v2[1].Type,
-        v2[1].Modifiers.States,
-        v2->Modifiers,
-        v2[2].Modifiers.States);
+        &this->InputEventsQueue,
+        event[1].Type,
+        event[1].Modifiers.States,
+        event->Modifiers,
+        event[2].Modifiers.States);
       v4 = 3i64;
       break;
-    case 9:
-      Scaleform::GFx::MovieImpl::ResetKeyboardState(v3);
-      Scaleform::GFx::MovieImpl::ResetMouseState(v3);
-      v3->Flags &= 0xFFFBFFFF;
-      v3->pASMovieRoot.pObject->vfptr[26].__vecDelDtor((Scaleform::RefCountImplCore *)v3->pASMovieRoot.pObject, 0);
-      goto LABEL_74;
-    case 0x1A:
+    case F5_180_512:
+      Scaleform::GFx::MovieImpl::ResetKeyboardState(this);
+      Scaleform::GFx::MovieImpl::ResetMouseState(this);
+      this->Flags &= ~0x40000u;
+      this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[26].__vecDelDtor(this->pASMovieRoot.pObject, 0);
+      goto LABEL_72;
+    case F3_240M_512|F3_1Pt44_512:
       Scaleform::GFx::InputEventsQueue::AddAccelerometerEvent(
-        &v3->InputEventsQueue,
-        v2[1].Type,
-        *(long double *)&v2[2],
-        *(long double *)&v2[3],
-        *(long double *)&v2[4],
-        *(long double *)&v2[5]);
+        &this->InputEventsQueue,
+        event[1].Type,
+        *(long double *)&event[2],
+        *(long double *)&event[3],
+        *(long double *)&event[4],
+        *(long double *)&event[5]);
       v4 = 3i64;
       break;
-    case 0x1B:
+    case F3_32M_512|F3_1Pt44_512:
       Scaleform::GFx::InputEventsQueue::AddGeolocationEvent(
-        &v3->InputEventsQueue,
-        v2[1].Type,
-        *(long double *)&v2[2],
-        *(long double *)&v2[3],
-        *(long double *)&v2[4],
-        *(long double *)&v2[5],
-        *(long double *)&v2[6],
-        *(long double *)&v2[7],
-        *(long double *)&v2[8],
-        *(long double *)&v2[9]);
+        &this->InputEventsQueue,
+        event[1].Type,
+        *(long double *)&event[2],
+        *(long double *)&event[3],
+        *(long double *)&event[4],
+        *(long double *)&event[5],
+        *(long double *)&event[6],
+        *(long double *)&event[7],
+        *(long double *)&event[8],
+        *(long double *)&event[9]);
       v4 = 3i64;
       break;
-    case 0x1C:
+    case F3_240M_512|F3_20Pt8_512:
       Scaleform::GFx::InputEventsQueue::AddStatusEvent(
-        &v3->InputEventsQueue,
-        *(Scaleform::String **)&v2[1],
-        *(Scaleform::String **)&v2[2],
-        *(Scaleform::String **)&v2[3],
-        *(Scaleform::String **)&v2[4]);
+        &this->InputEventsQueue,
+        *(Scaleform::String **)&event[1],
+        *(Scaleform::String **)&event[2],
+        *(Scaleform::String **)&event[3],
+        *(Scaleform::String **)&event[4]);
       v4 = 3i64;
       break;
-    case 0x1D:
-      Scaleform::GFx::InputEventsQueue::AddCharTyped(&v3->InputEventsQueue, v2[1].Type, v2[1].Modifiers.States);
+    case F3_32M_512|F3_20Pt8_512:
+      Scaleform::GFx::InputEventsQueue::AddCharTyped(&this->InputEventsQueue, event[1].Type, event[1].Modifiers.States);
       v4 = 3i64;
       break;
     default:
-LABEL_74:
+LABEL_72:
       v4 = 0i64;
       break;
   }
   return v4;
+}ates);
+      v4 = 3i64;
+      break;
+    default:
+LABEL_72:
+      v4 = 0i64;
+      break;
+  }
+  return v4;
 }
 
 // File Line: 3171
 // RVA: 0x8EBE50
-void __fastcall Scaleform::GFx::MovieImpl::NotifyMouseState(Scaleform::GFx::MovieImpl *this, float x, float y, unsigned int buttons, unsigned int mouseIndex)
+void __fastcall Scaleform::GFx::MovieImpl::NotifyMouseState(
+        Scaleform::GFx::MovieImpl *this,
+        float x,
+        float y,
+        unsigned int buttons,
+        unsigned int mouseIndex)
 {
-  Scaleform::GFx::MovieImpl *v5; // rbx
-  unsigned int v6; // er15
   __int64 v7; // rsi
-  Scaleform::GFx::InputEventsQueue *v8; // rdi
+  Scaleform::GFx::InputEventsQueue *p_InputEventsQueue; // rdi
   float v9; // xmm6_4
-  int v10; // xmm8_4
-  unsigned int v11; // ebp
-  signed int v12; // ebx
-  signed __int64 v13; // r14
-  Scaleform::GFx::InputEventsQueueEntry *v14; // rax
+  float v10; // xmm8_4
+  unsigned int CurButtonsState; // ebp
+  int v12; // ebx
+  __int64 i; // r14
+  Scaleform::GFx::InputEventsQueue *v14; // rax
   unsigned __int16 v15; // cx
-  float v16; // [rsp+20h] [rbp-68h]
-  int v17; // [rsp+24h] [rbp-64h]
-  float v18; // [rsp+90h] [rbp+8h]
-  float v19; // [rsp+94h] [rbp+Ch]
+  Scaleform::Render::Point<float> v16; // [rsp+20h] [rbp-68h] BYREF
+  Scaleform::Render::Point<float> v17; // [rsp+90h] [rbp+8h] BYREF
 
-  v5 = this;
-  v18 = x;
-  v19 = y;
-  v6 = buttons;
-  Scaleform::Render::Matrix2x4<float>::TransformByInverse(
-    &this->ViewportMatrix,
-    (Scaleform::Render::Point<float> *)&v16,
-    (Scaleform::Render::Point<float> *)&v18);
+  v17.x = x;
+  v17.y = y;
+  Scaleform::Render::Matrix2x4<float>::TransformByInverse(&this->ViewportMatrix, &v16, &v17);
   v7 = mouseIndex;
-  if ( mouseIndex < v5->MouseCursorCount )
+  if ( mouseIndex < this->MouseCursorCount )
   {
-    v8 = &v5->InputEventsQueue;
-    v9 = v16;
-    v10 = v17;
-    if ( (unsigned int)v7 < 6 )
+    p_InputEventsQueue = &this->InputEventsQueue;
+    v9 = v16.x;
+    v10 = v16.y;
+    if ( mouseIndex < 6 )
     {
-      v5->InputEventsQueue.LastMousePosMask |= 1 << mouseIndex;
-      v8->LastMousePos[v7].x = v9;
-      LODWORD(v8->LastMousePos[v7].y) = v10;
+      this->InputEventsQueue.LastMousePosMask |= 1 << mouseIndex;
+      p_InputEventsQueue->LastMousePos[v7].x = v9;
+      p_InputEventsQueue->LastMousePos[v7].y = v10;
     }
-    v11 = v5->mMouseState[v7].CurButtonsState;
+    CurButtonsState = this->mMouseState[v7].CurButtonsState;
     v12 = 1;
-    v13 = 16i64;
-    do
+    for ( i = 16i64; i; --i )
     {
-      if ( v6 & v12 )
+      if ( (buttons & v12) != 0 )
       {
-        if ( !(v12 & v11) )
+        if ( (v12 & CurButtonsState) == 0 )
         {
           if ( v9 != 1.1754944e-38 )
-            v8->LastMousePosMask &= ~(1 << v7);
-          v14 = Scaleform::GFx::InputEventsQueue::AddEmptyQueueEntry(v8);
-          v14->t = 0;
-          v14->u.mouseEntry.Flags = 0;
-          v15 = v12 & v6;
+            p_InputEventsQueue->LastMousePosMask &= ~(1 << v7);
+          v14 = Scaleform::GFx::InputEventsQueue::AddEmptyQueueEntry(p_InputEventsQueue);
+          v14->Queue[0].t = QE_Mouse;
+          v14->Queue[0].u.mouseEntry.Flags = 0;
+          v15 = v12 & buttons;
 LABEL_15:
-          v14->u.mouseEntry.ButtonsState = v15;
-          v14->u.keyEntry.Code = v10;
-          v14->u.mouseEntry.PosX = v9;
-          v14->u.mouseEntry.MouseIndex = v7;
+          v14->Queue[0].u.mouseEntry.ButtonsState = v15;
+          v14->Queue[0].u.mouseEntry.PosY = v10;
+          v14->Queue[0].u.mouseEntry.PosX = v9;
+          v14->Queue[0].u.mouseEntry.MouseIndex = v7;
           goto LABEL_16;
         }
       }
-      else if ( !(v12 & v11) )
+      else if ( (v12 & CurButtonsState) == 0 )
       {
         goto LABEL_16;
       }
-      if ( !(v6 & v12) )
+      if ( (buttons & v12) == 0 )
       {
         if ( v9 != 1.1754944e-38 )
-          v8->LastMousePosMask &= ~(1 << v7);
-        v14 = Scaleform::GFx::InputEventsQueue::AddEmptyQueueEntry(v8);
-        v14->t = 0;
-        v14->u.mouseEntry.Flags = -128;
-        v15 = v11 & v12;
+          p_InputEventsQueue->LastMousePosMask &= ~(1 << v7);
+        v14 = Scaleform::GFx::InputEventsQueue::AddEmptyQueueEntry(p_InputEventsQueue);
+        v14->Queue[0].t = QE_Mouse;
+        v14->Queue[0].u.mouseEntry.Flags = 0x80;
+        v15 = CurButtonsState & v12;
         goto LABEL_15;
       }
 LABEL_16:
       v12 *= 2;
-      --v13;
     }
-    while ( v13 );
   }
 }
 
 // File Line: 3196
 // RVA: 0x8DB1F0
-void __fastcall Scaleform::GFx::MovieImpl::GetMouseState(Scaleform::GFx::MovieImpl *this, unsigned int mouseIndex, float *x, float *y, unsigned int *buttons)
+void __fastcall Scaleform::GFx::MovieImpl::GetMouseState(
+        Scaleform::GFx::MovieImpl *this,
+        unsigned int mouseIndex,
+        float *x,
+        float *y,
+        unsigned int *buttons)
 {
   float v5; // xmm1_4
 
@@ -4926,116 +4808,115 @@ void __fastcall Scaleform::GFx::MovieImpl::GetMouseState(Scaleform::GFx::MovieIm
 
 // File Line: 3215
 // RVA: 0x8E33B0
-char __fastcall Scaleform::GFx::MovieImpl::HitTest(Scaleform::GFx::MovieImpl *this, float x, float y, Scaleform::GFx::Movie::HitTestType testCond, unsigned int controllerIdx)
+char __fastcall Scaleform::GFx::MovieImpl::HitTest(
+        Scaleform::GFx::MovieImpl *this,
+        float x,
+        float y,
+        Scaleform::GFx::Movie::HitTestType testCond,
+        int controllerIdx)
 {
-  Scaleform::GFx::MovieImpl *v5; // r14
-  Scaleform::GFx::Movie::HitTestType v6; // esi
   float v7; // xmm2_4
-  int v8; // edi
-  unsigned int v9; // er15
-  Scaleform::GFx::MovieImpl::LevelInfo *v10; // rax
-  Scaleform::GFx::DisplayObjectBase *v11; // rbx
+  int Size; // edi
+  int v9; // r15d
+  Scaleform::GFx::MovieImpl::LevelInfo *Data; // rax
+  Scaleform::GFx::DisplayObjectBase *pObject; // rbx
   __int64 v12; // r8
   Scaleform::GFx::ASMovieRootBase *v13; // rax
   bool v14; // zf
-  Scaleform::RefCountNTSImplCoreVtbl *v15; // rax
+  Scaleform::RefCountNTSImplCoreVtbl *vfptr; // rax
   __int64 v17; // rbx
   unsigned __int8 v18; // al
   __int64 v19; // rax
-  Scaleform::Render::Point<float> result; // [rsp+30h] [rbp-50h]
-  float v21; // [rsp+40h] [rbp-40h]
-  float v22; // [rsp+44h] [rbp-3Ch]
-  float v23; // [rsp+48h] [rbp-38h]
-  float v24; // [rsp+4Ch] [rbp-34h]
-  __int128 v25; // [rsp+50h] [rbp-30h]
-  __m128 v26; // [rsp+60h] [rbp-20h]
-  unsigned int v27; // [rsp+70h] [rbp-10h]
-  char v28; // [rsp+74h] [rbp-Ch]
-  Scaleform::Render::Point<float> p; // [rsp+B0h] [rbp+30h]
+  Scaleform::Render::Point<float> result; // [rsp+30h] [rbp-50h] BYREF
+  int v21[4]; // [rsp+40h] [rbp-40h] BYREF
+  __int128 v22; // [rsp+50h] [rbp-30h] BYREF
+  __m128 v23; // [rsp+60h] [rbp-20h]
+  int v24; // [rsp+70h] [rbp-10h]
+  char v25; // [rsp+74h] [rbp-Ch]
+  Scaleform::Render::Point<float> p; // [rsp+B0h] [rbp+30h] BYREF
 
-  v5 = this;
   p.x = x;
   p.y = y;
-  v6 = testCond;
   Scaleform::Render::Matrix2x4<float>::TransformByInverse(&this->ViewportMatrix, &result, &p);
-  v7 = (float)(result.x - (float)(v5->ViewOffsetX * 20.0)) / (float)(v5->VisibleFrameRect.x2 - v5->VisibleFrameRect.x1);
-  LODWORD(v5->ScreenToWorld.Sy) = COERCE_UNSIGNED_INT(
-                                    (float)((float)((float)(result.y - (float)(v5->ViewOffsetY * 20.0))
-                                                  / (float)(v5->VisibleFrameRect.y2 - v5->VisibleFrameRect.y1))
-                                          * 2.0)
-                                  - 1.0) ^ _xmm[0];
-  v5->ScreenToWorld.Sx = (float)(v7 * 2.0) - 1.0;
-  v8 = v5->MovieLevels.Data.Size;
-  if ( !v8 )
+  v7 = (float)(result.x - (float)(this->ViewOffsetX * 20.0))
+     / (float)(this->VisibleFrameRect.x2 - this->VisibleFrameRect.x1);
+  LODWORD(this->ScreenToWorld.Sy) = COERCE_UNSIGNED_INT(
+                                      (float)((float)((float)(result.y - (float)(this->ViewOffsetY * 20.0))
+                                                    / (float)(this->VisibleFrameRect.y2 - this->VisibleFrameRect.y1))
+                                            * 2.0)
+                                    - 1.0) ^ _xmm[0];
+  this->ScreenToWorld.Sx = (float)(v7 * 2.0) - 1.0;
+  Size = this->MovieLevels.Data.Size;
+  if ( !Size )
     return 0;
   v9 = controllerIdx;
   while ( 1 )
   {
-    v10 = v5->MovieLevels.Data.Data;
-    --v8;
-    v25 = _xmm;
-    v26 = _xmm;
-    v11 = (Scaleform::GFx::DisplayObjectBase *)&v10[v8].pSprite.pObject->vfptr;
-    ((void (__fastcall *)(Scaleform::GFx::DisplayObjectBase *, float *, __int128 *))v11->vfptr[61].__vecDelDtor)(
-      v11,
-      &v21,
-      &v25);
-    Scaleform::GFx::DisplayObjectBase::TransformPointToLocal(v11, &p, &result, 0, 0i64);
-    if ( (p.x > v23 || p.x < v21 || p.y > v24 || p.y < v22)
-      && !((unsigned __int8 (__fastcall *)(Scaleform::GFx::DisplayObjectBase *))v11->vfptr[14].__vecDelDtor)(v11) )
+    Data = this->MovieLevels.Data.Data;
+    --Size;
+    v22 = _xmm;
+    v23 = _xmm;
+    pObject = Data[Size].pSprite.pObject;
+    ((void (__fastcall *)(Scaleform::GFx::DisplayObjectBase *, int *, __int128 *))pObject->Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[61].__vecDelDtor)(
+      pObject,
+      v21,
+      &v22);
+    Scaleform::GFx::DisplayObjectBase::TransformPointToLocal(pObject, &p, &result, 0, 0i64);
+    if ( (p.x > *(float *)&v21[2] || p.x < *(float *)v21 || p.y > *(float *)&v21[3] || p.y < *(float *)&v21[1])
+      && !((unsigned __int8 (__fastcall *)(Scaleform::GFx::DisplayObjectBase *))pObject->Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[14].__vecDelDtor)(pObject) )
     {
       goto LABEL_25;
     }
-    if ( v6 )
+    if ( testCond )
       break;
     v12 = 0i64;
 LABEL_24:
-    if ( ((unsigned __int8 (__fastcall *)(Scaleform::GFx::DisplayObjectBase *, Scaleform::Render::Point<float> *, __int64))v11->vfptr[63].__vecDelDtor)(
-           v11,
+    if ( ((unsigned __int8 (__fastcall *)(Scaleform::GFx::DisplayObjectBase *, Scaleform::Render::Point<float> *, __int64))pObject->Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[63].__vecDelDtor)(
+           pObject,
            &p,
            v12) )
     {
       return 1;
     }
 LABEL_25:
-    if ( !v8 )
+    if ( !Size )
       return 0;
   }
-  if ( v6 == 1 )
+  if ( testCond == HitTest_Shapes )
   {
     LOBYTE(v12) = 1;
     goto LABEL_24;
   }
-  if ( v6 != 2 )
+  if ( testCond != HitTest_ButtonEvents )
   {
-    if ( v6 != 3 )
+    if ( testCond != HitTest_ShapesNoInvisible )
       goto LABEL_25;
     LOBYTE(v12) = 3;
     goto LABEL_24;
   }
-  v13 = v5->pASMovieRoot.pObject;
-  v26 = 0ui64;
-  v28 = 0;
-  v27 = v9;
+  v13 = this->pASMovieRoot.pObject;
+  v23 = 0ui64;
+  v25 = 0;
+  v24 = v9;
   v14 = v13->AVMVersion == 1;
-  v15 = v11->vfptr;
+  vfptr = pObject->Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr;
   if ( v14 )
   {
-    if ( ((unsigned int (__fastcall *)(Scaleform::GFx::DisplayObjectBase *, Scaleform::Render::Point<float> *, __int128 *))v15[64].__vecDelDtor)(
-           v11,
+    if ( ((unsigned int (__fastcall *)(Scaleform::GFx::DisplayObjectBase *, Scaleform::Render::Point<float> *, __int128 *))vfptr[64].__vecDelDtor)(
+           pObject,
            &p,
-           &v25) == 1 )
+           &v22) == 1 )
       return 1;
     goto LABEL_25;
   }
-  v28 = 1;
-  if ( ((unsigned int (__fastcall *)(Scaleform::GFx::DisplayObjectBase *, Scaleform::Render::Point<float> *, __int128 *))v15[64].__vecDelDtor)(
-         v11,
+  v25 = 1;
+  if ( ((unsigned int (__fastcall *)(Scaleform::GFx::DisplayObjectBase *, Scaleform::Render::Point<float> *, __int128 *))vfptr[64].__vecDelDtor)(
+         pObject,
          &p,
-         &v25) != 1 )
+         &v22) != 1 )
     goto LABEL_25;
-  v17 = v25;
-  if ( !(_QWORD)v25 )
+  v17 = v22;
+  if ( !(_QWORD)v22 )
     goto LABEL_25;
   while ( 1 )
   {
@@ -5050,67 +4931,58 @@ LABEL_25:
     if ( !v17 )
       goto LABEL_25;
   }
-} + 96i64))(v19) )
-        return 1;
-    }
-    v17 = *(_QWORD *)(v17 + 56);
-    if ( !v17 )
-      goto LABEL_2
+}
 
 // File Line: 3287
 // RVA: 0x8B1990
-__int64 __fastcall Scaleform::GFx::MovieImpl::AddIntervalTimer(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::ASIntervalTimerIntf *timer)
+__int64 __fastcall Scaleform::GFx::MovieImpl::AddIntervalTimer(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::Render::RenderBuffer *timer)
 {
-  Scaleform::GFx::Resource *v2; // rdi
-  Scaleform::GFx::MovieImpl *v3; // rsi
-  _QWORD *v4; // rbx
+  Scaleform::Ptr<Scaleform::GFx::ASIntervalTimerIntf> *v4; // rbx
 
-  v2 = (Scaleform::GFx::Resource *)timer;
-  v3 = this;
-  timer->vfptr[7].__vecDelDtor((Scaleform::RefCountImplCore *)timer, ++this->LastIntervalTimerId);
-  Scaleform::Render::RenderBuffer::AddRef(v2);
+  timer->vfptr[7].__vecDelDtor(timer, ++this->LastIntervalTimerId);
+  Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)timer);
   Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::ASIntervalTimerIntf>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::ASIntervalTimerIntf>,327>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
-    (Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::ASIntervalTimerIntf>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::ASIntervalTimerIntf>,327>,Scaleform::ArrayDefaultPolicy> *)&v3->IntervalTimers.Data.Data,
-    &v3->IntervalTimers,
-    v3->IntervalTimers.Data.Size + 1);
-  v4 = &v3->IntervalTimers.Data.Data[v3->IntervalTimers.Data.Size - 1].pObject;
+    &this->IntervalTimers.Data,
+    &this->IntervalTimers,
+    this->IntervalTimers.Data.Size + 1);
+  v4 = &this->IntervalTimers.Data.Data[this->IntervalTimers.Data.Size - 1];
   if ( v4 )
   {
-    Scaleform::Render::RenderBuffer::AddRef(v2);
-    *v4 = v2;
+    Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)timer);
+    v4->pObject = (Scaleform::GFx::ASIntervalTimerIntf *)timer;
   }
-  Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v2);
-  return (unsigned int)v3->LastIntervalTimerId;
+  Scaleform::RefCountImpl::Release(timer);
+  return (unsigned int)this->LastIntervalTimerId;
 }
 
 // File Line: 3294
 // RVA: 0x8BC490
 void __fastcall Scaleform::GFx::MovieImpl::ClearIntervalTimer(Scaleform::GFx::MovieImpl *this, int timerId)
 {
-  unsigned __int64 v2; // rsi
+  unsigned __int64 Size; // rsi
   __int64 v3; // rbx
-  int v4; // ebp
-  Scaleform::GFx::MovieImpl *v5; // rdi
-  Scaleform::GFx::ASIntervalTimerIntf *v6; // rcx
+  Scaleform::GFx::ASIntervalTimerIntf *pObject; // rcx
+  Scaleform::GFx::ASIntervalTimerIntf *v7; // rcx
 
-  v2 = this->IntervalTimers.Data.Size;
+  Size = this->IntervalTimers.Data.Size;
   v3 = 0i64;
-  v4 = timerId;
-  v5 = this;
-  if ( v2 )
+  if ( Size )
   {
     while ( 1 )
     {
-      v6 = v5->IntervalTimers.Data.Data[v3].pObject;
-      if ( v6 )
+      pObject = this->IntervalTimers.Data.Data[v3].pObject;
+      if ( pObject )
       {
-        if ( ((unsigned int (*)(void))v6->vfptr[8].__vecDelDtor)() == v4 )
+        if ( ((unsigned int (__fastcall *)(Scaleform::GFx::ASIntervalTimerIntf *))pObject->vfptr[8].__vecDelDtor)(pObject) == timerId )
           break;
       }
-      if ( ++v3 >= v2 )
+      if ( ++v3 >= Size )
         return;
     }
-    ((void (*)(void))v5->IntervalTimers.Data.Data[v3].pObject->vfptr[4].__vecDelDtor)();
+    v7 = this->IntervalTimers.Data.Data[v3].pObject;
+    ((void (__fastcall *)(Scaleform::GFx::ASIntervalTimerIntf *))v7->vfptr[4].__vecDelDtor)(v7);
   }
 }
 
@@ -5118,62 +4990,51 @@ void __fastcall Scaleform::GFx::MovieImpl::ClearIntervalTimer(Scaleform::GFx::Mo
 // RVA: 0x910870
 void __fastcall Scaleform::GFx::MovieImpl::ShutdownTimers(Scaleform::GFx::MovieImpl *this)
 {
-  unsigned __int64 v1; // rsi
-  unsigned __int64 v2; // rbx
-  Scaleform::GFx::MovieImpl *v3; // rdi
+  unsigned __int64 Size; // rsi
+  unsigned __int64 i; // rbx
+  Scaleform::GFx::ASIntervalTimerIntf *pObject; // rcx
 
-  v1 = this->IntervalTimers.Data.Size;
-  v2 = 0i64;
-  v3 = this;
-  if ( v1 )
+  Size = this->IntervalTimers.Data.Size;
+  for ( i = 0i64; i < Size; ++i )
   {
-    do
-      ((void (*)(void))v3->IntervalTimers.Data.Data[v2++].pObject->vfptr[4].__vecDelDtor)();
-    while ( v2 < v1 );
+    pObject = this->IntervalTimers.Data.Data[i].pObject;
+    ((void (__fastcall *)(Scaleform::GFx::ASIntervalTimerIntf *))pObject->vfptr[4].__vecDelDtor)(pObject);
   }
   Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::ASIntervalTimerIntf>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::ASIntervalTimerIntf>,327>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
-    (Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::ASIntervalTimerIntf>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::ASIntervalTimerIntf>,327>,Scaleform::ArrayDefaultPolicy> *)&v3->IntervalTimers.Data.Data,
-    &v3->IntervalTimers,
+    &this->IntervalTimers.Data,
+    &this->IntervalTimers,
     0i64);
 }
 
 // File Line: 3317
 // RVA: 0x9108D0
-void __fastcall Scaleform::GFx::MovieImpl::ShutdownTimersForMovieDef(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::MovieDefImpl *defimpl)
+void __fastcall Scaleform::GFx::MovieImpl::ShutdownTimersForMovieDef(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::MovieDefImpl *defimpl)
 {
-  unsigned __int64 v2; // rbp
-  Scaleform::GFx::MovieDefImpl *v3; // r14
-  Scaleform::GFx::MovieImpl *v4; // rsi
-  unsigned __int64 v5; // rbx
-  Scaleform::GFx::ASIntervalTimerIntf *v6; // rcx
-  Scaleform::Ptr<Scaleform::GFx::ASIntervalTimerIntf> *v7; // rax
+  unsigned __int64 Size; // rbp
+  unsigned __int64 i; // rbx
+  Scaleform::GFx::ASIntervalTimerIntf *pObject; // rcx
+  Scaleform::Ptr<Scaleform::GFx::ASIntervalTimerIntf> *Data; // rax
   Scaleform::Render::RenderBuffer *v8; // rcx
   Scaleform::Ptr<Scaleform::GFx::ASIntervalTimerIntf> *v9; // rdi
 
-  v2 = this->IntervalTimers.Data.Size;
-  v3 = defimpl;
-  v4 = this;
-  v5 = 0i64;
-  if ( v2 )
+  Size = this->IntervalTimers.Data.Size;
+  for ( i = 0i64; i < Size; ++i )
   {
-    do
+    pObject = this->IntervalTimers.Data.Data[i].pObject;
+    if ( ((unsigned __int8 (__fastcall *)(Scaleform::GFx::ASIntervalTimerIntf *, Scaleform::GFx::MovieImpl *, Scaleform::GFx::MovieDefImpl *))pObject->vfptr[5].__vecDelDtor)(
+           pObject,
+           this,
+           defimpl) )
     {
-      v6 = v4->IntervalTimers.Data.Data[v5].pObject;
-      if ( ((unsigned __int8 (__fastcall *)(Scaleform::GFx::ASIntervalTimerIntf *, Scaleform::GFx::MovieImpl *, Scaleform::GFx::MovieDefImpl *))v6->vfptr[5].__vecDelDtor)(
-             v6,
-             v4,
-             v3) )
-      {
-        v7 = v4->IntervalTimers.Data.Data;
-        v8 = (Scaleform::Render::RenderBuffer *)v7[v5].pObject;
-        v9 = &v7[v5];
-        if ( v8 )
-          Scaleform::RefCountImpl::Release(v8);
-        v9->pObject = 0i64;
-      }
-      ++v5;
+      Data = this->IntervalTimers.Data.Data;
+      v8 = (Scaleform::Render::RenderBuffer *)Data[i].pObject;
+      v9 = &Data[i];
+      if ( v8 )
+        Scaleform::RefCountImpl::Release(v8);
+      v9->pObject = 0i64;
     }
-    while ( v5 < v2 );
   }
 }
 
@@ -5181,97 +5042,86 @@ void __fastcall Scaleform::GFx::MovieImpl::ShutdownTimersForMovieDef(Scaleform::
 // RVA: 0x8D6630
 __int64 __fastcall Scaleform::GFx::MovieImpl::GetCurrentFrame(Scaleform::GFx::MovieImpl *this)
 {
-  Scaleform::GFx::InteractiveObject *v1; // rcx
-  __int64 result; // rax
+  Scaleform::GFx::InteractiveObject *pMainMovie; // rcx
 
-  v1 = this->pMainMovie;
-  if ( v1 )
-    result = ((__int64 (*)(void))v1->vfptr[107].__vecDelDtor)();
+  pMainMovie = this->pMainMovie;
+  if ( pMainMovie )
+    return ((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))pMainMovie->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[107].__vecDelDtor)(pMainMovie);
   else
-    result = 0i64;
-  return result;
+    return 0i64;
 }
 
 // File Line: 3350
 // RVA: 0x8E2EE0
 bool __fastcall Scaleform::GFx::MovieImpl::HasLooped(Scaleform::GFx::MovieImpl *this)
 {
-  Scaleform::GFx::InteractiveObject *v1; // rcx
-  __int64 v2; // rax
+  Scaleform::GFx::InteractiveObject *pMainMovie; // rcx
 
-  v1 = this->pMainMovie;
-  if ( v1 )
-    v2 = ((unsigned __int8 (*)(void))v1->vfptr[113].__vecDelDtor)();
+  pMainMovie = this->pMainMovie;
+  if ( pMainMovie )
+    return ((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))pMainMovie->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[113].__vecDelDtor)(pMainMovie);
   else
-    LOBYTE(v2) = 0;
-  return v2;
+    return 0;
 }
 
 // File Line: 3356
 // RVA: 0x8FE740
 char __fastcall Scaleform::GFx::MovieImpl::ReleaseLevelMovie(Scaleform::GFx::MovieImpl *this, int level)
 {
-  Scaleform::GFx::MovieImpl *v2; // rdi
-  unsigned __int64 v3; // rsi
-  Scaleform::GFx::DisplayObjectBase *v4; // rbp
-  unsigned __int64 v5; // rcx
-  __int64 v6; // rbx
-  signed __int64 v7; // r15
-  Scaleform::RefCountNTSImpl *v8; // rcx
-  Scaleform::Render::TreeNode *v9; // rax
-  Scaleform::Render::TreeContainer *v10; // rbx
-  signed __int64 v11; // rax
-  char result; // al
-  unsigned __int64 v13; // rcx
-  __int64 v14; // rax
-  Scaleform::GFx::MovieImpl::LevelInfo *v15; // r8
-  Scaleform::GFx::InteractiveObject *v16; // rcx
-  Scaleform::GFx::DisplayObjectBase *v17; // rbx
-  Scaleform::Render::TreeNode *v18; // rax
-  Scaleform::Render::TreeContainer *v19; // rcx
+  unsigned int v3; // esi
+  Scaleform::GFx::InteractiveObject *v4; // rbp
+  Scaleform::GFx::InteractiveObject *v5; // rbx
+  unsigned __int64 v6; // r15
+  Scaleform::GFx::InteractiveObject *v7; // rcx
+  Scaleform::Render::TreeNode *v8; // rax
+  Scaleform::Render::TreeContainer *v9; // rbx
+  __int64 v10; // rax
+  unsigned __int64 Size; // rcx
+  __int64 v13; // rax
+  Scaleform::GFx::MovieImpl::LevelInfo *Data; // r8
+  Scaleform::GFx::InteractiveObject *pObject; // rcx
+  Scaleform::GFx::DisplayObjectBase *v16; // rbx
+  Scaleform::Render::TreeNode *RenderNode; // rax
+  Scaleform::Render::TreeContainer *pParent; // rcx
 
-  v2 = this;
-  LODWORD(v3) = 0;
+  v3 = 0;
   if ( level )
   {
-    v13 = this->MovieLevels.Data.Size;
-    if ( v13 )
+    Size = this->MovieLevels.Data.Size;
+    if ( Size )
     {
-      v14 = 0i64;
-      v15 = v2->MovieLevels.Data.Data;
-      while ( v15[v14].Level != level )
+      v13 = 0i64;
+      Data = this->MovieLevels.Data.Data;
+      while ( Data[v13].Level != level )
       {
-        LODWORD(v3) = v3 + 1;
-        v14 = (unsigned int)v3;
-        if ( (unsigned int)v3 >= v13 )
-          goto LABEL_30;
+        v13 = ++v3;
+        if ( v3 >= Size )
+          return 0;
       }
-      v3 = (unsigned int)v3;
-      v16 = v15[(unsigned int)v3].pSprite.pObject;
-      if ( v16 )
-        ++v16->RefCount;
-      v17 = (Scaleform::GFx::DisplayObjectBase *)&v15[(unsigned int)v3].pSprite.pObject->vfptr;
-      ((void (__fastcall *)(Scaleform::GFx::DisplayObjectBase *))v17->vfptr[75].__vecDelDtor)(v17);
-      ((void (__cdecl *)(Scaleform::GFx::ASMovieRootBase *))v2->pASMovieRoot.pObject->vfptr[7].__vecDelDtor)(v2->pASMovieRoot.pObject);
-      ((void (__fastcall *)(Scaleform::GFx::DisplayObjectBase *))v17->vfptr[60].__vecDelDtor)(v17);
+      pObject = Data[v3].pSprite.pObject;
+      if ( pObject )
+        ++pObject->RefCount;
+      v16 = Data[v3].pSprite.pObject;
+      ((void (__fastcall *)(Scaleform::GFx::DisplayObjectBase *))v16->Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[75].__vecDelDtor)(v16);
+      ((void (__fastcall *)(Scaleform::GFx::ASMovieRootBase *))this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[7].__vecDelDtor)(this->pASMovieRoot.pObject);
+      ((void (__fastcall *)(Scaleform::GFx::DisplayObjectBase *))v16->Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[60].__vecDelDtor)(v16);
       Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::GFx::MovieImpl::LevelInfo,Scaleform::AllocatorLH<Scaleform::GFx::MovieImpl::LevelInfo,327>,Scaleform::ArrayDefaultPolicy>>::RemoveAt(
-        (Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::GFx::MovieImpl::LevelInfo,Scaleform::AllocatorLH<Scaleform::GFx::MovieImpl::LevelInfo,327>,Scaleform::ArrayDefaultPolicy> > *)&v2->MovieLevels.Data,
+        &this->MovieLevels,
         v3);
-      v2->Flags |= 0x100u;
-      v18 = Scaleform::GFx::DisplayObjectBase::GetRenderNode(v17);
-      if ( v18 )
+      this->Flags |= 0x100u;
+      RenderNode = Scaleform::GFx::DisplayObjectBase::GetRenderNode(v16);
+      if ( RenderNode )
       {
-        v19 = (Scaleform::Render::TreeContainer *)v18->pParent;
-        if ( v19 )
-          Scaleform::Render::TreeContainer::Remove(v19, v3, 1ui64);
+        pParent = (Scaleform::Render::TreeContainer *)RenderNode->pParent;
+        if ( pParent )
+          Scaleform::Render::TreeContainer::Remove(pParent, v3, 1ui64);
       }
-      Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v17->vfptr);
-      result = 1;
+      Scaleform::RefCountNTSImpl::Release(v16);
+      return 1;
     }
     else
     {
-LABEL_30:
-      result = 0;
+      return 0;
     }
   }
   else
@@ -5295,9 +5145,9 @@ LABEL_30:
     this->CurrentDragStates[5].pTopmostEntity = 0i64;
     this->CurrentDragStates[5].MouseIndex = -1;
     Scaleform::GFx::MovieImpl::ShutdownTimers(this);
-    if ( v2->MovieLevels.Data.Size )
+    if ( this->MovieLevels.Data.Size )
     {
-      v4 = (Scaleform::GFx::DisplayObjectBase *)&v2->MovieLevels.Data.Data->pSprite.pObject->vfptr;
+      v4 = this->MovieLevels.Data.Data->pSprite.pObject;
       if ( v4 )
         ++v4->RefCount;
     }
@@ -5305,117 +5155,111 @@ LABEL_30:
     {
       v4 = 0i64;
     }
-    while ( v2->MovieLevels.Data.Size )
+    while ( this->MovieLevels.Data.Size )
     {
-      v5 = v2->MovieLevels.Data.Size;
-      v6 = *((_QWORD *)&v2->MovieLevels.Data.Data[v5] - 1);
-      (*(void (__fastcall **)(_QWORD))(*(_QWORD *)v6 + 600i64))(*((_QWORD *)&v2->MovieLevels.Data.Data[v5] - 1));
-      ((void (__cdecl *)(Scaleform::GFx::ASMovieRootBase *))v2->pASMovieRoot.pObject->vfptr[7].__vecDelDtor)(v2->pASMovieRoot.pObject);
-      (*(void (__fastcall **)(__int64))(*(_QWORD *)v6 + 480i64))(v6);
-      v7 = v2->MovieLevels.Data.Size - 1;
-      if ( v2->MovieLevels.Data.Size == 1 )
+      v5 = this->MovieLevels.Data.Data[this->MovieLevels.Data.Size - 1].pSprite.pObject;
+      ((void (__fastcall *)(Scaleform::GFx::InteractiveObject *))v5->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[75].__vecDelDtor)(v5);
+      ((void (__fastcall *)(Scaleform::GFx::ASMovieRootBase *))this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[7].__vecDelDtor)(this->pASMovieRoot.pObject);
+      ((void (__fastcall *)(Scaleform::GFx::InteractiveObject *))v5->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[60].__vecDelDtor)(v5);
+      v6 = this->MovieLevels.Data.Size - 1;
+      if ( this->MovieLevels.Data.Size == 1 )
       {
         Scaleform::ArrayDataBase<Scaleform::GFx::MovieImpl::LevelInfo,Scaleform::AllocatorLH<Scaleform::GFx::MovieImpl::LevelInfo,327>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
-          (Scaleform::ArrayDataBase<Scaleform::GFx::MovieImpl::LevelInfo,Scaleform::AllocatorLH<Scaleform::GFx::MovieImpl::LevelInfo,327>,Scaleform::ArrayDefaultPolicy> *)&v2->MovieLevels.Data.Data,
-          &v2->MovieLevels,
+          &this->MovieLevels.Data,
+          &this->MovieLevels,
           0i64);
       }
       else
       {
-        v8 = (Scaleform::RefCountNTSImpl *)&v2->MovieLevels.Data.Data[v7].pSprite.pObject->vfptr;
-        if ( v8 )
-          Scaleform::RefCountNTSImpl::Release(v8);
+        v7 = this->MovieLevels.Data.Data[v6].pSprite.pObject;
+        if ( v7 )
+          Scaleform::RefCountNTSImpl::Release(v7);
         memmove(
-          &v2->MovieLevels.Data.Data[v7],
-          &v2->MovieLevels.Data.Data[v7 + 1],
-          16 * (v2->MovieLevels.Data.Size - v7 - 1));
-        --v2->MovieLevels.Data.Size;
+          &this->MovieLevels.Data.Data[v6],
+          &this->MovieLevels.Data.Data[v6 + 1],
+          16 * (this->MovieLevels.Data.Size - v6 - 1));
+        --this->MovieLevels.Data.Size;
       }
     }
-    v9 = Scaleform::GFx::DisplayObjectBase::GetRenderNode(v4);
-    if ( v9 )
+    v8 = Scaleform::GFx::DisplayObjectBase::GetRenderNode(v4);
+    if ( v8 )
     {
-      v10 = (Scaleform::Render::TreeContainer *)v9->pParent;
-      if ( v10 )
+      v9 = (Scaleform::Render::TreeContainer *)v8->pParent;
+      if ( v9 )
       {
-        v11 = Scaleform::Render::TreeContainer::GetSize((Scaleform::Render::TreeContainer *)v9->pParent);
-        Scaleform::Render::TreeContainer::Remove(v10, 0i64, v11);
+        v10 = Scaleform::Render::TreeContainer::GetSize((Scaleform::Render::TreeContainer *)v8->pParent);
+        Scaleform::Render::TreeContainer::Remove(v9, 0i64, v10);
       }
     }
     if ( v4 )
-      Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v4->vfptr);
-    v2->pMainMovie = 0i64;
-    v2->FrameTime = 0.083333336;
-    v2->Flags |= 0x100u;
-    result = 1;
+      Scaleform::RefCountNTSImpl::Release(v4);
+    this->pMainMovie = 0i64;
+    this->FrameTime = 0.083333336;
+    this->Flags |= 0x100u;
+    return 1;
   }
-  return result;
 }
 
 // File Line: 3438
 // RVA: 0x9042E0
 void __fastcall Scaleform::GFx::MovieImpl::Restart(Scaleform::GFx::MovieImpl *this, bool advance0)
 {
-  bool v2; // r15
-  Scaleform::GFx::MovieImpl *v3; // rdi
   __int64 v4; // rax
   __int64 v5; // r14
   int i; // ebx
-  Scaleform::GFx::LoadQueueEntryMT *v7; // rcx
+  Scaleform::GFx::LoadQueueEntryMT *pLoadQueueMTHead; // rcx
   unsigned int v8; // ebp
   unsigned int v9; // esi
   Scaleform::GFx::LoadQueueEntryMT *j; // rbx
-  Scaleform::GFx::LoadQueueEntry *v11; // rcx
+  Scaleform::GFx::LoadQueueEntry *pLoadQueueHead; // rcx
   Scaleform::GFx::LoadQueueEntryMT *v12; // rcx
-  Scaleform::GFx::MovieImpl::ReturnValueHolder *v13; // rbx
+  Scaleform::GFx::MovieImpl::ReturnValueHolder *pRetValHolder; // rbx
   unsigned int k; // ebx
-  Scaleform::GFx::UserEventHandler *v15; // rcx
+  Scaleform::GFx::UserEventHandler *pObject; // rcx
   Scaleform::GFx::UserEventHandler *v16; // rcx
   __int64 v17; // rdx
   __int64 v18; // r9
   __int64 v19; // rcx
-  int v20; // [rsp+28h] [rbp-50h]
+  int v20; // [rsp+28h] [rbp-50h] BYREF
   char v21; // [rsp+2Ch] [rbp-4Ch]
   int v22; // [rsp+30h] [rbp-48h]
   unsigned int v23; // [rsp+34h] [rbp-44h]
-  int v24; // [rsp+38h] [rbp-40h]
+  int v24; // [rsp+38h] [rbp-40h] BYREF
   char v25; // [rsp+3Ch] [rbp-3Ch]
   int v26; // [rsp+40h] [rbp-38h]
   unsigned int v27; // [rsp+44h] [rbp-34h]
 
-  v2 = advance0;
-  v3 = this;
   if ( this->pMainMovie )
   {
     this->Flags2 |= 4u;
     Scaleform::GFx::MovieImpl::ProcessUnloadQueue(this);
-    v4 = ((__int64 (__cdecl *)(Scaleform::GFx::InteractiveObject *))v3->pMainMovie->vfptr[66].__vecDelDtor)(v3->pMainMovie);
+    v4 = ((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))this->pMainMovie->vfptr[66].__vecDelDtor)(this->pMainMovie);
     v5 = v4;
     if ( v4 )
       _InterlockedExchangeAdd((volatile signed __int32 *)(v4 + 8), 1u);
-    for ( i = v3->MovieLevels.Data.Size - 1; i >= 0; --i )
-      Scaleform::GFx::MovieImpl::ReleaseLevelMovie(v3, i);
+    for ( i = this->MovieLevels.Data.Size - 1; i >= 0; --i )
+      Scaleform::GFx::MovieImpl::ReleaseLevelMovie(this, i);
     Scaleform::ArrayDataBase<Scaleform::GFx::MovieImpl::LevelInfo,Scaleform::AllocatorLH<Scaleform::GFx::MovieImpl::LevelInfo,327>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
-      (Scaleform::ArrayDataBase<Scaleform::GFx::MovieImpl::LevelInfo,Scaleform::AllocatorLH<Scaleform::GFx::MovieImpl::LevelInfo,327>,Scaleform::ArrayDefaultPolicy> *)&v3->MovieLevels.Data.Data,
-      &v3->MovieLevels,
+      &this->MovieLevels.Data,
+      &this->MovieLevels,
       0i64);
-    v7 = v3->pLoadQueueMTHead;
+    pLoadQueueMTHead = this->pLoadQueueMTHead;
     v8 = 0;
-    if ( v7 )
+    if ( pLoadQueueMTHead )
     {
       do
       {
         ++v8;
-        v7->pQueueEntry->Canceled = 1;
-        v7 = v7->pNext;
+        pLoadQueueMTHead->pQueueEntry->Canceled = 1;
+        pLoadQueueMTHead = pLoadQueueMTHead->pNext;
       }
-      while ( v7 );
+      while ( pLoadQueueMTHead );
       if ( v8 )
       {
         do
         {
           v9 = 0;
-          for ( j = v3->pLoadQueueMTHead; j; j = j->pNext )
+          for ( j = this->pLoadQueueMTHead; j; j = j->pNext )
           {
             if ( j->vfptr->LoadFinished(j) )
               ++v9;
@@ -5424,81 +5268,79 @@ void __fastcall Scaleform::GFx::MovieImpl::Restart(Scaleform::GFx::MovieImpl *th
         while ( v8 > v9 );
       }
     }
-    while ( v3->pLoadQueueHead )
+    while ( this->pLoadQueueHead )
     {
-      v11 = v3->pLoadQueueHead;
-      v3->pLoadQueueHead = v11->pNext;
-      v11->vfptr->__vecDelDtor(v11, 1u);
+      pLoadQueueHead = this->pLoadQueueHead;
+      this->pLoadQueueHead = pLoadQueueHead->pNext;
+      pLoadQueueHead->vfptr->__vecDelDtor(pLoadQueueHead, 1u);
     }
-    while ( v3->pLoadQueueMTHead )
+    while ( this->pLoadQueueMTHead )
     {
-      v12 = v3->pLoadQueueMTHead;
-      v3->pLoadQueueMTHead = v12->pNext;
+      v12 = this->pLoadQueueMTHead;
+      this->pLoadQueueMTHead = v12->pNext;
       v12->vfptr->__vecDelDtor(v12, 1u);
     }
-    v3->pLoadQueueHead = 0i64;
-    v3->pLoadQueueMTHead = 0i64;
-    v3->Flags |= 0x80000u;
-    v3->pPlayListOptHead = 0i64;
-    v3->pPlayListHead = 0i64;
-    ((void (__cdecl *)(Scaleform::GFx::ASMovieRootBase *))v3->pASMovieRoot.pObject->vfptr[42].__vecDelDtor)(v3->pASMovieRoot.pObject);
-    Scaleform::GFx::MovieImpl::ClearIndirectTransformPairs(v3);
-    v13 = v3->pRetValHolder;
-    if ( v13 )
+    this->pLoadQueueHead = 0i64;
+    this->pLoadQueueMTHead = 0i64;
+    this->Flags |= 0x80000u;
+    this->pPlayListOptHead = 0i64;
+    this->pPlayListHead = 0i64;
+    ((void (__fastcall *)(Scaleform::GFx::ASMovieRootBase *))this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[42].__vecDelDtor)(this->pASMovieRoot.pObject);
+    Scaleform::GFx::MovieImpl::ClearIndirectTransformPairs(this);
+    pRetValHolder = this->pRetValHolder;
+    if ( pRetValHolder )
     {
-      if ( v13->CharBuffer )
-        ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
-      Scaleform::ArrayDataCC<Scaleform::GFx::ASString,Scaleform::AllocatorLH<Scaleform::GFx::ASString,323>,Scaleform::ArrayDefaultPolicy>::~ArrayDataCC<Scaleform::GFx::ASString,Scaleform::AllocatorLH<Scaleform::GFx::ASString,323>,Scaleform::ArrayDefaultPolicy>(&v13->StringArray.Data);
-      Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v13);
+      if ( pRetValHolder->CharBuffer )
+        ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+      Scaleform::ArrayDataCC<Scaleform::GFx::ASString,Scaleform::AllocatorLH<Scaleform::GFx::ASString,323>,Scaleform::ArrayDefaultPolicy>::~ArrayDataCC<Scaleform::GFx::ASString,Scaleform::AllocatorLH<Scaleform::GFx::ASString,323>,Scaleform::ArrayDefaultPolicy>(&pRetValHolder->StringArray.Data);
+      Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, pRetValHolder);
     }
-    v3->pRetValHolder = 0i64;
-    Scaleform::GFx::MovieImpl::ResetFocusStates(v3);
-    v3->Flags &= 0x3FFFFFu;
-    Scaleform::GFx::MovieImpl::ResetMouseState(v3);
-    v3->pASMovieRoot.pObject->vfptr[9].__vecDelDtor((Scaleform::RefCountImplCore *)&v3->pASMovieRoot.pObject->vfptr, 2u);
-    v3->Flags2 &= 0xFFFFFFFB;
-    v3->pASMovieRoot.pObject->vfptr[17].__vecDelDtor((Scaleform::RefCountImplCore *)v3->pASMovieRoot.pObject, v5);
-    if ( v3->pMainMovie )
+    this->pRetValHolder = 0i64;
+    Scaleform::GFx::MovieImpl::ResetFocusStates(this);
+    this->Flags &= 0x3FFFFFu;
+    Scaleform::GFx::MovieImpl::ResetMouseState(this);
+    this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[9].__vecDelDtor(this->pASMovieRoot.pObject, 2u);
+    this->Flags2 &= ~4u;
+    this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[17].__vecDelDtor(this->pASMovieRoot.pObject, v5);
+    if ( this->pMainMovie )
     {
-      if ( v3->pUserEventHandler.pObject )
+      if ( this->pUserEventHandler.pObject )
       {
-        for ( k = 0; k < v3->MouseCursorCount; ++k )
+        for ( k = 0; k < this->MouseCursorCount; ++k )
         {
-          v15 = v3->pUserEventHandler.pObject;
+          pObject = this->pUserEventHandler.pObject;
           v21 = 0;
           v20 = 21;
           v22 = 0;
           v23 = k;
-          ((void (__fastcall *)(Scaleform::GFx::UserEventHandler *, Scaleform::GFx::MovieImpl *, int *))v15->vfptr[1].__vecDelDtor)(
-            v15,
-            v3,
+          ((void (__fastcall *)(Scaleform::GFx::UserEventHandler *, Scaleform::GFx::MovieImpl *, int *))pObject->vfptr[1].__vecDelDtor)(
+            pObject,
+            this,
             &v20);
-          v16 = v3->pUserEventHandler.pObject;
+          v16 = this->pUserEventHandler.pObject;
           v25 = 0;
           v24 = 23;
           v26 = 0;
           v27 = k;
           ((void (__fastcall *)(Scaleform::GFx::UserEventHandler *, Scaleform::GFx::MovieImpl *, int *))v16->vfptr[1].__vecDelDtor)(
             v16,
-            v3,
+            this,
             &v24);
         }
       }
-      v3->FocusRectChanged = 1;
-      Scaleform::GFx::MovieImpl::ResetKeyboardState(v3);
-      if ( v2 )
+      this->FocusRectChanged = 1;
+      Scaleform::GFx::MovieImpl::ResetKeyboardState(this);
+      if ( advance0 )
       {
         LOBYTE(v18) = 1;
-        ((void (__fastcall *)(Scaleform::GFx::MovieImpl *, __int64, _QWORD, __int64, signed __int64))v3->vfptr[24].__vecDelDtor)(
-          v3,
+        ((void (__fastcall *)(Scaleform::GFx::MovieImpl *, __int64, _QWORD, __int64, __int64))this->Scaleform::GFx::Movie::Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr[24].__vecDelDtor)(
+          this,
           v17,
           0i64,
           v18,
           -2i64);
       }
-      v3->pASMovieRoot.pObject->vfptr[9].__vecDelDtor(
-        (Scaleform::RefCountImplCore *)&v3->pASMovieRoot.pObject->vfptr,
-        2u);
+      this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[9].__vecDelDtor(this->pASMovieRoot.pObject, 2u);
     }
     if ( v5 && !_InterlockedDecrement((volatile signed __int32 *)(v5 + 8)) )
     {
@@ -5508,7 +5350,7 @@ void __fastcall Scaleform::GFx::MovieImpl::Restart(Scaleform::GFx::MovieImpl *th
         (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)v19 + 8i64))(v19, v5);
         *(_QWORD *)(v5 + 16) = 0i64;
       }
-      (**(void (__fastcall ***)(__int64, signed __int64))v5)(v5, 1i64);
+      (**(void (__fastcall ***)(__int64, __int64))v5)(v5, 1i64);
     }
   }
 }
@@ -5553,24 +5395,24 @@ void __fastcall Scaleform::GFx::MovieImpl::ResetMouseState(Scaleform::GFx::Movie
 // RVA: 0x9015F0
 void __fastcall Scaleform::GFx::MovieImpl::ResetKeyboardState(Scaleform::GFx::MovieImpl *this)
 {
-  unsigned int *v1; // rbx
-  signed __int64 v2; // rdi
+  unsigned int *p_GetIdx; // rbx
+  __int64 v2; // rdi
 
-  v1 = &this->KeyboardStates[0].KeyQueue.GetIdx;
+  p_GetIdx = &this->KeyboardStates[0].KeyQueue.GetIdx;
   v2 = 6i64;
   do
   {
-    *(_QWORD *)(v1 - 1) = 0i64;
-    v1[1] = 0;
-    memset(v1 - 401, 0, 0x640ui64);
-    v1 += 418;
-    *(_QWORD *)((char *)v1 - 1663) = 0i64;
-    *(_QWORD *)((char *)v1 - 1655) = 0i64;
-    *(_QWORD *)((char *)v1 - 1647) = 0i64;
-    *(unsigned int *)((char *)v1 - 1639) = 0;
-    *((_BYTE *)v1 - 1635) = 0;
-    *((_WORD *)v1 - 817) = 0;
-    *((_BYTE *)v1 - 1632) = 0;
+    *(_QWORD *)(p_GetIdx - 1) = 0i64;
+    p_GetIdx[1] = 0;
+    memset(p_GetIdx - 401, 0, 0x640ui64);
+    p_GetIdx += 418;
+    *(_QWORD *)((char *)p_GetIdx - 1663) = 0i64;
+    *(_QWORD *)((char *)p_GetIdx - 1655) = 0i64;
+    *(_QWORD *)((char *)p_GetIdx - 1647) = 0i64;
+    *(unsigned int *)((char *)p_GetIdx - 1639) = 0;
+    *((_BYTE *)p_GetIdx - 1635) = 0;
+    *((_WORD *)p_GetIdx - 817) = 0;
+    *((_BYTE *)p_GetIdx - 1632) = 0;
     --v2;
   }
   while ( v2 );
@@ -5578,7 +5420,9 @@ void __fastcall Scaleform::GFx::MovieImpl::ResetKeyboardState(Scaleform::GFx::Mo
 
 // File Line: 3610
 // RVA: 0x9085F0
-void __fastcall Scaleform::GFx::MovieImpl::SetKeyboardListener(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::KeyboardState::IListener *l)
+void __fastcall Scaleform::GFx::MovieImpl::SetKeyboardListener(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::KeyboardState::IListener *l)
 {
   this->KeyboardStates[0].pListener = l;
   this->KeyboardStates[1].pListener = l;
@@ -5592,47 +5436,48 @@ void __fastcall Scaleform::GFx::MovieImpl::SetKeyboardListener(Scaleform::GFx::M
 // RVA: 0x8E21C0
 void __fastcall Scaleform::GFx::MovieImpl::GotoFrame(Scaleform::GFx::MovieImpl *this, __int64 targetFrameNumber)
 {
-  Scaleform::GFx::InteractiveObject *v2; // rcx
+  Scaleform::GFx::InteractiveObject *pMainMovie; // rcx
 
-  v2 = this->pMainMovie;
-  if ( v2 )
-    v2->vfptr[110].__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v2->vfptr, targetFrameNumber);
+  pMainMovie = this->pMainMovie;
+  if ( pMainMovie )
+    pMainMovie->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[110].__vecDelDtor(
+      pMainMovie,
+      targetFrameNumber);
 }
 
 // File Line: 3624
 // RVA: 0x8E24C0
-char __fastcall Scaleform::GFx::MovieImpl::GotoLabeledFrame(Scaleform::GFx::MovieImpl *this, const char *label, int offset)
+char __fastcall Scaleform::GFx::MovieImpl::GotoLabeledFrame(
+        Scaleform::GFx::MovieImpl *this,
+        const char *label,
+        int offset)
 {
-  int v3; // esi
-  const char *v4; // rdi
-  Scaleform::GFx::MovieImpl *v5; // rbx
-  Scaleform::GFx::MovieDataDef *v6; // rcx
-  int v8; // [rsp+40h] [rbp+8h]
-  Scaleform::Ptr<Scaleform::GFx::LogState> result; // [rsp+58h] [rbp+20h]
+  Scaleform::GFx::MovieDataDef *pObject; // rcx
+  int v8; // [rsp+40h] [rbp+8h] BYREF
+  Scaleform::Ptr<Scaleform::GFx::LogState> result; // [rsp+58h] [rbp+20h] BYREF
 
-  v3 = offset;
-  v4 = label;
-  v5 = this;
   if ( this->pMainMovie )
   {
     v8 = -1;
-    v6 = this->pMainMovieDef.pObject->pBindData.pObject->pDataDef.pObject;
-    if ( ((unsigned __int8 (__fastcall *)(Scaleform::GFx::MovieDataDef *, const char *, int *, _QWORD, signed __int64))v6->vfptr[3].GetKey)(
-           v6,
+    pObject = this->pMainMovieDef.pObject->pBindData.pObject->pDataDef.pObject;
+    if ( ((unsigned __int8 (__fastcall *)(Scaleform::GFx::MovieDataDef *, const char *, int *, _QWORD, __int64))pObject->Scaleform::GFx::TimelineDef::Scaleform::GFx::CharacterDef::Scaleform::GFx::Resource::vfptr[3].GetKey)(
+           pObject,
            label,
            &v8,
            0i64,
            -2i64) )
     {
-      v5->vfptr[4].__vecDelDtor((Scaleform::RefCountImplCore *)&v5->vfptr, v8 + v3);
+      this->Scaleform::GFx::Movie::Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr[4].__vecDelDtor(
+        this,
+        v8 + offset);
       return 1;
     }
-    Scaleform::GFx::StateBag::GetLogState((Scaleform::GFx::StateBag *)&v5->vfptr, &result);
+    Scaleform::GFx::StateBag::GetLogState(&this->Scaleform::GFx::StateBag, &result);
     if ( result.pObject )
       Scaleform::GFx::LogBase<Scaleform::GFx::LogState>::LogScriptError(
-        (Scaleform::GFx::LogBase<Scaleform::GFx::LogState> *)&result.pObject->vfptr,
+        &result.pObject->Scaleform::GFx::LogBase<Scaleform::GFx::LogState>,
         "MovieImpl::GotoLabeledFrame(%s) unknown label",
-        v4);
+        label);
     if ( result.pObject )
       Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)result.pObject);
   }
@@ -5643,47 +5488,35 @@ char __fastcall Scaleform::GFx::MovieImpl::GotoLabeledFrame(Scaleform::GFx::Movi
 // RVA: 0x909BF0
 void __fastcall Scaleform::GFx::MovieImpl::SetPause(Scaleform::GFx::MovieImpl *this, bool pause)
 {
-  Scaleform::GFx::MovieImpl *v2; // rbx
-  unsigned int v3; // ecx
-  bool v4; // di
-  char v5; // al
-  unsigned __int64 v6; // rax
-  unsigned __int64 v7; // rax
-  Scaleform::GFx::InteractiveObject *v8; // rcx
-  Scaleform::GFx::InteractiveObject *v9; // rbx
+  unsigned int Flags; // ecx
+  Scaleform::GFx::InteractiveObject *pPlayListHead; // rcx
+  Scaleform::GFx::InteractiveObject *pPlayNext; // rbx
 
-  v2 = this;
-  v3 = this->Flags;
-  v4 = pause;
-  v5 = (v3 >> 20) & 1;
-  if ( (!v5 || !pause) && (v5 || pause) )
+  Flags = this->Flags;
+  if ( ((Flags & 0x100000) == 0 || !pause) && ((Flags & 0x100000) != 0 || pause) )
   {
     if ( pause )
     {
-      v2->Flags = v3 | 0x100000;
-      v6 = Scaleform::Timer::GetTicks();
-      v2->PauseTickMs = (unsigned __int64)((v6 * (unsigned __int128)0x624DD2F1A9FBE77ui64 >> 64)
-                                         + ((unsigned __int64)(v6 - (v6 * (unsigned __int128)0x624DD2F1A9FBE77ui64 >> 64)) >> 1)) >> 9;
+      this->Flags = Flags | 0x100000;
+      this->PauseTickMs = Scaleform::Timer::GetTicks() / 0x3E8;
     }
     else
     {
-      v2->Flags = v3 & 0xFFEFFFFF;
-      v7 = Scaleform::Timer::GetTicks();
-      v2->StartTickMs += ((unsigned __int64)((v7 * (unsigned __int128)0x624DD2F1A9FBE77ui64 >> 64)
-                                           + ((unsigned __int64)(v7
-                                                               - (v7 * (unsigned __int128)0x624DD2F1A9FBE77ui64 >> 64)) >> 1)) >> 9)
-                       - v2->PauseTickMs;
+      this->Flags = Flags & 0xFFEFFFFF;
+      this->StartTickMs += Scaleform::Timer::GetTicks() / 0x3E8 - this->PauseTickMs;
     }
-    v8 = v2->pPlayListHead;
-    if ( v8 )
+    pPlayListHead = this->pPlayListHead;
+    if ( pPlayListHead )
     {
       do
       {
-        v9 = v8->pPlayNext;
-        v8->vfptr[95].__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v8->vfptr, v4);
-        v8 = v9;
+        pPlayNext = pPlayListHead->pPlayNext;
+        pPlayListHead->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[95].__vecDelDtor(
+          pPlayListHead,
+          pause);
+        pPlayListHead = pPlayNext;
       }
-      while ( v9 );
+      while ( pPlayNext );
     }
   }
 }
@@ -5692,102 +5525,103 @@ void __fastcall Scaleform::GFx::MovieImpl::SetPause(Scaleform::GFx::MovieImpl *t
 // RVA: 0x909CE0
 void __fastcall Scaleform::GFx::MovieImpl::SetPlayState(Scaleform::GFx::MovieImpl *this, __int64 s)
 {
-  Scaleform::GFx::InteractiveObject *v2; // rcx
+  Scaleform::GFx::InteractiveObject *pMainMovie; // rcx
 
-  v2 = this->pMainMovie;
-  if ( v2 )
-    v2->vfptr[114].__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v2->vfptr, s);
+  pMainMovie = this->pMainMovie;
+  if ( pMainMovie )
+    pMainMovie->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[114].__vecDelDtor(
+      pMainMovie,
+      s);
 }
 
 // File Line: 3678
 // RVA: 0x8DC110
 __int64 __fastcall Scaleform::GFx::MovieImpl::GetPlayState(Scaleform::GFx::MovieImpl *this)
 {
-  Scaleform::GFx::InteractiveObject *v1; // rcx
-  __int64 result; // rax
+  Scaleform::GFx::InteractiveObject *pMainMovie; // rcx
 
-  v1 = this->pMainMovie;
-  if ( v1 )
-    result = ((__int64 (*)(void))v1->vfptr[115].__vecDelDtor)();
+  pMainMovie = this->pMainMovie;
+  if ( pMainMovie )
+    return ((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))pMainMovie->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[115].__vecDelDtor)(pMainMovie);
   else
-    result = 1i64;
-  return result;
+    return 1i64;
 }
 
 // File Line: 3684
 // RVA: 0x90F150
 void __fastcall Scaleform::GFx::MovieImpl::SetVisible(Scaleform::GFx::MovieImpl *this, __int64 visible)
 {
-  Scaleform::GFx::InteractiveObject *v2; // rcx
+  Scaleform::GFx::InteractiveObject *pMainMovie; // rcx
 
-  v2 = this->pMainMovie;
-  if ( v2 )
-    v2->vfptr[58].__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v2->vfptr, visible);
+  pMainMovie = this->pMainMovie;
+  if ( pMainMovie )
+    pMainMovie->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[58].__vecDelDtor(
+      pMainMovie,
+      visible);
 }
 
 // File Line: 3688
 // RVA: 0x8E1850
 bool __fastcall Scaleform::GFx::MovieImpl::GetVisible(Scaleform::GFx::MovieImpl *this)
 {
-  Scaleform::GFx::InteractiveObject *v1; // rcx
-  __int64 v2; // rax
+  Scaleform::GFx::InteractiveObject *pMainMovie; // rcx
 
-  v1 = this->pMainMovie;
-  if ( v1 )
-    v2 = ((unsigned __int8 (*)(void))v1->vfptr[59].__vecDelDtor)();
+  pMainMovie = this->pMainMovie;
+  if ( pMainMovie )
+    return ((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))pMainMovie->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[59].__vecDelDtor)(pMainMovie);
   else
-    LOBYTE(v2) = 0;
-  return v2;
+    return 0;
 }
 
 // File Line: 3693
 // RVA: 0x8B2E30
-void __fastcall Scaleform::GFx::MovieImpl::AddStickyVariableNode(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::ASString *path, Scaleform::GFx::MovieImpl::StickyVarNode *p)
+void __fastcall Scaleform::GFx::MovieImpl::AddStickyVariableNode(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::ASString *path,
+        Scaleform::GFx::MovieImpl::StickyVarNode *p)
 {
-  Scaleform::Hash<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF>,Scaleform::HashSet<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF> > > *v3; // rdi
-  Scaleform::GFx::MovieImpl::StickyVarNode *v4; // rbx
-  Scaleform::GFx::ASString *v5; // r14
-  Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF> >::TableType *v6; // rsi
-  signed __int64 v7; // rax
-  signed __int64 v8; // rdx
-  __int64 v9; // rdx
-  _QWORD *v10; // rcx
-  Scaleform::GFx::MovieImpl::StickyVarNode *value; // [rsp+40h] [rbp+18h]
+  Scaleform::GFx::ASStringHash<Scaleform::GFx::MovieImpl::StickyVarNode *> *p_StickyVariables; // rdi
+  Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF> >::TableType *pTable; // rsi
+  __int64 v7; // rax
+  unsigned __int64 *v8; // rdx
+  unsigned __int64 v9; // rdx
+  unsigned __int64 v10; // rcx
+  Scaleform::GFx::MovieImpl::StickyVarNode *value; // [rsp+40h] [rbp+18h] BYREF
 
   value = p;
-  v3 = (Scaleform::Hash<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF>,Scaleform::HashSet<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::All)&this->StickyVariables.mHash;
-  v4 = p;
-  v5 = path;
-  v6 = this->StickyVariables.mHash.pTable;
-  if ( v6
+  p_StickyVariables = &this->StickyVariables;
+  pTable = this->StickyVariables.mHash.pTable;
+  if ( pTable
     && (v7 = Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeHashF>>::findIndexCore<Scaleform::GFx::ASString>(
-               (Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF> > *)&this->StickyVariables.mHash.pTable,
+               &this->StickyVariables.mHash,
                path,
-               v6->SizeMask & path->pNode->HashFlags),
+               pTable->SizeMask & path->pNode->HashFlags),
         v7 >= 0)
-    && (v8 = (signed __int64)v6 + 8 * (3 * v7 + 3)) != 0
-    && (v9 = *(_QWORD *)(v8 + 8)) != 0 )
+    && (v8 = &pTable[1].SizeMask + 3 * v7) != 0i64
+    && (v9 = v8[1]) != 0 )
   {
-    v10 = (_QWORD *)v9;
-    while ( (Scaleform::GFx::ASStringNode *)v10[1] != v4->Name.pNode )
+    v10 = v9;
+    while ( *(Scaleform::GFx::ASStringNode **)(v10 + 8) != p->Name.pNode )
     {
-      v10 = (_QWORD *)v10[2];
+      v10 = *(_QWORD *)(v10 + 16);
       if ( !v10 )
       {
-        v4->pNext = *(Scaleform::GFx::MovieImpl::StickyVarNode **)(v9 + 16);
+        p->pNext = *(Scaleform::GFx::MovieImpl::StickyVarNode **)(v9 + 16);
         *(_QWORD *)(v9 + 16) = value;
         return;
       }
     }
-    (*(void (__fastcall **)(_QWORD *, Scaleform::GFx::MovieImpl::StickyVarNode *))(*v10 + 8i64))(v10, v4);
+    (*(void (__fastcall **)(unsigned __int64, Scaleform::GFx::MovieImpl::StickyVarNode *))(*(_QWORD *)v10 + 8i64))(
+      v10,
+      p);
     if ( value )
-      value->vfptr->__vecDelDtor(value, 1u);
+      value->vfptr->__vecDelDtor(value, 1i64);
   }
   else
   {
     Scaleform::Hash<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF>,Scaleform::HashSet<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF>>>::Set(
-      v3,
-      v5,
+      p_StickyVariables,
+      path,
       &value);
   }
 }
@@ -5796,26 +5630,26 @@ void __fastcall Scaleform::GFx::MovieImpl::AddStickyVariableNode(Scaleform::GFx:
 // RVA: 0x8BC9D0
 void __fastcall Scaleform::GFx::MovieImpl::ClearStickyVariables(Scaleform::GFx::MovieImpl *this)
 {
-  Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF> > *v1; // rsi
-  Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF> > *v2; // r14
-  Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF> >::TableType *v3; // rax
+  Scaleform::GFx::ASStringHash<Scaleform::GFx::MovieImpl::StickyVarNode *> *v1; // rsi
+  Scaleform::GFx::ASStringHash<Scaleform::GFx::MovieImpl::StickyVarNode *> *p_StickyVariables; // r14
+  Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF> >::TableType *pTable; // rax
   unsigned __int64 v4; // rbx
-  unsigned __int64 v5; // rcx
+  unsigned __int64 SizeMask; // rcx
   Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF> >::TableType *v6; // rax
   Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF> >::TableType *v7; // rdi
   __int64 v8; // rdi
-  void (__fastcall ***v9)(_QWORD, signed __int64); // rcx
+  void (__fastcall ***v9)(_QWORD, __int64); // rcx
   unsigned __int64 v10; // rdx
   unsigned __int64 *v11; // rcx
 
   v1 = 0i64;
-  v2 = (Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF> > *)&this->StickyVariables.mHash.pTable;
-  v3 = this->StickyVariables.mHash.pTable;
+  p_StickyVariables = &this->StickyVariables;
+  pTable = this->StickyVariables.mHash.pTable;
   v4 = 0i64;
-  if ( v3 )
+  if ( pTable )
   {
-    v5 = v3->SizeMask;
-    v6 = v3 + 1;
+    SizeMask = pTable->SizeMask;
+    v6 = pTable + 1;
     do
     {
       if ( v6->EntryCount != -2i64 )
@@ -5823,25 +5657,25 @@ void __fastcall Scaleform::GFx::MovieImpl::ClearStickyVariables(Scaleform::GFx::
       ++v4;
       v6 = (Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,Scaleform::GFx::MovieImpl::StickyVarNode *,Scaleform::GFx::ASStringHashFunctor>::NodeHashF> >::TableType *)((char *)v6 + 24);
     }
-    while ( v4 <= v5 );
-    v1 = v2;
+    while ( v4 <= SizeMask );
+    v1 = p_StickyVariables;
   }
   while ( v1 )
   {
-    v7 = v1->pTable;
-    if ( !v1->pTable || (signed __int64)v4 > (signed __int64)v7->SizeMask )
+    v7 = v1->mHash.pTable;
+    if ( !v1->mHash.pTable || (signed __int64)v4 > (signed __int64)v7->SizeMask )
       break;
     v8 = *(&v7[2].EntryCount + 3 * v4);
     while ( v8 )
     {
-      v9 = (void (__fastcall ***)(_QWORD, signed __int64))v8;
+      v9 = (void (__fastcall ***)(_QWORD, __int64))v8;
       v8 = *(_QWORD *)(v8 + 16);
       (**v9)(v9, 1i64);
     }
-    v10 = v1->pTable->SizeMask;
-    if ( (signed __int64)v4 <= (signed __int64)v10 && ++v4 <= v10 )
+    v10 = v1->mHash.pTable->SizeMask;
+    if ( (__int64)v4 <= (__int64)v10 && ++v4 <= v10 )
     {
-      v11 = &v1->pTable[1].EntryCount + 3 * v4;
+      v11 = &v1->mHash.pTable[1].EntryCount + 3 * v4;
       do
       {
         if ( *v11 != -2i64 )
@@ -5852,68 +5686,63 @@ void __fastcall Scaleform::GFx::MovieImpl::ClearStickyVariables(Scaleform::GFx::
       while ( v4 <= v10 );
     }
   }
-  Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeHashF>>::~HashSetBase<Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeHashF>>(v2);
+  Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeHashF>>::~HashSetBase<Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::ASString,324>,Scaleform::HashsetNodeEntry<Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>,Scaleform::HashNode<Scaleform::GFx::ASString,char,Scaleform::GFx::ASStringHashFunctor>::NodeHashF>>(&p_StickyVariables->mHash);
 }
 
 // File Line: 3783
 // RVA: 0x9014F0
 void __fastcall Scaleform::GFx::MovieImpl::ResetFocusStates(Scaleform::GFx::MovieImpl *this)
 {
-  Scaleform::GFx::MovieImpl *v1; // rbp
-  unsigned int v2; // esi
-  signed __int64 v3; // rdi
+  unsigned int i; // esi
+  char *v3; // rdi
   _QWORD *v4; // rbx
   Scaleform::GFx::ASStringNode *v5; // rcx
   bool v6; // zf
   Scaleform::GFx::ASStringNode *v7; // rcx
   Scaleform::GFx::ASStringNode *v8; // rcx
 
-  v1 = this;
-  v2 = 0;
-  if ( this->FocusGroupsCnt )
+  for ( i = 0; i < this->FocusGroupsCnt; ++i )
   {
-    do
+    v3 = (char *)this + 96 * i;
+    v4 = (_QWORD *)*((_QWORD *)v3 + 2458);
+    if ( v4 )
     {
-      v3 = (signed __int64)v1 + 96 * v2;
-      v4 = *(_QWORD **)(v3 + 19664);
-      if ( v4 )
+      if ( (int)--*(_DWORD *)v4 <= 0 )
       {
-        if ( --*(_DWORD *)v4 <= 0 )
-        {
-          v5 = (Scaleform::GFx::ASStringNode *)v4[4];
-          v6 = v5->RefCount-- == 1;
-          if ( v6 )
-            Scaleform::GFx::ASStringNode::ReleaseNode(v5);
-          v7 = (Scaleform::GFx::ASStringNode *)v4[3];
-          v6 = v7->RefCount-- == 1;
-          if ( v6 )
-            Scaleform::GFx::ASStringNode::ReleaseNode(v7);
-          v8 = (Scaleform::GFx::ASStringNode *)v4[2];
-          v6 = v8->RefCount-- == 1;
-          if ( v6 )
-            Scaleform::GFx::ASStringNode::ReleaseNode(v8);
-          Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v4);
-        }
+        v5 = (Scaleform::GFx::ASStringNode *)v4[4];
+        v6 = v5->RefCount-- == 1;
+        if ( v6 )
+          Scaleform::GFx::ASStringNode::ReleaseNode(v5);
+        v7 = (Scaleform::GFx::ASStringNode *)v4[3];
+        v6 = v7->RefCount-- == 1;
+        if ( v6 )
+          Scaleform::GFx::ASStringNode::ReleaseNode(v7);
+        v8 = (Scaleform::GFx::ASStringNode *)v4[2];
+        v6 = v8->RefCount-- == 1;
+        if ( v6 )
+          Scaleform::GFx::ASStringNode::ReleaseNode(v8);
+        Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v4);
       }
-      *(_QWORD *)(v3 + 19664) = 0i64;
-      if ( *(_BYTE *)(v3 + 19697) & 1 )
-      {
-        Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,Scaleform::AllocatorDH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,327>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
-          (Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,Scaleform::AllocatorDH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,327>,Scaleform::ArrayDefaultPolicy> *)(v3 + 19624),
-          *(const void **)(v3 + 19648),
-          0i64);
-        *(_BYTE *)(v3 + 19697) = 0;
-      }
-      *(_DWORD *)(v3 + 19672) = 0;
-      ++v2;
     }
-    while ( v2 < v1->FocusGroupsCnt );
+    *((_QWORD *)v3 + 2458) = 0i64;
+    if ( (v3[19697] & 1) != 0 )
+    {
+      Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,Scaleform::AllocatorDH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,327>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
+        (Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,Scaleform::AllocatorDH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,327>,Scaleform::ArrayDefaultPolicy> *)(v3 + 19624),
+        *((__int64 **)v3 + 2456),
+        0i64);
+      v3[19697] = 0;
+    }
+    *((_DWORD *)v3 + 4918) = 0;
   }
 }
 
 // File Line: 3793
 // RVA: 0x906A80
-char __fastcall Scaleform::GFx::MovieImpl::SetControllerFocusGroup(Scaleform::GFx::MovieImpl *this, unsigned int controllerIdx, unsigned int focusGroupIndex)
+char __fastcall Scaleform::GFx::MovieImpl::SetControllerFocusGroup(
+        Scaleform::GFx::MovieImpl *this,
+        unsigned int controllerIdx,
+        unsigned int focusGroupIndex)
 {
   if ( controllerIdx >= 0x10 || focusGroupIndex >= 0x10 )
     return 0;
@@ -5925,156 +5754,150 @@ char __fastcall Scaleform::GFx::MovieImpl::SetControllerFocusGroup(Scaleform::GF
 
 // File Line: 3804
 // RVA: 0x8D64F0
-__int64 __fastcall Scaleform::GFx::MovieImpl::GetControllerFocusGroup(Scaleform::GFx::MovieImpl *this, unsigned int controllerIdx)
+__int64 __fastcall Scaleform::GFx::MovieImpl::GetControllerFocusGroup(
+        Scaleform::GFx::MovieImpl *this,
+        unsigned int controllerIdx)
 {
-  __int64 result; // rax
-
   if ( controllerIdx < 0x10 )
-    result = (unsigned __int8)this->FocusGroupIndexes[controllerIdx];
+    return (unsigned __int8)this->FocusGroupIndexes[controllerIdx];
   else
-    result = 0i64;
-  return result;
+    return 0i64;
 }
 
 // File Line: 3811
 // RVA: 0x8CB3C0
-void __fastcall Scaleform::GFx::MovieImpl::FillTabableArray(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::ProcessFocusKeyInfo *pfocusInfo)
+void __fastcall Scaleform::GFx::MovieImpl::FillTabableArray(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::ProcessFocusKeyInfo *pfocusInfo)
 {
-  Scaleform::GFx::ProcessFocusKeyInfo *v2; // r15
-  Scaleform::GFx::MovieImpl *v3; // rbp
-  Scaleform::GFx::FocusGroupDescr *v4; // rsi
-  char v5; // al
-  Scaleform::GFx::CharacterHandle *v6; // rdx
-  __int64 v7; // rbx
-  __int64 v8; // rdx
-  unsigned __int8 v9; // al
-  __int64 v10; // rax
-  __int64 v11; // rdi
-  signed __int64 v12; // rbx
-  __int64 v13; // rcx
-  unsigned __int8 v14; // al
-  __int64 v15; // rax
-  unsigned __int64 v16; // r8
-  Scaleform::ArrayDH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,327,Scaleform::ArrayDefaultPolicy> *v17; // rcx
-  Scaleform::ArrayDH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,327,Scaleform::ArrayDefaultPolicy> *v18; // [rsp+28h] [rbp-30h]
-  char v19; // [rsp+30h] [rbp-28h]
-  bool v20; // [rsp+31h] [rbp-27h]
-  char v21; // [rsp+32h] [rbp-26h]
+  Scaleform::GFx::FocusGroupDescr *pFocusGroup; // rsi
+  char TabableArrayStatus; // al
+  Scaleform::GFx::CharacterHandle *pObject; // rdx
+  Scaleform::GFx::DisplayObject *pCharacter; // rbx
+  unsigned __int8 AvmObjOffset; // al
+  __int64 v9; // rax
+  __int64 Size_low; // rdi
+  __int64 v11; // rbx
+  __int64 v12; // rcx
+  unsigned __int8 v13; // al
+  __int64 v14; // rax
+  unsigned __int64 Size; // r8
+  Scaleform::ArrayDH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,327,Scaleform::ArrayDefaultPolicy> *v16; // rcx
+  Scaleform::ArrayDH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,327,Scaleform::ArrayDefaultPolicy> *p_TabableArray; // [rsp+28h] [rbp-30h] BYREF
+  char v18; // [rsp+30h] [rbp-28h]
+  bool InclFocusEnabled; // [rsp+31h] [rbp-27h]
+  char v20; // [rsp+32h] [rbp-26h]
 
-  v2 = pfocusInfo;
-  v3 = this;
-  v4 = pfocusInfo->pFocusGroup;
+  pFocusGroup = pfocusInfo->pFocusGroup;
   if ( pfocusInfo->InclFocusEnabled )
   {
-    v5 = v4->TabableArrayStatus;
-    if ( v5 & 1 )
+    TabableArrayStatus = pFocusGroup->TabableArrayStatus;
+    if ( (TabableArrayStatus & 1) != 0 && (TabableArrayStatus & 2) == 0 )
     {
-      if ( !(v5 & 2) )
-      {
-        Scaleform::ArrayDataDH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,Scaleform::AllocatorDH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,327>,Scaleform::ArrayDefaultPolicy>::Resize(
-          &v4->TabableArray.Data,
-          0i64);
-        v4->TabableArrayStatus = 0;
-      }
+      Scaleform::ArrayDataDH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,Scaleform::AllocatorDH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,327>,Scaleform::ArrayDefaultPolicy>::Resize(
+        &pFocusGroup->TabableArray.Data,
+        0i64);
+      pFocusGroup->TabableArrayStatus = 0;
     }
   }
-  if ( !(v4->TabableArrayStatus & 1) )
+  if ( (pFocusGroup->TabableArrayStatus & 1) == 0 )
   {
-    v19 = 0;
-    v21 = 0;
-    v18 = &v4->TabableArray;
-    v20 = v2->InclFocusEnabled;
-    v6 = v4->ModalClip.pObject;
-    if ( !v6 )
-      goto LABEL_26;
-    v7 = (__int64)v6->pCharacter;
-    if ( v7
-      || (v7 = (__int64)v3->pASMovieRoot.pObject->vfptr[8].__vecDelDtor(
-                          (Scaleform::RefCountImplCore *)&v3->pASMovieRoot.pObject->vfptr,
-                          (unsigned int)&v6->NamePath)) != 0 )
+    v18 = 0;
+    v20 = 0;
+    p_TabableArray = &pFocusGroup->TabableArray;
+    InclFocusEnabled = pfocusInfo->InclFocusEnabled;
+    pObject = pFocusGroup->ModalClip.pObject;
+    if ( !pObject )
+      goto LABEL_13;
+    pCharacter = pObject->pCharacter;
+    if ( pCharacter
+      || (pCharacter = (Scaleform::GFx::DisplayObject *)this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[8].__vecDelDtor(
+                                                          this->pASMovieRoot.pObject,
+                                                          &pObject->NamePath)) != 0i64 )
     {
-      ++*(_DWORD *)(v7 + 8);
+      ++pCharacter->RefCount;
     }
-    if ( v7 )
+    if ( pCharacter )
     {
-      Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)v7);
-      v9 = *(_BYTE *)(v7 + 109);
-      if ( v9 )
+      Scaleform::RefCountNTSImpl::Release(pCharacter);
+      AvmObjOffset = pCharacter->AvmObjOffset;
+      if ( AvmObjOffset )
       {
-        v10 = (*(__int64 (__cdecl **)(__int64, __int64))(*(_QWORD *)(v7 + 4i64 * v9) + 40i64))(v7 + 4i64 * v9, v8);
-        (*(void (__fastcall **)(__int64, Scaleform::ArrayDH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,327,Scaleform::ArrayDefaultPolicy> **))(*(_QWORD *)v10 + 184i64))(
-          v10,
-          &v18);
+        v9 = ((__int64 (__fastcall *)(_DWORD *))(*(Scaleform::RefCountNTSImplCoreVtbl **)((char *)&pCharacter->Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr
+                                                                                        + 4 * AvmObjOffset))[5].__vecDelDtor)((_DWORD *)pCharacter + AvmObjOffset);
+        (*(void (__fastcall **)(__int64, Scaleform::ArrayDH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,327,Scaleform::ArrayDefaultPolicy> **))(*(_QWORD *)v9 + 184i64))(
+          v9,
+          &p_TabableArray);
       }
     }
     else
     {
-LABEL_26:
-      v11 = SLODWORD(v3->MovieLevels.Data.Size);
-      if ( v11 > 0 )
+LABEL_13:
+      Size_low = SLODWORD(this->MovieLevels.Data.Size);
+      if ( Size_low > 0 )
       {
-        v12 = 16 * v11 - 16;
+        v11 = 16 * Size_low - 16;
         do
         {
-          v13 = *(__int64 *)((char *)&v3->MovieLevels.Data.Data->pSprite.pObject + v12);
-          if ( (*(_WORD *)(v13 + 106) >> 9) & 1 )
+          v12 = *(__int64 *)((char *)&this->MovieLevels.Data.Data->pSprite.pObject + v11);
+          if ( (*(_WORD *)(v12 + 106) & 0x200) != 0 )
           {
-            v14 = *(_BYTE *)(v13 + 109);
-            if ( v14 )
+            v13 = *(_BYTE *)(v12 + 109);
+            if ( v13 )
             {
-              v15 = (*(__int64 (__cdecl **)(__int64, Scaleform::GFx::CharacterHandle *))(*(_QWORD *)(v13 + 4i64 * v14)
-                                                                                       + 40i64))(
-                      v13 + 4i64 * v14,
-                      v6);
-              (*(void (__fastcall **)(__int64, Scaleform::ArrayDH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,327,Scaleform::ArrayDefaultPolicy> **))(*(_QWORD *)v15 + 184i64))(
-                v15,
-                &v18);
+              v14 = (*(__int64 (__fastcall **)(__int64))(*(_QWORD *)(v12 + 4i64 * v13) + 40i64))(v12 + 4i64 * v13);
+              (*(void (__fastcall **)(__int64, Scaleform::ArrayDH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,327,Scaleform::ArrayDefaultPolicy> **))(*(_QWORD *)v14 + 184i64))(
+                v14,
+                &p_TabableArray);
             }
           }
-          --v11;
-          v12 -= 16i64;
+          --Size_low;
+          v11 -= 16i64;
         }
-        while ( v11 > 0 );
+        while ( Size_low > 0 );
       }
     }
-    v16 = v4->TabableArray.Data.Size;
-    v17 = &v4->TabableArray;
-    if ( v19 )
+    Size = pFocusGroup->TabableArray.Data.Size;
+    v16 = &pFocusGroup->TabableArray;
+    if ( v18 )
       Scaleform::Alg::QuickSortSliced<Scaleform::ArrayDH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,327,Scaleform::ArrayDefaultPolicy>,Scaleform::GFx::TabIndexSortFunctor>(
-        v17,
-        0i64,
         v16,
+        0i64,
+        Size,
         byte_142440EF4);
     else
       Scaleform::Alg::QuickSortSliced<Scaleform::ArrayDH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,327,Scaleform::ArrayDefaultPolicy>,Scaleform::GFx::AutoTabSortFunctor>(
-        v17,
-        0i64,
         v16,
+        0i64,
+        Size,
         byte_142440EF5);
-    v4->TabableArrayStatus = 1;
-    if ( v2->InclFocusEnabled )
-      v4->TabableArrayStatus = 3;
+    pFocusGroup->TabableArrayStatus = 1;
+    if ( pfocusInfo->InclFocusEnabled )
+      pFocusGroup->TabableArrayStatus = 3;
   }
 }
 
 // File Line: 3864
 // RVA: 0x8E4120
-void __fastcall Scaleform::GFx::MovieImpl::InitFocusKeyInfo(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::ProcessFocusKeyInfo *pfocusInfo, Scaleform::GFx::InputEventsQueueEntry::KeyEntry *keyEntry, bool inclFocusEnabled, Scaleform::GFx::FocusGroupDescr *pfocusGroup)
+void __fastcall Scaleform::GFx::MovieImpl::InitFocusKeyInfo(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::ProcessFocusKeyInfo *pfocusInfo,
+        Scaleform::GFx::InputEventsQueueEntry::KeyEntry *keyEntry,
+        bool inclFocusEnabled,
+        Scaleform::GFx::FocusGroupDescr *pfocusGroup)
 {
-  Scaleform::GFx::ProcessFocusKeyInfo *v5; // rbx
   Scaleform::GFx::FocusGroupDescr *v6; // rdi
-  float v7; // xmm2_4
-  float v8; // xmm1_4
-  float v9; // xmm0_4
-  Scaleform::GFx::Sprite *v10; // rax
-  Scaleform::RefCountNTSImpl *v11; // rcx
+  float y2; // xmm2_4
+  float x2; // xmm1_4
+  float y1; // xmm0_4
+  Scaleform::GFx::Sprite *pObject; // rax
+  Scaleform::GFx::InteractiveObject *v11; // rcx
   Scaleform::GFx::InteractiveObject *v12; // rdx
   unsigned __int64 v13; // rax
-  unsigned __int64 v14; // r8
-  Scaleform::Ptr<Scaleform::GFx::InteractiveObject> *v15; // rcx
-  Scaleform::Ptr<Scaleform::GFx::Sprite> result; // [rsp+48h] [rbp+10h]
+  unsigned __int64 Size; // r8
+  Scaleform::Ptr<Scaleform::GFx::InteractiveObject> *Data; // rcx
+  Scaleform::Ptr<Scaleform::GFx::Sprite> result; // [rsp+48h] [rbp+10h] BYREF
 
-  v5 = pfocusInfo;
   if ( !pfocusInfo->Initialized )
   {
     v6 = pfocusGroup;
@@ -6082,88 +5905,90 @@ void __fastcall Scaleform::GFx::MovieImpl::InitFocusKeyInfo(Scaleform::GFx::Movi
       v6 = &this->FocusGroups[(unsigned __int8)this->FocusGroupIndexes[(unsigned __int8)keyEntry->KeyboardIndex]];
     pfocusInfo->pFocusGroup = v6;
     pfocusInfo->PrevKeyCode = v6->LastFocusKeyCode;
-    v7 = v6->LastFocusedRect.y2;
-    v8 = v6->LastFocusedRect.x2;
-    v9 = v6->LastFocusedRect.y1;
+    y2 = v6->LastFocusedRect.y2;
+    x2 = v6->LastFocusedRect.x2;
+    y1 = v6->LastFocusedRect.y1;
     pfocusInfo->Prev_aRect.x1 = v6->LastFocusedRect.x1;
-    pfocusInfo->Prev_aRect.y1 = v9;
-    pfocusInfo->Prev_aRect.x2 = v8;
-    pfocusInfo->Prev_aRect.y2 = v7;
+    pfocusInfo->Prev_aRect.y1 = y1;
+    pfocusInfo->Prev_aRect.x2 = x2;
+    pfocusInfo->Prev_aRect.y2 = y2;
     pfocusInfo->InclFocusEnabled = inclFocusEnabled;
     pfocusInfo->ManualFocus = 0;
     pfocusInfo->KeyboardIndex = keyEntry->KeyboardIndex;
     pfocusInfo->KeyCode = keyEntry->Code;
     pfocusInfo->KeysState = keyEntry->KeysState;
     Scaleform::GFx::MovieImpl::FillTabableArray(this, pfocusInfo);
-    v5->CurFocusIdx = -1;
+    pfocusInfo->CurFocusIdx = -1;
     Scaleform::WeakPtr<Scaleform::GFx::DisplayObject>::operator Scaleform::Ptr<Scaleform::GFx::DisplayObject>(
       (Scaleform::WeakPtr<Scaleform::GFx::Sprite> *)&v6->LastFocused,
       &result);
-    v10 = result.pObject;
+    pObject = result.pObject;
     if ( result.pObject )
     {
       ++result.pObject->RefCount;
-      v10 = result.pObject;
+      pObject = result.pObject;
     }
-    v11 = (Scaleform::RefCountNTSImpl *)&v5->CurFocused.pObject->vfptr;
+    v11 = pfocusInfo->CurFocused.pObject;
     if ( v11 )
     {
       Scaleform::RefCountNTSImpl::Release(v11);
-      v10 = result.pObject;
+      pObject = result.pObject;
     }
-    v5->CurFocused.pObject = (Scaleform::GFx::InteractiveObject *)&v10->vfptr;
+    pfocusInfo->CurFocused.pObject = pObject;
     if ( result.pObject )
-      Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&result.pObject->vfptr);
-    v12 = v5->CurFocused.pObject;
+      Scaleform::RefCountNTSImpl::Release(result.pObject);
+    v12 = pfocusInfo->CurFocused.pObject;
     if ( v12 )
     {
       v13 = 0i64;
-      v14 = v6->TabableArray.Data.Size;
-      if ( v14 )
+      Size = v6->TabableArray.Data.Size;
+      if ( Size )
       {
-        v15 = v6->TabableArray.Data.Data;
-        while ( v15->pObject != v12 )
+        Data = v6->TabableArray.Data.Data;
+        while ( Data->pObject != v12 )
         {
           ++v13;
-          ++v15;
-          if ( v13 >= v14 )
+          ++Data;
+          if ( v13 >= Size )
             goto LABEL_17;
         }
-        v5->CurFocusIdx = v13;
+        pfocusInfo->CurFocusIdx = v13;
       }
     }
 LABEL_17:
-    v5->Initialized = 1;
+    pfocusInfo->Initialized = 1;
   }
 }
 
 // File Line: 3906
 // RVA: 0x8F1140
-void __fastcall Scaleform::GFx::MovieImpl::ProcessFocusKey(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::Event::EventType event, Scaleform::GFx::InputEventsQueueEntry::KeyEntry *keyEntry, Scaleform::GFx::ProcessFocusKeyInfo *pfocusInfo)
+void __fastcall Scaleform::GFx::MovieImpl::ProcessFocusKey(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::Event::EventType event,
+        Scaleform::GFx::InputEventsQueueEntry::KeyEntry *keyEntry,
+        Scaleform::GFx::ProcessFocusKeyInfo *pfocusInfo)
 {
-  Scaleform::GFx::ProcessFocusKeyInfo *v4; // r14
   Scaleform::GFx::InputEventsQueueEntry::KeyEntry *v5; // rbx
-  Scaleform::GFx::MovieImpl *v6; // r12
-  unsigned int v7; // er9
-  Scaleform::GFx::FocusGroupDescr *v8; // r15
-  __int64 v9; // r13
-  signed __int64 v10; // rdx
-  signed __int64 v11; // rdi
+  unsigned int Code; // r9d
+  Scaleform::GFx::FocusGroupDescr *pFocusGroup; // r15
+  __int64 Size; // r13
+  __int64 v10; // rdx
+  __int64 CurFocusIdx; // rdi
   int v12; // esi
-  signed __int64 v13; // rbx
-  Scaleform::GFx::InteractiveObject *v14; // rcx
+  __int64 v13; // rbx
+  Scaleform::GFx::InteractiveObject *pObject; // rcx
   Scaleform::GFx::InteractiveObject *v15; // rcx
   Scaleform::GFx::InteractiveObject *v16; // rcx
   int v17; // eax
   Scaleform::Render::Rect<float> *v18; // rax
   unsigned int v19; // ecx
   unsigned int v20; // ecx
-  signed __int64 v21; // rdi
+  __int64 v21; // rdi
   float v22; // xmm14_4
   float v23; // xmm10_4
   char v24; // r15
-  unsigned int v25; // er13
-  signed __int64 v26; // rsi
+  int v25; // r13d
+  __int64 v26; // rsi
   __int64 v27; // r12
   float v28; // xmm8_4
   __int64 v29; // rbx
@@ -6174,30 +5999,30 @@ void __fastcall Scaleform::GFx::MovieImpl::ProcessFocusKey(Scaleform::GFx::Movie
   float v34; // xmm2_4
   float v35; // xmm3_4
   float v36; // xmm3_4
-  float v37; // xmm2_4
+  float x2; // xmm2_4
   float v38; // xmm1_4
-  __m128 v39; // xmm3
+  __m128 y1_low; // xmm3
   __m128 v40; // xmm5
   float v41; // xmm0_4
   float v42; // xmm0_4
   __m128 v43; // xmm2
   __m128 v44; // xmm4
-  signed int v45; // ecx
-  signed int v46; // ecx
-  signed int v47; // ecx
-  signed int v48; // ecx
+  int v45; // ecx
+  int v46; // ecx
+  int v47; // ecx
+  int v48; // ecx
   float v49; // xmm0_4
   float v50; // xmm0_4
-  signed int v51; // ecx
-  signed int v52; // ecx
-  signed int v53; // ecx
-  signed int v54; // ecx
-  signed __int64 v55; // rdi
-  __m128 v56; // xmm14
+  int v51; // ecx
+  int v52; // ecx
+  int v53; // ecx
+  int v54; // ecx
+  __int64 v55; // rdi
+  __m128 x2_low; // xmm14
   float v57; // xmm15_4
   char v58; // r15
-  unsigned int v59; // er13
-  signed __int64 v60; // rsi
+  int v59; // r13d
+  __int64 v60; // rsi
   __int64 v61; // r12
   float v62; // xmm8_4
   __int64 v63; // rbx
@@ -6207,187 +6032,180 @@ void __fastcall Scaleform::GFx::MovieImpl::ProcessFocusKey(Scaleform::GFx::Movie
   float *v67; // rax
   float v68; // xmm3_4
   float v69; // xmm4_4
-  unsigned __int64 v70; // kr00_8
-  Scaleform::Render::Rect<float> *v71; // rax
-  unsigned int v72; // eax
-  float v73; // xmm3_4
-  float v74; // xmm2_4
-  float v75; // xmm3_4
-  float v76; // xmm2_4
-  float v77; // xmm1_4
-  __m128 v78; // xmm4
-  __m128 v79; // xmm5
-  float v80; // xmm0_4
+  float v70; // xmm5_4
+  float v71; // xmm6_4
+  Scaleform::Render::Rect<float> *v72; // rax
+  unsigned int v73; // eax
+  float v74; // xmm3_4
+  float v75; // xmm2_4
+  float y1; // xmm3_4
+  float y2; // xmm2_4
+  float v78; // xmm1_4
+  __m128 x1_low; // xmm4
+  __m128 v80; // xmm5
   float v81; // xmm0_4
-  __m128 v82; // xmm3
-  __m128 v83; // xmm2
-  signed int v84; // ecx
-  signed int v85; // ecx
-  signed int v86; // ecx
-  signed int v87; // ecx
-  float v88; // xmm0_4
+  float v82; // xmm0_4
+  __m128 y2_low; // xmm3
+  __m128 v84; // xmm2
+  int v85; // ecx
+  int v86; // ecx
+  int v87; // ecx
+  int v88; // ecx
   float v89; // xmm0_4
-  signed int v90; // ecx
-  signed int v91; // ecx
-  signed int v92; // ecx
-  signed int v93; // ecx
-  __int64 v94; // rax
-  __int64 v95; // rbx
-  Scaleform::Ptr<Scaleform::GFx::InteractiveObject> *v96; // rdi
-  Scaleform::GFx::InteractiveObject *v97; // rax
-  Scaleform::RefCountNTSImpl *v98; // rcx
-  Scaleform::RefCountNTSImpl *v99; // rcx
-  float v100; // [rsp+30h] [rbp-98h]
+  float v90; // xmm0_4
+  int v91; // ecx
+  int v92; // ecx
+  int v93; // ecx
+  int v94; // ecx
+  __int64 v95; // rax
+  __int64 v96; // rbx
+  Scaleform::Ptr<Scaleform::GFx::InteractiveObject> *Data; // rdi
+  Scaleform::GFx::InteractiveObject *v98; // rax
+  Scaleform::GFx::InteractiveObject *v99; // rcx
+  Scaleform::GFx::InteractiveObject *v100; // rcx
   float v101; // [rsp+30h] [rbp-98h]
-  float v102; // [rsp+40h] [rbp-88h]
-  Scaleform::Render::Rect<float> pr; // [rsp+48h] [rbp-80h]
-  __m128 v104; // [rsp+58h] [rbp-70h]
+  float x1; // [rsp+30h] [rbp-98h]
+  float v103; // [rsp+40h] [rbp-88h]
+  Scaleform::Render::Matrix2x4<float> pr; // [rsp+48h] [rbp-80h] BYREF
   __int64 v105; // [rsp+68h] [rbp-60h]
-  Scaleform::Render::Rect<float> v106; // [rsp+70h] [rbp-58h]
+  Scaleform::Render::Rect<float> v106; // [rsp+70h] [rbp-58h] BYREF
   __int64 v107; // [rsp+80h] [rbp-48h]
-  char v108; // [rsp+88h] [rbp-40h]
-  Scaleform::Render::Matrix2x4<float> result; // [rsp+98h] [rbp-30h]
+  char v108[16]; // [rsp+88h] [rbp-40h] BYREF
+  Scaleform::Render::Matrix2x4<float> result; // [rsp+98h] [rbp-30h] BYREF
   __int64 v110; // [rsp+198h] [rbp+D0h]
   float v111; // [rsp+1A0h] [rbp+D8h]
   Scaleform::GFx::InputEventsQueueEntry::KeyEntry *v112; // [rsp+1A8h] [rbp+E0h]
 
-  if ( event != 5 )
+  if ( event != F3_720_512 )
     return;
   v107 = -2i64;
-  v4 = pfocusInfo;
   v5 = keyEntry;
-  v6 = this;
-  v7 = keyEntry->Code;
-  if ( v7 != 9
+  Code = keyEntry->Code;
+  if ( Code != 9
     && (!this->FocusGroups[(unsigned __int8)this->FocusGroupIndexes[(unsigned __int8)keyEntry->KeyboardIndex]].FocusRectShown
-     && !v4->ManualFocus
-     || v7 - 37 > 3) )
+     && !pfocusInfo->ManualFocus
+     || Code - 37 > 3) )
   {
     return;
   }
-  Scaleform::GFx::MovieImpl::InitFocusKeyInfo(this, v4, keyEntry, 0, 0i64);
-  v8 = v4->pFocusGroup;
-  v104.m128_u64[1] = (unsigned __int64)v8;
-  v9 = v8->TabableArray.Data.Size;
-  v105 = v9;
-  v10 = (signed int)v9;
-  *(_QWORD *)&v106.x1 = (signed int)v9;
+  Scaleform::GFx::MovieImpl::InitFocusKeyInfo(this, pfocusInfo, keyEntry, 0, 0i64);
+  pFocusGroup = pfocusInfo->pFocusGroup;
+  *(_QWORD *)&pr.M[1][2] = pFocusGroup;
+  Size = pFocusGroup->TabableArray.Data.Size;
+  v105 = Size;
+  v10 = (int)Size;
+  *(_QWORD *)&v106.x1 = (int)Size;
   if ( v5->Code == 9 )
   {
-    v11 = v4->CurFocusIdx;
-    v4->CurFocusIdx = -1;
+    CurFocusIdx = pfocusInfo->CurFocusIdx;
+    pfocusInfo->CurFocusIdx = -1;
     v12 = 0;
-    v13 = v11;
-    if ( (signed int)v9 <= 0 )
+    v13 = CurFocusIdx;
+    if ( (int)Size <= 0 )
       goto LABEL_222;
     while ( 1 )
     {
-      if ( v112->KeysState & 1 )
+      if ( (v112->KeysState & 1) != 0 )
       {
-        LODWORD(v11) = v11 - 1;
+        LODWORD(CurFocusIdx) = CurFocusIdx - 1;
         if ( --v13 < 0 )
         {
-          LODWORD(v11) = v9 - 1;
+          LODWORD(CurFocusIdx) = Size - 1;
           v13 = v10 - 1;
         }
       }
       else
       {
-        LODWORD(v11) = v11 + 1;
+        LODWORD(CurFocusIdx) = CurFocusIdx + 1;
         if ( ++v13 >= v10 )
         {
-          LODWORD(v11) = 0;
+          LODWORD(CurFocusIdx) = 0;
           v13 = 0i64;
         }
       }
-      v14 = v8->TabableArray.Data.Data[v13].pObject;
-      if ( v14 )
+      pObject = pFocusGroup->TabableArray.Data.Data[v13].pObject;
+      if ( pObject )
       {
-        if ( v4->InclFocusEnabled || ((unsigned __int8 (*)(void))v14->vfptr[87].__vecDelDtor)() )
+        if ( pfocusInfo->InclFocusEnabled
+          || ((unsigned __int8 (__fastcall *)(Scaleform::GFx::InteractiveObject *))pObject->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[87].__vecDelDtor)(pObject) )
         {
-          v15 = v8->TabableArray.Data.Data[v13].pObject;
-          if ( ((unsigned __int8 (__fastcall *)(Scaleform::GFx::InteractiveObject *, Scaleform::GFx::MovieImpl *, _QWORD))v15->vfptr[85].__vecDelDtor)(
+          v15 = pFocusGroup->TabableArray.Data.Data[v13].pObject;
+          if ( ((unsigned __int8 (__fastcall *)(Scaleform::GFx::InteractiveObject *, Scaleform::GFx::MovieImpl *, _QWORD))v15->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[85].__vecDelDtor)(
                  v15,
-                 v6,
-                 (unsigned __int8)v4->KeyboardIndex) )
+                 this,
+                 (unsigned __int8)pfocusInfo->KeyboardIndex) )
           {
-            v4->CurFocusIdx = v11;
+            pfocusInfo->CurFocusIdx = CurFocusIdx;
             goto LABEL_222;
           }
         }
         v10 = *(_QWORD *)&v106.x1;
       }
-      if ( ++v12 >= (signed int)v9 )
+      if ( ++v12 >= (int)Size )
         goto LABEL_222;
     }
   }
-  v16 = v4->CurFocused.pObject;
+  v16 = pfocusInfo->CurFocused.pObject;
   if ( !v16 )
     goto LABEL_222;
-  if ( !((unsigned __int8 (*)(void))v16->vfptr[88].__vecDelDtor)() )
+  if ( !((unsigned __int8 (__fastcall *)(Scaleform::GFx::InteractiveObject *))v16->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[88].__vecDelDtor)(v16) )
   {
-    v17 = HIBYTE(v6->Flags) & 3;
+    v17 = HIBYTE(this->Flags) & 3;
     if ( v17 == 3 )
       v17 = -1;
-    if ( v17 != 1 && !v4->ManualFocus )
+    if ( v17 != 1 && !pfocusInfo->ManualFocus )
       goto LABEL_222;
   }
-  Scaleform::GFx::DisplayObjectBase::GetLevelMatrix(
-    (Scaleform::GFx::DisplayObjectBase *)&v4->CurFocused.pObject->vfptr,
-    &result);
-  v18 = (Scaleform::Render::Rect<float> *)v4->CurFocused.pObject->vfptr[93].__vecDelDtor(
-                                            (Scaleform::RefCountNTSImplCore *)&v4->CurFocused.pObject->vfptr,
-                                            (unsigned int)&v106);
-  Scaleform::Render::Matrix2x4<float>::EncloseTransform(
-    &result,
-    (Scaleform::Render::Rect<float> *)((char *)&pr + 8),
-    v18);
+  Scaleform::GFx::DisplayObjectBase::GetLevelMatrix(pfocusInfo->CurFocused.pObject, &result);
+  v18 = (Scaleform::Render::Rect<float> *)pfocusInfo->CurFocused.pObject->vfptr[93].__vecDelDtor(
+                                            pfocusInfo->CurFocused.pObject,
+                                            &v106);
+  Scaleform::Render::Matrix2x4<float>::EncloseTransform(&result, (Scaleform::Render::Rect<float> *)&pr.M[0][2], v18);
   v19 = v5->Code;
-  if ( v4->PrevKeyCode == v19 )
+  if ( pfocusInfo->PrevKeyCode == v19 )
   {
-    if ( (v19 - 38) & 0xFFFFFFFD )
+    if ( ((v19 - 38) & 0xFFFFFFFD) != 0 )
     {
-      if ( !((v19 - 37) & 0xFFFFFFFD) )
+      if ( ((v19 - 37) & 0xFFFFFFFD) == 0 )
       {
-        pr.y2 = v4->Prev_aRect.y1;
-        v104.m128_i32[1] = LODWORD(v4->Prev_aRect.y2);
+        pr.M[0][3] = pfocusInfo->Prev_aRect.y1;
+        pr.M[1][1] = pfocusInfo->Prev_aRect.y2;
       }
     }
     else
     {
-      pr.x2 = v4->Prev_aRect.x1;
-      v104.m128_i32[0] = LODWORD(v4->Prev_aRect.x2);
+      pr.M[0][2] = pfocusInfo->Prev_aRect.x1;
+      pr.M[1][0] = pfocusInfo->Prev_aRect.x2;
     }
   }
   else
   {
-    v4->Prev_aRect.x1 = pr.x2;
-    v4->Prev_aRect.y1 = pr.y2;
-    *(_QWORD *)&v4->Prev_aRect.x2 = v104.m128_u64[0];
-    v4->PrevKeyCode = v5->Code;
+    *(_QWORD *)&pfocusInfo->Prev_aRect.x1 = *(_QWORD *)&pr.M[0][2];
+    *(_QWORD *)&pfocusInfo->Prev_aRect.x2 = *(_QWORD *)&pr.M[1][0];
+    pfocusInfo->PrevKeyCode = v5->Code;
   }
   v20 = v5->Code;
-  if ( !((v20 - 37) & 0xFFFFFFFD) )
+  if ( ((v20 - 37) & 0xFFFFFFFD) == 0 )
   {
-    v55 = v4->CurFocusIdx;
+    v55 = pfocusInfo->CurFocusIdx;
     v111 = FLOAT_2_1474836e9;
     if ( v20 == 39 )
-      v56 = (__m128)LODWORD(FLOAT_2_1474836e9);
+      x2_low = (__m128)LODWORD(FLOAT_2_1474836e9);
     else
-      v56 = (__m128)LODWORD(FLOAT_N2_1474836e9);
-    v101 = v56.m128_f32[0];
+      x2_low = (__m128)LODWORD(FLOAT_N2_1474836e9);
+    x1 = x2_low.m128_f32[0];
     v57 = FLOAT_2_1474836e9;
     v58 = 0;
-    v59 = v9 - 1;
+    v59 = Size - 1;
     v60 = v55;
-    if ( (signed int)v59 <= 0 )
+    if ( v59 <= 0 )
     {
 LABEL_221:
-      LODWORD(v9) = v105;
-      v8 = (Scaleform::GFx::FocusGroupDescr *)v104.m128_u64[1];
+      LODWORD(Size) = v105;
+      pFocusGroup = *(Scaleform::GFx::FocusGroupDescr **)&pr.M[1][2];
       goto LABEL_222;
     }
-    v61 = v59;
+    v61 = (unsigned int)v59;
     v62 = *(float *)&FLOAT_1_0;
     while ( 1 )
     {
@@ -6401,9 +6219,9 @@ LABEL_221:
         LODWORD(v55) = v55 - 1;
         --v60;
       }
-      if ( v60 < *(_QWORD *)&v106.x1 )
+      if ( v60 < *(__int64 *)&v106.x1 )
       {
-        if ( (signed int)v55 < 0 )
+        if ( (int)v55 < 0 )
         {
           LODWORD(v55) = v59;
           v60 = *(_QWORD *)&v106.x1 - 1i64;
@@ -6414,18 +6232,18 @@ LABEL_221:
         LODWORD(v55) = 0;
         v60 = 0i64;
       }
-      v63 = *(_QWORD *)(v104.m128_u64[1] + 8);
+      v63 = *(_QWORD *)(*(_QWORD *)&pr.M[1][2] + 8i64);
       v64 = *(_QWORD *)(v63 + 8 * v60);
       if ( v64 )
         ++*(_DWORD *)(v64 + 8);
       v65 = *(_QWORD *)(v63 + 8 * v60);
       *(_QWORD *)&v106.x2 = v65;
-      if ( v4->InclFocusEnabled || (*(unsigned __int8 (__fastcall **)(__int64))(*(_QWORD *)v65 + 696i64))(v65) )
+      if ( pfocusInfo->InclFocusEnabled || (*(unsigned __int8 (__fastcall **)(__int64))(*(_QWORD *)v65 + 696i64))(v65) )
       {
         if ( (*(unsigned __int8 (__fastcall **)(__int64, __int64, _QWORD))(*(_QWORD *)v65 + 680i64))(
                v65,
                v110,
-               (unsigned __int8)v4->KeyboardIndex) )
+               (unsigned __int8)pfocusInfo->KeyboardIndex) )
         {
           break;
         }
@@ -6437,156 +6255,156 @@ LABEL_220:
       if ( !v61 )
         goto LABEL_221;
     }
-    pr = (Scaleform::Render::Rect<float>)_xmm;
-    v104 = _xmm;
+    *(_OWORD *)&pr.M[0][0] = _xmm;
+    *(__m128 *)&pr.M[1][0] = _xmm;
     v66 = *(Scaleform::GFx::DisplayObjectBase **)(v65 + 56);
     if ( v66 )
     {
-      Scaleform::GFx::DisplayObjectBase::GetLevelMatrix(v66, (Scaleform::Render::Matrix2x4<float> *)&pr);
+      Scaleform::GFx::DisplayObjectBase::GetLevelMatrix(v66, &pr);
       v67 = (float *)(*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v65 + 16i64))(v65);
-      v68 = pr.x1;
-      v69 = pr.y1;
-      v70 = v104.m128_u64[0];
-      pr.x1 = (float)(pr.x1 * *v67) + (float)(pr.y1 * v67[4]);
-      v104.m128_f32[0] = (float)(v104.m128_f32[0] * *v67) + (float)(v104.m128_f32[1] * v67[4]);
-      pr.y1 = (float)(v68 * v67[1]) + (float)(pr.y1 * v67[5]);
-      v104.m128_f32[1] = (float)(*(float *)&v70 * v67[1]) + (float)(v104.m128_f32[1] * v67[5]);
-      v104.m128_i32[2] = 0;
-      pr.x2 = 0.0;
-      pr.y2 = pr.y2 + (float)((float)(v69 * v67[7]) + (float)(v68 * v67[3]));
-      v104.m128_f32[3] = v104.m128_f32[3]
-                       + (float)((float)(*((float *)&v70 + 1) * v67[7]) + (float)(*(float *)&v70 * v67[3]));
+      v68 = pr.M[0][0];
+      v69 = pr.M[0][1];
+      v70 = pr.M[1][0];
+      v71 = pr.M[1][1];
+      pr.M[0][0] = (float)(pr.M[0][0] * *v67) + (float)(pr.M[0][1] * v67[4]);
+      pr.M[1][0] = (float)(pr.M[1][0] * *v67) + (float)(pr.M[1][1] * v67[4]);
+      pr.M[0][1] = (float)(v68 * v67[1]) + (float)(pr.M[0][1] * v67[5]);
+      pr.M[1][1] = (float)(v70 * v67[1]) + (float)(pr.M[1][1] * v67[5]);
+      pr.M[1][2] = 0.0;
+      pr.M[0][2] = 0.0;
+      pr.M[0][3] = pr.M[0][3] + (float)((float)(v69 * v67[7]) + (float)(v68 * v67[3]));
+      pr.M[1][3] = pr.M[1][3] + (float)((float)(v71 * v67[7]) + (float)(v70 * v67[3]));
     }
     else
     {
-      pr = (Scaleform::Render::Rect<float>)_xmm;
-      v104 = _xmm;
+      *(_OWORD *)&pr.M[0][0] = _xmm;
+      *(__m128 *)&pr.M[1][0] = _xmm;
     }
-    v71 = (Scaleform::Render::Rect<float> *)(*(__int64 (__fastcall **)(__int64, char *))(*(_QWORD *)v65 + 744i64))(
+    v72 = (Scaleform::Render::Rect<float> *)(*(__int64 (__fastcall **)(__int64, char *))(*(_QWORD *)v65 + 744i64))(
                                               v65,
-                                              &v108);
-    Scaleform::Render::Matrix2x4<float>::EncloseTransform((Scaleform::Render::Matrix2x4<float> *)&pr, &v106, v71);
-    v72 = v112->Code;
-    if ( v72 == 39 )
+                                              v108);
+    Scaleform::Render::Matrix2x4<float>::EncloseTransform(&pr, &v106, v72);
+    v73 = v112->Code;
+    if ( v73 == 39 )
     {
-      v73 = v104.m128_f32[0] + v62;
-      v74 = FLOAT_3_4028235e38;
+      v74 = pr.M[1][0] + v62;
+      v75 = FLOAT_3_4028235e38;
     }
     else
     {
-      v74 = pr.x2 - v62;
-      v73 = FLOAT_1_1754944eN38;
+      v75 = pr.M[0][2] - v62;
+      v74 = FLOAT_1_1754944eN38;
     }
-    if ( v106.y2 < pr.y2 || v104.m128_f32[1] < v106.y1 || v74 < v106.x1 || v106.x2 < v73 )
-      goto LABEL_234;
-    v75 = v106.y1;
-    v76 = v106.y2;
-    if ( v106.y1 <= pr.y2 )
-      v75 = pr.y2;
-    if ( v106.y2 > v104.m128_f32[1] )
-      v76 = v104.m128_f32[1];
-    if ( (float)(v76 - v75) < 40.0 )
+    if ( v106.y2 < pr.M[0][3] || pr.M[1][1] < v106.y1 || v75 < v106.x1 || v106.x2 < v74 )
+      goto LABEL_162;
+    y1 = v106.y1;
+    y2 = v106.y2;
+    if ( v106.y1 <= pr.M[0][3] )
+      y1 = pr.M[0][3];
+    if ( v106.y2 > pr.M[1][1] )
+      y2 = pr.M[1][1];
+    if ( (float)(y2 - y1) < 40.0 )
     {
-LABEL_234:
+LABEL_162:
       if ( v58 )
         goto LABEL_219;
     }
     else if ( !v58 )
     {
-      v101 = v106.x1;
+      x1 = v106.x1;
       v111 = v106.y2;
       v58 = 1;
 LABEL_218:
-      v56 = (__m128)LODWORD(v106.x2);
+      x2_low = (__m128)LODWORD(v106.x2);
       v57 = v106.y1;
-      v4->CurFocusIdx = v55;
+      pfocusInfo->CurFocusIdx = v55;
       goto LABEL_219;
     }
-    v77 = (float)((float)(v104.m128_f32[1] - pr.y2) * 0.5) + pr.y2;
-    if ( v72 == 39 )
+    v78 = (float)((float)(pr.M[1][1] - pr.M[0][3]) * 0.5) + pr.M[0][3];
+    if ( v73 == 39 )
     {
-      v78 = (__m128)LODWORD(v106.x1);
-      v79 = (__m128)LODWORD(v101);
-      if ( v104.m128_f32[0] > v106.x1 )
-        v78 = (__m128)v104.m128_u32[0];
-      if ( v104.m128_f32[0] > v101 )
-        v79 = (__m128)v104.m128_u32[0];
-      if ( v106.x2 < v78.m128_f32[0] || v106.y2 < v106.y1 )
+      x1_low = (__m128)LODWORD(v106.x1);
+      v80 = (__m128)LODWORD(x1);
+      if ( pr.M[1][0] > v106.x1 )
+        x1_low = (__m128)LODWORD(pr.M[1][0]);
+      if ( pr.M[1][0] > x1 )
+        v80 = (__m128)LODWORD(pr.M[1][0]);
+      if ( v106.x2 < x1_low.m128_f32[0] || v106.y2 < v106.y1 )
         goto LABEL_219;
-      v80 = (float)(v106.x2 - v78.m128_f32[0]) * 0.050000001;
-      v81 = v80 <= 0.0 ? v80 - 0.5 : v80 + 0.5;
-      if ( (signed int)v81 <= 3 )
+      v81 = (float)(v106.x2 - x1_low.m128_f32[0]) * 0.050000001;
+      v82 = v81 <= 0.0 ? v81 - 0.5 : v81 + 0.5;
+      if ( (int)v82 <= 3 )
         goto LABEL_219;
-      v82 = (__m128)LODWORD(v106.y2);
-      v83 = (__m128)LODWORD(v111);
-      v78.m128_f32[0] = (float)(v78.m128_f32[0] - v104.m128_f32[0]) * 0.050000001;
-      v84 = (signed int)v78.m128_f32[0];
-      if ( (signed int)v78.m128_f32[0] != 0x80000000 && (float)v84 != v78.m128_f32[0] )
-        v78.m128_f32[0] = (float)(v84 - (_mm_movemask_ps(_mm_unpacklo_ps(v78, v78)) & 1));
-      v82.m128_f32[0] = (float)((float)((float)((float)(v106.y2 - v106.y1) * 0.5) + v106.y1) - v77) * 0.050000001;
-      v85 = (signed int)v82.m128_f32[0];
-      if ( (signed int)v82.m128_f32[0] != 0x80000000 && (float)v85 != v82.m128_f32[0] )
-        v82.m128_f32[0] = (float)(v85 - (_mm_movemask_ps(_mm_unpacklo_ps(v82, v82)) & 1));
-      v79.m128_f32[0] = (float)(v79.m128_f32[0] - v104.m128_f32[0]) * 0.050000001;
-      v86 = (signed int)v79.m128_f32[0];
-      if ( (signed int)v79.m128_f32[0] != 0x80000000 && (float)v86 != v79.m128_f32[0] )
-        v79.m128_f32[0] = (float)(v86 - (_mm_movemask_ps(_mm_unpacklo_ps(v79, v79)) & 1));
-      v83.m128_f32[0] = (float)((float)((float)((float)(v111 - v57) * 0.5) + v57) - v77) * 0.050000001;
-      v87 = (signed int)v83.m128_f32[0];
-      if ( (signed int)v83.m128_f32[0] != 0x80000000 && (float)v87 != v83.m128_f32[0] )
-        v83.m128_f32[0] = (float)(v87 - (_mm_movemask_ps(_mm_unpacklo_ps(v83, v83)) & 1));
-      if ( v78.m128_f32[0] < 0.0 )
+      y2_low = (__m128)LODWORD(v106.y2);
+      v84 = (__m128)LODWORD(v111);
+      x1_low.m128_f32[0] = (float)(x1_low.m128_f32[0] - pr.M[1][0]) * 0.050000001;
+      v85 = (int)x1_low.m128_f32[0];
+      if ( (int)x1_low.m128_f32[0] != 0x80000000 && (float)v85 != x1_low.m128_f32[0] )
+        x1_low.m128_f32[0] = (float)(v85 - (_mm_movemask_ps(_mm_unpacklo_ps(x1_low, x1_low)) & 1));
+      y2_low.m128_f32[0] = (float)((float)((float)((float)(v106.y2 - v106.y1) * 0.5) + v106.y1) - v78) * 0.050000001;
+      v86 = (int)y2_low.m128_f32[0];
+      if ( (int)y2_low.m128_f32[0] != 0x80000000 && (float)v86 != y2_low.m128_f32[0] )
+        y2_low.m128_f32[0] = (float)(v86 - (_mm_movemask_ps(_mm_unpacklo_ps(y2_low, y2_low)) & 1));
+      v80.m128_f32[0] = (float)(v80.m128_f32[0] - pr.M[1][0]) * 0.050000001;
+      v87 = (int)v80.m128_f32[0];
+      if ( (int)v80.m128_f32[0] != 0x80000000 && (float)v87 != v80.m128_f32[0] )
+        v80.m128_f32[0] = (float)(v87 - (_mm_movemask_ps(_mm_unpacklo_ps(v80, v80)) & 1));
+      v84.m128_f32[0] = (float)((float)((float)((float)(v111 - v57) * 0.5) + v57) - v78) * 0.050000001;
+      v88 = (int)v84.m128_f32[0];
+      if ( (int)v84.m128_f32[0] != 0x80000000 && (float)v88 != v84.m128_f32[0] )
+        v84.m128_f32[0] = (float)(v88 - (_mm_movemask_ps(_mm_unpacklo_ps(v84, v84)) & 1));
+      if ( x1_low.m128_f32[0] < 0.0 )
         goto LABEL_219;
     }
     else
     {
-      v78 = (__m128)LODWORD(v106.x2);
-      v79 = v56;
-      if ( pr.x2 < v106.x2 )
-        v78 = (__m128)LODWORD(pr.x2);
-      if ( pr.x2 < v56.m128_f32[0] )
-        v79 = (__m128)LODWORD(pr.x2);
-      if ( v78.m128_f32[0] < v106.x1 || v106.y2 < v106.y1 )
+      x1_low = (__m128)LODWORD(v106.x2);
+      v80 = x2_low;
+      if ( pr.M[0][2] < v106.x2 )
+        x1_low = (__m128)LODWORD(pr.M[0][2]);
+      if ( pr.M[0][2] < x2_low.m128_f32[0] )
+        v80 = (__m128)LODWORD(pr.M[0][2]);
+      if ( x1_low.m128_f32[0] < v106.x1 || v106.y2 < v106.y1 )
         goto LABEL_219;
-      v88 = (float)(v78.m128_f32[0] - v106.x1) * 0.050000001;
-      v89 = v88 <= 0.0 ? v88 - 0.5 : v88 + 0.5;
-      if ( (signed int)v89 <= 3 )
+      v89 = (float)(x1_low.m128_f32[0] - v106.x1) * 0.050000001;
+      v90 = v89 <= 0.0 ? v89 - 0.5 : v89 + 0.5;
+      if ( (int)v90 <= 3 )
         goto LABEL_219;
-      v82 = (__m128)LODWORD(v106.y2);
-      v83 = (__m128)LODWORD(v111);
-      v78.m128_f32[0] = (float)(v78.m128_f32[0] - pr.x2) * 0.050000001;
-      v90 = (signed int)v78.m128_f32[0];
-      if ( (signed int)v78.m128_f32[0] != 0x80000000 && (float)v90 != v78.m128_f32[0] )
-        v78.m128_f32[0] = (float)(v90 - (_mm_movemask_ps(_mm_unpacklo_ps(v78, v78)) & 1));
-      v82.m128_f32[0] = (float)((float)((float)((float)(v106.y2 - v106.y1) * 0.5) + v106.y1) - v77) * 0.050000001;
-      v91 = (signed int)v82.m128_f32[0];
-      if ( (signed int)v82.m128_f32[0] != 0x80000000 && (float)v91 != v82.m128_f32[0] )
-        v82.m128_f32[0] = (float)(v91 - (_mm_movemask_ps(_mm_unpacklo_ps(v82, v82)) & 1));
-      v79.m128_f32[0] = (float)(v79.m128_f32[0] - pr.x2) * 0.050000001;
-      v92 = (signed int)v79.m128_f32[0];
-      if ( (signed int)v79.m128_f32[0] != 0x80000000 && (float)v92 != v79.m128_f32[0] )
-        v79.m128_f32[0] = (float)(v92 - (_mm_movemask_ps(_mm_unpacklo_ps(v79, v79)) & 1));
-      v83.m128_f32[0] = (float)((float)((float)((float)(v111 - v57) * 0.5) + v57) - v77) * 0.050000001;
-      v93 = (signed int)v83.m128_f32[0];
-      if ( (signed int)v83.m128_f32[0] != 0x80000000 && (float)v93 != v83.m128_f32[0] )
-        v83.m128_f32[0] = (float)(v93 - (_mm_movemask_ps(_mm_unpacklo_ps(v83, v83)) & 1));
-      if ( v78.m128_f32[0] > 0.0 )
+      y2_low = (__m128)LODWORD(v106.y2);
+      v84 = (__m128)LODWORD(v111);
+      x1_low.m128_f32[0] = (float)(x1_low.m128_f32[0] - pr.M[0][2]) * 0.050000001;
+      v91 = (int)x1_low.m128_f32[0];
+      if ( (int)x1_low.m128_f32[0] != 0x80000000 && (float)v91 != x1_low.m128_f32[0] )
+        x1_low.m128_f32[0] = (float)(v91 - (_mm_movemask_ps(_mm_unpacklo_ps(x1_low, x1_low)) & 1));
+      y2_low.m128_f32[0] = (float)((float)((float)((float)(v106.y2 - v106.y1) * 0.5) + v106.y1) - v78) * 0.050000001;
+      v92 = (int)y2_low.m128_f32[0];
+      if ( (int)y2_low.m128_f32[0] != 0x80000000 && (float)v92 != y2_low.m128_f32[0] )
+        y2_low.m128_f32[0] = (float)(v92 - (_mm_movemask_ps(_mm_unpacklo_ps(y2_low, y2_low)) & 1));
+      v80.m128_f32[0] = (float)(v80.m128_f32[0] - pr.M[0][2]) * 0.050000001;
+      v93 = (int)v80.m128_f32[0];
+      if ( (int)v80.m128_f32[0] != 0x80000000 && (float)v93 != v80.m128_f32[0] )
+        v80.m128_f32[0] = (float)(v93 - (_mm_movemask_ps(_mm_unpacklo_ps(v80, v80)) & 1));
+      v84.m128_f32[0] = (float)((float)((float)((float)(v111 - v57) * 0.5) + v57) - v78) * 0.050000001;
+      v94 = (int)v84.m128_f32[0];
+      if ( (int)v84.m128_f32[0] != 0x80000000 && (float)v94 != v84.m128_f32[0] )
+        v84.m128_f32[0] = (float)(v94 - (_mm_movemask_ps(_mm_unpacklo_ps(v84, v84)) & 1));
+      if ( x1_low.m128_f32[0] > 0.0 )
         goto LABEL_219;
     }
     if ( v58 )
     {
-      if ( COERCE_FLOAT(v78.m128_i32[0] & _xmm) >= COERCE_FLOAT(v79.m128_i32[0] & _xmm)
-        && (v78.m128_f32[0] != v79.m128_f32[0]
-         || COERCE_FLOAT(v82.m128_i32[0] & _xmm) >= COERCE_FLOAT(v83.m128_i32[0] & _xmm)) )
+      if ( COERCE_FLOAT(x1_low.m128_i32[0] & _xmm) >= COERCE_FLOAT(v80.m128_i32[0] & _xmm)
+        && (x1_low.m128_f32[0] != v80.m128_f32[0]
+         || COERCE_FLOAT(y2_low.m128_i32[0] & _xmm) >= COERCE_FLOAT(v84.m128_i32[0] & _xmm)) )
       {
         goto LABEL_219;
       }
       goto LABEL_217;
     }
-    if ( (float)((float)(v82.m128_f32[0] * v82.m128_f32[0]) + (float)(v78.m128_f32[0] * v78.m128_f32[0])) < (float)((float)(v83.m128_f32[0] * v83.m128_f32[0]) + (float)(v79.m128_f32[0] * v79.m128_f32[0])) )
+    if ( (float)((float)(y2_low.m128_f32[0] * y2_low.m128_f32[0]) + (float)(x1_low.m128_f32[0] * x1_low.m128_f32[0])) < (float)((float)(v84.m128_f32[0] * v84.m128_f32[0]) + (float)(v80.m128_f32[0] * v80.m128_f32[0])) )
     {
 LABEL_217:
-      v101 = v106.x1;
+      x1 = v106.x1;
       v111 = v106.y2;
       goto LABEL_218;
     }
@@ -6595,11 +6413,11 @@ LABEL_219:
     v62 = *(float *)&FLOAT_1_0;
     goto LABEL_220;
   }
-  if ( !((v20 - 38) & 0xFFFFFFFD) )
+  if ( ((v20 - 38) & 0xFFFFFFFD) == 0 )
   {
-    v21 = v4->CurFocusIdx;
-    v102 = 0.0;
-    v100 = 0.0;
+    v21 = pfocusInfo->CurFocusIdx;
+    v103 = 0.0;
+    v101 = 0.0;
     v22 = FLOAT_2_1474836e9;
     if ( v20 == 40 )
       v23 = FLOAT_2_1474836e9;
@@ -6607,11 +6425,11 @@ LABEL_219:
       v23 = FLOAT_N2_1474836e9;
     v111 = v23;
     v24 = 0;
-    v25 = v9 - 1;
+    v25 = Size - 1;
     v26 = v21;
-    if ( (signed int)v25 > 0 )
+    if ( v25 > 0 )
     {
-      v27 = v25;
+      v27 = (unsigned int)v25;
       v28 = *(float *)&FLOAT_1_0;
       while ( 1 )
       {
@@ -6625,9 +6443,9 @@ LABEL_219:
           LODWORD(v21) = v21 - 1;
           --v26;
         }
-        if ( v26 < *(_QWORD *)&v106.x1 )
+        if ( v26 < *(__int64 *)&v106.x1 )
         {
-          if ( (signed int)v21 < 0 )
+          if ( (int)v21 < 0 )
           {
             LODWORD(v21) = v25;
             v26 = *(_QWORD *)&v106.x1 - 1i64;
@@ -6638,273 +6456,267 @@ LABEL_219:
           LODWORD(v21) = 0;
           v26 = 0i64;
         }
-        v29 = *(_QWORD *)(v104.m128_u64[1] + 8);
+        v29 = *(_QWORD *)(*(_QWORD *)&pr.M[1][2] + 8i64);
         v30 = *(_QWORD *)(v29 + 8 * v26);
         if ( v30 )
           ++*(_DWORD *)(v30 + 8);
         v31 = *(Scaleform::GFx::DisplayObjectBase **)(v29 + 8 * v26);
         *(_QWORD *)&v106.x2 = v31;
-        if ( v4->InclFocusEnabled
-          || ((unsigned __int8 (__fastcall *)(Scaleform::GFx::DisplayObjectBase *))v31->vfptr[87].__vecDelDtor)(v31) )
+        if ( pfocusInfo->InclFocusEnabled
+          || ((unsigned __int8 (__fastcall *)(Scaleform::GFx::DisplayObjectBase *))v31->Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[87].__vecDelDtor)(v31) )
         {
-          if ( ((unsigned __int8 (__fastcall *)(Scaleform::GFx::DisplayObjectBase *, __int64, _QWORD))v31->vfptr[85].__vecDelDtor)(
+          if ( ((unsigned __int8 (__fastcall *)(Scaleform::GFx::DisplayObjectBase *, __int64, _QWORD))v31->Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[85].__vecDelDtor)(
                  v31,
                  v110,
-                 (unsigned __int8)v4->KeyboardIndex) )
+                 (unsigned __int8)pfocusInfo->KeyboardIndex) )
           {
             break;
           }
         }
-        Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v31->vfptr);
+        Scaleform::RefCountNTSImpl::Release(v31);
 LABEL_125:
         --v27;
         v5 = v112;
         if ( !v27 )
           goto LABEL_221;
       }
-      Scaleform::GFx::DisplayObjectBase::GetLevelMatrix(v31, (Scaleform::Render::Matrix2x4<float> *)&pr);
-      v32 = (Scaleform::Render::Rect<float> *)v31->vfptr[93].__vecDelDtor(
-                                                (Scaleform::RefCountNTSImplCore *)&v31->vfptr,
-                                                (unsigned int)&v108);
-      Scaleform::Render::Matrix2x4<float>::EncloseTransform((Scaleform::Render::Matrix2x4<float> *)&pr, &v106, v32);
+      Scaleform::GFx::DisplayObjectBase::GetLevelMatrix(v31, &pr);
+      v32 = (Scaleform::Render::Rect<float> *)v31->Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[93].__vecDelDtor(
+                                                v31,
+                                                (unsigned int)v108);
+      Scaleform::Render::Matrix2x4<float>::EncloseTransform(&pr, &v106, v32);
       v33 = v112->Code;
       if ( v33 == 40 )
       {
-        v34 = v104.m128_f32[1] + v28;
+        v34 = pr.M[1][1] + v28;
         v35 = FLOAT_3_4028235e38;
       }
       else
       {
-        v35 = pr.y2 - v28;
+        v35 = pr.M[0][3] - v28;
         v34 = FLOAT_1_1754944eN38;
       }
-      if ( v106.y2 < v34 || v35 < v106.y1 || v104.m128_f32[0] < v106.x1 || v106.x2 < pr.x2 )
-        goto LABEL_235;
+      if ( v106.y2 < v34 || v35 < v106.y1 || pr.M[1][0] < v106.x1 || v106.x2 < pr.M[0][2] )
+        goto LABEL_67;
       v36 = v106.x1;
-      v37 = v106.x2;
-      if ( v106.x1 <= pr.x2 )
-        v36 = pr.x2;
-      if ( v106.x2 > v104.m128_f32[0] )
-        v37 = v104.m128_f32[0];
-      if ( (float)(v37 - v36) < 40.0 )
+      x2 = v106.x2;
+      if ( v106.x1 <= pr.M[0][2] )
+        v36 = pr.M[0][2];
+      if ( v106.x2 > pr.M[1][0] )
+        x2 = pr.M[1][0];
+      if ( (float)(x2 - v36) < 40.0 )
       {
-LABEL_235:
+LABEL_67:
         if ( v24 )
           goto LABEL_124;
       }
       else if ( !v24 )
       {
         v111 = v106.y1;
-        v100 = v106.y2;
+        v101 = v106.y2;
         v24 = 1;
 LABEL_123:
-        v102 = v106.x2;
+        v103 = v106.x2;
         v22 = v106.x1;
-        v4->CurFocusIdx = v21;
+        pfocusInfo->CurFocusIdx = v21;
         goto LABEL_124;
       }
-      v38 = (float)((float)(v104.m128_f32[0] - pr.x2) * 0.5) + pr.x2;
+      v38 = (float)((float)(pr.M[1][0] - pr.M[0][2]) * 0.5) + pr.M[0][2];
       if ( v33 == 38 )
       {
-        v39 = (__m128)LODWORD(v106.y2);
-        v40 = (__m128)LODWORD(v100);
-        if ( pr.y2 < v106.y2 )
-          v39 = (__m128)LODWORD(pr.y2);
-        if ( pr.y2 < v100 )
-          v40 = (__m128)LODWORD(pr.y2);
-        if ( v106.x2 < v106.x1 || v39.m128_f32[0] < v106.y1 )
+        y1_low = (__m128)LODWORD(v106.y2);
+        v40 = (__m128)LODWORD(v101);
+        if ( pr.M[0][3] < v106.y2 )
+          y1_low = (__m128)LODWORD(pr.M[0][3]);
+        if ( pr.M[0][3] < v101 )
+          v40 = (__m128)LODWORD(pr.M[0][3]);
+        if ( v106.x2 < v106.x1 || y1_low.m128_f32[0] < v106.y1 )
           goto LABEL_124;
-        v41 = (float)(v39.m128_f32[0] - v106.y1) * 0.050000001;
+        v41 = (float)(y1_low.m128_f32[0] - v106.y1) * 0.050000001;
         v42 = v41 <= 0.0 ? v41 - 0.5 : v41 + 0.5;
-        if ( (signed int)v42 <= 3 )
+        if ( (int)v42 <= 3 )
           goto LABEL_124;
         v44 = (__m128)LODWORD(v106.x2);
-        v43 = (__m128)LODWORD(v102);
+        v43 = (__m128)LODWORD(v103);
         v44.m128_f32[0] = (float)((float)((float)((float)(v106.x2 - v106.x1) * 0.5) + v106.x1) - v38) * 0.050000001;
-        v45 = (signed int)v44.m128_f32[0];
-        if ( (signed int)v44.m128_f32[0] != 0x80000000 && (float)v45 != v44.m128_f32[0] )
+        v45 = (int)v44.m128_f32[0];
+        if ( (int)v44.m128_f32[0] != 0x80000000 && (float)v45 != v44.m128_f32[0] )
           v44.m128_f32[0] = (float)(v45 - (_mm_movemask_ps(_mm_unpacklo_ps(v44, v44)) & 1));
-        v39.m128_f32[0] = (float)(v39.m128_f32[0] - pr.y2) * 0.050000001;
-        v46 = (signed int)v39.m128_f32[0];
-        if ( (signed int)v39.m128_f32[0] != 0x80000000 && (float)v46 != v39.m128_f32[0] )
-          v39.m128_f32[0] = (float)(v46 - (_mm_movemask_ps(_mm_unpacklo_ps(v39, v39)) & 1));
-        v43.m128_f32[0] = (float)((float)((float)((float)(v102 - v22) * 0.5) + v22) - v38) * 0.050000001;
-        v47 = (signed int)v43.m128_f32[0];
-        if ( (signed int)v43.m128_f32[0] != 0x80000000 && (float)v47 != v43.m128_f32[0] )
+        y1_low.m128_f32[0] = (float)(y1_low.m128_f32[0] - pr.M[0][3]) * 0.050000001;
+        v46 = (int)y1_low.m128_f32[0];
+        if ( (int)y1_low.m128_f32[0] != 0x80000000 && (float)v46 != y1_low.m128_f32[0] )
+          y1_low.m128_f32[0] = (float)(v46 - (_mm_movemask_ps(_mm_unpacklo_ps(y1_low, y1_low)) & 1));
+        v43.m128_f32[0] = (float)((float)((float)((float)(v103 - v22) * 0.5) + v22) - v38) * 0.050000001;
+        v47 = (int)v43.m128_f32[0];
+        if ( (int)v43.m128_f32[0] != 0x80000000 && (float)v47 != v43.m128_f32[0] )
           v43.m128_f32[0] = (float)(v47 - (_mm_movemask_ps(_mm_unpacklo_ps(v43, v43)) & 1));
-        v40.m128_f32[0] = (float)(v40.m128_f32[0] - pr.y2) * 0.050000001;
-        v48 = (signed int)v40.m128_f32[0];
-        if ( (signed int)v40.m128_f32[0] != 0x80000000 && (float)v48 != v40.m128_f32[0] )
+        v40.m128_f32[0] = (float)(v40.m128_f32[0] - pr.M[0][3]) * 0.050000001;
+        v48 = (int)v40.m128_f32[0];
+        if ( (int)v40.m128_f32[0] != 0x80000000 && (float)v48 != v40.m128_f32[0] )
           v40.m128_f32[0] = (float)(v48 - (_mm_movemask_ps(_mm_unpacklo_ps(v40, v40)) & 1));
-        if ( v39.m128_f32[0] > 0.0 )
+        if ( y1_low.m128_f32[0] > 0.0 )
           goto LABEL_124;
       }
       else
       {
-        v39 = (__m128)LODWORD(v106.y1);
+        y1_low = (__m128)LODWORD(v106.y1);
         v40 = (__m128)LODWORD(v111);
-        if ( v104.m128_f32[1] > v106.y1 )
-          v39 = (__m128)v104.m128_u32[1];
-        if ( v104.m128_f32[1] > v111 )
-          v40 = (__m128)v104.m128_u32[1];
-        if ( v106.x2 < v106.x1 || v106.y2 < v39.m128_f32[0] )
+        if ( pr.M[1][1] > v106.y1 )
+          y1_low = (__m128)LODWORD(pr.M[1][1]);
+        if ( pr.M[1][1] > v111 )
+          v40 = (__m128)LODWORD(pr.M[1][1]);
+        if ( v106.x2 < v106.x1 || v106.y2 < y1_low.m128_f32[0] )
           goto LABEL_124;
-        v49 = (float)(v106.y2 - v39.m128_f32[0]) * 0.050000001;
+        v49 = (float)(v106.y2 - y1_low.m128_f32[0]) * 0.050000001;
         v50 = v49 <= 0.0 ? v49 - 0.5 : v49 + 0.5;
-        if ( (signed int)v50 <= 3 )
+        if ( (int)v50 <= 3 )
           goto LABEL_124;
         v44 = (__m128)LODWORD(v106.x2);
-        v43 = (__m128)LODWORD(v102);
+        v43 = (__m128)LODWORD(v103);
         v44.m128_f32[0] = (float)((float)((float)((float)(v106.x2 - v106.x1) * 0.5) + v106.x1) - v38) * 0.050000001;
-        v51 = (signed int)v44.m128_f32[0];
-        if ( (signed int)v44.m128_f32[0] != 0x80000000 && (float)v51 != v44.m128_f32[0] )
+        v51 = (int)v44.m128_f32[0];
+        if ( (int)v44.m128_f32[0] != 0x80000000 && (float)v51 != v44.m128_f32[0] )
           v44.m128_f32[0] = (float)(v51 - (_mm_movemask_ps(_mm_unpacklo_ps(v44, v44)) & 1));
-        v39.m128_f32[0] = (float)(v39.m128_f32[0] - v104.m128_f32[1]) * 0.050000001;
-        v52 = (signed int)v39.m128_f32[0];
-        if ( (signed int)v39.m128_f32[0] != 0x80000000 && (float)v52 != v39.m128_f32[0] )
-          v39.m128_f32[0] = (float)(v52 - (_mm_movemask_ps(_mm_unpacklo_ps(v39, v39)) & 1));
-        v43.m128_f32[0] = (float)((float)((float)((float)(v102 - v22) * 0.5) + v22) - v38) * 0.050000001;
-        v53 = (signed int)v43.m128_f32[0];
-        if ( (signed int)v43.m128_f32[0] != 0x80000000 && (float)v53 != v43.m128_f32[0] )
+        y1_low.m128_f32[0] = (float)(y1_low.m128_f32[0] - pr.M[1][1]) * 0.050000001;
+        v52 = (int)y1_low.m128_f32[0];
+        if ( (int)y1_low.m128_f32[0] != 0x80000000 && (float)v52 != y1_low.m128_f32[0] )
+          y1_low.m128_f32[0] = (float)(v52 - (_mm_movemask_ps(_mm_unpacklo_ps(y1_low, y1_low)) & 1));
+        v43.m128_f32[0] = (float)((float)((float)((float)(v103 - v22) * 0.5) + v22) - v38) * 0.050000001;
+        v53 = (int)v43.m128_f32[0];
+        if ( (int)v43.m128_f32[0] != 0x80000000 && (float)v53 != v43.m128_f32[0] )
           v43.m128_f32[0] = (float)(v53 - (_mm_movemask_ps(_mm_unpacklo_ps(v43, v43)) & 1));
-        v40.m128_f32[0] = (float)(v40.m128_f32[0] - v104.m128_f32[1]) * 0.050000001;
-        v54 = (signed int)v40.m128_f32[0];
-        if ( (signed int)v40.m128_f32[0] != 0x80000000 && (float)v54 != v40.m128_f32[0] )
+        v40.m128_f32[0] = (float)(v40.m128_f32[0] - pr.M[1][1]) * 0.050000001;
+        v54 = (int)v40.m128_f32[0];
+        if ( (int)v40.m128_f32[0] != 0x80000000 && (float)v54 != v40.m128_f32[0] )
           v40.m128_f32[0] = (float)(v54 - (_mm_movemask_ps(_mm_unpacklo_ps(v40, v40)) & 1));
-        if ( v39.m128_f32[0] < 0.0 )
+        if ( y1_low.m128_f32[0] < 0.0 )
           goto LABEL_124;
       }
       if ( v24 )
       {
-        if ( COERCE_FLOAT(v39.m128_i32[0] & _xmm) >= COERCE_FLOAT(v40.m128_i32[0] & _xmm)
-          && (v39.m128_f32[0] != v40.m128_f32[0]
+        if ( COERCE_FLOAT(y1_low.m128_i32[0] & _xmm) >= COERCE_FLOAT(v40.m128_i32[0] & _xmm)
+          && (y1_low.m128_f32[0] != v40.m128_f32[0]
            || COERCE_FLOAT(v44.m128_i32[0] & _xmm) >= COERCE_FLOAT(v43.m128_i32[0] & _xmm)) )
         {
           goto LABEL_124;
         }
         goto LABEL_122;
       }
-      if ( (float)((float)(v39.m128_f32[0] * v39.m128_f32[0]) + (float)(v44.m128_f32[0] * v44.m128_f32[0])) < (float)((float)(v40.m128_f32[0] * v40.m128_f32[0]) + (float)(v43.m128_f32[0] * v43.m128_f32[0])) )
+      if ( (float)((float)(y1_low.m128_f32[0] * y1_low.m128_f32[0]) + (float)(v44.m128_f32[0] * v44.m128_f32[0])) < (float)((float)(v40.m128_f32[0] * v40.m128_f32[0]) + (float)(v43.m128_f32[0] * v43.m128_f32[0])) )
       {
 LABEL_122:
         v111 = v106.y1;
-        v100 = v106.y2;
+        v101 = v106.y2;
         goto LABEL_123;
       }
 LABEL_124:
-      Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v31->vfptr);
+      Scaleform::RefCountNTSImpl::Release(v31);
       v28 = *(float *)&FLOAT_1_0;
       goto LABEL_125;
     }
     goto LABEL_221;
   }
 LABEL_222:
-  v94 = v4->CurFocusIdx;
-  if ( (signed int)v94 < 0 || (signed int)v94 >= (signed int)v9 )
+  v95 = pfocusInfo->CurFocusIdx;
+  if ( (int)v95 < 0 || (int)v95 >= (int)Size )
   {
-    v99 = (Scaleform::RefCountNTSImpl *)&v4->CurFocused.pObject->vfptr;
-    if ( v99 )
-      Scaleform::RefCountNTSImpl::Release(v99);
-    v4->CurFocused.pObject = 0i64;
+    v100 = pfocusInfo->CurFocused.pObject;
+    if ( v100 )
+      Scaleform::RefCountNTSImpl::Release(v100);
+    pfocusInfo->CurFocused.pObject = 0i64;
   }
   else
   {
-    v95 = v4->CurFocusIdx;
-    v96 = v8->TabableArray.Data.Data;
-    v97 = v96[v94].pObject;
-    if ( v97 )
-      ++v97->RefCount;
-    v98 = (Scaleform::RefCountNTSImpl *)&v4->CurFocused.pObject->vfptr;
+    v96 = pfocusInfo->CurFocusIdx;
+    Data = pFocusGroup->TabableArray.Data.Data;
+    v98 = Data[v95].pObject;
     if ( v98 )
-      Scaleform::RefCountNTSImpl::Release(v98);
-    v4->CurFocused = v96[v95];
+      ++v98->RefCount;
+    v99 = pfocusInfo->CurFocused.pObject;
+    if ( v99 )
+      Scaleform::RefCountNTSImpl::Release(v99);
+    pfocusInfo->CurFocused = Data[v96];
   }
-}
-      Scaleform::RefCountNTSImpl::Release(v98);
-    v4->CurFocused = v96[v95];
-  }
 }
 
 // File Line: 4261
 // RVA: 0x8CB550
-void __fastcall Scaleform::GFx::MovieImpl::FinalizeProcessFocusKey(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::ProcessFocusKeyInfo *pfocusInfo)
+void __fastcall Scaleform::GFx::MovieImpl::FinalizeProcessFocusKey(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::ProcessFocusKeyInfo *pfocusInfo)
 {
-  Scaleform::GFx::ProcessFocusKeyInfo *pfocusKeyInfo; // rbp
-  Scaleform::GFx::MovieImpl *v3; // rdi
-  unsigned __int64 v4; // rsi
-  int v5; // eax
-  Scaleform::GFx::InteractiveObject *v6; // r14
+  __int64 v4; // rsi
+  int CurFocusIdx; // eax
+  Scaleform::GFx::InteractiveObject *pObject; // r14
   Scaleform::GFx::Sprite *v7; // rbx
-  float v8; // xmm2_4
-  float v9; // xmm1_4
-  float v10; // xmm0_4
-  Scaleform::Ptr<Scaleform::GFx::Sprite> result; // [rsp+60h] [rbp+8h]
+  float y2; // xmm2_4
+  float x2; // xmm1_4
+  float y1; // xmm0_4
+  Scaleform::Ptr<Scaleform::GFx::Sprite> result; // [rsp+60h] [rbp+8h] BYREF
   Scaleform::GFx::Sprite *v12; // [rsp+68h] [rbp+10h]
 
-  pfocusKeyInfo = pfocusInfo;
-  v3 = this;
   v4 = (unsigned __int8)this->FocusGroupIndexes[(unsigned __int8)pfocusInfo->KeyboardIndex];
-  if ( pfocusInfo->Initialized )
+  if ( pfocusInfo->Initialized && (this->FocusGroups[v4].TabableArrayStatus & 1) != 0 )
   {
-    if ( this->FocusGroups[v4].TabableArrayStatus & 1 )
+    CurFocusIdx = pfocusInfo->CurFocusIdx;
+    if ( CurFocusIdx >= 0 && CurFocusIdx < SLODWORD(this->FocusGroups[v4].TabableArray.Data.Size) )
     {
-      v5 = pfocusInfo->CurFocusIdx;
-      if ( v5 >= 0 && v5 < SLODWORD(this->FocusGroups[v4].TabableArray.Data.Size) )
+      pObject = this->FocusGroups[v4].TabableArray.Data.Data[pfocusInfo->CurFocusIdx].pObject;
+      Scaleform::WeakPtr<Scaleform::GFx::DisplayObject>::operator Scaleform::Ptr<Scaleform::GFx::DisplayObject>(
+        (Scaleform::WeakPtr<Scaleform::GFx::Sprite> *)&this->FocusGroups[v4].LastFocused,
+        &result);
+      v7 = result.pObject;
+      if ( result.pObject )
       {
-        v6 = this->FocusGroups[v4].TabableArray.Data.Data[pfocusInfo->CurFocusIdx].pObject;
-        Scaleform::WeakPtr<Scaleform::GFx::DisplayObject>::operator Scaleform::Ptr<Scaleform::GFx::DisplayObject>(
-          (Scaleform::WeakPtr<Scaleform::GFx::Sprite> *)&this->FocusGroups[v4].LastFocused,
-          &result);
+        ++result.pObject->RefCount;
         v7 = result.pObject;
-        if ( result.pObject )
-        {
-          ++result.pObject->RefCount;
-          v7 = result.pObject;
-        }
-        v12 = v7;
-        if ( result.pObject )
-          Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&result.pObject->vfptr);
-        if ( v7 != (Scaleform::GFx::Sprite *)v6 )
-        {
-          v3->FocusGroups[v4].LastFocusKeyCode = pfocusKeyInfo->PrevKeyCode;
-          v8 = pfocusKeyInfo->Prev_aRect.y2;
-          v9 = pfocusKeyInfo->Prev_aRect.x2;
-          v10 = pfocusKeyInfo->Prev_aRect.y1;
-          v3->FocusGroups[v4].LastFocusedRect.x1 = pfocusKeyInfo->Prev_aRect.x1;
-          v3->FocusGroups[v4].LastFocusedRect.y1 = v10;
-          v3->FocusGroups[v4].LastFocusedRect.x2 = v9;
-          v3->FocusGroups[v4].LastFocusedRect.y2 = v8;
-          Scaleform::GFx::MovieImpl::QueueSetFocusTo(
-            v3,
-            v6,
-            0i64,
-            (unsigned __int8)pfocusKeyInfo->KeyboardIndex,
-            GFx_FocusMovedByKeyboard,
-            pfocusKeyInfo);
-        }
-        if ( v6
-          && ((unsigned int (__fastcall *)(Scaleform::GFx::InteractiveObject *))v6->vfptr[81].__vecDelDtor)(v6) == 4 )
-        {
-          if ( v3->FocusGroups[v4].FocusRectShown )
-            v3->FocusRectChanged = 1;
-          v3->FocusGroups[v4].FocusRectShown = 0;
-        }
-        else
-        {
-          if ( !v3->FocusGroups[v4].FocusRectShown )
-            v3->FocusRectChanged = 1;
-          v3->FocusGroups[v4].FocusRectShown = 1;
-        }
-        if ( v7 )
-          Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v7->vfptr);
       }
+      v12 = v7;
+      if ( result.pObject )
+        Scaleform::RefCountNTSImpl::Release(result.pObject);
+      if ( v7 != pObject )
+      {
+        this->FocusGroups[v4].LastFocusKeyCode = pfocusInfo->PrevKeyCode;
+        y2 = pfocusInfo->Prev_aRect.y2;
+        x2 = pfocusInfo->Prev_aRect.x2;
+        y1 = pfocusInfo->Prev_aRect.y1;
+        this->FocusGroups[v4].LastFocusedRect.x1 = pfocusInfo->Prev_aRect.x1;
+        this->FocusGroups[v4].LastFocusedRect.y1 = y1;
+        this->FocusGroups[v4].LastFocusedRect.x2 = x2;
+        this->FocusGroups[v4].LastFocusedRect.y2 = y2;
+        Scaleform::GFx::MovieImpl::QueueSetFocusTo(
+          this,
+          pObject,
+          0i64,
+          (unsigned __int8)pfocusInfo->KeyboardIndex,
+          GFx_FocusMovedByKeyboard,
+          pfocusInfo);
+      }
+      if ( pObject
+        && ((unsigned int (__fastcall *)(Scaleform::GFx::InteractiveObject *))pObject->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[81].__vecDelDtor)(pObject) == 4 )
+      {
+        if ( this->FocusGroups[v4].FocusRectShown )
+          this->FocusRectChanged = 1;
+        this->FocusGroups[v4].FocusRectShown = 0;
+      }
+      else
+      {
+        if ( !this->FocusGroups[v4].FocusRectShown )
+          this->FocusRectChanged = 1;
+        this->FocusGroups[v4].FocusRectShown = 1;
+      }
+      if ( v7 )
+        Scaleform::RefCountNTSImpl::Release(v7);
     }
   }
 }
 
 // File Line: 4316
 // RVA: 0x909820
-void __fastcall Scaleform::GFx::MovieImpl::SetModalClip(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::Sprite *pmovie, unsigned int controllerIdx)
+void __fastcall Scaleform::GFx::MovieImpl::SetModalClip(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::Sprite *pmovie,
+        unsigned int controllerIdx)
 {
   char *v3; // rsi
   _QWORD *v4; // rbx
@@ -6912,7 +6724,7 @@ void __fastcall Scaleform::GFx::MovieImpl::SetModalClip(Scaleform::GFx::MovieImp
   bool v6; // zf
   Scaleform::GFx::ASStringNode *v7; // rcx
   Scaleform::GFx::ASStringNode *v8; // rcx
-  Scaleform::GFx::CharacterHandle *v9; // rdi
+  Scaleform::GFx::CharacterHandle *pObject; // rdi
   _QWORD *v10; // rbx
   Scaleform::GFx::ASStringNode *v11; // rcx
   Scaleform::GFx::ASStringNode *v12; // rcx
@@ -6921,16 +6733,13 @@ void __fastcall Scaleform::GFx::MovieImpl::SetModalClip(Scaleform::GFx::MovieImp
   v3 = (char *)this + 96 * (unsigned __int8)this->FocusGroupIndexes[controllerIdx];
   if ( pmovie )
   {
-    v9 = pmovie->pNameHandle.pObject;
-    if ( v9
-      || (v9 = Scaleform::GFx::DisplayObject::CreateCharacterHandle((Scaleform::GFx::DisplayObject *)&pmovie->vfptr)) != 0i64 )
-    {
-      ++v9->RefCount;
-    }
+    pObject = pmovie->pNameHandle.pObject;
+    if ( pObject || (pObject = Scaleform::GFx::DisplayObject::CreateCharacterHandle(pmovie)) != 0i64 )
+      ++pObject->RefCount;
     v10 = (_QWORD *)*((_QWORD *)v3 + 2458);
     if ( v10 )
     {
-      if ( --*(_DWORD *)v10 <= 0 )
+      if ( (int)--*(_DWORD *)v10 <= 0 )
       {
         v11 = (Scaleform::GFx::ASStringNode *)v10[4];
         v6 = v11->RefCount-- == 1;
@@ -6947,14 +6756,14 @@ void __fastcall Scaleform::GFx::MovieImpl::SetModalClip(Scaleform::GFx::MovieImp
         Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v10);
       }
     }
-    *((_QWORD *)v3 + 2458) = v9;
+    *((_QWORD *)v3 + 2458) = pObject;
   }
   else
   {
     v4 = (_QWORD *)*((_QWORD *)v3 + 2458);
     if ( v4 )
     {
-      if ( --*(_DWORD *)v4 <= 0 )
+      if ( (int)--*(_DWORD *)v4 <= 0 )
       {
         v5 = (Scaleform::GFx::ASStringNode *)v4[4];
         v6 = v5->RefCount-- == 1;
@@ -6977,39 +6786,43 @@ void __fastcall Scaleform::GFx::MovieImpl::SetModalClip(Scaleform::GFx::MovieImp
 
 // File Line: 4326
 // RVA: 0x8DB0F0
-Scaleform::RefCountNTSImpl *__fastcall Scaleform::GFx::MovieImpl::GetModalClip(Scaleform::GFx::MovieImpl *this, unsigned int controllerIdx)
+Scaleform::GFx::Sprite *__fastcall Scaleform::GFx::MovieImpl::GetModalClip(
+        Scaleform::GFx::MovieImpl *this,
+        unsigned int controllerIdx)
 {
-  Scaleform::GFx::CharacterHandle *v2; // rdx
-  Scaleform::RefCountNTSImpl *v3; // rbx
+  Scaleform::GFx::CharacterHandle *pObject; // rdx
+  Scaleform::RefCountNTSImpl *pCharacter; // rbx
 
-  v2 = this->FocusGroups[(unsigned __int8)this->FocusGroupIndexes[controllerIdx]].ModalClip.pObject;
-  if ( !v2 )
+  pObject = this->FocusGroups[(unsigned __int8)this->FocusGroupIndexes[controllerIdx]].ModalClip.pObject;
+  if ( !pObject )
     return 0i64;
-  v3 = (Scaleform::RefCountNTSImpl *)&v2->pCharacter->vfptr;
-  if ( v3
-    || (v3 = (Scaleform::RefCountNTSImpl *)this->pASMovieRoot.pObject->vfptr[8].__vecDelDtor(
-                                             (Scaleform::RefCountImplCore *)this->pASMovieRoot.pObject,
-                                             (unsigned int)&v2->NamePath)) != 0i64 )
+  pCharacter = pObject->pCharacter;
+  if ( pCharacter
+    || (pCharacter = (Scaleform::RefCountNTSImpl *)this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[8].__vecDelDtor(
+                                                     this->pASMovieRoot.pObject,
+                                                     &pObject->NamePath)) != 0i64 )
   {
-    ++v3->RefCount;
+    ++pCharacter->RefCount;
   }
-  if ( !v3 )
+  if ( !pCharacter )
     return 0i64;
-  Scaleform::RefCountNTSImpl::Release(v3);
-  return v3;
+  Scaleform::RefCountNTSImpl::Release(pCharacter);
+  return (Scaleform::GFx::Sprite *)pCharacter;
 }
 
 // File Line: 4332
 // RVA: 0x8D6510
-__int64 __fastcall Scaleform::GFx::MovieImpl::GetControllerMaskByFocusGroup(Scaleform::GFx::MovieImpl *this, unsigned int focusGroupIndex)
+__int64 __fastcall Scaleform::GFx::MovieImpl::GetControllerMaskByFocusGroup(
+        Scaleform::GFx::MovieImpl *this,
+        unsigned int focusGroupIndex)
 {
-  unsigned int v2; // er9
+  unsigned int v2; // r9d
   char *v3; // r10
-  int v4; // er8
-  signed __int64 v5; // r11
-  int v6; // er8
-  int v7; // er8
-  int v8; // er8
+  int v4; // r8d
+  __int64 v5; // r11
+  int v6; // r8d
+  int v7; // r8d
+  int v8; // r8d
 
   v2 = 0;
   v3 = &this->FocusGroupIndexes[1];
@@ -7040,29 +6853,28 @@ __int64 __fastcall Scaleform::GFx::MovieImpl::GetControllerMaskByFocusGroup(Scal
 // RVA: 0x916D10
 void __fastcall Scaleform::GFx::MovieImpl::UpdateFocusRectRenderNodes(Scaleform::GFx::MovieImpl *this)
 {
-  Scaleform::GFx::MovieImpl *v1; // r14
-  Scaleform::Render::TreeContainer *v2; // rbx
-  Scaleform::Render::TreeNode *v3; // rbx
-  Scaleform::Render::ContextImpl::Entry *v4; // rcx
+  Scaleform::Render::TreeContainer *pObject; // rbx
+  Scaleform::Render::TreeContainer *v3; // rbx
+  Scaleform::Render::TreeContainer *v4; // rcx
   bool v5; // zf
-  signed __int64 v6; // rax
-  signed __int64 v7; // r13
+  __int64 Size; // rax
+  __int64 v7; // r13
   int v8; // edi
-  signed __int64 v9; // r12
+  __int64 v9; // r12
   Scaleform::GFx::Sprite *v10; // rbx
-  Scaleform::GFx::DisplayObjectBase *v11; // rcx
+  Scaleform::GFx::DisplayObjectBase *pParent; // rcx
   Scaleform::Render::Matrix3x4<float> *v12; // rax
   float v13; // xmm0_4
   float v14; // xmm1_4
   float v15; // xmm2_4
   float v16; // xmm3_4
-  unsigned int v17; // xmm4_4
-  unsigned int v18; // xmm5_4
-  unsigned int v19; // xmm6_4
-  unsigned int v20; // xmm7_4
-  unsigned int v21; // xmm8_4
-  unsigned int v22; // xmm9_4
-  unsigned int v23; // xmm10_4
+  float v17; // xmm4_4
+  float v18; // xmm5_4
+  float v19; // xmm6_4
+  float v20; // xmm7_4
+  float v21; // xmm8_4
+  float v22; // xmm9_4
+  float v23; // xmm10_4
   float v24; // xmm11_4
   float *v25; // rax
   float v26; // xmm0_4
@@ -7070,64 +6882,63 @@ void __fastcall Scaleform::GFx::MovieImpl::UpdateFocusRectRenderNodes(Scaleform:
   float v28; // xmm8_4
   float v29; // xmm9_4
   float v30; // xmm10_4
-  __int64 v31; // rcx
+  Scaleform::MemoryHeap *v31; // rcx
   Scaleform::Render::ShapeDataFloat *v32; // rax
   Scaleform::Render::ShapeDataFloatTempl<Scaleform::Array<unsigned char,2,Scaleform::ArrayDefaultPolicy> > *v33; // rax
   Scaleform::Render::ShapeDataFloatTempl<Scaleform::Array<unsigned char,2,Scaleform::ArrayDefaultPolicy> > *v34; // rsi
-  signed __int64 v35; // rcx
-  signed __int64 v36; // rdx
-  __int64 v37; // rdx
-  float v38; // xmm1_4
+  __int64 v35; // rcx
+  __int64 v36; // rdx
+  Scaleform::MemoryHeap *v37; // rdx
+  float StartX; // xmm1_4
   float v39; // xmm1_4
   float v40; // xmm1_4
   float v41; // xmm7_4
   float v42; // xmm1_4
-  __int64 v43; // rcx
+  Scaleform::MemoryHeap *v43; // rcx
   Scaleform::Render::ShapeMeshProvider *v44; // rax
-  Scaleform::Render::ShapeMeshProvider *v45; // rax
-  Scaleform::Render::ShapeMeshProvider *v46; // r15
+  Scaleform::Render::ContextImpl::EntryDataVtbl *v45; // rax
+  Scaleform::Render::ContextImpl::EntryDataVtbl *v46; // r15
   Scaleform::Render::TreeShape *v47; // rdi
-  Scaleform::Render::ContextImpl::Entry *v48; // rcx
-  __int128 Dst; // [rsp+20h] [rbp-A0h]
-  __int128 v50; // [rsp+30h] [rbp-90h]
-  Scaleform::Render::Matrix3x4<float> v51; // [rsp+40h] [rbp-80h]
-  Scaleform::Render::Matrix3x4<float> m1; // [rsp+70h] [rbp-50h]
+  Scaleform::Render::TreeShape *v48; // rcx
+  Scaleform::Render::Matrix3x4<float> Dst; // [rsp+20h] [rbp-A0h] BYREF
+  Scaleform::Render::Rect<float> v50; // [rsp+50h] [rbp-70h] BYREF
+  Scaleform::Render::Rect<float> v51; // [rsp+60h] [rbp-60h] BYREF
+  Scaleform::Render::Matrix3x4<float> m1; // [rsp+70h] [rbp-50h] BYREF
   Scaleform::Render::ShapeDataFloatTempl<Scaleform::Array<unsigned char,2,Scaleform::ArrayDefaultPolicy> > *v53; // [rsp+A0h] [rbp-20h]
   Scaleform::Render::TreeShape *v54; // [rsp+A8h] [rbp-18h]
   __int64 v55; // [rsp+B0h] [rbp-10h]
   unsigned int v56; // [rsp+B8h] [rbp-8h]
   __int64 v57; // [rsp+C0h] [rbp+0h]
-  Scaleform::Render::ShapeMeshProvider *v58; // [rsp+C8h] [rbp+8h]
+  Scaleform::Render::ContextImpl::EntryDataVtbl *v58; // [rsp+C8h] [rbp+8h]
   int v59; // [rsp+190h] [rbp+D0h]
-  Scaleform::Ptr<Scaleform::GFx::Sprite> result; // [rsp+198h] [rbp+D8h]
+  Scaleform::Ptr<Scaleform::GFx::Sprite> result; // [rsp+198h] [rbp+D8h] BYREF
   Scaleform::GFx::Sprite *v61; // [rsp+1A0h] [rbp+E0h]
-  __int64 v62; // [rsp+1A8h] [rbp+E8h]
+  Scaleform::MemoryHeap *pHeap; // [rsp+1A8h] [rbp+E8h]
 
   v55 = -2i64;
-  v1 = this;
   if ( this->pMainMovie )
   {
-    v2 = this->FocusRectContainerNode.pObject;
-    if ( v2 )
+    pObject = this->FocusRectContainerNode.pObject;
+    if ( pObject )
     {
-      v6 = Scaleform::Render::TreeContainer::GetSize(this->FocusRectContainerNode.pObject);
-      Scaleform::Render::TreeContainer::Remove(v2, 0i64, v6);
+      Size = Scaleform::Render::TreeContainer::GetSize(this->FocusRectContainerNode.pObject);
+      Scaleform::Render::TreeContainer::Remove(pObject, 0i64, Size);
     }
     else
     {
-      v3 = (Scaleform::Render::TreeNode *)Scaleform::Render::ContextImpl::Context::CreateEntry<Scaleform::Render::TreeContainer>(&this->RenderContext);
-      v4 = (Scaleform::Render::ContextImpl::Entry *)&v1->FocusRectContainerNode.pObject->0;
+      v3 = Scaleform::Render::ContextImpl::Context::CreateEntry<Scaleform::Render::TreeContainer>(&this->RenderContext);
+      v4 = this->FocusRectContainerNode.pObject;
       if ( v4 )
       {
         v5 = v4->RefCount-- == 1;
         if ( v5 )
           Scaleform::Render::ContextImpl::Entry::destroyHelper(v4);
       }
-      v1->FocusRectContainerNode.pObject = (Scaleform::Render::TreeContainer *)v3;
-      Scaleform::Render::TreeContainer::Add((Scaleform::Render::TreeContainer *)&v1->pRenderRoot.pObject->0, v3);
+      this->FocusRectContainerNode.pObject = v3;
+      Scaleform::Render::TreeContainer::Add(this->pRenderRoot.pObject, v3);
     }
     v7 = 0i64;
-    if ( v1->FocusGroupsCnt )
+    if ( this->FocusGroupsCnt )
     {
       v8 = 0;
       v59 = 0;
@@ -7135,7 +6946,7 @@ void __fastcall Scaleform::GFx::MovieImpl::UpdateFocusRectRenderNodes(Scaleform:
       {
         v9 = v7;
         Scaleform::WeakPtr<Scaleform::GFx::DisplayObject>::operator Scaleform::Ptr<Scaleform::GFx::DisplayObject>(
-          (Scaleform::WeakPtr<Scaleform::GFx::Sprite> *)&v1->FocusGroups[v7].LastFocused,
+          (Scaleform::WeakPtr<Scaleform::GFx::Sprite> *)&this->FocusGroups[v7].LastFocused,
           &result);
         v10 = result.pObject;
         if ( result.pObject )
@@ -7145,95 +6956,96 @@ void __fastcall Scaleform::GFx::MovieImpl::UpdateFocusRectRenderNodes(Scaleform:
         }
         v61 = v10;
         if ( result.pObject )
-          Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&result.pObject->vfptr);
+          Scaleform::RefCountNTSImpl::Release(result.pObject);
         if ( v10
-          && v1->FocusGroups[v9].FocusRectShown
-          && ((unsigned __int8 (__fastcall *)(Scaleform::GFx::Sprite *))v10->vfptr[88].__vecDelDtor)(v10) )
+          && this->FocusGroups[v9].FocusRectShown
+          && ((unsigned __int8 (__fastcall *)(Scaleform::GFx::Sprite *))v10->Scaleform::GFx::DisplayObjContainer::Scaleform::GFx::InteractiveObject::Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[88].__vecDelDtor)(v10) )
         {
-          v10->vfptr[93].__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v10->vfptr, (unsigned int)v51.M[2]);
-          if ( v51.M[2][2] == v51.M[2][0] && v51.M[2][3] == v51.M[2][1] )
+          v10->Scaleform::GFx::DisplayObjContainer::Scaleform::GFx::InteractiveObject::Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[93].__vecDelDtor(
+            v10,
+            (unsigned int)&v51);
+          if ( v51.x2 == v51.x1 && v51.y2 == v51.y1 )
           {
-            Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v10->vfptr);
+            Scaleform::RefCountNTSImpl::Release(v10);
             return;
           }
-          memset(&Dst, 0, 0x30ui64);
-          LODWORD(Dst) = 1065353216;
-          DWORD1(v50) = 1065353216;
-          v51.M[0][2] = 1.0;
-          v11 = v10->pParentChar;
-          if ( v11 )
+          memset(&Dst, 0, sizeof(Dst));
+          Dst.M[0][0] = 1.0;
+          Dst.M[1][1] = 1.0;
+          Dst.M[2][2] = 1.0;
+          pParent = v10->pParent;
+          if ( pParent )
           {
-            Scaleform::GFx::DisplayObjectBase::GetWorldMatrix3D(v11, (Scaleform::Render::Matrix3x4<float> *)&Dst);
-            v12 = (Scaleform::Render::Matrix3x4<float> *)((__int64 (__fastcall *)(Scaleform::GFx::Sprite *))v10->vfptr[4].__vecDelDtor)(v10);
-            *(_OWORD *)&m1.M[0][0] = Dst;
-            *(_OWORD *)&m1.M[1][0] = v50;
-            *(_OWORD *)&m1.M[2][0] = *(_OWORD *)&v51.M[0][0];
-            Scaleform::Render::Matrix3x4<float>::MultiplyMatrix((Scaleform::Render::Matrix3x4<float> *)&Dst, &m1, v12);
-            v13 = v51.M[0][3];
-            v14 = v51.M[0][2];
-            v15 = v51.M[0][1];
-            v16 = v51.M[0][0];
-            v17 = HIDWORD(v50);
-            v18 = DWORD2(v50);
-            v19 = DWORD1(v50);
-            v20 = v50;
-            v21 = HIDWORD(Dst);
-            v22 = DWORD2(Dst);
-            v23 = DWORD1(Dst);
-            LODWORD(v24) = Dst;
+            Scaleform::GFx::DisplayObjectBase::GetWorldMatrix3D(pParent, &Dst);
+            v12 = (Scaleform::Render::Matrix3x4<float> *)((__int64 (__fastcall *)(Scaleform::GFx::Sprite *))v10->Scaleform::GFx::DisplayObjContainer::Scaleform::GFx::InteractiveObject::Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[4].__vecDelDtor)(v10);
+            m1 = Dst;
+            Scaleform::Render::Matrix3x4<float>::MultiplyMatrix(&Dst, &m1, v12);
+            v13 = Dst.M[2][3];
+            v14 = Dst.M[2][2];
+            v15 = Dst.M[2][1];
+            v16 = Dst.M[2][0];
+            v17 = Dst.M[1][3];
+            v18 = Dst.M[1][2];
+            v19 = Dst.M[1][1];
+            v20 = Dst.M[1][0];
+            v21 = Dst.M[0][3];
+            v22 = Dst.M[0][2];
+            v23 = Dst.M[0][1];
+            v24 = Dst.M[0][0];
           }
           else
           {
-            v25 = (float *)((__int64 (__fastcall *)(Scaleform::GFx::Sprite *))v10->vfptr[4].__vecDelDtor)(v10);
+            v25 = (float *)((__int64 (__fastcall *)(Scaleform::GFx::Sprite *))v10->Scaleform::GFx::DisplayObjContainer::Scaleform::GFx::InteractiveObject::Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[4].__vecDelDtor)(v10);
             v24 = *v25;
-            *(float *)&Dst = *v25;
-            v23 = *((_DWORD *)v25 + 1);
-            *((float *)&Dst + 1) = v25[1];
-            v22 = *((_DWORD *)v25 + 2);
-            *((float *)&Dst + 2) = v25[2];
-            v21 = *((_DWORD *)v25 + 3);
-            *((float *)&Dst + 3) = v25[3];
-            v20 = *((_DWORD *)v25 + 4);
-            *(float *)&v50 = v25[4];
-            v19 = *((_DWORD *)v25 + 5);
-            *((float *)&v50 + 1) = v25[5];
-            v18 = *((_DWORD *)v25 + 6);
-            *((float *)&v50 + 2) = v25[6];
-            v17 = *((_DWORD *)v25 + 7);
-            *((float *)&v50 + 3) = v25[7];
+            Dst.M[0][0] = *v25;
+            v23 = v25[1];
+            Dst.M[0][1] = v23;
+            v22 = v25[2];
+            Dst.M[0][2] = v22;
+            v21 = v25[3];
+            Dst.M[0][3] = v21;
+            v20 = v25[4];
+            Dst.M[1][0] = v20;
+            v19 = v25[5];
+            Dst.M[1][1] = v19;
+            v18 = v25[6];
+            Dst.M[1][2] = v18;
+            v17 = v25[7];
+            Dst.M[1][3] = v17;
             v16 = v25[8];
-            v51.M[0][0] = v25[8];
+            Dst.M[2][0] = v16;
             v15 = v25[9];
-            v51.M[0][1] = v25[9];
+            Dst.M[2][1] = v15;
             v14 = v25[10];
-            v51.M[0][2] = v25[10];
+            Dst.M[2][2] = v14;
             v13 = v25[11];
-            v51.M[0][3] = v25[11];
+            Dst.M[2][3] = v13;
           }
-          *(_QWORD *)&v51.M[0][0] = __PAIR__(v23, LODWORD(v24));
-          *(_QWORD *)&v51.M[0][2] = __PAIR__(v21, v22);
-          *(_QWORD *)&v51.M[1][0] = __PAIR__(v19, v20);
-          *(_QWORD *)&v51.M[1][2] = __PAIR__(v17, v18);
-          *(_QWORD *)&v51.M[2][0] = __PAIR__(LODWORD(v15), LODWORD(v16));
-          *(_QWORD *)&v51.M[2][2] = __PAIR__(LODWORD(v13), LODWORD(v14));
+          *(_QWORD *)&Dst.M[2][0] = __PAIR64__(LODWORD(v23), LODWORD(v24));
+          *(_QWORD *)&Dst.M[2][2] = __PAIR64__(LODWORD(v21), LODWORD(v22));
+          v50.x1 = v20;
+          v50.y1 = v19;
+          v50.x2 = v18;
+          v50.y2 = v17;
+          v51.x1 = v16;
+          v51.y1 = v15;
+          v51.x2 = v14;
+          v51.y2 = v13;
           Scaleform::Render::Matrix3x4<float>::EncloseTransform(
-            &v51,
-            (Scaleform::Render::Rect<float> *)v51.M[1],
-            (Scaleform::Render::Rect<float> *)v51.M[2]);
-          v26 = (float)(signed int)v7 * 20.0;
-          v27 = v51.M[1][0] - v26;
-          v51.M[1][0] = v51.M[1][0] - v26;
-          v28 = v51.M[1][2] + v26;
-          v51.M[1][2] = v51.M[1][2] + v26;
-          v29 = v51.M[1][1] - v26;
-          v51.M[1][1] = v51.M[1][1] - v26;
-          v30 = v51.M[1][3] + v26;
-          v51.M[1][3] = v51.M[1][3] + v26;
-          v62 = (__int64)v1->RenderContext.pHeap;
-          v32 = (Scaleform::Render::ShapeDataFloat *)(*(__int64 (__fastcall **)(__int64, signed __int64, _QWORD))(*(_QWORD *)v62 + 80i64))(
-                                                       v31,
-                                                       128i64,
-                                                       0i64);
+            (Scaleform::Render::Matrix3x4<float> *)Dst.M[2],
+            &v50,
+            &v51);
+          v26 = (float)(int)v7 * 20.0;
+          v27 = v50.x1 - v26;
+          v50.x1 = v50.x1 - v26;
+          v28 = v50.x2 + v26;
+          v50.x2 = v50.x2 + v26;
+          v29 = v50.y1 - v26;
+          v50.y1 = v50.y1 - v26;
+          v30 = v50.y2 + v26;
+          v50.y2 = v50.y2 + v26;
+          pHeap = this->RenderContext.pHeap;
+          v32 = (Scaleform::Render::ShapeDataFloat *)pHeap->vfptr->Alloc(v31, 128ui64, 0i64);
           *(_QWORD *)&m1.M[0][0] = v32;
           if ( v32 )
           {
@@ -7248,19 +7060,19 @@ void __fastcall Scaleform::GFx::MovieImpl::UpdateFocusRectRenderNodes(Scaleform:
           v57 = 0i64;
           v56 = v8 ^ 0xFFFFFF00 | 0xFF000000;
           Scaleform::ArrayDataBase<Scaleform::Render::FillStyleType,Scaleform::AllocatorLH<Scaleform::Render::FillStyleType,2>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
-            (Scaleform::ArrayDataBase<Scaleform::Render::FillStyleType,Scaleform::AllocatorLH<Scaleform::Render::FillStyleType,2>,Scaleform::ArrayDefaultPolicy> *)&v34->Fills.Data.Data,
+            &v34->Fills.Data,
             &v34->Fills,
             v34->Fills.Data.Size + 1);
           v35 = 16 * v34->Fills.Data.Size;
-          v36 = (signed __int64)&v34->Fills.Data.Data[-1];
+          v36 = (__int64)&v34->Fills.Data.Data[-1];
           v5 = v35 + v36 == 0;
-          v37 = v35 + v36;
-          v62 = v37;
+          v37 = (Scaleform::MemoryHeap *)(v35 + v36);
+          pHeap = v37;
           *(_QWORD *)&m1.M[0][0] = v37;
           if ( !v5 )
           {
-            *(_DWORD *)v37 = v8 ^ 0xFFFFFF00 | 0xFF000000;
-            *(_QWORD *)(v37 + 8) = 0i64;
+            LODWORD(v37->vfptr) = v8 ^ 0xFFFFFF00 | 0xFF000000;
+            v37->pPrev = 0i64;
           }
           Scaleform::Render::ShapeDataFloatTempl<Scaleform::Array<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::StartPath(
             v34,
@@ -7283,11 +7095,11 @@ void __fastcall Scaleform::GFx::MovieImpl::UpdateFocusRectRenderNodes(Scaleform:
             v34,
             v27,
             v29 + 20.0);
-          v38 = v34->StartX;
-          if ( v38 != v34->LastX || v34->StartY != v34->LastY )
+          StartX = v34->StartX;
+          if ( StartX != v34->LastX || v34->StartY != v34->LastY )
             Scaleform::Render::ShapeDataFloatTempl<Scaleform::Array<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::LineTo(
               v34,
-              v38,
+              StartX,
               v34->StartY);
           Scaleform::Render::ShapeDataFloatTempl<Scaleform::Array<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::EndPath(v34);
           Scaleform::Render::ShapeDataFloatTempl<Scaleform::Array<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::StartPath(
@@ -7376,18 +7188,12 @@ void __fastcall Scaleform::GFx::MovieImpl::UpdateFocusRectRenderNodes(Scaleform:
               v34->StartY);
           Scaleform::Render::ShapeDataFloatTempl<Scaleform::Array<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::EndPath(v34);
           Scaleform::Render::ShapeDataFloatTempl<Scaleform::Array<unsigned char,2,Scaleform::ArrayDefaultPolicy>>::EndShape(v34);
-          v62 = (__int64)v1->RenderContext.pHeap;
-          v44 = (Scaleform::Render::ShapeMeshProvider *)(*(__int64 (__fastcall **)(__int64, signed __int64, _QWORD))(*(_QWORD *)v62 + 80i64))(
-                                                          v43,
-                                                          144i64,
-                                                          0i64);
+          pHeap = this->RenderContext.pHeap;
+          v44 = (Scaleform::Render::ShapeMeshProvider *)pHeap->vfptr->Alloc(v43, 144ui64, 0i64);
           *(_QWORD *)&m1.M[0][0] = v44;
           if ( v44 )
           {
-            Scaleform::Render::ShapeMeshProvider::ShapeMeshProvider(
-              v44,
-              (Scaleform::Render::ShapeDataInterface *)&v34->vfptr,
-              0i64);
+            Scaleform::Render::ShapeMeshProvider::ShapeMeshProvider(v44, v34, 0i64);
             v46 = v45;
           }
           else
@@ -7395,42 +7201,41 @@ void __fastcall Scaleform::GFx::MovieImpl::UpdateFocusRectRenderNodes(Scaleform:
             v46 = 0i64;
           }
           v58 = v46;
-          v47 = (Scaleform::Render::TreeShape *)Scaleform::Render::ContextImpl::Context::CreateEntry<Scaleform::Render::TreeShape>(&v1->RenderContext);
+          v47 = Scaleform::Render::ContextImpl::Context::CreateEntry<Scaleform::Render::TreeShape>(&this->RenderContext);
           v54 = v47;
           Scaleform::Render::TreeShape::SetShape(v47, v46);
-          Scaleform::Render::TreeContainer::Add(
-            v1->FocusRectContainerNode.pObject,
-            (Scaleform::Render::TreeNode *)&v47->0);
+          Scaleform::Render::TreeContainer::Add(this->FocusRectContainerNode.pObject, v47);
           if ( v47 )
             ++v47->RefCount;
-          v48 = (Scaleform::Render::ContextImpl::Entry *)&v1->FocusGroups[v9].FocusRectNode.pObject->0;
+          v48 = this->FocusGroups[v9].FocusRectNode.pObject;
           if ( v48 )
           {
             v5 = v48->RefCount-- == 1;
             if ( v5 )
               Scaleform::Render::ContextImpl::Entry::destroyHelper(v48);
           }
-          v1->FocusGroups[v9].FocusRectNode.pObject = v47;
+          this->FocusGroups[v9].FocusRectNode.pObject = v47;
           if ( v47 )
           {
             v5 = v47->RefCount-- == 1;
             if ( v5 )
-              Scaleform::Render::ContextImpl::Entry::destroyHelper((Scaleform::Render::ContextImpl::Entry *)&v47->0);
+              Scaleform::Render::ContextImpl::Entry::destroyHelper(v47);
           }
           if ( v46 )
-            ((void (*)(void))v46->vfptr->Release)();
+            (*((void (__fastcall **)(void (__fastcall **)(Scaleform::Render::ContextImpl::EntryData *, void *)))v46->CopyTo
+             + 2))(&v46->CopyTo);
           Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v34);
           v8 = v59;
         }
         if ( v10 )
-          Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v10->vfptr);
+          Scaleform::RefCountNTSImpl::Release(v10);
         v7 = (unsigned int)(v7 + 1);
         v8 += 1081552;
         v59 = v8;
       }
-      while ( (unsigned int)v7 < v1->FocusGroupsCnt );
+      while ( (unsigned int)v7 < this->FocusGroupsCnt );
     }
-    v1->FocusRectChanged = 0;
+    this->FocusRectChanged = 0;
   }
 }
 
@@ -7438,102 +7243,94 @@ void __fastcall Scaleform::GFx::MovieImpl::UpdateFocusRectRenderNodes(Scaleform:
 // RVA: 0x8E32E0
 void __fastcall Scaleform::GFx::MovieImpl::HideFocusRect(Scaleform::GFx::MovieImpl *this, unsigned int controllerIdx)
 {
-  unsigned int v2; // ebp
-  Scaleform::GFx::MovieImpl *v3; // rsi
   __int64 v4; // rdi
-  Scaleform::GFx::Sprite *v5; // rbx
-  Scaleform::Ptr<Scaleform::GFx::Sprite> result; // [rsp+50h] [rbp+8h]
+  Scaleform::GFx::Sprite *pObject; // rbx
+  Scaleform::Ptr<Scaleform::GFx::Sprite> result; // [rsp+50h] [rbp+8h] BYREF
   Scaleform::GFx::Sprite *v7; // [rsp+60h] [rbp+18h]
 
-  v2 = controllerIdx;
-  v3 = this;
   v4 = (unsigned __int8)this->FocusGroupIndexes[controllerIdx];
   if ( this->FocusGroups[v4].FocusRectShown )
   {
     Scaleform::WeakPtr<Scaleform::GFx::DisplayObject>::operator Scaleform::Ptr<Scaleform::GFx::DisplayObject>(
       (Scaleform::WeakPtr<Scaleform::GFx::Sprite> *)&this->FocusGroups[v4].LastFocused,
       &result);
-    v5 = result.pObject;
+    pObject = result.pObject;
     if ( result.pObject )
     {
       ++result.pObject->RefCount;
-      v5 = result.pObject;
+      pObject = result.pObject;
     }
-    v7 = v5;
+    v7 = pObject;
     if ( result.pObject )
-      Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&result.pObject->vfptr);
-    if ( v5
-      && v5->pParent
-      && !((unsigned __int8 (__fastcall *)(Scaleform::GFx::Sprite *, _QWORD, _QWORD, signed __int64, signed __int64))v5->vfptr[92].__vecDelDtor)(
-            v5,
+      Scaleform::RefCountNTSImpl::Release(result.pObject);
+    if ( pObject
+      && pObject->pParent
+      && !((unsigned __int8 (__fastcall *)(Scaleform::GFx::Sprite *, _QWORD, _QWORD, __int64, __int64))pObject->Scaleform::GFx::DisplayObjContainer::Scaleform::GFx::InteractiveObject::Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[92].__vecDelDtor)(
+            pObject,
             0i64,
-            v2,
+            controllerIdx,
             2i64,
             -2i64) )
     {
-      Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v5->vfptr);
+      Scaleform::RefCountNTSImpl::Release(pObject);
       return;
     }
-    if ( v5 )
-      Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v5->vfptr);
+    if ( pObject )
+      Scaleform::RefCountNTSImpl::Release(pObject);
   }
-  v3->FocusGroups[v4].FocusRectShown = 0;
-  v3->FocusRectChanged = 1;
+  this->FocusGroups[v4].FocusRectShown = 0;
+  this->FocusRectChanged = 1;
 }
 
 // File Line: 4448
 // RVA: 0x907520
-__int64 __fastcall Scaleform::GFx::MovieImpl::SetFocusTo(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::InteractiveObject *ch, unsigned int controllerIdx, Scaleform::GFx::FocusMovedType fmt)
+__int64 __fastcall Scaleform::GFx::MovieImpl::SetFocusTo(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::Sprite *ch,
+        unsigned int controllerIdx,
+        Scaleform::GFx::FocusMovedType fmt)
 {
-  Scaleform::GFx::FocusMovedType v4; // er14
-  unsigned int v5; // esi
-  Scaleform::GFx::InteractiveObject *v6; // rdi
-  Scaleform::GFx::MovieImpl *v7; // rbp
-  Scaleform::GFx::Sprite *v8; // rbx
+  Scaleform::GFx::Sprite *pObject; // rbx
   unsigned __int8 v9; // di
-  Scaleform::Ptr<Scaleform::GFx::Sprite> result; // [rsp+50h] [rbp+8h]
+  Scaleform::Ptr<Scaleform::GFx::Sprite> result; // [rsp+50h] [rbp+8h] BYREF
   Scaleform::GFx::Sprite *v12; // [rsp+58h] [rbp+10h]
 
-  v4 = fmt;
-  v5 = controllerIdx;
-  v6 = ch;
-  v7 = this;
   Scaleform::WeakPtr<Scaleform::GFx::DisplayObject>::operator Scaleform::Ptr<Scaleform::GFx::DisplayObject>(
     (Scaleform::WeakPtr<Scaleform::GFx::Sprite> *)&this->FocusGroups[(unsigned __int8)this->FocusGroupIndexes[controllerIdx]].LastFocused,
     &result);
-  v8 = result.pObject;
+  pObject = result.pObject;
   if ( result.pObject )
   {
     ++result.pObject->RefCount;
-    v8 = result.pObject;
+    pObject = result.pObject;
   }
-  v12 = v8;
+  v12 = pObject;
   if ( result.pObject )
-    Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&result.pObject->vfptr);
-  if ( v8 == (Scaleform::GFx::Sprite *)v6
-    || (v7->FocusRectChanged = 1, v8)
-    && v8->pParent
-    && !((unsigned __int8 (__fastcall *)(Scaleform::GFx::Sprite *, Scaleform::GFx::InteractiveObject *, _QWORD, _QWORD, signed __int64))v8->vfptr[92].__vecDelDtor)(
-          v8,
-          v6,
-          v5,
-          (unsigned int)v4,
+    Scaleform::RefCountNTSImpl::Release(result.pObject);
+  if ( pObject == ch
+    || (this->FocusRectChanged = 1, pObject)
+    && pObject->pParent
+    && !((unsigned __int8 (__fastcall *)(Scaleform::GFx::Sprite *, Scaleform::GFx::InteractiveObject *, _QWORD, _QWORD, __int64))pObject->Scaleform::GFx::DisplayObjContainer::Scaleform::GFx::InteractiveObject::Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[92].__vecDelDtor)(
+          pObject,
+          ch,
+          controllerIdx,
+          (unsigned int)fmt,
           -2i64) )
   {
     v9 = 0;
   }
   else
   {
-    Scaleform::GFx::MovieImpl::TransferFocus(v7, v6, v5, v4);
-    if ( v6 )
-      ((void (__fastcall *)(Scaleform::GFx::InteractiveObject *, _QWORD, _QWORD))v6->vfptr[91].__vecDelDtor)(
-        v6,
-        v5,
-        (unsigned int)v4);
+    Scaleform::GFx::MovieImpl::TransferFocus(this, ch, controllerIdx, fmt);
+    if ( ch )
+      ((void (__fastcall *)(Scaleform::GFx::Sprite *, _QWORD, _QWORD))ch->Scaleform::GFx::DisplayObjContainer::Scaleform::GFx::InteractiveObject::Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[91].__vecDelDtor)(
+        ch,
+        controllerIdx,
+        (unsigned int)fmt);
     v9 = 1;
   }
-  if ( v8 )
-    Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v8->vfptr);
+  if ( pObject )
+    Scaleform::RefCountNTSImpl::Release(pObject);
   return v9;
 }
 
@@ -7546,209 +7343,205 @@ void __fastcall Scaleform::GFx::MovieImpl::ResetInputFocus(Scaleform::GFx::Movie
 
 // File Line: 4495
 // RVA: 0x8F5780
-__int64 __fastcall Scaleform::GFx::MovieImpl::QueueSetFocusTo(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::InteractiveObject *ch, Scaleform::GFx::InteractiveObject *ptopMostCh, unsigned int controllerIdx, Scaleform::GFx::FocusMovedType fmt, Scaleform::GFx::ProcessFocusKeyInfo *pfocusKeyInfo)
+__int64 __fastcall Scaleform::GFx::MovieImpl::QueueSetFocusTo(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::Sprite *ch,
+        Scaleform::GFx::InteractiveObject *ptopMostCh,
+        unsigned int controllerIdx,
+        Scaleform::GFx::FocusMovedType fmt,
+        Scaleform::GFx::ProcessFocusKeyInfo *pfocusKeyInfo)
 {
-  unsigned int v6; // ebp
-  Scaleform::GFx::InteractiveObject *v7; // rdi
-  Scaleform::GFx::MovieImpl *v8; // r14
-  Scaleform::GFx::Sprite *v9; // rbx
+  Scaleform::GFx::Sprite *pObject; // rbx
   Scaleform::GFx::FocusMovedType v10; // esi
   unsigned __int8 v11; // di
-  Scaleform::Ptr<Scaleform::GFx::Sprite> result; // [rsp+60h] [rbp+8h]
+  Scaleform::Ptr<Scaleform::GFx::Sprite> result; // [rsp+60h] [rbp+8h] BYREF
   Scaleform::GFx::Sprite *v14; // [rsp+68h] [rbp+10h]
 
-  v6 = controllerIdx;
-  v7 = ch;
-  v8 = this;
   Scaleform::WeakPtr<Scaleform::GFx::DisplayObject>::operator Scaleform::Ptr<Scaleform::GFx::DisplayObject>(
     (Scaleform::WeakPtr<Scaleform::GFx::Sprite> *)&this->FocusGroups[(unsigned __int8)this->FocusGroupIndexes[controllerIdx]].LastFocused,
     &result);
-  v9 = result.pObject;
+  pObject = result.pObject;
   if ( result.pObject )
   {
     ++result.pObject->RefCount;
-    v9 = result.pObject;
+    pObject = result.pObject;
   }
-  v14 = v9;
+  v14 = pObject;
   if ( result.pObject )
-    Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&result.pObject->vfptr);
-  if ( v9 == (Scaleform::GFx::Sprite *)v7 )
-    goto LABEL_22;
-  v8->FocusRectChanged = 1;
+    Scaleform::RefCountNTSImpl::Release(result.pObject);
+  if ( pObject == ch )
+    goto LABEL_16;
+  this->FocusRectChanged = 1;
   v10 = fmt;
-  if ( !((unsigned __int8 (__fastcall *)(Scaleform::GFx::ASMovieRootBase *, Scaleform::GFx::Sprite *, Scaleform::GFx::InteractiveObject *, _QWORD, Scaleform::GFx::FocusMovedType, Scaleform::GFx::ProcessFocusKeyInfo *, signed __int64))v8->pASMovieRoot.pObject->vfptr[22].__vecDelDtor)(
-          v8->pASMovieRoot.pObject,
-          v9,
-          v7,
-          v6,
+  if ( !((unsigned __int8 (__fastcall *)(Scaleform::GFx::ASMovieRootBase *, Scaleform::GFx::Sprite *, Scaleform::GFx::Sprite *, _QWORD, Scaleform::GFx::FocusMovedType, Scaleform::GFx::ProcessFocusKeyInfo *, __int64))this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[22].__vecDelDtor)(
+          this->pASMovieRoot.pObject,
+          pObject,
+          ch,
+          controllerIdx,
           fmt,
           pfocusKeyInfo,
           -2i64) )
-    goto LABEL_22;
-  if ( v7 && !(unsigned __int8)v7->vfptr[89].__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v7->vfptr, v10) )
-    v7 = 0i64;
-  if ( v9
-    && v9->pParent
-    && !((unsigned __int8 (__fastcall *)(Scaleform::GFx::Sprite *, Scaleform::GFx::InteractiveObject *, _QWORD, _QWORD))v9->vfptr[92].__vecDelDtor)(
-          v9,
-          v7,
-          v6,
+    goto LABEL_16;
+  if ( ch
+    && !ch->Scaleform::GFx::DisplayObjContainer::Scaleform::GFx::InteractiveObject::Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[89].__vecDelDtor(
+          ch,
           (unsigned int)v10) )
   {
-LABEL_22:
+    ch = 0i64;
+  }
+  if ( pObject
+    && pObject->pParent
+    && !((unsigned __int8 (__fastcall *)(Scaleform::GFx::Sprite *, Scaleform::GFx::InteractiveObject *, _QWORD, _QWORD))pObject->Scaleform::GFx::DisplayObjContainer::Scaleform::GFx::InteractiveObject::Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[92].__vecDelDtor)(
+          pObject,
+          ch,
+          controllerIdx,
+          (unsigned int)v10) )
+  {
+LABEL_16:
     v11 = 0;
   }
   else
   {
-    if ( v7 )
-      ((void (__fastcall *)(Scaleform::GFx::InteractiveObject *, _QWORD, _QWORD))v7->vfptr[91].__vecDelDtor)(
-        v7,
-        v6,
+    if ( ch )
+      ((void (__fastcall *)(Scaleform::GFx::Sprite *, _QWORD, _QWORD))ch->Scaleform::GFx::DisplayObjContainer::Scaleform::GFx::InteractiveObject::Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[91].__vecDelDtor)(
+        ch,
+        controllerIdx,
         (unsigned int)v10);
-    ((void (__fastcall *)(Scaleform::GFx::ASMovieRootBase *, Scaleform::GFx::InteractiveObject *, _QWORD, _QWORD))v8->pASMovieRoot.pObject->vfptr[20].__vecDelDtor)(
-      v8->pASMovieRoot.pObject,
-      v7,
-      v6,
+    ((void (__fastcall *)(Scaleform::GFx::ASMovieRootBase *, Scaleform::GFx::Sprite *, _QWORD, _QWORD))this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[20].__vecDelDtor)(
+      this->pASMovieRoot.pObject,
+      ch,
+      controllerIdx,
       (unsigned int)v10);
     v11 = 1;
   }
-  if ( v9 )
-    Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v9->vfptr);
+  if ( pObject )
+    Scaleform::RefCountNTSImpl::Release(pObject);
   return v11;
 }
 
 // File Line: 4552
 // RVA: 0x913190
-void __fastcall Scaleform::GFx::MovieImpl::TransferFocus(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::InteractiveObject *pNewFocus, unsigned int controllerIdx, Scaleform::GFx::FocusMovedType fmt)
+void __fastcall Scaleform::GFx::MovieImpl::TransferFocus(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::InteractiveObject *pNewFocus,
+        unsigned int controllerIdx,
+        unsigned int fmt)
 {
-  Scaleform::GFx::FocusMovedType v4; // er13
-  unsigned int v5; // er12
-  Scaleform::GFx::InteractiveObject *v6; // rdi
-  Scaleform::GFx::MovieImpl *v7; // r15
-  Scaleform::WeakPtr<Scaleform::GFx::Sprite> *v8; // rsi
-  Scaleform::RefCountNTSImpl *v9; // rbx
-  int v10; // er14
+  Scaleform::WeakPtr<Scaleform::GFx::InteractiveObject> *p_LastFocused; // rsi
+  Scaleform::GFx::InteractiveObject *v9; // rbx
+  int AVMVersion; // r14d
   Scaleform::WeakPtrProxy *v11; // rdx
   bool v12; // zf
-  Scaleform::WeakPtrProxy *v13; // rbp
+  Scaleform::WeakPtrProxy *WeakProxy; // rbp
   Scaleform::WeakPtrProxy *v14; // rdx
-  Scaleform::WeakPtrProxy *v15; // rdx
+  Scaleform::WeakPtrProxy *pObject; // rdx
   Scaleform::WeakPtrProxy *v16; // rbp
   Scaleform::WeakPtrProxy *v17; // rdx
   Scaleform::WeakPtrProxy *v18; // rdx
-  _QWORD v19[11]; // [rsp+20h] [rbp-58h]
-  Scaleform::RefCountNTSImpl *v20; // [rsp+80h] [rbp+8h]
-  Scaleform::RefCountNTSImpl *v21; // [rsp+88h] [rbp+10h]
+  Scaleform::RefCountNTSImpl *v19; // [rsp+80h] [rbp+8h] BYREF
+  Scaleform::GFx::InteractiveObject *v20; // [rsp+88h] [rbp+10h]
 
-  v4 = fmt;
-  v5 = controllerIdx;
-  v6 = pNewFocus;
-  v7 = this;
-  v8 = (Scaleform::WeakPtr<Scaleform::GFx::Sprite> *)&this->FocusGroups[(unsigned __int8)this->FocusGroupIndexes[controllerIdx]].LastFocused;
+  p_LastFocused = &this->FocusGroups[(unsigned __int8)this->FocusGroupIndexes[controllerIdx]].LastFocused;
   Scaleform::WeakPtr<Scaleform::GFx::DisplayObject>::operator Scaleform::Ptr<Scaleform::GFx::DisplayObject>(
-    v8,
-    (Scaleform::Ptr<Scaleform::GFx::Sprite> *)&v20);
-  v9 = v20;
-  if ( v20 )
+    (Scaleform::WeakPtr<Scaleform::GFx::Sprite> *)p_LastFocused,
+    (Scaleform::Ptr<Scaleform::GFx::Sprite> *)&v19);
+  v9 = (Scaleform::GFx::InteractiveObject *)v19;
+  if ( v19 )
   {
-    ++v20->RefCount;
-    v9 = v20;
+    ++v19->RefCount;
+    v9 = (Scaleform::GFx::InteractiveObject *)v19;
   }
-  v21 = v9;
-  if ( v20 )
-    Scaleform::RefCountNTSImpl::Release(v20);
-  if ( v9 != (Scaleform::RefCountNTSImpl *)v6 )
+  v20 = v9;
+  if ( v19 )
+    Scaleform::RefCountNTSImpl::Release(v19);
+  if ( v9 != pNewFocus )
   {
-    v7->FocusRectChanged = 1;
-    v10 = (unsigned __int8)v7->pASMovieRoot.pObject->AVMVersion;
-    if ( v10 == 2 )
+    this->FocusRectChanged = 1;
+    AVMVersion = (unsigned __int8)this->pASMovieRoot.pObject->AVMVersion;
+    if ( AVMVersion == 2 )
     {
-      if ( !v6 )
-        goto LABEL_42;
-      if ( !(unsigned __int8)v6->vfptr[89].__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v6->vfptr, v4) )
+      if ( !pNewFocus )
       {
-        v11 = v8->pProxy.pObject;
-        if ( v8->pProxy.pObject )
+        pObject = p_LastFocused->pProxy.pObject;
+        if ( p_LastFocused->pProxy.pObject )
+        {
+          v12 = pObject->RefCount-- == 1;
+          if ( v12 )
+            ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+        }
+        goto LABEL_20;
+      }
+      if ( !pNewFocus->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[89].__vecDelDtor(
+              pNewFocus,
+              fmt) )
+      {
+        v11 = p_LastFocused->pProxy.pObject;
+        if ( p_LastFocused->pProxy.pObject )
         {
           v12 = v11->RefCount-- == 1;
           if ( v12 )
-            ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
+            ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
         }
-        v6 = 0i64;
-LABEL_21:
-        v8->pProxy.pObject = 0i64;
-        goto LABEL_22;
-      }
-      if ( !v6 )
-      {
-LABEL_42:
-        v15 = v8->pProxy.pObject;
-        if ( v8->pProxy.pObject )
-        {
-          v12 = v15->RefCount-- == 1;
-          if ( v12 )
-            ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-        }
+        pNewFocus = 0i64;
+LABEL_20:
+        p_LastFocused->pProxy.pObject = 0i64;
         goto LABEL_21;
       }
-      v13 = Scaleform::RefCountWeakSupportImpl::CreateWeakProxy((Scaleform::RefCountWeakSupportImpl *)&v6->vfptr);
-      v14 = v8->pProxy.pObject;
-      if ( v8->pProxy.pObject )
+      WeakProxy = Scaleform::RefCountWeakSupportImpl::CreateWeakProxy(pNewFocus);
+      v14 = p_LastFocused->pProxy.pObject;
+      if ( p_LastFocused->pProxy.pObject )
       {
         v12 = v14->RefCount-- == 1;
         if ( v12 )
-          ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
+          ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
       }
-      v8->pProxy.pObject = v13;
+      p_LastFocused->pProxy.pObject = WeakProxy;
     }
-LABEL_22:
-    if ( v9 && *(_QWORD *)&v9[3].RefCount )
-      ((void (__fastcall *)(Scaleform::RefCountNTSImpl *, _QWORD, Scaleform::GFx::InteractiveObject *, _QWORD, Scaleform::GFx::FocusMovedType))v9->vfptr[90].__vecDelDtor)(
+LABEL_21:
+    if ( v9 && v9->pParent )
+      ((void (__fastcall *)(Scaleform::GFx::InteractiveObject *, _QWORD, Scaleform::GFx::InteractiveObject *, _QWORD, unsigned int))v9->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[90].__vecDelDtor)(
         v9,
         0i64,
-        v6,
-        v5,
-        v4);
-    if ( v10 == 1 )
+        pNewFocus,
+        controllerIdx,
+        fmt);
+    if ( AVMVersion == 1 )
     {
-      if ( !v6 )
+      if ( !pNewFocus )
       {
-        v18 = v8->pProxy.pObject;
-        if ( v8->pProxy.pObject )
+        v18 = p_LastFocused->pProxy.pObject;
+        if ( p_LastFocused->pProxy.pObject )
         {
           v12 = v18->RefCount-- == 1;
           if ( v12 )
-            ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
+            ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
         }
-        v8->pProxy.pObject = 0i64;
-        goto LABEL_37;
+        p_LastFocused->pProxy.pObject = 0i64;
+        goto LABEL_36;
       }
-      v16 = Scaleform::RefCountWeakSupportImpl::CreateWeakProxy((Scaleform::RefCountWeakSupportImpl *)&v6->vfptr);
-      v17 = v8->pProxy.pObject;
-      if ( v8->pProxy.pObject )
+      v16 = Scaleform::RefCountWeakSupportImpl::CreateWeakProxy(pNewFocus);
+      v17 = p_LastFocused->pProxy.pObject;
+      if ( p_LastFocused->pProxy.pObject )
       {
         v12 = v17->RefCount-- == 1;
         if ( v12 )
-          ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
+          ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
       }
-      v8->pProxy.pObject = v16;
+      p_LastFocused->pProxy.pObject = v16;
     }
-    if ( v6 )
-    {
-      LODWORD(v19[0]) = v4;
-      ((void (__fastcall *)(Scaleform::GFx::InteractiveObject *, signed __int64, Scaleform::RefCountNTSImpl *, _QWORD, _QWORD))v6->vfptr[90].__vecDelDtor)(
-        v6,
+    if ( pNewFocus )
+      ((void (__fastcall *)(Scaleform::GFx::InteractiveObject *, __int64, Scaleform::GFx::InteractiveObject *, _QWORD, unsigned int))pNewFocus->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[90].__vecDelDtor)(
+        pNewFocus,
         1i64,
         v9,
-        v5,
-        v19[0]);
-    }
-LABEL_37:
-    ((void (__fastcall *)(Scaleform::GFx::ASMovieRootBase *, Scaleform::RefCountNTSImpl *, Scaleform::GFx::InteractiveObject *, _QWORD))v7->pASMovieRoot.pObject->vfptr[21].__vecDelDtor)(
-      v7->pASMovieRoot.pObject,
+        controllerIdx,
+        fmt);
+LABEL_36:
+    ((void (__fastcall *)(Scaleform::GFx::ASMovieRootBase *, Scaleform::GFx::InteractiveObject *, Scaleform::GFx::InteractiveObject *, _QWORD))this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[21].__vecDelDtor)(
+      this->pASMovieRoot.pObject,
       v9,
-      v6,
-      v5);
+      pNewFocus,
+      controllerIdx);
   }
   if ( v9 )
     Scaleform::RefCountNTSImpl::Release(v9);
@@ -7756,203 +7549,188 @@ LABEL_37:
 
 // File Line: 4599
 // RVA: 0x9084F0
-void __fastcall Scaleform::GFx::MovieImpl::SetKeyboardFocusTo(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::InteractiveObject *ch, unsigned int controllerIdx, Scaleform::GFx::FocusMovedType fmt)
+void __fastcall Scaleform::GFx::MovieImpl::SetKeyboardFocusTo(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::Sprite *ch,
+        unsigned int controllerIdx,
+        Scaleform::GFx::FocusMovedType fmt)
 {
-  Scaleform::GFx::InteractiveObject *v4; // rbx
-  unsigned int v5; // er14
-  Scaleform::GFx::FocusMovedType v6; // er15
-  Scaleform::GFx::MovieImpl *v7; // rsi
+  Scaleform::GFx::Sprite *pParent; // rbx
   Scaleform::GFx::FocusGroupDescr *v8; // rdi
   int v9; // ebp
   bool v10; // zf
 
-  v4 = ch;
-  v5 = controllerIdx;
-  v6 = fmt;
-  v7 = this;
+  pParent = ch;
   v8 = &this->FocusGroups[(unsigned __int8)this->FocusGroupIndexes[controllerIdx]];
-  if ( ch && ((unsigned int (__fastcall *)(Scaleform::GFx::InteractiveObject *))ch->vfptr[81].__vecDelDtor)(ch) == 4 )
+  if ( ch
+    && ((unsigned int (__fastcall *)(Scaleform::GFx::Sprite *))ch->Scaleform::GFx::DisplayObjContainer::Scaleform::GFx::InteractiveObject::Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[81].__vecDelDtor)(ch) == 4 )
   {
     if ( v8->FocusRectShown )
-      v7->FocusRectChanged = 1;
+      this->FocusRectChanged = 1;
     v8->FocusRectShown = 0;
   }
   else
   {
     if ( !v8->FocusRectShown )
-      v7->FocusRectChanged = 1;
+      this->FocusRectChanged = 1;
     v8->FocusRectShown = 1;
   }
   v9 = 0;
   v8->LastFocusKeyCode = 0;
-  if ( (unsigned __int8)Scaleform::GFx::MovieImpl::SetFocusTo(v7, v4, v5, v6) && v8->FocusRectShown )
+  if ( (unsigned __int8)Scaleform::GFx::MovieImpl::SetFocusTo(this, pParent, controllerIdx, fmt) && v8->FocusRectShown )
   {
-    v10 = v4 == 0i64;
-    if ( v4 )
+    v10 = pParent == 0i64;
+    if ( pParent )
     {
       do
       {
-        if ( !((unsigned __int8 (__fastcall *)(Scaleform::GFx::InteractiveObject *))v4->vfptr[59].__vecDelDtor)(v4) )
+        if ( !((unsigned __int8 (__fastcall *)(Scaleform::GFx::Sprite *))pParent->Scaleform::GFx::DisplayObjContainer::Scaleform::GFx::InteractiveObject::Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[59].__vecDelDtor)(pParent) )
           break;
-        v4 = v4->pParent;
+        pParent = (Scaleform::GFx::Sprite *)pParent->pParent;
       }
-      while ( v4 );
-      v10 = v4 == 0i64;
+      while ( pParent );
+      v10 = pParent == 0i64;
     }
     LOBYTE(v9) = v10;
     if ( v8->FocusRectShown != v9 )
-      v7->FocusRectChanged = 1;
-    v8->FocusRectShown = v4 == 0i64;
+      this->FocusRectChanged = 1;
+    v8->FocusRectShown = pParent == 0i64;
   }
 }
 
 // File Line: 4647
 // RVA: 0x901310
-void __fastcall Scaleform::GFx::MovieImpl::ResetFocusForChar(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::InteractiveObject *ch)
+void __fastcall Scaleform::GFx::MovieImpl::ResetFocusForChar(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::Sprite *ch)
 {
-  Scaleform::GFx::InteractiveObject *v2; // r13
-  Scaleform::GFx::MovieImpl *v3; // r15
-  __int64 v4; // rbp
+  __int64 i; // rbp
   Scaleform::WeakPtr<Scaleform::GFx::Sprite> *v5; // r12
-  Scaleform::GFx::Sprite *v6; // rbx
+  Scaleform::GFx::Sprite *pObject; // rbx
   Scaleform::GFx::Sprite *v7; // rbx
   unsigned int v8; // edi
   int v9; // eax
   char *v10; // rdx
-  signed __int64 v11; // r8
+  __int64 v11; // r8
   int v12; // eax
   int v13; // eax
   int v14; // eax
-  unsigned int v15; // er14
-  unsigned int i; // esi
+  unsigned int v15; // r14d
+  unsigned int j; // esi
   Scaleform::WeakPtrProxy *v17; // rdx
-  bool v18; // zf
-  Scaleform::Ptr<Scaleform::GFx::Sprite> result; // [rsp+70h] [rbp+8h]
-  Scaleform::Ptr<Scaleform::GFx::Sprite> v20; // [rsp+80h] [rbp+18h]
+  Scaleform::Ptr<Scaleform::GFx::Sprite> result; // [rsp+70h] [rbp+8h] BYREF
+  Scaleform::Ptr<Scaleform::GFx::Sprite> v20; // [rsp+80h] [rbp+18h] BYREF
   Scaleform::GFx::Sprite *v21; // [rsp+88h] [rbp+20h]
 
-  v2 = ch;
-  v3 = this;
-  v4 = 0i64;
-  if ( this->FocusGroupsCnt )
+  for ( i = 0i64; (unsigned int)i < this->FocusGroupsCnt; i = (unsigned int)(i + 1) )
   {
-    do
+    v5 = (Scaleform::WeakPtr<Scaleform::GFx::Sprite> *)((char *)this + 96 * i);
+    Scaleform::WeakPtr<Scaleform::GFx::DisplayObject>::operator Scaleform::Ptr<Scaleform::GFx::DisplayObject>(
+      v5 + 2457,
+      &result);
+    pObject = result.pObject;
+    if ( result.pObject )
     {
-      v5 = (Scaleform::WeakPtr<Scaleform::GFx::Sprite> *)((char *)v3 + 96 * v4);
+      ++result.pObject->RefCount;
+      pObject = result.pObject;
+    }
+    v21 = pObject;
+    if ( result.pObject )
+      Scaleform::RefCountNTSImpl::Release(result.pObject);
+    if ( pObject )
+      Scaleform::RefCountNTSImpl::Release(pObject);
+    if ( pObject == ch )
+    {
       Scaleform::WeakPtr<Scaleform::GFx::DisplayObject>::operator Scaleform::Ptr<Scaleform::GFx::DisplayObject>(
         v5 + 2457,
-        &result);
-      v6 = result.pObject;
-      if ( result.pObject )
+        &v20);
+      v7 = v20.pObject;
+      if ( v20.pObject )
       {
-        ++result.pObject->RefCount;
-        v6 = result.pObject;
-      }
-      v21 = v6;
-      if ( result.pObject )
-        Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&result.pObject->vfptr);
-      if ( v6 )
-        Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v6->vfptr);
-      if ( v6 == (Scaleform::GFx::Sprite *)v2 )
-      {
-        Scaleform::WeakPtr<Scaleform::GFx::DisplayObject>::operator Scaleform::Ptr<Scaleform::GFx::DisplayObject>(
-          v5 + 2457,
-          &v20);
+        ++v20.pObject->RefCount;
         v7 = v20.pObject;
-        if ( v20.pObject )
-        {
-          ++v20.pObject->RefCount;
-          v7 = v20.pObject;
-        }
-        if ( v20.pObject )
-          Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v20.pObject->vfptr);
-        if ( v7 && !Scaleform::GFx::MovieImpl::IsShutdowning(v3) )
-        {
-          v8 = 0;
-          v9 = 1;
-          v10 = &v3->FocusGroupIndexes[1];
-          v11 = 4i64;
-          do
-          {
-            if ( (unsigned __int8)*(v10 - 1) == (_DWORD)v4 )
-              v8 |= v9;
-            v12 = 2 * v9;
-            if ( (unsigned __int8)*v10 == (_DWORD)v4 )
-              v8 |= v12;
-            v13 = 2 * v12;
-            if ( (unsigned __int8)v10[1] == (_DWORD)v4 )
-              v8 |= v13;
-            v14 = 2 * v13;
-            if ( (unsigned __int8)v10[2] == (_DWORD)v4 )
-              v8 |= v14;
-            v9 = 2 * v14;
-            v10 += 4;
-            --v11;
-          }
-          while ( v11 );
-          v15 = (__int64)v3->vfptr[46].__vecDelDtor((Scaleform::RefCountImplCore *)&v3->vfptr, (unsigned int)v10);
-          for ( i = 0; v8; v8 >>= 1 )
-          {
-            if ( i >= v15 )
-              break;
-            Scaleform::GFx::MovieImpl::SetFocusTo(v3, 0i64, i++, GFx_FocusMovedByKeyboard);
-          }
-        }
-        v17 = v5[2457].pProxy.pObject;
-        if ( v17 )
-        {
-          v18 = v17->RefCount-- == 1;
-          if ( v18 )
-            ((void (__cdecl *)(Scaleform::MemoryHeap *, Scaleform::WeakPtrProxy *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(
-              Scaleform::Memory::pGlobalHeap,
-              v17);
-        }
-        v5[2457].pProxy.pObject = 0i64;
-        if ( v7 )
-          Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v7->vfptr);
       }
-      v4 = (unsigned int)(v4 + 1);
+      if ( v20.pObject )
+        Scaleform::RefCountNTSImpl::Release(v20.pObject);
+      if ( v7 && !Scaleform::GFx::MovieImpl::IsShutdowning(this) )
+      {
+        v8 = 0;
+        v9 = 1;
+        v10 = &this->FocusGroupIndexes[1];
+        v11 = 4i64;
+        do
+        {
+          if ( (unsigned __int8)*(v10 - 1) == (_DWORD)i )
+            v8 |= v9;
+          v12 = 2 * v9;
+          if ( (unsigned __int8)*v10 == (_DWORD)i )
+            v8 |= v12;
+          v13 = 2 * v12;
+          if ( (unsigned __int8)v10[1] == (_DWORD)i )
+            v8 |= v13;
+          v14 = 2 * v13;
+          if ( (unsigned __int8)v10[2] == (_DWORD)i )
+            v8 |= v14;
+          v9 = 2 * v14;
+          v10 += 4;
+          --v11;
+        }
+        while ( v11 );
+        v15 = (unsigned int)this->Scaleform::GFx::Movie::Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr[46].__vecDelDtor(
+                              this,
+                              v10);
+        for ( j = 0; v8; v8 >>= 1 )
+        {
+          if ( j >= v15 )
+            break;
+          Scaleform::GFx::MovieImpl::SetFocusTo(this, 0i64, j++, GFx_FocusMovedByKeyboard);
+        }
+      }
+      v17 = v5[2457].pProxy.pObject;
+      if ( v17 )
+      {
+        if ( v17->RefCount-- == 1 )
+          ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+      }
+      v5[2457].pProxy.pObject = 0i64;
+      if ( v7 )
+        Scaleform::RefCountNTSImpl::Release(v7);
     }
-    while ( (unsigned int)v4 < v3->FocusGroupsCnt );
   }
 }
 
 // File Line: 4667
 // RVA: 0x8E7280
-char __fastcall Scaleform::GFx::MovieImpl::IsFocused(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::InteractiveObject *ch)
+char __fastcall Scaleform::GFx::MovieImpl::IsFocused(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::Sprite *ch)
 {
-  Scaleform::GFx::InteractiveObject *v2; // r14
-  Scaleform::GFx::MovieImpl *v3; // rbp
   __int64 v4; // rdi
-  Scaleform::GFx::Sprite *v5; // rbx
-  Scaleform::Ptr<Scaleform::GFx::Sprite> result; // [rsp+50h] [rbp+8h]
+  Scaleform::GFx::Sprite *pObject; // rbx
+  Scaleform::Ptr<Scaleform::GFx::Sprite> result; // [rsp+50h] [rbp+8h] BYREF
   Scaleform::GFx::Sprite *v8; // [rsp+60h] [rbp+18h]
 
-  v2 = ch;
-  v3 = this;
   v4 = 0i64;
   if ( !this->FocusGroupsCnt )
     return 0;
   while ( 1 )
   {
     Scaleform::WeakPtr<Scaleform::GFx::DisplayObject>::operator Scaleform::Ptr<Scaleform::GFx::DisplayObject>(
-      (Scaleform::WeakPtr<Scaleform::GFx::Sprite> *)&v3->FocusGroups[v4].LastFocused,
+      (Scaleform::WeakPtr<Scaleform::GFx::Sprite> *)&this->FocusGroups[v4].LastFocused,
       &result);
-    v5 = result.pObject;
+    pObject = result.pObject;
     if ( result.pObject )
     {
       ++result.pObject->RefCount;
-      v5 = result.pObject;
+      pObject = result.pObject;
     }
-    v8 = v5;
+    v8 = pObject;
     if ( result.pObject )
-      Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&result.pObject->vfptr);
-    if ( v5 )
-      Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v5->vfptr);
-    if ( v5 == (Scaleform::GFx::Sprite *)v2 )
+      Scaleform::RefCountNTSImpl::Release(result.pObject);
+    if ( pObject )
+      Scaleform::RefCountNTSImpl::Release(pObject);
+    if ( pObject == ch )
       break;
     v4 = (unsigned int)(v4 + 1);
-    if ( (unsigned int)v4 >= v3->FocusGroupsCnt )
+    if ( (unsigned int)v4 >= this->FocusGroupsCnt )
       return 0;
   }
   return 1;
@@ -7960,78 +7738,72 @@ char __fastcall Scaleform::GFx::MovieImpl::IsFocused(Scaleform::GFx::MovieImpl *
 
 // File Line: 4678
 // RVA: 0x8B3D90
-void __fastcall Scaleform::GFx::MovieImpl::AddTopmostLevelCharacter(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::InteractiveObject *pch)
+void __fastcall Scaleform::GFx::MovieImpl::AddTopmostLevelCharacter(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::InteractiveObject *pch)
 {
-  Scaleform::GFx::InteractiveObject *v2; // r15
-  Scaleform::GFx::MovieImpl *v3; // r12
-  unsigned __int8 v4; // al
+  unsigned __int8 AvmObjOffset; // al
   __int64 v5; // rax
   unsigned __int64 v6; // rsi
   void *v7; // rax
   void *v8; // rax
-  Scaleform::GFx::AS3::Instances::fl::XML *v9; // rdi
+  Scaleform::GFx::InteractiveObject *pParent; // rdi
   unsigned __int64 v10; // rbx
   unsigned __int64 v11; // r8
   Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML> *v12; // rcx
-  Scaleform::GFx::AS3::Instances::fl::XML *v13; // r14
-  unsigned __int64 v14; // r13
+  Scaleform::GFx::InteractiveObject *v13; // r14
+  unsigned __int64 Size; // r13
   unsigned __int64 v15; // r8
-  Scaleform::GFx::AS3::Instances::fl::XML *v16; // rcx
-  Scaleform::GFx::AS3::Instances::fl::XML *i; // rdi
+  Scaleform::GFx::InteractiveObject *v16; // rcx
+  Scaleform::GFx::InteractiveObject *i; // rdi
   unsigned __int64 v18; // rbx
   unsigned __int64 v19; // r8
   Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML> *v20; // rcx
-  signed __int64 v21; // r9
+  __int64 v21; // r9
   unsigned __int64 v22; // rdx
-  signed __int64 v23; // rcx
+  char *v23; // rcx
   __int64 v24; // rax
-  signed int v25; // ebx
-  signed __int64 v26; // rcx
+  int v25; // ebx
+  char *v26; // rcx
   __int64 v27; // rax
-  Scaleform::ArrayLH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,327,Scaleform::ArrayDefaultPolicy> *v28; // rdi
+  Scaleform::ArrayLH<Scaleform::Ptr<Scaleform::GFx::InteractiveObject>,327,Scaleform::ArrayDefaultPolicy> *p_TopmostLevelCharacters; // rdi
   unsigned __int64 v29; // r14
   Scaleform::ArrayDataBase<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML>,Scaleform::AllocatorDH<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML>,2>,Scaleform::ArrayDefaultPolicy> *v30; // rcx
-  signed __int64 v31; // rbx
+  __int64 v31; // rbx
   unsigned __int64 v32; // r8
   Scaleform::ArrayDataBase<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML>,Scaleform::AllocatorDH<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML>,2>,Scaleform::ArrayDefaultPolicy> *v33; // rcx
-  Scaleform::Render::TreeNode *v34; // rcx
-  bool v35; // zf
-  Scaleform::ArrayDataBase<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML>,Scaleform::AllocatorDH<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML>,2>,Scaleform::ArrayDefaultPolicy> v36; // [rsp+30h] [rbp-40h]
+  Scaleform::Render::TreeNode *pObject; // rcx
+  Scaleform::ArrayDataBase<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML>,Scaleform::AllocatorDH<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML>,2>,Scaleform::ArrayDefaultPolicy> v36; // [rsp+30h] [rbp-40h] BYREF
   void *v37; // [rsp+48h] [rbp-28h]
-  Scaleform::ArrayDataBase<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML>,Scaleform::AllocatorDH<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML>,2>,Scaleform::ArrayDefaultPolicy> v38; // [rsp+50h] [rbp-20h]
+  Scaleform::ArrayDataBase<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML>,Scaleform::AllocatorDH<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML>,2>,Scaleform::ArrayDefaultPolicy> v38; // [rsp+50h] [rbp-20h] BYREF
   void *pheapAddr; // [rsp+68h] [rbp-8h]
-  Scaleform::Ptr<Scaleform::Render::TreeNode> result; // [rsp+B8h] [rbp+48h]
+  Scaleform::Ptr<Scaleform::Render::TreeNode> result; // [rsp+B8h] [rbp+48h] BYREF
   Scaleform::ArrayDataBase<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML>,Scaleform::AllocatorDH<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML>,2>,Scaleform::ArrayDefaultPolicy> *v41; // [rsp+C0h] [rbp+50h]
   Scaleform::GFx::InteractiveObject *v42; // [rsp+C8h] [rbp+58h]
 
-  v2 = pch;
-  v3 = this;
-  if ( (pch->Flags >> 10) & 1 )
+  if ( (pch->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Flags & 0x400) != 0 )
   {
-    v4 = pch->AvmObjOffset;
-    if ( v4 )
+    AvmObjOffset = pch->AvmObjOffset;
+    if ( AvmObjOffset )
     {
-      v5 = ((__int64 (__cdecl *)(char *))(*(Scaleform::RefCountNTSImplCoreVtbl **)((char *)&pch->vfptr + 4 * v4))[2].__vecDelDtor)((char *)pch + 4 * v4);
+      v5 = ((__int64 (__fastcall *)(char *))(*(Scaleform::RefCountNTSImplCoreVtbl **)((char *)&pch->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr
+                                                                                    + 4 * AvmObjOffset))[2].__vecDelDtor)((char *)pch + 4 * AvmObjOffset);
       if ( (*(unsigned __int8 (__fastcall **)(__int64))(*(_QWORD *)v5 + 248i64))(v5) )
         return;
     }
   }
   v6 = 0i64;
-  if ( !v3->TopmostLevelCharacters.Data.Size )
+  if ( !this->TopmostLevelCharacters.Data.Size )
     goto LABEL_47;
-  v7 = (void *)((__int64 (__fastcall *)(Scaleform::GFx::MovieImpl *))v3->vfptr[48].__vecDelDtor)(v3);
+  v7 = (void *)((__int64 (__fastcall *)(Scaleform::GFx::MovieImpl *))this->Scaleform::GFx::Movie::Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr[48].__vecDelDtor)(this);
   v41 = &v38;
-  v38.Data = 0i64;
-  v38.Size = 0i64;
-  v38.Policy.Capacity = 0i64;
+  memset(&v38, 0, sizeof(v38));
   pheapAddr = v7;
-  v8 = (void *)((__int64 (__fastcall *)(Scaleform::GFx::MovieImpl *))v3->vfptr[48].__vecDelDtor)(v3);
+  v8 = (void *)((__int64 (__fastcall *)(Scaleform::GFx::MovieImpl *))this->Scaleform::GFx::Movie::Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr[48].__vecDelDtor)(this);
   v41 = &v36;
-  v36.Data = 0i64;
-  v36.Size = 0i64;
-  v36.Policy.Capacity = 0i64;
+  memset(&v36, 0, sizeof(v36));
   v37 = v8;
-  v9 = (Scaleform::GFx::AS3::Instances::fl::XML *)v2;
+  pParent = pch;
   do
   {
     v10 = v38.Size + 1;
@@ -8055,13 +7827,13 @@ LABEL_12:
     v38.Size = v10;
     v12 = &v38.Data[v10 - 1];
     if ( v12 )
-      v12->pObject = v9;
-    v13 = v9;
-    v9 = (Scaleform::GFx::AS3::Instances::fl::XML *)v9->Text.pNode;
+      v12->pObject = (Scaleform::GFx::AS3::Instances::fl::XML *)pParent;
+    v13 = pParent;
+    pParent = pParent->pParent;
   }
-  while ( v9 );
-  v14 = v3->TopmostLevelCharacters.Data.Size;
-  if ( !v14 )
+  while ( pParent );
+  Size = this->TopmostLevelCharacters.Data.Size;
+  if ( !Size )
   {
 LABEL_46:
     v41 = &v36;
@@ -8069,18 +7841,18 @@ LABEL_46:
     v41 = &v38;
     Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v38.Data);
 LABEL_47:
-    ++v2->RefCount;
-    v42 = v2;
-    v28 = &v3->TopmostLevelCharacters;
-    v29 = v3->TopmostLevelCharacters.Data.Size;
+    ++pch->RefCount;
+    v42 = pch;
+    p_TopmostLevelCharacters = &this->TopmostLevelCharacters;
+    v29 = this->TopmostLevelCharacters.Data.Size;
     Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::Sprite>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::Sprite>,327>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
-      (Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::Sprite>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::Sprite>,327>,Scaleform::ArrayDefaultPolicy> *)&v3->TopmostLevelCharacters,
-      &v3->TopmostLevelCharacters,
+      (Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::Sprite>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::Sprite>,327>,Scaleform::ArrayDefaultPolicy> *)&this->TopmostLevelCharacters,
+      &this->TopmostLevelCharacters,
       v29 + 1);
     if ( v29 + 1 > v29 )
     {
-      v30 = (Scaleform::ArrayDataBase<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML>,Scaleform::AllocatorDH<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML>,2>,Scaleform::ArrayDefaultPolicy> *)&v28->Data.Data[v29];
-      v41 = (Scaleform::ArrayDataBase<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML>,Scaleform::AllocatorDH<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML>,2>,Scaleform::ArrayDefaultPolicy> *)&v28->Data.Data[v29];
+      v30 = (Scaleform::ArrayDataBase<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML>,Scaleform::AllocatorDH<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML>,2>,Scaleform::ArrayDefaultPolicy> *)&p_TopmostLevelCharacters->Data.Data[v29];
+      v41 = v30;
       v31 = 1i64;
       do
       {
@@ -8092,40 +7864,39 @@ LABEL_47:
       }
       while ( v31 );
     }
-    v32 = v3->TopmostLevelCharacters.Data.Size;
+    v32 = this->TopmostLevelCharacters.Data.Size;
     if ( v6 < v32 - 1 )
-      memmove(&v28->Data.Data[v6 + 1], &v28->Data.Data[v6], 8 * (v32 - v6) - 8);
-    v33 = (Scaleform::ArrayDataBase<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML>,Scaleform::AllocatorDH<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML>,2>,Scaleform::ArrayDefaultPolicy> *)&v28->Data.Data[v6];
+      memmove(
+        &p_TopmostLevelCharacters->Data.Data[v6 + 1],
+        &p_TopmostLevelCharacters->Data.Data[v6],
+        8 * (v32 - v6) - 8);
+    v33 = (Scaleform::ArrayDataBase<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML>,Scaleform::AllocatorDH<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML>,2>,Scaleform::ArrayDefaultPolicy> *)&p_TopmostLevelCharacters->Data.Data[v6];
     v41 = v33;
     if ( v33 )
     {
-      ++v2->RefCount;
-      v33->Data = (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML> *)v2;
+      ++pch->RefCount;
+      v33->Data = (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML> *)pch;
     }
-    Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v2->vfptr);
-    Scaleform::GFx::DisplayObjectBase::SetIndirectTransform(
-      (Scaleform::GFx::DisplayObjectBase *)&v2->vfptr,
-      &result,
-      (Scaleform::Render::TreeNode *)&v3->pTopMostRoot.pObject->0);
+    Scaleform::RefCountNTSImpl::Release(pch);
+    Scaleform::GFx::DisplayObjectBase::SetIndirectTransform(pch, &result, this->pTopMostRoot.pObject);
     if ( result.pObject )
-      Scaleform::Render::TreeContainer::Insert(v3->pTopMostRoot.pObject, v6, result.pObject);
-    v34 = result.pObject;
+      Scaleform::Render::TreeContainer::Insert(this->pTopMostRoot.pObject, v6, result.pObject);
+    pObject = result.pObject;
     if ( result.pObject )
     {
-      v35 = result.pObject->RefCount-- == 1;
-      if ( v35 )
-        Scaleform::Render::ContextImpl::Entry::destroyHelper((Scaleform::Render::ContextImpl::Entry *)&v34->0);
+      if ( result.pObject->RefCount-- == 1 )
+        Scaleform::Render::ContextImpl::Entry::destroyHelper(pObject);
     }
     return;
   }
   v15 = v36.Size;
-  while ( v3->TopmostLevelCharacters.Data.Data[v6].pObject != v2 )
+  while ( this->TopmostLevelCharacters.Data.Data[v6].pObject != pch )
   {
-    if ( v15 && v36.Policy.Capacity & 0xFFFFFFFFFFFFFFFEui64 )
+    if ( v15 && (v36.Policy.Capacity & 0xFFFFFFFFFFFFFFFEui64) != 0 )
     {
       if ( v36.Data )
       {
-        ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+        ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
         v36.Data = 0i64;
       }
       v36.Policy.Capacity = 0i64;
@@ -8133,9 +7904,7 @@ LABEL_47:
     v15 = 0i64;
     v36.Size = 0i64;
     v16 = 0i64;
-    for ( i = (Scaleform::GFx::AS3::Instances::fl::XML *)v3->TopmostLevelCharacters.Data.Data[v6].pObject;
-          i;
-          i = (Scaleform::GFx::AS3::Instances::fl::XML *)i->Text.pNode )
+    for ( i = this->TopmostLevelCharacters.Data.Data[v6].pObject; i; i = i->pParent )
     {
       v18 = v15 + 1;
       if ( v15 + 1 >= v15 )
@@ -8154,15 +7923,13 @@ LABEL_29:
           &v36,
           v37,
           v19);
-        goto LABEL_30;
       }
-LABEL_30:
       v15 = v18;
       v36.Size = v18;
       v20 = &v36.Data[v18 - 1];
       if ( v20 )
       {
-        v20->pObject = i;
+        v20->pObject = (Scaleform::GFx::AS3::Instances::fl::XML *)i;
         v15 = v36.Size;
       }
       v16 = i;
@@ -8189,16 +7956,16 @@ LABEL_30:
     }
     else
     {
-      v23 = (signed __int64)v16 + 4 * *((unsigned __int8 *)&v16[1].RefCount + 5);
-      v24 = (*(__int64 (__cdecl **)(signed __int64))(*(_QWORD *)v23 + 16i64))(v23);
+      v23 = (char *)v16 + 4 * (unsigned __int8)v16->AvmObjOffset;
+      v24 = (*(__int64 (__fastcall **)(char *))(*(_QWORD *)v23 + 16i64))(v23);
       v25 = (*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v24 + 240i64))(v24);
-      v26 = (signed __int64)v13 + 4 * *((unsigned __int8 *)&v13[1].RefCount + 5);
-      v27 = (*(__int64 (__cdecl **)(signed __int64))(*(_QWORD *)v26 + 16i64))(v26);
-      if ( v25 > (*(signed int (__fastcall **)(__int64))(*(_QWORD *)v27 + 240i64))(v27) )
+      v26 = (char *)v13 + 4 * (unsigned __int8)v13->AvmObjOffset;
+      v27 = (*(__int64 (__fastcall **)(char *))(*(_QWORD *)v26 + 16i64))(v26);
+      if ( v25 > (*(int (__fastcall **)(__int64))(*(_QWORD *)v27 + 240i64))(v27) )
         goto LABEL_46;
       v15 = v36.Size;
     }
-    if ( ++v6 >= v14 )
+    if ( ++v6 >= Size )
       goto LABEL_46;
   }
   v41 = &v36;
@@ -8212,45 +7979,45 @@ LABEL_30:
 
 // File Line: 4765
 // RVA: 0x8FFD80
-void __fastcall Scaleform::GFx::MovieImpl::RemoveTopmostLevelCharacter(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::DisplayObjectBase *pch)
+void __fastcall Scaleform::GFx::MovieImpl::RemoveTopmostLevelCharacter(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::InteractiveObject *pch)
 {
-  unsigned __int64 v2; // r8
+  unsigned __int64 Size; // r8
   unsigned __int64 v3; // rbx
-  Scaleform::GFx::DisplayObjectBase *v4; // rsi
-  Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::Sprite>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::Sprite>,327>,Scaleform::ArrayDefaultPolicy> *v5; // rdi
-  Scaleform::Ptr<Scaleform::GFx::InteractiveObject> *v6; // rax
-  Scaleform::RefCountNTSImpl *v7; // rcx
+  Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::Sprite>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::Sprite>,327>,Scaleform::ArrayDefaultPolicy> *p_TopmostLevelCharacters; // rdi
+  Scaleform::Ptr<Scaleform::GFx::InteractiveObject> *i; // rax
+  Scaleform::RefCountNTSImpl *pObject; // rcx
 
-  v2 = this->TopmostLevelCharacters.Data.Size;
+  Size = this->TopmostLevelCharacters.Data.Size;
   v3 = 0i64;
-  v4 = pch;
-  if ( v2 )
+  if ( Size )
   {
-    v5 = (Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::Sprite>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::Sprite>,327>,Scaleform::ArrayDefaultPolicy> *)&this->TopmostLevelCharacters;
-    v6 = this->TopmostLevelCharacters.Data.Data;
-    while ( (Scaleform::GFx::DisplayObjectBase *)v6->pObject != pch )
+    p_TopmostLevelCharacters = (Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::Sprite>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::Sprite>,327>,Scaleform::ArrayDefaultPolicy> *)&this->TopmostLevelCharacters;
+    for ( i = this->TopmostLevelCharacters.Data.Data; i->pObject != pch; ++i )
     {
-      ++v3;
-      ++v6;
-      if ( v3 >= v2 )
+      if ( ++v3 >= Size )
         return;
     }
     Scaleform::Render::TreeContainer::Remove(this->pTopMostRoot.pObject, v3, 1ui64);
-    Scaleform::GFx::DisplayObjectBase::RemoveIndirectTransform(v4, 1);
-    if ( v5->Size == 1 )
+    Scaleform::GFx::DisplayObjectBase::RemoveIndirectTransform(pch, 1);
+    if ( p_TopmostLevelCharacters->Size == 1 )
     {
       Scaleform::ArrayDataBase<Scaleform::Ptr<Scaleform::GFx::Sprite>,Scaleform::AllocatorLH<Scaleform::Ptr<Scaleform::GFx::Sprite>,327>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
-        v5,
-        v5,
+        p_TopmostLevelCharacters,
+        p_TopmostLevelCharacters,
         0i64);
     }
     else
     {
-      v7 = (Scaleform::RefCountNTSImpl *)&v5->Data[v3].pObject->vfptr;
-      if ( v7 )
-        Scaleform::RefCountNTSImpl::Release(v7);
-      memmove(&v5->Data[v3], &v5->Data[v3 + 1], 8 * (v5->Size - v3) - 8);
-      --v5->Size;
+      pObject = p_TopmostLevelCharacters->Data[v3].pObject;
+      if ( pObject )
+        Scaleform::RefCountNTSImpl::Release(pObject);
+      memmove(
+        &p_TopmostLevelCharacters->Data[v3],
+        &p_TopmostLevelCharacters->Data[v3 + 1],
+        8 * (p_TopmostLevelCharacters->Size - v3) - 8);
+      --p_TopmostLevelCharacters->Size;
     }
   }
 }
@@ -8259,114 +8026,96 @@ void __fastcall Scaleform::GFx::MovieImpl::RemoveTopmostLevelCharacter(Scaleform
 // RVA: 0x8D6C70
 bool __fastcall Scaleform::GFx::MovieImpl::GetDirtyFlag(Scaleform::GFx::MovieImpl *this, bool doReset)
 {
-  bool v2; // di
-  Scaleform::GFx::MovieImpl *v3; // rbx
   bool result; // al
 
-  v2 = doReset;
-  v3 = this;
-  if ( (this->Flags >> 10) & 1
-    || (result = Scaleform::Render::ContextImpl::Context::HasChanges(&this->RenderContext)) != 0 )
+  if ( (this->Flags & 0x400) != 0
+    || (result = Scaleform::Render::ContextImpl::Context::HasChanges(&this->RenderContext)) )
   {
     result = 1;
   }
-  if ( v2 )
-    v3->Flags &= 0xFFFFFBFF;
+  if ( doReset )
+    this->Flags &= ~0x400u;
   return result;
 }
 
 // File Line: 4813
 // RVA: 0x8DE9B0
-Scaleform::Render::Text::Allocator *__fastcall Scaleform::GFx::MovieImpl::GetTextAllocator(Scaleform::GFx::MovieImpl *this)
+Scaleform::Render::Text::Allocator *__fastcall Scaleform::GFx::MovieImpl::GetTextAllocator(
+        Scaleform::GFx::MovieImpl *this)
 {
-  return (Scaleform::Render::Text::Allocator *)((__int64 (*)(void))this->pASMovieRoot.pObject->vfptr[60].__vecDelDtor)();
+  return (Scaleform::Render::Text::Allocator *)((__int64 (__fastcall *)(Scaleform::GFx::ASMovieRootBase *))this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[60].__vecDelDtor)(this->pASMovieRoot.pObject);
 }
 
 // File Line: 4818
 // RVA: 0x8D4A60
 unsigned __int64 __fastcall Scaleform::GFx::MovieImpl::GetASTimerMs(Scaleform::GFx::MovieImpl *this)
 {
-  Scaleform::GFx::MovieImpl *v1; // rsi
-  Scaleform::GFx::TestStream *v2; // rdi
-  unsigned __int64 v3; // rax
-  unsigned __int64 v4; // rbx
+  Scaleform::GFx::TestStream *pObject; // rdi
+  unsigned __int64 v3; // rbx
   unsigned __int64 result; // rax
-  unsigned __int64 v6; // rbx
-  unsigned __int64 v7; // rax
-  Scaleform::LongFormatter v8; // [rsp+30h] [rbp-68h]
-  Scaleform::String v9; // [rsp+A0h] [rbp+8h]
-  Scaleform::Render::RenderBuffer *v10; // [rsp+A8h] [rbp+10h]
+  unsigned __int64 v5; // rbx
+  Scaleform::LongFormatter v6; // [rsp+30h] [rbp-68h] BYREF
+  Scaleform::String v7; // [rsp+A0h] [rbp+8h] BYREF
+  Scaleform::Render::RenderBuffer *v8; // [rsp+A8h] [rbp+10h] BYREF
 
-  v1 = this;
-  v2 = Scaleform::GFx::StateBag::GetTestStream(
-         (Scaleform::GFx::StateBag *)&this->vfptr,
-         (Scaleform::Ptr<Scaleform::GFx::TestStream> *)&v10)->pObject;
-  if ( v10 )
-    Scaleform::RefCountImpl::Release(v10);
-  if ( v2 )
+  pObject = Scaleform::GFx::StateBag::GetTestStream(
+              &this->Scaleform::GFx::StateBag,
+              (Scaleform::Ptr<Scaleform::GFx::TestStream> *)&v8)->pObject;
+  if ( v8 )
+    Scaleform::RefCountImpl::Release(v8);
+  if ( !pObject )
+    return Scaleform::Timer::GetTicks() / 0x3E8 - this->StartTickMs;
+  if ( pObject->TestStatus )
   {
-    if ( v2->TestStatus )
+    Scaleform::String::String(&v7);
+    ((void (__fastcall *)(Scaleform::GFx::TestStream *, const char *, Scaleform::String *))pObject->vfptr[1].__vecDelDtor)(
+      pObject,
+      "timer",
+      &v7);
+    result = strtoui64((const char *)((v7.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12), 0i64, 10);
+    v5 = result;
+    if ( !_InterlockedDecrement((volatile signed __int32 *)((v7.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
     {
-      Scaleform::String::String(&v9);
-      ((void (__fastcall *)(Scaleform::GFx::TestStream *, const char *, Scaleform::String *))v2->vfptr[1].__vecDelDtor)(
-        v2,
-        "timer",
-        &v9);
-      result = strtoui64((const char *)((v9.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12), 0i64, 10);
-      v6 = result;
-      if ( !_InterlockedDecrement((volatile signed __int32 *)((v9.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-      {
-        ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
-        result = v6;
-      }
-    }
-    else
-    {
-      v3 = Scaleform::Timer::GetTicks();
-      v4 = ((unsigned __int64)((v3 * (unsigned __int128)0x624DD2F1A9FBE77ui64 >> 64)
-                             + ((unsigned __int64)(v3 - (v3 * (unsigned __int128)0x624DD2F1A9FBE77ui64 >> 64)) >> 1)) >> 9)
-         - v1->StartTickMs;
-      Scaleform::LongFormatter::LongFormatter(&v8, v4);
-      Scaleform::LongFormatter::Convert(&v8);
-      ((void (__fastcall *)(Scaleform::GFx::TestStream *, const char *, char *))v2->vfptr[2].__vecDelDtor)(
-        v2,
-        "timer",
-        v8.ValueStr);
-      v8.vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
-      Scaleform::Formatter::~Formatter((Scaleform::Formatter *)&v8.vfptr);
-      result = v4;
+      ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+      return v5;
     }
   }
   else
   {
-    v7 = Scaleform::Timer::GetTicks();
-    result = ((unsigned __int64)((v7 * (unsigned __int128)0x624DD2F1A9FBE77ui64 >> 64)
-                               + ((unsigned __int64)(v7 - (v7 * (unsigned __int128)0x624DD2F1A9FBE77ui64 >> 64)) >> 1)) >> 9)
-           - v1->StartTickMs;
+    v3 = Scaleform::Timer::GetTicks() / 0x3E8 - this->StartTickMs;
+    Scaleform::LongFormatter::LongFormatter(&v6, v3);
+    Scaleform::LongFormatter::Convert(&v6);
+    ((void (__fastcall *)(Scaleform::GFx::TestStream *, const char *, char *))pObject->vfptr[2].__vecDelDtor)(
+      pObject,
+      "timer",
+      v6.ValueStr);
+    v6.Scaleform::String::InitStruct::vfptr = (Scaleform::String::InitStructVtbl *)&Scaleform::String::InitStruct::`vftable;
+    Scaleform::Formatter::~Formatter(&v6);
+    return v3;
   }
   return result;
 }
 
 // File Line: 4844
 // RVA: 0x914180
-Scaleform::Render::Point<float> *__fastcall Scaleform::GFx::MovieImpl::TranslateToScreen(Scaleform::GFx::MovieImpl *this, Scaleform::Render::Point<float> *result, Scaleform::Render::Point<float> *p, Scaleform::Render::Matrix2x4<float> *puserMatrix)
+Scaleform::Render::Point<float> *__fastcall Scaleform::GFx::MovieImpl::TranslateToScreen(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::Render::Point<float> *result,
+        Scaleform::Render::Point<float> *p,
+        Scaleform::Render::Matrix2x4<float> *puserMatrix)
 {
-  Scaleform::GFx::InteractiveObject *v4; // rdi
-  float *v5; // rbx
-  float *v6; // rsi
-  Scaleform::Render::Point<float> *v7; // r14
-  Scaleform::Render::Point<float> *v8; // rbp
-  Scaleform::GFx::DisplayObjectBase *v9; // rcx
+  Scaleform::GFx::InteractiveObject *pMainMovie; // rdi
+  Scaleform::GFx::DisplayObjectBase *pParent; // rcx
   float *v10; // rax
-  __int64 v11; // kr00_8
-  float v12; // xmm3_4
-  float v13; // xmm10_4
-  float v14; // xmm4_4
-  float v15; // xmm11_4
-  float v16; // xmm9_4
-  float v17; // xmm10_4
-  float v18; // xmm12_4
-  float v19; // xmm2_4
+  float v11; // xmm1_4
+  float v12; // xmm2_4
+  float v13; // xmm3_4
+  float v14; // xmm10_4
+  float v15; // xmm4_4
+  float v16; // xmm11_4
+  float v17; // xmm9_4
+  float v18; // xmm10_4
+  float v19; // xmm12_4
   float v20; // xmm13_4
   float *v21; // rax
   float v22; // xmm2_4
@@ -8376,262 +8125,241 @@ Scaleform::Render::Point<float> *__fastcall Scaleform::GFx::MovieImpl::Translate
   float v26; // xmm15_4
   float v27; // xmm8_4
   float v28; // xmm5_4
-  float v29; // xmm7_4
-  float v30; // xmm3_4
-  float v31; // xmm4_4
+  float v29; // xmm0_4
+  float v30; // xmm4_4
+  float v31; // xmm1_4
   float v32; // xmm2_4
-  float v33; // xmm1_4
-  float v34; // xmm0_4
-  float v35; // xmm3_4
-  float v36; // xmm4_4
-  float v37; // ST20_4
+  float v33; // xmm0_4
+  float v34; // xmm4_4
+  float v35; // xmm0_4
+  float v36; // xmm14_4
+  float v37; // xmm1_4
   float v38; // xmm0_4
-  float v39; // xmm4_4
-  float v40; // xmm15_4
-  float v41; // xmm2_4
+  Scaleform::Render::Point<float> *v39; // rax
+  float v40; // xmm5_4
+  float v41; // xmm4_4
   float v42; // xmm0_4
-  float v43; // xmm14_4
+  float v43; // xmm2_4
   float v44; // xmm1_4
-  float v45; // xmm0_4
-  float v46; // xmm3_4
-  float v47; // xmm5_4
-  Scaleform::Render::Point<float> *v48; // rax
-  float v49; // xmm9_4
-  float v50; // xmm5_4
-  float v51; // xmm4_4
-  float v52; // xmm10_4
-  float v53; // xmm0_4
-  float v54; // xmm13_4
-  float v55; // xmm0_4
-  float v56; // xmm3_4
-  float v57; // xmm2_4
-  Scaleform::Render::Matrix2x4<float> pmat; // [rsp+30h] [rbp-E8h]
-  float v59; // [rsp+120h] [rbp+8h]
-  float v60; // [rsp+130h] [rbp+18h]
+  float v45; // [rsp+20h] [rbp-F8h]
+  Scaleform::Render::Matrix2x4<float> pmat; // [rsp+30h] [rbp-E8h] BYREF
+  float v47; // [rsp+120h] [rbp+8h]
+  float v48; // [rsp+130h] [rbp+18h]
 
-  v4 = this->pMainMovie;
-  v5 = (float *)this;
-  v6 = (float *)puserMatrix;
-  v7 = p;
-  v8 = result;
+  pMainMovie = this->pMainMovie;
   *(_OWORD *)&pmat.M[0][0] = _xmm;
   *(__m128 *)&pmat.M[1][0] = _xmm;
-  v9 = v4->pParentChar;
-  if ( v9 )
+  pParent = pMainMovie->pParent;
+  if ( pParent )
   {
-    Scaleform::GFx::DisplayObjectBase::GetWorldMatrix(v9, &pmat);
-    v10 = (float *)((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))v4->vfptr[2].__vecDelDtor)(v4);
-    v11 = *(_QWORD *)&pmat.M[0][0];
-    v12 = pmat.M[1][0];
-    v13 = pmat.M[0][0];
-    v14 = pmat.M[1][1];
-    v15 = (float)(pmat.M[0][1] * v10[4]) + (float)(pmat.M[0][0] * *v10);
-    pmat.M[0][0] = (float)(pmat.M[0][1] * v10[4]) + (float)(pmat.M[0][0] * *v10);
-    v16 = (float)(pmat.M[1][1] * v10[4]) + (float)(pmat.M[1][0] * *v10);
-    pmat.M[1][0] = (float)(pmat.M[1][1] * v10[4]) + (float)(pmat.M[1][0] * *v10);
-    v17 = (float)(v13 * v10[1]) + (float)(pmat.M[0][1] * v10[5]);
-    *(_QWORD *)&pmat.M[0][1] = LODWORD(v17);
-    v18 = (float)(v12 * v10[1]) + (float)(pmat.M[1][1] * v10[5]);
-    *(_QWORD *)&pmat.M[1][1] = LODWORD(v18);
-    v19 = (float)(*((float *)&v11 + 1) * v10[7]) + (float)(*(float *)&v11 * v10[3]);
-    v20 = pmat.M[0][3] + v19;
-    pmat.M[0][3] = pmat.M[0][3] + v19;
-    v59 = pmat.M[1][3] + (float)((float)(v14 * v10[7]) + (float)(v12 * v10[3]));
+    Scaleform::GFx::DisplayObjectBase::GetWorldMatrix(pParent, &pmat);
+    v10 = (float *)((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))pMainMovie->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[2].__vecDelDtor)(pMainMovie);
+    v11 = pmat.M[0][0];
+    v12 = pmat.M[0][1];
+    v13 = pmat.M[1][0];
+    v14 = pmat.M[0][0];
+    v15 = pmat.M[1][1];
+    v16 = (float)(pmat.M[0][1] * v10[4]) + (float)(pmat.M[0][0] * *v10);
+    pmat.M[0][0] = v16;
+    v17 = (float)(pmat.M[1][1] * v10[4]) + (float)(pmat.M[1][0] * *v10);
+    pmat.M[1][0] = v17;
+    v18 = (float)(v14 * v10[1]) + (float)(pmat.M[0][1] * v10[5]);
+    *(_QWORD *)&pmat.M[0][1] = LODWORD(v18);
+    v19 = (float)(v13 * v10[1]) + (float)(pmat.M[1][1] * v10[5]);
+    *(_QWORD *)&pmat.M[1][1] = LODWORD(v19);
+    v20 = pmat.M[0][3] + (float)((float)(v12 * v10[7]) + (float)(v11 * v10[3]));
+    pmat.M[0][3] = v20;
+    v47 = pmat.M[1][3] + (float)((float)(v15 * v10[7]) + (float)(v13 * v10[3]));
   }
   else
   {
-    v21 = (float *)((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))v4->vfptr[2].__vecDelDtor)(v4);
-    v15 = *v21;
+    v21 = (float *)((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))pMainMovie->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[2].__vecDelDtor)(pMainMovie);
+    v16 = *v21;
     pmat.M[0][0] = *v21;
-    v17 = v21[1];
+    v18 = v21[1];
     *(_QWORD *)&pmat.M[0][1] = *(_QWORD *)(v21 + 1);
     v20 = v21[3];
-    pmat.M[0][3] = v21[3];
-    v16 = v21[4];
-    pmat.M[1][0] = v21[4];
-    v18 = v21[5];
+    pmat.M[0][3] = v20;
+    v17 = v21[4];
+    pmat.M[1][0] = v17;
+    v19 = v21[5];
     *(_QWORD *)&pmat.M[1][1] = *(_QWORD *)(v21 + 5);
-    v59 = v21[7];
+    v47 = v21[7];
   }
-  v22 = v5[68];
-  v23 = v5[69];
-  v24 = v5[71];
-  v25 = v5[72];
-  v26 = v5[73];
-  v27 = v5[75];
-  if ( v6 )
+  v22 = this->ViewportMatrix.M[0][0];
+  v23 = this->ViewportMatrix.M[0][1];
+  v24 = this->ViewportMatrix.M[0][3];
+  v25 = this->ViewportMatrix.M[1][0];
+  v26 = this->ViewportMatrix.M[1][1];
+  v27 = this->ViewportMatrix.M[1][3];
+  if ( puserMatrix )
   {
-    v28 = v5[68];
-    v29 = v5[72];
-    v30 = v6[4];
-    v31 = (float)(*v6 * v22) + (float)(v30 * v23);
-    v32 = v6[1];
-    v33 = v32;
-    v34 = (float)(*v6 * v29) + (float)(v30 * v26);
-    v35 = v6[3];
-    v60 = v31;
-    v36 = v6[5];
-    v37 = v34;
-    v38 = v36;
-    v39 = v36 * v26;
-    v40 = v32 * v29;
-    v41 = v6[7];
-    v42 = v38 * v23;
-    v43 = v33 * v28;
-    v44 = v35;
-    v26 = v40 + v39;
-    v23 = v43 + v42;
-    v45 = v41;
-    v46 = (float)(v35 * v29) + (float)(v41 * v5[73]);
-    v22 = v60;
-    v27 = v5[75] + v46;
-    v25 = v37;
-    v24 = v5[71] + (float)((float)(v44 * v28) + (float)(v45 * v5[69]));
+    v28 = this->ViewportMatrix.M[0][0];
+    v29 = puserMatrix->M[1][0];
+    v30 = (float)(puserMatrix->M[0][0] * v22) + (float)(v29 * v23);
+    v31 = puserMatrix->M[0][1];
+    v32 = v31 * v25;
+    v48 = v30;
+    v45 = (float)(puserMatrix->M[0][0] * v25) + (float)(v29 * v26);
+    v33 = puserMatrix->M[1][1];
+    v34 = v33 * v26;
+    v35 = v33 * v23;
+    v36 = v31 * v28;
+    v37 = puserMatrix->M[0][3];
+    v26 = v32 + v34;
+    v23 = v36 + v35;
+    v38 = puserMatrix->M[1][3];
+    v22 = v48;
+    v27 = this->ViewportMatrix.M[1][3]
+        + (float)((float)(v37 * this->ViewportMatrix.M[1][0]) + (float)(v38 * this->ViewportMatrix.M[1][1]));
+    v25 = v45;
+    v24 = this->ViewportMatrix.M[0][3] + (float)((float)(v37 * v28) + (float)(v38 * this->ViewportMatrix.M[0][1]));
   }
-  v47 = v16;
-  v48 = v8;
-  v49 = (float)(v16 * v26) + (float)(v15 * v25);
-  v50 = (float)(v47 * v23) + (float)(v15 * v22);
-  v51 = (float)(v17 * v22) + (float)(v18 * v23);
-  v52 = (float)(v17 * v25) + (float)(v18 * v26);
-  v53 = v20;
-  v54 = v20 * v25;
-  v55 = v53 * v22;
-  v56 = v7->x * 20.0;
-  v57 = v7->y * 20.0;
-  v8->y = (float)((float)(v56 * v49) + (float)(v57 * v52)) + (float)(v27 + (float)(v54 + (float)(v59 * v26)));
-  v8->x = (float)((float)(v56 * v50) + (float)(v57 * v51)) + (float)(v24 + (float)((float)(v59 * v23) + v55));
-  return v48;
+  v39 = result;
+  v40 = (float)(v17 * v23) + (float)(v16 * v22);
+  v41 = (float)(v18 * v22) + (float)(v19 * v23);
+  v42 = v20 * v22;
+  v43 = p->y * 20.0;
+  v44 = p->x * 20.0;
+  result->y = (float)((float)(v44 * (float)((float)(v17 * v26) + (float)(v16 * v25)))
+                    + (float)(v43 * (float)((float)(v18 * v25) + (float)(v19 * v26))))
+            + (float)(v27 + (float)((float)(v20 * v25) + (float)(v47 * v26)));
+  result->x = (float)((float)(v44 * v40) + (float)(v43 * v41)) + (float)(v24 + (float)((float)(v47 * v23) + v42));
+  return v39;
 }
 
 // File Line: 4855
 // RVA: 0x914590
-Scaleform::Render::Rect<float> *__usercall Scaleform::GFx::MovieImpl::TranslateToScreen@<rax>(Scaleform::GFx::MovieImpl *this@<rcx>, Scaleform::Render::Rect<float> *result@<rdx>, Scaleform::Render::Rect<float> *r@<r8>, Scaleform::Render::Matrix2x4<float> *puserMatrix@<r9>, __int128 a5@<xmm6>)
+Scaleform::Render::Rect<float> *__fastcall Scaleform::GFx::MovieImpl::TranslateToScreen(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::Render::Rect<float> *result,
+        Scaleform::Render::Rect<float> *r,
+        Scaleform::Render::Matrix2x4<float> *puserMatrix)
 {
-  float *v5; // rbx
-  float *v6; // rsi
-  Scaleform::Render::Rect<float> *v7; // r14
-  Scaleform::Render::Rect<float> *v8; // r15
-  Scaleform::GFx::InteractiveObject *v9; // rdi
-  Scaleform::GFx::DisplayObjectBase *v10; // rcx
+  __int128 v4; // xmm6
+  Scaleform::GFx::InteractiveObject *pMainMovie; // rdi
+  Scaleform::GFx::DisplayObjectBase *pParent; // rcx
   float *v11; // rax
-  __int64 v12; // kr00_8
-  __int64 v13; // kr08_8
-  float v14; // xmm12_4
-  float v15; // xmm13_4
-  float v16; // xmm14_4
-  float v17; // xmm0_4
-  float v18; // xmm15_4
-  float v19; // xmm15_4
-  float v20; // xmm0_4
-  float *v21; // rax
-  float v22; // xmm10_4
-  float v23; // xmm8_4
-  float v24; // xmm3_4
-  float v25; // xmm11_4
-  float v26; // xmm9_4
-  float v27; // xmm4_4
-  float v28; // xmm7_4
-  float v29; // xmm5_4
-  float v30; // xmm1_4
+  float v12; // xmm1_4
+  float v13; // xmm2_4
+  float v14; // xmm3_4
+  float v15; // xmm4_4
+  float v16; // xmm12_4
+  float v17; // xmm13_4
+  float v18; // xmm14_4
+  float v19; // xmm0_4
+  float v20; // xmm15_4
+  float v21; // xmm15_4
+  float v22; // xmm0_4
+  float *v23; // rax
+  float v24; // xmm10_4
+  float v25; // xmm8_4
+  float v26; // xmm3_4
+  float v27; // xmm11_4
+  float v28; // xmm9_4
+  float v29; // xmm4_4
+  float v30; // xmm7_4
   float v31; // xmm5_4
   float v32; // xmm1_4
-  float v33; // xmm0_4
-  float v34; // xmm0_4
-  float v35; // xmm0_4
-  Scaleform::Render::Rect<float> ra; // [rsp+20h] [rbp-C8h]
-  Scaleform::Render::Matrix2x4<float> pmat; // [rsp+30h] [rbp-B8h]
-  Scaleform::Render::Matrix2x4<float> v39; // [rsp+50h] [rbp-98h]
-  __int128 v40; // [rsp+100h] [rbp+18h]
+  float v33; // xmm5_4
+  float x2; // xmm1_4
+  float x1; // xmm0_4
+  float y1; // xmm0_4
+  float y2; // xmm0_4
+  Scaleform::Render::Rect<float> ra; // [rsp+20h] [rbp-C8h] BYREF
+  Scaleform::Render::Matrix2x4<float> pmat; // [rsp+30h] [rbp-B8h] BYREF
+  Scaleform::Render::Matrix2x4<float> v41; // [rsp+50h] [rbp-98h] BYREF
+  __int128 v42; // [rsp+100h] [rbp+18h]
 
-  v5 = (float *)this;
-  v6 = (float *)puserMatrix;
-  v7 = r;
-  v8 = result;
   *(_OWORD *)&pmat.M[0][0] = _xmm;
   *(__m128 *)&pmat.M[1][0] = _xmm;
-  v9 = this->pMainMovie;
-  v10 = v9->pParentChar;
-  if ( v10 )
+  pMainMovie = this->pMainMovie;
+  pParent = pMainMovie->pParent;
+  if ( pParent )
   {
-    Scaleform::GFx::DisplayObjectBase::GetWorldMatrix(v10, &pmat);
-    v11 = (float *)((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))v9->vfptr[2].__vecDelDtor)(v9);
-    v12 = *(_QWORD *)&pmat.M[0][0];
-    v13 = *(_QWORD *)&pmat.M[1][0];
-    v14 = (float)(pmat.M[0][0] * *v11) + (float)(pmat.M[0][1] * v11[4]);
-    pmat.M[0][0] = (float)(pmat.M[0][0] * *v11) + (float)(pmat.M[0][1] * v11[4]);
-    v15 = (float)(pmat.M[1][1] * v11[4]) + (float)(pmat.M[1][0] * *v11);
-    pmat.M[1][0] = (float)(pmat.M[1][1] * v11[4]) + (float)(pmat.M[1][0] * *v11);
-    v16 = (float)(pmat.M[0][1] * v11[5]) + (float)(*(float *)&v12 * v11[1]);
-    pmat.M[0][1] = (float)(pmat.M[0][1] * v11[5]) + (float)(*(float *)&v12 * v11[1]);
-    v17 = pmat.M[1][1] * v11[5];
-    v18 = *(float *)&v13 * v11[1];
+    Scaleform::GFx::DisplayObjectBase::GetWorldMatrix(pParent, &pmat);
+    v11 = (float *)((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))pMainMovie->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[2].__vecDelDtor)(pMainMovie);
+    v12 = pmat.M[0][0];
+    v13 = pmat.M[0][1];
+    v14 = pmat.M[1][0];
+    v15 = pmat.M[1][1];
+    v16 = (float)(pmat.M[0][0] * *v11) + (float)(pmat.M[0][1] * v11[4]);
+    pmat.M[0][0] = v16;
+    v17 = (float)(pmat.M[1][1] * v11[4]) + (float)(pmat.M[1][0] * *v11);
+    pmat.M[1][0] = v17;
+    v18 = (float)(pmat.M[0][1] * v11[5]) + (float)(v12 * v11[1]);
+    pmat.M[0][1] = v18;
+    v19 = pmat.M[1][1] * v11[5];
+    v20 = v14 * v11[1];
     pmat.M[0][2] = 0.0;
-    v19 = v18 + v17;
-    *(_QWORD *)&pmat.M[1][1] = LODWORD(v19);
-    pmat.M[0][3] = pmat.M[0][3] + (float)((float)(*((float *)&v12 + 1) * v11[7]) + (float)(*(float *)&v12 * v11[3]));
-    v20 = pmat.M[1][3] + (float)((float)(*((float *)&v13 + 1) * v11[7]) + (float)(*(float *)&v13 * v11[3]));
+    v21 = v20 + v19;
+    *(_QWORD *)&pmat.M[1][1] = LODWORD(v21);
+    pmat.M[0][3] = pmat.M[0][3] + (float)((float)(v13 * v11[7]) + (float)(v12 * v11[3]));
+    v22 = pmat.M[1][3] + (float)((float)(v15 * v11[7]) + (float)(v14 * v11[3]));
   }
   else
   {
-    v21 = (float *)((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))v9->vfptr[2].__vecDelDtor)(v9);
-    v14 = *v21;
-    pmat.M[0][0] = *v21;
-    v16 = v21[1];
-    *(_QWORD *)&pmat.M[0][1] = *(_QWORD *)(v21 + 1);
-    pmat.M[0][3] = v21[3];
-    v15 = v21[4];
-    pmat.M[1][0] = v21[4];
-    v19 = v21[5];
-    *(_QWORD *)&pmat.M[1][1] = *(_QWORD *)(v21 + 5);
-    v20 = v21[7];
+    v23 = (float *)((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))pMainMovie->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[2].__vecDelDtor)(pMainMovie);
+    v16 = *v23;
+    pmat.M[0][0] = *v23;
+    v18 = v23[1];
+    *(_QWORD *)&pmat.M[0][1] = *(_QWORD *)(v23 + 1);
+    pmat.M[0][3] = v23[3];
+    v17 = v23[4];
+    pmat.M[1][0] = v17;
+    v21 = v23[5];
+    *(_QWORD *)&pmat.M[1][1] = *(_QWORD *)(v23 + 5);
+    v22 = v23[7];
   }
-  v22 = v5[68];
-  v23 = v5[69];
-  v24 = v5[71];
-  v25 = v5[72];
-  v26 = v5[73];
-  v27 = v5[75];
-  pmat.M[1][3] = v20;
-  if ( v6 )
+  v24 = this->ViewportMatrix.M[0][0];
+  v25 = this->ViewportMatrix.M[0][1];
+  v26 = this->ViewportMatrix.M[0][3];
+  v27 = this->ViewportMatrix.M[1][0];
+  v28 = this->ViewportMatrix.M[1][1];
+  v29 = this->ViewportMatrix.M[1][3];
+  pmat.M[1][3] = v22;
+  if ( puserMatrix )
   {
-    v40 = a5;
-    v28 = v25;
-    v29 = v22;
-    v30 = v22;
-    v22 = (float)(v22 * *v6) + (float)(v23 * v6[4]);
-    v25 = (float)(v25 * *v6) + (float)(v26 * v6[4]);
-    v31 = (float)(v29 * v6[3]) + (float)(v23 * v6[7]);
-    v23 = (float)(v30 * v6[1]) + (float)(v23 * v6[5]);
-    v27 = v5[75] + (float)((float)(v28 * v6[3]) + (float)(v26 * v6[7]));
-    v24 = v24 + v31;
-    v26 = (float)(v28 * v6[1]) + (float)(v26 * v6[5]);
+    v42 = v4;
+    v30 = v27;
+    v31 = v24;
+    v32 = v24;
+    v24 = (float)(v24 * puserMatrix->M[0][0]) + (float)(v25 * puserMatrix->M[1][0]);
+    v27 = (float)(v27 * puserMatrix->M[0][0]) + (float)(v28 * puserMatrix->M[1][0]);
+    v33 = (float)(v31 * puserMatrix->M[0][3]) + (float)(v25 * puserMatrix->M[1][3]);
+    v25 = (float)(v32 * puserMatrix->M[0][1]) + (float)(v25 * puserMatrix->M[1][1]);
+    v29 = this->ViewportMatrix.M[1][3]
+        + (float)((float)(v30 * puserMatrix->M[0][3]) + (float)(v28 * puserMatrix->M[1][3]));
+    v26 = v26 + v33;
+    v28 = (float)(v30 * puserMatrix->M[0][1]) + (float)(v28 * puserMatrix->M[1][1]);
   }
-  v39.M[0][0] = (float)(v23 * v15) + (float)(v22 * v14);
-  v39.M[1][0] = (float)(v26 * v15) + (float)(v25 * v14);
-  *(_QWORD *)&v39.M[0][1] = COERCE_UNSIGNED_INT((float)(v23 * v19) + (float)(v22 * v16));
-  v32 = v7->x2;
-  v33 = v7->x1;
-  *(_QWORD *)&v39.M[1][1] = COERCE_UNSIGNED_INT((float)(v26 * v19) + (float)(v25 * v16));
-  ra.x1 = v33 * 20.0;
-  v34 = v7->y1;
-  v39.M[0][3] = v24 + (float)((float)(v23 * pmat.M[1][3]) + (float)(v22 * pmat.M[0][3]));
-  ra.y1 = v34 * 20.0;
-  v35 = v7->y2;
-  v39.M[1][3] = v27 + (float)((float)(v26 * pmat.M[1][3]) + (float)(v25 * pmat.M[0][3]));
-  ra.y2 = v35 * 20.0;
-  ra.x2 = v32 * 20.0;
-  Scaleform::Render::Matrix2x4<float>::EncloseTransform(&v39, v8, &ra);
-  return v8;
+  v41.M[0][0] = (float)(v25 * v17) + (float)(v24 * v16);
+  v41.M[1][0] = (float)(v28 * v17) + (float)(v27 * v16);
+  *(_QWORD *)&v41.M[0][1] = COERCE_UNSIGNED_INT((float)(v25 * v21) + (float)(v24 * v18));
+  x2 = r->x2;
+  x1 = r->x1;
+  *(_QWORD *)&v41.M[1][1] = COERCE_UNSIGNED_INT((float)(v28 * v21) + (float)(v27 * v18));
+  ra.x1 = x1 * 20.0;
+  y1 = r->y1;
+  v41.M[0][3] = v26 + (float)((float)(v25 * pmat.M[1][3]) + (float)(v24 * pmat.M[0][3]));
+  ra.y1 = y1 * 20.0;
+  y2 = r->y2;
+  v41.M[1][3] = v29 + (float)((float)(v28 * pmat.M[1][3]) + (float)(v27 * pmat.M[0][3]));
+  ra.y2 = y2 * 20.0;
+  ra.x2 = x2 * 20.0;
+  Scaleform::Render::Matrix2x4<float>::EncloseTransform(&v41, result, &ra);
+  return result;
 }
 
 // File Line: 4872
 // RVA: 0x913DA0
-__int64 __fastcall Scaleform::GFx::MovieImpl::TranslateLocalToScreen(Scaleform::GFx::MovieImpl *this, const char *pathToMovieClip, Scaleform::Render::Point<float> *pt, Scaleform::Render::Point<float> *presPt, Scaleform::Render::Matrix2x4<float> *userMatrix)
+__int64 __fastcall Scaleform::GFx::MovieImpl::TranslateLocalToScreen(
+        Scaleform::GFx::MovieImpl *this,
+        const char *pathToMovieClip,
+        Scaleform::Render::Point<float> *pt,
+        Scaleform::Render::Point<float> *presPt,
+        Scaleform::Render::Matrix2x4<float> *userMatrix)
 {
-  Scaleform::Render::Point<float> *v5; // rdi
-  Scaleform::Render::Point<float> *v6; // rsi
-  float *v7; // rbx
   float v8; // xmm8_4
   float v9; // xmm10_4
   float v10; // xmm12_4
@@ -8642,59 +8370,60 @@ __int64 __fastcall Scaleform::GFx::MovieImpl::TranslateLocalToScreen(Scaleform::
   float v15; // xmm7_4
   float v16; // xmm5_4
   unsigned __int8 v17; // bl
-  __int128 v19; // [rsp+30h] [rbp-D8h]
+  __int128 v19; // [rsp+30h] [rbp-D8h] BYREF
   __m128 v20; // [rsp+40h] [rbp-C8h]
-  char v21; // [rsp+50h] [rbp-B8h]
+  char v21[16]; // [rsp+50h] [rbp-B8h] BYREF
   __int64 v22; // [rsp+60h] [rbp-A8h]
-  unsigned int v23; // [rsp+68h] [rbp-A0h]
+  int v23; // [rsp+68h] [rbp-A0h]
   __int64 v24; // [rsp+70h] [rbp-98h]
 
-  v5 = presPt;
-  v6 = pt;
-  v7 = (float *)this;
   v22 = 0i64;
   v23 = 0;
-  if ( ((unsigned __int8 (__fastcall *)(Scaleform::GFx::ASMovieRootBase *, char *, const char *))this->pASMovieRoot.pObject->vfptr[49].__vecDelDtor)(
+  if ( ((unsigned __int8 (__fastcall *)(Scaleform::GFx::ASMovieRootBase *, char *, const char *))this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[49].__vecDelDtor)(
          this->pASMovieRoot.pObject,
-         &v21,
+         v21,
          pathToMovieClip)
     && (v19 = _xmm,
         v20 = _xmm,
         (*(unsigned __int8 (__fastcall **)(__int64, __int64, __int128 *))(*(_QWORD *)v22 + 232i64))(v22, v24, &v19)) )
   {
-    v8 = v7[68] * 20.0;
-    v9 = v7[69] * 20.0;
-    v10 = v7[71] * 20.0;
-    v11 = v7[72] * 20.0;
-    v12 = v7[73] * 20.0;
-    v13 = v7[75] * 20.0;
+    v8 = this->ViewportMatrix.M[0][0] * 20.0;
+    v9 = this->ViewportMatrix.M[0][1] * 20.0;
+    v10 = this->ViewportMatrix.M[0][3] * 20.0;
+    v11 = this->ViewportMatrix.M[1][0] * 20.0;
+    v12 = this->ViewportMatrix.M[1][1] * 20.0;
+    v13 = this->ViewportMatrix.M[1][3] * 20.0;
     if ( userMatrix )
     {
-      v14 = v7[68] * 20.0;
-      v15 = v7[72] * 20.0;
+      v14 = this->ViewportMatrix.M[0][0] * 20.0;
+      v15 = this->ViewportMatrix.M[1][0] * 20.0;
       v8 = (float)(v8 * userMatrix->M[0][0]) + (float)(v9 * userMatrix->M[1][0]);
       v11 = (float)(v11 * userMatrix->M[0][0]) + (float)(v12 * userMatrix->M[1][0]);
       v9 = (float)(v14 * userMatrix->M[0][1]) + (float)(v9 * userMatrix->M[1][1]);
       v12 = (float)(v15 * userMatrix->M[0][1]) + (float)(v12 * userMatrix->M[1][1]);
-      v10 = v10 + (float)((float)(v14 * userMatrix->M[0][3]) + (float)((float)(v7[69] * 20.0) * userMatrix->M[1][3]));
-      v13 = v13 + (float)((float)(v15 * userMatrix->M[0][3]) + (float)((float)(v7[73] * 20.0) * userMatrix->M[1][3]));
+      v10 = v10
+          + (float)((float)(v14 * userMatrix->M[0][3])
+                  + (float)((float)(this->ViewportMatrix.M[0][1] * 20.0) * userMatrix->M[1][3]));
+      v13 = v13
+          + (float)((float)(v15 * userMatrix->M[0][3])
+                  + (float)((float)(this->ViewportMatrix.M[1][1] * 20.0) * userMatrix->M[1][3]));
     }
-    v16 = (float)((float)((float)((float)(v11 * *(float *)&v19) + (float)(v12 * v20.m128_f32[0])) * v6->x)
-                + (float)((float)((float)(v11 * *((float *)&v19 + 1)) + (float)(v12 * v20.m128_f32[1])) * v6->y))
+    v16 = (float)((float)((float)((float)(v11 * *(float *)&v19) + (float)(v12 * v20.m128_f32[0])) * pt->x)
+                + (float)((float)((float)(v11 * *((float *)&v19 + 1)) + (float)(v12 * v20.m128_f32[1])) * pt->y))
         + (float)(v13 + (float)((float)(v11 * *((float *)&v19 + 3)) + (float)(v12 * v20.m128_f32[3])));
-    v5->x = (float)((float)((float)((float)(v8 * *(float *)&v19) + (float)(v9 * v20.m128_f32[0])) * v6->x)
-                  + (float)((float)((float)(v8 * *((float *)&v19 + 1)) + (float)(v9 * v20.m128_f32[1])) * v6->y))
-          + (float)(v10 + (float)((float)(v8 * *((float *)&v19 + 3)) + (float)(v9 * v20.m128_f32[3])));
-    v5->y = v16;
+    presPt->x = (float)((float)((float)((float)(v8 * *(float *)&v19) + (float)(v9 * v20.m128_f32[0])) * pt->x)
+                      + (float)((float)((float)(v8 * *((float *)&v19 + 1)) + (float)(v9 * v20.m128_f32[1])) * pt->y))
+              + (float)(v10 + (float)((float)(v8 * *((float *)&v19 + 3)) + (float)(v9 * v20.m128_f32[3])));
+    presPt->y = v16;
     v17 = 1;
   }
   else
   {
     v17 = 0;
   }
-  if ( (v23 >> 6) & 1 )
+  if ( (v23 & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v22 + 16i64))(v22, &v21, v24);
+    (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v22 + 16i64))(v22, v21, v24);
     v22 = 0i64;
   }
   return v17;
@@ -8702,36 +8431,43 @@ __int64 __fastcall Scaleform::GFx::MovieImpl::TranslateLocalToScreen(Scaleform::
 
 // File Line: 4899
 // RVA: 0x8DE5D0
-void __fastcall Scaleform::GFx::MovieImpl::GetStats(Scaleform::GFx::MovieImpl *this, Scaleform::StatBag *pbag, __int64 reset)
+void __fastcall Scaleform::GFx::MovieImpl::GetStats(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::StatBag *pbag,
+        __int64 reset)
 {
-  Scaleform::AmpStats *v3; // rcx
+  Scaleform::AmpStats *pObject; // rcx
 
-  v3 = this->AdvanceStats.pObject;
-  if ( v3 )
-    ((void (__fastcall *)(Scaleform::AmpStats *, Scaleform::StatBag *, __int64))v3->vfptr[5].__vecDelDtor)(
-      v3,
+  pObject = this->AdvanceStats.pObject;
+  if ( pObject )
+    ((void (__fastcall *)(Scaleform::AmpStats *, Scaleform::StatBag *, __int64))pObject->vfptr[5].__vecDelDtor)(
+      pObject,
       pbag,
       reset);
 }
 
 // File Line: 4926
 // RVA: 0x8F0CD0
-void __fastcall Scaleform::GFx::MovieImpl::PrintObjectsReport(Scaleform::GFx::MovieImpl *this, __int64 flags, Scaleform::Log *log, const char *swfName, Scaleform::Ptr<Scaleform::AmpMovieObjectDesc> *root, Scaleform::MemoryHeap *heap)
+void __fastcall Scaleform::GFx::MovieImpl::PrintObjectsReport(
+        Scaleform::GFx::MovieImpl *this,
+        __int64 flags,
+        Scaleform::Log *log,
+        const char *swfName,
+        Scaleform::Ptr<Scaleform::AmpMovieObjectDesc> *root,
+        Scaleform::MemoryHeap *heap)
 {
-  Scaleform::GFx::MovieImpl *v6; // rdi
   Scaleform::AmpMovieObjectDesc *v7; // rdi
 
-  v6 = this;
-  ((void (__fastcall *)(Scaleform::GFx::ASMovieRootBase *, __int64, Scaleform::Log *, const char *))this->pASMovieRoot.pObject->vfptr[32].__vecDelDtor)(
+  ((void (__fastcall *)(Scaleform::GFx::ASMovieRootBase *, __int64, Scaleform::Log *, const char *))this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[32].__vecDelDtor)(
     this->pASMovieRoot.pObject,
     flags,
     log,
     swfName);
   if ( root )
   {
-    v7 = (Scaleform::AmpMovieObjectDesc *)v6->pASMovieRoot.pObject->vfptr[34].__vecDelDtor(
-                                            (Scaleform::RefCountImplCore *)&v6->pASMovieRoot.pObject->vfptr,
-                                            (unsigned int)heap);
+    v7 = (Scaleform::AmpMovieObjectDesc *)this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[34].__vecDelDtor(
+                                            this->pASMovieRoot.pObject,
+                                            heap);
     if ( root->pObject )
       Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)root->pObject);
     root->pObject = v7;
@@ -8740,172 +8476,173 @@ void __fastcall Scaleform::GFx::MovieImpl::PrintObjectsReport(Scaleform::GFx::Mo
 
 // File Line: 4936
 // RVA: 0x908630
-char __usercall Scaleform::GFx::MovieImpl::SetLevelMovie@<al>(Scaleform::GFx::MovieImpl *this@<rcx>, int level@<edx>, Scaleform::GFx::DisplayObjContainer *psprite@<r8>, float a4@<xmm0>)
+char __fastcall Scaleform::GFx::MovieImpl::SetLevelMovie(
+        Scaleform::GFx::MovieImpl *this,
+        int level,
+        Scaleform::GFx::DisplayObjContainer *psprite)
 {
-  Scaleform::GFx::DisplayObjContainer *v4; // r15
-  int v5; // esi
-  Scaleform::GFx::MovieImpl *v6; // r14
-  unsigned int v7; // ecx
-  unsigned __int64 v8; // rdx
-  __int64 v9; // rax
-  Scaleform::GFx::MovieImpl::LevelInfo *v10; // r8
-  unsigned __int64 v12; // rdi
-  unsigned __int64 v13; // r13
-  signed __int64 v14; // rax
-  signed __int64 v15; // rbx
-  unsigned __int64 v16; // r8
-  signed __int64 v17; // rdi
-  __int64 v18; // rax
-  Scaleform::GFx::MovieDefImpl *v19; // rdi
-  Scaleform::GFx::MovieDefImpl *v20; // rbx
-  Scaleform::GFx::ResourceLibBase *v21; // rcx
-  Scaleform::AmpStats *v22; // rsi
-  Scaleform::RefCountImplCoreVtbl *v23; // rbx
-  __int64 v24; // rax
-  Scaleform::GFx::MovieDefImpl *v25; // rax
-  Scaleform::GFx::StateBagImpl *v26; // rbx
-  Scaleform::GFx::StateBagImpl *v27; // rdi
-  Scaleform::Render::RenderBuffer *v28; // rcx
-  __int64 v29; // rax
-  __int64 v30; // rsi
-  int v31; // [rsp+38h] [rbp-70h]
-  int v32; // [rsp+3Ch] [rbp-6Ch]
-  __int64 v33; // [rsp+40h] [rbp-68h]
-  int v34; // [rsp+48h] [rbp-60h]
-  int v35; // [rsp+4Ch] [rbp-5Ch]
-  int v36; // [rsp+50h] [rbp-58h]
-  __int64 v37; // [rsp+54h] [rbp-54h]
-  __int64 v38; // [rsp+5Ch] [rbp-4Ch]
-  int v39; // [rsp+64h] [rbp-44h]
-  int v40; // [rsp+68h] [rbp-40h]
+  unsigned int v6; // ecx
+  unsigned __int64 Size; // rdx
+  __int64 v8; // rax
+  Scaleform::GFx::MovieImpl::LevelInfo *Data; // r8
+  unsigned __int64 v11; // rdi
+  unsigned __int64 v12; // r13
+  Scaleform::GFx::MovieImpl::LevelInfo *v13; // rax
+  __int64 v14; // rbx
+  unsigned __int64 v15; // r8
+  Scaleform::GFx::MovieImpl::LevelInfo *v16; // rdi
+  __int64 v17; // rax
+  Scaleform::GFx::MovieDefImpl *v18; // rdi
+  Scaleform::GFx::MovieDefImpl *pObject; // rbx
+  Scaleform::GFx::ResourceLibBase *pLib; // rcx
+  Scaleform::AmpStats *v21; // rsi
+  Scaleform::RefCountImplCoreVtbl *vfptr; // rbx
+  __int64 v23; // rax
+  Scaleform::GFx::MovieDefImpl *v24; // rax
+  Scaleform::GFx::StateBagImpl *v25; // rbx
+  Scaleform::GFx::StateBagImpl *v26; // rdi
+  Scaleform::Render::RenderBuffer *v27; // rcx
+  __int64 v28; // rax
+  __int64 v29; // rsi
+  int v30; // ebp
+  int v31; // edi
+  int v32; // ebx
+  int v33[2]; // [rsp+38h] [rbp-70h] BYREF
+  __int64 v34; // [rsp+40h] [rbp-68h]
+  int v35; // [rsp+48h] [rbp-60h]
+  int v36; // [rsp+4Ch] [rbp-5Ch]
+  int v37; // [rsp+50h] [rbp-58h]
+  __int64 v38; // [rsp+54h] [rbp-54h]
+  __int64 v39; // [rsp+5Ch] [rbp-4Ch]
+  int v40; // [rsp+64h] [rbp-44h]
+  int v41; // [rsp+68h] [rbp-40h]
 
-  v4 = psprite;
-  v5 = level;
-  v6 = this;
-  v7 = 0;
-  v8 = v6->MovieLevels.Data.Size;
-  if ( v8 )
+  v6 = 0;
+  Size = this->MovieLevels.Data.Size;
+  if ( Size )
   {
-    v9 = 0i64;
-    v10 = v6->MovieLevels.Data.Data;
-    while ( v10[v9].Level < v5 )
+    v8 = 0i64;
+    Data = this->MovieLevels.Data.Data;
+    while ( Data[v8].Level < level )
     {
-      v9 = ++v7;
-      if ( v7 >= v8 )
+      v8 = ++v6;
+      if ( v6 >= Size )
         goto LABEL_8;
     }
-    if ( v10[v7].Level == v5 )
+    if ( Data[v6].Level == level )
       return 0;
   }
 LABEL_8:
-  v6->Flags |= 0x100u;
-  if ( v4 )
-    ++v4->RefCount;
-  v12 = v7;
-  v13 = v6->MovieLevels.Data.Size;
+  this->Flags |= 0x100u;
+  if ( psprite )
+    ++psprite->RefCount;
+  v11 = v6;
+  v12 = this->MovieLevels.Data.Size;
   Scaleform::ArrayDataBase<Scaleform::GFx::MovieImpl::LevelInfo,Scaleform::AllocatorLH<Scaleform::GFx::MovieImpl::LevelInfo,327>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
-    (Scaleform::ArrayDataBase<Scaleform::GFx::MovieImpl::LevelInfo,Scaleform::AllocatorLH<Scaleform::GFx::MovieImpl::LevelInfo,327>,Scaleform::ArrayDefaultPolicy> *)&v6->MovieLevels.Data.Data,
-    &v6->MovieLevels,
-    v13 + 1);
-  if ( v13 + 1 > v13 )
+    &this->MovieLevels.Data,
+    &this->MovieLevels,
+    v12 + 1);
+  if ( v12 + 1 > v12 )
   {
-    v14 = (signed __int64)&v6->MovieLevels.Data.Data[v13];
-    v15 = 1i64;
+    v13 = &this->MovieLevels.Data.Data[v12];
+    v14 = 1i64;
     do
     {
-      if ( v14 )
-        *(_QWORD *)(v14 + 8) = 0i64;
-      v14 += 16i64;
-      --v15;
+      if ( v13 )
+        v13->pSprite.pObject = 0i64;
+      ++v13;
+      --v14;
     }
-    while ( v15 );
+    while ( v14 );
   }
-  v16 = v6->MovieLevels.Data.Size;
-  if ( v12 < v16 - 1 )
-    memmove(&v6->MovieLevels.Data.Data[v12 + 1], &v6->MovieLevels.Data.Data[v12], 16 * (v16 - v12 - 1));
-  v17 = (signed __int64)&v6->MovieLevels.Data.Data[v12];
-  if ( v17 )
+  v15 = this->MovieLevels.Data.Size;
+  if ( v11 < v15 - 1 )
+    memmove(&this->MovieLevels.Data.Data[v11 + 1], &this->MovieLevels.Data.Data[v11], 16 * (v15 - v11 - 1));
+  v16 = &this->MovieLevels.Data.Data[v11];
+  if ( v16 )
   {
-    *(_DWORD *)v17 = v5;
-    if ( v4 )
-      ++v4->RefCount;
-    *(_QWORD *)(v17 + 8) = v4;
+    v16->Level = level;
+    if ( psprite )
+      ++psprite->RefCount;
+    v16->pSprite.pObject = psprite;
   }
-  v4->vfptr[122].__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v4->vfptr, v5);
-  if ( !v5 )
+  psprite->Scaleform::GFx::InteractiveObject::Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[122].__vecDelDtor(
+    psprite,
+    level);
+  if ( !level )
   {
-    v6->pMainMovie = (Scaleform::GFx::InteractiveObject *)&v4->vfptr;
-    v18 = ((__int64 (__fastcall *)(Scaleform::GFx::DisplayObjContainer *))v4->vfptr[66].__vecDelDtor)(v4);
-    v19 = (Scaleform::GFx::MovieDefImpl *)v18;
-    if ( v18 )
-      _InterlockedExchangeAdd((volatile signed __int32 *)(v18 + 8), 1u);
-    v20 = v6->pMainMovieDef.pObject;
-    if ( v20 && !_InterlockedDecrement(&v20->RefCount.Value) )
+    this->pMainMovie = psprite;
+    v17 = ((__int64 (__fastcall *)(Scaleform::GFx::DisplayObjContainer *))psprite->Scaleform::GFx::InteractiveObject::Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[66].__vecDelDtor)(psprite);
+    v18 = (Scaleform::GFx::MovieDefImpl *)v17;
+    if ( v17 )
+      _InterlockedExchangeAdd((volatile signed __int32 *)(v17 + 8), 1u);
+    pObject = this->pMainMovieDef.pObject;
+    if ( pObject && !_InterlockedDecrement(&pObject->RefCount.Value) )
     {
-      v21 = v20->pLib;
+      pLib = pObject->pLib;
+      if ( pLib )
+      {
+        pLib->vfptr[1].__vecDelDtor(pLib, (unsigned int)pObject);
+        pObject->pLib = 0i64;
+      }
+      pObject->Scaleform::GFx::MovieDef::Scaleform::GFx::Resource::vfptr->__vecDelDtor(pObject, 1u);
+    }
+    this->pMainMovieDef.pObject = v18;
+    if ( v18 )
+    {
+      v21 = this->AdvanceStats.pObject;
       if ( v21 )
       {
-        v21->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v21->vfptr, (unsigned int)v20);
-        v20->pLib = 0i64;
-      }
-      v20->vfptr->__vecDelDtor((Scaleform::GFx::Resource *)&v20->vfptr, 1u);
-    }
-    v6->pMainMovieDef.pObject = v19;
-    if ( v19 )
-    {
-      v22 = v6->AdvanceStats.pObject;
-      if ( v22 )
-      {
-        v23 = v22->vfptr;
-        v24 = ((__int64 (__fastcall *)(Scaleform::GFx::MovieDefImpl *))v19->vfptr[3].__vecDelDtor)(v19);
-        v23[7].__vecDelDtor((Scaleform::RefCountImplCore *)&v22->vfptr, v24);
+        vfptr = v21->vfptr;
+        v23 = ((__int64 (__fastcall *)(Scaleform::GFx::MovieDefImpl *))v18->Scaleform::GFx::MovieDef::Scaleform::GFx::Resource::vfptr[3].__vecDelDtor)(v18);
+        vfptr[7].__vecDelDtor(v21, v23);
       }
     }
-    v25 = v6->pMainMovieDef.pObject;
-    v26 = v25->pStateBag.pObject;
-    v27 = v6->pStateBag.pObject;
-    if ( v26 )
-      Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)v25->pStateBag.pObject);
-    v28 = (Scaleform::Render::RenderBuffer *)v27->pDelegate.pObject;
-    if ( v28 )
-      Scaleform::RefCountImpl::Release(v28);
-    v27->pDelegate.pObject = v26;
-    v29 = ((__int64 (__fastcall *)(Scaleform::GFx::MovieImpl *))v6->vfptr[1].__vecDelDtor)(v6);
-    (*(void (__fastcall **)(__int64))(*(_QWORD *)v29 + 72i64))(v29);
-    v6->FrameTime = 1.0 / a4;
-    if ( !(v6->Flags & 1) )
+    v24 = this->pMainMovieDef.pObject;
+    v25 = v24->pStateBag.pObject;
+    v26 = this->pStateBag.pObject;
+    if ( v25 )
+      Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)v24->pStateBag.pObject);
+    v27 = (Scaleform::Render::RenderBuffer *)v26->pDelegate.pObject;
+    if ( v27 )
+      Scaleform::RefCountImpl::Release(v27);
+    v26->pDelegate.pObject = v25;
+    v28 = ((__int64 (__fastcall *)(Scaleform::GFx::MovieImpl *))this->Scaleform::GFx::Movie::Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr[1].__vecDelDtor)(this);
+    this->FrameTime = 1.0 / (*(float (__fastcall **)(__int64))(*(_QWORD *)v28 + 72i64))(v28);
+    if ( (this->Flags & 1) == 0 )
     {
-      v30 = ((__int64 (__fastcall *)(Scaleform::GFx::DisplayObjContainer *))v4->vfptr[66].__vecDelDtor)(v4);
-      (*(void (__fastcall **)(__int64))(*(_QWORD *)v30 + 56i64))(v30);
-      (*(void (__fastcall **)(__int64))(*(_QWORD *)v30 + 48i64))(v30);
-      (*(void (__fastcall **)(__int64))(*(_QWORD *)v30 + 56i64))(v30);
-      (*(void (__fastcall **)(__int64))(*(_QWORD *)v30 + 48i64))(v30);
-      v31 = (signed int)a4;
-      v32 = (signed int)a4;
-      v33 = 0i64;
-      v34 = (signed int)a4;
-      v35 = (signed int)a4;
+      v29 = ((__int64 (__fastcall *)(Scaleform::GFx::DisplayObjContainer *))psprite->Scaleform::GFx::InteractiveObject::Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[66].__vecDelDtor)(psprite);
+      v30 = (int)(*(float (__fastcall **)(__int64))(*(_QWORD *)v29 + 56i64))(v29);
+      v31 = (int)(*(float (__fastcall **)(__int64))(*(_QWORD *)v29 + 48i64))(v29);
+      v32 = (int)(*(float (__fastcall **)(__int64))(*(_QWORD *)v29 + 56i64))(v29);
+      v33[0] = (int)(*(float (__fastcall **)(__int64))(*(_QWORD *)v29 + 48i64))(v29);
+      v33[1] = v32;
+      v34 = 0i64;
+      v35 = v31;
+      v36 = v30;
+      v39 = 0i64;
       v38 = 0i64;
-      v37 = 0i64;
-      v36 = 0;
+      v37 = 0;
+      v41 = 1065353216;
       v40 = 1065353216;
-      v39 = 1065353216;
-      v6->vfptr[12].__vecDelDtor((Scaleform::RefCountImplCore *)&v6->vfptr, (unsigned int)&v31);
+      this->Scaleform::GFx::Movie::Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr[12].__vecDelDtor(
+        this,
+        (unsigned int)v33);
     }
   }
-  v6->Flags |= 0x80u;
-  Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v4->vfptr);
+  this->Flags |= 0x80u;
+  Scaleform::RefCountNTSImpl::Release(psprite);
   return 1;
 }
 
 // File Line: 4990
 // RVA: 0x8C2750
-Scaleform::GFx::ASString *__fastcall Scaleform::GFx::MovieImpl::CreateNewInstanceName(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::ASString *result)
+Scaleform::GFx::ASString *__fastcall Scaleform::GFx::MovieImpl::CreateNewInstanceName(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::ASString *result)
 {
-  Scaleform::GFx::ASString *v2; // rsi
-  Scaleform::GFx::MovieImpl *v3; // rdi
   Scaleform::GFx::ASStringManager *v4; // rax
-  char pstr; // [rsp+28h] [rbp-460h]
+  char pstr; // [rsp+28h] [rbp-460h] BYREF
   __int64 v7; // [rsp+29h] [rbp-45Fh]
   __int64 v8; // [rsp+31h] [rbp-457h]
   __int64 v9; // [rsp+39h] [rbp-44Fh]
@@ -8914,13 +8651,11 @@ Scaleform::GFx::ASString *__fastcall Scaleform::GFx::MovieImpl::CreateNewInstanc
   int v12; // [rsp+51h] [rbp-437h]
   __int16 v13; // [rsp+55h] [rbp-433h]
   char v14; // [rsp+57h] [rbp-431h]
-  Scaleform::MsgFormat::Sink r; // [rsp+58h] [rbp-430h]
+  Scaleform::MsgFormat::Sink r; // [rsp+58h] [rbp-430h] BYREF
   __int64 v16; // [rsp+70h] [rbp-418h]
-  Scaleform::MsgFormat v17; // [rsp+80h] [rbp-408h]
+  Scaleform::MsgFormat v17; // [rsp+80h] [rbp-408h] BYREF
 
   v16 = -2i64;
-  v2 = result;
-  v3 = this;
   ++this->InstanceNameCount;
   pstr = 0;
   v7 = 0i64;
@@ -8931,36 +8666,37 @@ Scaleform::GFx::ASString *__fastcall Scaleform::GFx::MovieImpl::CreateNewInstanc
   v12 = 0;
   v13 = 0;
   v14 = 0;
-  r.Type = 2;
+  r.Type = tDataPtr;
   r.SinkData.pStr = (Scaleform::String *)&pstr;
   r.SinkData.DataPtr.Size = 48i64;
   Scaleform::MsgFormat::MsgFormat(&v17, &r);
   Scaleform::MsgFormat::Parse(&v17, "instance{0}");
-  Scaleform::MsgFormat::FormatD1<unsigned long>(&v17, &v3->InstanceNameCount);
+  Scaleform::MsgFormat::FormatD1<unsigned long>(&v17, &this->InstanceNameCount);
   Scaleform::MsgFormat::FinishFormatD(&v17);
   Scaleform::MsgFormat::~MsgFormat(&v17);
-  v4 = (Scaleform::GFx::ASStringManager *)((__int64 (__cdecl *)(Scaleform::GFx::ASMovieRootBase *))v3->pASMovieRoot.pObject->vfptr[59].__vecDelDtor)(v3->pASMovieRoot.pObject);
-  Scaleform::GFx::ASStringManager::CreateString(v4, v2, &pstr);
-  return v2;
+  v4 = (Scaleform::GFx::ASStringManager *)((__int64 (__fastcall *)(Scaleform::GFx::ASMovieRootBase *))this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[59].__vecDelDtor)(this->pASMovieRoot.pObject);
+  Scaleform::GFx::ASStringManager::CreateString(v4, result, &pstr);
+  return result;
 }
 
 // File Line: 5000
 // RVA: 0x8D9D50
-Scaleform::Ptr<Scaleform::GFx::ImageResource> *__fastcall Scaleform::GFx::MovieImpl::GetImageResourceByLinkageId(Scaleform::GFx::MovieImpl *this, Scaleform::Ptr<Scaleform::GFx::ImageResource> *result, Scaleform::GFx::MovieDefImpl *md, const char *linkageId)
+// bad sp value at call has been detected, the output may be wrong!
+Scaleform::Ptr<Scaleform::GFx::ImageResource> *__fastcall Scaleform::GFx::MovieImpl::GetImageResourceByLinkageId(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::Ptr<Scaleform::GFx::ImageResource> *result,
+        Scaleform::GFx::MovieDefImpl *md,
+        const char *linkageId)
 {
-  const char *v4; // rdi
-  Scaleform::GFx::MovieDefImpl *v5; // r15
-  Scaleform::Ptr<Scaleform::GFx::ImageResource> *v6; // rsi
-  Scaleform::GFx::MovieImpl *v7; // r13
   Scaleform::String *v8; // rax
-  bool v9; // r14
-  Scaleform::GFx::StateBagImpl *v10; // r14
+  bool IsProtocolImage; // r14
+  Scaleform::GFx::StateBagImpl *pObject; // r14
   Scaleform::GFx::StateBag *v11; // r14
-  __int64 v12; // r15
+  Scaleform::MemoryHeap *pHeap; // r15
   Scaleform::GFx::ImageCreator *v13; // r12
-  Scaleform::Ptr<Scaleform::GFx::ImageFileHandlerRegistry> *v14; // rsi
-  __int64 *v15; // rdi
-  Scaleform::Ptr<Scaleform::Log> *v16; // rax
+  Scaleform::Ptr<Scaleform::GFx::ImageFileHandlerRegistry> *ImageFileHandlerRegistry; // rsi
+  __int64 *FileOpener; // rdi
+  Scaleform::Ptr<Scaleform::Log> *Log; // rax
   __int64 v17; // rdx
   __int64 v18; // rax
   Scaleform::Render::Image *v19; // rdi
@@ -8968,26 +8704,26 @@ Scaleform::Ptr<Scaleform::GFx::ImageResource> *__fastcall Scaleform::GFx::MovieI
   char v21; // al
   Scaleform::GFx::MovieDefImpl *v22; // r14
   Scaleform::GFx::MovieDefRootNode *i; // rdi
-  signed __int64 v24; // rax
-  Scaleform::GFx::MovieDefImpl *v25; // rcx
+  Scaleform::ArrayDefaultPolicy *p_Policy; // rax
+  Scaleform::GFx::MovieDefImpl *pDefImpl; // rcx
   bool v26; // di
   Scaleform::GFx::Resource *v27; // rdi
   Scaleform::GFx::ResourceLibBase *v28; // rcx
-  Scaleform::GFx::Resource *v29; // rcx
+  Scaleform::GFx::ImageResource *v29; // rcx
   Scaleform::GFx::Resource *v30; // rdi
   Scaleform::GFx::ResourceLibBase *v31; // rcx
-  __int64 v32; // rax
-  __int64 v33; // rbx
-  Scaleform::GFx::ResourceLibBase *v34; // rcx
-  Scaleform::GFx::ResourceBindData v36; // [rsp+0h] [rbp-79h]
-  Scaleform::String v37; // [rsp+10h] [rbp-69h]
-  Scaleform::Ptr<Scaleform::GFx::FileOpenerBase> v38; // [rsp+18h] [rbp-61h]
-  Scaleform::Ptr<Scaleform::GFx::ImageFileHandlerRegistry> v39; // [rsp+20h] [rbp-59h]
-  Scaleform::String v40; // [rsp+28h] [rbp-51h]
-  Scaleform::Ptr<Scaleform::GFx::ImageCreator> resulta; // [rsp+30h] [rbp-49h]
-  Scaleform::Ptr<Scaleform::Log> v42; // [rsp+38h] [rbp-41h]
-  int v43; // [rsp+40h] [rbp-39h]
-  __int64 v44; // [rsp+48h] [rbp-31h]
+  Scaleform::GFx::ImageResource *v32; // rax
+  Scaleform::GFx::ImageResource *v33; // rbx
+  Scaleform::GFx::ResourceLibBase *pLib; // rcx
+  Scaleform::GFx::ResourceBindData v36; // [rsp+0h] [rbp-79h] BYREF
+  Scaleform::String v37; // [rsp+10h] [rbp-69h] BYREF
+  Scaleform::Ptr<Scaleform::GFx::FileOpenerBase> v38; // [rsp+18h] [rbp-61h] BYREF
+  Scaleform::Ptr<Scaleform::GFx::ImageFileHandlerRegistry> v39; // [rsp+20h] [rbp-59h] BYREF
+  Scaleform::String v40; // [rsp+28h] [rbp-51h] BYREF
+  Scaleform::Ptr<Scaleform::GFx::ImageCreator> resulta; // [rsp+30h] [rbp-49h] BYREF
+  Scaleform::Ptr<Scaleform::Log> v42; // [rsp+38h] [rbp-41h] BYREF
+  int v43; // [rsp+40h] [rbp-39h] BYREF
+  Scaleform::MemoryHeap *v44; // [rsp+48h] [rbp-31h]
   int v45; // [rsp+50h] [rbp-29h]
   int v46; // [rsp+54h] [rbp-25h]
   __int64 v47; // [rsp+58h] [rbp-21h]
@@ -9003,63 +8739,59 @@ Scaleform::Ptr<Scaleform::GFx::ImageResource> *__fastcall Scaleform::GFx::MovieI
   char *pdata; // [rsp+F8h] [rbp+7Fh]
 
   v52 = -2i64;
-  v4 = linkageId;
-  v5 = md;
-  v6 = result;
-  v7 = this;
   LODWORD(v40.pData) = 0;
   v56 = 0i64;
   if ( !md )
   {
 LABEL_59:
-    v32 = (__int64)v56;
-    v6->pObject = v56;
+    v32 = v56;
+    result->pObject = v56;
     LODWORD(v40.pData) = 1;
-    if ( v32 && !_InterlockedDecrement((volatile signed __int32 *)(v32 + 8)) )
+    if ( v32 && !_InterlockedDecrement(&v32->RefCount.Value) )
     {
-      v33 = (__int64)v56;
-      v34 = v56->pLib;
-      if ( v34 )
+      v33 = v56;
+      pLib = v56->pLib;
+      if ( pLib )
       {
-        v34->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v34->vfptr, (unsigned int)v56);
-        *(_QWORD *)(v33 + 16) = 0i64;
+        pLib->vfptr[1].__vecDelDtor(pLib, (unsigned int)v56);
+        v33->pLib = 0i64;
       }
-      (**(void (__fastcall ***)(__int64, signed __int64))v33)(v33, 1i64);
+      v33->vfptr->__vecDelDtor(v33, 1u);
     }
-    return v6;
+    return result;
   }
   Scaleform::String::String(&v40, linkageId);
-  v9 = Scaleform::GFx::LoaderImpl::IsProtocolImage(v8, 0i64, 0i64);
+  IsProtocolImage = Scaleform::GFx::LoaderImpl::IsProtocolImage(v8, 0i64, 0i64);
   if ( !_InterlockedDecrement((volatile signed __int32 *)((v40.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-    ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-  if ( v9 )
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+  if ( IsProtocolImage )
   {
-    v10 = v7->pStateBag.pObject;
-    if ( v10 )
-      v11 = (Scaleform::GFx::StateBag *)&v10->vfptr;
+    pObject = this->pStateBag.pObject;
+    if ( pObject )
+      v11 = &pObject->Scaleform::GFx::StateBag;
     else
       v11 = 0i64;
-    v12 = (__int64)v7->pHeap;
-    v51 = v7->pHeap;
+    pHeap = this->pHeap;
+    v51 = pHeap;
     v13 = Scaleform::GFx::StateBag::GetImageCreator(v11, &resulta)->pObject;
     if ( resulta.pObject )
       Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)resulta.pObject);
     if ( !v13 )
       goto LABEL_59;
     v43 = 0;
-    v44 = v12;
+    v44 = pHeap;
     v45 = 1;
     v46 = 1;
     v47 = 0i64;
     v48 = 0i64;
     v49 = 0i64;
     v50 = 0i64;
-    v14 = Scaleform::GFx::StateBag::GetImageFileHandlerRegistry(v11, &v39);
-    v15 = (__int64 *)Scaleform::GFx::StateBag::GetFileOpener(v11, &v38);
-    v16 = Scaleform::GFx::StateBag::GetLog(v11, &v42);
-    v17 = (__int64)v14->pObject;
-    v18 = (__int64)v16->pObject;
-    v48 = *v15;
+    ImageFileHandlerRegistry = Scaleform::GFx::StateBag::GetImageFileHandlerRegistry(v11, &v39);
+    FileOpener = (__int64 *)Scaleform::GFx::StateBag::GetFileOpener(v11, &v38);
+    Log = Scaleform::GFx::StateBag::GetLog(v11, &v42);
+    v17 = (__int64)ImageFileHandlerRegistry->pObject;
+    v18 = (__int64)Log->pObject;
+    v48 = *FileOpener;
     v47 = v18;
     v49 = v17;
     if ( v42.pObject )
@@ -9068,7 +8800,7 @@ LABEL_59:
       Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v38.pObject);
     if ( v39.pObject )
       Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v39.pObject);
-    v50 = v7;
+    v50 = this;
     Scaleform::String::String(&v37, pdata);
     v19 = (Scaleform::Render::Image *)((__int64 (__fastcall *)(Scaleform::GFx::ImageCreator *, int *, Scaleform::String *))v13->vfptr[1].__vecDelDtor)(
                                         v13,
@@ -9076,11 +8808,11 @@ LABEL_59:
                                         &v37);
     v54 = v19;
     if ( !_InterlockedDecrement((volatile signed __int32 *)((v37.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-      ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
+      ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
     if ( v19 )
     {
-      v20 = (Scaleform::GFx::ImageResource *)(*(__int64 (__fastcall **)(__int64, signed __int64))(*(_QWORD *)v12 + 80i64))(
-                                               v12,
+      v20 = (Scaleform::GFx::ImageResource *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))pHeap->vfptr->Alloc)(
+                                               pHeap,
                                                104i64);
       v53 = v20;
       if ( v20 )
@@ -9092,29 +8824,25 @@ LABEL_59:
     goto LABEL_57;
   }
   v36.pResource.pObject = 0i64;
-  Scaleform::String::String((Scaleform::String *)&resulta, v4);
-  if ( (unsigned __int8)Scaleform::GFx::MovieDefImpl::GetExportedResource(v5, &v36, (Scaleform::String *)&resulta, 0i64) )
+  Scaleform::String::String((Scaleform::String *)&resulta, linkageId);
+  if ( Scaleform::GFx::MovieDefImpl::GetExportedResource(md, &v36, (Scaleform::String *)&resulta, 0i64) )
   {
     v21 = 1;
   }
   else
   {
-    v22 = v5;
-    for ( i = v7->RootMovieDefNodes.Root.pNext; ; i = i->pNext )
+    v22 = md;
+    for ( i = this->RootMovieDefNodes.Root.pNext; ; i = i->pNext )
     {
-      v24 = (signed __int64)&v7->MovieLevels.Data.Policy;
-      if ( v7 == (Scaleform::GFx::MovieImpl *)-112i64 )
-        v24 = 0i64;
-      if ( i == (Scaleform::GFx::MovieDefRootNode *)v24 )
+      p_Policy = &this->MovieLevels.Data.Policy;
+      if ( this == (Scaleform::GFx::MovieImpl *)-112i64 )
+        p_Policy = 0i64;
+      if ( i == (Scaleform::GFx::MovieDefRootNode *)p_Policy )
         break;
-      v25 = i->pDefImpl;
-      if ( v25 != v5 && (unsigned __int8)Scaleform::GFx::MovieDefImpl::DoesDirectlyImport(v25, v22) )
+      pDefImpl = i->pDefImpl;
+      if ( pDefImpl != md && (unsigned __int8)Scaleform::GFx::MovieDefImpl::DoesDirectlyImport(pDefImpl, v22) )
       {
-        if ( (unsigned __int8)Scaleform::GFx::MovieDefImpl::GetExportedResource(
-                                i->pDefImpl,
-                                &v36,
-                                (Scaleform::String *)&resulta,
-                                0i64) )
+        if ( Scaleform::GFx::MovieDefImpl::GetExportedResource(i->pDefImpl, &v36, (Scaleform::String *)&resulta, 0i64) )
         {
           v21 = 1;
           goto LABEL_38;
@@ -9124,20 +8852,20 @@ LABEL_59:
     }
     v21 = 0;
 LABEL_38:
-    v6 = v55;
+    result = v55;
   }
   v26 = v21 == 0;
   if ( !_InterlockedDecrement((volatile signed __int32 *)(((unsigned __int64)resulta.pObject & 0xFFFFFFFFFFFFFFFCui64)
                                                         + 8)) )
-    ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
   if ( !v26 )
   {
-    if ( (((__int64 (*)(void))v36.pResource.pObject->vfptr->GetResourceTypeCode)() & 0xFF00) == 256 )
+    if ( (((__int64 (__fastcall *)(Scaleform::GFx::Resource *))v36.pResource.pObject->vfptr->GetResourceTypeCode)(v36.pResource.pObject) & 0xFF00) == 256 )
     {
-      v29 = v36.pResource.pObject;
+      v29 = (Scaleform::GFx::ImageResource *)v36.pResource.pObject;
       if ( v36.pResource.pObject )
         _InterlockedExchangeAdd(&v36.pResource.pObject->RefCount.Value, 1u);
-      v56 = (Scaleform::GFx::ImageResource *)v29;
+      v56 = v29;
     }
     v30 = v36.pResource.pObject;
     if ( v36.pResource.pObject && !_InterlockedDecrement(&v36.pResource.pObject->RefCount.Value) )
@@ -9145,18 +8873,18 @@ LABEL_38:
       v31 = v30->pLib;
       if ( v31 )
       {
-        v31->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v31->vfptr, (unsigned int)v30);
+        v31->vfptr[1].__vecDelDtor(v31, (unsigned int)v30);
         v30->pLib = 0i64;
       }
       v30->vfptr->__vecDelDtor(v30, 1u);
     }
 LABEL_57:
-    v6 = v55;
+    result = v55;
     if ( v56 )
       _InterlockedExchangeAdd(&v56->RefCount.Value, 1u);
     goto LABEL_59;
   }
-  v6->pObject = 0i64;
+  result->pObject = 0i64;
   LODWORD(v40.pData) = 1;
   v27 = v36.pResource.pObject;
   if ( v36.pResource.pObject && !_InterlockedDecrement(&v36.pResource.pObject->RefCount.Value) )
@@ -9164,124 +8892,107 @@ LABEL_57:
     v28 = v27->pLib;
     if ( v28 )
     {
-      v28->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v28->vfptr, (unsigned int)v27);
+      v28->vfptr[1].__vecDelDtor(v28, (unsigned int)v27);
       v27->pLib = 0i64;
     }
     v27->vfptr->__vecDelDtor(v27, 1u);
   }
-  return v6;
+  return result;
 }
 
 // File Line: 5050
 // RVA: 0x8FD890
-bool __fastcall Scaleform::GFx::MovieImpl::ReadTextData(Scaleform::String *pdata, Scaleform::File *pfile, int *pfileLen, bool urlEncoded)
+bool __fastcall Scaleform::GFx::MovieImpl::ReadTextData(
+        Scaleform::String *pdata,
+        Scaleform::File *pfile,
+        unsigned int *pfileLen,
+        bool urlEncoded)
 {
-  bool v4; // r14
-  int *v5; // rsi
-  Scaleform::File *v6; // rdi
-  Scaleform::String *v7; // rbp
   int v8; // eax
   char *v9; // rbx
-  signed int v10; // eax
+  int v10; // eax
   int v11; // eax
-  signed __int64 v12; // rcx
-  int v13; // eax
-  signed __int64 v14; // rcx
-  const char *v15; // rdx
-  __int64 v16; // r8
-  Scaleform::String src; // [rsp+58h] [rbp+10h]
+  __int64 v12; // rcx
+  __int64 i; // r8
+  int v14; // eax
+  __int64 v15; // rcx
+  const char *v16; // rdx
+  __int64 v17; // r8
+  Scaleform::String src; // [rsp+58h] [rbp+10h] BYREF
 
-  v4 = urlEncoded;
-  v5 = pfileLen;
-  v6 = pfile;
-  v7 = pdata;
   v8 = ((__int64 (__fastcall *)(Scaleform::File *))pfile->vfptr[6].__vecDelDtor)(pfile);
-  *v5 = v8;
-  if ( v8 )
+  *pfileLen = v8;
+  if ( !v8 )
+    return v8;
+  Scaleform::String::String(&src);
+  v9 = (char *)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(Scaleform::Memory::pGlobalHeap, (int)*pfileLen, 0i64);
+  ((void (__fastcall *)(Scaleform::File *, char *, _QWORD))pfile->vfptr[10].__vecDelDtor)(pfile, v9, *pfileLen);
+  v10 = *pfileLen;
+  if ( *(_WORD *)v9 == 0xFEFF )
   {
-    Scaleform::String::String(&src);
-    v9 = (char *)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(Scaleform::Memory::pGlobalHeap, *v5, 0i64);
-    ((void (__fastcall *)(Scaleform::File *, char *, _QWORD))v6->vfptr[10].__vecDelDtor)(v6, v9, (unsigned int)*v5);
-    v10 = *v5;
-    if ( *(_WORD *)v9 == -257 )
+    v11 = v10 / 2 - 1;
+    v12 = 0i64;
+    for ( i = v11; v12 < v11; ++v12 )
+      ;
+  }
+  else
+  {
+    if ( *(_WORD *)v9 != 0xFFFE )
     {
-      v11 = v10 / 2 - 1;
-      v12 = 0i64;
-      if ( v11 > 0 )
+      if ( v10 > 2 && *v9 == -17 && v9[1] == -69 && v9[2] == -65 )
       {
-        do
-          ++v12;
-        while ( v12 < v11 );
-      }
-      Scaleform::String::AppendString(&src, (const wchar_t *)v9 + 1, v11);
-    }
-    else if ( *(_WORD *)v9 == -2 )
-    {
-      v13 = v10 / 2 - 1;
-      v14 = 0i64;
-      if ( v13 > 0 )
-      {
-        do
-        {
-          *(_WORD *)&v9[2 * v14 + 2] = __ROL2__(*(_WORD *)&v9[2 * v14 + 2], 8);
-          ++v14;
-        }
-        while ( v14 < v13 );
-      }
-      Scaleform::String::AppendString(&src, (const wchar_t *)v9 + 1, v13);
-    }
-    else
-    {
-      if ( v10 <= 2 || *v9 != -17 || v9[1] != -69 || v9[2] != -65 )
-      {
-        v16 = *v5;
-        v15 = v9;
+        v16 = v9 + 3;
+        v17 = v10 - 3;
       }
       else
       {
-        v15 = v9 + 3;
-        v16 = v10 - 3;
+        v17 = (int)*pfileLen;
+        v16 = v9;
       }
-      Scaleform::String::AppendString(&src, v15, v16);
+      Scaleform::String::AppendString(&src, v16, v17);
+      goto LABEL_17;
     }
-    if ( v4 )
-      Scaleform::GFx::ASUtils::Unescape(
-        (const char *)((src.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12),
-        *(_QWORD *)(src.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) & 0x7FFFFFFFFFFFFFFFi64,
-        v7);
-    else
-      Scaleform::String::operator=(v7, &src);
-    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v9);
-    if ( !_InterlockedDecrement((volatile signed __int32 *)((src.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-      ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-    LOBYTE(v8) = 1;
+    v14 = v10 / 2 - 1;
+    v15 = 0i64;
+    for ( i = v14; v15 < v14; ++v15 )
+      *(_WORD *)&v9[2 * v15 + 2] = __ROL2__(*(_WORD *)&v9[2 * v15 + 2], 8);
   }
+  Scaleform::String::AppendString(&src, (const wchar_t *)v9 + 1, i);
+LABEL_17:
+  if ( urlEncoded )
+    Scaleform::GFx::ASUtils::Unescape(
+      (const char *)((src.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12),
+      *(_QWORD *)(src.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) & 0x7FFFFFFFFFFFFFFFi64,
+      pdata);
+  else
+    Scaleform::String::operator=(pdata, &src);
+  Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v9);
+  if ( !_InterlockedDecrement((volatile signed __int32 *)((src.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+  LOBYTE(v8) = 1;
   return v8;
 }
 
 // File Line: 5135
 // RVA: 0x8FA880
-bool __fastcall Scaleform::GFx::MovieImpl::ReadBinaryData(Scaleform::ArrayPOD<unsigned char,2,Scaleform::ArrayDefaultPolicy> *pdata, Scaleform::File *pfile, int *pfileLen)
+bool __fastcall Scaleform::GFx::MovieImpl::ReadBinaryData(
+        Scaleform::ArrayData<char,Scaleform::AllocatorGH<char,2>,Scaleform::ArrayDefaultPolicy> *pdata,
+        Scaleform::File *pfile,
+        unsigned int *pfileLen)
 {
-  Scaleform::ArrayPOD<unsigned char,2,Scaleform::ArrayDefaultPolicy> *v3; // rsi
-  int *v4; // rdi
-  Scaleform::File *v5; // rbx
   int v6; // eax
 
-  v3 = pdata;
-  v4 = pfileLen;
-  v5 = pfile;
   v6 = ((__int64 (__fastcall *)(Scaleform::File *))pfile->vfptr[6].__vecDelDtor)(pfile);
-  *v4 = v6;
+  *pfileLen = v6;
   if ( v6 )
   {
     Scaleform::ArrayData<unsigned char,Scaleform::AllocatorGH<unsigned char,2>,Scaleform::ArrayDefaultPolicy>::Resize(
-      (Scaleform::ArrayData<char,Scaleform::AllocatorGH<char,2>,Scaleform::ArrayDefaultPolicy> *)v3,
+      pdata,
       v6);
-    LOBYTE(v6) = ((unsigned int (__fastcall *)(Scaleform::File *, char *, _QWORD))v5->vfptr[10].__vecDelDtor)(
-                   v5,
-                   v3->Data.Data,
-                   (unsigned int)*v4) == *v4;
+    LOBYTE(v6) = ((unsigned int (__fastcall *)(Scaleform::File *, char *, _QWORD))pfile->vfptr[10].__vecDelDtor)(
+                   pfile,
+                   pdata->Data,
+                   *pfileLen) == *pfileLen;
   }
   return v6;
 }
@@ -9290,146 +9001,139 @@ bool __fastcall Scaleform::GFx::MovieImpl::ReadBinaryData(Scaleform::ArrayPOD<un
 // RVA: 0x8F3B80
 void __fastcall Scaleform::GFx::MovieImpl::ProcessUnloadQueue(Scaleform::GFx::MovieImpl *this)
 {
-  Scaleform::GFx::InteractiveObject *v1; // rbx
-  Scaleform::GFx::MovieImpl *v2; // rsi
-  Scaleform::GFx::InteractiveObject *v3; // rdi
-  Scaleform::RefCountNTSImplCoreVtbl *v4; // rax
-  Scaleform::GFx::InteractiveObject *v5; // rcx
+  Scaleform::GFx::InteractiveObject *pUnloadListHead; // rbx
+  Scaleform::GFx::InteractiveObject *pPlayNextOpt; // rdi
+  Scaleform::RefCountNTSImplCoreVtbl *vfptr; // rax
+  Scaleform::GFx::InteractiveObject *pParent; // rcx
 
-  v1 = this->pUnloadListHead;
-  v2 = this;
-  if ( v1 )
+  pUnloadListHead = this->pUnloadListHead;
+  if ( pUnloadListHead )
   {
     do
     {
-      v3 = v1->pPlayNextOpt;
-      v4 = v1->vfptr;
-      v1->pPlayNextOpt = 0i64;
-      ((void (__fastcall *)(Scaleform::GFx::InteractiveObject *))v4[75].__vecDelDtor)(v1);
-      v5 = v1->pParent;
-      if ( v5 )
-        v5->vfptr[117].__vecDelDtor((Scaleform::RefCountNTSImplCore *)&v5->vfptr, (unsigned int)v1);
-      Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v1->vfptr);
-      v1 = v3;
+      pPlayNextOpt = pUnloadListHead->pPlayNextOpt;
+      vfptr = pUnloadListHead->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr;
+      pUnloadListHead->pPlayNextOpt = 0i64;
+      ((void (__fastcall *)(Scaleform::GFx::InteractiveObject *))vfptr[75].__vecDelDtor)(pUnloadListHead);
+      pParent = pUnloadListHead->pParent;
+      if ( pParent )
+        pParent->Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[117].__vecDelDtor(
+          pParent,
+          (unsigned int)pUnloadListHead);
+      Scaleform::RefCountNTSImpl::Release(pUnloadListHead);
+      pUnloadListHead = pPlayNextOpt;
     }
-    while ( v3 );
-    v2->pUnloadListHead = 0i64;
+    while ( pPlayNextOpt );
+    this->pUnloadListHead = 0i64;
   }
 }
 
 // File Line: 5354
 // RVA: 0x8CBAC0
-char __fastcall Scaleform::GFx::MovieImpl::FindExportedResource(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::MovieDefImpl *localDef, Scaleform::GFx::ResourceBindData *presBindData, Scaleform::String *symbol)
+char __fastcall Scaleform::GFx::MovieImpl::FindExportedResource(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::MovieDefImpl *localDef,
+        Scaleform::GFx::ResourceBindData *presBindData,
+        Scaleform::String *symbol)
 {
-  Scaleform::String *v4; // r14
-  Scaleform::GFx::ResourceBindData *v5; // r15
-  Scaleform::GFx::MovieDefImpl *v6; // rbp
-  Scaleform::GFx::MovieImpl *v7; // rdi
-  Scaleform::GFx::MovieDefRootNode *v9; // rbx
+  Scaleform::GFx::MovieDefRootNode *pNext; // rbx
   Scaleform::GFx::MovieDefImpl *v10; // rsi
-  signed __int64 v11; // rdi
-  signed __int64 v12; // rax
-  Scaleform::GFx::MovieDefImpl *v13; // rcx
+  Scaleform::List<Scaleform::GFx::MovieDefRootNode,Scaleform::GFx::MovieDefRootNode> *p_RootMovieDefNodes; // rdi
+  __int64 v12; // rax
+  Scaleform::GFx::MovieDefImpl *pDefImpl; // rcx
 
-  v4 = symbol;
-  v5 = presBindData;
-  v6 = localDef;
-  v7 = this;
   if ( Scaleform::GFx::MovieDefImpl::GetExportedResource(localDef, presBindData, symbol, 0i64) )
     return 1;
-  v9 = v7->RootMovieDefNodes.Root.pNext;
-  v10 = v6;
-  v11 = (signed __int64)&v7->RootMovieDefNodes;
+  pNext = this->RootMovieDefNodes.Root.pNext;
+  v10 = localDef;
+  p_RootMovieDefNodes = &this->RootMovieDefNodes;
   while ( 1 )
   {
-    v12 = v11 ? v11 - 8 : 0i64;
-    if ( v9 == (Scaleform::GFx::MovieDefRootNode *)v12 )
+    v12 = p_RootMovieDefNodes ? (__int64)&p_RootMovieDefNodes[-1].Root.8 : 0i64;
+    if ( pNext == (Scaleform::GFx::MovieDefRootNode *)v12 )
       break;
-    v13 = v9->pDefImpl;
-    if ( v13 != v6 && (unsigned __int8)Scaleform::GFx::MovieDefImpl::DoesDirectlyImport(v13, v10) )
+    pDefImpl = pNext->pDefImpl;
+    if ( pDefImpl != localDef && (unsigned __int8)Scaleform::GFx::MovieDefImpl::DoesDirectlyImport(pDefImpl, v10) )
     {
-      if ( Scaleform::GFx::MovieDefImpl::GetExportedResource(v9->pDefImpl, v5, v4, 0i64) )
+      if ( Scaleform::GFx::MovieDefImpl::GetExportedResource(pNext->pDefImpl, presBindData, symbol, 0i64) )
         return 1;
-      v10 = v9->pDefImpl;
+      v10 = pNext->pDefImpl;
     }
-    v9 = v9->pNext;
+    pNext = pNext->pNext;
   }
   return 0;
 }
 
 // File Line: 5378
 // RVA: 0x8D70B0
-Scaleform::Render::DrawableImageContext *__fastcall Scaleform::GFx::MovieImpl::GetDrawableImageContext(Scaleform::GFx::MovieImpl *this)
+Scaleform::Render::DrawableImageContext *__fastcall Scaleform::GFx::MovieImpl::GetDrawableImageContext(
+        Scaleform::GFx::MovieImpl *this)
 {
-  Scaleform::GFx::MovieImpl *v1; // rdi
   Scaleform::Render::DrawableImageContext *result; // rax
   Scaleform::Render::DrawableImageContext *v3; // rax
   Scaleform::Render::DrawableImageContext *v4; // rbx
   Scaleform::Render::DrawableImageContext *v5; // rax
-  Scaleform::Render::RenderBuffer *v6; // rcx
-  Scaleform::Render::Interfaces i; // [rsp+28h] [rbp-30h]
+  Scaleform::Render::RenderBuffer *pObject; // rcx
+  Scaleform::Render::Interfaces i; // [rsp+28h] [rbp-30h] BYREF
 
-  v1 = this;
   result = this->DIContext.pObject;
   if ( !result )
   {
     v3 = (Scaleform::Render::DrawableImageContext *)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(
                                                       Scaleform::Memory::pGlobalHeap,
-                                                      448ui64,
+                                                      448i64,
                                                       0i64);
     v4 = 0i64;
     if ( v3 )
     {
-      i.pTextureManager = 0i64;
-      i.pHAL = 0i64;
-      i.pRenderer2D = 0i64;
-      i.RenderThreadID = 0i64;
-      Scaleform::Render::DrawableImageContext::DrawableImageContext(v3, &v1->RenderContext, v1->pRTCommandQueue, &i);
+      memset(&i, 0, sizeof(i));
+      Scaleform::Render::DrawableImageContext::DrawableImageContext(v3, &this->RenderContext, this->pRTCommandQueue, &i);
       v4 = v5;
     }
-    v6 = (Scaleform::Render::RenderBuffer *)v1->DIContext.pObject;
-    if ( v6 )
-      Scaleform::RefCountImpl::Release(v6);
-    v1->DIContext.pObject = v4;
-    result = v4;
+    pObject = (Scaleform::Render::RenderBuffer *)this->DIContext.pObject;
+    if ( pObject )
+      Scaleform::RefCountImpl::Release(pObject);
+    this->DIContext.pObject = v4;
+    return v4;
   }
   return result;
 }
 
 // File Line: 5389
 // RVA: 0x8BF3A0
-Scaleform::GFx::DrawingContext *__fastcall Scaleform::GFx::MovieImpl::CreateDrawingContext(Scaleform::GFx::MovieImpl *this)
+Scaleform::GFx::DrawingContext *__fastcall Scaleform::GFx::MovieImpl::CreateDrawingContext(
+        Scaleform::GFx::MovieImpl *this)
 {
-  Scaleform::GFx::MovieImpl *v1; // rsi
   char v2; // bl
   Scaleform::GFx::DrawingContext *v3; // rdi
-  Scaleform::Ptr<Scaleform::GFx::ImageCreator> *v4; // rax
+  Scaleform::GFx::Resource **ImageCreator; // rax
   Scaleform::GFx::DrawingContext *v5; // rax
   Scaleform::GFx::DrawingContext *v6; // rdi
-  Scaleform::Ptr<Scaleform::GFx::ImageCreator> result; // [rsp+58h] [rbp+10h]
+  Scaleform::Ptr<Scaleform::GFx::ImageCreator> result; // [rsp+58h] [rbp+10h] BYREF
   Scaleform::GFx::DrawingContext *v9; // [rsp+60h] [rbp+18h]
 
-  v1 = this;
   v2 = 0;
-  v3 = (Scaleform::GFx::DrawingContext *)this->pHeap->vfptr->Alloc(this->pHeap, 208ui64, 0i64);
+  v3 = (Scaleform::GFx::DrawingContext *)this->pHeap->vfptr->Alloc(this->pHeap, 208i64, 0i64);
   v9 = v3;
   if ( v3 )
   {
-    v4 = Scaleform::GFx::StateBag::GetImageCreator((Scaleform::GFx::StateBag *)&v1->vfptr, &result);
+    ImageCreator = (Scaleform::GFx::Resource **)Scaleform::GFx::StateBag::GetImageCreator(
+                                                  &this->Scaleform::GFx::StateBag,
+                                                  &result);
     v2 = 1;
-    Scaleform::GFx::DrawingContext::DrawingContext(v3, &v1->RenderContext, v4->pObject);
+    Scaleform::GFx::DrawingContext::DrawingContext(v3, &this->RenderContext, *ImageCreator);
     v6 = v5;
   }
   else
   {
     v6 = 0i64;
   }
-  if ( v2 & 1 && result.pObject )
+  if ( (v2 & 1) != 0 && result.pObject )
     Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)result.pObject);
-  v6->pPrev = v1->DrawingContextList.Root.pPrev;
-  v6->pNext = (Scaleform::GFx::DrawingContext *)&v1->RegisteredFonts.Data.Size;
-  v1->DrawingContextList.Root.pPrev->pNext = v6;
-  v1->DrawingContextList.Root.pPrev = v6;
+  v6->pPrev = this->DrawingContextList.Root.pPrev;
+  v6->pNext = (Scaleform::GFx::DrawingContext *)&this->RegisteredFonts.Data.Size;
+  this->DrawingContextList.Root.pPrev->pNext = v6;
+  this->DrawingContextList.Root.pPrev = v6;
   return v6;
 }
 
@@ -9437,85 +9141,83 @@ Scaleform::GFx::DrawingContext *__fastcall Scaleform::GFx::MovieImpl::CreateDraw
 // RVA: 0x916AE0
 void __fastcall Scaleform::GFx::MovieImpl::UpdateAllRenderNodes(Scaleform::GFx::MovieImpl *this)
 {
-  Scaleform::GFx::DrawingContext *v1; // rbx
-  Scaleform::GFx::MovieImpl *v2; // rsi
-  Scaleform::List<Scaleform::GFx::DrawingContext,Scaleform::GFx::DrawingContext> *v3; // rdi
-  signed __int64 v4; // rax
+  Scaleform::GFx::DrawingContext *pNext; // rbx
+  Scaleform::List<Scaleform::GFx::DrawingContext,Scaleform::GFx::DrawingContext> *p_DrawingContextList; // rdi
+  __int64 v4; // rax
 
-  v1 = this->DrawingContextList.Root.pNext;
-  v2 = this;
-  v3 = &this->DrawingContextList;
+  pNext = this->DrawingContextList.Root.pNext;
+  p_DrawingContextList = &this->DrawingContextList;
   while ( 1 )
   {
-    v4 = (signed __int64)(v3 ? &v3[-1] : 0i64);
-    if ( v1 == (Scaleform::GFx::DrawingContext *)v4 )
+    v4 = p_DrawingContextList ? (__int64)&p_DrawingContextList[-1] : 0i64;
+    if ( pNext == (Scaleform::GFx::DrawingContext *)v4 )
       break;
-    if ( v1->States < 0 )
-      Scaleform::GFx::DrawingContext::UpdateRenderNode(v1);
-    v1 = v1->pNext;
+    if ( pNext->States < 0 )
+      Scaleform::GFx::DrawingContext::UpdateRenderNode(pNext);
+    pNext = pNext->pNext;
   }
-  if ( v2->FocusRectChanged )
-    Scaleform::GFx::MovieImpl::UpdateFocusRectRenderNodes(v2);
+  if ( this->FocusRectChanged )
+    Scaleform::GFx::MovieImpl::UpdateFocusRectRenderNodes(this);
 }
 
 // File Line: 5431
 // RVA: 0x8B1B60
-void __fastcall Scaleform::GFx::MovieImpl::AddMovieDefToKillList(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::MovieDefImpl *md)
+void __fastcall Scaleform::GFx::MovieImpl::AddMovieDefToKillList(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::MovieDefImpl *md)
 {
-  Scaleform::GFx::MovieDefImpl *v2; // rdi
   unsigned __int64 v3; // rdx
-  unsigned __int64 v4; // r8
-  Scaleform::GFx::MovieImpl::MDKillListEntry *v5; // r9
-  Scaleform::Ptr<Scaleform::GFx::MovieDefImpl> *v6; // rax
+  unsigned __int64 Size; // r8
+  Scaleform::GFx::MovieImpl::MDKillListEntry *Data; // r9
+  Scaleform::GFx::MovieDefImpl **p_pObject; // rax
   unsigned __int64 v7; // rsi
-  Scaleform::Array<Scaleform::GFx::MovieImpl::MDKillListEntry,327,Scaleform::ArrayDefaultPolicy> *v8; // rbx
-  unsigned __int64 *v9; // rdx
-  Scaleform::GFx::ResourceLibBase *v10; // rcx
+  Scaleform::Array<Scaleform::GFx::MovieImpl::MDKillListEntry,327,Scaleform::ArrayDefaultPolicy> *p_MovieDefKillList; // rbx
+  Scaleform::GFx::MovieImpl::MDKillListEntry *v9; // rdx
+  Scaleform::GFx::ResourceLibBase *pLib; // rcx
 
   if ( md )
   {
-    v2 = md;
     v3 = 0i64;
-    v4 = this->MovieDefKillList.Data.Size;
-    if ( v4 )
+    Size = this->MovieDefKillList.Data.Size;
+    if ( Size )
     {
-      v5 = this->MovieDefKillList.Data.Data;
-      v6 = &v5->pMovieDef;
-      while ( v6->pObject != v2 )
+      Data = this->MovieDefKillList.Data.Data;
+      p_pObject = &Data->pMovieDef.pObject;
+      while ( *p_pObject != md )
       {
         ++v3;
-        v6 += 2;
-        if ( v3 >= v4 )
+        p_pObject += 2;
+        if ( v3 >= Size )
           goto LABEL_8;
       }
-      v5[v3].KillFrameId = this->RenderContext.SnapshotFrameIds[0];
+      Data[v3].KillFrameId = this->RenderContext.SnapshotFrameIds[0];
     }
     else
     {
 LABEL_8:
       v7 = this->RenderContext.SnapshotFrameIds[0];
-      _InterlockedExchangeAdd(&v2->RefCount.Value, 1u);
-      v8 = &this->MovieDefKillList;
+      _InterlockedExchangeAdd(&md->RefCount.Value, 1u);
+      p_MovieDefKillList = &this->MovieDefKillList;
       Scaleform::ArrayDataBase<Scaleform::GFx::MovieImpl::MDKillListEntry,Scaleform::AllocatorGH<Scaleform::GFx::MovieImpl::MDKillListEntry,327>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
-        (Scaleform::ArrayDataBase<Scaleform::GFx::MovieImpl::MDKillListEntry,Scaleform::AllocatorGH<Scaleform::GFx::MovieImpl::MDKillListEntry,327>,Scaleform::ArrayDefaultPolicy> *)&this->MovieDefKillList.Data.Data,
+        &this->MovieDefKillList.Data,
         &this->MovieDefKillList,
         this->MovieDefKillList.Data.Size + 1);
-      v9 = &v8->Data.Data[v8->Data.Size - 1].KillFrameId;
+      v9 = &p_MovieDefKillList->Data.Data[p_MovieDefKillList->Data.Size - 1];
       if ( v9 )
       {
-        *v9 = v7;
-        _InterlockedExchangeAdd(&v2->RefCount.Value, 1u);
-        v9[1] = (unsigned __int64)v2;
+        v9->KillFrameId = v7;
+        _InterlockedExchangeAdd(&md->RefCount.Value, 1u);
+        v9->pMovieDef.pObject = md;
       }
-      if ( !_InterlockedDecrement(&v2->RefCount.Value) )
+      if ( !_InterlockedDecrement(&md->RefCount.Value) )
       {
-        v10 = v2->pLib;
-        if ( v10 )
+        pLib = md->pLib;
+        if ( pLib )
         {
-          v10->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v10->vfptr, (unsigned int)v2);
-          v2->pLib = 0i64;
+          pLib->vfptr[1].__vecDelDtor(pLib, (unsigned int)md);
+          md->pLib = 0i64;
         }
-        v2->vfptr->__vecDelDtor((Scaleform::GFx::Resource *)&v2->vfptr, 1u);
+        md->Scaleform::GFx::MovieDef::Scaleform::GFx::Resource::vfptr->__vecDelDtor(md, 1i64);
       }
     }
   }
@@ -9525,59 +9227,55 @@ LABEL_8:
 // RVA: 0x8F3A80
 void __fastcall Scaleform::GFx::MovieImpl::ProcessMovieDefToKillList(Scaleform::GFx::MovieImpl *this)
 {
-  Scaleform::GFx::MovieImpl *v1; // rbp
-  unsigned __int64 v2; // rax
-  unsigned __int64 v3; // r15
-  unsigned __int64 v4; // rsi
-  Scaleform::ArrayData<Scaleform::GFx::MovieImpl::MDKillListEntry,Scaleform::AllocatorGH<Scaleform::GFx::MovieImpl::MDKillListEntry,327>,Scaleform::ArrayDefaultPolicy> *v5; // rdi
-  __int64 v6; // r14
-  Scaleform::GFx::MovieImpl::MDKillListEntry *v7; // rbx
-  Scaleform::GFx::MovieDefImpl *v8; // rbx
-  Scaleform::GFx::ResourceLibBase *v9; // rcx
+  unsigned __int64 FinalizedFrameId; // r15
+  unsigned __int64 v3; // rsi
+  Scaleform::Array<Scaleform::GFx::MovieImpl::MDKillListEntry,327,Scaleform::ArrayDefaultPolicy> *p_MovieDefKillList; // rdi
+  __int64 v5; // r14
+  Scaleform::GFx::MovieImpl::MDKillListEntry *v6; // rbx
+  Scaleform::GFx::MovieDefImpl *pObject; // rbx
+  Scaleform::GFx::ResourceLibBase *pLib; // rcx
 
-  v1 = this;
-  v2 = this->MovieDefKillList.Data.Size;
-  if ( v2 )
+  if ( this->MovieDefKillList.Data.Size )
   {
-    v3 = this->RenderContext.FinalizedFrameId;
-    v4 = 0i64;
-    if ( v2 )
+    FinalizedFrameId = this->RenderContext.FinalizedFrameId;
+    v3 = 0i64;
+    p_MovieDefKillList = &this->MovieDefKillList;
+    v5 = 0i64;
+    do
     {
-      v5 = &this->MovieDefKillList.Data;
-      v6 = 0i64;
-      do
+      v6 = &p_MovieDefKillList->Data.Data[v5];
+      if ( FinalizedFrameId <= v6->KillFrameId )
       {
-        v7 = &v5->Data[v6];
-        if ( v3 <= v7->KillFrameId )
-        {
-          ++v4;
-          ++v6;
-        }
-        else if ( v5->Size == 1 )
-        {
-          Scaleform::ArrayData<Scaleform::GFx::MovieImpl::MDKillListEntry,Scaleform::AllocatorGH<Scaleform::GFx::MovieImpl::MDKillListEntry,327>,Scaleform::ArrayDefaultPolicy>::Resize(
-            v5,
-            0i64);
-        }
-        else
-        {
-          v8 = v7->pMovieDef.pObject;
-          if ( v8 && !_InterlockedDecrement(&v8->RefCount.Value) )
-          {
-            v9 = v8->pLib;
-            if ( v9 )
-            {
-              v9->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v9->vfptr, (unsigned int)v8);
-              v8->pLib = 0i64;
-            }
-            v8->vfptr->__vecDelDtor((Scaleform::GFx::Resource *)&v8->vfptr, 1u);
-          }
-          memmove(&v5->Data[v6], &v5->Data[v6 + 1], 16 * (v5->Size - v4 - 1));
-          --v5->Size;
-        }
+        ++v3;
+        ++v5;
       }
-      while ( v4 < v1->MovieDefKillList.Data.Size );
+      else if ( p_MovieDefKillList->Data.Size == 1 )
+      {
+        Scaleform::ArrayData<Scaleform::GFx::MovieImpl::MDKillListEntry,Scaleform::AllocatorGH<Scaleform::GFx::MovieImpl::MDKillListEntry,327>,Scaleform::ArrayDefaultPolicy>::Resize(
+          &p_MovieDefKillList->Data,
+          0i64);
+      }
+      else
+      {
+        pObject = v6->pMovieDef.pObject;
+        if ( pObject && !_InterlockedDecrement(&pObject->RefCount.Value) )
+        {
+          pLib = pObject->pLib;
+          if ( pLib )
+          {
+            pLib->vfptr[1].__vecDelDtor(pLib, (unsigned int)pObject);
+            pObject->pLib = 0i64;
+          }
+          pObject->Scaleform::GFx::MovieDef::Scaleform::GFx::Resource::vfptr->__vecDelDtor(pObject, 1u);
+        }
+        memmove(
+          &p_MovieDefKillList->Data.Data[v5],
+          &p_MovieDefKillList->Data.Data[v5 + 1],
+          16 * (p_MovieDefKillList->Data.Size - v3 - 1));
+        --p_MovieDefKillList->Data.Size;
+      }
     }
+    while ( v3 < this->MovieDefKillList.Data.Size );
   }
 }
 
@@ -9585,29 +9283,22 @@ void __fastcall Scaleform::GFx::MovieImpl::ProcessMovieDefToKillList(Scaleform::
 // RVA: 0x8DDD40
 void __fastcall Scaleform::GFx::MovieImpl::GetRetValHolder(Scaleform::GFx::MovieImpl *this)
 {
-  Scaleform::GFx::MovieImpl *v1; // rbx
-  __int64 v2; // rax
+  Scaleform::GFx::MovieImpl::ReturnValueHolder *v2; // rax
   Scaleform::GFx::MovieImpl::ReturnValueHolder *v3; // rdi
   Scaleform::GFx::ASStringManager *v4; // rax
-  Scaleform::GFx::MovieImpl::ReturnValueHolder *v5; // rax
 
-  v1 = this;
-  if ( this->pRetValHolder )
+  if ( !this->pRetValHolder )
   {
-    v5 = this->pRetValHolder;
-  }
-  else
-  {
-    v2 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))this->pHeap->vfptr->Alloc)(
-           this->pHeap,
-           56i64);
-    v3 = (Scaleform::GFx::MovieImpl::ReturnValueHolder *)v2;
+    v2 = (Scaleform::GFx::MovieImpl::ReturnValueHolder *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))this->pHeap->vfptr->Alloc)(
+                                                           this->pHeap,
+                                                           56i64);
+    v3 = v2;
     if ( v2 )
     {
-      v4 = (Scaleform::GFx::ASStringManager *)((__int64 (__cdecl *)(Scaleform::GFx::ASMovieRootBase *))v1->pASMovieRoot.pObject->vfptr[59].__vecDelDtor)(v1->pASMovieRoot.pObject);
+      v4 = (Scaleform::GFx::ASStringManager *)((__int64 (__fastcall *)(Scaleform::GFx::ASMovieRootBase *))this->pASMovieRoot.pObject->Scaleform::GFx::Movie::vfptr[59].__vecDelDtor)(this->pASMovieRoot.pObject);
       Scaleform::GFx::MovieImpl::ReturnValueHolder::ReturnValueHolder(v3, v4);
     }
-    v1->pRetValHolder = (Scaleform::GFx::MovieImpl::ReturnValueHolder *)v2;
+    this->pRetValHolder = v2;
   }
 }
 
@@ -9615,359 +9306,340 @@ void __fastcall Scaleform::GFx::MovieImpl::GetRetValHolder(Scaleform::GFx::Movie
 // RVA: 0x8CE480
 void __fastcall Scaleform::GFx::MovieImpl::ForceUpdateImages(Scaleform::GFx::MovieImpl *this)
 {
-  Scaleform::GFx::MovieImpl *v1; // rbx
-
-  v1 = this;
   Scaleform::Render::ContextImpl::Context::ForceUpdateImages(&this->RenderContext);
-  ++v1->PreviouslyCaptured;
+  ++this->PreviouslyCaptured;
 }
 
 // File Line: 5687
 // RVA: 0x8B1810
-void __fastcall Scaleform::GFx::MovieImpl::AddIndirectTransformPair(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::DisplayObjContainer *origParent, Scaleform::Render::TreeNode *transformParent, Scaleform::GFx::DisplayObjectBase *obj)
+void __fastcall Scaleform::GFx::MovieImpl::AddIndirectTransformPair(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::DisplayObjContainer *origParent,
+        Scaleform::Render::TreeNode *transformParent,
+        Scaleform::GFx::DisplayObjectBase *obj)
 {
-  Scaleform::GFx::DisplayObjectBase *v4; // rsi
-  Scaleform::Render::TreeNode *v5; // rdi
-  Scaleform::GFx::DisplayObjContainer *v6; // rbp
-  Scaleform::ArrayLH<Scaleform::GFx::MovieImpl::IndirectTransPair,2,Scaleform::ArrayDefaultPolicy> *v7; // rbx
-  signed __int64 v8; // rdx
-  bool v9; // zf
+  Scaleform::ArrayLH<Scaleform::GFx::MovieImpl::IndirectTransPair,2,Scaleform::ArrayDefaultPolicy> *p_IndirectTransformPairs; // rbx
+  __int64 v8; // rdx
 
-  v4 = obj;
-  v5 = transformParent;
-  v6 = origParent;
   if ( transformParent )
     ++transformParent->RefCount;
   if ( obj )
     ++obj->RefCount;
   if ( origParent )
     ++origParent->RefCount;
-  v7 = &this->IndirectTransformPairs;
+  p_IndirectTransformPairs = &this->IndirectTransformPairs;
   Scaleform::ArrayDataBase<Scaleform::GFx::MovieImpl::IndirectTransPair,Scaleform::AllocatorLH<Scaleform::GFx::MovieImpl::IndirectTransPair,2>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
-    (Scaleform::ArrayDataBase<Scaleform::GFx::MovieImpl::IndirectTransPair,Scaleform::AllocatorLH<Scaleform::GFx::MovieImpl::IndirectTransPair,2>,Scaleform::ArrayDefaultPolicy> *)&this->IndirectTransformPairs.Data.Data,
+    &this->IndirectTransformPairs.Data,
     &this->IndirectTransformPairs,
     this->IndirectTransformPairs.Data.Size + 1);
-  v8 = (signed __int64)&v7->Data.Data[v7->Data.Size - 1];
+  v8 = (__int64)&p_IndirectTransformPairs->Data.Data[p_IndirectTransformPairs->Data.Size - 1];
   if ( v8 )
   {
-    if ( v5 )
-      ++v5->RefCount;
-    *(_QWORD *)v8 = v5;
-    if ( v4 )
-      ++v4->RefCount;
-    *(_QWORD *)(v8 + 8) = v4;
-    if ( v6 )
-      ++v6->RefCount;
-    *(_QWORD *)(v8 + 16) = v6;
+    if ( transformParent )
+      ++transformParent->RefCount;
+    *(_QWORD *)v8 = transformParent;
+    if ( obj )
+      ++obj->RefCount;
+    *(_QWORD *)(v8 + 8) = obj;
+    if ( origParent )
+      ++origParent->RefCount;
+    *(_QWORD *)(v8 + 16) = origParent;
     *(_DWORD *)(v8 + 24) = -1;
   }
-  if ( v6 )
-    Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v6->vfptr);
-  if ( v4 )
-    Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v4->vfptr);
-  if ( v5 )
+  if ( origParent )
+    Scaleform::RefCountNTSImpl::Release(origParent);
+  if ( obj )
+    Scaleform::RefCountNTSImpl::Release(obj);
+  if ( transformParent )
   {
-    v9 = v5->RefCount-- == 1;
-    if ( v9 )
-      Scaleform::Render::ContextImpl::Entry::destroyHelper((Scaleform::Render::ContextImpl::Entry *)&v5->0);
+    if ( transformParent->RefCount-- == 1 )
+      Scaleform::Render::ContextImpl::Entry::destroyHelper(transformParent);
   }
 }
 
 // File Line: 5696
 // RVA: 0x8FFA00
-Scaleform::GFx::MovieImpl::IndirectTransPair *__fastcall Scaleform::GFx::MovieImpl::RemoveIndirectTransformPair(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::MovieImpl::IndirectTransPair *result, Scaleform::GFx::DisplayObjectBase *obj)
+Scaleform::GFx::MovieImpl::IndirectTransPair *__fastcall Scaleform::GFx::MovieImpl::RemoveIndirectTransformPair(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::MovieImpl::IndirectTransPair *result,
+        Scaleform::GFx::DisplayObjectBase *obj)
 {
-  Scaleform::GFx::MovieImpl::IndirectTransPair *v3; // rdi
   unsigned __int64 v4; // rdx
-  unsigned __int64 v5; // r9
-  Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::GFx::MovieImpl::IndirectTransPair,Scaleform::AllocatorLH<Scaleform::GFx::MovieImpl::IndirectTransPair,2>,Scaleform::ArrayDefaultPolicy> > *v6; // r10
-  Scaleform::GFx::MovieImpl::IndirectTransPair *v7; // rcx
-  Scaleform::GFx::DisplayObjectBase **v8; // rax
-  signed __int64 v9; // rax
-  Scaleform::Render::ContextImpl::Entry *v10; // rbx
-  __int64 v11; // rcx
-  Scaleform::RefCountNTSImpl *v12; // rsi
-  __int64 v13; // r8
-  Scaleform::RefCountNTSImpl *v14; // rbp
-  int v15; // er14
-  bool v16; // zf
+  unsigned __int64 Size; // r9
+  Scaleform::ArrayLH<Scaleform::GFx::MovieImpl::IndirectTransPair,2,Scaleform::ArrayDefaultPolicy> *p_IndirectTransformPairs; // r10
+  Scaleform::GFx::MovieImpl::IndirectTransPair *Data; // rcx
+  Scaleform::GFx::DisplayObjectBase **p_pObject; // rax
+  Scaleform::GFx::MovieImpl::IndirectTransPair *v9; // rax
+  Scaleform::Render::TreeNode *pObject; // rbx
+  Scaleform::GFx::DisplayObjectBase *v11; // rcx
+  Scaleform::GFx::DisplayObjectBase *v12; // rsi
+  Scaleform::GFx::DisplayObjContainer *v13; // r8
+  Scaleform::GFx::DisplayObjContainer *v14; // rbp
+  int OrigParentDepth; // r14d
 
-  v3 = result;
   v4 = 0i64;
-  v5 = this->IndirectTransformPairs.Data.Size;
-  if ( v5 )
+  Size = this->IndirectTransformPairs.Data.Size;
+  if ( Size )
   {
-    v6 = (Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::GFx::MovieImpl::IndirectTransPair,Scaleform::AllocatorLH<Scaleform::GFx::MovieImpl::IndirectTransPair,2>,Scaleform::ArrayDefaultPolicy> > *)&this->IndirectTransformPairs.Data;
-    v7 = this->IndirectTransformPairs.Data.Data;
-    v8 = &v7->Obj.pObject;
-    while ( *v8 != obj )
+    p_IndirectTransformPairs = &this->IndirectTransformPairs;
+    Data = this->IndirectTransformPairs.Data.Data;
+    p_pObject = &Data->Obj.pObject;
+    while ( *p_pObject != obj )
     {
       ++v4;
-      v8 += 4;
-      if ( v4 >= v5 )
+      p_pObject += 4;
+      if ( v4 >= Size )
         goto LABEL_25;
     }
-    v9 = (signed __int64)&v7[v4];
-    if ( *(_QWORD *)v9 )
-      ++*(_QWORD *)(*(_QWORD *)v9 + 8i64);
-    v10 = *(Scaleform::Render::ContextImpl::Entry **)v9;
-    v11 = *(_QWORD *)(v9 + 8);
+    v9 = &Data[v4];
+    if ( v9->TransformParent.pObject )
+      ++v9->TransformParent.pObject->RefCount;
+    pObject = v9->TransformParent.pObject;
+    v11 = v9->Obj.pObject;
     if ( v11 )
-      ++*(_DWORD *)(v11 + 8);
-    v12 = *(Scaleform::RefCountNTSImpl **)(v9 + 8);
-    v13 = *(_QWORD *)(v9 + 16);
+      ++v11->RefCount;
+    v12 = v9->Obj.pObject;
+    v13 = v9->OriginalParent.pObject;
     if ( v13 )
-      ++*(_DWORD *)(v13 + 8);
-    v14 = *(Scaleform::RefCountNTSImpl **)(v9 + 16);
-    v15 = *(_DWORD *)(v9 + 24);
+      ++v13->RefCount;
+    v14 = v9->OriginalParent.pObject;
+    OrigParentDepth = v9->OrigParentDepth;
     Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::GFx::MovieImpl::IndirectTransPair,Scaleform::AllocatorLH<Scaleform::GFx::MovieImpl::IndirectTransPair,2>,Scaleform::ArrayDefaultPolicy>>::RemoveAt(
-      v6,
+      p_IndirectTransformPairs,
       v4);
-    if ( v10 )
-      ++v10->RefCount;
-    v3->TransformParent.pObject = (Scaleform::Render::TreeNode *)v10;
+    if ( pObject )
+      ++pObject->RefCount;
+    result->TransformParent.pObject = pObject;
     if ( v12 )
       ++v12->RefCount;
-    v3->Obj.pObject = (Scaleform::GFx::DisplayObjectBase *)v12;
+    result->Obj.pObject = v12;
     if ( v14 )
       ++v14->RefCount;
-    v3->OriginalParent.pObject = (Scaleform::GFx::DisplayObjContainer *)v14;
-    v3->OrigParentDepth = v15;
+    result->OriginalParent.pObject = v14;
+    result->OrigParentDepth = OrigParentDepth;
     if ( v14 )
       Scaleform::RefCountNTSImpl::Release(v14);
     if ( v12 )
       Scaleform::RefCountNTSImpl::Release(v12);
-    if ( v10 )
+    if ( pObject )
     {
-      v16 = v10->RefCount-- == 1;
-      if ( v16 )
-        Scaleform::Render::ContextImpl::Entry::destroyHelper(v10);
+      if ( pObject->RefCount-- == 1 )
+        Scaleform::Render::ContextImpl::Entry::destroyHelper(pObject);
     }
   }
   else
   {
 LABEL_25:
-    v3->TransformParent.pObject = 0i64;
-    v3->Obj.pObject = 0i64;
-    v3->OriginalParent.pObject = 0i64;
-    v3->OrigParentDepth = -1;
+    result->TransformParent.pObject = 0i64;
+    result->Obj.pObject = 0i64;
+    result->OriginalParent.pObject = 0i64;
+    result->OrigParentDepth = -1;
   }
-  return v3;
+  return result;
 }
 
 // File Line: 5710
 // RVA: 0x8BC3E0
 void __fastcall Scaleform::GFx::MovieImpl::ClearIndirectTransformPairs(Scaleform::GFx::MovieImpl *this)
 {
-  unsigned __int64 v1; // rsi
-  Scaleform::GFx::MovieImpl *v2; // rbp
+  unsigned __int64 Size; // rsi
   __int64 v3; // rdi
-  Scaleform::GFx::MovieImpl::IndirectTransPair *v4; // rbx
-  Scaleform::Render::ContextImpl::Entry *v5; // rcx
-  bool v6; // zf
+  Scaleform::GFx::MovieImpl::IndirectTransPair *Data; // rbx
+  Scaleform::Render::ContextImpl::Entry *pObject; // rcx
   Scaleform::RefCountNTSImpl *v7; // rcx
   Scaleform::RefCountNTSImpl *v8; // rcx
 
-  v1 = this->IndirectTransformPairs.Data.Size;
-  v2 = this;
-  if ( v1 )
+  Size = this->IndirectTransformPairs.Data.Size;
+  if ( Size )
   {
     v3 = 0i64;
     do
     {
-      v4 = v2->IndirectTransformPairs.Data.Data;
-      v5 = (Scaleform::Render::ContextImpl::Entry *)&v4[v3].TransformParent.pObject->0;
-      if ( v5 )
+      Data = this->IndirectTransformPairs.Data.Data;
+      pObject = Data[v3].TransformParent.pObject;
+      if ( pObject )
       {
-        v6 = v5->RefCount-- == 1;
-        if ( v6 )
-          Scaleform::Render::ContextImpl::Entry::destroyHelper(v5);
+        if ( pObject->RefCount-- == 1 )
+          Scaleform::Render::ContextImpl::Entry::destroyHelper(pObject);
       }
-      v4[v3].TransformParent.pObject = 0i64;
-      v7 = (Scaleform::RefCountNTSImpl *)&v4[v3].Obj.pObject->vfptr;
+      Data[v3].TransformParent.pObject = 0i64;
+      v7 = Data[v3].Obj.pObject;
       if ( v7 )
         Scaleform::RefCountNTSImpl::Release(v7);
-      v4[v3].Obj.pObject = 0i64;
-      v8 = (Scaleform::RefCountNTSImpl *)&v4[v3].OriginalParent.pObject->vfptr;
+      Data[v3].Obj.pObject = 0i64;
+      v8 = Data[v3].OriginalParent.pObject;
       if ( v8 )
         Scaleform::RefCountNTSImpl::Release(v8);
-      v4[v3].OriginalParent.pObject = 0i64;
-      v4[v3].OrigParentDepth = 0;
-      ++v3;
-      --v1;
+      Data[v3].OriginalParent.pObject = 0i64;
+      Data[v3++].OrigParentDepth = 0;
+      --Size;
     }
-    while ( v1 );
+    while ( Size );
   }
   Scaleform::ArrayDataBase<Scaleform::GFx::MovieImpl::IndirectTransPair,Scaleform::AllocatorLH<Scaleform::GFx::MovieImpl::IndirectTransPair,2>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
-    (Scaleform::ArrayDataBase<Scaleform::GFx::MovieImpl::IndirectTransPair,Scaleform::AllocatorLH<Scaleform::GFx::MovieImpl::IndirectTransPair,2>,Scaleform::ArrayDefaultPolicy> *)&v2->IndirectTransformPairs.Data.Data,
-    &v2->IndirectTransformPairs,
+    &this->IndirectTransformPairs.Data,
+    &this->IndirectTransformPairs,
     0i64);
 }
 
 // File Line: 5720
 // RVA: 0x9183C0
-void __fastcall Scaleform::GFx::MovieImpl::UpdateTransformParent(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::DisplayObjectBase *obj, Scaleform::GFx::DisplayObjectBase *transfParent)
+void __fastcall Scaleform::GFx::MovieImpl::UpdateTransformParent(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::DisplayObjectBase *obj,
+        Scaleform::GFx::DisplayObjectBase *transfParent)
 {
-  unsigned __int64 v3; // r9
+  unsigned __int64 Size; // r9
   Scaleform::Render::TreeNode *v4; // rdi
-  unsigned __int64 v5; // rbx
-  Scaleform::GFx::MovieImpl::IndirectTransPair *v6; // r10
-  Scaleform::GFx::DisplayObjectBase **v7; // rax
-  signed __int64 v8; // rbx
-  Scaleform::Render::TreeNode *v9; // rax
-  Scaleform::Render::ContextImpl::Entry *v10; // rcx
-  bool v11; // zf
+  __int64 v5; // rbx
+  Scaleform::GFx::MovieImpl::IndirectTransPair *Data; // r10
+  Scaleform::GFx::DisplayObjectBase **i; // rax
+  Scaleform::GFx::MovieImpl::IndirectTransPair *v8; // rbx
+  Scaleform::Render::TreeNode *RenderNode; // rax
+  Scaleform::Render::ContextImpl::Entry *pObject; // rcx
 
-  v3 = this->IndirectTransformPairs.Data.Size;
+  Size = this->IndirectTransformPairs.Data.Size;
   v4 = 0i64;
   v5 = 0i64;
-  if ( v3 )
+  if ( Size )
   {
-    v6 = this->IndirectTransformPairs.Data.Data;
-    v7 = &v6->Obj.pObject;
-    while ( *v7 != obj )
+    Data = this->IndirectTransformPairs.Data.Data;
+    for ( i = &Data->Obj.pObject; *i != obj; i += 4 )
     {
-      ++v5;
-      v7 += 4;
-      if ( v5 >= v3 )
+      if ( ++v5 >= Size )
         return;
     }
-    v8 = (signed __int64)&v6[v5];
+    v8 = &Data[v5];
     if ( transfParent )
     {
-      v9 = Scaleform::GFx::DisplayObjectBase::GetRenderNode(transfParent);
-      v4 = v9;
-      if ( v9 )
-        ++v9->RefCount;
+      RenderNode = Scaleform::GFx::DisplayObjectBase::GetRenderNode(transfParent);
+      v4 = RenderNode;
+      if ( RenderNode )
+        ++RenderNode->RefCount;
     }
-    v10 = *(Scaleform::Render::ContextImpl::Entry **)v8;
-    if ( *(_QWORD *)v8 )
+    pObject = v8->TransformParent.pObject;
+    if ( v8->TransformParent.pObject )
     {
-      v11 = v10->RefCount-- == 1;
-      if ( v11 )
-        Scaleform::Render::ContextImpl::Entry::destroyHelper(v10);
+      if ( pObject->RefCount-- == 1 )
+        Scaleform::Render::ContextImpl::Entry::destroyHelper(pObject);
     }
-    *(_QWORD *)v8 = v4;
-    *(_DWORD *)(v8 + 24) = -1;
+    v8->TransformParent.pObject = v4;
+    v8->OrigParentDepth = -1;
   }
 }
 
 // File Line: 5735
 // RVA: 0x8FE410
-char __fastcall Scaleform::GFx::MovieImpl::RegisterFont(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::MovieDef *md, Scaleform::GFx::FontResource *fontRes)
+char __fastcall Scaleform::GFx::MovieImpl::RegisterFont(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::MovieDef *md,
+        Scaleform::GFx::FontResource *fontRes)
 {
-  Scaleform::GFx::FontResource *v3; // rsi
-  Scaleform::GFx::MovieDef *v4; // rdi
-  Scaleform::GFx::MovieImpl *v5; // rbp
   unsigned __int64 v6; // rdx
-  unsigned __int64 v7; // r8
-  Scaleform::GFx::MovieImpl::FontDesc *v8; // rax
-  char result; // al
+  unsigned __int64 Size; // r8
+  Scaleform::GFx::MovieImpl::FontDesc *Data; // rax
   Scaleform::GFx::MovieImpl::FontDesc *v10; // rdx
-  Scaleform::GFx::ResourceLibBase *v11; // rcx
+  Scaleform::GFx::ResourceLibBase *pLib; // rcx
   Scaleform::GFx::ResourceLibBase *v12; // rcx
 
-  v3 = fontRes;
-  v4 = md;
-  v5 = this;
   v6 = 0i64;
-  v7 = this->RegisteredFonts.Data.Size;
-  if ( v7 )
+  Size = this->RegisteredFonts.Data.Size;
+  if ( Size )
   {
-    v8 = this->RegisteredFonts.Data.Data;
-    while ( v8->pFont.pObject != v3 || v8->pMovieDef.pObject != v4 )
+    Data = this->RegisteredFonts.Data.Data;
+    while ( Data->pFont.pObject != fontRes || Data->pMovieDef.pObject != md )
     {
       ++v6;
-      ++v8;
-      if ( v6 >= v7 )
+      ++Data;
+      if ( v6 >= Size )
         goto LABEL_8;
     }
-    result = 0;
+    return 0;
   }
   else
   {
 LABEL_8:
-    if ( v3 )
-      _InterlockedExchangeAdd(&v3->RefCount.Value, 1u);
-    if ( v4 )
-      _InterlockedExchangeAdd(&v4->RefCount.Value, 1u);
+    if ( fontRes )
+      _InterlockedExchangeAdd(&fontRes->RefCount.Value, 1u);
+    if ( md )
+      _InterlockedExchangeAdd(&md->RefCount.Value, 1u);
     Scaleform::ArrayDataBase<Scaleform::GFx::MovieImpl::FontDesc,Scaleform::AllocatorLH<Scaleform::GFx::MovieImpl::FontDesc,2>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
-      (Scaleform::ArrayDataBase<Scaleform::GFx::MovieImpl::FontDesc,Scaleform::AllocatorLH<Scaleform::GFx::MovieImpl::FontDesc,2>,Scaleform::ArrayDefaultPolicy> *)&this->RegisteredFonts.Data.Data,
+      &this->RegisteredFonts.Data,
       &this->RegisteredFonts,
       this->RegisteredFonts.Data.Size + 1);
-    v10 = &v5->RegisteredFonts.Data.Data[v5->RegisteredFonts.Data.Size - 1];
+    v10 = &this->RegisteredFonts.Data.Data[this->RegisteredFonts.Data.Size - 1];
     if ( v10 )
     {
-      if ( v4 )
-        _InterlockedExchangeAdd(&v4->RefCount.Value, 1u);
-      v10->pMovieDef.pObject = v4;
-      if ( v3 )
-        _InterlockedExchangeAdd(&v3->RefCount.Value, 1u);
-      v10->pFont.pObject = v3;
+      if ( md )
+        _InterlockedExchangeAdd(&md->RefCount.Value, 1u);
+      v10->pMovieDef.pObject = md;
+      if ( fontRes )
+        _InterlockedExchangeAdd(&fontRes->RefCount.Value, 1u);
+      v10->pFont.pObject = fontRes;
     }
-    v5->Flags2 |= 2u;
-    if ( v3 && !_InterlockedDecrement(&v3->RefCount.Value) )
+    this->Flags2 |= 2u;
+    if ( fontRes && !_InterlockedDecrement(&fontRes->RefCount.Value) )
     {
-      v11 = v3->pLib;
-      if ( v11 )
+      pLib = fontRes->pLib;
+      if ( pLib )
       {
-        v11->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v11->vfptr, (unsigned int)v3);
-        v3->pLib = 0i64;
+        pLib->vfptr[1].__vecDelDtor(pLib, (unsigned int)fontRes);
+        fontRes->pLib = 0i64;
       }
-      v3->vfptr->__vecDelDtor((Scaleform::GFx::Resource *)&v3->vfptr, 1u);
+      fontRes->vfptr->__vecDelDtor(fontRes, 1i64);
     }
-    if ( v4 && !_InterlockedDecrement(&v4->RefCount.Value) )
+    if ( md && !_InterlockedDecrement(&md->RefCount.Value) )
     {
-      v12 = v4->pLib;
+      v12 = md->pLib;
       if ( v12 )
       {
-        v12->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v12->vfptr, (unsigned int)v4);
-        v4->pLib = 0i64;
+        v12->vfptr[1].__vecDelDtor(v12, (unsigned int)md);
+        md->pLib = 0i64;
       }
-      v4->vfptr->__vecDelDtor((Scaleform::GFx::Resource *)&v4->vfptr, 1u);
+      md->Scaleform::GFx::Resource::vfptr->__vecDelDtor(md, 1i64);
     }
-    result = 1;
+    return 1;
   }
-  return result;
 }
 
 // File Line: 5756
 // RVA: 0x916540
-void __fastcall Scaleform::GFx::MovieImpl::UnregisterFonts(Scaleform::GFx::MovieImpl *this, Scaleform::GFx::MovieDefImpl *pdefImpl)
+void __fastcall Scaleform::GFx::MovieImpl::UnregisterFonts(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::GFx::MovieDefImpl *pdefImpl)
 {
   unsigned __int64 v2; // rdi
-  Scaleform::GFx::MovieDefImpl *v3; // r14
-  Scaleform::GFx::MovieImpl *v4; // rbp
-  Scaleform::ArrayDataBase<Scaleform::GFx::MovieImpl::FontDesc,Scaleform::AllocatorLH<Scaleform::GFx::MovieImpl::FontDesc,2>,Scaleform::ArrayDefaultPolicy> *v5; // rbx
+  Scaleform::ArrayLH<Scaleform::GFx::MovieImpl::FontDesc,2,Scaleform::ArrayDefaultPolicy> *p_RegisteredFonts; // rbx
   __int64 v6; // rsi
   Scaleform::GFx::MovieImpl::FontDesc *v7; // rcx
   Scaleform::GFx::MovieDefRootNode *i; // rbx
-  signed __int64 v9; // rax
+  Scaleform::ArrayDefaultPolicy *v9; // rax
 
   v2 = 0i64;
-  v3 = pdefImpl;
-  v4 = this;
   if ( this->RegisteredFonts.Data.Size )
   {
-    v5 = (Scaleform::ArrayDataBase<Scaleform::GFx::MovieImpl::FontDesc,Scaleform::AllocatorLH<Scaleform::GFx::MovieImpl::FontDesc,2>,Scaleform::ArrayDefaultPolicy> *)&this->RegisteredFonts.Data.Data;
+    p_RegisteredFonts = &this->RegisteredFonts;
     v6 = 0i64;
     do
     {
-      v7 = &v5->Data[v6];
-      if ( (Scaleform::GFx::MovieDefImpl *)v7->pMovieDef.pObject == v3 )
+      v7 = &p_RegisteredFonts->Data.Data[v6];
+      if ( v7->pMovieDef.pObject == pdefImpl )
       {
-        if ( v5->Size == 1 )
+        if ( p_RegisteredFonts->Data.Size == 1 )
         {
           Scaleform::ArrayDataBase<Scaleform::GFx::MovieImpl::FontDesc,Scaleform::AllocatorLH<Scaleform::GFx::MovieImpl::FontDesc,2>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
-            v5,
-            v5,
+            &p_RegisteredFonts->Data,
+            p_RegisteredFonts,
             0i64);
         }
         else
         {
           Scaleform::GFx::MovieImpl::FontDesc::~FontDesc(v7);
-          memmove(&v5->Data[v6], &v5->Data[v6 + 1], 16 * (v5->Size - v2 - 1));
-          --v5->Size;
+          memmove(
+            &p_RegisteredFonts->Data.Data[v6],
+            &p_RegisteredFonts->Data.Data[v6 + 1],
+            16 * (p_RegisteredFonts->Data.Size - v2 - 1));
+          --p_RegisteredFonts->Data.Size;
         }
       }
       else
@@ -9976,227 +9648,213 @@ void __fastcall Scaleform::GFx::MovieImpl::UnregisterFonts(Scaleform::GFx::Movie
         ++v6;
       }
     }
-    while ( v2 < v4->RegisteredFonts.Data.Size );
+    while ( v2 < this->RegisteredFonts.Data.Size );
   }
-  for ( i = v4->RootMovieDefNodes.Root.pNext; ; i = i->pNext )
+  for ( i = this->RootMovieDefNodes.Root.pNext; ; i = i->pNext )
   {
-    v9 = (signed __int64)(v4 == (Scaleform::GFx::MovieImpl *)-112i64 ? 0i64 : &v4->MovieLevels.Data.Policy);
+    v9 = this == (Scaleform::GFx::MovieImpl *)-112i64 ? 0i64 : &this->MovieLevels.Data.Policy;
     if ( i == (Scaleform::GFx::MovieDefRootNode *)v9 )
       break;
-    Scaleform::GFx::FontManager::CleanCacheFor(i->pFontManager.pObject, v3);
+    Scaleform::GFx::FontManager::CleanCacheFor(i->pFontManager.pObject, pdefImpl);
   }
-  v4->Flags2 |= 2u;
+  this->Flags2 |= 2u;
 }
 
 // File Line: 5780
 // RVA: 0x8CD3E0
-Scaleform::GFx::FontResource *__fastcall Scaleform::GFx::MovieImpl::FindRegisteredFont(Scaleform::GFx::MovieImpl *this, const char *pfontName, unsigned int matchFontFlags, Scaleform::GFx::MovieDef **ppsrcMovieDef)
+Scaleform::GFx::FontResource *__fastcall Scaleform::GFx::MovieImpl::FindRegisteredFont(
+        Scaleform::GFx::MovieImpl *this,
+        const char *pfontName,
+        __int16 matchFontFlags,
+        Scaleform::GFx::MovieDef **ppsrcMovieDef)
 {
-  unsigned __int64 v4; // rbp
+  unsigned __int64 Size; // rbp
   unsigned __int64 v5; // rbx
-  Scaleform::GFx::MovieDef **v6; // r13
-  const char *v7; // r12
-  Scaleform::GFx::MovieImpl *v8; // rsi
   __int64 v9; // rdi
-  unsigned int v10; // er14
-  unsigned int v11; // er15
-  Scaleform::Render::Font *v12; // rcx
+  int v10; // r14d
+  int v11; // r15d
+  Scaleform::Render::Font *pObject; // rcx
   const char *v13; // rax
-  signed __int64 v15; // rbx
+  unsigned __int64 v15; // rbx
 
-  v4 = this->RegisteredFonts.Data.Size;
+  Size = this->RegisteredFonts.Data.Size;
   v5 = 0i64;
-  v6 = ppsrcMovieDef;
-  v7 = pfontName;
-  v8 = this;
-  if ( !v4 )
+  if ( !Size )
     return 0i64;
   v9 = 0i64;
   v10 = matchFontFlags & 0x10 | ((matchFontFlags & 0x300) != 0 ? 0x300 : 0) | 3;
   v11 = matchFontFlags & 0x313;
   while ( 1 )
   {
-    v12 = v8->RegisteredFonts.Data.Data[v9].pFont.pObject->pFont.pObject;
-    if ( (v10 & v12->Flags) == v11 )
+    pObject = this->RegisteredFonts.Data.Data[v9].pFont.pObject->pFont.pObject;
+    if ( (v10 & pObject->Flags) == v11 )
     {
-      v13 = (const char *)((__int64 (*)(void))v12->vfptr[1].__vecDelDtor)();
-      if ( !Scaleform::String::CompareNoCase(v13, v7) )
+      v13 = (const char *)((__int64 (__fastcall *)(Scaleform::Render::Font *))pObject->vfptr[1].__vecDelDtor)(pObject);
+      if ( !Scaleform::String::CompareNoCase(v13, pfontName) )
         break;
     }
     ++v5;
     ++v9;
-    if ( v5 >= v4 )
+    if ( v5 >= Size )
       return 0i64;
   }
   v15 = v5;
-  *v6 = v8->RegisteredFonts.Data.Data[v15].pMovieDef.pObject;
-  return v8->RegisteredFonts.Data.Data[v15].pFont.pObject;
+  *ppsrcMovieDef = this->RegisteredFonts.Data.Data[v15].pMovieDef.pObject;
+  return this->RegisteredFonts.Data.Data[v15].pFont.pObject;
 }
 
 // File Line: 5807
 // RVA: 0x8E9620
-void __fastcall Scaleform::GFx::MovieImpl::MakeAreaVisible(Scaleform::GFx::MovieImpl *this, Scaleform::Render::Rect<float> *screenRect, Scaleform::Render::Rect<float> *box, unsigned int flags)
+void __fastcall Scaleform::GFx::MovieImpl::MakeAreaVisible(
+        Scaleform::GFx::MovieImpl *this,
+        Scaleform::Render::Rect<float> *screenRect,
+        Scaleform::Render::Rect<float> *box,
+        char flags)
 {
-  char v4; // si
-  Scaleform::Render::Rect<float> *v5; // rbx
-  Scaleform::Render::Rect<float> *v6; // rdi
-  Scaleform::GFx::MovieImpl *v7; // r15
-  float *v8; // r14
+  Scaleform::Render::Matrix2x4<float> *p_ViewportMatrix; // r14
   float v9; // xmm9_4
   float v10; // xmm10_4
-  __m128 v11; // xmm6
+  __m128 x2_low; // xmm6
   float v12; // xmm7_4
   double v13; // xmm4_8
   double v14; // xmm3_8
   float v15; // xmm8_4
   float v16; // xmm11_4
   float v17; // xmm7_4
-  double v18; // xmm1_8
+  __m128d v18; // xmm1
   double v19; // xmm3_8
-  __m128d v20; // xmm1
-  double v21; // xmm3_8
-  double v22; // xmm12_8
-  double v23; // xmm5_8
-  double v24; // xmm2_8
-  float v25; // xmm6_4
-  float v26; // xmm1_4
-  float v27; // xmm1_4
-  float v28; // xmm5_4
-  float v29; // xmm8_4
+  double v20; // xmm12_8
+  double v21; // xmm5_8
+  double v22; // xmm2_8
+  float v23; // xmm6_4
+  float v24; // xmm1_4
+  float v25; // xmm1_4
+  float v26; // xmm5_4
+  float v27; // xmm8_4
+  float v28; // xmm10_4
+  float v29; // xmm7_4
   float v30; // xmm10_4
-  float v31; // xmm7_4
-  float v32; // xmm10_4
-  float v33; // xmm6_4
-  float v34; // xmm9_4
-  float v35; // xmm3_4
-  float v36; // xmm0_4
-  float v37; // xmm1_4
-  float v38; // xmm6_4
-  float v39; // xmm3_4
-  float v40; // xmm0_4
-  float v41; // xmm8_4
-  Scaleform::Render::Rect<float> pr; // [rsp+20h] [rbp-99h]
-  Scaleform::Render::Rect<float> v43; // [rsp+30h] [rbp-89h]
-  Scaleform::Render::Rect<float> r; // [rsp+40h] [rbp-79h]
-  Scaleform::Render::Matrix2x4<float> v45; // [rsp+50h] [rbp-69h]
-  Scaleform::Render::Matrix2x4<float> v46; // [rsp+70h] [rbp-49h]
+  float v31; // xmm6_4
+  float v32; // xmm9_4
+  float v33; // xmm3_4
+  float v34; // xmm0_4
+  float v35; // xmm1_4
+  float v36; // xmm6_4
+  float v37; // xmm3_4
+  float v38; // xmm0_4
+  float v39; // xmm8_4
+  Scaleform::Render::Rect<float> pr; // [rsp+20h] [rbp-99h] BYREF
+  Scaleform::Render::Rect<float> v41; // [rsp+30h] [rbp-89h] BYREF
+  Scaleform::Render::Rect<float> r; // [rsp+40h] [rbp-79h] BYREF
+  Scaleform::Render::Matrix2x4<float> v43; // [rsp+50h] [rbp-69h] BYREF
+  Scaleform::Render::Matrix2x4<float> v44; // [rsp+70h] [rbp-49h] BYREF
 
-  v4 = flags;
-  v5 = box;
-  v6 = screenRect;
-  v7 = this;
   if ( box->x2 > screenRect->x2 || box->y2 > screenRect->y2 || box->x1 < screenRect->x1 || box->y1 < screenRect->y1 )
   {
-    *(_OWORD *)&v46.M[0][0] = _xmm;
-    *(__m128 *)&v46.M[1][0] = _xmm;
+    *(_OWORD *)&v44.M[0][0] = _xmm;
+    *(__m128 *)&v44.M[1][0] = _xmm;
     Scaleform::GFx::MovieImpl::ResetViewportMatrix(this);
-    v8 = (float *)&v7->ViewportMatrix;
-    Scaleform::Render::Matrix2x4<float>::SetInverse(&v46, &v7->ViewportMatrix);
+    p_ViewportMatrix = &this->ViewportMatrix;
+    Scaleform::Render::Matrix2x4<float>::SetInverse(&v44, &this->ViewportMatrix);
     pr = 0i64;
-    Scaleform::Render::Matrix2x4<float>::EncloseTransform(&v46, &pr, v6);
-    v9 = v5->x1 * 20.0;
-    v11 = (__m128)LODWORD(v5->x2);
-    v10 = v5->y1 * 20.0;
-    v11.m128_f32[0] = v11.m128_f32[0] * 20.0;
-    v12 = v5->y2 * 20.0;
-    r.x1 = v5->x1 * 20.0;
+    Scaleform::Render::Matrix2x4<float>::EncloseTransform(&v44, &pr, screenRect);
+    v9 = box->x1 * 20.0;
+    x2_low = (__m128)LODWORD(box->x2);
+    v10 = box->y1 * 20.0;
+    x2_low.m128_f32[0] = x2_low.m128_f32[0] * 20.0;
+    v12 = box->y2 * 20.0;
+    r.x1 = v9;
     r.y1 = v10;
-    LODWORD(r.x2) = v11.m128_i32[0];
+    LODWORD(r.x2) = x2_low.m128_i32[0];
     r.y2 = v12;
     v13 = DOUBLE_1_0;
     v14 = DOUBLE_1_0;
-    if ( !(v4 & 1) )
+    if ( (flags & 1) == 0 )
     {
-      if ( (float)(v11.m128_f32[0] - v9) > (float)(pr.x2 - pr.x1) )
-        v13 = pr.x2 / v11.m128_f32[0];
+      if ( (float)(x2_low.m128_f32[0] - v9) > (float)(pr.x2 - pr.x1) )
+        v13 = pr.x2 / x2_low.m128_f32[0];
       if ( (float)(v12 - v10) > (float)(pr.y2 - pr.y1) )
         v14 = pr.y2 / v12;
     }
-    if ( v4 & 2 )
+    if ( (flags & 2) != 0 && v13 == 1.0 && v14 == 1.0 )
     {
-      if ( v13 == 1.0 && v14 == 1.0 )
+      v15 = pr.y2 - pr.y1;
+      v16 = pr.x2 - pr.x1;
+      v17 = v12 - v10;
+      x2_low.m128_f32[0] = x2_low.m128_f32[0] - v9;
+      if ( (float)((float)(v17 * x2_low.m128_f32[0]) * 2.0) < (double)(float)((float)(pr.y2 - pr.y1)
+                                                                            * (float)(pr.x2 - pr.x1)) )
       {
-        v15 = pr.y2 - pr.y1;
-        v16 = pr.x2 - pr.x1;
-        v17 = v12 - v10;
-        v18 = (float)((float)(pr.y2 - pr.y1) * (float)(pr.x2 - pr.x1));
-        v11.m128_f32[0] = v11.m128_f32[0] - v9;
-        if ( (float)((float)(v17 * v11.m128_f32[0]) * 2.0) < v18 )
-        {
-          v19 = v18;
-          v20 = _mm_cvtps_pd(v11);
-          v21 = v19 * 0.5;
-          v22 = 1.0 / v17;
-          v23 = 1.0 / v11.m128_f32[0];
-          v20.m128d_f64[0] = v20.m128d_f64[0] * v22 * v21;
-          *(_QWORD *)&v24 = (unsigned __int128)_mm_sqrt_pd(v20);
-          v13 = v23 * v24;
-          v14 = v21 / v24 * v22;
-          if ( v11.m128_f32[0] * (v23 * v24) > v16 )
-            v13 = v16 * v23;
-          if ( v17 * v14 > v15 )
-            v14 = v15 * v22;
-        }
+        v18 = _mm_cvtps_pd(x2_low);
+        v19 = (float)((float)(pr.y2 - pr.y1) * (float)(pr.x2 - pr.x1)) * 0.5;
+        v20 = 1.0 / v17;
+        v21 = 1.0 / x2_low.m128_f32[0];
+        v18.m128d_f64[0] = v18.m128d_f64[0] * v20 * v19;
+        v22 = _mm_sqrt_pd(v18).m128d_f64[0];
+        v13 = v21 * v22;
+        v14 = v19 / v22 * v20;
+        if ( x2_low.m128_f32[0] * (v21 * v22) > v16 )
+          v13 = v16 * v21;
+        if ( v17 * v14 > v15 )
+          v14 = v15 * v20;
       }
     }
     if ( v13 >= v14 )
       v13 = v14;
+    v23 = 0.0;
+    v24 = v13;
+    v43.M[0][0] = v24;
+    v43.M[1][1] = v24;
+    v43.M[0][1] = v24 * 0.0;
+    v43.M[0][2] = v24 * 0.0;
+    v43.M[1][0] = v24 * 0.0;
+    v43.M[1][2] = v24 * 0.0;
+    v43.M[0][3] = (float)(COERCE_FLOAT(LODWORD(v9) ^ _xmm[0]) * v24) + v9;
+    v43.M[1][3] = (float)(COERCE_FLOAT(LODWORD(v10) ^ _xmm[0]) * v24) + v10;
+    v41 = 0i64;
+    Scaleform::Render::Matrix2x4<float>::EncloseTransform(&v43, &v41, &r);
     v25 = 0.0;
-    v26 = v13;
-    v45.M[0][0] = v26;
-    v45.M[1][1] = v26;
-    v45.M[0][1] = v26 * 0.0;
-    v45.M[0][2] = v26 * 0.0;
-    v45.M[1][0] = v26 * 0.0;
-    v45.M[1][2] = v26 * 0.0;
-    v45.M[0][3] = (float)(COERCE_FLOAT(LODWORD(v9) ^ _xmm[0]) * v26) + v9;
-    v45.M[1][3] = (float)(COERCE_FLOAT(LODWORD(v10) ^ _xmm[0]) * v26) + v10;
-    v43 = 0i64;
-    Scaleform::Render::Matrix2x4<float>::EncloseTransform(&v45, &v43, &r);
-    v27 = 0.0;
-    if ( v43.x1 > pr.x2 || v43.x2 < pr.x1 || v43.x2 > pr.x2 || v43.x1 < pr.x1 )
+    if ( v41.x1 > pr.x2 || v41.x2 < pr.x1 || v41.x2 > pr.x2 || v41.x1 < pr.x1 )
     {
-      if ( v4 & 4 )
-        v25 = v43.x1 - pr.x1;
+      if ( (flags & 4) != 0 )
+        v23 = v41.x1 - pr.x1;
       else
-        v25 = (float)((float)((float)(v43.x2 - v43.x1) * 0.5) + v43.x1)
+        v23 = (float)((float)((float)(v41.x2 - v41.x1) * 0.5) + v41.x1)
             - (float)(pr.x2 - (float)((float)(pr.x2 - pr.x1) * 0.5));
     }
-    if ( v43.y1 > pr.y2 || v43.y2 < pr.y1 || v43.y2 > pr.y2 || v43.y1 < pr.y1 )
+    if ( v41.y1 > pr.y2 || v41.y2 < pr.y1 || v41.y2 > pr.y2 || v41.y1 < pr.y1 )
     {
-      if ( v4 & 4 )
-        v27 = v43.y1 - pr.y1;
+      if ( (flags & 4) != 0 )
+        v25 = v41.y1 - pr.y1;
       else
-        v27 = (float)((float)((float)(v43.y2 - v43.y1) * 0.5) + v43.y1)
+        v25 = (float)((float)((float)(v41.y2 - v41.y1) * 0.5) + v41.y1)
             - (float)(pr.y2 - (float)((float)(pr.y2 - pr.y1) * 0.5));
     }
-    v28 = *v8;
-    v29 = v7->ViewportMatrix.M[1][1];
-    v30 = v45.M[0][3];
-    v7->ViewportMatrix.M[1][2] = 0.0;
-    v7->ViewportMatrix.M[0][2] = 0.0;
-    v31 = v7->ViewportMatrix.M[1][0];
-    v32 = v30 + COERCE_FLOAT(LODWORD(v25) ^ _xmm[0]);
-    v33 = v7->ViewportMatrix.M[0][1];
-    v45.M[0][3] = v32;
-    v35 = v33 * v45.M[1][1];
-    v45.M[1][3] = v45.M[1][3] + COERCE_FLOAT(LODWORD(v27) ^ _xmm[0]);
-    v34 = v45.M[1][3];
-    *v8 = (float)(v33 * v45.M[1][0]) + (float)(v28 * v45.M[0][0]);
-    v36 = v28 * v45.M[0][1];
-    v7->ViewportMatrix.M[1][0] = (float)(v29 * v45.M[1][0]) + (float)(v31 * v45.M[0][0]);
-    v37 = v29 * v45.M[1][1];
-    v38 = (float)((float)(v33 * v34) + (float)(v28 * v32)) + v7->ViewportMatrix.M[0][3];
-    v39 = v35 + v36;
-    v40 = v31 * v45.M[0][1];
-    v7->ViewportMatrix.M[0][1] = v39;
-    v7->ViewportMatrix.M[0][3] = v38;
-    v41 = (float)((float)(v29 * v34) + (float)(v31 * v32)) + v7->ViewportMatrix.M[1][3];
-    v7->ViewportMatrix.M[1][1] = v37 + v40;
-    v7->ViewportMatrix.M[1][3] = v41;
-    Scaleform::Render::TreeNode::SetMatrix(
-      (Scaleform::Render::TreeNode *)&v7->pRenderRoot.pObject->0,
-      &v7->ViewportMatrix);
+    v26 = p_ViewportMatrix->M[0][0];
+    v27 = this->ViewportMatrix.M[1][1];
+    v28 = v43.M[0][3];
+    this->ViewportMatrix.M[1][2] = 0.0;
+    this->ViewportMatrix.M[0][2] = 0.0;
+    v29 = this->ViewportMatrix.M[1][0];
+    v30 = v28 + COERCE_FLOAT(LODWORD(v23) ^ _xmm[0]);
+    v31 = this->ViewportMatrix.M[0][1];
+    v43.M[0][3] = v30;
+    v33 = v31 * v43.M[1][1];
+    v43.M[1][3] = v43.M[1][3] + COERCE_FLOAT(LODWORD(v25) ^ _xmm[0]);
+    v32 = v43.M[1][3];
+    p_ViewportMatrix->M[0][0] = (float)(v31 * v43.M[1][0]) + (float)(v26 * v43.M[0][0]);
+    v34 = v26 * v43.M[0][1];
+    this->ViewportMatrix.M[1][0] = (float)(v27 * v43.M[1][0]) + (float)(v29 * v43.M[0][0]);
+    v35 = v27 * v43.M[1][1];
+    v36 = (float)((float)(v31 * v32) + (float)(v26 * v30)) + this->ViewportMatrix.M[0][3];
+    v37 = v33 + v34;
+    v38 = v29 * v43.M[0][1];
+    this->ViewportMatrix.M[0][1] = v37;
+    this->ViewportMatrix.M[0][3] = v36;
+    v39 = (float)((float)(v27 * v32) + (float)(v29 * v30)) + this->ViewportMatrix.M[1][3];
+    this->ViewportMatrix.M[1][1] = v35 + v38;
+    this->ViewportMatrix.M[1][3] = v39;
+    Scaleform::Render::TreeNode::SetMatrix(this->pRenderRoot.pObject, &this->ViewportMatrix);
   }
 }
 

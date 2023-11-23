@@ -3,7 +3,7 @@
 __int64 Render::_dynamic_initializer_for__gLightGroupInventory__()
 {
   UFG::qResourceInventory::qResourceInventory(
-    (UFG::qResourceInventory *)&Render::gLightGroupInventory.vfptr,
+    &Render::gLightGroupInventory,
     "LightGroupInventory",
     0xF0A0724F,
     0x7480E00Fu,
@@ -12,28 +12,24 @@ __int64 Render::_dynamic_initializer_for__gLightGroupInventory__()
   Render::gLightGroupInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Render::LightGroupInventory::`vftable;
   uid = 0;
   UFG::qBaseTreeRB::qBaseTreeRB(&stru_142135078);
-  return atexit(Render::_dynamic_atexit_destructor_for__gLightGroupInventory__);
+  return atexit((int (__fastcall *)())Render::_dynamic_atexit_destructor_for__gLightGroupInventory__);
 }
 
 // File Line: 26
 // RVA: 0x28A40
 void __fastcall Render::LightGroupInventory::Add(Render::LightGroupInventory *this, UFG::qResourceData *resource_data)
 {
-  UFG::qResourceData *v2; // rbx
-  Render::LightGroupInventory *v3; // rbp
   unsigned int v4; // edi
-  unsigned int v5; // esi
+  unsigned int mUID; // esi
   UFG::qBaseTreeRB *v6; // rax
   char *v7; // rbx
 
-  v2 = resource_data;
-  v3 = this;
   if ( resource_data )
     UFG::qResourceData::qResourceData(resource_data);
-  UFG::qResourceInventory::Add((UFG::qResourceInventory *)&v3->vfptr, v2);
+  UFG::qResourceInventory::Add(this, resource_data);
   v4 = UFG::Metrics::msFrameCount;
-  v5 = v2->mNode.mUID;
-  if ( v5 && (v6 = UFG::qBaseTreeRB::Get(&v3->mLightGroupFrameStamp.mTree.mTree, v5)) != 0i64 )
+  mUID = resource_data->mNode.mUID;
+  if ( mUID && (v6 = UFG::qBaseTreeRB::Get(&this->mLightGroupFrameStamp.mTree.mTree, mUID)) != 0i64 )
   {
     LODWORD(v6->mNULL.mParent) = v4;
   }
@@ -45,52 +41,50 @@ void __fastcall Render::LightGroupInventory::Add(Render::LightGroupInventory *th
       *(_QWORD *)v7 = 0i64;
       *((_QWORD *)v7 + 1) = 0i64;
       *((_QWORD *)v7 + 2) = 0i64;
-      *((_DWORD *)v7 + 6) = v5;
+      *((_DWORD *)v7 + 6) = mUID;
       *((_DWORD *)v7 + 8) = v4;
     }
     else
     {
       v7 = 0i64;
     }
-    UFG::qBaseTreeRB::Add(&v3->mLightGroupFrameStamp.mTree.mTree, (UFG::qBaseNodeRB *)v7);
+    UFG::qBaseTreeRB::Add(&this->mLightGroupFrameStamp.mTree.mTree, (UFG::qBaseNodeRB *)v7);
     *((_DWORD *)v7 + 8) = v4;
   }
 }
 
 // File Line: 40
 // RVA: 0x28B00
-void __fastcall Render::LightGroupInventory::Remove(Render::LightGroupInventory *this, UFG::qResourceData *resource_data)
+void __fastcall Render::LightGroupInventory::Remove(
+        Render::LightGroupInventory *this,
+        UFG::qResourceData *resource_data)
 {
-  UFG::qResourceData *v2; // rdi
-  Render::LightGroupInventory *v3; // rsi
-  unsigned int v4; // edx
+  unsigned int mUID; // edx
   UFG::qBaseTreeRB *v5; // rax
   UFG::qBaseTreeRB *v6; // rbx
-  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v7; // rcx
-  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v8; // rax
+  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *mPrev; // rcx
+  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *mNext; // rax
 
-  v2 = resource_data;
-  v3 = this;
-  UFG::qResourceInventory::Remove((UFG::qResourceInventory *)&this->vfptr, resource_data);
-  v4 = v2->mNode.mUID;
-  if ( v4 )
+  UFG::qResourceInventory::Remove(this, resource_data);
+  mUID = resource_data->mNode.mUID;
+  if ( mUID )
   {
-    v5 = UFG::qBaseTreeRB::Get(&v3->mLightGroupFrameStamp.mTree.mTree, v4);
+    v5 = UFG::qBaseTreeRB::Get(&this->mLightGroupFrameStamp.mTree.mTree, mUID);
     v6 = v5;
     if ( v5 )
     {
       UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
-        (UFG::qBaseTreeVariableRB<unsigned __int64> *)&v3->mLightGroupFrameStamp,
+        (UFG::qBaseTreeVariableRB<unsigned __int64> *)&this->mLightGroupFrameStamp,
         (UFG::qBaseNodeVariableRB<unsigned __int64> *)v5);
       operator delete[](v6);
     }
   }
-  UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0>::DeleteNodes(&v2->mResourceHandles);
-  v7 = v2->mResourceHandles.mNode.mPrev;
-  v8 = v2->mResourceHandles.mNode.mNext;
-  v7->mNext = v8;
-  v8->mPrev = v7;
-  v2->mResourceHandles.mNode.mPrev = &v2->mResourceHandles.mNode;
-  v2->mResourceHandles.mNode.mNext = &v2->mResourceHandles.mNode;
+  UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0>::DeleteNodes(&resource_data->mResourceHandles);
+  mPrev = resource_data->mResourceHandles.mNode.mPrev;
+  mNext = resource_data->mResourceHandles.mNode.mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  resource_data->mResourceHandles.mNode.mPrev = &resource_data->mResourceHandles.mNode;
+  resource_data->mResourceHandles.mNode.mNext = &resource_data->mResourceHandles.mNode;
 }
 

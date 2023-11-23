@@ -18,24 +18,26 @@ void __fastcall CAkContextualMusicSequencer::~CAkContextualMusicSequencer(CAkCon
 
 // File Line: 44
 // RVA: 0xAB4320
-void __fastcall CAkContextualMusicSequencer::ScheduleAction(CAkContextualMusicSequencer *this, AkMusicAction *in_pAction)
+void __fastcall CAkContextualMusicSequencer::ScheduleAction(
+        CAkContextualMusicSequencer *this,
+        AkMusicAction *in_pAction)
 {
-  AkMusicAction *v2; // rax
+  AkMusicAction *m_pFirst; // rax
   AkMusicAction *v3; // r8
-  AkMusicAction *v4; // rax
+  AkMusicAction *m_pLast; // rax
 
-  v2 = this->m_pFirst;
+  m_pFirst = this->m_pFirst;
   v3 = 0i64;
-  if ( v2 )
+  if ( m_pFirst )
   {
-    while ( in_pAction->m_iTime >= v2->m_iTime )
+    while ( in_pAction->m_iTime >= m_pFirst->m_iTime )
     {
-      v3 = v2;
-      v2 = v2->pNextItem;
-      if ( !v2 )
+      v3 = m_pFirst;
+      m_pFirst = m_pFirst->pNextItem;
+      if ( !m_pFirst )
         goto LABEL_4;
     }
-    in_pAction->pNextItem = v2;
+    in_pAction->pNextItem = m_pFirst;
     if ( v3 )
       v3->pNextItem = in_pAction;
     else
@@ -45,9 +47,9 @@ void __fastcall CAkContextualMusicSequencer::ScheduleAction(CAkContextualMusicSe
   {
 LABEL_4:
     in_pAction->pNextItem = 0i64;
-    v4 = this->m_pLast;
-    if ( v4 )
-      v4->pNextItem = in_pAction;
+    m_pLast = this->m_pLast;
+    if ( m_pLast )
+      m_pLast->pNextItem = in_pAction;
     else
       this->m_pFirst = in_pAction;
     this->m_pLast = in_pAction;
@@ -56,79 +58,75 @@ LABEL_4:
 
 // File Line: 68
 // RVA: 0xAB42D0
-signed __int64 __fastcall CAkContextualMusicSequencer::PopImminentAction(CAkContextualMusicSequencer *this, int in_iNow, int in_iFrameDuration, AkMusicAction **out_pAction)
+__int64 __fastcall CAkContextualMusicSequencer::PopImminentAction(
+        CAkContextualMusicSequencer *this,
+        int in_iNow,
+        int in_iFrameDuration,
+        AkMusicAction **out_pAction)
 {
-  AkMusicAction *v4; // r10
+  AkMusicAction *m_pFirst; // r10
   AkMusicAction *v5; // rax
-  AkMusicAction *v6; // rax
-  signed __int64 result; // rax
+  AkMusicAction *pNextItem; // rax
 
-  v4 = this->m_pFirst;
-  if ( v4 && v4->m_iTime < in_iNow + in_iFrameDuration )
+  m_pFirst = this->m_pFirst;
+  if ( m_pFirst && m_pFirst->m_iTime < in_iNow + in_iFrameDuration )
   {
-    *out_pAction = v4;
+    *out_pAction = m_pFirst;
     v5 = this->m_pFirst;
     if ( v5 )
     {
-      v6 = v5->pNextItem;
-      if ( !v6 )
+      pNextItem = v5->pNextItem;
+      if ( !pNextItem )
         this->m_pLast = 0i64;
-      this->m_pFirst = v6;
+      this->m_pFirst = pNextItem;
     }
-    result = 45i64;
+    return 45i64;
   }
   else
   {
     *out_pAction = 0i64;
-    result = 17i64;
+    return 17i64;
   }
-  return result;
 }
 
 // File Line: 88
 // RVA: 0xAB4190
-void __fastcall CAkContextualMusicSequencer::ClearActionsByTarget(CAkContextualMusicSequencer *this, CAkMusicPBI *in_pTarget)
+void __fastcall CAkContextualMusicSequencer::ClearActionsByTarget(
+        CAkContextualMusicSequencer *this,
+        CAkMusicPBI *in_pTarget)
 {
-  AkMusicAction *v2; // rbx
+  AkMusicAction *m_pFirst; // rbx
   AkMusicAction *v3; // rdi
-  CAkMusicPBI *v4; // rbp
-  CAkContextualMusicSequencer *v5; // rsi
-  AkMusicAction *v6; // rax
+  AkMusicAction *pNextItem; // rax
   int v7; // edi
-  __int128 v8; // [rsp+20h] [rbp-28h]
-  __m128i v9; // [rsp+30h] [rbp-18h]
+  AkMusicAction *v8; // [rsp+30h] [rbp-18h]
+  AkMusicAction *v9; // [rsp+38h] [rbp-10h]
 
-  v2 = this->m_pFirst;
+  m_pFirst = this->m_pFirst;
   v3 = 0i64;
-  v4 = in_pTarget;
-  v5 = this;
-  while ( v2 )
+  while ( m_pFirst )
   {
-    if ( v2->vfptr->Type(v2) != 1 || (CAkMusicPBI *)v2[1].vfptr != v4 )
+    if ( m_pFirst->vfptr->Type(m_pFirst) == MusicActionTypeStop && (CAkMusicPBI *)m_pFirst[1].vfptr == in_pTarget )
     {
-      v3 = v2;
-      v2 = v2->pNextItem;
+      pNextItem = m_pFirst->pNextItem;
+      v9 = v3;
+      v8 = pNextItem;
+      if ( m_pFirst == this->m_pFirst )
+        this->m_pFirst = pNextItem;
+      else
+        v3->pNextItem = pNextItem;
+      if ( m_pFirst == this->m_pLast )
+        this->m_pLast = v3;
+      v7 = g_DefaultPoolId;
+      m_pFirst->vfptr->__vecDelDtor(m_pFirst, 0);
+      AK::MemoryMgr::Free(v7, m_pFirst);
+      v3 = v9;
+      m_pFirst = v8;
     }
     else
     {
-      v6 = v2->pNextItem;
-      v9.m128i_i64[1] = (__int64)v3;
-      v9.m128i_i64[0] = (__int64)v6;
-      if ( v2 == v5->m_pFirst )
-        v5->m_pFirst = v6;
-      else
-        v3->pNextItem = v6;
-      if ( v2 == v5->m_pLast )
-        v5->m_pLast = v3;
-      v7 = g_DefaultPoolId;
-      _mm_store_si128((__m128i *)&v8, v9);
-      if ( v2 )
-      {
-        v2->vfptr->__vecDelDtor(v2, 0);
-        AK::MemoryMgr::Free(v7, v2);
-      }
-      v3 = (AkMusicAction *)*((_QWORD *)&v8 + 1);
-      v2 = (AkMusicAction *)v8;
+      v3 = m_pFirst;
+      m_pFirst = m_pFirst->pNextItem;
     }
   }
 }
@@ -137,39 +135,25 @@ void __fastcall CAkContextualMusicSequencer::ClearActionsByTarget(CAkContextualM
 // RVA: 0xAB4250
 void __fastcall CAkContextualMusicSequencer::Flush(CAkContextualMusicSequencer *this)
 {
-  AkMusicAction *v1; // rbx
-  CAkContextualMusicSequencer *v2; // rdi
-  AkMusicAction *v3; // rax
+  AkMusicAction *i; // rbx
+  AkMusicAction *pNextItem; // rax
   int v4; // esi
 
-  v1 = this->m_pFirst;
-  v2 = this;
-  if ( v1 )
+  for ( i = this->m_pFirst; i; i = this->m_pFirst )
   {
-    if ( !v1 )
-      goto LABEL_6;
-    do
+    pNextItem = i->pNextItem;
+    if ( pNextItem )
     {
-      v3 = v1->pNextItem;
-      if ( v3 )
-      {
-        v2->m_pFirst = v3;
-      }
-      else
-      {
-        v2->m_pFirst = 0i64;
-        v2->m_pLast = 0i64;
-      }
-LABEL_6:
-      v4 = g_DefaultPoolId;
-      if ( v1 )
-      {
-        v1->vfptr->__vecDelDtor(v1, 0);
-        AK::MemoryMgr::Free(v4, v1);
-      }
-      v1 = v2->m_pFirst;
+      this->m_pFirst = pNextItem;
     }
-    while ( v1 );
+    else
+    {
+      this->m_pFirst = 0i64;
+      this->m_pLast = 0i64;
+    }
+    v4 = g_DefaultPoolId;
+    i->vfptr->__vecDelDtor(i, 0);
+    AK::MemoryMgr::Free(v4, i);
   }
 }
 

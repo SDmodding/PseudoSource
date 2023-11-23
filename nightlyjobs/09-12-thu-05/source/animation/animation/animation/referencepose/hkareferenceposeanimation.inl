@@ -2,17 +2,13 @@
 // RVA: 0xB1DD00
 void __fastcall hkaReferencePoseAnimation::setSkeleton(hkaReferencePoseAnimation *this, hkaSkeleton *skeleton)
 {
-  hkaSkeleton *v2; // rbx
-  hkaReferencePoseAnimation *v3; // rdi
-  hkReferencedObject *v4; // rcx
+  hkaSkeleton *m_pntr; // rcx
 
-  v2 = skeleton;
-  v3 = this;
   if ( skeleton )
-    hkReferencedObject::addReference((hkReferencedObject *)&skeleton->vfptr);
-  v4 = (hkReferencedObject *)&v3->m_skeleton.m_pntr->vfptr;
-  if ( v4 )
-    hkReferencedObject::removeReference(v4);
-  v3->m_skeleton.m_pntr = v2;
+    hkReferencedObject::addReference(skeleton);
+  m_pntr = this->m_skeleton.m_pntr;
+  if ( m_pntr )
+    hkReferencedObject::removeReference(m_pntr);
+  this->m_skeleton.m_pntr = skeleton;
 }
 

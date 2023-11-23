@@ -2,53 +2,57 @@
 // RVA: 0x4D2AA0
 void UFG::TSCombatRegion::BindAtomics(void)
 {
+  ASymbol rebind; // [rsp+20h] [rbp-18h]
+  ASymbol rebinda; // [rsp+20h] [rbp-18h]
+
   UFG::TSCombatRegion::mspCombatRegionClass = SSBrain::get_class("CombatRegion");
   SSClass::register_method_func(
     UFG::TSCombatRegion::mspCombatRegionClass,
     "get_bounding_box",
     UFG::TSCombatRegion::Mthd_get_bounding_box,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
     UFG::TSCombatRegion::mspCombatRegionClass,
     "get_bounding_radius",
     UFG::TSCombatRegion::Mthd_get_bounding_radius,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
     UFG::TSCombatRegion::mspCombatRegionClass,
     "get_center",
     UFG::TSCombatRegion::Mthd_get_center,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_method_func(
     UFG::TSCombatRegion::mspCombatRegionClass,
     "is_hit_pos",
     UFG::TSCombatRegion::Mthd_is_hit_pos,
-    0);
+    SSBindFlag_instance_no_rebind);
+  LOBYTE(rebind.i_uid) = 0;
   SSClass::register_method_func(
     UFG::TSCombatRegion::mspCombatRegionClass,
     "find_named",
     UFG::TSCombatRegion::MthdC_find_named,
     1,
-    0);
+    rebind);
+  LOBYTE(rebinda.i_uid) = 0;
   SSClass::register_method_func(
     UFG::TSCombatRegion::mspCombatRegionClass,
     "get_named",
     UFG::TSCombatRegion::MthdC_get_named,
     1,
-    0);
+    rebinda);
 }
 
 // File Line: 87
 // RVA: 0x4FB8B0
 void __fastcall UFG::TSCombatRegion::Mthd_get_bounding_box(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // rbx
-  SSObjectBase *v3; // rdx
+  SSObjectBase *i_obj_p; // rdx
   UFG::allocator::free_link *v4; // rax
-  float v5; // xmm1_4
-  float v6; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
   SSInstance *v7; // rsi
   SSData *v8; // rdi
-  SSInstance *v9; // rcx
+  SSInstance *i_data_p; // rcx
   bool v10; // zf
   UFG::allocator::free_link *v11; // rax
   float v12; // xmm1_4
@@ -57,33 +61,30 @@ void __fastcall UFG::TSCombatRegion::Mthd_get_bounding_box(SSInvokedMethod *pSco
   SSInstance *v15; // rdi
   __int64 v16; // rbx
   _DWORD *v17; // rcx
-  UFG::qBox pBox; // [rsp+28h] [rbp-20h]
+  UFG::qBox pBox; // [rsp+28h] [rbp-20h] BYREF
 
-  v2 = pScope;
-  *(_QWORD *)&pBox.mMin.x = 0i64;
-  *(_QWORD *)&pBox.mMin.z = 0i64;
-  *(_QWORD *)&pBox.mMax.y = 0i64;
-  v3 = pScope->i_scope_p.i_obj_p;
-  if ( !v3 || pScope->i_scope_p.i_ptr_id != v3->i_ptr_id )
-    v3 = 0i64;
-  UFG::RegionComponent::GetBoundingBox((UFG::RegionComponent *)v3[2].vfptr[2].set_data_by_name, &pBox);
+  memset(&pBox, 0, sizeof(pBox));
+  i_obj_p = pScope->i_scope_p.i_obj_p;
+  if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  UFG::RegionComponent::GetBoundingBox((UFG::RegionComponent *)i_obj_p[2].vfptr[2].set_data_by_name, &pBox);
   v4 = UFG::qMalloc(0xCui64, "Skookum.qVector3", 0i64);
   if ( v4 )
   {
-    v5 = pBox.mMin.y;
-    v6 = pBox.mMin.z;
+    y = pBox.mMin.y;
+    z = pBox.mMin.z;
     *(float *)&v4->mNext = pBox.mMin.x;
-    *((float *)&v4->mNext + 1) = v5;
-    *(float *)&v4[1].mNext = v6;
+    *((float *)&v4->mNext + 1) = y;
+    *(float *)&v4[1].mNext = z;
   }
   v7 = SSInstance::pool_new(UFG::SkookumMgr::mspVector3Class, (unsigned __int64)v4);
-  v8 = *v2->i_data.i_array_p;
-  v9 = v8->i_data_p;
-  v10 = v9->i_ref_count-- == 1;
+  v8 = *pScope->i_data.i_array_p;
+  i_data_p = v8->i_data_p;
+  v10 = i_data_p->i_ref_count-- == 1;
   if ( v10 )
   {
-    v9->i_ref_count = 2147483648;
-    ((void (__cdecl *)(SSInstance *))v9->vfptr[1].get_scope_context)(v9);
+    i_data_p->i_ref_count = 0x80000000;
+    i_data_p->vfptr[1].get_scope_context(i_data_p);
   }
   v8->i_data_p = v7;
   v11 = UFG::qMalloc(0xCui64, "Skookum.qVector3", 0i64);
@@ -97,13 +98,13 @@ void __fastcall UFG::TSCombatRegion::Mthd_get_bounding_box(SSInvokedMethod *pSco
   }
   v14 = SSInstance::pool_new(UFG::SkookumMgr::mspVector3Class, (unsigned __int64)v11);
   v15 = v14;
-  v16 = *((_QWORD *)v2->i_data.i_array_p + 1);
+  v16 = *((_QWORD *)pScope->i_data.i_array_p + 1);
   v17 = *(_DWORD **)(v16 + 8);
   v10 = v17[4]-- == 1;
   if ( v10 )
   {
-    v17[4] = 2147483648;
-    (*(void (__cdecl **)(_DWORD *))(*(_QWORD *)v17 + 112i64))(v17);
+    v17[4] = 0x80000000;
+    (*(void (__fastcall **)(_DWORD *))(*(_QWORD *)v17 + 112i64))(v17);
     *(_QWORD *)(v16 + 8) = v15;
   }
   else
@@ -114,19 +115,20 @@ void __fastcall UFG::TSCombatRegion::Mthd_get_bounding_box(SSInvokedMethod *pSco
 
 // File Line: 101
 // RVA: 0x4FBB70
-void __usercall UFG::TSCombatRegion::Mthd_get_bounding_radius(SSInvokedMethod *pScope@<rcx>, SSInstance **ppResult@<rdx>, unsigned int a3@<xmm0>)
+void __fastcall UFG::TSCombatRegion::Mthd_get_bounding_radius(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v3; // r8
-  SSInstance **v4; // rbx
+  SSObjectBase *i_obj_p; // r8
+  __int64 v4; // rcx
+  float user_data; // [rsp+38h] [rbp+10h]
 
   if ( ppResult )
   {
-    v3 = pScope->i_scope_p.i_obj_p;
-    v4 = ppResult;
-    if ( !v3 || pScope->i_scope_p.i_ptr_id != v3->i_ptr_id )
-      v3 = 0i64;
-    (*(void (**)(void))(**((_QWORD **)v3[2].vfptr[2].set_data_by_name + 10) + 32i64))();
-    *v4 = SSInstance::pool_new(SSBrain::c_real_class_p, a3);
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    v4 = *((_QWORD *)i_obj_p[2].vfptr[2].set_data_by_name + 10);
+    user_data = (*(float (__fastcall **)(__int64))(*(_QWORD *)v4 + 32i64))(v4);
+    *ppResult = SSInstance::pool_new(SSBrain::c_real_class_p, LODWORD(user_data));
   }
 }
 
@@ -134,30 +136,28 @@ void __usercall UFG::TSCombatRegion::Mthd_get_bounding_radius(SSInvokedMethod *p
 // RVA: 0x4FBE40
 void __fastcall UFG::TSCombatRegion::Mthd_get_center(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance **v2; // rbx
-  SSObjectBase *v3; // r8
+  SSObjectBase *i_obj_p; // r8
   UFG::allocator::free_link *v4; // rax
-  float v5; // xmm1_4
-  float v6; // xmm2_4
-  UFG::qVector3 pPos; // [rsp+28h] [rbp-20h]
+  float y; // xmm1_4
+  float z; // xmm2_4
+  UFG::qVector3 pPos; // [rsp+28h] [rbp-20h] BYREF
 
   if ( ppResult )
   {
-    v2 = ppResult;
-    v3 = pScope->i_scope_p.i_obj_p;
-    if ( !v3 || pScope->i_scope_p.i_ptr_id != v3->i_ptr_id )
-      v3 = 0i64;
-    UFG::RegionComponent::GetCenter((UFG::RegionComponent *)v3[2].vfptr[2].set_data_by_name, &pPos);
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    UFG::RegionComponent::GetCenter((UFG::RegionComponent *)i_obj_p[2].vfptr[2].set_data_by_name, &pPos);
     v4 = UFG::qMalloc(0xCui64, "Skookum.qVector3", 0i64);
     if ( v4 )
     {
-      v5 = pPos.y;
-      v6 = pPos.z;
+      y = pPos.y;
+      z = pPos.z;
       *(float *)&v4->mNext = pPos.x;
-      *((float *)&v4->mNext + 1) = v5;
-      *(float *)&v4[1].mNext = v6;
+      *((float *)&v4->mNext + 1) = y;
+      *(float *)&v4[1].mNext = z;
     }
-    *v2 = SSInstance::pool_new(UFG::SkookumMgr::mspVector3Class, (unsigned __int64)v4);
+    *ppResult = SSInstance::pool_new(UFG::SkookumMgr::mspVector3Class, (unsigned __int64)v4);
   }
 }
 
@@ -165,20 +165,18 @@ void __fastcall UFG::TSCombatRegion::Mthd_get_center(SSInvokedMethod *pScope, SS
 // RVA: 0x501810
 void __fastcall UFG::TSCombatRegion::Mthd_is_hit_pos(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSObjectBase *v2; // r8
-  SSInstance **v3; // rbx
-  bool v4; // al
+  SSObjectBase *i_obj_p; // r8
+  bool IsHitPoint; // al
 
   if ( ppResult )
   {
-    v2 = pScope->i_scope_p.i_obj_p;
-    v3 = ppResult;
-    if ( !v2 || pScope->i_scope_p.i_ptr_id != v2->i_ptr_id )
-      v2 = 0i64;
-    v4 = UFG::RegionComponent::IsHitPoint(
-           (UFG::RegionComponent *)v2[2].vfptr[2].set_data_by_name,
-           (UFG::qVector3 *)(*pScope->i_data.i_array_p)->i_data_p->i_user_data);
-    *v3 = (SSInstance *)SSBoolean::pool_new(v4);
+    i_obj_p = pScope->i_scope_p.i_obj_p;
+    if ( !i_obj_p || pScope->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    IsHitPoint = UFG::RegionComponent::IsHitPoint(
+                   (UFG::RegionComponent *)i_obj_p[2].vfptr[2].set_data_by_name,
+                   (UFG::qVector3 *)(*pScope->i_data.i_array_p)->i_data_p->i_user_data);
+    *ppResult = SSBoolean::pool_new(IsHitPoint);
   }
 }
 
@@ -186,23 +184,21 @@ void __fastcall UFG::TSCombatRegion::Mthd_is_hit_pos(SSInvokedMethod *pScope, SS
 // RVA: 0x4E6420
 void __fastcall UFG::TSCombatRegion::MthdC_find_named(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance **v2; // rbx
-  unsigned int v3; // edx
+  unsigned int i_user_data; // edx
   UFG::qBaseTreeRB *v4; // rax
 
   if ( ppResult )
   {
-    v2 = ppResult;
-    v3 = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
-    if ( v3
-      && (v4 = UFG::qBaseTreeRB::Get(&UFG::CombatRegion::msCombatRegions.mTree, v3)) != 0i64
+    i_user_data = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
+    if ( i_user_data
+      && (v4 = UFG::qBaseTreeRB::Get(&UFG::CombatRegion::msCombatRegions.mTree, i_user_data)) != 0i64
       && v4 != (UFG::qBaseTreeRB *)136 )
     {
-      *v2 = SSInstance::pool_new(UFG::TSCombatRegion::mspCombatRegionClass, (unsigned __int64)v4[-2].mRoot.mChild);
+      *ppResult = SSInstance::pool_new(UFG::TSCombatRegion::mspCombatRegionClass, (unsigned __int64)v4[-2].mRoot.mChild);
     }
     else
     {
-      *v2 = SSBrain::c_nil_p;
+      *ppResult = SSBrain::c_nil_p;
     }
   }
 }
@@ -211,20 +207,18 @@ void __fastcall UFG::TSCombatRegion::MthdC_find_named(SSInvokedMethod *pScope, S
 // RVA: 0x4E81C0
 void __fastcall UFG::TSCombatRegion::MthdC_get_named(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance **v2; // rbx
-  unsigned int v3; // edx
+  unsigned int i_user_data; // edx
   UFG::qBaseTreeRB *v4; // rax
-  unsigned __int64 v5; // rdx
+  unsigned __int64 mChild; // rdx
 
   if ( ppResult )
   {
-    v2 = ppResult;
-    v3 = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
-    if ( v3 && (v4 = UFG::qBaseTreeRB::Get(&UFG::CombatRegion::msCombatRegions.mTree, v3)) != 0i64 )
-      v5 = (unsigned __int64)v4[-2].mRoot.mChild;
+    i_user_data = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
+    if ( i_user_data && (v4 = UFG::qBaseTreeRB::Get(&UFG::CombatRegion::msCombatRegions.mTree, i_user_data)) != 0i64 )
+      mChild = (unsigned __int64)v4[-2].mRoot.mChild;
     else
-      v5 = 0i64;
-    *v2 = SSInstance::pool_new(UFG::TSCombatRegion::mspCombatRegionClass, v5);
+      mChild = 0i64;
+    *ppResult = SSInstance::pool_new(UFG::TSCombatRegion::mspCombatRegionClass, mChild);
   }
 }
 

@@ -3,12 +3,14 @@
 bool __fastcall UFG::UIHKFaceLevelWidget::IsStandingDeltaGonnaCauseLevelUp()
 {
   UFG::GameStatTracker *v0; // rdi
-  float v1; // xmm6_4
-  signed int v2; // ebx
+  float Stat; // xmm6_4
+  int FaceLevelFromExperience; // ebx
 
   v0 = UFG::GameStatTracker::Instance();
-  v1 = (float)(signed int)UFG::GameStatTracker::GetStat(v0, Standing);
-  v2 = UFG::GameStatTracker::GetFaceLevelFromExperience(v0, (signed int)UFG::UIHKFaceLevelWidget::mPreviousStanding);
-  return (signed int)UFG::GameStatTracker::GetFaceLevelFromExperience(v0, (signed int)v1) > v2;
+  Stat = (float)(int)UFG::GameStatTracker::GetStat(v0, Standing);
+  FaceLevelFromExperience = UFG::GameStatTracker::GetFaceLevelFromExperience(
+                              v0,
+                              (int)UFG::UIHKFaceLevelWidget::mPreviousStanding);
+  return (int)UFG::GameStatTracker::GetFaceLevelFromExperience(v0, (int)Stat) > FaceLevelFromExperience;
 }
 

@@ -2,400 +2,389 @@
 // RVA: 0xD95850
 void __fastcall deleteTaskHeaderResources(hkpBuildJacobianTaskHeader *taskHeader)
 {
-  hkpBuildJacobianTaskHeader *v1; // rbx
-  hkpBuildJacobianTask *v2; // rdi
-  _QWORD **v3; // rax
-  hkpSolveConstraintBatchTask *v4; // rdi
+  hkpBuildJacobianTask *m_buildJacobianTasks; // rdi
+  _QWORD **Value; // rax
+  hkpSolveConstraintBatchTask *m_firstSolveJacobiansTask; // rdi
   _QWORD **v5; // rax
-  void *v6; // rsi
-  unsigned int v7; // edi
+  void *m_buffer; // rsi
+  unsigned int m_bufferCapacity; // edi
   _QWORD **v8; // rax
-  int v9; // esi
-  hkpEntity *const *v10; // rdi
+  int m_entitiesCapacity; // esi
+  hkpEntity *const *m_allEntities; // rdi
   _QWORD **v11; // rax
-  int v12; // er8
+  int m_capacityAndFlags; // r8d
   _QWORD **v13; // rax
 
-  v1 = taskHeader;
-  while ( v1->m_tasks.m_buildJacobianTasks )
+  while ( taskHeader->m_tasks.m_buildJacobianTasks )
   {
-    v2 = v1->m_tasks.m_buildJacobianTasks;
-    v1->m_tasks.m_buildJacobianTasks = v2->m_next;
-    v3 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    (*(void (__fastcall **)(_QWORD *, hkpBuildJacobianTask *, signed __int64))(*v3[11] + 16i64))(v3[11], v2, 3968i64);
+    m_buildJacobianTasks = taskHeader->m_tasks.m_buildJacobianTasks;
+    taskHeader->m_tasks.m_buildJacobianTasks = m_buildJacobianTasks->m_next;
+    Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    (*(void (__fastcall **)(_QWORD *, hkpBuildJacobianTask *, __int64))(*Value[11] + 16i64))(
+      Value[11],
+      m_buildJacobianTasks,
+      3968i64);
   }
-  while ( v1->m_solveTasks.m_firstSolveJacobiansTask )
+  while ( taskHeader->m_solveTasks.m_firstSolveJacobiansTask )
   {
-    v4 = v1->m_solveTasks.m_firstSolveJacobiansTask;
-    v1->m_solveTasks.m_firstSolveJacobiansTask = v4->m_next;
+    m_firstSolveJacobiansTask = taskHeader->m_solveTasks.m_firstSolveJacobiansTask;
+    taskHeader->m_solveTasks.m_firstSolveJacobiansTask = m_firstSolveJacobiansTask->m_next;
     v5 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    (*(void (__fastcall **)(_QWORD *, hkpSolveConstraintBatchTask *, signed __int64))(*v5[11] + 16i64))(
+    (*(void (__fastcall **)(_QWORD *, hkpSolveConstraintBatchTask *, __int64))(*v5[11] + 16i64))(
       v5[11],
-      v4,
+      m_firstSolveJacobiansTask,
       64i64);
   }
-  v6 = v1->m_buffer;
-  if ( v6 )
+  m_buffer = taskHeader->m_buffer;
+  if ( m_buffer )
   {
-    v7 = v1->m_bufferCapacity;
+    m_bufferCapacity = taskHeader->m_bufferCapacity;
     v8 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    (*(void (__fastcall **)(_QWORD *, void *, _QWORD))(*v8[13] + 32i64))(v8[13], v6, v7);
-    v1->m_buffer = 0i64;
+    (*(void (__fastcall **)(_QWORD *, void *, _QWORD))(*v8[13] + 32i64))(v8[13], m_buffer, m_bufferCapacity);
+    taskHeader->m_buffer = 0i64;
   }
-  if ( v1->m_numIslandsAfterSplit > 1 )
+  if ( taskHeader->m_numIslandsAfterSplit > 1 )
   {
-    v9 = v1->m_entitiesCapacity;
-    v10 = v1->m_allEntities;
+    m_entitiesCapacity = taskHeader->m_entitiesCapacity;
+    m_allEntities = taskHeader->m_allEntities;
     v11 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
     (*(void (__fastcall **)(_QWORD *, hkpEntity *const *, _QWORD))(*v11[11] + 32i64))(
       v11[11],
-      v10,
-      (unsigned int)(8 * v9));
-    v1->m_allEntities = 0i64;
+      m_allEntities,
+      (unsigned int)(8 * m_entitiesCapacity));
+    taskHeader->m_allEntities = 0i64;
   }
-  v12 = v1->m_newSplitIslands.m_capacityAndFlags;
-  v1->m_newSplitIslands.m_size = 0;
-  if ( v12 >= 0 )
+  m_capacityAndFlags = taskHeader->m_newSplitIslands.m_capacityAndFlags;
+  taskHeader->m_newSplitIslands.m_size = 0;
+  if ( m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_newSplitIslands.m_data,
-      8 * v12);
-  v1->m_newSplitIslands.m_data = 0i64;
-  v1->m_newSplitIslands.m_capacityAndFlags = 2147483648;
+      &hkContainerHeapAllocator::s_alloc,
+      taskHeader->m_newSplitIslands.m_data,
+      8 * m_capacityAndFlags);
+  taskHeader->m_newSplitIslands.m_data = 0i64;
+  taskHeader->m_newSplitIslands.m_capacityAndFlags = 0x80000000;
   v13 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  (*(void (__fastcall **)(_QWORD *, hkpBuildJacobianTaskHeader *, signed __int64))(*v13[11] + 16i64))(
+  (*(void (__fastcall **)(_QWORD *, hkpBuildJacobianTaskHeader *, __int64))(*v13[11] + 16i64))(
     v13[11],
-    v1,
+    taskHeader,
     208i64);
 }
 
 // File Line: 65
 // RVA: 0xD94D40
-__int64 __fastcall hkpSingleThreadedJobsOnIsland::cpuBroadPhaseJob(hkpMtThreadStructure *tl, hkJobQueue *jobQueue, hkJobQueue::JobQueueEntry *nextJobOut)
+__int64 __fastcall hkpSingleThreadedJobsOnIsland::cpuBroadPhaseJob(
+        hkpMtThreadStructure *tl,
+        hkJobQueue *jobQueue,
+        hkJobQueue::JobQueueEntry *nextJobOut)
 {
   __int64 v3; // r14
-  hkpMtThreadStructure *v4; // r12
   hkJobQueue::JobQueueEntry *v5; // r15
-  _QWORD *v6; // rax
+  _QWORD *Value; // rax
   _QWORD *v7; // rcx
   _QWORD *v8; // r9
   unsigned __int64 v9; // rax
-  signed __int64 v10; // rcx
-  signed __int32 v11; // er13
-  int v12; // edi
+  _QWORD *v10; // rcx
+  signed __int32 v11; // r13d
+  int m_broadPhaseUpdateSize; // edi
   _BYTE *v13; // rbx
-  LPVOID v14; // rax
-  hkLifoAllocator *v15; // rcx
-  hkpBroadPhaseHandlePair *v16; // rax
-  int v17; // edx
-  char *v18; // r8
-  hkpWorld *v19; // rax
-  int v20; // edi
-  LPVOID v21; // rax
-  hkLifoAllocator *v22; // rcx
-  hkpBroadPhaseHandlePair *v23; // rax
-  int v24; // edx
-  char *v25; // r8
-  hkpWorld *v26; // r9
-  hkpContinuousSimulation *v27; // rcx
-  __int64 v28; // rsi
-  signed __int32 v29; // ecx
-  _QWORD *v30; // r8
+  hkLifoAllocator *v14; // rcx
+  hkpBroadPhaseHandlePair *m_cur; // rax
+  int v16; // edx
+  char *v17; // r8
+  hkpWorld *m_world; // rax
+  int v19; // edi
+  hkLifoAllocator *v20; // rcx
+  hkpBroadPhaseHandlePair *v21; // rax
+  int v22; // edx
+  char *v23; // r8
+  hkpWorld *v24; // r9
+  hkpMultiThreadedSimulation *m_storage; // rcx
+  __int64 v26; // rsi
+  signed __int32 v27; // ecx
+  _QWORD *v28; // r8
+  _QWORD *v29; // rcx
+  unsigned __int64 v30; // rax
   _QWORD *v31; // rcx
-  unsigned __int64 v32; // rax
-  signed __int64 v33; // rcx
-  _QWORD *v34; // r8
+  _QWORD *v32; // r8
+  _QWORD *v33; // rcx
+  unsigned __int64 v34; // rax
   _QWORD *v35; // rcx
-  unsigned __int64 v36; // rax
-  signed __int64 v37; // rcx
-  __int64 v38; // rax
-  int v39; // edi
-  hkLifoAllocator *v40; // rax
-  hkpContactImpulseLimitBreachedListenerInfo *v41; // r14
-  int v42; // er15
-  char *v43; // rcx
-  __int64 v44; // r9
-  int i; // er11
-  int *v46; // rcx
-  __int64 v47; // rdx
-  signed __int64 v48; // r10
-  int v49; // eax
-  hkLifoAllocator *v50; // rax
-  int v51; // er8
-  _QWORD *v52; // r8
+  __int64 v36; // rax
+  unsigned int v37; // edi
+  hkLifoAllocator *v38; // rax
+  hkpContactImpulseLimitBreachedListenerInfo *v39; // r14
+  int v40; // r15d
+  char *v41; // rcx
+  __int64 v42; // r9
+  int i; // r11d
+  int *v44; // rcx
+  __int64 v45; // rdx
+  char *v46; // r10
+  int v47; // eax
+  hkLifoAllocator *v48; // rax
+  int v49; // r8d
+  _QWORD *v50; // r8
+  _QWORD *v51; // rcx
+  unsigned __int64 v52; // rax
   _QWORD *v53; // rcx
-  unsigned __int64 v54; // rax
-  signed __int64 v55; // rcx
-  _QWORD *v56; // r8
+  _QWORD *v54; // r8
+  _QWORD *v55; // rcx
+  unsigned __int64 v56; // rax
   _QWORD *v57; // rcx
-  unsigned __int64 v58; // rax
-  signed __int64 v59; // rcx
-  _QWORD *v60; // r8
-  unsigned __int64 v61; // rcx
-  unsigned __int64 v62; // rax
-  __int64 v63; // r14
-  hkpWorld *v64; // rdi
-  _QWORD *v65; // r8
+  _QWORD *v58; // r8
+  unsigned __int64 v59; // rcx
+  unsigned __int64 v60; // rax
+  __int64 v61; // r14
+  hkpWorld *v62; // rdi
+  _QWORD *v63; // r8
+  _QWORD *v64; // rcx
+  unsigned __int64 v65; // rax
   _QWORD *v66; // rcx
-  unsigned __int64 v67; // rax
-  signed __int64 v68; // rcx
-  int v69; // ebx
-  hkMemorySystem *v70; // rax
-  _QWORD *v71; // r8
+  int m_size; // ebx
+  hkMemorySystem *Instance; // rax
+  _QWORD *v69; // r8
+  _QWORD *v70; // rcx
+  unsigned __int64 v71; // rax
   _QWORD *v72; // rcx
-  unsigned __int64 v73; // rax
-  signed __int64 v74; // rcx
-  hkpCollisionFilter *v75; // rax
-  hkpCollidableCollidableFilter *v76; // r9
-  _QWORD *v77; // r8
+  hkpCollisionFilter *m_collisionFilter; // rax
+  hkpCollidableCollidableFilter *v74; // r9
+  _QWORD *v75; // r8
+  _QWORD *v76; // rcx
+  unsigned __int64 v77; // rax
   _QWORD *v78; // rcx
-  unsigned __int64 v79; // rax
-  signed __int64 v80; // rcx
+  _QWORD *v79; // rbx
+  _QWORD **v80; // rax
   _QWORD *v81; // rbx
   _QWORD **v82; // rax
-  _QWORD *v83; // rbx
-  _QWORD **v84; // rax
-  __int64 v85; // rdi
-  unsigned int v86; // ebx
-  _QWORD **v87; // rax
-  int v88; // edi
-  __int64 v89; // rbx
+  __int64 v83; // rdi
+  unsigned int v84; // ebx
+  _QWORD **v85; // rax
+  int v86; // edi
+  __int64 v87; // rbx
+  _QWORD **v88; // rax
+  int v89; // r8d
   _QWORD **v90; // rax
-  int v91; // er8
-  _QWORD **v92; // rax
-  int v93; // er12
-  int v94; // er11
-  int v95; // er13
-  signed __int64 v96; // r9
-  hkJobQueue::JobQueueEntry **v97; // r15
-  __int16 *v98; // rdi
-  hkpWorld *v99; // r10
-  int v100; // esi
-  int v101; // er14
-  hkJobQueue::JobQueueEntry *v102; // r8
-  bool v103; // zf
-  __int16 v104; // dx
-  __int16 v105; // ax
-  char v106; // al
-  hkpAgentSectorHeader *v107; // rax
-  hkJobQueue *v108; // r15
-  int v109; // edi
-  signed __int64 v110; // rbx
-  hkpAgentSectorHeader *v111; // rsi
-  __int64 v112; // rdx
-  hkJobQueue::JobQueueEntry *v113; // rbx
-  _QWORD *v114; // r9
+  int v91; // r12d
+  signed int v92; // r11d
+  int v93; // r13d
+  __int64 v94; // r9
+  hkJobQueue::JobQueueEntry **v95; // r15
+  __int64 v96; // rdi
+  hkpWorld *v97; // r10
+  int m_maxSectorsPerMidphaseCollideTask; // esi
+  int v99; // r14d
+  hkJobQueue::JobQueueEntry *v100; // r8
+  bool v101; // zf
+  __int16 v102; // dx
+  __int16 v103; // ax
+  char v104; // al
+  hkpAgentSectorHeader *v105; // rax
+  hkJobQueue *v106; // r15
+  int v107; // edi
+  __int64 v108; // rbx
+  hkpAgentSectorHeader *j; // rsi
+  hkJobQueue::JobQueueEntry *v110; // rdx
+  hkJobQueue::JobQueueEntry *v111; // rbx
+  _QWORD *v112; // r9
+  _QWORD *v113; // rcx
+  unsigned __int64 v114; // rax
   _QWORD *v115; // rcx
-  unsigned __int64 v116; // rax
-  signed __int64 v117; // rcx
-  unsigned int v118; // eax
-  _QWORD *v119; // r8
+  unsigned int NextJob; // eax
+  _QWORD *v117; // r8
+  _QWORD *v118; // rcx
+  unsigned __int64 v119; // rax
   _QWORD *v120; // rcx
-  unsigned __int64 v121; // rax
-  signed __int64 v122; // rcx
-  char *v123; // rdi
-  unsigned int v124; // esi
-  int v125; // eax
-  signed int v126; // ebx
-  hkLifoAllocator *v127; // rax
-  int v128; // er8
-  int v129; // eax
-  char *v130; // rdi
-  signed int v131; // ebx
-  hkLifoAllocator *v132; // rax
-  int v133; // er8
-  hkArray<hkpBroadPhaseHandlePair,hkContainerHeapAllocator> delPairs; // [rsp+30h] [rbp-D0h]
+  char *v121; // rdi
+  unsigned int v122; // esi
+  int v123; // eax
+  signed int v124; // ebx
+  hkLifoAllocator *v125; // rax
+  int v126; // r8d
+  int v127; // eax
+  char *v128; // rdi
+  signed int v129; // ebx
+  hkLifoAllocator *v130; // rax
+  int v131; // r8d
+  hkArray<hkpBroadPhaseHandlePair,hkContainerHeapAllocator> delPairs; // [rsp+30h] [rbp-D0h] BYREF
   void *p; // [rsp+40h] [rbp-C0h]
-  int v137; // [rsp+48h] [rbp-B8h]
-  hkArray<hkpBroadPhaseHandlePair,hkContainerHeapAllocator> newPairs; // [rsp+50h] [rbp-B0h]
-  void *v139; // [rsp+60h] [rbp-A0h]
-  int v140; // [rsp+68h] [rbp-98h]
-  __int64 v141; // [rsp+70h] [rbp-90h]
-  hkJobQueue::JobQueueEntry *job; // [rsp+78h] [rbp-88h]
-  char *v143; // [rsp+80h] [rbp-80h]
-  __int64 v144; // [rsp+88h] [rbp-78h]
-  __int64 v145; // [rsp+90h] [rbp-70h]
-  char v146; // [rsp+A0h] [rbp-60h]
-  hkpMtThreadStructure *v147; // [rsp+1F0h] [rbp+F0h]
-  hkJobQueue *v148; // [rsp+1F8h] [rbp+F8h]
-  hkJobQueue::JobQueueEntry *jobInOut; // [rsp+200h] [rbp+100h]
-  int v150; // [rsp+208h] [rbp+108h]
-  __int64 v151; // [rsp+208h] [rbp+108h]
+  int v135; // [rsp+48h] [rbp-B8h]
+  hkArray<hkpBroadPhaseHandlePair,hkContainerHeapAllocator> newPairs; // [rsp+50h] [rbp-B0h] BYREF
+  void *v137; // [rsp+60h] [rbp-A0h]
+  int v138; // [rsp+68h] [rbp-98h]
+  __int64 v139; // [rsp+70h] [rbp-90h]
+  hkJobQueue::JobQueueEntry *job[2]; // [rsp+78h] [rbp-88h] BYREF
+  __int64 v141[3]; // [rsp+88h] [rbp-78h]
+  char v142; // [rsp+A0h] [rbp-60h] BYREF
+  int v146; // [rsp+208h] [rbp+108h]
+  __int64 v147; // [rsp+208h] [rbp+108h]
 
-  jobInOut = nextJobOut;
-  v148 = jobQueue;
-  v147 = tl;
   v3 = *(_QWORD *)&nextJobOut->m_data[8];
-  v4 = tl;
-  v141 = *(_QWORD *)&nextJobOut->m_data[8];
+  v139 = v3;
   v5 = nextJobOut;
-  v6 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v7 = (_QWORD *)v6[1];
-  v8 = v6;
-  if ( (unsigned __int64)v7 < v6[3] )
+  Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v7 = (_QWORD *)Value[1];
+  v8 = Value;
+  if ( (unsigned __int64)v7 < Value[3] )
   {
     *v7 = "TtBroadphase";
     v9 = __rdtsc();
-    v10 = (signed __int64)(v7 + 2);
-    *(_DWORD *)(v10 - 8) = v9;
+    v10 = v7 + 2;
+    *((_DWORD *)v10 - 2) = v9;
     v8[1] = v10;
   }
   if ( *(_DWORD *)(*(_QWORD *)&v5->m_data[16] + 8i64)
-    && v4->m_world->m_wantDeactivation.m_bool
-    && *(_BYTE *)(v3 + 50) & 0xC
-    && !(*(_BYTE *)(v3 + 49) & 0xC) )
+    && tl->m_world->m_wantDeactivation.m_bool
+    && (*(_BYTE *)(v3 + 50) & 0xC) != 0
+    && (*(_BYTE *)(v3 + 49) & 0xC) == 0 )
   {
-    hkpWorldOperationUtil::markIslandInactiveMt(v4->m_world, (hkpSimulationIsland *)v3);
+    hkpWorldOperationUtil::markIslandInactiveMt(tl->m_world, (hkpSimulationIsland *)v3);
   }
   v11 = 0;
-  v12 = v4->m_world->m_broadPhaseUpdateSize;
+  m_broadPhaseUpdateSize = tl->m_world->m_broadPhaseUpdateSize;
   v13 = (_BYTE *)(*(_QWORD *)&v5->m_data[16] + 40i64);
   newPairs.m_data = 0i64;
   newPairs.m_size = 0;
-  newPairs.m_capacityAndFlags = 2147483648;
-  v140 = v12;
-  if ( v12 )
+  newPairs.m_capacityAndFlags = 0x80000000;
+  v138 = m_broadPhaseUpdateSize;
+  if ( m_broadPhaseUpdateSize )
   {
-    v14 = TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v15 = (hkLifoAllocator *)v14;
-    v16 = (hkpBroadPhaseHandlePair *)*((_QWORD *)v14 + 3);
-    v17 = (16 * v12 + 127) & 0xFFFFFF80;
-    v18 = (char *)v16 + v17;
-    if ( v17 > v15->m_slabSize || v18 > v15->m_end )
-      v16 = (hkpBroadPhaseHandlePair *)hkLifoAllocator::allocateFromNewSlab(v15, v17);
+    v14 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    m_cur = (hkpBroadPhaseHandlePair *)v14->m_cur;
+    v16 = (16 * m_broadPhaseUpdateSize + 127) & 0xFFFFFF80;
+    v17 = (char *)m_cur + v16;
+    if ( v16 > v14->m_slabSize || v17 > v14->m_end )
+      m_cur = (hkpBroadPhaseHandlePair *)hkLifoAllocator::allocateFromNewSlab(v14, v16);
     else
-      v15->m_cur = v18;
+      v14->m_cur = v17;
   }
   else
   {
-    v16 = 0i64;
+    m_cur = 0i64;
   }
-  newPairs.m_data = v16;
-  v139 = v16;
-  v19 = v4->m_world;
-  newPairs.m_capacityAndFlags = v12 | 0x80000000;
-  v20 = v19->m_broadPhaseUpdateSize;
+  newPairs.m_data = m_cur;
+  v137 = m_cur;
+  m_world = tl->m_world;
+  newPairs.m_capacityAndFlags = m_broadPhaseUpdateSize | 0x80000000;
+  v19 = m_world->m_broadPhaseUpdateSize;
   delPairs.m_data = 0i64;
   delPairs.m_size = 0;
-  delPairs.m_capacityAndFlags = 2147483648;
-  v137 = v20;
-  if ( v20 )
+  delPairs.m_capacityAndFlags = 0x80000000;
+  v135 = v19;
+  if ( v19 )
   {
-    v21 = TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v22 = (hkLifoAllocator *)v21;
-    v23 = (hkpBroadPhaseHandlePair *)*((_QWORD *)v21 + 3);
-    v24 = (16 * v20 + 127) & 0xFFFFFF80;
-    v25 = (char *)v23 + v24;
-    if ( v24 > v22->m_slabSize || v25 > v22->m_end )
-      v23 = (hkpBroadPhaseHandlePair *)hkLifoAllocator::allocateFromNewSlab(v22, v24);
+    v20 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    v21 = (hkpBroadPhaseHandlePair *)v20->m_cur;
+    v22 = (16 * v19 + 127) & 0xFFFFFF80;
+    v23 = (char *)v21 + v22;
+    if ( v22 > v20->m_slabSize || v23 > v20->m_end )
+      v21 = (hkpBroadPhaseHandlePair *)hkLifoAllocator::allocateFromNewSlab(v20, v22);
     else
-      v22->m_cur = v25;
+      v20->m_cur = v23;
   }
   else
   {
-    v23 = 0i64;
+    v21 = 0i64;
   }
-  v26 = v4->m_world;
-  v27 = (hkpContinuousSimulation *)&v4->m_simulation.m_storage->vfptr;
-  v28 = *(_QWORD *)&v5->m_data[16];
-  delPairs.m_data = v23;
-  p = v23;
-  delPairs.m_capacityAndFlags = v20 | 0x80000000;
+  v24 = tl->m_world;
+  m_storage = tl->m_simulation.m_storage;
+  v26 = *(_QWORD *)&v5->m_data[16];
+  delPairs.m_data = v21;
+  p = v21;
+  delPairs.m_capacityAndFlags = v19 | 0x80000000;
   hkpContinuousSimulation::collideEntitiesBroadPhaseContinuousFindPairs(
-    v27,
+    m_storage,
     *(hkpEntity ***)(v3 + 96),
     *(_DWORD *)(v3 + 104),
-    v26,
+    v24,
     &newPairs,
     &delPairs);
-  v150 = 1 - *(_DWORD *)(v28 + 16);
-  if ( *(_DWORD *)(v28 + 16) == 1 )
+  v146 = 1 - *(_DWORD *)(v26 + 16);
+  if ( *(_DWORD *)(v26 + 16) == 1 )
   {
-    v29 = *(_DWORD *)(v28 + 12);
-    *(_DWORD *)(v28 + 12) = v29 - 1;
+    v27 = *(_DWORD *)(v26 + 12);
+    *(_DWORD *)(v26 + 12) = v27 - 1;
   }
   else
   {
-    v29 = _InterlockedExchangeAdd((volatile signed __int32 *)(v28 + 12), 0xFFFFFFFF);
+    v27 = _InterlockedExchangeAdd((volatile signed __int32 *)(v26 + 12), 0xFFFFFFFF);
   }
-  if ( v29 == *(_DWORD *)(v28 + 16) )
+  if ( v27 == *(_DWORD *)(v26 + 16) )
   {
     if ( v13 )
     {
-      v30 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-      v31 = (_QWORD *)v30[1];
-      if ( (unsigned __int64)v31 < v30[3] )
+      v28 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+      v29 = (_QWORD *)v28[1];
+      if ( (unsigned __int64)v29 < v28[3] )
       {
-        *v31 = "TtWaitForExport";
-        v32 = __rdtsc();
-        v33 = (signed __int64)(v31 + 2);
-        *(_DWORD *)(v33 - 8) = v32;
-        v30[1] = v33;
+        *v29 = "TtWaitForExport";
+        v30 = __rdtsc();
+        v31 = v29 + 2;
+        *((_DWORD *)v31 - 2) = v30;
+        v28[1] = v31;
       }
       while ( *v13 != 1 && *v13 != 2 )
         ;
-      v34 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-      v35 = (_QWORD *)v34[1];
-      if ( (unsigned __int64)v35 < v34[3] )
+      v32 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+      v33 = (_QWORD *)v32[1];
+      if ( (unsigned __int64)v33 < v32[3] )
       {
-        *v35 = "Et";
-        v36 = __rdtsc();
-        v37 = (signed __int64)(v35 + 2);
-        *(_DWORD *)(v37 - 8) = v36;
-        v34[1] = v37;
+        *v33 = "Et";
+        v34 = __rdtsc();
+        v35 = v33 + 2;
+        *((_DWORD *)v35 - 2) = v34;
+        v32[1] = v35;
       }
     }
-    v38 = *(_QWORD *)(v28 + 48);
-    if ( v38 )
+    v36 = *(_QWORD *)(v26 + 48);
+    if ( v36 )
     {
-      v39 = 0;
+      v37 = 0;
       do
       {
-        v39 += *(_DWORD *)v38;
-        v38 = *(_QWORD *)(v38 + 8);
+        v37 += *(_DWORD *)v36;
+        v36 = *(_QWORD *)(v36 + 8);
       }
-      while ( v38 );
-      v40 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v41 = (hkpContactImpulseLimitBreachedListenerInfo *)v40->m_cur;
-      v42 = (32 * v39 + 127) & 0xFFFFFF80;
-      v43 = (char *)v41 + v42;
-      if ( v42 > v40->m_slabSize || v43 > v40->m_end )
-        v41 = (hkpContactImpulseLimitBreachedListenerInfo *)hkLifoAllocator::allocateFromNewSlab(v40, v42);
+      while ( v36 );
+      v38 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+      v39 = (hkpContactImpulseLimitBreachedListenerInfo *)v38->m_cur;
+      v40 = (32 * v37 + 127) & 0xFFFFFF80;
+      v41 = (char *)v39 + v40;
+      if ( v40 > v38->m_slabSize || v41 > v38->m_end )
+        v39 = (hkpContactImpulseLimitBreachedListenerInfo *)hkLifoAllocator::allocateFromNewSlab(v38, v40);
       else
-        v40->m_cur = v43;
-      v44 = *(_QWORD *)(v28 + 48);
-      for ( i = 0; v44; v44 = *(_QWORD *)(v44 + 8) )
+        v38->m_cur = v41;
+      v42 = *(_QWORD *)(v26 + 48);
+      for ( i = 0; v42; v42 = *(_QWORD *)(v42 + 8) )
       {
-        v46 = (int *)(v44 + 16);
-        v47 = (unsigned int)(8 * *(_DWORD *)v44);
-        if ( (signed int)v47 > 0 )
+        v44 = (int *)(v42 + 16);
+        v45 = (unsigned int)(8 * *(_DWORD *)v42);
+        if ( (int)v45 > 0 )
         {
-          v48 = (signed __int64)v41 + 32i64 * i - (_QWORD)v46;
+          v46 = (char *)v39 + 32i64 * i - (_QWORD)v44;
           do
           {
-            v49 = *v46;
-            ++v46;
-            *(int *)((char *)v46 + v48 - 4) = v49;
-            --v47;
+            v47 = *v44++;
+            *(int *)((char *)v44 + (_QWORD)v46 - 4) = v47;
+            --v45;
           }
-          while ( v47 );
+          while ( v45 );
         }
-        i += *(_DWORD *)v44;
+        i += *(_DWORD *)v42;
       }
-      hkpWorldCallbackUtil::fireContactImpulseLimitBreached(v4->m_world, v41, v39);
-      v50 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v51 = (v42 + 15) & 0xFFFFFFF0;
-      if ( v42 <= v50->m_slabSize && (char *)v41 + v51 == v50->m_cur && v50->m_firstNonLifoEnd != v41 )
+      hkpWorldCallbackUtil::fireContactImpulseLimitBreached(tl->m_world, v39, v37);
+      v48 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+      v49 = (v40 + 15) & 0xFFFFFFF0;
+      if ( v40 <= v48->m_slabSize && (char *)v39 + v49 == v48->m_cur && v48->m_firstNonLifoEnd != v39 )
       {
-        v5 = jobInOut;
-        v50->m_cur = v41;
-        v3 = v141;
+        v5 = nextJobOut;
+        v48->m_cur = v39;
+        v3 = v139;
         *v13 = 2;
         goto LABEL_57;
       }
-      hkLifoAllocator::slowBlockFree(v50, v41, v51);
-      v3 = v141;
-      v5 = jobInOut;
+      hkLifoAllocator::slowBlockFree(v48, (char *)v39, v49);
+      v3 = v139;
+      v5 = nextJobOut;
     }
     *v13 = 2;
   }
@@ -403,307 +392,301 @@ __int64 __fastcall hkpSingleThreadedJobsOnIsland::cpuBroadPhaseJob(hkpMtThreadSt
   {
     if ( *v13 != 2 )
     {
-      v52 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-      v53 = (_QWORD *)v52[1];
-      if ( (unsigned __int64)v53 < v52[3] )
+      v50 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+      v51 = (_QWORD *)v50[1];
+      if ( (unsigned __int64)v51 < v50[3] )
       {
-        *v53 = "TtWaitForSolverCallbacks";
-        v54 = __rdtsc();
-        v55 = (signed __int64)(v53 + 2);
-        *(_DWORD *)(v55 - 8) = v54;
-        v52[1] = v55;
+        *v51 = "TtWaitForSolverCallbacks";
+        v52 = __rdtsc();
+        v53 = v51 + 2;
+        *((_DWORD *)v53 - 2) = v52;
+        v50[1] = v53;
       }
       while ( *v13 != 2 )
         ;
-      v56 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-      v57 = (_QWORD *)v56[1];
-      if ( (unsigned __int64)v57 < v56[3] )
+      v54 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+      v55 = (_QWORD *)v54[1];
+      if ( (unsigned __int64)v55 < v54[3] )
       {
-        *v57 = "Et";
-        v58 = __rdtsc();
-        v59 = (signed __int64)(v57 + 2);
-        *(_DWORD *)(v59 - 8) = v58;
-        v56[1] = v59;
+        *v55 = "Et";
+        v56 = __rdtsc();
+        v57 = v55 + 2;
+        *((_DWORD *)v57 - 2) = v56;
+        v54[1] = v57;
       }
     }
     v11 = -1;
-    if ( *(_DWORD *)(v28 + 16) > 2 )
-      v11 = _InterlockedDecrement((volatile signed __int32 *)(v28 + 12));
+    if ( *(int *)(v26 + 16) > 2 )
+      v11 = _InterlockedDecrement((volatile signed __int32 *)(v26 + 12));
   }
 LABEL_57:
   if ( delPairs.m_size + newPairs.m_size > 0 )
   {
-    v60 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-    v61 = v60[1];
-    if ( v61 < v60[3] )
+    v58 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+    v59 = v58[1];
+    if ( v59 < v58[3] )
     {
-      *(_QWORD *)v61 = "LtAddRemoveAgnts";
-      *(_QWORD *)(v61 + 16) = "StInit";
-      v62 = __rdtsc();
-      *(_DWORD *)(v61 + 8) = v62;
-      v60[1] = v61 + 24;
+      *(_QWORD *)v59 = "LtAddRemoveAgnts";
+      *(_QWORD *)(v59 + 16) = "StInit";
+      v60 = __rdtsc();
+      *(_DWORD *)(v59 + 8) = v60;
+      v58[1] = v59 + 24;
     }
-    v63 = *(_QWORD *)(v3 + 96);
-    v64 = v4->m_world;
+    v61 = *(_QWORD *)(v3 + 96);
+    v62 = tl->m_world;
     if ( delPairs.m_size + newPairs.m_size > 0 )
     {
-      v65 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-      v66 = (_QWORD *)v65[1];
-      if ( (unsigned __int64)v66 < v65[3] )
+      v63 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+      v64 = (_QWORD *)v63[1];
+      if ( (unsigned __int64)v64 < v63[3] )
       {
-        *v66 = "StRemoveAgt";
-        v67 = __rdtsc();
-        v68 = (signed __int64)(v66 + 2);
-        *(_DWORD *)(v68 - 8) = v67;
-        v65[1] = v68;
+        *v64 = "StRemoveAgt";
+        v65 = __rdtsc();
+        v66 = v64 + 2;
+        *((_DWORD *)v66 - 2) = v65;
+        v63[1] = v66;
       }
-      hkpWorld::lockIslandForConstraintUpdate(v64, *(hkpSimulationIsland **)(*(_QWORD *)v63 + 296i64));
+      hkpWorld::lockIslandForConstraintUpdate(v62, *(hkpSimulationIsland **)(*(_QWORD *)v61 + 296i64));
       hkpTypedBroadPhaseDispatcher::removePairs(
-        v64->m_broadPhaseDispatcher,
+        v62->m_broadPhaseDispatcher,
         (hkpTypedBroadPhaseHandlePair *)delPairs.m_data,
         delPairs.m_size);
-      v69 = newPairs.m_size;
-      v70 = hkMemorySystem::getInstance();
-      if ( v70->vfptr->heapCanAllocTotal(v70, v69 << 10) )
+      m_size = newPairs.m_size;
+      Instance = hkMemorySystem::getInstance();
+      if ( Instance->vfptr->heapCanAllocTotal(Instance, m_size << 10) )
       {
-        v71 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-        v72 = (_QWORD *)v71[1];
-        if ( (unsigned __int64)v72 < v71[3] )
+        v69 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+        v70 = (_QWORD *)v69[1];
+        if ( (unsigned __int64)v70 < v69[3] )
         {
-          *v72 = "StAddAgt";
-          v73 = __rdtsc();
-          v74 = (signed __int64)(v72 + 2);
-          *(_DWORD *)(v74 - 8) = v73;
-          v71[1] = v74;
+          *v70 = "StAddAgt";
+          v71 = __rdtsc();
+          v72 = v70 + 2;
+          *((_DWORD *)v72 - 2) = v71;
+          v69[1] = v72;
         }
-        v75 = v64->m_collisionFilter;
-        if ( v75 )
-          v76 = (hkpCollidableCollidableFilter *)&v75->vfptr;
+        m_collisionFilter = v62->m_collisionFilter;
+        if ( m_collisionFilter )
+          v74 = &m_collisionFilter->hkpCollidableCollidableFilter;
         else
-          v76 = 0i64;
+          v74 = 0i64;
         hkpTypedBroadPhaseDispatcher::addPairs(
-          v64->m_broadPhaseDispatcher,
+          v62->m_broadPhaseDispatcher,
           (hkpTypedBroadPhaseHandlePair *)newPairs.m_data,
           newPairs.m_size,
-          v76);
+          v74);
       }
-      hkpWorld::unlockIslandForConstraintUpdate(v64, *(hkpSimulationIsland **)(*(_QWORD *)v63 + 296i64));
+      hkpWorld::unlockIslandForConstraintUpdate(v62, *(hkpSimulationIsland **)(*(_QWORD *)v61 + 296i64));
     }
-    v77 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-    v78 = (_QWORD *)v77[1];
-    if ( (unsigned __int64)v78 < v77[3] )
+    v75 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+    v76 = (_QWORD *)v75[1];
+    if ( (unsigned __int64)v76 < v75[3] )
     {
-      *v78 = "lt";
-      v79 = __rdtsc();
-      v80 = (signed __int64)(v78 + 2);
-      *(_DWORD *)(v80 - 8) = v79;
-      v77[1] = v80;
+      *v76 = "lt";
+      v77 = __rdtsc();
+      v78 = v76 + 2;
+      *((_DWORD *)v78 - 2) = v77;
+      v75[1] = v78;
     }
   }
-  if ( v11 == v150 )
+  if ( v11 == v146 )
   {
-    while ( *(_QWORD *)(v28 + 152) )
+    while ( *(_QWORD *)(v26 + 152) )
     {
-      v81 = *(_QWORD **)(v28 + 152);
-      *(_QWORD *)(v28 + 152) = *v81;
+      v79 = *(_QWORD **)(v26 + 152);
+      *(_QWORD *)(v26 + 152) = *v79;
+      v80 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+      (*(void (__fastcall **)(_QWORD *, _QWORD *, __int64))(*v80[11] + 16i64))(v80[11], v79, 3968i64);
+    }
+    while ( *(_QWORD *)(v26 + 184) )
+    {
+      v81 = *(_QWORD **)(v26 + 184);
+      *(_QWORD *)(v26 + 184) = *v81;
       v82 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      (*(void (__fastcall **)(_QWORD *, _QWORD *, signed __int64))(*v82[11] + 16i64))(v82[11], v81, 3968i64);
+      (*(void (__fastcall **)(_QWORD *, _QWORD *, __int64))(*v82[11] + 16i64))(v82[11], v81, 64i64);
     }
-    while ( *(_QWORD *)(v28 + 184) )
+    v83 = *(_QWORD *)(v26 + 24);
+    if ( v83 )
     {
-      v83 = *(_QWORD **)(v28 + 184);
-      *(_QWORD *)(v28 + 184) = *v83;
-      v84 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      (*(void (__fastcall **)(_QWORD *, _QWORD *, signed __int64))(*v84[11] + 16i64))(v84[11], v83, 64i64);
+      v84 = *(_DWORD *)(v26 + 36);
+      v85 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+      (*(void (__fastcall **)(_QWORD *, __int64, _QWORD))(*v85[13] + 32i64))(v85[13], v83, v84);
+      *(_QWORD *)(v26 + 24) = 0i64;
     }
-    v85 = *(_QWORD *)(v28 + 24);
-    if ( v85 )
+    if ( *(int *)(v26 + 16) > 1 )
     {
-      v86 = *(_DWORD *)(v28 + 36);
-      v87 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      (*(void (__fastcall **)(_QWORD *, __int64, _QWORD))(*v87[13] + 32i64))(v87[13], v85, v86);
-      *(_QWORD *)(v28 + 24) = 0i64;
+      v86 = *(unsigned __int16 *)(v26 + 130);
+      v87 = *(_QWORD *)(v26 + 120);
+      v88 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+      (*(void (__fastcall **)(_QWORD *, __int64, _QWORD))(*v88[11] + 32i64))(v88[11], v87, (unsigned int)(8 * v86));
+      *(_QWORD *)(v26 + 120) = 0i64;
     }
-    if ( *(_DWORD *)(v28 + 16) > 1 )
-    {
-      v88 = *(unsigned __int16 *)(v28 + 130);
-      v89 = *(_QWORD *)(v28 + 120);
-      v90 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      (*(void (__fastcall **)(_QWORD *, __int64, _QWORD))(*v90[11] + 32i64))(v90[11], v89, (unsigned int)(8 * v88));
-      *(_QWORD *)(v28 + 120) = 0i64;
-    }
-    v91 = *(_DWORD *)(v28 + 148);
-    *(_DWORD *)(v28 + 144) = 0;
-    if ( v91 >= 0 )
+    v89 = *(_DWORD *)(v26 + 148);
+    *(_DWORD *)(v26 + 144) = 0;
+    if ( v89 >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-        *(void **)(v28 + 136),
-        8 * v91);
-    *(_QWORD *)(v28 + 136) = 0i64;
-    *(_DWORD *)(v28 + 148) = 2147483648;
-    v92 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    (*(void (__fastcall **)(_QWORD *, __int64, signed __int64))(*v92[11] + 16i64))(v92[11], v28, 208i64);
+        &hkContainerHeapAllocator::s_alloc,
+        *(void **)(v26 + 136),
+        8 * v89);
+    *(_QWORD *)(v26 + 136) = 0i64;
+    *(_DWORD *)(v26 + 148) = 0x80000000;
+    v90 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    (*(void (__fastcall **)(_QWORD *, __int64, __int64))(*v90[11] + 16i64))(v90[11], v26, 208i64);
   }
-  job = v5;
-  v143 = &v146;
+  job[0] = v5;
+  job[1] = (hkJobQueue::JobQueueEntry *)&v142;
+  v91 = 0;
+  v141[0] = v139 + 152;
+  v92 = 0;
   v93 = 0;
-  v144 = v141 + 152;
-  v94 = 0;
-  v95 = 0;
-  v96 = 0i64;
-  v97 = &job;
-  v145 = v141 + 120;
+  v94 = 0i64;
+  v95 = job;
+  v141[1] = v139 + 120;
   do
   {
-    v98 = (__int16 *)*(&v144 + v96);
-    v99 = v147->m_world;
-    if ( v96 )
-      v100 = v99->m_maxSectorsPerMidphaseCollideTask;
+    v96 = v141[v94];
+    v97 = tl->m_world;
+    if ( v94 )
+      m_maxSectorsPerMidphaseCollideTask = v97->m_maxSectorsPerMidphaseCollideTask;
     else
-      v100 = v99->m_maxSectorsPerNarrowphaseCollideTask;
-    v101 = *((_DWORD *)v98 + 4);
-    v151 = *((_QWORD *)v98 + 1);
-    if ( v101 > 0 )
+      m_maxSectorsPerMidphaseCollideTask = v97->m_maxSectorsPerNarrowphaseCollideTask;
+    v99 = *(_DWORD *)(v96 + 16);
+    v147 = *(_QWORD *)(v96 + 8);
+    if ( v99 > 0 )
     {
-      v102 = *v97;
-      if ( *v97 )
+      v100 = *v95;
+      if ( *v95 )
       {
-        v103 = v99->m_useCompoundSpuElf.m_bool == 0;
-        v104 = *v98;
-        *(_WORD *)&v102->m_jobSubType = 13;
-        v102->m_jobSpuType.m_storage = 1;
-        v102->m_size = 112;
-        v102->m_threadAffinity = -1;
-        *(_WORD *)v102->m_data = *(_WORD *)jobInOut->m_data;
-        *(_QWORD *)&v102->m_data[8] = *(_QWORD *)&jobInOut->m_data[8];
-        *(_QWORD *)&v102->m_data[16] = *(_QWORD *)&jobInOut->m_data[16];
-        *(_QWORD *)&v102->m_data[24] = *(_QWORD *)&jobInOut->m_data[24];
-        *(hkStepInfo *)&v102->m_data[64] = v99->m_dynamicsStepInfo.m_stepInfo;
-        v105 = *(_WORD *)jobInOut->m_data;
-        *(_WORD *)&v102->m_data[40] = 0;
-        *(_WORD *)v102->m_data = v105;
-        *(_WORD *)&v102->m_data[42] = v101;
-        *(_QWORD *)&v102->m_data[48] = v151;
-        *(_WORD *)&v102->m_data[44] = v100;
-        v102->m_data[46] = (v95 == 0) + 1;
-        v106 = 1;
-        *(_QWORD *)&v102->m_data[32] = 0i64;
-        if ( !v103 )
-          v106 = 18;
-        *(_QWORD *)&v102->m_data[80] = 0i64;
-        *(_WORD *)&v102->m_data[88] = v104;
-        v102->m_jobType.m_storage = v106;
+        v101 = v97->m_useCompoundSpuElf.m_bool == 0;
+        v102 = *(_WORD *)v96;
+        *(_WORD *)&v100->m_jobSubType = 13;
+        v100->m_jobSpuType.m_storage = 1;
+        v100->m_size = 112;
+        v100->m_threadAffinity = -1;
+        *(_WORD *)v100->m_data = *(_WORD *)nextJobOut->m_data;
+        *(_QWORD *)&v100->m_data[8] = *(_QWORD *)&nextJobOut->m_data[8];
+        *(_QWORD *)&v100->m_data[16] = *(_QWORD *)&nextJobOut->m_data[16];
+        *(_QWORD *)&v100->m_data[24] = *(_QWORD *)&nextJobOut->m_data[24];
+        *(hkStepInfo *)&v100->m_data[64] = v97->m_dynamicsStepInfo.m_stepInfo;
+        v103 = *(_WORD *)nextJobOut->m_data;
+        *(_WORD *)&v100->m_data[40] = 0;
+        *(_WORD *)v100->m_data = v103;
+        *(_WORD *)&v100->m_data[42] = v99;
+        *(_QWORD *)&v100->m_data[48] = v147;
+        *(_WORD *)&v100->m_data[44] = m_maxSectorsPerMidphaseCollideTask;
+        v100->m_data[46] = (v93 == 0) + 1;
+        v104 = 1;
+        *(_QWORD *)&v100->m_data[32] = 0i64;
+        if ( !v101 )
+          v104 = 18;
+        *(_QWORD *)&v100->m_data[80] = 0i64;
+        *(_WORD *)&v100->m_data[88] = v102;
+        v100->m_jobType.m_storage = v104;
       }
       else
       {
-        v102 = 0i64;
+        v100 = 0i64;
       }
-      *(_WORD *)&v102->m_data[40] = v94;
-      ++v93;
-      ++v97;
-      v94 += (v101 - 1) / v100 + 1;
+      *(_WORD *)&v100->m_data[40] = v92;
+      ++v91;
+      ++v95;
+      v92 += (v99 - 1) / m_maxSectorsPerMidphaseCollideTask + 1;
     }
-    ++v96;
-    ++v95;
+    ++v94;
+    ++v93;
   }
-  while ( v96 < 2 );
-  if ( v93 )
+  while ( v94 < 2 );
+  if ( v91 )
   {
-    if ( v94 <= 1 )
+    if ( v92 <= 1 )
     {
-      v113 = jobInOut;
-      v108 = v148;
-      *(_QWORD *)&jobInOut->m_data[80] = 0i64;
+      v111 = nextJobOut;
+      v106 = jobQueue;
+      *(_QWORD *)&nextJobOut->m_data[80] = 0i64;
     }
     else
     {
-      v107 = hkpAgentSectorHeader::allocate(v94, 48);
-      v108 = v148;
-      v109 = 0;
-      v110 = 0i64;
-      v107->m_shapeKeyTracks = 0i64;
-      v107->m_numShapeKeyTracks = 0;
-      v111 = v107;
-      if ( v93 > 0 )
+      v105 = hkpAgentSectorHeader::allocate(v92, 48);
+      v106 = jobQueue;
+      v107 = 0;
+      v108 = 0i64;
+      v105->m_shapeKeyTracks = 0i64;
+      v105->m_numShapeKeyTracks = 0;
+      for ( j = v105; v108 < v91; ++v107 )
       {
-        do
-        {
-          v112 = (__int64)*(&job + v110);
-          *(_QWORD *)(v112 + 48) = v111;
-          if ( v109 )
-            hkJobQueue::addJob(v148, (hkJobQueue::JobQueueEntry *)v112, JOB_LOW_PRIORITY);
-          ++v110;
-          ++v109;
-        }
-        while ( v110 < v93 );
+        v110 = job[v108];
+        *(_QWORD *)&v110->m_data[32] = j;
+        if ( v107 )
+          hkJobQueue::addJob(jobQueue, v110, JOB_LOW_PRIORITY);
+        ++v108;
       }
-      v113 = jobInOut;
+      v111 = nextJobOut;
     }
-    v114 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-    v115 = (_QWORD *)v114[1];
-    if ( (unsigned __int64)v115 < v114[3] )
+    v112 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+    v113 = (_QWORD *)v112[1];
+    if ( (unsigned __int64)v113 < v112[3] )
     {
-      *v115 = "Et";
-      v116 = __rdtsc();
-      v117 = (signed __int64)(v115 + 2);
-      *(_DWORD *)(v117 - 8) = v116;
-      v114[1] = v117;
+      *v113 = "Et";
+      v114 = __rdtsc();
+      v115 = v113 + 2;
+      *((_DWORD *)v115 - 2) = v114;
+      v112[1] = v115;
     }
-    v118 = hkJobQueue::finishAddAndGetNextJob(v108, 0, JOB_LOW_PRIORITY, v113, 0);
+    NextJob = hkJobQueue::finishAddAndGetNextJob(v106, HK_JOB_TYPE_DYNAMICS, JOB_LOW_PRIORITY, v111, WAIT_FOR_NEXT_JOB);
   }
   else
   {
-    v119 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-    v120 = (_QWORD *)v119[1];
-    if ( (unsigned __int64)v120 < v119[3] )
+    v117 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+    v118 = (_QWORD *)v117[1];
+    if ( (unsigned __int64)v118 < v117[3] )
     {
-      *v120 = "Et";
-      v121 = __rdtsc();
-      v122 = (signed __int64)(v120 + 2);
-      *(_DWORD *)(v122 - 8) = v121;
-      v119[1] = v122;
+      *v118 = "Et";
+      v119 = __rdtsc();
+      v120 = v118 + 2;
+      *((_DWORD *)v120 - 2) = v119;
+      v117[1] = v120;
     }
-    v118 = hkJobQueue::finishJobAndGetNextJob(v148, jobInOut, jobInOut, 0);
+    NextJob = hkJobQueue::finishJobAndGetNextJob(jobQueue, nextJobOut, nextJobOut, WAIT_FOR_NEXT_JOB);
   }
-  v123 = (char *)p;
-  v124 = v118;
-  v125 = delPairs.m_size;
+  v121 = (char *)p;
+  v122 = NextJob;
+  v123 = delPairs.m_size;
   if ( p == delPairs.m_data )
-    v125 = 0;
-  delPairs.m_size = v125;
-  v126 = (16 * v137 + 127) & 0xFFFFFF80;
-  v127 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v128 = (v126 + 15) & 0xFFFFFFF0;
-  if ( v126 > v127->m_slabSize || &v123[v128] != v127->m_cur || v127->m_firstNonLifoEnd == v123 )
-    hkLifoAllocator::slowBlockFree(v127, v123, v128);
+    v123 = 0;
+  delPairs.m_size = v123;
+  v124 = (16 * v135 + 127) & 0xFFFFFF80;
+  v125 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v126 = (v124 + 15) & 0xFFFFFFF0;
+  if ( v124 > v125->m_slabSize || &v121[v126] != v125->m_cur || v125->m_firstNonLifoEnd == v121 )
+    hkLifoAllocator::slowBlockFree(v125, v121, v126);
   else
-    v127->m_cur = v123;
+    v125->m_cur = v121;
   delPairs.m_size = 0;
   if ( delPairs.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       delPairs.m_data,
       16 * delPairs.m_capacityAndFlags);
-  v129 = newPairs.m_size;
-  v130 = (char *)v139;
+  v127 = newPairs.m_size;
+  v128 = (char *)v137;
   delPairs.m_data = 0i64;
-  if ( v139 == newPairs.m_data )
-    v129 = 0;
-  delPairs.m_capacityAndFlags = 2147483648;
-  newPairs.m_size = v129;
-  v131 = (16 * v140 + 127) & 0xFFFFFF80;
-  v132 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v133 = (v131 + 15) & 0xFFFFFFF0;
-  if ( v131 > v132->m_slabSize || &v130[v133] != v132->m_cur || v132->m_firstNonLifoEnd == v130 )
-    hkLifoAllocator::slowBlockFree(v132, v130, v133);
+  if ( v137 == newPairs.m_data )
+    v127 = 0;
+  delPairs.m_capacityAndFlags = 0x80000000;
+  newPairs.m_size = v127;
+  v129 = (16 * v138 + 127) & 0xFFFFFF80;
+  v130 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v131 = (v129 + 15) & 0xFFFFFFF0;
+  if ( v129 > v130->m_slabSize || &v128[v131] != v130->m_cur || v130->m_firstNonLifoEnd == v128 )
+    hkLifoAllocator::slowBlockFree(v130, v128, v131);
   else
-    v132->m_cur = v130;
+    v130->m_cur = v128;
   newPairs.m_size = 0;
   if ( newPairs.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       newPairs.m_data,
       16 * newPairs.m_capacityAndFlags);
-  return v124;
+  return v122;
 }
 

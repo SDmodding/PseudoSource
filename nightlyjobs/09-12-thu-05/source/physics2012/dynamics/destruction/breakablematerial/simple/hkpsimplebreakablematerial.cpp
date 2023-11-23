@@ -1,6 +1,8 @@
 // File Line: 17
 // RVA: 0xD7A360
-void __fastcall hkpSimpleBreakableMaterial::hkpSimpleBreakableMaterial(hkpSimpleBreakableMaterial *this, float strength)
+void __fastcall hkpSimpleBreakableMaterial::hkpSimpleBreakableMaterial(
+        hkpSimpleBreakableMaterial *this,
+        float strength)
 {
   this->m_strength = strength;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
@@ -18,7 +20,9 @@ hkClass *__fastcall hkpSimpleBreakableMaterial::getClassType(hkpSimpleBreakableM
 
 // File Line: 32
 // RVA: 0xD7A390
-void __fastcall hkpSimpleBreakableMaterial::hkpSimpleBreakableMaterial(hkpSimpleBreakableMaterial *this, hkFinishLoadedObjectFlag flag)
+void __fastcall hkpSimpleBreakableMaterial::hkpSimpleBreakableMaterial(
+        hkpSimpleBreakableMaterial *this,
+        hkFinishLoadedObjectFlag flag)
 {
   this->vfptr = (hkBaseObjectVtbl *)&hkpSimpleBreakableMaterial::`vftable;
   if ( flag.m_finishing )
@@ -27,7 +31,9 @@ void __fastcall hkpSimpleBreakableMaterial::hkpSimpleBreakableMaterial(hkpSimple
 
 // File Line: 44
 // RVA: 0xD7A3B0
-void __fastcall hkpSimpleBreakableMaterial::hkpSimpleBreakableMaterial(hkpSimpleBreakableMaterial *this, hkpSimpleBreakableMaterial *other)
+void __fastcall hkpSimpleBreakableMaterial::hkpSimpleBreakableMaterial(
+        hkpSimpleBreakableMaterial *this,
+        hkpSimpleBreakableMaterial *other)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->vfptr = (hkBaseObjectVtbl *)&hkpBreakableMaterial::`vftable;
@@ -41,17 +47,15 @@ void __fastcall hkpSimpleBreakableMaterial::hkpSimpleBreakableMaterial(hkpSimple
 // RVA: 0xD7A400
 void __fastcall hkpSimpleBreakableMaterial::duplicate(hkpSimpleBreakableMaterial *this)
 {
-  hkpSimpleBreakableMaterial *v1; // rbx
-  _QWORD **v2; // rax
+  _QWORD **Value; // rax
   hkpSimpleBreakableMaterial *v3; // rax
 
-  v1 = this;
-  v2 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v3 = (hkpSimpleBreakableMaterial *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v2[11] + 8i64))(
-                                       v2[11],
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v3 = (hkpSimpleBreakableMaterial *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(
+                                       Value[11],
                                        32i64);
   if ( v3 )
-    hkpSimpleBreakableMaterial::hkpSimpleBreakableMaterial(v3, v1);
+    hkpSimpleBreakableMaterial::hkpSimpleBreakableMaterial(v3, this);
 }
 
 // File Line: 58
@@ -64,7 +68,10 @@ void __fastcall hkpSimpleBreakableMaterial::setDefaultMapping(hkpSimpleBreakable
 
 // File Line: 66
 // RVA: 0xD7A470
-hkpSimpleBreakableMaterial *__fastcall hkpSimpleBreakableMaterial::getShapeKeyMaterial(hkpSimpleBreakableMaterial *this, hkcdShape *shapePpu, unsigned int shapeKey)
+hkpSimpleBreakableMaterial *__fastcall hkpSimpleBreakableMaterial::getShapeKeyMaterial(
+        hkpSimpleBreakableMaterial *this,
+        hkcdShape *shapePpu,
+        unsigned int shapeKey)
 {
   return this;
 }

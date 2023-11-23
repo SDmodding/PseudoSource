@@ -26,7 +26,7 @@ void __fastcall hkMemoryExceptionTestingUtil::~hkMemoryExceptionTestingUtil(hkMe
 void hkMemoryExceptionTestingUtil::create(void)
 {
   hkMemoryExceptionTestingUtil *v0; // rbx
-  _QWORD **v1; // rax
+  _QWORD **Value; // rax
   _QWORD **v2; // rax
   hkMemoryExceptionTestingUtil *v3; // rax
   hkMemoryExceptionTestingUtil *v4; // rax
@@ -34,16 +34,14 @@ void hkMemoryExceptionTestingUtil::create(void)
   v0 = hkMemoryExceptionTestingUtil::s_instance;
   if ( hkMemoryExceptionTestingUtil::s_instance )
   {
-    v1 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    (*(void (__fastcall **)(_QWORD *, hkMemoryExceptionTestingUtil *, signed __int64))(*v1[11] + 16i64))(
-      v1[11],
+    Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    (*(void (__fastcall **)(_QWORD *, hkMemoryExceptionTestingUtil *, __int64))(*Value[11] + 16i64))(
+      Value[11],
       v0,
       60i64);
   }
   v2 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v3 = (hkMemoryExceptionTestingUtil *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v2[11] + 8i64))(
-                                         v2[11],
-                                         60i64);
+  v3 = (hkMemoryExceptionTestingUtil *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v2[11] + 8i64))(v2[11], 60i64);
   if ( v3 )
   {
     hkMemoryExceptionTestingUtil::hkMemoryExceptionTestingUtil(v3);
@@ -60,14 +58,14 @@ void hkMemoryExceptionTestingUtil::create(void)
 void hkMemoryExceptionTestingUtil::destroy(void)
 {
   hkMemoryExceptionTestingUtil *v0; // rbx
-  _QWORD **v1; // rax
+  _QWORD **Value; // rax
 
   v0 = hkMemoryExceptionTestingUtil::s_instance;
   if ( hkMemoryExceptionTestingUtil::s_instance )
   {
-    v1 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    (*(void (__fastcall **)(_QWORD *, hkMemoryExceptionTestingUtil *, signed __int64))(*v1[11] + 16i64))(
-      v1[11],
+    Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    (*(void (__fastcall **)(_QWORD *, hkMemoryExceptionTestingUtil *, __int64))(*Value[11] + 16i64))(
+      Value[11],
       v0,
       60i64);
   }
@@ -112,7 +110,9 @@ void __fastcall hkMemoryExceptionTestingUtil::endFrameImpl(hkMemoryExceptionTest
 
 // File Line: 97
 // RVA: 0x12FE500
-void __fastcall hkMemoryExceptionTestingUtil::allowMemoryExceptionsImpl(hkMemoryExceptionTestingUtil *this, bool allowMemExceptions)
+void __fastcall hkMemoryExceptionTestingUtil::allowMemoryExceptionsImpl(
+        hkMemoryExceptionTestingUtil *this,
+        bool allowMemExceptions)
 {
   this->m_allowMemoryExceptions = allowMemExceptions;
 }
@@ -121,12 +121,15 @@ void __fastcall hkMemoryExceptionTestingUtil::allowMemoryExceptionsImpl(hkMemory
 // RVA: 0x12FE510
 char __fastcall hkMemoryExceptionTestingUtil::isMemoryAvailableImpl(hkMemoryExceptionTestingUtil *this, int id)
 {
-  int v2; // er8
+  int m_frameCounter; // r8d
 
   if ( this->m_outOfMemory && this->m_allowMemoryExceptions )
     return 0;
-  v2 = this->m_frameCounter;
-  if ( v2 > 50 && v2 == 3 * (v2 / 3) && this->m_allowMemoryExceptions && !this->m_wasCheckIdThrown[id] )
+  m_frameCounter = this->m_frameCounter;
+  if ( m_frameCounter > 50
+    && m_frameCounter == 3 * (m_frameCounter / 3)
+    && this->m_allowMemoryExceptions
+    && !this->m_wasCheckIdThrown[id] )
   {
     this->m_wasCheckIdThrown[id] = 1;
     this->m_outOfMemory = 1;

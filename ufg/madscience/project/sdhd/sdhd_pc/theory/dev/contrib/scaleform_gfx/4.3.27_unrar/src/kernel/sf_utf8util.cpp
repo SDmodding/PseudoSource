@@ -1,21 +1,19 @@
 // File Line: 27
 // RVA: 0x9884A0
-__int64 __fastcall Scaleform::UTF8Util::GetLength(const char *buf, __int64 buflen)
+__int64 __fastcall Scaleform::UTF8Util::GetLength(char *buf, __int64 buflen)
 {
   __int64 v2; // rbx
-  __int64 v3; // r10
-  const char *v4; // r8
+  char *v4; // r8
   __int64 result; // rax
   char v6; // dl
   char v7; // cl
   char v8; // cl
   char v9; // cl
-  char *putf8Buffer; // [rsp+30h] [rbp+8h]
+  char *putf8Buffer; // [rsp+30h] [rbp+8h] BYREF
 
   v2 = 0i64;
-  v3 = buflen;
   v4 = buf;
-  putf8Buffer = (char *)buf;
+  putf8Buffer = buf;
   if ( buflen != -1 )
   {
     result = 0i64;
@@ -25,53 +23,52 @@ __int64 __fastcall Scaleform::UTF8Util::GetLength(const char *buf, __int64 bufle
     {
       v6 = *v4++;
       ++result;
-      if ( !v6 || v6 >= 0 )
-        goto LABEL_31;
-      if ( (v6 & 0xE0) == -64 )
-        goto LABEL_28;
-      if ( (v6 & 0xF0) == -32 )
-        goto LABEL_7;
-      if ( (v6 & 0xF8) == -16 )
-        goto LABEL_11;
-      if ( (v6 & 0xFC) == -8 )
+      if ( v6 >= 0 )
+        goto LABEL_30;
+      if ( (v6 & 0xE0) == 0xC0 )
+        goto LABEL_27;
+      if ( (v6 & 0xF0) == 0xE0 )
+        goto LABEL_6;
+      if ( (v6 & 0xF8) == 0xF0 )
+        goto LABEL_10;
+      if ( (v6 & 0xFC) == 0xF8 )
         break;
-      if ( (v6 & 0xFE) == -4 )
+      if ( (v6 & 0xFE) == 0xFC )
       {
         if ( *v4 )
         {
-          if ( (*v4 & 0xC0) == -128 )
+          if ( (*v4 & 0xC0) == 0x80 )
           {
-            v7 = (v4++)[1];
+            v7 = *++v4;
             ++result;
             if ( v7 )
             {
-              if ( (v7 & 0xC0) == -128 )
+              if ( (v7 & 0xC0) == 0x80 )
               {
-                v8 = (v4++)[1];
+                v8 = *++v4;
                 ++result;
                 if ( v8 )
                 {
-                  if ( (v8 & 0xC0) == -128 )
+                  if ( (v8 & 0xC0) == 0x80 )
                   {
-                    v9 = (v4++)[1];
+                    v9 = *++v4;
                     ++result;
                     if ( v9 )
                     {
-                      if ( (v9 & 0xC0) == -128 )
+                      if ( (v9 & 0xC0) == 0x80 )
                       {
-LABEL_27:
+LABEL_26:
                         ++v4;
                         ++result;
-LABEL_28:
+LABEL_27:
                         if ( *v4 )
                         {
-                          if ( (*v4 & 0xC0) == -128 )
+                          if ( (*v4 & 0xC0) == 0x80 )
                           {
                             ++v4;
                             ++result;
                           }
                         }
-                        goto LABEL_31;
                       }
                     }
                   }
@@ -81,37 +78,35 @@ LABEL_28:
           }
         }
       }
-LABEL_31:
+LABEL_30:
       ++v2;
-      if ( result >= v3 )
+      if ( result >= buflen )
         return v2;
     }
-    if ( !*v4 || (*v4 & 0xC0) != -128 )
-      goto LABEL_31;
+    if ( !*v4 || (*v4 & 0xC0) != 0x80 )
+      goto LABEL_30;
     ++v4;
     ++result;
-LABEL_11:
-    if ( !*v4 || (*v4 & 0xC0) != -128 )
-      goto LABEL_31;
+LABEL_10:
+    if ( !*v4 || (*v4 & 0xC0) != 0x80 )
+      goto LABEL_30;
     ++v4;
     ++result;
-LABEL_7:
-    if ( *v4 && (*v4 & 0xC0) == -128 )
-      goto LABEL_27;
-    goto LABEL_31;
+LABEL_6:
+    if ( *v4 && (*v4 & 0xC0) == 0x80 )
+      goto LABEL_26;
+    goto LABEL_30;
   }
-  for ( ; (unsigned int)Scaleform::UTF8Util::DecodeNextChar_Advance0((const char **)&putf8Buffer); ++v2 )
+  for ( ; (unsigned int)Scaleform::UTF8Util::DecodeNextChar_Advance0(&putf8Buffer); ++v2 )
     ;
   return v2;
 }
 
 // File Line: 50
 // RVA: 0x980C70
-signed __int64 __fastcall Scaleform::UTF8Util::GetCharAt(__int64 index, const char *putf8str, __int64 length)
+__int64 __fastcall Scaleform::UTF8Util::GetCharAt(__int64 index, char *putf8str, __int64 length)
 {
-  signed __int64 result; // rax
-  __int64 v4; // r10
-  __int64 v5; // rbx
+  __int64 result; // rax
   __int64 v6; // r9
   char v7; // cl
   char v8; // r8
@@ -153,24 +148,22 @@ signed __int64 __fastcall Scaleform::UTF8Util::GetCharAt(__int64 index, const ch
   char v44; // cl
   char v45; // r8
   int v46; // eax
-  char *putf8Buffer; // [rsp+38h] [rbp+10h]
+  char *putf8Buffer; // [rsp+38h] [rbp+10h] BYREF
 
   result = 0i64;
-  v4 = length;
-  v5 = index;
-  putf8Buffer = (char *)putf8str;
+  putf8Buffer = putf8str;
   if ( length == -1 )
   {
     while ( 1 )
     {
-      result = Scaleform::UTF8Util::DecodeNextChar_Advance0((const char **)&putf8Buffer);
-      --v5;
+      result = Scaleform::UTF8Util::DecodeNextChar_Advance0(&putf8Buffer);
+      --index;
       if ( !(_DWORD)result )
         break;
-      if ( v5 < 0 )
+      if ( index < 0 )
         return result;
     }
-    result = 0i64;
+    return 0i64;
   }
   else if ( length > 0 )
   {
@@ -189,7 +182,7 @@ signed __int64 __fastcall Scaleform::UTF8Util::GetCharAt(__int64 index, const ch
         result = (unsigned int)v7;
         goto LABEL_74;
       }
-      if ( (v7 & 0xE0) == -64 )
+      if ( (v7 & 0xE0) == 0xC0 )
       {
         v8 = *putf8str;
         if ( !*putf8str )
@@ -197,17 +190,17 @@ signed __int64 __fastcall Scaleform::UTF8Util::GetCharAt(__int64 index, const ch
           result = 0i64;
           goto LABEL_74;
         }
-        if ( (v8 & 0xC0) == -128 )
+        if ( (v8 & 0xC0) == 0x80 )
         {
           ++putf8str;
           ++v6;
-          result = v8 & 0x3F | ((v7 & 0x1Fu) << 6);
+          result = v8 & 0x3F | ((unsigned __int8)(v7 & 0x1F) << 6);
           if ( (unsigned int)result < 0x80 )
             result = 65533i64;
           goto LABEL_74;
         }
       }
-      else if ( (v7 & 0xF0) == -32 )
+      else if ( (v7 & 0xF0) == 0xE0 )
       {
         v9 = *putf8str;
         v10 = (v7 & 0xF) << 12;
@@ -216,7 +209,7 @@ signed __int64 __fastcall Scaleform::UTF8Util::GetCharAt(__int64 index, const ch
           result = 0i64;
           goto LABEL_74;
         }
-        if ( (v9 & 0xC0) == -128 )
+        if ( (v9 & 0xC0) == 0x80 )
         {
           ++putf8str;
           v11 = v9;
@@ -228,7 +221,7 @@ signed __int64 __fastcall Scaleform::UTF8Util::GetCharAt(__int64 index, const ch
             result = 0i64;
             goto LABEL_74;
           }
-          if ( (v12 & 0xC0) == -128 )
+          if ( (v12 & 0xC0) == 0x80 )
           {
             ++putf8str;
             ++v6;
@@ -239,7 +232,7 @@ signed __int64 __fastcall Scaleform::UTF8Util::GetCharAt(__int64 index, const ch
           }
         }
       }
-      else if ( (v7 & 0xF8) == -16 )
+      else if ( (v7 & 0xF8) == 0xF0 )
       {
         v14 = *putf8str;
         v15 = (v7 & 7) << 18;
@@ -248,7 +241,7 @@ signed __int64 __fastcall Scaleform::UTF8Util::GetCharAt(__int64 index, const ch
           result = 0i64;
           goto LABEL_74;
         }
-        if ( (v14 & 0xC0) == -128 )
+        if ( (v14 & 0xC0) == 0x80 )
         {
           ++putf8str;
           v16 = v14;
@@ -260,7 +253,7 @@ signed __int64 __fastcall Scaleform::UTF8Util::GetCharAt(__int64 index, const ch
             result = 0i64;
             goto LABEL_74;
           }
-          if ( (v17 & 0xC0) == -128 )
+          if ( (v17 & 0xC0) == 0x80 )
           {
             ++putf8str;
             v19 = v17;
@@ -272,7 +265,7 @@ signed __int64 __fastcall Scaleform::UTF8Util::GetCharAt(__int64 index, const ch
               result = 0i64;
               goto LABEL_74;
             }
-            if ( (v20 & 0xC0) == -128 )
+            if ( (v20 & 0xC0) == 0x80 )
             {
               ++putf8str;
               ++v6;
@@ -284,7 +277,7 @@ signed __int64 __fastcall Scaleform::UTF8Util::GetCharAt(__int64 index, const ch
           }
         }
       }
-      else if ( (v7 & 0xFC) == -8 )
+      else if ( (v7 & 0xFC) == 0xF8 )
       {
         v22 = *putf8str;
         v23 = (v7 & 3) << 24;
@@ -293,7 +286,7 @@ signed __int64 __fastcall Scaleform::UTF8Util::GetCharAt(__int64 index, const ch
           result = 0i64;
           goto LABEL_74;
         }
-        if ( (v22 & 0xC0) == -128 )
+        if ( (v22 & 0xC0) == 0x80 )
         {
           ++putf8str;
           v24 = v22;
@@ -305,7 +298,7 @@ signed __int64 __fastcall Scaleform::UTF8Util::GetCharAt(__int64 index, const ch
             result = 0i64;
             goto LABEL_74;
           }
-          if ( (v25 & 0xC0) == -128 )
+          if ( (v25 & 0xC0) == 0x80 )
           {
             ++putf8str;
             v27 = v25;
@@ -317,7 +310,7 @@ signed __int64 __fastcall Scaleform::UTF8Util::GetCharAt(__int64 index, const ch
               result = 0i64;
               goto LABEL_74;
             }
-            if ( (v28 & 0xC0) == -128 )
+            if ( (v28 & 0xC0) == 0x80 )
             {
               ++putf8str;
               v30 = v28;
@@ -329,7 +322,7 @@ signed __int64 __fastcall Scaleform::UTF8Util::GetCharAt(__int64 index, const ch
                 result = 0i64;
                 goto LABEL_74;
               }
-              if ( (v31 & 0xC0) == -128 )
+              if ( (v31 & 0xC0) == 0x80 )
               {
                 ++putf8str;
                 ++v6;
@@ -342,7 +335,7 @@ signed __int64 __fastcall Scaleform::UTF8Util::GetCharAt(__int64 index, const ch
           }
         }
       }
-      else if ( (v7 & 0xFE) == -4 )
+      else if ( (v7 & 0xFE) == 0xFC )
       {
         v33 = *putf8str;
         v34 = (v7 & 1) << 30;
@@ -351,7 +344,7 @@ signed __int64 __fastcall Scaleform::UTF8Util::GetCharAt(__int64 index, const ch
           result = 0i64;
           goto LABEL_74;
         }
-        if ( (v33 & 0xC0) == -128 )
+        if ( (v33 & 0xC0) == 0x80 )
         {
           ++putf8str;
           v35 = v33;
@@ -363,7 +356,7 @@ signed __int64 __fastcall Scaleform::UTF8Util::GetCharAt(__int64 index, const ch
             result = 0i64;
             goto LABEL_74;
           }
-          if ( (v36 & 0xC0) == -128 )
+          if ( (v36 & 0xC0) == 0x80 )
           {
             ++putf8str;
             v38 = v36;
@@ -375,7 +368,7 @@ signed __int64 __fastcall Scaleform::UTF8Util::GetCharAt(__int64 index, const ch
               result = 0i64;
               goto LABEL_74;
             }
-            if ( (v39 & 0xC0) == -128 )
+            if ( (v39 & 0xC0) == 0x80 )
             {
               ++putf8str;
               v41 = v39;
@@ -387,7 +380,7 @@ signed __int64 __fastcall Scaleform::UTF8Util::GetCharAt(__int64 index, const ch
                 result = 0i64;
                 goto LABEL_74;
               }
-              if ( (v42 & 0xC0) == -128 )
+              if ( (v42 & 0xC0) == 0x80 )
               {
                 ++putf8str;
                 v44 = v42;
@@ -399,7 +392,7 @@ signed __int64 __fastcall Scaleform::UTF8Util::GetCharAt(__int64 index, const ch
                   result = 0i64;
                   goto LABEL_74;
                 }
-                if ( (v45 & 0xC0) == -128 )
+                if ( (v45 & 0xC0) == 0x80 )
                 {
                   ++putf8str;
                   ++v6;
@@ -415,10 +408,10 @@ signed __int64 __fastcall Scaleform::UTF8Util::GetCharAt(__int64 index, const ch
       }
       result = 65533i64;
 LABEL_74:
-      if ( v5 )
+      if ( index )
       {
-        --v5;
-        if ( v6 < v4 )
+        --index;
+        if ( v6 < length )
           continue;
       }
       return result;
@@ -429,22 +422,20 @@ LABEL_74:
 
 // File Line: 84
 // RVA: 0x980790
-char *__fastcall Scaleform::UTF8Util::GetByteIndex(__int64 index, const char *putf8str, __int64 length)
+__int64 __fastcall Scaleform::UTF8Util::GetByteIndex(__int64 index, char *putf8str, __int64 length)
 {
-  const char *v3; // rdi
   __int64 v4; // rbx
-  const char *v5; // r9
+  char *v5; // r9
   __int64 v6; // rax
   char v7; // dl
   char v8; // cl
   char v9; // cl
   char v10; // cl
-  char *putf8Buffer; // [rsp+38h] [rbp+10h]
+  char *putf8Buffer; // [rsp+38h] [rbp+10h] BYREF
 
-  v3 = putf8str;
   v4 = index;
   v5 = putf8str;
-  putf8Buffer = (char *)putf8str;
+  putf8Buffer = putf8str;
   if ( length != -1 )
   {
     if ( length > 0 )
@@ -453,56 +444,55 @@ char *__fastcall Scaleform::UTF8Util::GetByteIndex(__int64 index, const char *pu
       while ( 1 )
       {
         if ( v4 <= 0 )
-          return (char *)(v5 - v3);
+          return v5 - putf8str;
         v7 = *v5++;
         ++v6;
-        if ( !v7 || v7 >= 0 )
-          goto LABEL_33;
-        if ( (v7 & 0xE0) == -64 )
-          goto LABEL_30;
-        if ( (v7 & 0xF0) == -32 )
-          goto LABEL_9;
-        if ( (v7 & 0xF8) == -16 )
-          goto LABEL_13;
-        if ( (v7 & 0xFC) == -8 )
+        if ( v7 >= 0 )
+          goto LABEL_32;
+        if ( (v7 & 0xE0) == 0xC0 )
+          goto LABEL_29;
+        if ( (v7 & 0xF0) == 0xE0 )
+          goto LABEL_8;
+        if ( (v7 & 0xF8) == 0xF0 )
+          goto LABEL_12;
+        if ( (v7 & 0xFC) == 0xF8 )
           break;
-        if ( (v7 & 0xFE) == -4 )
+        if ( (v7 & 0xFE) == 0xFC )
         {
           if ( *v5 )
           {
-            if ( (*v5 & 0xC0) == -128 )
+            if ( (*v5 & 0xC0) == 0x80 )
             {
-              v8 = (v5++)[1];
+              v8 = *++v5;
               ++v6;
               if ( v8 )
               {
-                if ( (v8 & 0xC0) == -128 )
+                if ( (v8 & 0xC0) == 0x80 )
                 {
-                  v9 = (v5++)[1];
+                  v9 = *++v5;
                   ++v6;
                   if ( v9 )
                   {
-                    if ( (v9 & 0xC0) == -128 )
+                    if ( (v9 & 0xC0) == 0x80 )
                     {
-                      v10 = (v5++)[1];
+                      v10 = *++v5;
                       ++v6;
                       if ( v10 )
                       {
-                        if ( (v10 & 0xC0) == -128 )
+                        if ( (v10 & 0xC0) == 0x80 )
                         {
-LABEL_29:
+LABEL_28:
                           ++v5;
                           ++v6;
-LABEL_30:
+LABEL_29:
                           if ( *v5 )
                           {
-                            if ( (*v5 & 0xC0) == -128 )
+                            if ( (*v5 & 0xC0) == 0x80 )
                             {
                               ++v5;
                               ++v6;
                             }
                           }
-                          goto LABEL_33;
                         }
                       }
                     }
@@ -512,112 +502,110 @@ LABEL_30:
             }
           }
         }
-LABEL_33:
+LABEL_32:
         --v4;
         if ( v6 >= length )
-          return (char *)(v5 - v3);
+          return v5 - putf8str;
       }
-      if ( !*v5 || (*v5 & 0xC0) != -128 )
-        goto LABEL_33;
+      if ( !*v5 || (*v5 & 0xC0) != 0x80 )
+        goto LABEL_32;
       ++v5;
       ++v6;
-LABEL_13:
-      if ( !*v5 || (*v5 & 0xC0) != -128 )
-        goto LABEL_33;
+LABEL_12:
+      if ( !*v5 || (*v5 & 0xC0) != 0x80 )
+        goto LABEL_32;
       ++v5;
       ++v6;
-LABEL_9:
-      if ( *v5 && (*v5 & 0xC0) == -128 )
-        goto LABEL_29;
-      goto LABEL_33;
+LABEL_8:
+      if ( *v5 && (*v5 & 0xC0) == 0x80 )
+        goto LABEL_28;
+      goto LABEL_32;
     }
-    return (char *)(v5 - v3);
+    return v5 - putf8str;
   }
   if ( index <= 0 )
-    return (char *)(v5 - v3);
+    return v5 - putf8str;
   while ( 1 )
   {
     --v4;
-    if ( !(unsigned int)Scaleform::UTF8Util::DecodeNextChar_Advance0((const char **)&putf8Buffer) )
+    if ( !(unsigned int)Scaleform::UTF8Util::DecodeNextChar_Advance0(&putf8Buffer) )
       break;
     if ( v4 <= 0 )
-      return (char *)(putf8Buffer - v3);
+      return putf8Buffer - putf8str;
   }
-  return (char *)(putf8Buffer - v3);
+  return putf8Buffer - putf8str;
 }
 
 // File Line: 129
 // RVA: 0x96C530
-signed __int64 __fastcall Scaleform::UTF8Util::DecodeNextChar_Advance0(const char **putf8Buffer)
+__int64 __fastcall Scaleform::UTF8Util::DecodeNextChar_Advance0(char **putf8Buffer)
 {
-  const char **v1; // r9
   char v2; // dl
   const char *v3; // rcx
-  signed __int64 result; // rax
+  __int64 result; // rax
   char v5; // r8
   char v6; // dl
-  int v7; // er8
-  unsigned int v8; // er8
+  int v7; // r8d
+  unsigned int v8; // r8d
   char v9; // r8
   char v10; // dl
-  int v11; // er8
+  int v11; // r8d
   const char *v12; // rcx
   int v13; // eax
   char v14; // dl
-  int v15; // er8
-  unsigned int v16; // er8
+  int v15; // r8d
+  unsigned int v16; // r8d
   char v17; // r8
   char v18; // dl
-  int v19; // er8
-  signed __int64 v20; // r10
+  int v19; // r8d
+  const char *v20; // r10
   char v21; // cl
-  int v22; // er8
+  int v22; // r8d
   const char *v23; // r10
   char v24; // dl
-  int v25; // er8
-  unsigned int v26; // er8
+  int v25; // r8d
+  unsigned int v26; // r8d
   char v27; // r8
   char v28; // dl
-  int v29; // er8
-  signed __int64 v30; // r10
+  int v29; // r8d
+  const char *v30; // r10
   char v31; // cl
-  int v32; // er8
+  int v32; // r8d
   const char *v33; // r10
   int v34; // eax
   char v35; // cl
-  int v36; // er8
+  int v36; // r8d
   const char *v37; // r10
   char v38; // dl
-  int v39; // er8
-  unsigned int v40; // er8
+  int v39; // r8d
+  unsigned int v40; // r8d
   char v41; // r8
   char v42; // dl
-  int v43; // er8
-  signed __int64 v44; // r10
+  int v43; // r8d
+  const char *v44; // r10
   char v45; // cl
-  int v46; // er8
+  int v46; // r8d
   const char *v47; // r10
   int v48; // eax
   char v49; // cl
-  int v50; // er8
+  int v50; // r8d
   const char *v51; // r10
   int v52; // eax
   char v53; // cl
-  int v54; // er8
+  int v54; // r8d
   const char *v55; // r10
   char v56; // dl
-  int v57; // er8
-  unsigned int v58; // er8
+  int v57; // r8d
+  unsigned int v58; // r8d
 
-  v1 = putf8Buffer;
   v2 = **putf8Buffer;
   v3 = *putf8Buffer + 1;
-  *v1 = v3;
+  *putf8Buffer = (char *)v3;
   if ( !v2 )
     return 0i64;
   if ( v2 >= 0 )
     return (unsigned int)v2;
-  if ( (v2 & 0xE0) == -64 )
+  if ( (v2 & 0xE0) == 0xC0 )
   {
     v5 = v2;
     v6 = *v3;
@@ -625,151 +613,151 @@ signed __int64 __fastcall Scaleform::UTF8Util::DecodeNextChar_Advance0(const cha
     if ( *v3 )
     {
       result = 65533i64;
-      if ( (v6 & 0xC0) == -128 )
+      if ( (v6 & 0xC0) == 0x80 )
       {
-        *v1 = v3 + 1;
+        *putf8Buffer = (char *)(v3 + 1);
         v8 = v6 & 0x3F | v7;
         if ( v8 < 0x80 )
-          v8 = 65533;
-        result = v8;
+          return 65533;
+        return v8;
       }
       return result;
     }
     return 0i64;
   }
-  if ( (v2 & 0xF0) != -32 )
+  if ( (v2 & 0xF0) != 0xE0 )
   {
-    if ( (v2 & 0xF8) == -16 )
+    if ( (v2 & 0xF8) == 0xF0 )
     {
       v17 = v2;
       v18 = *v3;
       v19 = (v17 & 7) << 18;
       if ( !*v3 )
         return 0i64;
-      if ( (v18 & 0xC0) == -128 )
+      if ( (v18 & 0xC0) == 0x80 )
       {
-        v20 = (signed __int64)(v3 + 1);
-        *v1 = v3 + 1;
+        v20 = v3 + 1;
+        *putf8Buffer = (char *)(v3 + 1);
         v21 = v3[1];
         v22 = ((v18 & 0x3F) << 12) | v19;
         if ( !v21 )
           return 0i64;
-        if ( (v21 & 0xC0) == -128 )
+        if ( (v21 & 0xC0) == 0x80 )
         {
-          v23 = (const char *)(v20 + 1);
-          *v1 = v23;
+          v23 = v20 + 1;
+          *putf8Buffer = (char *)v23;
           v24 = *v23;
           v25 = ((v21 & 0x3F) << 6) | v22;
           if ( !*v23 )
             return 0i64;
           result = 65533i64;
-          if ( (v24 & 0xC0) == -128 )
+          if ( (v24 & 0xC0) == 0x80 )
           {
-            *v1 = v23 + 1;
+            *putf8Buffer = (char *)(v23 + 1);
             v26 = v24 & 0x3F | v25;
             if ( v26 < 0x10000 )
-              v26 = 65533;
-            result = v26;
+              return 65533;
+            return v26;
           }
           return result;
         }
       }
     }
-    else if ( (v2 & 0xFC) == -8 )
+    else if ( (v2 & 0xFC) == 0xF8 )
     {
       v27 = v2;
       v28 = *v3;
       v29 = (v27 & 3) << 24;
       if ( !*v3 )
         return 0i64;
-      if ( (v28 & 0xC0) == -128 )
+      if ( (v28 & 0xC0) == 0x80 )
       {
-        v30 = (signed __int64)(v3 + 1);
-        *v1 = v3 + 1;
+        v30 = v3 + 1;
+        *putf8Buffer = (char *)(v3 + 1);
         v31 = v3[1];
         v32 = ((v28 & 0x3F) << 18) | v29;
         if ( !v31 )
           return 0i64;
-        if ( (v31 & 0xC0) == -128 )
+        if ( (v31 & 0xC0) == 0x80 )
         {
-          v33 = (const char *)(v30 + 1);
+          v33 = v30 + 1;
           v34 = v31 & 0x3F;
-          *v1 = v33;
+          *putf8Buffer = (char *)v33;
           v35 = *v33;
           v36 = (v34 << 12) | v32;
           if ( !*v33 )
             return 0i64;
-          if ( (v35 & 0xC0) == -128 )
+          if ( (v35 & 0xC0) == 0x80 )
           {
             v37 = v33 + 1;
-            *v1 = v37;
+            *putf8Buffer = (char *)v37;
             v38 = *v37;
             v39 = ((v35 & 0x3F) << 6) | v36;
             if ( !*v37 )
               return 0i64;
             result = 65533i64;
-            if ( (v38 & 0xC0) == -128 )
+            if ( (v38 & 0xC0) == 0x80 )
             {
-              *v1 = v37 + 1;
+              *putf8Buffer = (char *)(v37 + 1);
               v40 = v38 & 0x3F | v39;
               if ( v40 < 0x200000 )
-                v40 = 65533;
-              result = v40;
+                return 65533;
+              return v40;
             }
             return result;
           }
         }
       }
     }
-    else if ( (v2 & 0xFE) == -4 )
+    else if ( (v2 & 0xFE) == 0xFC )
     {
       v41 = v2;
       v42 = *v3;
       v43 = (v41 & 1) << 30;
       if ( !*v3 )
         return 0i64;
-      if ( (v42 & 0xC0) == -128 )
+      if ( (v42 & 0xC0) == 0x80 )
       {
-        v44 = (signed __int64)(v3 + 1);
-        *v1 = v3 + 1;
+        v44 = v3 + 1;
+        *putf8Buffer = (char *)(v3 + 1);
         v45 = v3[1];
         v46 = ((v42 & 0x3F) << 24) | v43;
         if ( !v45 )
           return 0i64;
-        if ( (v45 & 0xC0) == -128 )
+        if ( (v45 & 0xC0) == 0x80 )
         {
-          v47 = (const char *)(v44 + 1);
+          v47 = v44 + 1;
           v48 = v45 & 0x3F;
-          *v1 = v47;
+          *putf8Buffer = (char *)v47;
           v49 = *v47;
           v50 = (v48 << 18) | v46;
           if ( !*v47 )
             return 0i64;
-          if ( (v49 & 0xC0) == -128 )
+          if ( (v49 & 0xC0) == 0x80 )
           {
             v51 = v47 + 1;
             v52 = v49 & 0x3F;
-            *v1 = v51;
+            *putf8Buffer = (char *)v51;
             v53 = *v51;
             v54 = (v52 << 12) | v50;
             if ( !*v51 )
               return 0i64;
-            if ( (v53 & 0xC0) == -128 )
+            if ( (v53 & 0xC0) == 0x80 )
             {
               v55 = v51 + 1;
-              *v1 = v55;
+              *putf8Buffer = (char *)v55;
               v56 = *v55;
               v57 = ((v53 & 0x3F) << 6) | v54;
               if ( !*v55 )
                 return 0i64;
               result = 65533i64;
-              if ( (v56 & 0xC0) == -128 )
+              if ( (v56 & 0xC0) == 0x80 )
               {
-                *v1 = v55 + 1;
+                *putf8Buffer = (char *)(v55 + 1);
                 v58 = v56 & 0x3F | v57;
                 if ( v58 < 0x4000000 )
-                  v58 = 65533;
-                result = v58;
+                  return 65533;
+                return v58;
               }
               return result;
             }
@@ -784,35 +772,33 @@ signed __int64 __fastcall Scaleform::UTF8Util::DecodeNextChar_Advance0(const cha
   v11 = (v9 & 0xF) << 12;
   if ( !*v3 )
     return 0i64;
-  if ( (v10 & 0xC0) != -128 )
+  if ( (v10 & 0xC0) != 0x80 )
     return 65533i64;
   v12 = v3 + 1;
   v13 = v10 & 0x3F;
-  *v1 = v12;
+  *putf8Buffer = (char *)v12;
   v14 = *v12;
   v15 = (v13 << 6) | v11;
   if ( !*v12 )
     return 0i64;
   result = 65533i64;
-  if ( (v14 & 0xC0) == -128 )
+  if ( (v14 & 0xC0) == 0x80 )
   {
-    *v1 = v12 + 1;
+    *putf8Buffer = (char *)(v12 + 1);
     v16 = v14 & 0x3F | v15;
     if ( v16 < 0x800 )
-      v16 = 65533;
-    result = v16;
+      return 65533;
+    return v16;
   }
   return result;
 }
 
 // File Line: 307
 // RVA: 0x96C890
-signed __int64 __fastcall Scaleform::UTF8Util::DecodeString(wchar_t *pbuff, const char *putf8str, __int64 bytesLen)
+__int64 __fastcall Scaleform::UTF8Util::DecodeString(wchar_t *pbuff, char *putf8str, __int64 bytesLen)
 {
-  __int64 v3; // rsi
-  const char *v4; // rbx
+  char *v4; // rbx
   wchar_t *v5; // r14
-  wchar_t *v6; // rbp
   char v7; // cl
   unsigned int v8; // eax
   char v9; // dl
@@ -856,12 +842,10 @@ signed __int64 __fastcall Scaleform::UTF8Util::DecodeString(wchar_t *pbuff, cons
   char v47; // dl
   int v48; // eax
   unsigned int v49; // eax
-  char *putf8Buffer; // [rsp+40h] [rbp+8h]
+  char *putf8Buffer; // [rsp+40h] [rbp+8h] BYREF
 
-  v3 = bytesLen;
   v4 = putf8str;
   v5 = pbuff;
-  v6 = pbuff;
   if ( bytesLen == -1 )
   {
     while ( 1 )
@@ -876,12 +860,12 @@ signed __int64 __fastcall Scaleform::UTF8Util::DecodeString(wchar_t *pbuff, cons
           v8 = v7;
           goto LABEL_47;
         }
-        if ( (v7 & 0xE0) != -64 )
+        if ( (v7 & 0xE0) != 0xC0 )
           break;
         v9 = *v4;
         if ( !*v4 )
           goto LABEL_55;
-        if ( (v9 & 0xC0) == -128 )
+        if ( (v9 & 0xC0) == 0x80 )
         {
           ++v4;
           v8 = v9 & 0x3F | ((v7 & 0x1F) << 6);
@@ -889,16 +873,15 @@ signed __int64 __fastcall Scaleform::UTF8Util::DecodeString(wchar_t *pbuff, cons
           goto LABEL_9;
         }
 LABEL_10:
-        ++v5;
-        *(v5 - 1) = -3;
+        *v5++ = -3;
       }
-      if ( (v7 & 0xF0) == -32 )
+      if ( (v7 & 0xF0) == 0xE0 )
       {
         v11 = *v4;
         v12 = (v7 & 0xF) << 12;
         if ( !*v4 )
           goto LABEL_55;
-        if ( (v11 & 0xC0) != -128 )
+        if ( (v11 & 0xC0) != 0x80 )
           goto LABEL_10;
         ++v4;
         v13 = v11;
@@ -906,19 +889,19 @@ LABEL_10:
         v15 = ((v13 & 0x3F) << 6) | v12;
         if ( !*v4 )
           goto LABEL_55;
-        if ( (v14 & 0xC0) != -128 )
+        if ( (v14 & 0xC0) != 0x80 )
           goto LABEL_10;
         ++v4;
         v8 = v14 & 0x3F | v15;
         v10 = v8 < 0x800;
       }
-      else if ( (v7 & 0xF8) == -16 )
+      else if ( (v7 & 0xF8) == 0xF0 )
       {
         v16 = *v4;
         v17 = (v7 & 7) << 18;
         if ( !*v4 )
           goto LABEL_55;
-        if ( (v16 & 0xC0) != -128 )
+        if ( (v16 & 0xC0) != 0x80 )
           goto LABEL_10;
         ++v4;
         v18 = v16;
@@ -926,7 +909,7 @@ LABEL_10:
         v20 = ((v18 & 0x3F) << 12) | v17;
         if ( !*v4 )
           goto LABEL_55;
-        if ( (v19 & 0xC0) != -128 )
+        if ( (v19 & 0xC0) != 0x80 )
           goto LABEL_10;
         ++v4;
         v21 = v19;
@@ -934,7 +917,7 @@ LABEL_10:
         v23 = ((v21 & 0x3F) << 6) | v20;
         if ( !*v4 )
           goto LABEL_55;
-        if ( (v22 & 0xC0) != -128 )
+        if ( (v22 & 0xC0) != 0x80 )
           goto LABEL_10;
         ++v4;
         v8 = v22 & 0x3F | v23;
@@ -942,15 +925,15 @@ LABEL_10:
       }
       else
       {
-        if ( (v7 & 0xFC) != -8 )
+        if ( (v7 & 0xFC) != 0xF8 )
         {
-          if ( (v7 & 0xFE) == -4 )
+          if ( (v7 & 0xFE) == 0xFC )
           {
             v35 = *v4;
             v36 = (v7 & 1) << 30;
             if ( !*v4 )
               goto LABEL_55;
-            if ( (v35 & 0xC0) == -128 )
+            if ( (v35 & 0xC0) == 0x80 )
             {
               ++v4;
               v37 = v35;
@@ -958,7 +941,7 @@ LABEL_10:
               v39 = ((v37 & 0x3F) << 24) | v36;
               if ( !*v4 )
                 goto LABEL_55;
-              if ( (v38 & 0xC0) == -128 )
+              if ( (v38 & 0xC0) == 0x80 )
               {
                 ++v4;
                 v40 = v38;
@@ -966,7 +949,7 @@ LABEL_10:
                 v42 = ((v40 & 0x3F) << 18) | v39;
                 if ( !*v4 )
                   goto LABEL_55;
-                if ( (v41 & 0xC0) == -128 )
+                if ( (v41 & 0xC0) == 0x80 )
                 {
                   ++v4;
                   v43 = v41;
@@ -974,7 +957,7 @@ LABEL_10:
                   v45 = ((v43 & 0x3F) << 12) | v42;
                   if ( !*v4 )
                     goto LABEL_55;
-                  if ( (v44 & 0xC0) == -128 )
+                  if ( (v44 & 0xC0) == 0x80 )
                   {
                     ++v4;
                     v46 = v44;
@@ -982,7 +965,7 @@ LABEL_10:
                     v48 = ((v46 & 0x3F) << 6) | v45;
                     if ( !*v4 )
                       goto LABEL_55;
-                    if ( (v47 & 0xC0) == -128 )
+                    if ( (v47 & 0xC0) == 0x80 )
                     {
                       ++v4;
                       v8 = v47 & 0x3F | v48;
@@ -1000,7 +983,7 @@ LABEL_10:
         v25 = (v7 & 3) << 24;
         if ( !*v4 )
           goto LABEL_55;
-        if ( (v24 & 0xC0) != -128 )
+        if ( (v24 & 0xC0) != 0x80 )
           goto LABEL_10;
         ++v4;
         v26 = v24;
@@ -1008,7 +991,7 @@ LABEL_10:
         v28 = ((v26 & 0x3F) << 18) | v25;
         if ( !*v4 )
           goto LABEL_55;
-        if ( (v27 & 0xC0) != -128 )
+        if ( (v27 & 0xC0) != 0x80 )
           goto LABEL_10;
         ++v4;
         v29 = v27;
@@ -1016,7 +999,7 @@ LABEL_10:
         v31 = ((v29 & 0x3F) << 12) | v28;
         if ( !*v4 )
           goto LABEL_55;
-        if ( (v30 & 0xC0) != -128 )
+        if ( (v30 & 0xC0) != 0x80 )
           goto LABEL_10;
         ++v4;
         v32 = v30;
@@ -1024,7 +1007,7 @@ LABEL_10:
         v34 = ((v32 & 0x3F) << 6) | v31;
         if ( !*v4 )
           goto LABEL_55;
-        if ( (v33 & 0xC0) != -128 )
+        if ( (v33 & 0xC0) != 0x80 )
           goto LABEL_10;
         ++v4;
         v8 = v33 & 0x3F | v34;
@@ -1038,35 +1021,37 @@ LABEL_47:
         goto LABEL_55;
       if ( v8 >= 0xFFFF )
         LOWORD(v8) = -3;
-      ++v5;
-      *(v5 - 1) = v8;
+      *v5++ = v8;
     }
   }
-  putf8Buffer = (char *)putf8str;
+  putf8Buffer = putf8str;
   if ( bytesLen > 0 )
   {
     do
     {
-      v49 = Scaleform::UTF8Util::DecodeNextChar_Advance0((const char **)&putf8Buffer);
+      v49 = Scaleform::UTF8Util::DecodeNextChar_Advance0(&putf8Buffer);
       if ( v49 >= 0xFFFF )
         LOWORD(v49) = -3;
-      ++v5;
-      *(v5 - 1) = v49;
+      *v5++ = v49;
     }
-    while ( putf8Buffer - v4 < v3 );
+    while ( putf8Buffer - v4 < bytesLen );
   }
 LABEL_55:
   *v5 = 0;
-  return v5 - v6;
+  return v5 - pbuff;
 }
 
 // File Line: 338
 // RVA: 0x970380
-void __fastcall Scaleform::UTF8Util::EncodeCharSafe(char *pbuffer, unsigned __int64 buffLen, __int64 *pindex, unsigned int ucs_character)
+void __fastcall Scaleform::UTF8Util::EncodeCharSafe(
+        char *pbuffer,
+        unsigned __int64 buffLen,
+        __int64 *pindex,
+        unsigned int ucs_character)
 {
   if ( ucs_character <= 0x7F )
   {
-    if ( buffLen >= 1 )
+    if ( buffLen )
       pbuffer[(*pindex)++] = ucs_character;
     return;
   }
@@ -1120,62 +1105,33 @@ __int64 __fastcall Scaleform::UTF8Util::GetEncodeStringSize(const wchar_t *pchar
 {
   __int64 v2; // r9
   const wchar_t *v3; // r10
-  int v4; // er8
+  int v4; // r8d
   unsigned int v5; // ecx
-  signed int v6; // eax
+  int v6; // eax
   wchar_t v8; // ax
   __int64 i; // rdx
-  unsigned int v10; // ecx
-  signed int v11; // eax
+  int v10; // eax
 
   v2 = 0i64;
   v3 = pchar;
   if ( length == -1 )
   {
     v8 = *pchar;
-    for ( i = 0i64; v8; v8 = v3[i] )
+    for ( i = 0i64; v8; v8 = pchar[i] )
     {
-      v10 = v8;
       if ( v8 > 0x7Fu )
       {
         if ( v8 > 0x7FFu )
-        {
-          if ( v8 > 0xFFFFu )
-          {
-            if ( v8 > 0x1FFFFFu )
-            {
-              if ( v8 > 0x3FFFFFFu )
-              {
-                v11 = 0;
-                if ( v10 <= 0x7FFFFFFF )
-                  v11 = 6;
-              }
-              else
-              {
-                v11 = 5;
-              }
-            }
-            else
-            {
-              v11 = 4;
-            }
-          }
-          else
-          {
-            v11 = 3;
-          }
-        }
+          v10 = 3;
         else
-        {
-          v11 = 2;
-        }
+          v10 = 2;
       }
       else
       {
-        v11 = 1;
+        v10 = 1;
       }
       ++i;
-      v2 += v11;
+      v2 += v10;
     }
     return v2;
   }
@@ -1188,36 +1144,9 @@ __int64 __fastcall Scaleform::UTF8Util::GetEncodeStringSize(const wchar_t *pchar
     if ( v5 > 0x7F )
     {
       if ( v5 > 0x7FF )
-      {
-        if ( v5 > 0xFFFF )
-        {
-          if ( v5 > 0x1FFFFF )
-          {
-            if ( v5 > 0x3FFFFFF )
-            {
-              v6 = 0;
-              if ( v5 <= 0x7FFFFFFF )
-                v6 = 6;
-            }
-            else
-            {
-              v6 = 5;
-            }
-          }
-          else
-          {
-            v6 = 4;
-          }
-        }
-        else
-        {
-          v6 = 3;
-        }
-      }
+        v6 = 3;
       else
-      {
         v6 = 2;
-      }
     }
     else
     {
@@ -1233,68 +1162,60 @@ __int64 __fastcall Scaleform::UTF8Util::GetEncodeStringSize(const wchar_t *pchar
 
 // File Line: 439
 // RVA: 0x9704C0
-void __fastcall Scaleform::UTF8Util::EncodeStringSafe(char *pbuff, unsigned __int64 buffLen, const wchar_t *pchar, __int64 length)
+void __fastcall Scaleform::UTF8Util::EncodeStringSafe(
+        char *pbuff,
+        __int64 buffLen,
+        const wchar_t *pchar,
+        __int64 length)
 {
   __int64 v4; // rax
-  __int64 v5; // r14
-  const wchar_t *v6; // rbx
-  __int64 v7; // rdi
-  char *v8; // rbp
-  int v9; // esi
-  __int64 pindex; // [rsp+48h] [rbp+10h]
+  int i; // esi
+  __int64 pindex; // [rsp+48h] [rbp+10h] BYREF
 
   if ( buffLen )
   {
     v4 = 0i64;
-    v5 = length;
-    v6 = pchar;
-    v7 = buffLen;
-    v8 = pbuff;
     pindex = 0i64;
     if ( length == -1 )
     {
-      if ( (signed __int64)buffLen > 0 )
+      if ( buffLen > 0 )
       {
         do
         {
-          if ( !*v6 )
+          if ( !*pchar )
             break;
-          Scaleform::UTF8Util::EncodeCharSafe(v8, v7 - v4, &pindex, *v6);
+          Scaleform::UTF8Util::EncodeCharSafe(pbuff, buffLen - v4, &pindex, *pchar);
           v4 = pindex;
-          ++v6;
+          ++pchar;
         }
-        while ( pindex < v7 );
+        while ( pindex < buffLen );
       }
     }
     else
     {
-      v9 = 0;
-      if ( length > 0 )
+      for ( i = 0; i < length; v4 = pindex )
       {
-        do
-        {
-          if ( v4 >= v7 )
-            break;
-          Scaleform::UTF8Util::EncodeCharSafe(v8, v7 - v4, &pindex, *v6);
-          ++v9;
-          ++v6;
-          v4 = pindex;
-        }
-        while ( v9 < v5 );
+        if ( v4 >= buffLen )
+          break;
+        Scaleform::UTF8Util::EncodeCharSafe(pbuff, buffLen - v4, &pindex, *pchar);
+        ++i;
+        ++pchar;
       }
     }
-    v8[v4] = 0;
+    pbuff[v4] = 0;
   }
 }
 
 // File Line: 466
 // RVA: 0x96CC30
-signed __int64 __fastcall Scaleform::UTF8Util::DecodeStringSafe(wchar_t *pbuff, unsigned __int64 buffLen, const char *putf8str, __int64 bytesLen)
+__int64 __fastcall Scaleform::UTF8Util::DecodeStringSafe(
+        wchar_t *pbuff,
+        unsigned __int64 buffLen,
+        char *putf8str,
+        __int64 bytesLen)
 {
-  __int64 v4; // rsi
-  const char *v5; // rbx
+  char *v5; // rbx
   wchar_t *v6; // r14
-  wchar_t *v8; // r15
   wchar_t *v9; // rbp
   char v10; // cl
   unsigned int v11; // eax
@@ -1339,14 +1260,12 @@ signed __int64 __fastcall Scaleform::UTF8Util::DecodeStringSafe(wchar_t *pbuff, 
   char v50; // dl
   int v51; // eax
   unsigned int v52; // eax
-  char *putf8Buffer; // [rsp+48h] [rbp+10h]
+  char *putf8Buffer; // [rsp+48h] [rbp+10h] BYREF
 
-  v4 = bytesLen;
   v5 = putf8str;
   v6 = pbuff;
   if ( !buffLen )
     return 0i64;
-  v8 = pbuff;
   v9 = &pbuff[buffLen];
   if ( bytesLen == -1 )
   {
@@ -1362,15 +1281,15 @@ signed __int64 __fastcall Scaleform::UTF8Util::DecodeStringSafe(wchar_t *pbuff, 
           v11 = v10;
           goto LABEL_52;
         }
-        if ( (v10 & 0xE0) == -64 )
+        if ( (v10 & 0xE0) == 0xC0 )
           break;
-        if ( (v10 & 0xF0) == -32 )
+        if ( (v10 & 0xF0) == 0xE0 )
         {
           v14 = *v5;
           v15 = (v10 & 0xF) << 12;
           if ( !*v5 )
             goto LABEL_61;
-          if ( (v14 & 0xC0) != -128 )
+          if ( (v14 & 0xC0) != 0x80 )
             goto LABEL_13;
           ++v5;
           v16 = v14;
@@ -1378,20 +1297,20 @@ signed __int64 __fastcall Scaleform::UTF8Util::DecodeStringSafe(wchar_t *pbuff, 
           v18 = ((v16 & 0x3F) << 6) | v15;
           if ( !*v5 )
             goto LABEL_61;
-          if ( (v17 & 0xC0) != -128 )
+          if ( (v17 & 0xC0) != 0x80 )
             goto LABEL_13;
           ++v5;
           v11 = v17 & 0x3F | v18;
           v13 = v11 < 0x800;
           goto LABEL_12;
         }
-        if ( (v10 & 0xF8) == -16 )
+        if ( (v10 & 0xF8) == 0xF0 )
         {
           v19 = *v5;
           v20 = (v10 & 7) << 18;
           if ( !*v5 )
             goto LABEL_61;
-          if ( (v19 & 0xC0) != -128 )
+          if ( (v19 & 0xC0) != 0x80 )
             goto LABEL_13;
           ++v5;
           v21 = v19;
@@ -1399,7 +1318,7 @@ signed __int64 __fastcall Scaleform::UTF8Util::DecodeStringSafe(wchar_t *pbuff, 
           v23 = ((v21 & 0x3F) << 12) | v20;
           if ( !*v5 )
             goto LABEL_61;
-          if ( (v22 & 0xC0) != -128 )
+          if ( (v22 & 0xC0) != 0x80 )
             goto LABEL_13;
           ++v5;
           v24 = v22;
@@ -1407,20 +1326,20 @@ signed __int64 __fastcall Scaleform::UTF8Util::DecodeStringSafe(wchar_t *pbuff, 
           v26 = ((v24 & 0x3F) << 6) | v23;
           if ( !*v5 )
             goto LABEL_61;
-          if ( (v25 & 0xC0) != -128 )
+          if ( (v25 & 0xC0) != 0x80 )
             goto LABEL_13;
           ++v5;
           v11 = v25 & 0x3F | v26;
           v13 = v11 < 0x10000;
           goto LABEL_12;
         }
-        if ( (v10 & 0xFC) == -8 )
+        if ( (v10 & 0xFC) == 0xF8 )
         {
           v27 = *v5;
           v28 = (v10 & 3) << 24;
           if ( !*v5 )
             goto LABEL_61;
-          if ( (v27 & 0xC0) != -128 )
+          if ( (v27 & 0xC0) != 0x80 )
             goto LABEL_13;
           ++v5;
           v29 = v27;
@@ -1428,7 +1347,7 @@ signed __int64 __fastcall Scaleform::UTF8Util::DecodeStringSafe(wchar_t *pbuff, 
           v31 = ((v29 & 0x3F) << 18) | v28;
           if ( !*v5 )
             goto LABEL_61;
-          if ( (v30 & 0xC0) != -128 )
+          if ( (v30 & 0xC0) != 0x80 )
             goto LABEL_13;
           ++v5;
           v32 = v30;
@@ -1436,7 +1355,7 @@ signed __int64 __fastcall Scaleform::UTF8Util::DecodeStringSafe(wchar_t *pbuff, 
           v34 = ((v32 & 0x3F) << 12) | v31;
           if ( !*v5 )
             goto LABEL_61;
-          if ( (v33 & 0xC0) != -128 )
+          if ( (v33 & 0xC0) != 0x80 )
             goto LABEL_13;
           ++v5;
           v35 = v33;
@@ -1444,20 +1363,20 @@ signed __int64 __fastcall Scaleform::UTF8Util::DecodeStringSafe(wchar_t *pbuff, 
           v37 = ((v35 & 0x3F) << 6) | v34;
           if ( !*v5 )
             goto LABEL_61;
-          if ( (v36 & 0xC0) != -128 )
+          if ( (v36 & 0xC0) != 0x80 )
             goto LABEL_13;
           ++v5;
           v11 = v36 & 0x3F | v37;
           v13 = v11 < 0x200000;
           goto LABEL_12;
         }
-        if ( (v10 & 0xFE) != -4 )
+        if ( (v10 & 0xFE) != 0xFC )
           goto LABEL_13;
         v38 = *v5;
         v39 = (v10 & 1) << 30;
         if ( !*v5 )
           goto LABEL_61;
-        if ( (v38 & 0xC0) != -128 )
+        if ( (v38 & 0xC0) != 0x80 )
           goto LABEL_13;
         ++v5;
         v40 = v38;
@@ -1465,7 +1384,7 @@ signed __int64 __fastcall Scaleform::UTF8Util::DecodeStringSafe(wchar_t *pbuff, 
         v42 = ((v40 & 0x3F) << 24) | v39;
         if ( !*v5 )
           goto LABEL_61;
-        if ( (v41 & 0xC0) != -128 )
+        if ( (v41 & 0xC0) != 0x80 )
           goto LABEL_13;
         ++v5;
         v43 = v41;
@@ -1473,7 +1392,7 @@ signed __int64 __fastcall Scaleform::UTF8Util::DecodeStringSafe(wchar_t *pbuff, 
         v45 = ((v43 & 0x3F) << 18) | v42;
         if ( !*v5 )
           goto LABEL_61;
-        if ( (v44 & 0xC0) != -128 )
+        if ( (v44 & 0xC0) != 0x80 )
           goto LABEL_13;
         ++v5;
         v46 = v44;
@@ -1481,7 +1400,7 @@ signed __int64 __fastcall Scaleform::UTF8Util::DecodeStringSafe(wchar_t *pbuff, 
         v48 = ((v46 & 0x3F) << 12) | v45;
         if ( !*v5 )
           goto LABEL_61;
-        if ( (v47 & 0xC0) != -128 )
+        if ( (v47 & 0xC0) != 0x80 )
           goto LABEL_13;
         ++v5;
         v49 = v47;
@@ -1489,7 +1408,7 @@ signed __int64 __fastcall Scaleform::UTF8Util::DecodeStringSafe(wchar_t *pbuff, 
         v51 = ((v49 & 0x3F) << 6) | v48;
         if ( !*v5 )
           goto LABEL_61;
-        if ( (v50 & 0xC0) != -128 || (++v5, v11 = v50 & 0x3F | v51, v11 < 0x4000000) )
+        if ( (v50 & 0xC0) != 0x80 || (++v5, v11 = v50 & 0x3F | v51, v11 < 0x4000000) )
         {
 LABEL_13:
           LOWORD(v11) = -3;
@@ -1501,15 +1420,14 @@ LABEL_52:
         if ( v11 >= 0xFFFF )
           LOWORD(v11) = -3;
 LABEL_14:
-        *v6 = v11;
-        ++v6;
+        *v6++ = v11;
         if ( v6 >= v9 )
           goto LABEL_61;
       }
       v12 = *v5;
       if ( !*v5 )
         goto LABEL_61;
-      if ( (v12 & 0xC0) != -128 )
+      if ( (v12 & 0xC0) != 0x80 )
         goto LABEL_13;
       ++v5;
       v11 = v12 & 0x3F | ((v10 & 0x1F) << 6);
@@ -1522,24 +1440,23 @@ LABEL_12:
   }
   else
   {
-    putf8Buffer = (char *)putf8str;
+    putf8Buffer = putf8str;
     if ( bytesLen > 0 )
     {
       do
       {
         if ( v6 >= v9 )
           break;
-        v52 = Scaleform::UTF8Util::DecodeNextChar_Advance0((const char **)&putf8Buffer);
+        v52 = Scaleform::UTF8Util::DecodeNextChar_Advance0(&putf8Buffer);
         if ( v52 >= 0xFFFF )
           LOWORD(v52) = -3;
-        ++v6;
-        *(v6 - 1) = v52;
+        *v6++ = v52;
       }
-      while ( putf8Buffer - v5 < v4 );
+      while ( putf8Buffer - v5 < bytesLen );
     }
   }
 LABEL_61:
   *v6 = 0;
-  return v6 - v8;
+  return v6 - pbuff;
 }
 

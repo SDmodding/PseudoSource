@@ -6,7 +6,7 @@ __int64 UFG::GameStat::_dynamic_initializer_for__Symbol_ReservedFMapBool4__()
 
   v0 = UFG::qStringHash32("ReservedFMapBool4", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::GameStat::Symbol_ReservedFMapBool4, v0);
-  return atexit(UFG::GameStat::_dynamic_atexit_destructor_for__Symbol_ReservedFMapBool4__);
+  return atexit((int (__fastcall *)())UFG::GameStat::_dynamic_atexit_destructor_for__Symbol_ReservedFMapBool4__);
 }
 
 // File Line: 164
@@ -46,20 +46,20 @@ UFG::qSymbol *__fastcall UFG::GameStat::GetSymbol(UFG::GameStat::MapInt32Stat st
 
 // File Line: 182
 // RVA: 0x4A6C70
-signed __int64 __fastcall UFG::GameStat::GetTimeStatEnum(UFG::qSymbol *name, bool warnIfNotFound)
+__int64 __fastcall UFG::GameStat::GetTimeStatEnum(UFG::qSymbol *name, bool warnIfNotFound)
 {
-  unsigned int v2; // eax
+  unsigned int mUID; // eax
 
-  v2 = name->mUID;
+  mUID = name->mUID;
   if ( name->mUID <= 0x76A6FE1A )
   {
-    if ( v2 == 1990655514 )
+    if ( mUID == 1990655514 )
       return 28i64;
-    if ( v2 > 0x55F9B88F )
+    if ( mUID > 0x55F9B88F )
     {
-      if ( v2 > 0x617BED62 )
+      if ( mUID > 0x617BED62 )
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0x68E1AE1Fu:
             return 29i64;
@@ -71,7 +71,7 @@ signed __int64 __fastcall UFG::GameStat::GetTimeStatEnum(UFG::qSymbol *name, boo
       }
       else
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0x617BED62u:
             return 7i64;
@@ -86,11 +86,11 @@ signed __int64 __fastcall UFG::GameStat::GetTimeStatEnum(UFG::qSymbol *name, boo
     }
     else
     {
-      if ( v2 == 1442429071 )
+      if ( mUID == 1442429071 )
         return 22i64;
-      if ( v2 > 0x112E1CEE )
+      if ( mUID > 0x112E1CEE )
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0x11FEFDE1u:
             return 18i64;
@@ -102,7 +102,7 @@ signed __int64 __fastcall UFG::GameStat::GetTimeStatEnum(UFG::qSymbol *name, boo
       }
       else
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0x112E1CEEu:
             return 15i64;
@@ -117,13 +117,13 @@ signed __int64 __fastcall UFG::GameStat::GetTimeStatEnum(UFG::qSymbol *name, boo
     }
     return 30i64;
   }
-  if ( v2 <= 0xC27C72B7 )
+  if ( mUID <= 0xC27C72B7 )
   {
-    if ( v2 == -1032031561 )
+    if ( mUID == -1032031561 )
       return 21i64;
-    if ( v2 > 0x943B64AB )
+    if ( mUID > 0x943B64AB )
     {
-      switch ( v2 )
+      switch ( mUID )
       {
         case 0x9E6252BB:
           return 2i64;
@@ -135,7 +135,7 @@ signed __int64 __fastcall UFG::GameStat::GetTimeStatEnum(UFG::qSymbol *name, boo
     }
     else
     {
-      switch ( v2 )
+      switch ( mUID )
       {
         case 0x943B64AB:
           return 5i64;
@@ -149,9 +149,9 @@ signed __int64 __fastcall UFG::GameStat::GetTimeStatEnum(UFG::qSymbol *name, boo
     }
     return 30i64;
   }
-  if ( v2 <= 0xDEA06E66 )
+  if ( mUID <= 0xDEA06E66 )
   {
-    switch ( v2 )
+    switch ( mUID )
     {
       case 0xDEA06E66:
         return 19i64;
@@ -164,9 +164,9 @@ signed __int64 __fastcall UFG::GameStat::GetTimeStatEnum(UFG::qSymbol *name, boo
     }
     return 30i64;
   }
-  if ( v2 == -371397617 )
+  if ( mUID == -371397617 )
     return 1i64;
-  if ( v2 != -139842885 )
+  if ( mUID != -139842885 )
     return 30i64;
   return 16i64;
 }
@@ -175,18 +175,18 @@ signed __int64 __fastcall UFG::GameStat::GetTimeStatEnum(UFG::qSymbol *name, boo
 // RVA: 0x4A3560
 UFG::GameStat::IDStat __fastcall UFG::GameStat::GetIDStatEnum(UFG::qSymbol *name, bool warnIfNotFound)
 {
-  unsigned int v2; // eax
+  unsigned int mUID; // eax
 
-  v2 = name->mUID;
+  mUID = name->mUID;
   if ( name->mUID <= 0x79F594C8 )
   {
-    if ( v2 == 2046137544 )
+    if ( mUID == 2046137544 )
       return 39;
-    if ( v2 > 0x55CCB293 )
+    if ( mUID > 0x55CCB293 )
     {
-      if ( v2 > 0x6E30FFA3 )
+      if ( mUID > 0x6E30FFA3 )
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0x7077AFA6u:
             return ReservedFCID3;
@@ -200,7 +200,7 @@ UFG::GameStat::IDStat __fastcall UFG::GameStat::GetIDStatEnum(UFG::qSymbol *name
       }
       else
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0x6E30FFA3u:
             return ReservedFCID4;
@@ -217,11 +217,11 @@ UFG::GameStat::IDStat __fastcall UFG::GameStat::GetIDStatEnum(UFG::qSymbol *name
     }
     else
     {
-      if ( v2 == 1439478419 )
+      if ( mUID == 1439478419 )
         return 5;
-      if ( v2 > 0x2B4BE5C4 )
+      if ( mUID > 0x2B4BE5C4 )
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0x2CF97BC5u:
             return 20;
@@ -235,7 +235,7 @@ UFG::GameStat::IDStat __fastcall UFG::GameStat::GetIDStatEnum(UFG::qSymbol *name
       }
       else
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0x2B4BE5C4u:
             return 15;
@@ -252,13 +252,13 @@ UFG::GameStat::IDStat __fastcall UFG::GameStat::GetIDStatEnum(UFG::qSymbol *name
     }
     return 44;
   }
-  if ( v2 <= 0xC32022E6 )
+  if ( mUID <= 0xC32022E6 )
   {
-    if ( v2 == -1021304090 )
+    if ( mUID == -1021304090 )
       return 36;
-    if ( v2 > 0xA8245162 )
+    if ( mUID > 0xA8245162 )
     {
-      switch ( v2 )
+      switch ( mUID )
       {
         case 0xAE115074:
           return 10;
@@ -274,18 +274,18 @@ UFG::GameStat::IDStat __fastcall UFG::GameStat::GetIDStatEnum(UFG::qSymbol *name
     }
     else
     {
-      if ( v2 == -1474014878 )
+      if ( mUID == -1474014878 )
         return 1;
-      if ( v2 > 0x9890D3F8 )
+      if ( mUID > 0x9890D3F8 )
       {
-        if ( v2 == -1718800341 )
+        if ( mUID == -1718800341 )
           return 0;
-        if ( v2 == -1502042175 )
+        if ( mUID == -1502042175 )
           return 13;
       }
       else
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0x9890D3F8:
             return 9;
@@ -300,9 +300,9 @@ UFG::GameStat::IDStat __fastcall UFG::GameStat::GetIDStatEnum(UFG::qSymbol *name
     }
     return 44;
   }
-  if ( v2 <= 0xE500E5B6 )
+  if ( mUID <= 0xE500E5B6 )
   {
-    switch ( v2 )
+    switch ( mUID )
     {
       case 0xE500E5B6:
         return 33;
@@ -319,7 +319,7 @@ UFG::GameStat::IDStat __fastcall UFG::GameStat::GetIDStatEnum(UFG::qSymbol *name
     }
     return 44;
   }
-  switch ( v2 )
+  switch ( mUID )
   {
     case 0xEB2FBC12:
       return 30;
@@ -330,36 +330,36 @@ UFG::GameStat::IDStat __fastcall UFG::GameStat::GetIDStatEnum(UFG::qSymbol *name
     case 0xF926D62D:
       return 25;
   }
-  if ( v2 != -109338094 )
+  if ( mUID != -109338094 )
     return 44;
   return 27;
 }
 
 // File Line: 210
 // RVA: 0x4A1960
-signed __int64 __fastcall UFG::GameStat::GetBoolStatEnum(UFG::qSymbol *name, bool warnIfNotFound)
+__int64 __fastcall UFG::GameStat::GetBoolStatEnum(UFG::qSymbol *name, bool warnIfNotFound)
 {
-  unsigned int v2; // eax
+  unsigned int mUID; // eax
 
-  v2 = name->mUID;
+  mUID = name->mUID;
   if ( name->mUID <= 0x74403A22 )
   {
-    if ( v2 == 1950366242 )
+    if ( mUID == 1950366242 )
       return 43i64;
-    if ( v2 > 0x20C7126A )
+    if ( mUID > 0x20C7126A )
     {
-      if ( v2 > 0x366670BE )
+      if ( mUID > 0x366670BE )
       {
-        if ( v2 > 0x61778A4B )
+        if ( mUID > 0x61778A4B )
         {
-          if ( v2 == 1729748744 )
+          if ( mUID == 1729748744 )
             return 48i64;
-          if ( v2 == 1731961755 )
+          if ( mUID == 1731961755 )
             return 20i64;
         }
         else
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0x61778A4Bu:
               return 30i64;
@@ -374,18 +374,18 @@ signed __int64 __fastcall UFG::GameStat::GetBoolStatEnum(UFG::qSymbol *name, boo
       }
       else
       {
-        if ( v2 == 912683198 )
+        if ( mUID == 912683198 )
           return 17i64;
-        if ( v2 > 0x2BCB4A0C )
+        if ( mUID > 0x2BCB4A0C )
         {
-          if ( v2 == 808081774 )
+          if ( mUID == 808081774 )
             return 27i64;
-          if ( v2 == 906411777 )
+          if ( mUID == 906411777 )
             return 6i64;
         }
         else
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0x2BCB4A0Cu:
               return 51i64;
@@ -401,20 +401,20 @@ signed __int64 __fastcall UFG::GameStat::GetBoolStatEnum(UFG::qSymbol *name, boo
     }
     else
     {
-      if ( v2 == 549917290 )
+      if ( mUID == 549917290 )
         return 55i64;
-      if ( v2 > 0xDF3CB7F )
+      if ( mUID > 0xDF3CB7F )
       {
-        if ( v2 > 0x1BE865D0 )
+        if ( mUID > 0x1BE865D0 )
         {
-          if ( v2 == 528881124 )
+          if ( mUID == 528881124 )
             return 5i64;
-          if ( v2 == 543988943 )
+          if ( mUID == 543988943 )
             return 26i64;
         }
         else
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0x1BE865D0u:
               return 41i64;
@@ -429,18 +429,18 @@ signed __int64 __fastcall UFG::GameStat::GetBoolStatEnum(UFG::qSymbol *name, boo
       }
       else
       {
-        if ( v2 == 234081151 )
+        if ( mUID == 234081151 )
           return 37i64;
-        if ( v2 > 0x6AD3E5D )
+        if ( mUID > 0x6AD3E5D )
         {
-          if ( v2 == 154545853 )
+          if ( mUID == 154545853 )
             return 56i64;
-          if ( v2 == 161707302 )
+          if ( mUID == 161707302 )
             return 4i64;
         }
         else
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0x6AD3E5Du:
               return 14i64;
@@ -456,15 +456,15 @@ signed __int64 __fastcall UFG::GameStat::GetBoolStatEnum(UFG::qSymbol *name, boo
     }
     return 58i64;
   }
-  if ( v2 <= 0xC5E4C74C )
+  if ( mUID <= 0xC5E4C74C )
   {
-    if ( v2 == -974862516 )
+    if ( mUID == -974862516 )
       return 18i64;
-    if ( v2 > 0x9C5652CC )
+    if ( mUID > 0x9C5652CC )
     {
-      if ( v2 > 0xAFB8D3F2 )
+      if ( mUID > 0xAFB8D3F2 )
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0xB0BD11EA:
             return 42i64;
@@ -476,7 +476,7 @@ signed __int64 __fastcall UFG::GameStat::GetBoolStatEnum(UFG::qSymbol *name, boo
       }
       else
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0xAFB8D3F2:
             return 11i64;
@@ -491,11 +491,11 @@ signed __int64 __fastcall UFG::GameStat::GetBoolStatEnum(UFG::qSymbol *name, boo
     }
     else
     {
-      if ( v2 == -1672064308 )
+      if ( mUID == -1672064308 )
         return 47i64;
-      if ( v2 > 0x90E9D237 )
+      if ( mUID > 0x90E9D237 )
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0x92F53DB9:
             return 29i64;
@@ -507,7 +507,7 @@ signed __int64 __fastcall UFG::GameStat::GetBoolStatEnum(UFG::qSymbol *name, boo
       }
       else
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0x90E9D237:
             return 39i64;
@@ -522,13 +522,13 @@ signed __int64 __fastcall UFG::GameStat::GetBoolStatEnum(UFG::qSymbol *name, boo
     }
     return 58i64;
   }
-  if ( v2 <= 0xE5579D7A )
+  if ( mUID <= 0xE5579D7A )
   {
-    if ( v2 == -447242886 )
+    if ( mUID == -447242886 )
       return 38i64;
-    if ( v2 > 0xD3EE2B3D )
+    if ( mUID > 0xD3EE2B3D )
     {
-      switch ( v2 )
+      switch ( mUID )
       {
         case 0xD5A202ED:
           return 15i64;
@@ -540,7 +540,7 @@ signed __int64 __fastcall UFG::GameStat::GetBoolStatEnum(UFG::qSymbol *name, boo
     }
     else
     {
-      switch ( v2 )
+      switch ( mUID )
       {
         case 0xD3EE2B3D:
           return 25i64;
@@ -554,9 +554,9 @@ signed __int64 __fastcall UFG::GameStat::GetBoolStatEnum(UFG::qSymbol *name, boo
     }
     return 58i64;
   }
-  if ( v2 <= 0xF8F6A97F )
+  if ( mUID <= 0xF8F6A97F )
   {
-    switch ( v2 )
+    switch ( mUID )
     {
       case 0xF8F6A97F:
         return 8i64;
@@ -569,33 +569,33 @@ signed __int64 __fastcall UFG::GameStat::GetBoolStatEnum(UFG::qSymbol *name, boo
     }
     return 58i64;
   }
-  if ( v2 == -115980979 )
+  if ( mUID == -115980979 )
     return 7i64;
-  if ( v2 != -53093155 )
+  if ( mUID != -53093155 )
     return 58i64;
   return 2i64;
 }
 
 // File Line: 224
 // RVA: 0x4A3860
-signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bool warnIfNotFound)
+__int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bool warnIfNotFound)
 {
-  unsigned int v2; // eax
+  unsigned int mUID; // eax
 
-  v2 = name->mUID;
+  mUID = name->mUID;
   if ( name->mUID <= 0x7EDEEB53 )
   {
-    if ( v2 == 2128538451 )
+    if ( mUID == 2128538451 )
       return 17i64;
-    if ( v2 > 0x4CC8731D )
+    if ( mUID > 0x4CC8731D )
     {
-      if ( v2 > 0x6942DC10 )
+      if ( mUID > 0x6942DC10 )
       {
-        if ( v2 > 0x74BDCF78 )
+        if ( mUID > 0x74BDCF78 )
         {
-          if ( v2 > 0x77703E44 )
+          if ( mUID > 0x77703E44 )
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x77C07232u:
                 return 100i64;
@@ -607,7 +607,7 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
           }
           else
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x77703E44u:
                 return 28i64;
@@ -624,11 +624,11 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
         }
         else
         {
-          if ( v2 == 1958596472 )
+          if ( mUID == 1958596472 )
             return 116i64;
-          if ( v2 > 0x6D8B3CFD )
+          if ( mUID > 0x6D8B3CFD )
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x71718F57u:
                 return 158i64;
@@ -642,7 +642,7 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
           }
           else
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x6D8B3CFDu:
                 return 91i64;
@@ -660,13 +660,13 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
       }
       else
       {
-        if ( v2 == 1765989392 )
+        if ( mUID == 1765989392 )
           return 157i64;
-        if ( v2 > 0x5A3E7FA5 )
+        if ( mUID > 0x5A3E7FA5 )
         {
-          if ( v2 > 0x5DCC417E )
+          if ( mUID > 0x5DCC417E )
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x60E01E55u:
                 return 13i64;
@@ -678,7 +678,7 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
           }
           else
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x5DCC417Eu:
                 return 36i64;
@@ -695,11 +695,11 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
         }
         else
         {
-          if ( v2 == 1514045349 )
+          if ( mUID == 1514045349 )
             return 32i64;
-          if ( v2 > 0x58437E48 )
+          if ( mUID > 0x58437E48 )
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x593A9A60u:
                 return 38i64;
@@ -713,7 +713,7 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
           }
           else
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x58437E48u:
                 return 133i64;
@@ -732,15 +732,15 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
     }
     else
     {
-      if ( v2 == 1288205085 )
+      if ( mUID == 1288205085 )
         return 87i64;
-      if ( v2 > 0x21736AA7 )
+      if ( mUID > 0x21736AA7 )
       {
-        if ( v2 > 0x38083CDE )
+        if ( mUID > 0x38083CDE )
         {
-          if ( v2 > 0x4282CB98 )
+          if ( mUID > 0x4282CB98 )
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x437495C3u:
                 return 138i64;
@@ -752,7 +752,7 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
           }
           else
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x4282CB98u:
                 return 66i64;
@@ -769,11 +769,11 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
         }
         else
         {
-          if ( v2 == 940063966 )
+          if ( mUID == 940063966 )
             return 150i64;
-          if ( v2 > 0x29867C9E )
+          if ( mUID > 0x29867C9E )
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x2A465ED6u:
                 return 54i64;
@@ -787,7 +787,7 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
           }
           else
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x29867C9Eu:
                 return 83i64;
@@ -805,13 +805,13 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
       }
       else
       {
-        if ( v2 == 561212071 )
+        if ( mUID == 561212071 )
           return 118i64;
-        if ( v2 > 0x15ACD467 )
+        if ( mUID > 0x15ACD467 )
         {
-          if ( v2 > 0x1CF65432 )
+          if ( mUID > 0x1CF65432 )
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x1E3D2987u:
                 return 8i64;
@@ -823,7 +823,7 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
           }
           else
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x1CF65432u:
                 return 108i64;
@@ -840,11 +840,11 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
         }
         else
         {
-          if ( v2 == 363648103 )
+          if ( mUID == 363648103 )
             return 65i64;
-          if ( v2 > 0x6D4BBFB )
+          if ( mUID > 0x6D4BBFB )
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x7390557u:
                 return 39i64;
@@ -858,7 +858,7 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
           }
           else
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x6D4BBFBu:
                 return 59i64;
@@ -877,17 +877,17 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
     }
     return 163i64;
   }
-  if ( v2 <= 0xBEB86394 )
+  if ( mUID <= 0xBEB86394 )
   {
-    if ( v2 == -1095212140 )
+    if ( mUID == -1095212140 )
       return 2i64;
-    if ( v2 > 0xA2030C5F )
+    if ( mUID > 0xA2030C5F )
     {
-      if ( v2 > 0xB338FC5C )
+      if ( mUID > 0xB338FC5C )
       {
-        if ( v2 > 0xB723C6CA )
+        if ( mUID > 0xB723C6CA )
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0xB8DA6EDA:
               return 159i64;
@@ -901,7 +901,7 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
         }
         else
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0xB723C6CA:
               return 30i64;
@@ -920,11 +920,11 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
       }
       else
       {
-        if ( v2 == -1288111012 )
+        if ( mUID == -1288111012 )
           return 63i64;
-        if ( v2 > 0xAAF600A3 )
+        if ( mUID > 0xAAF600A3 )
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0xAE1B74B2:
               return 104i64;
@@ -938,7 +938,7 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
         }
         else
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0xAAF600A3:
               return 88i64;
@@ -958,13 +958,13 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
     }
     else
     {
-      if ( v2 == -1576858529 )
+      if ( mUID == -1576858529 )
         return 145i64;
-      if ( v2 > 0x96105A26 )
+      if ( mUID > 0x96105A26 )
       {
-        if ( v2 > 0x9D36B83F )
+        if ( mUID > 0x9D36B83F )
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0x9DA3E589:
               return 139i64;
@@ -978,7 +978,7 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
         }
         else
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0x9D36B83F:
               return 37i64;
@@ -997,11 +997,11 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
       }
       else
       {
-        if ( v2 == -1777313242 )
+        if ( mUID == -1777313242 )
           return 75i64;
-        if ( v2 > 0x8EF6865C )
+        if ( mUID > 0x8EF6865C )
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0x91C55811:
               return 106i64;
@@ -1015,7 +1015,7 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
         }
         else
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0x8EF6865C:
               return 34i64;
@@ -1035,15 +1035,15 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
     }
     return 163i64;
   }
-  if ( v2 <= 0xE4B4363F )
+  if ( mUID <= 0xE4B4363F )
   {
-    if ( v2 == -457951681 )
+    if ( mUID == -457951681 )
       return 82i64;
-    if ( v2 > 0xCC1B362B )
+    if ( mUID > 0xCC1B362B )
     {
-      if ( v2 > 0xD9720C2E )
+      if ( mUID > 0xD9720C2E )
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0xDC4EE01A:
             return 55i64;
@@ -1057,7 +1057,7 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
       }
       else
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0xD9720C2E:
             return 24i64;
@@ -1076,11 +1076,11 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
     }
     else
     {
-      if ( v2 == -870631893 )
+      if ( mUID == -870631893 )
         return 123i64;
-      if ( v2 > 0xC4D582F2 )
+      if ( mUID > 0xC4D582F2 )
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0xC5C5F916:
             return 3i64;
@@ -1094,7 +1094,7 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
       }
       else
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0xC4D582F2:
             return 62i64;
@@ -1113,13 +1113,13 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
     }
     return 163i64;
   }
-  if ( v2 <= 0xF41648AB )
+  if ( mUID <= 0xF41648AB )
   {
-    if ( v2 == -199866197 )
+    if ( mUID == -199866197 )
       return 81i64;
-    if ( v2 > 0xEC9632DC )
+    if ( mUID > 0xEC9632DC )
     {
-      switch ( v2 )
+      switch ( mUID )
       {
         case 0xECCF0E38:
           return 94i64;
@@ -1133,7 +1133,7 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
     }
     else
     {
-      switch ( v2 )
+      switch ( mUID )
       {
         case 0xEC9632DC:
           return 18i64;
@@ -1151,9 +1151,9 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
     }
     return 163i64;
   }
-  if ( v2 <= 0xFB436A5A )
+  if ( mUID <= 0xFB436A5A )
   {
-    switch ( v2 )
+    switch ( mUID )
     {
       case 0xFB436A5A:
         return 11i64;
@@ -1170,7 +1170,7 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
     }
     return 163i64;
   }
-  switch ( v2 )
+  switch ( mUID )
   {
     case 0xFB8491DB:
       return 103i64;
@@ -1179,31 +1179,31 @@ signed __int64 __fastcall UFG::GameStat::GetInt32StatEnum(UFG::qSymbol *name, bo
     case 0xFEAB70F4:
       return 50i64;
   }
-  if ( v2 != -10053847 )
+  if ( mUID != -10053847 )
     return 163i64;
   return 76i64;
 }
 
 // File Line: 252
 // RVA: 0x4A2A30
-signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bool warnIfNotFound)
+__int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bool warnIfNotFound)
 {
-  unsigned int v2; // eax
+  unsigned int mUID; // eax
 
-  v2 = name->mUID;
+  mUID = name->mUID;
   if ( name->mUID <= 0x7CF7C89C )
   {
-    if ( v2 == 2096613532 )
+    if ( mUID == 2096613532 )
       return 110i64;
-    if ( v2 > 0x44D0B5FA )
+    if ( mUID > 0x44D0B5FA )
     {
-      if ( v2 > 0x64AEAF2C )
+      if ( mUID > 0x64AEAF2C )
       {
-        if ( v2 > 0x6ADB650F )
+        if ( mUID > 0x6ADB650F )
         {
-          if ( v2 > 0x6E1A78B8 )
+          if ( mUID > 0x6E1A78B8 )
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x6E35429Bu:
                 return 25i64;
@@ -1215,7 +1215,7 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
           }
           else
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x6E1A78B8u:
                 return 19i64;
@@ -1230,11 +1230,11 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
         }
         else
         {
-          if ( v2 == 1792763151 )
+          if ( mUID == 1792763151 )
             return 18i64;
-          if ( v2 > 0x67B779F5 )
+          if ( mUID > 0x67B779F5 )
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x699B9991u:
                 return 22i64;
@@ -1246,7 +1246,7 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
           }
           else
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x67B779F5u:
                 return 23i64;
@@ -1262,13 +1262,13 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
       }
       else
       {
-        if ( v2 == 1689169708 )
+        if ( mUID == 1689169708 )
           return 8i64;
-        if ( v2 > 0x5734552A )
+        if ( mUID > 0x5734552A )
         {
-          if ( v2 > 0x60724D04 )
+          if ( mUID > 0x60724D04 )
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x62A9F085u:
                 return 33i64;
@@ -1280,7 +1280,7 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
           }
           else
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x60724D04u:
                 return 51i64;
@@ -1295,11 +1295,11 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
         }
         else
         {
-          if ( v2 == 1463047466 )
+          if ( mUID == 1463047466 )
             return 42i64;
-          if ( v2 > 0x4BB83D07 )
+          if ( mUID > 0x4BB83D07 )
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x4E2E4E98u:
                 return 7i64;
@@ -1311,7 +1311,7 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
           }
           else
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x4BB83D07u:
                 return 10i64;
@@ -1330,15 +1330,15 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
     }
     else
     {
-      if ( v2 == 1154528762 )
+      if ( mUID == 1154528762 )
         return 137i64;
-      if ( v2 > 0x2E274CD7 )
+      if ( mUID > 0x2E274CD7 )
       {
-        if ( v2 > 0x3A4F25B8 )
+        if ( mUID > 0x3A4F25B8 )
         {
-          if ( v2 > 0x3EBC4E1B )
+          if ( mUID > 0x3EBC4E1B )
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x423A0669u:
                 return 12i64;
@@ -1350,7 +1350,7 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
           }
           else
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x3EBC4E1Bu:
                 return 67i64;
@@ -1365,11 +1365,11 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
         }
         else
         {
-          if ( v2 == 978265528 )
+          if ( mUID == 978265528 )
             return 29i64;
-          if ( v2 > 0x36FCD1D2 )
+          if ( mUID > 0x36FCD1D2 )
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x370C0361u:
                 return 28i64;
@@ -1381,7 +1381,7 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
           }
           else
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x36FCD1D2u:
                 return 120i64;
@@ -1397,13 +1397,13 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
       }
       else
       {
-        if ( v2 == 774327511 )
+        if ( mUID == 774327511 )
           return 35i64;
-        if ( v2 > 0x19D5CDE5 )
+        if ( mUID > 0x19D5CDE5 )
         {
-          if ( v2 > 0x21E7A173 )
+          if ( mUID > 0x21E7A173 )
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x2794EF40u:
                 return 89i64;
@@ -1415,7 +1415,7 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
           }
           else
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x21E7A173u:
                 return 113i64;
@@ -1430,11 +1430,11 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
         }
         else
         {
-          if ( v2 == 433442277 )
+          if ( mUID == 433442277 )
             return 63i64;
-          if ( v2 > 0x1022948B )
+          if ( mUID > 0x1022948B )
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x11CF5675u:
                 return 21i64;
@@ -1446,7 +1446,7 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
           }
           else
           {
-            switch ( v2 )
+            switch ( mUID )
             {
               case 0x1022948Bu:
                 return 102i64;
@@ -1465,17 +1465,17 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
     }
     return 139i64;
   }
-  if ( v2 <= 0xC04D3273 )
+  if ( mUID <= 0xC04D3273 )
   {
-    if ( v2 == -1068682637 )
+    if ( mUID == -1068682637 )
       return 58i64;
-    if ( v2 > 0x9EDC4646 )
+    if ( mUID > 0x9EDC4646 )
     {
-      if ( v2 > 0xAF5330D0 )
+      if ( mUID > 0xAF5330D0 )
       {
-        if ( v2 > 0xB8BDA89D )
+        if ( mUID > 0xB8BDA89D )
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0xBBA48FAF:
               return 129i64;
@@ -1487,7 +1487,7 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
         }
         else
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0xB8BDA89D:
               return 135i64;
@@ -1504,11 +1504,11 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
       }
       else
       {
-        if ( v2 == -1353502512 )
+        if ( mUID == -1353502512 )
           return 133i64;
-        if ( v2 > 0xA760CF19 )
+        if ( mUID > 0xA760CF19 )
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0xA81937E3:
               return 122i64;
@@ -1520,7 +1520,7 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
         }
         else
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0xA760CF19:
               return 115i64;
@@ -1538,13 +1538,13 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
     }
     else
     {
-      if ( v2 == -1629731258 )
+      if ( mUID == -1629731258 )
         return 88i64;
-      if ( v2 > 0x8E580C5F )
+      if ( mUID > 0x8E580C5F )
       {
-        if ( v2 > 0x97B8D543 )
+        if ( mUID > 0x97B8D543 )
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0x997644C6:
               return 100i64;
@@ -1556,7 +1556,7 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
         }
         else
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0x97B8D543:
               return 38i64;
@@ -1573,11 +1573,11 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
       }
       else
       {
-        if ( v2 == -1906832289 )
+        if ( mUID == -1906832289 )
           return 84i64;
-        if ( v2 > 0x87E96C6E )
+        if ( mUID > 0x87E96C6E )
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0x89761C60:
               return 131i64;
@@ -1591,7 +1591,7 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
         }
         else
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0x87E96C6E:
               return 74i64;
@@ -1609,15 +1609,15 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
     }
     return 139i64;
   }
-  if ( v2 <= 0xD87294B5 )
+  if ( mUID <= 0xD87294B5 )
   {
-    if ( v2 == -663579467 )
+    if ( mUID == -663579467 )
       return 77i64;
-    if ( v2 > 0xCD140126 )
+    if ( mUID > 0xCD140126 )
     {
-      if ( v2 > 0xD21429D3 )
+      if ( mUID > 0xD21429D3 )
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0xD5A3C5AA:
             return 4i64;
@@ -1629,7 +1629,7 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
       }
       else
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0xD21429D3:
             return 70i64;
@@ -1646,11 +1646,11 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
     }
     else
     {
-      if ( v2 == -854327002 )
+      if ( mUID == -854327002 )
         return 79i64;
-      if ( v2 > 0xC4963A48 )
+      if ( mUID > 0xC4963A48 )
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0xC60796CD:
             return 1i64;
@@ -1664,7 +1664,7 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
       }
       else
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0xC4963A48:
             return 81i64;
@@ -1681,13 +1681,13 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
     }
     return 139i64;
   }
-  if ( v2 <= 0xE8833595 )
+  if ( mUID <= 0xE8833595 )
   {
-    if ( v2 == -394054251 )
+    if ( mUID == -394054251 )
       return 9i64;
-    if ( v2 > 0xE251143A )
+    if ( mUID > 0xE251143A )
     {
-      switch ( v2 )
+      switch ( mUID )
       {
         case 0xE2E3A218:
           return 112i64;
@@ -1699,7 +1699,7 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
     }
     else
     {
-      switch ( v2 )
+      switch ( mUID )
       {
         case 0xE251143A:
           return 3i64;
@@ -1715,9 +1715,9 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
     }
     return 139i64;
   }
-  if ( v2 <= 0xF8E1F4C6 )
+  if ( mUID <= 0xF8E1F4C6 )
   {
-    switch ( v2 )
+    switch ( mUID )
     {
       case 0xF8E1F4C6:
         return 2i64;
@@ -1732,40 +1732,32 @@ signed __int64 __fastcall UFG::GameStat::GetFloatStatEnum(UFG::qSymbol *name, bo
     }
     return 139i64;
   }
-  if ( v2 == -115593349 )
+  if ( mUID == -115593349 )
     return 15i64;
-  if ( v2 == -55827904 )
+  if ( mUID == -55827904 )
     return 86i64;
-  if ( v2 != -35835188 )
+  if ( mUID != -35835188 )
     return 139i64;
   return 16i64;
-}130:
-          return 59i64;
+}      return 59i64;
       }
     }
     return 139i64;
   }
-  if ( v2 <= 0xF8E1F4C6 )
+  if ( mUID <= 0xF8E1F4C6 )
   {
-    switch ( v2 )
-    {
-      case 0xF8E1F4C6:
-        return 2i64;
-      case 0xEC28560D:
-        return 138i64;
-      case 0xF120FC1A:
-        
+    s
 
 // File Line: 266
 // RVA: 0x4A37F0
-signed __int64 __fastcall UFG::GameStat::GetInt32RangedStatEnum(UFG::qSymbol *name, bool warnIfNotFound)
+__int64 __fastcall UFG::GameStat::GetInt32RangedStatEnum(UFG::qSymbol *name, bool warnIfNotFound)
 {
-  unsigned int v2; // eax
+  unsigned int mUID; // eax
 
-  v2 = name->mUID;
+  mUID = name->mUID;
   if ( name->mUID <= 0x6B369BA6 )
   {
-    switch ( v2 )
+    switch ( mUID )
     {
       case 0x6B369BA6u:
         return 5i64;
@@ -1778,11 +1770,11 @@ signed __int64 __fastcall UFG::GameStat::GetInt32RangedStatEnum(UFG::qSymbol *na
     }
     return 7i64;
   }
-  if ( v2 == 1855574845 )
+  if ( mUID == 1855574845 )
     return 4i64;
-  if ( v2 == -1954782142 )
+  if ( mUID == -1954782142 )
     return 1i64;
-  if ( v2 != -1255360625 )
+  if ( mUID != -1255360625 )
     return 7i64;
   return 3i64;
 }
@@ -1796,18 +1788,18 @@ _BOOL8 __fastcall UFG::GameStat::GetFloatRangedStatEnum(UFG::qSymbol *name, bool
 
 // File Line: 294
 // RVA: 0x4A6AB0
-signed __int64 __fastcall UFG::GameStat::GetStringStatEnum(UFG::qSymbol *name, bool warnIfNotFound)
+__int64 __fastcall UFG::GameStat::GetStringStatEnum(UFG::qSymbol *name, bool warnIfNotFound)
 {
-  unsigned int v2; // eax
+  unsigned int mUID; // eax
 
-  v2 = name->mUID;
+  mUID = name->mUID;
   if ( name->mUID <= 0x697CF8E1 )
   {
-    if ( v2 == 1769797857 )
+    if ( mUID == 1769797857 )
       return 2i64;
-    if ( v2 > 0x36810BF3 )
+    if ( mUID > 0x36810BF3 )
     {
-      switch ( v2 )
+      switch ( mUID )
       {
         case 0x4C19F50Fu:
           return 8i64;
@@ -1819,7 +1811,7 @@ signed __int64 __fastcall UFG::GameStat::GetStringStatEnum(UFG::qSymbol *name, b
     }
     else
     {
-      switch ( v2 )
+      switch ( mUID )
       {
         case 0x36810BF3u:
           return 23i64;
@@ -1835,13 +1827,13 @@ signed __int64 __fastcall UFG::GameStat::GetStringStatEnum(UFG::qSymbol *name, b
     }
     return 25i64;
   }
-  if ( v2 <= 0xD3AF4B4F )
+  if ( mUID <= 0xD3AF4B4F )
   {
-    if ( v2 == -743486641 )
+    if ( mUID == -743486641 )
       return 15i64;
-    if ( v2 > 0xABBAF1FE )
+    if ( mUID > 0xABBAF1FE )
     {
-      switch ( v2 )
+      switch ( mUID )
       {
         case 0xBC755C0E:
           return 14i64;
@@ -1853,7 +1845,7 @@ signed __int64 __fastcall UFG::GameStat::GetStringStatEnum(UFG::qSymbol *name, b
     }
     else
     {
-      switch ( v2 )
+      switch ( mUID )
       {
         case 0xABBAF1FE:
           return 18i64;
@@ -1869,9 +1861,9 @@ signed __int64 __fastcall UFG::GameStat::GetStringStatEnum(UFG::qSymbol *name, b
     }
     return 25i64;
   }
-  if ( v2 <= 0xE9FEE60B )
+  if ( mUID <= 0xE9FEE60B )
   {
-    switch ( v2 )
+    switch ( mUID )
     {
       case 0xE9FEE60B:
         return 4i64;
@@ -1884,33 +1876,33 @@ signed __int64 __fastcall UFG::GameStat::GetStringStatEnum(UFG::qSymbol *name, b
     }
     return 25i64;
   }
-  if ( v2 == -314573892 )
+  if ( mUID == -314573892 )
     return 3i64;
-  if ( v2 == -218355561 )
+  if ( mUID == -218355561 )
     return 17i64;
-  if ( v2 != -77989936 )
+  if ( mUID != -77989936 )
     return 25i64;
   return 10i64;
 }
 
 // File Line: 322
 // RVA: 0x4A47C0
-signed __int64 __fastcall UFG::GameStat::GetMapBoolStatEnum(UFG::qSymbol *name, bool warnIfNotFound)
+__int64 __fastcall UFG::GameStat::GetMapBoolStatEnum(UFG::qSymbol *name, bool warnIfNotFound)
 {
-  unsigned int v2; // eax
+  unsigned int mUID; // eax
 
-  v2 = name->mUID;
+  mUID = name->mUID;
   if ( name->mUID <= 0x7C910D9E )
   {
-    if ( v2 == 2089880990 )
+    if ( mUID == 2089880990 )
       return 28i64;
-    if ( v2 > 0x3CD97790 )
+    if ( mUID > 0x3CD97790 )
     {
-      if ( v2 > 0x542C0CAD )
+      if ( mUID > 0x542C0CAD )
       {
-        if ( v2 > 0x6DD37AD5 )
+        if ( mUID > 0x6DD37AD5 )
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0x70238BEAu:
               return 18i64;
@@ -1924,7 +1916,7 @@ signed __int64 __fastcall UFG::GameStat::GetMapBoolStatEnum(UFG::qSymbol *name, 
         }
         else
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0x6DD37AD5u:
               return 10i64;
@@ -1941,11 +1933,11 @@ signed __int64 __fastcall UFG::GameStat::GetMapBoolStatEnum(UFG::qSymbol *name, 
       }
       else
       {
-        if ( v2 == 1412172973 )
+        if ( mUID == 1412172973 )
           return 53i64;
-        if ( v2 > 0x4A2575D3 )
+        if ( mUID > 0x4A2575D3 )
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0x4A846F2Fu:
               return 7i64;
@@ -1959,7 +1951,7 @@ signed __int64 __fastcall UFG::GameStat::GetMapBoolStatEnum(UFG::qSymbol *name, 
         }
         else
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0x4A2575D3u:
               return 63i64;
@@ -1979,13 +1971,13 @@ signed __int64 __fastcall UFG::GameStat::GetMapBoolStatEnum(UFG::qSymbol *name, 
     }
     else
     {
-      if ( v2 == 1020884880 )
+      if ( mUID == 1020884880 )
         return 26i64;
-      if ( v2 > 0x24725572 )
+      if ( mUID > 0x24725572 )
       {
-        if ( v2 > 0x35C325A2 )
+        if ( mUID > 0x35C325A2 )
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0x361F67F0u:
               return 66i64;
@@ -1999,7 +1991,7 @@ signed __int64 __fastcall UFG::GameStat::GetMapBoolStatEnum(UFG::qSymbol *name, 
         }
         else
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0x35C325A2u:
               return 47i64;
@@ -2018,11 +2010,11 @@ signed __int64 __fastcall UFG::GameStat::GetMapBoolStatEnum(UFG::qSymbol *name, 
       }
       else
       {
-        if ( v2 == 611472754 )
+        if ( mUID == 611472754 )
           return 62i64;
-        if ( v2 > 0x8C19049 )
+        if ( mUID > 0x8C19049 )
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0x117BD5C3u:
               return 30i64;
@@ -2036,7 +2028,7 @@ signed __int64 __fastcall UFG::GameStat::GetMapBoolStatEnum(UFG::qSymbol *name, 
         }
         else
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0x8C19049u:
               return 17i64;
@@ -2056,15 +2048,15 @@ signed __int64 __fastcall UFG::GameStat::GetMapBoolStatEnum(UFG::qSymbol *name, 
     }
     return 93i64;
   }
-  if ( v2 <= 0xCDBC4485 )
+  if ( mUID <= 0xCDBC4485 )
   {
-    if ( v2 == -843299707 )
+    if ( mUID == -843299707 )
       return 54i64;
-    if ( v2 > 0xA8DBC3C3 )
+    if ( mUID > 0xA8DBC3C3 )
     {
-      if ( v2 > 0xB8E0E139 )
+      if ( mUID > 0xB8E0E139 )
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0xC1A133C2:
             return 67i64;
@@ -2080,18 +2072,18 @@ signed __int64 __fastcall UFG::GameStat::GetMapBoolStatEnum(UFG::qSymbol *name, 
       }
       else
       {
-        if ( v2 == -1193221831 )
+        if ( mUID == -1193221831 )
           return 25i64;
-        if ( v2 > 0xB3E1E3C9 )
+        if ( mUID > 0xB3E1E3C9 )
         {
-          if ( v2 == -1223333173 )
+          if ( mUID == -1223333173 )
             return 84i64;
-          if ( v2 == -1203949030 )
+          if ( mUID == -1203949030 )
             return 5i64;
         }
         else
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0xB3E1E3C9:
               return 58i64;
@@ -2107,11 +2099,11 @@ signed __int64 __fastcall UFG::GameStat::GetMapBoolStatEnum(UFG::qSymbol *name, 
     }
     else
     {
-      if ( v2 == -1461992509 )
+      if ( mUID == -1461992509 )
         return 9i64;
-      if ( v2 > 0x9542436A )
+      if ( mUID > 0x9542436A )
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0x96F94396:
             return 89i64;
@@ -2127,18 +2119,18 @@ signed __int64 __fastcall UFG::GameStat::GetMapBoolStatEnum(UFG::qSymbol *name, 
       }
       else
       {
-        if ( v2 == -1790819478 )
+        if ( mUID == -1790819478 )
           return 29i64;
-        if ( v2 > 0x8E3D9278 )
+        if ( mUID > 0x8E3D9278 )
         {
-          if ( v2 == -1868564411 )
+          if ( mUID == -1868564411 )
             return 20i64;
-          if ( v2 == -1849709840 )
+          if ( mUID == -1849709840 )
             return 2i64;
         }
         else
         {
-          switch ( v2 )
+          switch ( mUID )
           {
             case 0x8E3D9278:
               return 4i64;
@@ -2154,13 +2146,13 @@ signed __int64 __fastcall UFG::GameStat::GetMapBoolStatEnum(UFG::qSymbol *name, 
     }
     return 93i64;
   }
-  if ( v2 <= 0xE7DAE47E )
+  if ( mUID <= 0xE7DAE47E )
   {
-    if ( v2 == -405085058 )
+    if ( mUID == -405085058 )
       return 37i64;
-    if ( v2 > 0xD2F71181 )
+    if ( mUID > 0xD2F71181 )
     {
-      switch ( v2 )
+      switch ( mUID )
       {
         case 0xD61762AD:
           return 42i64;
@@ -2176,18 +2168,18 @@ signed __int64 __fastcall UFG::GameStat::GetMapBoolStatEnum(UFG::qSymbol *name, 
     }
     else
     {
-      if ( v2 == -755560063 )
+      if ( mUID == -755560063 )
         return 56i64;
-      if ( v2 > 0xD15D2F54 )
+      if ( mUID > 0xD15D2F54 )
       {
-        if ( v2 == -774204015 )
+        if ( mUID == -774204015 )
           return 75i64;
-        if ( v2 == -757694694 )
+        if ( mUID == -757694694 )
           return 41i64;
       }
       else
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0xD15D2F54:
             return 14i64;
@@ -2202,9 +2194,9 @@ signed __int64 __fastcall UFG::GameStat::GetMapBoolStatEnum(UFG::qSymbol *name, 
     }
     return 93i64;
   }
-  if ( v2 <= 0xF0E668E7 )
+  if ( mUID <= 0xF0E668E7 )
   {
-    switch ( v2 )
+    switch ( mUID )
     {
       case 0xF0E668E7:
         return 78i64;
@@ -2221,7 +2213,7 @@ signed __int64 __fastcall UFG::GameStat::GetMapBoolStatEnum(UFG::qSymbol *name, 
     }
     return 93i64;
   }
-  switch ( v2 )
+  switch ( mUID )
   {
     case 0xF83ECD6B:
       return 60i64;
@@ -2232,27 +2224,27 @@ signed __int64 __fastcall UFG::GameStat::GetMapBoolStatEnum(UFG::qSymbol *name, 
     case 0xFD5CA9CC:
       return 35i64;
   }
-  if ( v2 != -8301145 )
+  if ( mUID != -8301145 )
     return 93i64;
   return 22i64;
 }
 
 // File Line: 336
 // RVA: 0x4A4E40
-signed __int64 __fastcall UFG::GameStat::GetMapInt32StatEnum(UFG::qSymbol *name, bool warnIfNotFound)
+__int64 __fastcall UFG::GameStat::GetMapInt32StatEnum(UFG::qSymbol *name, bool warnIfNotFound)
 {
-  unsigned int v2; // eax
+  unsigned int mUID; // eax
 
-  v2 = name->mUID;
+  mUID = name->mUID;
   if ( name->mUID <= 0x7DC907CE )
   {
-    if ( v2 == 2110326734 )
+    if ( mUID == 2110326734 )
       return 20i64;
-    if ( v2 > 0x249E325F )
+    if ( mUID > 0x249E325F )
     {
-      if ( v2 > 0x5A15AD4E )
+      if ( mUID > 0x5A15AD4E )
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0x65EA5F2Bu:
             return 22i64;
@@ -2264,7 +2256,7 @@ signed __int64 __fastcall UFG::GameStat::GetMapInt32StatEnum(UFG::qSymbol *name,
       }
       else
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0x5A15AD4Eu:
             return 14i64;
@@ -2281,11 +2273,11 @@ signed __int64 __fastcall UFG::GameStat::GetMapInt32StatEnum(UFG::qSymbol *name,
     }
     else
     {
-      if ( v2 == 614347359 )
+      if ( mUID == 614347359 )
         return 8i64;
-      if ( v2 > 0xAF0751D )
+      if ( mUID > 0xAF0751D )
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0x1BB8FA05u:
             return 23i64;
@@ -2297,7 +2289,7 @@ signed __int64 __fastcall UFG::GameStat::GetMapInt32StatEnum(UFG::qSymbol *name,
       }
       else
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0xAF0751Du:
             return 36i64;
@@ -2314,22 +2306,22 @@ signed __int64 __fastcall UFG::GameStat::GetMapInt32StatEnum(UFG::qSymbol *name,
     }
     return 47i64;
   }
-  if ( v2 <= 0xC1271821 )
+  if ( mUID <= 0xC1271821 )
   {
-    if ( v2 == -1054402527 )
+    if ( mUID == -1054402527 )
       return 26i64;
-    if ( v2 > 0x9F328BA9 )
+    if ( mUID > 0x9F328BA9 )
     {
-      if ( v2 > 0xB54277B1 )
+      if ( mUID > 0xB54277B1 )
       {
-        if ( v2 == -1205681139 )
+        if ( mUID == -1205681139 )
           return 13i64;
-        if ( v2 == -1056663930 )
+        if ( mUID == -1056663930 )
           return 43i64;
       }
       else
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0xB54277B1:
             return 34i64;
@@ -2344,11 +2336,11 @@ signed __int64 __fastcall UFG::GameStat::GetMapInt32StatEnum(UFG::qSymbol *name,
     }
     else
     {
-      if ( v2 == -1624077399 )
+      if ( mUID == -1624077399 )
         return 41i64;
-      if ( v2 > 0x96B0B0C7 )
+      if ( mUID > 0x96B0B0C7 )
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0x9BF3961E:
             return 40i64;
@@ -2360,7 +2352,7 @@ signed __int64 __fastcall UFG::GameStat::GetMapInt32StatEnum(UFG::qSymbol *name,
       }
       else
       {
-        switch ( v2 )
+        switch ( mUID )
         {
           case 0x96B0B0C7:
             return 39i64;
@@ -2375,13 +2367,13 @@ signed __int64 __fastcall UFG::GameStat::GetMapInt32StatEnum(UFG::qSymbol *name,
     }
     return 47i64;
   }
-  if ( v2 <= 0xD6C1FDED )
+  if ( mUID <= 0xD6C1FDED )
   {
-    if ( v2 == -691929619 )
+    if ( mUID == -691929619 )
       return 46i64;
-    if ( v2 > 0xC886ADE8 )
+    if ( mUID > 0xC886ADE8 )
     {
-      switch ( v2 )
+      switch ( mUID )
       {
         case 0xCA08E718:
           return 30i64;
@@ -2393,7 +2385,7 @@ signed __int64 __fastcall UFG::GameStat::GetMapInt32StatEnum(UFG::qSymbol *name,
     }
     else
     {
-      switch ( v2 )
+      switch ( mUID )
       {
         case 0xC886ADE8:
           return 45i64;
@@ -2407,9 +2399,9 @@ signed __int64 __fastcall UFG::GameStat::GetMapInt32StatEnum(UFG::qSymbol *name,
     }
     return 47i64;
   }
-  if ( v2 <= 0xDEA94502 )
+  if ( mUID <= 0xDEA94502 )
   {
-    switch ( v2 )
+    switch ( mUID )
     {
       case 0xDEA94502:
         return 7i64;
@@ -2422,23 +2414,23 @@ signed __int64 __fastcall UFG::GameStat::GetMapInt32StatEnum(UFG::qSymbol *name,
     }
     return 47i64;
   }
-  if ( v2 == -190007928 )
+  if ( mUID == -190007928 )
     return 28i64;
-  if ( v2 != -3850668 )
+  if ( mUID != -3850668 )
     return 47i64;
   return 37i64;
 }
 
 // File Line: 364
 // RVA: 0x4A4D40
-signed __int64 __fastcall UFG::GameStat::GetMapFloatStatEnum(UFG::qSymbol *name, bool warnIfNotFound)
+__int64 __fastcall UFG::GameStat::GetMapFloatStatEnum(UFG::qSymbol *name, bool warnIfNotFound)
 {
-  unsigned int v2; // eax
+  unsigned int mUID; // eax
 
-  v2 = name->mUID;
+  mUID = name->mUID;
   if ( name->mUID <= 0x7AA891BD )
   {
-    switch ( v2 )
+    switch ( mUID )
     {
       case 0x7AA891BDu:
         return 1i64;
@@ -2453,20 +2445,20 @@ signed __int64 __fastcall UFG::GameStat::GetMapFloatStatEnum(UFG::qSymbol *name,
     }
     return 18i64;
   }
-  if ( v2 <= 0x9C78AFB8 )
+  if ( mUID <= 0x9C78AFB8 )
   {
-    if ( v2 == -1669812296 )
+    if ( mUID == -1669812296 )
       return 11i64;
-    if ( v2 > 0x913B8961 )
+    if ( mUID > 0x913B8961 )
     {
-      if ( v2 == -1732660721 )
+      if ( mUID == -1732660721 )
         return 12i64;
-      if ( v2 == -1682467663 )
+      if ( mUID == -1682467663 )
         return 9i64;
     }
     else
     {
-      switch ( v2 )
+      switch ( mUID )
       {
         case 0x913B8961:
           return 10i64;
@@ -2480,9 +2472,9 @@ signed __int64 __fastcall UFG::GameStat::GetMapFloatStatEnum(UFG::qSymbol *name,
     }
     return 18i64;
   }
-  if ( v2 <= 0xED63DE37 )
+  if ( mUID <= 0xED63DE37 )
   {
-    switch ( v2 )
+    switch ( mUID )
     {
       case 0xED63DE37:
         return 7i64;
@@ -2495,9 +2487,9 @@ signed __int64 __fastcall UFG::GameStat::GetMapFloatStatEnum(UFG::qSymbol *name,
     }
     return 18i64;
   }
-  if ( v2 == -195128372 )
+  if ( mUID == -195128372 )
     return 8i64;
-  if ( v2 != -137383293 )
+  if ( mUID != -137383293 )
     return 18i64;
   return 0i64;
 }

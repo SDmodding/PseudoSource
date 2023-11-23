@@ -2,23 +2,20 @@
 // RVA: 0x33B40
 void __fastcall UFG::RenderStageAO::Create(UFG::RenderContext *render_context)
 {
-  UFG::RenderContext *v1; // rbx
   UFG::RenderStageAO *v2; // rax
 
-  v1 = render_context;
   v2 = (UFG::RenderStageAO *)UFG::qMalloc(0x90ui64, "RenderStageAO", 0i64);
   if ( v2 )
-    UFG::RenderStageAO::RenderStageAO(v2, v1);
+    UFG::RenderStageAO::RenderStageAO(v2, render_context);
 }
 
 // File Line: 86
 // RVA: 0x33940
 void __fastcall UFG::RenderStageAO::RenderStageAO(UFG::RenderStageAO *this, UFG::RenderContext *render_context)
 {
-  UFG::RenderStageAO *v2; // rbx
-  UFG::qResourceHandle *v3; // r14
-  unsigned int v4; // er15
-  UFG::qResourceInventory *v5; // rax
+  Illusion::ShaderHandle *p_mAOCSShader; // r14
+  unsigned int v4; // r15d
+  UFG::qResourceInventory *Inventory; // rax
   UFG::qResourceWarehouse *v6; // rax
   unsigned int v7; // edi
   UFG::qResourceInventory *v8; // rax
@@ -29,29 +26,28 @@ void __fastcall UFG::RenderStageAO::RenderStageAO(UFG::RenderStageAO *this, UFG:
   unsigned int v13; // edi
   UFG::qResourceInventory *v14; // rax
   UFG::qResourceWarehouse *v15; // rax
-  Render::RenderOutputParams outSettings; // [rsp+30h] [rbp-98h]
+  Render::RenderOutputParams outSettings; // [rsp+30h] [rbp-98h] BYREF
 
-  v2 = this;
-  v3 = (UFG::qResourceHandle *)&this->mAOCSShader.mPrev;
-  UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&this->mAOCSShader.mPrev);
-  UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v2->mHalfResAOCSShader.mPrev);
-  UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v2->mBilateralXCSShader.mPrev);
-  UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v2->mBilateralYCSShader.mPrev);
-  *(_WORD *)&v2->mAOBlur = 257;
-  v2->mAOBilateralCS = 1;
+  p_mAOCSShader = &this->mAOCSShader;
+  UFG::qResourceHandle::qResourceHandle(&this->mAOCSShader);
+  UFG::qResourceHandle::qResourceHandle(&this->mHalfResAOCSShader);
+  UFG::qResourceHandle::qResourceHandle(&this->mBilateralXCSShader);
+  UFG::qResourceHandle::qResourceHandle(&this->mBilateralYCSShader);
+  *(_WORD *)&this->mAOBlur = 257;
+  this->mAOBilateralCS = 1;
   Render::RenderOutputParams::RenderOutputParams(&outSettings);
   Render::GetCurrentDisplaySettings(&outSettings);
-  if ( outSettings.mFeatureLevel == 2 )
+  if ( outSettings.mFeatureLevel == FEATURE_LEVEL_D3D11_0 )
   {
     v4 = UFG::qStringHash32("HK_AO_HD_CS_HALFRES", 0xFFFFFFFF);
-    v5 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
+    Inventory = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
     if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
     {
       v6 = UFG::qResourceWarehouse::Instance();
-      v5 = UFG::qResourceWarehouse::GetInventory(v6, 0x8B5561A1);
-      `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v5;
+      Inventory = UFG::qResourceWarehouse::GetInventory(v6, 0x8B5561A1);
+      `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = Inventory;
     }
-    UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v2->mHalfResAOCSShader.mPrev, 0x8B5561A1, v4, v5);
+    UFG::qResourceHandle::Init(&this->mHalfResAOCSShader, 0x8B5561A1, v4, Inventory);
     v7 = UFG::qStringHash32("HK_AO_HD_CS_FULLRES", 0xFFFFFFFF);
     v8 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
     if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
@@ -60,8 +56,8 @@ void __fastcall UFG::RenderStageAO::RenderStageAO(UFG::RenderStageAO *this, UFG:
       v8 = UFG::qResourceWarehouse::GetInventory(v9, 0x8B5561A1);
       `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v8;
     }
-    UFG::qResourceHandle::Init(v3, 0x8B5561A1, v7, v8);
-    v2->mAOCSUAVParamIndex = Illusion::StateSystem::GetParam(&Illusion::gStateSystem, "AO_Output");
+    UFG::qResourceHandle::Init(p_mAOCSShader, 0x8B5561A1, v7, v8);
+    this->mAOCSUAVParamIndex = Illusion::StateSystem::GetParam(&Illusion::gStateSystem, "AO_Output");
     v10 = UFG::qStringHash32("BILATERALBLURAMD_CS_X", 0xFFFFFFFF);
     v11 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
     if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
@@ -70,7 +66,7 @@ void __fastcall UFG::RenderStageAO::RenderStageAO(UFG::RenderStageAO *this, UFG:
       v11 = UFG::qResourceWarehouse::GetInventory(v12, 0x8B5561A1);
       `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v11;
     }
-    UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v2->mBilateralXCSShader.mPrev, 0x8B5561A1, v10, v11);
+    UFG::qResourceHandle::Init(&this->mBilateralXCSShader, 0x8B5561A1, v10, v11);
     v13 = UFG::qStringHash32("BILATERALBLURAMD_CS_Y", 0xFFFFFFFF);
     v14 = `UFG::qGetResourceInventory<Illusion::Shader>::`2::result;
     if ( !`UFG::qGetResourceInventory<Illusion::Shader>::`2::result )
@@ -79,108 +75,104 @@ void __fastcall UFG::RenderStageAO::RenderStageAO(UFG::RenderStageAO *this, UFG:
       v14 = UFG::qResourceWarehouse::GetInventory(v15, 0x8B5561A1);
       `UFG::qGetResourceInventory<Illusion::Shader>::`2::result = v14;
     }
-    UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v2->mBilateralYCSShader.mPrev, 0x8B5561A1, v13, v14);
+    UFG::qResourceHandle::Init(&this->mBilateralYCSShader, 0x8B5561A1, v13, v14);
   }
 }
 
 // File Line: 133
 // RVA: 0x33B90
-UFG::qVector3 *__fastcall UFG::RenderStageAO::EvaluateSphericalHarmonic(UFG::qVector3 *result, UFG::qVector3 *normal, CB_SphericalHarmonic *sh)
+UFG::qVector3 *__fastcall UFG::RenderStageAO::EvaluateSphericalHarmonic(
+        UFG::qVector3 *result,
+        UFG::qVector3 *normal,
+        CB_SphericalHarmonic *sh)
 {
-  float v3; // xmm11_4
-  float v4; // xmm10_4
+  float x; // xmm11_4
+  float z; // xmm10_4
   float v5; // xmm8_4
-  float v6; // xmm13_4
+  float y; // xmm13_4
   float v7; // xmm6_4
-  float v8; // xmm12_4
-  float v9; // xmm5_4
-  float v10; // xmm0_4
-  float v11; // xmm2_4
-  float v12; // xmm9_4
-  float v13; // xmm3_4
-  float v14; // xmm4_4
-  float v15; // xmm12_4
-  UFG::qVector3 *v16; // rax
+  float v8; // xmm0_4
+  float v9; // xmm2_4
+  float v10; // xmm9_4
+  float v11; // xmm12_4
+  UFG::qVector3 *v12; // rax
 
-  v3 = normal->x;
-  v4 = normal->z;
-  v5 = normal->x * v4;
-  v6 = normal->y;
-  v7 = normal->x * v6;
-  v8 = normal->y * v6;
-  v9 = normal->y * v4;
-  v10 = (float)(v3 * v3) * sh->GreenIrradianceConst[0][0];
-  v11 = v5 * sh->GreenIrradianceConst[1][1];
-  v12 = (float)(v3 * v3) * sh->BlueIrradianceConst[0][0];
-  v13 = normal->y;
-  result->x = (float)((float)((float)((float)((float)(v8 * sh->RedIrradianceConst[0][1])
-                                            + (float)((float)(v3 * v3) * sh->RedIrradianceConst[0][0]))
-                                    + (float)((float)(v4 * v4) * sh->RedIrradianceConst[0][2]))
+  x = normal->x;
+  z = normal->z;
+  v5 = normal->x * z;
+  y = normal->y;
+  v7 = normal->x * y;
+  v8 = (float)(x * x) * sh->GreenIrradianceConst[0][0];
+  v9 = v5 * sh->GreenIrradianceConst[1][1];
+  v10 = (float)(x * x) * sh->BlueIrradianceConst[0][0];
+  result->x = (float)((float)((float)((float)((float)((float)(y * y) * sh->RedIrradianceConst[0][1])
+                                            + (float)((float)(normal->x * normal->x) * sh->RedIrradianceConst[0][0]))
+                                    + (float)((float)(z * z) * sh->RedIrradianceConst[0][2]))
                             + sh->IrradianceConst[0])
                     + (float)((float)((float)(v5 * sh->RedIrradianceConst[1][1])
                                     + (float)(v7 * sh->RedIrradianceConst[1][0]))
-                            + (float)(v9 * sh->RedIrradianceConst[1][2])))
-            + (float)((float)((float)(normal->y * sh->RedIrradianceConst[2][1])
+                            + (float)((float)(y * z) * sh->RedIrradianceConst[1][2])))
+            + (float)((float)((float)(y * sh->RedIrradianceConst[2][1])
                             + (float)(normal->x * sh->RedIrradianceConst[2][0]))
-                    + (float)(normal->z * sh->RedIrradianceConst[2][2]));
-  v14 = (float)(v8 * sh->GreenIrradianceConst[0][1]) + v10;
-  v15 = v8 * sh->BlueIrradianceConst[0][1];
-  result->y = (float)((float)((float)(v14 + (float)((float)(v4 * v4) * sh->GreenIrradianceConst[0][2]))
+                    + (float)(z * sh->RedIrradianceConst[2][2]));
+  v11 = (float)(y * y) * sh->BlueIrradianceConst[0][1];
+  result->y = (float)((float)((float)((float)((float)((float)(y * y) * sh->GreenIrradianceConst[0][1]) + v8)
+                                    + (float)((float)(z * z) * sh->GreenIrradianceConst[0][2]))
                             + sh->IrradianceConst[1])
-                    + (float)((float)(v11 + (float)(v7 * sh->GreenIrradianceConst[1][0]))
-                            + (float)(v9 * sh->GreenIrradianceConst[1][2])))
-            + (float)((float)((float)(v13 * sh->GreenIrradianceConst[2][1])
-                            + (float)(v3 * sh->GreenIrradianceConst[2][0]))
-                    + (float)(v4 * sh->GreenIrradianceConst[2][2]));
-  v16 = result;
-  result->z = (float)((float)((float)((float)(v15 + v12) + (float)((float)(v4 * v4) * sh->BlueIrradianceConst[0][2]))
+                    + (float)((float)(v9 + (float)(v7 * sh->GreenIrradianceConst[1][0]))
+                            + (float)((float)(y * z) * sh->GreenIrradianceConst[1][2])))
+            + (float)((float)((float)(y * sh->GreenIrradianceConst[2][1]) + (float)(x * sh->GreenIrradianceConst[2][0]))
+                    + (float)(z * sh->GreenIrradianceConst[2][2]));
+  v12 = result;
+  result->z = (float)((float)((float)((float)(v11 + v10) + (float)((float)(z * z) * sh->BlueIrradianceConst[0][2]))
                             + sh->IrradianceConst[2])
                     + (float)((float)((float)(v5 * sh->BlueIrradianceConst[1][1])
                                     + (float)(v7 * sh->BlueIrradianceConst[1][0]))
-                            + (float)(v9 * sh->BlueIrradianceConst[1][2])))
-            + (float)((float)((float)(v6 * sh->BlueIrradianceConst[2][1]) + (float)(v3 * sh->BlueIrradianceConst[2][0]))
-                    + (float)(v4 * sh->BlueIrradianceConst[2][2]));
-  return v16;
+                            + (float)((float)(y * z) * sh->BlueIrradianceConst[1][2])))
+            + (float)((float)((float)(y * sh->BlueIrradianceConst[2][1]) + (float)(x * sh->BlueIrradianceConst[2][0]))
+                    + (float)(z * sh->BlueIrradianceConst[2][2]));
+  return v12;
 }
 
 // File Line: 161
 // RVA: 0x33DC0
-void __fastcall UFG::GetSHFromCulledLights(UFG::qMatrix44 *local_world, Render::SphericalHarmonic *sh, const int max_lights, const float luminance_threshold, const float radius_boost)
+void __fastcall UFG::GetSHFromCulledLights(
+        UFG::qMatrix44 *local_world,
+        Render::SphericalHarmonic *sh,
+        const int max_lights,
+        float luminance_threshold,
+        float radius_boost)
 {
-  Render::SphericalHarmonic *v5; // r12
-  UFG::qVector3 *v6; // r13
+  UFG::qVector4 *v6; // r13
   unsigned int v7; // edi
-  int v8; // er14
   int v9; // ebx
   unsigned int v10; // ebp
-  unsigned int v11; // er15
+  unsigned int v11; // r15d
   __int64 v12; // rsi
-  UFG::qMatrix44 d; // [rsp+30h] [rbp-88h]
+  UFG::qMatrix44 d; // [rsp+30h] [rbp-88h] BYREF
 
-  v5 = sh;
-  v6 = (UFG::qVector3 *)&local_world->v3;
+  v6 = &local_world->v3;
   v7 = 0;
-  v8 = max_lights;
   v9 = 0;
   UFG::qInverseAffine(&d, local_world);
   v10 = 0;
   v11 = gNumNearLights + gNumStencilLights + gNumFarLights;
-  if ( gNumNearLights + gNumStencilLights + gNumFarLights )
+  if ( v11 )
   {
     v12 = 0i64;
     while ( 1 )
     {
-      if ( !(gCulledLights[v12].flags & 1) )
+      if ( (gCulledLights[v12].flags & 1) == 0 )
       {
         if ( Render::AddLightContributionToHarmonic(
-               v5,
+               sh,
                gLights[gCulledLights[v12].lightIndex],
-               v6,
+               (UFG::qVector3 *)v6,
                &d,
                luminance_threshold,
                radius_boost) )
         {
-          if ( ++v9 == v8 )
+          if ( ++v9 == max_lights )
             break;
         }
       }
@@ -193,19 +185,19 @@ void __fastcall UFG::GetSHFromCulledLights(UFG::qMatrix44 *local_world, Render::
   else
   {
 LABEL_7:
-    if ( gSpotShadowCount > 0 )
+    if ( gSpotShadowCount )
     {
       do
       {
         if ( Render::AddLightContributionToHarmonic(
-               v5,
+               sh,
                gLights[gCulledLights[gSpotShadowIndices[v7]].lightIndex],
-               v6,
+               (UFG::qVector3 *)v6,
                &d,
                luminance_threshold,
                radius_boost) )
         {
-          if ( ++v9 == v8 )
+          if ( ++v9 == max_lights )
             break;
         }
         ++v7;
@@ -217,149 +209,142 @@ LABEL_7:
 
 // File Line: 210
 // RVA: 0x33F10
-void __fastcall UFG::RenderStageAO::GetSignificantLightDirection(UFG::qMatrix44 *matLocalWorld, UFG::qMatrix44 *matLocalWorldInv, CB_EnvironmentSettings *envState, bool bUseDirectional, __int64 lightRadiusBoost)
+void __fastcall UFG::RenderStageAO::GetSignificantLightDirection(
+        UFG::qMatrix44 *matLocalWorld,
+        UFG::qMatrix44 *matLocalWorldInv,
+        CB_EnvironmentSettings *envState,
+        bool bUseDirectional,
+        __int64 lightRadiusBoost)
 {
-  UFG::qMatrix44 *v5; // r14
-  bool v6; // bl
-  CB_EnvironmentSettings *v7; // rsi
-  UFG::qMatrix44 *v8; // rdi
-  float v9; // xmm6_4
-  float v10; // xmm4_4
-  float v11; // xmm5_4
-  float v12; // xmm0_4
+  float v9; // xmm4_4
+  float v10; // xmm5_4
+  float v11; // xmm0_4
+  float v12; // xmm6_4
   float v13; // xmm3_4
-  float v14; // xmm6_4
-  float v15; // xmm3_4
-  float v16; // xmm2_4
-  float v17; // xmm0_4
-  float v18; // xmm4_4
-  float v19; // xmm2_4
-  float v20; // xmm6_4
-  float v21; // xmm1_4
+  float v14; // xmm2_4
+  float v15; // xmm0_4
+  float v16; // xmm4_4
+  float v17; // xmm2_4
+  float v18; // xmm6_4
+  float v19; // xmm1_4
+  float v20; // xmm3_4
+  __int128 v21; // xmm7
   float v22; // xmm3_4
-  __int128 v23; // xmm7
-  float v24; // xmm3_4
-  float v25; // xmm6_4
-  __m128 v26; // xmm2
-  float v27; // xmm1_4
-  float v28; // xmm6_4
-  float v29; // xmm9_4
-  UFG::qVector3 *v30; // rax
-  float v31; // xmm4_4
-  float v32; // xmm0_4
-  float v33; // xmm1_4
-  float v34; // xmm14_4
-  __m128 v35; // xmm2
-  float v36; // xmm3_4
-  UFG::qVector3 *v37; // rax
-  float v38; // xmm12_4
+  float v23; // xmm6_4
+  __m128 v24; // xmm2
+  float v25; // xmm1_4
+  float v26; // xmm6_4
+  float v27; // xmm9_4
+  UFG::qVector3 *v28; // rax
+  float v29; // xmm4_4
+  float y; // xmm0_4
+  float z; // xmm1_4
+  float x; // xmm14_4
+  __m128 v33; // xmm2
+  float v34; // xmm3_4
+  UFG::qVector3 *v35; // rax
+  float v36; // xmm12_4
+  float v37; // xmm11_4
+  float v38; // xmm13_4
   float v39; // xmm11_4
   float v40; // xmm13_4
-  float v41; // xmm11_4
-  float v42; // xmm13_4
-  float v43; // xmm12_4
-  float v44; // xmm14_4
-  int v45; // xmm14_4
-  float v46; // xmm3_4
-  __m128 v47; // xmm2
-  float v48; // xmm2_4
-  UFG::qVector3 *v49; // rax
-  __m128 v50; // xmm3
-  float v51; // xmm0_4
-  float v52; // xmm1_4
-  float v53; // xmm12_4
-  float v54; // xmm11_4
-  float v55; // xmm13_4
-  __m128 v56; // xmm2
-  float v57; // xmm2_4
-  UFG::qVector3 *v58; // rax
-  float v59; // xmm14_4
-  float v60; // xmm0_4
-  float v61; // xmm1_4
-  float v62; // xmm12_4
-  float v63; // xmm11_4
-  float v64; // xmm13_4
-  float v65; // xmm2_4
-  float v66; // xmm10_4
-  UFG::qVector3 *v67; // rax
-  float v68; // xmm0_4
-  float v69; // xmm1_4
-  float v70; // xmm12_4
-  float v71; // xmm11_4
-  float v72; // xmm13_4
-  float v73; // xmm2_4
-  float v74; // xmm3_4
-  float v75; // xmm1_4
-  float v76; // xmm7_4
-  float v77; // xmm2_4
-  float v78; // xmm6_4
-  float v79; // xmm1_4
-  UFG::qVector3 direction; // [rsp+30h] [rbp-B8h]
-  UFG::qColour colour; // [rsp+40h] [rbp-A8h]
-  Render::SphericalHarmonic sh; // [rsp+50h] [rbp-98h]
-  float irr_const; // [rsp+168h] [rbp+80h]
-  float v84; // [rsp+198h] [rbp+B0h]
-  float v85; // [rsp+278h] [rbp+190h]
+  float v41; // xmm12_4
+  float v42; // xmm14_4
+  int v43; // xmm14_4
+  float v44; // xmm3_4
+  __m128 v45; // xmm2
+  float v46; // xmm2_4
+  UFG::qVector3 *v47; // rax
+  __m128 v48; // xmm3
+  float v49; // xmm0_4
+  float v50; // xmm1_4
+  float v51; // xmm12_4
+  float v52; // xmm11_4
+  float v53; // xmm13_4
+  __m128 v54; // xmm2
+  float v55; // xmm2_4
+  UFG::qVector3 *v56; // rax
+  float v57; // xmm14_4
+  float v58; // xmm0_4
+  float v59; // xmm1_4
+  float v60; // xmm12_4
+  float v61; // xmm11_4
+  float v62; // xmm13_4
+  float v63; // xmm2_4
+  float v64; // xmm10_4
+  UFG::qVector3 *v65; // rax
+  float v66; // xmm0_4
+  float v67; // xmm1_4
+  float v68; // xmm12_4
+  float v69; // xmm11_4
+  float v70; // xmm13_4
+  float v71; // xmm2_4
+  float v72; // xmm3_4
+  float v73; // xmm1_4
+  float v74; // xmm7_4
+  float v75; // xmm2_4
+  float v76; // xmm6_4
+  float v77; // xmm1_4
+  UFG::qVector3 direction; // [rsp+30h] [rbp-B8h] BYREF
+  UFG::qColour colour; // [rsp+40h] [rbp-A8h] BYREF
+  Render::SphericalHarmonic sh; // [rsp+50h] [rbp-98h] BYREF
+  float irr_const[12]; // [rsp+168h] [rbp+80h] BYREF
+  float v82[54]; // [rsp+198h] [rbp+B0h] BYREF
+  float v83; // [rsp+278h] [rbp+190h]
   float radius_boost; // [rsp+298h] [rbp+1B0h]
-  float v87; // [rsp+2A0h] [rbp+1B8h]
-  __int64 v88; // [rsp+2A8h] [rbp+1C0h]
+  float v85; // [rsp+2A0h] [rbp+1B8h]
+  __int64 v86; // [rsp+2A8h] [rbp+1C0h]
 
-  v5 = matLocalWorld;
-  v6 = bUseDirectional;
-  v7 = envState;
-  v8 = matLocalWorldInv;
   Render::SphericalHarmonic::SphericalHarmonic(&sh);
-  UFG::GetSHFromCulledLights(v5, &sh, 16, s_fLumThresh, radius_boost);
-  if ( v6 )
+  UFG::GetSHFromCulledLights(matLocalWorld, &sh, 16, s_fLumThresh, radius_boost);
+  if ( bUseDirectional )
   {
-    v9 = v7->SunDirWorld[0];
-    v10 = v7->SunDirWorld[1];
-    v11 = v7->SunDirWorld[2];
-    v12 = v9;
-    v13 = v7->SunDirWorld[0];
-    v14 = v9 * v8->v0.z;
+    v9 = envState->SunDirWorld[1];
+    v10 = envState->SunDirWorld[2];
+    v11 = envState->SunDirWorld[0];
+    v12 = v11 * matLocalWorldInv->v0.z;
     colour.a = 1.0;
-    v15 = v13 * v8->v0.y;
-    v16 = (float)(v10 * v8->v1.x) + (float)(v12 * v8->v0.x);
-    v17 = v10 * v8->v1.y;
-    v18 = v10 * v8->v1.z;
-    direction.x = v16 + (float)(v11 * v8->v2.x);
-    v19 = v7->SunColor[1] * v87;
-    v20 = (float)(v14 + v18) + (float)(v11 * v8->v2.z);
-    v21 = v7->SunColor[0] * v87;
-    direction.y = (float)(v15 + v17) + (float)(v11 * v8->v2.y);
-    v22 = v7->SunColor[2];
-    direction.z = v20;
-    colour.r = v21;
-    colour.g = v19;
-    colour.b = v22 * v87;
+    v13 = v11 * matLocalWorldInv->v0.y;
+    v14 = (float)(v9 * matLocalWorldInv->v1.x) + (float)(v11 * matLocalWorldInv->v0.x);
+    v15 = v9 * matLocalWorldInv->v1.y;
+    v16 = v9 * matLocalWorldInv->v1.z;
+    direction.x = v14 + (float)(v10 * matLocalWorldInv->v2.x);
+    v17 = envState->SunColor[1] * v85;
+    v18 = (float)(v12 + v16) + (float)(v10 * matLocalWorldInv->v2.z);
+    v19 = envState->SunColor[0] * v85;
+    direction.y = (float)(v13 + v15) + (float)(v10 * matLocalWorldInv->v2.y);
+    v20 = envState->SunColor[2];
+    direction.z = v18;
+    colour.r = v19;
+    colour.g = v17;
+    colour.b = v20 * v85;
     Render::SphericalHarmonic::EvalDirectionalLight(&sh, &direction, &colour);
   }
-  v23 = LODWORD(sh.mRedCoefficients[1]);
-  *(float *)&v23 = (float)(sh.mRedCoefficients[1] + sh.mGreenCoefficients[1]) + sh.mGreenCoefficients[4];
-  v24 = (float)(sh.mRedCoefficients[3] + sh.mRedCoefficients[6]) + sh.mGreenCoefficients[6];
-  v25 = (float)(sh.mRedCoefficients[2] + sh.mGreenCoefficients[2]) + sh.mGreenCoefficients[5];
-  v26 = (__m128)v23;
-  v26.m128_f32[0] = (float)((float)(*(float *)&v23 * *(float *)&v23) + (float)(v24 * v24)) + (float)(v25 * v25);
-  if ( v26.m128_f32[0] <= 0.000001 )
+  v21 = LODWORD(sh.mRedCoefficients[1]);
+  *(float *)&v21 = (float)(sh.mRedCoefficients[1] + sh.mGreenCoefficients[1]) + sh.mGreenCoefficients[4];
+  v22 = (float)(sh.mRedCoefficients[3] + sh.mRedCoefficients[6]) + sh.mGreenCoefficients[6];
+  v23 = (float)(sh.mRedCoefficients[2] + sh.mGreenCoefficients[2]) + sh.mGreenCoefficients[5];
+  v24 = (__m128)v21;
+  v24.m128_f32[0] = (float)((float)(*(float *)&v21 * *(float *)&v21) + (float)(v22 * v22)) + (float)(v23 * v23);
+  if ( v24.m128_f32[0] <= 0.000001 )
   {
-    v29 = 0.0;
-    v23 = 0i64;
-    v28 = *(float *)&FLOAT_1_0;
+    v27 = 0.0;
+    v21 = 0i64;
+    v26 = *(float *)&FLOAT_1_0;
   }
   else
   {
-    if ( v26.m128_f32[0] == 0.0 )
-      v27 = 0.0;
+    if ( v24.m128_f32[0] == 0.0 )
+      v25 = 0.0;
     else
-      v27 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v26));
-    *(float *)&v23 = *(float *)&v23 * v27;
-    v28 = v25 * v27;
-    v29 = v27 * v24;
+      v25 = 1.0 / _mm_sqrt_ps(v24).m128_f32[0];
+    *(float *)&v21 = *(float *)&v21 * v25;
+    v26 = v23 * v25;
+    v27 = v25 * v22;
   }
-  direction.z = v28;
-  LODWORD(direction.y) = v23;
-  direction.x = v29;
+  direction.z = v26;
+  LODWORD(direction.y) = v21;
+  direction.x = v27;
   Render::SphericalHarmonic::ComputeIrradianceConstants(
     &sh,
     (float *)&sh.mHelperLight[13],
@@ -368,133 +353,134 @@ void __fastcall UFG::RenderStageAO::GetSignificantLightDirection(UFG::qMatrix44 
   Render::SphericalHarmonic::ComputeIrradianceConstants(
     &sh,
     (float *)&sh.mHelperLight[13] + 1,
-    &irr_const,
+    irr_const,
     sh.mGreenCoefficients);
   Render::SphericalHarmonic::ComputeIrradianceConstants(
     &sh,
     (float *)&sh.mHelperLight[14],
-    &v84,
+    v82,
     &sh.mGreenCoefficients[3]);
-  v30 = UFG::RenderStageAO::EvaluateSphericalHarmonic(
+  v28 = UFG::RenderStageAO::EvaluateSphericalHarmonic(
           (UFG::qVector3 *)&colour,
           &direction,
           (CB_SphericalHarmonic *)&sh.mHelperLight[13]);
-  v35 = (__m128)v23;
-  v31 = v29 + colorSamplingOffset;
-  v32 = v30->y;
-  v33 = v30->z;
-  v34 = v30->x;
+  v33 = (__m128)v21;
+  v29 = v27 + colorSamplingOffset;
+  y = v28->y;
+  z = v28->z;
+  x = v28->x;
   *(_DWORD *)(lightRadiusBoost + 12) = 1065353216;
-  *(float *)(lightRadiusBoost + 4) = v32;
-  v85 = v33;
-  *(float *)(lightRadiusBoost + 8) = v33;
-  *(float *)lightRadiusBoost = v34;
-  v35.m128_f32[0] = (float)((float)(*(float *)&v23 * *(float *)&v23) + (float)(v31 * v31)) + (float)(v28 * v28);
-  if ( v35.m128_f32[0] == 0.0 )
-    v36 = 0.0;
+  *(float *)(lightRadiusBoost + 4) = y;
+  v83 = z;
+  *(float *)(lightRadiusBoost + 8) = z;
+  *(float *)lightRadiusBoost = x;
+  v33.m128_f32[0] = (float)((float)(*(float *)&v21 * *(float *)&v21) + (float)(v29 * v29)) + (float)(v26 * v26);
+  if ( v33.m128_f32[0] == 0.0 )
+    v34 = 0.0;
   else
-    v36 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v35));
-  direction.x = v31 * v36;
-  direction.y = *(float *)&v23 * v36;
-  direction.z = v28 * v36;
-  v37 = UFG::RenderStageAO::EvaluateSphericalHarmonic(
+    v34 = 1.0 / _mm_sqrt_ps(v33).m128_f32[0];
+  direction.x = v29 * v34;
+  direction.y = *(float *)&v21 * v34;
+  direction.z = v26 * v34;
+  v35 = UFG::RenderStageAO::EvaluateSphericalHarmonic(
           (UFG::qVector3 *)&colour,
           &direction,
           (CB_SphericalHarmonic *)&sh.mHelperLight[13]);
-  v47 = (__m128)v23;
-  v38 = v37->x;
-  v39 = v37->y;
-  v40 = v37->z;
+  v45 = (__m128)v21;
+  v36 = v35->x;
+  v37 = v35->y;
+  v38 = v35->z;
   *(_DWORD *)(lightRadiusBoost + 12) = 0x40000000;
-  v41 = v39 + v32;
-  v42 = v40 + v85;
-  v43 = v38 + v34;
-  v44 = colorSamplingOffset;
-  *(float *)lightRadiusBoost = v43;
-  *(float *)(lightRadiusBoost + 4) = v41;
-  v45 = LODWORD(v44) ^ _xmm[0];
-  *(float *)(lightRadiusBoost + 8) = v42;
-  v46 = *(float *)&v45 + v29;
-  v47.m128_f32[0] = (float)((float)(*(float *)&v23 * *(float *)&v23) + (float)(v46 * v46)) + (float)(v28 * v28);
-  if ( v47.m128_f32[0] == 0.0 )
-    v48 = 0.0;
+  v39 = v37 + y;
+  v40 = v38 + v83;
+  v41 = v36 + x;
+  v42 = colorSamplingOffset;
+  *(float *)lightRadiusBoost = v41;
+  *(float *)(lightRadiusBoost + 4) = v39;
+  v43 = LODWORD(v42) ^ _xmm[0];
+  *(float *)(lightRadiusBoost + 8) = v40;
+  v44 = *(float *)&v43 + v27;
+  v45.m128_f32[0] = (float)((float)(*(float *)&v21 * *(float *)&v21) + (float)(v44 * v44)) + (float)(v26 * v26);
+  if ( v45.m128_f32[0] == 0.0 )
+    v46 = 0.0;
   else
-    v48 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v47));
-  direction.x = v46 * v48;
-  direction.y = *(float *)&v23 * v48;
-  direction.z = v28 * v48;
-  v49 = UFG::RenderStageAO::EvaluateSphericalHarmonic(
+    v46 = 1.0 / _mm_sqrt_ps(v45).m128_f32[0];
+  direction.x = v44 * v46;
+  direction.y = *(float *)&v21 * v46;
+  direction.z = v26 * v46;
+  v47 = UFG::RenderStageAO::EvaluateSphericalHarmonic(
           (UFG::qVector3 *)&colour,
           &direction,
           (CB_SphericalHarmonic *)&sh.mHelperLight[13]);
-  v50 = (__m128)v23;
-  v50.m128_f32[0] = *(float *)&v23 + colorSamplingOffset;
-  v51 = v49->y;
-  v52 = v49->z;
-  v53 = v43 + v49->x;
-  v56 = v50;
+  v48 = (__m128)v21;
+  v48.m128_f32[0] = *(float *)&v21 + colorSamplingOffset;
+  v49 = v47->y;
+  v50 = v47->z;
+  v51 = v41 + v47->x;
+  v54 = v48;
   *(_DWORD *)(lightRadiusBoost + 12) = 1077936128;
-  v54 = v41 + v51;
-  v55 = v42 + v52;
-  *(float *)lightRadiusBoost = v53;
-  *(float *)(lightRadiusBoost + 4) = v54;
-  *(float *)(lightRadiusBoost + 8) = v55;
-  v56.m128_f32[0] = (float)((float)(v50.m128_f32[0] * v50.m128_f32[0]) + (float)(v29 * v29)) + (float)(v28 * v28);
-  if ( v56.m128_f32[0] == 0.0 )
-    v57 = 0.0;
+  v52 = v39 + v49;
+  v53 = v40 + v50;
+  *(float *)lightRadiusBoost = v51;
+  *(float *)(lightRadiusBoost + 4) = v52;
+  *(float *)(lightRadiusBoost + 8) = v53;
+  v54.m128_f32[0] = (float)((float)(v48.m128_f32[0] * v48.m128_f32[0]) + (float)(v27 * v27)) + (float)(v26 * v26);
+  if ( v54.m128_f32[0] == 0.0 )
+    v55 = 0.0;
   else
-    v57 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v56));
-  direction.y = v50.m128_f32[0] * v57;
-  direction.x = v29 * v57;
-  direction.z = v28 * v57;
-  v58 = UFG::RenderStageAO::EvaluateSphericalHarmonic(
+    v55 = 1.0 / _mm_sqrt_ps(v54).m128_f32[0];
+  direction.y = v48.m128_f32[0] * v55;
+  direction.x = v27 * v55;
+  direction.z = v26 * v55;
+  v56 = UFG::RenderStageAO::EvaluateSphericalHarmonic(
           (UFG::qVector3 *)&colour,
           &direction,
           (CB_SphericalHarmonic *)&sh.mHelperLight[13]);
-  v59 = *(float *)&v45 + *(float *)&v23;
-  v60 = v58->y;
-  v61 = v58->z;
-  v62 = v53 + v58->x;
+  v57 = *(float *)&v43 + *(float *)&v21;
+  v58 = v56->y;
+  v59 = v56->z;
+  v60 = v51 + v56->x;
   *(_DWORD *)(lightRadiusBoost + 12) = 1082130432;
-  v63 = v54 + v60;
-  v64 = v55 + v61;
-  *(float *)lightRadiusBoost = v62;
-  *(float *)(lightRadiusBoost + 4) = v63;
-  *(float *)(lightRadiusBoost + 8) = v64;
-  v65 = (float)((float)(v59 * v59) + (float)(v29 * v29)) + (float)(v28 * v28);
-  if ( v65 == 0.0 )
-    v66 = 0.0;
+  v61 = v52 + v58;
+  v62 = v53 + v59;
+  *(float *)lightRadiusBoost = v60;
+  *(float *)(lightRadiusBoost + 4) = v61;
+  *(float *)(lightRadiusBoost + 8) = v62;
+  v63 = (float)((float)(v57 * v57) + (float)(v27 * v27)) + (float)(v26 * v26);
+  if ( v63 == 0.0 )
+    v64 = 0.0;
   else
-    v66 = 1.0 / fsqrt(v65);
-  direction.y = v59 * v66;
-  direction.x = v29 * v66;
-  direction.z = v28 * v66;
-  v67 = UFG::RenderStageAO::EvaluateSphericalHarmonic(
+    v64 = 1.0 / fsqrt(v63);
+  direction.y = v57 * v64;
+  direction.x = v27 * v64;
+  direction.z = v26 * v64;
+  v65 = UFG::RenderStageAO::EvaluateSphericalHarmonic(
           (UFG::qVector3 *)&colour,
           &direction,
           (CB_SphericalHarmonic *)&sh.mHelperLight[13]);
-  v68 = v67->y;
-  v69 = v67->z;
-  v70 = (float)(v62 + v67->x) * 0.2;
-  *(float *)lightRadiusBoost = v70;
-  v71 = (float)(v63 + v68) * 0.2;
-  v72 = (float)(v64 + v69) * 0.2;
-  *(float *)(lightRadiusBoost + 4) = v71;
-  *(float *)(lightRadiusBoost + 8) = v72;
-  LODWORD(v73) = v23 ^ _xmm[0];
-  *(float *)(lightRadiusBoost + 12) = (float)((float)(v71 * 0.5) + (float)(v70 * 0.30000001)) + (float)(v72 * 0.2);
-  v74 = (float)((float)(COERCE_FLOAT(v23 ^ _xmm[0]) * v5->v1.x)
-              + (float)(COERCE_FLOAT(LODWORD(v29) ^ _xmm[0]) * v5->v0.x))
-      + (float)(v28 * v5->v2.x);
-  v75 = v28;
-  v76 = (float)(COERCE_FLOAT(v23 ^ _xmm[0]) * v5->v1.z) + (float)(COERCE_FLOAT(LODWORD(v29) ^ _xmm[0]) * v5->v0.z);
-  v77 = (float)(v73 * v5->v1.y) + (float)(COERCE_FLOAT(LODWORD(v29) ^ _xmm[0]) * v5->v0.y);
-  v78 = v28 * v5->v2.z;
-  v79 = v75 * v5->v2.y;
-  *(float *)v88 = v74;
-  *(_DWORD *)(v88 + 12) = 0;
-  *(float *)(v88 + 8) = v76 + v78;
-  *(float *)(v88 + 4) = v77 + v79;
+  v66 = v65->y;
+  v67 = v65->z;
+  v68 = (float)(v60 + v65->x) * 0.2;
+  *(float *)lightRadiusBoost = v68;
+  v69 = (float)(v61 + v66) * 0.2;
+  v70 = (float)(v62 + v67) * 0.2;
+  *(float *)(lightRadiusBoost + 4) = v69;
+  *(float *)(lightRadiusBoost + 8) = v70;
+  LODWORD(v71) = v21 ^ _xmm[0];
+  *(float *)(lightRadiusBoost + 12) = (float)((float)(v69 * 0.5) + (float)(v68 * 0.30000001)) + (float)(v70 * 0.2);
+  v72 = (float)((float)(COERCE_FLOAT(v21 ^ _xmm[0]) * matLocalWorld->v1.x)
+              + (float)(COERCE_FLOAT(LODWORD(v27) ^ _xmm[0]) * matLocalWorld->v0.x))
+      + (float)(v26 * matLocalWorld->v2.x);
+  v73 = v26;
+  v74 = (float)(COERCE_FLOAT(v21 ^ _xmm[0]) * matLocalWorld->v1.z)
+      + (float)(COERCE_FLOAT(LODWORD(v27) ^ _xmm[0]) * matLocalWorld->v0.z);
+  v75 = (float)(v71 * matLocalWorld->v1.y) + (float)(COERCE_FLOAT(LODWORD(v27) ^ _xmm[0]) * matLocalWorld->v0.y);
+  v76 = v26 * matLocalWorld->v2.z;
+  v77 = v73 * matLocalWorld->v2.y;
+  *(float *)v86 = v72;
+  *(_DWORD *)(v86 + 12) = 0;
+  *(float *)(v86 + 8) = v74 + v76;
+  *(float *)(v86 + 4) = v75 + v77;
 }
 
 // File Line: 270
@@ -503,7 +489,7 @@ __int64 UFG::_dynamic_initializer_for__uidBILATERALBLURX__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("BILATERALBLURX", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("BILATERALBLURX", -1);
   uidBILATERALBLURX = result;
   return result;
 }
@@ -514,7 +500,7 @@ __int64 UFG::_dynamic_initializer_for__uidBILATERALBLURX_NOSUN__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("BILATERALBLURX_NOSUN", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("BILATERALBLURX_NOSUN", -1);
   uidBILATERALBLURX_NOSUN = result;
   return result;
 }
@@ -525,7 +511,7 @@ __int64 UFG::_dynamic_initializer_for__uidBILATERALBLURY__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("BILATERALBLURY", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("BILATERALBLURY", -1);
   uidBILATERALBLURY = result;
   return result;
 }
@@ -536,22 +522,22 @@ __int64 UFG::_dynamic_initializer_for__uidBILATERALBLURY_NOSUN__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("BILATERALBLURY_NOSUN", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("BILATERALBLURY_NOSUN", -1);
   uidBILATERALBLURY_NOSUN = result;
   return result;
 }
 
 // File Line: 276
 // RVA: 0x35370
-void __fastcall UFG::RenderStageAO::RenderAmbientOcclusion(UFG::RenderStageAO *this, UFG::RenderContext *render_context, UFG::qList<Illusion::RenderQueue,Illusion::RenderQueue,1,0> *serialization_list)
+void __fastcall UFG::RenderStageAO::RenderAmbientOcclusion(
+        UFG::RenderStageAO *this,
+        UFG::RenderContext *render_context,
+        UFG::qList<Illusion::RenderQueue,Illusion::RenderQueue,1,0> *serialization_list)
 {
-  UFG::qList<Illusion::RenderQueue,Illusion::RenderQueue,1,0> *v3; // r15
-  UFG::RenderContext *v4; // rdi
-  UFG::RenderStageAO *v5; // rbx
-  Illusion::StateArgs *v6; // r14
-  float v7; // xmm1_4
-  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v8; // rcx
-  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v9; // rax
+  Illusion::StateArgs *StateArgs; // r14
+  float mAOOpacity; // xmm1_4
+  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *mPrev; // rcx
+  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *mNext; // rax
   UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v10; // rcx
   UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v11; // rax
   Illusion::RenderQueue *v12; // rax
@@ -560,15 +546,15 @@ void __fastcall UFG::RenderStageAO::RenderAmbientOcclusion(UFG::RenderStageAO *t
   UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *v15; // rcx
   UFG::RenderContext *v16; // rdx
   UFG::RenderStageAO *v17; // rcx
-  Render::ViewSettings *v18; // rbx
-  UFG::qMatrix44 *v19; // r15
-  unsigned __int16 v20; // ax
-  const float *v21; // rbx
-  const float *v22; // r15
-  const float *v23; // r12
+  Render::ViewSettings *mSettings; // rbx
+  UFG::qMatrix44 *p_mProjection; // r15
+  unsigned __int16 Param; // ax
+  float *mShadowFilterWidth; // rbx
+  float *mBiases; // r15
+  float *mCutplanes; // r12
   unsigned __int16 v24; // ax
-  CB_EnvironmentSettings *v25; // rbx
-  Illusion::StateValues *v26; // rax
+  CB_EnvironmentSettings *mEnvState; // rbx
+  Illusion::StateValues *StateValues; // rax
   UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v27; // rcx
   UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v28; // rax
   UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v29; // rcx
@@ -577,130 +563,147 @@ void __fastcall UFG::RenderStageAO::RenderAmbientOcclusion(UFG::RenderStageAO *t
   UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v32; // rax
   UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v33; // rcx
   UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v34; // rax
-  Render::cbExternalViewTransformState arg; // [rsp+50h] [rbp-B0h]
-  Render::cbShadowTransformState v36; // [rsp+90h] [rbp-70h]
+  Render::cbExternalViewTransformState arg; // [rsp+50h] [rbp-B0h] BYREF
+  Render::cbShadowTransformState v36; // [rsp+90h] [rbp-70h] BYREF
   __int64 v37; // [rsp+F0h] [rbp-10h]
-  Render::View view; // [rsp+100h] [rbp+0h]
-  RenderQueueLayer v39; // [rsp+290h] [rbp+190h]
-  UFG::RenderStageShadow::LinearCascadeViews views; // [rsp+370h] [rbp+270h]
-  LayerSubmitContext ptr; // [rsp+570h] [rbp+470h]
+  Render::View view; // [rsp+100h] [rbp+0h] BYREF
+  RenderQueueLayer v39; // [rsp+290h] [rbp+190h] BYREF
+  UFG::RenderStageShadow::LinearCascadeViews views; // [rsp+370h] [rbp+270h] BYREF
+  LayerSubmitContext ptr; // [rsp+570h] [rbp+470h] BYREF
 
   v37 = -2i64;
-  v3 = serialization_list;
-  v4 = render_context;
-  v5 = this;
   if ( !render_context->mRenderFeatures.mWorld )
     return;
   RenderQueueLayer::RenderQueueLayer(&v39);
   LayerSubmitContext::LayerSubmitContext(&ptr);
-  v39.mSerializationList = v3;
-  ptr.mQueueMode = 0;
+  v39.mSerializationList = serialization_list;
+  ptr.mQueueMode = QM_Single;
   ptr.mRenderQueueProvider = &v39;
-  Render::View::View(&view, &v4->mMainViewSettings, (Illusion::SubmitContext *)&ptr.vfptr);
-  v6 = Render::View::GetStateArgs(&view);
-  if ( !v4->mRenderFeatures.mAO )
+  Render::View::View(&view, &render_context->mMainViewSettings, &ptr);
+  StateArgs = Render::View::GetStateArgs(&view);
+  if ( !render_context->mRenderFeatures.mAO )
   {
-    Render::View::BeginTarget(&view, v4->mAmbientOcclusionAliasTarget, "AmbientOcclusionNone", 0, 0, 0i64, 0, 0, 0, 0);
+    Render::View::BeginTarget(
+      &view,
+      render_context->mAmbientOcclusionAliasTarget,
+      "AmbientOcclusionNone",
+      0,
+      0,
+      0i64,
+      0,
+      0,
+      0,
+      0);
     Render::View::Clear(&view, &UFG::qColour::White, 1u, 1.0, 1u);
     Render::View::EndTarget(&view);
     goto LABEL_23;
   }
-  v7 = v4->mAOOpacity;
-  if ( v7 < 0.0 )
-    LODWORD(v7) ^= _xmm[0];
-  if ( v7 < 0.001 )
+  mAOOpacity = render_context->mAOOpacity;
+  if ( mAOOpacity < 0.0 )
+    LODWORD(mAOOpacity) ^= _xmm[0];
+  if ( mAOOpacity < 0.001 )
   {
-    Render::View::BeginTarget(&view, v4->mAmbientOcclusionAliasTarget, "DropShadows", 0, 0, 0i64, 0, 0, 0, 0);
+    Render::View::BeginTarget(
+      &view,
+      render_context->mAmbientOcclusionAliasTarget,
+      "DropShadows",
+      0,
+      0,
+      0i64,
+      0,
+      0,
+      0,
+      0);
     Render::View::Clear(&view, &UFG::qColour::White, 1u, 1.0, 1u);
     Render::cbExternalViewTransformState::cbExternalViewTransformState(
       &arg,
       &view.mSettings->mWorldView,
       &view.mSettings->mProjection);
-    Illusion::StateArgs::Set<Render::cbExternalViewTransformState>(v6, &arg);
-    UFG::DropShadowComponent::DrawAll(&view, v4->mHalfSizeLinearDepthTarget);
-    v8 = arg.mPrev;
-    v9 = arg.mNext;
+    Illusion::StateArgs::Set<Render::cbExternalViewTransformState>(StateArgs, &arg);
+    UFG::DropShadowComponent::DrawAll(&view, render_context->mHalfSizeLinearDepthTarget);
+    mPrev = arg.mPrev;
+    mNext = arg.mNext;
     arg.mPrev->mNext = arg.mNext;
-    v9->mPrev = v8;
-    arg.mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
-    arg.mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
+    mNext->mPrev = mPrev;
+    arg.mPrev = &arg;
+    arg.mNext = &arg;
     arg.mIsSet = 0;
-    if ( (Illusion::StateArgs *)v6->mStateArgsCreateMask.mFlags[2 * (arg.mStateParamIndex + 3i64) + 1] == (Illusion::StateArgs *)((char *)v6 + 16 * (arg.mStateParamIndex + 3i64)) )
-      v6->mStateArgsCreateMask.mFlags[(unsigned int)arg.mStateParamIndex >> 6] &= ~(1i64 << (arg.mStateParamIndex & 0x3F));
+    if ( (UFG::qList<Illusion::StateArg,Illusion::StateArg,0,0> *)StateArgs->mStateArgs[arg.mStateParamIndex].mNode.mNext == &StateArgs->mStateArgs[arg.mStateParamIndex] )
+      StateArgs->mStateArgsCreateMask.mFlags[(unsigned int)arg.mStateParamIndex >> 6] &= ~(1i64 << (arg.mStateParamIndex & 0x3F));
     Render::View::EndTarget(&view);
     v10 = arg.mPrev;
     v11 = arg.mNext;
     arg.mPrev->mNext = arg.mNext;
     v11->mPrev = v10;
-    arg.mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
-    arg.mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
+    arg.mPrev = &arg;
+    arg.mNext = &arg;
     goto LABEL_23;
   }
-  if ( v4->mRenderSettingsForFrame.mFeatureLevel != 2
-    || v4->mRenderSettingsForFrame.mSSAO != 1
-    || !v4->mQuarterSizeAmbientOcclusionTarget
-    || !v5->mHDAOCS )
+  if ( render_context->mRenderSettingsForFrame.mFeatureLevel != FEATURE_LEVEL_D3D11_0
+    || render_context->mRenderSettingsForFrame.mSSAO != SSAO_HIGH
+    || !render_context->mQuarterSizeAmbientOcclusionTarget
+    || !this->mHDAOCS )
   {
-    UFG::RenderStageAO::RenderAmbientOcclusionPS(v5, v4, &view);
-    if ( !v5->mAOBlur )
+    UFG::RenderStageAO::RenderAmbientOcclusionPS(this, render_context, &view);
+    if ( !this->mAOBlur )
       goto LABEL_23;
-    v16 = v4;
-    v17 = v5;
+    v16 = render_context;
+    v17 = this;
 LABEL_21:
     UFG::RenderStageAO::RenderAOBilateralBlurPS(v17, v16, &view);
     goto LABEL_23;
   }
-  v12 = UFG::RenderStageAO::RenderAmbientOcclusionCS(v5, v4, 1);
-  v13 = v3->mNode.mPrev;
-  v13->mNext = (UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *)&v12->mPrev;
+  v12 = UFG::RenderStageAO::RenderAmbientOcclusionCS(this, render_context, 1);
+  v13 = serialization_list->mNode.mPrev;
+  v13->mNext = v12;
   v12->mPrev = v13;
-  v12->mNext = &v3->mNode;
-  v3->mNode.mPrev = (UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *)&v12->mPrev;
-  if ( v5->mAOBlur && v5->mAOBilateralCS )
-    UFG::RenderStageAO::RenderAOBilateralBlurCS(v5, v4, &view, 1);
-  v14 = UFG::RenderStageAO::RenderAmbientOcclusionCS(v5, v4, 0);
-  v15 = v3->mNode.mPrev;
-  v15->mNext = (UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *)&v14->mPrev;
+  v12->mNext = &serialization_list->mNode;
+  serialization_list->mNode.mPrev = v12;
+  if ( this->mAOBlur && this->mAOBilateralCS )
+    UFG::RenderStageAO::RenderAOBilateralBlurCS(this, render_context, &view, 1);
+  v14 = UFG::RenderStageAO::RenderAmbientOcclusionCS(this, render_context, 0);
+  v15 = serialization_list->mNode.mPrev;
+  v15->mNext = v14;
   v14->mPrev = v15;
-  v14->mNext = &v3->mNode;
-  v3->mNode.mPrev = (UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *)&v14->mPrev;
-  if ( !v5->mAOBlur )
+  v14->mNext = &serialization_list->mNode;
+  serialization_list->mNode.mPrev = v14;
+  if ( !this->mAOBlur )
     goto LABEL_23;
-  v16 = v4;
-  v17 = v5;
-  if ( !v5->mAOBilateralCS )
+  v16 = render_context;
+  v17 = this;
+  if ( !this->mAOBilateralCS )
     goto LABEL_21;
-  UFG::RenderStageAO::RenderAOBilateralBlurCS(v5, v4, &view, 0);
+  UFG::RenderStageAO::RenderAOBilateralBlurCS(this, render_context, &view, 0);
 LABEL_23:
-  Render::View::BeginTarget(&view, v4->mSkyOcclusionAliasTarget, "SkyOcclusion", 0, 0, 0i64, 0, 1, 0, 0);
+  Render::View::BeginTarget(&view, render_context->mSkyOcclusionAliasTarget, "SkyOcclusion", 0, 0, 0i64, 0, 1, 0, 0);
   Render::View::Clear(&view, &UFG::qColour::White, 1u, 1.0, 1u);
-  v18 = view.mSettings;
-  v19 = &view.mSettings->mProjection;
-  arg.mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
-  arg.mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
+  mSettings = view.mSettings;
+  p_mProjection = &view.mSettings->mProjection;
+  arg.mPrev = &arg;
+  arg.mNext = &arg;
   arg.mCallback = 0i64;
   arg.mStateParamIndex = Render::cbExternalViewTransformState::sStateParamIndex;
   *(_WORD *)&arg.mFlags = 1;
-  if ( (_WORD)Render::cbExternalViewTransformState::sStateParamIndex == -1 )
+  if ( (_WORD)Render::cbExternalViewTransformState::sStateParamIndex == 0xFFFF )
   {
-    v20 = Illusion::StateSystem::GetParam(&Illusion::gStateSystem, "cbExternalViewTransform");
-    Render::cbExternalViewTransformState::sStateParamIndex = v20;
-    arg.mStateParamIndex = v20;
+    Param = Illusion::StateSystem::GetParam(&Illusion::gStateSystem, "cbExternalViewTransform");
+    Render::cbExternalViewTransformState::sStateParamIndex = Param;
+    arg.mStateParamIndex = Param;
   }
-  arg.mWorldView = &v18->mWorldView;
-  arg.mProjection = v19;
+  arg.mWorldView = &mSettings->mWorldView;
+  arg.mProjection = p_mProjection;
   arg.mCached_Remote.m_Stream = 0i64;
-  Illusion::StateArgs::Set<Render::cbExternalViewTransformState>(v6, &arg);
+  Illusion::StateArgs::Set<Render::cbExternalViewTransformState>(StateArgs, &arg);
   UFG::RenderStageShadow::GetLinearCascadeViews(UFG::RenderWorld::msStageShadow, &views);
-  v21 = UFG::RenderWorld::msStageShadow->mShadowFilterWidth;
-  v22 = UFG::RenderWorld::msStageShadow->mBiases;
-  v23 = UFG::RenderWorld::msStageShadow->mCutplanes;
-  v36.mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&v36;
-  v36.mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&v36;
+  mShadowFilterWidth = UFG::RenderWorld::msStageShadow->mShadowFilterWidth;
+  mBiases = UFG::RenderWorld::msStageShadow->mBiases;
+  mCutplanes = UFG::RenderWorld::msStageShadow->mCutplanes;
+  v36.mPrev = &v36;
+  v36.mNext = &v36;
   v36.mCallback = 0i64;
   v36.mStateParamIndex = Render::cbShadowTransformState::sStateParamIndex;
   *(_WORD *)&v36.mFlags = 1;
-  if ( (_WORD)Render::cbShadowTransformState::sStateParamIndex == -1 )
+  if ( (_WORD)Render::cbShadowTransformState::sStateParamIndex == 0xFFFF )
   {
     v24 = Illusion::StateSystem::GetParam(&Illusion::gStateSystem, "cbShadowTransform");
     Render::cbShadowTransformState::sStateParamIndex = v24;
@@ -709,48 +712,48 @@ LABEL_23:
   v36.mViewWorld = &view.mViewWorld;
   v36.mWorldView = (UFG::qMatrix44 *)&views;
   v36.mProjection = views.mProjection;
-  v36.mCutplanes = v23;
-  v36.mBiases = v22;
-  v36.mBlurWidths = v21;
+  v36.mCutplanes = mCutplanes;
+  v36.mBiases = mBiases;
+  v36.mBlurWidths = mShadowFilterWidth;
   v36.mCached_Remote.m_Stream = 0i64;
-  Illusion::StateArgs::Set<Render::cbShadowTransformState>(v6, &v36);
-  v25 = v4->mEnvState;
-  v26 = Render::View::GetStateValues(&view);
-  v26->mSetValueMask.mFlags[0] |= 0x80000000000000ui64;
-  v26->mParamValues[55] = v25;
+  Illusion::StateArgs::Set<Render::cbShadowTransformState>(StateArgs, &v36);
+  mEnvState = render_context->mEnvState;
+  StateValues = Render::View::GetStateValues(&view);
+  StateValues->mSetValueMask.mFlags[0] |= 0x80000000000000ui64;
+  StateValues->mParamValues[55] = mEnvState;
   if ( gEnableSkyIrradianceVolumes )
-    DrawIrradianceVolumes(v4, &view, v4->mAmbientOcclusionVolumesType);
+    DrawIrradianceVolumes(render_context, &view, render_context->mAmbientOcclusionVolumesType);
   v27 = arg.mPrev;
   v28 = arg.mNext;
   arg.mPrev->mNext = arg.mNext;
   v28->mPrev = v27;
-  arg.mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
-  arg.mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
+  arg.mPrev = &arg;
+  arg.mNext = &arg;
   arg.mIsSet = 0;
-  if ( (Illusion::StateArgs *)v6->mStateArgsCreateMask.mFlags[2 * (arg.mStateParamIndex + 3i64) + 1] == (Illusion::StateArgs *)((char *)v6 + 16 * (arg.mStateParamIndex + 3i64)) )
-    v6->mStateArgsCreateMask.mFlags[(unsigned int)arg.mStateParamIndex >> 6] &= ~(1i64 << (arg.mStateParamIndex & 0x3F));
+  if ( (UFG::qList<Illusion::StateArg,Illusion::StateArg,0,0> *)StateArgs->mStateArgs[arg.mStateParamIndex].mNode.mNext == &StateArgs->mStateArgs[arg.mStateParamIndex] )
+    StateArgs->mStateArgsCreateMask.mFlags[(unsigned int)arg.mStateParamIndex >> 6] &= ~(1i64 << (arg.mStateParamIndex & 0x3F));
   v29 = v36.mPrev;
   v30 = v36.mNext;
   v36.mPrev->mNext = v36.mNext;
   v30->mPrev = v29;
-  v36.mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&v36;
-  v36.mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&v36;
+  v36.mPrev = &v36;
+  v36.mNext = &v36;
   v36.mIsSet = 0;
-  if ( (Illusion::StateArgs *)v6->mStateArgsCreateMask.mFlags[2 * (v36.mStateParamIndex + 3i64) + 1] == (Illusion::StateArgs *)((char *)v6 + 16 * (v36.mStateParamIndex + 3i64)) )
-    v6->mStateArgsCreateMask.mFlags[(unsigned int)v36.mStateParamIndex >> 6] &= ~(1i64 << (v36.mStateParamIndex & 0x3F));
+  if ( (UFG::qList<Illusion::StateArg,Illusion::StateArg,0,0> *)StateArgs->mStateArgs[v36.mStateParamIndex].mNode.mNext == &StateArgs->mStateArgs[v36.mStateParamIndex] )
+    StateArgs->mStateArgsCreateMask.mFlags[(unsigned int)v36.mStateParamIndex >> 6] &= ~(1i64 << (v36.mStateParamIndex & 0x3F));
   Render::View::EndTarget(&view);
   v31 = v36.mPrev;
   v32 = v36.mNext;
   v36.mPrev->mNext = v36.mNext;
   v32->mPrev = v31;
-  v36.mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&v36;
-  v36.mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&v36;
+  v36.mPrev = &v36;
+  v36.mNext = &v36;
   v33 = arg.mPrev;
   v34 = arg.mNext;
   arg.mPrev->mNext = arg.mNext;
   v34->mPrev = v33;
-  arg.mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
-  arg.mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
+  arg.mPrev = &arg;
+  arg.mNext = &arg;
   RenderQueueLayer::SerializeRenderQueues(&v39);
   `eh vector destructor iterator(
     ptr.mStateArgs.mStateArgs,
@@ -762,33 +765,34 @@ LABEL_23:
 
 // File Line: 386
 // RVA: 0x36140
-void __fastcall UFG::RenderStageAO::RenderAmbientOcclusionPS(UFG::RenderStageAO *this, UFG::RenderContext *render_context, Render::View *view)
+void __fastcall UFG::RenderStageAO::RenderAmbientOcclusionPS(
+        UFG::RenderStageAO *this,
+        UFG::RenderContext *render_context,
+        Render::View *view)
 {
-  Render::View *v3; // rsi
-  UFG::RenderContext *v4; // rdi
-  Illusion::StateArgs *v5; // r14
-  char *v6; // rbx
-  char *v7; // r15
-  char *v8; // r12
-  unsigned __int16 v9; // ax
+  Illusion::StateArgs *StateArgs; // r14
+  float *mShadowFilterWidth; // rbx
+  float *mBiases; // r15
+  float *mCutplanes; // r12
+  unsigned __int16 Param; // ax
   char *v10; // rbx
-  UFG::qMatrix44 *v11; // r15
-  UFG::qMatrix44 *v12; // r12
+  Render::ViewSettings *mSettings; // r15
+  UFG::qMatrix44 *p_mProjection; // r12
   unsigned __int16 v13; // ax
-  Illusion::StateValues *v14; // rax
-  CB_EnvironmentSettings *v15; // rbx
+  Illusion::StateValues *StateValues; // rax
+  CB_EnvironmentSettings *mEnvState; // rbx
   Illusion::StateValues *v16; // rax
   char v17; // r15
-  UFG::TimeOfDayManager *v18; // rax
-  bool v19; // r12
+  UFG::TimeOfDayManager *Instance; // rax
+  bool IsSunShining; // r12
   char *v20; // rax
   float *v21; // rbx
-  _OWORD *v22; // rdx
+  CB_EnvironmentSettings *v22; // rdx
   char *v23; // r8
-  signed __int64 v24; // rcx
-  float v25; // xmm1_4
-  float v26; // xmm2_4
-  float v27; // xmm3_4
+  __int64 v24; // rcx
+  float y; // xmm1_4
+  float z; // xmm2_4
+  float w; // xmm3_4
   float v28; // xmm1_4
   float v29; // xmm2_4
   float v30; // xmm3_4
@@ -798,7 +802,7 @@ void __fastcall UFG::RenderStageAO::RenderAmbientOcclusionPS(UFG::RenderStageAO 
   float v34; // xmm3_4
   float v35; // xmm4_4
   float v36; // xmm5_4
-  float v37; // xmm4_4
+  float x; // xmm4_4
   float v38; // xmm8_4
   float v39; // xmm5_4
   float v40; // xmm7_4
@@ -807,98 +811,106 @@ void __fastcall UFG::RenderStageAO::RenderAmbientOcclusionPS(UFG::RenderStageAO 
   float v43; // xmm2_4
   float v44; // xmm8_4
   Illusion::StateValues *v45; // rax
-  Illusion::Material *v46; // r8
-  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v47; // rcx
-  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v48; // rax
+  Illusion::Material *mSSAOHighMaterial; // r8
+  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *mPrev; // rcx
+  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *mNext; // rax
   __int64 v49; // rcx
-  UFG::qMatrix44 *v50; // rax
+  UFG::qMatrix44 *mWorldView; // rax
   UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v51; // rcx
   UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v52; // rax
   __int64 v53; // rcx
   UFG::qMatrix44 *v54; // rax
   __int64 dest_mip_level; // [rsp+20h] [rbp-B8h]
-  Render::cbExternalViewTransformState arg; // [rsp+50h] [rbp-88h]
-  UFG::qMatrix44 *v57; // [rsp+88h] [rbp-50h]
-  UFG::RenderStageShadow::LinearCascadeViews *v58; // [rsp+90h] [rbp-48h]
-  UFG::qMatrix44 *v59; // [rsp+98h] [rbp-40h]
-  char *v60; // [rsp+A0h] [rbp-38h]
-  char *v61; // [rsp+A8h] [rbp-30h]
-  char *v62; // [rsp+B0h] [rbp-28h]
+  Render::cbExternalViewTransformState arg; // [rsp+50h] [rbp-88h] BYREF
+  UFG::qMatrix44 *p_mViewWorld; // [rsp+88h] [rbp-50h]
+  UFG::RenderStageShadow::LinearCascadeViews *p_views; // [rsp+90h] [rbp-48h]
+  UFG::qMatrix44 *mProjection; // [rsp+98h] [rbp-40h]
+  float *v60; // [rsp+A0h] [rbp-38h]
+  float *v61; // [rsp+A8h] [rbp-30h]
+  float *v62; // [rsp+B0h] [rbp-28h]
   __int64 v63; // [rsp+B8h] [rbp-20h]
   UFG::qVector4 outLightDirWorld; // [rsp+C8h] [rbp-10h]
-  UFG::qMatrix44 m; // [rsp+D8h] [rbp+0h]
+  UFG::qMatrix44 m; // [rsp+D8h] [rbp+0h] BYREF
   __int64 v66; // [rsp+118h] [rbp+40h]
-  UFG::qMatrix44 d; // [rsp+138h] [rbp+60h]
-  UFG::RenderStageShadow::LinearCascadeViews views; // [rsp+178h] [rbp+A0h]
-  Render::Poly poly; // [rsp+3E0h] [rbp+308h]
+  UFG::qMatrix44 d; // [rsp+138h] [rbp+60h] BYREF
+  UFG::RenderStageShadow::LinearCascadeViews views; // [rsp+178h] [rbp+A0h] BYREF
+  Render::Poly poly; // [rsp+3E0h] [rbp+308h] BYREF
 
   v66 = -2i64;
-  v3 = view;
-  v4 = render_context;
-  v5 = Render::View::GetStateArgs(view);
+  StateArgs = Render::View::GetStateArgs(view);
   UFG::RenderStageShadow::GetLinearCascadeViews(UFG::RenderWorld::msStageShadow, &views);
-  v6 = (char *)UFG::RenderWorld::msStageShadow->mShadowFilterWidth;
-  v7 = (char *)UFG::RenderWorld::msStageShadow->mBiases;
-  v8 = (char *)UFG::RenderWorld::msStageShadow->mCutplanes;
-  *(_QWORD *)&arg.mStateParamIndex = (char *)&arg + 24;
+  mShadowFilterWidth = UFG::RenderWorld::msStageShadow->mShadowFilterWidth;
+  mBiases = UFG::RenderWorld::msStageShadow->mBiases;
+  mCutplanes = UFG::RenderWorld::msStageShadow->mCutplanes;
+  *(_QWORD *)&arg.mStateParamIndex = &arg.mStateParamIndex;
   arg.mWorldView = (UFG::qMatrix44 *)&arg.mStateParamIndex;
   arg.mProjection = 0i64;
   LOWORD(arg.mCached_Remote.m_Stream) = Render::cbShadowTransformState::sStateParamIndex;
   WORD1(arg.mCached_Remote.m_Stream) = 1;
-  if ( (_WORD)Render::cbShadowTransformState::sStateParamIndex == -1 )
+  if ( (_WORD)Render::cbShadowTransformState::sStateParamIndex == 0xFFFF )
   {
-    v9 = Illusion::StateSystem::GetParam(&Illusion::gStateSystem, "cbShadowTransform");
-    Render::cbShadowTransformState::sStateParamIndex = v9;
-    LOWORD(arg.mCached_Remote.m_Stream) = v9;
+    Param = Illusion::StateSystem::GetParam(&Illusion::gStateSystem, "cbShadowTransform");
+    Render::cbShadowTransformState::sStateParamIndex = Param;
+    LOWORD(arg.mCached_Remote.m_Stream) = Param;
   }
-  v57 = &v3->mViewWorld;
-  v58 = &views;
-  v59 = views.mProjection;
-  v60 = v8;
-  v61 = v7;
-  v62 = v6;
+  p_mViewWorld = &view->mViewWorld;
+  p_views = &views;
+  mProjection = views.mProjection;
+  v60 = mCutplanes;
+  v61 = mBiases;
+  v62 = mShadowFilterWidth;
   v63 = 0i64;
   v10 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x80u, 0x10u);
-  *(float *)v10 = v4->mAOOpacity;
-  Render::View::BeginTarget(v3, v4->mAmbientOcclusionAliasTarget, "AmbientOcclusion", 0, 0, 0i64, 0, 0, 0, 0);
-  v11 = &v3->mSettings->mWorldView;
-  v12 = &v3->mSettings->mProjection;
-  arg.mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
-  arg.mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
+  *(float *)v10 = render_context->mAOOpacity;
+  Render::View::BeginTarget(
+    view,
+    render_context->mAmbientOcclusionAliasTarget,
+    "AmbientOcclusion",
+    0,
+    0,
+    0i64,
+    0,
+    0,
+    0,
+    0);
+  mSettings = view->mSettings;
+  p_mProjection = &view->mSettings->mProjection;
+  arg.mPrev = &arg;
+  arg.mNext = &arg;
   arg.mCallback = 0i64;
   arg.mStateParamIndex = Render::cbExternalViewTransformState::sStateParamIndex;
   *(_WORD *)&arg.mFlags = 1;
-  if ( (_WORD)Render::cbExternalViewTransformState::sStateParamIndex == -1 )
+  if ( (_WORD)Render::cbExternalViewTransformState::sStateParamIndex == 0xFFFF )
   {
     v13 = Illusion::StateSystem::GetParam(&Illusion::gStateSystem, "cbExternalViewTransform");
     Render::cbExternalViewTransformState::sStateParamIndex = v13;
     arg.mStateParamIndex = v13;
   }
-  arg.mWorldView = v11;
-  arg.mProjection = v12;
+  arg.mWorldView = &mSettings->mWorldView;
+  arg.mProjection = p_mProjection;
   arg.mNext = 0i64;
-  Illusion::StateArgs::Set<Render::cbExternalViewTransformState>(v5, &arg);
-  Illusion::StateArgs::Set<Render::cbShadowTransformState>(v5, (Render::cbShadowTransformState *)&arg.mStateParamIndex);
-  v14 = Render::View::GetStateValues(v3);
-  v14->mSetValueMask.mFlags[0] |= 0x8000ui64;
-  v14->mParamValues[15] = v10;
-  v15 = v4->mEnvState;
-  v16 = Render::View::GetStateValues(v3);
+  Illusion::StateArgs::Set<Render::cbExternalViewTransformState>(StateArgs, &arg);
+  Illusion::StateArgs::Set<Render::cbShadowTransformState>(
+    StateArgs,
+    (Render::cbShadowTransformState *)&arg.mStateParamIndex);
+  StateValues = Render::View::GetStateValues(view);
+  StateValues->mSetValueMask.mFlags[0] |= 0x8000ui64;
+  StateValues->mParamValues[15] = v10;
+  mEnvState = render_context->mEnvState;
+  v16 = Render::View::GetStateValues(view);
   v16->mSetValueMask.mFlags[0] |= 0x80000000000000ui64;
-  v16->mParamValues[55] = v15;
+  v16->mParamValues[55] = mEnvState;
   Scaleform::Ptr<Scaleform::Render::Texture>::Ptr<Scaleform::Render::Texture>(&poly);
   if ( UFG::RenderWorld::msIsNisPlaying || UFG::RenderWorld::msStageHairSkin->mEnableSSSOutsideNIS )
   {
     v17 = 1;
-    v18 = UFG::TimeOfDayManager::GetInstance();
-    v19 = 1;
-    if ( !UFG::TimeOfDayManager::IsSunShining(v18, v4->mEnvState) )
-      v19 = 0;
+    Instance = UFG::TimeOfDayManager::GetInstance();
+    IsSunShining = UFG::TimeOfDayManager::IsSunShining(Instance, render_context->mEnvState);
     v20 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x100u, 0x10u);
     v21 = (float *)v20;
-    v22 = (_OWORD *)v4->mEnvState->SunDir;
+    v22 = render_context->mEnvState;
     v23 = v20;
-    if ( ((unsigned __int8)v20 | (unsigned __int8)v4->mEnvState) & 0xF )
+    if ( (((unsigned __int8)v20 | (unsigned __int8)v22) & 0xF) != 0 )
     {
       memmove(v20, v22, 0x100ui64);
     }
@@ -907,52 +919,52 @@ void __fastcall UFG::RenderStageAO::RenderAmbientOcclusionPS(UFG::RenderStageAO 
       v24 = 2i64;
       do
       {
-        *(_OWORD *)v23 = *v22;
-        *((_OWORD *)v23 + 1) = v22[1];
-        *((_OWORD *)v23 + 2) = v22[2];
-        *((_OWORD *)v23 + 3) = v22[3];
-        *((_OWORD *)v23 + 4) = v22[4];
-        *((_OWORD *)v23 + 5) = v22[5];
-        *((_OWORD *)v23 + 6) = v22[6];
+        *(_OWORD *)v23 = *(_OWORD *)v22->SunDir;
+        *((_OWORD *)v23 + 1) = *(_OWORD *)v22->SunDirWorld;
+        *((_OWORD *)v23 + 2) = *(_OWORD *)v22->SunColor;
+        *((_OWORD *)v23 + 3) = *(_OWORD *)v22->AmbientColorHorizon;
+        *((_OWORD *)v23 + 4) = *(_OWORD *)v22->ScaleAndHeight;
+        *((_OWORD *)v23 + 5) = *(_OWORD *)v22->ScatterZenithColor;
+        *((_OWORD *)v23 + 6) = *(_OWORD *)v22->ScatterHorizonColor;
         v23 += 128;
-        *((_OWORD *)v23 - 1) = v22[7];
-        v22 += 8;
+        *((_OWORD *)v23 - 1) = *(_OWORD *)v22->ScatterGroundColor;
+        v22 = (CB_EnvironmentSettings *)((char *)v22 + 128);
         --v24;
       }
       while ( v24 );
     }
-    v25 = v3->mViewWorld.v0.y;
-    v26 = v3->mViewWorld.v0.z;
-    v27 = v3->mViewWorld.v0.w;
-    m.v0.x = v3->mViewWorld.v0.x;
-    m.v0.y = v25;
-    m.v0.z = v26;
-    m.v0.w = v27;
-    v28 = v3->mViewWorld.v1.y;
-    v29 = v3->mViewWorld.v1.z;
-    v30 = v3->mViewWorld.v1.w;
-    m.v1.x = v3->mViewWorld.v1.x;
+    y = view->mViewWorld.v0.y;
+    z = view->mViewWorld.v0.z;
+    w = view->mViewWorld.v0.w;
+    m.v0.x = view->mViewWorld.v0.x;
+    m.v0.y = y;
+    m.v0.z = z;
+    m.v0.w = w;
+    v28 = view->mViewWorld.v1.y;
+    v29 = view->mViewWorld.v1.z;
+    v30 = view->mViewWorld.v1.w;
+    m.v1.x = view->mViewWorld.v1.x;
     m.v1.y = v28;
     m.v1.z = v29;
     m.v1.w = v30;
-    v31 = v3->mViewWorld.v2.y;
-    v32 = v3->mViewWorld.v2.z;
-    v33 = v3->mViewWorld.v2.w;
-    m.v2.x = v3->mViewWorld.v2.x;
+    v31 = view->mViewWorld.v2.y;
+    v32 = view->mViewWorld.v2.z;
+    v33 = view->mViewWorld.v2.w;
+    m.v2.x = view->mViewWorld.v2.x;
     m.v2.y = v31;
     m.v2.z = v32;
     m.v2.w = v33;
-    v34 = v3->mViewWorld.v3.y - v31;
-    v35 = v3->mViewWorld.v3.z - v32;
-    v36 = v3->mViewWorld.v3.w - v33;
-    m.v3.x = v3->mViewWorld.v3.x - m.v2.x;
+    v34 = view->mViewWorld.v3.y - v31;
+    v35 = view->mViewWorld.v3.z - v32;
+    v36 = view->mViewWorld.v3.w - v33;
+    m.v3.x = view->mViewWorld.v3.x - m.v2.x;
     m.v3.y = v34;
     m.v3.z = v35;
     m.v3.w = v36;
     UFG::qInverseAffine(&d, &m);
     *(float *)&dest_mip_level = FLOAT_2_0;
-    UFG::RenderStageAO::GetSignificantLightDirection(&m, &d, v4->mEnvState, v19, dest_mip_level);
-    v37 = outLightDirWorld.x;
+    UFG::RenderStageAO::GetSignificantLightDirection(&m, &d, render_context->mEnvState, IsSunShining, dest_mip_level);
+    x = outLightDirWorld.x;
     v21[4] = outLightDirWorld.x;
     v38 = outLightDirWorld.y;
     v21[5] = outLightDirWorld.y;
@@ -960,23 +972,23 @@ void __fastcall UFG::RenderStageAO::RenderAmbientOcclusionPS(UFG::RenderStageAO 
     v21[6] = outLightDirWorld.z;
     v40 = outLightDirWorld.w;
     v21[7] = outLightDirWorld.w;
-    v41 = (float)((float)((float)(v38 * v3->mSettings->mWorldView.v1.x) + (float)(v37 * v3->mSettings->mWorldView.v0.x))
-                + (float)(v39 * v3->mSettings->mWorldView.v2.x))
-        + (float)(v40 * v3->mSettings->mWorldView.v3.x);
-    v42 = (float)((float)((float)(v38 * v3->mSettings->mWorldView.v1.y) + (float)(v37 * v3->mSettings->mWorldView.v0.y))
-                + (float)(v39 * v3->mSettings->mWorldView.v2.y))
-        + (float)(v40 * v3->mSettings->mWorldView.v3.y);
-    v43 = (float)((float)((float)(v38 * v3->mSettings->mWorldView.v1.z) + (float)(v37 * v3->mSettings->mWorldView.v0.z))
-                + (float)(v39 * v3->mSettings->mWorldView.v2.z))
-        + (float)(v40 * v3->mSettings->mWorldView.v3.z);
-    v44 = (float)((float)((float)(v38 * v3->mSettings->mWorldView.v1.w) + (float)(v37 * v3->mSettings->mWorldView.v0.w))
-                + (float)(v39 * v3->mSettings->mWorldView.v2.w))
-        + (float)(v40 * v3->mSettings->mWorldView.v3.w);
+    v41 = (float)((float)((float)(v38 * view->mSettings->mWorldView.v1.x) + (float)(x * view->mSettings->mWorldView.v0.x))
+                + (float)(v39 * view->mSettings->mWorldView.v2.x))
+        + (float)(v40 * view->mSettings->mWorldView.v3.x);
+    v42 = (float)((float)((float)(v38 * view->mSettings->mWorldView.v1.y) + (float)(x * view->mSettings->mWorldView.v0.y))
+                + (float)(v39 * view->mSettings->mWorldView.v2.y))
+        + (float)(v40 * view->mSettings->mWorldView.v3.y);
+    v43 = (float)((float)((float)(v38 * view->mSettings->mWorldView.v1.z) + (float)(x * view->mSettings->mWorldView.v0.z))
+                + (float)(v39 * view->mSettings->mWorldView.v2.z))
+        + (float)(v40 * view->mSettings->mWorldView.v3.z);
+    v44 = (float)((float)((float)(v38 * view->mSettings->mWorldView.v1.w) + (float)(x * view->mSettings->mWorldView.v0.w))
+                + (float)(v39 * view->mSettings->mWorldView.v2.w))
+        + (float)(v40 * view->mSettings->mWorldView.v3.w);
     *v21 = v41;
     v21[1] = v42;
     v21[2] = v43;
     v21[3] = v44;
-    v45 = Render::View::GetStateValues(v3);
+    v45 = Render::View::GetStateValues(view);
     v45->mSetValueMask.mFlags[0] |= 0x80000000000000ui64;
     v45->mParamValues[55] = v21;
   }
@@ -984,38 +996,38 @@ void __fastcall UFG::RenderStageAO::RenderAmbientOcclusionPS(UFG::RenderStageAO 
   {
     v17 = 0;
   }
-  if ( v4->mRenderSettingsForFrame.mSSAO == 1 )
+  if ( render_context->mRenderSettingsForFrame.mSSAO == SSAO_HIGH )
   {
-    v46 = v4->mSSAOHighMaterial;
+    mSSAOHighMaterial = render_context->mSSAOHighMaterial;
   }
   else if ( v17 )
   {
-    v46 = v4->mSSAONISMaterial;
+    mSSAOHighMaterial = render_context->mSSAONISMaterial;
   }
   else
   {
-    v46 = v4->mSSAOMaterial;
+    mSSAOHighMaterial = render_context->mSSAOMaterial;
   }
-  Render::View::Draw(v3, &poly, v46, 0i64);
-  v47 = arg.mPrev;
-  v48 = arg.mNext;
+  Render::View::Draw(view, &poly, mSSAOHighMaterial, 0i64);
+  mPrev = arg.mPrev;
+  mNext = arg.mNext;
   arg.mPrev->mNext = arg.mNext;
-  v48->mPrev = v47;
-  arg.mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
-  arg.mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
+  mNext->mPrev = mPrev;
+  arg.mPrev = &arg;
+  arg.mNext = &arg;
   arg.mIsSet = 0;
-  if ( (Illusion::StateArgs *)v5->mStateArgsCreateMask.mFlags[2 * (arg.mStateParamIndex + 3i64) + 1] == (Illusion::StateArgs *)((char *)v5 + 16 * (arg.mStateParamIndex + 3i64)) )
-    v5->mStateArgsCreateMask.mFlags[(unsigned int)arg.mStateParamIndex >> 6] &= ~(1i64 << (arg.mStateParamIndex & 0x3F));
+  if ( (UFG::qList<Illusion::StateArg,Illusion::StateArg,0,0> *)StateArgs->mStateArgs[arg.mStateParamIndex].mNode.mNext == &StateArgs->mStateArgs[arg.mStateParamIndex] )
+    StateArgs->mStateArgsCreateMask.mFlags[(unsigned int)arg.mStateParamIndex >> 6] &= ~(1i64 << (arg.mStateParamIndex & 0x3F));
   v49 = *(_QWORD *)&arg.mStateParamIndex;
-  v50 = arg.mWorldView;
+  mWorldView = arg.mWorldView;
   *(_QWORD *)(*(_QWORD *)&arg.mStateParamIndex + 8i64) = arg.mWorldView;
-  *(_QWORD *)&v50->v0.x = v49;
-  *(_QWORD *)&arg.mStateParamIndex = (char *)&arg + 24;
+  *(_QWORD *)&mWorldView->v0.x = v49;
+  *(_QWORD *)&arg.mStateParamIndex = &arg.mStateParamIndex;
   arg.mWorldView = (UFG::qMatrix44 *)&arg.mStateParamIndex;
   BYTE3(arg.mCached_Remote.m_Stream) = 0;
-  if ( (Illusion::StateArgs *)v5->mStateArgsCreateMask.mFlags[2 * (SLOWORD(arg.mCached_Remote.m_Stream) + 3i64) + 1] == (Illusion::StateArgs *)((char *)v5 + 16 * (SLOWORD(arg.mCached_Remote.m_Stream) + 3i64)) )
-    v5->mStateArgsCreateMask.mFlags[(unsigned int)SLOWORD(arg.mCached_Remote.m_Stream) >> 6] &= ~(1i64 << ((_QWORD)arg.mCached_Remote.m_Stream & 0x3F));
-  Render::View::EndTarget(v3);
+  if ( (UFG::qList<Illusion::StateArg,Illusion::StateArg,0,0> *)StateArgs->mStateArgs[SLOWORD(arg.mCached_Remote.m_Stream)].mNode.mNext == &StateArgs->mStateArgs[SLOWORD(arg.mCached_Remote.m_Stream)] )
+    StateArgs->mStateArgsCreateMask.mFlags[(unsigned int)SLOWORD(arg.mCached_Remote.m_Stream) >> 6] &= ~(1i64 << ((__int64)arg.mCached_Remote.m_Stream & 0x3F));
+  Render::View::EndTarget(view);
   v51 = arg.mPrev;
   v52 = arg.mNext;
   arg.mPrev->mNext = arg.mNext;
@@ -1028,243 +1040,249 @@ void __fastcall UFG::RenderStageAO::RenderAmbientOcclusionPS(UFG::RenderStageAO 
 
 // File Line: 455
 // RVA: 0x350C0
-void __fastcall UFG::RenderStageAO::RenderAOBilateralBlurPS(UFG::RenderStageAO *this, UFG::RenderContext *render_context, Render::View *view)
+void __fastcall UFG::RenderStageAO::RenderAOBilateralBlurPS(
+        UFG::RenderStageAO *this,
+        UFG::RenderContext *render_context,
+        Render::View *view)
 {
-  Render::View *v3; // r14
-  UFG::RenderContext *v4; // rsi
-  Illusion::StateArgs *v5; // r15
+  Illusion::StateArgs *StateArgs; // r15
   _WORD *v6; // rbx
-  Illusion::Target *v7; // r8
-  Illusion::Target *v8; // rdx
-  unsigned int v9; // er9
-  __int64 v10; // rdi
-  signed __int64 v11; // r12
-  unsigned __int16 v12; // ax
-  Illusion::Material *v13; // rdi
+  Illusion::Target *mHalfSizeScratchTargetB; // r8
+  Illusion::Target *mAmbientOcclusionAliasTarget; // rdx
+  unsigned int v9; // r9d
+  Render::ViewSettings *mSettings; // rdi
+  UFG::qMatrix44 *p_mProjection; // r12
+  unsigned __int16 Param; // ax
+  Illusion::Material *mMaterial; // rdi
   __int64 v14; // rax
   _WORD *v15; // rax
-  __int64 v16; // rax
-  unsigned int v17; // er8
+  __int64 mOffset; // rax
+  unsigned int mUID; // r8d
   __int64 v18; // rax
-  __int64 v19; // rcx
-  UFG::qVector4 *v20; // rax
+  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *mPrev; // rcx
+  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *mNext; // rax
   unsigned __int64 *v21; // rdx
-  __int64 v22; // rcx
-  UFG::qVector4 *v23; // rax
-  bool clearOnResolve[8]; // [rsp+30h] [rbp-1h]
-  UFG::qVector4 *texUV; // [rsp+38h] [rbp+7h]
-  bool ps4_decompress_depth[8]; // [rsp+40h] [rbp+Fh]
-  bool d3d_disable_depth_copy[2]; // [rsp+48h] [rbp+17h]
-  __int16 v28; // [rsp+4Ah] [rbp+19h]
-  __int64 v29; // [rsp+50h] [rbp+1Fh]
-  __int64 v30; // [rsp+58h] [rbp+27h]
-  __int64 v31; // [rsp+60h] [rbp+2Fh]
-  Render::Poly poly; // [rsp+A0h] [rbp+6Fh]
+  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v22; // rcx
+  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v23; // rax
+  Render::cbExternalViewTransformState clearOnResolve; // [rsp+30h] [rbp-1h] BYREF
+  Render::Poly poly; // [rsp+A0h] [rbp+6Fh] BYREF
 
-  v3 = view;
-  v4 = render_context;
-  v5 = Render::View::GetStateArgs(view);
-  Render::gRenderUtilities.mSubmitContext = v3->mSubmitContext;
+  StateArgs = Render::View::GetStateArgs(view);
+  Render::gRenderUtilities.mSubmitContext = view->mSubmitContext;
   v6 = 0i64;
-  v7 = v4->mHalfSizeScratchTargetB;
-  v8 = v4->mAmbientOcclusionAliasTarget;
-  texUV = 0i64;
-  clearOnResolve[0] = 1;
+  mHalfSizeScratchTargetB = render_context->mHalfSizeScratchTargetB;
+  mAmbientOcclusionAliasTarget = render_context->mAmbientOcclusionAliasTarget;
+  clearOnResolve.mNext = 0i64;
+  LOBYTE(clearOnResolve.mPrev) = 1;
   v9 = uidBILATERALBLURX;
-  if ( !v4->mRenderSun )
+  if ( !render_context->mRenderSun )
     v9 = uidBILATERALBLURX_NOSUN;
-  Render::RenderUtilities::Blit(&Render::gRenderUtilities, v8, v7, v9, "AO Blur X", 0, clearOnResolve[0], texUV);
+  Render::RenderUtilities::Blit(
+    &Render::gRenderUtilities,
+    mAmbientOcclusionAliasTarget,
+    mHalfSizeScratchTargetB,
+    v9,
+    "AO Blur X",
+    0,
+    (bool)clearOnResolve.mPrev,
+    (UFG::qVector4 *)clearOnResolve.mNext);
   Render::gRenderUtilities.mSubmitContext = 0i64;
-  Render::View::BeginTarget(v3, v4->mAmbientOcclusionAliasTarget, "AO Blur Y/ Blobs", 0, 0, 0i64, 1, 0, 0, 0);
-  v10 = (__int64)v3->mSettings;
-  v11 = (signed __int64)&v3->mSettings->mProjection;
-  *(_QWORD *)clearOnResolve = clearOnResolve;
-  texUV = (UFG::qVector4 *)clearOnResolve;
-  *(_QWORD *)ps4_decompress_depth = 0i64;
-  *(_WORD *)d3d_disable_depth_copy = Render::cbExternalViewTransformState::sStateParamIndex;
-  v28 = 1;
-  if ( (_WORD)Render::cbExternalViewTransformState::sStateParamIndex == -1 )
+  Render::View::BeginTarget(
+    view,
+    render_context->mAmbientOcclusionAliasTarget,
+    "AO Blur Y/ Blobs",
+    0,
+    0,
+    0i64,
+    1,
+    0,
+    0,
+    0);
+  mSettings = view->mSettings;
+  p_mProjection = &view->mSettings->mProjection;
+  clearOnResolve.mPrev = &clearOnResolve;
+  clearOnResolve.mNext = &clearOnResolve;
+  clearOnResolve.mCallback = 0i64;
+  clearOnResolve.mStateParamIndex = Render::cbExternalViewTransformState::sStateParamIndex;
+  *(_WORD *)&clearOnResolve.mFlags = 1;
+  if ( (_WORD)Render::cbExternalViewTransformState::sStateParamIndex == 0xFFFF )
   {
-    v12 = Illusion::StateSystem::GetParam(&Illusion::gStateSystem, "cbExternalViewTransform");
-    Render::cbExternalViewTransformState::sStateParamIndex = v12;
-    *(_WORD *)d3d_disable_depth_copy = v12;
+    Param = Illusion::StateSystem::GetParam(&Illusion::gStateSystem, "cbExternalViewTransform");
+    Render::cbExternalViewTransformState::sStateParamIndex = Param;
+    clearOnResolve.mStateParamIndex = Param;
   }
-  v29 = v10;
-  v30 = v11;
-  v31 = 0i64;
-  Illusion::StateArgs::Set<Render::cbExternalViewTransformState>(
-    v5,
-    (Render::cbExternalViewTransformState *)clearOnResolve);
-  v13 = Render::gRenderUtilities.mMaterial;
-  if ( !v4->mRenderSun )
+  clearOnResolve.mWorldView = &mSettings->mWorldView;
+  clearOnResolve.mProjection = p_mProjection;
+  clearOnResolve.mCached_Remote.m_Stream = 0i64;
+  Illusion::StateArgs::Set<Render::cbExternalViewTransformState>(StateArgs, &clearOnResolve);
+  mMaterial = Render::gRenderUtilities.mMaterial;
+  if ( !render_context->mRenderSun )
   {
-    if ( LODWORD(Render::gRenderUtilities.mMaterial[1].mResourceHandles.mNode.mNext) == uidBILATERALBLURY_NOSUN )
+    if ( LODWORD(Render::gRenderUtilities.mMaterial[1].mResourceHandles.UFG::qResourceData::mNode.mNext) == uidBILATERALBLURY_NOSUN )
       goto LABEL_14;
     UFG::qResourceHandle::Init(
       (UFG::qResourceHandle *)&Render::gRenderUtilities.mMaterial[1].mNode.mChild[1],
       Render::gRenderUtilities.mMaterial[1].mTypeUID,
       uidBILATERALBLURY_NOSUN);
-    v16 = v13->mMaterialUser.mOffset;
-    if ( v16 )
+    mOffset = mMaterial->mMaterialUser.mOffset;
+    if ( mOffset )
     {
-      v15 = (_WORD *)((char *)&v13->mMaterialUser + v16);
+      v15 = (_WORD *)((char *)&mMaterial->mMaterialUser + mOffset);
       goto LABEL_13;
     }
 LABEL_12:
     v15 = 0i64;
     goto LABEL_13;
   }
-  if ( LODWORD(Render::gRenderUtilities.mMaterial[1].mResourceHandles.mNode.mNext) == uidBILATERALBLURY )
+  if ( LODWORD(Render::gRenderUtilities.mMaterial[1].mResourceHandles.UFG::qResourceData::mNode.mNext) == uidBILATERALBLURY )
     goto LABEL_14;
   UFG::qResourceHandle::Init(
     (UFG::qResourceHandle *)&Render::gRenderUtilities.mMaterial[1].mNode.mChild[1],
     Render::gRenderUtilities.mMaterial[1].mTypeUID,
     uidBILATERALBLURY);
-  v14 = v13->mMaterialUser.mOffset;
+  v14 = mMaterial->mMaterialUser.mOffset;
   if ( !v14 )
     goto LABEL_12;
-  v15 = (_WORD *)((char *)&v13->mMaterialUser + v14);
+  v15 = (_WORD *)((char *)&mMaterial->mMaterialUser + v14);
 LABEL_13:
   *v15 |= 0x20u;
-  v13 = Render::gRenderUtilities.mMaterial;
+  mMaterial = Render::gRenderUtilities.mMaterial;
 LABEL_14:
-  v17 = v4->mHalfSizeScratchTargetB->mTargetTexture[0]->mNode.mUID;
-  if ( LODWORD(v13[1].mStateBlockMask.mFlags[0]) != v17 )
+  mUID = render_context->mHalfSizeScratchTargetB->mTargetTexture[0]->mNode.mUID;
+  if ( LODWORD(mMaterial[1].mStateBlockMask.mFlags[0]) != mUID )
   {
-    UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v13[1].mDebugName[20], v13[1].mStateBlockMask.mFlags[1], v17);
-    v18 = v13->mMaterialUser.mOffset;
+    UFG::qResourceHandle::Init(
+      (UFG::qResourceHandle *)&mMaterial[1].mDebugName[20],
+      mMaterial[1].mStateBlockMask.mFlags[1],
+      mUID);
+    v18 = mMaterial->mMaterialUser.mOffset;
     if ( v18 )
-      v6 = (_WORD *)((char *)&v13->mMaterialUser + v18);
+      v6 = (_WORD *)((char *)&mMaterial->mMaterialUser + v18);
     *v6 |= 0x20u;
   }
   Scaleform::Ptr<Scaleform::Render::Texture>::Ptr<Scaleform::Render::Texture>(&poly);
-  Render::View::Draw(v3, &poly, Render::gRenderUtilities.mMaterial, 0i64);
-  UFG::DropShadowComponent::DrawAll(v3, v4->mHalfSizeLinearDepthTarget);
-  v19 = *(_QWORD *)clearOnResolve;
-  v20 = texUV;
-  *(_QWORD *)(*(_QWORD *)clearOnResolve + 8i64) = texUV;
-  *(_QWORD *)&v20->x = v19;
-  *(_QWORD *)clearOnResolve = clearOnResolve;
-  texUV = (UFG::qVector4 *)clearOnResolve;
-  HIBYTE(v28) = 0;
-  if ( (Illusion::StateArgs *)v5->mStateArgsCreateMask.mFlags[2 * (*(signed __int16 *)d3d_disable_depth_copy + 3i64) + 1] == (Illusion::StateArgs *)((char *)v5 + 16 * (*(signed __int16 *)d3d_disable_depth_copy + 3i64)) )
+  Render::View::Draw(view, &poly, Render::gRenderUtilities.mMaterial, 0i64);
+  UFG::DropShadowComponent::DrawAll(view, render_context->mHalfSizeLinearDepthTarget);
+  mPrev = clearOnResolve.mPrev;
+  mNext = clearOnResolve.mNext;
+  clearOnResolve.mPrev->mNext = clearOnResolve.mNext;
+  mNext->mPrev = mPrev;
+  clearOnResolve.mPrev = &clearOnResolve;
+  clearOnResolve.mNext = &clearOnResolve;
+  clearOnResolve.mIsSet = 0;
+  if ( (UFG::qList<Illusion::StateArg,Illusion::StateArg,0,0> *)StateArgs->mStateArgs[clearOnResolve.mStateParamIndex].mNode.mNext == &StateArgs->mStateArgs[clearOnResolve.mStateParamIndex] )
   {
-    v21 = &v5->mStateArgsCreateMask.mFlags[(unsigned int)*(signed __int16 *)d3d_disable_depth_copy >> 6];
-    *v21 &= ~(1i64 << (d3d_disable_depth_copy[0] & 0x3F));
+    v21 = &StateArgs->mStateArgsCreateMask.mFlags[(unsigned int)clearOnResolve.mStateParamIndex >> 6];
+    *v21 &= ~(1i64 << (clearOnResolve.mStateParamIndex & 0x3F));
   }
-  Render::View::EndTarget(v3);
-  v22 = *(_QWORD *)clearOnResolve;
-  v23 = texUV;
-  *(_QWORD *)(*(_QWORD *)clearOnResolve + 8i64) = texUV;
-  *(_QWORD *)&v23->x = v22;
+  Render::View::EndTarget(view);
+  v22 = clearOnResolve.mPrev;
+  v23 = clearOnResolve.mNext;
+  clearOnResolve.mPrev->mNext = clearOnResolve.mNext;
+  v23->mPrev = v22;
 }
 
 // File Line: 489
 // RVA: 0x359C0
-Illusion::RenderQueue *__fastcall UFG::RenderStageAO::RenderAmbientOcclusionCS(UFG::RenderStageAO *this, UFG::RenderContext *render_context, bool bQuarterSize)
+Illusion::RenderQueue *__fastcall UFG::RenderStageAO::RenderAmbientOcclusionCS(
+        UFG::RenderStageAO *this,
+        UFG::RenderContext *render_context,
+        bool bQuarterSize)
 {
-  bool v3; // r14
-  UFG::RenderContext *v4; // rsi
-  UFG::RenderStageAO *v5; // r13
-  Illusion::Target *v6; // rbp
+  Illusion::Target *mQuarterSizeAmbientOcclusionTarget; // rbp
   __m128 v7; // xmm1
-  signed int v8; // ecx
+  int v8; // ecx
   __m128 v9; // xmm1
-  signed int v10; // ecx
-  signed int v11; // er12
+  int v10; // ecx
+  int v11; // r12d
   char *v12; // rax
   char *v13; // rbx
-  _QWORD *v14; // ST28_8
-  UFG::qResourceData *v15; // r15
-  __int64 v16; // rdx
-  __int64 v17; // rax
-  signed __int64 v18; // rcx
-  char *v19; // rax
-  char *v20; // rdx
+  UFG::qResourceData *mData; // r15
+  __int64 v15; // rdx
+  __int64 v16; // rax
+  __int64 v17; // rcx
+  char *v18; // rax
+  char *v19; // rdx
+  __int64 v20; // rax
   __int64 v21; // rax
-  __int64 v22; // rax
-  float v23; // xmm1_4
-  float v24; // xmm10_4
-  float v25; // xmm3_4
-  float v26; // xmm2_4
+  float z; // xmm1_4
+  float v23; // xmm10_4
+  float w; // xmm3_4
+  float v25; // xmm2_4
+  float v26; // xmm10_4
   float v27; // xmm10_4
-  float v28; // xmm10_4
-  float v29; // xmm9_4
-  float v30; // xmm7_4
-  float *v31; // r15
-  __int64 v32; // rdx
-  __int64 v33; // rax
-  signed __int64 v34; // rcx
-  char *v35; // rax
-  char *v36; // rdx
+  float v28; // xmm9_4
+  float v29; // xmm7_4
+  float *v30; // r15
+  __int64 v31; // rdx
+  __int64 v32; // rax
+  __int64 v33; // rcx
+  char *v34; // rax
+  char *v35; // rdx
+  __int64 v36; // rax
   __int64 v37; // rax
-  __int64 v38; // rax
-  Illusion::Target *v39; // rax
-  Illusion::Texture *v40; // rbp
-  __int64 v41; // rdx
-  __int64 v42; // rax
-  signed __int64 v43; // rcx
-  char *v44; // rax
-  char *v45; // rdx
+  Illusion::Target *mQuarterSizeLinearDepthTarget; // rax
+  Illusion::Texture *v39; // rbp
+  __int64 v40; // rdx
+  __int64 v41; // rax
+  __int64 v42; // rcx
+  char *v43; // rax
+  char *v44; // rdx
+  __int64 v45; // rax
   __int64 v46; // rax
-  __int64 v47; // rax
-  Illusion::Texture *v48; // rbp
-  __int64 v49; // rdx
-  __int64 v50; // rax
-  signed __int64 v51; // rcx
-  char *v52; // rax
-  char *v53; // rdx
+  Illusion::Texture *v47; // rbp
+  __int64 v48; // rdx
+  __int64 v49; // rax
+  __int64 v50; // rcx
+  char *v51; // rax
+  char *v52; // rdx
+  __int64 v53; // rax
   __int64 v54; // rax
-  __int64 v55; // rax
-  Illusion::UnorderedAccessView *v56; // rsi
-  unsigned __int16 v57; // bp
-  __int64 v58; // rdx
-  __int64 v59; // rax
-  signed __int64 v60; // rcx
-  char *v61; // rax
-  char *v62; // rdx
+  Illusion::UnorderedAccessView *mAmbientOcclusionAliasUAV; // rsi
+  unsigned __int16 mAOCSUAVParamIndex; // bp
+  __int64 v57; // rdx
+  __int64 v58; // rax
+  __int64 v59; // rcx
+  char *v60; // rax
+  char *v61; // rdx
+  __int64 v62; // rax
   __int64 v63; // rax
-  __int64 v64; // rax
-  char *v65; // rsi
-  __int64 v66; // rcx
-  __int64 v67; // rdx
-  signed __int64 v68; // rax
-  char *v69; // rax
-  char *v70; // rdx
+  char *v64; // rsi
+  __int64 v65; // rcx
+  __int64 v66; // rdx
+  __int64 v67; // rax
+  char *v68; // rax
+  char *v69; // rdx
+  __int64 v70; // rax
   __int64 v71; // rax
   __int64 v72; // rax
-  __int64 v73; // rax
-  __int64 v75; // [rsp+D0h] [rbp+8h]
-  float v76; // [rsp+E0h] [rbp+18h]
+  int v74; // [rsp+D0h] [rbp+8h]
+  float v75; // [rsp+E0h] [rbp+18h]
 
-  v3 = bQuarterSize;
-  v4 = render_context;
-  v5 = this;
   if ( bQuarterSize )
-    v6 = render_context->mQuarterSizeAmbientOcclusionTarget;
+    mQuarterSizeAmbientOcclusionTarget = render_context->mQuarterSizeAmbientOcclusionTarget;
   else
-    v6 = render_context->mAmbientOcclusionAliasTarget;
-  v7 = (__m128)COERCE_UNSIGNED_INT((float)v6->mWidth);
+    mQuarterSizeAmbientOcclusionTarget = render_context->mAmbientOcclusionAliasTarget;
+  v7 = (__m128)COERCE_UNSIGNED_INT((float)mQuarterSizeAmbientOcclusionTarget->mWidth);
   v7.m128_f32[0] = v7.m128_f32[0] * 0.03125;
-  v8 = (signed int)v7.m128_f32[0];
-  if ( (signed int)v7.m128_f32[0] != 0x80000000 && (float)v8 != v7.m128_f32[0] )
-    v7.m128_f32[0] = (float)((_mm_movemask_ps(_mm_unpacklo_ps(v7, v7)) & 1 ^ 1) + v8);
-  v75 = (unsigned int)(signed int)v7.m128_f32[0];
-  v9 = (__m128)COERCE_UNSIGNED_INT((float)v6->mHeight);
+  v8 = (int)v7.m128_f32[0];
+  if ( (int)v7.m128_f32[0] != 0x80000000 && (float)v8 != v7.m128_f32[0] )
+    v7.m128_f32[0] = (float)(!(_mm_movemask_ps(_mm_unpacklo_ps(v7, v7)) & 1) + v8);
+  v74 = (int)v7.m128_f32[0];
+  v9 = (__m128)COERCE_UNSIGNED_INT((float)mQuarterSizeAmbientOcclusionTarget->mHeight);
   v9.m128_f32[0] = v9.m128_f32[0] * 0.03125;
-  v10 = (signed int)v9.m128_f32[0];
-  if ( (signed int)v9.m128_f32[0] != 0x80000000 && (float)v10 != v9.m128_f32[0] )
-    v9.m128_f32[0] = (float)((_mm_movemask_ps(_mm_unpacklo_ps(v9, v9)) & 1 ^ 1) + v10);
-  v11 = (signed int)v9.m128_f32[0];
+  v10 = (int)v9.m128_f32[0];
+  if ( (int)v9.m128_f32[0] != 0x80000000 && (float)v10 != v9.m128_f32[0] )
+    v9.m128_f32[0] = (float)(!(_mm_movemask_ps(_mm_unpacklo_ps(v9, v9)) & 1) + v10);
+  v11 = (int)v9.m128_f32[0];
   v12 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x460u, 0x10u);
   v13 = v12;
   if ( v12 )
   {
     *(_QWORD *)v12 = v12;
     *((_QWORD *)v12 + 1) = v12;
-    v14 = v12 + 16;
-    *v14 = v14;
-    v14[1] = v14;
+    *((_QWORD *)v12 + 2) = v12 + 16;
+    *((_QWORD *)v12 + 3) = v12 + 16;
     UFG::qMemSet(v12 + 96, 0, 0x400u);
     *((_QWORD *)v13 + 11) = 0i64;
     *((_QWORD *)v13 + 10) = 0i64;
@@ -1279,329 +1297,311 @@ Illusion::RenderQueue *__fastcall UFG::RenderStageAO::RenderAmbientOcclusionCS(U
   {
     v13 = 0i64;
   }
-  if ( v3 )
-    v15 = v5->mHalfResAOCSShader.mData;
+  if ( bQuarterSize )
+    mData = this->mHalfResAOCSShader.mData;
   else
-    v15 = v5->mAOCSShader.mData;
-  v16 = *((_QWORD *)v13 + 5);
-  if ( v16 )
+    mData = this->mAOCSShader.mData;
+  v15 = *((_QWORD *)v13 + 5);
+  if ( v15 )
   {
-    v17 = *(unsigned int *)(v16 + 24);
-    if ( (unsigned int)v17 < 0x7E )
+    v16 = *(unsigned int *)(v15 + 24);
+    if ( (unsigned int)v16 < 0x7E )
     {
-      v18 = v16 + 16 * (v17 + 2);
-      *(_DWORD *)(v16 + 24) = v17 + 1;
-      goto LABEL_25;
+      v17 = v15 + 16 * (v16 + 2);
+      *(_DWORD *)(v15 + 24) = v16 + 1;
+      goto LABEL_24;
     }
-    if ( v16 )
-    {
-      *((_DWORD *)v13 + 18) += *(_DWORD *)(v16 + 24);
-      *((_QWORD *)v13 + 5) = 0i64;
-    }
+    *((_DWORD *)v13 + 18) += *(_DWORD *)(v15 + 24);
+    *((_QWORD *)v13 + 5) = 0i64;
   }
-  v19 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
-  v20 = v19;
-  if ( v19 )
+  v18 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
+  v19 = v18;
+  if ( v18 )
   {
-    *(_QWORD *)v19 = v19;
-    *((_QWORD *)v19 + 1) = v19;
-    *((_QWORD *)v19 + 2) = 0i64;
-    *((_DWORD *)v19 + 6) = 0;
-    v21 = *((_QWORD *)v13 + 2);
-    *(_QWORD *)(v21 + 8) = v20;
-    *(_QWORD *)v20 = v21;
-    *((_QWORD *)v20 + 1) = v13 + 16;
-    *((_QWORD *)v13 + 2) = v20;
-    *((_QWORD *)v13 + 5) = v20;
+    *(_QWORD *)v18 = v18;
+    *((_QWORD *)v18 + 1) = v18;
+    *((_QWORD *)v18 + 2) = 0i64;
+    *((_DWORD *)v18 + 6) = 0;
+    v20 = *((_QWORD *)v13 + 2);
+    *(_QWORD *)(v20 + 8) = v19;
+    *(_QWORD *)v19 = v20;
+    *((_QWORD *)v19 + 1) = v13 + 16;
+    *((_QWORD *)v13 + 2) = v19;
+    *((_QWORD *)v13 + 5) = v19;
   }
-  v22 = *((_QWORD *)v13 + 5);
-  if ( v22 )
+  v21 = *((_QWORD *)v13 + 5);
+  if ( v21 )
   {
-    *(_DWORD *)(v22 + 24) = 1;
-    v18 = *((_QWORD *)v13 + 5) + 32i64;
-LABEL_25:
-    if ( v18 )
+    *(_DWORD *)(v21 + 24) = 1;
+    v17 = *((_QWORD *)v13 + 5) + 32i64;
+LABEL_24:
+    if ( v17 )
     {
-      *(_DWORD *)v18 = 1;
-      *(_QWORD *)(v18 + 8) = v15;
+      *(_DWORD *)v17 = 1;
+      *(_QWORD *)(v17 + 8) = mData;
     }
   }
-  v23 = v4->mMainViewSettings.mProjection.v2.z;
-  v24 = v4->mMainViewSettings.mProjection.v3.z;
-  v25 = v4->mMainViewSettings.mProjection.v2.w;
-  if ( v23 == 0.0 || v23 == v25 )
+  z = render_context->mMainViewSettings.mProjection.v2.z;
+  v23 = render_context->mMainViewSettings.mProjection.v3.z;
+  w = render_context->mMainViewSettings.mProjection.v2.w;
+  if ( z == 0.0 || z == w )
   {
-    v27 = v76;
-    v26 = v76;
+    v26 = v75;
+    v25 = v75;
   }
   else
   {
-    v26 = v24 / v23;
-    v27 = (float)(v24 - v4->mMainViewSettings.mProjection.v3.w) / (float)(v23 - v25);
+    v25 = v23 / z;
+    v26 = (float)(v23 - render_context->mMainViewSettings.mProjection.v3.w) / (float)(z - w);
   }
-  v28 = v27 / (float)(v27 - v26);
-  v29 = 1.0 / v4->mMainViewSettings.mProjection.v0.x;
-  v30 = 1.0 / v4->mMainViewSettings.mProjection.v1.y;
-  v31 = (float *)UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x80u, 0x10u);
-  *v31 = (float)v6->mWidth;
-  v31[1] = (float)v6->mHeight;
-  v31[2] = 1.0 / (float)v6->mWidth;
-  v31[3] = 1.0 / (float)v6->mHeight;
-  v31[7] = v28 * v26;
-  v31[6] = v28 * v26;
-  v31[5] = v28 * v26;
-  v31[4] = v28 * v26;
-  v31[11] = v28;
-  v31[10] = v28;
-  v31[9] = v28;
-  v31[8] = v28;
-  v31[12] = v29;
-  v31[13] = v30;
-  v32 = *((_QWORD *)v13 + 5);
-  if ( v32 )
+  v27 = v26 / (float)(v26 - v25);
+  v28 = 1.0 / render_context->mMainViewSettings.mProjection.v0.x;
+  v29 = 1.0 / render_context->mMainViewSettings.mProjection.v1.y;
+  v30 = (float *)UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x80u, 0x10u);
+  *v30 = (float)mQuarterSizeAmbientOcclusionTarget->mWidth;
+  v30[1] = (float)mQuarterSizeAmbientOcclusionTarget->mHeight;
+  v30[2] = 1.0 / (float)mQuarterSizeAmbientOcclusionTarget->mWidth;
+  v30[3] = 1.0 / (float)mQuarterSizeAmbientOcclusionTarget->mHeight;
+  v30[7] = v27 * v25;
+  v30[6] = v27 * v25;
+  v30[5] = v27 * v25;
+  v30[4] = v27 * v25;
+  v30[11] = v27;
+  v30[10] = v27;
+  v30[9] = v27;
+  v30[8] = v27;
+  v30[12] = v28;
+  v30[13] = v29;
+  v31 = *((_QWORD *)v13 + 5);
+  if ( v31 )
   {
-    v33 = *(unsigned int *)(v32 + 24);
-    if ( (unsigned int)v33 < 0x7E )
+    v32 = *(unsigned int *)(v31 + 24);
+    if ( (unsigned int)v32 < 0x7E )
     {
-      v34 = v32 + 16 * (v33 + 2);
-      *(_DWORD *)(v32 + 24) = v33 + 1;
-      goto LABEL_40;
+      v33 = v31 + 16 * (v32 + 2);
+      *(_DWORD *)(v31 + 24) = v32 + 1;
+      goto LABEL_38;
     }
-    if ( v32 )
-    {
-      *((_DWORD *)v13 + 18) += *(_DWORD *)(v32 + 24);
-      *((_QWORD *)v13 + 5) = 0i64;
-    }
+    *((_DWORD *)v13 + 18) += *(_DWORD *)(v31 + 24);
+    *((_QWORD *)v13 + 5) = 0i64;
   }
-  v35 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
-  v36 = v35;
-  if ( v35 )
+  v34 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
+  v35 = v34;
+  if ( v34 )
   {
-    *(_QWORD *)v35 = v35;
-    *((_QWORD *)v35 + 1) = v35;
-    *((_QWORD *)v35 + 2) = 0i64;
-    *((_DWORD *)v35 + 6) = 0;
-    v37 = *((_QWORD *)v13 + 2);
-    *(_QWORD *)(v37 + 8) = v36;
-    *(_QWORD *)v36 = v37;
-    *((_QWORD *)v36 + 1) = v13 + 16;
-    *((_QWORD *)v13 + 2) = v36;
-    *((_QWORD *)v13 + 5) = v36;
+    *(_QWORD *)v34 = v34;
+    *((_QWORD *)v34 + 1) = v34;
+    *((_QWORD *)v34 + 2) = 0i64;
+    *((_DWORD *)v34 + 6) = 0;
+    v36 = *((_QWORD *)v13 + 2);
+    *(_QWORD *)(v36 + 8) = v35;
+    *(_QWORD *)v35 = v36;
+    *((_QWORD *)v35 + 1) = v13 + 16;
+    *((_QWORD *)v13 + 2) = v35;
+    *((_QWORD *)v13 + 5) = v35;
   }
-  v38 = *((_QWORD *)v13 + 5);
-  if ( v38 )
+  v37 = *((_QWORD *)v13 + 5);
+  if ( v37 )
   {
-    *(_DWORD *)(v38 + 24) = 1;
-    v34 = *((_QWORD *)v13 + 5) + 32i64;
-LABEL_40:
-    if ( v34 )
+    *(_DWORD *)(v37 + 24) = 1;
+    v33 = *((_QWORD *)v13 + 5) + 32i64;
+LABEL_38:
+    if ( v33 )
     {
-      *(_DWORD *)v34 = 983042;
-      *(_QWORD *)(v34 + 8) = v31;
+      *(_DWORD *)v33 = 983042;
+      *(_QWORD *)(v33 + 8) = v30;
     }
   }
-  if ( v3 )
-    v39 = v4->mQuarterSizeLinearDepthTarget;
+  if ( bQuarterSize )
+    mQuarterSizeLinearDepthTarget = render_context->mQuarterSizeLinearDepthTarget;
   else
-    v39 = v4->mHalfSizeLinearDepthTarget;
-  v40 = v39->mTargetTexture[0];
-  v41 = *((_QWORD *)v13 + 5);
-  if ( v41 )
+    mQuarterSizeLinearDepthTarget = render_context->mHalfSizeLinearDepthTarget;
+  v39 = mQuarterSizeLinearDepthTarget->mTargetTexture[0];
+  v40 = *((_QWORD *)v13 + 5);
+  if ( v40 )
   {
-    v42 = *(unsigned int *)(v41 + 24);
-    if ( (unsigned int)v42 < 0x7E )
+    v41 = *(unsigned int *)(v40 + 24);
+    if ( (unsigned int)v41 < 0x7E )
     {
-      v43 = v41 + 16 * (v42 + 2);
-      *(_DWORD *)(v41 + 24) = v42 + 1;
-      goto LABEL_54;
+      v42 = v40 + 16 * (v41 + 2);
+      *(_DWORD *)(v40 + 24) = v41 + 1;
+      goto LABEL_51;
     }
-    if ( v41 )
-    {
-      *((_DWORD *)v13 + 18) += *(_DWORD *)(v41 + 24);
-      *((_QWORD *)v13 + 5) = 0i64;
-    }
+    *((_DWORD *)v13 + 18) += *(_DWORD *)(v40 + 24);
+    *((_QWORD *)v13 + 5) = 0i64;
   }
-  v44 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
-  v45 = v44;
-  if ( v44 )
+  v43 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
+  v44 = v43;
+  if ( v43 )
   {
-    *(_QWORD *)v44 = v44;
-    *((_QWORD *)v44 + 1) = v44;
-    *((_QWORD *)v44 + 2) = 0i64;
-    *((_DWORD *)v44 + 6) = 0;
-    v46 = *((_QWORD *)v13 + 2);
-    *(_QWORD *)(v46 + 8) = v45;
-    *(_QWORD *)v45 = v46;
-    *((_QWORD *)v45 + 1) = v13 + 16;
-    *((_QWORD *)v13 + 2) = v45;
-    *((_QWORD *)v13 + 5) = v45;
+    *(_QWORD *)v43 = v43;
+    *((_QWORD *)v43 + 1) = v43;
+    *((_QWORD *)v43 + 2) = 0i64;
+    *((_DWORD *)v43 + 6) = 0;
+    v45 = *((_QWORD *)v13 + 2);
+    *(_QWORD *)(v45 + 8) = v44;
+    *(_QWORD *)v44 = v45;
+    *((_QWORD *)v44 + 1) = v13 + 16;
+    *((_QWORD *)v13 + 2) = v44;
+    *((_QWORD *)v13 + 5) = v44;
   }
-  v47 = *((_QWORD *)v13 + 5);
-  if ( v47 )
+  v46 = *((_QWORD *)v13 + 5);
+  if ( v46 )
   {
-    *(_DWORD *)(v47 + 24) = 1;
-    v43 = *((_QWORD *)v13 + 5) + 32i64;
-LABEL_54:
-    if ( v43 )
+    *(_DWORD *)(v46 + 24) = 1;
+    v42 = *((_QWORD *)v13 + 5) + 32i64;
+LABEL_51:
+    if ( v42 )
     {
-      *(_DWORD *)v43 = 3080194;
-      *(_QWORD *)(v43 + 8) = v40;
+      *(_DWORD *)v42 = 3080194;
+      *(_QWORD *)(v42 + 8) = v39;
     }
   }
-  if ( !v3 )
+  if ( !bQuarterSize )
   {
-    v48 = v4->mQuarterSizeAmbientOcclusionTarget->mTargetTexture[0];
-    v49 = *((_QWORD *)v13 + 5);
-    if ( v49 )
+    v47 = render_context->mQuarterSizeAmbientOcclusionTarget->mTargetTexture[0];
+    v48 = *((_QWORD *)v13 + 5);
+    if ( v48 )
     {
-      v50 = *(unsigned int *)(v49 + 24);
-      if ( (unsigned int)v50 < 0x7E )
+      v49 = *(unsigned int *)(v48 + 24);
+      if ( (unsigned int)v49 < 0x7E )
       {
-        v51 = v49 + 16 * (v50 + 2);
-        *(_DWORD *)(v49 + 24) = v50 + 1;
-        goto LABEL_66;
+        v50 = v48 + 16 * (v49 + 2);
+        *(_DWORD *)(v48 + 24) = v49 + 1;
+        goto LABEL_62;
       }
-      if ( v49 )
-      {
-        *((_DWORD *)v13 + 18) += *(_DWORD *)(v49 + 24);
-        *((_QWORD *)v13 + 5) = 0i64;
-      }
+      *((_DWORD *)v13 + 18) += *(_DWORD *)(v48 + 24);
+      *((_QWORD *)v13 + 5) = 0i64;
     }
-    v52 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
-    v53 = v52;
-    if ( v52 )
-    {
-      *(_QWORD *)v52 = v52;
-      *((_QWORD *)v52 + 1) = v52;
-      *((_QWORD *)v52 + 2) = 0i64;
-      *((_DWORD *)v52 + 6) = 0;
-      v54 = *((_QWORD *)v13 + 2);
-      *(_QWORD *)(v54 + 8) = v53;
-      *(_QWORD *)v53 = v54;
-      *((_QWORD *)v53 + 1) = v13 + 16;
-      *((_QWORD *)v13 + 2) = v53;
-      *((_QWORD *)v13 + 5) = v53;
-    }
-    v55 = *((_QWORD *)v13 + 5);
-    if ( !v55 )
-      goto LABEL_68;
-    *(_DWORD *)(v55 + 24) = 1;
-    v51 = *((_QWORD *)v13 + 5) + 32i64;
-LABEL_66:
+    v51 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
+    v52 = v51;
     if ( v51 )
     {
-      *(_DWORD *)v51 = 1114114;
-      *(_QWORD *)(v51 + 8) = v48;
+      *(_QWORD *)v51 = v51;
+      *((_QWORD *)v51 + 1) = v51;
+      *((_QWORD *)v51 + 2) = 0i64;
+      *((_DWORD *)v51 + 6) = 0;
+      v53 = *((_QWORD *)v13 + 2);
+      *(_QWORD *)(v53 + 8) = v52;
+      *(_QWORD *)v52 = v53;
+      *((_QWORD *)v52 + 1) = v13 + 16;
+      *((_QWORD *)v13 + 2) = v52;
+      *((_QWORD *)v13 + 5) = v52;
     }
-LABEL_68:
-    v56 = v4->mAmbientOcclusionAliasUAV;
-    goto LABEL_70;
-  }
-  v56 = v4->mQuarterSizeAmbientOcclusionAliasUAV;
-LABEL_70:
-  v57 = v5->mAOCSUAVParamIndex;
-  v58 = *((_QWORD *)v13 + 5);
-  if ( v58 )
-  {
-    v59 = *(unsigned int *)(v58 + 24);
-    if ( (unsigned int)v59 < 0x7E )
+    v54 = *((_QWORD *)v13 + 5);
+    if ( !v54 )
+      goto LABEL_64;
+    *(_DWORD *)(v54 + 24) = 1;
+    v50 = *((_QWORD *)v13 + 5) + 32i64;
+LABEL_62:
+    if ( v50 )
     {
-      v60 = v58 + 16 * (v59 + 2);
-      *(_DWORD *)(v58 + 24) = v59 + 1;
-      goto LABEL_79;
+      *(_DWORD *)v50 = 1114114;
+      *(_QWORD *)(v50 + 8) = v47;
     }
-    if ( v58 )
-    {
-      *((_DWORD *)v13 + 18) += *(_DWORD *)(v58 + 24);
-      *((_QWORD *)v13 + 5) = 0i64;
-    }
+LABEL_64:
+    mAmbientOcclusionAliasUAV = render_context->mAmbientOcclusionAliasUAV;
+    goto LABEL_66;
   }
-  v61 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
-  v62 = v61;
-  if ( v61 )
+  mAmbientOcclusionAliasUAV = render_context->mQuarterSizeAmbientOcclusionAliasUAV;
+LABEL_66:
+  mAOCSUAVParamIndex = this->mAOCSUAVParamIndex;
+  v57 = *((_QWORD *)v13 + 5);
+  if ( v57 )
   {
-    *(_QWORD *)v61 = v61;
-    *((_QWORD *)v61 + 1) = v61;
-    *((_QWORD *)v61 + 2) = 0i64;
-    *((_DWORD *)v61 + 6) = 0;
-    v63 = *((_QWORD *)v13 + 2);
-    *(_QWORD *)(v63 + 8) = v62;
-    *(_QWORD *)v62 = v63;
-    *((_QWORD *)v62 + 1) = v13 + 16;
-    *((_QWORD *)v13 + 2) = v62;
-    *((_QWORD *)v13 + 5) = v62;
+    v58 = *(unsigned int *)(v57 + 24);
+    if ( (unsigned int)v58 < 0x7E )
+    {
+      v59 = v57 + 16 * (v58 + 2);
+      *(_DWORD *)(v57 + 24) = v58 + 1;
+      goto LABEL_74;
+    }
+    *((_DWORD *)v13 + 18) += *(_DWORD *)(v57 + 24);
+    *((_QWORD *)v13 + 5) = 0i64;
   }
-  v64 = *((_QWORD *)v13 + 5);
+  v60 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
+  v61 = v60;
+  if ( v60 )
+  {
+    *(_QWORD *)v60 = v60;
+    *((_QWORD *)v60 + 1) = v60;
+    *((_QWORD *)v60 + 2) = 0i64;
+    *((_DWORD *)v60 + 6) = 0;
+    v62 = *((_QWORD *)v13 + 2);
+    *(_QWORD *)(v62 + 8) = v61;
+    *(_QWORD *)v61 = v62;
+    *((_QWORD *)v61 + 1) = v13 + 16;
+    *((_QWORD *)v13 + 2) = v61;
+    *((_QWORD *)v13 + 5) = v61;
+  }
+  v63 = *((_QWORD *)v13 + 5);
+  if ( v63 )
+  {
+    *(_DWORD *)(v63 + 24) = 1;
+    v59 = *((_QWORD *)v13 + 5) + 32i64;
+LABEL_74:
+    if ( v59 )
+    {
+      *(_WORD *)v59 = 2;
+      *(_WORD *)(v59 + 2) = mAOCSUAVParamIndex;
+      *(_QWORD *)(v59 + 8) = mAmbientOcclusionAliasUAV;
+    }
+  }
+  v64 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0xCu, 4u);
   if ( v64 )
   {
-    *(_DWORD *)(v64 + 24) = 1;
-    v60 = *((_QWORD *)v13 + 5) + 32i64;
-LABEL_79:
-    if ( v60 )
-    {
-      *(_WORD *)v60 = 2;
-      *(_WORD *)(v60 + 2) = v57;
-      *(_QWORD *)(v60 + 8) = v56;
-    }
-  }
-  v65 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0xCu, 4u);
-  if ( v65 )
-  {
-    *(_DWORD *)v65 = v75;
-    *((_DWORD *)v65 + 1) = v11;
-    *((_DWORD *)v65 + 2) = 1;
+    *(_DWORD *)v64 = v74;
+    *((_DWORD *)v64 + 1) = v11;
+    *((_DWORD *)v64 + 2) = 1;
   }
   else
   {
-    v65 = 0i64;
+    v64 = 0i64;
   }
-  v66 = *((_QWORD *)v13 + 5);
-  if ( v66 )
+  v65 = *((_QWORD *)v13 + 5);
+  if ( v65 )
   {
-    v67 = *(unsigned int *)(v66 + 24);
-    if ( (unsigned int)v67 < 0x7E )
+    v66 = *(unsigned int *)(v65 + 24);
+    if ( (unsigned int)v66 < 0x7E )
     {
-      *(_DWORD *)(v66 + 24) = v67 + 1;
-      v68 = v66 + 16 * (v67 + 2);
-      goto LABEL_93;
+      *(_DWORD *)(v65 + 24) = v66 + 1;
+      v67 = v65 + 16 * (v66 + 2);
+      goto LABEL_87;
     }
-    if ( v66 )
-    {
-      *((_DWORD *)v13 + 18) += *(_DWORD *)(v66 + 24);
-      *((_QWORD *)v13 + 5) = 0i64;
-    }
+    *((_DWORD *)v13 + 18) += *(_DWORD *)(v65 + 24);
+    *((_QWORD *)v13 + 5) = 0i64;
   }
-  v69 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
-  v70 = v69;
-  if ( v69 )
+  v68 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
+  v69 = v68;
+  if ( v68 )
   {
-    *(_QWORD *)v69 = v69;
-    *((_QWORD *)v69 + 1) = v69;
-    *((_QWORD *)v69 + 2) = 0i64;
-    *((_DWORD *)v69 + 6) = 0;
-    v71 = *((_QWORD *)v13 + 2);
-    *(_QWORD *)(v71 + 8) = v70;
-    *(_QWORD *)v70 = v71;
-    *((_QWORD *)v70 + 1) = v13 + 16;
-    *((_QWORD *)v13 + 2) = v70;
-    *((_QWORD *)v13 + 5) = v70;
+    *(_QWORD *)v68 = v68;
+    *((_QWORD *)v68 + 1) = v68;
+    *((_QWORD *)v68 + 2) = 0i64;
+    *((_DWORD *)v68 + 6) = 0;
+    v70 = *((_QWORD *)v13 + 2);
+    *(_QWORD *)(v70 + 8) = v69;
+    *(_QWORD *)v69 = v70;
+    *((_QWORD *)v69 + 1) = v13 + 16;
+    *((_QWORD *)v13 + 2) = v69;
+    *((_QWORD *)v13 + 5) = v69;
+  }
+  v71 = *((_QWORD *)v13 + 5);
+  if ( v71 )
+  {
+    *(_DWORD *)(v71 + 24) = 1;
+    v67 = *((_QWORD *)v13 + 5) + 32i64;
+LABEL_87:
+    if ( v67 )
+    {
+      *(_DWORD *)v67 = 26;
+      *(_QWORD *)(v67 + 8) = v64;
+    }
   }
   v72 = *((_QWORD *)v13 + 5);
   if ( v72 )
   {
-    *(_DWORD *)(v72 + 24) = 1;
-    v68 = *((_QWORD *)v13 + 5) + 32i64;
-LABEL_93:
-    if ( v68 )
-    {
-      *(_DWORD *)v68 = 26;
-      *(_QWORD *)(v68 + 8) = v65;
-    }
-  }
-  v73 = *((_QWORD *)v13 + 5);
-  if ( v73 )
-  {
-    *((_DWORD *)v13 + 18) += *(_DWORD *)(v73 + 24);
+    *((_DWORD *)v13 + 18) += *(_DWORD *)(v72 + 24);
     *((_QWORD *)v13 + 5) = 0i64;
   }
   return (Illusion::RenderQueue *)v13;
@@ -1609,742 +1609,697 @@ LABEL_93:
 
 // File Line: 543
 // RVA: 0x34590
-void __fastcall UFG::RenderStageAO::RenderAOBilateralBlurCS(UFG::RenderStageAO *this, UFG::RenderContext *render_context, Render::View *view, bool bQuarterSize)
+void __fastcall UFG::RenderStageAO::RenderAOBilateralBlurCS(
+        UFG::RenderStageAO *this,
+        UFG::RenderContext *render_context,
+        Render::View *view,
+        bool bQuarterSize)
 {
-  UFG::RenderContext *v4; // r13
-  UFG::RenderStageAO *v5; // rbx
-  Illusion::Target *v6; // r15
-  float *v7; // rax
-  float *v8; // r14
-  char *v9; // rax
-  char *v10; // rdi
-  _QWORD *v11; // ST18_8
-  UFG::qResourceData *v12; // rbx
-  __int64 v13; // rdx
-  __int64 v14; // rax
-  signed __int64 v15; // rcx
-  char *v16; // rax
-  char *v17; // rdx
-  __int64 v18; // rax
+  Illusion::Target *mQuarterSizeAmbientOcclusionTarget; // r15
+  float *v7; // r14
+  char *v8; // rax
+  char *v9; // rdi
+  UFG::qResourceData *mData; // rbx
+  __int64 v11; // rdx
+  __int64 v12; // rax
+  __int64 v13; // rcx
+  char *v14; // rax
+  char *v15; // rdx
+  __int64 v16; // rax
+  __int64 v17; // rax
+  __int64 v18; // rdx
   __int64 v19; // rax
-  __int64 v20; // rdx
-  __int64 v21; // rax
-  signed __int64 v22; // rcx
-  char *v23; // rax
-  char *v24; // rdx
-  __int64 v25; // rax
-  __int64 v26; // rax
-  char v27; // r14
-  Illusion::Texture *v28; // rbx
-  __int64 v29; // rdx
-  __int64 v30; // rax
-  signed __int64 v31; // rcx
-  char *v32; // rax
-  char *v33; // rdx
-  __int64 v34; // rax
-  __int64 v35; // rax
-  Illusion::UnorderedAccessView *v36; // rbx
-  __int16 v37; // r14
-  __int64 v38; // rdx
-  __int64 v39; // rax
-  signed __int64 v40; // rcx
-  char *v41; // rax
-  char *v42; // rdx
-  __int64 v43; // rax
-  __int64 v44; // rax
-  __m128 v45; // xmm1
-  signed int v46; // ecx
-  __m128 v47; // xmm2
-  signed int v48; // ecx
-  char *v49; // rax
-  char *v50; // rbx
-  __int64 v51; // rdx
-  __int64 v52; // rax
-  signed __int64 v53; // rcx
-  char *v54; // rax
-  char *v55; // rdx
-  __int64 v56; // rax
-  __int64 v57; // rax
-  __int64 v58; // r15
-  __int64 v59; // rbx
-  __int64 v60; // rdx
-  __int64 v61; // rax
-  signed __int64 v62; // rcx
-  char *v63; // rax
-  char *v64; // rdx
-  __int64 v65; // rax
+  __int64 v20; // rcx
+  char *v21; // rax
+  char *v22; // rdx
+  __int64 v23; // rax
+  __int64 v24; // rax
+  char v25; // r14
+  Illusion::Texture *mQuarterSizeScratchAPointSampleTexture; // rbx
+  __int64 v27; // rdx
+  __int64 v28; // rax
+  __int64 v29; // rcx
+  char *v30; // rax
+  char *v31; // rdx
+  __int64 v32; // rax
+  __int64 v33; // rax
+  Illusion::UnorderedAccessView *mQuarterSizeAmbientOcclusionScratchUAV; // rbx
+  __int16 v35; // r14
+  __int64 v36; // rdx
+  __int64 v37; // rax
+  __int64 v38; // rcx
+  char *v39; // rax
+  char *v40; // rdx
+  __int64 v41; // rax
+  __int64 v42; // rax
+  __m128 v43; // xmm1
+  int v44; // ecx
+  __m128 v45; // xmm2
+  int v46; // ecx
+  char *v47; // rax
+  char *v48; // rbx
+  __int64 v49; // rdx
+  __int64 v50; // rax
+  __int64 v51; // rcx
+  char *v52; // rax
+  char *v53; // rdx
+  __int64 v54; // rax
+  __int64 v55; // rax
+  __int64 v56; // r15
+  __int64 v57; // rbx
+  __int64 v58; // rdx
+  __int64 v59; // rax
+  __int64 v60; // rcx
+  char *v61; // rax
+  char *v62; // rdx
+  __int64 v63; // rax
+  __int64 v64; // rax
+  __int64 v65; // rdx
   __int64 v66; // rax
-  __int64 v67; // rdx
-  __int64 v68; // rax
-  signed __int64 v69; // rcx
-  char *v70; // rax
-  char *v71; // rdx
-  __int64 v72; // rax
-  __int64 v73; // rax
-  char v74; // r14
-  Illusion::Texture *v75; // rbx
-  __int64 v76; // rdx
-  __int64 v77; // rax
-  signed __int64 v78; // rcx
-  char *v79; // rax
-  char *v80; // rdx
-  __int64 v81; // rax
-  __int64 v82; // rax
-  Illusion::UnorderedAccessView *v83; // rbx
-  __int16 v84; // r14
-  __int64 v85; // rdx
-  __int64 v86; // rax
-  signed __int64 v87; // rcx
-  char *v88; // rax
-  char *v89; // rdx
-  __int64 v90; // rax
-  __int64 v91; // rax
-  __m128 v92; // xmm1
-  signed int v93; // ecx
-  signed int v94; // er15
-  __m128 v95; // xmm1
-  signed int v96; // ecx
-  char *v97; // rax
-  char *v98; // rbx
-  __int64 v99; // rdx
-  __int64 v100; // rax
-  signed __int64 v101; // rcx
-  char *v102; // rax
-  char *v103; // rdx
+  __int64 v67; // rcx
+  char *v68; // rax
+  char *v69; // rdx
+  __int64 v70; // rax
+  __int64 v71; // rax
+  char v72; // r14
+  Illusion::Texture *mQuarterSizeScratchBPointSampleTexture; // rbx
+  __int64 v74; // rdx
+  __int64 v75; // rax
+  __int64 v76; // rcx
+  char *v77; // rax
+  char *v78; // rdx
+  __int64 v79; // rax
+  __int64 v80; // rax
+  Illusion::UnorderedAccessView *mQuarterSizeAmbientOcclusionAliasUAV; // rbx
+  __int16 v82; // r14
+  __int64 v83; // rdx
+  __int64 v84; // rax
+  __int64 v85; // rcx
+  char *v86; // rax
+  char *v87; // rdx
+  __int64 v88; // rax
+  __int64 v89; // rax
+  __m128 v90; // xmm1
+  int v91; // ecx
+  int v92; // r15d
+  __m128 v93; // xmm1
+  int v94; // ecx
+  char *v95; // rax
+  char *v96; // rbx
+  __int64 v97; // rdx
+  __int64 v98; // rax
+  __int64 v99; // rcx
+  char *v100; // rax
+  char *v101; // rdx
+  __int64 v102; // rax
+  __int64 v103; // rax
   __int64 v104; // rax
-  __int64 v105; // rax
-  __int64 v106; // rax
-  Render::View *v107; // r15
-  RenderQueueLayer *v108; // rbx
-  UFG::qList<Illusion::RenderQueue,Illusion::RenderQueue,1,0> *v109; // rcx
-  UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *v110; // rax
-  Illusion::StateArgs *v111; // rbx
-  __int64 v112; // rdi
-  signed __int64 v113; // r14
-  unsigned __int16 v114; // ax
-  __int64 v115; // rcx
-  _QWORD *v116; // rax
-  __int64 v117; // rcx
-  _QWORD *v118; // rax
-  signed int *vp_scissor; // [rsp+28h] [rbp-39h]
-  bool clear_on_resolve[8]; // [rsp+30h] [rbp-31h]
-  bool ignore_resolve_depth[8]; // [rsp+38h] [rbp-29h]
-  bool ps4_decompress_depth[8]; // [rsp+40h] [rbp-21h]
-  bool d3d_disable_depth_copy[2]; // [rsp+48h] [rbp-19h]
-  __int16 v124; // [rsp+4Ah] [rbp-17h]
-  __int64 v125; // [rsp+50h] [rbp-11h]
-  __int64 v126; // [rsp+58h] [rbp-9h]
-  __int64 v127; // [rsp+60h] [rbp-1h]
-  float *v128; // [rsp+68h] [rbp+7h]
-  char *v129; // [rsp+70h] [rbp+Fh]
-  __int64 v130; // [rsp+78h] [rbp+17h]
-  char *v131; // [rsp+C8h] [rbp+67h]
+  Render::View *v105; // r15
+  RenderQueueLayer *v106; // rbx
+  UFG::qList<Illusion::RenderQueue,Illusion::RenderQueue,1,0> *mSerializationList; // rcx
+  UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *mPrev; // rax
+  Illusion::StateArgs *StateArgs; // rbx
+  UFG::qMatrix44 *p_mWorldView; // rdi
+  UFG::qMatrix44 *p_mProjection; // r14
+  unsigned __int16 Param; // ax
+  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v113; // rcx
+  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *mNext; // rax
+  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v115; // rcx
+  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v116; // rax
+  int *vp_scissor; // [rsp+28h] [rbp-39h]
+  Render::cbExternalViewTransformState clear_on_resolve; // [rsp+30h] [rbp-31h] BYREF
+  float *v119; // [rsp+68h] [rbp+7h]
+  char *v120; // [rsp+70h] [rbp+Fh]
+  __int64 v121; // [rsp+78h] [rbp+17h]
+  char *v122; // [rsp+C8h] [rbp+67h]
   Render::View *viewa; // [rsp+D8h] [rbp+77h]
-  char v133; // [rsp+E0h] [rbp+7Fh]
+  char v124; // [rsp+E0h] [rbp+7Fh]
 
-  v130 = -2i64;
-  v4 = render_context;
-  v5 = this;
+  v121 = -2i64;
   if ( bQuarterSize )
-    v6 = render_context->mQuarterSizeAmbientOcclusionTarget;
+    mQuarterSizeAmbientOcclusionTarget = render_context->mQuarterSizeAmbientOcclusionTarget;
   else
-    v6 = render_context->mAmbientOcclusionAliasTarget;
-  vp_scissor = (signed int *)v6;
+    mQuarterSizeAmbientOcclusionTarget = render_context->mAmbientOcclusionAliasTarget;
+  vp_scissor = (int *)mQuarterSizeAmbientOcclusionTarget;
   v7 = (float *)UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x80u, 0x10u);
-  v8 = v7;
-  v128 = v7;
-  *v7 = (float)v6->mWidth;
-  v7[1] = (float)v6->mHeight;
-  v7[2] = 1.0 / (float)v6->mWidth;
-  v7[3] = 1.0 / (float)v6->mHeight;
-  v9 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x460u, 0x10u);
-  v10 = v9;
-  v129 = v9;
-  if ( v9 )
+  v119 = v7;
+  *v7 = (float)mQuarterSizeAmbientOcclusionTarget->mWidth;
+  v7[1] = (float)mQuarterSizeAmbientOcclusionTarget->mHeight;
+  v7[2] = 1.0 / (float)mQuarterSizeAmbientOcclusionTarget->mWidth;
+  v7[3] = 1.0 / (float)mQuarterSizeAmbientOcclusionTarget->mHeight;
+  v8 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x460u, 0x10u);
+  v9 = v8;
+  v120 = v8;
+  if ( v8 )
   {
-    *(_QWORD *)v9 = v9;
-    *((_QWORD *)v9 + 1) = v9;
-    v11 = v9 + 16;
-    *v11 = v11;
-    v11[1] = v11;
-    UFG::qMemSet(v9 + 96, 0, 0x400u);
-    *((_QWORD *)v10 + 11) = 0i64;
-    *((_QWORD *)v10 + 10) = 0i64;
-    *((_DWORD *)v10 + 8) = 0;
-    *((_QWORD *)v10 + 5) = 0i64;
-    *((_QWORD *)v10 + 6) = 0i64;
-    *((_QWORD *)v10 + 7) = 0i64;
-    *((_QWORD *)v10 + 8) = 0i64;
-    *((_QWORD *)v10 + 9) = 0i64;
+    *(_QWORD *)v8 = v8;
+    *((_QWORD *)v8 + 1) = v8;
+    *((_QWORD *)v8 + 2) = v8 + 16;
+    *((_QWORD *)v8 + 3) = v8 + 16;
+    UFG::qMemSet(v8 + 96, 0, 0x400u);
+    *((_QWORD *)v9 + 11) = 0i64;
+    *((_QWORD *)v9 + 10) = 0i64;
+    *((_DWORD *)v9 + 8) = 0;
+    *((_QWORD *)v9 + 5) = 0i64;
+    *((_QWORD *)v9 + 6) = 0i64;
+    *((_QWORD *)v9 + 7) = 0i64;
+    *((_QWORD *)v9 + 8) = 0i64;
+    *((_QWORD *)v9 + 9) = 0i64;
   }
   else
   {
-    v10 = 0i64;
+    v9 = 0i64;
   }
-  v12 = v5->mBilateralXCSShader.mData;
-  v13 = *((_QWORD *)v10 + 5);
-  if ( v13 )
+  mData = this->mBilateralXCSShader.mData;
+  v11 = *((_QWORD *)v9 + 5);
+  if ( v11 )
   {
-    v14 = *(unsigned int *)(v13 + 24);
-    if ( (unsigned int)v14 < 0x7E )
+    v12 = *(unsigned int *)(v11 + 24);
+    if ( (unsigned int)v12 < 0x7E )
     {
-      v15 = v13 + 16 * (v14 + 2);
-      *(_DWORD *)(v13 + 24) = v14 + 1;
-      goto LABEL_16;
+      v13 = v11 + 16 * (v12 + 2);
+      *(_DWORD *)(v11 + 24) = v12 + 1;
+      goto LABEL_15;
     }
+    *((_DWORD *)v9 + 18) += *(_DWORD *)(v11 + 24);
+    *((_QWORD *)v9 + 5) = 0i64;
+  }
+  v14 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
+  v15 = v14;
+  if ( v14 )
+  {
+    *(_QWORD *)v14 = v14;
+    *((_QWORD *)v14 + 1) = v14;
+    *((_QWORD *)v14 + 2) = 0i64;
+    *((_DWORD *)v14 + 6) = 0;
+    v16 = *((_QWORD *)v9 + 2);
+    *(_QWORD *)(v16 + 8) = v15;
+    *(_QWORD *)v15 = v16;
+    *((_QWORD *)v15 + 1) = v9 + 16;
+    *((_QWORD *)v9 + 2) = v15;
+    *((_QWORD *)v9 + 5) = v15;
+  }
+  v17 = *((_QWORD *)v9 + 5);
+  if ( v17 )
+  {
+    *(_DWORD *)(v17 + 24) = 1;
+    v13 = *((_QWORD *)v9 + 5) + 32i64;
+LABEL_15:
     if ( v13 )
     {
-      *((_DWORD *)v10 + 18) += *(_DWORD *)(v13 + 24);
-      *((_QWORD *)v10 + 5) = 0i64;
+      *(_DWORD *)v13 = 1;
+      *(_QWORD *)(v13 + 8) = mData;
     }
   }
-  v16 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
-  v17 = v16;
-  if ( v16 )
+  v18 = *((_QWORD *)v9 + 5);
+  if ( v18 )
   {
-    *(_QWORD *)v16 = v16;
-    *((_QWORD *)v16 + 1) = v16;
-    *((_QWORD *)v16 + 2) = 0i64;
-    *((_DWORD *)v16 + 6) = 0;
-    v18 = *((_QWORD *)v10 + 2);
-    *(_QWORD *)(v18 + 8) = v17;
-    *(_QWORD *)v17 = v18;
-    *((_QWORD *)v17 + 1) = v10 + 16;
-    *((_QWORD *)v10 + 2) = v17;
-    *((_QWORD *)v10 + 5) = v17;
-  }
-  v19 = *((_QWORD *)v10 + 5);
-  if ( v19 )
-  {
-    *(_DWORD *)(v19 + 24) = 1;
-    v15 = *((_QWORD *)v10 + 5) + 32i64;
-LABEL_16:
-    if ( v15 )
+    v19 = *(unsigned int *)(v18 + 24);
+    if ( (unsigned int)v19 < 0x7E )
     {
-      *(_DWORD *)v15 = 1;
-      *(_QWORD *)(v15 + 8) = v12;
+      v20 = v18 + 16 * (v19 + 2);
+      *(_DWORD *)(v18 + 24) = v19 + 1;
+      goto LABEL_25;
     }
+    *((_DWORD *)v9 + 18) += *(_DWORD *)(v18 + 24);
+    *((_QWORD *)v9 + 5) = 0i64;
   }
-  v20 = *((_QWORD *)v10 + 5);
-  if ( v20 )
+  v21 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
+  v22 = v21;
+  if ( v21 )
   {
-    v21 = *(unsigned int *)(v20 + 24);
-    if ( (unsigned int)v21 < 0x7E )
-    {
-      v22 = v20 + 16 * (v21 + 2);
-      *(_DWORD *)(v20 + 24) = v21 + 1;
-      goto LABEL_27;
-    }
+    *(_QWORD *)v21 = v21;
+    *((_QWORD *)v21 + 1) = v21;
+    *((_QWORD *)v21 + 2) = 0i64;
+    *((_DWORD *)v21 + 6) = 0;
+    v23 = *((_QWORD *)v9 + 2);
+    *(_QWORD *)(v23 + 8) = v22;
+    *(_QWORD *)v22 = v23;
+    *((_QWORD *)v22 + 1) = v9 + 16;
+    *((_QWORD *)v9 + 2) = v22;
+    *((_QWORD *)v9 + 5) = v22;
+  }
+  v24 = *((_QWORD *)v9 + 5);
+  if ( v24 )
+  {
+    *(_DWORD *)(v24 + 24) = 1;
+    v20 = *((_QWORD *)v9 + 5) + 32i64;
+LABEL_25:
     if ( v20 )
     {
-      *((_DWORD *)v10 + 18) += *(_DWORD *)(v20 + 24);
-      *((_QWORD *)v10 + 5) = 0i64;
+      *(_DWORD *)v20 = 983042;
+      *(_QWORD *)(v20 + 8) = v7;
     }
   }
-  v23 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
-  v24 = v23;
-  if ( v23 )
-  {
-    *(_QWORD *)v23 = v23;
-    *((_QWORD *)v23 + 1) = v23;
-    *((_QWORD *)v23 + 2) = 0i64;
-    *((_DWORD *)v23 + 6) = 0;
-    v25 = *((_QWORD *)v10 + 2);
-    *(_QWORD *)(v25 + 8) = v24;
-    *(_QWORD *)v24 = v25;
-    *((_QWORD *)v24 + 1) = v10 + 16;
-    *((_QWORD *)v10 + 2) = v24;
-    *((_QWORD *)v10 + 5) = v24;
-  }
-  v26 = *((_QWORD *)v10 + 5);
-  if ( v26 )
-  {
-    *(_DWORD *)(v26 + 24) = 1;
-    v22 = *((_QWORD *)v10 + 5) + 32i64;
-LABEL_27:
-    if ( v22 )
-    {
-      *(_DWORD *)v22 = 983042;
-      *(_QWORD *)(v22 + 8) = v8;
-    }
-  }
-  v27 = v133;
-  if ( v133 )
-    v28 = v4->mQuarterSizeScratchAPointSampleTexture;
+  v25 = v124;
+  if ( v124 )
+    mQuarterSizeScratchAPointSampleTexture = render_context->mQuarterSizeScratchAPointSampleTexture;
   else
-    v28 = v4->mHalfSizeScratchCPointSampleTexture;
-  v29 = *((_QWORD *)v10 + 5);
-  if ( v29 )
+    mQuarterSizeScratchAPointSampleTexture = render_context->mHalfSizeScratchCPointSampleTexture;
+  v27 = *((_QWORD *)v9 + 5);
+  if ( v27 )
   {
-    v30 = *(unsigned int *)(v29 + 24);
-    if ( (unsigned int)v30 < 0x7E )
+    v28 = *(unsigned int *)(v27 + 24);
+    if ( (unsigned int)v28 < 0x7E )
     {
-      v31 = v29 + 16 * (v30 + 2);
-      *(_DWORD *)(v29 + 24) = v30 + 1;
-      goto LABEL_41;
+      v29 = v27 + 16 * (v28 + 2);
+      *(_DWORD *)(v27 + 24) = v28 + 1;
+      goto LABEL_38;
     }
+    *((_DWORD *)v9 + 18) += *(_DWORD *)(v27 + 24);
+    *((_QWORD *)v9 + 5) = 0i64;
+  }
+  v30 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
+  v31 = v30;
+  if ( v30 )
+  {
+    *(_QWORD *)v30 = v30;
+    *((_QWORD *)v30 + 1) = v30;
+    *((_QWORD *)v30 + 2) = 0i64;
+    *((_DWORD *)v30 + 6) = 0;
+    v32 = *((_QWORD *)v9 + 2);
+    *(_QWORD *)(v32 + 8) = v31;
+    *(_QWORD *)v31 = v32;
+    *((_QWORD *)v31 + 1) = v9 + 16;
+    *((_QWORD *)v9 + 2) = v31;
+    *((_QWORD *)v9 + 5) = v31;
+  }
+  v33 = *((_QWORD *)v9 + 5);
+  if ( v33 )
+  {
+    *(_DWORD *)(v33 + 24) = 1;
+    v29 = *((_QWORD *)v9 + 5) + 32i64;
+LABEL_38:
     if ( v29 )
     {
-      *((_DWORD *)v10 + 18) += *(_DWORD *)(v29 + 24);
-      *((_QWORD *)v10 + 5) = 0i64;
+      *(_DWORD *)v29 = 1114114;
+      *(_QWORD *)(v29 + 8) = mQuarterSizeScratchAPointSampleTexture;
     }
   }
-  v32 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
-  v33 = v32;
-  if ( v32 )
-  {
-    *(_QWORD *)v32 = v32;
-    *((_QWORD *)v32 + 1) = v32;
-    *((_QWORD *)v32 + 2) = 0i64;
-    *((_DWORD *)v32 + 6) = 0;
-    v34 = *((_QWORD *)v10 + 2);
-    *(_QWORD *)(v34 + 8) = v33;
-    *(_QWORD *)v33 = v34;
-    *((_QWORD *)v33 + 1) = v10 + 16;
-    *((_QWORD *)v10 + 2) = v33;
-    *((_QWORD *)v10 + 5) = v33;
-  }
-  v35 = *((_QWORD *)v10 + 5);
-  if ( v35 )
-  {
-    *(_DWORD *)(v35 + 24) = 1;
-    v31 = *((_QWORD *)v10 + 5) + 32i64;
-LABEL_41:
-    if ( v31 )
-    {
-      *(_DWORD *)v31 = 1114114;
-      *(_QWORD *)(v31 + 8) = v28;
-    }
-  }
-  if ( v27 )
-    v36 = v4->mQuarterSizeAmbientOcclusionScratchUAV;
+  if ( v25 )
+    mQuarterSizeAmbientOcclusionScratchUAV = render_context->mQuarterSizeAmbientOcclusionScratchUAV;
   else
-    v36 = v4->mAmbientOcclusionScratchUAV;
-  v37 = *((_WORD *)v131 + 68);
-  v38 = *((_QWORD *)v10 + 5);
-  if ( v38 )
+    mQuarterSizeAmbientOcclusionScratchUAV = render_context->mAmbientOcclusionScratchUAV;
+  v35 = *((_WORD *)v122 + 68);
+  v36 = *((_QWORD *)v9 + 5);
+  if ( v36 )
   {
-    v39 = *(unsigned int *)(v38 + 24);
-    if ( (unsigned int)v39 < 0x7E )
+    v37 = *(unsigned int *)(v36 + 24);
+    if ( (unsigned int)v37 < 0x7E )
     {
-      v40 = v38 + 16 * (v39 + 2);
-      *(_DWORD *)(v38 + 24) = v39 + 1;
-      goto LABEL_55;
+      v38 = v36 + 16 * (v37 + 2);
+      *(_DWORD *)(v36 + 24) = v37 + 1;
+      goto LABEL_51;
     }
+    *((_DWORD *)v9 + 18) += *(_DWORD *)(v36 + 24);
+    *((_QWORD *)v9 + 5) = 0i64;
+  }
+  v39 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
+  v40 = v39;
+  if ( v39 )
+  {
+    *(_QWORD *)v39 = v39;
+    *((_QWORD *)v39 + 1) = v39;
+    *((_QWORD *)v39 + 2) = 0i64;
+    *((_DWORD *)v39 + 6) = 0;
+    v41 = *((_QWORD *)v9 + 2);
+    *(_QWORD *)(v41 + 8) = v40;
+    *(_QWORD *)v40 = v41;
+    *((_QWORD *)v40 + 1) = v9 + 16;
+    *((_QWORD *)v9 + 2) = v40;
+    *((_QWORD *)v9 + 5) = v40;
+  }
+  v42 = *((_QWORD *)v9 + 5);
+  if ( v42 )
+  {
+    *(_DWORD *)(v42 + 24) = 1;
+    v38 = *((_QWORD *)v9 + 5) + 32i64;
+LABEL_51:
     if ( v38 )
     {
-      *((_DWORD *)v10 + 18) += *(_DWORD *)(v38 + 24);
-      *((_QWORD *)v10 + 5) = 0i64;
+      *(_WORD *)v38 = 2;
+      *(_WORD *)(v38 + 2) = v35;
+      *(_QWORD *)(v38 + 8) = mQuarterSizeAmbientOcclusionScratchUAV;
     }
   }
-  v41 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
-  v42 = v41;
-  if ( v41 )
+  v43 = (__m128)COERCE_UNSIGNED_INT((float)mQuarterSizeAmbientOcclusionTarget->mWidth);
+  v43.m128_f32[0] = v43.m128_f32[0] * 0.0078125;
+  v44 = (int)v43.m128_f32[0];
+  if ( (int)v43.m128_f32[0] != 0x80000000 && (float)v44 != v43.m128_f32[0] )
+    v43.m128_f32[0] = (float)(!(_mm_movemask_ps(_mm_unpacklo_ps(v43, v43)) & 1) + v44);
+  v45 = (__m128)COERCE_UNSIGNED_INT((float)mQuarterSizeAmbientOcclusionTarget->mHeight);
+  v45.m128_f32[0] = v45.m128_f32[0] * 0.5;
+  v46 = (int)v45.m128_f32[0];
+  if ( (int)v45.m128_f32[0] != 0x80000000 && (float)v46 != v45.m128_f32[0] )
+    v45.m128_f32[0] = (float)(!(_mm_movemask_ps(_mm_unpacklo_ps(v45, v45)) & 1) + v46);
+  v47 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0xCu, 4u);
+  v48 = v47;
+  if ( v47 )
   {
-    *(_QWORD *)v41 = v41;
-    *((_QWORD *)v41 + 1) = v41;
-    *((_QWORD *)v41 + 2) = 0i64;
-    *((_DWORD *)v41 + 6) = 0;
-    v43 = *((_QWORD *)v10 + 2);
-    *(_QWORD *)(v43 + 8) = v42;
-    *(_QWORD *)v42 = v43;
-    *((_QWORD *)v42 + 1) = v10 + 16;
-    *((_QWORD *)v10 + 2) = v42;
-    *((_QWORD *)v10 + 5) = v42;
+    *(_DWORD *)v47 = (int)v43.m128_f32[0];
+    *((_DWORD *)v47 + 1) = (int)v45.m128_f32[0];
+    *((_DWORD *)v47 + 2) = 1;
   }
-  v44 = *((_QWORD *)v10 + 5);
-  if ( v44 )
+  else
   {
-    *(_DWORD *)(v44 + 24) = 1;
-    v40 = *((_QWORD *)v10 + 5) + 32i64;
-LABEL_55:
-    if ( v40 )
-    {
-      *(_WORD *)v40 = 2;
-      *(_WORD *)(v40 + 2) = v37;
-      *(_QWORD *)(v40 + 8) = v36;
-    }
+    v48 = 0i64;
   }
-  v45 = (__m128)COERCE_UNSIGNED_INT((float)v6->mWidth);
-  v45.m128_f32[0] = v45.m128_f32[0] * 0.0078125;
-  v46 = (signed int)v45.m128_f32[0];
-  if ( (signed int)v45.m128_f32[0] != 0x80000000 && (float)v46 != v45.m128_f32[0] )
-    v45.m128_f32[0] = (float)((_mm_movemask_ps(_mm_unpacklo_ps(v45, v45)) & 1 ^ 1) + v46);
-  v47 = (__m128)COERCE_UNSIGNED_INT((float)v6->mHeight);
-  v47.m128_f32[0] = v47.m128_f32[0] * 0.5;
-  v48 = (signed int)v47.m128_f32[0];
-  if ( (signed int)v47.m128_f32[0] != 0x80000000 && (float)v48 != v47.m128_f32[0] )
-    v47.m128_f32[0] = (float)((_mm_movemask_ps(_mm_unpacklo_ps(v47, v47)) & 1 ^ 1) + v48);
-  v49 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0xCu, 4u);
-  v50 = v49;
+  v49 = *((_QWORD *)v9 + 5);
   if ( v49 )
   {
-    *(_DWORD *)v49 = (signed int)v45.m128_f32[0];
-    *((_DWORD *)v49 + 1) = (signed int)v47.m128_f32[0];
-    *((_DWORD *)v49 + 2) = 1;
-  }
-  else
-  {
-    v50 = 0i64;
-  }
-  v51 = *((_QWORD *)v10 + 5);
-  if ( v51 )
-  {
-    v52 = *(unsigned int *)(v51 + 24);
-    if ( (unsigned int)v52 < 0x7E )
+    v50 = *(unsigned int *)(v49 + 24);
+    if ( (unsigned int)v50 < 0x7E )
     {
-      v53 = v51 + 16 * (v52 + 2);
-      *(_DWORD *)(v51 + 24) = v52 + 1;
-      goto LABEL_75;
+      v51 = v49 + 16 * (v50 + 2);
+      *(_DWORD *)(v49 + 24) = v50 + 1;
+      goto LABEL_70;
     }
+    *((_DWORD *)v9 + 18) += *(_DWORD *)(v49 + 24);
+    *((_QWORD *)v9 + 5) = 0i64;
+  }
+  v52 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
+  v53 = v52;
+  if ( v52 )
+  {
+    *(_QWORD *)v52 = v52;
+    *((_QWORD *)v52 + 1) = v52;
+    *((_QWORD *)v52 + 2) = 0i64;
+    *((_DWORD *)v52 + 6) = 0;
+    v54 = *((_QWORD *)v9 + 2);
+    *(_QWORD *)(v54 + 8) = v53;
+    *(_QWORD *)v53 = v54;
+    *((_QWORD *)v53 + 1) = v9 + 16;
+    *((_QWORD *)v9 + 2) = v53;
+    *((_QWORD *)v9 + 5) = v53;
+  }
+  v55 = *((_QWORD *)v9 + 5);
+  if ( v55 )
+  {
+    *(_DWORD *)(v55 + 24) = 1;
+    v51 = *((_QWORD *)v9 + 5) + 32i64;
+LABEL_70:
     if ( v51 )
     {
-      *((_DWORD *)v10 + 18) += *(_DWORD *)(v51 + 24);
-      *((_QWORD *)v10 + 5) = 0i64;
+      *(_DWORD *)v51 = 26;
+      *(_QWORD *)(v51 + 8) = v48;
     }
   }
-  v54 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
-  v55 = v54;
-  if ( v54 )
+  v56 = (__int64)v122;
+  v57 = *((_QWORD *)v122 + 15);
+  v58 = *((_QWORD *)v9 + 5);
+  if ( v58 )
   {
-    *(_QWORD *)v54 = v54;
-    *((_QWORD *)v54 + 1) = v54;
-    *((_QWORD *)v54 + 2) = 0i64;
-    *((_DWORD *)v54 + 6) = 0;
-    v56 = *((_QWORD *)v10 + 2);
-    *(_QWORD *)(v56 + 8) = v55;
-    *(_QWORD *)v55 = v56;
-    *((_QWORD *)v55 + 1) = v10 + 16;
-    *((_QWORD *)v10 + 2) = v55;
-    *((_QWORD *)v10 + 5) = v55;
-  }
-  v57 = *((_QWORD *)v10 + 5);
-  if ( v57 )
-  {
-    *(_DWORD *)(v57 + 24) = 1;
-    v53 = *((_QWORD *)v10 + 5) + 32i64;
-LABEL_75:
-    if ( v53 )
+    v59 = *(unsigned int *)(v58 + 24);
+    if ( (unsigned int)v59 < 0x7E )
     {
-      *(_DWORD *)v53 = 26;
-      *(_QWORD *)(v53 + 8) = v50;
+      v60 = v58 + 16 * (v59 + 2);
+      *(_DWORD *)(v58 + 24) = v59 + 1;
+      goto LABEL_80;
     }
+    *((_DWORD *)v9 + 18) += *(_DWORD *)(v58 + 24);
+    *((_QWORD *)v9 + 5) = 0i64;
   }
-  v58 = (__int64)v131;
-  v59 = *((_QWORD *)v131 + 15);
-  v60 = *((_QWORD *)v10 + 5);
-  if ( v60 )
+  v61 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
+  v62 = v61;
+  v122 = v61;
+  if ( v61 )
   {
-    v61 = *(unsigned int *)(v60 + 24);
-    if ( (unsigned int)v61 < 0x7E )
-    {
-      v62 = v60 + 16 * (v61 + 2);
-      *(_DWORD *)(v60 + 24) = v61 + 1;
-      goto LABEL_86;
-    }
+    *(_QWORD *)v61 = v61;
+    *((_QWORD *)v61 + 1) = v61;
+    *((_QWORD *)v61 + 2) = 0i64;
+    *((_DWORD *)v61 + 6) = 0;
+    v63 = *((_QWORD *)v9 + 2);
+    *(_QWORD *)(v63 + 8) = v62;
+    *(_QWORD *)v62 = v63;
+    *((_QWORD *)v62 + 1) = v9 + 16;
+    *((_QWORD *)v9 + 2) = v62;
+    *((_QWORD *)v9 + 5) = v62;
+  }
+  v64 = *((_QWORD *)v9 + 5);
+  if ( v64 )
+  {
+    *(_DWORD *)(v64 + 24) = 1;
+    v60 = *((_QWORD *)v9 + 5) + 32i64;
+LABEL_80:
     if ( v60 )
     {
-      *((_DWORD *)v10 + 18) += *(_DWORD *)(v60 + 24);
-      *((_QWORD *)v10 + 5) = 0i64;
+      *(_DWORD *)v60 = 1;
+      *(_QWORD *)(v60 + 8) = v57;
     }
   }
-  v63 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
-  v64 = v63;
-  v131 = v63;
-  if ( v63 )
+  v65 = *((_QWORD *)v9 + 5);
+  if ( v65 )
   {
-    *(_QWORD *)v63 = v63;
-    *((_QWORD *)v63 + 1) = v63;
-    *((_QWORD *)v63 + 2) = 0i64;
-    *((_DWORD *)v63 + 6) = 0;
-    v65 = *((_QWORD *)v10 + 2);
-    *(_QWORD *)(v65 + 8) = v64;
-    *(_QWORD *)v64 = v65;
-    *((_QWORD *)v64 + 1) = v10 + 16;
-    *((_QWORD *)v10 + 2) = v64;
-    *((_QWORD *)v10 + 5) = v64;
-  }
-  v66 = *((_QWORD *)v10 + 5);
-  if ( v66 )
-  {
-    *(_DWORD *)(v66 + 24) = 1;
-    v62 = *((_QWORD *)v10 + 5) + 32i64;
-LABEL_86:
-    if ( v62 )
+    v66 = *(unsigned int *)(v65 + 24);
+    if ( (unsigned int)v66 < 0x7E )
     {
-      *(_DWORD *)v62 = 1;
-      *(_QWORD *)(v62 + 8) = v59;
+      v67 = v65 + 16 * (v66 + 2);
+      *(_DWORD *)(v65 + 24) = v66 + 1;
+      goto LABEL_90;
     }
+    *((_DWORD *)v9 + 18) += *(_DWORD *)(v65 + 24);
+    *((_QWORD *)v9 + 5) = 0i64;
   }
-  v67 = *((_QWORD *)v10 + 5);
-  if ( v67 )
+  v68 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
+  v69 = v68;
+  v122 = v68;
+  if ( v68 )
   {
-    v68 = *(unsigned int *)(v67 + 24);
-    if ( (unsigned int)v68 < 0x7E )
-    {
-      v69 = v67 + 16 * (v68 + 2);
-      *(_DWORD *)(v67 + 24) = v68 + 1;
-      goto LABEL_97;
-    }
+    *(_QWORD *)v68 = v68;
+    *((_QWORD *)v68 + 1) = v68;
+    *((_QWORD *)v68 + 2) = 0i64;
+    *((_DWORD *)v68 + 6) = 0;
+    v70 = *((_QWORD *)v9 + 2);
+    *(_QWORD *)(v70 + 8) = v69;
+    *(_QWORD *)v69 = v70;
+    *((_QWORD *)v69 + 1) = v9 + 16;
+    *((_QWORD *)v9 + 2) = v69;
+    *((_QWORD *)v9 + 5) = v69;
+  }
+  v71 = *((_QWORD *)v9 + 5);
+  if ( v71 )
+  {
+    *(_DWORD *)(v71 + 24) = 1;
+    v67 = *((_QWORD *)v9 + 5) + 32i64;
+LABEL_90:
     if ( v67 )
     {
-      *((_DWORD *)v10 + 18) += *(_DWORD *)(v67 + 24);
-      *((_QWORD *)v10 + 5) = 0i64;
+      *(_DWORD *)v67 = 983042;
+      *(_QWORD *)(v67 + 8) = v119;
     }
   }
-  v70 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
-  v71 = v70;
-  v131 = v70;
-  if ( v70 )
-  {
-    *(_QWORD *)v70 = v70;
-    *((_QWORD *)v70 + 1) = v70;
-    *((_QWORD *)v70 + 2) = 0i64;
-    *((_DWORD *)v70 + 6) = 0;
-    v72 = *((_QWORD *)v10 + 2);
-    *(_QWORD *)(v72 + 8) = v71;
-    *(_QWORD *)v71 = v72;
-    *((_QWORD *)v71 + 1) = v10 + 16;
-    *((_QWORD *)v10 + 2) = v71;
-    *((_QWORD *)v10 + 5) = v71;
-  }
-  v73 = *((_QWORD *)v10 + 5);
-  if ( v73 )
-  {
-    *(_DWORD *)(v73 + 24) = 1;
-    v69 = *((_QWORD *)v10 + 5) + 32i64;
-LABEL_97:
-    if ( v69 )
-    {
-      *(_DWORD *)v69 = 983042;
-      *(_QWORD *)(v69 + 8) = v128;
-    }
-  }
-  v74 = v133;
-  if ( v133 )
-    v75 = v4->mQuarterSizeScratchBPointSampleTexture;
+  v72 = v124;
+  if ( v124 )
+    mQuarterSizeScratchBPointSampleTexture = render_context->mQuarterSizeScratchBPointSampleTexture;
   else
-    v75 = v4->mHalfSizeScratchBPointSampleTexture;
-  v76 = *((_QWORD *)v10 + 5);
-  if ( v76 )
+    mQuarterSizeScratchBPointSampleTexture = render_context->mHalfSizeScratchBPointSampleTexture;
+  v74 = *((_QWORD *)v9 + 5);
+  if ( v74 )
   {
-    v77 = *(unsigned int *)(v76 + 24);
-    if ( (unsigned int)v77 < 0x7E )
+    v75 = *(unsigned int *)(v74 + 24);
+    if ( (unsigned int)v75 < 0x7E )
     {
-      v78 = v76 + 16 * (v77 + 2);
-      *(_DWORD *)(v76 + 24) = v77 + 1;
-      goto LABEL_111;
+      v76 = v74 + 16 * (v75 + 2);
+      *(_DWORD *)(v74 + 24) = v75 + 1;
+      goto LABEL_103;
     }
+    *((_DWORD *)v9 + 18) += *(_DWORD *)(v74 + 24);
+    *((_QWORD *)v9 + 5) = 0i64;
+  }
+  v77 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
+  v78 = v77;
+  v122 = v77;
+  if ( v77 )
+  {
+    *(_QWORD *)v77 = v77;
+    *((_QWORD *)v77 + 1) = v77;
+    *((_QWORD *)v77 + 2) = 0i64;
+    *((_DWORD *)v77 + 6) = 0;
+    v79 = *((_QWORD *)v9 + 2);
+    *(_QWORD *)(v79 + 8) = v78;
+    *(_QWORD *)v78 = v79;
+    *((_QWORD *)v78 + 1) = v9 + 16;
+    *((_QWORD *)v9 + 2) = v78;
+    *((_QWORD *)v9 + 5) = v78;
+  }
+  v80 = *((_QWORD *)v9 + 5);
+  if ( v80 )
+  {
+    *(_DWORD *)(v80 + 24) = 1;
+    v76 = *((_QWORD *)v9 + 5) + 32i64;
+LABEL_103:
     if ( v76 )
     {
-      *((_DWORD *)v10 + 18) += *(_DWORD *)(v76 + 24);
-      *((_QWORD *)v10 + 5) = 0i64;
+      *(_DWORD *)v76 = 1114114;
+      *(_QWORD *)(v76 + 8) = mQuarterSizeScratchBPointSampleTexture;
     }
   }
-  v79 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
-  v80 = v79;
-  v131 = v79;
-  if ( v79 )
-  {
-    *(_QWORD *)v79 = v79;
-    *((_QWORD *)v79 + 1) = v79;
-    *((_QWORD *)v79 + 2) = 0i64;
-    *((_DWORD *)v79 + 6) = 0;
-    v81 = *((_QWORD *)v10 + 2);
-    *(_QWORD *)(v81 + 8) = v80;
-    *(_QWORD *)v80 = v81;
-    *((_QWORD *)v80 + 1) = v10 + 16;
-    *((_QWORD *)v10 + 2) = v80;
-    *((_QWORD *)v10 + 5) = v80;
-  }
-  v82 = *((_QWORD *)v10 + 5);
-  if ( v82 )
-  {
-    *(_DWORD *)(v82 + 24) = 1;
-    v78 = *((_QWORD *)v10 + 5) + 32i64;
-LABEL_111:
-    if ( v78 )
-    {
-      *(_DWORD *)v78 = 1114114;
-      *(_QWORD *)(v78 + 8) = v75;
-    }
-  }
-  if ( v74 )
-    v83 = v4->mQuarterSizeAmbientOcclusionAliasUAV;
+  if ( v72 )
+    mQuarterSizeAmbientOcclusionAliasUAV = render_context->mQuarterSizeAmbientOcclusionAliasUAV;
   else
-    v83 = v4->mAmbientOcclusionAliasUAV;
-  v84 = *(_WORD *)(v58 + 136);
-  v85 = *((_QWORD *)v10 + 5);
-  if ( v85 )
+    mQuarterSizeAmbientOcclusionAliasUAV = render_context->mAmbientOcclusionAliasUAV;
+  v82 = *(_WORD *)(v56 + 136);
+  v83 = *((_QWORD *)v9 + 5);
+  if ( v83 )
   {
-    v86 = *(unsigned int *)(v85 + 24);
-    if ( (unsigned int)v86 < 0x7E )
+    v84 = *(unsigned int *)(v83 + 24);
+    if ( (unsigned int)v84 < 0x7E )
     {
-      v87 = v85 + 16 * (v86 + 2);
-      *(_DWORD *)(v85 + 24) = v86 + 1;
-      goto LABEL_125;
+      v85 = v83 + 16 * (v84 + 2);
+      *(_DWORD *)(v83 + 24) = v84 + 1;
+      goto LABEL_116;
     }
+    *((_DWORD *)v9 + 18) += *(_DWORD *)(v83 + 24);
+    *((_QWORD *)v9 + 5) = 0i64;
+  }
+  v86 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
+  v87 = v86;
+  v122 = v86;
+  if ( v86 )
+  {
+    *(_QWORD *)v86 = v86;
+    *((_QWORD *)v86 + 1) = v86;
+    *((_QWORD *)v86 + 2) = 0i64;
+    *((_DWORD *)v86 + 6) = 0;
+    v88 = *((_QWORD *)v9 + 2);
+    *(_QWORD *)(v88 + 8) = v87;
+    *(_QWORD *)v87 = v88;
+    *((_QWORD *)v87 + 1) = v9 + 16;
+    *((_QWORD *)v9 + 2) = v87;
+    *((_QWORD *)v9 + 5) = v87;
+  }
+  v89 = *((_QWORD *)v9 + 5);
+  if ( v89 )
+  {
+    *(_DWORD *)(v89 + 24) = 1;
+    v85 = *((_QWORD *)v9 + 5) + 32i64;
+LABEL_116:
     if ( v85 )
     {
-      *((_DWORD *)v10 + 18) += *(_DWORD *)(v85 + 24);
-      *((_QWORD *)v10 + 5) = 0i64;
+      *(_WORD *)v85 = 2;
+      *(_WORD *)(v85 + 2) = v82;
+      *(_QWORD *)(v85 + 8) = mQuarterSizeAmbientOcclusionAliasUAV;
     }
   }
-  v88 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
-  v89 = v88;
-  v131 = v88;
-  if ( v88 )
+  v90 = (__m128)COERCE_UNSIGNED_INT((float)*vp_scissor);
+  v90.m128_f32[0] = v90.m128_f32[0] * 0.5;
+  v91 = (int)v90.m128_f32[0];
+  if ( (int)v90.m128_f32[0] != 0x80000000 && (float)v91 != v90.m128_f32[0] )
+    v90.m128_f32[0] = (float)(!(_mm_movemask_ps(_mm_unpacklo_ps(v90, v90)) & 1) + v91);
+  v92 = (int)v90.m128_f32[0];
+  v93 = (__m128)COERCE_UNSIGNED_INT((float)vp_scissor[1]);
+  v93.m128_f32[0] = v93.m128_f32[0] * 0.0078125;
+  v94 = (int)v93.m128_f32[0];
+  if ( (int)v93.m128_f32[0] != 0x80000000 && (float)v94 != v93.m128_f32[0] )
+    v93.m128_f32[0] = (float)(!(_mm_movemask_ps(_mm_unpacklo_ps(v93, v93)) & 1) + v94);
+  v95 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0xCu, 4u);
+  v96 = v95;
+  v122 = v95;
+  if ( v95 )
   {
-    *(_QWORD *)v88 = v88;
-    *((_QWORD *)v88 + 1) = v88;
-    *((_QWORD *)v88 + 2) = 0i64;
-    *((_DWORD *)v88 + 6) = 0;
-    v90 = *((_QWORD *)v10 + 2);
-    *(_QWORD *)(v90 + 8) = v89;
-    *(_QWORD *)v89 = v90;
-    *((_QWORD *)v89 + 1) = v10 + 16;
-    *((_QWORD *)v10 + 2) = v89;
-    *((_QWORD *)v10 + 5) = v89;
-  }
-  v91 = *((_QWORD *)v10 + 5);
-  if ( v91 )
-  {
-    *(_DWORD *)(v91 + 24) = 1;
-    v87 = *((_QWORD *)v10 + 5) + 32i64;
-LABEL_125:
-    if ( v87 )
-    {
-      *(_WORD *)v87 = 2;
-      *(_WORD *)(v87 + 2) = v84;
-      *(_QWORD *)(v87 + 8) = v83;
-    }
-  }
-  v92 = (__m128)COERCE_UNSIGNED_INT((float)*vp_scissor);
-  v92.m128_f32[0] = v92.m128_f32[0] * 0.5;
-  v93 = (signed int)v92.m128_f32[0];
-  if ( (signed int)v92.m128_f32[0] != 0x80000000 && (float)v93 != v92.m128_f32[0] )
-    v92.m128_f32[0] = (float)((_mm_movemask_ps(_mm_unpacklo_ps(v92, v92)) & 1 ^ 1) + v93);
-  v94 = (signed int)v92.m128_f32[0];
-  v95 = (__m128)COERCE_UNSIGNED_INT((float)vp_scissor[1]);
-  v95.m128_f32[0] = v95.m128_f32[0] * 0.0078125;
-  v96 = (signed int)v95.m128_f32[0];
-  if ( (signed int)v95.m128_f32[0] != 0x80000000 && (float)v96 != v95.m128_f32[0] )
-    v95.m128_f32[0] = (float)((_mm_movemask_ps(_mm_unpacklo_ps(v95, v95)) & 1 ^ 1) + v96);
-  v97 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0xCu, 4u);
-  v98 = v97;
-  v131 = v97;
-  if ( v97 )
-  {
-    *(_DWORD *)v97 = v94;
-    *((_DWORD *)v97 + 1) = (signed int)v95.m128_f32[0];
-    *((_DWORD *)v97 + 2) = 1;
+    *(_DWORD *)v95 = v92;
+    *((_DWORD *)v95 + 1) = (int)v93.m128_f32[0];
+    *((_DWORD *)v95 + 2) = 1;
   }
   else
   {
-    v98 = 0i64;
+    v96 = 0i64;
   }
-  v99 = *((_QWORD *)v10 + 5);
-  if ( v99 )
+  v97 = *((_QWORD *)v9 + 5);
+  if ( v97 )
   {
-    v100 = *(unsigned int *)(v99 + 24);
-    if ( (unsigned int)v100 < 0x7E )
+    v98 = *(unsigned int *)(v97 + 24);
+    if ( (unsigned int)v98 < 0x7E )
     {
-      v101 = v99 + 16 * (v100 + 2);
-      *(_DWORD *)(v99 + 24) = v100 + 1;
-      goto LABEL_145;
+      v99 = v97 + 16 * (v98 + 2);
+      *(_DWORD *)(v97 + 24) = v98 + 1;
+      goto LABEL_135;
     }
+    *((_DWORD *)v9 + 18) += *(_DWORD *)(v97 + 24);
+    *((_QWORD *)v9 + 5) = 0i64;
+  }
+  v100 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
+  v101 = v100;
+  v122 = v100;
+  if ( v100 )
+  {
+    *(_QWORD *)v100 = v100;
+    *((_QWORD *)v100 + 1) = v100;
+    *((_QWORD *)v100 + 2) = 0i64;
+    *((_DWORD *)v100 + 6) = 0;
+    v102 = *((_QWORD *)v9 + 2);
+    *(_QWORD *)(v102 + 8) = v101;
+    *(_QWORD *)v101 = v102;
+    *((_QWORD *)v101 + 1) = v9 + 16;
+    *((_QWORD *)v9 + 2) = v101;
+    *((_QWORD *)v9 + 5) = v101;
+  }
+  v103 = *((_QWORD *)v9 + 5);
+  if ( v103 )
+  {
+    *(_DWORD *)(v103 + 24) = 1;
+    v99 = *((_QWORD *)v9 + 5) + 32i64;
+LABEL_135:
     if ( v99 )
     {
-      *((_DWORD *)v10 + 18) += *(_DWORD *)(v99 + 24);
-      *((_QWORD *)v10 + 5) = 0i64;
+      *(_DWORD *)v99 = 26;
+      *(_QWORD *)(v99 + 8) = v96;
     }
   }
-  v102 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x800u, 0x10u);
-  v103 = v102;
-  v131 = v102;
-  if ( v102 )
+  v104 = *((_QWORD *)v9 + 5);
+  if ( v104 )
   {
-    *(_QWORD *)v102 = v102;
-    *((_QWORD *)v102 + 1) = v102;
-    *((_QWORD *)v102 + 2) = 0i64;
-    *((_DWORD *)v102 + 6) = 0;
-    v104 = *((_QWORD *)v10 + 2);
-    *(_QWORD *)(v104 + 8) = v103;
-    *(_QWORD *)v103 = v104;
-    *((_QWORD *)v103 + 1) = v10 + 16;
-    *((_QWORD *)v10 + 2) = v103;
-    *((_QWORD *)v10 + 5) = v103;
+    *((_DWORD *)v9 + 18) += *(_DWORD *)(v104 + 24);
+    *((_QWORD *)v9 + 5) = 0i64;
   }
-  v105 = *((_QWORD *)v10 + 5);
-  if ( v105 )
+  v105 = viewa;
+  v106 = (RenderQueueLayer *)viewa->mSubmitContext[1].mStateValues.mParamValues[0];
+  RenderQueueLayer::SerializeRenderQueues(v106);
+  mSerializationList = v106->mSerializationList;
+  mPrev = v106->mSerializationList->mNode.mPrev;
+  mPrev->mNext = (UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *)v9;
+  *(_QWORD *)v9 = mPrev;
+  *((_QWORD *)v9 + 1) = mSerializationList;
+  mSerializationList->mNode.mPrev = (UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *)v9;
+  if ( !v124 )
   {
-    *(_DWORD *)(v105 + 24) = 1;
-    v101 = *((_QWORD *)v10 + 5) + 32i64;
-LABEL_145:
-    if ( v101 )
+    StateArgs = Render::View::GetStateArgs(v105);
+    Render::View::BeginTarget(v105, render_context->mAmbientOcclusionAliasTarget, "DropShadows", 0, 0, 0i64, 1, 0, 0, 0);
+    p_mWorldView = &v105->mSettings->mWorldView;
+    p_mProjection = &v105->mSettings->mProjection;
+    clear_on_resolve.mPrev = &clear_on_resolve;
+    clear_on_resolve.mNext = &clear_on_resolve;
+    clear_on_resolve.mCallback = 0i64;
+    clear_on_resolve.mStateParamIndex = Render::cbExternalViewTransformState::sStateParamIndex;
+    *(_WORD *)&clear_on_resolve.mFlags = 1;
+    if ( (_WORD)Render::cbExternalViewTransformState::sStateParamIndex == 0xFFFF )
     {
-      *(_DWORD *)v101 = 26;
-      *(_QWORD *)(v101 + 8) = v98;
+      Param = Illusion::StateSystem::GetParam(&Illusion::gStateSystem, "cbExternalViewTransform");
+      Render::cbExternalViewTransformState::sStateParamIndex = Param;
+      clear_on_resolve.mStateParamIndex = Param;
     }
+    clear_on_resolve.mWorldView = p_mWorldView;
+    clear_on_resolve.mProjection = p_mProjection;
+    clear_on_resolve.mCached_Remote.m_Stream = 0i64;
+    Illusion::StateArgs::Set<Render::cbExternalViewTransformState>(StateArgs, &clear_on_resolve);
+    UFG::DropShadowComponent::DrawAll(v105, render_context->mHalfSizeLinearDepthTarget);
+    v113 = clear_on_resolve.mPrev;
+    mNext = clear_on_resolve.mNext;
+    clear_on_resolve.mPrev->mNext = clear_on_resolve.mNext;
+    mNext->mPrev = v113;
+    clear_on_resolve.mPrev = &clear_on_resolve;
+    clear_on_resolve.mNext = &clear_on_resolve;
+    clear_on_resolve.mIsSet = 0;
+    if ( (UFG::qList<Illusion::StateArg,Illusion::StateArg,0,0> *)StateArgs->mStateArgs[clear_on_resolve.mStateParamIndex].mNode.mNext == &StateArgs->mStateArgs[clear_on_resolve.mStateParamIndex] )
+      StateArgs->mStateArgsCreateMask.mFlags[(unsigned int)clear_on_resolve.mStateParamIndex >> 6] &= ~(1i64 << (clear_on_resolve.mStateParamIndex & 0x3F));
+    Render::View::EndTarget(v105);
+    v115 = clear_on_resolve.mPrev;
+    v116 = clear_on_resolve.mNext;
+    clear_on_resolve.mPrev->mNext = clear_on_resolve.mNext;
+    v116->mPrev = v115;
   }
-  v106 = *((_QWORD *)v10 + 5);
-  if ( v106 )
-  {
-    *((_DWORD *)v10 + 18) += *(_DWORD *)(v106 + 24);
-    *((_QWORD *)v10 + 5) = 0i64;
-  }
-  v107 = viewa;
-  v108 = (RenderQueueLayer *)viewa->mSubmitContext[1].mStateValues.mParamValues[0];
-  RenderQueueLayer::SerializeRenderQueues(v108);
-  v109 = v108->mSerializationList;
-  v110 = v108->mSerializationList->mNode.mPrev;
-  v110->mNext = (UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *)v10;
-  *(_QWORD *)v10 = v110;
-  *((_QWORD *)v10 + 1) = v109;
-  v109->mNode.mPrev = (UFG::qNode<Illusion::RenderQueue,Illusion::RenderQueue> *)v10;
-  if ( !v133 )
-  {
-    v111 = Render::View::GetStateArgs(v107);
-    Render::View::BeginTarget(v107, v4->mAmbientOcclusionAliasTarget, "DropShadows", 0, 0, 0i64, 1, 0, 0, 0);
-    v112 = (__int64)v107->mSettings;
-    v113 = (signed __int64)&v107->mSettings->mProjection;
-    *(_QWORD *)clear_on_resolve = clear_on_resolve;
-    *(_QWORD *)ignore_resolve_depth = clear_on_resolve;
-    *(_QWORD *)ps4_decompress_depth = 0i64;
-    *(_WORD *)d3d_disable_depth_copy = Render::cbExternalViewTransformState::sStateParamIndex;
-    v124 = 1;
-    if ( (_WORD)Render::cbExternalViewTransformState::sStateParamIndex == -1 )
-    {
-      v114 = Illusion::StateSystem::GetParam(&Illusion::gStateSystem, "cbExternalViewTransform");
-      Render::cbExternalViewTransformState::sStateParamIndex = v114;
-      *(_WORD *)d3d_disable_depth_copy = v114;
-    }
-    v125 = v112;
-    v126 = v113;
-    v127 = 0i64;
-    Illusion::StateArgs::Set<Render::cbExternalViewTransformState>(
-      v111,
-      (Render::cbExternalViewTransformState *)clear_on_resolve);
-    UFG::DropShadowComponent::DrawAll(v107, v4->mHalfSizeLinearDepthTarget);
-    v115 = *(_QWORD *)clear_on_resolve;
-    v116 = *(_QWORD **)ignore_resolve_depth;
-    *(_QWORD *)(*(_QWORD *)clear_on_resolve + 8i64) = *(_QWORD *)ignore_resolve_depth;
-    *v116 = v115;
-    *(_QWORD *)clear_on_resolve = clear_on_resolve;
-    *(_QWORD *)ignore_resolve_depth = clear_on_resolve;
-    HIBYTE(v124) = 0;
-    if ( (Illusion::StateArgs *)v111->mStateArgsCreateMask.mFlags[2 * (*(signed __int16 *)d3d_disable_depth_copy + 3i64)
-                                                                + 1] == (Illusion::StateArgs *)((char *)v111
-                                                                                              + 16
-                                                                                              * (*(signed __int16 *)d3d_disable_depth_copy
-                                                                                               + 3i64)) )
-      v111->mStateArgsCreateMask.mFlags[(unsigned int)*(signed __int16 *)d3d_disable_depth_copy >> 6] &= ~(1i64 << (d3d_disable_depth_copy[0] & 0x3F));
-    Render::View::EndTarget(v107);
-    v117 = *(_QWORD *)clear_on_resolve;
-    v118 = *(_QWORD **)ignore_resolve_depth;
-    *(_QWORD *)(*(_QWORD *)clear_on_resolve + 8i64) = *(_QWORD *)ignore_resolve_depth;
-    *v118 = v117;
-  }
-}                                                                                              + 16
-                      
+}    clear_on_resolve.mPrev = &clear_on_resolve;
+    clear_on_resolve.mNext = &clear_on_resolve;
+    clear_on_resolve.mIsSet = 0;
+    if ( (UFG::qList<Illusion::StateArg,Illusion::StateArg,0,0> *)StateArgs->mStateArgs[clear_on_resolve.mStateParamInde
 

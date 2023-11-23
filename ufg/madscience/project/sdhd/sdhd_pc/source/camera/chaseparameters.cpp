@@ -1941,9 +1941,8 @@ __int64 UFG::_dynamic_initializer_for__gChaseParams__()
   unk_142078B20 = _xmm;
   unk_142078B40 = _xmm;
   unk_142078B30 = _xmm;
-  return atexit(UFG::_dynamic_atexit_destructor_for__gChaseParams__);
-}78B40 = _xmm;
-  unk_142078B30 = _xmm;
-  return atexit(UFG::_dynamic_atexit_destructor_for__gChaseParams__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gChaseParams__);
+}42078B30 = _xmm;
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gChaseParams__);
 }
 

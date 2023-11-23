@@ -1,6 +1,9 @@
 // File Line: 15
 // RVA: 0xD4DF30
-void __fastcall hkpWheelFrictionConstraintData::init(hkpWheelFrictionConstraintData *this, hkpWheelFrictionConstraintAtom::Axle *axle, float radius)
+void __fastcall hkpWheelFrictionConstraintData::init(
+        hkpWheelFrictionConstraintData *this,
+        hkpWheelFrictionConstraintAtom::Axle *axle,
+        float radius)
 {
   this->m_atoms.m_friction.m_radius = radius;
   this->m_atoms.m_friction.m_axle = axle;
@@ -19,14 +22,17 @@ hkBool *__fastcall hkpWheelFrictionConstraintData::isValid(hkpWheelFrictionConst
 
 // File Line: 35
 // RVA: 0xD4DF80
-signed __int64 __fastcall hkpWheelFrictionConstraintData::getType(hkpWheelFrictionConstraintData *this)
+__int64 __fastcall hkpWheelFrictionConstraintData::getType(hkpWheelFrictionConstraintData *this)
 {
   return 20i64;
 }
 
 // File Line: 45
 // RVA: 0xD4DF90
-void __fastcall hkpWheelFrictionConstraintData::getRuntimeInfo(hkpWheelFrictionConstraintData *this, hkBool wantRuntime, hkpConstraintData::RuntimeInfo *infoOut)
+void __fastcall hkpWheelFrictionConstraintData::getRuntimeInfo(
+        hkpWheelFrictionConstraintData *this,
+        hkBool wantRuntime,
+        hkpConstraintData::RuntimeInfo *infoOut)
 {
   infoOut->m_numSolverResults = 0;
   infoOut->m_sizeOfExternalRuntime = wantRuntime.m_bool != 0;
@@ -34,61 +40,63 @@ void __fastcall hkpWheelFrictionConstraintData::getRuntimeInfo(hkpWheelFrictionC
 
 // File Line: 59
 // RVA: 0xD4DFB0
-void __fastcall hkpWheelFrictionConstraintData::getConstraintInfo(hkpWheelFrictionConstraintData *this, hkpConstraintData::ConstraintInfo *infoOut)
+void __fastcall hkpWheelFrictionConstraintData::getConstraintInfo(
+        hkpWheelFrictionConstraintData *this,
+        hkpConstraintData::ConstraintInfo *infoOut)
 {
-  hkpConstraintData::getConstraintInfoUtil((hkpConstraintAtom *)&this->m_atoms.m_transforms.m_type, 192, infoOut);
+  hkpConstraintData::getConstraintInfoUtil(&this->m_atoms.m_transforms, 0xC0u, infoOut);
 }
 
 // File Line: 64
 // RVA: 0xD4DFD0
-void __fastcall hkpWheelFrictionConstraintData::setInWorldSpace(hkpWheelFrictionConstraintData *this, hkTransformf *bodyATransform, hkTransformf *bodyBTransform, hkVector4f *contact, hkVector4f *forward, hkVector4f *side)
+void __fastcall hkpWheelFrictionConstraintData::setInWorldSpace(
+        hkpWheelFrictionConstraintData *this,
+        hkTransformf *bodyATransform,
+        hkTransformf *bodyBTransform,
+        hkVector4f *contact,
+        hkVector4f *forward,
+        hkVector4f *side)
 {
-  hkTransformf *v6; // r15
-  hkpWheelFrictionConstraintData *v7; // rbp
-  hkVector4f *v8; // r14
-  hkTransformf *v9; // rbx
   __m128 v10; // xmm2
-  hkVector4f b; // [rsp+20h] [rbp-28h]
+  hkVector4f b; // [rsp+20h] [rbp-28h] BYREF
 
-  v6 = bodyBTransform;
-  v7 = this;
-  v8 = contact;
-  v9 = bodyATransform;
   v10 = _mm_sub_ps(
           _mm_mul_ps(_mm_shuffle_ps(side->m_quad, side->m_quad, 201), forward->m_quad),
           _mm_mul_ps(_mm_shuffle_ps(forward->m_quad, forward->m_quad, 201), side->m_quad));
   b.m_quad = _mm_shuffle_ps(v10, v10, 201);
   hkVector4f::setRotatedInverseDir(
     &this->m_atoms.m_transforms.m_transformA.m_rotation.m_col0,
-    (hkMatrix3f *)&bodyATransform->m_rotation.m_col0,
+    &bodyATransform->m_rotation,
     &b);
   hkVector4f::setRotatedInverseDir(
-    &v7->m_atoms.m_transforms.m_transformA.m_rotation.m_col1,
-    (hkMatrix3f *)&v9->m_rotation.m_col0,
+    &this->m_atoms.m_transforms.m_transformA.m_rotation.m_col1,
+    &bodyATransform->m_rotation,
     forward);
   hkVector4f::setRotatedInverseDir(
-    &v7->m_atoms.m_transforms.m_transformA.m_rotation.m_col2,
-    (hkMatrix3f *)&v9->m_rotation.m_col0,
+    &this->m_atoms.m_transforms.m_transformA.m_rotation.m_col2,
+    &bodyATransform->m_rotation,
     side);
-  hkVector4f::setTransformedInversePos(&v7->m_atoms.m_transforms.m_transformA.m_translation, v9, v8);
+  hkVector4f::setTransformedInversePos(&this->m_atoms.m_transforms.m_transformA.m_translation, bodyATransform, contact);
   hkVector4f::setRotatedInverseDir(
-    &v7->m_atoms.m_transforms.m_transformB.m_rotation.m_col0,
-    (hkMatrix3f *)&v6->m_rotation.m_col0,
+    &this->m_atoms.m_transforms.m_transformB.m_rotation.m_col0,
+    &bodyBTransform->m_rotation,
     &b);
   hkVector4f::setRotatedInverseDir(
-    &v7->m_atoms.m_transforms.m_transformB.m_rotation.m_col1,
-    (hkMatrix3f *)&v6->m_rotation.m_col0,
+    &this->m_atoms.m_transforms.m_transformB.m_rotation.m_col1,
+    &bodyBTransform->m_rotation,
     forward);
   hkVector4f::setRotatedInverseDir(
-    &v7->m_atoms.m_transforms.m_transformB.m_rotation.m_col2,
-    (hkMatrix3f *)&v6->m_rotation.m_col0,
+    &this->m_atoms.m_transforms.m_transformB.m_rotation.m_col2,
+    &bodyBTransform->m_rotation,
     side);
-  hkVector4f::setTransformedInversePos(&v7->m_atoms.m_transforms.m_transformB.m_translation, v6, v8);
+  hkVector4f::setTransformedInversePos(&this->m_atoms.m_transforms.m_transformB.m_translation, bodyBTransform, contact);
 }
 
 // File Line: 83
 // RVA: 0xD4E0D0
-void __fastcall hkpWheelFrictionConstraintData::setMaxFrictionForce(hkpWheelFrictionConstraintData *this, float maxFrictionForce)
+void __fastcall hkpWheelFrictionConstraintData::setMaxFrictionForce(
+        hkpWheelFrictionConstraintData *this,
+        float maxFrictionForce)
 {
   this->m_atoms.m_friction.m_maxFrictionForce = maxFrictionForce;
 }
@@ -109,7 +117,9 @@ float __fastcall hkpWheelFrictionConstraintData::getSpinVelocity(hkpWheelFrictio
 
 // File Line: 98
 // RVA: 0xD4E170
-void __fastcall hkpWheelFrictionConstraintData::setSpinVelocity(hkpWheelFrictionConstraintData *this, float spinVelocity)
+void __fastcall hkpWheelFrictionConstraintData::setSpinVelocity(
+        hkpWheelFrictionConstraintData *this,
+        float spinVelocity)
 {
   this->m_atoms.m_friction.m_axle->m_spinVelocity = spinVelocity;
 }
@@ -118,25 +128,28 @@ void __fastcall hkpWheelFrictionConstraintData::setSpinVelocity(hkpWheelFriction
 // RVA: 0xD4E0F0
 void __fastcall hkpWheelFrictionConstraintData::setInvInertia(hkpWheelFrictionConstraintData *this, float invInertia)
 {
-  hkpWheelFrictionConstraintAtom::Axle *v2; // rax
+  hkpWheelFrictionConstraintAtom::Axle *m_axle; // rax
 
-  v2 = this->m_atoms.m_friction.m_axle;
-  v2->m_invInertia = invInertia;
+  m_axle = this->m_atoms.m_friction.m_axle;
+  m_axle->m_invInertia = invInertia;
   if ( invInertia == 0.0 )
-    v2->m_inertia = 0.0;
+    m_axle->m_inertia = 0.0;
   else
-    v2->m_inertia = 1.0 / invInertia;
+    m_axle->m_inertia = 1.0 / invInertia;
 }
 
 // File Line: 108
 // RVA: 0xD4E130
-void __fastcall hkpWheelFrictionConstraintData::setImpulseScaling(hkpWheelFrictionConstraintData *this, float impulseScaling, float impulseMax)
+void __fastcall hkpWheelFrictionConstraintData::setImpulseScaling(
+        hkpWheelFrictionConstraintData *this,
+        float impulseScaling,
+        float impulseMax)
 {
-  hkpWheelFrictionConstraintAtom::Axle *v3; // rax
+  hkpWheelFrictionConstraintAtom::Axle *m_axle; // rax
 
-  v3 = this->m_atoms.m_friction.m_axle;
-  v3->m_impulseScaling = impulseScaling;
-  v3->m_impulseMax = impulseMax;
+  m_axle = this->m_atoms.m_friction.m_axle;
+  m_axle->m_impulseScaling = impulseScaling;
+  m_axle->m_impulseMax = impulseMax;
 }
 
 // File Line: 113

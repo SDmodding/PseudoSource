@@ -2,7 +2,7 @@
 // RVA: 0x14672D0
 __int64 dynamic_initializer_for__SyncedObjectComponent::s_SyncedObjectComponentList__()
 {
-  return atexit(dynamic_atexit_destructor_for__SyncedObjectComponent::s_SyncedObjectComponentList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__SyncedObjectComponent::s_SyncedObjectComponentList__);
 }
 
 // File Line: 53

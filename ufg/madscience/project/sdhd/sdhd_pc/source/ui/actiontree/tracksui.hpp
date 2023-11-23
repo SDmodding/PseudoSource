@@ -2,34 +2,26 @@
 // RVA: 0x29F020
 void __fastcall UIEventTrack::~UIEventTrack(UIEventTrack *this)
 {
-  UIEventTrack *v1; // rbx
   char *v2; // rcx
-  ExpressionParameterFloat *v3; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v4; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&UIEventTrack::`vftable;
-  if ( !(~LOBYTE(this->mEventName.mOffset) & 1) )
+  if ( (this->mEventName.mOffset & 1) != 0 && (this->mEventName.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( this->mEventName.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v2 = (char *)&this->mEventName + (this->mEventName.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v2 != BinString::sEmptyString )
-        operator delete[](v2);
-    }
+    v2 = (char *)&this->mEventName + (this->mEventName.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v2 != BinString::sEmptyString )
+      operator delete[](v2);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v3 = &v1->mMasterRate;
-  if ( !(~LOBYTE(v1->mMasterRate.text.mOffset) & 1) )
+  this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
+  p_mMasterRate = &this->mMasterRate;
+  if ( (this->mMasterRate.text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v3->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v4 = (char *)v3 + (v3->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v4 != BinString::sEmptyString )
-        operator delete[](v4);
-    }
+    v4 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v4 != BinString::sEmptyString )
+      operator delete[](v4);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 27
@@ -47,24 +39,19 @@ void __fastcall UIEventTrack::Create()
 // RVA: 0x29F0C0
 void __fastcall UIScreenTrack::~UIScreenTrack(UIScreenTrack *this)
 {
-  UIScreenTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&UIScreenTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 47
@@ -82,24 +69,19 @@ void __fastcall UIScreenTrack::Create()
 // RVA: 0x29BC70
 void __fastcall HUDSocialActionChargeTrack::~HUDSocialActionChargeTrack(HUDSocialActionChargeTrack *this)
 {
-  HUDSocialActionChargeTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&HUDSocialActionChargeTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 100
@@ -113,24 +95,19 @@ __int64 __fastcall HUDSocialActionChargeTrack::GetClassNameUID(HUDSocialActionCh
 // RVA: 0x29BC00
 void __fastcall HUDSocialActionActivateTrack::~HUDSocialActionActivateTrack(HUDSocialActionActivateTrack *this)
 {
-  HUDSocialActionActivateTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&HUDSocialActionActivateTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 123
@@ -144,24 +121,19 @@ __int64 __fastcall HUDSocialActionActivateTrack::GetClassNameUID(HUDSocialAction
 // RVA: 0x29BCE0
 void __fastcall HUDSocialActionEnableTrack::~HUDSocialActionEnableTrack(HUDSocialActionEnableTrack *this)
 {
-  HUDSocialActionEnableTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&HUDSocialActionEnableTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 136

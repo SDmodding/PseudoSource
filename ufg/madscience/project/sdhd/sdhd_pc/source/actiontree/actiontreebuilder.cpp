@@ -5,7 +5,7 @@ __int64 dynamic_initializer_for__gMemberMapClassSchema__()
   UFG::qBaseTreeRB::qBaseTreeRB(&gMemberMapClassSchema.mClasses.mTree);
   gMemberMapClassSchema.mSerializationStack.p = 0i64;
   *(_QWORD *)&gMemberMapClassSchema.mSerializationStack.size = 0i64;
-  return atexit(dynamic_atexit_destructor_for__gMemberMapClassSchema__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gMemberMapClassSchema__);
 }
 
 // File Line: 35
@@ -13,6 +13,6 @@ __int64 dynamic_initializer_for__gMemberMapClassSchema__()
 __int64 dynamic_initializer_for__gSerializedSymbols__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&gSerializedSymbols.mTree);
-  return atexit(dynamic_atexit_destructor_for__gSerializedSymbols__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gSerializedSymbols__);
 }
 

@@ -1,55 +1,51 @@
 // File Line: 53
 // RVA: 0x12DD168
-char *__fastcall mbschr_l(const char *string, unsigned int c, localeinfo_struct *plocinfo)
+char *__fastcall mbschr_l(char *string, unsigned int c, localeinfo_struct *plocinfo)
 {
-  char *v3; // rbx
-  int v4; // edi
   unsigned __int16 v5; // cx
-  _LocaleUpdate v7; // [rsp+20h] [rbp-28h]
+  _LocaleUpdate v7; // [rsp+20h] [rbp-28h] BYREF
 
-  v3 = (char *)string;
-  v4 = c;
   _LocaleUpdate::_LocaleUpdate(&v7, plocinfo);
-  if ( !v3 )
+  if ( !string )
   {
     *errno() = 22;
     invalid_parameter_noinfo();
 LABEL_13:
-    v3 = 0i64;
+    string = 0i64;
     goto LABEL_14;
   }
   if ( !v7.localeinfo.mbcinfo->ismbcodepage )
   {
-    v3 = strchr(v3, v4);
+    string = strchr((unsigned __int64)string, c);
     goto LABEL_14;
   }
   while ( 1 )
   {
-    v5 = (unsigned __int8)*v3;
-    if ( !*v3 )
+    v5 = (unsigned __int8)*string;
+    if ( !*string )
       break;
-    if ( v7.localeinfo.mbcinfo->mbctype[(unsigned __int8)v5 + 1] & 4 )
+    if ( (v7.localeinfo.mbcinfo->mbctype[(unsigned __int8)v5 + 1] & 4) != 0 )
     {
-      if ( !*++v3 )
+      if ( !*++string )
         goto LABEL_13;
-      if ( v4 == ((unsigned __int8)*v3 | (v5 << 8)) )
+      if ( c == ((unsigned __int8)*string | (v5 << 8)) )
       {
-        --v3;
+        --string;
         goto LABEL_14;
       }
     }
-    else if ( v4 == (unsigned __int8)*v3 )
+    else if ( c == (unsigned __int8)*string )
     {
       break;
     }
-    ++v3;
+    ++string;
   }
-  if ( v4 != (unsigned __int8)*v3 )
+  if ( c != (unsigned __int8)*string )
     goto LABEL_13;
 LABEL_14:
   if ( v7.updated )
-    v7.ptd->_ownlocale &= 0xFFFFFFFD;
-  return v3;
+    v7.ptd->_ownlocale &= ~2u;
+  return string;
 }
 
 // File Line: 86

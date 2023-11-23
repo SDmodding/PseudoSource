@@ -3,140 +3,134 @@
 __int64 dynamic_initializer_for__gVideoBroadcastMemoryPool__()
 {
   UFG::qMemoryPool::qMemoryPool(&gVideoBroadcastMemoryPool);
-  return atexit(dynamic_atexit_destructor_for__gVideoBroadcastMemoryPool__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gVideoBroadcastMemoryPool__);
 }
 
 // File Line: 38
 // RVA: 0x81CB0
-void __fastcall LoginCallback(__int64 result, void *userData)
+void __fastcall LoginCallback(__int64 result, _DWORD *userData)
 {
-  _DWORD *v2; // rbx
-  __int64 v3; // rax
+  const char *v3; // rax
   int v4; // eax
-  unsigned int v5; // eax
-  __int64 v6; // rax
-  unsigned int v7; // eax
+  int v5; // eax
+  const char *v6; // rax
+  int v7; // eax
 
-  v2 = userData;
-  if ( (signed int)result > 0 )
+  if ( (int)result > 0 )
   {
-    v3 = TTV_ErrorToString(result);
+    v3 = (const char *)TTV_ErrorToString(result);
     UFG::qPrintf("ERROR: twitch.tv - LoginCallback got failure: %s. Shutting down streaming...\n", v3);
-    v4 = v2[468];
-    *((_BYTE *)v2 + 1877) = 1;
-    if ( (v4 - 10) & 0xFFFFFFFD )
+    v4 = userData[468];
+    *((_BYTE *)userData + 1877) = 1;
+    if ( ((v4 - 10) & 0xFFFFFFFD) != 0 )
     {
-      *((_BYTE *)v2 + 1876) = 0;
-      *((_BYTE *)v2 + 80) = 0;
-      if ( v2[468] )
+      *((_BYTE *)userData + 1876) = 0;
+      *((_BYTE *)userData + 80) = 0;
+      if ( userData[468] )
       {
-        v2[468] = 0;
+        userData[468] = 0;
         v7 = TTV_Shutdown();
-        if ( (signed int)v7 > 0 )
-          TTV_ErrorToString(v7);
+        if ( v7 > 0 )
+          TTV_ErrorToString((unsigned int)v7);
       }
     }
     else
     {
-      v5 = TTV_Stop(StopCallback, v2);
-      if ( (signed int)v5 <= 0 )
+      v5 = TTV_Stop(StopCallback, userData);
+      if ( v5 <= 0 )
       {
-        v2[468] = 11;
+        userData[468] = 11;
       }
       else
       {
-        v6 = TTV_ErrorToString(v5);
+        v6 = (const char *)TTV_ErrorToString((unsigned int)v5);
         UFG::qPrintf("ERROR: twitch.tv - Error while stopping the stream: %s\n", v6);
       }
-      *((_BYTE *)v2 + 1878) = 1;
+      *((_BYTE *)userData + 1878) = 1;
     }
   }
   else
   {
-    *((_DWORD *)userData + 468) = 5;
+    userData[468] = 5;
   }
 }
 
 // File Line: 59
 // RVA: 0x81C50
-void __fastcall IngestListCallback(__int64 result, void *userData)
+void __fastcall IngestListCallback(__int64 result, Broadcaster *userData)
 {
-  _DWORD *v2; // rbx
-  __int64 v3; // rax
+  const char *v3; // rax
 
-  v2 = userData;
-  if ( (signed int)result > 0 )
+  if ( (int)result > 0 )
   {
-    v3 = TTV_ErrorToString(result);
+    v3 = (const char *)TTV_ErrorToString(result);
     UFG::qPrintf("ERROR: twitch.tv - IngestListCallback got failure: %s\n", v3);
   }
-  else if ( Broadcaster::FindIngestServer((Broadcaster *)userData) )
+  else if ( Broadcaster::FindIngestServer(userData) )
   {
-    v2[468] = 7;
+    userData->mStreamState = eStreamState_FoundIngestServer;
   }
 }
 
 // File Line: 77
 // RVA: 0x81D80
-void __fastcall StartCallback(__int64 result, void *userData)
+void __fastcall StartCallback(__int64 result, Broadcaster *userData)
 {
-  _BYTE *v2; // rbx
   __int64 v3; // rax
-  unsigned int v4; // eax
-  __int64 v5; // rax
-  unsigned int v6; // eax
+  int v4; // eax
+  const char *v5; // rax
+  int v6; // eax
 
-  v2 = userData;
-  if ( (signed int)result <= 0 )
+  if ( (int)result <= 0 )
   {
-    Broadcaster::StreamStarted((Broadcaster *)userData);
+    Broadcaster::StreamStarted(userData);
   }
   else
   {
     v3 = TTV_ErrorToString(result);
     UFG::qPrintf(0i64, "ERROR: twitch.tv - Error while starting to stream: %s\n", v3);
-    if ( (*((_DWORD *)v2 + 468) - 10) & 0xFFFFFFFD )
+    if ( ((userData->mStreamState - 10) & 0xFFFFFFFD) != 0 )
     {
-      v2[1876] = 0;
-      v2[80] = 0;
-      if ( *((_DWORD *)v2 + 468) )
+      userData->mAuthTokenSavedThisSession = 0;
+      userData->mAuthToken.data[0] = 0;
+      if ( userData->mStreamState )
       {
-        *((_DWORD *)v2 + 468) = 0;
+        userData->mStreamState = eStreamState_Uninitialized;
         v6 = TTV_Shutdown();
-        if ( (signed int)v6 > 0 )
-          TTV_ErrorToString(v6);
+        if ( v6 > 0 )
+          TTV_ErrorToString((unsigned int)v6);
       }
     }
     else
     {
-      v4 = TTV_Stop(StopCallback, v2);
-      if ( (signed int)v4 <= 0 )
+      v4 = TTV_Stop(StopCallback, userData);
+      if ( v4 <= 0 )
       {
-        *((_DWORD *)v2 + 468) = 11;
+        userData->mStreamState = eStreamState_StoppingStream;
       }
       else
       {
-        v5 = TTV_ErrorToString(v4);
+        v5 = (const char *)TTV_ErrorToString((unsigned int)v4);
         UFG::qPrintf("ERROR: twitch.tv - Error while stopping the stream: %s\n", v5);
       }
-      v2[1878] = 1;
+      userData->mShutdownStreamingAfterStop = 1;
     }
   }
 }
 
 // File Line: 92
 // RVA: 0x82240
-void __fastcall StopCallback(__int64 result, void *userData)
+void __fastcall StopCallback(__int64 result, Broadcaster *userData)
 {
-  __int64 v2; // rax
+  const char *v2; // rax
 
-  if ( (signed int)result <= 0 )
+  if ( (int)result <= 0 )
   {
-    Broadcaster::StreamStopped((Broadcaster *)userData);
+    Broadcaster::StreamStopped(userData);
   }
   else
   {
-    v2 = TTV_ErrorToString(result);
+    v2 = (const char *)TTV_ErrorToString(result);
     UFG::qPrintf("ERROR: twitch.tv - Error while stopping the stream: %s\n", v2);
   }
 }
@@ -145,11 +139,11 @@ void __fastcall StopCallback(__int64 result, void *userData)
 // RVA: 0x826D0
 void __fastcall UserInfoDoneCallback(__int64 result, void *__formal)
 {
-  __int64 v2; // rax
+  const char *v2; // rax
 
-  if ( (signed int)result > 0 )
+  if ( (int)result > 0 )
   {
-    v2 = TTV_ErrorToString(result);
+    v2 = (const char *)TTV_ErrorToString(result);
     UFG::qPrintf("ERROR: twitch.tv - UserInfoDoneCallback got failure: %s\n", v2);
   }
 }
@@ -158,61 +152,56 @@ void __fastcall UserInfoDoneCallback(__int64 result, void *__formal)
 // RVA: 0x82270
 void __fastcall StreamInfoDoneCallback(__int64 result, void *__formal)
 {
-  __int64 v2; // rax
+  const char *v2; // rax
 
-  if ( (signed int)result > 0 && (_DWORD)result != 37 )
+  if ( (int)result > 0 && (_DWORD)result != 37 )
   {
-    v2 = TTV_ErrorToString(result);
+    v2 = (const char *)TTV_ErrorToString(result);
     UFG::qPrintf("ERROR: twitch.tv - StreamInfoDoneCallback got failure: %s\n", v2);
   }
 }
 
 // File Line: 153
 // RVA: 0x81B20
-void __fastcall FrameUnlockCallback(const char *_buffer, void *userData)
+void __fastcall FrameUnlockCallback(char *_buffer, Broadcaster *userData)
 {
-  Broadcaster::FreeBuffer((Broadcaster *)userData, (char *)_buffer);
+  Broadcaster::FreeBuffer(userData, _buffer);
 }
 
 // File Line: 165
 // RVA: 0x81850
 void __fastcall Broadcaster::Broadcaster(Broadcaster *this)
 {
-  Broadcaster *v1; // rbx
-
-  v1 = this;
   UFG::qString::qString(&this->mUserName);
-  UFG::qString::qString(&v1->mPassword);
-  v1->mAllFrameBuffers.p = 0i64;
-  *(_QWORD *)&v1->mAllFrameBuffers.size = 0i64;
-  v1->mFreeFrameBuffers.p = 0i64;
-  *(_QWORD *)&v1->mFreeFrameBuffers.size = 0i64;
-  v1->mStreamState = 0;
-  *(_WORD *)&v1->mAuthTokenSavedThisSession = 0;
-  v1->mShutdownStreamingAfterStop = 0;
+  UFG::qString::qString(&this->mPassword);
+  this->mAllFrameBuffers.p = 0i64;
+  *(_QWORD *)&this->mAllFrameBuffers.size = 0i64;
+  this->mFreeFrameBuffers.p = 0i64;
+  *(_QWORD *)&this->mFreeFrameBuffers.size = 0i64;
+  this->mStreamState = eStreamState_Uninitialized;
+  *(_WORD *)&this->mAuthTokenSavedThisSession = 0;
+  this->mShutdownStreamingAfterStop = 0;
 }
 
 // File Line: 222
 // RVA: 0x81B30
-void __fastcall Broadcaster::FreeBuffer(Broadcaster *this, char *buffer)
+void __fastcall Broadcaster::FreeBuffer(Broadcaster *this, UFG::qReflectInventoryBase *buffer)
 {
-  UFG::qArray<UFG::qReflectInventoryBase *,0> *v2; // rdi
-  char *v3; // rbp
-  __int64 v4; // rsi
-  unsigned int v5; // edx
+  UFG::qArray<UFG::qReflectInventoryBase *,0> *p_mFreeFrameBuffers; // rdi
+  __int64 size; // rsi
+  unsigned int capacity; // edx
   unsigned int v6; // ebx
   unsigned int v7; // edx
-  UFG::qReflectInventoryBase **v8; // rax
+  UFG::qReflectInventoryBase **p; // rax
 
-  v2 = (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&this->mFreeFrameBuffers;
-  v3 = buffer;
-  v4 = this->mFreeFrameBuffers.size;
-  v5 = this->mFreeFrameBuffers.capacity;
-  v6 = v4 + 1;
-  if ( (signed int)v4 + 1 > v5 )
+  p_mFreeFrameBuffers = (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&this->mFreeFrameBuffers;
+  size = this->mFreeFrameBuffers.size;
+  capacity = this->mFreeFrameBuffers.capacity;
+  v6 = size + 1;
+  if ( (int)size + 1 > capacity )
   {
-    if ( v5 )
-      v7 = 2 * v5;
+    if ( capacity )
+      v7 = 2 * capacity;
     else
       v7 = 1;
     for ( ; v7 < v6; v7 *= 2 )
@@ -220,91 +209,88 @@ void __fastcall Broadcaster::FreeBuffer(Broadcaster *this, char *buffer)
     if ( v7 <= 2 )
       v7 = 2;
     if ( v7 - v6 > 0x10000 )
-      v7 = v4 + 65537;
-    UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(v2, v7, "qArray.Add");
+      v7 = size + 65537;
+    UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(p_mFreeFrameBuffers, v7, "qArray.Add");
   }
-  v8 = v2->p;
-  v2->size = v6;
-  v8[v4] = (UFG::qReflectInventoryBase *)v3;
+  p = p_mFreeFrameBuffers->p;
+  p_mFreeFrameBuffers->size = v6;
+  p[size] = buffer;
 }
 
 // File Line: 229
 // RVA: 0x822A0
 void __fastcall Broadcaster::StreamStarted(Broadcaster *this)
 {
-  Broadcaster *v1; // rbx
-  _FILETIME v2; // rax
-  float v3; // xmm0_4
-  unsigned int v4; // eax
+  _FILETIME SystemTime; // rax
+  float mLength; // xmm0_4
+  int v4; // eax
   __int64 v5; // rax
-  unsigned int v6; // eax
-  __int64 v7; // rax
-  unsigned int v8; // eax
-  __int64 v9; // [rsp+20h] [rbp-68h]
-  __int64 v10; // [rsp+28h] [rbp-60h]
-  __int64 v11; // [rsp+30h] [rbp-58h]
-  _QWORD v12[2]; // [rsp+38h] [rbp-50h]
-  UFG::qDateTime date_time; // [rsp+48h] [rbp-40h]
-  UFG::qString result; // [rsp+58h] [rbp-30h]
+  int v6; // eax
+  const char *v7; // rax
+  int v8; // eax
+  int mYear; // [rsp+20h] [rbp-68h]
+  int mHour; // [rsp+28h] [rbp-60h]
+  int mMinute; // [rsp+30h] [rbp-58h]
+  int mSecond; // [rsp+38h] [rbp-50h]
+  UFG::qDateTime date_time; // [rsp+48h] [rbp-40h] BYREF
+  UFG::qString result; // [rsp+58h] [rbp-30h] BYREF
 
-  v1 = this;
   this->mStreamTimeStartTicks = UFG::qGetTicks();
-  v2 = UFG::qGetSystemTime();
-  UFG::qConvertSystemTimeToDateTime(&date_time, *(_QWORD *)&v2);
-  LODWORD(v12[0]) = date_time.mSecond;
-  LODWORD(v11) = date_time.mMinute;
-  LODWORD(v10) = date_time.mHour;
-  LODWORD(v9) = date_time.mYear;
+  SystemTime = UFG::qGetSystemTime();
+  UFG::qConvertSystemTimeToDateTime(&date_time, *(_QWORD *)&SystemTime);
+  mSecond = date_time.mSecond;
+  mMinute = date_time.mMinute;
+  mHour = date_time.mHour;
+  mYear = date_time.mYear;
   UFG::qString::FormatEx(
     &result,
     "%02d/%02d/%04d, %02d:%02d:%02d",
     date_time.mDay,
     date_time.mMonth,
-    v9,
-    v10,
-    v11,
-    v12[0],
-    -2i64);
-  v1->mStreamInfoForSetting.size = 520i64;
-  v3 = FLOAT_255_0;
+    mYear,
+    mHour,
+    mMinute,
+    mSecond);
+  this->mStreamInfoForSetting.size = 520i64;
+  mLength = FLOAT_255_0;
   if ( (float)result.mLength <= 255.0 )
-    v3 = (float)result.mLength;
-  UFG::qMemCopy(v1->mStreamInfoForSetting.streamTitle, result.mData, (signed int)v3);
-  UFG::qMemCopy(v1->mStreamInfoForSetting.gameName, "UFG", 3u);
-  v4 = TTV_SetStreamInfo(&v1->mAuthToken, v1->mChannelInfo.name, &v1->mStreamInfoForSetting);
-  if ( (signed int)v4 <= 0 )
+    mLength = (float)result.mLength;
+  UFG::qMemCopy(this->mStreamInfoForSetting.streamTitle, result.mData, (int)mLength);
+  UFG::qMemCopy(this->mStreamInfoForSetting.gameName, "UFG", 3u);
+  v4 = TTV_SetStreamInfo(&this->mAuthToken, this->mChannelInfo.name, &this->mStreamInfoForSetting);
+  if ( v4 <= 0 )
   {
-    v1->mStreamState = 10;
+    this->mStreamState = eStreamState_Streaming;
   }
   else
   {
-    v5 = TTV_ErrorToString(v4);
+    v5 = TTV_ErrorToString((unsigned int)v4);
     UFG::qPrintf(0i64, "ERROR: twitch.tv - Error while sending stream info: %s\n", v5);
-    if ( (v1->mStreamState - 10) & 0xFFFFFFFD )
+    if ( ((this->mStreamState - 10) & 0xFFFFFFFD) != 0 )
     {
-      v1->mAuthTokenSavedThisSession = 0;
-      v1->mAuthToken.data[0] = 0;
-      if ( v1->mStreamState )
+      this->mAuthTokenSavedThisSession = 0;
+      this->mAuthToken.data[0] = 0;
+      if ( this->mStreamState )
       {
-        v1->mStreamState = 0;
+        this->mStreamState = eStreamState_Uninitialized;
         v8 = TTV_Shutdown();
-        if ( (signed int)v8 > 0 )
-          TTV_ErrorToString(v8);
+        if ( v8 > 0 )
+          TTV_ErrorToString((unsigned int)v8);
       }
     }
     else
     {
-      v6 = TTV_Stop(StopCallback, v1);
-      if ( (signed int)v6 <= 0 )
+      v6 = TTV_Stop(StopCallback, this);
+      if ( v6 <= 0 )
       {
-        v1->mStreamState = 11;
+        this->mStreamState = eStreamState_StoppingStream;
       }
       else
       {
-        v7 = TTV_ErrorToString(v6);
+        v7 = (const char *)TTV_ErrorToString((unsigned int)v6);
         UFG::qPrintf("ERROR: twitch.tv - Error while stopping the stream: %s\n", v7);
       }
-      v1->mShutdownStreamingAfterStop = 1;
+      this->mShutdownStreamingAfterStop = 1;
     }
   }
   UFG::qString::~qString(&result);
@@ -314,72 +300,62 @@ void __fastcall Broadcaster::StreamStarted(Broadcaster *this)
 // RVA: 0x82460
 void __fastcall Broadcaster::StreamStopped(Broadcaster *this)
 {
-  Broadcaster *v1; // rbx
-  signed __int64 v2; // rdi
-  char **v3; // rcx
+  __int64 i; // rdi
+  char **p; // rcx
   char **v4; // rcx
 
-  v1 = this;
-  v2 = 0i64;
-  do
-  {
-    UFG::qMemoryPool::Free(&gVideoBroadcastMemoryPool, v1->mAllFrameBuffers.p[v2]);
-    ++v2;
-  }
-  while ( v2 < 3 );
-  v3 = v1->mAllFrameBuffers.p;
-  if ( v3 )
-    operator delete[](v3);
-  v1->mAllFrameBuffers.p = 0i64;
-  *(_QWORD *)&v1->mAllFrameBuffers.size = 0i64;
-  v4 = v1->mFreeFrameBuffers.p;
+  for ( i = 0i64; i < 3; ++i )
+    UFG::qMemoryPool::Free(&gVideoBroadcastMemoryPool, this->mAllFrameBuffers.p[i]);
+  p = this->mAllFrameBuffers.p;
+  if ( p )
+    operator delete[](p);
+  this->mAllFrameBuffers.p = 0i64;
+  *(_QWORD *)&this->mAllFrameBuffers.size = 0i64;
+  v4 = this->mFreeFrameBuffers.p;
   if ( v4 )
     operator delete[](v4);
-  v1->mFreeFrameBuffers.p = 0i64;
-  *(_QWORD *)&v1->mFreeFrameBuffers.size = 0i64;
-  v1->mStreamInfo.streamId = 0i64;
-  v1->mStreamState = 8;
+  this->mFreeFrameBuffers.p = 0i64;
+  *(_QWORD *)&this->mFreeFrameBuffers.size = 0i64;
+  this->mStreamInfo.streamId = 0i64;
+  this->mStreamState = eStreamState_ReadyToStream;
 }
 
 // File Line: 267
 // RVA: 0x818B0
 char __fastcall Broadcaster::FindIngestServer(Broadcaster *this)
 {
-  unsigned int v1; // er8
+  unsigned int ingestCount; // r8d
   unsigned int v2; // eax
-  Broadcaster *v3; // r10
   unsigned int v4; // ecx
-  signed __int64 v5; // rbx
-  TTV_IngestServer *v6; // r9
+  TTV_IngestList *p_mIngestList; // rbx
+  TTV_IngestServer *p_mIngestServer; // r9
   TTV_IngestServer *v7; // rdx
-  signed __int64 v8; // rax
+  __int64 v8; // rax
   __int128 v9; // xmm0
-  char result; // al
 
-  v1 = this->mIngestList.ingestCount;
+  ingestCount = this->mIngestList.ingestCount;
   v2 = 0;
-  v3 = this;
-  v4 = v1;
-  if ( v1 )
+  v4 = ingestCount;
+  if ( ingestCount )
   {
-    while ( !v3->mIngestList.ingestList[v2].defaultServer )
+    while ( !this->mIngestList.ingestList[v2].defaultServer )
     {
-      if ( ++v2 >= v1 )
+      if ( ++v2 >= ingestCount )
         goto LABEL_6;
     }
     v4 = v2;
   }
 LABEL_6:
-  if ( v4 >= v1 )
+  if ( v4 >= ingestCount )
     return 0;
-  v5 = (signed __int64)&v3->mIngestList;
-  v6 = &v3->mIngestServer;
-  v7 = &v3->mIngestList.ingestList[v4];
-  if ( ((unsigned __int8)((_BYTE)v3 + 8) | (unsigned __int8)v7) & 0xF )
+  p_mIngestList = &this->mIngestList;
+  p_mIngestServer = &this->mIngestServer;
+  v7 = &this->mIngestList.ingestList[v4];
+  if ( (((unsigned __int8)((_BYTE)this + 8) | (unsigned __int8)v7) & 0xF) != 0 )
   {
-    memmove(&v3->mIngestServer, v7, 0x201ui64);
-    TTV_FreeIngestList(v5);
-    result = 1;
+    memmove(&this->mIngestServer, v7, 0x201ui64);
+    TTV_FreeIngestList(p_mIngestList);
+    return 1;
   }
   else
   {
@@ -387,78 +363,75 @@ LABEL_6:
     do
     {
       v9 = *(_OWORD *)v7->serverName;
-      v6 = (TTV_IngestServer *)((char *)v6 + 128);
+      p_mIngestServer = (TTV_IngestServer *)((char *)p_mIngestServer + 128);
       v7 = (TTV_IngestServer *)((char *)v7 + 128);
-      *(_OWORD *)&v6[-1].serverUrl[129] = v9;
-      *(_OWORD *)&v6[-1].serverUrl[145] = *(_OWORD *)&v7[-1].serverUrl[145];
-      *(_OWORD *)&v6[-1].serverUrl[161] = *(_OWORD *)&v7[-1].serverUrl[161];
-      *(_OWORD *)&v6[-1].serverUrl[177] = *(_OWORD *)&v7[-1].serverUrl[177];
-      *(_OWORD *)&v6[-1].serverUrl[193] = *(_OWORD *)&v7[-1].serverUrl[193];
-      *(_OWORD *)&v6[-1].serverUrl[209] = *(_OWORD *)&v7[-1].serverUrl[209];
-      *(_OWORD *)&v6[-1].serverUrl[225] = *(_OWORD *)&v7[-1].serverUrl[225];
-      *(_OWORD *)&v6[-1].serverUrl[241] = *(_OWORD *)&v7[-1].serverUrl[241];
+      *(_OWORD *)&p_mIngestServer[-1].serverUrl[129] = v9;
+      *(_OWORD *)&p_mIngestServer[-1].serverUrl[145] = *(_OWORD *)&v7[-1].serverUrl[145];
+      *(_OWORD *)&p_mIngestServer[-1].serverUrl[161] = *(_OWORD *)&v7[-1].serverUrl[161];
+      *(_OWORD *)&p_mIngestServer[-1].serverUrl[177] = *(_OWORD *)&v7[-1].serverUrl[177];
+      *(_OWORD *)&p_mIngestServer[-1].serverUrl[193] = *(_OWORD *)&v7[-1].serverUrl[193];
+      *(_OWORD *)&p_mIngestServer[-1].serverUrl[209] = *(_OWORD *)&v7[-1].serverUrl[209];
+      *(_OWORD *)&p_mIngestServer[-1].serverUrl[225] = *(_OWORD *)&v7[-1].serverUrl[225];
+      *(_OWORD *)&p_mIngestServer[-1].serverUrl[241] = *(_OWORD *)&v7[-1].serverUrl[241];
       --v8;
     }
     while ( v8 );
-    v6->serverName[0] = v7->serverName[0];
-    TTV_FreeIngestList(&v3->mIngestList);
-    result = 1;
+    p_mIngestServer->serverName[0] = v7->serverName[0];
+    TTV_FreeIngestList(&this->mIngestList);
+    return 1;
   }
-  return result;
 }
 
 // File Line: 382
 // RVA: 0x81E50
-void __fastcall Broadcaster::StartStreaming(Broadcaster *this, unsigned int outputWidth, unsigned int outputHeight, unsigned int targetFps)
+void __fastcall Broadcaster::StartStreaming(
+        Broadcaster *this,
+        unsigned int outputWidth,
+        unsigned int outputHeight,
+        unsigned int targetFps)
 {
-  unsigned int v4; // esi
-  unsigned int v5; // edi
-  Broadcaster *v6; // rbx
-  signed __int64 v7; // r12
+  __int64 v7; // r12
   unsigned __int64 v8; // r13
   char *v9; // rax
-  __int64 v10; // r14
-  unsigned int v11; // edi
+  __int64 size; // r14
+  unsigned int capacity; // edi
   unsigned int v12; // esi
   char *v13; // r15
   unsigned int v14; // edi
   unsigned __int64 v15; // rax
   char *v16; // rax
-  char *v17; // rbp
-  signed __int64 v18; // r9
-  signed __int64 v19; // r8
-  char **v20; // rax
+  char **v17; // rbp
+  __int64 i; // r9
+  __int64 v19; // r8
+  char **p; // rax
   __int64 v21; // r14
   unsigned int v22; // edi
   unsigned int v23; // esi
   unsigned int v24; // edi
   unsigned __int64 v25; // rax
   char *v26; // rax
-  char *v27; // rbp
-  signed __int64 v28; // r9
-  signed __int64 v29; // r8
+  char **v27; // rbp
+  __int64 j; // r9
+  __int64 v29; // r8
   char **v30; // rax
-  unsigned int v31; // eax
-  __int64 v32; // rax
-  unsigned int v33; // eax
-  __int64 v34; // rax
-  unsigned int v35; // eax
+  int v31; // eax
+  const char *v32; // rax
+  int v33; // eax
+  const char *v34; // rax
+  int v35; // eax
 
-  v4 = outputHeight;
-  v5 = outputWidth;
-  v6 = this;
   switch ( this->mStreamState )
   {
-    case 0:
-    case 1:
-    case 2:
-    case 3:
-    case 6:
-    case 7:
-    case 9:
-    case 0xA:
-    case 0xB:
-    case 0xC:
+    case eStreamState_Uninitialized:
+    case eStreamState_Initialized:
+    case eStreamState_Authenticating:
+    case eStreamState_Authenticated:
+    case eStreamState_FindingIngestServer:
+    case eStreamState_FoundIngestServer:
+    case eStreamState_StartingStream:
+    case eStreamState_Streaming:
+    case eStreamState_StoppingStream:
+    case eStreamState_Paused:
       return;
     default:
       this->mVideoParams.size = 40i64;
@@ -466,22 +439,22 @@ void __fastcall Broadcaster::StartStreaming(Broadcaster *this, unsigned int outp
       this->mVideoParams.outputHeight = outputHeight;
       this->mVideoParams.targetFps = targetFps;
       TTV_GetDefaultParams(&this->mVideoParams);
-      v6->mVideoParams.pixelFormat = 33619971;
-      v6->mAudioParams.size = 16i64;
-      v6->mAudioParams.audioEnabled = 1;
+      this->mVideoParams.pixelFormat = TTV_PF_RGBA;
+      this->mAudioParams.size = 16i64;
+      this->mAudioParams.audioEnabled = 1;
       v7 = 3i64;
-      v8 = 4 * v4 * v5;
+      v8 = 4 * outputHeight * outputWidth;
       do
       {
         v9 = UFG::qMemoryPool::Allocate(&gVideoBroadcastMemoryPool, v8, "BroadcastFrameBuffers", 0i64, 1u);
-        v10 = v6->mAllFrameBuffers.size;
-        v11 = v6->mAllFrameBuffers.capacity;
-        v12 = v10 + 1;
+        size = this->mAllFrameBuffers.size;
+        capacity = this->mAllFrameBuffers.capacity;
+        v12 = size + 1;
         v13 = v9;
-        if ( (signed int)v10 + 1 > v11 )
+        if ( (int)size + 1 > capacity )
         {
-          if ( v11 )
-            v14 = 2 * v11;
+          if ( capacity )
+            v14 = 2 * capacity;
           else
             v14 = 1;
           for ( ; v14 < v12; v14 *= 2 )
@@ -489,40 +462,36 @@ void __fastcall Broadcaster::StartStreaming(Broadcaster *this, unsigned int outp
           if ( v14 <= 2 )
             v14 = 2;
           if ( v14 - v12 > 0x10000 )
-            v14 = v10 + 65537;
-          if ( v14 != (_DWORD)v10 )
+            v14 = size + 65537;
+          if ( v14 != (_DWORD)size )
           {
             v15 = 8i64 * v14;
             if ( !is_mul_ok(v14, 8ui64) )
               v15 = -1i64;
             v16 = UFG::qMalloc(v15, "qArray.Add", 0i64);
-            v17 = v16;
-            if ( v6->mAllFrameBuffers.p )
+            v17 = (char **)v16;
+            if ( this->mAllFrameBuffers.p )
             {
-              v18 = 0i64;
-              if ( v6->mAllFrameBuffers.size )
+              for ( i = 0i64;
+                    (unsigned int)i < this->mAllFrameBuffers.size;
+                    *(_QWORD *)&v16[v19 * 8] = this->mAllFrameBuffers.p[v19] )
               {
-                do
-                {
-                  v19 = v18;
-                  v18 = (unsigned int)(v18 + 1);
-                  *(_QWORD *)&v16[v19 * 8] = v6->mAllFrameBuffers.p[v19];
-                }
-                while ( (unsigned int)v18 < v6->mAllFrameBuffers.size );
+                v19 = i;
+                i = (unsigned int)(i + 1);
               }
-              operator delete[](v6->mAllFrameBuffers.p);
+              operator delete[](this->mAllFrameBuffers.p);
             }
-            v6->mAllFrameBuffers.p = (char **)v17;
-            v6->mAllFrameBuffers.capacity = v14;
+            this->mAllFrameBuffers.p = v17;
+            this->mAllFrameBuffers.capacity = v14;
           }
         }
-        v20 = v6->mAllFrameBuffers.p;
-        v6->mAllFrameBuffers.size = v12;
-        v20[v10] = v13;
-        v21 = v6->mFreeFrameBuffers.size;
-        v22 = v6->mFreeFrameBuffers.capacity;
+        p = this->mAllFrameBuffers.p;
+        this->mAllFrameBuffers.size = v12;
+        p[size] = v13;
+        v21 = this->mFreeFrameBuffers.size;
+        v22 = this->mFreeFrameBuffers.capacity;
         v23 = v21 + 1;
-        if ( (signed int)v21 + 1 > v22 )
+        if ( (int)v21 + 1 > v22 )
         {
           if ( v22 )
             v24 = 2 * v22;
@@ -540,66 +509,62 @@ void __fastcall Broadcaster::StartStreaming(Broadcaster *this, unsigned int outp
             if ( !is_mul_ok(v24, 8ui64) )
               v25 = -1i64;
             v26 = UFG::qMalloc(v25, "qArray.Add", 0i64);
-            v27 = v26;
-            if ( v6->mFreeFrameBuffers.p )
+            v27 = (char **)v26;
+            if ( this->mFreeFrameBuffers.p )
             {
-              v28 = 0i64;
-              if ( v6->mFreeFrameBuffers.size )
+              for ( j = 0i64;
+                    (unsigned int)j < this->mFreeFrameBuffers.size;
+                    *(_QWORD *)&v26[v29 * 8] = this->mFreeFrameBuffers.p[v29] )
               {
-                do
-                {
-                  v29 = v28;
-                  v28 = (unsigned int)(v28 + 1);
-                  *(_QWORD *)&v26[v29 * 8] = v6->mFreeFrameBuffers.p[v29];
-                }
-                while ( (unsigned int)v28 < v6->mFreeFrameBuffers.size );
+                v29 = j;
+                j = (unsigned int)(j + 1);
               }
-              operator delete[](v6->mFreeFrameBuffers.p);
+              operator delete[](this->mFreeFrameBuffers.p);
             }
-            v6->mFreeFrameBuffers.p = (char **)v27;
-            v6->mFreeFrameBuffers.capacity = v24;
+            this->mFreeFrameBuffers.p = v27;
+            this->mFreeFrameBuffers.capacity = v24;
           }
         }
-        v30 = v6->mFreeFrameBuffers.p;
-        v6->mFreeFrameBuffers.size = v23;
+        v30 = this->mFreeFrameBuffers.p;
+        this->mFreeFrameBuffers.size = v23;
         v30[v21] = v13;
         --v7;
       }
       while ( v7 );
-      v31 = TTV_Start(&v6->mVideoParams, &v6->mAudioParams, &v6->mIngestServer, 0i64, StartCallback, v6);
-      if ( (signed int)v31 <= 0 )
+      v31 = TTV_Start(&this->mVideoParams, &this->mAudioParams, &this->mIngestServer, 0i64, StartCallback, this);
+      if ( v31 <= 0 )
       {
-        v6->mStreamState = 9;
+        this->mStreamState = eStreamState_StartingStream;
       }
       else
       {
-        v32 = TTV_ErrorToString(v31);
+        v32 = (const char *)TTV_ErrorToString((unsigned int)v31);
         UFG::qPrintf("ERROR: twitch.tv - Error while starting to stream: %s\n", v32);
-        if ( (v6->mStreamState - 10) & 0xFFFFFFFD )
+        if ( ((this->mStreamState - 10) & 0xFFFFFFFD) != 0 )
         {
-          v6->mAuthTokenSavedThisSession = 0;
-          v6->mAuthToken.data[0] = 0;
-          if ( v6->mStreamState )
+          this->mAuthTokenSavedThisSession = 0;
+          this->mAuthToken.data[0] = 0;
+          if ( this->mStreamState )
           {
-            v6->mStreamState = 0;
+            this->mStreamState = eStreamState_Uninitialized;
             v35 = TTV_Shutdown();
-            if ( (signed int)v35 > 0 )
-              TTV_ErrorToString(v35);
+            if ( v35 > 0 )
+              TTV_ErrorToString((unsigned int)v35);
           }
         }
         else
         {
-          v33 = TTV_Stop(StopCallback, v6);
-          if ( (signed int)v33 <= 0 )
+          v33 = TTV_Stop(StopCallback, this);
+          if ( v33 <= 0 )
           {
-            v6->mStreamState = 11;
+            this->mStreamState = eStreamState_StoppingStream;
           }
           else
           {
-            v34 = TTV_ErrorToString(v33);
+            v34 = (const char *)TTV_ErrorToString((unsigned int)v33);
             UFG::qPrintf("ERROR: twitch.tv - Error while stopping the stream: %s\n", v34);
           }
-          v6->mShutdownStreamingAfterStop = 1;
+          this->mShutdownStreamingAfterStop = 1;
         }
       }
       break;
@@ -610,56 +575,54 @@ void __fastcall Broadcaster::StartStreaming(Broadcaster *this, unsigned int outp
 // RVA: 0x82500
 void __fastcall Broadcaster::SubmitFrame(Broadcaster *this, char *rgba, unsigned int width, unsigned int height)
 {
-  Broadcaster *v4; // rdi
-  unsigned int v5; // er9
+  unsigned int size; // r9d
   __int64 v6; // r10
   char *v7; // rbx
-  unsigned int v8; // eax
-  __int64 v9; // rax
-  unsigned int v10; // eax
-  __int64 v11; // rax
-  unsigned int v12; // eax
+  int v8; // eax
+  const char *v9; // rax
+  int v10; // eax
+  const char *v11; // rax
+  int v12; // eax
 
-  v4 = this;
-  if ( !((this->mStreamState - 10) & 0xFFFFFFFD) )
+  if ( ((this->mStreamState - 10) & 0xFFFFFFFD) == 0 )
   {
-    v5 = this->mFreeFrameBuffers.size;
-    v6 = v5 - 1;
+    size = this->mFreeFrameBuffers.size;
+    v6 = size - 1;
     v7 = this->mFreeFrameBuffers.p[v6];
-    if ( v5 <= 1 )
+    if ( size <= 1 )
       LODWORD(v6) = 0;
     this->mFreeFrameBuffers.size = v6;
     UFG::qMemCopy(v7, rgba, 4 * this->mVideoParams.outputWidth * this->mVideoParams.outputHeight);
-    v8 = TTV_SubmitVideoFrame(v7, FrameUnlockCallback, v4);
-    if ( (signed int)v8 > 0 )
+    v8 = TTV_SubmitVideoFrame(v7, FrameUnlockCallback, this);
+    if ( v8 > 0 )
     {
-      v9 = TTV_ErrorToString(v8);
+      v9 = (const char *)TTV_ErrorToString((unsigned int)v8);
       UFG::qPrintf("ERROR: twitch.tv - error while submitting frame to stream: %s\n", v9);
-      if ( (v4->mStreamState - 10) & 0xFFFFFFFD )
+      if ( ((this->mStreamState - 10) & 0xFFFFFFFD) != 0 )
       {
-        v4->mAuthTokenSavedThisSession = 0;
-        v4->mAuthToken.data[0] = 0;
-        if ( v4->mStreamState )
+        this->mAuthTokenSavedThisSession = 0;
+        this->mAuthToken.data[0] = 0;
+        if ( this->mStreamState )
         {
-          v4->mStreamState = 0;
+          this->mStreamState = eStreamState_Uninitialized;
           v12 = TTV_Shutdown();
-          if ( (signed int)v12 > 0 )
-            TTV_ErrorToString(v12);
+          if ( v12 > 0 )
+            TTV_ErrorToString((unsigned int)v12);
         }
       }
       else
       {
-        v10 = TTV_Stop(StopCallback, v4);
-        if ( (signed int)v10 <= 0 )
+        v10 = TTV_Stop(StopCallback, this);
+        if ( v10 <= 0 )
         {
-          v4->mStreamState = 11;
+          this->mStreamState = eStreamState_StoppingStream;
         }
         else
         {
-          v11 = TTV_ErrorToString(v10);
+          v11 = (const char *)TTV_ErrorToString((unsigned int)v10);
           UFG::qPrintf("ERROR: twitch.tv - Error while stopping the stream: %s\n", v11);
         }
-        v4->mShutdownStreamingAfterStop = 1;
+        this->mShutdownStreamingAfterStop = 1;
       }
     }
   }
@@ -669,32 +632,30 @@ void __fastcall Broadcaster::SubmitFrame(Broadcaster *this, char *rgba, unsigned
 // RVA: 0x82640
 void __fastcall Broadcaster::Update(Broadcaster *this)
 {
-  Broadcaster *v1; // rbx
-  unsigned int v2; // eax
+  int v2; // eax
 
-  v1 = this;
   if ( this->mStreamState )
   {
     Broadcaster::FlushStreamingEvents(this);
-    if ( v1->mStreamState == 8 )
+    if ( this->mStreamState == eStreamState_ReadyToStream )
     {
-      if ( v1->mShutdownStreamingAfterStop )
+      if ( this->mShutdownStreamingAfterStop )
       {
-        v1->mShutdownStreamingAfterStop = 0;
-        v1->mAuthTokenSavedThisSession = 0;
-        v1->mAuthToken.data[0] = 0;
-        if ( v1->mStreamState )
+        this->mShutdownStreamingAfterStop = 0;
+        this->mAuthTokenSavedThisSession = 0;
+        this->mAuthToken.data[0] = 0;
+        if ( this->mStreamState )
         {
-          v1->mStreamState = 0;
+          this->mStreamState = eStreamState_Uninitialized;
           v2 = TTV_Shutdown();
-          if ( (signed int)v2 > 0 )
-            TTV_ErrorToString(v2);
+          if ( v2 > 0 )
+            TTV_ErrorToString((unsigned int)v2);
         }
       }
       else
       {
         Broadcaster::StartStreaming(
-          v1,
+          this,
           UFG::RenderStageFrameCapture::sWidth,
           UFG::RenderStageFrameCapture::sHeight,
           0x19u);
@@ -707,30 +668,28 @@ void __fastcall Broadcaster::Update(Broadcaster *this)
 // RVA: 0x819D0
 void __fastcall Broadcaster::FlushStreamingEvents(Broadcaster *this)
 {
-  Broadcaster *v1; // rsi
-  Broadcaster::StreamState v2; // eax
+  Broadcaster::StreamState mStreamState; // eax
 
-  v1 = this;
   TTV_PollTasks();
-  v2 = v1->mStreamState;
-  switch ( v2 )
+  mStreamState = this->mStreamState;
+  switch ( mStreamState )
   {
-    case 3:
-      v1->mStreamState = 4;
-      v1->mChannelInfo.size = 392i64;
-      TTV_Login(&v1->mAuthToken, LoginCallback, v1);
+    case eStreamState_Authenticated:
+      this->mStreamState = eStreamState_LoggingIn;
+      this->mChannelInfo.size = 392i64;
+      TTV_Login(&this->mAuthToken, LoginCallback, this);
       break;
-    case 5:
-      v1->mStreamState = 6;
-      TTV_GetIngestServers(&v1->mAuthToken, IngestListCallback, v1, &v1->mIngestList);
+    case eStreamState_LoggedIn:
+      this->mStreamState = eStreamState_FindingIngestServer;
+      TTV_GetIngestServers(&this->mAuthToken, IngestListCallback, this, &this->mIngestList);
       break;
-    case 7:
-      v1->mStreamInfo.size = 24i64;
-      v1->mStreamState = 8;
-      v1->mUserInfo.size = 136i64;
-      v1->mStreamInfo.streamId = 0i64;
+    case eStreamState_FoundIngestServer:
+      this->mStreamInfo.size = 24i64;
+      this->mStreamState = eStreamState_ReadyToStream;
+      this->mUserInfo.size = 136i64;
+      this->mStreamInfo.streamId = 0i64;
       TTV_GetUserInfo();
-      TTV_GetStreamInfo(&v1->mAuthToken, StreamInfoDoneCallback, v1, v1->mUserName.mData, &v1->mStreamInfo);
+      TTV_GetStreamInfo(&this->mAuthToken, StreamInfoDoneCallback, this, this->mUserName.mData, &this->mStreamInfo);
       break;
   }
 }

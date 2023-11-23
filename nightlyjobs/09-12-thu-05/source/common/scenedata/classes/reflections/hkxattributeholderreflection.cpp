@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkxAttributeHolderClass__()
     0i64,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 58
@@ -28,17 +28,17 @@ hkClass *__fastcall hkxAttributeHolder::staticClass()
 
 // File Line: 65
 // RVA: 0xE317F0
-void __fastcall finishLoadedObjecthkxAttributeHolder(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxAttributeHolder(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxAttributeHolder::`vftable;
+    *p = &hkxAttributeHolder::`vftable;
 }
 
 // File Line: 71
 // RVA: 0xE31810
-void __fastcall cleanupLoadedObjecthkxAttributeHolder(void *p)
+void __fastcall cleanupLoadedObjecthkxAttributeHolder(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 75
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkxAttributeHolderTypeInfo__()
   hkxAttributeHolderTypeInfo.m_typeName = "hkxAttributeHolder";
   hkxAttributeHolderTypeInfo.m_vtable = result;
   hkxAttributeHolderTypeInfo.m_scopedName = "!hkxAttributeHolder";
-  hkxAttributeHolderTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxAttributeHolder;
-  hkxAttributeHolderTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxAttributeHolder;
+  hkxAttributeHolderTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxAttributeHolder;
+  hkxAttributeHolderTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxAttributeHolder;
   return result;
 }
 

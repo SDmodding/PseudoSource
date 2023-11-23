@@ -3,13 +3,13 @@
 __int64 dynamic_initializer_for__UFG::UIHKScreenHud::PDACache__()
 {
   UFG::qString::qString(&stru_142431A20);
-  UFG::UIHKScreenHud::PDACache.state = 0;
-  unk_142431A14 = 0;
-  unk_142431A18 = 0;
-  UFG::qString::Set(&stru_142431A20, &customWorldMapCaption);
+  UFG::UIHKScreenHud::PDACache.state = STATE_IDLE;
+  byte_142431A14 = 0;
+  dword_142431A18 = 0;
+  UFG::qString::Set(&stru_142431A20, &customCaption);
   unk_142431A48 = 0;
   unk_142431A4A = 0;
-  return atexit(dynamic_atexit_destructor_for__UFG::UIHKScreenHud::PDACache__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::UIHKScreenHud::PDACache__);
 }
 
 // File Line: 109
@@ -67,7 +67,6 @@ void UFG::UIHKScreenHud::Initialize(void)
   UFG::UIHK_XPFlasherWidget *v41; // rax
   UFG::allocator::free_link *v42; // rax
   UFG::UIHKSecondaryTutorialWidget *v43; // rbx
-  UFG::qList<UFG::UIScreenInvoke,UFG::UIScreenInvoke,1,0> *v44; // [rsp+58h] [rbp+18h]
 
   v0 = (UFG::UIScreenInvokeQueue *)UFG::qMemoryPool::Allocate(
                                      &gScaleformMemoryPool,
@@ -79,9 +78,8 @@ void UFG::UIHKScreenHud::Initialize(void)
   {
     v0->vfptr = (UFG::UIScreenInvokeQueueVtbl *)&UFG::UIScreenInvokeQueue::`vftable;
     v0->mNumCommandsPerFrame = -1;
-    v44 = &v0->mCommandQueue;
-    v44->mNode.mPrev = &v44->mNode;
-    v44->mNode.mNext = &v44->mNode;
+    v0->mCommandQueue.mNode.mPrev = &v0->mCommandQueue.mNode;
+    v0->mCommandQueue.mNode.mNext = &v0->mCommandQueue.mNode;
   }
   else
   {
@@ -364,17 +362,12 @@ void UFG::UIHKScreenHud::Initialize(void)
 // RVA: 0x5C59A0
 void __fastcall UFG::UIHKScreenHud::UIHKScreenHud(UFG::UIHKScreenHud *this)
 {
-  UFG::UIHKScreenHud *v1; // rdi
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v2; // rax
-  UFG::GameStatTracker *v3; // rax
-  UFG::allocator::free_link *v4; // rax
-  UFG::UIHK_PDAWidget *v5; // rax
-  signed __int64 v6; // [rsp+58h] [rbp+10h]
+  UFG::GameStatTracker *v2; // rax
+  UFG::allocator::free_link *v3; // rax
+  UFG::UIHK_PDAWidget *v4; // rax
 
-  v1 = this;
-  v2 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
-  v2->mPrev = v2;
-  v2->mNext = v2;
+  this->mPrev = &this->UFG::qNode<UFG::UIScreen,UFG::UIScreen>;
+  this->mNext = &this->UFG::qNode<UFG::UIScreen,UFG::UIScreen>;
   this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
@@ -382,113 +375,111 @@ void __fastcall UFG::UIHKScreenHud::UIHKScreenHud(UFG::UIHKScreenHud *this)
   this->mScreenUID = -1;
   *(_QWORD *)&this->mControllerMask = 15i64;
   *(_QWORD *)&this->mPriority = 0i64;
-  this->mDimToApplyType = 0;
+  this->mDimToApplyType = eDIM_INVALID;
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
   this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenHud::`vftable;
   UFG::UITiledMapWidget::UITiledMapWidget(&this->Minimap);
-  v1->HealthMeter.mHealthPercent = -1.0;
-  v1->HealthMeter.mHealthPercentOfMaxPossible = -1.0;
-  *(_WORD *)&v1->HealthMeter.mChanged = 1;
-  v1->HealthMeter.mIsFirstUpdate = 1;
-  UFG::UIHKWeaponAmmoWidget::UIHKWeaponAmmoWidget(&v1->WeaponAmmo);
-  v6 = (signed __int64)&v1->RadioStationWidget;
-  *(_DWORD *)v6 = 0;
-  *(_DWORD *)(v6 + 4) = 257;
-  *(_QWORD *)(v6 + 8) = 0i64;
-  *(_DWORD *)(v6 + 16) = 0;
-  *(_QWORD *)(v6 + 32) = 0i64;
-  *(_QWORD *)(v6 + 24) = 0i64;
-  UFG::qString::qString(&v1->RadioStationWidget.mLoadedTexturePack);
-  UFG::UIHKRadioStationWidget::ReadStationList(&v1->RadioStationWidget);
-  *(_WORD *)&v1->ActionHijack.mChanged = 0;
-  v1->ActionHijack.mDistance = 0.0;
-  v1->ActionHijack.mCanHijack = 0;
-  *(_DWORD *)&v1->MoneyPopup.mIsVisible = 0;
-  *(_WORD *)&v1->MoneyPopup.mTryToHide = 0;
-  *(_QWORD *)&v1->MoneyPopup.mMoney = 0i64;
-  v3 = UFG::GameStatTracker::Instance();
-  v1->MoneyPopup.mMoney = UFG::GameStatTracker::GetStat(v3, Money);
-  UFG::qString::qString(&v1->Buffs.mTexturePackFilename);
+  this->HealthMeter.mHealthPercent = -1.0;
+  this->HealthMeter.mHealthPercentOfMaxPossible = -1.0;
+  *(_WORD *)&this->HealthMeter.mChanged = 1;
+  this->HealthMeter.mIsFirstUpdate = 1;
+  UFG::UIHKWeaponAmmoWidget::UIHKWeaponAmmoWidget(&this->WeaponAmmo);
+  this->RadioStationWidget.mState = STATE_IDLE;
+  *(_DWORD *)&this->RadioStationWidget.mChanged = 257;
+  *(_QWORD *)&this->RadioStationWidget.mCurrentStation = 0i64;
+  this->RadioStationWidget.mWaitingForTextureTimer = 0.0;
+  this->RadioStationWidget.mStationData.p = 0i64;
+  *(_QWORD *)&this->RadioStationWidget.mStationData.size = 0i64;
+  UFG::qString::qString(&this->RadioStationWidget.mLoadedTexturePack);
+  UFG::UIHKRadioStationWidget::ReadStationList(&this->RadioStationWidget);
+  *(_WORD *)&this->ActionHijack.mChanged = 0;
+  this->ActionHijack.mDistance = 0.0;
+  this->ActionHijack.mCanHijack = 0;
+  *(_DWORD *)&this->MoneyPopup.mIsVisible = 0;
+  *(_WORD *)&this->MoneyPopup.mTryToHide = 0;
+  *(_QWORD *)&this->MoneyPopup.mMoney = 0i64;
+  v2 = UFG::GameStatTracker::Instance();
+  this->MoneyPopup.mMoney = UFG::GameStatTracker::GetStat(v2, Money);
+  UFG::qString::qString(&this->Buffs.mTexturePackFilename);
   `eh vector constructor iterator(
-    v1->Buffs.mIconLoaded,
+    this->Buffs.mIconLoaded,
     0x28ui64,
     7,
     (void (__fastcall *)(void *))UFG::qString::qString);
-  *(_WORD *)&v1->Buffs.mPerkActivate = 0;
-  v1->Buffs.mPerkTimer = 0.0;
-  v1->SocialActionManager.mScoredTargets.size = 0;
-  v1->SocialActionManager.mTargets.size = 0;
-  v1->SocialActionManager.mWidgetIndexToUpdate = -1;
-  *(_WORD *)&v1->SocialActionManager.mIconsReset = 256;
-  UFG::UIHKSocialActionManager::mThis = &v1->SocialActionManager;
-  ++v1->SocialActionManager.mTargets.size;
-  ++v1->SocialActionManager.mTargets.size;
-  ++v1->SocialActionManager.mTargets.size;
-  ++v1->SocialActionManager.mTargets.size;
-  ++v1->SocialActionManager.mTargets.size;
-  v1->SocialActionManager.mTargets.p[0].m_pSimObject = 0i64;
-  v1->SocialActionManager.mTargets.p[0].m_fScore = 0.0;
-  v1->SocialActionManager.mTargets.p[1].m_pSimObject = 0i64;
-  v1->SocialActionManager.mTargets.p[1].m_fScore = 0.0;
-  v1->SocialActionManager.mTargets.p[2].m_pSimObject = 0i64;
-  v1->SocialActionManager.mTargets.p[2].m_fScore = 0.0;
-  v1->SocialActionManager.mTargets.p[3].m_pSimObject = 0i64;
-  v1->SocialActionManager.mTargets.p[3].m_fScore = 0.0;
-  v1->SocialActionManager.mTargets.p[4].m_pSimObject = 0i64;
-  v1->SocialActionManager.mTargets.p[4].m_fScore = 0.0;
-  UFG::UIHKSecondaryObjectivesWidget::UIHKSecondaryObjectivesWidget(&v1->SecondaryObjectives);
-  v1->ObjectiveFlasher.mOldVisible = 0;
-  *(_QWORD *)&v1->mState = 0i64;
-  v1->mMinimapFadeTimeout = 0.0;
-  v1->mMinimapVisibleChanged = 1;
-  *(_DWORD *)&v1->Reticle.mChanged = 1;
-  v1->Reticle.mVisible = 1;
-  *(_QWORD *)&v1->Reticle.mScreenX = 0i64;
-  *(_QWORD *)&v1->Reticle.mRadius = 0i64;
-  *(_QWORD *)&v1->Reticle.mfSizeMax = 0i64;
-  *(_WORD *)&v1->Reticle.mLockAnimationPlaying = 0;
-  v1->Reticle.mHasAmmo = 1;
-  *(_QWORD *)&v1->Reticle.mTargetFaction = 1i64;
-  v1->DirectionalDamage.mDDTimers[0].bActive = 0;
-  v1->DirectionalDamage.mDDTimers[0].fElapsedTime = 0.0;
-  v1->DirectionalDamage.mDDTimers[1].bActive = 0;
-  v1->DirectionalDamage.mDDTimers[1].fElapsedTime = 0.0;
-  v1->DirectionalDamage.mDDTimers[2].bActive = 0;
-  v1->DirectionalDamage.mDDTimers[2].fElapsedTime = 0.0;
-  v1->DirectionalDamage.mDDTimers[3].bActive = 0;
-  *(_QWORD *)&v1->DirectionalDamage.mDDTimers[3].fElapsedTime = 0i64;
-  v1->HeatLevel.mHeatLevel = -1;
-  *(_WORD *)&v1->HeatLevel.mCopCooldown = 256;
-  v1->HeatLevel.mVisibleChanged = 0;
-  v1->TimeOfDay.mLightingConditions = 0;
-  v1->SniperWidget.vfptr = (UFG::UIHKSniperWidgetVtbl *)&UFG::UIHKSniperWidget::`vftable;
-  v1->SniperWidget.mState = 0;
-  v1->SniperWidget.mSniperMode = 0;
-  v1->mStatInfoTimer = 0.0;
-  *(_DWORD *)&v1->mStatSocialAwardActive = 0x1000000;
-  UFG::UIHKScreenHud::mInstance = v1;
-  v4 = UFG::qMalloc(0x300ui64, "PDAWidget", 0i64);
-  if ( v4 )
-    UFG::UIHK_PDAWidget::UIHK_PDAWidget((UFG::UIHK_PDAWidget *)v4, &UFG::UIHKScreenHud::PDACache);
+  *(_WORD *)&this->Buffs.mPerkActivate = 0;
+  this->Buffs.mPerkTimer = 0.0;
+  this->SocialActionManager.mScoredTargets.size = 0;
+  this->SocialActionManager.mTargets.size = 0;
+  this->SocialActionManager.mWidgetIndexToUpdate = -1;
+  *(_WORD *)&this->SocialActionManager.mIconsReset = 256;
+  UFG::UIHKSocialActionManager::mThis = &this->SocialActionManager;
+  ++this->SocialActionManager.mTargets.size;
+  ++this->SocialActionManager.mTargets.size;
+  ++this->SocialActionManager.mTargets.size;
+  ++this->SocialActionManager.mTargets.size;
+  ++this->SocialActionManager.mTargets.size;
+  this->SocialActionManager.mTargets.p[0].m_pSimObject = 0i64;
+  this->SocialActionManager.mTargets.p[0].m_fScore = 0.0;
+  this->SocialActionManager.mTargets.p[1].m_pSimObject = 0i64;
+  this->SocialActionManager.mTargets.p[1].m_fScore = 0.0;
+  this->SocialActionManager.mTargets.p[2].m_pSimObject = 0i64;
+  this->SocialActionManager.mTargets.p[2].m_fScore = 0.0;
+  this->SocialActionManager.mTargets.p[3].m_pSimObject = 0i64;
+  this->SocialActionManager.mTargets.p[3].m_fScore = 0.0;
+  this->SocialActionManager.mTargets.p[4].m_pSimObject = 0i64;
+  this->SocialActionManager.mTargets.p[4].m_fScore = 0.0;
+  UFG::UIHKSecondaryObjectivesWidget::UIHKSecondaryObjectivesWidget(&this->SecondaryObjectives);
+  this->ObjectiveFlasher.mOldVisible = 0;
+  *(_QWORD *)&this->mState = 0i64;
+  this->mMinimapFadeTimeout = 0.0;
+  this->mMinimapVisibleChanged = 1;
+  *(_DWORD *)&this->Reticle.mChanged = 1;
+  this->Reticle.mVisible = 1;
+  *(_QWORD *)&this->Reticle.mScreenX = 0i64;
+  *(_QWORD *)&this->Reticle.mRadius = 0i64;
+  *(_QWORD *)&this->Reticle.mfSizeMax = 0i64;
+  *(_WORD *)&this->Reticle.mLockAnimationPlaying = 0;
+  this->Reticle.mHasAmmo = 1;
+  *(_QWORD *)&this->Reticle.mTargetFaction = 1i64;
+  this->DirectionalDamage.mDDTimers[0].bActive = 0;
+  this->DirectionalDamage.mDDTimers[0].fElapsedTime = 0.0;
+  this->DirectionalDamage.mDDTimers[1].bActive = 0;
+  this->DirectionalDamage.mDDTimers[1].fElapsedTime = 0.0;
+  this->DirectionalDamage.mDDTimers[2].bActive = 0;
+  this->DirectionalDamage.mDDTimers[2].fElapsedTime = 0.0;
+  this->DirectionalDamage.mDDTimers[3].bActive = 0;
+  *(_QWORD *)&this->DirectionalDamage.mDDTimers[3].fElapsedTime = 0i64;
+  this->HeatLevel.mHeatLevel = -1;
+  *(_WORD *)&this->HeatLevel.mCopCooldown = 256;
+  this->HeatLevel.mVisibleChanged = 0;
+  this->TimeOfDay.mLightingConditions = LIGHTING_INVALID;
+  this->SniperWidget.vfptr = (UFG::UIHKSniperWidgetVtbl *)&UFG::UIHKSniperWidget::`vftable;
+  this->SniperWidget.mState = STATE_HIDE;
+  this->SniperWidget.mSniperMode = 0;
+  this->mStatInfoTimer = 0.0;
+  *(_DWORD *)&this->mStatSocialAwardActive = 0x1000000;
+  UFG::UIHKScreenHud::mInstance = this;
+  v3 = UFG::qMalloc(0x300ui64, "PDAWidget", 0i64);
+  if ( v3 )
+    UFG::UIHK_PDAWidget::UIHK_PDAWidget((UFG::UIHK_PDAWidget *)v3, &UFG::UIHKScreenHud::PDACache);
   else
-    v5 = 0i64;
-  v1->PDA = v5;
-  UFG::UIHKScreenHud::PDACache.state = 0;
-  unk_142431A14 = 0;
-  unk_142431A18 = 0;
+    v4 = 0i64;
+  this->PDA = v4;
+  UFG::UIHKScreenHud::PDACache.state = STATE_IDLE;
+  byte_142431A14 = 0;
+  dword_142431A18 = 0;
 }
 
 // File Line: 179
 // RVA: 0x5CB110
 void __fastcall UFG::UIHKScreenHud::~UIHKScreenHud(UFG::UIHKScreenHud *this)
 {
-  UFG::UIHKScreenHud *v1; // rdi
-  UFG::UIHK_PDAWidget *v2; // rcx
+  UFG::UIHK_PDAWidget *PDA; // rcx
   UFG::UIHKMissionRewardsWidget *v3; // rbx
   UFG::UIScreenTextureManager *v4; // rax
-  UFG::UIHKMissionRewardsHeaderWidget::eState v5; // eax
+  UFG::UIHKMissionRewardsHeaderWidget::eState mState; // eax
   UFG::UIHKCombatMeterWidget *v6; // rcx
   UFG::UIScreenTextureManager *v7; // rax
   UFG::UIScreenTextureManager *v8; // rax
@@ -497,28 +488,27 @@ void __fastcall UFG::UIHKScreenHud::~UIHKScreenHud(UFG::UIHKScreenHud *this)
   int v11; // eax
   UFG::UIHKScreenGlobalOverlay *v12; // rax
 
-  v1 = this;
   this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenHud::`vftable;
   UFG::UIHKScreenHud::PopulatePDACache(this);
-  v2 = v1->PDA;
-  if ( v2 )
-    v2->vfptr->__vecDelDtor(v2, 1u);
-  v1->PDA = 0i64;
-  UFG::UIMapInteriorManager::HandleScreenDestruct(UFG::UIHKScreenHud::mInteriorManager, &v1->Minimap);
+  PDA = this->PDA;
+  if ( PDA )
+    PDA->vfptr->__vecDelDtor(PDA, 1u);
+  this->PDA = 0i64;
+  UFG::UIMapInteriorManager::HandleScreenDestruct(UFG::UIHKScreenHud::mInteriorManager, &this->Minimap);
   v3 = UFG::UIHKScreenHud::MissionRewards;
   v4 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseTexturePack(v4, UFG::UIHKMissionRewardsWidget::gTexturePackFilename);
   if ( v3->mState )
   {
-    v5 = v3->Header.mState;
-    if ( v5 == 7 || v5 == STATE_NONE )
+    mState = v3->Header.mState;
+    if ( mState == (STATE_SYNCED|STATE_WAITING) || mState == STATE_NONE )
       v3->mShouldSkipHeader = 1;
-    v3->mState = 15;
+    v3->mState = STATE_SYNCED|STATE_WAITING|0x8;
   }
-  ((void (__cdecl *)(UFG::UIHKMissionRewardsFlasherWidget *))v3->Rewards.vfptr->HandleScreenDestruct)(&v3->Rewards);
+  v3->Rewards.vfptr->HandleScreenDestruct(&v3->Rewards);
   v6 = UFG::UIHKScreenHud::CombatMeter;
   UFG::UIHKScreenHud::CombatMeter->mSleepPrevState = UFG::UIHKScreenHud::CombatMeter->mState;
-  v6->mState = 6;
+  v6->mState = STATE_INCOMING_TEXT;
   v7 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v7, "Hud");
   v8 = UFG::UIScreenTextureManager::Instance();
@@ -531,7 +521,7 @@ void __fastcall UFG::UIHKScreenHud::~UIHKScreenHud(UFG::UIHKScreenHud *this)
   {
     v11 = UFG::UIHKHelpBarWidget::mLocked;
     if ( UFG::UIHKHelpBarWidget::mLocked > 0 )
-      v11 = UFG::UIHKHelpBarWidget::mLocked-- - 1;
+      v11 = --UFG::UIHKHelpBarWidget::mLocked;
     if ( v11 < 1 )
     {
       v12 = UFG::UIHKScreenGlobalOverlay::mThis;
@@ -541,32 +531,31 @@ void __fastcall UFG::UIHKScreenHud::~UIHKScreenHud(UFG::UIHKScreenHud *this)
     }
     v9->mShowingInFlash = 0;
   }
-  v1->SniperWidget.vfptr = (UFG::UIHKSniperWidgetVtbl *)&UFG::UIHKSniperWidget::`vftable;
+  this->SniperWidget.vfptr = (UFG::UIHKSniperWidgetVtbl *)&UFG::UIHKSniperWidget::`vftable;
   if ( UFG::UIHKScreenGlobalOverlay::mThis )
     v10 = UFG::UIHKScreenGlobalOverlay::mThis;
   UFG::UIHKHelpBarWidget::Hide(&v10->HelpBar, UI_HASH_SNIPER);
-  UFG::qString::~qString(&v1->SecondaryObjectives.mTriadObjective.Caption);
-  UFG::qString::~qString(&v1->SecondaryObjectives.mCopObjective.Caption);
+  UFG::qString::~qString(&this->SecondaryObjectives.mTriadObjective.Caption);
+  UFG::qString::~qString(&this->SecondaryObjectives.mCopObjective.Caption);
   UFG::UIHKSocialActionManager::mThis = 0i64;
   if ( UFG::UIHKScreenGlobalOverlay::mThis )
     UFG::UIHKHelpBarWidget::Hide(&UFG::UIHKScreenGlobalOverlay::mThis->HelpBar, UI_HASH_HELPBAR_SOCIAL_20);
-  v1->SocialActionManager.mTargets.size = 0;
-  v1->SocialActionManager.mScoredTargets.size = 0;
-  UFG::UIHKBuffWidget::~UIHKBuffWidget(&v1->Buffs);
-  UFG::UIHKRadioStationWidget::~UIHKRadioStationWidget(&v1->RadioStationWidget);
-  UFG::UIHKWeaponAmmoWidget::~UIHKWeaponAmmoWidget(&v1->WeaponAmmo);
-  UFG::UITiledMapWidget::~UITiledMapWidget(&v1->Minimap);
-  UFG::UIScreen::~UIScreen((UFG::UIScreen *)&v1->vfptr);
+  this->SocialActionManager.mTargets.size = 0;
+  this->SocialActionManager.mScoredTargets.size = 0;
+  UFG::UIHKBuffWidget::~UIHKBuffWidget(&this->Buffs);
+  UFG::UIHKRadioStationWidget::~UIHKRadioStationWidget(&this->RadioStationWidget);
+  UFG::UIHKWeaponAmmoWidget::~UIHKWeaponAmmoWidget(&this->WeaponAmmo);
+  UFG::UITiledMapWidget::~UITiledMapWidget(&this->Minimap);
+  UFG::UIScreen::~UIScreen(this);
 }
 
 // File Line: 205
 // RVA: 0x632060
 void __fastcall UFG::UIHKScreenHud::init(UFG::UIHKScreenHud *this, UFG::UICommandData *data)
 {
-  UFG::UIHKScreenHud *v2; // rdi
   UFG::GameStatTracker *v3; // rax
-  bool v4; // al
-  UFG::UIScreenRenderable *v5; // rsi
+  bool Stat; // al
+  UFG::UIScreenRenderable *mRenderable; // rsi
   UFG::UIHKMissionProgressWidget *v6; // rax
   UFG::UIHKInfoPopupWidget *v7; // rcx
   UFG::UIHKActionButtonWidget *v8; // rcx
@@ -574,29 +563,27 @@ void __fastcall UFG::UIHKScreenHud::init(UFG::UIHKScreenHud *this, UFG::UIComman
   UFG::UIHKBuffData *v10; // rcx
   __int64 v11; // rdx
   UFG::UIHKMissionHealthWidget *v12; // rax
-  signed __int64 v13; // rcx
-  UFG::UIHKRegionIndicatorWidget *v14; // rcx
-  bool v15; // r8
-  UFG::UIHKCombatMeterWidget *v16; // rax
-  UFG::UIHKGameplayHelpWidget *v17; // rcx
-  UFG::UIHK_XPFlasherWidget *v18; // rax
-  UFG::UIScreenTextureManager *v19; // rax
-  UFG::Controller *v20; // rdx
-  UFG::UIHKScreenGlobalOverlay *v21; // rax
+  UFG::UIHKRegionIndicatorWidget *v13; // rcx
+  bool mVisible; // r8
+  UFG::UIHKCombatMeterWidget *v15; // rax
+  UFG::UIHKGameplayHelpWidget *v16; // rcx
+  UFG::UIHK_XPFlasherWidget *v17; // rax
+  UFG::UIScreenTextureManager *v18; // rax
+  UFG::Controller *v19; // rdx
+  UFG::UIHKScreenGlobalOverlay *v20; // rax
 
-  v2 = this;
-  UFG::UIScreen::init((UFG::UIScreen *)&this->vfptr, data);
+  UFG::UIScreen::init(this, data);
   v3 = UFG::GameStatTracker::Instance();
-  v4 = UFG::GameStatTracker::GetStat(v3, HudEnable);
-  v5 = v2->mRenderable;
-  v2->mHudEnable = v4;
-  if ( v5 )
+  Stat = UFG::GameStatTracker::GetStat(v3, HudEnable);
+  mRenderable = this->mRenderable;
+  this->mHudEnable = Stat;
+  if ( mRenderable )
   {
-    v2->mState = 1;
-    UFG::UITiledMapWidget::Init(&v2->Minimap, (UFG::UIScreen *)&v2->vfptr);
-    v2->PDA->vfptr->init(v2->PDA, (UFG::UIScreen *)&v2->vfptr);
-    v2->Minimap.mVisible = UFG::UIHKTweakables::RenderMinimap;
-    v5->m_shouldRender = UFG::UIHKScreenHud::mShouldRender;
+    this->mState = STATE_QUEUED;
+    UFG::UITiledMapWidget::Init(&this->Minimap, this);
+    this->PDA->vfptr->init(this->PDA, this);
+    this->Minimap.mVisible = UFG::UIHKTweakables::RenderMinimap;
+    mRenderable->m_shouldRender = UFG::UIHKScreenHud::mShouldRender;
     UFG::UIMapBlipManager::HandleScreenInit(UFG::UIHKScreenHud::mIconManager);
     UFG::UIMapBlipManager::PopulateAmbientBlips(UFG::UIHKScreenHud::mIconManager);
     _((AMD_HD3D *)UFG::UIHKScreenHud::mInteriorManager);
@@ -608,21 +595,21 @@ void __fastcall UFG::UIHKScreenHud::init(UFG::UIHKScreenHud *this, UFG::UIComman
     v6->mData[3].Changed = 1;
     v7 = UFG::UIHKScreenHud::InfoPopup;
     if ( (unsigned int)(UFG::UIHKScreenHud::InfoPopup->mState - 4) <= 1 )
-      UFG::UIHKScreenHud::InfoPopup->mState = 0;
+      UFG::UIHKScreenHud::InfoPopup->mState = STATE_IDLE;
     if ( v7->mState )
-      v7->mState = 1;
-    UFG::UIHKReticleWidget::HandleScreenInit(&v2->Reticle, (UFG::UIScreen *)&v2->vfptr);
-    UFG::UIHKHealthMeterWidget::Flash_SetVisible(&v2->HealthMeter, (UFG::UIScreen *)&v2->vfptr, 0);
+      v7->mState = STATE_ROOT_MENU;
+    UFG::UIHKReticleWidget::HandleScreenInit(&this->Reticle, this);
+    UFG::UIHKHealthMeterWidget::Flash_SetVisible(&this->HealthMeter, this, 0);
     v8 = UFG::UIHKScreenHud::ActionButton;
     UFG::UIHKScreenHud::ActionButton->mChanged = 1;
-    UFG::UIHKActionButtonWidget::Update(v8, (UFG::UIScreen *)&v2->vfptr);
+    UFG::UIHKActionButtonWidget::Update(v8, this);
     v9 = UFG::UIHKScreenHud::ObjectiveDistance;
     UFG::UIHKScreenHud::ObjectiveDistance->mChanged = 1;
     v9->mColorChanged = 1;
     v9->mOldDistance = -1.0;
     UFG::UIMapLinesWidget::HandleScreenInit(UFG::UIHKScreenHud::MapLines);
     UFG::UIHKScreenHud::MapLines->mClipToPlayerPos = 1;
-    UFG::UITiledMapGPS::HandleScreenInit(UFG::UIHKScreenHud::GPS, (UFG::UIScreen *)&v2->vfptr);
+    UFG::UITiledMapGPS::HandleScreenInit(UFG::UIHKScreenHud::GPS, this);
     UFG::UITiledMapGPS::UsePlayerSourcePosition(UFG::UIHKScreenHud::GPS);
     UFG::UIHKScreenHud::GPS->mOnlyShowInVehicles = UFG::UIHKTweakables::OnlyShowGPSInVehicles;
     if ( UFG::UIHKBuffWidget::mNumBuffs )
@@ -632,88 +619,85 @@ void __fastcall UFG::UIHKScreenHud::init(UFG::UIHKScreenHud *this, UFG::UIComman
       do
       {
         if ( (unsigned int)(v10->mState - 2) <= 1 )
-          v10->mState = 4;
+          v10->mState = STATE_INCOMING_CALL;
         ++v10;
         --v11;
       }
       while ( v11 );
     }
-    UFG::UIHKSocialActionManager::Init(&v2->SocialActionManager, (UFG::UIScreen *)&v2->vfptr);
+    UFG::UIHKSocialActionManager::Init(&this->SocialActionManager, this);
     v12 = UFG::UIHKScreenHud::MissionHealth;
     UFG::UIHKScreenHud::MissionHealth->mChanged = 1;
     v12->mVisibleChanged = 1;
     UFG::UIHKScreenHud::TurnHint->mChanged = UFG::UIHKScreenHud::TurnHint->mVisible;
-    v13 = (signed __int64)&v2->SecondaryObjectives;
     UFG::UIHKScreenHud::TraceSignalBar->mVisible = 0;
     *(_WORD *)&UFG::UIHKScreenHud::RaceTimer->mTimeChanged = 257;
     UFG::UIHKScreenHud::RacePosition->mChanged = 1;
     UFG::UIHKScreenHud::RacePercentage->mChanged = 1;
-    *(_WORD *)(v13 + 52) = 257;
-    *(_WORD *)(v13 + 116) = 257;
+    *(_WORD *)&this->SecondaryObjectives.mCopObjective.CaptionChanged = 257;
+    *(_WORD *)&this->SecondaryObjectives.mTriadObjective.CaptionChanged = 257;
     UFG::UIHKSecondaryObjectivesWidget::UpdateObjective(
-      &v2->SecondaryObjectives,
-      (UFG::UIScreen *)&v2->vfptr,
+      &this->SecondaryObjectives,
+      this,
       0.0,
-      &v2->SecondaryObjectives.mCopObjective,
+      &this->SecondaryObjectives.mCopObjective,
       1);
     UFG::UIHKSecondaryObjectivesWidget::UpdateObjective(
-      &v2->SecondaryObjectives,
-      (UFG::UIScreen *)&v2->vfptr,
+      &this->SecondaryObjectives,
+      this,
       0.0,
-      &v2->SecondaryObjectives.mTriadObjective,
+      &this->SecondaryObjectives.mTriadObjective,
       0);
-    UFG::UIHKMissionRewardsWidget::HandleScreenInit(UFG::UIHKScreenHud::MissionRewards, (UFG::UIScreen *)&v2->vfptr);
-    v14 = UFG::UIHKScreenHud::RegionIndicator;
-    v15 = UFG::UIHKScreenHud::RegionIndicator->mVisible;
+    UFG::UIHKMissionRewardsWidget::HandleScreenInit(UFG::UIHKScreenHud::MissionRewards, this);
+    v13 = UFG::UIHKScreenHud::RegionIndicator;
+    mVisible = UFG::UIHKScreenHud::RegionIndicator->mVisible;
     UFG::UIHKScreenHud::RegionIndicator->mChanged = 0;
-    UFG::UIHKRegionIndicatorWidget::Flash_SetVisible(v14, (UFG::UIScreen *)&v2->vfptr, v15);
-    if ( (unsigned int)(UFG::UIHKObjectiveFlasherWidget::mState - 3) > 1 )
-      UFG::UIHKObjectiveFlasherWidget::mState = UFG::UIHKObjectiveFlasherWidget::mState != 0;
-    else
-      UFG::UIHKObjectiveFlasherWidget::mState = 0;
-    v16 = UFG::UIHKScreenHud::CombatMeter;
-    if ( UFG::UIHKScreenHud::CombatMeter->mSleepPrevState == 4 )
+    UFG::UIHKRegionIndicatorWidget::Flash_SetVisible(v13, this, mVisible);
+    UFG::UIHKObjectiveFlasherWidget::mState = (unsigned int)(UFG::UIHKObjectiveFlasherWidget::mState - 3) > 1
+                                           && UFG::UIHKObjectiveFlasherWidget::mState != STATE_IDLE;
+    v15 = UFG::UIHKScreenHud::CombatMeter;
+    if ( UFG::UIHKScreenHud::CombatMeter->mSleepPrevState == STATE_INCOMING_CALL )
       UFG::UIHKScreenHud::CombatMeter->mPreserveBuffStartingDuration = 1;
-    *(_QWORD *)&v16->mState = 0i64;
-    UFG::UIHKScreenHud::HintText->vfptr->HandleScreenInit(UFG::UIHKScreenHud::HintText, (UFG::UIScreen *)v2);
-    v17 = UFG::UIHKScreenHud::GameplayHelp;
+    *(_QWORD *)&v15->mState = 0i64;
+    UFG::UIHKScreenHud::HintText->vfptr->HandleScreenInit(UFG::UIHKScreenHud::HintText, this);
+    v16 = UFG::UIHKScreenHud::GameplayHelp;
     UFG::UIHKScreenHud::GameplayHelp->mChanged = 1;
-    UFG::UIHKGameplayHelpWidget::Update(v17, (UFG::UIScreen *)&v2->vfptr);
-    v18 = UFG::UIHKScreenHud::XPFlasher;
+    UFG::UIHKGameplayHelpWidget::Update(v16, this);
+    v17 = UFG::UIHKScreenHud::XPFlasher;
     if ( UFG::UIHKScreenHud::XPFlasher->mState )
     {
-      if ( UFG::UIHKScreenHud::XPFlasher->mState == 2 )
+      if ( UFG::UIHKScreenHud::XPFlasher->mState == STATE_PHONE_CONTACTS )
       {
         UFG::UIHKScreenHud::XPFlasher->mStateElapsed = 0.0;
-        if ( v18->mData[0].Total > 0 )
-          v18->mData[0].Changed = 1;
-        if ( v18->mData[1].Total > 0 )
-          v18->mData[1].Changed = 1;
-        if ( v18->mData[2].Total > 0 )
-          v18->mData[2].Changed = 1;
+        if ( v17->mData[0].Total > 0 )
+          v17->mData[0].Changed = 1;
+        if ( v17->mData[1].Total > 0 )
+          v17->mData[1].Changed = 1;
+        if ( v17->mData[2].Total > 0 )
+          v17->mData[2].Changed = 1;
       }
     }
     else
     {
-      UFG::UIHKScreenHud::XPFlasher->mState = 1;
+      UFG::UIHKScreenHud::XPFlasher->mState = STATE_ROOT_MENU;
     }
     if ( UFG::UIHKScreenHud::mOnDemandTextureLoadRefCounter > 0 )
     {
-      v19 = UFG::UIScreenTextureManager::Instance();
+      v18 = UFG::UIScreenTextureManager::Instance();
       UFG::UIScreenTextureManager::QueueTexturePackLoad(
-        v19,
+        v18,
         UFG::kOnDemandTexturePackFilename,
         HIGH_PRIORITY,
-        UFG::UIHKScreenHud::HandleTutorialHudTexturePackLoaded,
+        (UFG::qReflectInventoryBase *)UFG::UIHKScreenHud::HandleTutorialHudTexturePackLoaded,
         0i64);
     }
-    v20 = UFG::gInputSystem->mControllers[UFG::gActiveControllerNum];
-    if ( v20 && v20->m_ActiveMapSet == 8 && !UFG::UI::gUIInputLocked )
-      UFG::UIHKScreenHud::EmergencyInputModeRecovery(v2);
-    v21 = UFG::UIHKScreenGlobalOverlay::mThis;
+    v19 = UFG::gInputSystem->mControllers[UFG::gActiveControllerNum];
+    if ( v19 && v19->m_ActiveMapSet == 8 && !UFG::UI::gUIInputLocked )
+      UFG::UIHKScreenHud::EmergencyInputModeRecovery(this);
+    v20 = UFG::UIHKScreenGlobalOverlay::mThis;
     if ( !UFG::UIHKScreenGlobalOverlay::mThis )
-      v21 = &gGlobalOverlaySentinel;
-    v21->HelpBar.mChanged = 1;
+      v20 = &gGlobalOverlaySentinel;
+    v20->HelpBar.mChanged = 1;
   }
 }
 
@@ -721,28 +705,25 @@ void __fastcall UFG::UIHKScreenHud::init(UFG::UIHKScreenHud *this, UFG::UIComman
 // RVA: 0x63D310
 void __fastcall UFG::UIHKScreenHud::update(UFG::UIHKScreenHud *this, float elapsed)
 {
-  UFG::UIHKScreenHud *v2; // rdi
-  float v3; // xmm6_4
   char v4; // al
   bool v5; // dl
-  UFG::UIScreenRenderable *v6; // rax
-  float v7; // xmm1_4
+  UFG::UIScreenRenderable *mRenderable; // rax
+  float mMinimapAlpha; // xmm1_4
   float v8; // xmm0_4
   float v9; // xmm0_4
-  float v10; // xmm0_4
-  UFG::UIHKRacePositionWidget *v11; // rbx
-  UFG::UIHKRacePositionWidget *v12; // rcx
-  UFG::UIHKShortcutButtonWidget *v13; // rdx
-  UFG::UIHKShortcutButtonWidget::eState v14; // ecx
-  int v15; // ecx
-  float v16; // xmm0_4
-  UFG::UIHKHelpBarWidget *v17; // rcx
-  float v18; // xmm0_4
+  float mStatInfoTimer; // xmm0_4
+  float v11; // xmm0_4
+  UFG::UIHKRacePositionWidget *v12; // rbx
+  UFG::UIHKRacePositionWidget *v13; // rcx
+  UFG::UIHKShortcutButtonWidget *v14; // rdx
+  UFG::UIHKShortcutButtonWidget::eState mState; // ecx
+  __int32 v16; // ecx
+  float v17; // xmm0_4
+  UFG::UIHKHelpBarWidget *p_HelpBar; // rcx
   float v19; // xmm0_4
-  UFG::UIScreenRenderable *v20; // rcx
+  float mYOffset; // xmm0_4
+  UFG::UIScreenRenderable *v21; // rcx
 
-  v2 = this;
-  v3 = elapsed;
   if ( UFG::UIHKScreenHud::mHandleSigninChange )
   {
     v4 = UFG::UIHKMessageOverlay::HandleSigninChange();
@@ -751,128 +732,128 @@ void __fastcall UFG::UIHKScreenHud::update(UFG::UIHKScreenHud *this, float elaps
       v5 = 0;
     UFG::UIHKScreenHud::mHandleSigninChange = v5;
   }
-  v6 = v2->mRenderable;
-  if ( v6 && v6->m_shouldRender )
+  mRenderable = this->mRenderable;
+  if ( mRenderable && mRenderable->m_shouldRender )
   {
-    switch ( v2->mState )
+    switch ( this->mState )
     {
-      case 1:
-        v9 = elapsed + v2->mMinimapFadeTimeout;
-        v2->mMinimapFadeTimeout = v9;
+      case STATE_QUEUED:
+        v9 = elapsed + this->mMinimapFadeTimeout;
+        this->mMinimapFadeTimeout = v9;
         if ( !UFG::UIHKScreenHud::mInteriorManager->mActive
           || UFG::UIHKScreenHud::mInteriorManager->mTextureLoaded
           || v9 > 5.0 )
         {
-          v2->mState = 2;
+          this->mState = STATE_WAITING;
         }
         break;
-      case 2:
-        v7 = v2->mMinimapAlpha;
-        if ( v7 >= 1.0 )
-          v2->mState = 3;
-        v8 = (float)(v3 * 1.5) + v7;
-        v2->mMinimapAlpha = v8;
+      case STATE_WAITING:
+        mMinimapAlpha = this->mMinimapAlpha;
+        if ( mMinimapAlpha >= 1.0 )
+          this->mState = STATE_EXECUTING;
+        v8 = (float)(elapsed * 1.5) + mMinimapAlpha;
+        this->mMinimapAlpha = v8;
         if ( v8 > 1.0 )
-          v2->mMinimapAlpha = 1.0;
-        v2->Minimap.mAlpha = v2->mMinimapAlpha;
+          this->mMinimapAlpha = 1.0;
+        this->Minimap.mAlpha = this->mMinimapAlpha;
         break;
-      case 4:
+      case STATE_DONE:
         return;
     }
-    v10 = v2->mStatInfoTimer;
-    if ( v10 > 0.0 )
+    mStatInfoTimer = this->mStatInfoTimer;
+    if ( mStatInfoTimer > 0.0 )
     {
-      v10 = v10 - v3;
-      v2->mStatInfoTimer = v10;
-      if ( v10 <= 0.0 )
-        UFG::UIHKScreenHud::HideStatGameInfo(v2);
+      v11 = mStatInfoTimer - elapsed;
+      this->mStatInfoTimer = v11;
+      if ( v11 <= 0.0 )
+        UFG::UIHKScreenHud::HideStatGameInfo(this);
     }
-    UFG::UIScreenInvokeQueue::Update(UFG::UIHKScreenHud::mScreenInvokeQueue, (UFG::UIScreen *)&v2->vfptr);
+    UFG::UIScreenInvokeQueue::Update(UFG::UIHKScreenHud::mScreenInvokeQueue, this);
     UFG::UITiledMapWidget::Update(
-      &v2->Minimap,
-      (UFG::UIScreen *)&v2->vfptr,
-      v3,
+      &this->Minimap,
+      this,
+      elapsed,
       UFG::UIHKScreenHud::mIconManager,
       UFG::UIHKScreenHud::mInteriorManager,
       0i64,
       0i64,
       UFG::UIHKScreenHud::GPS);
-    UFG::UIHKScreenHud::Flash_Update(v2);
-    UFG::UIHKSocialActionManager::Update(&v2->SocialActionManager, (UFG::UIScreen *)&v2->vfptr, v3);
-    UFG::UIHKMissionProgressWidget::Update(UFG::UIHKScreenHud::MissionProgress, (UFG::UIScreen *)&v2->vfptr);
-    UFG::UIHKInfoPopupWidget::Update(UFG::UIHKScreenHud::InfoPopup, (UFG::UIScreen *)&v2->vfptr, v3);
-    UFG::UIHKMoneyPopupWidget::Update(&v2->MoneyPopup, (UFG::UIScreen *)&v2->vfptr, v3);
-    UFG::UIHKWeaponAmmoWidget::Update(&v2->WeaponAmmo, (UFG::UIScreen *)&v2->vfptr, v3);
-    UFG::UIHKReticleWidget::Update(&v2->Reticle, (UFG::UIScreen *)&v2->vfptr, v10);
-    UFG::UIHKHealthMeterWidget::Update(&v2->HealthMeter, (UFG::UIScreen *)&v2->vfptr, v3);
-    UFG::UIHKDirectionalDamageWidget::Update(&v2->DirectionalDamage, (UFG::UIScreen *)&v2->vfptr, v3);
-    UFG::UIHKCombatMeterWidget::Update(UFG::UIHKScreenHud::CombatMeter, (UFG::UIScreen *)&v2->vfptr);
-    UFG::UIHKHeatLevelWidget::Update(&v2->HeatLevel, (UFG::UIScreen *)&v2->vfptr);
-    UFG::UIHKActionButtonWidget::Update(UFG::UIHKScreenHud::ActionButton, (UFG::UIScreen *)&v2->vfptr);
-    UFG::UIHKRadioStationWidget::Update(&v2->RadioStationWidget, (UFG::UIScreen *)&v2->vfptr, v3);
-    UFG::UIHKWitnessManager::Update(UFG::UIHKScreenHud::WitnessManager, v3);
-    UFG::UIHKTimeOfDayWidget::Update(&v2->TimeOfDay, (UFG::UIScreen *)&v2->vfptr);
-    UFG::UIMapLinesWidget::Update(UFG::UIHKScreenHud::MapLines, v3, &v2->Minimap.m_mapGeo);
-    UFG::UIHKSniperWidget::Update(&v2->SniperWidget, (UFG::UIScreen *)&v2->vfptr);
-    UFG::UIHKBuffWidget::Update(&v2->Buffs, (UFG::UIScreen *)&v2->vfptr, v3);
-    UFG::UIHKMissionHealthWidget::Update(UFG::UIHKScreenHud::MissionHealth, (UFG::UIScreen *)&v2->vfptr);
-    UFG::UIHKUpgradePopupWidget::Update(UFG::UIHKScreenHud::UpgradePopup, (UFG::UIScreen *)&v2->vfptr, v3);
-    UFG::UIHKTurnHintWidget::Update(UFG::UIHKScreenHud::TurnHint, (UFG::UIScreen *)&v2->vfptr);
-    UFG::UIHKPhoneTraceSignalBarWidget::Update(UFG::UIHKScreenHud::TraceSignalBar, (UFG::UIScreen *)&v2->vfptr);
-    UFG::UIHKRaceTimerWidget::Update(UFG::UIHKScreenHud::RaceTimer, (UFG::UIScreen *)&v2->vfptr);
-    v11 = UFG::UIHKScreenHud::RacePosition;
+    UFG::UIHKScreenHud::Flash_Update(this);
+    UFG::UIHKSocialActionManager::Update(&this->SocialActionManager, this, elapsed);
+    UFG::UIHKMissionProgressWidget::Update(UFG::UIHKScreenHud::MissionProgress, this);
+    UFG::UIHKInfoPopupWidget::Update(UFG::UIHKScreenHud::InfoPopup, this, elapsed);
+    UFG::UIHKMoneyPopupWidget::Update(&this->MoneyPopup, this, elapsed);
+    UFG::UIHKWeaponAmmoWidget::Update(&this->WeaponAmmo, this, elapsed);
+    UFG::UIHKReticleWidget::Update(&this->Reticle, this);
+    UFG::UIHKHealthMeterWidget::Update(&this->HealthMeter, this, elapsed);
+    UFG::UIHKDirectionalDamageWidget::Update(&this->DirectionalDamage, this, elapsed);
+    UFG::UIHKCombatMeterWidget::Update(UFG::UIHKScreenHud::CombatMeter, this);
+    UFG::UIHKHeatLevelWidget::Update(&this->HeatLevel, this);
+    UFG::UIHKActionButtonWidget::Update(UFG::UIHKScreenHud::ActionButton, this);
+    UFG::UIHKRadioStationWidget::Update(&this->RadioStationWidget, this, elapsed);
+    UFG::UIHKWitnessManager::Update(UFG::UIHKScreenHud::WitnessManager, elapsed);
+    UFG::UIHKTimeOfDayWidget::Update(&this->TimeOfDay, this);
+    UFG::UIMapLinesWidget::Update(UFG::UIHKScreenHud::MapLines, elapsed, &this->Minimap.m_mapGeo);
+    UFG::UIHKSniperWidget::Update(&this->SniperWidget, this);
+    UFG::UIHKBuffWidget::Update(&this->Buffs, this, elapsed);
+    UFG::UIHKMissionHealthWidget::Update(UFG::UIHKScreenHud::MissionHealth, this);
+    UFG::UIHKUpgradePopupWidget::Update(UFG::UIHKScreenHud::UpgradePopup, this, elapsed);
+    UFG::UIHKTurnHintWidget::Update(UFG::UIHKScreenHud::TurnHint, this);
+    UFG::UIHKPhoneTraceSignalBarWidget::Update(UFG::UIHKScreenHud::TraceSignalBar, this);
+    UFG::UIHKRaceTimerWidget::Update(UFG::UIHKScreenHud::RaceTimer, this);
+    v12 = UFG::UIHKScreenHud::RacePosition;
     if ( UFG::UIHKScreenHud::RacePosition->mChanged )
     {
-      v12 = UFG::UIHKScreenHud::RacePosition;
+      v13 = UFG::UIHKScreenHud::RacePosition;
       UFG::UIHKScreenHud::RacePosition->mChanged = 0;
-      UFG::UIHKRacePositionWidget::Flash_SetVisible(v12, (UFG::UIScreen *)&v2->vfptr);
-      if ( v11->mVisible )
-        UFG::UIHKRacePositionWidget::Flash_SetPlayerPosition(v11, (UFG::UIScreen *)&v2->vfptr);
+      UFG::UIHKRacePositionWidget::Flash_SetVisible(v13, this);
+      if ( v12->mVisible )
+        UFG::UIHKRacePositionWidget::Flash_SetPlayerPosition(v12, this);
     }
-    UFG::UIHKRacePercentageWidget::Update(UFG::UIHKScreenHud::RacePercentage, (UFG::UIScreen *)&v2->vfptr);
+    UFG::UIHKRacePercentageWidget::Update(UFG::UIHKScreenHud::RacePercentage, this);
     UFG::UIHKSecondaryObjectivesWidget::UpdateObjective(
-      &v2->SecondaryObjectives,
-      (UFG::UIScreen *)&v2->vfptr,
-      v3,
-      &v2->SecondaryObjectives.mCopObjective,
+      &this->SecondaryObjectives,
+      this,
+      elapsed,
+      &this->SecondaryObjectives.mCopObjective,
       1);
     UFG::UIHKSecondaryObjectivesWidget::UpdateObjective(
-      &v2->SecondaryObjectives,
-      (UFG::UIScreen *)&v2->vfptr,
-      v3,
-      &v2->SecondaryObjectives.mTriadObjective,
+      &this->SecondaryObjectives,
+      this,
+      elapsed,
+      &this->SecondaryObjectives.mTriadObjective,
       0);
-    UFG::UIHKMissionRewardsWidget::Update(UFG::UIHKScreenHud::MissionRewards, (UFG::UIScreen *)&v2->vfptr, v3);
-    UFG::UIHKRegionIndicatorWidget::Update(UFG::UIHKScreenHud::RegionIndicator, (UFG::UIScreen *)&v2->vfptr, v3);
-    UFG::UIHKObjectiveFlasherWidget::Update(&v2->ObjectiveFlasher, (UFG::UIScreen *)&v2->vfptr);
-    v13 = UFG::UIHKScreenHud::ShortcutButton;
-    v14 = UFG::UIHKScreenHud::ShortcutButton->mState;
-    if ( v14 && v2->mRenderable->m_movie.pObject )
+    UFG::UIHKMissionRewardsWidget::Update(UFG::UIHKScreenHud::MissionRewards, this, elapsed);
+    UFG::UIHKRegionIndicatorWidget::Update(UFG::UIHKScreenHud::RegionIndicator, this, elapsed);
+    UFG::UIHKObjectiveFlasherWidget::Update(&this->ObjectiveFlasher, this);
+    v14 = UFG::UIHKScreenHud::ShortcutButton;
+    mState = UFG::UIHKScreenHud::ShortcutButton->mState;
+    if ( mState && this->mRenderable->m_movie.pObject )
     {
-      v15 = v14 - 1;
-      if ( v15 )
+      v16 = mState - 1;
+      if ( v16 )
       {
-        if ( v15 == 1 )
+        if ( v16 == 1 )
         {
-          v16 = UFG::UIHKScreenHud::ShortcutButton->mTimeout - v3;
-          UFG::UIHKScreenHud::ShortcutButton->mTimeout = v16;
-          if ( v16 <= 0.0 )
-            v13->mState = 0;
+          v17 = UFG::UIHKScreenHud::ShortcutButton->mTimeout - elapsed;
+          UFG::UIHKScreenHud::ShortcutButton->mTimeout = v17;
+          if ( v17 <= 0.0 )
+            v14->mState = STATE_IDLE;
         }
       }
       else
       {
-        UFG::UIHKScreenHud::ShortcutButton->mState = 2;
+        UFG::UIHKScreenHud::ShortcutButton->mState = STATE_PHONE_CONTACTS;
       }
     }
     ((void (__fastcall *)(UFG::UIHKHintText *, UFG::UIHKScreenHud *))UFG::UIHKScreenHud::HintText->vfptr->Update)(
       UFG::UIHKScreenHud::HintText,
-      v2);
-    UFG::UIHKGameplayHelpWidget::Update(UFG::UIHKScreenHud::GameplayHelp, (UFG::UIScreen *)&v2->vfptr);
-    UFG::UIHK_XPFlasherWidget::Update(UFG::UIHKScreenHud::XPFlasher, (UFG::UIScreen *)&v2->vfptr, v3);
-    UFG::UIHKSecondaryTutorialWidget::Update(UFG::UIHKScreenHud::SecondaryTutorial, (UFG::UIScreen *)&v2->vfptr, v3);
-    ((void (__fastcall *)(UFG::UIHK_PDAWidget *, UFG::UIHKScreenHud *))v2->PDA->vfptr->update)(v2->PDA, v2);
-    UFG::UIScreen::update((UFG::UIScreen *)&v2->vfptr, v3);
+      this);
+    UFG::UIHKGameplayHelpWidget::Update(UFG::UIHKScreenHud::GameplayHelp, this);
+    UFG::UIHK_XPFlasherWidget::Update(UFG::UIHKScreenHud::XPFlasher, this, elapsed);
+    UFG::UIHKSecondaryTutorialWidget::Update(UFG::UIHKScreenHud::SecondaryTutorial, this, elapsed);
+    ((void (__fastcall *)(UFG::UIHK_PDAWidget *, UFG::UIHKScreenHud *))this->PDA->vfptr->update)(this->PDA, this);
+    UFG::UIScreen::update(this, elapsed);
     if ( UFG::UIHKScreenGlobalOverlay::mThis
       && UFG::UIHKScreenGlobalOverlay::mThis != (UFG::UIHKScreenGlobalOverlay *)-144i64 )
     {
@@ -881,85 +862,80 @@ void __fastcall UFG::UIHKScreenHud::update(UFG::UIHKScreenHud *this, float elaps
         || (UFG::qList<UFG::UISubtitleMessage,UFG::UISubtitleMessage,1,0> *)UFG::UIHKScreenGlobalOverlay::mThis->TextOverlay.mSubtitleQueue.mQueue.mNode.mNext != &UFG::UIHKScreenGlobalOverlay::mThis->TextOverlay.mSubtitleQueue.mQueue )
       {
         if ( UFG::UIHKScreenGlobalOverlay::mThis )
-          v17 = &UFG::UIHKScreenGlobalOverlay::mThis->HelpBar;
+          p_HelpBar = &UFG::UIHKScreenGlobalOverlay::mThis->HelpBar;
         else
-          v17 = &gHelpBarSentinel;
-        v19 = v17->mYOffset;
-        v17->mYOffset = -70.0;
-        v18 = v19 - -70.0;
+          p_HelpBar = &gHelpBarSentinel;
+        mYOffset = p_HelpBar->mYOffset;
+        p_HelpBar->mYOffset = -70.0;
+        v19 = mYOffset - -70.0;
       }
       else if ( UFG::UIHKScreenGlobalOverlay::mThis )
       {
-        v18 = UFG::UIHKScreenGlobalOverlay::mThis->HelpBar.mYOffset;
-        v17 = &UFG::UIHKScreenGlobalOverlay::mThis->HelpBar;
+        v19 = UFG::UIHKScreenGlobalOverlay::mThis->HelpBar.mYOffset;
+        p_HelpBar = &UFG::UIHKScreenGlobalOverlay::mThis->HelpBar;
         UFG::UIHKScreenGlobalOverlay::mThis->HelpBar.mYOffset = 0.0;
       }
       else
       {
-        v17 = &gHelpBarSentinel;
-        v18 = gHelpBarSentinel.mYOffset;
+        p_HelpBar = &gHelpBarSentinel;
+        v19 = gHelpBarSentinel.mYOffset;
         gHelpBarSentinel.mYOffset = 0.0;
       }
-      v17->mChanged |= COERCE_FLOAT(LODWORD(v18) & _xmm) > 0.001;
+      p_HelpBar->mChanged |= COERCE_FLOAT(LODWORD(v19) & _xmm) > 0.001;
     }
-    if ( v2->mUpdateStatGamePosition )
+    if ( this->mUpdateStatGamePosition )
     {
-      v20 = v2->mRenderable;
-      if ( v20 )
+      v21 = this->mRenderable;
+      if ( v21 )
       {
-        if ( v20->m_movie.pObject )
+        if ( v21->m_movie.pObject )
         {
-          v2->mUpdateStatGamePosition = 0;
-          Scaleform::GFx::Movie::Invoke(v20->m_movie.pObject, "StatGame_MakeSafe", 0i64);
+          this->mUpdateStatGamePosition = 0;
+          Scaleform::GFx::Movie::Invoke(v21->m_movie.pObject, "StatGame_MakeSafe", 0i64);
         }
       }
     }
   }
   else
   {
-    UFG::UIScreen::update((UFG::UIScreen *)&v2->vfptr, elapsed);
+    UFG::UIScreen::update(this, elapsed);
   }
-}
+}ition = 0;
+          Scaleform::GFx::Movie::Invoke(v21->m_movie.pObject, "StatGame_MakeSafe", 0i64);
+        }
+      }
+    }
+  }
+  else
+  {
+    UFG::UISc
 
 // File Line: 425
 // RVA: 0x61FD40
 void __fastcall UFG::UIHKScreenHud::customPreRender(UFG::UIHKScreenHud *this, Render::View *view)
 {
-  UFG::UIHKScreenHud *v2; // rbx
-  Render::View *v3; // rdi
-  UFG::UIScreenRenderable *v4; // rax
-  Scaleform::GFx::Movie *v5; // rcx
+  UFG::UIScreenRenderable *mRenderable; // rax
+  Scaleform::GFx::Movie *pObject; // rcx
 
-  v2 = this;
-  v3 = view;
   if ( UFG::UIHKScreenHud::ObjectiveDistance )
-    UFG::UIHKObjectiveDistanceWidget::Update(
-      UFG::UIHKScreenHud::ObjectiveDistance,
-      (UFG::UIScreen *)&this->vfptr,
-      gUIUpdateDelta);
-  if ( v2->mHudEnable )
+    UFG::UIHKObjectiveDistanceWidget::Update(UFG::UIHKScreenHud::ObjectiveDistance, this, gUIUpdateDelta);
+  if ( this->mHudEnable && UFG::UIScreenManager::s_instance->m_renderUI && UFG::UIHKTweakables::RenderMinimap )
   {
-    if ( UFG::UIScreenManager::s_instance->m_renderUI )
+    mRenderable = this->mRenderable;
+    if ( mRenderable )
     {
-      if ( UFG::UIHKTweakables::RenderMinimap )
+      if ( mRenderable->m_shouldRender )
       {
-        v4 = v2->mRenderable;
-        if ( v4 )
+        pObject = mRenderable->m_movie.pObject;
+        if ( pObject )
         {
-          if ( v4->m_shouldRender )
-          {
-            v5 = v4->m_movie.pObject;
-            if ( v5 )
-            {
-              if ( ((unsigned __int8 (*)(void))v5->vfptr[10].__vecDelDtor)() )
-                UFG::UITiledMapWidget::RenderMinimapBackdrop(
-                  &v2->Minimap,
-                  v3,
-                  UFG::UIHKScreenHud::mInteriorManager,
-                  0i64,
-                  UFG::UIHKScreenHud::MapLines);
-            }
-          }
+          if ( ((unsigned __int8 (__fastcall *)(Scaleform::GFx::Movie *))pObject->Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr[10].__vecDelDtor)(pObject) )
+            UFG::UITiledMapWidget::RenderMinimapBackdrop(
+              &this->Minimap,
+              view,
+              UFG::UIHKScreenHud::mInteriorManager,
+              0i64,
+              UFG::UIHKScreenHud::MapLines);
         }
       }
     }
@@ -970,49 +946,36 @@ void __fastcall UFG::UIHKScreenHud::customPreRender(UFG::UIHKScreenHud *this, Re
 // RVA: 0x63A150
 void __fastcall UFG::UIHKScreenHud::render(UFG::UIHKScreenHud *this)
 {
-  if ( this->mHudEnable )
-  {
-    if ( UFG::UIScreenManager::s_instance->m_renderUI )
-      UFG::UIScreenRenderable::render(this->mRenderable);
-  }
+  if ( this->mHudEnable && UFG::UIScreenManager::s_instance->m_renderUI )
+    UFG::UIScreenRenderable::render(this->mRenderable);
 }
 
 // File Line: 451
 // RVA: 0x61FC90
 void __fastcall UFG::UIHKScreenHud::customPostRender(UFG::UIHKScreenHud *this, Render::View *view)
 {
-  Render::View *v2; // rdi
-  UFG::UIHKScreenHud *v3; // rbx
-  UFG::UIScreenRenderable *v4; // rax
-  Scaleform::GFx::Movie *v5; // rcx
+  UFG::UIScreenRenderable *mRenderable; // rax
+  Scaleform::GFx::Movie *pObject; // rcx
 
-  v2 = view;
-  v3 = this;
-  if ( this->mHudEnable )
+  if ( this->mHudEnable && UFG::UIScreenManager::s_instance->m_renderUI && UFG::UIHKTweakables::RenderMinimap )
   {
-    if ( UFG::UIScreenManager::s_instance->m_renderUI )
+    mRenderable = this->mRenderable;
+    if ( mRenderable )
     {
-      if ( UFG::UIHKTweakables::RenderMinimap )
+      if ( mRenderable->m_shouldRender )
       {
-        v4 = this->mRenderable;
-        if ( v4 )
+        pObject = mRenderable->m_movie.pObject;
+        if ( pObject )
         {
-          if ( v4->m_shouldRender )
-          {
-            v5 = v4->m_movie.pObject;
-            if ( v5 )
-            {
-              if ( ((unsigned __int8 (*)(void))v5->vfptr[10].__vecDelDtor)() )
-                UFG::UITiledMapWidget::Render(
-                  &v3->Minimap,
-                  v2,
-                  UFG::UIHKScreenHud::mIconManager,
-                  UFG::UIHKScreenHud::mInteriorManager,
-                  UFG::UIHKScreenHud::GPS,
-                  UFG::UIHKScreenHud::MapLines,
-                  UFG::UIHKScreenHud::RacePath);
-            }
-          }
+          if ( ((unsigned __int8 (__fastcall *)(Scaleform::GFx::Movie *))pObject->Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr[10].__vecDelDtor)(pObject) )
+            UFG::UITiledMapWidget::Render(
+              &this->Minimap,
+              view,
+              UFG::UIHKScreenHud::mIconManager,
+              UFG::UIHKScreenHud::mInteriorManager,
+              UFG::UIHKScreenHud::GPS,
+              UFG::UIHKScreenHud::MapLines,
+              UFG::UIHKScreenHud::RacePath);
         }
       }
     }
@@ -1023,23 +986,17 @@ void __fastcall UFG::UIHKScreenHud::customPostRender(UFG::UIHKScreenHud *this, R
 // RVA: 0x623EA0
 char __fastcall UFG::UIHKScreenHud::handleMessage(UFG::UIHKScreenHud *this, unsigned int msgId, UFG::UIMessage *msg)
 {
-  UFG::UIMessage *v3; // rbp
-  unsigned int v4; // ebx
-  UFG::UIHKScreenHud *v5; // rdi
   const char *v7; // rdx
   char v8; // r14
   bool v9; // bp
   char v10; // al
   unsigned __int8 v11; // bp
-  NISManager *v12; // rax
+  NISManager *Instance; // rax
   UFG::UIHKRegionIndicatorWidget *v13; // rdx
-  unsigned int v14; // ecx
+  unsigned int vfptr; // ecx
   bool v15; // zf
   UFG::UIHKCombatMeterWidget *v16; // rax
 
-  v3 = msg;
-  v4 = msgId;
-  v5 = this;
   if ( msgId == UI_HASH_GAME_UNLOADING_30 )
   {
     UFG::UIHKScreenHud::Pop();
@@ -1057,7 +1014,7 @@ char __fastcall UFG::UIHKScreenHud::handleMessage(UFG::UIHKScreenHud *this, unsi
   }
   if ( msgId == UI_HASH_DIALOG_BOX_DISAPPEAR_3 )
   {
-    if ( UFG::UIScreenDialogBox::m_iDialogBoxRefCount <= 0 )
+    if ( !UFG::UIScreenDialogBox::m_iDialogBoxRefCount )
       this->mRenderable->m_shouldRender = UFG::UIHKScreenHud::mShouldRender;
   }
   else
@@ -1075,91 +1032,76 @@ char __fastcall UFG::UIHKScreenHud::handleMessage(UFG::UIHKScreenHud *this, unsi
     Scaleform::GFx::Movie::Invoke(this->mRenderable->m_movie.pObject, v7, 0i64, 0i64, 0);
   }
 LABEL_15:
-  if ( UFG::UIHKShortcutButtonWidget::HandleMessage(
-         UFG::UIHKScreenHud::ShortcutButton,
-         (UFG::UIScreen *)&v5->vfptr,
-         v4,
-         v3) )
-  {
+  if ( UFG::UIHKShortcutButtonWidget::HandleMessage(UFG::UIHKScreenHud::ShortcutButton, this, msgId, msg) )
     return 1;
-  }
-  if ( v4 != UI_HASH_BUTTON_START_PRESSED_30 && v4 != UI_HASH_BUTTON_SELECT_PRESSED_30 || v5->mState == 4 )
-  {
-    UFG::UIHKSniperWidget::HandleMessage(&v5->SniperWidget, (UFG::UIScreen *)&v5->vfptr, v4);
-    if ( v5->RadioStationWidget.mState == 3 && v4 == UI_HASH_RADIO_OUTRO_COMPLETE_20 )
-      v5->RadioStationWidget.mState = 0;
-    UFG::UIHKSocialActionWidget::HandleMessage(
-      &UFG::UIHKSocialActionManager::SocialAction,
-      (UFG::UIScreen *)&v5->vfptr,
-      v4,
-      v3);
-    UFG::UIHKMissionRewardsWidget::HandleMessage(
-      UFG::UIHKScreenHud::MissionRewards,
-      (UFG::UIScreen *)&v5->vfptr,
-      v4,
-      v3);
-    v13 = UFG::UIHKScreenHud::RegionIndicator;
-    if ( v4 == UI_HASH_REGION_CHANGE_20 )
-    {
-      v14 = (unsigned int)v3[1].vfptr;
-      v15 = UFG::UIHKScreenHud::RegionIndicator->mZone == v14;
-      UFG::UIHKScreenHud::RegionIndicator->mZone = v14;
-      v13->mChanged |= !v15;
-    }
-    if ( v4 == UI_HASH_REGION_SHOW_20 )
-      *(_WORD *)&v13->mChanged = 257;
-    UFG::UIHKObjectiveFlasherWidget::HandleMessage(&v5->ObjectiveFlasher, (UFG::UIScreen *)&v5->vfptr, v4, v3);
-    if ( v4 == UI_HASH_RACEHUD_LOADED_20 )
-    {
-      UFG::UIHKScreenHud::RacePosition->mChanged = 1;
-      UFG::UIHKScreenHud::RacePercentage->mChanged = 1;
-    }
-    v16 = UFG::UIHKScreenHud::CombatMeter;
-    if ( v4 == UI_HASH_COMBAT_METER_INTRO_20 )
-    {
-      UFG::UIHKScreenHud::CombatMeter->mChanged = 1;
-      v16->mState = 3;
-    }
-    else if ( v4 == UI_HASH_COMBAT_METER_OUTRO_20 )
-    {
-      UFG::UIHKScreenHud::CombatMeter->mState = 0;
-    }
-    UFG::UIHKScreenHud::HintText->vfptr->HandleMessage(UFG::UIHKScreenHud::HintText, (UFG::UIScreen *)v5, v4, v3);
-    if ( v4 == UI_HASH_GAME_UNLOADING_30 )
-      UFG::UIHKGameplayHelpWidget::ClearAll(UFG::UIHKScreenHud::GameplayHelp);
-    v5->PDA->vfptr->handleMessage(v5->PDA, (UFG::UIScreen *)&v5->vfptr, v4, v3);
-    UFG::UIScreen::handleMessage((UFG::UIScreen *)&v5->vfptr, v4, v3);
-  }
-  else
+  if ( (msgId == UI_HASH_BUTTON_START_PRESSED_30 || msgId == UI_HASH_BUTTON_SELECT_PRESSED_30)
+    && this->mState != STATE_DONE )
   {
     v8 = 1;
-    v9 = UFG::UIScreenManagerBase::getTopScreen((UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr) == 0i64;
+    v9 = UFG::UIScreenManagerBase::getTopScreen(UFG::UIScreenManager::s_instance) == 0i64;
     if ( !UFG::UIHKScreenGlobalOverlay::mThis
       || (v10 = 0, !UFG::UIHKScreenGlobalOverlay::mThis->m_skookum_dialog_active) )
     {
       v10 = 1;
     }
     v11 = v10 & v9;
-    v12 = NISManager::GetInstance();
-    if ( v12 && v12->mState )
+    Instance = NISManager::GetInstance();
+    if ( Instance && Instance->mState )
       v8 = 0;
-    if ( (UFG::UIHK_NISOverlay::m_curtains.m_state == 0) & (unsigned __int8)v8 & (UFG::UIScreenManagerBase::getScreen(
-                                                                                    (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-                                                                                    "NISPause") == 0i64) & v11 )
+    if ( ((UFG::UIHK_NISOverlay::m_curtains.m_state == STATE_CURTAIN_HIDDEN) & (unsigned __int8)v8 & (UFG::UIScreenManagerBase::getScreen(UFG::UIScreenManager::s_instance, "NISPause") == 0i64) & v11) != 0 )
     {
-      if ( v4 == UI_HASH_BUTTON_START_PRESSED_30 )
+      if ( msgId == UI_HASH_BUTTON_START_PRESSED_30 )
       {
         UFG::UI::PauseGame("PauseMenu");
-        v5->mState = 4;
+        this->mState = STATE_DONE;
         return 1;
       }
-      if ( v4 == UI_HASH_BUTTON_SELECT_PRESSED_30 && UFG::gEnableWorldMapAndPDA && !UFG::UI::InGameIntroChapter() )
+      if ( msgId == UI_HASH_BUTTON_SELECT_PRESSED_30 && UFG::gEnableWorldMapAndPDA && !UFG::UI::InGameIntroChapter() )
       {
         if ( UFG::UI::PauseGame("WorldMap") )
           UFG::UIHKScreenHud::Pop();
       }
       return 1;
     }
+  }
+  else
+  {
+    UFG::UIHKSniperWidget::HandleMessage(&this->SniperWidget, this, msgId);
+    if ( this->RadioStationWidget.mState == STATE_TEXT_INBOX && msgId == UI_HASH_RADIO_OUTRO_COMPLETE_20 )
+      this->RadioStationWidget.mState = STATE_IDLE;
+    UFG::UIHKSocialActionWidget::HandleMessage(&UFG::UIHKSocialActionManager::SocialAction, this, msgId, msg);
+    UFG::UIHKMissionRewardsWidget::HandleMessage(UFG::UIHKScreenHud::MissionRewards, this, msgId, msg);
+    v13 = UFG::UIHKScreenHud::RegionIndicator;
+    if ( msgId == UI_HASH_REGION_CHANGE_20 )
+    {
+      vfptr = (unsigned int)msg[1].vfptr;
+      v15 = UFG::UIHKScreenHud::RegionIndicator->mZone == vfptr;
+      UFG::UIHKScreenHud::RegionIndicator->mZone = vfptr;
+      v13->mChanged |= !v15;
+    }
+    if ( msgId == UI_HASH_REGION_SHOW_20 )
+      *(_WORD *)&v13->mChanged = 257;
+    UFG::UIHKObjectiveFlasherWidget::HandleMessage(&this->ObjectiveFlasher, this, msgId, msg);
+    if ( msgId == UI_HASH_RACEHUD_LOADED_20 )
+    {
+      UFG::UIHKScreenHud::RacePosition->mChanged = 1;
+      UFG::UIHKScreenHud::RacePercentage->mChanged = 1;
+    }
+    v16 = UFG::UIHKScreenHud::CombatMeter;
+    if ( msgId == UI_HASH_COMBAT_METER_INTRO_20 )
+    {
+      UFG::UIHKScreenHud::CombatMeter->mChanged = 1;
+      v16->mState = STATE_TEXT_INBOX;
+    }
+    else if ( msgId == UI_HASH_COMBAT_METER_OUTRO_20 )
+    {
+      UFG::UIHKScreenHud::CombatMeter->mState = STATE_IDLE;
+    }
+    UFG::UIHKScreenHud::HintText->vfptr->HandleMessage(UFG::UIHKScreenHud::HintText, this, msgId, msg);
+    if ( msgId == UI_HASH_GAME_UNLOADING_30 )
+      UFG::UIHKGameplayHelpWidget::ClearAll(UFG::UIHKScreenHud::GameplayHelp);
+    this->PDA->vfptr->handleMessage(this->PDA, this, msgId, msg);
+    UFG::UIScreen::handleMessage(this, msgId, msg);
   }
   return 0;
 }
@@ -1175,32 +1117,28 @@ UFG::UIHKScreenHud *__fastcall UFG::UIHKScreenHud::getInstance()
 // RVA: 0x5FECD0
 void __fastcall UFG::UIHKScreenHud::QueueInvoke(UFG::UIScreenInvoke *cmd)
 {
-  UFG::UIScreenInvoke *v1; // rbx
-  bool v2; // si
-  UFG::UIScreen *v3; // rax
+  bool m_shouldRender; // si
+  UFG::UIScreen *Overlay; // rax
   char v4; // di
-  UFG::UIScreenRenderable *v5; // rax
+  UFG::UIScreenRenderable *mRenderable; // rax
   char v6; // bp
 
   if ( cmd )
   {
-    v1 = cmd;
-    v2 = 0;
-    v3 = UFG::UIScreenManagerBase::getOverlay(
-           (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-           "Hud");
+    m_shouldRender = 0;
+    Overlay = UFG::UIScreenManagerBase::getOverlay(UFG::UIScreenManager::s_instance, "Hud");
     v4 = 0;
-    if ( v3 && (v5 = v3->mRenderable) != 0i64 && (v2 = v5->m_shouldRender) != 0
-      || (v6 = 1, (unsigned int)UFG::qStringCompare(v1->command.mData, "hideFace", -1)) )
+    if ( Overlay && (mRenderable = Overlay->mRenderable) != 0i64 && (m_shouldRender = mRenderable->m_shouldRender)
+      || (v6 = 1, (unsigned int)UFG::qStringCompare(cmd->command.mData, "hideFace", -1)) )
     {
       v6 = 0;
     }
-    if ( !v2 && !(unsigned int)UFG::qStringCompare(v1->command.mData, "Cops_PingMinimap", -1) )
+    if ( !m_shouldRender && !(unsigned int)UFG::qStringCompare(cmd->command.mData, "Cops_PingMinimap", -1) )
       v4 = 1;
     if ( (unsigned __int8)v6 | (unsigned __int8)v4 )
-      v1->vfptr->__vecDelDtor(v1, 1u);
+      cmd->vfptr->__vecDelDtor(cmd, 1i64);
     else
-      UFG::UIScreenInvokeQueue::Add(UFG::UIHKScreenHud::mScreenInvokeQueue, v1);
+      UFG::UIScreenInvokeQueue::Add(UFG::UIHKScreenHud::mScreenInvokeQueue, cmd);
   }
 }
 
@@ -1208,18 +1146,18 @@ void __fastcall UFG::UIHKScreenHud::QueueInvoke(UFG::UIScreenInvoke *cmd)
 // RVA: 0x5F4290
 void UFG::UIHKScreenHud::Pop(void)
 {
-  UFG::UIScreenRenderable *v0; // rcx
+  UFG::UIScreenRenderable *mRenderable; // rcx
   UFG::UIScreenTextureManager *v1; // rax
   UFG::UIScreenTextureManager *v2; // rax
 
   if ( UFG::UIHKScreenHud::mInstance )
   {
-    v0 = UFG::UIHKScreenHud::mInstance->mRenderable;
-    UFG::UIHKScreenHud::mInstance->mState = 4;
-    if ( v0 )
-      v0->m_shouldRender = 0;
+    mRenderable = UFG::UIHKScreenHud::mInstance->mRenderable;
+    UFG::UIHKScreenHud::mInstance->mState = STATE_DONE;
+    if ( mRenderable )
+      mRenderable->m_shouldRender = 0;
   }
-  UFG::UIScreenManagerBase::queuePopOverlay((UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr, "Hud");
+  UFG::UIScreenManagerBase::queuePopOverlay(UFG::UIScreenManager::s_instance, "Hud");
   v1 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v1, "Hud");
   v2 = UFG::UIScreenTextureManager::Instance();
@@ -1238,7 +1176,7 @@ void __fastcall UFG::UIHKScreenHud::LoadTutorialHudTexturePack(UFG::UIHKScreenHu
     v1,
     UFG::kOnDemandTexturePackFilename,
     HIGH_PRIORITY,
-    UFG::UIHKScreenHud::HandleTutorialHudTexturePackLoaded,
+    (UFG::qReflectInventoryBase *)UFG::UIHKScreenHud::HandleTutorialHudTexturePackLoaded,
     0i64);
   ++UFG::UIHKScreenHud::mOnDemandTextureLoadRefCounter;
 }
@@ -1262,18 +1200,18 @@ void __fastcall UFG::UIHKScreenHud::UnloadTutorialHudTexturePack(UFG::UIHKScreen
 void __fastcall UFG::UIHKScreenHud::EmergencyInputModeRecovery(UFG::UIHKScreenHud *this)
 {
   UFG::SimObjectCharacter *v1; // rbx
-  unsigned __int16 v2; // cx
-  UFG::SimComponent *v3; // rdi
-  UFG::SimComponent *v4; // rax
-  unsigned __int16 v5; // cx
+  signed __int16 m_Flags; // cx
+  UFG::SimComponent *m_pComponent; // rdi
+  UFG::SimComponent *ComponentOfTypeHK; // rax
+  __int16 v5; // cx
   UFG::SimComponent *v6; // rbx
-  UFG::SimComponent *v7; // rax
+  UFG::SimComponent *ComponentOfType; // rax
   unsigned int v8; // eax
-  unsigned int v9; // eax
+  unsigned int MostUsedIndex; // eax
   bool v10; // dl
-  UFG::ePDAStateEnum v11; // ecx
-  UFG::UIHK_PDAWidget *v12; // r8
-  UFG::ePDAStateEnum v13; // er8
+  UFG::ePDAStateEnum state; // ecx
+  UFG::UIHK_PDAWidget *PDA; // r8
+  UFG::ePDAStateEnum mState; // r8d
   UFG::UIHK_PDAWidget *v14; // r8
   char v15; // al
   int v16; // ecx
@@ -1281,62 +1219,39 @@ void __fastcall UFG::UIHKScreenHud::EmergencyInputModeRecovery(UFG::UIHKScreenHu
   v1 = LocalPlayer;
   if ( LocalPlayer )
   {
-    v2 = LocalPlayer->m_Flags;
-    if ( (v2 >> 14) & 1 )
+    m_Flags = LocalPlayer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v3 = LocalPlayer->m_Components.p[44].m_pComponent;
+      m_pComponent = LocalPlayer->m_Components.p[44].m_pComponent;
     }
     else
     {
-      if ( (v2 & 0x8000u) == 0 )
-      {
-        if ( (v2 >> 13) & 1 )
-        {
-          v4 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                 (UFG::SimObjectGame *)&LocalPlayer->vfptr,
-                 UFG::CharacterOccupantComponent::_TypeUID);
-        }
-        else if ( (v2 >> 12) & 1 )
-        {
-          v4 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                 (UFG::SimObjectGame *)&LocalPlayer->vfptr,
-                 UFG::CharacterOccupantComponent::_TypeUID);
-        }
-        else
-        {
-          v4 = UFG::SimObject::GetComponentOfType(
-                 (UFG::SimObject *)&LocalPlayer->vfptr,
-                 UFG::CharacterOccupantComponent::_TypeUID);
-        }
-      }
+      if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                              LocalPlayer,
+                              UFG::CharacterOccupantComponent::_TypeUID);
       else
-      {
-        v4 = UFG::SimObjectGame::GetComponentOfTypeHK(
-               (UFG::SimObjectGame *)&LocalPlayer->vfptr,
-               UFG::CharacterOccupantComponent::_TypeUID);
-      }
-      v3 = v4;
+        ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(LocalPlayer, UFG::CharacterOccupantComponent::_TypeUID);
+      m_pComponent = ComponentOfTypeHK;
     }
     v5 = v1->m_Flags;
-    if ( (v5 >> 14) & 1 )
+    if ( (v5 & 0x4000) != 0 )
     {
       v6 = v1->m_Components.p[7].m_pComponent;
     }
-    else if ( (v5 & 0x8000u) == 0 )
+    else if ( v5 >= 0 )
     {
-      if ( (v5 >> 13) & 1 )
+      if ( (v5 & 0x2000) != 0 )
       {
         v6 = v1->m_Components.p[6].m_pComponent;
       }
       else
       {
-        if ( (v5 >> 12) & 1 )
-          v7 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                 (UFG::SimObjectGame *)&v1->vfptr,
-                 UFG::ActionTreeComponent::_TypeUID);
+        if ( (v5 & 0x1000) != 0 )
+          ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(v1, UFG::ActionTreeComponent::_TypeUID);
         else
-          v7 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v1->vfptr, UFG::ActionTreeComponent::_TypeUID);
-        v6 = v7;
+          ComponentOfType = UFG::SimObject::GetComponentOfType(v1, UFG::ActionTreeComponent::_TypeUID);
+        v6 = ComponentOfType;
       }
     }
     else
@@ -1344,42 +1259,42 @@ void __fastcall UFG::UIHKScreenHud::EmergencyInputModeRecovery(UFG::UIHKScreenHu
       v6 = v1->m_Components.p[7].m_pComponent;
     }
     v8 = _S12_11;
-    if ( !(_S12_11 & 1) )
+    if ( (_S12_11 & 1) == 0 )
     {
       _S12_11 |= 1u;
-      sActionHijackUID.mUID = UFG::qStringHashUpper32("ActionHijack", 0xFFFFFFFF);
+      sActionHijackUID.mUID = UFG::qStringHashUpper32("ActionHijack", -1);
       v8 = _S12_11;
     }
-    if ( v8 & 2 )
+    if ( (v8 & 2) != 0 )
     {
-      v9 = sMostUsedIndex_ActionHijack;
+      MostUsedIndex = sMostUsedIndex_ActionHijack;
     }
     else
     {
       _S12_11 = v8 | 2;
-      v9 = GetMostUsedIndex(sActionHijackUID.mUID);
-      sMostUsedIndex_ActionHijack = v9;
+      MostUsedIndex = GetMostUsedIndex(sActionHijackUID.mUID);
+      sMostUsedIndex_ActionHijack = MostUsedIndex;
     }
-    v10 = ActionController::IsPlaying((ActionController *)&v6[3], &sActionHijackUID, v9, 1)
-       || v3 && (LODWORD(v3[1].m_SafePointerList.mNode.mNext) - 9) & 0xFFFFFFFB;
-    v11 = UFG::UIHKScreenHud::PDACache.state;
-    if ( UFG::UIHKScreenHud::mInstance && (v12 = UFG::UIHKScreenHud::mInstance->PDA) != 0i64 )
-      v13 = v12->mState;
+    v10 = ActionController::IsPlaying((ActionController *)&v6[3], &sActionHijackUID, MostUsedIndex, 1)
+       || m_pComponent && ((LODWORD(m_pComponent[1].m_SafePointerList.mNode.mNext) - 9) & 0xFFFFFFFB) != 0;
+    state = UFG::UIHKScreenHud::PDACache.state;
+    if ( UFG::UIHKScreenHud::mInstance && (PDA = UFG::UIHKScreenHud::mInstance->PDA) != 0i64 )
+      mState = PDA->mState;
     else
-      v13 = UFG::UIHKScreenHud::PDACache.state;
-    if ( v13 == STATE_IDLE )
-      goto LABEL_50;
+      mState = UFG::UIHKScreenHud::PDACache.state;
+    if ( mState == STATE_IDLE )
+      goto LABEL_41;
     if ( UFG::UIHKScreenHud::mInstance )
     {
       v14 = UFG::UIHKScreenHud::mInstance->PDA;
       if ( v14 )
-        v11 = v14->mState;
+        state = v14->mState;
     }
-    if ( v11 != 11 )
-      v15 = 1;
-    else
-LABEL_50:
+    if ( state == STATE_WAIT_TO_WRITE_TEXT )
+LABEL_41:
       v15 = 0;
+    else
+      v15 = 1;
     if ( v10 )
     {
       v16 = (v15 != 0) + 4;
@@ -1398,72 +1313,62 @@ LABEL_50:
 // RVA: 0x5E57D0
 void __fastcall UFG::UIHKScreenHud::Flash_Update(UFG::UIHKScreenHud *this)
 {
-  UFG::UIHKScreenHud *v1; // rbx
-  Scaleform::GFx::Movie *v2; // rdi
-  double v3; // xmm6_8
+  Scaleform::GFx::Movie *pObject; // rdi
+  long double v3; // xmm6_8
   bool v4; // cl
   bool v5; // bl
-  Scaleform::GFx::Value value; // [rsp+38h] [rbp-48h]
+  Scaleform::GFx::Value value; // [rsp+38h] [rbp-48h] BYREF
 
-  v1 = this;
-  v2 = this->mRenderable->m_movie.pObject;
-  if ( v2 )
+  pObject = this->mRenderable->m_movie.pObject;
+  if ( pObject )
   {
     value.pObjectInterface = 0i64;
-    value.Type = 0;
+    value.Type = VT_Undefined;
     if ( UFG::UIHKScreenHud::mIconManager )
       UFG::UIMapBlipManager::UpdatePlayerArrow(
         UFG::UIHKScreenHud::mIconManager,
-        (signed int)UFG::UITiledMapWidget::gMinimapCenter.x,
-        (signed int)UFG::UITiledMapWidget::gMinimapCenter.y,
+        (int)UFG::UITiledMapWidget::gMinimapCenter.x,
+        (int)UFG::UITiledMapWidget::gMinimapCenter.y,
         this->Minimap.m_mapGeo.playerRot,
         0);
-    if ( (unsigned int)(v1->mState - 1) <= 1 )
+    if ( (unsigned int)(this->mState - 1) <= 1 )
     {
-      v3 = (float)(v1->mMinimapAlpha * 100.0);
-      if ( ((unsigned int)value.Type >> 6) & 1 )
-      {
-        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
-          value.pObjectInterface,
-          &value,
-          *(_QWORD *)&value.mValue.NValue);
-        value.pObjectInterface = 0i64;
-      }
-      value.Type = 5;
+      v3 = (float)(this->mMinimapAlpha * 100.0);
+      value.Type = VT_Number;
       value.mValue.NValue = v3;
-      Scaleform::GFx::Movie::SetVariable(v2, "mc_minimapBorder._alpha", &value, 1i64);
-      Scaleform::GFx::Movie::SetVariable(v2, "mcOuterRing._alpha", &value, 1i64);
-      Scaleform::GFx::Movie::SetVariable(v2, "mcHeatMeter._alpha", &value, 1i64);
-      Scaleform::GFx::Movie::SetVariable(v2, "mc_MinimapPulse._alpha", &value, 1i64);
-      Scaleform::GFx::Movie::SetVariable(v2, "mc_HealthBar._alpha", &value, 1i64);
-      Scaleform::GFx::Movie::SetVariable(v2, "mc_CombatTarget._alpha", &value, 1i64);
-      Scaleform::GFx::Movie::SetVariable(v2, "mc_ObjectiveFlasherTarget._alpha", &value, 1i64);
+      Scaleform::GFx::Movie::SetVariable(pObject, "mc_minimapBorder._alpha", &value, 1i64);
+      Scaleform::GFx::Movie::SetVariable(pObject, "mcOuterRing._alpha", &value, 1i64);
+      Scaleform::GFx::Movie::SetVariable(pObject, "mcHeatMeter._alpha", &value, 1i64);
+      Scaleform::GFx::Movie::SetVariable(pObject, "mc_MinimapPulse._alpha", &value, 1i64);
+      Scaleform::GFx::Movie::SetVariable(pObject, "mc_HealthBar._alpha", &value, 1i64);
+      Scaleform::GFx::Movie::SetVariable(pObject, "mc_CombatTarget._alpha", &value, 1i64);
+      Scaleform::GFx::Movie::SetVariable(pObject, "mc_ObjectiveFlasherTarget._alpha", &value, 1i64);
     }
-    if ( v1->mMinimapVisibleChanged )
+    if ( this->mMinimapVisibleChanged )
     {
-      v1->mMinimapVisibleChanged = 0;
+      this->mMinimapVisibleChanged = 0;
       v4 = UFG::UIHKTweakables::RenderMinimap;
-      v1->HeatLevel.mVisibleChanged |= v1->HeatLevel.mVisible != UFG::UIHKTweakables::RenderMinimap;
-      v1->HeatLevel.mVisible = v4;
+      this->HeatLevel.mVisibleChanged |= this->HeatLevel.mVisible != UFG::UIHKTweakables::RenderMinimap;
+      this->HeatLevel.mVisible = v4;
       v5 = UFG::UIHKTweakables::RenderMinimap;
-      if ( ((unsigned int)value.Type >> 6) & 1 )
+      if ( (value.Type & 0x40) != 0 )
       {
-        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
+        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&value.pObjectInterface->vfptr->gap8[8])(
           value.pObjectInterface,
           &value,
-          *(_QWORD *)&value.mValue.NValue);
+          value.mValue);
         value.pObjectInterface = 0i64;
       }
-      value.Type = 2;
+      value.Type = VT_Boolean;
       value.mValue.BValue = v5;
-      Scaleform::GFx::Movie::SetVariable(v2, "mc_minimapBorder._visible", &value, 1i64);
-      Scaleform::GFx::Movie::SetVariable(v2, "mcOuterRing._visible", &value, 1i64);
+      Scaleform::GFx::Movie::SetVariable(pObject, "mc_minimapBorder._visible", &value, 1i64);
+      Scaleform::GFx::Movie::SetVariable(pObject, "mcOuterRing._visible", &value, 1i64);
     }
-    if ( ((unsigned int)value.Type >> 6) & 1 )
-      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
+    if ( (value.Type & 0x40) != 0 )
+      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&value.pObjectInterface->vfptr->gap8[8])(
         value.pObjectInterface,
         &value,
-        *(_QWORD *)&value.mValue.NValue);
+        value.mValue);
   }
 }
 
@@ -1477,15 +1382,15 @@ void UFG::UIHKScreenHud::RaceClear(void)
   UFG::UIHKRacePercentageWidget *v3; // rcx
 
   v0 = UFG::UIHKScreenHud::RaceTimer;
-  v1 = UFG::UIHKScreenHud::RaceTimer->mVisible == 0;
+  v1 = !UFG::UIHKScreenHud::RaceTimer->mVisible;
   UFG::UIHKScreenHud::RaceTimer->mVisible = 0;
   v0->mVisibilityChanged |= !v1;
   v2 = UFG::UIHKScreenHud::RacePosition;
-  v1 = UFG::UIHKScreenHud::RacePosition->mVisible == 0;
+  v1 = !UFG::UIHKScreenHud::RacePosition->mVisible;
   UFG::UIHKScreenHud::RacePosition->mVisible = 0;
   v2->mChanged |= !v1;
   v3 = UFG::UIHKScreenHud::RacePercentage;
-  v1 = UFG::UIHKScreenHud::RacePercentage->mVisible == 0;
+  v1 = !UFG::UIHKScreenHud::RacePercentage->mVisible;
   UFG::UIHKScreenHud::RacePercentage->mVisible = 0;
   v3->mChanged |= !v1;
 }
@@ -1633,7 +1538,7 @@ void UFG::UIHKScreenHud::PingMinimap(void)
     v2->mNext = v2;
     v2[1].mNext = v2;
     v1->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvoke::`vftable;
-    UFG::qString::qString(&v1->command, &customWorldMapCaption);
+    UFG::qString::qString(&v1->command, &customCaption);
   }
   else
   {
@@ -1664,61 +1569,61 @@ void UFG::UIHKScreenHud::HandleMinimapInteriorTextureLoaded(void)
 // RVA: 0x602AE0
 void UFG::UIHKScreenHud::ResetWidgets(void)
 {
-  signed __int64 v0; // rdi
-  UFG::UIHKInfoPopupWidget::eState v1; // ecx
+  __int64 v0; // rdi
+  UFG::UIHKInfoPopupWidget::eState mState; // ecx
   UFG::UIHKHintText *v2; // rcx
-  bool v3; // zf
-  UFG::UIHKHintText::eState v4; // eax
+  bool m_isShowingOnlineDisconnect; // zf
+  UFG::UIHKHintText::eState m_eState; // eax
   UFG::UIHKActionButtonWidget *v5; // rcx
   UFG::UIHKMissionProgressWidget *v6; // rsi
-  UFG::qString *v7; // rbx
+  UFG::qString *p_Caption; // rbx
   UFG::qString *v8; // rbx
-  signed __int64 v9; // rdi
+  __int64 v9; // rdi
   UFG::UIHKObjectiveFlasherWidget::eState v10; // eax
   int v11; // eax
   UFG::UIHKRaceTimerWidget *v12; // rcx
   UFG::UIHKRacePositionWidget *v13; // rcx
   UFG::UIHKRacePercentageWidget *v14; // rcx
   UFG::UIHKScreenGlobalOverlay *v15; // rax
-  UFG::UIHKTextOverlay *v16; // rbx
-  UFG::UISubtitleMessage *v17; // rdx
-  UFG::UIHKTextOverlay *v18; // rcx
-  UFG::UISubtitleMessage *v19; // rdx
+  UFG::UIHKTextOverlay *p_TextOverlay; // rbx
+  UFG::UISubtitleMessage *mCurrent1; // rdx
+  UFG::UIHKTextOverlay *mParent; // rcx
+  UFG::UISubtitleMessage *mCurrent2; // rdx
   UFG::UIHKTextOverlay *v20; // rcx
 
   UFG::UITiledMapGPS::Initialize(UFG::UIHKScreenHud::GPS);
   v0 = 4i64;
-  v1 = UFG::UIHKScreenHud::InfoPopup->mState;
-  if ( v1 && v1 != 5 )
-    UFG::UIHKScreenHud::InfoPopup->mState = 4;
+  mState = UFG::UIHKScreenHud::InfoPopup->mState;
+  if ( mState && mState != STATE_OUTGOING_CALL )
+    UFG::UIHKScreenHud::InfoPopup->mState = STATE_INCOMING_CALL;
   v2 = UFG::UIHKScreenHud::HintText;
-  v3 = UFG::UIHKScreenHud::HintText->m_isShowingOnlineDisconnect == 1;
+  m_isShowingOnlineDisconnect = UFG::UIHKScreenHud::HintText->m_isShowingOnlineDisconnect;
   UFG::UIHKScreenHud::HintText->m_bShowMsg = 0;
   v2->m_bUseTimer = 0;
   v2->m_bRepeatMsg = 0;
-  if ( v3 )
+  if ( m_isShowingOnlineDisconnect )
     v2->m_isShowingOnlineDisconnect = 0;
-  v4 = v2->m_eState;
-  if ( v4 == 3 )
+  m_eState = v2->m_eState;
+  if ( m_eState == STATE_TEXT_INBOX )
   {
-    v2->m_eState = 4;
+    v2->m_eState = STATE_INCOMING_CALL;
   }
-  else if ( !((v4 - 2) & 0xFFFFFFFB) )
+  else if ( ((m_eState - 2) & 0xFFFFFFFB) == 0 )
   {
-    v2->m_eState = 0;
+    v2->m_eState = STATE_IDLE;
   }
   v5 = UFG::UIHKScreenHud::ActionButton;
-  v3 = UFG::UIHKScreenHud::ActionButton->mVisible == 0;
+  m_isShowingOnlineDisconnect = !UFG::UIHKScreenHud::ActionButton->mVisible;
   UFG::UIHKScreenHud::ActionButton->mVisible = 0;
-  v5->mChanged |= !v3;
+  v5->mChanged |= !m_isShowingOnlineDisconnect;
   v6 = UFG::UIHKScreenHud::MissionProgress;
-  v7 = &UFG::UIHKScreenHud::MissionProgress->mData[0].Caption;
+  p_Caption = &UFG::UIHKScreenHud::MissionProgress->mData[0].Caption;
   do
   {
-    LOBYTE(v7[-1].mStringHash32) = 1;
-    v7[-1].mStringHashUpper32 = 0;
-    UFG::qString::Set(v7, &customWorldMapCaption);
-    v7 = (UFG::qString *)((char *)v7 + 48);
+    LOBYTE(p_Caption[-1].mStringHash32) = 1;
+    p_Caption[-1].mStringHashUpper32 = 0;
+    UFG::qString::Set(p_Caption, &customCaption);
+    p_Caption = (UFG::qString *)((char *)p_Caption + 48);
     --v0;
   }
   while ( v0 );
@@ -1728,7 +1633,7 @@ void UFG::UIHKScreenHud::ResetWidgets(void)
   do
   {
     v8[-1].mData = 0i64;
-    UFG::qString::Set(v8, &customWorldMapCaption);
+    UFG::qString::Set(v8, &customCaption);
     LOBYTE(v8[1].mPrev) = 0;
     v8 = (UFG::qString *)((char *)v8 + 64);
     --v9;
@@ -1737,62 +1642,62 @@ void UFG::UIHKScreenHud::ResetWidgets(void)
   UFG::UIHKGameplayHelpWidget::ClearAll(UFG::UIHKScreenHud::GameplayHelp);
   UFG::UIHKBuffWidget::Clear();
   v10 = UFG::UIHKObjectiveFlasherWidget::mState;
-  if ( UFG::UIHKObjectiveFlasherWidget::mState & 0xFFFFFFFB )
-    v10 = 3;
+  if ( (UFG::UIHKObjectiveFlasherWidget::mState & 0xFFFFFFFB) != 0 )
+    v10 = STATE_TEXT_INBOX;
   UFG::UIHKObjectiveFlasherWidget::mState = v10;
   UFG::UIHK_PDATextInboxWidget::ClearMessages();
-  if ( unk_142431A14 && UFG::UIHK_PDAWidget::mInputLocked > 0 )
+  if ( byte_142431A14 && UFG::UIHK_PDAWidget::mInputLocked )
   {
     UFG::SetInputMode_PDA_Off(UFG::gActiveControllerNum);
     v11 = UFG::UIHKGameplayHelpWidget::mLocked;
     if ( UFG::UIHKGameplayHelpWidget::mLocked > 0 )
-      v11 = UFG::UIHKGameplayHelpWidget::mLocked-- - 1;
+      v11 = --UFG::UIHKGameplayHelpWidget::mLocked;
     if ( v11 < 1 )
       UFG::UIHKScreenHud::GameplayHelp->mChanged = 1;
     --UFG::UIHK_PDAWidget::mInputLocked;
   }
   v12 = UFG::UIHKScreenHud::RaceTimer;
-  UFG::UIHKScreenHud::PDACache.state = 0;
-  unk_142431A14 = 0;
-  unk_142431A18 = 0;
-  v3 = UFG::UIHKScreenHud::RaceTimer->mVisible == 0;
+  UFG::UIHKScreenHud::PDACache.state = STATE_IDLE;
+  byte_142431A14 = 0;
+  dword_142431A18 = 0;
+  m_isShowingOnlineDisconnect = !UFG::UIHKScreenHud::RaceTimer->mVisible;
   UFG::UIHKScreenHud::RaceTimer->mVisible = 0;
-  v12->mVisibilityChanged |= !v3;
+  v12->mVisibilityChanged |= !m_isShowingOnlineDisconnect;
   v13 = UFG::UIHKScreenHud::RacePosition;
-  v3 = UFG::UIHKScreenHud::RacePosition->mVisible == 0;
+  m_isShowingOnlineDisconnect = !UFG::UIHKScreenHud::RacePosition->mVisible;
   UFG::UIHKScreenHud::RacePosition->mVisible = 0;
-  v13->mChanged |= !v3;
+  v13->mChanged |= !m_isShowingOnlineDisconnect;
   v14 = UFG::UIHKScreenHud::RacePercentage;
-  v3 = UFG::UIHKScreenHud::RacePercentage->mVisible == 0;
+  m_isShowingOnlineDisconnect = !UFG::UIHKScreenHud::RacePercentage->mVisible;
   UFG::UIHKScreenHud::RacePercentage->mVisible = 0;
-  v14->mChanged |= !v3;
+  v14->mChanged |= !m_isShowingOnlineDisconnect;
   v15 = UFG::UIHKScreenGlobalOverlay::mThis;
   if ( UFG::UIHKScreenGlobalOverlay::mThis )
   {
-    v16 = &UFG::UIHKScreenGlobalOverlay::mThis->TextOverlay;
+    p_TextOverlay = &UFG::UIHKScreenGlobalOverlay::mThis->TextOverlay;
     if ( UFG::UIHKScreenGlobalOverlay::mThis != (UFG::UIHKScreenGlobalOverlay *)-144i64 )
     {
       UFG::qList<UFG::UISubtitleMessage,UFG::UISubtitleMessage,1,0>::DeleteNodes(&UFG::UIHKScreenGlobalOverlay::mThis->TextOverlay.mSubtitleQueue.mQueue);
-      v17 = v16->mSubtitleQueue.mCurrent1;
-      if ( v17 )
+      mCurrent1 = p_TextOverlay->mSubtitleQueue.mCurrent1;
+      if ( mCurrent1 )
       {
-        v17->state = 3;
-        v18 = v16->mSubtitleQueue.mParent;
-        if ( v18 )
-          UFG::UIHKTextOverlay::OnHideNow(v18, v17, 1);
+        mCurrent1->state = STATE_EXECUTING;
+        mParent = p_TextOverlay->mSubtitleQueue.mParent;
+        if ( mParent )
+          UFG::UIHKTextOverlay::OnHideNow(mParent, mCurrent1, 1);
       }
-      v19 = v16->mSubtitleQueue.mCurrent2;
-      if ( v19 )
+      mCurrent2 = p_TextOverlay->mSubtitleQueue.mCurrent2;
+      if ( mCurrent2 )
       {
-        v19->state = 3;
-        v20 = v16->mSubtitleQueue.mParent;
+        mCurrent2->state = STATE_EXECUTING;
+        v20 = p_TextOverlay->mSubtitleQueue.mParent;
         if ( v20 )
-          UFG::UIHKTextOverlay::OnHideNow(v20, v19, 2);
+          UFG::UIHKTextOverlay::OnHideNow(v20, mCurrent2, 2);
       }
-      if ( v16->mSubtitlesVisible != 1 )
+      if ( !p_TextOverlay->mSubtitlesVisible )
       {
-        *(_WORD *)&v16->mChanged = 257;
-        v16->mSubtitleQueue.mPauseQueue = 0;
+        *(_WORD *)&p_TextOverlay->mChanged = 257;
+        p_TextOverlay->mSubtitleQueue.mPauseQueue = 0;
       }
       v15 = UFG::UIHKScreenGlobalOverlay::mThis;
     }
@@ -1815,35 +1720,33 @@ void UFG::UIHKScreenHud::ClearPDACache(void)
 {
   int v0; // eax
 
-  if ( unk_142431A14 && UFG::UIHK_PDAWidget::mInputLocked )
+  if ( byte_142431A14 && UFG::UIHK_PDAWidget::mInputLocked )
   {
     UFG::SetInputMode_PDA_Off(UFG::gActiveControllerNum);
     v0 = UFG::UIHKGameplayHelpWidget::mLocked;
     if ( UFG::UIHKGameplayHelpWidget::mLocked > 0 )
-      v0 = UFG::UIHKGameplayHelpWidget::mLocked-- - 1;
+      v0 = --UFG::UIHKGameplayHelpWidget::mLocked;
     if ( v0 < 1 )
       UFG::UIHKScreenHud::GameplayHelp->mChanged = 1;
     --UFG::UIHK_PDAWidget::mInputLocked;
   }
-  UFG::UIHKScreenHud::PDACache.state = 0;
-  unk_142431A14 = 0;
-  unk_142431A18 = 0;
+  UFG::UIHKScreenHud::PDACache.state = STATE_IDLE;
+  byte_142431A14 = 0;
+  dword_142431A18 = 0;
 }
 
 // File Line: 908
 // RVA: 0x60C670
 void __fastcall UFG::UIHKScreenHud::SetVisible(bool value)
 {
-  UFG::UIScreen *v1; // rax
+  UFG::UIScreen *Overlay; // rax
 
   if ( UFG::UIHKScreenHud::mShouldRender != value )
   {
     UFG::UIHKScreenHud::mShouldRender = value;
-    v1 = UFG::UIScreenManagerBase::getOverlay(
-           (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-           "Hud");
-    if ( v1 )
-      v1->mRenderable->m_shouldRender = UFG::UIHKScreenHud::mShouldRender;
+    Overlay = UFG::UIScreenManagerBase::getOverlay(UFG::UIScreenManager::s_instance, "Hud");
+    if ( Overlay )
+      Overlay->mRenderable->m_shouldRender = UFG::UIHKScreenHud::mShouldRender;
   }
 }
 
@@ -1875,21 +1778,19 @@ void __fastcall UFG::UIHKScreenHud::UnHideAmmoOverlay(UFG::UIHKScreenHud *this)
 // RVA: 0x5F9F10
 void __fastcall UFG::UIHKScreenHud::PopulatePDACache(UFG::UIHKScreenHud *this)
 {
-  UFG::UIHKScreenHud *v1; // rbx
-  UFG::UIHK_PDAWidget *v2; // rdx
+  UFG::UIHK_PDAWidget *PDA; // rdx
 
-  v1 = this;
   if ( UFG::UIHKScreenHud::mInstance )
   {
-    v2 = UFG::UIHKScreenHud::mInstance->PDA;
-    if ( v2 )
-      UFG::UIHKScreenHud::PDACache.state = v2->mState;
+    PDA = UFG::UIHKScreenHud::mInstance->PDA;
+    if ( PDA )
+      UFG::UIHKScreenHud::PDACache.state = PDA->mState;
   }
   UFG::qString::Set(&stru_142431A20, this->PDA->IncomingCall.mCallerName.mData);
-  unk_142431A48 = v1->PDA->mOutgoingCall;
-  unk_142431A49 = v1->PDA->IncomingCall.mState == 4;
-  unk_142431A4A = v1->PDA->mVoiceMail;
-  unk_142431A18 = v1->PDA->RootMenu.mSelectedIndex;
+  unk_142431A48 = this->PDA->mOutgoingCall;
+  unk_142431A49 = this->PDA->IncomingCall.mState == STATE_INCOMING_CALL;
+  unk_142431A4A = this->PDA->mVoiceMail;
+  dword_142431A18 = this->PDA->RootMenu.mSelectedIndex;
 }
 
 // File Line: 980
@@ -1903,35 +1804,35 @@ float __fastcall UFG::UIHKScreenHud::GetMapZoomFactor(UFG::UIHKScreenHud *this)
 // RVA: 0x602A00
 void UFG::UIHKScreenHud::ResetWidgetVisibility(void)
 {
-  UFG::qSymbol widget; // [rsp+40h] [rbp+10h]
-  UFG::qSymbol *v1; // [rsp+48h] [rbp+18h]
+  UFG::qSymbol widget; // [rsp+40h] [rbp+10h] BYREF
+  UFG::qSymbol *p_widget; // [rsp+48h] [rbp+18h]
 
-  v1 = &widget;
+  p_widget = &widget;
   widget.mUID = UIHudWidgetID_HUD_MINIMAP_13.mUID;
   UFG::UIHKScreenHud::SetWidgetVisible((__int64)&widget, 1);
-  v1 = &widget;
+  p_widget = &widget;
   widget.mUID = UIHudWidgetID_HUD_PDA_13.mUID;
   UFG::UIHKScreenHud::SetWidgetVisible((__int64)&widget, 1);
-  v1 = &widget;
+  p_widget = &widget;
   widget.mUID = UIHudWidgetID_HUD_HEALTH_13.mUID;
   UFG::UIHKScreenHud::SetWidgetVisible((__int64)&widget, 1);
-  v1 = &widget;
+  p_widget = &widget;
   widget.mUID = UIHudWidgetID_HUD_COMBAT_METER_13.mUID;
   UFG::UIHKScreenHud::SetWidgetVisible((__int64)&widget, 1);
-  v1 = &widget;
+  p_widget = &widget;
   widget.mUID = UIHudWidgetID_HUD_WEAPON_AMMO_13.mUID;
   UFG::UIHKScreenHud::SetWidgetVisible((__int64)&widget, 1);
-  v1 = &widget;
+  p_widget = &widget;
   widget.mUID = UIHudWidgetID_HUD_REGION_INDICATOR_13.mUID;
   UFG::UIHKScreenHud::SetWidgetVisible((__int64)&widget, 1);
-  v1 = &widget;
+  p_widget = &widget;
   widget.mUID = UIHudWidgetID_HUD_GAMEPLAY_HELP_13.mUID;
   UFG::UIHKScreenHud::SetWidgetVisible((__int64)&widget, 1);
 }
 
 // File Line: 998
 // RVA: 0x60C720
-void __fastcall UFG::UIHKScreenHud::SetWidgetVisible(__int64 widget, bool visible)
+void __fastcall UFG::UIHKScreenHud::SetWidgetVisible(int *widget, bool visible)
 {
   int v2; // eax
   UFG::UIHKScreenHud *v3; // r8
@@ -1939,9 +1840,9 @@ void __fastcall UFG::UIHKScreenHud::SetWidgetVisible(__int64 widget, bool visibl
   UFG::UIHKRegionIndicatorWidget *v5; // rcx
   UFG::UIHKGameplayHelpWidget *v6; // rcx
 
-  v2 = *(_DWORD *)widget;
+  v2 = *widget;
   v3 = UFG::UIHKScreenHud::mInstance;
-  if ( *(_DWORD *)widget == UIHudWidgetID_HUD_MINIMAP_13.mUID )
+  if ( *widget == UIHudWidgetID_HUD_MINIMAP_13.mUID )
   {
     UFG::UIHKTweakables::RenderMinimap = visible;
     if ( UFG::UIHKScreenHud::mInstance )
@@ -1991,12 +1892,12 @@ void __fastcall UFG::UIHKScreenHud::SetWidgetVisible(__int64 widget, bool visibl
 
 // File Line: 1046
 // RVA: 0x60C6C0
-void __fastcall UFG::UIHKScreenHud::SetWidgetHighlight(UFG::UIHKScreenHud *this, __int64 widget, bool highlight)
+void __fastcall UFG::UIHKScreenHud::SetWidgetHighlight(UFG::UIHKScreenHud *this, int *widget, bool highlight)
 {
   int v3; // eax
 
-  v3 = *(_DWORD *)widget;
-  if ( *(_DWORD *)widget == UIHudWidgetID_HUD_MINIMAP_13.mUID )
+  v3 = *widget;
+  if ( *widget == UIHudWidgetID_HUD_MINIMAP_13.mUID )
   {
     UFG::UIHKScreenHud::SetMinimapHighlight(this, highlight);
   }
@@ -2020,37 +1921,37 @@ void __fastcall UFG::UIHKScreenHud::SetWidgetHighlight(UFG::UIHKScreenHud *this,
 // RVA: 0x6062E0
 void __fastcall UFG::UIHKScreenHud::SetMinimapHighlight(UFG::UIHKScreenHud *this, bool highlight)
 {
-  Scaleform::GFx::Movie *v2; // rbx
-  char ptr; // [rsp+40h] [rbp-68h]
-  __int64 v4; // [rsp+50h] [rbp-58h]
-  unsigned int v5; // [rsp+58h] [rbp-50h]
-  const char *v6; // [rsp+60h] [rbp-48h]
-  char v7; // [rsp+70h] [rbp-38h]
-  __int64 v8; // [rsp+80h] [rbp-28h]
-  unsigned int v9; // [rsp+88h] [rbp-20h]
-  const char *v10; // [rsp+90h] [rbp-18h]
+  Scaleform::GFx::Movie *pObject; // rbx
+  Scaleform::GFx::Value ptr; // [rsp+40h] [rbp-68h] BYREF
+  char v4[16]; // [rsp+70h] [rbp-38h] BYREF
+  __int64 v5; // [rsp+80h] [rbp-28h]
+  int v6; // [rsp+88h] [rbp-20h]
+  const char *v7; // [rsp+90h] [rbp-18h]
 
   if ( highlight )
   {
-    v2 = this->mRenderable->m_movie.pObject;
-    if ( v2 )
+    pObject = this->mRenderable->m_movie.pObject;
+    if ( pObject )
     {
       `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-      if ( (v5 >> 6) & 1 )
+      if ( (ptr.Type & 0x40) != 0 )
       {
-        (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v4 + 16i64))(v4, &ptr, v6);
-        v4 = 0i64;
+        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&ptr.pObjectInterface->vfptr->gap8[8])(
+          ptr.pObjectInterface,
+          &ptr,
+          ptr.mValue);
+        ptr.pObjectInterface = 0i64;
       }
-      v5 = 6;
-      v6 = "mc_Minimap";
-      if ( (v9 >> 6) & 1 )
+      ptr.Type = VT_String;
+      ptr.mValue.pString = "mc_Minimap";
+      if ( (v6 & 0x40) != 0 )
       {
-        (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v8 + 16i64))(v8, &v7, v10);
-        v8 = 0i64;
+        (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v5 + 16i64))(v5, v4, v7);
+        v5 = 0i64;
       }
-      v9 = 6;
-      v10 = "mc_HealthBar_highlight";
-      Scaleform::GFx::Movie::Invoke(v2, "UIHighlight_Init", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
+      v6 = 6;
+      v7 = "mc_HealthBar_highlight";
+      Scaleform::GFx::Movie::Invoke(pObject, "UIHighlight_Init", 0i64, &ptr, 2u);
       `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
     }
   }
@@ -2058,126 +1959,120 @@ void __fastcall UFG::UIHKScreenHud::SetMinimapHighlight(UFG::UIHKScreenHud *this
 
 // File Line: 1110
 // RVA: 0x6081F0
-void __fastcall UFG::UIHKScreenHud::SetSocialAwardMedal(UFG::UIHKScreenHud *this, int medal, const char *socialaward, const char *myname, const char *myscore)
+void __fastcall UFG::UIHKScreenHud::SetSocialAwardMedal(
+        UFG::UIHKScreenHud *this,
+        int medal,
+        const char *socialaward,
+        const char *myname,
+        const char *myscore)
 {
-  const char *v5; // r12
-  const char *v6; // r15
   __int64 v7; // r14
-  UFG::UIHKScreenHud *v8; // rbx
-  UFG::UIScreenRenderable *v9; // rax
-  Scaleform::GFx::Movie *v10; // rsi
+  UFG::UIScreenRenderable *mRenderable; // rax
+  Scaleform::GFx::Movie *pObject; // rsi
   UFG::GameStatTracker *v11; // rax
-  UFG::UIHK_PDAWidget *v12; // rcx
-  UFG::ePDAStateEnum v13; // eax
+  UFG::UIHK_PDAWidget *PDA; // rcx
+  UFG::ePDAStateEnum state; // eax
   unsigned int v14; // eax
-  UFG::UIGfxTranslator *v15; // rcx
+  UFG::UIGfxTranslator *m_translator; // rcx
   const char *v16; // rdi
-  char *v17; // rdi
+  char *mData; // rdi
   __int64 v18; // rdi
-  char ptr; // [rsp+30h] [rbp-D0h]
-  __int64 v20; // [rsp+40h] [rbp-C0h]
-  unsigned int v21; // [rsp+48h] [rbp-B8h]
-  const char *v22; // [rsp+50h] [rbp-B0h]
-  char v23; // [rsp+60h] [rbp-A0h]
-  __int64 v24; // [rsp+70h] [rbp-90h]
-  unsigned int v25; // [rsp+78h] [rbp-88h]
-  const char *v26; // [rsp+80h] [rbp-80h]
-  char v27; // [rsp+90h] [rbp-70h]
-  __int64 v28; // [rsp+A0h] [rbp-60h]
-  unsigned int v29; // [rsp+A8h] [rbp-58h]
-  char *v30; // [rsp+B0h] [rbp-50h]
-  char v31; // [rsp+C0h] [rbp-40h]
-  __int64 v32; // [rsp+D0h] [rbp-30h]
-  unsigned int v33; // [rsp+D8h] [rbp-28h]
-  double v34; // [rsp+E0h] [rbp-20h]
-  char v35; // [rsp+F0h] [rbp-10h]
-  __int64 v36; // [rsp+100h] [rbp+0h]
-  unsigned int v37; // [rsp+108h] [rbp+8h]
-  __int64 v38; // [rsp+110h] [rbp+10h]
-  char *v39; // [rsp+120h] [rbp+20h]
-  const char *v40; // [rsp+128h] [rbp+28h]
-  const char *v41; // [rsp+130h] [rbp+30h]
-  const char *v42; // [rsp+138h] [rbp+38h]
-  __int64 v43; // [rsp+140h] [rbp+40h]
-  UFG::qString v44; // [rsp+148h] [rbp+48h]
+  Scaleform::GFx::Value ptr; // [rsp+30h] [rbp-D0h] BYREF
+  char v20[16]; // [rsp+60h] [rbp-A0h] BYREF
+  __int64 v21; // [rsp+70h] [rbp-90h]
+  int v22; // [rsp+78h] [rbp-88h]
+  const char *v23; // [rsp+80h] [rbp-80h]
+  char v24[16]; // [rsp+90h] [rbp-70h] BYREF
+  __int64 v25; // [rsp+A0h] [rbp-60h]
+  int v26; // [rsp+A8h] [rbp-58h]
+  char *v27; // [rsp+B0h] [rbp-50h]
+  char v28[16]; // [rsp+C0h] [rbp-40h] BYREF
+  __int64 v29; // [rsp+D0h] [rbp-30h]
+  int v30; // [rsp+D8h] [rbp-28h]
+  double v31; // [rsp+E0h] [rbp-20h]
+  char v32[16]; // [rsp+F0h] [rbp-10h] BYREF
+  __int64 v33; // [rsp+100h] [rbp+0h]
+  int v34; // [rsp+108h] [rbp+8h]
+  __int64 v35; // [rsp+110h] [rbp+10h]
+  __int64 v36[5]; // [rsp+120h] [rbp+20h]
+  UFG::qString v37; // [rsp+148h] [rbp+48h] BYREF
 
-  v43 = -2i64;
-  v5 = myname;
-  v6 = socialaward;
+  v36[4] = -2i64;
   v7 = medal;
-  v8 = this;
-  v9 = this->mRenderable;
-  if ( v9 )
+  mRenderable = this->mRenderable;
+  if ( mRenderable )
   {
-    v10 = v9->m_movie.pObject;
-    if ( v10 )
+    pObject = mRenderable->m_movie.pObject;
+    if ( pObject )
     {
       v11 = UFG::GameStatTracker::Instance();
-      if ( !(unsigned __int8)UFG::GameStatTracker::GetStat(v11, OptionsDisableSocial) )
+      if ( !UFG::GameStatTracker::GetStat(v11, OptionsDisableSocial) )
       {
-        if ( !v8->PDA
-          || (!UFG::UIHKScreenHud::mInstance || (v12 = UFG::UIHKScreenHud::mInstance->PDA) == 0i64 ? (v13 = UFG::UIHKScreenHud::PDACache.state) : (v13 = v12->mState),
-              v13 == STATE_IDLE) )
+        if ( !this->PDA
+          || (!UFG::UIHKScreenHud::mInstance || (PDA = UFG::UIHKScreenHud::mInstance->PDA) == 0i64
+            ? (state = UFG::UIHKScreenHud::PDACache.state)
+            : (state = PDA->mState),
+              state == STATE_IDLE) )
         {
-          v14 = UFG::qStringHashUpper32("LEADERBOARD_YOUR_SCORE", 0xFFFFFFFF);
-          v15 = UFG::UIScreenManager::s_instance->m_translator;
-          if ( !v15
-            || (v16 = (const char *)v15->vfptr[5].__vecDelDtor((Scaleform::RefCountImplCore *)&v15->vfptr, v14)) == 0i64 )
-          {
+          v14 = UFG::qStringHashUpper32("LEADERBOARD_YOUR_SCORE", -1);
+          m_translator = UFG::UIScreenManager::s_instance->m_translator;
+          if ( !m_translator || (v16 = (const char *)m_translator->vfptr[5].__vecDelDtor(m_translator, v14)) == 0i64 )
             v16 = "LEADERBOARD_YOUR_SCORE";
-          }
-          UFG::qString::qString(&v44);
-          UFG::qString::Format(&v44, "%s: %s", v16, myscore);
-          v39 = &customWorldMapCaption;
-          v40 = "$HUD_SOCIAL_AWARDBRONZE";
-          v41 = "$HUD_SOCIAL_AWARDSILVER";
-          v42 = "$HUD_SOCIAL_AWARDGOLD";
+          UFG::qString::qString(&v37);
+          UFG::qString::Format(&v37, "%s: %s", v16, myscore);
+          v36[0] = (__int64)&customCaption;
+          v36[1] = (__int64)"$HUD_SOCIAL_AWARDBRONZE";
+          v36[2] = (__int64)"$HUD_SOCIAL_AWARDSILVER";
+          v36[3] = (__int64)"$HUD_SOCIAL_AWARDGOLD";
           `eh vector constructor iterator(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-          if ( (v21 >> 6) & 1 )
+          if ( (ptr.Type & 0x40) != 0 )
           {
-            (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v20 + 16i64))(v20, &ptr, v22);
-            v20 = 0i64;
+            (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&ptr.pObjectInterface->vfptr->gap8[8])(
+              ptr.pObjectInterface,
+              &ptr,
+              ptr.mValue);
+            ptr.pObjectInterface = 0i64;
           }
-          v21 = 6;
-          v22 = v6;
-          if ( (v25 >> 6) & 1 )
+          ptr.Type = VT_String;
+          ptr.mValue.pString = socialaward;
+          if ( (v22 & 0x40) != 0 )
           {
-            (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v24 + 16i64))(v24, &v23, v26);
-            v24 = 0i64;
+            (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v21 + 16i64))(v21, v20, v23);
+            v21 = 0i64;
           }
-          v25 = 6;
-          v26 = v5;
-          v17 = v44.mData;
-          if ( (v29 >> 6) & 1 )
+          v22 = 6;
+          v23 = myname;
+          mData = v37.mData;
+          if ( (v26 & 0x40) != 0 )
           {
-            (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v28 + 16i64))(v28, &v27, v30);
-            v28 = 0i64;
+            (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v25 + 16i64))(v25, v24, v27);
+            v25 = 0i64;
           }
-          v29 = 6;
-          v30 = v17;
-          if ( (v33 >> 6) & 1 )
+          v26 = 6;
+          v27 = mData;
+          if ( (v30 & 0x40) != 0 )
           {
-            (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v32 + 16i64))(
-              v32,
-              &v31,
-              COERCE_DOUBLE(*(_QWORD *)&v34));
-            v32 = 0i64;
+            (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v29 + 16i64))(
+              v29,
+              v28,
+              COERCE_DOUBLE(*(_QWORD *)&v31));
+            v29 = 0i64;
           }
-          v33 = 5;
-          v34 = (double)((signed int)v7 - 1);
-          v18 = (__int64)(&v39)[v7];
-          if ( (v37 >> 6) & 1 )
+          v30 = 5;
+          v31 = (double)((int)v7 - 1);
+          v18 = v36[v7];
+          if ( (v34 & 0x40) != 0 )
           {
-            (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v36 + 16i64))(v36, &v35, v38);
-            v36 = 0i64;
+            (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v33 + 16i64))(v33, v32, v35);
+            v33 = 0i64;
           }
-          v37 = 6;
-          v38 = v18;
-          Scaleform::GFx::Movie::Invoke(v10, "StatGame_SetStatAward", 0i64, (Scaleform::GFx::Value *)&ptr, 5u);
-          v8->mStatInfoTimer = 5.0;
-          v8->mStatSocialAwardActive = 1;
+          v34 = 6;
+          v35 = v18;
+          Scaleform::GFx::Movie::Invoke(pObject, "StatGame_SetStatAward", 0i64, &ptr, 5u);
+          this->mStatInfoTimer = 5.0;
+          this->mStatSocialAwardActive = 1;
           `eh vector destructor iterator(&ptr, 0x30ui64, 5, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
-          UFG::qString::~qString(&v44);
+          UFG::qString::~qString(&v37);
         }
       }
     }
@@ -2186,136 +2081,131 @@ void __fastcall UFG::UIHKScreenHud::SetSocialAwardMedal(UFG::UIHKScreenHud *this
 
 // File Line: 1141
 // RVA: 0x608960
-void __fastcall UFG::UIHKScreenHud::SetStatGameInfo(UFG::UIHKScreenHud *this, const char *statInfo, const char *myname, const char *myscore, const char *leader, const char *leaderscore)
+void __fastcall UFG::UIHKScreenHud::SetStatGameInfo(
+        UFG::UIHKScreenHud *this,
+        const char *statInfo,
+        const char *myname,
+        const char *myscore,
+        const char *leader,
+        const char *leaderscore)
 {
-  const char *v6; // r13
-  const char *v7; // r15
-  const char *v8; // rbx
-  UFG::UIHKScreenHud *v9; // rsi
-  UFG::UIScreenRenderable *v10; // rax
-  Scaleform::GFx::Movie *v11; // r14
+  UFG::UIScreenRenderable *mRenderable; // rax
+  Scaleform::GFx::Movie *pObject; // r14
   UFG::GameStatTracker *v12; // rax
-  UFG::UIHK_PDAWidget *v13; // rcx
-  UFG::ePDAStateEnum v14; // eax
+  UFG::UIHK_PDAWidget *PDA; // rcx
+  UFG::ePDAStateEnum state; // eax
   const char *v15; // r12
   const char *v16; // rbx
   const char *v17; // rdi
-  char *v18; // rbx
+  char *mData; // rbx
   char *v19; // rbx
   unsigned int v20; // eax
-  char ptr; // [rsp+30h] [rbp-D0h]
-  __int64 v22; // [rsp+40h] [rbp-C0h]
-  unsigned int v23; // [rsp+48h] [rbp-B8h]
-  const char *v24; // [rsp+50h] [rbp-B0h]
-  char v25; // [rsp+60h] [rbp-A0h]
-  __int64 v26; // [rsp+70h] [rbp-90h]
-  unsigned int v27; // [rsp+78h] [rbp-88h]
-  const char *v28; // [rsp+80h] [rbp-80h]
-  char v29; // [rsp+90h] [rbp-70h]
-  __int64 v30; // [rsp+A0h] [rbp-60h]
-  unsigned int v31; // [rsp+A8h] [rbp-58h]
-  char *v32; // [rsp+B0h] [rbp-50h]
-  char v33; // [rsp+C0h] [rbp-40h]
-  __int64 v34; // [rsp+D0h] [rbp-30h]
-  unsigned int v35; // [rsp+D8h] [rbp-28h]
-  const char *v36; // [rsp+E0h] [rbp-20h]
-  char v37; // [rsp+F0h] [rbp-10h]
-  __int64 v38; // [rsp+100h] [rbp+0h]
-  unsigned int v39; // [rsp+108h] [rbp+8h]
-  char *v40; // [rsp+110h] [rbp+10h]
-  __int64 v41; // [rsp+120h] [rbp+20h]
-  UFG::qString v42; // [rsp+128h] [rbp+28h]
-  UFG::qString v43; // [rsp+150h] [rbp+50h]
+  Scaleform::GFx::Value ptr; // [rsp+30h] [rbp-D0h] BYREF
+  char v22[16]; // [rsp+60h] [rbp-A0h] BYREF
+  __int64 v23; // [rsp+70h] [rbp-90h]
+  int v24; // [rsp+78h] [rbp-88h]
+  const char *v25; // [rsp+80h] [rbp-80h]
+  char v26[16]; // [rsp+90h] [rbp-70h] BYREF
+  __int64 v27; // [rsp+A0h] [rbp-60h]
+  int v28; // [rsp+A8h] [rbp-58h]
+  char *v29; // [rsp+B0h] [rbp-50h]
+  char v30[16]; // [rsp+C0h] [rbp-40h] BYREF
+  __int64 v31; // [rsp+D0h] [rbp-30h]
+  int v32; // [rsp+D8h] [rbp-28h]
+  const char *v33; // [rsp+E0h] [rbp-20h]
+  char v34[16]; // [rsp+F0h] [rbp-10h] BYREF
+  __int64 v35; // [rsp+100h] [rbp+0h]
+  int v36; // [rsp+108h] [rbp+8h]
+  char *v37; // [rsp+110h] [rbp+10h]
+  __int64 v38; // [rsp+120h] [rbp+20h]
+  UFG::qString v39; // [rsp+128h] [rbp+28h] BYREF
+  UFG::qString v40; // [rsp+150h] [rbp+50h] BYREF
 
-  v41 = -2i64;
-  v6 = myscore;
-  v7 = myname;
-  v8 = statInfo;
-  v9 = this;
-  v10 = this->mRenderable;
-  if ( v10 )
+  v38 = -2i64;
+  mRenderable = this->mRenderable;
+  if ( mRenderable )
   {
-    v11 = v10->m_movie.pObject;
-    if ( v11 )
+    pObject = mRenderable->m_movie.pObject;
+    if ( pObject )
     {
       v12 = UFG::GameStatTracker::Instance();
-      if ( !(unsigned __int8)UFG::GameStatTracker::GetStat(v12, OptionsDisableSocial) )
+      if ( !UFG::GameStatTracker::GetStat(v12, OptionsDisableSocial) )
       {
-        if ( !v9->PDA
-          || (!UFG::UIHKScreenHud::mInstance || (v13 = UFG::UIHKScreenHud::mInstance->PDA) == 0i64 ? (v14 = UFG::UIHKScreenHud::PDACache.state) : (v14 = v13->mState),
-              v14 == STATE_IDLE) )
+        if ( !this->PDA
+          || (!UFG::UIHKScreenHud::mInstance || (PDA = UFG::UIHKScreenHud::mInstance->PDA) == 0i64
+            ? (state = UFG::UIHKScreenHud::PDACache.state)
+            : (state = PDA->mState),
+              state == STATE_IDLE) )
         {
-          if ( v9->mStatInfoTimer <= 0.0 )
+          if ( this->mStatInfoTimer <= 0.0 )
           {
-            v15 = UFG::UI::LocalizeText(v8);
+            v15 = UFG::UI::LocalizeText(statInfo);
             v16 = UFG::UI::LocalizeText("LEADERBOARD_YOUR_SCORE");
             v17 = UFG::UI::LocalizeText("LEADERBOARD_SCORE_TO_BEAT");
-            UFG::qString::qString(&v43);
-            UFG::qString::qString(&v42);
-            UFG::qString::Format(&v43, "%s: %s", v16, v6);
-            UFG::qString::Format(&v42, "%s: %s", v17, leaderscore);
+            UFG::qString::qString(&v40);
+            UFG::qString::qString(&v39);
+            UFG::qString::Format(&v40, "%s: %s", v16, myscore);
+            UFG::qString::Format(&v39, "%s: %s", v17, leaderscore);
             `eh vector constructor iterator(
               &ptr,
               0x30ui64,
               5,
               (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-            if ( (v23 >> 6) & 1 )
+            if ( (ptr.Type & 0x40) != 0 )
             {
-              (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v22 + 16i64))(v22, &ptr, v24);
-              v22 = 0i64;
+              (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&ptr.pObjectInterface->vfptr->gap8[8])(
+                ptr.pObjectInterface,
+                &ptr,
+                ptr.mValue);
+              ptr.pObjectInterface = 0i64;
             }
-            v23 = 6;
-            v24 = v15;
-            if ( (v27 >> 6) & 1 )
+            ptr.Type = VT_String;
+            ptr.mValue.pString = v15;
+            if ( (v24 & 0x40) != 0 )
             {
-              (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v26 + 16i64))(v26, &v25, v28);
-              v26 = 0i64;
+              (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v23 + 16i64))(v23, v22, v25);
+              v23 = 0i64;
             }
-            v27 = 6;
-            v28 = v7;
-            v18 = v43.mData;
-            if ( (v31 >> 6) & 1 )
+            v24 = 6;
+            v25 = myname;
+            mData = v40.mData;
+            if ( (v28 & 0x40) != 0 )
             {
-              (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v30 + 16i64))(v30, &v29, v32);
-              v30 = 0i64;
+              (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v27 + 16i64))(v27, v26, v29);
+              v27 = 0i64;
             }
-            v31 = 6;
-            v32 = v18;
-            if ( (v35 >> 6) & 1 )
+            v28 = 6;
+            v29 = mData;
+            if ( (v32 & 0x40) != 0 )
             {
-              (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v34 + 16i64))(v34, &v33, v36);
-              v34 = 0i64;
+              (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v31 + 16i64))(v31, v30, v33);
+              v31 = 0i64;
             }
-            v35 = 6;
-            v36 = leader;
-            v19 = v42.mData;
-            if ( (v39 >> 6) & 1 )
+            v32 = 6;
+            v33 = leader;
+            v19 = v39.mData;
+            if ( (v36 & 0x40) != 0 )
             {
-              (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v38 + 16i64))(v38, &v37, v40);
-              v38 = 0i64;
+              (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v35 + 16i64))(v35, v34, v37);
+              v35 = 0i64;
             }
-            v39 = 6;
-            v40 = v19;
-            Scaleform::GFx::Movie::Invoke(v11, "StatGame_SetLocalInfo", 0i64, (Scaleform::GFx::Value *)&ptr, 5u);
-            if ( !v9->mStatGameInfoActive )
+            v36 = 6;
+            v37 = v19;
+            Scaleform::GFx::Movie::Invoke(pObject, "StatGame_SetLocalInfo", 0i64, &ptr, 5u);
+            if ( !this->mStatGameInfoActive )
             {
               v20 = UFG::TiDo::CalcWwiseUid("Play_ui_stat_game");
               if ( UFG::HudAudio::m_instance )
-                UFG::AudioEntity::CreateAndPlayEvent(
-                  (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-                  v20,
-                  0i64,
-                  0,
-                  0i64);
-              v9->mStatGameInfoActive = 1;
+                UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, v20, 0i64, 0, 0i64);
+              this->mStatGameInfoActive = 1;
             }
             `eh vector destructor iterator(
               &ptr,
               0x30ui64,
               5,
               (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
-            UFG::qString::~qString(&v42);
-            UFG::qString::~qString(&v43);
+            UFG::qString::~qString(&v39);
+            UFG::qString::~qString(&v40);
           }
         }
       }
@@ -2327,29 +2217,29 @@ void __fastcall UFG::UIHKScreenHud::SetStatGameInfo(UFG::UIHKScreenHud *this, co
 // RVA: 0x608C50
 void __fastcall UFG::UIHKScreenHud::SetStatMakingNewRecord(UFG::UIHKScreenHud *this)
 {
-  UFG::UIScreenRenderable *v1; // rax
-  UFG::UIHKScreenHud *v2; // rbx
-  Scaleform::GFx::Movie *v3; // rdi
+  UFG::UIScreenRenderable *mRenderable; // rax
+  Scaleform::GFx::Movie *pObject; // rdi
   UFG::GameStatTracker *v4; // rax
-  UFG::UIHK_PDAWidget *v5; // rcx
-  UFG::ePDAStateEnum v6; // eax
+  UFG::UIHK_PDAWidget *PDA; // rcx
+  UFG::ePDAStateEnum state; // eax
 
-  v1 = this->mRenderable;
-  v2 = this;
-  if ( v1 )
+  mRenderable = this->mRenderable;
+  if ( mRenderable )
   {
-    v3 = v1->m_movie.pObject;
-    if ( v3 )
+    pObject = mRenderable->m_movie.pObject;
+    if ( pObject )
     {
       v4 = UFG::GameStatTracker::Instance();
-      if ( !(unsigned __int8)UFG::GameStatTracker::GetStat(v4, OptionsDisableSocial) )
+      if ( !UFG::GameStatTracker::GetStat(v4, OptionsDisableSocial) )
       {
-        if ( !v2->PDA
-          || (!UFG::UIHKScreenHud::mInstance || (v5 = UFG::UIHKScreenHud::mInstance->PDA) == 0i64 ? (v6 = UFG::UIHKScreenHud::PDACache.state) : (v6 = v5->mState),
-              v6 == STATE_IDLE) )
+        if ( !this->PDA
+          || (!UFG::UIHKScreenHud::mInstance || (PDA = UFG::UIHKScreenHud::mInstance->PDA) == 0i64
+            ? (state = UFG::UIHKScreenHud::PDACache.state)
+            : (state = PDA->mState),
+              state == STATE_IDLE) )
         {
-          if ( v2->mStatInfoTimer <= 0.0 )
-            Scaleform::GFx::Movie::Invoke(v3, "StatGame_ShowSettingHighRecord", 0i64, 0i64, 0);
+          if ( this->mStatInfoTimer <= 0.0 )
+            Scaleform::GFx::Movie::Invoke(pObject, "StatGame_ShowSettingHighRecord", 0i64, 0i64, 0);
         }
       }
     }
@@ -2358,78 +2248,77 @@ void __fastcall UFG::UIHKScreenHud::SetStatMakingNewRecord(UFG::UIHKScreenHud *t
 
 // File Line: 1205
 // RVA: 0x6084C0
-void __fastcall UFG::UIHKScreenHud::SetStatGameBeatHim(UFG::UIHKScreenHud *this, const char *hisname, const char *score)
+void __fastcall UFG::UIHKScreenHud::SetStatGameBeatHim(
+        UFG::UIHKScreenHud *this,
+        const char *hisname,
+        const char *score)
 {
-  const char *v3; // rsi
-  const char *v4; // rbp
-  UFG::UIHKScreenHud *v5; // rbx
-  UFG::UIScreenRenderable *v6; // rax
-  Scaleform::GFx::Movie *v7; // rdi
+  UFG::UIScreenRenderable *mRenderable; // rax
+  Scaleform::GFx::Movie *pObject; // rdi
   UFG::GameStatTracker *v8; // rax
-  UFG::UIHK_PDAWidget *v9; // rcx
-  UFG::ePDAStateEnum v10; // eax
+  UFG::UIHK_PDAWidget *PDA; // rcx
+  UFG::ePDAStateEnum state; // eax
   const char *v11; // rbx
-  char *v12; // rbx
-  char ptr; // [rsp+30h] [rbp-98h]
-  __int64 v14; // [rsp+40h] [rbp-88h]
-  unsigned int v15; // [rsp+48h] [rbp-80h]
-  char *v16; // [rsp+50h] [rbp-78h]
-  char v17; // [rsp+60h] [rbp-68h]
-  __int64 v18; // [rsp+70h] [rbp-58h]
-  unsigned int v19; // [rsp+78h] [rbp-50h]
-  const char *v20; // [rsp+80h] [rbp-48h]
-  __int64 v21; // [rsp+90h] [rbp-38h]
-  UFG::qString v22; // [rsp+98h] [rbp-30h]
+  char *mData; // rbx
+  Scaleform::GFx::Value ptr; // [rsp+30h] [rbp-98h] BYREF
+  char v14[16]; // [rsp+60h] [rbp-68h] BYREF
+  __int64 v15; // [rsp+70h] [rbp-58h]
+  int v16; // [rsp+78h] [rbp-50h]
+  const char *v17; // [rsp+80h] [rbp-48h]
+  __int64 v18; // [rsp+90h] [rbp-38h]
+  UFG::qString v19; // [rsp+98h] [rbp-30h] BYREF
 
-  v21 = -2i64;
-  v3 = score;
-  v4 = hisname;
-  v5 = this;
-  v6 = this->mRenderable;
-  if ( v6 )
+  v18 = -2i64;
+  mRenderable = this->mRenderable;
+  if ( mRenderable )
   {
-    v7 = v6->m_movie.pObject;
-    if ( v7 )
+    pObject = mRenderable->m_movie.pObject;
+    if ( pObject )
     {
       v8 = UFG::GameStatTracker::Instance();
-      if ( !(unsigned __int8)UFG::GameStatTracker::GetStat(v8, OptionsDisableSocial) )
+      if ( !UFG::GameStatTracker::GetStat(v8, OptionsDisableSocial) )
       {
-        if ( !v5->PDA
-          || (!UFG::UIHKScreenHud::mInstance || (v9 = UFG::UIHKScreenHud::mInstance->PDA) == 0i64 ? (v10 = UFG::UIHKScreenHud::PDACache.state) : (v10 = v9->mState),
-              v10 == STATE_IDLE) )
+        if ( !this->PDA
+          || (!UFG::UIHKScreenHud::mInstance || (PDA = UFG::UIHKScreenHud::mInstance->PDA) == 0i64
+            ? (state = UFG::UIHKScreenHud::PDACache.state)
+            : (state = PDA->mState),
+              state == STATE_IDLE) )
         {
-          if ( !v5->mStatSocialAwardActive )
+          if ( !this->mStatSocialAwardActive )
           {
             v11 = UFG::UI::LocalizeText("LEADERBOARD_YOU_BEAT");
-            UFG::qString::qString(&v22);
-            UFG::qString::Format(&v22, "%s: %s", v11, v4);
+            UFG::qString::qString(&v19);
+            UFG::qString::Format(&v19, "%s: %s", v11, hisname);
             `eh vector constructor iterator(
               &ptr,
               0x30ui64,
               2,
               (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-            v12 = v22.mData;
-            if ( (v15 >> 6) & 1 )
+            mData = v19.mData;
+            if ( (ptr.Type & 0x40) != 0 )
             {
-              (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v14 + 16i64))(v14, &ptr, v16);
-              v14 = 0i64;
+              (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&ptr.pObjectInterface->vfptr->gap8[8])(
+                ptr.pObjectInterface,
+                &ptr,
+                ptr.mValue);
+              ptr.pObjectInterface = 0i64;
             }
-            v15 = 6;
-            v16 = v12;
-            if ( (v19 >> 6) & 1 )
+            ptr.Type = VT_String;
+            ptr.mValue.pString = mData;
+            if ( (v16 & 0x40) != 0 )
             {
-              (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v18 + 16i64))(v18, &v17, v20);
-              v18 = 0i64;
+              (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v15 + 16i64))(v15, v14, v17);
+              v15 = 0i64;
             }
-            v19 = 6;
-            v20 = v3;
-            Scaleform::GFx::Movie::Invoke(v7, "StatGame_SetYouBeatHimInfo", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
+            v16 = 6;
+            v17 = score;
+            Scaleform::GFx::Movie::Invoke(pObject, "StatGame_SetYouBeatHimInfo", 0i64, &ptr, 2u);
             `eh vector destructor iterator(
               &ptr,
               0x30ui64,
               2,
               (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
-            UFG::qString::~qString(&v22);
+            UFG::qString::~qString(&v19);
           }
         }
       }
@@ -2439,120 +2328,117 @@ void __fastcall UFG::UIHKScreenHud::SetStatGameBeatHim(UFG::UIHKScreenHud *this,
 
 // File Line: 1234
 // RVA: 0x6086A0
-void __fastcall UFG::UIHKScreenHud::SetStatGameFinalScore(UFG::UIHKScreenHud *this, int popup_id, const char *statDescr, int rank)
+void __fastcall UFG::UIHKScreenHud::SetStatGameFinalScore(
+        UFG::UIHKScreenHud *this,
+        int popup_id,
+        const char *statDescr,
+        unsigned int rank)
 {
-  unsigned int v4; // er15
-  const char *v5; // rbx
-  int v6; // er12
-  UFG::UIHKScreenHud *v7; // rsi
-  UFG::UIScreenRenderable *v8; // rax
-  Scaleform::GFx::Movie *v9; // r14
+  UFG::UIScreenRenderable *mRenderable; // rax
+  Scaleform::GFx::Movie *pObject; // r14
   UFG::GameStatTracker *v10; // rax
-  UFG::UIHK_PDAWidget *v11; // rcx
-  UFG::ePDAStateEnum v12; // eax
+  UFG::UIHK_PDAWidget *PDA; // rcx
+  UFG::ePDAStateEnum state; // eax
   const char *v13; // r13
   const char *v14; // rbx
   const char *v15; // rdi
   const char *v16; // rdx
-  char *v17; // rbx
+  char *mData; // rbx
   char *v18; // rbx
-  char ptr; // [rsp+30h] [rbp-A8h]
-  __int64 v20; // [rsp+40h] [rbp-98h]
-  unsigned int v21; // [rsp+48h] [rbp-90h]
-  double v22; // [rsp+50h] [rbp-88h]
-  const char *v23; // [rsp+58h] [rbp-80h]
-  char v24; // [rsp+60h] [rbp-78h]
-  char v25; // [rsp+68h] [rbp-70h]
-  __int64 v26; // [rsp+70h] [rbp-68h]
-  __int64 v27; // [rsp+78h] [rbp-60h]
-  unsigned int v28; // [rsp+80h] [rbp-58h]
-  char *v29; // [rsp+88h] [rbp-50h]
-  char v30; // [rsp+98h] [rbp-40h]
-  __int64 v31; // [rsp+A8h] [rbp-30h]
-  unsigned int v32; // [rsp+B0h] [rbp-28h]
-  char *v33; // [rsp+B8h] [rbp-20h]
-  UFG::qString v34; // [rsp+C8h] [rbp-10h]
-  __int64 v35; // [rsp+F0h] [rbp+18h]
-  UFG::qString v36; // [rsp+F8h] [rbp+20h]
-  void *retaddr; // [rsp+178h] [rbp+A0h]
+  Scaleform::GFx::Value ptr; // [rsp+30h] [rbp-A8h] BYREF
+  char v20[8]; // [rsp+60h] [rbp-78h] BYREF
+  char v21[8]; // [rsp+68h] [rbp-70h] BYREF
+  __int64 v22; // [rsp+70h] [rbp-68h]
+  __int64 v23; // [rsp+78h] [rbp-60h]
+  int v24; // [rsp+80h] [rbp-58h]
+  char *v25; // [rsp+88h] [rbp-50h]
+  char v26[16]; // [rsp+98h] [rbp-40h] BYREF
+  __int64 v27; // [rsp+A8h] [rbp-30h]
+  int v28; // [rsp+B0h] [rbp-28h]
+  char *v29; // [rsp+B8h] [rbp-20h]
+  UFG::qString v30; // [rsp+C8h] [rbp-10h] BYREF
+  __int64 v31; // [rsp+F0h] [rbp+18h]
+  UFG::qString v32; // [rsp+F8h] [rbp+20h] BYREF
+  const char *retaddr; // [rsp+178h] [rbp+A0h]
 
-  v35 = -2i64;
-  v4 = rank;
-  v5 = statDescr;
-  v6 = popup_id;
-  v7 = this;
-  v8 = this->mRenderable;
-  if ( v8 )
+  v31 = -2i64;
+  mRenderable = this->mRenderable;
+  if ( mRenderable )
   {
-    v9 = v8->m_movie.pObject;
-    if ( v9 )
+    pObject = mRenderable->m_movie.pObject;
+    if ( pObject )
     {
       v10 = UFG::GameStatTracker::Instance();
-      if ( !(unsigned __int8)UFG::GameStatTracker::GetStat(v10, OptionsDisableSocial) )
+      if ( !UFG::GameStatTracker::GetStat(v10, OptionsDisableSocial) )
       {
-        if ( !v7->PDA
-          || (!UFG::UIHKScreenHud::mInstance || (v11 = UFG::UIHKScreenHud::mInstance->PDA) == 0i64 ? (v12 = UFG::UIHKScreenHud::PDACache.state) : (v12 = v11->mState),
-              v12 == STATE_IDLE) )
+        if ( !this->PDA
+          || (!UFG::UIHKScreenHud::mInstance || (PDA = UFG::UIHKScreenHud::mInstance->PDA) == 0i64
+            ? (state = UFG::UIHKScreenHud::PDACache.state)
+            : (state = PDA->mState),
+              state == STATE_IDLE) )
         {
-          if ( !v7->mStatSocialAwardActive )
+          if ( !this->mStatSocialAwardActive )
           {
             `eh vector constructor iterator(
               &ptr,
               0x30ui64,
               4,
               (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-            v13 = UFG::UI::LocalizeText(v5);
+            v13 = UFG::UI::LocalizeText(statDescr);
             v14 = UFG::UI::LocalizeText("$LEADERBOARD_YOUR_SCORE");
             v15 = UFG::UI::LocalizeText("$LEADERBOARD_YOUR_RANK");
-            UFG::qString::qString(&v36);
-            UFG::qString::qString(&v34);
-            UFG::qString::Format(&v36, "%s: %s", v14, retaddr, Scaleform::GFx::Value::~Value);
-            UFG::qString::Format(&v34, v15, v4);
+            UFG::qString::qString(&v32);
+            UFG::qString::qString(&v30);
+            UFG::qString::Format(&v32, "%s: %s", v14, retaddr);
+            UFG::qString::Format(&v30, v15, rank);
             if ( !UFG::OSuiteManager::Instance()->m_bConnected )
             {
-              if ( v4 == 1 )
-                v16 = UFG::UI::LocalizeText(asc_1417E0F68);
+              if ( rank == 1 )
+                v16 = UFG::UI::LocalizeText("$MINIGAME_KARAOKE_HIGH_SCORE");
               else
-                v16 = &customWorldMapCaption;
-              UFG::qString::Set(&v34, v16);
+                v16 = &customCaption;
+              UFG::qString::Set(&v30, v16);
             }
-            if ( (v21 >> 6) & 1 )
+            if ( (ptr.Type & 0x40) != 0 )
             {
-              (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v20 + 16i64))(
-                v20,
+              (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&ptr.pObjectInterface->vfptr->gap8[8])(
+                ptr.pObjectInterface,
                 &ptr,
-                COERCE_DOUBLE(*(_QWORD *)&v22));
-              v20 = 0i64;
+                ptr.mValue);
+              ptr.pObjectInterface = 0i64;
             }
-            v21 = 5;
-            v22 = (double)v6;
-            if ( ((unsigned int)v27 >> 6) & 1 )
+            ptr.Type = VT_Number;
+            ptr.mValue.NValue = (double)popup_id;
+            if ( (v23 & 0x40) != 0 )
             {
-              (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v26 + 16i64))(v26, &v24, v23);
-              v26 = 0i64;
+              (*(void (__fastcall **)(__int64, char *, unsigned __int64))(*(_QWORD *)v22 + 16i64))(
+                v22,
+                v20,
+                ptr.DataAux);
+              v22 = 0i64;
             }
-            LODWORD(v27) = 6;
-            v23 = v13;
-            v17 = v34.mData;
-            if ( (v28 >> 6) & 1 )
+            LODWORD(v23) = 6;
+            ptr.DataAux = (unsigned __int64)v13;
+            mData = v30.mData;
+            if ( (v24 & 0x40) != 0 )
             {
-              (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v27 + 16i64))(v27, &v25, v29);
+              (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v23 + 16i64))(v23, v21, v25);
+              v23 = 0i64;
+            }
+            v24 = 6;
+            v25 = mData;
+            v18 = v32.mData;
+            if ( (v28 & 0x40) != 0 )
+            {
+              (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v27 + 16i64))(v27, v26, v29);
               v27 = 0i64;
             }
             v28 = 6;
-            v29 = v17;
-            v18 = v36.mData;
-            if ( (v32 >> 6) & 1 )
-            {
-              (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v31 + 16i64))(v31, &v30, v33);
-              v31 = 0i64;
-            }
-            v32 = 6;
-            v33 = v18;
-            Scaleform::GFx::Movie::Invoke(v9, "StatGame_SetFinalScore", 0i64, (Scaleform::GFx::Value *)&ptr, 4u);
-            v7->mStatInfoTimer = 5.0;
-            UFG::qString::~qString(&v34);
-            UFG::qString::~qString(&v36);
+            v29 = v18;
+            Scaleform::GFx::Movie::Invoke(pObject, "StatGame_SetFinalScore", 0i64, &ptr, 4u);
+            this->mStatInfoTimer = 5.0;
+            UFG::qString::~qString(&v30);
+            UFG::qString::~qString(&v32);
             `eh vector destructor iterator(
               &ptr,
               0x30ui64,
@@ -2576,66 +2462,68 @@ bool __fastcall UFG::UIHKScreenHud::IsStatGameShowingFinalScore(UFG::UIHKScreenH
 // RVA: 0x5ED170
 void __fastcall UFG::UIHKScreenHud::HideStatGameInfo(UFG::UIHKScreenHud *this)
 {
-  UFG::UIScreenRenderable *v1; // rax
-  UFG::UIHKScreenHud *v2; // rbx
-  Scaleform::GFx::Movie *v3; // rcx
+  UFG::UIScreenRenderable *mRenderable; // rax
+  Scaleform::GFx::Movie *pObject; // rcx
 
-  v1 = this->mRenderable;
-  v2 = this;
-  if ( v1 )
+  mRenderable = this->mRenderable;
+  if ( mRenderable )
   {
-    v3 = v1->m_movie.pObject;
-    if ( v3 )
+    pObject = mRenderable->m_movie.pObject;
+    if ( pObject )
     {
-      v2->mStatSocialAwardActive = 0;
-      Scaleform::GFx::Movie::Invoke(v3, "StatGame_Hide", 0i64, 0i64, 0);
-      v2->mStatGameInfoActive = 0;
+      this->mStatSocialAwardActive = 0;
+      Scaleform::GFx::Movie::Invoke(pObject, "StatGame_Hide", 0i64, 0i64, 0);
+      this->mStatGameInfoActive = 0;
     }
   }
 }
 
 // File Line: 1306
 // RVA: 0x5F08B0
-void __fastcall UFG::UIHKScreenHud::LeadUnlocked(UFG::UIHKScreenHud *this, __int64 assetID)
+void __fastcall UFG::UIHKScreenHud::LeadUnlocked(UFG::UIHKScreenHud *this, _DWORD *assetID)
 {
-  _DWORD *v2; // rsi
   UFG::qSymbol *v3; // rax
-  UFG::qPropertySet *v4; // rax
+  UFG::qPropertySet *PropertySet; // rax
   UFG::qPropertyList *v5; // rbp
-  unsigned int v6; // edi
+  unsigned int mNumElements; // edi
   unsigned int v7; // ebx
-  char *v8; // rax
+  char *ValuePtr; // rax
   UFG::qPropertySet *v9; // rcx
   char *v10; // rax
-  UFG::qString v11; // [rsp+28h] [rbp-30h]
-  UFG::qSymbol result; // [rsp+60h] [rbp+8h]
+  UFG::qString v11; // [rsp+28h] [rbp-30h] BYREF
+  UFG::qSymbol result; // [rsp+60h] [rbp+8h] BYREF
 
-  v2 = (_DWORD *)assetID;
   if ( this->mRenderable->m_movie.pObject )
   {
     v3 = UFG::qSymbol::create_from_string(&result, "default-unlockables-caseLeads-list");
-    v4 = UFG::PropertySetManager::GetPropertySet(v3);
-    v5 = UFG::qPropertySet::Get<UFG::qPropertyList>(v4, (UFG::qSymbol *)&qSymbol_List_20.mUID, DEPTH_RECURSE);
+    PropertySet = UFG::PropertySetManager::GetPropertySet(v3);
+    v5 = UFG::qPropertySet::Get<UFG::qPropertyList>(
+           PropertySet,
+           (UFG::qArray<unsigned long,0> *)&qSymbol_List_20,
+           DEPTH_RECURSE);
     UFG::qString::qString(&v11);
     if ( v5 )
     {
-      v6 = v5->mNumElements;
+      mNumElements = v5->mNumElements;
       v7 = 0;
-      if ( v6 )
+      if ( mNumElements )
       {
         while ( 1 )
         {
-          v8 = UFG::qPropertyList::GetValuePtr(v5, 0x1Au, v7);
-          if ( v8 && *(_QWORD *)v8 )
-            v9 = (UFG::qPropertySet *)&v8[*(_QWORD *)v8];
+          ValuePtr = UFG::qPropertyList::GetValuePtr(v5, 0x1Au, v7);
+          if ( ValuePtr && *(_QWORD *)ValuePtr )
+            v9 = (UFG::qPropertySet *)&ValuePtr[*(_QWORD *)ValuePtr];
           else
             v9 = 0i64;
-          if ( v9->mName.mUID == *v2 )
+          if ( v9->mName.mUID == *assetID )
             break;
-          if ( ++v7 >= v6 )
+          if ( ++v7 >= mNumElements )
             goto LABEL_12;
         }
-        v10 = PropertyUtils::Get<char const *>(v9, (UFG::qSymbol *)&qSymbol_Description_20.mUID, DEPTH_RECURSE);
+        v10 = PropertyUtils::Get<char const *>(
+                v9,
+                (UFG::qArray<unsigned long,0> *)&qSymbol_Description_20,
+                DEPTH_RECURSE);
         UFG::qString::Set(&v11, v10);
       }
     }
@@ -2648,24 +2536,24 @@ LABEL_12:
 // RVA: 0x60A030
 void __fastcall UFG::UIHKScreenHud::SetTexturePackForFlow(const char *flowPostfix)
 {
-  const char *v1; // rbx
   int v2; // eax
   const char *v3; // rdx
   UFG::UIScreenTextureManager *v4; // rax
-  UFG::qBaseTreeRB *v5; // rax
-  UFG::qString v6; // [rsp+28h] [rbp-30h]
+  UFG::qBaseTreeRB *ScreenInfo; // rax
+  UFG::qString v6; // [rsp+28h] [rbp-30h] BYREF
 
-  v1 = flowPostfix;
   UFG::qString::qString(&v6);
-  v2 = UFG::qStringCompare(v1, "G", -1);
+  v2 = UFG::qStringCompare(flowPostfix, "G", -1);
   v3 = "Data\\UI\\hud_texturepack_ghost.perm.bin";
   if ( v2 )
     v3 = "Data\\UI\\hud_texturepack.perm.bin";
   UFG::qString::Set(&v6, v3);
   UFG::UIHKScreenHud::gTexturePackFilename = v6.mData;
   v4 = UFG::UIScreenTextureManager::Instance();
-  v5 = UFG::UIScreenTextureManager::GetScreenInfo(v4, "Hud");
-  UFG::UIScreenTextureManager::ScreenInfo::SetTexturePack((UFG::UIScreenTextureManager::ScreenInfo *)v5, v6.mData);
+  ScreenInfo = UFG::UIScreenTextureManager::GetScreenInfo(v4, "Hud");
+  UFG::UIScreenTextureManager::ScreenInfo::SetTexturePack(
+    (UFG::UIScreenTextureManager::ScreenInfo *)ScreenInfo,
+    v6.mData);
   UFG::qString::~qString(&v6);
 }
 

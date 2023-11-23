@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkxAnimatedQuaternionClass__()
     0i64,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 55
@@ -28,17 +28,17 @@ hkClass *__fastcall hkxAnimatedQuaternion::staticClass()
 
 // File Line: 62
 // RVA: 0xE31750
-void __fastcall finishLoadedObjecthkxAnimatedQuaternion(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxAnimatedQuaternion(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxAnimatedQuaternion::`vftable;
+    *p = &hkxAnimatedQuaternion::`vftable;
 }
 
 // File Line: 68
 // RVA: 0xE31770
-void __fastcall cleanupLoadedObjecthkxAnimatedQuaternion(void *p)
+void __fastcall cleanupLoadedObjecthkxAnimatedQuaternion(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 72
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkxAnimatedQuaternionTypeInfo__()
   hkxAnimatedQuaternionTypeInfo.m_typeName = "hkxAnimatedQuaternion";
   hkxAnimatedQuaternionTypeInfo.m_vtable = result;
   hkxAnimatedQuaternionTypeInfo.m_scopedName = "!hkxAnimatedQuaternion";
-  hkxAnimatedQuaternionTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxAnimatedQuaternion;
-  hkxAnimatedQuaternionTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxAnimatedQuaternion;
+  hkxAnimatedQuaternionTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxAnimatedQuaternion;
+  hkxAnimatedQuaternionTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxAnimatedQuaternion;
   return result;
 }
 

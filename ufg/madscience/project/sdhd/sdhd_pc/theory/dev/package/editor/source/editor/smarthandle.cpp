@@ -2,7 +2,7 @@
 // RVA: 0x20DC40
 UFG::Editor::SmartWarehouse *__fastcall UFG::Editor::SmartWarehouse::Instance()
 {
-  if ( !(_S26 & 1) )
+  if ( (_S26 & 1) == 0 )
   {
     _S26 |= 1u;
     UFG::qBaseTreeRB::qBaseTreeRB(&sSmartWarehouse.mInventories.mTree);

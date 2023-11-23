@@ -2,90 +2,80 @@
 // RVA: 0xEEBE80
 void __fastcall OSuite::ZCallbackManager::ZCallbackManager(OSuite::ZCallbackManager *this)
 {
-  OSuite::ZCallbackManager *v1; // rdi
-
-  v1 = this;
   this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZCallbackManager::`vftable;
   OSuite::ZDoublyLinkedListBase::ZDoublyLinkedListBase((OSuite::ZRedBlackTreeBase *)&this->m_callbacksList);
-  v1->m_callbacksList.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable;
-  OSuite::ZMutex::ZMutex(&v1->m_Mutex);
+  this->m_callbacksList.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable;
+  OSuite::ZMutex::ZMutex(&this->m_Mutex);
 }
 
 // File Line: 12
 // RVA: 0xEEBEC4
 void __fastcall OSuite::ZCallbackManager::~ZCallbackManager(OSuite::ZCallbackManager *this)
 {
-  OSuite::ZDoublyLinkedListBase *v1; // rbx
-  OSuite::ZCallbackManager *v2; // rdi
-  OSuite::ZObjectVtbl *v3; // rcx
-  OSuite::ZDoublyLinkedListBase::ZIteratorBase v4; // [rsp+20h] [rbp-28h]
+  OSuite::TDoublyLinkedList<OSuite::ManagedCallback *> *p_m_callbacksList; // rbx
+  OSuite::ZObjectVtbl *vfptr; // rcx
+  OSuite::ZDoublyLinkedListBase::ZIteratorBase v4; // [rsp+20h] [rbp-28h] BYREF
 
   v4.m_pList = 0i64;
   v4.m_pElement = 0i64;
-  v1 = (OSuite::ZDoublyLinkedListBase *)&this->m_callbacksList.vfptr;
-  v2 = this;
+  p_m_callbacksList = &this->m_callbacksList;
   this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZCallbackManager::`vftable;
   OSuite::ZDoublyLinkedListBase::ZIteratorBase::ZIteratorBase(
     &v4,
-    (OSuite::ZDoublyLinkedListBase *)&this->m_callbacksList.vfptr,
+    &this->m_callbacksList,
     this->m_callbacksList.m_pHead);
   v4.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
-  while ( !(unsigned __int8)OSuite::ZString::IsNull((OSuite::ZString *)&v4) )
+  while ( !OSuite::ZString::IsNull((OSuite::ZString *)&v4) )
   {
-    v3 = v4.m_pElement[1].vfptr;
-    if ( v3 )
-      (*(void (__fastcall **)(OSuite::ZObjectVtbl *, signed __int64))v3->__vecDelDtor)(v3, 1i64);
+    vfptr = v4.m_pElement[1].vfptr;
+    if ( vfptr )
+      (*(void (__fastcall **)(OSuite::ZObjectVtbl *, __int64))vfptr->__vecDelDtor)(vfptr, 1i64);
     OSuite::ZDoublyLinkedListBase::ZIteratorBase::Remove(&v4);
   }
-  OSuite::ZMutex::~ZMutex(&v2->m_Mutex);
-  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable;
-  OSuite::ZDoublyLinkedListBase::Clear(v1);
+  OSuite::ZMutex::~ZMutex(&this->m_Mutex);
+  p_m_callbacksList->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TDoublyLinkedList<OSuite::ZSocketManager::InternalSocket>::`vftable;
+  OSuite::ZDoublyLinkedListBase::Clear(p_m_callbacksList);
 }
 
 // File Line: 22
 // RVA: 0xEEBFAC
-void __fastcall OSuite::ZCallbackManager::AddCallback(OSuite::ZCallbackManager *this, OSuite::ManagedCallback *callback)
+void __fastcall OSuite::ZCallbackManager::AddCallback(
+        OSuite::ZCallbackManager *this,
+        OSuite::ManagedCallback *callback)
 {
-  OSuite::ZCallbackManager *v2; // rdi
-  OSuite::ManagedCallback *data; // [rsp+38h] [rbp+10h]
+  OSuite::ManagedCallback *data; // [rsp+38h] [rbp+10h] BYREF
 
   data = callback;
-  v2 = this;
   OSuite::ZMutex::Lock(&this->m_Mutex);
-  OSuite::TDoublyLinkedList<OSuite::ZMetricAppender *>::Append(&v2->m_callbacksList, &data);
-  OSuite::ZMutex::Unlock(&v2->m_Mutex);
+  OSuite::TDoublyLinkedList<OSuite::ZMetricAppender *>::Append(&this->m_callbacksList, &data);
+  OSuite::ZMutex::Unlock(&this->m_Mutex);
 }
 
 // File Line: 31
 // RVA: 0xEEBFE8
 void __fastcall OSuite::ZCallbackManager::Update(OSuite::ZCallbackManager *this)
 {
-  OSuite::ZCallbackManager *v1; // rbx
-  OSuite::ZDoublyLinkedListBase::ZElementBase *v2; // r8
-  OSuite::ZObjectVtbl *v3; // rcx
-  OSuite::ZDoublyLinkedListBase::ZIteratorBase v4; // [rsp+20h] [rbp-28h]
+  OSuite::ZDoublyLinkedListBase::ZElementBase *m_pHead; // r8
+  OSuite::ZObjectVtbl *vfptr; // rcx
+  OSuite::ZDoublyLinkedListBase::ZIteratorBase v4; // [rsp+20h] [rbp-28h] BYREF
 
-  v1 = this;
   if ( OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&this->m_callbacksList) )
   {
-    OSuite::ZMutex::Lock(&v1->m_Mutex);
-    v2 = v1->m_callbacksList.m_pHead;
+    OSuite::ZMutex::Lock(&this->m_Mutex);
+    m_pHead = this->m_callbacksList.m_pHead;
     v4.m_pList = 0i64;
     v4.m_pElement = 0i64;
-    OSuite::ZDoublyLinkedListBase::ZIteratorBase::ZIteratorBase(
-      &v4,
-      (OSuite::ZDoublyLinkedListBase *)&v1->m_callbacksList.vfptr,
-      v2);
+    OSuite::ZDoublyLinkedListBase::ZIteratorBase::ZIteratorBase(&v4, &this->m_callbacksList, m_pHead);
     v4.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
-    while ( !(unsigned __int8)OSuite::ZString::IsNull((OSuite::ZString *)&v4) )
+    while ( !OSuite::ZString::IsNull((OSuite::ZString *)&v4) )
     {
-      (*((void (__cdecl **)(OSuite::ZObjectVtbl *))v4.m_pElement[1].vfptr->__vecDelDtor + 3))(v4.m_pElement[1].vfptr);
-      v3 = v4.m_pElement[1].vfptr;
-      if ( v3 )
-        (*(void (__fastcall **)(OSuite::ZObjectVtbl *, signed __int64))v3->__vecDelDtor)(v3, 1i64);
+      (*((void (__fastcall **)(OSuite::ZObjectVtbl *))v4.m_pElement[1].vfptr->__vecDelDtor + 3))(v4.m_pElement[1].vfptr);
+      vfptr = v4.m_pElement[1].vfptr;
+      if ( vfptr )
+        (*(void (__fastcall **)(OSuite::ZObjectVtbl *, __int64))vfptr->__vecDelDtor)(vfptr, 1i64);
       OSuite::ZDoublyLinkedListBase::ZIteratorBase::Remove(&v4);
     }
-    OSuite::ZMutex::Unlock(&v1->m_Mutex);
+    OSuite::ZMutex::Unlock(&this->m_Mutex);
   }
 }
 

@@ -9,15 +9,10 @@ void __fastcall hkpEntityListener::~hkpEntityListener(hkpEntityListener *this)
 // RVA: 0xB7EA0
 void __fastcall hkpEntityListener::entityShapeSetCallback(hkpEntityListener *this, hkpEntity *entity)
 {
-  hkpEntity *v2; // rbx
-  hkpEntityListener *v3; // rdi
-
-  v2 = entity;
-  v3 = this;
   if ( entity->m_world )
   {
-    ((void (*)(void))this->vfptr->entityRemovedCallback)();
-    v3->vfptr->entityAddedCallback(v3, v2);
+    ((void (__fastcall *)(hkpEntityListener *))this->vfptr->entityRemovedCallback)(this);
+    this->vfptr->entityAddedCallback(this, entity);
   }
 }
 

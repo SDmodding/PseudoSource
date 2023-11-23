@@ -2,20 +2,18 @@
 // RVA: 0x12ADB4C
 int (__fastcall *__fastcall onexit(int (__fastcall *func)()))()
 {
-  int (__fastcall *v1)(); // r12
   PVOID *v2; // r14
   PVOID *v3; // rax
   PVOID *v4; // rbx
-  signed __int64 v5; // rdi
+  __int64 v5; // rdi
   unsigned __int64 v6; // r15
   unsigned __int64 v7; // rax
   unsigned __int64 v8; // rsi
-  signed __int64 v9; // rdx
+  __int64 v9; // rdx
   unsigned __int64 v10; // rdx
   char *v11; // rax
   int (__fastcall *v12)(); // rbx
 
-  v1 = func;
   lockexit();
   v2 = (PVOID *)DecodePointer(_onexitbegin);
   v3 = (PVOID *)DecodePointer(_onexitend);
@@ -50,9 +48,9 @@ LABEL_12:
       v4 = (PVOID *)&v11[8 * (v5 >> 3)];
       _onexitbegin = EncodePointer(v11);
 LABEL_13:
-      *v4 = EncodePointer(v1);
+      *v4 = EncodePointer(func);
       _onexitend = EncodePointer(v4 + 1);
-      v12 = v1;
+      v12 = func;
       goto $LN8_202;
     }
   }
@@ -73,14 +71,14 @@ _onexit$fin$0
 
 // File Line: 161
 // RVA: 0x12ADC58
-__int64 __fastcall atexit(void (__fastcall *func)())
+__int64 __fastcall atexit(int (__fastcall *func)())
 {
-  return (unsigned int)(onexit((int (__fastcall *)())func) != 0i64) - 1;
+  return (unsigned int)(onexit(func) != 0i64) - 1;
 }
 
 // File Line: 201
 // RVA: 0x12ADB08
-signed __int64 __fastcall _onexitinit()
+__int64 __fastcall _onexitinit()
 {
   _QWORD *v0; // rbx
 

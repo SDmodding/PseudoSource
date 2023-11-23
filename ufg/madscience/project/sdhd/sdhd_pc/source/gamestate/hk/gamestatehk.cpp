@@ -156,24 +156,14 @@ void __fastcall UFG::CreateAndRegisterGameStates(UFG *this)
     v20 = 0i64;
   }
   UFG::g_LOAD_NIS_GameStateObj = (UFG::GameStateLoadNIS *)v20;
-  UFG::FlowController::RegisterGameState(&UFG::gFlowController, (UFG::GameState *)&UFG::g_FE_GameStateObj->vfptr);
-  UFG::FlowController::RegisterGameState(&UFG::gFlowController, (UFG::GameState *)&UFG::g_LOAD_GAME_GameStateObj->vfptr);
-  UFG::FlowController::RegisterGameState(&UFG::gFlowController, (UFG::GameState *)&UFG::g_IN_GAME_GameStateObj->vfptr);
-  UFG::FlowController::RegisterGameState(
-    &UFG::gFlowController,
-    (UFG::GameState *)&UFG::g_CHANGE_LOCATION_GameStateObj->vfptr);
-  UFG::FlowController::RegisterGameState(
-    &UFG::gFlowController,
-    (UFG::GameState *)&UFG::g_RESTORE_CHECKPOINT_GameStateObj->vfptr);
-  UFG::FlowController::RegisterGameState(
-    &UFG::gFlowController,
-    (UFG::GameState *)&UFG::g_UNLOAD_GAME_GameStateObj->vfptr);
-  UFG::FlowController::RegisterGameState(
-    &UFG::gFlowController,
-    (UFG::GameState *)&UFG::g_LOAD_CHALLENGE_GameStateObj->vfptr);
-  UFG::FlowController::RegisterGameState(
-    &UFG::gFlowController,
-    (UFG::GameState *)&UFG::g_UNLOAD_CHALLENGE_GameStateObj->vfptr);
-  UFG::FlowController::RegisterGameState(&UFG::gFlowController, (UFG::GameState *)&UFG::g_LOAD_NIS_GameStateObj->vfptr);
+  UFG::FlowController::RegisterGameState(&UFG::gFlowController, UFG::g_FE_GameStateObj);
+  UFG::FlowController::RegisterGameState(&UFG::gFlowController, UFG::g_LOAD_GAME_GameStateObj);
+  UFG::FlowController::RegisterGameState(&UFG::gFlowController, UFG::g_IN_GAME_GameStateObj);
+  UFG::FlowController::RegisterGameState(&UFG::gFlowController, UFG::g_CHANGE_LOCATION_GameStateObj);
+  UFG::FlowController::RegisterGameState(&UFG::gFlowController, UFG::g_RESTORE_CHECKPOINT_GameStateObj);
+  UFG::FlowController::RegisterGameState(&UFG::gFlowController, UFG::g_UNLOAD_GAME_GameStateObj);
+  UFG::FlowController::RegisterGameState(&UFG::gFlowController, UFG::g_LOAD_CHALLENGE_GameStateObj);
+  UFG::FlowController::RegisterGameState(&UFG::gFlowController, UFG::g_UNLOAD_CHALLENGE_GameStateObj);
+  UFG::FlowController::RegisterGameState(&UFG::gFlowController, UFG::g_LOAD_NIS_GameStateObj);
 }
 

@@ -2,30 +2,28 @@
 // RVA: 0xBB75E0
 void __fastcall hkaiObstacleGenerator::~hkaiObstacleGenerator(hkaiObstacleGenerator *this)
 {
-  hkaiObstacleGenerator *v1; // rbx
-  int v2; // er8
-  int v3; // er8
+  int m_capacityAndFlags; // r8d
+  int v3; // r8d
 
-  v1 = this;
   this->vfptr = (hkBaseObjectVtbl *)&hkaiObstacleGenerator::`vftable;
-  v2 = this->m_boundaries.m_capacityAndFlags;
+  m_capacityAndFlags = this->m_boundaries.m_capacityAndFlags;
   this->m_boundaries.m_size = 0;
-  if ( v2 >= 0 )
+  if ( m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       this->m_boundaries.m_data,
-      32 * v2);
-  v1->m_boundaries.m_data = 0i64;
-  v1->m_boundaries.m_capacityAndFlags = 2147483648;
-  v3 = v1->m_spheres.m_capacityAndFlags;
-  v1->m_spheres.m_size = 0;
+      32 * m_capacityAndFlags);
+  this->m_boundaries.m_data = 0i64;
+  this->m_boundaries.m_capacityAndFlags = 0x80000000;
+  v3 = this->m_spheres.m_capacityAndFlags;
+  this->m_spheres.m_size = 0;
   if ( v3 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_spheres.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_spheres.m_data,
       32 * v3);
-  v1->m_spheres.m_data = 0i64;
-  v1->m_spheres.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+  this->m_spheres.m_data = 0i64;
+  this->m_spheres.m_capacityAndFlags = 0x80000000;
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 

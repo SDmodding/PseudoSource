@@ -8,15 +8,19 @@ hkBool *__fastcall hkStreamWriter::seekTellSupported(hkStreamWriter *this, hkBoo
 
 // File Line: 17
 // RVA: 0xC802E0
-hkResult *__fastcall hkStreamWriter::seek(hkStreamWriter *this, hkResult *result, int offset, hkStreamWriter::SeekWhence whence)
+hkResult *__fastcall hkStreamWriter::seek(
+        hkStreamWriter *this,
+        hkResult *result,
+        int offset,
+        hkStreamWriter::SeekWhence whence)
 {
-  result->m_enum = 1;
+  result->m_enum = HK_FAILURE;
   return result;
 }
 
 // File Line: 23
 // RVA: 0xC802F0
-signed __int64 __fastcall hkStreamWriter::tell(hkStreamWriter *this)
+__int64 __fastcall hkStreamWriter::tell(hkStreamWriter *this)
 {
   return 0xFFFFFFFFi64;
 }

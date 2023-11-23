@@ -30,16 +30,16 @@ __int64 __fastcall Scaleform::Render::Hairliner::GetMeshVertexCount(UFG::GroupCo
 // RVA: 0x954D50
 void __fastcall Scaleform::Render::Hairliner::AddVertex(Scaleform::Render::Hairliner *this, float x, float y)
 {
-  Scaleform::Render::ArrayPaged<Scaleform::Render::Hairliner::SrcVertexType,4,16> *v3; // rbx
+  Scaleform::Render::ArrayPaged<Scaleform::Render::Hairliner::SrcVertexType,4,16> *p_SrcVertices; // rbx
   unsigned __int64 v4; // rdi
 
-  v3 = &this->SrcVertices;
+  p_SrcVertices = &this->SrcVertices;
   v4 = this->SrcVertices.Size >> 4;
   if ( v4 >= this->SrcVertices.NumPages )
     Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16>::allocPage(
       (Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16> *)&this->SrcVertices,
       v4);
-  v3->Pages[v4][v3->Size & 0xF] = (Scaleform::Render::Hairliner::SrcVertexType)__PAIR__(LODWORD(y), LODWORD(x));
-  ++v3->Size;
+  p_SrcVertices->Pages[v4][p_SrcVertices->Size & 0xF] = (Scaleform::Render::Hairliner::SrcVertexType)__PAIR64__(LODWORD(y), LODWORD(x));
+  ++p_SrcVertices->Size;
 }
 

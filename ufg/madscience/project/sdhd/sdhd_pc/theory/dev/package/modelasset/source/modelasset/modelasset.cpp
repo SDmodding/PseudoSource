@@ -1,6 +1,7 @@
 // File Line: 19
 // RVA: 0x21F280
-const char *__fastcall UFG::qReflectObjectType<UFG::ModelAsset,UFG::qReflectObject>::GetTypeName(UFG::qReflectObjectType<UFG::ModelAsset,UFG::qReflectObject> *this)
+const char *__fastcall UFG::qReflectObjectType<UFG::ModelAsset,UFG::qReflectObject>::GetTypeName(
+        UFG::qReflectObjectType<UFG::ModelAsset,UFG::qReflectObject> *this)
 {
   return "UFG::ModelAsset";
 }
@@ -25,6 +26,6 @@ __int64 dynamic_initializer_for__ModelNotification__()
     (void (__fastcall *)(char *, UFG::qReflectField *, UFG::qReflectType *, char *, void *))_,
     (void (__fastcall *)(char *, void *))_,
     0i64);
-  return atexit(dynamic_atexit_destructor_for__ModelNotification__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__ModelNotification__);
 }
 

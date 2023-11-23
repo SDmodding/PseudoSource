@@ -15,6 +15,7 @@ void __fastcall operator delete[](void *mem)
 
 // File Line: 573
 // RVA: 0x25AE0
+// attributes: thunk
 void __fastcall UFG::qFixedAllocator::~qFixedAllocator(UFG::qFixedAllocator *this)
 {
   UFG::qFixedAllocator::Close(this);

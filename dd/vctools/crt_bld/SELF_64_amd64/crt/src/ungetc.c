@@ -1,24 +1,20 @@
 // File Line: 44
 // RVA: 0x12BD4D8
-signed __int64 __fastcall ungetc(int ch, _iobuf *stream)
+__int64 __fastcall ungetc(int ch, _iobuf *stream)
 {
-  _iobuf *v2; // rbx
-  int v3; // edi
   unsigned int v5; // edi
 
-  v2 = stream;
-  v3 = ch;
   if ( !stream )
   {
     *errno() = 22;
     invalid_parameter_noinfo();
     return 0xFFFFFFFFi64;
   }
-  if ( (signed int)ioinit() < 0 )
+  if ( (int)ioinit() < 0 )
     return 0xFFFFFFFFi64;
-  lock_file(v2);
-  v5 = ungetc_nolock(v3, v2);
-  unlock_file(v2);
+  lock_file(stream);
+  v5 = ungetc_nolock(ch, stream);
+  unlock_file(stream);
   return v5;
 }
 

@@ -28,9 +28,10 @@ hkClass *__fastcall hkpShapeKeyTable::Block::staticClass()
 
 // File Line: 63
 // RVA: 0xD992A0
-void __fastcall cleanupLoadedObjecthkpShapeKeyTableBlock(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkpShapeKeyTableBlock(hkpShapeKeyTable::Block *p)
 {
-  hkpShapeKeyTable::Block::~Block((hkpShapeKeyTable::Block *)p);
+  hkpShapeKeyTable::Block::~Block(p);
 }
 
 // File Line: 100
@@ -63,15 +64,17 @@ hkClass *__fastcall hkpShapeKeyTable::staticClass()
 
 // File Line: 110
 // RVA: 0xD992B0
-void __fastcall finishLoadedObjecthkpShapeKeyTable(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpShapeKeyTable(hkpShapeKeyTable *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpShapeKeyTable::hkpShapeKeyTable);
+  if ( p )
+    hkpShapeKeyTable::hkpShapeKeyTable(p, finishing);
 }
 
 // File Line: 116
 // RVA: 0xD992D0
-void __fastcall cleanupLoadedObjecthkpShapeKeyTable(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkpShapeKeyTable(hkpShapeKeyTable *p)
 {
-  hkpShapeKeyTable::~hkpShapeKeyTable((hkpShapeKeyTable *)p);
+  hkpShapeKeyTable::~hkpShapeKeyTable(p);
 }
 

@@ -1,144 +1,139 @@
 // File Line: 36
 // RVA: 0xAA6540
-__int64 __fastcall AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase>::CanBeDestroyed(AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase> *this)
+__int64 __fastcall AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase>::CanBeDestroyed(
+        AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase> *this)
 {
-  _RTL_CRITICAL_SECTION *v1; // rbx
+  CAkLock *p_m_lockStatus; // rbx
   AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase> *v2; // rdi
 
-  v1 = &this->m_lockStatus.m_csLock;
+  p_m_lockStatus = &this->m_lockStatus;
   v2 = this;
   EnterCriticalSection(&this->m_lockStatus.m_csLock);
   LOBYTE(v2) = v2->m_listCancelledXfers.m_pFirst == 0i64;
-  LeaveCriticalSection(v1);
+  LeaveCriticalSection(&p_m_lockStatus->m_csLock);
   return (unsigned __int8)v2;
 }
 
 // File Line: 54
 // RVA: 0xAA7CA0
-void __fastcall AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase>::Update(AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase> *this, AK::StreamMgr::CAkStmMemView *in_pTransfer, AKRESULT in_eIOResult, bool in_bRequiredLowLevelXfer)
+void __fastcall AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase>::Update(
+        AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase> *this,
+        AK::StreamMgr::CAkStmMemView *in_pTransfer,
+        AKRESULT in_eIOResult,
+        bool in_bRequiredLowLevelXfer)
 {
-  AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase> *v4; // rsi
-  bool v5; // r15
-  AKRESULT v6; // er12
-  AK::StreamMgr::CAkStmMemView *v7; // rdi
-  int v8; // er10
+  int v8; // r10d
   bool v9; // bp
-  unsigned int v10; // er10
-  bool v11; // r14
+  bool v10; // r14
 
-  v4 = this;
-  v5 = in_bRequiredLowLevelXfer;
-  v6 = in_eIOResult;
-  v7 = in_pTransfer;
   EnterCriticalSection(&this->m_lockStatus.m_csLock);
-  if ( v6 != 1 || (v8 = *((_DWORD *)v7 + 5), (*((_DWORD *)v7 + 5) & 7) == 2) )
+  if ( in_eIOResult != AK_Success || (v8 = *((_DWORD *)in_pTransfer + 5), (v8 & 7) == 2) )
   {
     v9 = 0;
   }
   else
   {
     v9 = 1;
-    if ( v4->m_listPendingXfers.m_pFirst != v7 )
+    if ( this->m_listPendingXfers.m_pFirst != in_pTransfer )
     {
-      if ( v5 )
-        v10 = v8 & 0xFFFFFFF9 | 1;
+      if ( in_bRequiredLowLevelXfer )
+        *((_DWORD *)in_pTransfer + 5) = v8 & 0xFFFFFFF8 | 1;
       else
-        v10 = v8 & 0xFFFFFFFB | 3;
-      *((_DWORD *)v7 + 5) = v10;
-      goto LABEL_16;
+        *((_DWORD *)in_pTransfer + 5) = v8 & 0xFFFFFFF8 | 3;
+      goto LABEL_15;
     }
   }
-  if ( v7 )
+  if ( in_pTransfer )
   {
-    v11 = (*((_DWORD *)v7 + 5) & 7) == 2;
-    AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase>::PopTransferRequest(v4, v7, v9);
-    if ( !v5 && !v11 )
+    v10 = (*((_DWORD *)in_pTransfer + 5) & 7) == 2;
+    AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase>::PopTransferRequest(this, in_pTransfer, v9);
+    if ( !in_bRequiredLowLevelXfer && !v10 )
     {
-      *((_DWORD *)v7 + 5) &= 0xFFFFFFFB;
-      *((_DWORD *)v7 + 5) |= 3u;
+      *((_DWORD *)in_pTransfer + 5) &= ~4u;
+      *((_DWORD *)in_pTransfer + 5) |= 3u;
     }
-    AK::StreamMgr::CAkAutoStmBase::AddMemView((AK::StreamMgr::CAkAutoStmBase *)&v4->vfptr, v7, v9);
-    if ( !v11 )
-      AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase>::UpdateCompletedTransfers(v4);
+    AK::StreamMgr::CAkAutoStmBase::AddMemView(this, in_pTransfer, v9);
+    if ( !v10 )
+      AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase>::UpdateCompletedTransfers(this);
   }
-  AK::StreamMgr::CAkAutoStmBase::UpdateTaskStatus((AK::StreamMgr::CAkAutoStmBase *)&v4->vfptr, v6);
-  AK::StreamMgr::CAkIOThread::DecrementIOCount((AK::StreamMgr::CAkIOThread *)&v4->m_pDevice->vfptr);
-LABEL_16:
-  LeaveCriticalSection(&v4->m_lockStatus.m_csLock);
+  AK::StreamMgr::CAkAutoStmBase::UpdateTaskStatus(this, in_eIOResult);
+  AK::StreamMgr::CAkIOThread::DecrementIOCount(this->m_pDevice);
+LABEL_15:
+  LeaveCriticalSection(&this->m_lockStatus.m_csLock);
 }
 
 // File Line: 126
 // RVA: 0xAA7F80
-void __fastcall AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkStdStmBase>::UpdateCompletedTransfers(AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkStdStmBase> *this)
+void __fastcall AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkStdStmBase>::UpdateCompletedTransfers(
+        AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkStdStmBase> *this)
 {
-  AK::StreamMgr::CAkStmMemView *v1; // rdx
-  AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkStdStmBase> *v2; // rbx
+  AK::StreamMgr::CAkStmMemView *m_pFirst; // rdx
   AK::StreamMgr::CAkStmMemView *v3; // rax
   AK::StreamMgr::CAkStmMemView *v4; // rcx
-  AK::StreamMgr::CAkStmMemView *v5; // r8
+  AK::StreamMgr::CAkStmMemView **p_pNextView; // r8
   AK::StreamMgr::CAkStmMemView *v6; // rax
   bool v7; // zf
-  AK::StreamMgr::CAkStmMemView *v8; // rcx
+  AK::StreamMgr::CAkStmMemView *pNextView; // rcx
 
-  v1 = this->m_listPendingXfers.m_pFirst;
-  v2 = this;
-  if ( v1 && *((_BYTE *)v1 + 20) & 7 )
+  m_pFirst = this->m_listPendingXfers.m_pFirst;
+  if ( m_pFirst && (*((_BYTE *)m_pFirst + 20) & 7) != 0 )
   {
     do
     {
-      if ( (*((_DWORD *)v1 + 5) & 7) == 2 )
+      if ( (*((_DWORD *)m_pFirst + 5) & 7) == 2 )
       {
-        v4 = v2->m_listCancelledXfers.m_pFirst;
-        v5 = 0i64;
+        v4 = this->m_listCancelledXfers.m_pFirst;
+        p_pNextView = 0i64;
         v6 = v4;
         if ( v4 )
         {
-          while ( v6 != v1 )
+          while ( v6 != m_pFirst )
           {
-            v5 = v6;
+            p_pNextView = &v6->pNextView;
             v6 = v6->pNextView;
             if ( !v6 )
               goto LABEL_15;
           }
           v7 = v6 == v4;
-          v8 = v6->pNextView;
+          pNextView = v6->pNextView;
           if ( v7 )
-            v2->m_listCancelledXfers.m_pFirst = v8;
+            this->m_listCancelledXfers.m_pFirst = pNextView;
           else
-            v5->pNextView = v8;
+            *p_pNextView = pNextView;
         }
       }
       else
       {
-        v3 = v2->m_listPendingXfers.m_pFirst;
+        v3 = this->m_listPendingXfers.m_pFirst;
         if ( v3 )
         {
           if ( v3->pNextView )
           {
-            v2->m_listPendingXfers.m_pFirst = v3->pNextView;
+            this->m_listPendingXfers.m_pFirst = v3->pNextView;
           }
           else
           {
-            v2->m_listPendingXfers.m_pFirst = 0i64;
-            v2->m_listPendingXfers.m_pLast = 0i64;
+            this->m_listPendingXfers.m_pFirst = 0i64;
+            this->m_listPendingXfers.m_pLast = 0i64;
           }
         }
       }
 LABEL_15:
-      AK::StreamMgr::CAkStdStmBase::AddMemView((AK::StreamMgr::CAkStdStmBase *)&v2->vfptr, v1, 1);
-      AK::StreamMgr::CAkIOThread::DecrementIOCount((AK::StreamMgr::CAkIOThread *)&v2->m_pDevice->vfptr);
-      v1 = AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkStdStmBase>::GetOldestCompletedTransfer(v2);
+      AK::StreamMgr::CAkStdStmBase::AddMemView(this, m_pFirst, 1);
+      AK::StreamMgr::CAkIOThread::DecrementIOCount(this->m_pDevice);
+      m_pFirst = AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkStdStmBase>::GetOldestCompletedTransfer(this);
     }
-    while ( v1 );
+    while ( m_pFirst );
   }
 }
 
 // File Line: 159
 // RVA: 0xAA7860
-void __fastcall AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase>::PopTransferRequest(AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase> *this, AK::StreamMgr::CAkStmMemView *in_pTransfer, bool in_bStoreData)
+void __fastcall AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase>::PopTransferRequest(
+        AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase> *this,
+        AK::StreamMgr::CAkStmMemView *in_pTransfer,
+        bool in_bStoreData)
 {
-  AK::StreamMgr::CAkStmMemView *v3; // r10
-  AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase> *v4; // r9
   AK::StreamMgr::CAkStmMemView *v5; // rax
   AK::StreamMgr::CAkStmMemView *v6; // rdx
   AK::StreamMgr::CAkStmMemView *v7; // rcx
@@ -146,33 +141,31 @@ void __fastcall AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoS
   AK::StreamMgr::CAkStmMemView *v9; // rax
   AK::StreamMgr::CAkStmMemView *v10; // rax
   AK::StreamMgr::CAkStmMemView *v11; // rax
-  AK::StreamMgr::CAkStmMemView *v12; // rcx
+  AK::StreamMgr::CAkStmMemView *m_pFirst; // rcx
   AK::StreamMgr::CAkStmMemView *v13; // rdx
   AK::StreamMgr::CAkStmMemView *v14; // rax
-  AK::StreamMgr::CAkStmMemView *v15; // rax
+  AK::StreamMgr::CAkStmMemView *pNextView; // rax
 
-  v3 = in_pTransfer;
-  v4 = this;
   if ( (*((_DWORD *)in_pTransfer + 5) & 7) == 2 )
   {
-    v12 = this->m_listCancelledXfers.m_pFirst;
+    m_pFirst = this->m_listCancelledXfers.m_pFirst;
     v13 = 0i64;
-    v14 = v12;
-    if ( v12 )
+    v14 = m_pFirst;
+    if ( m_pFirst )
     {
-      while ( v14 != v3 )
+      while ( v14 != in_pTransfer )
       {
         v13 = v14;
         v14 = v14->pNextView;
         if ( !v14 )
           return;
       }
-      v8 = v14 == v12;
-      v15 = v14->pNextView;
+      v8 = v14 == m_pFirst;
+      pNextView = v14->pNextView;
       if ( v8 )
-        v4->m_listCancelledXfers.m_pFirst = v15;
+        this->m_listCancelledXfers.m_pFirst = pNextView;
       else
-        v13->pNextView = v15;
+        v13->pNextView = pNextView;
     }
   }
   else if ( in_bStoreData || (v5 = this->m_listPendingXfers.m_pFirst, v5 == in_pTransfer) )
@@ -198,7 +191,7 @@ void __fastcall AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoS
     v7 = this->m_listPendingXfers.m_pFirst;
     if ( v5 )
     {
-      while ( v7 != v3 )
+      while ( v7 != in_pTransfer )
       {
         v6 = v7;
         v7 = v7->pNextView;
@@ -208,115 +201,112 @@ void __fastcall AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoS
       v8 = v7 == v5;
       v9 = v7->pNextView;
       if ( v8 )
-        v4->m_listPendingXfers.m_pFirst = v9;
+        this->m_listPendingXfers.m_pFirst = v9;
       else
         v6->pNextView = v9;
-      if ( v7 == v4->m_listPendingXfers.m_pLast )
-        v4->m_listPendingXfers.m_pLast = v6;
+      if ( v7 == this->m_listPendingXfers.m_pLast )
+        this->m_listPendingXfers.m_pLast = v6;
     }
   }
 }
 
 // File Line: 220
 // RVA: 0xAA67C0
-void __fastcall AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase>::CancelTransfers(AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase> *this, AkListBare<AK::StreamMgr::CAkStmMemView,AK::StreamMgr::AkListBareNextMemView,AkCountPolicyNoCount> *in_listToCancel, bool in_bNotifyAllCancelled)
+void __fastcall AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase>::CancelTransfers(
+        AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase> *this,
+        AkListBare<AK::StreamMgr::CAkStmMemView,AK::StreamMgr::AkListBareNextMemView,AkCountPolicyNoCount> *in_listToCancel,
+        bool in_bNotifyAllCancelled)
 {
-  AkListBare<AK::StreamMgr::CAkStmMemView,AK::StreamMgr::AkListBareNextMemView,AkCountPolicyNoCount> *v3; // rsi
-  AK::StreamMgr::CAkStmMemView *v4; // rdx
-  bool v5; // bp
-  AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase> *v6; // rdi
+  AK::StreamMgr::CAkStmMemView *m_pFirst; // rdx
   AK::StreamMgr::CAkStmMemView *v7; // rax
-  AK::StreamMgr::CAkStmMemView *v8; // rbx
+  AK::StreamMgr::CAkStmMemView *pNextView; // rbx
   int v9; // eax
-  AK::StreamMgr::AkMemBlock *v10; // r8
-  __int64 v11; // r9
-  unsigned __int64 v12; // r10
-  unsigned __int64 v13; // rcx
-  unsigned int v14; // ecx
+  AK::StreamMgr::AkMemBlock *m_pBlock; // r8
+  __int64 m_uOffsetInBlock; // r9
+  unsigned __int64 uPosition; // r10
+  unsigned __int64 m_uLoopEnd; // rcx
+  unsigned int uAvailableSize; // ecx
   AK::StreamMgr::CAkStmMemView *v15; // rax
-  AK::StreamMgr::CAkStmMemViewDeferred *v16; // rbx
-  char i; // r8
+  AK::StreamMgr::CAkStmMemView *v16; // rbx
+  bool i; // r8
   AK::StreamMgr::CAkStmMemViewDeferred *v18; // rcx
-  __m128i v19; // [rsp+20h] [rbp-28h]
-  __m128i v20; // [rsp+30h] [rbp-18h]
+  AK::StreamMgr::CAkStmMemView *v19; // [rsp+20h] [rbp-28h]
+  AK::StreamMgr::CAkStmMemView *v20; // [rsp+28h] [rbp-20h]
 
-  v3 = in_listToCancel;
-  v4 = in_listToCancel->m_pFirst;
-  v5 = in_bNotifyAllCancelled;
-  v6 = this;
+  m_pFirst = in_listToCancel->m_pFirst;
   v7 = 0i64;
-  if ( v4 )
+  if ( m_pFirst )
   {
     while ( 1 )
     {
-      v8 = v4->pNextView;
-      v19.m128i_i64[1] = (__int64)v7;
-      v19.m128i_i64[0] = (__int64)v4->pNextView;
-      if ( v4 == v3->m_pFirst )
-        v3->m_pFirst = v8;
+      pNextView = m_pFirst->pNextView;
+      v20 = v7;
+      v19 = m_pFirst->pNextView;
+      if ( m_pFirst == in_listToCancel->m_pFirst )
+        in_listToCancel->m_pFirst = pNextView;
       else
-        v7->pNextView = v8;
-      if ( v4 == v3->m_pLast )
-        v3->m_pLast = v7;
-      v9 = *((_DWORD *)v4 + 5);
-      _mm_store_si128(&v20, v19);
-      if ( v9 & 7 )
+        v7->pNextView = pNextView;
+      if ( m_pFirst == in_listToCancel->m_pLast )
+        in_listToCancel->m_pLast = v7;
+      v9 = *((_DWORD *)m_pFirst + 5);
+      if ( (v9 & 7) != 0 )
       {
-        AK::StreamMgr::CAkAutoStmBase::AddMemView((AK::StreamMgr::CAkAutoStmBase *)&v6->vfptr, v4, 0);
+        AK::StreamMgr::CAkAutoStmBase::AddMemView(this, m_pFirst, 0);
       }
       else
       {
-        v10 = v4->m_pBlock;
-        v11 = v4->m_uOffsetInBlock;
-        *((_DWORD *)v4 + 5) = v9 & 0xFFFFFFFA | 2;
-        v12 = v10->uPosition;
-        v13 = v6->m_uLoopEnd;
-        if ( v10->uPosition + v11 >= v13 || v12 + v10->uAvailableSize <= v13 )
-          v14 = v10->uAvailableSize;
+        m_pBlock = m_pFirst->m_pBlock;
+        m_uOffsetInBlock = m_pFirst->m_uOffsetInBlock;
+        *((_DWORD *)m_pFirst + 5) = v9 & 0xFFFFFFF8 | 2;
+        uPosition = m_pBlock->uPosition;
+        m_uLoopEnd = this->m_uLoopEnd;
+        if ( m_pBlock->uPosition + m_uOffsetInBlock >= m_uLoopEnd || uPosition + m_pBlock->uAvailableSize <= m_uLoopEnd )
+          uAvailableSize = m_pBlock->uAvailableSize;
         else
-          v14 = v13 - v12;
-        v6->m_uVirtualBufferingSize -= v14 - v11;
-        v4->m_uOffsetInBlock = v4->m_pBlock->uAvailableSize;
-        v15 = v6->m_listCancelledXfers.m_pFirst;
+          uAvailableSize = m_uLoopEnd - uPosition;
+        this->m_uVirtualBufferingSize -= uAvailableSize - m_uOffsetInBlock;
+        m_pFirst->m_uOffsetInBlock = m_pFirst->m_pBlock->uAvailableSize;
+        v15 = this->m_listCancelledXfers.m_pFirst;
         if ( v15 )
         {
-          v4->pNextView = v15;
-          v6->m_listCancelledXfers.m_pFirst = v4;
+          m_pFirst->pNextView = v15;
+          this->m_listCancelledXfers.m_pFirst = m_pFirst;
         }
         else
         {
-          v6->m_listCancelledXfers.m_pFirst = v4;
-          v4->pNextView = 0i64;
+          this->m_listCancelledXfers.m_pFirst = m_pFirst;
+          m_pFirst->pNextView = 0i64;
         }
       }
-      if ( !v8 )
+      if ( !pNextView )
         break;
-      v7 = (AK::StreamMgr::CAkStmMemView *)v20.m128i_i64[1];
-      v4 = (AK::StreamMgr::CAkStmMemView *)v20.m128i_i64[0];
+      v7 = v20;
+      m_pFirst = v19;
     }
   }
-  v16 = (AK::StreamMgr::CAkStmMemViewDeferred *)v6->m_listCancelledXfers.m_pFirst;
-  for ( i = 1; v16; i = v5 == 0 )
+  v16 = this->m_listCancelledXfers.m_pFirst;
+  for ( i = 1; v16; i = !in_bNotifyAllCancelled )
   {
-    v18 = v16;
-    v16 = (AK::StreamMgr::CAkStmMemViewDeferred *)v16->pNextView;
+    v18 = (AK::StreamMgr::CAkStmMemViewDeferred *)v16;
+    v16 = v16->pNextView;
     AK::StreamMgr::CAkStmMemViewDeferred::Cancel(
       v18,
-      (AK::StreamMgr::IAkIOHookDeferred *)v6->m_pDevice->m_pLowLevelHook,
+      (AK::StreamMgr::IAkIOHookDeferred *)this->m_pDevice->m_pLowLevelHook,
       i,
-      v5);
+      in_bNotifyAllCancelled);
   }
 }
 
 // File Line: 298
 // RVA: 0xAA7610
-AK::StreamMgr::CAkStmMemView *__fastcall AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase>::GetOldestCompletedTransfer(AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase> *this)
+AK::StreamMgr::CAkStmMemView *__fastcall AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase>::GetOldestCompletedTransfer(
+        AK::StreamMgr::CAkStmDeferredLinedUpBase<AK::StreamMgr::CAkAutoStmBase> *this)
 {
   AK::StreamMgr::CAkStmMemView *result; // rax
 
   result = this->m_listPendingXfers.m_pFirst;
-  if ( !result || !(*((_BYTE *)result + 20) & 7) )
-    result = 0i64;
+  if ( !result || (*((_BYTE *)result + 20) & 7) == 0 )
+    return 0i64;
   return result;
 }
 

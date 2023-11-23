@@ -2,7 +2,7 @@
 // RVA: 0x1543F40
 __int64 dynamic_initializer_for__UFG::InventoryItemComponent::s_InventoryItemComponentList__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::InventoryItemComponent::s_InventoryItemComponentList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::InventoryItemComponent::s_InventoryItemComponentList__);
 }
 
 // File Line: 32
@@ -14,64 +14,59 @@ UFG::ComponentIDDesc *__fastcall UFG::InventoryItemComponent::GetDesc(UFG::Inven
 
 // File Line: 38
 // RVA: 0x518140
-void __fastcall UFG::InventoryItemComponent::InventoryItemComponent(UFG::InventoryItemComponent *this, unsigned int name_uid, UFG::qPropertySet *properties, component_InventoryItem *data_ptr)
+void __fastcall UFG::InventoryItemComponent::InventoryItemComponent(
+        UFG::InventoryItemComponent *this,
+        unsigned int name_uid,
+        UFG::qPropertySet *properties,
+        component_InventoryItem *data_ptr)
 {
-  component_InventoryItem *v4; // rbp
-  UFG::qPropertySet *v5; // rsi
-  UFG::InventoryItemComponent *v6; // rdi
-  UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent> *v7; // rdx
-  UFG::qSafePointer<UFG::SimComponent,UFG::InventoryComponent> *v8; // rbx
-  UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent> *v9; // rax
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v10; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v11; // rax
+  UFG::qSafePointer<UFG::SimComponent,UFG::InventoryComponent> *p_m_pOwnerInventoryComponent; // rbx
+  UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent> *mPrev; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v9; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rax
 
-  v4 = data_ptr;
-  v5 = properties;
-  v6 = this;
-  UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v7 = (UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent> *)&v6->mPrev;
-  v7->mPrev = v7;
-  v7->mNext = v7;
-  v6->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InventoryItemComponent::`vftable;
-  v8 = &v6->m_pOwnerInventoryComponent;
-  v8->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v8->mPrev;
-  v8->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v8->mPrev;
-  v6->m_pOwnerInventoryComponent.m_pPointer = 0i64;
-  v6->m_eInventoryItem = 0;
-  v6->m_symInventoryItem.mUID = -1;
-  v6->m_iQuantity = 0;
-  v9 = UFG::InventoryItemComponent::s_InventoryItemComponentList.mNode.mPrev;
-  UFG::InventoryItemComponent::s_InventoryItemComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent> *)&v6->mPrev;
-  v7->mPrev = v9;
-  v6->mNext = (UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent> *)&UFG::InventoryItemComponent::s_InventoryItemComponentList;
-  UFG::InventoryItemComponent::s_InventoryItemComponentList.mNode.mPrev = (UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent> *)&v6->mPrev;
+  UFG::SimComponent::SimComponent(this, name_uid);
+  this->mPrev = &this->UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent>;
+  this->mNext = &this->UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent>;
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InventoryItemComponent::`vftable;
+  p_m_pOwnerInventoryComponent = &this->m_pOwnerInventoryComponent;
+  this->m_pOwnerInventoryComponent.mPrev = &this->m_pOwnerInventoryComponent;
+  this->m_pOwnerInventoryComponent.mNext = &this->m_pOwnerInventoryComponent;
+  this->m_pOwnerInventoryComponent.m_pPointer = 0i64;
+  this->m_eInventoryItem = eINVENTORY_ITEM_INVALID;
+  this->m_symInventoryItem.mUID = -1;
+  this->m_iQuantity = 0;
+  mPrev = UFG::InventoryItemComponent::s_InventoryItemComponentList.mNode.mPrev;
+  UFG::InventoryItemComponent::s_InventoryItemComponentList.mNode.mPrev->mNext = &this->UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent>;
+  this->mPrev = mPrev;
+  this->mNext = (UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent> *)&UFG::InventoryItemComponent::s_InventoryItemComponentList;
+  UFG::InventoryItemComponent::s_InventoryItemComponentList.mNode.mPrev = &this->UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent>;
   UFG::SimComponent::AddType(
-    (UFG::SimComponent *)&v6->vfptr,
+    this,
     UFG::InventoryItemComponent::_InventoryItemComponentTypeUID,
     "InventoryItemComponent");
-  if ( v6->m_pOwnerInventoryComponent.m_pPointer )
+  if ( this->m_pOwnerInventoryComponent.m_pPointer )
   {
-    v10 = v8->mPrev;
-    v11 = v6->m_pOwnerInventoryComponent.mNext;
-    v10->mNext = v11;
-    v11->mPrev = v10;
-    v8->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v8->mPrev;
-    v6->m_pOwnerInventoryComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v6->m_pOwnerInventoryComponent.mPrev;
+    v9 = p_m_pOwnerInventoryComponent->mPrev;
+    mNext = this->m_pOwnerInventoryComponent.mNext;
+    v9->mNext = mNext;
+    mNext->mPrev = v9;
+    p_m_pOwnerInventoryComponent->mPrev = p_m_pOwnerInventoryComponent;
+    this->m_pOwnerInventoryComponent.mNext = &this->m_pOwnerInventoryComponent;
   }
-  v6->m_pOwnerInventoryComponent.m_pPointer = 0i64;
-  if ( v5 )
-    UFG::InventoryItemComponent::PropertiesLoad(v6, v5, v4);
+  this->m_pOwnerInventoryComponent.m_pPointer = 0i64;
+  if ( properties )
+    UFG::InventoryItemComponent::PropertiesLoad(this, properties, data_ptr);
 }
 
 // File Line: 53
 // RVA: 0x51BF60
 void __fastcall UFG::InventoryItemComponent::~InventoryItemComponent(UFG::InventoryItemComponent *this)
 {
-  UFG::InventoryItemComponent *v1; // r8
   UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent> *v2; // r9
-  UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent> *v3; // rcx
-  UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent> *v4; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::InventoryComponent> *v5; // rdx
+  UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent> *mPrev; // rcx
+  UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent> *mNext; // rax
+  UFG::qSafePointer<UFG::SimComponent,UFG::InventoryComponent> *p_m_pOwnerInventoryComponent; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v6; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v7; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v8; // rcx
@@ -79,62 +74,60 @@ void __fastcall UFG::InventoryItemComponent::~InventoryItemComponent(UFG::Invent
   UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent> *v10; // rcx
   UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent> *v11; // rax
 
-  v1 = this;
   this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InventoryItemComponent::`vftable;
   if ( this == UFG::InventoryItemComponent::s_InventoryItemComponentpCurrentIterator )
     UFG::InventoryItemComponent::s_InventoryItemComponentpCurrentIterator = (UFG::InventoryItemComponent *)&this->mPrev[-4];
-  v2 = (UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent> *)&this->mPrev;
-  v3 = this->mPrev;
-  v4 = v2->mNext;
-  v3->mNext = v4;
-  v4->mPrev = v3;
+  v2 = &this->UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent>;
+  mPrev = this->mPrev;
+  mNext = v2->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v5 = &v1->m_pOwnerInventoryComponent;
-  if ( v1->m_pOwnerInventoryComponent.m_pPointer )
+  p_m_pOwnerInventoryComponent = &this->m_pOwnerInventoryComponent;
+  if ( this->m_pOwnerInventoryComponent.m_pPointer )
   {
-    v6 = v5->mPrev;
-    v7 = v1->m_pOwnerInventoryComponent.mNext;
+    v6 = p_m_pOwnerInventoryComponent->mPrev;
+    v7 = this->m_pOwnerInventoryComponent.mNext;
     v6->mNext = v7;
     v7->mPrev = v6;
-    v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v5->mPrev;
-    v1->m_pOwnerInventoryComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->m_pOwnerInventoryComponent.mPrev;
+    p_m_pOwnerInventoryComponent->mPrev = p_m_pOwnerInventoryComponent;
+    this->m_pOwnerInventoryComponent.mNext = &this->m_pOwnerInventoryComponent;
   }
-  v1->m_pOwnerInventoryComponent.m_pPointer = 0i64;
-  v8 = v5->mPrev;
-  v9 = v1->m_pOwnerInventoryComponent.mNext;
+  this->m_pOwnerInventoryComponent.m_pPointer = 0i64;
+  v8 = p_m_pOwnerInventoryComponent->mPrev;
+  v9 = this->m_pOwnerInventoryComponent.mNext;
   v8->mNext = v9;
   v9->mPrev = v8;
-  v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v5->mPrev;
-  v1->m_pOwnerInventoryComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->m_pOwnerInventoryComponent.mPrev;
+  p_m_pOwnerInventoryComponent->mPrev = p_m_pOwnerInventoryComponent;
+  this->m_pOwnerInventoryComponent.mNext = &this->m_pOwnerInventoryComponent;
   v10 = v2->mPrev;
   v11 = v2->mNext;
   v10->mNext = v11;
   v11->mPrev = v10;
   v2->mPrev = v2;
   v2->mNext = v2;
-  UFG::SimComponent::~SimComponent((UFG::SimComponent *)&v1->vfptr);
+  UFG::SimComponent::~SimComponent(this);
 }
 
 // File Line: 61
 // RVA: 0x5441D0
-void __fastcall UFG::InventoryItemComponent::PropertiesLoad(UFG::InventoryItemComponent *this, UFG::qPropertySet *properties, component_InventoryItem *data_ptr)
+void __fastcall UFG::InventoryItemComponent::PropertiesLoad(
+        UFG::InventoryItemComponent *this,
+        UFG::qPropertySet *properties,
+        component_InventoryItem *data_ptr)
 {
-  component_InventoryItem *v3; // rbx
-  UFG::InventoryItemComponent *v4; // rdi
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v5; // rax
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
   UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v6; // rcx
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v7; // rax
-  TracksEnumBinding<unsigned long> pTrackEnumBinding; // [rsp+28h] [rbp-28h]
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mNext; // rax
+  TracksEnumBinding<unsigned long> pTrackEnumBinding; // [rsp+28h] [rbp-28h] BYREF
 
-  v3 = data_ptr;
-  v4 = this;
-  this->m_eInventoryItem = 0;
+  this->m_eInventoryItem = eINVENTORY_ITEM_INVALID;
   this->m_symInventoryItem = UFG::gNullQSymbol;
   if ( data_ptr->simObjectInventoryItem.mUID != UFG::gNullQSymbol.mUID )
   {
-    pTrackEnumBinding.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&pTrackEnumBinding;
-    pTrackEnumBinding.mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&pTrackEnumBinding;
+    pTrackEnumBinding.mPrev = &pTrackEnumBinding;
+    pTrackEnumBinding.mNext = &pTrackEnumBinding;
     pTrackEnumBinding.m_EnumSymbol.mUID = -1;
     pTrackEnumBinding.m_EnumSymbol.mUID = data_ptr->simObjectInventoryItem.mUID;
     *(_QWORD *)&pTrackEnumBinding.m_EnumValue = 0i64;
@@ -145,147 +138,145 @@ void __fastcall UFG::InventoryItemComponent::PropertiesLoad(UFG::InventoryItemCo
     }
     else
     {
-      v5 = UFG::gInventoryItemTracksEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-      UFG::gInventoryItemTracksEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&pTrackEnumBinding;
-      pTrackEnumBinding.mPrev = v5;
+      mPrev = UFG::gInventoryItemTracksEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+      UFG::gInventoryItemTracksEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &pTrackEnumBinding;
+      pTrackEnumBinding.mPrev = mPrev;
       pTrackEnumBinding.mNext = &UFG::gInventoryItemTracksEnum.m_UnresolvedTracksEnumBindingList.mNode;
-      UFG::gInventoryItemTracksEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&pTrackEnumBinding;
+      UFG::gInventoryItemTracksEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &pTrackEnumBinding;
     }
-    v4->m_eInventoryItem = pTrackEnumBinding.m_EnumValue;
-    v4->m_symInventoryItem.mUID = v3->simObjectInventoryItem.mUID;
+    this->m_eInventoryItem = pTrackEnumBinding.m_EnumValue;
+    this->m_symInventoryItem.mUID = data_ptr->simObjectInventoryItem.mUID;
     v6 = pTrackEnumBinding.mPrev;
-    v7 = pTrackEnumBinding.mNext;
+    mNext = pTrackEnumBinding.mNext;
     pTrackEnumBinding.mPrev->mNext = pTrackEnumBinding.mNext;
-    v7->mPrev = v6;
-    pTrackEnumBinding.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&pTrackEnumBinding;
-    pTrackEnumBinding.mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&pTrackEnumBinding;
+    mNext->mPrev = v6;
+    pTrackEnumBinding.mPrev = &pTrackEnumBinding;
+    pTrackEnumBinding.mNext = &pTrackEnumBinding;
   }
-  v4->m_iQuantity = UFG::GetRandomNumberInRange(v3->InventoryItemQuantityMin, v3->InventoryItemQuantityMax);
+  this->m_iQuantity = UFG::GetRandomNumberInRange(
+                        data_ptr->InventoryItemQuantityMin,
+                        data_ptr->InventoryItemQuantityMax);
 }
 
 // File Line: 88
 // RVA: 0x5468F0
-UFG::SimComponent *__fastcall UFG::InventoryItemComponent::PropertiesOnActivateNew(UFG::SceneObjectProperties *sceneObject, bool required)
+UFG::InventoryItemComponent *__fastcall UFG::InventoryItemComponent::PropertiesOnActivateNew(
+        UFG::SceneObjectProperties *sceneObject,
+        bool required)
 {
-  bool v2; // bp
-  UFG::SceneObjectProperties *v3; // rbx
-  UFG::qPropertySet *v4; // rcx
+  UFG::qPropertySet *mpWritableProperties; // rcx
   UFG::qPropertySet *v5; // rax
   UFG::SimComponent *v6; // rsi
-  char *v7; // rdi
-  UFG::qMemoryPool *v9; // rax
+  char *MemImagePtr; // rdi
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
   UFG::allocator::free_link *v10; // rax
-  UFG::qPropertySet *v11; // r8
+  UFG::qPropertySet *mpConstProperties; // r8
   UFG::SimComponent *v12; // rax
-  UFG::SimObject *v13; // rdx
-  unsigned __int16 v14; // cx
+  UFG::SimObject *m_pSimObject; // rdx
+  __int16 m_Flags; // cx
   unsigned int v15; // ebx
-  UFG::SimObjectModifier v16; // [rsp+38h] [rbp-30h]
+  UFG::SimObjectModifier v16; // [rsp+38h] [rbp-30h] BYREF
 
-  v2 = required;
-  v3 = sceneObject;
-  v4 = sceneObject->mpWritableProperties;
-  if ( !v4 )
-    v4 = v3->mpConstProperties;
+  mpWritableProperties = sceneObject->mpWritableProperties;
+  if ( !mpWritableProperties )
+    mpWritableProperties = sceneObject->mpConstProperties;
   v5 = UFG::qPropertySet::Get<UFG::qPropertySet>(
-         v4,
-         (UFG::qSymbol *)&component_InventoryItem::sPropertyName.mUID,
+         mpWritableProperties,
+         (UFG::qArray<unsigned long,0> *)&component_InventoryItem::sPropertyName,
          DEPTH_RECURSE);
   v6 = 0i64;
   if ( v5 )
-    v7 = UFG::qPropertySet::GetMemImagePtr(v5);
+    MemImagePtr = UFG::qPropertySet::GetMemImagePtr(v5);
   else
-    v7 = 0i64;
-  if ( !v2 && !v7 )
+    MemImagePtr = 0i64;
+  if ( !required && !MemImagePtr )
     return 0i64;
-  v9 = UFG::GetSimulationMemoryPool();
-  v10 = UFG::qMemoryPool::Allocate(v9, 0x78ui64, "InventoryItemComponent", 0i64, 1u);
+  SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+  v10 = UFG::qMemoryPool::Allocate(SimulationMemoryPool, 0x78ui64, "InventoryItemComponent", 0i64, 1u);
   if ( v10 )
   {
-    v11 = v3->mpWritableProperties;
-    if ( !v11 )
-      v11 = v3->mpConstProperties;
+    mpConstProperties = sceneObject->mpWritableProperties;
+    if ( !mpConstProperties )
+      mpConstProperties = sceneObject->mpConstProperties;
     UFG::InventoryItemComponent::InventoryItemComponent(
       (UFG::InventoryItemComponent *)v10,
-      v3->m_NameUID,
-      v11,
-      (component_InventoryItem *)v7);
+      sceneObject->m_NameUID,
+      mpConstProperties,
+      (component_InventoryItem *)MemImagePtr);
     v6 = v12;
   }
-  v13 = v3->m_pSimObject;
-  v14 = v13->m_Flags;
-  if ( (v14 >> 14) & 1 || (v14 & 0x8000u) != 0 || !((v14 >> 13) & 1) )
+  m_pSimObject = sceneObject->m_pSimObject;
+  m_Flags = m_pSimObject->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 || (m_Flags & 0x2000) == 0 )
     v15 = -1;
   else
     v15 = 11;
-  UFG::SimObjectModifier::SimObjectModifier(&v16, v13, 1);
+  UFG::SimObjectModifier::SimObjectModifier(&v16, m_pSimObject, 1);
   UFG::SimObjectModifier::AttachComponent(&v16, v6, v15);
   UFG::SimObjectModifier::Close(&v16);
   UFG::SimObjectModifier::~SimObjectModifier(&v16);
-  return v6;
+  return (UFG::InventoryItemComponent *)v6;
 }
 
 // File Line: 108
 // RVA: 0x53E420
 void __fastcall UFG::InventoryItemComponent::OnAttach(UFG::InventoryItemComponent *this, UFG::SimObject *pObject)
 {
-  UFG::InventoryItemComponent *v2; // rsi
-  UFG::SimObject *v3; // r8
-  unsigned __int16 v4; // dx
-  UFG::SimComponent *v5; // rbx
-  unsigned int v6; // ecx
-  unsigned int v7; // er9
-  UFG::SimComponentHolder *v8; // rbx
+  UFG::SimObject *m_pSimObject; // r8
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rbx
+  unsigned int vfptr; // ecx
+  unsigned int size; // r9d
+  UFG::SimComponentHolder *p; // rbx
   UFG::allocator::free_link *v9; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v10; // rdi
-  hkSeekableStreamReader *v11; // rax
+  hkSeekableStreamReader *RCX; // rax
 
-  v2 = this;
-  v3 = this->m_pSimObject;
-  if ( v3 )
+  m_pSimObject = this->m_pSimObject;
+  if ( m_pSimObject )
   {
-    v4 = v3->m_Flags;
-    if ( (v4 >> 14) & 1 )
+    m_Flags = m_pSimObject->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v5 = v3->m_Components.p->m_pComponent;
+      m_pComponent = m_pSimObject->m_Components.p->m_pComponent;
     }
-    else if ( (v4 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v4 >> 13) & 1 )
+      if ( (m_Flags & 0x2000) != 0 )
       {
-        v5 = v3->m_Components.p->m_pComponent;
+        m_pComponent = m_pSimObject->m_Components.p->m_pComponent;
       }
-      else if ( (v4 >> 12) & 1 )
+      else if ( (m_Flags & 0x1000) != 0 )
       {
-        v6 = (unsigned int)v3[1].vfptr;
-        v7 = v3->m_Components.size;
-        if ( v6 >= v7 )
+        vfptr = (unsigned int)m_pSimObject[1].vfptr;
+        size = m_pSimObject->m_Components.size;
+        if ( vfptr >= size )
         {
 LABEL_16:
-          v5 = 0i64;
+          m_pComponent = 0i64;
         }
         else
         {
-          v8 = v3->m_Components.p;
-          while ( (v8[v6].m_TypeUID & 0xFE000000) != (UFG::UELComponent::_TypeUID & 0xFE000000)
-               || UFG::UELComponent::_TypeUID & ~v8[v6].m_TypeUID & 0x1FFFFFF )
+          p = m_pSimObject->m_Components.p;
+          while ( (p[vfptr].m_TypeUID & 0xFE000000) != (UFG::UELComponent::_TypeUID & 0xFE000000)
+               || (UFG::UELComponent::_TypeUID & ~p[vfptr].m_TypeUID & 0x1FFFFFF) != 0 )
           {
-            if ( ++v6 >= v7 )
+            if ( ++vfptr >= size )
               goto LABEL_16;
           }
-          v5 = v8[v6].m_pComponent;
+          m_pComponent = p[vfptr].m_pComponent;
         }
       }
       else
       {
-        v5 = UFG::SimObject::GetComponentOfType(this->m_pSimObject, UFG::UELComponent::_TypeUID);
+        m_pComponent = UFG::SimObject::GetComponentOfType(this->m_pSimObject, UFG::UELComponent::_TypeUID);
       }
     }
     else
     {
-      v5 = v3->m_Components.p->m_pComponent;
+      m_pComponent = m_pSimObject->m_Components.p->m_pComponent;
     }
-    if ( v5 )
+    if ( m_pComponent )
     {
       v9 = UFG::qMalloc(0x10ui64, UFG::gGlobalNewName, 0i64);
       v10 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)v9;
@@ -298,184 +289,183 @@ LABEL_16:
       {
         v10 = 0i64;
       }
-      v5[3].m_SafePointerList.mNode.mPrev = v10;
-      v11 = Assembly::GetRCX(v2);
+      m_pComponent[3].m_SafePointerList.mNode.mPrev = v10;
+      RCX = Assembly::GetRCX(this);
       v10->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)UFG::InventoryItemComponent::GetOwnerSimObject_UEL;
-      v10->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)v11;
+      v10->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)RCX;
     }
   }
 }
 
 // File Line: 120
 // RVA: 0x540990
-void __usercall UFG::InventoryItemComponent::OnDetach(UFG::InventoryItemComponent *this@<rcx>, __int64 a2@<r15>)
+void __fastcall UFG::InventoryItemComponent::OnDetach(UFG::InventoryItemComponent *this)
 {
-  UFG::InventoryItemComponent *v2; // rbx
-  UFG::InventoryComponent *v3; // rcx
-  UFG::qSafePointer<UFG::SimComponent,UFG::InventoryComponent> *v4; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v5; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v6; // rax
-  UFG::SimObject *v7; // rcx
-  unsigned __int16 v8; // dx
-  UFG::SimComponent *v9; // rbx
-  unsigned int v10; // er8
-  unsigned int v11; // er9
-  signed __int64 v12; // rdx
+  __int64 v1; // r15
+  UFG::InventoryComponent *m_pPointer; // rcx
+  UFG::qSafePointer<UFG::SimComponent,UFG::InventoryComponent> *p_m_pOwnerInventoryComponent; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rax
+  UFG::SimObject *m_pSimObject; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rbx
+  unsigned int vfptr; // r8d
+  unsigned int size; // r9d
+  __int64 v12; // rdx
 
-  v2 = this;
-  v3 = (UFG::InventoryComponent *)this->m_pOwnerInventoryComponent.m_pPointer;
-  if ( v3 )
+  m_pPointer = (UFG::InventoryComponent *)this->m_pOwnerInventoryComponent.m_pPointer;
+  if ( m_pPointer )
   {
-    UFG::InventoryComponent::RemoveObjectFromInventory(v3, v2->m_pSimObject, a2);
-    v4 = &v2->m_pOwnerInventoryComponent;
-    if ( v2->m_pOwnerInventoryComponent.m_pPointer )
+    UFG::InventoryComponent::RemoveObjectFromInventory(m_pPointer, this->m_pSimObject, v1);
+    p_m_pOwnerInventoryComponent = &this->m_pOwnerInventoryComponent;
+    if ( this->m_pOwnerInventoryComponent.m_pPointer )
     {
-      v5 = v4->mPrev;
-      v6 = v2->m_pOwnerInventoryComponent.mNext;
-      v5->mNext = v6;
-      v6->mPrev = v5;
-      v4->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v4->mPrev;
-      v2->m_pOwnerInventoryComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->m_pOwnerInventoryComponent.mPrev;
+      mPrev = p_m_pOwnerInventoryComponent->mPrev;
+      mNext = this->m_pOwnerInventoryComponent.mNext;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
+      p_m_pOwnerInventoryComponent->mPrev = p_m_pOwnerInventoryComponent;
+      this->m_pOwnerInventoryComponent.mNext = &this->m_pOwnerInventoryComponent;
     }
-    v2->m_pOwnerInventoryComponent.m_pPointer = 0i64;
+    this->m_pOwnerInventoryComponent.m_pPointer = 0i64;
   }
-  v7 = v2->m_pSimObject;
-  if ( v7 )
+  m_pSimObject = this->m_pSimObject;
+  if ( m_pSimObject )
   {
-    v8 = v7->m_Flags;
-    if ( (v8 >> 14) & 1 )
+    m_Flags = m_pSimObject->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v9 = v7->m_Components.p->m_pComponent;
+      m_pComponent = m_pSimObject->m_Components.p->m_pComponent;
     }
-    else if ( (v8 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v8 >> 13) & 1 )
+      if ( (m_Flags & 0x2000) != 0 )
       {
-        v9 = v7->m_Components.p->m_pComponent;
+        m_pComponent = m_pSimObject->m_Components.p->m_pComponent;
       }
-      else if ( (v8 >> 12) & 1 )
+      else if ( (m_Flags & 0x1000) != 0 )
       {
-        v10 = (unsigned int)v7[1].vfptr;
-        v11 = v7->m_Components.size;
-        if ( v10 >= v11 )
+        vfptr = (unsigned int)m_pSimObject[1].vfptr;
+        size = m_pSimObject->m_Components.size;
+        if ( vfptr >= size )
         {
 LABEL_18:
-          v9 = 0i64;
+          m_pComponent = 0i64;
         }
         else
         {
-          v12 = (signed __int64)&v7->m_Components.p[v10];
+          v12 = (__int64)&m_pSimObject->m_Components.p[vfptr];
           while ( (*(_DWORD *)(v12 + 8) & 0xFE000000) != (UFG::UELComponent::_TypeUID & 0xFE000000)
-               || UFG::UELComponent::_TypeUID & ~*(_DWORD *)(v12 + 8) & 0x1FFFFFF )
+               || (UFG::UELComponent::_TypeUID & ~*(_DWORD *)(v12 + 8) & 0x1FFFFFF) != 0 )
           {
-            ++v10;
+            ++vfptr;
             v12 += 16i64;
-            if ( v10 >= v11 )
+            if ( vfptr >= size )
               goto LABEL_18;
           }
-          v9 = *(UFG::SimComponent **)v12;
+          m_pComponent = *(UFG::SimComponent **)v12;
         }
       }
       else
       {
-        v9 = UFG::SimObject::GetComponentOfType(v7, UFG::UELComponent::_TypeUID);
+        m_pComponent = UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::UELComponent::_TypeUID);
       }
     }
     else
     {
-      v9 = v7->m_Components.p->m_pComponent;
+      m_pComponent = m_pSimObject->m_Components.p->m_pComponent;
     }
-    if ( v9 )
+    if ( m_pComponent )
     {
-      operator delete[](v9[3].m_SafePointerList.mNode.mPrev);
-      v9[3].m_SafePointerList.mNode.mPrev = 0i64;
+      operator delete[](m_pComponent[3].m_SafePointerList.mNode.mPrev);
+      m_pComponent[3].m_SafePointerList.mNode.mPrev = 0i64;
     }
   }
 }
 
 // File Line: 139
 // RVA: 0x52F310
-UFG::SimObject *__fastcall UFG::InventoryItemComponent::GetOwnerSimObject(UFG::InventoryItemComponent *this)
+UFG::qBaseNodeRB *__fastcall UFG::InventoryItemComponent::GetOwnerSimObject(UFG::InventoryItemComponent *this)
 {
-  UFG::SimObject *result; // rax
+  UFG::qBaseNodeRB *result; // rax
 
-  result = (UFG::SimObject *)this->m_pOwnerInventoryComponent.m_pPointer;
+  result = (UFG::qBaseNodeRB *)this->m_pOwnerInventoryComponent.m_pPointer;
   if ( result )
-    result = (UFG::SimObject *)result->mNode.mParent;
+    return result[1].mChild[0];
   return result;
 }
 
 // File Line: 145
 // RVA: 0x52F320
-UEL::Value *__fastcall UFG::InventoryItemComponent::GetOwnerSimObject_UEL(UFG::InventoryItemComponent *this, UEL::Value *result)
+UEL::Value *__fastcall UFG::InventoryItemComponent::GetOwnerSimObject_UEL(
+        UFG::InventoryItemComponent *this,
+        UEL::Value *result)
 {
-  UFG::SimComponent *v2; // rcx
-  UEL::Value *v3; // rbx
-  UFG::SimObject *v4; // rcx
-  unsigned __int16 v5; // r8
-  UFG::SimComponent *v6; // rcx
-  unsigned int v7; // er8
-  unsigned int v8; // er9
-  signed __int64 v9; // rdx
-  unsigned int v10; // eax
+  UFG::SimComponent *m_pPointer; // rcx
+  UFG::SimObject *m_pSimObject; // rcx
+  __int16 m_Flags; // r8
+  UFG::SimComponent *m_pComponent; // rcx
+  unsigned int vfptr; // r8d
+  unsigned int size; // r9d
+  __int64 v9; // rdx
+  unsigned int mUID; // eax
 
-  v2 = this->m_pOwnerInventoryComponent.m_pPointer;
-  v3 = result;
-  if ( !v2 )
+  m_pPointer = this->m_pOwnerInventoryComponent.m_pPointer;
+  if ( !m_pPointer )
     goto LABEL_15;
-  v4 = v2->m_pSimObject;
-  if ( !v4 )
+  m_pSimObject = m_pPointer->m_pSimObject;
+  if ( !m_pSimObject )
     goto LABEL_15;
-  v5 = v4->m_Flags;
-  if ( (v5 >> 14) & 1 )
+  m_Flags = m_pSimObject->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 )
   {
-    v6 = v4->m_Components.p->m_pComponent;
+    m_pComponent = m_pSimObject->m_Components.p->m_pComponent;
     goto LABEL_16;
   }
-  if ( (v5 & 0x8000u) != 0 )
+  if ( m_Flags < 0 )
   {
-    v6 = v4->m_Components.p->m_pComponent;
+    m_pComponent = m_pSimObject->m_Components.p->m_pComponent;
     goto LABEL_16;
   }
-  if ( (v5 >> 13) & 1 )
+  if ( (m_Flags & 0x2000) != 0 )
   {
-    v6 = v4->m_Components.p->m_pComponent;
+    m_pComponent = m_pSimObject->m_Components.p->m_pComponent;
     goto LABEL_16;
   }
-  if ( !((v5 >> 12) & 1) )
+  if ( (m_Flags & 0x1000) == 0 )
   {
-    v6 = UFG::SimObject::GetComponentOfType(v4, UFG::UELComponent::_TypeUID);
+    m_pComponent = UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::UELComponent::_TypeUID);
     goto LABEL_16;
   }
-  v7 = (unsigned int)v4[1].vfptr;
-  v8 = v4->m_Components.size;
-  if ( v7 >= v8 )
+  vfptr = (unsigned int)m_pSimObject[1].vfptr;
+  size = m_pSimObject->m_Components.size;
+  if ( vfptr >= size )
   {
 LABEL_15:
-    v6 = 0i64;
+    m_pComponent = 0i64;
     goto LABEL_16;
   }
-  v9 = (signed __int64)&v4->m_Components.p[v7];
+  v9 = (__int64)&m_pSimObject->m_Components.p[vfptr];
   while ( (*(_DWORD *)(v9 + 8) & 0xFE000000) != (UFG::UELComponent::_TypeUID & 0xFE000000)
-       || UFG::UELComponent::_TypeUID & ~*(_DWORD *)(v9 + 8) & 0x1FFFFFF )
+       || (UFG::UELComponent::_TypeUID & ~*(_DWORD *)(v9 + 8) & 0x1FFFFFF) != 0 )
   {
-    ++v7;
+    ++vfptr;
     v9 += 16i64;
-    if ( v7 >= v8 )
+    if ( vfptr >= size )
       goto LABEL_15;
   }
-  v6 = *(UFG::SimComponent **)v9;
+  m_pComponent = *(UFG::SimComponent **)v9;
 LABEL_16:
-  v3->type.mBaseType.mValue = 0;
-  v3->type.mDetailedType = UFG::gNullQSymbol;
-  if ( v6 )
+  result->type.mBaseType.mValue = 0;
+  result->type.mDetailedType = UFG::gNullQSymbol;
+  if ( m_pComponent )
   {
-    v10 = UFG::gNullQSymbol.mUID;
-    v3->type.mBaseType.mValue = 8;
-    v3->type.mDetailedType.mUID = v10;
-    v3->integer = (__int64)&v6[1].m_TypeUID;
+    mUID = UFG::gNullQSymbol.mUID;
+    result->type.mBaseType.mValue = 8;
+    result->type.mDetailedType.mUID = mUID;
+    result->integer = (__int64)&m_pComponent[1].m_TypeUID;
   }
-  return v3;
+  return result;
 }
 
 // File Line: 157

@@ -7,7 +7,11 @@ void __fastcall hkpCollisionAgent::invalidateTim(hkpCollisionAgent *this, hkpCol
 
 // File Line: 19
 // RVA: 0xD2F6B0
-void __fastcall hkpCollisionAgent::warpTime(hkpCollisionAgent *this, float oldTime, float newTime, hkpCollisionInput *input)
+void __fastcall hkpCollisionAgent::warpTime(
+        hkpCollisionAgent *this,
+        float oldTime,
+        float newTime,
+        hkpCollisionInput *input)
 {
   ;
 }

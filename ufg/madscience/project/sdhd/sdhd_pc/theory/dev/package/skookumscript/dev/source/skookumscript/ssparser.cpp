@@ -2,117 +2,104 @@
 // RVA: 0x1461530
 __int64 dynamic_initializer_for__SSParser::c_reserved_word_syms__()
 {
-  return atexit(dynamic_atexit_destructor_for__SSParser::c_reserved_word_syms__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__SSParser::c_reserved_word_syms__);
 }
 
 // File Line: 113
 // RVA: 0x1461510
 __int64 dynamic_initializer_for__SSParser::c_reserved_word_strs__()
 {
-  return atexit(dynamic_atexit_destructor_for__SSParser::c_reserved_word_strs__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__SSParser::c_reserved_word_strs__);
 }
 
 // File Line: 114
 // RVA: 0x14614E0
 __int64 dynamic_initializer_for__SSParser::c_operator_word_strs__()
 {
-  return atexit(dynamic_atexit_destructor_for__SSParser::c_operator_word_strs__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__SSParser::c_operator_word_strs__);
 }
 
 // File Line: 117
 // RVA: 0x1461490
 __int64 dynamic_initializer_for__SSParser::c_error_str__()
 {
-  AStringRef *v0; // rax
-
-  v0 = AStringRef::get_empty();
-  SSParser::c_error_str.i_str_ref_p = v0;
-  ++v0->i_ref_count;
-  return atexit(dynamic_atexit_destructor_for__SSParser::c_error_str__);
+  SSParser::c_error_str.i_str_ref_p = AStringRef::get_empty();
+  ++SSParser::c_error_str.i_str_ref_p->i_ref_count;
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__SSParser::c_error_str__);
 }
 
 // File Line: 162
 // RVA: 0x10F510
 ASymbol *__fastcall SSParser::as_symbol(SSParser *this, ASymbol *result, unsigned int start_pos, unsigned int end_pos)
 {
-  unsigned int v4; // er10
-  ASymbol *v5; // rbx
-  unsigned int v6; // er9
-  unsigned int v7; // er8
+  unsigned int v6; // r9d
+  unsigned int v7; // r8d
 
-  v4 = start_pos;
-  v5 = result;
   v6 = end_pos - start_pos;
   v7 = 255;
   if ( v6 < 0xFF )
     v7 = v6;
-  ASymbol::create(result, &this->i_str_ref_p->i_cstr_p[v4], v7, 0);
-  return v5;
+  ASymbol::create(result, &this->i_str_ref_p->i_cstr_p[start_pos], v7, ATerm_short);
+  return result;
 }
 
 // File Line: 178
 // RVA: 0x13C360
-void __fastcall SSParser::set_class_scope(SSParser *this, SSClassUnaryBase *scope_p)
+void __fastcall SSParser::set_class_scope(SSParser *this, SSClass *scope_p)
 {
   SSClass *v2; // rax
 
   v2 = SSBrain::c_object_class_p;
   if ( scope_p )
-    v2 = (SSClass *)scope_p;
-  this->i_context.i_obj_scope_p = (SSClassUnaryBase *)&v2->vfptr;
+    v2 = scope_p;
+  this->i_context.i_obj_scope_p = v2;
 }
 
 // File Line: 236
 // RVA: 0x127190
-SSBind *__fastcall SSParser::parse_bind(SSParser *this, SSParser::Args *args, SSExpressionBase *identifier_p)
+SSBind *__fastcall SSParser::parse_bind(SSParser *this, SSParser::Args *args, SSIdentifier *identifier_p)
 {
-  SSIdentifier *v3; // rsi
-  SSParser::Args *v4; // rdi
-  SSParser *v5; // r14
-  eSSExprType v6; // eax
-  _QWORD *v7; // rbx
-  signed int v8; // eax
-  SSClassDescBase *v10; // r15
+  int v6; // eax
+  __int64 v7; // rbx
+  SSParser::eResult v8; // eax
+  SSClassDescBase *i_type_p; // r15
   SSExpressionBase *v11; // rbp
   _QWORD *v12; // rax
 
-  v3 = (SSIdentifier *)identifier_p;
-  v4 = args;
-  v5 = this;
-  v6 = (unsigned int)identifier_p->vfptr->get_type(identifier_p);
+  v6 = identifier_p->vfptr->get_type(identifier_p);
   v7 = 0i64;
-  if ( (signed int)v6 > 0 )
+  if ( v6 > 0 )
   {
-    if ( (signed int)v6 <= 3 )
+    if ( v6 <= 3 )
     {
-      v8 = 0;
+      v8 = Result_ok;
       goto LABEL_7;
     }
     if ( v6 == 5 )
     {
-      v8 = 89;
+      v8 = Result_err_unexpected_reserved;
       goto LABEL_7;
     }
   }
-  v8 = 70;
+  v8 = Result_err_unexpected_bind_expr;
 LABEL_7:
-  v4->i_result = v8;
+  args->i_result = v8;
   if ( v8 )
     return 0i64;
-  v10 = v4->i_type_p;
-  v11 = SSParser::parse_binding(v5, v4);
-  if ( v4->i_result == Result_ok )
-    v4->i_result = SSParser::validate_bind_type(v5, v3, v10, v4->i_type_p);
-  if ( v11 && v4->i_result == Result_ok )
+  i_type_p = args->i_type_p;
+  v11 = SSParser::parse_binding(this, args);
+  if ( args->i_result == Result_ok )
+    args->i_result = SSParser::validate_bind_type(this, identifier_p, i_type_p, args->i_type_p);
+  if ( v11 && args->i_result == Result_ok )
   {
     v12 = AMemory::c_malloc_func(0x18ui64, "SSBind");
     if ( v12 )
     {
       *v12 = &SSExpressionBase::`vftable;
       *v12 = &SSBind::`vftable;
-      v12[1] = v3;
+      v12[1] = identifier_p;
       v12[2] = v11;
-      v7 = v12;
+      return (SSBind *)v12;
     }
   }
   return (SSBind *)v7;
@@ -122,136 +109,124 @@ LABEL_7:
 // RVA: 0x127280
 SSExpressionBase *__fastcall SSParser::parse_binding(SSParser *this, SSParser::Args *args)
 {
-  AStringRef *v2; // rax
-  SSParser::Args *v3; // rbx
-  __int64 v4; // rdx
-  SSParser *v5; // rdi
+  AStringRef *i_str_ref_p; // rax
+  __int64 i_start_pos; // rdx
   SSParser::eResult v6; // eax
-  SSExpressionBase *result; // rax
-  unsigned int end_pos_p; // [rsp+30h] [rbp+8h]
+  unsigned int end_pos_p; // [rsp+30h] [rbp+8h] BYREF
 
-  v2 = this->i_str_ref_p;
-  v3 = args;
-  v4 = args->i_start_pos;
-  v5 = this;
-  end_pos_p = v4;
-  if ( v2->i_length <= (unsigned int)v4 || v2->i_cstr_p[v4] != 58 )
+  i_str_ref_p = this->i_str_ref_p;
+  i_start_pos = args->i_start_pos;
+  end_pos_p = i_start_pos;
+  if ( i_str_ref_p->i_length > (unsigned int)i_start_pos && i_str_ref_p->i_cstr_p[i_start_pos] == 58 )
   {
-    v3->i_result = 10;
-    v3->i_end_pos = v4;
-    result = 0i64;
-  }
-  else
-  {
-    v6 = SSParser::parse_ws_any(this, v4 + 1, &end_pos_p);
-    v3->i_result = v6;
+    v6 = SSParser::parse_ws_any(this, i_start_pos + 1, &end_pos_p);
+    args->i_result = v6;
     if ( v6 )
     {
-      v3->i_end_pos = end_pos_p;
-      result = 0i64;
+      args->i_end_pos = end_pos_p;
+      return 0i64;
     }
     else
     {
-      v3->i_start_pos = end_pos_p;
-      result = SSParser::parse_expression(v5, v3, SSInvokeTime_any);
+      args->i_start_pos = end_pos_p;
+      return SSParser::parse_expression(this, args, SSInvokeTime_any);
     }
   }
-  return result;
+  else
+  {
+    args->i_result = Result_err_expected_binding;
+    args->i_end_pos = i_start_pos;
+    return 0i64;
+  }
 }
 
 // File Line: 350
 // RVA: 0x127310
 SSCase *__fastcall SSParser::parse_case_tail(SSParser *this, SSParser::Args *args)
 {
-  SSParser::Args *v2; // rbx
-  SSParser *v3; // rsi
-  int v4; // er14
-  void (__fastcall ***v5)(_QWORD, signed __int64); // r15
+  int v4; // r14d
+  void (__fastcall ***v5)(_QWORD, __int64); // r15
   SSParser::eResult v6; // eax
   SSExpressionBase *v7; // rdi
-  unsigned int v8; // er13
-  __int64 v9; // rax
-  __int64 v10; // rax
-  __int64 v11; // rcx
-  AStringRef *v12; // rax
-  char *v13; // r12
+  unsigned int i_end_pos; // r13d
+  SSMethodBase *v9; // rax
+  SSParameters *i_obj_p; // rax
+  SSParameterBase *v11; // rcx
+  AStringRef *i_str_ref_p; // rax
+  char *i_cstr_p; // r12
   char *v14; // r15
-  signed __int64 v15; // rax
-  unsigned int v16; // edi
-  unsigned __int64 v17; // r15
-  SSParser::eResult v18; // eax
-  SSExpressionBase *v19; // r13
-  __int64 v20; // rdx
-  signed int v21; // eax
-  __int64 v22; // r14
-  unsigned int v23; // eax
-  SSTypedName **v24; // rax
-  SSParser::eResult v25; // eax
-  SSCode *v26; // r14
-  SSClause *v27; // rax
-  unsigned int v28; // er14
-  unsigned int v29; // eax
-  unsigned int v30; // eax
-  SSTypedName **v31; // r14
-  SSClassUnaryBase *v32; // rax
-  unsigned int v34; // [rsp+20h] [rbp-79h]
-  unsigned int v35; // [rsp+24h] [rbp-75h]
-  APSorted<SSTypedName,ASymbol,ACompareLogical<ASymbol> > sorted; // [rsp+28h] [rbp-71h]
-  unsigned int v37; // [rsp+40h] [rbp-59h]
-  char *v38; // [rsp+48h] [rbp-51h]
-  APCompactArray<SSClause,SSClause,ACompareAddress<SSClause> > *v39; // [rsp+50h] [rbp-49h]
-  SSClass *v40; // [rsp+58h] [rbp-41h]
-  APSortedLogical<SSTypedName,ASymbol> merge_vars_p; // [rsp+60h] [rbp-39h]
-  SSClassUnion class_union; // [rsp+78h] [rbp-21h]
-  __int64 v43; // [rsp+A8h] [rbp+Fh]
-  SSClause *v44; // [rsp+B0h] [rbp+17h]
-  unsigned int end_pos_p; // [rsp+108h] [rbp+6Fh]
-  char *v46; // [rsp+110h] [rbp+77h]
-  __int64 v47; // [rsp+118h] [rbp+7Fh]
+  unsigned int v15; // edi
+  unsigned __int64 v16; // r15
+  SSParser::eResult v17; // eax
+  SSExpressionBase *v18; // r13
+  SSParser::eResult v19; // eax
+  __int64 i_count; // r14
+  unsigned int v21; // eax
+  SSTypedName **i_array_p; // rax
+  SSParser::eResult v23; // eax
+  SSCode *v24; // r14
+  SSClause *v25; // rax
+  int v26; // r14d
+  unsigned int v27; // eax
+  unsigned int v28; // eax
+  SSTypedName **v29; // r14
+  SSClassUnaryBase *i_common_class_p; // rax
+  unsigned int v32; // [rsp+20h] [rbp-79h] BYREF
+  unsigned int v33; // [rsp+24h] [rbp-75h]
+  APSorted<SSTypedName,ASymbol,ACompareLogical<ASymbol> > sorted; // [rsp+28h] [rbp-71h] BYREF
+  unsigned int i_length; // [rsp+40h] [rbp-59h]
+  char *v36; // [rsp+48h] [rbp-51h]
+  APCompactArray<SSClause,SSClause,ACompareAddress<SSClause> > *v37; // [rsp+50h] [rbp-49h]
+  SSClass *vfptr; // [rsp+58h] [rbp-41h]
+  APSortedLogical<SSTypedName,ASymbol> merge_vars_p; // [rsp+60h] [rbp-39h] BYREF
+  SSClassUnion class_union; // [rsp+78h] [rbp-21h] BYREF
+  __int64 v41; // [rsp+A8h] [rbp+Fh]
+  SSClause *v42; // [rsp+B0h] [rbp+17h]
+  __int64 end_pos_p; // [rsp+108h] [rbp+6Fh] BYREF
+  char *v44; // [rsp+110h] [rbp+77h]
+  char *v45; // [rsp+118h] [rbp+7Fh]
 
-  v43 = -2i64;
-  v2 = args;
-  v3 = this;
+  v41 = -2i64;
   v4 = 0;
   v5 = 0i64;
-  v38 = 0i64;
-  end_pos_p = args->i_start_pos;
-  v6 = SSParser::parse_ws_any(this, end_pos_p, &end_pos_p);
-  v2->i_result = v6;
+  v36 = 0i64;
+  LODWORD(end_pos_p) = args->i_start_pos;
+  v6 = SSParser::parse_ws_any(this, end_pos_p, (unsigned int *)&end_pos_p);
+  args->i_result = v6;
   if ( v6 )
   {
-    v2->i_end_pos = end_pos_p;
+    args->i_end_pos = end_pos_p;
     return (SSCase *)v5;
   }
-  v2->i_start_pos = end_pos_p;
-  v7 = SSParser::parse_expression(v3, v2, SSInvokeTime_immediate);
-  v8 = v2->i_end_pos;
-  v35 = v2->i_end_pos;
-  if ( v2->i_result )
+  args->i_start_pos = end_pos_p;
+  v7 = SSParser::parse_expression(this, args, SSInvokeTime_immediate);
+  i_end_pos = args->i_end_pos;
+  v33 = i_end_pos;
+  if ( args->i_result )
     goto LABEL_81;
-  v40 = SSBrain::c_object_class_p;
-  if ( v3->i_flags.i_flagset & 1 )
+  vfptr = SSBrain::c_object_class_p;
+  if ( (this->i_flags.i_flagset & 1) != 0 )
   {
-    v9 = (__int64)v2->i_type_p->vfptr->get_method_inherited(v2->i_type_p, &ASymbol_equals);
+    v9 = args->i_type_p->vfptr->get_method_inherited(args->i_type_p, &ASymbol_equals);
     if ( v9 )
     {
-      v10 = *(_QWORD *)(v9 + 24);
-      if ( *(_DWORD *)(v10 + 8) )
-        v11 = **(_QWORD **)(v10 + 16);
+      i_obj_p = v9->i_params_p.i_obj_p;
+      if ( i_obj_p->i_params.i_count )
+        v11 = *i_obj_p->i_params.i_array_p;
       else
         v11 = 0i64;
-      v40 = *(SSClass **)(v11 + 16);
+      vfptr = (SSClass *)v11[1].vfptr;
     }
     else
     {
-      v2->i_result = 97;
+      args->i_result = Result_err_context_case_compare;
     }
   }
-  if ( v2->i_result )
+  if ( args->i_result )
     goto LABEL_81;
-  v12 = v3->i_str_ref_p;
-  v37 = v3->i_str_ref_p->i_length;
-  v13 = v12->i_cstr_p;
+  i_str_ref_p = this->i_str_ref_p;
+  i_length = this->i_str_ref_p->i_length;
+  i_cstr_p = i_str_ref_p->i_cstr_p;
   class_union.i_ref_count = 0;
   class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable;
   class_union.i_common_class_p = 0i64;
@@ -263,184 +238,183 @@ SSCase *__fastcall SSParser::parse_case_tail(SSParser *this, SSParser::Args *arg
   merge_vars_p.i_size = 0;
   sorted.i_count = 0;
   sorted.i_array_p = 0i64;
-  *(_QWORD *)&end_pos_p = 0i64;
+  end_pos_p = 0i64;
   sorted.i_size = 0;
   if ( v7 )
   {
     v14 = (char *)AMemory::c_malloc_func(0x20ui64, "SSCase");
-    v38 = v14;
-    v46 = v14;
+    v36 = v14;
+    v44 = v14;
     if ( v14 )
     {
       *(_QWORD *)v14 = &SSExpressionBase::`vftable;
       *(_QWORD *)v14 = &SSCase::`vftable;
       *((_QWORD *)v14 + 1) = 0i64;
-      v15 = (signed __int64)(v14 + 16);
-      v47 = v15;
-      *(_DWORD *)v15 = 0;
-      *(_QWORD *)(v15 + 8) = 0i64;
+      v45 = v14 + 16;
+      *((_DWORD *)v14 + 4) = 0;
+      *((_QWORD *)v14 + 3) = 0i64;
     }
     else
     {
       v14 = 0i64;
-      v38 = 0i64;
+      v36 = 0i64;
     }
     *((_QWORD *)v14 + 1) = v7;
-    v39 = (APCompactArray<SSClause,SSClause,ACompareAddress<SSClause> > *)(v14 + 16);
+    v37 = (APCompactArray<SSClause,SSClause,ACompareAddress<SSClause> > *)(v14 + 16);
   }
   else
   {
-    v39 = 0i64;
+    v37 = 0i64;
   }
-  LODWORD(v47) = 0;
-  v16 = v8;
-  v34 = v8;
-  LOBYTE(v46) = 0;
-  LODWORD(v17) = end_pos_p;
+  LODWORD(v45) = 0;
+  v15 = i_end_pos;
+  v32 = i_end_pos;
+  LOBYTE(v44) = 0;
+  LODWORD(v16) = end_pos_p;
   do
   {
-    v18 = SSParser::parse_ws_any(v3, v16, &v34);
-    v2->i_result = v18;
+    v17 = SSParser::parse_ws_any(this, v15, &v32);
+    args->i_result = v17;
     LOBYTE(end_pos_p) = 0;
-    v19 = 0i64;
-    if ( v18 )
+    v18 = 0i64;
+    if ( v17 )
     {
-      v16 = v34;
+      v15 = v32;
       continue;
     }
-    v2->i_result = 24;
-    v16 = v34;
-    if ( v37 - v34 < 3 )
+    args->i_result = Result_err_expected_clause_block;
+    v15 = v32;
+    if ( i_length - v32 < 3 )
       break;
-    if ( v13[v34] == 101
-      && v13[v34 + 1] == 108
-      && v13[v34 + 2] == 115
-      && v13[v34 + 3] == 101
-      && (v20 = v34 + 4, byte_14236F1C0[(unsigned __int8)v13[v20]]) )
+    if ( i_cstr_p[v32] == 101
+      && i_cstr_p[v32 + 1] == 108
+      && i_cstr_p[v32 + 2] == 115
+      && i_cstr_p[v32 + 3] == 101
+      && byte_14236F1C0[(unsigned __int8)i_cstr_p[v32 + 4]] )
     {
-      v16 = v34 + 4;
-      v34 += 4;
-      v21 = 80;
+      v15 = v32 + 4;
+      v32 += 4;
+      v19 = Result_err_unexpected_else;
       if ( v4 )
-        v21 = 0;
-      v2->i_result = v21;
+        v19 = Result_ok;
+      args->i_result = v19;
       LOBYTE(end_pos_p) = 1;
-      LOBYTE(v46) = 1;
+      LOBYTE(v44) = 1;
     }
     else
     {
-      v22 = v3->i_context.i_top_scope_old.i_count;
-      sorted.i_count = v22;
-      if ( (unsigned int)v22 <= (unsigned int)v17 )
+      i_count = this->i_context.i_top_scope_old.i_count;
+      sorted.i_count = i_count;
+      if ( (unsigned int)i_count <= (unsigned int)v16 )
       {
-        v24 = sorted.i_array_p;
+        i_array_p = sorted.i_array_p;
       }
       else
       {
         AMemory::c_free_func(sorted.i_array_p);
-        v23 = AMemory::c_req_byte_size_func(8 * v22);
-        v17 = (unsigned __int64)v23 >> 3;
-        sorted.i_size = v23 >> 3;
-        v24 = APArrayBase<SSTypedName>::alloc_array(v23 >> 3);
-        sorted.i_array_p = v24;
+        v21 = AMemory::c_req_byte_size_func(8 * i_count);
+        v16 = (unsigned __int64)v21 >> 3;
+        sorted.i_size = v21 >> 3;
+        i_array_p = APArrayBase<SSTypedName>::alloc_array(v21 >> 3);
+        sorted.i_array_p = i_array_p;
       }
-      memmove(v24, v3->i_context.i_top_scope_old.i_array_p, 8 * v22);
-      v2->i_start_pos = v16;
-      v19 = SSParser::parse_expression(v3, v2, SSInvokeTime_immediate);
-      v16 = v2->i_end_pos;
-      v34 = v2->i_end_pos;
-      if ( v3->i_flags.i_flagset & 1 )
+      memmove(i_array_p, this->i_context.i_top_scope_old.i_array_p, 8 * i_count);
+      args->i_start_pos = v15;
+      v18 = SSParser::parse_expression(this, args, SSInvokeTime_immediate);
+      v15 = args->i_end_pos;
+      v32 = v15;
+      if ( (this->i_flags.i_flagset & 1) != 0 )
       {
-        if ( v2->i_result )
+        if ( args->i_result )
           goto LABEL_53;
-        if ( !v2->i_type_p->vfptr->is_class_type(v2->i_type_p, (SSClassDescBase *)&v40->vfptr) )
+        if ( !args->i_type_p->vfptr->is_class_type(args->i_type_p, vfptr) )
         {
-          v2->i_result = 126;
+          args->i_result = Result_err_typecheck_case;
           goto LABEL_53;
         }
       }
     }
-    if ( v2->i_result == Result_ok )
+    if ( args->i_result == Result_ok )
     {
-      v25 = SSParser::parse_ws_any(v3, v16, &v34);
-      v2->i_result = v25;
-      if ( v25 )
+      v23 = SSParser::parse_ws_any(this, v15, &v32);
+      args->i_result = v23;
+      if ( v23 )
       {
-        v16 = v34;
+        v15 = v32;
       }
       else
       {
-        v2->i_result = 24;
-        v16 = v34;
-        if ( v13[v34] == 91 )
+        args->i_result = Result_err_expected_clause_block;
+        v15 = v32;
+        if ( i_cstr_p[v32] == 91 )
         {
-          if ( v3->i_flags.i_flagset & 1 )
-            SSTypeContext::nest_locals(&v3->i_context);
+          if ( (this->i_flags.i_flagset & 1) != 0 )
+            SSTypeContext::nest_locals(&this->i_context);
           LOBYTE(end_pos_p) = 1;
-          v2->i_start_pos = v16;
-          v26 = SSParser::parse_code_block_optimized(v3, v2, SSInvokeTime_any, ResultDesired_true);
-          v16 = v2->i_end_pos;
-          v34 = v2->i_end_pos;
-          if ( v2->i_result )
-            goto LABEL_86;
-          v35 = v16;
-          LODWORD(v47) = v47 + 1;
-          if ( v39 )
+          args->i_start_pos = v15;
+          v24 = SSParser::parse_code_block_optimized(this, args, SSInvokeTime_any, ResultDesired_true);
+          v15 = args->i_end_pos;
+          v32 = v15;
+          if ( args->i_result )
+            goto LABEL_49;
+          v33 = v15;
+          LODWORD(v45) = (_DWORD)v45 + 1;
+          if ( v37 )
           {
-            v27 = (SSClause *)AMemory::c_malloc_func(0x18ui64, "SSClause");
-            v44 = v27;
-            if ( v27 )
+            v25 = (SSClause *)AMemory::c_malloc_func(0x18ui64, "SSClause");
+            v42 = v25;
+            if ( v25 )
             {
-              v27->vfptr = (SSClauseVtbl *)&SSClause::`vftable;
-              v27->i_test_p = v19;
-              v27->i_clause_p = (SSExpressionBase *)&v26->vfptr;
+              v25->vfptr = (SSClauseVtbl *)&SSClause::`vftable;
+              v25->i_test_p = v18;
+              v25->i_clause_p = v24;
             }
-            APCompactArray<SSClause,SSClause,ACompareAddress<SSClause>>::append(v39, v27);
+            APCompactArray<SSClause,SSClause,ACompareAddress<SSClause>>::append(v37, v25);
           }
-          if ( v3->i_flags.i_flagset & 1
-            && ((SSClassUnion::merge_class(&class_union, v2->i_type_p), merge_vars_p.i_count)
-             || v3->i_context.i_current_scope_p->i_count) )
+          if ( (this->i_flags.i_flagset & 1) != 0
+            && ((SSClassUnion::merge_class(&class_union, (SSClassUnion *)args->i_type_p), merge_vars_p.i_count)
+             || this->i_context.i_current_scope_p->i_count) )
           {
-            v28 = v47;
-            SSTypeContext::merge_locals(&v3->i_context, &merge_vars_p, (_DWORD)v47 == 1);
+            v26 = (int)v45;
+            SSTypeContext::merge_locals(&this->i_context, &merge_vars_p, (_DWORD)v45 == 1);
           }
           else
           {
-LABEL_86:
-            v28 = v47;
+LABEL_49:
+            v26 = (int)v45;
           }
-          if ( v3->i_flags.i_flagset & 1 )
+          if ( (this->i_flags.i_flagset & 1) != 0 )
           {
-            AList<SSTypeContext::ScopeVars,SSTypeContext::ScopeVars>::free_last(&v3->i_context.i_scope_stack);
-            v3->i_context.i_current_scope_p = (APSortedLogical<SSTypedName,ASymbol> *)&v3->i_context.i_scope_stack.i_sentinel.i_prev_p[1];
+            AList<SSTypeContext::ScopeVars,SSTypeContext::ScopeVars>::free_last(&this->i_context.i_scope_stack);
+            this->i_context.i_current_scope_p = (APSortedLogical<SSTypedName,ASymbol> *)&this->i_context.i_scope_stack.i_sentinel.i_prev_p[1];
           }
           goto LABEL_54;
         }
       }
     }
 LABEL_53:
-    v28 = v47;
+    v26 = (int)v45;
 LABEL_54:
-    if ( (_BYTE)v46 )
+    if ( (_BYTE)v44 )
       goto LABEL_59;
-    v4 = v47;
+    v4 = (int)v45;
   }
-  while ( v2->i_result == Result_ok );
-  v28 = v47;
+  while ( args->i_result == Result_ok );
+  v26 = (int)v45;
 LABEL_59:
-  v5 = (void (__fastcall ***)(_QWORD, signed __int64))v38;
-  if ( v2->i_result == Result_ok )
+  v5 = (void (__fastcall ***)(_QWORD, __int64))v36;
+  if ( args->i_result == Result_ok )
   {
-    v8 = v35;
+    i_end_pos = v33;
 LABEL_70:
-    v31 = sorted.i_array_p;
+    v29 = sorted.i_array_p;
     goto LABEL_71;
   }
-  if ( v19 )
-    v19->vfptr->__vecDelDtor(v19, 1u);
-  if ( (_BYTE)end_pos_p || v28 < 1 )
+  if ( v18 )
+    v18->vfptr->__vecDelDtor(v18, 1u);
+  if ( (_BYTE)end_pos_p || !v26 )
   {
-    v8 = v16;
+    i_end_pos = v15;
     if ( v5 )
     {
       (**v5)(v5, 1i64);
@@ -449,104 +423,101 @@ LABEL_70:
     goto LABEL_70;
   }
   APSorted<SSTypedName,ASymbol,ACompareLogical<ASymbol>>::remove_all_all(
-    (APSorted<SSTypedName,ASymbol,ACompareLogical<ASymbol> > *)&v3->i_context.i_top_scope_old.i_count,
+    &this->i_context.i_top_scope_old,
     &sorted,
     0,
     0xFFFFFFFF);
-  APSizedArrayBase<SSTypedName>::free_all((APSizedArrayBase<SSTypedName> *)&v3->i_context.i_top_scope_old.i_count);
-  v29 = sorted.i_count;
-  v3->i_context.i_top_scope_old.i_count = sorted.i_count;
-  if ( v29 > v3->i_context.i_top_scope_old.i_size )
+  APSizedArrayBase<SSTypedName>::free_all(&this->i_context.i_top_scope_old);
+  v27 = sorted.i_count;
+  this->i_context.i_top_scope_old.i_count = sorted.i_count;
+  if ( v27 > this->i_context.i_top_scope_old.i_size )
   {
-    AMemory::c_free_func(v3->i_context.i_top_scope_old.i_array_p);
-    v30 = AMemory::c_req_byte_size_func(8 * v3->i_context.i_top_scope_old.i_count) >> 3;
-    v3->i_context.i_top_scope_old.i_size = v30;
-    v3->i_context.i_top_scope_old.i_array_p = APArrayBase<SSTypedName>::alloc_array(v30);
+    AMemory::c_free_func(this->i_context.i_top_scope_old.i_array_p);
+    v28 = AMemory::c_req_byte_size_func(8 * this->i_context.i_top_scope_old.i_count) >> 3;
+    this->i_context.i_top_scope_old.i_size = v28;
+    this->i_context.i_top_scope_old.i_array_p = APArrayBase<SSTypedName>::alloc_array(v28);
   }
-  v31 = sorted.i_array_p;
-  memmove(v3->i_context.i_top_scope_old.i_array_p, sorted.i_array_p, 8i64 * v3->i_context.i_top_scope_old.i_count);
-  v2->i_result = 0;
-  v8 = v35;
+  v29 = sorted.i_array_p;
+  memmove(this->i_context.i_top_scope_old.i_array_p, sorted.i_array_p, 8i64 * this->i_context.i_top_scope_old.i_count);
+  args->i_result = Result_ok;
+  i_end_pos = v33;
 LABEL_71:
-  if ( v3->i_flags.i_flagset & 1 )
+  if ( (this->i_flags.i_flagset & 1) != 0 )
   {
-    if ( v2->i_result == Result_ok )
+    if ( args->i_result == Result_ok )
     {
-      if ( !(_BYTE)v46 )
+      if ( !(_BYTE)v44 )
       {
-        SSTypeContext::merge(&v3->i_context, &merge_vars_p);
-        SSClassUnion::merge_class(&class_union, (SSClassUnaryBase *)&SSBrain::c_none_class_p->vfptr);
+        SSTypeContext::merge(&this->i_context, &merge_vars_p);
+        SSClassUnion::merge_class(&class_union, SSBrain::c_none_class_p);
       }
       if ( class_union.i_union.i_count > 1 )
-        v32 = (SSClassUnaryBase *)SSClassUnion::get_or_create(&class_union);
+        i_common_class_p = (SSClassUnaryBase *)SSClassUnion::get_or_create(&class_union);
       else
-        v32 = class_union.i_common_class_p;
-      v2->i_type_p = (SSClassDescBase *)&v32->vfptr;
-      SSTypeContext::change_variable_types(&v3->i_context, &merge_vars_p);
+        i_common_class_p = class_union.i_common_class_p;
+      args->i_type_p = i_common_class_p;
+      SSTypeContext::change_variable_types(&this->i_context, &merge_vars_p);
     }
-    APSizedArrayBase<SSTypedName>::free_all((APSizedArrayBase<SSTypedName> *)&merge_vars_p.i_count);
+    APSizedArrayBase<SSTypedName>::free_all(&merge_vars_p);
   }
-  AMemory::c_free_func(v31);
+  AMemory::c_free_func(v29);
   AMemory::c_free_func(merge_vars_p.i_array_p);
   SSClassUnion::~SSClassUnion(&class_union);
 LABEL_81:
-  v2->i_end_pos = v8;
+  args->i_end_pos = i_end_pos;
   return (SSCase *)v5;
 }
 
 // File Line: 634
 // RVA: 0x1278A0
-SSParser::eResult __fastcall SSParser::parse_class(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, SSClass **class_pp)
+SSParser::eResult __fastcall SSParser::parse_class(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        SSClass **class_pp)
 {
-  SSClass **v4; // rbx
   SSParser::eResult result; // eax
-  SSClass **v6; // r8
+  SSClass **i_array_p; // r8
   SSClass **v7; // r10
-  signed __int64 v8; // rdx
-  unsigned int v9; // er9
-  _BOOL8 v10; // r9
-  ASymbol name_p; // [rsp+30h] [rbp-18h]
+  SSClass **v8; // rdx
+  unsigned int i_uid; // r9d
+  ASymbol name_p; // [rsp+30h] [rbp-18h] BYREF
 
-  v4 = class_pp;
   name_p.i_uid = -1;
   result = SSParser::parse_name_class(this, start_pos, end_pos_p, &name_p, ClassCheck_no_validate_meta);
   if ( result == Result_ok )
   {
     if ( !SSBrain::c_classes.i_count )
       return 112;
-    v6 = SSBrain::c_classes.i_array_p;
-    v7 = &SSBrain::c_classes.i_array_p[SSBrain::c_classes.i_count - 1i64];
+    i_array_p = SSBrain::c_classes.i_array_p;
+    v7 = &SSBrain::c_classes.i_array_p[SSBrain::c_classes.i_count - 1];
     while ( 1 )
     {
-      v8 = (signed __int64)&v6[((char *)v7 - (char *)v6) >> 4];
-      v9 = *(_DWORD *)(*(_QWORD *)v8 + 8i64);
-      if ( name_p.i_uid < v9 )
-        goto LABEL_17;
-      v10 = name_p.i_uid != v9;
-      if ( !v10 )
+      while ( 1 )
       {
-        if ( *(_QWORD *)v8 )
-        {
-          result = 0;
-          if ( v4 )
-            *v4 = *(SSClass **)v8;
-          return result;
-        }
+        v8 = &i_array_p[((char *)v7 - (char *)i_array_p) >> 4];
+        i_uid = (*v8)->i_name.i_uid;
+        if ( name_p.i_uid >= i_uid )
+          break;
+        if ( i_array_p == v8 )
+          return 112;
+        v7 = v8 - 1;
+      }
+      if ( name_p.i_uid == i_uid )
+        break;
+      if ( v7 == v8 )
         return 112;
-      }
-      if ( v10 < 0 )
-      {
-LABEL_17:
-        if ( v6 == (SSClass **)v8 )
-          return 112;
-        v7 = (SSClass **)(v8 - 8);
-      }
-      else
-      {
-        if ( v7 == (SSClass **)v8 )
-          return 112;
-        v6 = (SSClass **)(v8 + 8);
-      }
+      i_array_p = v8 + 1;
+    }
+    if ( *v8 )
+    {
+      result = Result_ok;
+      if ( class_pp )
+        *class_pp = *v8;
+    }
+    else
+    {
+      return 112;
     }
   }
   return result;
@@ -554,100 +525,97 @@ LABEL_17:
 
 // File Line: 688
 // RVA: 0x127D80
-__int64 __fastcall SSParser::parse_class_instance(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, SSClassUnaryBase **class_pp, bool *item_type_b_p)
+__int64 __fastcall SSParser::parse_class_instance(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        SSTypedClass **class_pp,
+        bool *item_type_b_p)
 {
-  SSTypedClass **v5; // r14
-  unsigned int v6; // esi
-  SSParser *v7; // r15
   SSParser::eResult v8; // edi
   bool v9; // r13
-  AStringRef *v10; // rax
-  char *v11; // rbx
-  eSSInvokeTime v12; // er12
+  AStringRef *i_str_ref_p; // rax
+  char *i_cstr_p; // rbx
+  eSSInvokeTime v12; // r12d
   unsigned __int8 v13; // cl
-  SSClass *v14; // rax
+  SSTypedClass *v14; // rax
   unsigned int v15; // eax
-  SSParameters *v16; // r9
-  SSParameterBase **v17; // rbx
+  SSParameters *p_params_p; // r9
+  SSParameterBase **i_array_p; // rbx
   SSParameterBase **v18; // rsi
   SSParameters *v19; // rax
-  unsigned int find_pos_p; // [rsp+30h] [rbp-50h]
-  SSClass *class_ppa; // [rsp+38h] [rbp-48h]
-  __int64 v23; // [rsp+40h] [rbp-40h]
-  SSParameters params_p; // [rsp+48h] [rbp-38h]
-  unsigned int end_pos_pa; // [rsp+C0h] [rbp+40h]
-  bool v26; // [rsp+C8h] [rbp+48h]
-  unsigned int *v27; // [rsp+D0h] [rbp+50h]
+  unsigned int find_pos_p; // [rsp+30h] [rbp-50h] BYREF
+  SSClass *class_ppa[2]; // [rsp+38h] [rbp-48h] BYREF
+  SSParameters params_p; // [rsp+48h] [rbp-38h] BYREF
+  unsigned int end_pos_pa; // [rsp+C0h] [rbp+40h] BYREF
+  bool v25; // [rsp+C8h] [rbp+48h] BYREF
+  unsigned int *v26; // [rsp+D0h] [rbp+50h]
 
-  v27 = end_pos_p;
-  v23 = -2i64;
-  v5 = (SSTypedClass **)class_pp;
-  v6 = start_pos;
-  v7 = this;
-  v8 = 82;
+  v26 = end_pos_p;
+  class_ppa[1] = (SSClass *)-2i64;
+  v8 = Result_err_unexpected_eof;
   end_pos_pa = start_pos;
   v9 = 0;
-  v26 = 0;
-  v10 = this->i_str_ref_p;
+  v25 = 0;
+  i_str_ref_p = this->i_str_ref_p;
   if ( this->i_str_ref_p->i_length <= start_pos )
     goto LABEL_36;
-  v8 = 19;
-  v11 = v10->i_cstr_p;
-  v12 = 1;
-  v13 = v10->i_cstr_p[start_pos];
+  v8 = Result_err_expected_class_instance;
+  i_cstr_p = i_str_ref_p->i_cstr_p;
+  v12 = SSInvokeTime_immediate;
+  v13 = i_str_ref_p->i_cstr_p[start_pos];
   if ( v13 == 40 )
     goto LABEL_14;
   if ( v13 == 43 || v13 == 95 )
   {
-    v12 = 2;
+    v12 = SSInvokeTime_durational;
     end_pos_pa = start_pos + 1;
 LABEL_14:
     params_p.i_ref_count = 0;
     params_p.i_params.i_count = 0;
     params_p.i_params.i_array_p = 0i64;
-    class_ppa = (SSClass *)&params_p.i_return_params;
+    class_ppa[0] = (SSClass *)&params_p.i_return_params;
     params_p.i_return_params.i_count = 0;
     params_p.i_return_params.i_array_p = 0i64;
-    params_p.i_result_type_p.i_obj_p = (SSClassDescBase *)&SSBrain::c_object_class_p->vfptr;
+    params_p.i_result_type_p.i_obj_p = SSBrain::c_object_class_p;
     if ( SSBrain::c_object_class_p )
-      (*(void (__fastcall **)(SSClass *, signed __int64))SSBrain::c_object_class_p->vfptr->gap8)(
+      (*(void (__fastcall **)(SSClass *, __int64))SSBrain::c_object_class_p->vfptr->gap8)(
         SSBrain::c_object_class_p,
         2i64);
     v15 = 0;
-    if ( v12 == 2 )
+    if ( v12 == SSInvokeTime_durational )
       v15 = 2;
-    v16 = &params_p;
-    if ( !v5 )
-      v16 = 0i64;
-    v8 = SSParser::parse_parameters(v7, end_pos_pa, &end_pos_pa, v16, v15);
-    if ( v8 == Result_ok && v5 )
+    p_params_p = &params_p;
+    if ( !class_pp )
+      p_params_p = 0i64;
+    v8 = SSParser::parse_parameters(this, end_pos_pa, &end_pos_pa, p_params_p, v15);
+    if ( v8 == Result_ok && class_pp )
     {
       if ( params_p.i_params.i_count )
       {
-        v17 = params_p.i_params.i_array_p;
+        i_array_p = params_p.i_params.i_array_p;
         v18 = &params_p.i_params.i_array_p[params_p.i_params.i_count];
         if ( params_p.i_params.i_array_p < v18 )
         {
-          while ( !((unsigned __int8 (*)(void))(*v17)->vfptr->is_defaultable)() )
+          while ( !(*i_array_p)->vfptr->is_defaultable(*i_array_p) )
           {
-            ++v17;
-            if ( v17 >= v18 )
+            if ( ++i_array_p >= v18 )
               goto LABEL_29;
           }
           if ( SSParameters::is_generic(&params_p) )
-            v8 = 8;
+            v8 = Result_err__start;
         }
       }
 LABEL_29:
       v19 = SSParameters::get_or_create(&params_p);
-      *v5 = (SSTypedClass *)SSInvokableClass::get_or_create(SSBrain::c_closure_class_p, v19, v12);
+      *class_pp = (SSTypedClass *)SSInvokableClass::get_or_create(SSBrain::c_closure_class_p, v19, v12);
     }
-    APCompactArrayBase<SSParameterBase>::free_all((APCompactArrayBase<SSParameterBase> *)&params_p.i_params.i_count);
-    APCompactArrayBase<SSTypedName>::free_all((APCompactArrayBase<SSTypedName> *)&params_p.i_return_params.i_count);
+    APCompactArrayBase<SSParameterBase>::free_all(&params_p.i_params);
+    APCompactArrayBase<SSTypedName>::free_all(&params_p.i_return_params);
     if ( params_p.i_result_type_p.i_obj_p )
-      (*(void (**)(void))&params_p.i_result_type_p.i_obj_p->vfptr->gap8[8])();
+      (*(void (__fastcall **)(SSClassDescBase *))&params_p.i_result_type_p.i_obj_p->vfptr->gap8[8])(params_p.i_result_type_p.i_obj_p);
     AMemory::c_free_func(params_p.i_return_params.i_array_p);
-    class_ppa = (SSClass *)&params_p.i_params;
+    class_ppa[0] = (SSClass *)&params_p.i_params;
     AMemory::c_free_func(params_p.i_params.i_array_p);
 LABEL_33:
     if ( v8 )
@@ -657,387 +625,359 @@ LABEL_33:
   if ( !AString::c_is_uppercase[v13] )
     goto LABEL_36;
   find_pos_p = start_pos + 1;
-  AString::find((AString *)&v7->i_str_ref_p, ACharMatch_not_identifier, 1u, &find_pos_p, start_pos + 1, 0xFFFFFFFF);
-  if ( v11[find_pos_p] == 123 )
+  AString::find(this, ACharMatch_not_identifier, 1u, &find_pos_p, start_pos + 1, 0xFFFFFFFF);
+  if ( i_cstr_p[find_pos_p] == 123 )
   {
-    v8 = SSParser::parse_class_typed(v7, v6, &end_pos_pa, v5, &v26);
-    v9 = v26;
+    v8 = SSParser::parse_class_typed(this, start_pos, &end_pos_pa, class_pp, &v25);
+    v9 = v25;
     goto LABEL_33;
   }
-  class_ppa = 0i64;
-  v8 = SSParser::parse_class(v7, v6, &end_pos_pa, &class_ppa);
+  class_ppa[0] = 0i64;
+  v8 = SSParser::parse_class(this, start_pos, &end_pos_pa, class_ppa);
   if ( v8 )
     goto LABEL_36;
-  if ( v5 )
+  if ( class_pp )
   {
-    v14 = class_ppa;
-    if ( class_ppa == SSBrain::c_list_class_p )
-      v14 = (SSClass *)SSTypedClass::get_or_create(
-                         SSBrain::c_list_class_p,
-                         (SSClassDescBase *)&SSBrain::c_object_class_p->vfptr);
-    *v5 = (SSTypedClass *)v14;
+    v14 = (SSTypedClass *)class_ppa[0];
+    if ( class_ppa[0] == SSBrain::c_list_class_p )
+      v14 = SSTypedClass::get_or_create(SSBrain::c_list_class_p, SSBrain::c_object_class_p);
+    *class_pp = v14;
   }
 LABEL_34:
   if ( item_type_b_p )
     *item_type_b_p = v9;
 LABEL_36:
-  if ( v27 )
-    *v27 = end_pos_pa;
+  if ( v26 )
+    *v26 = end_pos_pa;
   return (unsigned int)v8;
 }
 
 // File Line: 838
 // RVA: 0x127CA0
-__int64 __fastcall SSParser::parse_class_desc(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, SSClassDescBase **type_pp)
+__int64 __fastcall SSParser::parse_class_desc(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        SSMetaClass **type_pp)
 {
-  AStringRef *v4; // rbp
-  unsigned int v5; // ebx
-  SSClassDescBase **v6; // r14
-  unsigned int *v7; // rsi
-  SSParser *v8; // rdi
-  SSParser::eResult v9; // er10
-  char *v10; // rbp
-  unsigned int find_pos_p; // [rsp+50h] [rbp+8h]
-  unsigned int end_pos_pa; // [rsp+58h] [rbp+10h]
+  AStringRef *i_str_ref_p; // rbp
+  SSParser::eResult v9; // r10d
+  char *i_cstr_p; // rbp
+  unsigned int find_pos_p; // [rsp+50h] [rbp+8h] BYREF
+  unsigned int end_pos_pa; // [rsp+58h] [rbp+10h] BYREF
 
-  v4 = this->i_str_ref_p;
-  v5 = start_pos;
-  v6 = type_pp;
-  v7 = end_pos_p;
-  v8 = this;
-  v9 = 82;
+  i_str_ref_p = this->i_str_ref_p;
+  v9 = Result_err_unexpected_eof;
   end_pos_pa = start_pos;
-  if ( v4->i_length > start_pos )
+  if ( i_str_ref_p->i_length > start_pos )
   {
-    v10 = v4->i_cstr_p;
-    if ( v10[start_pos] == 60 )
+    i_cstr_p = i_str_ref_p->i_cstr_p;
+    if ( i_cstr_p[start_pos] == 60 )
     {
       find_pos_p = start_pos + 1;
-      AString::find(
-        (AString *)&this->i_str_ref_p,
-        ACharMatch_not_identifier,
-        1u,
-        &find_pos_p,
-        start_pos + 1,
-        0xFFFFFFFF);
-      if ( v10[find_pos_p] == 62 )
-        v9 = SSParser::parse_class_meta(v8, v5, &end_pos_pa, (SSMetaClass **)v6);
+      AString::find(this, ACharMatch_not_identifier, 1u, &find_pos_p, start_pos + 1, 0xFFFFFFFF);
+      if ( i_cstr_p[find_pos_p] == 62 )
+        v9 = SSParser::parse_class_meta(this, start_pos, &end_pos_pa, type_pp);
       else
-        v9 = SSParser::parse_class_union(v8, v5, &end_pos_pa, (SSClassUnion **)v6);
+        v9 = SSParser::parse_class_union(this, start_pos, &end_pos_pa, (SSClassUnion **)type_pp);
     }
     else
     {
-      v9 = SSParser::parse_class_instance(this, start_pos, &end_pos_pa, (SSClassUnaryBase **)type_pp, 0i64);
-      if ( end_pos_pa == v5 && v9 == 19 )
-        v9 = 16;
+      v9 = SSParser::parse_class_instance(this, start_pos, &end_pos_pa, type_pp, 0i64);
+      if ( end_pos_pa == start_pos && v9 == Result_err_expected_class_instance )
+        v9 = Result_err_expected_class_desc;
     }
   }
-  if ( v7 )
-    *v7 = end_pos_pa;
+  if ( end_pos_p )
+    *end_pos_p = end_pos_pa;
   return (unsigned int)v9;
 }
 
 // File Line: 905
 // RVA: 0x128010
-__int64 __fastcall SSParser::parse_class_meta(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, SSMetaClass **mclass_pp)
+__int64 __fastcall SSParser::parse_class_meta(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        SSMetaClass **mclass_pp)
 {
   __int64 v4; // rdi
-  AStringRef *v5; // rdx
-  unsigned int v6; // er10
-  unsigned int *v7; // r14
-  SSMetaClass **v8; // r15
-  SSParser *v9; // rsi
+  AStringRef *i_str_ref_p; // rdx
+  unsigned int i_length; // r10d
   unsigned int v10; // ebx
-  char *v11; // rbp
-  unsigned int v12; // eax
+  char *i_cstr_p; // rbp
+  unsigned int i_uid; // eax
   ASymbol *v13; // rax
-  SSClass **v14; // r8
+  SSClass **i_array_p; // r8
   SSClass **v15; // r10
-  signed __int64 v16; // rcx
-  unsigned int v17; // er9
-  _BOOL8 v18; // r9
-  __int64 v19; // rcx
-  __int64 v20; // rax
-  ASymbol result; // [rsp+60h] [rbp+8h]
-  unsigned int find_pos_p; // [rsp+68h] [rbp+10h]
+  SSClass **v16; // rcx
+  unsigned int v17; // r9d
+  __int64 v18; // rcx
+  __int64 v19; // rax
+  __int64 result; // [rsp+60h] [rbp+8h] BYREF
+  unsigned int find_pos_p; // [rsp+68h] [rbp+10h] BYREF
 
   v4 = start_pos;
-  v5 = this->i_str_ref_p;
-  v6 = this->i_str_ref_p->i_length;
-  v7 = end_pos_p;
-  v8 = mclass_pp;
-  v9 = this;
+  i_str_ref_p = this->i_str_ref_p;
+  i_length = this->i_str_ref_p->i_length;
   v10 = 82;
-  if ( v6 - (unsigned int)v4 < 3 )
-    goto LABEL_24;
-  v11 = v5->i_cstr_p;
-  v10 = 20;
-  if ( v5->i_cstr_p[v4] != 60 )
-    goto LABEL_24;
-  v4 = (unsigned int)(v4 + 1);
-  v12 = -1;
-  v10 = 82;
-  find_pos_p = v4;
-  if ( v6 > (unsigned int)v4 )
+  if ( i_length - (unsigned int)v4 >= 3 )
   {
-    v10 = 15;
-    if ( AString::c_is_uppercase[(unsigned __int8)v11[v4]] )
+    i_cstr_p = i_str_ref_p->i_cstr_p;
+    v10 = 20;
+    if ( i_str_ref_p->i_cstr_p[v4] == 60 )
     {
-      find_pos_p = v6;
-      AString::find((AString *)&this->i_str_ref_p, ACharMatch_not_identifier, 1u, &find_pos_p, v4 + 1, 0xFFFFFFFF);
-      v13 = SSParser::as_symbol(v9, &result, v4, find_pos_p);
-      LODWORD(v4) = find_pos_p;
-      v10 = 0;
-      v12 = v13->i_uid;
-      if ( v12 == ASymbol_Class.i_uid )
-        v10 = 74;
-    }
-  }
-  if ( v10 )
-    goto LABEL_19;
-  v10 = 112;
-  if ( !SSBrain::c_classes.i_count )
-    goto LABEL_19;
-  v14 = SSBrain::c_classes.i_array_p;
-  v15 = &SSBrain::c_classes.i_array_p[SSBrain::c_classes.i_count - 1i64];
-  while ( 1 )
-  {
-    v16 = (signed __int64)&v14[((char *)v15 - (char *)v14) >> 4];
-    v17 = *(_DWORD *)(*(_QWORD *)v16 + 8i64);
-    if ( v12 < v17 )
-      goto LABEL_15;
-    v18 = v12 != v17;
-    if ( !v18 )
-      break;
-    if ( v18 < 0 )
-    {
-LABEL_15:
-      if ( v14 == (SSClass **)v16 )
-        goto LABEL_19;
-      v15 = (SSClass **)(v16 - 8);
-    }
-    else
-    {
-      if ( v15 == (SSClass **)v16 )
-        goto LABEL_19;
-      v14 = (SSClass **)(v16 + 8);
-    }
-  }
-  v19 = *(_QWORD *)v16;
-  if ( v19 )
-  {
-    v10 = 0;
-    goto LABEL_20;
-  }
-LABEL_19:
-  v19 = *(_QWORD *)&result.i_uid;
-LABEL_20:
-  if ( !v10 )
-  {
-    v10 = 21;
-    if ( v11[(unsigned int)v4] == 62 )
-    {
-      LODWORD(v4) = v4 + 1;
-      v10 = 0;
-      if ( v8 )
-        *v8 = (SSMetaClass *)(*(__int64 (**)(void))(*(_QWORD *)v19 + 136i64))();
-    }
-  }
-LABEL_24:
-  v20 = v10;
-  if ( v7 )
-    *v7 = v4;
-  return v20;
-}
-
-// File Line: 977
-// RVA: 0x1281B0
-__int64 __fastcall SSParser::parse_class_typed(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, SSTypedClass **tclass_pp, bool *item_type_b_p)
-{
-  AStringRef *v5; // r10
-  unsigned int v6; // esi
-  unsigned int v7; // eax
-  SSParser *v8; // r12
-  SSTypedClass **v9; // r13
-  SSParser::eResult v10; // edi
-  ASymbol *v11; // rax
-  SSClass **v12; // r8
-  SSClass **v13; // r10
-  signed __int64 v14; // rdx
-  unsigned int v15; // er9
-  _BOOL8 v16; // rcx
-  _BOOL8 v17; // r9
-  SSClass *v18; // rbp
-  SSClass *v19; // rcx
-  char *v20; // r15
-  SSClassDescBase **v21; // r9
-  bool v22; // r14
-  SSParser::eResult v23; // eax
-  ASymbol result[2]; // [rsp+30h] [rbp-48h]
-  unsigned int v26; // [rsp+80h] [rbp+8h]
-  unsigned int end_pos_pa; // [rsp+88h] [rbp+10h]
-  unsigned int *v28; // [rsp+90h] [rbp+18h]
-
-  v28 = end_pos_p;
-  v5 = this->i_str_ref_p;
-  v6 = start_pos;
-  v7 = -1;
-  v26 = start_pos;
-  v8 = this;
-  v9 = tclass_pp;
-  v10 = 82;
-  if ( v5->i_length > start_pos )
-  {
-    v10 = 15;
-    if ( AString::c_is_uppercase[(unsigned __int8)v5->i_cstr_p[start_pos]] )
-    {
-      v26 = start_pos + 1;
-      v26 = v5->i_length;
-      AString::find((AString *)&this->i_str_ref_p, ACharMatch_not_identifier, 1u, &v26, start_pos + 1, 0xFFFFFFFF);
-      v11 = SSParser::as_symbol(v8, result, v6, v26);
-      v6 = v26;
-      v10 = 0;
-      v7 = v11->i_uid;
-      if ( v7 == ASymbol_Class.i_uid )
-        v10 = 74;
-    }
-  }
-  end_pos_pa = v6;
-  if ( v10 )
-    goto LABEL_17;
-  v10 = 112;
-  if ( !SSBrain::c_classes.i_count )
-    goto LABEL_17;
-  v12 = SSBrain::c_classes.i_array_p;
-  v13 = &SSBrain::c_classes.i_array_p[SSBrain::c_classes.i_count - 1i64];
-  while ( 1 )
-  {
-    v14 = (signed __int64)&v12[((char *)v13 - (char *)v12) >> 4];
-    v15 = *(_DWORD *)(*(_QWORD *)v14 + 8i64);
-    if ( v7 < v15 )
-      goto LABEL_13;
-    v16 = v7 == v15;
-    v17 = v7 != v15;
-    if ( v16 == 1 )
-      break;
-    if ( v17 < 0 )
-    {
-LABEL_13:
-      if ( v12 == (SSClass **)v14 )
-        goto LABEL_17;
-      v13 = (SSClass **)(v14 - 8);
-    }
-    else
-    {
-      if ( v13 == (SSClass **)v14 )
-        goto LABEL_17;
-      v12 = (SSClass **)(v14 + 8);
-    }
-  }
-  v18 = *(SSClass **)v14;
-  if ( *(_QWORD *)v14 )
-  {
-    v10 = 0;
-    goto LABEL_18;
-  }
-LABEL_17:
-  v18 = (SSClass *)v28;
-LABEL_18:
-  if ( v10 == Result_ok )
-  {
-    v10 = 134;
-    if ( SSBrain::c_list_class_p == v18
-      || (v19 = v18->i_superclass_p) != 0i64 && SSClass::is_class(v19, SSBrain::c_list_class_p) )
-    {
-      v10 = 17;
-      v20 = v8->i_str_ref_p->i_cstr_p;
-      if ( v8->i_str_ref_p->i_cstr_p[v6] == 123 )
+      v4 = (unsigned int)(v4 + 1);
+      i_uid = -1;
+      v10 = 82;
+      find_pos_p = v4;
+      if ( i_length > (unsigned int)v4 )
       {
-        v10 = SSParser::parse_ws_any(v8, v6 + 1, &end_pos_pa);
-        if ( v10 )
-          goto LABEL_37;
-        v21 = (SSClassDescBase **)result;
-        if ( !v9 )
-          v21 = 0i64;
-        v22 = 1;
-        *(_QWORD *)&result[0].i_uid = SSBrain::c_object_class_p;
-        v23 = (unsigned int)SSParser::parse_class_desc(v8, end_pos_pa, &v26, v21);
-        v6 = v26;
-        v10 = v23;
-        if ( v26 == end_pos_pa )
+        v10 = 15;
+        if ( AString::c_is_uppercase[(unsigned __int8)i_cstr_p[v4]] )
         {
-          v22 = 0;
+          find_pos_p = i_length;
+          AString::find(this, ACharMatch_not_identifier, 1u, &find_pos_p, v4 + 1, 0xFFFFFFFF);
+          v13 = SSParser::as_symbol(this, (ASymbol *)&result, v4, find_pos_p);
+          LODWORD(v4) = find_pos_p;
           v10 = 0;
+          i_uid = v13->i_uid;
+          if ( i_uid == ASymbol_Class.i_uid )
+            v10 = 74;
         }
-        end_pos_pa = v26;
-        if ( v10 == Result_ok )
+      }
+      if ( v10 )
+        goto LABEL_18;
+      v10 = 112;
+      if ( !SSBrain::c_classes.i_count )
+        goto LABEL_18;
+      i_array_p = SSBrain::c_classes.i_array_p;
+      v15 = &SSBrain::c_classes.i_array_p[SSBrain::c_classes.i_count - 1];
+      while ( 1 )
+      {
+        while ( 1 )
         {
-          if ( v22 )
-          {
-            v10 = SSParser::parse_ws_any(v8, v26, &end_pos_pa);
-            if ( v10 == Result_ok )
-            {
-              v6 = end_pos_pa;
-              goto LABEL_32;
-            }
-LABEL_37:
-            v6 = end_pos_pa;
-          }
-          else
-          {
-LABEL_32:
-            v10 = 18;
-            if ( v20[v6] == 125 )
-            {
-              ++v6;
-              v10 = 0;
-              if ( v9 )
-                *v9 = SSTypedClass::get_or_create(v18, *(SSClassDescBase **)&result[0].i_uid);
-              if ( item_type_b_p )
-                *item_type_b_p = v22;
-            }
-          }
+          v16 = &i_array_p[((char *)v15 - (char *)i_array_p) >> 4];
+          v17 = (*v16)->i_name.i_uid;
+          if ( i_uid >= v17 )
+            break;
+          if ( i_array_p == v16 )
+            goto LABEL_18;
+          v15 = v16 - 1;
+        }
+        if ( i_uid == v17 )
+          break;
+        if ( v15 == v16 )
+          goto LABEL_18;
+        i_array_p = v16 + 1;
+      }
+      v18 = (__int64)*v16;
+      if ( v18 )
+        v10 = 0;
+      else
+LABEL_18:
+        v18 = result;
+      if ( !v10 )
+      {
+        v10 = 21;
+        if ( i_cstr_p[(unsigned int)v4] == 62 )
+        {
+          LODWORD(v4) = v4 + 1;
+          v10 = 0;
+          if ( mclass_pp )
+            *mclass_pp = (SSMetaClass *)(*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v18 + 136i64))(v18);
         }
       }
     }
   }
-  if ( v28 )
-    *v28 = v6;
-  return (unsigned int)v10;
+  v19 = v10;
+  if ( end_pos_p )
+    *end_pos_p = v4;
+  return v19;
 }
+
+// File Line: 977
+// RVA: 0x1281B0
+__int64 __fastcall SSParser::parse_class_typed(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        SSTypedClass **tclass_pp,
+        bool *item_type_b_p)
+{
+  AStringRef *i_str_ref_p; // r10
+  unsigned int v6; // esi
+  unsigned int i_uid; // eax
+  SSParser::eResult v10; // edi
+  ASymbol *v11; // rax
+  SSClass **i_array_p; // r8
+  SSClass **v13; // r10
+  SSClass **v14; // rdx
+  unsigned int v15; // r9d
+  SSClass *v16; // rbp
+  SSClass *i_superclass_p; // rcx
+  char *i_cstr_p; // r15
+  SSMetaClass **v19; // r9
+  bool v20; // r14
+  SSParser::eResult v21; // eax
+  ASymbol result[2]; // [rsp+30h] [rbp-48h] BYREF
+  unsigned int i_length; // [rsp+80h] [rbp+8h] BYREF
+  unsigned int end_pos_pa; // [rsp+88h] [rbp+10h] BYREF
+  unsigned int *v26; // [rsp+90h] [rbp+18h]
+
+  v26 = end_pos_p;
+  i_str_ref_p = this->i_str_ref_p;
+  v6 = start_pos;
+  i_uid = -1;
+  i_length = start_pos;
+  v10 = Result_err_unexpected_eof;
+  if ( i_str_ref_p->i_length > start_pos )
+  {
+    v10 = Result_err_expected_class;
+    if ( AString::c_is_uppercase[(unsigned __int8)i_str_ref_p->i_cstr_p[start_pos]] )
+    {
+      i_length = start_pos + 1;
+      i_length = i_str_ref_p->i_length;
+      AString::find(this, ACharMatch_not_identifier, 1u, &i_length, start_pos + 1, 0xFFFFFFFF);
+      v11 = SSParser::as_symbol(this, result, v6, i_length);
+      v6 = i_length;
+      v10 = Result_ok;
+      i_uid = v11->i_uid;
+      if ( i_uid == ASymbol_Class.i_uid )
+        v10 = Result_err_unexpected_class_class;
+    }
+  }
+  end_pos_pa = v6;
+  if ( v10 )
+    goto LABEL_16;
+  v10 = Result_err_context_non_class;
+  if ( !SSBrain::c_classes.i_count )
+    goto LABEL_16;
+  i_array_p = SSBrain::c_classes.i_array_p;
+  v13 = &SSBrain::c_classes.i_array_p[SSBrain::c_classes.i_count - 1];
+  while ( 1 )
+  {
+    while ( 1 )
+    {
+      v14 = &i_array_p[((char *)v13 - (char *)i_array_p) >> 4];
+      v15 = (*v14)->i_name.i_uid;
+      if ( i_uid >= v15 )
+        break;
+      if ( i_array_p == v14 )
+        goto LABEL_16;
+      v13 = v14 - 1;
+    }
+    if ( i_uid == v15 )
+      break;
+    if ( v13 == v14 )
+      goto LABEL_16;
+    i_array_p = v14 + 1;
+  }
+  v16 = *v14;
+  if ( *v14 )
+    v10 = Result_ok;
+  else
+LABEL_16:
+    v16 = (SSClass *)v26;
+  if ( v10 == Result_ok )
+  {
+    v10 = Result_err_typecheck_list;
+    if ( SSBrain::c_list_class_p == v16
+      || (i_superclass_p = v16->i_superclass_p) != 0i64 && SSClass::is_class(i_superclass_p, SSBrain::c_list_class_p) )
+    {
+      v10 = Result_err_expected_class_list_item;
+      i_cstr_p = this->i_str_ref_p->i_cstr_p;
+      if ( i_cstr_p[v6] == 123 )
+      {
+        v10 = SSParser::parse_ws_any(this, v6 + 1, &end_pos_pa);
+        if ( v10 )
+          goto LABEL_36;
+        v19 = (SSMetaClass **)result;
+        if ( !tclass_pp )
+          v19 = 0i64;
+        v20 = 1;
+        *(_QWORD *)&result[0].i_uid = SSBrain::c_object_class_p;
+        v21 = (unsigned int)SSParser::parse_class_desc(this, end_pos_pa, &i_length, v19);
+        v6 = i_length;
+        v10 = v21;
+        if ( i_length == end_pos_pa )
+        {
+          v20 = 0;
+          v10 = Result_ok;
+        }
+        end_pos_pa = i_length;
+        if ( v10 == Result_ok )
+        {
+          if ( !v20 )
+            goto LABEL_31;
+          v10 = SSParser::parse_ws_any(this, i_length, &end_pos_pa);
+          if ( v10 == Result_ok )
+          {
+            v6 = end_pos_pa;
+LABEL_31:
+            v10 = Result_err_expected_class_list_end;
+            if ( i_cstr_p[v6] == 125 )
+            {
+              ++v6;
+              v10 = Result_ok;
+              if ( tclass_pp )
+                *tclass_pp = SSTypedClass::get_or_create(v16, *(SSClassDescBase **)&result[0].i_uid);
+              if ( item_type_b_p )
+                *item_type_b_p = v20;
+            }
+            goto LABEL_37;
+          }
+LABEL_36:
+          v6 = end_pos_pa;
+        }
+      }
+    }
+  }
+LABEL_37:
+  if ( v26 )
+    *v26 = v6;
+  return (unsigned int)v10;
+}EL_36:
+          v6 = end_pos_pa;
+        }
+      }
+    }
+  }
+LABEL_37:
+  if ( v26 )
+    *v26 = v6;
+  return (unsigned int)v1
 
 // File Line: 1095
 // RVA: 0x128450
-__int64 __fastcall SSParser::parse_class_union(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, SSClassUnion **type_pp)
+__int64 __fastcall SSParser::parse_class_union(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        SSClassUnion **type_pp)
 {
-  SSClassUnion **v4; // r12
-  unsigned int *v5; // r13
   unsigned int v6; // ebx
-  SSParser *v7; // r15
   unsigned int v8; // esi
-  char *v9; // rbp
-  SSClassUnaryBase **v10; // rdi
-  unsigned int v11; // er14
+  char *i_cstr_p; // rbp
+  SSClassUnaryBase **p_new_class; // rdi
+  unsigned int v11; // r14d
   __int64 v12; // rbx
   unsigned int v13; // eax
-  SSClassUnaryBase **v14; // r14
+  SSClassUnaryBase **i_array_p; // r14
   __int64 *v15; // rdi
   SSClassUnaryBase **v16; // rbp
   __int64 result; // rax
-  SSClassUnion class_union; // [rsp+38h] [rbp-70h]
-  SSClassUnaryBase *new_class; // [rsp+B0h] [rbp+8h]
-  unsigned int end_pos_pa; // [rsp+B8h] [rbp+10h]
+  SSClassUnion class_union; // [rsp+38h] [rbp-70h] BYREF
+  SSClassUnaryBase *new_class; // [rsp+B0h] [rbp+8h] BYREF
+  unsigned int end_pos_pa; // [rsp+B8h] [rbp+10h] BYREF
 
-  v4 = type_pp;
-  v5 = end_pos_p;
   v6 = start_pos;
-  v7 = this;
   v8 = 82;
   if ( this->i_str_ref_p->i_length - start_pos >= 3 )
   {
-    v9 = this->i_str_ref_p->i_cstr_p;
+    i_cstr_p = this->i_str_ref_p->i_cstr_p;
     v8 = 22;
-    if ( v9[start_pos] == 60 )
+    if ( i_cstr_p[start_pos] == 60 )
     {
       class_union.i_ref_count = 0;
       class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable;
@@ -1046,18 +986,18 @@ __int64 __fastcall SSParser::parse_class_union(SSParser *this, unsigned int star
       class_union.i_union.i_array_p = 0i64;
       class_union.i_union.i_size = 0;
       new_class = 0i64;
-      v10 = &new_class;
+      p_new_class = &new_class;
       if ( !type_pp )
-        v10 = 0i64;
+        p_new_class = 0i64;
       v11 = 0;
       do
       {
         v12 = v6 + 1;
         end_pos_pa = v12;
-        if ( v9[v12] == 60 )
-          v13 = SSParser::parse_class_meta(v7, v12, &end_pos_pa, (SSMetaClass **)v10);
+        if ( i_cstr_p[v12] == 60 )
+          v13 = SSParser::parse_class_meta(this, v12, &end_pos_pa, (SSMetaClass **)p_new_class);
         else
-          v13 = SSParser::parse_class_instance(v7, v12, &end_pos_pa, v10, 0i64);
+          v13 = SSParser::parse_class_instance(this, v12, &end_pos_pa, (SSTypedClass **)p_new_class, 0i64);
         v8 = v13;
         if ( v13 )
         {
@@ -1065,26 +1005,26 @@ __int64 __fastcall SSParser::parse_class_union(SSParser *this, unsigned int star
           goto LABEL_19;
         }
         ++v11;
-        if ( v10 )
+        if ( p_new_class )
           SSClassUnion::merge_class(&class_union, new_class);
         v6 = end_pos_pa;
       }
-      while ( v9[end_pos_pa] == 124 );
+      while ( i_cstr_p[end_pos_pa] == 124 );
       v8 = 23;
-      if ( v9[end_pos_pa] == 62 )
+      if ( i_cstr_p[end_pos_pa] == 62 )
       {
         v6 = end_pos_pa + 1;
         v8 = 91;
         if ( v11 >= 2 )
         {
           v8 = 0;
-          if ( v4 )
+          if ( type_pp )
           {
             v8 = 139;
             if ( class_union.i_union.i_count > 1 )
             {
               v8 = 0;
-              *v4 = SSClassUnion::get_or_create(&class_union);
+              *type_pp = SSClassUnion::get_or_create(&class_union);
             }
           }
         }
@@ -1092,8 +1032,8 @@ __int64 __fastcall SSParser::parse_class_union(SSParser *this, unsigned int star
 LABEL_19:
       class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable;
       if ( class_union.i_common_class_p )
-        ((void (*)(void))class_union.i_common_class_p->vfptr->dereference_delay)();
-      v14 = class_union.i_union.i_array_p;
+        class_union.i_common_class_p->vfptr->dereference_delay(class_union.i_common_class_p);
+      i_array_p = class_union.i_union.i_array_p;
       if ( class_union.i_union.i_count )
       {
         v15 = (__int64 *)class_union.i_union.i_array_p;
@@ -1101,68 +1041,64 @@ LABEL_19:
         if ( class_union.i_union.i_array_p < v16 )
         {
           do
-          {
-             SSClassDescBase::`vcall{24,{flat}}(*v15);
-            ++v15;
-          }
+             SSClassDescBase::`vcall{24,{flat}}(*v15++);
           while ( v15 < (__int64 *)v16 );
         }
       }
-      AMemory::c_free_func(v14);
+      AMemory::c_free_func(i_array_p);
       class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassDescBase::`vftable;
     }
   }
   result = v8;
-  if ( v5 )
-    *v5 = v6;
+  if ( end_pos_p )
+    *end_pos_p = v6;
   return result;
 }
 
 // File Line: 1206
 // RVA: 0x127960
-SSExpressionBase *__fastcall SSParser::parse_class_cast(SSParser *this, SSParser::Args *args, SSExpressionBase *receiver_p)
+SSExpressionBase *__fastcall SSParser::parse_class_cast(
+        SSParser *this,
+        SSParser::Args *args,
+        SSExpressionBase *receiver_p)
 {
-  SSExpressionBase *v3; // rbp
-  SSParser::Args *v4; // rdi
-  SSParser *v5; // rsi
-  char *v6; // rdx
+  char *i_cstr_p; // rdx
   __int64 v7; // r10
   SSExpressionBase *v8; // rbx
   SSParser::eResult v9; // eax
   SSClassDescBase *v10; // rsi
   SSClassDescBase *v11; // rax
   SSExpressionBase *v12; // rax
-  unsigned int end_pos_p; // [rsp+50h] [rbp+8h]
-  SSClassDescBase *type_pp; // [rsp+58h] [rbp+10h]
+  unsigned int end_pos_p; // [rsp+50h] [rbp+8h] BYREF
+  SSClassDescBase *type_pp; // [rsp+58h] [rbp+10h] BYREF
 
-  v3 = receiver_p;
-  v4 = args;
-  v5 = this;
-  v6 = this->i_str_ref_p->i_cstr_p;
-  end_pos_p = v4->i_start_pos;
+  i_cstr_p = this->i_str_ref_p->i_cstr_p;
+  end_pos_p = args->i_start_pos;
   v7 = end_pos_p;
   v8 = 0i64;
-  v4->i_result = 12;
-  if ( (unsigned int)(this->i_str_ref_p->i_length - v7) >= 2 && v6[v7] == 60 && v6[(unsigned int)(v7 + 1)] == 62 )
+  args->i_result = Result_err_expected_cast_op;
+  if ( (unsigned int)(this->i_str_ref_p->i_length - v7) >= 2
+    && i_cstr_p[v7] == 60
+    && i_cstr_p[(unsigned int)(v7 + 1)] == 62 )
   {
     v9 = SSParser::parse_class_desc(this, v7 + 2, &end_pos_p, &type_pp);
-    v4->i_result = v9;
+    args->i_result = v9;
     if ( v9 == Result_ok )
     {
-      if ( v5->i_flags.i_flagset & 1 )
+      if ( (this->i_flags.i_flagset & 1) != 0 )
       {
         if ( type_pp )
-          v10 = type_pp->vfptr->as_finalized_generic(type_pp, (SSClassDescBase *)v5->i_context.i_obj_scope_p);
+          v10 = type_pp->vfptr->as_finalized_generic(type_pp, this->i_context.i_obj_scope_p);
         else
           v10 = 0i64;
-        if ( v4->i_type_p->vfptr->is_class_type(v4->i_type_p, v10) )
+        if ( args->i_type_p->vfptr->is_class_type(args->i_type_p, v10) )
         {
-          v8 = v3;
+          v8 = receiver_p;
           goto LABEL_17;
         }
-        if ( !v10->vfptr->is_class_type(v10, v4->i_type_p) )
+        if ( !v10->vfptr->is_class_type(v10, args->i_type_p) )
         {
-          v4->i_result = 127;
+          args->i_result = Result_err_typecheck_cast;
           goto LABEL_17;
         }
       }
@@ -1170,14 +1106,14 @@ SSExpressionBase *__fastcall SSParser::parse_class_cast(SSParser *this, SSParser
       {
         v10 = type_pp;
       }
-      v4->i_type_p = v10;
-      if ( v4->i_flags & 1 )
+      args->i_type_p = v10;
+      if ( (args->i_flags & 1) != 0 )
       {
         v11 = (SSClassDescBase *)AMemory::c_malloc_func(0x18ui64, "SSCast");
         type_pp = v11;
         if ( v11 )
         {
-          SSCast::SSCast((SSCast *)v11, v10, v3);
+          SSCast::SSCast((SSCast *)v11, v10, receiver_p);
           v8 = v12;
         }
       }
@@ -1185,140 +1121,134 @@ SSExpressionBase *__fastcall SSParser::parse_class_cast(SSParser *this, SSParser
 LABEL_17:
     LODWORD(v7) = end_pos_p;
   }
-  v4->i_end_pos = v7;
+  args->i_end_pos = v7;
   return v8;
 }
 
 // File Line: 1308
 // RVA: 0x127A90
-SSExpressionBase *__fastcall SSParser::parse_class_conversion(SSParser *this, SSParser::Args *args, SSExpressionBase *receiver_p, __int64 a4)
+SSExpressionBase *__fastcall SSParser::parse_class_conversion(
+        SSParser *this,
+        SSParser::Args *args,
+        SSExpressionBase *receiver_p,
+        __int64 a4)
 {
-  SSExpressionBase *v4; // r15
-  SSParser::Args *v5; // rsi
-  SSParser *v6; // r14
-  char *v7; // rdx
-  __int64 v8; // rbp
+  char *i_cstr_p; // rdx
+  __int64 i_start_pos; // rbp
   SSExpressionBase *v9; // rbx
-  char *v10; // r8
-  unsigned int v11; // er10
-  unsigned int v12; // eax
-  signed int v13; // er11
+  char *i_str_ref_p; // r8
+  unsigned int i_length; // r10d
+  unsigned int i_uid; // eax
+  SSParser::eResult v13; // r11d
   SSClass **v14; // r10
-  signed __int64 v15; // rdx
+  char *v15; // rdx
   _BOOL8 v16; // rcx
-  ASymbol *v17; // rdi
+  __int64 v17; // rdi
   SSExpressionBase *v18; // rax
-  unsigned int find_pos_p; // [rsp+70h] [rbp+8h]
-  ASymbol result; // [rsp+78h] [rbp+10h]
+  SSExpressionBase *find_pos_p; // [rsp+70h] [rbp+8h] BYREF
+  ASymbol result; // [rsp+78h] [rbp+10h] BYREF
 
-  v4 = receiver_p;
-  v5 = args;
-  v6 = this;
-  v7 = this->i_str_ref_p->i_cstr_p;
-  v8 = v5->i_start_pos;
+  i_cstr_p = this->i_str_ref_p->i_cstr_p;
+  i_start_pos = args->i_start_pos;
   v9 = 0i64;
-  v5->i_result = 27;
-  v10 = (char *)this->i_str_ref_p;
-  v11 = this->i_str_ref_p->i_length;
-  if ( (unsigned int)(this->i_str_ref_p->i_length - v8) < 2 || v7[v8] != 62 || v7[(unsigned int)(v8 + 1)] != 62 )
-    goto LABEL_31;
-  v8 = (unsigned int)(v8 + 2);
-  v12 = -1;
-  v13 = 82;
-  find_pos_p = v8;
-  if ( v11 > (unsigned int)v8 )
+  args->i_result = Result_err_expected_conversion_op;
+  i_str_ref_p = (char *)this->i_str_ref_p;
+  i_length = this->i_str_ref_p->i_length;
+  if ( i_length - (unsigned int)i_start_pos >= 2
+    && i_cstr_p[i_start_pos] == 62
+    && i_cstr_p[(unsigned int)(i_start_pos + 1)] == 62 )
   {
-    v10 = *(char **)v10;
-    v13 = 15;
-    a4 = (unsigned __int8)v10[v8];
-    if ( AString::c_is_uppercase[a4] )
+    i_start_pos = (unsigned int)(i_start_pos + 2);
+    i_uid = -1;
+    v13 = Result_err_unexpected_eof;
+    LODWORD(find_pos_p) = i_start_pos;
+    if ( i_length > (unsigned int)i_start_pos )
     {
-      find_pos_p = v11;
-      AString::find((AString *)&this->i_str_ref_p, ACharMatch_not_identifier, 1u, &find_pos_p, v8 + 1, 0xFFFFFFFF);
-      v12 = SSParser::as_symbol(v6, &result, v8, find_pos_p)->i_uid;
-      v13 = 0;
-      if ( v12 == ASymbol_Class.i_uid )
-        v13 = 74;
-      LODWORD(v8) = find_pos_p;
+      i_str_ref_p = *(char **)i_str_ref_p;
+      v13 = Result_err_expected_class;
+      a4 = (unsigned __int8)i_str_ref_p[i_start_pos];
+      if ( AString::c_is_uppercase[a4] )
+      {
+        LODWORD(find_pos_p) = i_length;
+        AString::find(this, ACharMatch_not_identifier, 1u, (unsigned int *)&find_pos_p, i_start_pos + 1, 0xFFFFFFFF);
+        i_uid = SSParser::as_symbol(this, &result, i_start_pos, (unsigned int)find_pos_p)->i_uid;
+        v13 = Result_ok;
+        if ( i_uid == ASymbol_Class.i_uid )
+          v13 = Result_err_unexpected_class_class;
+        LODWORD(i_start_pos) = (_DWORD)find_pos_p;
+      }
     }
-  }
-  if ( v13 )
-    goto LABEL_21;
-  v13 = 112;
-  if ( !SSBrain::c_classes.i_count )
-    goto LABEL_21;
-  v10 = (char *)SSBrain::c_classes.i_array_p;
-  v14 = &SSBrain::c_classes.i_array_p[SSBrain::c_classes.i_count - 1i64];
-  while ( 1 )
-  {
-    v15 = (signed __int64)&v10[8 * (((char *)v14 - v10) >> 4)];
-    a4 = *(unsigned int *)(*(_QWORD *)v15 + 8i64);
-    if ( v12 < (unsigned int)a4 )
-      goto LABEL_17;
-    v16 = v12 == (_DWORD)a4;
-    a4 = v12 != (_DWORD)a4;
-    if ( v16 == 1 )
-      break;
-    if ( a4 < 0 )
+    if ( v13 )
+      goto LABEL_20;
+    v13 = Result_err_context_non_class;
+    if ( !SSBrain::c_classes.i_count )
+      goto LABEL_20;
+    i_str_ref_p = (char *)SSBrain::c_classes.i_array_p;
+    v14 = &SSBrain::c_classes.i_array_p[SSBrain::c_classes.i_count - 1];
+    while ( 1 )
     {
-LABEL_17:
-      if ( v10 == (char *)v15 )
-        goto LABEL_21;
-      v14 = (SSClass **)(v15 - 8);
-    }
-    else
-    {
+      while ( 1 )
+      {
+        v15 = &i_str_ref_p[8 * (((char *)v14 - i_str_ref_p) >> 4)];
+        a4 = *(unsigned int *)(*(_QWORD *)v15 + 8i64);
+        if ( i_uid >= (unsigned int)a4 )
+          break;
+        if ( i_str_ref_p == v15 )
+          goto LABEL_20;
+        v14 = (SSClass **)(v15 - 8);
+      }
+      v16 = i_uid == (_DWORD)a4;
+      a4 = i_uid != (_DWORD)a4;
+      if ( v16 )
+        break;
       if ( v14 == (SSClass **)v15 )
-        goto LABEL_21;
-      v10 = (char *)(v15 + 8);
+        goto LABEL_20;
+      i_str_ref_p = v15 + 8;
     }
-  }
-  v17 = *(ASymbol **)v15;
-  if ( *(_QWORD *)v15 )
-  {
-    v13 = 0;
-    goto LABEL_22;
-  }
-LABEL_21:
-  v17 = *(ASymbol **)&find_pos_p;
-LABEL_22:
-  v5->i_result = v13;
-  if ( !v13 )
-  {
-    if ( v6->i_flags.i_flagset & 1 )
+    v17 = *(_QWORD *)v15;
+    if ( *(_QWORD *)v15 )
+      v13 = Result_ok;
+    else
+LABEL_20:
+      v17 = (__int64)find_pos_p;
+    args->i_result = v13;
+    if ( v13 == Result_ok )
     {
-      if ( ((unsigned __int8 (__fastcall *)(SSClassDescBase *, ASymbol *, char *, __int64))v5->i_type_p->vfptr->is_class_type)(
-             v5->i_type_p,
-             v17,
-             v10,
-             a4) )
+      if ( (this->i_flags.i_flagset & 1) != 0 )
       {
-        v9 = v4;
-        goto LABEL_31;
+        if ( ((unsigned __int8 (__fastcall *)(SSClassDescBase *, __int64, char *, __int64))args->i_type_p->vfptr->is_class_type)(
+               args->i_type_p,
+               v17,
+               i_str_ref_p,
+               a4) )
+        {
+          v9 = receiver_p;
+          goto LABEL_30;
+        }
+        if ( !SSParser::get_method_inherited(this, (SSClassUnion *)args->i_type_p, (ASymbol *)(v17 + 8)) )
+        {
+          args->i_result = Result_err_context_non_method;
+          goto LABEL_30;
+        }
       }
-      if ( !SSParser::get_method_inherited(v6, v5->i_type_p, v17 + 2) )
+      args->i_type_p = (SSClassDescBase *)v17;
+      if ( (args->i_flags & 1) != 0 )
       {
-        v5->i_result = 115;
-        goto LABEL_31;
-      }
-    }
-    v5->i_type_p = (SSClassDescBase *)v17;
-    if ( v5->i_flags & 1 )
-    {
-      v18 = (SSExpressionBase *)AMemory::c_malloc_func(0x18ui64, "SSConversion");
-      *(_QWORD *)&find_pos_p = v18;
-      if ( v18 )
-      {
-        v18->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
-        v18->vfptr = (SSExpressionBaseVtbl *)&SSConversion::`vftable;
-        v18[1].vfptr = (SSExpressionBaseVtbl *)v17;
-        v18[2].vfptr = (SSExpressionBaseVtbl *)v4;
-        v9 = v18;
+        v18 = (SSExpressionBase *)AMemory::c_malloc_func(0x18ui64, "SSConversion");
+        find_pos_p = v18;
+        if ( v18 )
+        {
+          v18->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+          v18->vfptr = (SSExpressionBaseVtbl *)&SSConversion::`vftable;
+          v18[1].vfptr = (SSExpressionBaseVtbl *)v17;
+          v18[2].vfptr = (SSExpressionBaseVtbl *)receiver_p;
+          v9 = v18;
+        }
       }
     }
   }
-LABEL_31:
-  v5->i_end_pos = v8;
+LABEL_30:
+  args->i_end_pos = i_start_pos;
   return v9;
 }
 
@@ -1326,73 +1256,68 @@ LABEL_31:
 // RVA: 0x128610
 SSLiteralClosure *__fastcall SSParser::parse_closure(SSParser *this, SSParser::Args *args)
 {
-  SSParser::Args *v2; // rbx
-  SSParser *v3; // rsi
-  unsigned int v4; // ecx
+  unsigned int i_start_pos; // ecx
   __int64 v6; // rdi
-  bool v7; // zf
-  AStringRef *v8; // rcx
-  char *v9; // r15
-  __int64 v10; // rdx
-  char v11; // cl
-  __int64 v12; // r9
-  SSParser::eResult v13; // eax
-  SSClassDescBase *v14; // rcx
-  __int64 v15; // rax
-  __int64 v16; // r14
-  SSParser::eResult v17; // eax
-  SSClass *v18; // rax
-  SSParameters *v19; // r12
-  unsigned int v20; // ecx
+  AStringRef *i_str_ref_p; // rcx
+  char *i_cstr_p; // r15
+  __int64 v9; // rdx
+  char v10; // cl
+  __int64 v11; // r9
+  SSParser::eResult v12; // eax
+  SSClassDescBase *i_type_p; // rcx
+  __int64 v14; // rax
+  SSClassUnaryBase *v15; // r14
+  SSParser::eResult v16; // eax
+  SSClass *v17; // rax
+  SSParameters *p_params_p; // r12
+  unsigned int v19; // ecx
+  SSParser::eResult v20; // eax
   SSParser::eResult v21; // eax
-  SSParser::eResult v22; // eax
-  SSClass *v23; // r14
-  SSClassDescBase *v24; // rdx
-  char v25; // r14
-  SSExpressionBase *v26; // r14
-  int v27; // er12
-  eSSExprType v28; // er15
-  __int64 v29; // rax
-  SSParameters *v30; // rax
-  char *v31; // rax
-  __int64 v32; // rax
-  SSClosureInfoBase *v33; // rax
-  SSLiteralClosure closure_method_p; // [rsp+30h] [rbp-D0h]
-  void **v35; // [rsp+50h] [rbp-B0h]
+  SSClass *v22; // r14
+  SSClassDescBase *i_obj_p; // rdx
+  bool v24; // r14
+  SSExpressionBase *i_expr_p; // r14
+  int v26; // r12d
+  eSSExprType v27; // r15d
+  __int64 v28; // rax
+  SSParameters *v29; // rax
+  char *v30; // rax
+  __int64 v31; // rax
+  SSClosureInfoBase *v32; // rax
+  SSLiteralClosure closure_method_p; // [rsp+30h] [rbp-D0h] BYREF
+  void **v35; // [rsp+50h] [rbp-B0h] BYREF
   int v36; // [rsp+58h] [rbp-A8h]
-  AVCompactSortedLogical<ASymbol,ASymbol> captured_p; // [rsp+60h] [rbp-A0h]
-  SSMethod v38; // [rsp+70h] [rbp-90h]
-  SSParameters params_p; // [rsp+A0h] [rbp-60h]
-  char v40; // [rsp+D0h] [rbp-30h]
+  AVCompactSortedLogical<ASymbol,ASymbol> captured_p; // [rsp+60h] [rbp-A0h] BYREF
+  SSMethod v38; // [rsp+70h] [rbp-90h] BYREF
+  SSParameters params_p; // [rsp+A0h] [rbp-60h] BYREF
+  char v40[8]; // [rsp+D0h] [rbp-30h] BYREF
   SSParser *v41; // [rsp+D8h] [rbp-28h]
   SSClassUnaryBase *v42; // [rsp+E0h] [rbp-20h]
-  eSSMember v43; // [rsp+E8h] [rbp-18h]
+  eSSMember i_member_type; // [rsp+E8h] [rbp-18h]
   char v44; // [rsp+ECh] [rbp-14h]
   __int64 v45; // [rsp+F0h] [rbp-10h]
-  unsigned int end_pos_p; // [rsp+150h] [rbp+50h]
-  void *v47; // [rsp+158h] [rbp+58h]
-  void *v48; // [rsp+160h] [rbp+60h]
-  SSClassUnaryBase *v49; // [rsp+168h] [rbp+68h]
+  unsigned int end_pos_p; // [rsp+150h] [rbp+50h] BYREF
+  void *p_i_params; // [rsp+158h] [rbp+58h]
+  void *p_i_return_params; // [rsp+160h] [rbp+60h]
+  SSClassUnaryBase *i_obj_scope_p; // [rsp+168h] [rbp+68h]
 
   v45 = -2i64;
-  v2 = args;
-  v3 = this;
-  v4 = args->i_start_pos;
-  end_pos_p = v4;
-  if ( v3->i_str_ref_p->i_length < v4 )
+  i_start_pos = args->i_start_pos;
+  end_pos_p = i_start_pos;
+  if ( this->i_str_ref_p->i_length < i_start_pos )
   {
-    args->i_end_pos = v4;
-    args->i_result = 82;
+    args->i_end_pos = i_start_pos;
+    args->i_result = Result_err_unexpected_eof;
     return 0i64;
   }
-  LODWORD(v47) = 3;
+  LODWORD(p_i_params) = 3;
   closure_method_p.vfptr = (SSExpressionBaseVtbl *)&SSLiteralClosure::`vftable;
   v6 = 0i64;
   closure_method_p.i_receiver_p = 0i64;
   closure_method_p.i_info_p.i_obj_p = 0i64;
   captured_p.i_count = 0;
   captured_p.i_array_p = 0i64;
-  v48 = &v38;
+  p_i_return_params = &v38;
   v38.i_name = ASymbol_closure;
   v38.i_scope_p = SSBrain::c_object_class_p;
   v38.i_params_p.i_obj_p = 0i64;
@@ -1400,237 +1325,229 @@ SSLiteralClosure *__fastcall SSParser::parse_closure(SSParser *this, SSParser::A
   v35 = &SSClosureInfoMethod::`vftable{for `SSClosureInfoBase};
   v38.vfptr = (SSInvokableBaseVtbl *)&SSClosureInfoMethod::`vftable{for `SSMethod};
   v36 = 1;
-  if ( 0i64 != &v35 )
+  if ( &v35 )
   {
     v36 = 2;
-    if ( closure_method_p.i_info_p.i_obj_p )
-    {
-      v7 = closure_method_p.i_info_p.i_obj_p->i_ref_count-- == 1;
-      if ( v7 )
-        MEMORY[8] = 2147483648;
-    }
     closure_method_p.i_info_p.i_obj_p = (SSClosureInfoBase *)&v35;
   }
-  v41 = v3;
-  v49 = v3->i_context.i_obj_scope_p;
-  v42 = v49;
-  v43 = v3->i_member_type;
+  v41 = this;
+  i_obj_scope_p = this->i_context.i_obj_scope_p;
+  v42 = i_obj_scope_p;
+  i_member_type = this->i_member_type;
   v44 = 0;
-  v8 = v3->i_str_ref_p;
-  v9 = v3->i_str_ref_p->i_cstr_p;
-  if ( v9[end_pos_p] != 64 )
-    goto LABEL_31;
-  v10 = end_pos_p + 1;
-  end_pos_p = v10;
-  if ( v8->i_length >= (unsigned int)v10 )
+  i_str_ref_p = this->i_str_ref_p;
+  i_cstr_p = this->i_str_ref_p->i_cstr_p;
+  if ( i_cstr_p[end_pos_p] != 64 )
+    goto LABEL_26;
+  v9 = end_pos_p + 1;
+  end_pos_p = v9;
+  if ( i_str_ref_p->i_length >= (unsigned int)v9 )
   {
-    v11 = v9[v10];
-    if ( v11 == 39 )
+    v10 = i_cstr_p[v9];
+    if ( v10 == 39 )
     {
-      v2->i_end_pos = v10;
-      v2->i_result = 86;
-      goto LABEL_71;
+      args->i_end_pos = v9;
+      args->i_result = Result_err_unexpected_obj_identifier;
+      goto LABEL_66;
     }
-    if ( v11 == 95 )
+    if ( v10 == 95 )
     {
-      v12 = (unsigned int)(v10 + 1);
-      if ( !AString::c_is_lowercase[(unsigned __int8)v9[v12]] )
+      v11 = (unsigned int)(v9 + 1);
+      if ( !AString::c_is_lowercase[(unsigned __int8)i_cstr_p[v11]] )
       {
-        end_pos_p = v10 + 1;
-        LODWORD(v47) = 2;
-        v13 = SSParser::parse_ws_any(v3, v12, &end_pos_p);
-        v2->i_result = v13;
-        if ( v13 )
+        end_pos_p = v9 + 1;
+        LODWORD(p_i_params) = 2;
+        v12 = SSParser::parse_ws_any(this, v11, &end_pos_p);
+        args->i_result = v12;
+        if ( v12 )
         {
-          v2->i_end_pos = end_pos_p;
-          goto LABEL_71;
+          args->i_end_pos = end_pos_p;
+          goto LABEL_66;
         }
-        LODWORD(v10) = end_pos_p;
+        LODWORD(v9) = end_pos_p;
       }
     }
-    v2->i_start_pos = v10;
-    if ( v9[(unsigned int)v10] != 91 )
+    args->i_start_pos = v9;
+    if ( i_cstr_p[(unsigned int)v9] != 91 )
     {
-      closure_method_p.i_receiver_p = SSParser::parse_expression(v3, v2, SSInvokeTime_immediate);
-      if ( v2->i_result )
-        goto LABEL_71;
-      v14 = v2->i_type_p;
-      if ( v14 )
-        v15 = (__int64)v14->vfptr->as_finalized_generic(v14, (SSClassDescBase *)&v3->i_context.i_obj_scope_p->vfptr);
+      closure_method_p.i_receiver_p = SSParser::parse_expression(this, args, SSInvokeTime_immediate);
+      if ( args->i_result )
+        goto LABEL_66;
+      i_type_p = args->i_type_p;
+      if ( i_type_p )
+        v14 = (__int64)i_type_p->vfptr->as_finalized_generic(i_type_p, this->i_context.i_obj_scope_p);
       else
-        v15 = 0i64;
-      v16 = (*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v15 + 40i64))(v15);
-      v17 = SSParser::parse_ws_any(v3, v2->i_end_pos, &end_pos_p);
-      v2->i_result = v17;
-      if ( v17 )
+        v14 = 0i64;
+      v15 = (SSClassUnaryBase *)(*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v14 + 40i64))(v14);
+      v16 = SSParser::parse_ws_any(this, args->i_end_pos, &end_pos_p);
+      args->i_result = v16;
+      if ( v16 )
       {
-        v2->i_end_pos = end_pos_p;
-        goto LABEL_71;
+        args->i_end_pos = end_pos_p;
+        goto LABEL_66;
       }
-      if ( v3->i_context.i_obj_scope_p != (SSClassUnaryBase *)v16 )
+      if ( this->i_context.i_obj_scope_p != v15 )
       {
-        v18 = SSBrain::c_object_class_p;
-        if ( v16 )
-          v18 = (SSClass *)v16;
-        v3->i_context.i_obj_scope_p = (SSClassUnaryBase *)&v18->vfptr;
+        v17 = SSBrain::c_object_class_p;
+        if ( v15 )
+          v17 = (SSClass *)v15;
+        this->i_context.i_obj_scope_p = v17;
       }
     }
-LABEL_31:
-    v3->i_member_type = 3;
-    if ( v3->i_flags.i_flagset & 1 )
+LABEL_26:
+    this->i_member_type = SSMember_coroutine;
+    if ( (this->i_flags.i_flagset & 1) != 0 )
     {
-      SSTypeContext::capture_locals(&v3->i_context);
+      SSTypeContext::capture_locals(&this->i_context);
       v44 = 1;
     }
     params_p.i_ref_count = 0;
     params_p.i_params.i_count = 0;
     params_p.i_params.i_array_p = 0i64;
-    v48 = &params_p.i_return_params;
+    p_i_return_params = &params_p.i_return_params;
     params_p.i_return_params.i_count = 0;
     params_p.i_return_params.i_array_p = 0i64;
-    params_p.i_result_type_p.i_obj_p = (SSClassDescBase *)&SSBrain::c_object_class_p->vfptr;
+    params_p.i_result_type_p.i_obj_p = SSBrain::c_object_class_p;
     if ( SSBrain::c_object_class_p )
-      (*(void (**)(void))SSBrain::c_object_class_p->vfptr->gap8)();
-    v19 = &params_p;
-    if ( !(v2->i_flags & 1) )
-      v19 = 0i64;
-    v20 = end_pos_p;
-    LODWORD(v48) = end_pos_p;
-    if ( v9[end_pos_p] == 40 )
+      (*(void (__fastcall **)(SSClass *))SSBrain::c_object_class_p->vfptr->gap8)(SSBrain::c_object_class_p);
+    p_params_p = &params_p;
+    if ( (args->i_flags & 1) == 0 )
+      p_params_p = 0i64;
+    v19 = end_pos_p;
+    LODWORD(p_i_return_params) = end_pos_p;
+    if ( i_cstr_p[end_pos_p] == 40 )
     {
-      v21 = SSParser::parse_parameters(v3, end_pos_p, &end_pos_p, v19, 1u);
-      v2->i_result = v21;
+      v20 = SSParser::parse_parameters(this, end_pos_p, &end_pos_p, p_params_p, 1u);
+      args->i_result = v20;
+      if ( v20 )
+      {
+        args->i_end_pos = end_pos_p;
+LABEL_63:
+        APCompactArrayBase<SSParameterBase>::free_all(&params_p.i_params);
+        APCompactArrayBase<SSTypedName>::free_all(&params_p.i_return_params);
+        if ( params_p.i_result_type_p.i_obj_p )
+          (*(void (__fastcall **)(SSClassDescBase *))&params_p.i_result_type_p.i_obj_p->vfptr->gap8[8])(params_p.i_result_type_p.i_obj_p);
+        p_i_params = &params_p.i_return_params;
+        AMemory::c_free_func(params_p.i_return_params.i_array_p);
+        p_i_params = &params_p.i_params;
+        AMemory::c_free_func(params_p.i_params.i_array_p);
+        goto LABEL_66;
+      }
+      v21 = SSParser::parse_ws_any(this, end_pos_p, &end_pos_p);
+      args->i_result = v21;
       if ( v21 )
       {
-        v2->i_end_pos = end_pos_p;
-LABEL_68:
-        APCompactArrayBase<SSParameterBase>::free_all((APCompactArrayBase<SSParameterBase> *)&params_p.i_params.i_count);
-        APCompactArrayBase<SSTypedName>::free_all((APCompactArrayBase<SSTypedName> *)&params_p.i_return_params.i_count);
-        if ( params_p.i_result_type_p.i_obj_p )
-          (*(void (**)(void))&params_p.i_result_type_p.i_obj_p->vfptr->gap8[8])();
-        v47 = &params_p.i_return_params;
-        AMemory::c_free_func(params_p.i_return_params.i_array_p);
-        v47 = &params_p.i_params;
-        AMemory::c_free_func(params_p.i_params.i_array_p);
-        goto LABEL_71;
+        args->i_end_pos = end_pos_p;
+        goto LABEL_63;
       }
-      v22 = SSParser::parse_ws_any(v3, end_pos_p, &end_pos_p);
-      v2->i_result = v22;
-      if ( v22 )
-      {
-        v2->i_end_pos = end_pos_p;
-        goto LABEL_68;
-      }
-      v20 = end_pos_p;
+      v19 = end_pos_p;
     }
     else
     {
-      v23 = SSBrain::c_auto_class_p;
-      v24 = params_p.i_result_type_p.i_obj_p;
-      if ( (SSClass *)params_p.i_result_type_p.i_obj_p != SSBrain::c_auto_class_p )
+      v22 = SSBrain::c_auto_class_p;
+      i_obj_p = params_p.i_result_type_p.i_obj_p;
+      if ( params_p.i_result_type_p.i_obj_p != SSBrain::c_auto_class_p )
       {
         if ( SSBrain::c_auto_class_p )
         {
           (*(void (__fastcall **)(SSClass *))SSBrain::c_auto_class_p->vfptr->gap8)(SSBrain::c_auto_class_p);
-          v20 = end_pos_p;
-          v24 = params_p.i_result_type_p.i_obj_p;
+          v19 = end_pos_p;
+          i_obj_p = params_p.i_result_type_p.i_obj_p;
         }
-        if ( v24 )
+        if ( i_obj_p )
         {
-          (*(void (__fastcall **)(SSClassDescBase *))&v24->vfptr->gap8[8])(v24);
-          v20 = end_pos_p;
+          (*(void (__fastcall **)(SSClassDescBase *))&i_obj_p->vfptr->gap8[8])(i_obj_p);
+          v19 = end_pos_p;
         }
-        params_p.i_result_type_p.i_obj_p = (SSClassDescBase *)&v23->vfptr;
+        params_p.i_result_type_p.i_obj_p = v22;
       }
     }
-    v2->i_start_pos = v20;
-    v38.i_expr_p = (SSExpressionBase *)SSParser::parse_code_block_optimized(
-                                         v3,
-                                         v2,
-                                         SSInvokeTime_any,
-                                         ResultDesired_true);
-    v25 = 0;
-    if ( v2->i_result == Result_ok )
+    args->i_start_pos = v19;
+    v38.i_expr_p = SSParser::parse_code_block_optimized(this, args, SSInvokeTime_any, ResultDesired_true);
+    v24 = 0;
+    if ( args->i_result == Result_ok )
     {
-      v25 = SSParser::typecheck_parameters(v3, v2, v19, 1) && v38.i_expr_p ? 1 : 0;
-      if ( SSParameters::is_generic(v19) )
+      v24 = SSParser::typecheck_parameters(this, args, p_params_p, 1) && v38.i_expr_p;
+      if ( SSParameters::is_generic(p_params_p) )
       {
-        v25 = 0;
-        v2->i_end_pos = (unsigned int)v48;
-        v2->i_result = 128;
+        v24 = 0;
+        args->i_end_pos = (unsigned int)p_i_return_params;
+        args->i_result = Result_err_typecheck_closure_generics;
       }
     }
-    if ( !v25 )
-      goto LABEL_68;
-    SSTypeContext::capture_locals_stop(&v3->i_context, &captured_p);
+    if ( !v24 )
+      goto LABEL_63;
+    SSTypeContext::capture_locals_stop(&this->i_context, &captured_p);
     v44 = 0;
-    v26 = v38.i_expr_p;
-    v27 = (signed int)v47;
-    if ( (_DWORD)v47 == 3 )
+    i_expr_p = v38.i_expr_p;
+    v26 = (int)p_i_params;
+    if ( (_DWORD)p_i_params == 3 )
     {
       if ( !v38.i_expr_p )
       {
-        v27 = 1;
-        goto LABEL_62;
+        v26 = 1;
+        goto LABEL_57;
       }
-      v27 = 2 - (v38.i_expr_p->vfptr->is_immediate(v38.i_expr_p, 0i64) != 0);
+      v26 = 2 - v38.i_expr_p->vfptr->is_immediate(v38.i_expr_p, 0i64);
     }
-    if ( v27 != 1 )
+    if ( v26 != 1 )
     {
-      v28 = 8;
-      if ( v26 )
+      v27 = SSExprType_closure_coroutine;
+      if ( i_expr_p )
       {
-        v29 = (__int64)v26->vfptr->find_expr_last_no_side_effect(v26);
-        if ( v29 )
+        v28 = (__int64)i_expr_p->vfptr->find_expr_last_no_side_effect(i_expr_p);
+        if ( v28 )
         {
-          v2->i_result = ((*(unsigned int (__fastcall **)(__int64))(*(_QWORD *)v29 + 24i64))(v29) == 1) + 6;
-          goto LABEL_68;
+          args->i_result = ((*(unsigned int (__fastcall **)(__int64))(*(_QWORD *)v28 + 24i64))(v28) == 1) + 6;
+          goto LABEL_63;
         }
       }
-LABEL_66:
-      v38.i_scope_p = (SSClass *)((__int64 (*)(void))v49->vfptr->get_key_class)();
-      v38.i_name.i_uid = v3->i_context.i_scope_name.i_uid;
-      v30 = SSParameters::get_or_create(&params_p);
-      ARefPtr<SSParameters>::operator=(&v38.i_params_p, v30);
-      v2->i_type_p = (SSClassDescBase *)SSInvokableClass::get_or_create(
-                                          SSBrain::c_closure_class_p,
-                                          v38.i_params_p.i_obj_p,
-                                          (eSSInvokeTime)v27);
-      v31 = UFG::qMalloc(0x18ui64, "SSLiteralClosure", 0i64);
-      v47 = v31;
-      if ( v31 )
+LABEL_61:
+      v38.i_scope_p = i_obj_scope_p->vfptr->get_key_class(i_obj_scope_p);
+      v38.i_name.i_uid = this->i_context.i_scope_name.i_uid;
+      v29 = SSParameters::get_or_create(&params_p);
+      ARefPtr<SSParameters>::operator=(&v38.i_params_p, v29);
+      args->i_type_p = SSInvokableClass::get_or_create(
+                         SSBrain::c_closure_class_p,
+                         v38.i_params_p.i_obj_p,
+                         (eSSInvokeTime)v26);
+      v30 = UFG::qMalloc(0x18ui64, "SSLiteralClosure", 0i64);
+      p_i_params = v30;
+      if ( v30 )
       {
-        SSLiteralClosure::SSLiteralClosure((SSLiteralClosure *)v31, &closure_method_p, v28);
-        v6 = v32;
+        SSLiteralClosure::SSLiteralClosure((SSLiteralClosure *)v30, &closure_method_p, v27);
+        v6 = v31;
       }
-      goto LABEL_68;
+      goto LABEL_63;
     }
-LABEL_62:
-    v28 = 7;
-    goto LABEL_66;
+LABEL_57:
+    v27 = SSExprType_closure_method;
+    goto LABEL_61;
   }
-  v2->i_end_pos = v10;
-  v2->i_result = 82;
-LABEL_71:
-  SSParser::parse_closure_::_2_::NestedDtor::_NestedDtor((__int64)&v40);
+  args->i_end_pos = v9;
+  args->i_result = Result_err_unexpected_eof;
+LABEL_66:
+  SSParser::parse_closure_::_2_::NestedDtor::_NestedDtor((__int64)v40);
   v35 = &SSClosureInfoMethod::`vftable{for `SSClosureInfoBase};
   v38.vfptr = (SSInvokableBaseVtbl *)&SSClosureInfoMethod::`vftable{for `SSMethod};
   SSMethod::~SSMethod(&v38);
   v35 = &SSClosureInfoBase::`vftable;
-  v47 = &captured_p;
+  p_i_params = &captured_p;
   AMemory::c_free_func(captured_p.i_array_p);
   closure_method_p.vfptr = (SSExpressionBaseVtbl *)&SSLiteralClosure::`vftable;
   if ( closure_method_p.i_receiver_p )
     closure_method_p.i_receiver_p->vfptr->__vecDelDtor(closure_method_p.i_receiver_p, 1u);
-  v33 = closure_method_p.i_info_p.i_obj_p;
+  v32 = closure_method_p.i_info_p.i_obj_p;
   if ( closure_method_p.i_info_p.i_obj_p )
   {
-    v7 = closure_method_p.i_info_p.i_obj_p->i_ref_count-- == 1;
-    if ( v7 )
+    if ( closure_method_p.i_info_p.i_obj_p->i_ref_count-- == 1 )
     {
-      v33->i_ref_count = 2147483648;
-      if ( v33 != (SSClosureInfoBase *)-8i64 && &v33->i_ref_count != (unsigned int *)8 )
-        v33->vfptr->__vecDelDtor(v33, 1u);
+      v32->i_ref_count = 0x80000000;
+      if ( v32 != (SSClosureInfoBase *)-8i64 )
+      {
+        if ( v32 )
+          v32->vfptr->__vecDelDtor(v32, 1u);
+      }
     }
   }
   return (SSLiteralClosure *)v6;
@@ -1640,32 +1557,30 @@ LABEL_71:
 // RVA: 0x1069F0
 __int64 __fastcall SSParser::parse_closure_::_2_::NestedDtor::_NestedDtor(__int64 a1)
 {
-  __int64 v1; // rdi
   AList<SSTypeContext::ScopeVars,SSTypeContext::ScopeVars> *v2; // rsi
-  AListNode<SSTypeContext::ScopeVars,SSTypeContext::ScopeVars> *v3; // rbx
+  AListNode<SSTypeContext::ScopeVars,SSTypeContext::ScopeVars> *i_next_p; // rbx
   AListNode<SSTypeContext::ScopeVars,SSTypeContext::ScopeVars> *v4; // rcx
-  AListNode<SSTypeContext::ScopeVars,SSTypeContext::ScopeVars> *v5; // rax
+  AListNode<SSTypeContext::ScopeVars,SSTypeContext::ScopeVars> *i_prev_p; // rax
   AListNode<SSTypeContext::ScopeVars,SSTypeContext::ScopeVars> *v6; // rdx
   __int64 result; // rax
 
-  v1 = a1;
   if ( *(_BYTE *)(a1 + 28) )
   {
     v2 = *(AList<SSTypeContext::ScopeVars,SSTypeContext::ScopeVars> **)(a1 + 8);
-    v3 = v2[8].i_sentinel.i_next_p;
-    if ( v3 )
+    i_next_p = v2[8].i_sentinel.i_next_p;
+    if ( i_next_p )
     {
-      AMemory::c_free_func(v3[1].i_prev_p);
-      v4 = v3->i_next_p;
-      if ( v3->i_next_p != v3 )
+      AMemory::c_free_func(i_next_p[1].i_prev_p);
+      v4 = i_next_p->i_next_p;
+      if ( i_next_p->i_next_p != i_next_p )
       {
-        v5 = v3->i_prev_p;
-        v4->i_prev_p = v5;
-        v5->i_next_p = v4;
-        v3->i_prev_p = v3;
-        v3->i_next_p = v3;
+        i_prev_p = i_next_p->i_prev_p;
+        v4->i_prev_p = i_prev_p;
+        i_prev_p->i_next_p = v4;
+        i_next_p->i_prev_p = i_next_p;
+        i_next_p->i_next_p = i_next_p;
       }
-      operator delete[](v3);
+      operator delete[](i_next_p);
     }
     v6 = 0i64;
     if ( (AListNode<SSTypeContext::ScopeVars,SSTypeContext::ScopeVars> **)v2[8].i_sentinel.i_next_p != &v2[7].i_sentinel.i_prev_p )
@@ -1674,72 +1589,70 @@ __int64 __fastcall SSParser::parse_closure_::_2_::NestedDtor::_NestedDtor(__int6
     AList<SSTypeContext::ScopeVars,SSTypeContext::ScopeVars>::free_last(v2 + 6);
     v2[7].i_sentinel.i_next_p = v2[6].i_sentinel.i_prev_p + 1;
   }
-  *(_QWORD *)(*(_QWORD *)(v1 + 8) + 16i64) = *(_QWORD *)(v1 + 16);
-  result = *(unsigned int *)(v1 + 24);
-  *(_DWORD *)(*(_QWORD *)(v1 + 8) + 12i64) = result;
+  *(_QWORD *)(*(_QWORD *)(a1 + 8) + 16i64) = *(_QWORD *)(a1 + 16);
+  result = *(unsigned int *)(a1 + 24);
+  *(_DWORD *)(*(_QWORD *)(a1 + 8) + 12i64) = result;
   return result;
 }
 
 // File Line: 2080
 // RVA: 0x128BF0
-SSCode *__fastcall SSParser::parse_code_block(SSParser *this, SSParser::Args *args, eSSInvokeTime desired_exec_time, SSParser::eResultDesired result)
+SSCode *__fastcall SSParser::parse_code_block(
+        SSParser *this,
+        SSParser::Args *args,
+        eSSInvokeTime desired_exec_time,
+        SSParser::eResultDesired result)
 {
   eSSInvokeTime v4; // ebp
-  SSParser::Args *v5; // rsi
-  SSParser *v6; // r12
   SSCode *v7; // rdi
-  char *v8; // r13
-  unsigned int v9; // er14
-  __int64 v10; // rbx
+  char *i_cstr_p; // r13
+  unsigned int i_length; // r14d
+  __int64 i_start_pos; // rbx
   SSParser::eResult v11; // eax
   SSCode *v12; // rax
-  signed __int64 v13; // ST40_8
-  signed __int64 v14; // ST40_8
-  bool v15; // al
-  int v16; // ebp
-  SSParser::eResult v17; // eax
-  char v18; // cl
-  unsigned int v19; // eax
-  SSExpressionBaseVtbl *v20; // r14
-  SSExpressionBase *v21; // rax
-  unsigned int v22; // ebx
-  SSParser::eResult v23; // eax
-  unsigned int v24; // eax
-  SSExpressionBase *v25; // rcx
-  __int64 v26; // rax
-  unsigned int v27; // eax
-  SSExpressionBase *v28; // rcx
-  __int64 v29; // rax
-  unsigned int end_pos_p; // [rsp+A0h] [rbp+8h]
-  unsigned int v32; // [rsp+A8h] [rbp+10h]
-  eSSInvokeTime v33; // [rsp+B0h] [rbp+18h]
-  SSParser::eResultDesired v34; // [rsp+B8h] [rbp+20h]
+  bool v13; // al
+  int v14; // ebp
+  SSParser::eResult v15; // eax
+  char v16; // cl
+  unsigned int i_count; // eax
+  SSExpressionBaseVtbl *v18; // r14
+  SSExpressionBase *v19; // rax
+  unsigned int v20; // ebx
+  SSParser::eResult v21; // eax
+  unsigned int v22; // eax
+  SSExpressionBase *v23; // rcx
+  __int64 v24; // rax
+  unsigned int v25; // eax
+  SSExpressionBase *v26; // rcx
+  __int64 v27; // rax
+  SSExpressionBase *end_pos_p; // [rsp+A0h] [rbp+8h] BYREF
+  unsigned int v30; // [rsp+A8h] [rbp+10h]
+  eSSInvokeTime v31; // [rsp+B0h] [rbp+18h]
+  SSParser::eResultDesired v32; // [rsp+B8h] [rbp+20h]
 
-  v34 = result;
-  v33 = desired_exec_time;
+  v32 = result;
+  v31 = desired_exec_time;
   v4 = desired_exec_time;
-  v5 = args;
-  v6 = this;
-  args->i_result = 82;
+  args->i_result = Result_err_unexpected_eof;
   v7 = 0i64;
-  v8 = this->i_str_ref_p->i_cstr_p;
-  v9 = this->i_str_ref_p->i_length;
-  v32 = v9;
-  v10 = args->i_start_pos;
-  if ( v9 - (unsigned int)v10 < 2 )
+  i_cstr_p = this->i_str_ref_p->i_cstr_p;
+  i_length = this->i_str_ref_p->i_length;
+  v30 = i_length;
+  i_start_pos = args->i_start_pos;
+  if ( i_length - (unsigned int)i_start_pos < 2 )
     goto LABEL_61;
-  args->i_result = 25;
-  if ( v8[v10] != 91 )
+  args->i_result = Result_err_expected_code_block;
+  if ( i_cstr_p[i_start_pos] != 91 )
     goto LABEL_61;
-  end_pos_p = v10 + 1;
-  v11 = SSParser::parse_ws_any(this, v10 + 1, &end_pos_p);
-  v5->i_result = v11;
+  LODWORD(end_pos_p) = i_start_pos + 1;
+  v11 = SSParser::parse_ws_any(this, i_start_pos + 1, (unsigned int *)&end_pos_p);
+  args->i_result = v11;
   if ( v11 )
   {
-    LODWORD(v10) = end_pos_p;
+    LODWORD(i_start_pos) = (_DWORD)end_pos_p;
     goto LABEL_61;
   }
-  if ( v5->i_flags & 1 )
+  if ( (args->i_flags & 1) != 0 )
   {
     v12 = (SSCode *)AMemory::c_malloc_func(0x28ui64, "SSCode");
     v7 = v12;
@@ -1747,167 +1660,165 @@ SSCode *__fastcall SSParser::parse_code_block(SSParser *this, SSParser::Args *ar
     {
       v12->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
       v12->vfptr = (SSExpressionBaseVtbl *)&SSCode::`vftable;
-      v13 = (signed __int64)&v12->i_temp_vars;
-      *(_DWORD *)v13 = 0;
-      *(_QWORD *)(v13 + 8) = 0i64;
-      v14 = (signed __int64)&v12->i_statements;
-      *(_DWORD *)v14 = 0;
-      *(_QWORD *)(v14 + 8) = 0i64;
+      v12->i_temp_vars.i_count = 0;
+      v12->i_temp_vars.i_array_p = 0i64;
+      v12->i_statements.i_count = 0;
+      v12->i_statements.i_array_p = 0i64;
     }
     else
     {
       v7 = 0i64;
     }
   }
-  LODWORD(v10) = end_pos_p;
-  if ( v8[end_pos_p] == 93 )
+  LODWORD(i_start_pos) = (_DWORD)end_pos_p;
+  if ( i_cstr_p[(unsigned int)end_pos_p] == 93 )
   {
-    LODWORD(v10) = end_pos_p + 1;
-    v5->i_type_p = (SSClassDescBase *)&SSBrain::c_none_class_p->vfptr;
-    v5->i_result = 0;
+    LODWORD(i_start_pos) = (_DWORD)end_pos_p + 1;
+    args->i_type_p = SSBrain::c_none_class_p;
+    args->i_result = Result_ok;
     goto LABEL_61;
   }
-  v5->i_result = 82;
-  if ( (unsigned int)v10 < v9 )
+  args->i_result = Result_err_unexpected_eof;
+  if ( (unsigned int)i_start_pos < i_length )
   {
     while ( 1 )
     {
-      v5->i_start_pos = v10;
-      v15 = SSParser::parse_statement_append(v6, v5, v7, v4);
-      LODWORD(v10) = v5->i_end_pos;
-      end_pos_p = v5->i_end_pos;
-      if ( !v15 )
+      args->i_start_pos = i_start_pos;
+      v13 = SSParser::parse_statement_append(this, args, v7, v4);
+      LODWORD(i_start_pos) = args->i_end_pos;
+      LODWORD(end_pos_p) = i_start_pos;
+      if ( !v13 )
         break;
-      v16 = v10;
-      v17 = SSParser::parse_ws_any(v6, v10, &end_pos_p);
-      v5->i_result = v17;
-      if ( v17 )
+      v14 = i_start_pos;
+      v15 = SSParser::parse_ws_any(this, i_start_pos, (unsigned int *)&end_pos_p);
+      args->i_result = v15;
+      if ( v15 )
       {
-        v5->i_start_pos = v10;
+        args->i_start_pos = i_start_pos;
 LABEL_42:
-        LODWORD(v10) = end_pos_p;
+        LODWORD(i_start_pos) = (_DWORD)end_pos_p;
         break;
       }
-      LODWORD(v10) = end_pos_p;
-      v18 = v8[end_pos_p];
-      switch ( v18 )
+      LODWORD(i_start_pos) = (_DWORD)end_pos_p;
+      v16 = i_cstr_p[(unsigned int)end_pos_p];
+      switch ( v16 )
       {
-        case 37:
+        case %:
           ++`anonymous namespace::SSParser_old_branch_delimiter;
           if ( v7 )
           {
-            v19 = v7->i_statements.i_count;
-            if ( v19 )
-              v20 = (SSExpressionBaseVtbl *)v7->i_statements.i_array_p[v19 - 1];
+            i_count = v7->i_statements.i_count;
+            if ( i_count )
+              v18 = (SSExpressionBaseVtbl *)v7->i_statements.i_array_p[i_count - 1];
             else
-              v20 = 0i64;
-            if ( (*((unsigned __int8 (__fastcall **)(SSExpressionBaseVtbl *, _QWORD))v20->__vecDelDtor + 9))(v20, 0i64) )
+              v18 = 0i64;
+            if ( (*((unsigned __int8 (__fastcall **)(SSExpressionBaseVtbl *, _QWORD))v18->__vecDelDtor + 9))(v18, 0i64) )
             {
-              v5->i_result = 71;
+              args->i_result = Result_err_unexpected_branch_expr;
               goto LABEL_43;
             }
-            APCompactArrayBase<SSExpressionBase>::remove_last((APCompactArrayBase<SSExpressionBase> *)&v7->i_statements.i_count);
-            v21 = (SSExpressionBase *)AMemory::c_malloc_func(0x10ui64, "SSConcurrentBranch");
-            *(_QWORD *)&end_pos_p = v21;
-            if ( v21 )
+            APCompactArrayBase<SSExpressionBase>::remove_last(&v7->i_statements);
+            v19 = (SSExpressionBase *)AMemory::c_malloc_func(0x10ui64, "SSConcurrentBranch");
+            end_pos_p = v19;
+            if ( v19 )
             {
-              v21->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
-              v21->vfptr = (SSExpressionBaseVtbl *)&SSConcurrentBranch::`vftable;
-              v21[1].vfptr = v20;
+              v19->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+              v19->vfptr = (SSExpressionBaseVtbl *)&SSConcurrentBranch::`vftable;
+              v19[1].vfptr = v18;
             }
             APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase>>::append(
-              (APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *)&v7->i_statements.i_count,
-              v21);
-            v5->i_type_p = (SSClassDescBase *)&SSBrain::c_none_class_p->vfptr;
-            v9 = v32;
+              &v7->i_statements,
+              v19);
+            args->i_type_p = SSBrain::c_none_class_p;
+            i_length = v30;
           }
-          v22 = v10 + 1;
-          end_pos_p = v22;
-          v5->i_start_pos = v22;
-          v23 = SSParser::parse_ws_any(v6, v22, &end_pos_p);
-          v5->i_result = v23;
-          if ( v23 )
+          v20 = i_start_pos + 1;
+          LODWORD(end_pos_p) = v20;
+          args->i_start_pos = v20;
+          v21 = SSParser::parse_ws_any(this, v20, (unsigned int *)&end_pos_p);
+          args->i_result = v21;
+          if ( v21 )
             goto LABEL_42;
-          LODWORD(v10) = end_pos_p;
-          if ( v8[end_pos_p] == 93 )
+          LODWORD(i_start_pos) = (_DWORD)end_pos_p;
+          if ( i_cstr_p[(unsigned int)end_pos_p] == 93 )
             goto LABEL_40;
           break;
-        case 44:
-          v5->i_result = 78;
+        case ,:
+          args->i_result = Result_err_unexpected_deprecated;
           goto LABEL_43;
-        case 59:
-          v5->i_result = 77;
+        case ;:
+          args->i_result = Result_err_unexpected_cpp;
           goto LABEL_43;
-        case 93:
+        case ]:
 LABEL_40:
-          LODWORD(v10) = v10 + 1;
+          LODWORD(i_start_pos) = i_start_pos + 1;
           goto LABEL_43;
         default:
-          if ( v16 == end_pos_p )
+          if ( v14 == (_DWORD)end_pos_p )
           {
-            v5->i_result = 90;
+            args->i_result = Result_err_unexpected_statement;
             goto LABEL_43;
           }
           break;
       }
       if ( v7 )
       {
-        v24 = v7->i_statements.i_count;
-        if ( v24 )
+        v22 = v7->i_statements.i_count;
+        if ( v22 )
         {
-          v25 = v7->i_statements.i_array_p[v24 - 1];
-          if ( v25 )
+          v23 = v7->i_statements.i_array_p[v22 - 1];
+          if ( v23 )
           {
-            v26 = ((__int64 (*)(void))v25->vfptr->find_expr_last_no_side_effect)();
-            if ( v26 )
+            v24 = (__int64)v23->vfptr->find_expr_last_no_side_effect(v23);
+            if ( v24 )
             {
-              v5->i_result = ((*(unsigned int (__fastcall **)(__int64))(*(_QWORD *)v26 + 24i64))(v26) == 1) + 6;
+              args->i_result = ((*(unsigned int (__fastcall **)(__int64))(*(_QWORD *)v24 + 24i64))(v24) == 1) + 6;
               break;
             }
           }
         }
       }
-      v5->i_result = 82;
-      if ( (unsigned int)v10 >= v9 )
+      args->i_result = Result_err_unexpected_eof;
+      if ( (unsigned int)i_start_pos >= i_length )
         break;
-      v4 = v33;
+      v4 = v31;
     }
   }
 LABEL_43:
-  if ( v34 == ResultDesired_false && v7 )
+  if ( v32 == ResultDesired_false && v7 )
   {
-    if ( v5->i_result )
+    if ( args->i_result )
       goto LABEL_55;
-    v27 = v7->i_statements.i_count;
-    if ( v27 )
+    v25 = v7->i_statements.i_count;
+    if ( v25 )
     {
-      v28 = v7->i_statements.i_array_p[v27 - 1];
-      if ( v28 )
+      v26 = v7->i_statements.i_array_p[v25 - 1];
+      if ( v26 )
       {
-        v29 = ((__int64 (*)(void))v28->vfptr->find_expr_last_no_side_effect)();
-        if ( v29 )
-          v5->i_result = ((*(unsigned int (__fastcall **)(__int64))(*(_QWORD *)v29 + 24i64))(v29) == 1) + 6;
+        v27 = (__int64)v26->vfptr->find_expr_last_no_side_effect(v26);
+        if ( v27 )
+          args->i_result = ((*(unsigned int (__fastcall **)(__int64))(*(_QWORD *)v27 + 24i64))(v27) == 1) + 6;
       }
     }
   }
-  if ( v5->i_result == Result_ok )
+  if ( args->i_result == Result_ok )
   {
-    if ( v6->i_flags.i_flagset & 1 )
+    if ( (this->i_flags.i_flagset & 1) != 0 )
     {
-      (*(void (**)(void))v5->i_type_p->vfptr->gap8)();
+      (*(void (__fastcall **)(SSClassDescBase *))args->i_type_p->vfptr->gap8)(args->i_type_p);
       if ( v7 )
-        SSTypeContext::archive_locals(&v6->i_context, (AVCompactArrayBase<ASymbol> *)&v7->i_temp_vars.i_count);
-      ((void (*)(void))v5->i_type_p->vfptr->dereference_delay)();
+        SSTypeContext::archive_locals(&this->i_context, &v7->i_temp_vars);
+      args->i_type_p->vfptr->dereference_delay(args->i_type_p);
     }
     goto LABEL_61;
   }
 LABEL_55:
-  if ( v6->i_flags.i_flagset & 1 )
+  if ( (this->i_flags.i_flagset & 1) != 0 )
   {
     if ( !v7 )
       goto LABEL_61;
     APSorted<SSTypedName,ASymbol,ACompareLogical<ASymbol>>::free_all(
-      (APSorted<SSTypedName,ASymbol,ACompareLogical<ASymbol> > *)&v6->i_context.i_current_scope_p->i_count,
+      this->i_context.i_current_scope_p,
       v7->i_temp_vars.i_array_p,
       v7->i_temp_vars.i_count,
       0,
@@ -1915,131 +1826,131 @@ LABEL_55:
   }
   if ( v7 )
   {
-    v7->vfptr->__vecDelDtor((SSExpressionBase *)&v7->vfptr, 1u);
+    v7->vfptr->__vecDelDtor(v7, 1u);
     v7 = 0i64;
   }
 LABEL_61:
-  v5->i_end_pos = v10;
+  args->i_end_pos = i_start_pos;
   return v7;
 }
 
 // File Line: 2435
 // RVA: 0x128FD0
-SSCode *__fastcall SSParser::parse_code_block_optimized(SSParser *this, SSParser::Args *args, eSSInvokeTime desired_exec_time, SSParser::eResultDesired result)
+SSCode *__fastcall SSParser::parse_code_block_optimized(
+        SSParser *this,
+        SSParser::Args *args,
+        eSSInvokeTime desired_exec_time,
+        SSParser::eResultDesired result)
 {
-  SSCode *v5; // rbx
+  SSExpressionBase *v5; // rbx
   SSCode *v6; // rax
   SSCode *v7; // rdi
-  unsigned int v8; // eax
+  unsigned int i_count; // eax
 
-  if ( !(args->i_flags & 1) )
+  if ( (args->i_flags & 1) == 0 )
     return SSParser::parse_code_block(this, args, desired_exec_time, result);
   v5 = 0i64;
   v6 = SSParser::parse_code_block(this, args, desired_exec_time, result);
   v7 = v6;
   if ( v6 )
   {
-    v8 = v6->i_statements.i_count;
-    if ( v8 )
+    i_count = v6->i_statements.i_count;
+    if ( i_count )
     {
-      if ( v8 != 1 || v7->i_temp_vars.i_count )
+      if ( i_count != 1 || v7->i_temp_vars.i_count )
       {
-        v5 = v7;
+        return v7;
       }
       else
       {
-        v5 = (SSCode *)*v7->i_statements.i_array_p;
+        v5 = *v7->i_statements.i_array_p;
         AMemory::c_free_func(v7->i_statements.i_array_p);
         v7->i_statements.i_array_p = 0i64;
         v7->i_statements.i_count = 0;
-        v7->vfptr->__vecDelDtor((SSExpressionBase *)&v7->vfptr, 1u);
+        v7->vfptr->__vecDelDtor(v7, 1u);
       }
     }
     else
     {
-      v5 = (SSCode *)AMemory::c_malloc_func(0x18ui64, "SSLiteral");
+      v5 = (SSExpressionBase *)AMemory::c_malloc_func(0x18ui64, "SSLiteral");
       if ( v5 )
       {
         v5->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
         v5->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
-        *(_QWORD *)&v5->i_temp_vars.i_count = 0i64;
-        LODWORD(v5->i_temp_vars.i_array_p) = 7;
+        v5[1].vfptr = 0i64;
+        LODWORD(v5[2].vfptr) = 7;
       }
       else
       {
         v5 = 0i64;
       }
-      v7->vfptr->__vecDelDtor((SSExpressionBase *)&v7->vfptr, 1u);
+      v7->vfptr->__vecDelDtor(v7, 1u);
     }
   }
-  return v5;
+  return (SSCode *)v5;
 }
 
 // File Line: 2570
 // RVA: 0x1290B0
-signed __int64 __fastcall SSParser::parse_comment_multiline(SSParser *this, __int64 start_pos, unsigned int *end_pos_p)
+__int64 __fastcall SSParser::parse_comment_multiline(SSParser *this, __int64 start_pos, unsigned int *end_pos_p)
 {
-  AStringRef *v3; // rbx
-  unsigned int *v4; // rdi
-  unsigned int v5; // esi
-  SSParser *v6; // rbp
-  char *v7; // rbx
+  AStringRef *i_str_ref_p; // rbx
+  unsigned int i_length; // esi
+  char *i_cstr_p; // rbx
   __int64 v8; // rdx
   char v9; // cl
   SSParser::eResult v10; // eax
   unsigned int v11; // edx
   SSParser::eResult v12; // eax
-  unsigned int end_pos_pa; // [rsp+38h] [rbp+10h]
+  unsigned int end_pos_pa; // [rsp+38h] [rbp+10h] BYREF
 
-  v3 = this->i_str_ref_p;
-  v4 = end_pos_p;
-  v5 = this->i_str_ref_p->i_length;
-  v6 = this;
+  i_str_ref_p = this->i_str_ref_p;
+  i_length = this->i_str_ref_p->i_length;
   end_pos_pa = start_pos;
-  if ( (signed int)start_pos + 2 <= v5 )
+  if ( (int)start_pos + 2 <= i_length )
   {
-    v7 = v3->i_cstr_p;
-    if ( v7[(unsigned int)start_pos] == 47 )
+    i_cstr_p = i_str_ref_p->i_cstr_p;
+    if ( i_cstr_p[(unsigned int)start_pos] == 47 )
     {
       start_pos = (unsigned int)(start_pos + 1);
       end_pos_pa = start_pos;
-      if ( v7[start_pos] == 42 )
+      if ( i_cstr_p[start_pos] == 42 )
       {
         v8 = (unsigned int)(start_pos + 2);
         end_pos_pa = v8;
-        if ( (unsigned int)v8 >= v5 )
+        if ( (unsigned int)v8 >= i_length )
         {
 LABEL_16:
-          if ( v4 )
-            *v4 = v8;
+          if ( end_pos_p )
+            *end_pos_p = v8;
           return 26i64;
         }
         while ( 1 )
         {
-          v9 = v7[v8];
+          v9 = i_cstr_p[v8];
           if ( v9 == 42 )
           {
-            v12 = SSParser::parse_comment_multiline(v6, v8 - 1, &end_pos_pa);
+            v12 = SSParser::parse_comment_multiline(this, v8 - 1, &end_pos_pa);
             v11 = end_pos_pa;
             if ( v12 == Result_ok )
               goto LABEL_14;
-            if ( v7[end_pos_pa + 2] == 47 )
+            if ( i_cstr_p[end_pos_pa + 2] == 47 )
             {
-              if ( v4 )
-                *v4 = end_pos_pa + 3;
+              if ( end_pos_p )
+                *end_pos_p = end_pos_pa + 3;
               return 0i64;
             }
             v8 = end_pos_pa + 3;
           }
           else if ( v9 == 47 )
           {
-            if ( v7[(unsigned int)(v8 - 1)] == 42 )
+            if ( i_cstr_p[(unsigned int)(v8 - 1)] == 42 )
             {
-              if ( v4 )
-                *v4 = v8 + 1;
+              if ( end_pos_p )
+                *end_pos_p = v8 + 1;
               return 0i64;
             }
-            v10 = SSParser::parse_comment_multiline(v6, v8, &end_pos_pa);
+            v10 = SSParser::parse_comment_multiline(this, v8, &end_pos_pa);
             v11 = end_pos_pa;
             if ( v10 == Result_ok )
             {
@@ -2055,7 +1966,7 @@ LABEL_14:
           }
 LABEL_15:
           end_pos_pa = v8;
-          if ( (unsigned int)v8 >= v5 )
+          if ( (unsigned int)v8 >= i_length )
             goto LABEL_16;
         }
       }
@@ -2070,58 +1981,52 @@ LABEL_15:
 // RVA: 0x129550
 SSConditional *__fastcall SSParser::parse_conditional_tail(SSParser *this, SSParser::Args *args)
 {
-  SSParser::Args *v2; // rsi
-  SSParser *v3; // rdi
-  unsigned int v4; // ebx
-  char *v5; // r15
+  unsigned int i_start_pos; // ebx
+  char *i_cstr_p; // r15
   SSExpressionBase *v6; // r12
-  __int64 v7; // r13
-  unsigned int v8; // er14
-  _QWORD *v9; // rcx
+  __int64 i_count; // r13
+  unsigned int v8; // r14d
+  char *v9; // rcx
   SSParser::eResult v10; // eax
-  __int64 v11; // rdx
-  signed int v12; // eax
-  unsigned int v13; // eax
-  SSTypedName **v14; // rax
-  SSParser::eResult v15; // eax
-  SSCode *v16; // r14
-  SSClause *v17; // rax
-  char v18; // r14
-  unsigned int v19; // eax
-  void (__fastcall ***v20)(_QWORD, signed __int64); // r13
-  SSTypedName **v21; // r12
-  SSClassUnaryBase *v22; // r14
-  SSClassUnaryBase *v23; // rax
-  SSTypedName **v24; // rdi
-  unsigned __int64 v25; // r15
-  SSTypedName *v26; // rbx
-  SSClassDescBase *v27; // rcx
-  SSClassUnaryBase **v28; // rsi
-  __int64 *v29; // rbx
-  SSClassUnaryBase **v30; // rdi
-  unsigned int v32; // [rsp+20h] [rbp-89h]
-  void (__fastcall ***v33)(_QWORD, signed __int64); // [rsp+28h] [rbp-81h]
-  APCompactArray<SSClause,SSClause,ACompareAddress<SSClause> > *v34; // [rsp+30h] [rbp-79h]
-  unsigned int v35; // [rsp+38h] [rbp-71h]
-  APSorted<SSTypedName,ASymbol,ACompareLogical<ASymbol> > sorted; // [rsp+40h] [rbp-69h]
-  APSortedLogical<SSTypedName,ASymbol> merge_vars_p; // [rsp+58h] [rbp-51h]
-  SSClassUnion class_union; // [rsp+70h] [rbp-39h]
-  unsigned __int64 v39; // [rsp+A0h] [rbp-9h]
-  SSClause *v40; // [rsp+A8h] [rbp-1h]
-  __int64 v41; // [rsp+B0h] [rbp+7h]
-  char v42; // [rsp+110h] [rbp+67h]
-  signed __int64 v43; // [rsp+118h] [rbp+6Fh]
-  char v44; // [rsp+118h] [rbp+6Fh]
-  unsigned int end_pos_p; // [rsp+120h] [rbp+77h]
-  unsigned int v46; // [rsp+128h] [rbp+7Fh]
+  SSParser::eResult v11; // eax
+  unsigned int v12; // eax
+  SSTypedName **i_array_p; // rax
+  SSParser::eResult v14; // eax
+  SSCode *v15; // r14
+  SSClause *v16; // rax
+  char v17; // r14
+  unsigned int v18; // eax
+  void (__fastcall ***v19)(_QWORD, __int64); // r13
+  SSTypedName **v20; // r12
+  SSClassUnaryBase *i_common_class_p; // r14
+  SSClassUnaryBase *v22; // rax
+  SSTypedName **v23; // rdi
+  SSTypedName **v24; // r15
+  SSTypedName *v25; // rbx
+  SSClassDescBase *i_obj_p; // rcx
+  SSClassUnaryBase **v27; // rsi
+  __int64 *v28; // rbx
+  SSClassUnaryBase **v29; // rdi
+  unsigned int v31; // [rsp+20h] [rbp-89h]
+  void (__fastcall ***v32)(_QWORD, __int64); // [rsp+28h] [rbp-81h]
+  APCompactArray<SSClause,SSClause,ACompareAddress<SSClause> > *v33; // [rsp+30h] [rbp-79h]
+  unsigned int i_length; // [rsp+38h] [rbp-71h]
+  APSorted<SSTypedName,ASymbol,ACompareLogical<ASymbol> > sorted; // [rsp+40h] [rbp-69h] BYREF
+  APSortedLogical<SSTypedName,ASymbol> merge_vars_p; // [rsp+58h] [rbp-51h] BYREF
+  SSClassUnion class_union; // [rsp+70h] [rbp-39h] BYREF
+  unsigned __int64 v38; // [rsp+A0h] [rbp-9h]
+  SSClause *v39; // [rsp+A8h] [rbp-1h]
+  __int64 v40; // [rsp+B0h] [rbp+7h]
+  char v41; // [rsp+110h] [rbp+67h]
+  char v42; // [rsp+118h] [rbp+6Fh]
+  unsigned int end_pos_p; // [rsp+120h] [rbp+77h] BYREF
+  int v44; // [rsp+128h] [rbp+7Fh]
 
-  v41 = -2i64;
-  v2 = args;
-  v3 = this;
-  v4 = args->i_start_pos;
-  v32 = args->i_start_pos;
-  v35 = this->i_str_ref_p->i_length;
-  v5 = this->i_str_ref_p->i_cstr_p;
+  v40 = -2i64;
+  i_start_pos = args->i_start_pos;
+  v31 = args->i_start_pos;
+  i_length = this->i_str_ref_p->i_length;
+  i_cstr_p = this->i_str_ref_p->i_cstr_p;
   v6 = 0i64;
   class_union.i_ref_count = 0;
   class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable;
@@ -2132,325 +2037,313 @@ SSConditional *__fastcall SSParser::parse_conditional_tail(SSParser *this, SSPar
   merge_vars_p.i_count = 0;
   merge_vars_p.i_array_p = 0i64;
   merge_vars_p.i_size = 0;
-  LODWORD(v7) = 0;
+  LODWORD(i_count) = 0;
   sorted.i_count = 0;
   sorted.i_array_p = 0i64;
   v8 = 0;
-  v39 = 0i64;
+  v38 = 0i64;
   sorted.i_size = 0;
-  v33 = 0i64;
-  if ( !(args->i_flags & 1) )
-    goto LABEL_85;
-  v9 = AMemory::c_malloc_func(0x18ui64, "SSConditional");
-  v33 = (void (__fastcall ***)(_QWORD, signed __int64))v9;
-  if ( v9 )
+  v32 = 0i64;
+  if ( (args->i_flags & 1) != 0
+    && ((v9 = (char *)AMemory::c_malloc_func(0x18ui64, "SSConditional"),
+         (v32 = (void (__fastcall ***)(_QWORD, __int64))v9) == 0i64)
+      ? (v9 = 0i64, v32 = 0i64)
+      : (void (__fastcall ***)(_QWORD, __int64))(*(_QWORD *)v9 = &SSExpressionBase::`vftable,
+                                                 *(_QWORD *)v9 = &SSConditional::`vftable,
+                                                 *((_DWORD *)v9 + 2) = 0,
+                                                 *((_QWORD *)v9 + 2) = 0i64),
+        v9) )
   {
-    *v9 = &SSExpressionBase::`vftable;
-    *v9 = &SSConditional::`vftable;
-    v43 = (signed __int64)(v9 + 1);
-    *(_DWORD *)v43 = 0;
-    *(_QWORD *)(v43 + 8) = 0i64;
+    v33 = (APCompactArray<SSClause,SSClause,ACompareAddress<SSClause> > *)(v9 + 8);
   }
   else
   {
-    v9 = 0i64;
     v33 = 0i64;
   }
-  if ( v9 )
-    v34 = (APCompactArray<SSClause,SSClause,ACompareAddress<SSClause> > *)(v9 + 1);
-  else
-LABEL_85:
-    v34 = 0i64;
-  v46 = 0;
-  end_pos_p = v4;
-  v42 = 0;
+  v44 = 0;
+  end_pos_p = i_start_pos;
+  v41 = 0;
   while ( 1 )
   {
-    v10 = SSParser::parse_ws_any(v3, v4, &end_pos_p);
-    v2->i_result = v10;
-    v44 = 0;
+    v10 = SSParser::parse_ws_any(this, i_start_pos, &end_pos_p);
+    args->i_result = v10;
+    v42 = 0;
     if ( v10 )
     {
-      v4 = end_pos_p;
+      i_start_pos = end_pos_p;
       goto LABEL_47;
     }
-    v2->i_result = 24;
-    v4 = end_pos_p;
-    if ( v35 - end_pos_p < 3 )
+    args->i_result = Result_err_expected_clause_block;
+    i_start_pos = end_pos_p;
+    if ( i_length - end_pos_p < 3 )
       break;
-    if ( v5[end_pos_p] == 101
-      && v5[end_pos_p + 1] == 108
-      && v5[end_pos_p + 2] == 115
-      && v5[end_pos_p + 3] == 101
-      && (v11 = end_pos_p + 4, byte_14236F1C0[(unsigned __int8)v5[v11]]) )
+    if ( i_cstr_p[end_pos_p] == 101
+      && i_cstr_p[end_pos_p + 1] == 108
+      && i_cstr_p[end_pos_p + 2] == 115
+      && i_cstr_p[end_pos_p + 3] == 101
+      && byte_14236F1C0[(unsigned __int8)i_cstr_p[end_pos_p + 4]] )
     {
-      v4 = end_pos_p + 4;
+      i_start_pos = end_pos_p + 4;
       end_pos_p += 4;
-      v12 = 80;
-      if ( v46 )
-        v12 = 0;
-      v2->i_result = v12;
+      v11 = Result_err_unexpected_else;
+      if ( v44 )
+        v11 = Result_ok;
+      args->i_result = v11;
       v6 = 0i64;
-      v44 = 1;
       v42 = 1;
+      v41 = 1;
     }
     else
     {
-      v7 = v3->i_context.i_top_scope_old.i_count;
-      sorted.i_count = v7;
-      if ( (unsigned int)v7 <= v8 )
+      i_count = this->i_context.i_top_scope_old.i_count;
+      sorted.i_count = i_count;
+      if ( (unsigned int)i_count <= v8 )
       {
-        v14 = sorted.i_array_p;
+        i_array_p = sorted.i_array_p;
       }
       else
       {
         AMemory::c_free_func(sorted.i_array_p);
-        v13 = AMemory::c_req_byte_size_func(8 * v7);
-        v39 = (unsigned __int64)v13 >> 3;
-        sorted.i_size = v13 >> 3;
-        v14 = APArrayBase<SSTypedName>::alloc_array(v13 >> 3);
-        sorted.i_array_p = v14;
+        v12 = AMemory::c_req_byte_size_func(8 * i_count);
+        v38 = (unsigned __int64)v12 >> 3;
+        sorted.i_size = v12 >> 3;
+        i_array_p = APArrayBase<SSTypedName>::alloc_array(v12 >> 3);
+        sorted.i_array_p = i_array_p;
       }
-      memmove(v14, v3->i_context.i_top_scope_old.i_array_p, 8 * v7);
-      v2->i_start_pos = v4;
-      v6 = SSParser::parse_expression(v3, v2, SSInvokeTime_immediate);
-      v4 = v2->i_end_pos;
-      end_pos_p = v2->i_end_pos;
-      if ( v3->i_flags.i_flagset & 1 )
+      memmove(i_array_p, this->i_context.i_top_scope_old.i_array_p, 8 * i_count);
+      args->i_start_pos = i_start_pos;
+      v6 = SSParser::parse_expression(this, args, SSInvokeTime_immediate);
+      i_start_pos = args->i_end_pos;
+      end_pos_p = i_start_pos;
+      if ( (this->i_flags.i_flagset & 1) != 0 )
       {
-        if ( v2->i_result )
+        if ( args->i_result )
           goto LABEL_44;
-        if ( !v2->i_type_p->vfptr->is_class_type(v2->i_type_p, (SSClassDescBase *)&SSBrain::c_boolean_class_p->vfptr) )
+        if ( !args->i_type_p->vfptr->is_class_type(args->i_type_p, SSBrain::c_boolean_class_p) )
         {
-          v2->i_result = 129;
+          args->i_result = Result_err_typecheck_conditional;
           goto LABEL_44;
         }
       }
     }
-    if ( v2->i_result == Result_ok )
+    if ( args->i_result == Result_ok )
     {
-      v15 = SSParser::parse_ws_any(v3, v4, &end_pos_p);
-      v2->i_result = v15;
-      if ( v15 )
+      v14 = SSParser::parse_ws_any(this, i_start_pos, &end_pos_p);
+      args->i_result = v14;
+      if ( v14 )
       {
-        v4 = end_pos_p;
+        i_start_pos = end_pos_p;
       }
       else
       {
-        v2->i_result = 24;
-        v4 = end_pos_p;
-        if ( v5[end_pos_p] == 91 )
+        args->i_result = Result_err_expected_clause_block;
+        i_start_pos = end_pos_p;
+        if ( i_cstr_p[end_pos_p] == 91 )
         {
-          if ( v3->i_flags.i_flagset & 1 )
-            SSTypeContext::nest_locals(&v3->i_context);
-          v44 = 1;
-          v2->i_start_pos = v4;
-          v16 = SSParser::parse_code_block_optimized(v3, v2, SSInvokeTime_any, ResultDesired_true);
-          v4 = v2->i_end_pos;
-          end_pos_p = v2->i_end_pos;
-          if ( v2->i_result == Result_ok )
+          if ( (this->i_flags.i_flagset & 1) != 0 )
+            SSTypeContext::nest_locals(&this->i_context);
+          v42 = 1;
+          args->i_start_pos = i_start_pos;
+          v15 = SSParser::parse_code_block_optimized(this, args, SSInvokeTime_any, ResultDesired_true);
+          i_start_pos = args->i_end_pos;
+          end_pos_p = i_start_pos;
+          if ( args->i_result == Result_ok )
           {
-            v32 = v4;
-            ++v46;
-            if ( v34 )
+            v31 = i_start_pos;
+            ++v44;
+            if ( v33 )
             {
-              v17 = (SSClause *)AMemory::c_malloc_func(0x18ui64, "SSClause");
-              v40 = v17;
-              if ( v17 )
+              v16 = (SSClause *)AMemory::c_malloc_func(0x18ui64, "SSClause");
+              v39 = v16;
+              if ( v16 )
               {
-                v17->vfptr = (SSClauseVtbl *)&SSClause::`vftable;
-                v17->i_test_p = v6;
-                v17->i_clause_p = (SSExpressionBase *)&v16->vfptr;
+                v16->vfptr = (SSClauseVtbl *)&SSClause::`vftable;
+                v16->i_test_p = v6;
+                v16->i_clause_p = v15;
               }
-              APCompactArray<SSClause,SSClause,ACompareAddress<SSClause>>::append(v34, v17);
+              APCompactArray<SSClause,SSClause,ACompareAddress<SSClause>>::append(v33, v16);
             }
-            if ( !(v3->i_flags.i_flagset & 1) )
+            if ( (this->i_flags.i_flagset & 1) == 0 )
               goto LABEL_44;
-            SSClassUnion::merge_class(&class_union, v2->i_type_p);
-            if ( merge_vars_p.i_count || v3->i_context.i_current_scope_p->i_count )
-              SSTypeContext::merge_locals(&v3->i_context, &merge_vars_p, v46 == 1);
+            SSClassUnion::merge_class(&class_union, (SSClassUnion *)args->i_type_p);
+            if ( merge_vars_p.i_count || this->i_context.i_current_scope_p->i_count )
+              SSTypeContext::merge_locals(&this->i_context, &merge_vars_p, v44 == 1);
           }
-          if ( v3->i_flags.i_flagset & 1 )
+          if ( (this->i_flags.i_flagset & 1) != 0 )
           {
-            AList<SSTypeContext::ScopeVars,SSTypeContext::ScopeVars>::free_last(&v3->i_context.i_scope_stack);
-            v3->i_context.i_current_scope_p = (APSortedLogical<SSTypedName,ASymbol> *)&v3->i_context.i_scope_stack.i_sentinel.i_prev_p[1];
+            AList<SSTypeContext::ScopeVars,SSTypeContext::ScopeVars>::free_last(&this->i_context.i_scope_stack);
+            this->i_context.i_current_scope_p = (APSortedLogical<SSTypedName,ASymbol> *)&this->i_context.i_scope_stack.i_sentinel.i_prev_p[1];
           }
         }
       }
     }
 LABEL_44:
-    v18 = v42;
-    if ( v42 )
+    v17 = v41;
+    if ( v41 )
       goto LABEL_49;
-    v8 = v39;
+    v8 = v38;
 LABEL_47:
-    if ( v2->i_result )
+    if ( args->i_result )
       break;
     v6 = 0i64;
   }
-  v18 = v42;
+  v17 = 0;
 LABEL_49:
-  if ( v2->i_result )
+  if ( args->i_result )
   {
     if ( v6 )
       v6->vfptr->__vecDelDtor(v6, 1u);
-    if ( !v44 && v46 >= 1 )
+    if ( !v42 && v44 )
     {
       APSorted<SSTypedName,ASymbol,ACompareLogical<ASymbol>>::remove_all_all(
-        (APSorted<SSTypedName,ASymbol,ACompareLogical<ASymbol> > *)&v3->i_context.i_top_scope_old.i_count,
+        &this->i_context.i_top_scope_old,
         &sorted,
         0,
         0xFFFFFFFF);
-      APSizedArrayBase<SSTypedName>::free_all((APSizedArrayBase<SSTypedName> *)&v3->i_context.i_top_scope_old.i_count);
-      v3->i_context.i_top_scope_old.i_count = v7;
-      if ( (unsigned int)v7 > v3->i_context.i_top_scope_old.i_size )
+      APSizedArrayBase<SSTypedName>::free_all(&this->i_context.i_top_scope_old);
+      this->i_context.i_top_scope_old.i_count = i_count;
+      if ( (unsigned int)i_count > this->i_context.i_top_scope_old.i_size )
       {
-        AMemory::c_free_func(v3->i_context.i_top_scope_old.i_array_p);
-        v19 = AMemory::c_req_byte_size_func(8 * v3->i_context.i_top_scope_old.i_count) >> 3;
-        v3->i_context.i_top_scope_old.i_size = v19;
-        v3->i_context.i_top_scope_old.i_array_p = APArrayBase<SSTypedName>::alloc_array(v19);
+        AMemory::c_free_func(this->i_context.i_top_scope_old.i_array_p);
+        v18 = AMemory::c_req_byte_size_func(8 * this->i_context.i_top_scope_old.i_count) >> 3;
+        this->i_context.i_top_scope_old.i_size = v18;
+        this->i_context.i_top_scope_old.i_array_p = APArrayBase<SSTypedName>::alloc_array(v18);
       }
-      memmove(v3->i_context.i_top_scope_old.i_array_p, sorted.i_array_p, 8i64 * v3->i_context.i_top_scope_old.i_count);
-      v2->i_result = 0;
+      memmove(
+        this->i_context.i_top_scope_old.i_array_p,
+        sorted.i_array_p,
+        8i64 * this->i_context.i_top_scope_old.i_count);
+      args->i_result = Result_ok;
       goto LABEL_59;
     }
-    v32 = v4;
-    v20 = v33;
-    if ( v33 )
+    v31 = i_start_pos;
+    v19 = v32;
+    if ( v32 )
     {
-      (**v33)(v33, 1i64);
-      v20 = 0i64;
+      (**v32)(v32, 1i64);
+      v19 = 0i64;
     }
   }
   else
   {
 LABEL_59:
-    v20 = v33;
+    v19 = v32;
   }
-  v21 = merge_vars_p.i_array_p;
-  if ( v3->i_flags.i_flagset & 1 )
+  v20 = merge_vars_p.i_array_p;
+  if ( (this->i_flags.i_flagset & 1) != 0 )
   {
-    if ( v2->i_result )
+    if ( args->i_result )
     {
-      v22 = class_union.i_common_class_p;
+      i_common_class_p = class_union.i_common_class_p;
     }
     else
     {
-      if ( !v18 )
+      if ( !v17 )
       {
-        SSTypeContext::merge(&v3->i_context, &merge_vars_p);
-        SSClassUnion::merge_class(&class_union, (SSClassUnaryBase *)&SSBrain::c_none_class_p->vfptr);
+        SSTypeContext::merge(&this->i_context, &merge_vars_p);
+        SSClassUnion::merge_class(&class_union, SSBrain::c_none_class_p);
       }
       if ( class_union.i_union.i_count > 1 )
       {
-        v23 = (SSClassUnaryBase *)SSClassUnion::get_or_create(&class_union);
-        v22 = class_union.i_common_class_p;
+        v22 = (SSClassUnaryBase *)SSClassUnion::get_or_create(&class_union);
+        i_common_class_p = class_union.i_common_class_p;
       }
       else
       {
+        i_common_class_p = class_union.i_common_class_p;
         v22 = class_union.i_common_class_p;
-        v23 = class_union.i_common_class_p;
       }
-      v2->i_type_p = (SSClassDescBase *)&v23->vfptr;
-      SSTypeContext::change_variable_types(&v3->i_context, &merge_vars_p);
+      args->i_type_p = v22;
+      SSTypeContext::change_variable_types(&this->i_context, &merge_vars_p);
     }
-    v24 = v21;
-    v25 = (unsigned __int64)&v21[merge_vars_p.i_count];
+    v23 = v20;
+    v24 = &v20[merge_vars_p.i_count];
     merge_vars_p.i_count = 0;
-    if ( (unsigned __int64)v21 < v25 )
+    if ( v20 < v24 )
     {
       do
       {
-        v26 = *v24;
-        if ( *v24 )
+        v25 = *v23;
+        if ( *v23 )
         {
-          v27 = v26->i_type_p.i_obj_p;
-          if ( v27 )
-            (*(void (**)(void))&v27->vfptr->gap8[8])();
-          AMemory::c_free_func(v26);
+          i_obj_p = v25->i_type_p.i_obj_p;
+          if ( i_obj_p )
+            (*(void (__fastcall **)(SSClassDescBase *))&i_obj_p->vfptr->gap8[8])(i_obj_p);
+          AMemory::c_free_func(v25);
         }
-        ++v24;
+        ++v23;
       }
-      while ( (unsigned __int64)v24 < v25 );
+      while ( v23 < v24 );
     }
   }
   else
   {
-    v22 = class_union.i_common_class_p;
+    i_common_class_p = class_union.i_common_class_p;
   }
-  v2->i_end_pos = v32;
+  args->i_end_pos = v31;
   AMemory::c_free_func(sorted.i_array_p);
-  AMemory::c_free_func(v21);
+  AMemory::c_free_func(v20);
   class_union.vfptr = (SSClassDescBaseVtbl *)&SSClassUnion::`vftable;
-  if ( v22 )
-    v22->vfptr->dereference_delay((SSClassDescBase *)&v22->vfptr);
-  v28 = class_union.i_union.i_array_p;
+  if ( i_common_class_p )
+    i_common_class_p->vfptr->dereference_delay(i_common_class_p);
+  v27 = class_union.i_union.i_array_p;
   if ( class_union.i_union.i_count )
   {
-    v29 = (__int64 *)class_union.i_union.i_array_p;
-    v30 = &class_union.i_union.i_array_p[class_union.i_union.i_count];
-    if ( class_union.i_union.i_array_p < v30 )
+    v28 = (__int64 *)class_union.i_union.i_array_p;
+    v29 = &class_union.i_union.i_array_p[class_union.i_union.i_count];
+    if ( class_union.i_union.i_array_p < v29 )
     {
       do
-      {
-         SSClassDescBase::`vcall{24,{flat}}(*v29);
-        ++v29;
-      }
-      while ( v29 < (__int64 *)v30 );
+         SSClassDescBase::`vcall{24,{flat}}(*v28++);
+      while ( v28 < (__int64 *)v29 );
     }
   }
-  AMemory::c_free_func(v28);
-  return (SSConditional *)v20;
+  AMemory::c_free_func(v27);
+  return (SSConditional *)v19;
 }
 
 // File Line: 3022
 // RVA: 0x129AC0
 ASymbol *__fastcall SSParser::parse_data_member(SSParser *this, SSParser::Args *args, SSExpressionBase *owner_p)
 {
-  SSExpressionBase *v3; // rbp
-  SSParser::Args *v4; // rdi
-  SSParser *v5; // rsi
   ASymbol *v6; // rbx
   SSParser::eResult v7; // eax
-  SSClassDescBase *v8; // rsi
+  SSClassDescBase *i_type_p; // rsi
   __int64 v9; // rax
   ASymbol *v10; // rcx
   ASymbol *v11; // rcx
-  unsigned int end_pos_p; // [rsp+20h] [rbp-38h]
+  unsigned int end_pos_p; // [rsp+20h] [rbp-38h] BYREF
   __int64 v14; // [rsp+28h] [rbp-30h]
   ASymbol *v15; // [rsp+30h] [rbp-28h]
-  ASymbol name_p; // [rsp+68h] [rbp+10h]
-  int v17; // [rsp+78h] [rbp+20h]
+  ASymbol name_p; // [rsp+68h] [rbp+10h] BYREF
+  int v17; // [rsp+78h] [rbp+20h] BYREF
 
   v14 = -2i64;
-  v3 = owner_p;
-  v4 = args;
-  v5 = this;
   v6 = 0i64;
   name_p.i_uid = -1;
   end_pos_p = args->i_start_pos;
   v7 = SSParser::parse_name_instance(this, end_pos_p, &end_pos_p, &name_p);
-  v4->i_result = v7;
+  args->i_result = v7;
   if ( v7 == Result_ok )
   {
     v17 = 2;
-    if ( v5->i_flags.i_flagset & 1 )
+    if ( (this->i_flags.i_flagset & 1) != 0 )
     {
-      v8 = v4->i_type_p;
-      v9 = (__int64)v8->vfptr->get_data_type(v4->i_type_p, &name_p, (eSSScope *)&v17);
+      i_type_p = args->i_type_p;
+      v9 = (__int64)i_type_p->vfptr->get_data_type(i_type_p, &name_p, (eSSScope *)&v17);
       if ( v9 )
       {
-        v4->i_result = 0;
-        v4->i_type_p = (SSClassDescBase *)(*(__int64 (__fastcall **)(__int64, SSClassDescBase *))(*(_QWORD *)v9 + 32i64))(
-                                            v9,
-                                            v8);
+        args->i_result = Result_ok;
+        args->i_type_p = (SSClassDescBase *)(*(__int64 (__fastcall **)(__int64, SSClassDescBase *))(*(_QWORD *)v9 + 32i64))(
+                                              v9,
+                                              i_type_p);
       }
       else
       {
-        v4->i_result = 114;
+        args->i_result = Result_err_context_non_ident_member;
       }
     }
-    if ( v4->i_flags & 1 && v4->i_result == Result_ok )
+    if ( (args->i_flags & 1) != 0 && args->i_result == Result_ok )
     {
       if ( v17 == 2 )
       {
@@ -2462,7 +2355,7 @@ ASymbol *__fastcall SSParser::parse_data_member(SSParser *this, SSParser::Args *
           *(_QWORD *)&v10->i_uid = &SSIdentifier::`vftable;
           v10[2].i_uid = name_p.i_uid;
           *(_QWORD *)&v10->i_uid = &SSIdentifierMember::`vftable;
-          *(_QWORD *)&v10[4].i_uid = v3;
+          *(_QWORD *)&v10[4].i_uid = owner_p;
           v6 = v10;
         }
       }
@@ -2476,96 +2369,92 @@ ASymbol *__fastcall SSParser::parse_data_member(SSParser *this, SSParser::Args *
           *(_QWORD *)&v11->i_uid = &SSIdentifier::`vftable;
           v11[2].i_uid = name_p.i_uid;
           *(_QWORD *)&v11->i_uid = &SSIdentifierMember::`vftable;
-          *(_QWORD *)&v11[4].i_uid = v3;
+          *(_QWORD *)&v11[4].i_uid = owner_p;
           *(_QWORD *)&v11->i_uid = &SSIdentifierClassMember::`vftable;
           v6 = v11;
         }
       }
     }
   }
-  v4->i_end_pos = end_pos_p;
+  args->i_end_pos = end_pos_p;
   return v6;
 }
 
 // File Line: 3269
 // RVA: 0x129D10
-SSLiteralList *__fastcall SSParser::parse_expression(SSParser *this, SSParser::Args *args, __int64 desired_exec_time)
+SSLiteralList *__fastcall SSParser::parse_expression(
+        SSParser *this,
+        SSParser::Args *args,
+        unsigned __int64 desired_exec_time)
 {
-  SSParser::Args *v3; // rbx
-  SSParser *v4; // r15
-  AStringRef *v5; // r10
-  unsigned int v6; // er9
-  __int64 v7; // r13
+  AStringRef *i_str_ref_p; // r10
+  unsigned int i_length; // r9d
+  __int64 i_start_pos; // r13
   SSLiteralList *result; // rax
-  unsigned int v9; // esi
-  char *v10; // r10
+  unsigned int i_end_pos; // esi
+  char *i_cstr_p; // r10
   unsigned __int8 v11; // r11
   __int64 v12; // rdx
   SSLiteralList *v13; // rdi
-  ASymbol *v14; // r9
+  ASymbol *p_p_i_ctor_p; // r9
   SSParser::eResult v15; // eax
   AString *v16; // r9
   SSParser::eResult v17; // eax
   AStringRef *v18; // rsi
-  bool v19; // zf
-  AObjReusePool<AStringRef> *v20; // rax
-  AObjReusePool<AStringRef> *v21; // r8
-  AObjBlock<AStringRef> *v22; // rax
-  unsigned __int64 v23; // rdx
-  SSParser::eResult v24; // eax
-  char v25; // r14
-  SSCode *v26; // rax
-  signed __int64 v27; // rcx
-  SSParser::eResult v28; // ecx
-  SSExpressionBase *v29; // rax
-  unsigned int v30; // edx
-  SSParser::eResult v31; // ecx
-  signed int v32; // eax
-  AStringRef *elem; // [rsp+30h] [rbp-38h]
-  __int64 v34; // [rsp+38h] [rbp-30h]
-  SSParser::Args argsa; // [rsp+40h] [rbp-28h]
-  SSLiteralList *ch_p; // [rsp+B0h] [rbp+48h]
-  unsigned int end_pos_p; // [rsp+B8h] [rbp+50h]
+  AObjReusePool<AStringRef> *pool; // r8
+  AObjBlock<AStringRef> *i_block_p; // rax
+  unsigned __int64 i_objects_a; // rdx
+  SSParser::eResult v23; // eax
+  char v24; // r14
+  SSCode *v25; // rax
+  unsigned __int64 v26; // rcx
+  int i_result; // ecx
+  SSExpressionBase *v28; // rax
+  unsigned int v29; // edx
+  SSParser::eResult v30; // ecx
+  SSParser::eResult v31; // eax
+  AStringRef *elem[2]; // [rsp+30h] [rbp-38h] BYREF
+  SSParser::Args argsa; // [rsp+40h] [rbp-28h] BYREF
+  SSLiteralList *ch_p; // [rsp+B0h] [rbp+48h] BYREF
+  unsigned int end_pos_p; // [rsp+B8h] [rbp+50h] BYREF
   eSSInvokeTime desired_exec_timea; // [rsp+C0h] [rbp+58h]
-  SSMethodCall **v39; // [rsp+C8h] [rbp+60h]
+  SSMethodCall **p_i_ctor_p; // [rsp+C8h] [rbp+60h] BYREF
 
-  desired_exec_timea = (signed int)desired_exec_time;
-  v34 = -2i64;
-  v3 = args;
-  v4 = this;
-  v5 = this->i_str_ref_p;
-  v6 = this->i_str_ref_p->i_length;
-  v7 = args->i_start_pos;
-  if ( (unsigned int)v7 < v6 )
+  desired_exec_timea = (int)desired_exec_time;
+  elem[1] = (AStringRef *)-2i64;
+  i_str_ref_p = this->i_str_ref_p;
+  i_length = this->i_str_ref_p->i_length;
+  i_start_pos = args->i_start_pos;
+  if ( (unsigned int)i_start_pos < i_length )
   {
-    v9 = args->i_start_pos;
+    i_end_pos = args->i_start_pos;
     end_pos_p = args->i_start_pos;
-    v10 = v5->i_cstr_p;
-    v11 = v10[v7];
-    v12 = (unsigned int)(v7 + 1);
-    if ( (unsigned int)v12 >= v6 )
+    i_cstr_p = i_str_ref_p->i_cstr_p;
+    v11 = i_cstr_p[i_start_pos];
+    v12 = (unsigned int)(i_start_pos + 1);
+    if ( (unsigned int)v12 >= i_length )
       LOBYTE(desired_exec_time) = 0;
     else
-      desired_exec_time = (unsigned __int8)v10[v12];
+      desired_exec_time = (unsigned __int8)i_cstr_p[v12];
     v13 = 0i64;
-    switch ( 0x40000000 )
+    switch ( v11 )
     {
-      case 33:
-      case 95:
-        v3->i_result = 2;
-        goto LABEL_62;
-      case 34:
-        elem = AStringRef::get_empty();
-        ++elem->i_ref_count;
-        v16 = (AString *)&elem;
-        if ( !(v3->i_flags & 1) )
+      case !:
+      case _:
+        args->i_result = Result__implicit_this;
+        goto LABEL_61;
+      case ":
+        elem[0] = AStringRef::get_empty();
+        ++elem[0]->i_ref_count;
+        v16 = (AString *)elem;
+        if ( (args->i_flags & 1) == 0 )
           v16 = 0i64;
-        v17 = SSParser::parse_literal_string(v4, v7, &end_pos_p, v16);
-        v3->i_result = v17;
+        v17 = SSParser::parse_literal_string(this, i_start_pos, &end_pos_p, v16);
+        args->i_result = v17;
         if ( v17 == Result_ok )
         {
-          v3->i_type_p = (SSClassDescBase *)&SSBrain::c_string_class_p->vfptr;
-          if ( v3->i_flags & 1 )
+          args->i_type_p = SSBrain::c_string_class_p;
+          if ( (args->i_flags & 1) != 0 )
           {
             v13 = (SSLiteralList *)AMemory::c_malloc_func(0x18ui64, "SSLiteral");
             ch_p = v13;
@@ -2574,11 +2463,11 @@ SSLiteralList *__fastcall SSParser::parse_expression(SSParser *this, SSParser::A
               v13->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
               v13->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
               v13->i_item_exprs.i_count = 4;
-              v39 = &v13->i_ctor_p;
+              p_i_ctor_p = &v13->i_ctor_p;
               if ( v13 != (SSLiteralList *)-8i64 )
               {
-                v13->i_ctor_p = (SSMethodCall *)elem;
-                ++elem->i_ref_count;
+                v13->i_ctor_p = (SSMethodCall *)elem[0];
+                ++elem[0]->i_ref_count;
               }
             }
             else
@@ -2587,51 +2476,48 @@ SSLiteralList *__fastcall SSParser::parse_expression(SSParser *this, SSParser::A
             }
           }
         }
-        v18 = elem;
-        v19 = elem->i_ref_count == 1;
-        --v18->i_ref_count;
-        if ( !v19 )
+        v18 = elem[0];
+        if ( elem[0]->i_ref_count-- != 1 )
           goto LABEL_16;
         if ( v18->i_deallocate )
           AMemory::c_free_func(v18->i_cstr_p);
-        v20 = AStringRef::get_pool();
-        v21 = v20;
-        v22 = v20->i_block_p;
-        v23 = (unsigned __int64)v22->i_objects_a;
-        if ( (unsigned __int64)v18 < v23 || (unsigned __int64)v18 >= v23 + 24i64 * v22->i_size )
+        pool = AStringRef::get_pool();
+        i_block_p = pool->i_block_p;
+        i_objects_a = (unsigned __int64)i_block_p->i_objects_a;
+        if ( (unsigned __int64)v18 < i_objects_a || (unsigned __int64)v18 >= i_objects_a + 24i64 * i_block_p->i_size )
         {
-          APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(&v21->i_exp_pool, v18);
-          v9 = end_pos_p;
+          APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(&pool->i_exp_pool, v18);
+          i_end_pos = end_pos_p;
         }
         else
         {
-          APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(&v21->i_pool, v18);
-          v9 = end_pos_p;
+          APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(&pool->i_pool, v18);
+          i_end_pos = end_pos_p;
         }
-        goto LABEL_62;
-      case 38:
-      case 42:
-      case 43:
-      case 47:
-      case 58:
-      case 60:
-      case 61:
-      case 62:
-      case 94:
-      case 124:
-      case 126:
+        goto LABEL_61;
+      case &:
+      case *:
+      case +:
+      case /:
+      case ::
+      case <:
+      case =:
+      case >:
+      case ^:
+      case |:
+      case ~:
         goto $LN18_1;
-      case 39:
-        LODWORD(v39) = -1;
-        v14 = (ASymbol *)&v39;
-        if ( !(v3->i_flags & 1) )
-          v14 = 0i64;
-        v15 = SSParser::parse_literal_symbol(this, v7, &end_pos_p, v14);
-        v3->i_result = v15;
+      case \:
+        LODWORD(p_i_ctor_p) = -1;
+        p_p_i_ctor_p = (ASymbol *)&p_i_ctor_p;
+        if ( (args->i_flags & 1) == 0 )
+          p_p_i_ctor_p = 0i64;
+        v15 = SSParser::parse_literal_symbol(this, i_start_pos, &end_pos_p, p_p_i_ctor_p);
+        args->i_result = v15;
         if ( v15 == Result_ok )
         {
-          v3->i_type_p = (SSClassDescBase *)&SSBrain::c_symbol_class_p->vfptr;
-          if ( v3->i_flags & 1 )
+          args->i_type_p = SSBrain::c_symbol_class_p;
+          if ( (args->i_flags & 1) != 0 )
           {
             v13 = (SSLiteralList *)AMemory::c_malloc_func(0x18ui64, "SSLiteral");
             ch_p = v13;
@@ -2640,9 +2526,9 @@ SSLiteralList *__fastcall SSParser::parse_expression(SSParser *this, SSParser::A
               v13->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
               v13->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
               v13->i_item_exprs.i_count = 5;
-              elem = (AStringRef *)&v13->i_ctor_p;
+              elem[0] = (AStringRef *)&v13->i_ctor_p;
               if ( v13 != (SSLiteralList *)-8i64 )
-                LODWORD(v13->i_ctor_p) = (_DWORD)v39;
+                LODWORD(v13->i_ctor_p) = (_DWORD)p_i_ctor_p;
             }
             else
             {
@@ -2651,65 +2537,65 @@ SSLiteralList *__fastcall SSParser::parse_expression(SSParser *this, SSParser::A
           }
         }
 LABEL_16:
-        v9 = end_pos_p;
-        goto LABEL_62;
-      case 40:
+        i_end_pos = end_pos_p;
+        goto LABEL_61;
+      case (:
         goto $LN27_1;
-      case 45:
+      case -:
         if ( (_BYTE)desired_exec_time == 62 )
           goto $LN19_2;
         if ( AString::c_is_digit[(unsigned __int8)desired_exec_time] )
-          goto LABEL_56;
+          goto LABEL_55;
 $LN18_1:
-        v3->i_result = 84;
-        goto LABEL_62;
-      case 63:
+        args->i_result = Result_err_unexpected_implicit_this;
+        goto LABEL_61;
+      case ?:
 $LN19_2:
-        v3->i_result = 78;
-        v9 = v7 + 1;
-        goto LABEL_62;
-      case 64:
+        args->i_result = Result_err_unexpected_deprecated;
+        i_end_pos = i_start_pos + 1;
+        goto LABEL_61;
+      case @:
         if ( (unsigned __int8)desired_exec_time <= 0x3Fu
-          && (v27 = -6917528477885267968i64, _bittest64(&v27, desired_exec_time)) )
+          && (v26 = 0xA000008000000000ui64, _bittest64((const __int64 *)&v26, desired_exec_time)) )
         {
-          v26 = (SSCode *)SSParser::parse_object_id_tail(v4, v3, 0i64);
+          v25 = (SSCode *)SSParser::parse_object_id_tail(this, args, 0i64);
         }
         else
         {
 $LN27_1:
-          v26 = (SSCode *)SSParser::parse_closure(v4, v3);
+          v25 = (SSCode *)SSParser::parse_closure(this, args);
         }
-        goto LABEL_61;
-      case 91:
-        v26 = SSParser::parse_code_block_optimized(this, v3, SSInvokeTime_any, ResultDesired_true);
-        goto LABEL_61;
-      case 96:
-        v24 = 82;
-        if ( v6 - (unsigned int)v7 < 2 )
+        goto LABEL_60;
+      case [:
+        v25 = SSParser::parse_code_block_optimized(this, args, SSInvokeTime_any, ResultDesired_true);
+        goto LABEL_60;
+      case `:
+        v23 = Result_err_unexpected_eof;
+        if ( i_length - (unsigned int)i_start_pos < 2 )
           goto LABEL_38;
-        v24 = 42;
-        if ( v10[v7] != 96 )
+        v23 = Result_err_expected_literal_char;
+        if ( i_cstr_p[i_start_pos] != 96 )
           goto LABEL_38;
-        end_pos_p = v7 + 1;
-        v25 = v10[v12];
-        LOBYTE(ch_p) = v25;
-        if ( v25 == 92 )
+        end_pos_p = i_start_pos + 1;
+        v24 = i_cstr_p[v12];
+        LOBYTE(ch_p) = v24;
+        if ( v24 == 92 )
         {
-          v24 = SSParser::parse_literal_char_esc_seq(this, v12, &end_pos_p, (char *)&ch_p);
-          v9 = end_pos_p;
+          v23 = SSParser::parse_literal_char_esc_seq(this, v12, &end_pos_p, (char *)&ch_p);
+          i_end_pos = end_pos_p;
 LABEL_38:
-          v25 = (char)ch_p;
+          v24 = (char)ch_p;
         }
         else
         {
-          v24 = 0;
-          v9 = v7 + 2;
+          v23 = Result_ok;
+          i_end_pos = i_start_pos + 2;
         }
-        v3->i_result = v24;
-        if ( v24 == Result_ok )
+        args->i_result = v23;
+        if ( v23 == Result_ok )
         {
-          v3->i_type_p = (SSClassDescBase *)&SSBrain::c_char_class_p->vfptr;
-          if ( v3->i_flags & 1 )
+          args->i_type_p = SSBrain::c_char_class_p;
+          if ( (args->i_flags & 1) != 0 )
           {
             v13 = (SSLiteralList *)AMemory::c_malloc_func(0x18ui64, "SSLiteral");
             ch_p = v13;
@@ -2717,7 +2603,7 @@ LABEL_38:
             {
               v13->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
               v13->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
-              v13->i_ctor_p = (SSMethodCall *)v25;
+              v13->i_ctor_p = (SSMethodCall *)v24;
               v13->i_item_exprs.i_count = 1;
             }
             else
@@ -2726,79 +2612,79 @@ LABEL_38:
             }
           }
         }
-        goto LABEL_62;
-      case 123:
-        v13 = SSParser::parse_literal_list(this, v3, 0i64, 0, 0i64);
-        v9 = v3->i_end_pos;
-        goto LABEL_62;
+        goto LABEL_61;
+      case {:
+        v13 = SSParser::parse_literal_list(this, args, 0i64, 0, 0i64);
+        i_end_pos = args->i_end_pos;
+        goto LABEL_61;
       default:
-LABEL_56:
+LABEL_55:
         if ( v11 == 45 || AString::c_is_digit[v11] )
         {
-          v26 = (SSCode *)SSParser::parse_literal_number(this, v3);
+          v25 = (SSCode *)SSParser::parse_literal_number(this, args);
         }
         else
         {
-          v3->i_result = 73;
+          args->i_result = Result_err_unexpected_char;
           if ( !AString::c_char_match_table[0][v11] )
-            goto LABEL_62;
-          v26 = (SSCode *)SSParser::parse_expression_alpha(this, v3);
+            goto LABEL_61;
+          v25 = (SSCode *)SSParser::parse_expression_alpha(this, args);
         }
+LABEL_60:
+        i_end_pos = args->i_end_pos;
+        v13 = (SSLiteralList *)v25;
 LABEL_61:
-        v9 = v3->i_end_pos;
-        v13 = (SSLiteralList *)v26;
-LABEL_62:
-        v28 = v3->i_result;
-        if ( (signed int)v28 <= 2 )
+        i_result = args->i_result;
+        if ( i_result <= 2 )
         {
-          argsa.i_flags = v3->i_flags;
-          argsa.i_result = v28;
-          argsa.i_end_pos = v3->i_end_pos;
-          argsa.i_type_p = v3->i_type_p;
-          argsa.i_start_pos = v9;
-          if ( v28 == 2 )
-            argsa.i_type_p = (SSClassDescBase *)&v4->i_context.i_obj_scope_p->vfptr;
-          v29 = SSParser::parse_expression_string(v4, &argsa, (SSExpressionBase *)&v13->vfptr);
-          v30 = argsa.i_end_pos;
-          if ( v9 == argsa.i_end_pos )
+          argsa.i_flags = args->i_flags;
+          argsa.i_result = i_result;
+          argsa.i_end_pos = args->i_end_pos;
+          argsa.i_type_p = args->i_type_p;
+          argsa.i_start_pos = i_end_pos;
+          if ( i_result == 2 )
+            argsa.i_type_p = this->i_context.i_obj_scope_p;
+          v28 = SSParser::parse_expression_string(this, &argsa, v13);
+          v29 = argsa.i_end_pos;
+          if ( i_end_pos == argsa.i_end_pos )
           {
-            v32 = 0;
-            if ( v3->i_result == 2 )
-              v32 = 30;
-            v3->i_result = v32;
+            v31 = Result_ok;
+            if ( args->i_result == Result__implicit_this )
+              v31 = Result_err_expected_expression;
+            args->i_result = v31;
           }
           else
           {
-            v31 = argsa.i_result;
+            v30 = argsa.i_result;
             if ( argsa.i_result )
             {
               if ( v13 )
               {
-                v13->vfptr->__vecDelDtor((SSExpressionBase *)&v13->vfptr, 1u);
-                v30 = argsa.i_end_pos;
-                v31 = argsa.i_result;
+                v13->vfptr->__vecDelDtor(v13, 1u);
+                v29 = argsa.i_end_pos;
+                v30 = argsa.i_result;
               }
               v13 = 0i64;
             }
             else
             {
-              v13 = (SSLiteralList *)v29;
+              v13 = (SSLiteralList *)v28;
             }
-            v3->i_start_pos = argsa.i_start_pos;
-            v3->i_flags = argsa.i_flags;
-            v3->i_result = v31;
-            v3->i_end_pos = v30;
-            v3->i_type_p = argsa.i_type_p;
-            v9 = v30;
+            args->i_start_pos = argsa.i_start_pos;
+            args->i_flags = argsa.i_flags;
+            args->i_result = v30;
+            args->i_end_pos = v29;
+            args->i_type_p = argsa.i_type_p;
+            i_end_pos = v29;
           }
-          v3->i_end_pos = v9;
+          args->i_end_pos = i_end_pos;
           if ( v13 )
           {
-            if ( !SSParser::ensure_exec_time(v4, (SSExpressionBase *)&v13->vfptr, v3, desired_exec_timea) )
+            if ( !SSParser::ensure_exec_time(this, v13, args, desired_exec_timea) )
             {
-              v3->i_start_pos = v7;
-              v3->i_end_pos = v9;
-              v13->vfptr->__vecDelDtor((SSExpressionBase *)&v13->vfptr, 1u);
+              args->i_start_pos = i_start_pos;
+              args->i_end_pos = i_end_pos;
+              v13->vfptr->__vecDelDtor(v13, 1u);
               v13 = 0i64;
             }
           }
@@ -2806,7 +2692,7 @@ LABEL_62:
         }
         else
         {
-          v3->i_end_pos = v9;
+          args->i_end_pos = i_end_pos;
           result = 0i64;
         }
         break;
@@ -2814,9 +2700,9 @@ LABEL_62:
   }
   else
   {
-    args->i_result = 82;
-    args->i_end_pos = v7;
-    result = 0i64;
+    args->i_result = Result_err_unexpected_eof;
+    args->i_end_pos = i_start_pos;
+    return 0i64;
   }
   return result;
 }
@@ -2825,81 +2711,74 @@ LABEL_62:
 // RVA: 0x12A290
 SSObjectId *__fastcall SSParser::parse_expression_alpha(SSParser *this, SSParser::Args *args)
 {
-  SSParser::Args *v2; // r14
-  SSParser *v3; // r12
-  __int64 v4; // r15
-  unsigned int v5; // ebx
+  __int64 i_start_pos; // r15
+  unsigned int i_uid; // ebx
   SSObjectId *v6; // rsi
-  AStringRef *v7; // r9
-  char *v8; // r8
+  AStringRef *i_str_ref_p; // r9
+  char *i_cstr_p; // r8
   char v9; // r13
-  __int64 v10; // rdi
-  signed int v11; // er10
-  SSClass **v12; // rdx
+  SSClass *v10; // rdi
+  SSParser::eResult v11; // r10d
+  SSClass **i_array_p; // rdx
   SSClass **v13; // r9
-  signed __int64 v14; // rcx
-  unsigned int v15; // er8
-  _BOOL8 v16; // rax
-  _BOOL8 v17; // r8
-  __int64 v18; // rbx
-  SSObjectId *v19; // rax
-  __int64 v20; // rax
-  unsigned int v21; // edx
-  unsigned __int64 v22; // rcx
-  signed __int64 v23; // rax
-  SSClass *v24; // rdi
-  signed int v25; // er10
-  SSClass **v26; // rdx
-  SSClass **v27; // r9
-  signed __int64 v28; // rcx
-  unsigned int v29; // er8
-  _BOOL8 v30; // rax
-  _BOOL8 v31; // r8
+  SSClass **v14; // rcx
+  unsigned int v15; // r8d
+  SSClassDescBase *v16; // rbx
+  SSObjectId *v17; // rax
+  __int64 v18; // rax
+  unsigned int i_length; // edx
+  unsigned __int64 v20; // rcx
+  unsigned __int64 v21; // rax
+  SSClass *v22; // rdi
+  SSParser::eResult v23; // r10d
+  ASymbol *v24; // rax
+  SSClass **v25; // rdx
+  SSClass **v26; // r9
+  SSClass **v27; // rcx
+  unsigned int v28; // r8d
   unsigned int start_pos; // edi
-  unsigned int v34; // eax
-  unsigned int v35; // er8
-  ASymbol **v36; // rdx
-  ASymbol **v37; // r9
-  bool v38; // cf
-  bool i; // zf
-  signed __int64 v40; // rdx
+  unsigned int v31; // eax
+  ASymbol **v32; // rdx
+  ASymbol **v33; // r9
+  bool i; // cc
+  __int64 v35; // rdx
+  int v36; // kr00_4
+  unsigned __int64 v37; // rdx
+  SSObjectId *v38; // rax
+  SSClass *i_obj_scope_p; // rax
+  SSObjectId *v40; // rax
   SSObjectId *v41; // rax
-  SSClass *v42; // rax
+  SSObjectId *v42; // rax
   SSObjectId *v43; // rax
-  SSObjectId *v44; // rax
-  SSObjectId *v45; // rax
+  eSSMember i_member_type; // ecx
+  SSClass *v45; // rax
   SSObjectId *v46; // rax
-  eSSMember v47; // ecx
-  SSClass *v48; // rax
-  SSObjectId *v49; // rax
-  signed int v50; // ecx
-  int v51; // ecx
-  int v52; // ecx
-  ASymbol *v53; // rax
-  ASymbol *v54; // rax
-  ASymbol *v55; // rax
-  unsigned int v56; // [rsp+90h] [rbp+48h]
-  unsigned int find_pos_p; // [rsp+98h] [rbp+50h]
-  ASymbol op_name; // [rsp+A0h] [rbp+58h]
-  ASymbol result; // [rsp+A8h] [rbp+60h]
+  int variable; // ecx
+  int v48; // ecx
+  int v49; // ecx
+  SSObjectId *v50; // rax
+  SSObjectId *v51; // rax
+  SSObjectId *v52; // rax
+  unsigned int v53; // [rsp+90h] [rbp+48h] BYREF
+  unsigned int find_pos_p; // [rsp+98h] [rbp+50h] BYREF
+  SSObjectId *op_name; // [rsp+A0h] [rbp+58h] BYREF
+  SSObjectId *result; // [rsp+A8h] [rbp+60h] BYREF
 
-  v2 = args;
-  v3 = this;
-  v4 = args->i_start_pos;
-  v56 = v4;
-  find_pos_p = v4 + 1;
+  i_start_pos = args->i_start_pos;
+  v53 = i_start_pos;
+  find_pos_p = i_start_pos + 1;
   find_pos_p = this->i_str_ref_p->i_length;
-  v5 = -1;
-  AString::find((AString *)&this->i_str_ref_p, ACharMatch_not_identifier, 1u, &find_pos_p, v4 + 1, 0xFFFFFFFF);
-  v2->i_result = 2;
+  i_uid = -1;
+  AString::find(this, ACharMatch_not_identifier, 1u, &find_pos_p, i_start_pos + 1, 0xFFFFFFFF);
+  args->i_result = Result__implicit_this;
   v6 = 0i64;
-  v7 = v3->i_str_ref_p;
-  v8 = v3->i_str_ref_p->i_cstr_p;
-  v9 = v8[find_pos_p];
-  if ( AString::c_is_uppercase[(unsigned __int8)v8[v4]] )
+  i_str_ref_p = this->i_str_ref_p;
+  i_cstr_p = this->i_str_ref_p->i_cstr_p;
+  v9 = i_cstr_p[find_pos_p];
+  if ( AString::c_is_uppercase[(unsigned __int8)i_cstr_p[i_start_pos]] )
   {
     if ( v9 == 33 )
-      return (SSObjectId *)SSParser::parse_instantiate_or_list(v3, v2);
+      return (SSObjectId *)SSParser::parse_instantiate_or_list(this, args);
     if ( v9 != 40 )
     {
       if ( v9 != 64 )
@@ -2907,453 +2786,421 @@ SSObjectId *__fastcall SSParser::parse_expression_alpha(SSParser *this, SSParser
         if ( v9 != 123 )
         {
           v10 = 0i64;
-          LODWORD(v4) = v56;
-          v11 = 82;
-          op_name.i_uid = v56;
-          if ( v7->i_length > v56 )
+          LODWORD(i_start_pos) = v53;
+          v11 = Result_err_unexpected_eof;
+          LODWORD(op_name) = v53;
+          if ( i_str_ref_p->i_length > v53 )
           {
-            v11 = 15;
-            if ( AString::c_is_uppercase[(unsigned __int8)v8[v56]] )
+            v11 = Result_err_expected_class;
+            if ( AString::c_is_uppercase[(unsigned __int8)i_cstr_p[v53]] )
             {
-              op_name.i_uid = v56 + 1;
-              op_name.i_uid = v7->i_length;
-              AString::find(
-                (AString *)&v3->i_str_ref_p,
-                ACharMatch_not_identifier,
-                1u,
-                &op_name.i_uid,
-                v56 + 1,
-                0xFFFFFFFF);
-              v5 = SSParser::as_symbol(v3, &result, v4, op_name.i_uid)->i_uid;
-              v11 = 0;
-              if ( v5 == ASymbol_Class.i_uid )
-                v11 = 74;
-              LODWORD(v4) = op_name;
+              LODWORD(op_name) = v53 + 1;
+              LODWORD(op_name) = i_str_ref_p->i_length;
+              AString::find(this, ACharMatch_not_identifier, 1u, (unsigned int *)&op_name, v53 + 1, 0xFFFFFFFF);
+              i_uid = SSParser::as_symbol(this, (ASymbol *)&result, i_start_pos, (unsigned int)op_name)->i_uid;
+              v11 = Result_ok;
+              if ( i_uid == ASymbol_Class.i_uid )
+                v11 = Result_err_unexpected_class_class;
+              LODWORD(i_start_pos) = (_DWORD)op_name;
             }
           }
-          v56 = v4;
-          if ( !v11 )
+          v53 = i_start_pos;
+          if ( v11 == Result_ok )
           {
-            v11 = 112;
+            v11 = Result_err_context_non_class;
             if ( SSBrain::c_classes.i_count )
             {
-              v12 = SSBrain::c_classes.i_array_p;
-              v13 = &SSBrain::c_classes.i_array_p[SSBrain::c_classes.i_count - 1i64];
+              i_array_p = SSBrain::c_classes.i_array_p;
+              v13 = &SSBrain::c_classes.i_array_p[SSBrain::c_classes.i_count - 1];
               while ( 1 )
               {
-                v14 = (signed __int64)&v12[((char *)v13 - (char *)v12) >> 4];
-                v15 = *(_DWORD *)(*(_QWORD *)v14 + 8i64);
-                if ( v5 < v15 )
-                  goto LABEL_125;
-                v16 = v5 == v15;
-                v17 = v5 != v15;
-                if ( v16 == 1 )
-                {
-                  if ( *(_QWORD *)v14 )
-                  {
-                    v11 = 0;
-                    v10 = *(_QWORD *)v14;
-                  }
-                  break;
-                }
-                if ( v17 < 0 )
-                {
-LABEL_125:
-                  if ( v12 == (SSClass **)v14 )
-                    break;
-                  v13 = (SSClass **)(v14 - 8);
-                }
-                else
-                {
-                  if ( v13 == (SSClass **)v14 )
-                    break;
-                  v12 = (SSClass **)(v14 + 8);
-                }
-              }
-            }
-          }
-          v2->i_result = v11;
-          if ( !v10 )
-            goto LABEL_122;
-          v18 = (*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v10 + 136i64))(v10);
-          v2->i_type_p = (SSClassDescBase *)v18;
-          if ( v2->i_flags & 1 )
-          {
-            v19 = (SSObjectId *)AMemory::c_malloc_func(0x18ui64, "SSLiteral");
-            *(_QWORD *)&op_name.i_uid = v19;
-            if ( v19 )
-            {
-              v19->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
-              v19->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
-              *(_QWORD *)&v19->i_name.i_uid = v18;
-              LODWORD(v19->i_class_p) = 6;
-              v6 = v19;
-            }
-          }
-          goto LABEL_121;
-        }
-        return (SSObjectId *)SSParser::parse_instantiate_or_list(v3, v2);
-      }
-      v20 = find_pos_p + 1;
-      v21 = v7->i_length;
-      if ( (unsigned int)v20 < v21 )
-      {
-        v22 = (unsigned __int8)v8[v20];
-        if ( (unsigned __int8)v22 <= 0x3Fu )
-        {
-          v23 = -6917528477885267968i64;
-          if ( _bittest64(&v23, v22) )
-          {
-            v24 = 0i64;
-            LODWORD(v4) = v56;
-            v25 = 82;
-            op_name.i_uid = v56;
-            if ( v21 > v56 )
-            {
-              v25 = 15;
-              if ( AString::c_is_uppercase[(unsigned __int8)v8[v56]] )
-              {
-                op_name.i_uid = v21;
-                AString::find(
-                  (AString *)&v3->i_str_ref_p,
-                  ACharMatch_not_identifier,
-                  1u,
-                  &op_name.i_uid,
-                  v56 + 1,
-                  0xFFFFFFFF);
-                v5 = SSParser::as_symbol(v3, &result, v4, op_name.i_uid)->i_uid;
-                v25 = 0;
-                if ( v5 == ASymbol_Class.i_uid )
-                  v25 = 74;
-                LODWORD(v4) = op_name;
-              }
-            }
-            v56 = v4;
-            if ( !v25 )
-            {
-              v25 = 112;
-              if ( SSBrain::c_classes.i_count )
-              {
-                v26 = SSBrain::c_classes.i_array_p;
-                v27 = &SSBrain::c_classes.i_array_p[SSBrain::c_classes.i_count - 1i64];
                 while ( 1 )
                 {
-                  v28 = (signed __int64)&v26[((char *)v27 - (char *)v26) >> 4];
-                  v29 = *(_DWORD *)(*(_QWORD *)v28 + 8i64);
-                  if ( v5 < v29 )
-                    goto LABEL_126;
-                  v30 = v5 == v29;
-                  v31 = v5 != v29;
-                  if ( v30 == 1 )
-                  {
-                    if ( *(_QWORD *)v28 )
-                    {
-                      v25 = 0;
-                      v24 = *(SSClass **)v28;
-                    }
+                  v14 = &i_array_p[((char *)v13 - (char *)i_array_p) >> 4];
+                  v15 = (*v14)->i_name.i_uid;
+                  if ( i_uid >= v15 )
                     break;
-                  }
-                  if ( v31 < 0 )
+                  if ( i_array_p == v14 )
+                    goto LABEL_22;
+                  v13 = v14 - 1;
+                }
+                if ( i_uid == v15 )
+                  break;
+                if ( v13 == v14 )
+                  goto LABEL_22;
+                i_array_p = v14 + 1;
+              }
+              if ( *v14 )
+              {
+                v11 = Result_ok;
+                v10 = *v14;
+              }
+            }
+          }
+LABEL_22:
+          args->i_result = v11;
+          if ( !v10 )
+            goto LABEL_118;
+          v16 = v10->vfptr->get_metaclass(v10);
+          args->i_type_p = v16;
+          if ( (args->i_flags & 1) != 0 )
+          {
+            v17 = (SSObjectId *)AMemory::c_malloc_func(0x18ui64, "SSLiteral");
+            op_name = v17;
+            if ( v17 )
+            {
+              v17->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+              v17->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
+              *(_QWORD *)&v17->i_name.i_uid = v16;
+              LODWORD(v17->i_class_p) = 6;
+              v6 = v17;
+            }
+          }
+          goto LABEL_117;
+        }
+        return (SSObjectId *)SSParser::parse_instantiate_or_list(this, args);
+      }
+      v18 = find_pos_p + 1;
+      i_length = i_str_ref_p->i_length;
+      if ( (unsigned int)v18 < i_length )
+      {
+        v20 = (unsigned __int8)i_cstr_p[v18];
+        if ( (unsigned __int8)v20 <= 0x3Fu )
+        {
+          v21 = 0xA000008000000000ui64;
+          if ( _bittest64((const __int64 *)&v21, v20) )
+          {
+            v22 = 0i64;
+            LODWORD(i_start_pos) = v53;
+            v23 = Result_err_unexpected_eof;
+            LODWORD(op_name) = v53;
+            if ( i_length > v53 )
+            {
+              v23 = Result_err_expected_class;
+              if ( AString::c_is_uppercase[(unsigned __int8)i_cstr_p[v53]] )
+              {
+                LODWORD(op_name) = i_length;
+                AString::find(this, ACharMatch_not_identifier, 1u, (unsigned int *)&op_name, v53 + 1, 0xFFFFFFFF);
+                v24 = SSParser::as_symbol(this, (ASymbol *)&result, i_start_pos, (unsigned int)op_name);
+                i_uid = v24->i_uid;
+                v23 = Result_ok;
+                if ( v24->i_uid == ASymbol_Class.i_uid )
+                  v23 = Result_err_unexpected_class_class;
+                LODWORD(i_start_pos) = (_DWORD)op_name;
+              }
+            }
+            v53 = i_start_pos;
+            if ( v23 == Result_ok )
+            {
+              v23 = Result_err_context_non_class;
+              if ( SSBrain::c_classes.i_count )
+              {
+                v25 = SSBrain::c_classes.i_array_p;
+                v26 = &SSBrain::c_classes.i_array_p[SSBrain::c_classes.i_count - 1];
+                while ( 1 )
+                {
+                  while ( 1 )
                   {
-LABEL_126:
-                    if ( v26 == (SSClass **)v28 )
+                    v27 = &v25[((char *)v26 - (char *)v25) >> 4];
+                    v28 = (*v27)->i_name.i_uid;
+                    if ( i_uid >= v28 )
                       break;
-                    v27 = (SSClass **)(v28 - 8);
+                    if ( v25 == v27 )
+                      goto LABEL_46;
+                    v26 = v27 - 1;
                   }
-                  else
-                  {
-                    if ( v27 == (SSClass **)v28 )
-                      break;
-                    v26 = (SSClass **)(v28 + 8);
-                  }
+                  if ( i_uid == v28 )
+                    break;
+                  if ( v26 == v27 )
+                    goto LABEL_46;
+                  v25 = v27 + 1;
+                }
+                if ( *v27 )
+                {
+                  v23 = Result_ok;
+                  v22 = *v27;
                 }
               }
             }
-            v2->i_result = v25;
-            if ( v24 )
+LABEL_46:
+            args->i_result = v23;
+            if ( v22 )
             {
-              v2->i_start_pos = v4;
-              v6 = SSParser::parse_object_id_tail(v3, v2, v24);
-              LODWORD(v4) = v2->i_end_pos;
+              args->i_start_pos = i_start_pos;
+              v6 = SSParser::parse_object_id_tail(this, args, v22);
+              LODWORD(i_start_pos) = args->i_end_pos;
             }
-            goto LABEL_122;
+            goto LABEL_118;
           }
         }
       }
     }
-LABEL_121:
-    LODWORD(v4) = v56;
-    goto LABEL_122;
+LABEL_117:
+    LODWORD(i_start_pos) = v53;
+    goto LABEL_118;
   }
-  op_name.i_uid = -1;
-  if ( !(v3->i_flags.i_flagset & 1) && v9 == 40 )
-    goto LABEL_121;
-  start_pos = v56;
-  v56 = v7->i_length;
-  AString::find((AString *)&v3->i_str_ref_p, ACharMatch_not_identifier, 1u, &v56, start_pos, 0xFFFFFFFF);
-  v34 = SSParser::as_symbol(v3, &result, start_pos, v56)->i_uid;
-  op_name.i_uid = v34;
-  if ( v34 == -543273101 && v9 != 40 )
+  LODWORD(op_name) = -1;
+  if ( (this->i_flags.i_flagset & 1) == 0 && v9 == 40 )
+    goto LABEL_117;
+  start_pos = v53;
+  v53 = i_str_ref_p->i_length;
+  AString::find(this, ACharMatch_not_identifier, 1u, &v53, start_pos, 0xFFFFFFFF);
+  v31 = SSParser::as_symbol(this, (ASymbol *)&result, start_pos, v53)->i_uid;
+  LODWORD(op_name) = v31;
+  if ( v31 == -543273101 && v9 != 40 )
   {
-    v2->i_start_pos = v56;
-    v6 = (SSObjectId *)SSParser::parse_prefix_operator_expr(v3, &op_name, v2);
-    LODWORD(v4) = v2->i_end_pos;
-    goto LABEL_122;
+    args->i_start_pos = v53;
+    v6 = (SSObjectId *)SSParser::parse_prefix_operator_expr(this, (ASymbol *)&op_name, args);
+    LODWORD(i_start_pos) = args->i_end_pos;
+    goto LABEL_118;
   }
-  v35 = 0;
   if ( SSParser::c_reserved_word_syms.i_count )
   {
-    v36 = SSParser::c_reserved_word_syms.i_array_p;
-    v37 = &SSParser::c_reserved_word_syms.i_array_p[SSParser::c_reserved_word_syms.i_count - 1];
-    v38 = SSParser::c_reserved_word_syms.i_array_p < v37;
-    for ( i = SSParser::c_reserved_word_syms.i_array_p == v37; v38 || i; i = v36 == v37 )
+    v32 = SSParser::c_reserved_word_syms.i_array_p;
+    v33 = &SSParser::c_reserved_word_syms.i_array_p[SSParser::c_reserved_word_syms.i_count - 1];
+    for ( i = SSParser::c_reserved_word_syms.i_array_p <= v33; i; i = v32 <= v33 )
     {
-      if ( v34 == (*v36)->i_uid )
+      if ( v31 == (*v32)->i_uid )
       {
-        if ( v35 < 2 )
+        v35 = v32 - SSParser::c_reserved_word_syms.i_array_p;
+        args->i_result = Result_ok;
+        v36 = v35;
+        v37 = 0x140000000ui64;
+        switch ( v36 )
         {
-          v2->i_result = 0;
-          v40 = 5368709120i64;
-          switch ( 0x40000000 )
-          {
-            case 0:
-              v2->i_start_pos = find_pos_p;
-              v6 = (SSObjectId *)SSParser::parse_concurrent_branch_block(v3, v2);
-              LODWORD(v4) = v2->i_end_pos;
-              goto LABEL_122;
-            case 1:
-              v2->i_start_pos = v56;
-              v6 = (SSObjectId *)SSParser::parse_case_tail(v3, v2);
-              LODWORD(v4) = v2->i_end_pos;
-              goto LABEL_122;
-            case 2:
-              v2->i_start_pos = find_pos_p;
-              v6 = (SSObjectId *)SSParser::parse_divert_block(v3, v2);
-              LODWORD(v4) = v2->i_end_pos;
-              goto LABEL_122;
-            case 3:
-              v2->i_result = 81;
-              goto LABEL_121;
-            case 4:
-              LODWORD(v4) = v56 - 4;
-              v2->i_result = 83;
-              goto LABEL_122;
-            case 5:
-              if ( v2->i_flags & 1 )
+          case 0:
+            args->i_start_pos = find_pos_p;
+            v6 = (SSObjectId *)SSParser::parse_concurrent_branch_block(this, (unsigned __int64)args);
+            LODWORD(i_start_pos) = args->i_end_pos;
+            break;
+          case 1:
+            args->i_start_pos = v53;
+            v6 = (SSObjectId *)SSParser::parse_case_tail(this, args);
+            LODWORD(i_start_pos) = args->i_end_pos;
+            break;
+          case 2:
+            args->i_start_pos = find_pos_p;
+            v6 = (SSObjectId *)SSParser::parse_divert_block(this, (unsigned __int64)args);
+            LODWORD(i_start_pos) = args->i_end_pos;
+            break;
+          case 3:
+            args->i_result = Result_err_unexpected_else_statement;
+            goto LABEL_117;
+          case 4:
+            LODWORD(i_start_pos) = v53 - 4;
+            args->i_result = Result_err_unexpected_exit;
+            break;
+          case 5:
+            if ( (args->i_flags & 1) != 0 )
+            {
+              v40 = (SSObjectId *)AMemory::c_malloc_func(0x18ui64, "SSLiteral");
+              result = v40;
+              if ( v40 )
               {
-                v43 = (SSObjectId *)AMemory::c_malloc_func(0x18ui64, "SSLiteral");
-                *(_QWORD *)&result.i_uid = v43;
-                if ( v43 )
-                {
-                  v43->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
-                  v43->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
-                  *(_QWORD *)&v43->i_name.i_uid = 0i64;
-                  LODWORD(v43->i_class_p) = 0;
-                  v6 = v43;
-                }
+                v40->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+                v40->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
+                *(_QWORD *)&v40->i_name.i_uid = 0i64;
+                LODWORD(v40->i_class_p) = 0;
+                v6 = v40;
               }
-              v42 = SSBrain::c_boolean_class_p;
-              goto LABEL_120;
-            case 6:
-              v2->i_start_pos = v56;
-              v6 = (SSObjectId *)SSParser::parse_conditional_tail(v3, v2);
-              LODWORD(v4) = v2->i_end_pos;
-              goto LABEL_122;
-            case 7:
-              v2->i_start_pos = v56;
-              v6 = (SSObjectId *)SSParser::parse_loop_tail(v3, v2);
-              LODWORD(v4) = v2->i_end_pos;
-              goto LABEL_122;
-            case 9:
-              v2->i_start_pos = find_pos_p;
-              v6 = (SSObjectId *)SSParser::parse_concurrent_race_block(v3, v2);
-              LODWORD(v4) = v2->i_end_pos;
-              goto LABEL_122;
-            case 10:
-              v2->i_start_pos = find_pos_p;
-              v6 = (SSObjectId *)SSParser::parse_concurrent_sync_block(v3, v2);
-              LODWORD(v4) = v2->i_end_pos;
-              goto LABEL_122;
-            case 11:
-              if ( v2->i_flags & 1 )
+            }
+            i_obj_scope_p = SSBrain::c_boolean_class_p;
+            goto LABEL_116;
+          case 6:
+            args->i_start_pos = v53;
+            v6 = (SSObjectId *)SSParser::parse_conditional_tail(this, args);
+            LODWORD(i_start_pos) = args->i_end_pos;
+            break;
+          case 7:
+            args->i_start_pos = v53;
+            v6 = (SSObjectId *)SSParser::parse_loop_tail(this, args);
+            LODWORD(i_start_pos) = args->i_end_pos;
+            break;
+          case 9:
+            args->i_start_pos = find_pos_p;
+            v6 = (SSObjectId *)SSParser::parse_concurrent_race_block(this, (unsigned __int64)args);
+            LODWORD(i_start_pos) = args->i_end_pos;
+            break;
+          case 10:
+            args->i_start_pos = find_pos_p;
+            v6 = (SSObjectId *)SSParser::parse_concurrent_sync_block(this, (unsigned __int64)args);
+            LODWORD(i_start_pos) = args->i_end_pos;
+            break;
+          case 11:
+            if ( (args->i_flags & 1) != 0 )
+            {
+              v41 = (SSObjectId *)AMemory::c_malloc_func(0x18ui64, "SSLiteral");
+              result = v41;
+              if ( v41 )
               {
-                v44 = (SSObjectId *)AMemory::c_malloc_func(0x18ui64, "SSLiteral");
-                *(_QWORD *)&result.i_uid = v44;
-                if ( v44 )
-                {
-                  v44->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
-                  v44->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
-                  *(_QWORD *)&v44->i_name.i_uid = 0i64;
-                  LODWORD(v44->i_class_p) = 8;
-                  v6 = v44;
-                }
+                v41->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+                v41->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
+                *(_QWORD *)&v41->i_name.i_uid = 0i64;
+                LODWORD(v41->i_class_p) = 8;
+                v6 = v41;
               }
-              v42 = (SSClass *)v3->i_context.i_obj_scope_p;
-              goto LABEL_120;
-            case 12:
-              if ( v2->i_flags & 1 )
+            }
+            i_obj_scope_p = (SSClass *)this->i_context.i_obj_scope_p;
+            goto LABEL_116;
+          case 12:
+            if ( (args->i_flags & 1) != 0 )
+            {
+              v42 = (SSObjectId *)AMemory::c_malloc_func(0x18ui64, "SSLiteral");
+              result = v42;
+              if ( v42 )
               {
-                v45 = (SSObjectId *)AMemory::c_malloc_func(0x18ui64, "SSLiteral");
-                *(_QWORD *)&result.i_uid = v45;
-                if ( v45 )
-                {
-                  v45->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
-                  v45->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
-                  *(_QWORD *)&v45->i_name.i_uid = 0i64;
-                  LODWORD(v45->i_class_p) = 9;
-                  v6 = v45;
-                }
+                v42->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+                v42->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
+                *(_QWORD *)&v42->i_name.i_uid = 0i64;
+                LODWORD(v42->i_class_p) = 9;
+                v6 = v42;
               }
-              v42 = (SSClass *)((__int64 (__fastcall *)(SSClassUnaryBase *, signed __int64))v3->i_context.i_obj_scope_p->vfptr->get_metaclass)(
-                                 v3->i_context.i_obj_scope_p,
-                                 v40);
-              goto LABEL_120;
-            case 13:
-              if ( v2->i_flags & 1 )
+            }
+            i_obj_scope_p = (SSClass *)((__int64 (__fastcall *)(SSClassUnaryBase *, unsigned __int64))this->i_context.i_obj_scope_p->vfptr->get_metaclass)(
+                                         this->i_context.i_obj_scope_p,
+                                         v37);
+            goto LABEL_116;
+          case 13:
+            if ( (args->i_flags & 1) != 0 )
+            {
+              v43 = (SSObjectId *)AMemory::c_malloc_func(0x18ui64, "SSLiteral");
+              result = v43;
+              if ( v43 )
               {
-                v46 = (SSObjectId *)AMemory::c_malloc_func(0x18ui64, "SSLiteral");
-                *(_QWORD *)&result.i_uid = v46;
-                if ( v46 )
-                {
-                  v46->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
-                  v46->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
-                  *(_QWORD *)&v46->i_name.i_uid = 0i64;
-                  LODWORD(v46->i_class_p) = 10;
-                  v6 = v46;
-                }
+                v43->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+                v43->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
+                *(_QWORD *)&v43->i_name.i_uid = 0i64;
+                LODWORD(v43->i_class_p) = 10;
+                v6 = v43;
               }
-              v47 = v3->i_member_type;
-              LODWORD(v4) = v56;
-              if ( v47 )
+            }
+            i_member_type = this->i_member_type;
+            LODWORD(i_start_pos) = v53;
+            if ( i_member_type )
+            {
+              v45 = SSBrain::c_invoked_coroutine_class_p;
+              if ( i_member_type != SSMember_coroutine )
+                v45 = SSBrain::c_none_class_p;
+              args->i_type_p = v45;
+            }
+            else
+            {
+              args->i_type_p = SSBrain::c_invoked_method_class_p;
+            }
+            break;
+          case 14:
+            if ( (args->i_flags & 1) != 0 )
+            {
+              v38 = (SSObjectId *)AMemory::c_malloc_func(0x18ui64, "SSLiteral");
+              result = v38;
+              if ( v38 )
               {
-                v48 = SSBrain::c_invoked_coroutine_class_p;
-                if ( v47 != 3 )
-                  v48 = SSBrain::c_none_class_p;
-                v2->i_type_p = (SSClassDescBase *)&v48->vfptr;
+                v38->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+                v38->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
+                *(_QWORD *)&v38->i_name.i_uid = 1i64;
+                LODWORD(v38->i_class_p) = 0;
+                v6 = v38;
               }
-              else
+            }
+            i_obj_scope_p = SSBrain::c_boolean_class_p;
+            goto LABEL_116;
+          default:
+            if ( (args->i_flags & 1) != 0 )
+            {
+              v46 = (SSObjectId *)AMemory::c_malloc_func(0x18ui64, "SSLiteral");
+              result = v46;
+              if ( v46 )
               {
-                v2->i_type_p = (SSClassDescBase *)&SSBrain::c_invoked_method_class_p->vfptr;
+                v46->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+                v46->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
+                *(_QWORD *)&v46->i_name.i_uid = 0i64;
+                LODWORD(v46->i_class_p) = 7;
+                v6 = v46;
               }
-              goto LABEL_122;
-            case 14:
-              if ( v2->i_flags & 1 )
-              {
-                v41 = (SSObjectId *)AMemory::c_malloc_func(0x18ui64, "SSLiteral");
-                *(_QWORD *)&result.i_uid = v41;
-                if ( v41 )
-                {
-                  v41->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
-                  v41->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
-                  *(_QWORD *)&v41->i_name.i_uid = 1i64;
-                  LODWORD(v41->i_class_p) = 0;
-                  v6 = v41;
-                }
-              }
-              v42 = SSBrain::c_boolean_class_p;
-              break;
-            default:
-              if ( v2->i_flags & 1 )
-              {
-                v49 = (SSObjectId *)AMemory::c_malloc_func(0x18ui64, "SSLiteral");
-                *(_QWORD *)&result.i_uid = v49;
-                if ( v49 )
-                {
-                  v49->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
-                  v49->vfptr = (SSExpressionBaseVtbl *)&SSLiteral::`vftable;
-                  *(_QWORD *)&v49->i_name.i_uid = 0i64;
-                  LODWORD(v49->i_class_p) = 7;
-                  v6 = v49;
-                }
-              }
-              v42 = SSBrain::c_none_class_p;
-              break;
-          }
-          goto LABEL_120;
+            }
+            i_obj_scope_p = SSBrain::c_none_class_p;
+            goto LABEL_116;
         }
-        --v35;
+        goto LABEL_118;
       }
-      ++v36;
-      v38 = v36 < v37;
+      ++v32;
     }
   }
-  if ( !(v3->i_flags.i_flagset & 1) )
+  if ( (this->i_flags.i_flagset & 1) == 0 )
   {
-    v50 = 3;
-    goto LABEL_106;
-  }
-  v50 = SSTypeContext::find_variable(&v3->i_context, &op_name);
-  if ( v50 )
-  {
-LABEL_106:
-    v2->i_result = 0;
-    if ( v2->i_flags & 1 )
+    variable = 3;
+LABEL_102:
+    args->i_result = Result_ok;
+    if ( (args->i_flags & 1) != 0 )
     {
-      v51 = v50 - 1;
-      if ( v51 )
+      v48 = variable - 1;
+      if ( v48 )
       {
-        v52 = v51 - 1;
-        if ( v52 )
+        v49 = v48 - 1;
+        if ( v49 )
         {
-          if ( v52 == 1 )
+          if ( v49 == 1 )
           {
-            v53 = (ASymbol *)AMemory::c_malloc_func(0x10ui64, "SSIdentifier");
-            *(_QWORD *)&result.i_uid = v53;
-            if ( v53 )
+            v50 = (SSObjectId *)AMemory::c_malloc_func(0x10ui64, "SSIdentifier");
+            result = v50;
+            if ( v50 )
             {
-              *(_QWORD *)&v53->i_uid = &SSExpressionBase::`vftable;
-              *(_QWORD *)&v53->i_uid = &SSIdentifier::`vftable;
-              v53[2].i_uid = op_name.i_uid;
-              v6 = (SSObjectId *)v53;
+              v50->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+              v50->vfptr = (SSExpressionBaseVtbl *)&SSIdentifier::`vftable;
+              v50->i_name.i_uid = (unsigned int)op_name;
+              v6 = v50;
             }
           }
         }
         else
         {
-          v54 = (ASymbol *)AMemory::c_malloc_func(0x18ui64, "SSIdentifierMember");
-          *(_QWORD *)&result.i_uid = v54;
-          if ( v54 )
+          v51 = (SSObjectId *)AMemory::c_malloc_func(0x18ui64, "SSIdentifierMember");
+          result = v51;
+          if ( v51 )
           {
-            *(_QWORD *)&v54->i_uid = &SSExpressionBase::`vftable;
-            *(_QWORD *)&v54->i_uid = &SSIdentifier::`vftable;
-            v54[2].i_uid = op_name.i_uid;
-            *(_QWORD *)&v54->i_uid = &SSIdentifierMember::`vftable;
-            *(_QWORD *)&v54[4].i_uid = 0i64;
-            v6 = (SSObjectId *)v54;
+            v51->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+            v51->vfptr = (SSExpressionBaseVtbl *)&SSIdentifier::`vftable;
+            v51->i_name.i_uid = (unsigned int)op_name;
+            v51->vfptr = (SSExpressionBaseVtbl *)&SSIdentifierMember::`vftable;
+            v51->i_class_p = 0i64;
+            v6 = v51;
           }
         }
       }
       else
       {
-        v55 = (ASymbol *)AMemory::c_malloc_func(0x18ui64, "SSIdentifierClassMember");
-        *(_QWORD *)&result.i_uid = v55;
-        if ( v55 )
+        v52 = (SSObjectId *)AMemory::c_malloc_func(0x18ui64, "SSIdentifierClassMember");
+        result = v52;
+        if ( v52 )
         {
-          *(_QWORD *)&v55->i_uid = &SSExpressionBase::`vftable;
-          *(_QWORD *)&v55->i_uid = &SSIdentifier::`vftable;
-          v55[2].i_uid = op_name.i_uid;
-          *(_QWORD *)&v55->i_uid = &SSIdentifierMember::`vftable;
-          *(_QWORD *)&v55[4].i_uid = 0i64;
-          *(_QWORD *)&v55->i_uid = &SSIdentifierClassMember::`vftable;
-          v6 = (SSObjectId *)v55;
+          v52->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
+          v52->vfptr = (SSExpressionBaseVtbl *)&SSIdentifier::`vftable;
+          v52->i_name.i_uid = (unsigned int)op_name;
+          v52->vfptr = (SSExpressionBaseVtbl *)&SSIdentifierMember::`vftable;
+          v52->i_class_p = 0i64;
+          v52->vfptr = (SSExpressionBaseVtbl *)&SSIdentifierClassMember::`vftable;
+          v6 = v52;
         }
       }
-      if ( v3->i_flags.i_flagset & 1 )
+      if ( (this->i_flags.i_flagset & 1) != 0 )
       {
-        v42 = (SSClass *)SSTypeContext::get_variable_type(&v3->i_context, &op_name, 0);
-LABEL_120:
-        v2->i_type_p = (SSClassDescBase *)&v42->vfptr;
+        i_obj_scope_p = (SSClass *)SSTypeContext::get_variable_type(&this->i_context, (ASymbol *)&op_name, 0);
+LABEL_116:
+        args->i_type_p = i_obj_scope_p;
       }
     }
-    goto LABEL_121;
+    goto LABEL_117;
   }
+  variable = SSTypeContext::find_variable(&this->i_context, (ASymbol *)&op_name);
+  if ( variable )
+    goto LABEL_102;
   if ( v9 != 40 )
   {
-    v2->i_result = 113;
-    goto LABEL_121;
+    args->i_result = Result_err_context_non_identifier;
+    goto LABEL_117;
   }
-LABEL_122:
-  v2->i_end_pos = v4;
+LABEL_118:
+  args->i_end_pos = i_start_pos;
   return v6;
 }
 
@@ -3361,8 +3208,6 @@ LABEL_122:
 // RVA: 0x12B060
 SSLiteralList *__fastcall SSParser::parse_instantiate_or_list(SSParser *this, SSParser::Args *args)
 {
-  SSParser::Args *v2; // rsi
-  SSParser *v3; // r15
   SSExpressionBase *v4; // rbx
   SSParser::eResult v5; // eax
   SSTypedClass *v6; // r14
@@ -3370,11 +3215,9 @@ SSLiteralList *__fastcall SSParser::parse_instantiate_or_list(SSParser *this, SS
   SSLiteralList *result; // rax
   SSExpressionBase *v9; // rdi
   __int64 v10; // rax
-  _BOOL8 v11; // [rsp+78h] [rbp+10h]
-  SSTypedClass *list_class_p; // [rsp+80h] [rbp+18h]
+  _BOOL8 v11; // [rsp+78h] [rbp+10h] BYREF
+  SSTypedClass *list_class_p; // [rsp+80h] [rbp+18h] BYREF
 
-  v2 = args;
-  v3 = this;
   v4 = 0i64;
   list_class_p = 0i64;
   LOBYTE(v11) = 0;
@@ -3382,22 +3225,21 @@ SSLiteralList *__fastcall SSParser::parse_instantiate_or_list(SSParser *this, SS
                        this,
                        args->i_start_pos,
                        &args->i_end_pos,
-                       (SSClassUnaryBase **)&list_class_p,
+                       &list_class_p,
                        (bool *)&v11);
-  v2->i_result = v5;
+  args->i_result = v5;
   if ( v5 )
     return 0i64;
   v6 = list_class_p;
-  v2->i_type_p = (SSClassDescBase *)&list_class_p->vfptr;
-  v2->i_start_pos = v2->i_end_pos;
-  ctor_p = SSParser::parse_invoke_ctor(v3, v2);
-  if ( v2->i_result )
+  args->i_type_p = list_class_p;
+  args->i_start_pos = args->i_end_pos;
+  ctor_p = SSParser::parse_invoke_ctor(this, args);
+  if ( args->i_result )
     return 0i64;
-  if ( v3->i_str_ref_p->i_cstr_p[v2->i_end_pos] == 123
-    && (unsigned int)v6->vfptr->get_class_type((SSClassDescBase *)&v6->vfptr) )
+  if ( this->i_str_ref_p->i_cstr_p[args->i_end_pos] == 123 && v6->vfptr->get_class_type(v6) )
   {
-    v2->i_start_pos = v2->i_end_pos;
-    result = SSParser::parse_literal_list(v3, v2, v6, v11, ctor_p);
+    args->i_start_pos = args->i_end_pos;
+    return SSParser::parse_literal_list(this, args, v6, v11, ctor_p);
   }
   else
   {
@@ -3407,7 +3249,7 @@ SSLiteralList *__fastcall SSParser::parse_instantiate_or_list(SSParser *this, SS
       v11 = (_BOOL8)v9;
       if ( v9 )
       {
-        v10 = (__int64)v6->vfptr->get_key_class((SSClassDescBase *)&v6->vfptr);
+        v10 = (__int64)v6->vfptr->get_key_class(v6);
         v9->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
         v9->vfptr = (SSExpressionBaseVtbl *)&SSInstantiate::`vftable;
         v9[1].vfptr = (SSExpressionBaseVtbl *)v10;
@@ -3416,30 +3258,31 @@ SSLiteralList *__fastcall SSParser::parse_instantiate_or_list(SSParser *this, SS
       }
     }
     result = (SSLiteralList *)v4;
-    if ( v3->i_flags.i_flagset & 1 )
-      v2->i_type_p = (SSClassDescBase *)&v6->vfptr;
+    if ( (this->i_flags.i_flagset & 1) != 0 )
+      args->i_type_p = v6;
   }
   return result;
 }
 
 // File Line: 4101
 // RVA: 0x12ABA0
-SSExpressionBase *__fastcall SSParser::parse_expression_string(SSParser *this, SSParser::Args *args, SSExpressionBase *receiver_p)
+SSIdentifier *__fastcall SSParser::parse_expression_string(
+        SSParser *this,
+        SSParser::Args *args,
+        SSIdentifier *receiver_p)
 {
-  SSParser::Args *v3; // rdi
-  SSParser *v4; // r13
   bool v5; // r15
-  unsigned int v6; // esi
-  unsigned int v7; // er14
+  unsigned int i_start_pos; // esi
+  unsigned int v7; // r14d
   SSParser::eResult v8; // eax
-  unsigned int v10; // ebx
+  unsigned int i_end_pos; // ebx
   bool v11; // bp
-  AStringRef *v12; // rcx
-  unsigned int v13; // eax
-  __int64 v14; // rcx
-  SSBind *v15; // r8
-  SSExpressionBase *v16; // rsi
-  unsigned int v17; // er11
+  AStringRef *i_str_ref_p; // rcx
+  unsigned int i_length; // eax
+  __int64 i_cstr_p; // rcx
+  SSIdentifier *v15; // r8
+  SSIdentifier *v16; // rsi
+  unsigned int v17; // r11d
   SSMethodCall *v18; // r10
   __int64 v19; // r9
   unsigned __int8 v20; // dl
@@ -3447,59 +3290,55 @@ SSExpressionBase *__fastcall SSParser::parse_expression_string(SSParser *this, S
   unsigned int v22; // ebx
   __int64 v23; // rbp
   unsigned __int8 v24; // cl
-  SSBind *v25; // rax
+  SSInvokeCascade *v25; // rax
   bool v26; // dl
   SSMethodCall *v27; // rax
-  SSExpressionBase *v28; // r14
-  SSExpressionBase *v29; // rax
+  SSIdentifier *v28; // r14
+  SSIdentifier *v29; // rax
   char v30; // bp
   SSParser::eResult v31; // eax
   unsigned int v32; // [rsp+30h] [rbp-78h]
   SSMethodCall *v33; // [rsp+38h] [rbp-70h]
-  SSBind *v34; // [rsp+40h] [rbp-68h]
+  SSInvokeCascade *v34; // [rsp+40h] [rbp-68h]
   unsigned int v35; // [rsp+48h] [rbp-60h]
-  int v36; // [rsp+4Ch] [rbp-5Ch]
-  unsigned int find_pos_p; // [rsp+50h] [rbp-58h]
+  int v36; // [rsp+4Ch] [rbp-5Ch] BYREF
+  unsigned int find_pos_p; // [rsp+50h] [rbp-58h] BYREF
   unsigned int v38; // [rsp+54h] [rbp-54h]
   __int64 v39; // [rsp+58h] [rbp-50h]
   __int64 v40; // [rsp+60h] [rbp-48h]
   char v41; // [rsp+B8h] [rbp+10h]
-  SSExpressionBase *receiver_pa; // [rsp+C0h] [rbp+18h]
-  unsigned int end_pos_p; // [rsp+C8h] [rbp+20h]
+  unsigned int end_pos_p; // [rsp+C8h] [rbp+20h] BYREF
 
-  receiver_pa = receiver_p;
   v40 = -2i64;
-  v3 = args;
-  v4 = this;
-  v5 = args->i_result == 2;
-  v6 = args->i_start_pos;
+  v5 = args->i_result == Result__implicit_this;
+  i_start_pos = args->i_start_pos;
   v35 = args->i_start_pos;
   v33 = 0i64;
   v7 = args->i_start_pos;
   v8 = SSParser::parse_ws_any(this, args->i_start_pos, &args->i_end_pos);
-  v3->i_result = v8;
+  args->i_result = v8;
   if ( v8 )
     return 0i64;
-  v10 = v3->i_end_pos;
-  v11 = v6 != v10;
-  end_pos_p = v3->i_end_pos;
-  v32 = v10;
+  i_end_pos = args->i_end_pos;
+  v11 = i_start_pos != i_end_pos;
+  end_pos_p = i_end_pos;
+  v32 = i_end_pos;
   if ( v5 )
   {
-    v3->i_start_pos = v10;
-    v33 = SSParser::parse_invoke_selector(v4, v3, 0);
-    v10 = v3->i_end_pos;
-    end_pos_p = v3->i_end_pos;
+    args->i_start_pos = i_end_pos;
+    v33 = SSParser::parse_invoke_selector(this, args, 0);
+    i_end_pos = args->i_end_pos;
+    end_pos_p = i_end_pos;
   }
   v41 = 0;
-  v12 = v4->i_str_ref_p;
-  v13 = v4->i_str_ref_p->i_length;
-  v38 = v4->i_str_ref_p->i_length;
-  v14 = (__int64)v12->i_cstr_p;
-  v39 = v14;
+  i_str_ref_p = this->i_str_ref_p;
+  i_length = this->i_str_ref_p->i_length;
+  v38 = i_length;
+  i_cstr_p = (__int64)i_str_ref_p->i_cstr_p;
+  v39 = i_cstr_p;
   v15 = 0i64;
   v34 = 0i64;
-  v16 = receiver_pa;
+  v16 = receiver_p;
   while ( 1 )
   {
     if ( v5 )
@@ -3509,50 +3348,50 @@ LABEL_41:
     }
     else
     {
-      v17 = v10;
-      v32 = v10;
+      v17 = i_end_pos;
+      v32 = i_end_pos;
       v18 = 0i64;
       v33 = 0i64;
       v15 = 0i64;
       v34 = 0i64;
-      v19 = v10 + 1;
-      v20 = (unsigned int)v19 >= v13 ? 0 : *(_BYTE *)(v19 + v14);
-      switch ( *(char *)(v10 + v14) )
+      v19 = i_end_pos + 1;
+      v20 = (unsigned int)v19 >= i_length ? 0 : *(_BYTE *)(v19 + i_cstr_p);
+      switch ( *(_BYTE *)(i_end_pos + i_cstr_p) )
       {
-        case 37:
+        case %:
           if ( v20 == 62 )
           {
-            v3->i_start_pos = v10;
-            v25 = (SSBind *)SSParser::parse_invoke_race(v4, v3, v16);
+            args->i_start_pos = i_end_pos;
+            v25 = (SSInvokeCascade *)SSParser::parse_invoke_race(this, args, v16);
             goto LABEL_40;
           }
           if ( v20 == 93 || v20 == 41 || v20 == 125 || !byte_14236F7C0[v20] )
             goto LABEL_39;
-          v3->i_start_pos = v10;
-          v25 = (SSBind *)SSParser::parse_invoke_apply(v4, v3, v16);
+          args->i_start_pos = i_end_pos;
+          v25 = (SSInvokeCascade *)SSParser::parse_invoke_apply(this, args, v16);
           goto LABEL_40;
-        case 40:
+        case (:
           if ( !v11 )
           {
-            v3->i_start_pos = v10;
-            v25 = (SSBind *)SSParser::parse_invoke_operator(v4, v3, v16);
+            args->i_start_pos = i_end_pos;
+            v25 = (SSInvokeCascade *)SSParser::parse_invoke_operator(this, args, v16);
             goto LABEL_40;
           }
-          v3->i_result = 40;
+          args->i_result = Result_err_expected_invoke_selector;
           goto LABEL_43;
-        case 45:
+        case -:
           if ( v20 != 62 )
             goto LABEL_39;
-          v3->i_result = 78;
-          ++v10;
+          args->i_result = Result_err_unexpected_deprecated;
+          ++i_end_pos;
           end_pos_p = v19;
           goto LABEL_43;
-        case 46:
-          v21 = SSParser::parse_ws_any(v4, v19, &end_pos_p);
-          v3->i_result = v21;
+        case .:
+          v21 = SSParser::parse_ws_any(this, v19, &end_pos_p);
+          args->i_result = v21;
           if ( v21 )
           {
-            v10 = end_pos_p;
+            i_end_pos = end_pos_p;
             v15 = 0i64;
             v18 = 0i64;
             break;
@@ -3562,85 +3401,79 @@ LABEL_41:
           v24 = *(_BYTE *)(end_pos_p + v39);
           if ( v24 == 91 )
           {
-            v3->i_start_pos = end_pos_p;
-            v25 = (SSBind *)SSParser::parse_invoke_cascade(v4, v3, v16);
+            args->i_start_pos = end_pos_p;
+            v25 = SSParser::parse_invoke_cascade(this, args, v16);
 LABEL_40:
-            v10 = v3->i_end_pos;
-            v15 = v25;
+            i_end_pos = args->i_end_pos;
+            v15 = (SSIdentifier *)v25;
             v34 = v25;
-            end_pos_p = v3->i_end_pos;
+            end_pos_p = i_end_pos;
             goto LABEL_41;
           }
           v26 = 0;
           if ( AString::c_is_lowercase[v24] )
           {
-            AString::find(
-              (AString *)&v4->i_str_ref_p,
-              ACharMatch_not_identifier,
-              1u,
-              &find_pos_p,
-              end_pos_p + 1,
-              0xFFFFFFFF);
+            AString::find(this, ACharMatch_not_identifier, 1u, &find_pos_p, end_pos_p + 1, 0xFFFFFFFF);
             v26 = *(_BYTE *)(find_pos_p + v23) != 40;
           }
-          v3->i_start_pos = v22;
+          args->i_start_pos = v22;
           if ( v26 )
           {
-            v25 = (SSBind *)SSParser::parse_data_member(v4, v3, v16);
+            v25 = (SSInvokeCascade *)SSParser::parse_data_member(this, args, v16);
             goto LABEL_40;
           }
-          v27 = SSParser::parse_invoke_selector(v4, v3, 0);
+          v27 = SSParser::parse_invoke_selector(this, args, 0);
 LABEL_19:
           v18 = v27;
           v33 = v27;
-          v10 = v3->i_end_pos;
-          end_pos_p = v3->i_end_pos;
+          i_end_pos = args->i_end_pos;
+          end_pos_p = i_end_pos;
           v15 = 0i64;
           break;
-        case 58:
+        case ::
           if ( v20 == 61 )
             goto LABEL_39;
-          v3->i_start_pos = v10;
-          v25 = SSParser::parse_bind(v4, v3, v16);
+          args->i_start_pos = i_end_pos;
+          v25 = (SSInvokeCascade *)SSParser::parse_bind(this, args, v16);
           goto LABEL_40;
-        case 60:
+        case <:
           if ( v20 != 62 )
             goto LABEL_39;
-          v3->i_start_pos = v10;
-          v25 = (SSBind *)SSParser::parse_class_cast(v4, v3, v16);
+          args->i_start_pos = i_end_pos;
+          v25 = (SSInvokeCascade *)SSParser::parse_class_cast(this, args, v16);
           goto LABEL_40;
-        case 62:
+        case >:
           if ( v20 != 62 )
             goto LABEL_39;
-          v3->i_start_pos = v10;
-          v25 = (SSBind *)SSParser::parse_class_conversion(v4, v3, v16, v19);
+          args->i_start_pos = i_end_pos;
+          v25 = (SSInvokeCascade *)SSParser::parse_class_conversion(this, args, v16, v19);
           goto LABEL_40;
         default:
 LABEL_39:
-          v3->i_start_pos = v10;
-          v27 = SSParser::parse_operator(v4, v3);
+          args->i_start_pos = i_end_pos;
+          v27 = SSParser::parse_operator(this, args);
           goto LABEL_19;
       }
     }
     v17 = v32;
 LABEL_43:
     v5 = 0;
-    if ( v3->i_result )
+    if ( args->i_result )
       break;
     v28 = v16;
     if ( v15 )
     {
-      v16 = (SSExpressionBase *)&v15->vfptr;
+      v16 = v15;
     }
     else if ( v18 )
     {
-      v29 = (SSExpressionBase *)AMemory::c_malloc_func(0x18ui64, "SSInvocation");
+      v29 = (SSIdentifier *)AMemory::c_malloc_func(0x18ui64, "SSInvocation");
       if ( v29 )
       {
         v29->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
         v29->vfptr = (SSExpressionBaseVtbl *)&SSInvocation::`vftable;
-        v29[1].vfptr = (SSExpressionBaseVtbl *)v16;
-        v29[2].vfptr = (SSExpressionBaseVtbl *)v33;
+        *(_QWORD *)&v29->i_ident_name.i_uid = v16;
+        v29[1].vfptr = (SSExpressionBaseVtbl *)v33;
         v16 = v29;
       }
       else
@@ -3650,1293 +3483,1247 @@ LABEL_43:
     }
     v30 = 1;
     v41 = 1;
-    if ( v28 && !v28->vfptr->is_immediate(v28, (unsigned int *)&v36) && v4->i_str_ref_p->i_cstr_p[v3->i_end_pos] != 37 )
+    if ( v28
+      && !v28->vfptr->is_immediate(v28, (unsigned int *)&v36)
+      && this->i_str_ref_p->i_cstr_p[args->i_end_pos] != 37 )
     {
-      v3->i_end_pos = v36 + 4;
-      v3->i_result = 119;
-      v10 = v32;
-      v3->i_start_pos = v35;
+      args->i_end_pos = v36 + 4;
+      args->i_result = Result_err_context_immediate;
+      i_end_pos = v32;
+      args->i_start_pos = v35;
       goto LABEL_61;
     }
-    if ( v3->i_result )
+    if ( args->i_result )
       goto LABEL_62;
-    v7 = v10;
-    v31 = SSParser::parse_ws_any(v4, v10, &end_pos_p);
-    v3->i_result = v31;
-    v10 = end_pos_p;
+    v7 = i_end_pos;
+    v31 = SSParser::parse_ws_any(this, i_end_pos, &end_pos_p);
+    args->i_result = v31;
+    i_end_pos = end_pos_p;
     v11 = end_pos_p != v7;
     if ( v31 )
     {
       v30 = 1;
       goto LABEL_61;
     }
-    v15 = v34;
-    v14 = v39;
-    v13 = v38;
+    v15 = (SSIdentifier *)v34;
+    i_cstr_p = v39;
+    i_length = v38;
   }
   v30 = v41;
-  if ( v10 == v17 )
+  if ( i_end_pos == v17 )
   {
-    v10 = v7;
+    i_end_pos = v7;
     if ( v41 )
-      v3->i_result = 0;
+      args->i_result = Result_ok;
   }
 LABEL_61:
-  if ( v3->i_result )
+  if ( args->i_result )
   {
 LABEL_62:
-    if ( v30 && v16 && v16 != receiver_pa )
+    if ( v30 && v16 && v16 != receiver_p )
     {
-      v16->vfptr->null_receiver(v16, receiver_pa);
+      v16->vfptr->null_receiver(v16, receiver_p);
       v16->vfptr->__vecDelDtor(v16, 1u);
     }
     v16 = 0i64;
   }
-  v3->i_end_pos = v10;
+  args->i_end_pos = i_end_pos;
   return v16;
 }
 
 // File Line: 4465
 // RVA: 0x12E500
-signed __int64 __fastcall SSParser::parse_named_specifier(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, SSParameters *params_p, unsigned int *arg_idx_p, SSParameters::eType param_type)
+__int64 __fastcall SSParser::parse_named_specifier(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        SSParameters *params_p,
+        unsigned int *arg_idx_p,
+        SSParameters::eType param_type)
 {
-  SSParser *v6; // r14
-  SSParameters *v7; // rdi
-  unsigned int v8; // ecx
-  unsigned int *v9; // rsi
-  unsigned int v10; // ebx
-  signed __int64 v11; // rax
-  char *v12; // rbp
-  unsigned int v13; // er9
-  unsigned int v14; // er8
-  unsigned int v15; // eax
-  _BYTE *v16; // r11
-  unsigned __int64 v17; // r10
-  _BYTE *v18; // rdx
-  __int64 v19; // rax
-  bool v20; // zf
-  unsigned int v21; // eax
-  unsigned __int64 v22; // r10
-  ASymbol result; // [rsp+50h] [rbp+8h]
-  unsigned int find_pos_p; // [rsp+58h] [rbp+10h]
+  unsigned int i_length; // ecx
+  __int64 v11; // rax
+  char *i_cstr_p; // rbp
+  unsigned int v13; // r9d
+  unsigned int v14; // eax
+  char *i_array_p; // r11
+  char *v16; // r10
+  char *v17; // rdx
+  __int64 v18; // rax
+  bool v19; // zf
+  unsigned int i_count; // eax
+  char *v21; // r10
+  ASymbol result; // [rsp+50h] [rbp+8h] BYREF
+  unsigned int find_pos_p; // [rsp+58h] [rbp+10h] BYREF
 
-  v6 = this;
-  v7 = params_p;
-  v8 = this->i_str_ref_p->i_length;
-  v9 = end_pos_p;
-  v10 = start_pos;
-  find_pos_p = v8;
+  i_length = this->i_str_ref_p->i_length;
+  find_pos_p = i_length;
   if ( end_pos_p )
     *end_pos_p = start_pos;
-  if ( start_pos + 1 >= v8 )
+  if ( start_pos + 1 >= i_length )
     return 54i64;
-  v12 = v6->i_str_ref_p->i_cstr_p;
-  if ( byte_14236F2C0[(unsigned __int8)v6->i_str_ref_p->i_cstr_p[start_pos]] )
+  i_cstr_p = this->i_str_ref_p->i_cstr_p;
+  if ( byte_14236F2C0[(unsigned __int8)i_cstr_p[start_pos]] )
     return 54i64;
-  AString::find((AString *)&v6->i_str_ref_p, ACharMatch_not_identifier, 1u, &find_pos_p, start_pos + 1, 0xFFFFFFFF);
+  AString::find(this, ACharMatch_not_identifier, 1u, &find_pos_p, start_pos + 1, 0xFFFFFFFF);
   v13 = find_pos_p;
-  if ( v12[find_pos_p] != 35 )
+  if ( i_cstr_p[find_pos_p] != 35 )
     return 54i64;
-  if ( v9 )
-    *v9 = find_pos_p + 1;
-  if ( v13 - v10 > 0xFF )
+  if ( end_pos_p )
+    *end_pos_p = find_pos_p + 1;
+  if ( v13 - start_pos > 0xFF )
     return 95i64;
-  if ( !v7 )
+  if ( !params_p )
     return 0i64;
-  SSParser::as_symbol(v6, &result, v10, v13);
-  v14 = 0;
-  if ( param_type == Type_send )
+  SSParser::as_symbol(this, &result, start_pos, v13);
+  if ( param_type )
   {
-    v15 = v7->i_params.i_count;
-    if ( v15 )
+    i_count = params_p->i_return_params.i_count;
+    if ( i_count )
     {
-      v16 = v7->i_params.i_array_p;
-      v17 = (unsigned __int64)&v16[8 * (v15 - 1)];
-      v18 = v7->i_params.i_array_p;
-      if ( (unsigned __int64)v16 <= v17 )
+      i_array_p = (char *)params_p->i_return_params.i_array_p;
+      v21 = &i_array_p[8 * i_count - 8];
+      v17 = i_array_p;
+      if ( i_array_p <= v21 )
       {
-        do
+        while ( result.i_uid != **(_DWORD **)v17 )
         {
-          if ( result.i_uid == *(_DWORD *)(*(_QWORD *)v18 + 8i64) )
-          {
-            if ( v14 < 2 )
-              goto LABEL_32;
-            --v14;
-          }
-          v18 += 8;
+          v17 += 8;
+          if ( v17 > v21 )
+            goto LABEL_19;
         }
-        while ( (unsigned __int64)v18 <= v17 );
+        goto LABEL_28;
       }
     }
-    goto LABEL_21;
   }
-  v21 = v7->i_return_params.i_count;
-  if ( !v21
-    || (v16 = v7->i_return_params.i_array_p,
-        v22 = (unsigned __int64)&v16[8 * (v21 - 1)],
-        v18 = v7->i_return_params.i_array_p,
-        (unsigned __int64)v16 > v22) )
+  else
   {
-LABEL_21:
-    v19 = 0i64;
-    goto LABEL_22;
+    v14 = params_p->i_params.i_count;
+    if ( v14 )
+    {
+      i_array_p = (char *)params_p->i_params.i_array_p;
+      v16 = &i_array_p[8 * v14 - 8];
+      v17 = i_array_p;
+      if ( i_array_p <= v16 )
+      {
+        while ( result.i_uid != *(_DWORD *)(*(_QWORD *)v17 + 8i64) )
+        {
+          v17 += 8;
+          if ( v17 > v16 )
+            goto LABEL_19;
+        }
+LABEL_28:
+        if ( arg_idx_p )
+          *arg_idx_p = (v17 - i_array_p) >> 3;
+        v18 = *(_QWORD *)v17;
+        goto LABEL_20;
+      }
+    }
   }
-  while ( result.i_uid != **(_DWORD **)v18 )
-  {
-LABEL_30:
-    v18 += 8;
-    if ( (unsigned __int64)v18 > v22 )
-      goto LABEL_21;
-  }
-  if ( v14 >= 2 )
-  {
-    --v14;
-    goto LABEL_30;
-  }
-LABEL_32:
-  if ( arg_idx_p )
-    *arg_idx_p = (v18 - v16) >> 3;
-  v19 = *(_QWORD *)v18;
-LABEL_22:
-  v20 = v19 == 0;
+LABEL_19:
+  v18 = 0i64;
+LABEL_20:
+  v19 = v18 == 0;
   v11 = 107i64;
-  if ( !v20 )
-    v11 = 0i64;
+  if ( !v19 )
+    return 0i64;
   return v11;
 }
 
 // File Line: 4589
 // RVA: 0x12B3A0
-__int64 __fastcall SSParser::parse_invoke_args(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *args_p, APCompactArray<SSIdentifier,SSIdentifier,ACompareAddress<SSIdentifier> > *ret_args_p, SSClassUnaryBase *receiver_type_p, SSParameters *params_p)
+__int64 __fastcall SSParser::parse_invoke_args(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *args_p,
+        APCompactArray<SSIdentifier,SSIdentifier,ACompareAddress<SSIdentifier> > *ret_args_p,
+        SSClassUnaryBase *receiver_type_p,
+        SSParameters *params_p)
 {
   APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *v7; // r15
-  unsigned int v8; // ebx
-  SSParser::eResult v9; // edi
-  AStringRef *v10; // rax
-  char *v11; // rcx
-  unsigned int v12; // esi
-  unsigned int v13; // er13
-  APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *v14; // r12
-  SSParser *v15; // r14
-  unsigned __int64 v16; // r14
-  signed __int64 v17; // rax
-  SSParameters *v18; // r14
-  SSParser *v19; // rbx
-  SSParser::eResult v20; // eax
-  SSClassDescBase *v21; // r15
-  unsigned int v22; // er13
-  SSParameterBase **v23; // rax
-  SSParameterBase *v24; // rcx
-  __int64 v25; // rax
-  __int64 v26; // rdi
-  unsigned int v27; // er14
-  unsigned int v28; // er15
-  __int64 v29; // rbx
-  __int64 v30; // rax
-  __int64 v31; // rax
-  APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *v32; // rbx
-  unsigned int v33; // eax
-  unsigned int v34; // ecx
-  SSClass *v35; // rcx
-  SSLiteralList *v36; // r14
-  bool v37; // al
-  char v38; // r15
-  char v39; // cl
-  APCompactArrayBase<SSParameterBase> *v40; // r13
-  unsigned int v41; // er12
-  signed __int64 v42; // r14
-  char *v43; // r15
-  signed __int64 v44; // r14
-  char v46; // [rsp+30h] [rbp-71h]
-  char v47; // [rsp+31h] [rbp-70h]
-  char v48; // [rsp+32h] [rbp-6Fh]
+  unsigned int i_end_pos; // ebx
+  SSParser::eResult i_result; // edi
+  char *i_cstr_p; // rcx
+  unsigned int v11; // esi
+  unsigned int v12; // r13d
+  APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *v13; // r12
+  SSParser *v14; // r14
+  unsigned __int64 v15; // r14
+  __int64 v16; // rax
+  SSParameters *v17; // r14
+  SSParser *v18; // rbx
+  SSParser::eResult v19; // eax
+  SSClassDescBase *v20; // r15
+  unsigned int v21; // r13d
+  __int64 v22; // rcx
+  __int64 v23; // rax
+  __int64 v24; // rdi
+  unsigned int v25; // r14d
+  unsigned int v26; // r15d
+  __int64 v27; // rbx
+  __int64 v28; // rax
+  __int64 v29; // rax
+  APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *v30; // rbx
+  unsigned int v31; // eax
+  unsigned int v32; // ecx
+  SSClass *v33; // rcx
+  SSLiteralList *v34; // r14
+  bool v35; // al
+  char v36; // r15
+  char v37; // cl
+  APCompactArrayBase<SSParameterBase> *v38; // r13
+  unsigned int v39; // r12d
+  SSParameterBase **v40; // r14
+  char *v41; // r15
+  SSParameterBase **v42; // r14
+  char v44; // [rsp+30h] [rbp-71h]
+  char v45; // [rsp+31h] [rbp-70h]
+  char v46; // [rsp+32h] [rbp-6Fh]
   int elem_count; // [rsp+34h] [rbp-6Dh]
-  unsigned int v50; // [rsp+38h] [rbp-69h]
-  unsigned int v51; // [rsp+3Ch] [rbp-65h]
-  unsigned int v52; // [rsp+40h] [rbp-61h]
-  unsigned int v53; // [rsp+44h] [rbp-5Dh]
-  unsigned int v54; // [rsp+48h] [rbp-59h]
-  SSParameterBase **v55; // [rsp+50h] [rbp-51h]
-  SSClassDescBase *v56; // [rsp+58h] [rbp-49h]
-  unsigned int v57[2]; // [rsp+60h] [rbp-41h]
-  SSParameterBase *v58; // [rsp+68h] [rbp-39h]
-  SSParser::Args args; // [rsp+70h] [rbp-31h]
-  char *v60; // [rsp+88h] [rbp-19h]
-  __int64 v61; // [rsp+90h] [rbp-11h]
-  SSParser *v62; // [rsp+F0h] [rbp+4Fh]
-  unsigned int end_pos_pa; // [rsp+F8h] [rbp+57h]
+  unsigned int v48; // [rsp+38h] [rbp-69h]
+  unsigned int v49; // [rsp+3Ch] [rbp-65h]
+  unsigned int i_count; // [rsp+40h] [rbp-61h]
+  unsigned int v51; // [rsp+44h] [rbp-5Dh]
+  unsigned int i_length; // [rsp+48h] [rbp-59h]
+  SSParameterBase **i_array_p; // [rsp+50h] [rbp-51h]
+  SSClassDescBase *v54; // [rsp+58h] [rbp-49h]
+  unsigned int v55[2]; // [rsp+60h] [rbp-41h] BYREF
+  __int64 v56; // [rsp+68h] [rbp-39h]
+  SSParser::Args args; // [rsp+70h] [rbp-31h] BYREF
+  char *v58; // [rsp+88h] [rbp-19h]
+  __int64 v59; // [rsp+90h] [rbp-11h]
+  unsigned int end_pos_pa; // [rsp+F8h] [rbp+57h] BYREF
   void *mem_p; // [rsp+100h] [rbp+5Fh]
-  APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *v65; // [rsp+108h] [rbp+67h]
+  APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *v63; // [rsp+108h] [rbp+67h]
 
-  v65 = args_p;
+  v63 = args_p;
   mem_p = end_pos_p;
-  v62 = this;
-  v61 = -2i64;
+  v59 = -2i64;
   v7 = args_p;
-  v8 = start_pos;
-  v9 = 82;
-  v10 = this->i_str_ref_p;
-  v54 = this->i_str_ref_p->i_length;
-  v11 = this->i_str_ref_p->i_cstr_p;
-  v60 = v10->i_cstr_p;
-  if ( v54 - start_pos < 2 )
+  i_end_pos = start_pos;
+  i_result = Result_err_unexpected_eof;
+  i_length = this->i_str_ref_p->i_length;
+  i_cstr_p = this->i_str_ref_p->i_cstr_p;
+  v58 = i_cstr_p;
+  if ( i_length - start_pos < 2 )
     goto LABEL_132;
-  v9 = 35;
-  if ( v11[start_pos] != 40 )
+  i_result = Result_err_expected_invoke_args;
+  if ( i_cstr_p[start_pos] != 40 )
     goto LABEL_132;
-  v8 = start_pos + 1;
+  i_end_pos = start_pos + 1;
   end_pos_pa = start_pos + 1;
-  v58 = 0i64;
-  v55 = 0i64;
-  v52 = -1;
-  v48 = 0;
+  v56 = 0i64;
+  i_array_p = 0i64;
+  i_count = -1;
+  v46 = 0;
   if ( params_p )
   {
-    v52 = params_p->i_params.i_count;
-    v55 = params_p->i_params.i_array_p;
+    i_count = params_p->i_params.i_count;
+    i_array_p = params_p->i_params.i_array_p;
     if ( args_p )
       APCompactArrayBase<SSParameterBase>::free_all((APCompactArrayBase<SSParameterBase> *)args_p);
   }
-  v9 = 82;
-  v12 = 0;
+  i_result = Result_err_unexpected_eof;
+  v11 = 0;
+  v49 = 0;
   v51 = 0;
-  v53 = 0;
-  v13 = 0;
+  v12 = 0;
   elem_count = 0;
-  v50 = 0;
-  v46 = 0;
-  v47 = 0;
-  args.i_start_pos = v8;
+  v48 = 0;
+  v44 = 0;
+  v45 = 0;
+  args.i_start_pos = i_end_pos;
   args.i_flags = v7 != 0i64;
   *(_QWORD *)&args.i_result = 0i64;
   args.i_type_p = 0i64;
-  v14 = 0i64;
-  v15 = v62;
+  v13 = 0i64;
+  v14 = this;
   if ( receiver_type_p )
-    v56 = receiver_type_p->vfptr->as_finalized_generic(
-            (SSClassDescBase *)receiver_type_p,
-            (SSClassDescBase *)v62->i_context.i_obj_scope_p);
+    v54 = receiver_type_p->vfptr->as_finalized_generic(receiver_type_p, this->i_context.i_obj_scope_p);
   else
-    v56 = 0i64;
-  if ( v8 < v54 )
+    v54 = 0i64;
+  if ( i_end_pos < i_length )
   {
     while ( 1 )
     {
-      v9 = SSParser::parse_ws_any(v15, v8, &end_pos_pa);
-      if ( v9 )
+      i_result = SSParser::parse_ws_any(v14, i_end_pos, &end_pos_pa);
+      if ( i_result )
         goto LABEL_114;
-      v8 = end_pos_pa;
-      v16 = (unsigned __int8)v60[end_pos_pa];
-      if ( (unsigned __int8)v16 <= 0x3Bu )
+      i_end_pos = end_pos_pa;
+      v15 = (unsigned __int8)v58[end_pos_pa];
+      if ( (unsigned __int8)v15 <= 0x3Bu )
       {
-        v17 = 576480543512723456i64;
-        if ( _bittest64(&v17, v16) )
+        v16 = 0x800120000000000i64;
+        if ( _bittest64(&v16, v15) )
         {
-          v8 = end_pos_pa++ + 1;
-          if ( !v12 && (_BYTE)v16 != 44 )
+          i_end_pos = ++end_pos_pa;
+          if ( !v11 && (_BYTE)v15 != 44 )
             goto LABEL_25;
-          if ( v47 )
+          if ( v45 )
           {
-            v9 = 110;
+            i_result = Result_err_context_invoke_arg_unnamed;
             goto LABEL_115;
           }
-          if ( !v46 || (v46 = 0, ++v12, !v13) )
+          if ( !v44 || (v44 = 0, ++v11, !v12) )
           {
-            if ( v12 == v52 )
+            if ( v11 == i_count )
               goto LABEL_104;
-            if ( v55 && !((unsigned __int8 (*)(void))v55[v12]->vfptr->is_defaultable)() )
+            if ( i_array_p && !i_array_p[v11]->vfptr->is_defaultable(i_array_p[v11]) )
             {
-              v9 = 109;
+              i_result = Result_err_context_invoke_arg_skipped;
               goto LABEL_115;
             }
-            ++v12;
+            ++v11;
             if ( v7 )
-              APCompactArrayBase<SSExpressionBase>::append_null((APCompactArrayBase<SSExpressionBase> *)&v7->i_count);
+              APCompactArrayBase<SSExpressionBase>::append_null(v7);
 LABEL_25:
-            if ( (_BYTE)v16 == 41 )
+            if ( (_BYTE)v15 == 41 )
               goto LABEL_103;
-            if ( (_BYTE)v16 == 59 )
+            if ( (_BYTE)v15 == 59 )
             {
-              v48 = 1;
+              v46 = 1;
 LABEL_103:
-              v9 = 0;
+              i_result = Result_ok;
               goto LABEL_115;
             }
 LABEL_86:
-            v9 = 82;
+            i_result = Result_err_unexpected_eof;
             goto LABEL_99;
           }
-          v8 = v50;
-          end_pos_pa = v50;
-          if ( v14 )
-            APCompactArrayBase<SSExpressionBase>::free_all_last(
-              (APCompactArrayBase<SSExpressionBase> *)&v14[1].i_count,
-              v13);
+          i_end_pos = v48;
+          end_pos_pa = v48;
+          if ( v13 )
+            APCompactArrayBase<SSExpressionBase>::free_all_last(v13 + 1, v12);
           goto LABEL_99;
         }
       }
-      if ( v12 == v52 )
+      if ( v11 == i_count )
       {
 LABEL_104:
-        v9 = 105;
+        i_result = Result_err_context_invoke_arg_end;
         goto LABEL_115;
       }
-      v57[0] = v12;
-      v18 = params_p;
-      v19 = v62;
-      v20 = SSParser::parse_named_specifier(v62, end_pos_pa, &end_pos_pa, params_p, v57, 0);
-      v9 = v20;
-      v21 = 0i64;
-      v22 = v57[0];
-      if ( v20 != 54 )
+      v55[0] = v11;
+      v17 = params_p;
+      v18 = this;
+      v19 = SSParser::parse_named_specifier(this, end_pos_pa, &end_pos_pa, params_p, v55, Type_send);
+      i_result = v19;
+      v20 = 0i64;
+      v21 = v55[0];
+      if ( v19 != Result_err_expected_named_arg )
       {
-        if ( v20 )
+        if ( v19 )
           goto LABEL_114;
-        if ( v46 )
+        if ( v44 )
         {
-          v46 = 0;
-          ++v12;
+          v44 = 0;
+          ++v11;
           if ( elem_count )
           {
-            v8 = v50;
-            end_pos_pa = v50;
-            v13 = elem_count;
-            if ( v14 )
-              APCompactArrayBase<SSExpressionBase>::free_all_last(
-                (APCompactArrayBase<SSExpressionBase> *)&v14[1].i_count,
-                elem_count);
+            i_end_pos = v48;
+            end_pos_pa = v48;
+            v12 = elem_count;
+            if ( !v13 )
+              goto LABEL_99;
+LABEL_34:
+            APCompactArrayBase<SSExpressionBase>::free_all_last(v13 + 1, elem_count);
             goto LABEL_99;
           }
         }
-        v47 = 1;
-        if ( v18 )
+        v45 = 1;
+        if ( v17 )
         {
-          if ( v65 && v65->i_count > v57[0] && v65->i_array_p[v57[0]] )
+          if ( v63 && v63->i_count > v55[0] && v63->i_array_p[v55[0]] )
           {
-            v9 = 108;
+            i_result = Result_err_context_invoke_arg_preexist;
 LABEL_114:
-            v8 = end_pos_pa;
+            i_end_pos = end_pos_pa;
             goto LABEL_115;
           }
-          v23 = v18->i_params.i_array_p;
-          v24 = v23[v57[0]];
-          v58 = v23[v57[0]];
-          if ( v62->i_flags.i_flagset & 1 )
+          v22 = (__int64)v17->i_params.i_array_p[v55[0]];
+          v56 = v22;
+          if ( (this->i_flags.i_flagset & 1) != 0 )
           {
-            v25 = ((__int64 (*)(void))v24->vfptr->get_expected_type)();
-            v21 = (SSClassDescBase *)(*(__int64 (__fastcall **)(__int64, SSClassDescBase *))(*(_QWORD *)v25 + 32i64))(
-                                       v25,
-                                       v56);
+            v23 = (*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v22 + 64i64))(v22);
+            v20 = (SSClassDescBase *)(*(__int64 (__fastcall **)(__int64, SSClassDescBase *))(*(_QWORD *)v23 + 32i64))(
+                                       v23,
+                                       v54);
           }
         }
-        v9 = SSParser::parse_ws_any(v62, end_pos_pa, &end_pos_pa);
-        if ( v9 )
+        i_result = SSParser::parse_ws_any(this, end_pos_pa, &end_pos_pa);
+        if ( i_result )
           goto LABEL_114;
         goto LABEL_68;
       }
-      if ( v47 )
+      if ( v45 )
       {
-        v9 = 110;
+        i_result = Result_err_context_invoke_arg_unnamed;
         goto LABEL_114;
       }
-      if ( v18 )
+      if ( v17 )
         break;
 LABEL_68:
       args.i_start_pos = end_pos_pa;
-      args.i_type_p = v21;
-      v36 = SSParser::parse_expression(v19, &args, 1i64);
-      v8 = args.i_end_pos;
+      args.i_type_p = v20;
+      v34 = SSParser::parse_expression(v18, &args, 1ui64);
+      i_end_pos = args.i_end_pos;
       end_pos_pa = args.i_end_pos;
-      v9 = args.i_result;
+      i_result = args.i_result;
       if ( args.i_result )
         goto LABEL_115;
-      if ( !(v62->i_flags.i_flagset & 1) || (v37 = args.i_type_p->vfptr->is_class_type(args.i_type_p, v21)) != 0 )
-        v37 = 1;
-      v38 = v46;
-      if ( v46 )
+      if ( (this->i_flags.i_flagset & 1) == 0 || (v35 = args.i_type_p->vfptr->is_class_type(args.i_type_p, v20)) )
+        v35 = 1;
+      v36 = v44;
+      if ( v44 )
       {
-        if ( !v37 )
+        if ( !v35 )
         {
-          v46 = 0;
-          ++v12;
-          v13 = elem_count;
+          v44 = 0;
+          ++v11;
+          v12 = elem_count;
           if ( elem_count )
           {
-            v8 = v50;
-            end_pos_pa = v50;
-            if ( v14 )
-              APCompactArrayBase<SSExpressionBase>::free_all_last(
-                (APCompactArrayBase<SSExpressionBase> *)&v14[1].i_count,
-                elem_count);
+            i_end_pos = v48;
+            end_pos_pa = v48;
+            if ( v13 )
+              APCompactArrayBase<SSExpressionBase>::free_all_last(v13 + 1, elem_count);
           }
-          if ( v36 )
-            v36->vfptr->__vecDelDtor((SSExpressionBase *)&v36->vfptr, 1u);
+          if ( v34 )
+            v34->vfptr->__vecDelDtor(v34, 1u);
           goto LABEL_99;
         }
-        ++v51;
-        if ( v14 )
-          APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase>>::append(
-            v14 + 1,
-            (SSExpressionBase *)&v36->vfptr);
+        ++v49;
+        if ( v13 )
+          APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase>>::append(v13 + 1, v34);
       }
       else
       {
-        if ( !v37 )
+        if ( !v35 )
         {
-          v9 = 132;
-          if ( v36 )
-            v36->vfptr->__vecDelDtor((SSExpressionBase *)&v36->vfptr, 1u);
+          i_result = Result_err_typecheck_invoke_arg;
+          if ( v34 )
+            v34->vfptr->__vecDelDtor(v34, 1u);
           goto LABEL_115;
         }
-        if ( v65 )
+        if ( v63 )
           APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase>>::set_at_expand(
-            v65,
-            v22,
-            (SSExpressionBase *)&v36->vfptr);
-        if ( !v47 || !params_p )
-          ++v12;
-        v38 = 0;
+            v63,
+            v21,
+            v34);
+        if ( !v45 || !params_p )
+          ++v11;
+        v36 = 0;
       }
-      v9 = SSParser::parse_ws_any(v62, v8, &end_pos_pa);
-      if ( v9 )
+      i_result = SSParser::parse_ws_any(this, i_end_pos, &end_pos_pa);
+      if ( i_result )
         goto LABEL_114;
-      v8 = end_pos_pa;
-      v39 = v60[end_pos_pa];
-      if ( v39 == 44 )
+      i_end_pos = end_pos_pa;
+      v37 = v58[end_pos_pa];
+      if ( v37 == 44 )
       {
-        v8 = end_pos_pa++ + 1;
-        v13 = elem_count;
+        i_end_pos = ++end_pos_pa;
+        v12 = elem_count;
         goto LABEL_86;
       }
-      if ( v39 != 41 )
+      if ( v37 != 41 )
       {
-        if ( v39 != 59 )
+        if ( v37 != 59 )
         {
-          v9 = 36;
-          if ( v39 == 35 )
-            v9 = 85;
+          i_result = Result_err_expected_invoke_args_next;
+          if ( v37 == 35 )
+            i_result = Result_err_unexpected_named_spec;
           goto LABEL_115;
         }
-        v48 = 1;
+        v46 = 1;
       }
-      if ( !v38 || (v46 = 0, ++v12, (v13 = elem_count) == 0) )
+      if ( !v36 || (v44 = 0, ++v11, (v12 = elem_count) == 0) )
       {
-        v8 = end_pos_pa++ + 1;
-        v9 = 0;
+        i_end_pos = ++end_pos_pa;
+        i_result = Result_ok;
         goto LABEL_115;
       }
-      v8 = v50;
-      end_pos_pa = v50;
-      if ( v14 )
-        APCompactArrayBase<SSExpressionBase>::free_all_last(
-          (APCompactArrayBase<SSExpressionBase> *)&v14[1].i_count,
-          elem_count);
+      i_end_pos = v48;
+      end_pos_pa = v48;
+      if ( v13 )
+        goto LABEL_34;
 LABEL_99:
-      if ( v8 >= v54 )
+      if ( i_end_pos >= i_length )
         goto LABEL_115;
-      v7 = v65;
-      v15 = v62;
+      v7 = v63;
+      v14 = this;
     }
-    if ( v46 )
+    if ( v44 )
     {
-      v26 = (__int64)v58;
-      v27 = v51;
-      v28 = v53;
+      v24 = v56;
+      v25 = v49;
+      v26 = v51;
     }
     else
     {
-      v26 = (__int64)v18->i_params.i_array_p[v12];
-      v58 = (SSParameterBase *)v26;
-      if ( (*(unsigned int (__fastcall **)(__int64))(*(_QWORD *)v26 + 32i64))(v26) != 3 )
+      v24 = (__int64)v17->i_params.i_array_p[v11];
+      v56 = v24;
+      if ( (*(unsigned int (__fastcall **)(__int64))(*(_QWORD *)v24 + 32i64))(v24) != 3 )
       {
-        v29 = (*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v26 + 64i64))(v26);
-        if ( v56 )
-          v30 = (__int64)v56->vfptr->as_finalized_generic(v56, (SSClassDescBase *)&v62->i_context.i_obj_scope_p->vfptr);
+        v27 = (*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v24 + 64i64))(v24);
+        if ( v54 )
+          v28 = (__int64)v54->vfptr->as_finalized_generic(v54, this->i_context.i_obj_scope_p);
         else
-          v30 = 0i64;
-        v31 = (*(__int64 (__fastcall **)(__int64, __int64))(*(_QWORD *)v29 + 32i64))(v29, v30);
+          v28 = 0i64;
+        v29 = (*(__int64 (__fastcall **)(__int64, __int64))(*(_QWORD *)v27 + 32i64))(v27, v28);
 LABEL_67:
-        v19 = v62;
-        v21 = (SSClassDescBase *)v31;
+        v18 = this;
+        v20 = (SSClassDescBase *)v29;
         goto LABEL_68;
       }
-      v46 = 1;
-      v27 = 0;
-      v51 = 0;
-      v28 = 1;
-      if ( *(_DWORD *)(v26 + 16) )
-        v28 = *(_DWORD *)(v26 + 16);
-      v53 = v28;
+      v44 = 1;
+      v25 = 0;
+      v49 = 0;
+      v26 = 1;
+      if ( *(_DWORD *)(v24 + 16) )
+        v26 = *(_DWORD *)(v24 + 16);
+      v51 = v26;
     }
-    v32 = v65;
-    if ( v65 && !v27 )
+    v30 = v63;
+    if ( v63 && !v25 )
     {
-      v14 = (APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *)AMemory::c_malloc_func(0x20ui64, "SSLiteralList");
-      *(_QWORD *)v57 = v14;
-      if ( v14 )
+      v13 = (APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *)AMemory::c_malloc_func(0x20ui64, "SSLiteralList");
+      *(_QWORD *)v55 = v13;
+      if ( v13 )
       {
-        *(_QWORD *)&v14->i_count = &SSExpressionBase::`vftable;
-        *(_QWORD *)&v14->i_count = &SSLiteralList::`vftable;
-        v14->i_array_p = 0i64;
-        v14[1].i_count = 0;
-        v14[1].i_array_p = 0i64;
+        *(_QWORD *)&v13->i_count = &SSExpressionBase::`vftable;
+        *(_QWORD *)&v13->i_count = &SSLiteralList::`vftable;
+        v13->i_array_p = 0i64;
+        v13[1].i_count = 0;
+        v13[1].i_array_p = 0i64;
       }
       else
       {
-        v14 = 0i64;
+        v13 = 0i64;
       }
       APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase>>::append(
-        v32,
-        (SSExpressionBase *)v14);
+        v30,
+        (SSExpressionBase *)v13);
     }
-    elem_count = v27 % v28;
-    v33 = v50;
-    if ( !(v27 % v28) )
-      v33 = end_pos_pa;
-    v50 = v33;
-    v34 = *(_DWORD *)(v26 + 16);
-    if ( v34 )
-      v35 = *(SSClass **)(*(_QWORD *)(v26 + 24) + 8i64 * (v27 % v34));
+    elem_count = v25 % v26;
+    v31 = v48;
+    if ( !(v25 % v26) )
+      v31 = end_pos_pa;
+    v48 = v31;
+    v32 = *(_DWORD *)(v24 + 16);
+    if ( v32 )
+      v33 = *(SSClass **)(*(_QWORD *)(v24 + 24) + 8i64 * (v25 % v32));
     else
-      v35 = SSBrain::c_object_class_p;
-    v31 = (__int64)v35->vfptr->as_finalized_generic((SSClassDescBase *)&v35->vfptr, v56);
+      v33 = SSBrain::c_object_class_p;
+    v29 = (__int64)v33->vfptr->as_finalized_generic(v33, v54);
     goto LABEL_67;
   }
 LABEL_115:
-  v40 = (APCompactArrayBase<SSParameterBase> *)v65;
-  if ( v65 )
+  v38 = (APCompactArrayBase<SSParameterBase> *)v63;
+  if ( v63 )
   {
-    if ( v9 )
+    if ( i_result )
     {
 LABEL_128:
-      APCompactArrayBase<SSParameterBase>::free_all(v40);
+      APCompactArrayBase<SSParameterBase>::free_all(v38);
       goto LABEL_129;
     }
-    v41 = v65->i_count;
-    if ( v12 < v65->i_count )
+    v39 = v63->i_count;
+    if ( v11 < v63->i_count )
     {
-      v42 = (signed __int64)&v55[v12];
-      v43 = (char *)((char *)v65->i_array_p - (char *)v55);
-      while ( *(_QWORD *)&v43[v42] || (*(unsigned __int8 (**)(void))(**(_QWORD **)v42 + 40i64))() )
+      v40 = &i_array_p[v11];
+      v41 = (char *)((char *)v63->i_array_p - (char *)i_array_p);
+      while ( *(SSParameterBase **)((char *)v40 + (_QWORD)v41) || (*v40)->vfptr->is_defaultable(*v40) )
       {
-        ++v12;
-        v42 += 8i64;
-        if ( v12 >= v41 )
+        ++v11;
+        ++v40;
+        if ( v11 >= v39 )
           goto LABEL_122;
       }
       goto LABEL_127;
     }
 LABEL_122:
-    if ( v12 < v52 )
+    if ( v11 < i_count )
     {
-      v44 = (signed __int64)&v55[v12];
-      while ( (*(unsigned __int8 (**)(void))(**(_QWORD **)v44 + 40i64))() )
+      v42 = &i_array_p[v11];
+      while ( (*v42)->vfptr->is_defaultable(*v42) )
       {
-        ++v12;
-        v44 += 8i64;
-        if ( v12 >= v52 )
+        ++v11;
+        ++v42;
+        if ( v11 >= i_count )
           goto LABEL_129;
       }
 LABEL_127:
-      v9 = 106;
+      i_result = Result_err_context_invoke_arg_missing;
       goto LABEL_128;
     }
   }
 LABEL_129:
-  if ( v48 && v9 == Result_ok )
+  if ( v46 && i_result == Result_ok )
   {
-    v9 = SSParser::parse_invoke_return_args(v62, v8, &end_pos_pa, ret_args_p, receiver_type_p, params_p);
-    v8 = end_pos_pa;
+    i_result = SSParser::parse_invoke_return_args(this, i_end_pos, &end_pos_pa, ret_args_p, receiver_type_p, params_p);
+    i_end_pos = end_pos_pa;
   }
 LABEL_132:
   if ( mem_p )
-    *(_DWORD *)mem_p = v8;
-  return (unsigned int)v9;
+    *(_DWORD *)mem_p = i_end_pos;
+  return (unsigned int)i_result;
 }
 
 // File Line: 5205
 // RVA: 0x12C760
-__int64 __fastcall SSParser::parse_invoke_return_args(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, APCompactArray<SSIdentifier,SSIdentifier,ACompareAddress<SSIdentifier> > *ret_args_p, SSClassUnaryBase *receiver_type_p, SSParameters *params_p)
+__int64 __fastcall SSParser::parse_invoke_return_args(
+        SSParser *this,
+        unsigned int start_pos,
+        SSParameters *end_pos_p,
+        APCompactArray<SSIdentifier,SSIdentifier,ACompareAddress<SSIdentifier> > *ret_args_p,
+        SSClassUnaryBase *receiver_type_p,
+        SSParameters *params_p)
 {
-  APCompactArray<SSIdentifier,SSIdentifier,ACompareAddress<SSIdentifier> > *v6; // r14
-  unsigned int v7; // esi
-  SSParser *v8; // r13
-  SSParser::eResult v9; // ebx
+  unsigned int i_end_pos; // esi
+  SSParser::eResult i_result; // ebx
   SSParameters *v10; // rdi
-  unsigned int v11; // ST18_4
-  int v12; // er12
-  __int64 v13; // r15
-  char v14; // r15
-  SSParser::eResult v15; // eax
-  __int64 v16; // r15
-  SSClassDescBase *v17; // rsi
-  SSClassDescBase *v18; // rcx
-  SSClassDescBase *v20; // rbx
-  __int64 v21; // rax
-  SSLiteralList *v22; // rax
-  SSIdentifier *v23; // rdi
-  signed int v24; // eax
-  char v25; // cl
-  size_t v26; // rbx
-  SSIdentifier **v27; // rdi
-  SSIdentifier **v28; // rax
-  int v29; // [rsp+18h] [rbp-29h]
-  unsigned int v30; // [rsp+1Ch] [rbp-25h]
-  unsigned int *v31; // [rsp+20h] [rbp-21h]
+  int v11; // r12d
+  char *i_cstr_p; // r15
+  char v13; // r15
+  SSParser::eResult v14; // eax
+  __int64 v15; // r15
+  SSClassDescBase *v16; // rsi
+  SSClassDescBase *v17; // rcx
+  SSClassDescBase *i_obj_p; // rbx
+  __int64 v20; // rax
+  SSLiteralList *v21; // rax
+  SSIdentifier *v22; // rdi
+  int v23; // eax
+  char v24; // cl
+  size_t i_count; // rbx
+  SSIdentifier **i_array_p; // rdi
+  SSIdentifier **v27; // rax
+  int v28; // [rsp+18h] [rbp-29h]
+  unsigned int v29; // [rsp+1Ch] [rbp-25h] BYREF
+  unsigned int *v30; // [rsp+20h] [rbp-21h]
   SSParameters::eType param_type[2]; // [rsp+28h] [rbp-19h]
-  __int64 v33; // [rsp+30h] [rbp-11h]
-  SSParser::Args args; // [rsp+38h] [rbp-9h]
-  char v35; // [rsp+98h] [rbp+57h]
-  unsigned int end_pos_pa; // [rsp+A0h] [rbp+5Fh]
+  char *v32; // [rsp+30h] [rbp-11h]
+  SSParser::Args args; // [rsp+38h] [rbp-9h] BYREF
+  char v34; // [rsp+98h] [rbp+57h]
+  unsigned int end_pos_pa; // [rsp+A0h] [rbp+5Fh] BYREF
   unsigned int *retaddr; // [rsp+A8h] [rbp+67h]
-  SSClassDescBase *v38; // [rsp+B8h] [rbp+77h]
-  SSParameters *v39; // [rsp+C0h] [rbp+7Fh]
+  SSClassDescBase *v37; // [rsp+B8h] [rbp+77h]
 
-  v39 = (SSParameters *)end_pos_p;
-  LODWORD(v38) = start_pos;
-  v6 = ret_args_p;
-  v7 = start_pos;
-  LODWORD(v31) = this->i_str_ref_p->i_length;
-  v8 = this;
-  v9 = 82;
-  if ( (unsigned int)v31 - start_pos < 1 )
+  LODWORD(v37) = start_pos;
+  i_end_pos = start_pos;
+  LODWORD(v30) = this->i_str_ref_p->i_length;
+  i_result = Result_err_unexpected_eof;
+  if ( (_DWORD)v30 == start_pos )
     goto LABEL_23;
-  v10 = (SSParameters *)end_pos_p;
-  if ( end_pos_p )
+  v10 = end_pos_p;
+  if ( end_pos_p && ret_args_p )
   {
-    v11 = end_pos_p[6];
-    if ( ret_args_p )
-    {
-      AMemory::c_free_func(ret_args_p->i_array_p);
-      v6->i_array_p = 0i64;
-      v6->i_count = 0;
-    }
+    AMemory::c_free_func(ret_args_p->i_array_p);
+    ret_args_p->i_array_p = 0i64;
+    ret_args_p->i_count = 0;
   }
-  v12 = 0;
-  v13 = (__int64)v8->i_str_ref_p->i_cstr_p;
-  v35 = 0;
-  args.i_start_pos = v7;
-  *(_QWORD *)&args.i_result = 0i64;
-  v33 = v13;
-  *(_QWORD *)&args.i_flags = v6 != 0i64;
+  v11 = 0;
+  i_cstr_p = this->i_str_ref_p->i_cstr_p;
+  v34 = 0;
+  args.i_start_pos = i_end_pos;
+  args.i_end_pos = 0;
+  v32 = i_cstr_p;
+  *(_QWORD *)&args.i_flags = ret_args_p != 0i64;
   args.i_type_p = 0i64;
-  if ( v7 >= (unsigned int)v31 )
+  if ( i_end_pos >= (unsigned int)v30 )
     goto LABEL_20;
   while ( 1 )
   {
-    v9 = SSParser::parse_ws_any(v8, v7, &end_pos_pa);
-    if ( v9 )
+    i_result = SSParser::parse_ws_any(this, i_end_pos, &end_pos_pa);
+    if ( i_result )
       goto LABEL_19;
-    v7 = end_pos_pa;
-    v14 = *(_BYTE *)(end_pos_pa + v13);
-    if ( v14 != 41 && v14 != 44 )
+    i_end_pos = end_pos_pa;
+    v13 = i_cstr_p[end_pos_pa];
+    if ( v13 != 41 && v13 != 44 )
       break;
-    v7 = end_pos_pa++ + 1;
-    if ( v12 || v14 == 44 )
+    i_end_pos = ++end_pos_pa;
+    if ( v11 || v13 == 44 )
     {
-      if ( v35 )
+      if ( v34 )
       {
-        v9 = 110;
+        i_result = Result_err_context_invoke_arg_unnamed;
         goto LABEL_20;
       }
-      if ( v12 == v29 )
+      if ( v11 == v28 )
       {
 LABEL_65:
-        v9 = 105;
+        i_result = Result_err_context_invoke_arg_end;
         goto LABEL_20;
       }
-      ++v12;
-      if ( v6 )
+      ++v11;
+      if ( ret_args_p )
       {
-        v26 = v6->i_count;
-        v27 = v6->i_array_p;
-        v28 = APArrayBase<SSIdentifier>::alloc_array((signed int)v26 + 1);
-        v26 *= 8i64;
-        v6->i_array_p = v28;
-        memmove(v28, v27, v26);
-        AMemory::c_free_func(v27);
-        *(SSIdentifier **)((char *)v6->i_array_p + v26) = 0i64;
-        ++v6->i_count;
+        i_count = ret_args_p->i_count;
+        i_array_p = ret_args_p->i_array_p;
+        v27 = APArrayBase<SSIdentifier>::alloc_array((int)i_count + 1);
+        i_count *= 8i64;
+        ret_args_p->i_array_p = v27;
+        memmove(v27, i_array_p, i_count);
+        AMemory::c_free_func(i_array_p);
+        *(SSIdentifier **)((char *)ret_args_p->i_array_p + i_count) = 0i64;
+        ++ret_args_p->i_count;
       }
     }
-    if ( v14 == 41 )
+    if ( v13 == 41 )
       goto LABEL_62;
-    v13 = v33;
+    i_cstr_p = v32;
 LABEL_53:
-    v9 = 82;
-    if ( v7 >= (unsigned int)v31 )
+    i_result = Result_err_unexpected_eof;
+    if ( i_end_pos >= (unsigned int)v30 )
       goto LABEL_20;
-    v10 = v39;
+    v10 = end_pos_p;
   }
-  if ( v12 == v29 )
+  if ( v11 == v28 )
     goto LABEL_65;
-  v15 = SSParser::parse_named_specifier(v8, end_pos_pa, &end_pos_pa, v10, &v30, Type_return);
-  v16 = v30;
-  v17 = 0i64;
-  v9 = v15;
+  v14 = SSParser::parse_named_specifier(this, end_pos_pa, &end_pos_pa, v10, &v29, Type_return);
+  v15 = v29;
+  v16 = 0i64;
+  i_result = v14;
   *(_QWORD *)param_type = 0i64;
-  if ( v15 == 54 )
+  if ( v14 == Result_err_expected_named_arg )
   {
-    if ( !v35 )
+    if ( !v34 )
     {
       if ( v10 )
       {
-        v20 = v10->i_return_params.i_array_p[v12]->i_type_p.i_obj_p;
-        if ( v38 )
-          v21 = (__int64)v38->vfptr->as_finalized_generic(v38, (SSClassDescBase *)&v8->i_context.i_obj_scope_p->vfptr);
+        i_obj_p = v10->i_return_params.i_array_p[v11]->i_type_p.i_obj_p;
+        if ( v37 )
+          v20 = (__int64)v37->vfptr->as_finalized_generic(v37, this->i_context.i_obj_scope_p);
         else
-          v21 = 0i64;
-        v17 = v20->vfptr->as_finalized_generic(v20, (SSClassDescBase *)v21);
-        *(_QWORD *)param_type = v17;
+          v20 = 0i64;
+        v16 = i_obj_p->vfptr->as_finalized_generic(i_obj_p, (SSClassDescBase *)v20);
+        *(_QWORD *)param_type = v16;
       }
       goto LABEL_32;
     }
-    v9 = 110;
+    i_result = Result_err_context_invoke_arg_unnamed;
     goto LABEL_19;
   }
-  if ( v15 )
+  if ( v14 )
     goto LABEL_19;
-  v35 = 1;
+  v34 = 1;
   if ( v10 )
   {
-    if ( !v6 || v6->i_count <= v30 || !v6->i_array_p[v30] )
+    if ( !ret_args_p || ret_args_p->i_count <= v29 || !ret_args_p->i_array_p[v29] )
     {
-      if ( v8->i_flags.i_flagset & 1 )
+      if ( (this->i_flags.i_flagset & 1) != 0 )
       {
-        v18 = v10->i_return_params.i_array_p[v30]->i_type_p.i_obj_p;
-        v17 = v18->vfptr->as_finalized_generic(v18, v38);
-        *(_QWORD *)param_type = v17;
+        v17 = v10->i_return_params.i_array_p[v29]->i_type_p.i_obj_p;
+        v16 = v17->vfptr->as_finalized_generic(v17, v37);
+        *(_QWORD *)param_type = v16;
       }
       goto LABEL_18;
     }
-    v9 = 108;
+    i_result = Result_err_context_invoke_arg_preexist;
 LABEL_19:
-    v7 = end_pos_pa;
+    i_end_pos = end_pos_pa;
     goto LABEL_20;
   }
 LABEL_18:
-  v9 = SSParser::parse_ws_any(v8, end_pos_pa, &end_pos_pa);
-  if ( v9 )
+  i_result = SSParser::parse_ws_any(this, end_pos_pa, &end_pos_pa);
+  if ( i_result )
     goto LABEL_19;
 LABEL_32:
-  args.i_type_p = v17;
+  args.i_type_p = v16;
   args.i_start_pos = end_pos_pa;
-  v22 = SSParser::parse_expression(v8, &args, 3i64);
-  v9 = args.i_result;
-  v7 = args.i_end_pos;
-  v23 = (SSIdentifier *)v22;
+  v21 = SSParser::parse_expression(this, &args, 3ui64);
+  i_result = args.i_result;
+  i_end_pos = args.i_end_pos;
+  v22 = (SSIdentifier *)v21;
   end_pos_pa = args.i_end_pos;
   if ( args.i_result )
     goto LABEL_20;
-  if ( v22 )
+  if ( v21 )
   {
-    v24 = v22->vfptr->get_type((SSExpressionBase *)&v22->vfptr);
-    if ( v24 <= 0 )
+    v23 = v21->vfptr->get_type(v21);
+    if ( v23 <= 0 )
       goto LABEL_59;
-    if ( v24 > 3 )
+    if ( v23 > 3 )
     {
-      if ( v24 == 5 )
-        v9 = 89;
+      if ( v23 == 5 )
+        i_result = Result_err_unexpected_reserved;
       else
 LABEL_59:
-        v9 = 70;
+        i_result = Result_err_unexpected_bind_expr;
       goto LABEL_20;
     }
-    v9 = SSParser::validate_bind_type(v8, v23, args.i_type_p, *(SSClassDescBase **)param_type);
-    if ( v9 )
+    i_result = SSParser::validate_bind_type(this, v22, args.i_type_p, *(SSClassDescBase **)param_type);
+    if ( i_result )
     {
-      v23->vfptr->__vecDelDtor((SSExpressionBase *)&v23->vfptr, 1u);
+      v22->vfptr->__vecDelDtor(v22, 1u);
       goto LABEL_20;
     }
-    if ( v6 )
+    if ( ret_args_p )
     {
-      APCompactArrayBase<SSIdentifier>::ensure_length_null((APCompactArrayBase<SSIdentifier> *)&v6->i_count, v16 + 1);
-      v6->i_array_p[v16] = v23;
+      APCompactArrayBase<SSIdentifier>::ensure_length_null(ret_args_p, v15 + 1);
+      ret_args_p->i_array_p[v15] = v22;
     }
   }
-  if ( !v35 || !v39 )
-    ++v12;
-  v9 = SSParser::parse_ws_any(v8, v7, &end_pos_pa);
-  if ( v9 )
+  if ( !v34 || !end_pos_p )
+    ++v11;
+  i_result = SSParser::parse_ws_any(this, i_end_pos, &end_pos_pa);
+  if ( i_result )
     goto LABEL_19;
-  v7 = end_pos_pa;
-  v13 = v33;
-  v25 = *(_BYTE *)(end_pos_pa + v33);
-  if ( v25 == 44 )
+  i_end_pos = end_pos_pa;
+  i_cstr_p = v32;
+  v24 = v32[end_pos_pa];
+  if ( v24 == 44 )
   {
-    v7 = end_pos_pa++ + 1;
+    i_end_pos = ++end_pos_pa;
     goto LABEL_53;
   }
-  if ( v25 == 41 )
+  if ( v24 == 41 )
   {
-    v7 = end_pos_pa + 1;
+    i_end_pos = end_pos_pa + 1;
 LABEL_62:
-    v9 = 0;
+    i_result = Result_ok;
   }
   else
   {
-    v9 = 36;
+    i_result = Result_err_expected_invoke_args_next;
   }
 LABEL_20:
-  if ( v6 && v9 )
-    APCompactArrayBase<SSParameterBase>::free_all((APCompactArrayBase<SSParameterBase> *)v6);
+  if ( ret_args_p && i_result )
+    APCompactArrayBase<SSParameterBase>::free_all((APCompactArrayBase<SSParameterBase> *)ret_args_p);
 LABEL_23:
   if ( retaddr )
-    *retaddr = v7;
-  return (unsigned int)v9;
+    *retaddr = i_end_pos;
+  return (unsigned int)i_result;
 }
 
 // File Line: 5536
 // RVA: 0x12B180
-SSInvokeSync *__fastcall SSParser::parse_invoke_apply(SSParser *this, SSParser::Args *args, SSExpressionBase *receiver_p)
+SSInvokeSync *__fastcall SSParser::parse_invoke_apply(
+        SSParser *this,
+        SSParser::Args *args,
+        SSExpressionBase *receiver_p)
 {
   SSExpressionBase *v3; // r15
-  SSParser::Args *v4; // rbx
-  SSParser *v5; // r13
-  __int64 v6; // rbp
-  unsigned int v7; // er9
-  char *v8; // rdx
+  __int64 i_start_pos; // rbp
+  unsigned int i_length; // r9d
+  char *i_cstr_p; // rdx
   _QWORD *v9; // r14
-  __int64 v10; // rcx
-  SSClassDescBase *v11; // rcx
-  SSClass *v12; // rdi
-  char v13; // r12
-  eSSClassType v14; // eax
-  SSClassUnion *v15; // rsi
-  __int64 v16; // r15
-  __int64 v17; // rax
-  SSMethodCall *v18; // rsi
-  __int64 v19; // r8
-  _QWORD *v20; // rax
-  SSExpressionBase *v22; // [rsp+80h] [rbp+18h]
-
-  v22 = receiver_p;
-  v3 = receiver_p;
-  v4 = args;
-  v5 = this;
-  v6 = args->i_start_pos;
-  v7 = this->i_str_ref_p->i_length;
-  v8 = this->i_str_ref_p->i_cstr_p;
-  v9 = 0i64;
-  v4->i_result = 82;
-  if ( v7 - (unsigned int)v6 < 2 )
-    goto LABEL_28;
-  v4->i_result = 34;
-  if ( v8[v6] != 37 )
-    goto LABEL_28;
-  v10 = (unsigned int)(v6 + 1);
-  if ( v8[v10] == 62 )
-    goto LABEL_28;
-  LODWORD(v6) = v6 + 1;
-  v11 = v4->i_type_p;
-  v12 = (SSClass *)(v11 ? v11->vfptr->as_finalized_generic(v11, (SSClassDescBase *)&v5->i_context.i_obj_scope_p->vfptr) : 0i64);
-  v4->i_result = 133;
-  if ( v12 == SSBrain::c_none_class_p )
-    goto LABEL_28;
-  v13 = 0;
-  v14 = (unsigned int)v12->vfptr->get_class_type((SSClassDescBase *)&v12->vfptr);
-  if ( v14 )
-  {
-    if ( v14 == 2 )
-    {
-      v17 = (__int64)v12->vfptr->get_key_class((SSClassDescBase *)&v12->vfptr);
-      if ( (*(unsigned __int8 (__fastcall **)(__int64, SSClass *))(*(_QWORD *)v17 + 96i64))(
-             v17,
-             SSBrain::c_list_class_p) )
-      {
-        v13 = 1;
-        v15 = (SSClassUnion *)v12->vfptr->get_item_type((SSClassDescBase *)&v12->vfptr);
-        goto LABEL_21;
-      }
-    }
-    else if ( v14 == 4 )
-    {
-      v15 = SSClassUnion::get_reduced((SSClassUnion *)v12, (SSClassUnaryBase *)&SSBrain::c_none_class_p->vfptr);
-      v16 = (__int64)v15->vfptr->get_key_class((SSClassDescBase *)&v15->vfptr);
-      if ( (*(unsigned __int8 (__fastcall **)(__int64, SSClass *))(*(_QWORD *)v16 + 96i64))(
-             v16,
-             SSBrain::c_list_class_p) )
-      {
-        v13 = 1;
-        if ( (*(unsigned int (__fastcall **)(__int64))(*(_QWORD *)v16 + 104i64))(v16) == 2 )
-          v15 = (SSClassUnion *)(*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v16 + 112i64))(v16);
-        else
-          v15 = (SSClassUnion *)SSBrain::c_object_class_p;
-      }
-      v3 = v22;
-      goto LABEL_21;
-    }
-    goto LABEL_17;
-  }
-  if ( !v12->vfptr->is_class_type((SSClassDescBase *)&v12->vfptr, (SSClassDescBase *)&SSBrain::c_list_class_p->vfptr) )
-  {
-LABEL_17:
-    v15 = (SSClassUnion *)v12;
-    goto LABEL_21;
-  }
-  v13 = 1;
-  v15 = (SSClassUnion *)SSBrain::c_object_class_p;
-LABEL_21:
-  v4->i_type_p = (SSClassDescBase *)&v15->vfptr;
-  v4->i_start_pos = v6;
-  v18 = SSParser::parse_invoke_selector(v5, v4, 1);
-  LODWORD(v6) = v4->i_end_pos;
-  if ( v4->i_result == Result_ok )
-  {
-    if ( v13 )
-      v4->i_type_p = (SSClassDescBase *)&v12->vfptr;
-    else
-      v4->i_type_p = (SSClassDescBase *)SSClassUnion::get_merge(
-                                          v4->i_type_p,
-                                          (SSClassDescBase *)&SSBrain::c_none_class_p->vfptr,
-                                          v19);
-    if ( v4->i_flags & 1 )
-    {
-      v20 = AMemory::c_malloc_func(0x18ui64, "SSInvokeSync");
-      if ( v20 )
-      {
-        *v20 = &SSExpressionBase::`vftable;
-        *v20 = &SSInvocation::`vftable;
-        v20[1] = v3;
-        v20[2] = v18;
-        *v20 = &SSInvokeSync::`vftable;
-        v9 = v20;
-      }
-    }
-  }
-LABEL_28:
-  v4->i_end_pos = v6;
-  return (SSInvokeSync *)v9;
-}
-
-// File Line: 5693
-// RVA: 0x12C540
-SSInvokeRace *__fastcall SSParser::parse_invoke_race(SSParser *this, SSParser::Args *args, SSExpressionBase *receiver_p)
-{
-  SSExpressionBase *v3; // r15
-  SSParser::Args *v4; // rbx
-  SSParser *v5; // r13
-  __int64 v6; // rbp
-  unsigned int v7; // er9
-  char *v8; // rdx
-  _QWORD *v9; // r14
-  SSClassDescBase *v10; // rcx
+  SSClassDescBase *i_type_p; // rcx
   SSClass *v11; // rdi
   char v12; // r12
   eSSClassType v13; // eax
-  SSClassUnion *v14; // rsi
+  SSClassUnion *reduced; // rsi
   __int64 v15; // r15
   __int64 v16; // rax
   SSMethodCall *v17; // rsi
-  __int64 v18; // r8
-  _QWORD *v19; // rax
-  SSExpressionBase *v21; // [rsp+80h] [rbp+18h]
+  _QWORD *v18; // rax
 
-  v21 = receiver_p;
   v3 = receiver_p;
-  v4 = args;
-  v5 = this;
-  v6 = args->i_start_pos;
-  v7 = this->i_str_ref_p->i_length;
-  v8 = this->i_str_ref_p->i_cstr_p;
+  i_start_pos = args->i_start_pos;
+  i_length = this->i_str_ref_p->i_length;
+  i_cstr_p = this->i_str_ref_p->i_cstr_p;
   v9 = 0i64;
-  v4->i_result = 82;
-  if ( v7 - (unsigned int)v6 < 3 )
+  args->i_result = Result_err_unexpected_eof;
+  if ( i_length - (unsigned int)i_start_pos < 2 )
     goto LABEL_28;
-  v4->i_result = 34;
-  if ( v8[v6] != 37 || v8[(unsigned int)(v6 + 1)] != 62 )
+  args->i_result = Result_err_expected_invoke_apply;
+  if ( i_cstr_p[i_start_pos] != 37 || i_cstr_p[(unsigned int)(i_start_pos + 1)] == 62 )
     goto LABEL_28;
-  LODWORD(v6) = v6 + 2;
-  v10 = v4->i_type_p;
-  v11 = (SSClass *)(v10 ? v10->vfptr->as_finalized_generic(v10, (SSClassDescBase *)&v5->i_context.i_obj_scope_p->vfptr) : 0i64);
-  v4->i_result = 133;
+  LODWORD(i_start_pos) = i_start_pos + 1;
+  i_type_p = args->i_type_p;
+  v11 = i_type_p ? (SSClass *)i_type_p->vfptr->as_finalized_generic(i_type_p, this->i_context.i_obj_scope_p) : 0i64;
+  args->i_result = Result_err_typecheck_invoke_apply_recv;
   if ( v11 == SSBrain::c_none_class_p )
     goto LABEL_28;
   v12 = 0;
-  v13 = (unsigned int)v11->vfptr->get_class_type((SSClassDescBase *)&v11->vfptr);
+  v13 = v11->vfptr->get_class_type(v11);
   if ( v13 )
   {
-    if ( v13 == 2 )
+    if ( v13 == SSClassType_typed_class )
     {
-      v16 = (__int64)v11->vfptr->get_key_class((SSClassDescBase *)&v11->vfptr);
+      v16 = (__int64)v11->vfptr->get_key_class(v11);
       if ( (*(unsigned __int8 (__fastcall **)(__int64, SSClass *))(*(_QWORD *)v16 + 96i64))(
              v16,
              SSBrain::c_list_class_p) )
       {
         v12 = 1;
-        v14 = (SSClassUnion *)v11->vfptr->get_item_type((SSClassDescBase *)&v11->vfptr);
+        reduced = (SSClassUnion *)v11->vfptr->get_item_type(v11);
         goto LABEL_21;
       }
     }
-    else if ( v13 == 4 )
+    else if ( v13 == SSClassType_class_union )
     {
-      v14 = SSClassUnion::get_reduced((SSClassUnion *)v11, (SSClassUnaryBase *)&SSBrain::c_none_class_p->vfptr);
-      v15 = (__int64)v14->vfptr->get_key_class((SSClassDescBase *)&v14->vfptr);
+      reduced = SSClassUnion::get_reduced((SSClassUnion *)v11, SSBrain::c_none_class_p);
+      v15 = (__int64)reduced->vfptr->get_key_class(reduced);
       if ( (*(unsigned __int8 (__fastcall **)(__int64, SSClass *))(*(_QWORD *)v15 + 96i64))(
              v15,
              SSBrain::c_list_class_p) )
       {
         v12 = 1;
         if ( (*(unsigned int (__fastcall **)(__int64))(*(_QWORD *)v15 + 104i64))(v15) == 2 )
-          v14 = (SSClassUnion *)(*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v15 + 112i64))(v15);
+          reduced = (SSClassUnion *)(*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v15 + 112i64))(v15);
         else
-          v14 = (SSClassUnion *)SSBrain::c_object_class_p;
+          reduced = (SSClassUnion *)SSBrain::c_object_class_p;
       }
-      v3 = v21;
+      v3 = receiver_p;
       goto LABEL_21;
     }
     goto LABEL_17;
   }
-  if ( !v11->vfptr->is_class_type((SSClassDescBase *)&v11->vfptr, (SSClassDescBase *)&SSBrain::c_list_class_p->vfptr) )
+  if ( !v11->vfptr->is_class_type(v11, SSBrain::c_list_class_p) )
   {
 LABEL_17:
-    v14 = (SSClassUnion *)v11;
+    reduced = (SSClassUnion *)v11;
     goto LABEL_21;
   }
   v12 = 1;
-  v14 = (SSClassUnion *)SSBrain::c_object_class_p;
+  reduced = (SSClassUnion *)SSBrain::c_object_class_p;
 LABEL_21:
-  v4->i_type_p = (SSClassDescBase *)&v14->vfptr;
-  v4->i_start_pos = v6;
-  v17 = SSParser::parse_invoke_selector(v5, v4, 1);
-  LODWORD(v6) = v4->i_end_pos;
-  if ( v4->i_result == Result_ok )
+  args->i_type_p = reduced;
+  args->i_start_pos = i_start_pos;
+  v17 = SSParser::parse_invoke_selector(this, args, 1);
+  LODWORD(i_start_pos) = args->i_end_pos;
+  if ( args->i_result == Result_ok )
   {
     if ( v12 )
-      v4->i_type_p = (SSClassDescBase *)&v11->vfptr;
+      args->i_type_p = v11;
     else
-      v4->i_type_p = (SSClassDescBase *)SSClassUnion::get_merge(
-                                          v4->i_type_p,
-                                          (SSClassDescBase *)&SSBrain::c_none_class_p->vfptr,
-                                          v18);
-    if ( v4->i_flags & 1 )
+      args->i_type_p = SSClassUnion::get_merge((SSClassUnion *)args->i_type_p, (SSClassUnion *)SSBrain::c_none_class_p);
+    if ( (args->i_flags & 1) != 0 )
     {
-      v19 = AMemory::c_malloc_func(0x18ui64, "SSInvokeRace");
-      if ( v19 )
+      v18 = AMemory::c_malloc_func(0x18ui64, "SSInvokeSync");
+      if ( v18 )
       {
-        *v19 = &SSExpressionBase::`vftable;
-        *v19 = &SSInvocation::`vftable;
-        v19[1] = v3;
-        v19[2] = v17;
-        *v19 = &SSInvokeRace::`vftable;
-        v9 = v19;
+        *v18 = &SSExpressionBase::`vftable;
+        *v18 = &SSInvocation::`vftable;
+        v18[1] = v3;
+        v18[2] = v17;
+        *v18 = &SSInvokeSync::`vftable;
+        v9 = v18;
       }
     }
   }
 LABEL_28:
-  v4->i_end_pos = v6;
+  args->i_end_pos = i_start_pos;
+  return (SSInvokeSync *)v9;
+}
+
+// File Line: 5693
+// RVA: 0x12C540
+SSInvokeRace *__fastcall SSParser::parse_invoke_race(
+        SSParser *this,
+        SSParser::Args *args,
+        SSExpressionBase *receiver_p)
+{
+  SSExpressionBase *v3; // r15
+  __int64 i_start_pos; // rbp
+  unsigned int i_length; // r9d
+  char *i_cstr_p; // rdx
+  _QWORD *v9; // r14
+  SSClassDescBase *i_type_p; // rcx
+  SSClass *v11; // rdi
+  char v12; // r12
+  eSSClassType v13; // eax
+  SSClassUnion *reduced; // rsi
+  __int64 v15; // r15
+  __int64 v16; // rax
+  SSMethodCall *v17; // rsi
+  _QWORD *v18; // rax
+
+  v3 = receiver_p;
+  i_start_pos = args->i_start_pos;
+  i_length = this->i_str_ref_p->i_length;
+  i_cstr_p = this->i_str_ref_p->i_cstr_p;
+  v9 = 0i64;
+  args->i_result = Result_err_unexpected_eof;
+  if ( i_length - (unsigned int)i_start_pos < 3 )
+    goto LABEL_28;
+  args->i_result = Result_err_expected_invoke_apply;
+  if ( i_cstr_p[i_start_pos] != 37 || i_cstr_p[(unsigned int)(i_start_pos + 1)] != 62 )
+    goto LABEL_28;
+  LODWORD(i_start_pos) = i_start_pos + 2;
+  i_type_p = args->i_type_p;
+  v11 = i_type_p ? (SSClass *)i_type_p->vfptr->as_finalized_generic(i_type_p, this->i_context.i_obj_scope_p) : 0i64;
+  args->i_result = Result_err_typecheck_invoke_apply_recv;
+  if ( v11 == SSBrain::c_none_class_p )
+    goto LABEL_28;
+  v12 = 0;
+  v13 = v11->vfptr->get_class_type(v11);
+  if ( v13 )
+  {
+    if ( v13 == SSClassType_typed_class )
+    {
+      v16 = (__int64)v11->vfptr->get_key_class(v11);
+      if ( (*(unsigned __int8 (__fastcall **)(__int64, SSClass *))(*(_QWORD *)v16 + 96i64))(
+             v16,
+             SSBrain::c_list_class_p) )
+      {
+        v12 = 1;
+        reduced = (SSClassUnion *)v11->vfptr->get_item_type(v11);
+        goto LABEL_21;
+      }
+    }
+    else if ( v13 == SSClassType_class_union )
+    {
+      reduced = SSClassUnion::get_reduced((SSClassUnion *)v11, SSBrain::c_none_class_p);
+      v15 = (__int64)reduced->vfptr->get_key_class(reduced);
+      if ( (*(unsigned __int8 (__fastcall **)(__int64, SSClass *))(*(_QWORD *)v15 + 96i64))(
+             v15,
+             SSBrain::c_list_class_p) )
+      {
+        v12 = 1;
+        if ( (*(unsigned int (__fastcall **)(__int64))(*(_QWORD *)v15 + 104i64))(v15) == 2 )
+          reduced = (SSClassUnion *)(*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v15 + 112i64))(v15);
+        else
+          reduced = (SSClassUnion *)SSBrain::c_object_class_p;
+      }
+      v3 = receiver_p;
+      goto LABEL_21;
+    }
+    goto LABEL_17;
+  }
+  if ( !v11->vfptr->is_class_type(v11, SSBrain::c_list_class_p) )
+  {
+LABEL_17:
+    reduced = (SSClassUnion *)v11;
+    goto LABEL_21;
+  }
+  v12 = 1;
+  reduced = (SSClassUnion *)SSBrain::c_object_class_p;
+LABEL_21:
+  args->i_type_p = reduced;
+  args->i_start_pos = i_start_pos;
+  v17 = SSParser::parse_invoke_selector(this, args, 1);
+  LODWORD(i_start_pos) = args->i_end_pos;
+  if ( args->i_result == Result_ok )
+  {
+    if ( v12 )
+      args->i_type_p = v11;
+    else
+      args->i_type_p = SSClassUnion::get_merge((SSClassUnion *)args->i_type_p, (SSClassUnion *)SSBrain::c_none_class_p);
+    if ( (args->i_flags & 1) != 0 )
+    {
+      v18 = AMemory::c_malloc_func(0x18ui64, "SSInvokeRace");
+      if ( v18 )
+      {
+        *v18 = &SSExpressionBase::`vftable;
+        *v18 = &SSInvocation::`vftable;
+        v18[1] = v3;
+        v18[2] = v17;
+        *v18 = &SSInvokeRace::`vftable;
+        v9 = v18;
+      }
+    }
+  }
+LABEL_28:
+  args->i_end_pos = i_start_pos;
   return (SSInvokeRace *)v9;
 }
 
 // File Line: 5858
 // RVA: 0x12BA80
-SSInvokeCascade *__fastcall SSParser::parse_invoke_cascade(SSParser *this, SSParser::Args *args, SSExpressionBase *receiver_p)
+SSInvokeCascade *__fastcall SSParser::parse_invoke_cascade(
+        SSParser *this,
+        SSParser::Args *args,
+        SSExpressionBase *receiver_p)
 {
-  SSExpressionBase *v3; // rbp
-  SSParser::Args *v4; // rbx
-  SSParser *v5; // r14
-  char *v6; // r12
-  unsigned int v7; // er15
-  __int64 v8; // rdx
-  SSInvokeCascade *result; // rax
+  char *i_cstr_p; // r12
+  unsigned int i_length; // r15d
+  __int64 i_start_pos; // rdx
   SSParser::eResult v10; // eax
-  SSInvokeCascade *v11; // rsi
-  unsigned int v12; // edi
-  signed __int64 v13; // rax
-  unsigned int v14; // ebp
-  SSClassDescBase *v15; // r13
-  SSMethodCall *v16; // rax
-  SSParser::eResult v17; // eax
-  unsigned int end_pos_p; // [rsp+70h] [rbp+8h]
-  __int64 v19; // [rsp+78h] [rbp+10h]
+  char *v11; // rsi
+  unsigned int i_end_pos; // edi
+  unsigned int v13; // ebp
+  SSClassDescBase *i_type_p; // r13
+  SSMethodCall *v15; // rax
+  SSParser::eResult v16; // eax
+  char *end_pos_p; // [rsp+70h] [rbp+8h] BYREF
+  char *v18; // [rsp+78h] [rbp+10h]
 
-  v3 = receiver_p;
-  v4 = args;
-  v5 = this;
-  v6 = this->i_str_ref_p->i_cstr_p;
-  v7 = this->i_str_ref_p->i_length;
-  v8 = args->i_start_pos;
-  end_pos_p = v8;
-  if ( v6[v8] == 91 )
+  i_cstr_p = this->i_str_ref_p->i_cstr_p;
+  i_length = this->i_str_ref_p->i_length;
+  i_start_pos = args->i_start_pos;
+  LODWORD(end_pos_p) = i_start_pos;
+  if ( i_cstr_p[i_start_pos] == 91 )
   {
-    v10 = SSParser::parse_ws_any(this, v8 + 1, &end_pos_p);
-    v4->i_result = v10;
+    v10 = SSParser::parse_ws_any(this, i_start_pos + 1, (unsigned int *)&end_pos_p);
+    args->i_result = v10;
     if ( v10 )
     {
-      v4->i_end_pos = end_pos_p;
-      result = 0i64;
+      args->i_end_pos = (unsigned int)end_pos_p;
+      return 0i64;
     }
     else
     {
       v11 = 0i64;
-      v12 = end_pos_p;
-      if ( v4->i_flags & 1 && end_pos_p < v7 )
+      i_end_pos = (unsigned int)end_pos_p;
+      if ( (args->i_flags & 1) != 0 && (unsigned int)end_pos_p < i_length )
       {
-        v11 = (SSInvokeCascade *)AMemory::c_malloc_func(0x28ui64, "SSInvokeCascade");
-        *(_QWORD *)&end_pos_p = v11;
+        v11 = (char *)AMemory::c_malloc_func(0x28ui64, "SSInvokeCascade");
+        end_pos_p = v11;
         if ( v11 )
         {
-          v11->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
-          v11->vfptr = (SSExpressionBaseVtbl *)&SSInvokeCascade::`vftable;
-          v11->i_receiver_p = v3;
-          v13 = (signed __int64)&v11->i_invoke_calls;
-          v19 = v13;
-          *(_DWORD *)v13 = 0;
-          *(_QWORD *)(v13 + 8) = 0i64;
-          *(_DWORD *)(v13 + 16) = 0;
+          *(_QWORD *)v11 = &SSExpressionBase::`vftable;
+          *(_QWORD *)v11 = &SSInvokeCascade::`vftable;
+          *((_QWORD *)v11 + 1) = receiver_p;
+          v18 = v11 + 16;
+          *((_DWORD *)v11 + 4) = 0;
+          *((_QWORD *)v11 + 3) = 0i64;
+          *((_DWORD *)v11 + 8) = 0;
         }
         else
         {
           v11 = 0i64;
         }
       }
-      v14 = 0;
-      v15 = v4->i_type_p;
-      v4->i_result = 82;
-      if ( v12 < v7 )
+      v13 = 0;
+      i_type_p = args->i_type_p;
+      args->i_result = Result_err_unexpected_eof;
+      if ( i_end_pos < i_length )
       {
-        while ( v6[v12] != 93 )
+        while ( i_cstr_p[i_end_pos] != 93 )
         {
-          v4->i_type_p = v15;
-          v4->i_start_pos = v12;
-          v16 = SSParser::parse_invoke_selector(v5, v4, 1);
-          v12 = v4->i_end_pos;
-          end_pos_p = v4->i_end_pos;
-          if ( v4->i_result )
+          args->i_type_p = i_type_p;
+          args->i_start_pos = i_end_pos;
+          v15 = SSParser::parse_invoke_selector(this, args, 1);
+          i_end_pos = args->i_end_pos;
+          LODWORD(end_pos_p) = i_end_pos;
+          if ( args->i_result )
             goto LABEL_22;
-          ++v14;
+          ++v13;
           if ( v11 )
             APArray<SSInvokeBase,SSInvokeBase,ACompareAddress<SSInvokeBase>>::append(
-              (APArray<SSInvokeBase,SSInvokeBase,ACompareAddress<SSInvokeBase> > *)&v11->i_invoke_calls.i_count,
-              (SSInvokeBase *)&v16->vfptr);
-          v17 = SSParser::parse_ws_any(v5, v12, &end_pos_p);
-          v4->i_result = v17;
-          v12 = end_pos_p;
-          if ( v17 == Result_ok )
+              (APArray<SSInvokeBase,SSInvokeBase,ACompareAddress<SSInvokeBase> > *)(v11 + 16),
+              v15);
+          v16 = SSParser::parse_ws_any(this, i_end_pos, (unsigned int *)&end_pos_p);
+          args->i_result = v16;
+          i_end_pos = (unsigned int)end_pos_p;
+          if ( v16 == Result_ok )
           {
-            v4->i_result = 82;
-            if ( v12 < v7 )
+            args->i_result = Result_err_unexpected_eof;
+            if ( i_end_pos < i_length )
               continue;
           }
           goto LABEL_19;
         }
-        ++v12;
-        v4->i_result = 0;
+        ++i_end_pos;
+        args->i_result = Result_ok;
       }
 LABEL_19:
-      if ( v4->i_result == Result_ok && v14 < 2 )
-        v4->i_result = (v14 != 0) + 38;
+      if ( args->i_result == Result_ok && v13 < 2 )
+        args->i_result = (v13 != 0) + 38;
 LABEL_22:
       if ( v11 )
       {
-        if ( v4->i_result )
+        if ( args->i_result )
         {
-          v11->i_receiver_p = 0i64;
-          v11->vfptr->__vecDelDtor((SSExpressionBase *)&v11->vfptr, 1u);
+          *((_QWORD *)v11 + 1) = 0i64;
+          (**(void (__fastcall ***)(void *, __int64))v11)(v11, 1i64);
           v11 = 0i64;
         }
       }
-      v4->i_end_pos = v12;
-      result = v11;
+      args->i_end_pos = i_end_pos;
+      return (SSInvokeCascade *)v11;
     }
   }
   else
   {
-    v4->i_result = 38;
-    v4->i_end_pos = v8;
-    result = 0i64;
+    args->i_result = Result_err_expected_invoke_cascade;
+    args->i_end_pos = i_start_pos;
+    return 0i64;
   }
-  return result;
 }
 
 // File Line: 6003
 // RVA: 0x12C310
-APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *__fastcall SSParser::parse_invoke_operator(SSParser *this, SSParser::Args *args, SSExpressionBase *receiver_p)
+SSExpressionBase *__fastcall SSParser::parse_invoke_operator(
+        SSParser *this,
+        SSParser::Args *args,
+        SSExpressionBase *receiver_p)
 {
-  SSExpressionBase *v3; // r15
-  SSParser::Args *v4; // rbx
-  SSParser *v5; // r14
-  SSClassDescBase *v6; // rcx
-  APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *v7; // rdi
+  SSClassDescBase *i_type_p; // rcx
+  _QWORD *v7; // rdi
   __int64 v8; // rax
   __int64 v9; // rsi
   SSParser::eResult v10; // eax
-  APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *v11; // rcx
-  APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *v12; // rcx
-  APCompactArray<SSIdentifier,SSIdentifier,ACompareAddress<SSIdentifier> > ret_args_p; // [rsp+48h] [rbp-28h]
-  APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > args_p; // [rsp+58h] [rbp-18h]
+  _QWORD *v11; // rcx
+  _QWORD *v12; // rcx
+  APCompactArray<SSIdentifier,SSIdentifier,ACompareAddress<SSIdentifier> > ret_args_p; // [rsp+48h] [rbp-28h] BYREF
+  APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > args_p; // [rsp+58h] [rbp-18h] BYREF
 
-  v3 = receiver_p;
-  v4 = args;
-  v5 = this;
   if ( this->i_str_ref_p->i_cstr_p[args->i_start_pos] != 40 )
   {
-    args->i_result = 35;
+    args->i_result = Result_err_expected_invoke_args;
     return 0i64;
   }
-  v6 = args->i_type_p;
+  i_type_p = args->i_type_p;
   v7 = 0i64;
-  if ( v6 )
-    v8 = (__int64)v6->vfptr->as_finalized_generic(v6, (SSClassDescBase *)&v5->i_context.i_obj_scope_p->vfptr);
+  if ( i_type_p )
+    v8 = (__int64)i_type_p->vfptr->as_finalized_generic(i_type_p, this->i_context.i_obj_scope_p);
   else
     v8 = 0i64;
   v9 = (*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v8 + 40i64))(v8);
   if ( (*(unsigned int (__fastcall **)(__int64))(*(_QWORD *)v9 + 104i64))(v9) != 3 )
   {
-    v4->i_result = 8;
-    v4->i_end_pos = v4->i_start_pos + 1;
+    args->i_result = Result_err__start;
+    args->i_end_pos = args->i_start_pos + 1;
     return 0i64;
   }
-  if ( v4->i_flags & 1 )
+  if ( (args->i_flags & 1) != 0 )
   {
     args_p.i_count = 0;
     args_p.i_array_p = 0i64;
     ret_args_p.i_count = 0;
     ret_args_p.i_array_p = 0i64;
     v10 = (unsigned int)SSParser::parse_invoke_args(
-                          v5,
-                          v4->i_start_pos,
-                          &v4->i_end_pos,
+                          this,
+                          args->i_start_pos,
+                          &args->i_end_pos,
                           &args_p,
                           &ret_args_p,
                           0i64,
                           *(SSParameters **)(v9 + 24));
-    v4->i_result = v10;
+    args->i_result = v10;
     if ( v10 == Result_ok )
     {
       if ( *(_DWORD *)(v9 + 32) == 1 )
       {
-        v11 = (APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *)AMemory::c_malloc_func(0x30ui64, "SSInvokeClosureMethod");
+        v11 = AMemory::c_malloc_func(0x30ui64, "SSInvokeClosureMethod");
         if ( v11 )
         {
-          *(_QWORD *)&v11->i_count = &SSExpressionBase::`vftable;
-          *(_QWORD *)&v11->i_count = &SSInvokeClosureBase::`vftable;
-          v11->i_array_p = (SSExpressionBase **)v3;
-          v11[1] = args_p;
+          *v11 = &SSExpressionBase::`vftable;
+          *v11 = &SSInvokeClosureBase::`vftable;
+          v11[1] = receiver_p;
+          *((_DWORD *)v11 + 4) = args_p.i_count;
+          v11[3] = args_p.i_array_p;
           args_p.i_count = 0;
           args_p.i_array_p = 0i64;
-          v11[2] = (APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> >)ret_args_p;
+          *((_DWORD *)v11 + 8) = ret_args_p.i_count;
+          v11[5] = ret_args_p.i_array_p;
           ret_args_p.i_count = 0;
           ret_args_p.i_array_p = 0i64;
-          *(_QWORD *)&v11->i_count = &SSInvokeClosureMethod::`vftable;
+          *v11 = &SSInvokeClosureMethod::`vftable;
           v7 = v11;
         }
       }
       else
       {
-        v12 = (APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *)AMemory::c_malloc_func(0x30ui64, "SSInvokeClosureCoroutine");
+        v12 = AMemory::c_malloc_func(0x30ui64, "SSInvokeClosureCoroutine");
         if ( v12 )
         {
-          *(_QWORD *)&v12->i_count = &SSExpressionBase::`vftable;
-          *(_QWORD *)&v12->i_count = &SSInvokeClosureBase::`vftable;
-          v12->i_array_p = (SSExpressionBase **)v3;
-          v12[1] = args_p;
+          *v12 = &SSExpressionBase::`vftable;
+          *v12 = &SSInvokeClosureBase::`vftable;
+          v12[1] = receiver_p;
+          *((_DWORD *)v12 + 4) = args_p.i_count;
+          v12[3] = args_p.i_array_p;
           args_p.i_count = 0;
           args_p.i_array_p = 0i64;
-          v12[2] = (APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> >)ret_args_p;
+          *((_DWORD *)v12 + 8) = ret_args_p.i_count;
+          v12[5] = ret_args_p.i_array_p;
           ret_args_p.i_count = 0;
           ret_args_p.i_array_p = 0i64;
-          *(_QWORD *)&v12->i_count = &SSInvokeClosureCoroutine::`vftable;
+          *v12 = &SSInvokeClosureCoroutine::`vftable;
           v7 = v12;
         }
       }
@@ -4946,94 +4733,92 @@ APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBas
   }
   else
   {
-    v4->i_result = SSParser::parse_invoke_args(
-                     v5,
-                     v4->i_start_pos,
-                     &v4->i_end_pos,
-                     0i64,
-                     0i64,
-                     0i64,
-                     *(SSParameters **)(v9 + 24));
+    args->i_result = SSParser::parse_invoke_args(
+                       this,
+                       args->i_start_pos,
+                       &args->i_end_pos,
+                       0i64,
+                       0i64,
+                       0i64,
+                       *(SSParameters **)(v9 + 24));
   }
-  if ( v4->i_result == Result_ok )
-    v4->i_type_p = *(SSClassDescBase **)(*(_QWORD *)(v9 + 24) + 40i64);
-  return v7;
+  if ( args->i_result == Result_ok )
+    args->i_type_p = *(SSClassDescBase **)(*(_QWORD *)(v9 + 24) + 40i64);
+  return (SSExpressionBase *)v7;
 }
 
 // File Line: 6095
 // RVA: 0x12BE80
 SSMethodCall *__fastcall SSParser::parse_invoke_ctor(SSParser *this, SSParser::Args *args)
 {
-  SSParser::Args *v2; // rdi
-  SSParser *v3; // r15
-  void (__fastcall ***v4)(_QWORD, signed __int64); // rbx
-  __int64 v5; // rsi
-  char *v6; // rdx
+  void (__fastcall ***v4)(_QWORD, __int64); // rbx
+  __int64 i_start_pos; // rsi
+  char *i_cstr_p; // rdx
   ASymbol *v7; // r9
   SSParser::eResult v8; // eax
   SSParameters *params_p; // r14
-  __int64 v10; // rax
-  void (__fastcall ***v11)(_QWORD, signed __int64); // rax
+  SSMethodBase *v10; // rax
+  void (__fastcall ***v11)(_QWORD, __int64); // rax
   unsigned int v12; // ebp
   APCompactArray<SSIdentifier,SSIdentifier,ACompareAddress<SSIdentifier> > *ret_args_p; // rcx
   APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *v14; // r9
-  void *end_pos_p; // [rsp+90h] [rbp+8h]
-  int v17; // [rsp+98h] [rbp+10h]
-  unsigned int start_pos; // [rsp+A0h] [rbp+18h]
+  void *end_pos_p; // [rsp+90h] [rbp+8h] BYREF
+  int v17; // [rsp+98h] [rbp+10h] BYREF
+  unsigned int start_pos; // [rsp+A0h] [rbp+18h] BYREF
 
-  v2 = args;
-  v3 = this;
   v4 = 0i64;
-  v5 = args->i_start_pos;
+  i_start_pos = args->i_start_pos;
   start_pos = args->i_start_pos;
-  v6 = this->i_str_ref_p->i_cstr_p;
-  v2->i_result = 52;
-  if ( this->i_str_ref_p->i_length >= 3 && v6[v5] == 33 && v6[(unsigned int)(v5 + 1)] != 33 )
+  i_cstr_p = this->i_str_ref_p->i_cstr_p;
+  args->i_result = Result_err_expected_method_ctor_name;
+  if ( this->i_str_ref_p->i_length >= 3
+    && i_cstr_p[i_start_pos] == 33
+    && i_cstr_p[(unsigned int)(i_start_pos + 1)] != 33 )
   {
     v17 = -1;
     v7 = (ASymbol *)&v17;
-    if ( !(v2->i_flags & 1) )
+    if ( (args->i_flags & 1) == 0 )
       v7 = 0i64;
-    v8 = (unsigned int)SSParser::parse_name_method(this, v5, &start_pos, v7);
-    v2->i_result = v8;
+    v8 = (unsigned int)SSParser::parse_name_method(this, i_start_pos, &start_pos, v7);
+    args->i_result = v8;
     if ( v8 )
-      goto LABEL_31;
+      goto LABEL_27;
     params_p = 0i64;
-    if ( v3->i_flags.i_flagset & 1 )
+    if ( (this->i_flags.i_flagset & 1) != 0 )
     {
-      v10 = (__int64)v2->i_type_p->vfptr->get_method_inherited(v2->i_type_p, (ASymbol *)&v17);
+      v10 = args->i_type_p->vfptr->get_method_inherited(args->i_type_p, &v17);
       if ( v10 )
       {
-        v2->i_result = 0;
-        params_p = *(SSParameters **)(v10 + 24);
+        args->i_result = Result_ok;
+        params_p = v10->i_params_p.i_obj_p;
       }
       else
       {
-        v2->i_result = 115;
+        args->i_result = Result_err_context_non_method;
       }
     }
-    if ( v2->i_result )
+    if ( args->i_result )
     {
-LABEL_31:
-      LODWORD(v5) = start_pos;
+LABEL_27:
+      LODWORD(i_start_pos) = start_pos;
     }
     else
     {
-      if ( v2->i_flags & 1 )
+      if ( (args->i_flags & 1) != 0 )
       {
-        v11 = (void (__fastcall ***)(_QWORD, signed __int64))AMemory::c_malloc_func(0x38ui64, "SSMethodCall");
+        v11 = (void (__fastcall ***)(_QWORD, __int64))AMemory::c_malloc_func(0x38ui64, "SSMethodCall");
         v4 = v11;
         end_pos_p = v11;
         if ( v11 )
         {
           *((_DWORD *)v11 + 2) = v17;
           v11[2] = 0i64;
-          *v11 = (void (__fastcall **)(_QWORD, signed __int64))&SSInvokeBase::`vftable;
+          *v11 = (void (__fastcall **)(_QWORD, __int64))&SSInvokeBase::`vftable;
           *((_DWORD *)v11 + 6) = 0;
           v11[4] = 0i64;
           *((_DWORD *)v11 + 10) = 0;
           v11[6] = 0i64;
-          *v11 = (void (__fastcall **)(_QWORD, signed __int64))&SSMethodCall::`vftable;
+          *v11 = (void (__fastcall **)(_QWORD, __int64))&SSMethodCall::`vftable;
         }
         else
         {
@@ -5042,7 +4827,7 @@ LABEL_31:
       }
       v12 = start_pos;
       LODWORD(end_pos_p) = start_pos;
-      v2->i_start_pos = start_pos;
+      args->i_start_pos = start_pos;
       if ( v4 )
       {
         ret_args_p = (APCompactArray<SSIdentifier,SSIdentifier,ACompareAddress<SSIdentifier> > *)(v4 + 5);
@@ -5053,25 +4838,25 @@ LABEL_31:
         ret_args_p = 0i64;
         v14 = 0i64;
       }
-      v2->i_result = SSParser::parse_invoke_args(
-                       v3,
-                       v12,
-                       (unsigned int *)&end_pos_p,
-                       v14,
-                       ret_args_p,
-                       (SSClassUnaryBase *)v2->i_type_p,
-                       params_p);
-      LODWORD(v5) = (_DWORD)end_pos_p;
+      args->i_result = SSParser::parse_invoke_args(
+                         this,
+                         v12,
+                         (unsigned int *)&end_pos_p,
+                         v14,
+                         ret_args_p,
+                         (SSClassUnaryBase *)args->i_type_p,
+                         params_p);
+      LODWORD(i_start_pos) = (_DWORD)end_pos_p;
       if ( (_DWORD)end_pos_p == v12 )
       {
-        v2->i_result = 111;
+        args->i_result = Result_err_context_invoke_ctor_args;
         if ( params_p )
         {
           if ( !(unsigned int)SSParameters::get_arg_count_min(params_p) )
-            v2->i_result = 0;
+            args->i_result = Result_ok;
         }
       }
-      if ( v2->i_result )
+      if ( args->i_result )
       {
         if ( v4 )
           (**v4)(v4, 1i64);
@@ -5079,7 +4864,7 @@ LABEL_31:
       }
     }
   }
-  v2->i_end_pos = v5;
+  args->i_end_pos = i_start_pos;
   return (SSMethodCall *)v4;
 }
 
@@ -5087,61 +4872,55 @@ LABEL_31:
 // RVA: 0x12C060
 SSMethodCall *__fastcall SSParser::parse_invoke_method(SSParser *this, SSParser::Args *args)
 {
-  SSParser::Args *v2; // rsi
-  SSParser *v3; // rbp
-  void (__fastcall ***v4)(_QWORD, signed __int64); // rdi
-  void (__fastcall ***v5)(_QWORD, signed __int64); // rbx
+  __int64 v4; // rdi
+  void (__fastcall ***v5)(_QWORD, __int64); // rbx
   SSClass *v6; // r15
-  unsigned int v7; // er12
-  SSClassDescBase *v8; // r13
-  SSParser::eResult v9; // er14
+  unsigned int i_start_pos; // r12d
+  SSClassDescBase *i_type_p; // r13
+  SSParser::eResult v9; // r14d
   unsigned int v10; // ebp
   ASymbol *v12; // r9
   SSParser::eResult v13; // eax
-  __int64 params_p; // r14
+  SSParameters *params_p; // r14
   SSClass *v15; // rbp
   SSClassDescBase *v16; // rbp
   SSClassUnion *v17; // r14
-  char v18; // al
+  char is_class_maybe; // al
   __int64 v19; // rax
-  void (__fastcall ***v20)(_QWORD, signed __int64); // rax
+  void (__fastcall ***v20)(_QWORD, __int64); // rax
   unsigned int v21; // edx
   APCompactArray<SSIdentifier,SSIdentifier,ACompareAddress<SSIdentifier> > *ret_args_p; // rcx
   APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *v23; // r9
   SSParser::eResult v24; // eax
-  SSParser *v25; // [rsp+A0h] [rbp+8h]
-  void *v26; // [rsp+A8h] [rbp+10h]
-  int v27; // [rsp+B0h] [rbp+18h]
-  SSClass *v28; // [rsp+B8h] [rbp+20h]
+  void *v26; // [rsp+A8h] [rbp+10h] BYREF
+  int v27; // [rsp+B0h] [rbp+18h] BYREF
+  SSClass *v28; // [rsp+B8h] [rbp+20h] BYREF
 
-  v25 = this;
-  v2 = args;
-  v3 = this;
   v4 = 0i64;
   v5 = 0i64;
   v6 = 0i64;
-  v7 = args->i_start_pos;
-  v8 = args->i_type_p;
+  i_start_pos = args->i_start_pos;
+  i_type_p = args->i_type_p;
   v28 = 0i64;
-  LODWORD(v26) = v7;
-  v9 = SSParser::parse_class(this, v7, (unsigned int *)&v26, &v28);
+  LODWORD(v26) = i_start_pos;
+  v9 = SSParser::parse_class(this, i_start_pos, (unsigned int *)&v26, &v28);
   if ( v9 )
   {
     v10 = (unsigned int)v26;
-    if ( (_DWORD)v26 != v7 )
+    if ( (_DWORD)v26 != i_start_pos )
       goto LABEL_11;
     goto LABEL_9;
   }
-  if ( v3->i_str_ref_p->i_length <= (unsigned int)v26 || v3->i_str_ref_p->i_cstr_p[(unsigned int)v26] != 64 )
+  if ( this->i_str_ref_p->i_length <= (unsigned int)v26 || this->i_str_ref_p->i_cstr_p[(unsigned int)v26] != 64 )
   {
-    v10 = v7;
+    v10 = i_start_pos;
 LABEL_10:
-    v9 = 0;
+    v9 = Result_ok;
     goto LABEL_11;
   }
   v10 = (_DWORD)v26 + 1;
-  v9 = 138;
-  if ( !v8 || SSClass::is_scope_qualifier(v28, v8) )
+  v9 = Result_err_typecheck_scope;
+  if ( !i_type_p || SSClass::is_scope_qualifier(v28, i_type_p) )
   {
 LABEL_9:
     v6 = v28;
@@ -5149,40 +4928,40 @@ LABEL_9:
   }
 LABEL_11:
   LODWORD(v28) = v10;
-  v2->i_result = v9;
+  args->i_result = v9;
   if ( v9 )
   {
-    v2->i_end_pos = v10;
+    args->i_end_pos = v10;
     return 0i64;
   }
   v27 = -1;
   v12 = (ASymbol *)&v27;
-  if ( !(v2->i_flags & 1) )
+  if ( (args->i_flags & 1) == 0 )
     v12 = 0i64;
-  v13 = (unsigned int)SSParser::parse_name_method(v25, v10, (unsigned int *)&v28, v12);
-  v2->i_result = v13;
+  v13 = (unsigned int)SSParser::parse_name_method(this, v10, (unsigned int *)&v28, v12);
+  args->i_result = v13;
   if ( v13 )
     goto LABEL_30;
   params_p = 0i64;
   v15 = SSBrain::c_object_class_p;
-  if ( !(v25->i_flags.i_flagset & 1) )
+  if ( (this->i_flags.i_flagset & 1) == 0 )
   {
 LABEL_32:
-    if ( v2->i_flags & 1 )
+    if ( (args->i_flags & 1) != 0 )
     {
-      v20 = (void (__fastcall ***)(_QWORD, signed __int64))AMemory::c_malloc_func(0x38ui64, "SSMethodCall");
+      v20 = (void (__fastcall ***)(_QWORD, __int64))AMemory::c_malloc_func(0x38ui64, "SSMethodCall");
       v5 = v20;
       v26 = v20;
       if ( v20 )
       {
         *((_DWORD *)v20 + 2) = v27;
-        v20[2] = (void (__fastcall **)(_QWORD, signed __int64))v6;
-        *v20 = (void (__fastcall **)(_QWORD, signed __int64))&SSInvokeBase::`vftable;
+        v20[2] = (void (__fastcall **)(_QWORD, __int64))v6;
+        *v20 = (void (__fastcall **)(_QWORD, __int64))&SSInvokeBase::`vftable;
         *((_DWORD *)v20 + 6) = 0;
         v20[4] = 0i64;
         *((_DWORD *)v20 + 10) = 0;
         v20[6] = 0i64;
-        *v20 = (void (__fastcall **)(_QWORD, signed __int64))&SSMethodCall::`vftable;
+        *v20 = (void (__fastcall **)(_QWORD, __int64))&SSMethodCall::`vftable;
       }
       else
       {
@@ -5190,7 +4969,7 @@ LABEL_32:
       }
     }
     v21 = (unsigned int)v28;
-    v2->i_start_pos = (unsigned int)v28;
+    args->i_start_pos = (unsigned int)v28;
     if ( v5 )
     {
       ret_args_p = (APCompactArray<SSIdentifier,SSIdentifier,ACompareAddress<SSIdentifier> > *)(v5 + 5);
@@ -5202,14 +4981,14 @@ LABEL_32:
       v23 = 0i64;
     }
     v24 = (unsigned int)SSParser::parse_invoke_args(
-                          v25,
+                          this,
                           v21,
-                          &v2->i_end_pos,
+                          &args->i_end_pos,
                           v23,
                           ret_args_p,
-                          (SSClassUnaryBase *)v2->i_type_p,
-                          (SSParameters *)params_p);
-    v2->i_result = v24;
+                          (SSClassUnaryBase *)args->i_type_p,
+                          params_p);
+    args->i_result = v24;
     if ( v24 )
     {
       if ( v5 )
@@ -5217,43 +4996,43 @@ LABEL_32:
     }
     else
     {
-      v2->i_type_p = (SSClassDescBase *)&v15->vfptr;
-      v4 = v5;
+      args->i_type_p = v15;
+      return (SSMethodCall *)v5;
     }
     return (SSMethodCall *)v4;
   }
-  v16 = v2->i_type_p;
+  v16 = args->i_type_p;
   if ( v6 )
   {
-    if ( v16->vfptr->is_metaclass(v2->i_type_p) )
-      v17 = (SSClassUnion *)v6->vfptr->get_metaclass((SSClassDescBase *)&v6->vfptr);
+    if ( v16->vfptr->is_metaclass(args->i_type_p) )
+      v17 = (SSClassUnion *)v6->vfptr->get_metaclass(v6);
     else
       v17 = (SSClassUnion *)v6;
   }
   else
   {
-    v17 = (SSClassUnion *)v2->i_type_p;
+    v17 = (SSClassUnion *)args->i_type_p;
   }
-  if ( !((v25->i_flags.i_flagset >> 1) & 1)
+  if ( (this->i_flags.i_flagset & 2) == 0
     || v27 != ASymbol_String.i_uid
-    || (v17->vfptr->get_class_type((SSClassDescBase *)&v17->vfptr) != 4 ? (v18 = v17->vfptr->is_class_type(
-                                                                                   (SSClassDescBase *)&v17->vfptr,
-                                                                                   (SSClassDescBase *)&SSBrain::c_symbol_class_p->vfptr)) : (v18 = SSClassUnion::is_class_maybe(v17, (SSClassDescBase *)&SSBrain::c_symbol_class_p->vfptr)),
-        !v18) )
+    || (v17->vfptr->get_class_type(v17) != SSClassType_class_union
+      ? (is_class_maybe = v17->vfptr->is_class_type(v17, SSBrain::c_symbol_class_p))
+      : (is_class_maybe = SSClassUnion::is_class_maybe(v17, SSBrain::c_symbol_class_p)),
+        !is_class_maybe) )
   {
-    v19 = (__int64)v17->vfptr->get_method_inherited((SSClassDescBase *)&v17->vfptr, (ASymbol *)&v27);
+    v19 = (__int64)v17->vfptr->get_method_inherited(v17, (ASymbol *)&v27);
     if ( v19 )
     {
-      params_p = *(_QWORD *)(v19 + 24);
-      v15 = (SSClass *)(*(__int64 (__fastcall **)(_QWORD, SSClassDescBase *))(**(_QWORD **)(params_p + 40) + 32i64))(
-                         *(_QWORD *)(params_p + 40),
+      params_p = *(SSParameters **)(v19 + 24);
+      v15 = (SSClass *)params_p->i_result_type_p.i_obj_p->vfptr->as_finalized_generic(
+                         params_p->i_result_type_p.i_obj_p,
                          v16);
       goto LABEL_32;
     }
   }
-  v2->i_result = 115;
+  args->i_result = Result_err_context_non_method;
 LABEL_30:
-  v2->i_end_pos = (unsigned int)v28;
+  args->i_end_pos = (unsigned int)v28;
   return (SSMethodCall *)v4;
 }
 
@@ -5261,11 +5040,10 @@ LABEL_30:
 // RVA: 0x12E850
 SSMethodCall *__fastcall SSParser::parse_operator(SSParser *this, SSParser::Args *args, __int64 a3, __int64 a4)
 {
-  SSParser::Args *v4; // rsi
   _DWORD *v5; // r14
   __int64 v6; // rdi
-  unsigned int v7; // er15
-  char *v8; // rbx
+  unsigned int i_length; // r15d
+  char *i_cstr_p; // rbx
   char v9; // dl
   unsigned __int8 v10; // r10
   unsigned __int8 v11; // r11
@@ -5274,197 +5052,194 @@ SSMethodCall *__fastcall SSParser::parse_operator(SSParser *this, SSParser::Args
   __int64 v14; // rax
   __int64 v15; // rax
   __int64 v16; // rbx
-  SSClassDescBase *v17; // r12
+  SSClassDescBase *i_type_p; // r12
   SSClass *v18; // r13
   SSParser *v19; // rax
   __int64 v20; // rax
   SSLiteralList *v21; // r15
   SSParser::eResult v22; // eax
   __int64 v23; // rcx
-  SSClassDescBaseVtbl *v24; // rbx
+  SSClassDescBaseVtbl *vfptr; // rbx
   __int64 v25; // rax
   _DWORD *v26; // rax
-  SSParser *v28; // [rsp+80h] [rbp+48h]
   char v29; // [rsp+88h] [rbp+50h]
-  unsigned int end_pos_p; // [rsp+90h] [rbp+58h]
-  unsigned int v31; // [rsp+98h] [rbp+60h]
+  unsigned int end_pos_p; // [rsp+90h] [rbp+58h] BYREF
+  unsigned int i_uid; // [rsp+98h] [rbp+60h] BYREF
 
-  v28 = this;
-  v4 = args;
-  v31 = -1;
+  i_uid = -1;
   v5 = 0i64;
   end_pos_p = args->i_start_pos;
   v6 = end_pos_p;
   v29 = 1;
-  args->i_result = 0;
-  v7 = this->i_str_ref_p->i_length;
-  v8 = this->i_str_ref_p->i_cstr_p;
+  args->i_result = Result_ok;
+  i_length = this->i_str_ref_p->i_length;
+  i_cstr_p = this->i_str_ref_p->i_cstr_p;
   v9 = 0;
   v10 = 0;
   LOBYTE(a4) = 0;
   v11 = 0;
   v12 = (unsigned int)(v6 + 1);
-  if ( (unsigned int)v12 < v7 )
+  if ( (unsigned int)v12 < i_length )
   {
-    v9 = v8[v12];
+    v9 = i_cstr_p[v12];
     v13 = (unsigned int)(v6 + 2);
-    if ( (unsigned int)v13 < v7 )
+    if ( (unsigned int)v13 < i_length )
     {
-      v10 = v8[v13];
+      v10 = i_cstr_p[v13];
       v14 = (unsigned int)(v6 + 3);
-      if ( (unsigned int)v14 < v7 )
+      if ( (unsigned int)v14 < i_length )
       {
-        a4 = (unsigned __int8)v8[v14];
+        a4 = (unsigned __int8)i_cstr_p[v14];
         v15 = (unsigned int)(v6 + 4);
-        if ( (unsigned int)v15 < v7 )
-          v11 = v8[v15];
+        if ( (unsigned int)v15 < i_length )
+          v11 = i_cstr_p[v15];
       }
     }
   }
-  switch ( v8[v6] )
+  switch ( i_cstr_p[v6] )
   {
-    case 33:
+    case !:
       if ( v9 != 61 )
         goto LABEL_77;
       LODWORD(v6) = v6 + 1;
       end_pos_p = v12;
-      v4->i_result = 77;
+      args->i_result = Result_err_unexpected_cpp;
       goto LABEL_78;
-    case 38:
-    case 94:
-    case 124:
+    case &:
+    case ^:
+    case |:
       goto $LN22_2;
-    case 42:
+    case *:
       if ( v9 == 61 )
       {
         LODWORD(v6) = v6 + 2;
         end_pos_p = v6;
-        v31 = ASymbol_multiply_assign.i_uid;
+        i_uid = ASymbol_multiply_assign.i_uid;
       }
       else
       {
         LODWORD(v6) = v6 + 1;
         end_pos_p = v12;
-        v31 = ASymbol_multiply.i_uid;
+        i_uid = ASymbol_multiply.i_uid;
       }
       goto LABEL_78;
-    case 43:
+    case +:
       if ( v9 == 43 )
       {
         LODWORD(v6) = v6 + 2;
         end_pos_p = v6;
-        v31 = ASymbol_increment.i_uid;
+        i_uid = ASymbol_increment.i_uid;
         v29 = 0;
       }
       else if ( v9 == 61 )
       {
         LODWORD(v6) = v6 + 2;
         end_pos_p = v6;
-        v31 = ASymbol_add_assign.i_uid;
+        i_uid = ASymbol_add_assign.i_uid;
       }
       else
       {
         LODWORD(v6) = v6 + 1;
         end_pos_p = v12;
-        v31 = ASymbol_add.i_uid;
+        i_uid = ASymbol_add.i_uid;
       }
       goto LABEL_78;
-    case 45:
+    case -:
       if ( v9 == 45 )
       {
         LODWORD(v6) = v6 + 2;
         end_pos_p = v6;
-        v31 = ASymbol_decrement.i_uid;
+        i_uid = ASymbol_decrement.i_uid;
         v29 = 0;
       }
       else if ( v9 == 61 )
       {
         LODWORD(v6) = v6 + 2;
         end_pos_p = v6;
-        v31 = ASymbol_subtract_assign.i_uid;
+        i_uid = ASymbol_subtract_assign.i_uid;
       }
       else
       {
         LODWORD(v6) = v6 + 1;
         end_pos_p = v12;
-        v31 = ASymbol_subtract.i_uid;
+        i_uid = ASymbol_subtract.i_uid;
       }
       goto LABEL_78;
-    case 47:
+    case /:
       if ( v9 == 61 )
       {
         LODWORD(v6) = v6 + 2;
         end_pos_p = v6;
-        v31 = ASymbol_divide_assign.i_uid;
+        i_uid = ASymbol_divide_assign.i_uid;
       }
       else
       {
         LODWORD(v6) = v6 + 1;
         end_pos_p = v12;
-        v31 = ASymbol_divide.i_uid;
+        i_uid = ASymbol_divide.i_uid;
       }
       goto LABEL_78;
-    case 58:
+    case ::
       if ( v9 != 61 )
         goto LABEL_77;
       LODWORD(v6) = v6 + 2;
       end_pos_p = v6;
-      v31 = ASymbol_assign.i_uid;
+      i_uid = ASymbol_assign.i_uid;
       goto LABEL_78;
-    case 60:
+    case <:
       if ( v9 == 60 )
       {
         LODWORD(v6) = v6 + 1;
-        v4->i_result = 77;
+        args->i_result = Result_err_unexpected_cpp;
       }
       else if ( v9 == 61 )
       {
         LODWORD(v6) = v6 + 2;
         end_pos_p = v6;
-        v31 = ASymbol_less_or_equal.i_uid;
+        i_uid = ASymbol_less_or_equal.i_uid;
         goto LABEL_78;
       }
       LODWORD(v6) = v6 + 1;
       end_pos_p = v6;
-      v31 = ASymbol_less.i_uid;
+      i_uid = ASymbol_less.i_uid;
       goto LABEL_78;
-    case 61:
+    case =:
       LODWORD(v6) = v6 + 1;
       end_pos_p = v12;
       if ( v9 == 61 )
-        v4->i_result = 77;
+        args->i_result = Result_err_unexpected_cpp;
       else
-        v31 = ASymbol_equals.i_uid;
+        i_uid = ASymbol_equals.i_uid;
       goto LABEL_78;
-    case 62:
+    case >:
       if ( v9 == 61 )
       {
         LODWORD(v6) = v6 + 2;
         end_pos_p = v6;
-        v31 = ASymbol_greater_or_equal.i_uid;
+        i_uid = ASymbol_greater_or_equal.i_uid;
       }
       else
       {
         LODWORD(v6) = v6 + 1;
         end_pos_p = v12;
-        v31 = ASymbol_greater.i_uid;
+        i_uid = ASymbol_greater.i_uid;
       }
       goto LABEL_78;
-    case 97:
+    case a:
       if ( v9 != 110 || v10 != 100 || (_BYTE)a4 == 40 || !byte_14236F1C0[(unsigned __int8)a4] )
         goto LABEL_77;
       LODWORD(v6) = v6 + 3;
       end_pos_p = v6;
-      v31 = ASymbol_and.i_uid;
+      i_uid = ASymbol_and.i_uid;
       goto LABEL_78;
-    case 110:
+    case n:
       if ( v9 == 97 )
       {
         if ( v10 == 110 && (_BYTE)a4 == 100 && v11 != 40 && byte_14236F1C0[v11] )
         {
           LODWORD(v6) = v6 + 4;
           end_pos_p = v6;
-          v31 = ASymbol_nand.i_uid;
+          i_uid = ASymbol_nand.i_uid;
           goto LABEL_78;
         }
       }
@@ -5474,7 +5249,7 @@ SSMethodCall *__fastcall SSParser::parse_operator(SSParser *this, SSParser::Args
         {
           LODWORD(v6) = v6 + 3;
           end_pos_p = v6;
-          v31 = ASymbol_nor.i_uid;
+          i_uid = ASymbol_nor.i_uid;
           goto LABEL_78;
         }
       }
@@ -5482,27 +5257,27 @@ SSMethodCall *__fastcall SSParser::parse_operator(SSParser *this, SSParser::Args
       {
         LODWORD(v6) = v6 + 4;
         end_pos_p = v6;
-        v31 = ASymbol_nxor.i_uid;
+        i_uid = ASymbol_nxor.i_uid;
         goto LABEL_78;
       }
 LABEL_77:
-      v4->i_result = 55;
+      args->i_result = Result_err_expected_operator;
       goto LABEL_78;
-    case 111:
+    case o:
       if ( v9 != 114 || v10 == 40 || !byte_14236F1C0[v10] )
         goto LABEL_77;
       LODWORD(v6) = v6 + 2;
       end_pos_p = v6;
-      v31 = ASymbol_or.i_uid;
+      i_uid = ASymbol_or.i_uid;
       goto LABEL_78;
-    case 120:
+    case x:
       if ( v9 != 111 || v10 != 114 || (_BYTE)a4 == 40 || !byte_14236F1C0[(unsigned __int8)a4] )
         goto LABEL_77;
       LODWORD(v6) = v6 + 3;
       end_pos_p = v6;
-      v31 = ASymbol_xor.i_uid;
+      i_uid = ASymbol_xor.i_uid;
       goto LABEL_78;
-    case 126:
+    case ~:
       if ( v9 == 38 )
       {
 $LN22_2:
@@ -5515,31 +5290,31 @@ $LN22_2:
         {
           LODWORD(v6) = v6 + 2;
           end_pos_p = v6;
-          v31 = ASymbol_not_equal.i_uid;
+          i_uid = ASymbol_not_equal.i_uid;
           goto LABEL_78;
         }
         LODWORD(v6) = v6 + 1;
         end_pos_p = v12;
         if ( v9 != 94 && v9 != 124 )
         {
-          v31 = ASymbol_not.i_uid;
+          i_uid = ASymbol_not.i_uid;
           v29 = 0;
           goto LABEL_78;
         }
       }
-      v4->i_result = 78;
+      args->i_result = Result_err_unexpected_deprecated;
 LABEL_78:
-      if ( v4->i_result )
+      if ( args->i_result )
         goto LABEL_101;
       v16 = 0i64;
-      v17 = v4->i_type_p;
+      i_type_p = args->i_type_p;
       v18 = SSBrain::c_object_class_p;
       v19 = this;
-      if ( this->i_flags.i_flagset & 1 )
+      if ( (this->i_flags.i_flagset & 1) != 0 )
       {
-        v20 = ((__int64 (__fastcall *)(SSClassDescBase *, unsigned int *, __int64, __int64, signed __int64))v17->vfptr->get_method_inherited)(
-                v4->i_type_p,
-                &v31,
+        v20 = ((__int64 (__fastcall *)(SSClassDescBase *, unsigned int *, __int64, __int64, __int64))i_type_p->vfptr->get_method_inherited)(
+                args->i_type_p,
+                &i_uid,
                 v12,
                 a4,
                 -2i64);
@@ -5548,56 +5323,56 @@ LABEL_78:
           v16 = *(_QWORD *)(v20 + 24);
           v18 = (SSClass *)(*(__int64 (__fastcall **)(_QWORD, SSClassDescBase *))(**(_QWORD **)(v16 + 40) + 32i64))(
                              *(_QWORD *)(v16 + 40),
-                             v17);
+                             i_type_p);
         }
         else
         {
-          v4->i_result = 115;
+          args->i_result = Result_err_context_non_method;
         }
-        v19 = v28;
+        v19 = this;
       }
-      if ( v4->i_result )
+      if ( args->i_result )
         goto LABEL_101;
       v21 = 0i64;
       if ( !v29 )
         goto LABEL_95;
       v22 = SSParser::parse_ws_any(v19, v6, &end_pos_p);
-      v4->i_result = v22;
+      args->i_result = v22;
       if ( v22 )
       {
         LODWORD(v6) = end_pos_p;
       }
       else
       {
-        v4->i_start_pos = end_pos_p;
-        v21 = SSParser::parse_expression(v28, v4, 1i64);
-        LODWORD(v6) = v4->i_end_pos;
-        if ( v28->i_flags.i_flagset & 1 )
+        args->i_start_pos = end_pos_p;
+        v21 = SSParser::parse_expression(this, args, 1ui64);
+        LODWORD(v6) = args->i_end_pos;
+        if ( (this->i_flags.i_flagset & 1) != 0 )
         {
-          if ( v4->i_result )
+          if ( args->i_result )
             goto LABEL_101;
           if ( *(_DWORD *)(v16 + 8) )
             v23 = **(_QWORD **)(v16 + 16);
           else
             v23 = 0i64;
-          v24 = v4->i_type_p->vfptr;
+          vfptr = args->i_type_p->vfptr;
           v25 = (*(__int64 (__fastcall **)(_QWORD, SSClassDescBase *))(**(_QWORD **)(v23 + 16) + 32i64))(
                   *(_QWORD *)(v23 + 16),
-                  v17);
-          if ( !v24->is_class_type(v4->i_type_p, (SSClassDescBase *)v25) )
-            v4->i_result = 136;
+                  i_type_p);
+          if ( !vfptr->is_class_type(args->i_type_p, (SSClassDescBase *)v25) )
+            args->i_result = Result_err_typecheck_operand;
         }
       }
 LABEL_95:
-      if ( v4->i_result == Result_ok )
+      if ( args->i_result == Result_ok )
       {
-        v4->i_type_p = (SSClassDescBase *)&v18->vfptr;
-        if ( v4->i_flags & 1 )
+        args->i_type_p = v18;
+        if ( (args->i_flags & 1) != 0 )
         {
           v26 = AMemory::c_malloc_func(0x38ui64, "SSMethodCall");
           if ( v26 )
           {
-            v26[2] = v31;
+            v26[2] = i_uid;
             *((_QWORD *)v26 + 2) = 0i64;
             *(_QWORD *)v26 = &SSInvokeBase::`vftable;
             v26[6] = 0;
@@ -5610,11 +5385,11 @@ LABEL_95:
           if ( v21 )
             APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase>>::append(
               (APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *)(v5 + 6),
-              (SSExpressionBase *)&v21->vfptr);
+              v21);
         }
       }
 LABEL_101:
-      v4->i_end_pos = v6;
+      args->i_end_pos = v6;
       return (SSMethodCall *)v5;
     default:
       goto LABEL_77;
@@ -5625,59 +5400,53 @@ LABEL_101:
 // RVA: 0x12BC40
 SSCoroutineCall *__fastcall SSParser::parse_invoke_coroutine(SSParser *this, SSParser::Args *args)
 {
-  SSParser::Args *v2; // rsi
-  SSParser *v3; // rbp
-  void (__fastcall ***v4)(_QWORD, signed __int64); // rdi
-  void (__fastcall ***v5)(_QWORD, signed __int64); // rbx
+  __int64 v4; // rdi
+  void (__fastcall ***v5)(_QWORD, __int64); // rbx
   SSClass *v6; // r15
-  unsigned int v7; // er12
-  SSClassDescBase *v8; // r13
-  SSParser::eResult v9; // er14
+  unsigned int i_start_pos; // r12d
+  SSClassDescBase *i_type_p; // r13
+  SSParser::eResult v9; // r14d
   unsigned int v10; // ebp
   ASymbol *v12; // r9
   SSParser::eResult v13; // eax
   SSParameters *params_p; // rbp
-  __int64 v15; // rcx
-  char v16; // al
+  SSClassDescBase *v15; // rcx
+  bool v16; // al
   __int64 v17; // rax
-  void (__fastcall ***v18)(_QWORD, signed __int64); // rax
+  void (__fastcall ***v18)(_QWORD, __int64); // rax
   unsigned int v19; // edx
   APCompactArray<SSIdentifier,SSIdentifier,ACompareAddress<SSIdentifier> > *ret_args_p; // rcx
   APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *v21; // r9
   SSParser::eResult v22; // eax
-  SSParser *v23; // [rsp+A0h] [rbp+8h]
-  void *v24; // [rsp+A8h] [rbp+10h]
-  SSClass *v25; // [rsp+B0h] [rbp+18h]
-  int v26; // [rsp+B8h] [rbp+20h]
+  void *v24; // [rsp+A8h] [rbp+10h] BYREF
+  SSClass *v25; // [rsp+B0h] [rbp+18h] BYREF
+  int v26; // [rsp+B8h] [rbp+20h] BYREF
 
-  v23 = this;
-  v2 = args;
-  v3 = this;
   v4 = 0i64;
   v5 = 0i64;
   v6 = 0i64;
-  v7 = args->i_start_pos;
-  v8 = args->i_type_p;
+  i_start_pos = args->i_start_pos;
+  i_type_p = args->i_type_p;
   v25 = 0i64;
-  LODWORD(v24) = v7;
-  v9 = SSParser::parse_class(this, v7, (unsigned int *)&v24, &v25);
+  LODWORD(v24) = i_start_pos;
+  v9 = SSParser::parse_class(this, i_start_pos, (unsigned int *)&v24, &v25);
   if ( v9 )
   {
     v10 = (unsigned int)v24;
-    if ( (_DWORD)v24 != v7 )
+    if ( (_DWORD)v24 != i_start_pos )
       goto LABEL_11;
     goto LABEL_9;
   }
-  if ( v3->i_str_ref_p->i_length <= (unsigned int)v24 || v3->i_str_ref_p->i_cstr_p[(unsigned int)v24] != 64 )
+  if ( this->i_str_ref_p->i_length <= (unsigned int)v24 || this->i_str_ref_p->i_cstr_p[(unsigned int)v24] != 64 )
   {
-    v10 = v7;
+    v10 = i_start_pos;
 LABEL_10:
-    v9 = 0;
+    v9 = Result_ok;
     goto LABEL_11;
   }
   v10 = (_DWORD)v24 + 1;
-  v9 = 138;
-  if ( !v8 || SSClass::is_scope_qualifier(v25, v8) )
+  v9 = Result_err_typecheck_scope;
+  if ( !i_type_p || SSClass::is_scope_qualifier(v25, i_type_p) )
   {
 LABEL_9:
     v6 = v25;
@@ -5685,39 +5454,39 @@ LABEL_9:
   }
 LABEL_11:
   LODWORD(v25) = v10;
-  v2->i_result = v9;
+  args->i_result = v9;
   if ( v9 )
   {
-    v2->i_end_pos = v10;
+    args->i_end_pos = v10;
     return 0i64;
   }
   v26 = -1;
   v12 = (ASymbol *)&v26;
-  if ( !(v2->i_flags & 1) )
+  if ( (args->i_flags & 1) == 0 )
     v12 = 0i64;
-  v13 = SSParser::parse_name_coroutine(v23, v10, (unsigned int *)&v25, v12);
-  v2->i_result = v13;
+  v13 = SSParser::parse_name_coroutine(this, v10, (unsigned int *)&v25, v12);
+  args->i_result = v13;
   if ( v13 )
     goto LABEL_22;
   params_p = 0i64;
-  if ( !(v23->i_flags.i_flagset & 1) )
+  if ( (this->i_flags.i_flagset & 1) == 0 )
   {
 LABEL_24:
-    if ( v2->i_flags & 1 )
+    if ( (args->i_flags & 1) != 0 )
     {
-      v18 = (void (__fastcall ***)(_QWORD, signed __int64))AMemory::c_malloc_func(0x38ui64, "SSCoroutineCall");
+      v18 = (void (__fastcall ***)(_QWORD, __int64))AMemory::c_malloc_func(0x38ui64, "SSCoroutineCall");
       v5 = v18;
       v24 = v18;
       if ( v18 )
       {
         *((_DWORD *)v18 + 2) = v26;
-        v18[2] = (void (__fastcall **)(_QWORD, signed __int64))v6;
-        *v18 = (void (__fastcall **)(_QWORD, signed __int64))&SSInvokeBase::`vftable;
+        v18[2] = (void (__fastcall **)(_QWORD, __int64))v6;
+        *v18 = (void (__fastcall **)(_QWORD, __int64))&SSInvokeBase::`vftable;
         *((_DWORD *)v18 + 6) = 0;
         v18[4] = 0i64;
         *((_DWORD *)v18 + 10) = 0;
         v18[6] = 0i64;
-        *v18 = (void (__fastcall **)(_QWORD, signed __int64))&SSCoroutineCall::`vftable;
+        *v18 = (void (__fastcall **)(_QWORD, __int64))&SSCoroutineCall::`vftable;
       }
       else
       {
@@ -5725,7 +5494,7 @@ LABEL_24:
       }
     }
     v19 = (unsigned int)v25;
-    v2->i_start_pos = (unsigned int)v25;
+    args->i_start_pos = (unsigned int)v25;
     if ( v5 )
     {
       ret_args_p = (APCompactArray<SSIdentifier,SSIdentifier,ACompareAddress<SSIdentifier> > *)(v5 + 5);
@@ -5737,14 +5506,14 @@ LABEL_24:
       v21 = 0i64;
     }
     v22 = (unsigned int)SSParser::parse_invoke_args(
-                          v23,
+                          this,
                           v19,
-                          &v2->i_end_pos,
+                          &args->i_end_pos,
                           v21,
                           ret_args_p,
-                          (SSClassUnaryBase *)v2->i_type_p,
+                          (SSClassUnaryBase *)args->i_type_p,
                           params_p);
-    v2->i_result = v22;
+    args->i_result = v22;
     if ( v22 )
     {
       if ( v5 )
@@ -5752,28 +5521,28 @@ LABEL_24:
     }
     else
     {
-      v2->i_type_p = (SSClassDescBase *)&SSBrain::c_invoked_coroutine_class_p->vfptr;
-      v4 = v5;
+      args->i_type_p = SSBrain::c_invoked_coroutine_class_p;
+      return (SSCoroutineCall *)v5;
     }
     return (SSCoroutineCall *)v4;
   }
-  v15 = (__int64)v2->i_type_p;
+  v15 = args->i_type_p;
   if ( v6 )
   {
-    v16 = (*(__int64 (**)(void))(*(_QWORD *)v15 + 88i64))();
-    v15 = (__int64)v6;
+    v16 = v15->vfptr->is_metaclass(v15);
+    v15 = v6;
     if ( v16 )
-      v15 = (__int64)v6->vfptr->get_metaclass((SSClassDescBase *)&v6->vfptr);
+      v15 = v6->vfptr->get_metaclass(v6);
   }
-  v17 = (*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v15 + 184i64))(v15, &v26);
+  v17 = (__int64)v15->vfptr->get_coroutine_inherited(v15, (ASymbol *)&v26);
   if ( v17 )
   {
     params_p = *(SSParameters **)(v17 + 24);
     goto LABEL_24;
   }
-  v2->i_result = 116;
+  args->i_result = Result_err_context_non_coroutine;
 LABEL_22:
-  v2->i_end_pos = (unsigned int)v25;
+  args->i_end_pos = (unsigned int)v25;
   return (SSCoroutineCall *)v4;
 }
 
@@ -5781,116 +5550,110 @@ LABEL_22:
 // RVA: 0x12CB60
 SSMethodCall *__fastcall SSParser::parse_invoke_selector(SSParser *this, SSParser::Args *args, bool test_op)
 {
-  unsigned int v3; // esi
-  bool v4; // bp
-  SSParser::Args *v5; // rbx
-  SSParser *v6; // rdi
+  unsigned int i_start_pos; // esi
   SSParser::eResult v7; // eax
   __int64 v8; // rdx
-  char *v9; // r8
+  char *i_cstr_p; // r8
   unsigned __int8 v10; // cl
   SSMethodCall *result; // rax
-  unsigned int end_pos_p; // [rsp+48h] [rbp+10h]
+  unsigned int end_pos_p; // [rsp+48h] [rbp+10h] BYREF
   __int64 v13; // [rsp+58h] [rbp+20h]
 
-  v3 = args->i_start_pos;
-  v4 = test_op;
-  v5 = args;
-  v6 = this;
-  end_pos_p = v3;
+  i_start_pos = args->i_start_pos;
+  end_pos_p = i_start_pos;
   v13 = 0i64;
-  v7 = SSParser::parse_class(this, v3, &end_pos_p, 0i64);
+  v7 = SSParser::parse_class(this, i_start_pos, &end_pos_p, 0i64);
   if ( v7 )
   {
     LODWORD(v8) = end_pos_p;
-    if ( end_pos_p == v3 )
-      v7 = 0;
+    if ( end_pos_p == i_start_pos )
+      v7 = Result_ok;
   }
-  else if ( v6->i_str_ref_p->i_length <= end_pos_p || v6->i_str_ref_p->i_cstr_p[end_pos_p] != 64 )
+  else if ( this->i_str_ref_p->i_length > end_pos_p && this->i_str_ref_p->i_cstr_p[end_pos_p] == 64 )
   {
-    v7 = 0;
-    LODWORD(v8) = v3;
+    LODWORD(v8) = end_pos_p + 1;
+    v7 = Result_ok;
   }
   else
   {
-    LODWORD(v8) = end_pos_p + 1;
-    v7 = 0;
+    v7 = Result_ok;
+    LODWORD(v8) = i_start_pos;
   }
-  v5->i_result = v7;
+  args->i_result = v7;
   if ( v7 )
   {
 LABEL_18:
-    v5->i_end_pos = v8;
+    args->i_end_pos = v8;
     return 0i64;
   }
-  v9 = v6->i_str_ref_p->i_cstr_p;
-  v10 = v9[(unsigned int)v8];
-  v5->i_result = 40;
+  i_cstr_p = this->i_str_ref_p->i_cstr_p;
+  v10 = i_cstr_p[(unsigned int)v8];
+  args->i_result = Result_err_expected_invoke_selector;
   if ( v10 == 95 )
   {
     v8 = (unsigned int)(v8 + 1);
-    if ( AString::c_is_lowercase[(unsigned __int8)v9[v8]] )
-      return (SSMethodCall *)SSParser::parse_invoke_coroutine(v6, v5);
+    if ( AString::c_is_lowercase[(unsigned __int8)i_cstr_p[v8]] )
+      return (SSMethodCall *)SSParser::parse_invoke_coroutine(this, args);
     goto LABEL_18;
   }
   if ( v10 == 33 || AString::c_char_match_table[0][v10] )
-    return SSParser::parse_invoke_method(v6, v5);
-  if ( !v4 )
+    return SSParser::parse_invoke_method(this, args);
+  if ( !test_op )
     goto LABEL_18;
-  result = SSParser::parse_operator(v6, v5);
-  if ( v5->i_end_pos == v3 )
-    v5->i_result = 41;
+  result = SSParser::parse_operator(this, args);
+  if ( args->i_end_pos == i_start_pos )
+    args->i_result = Result_err_expected_invoke_select_op;
   return result;
 }
 
 // File Line: 7098
 // RVA: 0x12CC70
-__int64 __fastcall SSParser::parse_literal_char_esc_seq(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, char *ch_p)
+__int64 __fastcall SSParser::parse_literal_char_esc_seq(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        char *ch_p)
 {
-  char *v4; // rsi
-  unsigned int *v5; // rdi
-  SSParser::eResult v6; // er10
-  char *v7; // r11
-  unsigned int v8; // edx
+  SSParser::eResult v6; // r10d
+  char *i_cstr_p; // r11
+  int v8; // edx
   int v9; // ebx
   __int64 result; // rax
-  int int_p; // [rsp+50h] [rbp+8h]
-  unsigned int end_pos_pa; // [rsp+58h] [rbp+10h]
+  int int_p; // [rsp+50h] [rbp+8h] BYREF
+  unsigned int end_pos_pa; // [rsp+58h] [rbp+10h] BYREF
 
-  v4 = ch_p;
-  v5 = end_pos_p;
-  v6 = 82;
+  v6 = Result_err_unexpected_eof;
   if ( this->i_str_ref_p->i_length - start_pos >= 2 )
   {
-    v7 = this->i_str_ref_p->i_cstr_p;
-    v6 = 13;
-    if ( v7[start_pos] == 92 )
+    i_cstr_p = this->i_str_ref_p->i_cstr_p;
+    v6 = Result_err_expected_char;
+    if ( i_cstr_p[start_pos] == 92 )
     {
       v8 = start_pos + 1;
-      v6 = 0;
-      v9 = v7[v8];
+      v6 = Result_ok;
+      v9 = i_cstr_p[v8];
       start_pos = v8 + 1;
       switch ( v9 )
       {
-        case 97:
+        case a:
           LOBYTE(v9) = 7;
           break;
-        case 98:
+        case b:
           LOBYTE(v9) = 8;
           break;
-        case 102:
+        case f:
           LOBYTE(v9) = 12;
           break;
-        case 110:
+        case n:
           LOBYTE(v9) = 10;
           break;
-        case 114:
+        case r:
           LOBYTE(v9) = 13;
           break;
-        case 116:
+        case t:
           LOBYTE(v9) = 9;
           break;
-        case 118:
+        case v:
           LOBYTE(v9) = 11;
           break;
         default:
@@ -5900,38 +5663,42 @@ __int64 __fastcall SSParser::parse_literal_char_esc_seq(SSParser *this, unsigned
             v6 = SSParser::parse_literal_integer(this, start_pos - 1, &end_pos_pa, &int_p, 0i64);
             if ( v6 == Result_ok )
             {
-              v6 = 14;
+              v6 = Result_err_expected_char_number;
               if ( (unsigned int)int_p <= 0xFF )
               {
                 LOBYTE(v9) = int_p;
-                v6 = 0;
+                v6 = Result_ok;
               }
             }
             start_pos = end_pos_pa;
           }
           break;
       }
-      if ( v4 && v6 == Result_ok )
-        *v4 = v9;
+      if ( ch_p && v6 == Result_ok )
+        *ch_p = v9;
     }
   }
   result = (unsigned int)v6;
-  if ( v5 )
-    *v5 = start_pos;
+  if ( end_pos_p )
+    *end_pos_p = start_pos;
   return result;
 }
 
 // File Line: 7211
 // RVA: 0x12CDE0
-__int64 __fastcall SSParser::parse_literal_integer(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, int *int_p, unsigned int *radix_p)
+__int64 __fastcall SSParser::parse_literal_integer(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        int *int_p,
+        unsigned int *radix_p)
 {
-  AStringRef *v5; // rax
+  AStringRef *i_str_ref_p; // rax
   unsigned int *v6; // r12
-  int *v7; // r13
   __int64 v8; // rsi
-  unsigned int v9; // er11
-  char *v10; // r14
-  signed int v11; // er10
+  unsigned int v9; // r11d
+  char *i_cstr_p; // r14
+  int v11; // r10d
   char *v12; // rbx
   char *v13; // r9
   char v14; // dl
@@ -5939,38 +5706,35 @@ __int64 __fastcall SSParser::parse_literal_integer(SSParser *this, unsigned int 
   int v16; // ecx
   __int64 i; // rax
   bool v18; // r15
-  unsigned __int8 v19; // dl
-  unsigned int v20; // er8
+  char v19; // dl
+  unsigned int v20; // r8d
   bool v21; // bl
   int v22; // edi
   int v23; // ecx
   int v24; // eax
   __int64 result; // rax
   int v26; // [rsp+48h] [rbp+10h]
-  unsigned int *v27; // [rsp+50h] [rbp+18h]
 
-  v27 = end_pos_p;
-  v5 = this->i_str_ref_p;
+  i_str_ref_p = this->i_str_ref_p;
   v6 = end_pos_p;
-  v7 = int_p;
   LODWORD(v8) = start_pos;
   v9 = 82;
   if ( this->i_str_ref_p->i_length > start_pos )
   {
-    v10 = v5->i_cstr_p;
+    i_cstr_p = i_str_ref_p->i_cstr_p;
     v11 = 10;
-    v12 = &v5->i_cstr_p[start_pos];
-    v13 = &v5->i_cstr_p[start_pos];
-    if ( *v12 != 45 )
-    {
-      v14 = 0;
-      v9 = 33;
-    }
-    else
+    v12 = &i_str_ref_p->i_cstr_p[start_pos];
+    v13 = v12;
+    if ( *v12 == 45 )
     {
       v13 = v12 + 1;
       v14 = 1;
       v9 = 29;
+    }
+    else
+    {
+      v14 = 0;
+      v9 = 33;
     }
     v15 = (unsigned __int8)*v13;
     if ( AString::c_is_digit[v15] )
@@ -5996,11 +5760,11 @@ __int64 __fastcall SSParser::parse_literal_integer(SSParser *this, unsigned int 
     v8 = (unsigned int)((_DWORD)v13 - (_DWORD)v12 + v8);
     if ( !v9 )
     {
-      if ( v10[v8] != 114 )
+      if ( i_cstr_p[v8] != 114 )
       {
 LABEL_36:
-        if ( v7 )
-          *v7 = v16;
+        if ( int_p )
+          *int_p = v16;
         if ( radix_p )
           *radix_p = v11;
         goto LABEL_40;
@@ -6017,41 +5781,41 @@ LABEL_36:
         {
           v8 = (unsigned int)(v8 + 1);
           v16 = 0;
-          v19 = v10[v8];
+          v19 = i_cstr_p[v8];
           v9 = 9;
           v20 = v8;
           if ( v11 > 10 )
           {
             while ( 1 )
             {
-              v21 = AString::c_is_digit[v19];
+              v21 = AString::c_is_digit[(unsigned __int8)v19];
               if ( !v21 )
               {
-                v22 = AString::c_char2lower[v19];
+                v22 = AString::c_char2lower[(unsigned __int8)v19];
                 if ( v22 < 97 || v22 > v11 + 86 )
                   break;
               }
               v23 = v11 * v16;
               if ( v21 )
-                v24 = (char)v19 - 48;
+                v24 = v19 - 48;
               else
-                v24 = AString::c_char2lower[v19] - 87;
+                v24 = AString::c_char2lower[(unsigned __int8)v19] - 87;
               v16 = v24 + v23;
-              v19 = v10[++v20];
+              v19 = i_cstr_p[++v20];
             }
-            v6 = v27;
+            v6 = end_pos_p;
           }
           else
           {
-            while ( (char)v19 >= 48 && (char)v19 <= (char)(v11 + 47) )
+            while ( v19 >= 48 && v19 <= (char)(v11 + 47) )
             {
-              v16 = (char)v19 + v11 * v16 - 48;
-              v19 = v10[++v20];
+              v16 = v19 + v11 * v16 - 48;
+              v19 = i_cstr_p[++v20];
             }
           }
           if ( v20 > (unsigned int)v8 )
           {
-            if ( !byte_14236F1C0[v19] )
+            if ( !byte_14236F1C0[(unsigned __int8)v19] )
             {
               LODWORD(v8) = v20 + 1;
               goto LABEL_40;
@@ -6075,23 +5839,26 @@ LABEL_40:
 
 // File Line: 7336
 // RVA: 0x12D010
-SSLiteralList *__fastcall SSParser::parse_literal_list(SSParser *this, SSParser::Args *args, SSTypedClass *list_class_p, bool item_type_b, SSMethodCall *ctor_p)
+SSLiteralList *__fastcall SSParser::parse_literal_list(
+        SSParser *this,
+        SSParser::Args *args,
+        SSTypedClass *list_class_p,
+        bool item_type_b,
+        SSMethodCall *ctor_p)
 {
   bool v5; // r12
   SSTypedClass *v6; // r13
-  SSParser::Args *v7; // rdi
-  SSParser *v8; // r14
   SSLiteralList *v9; // r15
-  SSTypedClass *v10; // rbx
-  char *v11; // rcx
+  SSTypedClass *i_start_pos; // rbx
+  char *i_cstr_p; // rcx
   SSParser::eResult v12; // eax
   SSClass *v13; // rsi
   SSClass *v14; // rax
-  SSClass *v15; // rcx
+  SSClass *i_superclass_p; // rcx
   SSMethodCall *v16; // rax
   SSMethodCall *v17; // rsi
   SSParser::eResult v18; // eax
-  SSClassUnion *v19; // r13
+  SSClassUnion *p_class_union; // r13
   bool v20; // cf
   SSLiteralList *v21; // rax
   SSParser::eResult v22; // eax
@@ -6101,73 +5868,76 @@ SSLiteralList *__fastcall SSParser::parse_literal_list(SSParser *this, SSParser:
   SSTypedClass *v26; // rcx
   SSLiteralList *result; // rax
   char *v28; // [rsp+30h] [rbp-41h]
-  SSClassUnion class_union; // [rsp+48h] [rbp-29h]
-  unsigned int end_pos_p; // [rsp+D0h] [rbp+5Fh]
-  SSClassUnaryBase *class_pp; // [rsp+D8h] [rbp+67h]
+  SSClassUnion class_union; // [rsp+48h] [rbp-29h] BYREF
+  unsigned int end_pos_p; // [rsp+D0h] [rbp+5Fh] BYREF
+  SSClassUnaryBase *class_pp; // [rsp+D8h] [rbp+67h] BYREF
   SSTypedClass *v32; // [rsp+E0h] [rbp+6Fh]
-  bool item_type_b_p; // [rsp+E8h] [rbp+77h]
+  bool item_type_b_p; // [rsp+E8h] [rbp+77h] BYREF
 
   item_type_b_p = item_type_b;
   v32 = list_class_p;
   v5 = item_type_b;
   v6 = list_class_p;
-  v7 = args;
-  v8 = this;
   v9 = 0i64;
-  v10 = (SSTypedClass *)args->i_start_pos;
+  i_start_pos = (SSTypedClass *)args->i_start_pos;
   end_pos_p = args->i_start_pos;
-  v11 = this->i_str_ref_p->i_cstr_p;
-  v28 = v11;
-  args->i_result = 0;
-  if ( list_class_p || v11[(_QWORD)v10] == 123 )
+  i_cstr_p = this->i_str_ref_p->i_cstr_p;
+  v28 = i_cstr_p;
+  args->i_result = Result_ok;
+  if ( list_class_p || i_cstr_p[(_QWORD)i_start_pos] == 123 )
     goto LABEL_13;
-  v12 = (unsigned int)SSParser::parse_class_instance(v8, (unsigned int)v10, &end_pos_p, &class_pp, &item_type_b_p);
-  v7->i_result = v12;
+  v12 = (unsigned int)SSParser::parse_class_instance(
+                        this,
+                        (unsigned int)i_start_pos,
+                        &end_pos_p,
+                        (SSTypedClass **)&class_pp,
+                        &item_type_b_p);
+  args->i_result = v12;
   if ( v12
-    || (v7->i_result = 134,
+    || (args->i_result = Result_err_typecheck_list,
         v13 = SSBrain::c_list_class_p,
-        v10 = (SSTypedClass *)class_pp,
-        v14 = class_pp->vfptr->get_key_class((SSClassDescBase *)class_pp),
+        i_start_pos = (SSTypedClass *)class_pp,
+        v14 = class_pp->vfptr->get_key_class(class_pp),
         v13 != v14)
-    && ((v15 = v14->i_superclass_p) == 0i64 || !SSClass::is_class(v15, v13)) )
+    && ((i_superclass_p = v14->i_superclass_p) == 0i64 || !SSClass::is_class(i_superclass_p, v13)) )
   {
-    v11 = v28;
-    LODWORD(v10) = end_pos_p;
+    i_cstr_p = v28;
+    LODWORD(i_start_pos) = end_pos_p;
     v5 = item_type_b_p;
 LABEL_13:
     v17 = ctor_p;
     goto LABEL_14;
   }
-  v6 = v10;
-  v32 = v10;
-  v7->i_type_p = (SSClassDescBase *)&v10->vfptr;
-  v7->i_start_pos = end_pos_p;
-  v16 = SSParser::parse_invoke_ctor(v8, v7);
+  v6 = i_start_pos;
+  v32 = i_start_pos;
+  args->i_type_p = i_start_pos;
+  args->i_start_pos = end_pos_p;
+  v16 = SSParser::parse_invoke_ctor(this, args);
   v17 = v16;
-  LODWORD(v10) = v7->i_end_pos;
-  end_pos_p = v7->i_end_pos;
+  LODWORD(i_start_pos) = args->i_end_pos;
+  end_pos_p = (unsigned int)i_start_pos;
   if ( v16 && v16->i_name.i_uid == ASymbolX_ctor.i_uid && !v16->i_arguments.i_count )
   {
-    v16->vfptr->__vecDelDtor((SSInvokeBase *)&v16->vfptr, 1u);
+    v16->vfptr->__vecDelDtor(v16, 1u);
     v17 = 0i64;
   }
   v5 = item_type_b_p;
-  v11 = v28;
+  i_cstr_p = v28;
 LABEL_14:
-  if ( v7->i_result == Result_ok )
+  if ( args->i_result == Result_ok )
   {
-    v7->i_result = 82;
-    LODWORD(class_pp) = v8->i_str_ref_p->i_length;
-    if ( (unsigned int)((_DWORD)class_pp - (_DWORD)v10) >= 2 )
+    args->i_result = Result_err_unexpected_eof;
+    LODWORD(class_pp) = this->i_str_ref_p->i_length;
+    if ( (unsigned int)((_DWORD)class_pp - (_DWORD)i_start_pos) >= 2 )
     {
-      v7->i_result = 43;
-      if ( v11[(unsigned int)v10] == 123 )
+      args->i_result = Result_err_expected_literal_list;
+      if ( i_cstr_p[(unsigned int)i_start_pos] == 123 )
       {
-        v18 = SSParser::parse_ws_any(v8, (_DWORD)v10 + 1, &end_pos_p);
-        v7->i_result = v18;
+        v18 = SSParser::parse_ws_any(this, (_DWORD)i_start_pos + 1, &end_pos_p);
+        args->i_result = v18;
         if ( v18 )
         {
-          LODWORD(v10) = end_pos_p;
+          LODWORD(i_start_pos) = end_pos_p;
         }
         else
         {
@@ -6178,10 +5948,10 @@ LABEL_14:
           class_union.i_union.i_array_p = 0i64;
           class_union.i_union.i_size = 0;
           if ( v5 )
-            v19 = (SSClassUnion *)v6->vfptr->get_item_type((SSClassDescBase *)&v6->vfptr);
+            p_class_union = (SSClassUnion *)v6->vfptr->get_item_type(v6);
           else
-            v19 = &class_union;
-          if ( v7->i_flags & 1 )
+            p_class_union = &class_union;
+          if ( (args->i_flags & 1) != 0 )
           {
             v9 = (SSLiteralList *)AMemory::c_malloc_func(0x20ui64, "SSLiteralList");
             if ( v9 )
@@ -6198,74 +5968,74 @@ LABEL_14:
             }
             v17 = 0i64;
           }
-          LODWORD(v10) = end_pos_p;
+          LODWORD(i_start_pos) = end_pos_p;
           if ( v28[end_pos_p] == 125 )
           {
-            LODWORD(v10) = end_pos_p + 1;
+            LODWORD(i_start_pos) = end_pos_p + 1;
             if ( !v5 )
-              v19 = (SSClassUnion *)SSBrain::c_object_class_p;
+              p_class_union = (SSClassUnion *)SSBrain::c_object_class_p;
           }
           else
           {
             while ( 1 )
             {
-              v20 = (unsigned int)v10 < (unsigned int)class_pp;
-              v7->i_result = 82;
+              v20 = (unsigned int)i_start_pos < (unsigned int)class_pp;
+              args->i_result = Result_err_unexpected_eof;
               if ( !v20 )
                 break;
-              v7->i_start_pos = (unsigned int)v10;
-              v21 = SSParser::parse_expression(v8, v7, 1i64);
-              LODWORD(v10) = v7->i_end_pos;
-              end_pos_p = v7->i_end_pos;
-              if ( v7->i_result )
+              args->i_start_pos = (unsigned int)i_start_pos;
+              v21 = SSParser::parse_expression(this, args, 1ui64);
+              LODWORD(i_start_pos) = args->i_end_pos;
+              end_pos_p = (unsigned int)i_start_pos;
+              if ( args->i_result )
                 break;
               if ( v21 )
                 APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase>>::append(
                   &v9->i_item_exprs,
-                  (SSExpressionBase *)&v21->vfptr);
-              if ( v8->i_flags.i_flagset & 1 )
+                  v21);
+              if ( (this->i_flags.i_flagset & 1) != 0 )
               {
                 if ( v5 )
                 {
-                  if ( !v7->i_type_p->vfptr->is_class_type(v7->i_type_p, (SSClassDescBase *)&v19->vfptr) )
+                  if ( !args->i_type_p->vfptr->is_class_type(args->i_type_p, p_class_union) )
                   {
-                    v7->i_result = 135;
+                    args->i_result = Result_err_typecheck_list_item;
                     break;
                   }
                 }
                 else
                 {
-                  SSClassUnion::merge_class(&class_union, v7->i_type_p);
+                  SSClassUnion::merge_class(&class_union, (SSClassUnion *)args->i_type_p);
                 }
               }
-              v22 = SSParser::parse_ws_any(v8, (unsigned int)v10, &end_pos_p);
-              v7->i_result = v22;
+              v22 = SSParser::parse_ws_any(this, (unsigned int)i_start_pos, &end_pos_p);
+              args->i_result = v22;
               if ( v22 )
-                goto LABEL_72;
-              LODWORD(v10) = end_pos_p;
+                goto LABEL_46;
+              LODWORD(i_start_pos) = end_pos_p;
               v23 = v28[end_pos_p];
               if ( v23 == 125 )
               {
-                LODWORD(v10) = end_pos_p + 1;
+                LODWORD(i_start_pos) = end_pos_p + 1;
                 break;
               }
               if ( v23 != 44 )
               {
-                v7->i_result = 44;
+                args->i_result = Result_err_expected_literal_list_end;
                 break;
               }
-              v24 = SSParser::parse_ws_any(v8, end_pos_p + 1, &end_pos_p);
-              v7->i_result = v24;
+              v24 = SSParser::parse_ws_any(this, end_pos_p + 1, &end_pos_p);
+              args->i_result = v24;
               if ( v24 )
               {
-LABEL_72:
-                LODWORD(v10) = end_pos_p;
+LABEL_46:
+                LODWORD(i_start_pos) = end_pos_p;
                 break;
               }
-              LODWORD(v10) = end_pos_p;
+              LODWORD(i_start_pos) = end_pos_p;
             }
           }
-          if ( v8->i_flags.i_flagset & 1 && v7->i_result == Result_ok )
+          if ( (this->i_flags.i_flagset & 1) != 0 && args->i_result == Result_ok )
           {
             if ( v5 )
             {
@@ -6273,39 +6043,39 @@ LABEL_72:
             }
             else
             {
-              if ( v19 == &class_union )
+              if ( p_class_union == &class_union )
               {
                 if ( class_union.i_union.i_count > 1 )
-                  v19 = SSClassUnion::get_or_create(&class_union);
+                  p_class_union = SSClassUnion::get_or_create(&class_union);
                 else
-                  v19 = (SSClassUnion *)class_union.i_common_class_p;
+                  p_class_union = (SSClassUnion *)class_union.i_common_class_p;
               }
               if ( v32 )
-                v25 = (SSClass *)((__int64 (*)(void))v32->vfptr->get_key_class)();
+                v25 = v32->vfptr->get_key_class(v32);
               else
                 v25 = SSBrain::c_list_class_p;
-              v26 = SSTypedClass::get_or_create(v25, (SSClassDescBase *)&v19->vfptr);
+              v26 = SSTypedClass::get_or_create(v25, p_class_union);
             }
-            v7->i_type_p = (SSClassDescBase *)&v26->vfptr;
+            args->i_type_p = v26;
           }
           SSClassUnion::~SSClassUnion(&class_union);
         }
       }
     }
   }
-  if ( v7->i_result )
+  if ( args->i_result )
   {
     if ( v17 )
-      v17->vfptr->__vecDelDtor((SSInvokeBase *)&v17->vfptr, 1u);
+      v17->vfptr->__vecDelDtor(v17, 1u);
     if ( v9 )
-      v9->vfptr->__vecDelDtor((SSExpressionBase *)&v9->vfptr, 1u);
+      v9->vfptr->__vecDelDtor(v9, 1u);
     result = 0i64;
   }
   else
   {
     result = v9;
   }
-  v7->i_end_pos = (unsigned int)v10;
+  args->i_end_pos = (unsigned int)i_start_pos;
   return result;
 }
 
@@ -6313,114 +6083,109 @@ LABEL_72:
 // RVA: 0x12D3C0
 SSLiteral *__fastcall SSParser::parse_literal_number(SSParser *this, SSParser::Args *args)
 {
-  SSParser::Args *v2; // rdi
-  SSParser *v3; // rsi
-  unsigned int v4; // ebp
+  unsigned int i_start_pos; // ebp
   _QWORD *v5; // rbx
   float *v6; // r9
   SSParser::eResult v7; // eax
   unsigned int v8; // eax
   int *v9; // r9
   SSParser::eResult v10; // edx
-  _QWORD *v12; // [rsp+30h] [rbp-48h]
-  __int64 v13; // [rsp+38h] [rbp-40h]
-  _QWORD *v14; // [rsp+40h] [rbp-38h]
-  unsigned int end_pos_p; // [rsp+88h] [rbp+10h]
-  __int64 v16; // [rsp+90h] [rbp+18h]
-  unsigned int v17; // [rsp+98h] [rbp+20h]
+  __int64 v12[9]; // [rsp+30h] [rbp-48h] BYREF
+  __int64 end_pos_p; // [rsp+88h] [rbp+10h] BYREF
+  __int64 v14; // [rsp+90h] [rbp+18h] BYREF
+  int v15; // [rsp+98h] [rbp+20h] BYREF
 
-  v13 = -2i64;
-  v2 = args;
-  v3 = this;
-  v17 = 0;
-  v4 = args->i_start_pos;
+  v12[1] = -2i64;
+  v15 = 0;
+  i_start_pos = args->i_start_pos;
   v5 = 0i64;
-  v6 = (float *)&v17;
-  if ( !(args->i_flags & 1) )
+  v6 = (float *)&v15;
+  if ( (args->i_flags & 1) == 0 )
     v6 = 0i64;
-  v7 = SSParser::parse_literal_real(this, v4, (unsigned int *)&v16, v6);
-  v2->i_result = v7;
+  v7 = SSParser::parse_literal_real(this, i_start_pos, (unsigned int *)&v14, v6);
+  args->i_result = v7;
   if ( v7 )
   {
-    LODWORD(v12) = 0;
-    v9 = (int *)&v12;
-    if ( !(v2->i_flags & 1) )
+    LODWORD(v12[0]) = 0;
+    v9 = (int *)v12;
+    if ( (args->i_flags & 1) == 0 )
       v9 = 0i64;
-    v10 = (unsigned int)SSParser::parse_literal_integer(v3, v4, &end_pos_p, v9, 0i64);
+    v10 = (unsigned int)SSParser::parse_literal_integer(this, i_start_pos, (unsigned int *)&end_pos_p, v9, 0i64);
     if ( v10 )
     {
-      v8 = v16;
-      if ( end_pos_p >= (unsigned int)v16 )
+      v8 = v14;
+      if ( (unsigned int)end_pos_p >= (unsigned int)v14 )
       {
         v8 = end_pos_p;
-        v2->i_result = v10;
+        args->i_result = v10;
       }
     }
     else
     {
-      if ( v2->i_flags & 1 )
+      if ( (args->i_flags & 1) != 0 )
       {
         v5 = AMemory::c_malloc_func(0x18ui64, "SSLiteral");
-        v14 = v5;
+        v12[2] = (__int64)v5;
         if ( v5 )
         {
-          LODWORD(v16) = (_DWORD)v12;
+          LODWORD(v14) = v12[0];
           *v5 = &SSExpressionBase::`vftable;
           *v5 = &SSLiteral::`vftable;
-          v5[1] = v16;
+          v5[1] = v14;
           *((_DWORD *)v5 + 4) = 2;
         }
         else
         {
           v5 = 0i64;
         }
-        v2->i_type_p = (SSClassDescBase *)&SSBrain::c_integer_class_p->vfptr;
+        args->i_type_p = SSBrain::c_integer_class_p;
       }
       v8 = end_pos_p;
-      v2->i_result = 0;
+      args->i_result = Result_ok;
     }
   }
   else
   {
-    if ( v2->i_flags & 1 )
+    if ( (args->i_flags & 1) != 0 )
     {
       v5 = AMemory::c_malloc_func(0x18ui64, "SSLiteral");
-      v12 = v5;
+      v12[0] = (__int64)v5;
       if ( v5 )
       {
-        end_pos_p = v17;
+        LODWORD(end_pos_p) = v15;
         *v5 = &SSExpressionBase::`vftable;
         *v5 = &SSLiteral::`vftable;
-        v5[1] = *(_QWORD *)&end_pos_p;
+        v5[1] = end_pos_p;
         *((_DWORD *)v5 + 4) = 3;
       }
       else
       {
         v5 = 0i64;
       }
-      v2->i_type_p = (SSClassDescBase *)&SSBrain::c_real_class_p->vfptr;
+      args->i_type_p = SSBrain::c_real_class_p;
     }
-    v8 = v16;
+    v8 = v14;
   }
-  v2->i_end_pos = v8;
+  args->i_end_pos = v8;
   return (SSLiteral *)v5;
 }
 
 // File Line: 7670
 // RVA: 0x12D550
-__int64 __fastcall SSParser::parse_literal_real(SSParser *this, __int64 start_pos, unsigned int *end_pos_p, float *real_p)
+__int64 __fastcall SSParser::parse_literal_real(
+        SSParser *this,
+        __int64 start_pos,
+        unsigned int *end_pos_p,
+        float *real_p)
 {
-  AStringRef *v4; // rax
-  float *v5; // r13
-  unsigned int *v6; // r12
-  SSParser *v7; // r15
-  unsigned int v8; // er11
-  char *v9; // rsi
+  AStringRef *i_str_ref_p; // rax
+  unsigned int v8; // r11d
+  char *i_cstr_p; // rsi
   char *v10; // rdi
   char *v11; // r10
   char v12; // bp
   __int64 v13; // rax
-  int v14; // er9
+  int v14; // r9d
   signed int v15; // ebx
   __int64 i; // rax
   char v17; // di
@@ -6439,29 +6204,26 @@ __int64 __fastcall SSParser::parse_literal_real(SSParser *this, __int64 start_po
   double v30; // xmm7_8
   float v31; // xmm0_4
   __int64 result; // rax
-  int int_p; // [rsp+90h] [rbp+8h]
-  unsigned int end_pos_pa; // [rsp+98h] [rbp+10h]
+  int int_p; // [rsp+90h] [rbp+8h] BYREF
+  unsigned int end_pos_pa; // [rsp+98h] [rbp+10h] BYREF
 
-  v4 = this->i_str_ref_p;
-  v5 = real_p;
-  v6 = end_pos_p;
-  v7 = this;
+  i_str_ref_p = this->i_str_ref_p;
   v8 = 82;
   if ( this->i_str_ref_p->i_length > (unsigned int)start_pos )
   {
-    v9 = v4->i_cstr_p;
-    v10 = &v4->i_cstr_p[(unsigned int)start_pos];
+    i_cstr_p = i_str_ref_p->i_cstr_p;
+    v10 = &i_str_ref_p->i_cstr_p[(unsigned int)start_pos];
     v11 = v10;
-    if ( *v10 != 45 )
-    {
-      v12 = 0;
-      v8 = 33;
-    }
-    else
+    if ( *v10 == 45 )
     {
       v11 = v10 + 1;
       v12 = 1;
       v8 = 29;
+    }
+    else
+    {
+      v12 = 0;
+      v8 = 33;
     }
     v13 = (unsigned __int8)*v11;
     v14 = 0;
@@ -6491,7 +6253,7 @@ __int64 __fastcall SSParser::parse_literal_real(SSParser *this, __int64 start_po
     {
       v17 = 0;
       v18 = 0;
-      v19 = v9[start_pos] == 46;
+      v19 = i_cstr_p[start_pos] == 46;
       v20 = 0.0;
       int_p = 0;
       if ( v19 )
@@ -6499,11 +6261,11 @@ __int64 __fastcall SSParser::parse_literal_real(SSParser *this, __int64 start_po
         start_pos = (unsigned int)(start_pos + 1);
         v18 = 1;
         v8 = 29;
-        v21 = (unsigned __int8)v9[start_pos];
+        v21 = (unsigned __int8)i_cstr_p[start_pos];
         if ( !AString::c_is_digit[v21] )
         {
 LABEL_24:
-          if ( v5 && !v8 )
+          if ( real_p && !v8 )
           {
             v25 = (double)v15;
             if ( v12 )
@@ -6519,7 +6281,7 @@ LABEL_24:
               v29 = DOUBLE_1_0;
               while ( 1 )
               {
-                if ( v28 & 1 )
+                if ( (v28 & 1) != 0 )
                   v29 = v29 * v27;
                 v28 >>= 1;
                 if ( !v28 )
@@ -6533,7 +6295,7 @@ LABEL_24:
               v26 = v26 * v30;
             }
             v31 = v26;
-            *v5 = v31;
+            *real_p = v31;
           }
           goto LABEL_42;
         }
@@ -6543,17 +6305,17 @@ LABEL_24:
           v23 = (char)v21;
           start_pos = (unsigned int)(start_pos + 1);
           v22 = v22 * 0.1;
-          v21 = (unsigned __int8)v9[start_pos];
+          v21 = (unsigned __int8)i_cstr_p[start_pos];
           v20 = v20 + (double)(v23 - 48) * v22;
         }
         while ( AString::c_is_digit[v21] );
         v8 = 0;
       }
-      if ( !((v9[start_pos] - 69) & 0xDF) )
+      if ( ((i_cstr_p[start_pos] - 69) & 0xDF) == 0 )
       {
         v17 = 1;
         end_pos_pa = start_pos + 1;
-        v24 = SSParser::parse_literal_simple_int(v7, start_pos + 1, &end_pos_pa, &int_p, 0i64);
+        v24 = SSParser::parse_literal_simple_int(this, start_pos + 1, &end_pos_pa, &int_p, 0i64);
         LODWORD(start_pos) = end_pos_pa;
         v14 = int_p;
         v8 = v24;
@@ -6565,19 +6327,22 @@ LABEL_24:
   }
 LABEL_42:
   result = v8;
-  if ( v6 )
-    *v6 = start_pos;
+  if ( end_pos_p )
+    *end_pos_p = start_pos;
   return result;
 }
 
 // File Line: 7776
 // RVA: 0x12D7D0
-__int64 __fastcall SSParser::parse_literal_simple_int(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, int *int_p, bool *negative_p)
+__int64 __fastcall SSParser::parse_literal_simple_int(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        int *int_p,
+        bool *negative_p)
 {
-  int *v5; // rdi
   char *v6; // rbx
-  unsigned int v7; // ebp
-  unsigned int v8; // er11
+  unsigned int v8; // r11d
   char *v9; // r10
   bool v10; // r9
   __int64 v11; // rax
@@ -6587,11 +6352,9 @@ __int64 __fastcall SSParser::parse_literal_simple_int(SSParser *this, unsigned i
   int v15; // eax
   __int64 result; // rax
 
-  v5 = int_p;
   v6 = &this->i_str_ref_p->i_cstr_p[start_pos];
-  v7 = start_pos;
   v8 = 82;
-  v9 = &this->i_str_ref_p->i_cstr_p[start_pos];
+  v9 = v6;
   if ( this->i_str_ref_p->i_length > start_pos )
   {
     if ( *v6 == 45 )
@@ -6620,11 +6383,11 @@ __int64 __fastcall SSParser::parse_literal_simple_int(SSParser *this, unsigned i
           i = (unsigned __int8)*v9;
         }
       }
-      if ( v5 )
+      if ( int_p )
       {
         if ( v10 )
           v12 = -v12;
-        *v5 = v12;
+        *int_p = v12;
       }
       if ( negative_p )
         *negative_p = v10;
@@ -6633,72 +6396,72 @@ __int64 __fastcall SSParser::parse_literal_simple_int(SSParser *this, unsigned i
   }
   result = v8;
   if ( end_pos_p )
-    *end_pos_p = v7 + (_DWORD)v9 - (_DWORD)v6;
+    *end_pos_p = start_pos + (_DWORD)v9 - (_DWORD)v6;
   return result;
 }
 
 // File Line: 7862
 // RVA: 0x12D8B0
-__int64 __fastcall SSParser::parse_literal_simple_string(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, AString *str_p)
+__int64 __fastcall SSParser::parse_literal_simple_string(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        AString *str_p)
 {
   __int64 v4; // rdi
-  AString *v5; // r14
-  AStringRef *v6; // r9
+  AStringRef *i_str_ref_p; // r9
   SSParser *v7; // r10
   unsigned int v8; // esi
-  unsigned int v9; // edx
-  char *v10; // r12
+  unsigned int i_length; // edx
+  char *i_cstr_p; // r12
   unsigned int v11; // ebp
-  unsigned int v12; // er13
+  unsigned int v12; // r13d
   unsigned int i; // ebx
   char v14; // cl
-  unsigned int v15; // er8
-  int v16; // er15
+  unsigned int v15; // r8d
+  int v16; // r15d
   unsigned int v17; // ebp
   char v18; // cl
   unsigned int v19; // eax
-  unsigned int end_pos_pa; // [rsp+20h] [rbp-48h]
+  unsigned int end_pos_pa; // [rsp+20h] [rbp-48h] BYREF
   char *v22; // [rsp+28h] [rbp-40h]
-  SSParser *v23; // [rsp+70h] [rbp+8h]
-  char ch_p; // [rsp+78h] [rbp+10h]
+  char ch_p; // [rsp+78h] [rbp+10h] BYREF
   unsigned int *v25; // [rsp+80h] [rbp+18h]
 
   v25 = end_pos_p;
-  v23 = this;
   v4 = start_pos;
-  v5 = str_p;
-  v6 = this->i_str_ref_p;
+  i_str_ref_p = this->i_str_ref_p;
   v7 = this;
   v8 = 82;
-  v9 = this->i_str_ref_p->i_length;
-  if ( (unsigned int)(this->i_str_ref_p->i_length - v4) >= 2 )
+  i_length = this->i_str_ref_p->i_length;
+  if ( i_length - (unsigned int)v4 >= 2 )
   {
-    v10 = v6->i_cstr_p;
+    i_cstr_p = i_str_ref_p->i_cstr_p;
     v8 = 45;
-    if ( v6->i_cstr_p[v4] == 34 )
+    if ( i_str_ref_p->i_cstr_p[v4] == 34 )
     {
       v8 = 0;
       v11 = v4 + 1;
       v12 = 0;
       v22 = 0i64;
-      for ( i = v4 + 1; i < v9; ++i )
+      for ( i = v4 + 1; i < i_length; ++i )
       {
-        v14 = v10[i];
+        v14 = i_cstr_p[i];
         if ( v14 == 34 )
           break;
         if ( v14 == 92 )
           ++i;
       }
-      if ( v5 )
+      if ( str_p )
       {
-        v12 = v5->i_str_ref_p->i_length;
-        v15 = i + v5->i_str_ref_p->i_length - v4 - 1;
-        if ( v15 >= v5->i_str_ref_p->i_size || v5->i_str_ref_p->i_ref_count + v5->i_str_ref_p->i_read_only != 1 )
-          AString::set_size(v5, v15);
-        if ( v5->i_str_ref_p->i_ref_count + v5->i_str_ref_p->i_read_only != 1 )
-          AString::make_writeable(v5);
-        v7 = v23;
-        v22 = v5->i_str_ref_p->i_cstr_p;
+        v12 = str_p->i_str_ref_p->i_length;
+        v15 = i + v12 - v4 - 1;
+        if ( v15 >= str_p->i_str_ref_p->i_size || str_p->i_str_ref_p->i_ref_count + str_p->i_str_ref_p->i_read_only != 1 )
+          AString::set_size(str_p, v15);
+        if ( str_p->i_str_ref_p->i_ref_count + str_p->i_str_ref_p->i_read_only != 1 )
+          AString::make_writeable(str_p);
+        v7 = this;
+        v22 = str_p->i_str_ref_p->i_cstr_p;
       }
       LODWORD(v4) = v4 + 1;
       end_pos_pa = v11;
@@ -6714,7 +6477,7 @@ LABEL_25:
         v17 = v12;
         while ( !v8 )
         {
-          v18 = v10[(unsigned int)v4];
+          v18 = i_cstr_p[(unsigned int)v4];
           ch_p = v18;
           if ( v18 == 92 )
           {
@@ -6728,9 +6491,9 @@ LABEL_25:
             LODWORD(v4) = v4 + 1;
             end_pos_pa = v4;
           }
-          if ( v5 )
+          if ( str_p )
             v22[v17] = v18;
-          v7 = v23;
+          v7 = this;
           ++v16;
           ++v17;
           if ( (unsigned int)v4 >= i )
@@ -6741,8 +6504,8 @@ LABEL_25:
           }
         }
       }
-      if ( v5 )
-        AString::set_length(v5, v12);
+      if ( str_p )
+        AString::set_length(str_p, v12);
     }
   }
   if ( v25 )
@@ -6752,109 +6515,105 @@ LABEL_25:
 
 // File Line: 7990
 // RVA: 0x12DA60
-unsigned int __fastcall SSParser::parse_literal_string(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, AString *str_p)
+unsigned int __fastcall SSParser::parse_literal_string(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        AString *str_p)
 {
-  unsigned int *v4; // r12
-  AString *v5; // r15
-  SSParser *v6; // r14
   unsigned int result; // eax
   unsigned int v8; // ebx
-  unsigned int v9; // edi
-  char *v10; // rbp
+  unsigned int i_length; // edi
+  char *i_cstr_p; // rbp
   unsigned int v11; // edx
   unsigned int v12; // esi
-  unsigned int v13; // [rsp+20h] [rbp-38h]
-  unsigned int start_posa; // [rsp+68h] [rbp+10h]
-  unsigned int end_pos_pa; // [rsp+70h] [rbp+18h]
+  unsigned int v13[4]; // [rsp+20h] [rbp-38h] BYREF
+  unsigned int start_posa; // [rsp+68h] [rbp+10h] BYREF
+  unsigned int end_pos_pa; // [rsp+70h] [rbp+18h] BYREF
 
   start_posa = start_pos;
-  v4 = end_pos_p;
-  v5 = str_p;
-  v6 = this;
   result = SSParser::parse_literal_simple_string(this, start_pos, &start_posa, str_p);
   v8 = start_posa;
   if ( !result )
   {
-    v9 = v6->i_str_ref_p->i_length;
-    v10 = v6->i_str_ref_p->i_cstr_p;
-    if ( start_posa < v9 )
+    i_length = this->i_str_ref_p->i_length;
+    i_cstr_p = this->i_str_ref_p->i_cstr_p;
+    if ( start_posa < i_length )
     {
       do
       {
-        result = SSParser::parse_ws_any(v6, v8, &end_pos_pa);
+        result = SSParser::parse_ws_any(this, v8, &end_pos_pa);
         if ( result )
           break;
         v11 = end_pos_pa;
-        if ( end_pos_pa >= v9 )
+        if ( end_pos_pa >= i_length )
           break;
-        if ( v10[end_pos_pa] != 43 )
+        if ( i_cstr_p[end_pos_pa] != 43 )
           break;
         ++end_pos_pa;
-        result = SSParser::parse_ws_any(v6, v11 + 1, &end_pos_pa);
+        result = SSParser::parse_ws_any(this, v11 + 1, &end_pos_pa);
         if ( result )
           break;
         v12 = end_pos_pa;
-        if ( end_pos_pa >= v9 )
+        if ( end_pos_pa >= i_length )
           break;
-        result = SSParser::parse_literal_simple_string(v6, end_pos_pa, &v13, v5);
+        result = SSParser::parse_literal_simple_string(this, end_pos_pa, v13, str_p);
         if ( result )
         {
-          if ( v13 == v12 )
+          if ( v13[0] == v12 )
             result = 0;
           break;
         }
-        v8 = v13;
+        v8 = v13[0];
       }
-      while ( v13 < v9 );
+      while ( v13[0] < i_length );
     }
   }
-  if ( v4 )
-    *v4 = v8;
+  if ( end_pos_p )
+    *end_pos_p = v8;
   return result;
 }
 
 // File Line: 8074
 // RVA: 0x12DB50
-__int64 __fastcall SSParser::parse_literal_symbol(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, ASymbol *sym_p)
+__int64 __fastcall SSParser::parse_literal_symbol(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        ASymbol *sym_p)
 {
-  unsigned int v4; // esi
-  ASymbol *v5; // r12
-  unsigned int *v6; // r15
+  unsigned int i_length; // esi
   unsigned int v7; // ebx
-  SSParser *v8; // r14
   unsigned int v9; // edi
-  char *v10; // rbp
+  char *i_cstr_p; // rbp
   unsigned int v11; // edx
   bool v12; // al
   __int64 v13; // rsi
-  char v14; // cl
+  char i_uid; // cl
   unsigned int v15; // eax
   __int64 result; // rax
-  char cstr_p[256]; // [rsp+30h] [rbp-138h]
-  unsigned int find_pos_p; // [rsp+170h] [rbp+8h]
-  char ch_p; // [rsp+178h] [rbp+10h]
-  unsigned int end_pos_pa; // [rsp+180h] [rbp+18h]
+  char cstr_p[256]; // [rsp+30h] [rbp-138h] BYREF
+  unsigned int find_pos_p; // [rsp+170h] [rbp+8h] BYREF
+  ASymbol ch_p; // [rsp+178h] [rbp+10h] BYREF
+  unsigned int end_pos_pa; // [rsp+180h] [rbp+18h] BYREF
 
-  v4 = this->i_str_ref_p->i_length;
-  v5 = sym_p;
-  v6 = end_pos_p;
+  i_length = this->i_str_ref_p->i_length;
   v7 = start_pos;
-  v8 = this;
   v9 = 46;
-  if ( v4 - start_pos >= 2 )
+  if ( i_length - start_pos >= 2 )
   {
-    v10 = this->i_str_ref_p->i_cstr_p;
-    if ( v10[start_pos] == 39 )
+    i_cstr_p = this->i_str_ref_p->i_cstr_p;
+    if ( i_cstr_p[start_pos] == 39 )
     {
       v7 = start_pos + 1;
       v11 = start_pos + 1;
       do
       {
-        find_pos_p = v4;
-        v12 = AString::find((AString *)&v8->i_str_ref_p, 39, 1u, &find_pos_p, v11, 0xFFFFFFFF);
+        find_pos_p = i_length;
+        v12 = AString::find(this, 39, 1u, &find_pos_p, v11, 0xFFFFFFFF);
         v11 = find_pos_p;
       }
-      while ( find_pos_p != v4 && v10[find_pos_p - 1] == 92 );
+      while ( find_pos_p != i_length && i_cstr_p[find_pos_p - 1] == 92 );
       v13 = 0i64;
       v9 = 47;
       if ( v12 )
@@ -6866,10 +6625,10 @@ LABEL_16:
         if ( !v9 )
         {
           v7 = v11 + 1;
-          if ( v5 )
+          if ( sym_p )
           {
             cstr_p[v13] = 0;
-            v5->i_uid = ASymbol::create((ASymbol *)&ch_p, cstr_p, v13, 0)->i_uid;
+            sym_p->i_uid = ASymbol::create(&ch_p, cstr_p, v13, ATerm_short)->i_uid;
           }
         }
       }
@@ -6877,21 +6636,21 @@ LABEL_16:
       {
         while ( !v9 )
         {
-          v14 = v10[v7];
-          ch_p = v14;
-          if ( v14 == 92 )
+          i_uid = i_cstr_p[v7];
+          LOBYTE(ch_p.i_uid) = i_uid;
+          if ( i_uid == 92 )
           {
-            v15 = SSParser::parse_literal_char_esc_seq(v8, v7, &end_pos_pa, &ch_p);
+            v15 = SSParser::parse_literal_char_esc_seq(this, v7, &end_pos_pa, (char *)&ch_p);
             v7 = end_pos_pa;
             v11 = find_pos_p;
-            v14 = ch_p;
+            i_uid = ch_p.i_uid;
             v9 = v15;
           }
           else
           {
             end_pos_pa = ++v7;
           }
-          cstr_p[v13] = v14;
+          cstr_p[v13] = i_uid;
           v13 = (unsigned int)(v13 + 1);
           if ( (unsigned int)v13 > 0xFF )
             v9 = 96;
@@ -6902,8 +6661,8 @@ LABEL_16:
     }
   }
   result = v9;
-  if ( v6 )
-    *v6 = v7;
+  if ( end_pos_p )
+    *end_pos_p = v7;
   return result;
 }
 
@@ -6911,191 +6670,179 @@ LABEL_16:
 // RVA: 0x12DCF0
 SSLoopExit *__fastcall SSParser::parse_loop_exit(SSParser *this, SSParser::Args *args)
 {
-  SSParser::Args *v2; // rbx
-  SSParser *v3; // r14
-  __int64 v4; // rdx
-  char *v5; // r8
+  __int64 i_start_pos; // rdx
+  char *i_cstr_p; // r8
   __int64 v6; // rsi
-  SSLoopExit *v7; // rdi
+  _DWORD *v7; // rdi
   SSParser::eResult v8; // eax
   ASymbol *v9; // r9
   SSParser::eResult v10; // eax
-  SSLoopExit *v11; // rcx
-  SSLoopExit *result; // rax
-  unsigned int end_pos_p; // [rsp+58h] [rbp+10h]
-  unsigned int v14; // [rsp+60h] [rbp+18h]
+  _DWORD *v11; // rcx
+  unsigned int end_pos_p; // [rsp+58h] [rbp+10h] BYREF
+  int v14; // [rsp+60h] [rbp+18h] BYREF
 
-  v2 = args;
-  v3 = this;
-  args->i_result = 82;
-  v4 = args->i_start_pos;
-  if ( (unsigned int)(this->i_str_ref_p->i_length - v4) >= 4
-    && (v2->i_result = 49, v5 = this->i_str_ref_p->i_cstr_p, v5[v4] == 101)
-    && v5[(unsigned int)(v4 + 1)] == 120
-    && v5[(unsigned int)(v4 + 2)] == 105
-    && v5[(unsigned int)(v4 + 3)] == 116
-    && (v6 = (unsigned int)(v4 + 4), byte_14236F1C0[(unsigned __int8)v5[v6]]) )
+  args->i_result = Result_err_unexpected_eof;
+  i_start_pos = args->i_start_pos;
+  if ( (unsigned int)(this->i_str_ref_p->i_length - i_start_pos) >= 4
+    && (args->i_result = Result_err_expected_loop_exit,
+        i_cstr_p = this->i_str_ref_p->i_cstr_p,
+        i_cstr_p[i_start_pos] == 101)
+    && i_cstr_p[(unsigned int)(i_start_pos + 1)] == 120
+    && i_cstr_p[(unsigned int)(i_start_pos + 2)] == 105
+    && i_cstr_p[(unsigned int)(i_start_pos + 3)] == 116
+    && (v6 = (unsigned int)(i_start_pos + 4), byte_14236F1C0[(unsigned __int8)i_cstr_p[v6]]) )
   {
     v7 = 0i64;
-    end_pos_p = v4 + 4;
+    end_pos_p = i_start_pos + 4;
     v8 = SSParser::parse_ws_any(this, v6, &end_pos_p);
-    v2->i_result = v8;
+    args->i_result = v8;
     if ( v8 == Result_ok )
     {
       v14 = -1;
       v9 = (ASymbol *)&v14;
-      if ( !(v2->i_flags & 1) )
+      if ( (args->i_flags & 1) == 0 )
         v9 = 0i64;
-      v10 = SSParser::parse_name_instance(v3, end_pos_p, &end_pos_p, v9);
-      v2->i_result = v10;
+      v10 = SSParser::parse_name_instance(this, end_pos_p, &end_pos_p, v9);
+      args->i_result = v10;
       if ( v10 )
-        v2->i_result = 0;
+        args->i_result = Result_ok;
       else
         LODWORD(v6) = end_pos_p;
-      if ( v2->i_flags & 1 )
+      if ( (args->i_flags & 1) != 0 )
       {
-        v11 = (SSLoopExit *)AMemory::c_malloc_func(0x10ui64, "SSLoopExit");
+        v11 = AMemory::c_malloc_func(0x10ui64, "SSLoopExit");
         if ( v11 )
         {
-          v11->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
-          v11->vfptr = (SSExpressionBaseVtbl *)&SSLoopExit::`vftable;
-          v11->i_name.i_uid = v14;
+          *(_QWORD *)v11 = &SSExpressionBase::`vftable;
+          *(_QWORD *)v11 = &SSLoopExit::`vftable;
+          v11[2] = v14;
           v7 = v11;
         }
       }
     }
-    if ( v2->i_result == Result_ok )
-      v2->i_type_p = (SSClassDescBase *)&SSBrain::c_none_class_p->vfptr;
-    v2->i_end_pos = v6;
-    result = v7;
+    if ( args->i_result == Result_ok )
+      args->i_type_p = SSBrain::c_none_class_p;
+    args->i_end_pos = v6;
+    return (SSLoopExit *)v7;
   }
   else
   {
-    v2->i_end_pos = v4;
-    result = 0i64;
+    args->i_end_pos = i_start_pos;
+    return 0i64;
   }
-  return result;
 }
 
 // File Line: 8258
 // RVA: 0x12DE50
 SSLoop *__fastcall SSParser::parse_loop_tail(SSParser *this, SSParser::Args *args)
 {
-  SSParser::Args *v2; // rbx
-  SSParser *v3; // r14
-  unsigned int v4; // edi
+  unsigned int i_start_pos; // edi
   SSParser::eResult v5; // eax
   ASymbol *v6; // r9
-  SSLoop *v7; // rsi
+  __int64 v7; // rsi
   SSCode *v8; // rax
   SSCode *v9; // rdi
-  SSLoop *v10; // rax
-  SSLoop *result; // rax
-  unsigned int start_pos; // [rsp+50h] [rbp+8h]
-  unsigned int end_pos_p; // [rsp+58h] [rbp+10h]
-  unsigned int v14; // [rsp+60h] [rbp+18h]
+  _DWORD *v10; // rax
+  _DWORD *start_pos; // [rsp+50h] [rbp+8h] BYREF
+  unsigned int end_pos_p; // [rsp+58h] [rbp+10h] BYREF
+  int v14; // [rsp+60h] [rbp+18h] BYREF
 
-  v2 = args;
-  v3 = this;
-  args->i_result = 82;
-  v4 = args->i_start_pos;
-  end_pos_p = v4;
-  if ( this->i_str_ref_p->i_length - v4 < 2 )
-    goto LABEL_18;
-  v5 = SSParser::parse_ws_any(this, v4, &end_pos_p);
-  v2->i_result = v5;
-  v4 = end_pos_p;
-  v2->i_end_pos = end_pos_p;
+  args->i_result = Result_err_unexpected_eof;
+  i_start_pos = args->i_start_pos;
+  end_pos_p = i_start_pos;
+  if ( this->i_str_ref_p->i_length - i_start_pos < 2 )
+    goto LABEL_15;
+  v5 = SSParser::parse_ws_any(this, i_start_pos, &end_pos_p);
+  args->i_result = v5;
+  i_start_pos = end_pos_p;
+  args->i_end_pos = end_pos_p;
   if ( v5 )
-    goto LABEL_18;
+    goto LABEL_15;
   v14 = -1;
   v6 = (ASymbol *)&v14;
   v7 = 0i64;
-  if ( !(v2->i_flags & 1) )
+  if ( (args->i_flags & 1) == 0 )
     v6 = 0i64;
-  if ( SSParser::parse_name_instance(v3, v4, &start_pos, v6) )
+  if ( SSParser::parse_name_instance(this, i_start_pos, (unsigned int *)&start_pos, v6) )
   {
-    v2->i_result = 0;
+    args->i_result = Result_ok;
   }
   else
   {
-    v2->i_result = SSParser::parse_ws_any(v3, start_pos, &end_pos_p);
-    v4 = end_pos_p;
+    args->i_result = SSParser::parse_ws_any(this, (unsigned int)start_pos, &end_pos_p);
+    i_start_pos = end_pos_p;
   }
-  if ( v2->i_result || (v2->i_result = 48, v3->i_str_ref_p->i_cstr_p[v4] != 91) )
+  if ( args->i_result
+    || (args->i_result = Result_err_expected_loop_block, this->i_str_ref_p->i_cstr_p[i_start_pos] != 91) )
   {
-LABEL_18:
-    v2->i_end_pos = v4;
-    result = 0i64;
+LABEL_15:
+    args->i_end_pos = i_start_pos;
+    return 0i64;
   }
   else
   {
-    v2->i_start_pos = v4;
-    v8 = SSParser::parse_code_block_optimized(v3, v2, SSInvokeTime_any, 0);
+    args->i_start_pos = i_start_pos;
+    v8 = SSParser::parse_code_block_optimized(this, args, SSInvokeTime_any, ResultDesired_false);
     v9 = v8;
-    if ( v2->i_result == Result_ok )
+    if ( args->i_result == Result_ok )
     {
-      v2->i_type_p = (SSClassDescBase *)&SSBrain::c_none_class_p->vfptr;
+      args->i_type_p = SSBrain::c_none_class_p;
       if ( v8 )
       {
-        v10 = (SSLoop *)AMemory::c_malloc_func(0x18ui64, "SSLoop");
-        *(_QWORD *)&start_pos = v10;
+        v10 = AMemory::c_malloc_func(0x18ui64, "SSLoop");
+        start_pos = v10;
         if ( v10 )
         {
-          v10->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
-          v10->vfptr = (SSExpressionBaseVtbl *)&SSLoop::`vftable;
-          v10->i_name.i_uid = v14;
-          v10->i_expr_p = (SSExpressionBase *)&v9->vfptr;
-          v7 = v10;
+          *(_QWORD *)v10 = &SSExpressionBase::`vftable;
+          *(_QWORD *)v10 = &SSLoop::`vftable;
+          v10[2] = v14;
+          *((_QWORD *)v10 + 2) = v9;
+          return (SSLoop *)v10;
         }
       }
     }
-    result = v7;
+    return (SSLoop *)v7;
   }
-  return result;
 }
 
 // File Line: 8585
 // RVA: 0x12DFA0
-__int64 __fastcall SSParser::parse_name_class(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, ASymbol *name_p, SSParser::eClassCheck check)
+__int64 __fastcall SSParser::parse_name_class(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        ASymbol *name_p,
+        SSParser::eClassCheck check)
 {
-  SSParser *v5; // rsi
-  AStringRef *v6; // rcx
-  unsigned int v7; // ebx
-  ASymbol *v8; // rdi
-  unsigned int *v9; // r14
-  unsigned int v10; // er11
-  unsigned int v11; // eax
-  SSClass **v12; // r8
+  AStringRef *i_str_ref_p; // rcx
+  unsigned int v10; // r11d
+  unsigned int i_uid; // eax
+  SSClass **i_array_p; // r8
   SSClass **v13; // r10
-  signed __int64 v14; // rcx
-  unsigned int v15; // er9
+  SSClass **v14; // rcx
+  unsigned int v15; // r9d
   _BOOL8 v16; // rdx
   _BOOL8 v17; // r9
   char v18; // cl
   __int64 v19; // rax
-  ASymbol result; // [rsp+50h] [rbp+8h]
-  unsigned int find_pos_p; // [rsp+58h] [rbp+10h]
+  ASymbol result; // [rsp+50h] [rbp+8h] BYREF
+  unsigned int find_pos_p; // [rsp+58h] [rbp+10h] BYREF
 
-  v5 = this;
-  v6 = this->i_str_ref_p;
-  v7 = start_pos;
+  i_str_ref_p = this->i_str_ref_p;
   find_pos_p = start_pos;
-  v8 = name_p;
-  v9 = end_pos_p;
   v10 = 82;
-  if ( v6->i_length > start_pos )
+  if ( i_str_ref_p->i_length > start_pos )
   {
     v10 = 15;
-    if ( AString::c_is_uppercase[(unsigned __int8)v6->i_cstr_p[start_pos]] )
+    if ( AString::c_is_uppercase[(unsigned __int8)i_str_ref_p->i_cstr_p[start_pos]] )
     {
       find_pos_p = start_pos + 1;
-      find_pos_p = v6->i_length;
-      AString::find((AString *)&v5->i_str_ref_p, ACharMatch_not_identifier, 1u, &find_pos_p, start_pos + 1, 0xFFFFFFFF);
-      if ( check & 1 )
+      find_pos_p = i_str_ref_p->i_length;
+      AString::find(this, ACharMatch_not_identifier, 1u, &find_pos_p, start_pos + 1, 0xFFFFFFFF);
+      if ( (check & 1) != 0 )
       {
-        v11 = SSParser::as_symbol(v5, &result, v7, find_pos_p)->i_uid;
-        if ( check & 2 && v11 == ASymbol_Class.i_uid )
+        i_uid = SSParser::as_symbol(this, &result, start_pos, find_pos_p)->i_uid;
+        if ( (check & 2) != 0 && i_uid == ASymbol_Class.i_uid )
         {
           v10 = 74;
         }
@@ -7103,30 +6850,30 @@ __int64 __fastcall SSParser::parse_name_class(SSParser *this, unsigned int start
         {
           if ( SSBrain::c_classes.i_count )
           {
-            v12 = SSBrain::c_classes.i_array_p;
+            i_array_p = SSBrain::c_classes.i_array_p;
             v13 = &SSBrain::c_classes.i_array_p[SSBrain::c_classes.i_count - 1];
             while ( 1 )
             {
               while ( 1 )
               {
-                v14 = (signed __int64)&v12[((char *)v13 - (char *)v12) >> 4];
-                v15 = *(_DWORD *)(*(_QWORD *)v14 + 8i64);
-                if ( v11 >= v15 )
+                v14 = &i_array_p[((char *)v13 - (char *)i_array_p) >> 4];
+                v15 = (*v14)->i_name.i_uid;
+                if ( i_uid >= v15 )
                 {
-                  v16 = v11 == v15;
-                  v17 = v11 != v15;
+                  v16 = i_uid == v15;
+                  v17 = i_uid != v15;
                   if ( 1 - v16 >= 0 )
                     break;
                 }
-                if ( v12 == (SSClass **)v14 )
+                if ( i_array_p == v14 )
                   goto LABEL_17;
-                v13 = (SSClass **)(v14 - 8);
+                v13 = v14 - 1;
               }
               if ( v17 <= 0 )
                 break;
-              if ( v13 == (SSClass **)v14 )
+              if ( v13 == v14 )
                 goto LABEL_17;
-              v12 = (SSClass **)(v14 + 8);
+              i_array_p = v14 + 1;
             }
             v18 = 1;
           }
@@ -7139,14 +6886,14 @@ LABEL_17:
           if ( v18 )
             v10 = 0;
         }
-        if ( v8 )
-          v8->i_uid = v11;
+        if ( name_p )
+          name_p->i_uid = i_uid;
       }
       else
       {
-        if ( v8 )
-          v8->i_uid = SSParser::as_symbol(v5, &result, v7, find_pos_p)->i_uid;
-        if ( check & 2 && v8 && v8->i_uid == ASymbol_Class.i_uid )
+        if ( name_p )
+          name_p->i_uid = SSParser::as_symbol(this, &result, start_pos, find_pos_p)->i_uid;
+        if ( (check & 2) != 0 && name_p && name_p->i_uid == ASymbol_Class.i_uid )
           v10 = 74;
         else
           v10 = 0;
@@ -7154,134 +6901,123 @@ LABEL_17:
     }
   }
   v19 = v10;
-  if ( v9 )
-    *v9 = find_pos_p;
+  if ( end_pos_p )
+    *end_pos_p = find_pos_p;
   return v19;
 }
 
 // File Line: 8655
 // RVA: 0x12E210
-__int64 __fastcall SSParser::parse_name_instance(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, ASymbol *name_p)
+__int64 __fastcall SSParser::parse_name_instance(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        ASymbol *name_p)
 {
   __int64 v4; // rbx
-  AStringRef *v5; // rdx
-  ASymbol *v6; // r14
-  unsigned int *v7; // rsi
-  SSParser *v8; // rdi
-  unsigned int v9; // er11
+  AStringRef *i_str_ref_p; // rdx
+  unsigned int v9; // r11d
   ASymbol *v10; // rax
-  unsigned int v11; // eax
-  unsigned int v12; // er8
-  ASymbol **v13; // rcx
-  ASymbol **v14; // r9
-  __int64 v15; // rax
-  ASymbol result; // [rsp+50h] [rbp+8h]
-  unsigned int find_pos_p; // [rsp+58h] [rbp+10h]
+  unsigned int i_uid; // eax
+  ASymbol **i_array_p; // rcx
+  ASymbol **v13; // r9
+  __int64 v14; // rax
+  ASymbol result; // [rsp+50h] [rbp+8h] BYREF
+  unsigned int find_pos_p; // [rsp+58h] [rbp+10h] BYREF
 
   v4 = start_pos;
-  v5 = this->i_str_ref_p;
-  v6 = name_p;
+  i_str_ref_p = this->i_str_ref_p;
   find_pos_p = v4;
-  v7 = end_pos_p;
-  v8 = this;
   v9 = 82;
-  if ( v5->i_length <= (unsigned int)v4 )
-    goto LABEL_11;
-  v9 = 32;
-  if ( !AString::c_is_lowercase[(unsigned __int8)v5->i_cstr_p[v4]] )
-    goto LABEL_11;
-  find_pos_p = v4 + 1;
-  find_pos_p = v5->i_length;
-  AString::find((AString *)&this->i_str_ref_p, ACharMatch_not_identifier, 1u, &find_pos_p, v4 + 1, 0xFFFFFFFF);
-  v10 = SSParser::as_symbol(v8, &result, v4, find_pos_p);
-  v9 = 0;
-  v11 = v10->i_uid;
-  v12 = 0;
-  if ( SSParser::c_reserved_word_syms.i_count )
+  if ( i_str_ref_p->i_length > (unsigned int)v4 )
   {
-    v13 = SSParser::c_reserved_word_syms.i_array_p;
-    v14 = &SSParser::c_reserved_word_syms.i_array_p[SSParser::c_reserved_word_syms.i_count - 1];
-    if ( SSParser::c_reserved_word_syms.i_array_p <= v14 )
+    v9 = 32;
+    if ( AString::c_is_lowercase[(unsigned __int8)i_str_ref_p->i_cstr_p[v4]] )
     {
-      do
+      find_pos_p = v4 + 1;
+      find_pos_p = i_str_ref_p->i_length;
+      AString::find(this, ACharMatch_not_identifier, 1u, &find_pos_p, v4 + 1, 0xFFFFFFFF);
+      v10 = SSParser::as_symbol(this, &result, v4, find_pos_p);
+      v9 = 0;
+      i_uid = v10->i_uid;
+      if ( SSParser::c_reserved_word_syms.i_count
+        && (i_array_p = SSParser::c_reserved_word_syms.i_array_p,
+            v13 = &SSParser::c_reserved_word_syms.i_array_p[SSParser::c_reserved_word_syms.i_count - 1],
+            SSParser::c_reserved_word_syms.i_array_p <= v13) )
       {
-        if ( v11 == (*v13)->i_uid )
+        while ( i_uid != (*i_array_p)->i_uid )
         {
-          if ( v12 < 2 )
-          {
-            v9 = 89;
-            goto LABEL_11;
-          }
-          --v12;
+          if ( ++i_array_p > v13 )
+            goto LABEL_8;
         }
-        ++v13;
+        v9 = 89;
       }
-      while ( v13 <= v14 );
+      else
+      {
+LABEL_8:
+        if ( name_p )
+          name_p->i_uid = i_uid;
+      }
     }
   }
-  if ( v6 )
-    v6->i_uid = v11;
-LABEL_11:
-  v15 = v9;
-  if ( v7 )
-    *v7 = find_pos_p;
-  return v15;
+  v14 = v9;
+  if ( end_pos_p )
+    *end_pos_p = find_pos_p;
+  return v14;
 }
 
 // File Line: 8731
 // RVA: 0x12E310
-__int64 __fastcall SSParser::parse_name_method(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, ASymbol *name_p)
+__int64 __fastcall SSParser::parse_name_method(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        ASymbol *name_p)
 {
   __int64 v4; // rsi
   __int64 v5; // r10
-  AStringRef *v6; // rdx
-  ASymbol *v7; // rdi
-  unsigned int *v8; // r15
-  SSParser *v9; // r14
+  AStringRef *i_str_ref_p; // rdx
   unsigned int v10; // ebx
-  char *v11; // rcx
+  char *i_cstr_p; // rcx
   unsigned __int8 v12; // r8
   unsigned __int8 v13; // cl
   __int64 v14; // rax
-  ASymbol result; // [rsp+50h] [rbp+8h]
-  unsigned int end_pos_pa; // [rsp+58h] [rbp+10h]
+  ASymbol result; // [rsp+50h] [rbp+8h] BYREF
+  unsigned int end_pos_pa; // [rsp+58h] [rbp+10h] BYREF
 
   v4 = start_pos;
   LODWORD(v5) = start_pos;
-  v6 = this->i_str_ref_p;
+  i_str_ref_p = this->i_str_ref_p;
   end_pos_pa = v4;
-  v7 = name_p;
-  v8 = end_pos_p;
-  v9 = this;
   v10 = 82;
-  if ( v6->i_length <= (unsigned int)v4 )
+  if ( i_str_ref_p->i_length <= (unsigned int)v4 )
     goto LABEL_17;
-  v11 = v6->i_cstr_p;
+  i_cstr_p = i_str_ref_p->i_cstr_p;
   v10 = 53;
-  v12 = v6->i_cstr_p[v4];
+  v12 = i_str_ref_p->i_cstr_p[v4];
   if ( v12 != 33 )
   {
     if ( AString::c_is_lowercase[v12] )
     {
       end_pos_pa = v4 + 1;
-      end_pos_pa = v6->i_length;
-      AString::find((AString *)&v9->i_str_ref_p, ACharMatch_not_identifier, 1u, &end_pos_pa, v4 + 1, 0xFFFFFFFF);
-      if ( v7 )
-        v7->i_uid = SSParser::as_symbol(v9, &result, v4, end_pos_pa)->i_uid;
+      end_pos_pa = i_str_ref_p->i_length;
+      AString::find(this, ACharMatch_not_identifier, 1u, &end_pos_pa, v4 + 1, 0xFFFFFFFF);
+      if ( name_p )
+        name_p->i_uid = SSParser::as_symbol(this, &result, v4, end_pos_pa)->i_uid;
       v10 = 0;
     }
     else
     {
       if ( !AString::c_is_uppercase[v12] )
         goto LABEL_17;
-      v10 = SSParser::parse_name_class(v9, v4, &end_pos_pa, name_p, (SSParser::eClassCheck)((name_p != 0i64) + 2));
+      v10 = SSParser::parse_name_class(this, v4, &end_pos_pa, name_p, (SSParser::eClassCheck)((name_p != 0i64) + 2));
     }
     goto LABEL_16;
   }
   v5 = (unsigned int)(v4 + 1);
   v10 = 0;
   end_pos_pa = v4 + 1;
-  v13 = v11[v5];
+  v13 = i_cstr_p[v5];
   if ( v13 == 33 )
   {
     LODWORD(v5) = v4 + 2;
@@ -7292,7 +7028,7 @@ __int64 __fastcall SSParser::parse_name_method(SSParser *this, unsigned int star
   if ( AString::c_is_lowercase[v13] )
   {
     end_pos_pa = v4 + 2;
-    SSParser::parse_name_symbol(v9, v4, &end_pos_pa, name_p);
+    SSParser::parse_name_symbol(this, v4, &end_pos_pa, name_p);
 LABEL_16:
     LODWORD(v5) = end_pos_pa;
     goto LABEL_17;
@@ -7301,154 +7037,139 @@ LABEL_16:
     name_p->i_uid = ASymbolX_ctor.i_uid;
 LABEL_17:
   v14 = v10;
-  if ( v8 )
-    *v8 = v5;
+  if ( end_pos_p )
+    *end_pos_p = v5;
   return v14;
 }
 
 // File Line: 8831
 // RVA: 0x12E130
-__int64 __fastcall SSParser::parse_name_coroutine(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, ASymbol *name_p)
+__int64 __fastcall SSParser::parse_name_coroutine(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        ASymbol *name_p)
 {
-  unsigned int *v4; // rdi
-  AStringRef *v5; // r8
+  AStringRef *i_str_ref_p; // r8
   __int64 v6; // rbx
-  ASymbol *v7; // r14
-  SSParser *v8; // rsi
-  unsigned int v9; // er11
+  unsigned int v9; // r11d
   __int64 v10; // r10
-  char *v11; // rdx
-  unsigned int v12; // er10
-  __int64 v13; // rax
-  ASymbol result; // [rsp+50h] [rbp+8h]
-  unsigned int find_pos_p; // [rsp+58h] [rbp+10h]
+  char *i_cstr_p; // rdx
+  __int64 v12; // rax
+  ASymbol result; // [rsp+50h] [rbp+8h] BYREF
+  unsigned int find_pos_p; // [rsp+58h] [rbp+10h] BYREF
 
-  v4 = end_pos_p;
-  v5 = this->i_str_ref_p;
+  i_str_ref_p = this->i_str_ref_p;
   v6 = start_pos;
   find_pos_p = start_pos;
-  v7 = name_p;
-  v8 = this;
   v9 = 82;
   LODWORD(v10) = start_pos;
-  if ( v5->i_length - start_pos >= 2 )
+  if ( i_str_ref_p->i_length - start_pos >= 2 )
   {
-    v11 = v5->i_cstr_p;
+    i_cstr_p = i_str_ref_p->i_cstr_p;
     v9 = 61;
-    if ( v5->i_cstr_p[v6] == 95 )
+    if ( i_str_ref_p->i_cstr_p[v6] == 95 )
     {
       v10 = (unsigned int)(v6 + 1);
       find_pos_p = v6 + 1;
-      if ( AString::c_is_lowercase[(unsigned __int8)v11[v10]] )
+      if ( AString::c_is_lowercase[(unsigned __int8)i_cstr_p[v10]] )
       {
-        v12 = v10 + 1;
-        find_pos_p = v12;
-        find_pos_p = v5->i_length;
-        AString::find((AString *)&this->i_str_ref_p, ACharMatch_not_identifier, 1u, &find_pos_p, v12, 0xFFFFFFFF);
-        if ( v7 )
-          v7->i_uid = SSParser::as_symbol(v8, &result, v6, find_pos_p)->i_uid;
+        find_pos_p = v6 + 2;
+        find_pos_p = i_str_ref_p->i_length;
+        AString::find(this, ACharMatch_not_identifier, 1u, &find_pos_p, v6 + 2, 0xFFFFFFFF);
+        if ( name_p )
+          name_p->i_uid = SSParser::as_symbol(this, &result, v6, find_pos_p)->i_uid;
         LODWORD(v10) = find_pos_p;
         v9 = 0;
       }
     }
   }
-  v13 = v9;
-  if ( v4 )
-    *v4 = v10;
-  return v13;
+  v12 = v9;
+  if ( end_pos_p )
+    *end_pos_p = v10;
+  return v12;
 }
 
 // File Line: 8930
 // RVA: 0x12F100
-__int64 __fastcall SSParser::parse_parameter(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, SSParameterBase **param_new_pp)
+__int64 __fastcall SSParser::parse_parameter(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        SSParameterBase **param_new_pp)
 {
-  SSParameterBase **v4; // r12
-  unsigned int *v5; // r13
-  unsigned int v6; // ebx
-  SSParser *v7; // rsi
-  char *v8; // rax
-  unsigned int v9; // edi
-  SSParser::eResult v10; // er14
-  SSUnaryParam *v11; // rax
+  char *i_cstr_p; // rax
+  unsigned int i_count; // edi
+  SSParser::eResult v10; // r14d
+  SSParameterBase *v11; // rax
   SSParameterBase *v12; // rdx
-  SSClassDescBase **v13; // rsi
+  SSClassDescBase **i_array_p; // rsi
   __int64 *v14; // rbx
-  unsigned __int64 v15; // rdi
-  __int64 v16; // rdx
-  __int64 v17; // r8
-  SSParameterBase *v18; // rdi
-  __int64 v19; // rdx
-  __int64 v20; // r8
-  SSUnaryParam *v21; // rax
-  SSParameterBase *v22; // rax
-  SSParser::eResult v23; // eax
-  SSGroupParam gparam_p; // [rsp+28h] [rbp-28h]
-  unsigned int end_pos_pa; // [rsp+A0h] [rbp+50h]
-  SSUnaryParam *v27; // [rsp+A8h] [rbp+58h]
+  SSClassDescBase **v15; // rdi
+  SSParameterBase *v16; // rdi
+  SSUnaryParam *v17; // rax
+  SSParameterBase *v18; // rax
+  SSParser::eResult v19; // eax
+  SSGroupParam gparam_p; // [rsp+28h] [rbp-28h] BYREF
+  unsigned int end_pos_pa; // [rsp+A0h] [rbp+50h] BYREF
+  SSUnaryParam *v23; // [rsp+A8h] [rbp+58h]
 
-  v4 = param_new_pp;
-  v5 = end_pos_p;
-  v6 = start_pos;
-  v7 = this;
-  v8 = this->i_str_ref_p->i_cstr_p;
+  i_cstr_p = this->i_str_ref_p->i_cstr_p;
   if ( param_new_pp )
   {
-    if ( v8[start_pos] == 123 )
+    if ( i_cstr_p[start_pos] == 123 )
     {
       gparam_p.i_name = (ASymbol)ASymbol::get_null()->i_uid;
       gparam_p.vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable;
-      v9 = 0;
+      i_count = 0;
       gparam_p.i_class_pattern.i_count = 0;
       gparam_p.i_class_pattern.i_array_p = 0i64;
       gparam_p.i_class_pattern.i_size = 0;
-      v10 = SSParser::parse_parameter_group(v7, v6, &end_pos_pa, &gparam_p);
+      v10 = SSParser::parse_parameter_group(this, start_pos, &end_pos_pa, &gparam_p);
       if ( v10 )
       {
-        v13 = gparam_p.i_class_pattern.i_array_p;
-        v9 = gparam_p.i_class_pattern.i_count;
+        i_array_p = gparam_p.i_class_pattern.i_array_p;
+        i_count = gparam_p.i_class_pattern.i_count;
       }
       else
       {
-        v11 = (SSUnaryParam *)AMemory::c_malloc_func(0x28ui64, "SSGroupParam");
-        v12 = (SSParameterBase *)&v11->vfptr;
-        v27 = v11;
+        v11 = (SSParameterBase *)AMemory::c_malloc_func(0x28ui64, "SSGroupParam");
+        v12 = v11;
+        v23 = (SSUnaryParam *)v11;
         if ( v11 )
         {
           v11->i_name.i_uid = gparam_p.i_name.i_uid;
           v11->vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable;
           v11->vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable;
-          LODWORD(v11->i_type_p.i_obj_p) = gparam_p.i_class_pattern.i_count;
-          v11->i_default_p = (SSExpressionBase *)gparam_p.i_class_pattern.i_array_p;
-          LODWORD(v11[1].vfptr) = gparam_p.i_class_pattern.i_size;
+          LODWORD(v11[1].vfptr) = gparam_p.i_class_pattern.i_count;
+          *(_QWORD *)&v11[1].i_name.i_uid = gparam_p.i_class_pattern.i_array_p;
+          LODWORD(v11[2].vfptr) = gparam_p.i_class_pattern.i_size;
           gparam_p.i_class_pattern.i_count = 0;
           gparam_p.i_class_pattern.i_size = 0;
-          v13 = 0i64;
+          i_array_p = 0i64;
           gparam_p.i_class_pattern.i_array_p = 0i64;
         }
         else
         {
           v12 = 0i64;
-          v13 = gparam_p.i_class_pattern.i_array_p;
-          v9 = gparam_p.i_class_pattern.i_count;
+          i_array_p = gparam_p.i_class_pattern.i_array_p;
+          i_count = gparam_p.i_class_pattern.i_count;
         }
-        *v4 = v12;
+        *param_new_pp = v12;
       }
       gparam_p.vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable;
-      if ( v9 )
+      if ( i_count )
       {
-        v14 = (__int64 *)v13;
-        v15 = (unsigned __int64)&v13[v9];
-        if ( (unsigned __int64)v13 < v15 )
+        v14 = (__int64 *)i_array_p;
+        v15 = &i_array_p[i_count];
+        if ( i_array_p < v15 )
         {
           do
-          {
-             SSClassDescBase::`vcall{16,{flat}}(*v14);
-            ++v14;
-          }
-          while ( (unsigned __int64)v14 < v15 );
+             SSClassDescBase::`vcall{16,{flat}}(*v14++);
+          while ( v14 < (__int64 *)v15 );
         }
       }
-      AMemory::c_free_func(v13);
+      AMemory::c_free_func(i_array_p);
       gparam_p.vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable;
     }
     else
@@ -7457,80 +7178,71 @@ __int64 __fastcall SSParser::parse_parameter(SSParser *this, unsigned int start_
       gparam_p.vfptr = (SSParameterBaseVtbl *)&SSUnaryParam::`vftable;
       *(_QWORD *)&gparam_p.i_class_pattern.i_count = SSBrain::c_object_class_p;
       if ( SSBrain::c_object_class_p )
-        (*(void (__cdecl **)(SSClass *, __int64, __int64))SSBrain::c_object_class_p->vfptr->gap8)(
-          SSBrain::c_object_class_p,
-          v16,
-          v17);
-      v18 = 0i64;
+        (*(void (__fastcall **)(SSClass *))SSBrain::c_object_class_p->vfptr->gap8)(SSBrain::c_object_class_p);
+      v16 = 0i64;
       gparam_p.i_class_pattern.i_array_p = 0i64;
-      v10 = SSParser::parse_parameter_unary(v7, v6, &end_pos_pa, (SSUnaryParam *)&gparam_p);
+      v10 = SSParser::parse_parameter_unary(this, start_pos, &end_pos_pa, (SSUnaryParam *)&gparam_p);
       if ( v10 == Result_ok )
       {
-        v21 = (SSUnaryParam *)AMemory::c_malloc_func(0x20ui64, "SSUnaryParam");
-        v27 = v21;
-        if ( v21 )
+        v17 = (SSUnaryParam *)AMemory::c_malloc_func(0x20ui64, "SSUnaryParam");
+        v23 = v17;
+        if ( v17 )
         {
-          SSUnaryParam::SSUnaryParam(v21, (SSUnaryParam *)&gparam_p);
-          v18 = v22;
+          SSUnaryParam::SSUnaryParam(v17, (SSUnaryParam *)&gparam_p);
+          v16 = v18;
         }
-        *v4 = v18;
+        *param_new_pp = v16;
       }
       gparam_p.vfptr = (SSParameterBaseVtbl *)&SSUnaryParam::`vftable;
       if ( gparam_p.i_class_pattern.i_array_p )
-        (**(void (__fastcall ***)(SSClassDescBase **, signed __int64))gparam_p.i_class_pattern.i_array_p)(
+        (**(void (__fastcall ***)(SSClassDescBase **, __int64))gparam_p.i_class_pattern.i_array_p)(
           gparam_p.i_class_pattern.i_array_p,
           1i64);
       if ( *(_QWORD *)&gparam_p.i_class_pattern.i_count )
-        (*(void (__cdecl **)(_QWORD, __int64, __int64))(**(_QWORD **)&gparam_p.i_class_pattern.i_count + 16i64))(
-          *(_QWORD *)&gparam_p.i_class_pattern.i_count,
-          v19,
-          v20);
+        (*(void (__fastcall **)(_QWORD))(**(_QWORD **)&gparam_p.i_class_pattern.i_count + 16i64))(*(_QWORD *)&gparam_p.i_class_pattern.i_count);
       gparam_p.vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable;
     }
   }
   else
   {
-    if ( v8[start_pos] == 123 )
-      v23 = SSParser::parse_parameter_group(this, start_pos, &end_pos_pa, 0i64);
+    if ( i_cstr_p[start_pos] == 123 )
+      v19 = SSParser::parse_parameter_group(this, start_pos, &end_pos_pa, 0i64);
     else
-      v23 = SSParser::parse_parameter_unary(this, start_pos, &end_pos_pa, 0i64);
-    v10 = v23;
+      v19 = SSParser::parse_parameter_unary(this, start_pos, &end_pos_pa, 0i64);
+    v10 = v19;
   }
-  if ( v5 )
-    *v5 = end_pos_pa;
+  if ( end_pos_p )
+    *end_pos_p = end_pos_pa;
   return (unsigned int)v10;
 }
 
 // File Line: 8997
 // RVA: 0x12F520
-__int64 __fastcall SSParser::parse_parameter_specifier(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, SSTypedName *tname_p, unsigned int param_flags)
+__int64 __fastcall SSParser::parse_parameter_specifier(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        SSTypedName *tname_p,
+        char param_flags)
 {
-  SSTypedName *v5; // rsi
-  unsigned int *v6; // r14
-  SSClassDescBase **v7; // r9
-  unsigned int v8; // ebp
-  SSParser *v9; // rdi
+  SSClassDescBase **p_obj_p; // r9
   SSParser::eResult v10; // ebx
   SSClass *v11; // rax
-  SSClassDescBase *obj_p; // [rsp+20h] [rbp-38h]
-  unsigned int end_pos_pa; // [rsp+70h] [rbp+18h]
-  ASymbol name_p; // [rsp+78h] [rbp+20h]
+  SSClassDescBase *obj_p; // [rsp+20h] [rbp-38h] BYREF
+  unsigned int end_pos_pa; // [rsp+70h] [rbp+18h] BYREF
+  ASymbol name_p; // [rsp+78h] [rbp+20h] BYREF
 
-  v5 = tname_p;
-  v6 = end_pos_p;
-  v7 = &obj_p;
-  if ( !v5 )
-    v7 = 0i64;
-  v8 = start_pos;
-  v9 = this;
-  obj_p = (SSClassDescBase *)&SSBrain::c_object_class_p->vfptr;
-  v10 = (unsigned int)SSParser::parse_class_desc(this, start_pos, &end_pos_pa, v7);
+  p_obj_p = &obj_p;
+  if ( !tname_p )
+    p_obj_p = 0i64;
+  obj_p = SSBrain::c_object_class_p;
+  v10 = (unsigned int)SSParser::parse_class_desc(this, start_pos, &end_pos_pa, (SSMetaClass **)p_obj_p);
   if ( v10 == Result_ok )
   {
-    v10 = SSParser::parse_ws_required(v9, end_pos_pa, &end_pos_pa);
+    v10 = SSParser::parse_ws_required(this, end_pos_pa, &end_pos_pa);
     goto LABEL_5;
   }
-  if ( end_pos_pa != v8 )
+  if ( end_pos_pa != start_pos )
   {
 LABEL_5:
     if ( v10 )
@@ -7538,232 +7250,220 @@ LABEL_5:
     goto LABEL_6;
   }
   v11 = SSBrain::c_object_class_p;
-  if ( param_flags & 1 )
+  if ( (param_flags & 1) != 0 )
     v11 = SSBrain::c_auto_class_p;
-  obj_p = (SSClassDescBase *)&v11->vfptr;
+  obj_p = v11;
 LABEL_6:
   name_p.i_uid = -1;
-  if ( (unsigned int)SSParser::parse_name_instance(v9, end_pos_pa, &end_pos_pa, &name_p) )
+  if ( (unsigned int)SSParser::parse_name_instance(this, end_pos_pa, &end_pos_pa, &name_p) )
   {
-    v10 = 58;
+    v10 = Result_err_expected_param_name;
   }
-  else if ( v9->i_flags.i_flagset & 1 && SSTypeContext::is_previous_variable(&v9->i_context, &name_p) )
+  else if ( (this->i_flags.i_flagset & 1) != 0 && SSTypeContext::is_previous_variable(&this->i_context, &name_p) )
   {
-    v10 = 104;
+    v10 = Result_err_context_duped_variable;
   }
   else
   {
-    v10 = 0;
-    if ( v5 )
+    v10 = Result_ok;
+    if ( tname_p )
     {
-      ARefPtr<SSClassDescBase>::operator=(&v5->i_type_p, obj_p);
-      v5->i_name = name_p;
+      ARefPtr<SSClassDescBase>::operator=(&tname_p->i_type_p, obj_p);
+      tname_p->i_name = name_p;
     }
   }
 LABEL_17:
-  if ( v6 )
-    *v6 = end_pos_pa;
+  if ( end_pos_p )
+    *end_pos_p = end_pos_pa;
   return (unsigned int)v10;
 }
 
 // File Line: 9094
 // RVA: 0x12F630
-__int64 __fastcall SSParser::parse_parameter_unary(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, SSUnaryParam *uparam_p)
+__int64 __fastcall SSParser::parse_parameter_unary(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        SSUnaryParam *uparam_p)
 {
-  SSUnaryParam *v4; // r13
-  unsigned int v5; // er15
-  SSParser *v6; // r14
-  int v7; // er12
-  SSLiteralList *v8; // r12
-  SSClassDescBase *v9; // rdi
-  SSParser::eResult v10; // ebx
-  unsigned int v11; // esi
-  unsigned int v12; // er15
-  SSParser::eResult v13; // eax
-  bool v14; // zf
-  unsigned int v15; // eax
-  SSClassDescBase *v16; // rcx
-  SSExpressionBase *v17; // rcx
-  ASymbol name_p; // [rsp+20h] [rbp-40h]
-  unsigned int v20; // [rsp+24h] [rbp-3Ch]
-  SSClassDescBase *type_pp; // [rsp+28h] [rbp-38h]
-  __int64 v22; // [rsp+30h] [rbp-30h]
-  ASymbol v23; // [rsp+38h] [rbp-28h]
-  ARefPtr<SSClassDescBase> v24; // [rsp+40h] [rbp-20h]
-  SSParser::Args args; // [rsp+48h] [rbp-18h]
-  unsigned int end_pos_pa; // [rsp+A8h] [rbp+48h]
-  unsigned int *v27; // [rsp+B0h] [rbp+50h]
+  SSLiteralList *v7; // r12
+  SSClassDescBase *i_obj_p; // rdi
+  SSParser::eResult i_result; // ebx
+  unsigned int v10; // esi
+  unsigned int v11; // r15d
+  unsigned int i_end_pos; // eax
+  SSClassDescBase *v13; // rcx
+  SSExpressionBase *i_default_p; // rcx
+  ASymbol name_p; // [rsp+20h] [rbp-40h] BYREF
+  unsigned int i_uid; // [rsp+24h] [rbp-3Ch]
+  SSClassDescBase *type_pp[2]; // [rsp+28h] [rbp-38h] BYREF
+  ASymbol v19; // [rsp+38h] [rbp-28h] BYREF
+  ARefPtr<SSClassDescBase> v20; // [rsp+40h] [rbp-20h] BYREF
+  SSParser::Args args; // [rsp+48h] [rbp-18h] BYREF
+  unsigned int end_pos_pa; // [rsp+A8h] [rbp+48h] BYREF
+  unsigned int *v23; // [rsp+B0h] [rbp+50h]
 
-  v27 = end_pos_p;
-  v22 = -2i64;
-  v4 = uparam_p;
-  v5 = start_pos;
-  v6 = this;
-  v7 = ASymbol::get_null()->i_uid;
-  v20 = v7;
-  v23.i_uid = v7;
-  v8 = 0i64;
-  v9 = 0i64;
-  v24.i_obj_p = 0i64;
-  type_pp = (SSClassDescBase *)&SSBrain::c_object_class_p->vfptr;
-  v10 = (unsigned int)SSParser::parse_class_desc(v6, v5, &end_pos_pa, &type_pp);
-  if ( v10 )
+  v23 = end_pos_p;
+  type_pp[1] = (SSClassDescBase *)-2i64;
+  i_uid = ASymbol::get_null()->i_uid;
+  v19.i_uid = i_uid;
+  v7 = 0i64;
+  i_obj_p = 0i64;
+  v20.i_obj_p = 0i64;
+  type_pp[0] = SSBrain::c_object_class_p;
+  i_result = (unsigned int)SSParser::parse_class_desc(this, start_pos, &end_pos_pa, (SSMetaClass **)type_pp);
+  if ( i_result )
   {
-    v11 = end_pos_pa;
-    if ( end_pos_pa == v5 )
+    v10 = end_pos_pa;
+    if ( end_pos_pa == start_pos )
     {
-      type_pp = (SSClassDescBase *)&SSBrain::c_object_class_p->vfptr;
+      type_pp[0] = SSBrain::c_object_class_p;
       goto LABEL_6;
     }
   }
   else
   {
-    v10 = SSParser::parse_ws_required(v6, end_pos_pa, &end_pos_pa);
-    v11 = end_pos_pa;
+    i_result = SSParser::parse_ws_required(this, end_pos_pa, &end_pos_pa);
+    v10 = end_pos_pa;
   }
-  if ( v10 )
+  if ( i_result )
     goto LABEL_40;
 LABEL_6:
   name_p.i_uid = -1;
-  if ( (unsigned int)SSParser::parse_name_instance(v6, v11, &end_pos_pa, &name_p) )
+  if ( (unsigned int)SSParser::parse_name_instance(this, v10, &end_pos_pa, &name_p) )
   {
-    v10 = 58;
+    i_result = Result_err_expected_param_name;
   }
-  else if ( v6->i_flags.i_flagset & 1 && SSTypeContext::is_previous_variable(&v6->i_context, &name_p) )
+  else if ( (this->i_flags.i_flagset & 1) != 0 && SSTypeContext::is_previous_variable(&this->i_context, &name_p) )
   {
-    v10 = 104;
+    i_result = Result_err_context_duped_variable;
   }
   else
   {
-    v10 = 0;
-    ARefPtr<SSClassDescBase>::operator=(&v24, type_pp);
-    v20 = name_p.i_uid;
-    v23.i_uid = name_p.i_uid;
-    v9 = v24.i_obj_p;
+    i_result = Result_ok;
+    ARefPtr<SSClassDescBase>::operator=(&v20, type_pp[0]);
+    i_uid = name_p.i_uid;
+    v19.i_uid = name_p.i_uid;
+    i_obj_p = v20.i_obj_p;
   }
-  v11 = end_pos_pa;
-  if ( v10 )
+  v10 = end_pos_pa;
+  if ( i_result )
     goto LABEL_40;
-  SSParser::parse_ws_any(v6, end_pos_pa, &end_pos_pa);
-  v12 = end_pos_pa;
+  SSParser::parse_ws_any(this, end_pos_pa, &end_pos_pa);
+  v11 = end_pos_pa;
   args.i_start_pos = end_pos_pa;
-  args.i_flags = v4 != 0i64;
+  args.i_flags = uparam_p != 0i64;
   *(_QWORD *)&args.i_result = 0i64;
   args.i_type_p = 0i64;
-  if ( v6->i_str_ref_p->i_length <= end_pos_pa || v6->i_str_ref_p->i_cstr_p[end_pos_pa] != 58 )
+  if ( this->i_str_ref_p->i_length <= end_pos_pa || this->i_str_ref_p->i_cstr_p[end_pos_pa] != 58 )
   {
-    args.i_result = 10;
+    args.i_result = Result_err_expected_binding;
     args.i_end_pos = end_pos_pa;
 LABEL_27:
-    v10 = 0;
+    i_result = Result_ok;
     goto LABEL_28;
   }
-  v13 = SSParser::parse_ws_any(v6, end_pos_pa + 1, &end_pos_pa);
-  v10 = v13;
-  args.i_result = v13;
-  v14 = v13 == 0;
-  v15 = end_pos_pa;
-  if ( v14 )
+  i_result = SSParser::parse_ws_any(this, end_pos_pa + 1, &end_pos_pa);
+  args.i_result = i_result;
+  i_end_pos = end_pos_pa;
+  if ( i_result )
   {
-    args.i_start_pos = end_pos_pa;
-    v8 = SSParser::parse_expression(v6, &args, 3i64);
-    v15 = args.i_end_pos;
-    v10 = args.i_result;
+    args.i_end_pos = end_pos_pa;
   }
   else
   {
-    args.i_end_pos = end_pos_pa;
+    args.i_start_pos = end_pos_pa;
+    v7 = SSParser::parse_expression(this, &args, 3ui64);
+    i_end_pos = args.i_end_pos;
+    i_result = args.i_result;
   }
-  if ( v15 == v12 )
+  if ( i_end_pos == v11 )
     goto LABEL_27;
-  v11 = v15;
-  if ( v6->i_flags.i_flagset & 1 )
+  v10 = i_end_pos;
+  if ( (this->i_flags.i_flagset & 1) != 0 )
   {
-    if ( v10 )
+    if ( i_result )
       goto LABEL_40;
-    if ( !args.i_type_p->vfptr->is_class_type(args.i_type_p, v9) )
+    if ( !args.i_type_p->vfptr->is_class_type(args.i_type_p, i_obj_p) )
     {
-      v10 = 131;
-      if ( v8 )
-        v8->vfptr->__vecDelDtor((SSExpressionBase *)&v8->vfptr, 1u);
+      i_result = Result_err_typecheck_default_param;
+      if ( v7 )
+        v7->vfptr->__vecDelDtor(v7, 1u);
       goto LABEL_40;
     }
   }
-  else if ( v10 )
+  else if ( i_result )
   {
     goto LABEL_40;
   }
 LABEL_28:
-  if ( v4 )
+  if ( uparam_p )
   {
-    v4->i_name.i_uid = v20;
-    if ( v4->i_type_p.i_obj_p != v9 )
+    uparam_p->i_name.i_uid = i_uid;
+    if ( uparam_p->i_type_p.i_obj_p != i_obj_p )
     {
-      if ( v9 )
-        (*(void (__fastcall **)(SSClassDescBase *))v9->vfptr->gap8)(v9);
-      v16 = v4->i_type_p.i_obj_p;
-      if ( v16 )
-        (*(void (**)(void))&v16->vfptr->gap8[8])();
-      v4->i_type_p.i_obj_p = v9;
+      if ( i_obj_p )
+        (*(void (__fastcall **)(SSClassDescBase *))i_obj_p->vfptr->gap8)(i_obj_p);
+      v13 = uparam_p->i_type_p.i_obj_p;
+      if ( v13 )
+        (*(void (__fastcall **)(SSClassDescBase *))&v13->vfptr->gap8[8])(v13);
+      uparam_p->i_type_p.i_obj_p = i_obj_p;
     }
-    v17 = v4->i_default_p;
-    if ( v17 )
-      v17->vfptr->__vecDelDtor(v17, 1u);
-    v4->i_default_p = (SSExpressionBase *)&v8->vfptr;
+    i_default_p = uparam_p->i_default_p;
+    if ( i_default_p )
+      i_default_p->vfptr->__vecDelDtor(i_default_p, 1u);
+    uparam_p->i_default_p = v7;
   }
-  if ( v6->i_flags.i_flagset & 1 )
-    SSTypeContext::append_local(&v6->i_context, &v23, v9);
+  if ( (this->i_flags.i_flagset & 1) != 0 )
+    SSTypeContext::append_local(&this->i_context, &v19, i_obj_p);
 LABEL_40:
-  if ( v27 )
-    *v27 = v11;
-  if ( v9 )
-    (*(void (__fastcall **)(SSClassDescBase *))&v9->vfptr->gap8[8])(v9);
-  return (unsigned int)v10;
+  if ( v23 )
+    *v23 = v10;
+  if ( i_obj_p )
+    (*(void (__fastcall **)(SSClassDescBase *))&i_obj_p->vfptr->gap8[8])(i_obj_p);
+  return (unsigned int)i_result;
 }
 
 // File Line: 9178
 // RVA: 0x12F340
-__int64 __fastcall SSParser::parse_parameter_group(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, SSGroupParam *gparam_p)
+__int64 __fastcall SSParser::parse_parameter_group(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        SSGroupParam *gparam_p)
 {
-  char *v4; // r12
-  unsigned int v5; // er15
-  SSGroupParam *v6; // r14
-  unsigned int *v7; // r13
-  SSParser *v8; // rsi
+  char *i_cstr_p; // r12
+  unsigned int i_length; // r15d
   unsigned int v9; // ebx
-  SSClassUnaryBase *v10; // rdi
+  SSClassUnaryBase *merge; // rdi
   int v11; // ebp
-  __int64 v12; // r8
-  SSClassDescBase *v13; // rbx
-  SSClass *v14; // rdx
-  SSTypedClass *v15; // rax
+  SSClassDescBase *v12; // rbx
+  SSClass *v13; // rdx
+  SSTypedClass *v14; // rax
   __int64 result; // rax
-  SSClassDescBase *type_pp; // [rsp+60h] [rbp+8h]
-  unsigned int end_pos_pa; // [rsp+68h] [rbp+10h]
+  SSClassDescBase *type_pp; // [rsp+60h] [rbp+8h] BYREF
+  unsigned int end_pos_pa; // [rsp+68h] [rbp+10h] BYREF
 
-  v4 = this->i_str_ref_p->i_cstr_p;
-  v5 = this->i_str_ref_p->i_length;
-  v6 = gparam_p;
-  v7 = end_pos_p;
-  v8 = this;
+  i_cstr_p = this->i_str_ref_p->i_cstr_p;
+  i_length = this->i_str_ref_p->i_length;
   v9 = 82;
-  if ( this->i_str_ref_p->i_length - start_pos >= 2 )
+  if ( i_length - start_pos >= 2 )
   {
     v9 = 31;
-    if ( v4[start_pos] == 123 )
+    if ( i_cstr_p[start_pos] == 123 )
     {
       ++start_pos;
-      v10 = 0i64;
+      merge = 0i64;
       v11 = 0;
       end_pos_pa = start_pos;
-      if ( start_pos < v5 )
+      if ( start_pos < i_length )
       {
         while ( 1 )
         {
-          SSParser::parse_ws_any(v8, start_pos, &end_pos_pa);
-          if ( v4[end_pos_pa] == 125 )
+          SSParser::parse_ws_any(this, start_pos, &end_pos_pa);
+          if ( i_cstr_p[end_pos_pa] == 125 )
             break;
-          if ( (unsigned int)SSParser::parse_class_desc(v8, end_pos_pa, &end_pos_pa, &type_pp) )
+          if ( (unsigned int)SSParser::parse_class_desc(this, end_pos_pa, &end_pos_pa, (SSMetaClass **)&type_pp) )
           {
             v9 = 75;
             goto LABEL_29;
@@ -7775,68 +7475,73 @@ LABEL_29:
             start_pos = end_pos_pa;
             goto LABEL_30;
           }
-          v13 = type_pp;
-          if ( v8->i_flags.i_flagset & 1 )
+          v12 = type_pp;
+          if ( (this->i_flags.i_flagset & 1) != 0 )
           {
-            if ( v10 )
-              v10 = SSClassUnion::get_merge((SSClassDescBase *)&v10->vfptr, type_pp, v12);
+            if ( merge )
+              merge = SSClassUnion::get_merge((SSClassUnion *)merge, (SSClassUnion *)type_pp);
             else
-              v10 = (SSClassUnaryBase *)type_pp;
+              merge = (SSClassUnaryBase *)type_pp;
           }
-          if ( v6 )
+          if ( gparam_p )
           {
-            (*(void (__fastcall **)(SSClassDescBase *))v13->vfptr->gap8)(v13);
-            APArray<SSClassDescBase,SSClassDescBase,ACompareAddress<SSClassDescBase>>::append(&v6->i_class_pattern, v13);
+            (*(void (__fastcall **)(SSClassDescBase *))v12->vfptr->gap8)(v12);
+            APArray<SSClassDescBase,SSClassDescBase,ACompareAddress<SSClassDescBase>>::append(
+              &gparam_p->i_class_pattern,
+              v12);
           }
           start_pos = end_pos_pa;
-          if ( end_pos_pa >= v5 )
+          if ( end_pos_pa >= i_length )
             goto LABEL_18;
         }
-        start_pos = end_pos_pa++ + 1;
+        start_pos = ++end_pos_pa;
 LABEL_18:
-        SSParser::parse_ws_any(v8, start_pos, &end_pos_pa);
+        SSParser::parse_ws_any(this, start_pos, &end_pos_pa);
         LODWORD(type_pp) = -1;
-        if ( (unsigned int)SSParser::parse_name_instance(v8, end_pos_pa, &end_pos_pa, (ASymbol *)&type_pp) )
+        if ( (unsigned int)SSParser::parse_name_instance(this, end_pos_pa, &end_pos_pa, (ASymbol *)&type_pp) )
         {
           v9 = 58;
           goto LABEL_29;
         }
-        if ( v8->i_flags.i_flagset & 1 && SSTypeContext::is_previous_variable(&v8->i_context, (ASymbol *)&type_pp) )
+        if ( (this->i_flags.i_flagset & 1) != 0
+          && SSTypeContext::is_previous_variable(&this->i_context, (ASymbol *)&type_pp) )
         {
           v9 = 104;
           goto LABEL_29;
         }
         v9 = 0;
-        if ( v8->i_flags.i_flagset & 1 )
+        if ( (this->i_flags.i_flagset & 1) != 0 )
         {
-          v14 = SSBrain::c_object_class_p;
-          if ( v10 )
-            v14 = (SSClass *)v10;
-          v15 = SSTypedClass::get_or_create(SSBrain::c_list_class_p, (SSClassDescBase *)&v14->vfptr);
-          SSTypeContext::append_local(&v8->i_context, (ASymbol *)&type_pp, (SSClassDescBase *)&v15->vfptr);
+          v13 = SSBrain::c_object_class_p;
+          if ( merge )
+            v13 = (SSClass *)merge;
+          v14 = SSTypedClass::get_or_create(SSBrain::c_list_class_p, v13);
+          SSTypeContext::append_local(&this->i_context, (ASymbol *)&type_pp, v14);
         }
         start_pos = end_pos_pa;
-        if ( v6 )
-          v6->i_name.i_uid = (unsigned int)type_pp;
+        if ( gparam_p )
+          gparam_p->i_name.i_uid = (unsigned int)type_pp;
       }
     }
   }
 LABEL_30:
   result = v9;
-  if ( v7 )
-    *v7 = start_pos;
+  if ( end_pos_p )
+    *end_pos_p = start_pos;
   return result;
 }
 
 // File Line: 9359
 // RVA: 0x12F8C0
-signed __int64 __fastcall SSParser::parse_parameters(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, SSParameters *params_p, unsigned int flags)
+__int64 __fastcall SSParser::parse_parameters(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        SSParameters *params_p,
+        char flags)
 {
-  SSClassDescBase **v5; // rax
-  SSParser *v6; // r14
-  SSParameters *v7; // r12
-  unsigned int v8; // ecx
-  unsigned int *v9; // r15
+  SSClassDescBase **i_str_ref_p; // rax
+  unsigned int i_length; // ecx
   unsigned int v11; // ebx
   char v12; // bp
   char v13; // si
@@ -7846,27 +7551,23 @@ signed __int64 __fastcall SSParser::parse_parameters(SSParser *this, unsigned in
   char v17; // bp
   unsigned int v18; // esi
   SSClass *v19; // rdx
-  _QWORD v20[2]; // [rsp+20h] [rbp-58h]
-  unsigned int start_posa; // [rsp+30h] [rbp-48h]
-  unsigned int v22; // [rsp+34h] [rbp-44h]
-  SSClassDescBase *type_pp; // [rsp+38h] [rbp-40h]
-  unsigned int v24; // [rsp+80h] [rbp+8h]
-  unsigned int end_pos_pa; // [rsp+88h] [rbp+10h]
+  unsigned int start_posa; // [rsp+30h] [rbp-48h] BYREF
+  unsigned int v21; // [rsp+34h] [rbp-44h]
+  SSClassDescBase *type_pp; // [rsp+38h] [rbp-40h] BYREF
+  unsigned int v23; // [rsp+80h] [rbp+8h] BYREF
+  unsigned int end_pos_pa; // [rsp+88h] [rbp+10h] BYREF
 
   end_pos_pa = start_pos;
-  v5 = (SSClassDescBase **)this->i_str_ref_p;
-  v6 = this;
-  v7 = params_p;
-  v8 = this->i_str_ref_p->i_length;
-  v9 = end_pos_p;
-  v22 = v8;
-  if ( v8 < start_pos )
+  i_str_ref_p = (SSClassDescBase **)this->i_str_ref_p;
+  i_length = this->i_str_ref_p->i_length;
+  v21 = i_length;
+  if ( i_length < start_pos )
   {
     if ( end_pos_p )
       *end_pos_p = start_pos;
     return 82i64;
   }
-  type_pp = *v5;
+  type_pp = *i_str_ref_p;
   if ( *((_BYTE *)&type_pp->vfptr + start_pos) != 40 )
   {
     if ( end_pos_p )
@@ -7877,17 +7578,17 @@ signed __int64 __fastcall SSParser::parse_parameters(SSParser *this, unsigned in
   v12 = 0;
   v13 = 0;
   v14 = SSParser::parse_param_append;
-  if ( (v6->i_flags.i_flagset >> 2) & 1 )
+  if ( (this->i_flags.i_flagset & 4) != 0 )
     v14 = (SSParser::eResult (__fastcall *)(SSParser *, unsigned int, unsigned int *, SSParameters *))SSParser::preparse_param_append;
   end_pos_pa = start_pos + 1;
-  LOBYTE(v24) = 1;
-  v15 = 82;
+  LOBYTE(v23) = 1;
+  v15 = Result_err_unexpected_eof;
   start_posa = 0;
-  if ( v11 < v8 )
+  if ( v11 < i_length )
   {
     while ( 1 )
     {
-      v15 = SSParser::parse_ws_any(v6, v11, &end_pos_pa);
+      v15 = SSParser::parse_ws_any(this, v11, &end_pos_pa);
       if ( v15 )
         goto LABEL_41;
       v11 = end_pos_pa;
@@ -7898,11 +7599,11 @@ signed __int64 __fastcall SSParser::parse_parameters(SSParser *this, unsigned in
       {
         if ( v13 )
           goto LABEL_28;
-        if ( !(_BYTE)v24 )
+        if ( !(_BYTE)v23 )
           goto LABEL_33;
         v11 = end_pos_pa + 1;
         v14 = (SSParser::eResult (__fastcall *)(SSParser *, unsigned int, unsigned int *, SSParameters *))SSParser::parse_param_return_append;
-        LOBYTE(v24) = 0;
+        LOBYTE(v23) = 0;
         v12 = 0;
         start_posa = 1;
         ++end_pos_pa;
@@ -7917,21 +7618,20 @@ signed __int64 __fastcall SSParser::parse_parameters(SSParser *this, unsigned in
       }
       else
       {
-        LODWORD(v20[0]) = start_posa;
-        v15 = ((unsigned int (__fastcall *)(SSParser *, _QWORD, unsigned int *, SSParameters *, _QWORD))v14)(
-                v6,
+        v15 = ((unsigned int (__fastcall *)(SSParser *, _QWORD, unsigned int *, SSParameters *, unsigned int))v14)(
+                this,
                 end_pos_pa,
                 &end_pos_pa,
-                v7,
-                v20[0]);
+                params_p,
+                start_posa);
         if ( v15 )
           goto LABEL_41;
         v11 = end_pos_pa;
         v13 = 0;
         v12 = 1;
-        v15 = 82;
+        v15 = Result_err_unexpected_eof;
       }
-      if ( v11 >= v22 )
+      if ( v11 >= v21 )
       {
         if ( v15 )
           goto LABEL_42;
@@ -7941,67 +7641,66 @@ signed __int64 __fastcall SSParser::parse_parameters(SSParser *this, unsigned in
     if ( v13 )
     {
 LABEL_28:
-      v15 = 87;
+      v15 = Result_err_unexpected_parameter;
       goto LABEL_42;
     }
-    v11 = end_pos_pa++ + 1;
+    v11 = ++end_pos_pa;
 LABEL_30:
-    SSParser::parse_ws_any(v6, v11, &start_posa);
+    SSParser::parse_ws_any(this, v11, &start_posa);
     v17 = flags;
-    if ( flags & 2 )
+    if ( (flags & 2) != 0 )
     {
       v11 = start_posa;
-      SSParser::parse_class_desc(v6, start_posa, &v24, 0i64);
-      if ( v11 != v24 )
+      SSParser::parse_class_desc(this, start_posa, &v23, 0i64);
+      if ( v11 != v23 )
       {
 LABEL_33:
-        v15 = 88;
+        v15 = Result_err_unexpected_parameter_return;
         goto LABEL_42;
       }
-      SSParameters::set_result_type(v7, (SSClassDescBase *)&SSBrain::c_none_class_p->vfptr);
-      v15 = 0;
+      SSParameters::set_result_type(params_p, SSBrain::c_none_class_p);
+      v15 = Result_ok;
       goto LABEL_41;
     }
     v18 = start_posa;
-    v15 = (unsigned int)SSParser::parse_class_desc(v6, start_posa, &v24, &type_pp);
+    v15 = (unsigned int)SSParser::parse_class_desc(this, start_posa, &v23, (SSMetaClass **)&type_pp);
     if ( v15 == Result_ok )
     {
-      SSParameters::set_result_type(v7, type_pp);
-      v11 = v24;
+      SSParameters::set_result_type(params_p, type_pp);
+      v11 = v23;
       goto LABEL_42;
     }
-    v11 = v24;
-    if ( v18 == v24 )
+    v11 = v23;
+    if ( v18 == v23 )
     {
-      v15 = 0;
-      if ( v7 )
+      v15 = Result_ok;
+      if ( params_p )
       {
         v19 = SSBrain::c_object_class_p;
-        if ( v17 & 1 )
+        if ( (v17 & 1) != 0 )
           v19 = SSBrain::c_auto_class_p;
-        SSParameters::set_result_type(v7, (SSClassDescBase *)&v19->vfptr);
+        SSParameters::set_result_type(params_p, v19);
       }
 LABEL_41:
       v11 = end_pos_pa;
-      goto LABEL_42;
     }
   }
 LABEL_42:
-  if ( v9 )
-    *v9 = v11;
+  if ( end_pos_p )
+    *end_pos_p = v11;
   return (unsigned int)v15;
 }
 
 // File Line: 9861
 // RVA: 0x12FDD0
-bool __fastcall SSParser::parse_temporary(SSParser *this, SSParser::Args *args, ASymbol *ident_p, SSExpressionBase **expr_pp)
+bool __fastcall SSParser::parse_temporary(
+        SSParser *this,
+        SSParser::Args *args,
+        ASymbol *ident_p,
+        SSExpressionBase **expr_pp)
 {
-  __int64 v4; // rbp
-  SSExpressionBase **v5; // r13
-  ASymbol *v6; // r12
-  SSParser::Args *v7; // rdi
-  SSParser *v8; // r14
-  char *v9; // rbx
+  __int64 i_start_pos; // rbp
+  char *i_cstr_p; // rbx
   __int64 v10; // rsi
   char v11; // cl
   SSParser::eResult v12; // eax
@@ -8009,68 +7708,67 @@ bool __fastcall SSParser::parse_temporary(SSParser *this, SSParser::Args *args, 
   unsigned int v14; // ebx
   SSExpressionBase *v15; // rax
   bool v16; // zf
-  unsigned int end_pos_p; // [rsp+50h] [rbp+8h]
+  unsigned int end_pos_p; // [rsp+50h] [rbp+8h] BYREF
 
-  v4 = args->i_start_pos;
-  args->i_result = 82;
-  v5 = expr_pp;
-  v6 = ident_p;
-  v7 = args;
-  v8 = this;
-  if ( (unsigned int)(this->i_str_ref_p->i_length - v4) >= 2 )
+  i_start_pos = args->i_start_pos;
+  args->i_result = Result_err_unexpected_eof;
+  if ( (unsigned int)(this->i_str_ref_p->i_length - i_start_pos) >= 2 )
   {
-    v9 = this->i_str_ref_p->i_cstr_p;
-    args->i_result = 66;
-    if ( v9[v4] == 33 )
+    i_cstr_p = this->i_str_ref_p->i_cstr_p;
+    args->i_result = Result_err_expected_temporary;
+    if ( i_cstr_p[i_start_pos] == 33 )
     {
-      v10 = (unsigned int)(v4 + 1);
-      args->i_result = 72;
-      v11 = v9[v10];
-      end_pos_p = v4 + 1;
+      v10 = (unsigned int)(i_start_pos + 1);
+      args->i_result = Result_err_unexpected_cdtor;
+      v11 = i_cstr_p[v10];
+      end_pos_p = i_start_pos + 1;
       if ( v11 != 40 && v11 != 33 )
       {
-        v12 = SSParser::parse_ws_any(v8, v10, &end_pos_p);
-        v7->i_result = v12;
+        v12 = SSParser::parse_ws_any(this, v10, &end_pos_p);
+        args->i_result = v12;
         if ( v12
-          || (v13 = (unsigned int)SSParser::parse_name_instance(v8, end_pos_p, &end_pos_p, v6), (v7->i_result = v13) != 0) )
+          || (v13 = (unsigned int)SSParser::parse_name_instance(this, end_pos_p, &end_pos_p, ident_p),
+              (args->i_result = v13) != Result_ok) )
         {
           LODWORD(v10) = end_pos_p;
         }
         else
         {
           v10 = end_pos_p;
-          v7->i_result = 72;
-          if ( v9[v10] != 40 )
+          args->i_result = Result_err_unexpected_cdtor;
+          if ( i_cstr_p[v10] != 40 )
           {
-            if ( v8->i_flags.i_flagset & 1 && v6 && SSTypeContext::is_previous_variable(&v8->i_context, v6) )
+            if ( (this->i_flags.i_flagset & 1) != 0
+              && ident_p
+              && SSTypeContext::is_previous_variable(&this->i_context, ident_p) )
             {
-              v7->i_result = 104;
+              args->i_result = Result_err_context_duped_variable;
             }
-            else if ( SSParser::parse_ws_any(v8, v10, &end_pos_p)
+            else if ( SSParser::parse_ws_any(this, v10, &end_pos_p)
                    || (v14 = end_pos_p,
-                       v7->i_start_pos = end_pos_p,
-                       v15 = SSParser::parse_binding(v8, v7),
-                       v7->i_end_pos == v14) )
+                       args->i_start_pos = end_pos_p,
+                       v15 = SSParser::parse_binding(this, args),
+                       args->i_end_pos == v14) )
             {
-              v7->i_result = 0;
-              v7->i_type_p = (SSClassDescBase *)&SSBrain::c_none_class_p->vfptr;
+              args->i_result = Result_ok;
+              args->i_type_p = SSBrain::c_none_class_p;
             }
             else
             {
-              LODWORD(v10) = v7->i_end_pos;
-              if ( v5 )
-                *v5 = v15;
+              LODWORD(v10) = args->i_end_pos;
+              if ( expr_pp )
+                *expr_pp = v15;
             }
           }
         }
       }
-      if ( v7->i_result == 72 )
-        LODWORD(v10) = v4;
-      LODWORD(v4) = v10;
+      if ( args->i_result == Result_err_unexpected_cdtor )
+        LODWORD(v10) = i_start_pos;
+      LODWORD(i_start_pos) = v10;
     }
   }
-  v16 = v7->i_result == 0;
-  v7->i_end_pos = v4;
+  v16 = args->i_result == Result_ok;
+  args->i_end_pos = i_start_pos;
   return v16;
 }
 
@@ -8078,113 +7776,103 @@ bool __fastcall SSParser::parse_temporary(SSParser *this, SSParser::Args *args, 
 // RVA: 0x130090
 __int64 __fastcall SSParser::parse_ws_any(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p)
 {
-  unsigned int *v3; // r15
-  unsigned int v4; // esi
+  unsigned int i_length; // esi
   unsigned int v5; // ebx
-  SSParser *v6; // r14
   unsigned int v7; // edi
   unsigned int v8; // edx
-  char *v9; // r8
+  char *i_cstr_p; // r8
   char *v10; // rax
   unsigned __int64 i; // rdx
   __int64 v12; // rdx
   __int64 result; // rax
-  unsigned int find_pos_p; // [rsp+58h] [rbp+10h]
+  unsigned int find_pos_p; // [rsp+58h] [rbp+10h] BYREF
 
-  v3 = end_pos_p;
-  v4 = this->i_str_ref_p->i_length;
+  i_length = this->i_str_ref_p->i_length;
   v5 = start_pos;
-  v6 = this;
   v7 = 0;
-  if ( start_pos < v4 )
+  if ( start_pos < i_length )
   {
-    while ( v5 < v4 )
+    while ( v5 < i_length )
     {
-      find_pos_p = v4;
-      AString::find((AString *)&v6->i_str_ref_p, ACharMatch_not_white_space, 1u, &find_pos_p, v5, 0xFFFFFFFF);
+      find_pos_p = i_length;
+      AString::find(this, ACharMatch_not_white_space, 1u, &find_pos_p, v5, 0xFFFFFFFF);
       v5 = find_pos_p;
-      if ( find_pos_p >= v4 )
+      if ( find_pos_p >= i_length )
         break;
-      v8 = v6->i_str_ref_p->i_length;
-      v9 = v6->i_str_ref_p->i_cstr_p;
-      v10 = &v9[find_pos_p];
-      if ( find_pos_p + 2 > v8 || *v10 != 47 || (++v10, *v10 != 47) )
+      v8 = this->i_str_ref_p->i_length;
+      i_cstr_p = this->i_str_ref_p->i_cstr_p;
+      v10 = &i_cstr_p[find_pos_p];
+      if ( find_pos_p + 2 <= v8 && *v10 == 47 && (++v10, *v10 == 47) )
       {
-        v12 = find_pos_p;
-        find_pos_p = (_DWORD)v10 - (_DWORD)v9;
-        v7 = SSParser::parse_comment_multiline(v6, v12, &find_pos_p);
-        if ( v7 )
-          break;
-        v5 = find_pos_p;
-      }
-      else
-      {
-        for ( i = (unsigned __int64)&v9[v8 - 1]; (unsigned __int64)v10 <= i; ++v10 )
+        for ( i = (unsigned __int64)&i_cstr_p[v8 - 1]; (unsigned __int64)v10 <= i; ++v10 )
         {
           if ( *v10 == 10 )
             break;
         }
         v7 = 0;
-        v5 = (_DWORD)v10 - (_DWORD)v9 + 1;
+        v5 = (_DWORD)v10 - (_DWORD)i_cstr_p + 1;
+      }
+      else
+      {
+        v12 = find_pos_p;
+        find_pos_p = (_DWORD)v10 - (_DWORD)i_cstr_p;
+        v7 = SSParser::parse_comment_multiline(this, v12, &find_pos_p);
+        if ( v7 )
+          break;
+        v5 = find_pos_p;
       }
     }
     if ( v7 != 26 )
       v7 = 0;
   }
   result = v7;
-  if ( v3 )
-    *v3 = v5;
+  if ( end_pos_p )
+    *end_pos_p = v5;
   return result;
 }
 
 // File Line: 10119
 // RVA: 0x130190
-signed __int64 __fastcall SSParser::parse_ws_required(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p)
+__int64 __fastcall SSParser::parse_ws_required(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p)
 {
-  unsigned int v3; // ebp
-  unsigned int *v4; // rsi
-  SSParser *v5; // rdi
   unsigned int v6; // ebx
-  AStringRef *v7; // rax
-  unsigned int v8; // edx
-  char *v9; // r8
+  AStringRef *i_str_ref_p; // rax
+  unsigned int i_length; // edx
+  char *i_cstr_p; // r8
   char *v10; // rcx
   unsigned __int64 i; // rdx
-  signed __int64 result; // rax
+  __int64 result; // rax
   AStringRef *v13; // rax
-  unsigned int v14; // ST20_4
-  AStringRef *v15; // rax
-  unsigned int v16; // edx
-  char *v17; // r8
-  char *v18; // rax
+  AStringRef *v14; // rax
+  unsigned int v15; // edx
+  char *v16; // r8
+  char *v17; // rax
   unsigned __int64 j; // rdx
-  __int64 v20; // rdx
-  unsigned int end_pos_pa; // [rsp+50h] [rbp+8h]
-  unsigned int find_pos_p; // [rsp+60h] [rbp+18h]
+  __int64 v19; // rdx
+  unsigned int start_posa; // [rsp+20h] [rbp-28h]
+  unsigned int end_pos_pa; // [rsp+50h] [rbp+8h] BYREF
+  unsigned int find_pos_p; // [rsp+60h] [rbp+18h] BYREF
 
-  v3 = start_pos;
-  v4 = end_pos_p;
   find_pos_p = this->i_str_ref_p->i_length;
-  v5 = this;
-  AString::find((AString *)&this->i_str_ref_p, ACharMatch_not_white_space, 1u, &find_pos_p, start_pos, 0xFFFFFFFF);
+  AString::find(this, ACharMatch_not_white_space, 1u, &find_pos_p, start_pos, 0xFFFFFFFF);
   v6 = find_pos_p;
-  v7 = v5->i_str_ref_p;
+  i_str_ref_p = this->i_str_ref_p;
   end_pos_pa = find_pos_p;
-  v8 = v7->i_length;
-  v9 = v7->i_cstr_p;
-  v10 = &v7->i_cstr_p[find_pos_p];
-  if ( find_pos_p + 2 <= v8 && *v10 == 47 && *++v10 == 47 )
+  i_length = i_str_ref_p->i_length;
+  i_cstr_p = i_str_ref_p->i_cstr_p;
+  v10 = &i_str_ref_p->i_cstr_p[find_pos_p];
+  if ( find_pos_p + 2 <= i_length && *v10 == 47 && *++v10 == 47 )
   {
-    for ( i = (unsigned __int64)&v9[v8 - 1]; (unsigned __int64)v10 <= i; ++v10 )
+    for ( i = (unsigned __int64)&i_cstr_p[i_length - 1]; (unsigned __int64)v10 <= i; ++v10 )
     {
       if ( *v10 == 10 )
         break;
     }
-    end_pos_pa = (_DWORD)v10 - (_DWORD)v9 + 1;
+    end_pos_pa = (_DWORD)v10 - (_DWORD)i_cstr_p + 1;
     goto LABEL_9;
   }
-  end_pos_pa = (_DWORD)v10 - (_DWORD)v9;
-  result = SSParser::parse_comment_multiline(v5, find_pos_p, &end_pos_pa);
+  end_pos_pa = (_DWORD)v10 - (_DWORD)i_cstr_p;
+  result = SSParser::parse_comment_multiline(this, find_pos_p, &end_pos_pa);
   if ( !(_DWORD)result )
   {
     do
@@ -8192,34 +7880,34 @@ signed __int64 __fastcall SSParser::parse_ws_required(SSParser *this, unsigned i
 LABEL_9:
       while ( 1 )
       {
-        v13 = v5->i_str_ref_p;
+        v13 = this->i_str_ref_p;
         find_pos_p = end_pos_pa;
-        v14 = end_pos_pa;
+        start_posa = end_pos_pa;
         end_pos_pa = v13->i_length;
-        AString::find((AString *)&v5->i_str_ref_p, ACharMatch_not_white_space, 1u, &end_pos_pa, v14, 0xFFFFFFFF);
+        AString::find(this, ACharMatch_not_white_space, 1u, &end_pos_pa, start_posa, 0xFFFFFFFF);
         v6 = end_pos_pa;
-        v15 = v5->i_str_ref_p;
+        v14 = this->i_str_ref_p;
         find_pos_p = end_pos_pa;
-        v16 = v15->i_length;
-        v17 = v15->i_cstr_p;
-        v18 = &v15->i_cstr_p[end_pos_pa];
-        if ( end_pos_pa + 2 > v16 )
+        v15 = v14->i_length;
+        v16 = v14->i_cstr_p;
+        v17 = &v14->i_cstr_p[end_pos_pa];
+        if ( end_pos_pa + 2 > v15 )
           break;
-        if ( *v18 != 47 )
+        if ( *v17 != 47 )
           break;
-        if ( *++v18 != 47 )
+        if ( *++v17 != 47 )
           break;
-        for ( j = (unsigned __int64)&v17[v16 - 1]; (unsigned __int64)v18 <= j; ++v18 )
+        for ( j = (unsigned __int64)&v16[v15 - 1]; (unsigned __int64)v17 <= j; ++v17 )
         {
-          if ( *v18 == 10 )
+          if ( *v17 == 10 )
             break;
         }
-        end_pos_pa = (_DWORD)v18 - (_DWORD)v17 + 1;
+        end_pos_pa = (_DWORD)v17 - (_DWORD)v16 + 1;
       }
-      v20 = end_pos_pa;
-      end_pos_pa = (_DWORD)v18 - (_DWORD)v17;
+      v19 = end_pos_pa;
+      end_pos_pa = (_DWORD)v17 - (_DWORD)v16;
     }
-    while ( !(unsigned int)SSParser::parse_comment_multiline(v5, v20, &end_pos_pa) );
+    while ( !(unsigned int)SSParser::parse_comment_multiline(this, v19, &end_pos_pa) );
     goto LABEL_17;
   }
   if ( (_DWORD)result == 26 )
@@ -8229,366 +7917,331 @@ LABEL_9:
   }
 LABEL_17:
   result = 68i64;
-  if ( v6 != v3 )
+  if ( v6 != start_pos )
     result = 0i64;
 LABEL_19:
-  if ( v4 )
-    *v4 = v6;
+  if ( end_pos_p )
+    *end_pos_p = v6;
   return result;
 }
 
 // File Line: 10299
 // RVA: 0x131480
-__int64 __fastcall SSParser::preparse_parameter_unary(SSParser *this, SSUnaryParam *uparam_p, unsigned int start_pos, unsigned int *end_pos_p)
+__int64 __fastcall SSParser::preparse_parameter_unary(
+        SSParser *this,
+        SSUnaryParam *uparam_p,
+        unsigned int start_pos,
+        unsigned int *end_pos_p)
 {
-  unsigned int v4; // er13
-  SSUnaryParam *v5; // r12
-  SSParser *v6; // r15
   SSExpressionBase *v7; // r14
-  SSClassDescBase *v8; // rdi
-  unsigned int v9; // ebx
+  SSClassDescBase *i_obj_p; // rdi
+  SSParser::eResult i_result; // ebx
   unsigned int v10; // esi
-  unsigned int v11; // er13
-  SSParser::eResult v12; // eax
-  bool v13; // zf
-  unsigned int v14; // eax
-  SSClassDescBase *v15; // rax
-  SSClassDescBase *v16; // rcx
-  SSExpressionBase *v17; // rcx
-  ASymbol name_p; // [rsp+20h] [rbp-40h]
-  unsigned int v20; // [rsp+24h] [rbp-3Ch]
-  SSClassDescBase *type_pp; // [rsp+28h] [rbp-38h]
-  __int64 v22; // [rsp+30h] [rbp-30h]
-  unsigned int v23; // [rsp+38h] [rbp-28h]
-  ARefPtr<SSClassDescBase> v24; // [rsp+40h] [rbp-20h]
-  SSParser::Args args; // [rsp+48h] [rbp-18h]
-  unsigned int end_pos_pa; // [rsp+B0h] [rbp+50h]
-  unsigned int *v27; // [rsp+B8h] [rbp+58h]
+  unsigned int v11; // r13d
+  unsigned int i_end_pos; // eax
+  SSClassDescBase *v13; // rax
+  SSClassDescBase *v14; // rcx
+  SSExpressionBase *i_default_p; // rcx
+  ASymbol name_p; // [rsp+20h] [rbp-40h] BYREF
+  unsigned int i_uid; // [rsp+24h] [rbp-3Ch]
+  SSClassDescBase *type_pp[2]; // [rsp+28h] [rbp-38h] BYREF
+  unsigned int v20; // [rsp+38h] [rbp-28h]
+  ARefPtr<SSClassDescBase> v21; // [rsp+40h] [rbp-20h] BYREF
+  SSParser::Args args; // [rsp+48h] [rbp-18h] BYREF
+  unsigned int end_pos_pa; // [rsp+B0h] [rbp+50h] BYREF
+  unsigned int *v24; // [rsp+B8h] [rbp+58h]
 
-  v27 = end_pos_p;
-  v22 = -2i64;
-  v4 = start_pos;
-  v5 = uparam_p;
-  v6 = this;
-  v20 = ASymbol::get_null()->i_uid;
-  v23 = v20;
+  v24 = end_pos_p;
+  type_pp[1] = (SSClassDescBase *)-2i64;
+  i_uid = ASymbol::get_null()->i_uid;
+  v20 = i_uid;
   v7 = 0i64;
-  v8 = 0i64;
-  v24.i_obj_p = 0i64;
-  type_pp = (SSClassDescBase *)&SSBrain::c_object_class_p->vfptr;
-  v9 = SSParser::parse_class_desc(v6, v4, &end_pos_pa, &type_pp);
-  if ( v9 )
+  i_obj_p = 0i64;
+  v21.i_obj_p = 0i64;
+  type_pp[0] = SSBrain::c_object_class_p;
+  i_result = (unsigned int)SSParser::parse_class_desc(this, start_pos, &end_pos_pa, (SSMetaClass **)type_pp);
+  if ( i_result )
   {
     v10 = end_pos_pa;
-    if ( end_pos_pa == v4 )
+    if ( end_pos_pa == start_pos )
     {
-      type_pp = (SSClassDescBase *)&SSBrain::c_object_class_p->vfptr;
+      type_pp[0] = SSBrain::c_object_class_p;
       goto LABEL_6;
     }
   }
   else
   {
-    v9 = SSParser::parse_ws_required(v6, end_pos_pa, &end_pos_pa);
+    i_result = (unsigned int)SSParser::parse_ws_required(this, end_pos_pa, &end_pos_pa);
     v10 = end_pos_pa;
   }
-  if ( v9 )
+  if ( i_result )
     goto LABEL_34;
 LABEL_6:
   name_p.i_uid = -1;
-  if ( (unsigned int)SSParser::parse_name_instance(v6, v10, &end_pos_pa, &name_p) )
+  if ( (unsigned int)SSParser::parse_name_instance(this, v10, &end_pos_pa, &name_p) )
   {
-    v9 = 58;
+    i_result = Result_err_expected_param_name;
   }
-  else if ( v6->i_flags.i_flagset & 1 && SSTypeContext::is_previous_variable(&v6->i_context, &name_p) )
+  else if ( (this->i_flags.i_flagset & 1) != 0 && SSTypeContext::is_previous_variable(&this->i_context, &name_p) )
   {
-    v9 = 104;
+    i_result = Result_err_context_duped_variable;
   }
   else
   {
-    v9 = 0;
-    ARefPtr<SSClassDescBase>::operator=(&v24, type_pp);
+    i_result = Result_ok;
+    ARefPtr<SSClassDescBase>::operator=(&v21, type_pp[0]);
+    i_uid = name_p.i_uid;
     v20 = name_p.i_uid;
-    v23 = name_p.i_uid;
-    v8 = v24.i_obj_p;
+    i_obj_p = v21.i_obj_p;
   }
   v10 = end_pos_pa;
-  if ( v9 )
+  if ( i_result )
     goto LABEL_34;
-  SSParser::parse_ws_any(v6, end_pos_pa, &end_pos_pa);
+  SSParser::parse_ws_any(this, end_pos_pa, &end_pos_pa);
   v11 = end_pos_pa;
   args.i_start_pos = end_pos_pa;
-  *(_QWORD *)&args.i_flags = 0i64;
-  args.i_end_pos = 0;
-  args.i_type_p = 0i64;
-  if ( v6->i_str_ref_p->i_length <= end_pos_pa || v6->i_str_ref_p->i_cstr_p[end_pos_pa] != 58 )
+  memset(&args.i_flags, 0, 20);
+  if ( this->i_str_ref_p->i_length > end_pos_pa && this->i_str_ref_p->i_cstr_p[end_pos_pa] == 58 )
   {
-    args.i_result = 10;
-    args.i_end_pos = end_pos_pa;
-  }
-  else
-  {
-    v12 = (unsigned int)SSParser::parse_ws_any(v6, end_pos_pa + 1, &end_pos_pa);
-    v9 = v12;
-    args.i_result = v12;
-    v13 = v12 == 0;
-    v14 = end_pos_pa;
-    if ( v13 )
-    {
-      args.i_start_pos = end_pos_pa;
-      SSParser::parse_expression(v6, &args, 3i64);
-      v14 = args.i_end_pos;
-      v9 = args.i_result;
-    }
-    else
+    i_result = (unsigned int)SSParser::parse_ws_any(this, end_pos_pa + 1, &end_pos_pa);
+    args.i_result = i_result;
+    i_end_pos = end_pos_pa;
+    if ( i_result )
     {
       args.i_end_pos = end_pos_pa;
     }
-    if ( v14 != v11 )
+    else
     {
-      v10 = v14;
-      if ( !v9 )
+      args.i_start_pos = end_pos_pa;
+      SSParser::parse_expression(this, &args, 3ui64);
+      i_end_pos = args.i_end_pos;
+      i_result = args.i_result;
+    }
+    if ( i_end_pos != v11 )
+    {
+      v10 = i_end_pos;
+      if ( i_result == Result_ok )
       {
-        v15 = (SSClassDescBase *)AMemory::c_malloc_func(0x18ui64, "SSLiteral");
-        type_pp = v15;
-        if ( v15 )
+        v13 = (SSClassDescBase *)AMemory::c_malloc_func(0x18ui64, "SSLiteral");
+        type_pp[0] = v13;
+        if ( v13 )
         {
-          v15->vfptr = (SSClassDescBaseVtbl *)&SSExpressionBase::`vftable;
-          v15->vfptr = (SSClassDescBaseVtbl *)&SSLiteral::`vftable;
-          v15[1].vfptr = 0i64;
-          LODWORD(v15[2].vfptr) = 7;
-          v7 = (SSExpressionBase *)v15;
+          v13->vfptr = (SSClassDescBaseVtbl *)&SSExpressionBase::`vftable;
+          v13->vfptr = (SSClassDescBaseVtbl *)&SSLiteral::`vftable;
+          v13[1].vfptr = 0i64;
+          LODWORD(v13[2].vfptr) = 7;
+          v7 = (SSExpressionBase *)v13;
         }
       }
       goto LABEL_25;
     }
   }
-  v9 = 0;
-LABEL_25:
-  v5->i_name.i_uid = v20;
-  if ( v5->i_type_p.i_obj_p != v8 )
+  else
   {
-    if ( v8 )
-      (*(void (__fastcall **)(SSClassDescBase *))v8->vfptr->gap8)(v8);
-    v16 = v5->i_type_p.i_obj_p;
-    if ( v16 )
-      (*(void (**)(void))&v16->vfptr->gap8[8])();
-    v5->i_type_p.i_obj_p = v8;
+    args.i_result = Result_err_expected_binding;
+    args.i_end_pos = end_pos_pa;
   }
-  v17 = v5->i_default_p;
-  if ( v17 )
-    v17->vfptr->__vecDelDtor(v17, 1u);
-  v5->i_default_p = v7;
+  i_result = Result_ok;
+LABEL_25:
+  uparam_p->i_name.i_uid = i_uid;
+  if ( uparam_p->i_type_p.i_obj_p != i_obj_p )
+  {
+    if ( i_obj_p )
+      (*(void (__fastcall **)(SSClassDescBase *))i_obj_p->vfptr->gap8)(i_obj_p);
+    v14 = uparam_p->i_type_p.i_obj_p;
+    if ( v14 )
+      (*(void (__fastcall **)(SSClassDescBase *))&v14->vfptr->gap8[8])(v14);
+    uparam_p->i_type_p.i_obj_p = i_obj_p;
+  }
+  i_default_p = uparam_p->i_default_p;
+  if ( i_default_p )
+    i_default_p->vfptr->__vecDelDtor(i_default_p, 1u);
+  uparam_p->i_default_p = v7;
 LABEL_34:
-  if ( v27 )
-    *v27 = v10;
-  if ( v8 )
-    (*(void (__fastcall **)(SSClassDescBase *))&v8->vfptr->gap8[8])(v8);
-  return v9;
-}
+  if ( v24 )
+    *v24 = v10;
+  if ( i_obj_p )
+    (*(void (__fastcall **)(SSClassDescBase *))&i_obj_p->vfptr->gap8[8])(i_obj_p);
+  return (unsigned int)i_result;
+} if ( i_obj_p
 
 // File Line: 10371
 // RVA: 0x131280
-__int64 __fastcall SSParser::preparse_parameter(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, SSParameterBase **param_new_pp)
+__int64 __fastcall SSParser::preparse_parameter(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        SSParameterBase **param_new_pp)
 {
-  SSParameterBase **v4; // r15
-  unsigned int *v5; // r12
-  unsigned int v6; // ebx
-  SSParser *v7; // rsi
-  __int64 v8; // rdx
-  __int64 v9; // r8
-  unsigned int v10; // edi
-  __int64 v11; // rdx
-  __int64 v12; // r8
-  SSParser::eResult v13; // er14
-  SSUnaryParam *v14; // rax
-  SSParameterBase *v15; // rax
-  unsigned int v16; // eax
-  SSUnaryParam *v17; // rax
-  SSParameterBase *v18; // rdx
-  SSClassDescBase **v19; // rsi
-  __int64 *v20; // rbx
-  unsigned __int64 v21; // rdi
-  SSUnaryParam uparam_p; // [rsp+28h] [rbp-48h]
-  SSGroupParam gparam_p; // [rsp+48h] [rbp-28h]
-  unsigned int end_pos_pa; // [rsp+B8h] [rbp+48h]
-  SSUnaryParam *v26; // [rsp+C0h] [rbp+50h]
+  unsigned int i_count; // edi
+  SSParser::eResult v9; // r14d
+  SSUnaryParam *v10; // rax
+  SSParameterBase *v11; // rax
+  unsigned int v12; // eax
+  SSParameterBase *v13; // rax
+  SSParameterBase *v14; // rdx
+  SSClassDescBase **i_array_p; // rsi
+  __int64 *v16; // rbx
+  SSClassDescBase **v17; // rdi
+  SSUnaryParam uparam_p; // [rsp+28h] [rbp-48h] BYREF
+  SSGroupParam gparam_p; // [rsp+48h] [rbp-28h] BYREF
+  unsigned int end_pos_pa; // [rsp+B8h] [rbp+48h] BYREF
+  SSUnaryParam *v22; // [rsp+C0h] [rbp+50h]
 
-  v4 = param_new_pp;
-  v5 = end_pos_p;
-  v6 = start_pos;
-  v7 = this;
   uparam_p.i_name = (ASymbol)ASymbol::get_null()->i_uid;
   uparam_p.vfptr = (SSParameterBaseVtbl *)&SSUnaryParam::`vftable;
-  uparam_p.i_type_p.i_obj_p = (SSClassDescBase *)&SSBrain::c_object_class_p->vfptr;
+  uparam_p.i_type_p.i_obj_p = SSBrain::c_object_class_p;
   if ( SSBrain::c_object_class_p )
-    (*(void (__cdecl **)(SSClass *, __int64, __int64))SSBrain::c_object_class_p->vfptr->gap8)(
-      SSBrain::c_object_class_p,
-      v8,
-      v9);
-  v10 = 0;
+    (*(void (__fastcall **)(SSClass *))SSBrain::c_object_class_p->vfptr->gap8)(SSBrain::c_object_class_p);
+  i_count = 0;
   uparam_p.i_default_p = 0i64;
-  v13 = SSParser::preparse_parameter_unary(v7, &uparam_p, v6, &end_pos_pa);
-  if ( v13 == Result_ok )
+  v9 = SSParser::preparse_parameter_unary(this, &uparam_p, start_pos, &end_pos_pa);
+  if ( v9 == Result_ok )
   {
-    v14 = (SSUnaryParam *)AMemory::c_malloc_func(0x20ui64, "SSUnaryParam");
-    v26 = v14;
-    if ( v14 )
-      SSUnaryParam::SSUnaryParam(v14, &uparam_p);
+    v10 = (SSUnaryParam *)AMemory::c_malloc_func(0x20ui64, "SSUnaryParam");
+    v22 = v10;
+    if ( v10 )
+      SSUnaryParam::SSUnaryParam(v10, &uparam_p);
     else
-      v15 = 0i64;
-    *v4 = v15;
+      v11 = 0i64;
+    *param_new_pp = v11;
   }
-  v16 = end_pos_pa;
-  if ( end_pos_pa == v6 )
+  v12 = end_pos_pa;
+  if ( end_pos_pa == start_pos )
   {
     gparam_p.i_name = (ASymbol)ASymbol::get_null()->i_uid;
     gparam_p.vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable;
     gparam_p.i_class_pattern.i_count = 0;
     gparam_p.i_class_pattern.i_array_p = 0i64;
     gparam_p.i_class_pattern.i_size = 0;
-    v13 = (unsigned int)SSParser::parse_parameter_group(v7, v6, &end_pos_pa, &gparam_p);
-    if ( v13 )
+    v9 = (unsigned int)SSParser::parse_parameter_group(this, start_pos, &end_pos_pa, &gparam_p);
+    if ( v9 )
     {
-      v19 = gparam_p.i_class_pattern.i_array_p;
-      v10 = gparam_p.i_class_pattern.i_count;
+      i_array_p = gparam_p.i_class_pattern.i_array_p;
+      i_count = gparam_p.i_class_pattern.i_count;
     }
     else
     {
-      v17 = (SSUnaryParam *)AMemory::c_malloc_func(0x28ui64, "SSGroupParam");
-      v18 = (SSParameterBase *)&v17->vfptr;
-      v26 = v17;
-      if ( v17 )
+      v13 = (SSParameterBase *)AMemory::c_malloc_func(0x28ui64, "SSGroupParam");
+      v14 = v13;
+      v22 = (SSUnaryParam *)v13;
+      if ( v13 )
       {
-        v17->i_name.i_uid = gparam_p.i_name.i_uid;
-        v17->vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable;
-        v17->vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable;
-        LODWORD(v17->i_type_p.i_obj_p) = gparam_p.i_class_pattern.i_count;
-        v17->i_default_p = (SSExpressionBase *)gparam_p.i_class_pattern.i_array_p;
-        LODWORD(v17[1].vfptr) = gparam_p.i_class_pattern.i_size;
+        v13->i_name.i_uid = gparam_p.i_name.i_uid;
+        v13->vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable;
+        v13->vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable;
+        LODWORD(v13[1].vfptr) = gparam_p.i_class_pattern.i_count;
+        *(_QWORD *)&v13[1].i_name.i_uid = gparam_p.i_class_pattern.i_array_p;
+        LODWORD(v13[2].vfptr) = gparam_p.i_class_pattern.i_size;
         gparam_p.i_class_pattern.i_count = 0;
         gparam_p.i_class_pattern.i_size = 0;
-        v19 = 0i64;
+        i_array_p = 0i64;
         gparam_p.i_class_pattern.i_array_p = 0i64;
       }
       else
       {
-        v18 = 0i64;
-        v19 = gparam_p.i_class_pattern.i_array_p;
-        v10 = gparam_p.i_class_pattern.i_count;
+        v14 = 0i64;
+        i_array_p = gparam_p.i_class_pattern.i_array_p;
+        i_count = gparam_p.i_class_pattern.i_count;
       }
-      *v4 = v18;
+      *param_new_pp = v14;
     }
     gparam_p.vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable;
-    if ( v10 )
+    if ( i_count )
     {
-      v20 = (__int64 *)v19;
-      v21 = (unsigned __int64)&v19[v10];
-      if ( (unsigned __int64)v19 < v21 )
+      v16 = (__int64 *)i_array_p;
+      v17 = &i_array_p[i_count];
+      if ( i_array_p < v17 )
       {
         do
-        {
-           SSClassDescBase::`vcall{16,{flat}}(*v20);
-          ++v20;
-        }
-        while ( (unsigned __int64)v20 < v21 );
+           SSClassDescBase::`vcall{16,{flat}}(*v16++);
+        while ( v16 < (__int64 *)v17 );
       }
     }
-    AMemory::c_free_func(v19);
+    AMemory::c_free_func(i_array_p);
     gparam_p.vfptr = (SSParameterBaseVtbl *)&SSParameterBase::`vftable;
-    v16 = end_pos_pa;
+    v12 = end_pos_pa;
   }
-  if ( v5 )
-    *v5 = v16;
+  if ( end_pos_p )
+    *end_pos_p = v12;
   uparam_p.vfptr = (SSParameterBaseVtbl *)&SSUnaryParam::`vftable;
   if ( uparam_p.i_default_p )
     uparam_p.i_default_p->vfptr->__vecDelDtor(uparam_p.i_default_p, 1u);
   if ( uparam_p.i_type_p.i_obj_p )
-    (*(void (__cdecl **)(SSClassDescBase *, __int64, __int64))&uparam_p.i_type_p.i_obj_p->vfptr->gap8[8])(
-      uparam_p.i_type_p.i_obj_p,
-      v11,
-      v12);
-  return (unsigned int)v13;
-}e_p.i_obj_p->vfptr->gap8[8])(
-      uparam_p.i_type_p.i_obj_p,
-      v11,
-      
+    (*(void (__fastcall **)(SSClassDescBase *))&uparam_p.i_type_p.i_obj_p->vfptr->gap8[8])(uparam_p.i_type_p.i_obj_p);
+  return (unsigned int)v9;
+}
 
 // File Line: 10438
 // RVA: 0x1311F0
-SSParser::eResult __fastcall SSParser::preparse_param_append(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, SSParameters *params_p)
+SSParser::eResult __fastcall SSParser::preparse_param_append(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        SSParameters *params_p)
 {
-  SSParameters *v4; // rsi
-  unsigned int v5; // ebx
-  SSParameterBase **v6; // r9
+  SSParameterBase **p_elem; // r9
   SSParser::eResult result; // eax
-  SSParser::eResult v8; // edi
-  unsigned int v9; // edx
-  SSParameterBase **v10; // rcx
-  unsigned __int64 i; // r8
-  SSParameterBase *elem; // [rsp+48h] [rbp+20h]
+  SSParser::eResult v7; // edi
+  unsigned int i_count; // edx
+  SSParameterBase **i_array_p; // rcx
+  SSParameterBase **v10; // r8
+  SSParameterBase *elem; // [rsp+48h] [rbp+20h] BYREF
 
-  v4 = params_p;
-  v5 = 0;
-  v6 = &elem;
+  p_elem = &elem;
   elem = 0i64;
-  if ( !v4 )
-    v6 = 0i64;
-  result = SSParser::preparse_parameter(this, start_pos, end_pos_p, v6);
-  v8 = result;
+  if ( !params_p )
+    p_elem = 0i64;
+  result = SSParser::preparse_parameter(this, start_pos, end_pos_p, p_elem);
+  v7 = result;
   if ( elem )
   {
-    v9 = v4->i_params.i_count;
-    if ( v9 )
+    i_count = params_p->i_params.i_count;
+    if ( i_count && (i_array_p = params_p->i_params.i_array_p, v10 = &i_array_p[i_count - 1], i_array_p <= v10) )
     {
-      v10 = v4->i_params.i_array_p;
-      for ( i = (unsigned __int64)&v10[v9 - 1]; (unsigned __int64)v10 <= i; ++v10 )
+      while ( elem->i_name.i_uid != (*i_array_p)->i_name.i_uid )
       {
-        if ( elem->i_name.i_uid == (*v10)->i_name.i_uid )
-        {
-          if ( v5 < 2 )
-            goto LABEL_11;
-          --v5;
-        }
+        if ( ++i_array_p > v10 )
+          goto LABEL_8;
       }
     }
-    APCompactArray<SSParameterBase,ASymbol,ACompareLogical<ASymbol>>::append(
-      (APCompactArray<SSParameterBase,ASymbol,ACompareLogical<ASymbol> > *)&v4->i_params.i_count,
-      elem);
-LABEL_11:
-    result = v8;
+    else
+    {
+LABEL_8:
+      APCompactArray<SSParameterBase,ASymbol,ACompareLogical<ASymbol>>::append(&params_p->i_params, elem);
+    }
+    return v7;
   }
   return result;
 }
 
 // File Line: 11080
 // RVA: 0x114160
-char __fastcall SSParser::ensure_exec_time(SSParser *this, SSExpressionBase *expr, SSParser::Args *args, eSSInvokeTime desired_exec_time)
+char __fastcall SSParser::ensure_exec_time(
+        SSParser *this,
+        SSExpressionBase *expr,
+        SSParser::Args *args,
+        eSSInvokeTime desired_exec_time)
 {
-  SSParser::Args *v4; // rbx
-  eSSInvokeTime v5; // edi
-  SSParser *v6; // rsi
-  int v8; // eax
-  int v9; // [rsp+48h] [rbp+20h]
+  unsigned int v8; // eax
+  unsigned int v9; // [rsp+48h] [rbp+20h] BYREF
 
-  v4 = args;
-  v5 = desired_exec_time;
-  v6 = this;
-  if ( desired_exec_time != 3 )
+  if ( desired_exec_time != SSInvokeTime_any )
   {
-    if ( expr->vfptr->is_immediate(expr, (unsigned int *)&v9) )
+    if ( expr->vfptr->is_immediate(expr, &v9) )
     {
-      if ( v5 == 2 )
+      if ( desired_exec_time == SSInvokeTime_durational )
       {
-        v4->i_result = 120;
+        args->i_result = Result_err_context_deferred;
         return 0;
       }
     }
-    else if ( v5 == 1 && v6->i_str_ref_p->i_cstr_p[v4->i_end_pos] != 37 )
+    else if ( desired_exec_time == SSInvokeTime_immediate && this->i_str_ref_p->i_cstr_p[args->i_end_pos] != 37 )
     {
       v8 = v9;
-      v4->i_result = 119;
-      v4->i_start_pos = v8;
-      v4->i_end_pos = v8 + 4;
+      args->i_result = Result_err_context_immediate;
+      args->i_start_pos = v8;
+      args->i_end_pos = v8 + 4;
       return 0;
     }
   }
@@ -8597,37 +8250,39 @@ char __fastcall SSParser::ensure_exec_time(SSParser *this, SSExpressionBase *exp
 
 // File Line: 11140
 // RVA: 0x119120
-AString *__fastcall SSParser::get_result_context_string(AString *result, AString *code, SSParser::eResult a3, unsigned int result_pos, unsigned int result_start, unsigned int start_pos)
+AString *__fastcall SSParser::get_result_context_string(
+        AString *result,
+        AString *code,
+        SSParser::eResult a3,
+        unsigned int result_pos,
+        unsigned int result_start,
+        unsigned int start_pos)
 {
   unsigned int end_pos; // edi
-  SSParser::eResult v7; // ebp
-  AString *v8; // r15
-  AString *v9; // rbx
   unsigned int v10; // esi
-  unsigned int v11; // ecx
-  unsigned int v12; // er12
+  unsigned int i_length; // ecx
+  unsigned int v12; // r12d
   const char *v13; // rdx
-  AString *v14; // rax
-  AStringRef *v15; // r14
-  bool v16; // zf
-  AObjReusePool<AStringRef> *v17; // rax
-  AObjBlock<AStringRef> *v18; // rcx
-  unsigned __int64 v19; // rdx
+  AString *result_string; // rax
+  AStringRef *i_str_ref_p; // r14
+  AObjReusePool<AStringRef> *pool; // rax
+  AObjBlock<AStringRef> *i_block_p; // rcx
+  unsigned __int64 i_objects_a; // rdx
   bool v20; // cf
-  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *v21; // rcx
+  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *p_i_exp_pool; // rcx
   __int64 v22; // r14
   __int64 v23; // rbp
   bool v24; // bp
-  unsigned int v25; // er13
+  unsigned int v25; // r13d
   unsigned int v26; // ecx
   __int64 v27; // rbp
   unsigned int v28; // edi
   unsigned int v29; // eax
-  unsigned int v30; // er14
-  AString v31; // rax
+  unsigned int v30; // r14d
+  AStringRef *v31; // rax
   __int64 v32; // rbp
   __int64 v33; // rbp
-  unsigned int v34; // er12
+  unsigned int v34; // r12d
   __int64 v35; // rbp
   __int64 v36; // rdi
   unsigned int v37; // edx
@@ -8635,78 +8290,78 @@ AString *__fastcall SSParser::get_result_context_string(AString *result, AString
   __int64 v39; // rsi
   __int64 v40; // rdi
   __int64 v42; // [rsp+20h] [rbp-78h]
-  AString resulta; // [rsp+38h] [rbp-60h]
+  AString resulta; // [rsp+38h] [rbp-60h] BYREF
   __int64 v44; // [rsp+40h] [rbp-58h]
-  unsigned int v45; // [rsp+A8h] [rbp+10h]
-  unsigned int last_counted_p; // [rsp+B0h] [rbp+18h]
-  unsigned int find_pos_p; // [rsp+B8h] [rbp+20h]
+  unsigned int v45; // [rsp+A8h] [rbp+10h] BYREF
+  unsigned int last_counted_p; // [rsp+B0h] [rbp+18h] BYREF
+  unsigned int find_pos_p; // [rsp+B8h] [rbp+20h] BYREF
 
   v44 = -2i64;
   end_pos = result_pos;
-  v7 = a3;
-  v8 = code;
-  v9 = result;
   v10 = 0;
-  v11 = code->i_str_ref_p->i_length;
-  find_pos_p = v11;
-  if ( result_pos >= v11 )
-    end_pos = v11 - 1;
+  i_length = code->i_str_ref_p->i_length;
+  find_pos_p = i_length;
+  if ( result_pos >= i_length )
+    end_pos = i_length - 1;
   v12 = result_start;
   if ( result_start > end_pos )
     v12 = end_pos;
   if ( AString::find_reverse(code, 10, 4u, &start_pos, start_pos, end_pos) && start_pos )
     ++start_pos;
-  AString::find(v8, 10, 4u, &find_pos_p, end_pos, 0xFFFFFFFF);
-  AString::AString(v9, 0i64, 0x400u, 0, 0);
-  if ( v7 )
+  AString::find(code, 10, 4u, &find_pos_p, end_pos, 0xFFFFFFFF);
+  AString::AString(result, 0i64, 0x400u, 0, 0);
+  if ( a3 )
   {
     v13 = "ERROR: ";
-    if ( (signed int)v7 < 8 )
+    if ( a3 < Result_err__start )
       v13 = "WARNING: ";
   }
   else
   {
     v13 = "INFO: ";
   }
-  AString::append(v9, v13, 0xFFFFFFFF);
-  v14 = SSParser::get_result_string(&resulta, v7);
-  AString::append(v9, v14);
-  v15 = resulta.i_str_ref_p;
-  v16 = resulta.i_str_ref_p->i_ref_count == 1;
-  --v15->i_ref_count;
-  if ( v16 )
+  AString::append(result, v13, 0xFFFFFFFF);
+  result_string = SSParser::get_result_string(&resulta, a3);
+  AString::append(result, result_string);
+  i_str_ref_p = resulta.i_str_ref_p;
+  if ( resulta.i_str_ref_p->i_ref_count-- == 1 )
   {
-    if ( v15->i_deallocate )
-      AMemory::c_free_func(v15->i_cstr_p);
-    v17 = AStringRef::get_pool();
-    v18 = v17->i_block_p;
-    v19 = (unsigned __int64)v18->i_objects_a;
-    if ( (unsigned __int64)v15 < v19
-      || (v20 = (unsigned __int64)v15 < v19 + 24i64 * v18->i_size, v21 = &v17->i_pool, !v20) )
+    if ( i_str_ref_p->i_deallocate )
+      AMemory::c_free_func(i_str_ref_p->i_cstr_p);
+    pool = AStringRef::get_pool();
+    i_block_p = pool->i_block_p;
+    i_objects_a = (unsigned __int64)i_block_p->i_objects_a;
+    if ( (unsigned __int64)i_str_ref_p < i_objects_a
+      || (v20 = (unsigned __int64)i_str_ref_p < i_objects_a + 24i64 * i_block_p->i_size,
+          p_i_exp_pool = &pool->i_pool,
+          !v20) )
     {
-      v21 = &v17->i_exp_pool;
+      p_i_exp_pool = &pool->i_exp_pool;
     }
-    APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(v21, v15);
+    APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(p_i_exp_pool, i_str_ref_p);
   }
-  AString::append(v9, "\n", 0xFFFFFFFF);
-  v22 = v9->i_str_ref_p->i_length;
+  AString::append(result, "\n", 0xFFFFFFFF);
+  v22 = result->i_str_ref_p->i_length;
   v23 = (unsigned int)(v22 + 90);
-  if ( (unsigned int)v23 >= v9->i_str_ref_p->i_size || v9->i_str_ref_p->i_ref_count + v9->i_str_ref_p->i_read_only != 1 )
-    AString::set_size(v9, v23);
-  memset(&v9->i_str_ref_p->i_cstr_p[v22], 118, 0x5Aui64);
-  v9->i_str_ref_p->i_cstr_p[v23] = 0;
-  v9->i_str_ref_p->i_length = v23;
-  AString::append(v9, "\n", 0xFFFFFFFF);
-  AString::append(v9, &v8->i_str_ref_p->i_cstr_p[start_pos], end_pos - start_pos);
+  if ( (unsigned int)v23 >= result->i_str_ref_p->i_size
+    || result->i_str_ref_p->i_ref_count + result->i_str_ref_p->i_read_only != 1 )
+  {
+    AString::set_size(result, v23);
+  }
+  memset(&result->i_str_ref_p->i_cstr_p[v22], 118, 0x5Aui64);
+  result->i_str_ref_p->i_cstr_p[v23] = 0;
+  result->i_str_ref_p->i_length = v23;
+  AString::append(result, "\n", 0xFFFFFFFF);
+  AString::append(result, &code->i_str_ref_p->i_cstr_p[start_pos], end_pos - start_pos);
   v45 = find_pos_p - 1;
-  v24 = AString::find(v8, 10, 1u, &v45, end_pos, 0xFFFFFFFF);
+  v24 = AString::find(code, 10, 1u, &v45, end_pos, 0xFFFFFFFF);
   LOBYTE(result_start) = v24;
   if ( v45 - end_pos != -1 )
-    AString::append(v9, &v8->i_str_ref_p->i_cstr_p[end_pos], v45 - end_pos + 1);
-  if ( v8->i_str_ref_p->i_length )
+    AString::append(result, &code->i_str_ref_p->i_cstr_p[end_pos], v45 - end_pos + 1);
+  if ( code->i_str_ref_p->i_length )
   {
     last_counted_p = 0;
-    v25 = AString::count(v8, 10, 0, end_pos, &last_counted_p);
+    v25 = AString::count(code, 10, 0, end_pos, &last_counted_p);
     v26 = last_counted_p;
     if ( v25 )
       v26 = last_counted_p + 1;
@@ -8720,15 +8375,15 @@ AString *__fastcall SSParser::get_result_context_string(AString *result, AString
   }
   if ( !v24 )
   {
-    v27 = v9->i_str_ref_p->i_length + 1;
-    if ( (unsigned int)v27 >= v9->i_str_ref_p->i_size
-      || v9->i_str_ref_p->i_ref_count + v9->i_str_ref_p->i_read_only != 1 )
+    v27 = result->i_str_ref_p->i_length + 1;
+    if ( (unsigned int)v27 >= result->i_str_ref_p->i_size
+      || result->i_str_ref_p->i_ref_count + result->i_str_ref_p->i_read_only != 1 )
     {
-      AString::set_size(v9, v27);
+      AString::set_size(result, v27);
     }
-    v9->i_str_ref_p->i_cstr_p[(unsigned int)(v27 - 1)] = 10;
-    v9->i_str_ref_p->i_cstr_p[v27] = 0;
-    v9->i_str_ref_p->i_length = v27;
+    result->i_str_ref_p->i_cstr_p[(unsigned int)(v27 - 1)] = 10;
+    result->i_str_ref_p->i_cstr_p[v27] = 0;
+    result->i_str_ref_p->i_length = v27;
   }
   if ( end_pos - v10 > v12 )
     v12 = end_pos - v10;
@@ -8739,473 +8394,469 @@ AString *__fastcall SSParser::get_result_context_string(AString *result, AString
   v30 = v10 - v29;
   if ( v10 - v29 >= 2 )
   {
-    v31.i_str_ref_p = v9->i_str_ref_p;
-    last_counted_p = v9->i_str_ref_p->i_length;
+    v31 = result->i_str_ref_p;
+    last_counted_p = result->i_str_ref_p->i_length;
     v32 = v30 - 1 + last_counted_p;
-    if ( (unsigned int)v32 >= v31.i_str_ref_p->i_size
-      || v31.i_str_ref_p->i_ref_count + v31.i_str_ref_p->i_read_only != 1 )
-    {
-      AString::set_size(v9, v32);
-    }
-    memset(&v9->i_str_ref_p->i_cstr_p[last_counted_p], 62, v30 - 1);
-    v9->i_str_ref_p->i_cstr_p[v32] = 0;
-    v9->i_str_ref_p->i_length = v32;
+    if ( (unsigned int)v32 >= v31->i_size || v31->i_ref_count + v31->i_read_only != 1 )
+      AString::set_size(result, v32);
+    memset(&result->i_str_ref_p->i_cstr_p[last_counted_p], 62, v30 - 1);
+    result->i_str_ref_p->i_cstr_p[v32] = 0;
+    result->i_str_ref_p->i_length = v32;
   }
-  if ( v30 >= 1 )
+  if ( v30 )
   {
-    v33 = v9->i_str_ref_p->i_length + 1;
-    if ( (unsigned int)v33 >= v9->i_str_ref_p->i_size
-      || v9->i_str_ref_p->i_ref_count + v9->i_str_ref_p->i_read_only != 1 )
+    v33 = result->i_str_ref_p->i_length + 1;
+    if ( (unsigned int)v33 >= result->i_str_ref_p->i_size
+      || result->i_str_ref_p->i_ref_count + result->i_str_ref_p->i_read_only != 1 )
     {
-      AString::set_size(v9, v33);
+      AString::set_size(result, v33);
     }
-    v9->i_str_ref_p->i_cstr_p[(unsigned int)(v33 - 1)] = 32;
-    v9->i_str_ref_p->i_cstr_p[v33] = 0;
-    v9->i_str_ref_p->i_length = v33;
+    result->i_str_ref_p->i_cstr_p[(unsigned int)(v33 - 1)] = 32;
+    result->i_str_ref_p->i_cstr_p[v33] = 0;
+    result->i_str_ref_p->i_length = v33;
   }
   if ( v28 >= 2 )
   {
     v34 = v28 - 1;
-    v35 = v9->i_str_ref_p->i_length;
+    v35 = result->i_str_ref_p->i_length;
     v36 = v28 - 1 + (unsigned int)v35;
-    if ( (unsigned int)v36 >= v9->i_str_ref_p->i_size
-      || v9->i_str_ref_p->i_ref_count + v9->i_str_ref_p->i_read_only != 1 )
+    if ( (unsigned int)v36 >= result->i_str_ref_p->i_size
+      || result->i_str_ref_p->i_ref_count + result->i_str_ref_p->i_read_only != 1 )
     {
-      AString::set_size(v9, v36);
+      AString::set_size(result, v36);
     }
-    memset(&v9->i_str_ref_p->i_cstr_p[v35], 45, v34);
-    v9->i_str_ref_p->i_cstr_p[v36] = 0;
-    v9->i_str_ref_p->i_length = v36;
+    memset(&result->i_str_ref_p->i_cstr_p[v35], 45, v34);
+    result->i_str_ref_p->i_cstr_p[v36] = 0;
+    result->i_str_ref_p->i_length = v36;
   }
-  v37 = v9->i_str_ref_p->i_length + 256;
-  if ( v37 >= v9->i_str_ref_p->i_size || v9->i_str_ref_p->i_ref_count + v9->i_str_ref_p->i_read_only != 1 )
-    AString::set_size(v9, v37);
+  v37 = result->i_str_ref_p->i_length + 256;
+  if ( v37 >= result->i_str_ref_p->i_size || result->i_str_ref_p->i_ref_count + result->i_str_ref_p->i_read_only != 1 )
+    AString::set_size(result, v37);
   v38 = v25 + 1;
   if ( v30 == v10 )
   {
-    AString::append_format(v9, "^ <<<< Line: %u, column: %u\n", v38, v10 + 1);
+    AString::append_format(result, "^ <<<< Line: %u, column: %u\n", v38, v10 + 1);
   }
   else
   {
     LODWORD(v42) = v10 + 1;
-    AString::append_format(v9, "^ <<<< Line: %u, columns: %u-%u\n", v38, v30 + 1, v42);
+    AString::append_format(result, "^ <<<< Line: %u, columns: %u-%u\n", v38, v30 + 1, v42);
   }
   if ( (_BYTE)result_start )
-    AString::append(v9, &v8->i_str_ref_p->i_cstr_p[v45 + 1], find_pos_p - v45 - 1);
-  AString::remove_all(v9, 13, 0, 0xFFFFFFFF);
-  AString::append(v9, "\n", 0xFFFFFFFF);
-  v39 = v9->i_str_ref_p->i_length;
+    AString::append(result, &code->i_str_ref_p->i_cstr_p[v45 + 1], find_pos_p - v45 - 1);
+  AString::remove_all(result, 13, 0, 0xFFFFFFFF);
+  AString::append(result, "\n", 0xFFFFFFFF);
+  v39 = result->i_str_ref_p->i_length;
   v40 = (unsigned int)(v39 + 90);
-  if ( (unsigned int)v40 >= v9->i_str_ref_p->i_size || v9->i_str_ref_p->i_ref_count + v9->i_str_ref_p->i_read_only != 1 )
-    AString::set_size(v9, v40);
-  memset(&v9->i_str_ref_p->i_cstr_p[v39], 94, 0x5Aui64);
-  v9->i_str_ref_p->i_cstr_p[v40] = 0;
-  v9->i_str_ref_p->i_length = v40;
-  AString::append(v9, "\n", 0xFFFFFFFF);
-  return v9;
+  if ( (unsigned int)v40 >= result->i_str_ref_p->i_size
+    || result->i_str_ref_p->i_ref_count + result->i_str_ref_p->i_read_only != 1 )
+  {
+    AString::set_size(result, v40);
+  }
+  memset(&result->i_str_ref_p->i_cstr_p[v39], 94, 0x5Aui64);
+  result->i_str_ref_p->i_cstr_p[v40] = 0;
+  result->i_str_ref_p->i_length = v40;
+  AString::append(result, "\n", 0xFFFFFFFF);
+  return result;
 }
 
 // File Line: 11278
 // RVA: 0x119670
-AString *__fastcall SSParser::get_result_string(AString *result, SSParser::eResult a2)
+AString *__fastcall SSParser::get_result_string(AString *result, __int64 a2)
 {
-  AString *v2; // rbx
   const char *v3; // rdx
-  __int64 v5; // [rsp+20h] [rbp-10h]
 
-  v2 = result;
-  LODWORD(v5) = 0;
-  switch ( a2 )
+  switch ( (int)a2 )
   {
     case 0:
       AString::AString(result, "The text was parsed without error.");
-      return v2;
+      return result;
     case 3:
       v3 = "Identifier name is longer than the maximum.\n"
            "All characters greater than the maximum of 256 have been truncated.";
-      break;
+      goto LABEL_117;
     case 6:
       v3 = "The expression has no side effects so it does not seem useful as a statement\n"
            "on its own [not used as an argument or result (last expression) of a code block].";
-      break;
+      goto LABEL_117;
     case 7:
       v3 = "The expression has only sub-expressions with side effects - it does not seem\n"
            "useful as a statement on its own [not used as an argument or result (last\n"
            "expression) of a code block].";
-      break;
+      goto LABEL_117;
     case 9:
       v3 = "Expected a digit or letter [depending on the radix/base] but did not receive one.";
-      break;
+      goto LABEL_117;
     case 10:
       v3 = "A binding must begin with a colon :.";
-      break;
+      goto LABEL_117;
     case 11:
       v3 = "Expected a code block [ ], but did not find one.";
-      break;
+      goto LABEL_117;
     case 12:
       v3 = "Expected the class cast operator <>, but it was not found.";
-      break;
+      goto LABEL_117;
     case 13:
       v3 = "A character escape sequence must begin with a backslash character \\.";
-      break;
+      goto LABEL_117;
     case 14:
       v3 = "A character escape sequence that uses a number must have ASCII value between 0 and 255.";
-      break;
+      goto LABEL_117;
     case 15:
       v3 = "Class name must begin with an uppercase letter.";
-      break;
+      goto LABEL_117;
     case 16:
       v3 = "Expected class, list-class, invoke class, metaclass or class union and did not find one.";
-      break;
+      goto LABEL_117;
     case 17:
       v3 = "A List class descriptor must follow the list class type with braces/curly brackets {} optionally enclosed a"
            "round an item type.";
-      break;
+      goto LABEL_117;
     case 18:
       v3 = "A List class descriptor must end with a closing brace/curly bracket }.";
-      break;
+      goto LABEL_117;
     case 19:
       v3 = "Expected a class, list-class or invoke class and did not find one.";
-      break;
+      goto LABEL_117;
     case 20:
       v3 = "A metaclass descriptor must begin with an angle bracket <.";
-      break;
+      goto LABEL_117;
     case 21:
       v3 = "A metaclass descriptor must end with a closing angle bracket >.";
-      break;
+      goto LABEL_117;
     case 22:
       v3 = "A class union descriptor must begin with an opening angle bracket <.";
-      break;
+      goto LABEL_117;
     case 23:
       v3 = "A class union descriptor must end with a closing angle bracket >.";
-      break;
+      goto LABEL_117;
     case 24:
       v3 = "Expected a clause code block [ ], but did not receive one.";
-      break;
+      goto LABEL_117;
     case 25:
       v3 = "A code block must start with an opening square bracket [.";
-      break;
+      goto LABEL_117;
     case 26:
       v3 = "Multiple line comment missing closing delimiters *// .";
-      break;
+      goto LABEL_117;
     case 27:
       v3 = "Expected the class conversion operator >>, but it was not found.";
-      break;
+      goto LABEL_117;
     case 28:
       v3 = "A data definition statement must start with an exclamation mark !.";
-      break;
+      goto LABEL_117;
     case 29:
       v3 = "Expected a digit, but did not receive one.";
-      break;
+      goto LABEL_117;
     case 30:
       v3 = "Expected an expression, but did not find one.";
-      break;
+      goto LABEL_117;
     case 31:
       v3 = "A group parameter specification must begin with an opening brace {.";
-      break;
+      goto LABEL_117;
     case 32:
       v3 = "Instance name must begin with a lowercase letter.";
-      break;
+      goto LABEL_117;
     case 33:
       v3 = "Expected a negative sign - or a digit, but received neither.";
-      break;
+      goto LABEL_117;
     case 34:
       v3 = "An invocation apply must begin with a percent sign % character.";
-      break;
+      goto LABEL_117;
     case 35:
       v3 = "An invocation argument list must begin with an opening parenthesis (bracket) (.\n[Missing a period?]";
-      break;
+      goto LABEL_117;
     case 36:
       v3 = "An argument in an invocation argument list must be followed by a comma , argument delimiter, semi-colon ;"
            " return argument delimiter or an ending parenthesis (bracket) ).";
-      break;
+      goto LABEL_117;
     case 37:
       v3 = "An invocation return argument list must begin with an opening brace {.";
-      break;
+      goto LABEL_117;
     case 38:
       v3 = "Expected cascaded invocations - i.e. a receiver followed by . then [ then two or more invocations and end"
            "ing in ] and did not find any.";
-      break;
+      goto LABEL_117;
     case 39:
       v3 = "Expected cascaded invocations - i.e. a receiver followed . then [ then two or more invocations and ending"
            " in ] and only found one invocation.\n"
            "[If only one invocation is desired, then just use . - i.e. receiver.invoke()].\n";
-      break;
+      goto LABEL_117;
     case 40:
       v3 = "Expected an invocation selector - i.e. a method call or coroutine call,\nbut found neither.";
-      break;
+      goto LABEL_117;
     case 41:
       v3 = "Expected an invocation selector - i.e. a method call, an operator call\n"
            "or coroutine call, but found neither.";
-      break;
+      goto LABEL_117;
     case 42:
       v3 = "A character literal must begin with an accent [`] character - the one beneath the tilde ~.";
-      break;
+      goto LABEL_117;
     case 43:
       v3 = "Expected a List literal opening brace/curly bracket {, but did not receive one.";
-      break;
+      goto LABEL_117;
     case 44:
       v3 = "An item delimiter , or a closing brace/curly bracket } was expected while parsing a List literal, but did"
            " not receive either.";
-      break;
+      goto LABEL_117;
     case 45:
       v3 = "A string literal must begin with a double quote [\"]";
-      break;
+      goto LABEL_117;
     case 46:
       v3 = "A symbol literal must begin with a single quote [].";
-      break;
+      goto LABEL_117;
     case 47:
       v3 = "A symbol literal must end with a single quote [].";
-      break;
+      goto LABEL_117;
     case 48:
       v3 = "Expected a loop code block [ ], but did not receive one.";
-      break;
+      goto LABEL_117;
     case 49:
       v3 = "A loop exit must begin with exit.";
-      break;
+      goto LABEL_117;
     case 50:
       v3 = "Expected a class meta key name (demand_load or object_id_lookup).";
-      break;
+      goto LABEL_117;
     case 52:
       v3 = "A constructor method name must begin with an exclamation mark ! and be optionally followed by an identifier"
            " starting with a lowercase letter.";
-      break;
+      goto LABEL_117;
     case 53:
       v3 = "A method name must begin with a lowercase letter or an exclamation mark !";
-      break;
+      goto LABEL_117;
     case 54:
       v3 = "Expected a named argument specifier (arg_name#) and did not find one.";
-      break;
+      goto LABEL_117;
     case 55:
       v3 = "Expected an operator method call, but did not find one.";
-      break;
+      goto LABEL_117;
     case 56:
       v3 = "Expected an operator id, but did not find the @ or @? symbols.";
-      break;
+      goto LABEL_117;
     case 57:
       v3 = "A parameter list must start with an opening parenthesis (bracket) (.";
-      break;
+      goto LABEL_117;
     case 58:
       v3 = "Argument descriptors must be named and no name was found.";
-      break;
+      goto LABEL_117;
     case 59:
       v3 = "Expected a race code block [ ], but did not find one.";
-      break;
+      goto LABEL_117;
     case 60:
       v3 = "While parsing a real number, expected a fractional part (. digit {digit}),\n"
            "an exponent part (E | e [-] digits), or both, but received neither.";
-      break;
+      goto LABEL_117;
     case 61:
       v3 = "A script name must begin with an underscore _ and then a lowercase letter.";
-      break;
+      goto LABEL_117;
     case 62:
       v3 = "Expected a scope resolution operator to follow the given class scope.";
-      break;
+      goto LABEL_117;
     case 63:
       v3 = "String literal missing closing double quotation mark \".";
-      break;
+      goto LABEL_117;
     case 64:
       v3 = "A strategy name must begin with a dollar sign $ and then a lowercase letter.";
-      break;
+      goto LABEL_117;
     case 65:
       v3 = "String literal missing closing quotation mark ().";
-      break;
+      goto LABEL_117;
     case 66:
       v3 = "A create temporary variable statement must start with an exclamation mark !.";
-      break;
+      goto LABEL_117;
     case 67:
       v3 = "Expected a sync code block [ ], but did not find one.";
-      break;
+      goto LABEL_117;
     case 68:
       v3 = "Whitespace required - expected some combination of whitespace characters and/or comments.";
-      break;
+      goto LABEL_117;
     case 69:
       v3 = "Invocation expected , ) or an expression.";
-      break;
+      goto LABEL_117;
     case 70:
       v3 = "A variable rebind to an instance may only be applied to an identifier.";
-      break;
+      goto LABEL_117;
     case 71:
       v3 = "A concurrent branch only makes sense when used on an expression that is not immediate\n"
            "and may take more than one frame to execute such as a coroutine call.";
-      break;
+      goto LABEL_117;
     case 72:
       v3 = "While parsing for a create temporary variable statement, a constructor or a destructor call was found instead.";
-      break;
+      goto LABEL_117;
     case 73:
       v3 = "Expected a particular character or type of character, but did not receive it.";
-      break;
+      goto LABEL_117;
     case 74:
       v3 = "The metaclass <Object> should be used instead of the class instance Class.";
-      break;
+      goto LABEL_117;
     case 75:
       v3 = "Group parameter descriptor expected a class name or }, but neither were found.";
-      break;
+      goto LABEL_117;
     case 76:
       v3 = "Found a trailing concurrency delimiter , at the end of a code block.\n"
            "A concurrency delimiter is valid only when it is between two statements.";
-      break;
+      goto LABEL_117;
     case 79:
       v3 = "A divert only makes sense when used on expressions that are durational / non-immediate\n"
            "such as coroutine calls that may take more than one frame to execute and thereforerequire update calls.";
-      break;
+      goto LABEL_117;
     case 80:
       v3 = "An else / default clause may not be the sole clause - there must be at least one more prior to it.";
-      break;
+      goto LABEL_117;
     case 81:
       v3 = "Found an else without a matching if or case.";
-      break;
+      goto LABEL_117;
     case 82:
       v3 = "Hit end of file prior to the completion of a parse.\n[Mismatched brackets [] {} ()?]";
-      break;
+      goto LABEL_117;
     case 83:
       v3 = "Found a loop exit in an invalid location.";
-      break;
+      goto LABEL_117;
     case 84:
       v3 = "Operator calls may not be used with an implicit this - otherwise it is more error\n"
            "prone and even when used correctly code is more difficult to understand.";
-      break;
+      goto LABEL_117;
     case 85:
       v3 = "[A named specifier must appear before an argument rather than after - arg_name#arg.]\n"
            "An argument in an invocation argument list must be followed by a comma , argument delimiter, semi-colon ;"
            " return argument delimiter or an ending parenthesis (bracket) ).";
-      break;
+      goto LABEL_117;
     case 86:
       v3 = "Found an object-identifier when a closure was expected.";
-      break;
+      goto LABEL_117;
     case 87:
       v3 = "The parameter list expected , or ), but neither were found.";
-      break;
+      goto LABEL_117;
     case 88:
       v3 = "The parameter list did not expect an extra semi-colon ;!  Return parameters already started.";
-      break;
+      goto LABEL_117;
     case 90:
       v3 = "The code block expected another statement or the end of the code block ].";
-      break;
+      goto LABEL_117;
     case 91:
       v3 = "A class union descriptor must union two or more classes.";
-      break;
+      goto LABEL_117;
     case 92:
       AString::AString(
         result,
         0x100u,
         "The group parameter descriptor contained too many classes.\n"
         "There may not be more than %i classes in the pattern.",
-        63i64,
-        v5,
-        -2i64);
-      return v2;
+        63i64);
+      return result;
     case 93:
       v3 = "Radix too large - it must be between 2 and 36 inclusively.";
-      break;
+      goto LABEL_117;
     case 94:
       v3 = "Radix too small - it must be between 2 and 36 inclusively.";
-      break;
+      goto LABEL_117;
     case 95:
       v3 = "An identifier may be no more than 255 characters long.";
-      break;
+      goto LABEL_117;
     case 96:
       v3 = "A symbol literal may be no more than 255 characters long.";
-      break;
+      goto LABEL_117;
     case 97:
       v3 = "The case comparison expression must resolve to a class type that has an equals operator =.";
-      break;
+      goto LABEL_117;
     case 98:
       v3 = "A conversion method may not have any parameters [this may change in the future].";
-      break;
+      goto LABEL_117;
     case 99:
       v3 = "This data member name is a duplicate of one already existing in this class.";
-      break;
+      goto LABEL_117;
     case 100:
       v3 = "This data member name is a duplicate of one already existing in a superclass of this class.";
-      break;
+      goto LABEL_117;
     case 101:
       v3 = "This data member name is a duplicate of one already existing in a subclass of this class.";
-      break;
+      goto LABEL_117;
     case 102:
       v3 = "Argument with the same name already present in the parameter list.";
-      break;
+      goto LABEL_117;
     case 103:
       v3 = "Argument with the same name already present in the return parameter list.";
-      break;
+      goto LABEL_117;
     case 105:
       v3 = "Expected the end of the invocation list ), but did not find it.\n[Too many arguments supplied?]";
-      break;
+      goto LABEL_117;
     case 110:
       v3 = "Once a named argument is used, any following arguments must also be named.";
-      break;
+      goto LABEL_117;
     case 111:
       v3 = "The specified constructor method requires one or more arguments.";
-      break;
+      goto LABEL_117;
     case 112:
       v3 = "A class with the specified name does not exist - ensure that it is registered prior to this parse.";
-      break;
+      goto LABEL_117;
     case 119:
       v3 = "A deferred statement (such as a coroutine) was found where an immediate statement (such as a method) was expected.";
-      break;
+      goto LABEL_117;
     case 120:
       v3 = "An immediate statement (such as a method) was found where a deferred statement (such as a coroutine) was expected.";
-      break;
+      goto LABEL_117;
     case 121:
       v3 = "A concurrent block (sync or race) should have at least two durational expressions or running concurrently is redundant.";
-      break;
+      goto LABEL_117;
     case 122:
       v3 = "Expected an Actor class or subclass, but given a non-actor class.";
-      break;
+      goto LABEL_117;
     case 123:
       v3 = "The class scope for coroutines and strategies must be an Actor class or an Actor subclass.";
-      break;
+      goto LABEL_117;
     case 126:
       v3 = "The result class type of a case test expression must be compatible as an operand to the equals operator = o"
            "f the comparison expression.";
-      break;
+      goto LABEL_117;
     case 128:
       v3 = "Generic types are not supported in closure parameter lists and might never be - too many levels of indirectio"
            "n to wrap your head around";
-      break;
+      goto LABEL_117;
     case 129:
       v3 = "The result type of a conditional test expression must be a Boolean class.";
-      break;
+      goto LABEL_117;
     case 130:
       v3 = "The result type of a conversion method must be of the same type as or a subclass of the method name.";
-      break;
+      goto LABEL_117;
     case 131:
       v3 = "The result type of the default expression was not compatible with the specified parameter type.";
-      break;
+      goto LABEL_117;
     case 133:
       v3 = "Cannot do an invoke apply [receiver%invocation()] on a receiver that is guaranteed to be nil.";
-      break;
+      goto LABEL_117;
     case 134:
       v3 = "Expected a List class or subclass, but given a non-list class.";
-      break;
+      goto LABEL_117;
     case 135:
       v3 = "Supplied list item is not of the specified desired class type.";
-      break;
+      goto LABEL_117;
     case 138:
       v3 = "The specified class scope qualifier is not the same class or a superclass of the class of the receiver expres"
            "sion (or implied this).  Note that a NilClass may only have a scope qualifier of Object.";
-      break;
+      goto LABEL_117;
     case 139:
       v3 = "This class union descriptor is trivial.\n"
            "It is lexically correct, but it can be represented more simply as a single class instance or metaclass.";
-      break;
+      goto LABEL_117;
     default:
-      v3 = a_cstr_format("Parse error: #%u.\n[Use a build with additional error checking (SS_CODE_OUT defined) for more context.]");
-      break;
+      v3 = a_cstr_format(
+             "Parse error: #%u.\n[Use a build with additional error checking (SS_CODE_OUT defined) for more context.]",
+             a2);
+LABEL_117:
+      AString::AString(result, v3);
+      return result;
   }
-  AString::AString(v2, v3);
-  return v2;
-}
+}s lexically correct, but it can be
 
 // File Line: 11548
 // RVA: 0x11A870
 void SSParser::initialize_pre_load(void)
 {
   unsigned int v0; // eax
-  ASymbol **v1; // rbx
+  ASymbol **i_array_p; // rbx
   unsigned int v2; // eax
   AString **v3; // rbx
-  __int64 v4; // rbx
+  __int64 i_count; // rbx
   ASymbol **v5; // rdi
   unsigned int v6; // eax
   __int64 v7; // rbx
@@ -9306,10 +8957,10 @@ void SSParser::initialize_pre_load(void)
       SSParser::c_reserved_word_syms.i_size = v0;
       if ( SSParser::c_reserved_word_syms.i_count )
       {
-        v1 = SSParser::c_reserved_word_syms.i_array_p;
+        i_array_p = SSParser::c_reserved_word_syms.i_array_p;
         SSParser::c_reserved_word_syms.i_array_p = APArrayBase<ASymbol>::alloc_array(v0);
-        memmove(SSParser::c_reserved_word_syms.i_array_p, v1, 8i64 * SSParser::c_reserved_word_syms.i_count);
-        AMemory::c_free_func(v1);
+        memmove(SSParser::c_reserved_word_syms.i_array_p, i_array_p, 8i64 * SSParser::c_reserved_word_syms.i_count);
+        AMemory::c_free_func(i_array_p);
       }
       else
       {
@@ -9334,7 +8985,7 @@ void SSParser::initialize_pre_load(void)
         SSParser::c_reserved_word_strs.i_array_p = APArrayBase<AString>::alloc_array(SSParser::c_reserved_word_strs.i_size);
       }
     }
-    v4 = SSParser::c_reserved_word_syms.i_count;
+    i_count = SSParser::c_reserved_word_syms.i_count;
     if ( SSParser::c_reserved_word_syms.i_size < SSParser::c_reserved_word_syms.i_count + 1 )
     {
       v5 = SSParser::c_reserved_word_syms.i_array_p;
@@ -9344,10 +8995,10 @@ void SSParser::initialize_pre_load(void)
         v6 = AMemory::c_req_byte_size_func(8 * (SSParser::c_reserved_word_syms.i_count & 0xFFFFFFFC) + 32) >> 3;
       SSParser::c_reserved_word_syms.i_size = v6;
       SSParser::c_reserved_word_syms.i_array_p = APArrayBase<ASymbol>::alloc_array(v6);
-      memmove(SSParser::c_reserved_word_syms.i_array_p, v5, 8 * v4);
+      memmove(SSParser::c_reserved_word_syms.i_array_p, v5, 8 * i_count);
       AMemory::c_free_func(v5);
     }
-    SSParser::c_reserved_word_syms.i_array_p[v4] = &ASymbol_branch;
+    SSParser::c_reserved_word_syms.i_array_p[i_count] = &ASymbol_branch;
     v7 = SSParser::c_reserved_word_syms.i_count + 1;
     SSParser::c_reserved_word_syms.i_count = v7;
     if ( SSParser::c_reserved_word_syms.i_size < (unsigned int)(v7 + 1) )
@@ -9569,10 +9220,7 @@ void SSParser::initialize_pre_load(void)
     {
       v49 = 0i64;
     }
-    APSorted<AString,AString,ACompareLogical<AString>>::append(
-      (APSorted<AString,AString,ACompareLogical<AString> > *)&SSParser::c_reserved_word_strs.i_count,
-      v49,
-      0i64);
+    APSorted<AString,AString,ACompareLogical<AString>>::append(&SSParser::c_reserved_word_strs, v49, 0i64);
     v51 = (AString *)AMemory::c_malloc_func(8ui64, "AString");
     if ( v51 )
     {
@@ -9583,10 +9231,7 @@ void SSParser::initialize_pre_load(void)
     {
       v51 = 0i64;
     }
-    APSorted<AString,AString,ACompareLogical<AString>>::append(
-      (APSorted<AString,AString,ACompareLogical<AString> > *)&SSParser::c_reserved_word_strs.i_count,
-      v51,
-      0i64);
+    APSorted<AString,AString,ACompareLogical<AString>>::append(&SSParser::c_reserved_word_strs, v51, 0i64);
     v53 = (AString *)AMemory::c_malloc_func(8ui64, "AString");
     if ( v53 )
     {
@@ -9597,10 +9242,7 @@ void SSParser::initialize_pre_load(void)
     {
       v53 = 0i64;
     }
-    APSorted<AString,AString,ACompareLogical<AString>>::append(
-      (APSorted<AString,AString,ACompareLogical<AString> > *)&SSParser::c_reserved_word_strs.i_count,
-      v53,
-      0i64);
+    APSorted<AString,AString,ACompareLogical<AString>>::append(&SSParser::c_reserved_word_strs, v53, 0i64);
     v55 = (AString *)AMemory::c_malloc_func(8ui64, "AString");
     if ( v55 )
     {
@@ -9611,10 +9253,7 @@ void SSParser::initialize_pre_load(void)
     {
       v55 = 0i64;
     }
-    APSorted<AString,AString,ACompareLogical<AString>>::append(
-      (APSorted<AString,AString,ACompareLogical<AString> > *)&SSParser::c_reserved_word_strs.i_count,
-      v55,
-      0i64);
+    APSorted<AString,AString,ACompareLogical<AString>>::append(&SSParser::c_reserved_word_strs, v55, 0i64);
     v57 = (AString *)AMemory::c_malloc_func(8ui64, "AString");
     if ( v57 )
     {
@@ -9625,10 +9264,7 @@ void SSParser::initialize_pre_load(void)
     {
       v57 = 0i64;
     }
-    APSorted<AString,AString,ACompareLogical<AString>>::append(
-      (APSorted<AString,AString,ACompareLogical<AString> > *)&SSParser::c_reserved_word_strs.i_count,
-      v57,
-      0i64);
+    APSorted<AString,AString,ACompareLogical<AString>>::append(&SSParser::c_reserved_word_strs, v57, 0i64);
     v59 = (AString *)AMemory::c_malloc_func(8ui64, "AString");
     if ( v59 )
     {
@@ -9639,10 +9275,7 @@ void SSParser::initialize_pre_load(void)
     {
       v59 = 0i64;
     }
-    APSorted<AString,AString,ACompareLogical<AString>>::append(
-      (APSorted<AString,AString,ACompareLogical<AString> > *)&SSParser::c_reserved_word_strs.i_count,
-      v59,
-      0i64);
+    APSorted<AString,AString,ACompareLogical<AString>>::append(&SSParser::c_reserved_word_strs, v59, 0i64);
     v61 = (AString *)AMemory::c_malloc_func(8ui64, "AString");
     if ( v61 )
     {
@@ -9653,10 +9286,7 @@ void SSParser::initialize_pre_load(void)
     {
       v61 = 0i64;
     }
-    APSorted<AString,AString,ACompareLogical<AString>>::append(
-      (APSorted<AString,AString,ACompareLogical<AString> > *)&SSParser::c_reserved_word_strs.i_count,
-      v61,
-      0i64);
+    APSorted<AString,AString,ACompareLogical<AString>>::append(&SSParser::c_reserved_word_strs, v61, 0i64);
     v63 = (AString *)AMemory::c_malloc_func(8ui64, "AString");
     if ( v63 )
     {
@@ -9667,10 +9297,7 @@ void SSParser::initialize_pre_load(void)
     {
       v63 = 0i64;
     }
-    APSorted<AString,AString,ACompareLogical<AString>>::append(
-      (APSorted<AString,AString,ACompareLogical<AString> > *)&SSParser::c_reserved_word_strs.i_count,
-      v63,
-      0i64);
+    APSorted<AString,AString,ACompareLogical<AString>>::append(&SSParser::c_reserved_word_strs, v63, 0i64);
     v65 = (AString *)AMemory::c_malloc_func(8ui64, "AString");
     if ( v65 )
     {
@@ -9681,10 +9308,7 @@ void SSParser::initialize_pre_load(void)
     {
       v65 = 0i64;
     }
-    APSorted<AString,AString,ACompareLogical<AString>>::append(
-      (APSorted<AString,AString,ACompareLogical<AString> > *)&SSParser::c_reserved_word_strs.i_count,
-      v65,
-      0i64);
+    APSorted<AString,AString,ACompareLogical<AString>>::append(&SSParser::c_reserved_word_strs, v65, 0i64);
     v67 = (AString *)AMemory::c_malloc_func(8ui64, "AString");
     if ( v67 )
     {
@@ -9695,10 +9319,7 @@ void SSParser::initialize_pre_load(void)
     {
       v67 = 0i64;
     }
-    APSorted<AString,AString,ACompareLogical<AString>>::append(
-      (APSorted<AString,AString,ACompareLogical<AString> > *)&SSParser::c_reserved_word_strs.i_count,
-      v67,
-      0i64);
+    APSorted<AString,AString,ACompareLogical<AString>>::append(&SSParser::c_reserved_word_strs, v67, 0i64);
     v69 = (AString *)AMemory::c_malloc_func(8ui64, "AString");
     if ( v69 )
     {
@@ -9709,10 +9330,7 @@ void SSParser::initialize_pre_load(void)
     {
       v69 = 0i64;
     }
-    APSorted<AString,AString,ACompareLogical<AString>>::append(
-      (APSorted<AString,AString,ACompareLogical<AString> > *)&SSParser::c_reserved_word_strs.i_count,
-      v69,
-      0i64);
+    APSorted<AString,AString,ACompareLogical<AString>>::append(&SSParser::c_reserved_word_strs, v69, 0i64);
     v71 = (AString *)AMemory::c_malloc_func(8ui64, "AString");
     if ( v71 )
     {
@@ -9723,10 +9341,7 @@ void SSParser::initialize_pre_load(void)
     {
       v71 = 0i64;
     }
-    APSorted<AString,AString,ACompareLogical<AString>>::append(
-      (APSorted<AString,AString,ACompareLogical<AString> > *)&SSParser::c_reserved_word_strs.i_count,
-      v71,
-      0i64);
+    APSorted<AString,AString,ACompareLogical<AString>>::append(&SSParser::c_reserved_word_strs, v71, 0i64);
     v73 = (AString *)AMemory::c_malloc_func(8ui64, "AString");
     if ( v73 )
     {
@@ -9737,10 +9352,7 @@ void SSParser::initialize_pre_load(void)
     {
       v73 = 0i64;
     }
-    APSorted<AString,AString,ACompareLogical<AString>>::append(
-      (APSorted<AString,AString,ACompareLogical<AString> > *)&SSParser::c_reserved_word_strs.i_count,
-      v73,
-      0i64);
+    APSorted<AString,AString,ACompareLogical<AString>>::append(&SSParser::c_reserved_word_strs, v73, 0i64);
     v75 = (AString *)AMemory::c_malloc_func(8ui64, "AString");
     if ( v75 )
     {
@@ -9751,10 +9363,7 @@ void SSParser::initialize_pre_load(void)
     {
       v75 = 0i64;
     }
-    APSorted<AString,AString,ACompareLogical<AString>>::append(
-      (APSorted<AString,AString,ACompareLogical<AString> > *)&SSParser::c_reserved_word_strs.i_count,
-      v75,
-      0i64);
+    APSorted<AString,AString,ACompareLogical<AString>>::append(&SSParser::c_reserved_word_strs, v75, 0i64);
     v77 = (AString *)AMemory::c_malloc_func(8ui64, "AString");
     if ( v77 )
     {
@@ -9765,10 +9374,7 @@ void SSParser::initialize_pre_load(void)
     {
       v77 = 0i64;
     }
-    APSorted<AString,AString,ACompareLogical<AString>>::append(
-      (APSorted<AString,AString,ACompareLogical<AString> > *)&SSParser::c_reserved_word_strs.i_count,
-      v77,
-      0i64);
+    APSorted<AString,AString,ACompareLogical<AString>>::append(&SSParser::c_reserved_word_strs, v77, 0i64);
     if ( SSParser::c_operator_word_strs.i_size < 7 )
     {
       v79 = AMemory::c_req_byte_size_func(0x38u) >> 3;
@@ -9796,10 +9402,7 @@ void SSParser::initialize_pre_load(void)
     {
       v81 = 0i64;
     }
-    APSorted<AString,AString,ACompareLogical<AString>>::append(
-      (APSorted<AString,AString,ACompareLogical<AString> > *)&SSParser::c_operator_word_strs.i_count,
-      v81,
-      0i64);
+    APSorted<AString,AString,ACompareLogical<AString>>::append(&SSParser::c_operator_word_strs, v81, 0i64);
     v83 = (AString *)AMemory::c_malloc_func(8ui64, "AString");
     if ( v83 )
     {
@@ -9810,10 +9413,7 @@ void SSParser::initialize_pre_load(void)
     {
       v83 = 0i64;
     }
-    APSorted<AString,AString,ACompareLogical<AString>>::append(
-      (APSorted<AString,AString,ACompareLogical<AString> > *)&SSParser::c_operator_word_strs.i_count,
-      v83,
-      0i64);
+    APSorted<AString,AString,ACompareLogical<AString>>::append(&SSParser::c_operator_word_strs, v83, 0i64);
     v85 = (AString *)AMemory::c_malloc_func(8ui64, "AString");
     if ( v85 )
     {
@@ -9824,10 +9424,7 @@ void SSParser::initialize_pre_load(void)
     {
       v85 = 0i64;
     }
-    APSorted<AString,AString,ACompareLogical<AString>>::append(
-      (APSorted<AString,AString,ACompareLogical<AString> > *)&SSParser::c_operator_word_strs.i_count,
-      v85,
-      0i64);
+    APSorted<AString,AString,ACompareLogical<AString>>::append(&SSParser::c_operator_word_strs, v85, 0i64);
     v87 = (AString *)AMemory::c_malloc_func(8ui64, "AString");
     if ( v87 )
     {
@@ -9838,10 +9435,7 @@ void SSParser::initialize_pre_load(void)
     {
       v87 = 0i64;
     }
-    APSorted<AString,AString,ACompareLogical<AString>>::append(
-      (APSorted<AString,AString,ACompareLogical<AString> > *)&SSParser::c_operator_word_strs.i_count,
-      v87,
-      0i64);
+    APSorted<AString,AString,ACompareLogical<AString>>::append(&SSParser::c_operator_word_strs, v87, 0i64);
     v89 = (AString *)AMemory::c_malloc_func(8ui64, "AString");
     if ( v89 )
     {
@@ -9852,10 +9446,7 @@ void SSParser::initialize_pre_load(void)
     {
       v89 = 0i64;
     }
-    APSorted<AString,AString,ACompareLogical<AString>>::append(
-      (APSorted<AString,AString,ACompareLogical<AString> > *)&SSParser::c_operator_word_strs.i_count,
-      v89,
-      0i64);
+    APSorted<AString,AString,ACompareLogical<AString>>::append(&SSParser::c_operator_word_strs, v89, 0i64);
     v91 = (AString *)AMemory::c_malloc_func(8ui64, "AString");
     if ( v91 )
     {
@@ -9866,10 +9457,7 @@ void SSParser::initialize_pre_load(void)
     {
       v91 = 0i64;
     }
-    APSorted<AString,AString,ACompareLogical<AString>>::append(
-      (APSorted<AString,AString,ACompareLogical<AString> > *)&SSParser::c_operator_word_strs.i_count,
-      v91,
-      0i64);
+    APSorted<AString,AString,ACompareLogical<AString>>::append(&SSParser::c_operator_word_strs, v91, 0i64);
     v93 = (AString *)AMemory::c_malloc_func(8ui64, "AString");
     if ( v93 )
     {
@@ -9880,10 +9468,7 @@ void SSParser::initialize_pre_load(void)
     {
       v93 = 0i64;
     }
-    APSorted<AString,AString,ACompareLogical<AString>>::append(
-      (APSorted<AString,AString,ACompareLogical<AString> > *)&SSParser::c_operator_word_strs.i_count,
-      v93,
-      0i64);
+    APSorted<AString,AString,ACompareLogical<AString>>::append(&SSParser::c_operator_word_strs, v93, 0i64);
   }
 }
 
@@ -9893,88 +9478,77 @@ SSParser::string_to_esacpe_string
 
 // File Line: 12057
 // RVA: 0x12E480
-void __fastcall SSParser::parse_name_symbol(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, ASymbol *name_p)
+void __fastcall SSParser::parse_name_symbol(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        ASymbol *name_p)
 {
-  unsigned int v4; // er11
-  unsigned int v5; // ebp
-  ASymbol *v6; // rsi
-  unsigned int *v7; // rbx
-  SSParser *v8; // rdi
-  ASymbol result; // [rsp+40h] [rbp+8h]
+  unsigned int v4; // r11d
+  ASymbol result; // [rsp+40h] [rbp+8h] BYREF
 
   v4 = *end_pos_p;
-  v5 = start_pos;
-  v6 = name_p;
-  v7 = end_pos_p;
   *end_pos_p = this->i_str_ref_p->i_length;
-  v8 = this;
-  AString::find((AString *)&this->i_str_ref_p, ACharMatch_not_identifier, 1u, end_pos_p, v4, 0xFFFFFFFF);
-  if ( v6 )
-    v6->i_uid = SSParser::as_symbol(v8, &result, v5, *v7)->i_uid;
+  AString::find(this, ACharMatch_not_identifier, 1u, end_pos_p, v4, 0xFFFFFFFF);
+  if ( name_p )
+    name_p->i_uid = SSParser::as_symbol(this, &result, start_pos, *end_pos_p)->i_uid;
 }
 
 // File Line: 12087
 // RVA: 0x129C30
-SSDivert *__fastcall SSParser::parse_divert_block(SSParser *this, SSParser::Args *args)
+SSDivert *__fastcall SSParser::parse_divert_block(SSParser *this, unsigned __int64 args)
 {
   SSParser::Args *v2; // rbx
-  SSParser *v3; // rdi
   SSParser::eResult v4; // eax
   SSCode *v5; // rax
   SSCode *v6; // rsi
-  SSDivert *v7; // rdi
-  SSDivert *v8; // rax
-  SSDivert *result; // rax
-  unsigned int end_pos_p; // [rsp+40h] [rbp+8h]
+  __int64 v7; // rdi
+  _QWORD *v8; // rax
+  _QWORD *end_pos_p; // [rsp+40h] [rbp+8h] BYREF
 
-  v2 = args;
-  v3 = this;
-  args->i_result = 82;
-  LODWORD(args) = args->i_start_pos;
-  end_pos_p = (unsigned int)args;
-  if ( this->i_str_ref_p->i_length - (unsigned int)args < 2
-    || (v4 = SSParser::parse_ws_any(this, (unsigned int)args, &end_pos_p),
+  v2 = (SSParser::Args *)args;
+  *(_DWORD *)(args + 8) = 82;
+  LODWORD(args) = *(_DWORD *)args;
+  LODWORD(end_pos_p) = args;
+  if ( (unsigned int)(this->i_str_ref_p->i_length - args) < 2
+    || (v4 = SSParser::parse_ws_any(this, args, (unsigned int *)&end_pos_p),
         v2->i_result = v4,
-        args = (SSParser::Args *)end_pos_p,
-        v2->i_end_pos = end_pos_p,
+        args = (unsigned int)end_pos_p,
+        v2->i_end_pos = (unsigned int)end_pos_p,
         v4)
-    || (v2->i_result = 11, *((_BYTE *)&args->i_start_pos + (unsigned __int64)v3->i_str_ref_p->i_cstr_p) != 91) )
+    || (v2->i_result = Result_err_expected_block, this->i_str_ref_p->i_cstr_p[args] != 91) )
   {
-    v2->i_end_pos = (unsigned int)args;
-    result = 0i64;
+    v2->i_end_pos = args;
+    return 0i64;
   }
   else
   {
-    v2->i_start_pos = (unsigned int)args;
-    v5 = SSParser::parse_code_block_optimized(v3, v2, SSInvokeTime_any, ResultDesired_true);
+    v2->i_start_pos = args;
+    v5 = SSParser::parse_code_block_optimized(this, v2, SSInvokeTime_any, ResultDesired_true);
     v6 = v5;
     v7 = 0i64;
     if ( v2->i_result == Result_ok && v5 )
     {
-      v8 = (SSDivert *)AMemory::c_malloc_func(0x10ui64, "SSDivert");
-      *(_QWORD *)&end_pos_p = v8;
+      v8 = AMemory::c_malloc_func(0x10ui64, "SSDivert");
+      end_pos_p = v8;
       if ( v8 )
       {
-        v8->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
-        v8->vfptr = (SSExpressionBaseVtbl *)&SSDivert::`vftable;
-        v8->i_statement_p = (SSExpressionBase *)&v6->vfptr;
-        v7 = v8;
+        *v8 = &SSExpressionBase::`vftable;
+        *v8 = &SSDivert::`vftable;
+        v8[1] = v6;
+        return (SSDivert *)v8;
       }
     }
-    result = v7;
+    return (SSDivert *)v7;
   }
-  return result;
 }
 
 // File Line: 12147
 // RVA: 0x12E6A0
-ASymbol *__fastcall SSParser::parse_object_id_tail(SSParser *this, SSParser::Args *args, SSClass *class_p)
+ASymbol *__fastcall SSParser::parse_object_id_tail(SSParser *this, SSParser::Args *args, SSActorClass *class_p)
 {
-  SSActorClass *v3; // rsi
-  SSParser::Args *v4; // rbx
-  SSParser *v5; // r14
-  __int64 v6; // rdx
-  char *v7; // r8
+  __int64 i_start_pos; // rdx
+  char *i_cstr_p; // r8
   unsigned int v8; // edx
   ASymbol *v9; // rdi
   char v10; // cl
@@ -9983,21 +9557,18 @@ ASymbol *__fastcall SSParser::parse_object_id_tail(SSParser *this, SSParser::Arg
   SSClass *v13; // rax
   ASymbol *v14; // rax
   ASymbol *v15; // rdx
-  void **v17; // [rsp+28h] [rbp-50h]
-  ASymbol sym_p; // [rsp+30h] [rbp-48h]
-  SSActorClass *v19; // [rsp+38h] [rbp-40h]
+  void **v17; // [rsp+28h] [rbp-50h] BYREF
+  ASymbol sym_p; // [rsp+30h] [rbp-48h] BYREF
+  SSClass *v19; // [rsp+38h] [rbp-40h]
   __int64 v20; // [rsp+40h] [rbp-38h]
   unsigned int v21; // [rsp+48h] [rbp-30h]
   unsigned int v22; // [rsp+50h] [rbp-28h]
 
-  v3 = (SSActorClass *)class_p;
-  v4 = args;
-  v5 = this;
-  v6 = args->i_start_pos;
-  v7 = this->i_str_ref_p->i_cstr_p;
-  if ( (unsigned int)v6 < this->i_str_ref_p->i_length && v7[v6] == 64 )
+  i_start_pos = args->i_start_pos;
+  i_cstr_p = this->i_str_ref_p->i_cstr_p;
+  if ( (unsigned int)i_start_pos < this->i_str_ref_p->i_length && i_cstr_p[i_start_pos] == 64 )
   {
-    v8 = v6 + 1;
+    v8 = i_start_pos + 1;
     v17 = &SSObjectId::`vftable;
     sym_p.i_uid = -1;
     v9 = 0i64;
@@ -10005,10 +9576,10 @@ ASymbol *__fastcall SSParser::parse_object_id_tail(SSParser *this, SSParser::Arg
     v20 = 0i64;
     v21 = 0;
     v22 = 0;
-    if ( !v3 )
-      v3 = SSBrain::c_actor_class_p;
-    v19 = v3;
-    v10 = v7[v8];
+    if ( !class_p )
+      class_p = SSBrain::c_actor_class_p;
+    v19 = class_p;
+    v10 = i_cstr_p[v8];
     if ( v10 == 61 )
     {
       v22 |= 2u;
@@ -10021,25 +9592,25 @@ ASymbol *__fastcall SSParser::parse_object_id_tail(SSParser *this, SSParser::Arg
     }
     ++v8;
 LABEL_10:
-    v11 = (unsigned int)SSParser::parse_literal_symbol(v5, v8, &v4->i_end_pos, &sym_p);
-    v4->i_result = v11;
+    v11 = (unsigned int)SSParser::parse_literal_symbol(this, v8, &args->i_end_pos, &sym_p);
+    args->i_result = v11;
     if ( v11 == Result_ok )
     {
-      if ( (v3->i_flags >> 4) & 1 )
+      if ( (class_p->i_flags & 0x10) != 0 )
       {
-        v12 = v5->i_flags.i_flagset >> 8;
-        LOBYTE(v12) = (LOWORD(v5->i_flags.i_flagset) >> 8) & 1;
-        v13 = (SSClass *)((__int64 (__fastcall *)(SSActorClass *, void ***, __int64))v19->vfptr[1].is_actor_instance)(
+        v12 = this->i_flags.i_flagset >> 8;
+        LOBYTE(v12) = BYTE1(this->i_flags.i_flagset) & 1;
+        v13 = (SSClass *)((__int64 (__fastcall *)(SSClass *, void ***, __int64))v19->vfptr[1].is_actor_instance)(
                            v19,
                            &v17,
                            v12);
         if ( v13 )
         {
-          if ( v22 & 2 )
+          if ( (v22 & 2) != 0 )
             v13 = SSBrain::c_symbol_class_p;
-          v4->i_type_p = (SSClassDescBase *)&v13->vfptr;
-          if ( !(v4->i_flags & 1) )
-            goto LABEL_24;
+          args->i_type_p = v13;
+          if ( (args->i_flags & 1) == 0 )
+            goto LABEL_23;
           v14 = (ASymbol *)AMemory::c_malloc_func(0x30ui64, "SSObjectId");
           v15 = v14;
           if ( v14 )
@@ -10056,23 +9627,23 @@ LABEL_10:
           {
             v15 = 0i64;
           }
-LABEL_23:
+LABEL_22:
           v9 = v15;
-LABEL_24:
+LABEL_23:
           v17 = &SSExpressionBase::`vftable;
           return v9;
         }
-        v4->i_result = 118;
+        args->i_result = Result_err_context_object_id_invalid;
       }
       else
       {
-        v4->i_result = 117;
+        args->i_result = Result_err_context_object_id_bad_class;
       }
     }
     v15 = 0i64;
-    goto LABEL_23;
+    goto LABEL_22;
   }
-  v4->i_result = 56;
+  args->i_result = Result_err_expected_obj_id;
   return 0i64;
 }
 
@@ -10080,42 +9651,36 @@ LABEL_24:
 // RVA: 0x12FB70
 SSInvocation *__fastcall SSParser::parse_prefix_operator_expr(SSParser *this, ASymbol *op_name, SSParser::Args *args)
 {
-  SSParser::Args *v3; // rbx
-  ASymbol *v4; // r14
-  SSParser *v5; // rbp
   SSParser::eResult v6; // eax
   SSLiteralList *v7; // rsi
-  SSClassDescBase *v8; // rdi
+  SSClassDescBase *i_type_p; // rdi
   __int64 v9; // rax
-  _QWORD *v11; // rbx
+  __int64 v11; // rbx
   _QWORD *v12; // rdi
   ASymbol *v13; // rax
 
-  v3 = args;
-  v4 = op_name;
-  v5 = this;
   v6 = SSParser::parse_ws_any(this, args->i_start_pos, &args->i_end_pos);
-  v3->i_result = v6;
+  args->i_result = v6;
   if ( v6 )
     return 0i64;
-  v3->i_start_pos = v3->i_end_pos;
-  v7 = SSParser::parse_expression(v5, v3, 1i64);
-  if ( v3->i_result )
+  args->i_start_pos = args->i_end_pos;
+  v7 = SSParser::parse_expression(this, args, 1ui64);
+  if ( args->i_result )
     return 0i64;
-  v8 = v3->i_type_p;
-  if ( v5->i_flags.i_flagset & 1 )
+  i_type_p = args->i_type_p;
+  if ( (this->i_flags.i_flagset & 1) != 0 )
   {
-    v9 = (__int64)v8->vfptr->get_method_inherited(v3->i_type_p, v4);
+    v9 = (__int64)i_type_p->vfptr->get_method_inherited(args->i_type_p, op_name);
     if ( !v9 )
     {
-      v3->i_result = 115;
+      args->i_result = Result_err_context_non_method;
       if ( v7 )
-        v7->vfptr->__vecDelDtor((SSExpressionBase *)&v7->vfptr, 1u);
+        v7->vfptr->__vecDelDtor(v7, 1u);
       return 0i64;
     }
     (*(void (__fastcall **)(_QWORD, SSClassDescBase *))(**(_QWORD **)(*(_QWORD *)(v9 + 24) + 40i64) + 32i64))(
       *(_QWORD *)(*(_QWORD *)(v9 + 24) + 40i64),
-      v8);
+      i_type_p);
   }
   v11 = 0i64;
   if ( v7 )
@@ -10126,7 +9691,7 @@ SSInvocation *__fastcall SSParser::parse_prefix_operator_expr(SSParser *this, AS
       v13 = (ASymbol *)AMemory::c_malloc_func(0x38ui64, "SSMethodCall");
       if ( v13 )
       {
-        v13[2].i_uid = v4->i_uid;
+        v13[2].i_uid = op_name->i_uid;
         *(_QWORD *)&v13[4].i_uid = 0i64;
         *(_QWORD *)&v13->i_uid = &SSInvokeBase::`vftable;
         v13[6].i_uid = 0;
@@ -10143,7 +9708,7 @@ SSInvocation *__fastcall SSParser::parse_prefix_operator_expr(SSParser *this, AS
       *v12 = &SSInvocation::`vftable;
       v12[1] = v7;
       v12[2] = v13;
-      v11 = v12;
+      return (SSInvocation *)v12;
     }
   }
   return (SSInvocation *)v11;
@@ -10151,261 +9716,240 @@ SSInvocation *__fastcall SSParser::parse_prefix_operator_expr(SSParser *this, AS
 
 // File Line: 12342
 // RVA: 0x1291D0
-SSConcurrentBranch *__fastcall SSParser::parse_concurrent_branch_block(SSParser *this, SSParser::Args *args)
+SSConcurrentBranch *__fastcall SSParser::parse_concurrent_branch_block(SSParser *this, unsigned __int64 args)
 {
   SSParser::Args *v2; // rbx
-  SSParser *v3; // rdi
   SSParser::eResult v4; // eax
-  SSConcurrentBranch *v5; // rsi
+  __int64 v5; // rsi
   SSCode *v6; // rax
   SSCode *v7; // rdi
-  SSConcurrentBranch *v8; // rax
-  SSConcurrentBranch *result; // rax
-  unsigned int end_pos_p; // [rsp+40h] [rbp+8h]
+  _QWORD *v8; // rax
+  _QWORD *end_pos_p; // [rsp+40h] [rbp+8h] BYREF
 
-  v2 = args;
-  v3 = this;
-  args->i_result = 82;
-  LODWORD(args) = args->i_start_pos;
-  end_pos_p = (unsigned int)args;
-  if ( this->i_str_ref_p->i_length - (unsigned int)args < 2
-    || (v4 = SSParser::parse_ws_any(this, (unsigned int)args, &end_pos_p),
+  v2 = (SSParser::Args *)args;
+  *(_DWORD *)(args + 8) = 82;
+  LODWORD(args) = *(_DWORD *)args;
+  LODWORD(end_pos_p) = args;
+  if ( (unsigned int)(this->i_str_ref_p->i_length - args) < 2
+    || (v4 = SSParser::parse_ws_any(this, args, (unsigned int *)&end_pos_p),
         v2->i_result = v4,
-        args = (SSParser::Args *)end_pos_p,
-        v2->i_end_pos = end_pos_p,
+        args = (unsigned int)end_pos_p,
+        v2->i_end_pos = (unsigned int)end_pos_p,
         v4)
-    || (v2->i_result = 11, *((_BYTE *)&args->i_start_pos + (unsigned __int64)v3->i_str_ref_p->i_cstr_p) != 91) )
+    || (v2->i_result = Result_err_expected_block, this->i_str_ref_p->i_cstr_p[args] != 91) )
   {
-    v2->i_end_pos = (unsigned int)args;
-    result = 0i64;
+    v2->i_end_pos = args;
+    return 0i64;
   }
   else
   {
-    v2->i_start_pos = (unsigned int)args;
+    v2->i_start_pos = args;
     v5 = 0i64;
-    v6 = SSParser::parse_code_block_optimized(v3, v2, SSInvokeTime_any, 0);
+    v6 = SSParser::parse_code_block_optimized(this, v2, SSInvokeTime_any, ResultDesired_false);
     v7 = v6;
     if ( v2->i_result == Result_ok )
     {
-      if ( v6 && v6->vfptr->is_immediate((SSExpressionBase *)&v6->vfptr, 0i64) )
+      if ( v6 && v6->vfptr->is_immediate(v6, 0i64) )
       {
-        v2->i_result = 71;
-        v7->vfptr->__vecDelDtor((SSExpressionBase *)&v7->vfptr, 1u);
+        v2->i_result = Result_err_unexpected_branch_expr;
+        v7->vfptr->__vecDelDtor(v7, 1u);
       }
       else
       {
-        v2->i_type_p = (SSClassDescBase *)&SSBrain::c_none_class_p->vfptr;
+        v2->i_type_p = SSBrain::c_none_class_p;
         if ( v7 )
         {
-          v8 = (SSConcurrentBranch *)AMemory::c_malloc_func(0x10ui64, "SSConcurrentBranch");
-          *(_QWORD *)&end_pos_p = v8;
+          v8 = AMemory::c_malloc_func(0x10ui64, "SSConcurrentBranch");
+          end_pos_p = v8;
           if ( v8 )
           {
-            v8->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
-            v8->vfptr = (SSExpressionBaseVtbl *)&SSConcurrentBranch::`vftable;
-            v8->i_statement_p = (SSExpressionBase *)&v7->vfptr;
-            v5 = v8;
+            *v8 = &SSExpressionBase::`vftable;
+            *v8 = &SSConcurrentBranch::`vftable;
+            v8[1] = v7;
+            return (SSConcurrentBranch *)v8;
           }
         }
       }
     }
-    result = v5;
+    return (SSConcurrentBranch *)v5;
   }
-  return result;
 }
 
 // File Line: 12415
 // RVA: 0x129420
-SSConcurrentSync *__fastcall SSParser::parse_concurrent_sync_block(SSParser *this, SSParser::Args *args)
+SSConcurrentSync *__fastcall SSParser::parse_concurrent_sync_block(SSParser *this, unsigned __int64 args)
 {
   SSParser::Args *v2; // rbx
-  SSParser *v3; // rdi
   SSParser::eResult v4; // eax
   SSCode *v5; // rax
   SSCode *v6; // rdi
-  SSConcurrentSync *v7; // rsi
-  SSConcurrentSync *v8; // r8
-  signed __int64 v9; // rdx
-  SSExpressionBase **v10; // rcx
-  SSConcurrentSync *result; // rax
-  unsigned int end_pos_p; // [rsp+40h] [rbp+8h]
-  __int64 v13; // [rsp+48h] [rbp+10h]
+  _DWORD *v7; // rsi
+  _DWORD *v8; // r8
+  SSExpressionBase **i_array_p; // rcx
+  _DWORD *end_pos_p; // [rsp+40h] [rbp+8h] BYREF
+  _DWORD *v12; // [rsp+48h] [rbp+10h]
 
-  v2 = args;
-  v3 = this;
-  args->i_result = 82;
-  LODWORD(args) = args->i_start_pos;
-  end_pos_p = (unsigned int)args;
-  if ( this->i_str_ref_p->i_length - (unsigned int)args < 2
-    || (v4 = SSParser::parse_ws_any(this, (unsigned int)args, &end_pos_p),
+  v2 = (SSParser::Args *)args;
+  *(_DWORD *)(args + 8) = 82;
+  LODWORD(args) = *(_DWORD *)args;
+  LODWORD(end_pos_p) = args;
+  if ( (unsigned int)(this->i_str_ref_p->i_length - args) < 2
+    || (v4 = SSParser::parse_ws_any(this, args, (unsigned int *)&end_pos_p),
         v2->i_result = v4,
-        args = (SSParser::Args *)end_pos_p,
-        v2->i_end_pos = end_pos_p,
+        args = (unsigned int)end_pos_p,
+        v2->i_end_pos = (unsigned int)end_pos_p,
         v4)
-    || (v2->i_result = 67, *((_BYTE *)&args->i_start_pos + (unsigned __int64)v3->i_str_ref_p->i_cstr_p) != 91) )
+    || (v2->i_result = Result_err_expected_sync_block, this->i_str_ref_p->i_cstr_p[args] != 91) )
   {
-    v2->i_end_pos = (unsigned int)args;
-    result = 0i64;
+    v2->i_end_pos = args;
+    return 0i64;
   }
   else
   {
-    v2->i_start_pos = (unsigned int)args;
-    v5 = SSParser::parse_code_block(v3, v2, SSInvokeTime_durational, 0);
+    v2->i_start_pos = args;
+    v5 = SSParser::parse_code_block(this, v2, SSInvokeTime_durational, ResultDesired_false);
     v6 = v5;
     v7 = 0i64;
     if ( v2->i_result == Result_ok )
     {
-      v2->i_type_p = (SSClassDescBase *)&SSBrain::c_none_class_p->vfptr;
+      v2->i_type_p = SSBrain::c_none_class_p;
       if ( v5 )
       {
         if ( v5->i_statements.i_count < 2 )
         {
-          v2->i_result = 121;
+          v2->i_result = Result_err_context_concurrent_redundant;
         }
         else
         {
-          v8 = (SSConcurrentSync *)AMemory::c_malloc_func(0x18ui64, "SSConcurrentSync");
-          *(_QWORD *)&end_pos_p = v8;
+          v8 = AMemory::c_malloc_func(0x18ui64, "SSConcurrentSync");
+          end_pos_p = v8;
           if ( v8 )
           {
-            v8->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
-            v8->vfptr = (SSExpressionBaseVtbl *)&SSConcurrentSync::`vftable;
-            v9 = (signed __int64)&v8->i_exprs;
-            v13 = v9;
-            v10 = v6->i_statements.i_array_p;
-            *(_DWORD *)v9 = v6->i_statements.i_count;
-            *(_QWORD *)(v9 + 8) = v10;
+            *(_QWORD *)v8 = &SSExpressionBase::`vftable;
+            *(_QWORD *)v8 = &SSConcurrentSync::`vftable;
+            v12 = v8 + 2;
+            i_array_p = v6->i_statements.i_array_p;
+            v8[2] = v6->i_statements.i_count;
+            *((_QWORD *)v8 + 2) = i_array_p;
             v6->i_statements.i_count = 0;
             v6->i_statements.i_array_p = 0i64;
             v7 = v8;
           }
         }
-        v6->vfptr->__vecDelDtor((SSExpressionBase *)&v6->vfptr, 1u);
+        v6->vfptr->__vecDelDtor(v6, 1u);
       }
     }
-    result = v7;
+    return (SSConcurrentSync *)v7;
   }
-  return result;
 }
 
 // File Line: 12488
 // RVA: 0x1292F0
-SSConcurrentRace *__fastcall SSParser::parse_concurrent_race_block(SSParser *this, SSParser::Args *args)
+SSConcurrentRace *__fastcall SSParser::parse_concurrent_race_block(SSParser *this, unsigned __int64 args)
 {
   SSParser::Args *v2; // rbx
-  SSParser *v3; // rdi
   SSParser::eResult v4; // eax
   SSCode *v5; // rax
   SSCode *v6; // rdi
-  SSConcurrentRace *v7; // rsi
-  SSConcurrentRace *v8; // r8
-  signed __int64 v9; // rdx
-  SSExpressionBase **v10; // rcx
-  SSConcurrentRace *result; // rax
-  unsigned int end_pos_p; // [rsp+40h] [rbp+8h]
-  __int64 v13; // [rsp+48h] [rbp+10h]
+  _DWORD *v7; // rsi
+  _DWORD *v8; // r8
+  SSExpressionBase **i_array_p; // rcx
+  _DWORD *end_pos_p; // [rsp+40h] [rbp+8h] BYREF
+  _DWORD *v12; // [rsp+48h] [rbp+10h]
 
-  v2 = args;
-  v3 = this;
-  args->i_result = 82;
-  LODWORD(args) = args->i_start_pos;
-  end_pos_p = (unsigned int)args;
-  if ( this->i_str_ref_p->i_length - (unsigned int)args < 2
-    || (v4 = SSParser::parse_ws_any(this, (unsigned int)args, &end_pos_p),
+  v2 = (SSParser::Args *)args;
+  *(_DWORD *)(args + 8) = 82;
+  LODWORD(args) = *(_DWORD *)args;
+  LODWORD(end_pos_p) = args;
+  if ( (unsigned int)(this->i_str_ref_p->i_length - args) < 2
+    || (v4 = SSParser::parse_ws_any(this, args, (unsigned int *)&end_pos_p),
         v2->i_result = v4,
-        args = (SSParser::Args *)end_pos_p,
-        v2->i_end_pos = end_pos_p,
+        args = (unsigned int)end_pos_p,
+        v2->i_end_pos = (unsigned int)end_pos_p,
         v4)
-    || (v2->i_result = 59, *((_BYTE *)&args->i_start_pos + (unsigned __int64)v3->i_str_ref_p->i_cstr_p) != 91) )
+    || (v2->i_result = Result_err_expected_race_block, this->i_str_ref_p->i_cstr_p[args] != 91) )
   {
-    v2->i_end_pos = (unsigned int)args;
-    result = 0i64;
+    v2->i_end_pos = args;
+    return 0i64;
   }
   else
   {
-    v2->i_start_pos = (unsigned int)args;
-    v5 = SSParser::parse_code_block(v3, v2, SSInvokeTime_durational, 0);
+    v2->i_start_pos = args;
+    v5 = SSParser::parse_code_block(this, v2, SSInvokeTime_durational, ResultDesired_false);
     v6 = v5;
     v7 = 0i64;
     if ( v2->i_result == Result_ok )
     {
-      v2->i_type_p = (SSClassDescBase *)&SSBrain::c_none_class_p->vfptr;
+      v2->i_type_p = SSBrain::c_none_class_p;
       if ( v5 )
       {
         if ( v5->i_statements.i_count < 2 )
         {
-          v2->i_result = 121;
+          v2->i_result = Result_err_context_concurrent_redundant;
         }
         else
         {
-          v8 = (SSConcurrentRace *)AMemory::c_malloc_func(0x18ui64, "SSConcurrentRace");
-          *(_QWORD *)&end_pos_p = v8;
+          v8 = AMemory::c_malloc_func(0x18ui64, "SSConcurrentRace");
+          end_pos_p = v8;
           if ( v8 )
           {
-            v8->vfptr = (SSExpressionBaseVtbl *)&SSExpressionBase::`vftable;
-            v8->vfptr = (SSExpressionBaseVtbl *)&SSConcurrentRace::`vftable;
-            v9 = (signed __int64)&v8->i_exprs;
-            v13 = v9;
-            v10 = v6->i_statements.i_array_p;
-            *(_DWORD *)v9 = v6->i_statements.i_count;
-            *(_QWORD *)(v9 + 8) = v10;
+            *(_QWORD *)v8 = &SSExpressionBase::`vftable;
+            *(_QWORD *)v8 = &SSConcurrentRace::`vftable;
+            v12 = v8 + 2;
+            i_array_p = v6->i_statements.i_array_p;
+            v8[2] = v6->i_statements.i_count;
+            *((_QWORD *)v8 + 2) = i_array_p;
             v6->i_statements.i_count = 0;
             v6->i_statements.i_array_p = 0i64;
             v7 = v8;
           }
         }
-        v6->vfptr->__vecDelDtor((SSExpressionBase *)&v6->vfptr, 1u);
+        v6->vfptr->__vecDelDtor(v6, 1u);
       }
     }
-    result = v7;
+    return (SSConcurrentRace *)v7;
   }
-  return result;
 }
 
 // File Line: 12577
 // RVA: 0x12EEC0
-SSParser::eResult __fastcall SSParser::parse_param_append(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, SSParameters *params_p)
+SSParser::eResult __fastcall SSParser::parse_param_append(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        SSParameters *params_p)
 {
-  SSParameters *v4; // rdi
-  unsigned int *v5; // rbx
   SSParser::eResult result; // eax
   SSParser::eResult v7; // ebx
-  unsigned int v8; // er8
-  unsigned int v9; // ecx
-  SSParameterBase **v10; // rdx
-  unsigned __int64 i; // r10
-  SSParameterBase *param_new_pp; // [rsp+58h] [rbp+20h]
+  unsigned int i_count; // ecx
+  SSParameterBase **i_array_p; // rdx
+  SSParameterBase **v10; // r10
+  SSParameterBase *param_new_pp; // [rsp+58h] [rbp+20h] BYREF
 
-  v4 = params_p;
-  v5 = end_pos_p;
   if ( params_p )
   {
     result = SSParser::parse_parameter(this, start_pos, end_pos_p, &param_new_pp);
     v7 = result;
-    if ( result )
-      return result;
-    v8 = 0;
-    v9 = v4->i_params.i_count;
-    if ( v9 )
+    if ( result == Result_ok )
     {
-      v10 = v4->i_params.i_array_p;
-      for ( i = (unsigned __int64)&v10[v9 - 1]; (unsigned __int64)v10 <= i; ++v10 )
+      i_count = params_p->i_params.i_count;
+      if ( i_count && (i_array_p = params_p->i_params.i_array_p, v10 = &i_array_p[i_count - 1], i_array_p <= v10) )
       {
-        if ( param_new_pp->i_name.i_uid == (*v10)->i_name.i_uid )
+        while ( param_new_pp->i_name.i_uid != (*i_array_p)->i_name.i_uid )
         {
-          if ( v8 < 2 )
-          {
-            param_new_pp->vfptr->__vecDelDtor(param_new_pp, 1u);
-            return 102;
-          }
-          --v8;
+          if ( ++i_array_p > v10 )
+            goto LABEL_8;
         }
+        param_new_pp->vfptr->__vecDelDtor(param_new_pp, 1i64);
+        return 102;
+      }
+      else
+      {
+LABEL_8:
+        APCompactArray<SSParameterBase,ASymbol,ACompareLogical<ASymbol>>::append(&params_p->i_params, param_new_pp);
+        return v7;
       }
     }
-    APCompactArray<SSParameterBase,ASymbol,ACompareLogical<ASymbol>>::append(
-      (APCompactArray<SSParameterBase,ASymbol,ACompareLogical<ASymbol> > *)&v4->i_params.i_count,
-      param_new_pp);
-    result = v7;
   }
   else
   {
@@ -10413,83 +9957,76 @@ SSParser::eResult __fastcall SSParser::parse_param_append(SSParser *this, unsign
       result = SSParser::parse_parameter_group(this, start_pos, (unsigned int *)&param_new_pp, 0i64);
     else
       result = SSParser::parse_parameter_unary(this, start_pos, (unsigned int *)&param_new_pp, 0i64);
-    if ( v5 )
-      *v5 = (unsigned int)param_new_pp;
+    if ( end_pos_p )
+      *end_pos_p = (unsigned int)param_new_pp;
   }
   return result;
 }
 
 // File Line: 12635
 // RVA: 0x12EFA0
-SSParser::eResult __fastcall SSParser::parse_param_return_append(SSParser *this, unsigned int start_pos, unsigned int *end_pos_p, SSParameters *params_p, unsigned int param_flags)
+SSParser::eResult __fastcall SSParser::parse_param_return_append(
+        SSParser *this,
+        unsigned int start_pos,
+        unsigned int *end_pos_p,
+        SSParameters *params_p,
+        unsigned int param_flags)
 {
-  SSParameters *v5; // rbx
-  unsigned int *v6; // rdi
-  unsigned int v7; // esi
-  SSParser *v8; // r14
   SSParser::eResult v9; // ebp
-  SSClassDescBase *v10; // rdi
-  unsigned int v11; // edx
-  APCompactArray<SSTypedName,ASymbol,ACompareLogical<ASymbol> > *v12; // r15
-  unsigned int v13; // eax
-  unsigned int v14; // esi
-  SSTypedName **v15; // rcx
-  unsigned __int64 i; // r8
-  SSTypedName *v17; // rax
-  SSTypedName *v18; // rbx
-  SSTypedName tname_p; // [rsp+38h] [rbp-30h]
+  SSClassDescBase *i_obj_p; // rdi
+  APCompactArrayLogical<SSTypedName,ASymbol> *p_i_return_params; // r15
+  unsigned int i_count; // eax
+  unsigned int i_uid; // esi
+  SSTypedName **i_array_p; // rcx
+  SSTypedName **v15; // r8
+  SSTypedName *v16; // rax
+  SSTypedName *v17; // rbx
+  SSTypedName tname_p; // [rsp+38h] [rbp-30h] BYREF
 
-  v5 = params_p;
-  v6 = end_pos_p;
-  v7 = start_pos;
-  v8 = this;
   if ( !params_p )
     return SSParser::parse_parameter_specifier(this, start_pos, end_pos_p, 0i64, param_flags);
   tname_p.i_name = (ASymbol)ASymbol::get_null()->i_uid;
   tname_p.i_type_p.i_obj_p = 0i64;
-  v9 = SSParser::parse_parameter_specifier(v8, v7, v6, &tname_p, param_flags);
-  v10 = tname_p.i_type_p.i_obj_p;
+  v9 = SSParser::parse_parameter_specifier(this, start_pos, end_pos_p, &tname_p, param_flags);
+  i_obj_p = tname_p.i_type_p.i_obj_p;
   if ( v9 == Result_ok )
   {
-    v9 = 103;
-    v11 = 0;
-    v12 = (APCompactArray<SSTypedName,ASymbol,ACompareLogical<ASymbol> > *)&v5->i_return_params.i_count;
-    v13 = v5->i_return_params.i_count;
-    v14 = tname_p.i_name.i_uid;
-    if ( v13 )
+    v9 = Result_err_context_duped_rparam_name;
+    p_i_return_params = &params_p->i_return_params;
+    i_count = params_p->i_return_params.i_count;
+    i_uid = tname_p.i_name.i_uid;
+    if ( i_count && (i_array_p = params_p->i_return_params.i_array_p, v15 = &i_array_p[i_count - 1], i_array_p <= v15) )
     {
-      v15 = v5->i_return_params.i_array_p;
-      for ( i = (unsigned __int64)&v15[v13 - 1]; (unsigned __int64)v15 <= i; ++v15 )
+      while ( tname_p.i_name.i_uid != (*i_array_p)->i_name.i_uid )
       {
-        if ( tname_p.i_name.i_uid == (*v15)->i_name.i_uid )
-        {
-          if ( v11 < 2 )
-            goto LABEL_16;
-          --v11;
-        }
+        if ( ++i_array_p > v15 )
+          goto LABEL_7;
       }
-    }
-    v9 = 0;
-    v17 = (SSTypedName *)AMemory::c_malloc_func(0x10ui64, "SSTypedName");
-    v18 = v17;
-    if ( v17 )
-    {
-      v17->i_name.i_uid = v14;
-      v17->i_type_p.i_obj_p = v10;
-      if ( v10 )
-        (*(void (__fastcall **)(SSClassDescBase *))v10->vfptr->gap8)(v10);
     }
     else
     {
-      v18 = 0i64;
+LABEL_7:
+      v9 = Result_ok;
+      v16 = (SSTypedName *)AMemory::c_malloc_func(0x10ui64, "SSTypedName");
+      v17 = v16;
+      if ( v16 )
+      {
+        v16->i_name.i_uid = i_uid;
+        v16->i_type_p.i_obj_p = i_obj_p;
+        if ( i_obj_p )
+          (*(void (__fastcall **)(SSClassDescBase *))i_obj_p->vfptr->gap8)(i_obj_p);
+      }
+      else
+      {
+        v17 = 0i64;
+      }
+      APCompactArray<SSTypedName,ASymbol,ACompareLogical<ASymbol>>::append(p_i_return_params, v17);
+      if ( (this->i_flags.i_flagset & 1) != 0 )
+        SSTypeContext::append_local(&this->i_context, &tname_p.i_name, SSBrain::c_none_class_p);
     }
-    APCompactArray<SSTypedName,ASymbol,ACompareLogical<ASymbol>>::append(v12, v18);
-    if ( v8->i_flags.i_flagset & 1 )
-      SSTypeContext::append_local(&v8->i_context, &tname_p.i_name, (SSClassDescBase *)&SSBrain::c_none_class_p->vfptr);
   }
-LABEL_16:
-  if ( v10 )
-    (*(void (__fastcall **)(SSClassDescBase *))&v10->vfptr->gap8[8])(v10);
+  if ( i_obj_p )
+    (*(void (__fastcall **)(SSClassDescBase *))&i_obj_p->vfptr->gap8[8])(i_obj_p);
   return v9;
 }
 
@@ -10497,48 +10034,36 @@ LABEL_16:
 // RVA: 0x12FF40
 char __fastcall SSParser::parse_temporary_append(SSParser *this, SSParser::Args *args, SSCode *code_p)
 {
-  SSCode *v3; // rbp
-  SSParser::Args *v4; // rdi
-  SSParser *v5; // rsi
-  SSClassDescBase *v6; // rdi
+  SSClassDescBase *i_type_p; // rdi
   SSTypedName *v7; // rbx
   SSExpressionBase *v8; // rdi
   SSExpressionBase *v9; // rax
   SSExpressionBaseVtbl *v10; // rbx
   SSExpressionBase *v11; // rax
-  ASymbol ident_p; // [rsp+58h] [rbp+10h]
-  SSExpressionBase *expr_pp; // [rsp+68h] [rbp+20h]
+  ASymbol ident_p; // [rsp+58h] [rbp+10h] BYREF
+  SSExpressionBase *expr_pp; // [rsp+68h] [rbp+20h] BYREF
 
-  v3 = code_p;
-  v4 = args;
-  v5 = this;
   ident_p.i_uid = -1;
   expr_pp = 0i64;
   if ( !SSParser::parse_temporary(this, args, &ident_p, &expr_pp) )
     return 0;
-  AVCompactSorted<ASymbol,ASymbol,ACompareLogical<ASymbol>>::append(
-    (AVCompactSorted<ASymbol,ASymbol,ACompareLogical<ASymbol> > *)&v3->i_temp_vars.i_count,
-    &ident_p,
-    0i64);
-  if ( v5->i_flags.i_flagset & 1 )
+  AVCompactSorted<ASymbol,ASymbol,ACompareLogical<ASymbol>>::append(&code_p->i_temp_vars, &ident_p, 0i64);
+  if ( (this->i_flags.i_flagset & 1) != 0 )
   {
-    v6 = v4->i_type_p;
+    i_type_p = args->i_type_p;
     v7 = (SSTypedName *)AMemory::c_malloc_func(0x10ui64, "SSTypedName");
     if ( v7 )
     {
       v7->i_name = ident_p;
-      v7->i_type_p.i_obj_p = v6;
-      if ( v6 )
-        (*(void (__fastcall **)(SSClassDescBase *))v6->vfptr->gap8)(v6);
+      v7->i_type_p.i_obj_p = i_type_p;
+      if ( i_type_p )
+        (*(void (__fastcall **)(SSClassDescBase *))i_type_p->vfptr->gap8)(i_type_p);
     }
     else
     {
       v7 = 0i64;
     }
-    APSorted<SSTypedName,ASymbol,ACompareLogical<ASymbol>>::append(
-      (APSorted<SSTypedName,ASymbol,ACompareLogical<ASymbol> > *)&v5->i_context.i_current_scope_p->i_count,
-      v7,
-      0i64);
+    APSorted<SSTypedName,ASymbol,ACompareLogical<ASymbol>>::append(this->i_context.i_current_scope_p, v7, 0i64);
   }
   v8 = expr_pp;
   if ( expr_pp )
@@ -10566,7 +10091,7 @@ char __fastcall SSParser::parse_temporary_append(SSParser *this, SSParser::Args 
       v11[2].vfptr = (SSExpressionBaseVtbl *)v8;
     }
     APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase>>::append(
-      (APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *)&v3->i_statements.i_count,
+      &code_p->i_statements,
       v11);
   }
   return 1;
@@ -10574,232 +10099,219 @@ char __fastcall SSParser::parse_temporary_append(SSParser *this, SSParser::Args 
 
 // File Line: 12761
 // RVA: 0x12FCC0
-bool __fastcall SSParser::parse_statement_append(SSParser *this, SSParser::Args *args, SSCode *code_p, eSSInvokeTime desired_exec_time)
+bool __fastcall SSParser::parse_statement_append(
+        SSParser *this,
+        SSParser::Args *args,
+        SSCode *code_p,
+        eSSInvokeTime desired_exec_time)
 {
-  __int64 v4; // r15
-  SSParser *v5; // r14
-  eSSInvokeTime v6; // er13
+  __int64 i_start_pos; // r15
   char v7; // cl
-  SSCode *v8; // rsi
-  SSParser::Args *v9; // rbx
   SSExpressionBase *v10; // rdi
   SSLoopExit *v11; // rax
   bool v12; // r12
-  unsigned int v13; // eax
+  unsigned int i_count; // eax
   SSLiteralList *v14; // rax
-  unsigned int v15; // esi
+  unsigned int i_end_pos; // esi
 
-  v4 = args->i_start_pos;
-  v5 = this;
-  v6 = desired_exec_time;
-  v7 = this->i_str_ref_p->i_cstr_p[v4];
-  v8 = code_p;
-  v9 = args;
+  i_start_pos = args->i_start_pos;
+  v7 = this->i_str_ref_p->i_cstr_p[i_start_pos];
   v10 = 0i64;
   if ( v7 == 33 )
   {
-    if ( args->i_flags & 1 )
+    if ( (args->i_flags & 1) != 0 )
     {
-      if ( SSParser::parse_temporary_append(v5, args, code_p) )
+      if ( SSParser::parse_temporary_append(this, args, code_p) )
       {
-        v13 = v8->i_statements.i_count;
-        if ( v13 )
-          v10 = v8->i_statements.i_array_p[v13 - 1];
+        i_count = code_p->i_statements.i_count;
+        if ( i_count )
+          v10 = code_p->i_statements.i_array_p[i_count - 1];
       }
     }
     else
     {
-      SSParser::parse_temporary(v5, args, 0i64, 0i64);
+      SSParser::parse_temporary(this, args, 0i64, 0i64);
     }
-    v12 = v9->i_end_pos != (_DWORD)v4;
+    v12 = args->i_end_pos != (_DWORD)i_start_pos;
   }
   else
   {
     if ( v7 != 101 )
       goto LABEL_12;
-    v11 = SSParser::parse_loop_exit(v5, args);
-    v12 = v9->i_end_pos != (_DWORD)v4;
-    v10 = (SSExpressionBase *)&v11->vfptr;
+    v11 = SSParser::parse_loop_exit(this, args);
+    v12 = args->i_end_pos != (_DWORD)i_start_pos;
+    v10 = v11;
     if ( v11 )
       APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase>>::append(
-        (APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *)&v8->i_statements.i_count,
-        (SSExpressionBase *)&v11->vfptr);
+        &code_p->i_statements,
+        v11);
   }
   if ( !v12 )
   {
 LABEL_12:
-    v14 = SSParser::parse_expression(v5, v9, (unsigned int)v6);
+    v14 = SSParser::parse_expression(this, args, (unsigned int)desired_exec_time);
     if ( v14 )
       APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase>>::append(
-        (APCompactArray<SSExpressionBase,SSExpressionBase,ACompareAddress<SSExpressionBase> > *)&v8->i_statements.i_count,
-        (SSExpressionBase *)&v14->vfptr);
-    return v9->i_result == 0;
+        &code_p->i_statements,
+        v14);
+    return args->i_result == Result_ok;
   }
-  v15 = v9->i_end_pos;
-  if ( v10 && !SSParser::ensure_exec_time(v5, v10, v9, v6) )
+  i_end_pos = args->i_end_pos;
+  if ( v10 && !SSParser::ensure_exec_time(this, v10, args, desired_exec_time) )
   {
-    v9->i_start_pos = v4;
-    v9->i_end_pos = v15;
+    args->i_start_pos = i_start_pos;
+    args->i_end_pos = i_end_pos;
   }
-  return v9->i_result == 0;
+  return args->i_result == Result_ok;
 }
 
 // File Line: 12848
 // RVA: 0x13E8D0
-char __fastcall SSParser::typecheck_parameters(SSParser *this, SSParser::Args *args, SSParameters *params_p, bool check_result)
+bool __fastcall SSParser::typecheck_parameters(
+        SSParser *this,
+        SSParser::Args *args,
+        SSParameters *params_p,
+        bool check_result)
 {
-  SSParameters *v4; // rdi
-  SSParser::Args *v5; // r14
-  SSParser *v6; // rsi
-  char result; // al
-  SSClass *v8; // rcx
-  SSClassDescBase *v9; // rbx
+  bool result; // al
+  SSClass *i_obj_p; // rcx
+  SSClassDescBase *i_type_p; // rbx
   SSClassDescBase *v10; // rcx
-  __int64 v11; // rax
-  ASymbol **v12; // rdi
-  unsigned __int64 v13; // r15
-  SSTypeContext *v14; // r12
+  __int64 i_count; // rax
+  ASymbol **i_array_p; // rdi
+  ASymbol **v13; // r15
+  SSTypeContext *p_i_context; // r12
   ASymbol *v15; // rsi
-  SSClass *v16; // rax
+  SSClass *variable_type; // rax
   SSClass *v17; // rcx
   SSClass *v18; // rbx
   __int64 v19; // rcx
-  __int64 v20; // rax
+  SSClassDescBase *v20; // rax
   __int64 v21; // rax
 
-  v4 = params_p;
-  v5 = args;
-  v6 = this;
-  if ( !(this->i_flags.i_flagset & 1) )
+  if ( (this->i_flags.i_flagset & 1) == 0 )
   {
-    args->i_result = 0;
+    args->i_result = Result_ok;
     return 1;
   }
   if ( check_result )
   {
-    v8 = (SSClass *)params_p->i_result_type_p.i_obj_p;
-    if ( v8 == SSBrain::c_auto_class_p )
+    i_obj_p = (SSClass *)params_p->i_result_type_p.i_obj_p;
+    if ( i_obj_p == SSBrain::c_auto_class_p )
     {
-      v9 = args->i_type_p;
-      if ( v8 != (SSClass *)v9 )
+      i_type_p = args->i_type_p;
+      if ( i_obj_p != i_type_p )
       {
-        if ( v9 )
-          (*(void (__fastcall **)(SSClassDescBase *))v9->vfptr->gap8)(args->i_type_p);
-        v10 = v4->i_result_type_p.i_obj_p;
+        if ( i_type_p )
+          (*(void (__fastcall **)(SSClassDescBase *))i_type_p->vfptr->gap8)(args->i_type_p);
+        v10 = params_p->i_result_type_p.i_obj_p;
         if ( v10 )
-          (*(void (**)(void))&v10->vfptr->gap8[8])();
-        v4->i_result_type_p.i_obj_p = v9;
+          (*(void (__fastcall **)(SSClassDescBase *))&v10->vfptr->gap8[8])(v10);
+        params_p->i_result_type_p.i_obj_p = i_type_p;
       }
     }
     else
     {
-      if ( v8 )
-        v20 = (__int64)v8->vfptr->as_finalized_generic(
-                         (SSClassDescBase *)&v8->vfptr,
-                         (SSClassDescBase *)&v6->i_context.i_obj_scope_p->vfptr);
+      if ( i_obj_p )
+        v20 = i_obj_p->vfptr->as_finalized_generic(i_obj_p, this->i_context.i_obj_scope_p);
       else
         v20 = 0i64;
-      result = v5->i_type_p->vfptr->is_class_type(v5->i_type_p, (SSClassDescBase *)v20);
+      result = args->i_type_p->vfptr->is_class_type(args->i_type_p, v20);
       if ( !result )
       {
-        v5->i_result = 124;
+        args->i_result = Result_err_typecheck_return_type;
         return result;
       }
     }
   }
-  v5->i_result = 0;
-  v11 = v4->i_return_params.i_count;
-  if ( !(_DWORD)v11
-    || (v12 = (ASymbol **)v4->i_return_params.i_array_p, v13 = (unsigned __int64)&v12[v11], (unsigned __int64)v12 >= v13) )
+  args->i_result = Result_ok;
+  i_count = params_p->i_return_params.i_count;
+  if ( (_DWORD)i_count )
   {
-LABEL_32:
-    v5->i_result = 0;
-    return 1;
-  }
-  v14 = &v6->i_context;
-  while ( 1 )
-  {
-    v15 = *v12;
-    v16 = (SSClass *)SSTypeContext::get_variable_type(v14, *v12, 0);
-    v17 = *(SSClass **)&v15[2].i_uid;
-    v18 = v16;
-    if ( v17 != SSBrain::c_auto_class_p )
-      break;
-    if ( v16 == SSBrain::c_none_class_p )
-      goto LABEL_34;
-    if ( v17 != v16 )
+    i_array_p = (ASymbol **)params_p->i_return_params.i_array_p;
+    v13 = &i_array_p[i_count];
+    if ( i_array_p < v13 )
     {
-      if ( v16 )
-        (*(void (__fastcall **)(SSClass *))v16->vfptr->gap8)(v16);
-      v19 = *(_QWORD *)&v15[2].i_uid;
-      if ( v19 )
-        (*(void (**)(void))(*(_QWORD *)v19 + 16i64))();
-      *(_QWORD *)&v15[2].i_uid = v18;
-    }
-LABEL_31:
-    ++v12;
-    if ( (unsigned __int64)v12 >= v13 )
-      goto LABEL_32;
-  }
-  if ( v17 )
-    v21 = (__int64)v17->vfptr->as_finalized_generic(
-                     (SSClassDescBase *)&v17->vfptr,
-                     (SSClassDescBase *)&v14->i_obj_scope_p->vfptr);
-  else
-    v21 = 0i64;
-  if ( v18->vfptr->is_class_type((SSClassDescBase *)&v18->vfptr, (SSClassDescBase *)v21) )
-    goto LABEL_31;
+      p_i_context = &this->i_context;
+      do
+      {
+        v15 = *i_array_p;
+        variable_type = (SSClass *)SSTypeContext::get_variable_type(p_i_context, *i_array_p, 0);
+        v17 = *(SSClass **)&v15[2].i_uid;
+        v18 = variable_type;
+        if ( v17 == SSBrain::c_auto_class_p )
+        {
+          if ( variable_type == SSBrain::c_none_class_p )
+            goto LABEL_34;
+          if ( v17 != variable_type )
+          {
+            if ( variable_type )
+              (*(void (__fastcall **)(SSClass *))variable_type->vfptr->gap8)(variable_type);
+            v19 = *(_QWORD *)&v15[2].i_uid;
+            if ( v19 )
+              (*(void (__fastcall **)(__int64))(*(_QWORD *)v19 + 16i64))(v19);
+            *(_QWORD *)&v15[2].i_uid = v18;
+          }
+        }
+        else
+        {
+          if ( v17 )
+            v21 = (__int64)v17->vfptr->as_finalized_generic(v17, p_i_context->i_obj_scope_p);
+          else
+            v21 = 0i64;
+          if ( !v18->vfptr->is_class_type(v18, (SSClassDescBase *)v21) )
+          {
 LABEL_34:
-  v5->i_result = 125;
-  return 0;
+            args->i_result = Result_err_typecheck_rparam_type;
+            return 0;
+          }
+        }
+        ++i_array_p;
+      }
+      while ( i_array_p < v13 );
+    }
+  }
+  args->i_result = Result_ok;
+  return 1;
 }
 
 // File Line: 13022
 // RVA: 0x13EC50
-signed __int64 __fastcall SSParser::validate_bind_type(SSParser *this, SSIdentifier *identifier_p, SSClassDescBase *old_type_p, SSClassDescBase *new_type_p)
+__int64 __fastcall SSParser::validate_bind_type(
+        SSParser *this,
+        SSIdentifier *identifier_p,
+        SSClassDescBase *old_type_p,
+        SSClassDescBase *new_type_p)
 {
-  SSClassDescBase *v4; // rdi
-  SSClassDescBase *v5; // rsi
-  SSIdentifier *v6; // rbx
-  SSParser *v7; // rbp
-
-  v4 = new_type_p;
-  v5 = old_type_p;
-  v6 = identifier_p;
-  v7 = this;
-  if ( this->i_flags.i_flagset & 1 && new_type_p != old_type_p )
+  if ( (this->i_flags.i_flagset & 1) != 0 && new_type_p != old_type_p )
   {
-    if ( identifier_p->vfptr->get_type((SSExpressionBase *)identifier_p) != 1 && !v4->vfptr->is_class_type(v4, v5) )
+    if ( identifier_p->vfptr->get_type(identifier_p) != SSExprType_identifier
+      && !new_type_p->vfptr->is_class_type(new_type_p, old_type_p) )
+    {
       return 137i64;
-    if ( ((unsigned __int8 (__fastcall *)(SSIdentifier *))v6->vfptr[1].__vecDelDtor)(v6) )
-      SSTypeContext::change_variable_type(&v7->i_context, &v6->i_ident_name, v4);
+    }
+    if ( ((unsigned __int8 (__fastcall *)(SSIdentifier *))identifier_p->vfptr[1].__vecDelDtor)(identifier_p) )
+      SSTypeContext::change_variable_type(&this->i_context, &identifier_p->i_ident_name, new_type_p);
   }
   return 0i64;
 }
 
 // File Line: 13070
 // RVA: 0x1180C0
-SSMethodBase *__fastcall SSParser::get_method_inherited(SSParser *this, SSClassDescBase *class_p, ASymbol *method_name)
+SSMethodBase *__fastcall SSParser::get_method_inherited(SSParser *this, SSClassUnion *class_p, ASymbol *method_name)
 {
-  ASymbol *v3; // rdi
-  SSClassUnion *v4; // rbx
-
-  v3 = method_name;
-  v4 = (SSClassUnion *)class_p;
-  if ( (this->i_flags.i_flagset >> 1) & 1 && method_name->i_uid == ASymbol_String.i_uid )
+  if ( (this->i_flags.i_flagset & 2) != 0 && method_name->i_uid == ASymbol_String.i_uid )
   {
-    if ( class_p->vfptr->get_class_type(class_p) == 4 )
+    if ( class_p->vfptr->get_class_type(class_p) == SSClassType_class_union )
     {
-      if ( SSClassUnion::is_class_maybe(v4, (SSClassDescBase *)&SSBrain::c_symbol_class_p->vfptr) )
+      if ( SSClassUnion::is_class_maybe(class_p, SSBrain::c_symbol_class_p) )
         return 0i64;
     }
-    else if ( v4->vfptr->is_class_type(
-                (SSClassDescBase *)&v4->vfptr,
-                (SSClassDescBase *)&SSBrain::c_symbol_class_p->vfptr) )
+    else if ( class_p->vfptr->is_class_type(class_p, SSBrain::c_symbol_class_p) )
     {
       return 0i64;
     }
   }
-  return (SSMethodBase *)v4->vfptr->get_method_inherited((SSClassDescBase *)&v4->vfptr, v3);
+  return class_p->vfptr->get_method_inherited(class_p, method_name);
 }
 

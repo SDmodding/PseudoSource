@@ -28,29 +28,21 @@ hkClass *__fastcall hkxEnvironment::Variable::staticClass()
 
 // File Line: 63
 // RVA: 0xE31EC0
-void __fastcall finishLoadedObjecthkxEnvironmentVariable(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxEnvironmentVariable(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
-  int v2; // edi
-  hkStringPtr *v3; // rbx
-
   if ( p )
   {
-    v2 = finishing;
-    v3 = (hkStringPtr *)p;
-    hkStringPtr::hkStringPtr((hkStringPtr *)p, (hkFinishLoadedObjectFlag)finishing);
-    hkStringPtr::hkStringPtr(v3 + 1, (hkFinishLoadedObjectFlag)v2);
+    hkStringPtr::hkStringPtr(p, finishing);
+    hkStringPtr::hkStringPtr(p + 1, finishing);
   }
 }
 
 // File Line: 69
 // RVA: 0xE31F00
-void __fastcall cleanupLoadedObjecthkxEnvironmentVariable(void *p)
+void __fastcall cleanupLoadedObjecthkxEnvironmentVariable(hkStringPtr *p)
 {
-  hkStringPtr *v1; // rbx
-
-  v1 = (hkStringPtr *)p;
-  hkStringPtr::~hkStringPtr((hkStringPtr *)p + 1);
-  hkStringPtr::~hkStringPtr(v1);
+  hkStringPtr::~hkStringPtr(p + 1);
+  hkStringPtr::~hkStringPtr(p);
 }
 
 // File Line: 107
@@ -71,7 +63,7 @@ void dynamic_initializer_for__hkxEnvironmentClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 110
@@ -83,23 +75,24 @@ hkClass *__fastcall hkxEnvironment::staticClass()
 
 // File Line: 117
 // RVA: 0xE31F30
-void __fastcall finishLoadedObjecthkxEnvironment(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxEnvironment(hkxEnvironment *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkxEnvironment::hkxEnvironment);
+  if ( p )
+    hkxEnvironment::hkxEnvironment(p, finishing);
 }
 
 // File Line: 123
 // RVA: 0xE31F50
-void __fastcall cleanupLoadedObjecthkxEnvironment(void *p)
+void __fastcall cleanupLoadedObjecthkxEnvironment(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 127
 // RVA: 0xE31F60
 hkBaseObjectVtbl *__fastcall getVtablehkxEnvironment()
 {
-  hkxEnvironment v1; // [rsp+20h] [rbp-28h]
+  hkxEnvironment v1; // [rsp+20h] [rbp-28h] BYREF
 
   hkxEnvironment::hkxEnvironment(&v1, 0);
   return v1.vfptr;
@@ -116,8 +109,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkxEnvironmentTypeInfo__()
   hkxEnvironmentTypeInfo.m_typeName = "hkxEnvironment";
   hkxEnvironmentTypeInfo.m_vtable = result;
   hkxEnvironmentTypeInfo.m_scopedName = "!hkxEnvironment";
-  hkxEnvironmentTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxEnvironment;
-  hkxEnvironmentTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxEnvironment;
+  hkxEnvironmentTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxEnvironment;
+  hkxEnvironmentTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxEnvironment;
   return result;
 }
 

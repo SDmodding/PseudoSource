@@ -5,24 +5,23 @@ int __cdecl strcmp(const char *Str1, const char *Str2)
   signed __int64 v2; // rdx
   unsigned __int8 v3; // al
   __int64 v4; // rax
-  signed __int64 v5; // rax
+  __int64 v5; // rax
 
   v2 = Str2 - Str1;
-  if ( (unsigned __int8)Str1 & 7 )
+  if ( ((unsigned __int8)Str1 & 7) != 0 )
   {
 comp_head_loop_begin_0:
     while ( 1 )
     {
       v3 = *Str1;
       if ( *Str1 != Str1[v2] )
-        break;
+        return -(__int64)(v3 < (unsigned int)Str1[v2]) | 1;
       ++Str1;
       if ( !v3 )
         goto return_equal_0;
-      if ( !((unsigned __int8)Str1 & 7) )
+      if ( ((unsigned __int8)Str1 & 7) == 0 )
         goto LABEL_5;
     }
-    v5 = -(signed __int64)(v3 < Str1[v2]) | 1;
   }
   else
   {
@@ -36,7 +35,7 @@ LABEL_5:
         goto comp_head_loop_begin_0;
       Str1 += 8;
     }
-    while ( !((v4 - 72340172838076673i64) & ~v4 & 0x8080808080808080ui64) );
+    while ( ((v4 - 0x101010101010101i64) & ~v4 & 0x8080808080808080ui64) == 0 );
 return_equal_0:
     LODWORD(v5) = 0;
   }

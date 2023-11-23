@@ -1,447 +1,451 @@
 // File Line: 25
 // RVA: 0x1317EC0
-void __fastcall hkcdGsk_Vector4Shape::getSupportingVertex(hkcdGsk_Vector4Shape *this, hkVector4f *direction, hkcdVertex *vertexOut)
+void __fastcall hkcdGsk_Vector4Shape::getSupportingVertex(
+        hkcdGsk_Vector4Shape *this,
+        hkVector4f *direction,
+        hkcdVertex *vertexOut)
 {
-  __m128 v3; // xmm4
-  hkcdVertex *v4; // r10
-  signed __int64 v5; // rdx
-  signed int v6; // eax
-  signed int v7; // er9
+  __m128 m_quad; // xmm4
+  hkcdVertex *m_vertices; // r10
+  __int64 m_numVertices; // rdx
+  int v6; // eax
+  int v7; // r9d
   __m128 v8; // xmm1
   float v9; // xmm3_4
-  __m128 *v10; // rcx
-  signed __int64 v11; // rdx
+  __m128 *p_m_quad; // rcx
+  __int64 v11; // rdx
   __m128 v12; // xmm1
   float v13; // xmm2_4
 
-  v3 = direction->m_quad;
-  v4 = this->m_vertices;
-  v5 = this->m_numVertices;
+  m_quad = direction->m_quad;
+  m_vertices = this->m_vertices;
+  m_numVertices = this->m_numVertices;
   v6 = 1;
   v7 = 0;
-  v8 = _mm_mul_ps(v3, this->m_vertices->m_quad);
-  v9 = (float)(COERCE_FLOAT(_mm_shuffle_ps(v8, v8, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v8, v8, 0)))
-     + COERCE_FLOAT(_mm_shuffle_ps(v8, v8, 170));
-  if ( v5 > 1 )
+  v8 = _mm_mul_ps(m_quad, this->m_vertices->m_quad);
+  v9 = (float)(_mm_shuffle_ps(v8, v8, 85).m128_f32[0] + _mm_shuffle_ps(v8, v8, 0).m128_f32[0])
+     + _mm_shuffle_ps(v8, v8, 170).m128_f32[0];
+  if ( m_numVertices > 1 )
   {
-    v10 = &v4[1].m_quad;
-    v11 = v5 - 1;
+    p_m_quad = &m_vertices[1].m_quad;
+    v11 = m_numVertices - 1;
     do
     {
-      v12 = _mm_mul_ps(v3, *v10);
-      v13 = (float)(COERCE_FLOAT(_mm_shuffle_ps(v12, v12, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v12, v12, 0)))
-          + COERCE_FLOAT(_mm_shuffle_ps(v12, v12, 170));
+      v12 = _mm_mul_ps(m_quad, *p_m_quad);
+      v13 = (float)(_mm_shuffle_ps(v12, v12, 85).m128_f32[0] + _mm_shuffle_ps(v12, v12, 0).m128_f32[0])
+          + _mm_shuffle_ps(v12, v12, 170).m128_f32[0];
       if ( v13 > v9 )
       {
         v7 = v6;
         v9 = v13;
       }
       ++v6;
-      ++v10;
+      ++p_m_quad;
       --v11;
     }
     while ( v11 );
   }
-  *vertexOut = v4[v7];
+  *vertexOut = m_vertices[v7];
 }
 
 // File Line: 47
 // RVA: 0x1317F80
-void __fastcall hkcdGsk_Vector4ShapeInterface::getSupportingVertices(hkcdGsk_Vector4ShapeInterface *this, const void *shapeA, hkVector4f *directionA, const void *shapeB, hkTransformf *aTb, hkcdVertex *vertexAinAOut, hkcdVertex *vertexBinBOut, hkVector4f *vertexBinAout)
+void __fastcall hkcdGsk_Vector4ShapeInterface::getSupportingVertices(
+        hkcdGsk_Vector4ShapeInterface *this,
+        _DWORD *shapeA,
+        hkVector4f *directionA,
+        __m128 **shapeB,
+        hkTransformf *aTb,
+        hkcdVertex *vertexAinAOut,
+        hkcdVertex *vertexBinBOut,
+        hkVector4f *vertexBinAout)
 {
   hkVector4f v8; // xmm3
   __m128 v9; // xmm1
   __m128 v10; // xmm5
-  __m128 v11; // xmm8
-  __m128 v12; // xmm11
-  __m128 v13; // xmm2
-  __m128 v14; // xmm14
-  __m128 v15; // xmm4
+  __m128 v11; // xmm11
+  __m128 v12; // xmm2
+  __m128 v13; // xmm4
+  __m128 v14; // xmm6
+  __m128 v15; // xmm5
   __m128 v16; // xmm6
-  __m128 v17; // xmm5
-  __m128 v18; // xmm6
+  __m128 v17; // xmm1
+  __m128 v18; // xmm4
   __m128 v19; // xmm1
-  __m128 v20; // xmm4
+  __m128 v20; // xmm13
   __m128 v21; // xmm1
-  __m128 v22; // xmm13
-  __m128 v23; // xmm1
-  int v24; // er8
-  __m128 *v25; // rax
-  __m128 *v26; // r10
-  __m128 v27; // xmm8
+  int v22; // r8d
+  __m128 *v23; // rax
+  __m128 *v24; // r10
+  __m128 v25; // xmm8
+  __m128 v26; // xmm1
+  __m128 v27; // xmm15
   __m128 v28; // xmm1
-  __m128 v29; // xmm15
+  __m128 v29; // xmm2
   __m128 v30; // xmm1
-  __m128 v31; // xmm2
+  __m128 v31; // xmm14
   __m128 v32; // xmm1
-  __m128 v33; // xmm14
-  __m128 v34; // xmm1
-  int v35; // er11
-  int v36; // ecx
-  __m128 v37; // xmm2
+  int v33; // r11d
+  int v34; // ecx
+  __m128 v35; // xmm2
+  __m128 v36; // xmm1
+  __int64 v37; // rdx
   __m128 v38; // xmm1
-  unsigned int v39; // ecx
-  __int64 v40; // rdx
-  __m128 v41; // xmm1
-  __m128 v42; // xmm3
+  __m128 v39; // xmm3
+  __m128 v40; // xmm1
+  __m128 v41; // xmm2
+  __m128 v42; // xmm14
   __m128 v43; // xmm1
-  __m128 v44; // xmm2
-  __m128 v45; // ST120_16
-  __m128 v46; // xmm14
-  __m128 v47; // xmm1
-  __m128 v48; // xmm3
-  __m128 v49; // xmm12
-  __m128 v50; // xmm1
-  __m128 v51; // xmm4
-  __m128 v52; // xmm9
+  __m128 v44; // xmm3
+  __m128 v45; // xmm12
+  __m128 v46; // xmm1
+  __m128 v47; // xmm4
+  __m128 v48; // xmm9
+  __m128 v49; // xmm1
+  __m128 v50; // xmm7
+  __m128 v51; // xmm1
+  __m128 v52; // xmm15
   __m128 v53; // xmm1
-  __m128 v54; // xmm7
+  __m128 v54; // xmm13
   __m128 v55; // xmm1
-  __m128 v56; // ST130_16
-  __m128 v57; // xmm15
-  __m128 v58; // xmm1
-  __m128 v59; // xmm13
-  __m128 v60; // xmm1
-  __m128 v61; // xmm10
-  __m128 v62; // xmm5
-  __m128 v63; // xmm6
-  __m128 v64; // xmm11
-  __m128 v65; // xmm8
-  __m128 v66; // xmm7
-  __m128 v67; // xmm2
-  __m128 v68; // xmm1
-  __m128 v69; // xmm10
-  __m128 v70; // xmm12
-  __int64 v71; // rdx
-  __m128 v72; // xmm1
-  __m128 v73; // xmm8
+  __m128 v56; // xmm10
+  __m128 v57; // xmm5
+  __m128 v58; // xmm6
+  __m128 v59; // xmm11
+  __m128 v60; // xmm8
+  __m128 v61; // xmm7
+  __m128 v62; // xmm2
+  __m128 v63; // xmm1
+  __m128 v64; // xmm10
+  __m128 v65; // xmm12
+  __int64 v66; // rdx
+  __m128 v67; // xmm1
+  __m128 v68; // xmm8
+  __m128 v69; // xmm1
+  __m128 v70; // xmm7
+  __m128 v71; // xmm1
+  __m128 v72; // xmm2
+  __m128 v73; // xmm6
   __m128 v74; // xmm1
-  __m128 v75; // xmm7
+  __m128 v75; // xmm3
   __m128 v76; // xmm1
-  __m128 v77; // xmm2
-  __m128 v78; // xmm6
-  __m128 v79; // xmm1
-  __m128 v80; // xmm3
-  __m128 v81; // xmm1
-  __m128 v82; // xmm4
-  __m128 v83; // xmm5
-  __m128 v84; // xmm0
-  __m128 v85; // xmm11
-  __m128 v86; // xmm12
-  __m128 v87; // xmm15
-  __m128 v88; // xmm13
-  __int64 v89; // rcx
-  __m128 v90; // xmm1
-  __m128 v91; // xmm8
-  __m128 v92; // xmm1
-  __m128 v93; // xmm7
-  __m128 v94; // xmm1
-  __m128 v95; // xmm5
-  __m128 v96; // xmm1
-  __m128 v97; // xmm4
-  __m128 v98; // xmm2
-  __m128 v99; // xmm3
-  __m128 v100; // xmm1
-  __m128 v101; // xmm6
-  __m128 v102; // xmm9
-  __m128 v103; // xmm11
-  __m128 v104; // xmm12
-  __m128 v105; // xmm10
-  __m128 v106; // xmm1
-  __m128 v107; // xmm7
-  __m128 v108; // xmm3
-  __m128 v109; // xmm5
-  __m128 v110; // xmm6
-  __m128 v111; // xmm2
-  hkcdVertex v112; // xmm4
-  __m128 v113; // [rsp+0h] [rbp-1E8h]
-  __m128 v114; // [rsp+10h] [rbp-1D8h]
-  __m128 v115; // [rsp+20h] [rbp-1C8h]
-  __m128 v116; // [rsp+30h] [rbp-1B8h]
-  __m128 v117; // [rsp+40h] [rbp-1A8h]
-  __m128 v118; // [rsp+50h] [rbp-198h]
-  __m128 v119; // [rsp+60h] [rbp-188h]
-  __m128 v120; // [rsp+70h] [rbp-178h]
-  __m128 v121; // [rsp+80h] [rbp-168h]
-  __m128 v122; // [rsp+90h] [rbp-158h]
-  __m128 v123; // [rsp+A0h] [rbp-148h]
-  __m128 v124; // [rsp+B0h] [rbp-138h]
-  __m128 v125; // [rsp+C0h] [rbp-128h]
-  __m128 v126; // [rsp+D0h] [rbp-118h]
-  __m128 v127; // [rsp+E0h] [rbp-108h]
-  __m128 v128; // [rsp+F0h] [rbp-F8h]
-  __m128 v129; // [rsp+100h] [rbp-E8h]
-  __m128 v130; // [rsp+110h] [rbp-D8h]
+  __m128 v77; // xmm4
+  __m128 v78; // xmm5
+  __m128 v79; // xmm0
+  __m128 v80; // xmm11
+  __m128 v81; // xmm12
+  __m128 v82; // xmm15
+  __m128 v83; // xmm13
+  __int64 v84; // rcx
+  __m128 v85; // xmm1
+  __m128 v86; // xmm8
+  __m128 v87; // xmm1
+  __m128 v88; // xmm7
+  __m128 v89; // xmm1
+  __m128 v90; // xmm5
+  __m128 v91; // xmm1
+  __m128 v92; // xmm4
+  __m128 v93; // xmm2
+  __m128 v94; // xmm3
+  __m128 v95; // xmm1
+  __m128 v96; // xmm6
+  __m128 v97; // xmm9
+  __m128 v98; // xmm11
+  __m128 v99; // xmm12
+  __m128 v100; // xmm10
+  __m128 v101; // xmm1
+  __m128 v102; // xmm7
+  __m128 v103; // xmm3
+  __m128 v104; // xmm5
+  __m128 v105; // xmm6
+  __m128 v106; // xmm2
+  __m128 v107; // xmm4
+  __m128 v108; // [rsp+0h] [rbp-1E8h]
+  __m128 v109; // [rsp+10h] [rbp-1D8h]
+  __m128 v110; // [rsp+20h] [rbp-1C8h]
+  __m128 v111; // [rsp+30h] [rbp-1B8h]
+  __m128 v112; // [rsp+40h] [rbp-1A8h]
+  __m128 v113; // [rsp+50h] [rbp-198h]
+  __m128 v114; // [rsp+60h] [rbp-188h]
+  __m128 v115; // [rsp+70h] [rbp-178h]
+  __m128 v116; // [rsp+80h] [rbp-168h]
+  __m128 v117; // [rsp+90h] [rbp-158h]
+  __m128 v118; // [rsp+A0h] [rbp-148h]
+  __m128 v119; // [rsp+B0h] [rbp-138h]
+  __m128 v120; // [rsp+C0h] [rbp-128h]
+  __m128 v121; // [rsp+D0h] [rbp-118h]
+  __m128 v122; // [rsp+E0h] [rbp-108h]
+  __m128 v123; // [rsp+F0h] [rbp-F8h]
+  __m128 m_quad; // [rsp+100h] [rbp-E8h]
+  __m128 v125; // [rsp+110h] [rbp-D8h]
+  __m128 v126; // [rsp+120h] [rbp-C8h]
+  __m128 v127; // [rsp+130h] [rbp-B8h]
 
-  v129 = directionA->m_quad;
+  m_quad = directionA->m_quad;
   v8.m_quad = (__m128)aTb->m_rotation.m_col2;
   v9 = _mm_unpacklo_ps(aTb->m_rotation.m_col0.m_quad, aTb->m_rotation.m_col1.m_quad);
   v10 = _mm_xor_ps((__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 0), directionA->m_quad);
-  v11 = *(__m128 *)(*(_QWORD *)shapeA + 16i64);
-  v12 = *(__m128 *)(*(_QWORD *)shapeA + 48i64);
-  v13 = _mm_movelh_ps(v9, v8.m_quad);
-  v14 = *(__m128 *)(*(_QWORD *)shapeA + 32i64);
-  v125 = *(__m128 *)*(_QWORD *)shapeA;
-  v126 = *(__m128 *)*(_QWORD *)shapeB;
-  v15 = _mm_mul_ps(
+  v11 = *(__m128 *)(*(_QWORD *)shapeA + 48i64);
+  v12 = _mm_movelh_ps(v9, v8.m_quad);
+  v120 = *(__m128 *)*(_QWORD *)shapeA;
+  v121 = **shapeB;
+  v13 = _mm_mul_ps(
           _mm_shuffle_ps(_mm_unpackhi_ps(aTb->m_rotation.m_col0.m_quad, aTb->m_rotation.m_col1.m_quad), v8.m_quad, 228),
           _mm_shuffle_ps(v10, v10, 170));
-  v16 = _mm_add_ps(
-          _mm_mul_ps(_mm_shuffle_ps(v10, v10, 85), _mm_shuffle_ps(_mm_movehl_ps(v13, v9), v8.m_quad, 212)),
-          _mm_mul_ps(_mm_shuffle_ps(v10, v10, 0), v13));
-  v17 = directionA->m_quad;
-  v122 = v11;
-  v127 = *(__m128 *)(*(_QWORD *)shapeB + 32i64);
-  v18 = _mm_add_ps(v16, v15);
-  v19 = _mm_mul_ps(v125, directionA->m_quad);
-  v124 = v14;
-  v117 = v12;
-  v123 = *(__m128 *)(*(_QWORD *)shapeB + 16i64);
+  v14 = _mm_add_ps(
+          _mm_mul_ps(_mm_shuffle_ps(v10, v10, 85), _mm_shuffle_ps(_mm_movehl_ps(v12, v9), v8.m_quad, 212)),
+          _mm_mul_ps(_mm_shuffle_ps(v10, v10, 0), v12));
+  v15 = directionA->m_quad;
+  v117 = *(__m128 *)(*(_QWORD *)shapeA + 16i64);
+  v122 = (*shapeB)[2];
+  v16 = _mm_add_ps(v14, v13);
+  v17 = _mm_mul_ps(v120, directionA->m_quad);
+  v119 = *(__m128 *)(*(_QWORD *)shapeA + 32i64);
+  v112 = v11;
+  v118 = (*shapeB)[1];
+  v18 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v17, v17, 85), _mm_shuffle_ps(v17, v17, 0)), _mm_shuffle_ps(v17, v17, 170));
+  v116 = (*shapeB)[3];
+  v125 = v16;
+  v19 = _mm_mul_ps(v117, directionA->m_quad);
+  v108 = v18;
   v20 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v19, v19, 85), _mm_shuffle_ps(v19, v19, 0)), _mm_shuffle_ps(v19, v19, 170));
-  v121 = *(__m128 *)(*(_QWORD *)shapeB + 48i64);
-  v130 = v18;
-  v21 = _mm_mul_ps(v11, directionA->m_quad);
-  v113 = v20;
-  v22 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v21, v21, 85), _mm_shuffle_ps(v21, v21, 0)), _mm_shuffle_ps(v21, v21, 170));
-  v23 = _mm_mul_ps(v14, directionA->m_quad);
-  v116 = v22;
-  v24 = *((_DWORD *)shapeA + 2) - 4;
-  v25 = (__m128 *)(*(_QWORD *)shapeA + 64i64);
-  v26 = (__m128 *)(*(_QWORD *)shapeB + 64i64);
-  v27 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v23, v23, 0), _mm_shuffle_ps(v23, v23, 85)), _mm_shuffle_ps(v23, v23, 170));
-  v28 = _mm_mul_ps(v12, v17);
+  v21 = _mm_mul_ps(v119, directionA->m_quad);
+  v111 = v20;
+  v22 = shapeA[2] - 4;
+  v23 = (__m128 *)(*(_QWORD *)shapeA + 64i64);
+  v24 = *shapeB + 4;
+  v25 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v21, v21, 0), _mm_shuffle_ps(v21, v21, 85)), _mm_shuffle_ps(v21, v21, 170));
+  v26 = _mm_mul_ps(v11, v15);
+  v109 = v25;
+  v27 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v26, v26, 85), _mm_shuffle_ps(v26, v26, 0)), _mm_shuffle_ps(v26, v26, 170));
+  v28 = _mm_mul_ps(v121, v16);
   v114 = v27;
   v29 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v28, v28, 85), _mm_shuffle_ps(v28, v28, 0)), _mm_shuffle_ps(v28, v28, 170));
-  v30 = _mm_mul_ps(v126, v18);
-  v119 = v29;
+  v30 = _mm_mul_ps(v118, v16);
+  v113 = v29;
   v31 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v30, v30, 85), _mm_shuffle_ps(v30, v30, 0)), _mm_shuffle_ps(v30, v30, 170));
-  v32 = _mm_mul_ps(v123, v18);
-  v118 = v31;
-  v33 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v32, v32, 85), _mm_shuffle_ps(v32, v32, 0)), _mm_shuffle_ps(v32, v32, 170));
-  v34 = _mm_mul_ps(v127, v18);
-  v128 = v33;
-  v35 = *((_DWORD *)shapeB + 2) - 4;
-  v36 = *((_DWORD *)shapeB + 2) - 4;
-  if ( v24 < v35 )
-    v36 = *((_DWORD *)shapeA + 2) - 4;
-  v37 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v34, v34, 85), _mm_shuffle_ps(v34, v34, 0)), _mm_shuffle_ps(v34, v34, 170));
-  v38 = _mm_mul_ps(*(__m128 *)(*(_QWORD *)shapeB + 48i64), v18);
-  v120 = v37;
-  v115 = _mm_add_ps(
-           _mm_add_ps(_mm_shuffle_ps(v38, v38, 85), _mm_shuffle_ps(v38, v38, 0)),
-           _mm_shuffle_ps(v38, v38, 170));
-  if ( v36 > 0 )
+  v32 = _mm_mul_ps(v122, v16);
+  v123 = v31;
+  v33 = *((_DWORD *)shapeB + 2) - 4;
+  v34 = v33;
+  if ( v22 < v33 )
+    v34 = shapeA[2] - 4;
+  v35 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v32, v32, 85), _mm_shuffle_ps(v32, v32, 0)), _mm_shuffle_ps(v32, v32, 170));
+  v36 = _mm_mul_ps((*shapeB)[3], v16);
+  v115 = v35;
+  v110 = _mm_add_ps(
+           _mm_add_ps(_mm_shuffle_ps(v36, v36, 85), _mm_shuffle_ps(v36, v36, 0)),
+           _mm_shuffle_ps(v36, v36, 170));
+  if ( v34 > 0 )
   {
-    v39 = ((unsigned int)(v36 - 1) >> 2) + 1;
-    v40 = v39;
-    v39 *= 4;
-    v24 -= v39;
-    v35 -= v39;
+    v37 = ((unsigned int)(v34 - 1) >> 2) + 1;
+    v22 -= 4 * v37;
+    v33 -= 4 * v37;
     do
     {
-      v41 = _mm_mul_ps(v17, *v25);
+      v38 = _mm_mul_ps(v15, *v23);
+      v39 = _mm_add_ps(
+              _mm_add_ps(_mm_shuffle_ps(v38, v38, 85), _mm_shuffle_ps(v38, v38, 0)),
+              _mm_shuffle_ps(v38, v38, 170));
+      v40 = _mm_mul_ps(v15, v23[1]);
+      v41 = _mm_cmplt_ps(v18, v39);
+      v126 = v39;
       v42 = _mm_add_ps(
-              _mm_add_ps(_mm_shuffle_ps(v41, v41, 85), _mm_shuffle_ps(v41, v41, 0)),
-              _mm_shuffle_ps(v41, v41, 170));
-      v43 = _mm_mul_ps(v17, v25[1]);
-      v44 = _mm_cmpltps(v20, v42);
-      v45 = v42;
-      v46 = _mm_add_ps(
+              _mm_add_ps(_mm_shuffle_ps(v40, v40, 85), _mm_shuffle_ps(v40, v40, 0)),
+              _mm_shuffle_ps(v40, v40, 170));
+      v43 = _mm_mul_ps(v15, v23[2]);
+      v44 = _mm_cmplt_ps(v111, v42);
+      v45 = _mm_add_ps(
               _mm_add_ps(_mm_shuffle_ps(v43, v43, 85), _mm_shuffle_ps(v43, v43, 0)),
               _mm_shuffle_ps(v43, v43, 170));
-      v47 = _mm_mul_ps(v17, v25[2]);
-      v48 = _mm_cmpltps(v116, v46);
-      v49 = _mm_add_ps(
-              _mm_add_ps(_mm_shuffle_ps(v47, v47, 85), _mm_shuffle_ps(v47, v47, 0)),
-              _mm_shuffle_ps(v47, v47, 170));
-      v50 = _mm_mul_ps(v17, v25[3]);
-      v51 = _mm_cmpltps(v27, v49);
+      v46 = _mm_mul_ps(v15, v23[3]);
+      v47 = _mm_cmplt_ps(v25, v45);
+      v48 = _mm_add_ps(
+              _mm_add_ps(_mm_shuffle_ps(v46, v46, 85), _mm_shuffle_ps(v46, v46, 0)),
+              _mm_shuffle_ps(v46, v46, 170));
+      v49 = _mm_mul_ps(v16, *v24);
+      v50 = _mm_add_ps(
+              _mm_add_ps(_mm_shuffle_ps(v49, v49, 85), _mm_shuffle_ps(v49, v49, 0)),
+              _mm_shuffle_ps(v49, v49, 170));
+      v51 = _mm_mul_ps(v16, v24[1]);
+      v127 = v50;
       v52 = _mm_add_ps(
-              _mm_add_ps(_mm_shuffle_ps(v50, v50, 85), _mm_shuffle_ps(v50, v50, 0)),
-              _mm_shuffle_ps(v50, v50, 170));
-      v53 = _mm_mul_ps(v18, *v26);
+              _mm_add_ps(_mm_shuffle_ps(v51, v51, 85), _mm_shuffle_ps(v51, v51, 0)),
+              _mm_shuffle_ps(v51, v51, 170));
+      v53 = _mm_mul_ps(v16, v24[2]);
       v54 = _mm_add_ps(
               _mm_add_ps(_mm_shuffle_ps(v53, v53, 85), _mm_shuffle_ps(v53, v53, 0)),
               _mm_shuffle_ps(v53, v53, 170));
-      v55 = _mm_mul_ps(v18, v26[1]);
-      v56 = v54;
-      v57 = _mm_add_ps(
+      v55 = _mm_mul_ps(v16, v24[3]);
+      v56 = _mm_add_ps(
               _mm_add_ps(_mm_shuffle_ps(v55, v55, 85), _mm_shuffle_ps(v55, v55, 0)),
               _mm_shuffle_ps(v55, v55, 170));
-      v58 = _mm_mul_ps(v18, v26[2]);
-      v59 = _mm_add_ps(
-              _mm_add_ps(_mm_shuffle_ps(v58, v58, 85), _mm_shuffle_ps(v58, v58, 0)),
-              _mm_shuffle_ps(v58, v58, 170));
-      v60 = _mm_mul_ps(v18, v26[3]);
-      v61 = _mm_add_ps(
-              _mm_add_ps(_mm_shuffle_ps(v60, v60, 85), _mm_shuffle_ps(v60, v60, 0)),
-              _mm_shuffle_ps(v60, v60, 170));
-      v62 = _mm_cmpltps(v119, v52);
-      v63 = _mm_cmpltps(v118, v54);
-      v64 = _mm_cmpltps(v115, v61);
-      v65 = _mm_cmpltps(v120, v59);
-      v66 = _mm_cmpltps(v128, v57);
-      v113 = _mm_or_ps(_mm_and_ps(v44, v45), _mm_andnot_ps(v44, v113));
-      v116 = _mm_or_ps(_mm_and_ps(v48, v46), _mm_andnot_ps(v48, v116));
-      v114 = _mm_or_ps(_mm_and_ps(v51, v49), _mm_andnot_ps(v51, v114));
-      v119 = _mm_or_ps(_mm_and_ps(v62, v52), _mm_andnot_ps(v62, v119));
-      v125 = _mm_or_ps(_mm_and_ps(v44, *v25), _mm_andnot_ps(v44, v125));
-      v118 = _mm_or_ps(_mm_and_ps(v63, v56), _mm_andnot_ps(v63, v118));
-      v122 = _mm_or_ps(_mm_and_ps(v48, v25[1]), _mm_andnot_ps(v48, v122));
-      v33 = _mm_or_ps(_mm_and_ps(v66, v57), _mm_andnot_ps(v66, v128));
-      v128 = v33;
-      v124 = _mm_or_ps(_mm_and_ps(v51, v25[2]), _mm_andnot_ps(v51, v124));
-      v67 = _mm_or_ps(_mm_and_ps(v62, v25[3]), _mm_andnot_ps(v62, v117));
-      v120 = _mm_or_ps(_mm_and_ps(v65, v59), _mm_andnot_ps(v65, v120));
-      v117 = v67;
-      v68 = _mm_and_ps(v64, v61);
-      v69 = _mm_or_ps(_mm_and_ps(v63, *v26), _mm_andnot_ps(v63, v126));
-      v115 = _mm_or_ps(v68, _mm_andnot_ps(v64, v115));
-      v20 = v113;
-      v18 = v130;
-      v17 = v129;
-      v25 += 4;
-      v26 += 4;
-      v126 = v69;
-      v70 = _mm_or_ps(_mm_and_ps(v65, v26[-2]), _mm_andnot_ps(v65, v127));
-      v27 = v114;
-      v123 = _mm_or_ps(_mm_and_ps(v66, v26[-3]), _mm_andnot_ps(v66, v123));
-      v127 = v70;
-      v121 = _mm_or_ps(_mm_and_ps(v64, v26[-1]), _mm_andnot_ps(v64, v121));
-      --v40;
+      v57 = _mm_cmplt_ps(v114, v48);
+      v58 = _mm_cmplt_ps(v113, v50);
+      v59 = _mm_cmplt_ps(v110, v56);
+      v60 = _mm_cmplt_ps(v115, v54);
+      v61 = _mm_cmplt_ps(v123, v52);
+      v108 = _mm_or_ps(_mm_and_ps(v41, v126), _mm_andnot_ps(v41, v108));
+      v111 = _mm_or_ps(_mm_and_ps(v44, v42), _mm_andnot_ps(v44, v111));
+      v109 = _mm_or_ps(_mm_and_ps(v47, v45), _mm_andnot_ps(v47, v109));
+      v114 = _mm_or_ps(_mm_and_ps(v57, v48), _mm_andnot_ps(v57, v114));
+      v120 = _mm_or_ps(_mm_and_ps(v41, *v23), _mm_andnot_ps(v41, v120));
+      v113 = _mm_or_ps(_mm_and_ps(v58, v127), _mm_andnot_ps(v58, v113));
+      v117 = _mm_or_ps(_mm_and_ps(v44, v23[1]), _mm_andnot_ps(v44, v117));
+      v31 = _mm_or_ps(_mm_and_ps(v61, v52), _mm_andnot_ps(v61, v123));
+      v123 = v31;
+      v119 = _mm_or_ps(_mm_and_ps(v47, v23[2]), _mm_andnot_ps(v47, v119));
+      v62 = _mm_or_ps(_mm_and_ps(v57, v23[3]), _mm_andnot_ps(v57, v112));
+      v115 = _mm_or_ps(_mm_and_ps(v60, v54), _mm_andnot_ps(v60, v115));
+      v112 = v62;
+      v63 = _mm_and_ps(v59, v56);
+      v64 = _mm_or_ps(_mm_and_ps(v58, *v24), _mm_andnot_ps(v58, v121));
+      v110 = _mm_or_ps(v63, _mm_andnot_ps(v59, v110));
+      v18 = v108;
+      v16 = v125;
+      v15 = m_quad;
+      v23 += 4;
+      v24 += 4;
+      v121 = v64;
+      v65 = _mm_or_ps(_mm_and_ps(v60, v24[-2]), _mm_andnot_ps(v60, v122));
+      v25 = v109;
+      v118 = _mm_or_ps(_mm_and_ps(v61, v24[-3]), _mm_andnot_ps(v61, v118));
+      v122 = v65;
+      v116 = _mm_or_ps(_mm_and_ps(v59, v24[-1]), _mm_andnot_ps(v59, v116));
+      --v37;
     }
-    while ( v40 );
-    v22 = v116;
-    v29 = v119;
-    v12 = v67;
+    while ( v37 );
+    v20 = v111;
+    v27 = v114;
+    v11 = v62;
   }
-  if ( v24 > 0 )
+  if ( v22 > 0 )
   {
-    v71 = ((unsigned int)(v24 - 1) >> 2) + 1;
+    v66 = ((unsigned int)(v22 - 1) >> 2) + 1;
     while ( 1 )
     {
-      v72 = _mm_mul_ps(*v25, v17);
+      v67 = _mm_mul_ps(*v23, v15);
+      v68 = _mm_add_ps(
+              _mm_add_ps(_mm_shuffle_ps(v67, v67, 85), _mm_shuffle_ps(v67, v67, 0)),
+              _mm_shuffle_ps(v67, v67, 170));
+      v69 = _mm_mul_ps(v23[1], v15);
+      v70 = _mm_add_ps(
+              _mm_add_ps(_mm_shuffle_ps(v69, v69, 85), _mm_shuffle_ps(v69, v69, 0)),
+              _mm_shuffle_ps(v69, v69, 170));
+      v71 = _mm_mul_ps(v23[2], v15);
+      v72 = _mm_cmplt_ps(v20, v70);
       v73 = _mm_add_ps(
-              _mm_add_ps(_mm_shuffle_ps(v72, v72, 85), _mm_shuffle_ps(v72, v72, 0)),
-              _mm_shuffle_ps(v72, v72, 170));
-      v74 = _mm_mul_ps(v25[1], v17);
+              _mm_add_ps(_mm_shuffle_ps(v71, v71, 85), _mm_shuffle_ps(v71, v71, 0)),
+              _mm_shuffle_ps(v71, v71, 170));
+      v74 = _mm_mul_ps(v23[3], v15);
       v75 = _mm_add_ps(
               _mm_add_ps(_mm_shuffle_ps(v74, v74, 85), _mm_shuffle_ps(v74, v74, 0)),
               _mm_shuffle_ps(v74, v74, 170));
-      v76 = _mm_mul_ps(v25[2], v17);
-      v77 = _mm_cmpltps(v22, v75);
-      v78 = _mm_add_ps(
-              _mm_add_ps(_mm_shuffle_ps(v76, v76, 85), _mm_shuffle_ps(v76, v76, 0)),
-              _mm_shuffle_ps(v76, v76, 170));
-      v79 = _mm_mul_ps(v25[3], v17);
-      v80 = _mm_add_ps(
-              _mm_add_ps(_mm_shuffle_ps(v79, v79, 85), _mm_shuffle_ps(v79, v79, 0)),
-              _mm_shuffle_ps(v79, v79, 170));
-      v81 = _mm_cmpltps(v20, v73);
-      v82 = _mm_cmpltps(v114, v78);
-      v83 = _mm_cmpltps(v29, v80);
-      v22 = _mm_or_ps(_mm_andnot_ps(v77, v22), _mm_and_ps(v75, v77));
-      v113 = _mm_or_ps(_mm_andnot_ps(v81, v113), _mm_and_ps(v73, v81));
-      v29 = _mm_or_ps(_mm_andnot_ps(v83, v29), _mm_and_ps(v80, v83));
-      v125 = _mm_or_ps(_mm_andnot_ps(v81, v125), _mm_and_ps(*v25, v81));
-      v27 = _mm_or_ps(_mm_andnot_ps(v82, v114), _mm_and_ps(v78, v82));
-      v114 = v27;
-      v122 = _mm_or_ps(_mm_andnot_ps(v77, v122), _mm_and_ps(v25[1], v77));
-      v84 = _mm_or_ps(_mm_andnot_ps(v82, v124), _mm_and_ps(v25[2], v82));
-      v85 = v83;
-      v86 = _mm_and_ps(v25[3], v83);
-      v17 = v129;
-      v25 += 4;
-      v124 = v84;
-      v12 = _mm_or_ps(_mm_andnot_ps(v85, v117), v86);
-      v117 = v12;
-      if ( !--v71 )
+      v76 = _mm_cmplt_ps(v18, v68);
+      v77 = _mm_cmplt_ps(v109, v73);
+      v78 = _mm_cmplt_ps(v27, v75);
+      v20 = _mm_or_ps(_mm_andnot_ps(v72, v20), _mm_and_ps(v70, v72));
+      v108 = _mm_or_ps(_mm_andnot_ps(v76, v108), _mm_and_ps(v68, v76));
+      v27 = _mm_or_ps(_mm_andnot_ps(v78, v27), _mm_and_ps(v75, v78));
+      v120 = _mm_or_ps(_mm_andnot_ps(v76, v120), _mm_and_ps(*v23, v76));
+      v25 = _mm_or_ps(_mm_andnot_ps(v77, v109), _mm_and_ps(v73, v77));
+      v109 = v25;
+      v117 = _mm_or_ps(_mm_andnot_ps(v72, v117), _mm_and_ps(v23[1], v72));
+      v79 = _mm_or_ps(_mm_andnot_ps(v77, v119), _mm_and_ps(v23[2], v77));
+      v80 = v78;
+      v81 = _mm_and_ps(v23[3], v78);
+      v15 = m_quad;
+      v23 += 4;
+      v119 = v79;
+      v11 = _mm_or_ps(_mm_andnot_ps(v80, v112), v81);
+      v112 = v11;
+      if ( !--v66 )
         break;
-      v20 = v113;
+      v18 = v108;
     }
-    v33 = v128;
-    v119 = v29;
-    v116 = v22;
+    v31 = v123;
+    v114 = v27;
+    v111 = v20;
   }
-  if ( v35 <= 0 )
+  if ( v33 <= 0 )
   {
-    v102 = v123;
-    v105 = v121;
+    v97 = v118;
+    v100 = v116;
   }
   else
   {
-    v87 = v118;
-    v88 = v120;
-    v89 = ((unsigned int)(v35 - 1) >> 2) + 1;
+    v82 = v113;
+    v83 = v115;
+    v84 = ((unsigned int)(v33 - 1) >> 2) + 1;
     do
     {
-      v90 = _mm_mul_ps(*v26, v130);
-      v91 = _mm_add_ps(
-              _mm_add_ps(_mm_shuffle_ps(v90, v90, 85), _mm_shuffle_ps(v90, v90, 0)),
-              _mm_shuffle_ps(v90, v90, 170));
-      v92 = _mm_mul_ps(v26[1], v130);
-      v93 = _mm_add_ps(
-              _mm_add_ps(_mm_shuffle_ps(v92, v92, 85), _mm_shuffle_ps(v92, v92, 0)),
-              _mm_shuffle_ps(v92, v92, 170));
-      v94 = _mm_mul_ps(v26[2], v130);
-      v95 = _mm_add_ps(
-              _mm_add_ps(_mm_shuffle_ps(v94, v94, 85), _mm_shuffle_ps(v94, v94, 0)),
-              _mm_shuffle_ps(v94, v94, 170));
-      v96 = _mm_mul_ps(v26[3], v130);
-      v97 = _mm_cmpltps(v88, v95);
-      v98 = _mm_cmpltps(v33, v93);
-      v99 = _mm_add_ps(
-              _mm_add_ps(_mm_shuffle_ps(v96, v96, 85), _mm_shuffle_ps(v96, v96, 0)),
-              _mm_shuffle_ps(v96, v96, 170));
-      v100 = _mm_cmpltps(v87, v91);
-      v101 = _mm_cmpltps(v115, v99);
-      v87 = _mm_or_ps(_mm_andnot_ps(v100, v87), _mm_and_ps(v91, v100));
-      v33 = _mm_or_ps(_mm_andnot_ps(v98, v33), _mm_and_ps(v93, v98));
-      v88 = _mm_or_ps(_mm_and_ps(v95, v97), _mm_andnot_ps(v97, v88));
-      v115 = _mm_or_ps(_mm_and_ps(v99, v101), _mm_andnot_ps(v101, v115));
-      v126 = _mm_or_ps(_mm_andnot_ps(v100, v126), _mm_and_ps(*v26, v100));
-      v102 = _mm_or_ps(_mm_andnot_ps(v98, v123), _mm_and_ps(v26[1], v98));
-      v123 = v102;
-      v103 = _mm_and_ps(v26[2], v97);
-      v104 = _mm_and_ps(v26[3], v101);
-      v26 += 4;
-      v127 = _mm_or_ps(_mm_andnot_ps(v97, v127), v103);
-      v105 = _mm_or_ps(_mm_andnot_ps(v101, v121), v104);
-      v121 = v105;
-      --v89;
+      v85 = _mm_mul_ps(*v24, v125);
+      v86 = _mm_add_ps(
+              _mm_add_ps(_mm_shuffle_ps(v85, v85, 85), _mm_shuffle_ps(v85, v85, 0)),
+              _mm_shuffle_ps(v85, v85, 170));
+      v87 = _mm_mul_ps(v24[1], v125);
+      v88 = _mm_add_ps(
+              _mm_add_ps(_mm_shuffle_ps(v87, v87, 85), _mm_shuffle_ps(v87, v87, 0)),
+              _mm_shuffle_ps(v87, v87, 170));
+      v89 = _mm_mul_ps(v24[2], v125);
+      v90 = _mm_add_ps(
+              _mm_add_ps(_mm_shuffle_ps(v89, v89, 85), _mm_shuffle_ps(v89, v89, 0)),
+              _mm_shuffle_ps(v89, v89, 170));
+      v91 = _mm_mul_ps(v24[3], v125);
+      v92 = _mm_cmplt_ps(v83, v90);
+      v93 = _mm_cmplt_ps(v31, v88);
+      v94 = _mm_add_ps(
+              _mm_add_ps(_mm_shuffle_ps(v91, v91, 85), _mm_shuffle_ps(v91, v91, 0)),
+              _mm_shuffle_ps(v91, v91, 170));
+      v95 = _mm_cmplt_ps(v82, v86);
+      v96 = _mm_cmplt_ps(v110, v94);
+      v82 = _mm_or_ps(_mm_andnot_ps(v95, v82), _mm_and_ps(v86, v95));
+      v31 = _mm_or_ps(_mm_andnot_ps(v93, v31), _mm_and_ps(v88, v93));
+      v83 = _mm_or_ps(_mm_and_ps(v90, v92), _mm_andnot_ps(v92, v83));
+      v110 = _mm_or_ps(_mm_and_ps(v94, v96), _mm_andnot_ps(v96, v110));
+      v121 = _mm_or_ps(_mm_andnot_ps(v95, v121), _mm_and_ps(*v24, v95));
+      v97 = _mm_or_ps(_mm_andnot_ps(v93, v118), _mm_and_ps(v24[1], v93));
+      v118 = v97;
+      v98 = _mm_and_ps(v24[2], v92);
+      v99 = _mm_and_ps(v24[3], v96);
+      v24 += 4;
+      v122 = _mm_or_ps(_mm_andnot_ps(v92, v122), v98);
+      v100 = _mm_or_ps(_mm_andnot_ps(v96, v116), v99);
+      v116 = v100;
+      --v84;
     }
-    while ( v89 );
+    while ( v84 );
+    v25 = v109;
+    v11 = v112;
+    v115 = v83;
+    v20 = v111;
+    v113 = v82;
     v27 = v114;
-    v12 = v117;
-    v120 = v88;
-    v22 = v116;
-    v118 = v87;
-    v29 = v119;
   }
-  v106 = _mm_cmpltps(v120, v115);
-  v107 = _mm_cmpltps(v113, v22);
-  v108 = _mm_cmpltps(v118, v33);
-  v109 = _mm_cmpltps(v27, v29);
-  v110 = _mm_cmpltps(
-           _mm_or_ps(_mm_andnot_ps(v109, v27), _mm_and_ps(v29, v109)),
-           _mm_or_ps(_mm_andnot_ps(v107, v113), _mm_and_ps(v22, v107)));
-  v111 = _mm_cmpltps(
-           _mm_or_ps(_mm_and_ps(v106, v115), _mm_andnot_ps(v106, v120)),
-           _mm_or_ps(_mm_and_ps(v33, v108), _mm_andnot_ps(v108, v118)));
-  v112.m_quad = _mm_or_ps(
-                  _mm_andnot_ps(v111, _mm_or_ps(_mm_and_ps(v105, v106), _mm_andnot_ps(v106, v127))),
-                  _mm_and_ps(_mm_or_ps(_mm_and_ps(v102, v108), _mm_andnot_ps(v108, v126)), v111));
+  v101 = _mm_cmplt_ps(v115, v110);
+  v102 = _mm_cmplt_ps(v108, v20);
+  v103 = _mm_cmplt_ps(v113, v31);
+  v104 = _mm_cmplt_ps(v25, v27);
+  v105 = _mm_cmplt_ps(
+           _mm_or_ps(_mm_andnot_ps(v104, v25), _mm_and_ps(v27, v104)),
+           _mm_or_ps(_mm_andnot_ps(v102, v108), _mm_and_ps(v20, v102)));
+  v106 = _mm_cmplt_ps(
+           _mm_or_ps(_mm_and_ps(v101, v110), _mm_andnot_ps(v101, v115)),
+           _mm_or_ps(_mm_and_ps(v31, v103), _mm_andnot_ps(v103, v113)));
+  v107 = _mm_or_ps(
+           _mm_andnot_ps(v106, _mm_or_ps(_mm_and_ps(v100, v101), _mm_andnot_ps(v101, v122))),
+           _mm_and_ps(_mm_or_ps(_mm_and_ps(v97, v103), _mm_andnot_ps(v103, v121)), v106));
   vertexBinAout->m_quad = _mm_add_ps(
                             _mm_add_ps(
                               _mm_add_ps(
-                                _mm_mul_ps(_mm_shuffle_ps(v112.m_quad, v112.m_quad, 85), aTb->m_rotation.m_col1.m_quad),
-                                _mm_mul_ps(_mm_shuffle_ps(v112.m_quad, v112.m_quad, 0), aTb->m_rotation.m_col0.m_quad)),
-                              _mm_mul_ps(_mm_shuffle_ps(v112.m_quad, v112.m_quad, 170), aTb->m_rotation.m_col2.m_quad)),
+                                _mm_mul_ps(_mm_shuffle_ps(v107, v107, 85), aTb->m_rotation.m_col1.m_quad),
+                                _mm_mul_ps(_mm_shuffle_ps(v107, v107, 0), aTb->m_rotation.m_col0.m_quad)),
+                              _mm_mul_ps(_mm_shuffle_ps(v107, v107, 170), aTb->m_rotation.m_col2.m_quad)),
                             aTb->m_translation.m_quad);
   vertexAinAOut->m_quad = _mm_or_ps(
-                            _mm_andnot_ps(v110, _mm_or_ps(_mm_andnot_ps(v109, v124), _mm_and_ps(v12, v109))),
-                            _mm_and_ps(_mm_or_ps(_mm_andnot_ps(v107, v125), _mm_and_ps(v122, v107)), v110));
-  *vertexBinBOut = (hkcdVertex)v112.m_quad;
+                            _mm_andnot_ps(v105, _mm_or_ps(_mm_andnot_ps(v104, v119), _mm_and_ps(v11, v104))),
+                            _mm_and_ps(_mm_or_ps(_mm_andnot_ps(v102, v120), _mm_and_ps(v117, v102)), v105));
+  *vertexBinBOut = (hkcdVertex)v107;
 }
 
 // File Line: 75
@@ -450,18 +454,18 @@ __int64 __fastcall hkcdGsk::getClosestPoint(hkcdVertex *vertsA, int numVertsA, h
 {
   char *v4; // r15
   hkcdVertex *v5; // r11
-  hkcdVertex *v6; // r9
+  hkcdVertex *m_verticesBinA; // r9
   char *v7; // r10
   int v8; // edx
   int v9; // eax
-  unsigned int v10; // ebx
+  int v10; // ebx
   __int64 v11; // rcx
   hkcdVertex *v12; // r8
   __m128 *v13; // r11
   int v14; // ebx
   char *v15; // r10
   __m128 *v16; // r9
-  signed __int64 v17; // r8
+  __int64 v17; // r8
   hkTransformf *aTb; // rsi
   __m128 v19; // xmm10
   hkVector4f v20; // xmm13
@@ -472,37 +476,37 @@ __int64 __fastcall hkcdGsk::getClosestPoint(hkcdVertex *vertsA, int numVertsA, h
   hkVector4f v25; // xmm5
   hkVector4f v26; // xmm6
   __m128 v27; // xmm1
-  unsigned int v28; // er14
+  unsigned int v28; // r14d
   hkVector4f v29; // xmm12
   __m128 v30; // xmm2
   __m128 v31; // xmm15
   unsigned int v32; // eax
   __m128 v33; // xmm11
-  __m128 *v34; // rdx
-  __m128 *v35; // rcx
+  hkcdVertex *m_verticesA; // rdx
+  hkcdVertex *v35; // rcx
   __m128 v36; // xmm5
   __m128 v37; // xmm6
   __m128 v38; // xmm7
   __m128 v39; // xmm14
-  __m128 v40; // xmm1
+  __m128 v40; // xmm2
   __m128 v41; // xmm2
-  __m128 v42; // xmm2
-  __m128 v43; // xmm1
-  __m128 v44; // xmm4
-  __m128 v45; // xmm1
-  __m128 v46; // xmm2
-  __m128 v47; // xmm1
-  __m128 v48; // xmm3
-  __m128 v49; // xmm2
-  __m128 v50; // xmm1
-  __m128 v51; // xmm2
-  __m128 v52; // xmm0
-  __m128 v53; // xmm7
-  __m128 v54; // xmm3
-  __m128 v55; // xmm6
+  __m128 v42; // xmm1
+  __m128 v43; // xmm4
+  __m128 v44; // xmm1
+  __m128 v45; // xmm2
+  __m128 v46; // xmm1
+  __m128 v47; // xmm3
+  __m128 v48; // xmm2
+  __m128 v49; // xmm1
+  __m128 v50; // xmm2
+  __m128 v51; // xmm0
+  __m128 v52; // xmm7
+  __m128 v53; // xmm3
+  __m128 v54; // xmm6
+  __m128 v55; // xmm5
   __m128 v56; // xmm5
-  __m128 v57; // xmm5
-  __m128 v58; // xmm1
+  __m128 v57; // xmm1
+  __m128 v58; // xmm5
   __m128 v59; // xmm4
   __m128 v60; // xmm0
   __m128 v61; // xmm2
@@ -512,12 +516,12 @@ __int64 __fastcall hkcdGsk::getClosestPoint(hkcdVertex *vertsA, int numVertsA, h
   __m128 v65; // xmm1
   __m128 v66; // xmm7
   __m128 v67; // xmm2
-  signed int v68; // ecx
+  int v68; // ecx
   __m128 v69; // xmm1
   __m128 v70; // xmm3
   __m128 v71; // xmm14
-  __m128 v72; // xmm1
-  __m128 v73; // xmm6
+  __m128 v72; // xmm6
+  __m128 v73; // xmm8
   __m128 v74; // xmm4
   __m128 v75; // xmm9
   __m128 v76; // xmm8
@@ -537,7 +541,7 @@ __int64 __fastcall hkcdGsk::getClosestPoint(hkcdVertex *vertsA, int numVertsA, h
   __m128 v90; // xmm8
   __m128 v91; // xmm2
   hkVector4f v92; // xmm9
-  int v93; // er8
+  int v93; // r8d
   __m128 v94; // xmm15
   __m128 v95; // xmm1
   __m128 v96; // xmm2
@@ -564,665 +568,618 @@ __int64 __fastcall hkcdGsk::getClosestPoint(hkcdVertex *vertsA, int numVertsA, h
   __m128 v117; // xmm3
   __m128 v118; // xmm1
   __m128 v119; // xmm5
-  __m128 v120; // xmm3
-  __m128 v121; // xmm5
-  __m128 v122; // xmm0
+  __m128 v120; // xmm0
+  __m128 v121; // xmm2
+  __m128 v122; // xmm1
   __m128 v123; // xmm2
-  __m128 v124; // xmm1
-  __m128 v125; // xmm2
-  __m128 v126; // xmm11
-  __m128 v127; // xmm9
+  __m128 v124; // xmm11
+  __m128 v125; // xmm9
+  __m128 v126; // xmm1
+  __m128 v127; // xmm5
   __m128 v128; // xmm1
-  __m128 v129; // xmm5
+  __m128 v129; // xmm8
   __m128 v130; // xmm1
-  __m128 v131; // xmm8
-  __m128 v132; // xmm1
-  __m128 v133; // xmm7
-  __m128 v134; // xmm5
+  __m128 v131; // xmm7
+  __m128 v132; // xmm5
+  __m128 v133; // xmm1
+  __m128 v134; // xmm3
   __m128 v135; // xmm1
-  __m128 v136; // xmm3
+  __m128 v136; // xmm4
   __m128 v137; // xmm1
-  __m128 v138; // xmm4
-  __m128 v139; // xmm1
-  __m128 v140; // xmm2
-  __m128 v141; // xmm6
-  __m128 v142; // xmm1
-  __m128 v143; // xmm3
-  __m128 v144; // xmm1
-  __m128 v145; // xmm4
-  __m128 v146; // xmm3
+  __m128 v138; // xmm2
+  __m128 v139; // xmm6
+  __m128 v140; // xmm0
+  __m128 v141; // xmm3
+  __m128 v142; // xmm0
+  __m128 v143; // xmm4
+  __m128 v144; // xmm3
+  __m128 v145; // xmm2
+  __m128 v146; // xmm0
   __m128 v147; // xmm2
-  __m128 v148; // xmm1
-  __m128 v149; // xmm2
-  __m128 v150; // xmm2
-  __m128 v151; // xmm1
-  __m128 v152; // xmm8
-  __m128 v153; // xmm14
-  hkVector4f v154; // xmm11
+  __m128 v148; // xmm2
+  __m128 v149; // xmm1
+  __m128 v150; // xmm8
+  __m128 v151; // xmm14
+  hkVector4f v152; // xmm11
+  __m128 v153; // xmm1
+  __m128 v154; // xmm3
   __m128 v155; // xmm1
-  __m128 v156; // xmm3
-  __m128 v157; // xmm1
-  __m128 v158; // xmm2
-  __m128 v159; // xmm0
-  __m128 v160; // xmm0
-  __m128 v161; // xmm1
-  __m128 v162; // xmm3
-  __m128 v163; // xmm6
-  __m128 v164; // xmm6
-  __m128 v165; // xmm7
-  __m128 v166; // xmm4
-  __m128 v167; // xmm5
-  __m128 v168; // xmm1
-  __m128 v169; // xmm3
-  __m128 v170; // xmm0
-  __m128 v171; // xmm2
-  __m128 v172; // xmm7
-  __m128 v173; // xmm1
-  __m128 v174; // xmm3
-  __m128 v175; // xmm1
-  __m128 v176; // xmm7
-  __m128 v177; // xmm2
-  __m128 v178; // xmm1
-  __m128 v179; // xmm3
-  __m128 v180; // xmm6
-  __m128 v181; // xmm9
-  __m128 v182; // xmm5
-  __m128 v183; // xmm10
-  __m128 v184; // xmm7
-  __m128 v185; // xmm14
-  __m128 v186; // xmm10
-  __m128 v187; // xmm4
-  __m128 v188; // xmm7
-  __m128 v189; // xmm2
+  __m128 v156; // xmm2
+  __m128 v157; // xmm0
+  __m128 v158; // xmm0
+  __m128 v159; // xmm1
+  __m128 v160; // xmm3
+  __m128 v161; // xmm6
+  __m128 v162; // xmm6
+  __m128 v163; // xmm7
+  __m128 v164; // xmm4
+  __m128 v165; // xmm5
+  __m128 v166; // xmm1
+  __m128 v167; // xmm6
+  __m128 v168; // xmm3
+  __m128 v169; // xmm0
+  __m128 v170; // xmm2
+  __m128 v171; // xmm7
+  __m128 v172; // xmm1
+  __m128 v173; // xmm3
+  __m128 v174; // xmm1
+  __m128 v175; // xmm7
+  __m128 v176; // xmm2
+  __m128 v177; // xmm1
+  __m128 v178; // xmm3
+  __m128 v179; // xmm6
+  __m128 v180; // xmm9
+  __m128 v181; // xmm5
+  __m128 v182; // xmm10
+  __m128 v183; // xmm7
+  __m128 v184; // xmm14
+  __m128 v185; // xmm10
+  __m128 v186; // xmm4
+  __m128 v187; // xmm7
+  __m128 v188; // xmm2
+  __m128 v189; // xmm8
   __m128 v190; // xmm8
-  __m128 v191; // xmm8
-  __m128 v192; // xmm10
-  __m128 v193; // xmm7
-  __m128 v194; // xmm10
-  __m128 v195; // xmm7
-  __m128 v196; // xmm1
+  __m128 v191; // xmm10
+  __m128 v192; // xmm7
+  __m128 v193; // xmm10
+  __m128 v194; // xmm7
+  __m128 v195; // xmm1
+  __m128 v196; // xmm9
   __m128 v197; // xmm9
-  __m128 v198; // xmm9
-  __m128 v199; // xmm2
-  hkVector4f v200; // xmm10
-  int v201; // eax
-  float v202; // xmm1_4
-  float v203; // xmm11_4
-  float v204; // xmm1_4
-  float v205; // xmm11_4
-  int v206; // ecx
-  __m128 v207; // xmm14
-  __m128 v208; // xmm7
-  __m128 v209; // xmm5
-  __m128 v210; // xmm2
-  __m128 v211; // xmm4
-  __m128 v212; // xmm13
+  __m128 v198; // xmm2
+  hkVector4f v199; // xmm10
+  int v200; // eax
+  float v201; // xmm1_4
+  float v202; // xmm11_4
+  float v203; // xmm1_4
+  float v204; // xmm11_4
+  int v205; // ecx
+  __m128 v206; // xmm14
+  __m128 v207; // xmm7
+  __m128 v208; // xmm5
+  __m128 v209; // xmm2
+  __m128 v210; // xmm4
+  __m128 v211; // xmm13
+  __m128 v212; // xmm1
   __m128 v213; // xmm4
   __m128 v214; // xmm4
   __m128 v215; // xmm2
-  __m128 v216; // xmm0
-  __m128 v217; // xmm9
-  __m128 v218; // xmm2
-  __m128 v219; // xmm1
-  __m128 v220; // xmm6
+  __m128 v216; // xmm9
+  __m128 v217; // xmm1
+  __m128 v218; // xmm0
+  __m128 v219; // xmm2
+  __m128 v220; // xmm1
   __m128 v221; // xmm3
   __m128 v222; // xmm2
   __m128 v223; // xmm6
-  int v224; // ecx
-  int v225; // ecx
+  __m128 v224; // xmm2
+  __m128 v225; // xmm6
   int v226; // ecx
   int v227; // ecx
-  __m128 v228; // xmm1
-  __m128 v229; // xmm2
-  __m128 v230; // xmm11
-  __m128 v231; // xmm1
-  __m128 v232; // xmm2
-  __m128 v233; // xmm5
-  __m128 v234; // xmm10
-  __m128 v235; // xmm1
-  __m128 v236; // xmm9
-  __m128 v237; // xmm6
-  __m128 v238; // xmm1
-  __m128 v239; // xmm3
+  int v228; // ecx
+  int v229; // ecx
+  __m128 v230; // xmm1
+  __m128 v231; // xmm2
+  __m128 v232; // xmm11
+  __m128 v233; // xmm1
+  __m128 v234; // xmm2
+  __m128 v235; // xmm5
+  __m128 v236; // xmm10
+  __m128 v237; // xmm1
+  __m128 v238; // xmm9
+  __m128 v239; // xmm6
   __m128 v240; // xmm1
-  __m128 v241; // xmm5
+  __m128 v241; // xmm3
   __m128 v242; // xmm1
-  __m128 v243; // xmm7
-  __m128 v244; // xmm0
-  __m128 v245; // xmm2
-  __m128 v246; // xmm1
+  __m128 v243; // xmm5
+  __m128 v244; // xmm1
+  __m128 v245; // xmm7
+  __m128 v246; // xmm0
   __m128 v247; // xmm2
-  __m128 v248; // xmm8
-  __m128 v249; // xmm1
-  __m128 v250; // xmm0
-  __m128 v251; // xmm3
-  __m128 v252; // xmm2
-  __m128 v253; // xmm0
-  __m128 v254; // xmm1
-  int v255; // ecx
-  float v256; // xmm1_4
-  float v257; // xmm11_4
-  signed int v258; // eax
-  signed int v259; // eax
-  signed int v260; // eax
-  __m128 v261; // xmm1
-  __m128 v262; // xmm3
-  __m128 v263; // xmm2
-  __m128 v264; // xmm6
+  __m128 v248; // xmm1
+  __m128 v249; // xmm2
+  __m128 v250; // xmm8
+  __m128 v251; // xmm1
+  __m128 v252; // xmm0
+  __m128 v253; // xmm3
+  __m128 v254; // xmm2
+  __m128 v255; // xmm0
+  __m128 v256; // xmm0
+  int v257; // ecx
+  float v258; // xmm1_4
+  float v259; // xmm11_4
+  int m_storage; // eax
+  int v261; // eax
+  int v262; // eax
+  __m128 v263; // xmm1
+  __m128 v264; // xmm3
   __m128 v265; // xmm2
-  __m128 v266; // xmm3
-  __m128 v267; // xmm4
-  __m128 v268; // xmm1
-  __m128 v269; // xmm8
-  __m128 v270; // xmm5
-  __m128 v271; // xmm1
-  __m128 v272; // xmm4
-  __m128 v273; // xmm2
-  __m128 v274; // xmm0
-  __m128 v275; // xmm1
-  __m128 v276; // xmm0
-  __m128 v277; // xmm3
-  __m128 v278; // xmm7
-  __m128 v279; // xmm1
-  __m128 v280; // xmm10
-  __m128 v281; // xmm11
-  __m128 v282; // xmm7
-  __m128 v283; // xmm12
-  __m128 v284; // xmm9
-  __m128 v285; // xmm8
-  __m128 v286; // xmm2
+  __m128 v266; // xmm6
+  __m128 v267; // xmm2
+  __m128 v268; // xmm3
+  __m128 v269; // xmm4
+  __m128 v270; // xmm1
+  __m128 v271; // xmm5
+  __m128 v272; // xmm1
+  __m128 v273; // xmm4
+  __m128 v274; // xmm2
+  __m128 v275; // xmm0
+  __m128 v276; // xmm3
+  __m128 v277; // xmm1
+  __m128 v278; // xmm10
+  __m128 v279; // xmm11
+  __m128 v280; // xmm7
+  __m128 v281; // xmm12
+  __m128 v282; // xmm9
+  __m128 v283; // xmm8
+  __m128 v284; // xmm2
+  __m128 v285; // xmm1
+  __m128 v286; // xmm14
   __m128 v287; // xmm1
-  __m128 v288; // xmm14
-  __m128 v289; // xmm1
-  int v290; // er8
-  int v291; // er9
-  __int64 v292; // rcx
-  __m128 *v293; // rdx
-  int v294; // eax
-  __m128 v295; // xmm2
-  __m128 v296; // xmm0
-  __m128 v297; // xmm1
-  __m128 v298; // xmm2
-  __m128 v299; // xmm2
+  int v288; // r8d
+  int v289; // r9d
+  hkcdVertex *v290; // rcx
+  hkcdVertex *v291; // rdx
+  int v292; // eax
+  __m128 v293; // xmm2
+  __m128 v294; // xmm0
+  __m128 v295; // xmm1
+  __m128 v296; // xmm2
+  __m128 v297; // xmm2
+  __m128 v298; // xmm1
+  __m128 v299; // xmm6
   __m128 v300; // xmm1
-  __m128 v301; // xmm6
+  __m128 v301; // xmm2
   __m128 v302; // xmm1
   __m128 v303; // xmm2
   __m128 v304; // xmm1
   __m128 v305; // xmm2
   __m128 v306; // xmm1
-  __m128 v307; // xmm2
+  __int64 v307; // r10
   __m128 v308; // xmm1
-  unsigned int v309; // eax
-  __int64 v310; // r10
-  __m128 v311; // xmm1
-  __m128 v312; // xmm2
-  __m128 v313; // xmm4
-  __m128 v314; // xmm3
+  __m128 v309; // xmm2
+  __m128 v310; // xmm4
+  __m128 v311; // xmm3
+  __m128 v312; // xmm1
+  __m128 v313; // xmm6
+  __m128 v314; // xmm14
   __m128 v315; // xmm1
-  __m128 v316; // xmm2
-  __m128 v317; // xmm6
-  __m128 v318; // xmm14
+  __m128 v316; // xmm9
+  __m128 v317; // xmm12
+  __m128 v318; // xmm11
   __m128 v319; // xmm1
-  __m128 v320; // xmm9
-  __m128 v321; // xmm12
-  __m128 v322; // xmm11
+  __m128 v320; // xmm10
+  __m128 v321; // xmm1
+  __m128 v322; // xmm1
   __m128 v323; // xmm1
-  __m128 v324; // xmm10
-  __m128 v325; // xmm1
-  __m128 v326; // xmm7
-  __m128 v327; // xmm1
-  __m128 v328; // xmm8
-  __m128 v329; // xmm15
-  __m128i v330; // xmm4
-  __m128i v331; // xmm5
+  __m128 v324; // xmm1
+  __m128 v325; // xmm13
+  __m128 v326; // xmm15
+  __m128 *p_m_quad; // rcx
+  __int64 v328; // r8
+  __m128 v329; // xmm9
+  __m128 v330; // xmm1
+  __m128 v331; // xmm8
   __m128 v332; // xmm1
-  __m128 v333; // xmm9
-  __m128 v334; // xmm13
+  __m128 v333; // xmm12
+  __m128 v334; // xmm1
   __m128 v335; // xmm1
-  __m128i v336; // xmm2
-  __m128 v337; // xmm11
-  __m128i v338; // xmm3
-  __m128i v339; // xmm6
-  __m128i v340; // xmm7
-  __m128i v341; // xmm8
-  __m128 v342; // xmm0
-  __m128 v343; // xmm1
-  __m128i v344; // xmm9
-  __m128 v345; // xmm0
-  __m128 v346; // xmm13
-  __m128 v347; // xmm15
-  __m128 *v348; // rcx
-  __int64 v349; // r8
-  __m128 v350; // xmm9
-  __m128 v351; // xmm1
-  __m128 v352; // xmm10
-  __m128 v353; // xmm8
-  __m128 v354; // xmm11
+  __m128 v336; // xmm13
+  __m128 v337; // xmm15
+  __m128 v338; // xmm14
+  __m128 *v339; // rcx
+  __int64 v340; // rdx
+  __m128 v341; // xmm1
+  __m128 v342; // xmm8
+  __m128 v343; // xmm12
+  __m128 v344; // xmm1
+  __m128 v345; // xmm1
+  __m128 v346; // xmm6
+  __m128 v347; // xmm1
+  __m128 v348; // xmm9
+  __m128 v349; // xmm11
+  __m128 v350; // xmm14
+  __m128 v351; // xmm8
+  __m128 v352; // xmm6
+  __m128 v353; // xmm9
+  __m128 v354; // xmm5
   __m128 v355; // xmm1
-  __m128 v356; // xmm12
-  __m128 v357; // xmm7
-  __m128i v358; // xmm2
-  __m128 v359; // xmm1
-  __m128 v360; // xmm1
-  __m128i v361; // xmm3
-  __m128 v362; // xmm6
-  __m128 v363; // xmm4
-  __m128i v364; // xmm1
-  __m128i v365; // xmm5
-  __m128 v366; // xmm11
-  __m128 v367; // xmm0
-  __m128 v368; // xmm13
-  __m128 v369; // xmm15
+  __m128 v356; // xmm4
+  __m128 v357; // xmm1
+  __m128 v358; // xmm2
+  int v359; // eax
+  __m128 v360; // xmm4
+  __m128 v361; // xmm1
+  __m128 v362; // xmm2
+  __m128 v363; // xmm1
+  __m128 v364; // xmm1
+  __m128 v365; // xmm8
+  __m128 v366; // xmm14
+  __m128 v367; // xmm2
+  __m128 v368; // xmm6
+  __m128 v369; // xmm1
   __m128 v370; // xmm14
-  __m128 *v371; // rcx
-  __int64 v372; // rdx
-  __m128 v373; // xmm9
-  __m128 v374; // xmm10
-  __m128 v375; // xmm1
-  __m128 v376; // xmm11
-  __m128 v377; // xmm8
-  __m128 v378; // xmm12
+  hkcdVertex *v371; // r9
+  __m128 v372; // xmm1
+  __m128 v373; // xmm2
+  __m128 v374; // xmm6
+  __m128 v375; // xmm4
+  __m128 v376; // xmm5
+  __m128 v377; // xmm3
+  __m128 v378; // xmm0
   __m128 v379; // xmm1
-  __m128 v380; // xmm1
-  __m128 v381; // xmm6
-  __m128 v382; // xmm1
-  __m128i v383; // xmm2
-  __m128i v384; // xmm4
-  __m128 v385; // xmm7
-  __m128 v386; // xmm3
-  __m128i v387; // xmm1
-  __m128i v388; // xmm5
+  __m128 v380; // xmm9
+  __m128 v381; // xmm9
+  __m128 v382; // xmm3
+  __m128 v383; // xmm8
+  __m128 v384; // xmm8
+  __m128 v385; // xmm0
+  __m128 v386; // xmm8
+  __m128 v387; // xmm4
+  __m128 v388; // xmm5
   __m128 v389; // xmm9
-  __m128 v390; // xmm11
-  __m128 v391; // xmm14
-  __m128 v392; // xmm8
-  __m128 v393; // xmm6
-  __m128 v394; // xmm9
-  __m128 v395; // xmm5
+  __m128 v390; // xmm4
+  __m128 v391; // xmm1
+  __m128 v392; // xmm5
+  __m128 v393; // xmm3
+  __m128 v394; // xmm2
+  __m128 v395; // xmm0
   __m128 v396; // xmm1
   __m128 v397; // xmm4
-  __m128 v398; // xmm1
+  __m128i v398; // xmm5
   __m128 v399; // xmm2
-  int v400; // eax
-  __m128 v401; // xmm4
-  __m128 v402; // xmm1
-  __m128 v403; // xmm2
-  __m128 v404; // xmm1
-  __m128 v405; // xmm1
-  __m128 v406; // xmm8
-  __m128 v407; // xmm14
-  __m128 v408; // xmm2
-  __m128 v409; // xmm6
-  __m128 v410; // xmm1
-  __m128 v411; // xmm14
-  __m128 *v412; // r9
-  __m128 v413; // xmm1
-  __m128 v414; // xmm2
-  __m128 v415; // xmm6
-  __m128 v416; // xmm4
-  __m128 v417; // xmm5
-  __m128 v418; // xmm3
-  __m128 v419; // xmm0
+  __m128 v400; // xmm9
+  __m128 v401; // xmm0
+  __m128 v402; // xmm4
+  __m128 v403; // xmm4
+  __m128 v404; // xmm6
+  int v405; // edx
+  __m128 v406; // xmm2
+  int v407; // eax
+  int v408; // ecx
+  int v409; // ebx
+  __int64 v410; // rdi
+  __int64 v411; // r10
+  __int64 v412; // r8
+  __int64 v413; // r11
+  int v414; // edx
+  __m128 v415; // xmm0
+  __m128 v416; // xmm2
+  __m128 v417; // xmm4
+  __m128 v418; // xmm7
+  __m128 v419; // xmm5
   __m128 v420; // xmm1
-  __m128 v421; // xmm9
-  __m128 v422; // xmm9
-  __m128 v423; // xmm3
-  __m128 v424; // xmm8
-  __m128 v425; // xmm8
-  __m128 v426; // xmm0
-  __m128 v427; // xmm8
-  __m128 v428; // xmm4
-  __m128 v429; // xmm5
-  __m128 v430; // xmm9
-  __m128 v431; // xmm4
-  __m128 v432; // xmm1
-  __m128 v433; // xmm5
-  __m128 v434; // xmm3
-  __m128 v435; // xmm2
-  __m128 v436; // xmm0
-  __m128 v437; // xmm1
-  __m128 v438; // xmm4
-  __m128i v439; // xmm5
-  __m128 v440; // xmm2
-  __m128 v441; // xmm9
-  __m128 v442; // xmm2
-  __m128 v443; // xmm0
-  __m128 v444; // xmm4
-  __m128 v445; // xmm6
-  signed int v446; // edx
-  __m128 v447; // xmm2
-  signed int v448; // eax
-  signed int v449; // ecx
-  signed int v450; // ebx
-  signed __int64 v451; // rdi
-  signed __int64 v452; // r10
-  __int64 v453; // r8
-  signed __int64 v454; // r11
-  int v455; // edx
-  __m128 v456; // xmm0
-  __m128 v457; // xmm2
-  __m128 v458; // xmm4
-  __m128 v459; // xmm7
-  __m128 v460; // xmm5
-  __m128 v461; // xmm1
-  __m128 v462; // xmm3
-  __m128 v463; // xmm4
+  __m128 v421; // xmm3
+  __m128 v422; // xmm4
+  __m128 v423; // xmm7
+  __m128 v424; // xmm5
+  __m128 v425; // xmm6
+  __m128 v426; // xmm1
+  __m128 v427; // xmm4
+  __m128 v428; // xmm2
+  __m128 v429; // xmm11
+  __m128 v430; // xmm7
+  __m128 v431; // xmm3
+  __m128 v432; // xmm8
+  __m128 v433; // xmm8
+  __m128 v434; // xmm11
+  __m128 v435; // xmm6
+  __m128 v436; // xmm11
+  __m128 v437; // xmm6
+  __m128 v438; // xmm7
+  __m128 v439; // xmm1
+  __m128 v440; // xmm7
+  __m128 v441; // xmm2
+  hkVector4f v442; // xmm11
+  int v443; // ecx
+  __m128 v444; // xmm2
+  hkcdVertex v445; // xmm0
+  __int64 v446; // rcx
+  int v447; // ecx
+  __m128 v448; // xmm5
+  __m128 v449; // xmm3
+  __m128 v450; // xmm4
+  __m128 v451; // xmm11
+  __m128 v452; // xmm1
+  __m128 v453; // xmm6
+  __m128 v454; // xmm7
+  __m128 v455; // xmm13
+  __m128 v456; // xmm8
+  __m128 v457; // xmm8
+  __m128 v458; // xmm11
+  __m128 v459; // xmm11
+  __m128 v460; // xmm6
+  __m128 v461; // xmm6
+  __m128 v462; // xmm1
+  __m128 v463; // xmm7
   __m128 v464; // xmm7
-  __m128 v465; // xmm5
-  __m128 v466; // xmm6
-  __m128 v467; // xmm1
-  __m128 v468; // xmm4
-  __m128 v469; // xmm2
-  __m128 v470; // xmm11
-  __m128 v471; // xmm7
-  __m128 v472; // xmm3
-  __m128 v473; // xmm8
-  __m128 v474; // xmm8
-  __m128 v475; // xmm11
-  __m128 v476; // xmm6
-  __m128 v477; // xmm11
-  __m128 v478; // xmm6
-  __m128 v479; // xmm7
-  __m128 v480; // xmm1
-  __m128 v481; // xmm7
-  __m128 v482; // xmm2
-  hkVector4f v483; // xmm11
-  int v484; // ecx
-  __m128 v485; // xmm2
-  hkcdVertex v486; // xmm0
-  __int64 v487; // rcx
-  signed int v488; // ecx
-  __m128 v489; // xmm5
-  __m128 v490; // xmm3
-  __m128 v491; // xmm4
-  __m128 v492; // xmm11
-  __m128 v493; // xmm1
-  __m128 v494; // xmm6
-  __m128 v495; // xmm7
-  __m128 v496; // xmm13
-  __m128 v497; // xmm8
-  __m128 v498; // xmm8
-  __m128 v499; // xmm11
-  __m128 v500; // xmm11
-  __m128 v501; // xmm6
-  __m128 v502; // xmm6
-  __m128 v503; // xmm1
-  __m128 v504; // xmm7
-  __m128 v505; // xmm7
-  __m128 v506; // xmm2
-  hkVector4f v507; // xmm11
-  int v508; // ecx
-  __m128 v509; // xmm2
-  hkcdVertex v510; // xmm0
-  __int64 v511; // rcx
-  signed int v512; // ecx
-  __int64 v513; // r9
-  __int64 v514; // rax
-  __int64 v515; // rcx
-  __m128 v516; // xmm0
-  __m128 v517; // xmm12
-  __m128 v518; // xmm3
+  __m128 v465; // xmm2
+  hkVector4f v466; // xmm11
+  int v467; // ecx
+  __m128 v468; // xmm2
+  hkcdVertex v469; // xmm0
+  __int64 v470; // rcx
+  int v471; // ecx
+  __int64 v472; // r9
+  __int64 v473; // rax
+  __int64 v474; // rcx
+  __m128 v475; // xmm0
+  __m128 v476; // xmm12
+  __m128 v477; // xmm3
+  __m128 v478; // xmm2
+  __m128 v479; // xmm3
+  __m128 v480; // xmm4
+  __m128 v481; // xmm9
+  __m128 v482; // xmm5
+  __m128 v483; // xmm1
+  __m128 v484; // xmm2
+  __m128 v485; // xmm1
+  __m128 v486; // xmm6
+  __m128 v487; // xmm4
+  __m128 v488; // xmm1
+  __m128 v489; // xmm2
+  __m128 v490; // xmm8
+  __m128 v491; // xmm8
+  __m128 v492; // xmm8
+  __m128 v493; // xmm2
+  __int64 v494; // r9
+  __int64 v495; // rax
+  __int64 v496; // rcx
+  __m128 v497; // xmm0
+  __m128 v498; // xmm15
+  __m128 v499; // xmm3
+  __m128 v500; // xmm2
+  __m128 v501; // xmm3
+  __m128 v502; // xmm4
+  __m128 v503; // xmm6
+  __m128 v504; // xmm2
+  __m128 v505; // xmm8
+  __m128 v506; // xmm4
+  __m128 v507; // xmm7
+  __m128 v508; // xmm3
+  __m128 v509; // xmm5
+  __m128 v510; // xmm9
+  __m128 v511; // xmm10
+  __m128 v512; // xmm9
+  __m128 v513; // xmm6
+  __m128 v514; // xmm0
+  __m128 v515; // xmm3
+  __m128 v516; // xmm1
+  __m128 v517; // xmm2
+  __m128 v518; // xmm6
   __m128 v519; // xmm2
-  __m128 v520; // xmm3
-  __m128 v521; // xmm4
-  __m128 v522; // xmm9
-  __m128 v523; // xmm5
-  __m128 v524; // xmm1
+  __m128 v520; // xmm4
+  __m128 v521; // xmm3
+  __m128 v522; // xmm6
+  __m128 v523; // xmm2
+  __m128 v524; // xmm7
   __m128 v525; // xmm2
-  __m128 v526; // xmm1
-  __m128 v527; // xmm6
-  __m128 v528; // xmm4
-  __m128 v529; // xmm1
-  __m128 v530; // xmm2
-  __m128 v531; // xmm8
-  __m128 v532; // xmm8
-  __m128 v533; // xmm8
-  __m128 v534; // xmm2
-  __int64 v535; // r9
-  __int64 v536; // rax
-  __int64 v537; // rcx
-  __m128 v538; // xmm0
-  __m128 v539; // xmm15
-  __m128 v540; // xmm3
-  __m128 v541; // xmm2
-  __m128 v542; // xmm3
-  __m128 v543; // xmm4
-  __m128 v544; // xmm6
-  __m128 v545; // xmm2
-  __m128 v546; // xmm8
-  __m128 v547; // xmm4
-  __m128 v548; // xmm7
-  __m128 v549; // xmm3
-  __m128 v550; // xmm5
-  __m128 v551; // xmm9
-  __m128 v552; // xmm10
-  __m128 v553; // xmm9
-  __m128 v554; // xmm6
-  __m128 v555; // xmm0
-  __m128 v556; // xmm3
-  __m128 v557; // xmm1
-  __m128 v558; // xmm2
-  __m128 v559; // xmm6
-  __m128 v560; // xmm7
-  __m128 v561; // xmm2
-  __m128 v562; // xmm4
-  __m128 v563; // xmm3
-  __m128 v564; // xmm6
-  __m128 v565; // xmm2
-  __m128 v566; // xmm0
-  __m128 v567; // xmm1
-  __m128 v568; // xmm3
-  __m128 v569; // xmm0
-  __m128 v570; // xmm7
-  hkcdGsk::GetClosestPointOutput *v571; // rax
-  hkcdGsk::GetClosestPointOutput *v572; // rax
-  __m128 v573; // xmm15
-  __m128 v574; // xmm1
-  _QWORD *v575; // rbx
-  unsigned __int64 v576; // rcx
-  unsigned __int64 v577; // rax
-  unsigned int v578; // eax
-  _QWORD *v579; // rcx
-  unsigned __int64 v580; // rax
-  signed __int64 v581; // rcx
-  __int64 v582; // rdi
-  char v583; // bl
-  char v584; // r11
-  char v585; // dl
-  char v586; // r8
-  char v587; // r9
-  char v588; // r10
+  __m128 v526; // xmm0
+  __m128 v527; // xmm1
+  __m128 v528; // xmm3
+  __m128 v529; // xmm0
+  __m128 v530; // xmm7
+  hkcdGsk::GetClosestPointOutput *v531; // rax
+  hkcdGsk::GetClosestPointOutput *v532; // rax
+  __m128 v533; // xmm15
+  __m128 v534; // xmm1
+  _QWORD *Value; // rbx
+  unsigned __int64 v536; // rcx
+  unsigned __int64 v537; // rax
+  unsigned int v538; // eax
+  _QWORD *v539; // rcx
+  unsigned __int64 v540; // rax
+  _QWORD *v541; // rcx
+  __int64 v542; // rdi
+  char v543; // bl
+  char v544; // r11
+  char v545; // dl
+  char v546; // r8
+  char v547; // r9
+  char v548; // r10
   __int64 result; // rax
   __m128 supportOut; // [rsp+40h] [rbp-80h]
   __m128 supportOuta; // [rsp+40h] [rbp-80h]
-  __m128 v592; // [rsp+50h] [rbp-70h]
-  __m128 v593; // [rsp+50h] [rbp-70h]
-  hkcdGskBase v594; // [rsp+60h] [rbp-60h]
-  __m128 v595; // [rsp+120h] [rbp+60h]
-  __m128 v596; // [rsp+130h] [rbp+70h]
-  __m128 v597; // [rsp+140h] [rbp+80h]
-  __m128 v598; // [rsp+150h] [rbp+90h]
-  __m128 v599; // [rsp+160h] [rbp+A0h]
-  __m128 v600; // [rsp+170h] [rbp+B0h]
-  __m128 v601; // [rsp+180h] [rbp+C0h]
-  __m128 v602; // [rsp+190h] [rbp+D0h]
-  __m128 v603; // [rsp+1A0h] [rbp+E0h]
-  __m128 v604; // [rsp+1B0h] [rbp+F0h]
-  __m128 v605; // [rsp+1C0h] [rbp+100h]
-  __m128 v606; // [rsp+1D0h] [rbp+110h]
-  hkcdVertex *shapeB; // [rsp+1E0h] [rbp+120h]
-  int v608; // [rsp+1E8h] [rbp+128h]
-  hkcdVertex *shapeA; // [rsp+1F0h] [rbp+130h]
-  int v610; // [rsp+1F8h] [rbp+138h]
-  __m128 v611; // [rsp+200h] [rbp+140h]
-  __m128 v612; // [rsp+210h] [rbp+150h]
-  __m128 v613; // [rsp+220h] [rbp+160h]
-  __m128 v614; // [rsp+230h] [rbp+170h]
-  __m128 v615; // [rsp+240h] [rbp+180h]
-  __m128 v616; // [rsp+250h] [rbp+190h]
-  __m128 v617; // [rsp+260h] [rbp+1A0h]
-  __m128 v618; // [rsp+270h] [rbp+1B0h]
-  __m128 v619; // [rsp+280h] [rbp+1C0h]
-  __m128 v620; // [rsp+290h] [rbp+1D0h]
-  __m128 v621; // [rsp+2A0h] [rbp+1E0h]
-  __m128 v622; // [rsp+2B0h] [rbp+1F0h]
-  __m128 v623; // [rsp+2C0h] [rbp+200h]
-  __m128 v624; // [rsp+2D0h] [rbp+210h]
-  __m128 v625; // [rsp+2E0h] [rbp+220h]
-  __m128 v626; // [rsp+2F0h] [rbp+230h]
-  __m128 v627; // [rsp+300h] [rbp+240h]
-  __m128 v628; // [rsp+310h] [rbp+250h]
-  __m128 v629; // [rsp+320h] [rbp+260h]
-  __m128 v630; // [rsp+330h] [rbp+270h]
-  __m128 v631; // [rsp+340h] [rbp+280h]
-  __m128 v632; // [rsp+350h] [rbp+290h]
-  __m128 v633; // [rsp+360h] [rbp+2A0h]
-  __m128 v634; // [rsp+370h] [rbp+2B0h]
-  __m128 v635; // [rsp+380h] [rbp+2C0h]
-  __m128 v636; // [rsp+390h] [rbp+2D0h]
-  __m128 v637; // [rsp+3A0h] [rbp+2E0h]
-  __m128 v638; // [rsp+3B0h] [rbp+2F0h]
-  __m128 v639; // [rsp+3C0h] [rbp+300h]
-  __m128 v640; // [rsp+3D0h] [rbp+310h]
-  __m128 v641; // [rsp+3E0h] [rbp+320h]
-  __m128 v642; // [rsp+3F0h] [rbp+330h]
-  __m128 v643; // [rsp+400h] [rbp+340h]
-  __m128 v644; // [rsp+410h] [rbp+350h]
-  __m128 v645; // [rsp+420h] [rbp+360h]
-  __m128 v646; // [rsp+430h] [rbp+370h]
-  __m128 v647; // [rsp+440h] [rbp+380h]
-  __m128 v648; // [rsp+450h] [rbp+390h]
-  hkVector4f v649; // [rsp+460h] [rbp+3A0h]
-  __m128 v650; // [rsp+470h] [rbp+3B0h]
-  __m128 v651; // [rsp+480h] [rbp+3C0h]
-  __m128 v652; // [rsp+490h] [rbp+3D0h]
-  __m128 v653; // [rsp+4A0h] [rbp+3E0h]
-  __m128 v654; // [rsp+4B0h] [rbp+3F0h]
-  __m128 v655; // [rsp+4C0h] [rbp+400h]
-  __m128 v656; // [rsp+4D0h] [rbp+410h]
-  __m128 v657; // [rsp+4E0h] [rbp+420h]
-  __m128 v658; // [rsp+4F0h] [rbp+430h]
-  __m128 v659; // [rsp+500h] [rbp+440h]
-  __m128 v660; // [rsp+510h] [rbp+450h]
-  hkVector4f v661; // [rsp+520h] [rbp+460h]
-  hkVector4f v662; // [rsp+530h] [rbp+470h]
-  hkVector4f v663; // [rsp+540h] [rbp+480h]
-  hkVector4f v664; // [rsp+550h] [rbp+490h]
-  __m128 v665; // [rsp+560h] [rbp+4A0h]
-  __m128 v666; // [rsp+570h] [rbp+4B0h]
-  __m128 v667; // [rsp+580h] [rbp+4C0h]
-  __m128 v668; // [rsp+590h] [rbp+4D0h]
-  __m128 v669; // [rsp+5A0h] [rbp+4E0h]
-  __m128 v670; // [rsp+5B0h] [rbp+4F0h]
-  __m128 v671; // [rsp+5C0h] [rbp+500h]
-  __m128 v672; // [rsp+5D0h] [rbp+510h]
-  __m128 v673; // [rsp+5E0h] [rbp+520h]
-  __m128 v674; // [rsp+5F0h] [rbp+530h]
-  __m128 v675; // [rsp+600h] [rbp+540h]
-  __m128 v676; // [rsp+610h] [rbp+550h]
-  __m128 v677; // [rsp+620h] [rbp+560h]
-  __m128 v678; // [rsp+630h] [rbp+570h]
-  __m128 v679; // [rsp+640h] [rbp+580h]
-  __m128 v680; // [rsp+650h] [rbp+590h]
-  __m128 v681; // [rsp+660h] [rbp+5A0h]
-  __m128 v682; // [rsp+670h] [rbp+5B0h]
-  __m128 v683; // [rsp+680h] [rbp+5C0h]
-  __m128 v684; // [rsp+690h] [rbp+5D0h]
-  __m128 v685; // [rsp+6A0h] [rbp+5E0h]
-  __m128 v686; // [rsp+6B0h] [rbp+5F0h]
-  __m128 v687; // [rsp+6C0h] [rbp+600h]
-  __m128 v688; // [rsp+6D0h] [rbp+610h]
-  __m128 v689; // [rsp+6E0h] [rbp+620h]
-  __m128 v690; // [rsp+6F0h] [rbp+630h]
-  __m128 v691; // [rsp+700h] [rbp+640h]
-  __m128 v692; // [rsp+710h] [rbp+650h]
-  __m128 v693; // [rsp+720h] [rbp+660h]
-  __m128 v694; // [rsp+730h] [rbp+670h]
-  __m128 v695; // [rsp+740h] [rbp+680h]
-  __int128 v696; // [rsp+750h] [rbp+690h]
-  __int128 v697; // [rsp+760h] [rbp+6A0h]
-  __int128 v698; // [rsp+770h] [rbp+6B0h]
-  __int128 v699; // [rsp+780h] [rbp+6C0h]
-  __m128 v700; // [rsp+790h] [rbp+6D0h]
-  __int128 v701; // [rsp+7A0h] [rbp+6E0h]
-  __int128 v702; // [rsp+7B0h] [rbp+6F0h]
-  __int128 v703; // [rsp+7C0h] [rbp+700h]
-  __int128 v704; // [rsp+7D0h] [rbp+710h]
-  __m128 v705; // [rsp+7E0h] [rbp+720h]
-  __m128 v706; // [rsp+7F0h] [rbp+730h]
-  __m128 v707; // [rsp+800h] [rbp+740h]
-  __m128 v708; // [rsp+810h] [rbp+750h]
-  __m128 v709; // [rsp+820h] [rbp+760h]
-  __m128 v710; // [rsp+830h] [rbp+770h]
-  __m128 v711; // [rsp+840h] [rbp+780h]
-  __m128 v712; // [rsp+850h] [rbp+790h]
-  __m128 v713; // [rsp+860h] [rbp+7A0h]
-  __m128 v714; // [rsp+870h] [rbp+7B0h]
-  __m128 v715; // [rsp+880h] [rbp+7C0h]
-  __m128 v716; // [rsp+890h] [rbp+7D0h]
-  __m128 v717; // [rsp+8A0h] [rbp+7E0h]
-  __m128 v718; // [rsp+8B0h] [rbp+7F0h]
-  __m128 v719; // [rsp+8C0h] [rbp+800h]
-  __m128 v720; // [rsp+8D0h] [rbp+810h]
-  __int128 v721; // [rsp+8E0h] [rbp+820h]
-  __int128 v722; // [rsp+8F0h] [rbp+830h]
-  __int128 v723; // [rsp+900h] [rbp+840h]
-  __int128 v724; // [rsp+910h] [rbp+850h]
-  __m128 v725; // [rsp+920h] [rbp+860h]
-  __m128 v726; // [rsp+930h] [rbp+870h]
-  __m128 v727; // [rsp+940h] [rbp+880h]
-  __m128 v728; // [rsp+950h] [rbp+890h]
-  __m128 v729; // [rsp+960h] [rbp+8A0h]
-  __m128 v730; // [rsp+970h] [rbp+8B0h]
-  __m128 v731; // [rsp+980h] [rbp+8C0h]
-  __m128 v732; // [rsp+990h] [rbp+8D0h]
-  __m128 v733; // [rsp+9A0h] [rbp+8E0h]
-  __m128 v734; // [rsp+9B0h] [rbp+8F0h]
-  __m128 v735; // [rsp+9C0h] [rbp+900h]
-  __m128 v736; // [rsp+9D0h] [rbp+910h]
-  __m128 v737; // [rsp+9E0h] [rbp+920h]
-  __m128 v738; // [rsp+9F0h] [rbp+930h]
-  __m128 v739; // [rsp+A00h] [rbp+940h]
-  __m128 v740; // [rsp+A10h] [rbp+950h]
-  __int128 v741; // [rsp+A20h] [rbp+960h]
-  __int128 v742; // [rsp+A30h] [rbp+970h]
-  __int128 v743; // [rsp+A40h] [rbp+980h]
-  __int128 v744; // [rsp+A50h] [rbp+990h]
-  __m128 v745; // [rsp+A60h] [rbp+9A0h]
-  __m128 v746; // [rsp+A70h] [rbp+9B0h]
-  int v747; // [rsp+B70h] [rbp+AB0h]
-  hkPadSpu<int> dimA; // [rsp+B78h] [rbp+AB8h]
-  hkcdGskBase::ShapeInterface shapeInterface; // [rsp+B80h] [rbp+AC0h]
-  hkPadSpu<int> dimB; // [rsp+B88h] [rbp+AC8h]
-  hkTransformf *v751; // [rsp+B90h] [rbp+AD0h]
-  char *v752; // [rsp+B98h] [rbp+AD8h]
+  __m128 v552; // [rsp+50h] [rbp-70h]
+  __m128 v553; // [rsp+50h] [rbp-70h]
+  hkcdGskBase v554; // [rsp+60h] [rbp-60h] BYREF
+  __m128 v555; // [rsp+120h] [rbp+60h]
+  __m128 v556; // [rsp+130h] [rbp+70h]
+  __m128 v557; // [rsp+140h] [rbp+80h]
+  hkcdVertex v558; // [rsp+150h] [rbp+90h]
+  __m128 v559; // [rsp+160h] [rbp+A0h]
+  __m128 v560; // [rsp+170h] [rbp+B0h]
+  __m128 v561; // [rsp+180h] [rbp+C0h]
+  __m128 v562; // [rsp+190h] [rbp+D0h]
+  __m128 v563; // [rsp+1A0h] [rbp+E0h]
+  __m128 v564; // [rsp+1B0h] [rbp+F0h]
+  __m128 v565; // [rsp+1C0h] [rbp+100h]
+  __m128 v566; // [rsp+1D0h] [rbp+110h]
+  hkcdVertex *shapeB; // [rsp+1E0h] [rbp+120h] BYREF
+  int v568; // [rsp+1E8h] [rbp+128h]
+  hkcdVertex *shapeA; // [rsp+1F0h] [rbp+130h] BYREF
+  int v570; // [rsp+1F8h] [rbp+138h]
+  __m128 v571; // [rsp+200h] [rbp+140h]
+  __m128 v572; // [rsp+210h] [rbp+150h]
+  __m128 v573; // [rsp+220h] [rbp+160h]
+  __m128 v574; // [rsp+230h] [rbp+170h]
+  __m128 v575; // [rsp+240h] [rbp+180h]
+  __m128 v576; // [rsp+250h] [rbp+190h]
+  __m128 v577; // [rsp+260h] [rbp+1A0h]
+  __m128 v578; // [rsp+270h] [rbp+1B0h]
+  __m128 v579; // [rsp+280h] [rbp+1C0h]
+  __m128 v580; // [rsp+290h] [rbp+1D0h]
+  __m128 v581; // [rsp+2A0h] [rbp+1E0h]
+  __m128 v582; // [rsp+2B0h] [rbp+1F0h]
+  __m128 v583; // [rsp+2C0h] [rbp+200h]
+  __m128 v584; // [rsp+2D0h] [rbp+210h]
+  __m128 v585; // [rsp+2E0h] [rbp+220h]
+  __m128 v586; // [rsp+2F0h] [rbp+230h]
+  __m128 v587; // [rsp+300h] [rbp+240h]
+  __m128 v588; // [rsp+310h] [rbp+250h]
+  __m128 v589; // [rsp+320h] [rbp+260h]
+  __m128 v590; // [rsp+330h] [rbp+270h]
+  __m128 v591; // [rsp+340h] [rbp+280h]
+  __m128 v592; // [rsp+350h] [rbp+290h]
+  __int128 v593; // [rsp+360h] [rbp+2A0h]
+  __m128 v594; // [rsp+370h] [rbp+2B0h]
+  __m128 v595; // [rsp+380h] [rbp+2C0h]
+  __m128 v596; // [rsp+390h] [rbp+2D0h]
+  __m128 v597; // [rsp+3A0h] [rbp+2E0h]
+  __m128 v598; // [rsp+3B0h] [rbp+2F0h]
+  __m128 v599; // [rsp+3C0h] [rbp+300h]
+  __m128 v600; // [rsp+3D0h] [rbp+310h]
+  __m128 v601; // [rsp+3E0h] [rbp+320h]
+  __m128 v602[7]; // [rsp+3F0h] [rbp+330h] BYREF
+  hkVector4f v603; // [rsp+460h] [rbp+3A0h] BYREF
+  __m128 v604; // [rsp+470h] [rbp+3B0h]
+  __m128 v605; // [rsp+480h] [rbp+3C0h]
+  __m128 v606; // [rsp+490h] [rbp+3D0h]
+  __m128 v607; // [rsp+4A0h] [rbp+3E0h]
+  __m128 v608; // [rsp+4B0h] [rbp+3F0h]
+  __m128 v609; // [rsp+4C0h] [rbp+400h]
+  __m128 v610; // [rsp+4D0h] [rbp+410h]
+  __m128 v611; // [rsp+4E0h] [rbp+420h]
+  __m128 v612; // [rsp+4F0h] [rbp+430h]
+  __m128 v613; // [rsp+500h] [rbp+440h]
+  __m128 v614; // [rsp+510h] [rbp+450h]
+  hkVector4f v615; // [rsp+520h] [rbp+460h]
+  __m128 m_quad; // [rsp+530h] [rbp+470h]
+  __m128 v617; // [rsp+540h] [rbp+480h]
+  __m128 v618; // [rsp+550h] [rbp+490h]
+  __m128 v619; // [rsp+560h] [rbp+4A0h]
+  __int128 v620; // [rsp+570h] [rbp+4B0h]
+  __m128 v621; // [rsp+580h] [rbp+4C0h]
+  __m128 v622; // [rsp+590h] [rbp+4D0h]
+  __m128 v623; // [rsp+5A0h] [rbp+4E0h]
+  __m128 v624; // [rsp+5B0h] [rbp+4F0h]
+  __m128 v625; // [rsp+5C0h] [rbp+500h]
+  __m128 v626; // [rsp+5D0h] [rbp+510h]
+  __m128 v627; // [rsp+5E0h] [rbp+520h]
+  __m128 v628; // [rsp+5F0h] [rbp+530h]
+  __m128 v629; // [rsp+600h] [rbp+540h]
+  __m128 v630; // [rsp+610h] [rbp+550h]
+  __m128 v631; // [rsp+620h] [rbp+560h]
+  __m128 v632; // [rsp+630h] [rbp+570h]
+  __m128 v633; // [rsp+640h] [rbp+580h]
+  __m128 v634; // [rsp+650h] [rbp+590h]
+  __m128 v635; // [rsp+660h] [rbp+5A0h]
+  __m128 v636; // [rsp+670h] [rbp+5B0h]
+  __m128 v637; // [rsp+680h] [rbp+5C0h]
+  __m128 v638; // [rsp+690h] [rbp+5D0h]
+  __m128 v639; // [rsp+6A0h] [rbp+5E0h]
+  __m128 v640; // [rsp+6B0h] [rbp+5F0h]
+  __m128 v641; // [rsp+6C0h] [rbp+600h]
+  __m128 v642; // [rsp+6D0h] [rbp+610h]
+  __m128 v643; // [rsp+6E0h] [rbp+620h]
+  __m128 v644; // [rsp+6F0h] [rbp+630h]
+  __m128 v645; // [rsp+700h] [rbp+640h]
+  __m128 v646; // [rsp+710h] [rbp+650h]
+  __m128 v647; // [rsp+720h] [rbp+660h]
+  __m128 v648; // [rsp+730h] [rbp+670h]
+  __m128 v649; // [rsp+740h] [rbp+680h]
+  __m128 v650; // [rsp+750h] [rbp+690h]
+  __m128 v651; // [rsp+760h] [rbp+6A0h]
+  __m128 v652; // [rsp+770h] [rbp+6B0h]
+  __m128 v653; // [rsp+780h] [rbp+6C0h]
+  __m128 v654; // [rsp+790h] [rbp+6D0h]
+  __m128 v655; // [rsp+7A0h] [rbp+6E0h]
+  __m128 v656; // [rsp+7B0h] [rbp+6F0h]
+  __m128 v657; // [rsp+7C0h] [rbp+700h]
+  __m128 v658; // [rsp+7D0h] [rbp+710h]
+  __m128 v659; // [rsp+7E0h] [rbp+720h]
+  __m128 v660; // [rsp+7F0h] [rbp+730h]
+  __m128 v661; // [rsp+800h] [rbp+740h]
+  __m128 v662; // [rsp+810h] [rbp+750h]
+  __m128 v663; // [rsp+820h] [rbp+760h]
+  __m128 v664; // [rsp+830h] [rbp+770h]
+  __m128 v665; // [rsp+840h] [rbp+780h]
+  __m128 v666; // [rsp+850h] [rbp+790h]
+  __m128 v667; // [rsp+860h] [rbp+7A0h]
+  __m128 v668; // [rsp+870h] [rbp+7B0h]
+  __m128 v669; // [rsp+880h] [rbp+7C0h]
+  __m128 v670; // [rsp+890h] [rbp+7D0h]
+  __m128 v671; // [rsp+8A0h] [rbp+7E0h]
+  __m128 v672; // [rsp+8B0h] [rbp+7F0h]
+  __m128 v673; // [rsp+8C0h] [rbp+800h]
+  __m128 v674; // [rsp+8D0h] [rbp+810h]
+  __m128 v675; // [rsp+8E0h] [rbp+820h]
+  __m128 v676; // [rsp+8F0h] [rbp+830h]
+  __m128 v677; // [rsp+900h] [rbp+840h]
+  __m128 v678; // [rsp+910h] [rbp+850h]
+  __m128 v679; // [rsp+920h] [rbp+860h]
+  __m128 v680; // [rsp+930h] [rbp+870h]
+  __m128 v681; // [rsp+940h] [rbp+880h]
+  __m128 v682; // [rsp+950h] [rbp+890h]
+  __m128 v683; // [rsp+960h] [rbp+8A0h]
+  __m128 v684; // [rsp+970h] [rbp+8B0h]
+  __m128 v685; // [rsp+980h] [rbp+8C0h]
+  __m128 v686; // [rsp+990h] [rbp+8D0h]
+  __m128 v687; // [rsp+9A0h] [rbp+8E0h]
+  __m128 v688; // [rsp+9B0h] [rbp+8F0h]
+  __m128 v689; // [rsp+9C0h] [rbp+900h]
+  __m128 v690; // [rsp+9D0h] [rbp+910h]
+  __m128 v691; // [rsp+9E0h] [rbp+920h]
+  __m128 v692; // [rsp+9F0h] [rbp+930h]
+  __m128 v693; // [rsp+A00h] [rbp+940h]
+  __m128 v694; // [rsp+A10h] [rbp+950h]
+  __m128 v695; // [rsp+A20h] [rbp+960h]
+  __m128 v696; // [rsp+A30h] [rbp+970h]
+  __m128 v697; // [rsp+A40h] [rbp+980h]
+  __m128 v698; // [rsp+A50h] [rbp+990h]
+  __m128 v699; // [rsp+A60h] [rbp+9A0h]
+  __m128 v700; // [rsp+A70h] [rbp+9B0h]
+  int v701; // [rsp+B70h] [rbp+AB0h]
+  hkPadSpu<int> dimA; // [rsp+B78h] [rbp+AB8h] BYREF
+  hkcdGskBase::ShapeInterface shapeInterface; // [rsp+B80h] [rbp+AC0h] BYREF
+  hkPadSpu<int> dimB; // [rsp+B88h] [rbp+AC8h] BYREF
+  hkTransformf *v705; // [rsp+B90h] [rbp+AD0h]
+  char *v706; // [rsp+B98h] [rbp+AD8h]
   hkcdGsk::GetClosestPointOutput *vars0; // [rsp+BA0h] [rbp+AE0h]
 
-  v4 = v752;
-  v610 = numVertsA;
-  v608 = numVertsB;
+  v4 = v706;
+  v570 = numVertsA;
+  v568 = numVertsB;
   shapeA = vertsA;
   shapeB = vertsB;
   v5 = vertsA;
-  v6 = v594.m_verticesBinA;
-  v7 = v752;
+  m_verticesBinA = v554.m_verticesBinA;
+  v7 = v706;
   shapeInterface.vfptr = (hkcdGskBase::ShapeInterfaceVtbl *)&hkcdGsk_Vector4ShapeInterface::`vftable;
-  v8 = (unsigned int)(unsigned __int8)v752[4] >> 6;
-  v9 = v752[4] & 3;
-  v10 = (unsigned int)(unsigned __int8)v752[4] >> 6;
+  v8 = (unsigned __int8)v706[4] >> 6;
+  v9 = v706[4] & 3;
+  v10 = v8;
   while ( 1 )
   {
     v11 = (unsigned __int8)*v7;
-    v12 = v6;
-    ++v6;
+    v12 = m_verticesBinA++;
     ++v7;
     *v12 = v5[v11];
     if ( !--v10 )
       break;
     v5 = shapeA;
   }
-  v13 = &v642;
+  v13 = v602;
   v14 = v9;
   v15 = &v4[(unsigned __int64)(unsigned __int8)v4[4] >> 6];
   do
@@ -1235,28 +1192,27 @@ __int64 __fastcall hkcdGsk::getClosestPoint(hkcdVertex *vertsA, int numVertsA, h
     --v14;
   }
   while ( v14 );
-  aTb = v751;
+  aTb = v705;
   dimB.m_storage = v9;
   dimA.m_storage = v8;
   v19 = 0i64;
   v20.m_quad = 0i64;
-  *(_OWORD *)&v594.m_lastDimB.m_storage = 0i64;
+  *(_OWORD *)&v554.m_lastDimB.m_storage = 0i64;
   v21 = v9 - 1;
-  v22.m_quad = (__m128)v751->m_rotation.m_col0;
+  v22.m_quad = (__m128)v705->m_rotation.m_col0;
   v23 = v21;
-  v661.m_quad = (__m128)v751->m_rotation.m_col0;
-  v24.m_quad = (__m128)v751->m_rotation.m_col1;
-  v662.m_quad = (__m128)v751->m_rotation.m_col1;
-  v25.m_quad = (__m128)v751->m_rotation.m_col2;
-  v663.m_quad = (__m128)v751->m_rotation.m_col2;
-  v26.m_quad = (__m128)v751->m_translation;
-  v664.m_quad = (__m128)v751->m_translation;
+  v615.m_quad = (__m128)v705->m_rotation.m_col0;
+  v24.m_quad = (__m128)v705->m_rotation.m_col1;
+  m_quad = v24.m_quad;
+  v25.m_quad = (__m128)v705->m_rotation.m_col2;
+  v617 = v25.m_quad;
+  v26.m_quad = (__m128)v705->m_translation;
+  v618 = v26.m_quad;
   do
   {
-    v27 = *(__m128 *)((char *)&v642 + v23 * 16);
-    --v23;
+    v27 = v602[v23--];
     --v21;
-    v594.m_verticesBinA[v23 + 1].m_quad = _mm_add_ps(
+    v554.m_verticesBinA[v23 + 1].m_quad = _mm_add_ps(
                                             _mm_add_ps(
                                               _mm_add_ps(
                                                 _mm_mul_ps(_mm_shuffle_ps(v27, v27, 85), v24.m_quad),
@@ -1266,24 +1222,27 @@ __int64 __fastcall hkcdGsk::getClosestPoint(hkcdVertex *vertsA, int numVertsA, h
   }
   while ( v21 >= 0 );
   v28 = 0;
-  v29.m_quad = _mm_shuffle_ps(v594.m_verticesBinA[0].m_quad, _mm_unpackhi_ps(v594.m_verticesBinA[0].m_quad, v642), 196);
-  v594.m_verticesBinA[0].0 = (hkVector4f)v29.m_quad;
-  v594.m_verticesBinA[1].m_quad = _mm_shuffle_ps(
-                                    v594.m_verticesBinA[1].m_quad,
-                                    _mm_unpackhi_ps(v594.m_verticesBinA[1].m_quad, v643),
+  v29.m_quad = _mm_shuffle_ps(
+                 v554.m_verticesBinA[0].m_quad,
+                 _mm_unpackhi_ps(v554.m_verticesBinA[0].m_quad, v602[0]),
+                 196);
+  v554.m_verticesBinA[0] = (hkcdVertex)v29.m_quad;
+  v554.m_verticesBinA[1].m_quad = _mm_shuffle_ps(
+                                    v554.m_verticesBinA[1].m_quad,
+                                    _mm_unpackhi_ps(v554.m_verticesBinA[1].m_quad, v602[1]),
                                     196);
-  *(float *)&v752 = FLOAT_0_0000099999997;
-  v594.m_verticesBinA[2].m_quad = _mm_shuffle_ps(
-                                    v594.m_verticesBinA[2].m_quad,
-                                    _mm_unpackhi_ps(v594.m_verticesBinA[2].m_quad, v644),
+  *(float *)&v706 = FLOAT_0_0000099999997;
+  v554.m_verticesBinA[2].m_quad = _mm_shuffle_ps(
+                                    v554.m_verticesBinA[2].m_quad,
+                                    _mm_unpackhi_ps(v554.m_verticesBinA[2].m_quad, v602[2]),
                                     196);
   v30 = _mm_shuffle_ps((__m128)LODWORD(FLOAT_0_0000099999997), (__m128)LODWORD(FLOAT_0_0000099999997), 0);
 LABEL_9:
-  v31 = v594.m_verticesA[0].m_quad;
-  *(float *)&v752 = aTb[1].m_rotation.m_col2.m_quad.m128_f32[0];
-  v594.m_checkTriangleDots = (hkVector4f)v29.m_quad;
-  v32 = (dimB.m_storage | 8 * dimA.m_storage) - 9;
-  v627 = _mm_mul_ps(v30, _mm_shuffle_ps((__m128)(unsigned int)v752, (__m128)(unsigned int)v752, 0));
+  v31 = v554.m_verticesA[0].m_quad;
+  LODWORD(v706) = aTb[1].m_rotation.m_col2.m_quad.m128_i32[0];
+  v554.m_checkTriangleDots = (hkVector4f)v29.m_quad;
+  v32 = (dimB.m_storage | (8 * dimA.m_storage)) - 9;
+  v587 = _mm_mul_ps(v30, _mm_shuffle_ps((__m128)(unsigned int)v706, (__m128)(unsigned int)v706, 0));
   v33 = query.m_quad;
   supportOut = query.m_quad;
   while ( 2 )
@@ -1297,82 +1256,84 @@ LABEL_9:
       case 2u:
         goto LABEL_120;
       case 3u:
-        v411 = v31;
-        v412 = (__m128 *)v594.m_verticesBinA;
+        v370 = v31;
+        v371 = v554.m_verticesBinA;
         goto LABEL_97;
       case 8u:
         goto LABEL_136;
       case 9u:
         goto LABEL_44;
       case 0xAu:
-        v34 = (__m128 *)v594.m_verticesA;
-        v35 = (__m128 *)v594.m_verticesBinA;
+        m_verticesA = v554.m_verticesA;
+        v35 = v554.m_verticesBinA;
         goto LABEL_13;
       case 0x10u:
         goto LABEL_112;
       case 0x11u:
-        v34 = (__m128 *)v594.m_verticesBinA;
-        v35 = (__m128 *)v594.m_verticesA;
+        m_verticesA = v554.m_verticesBinA;
+        v35 = v554.m_verticesA;
 LABEL_13:
-        if ( v594.m_lastDimB.m_storage == 2 )
+        if ( v554.m_lastDimB.m_storage == 2 )
         {
-          v36 = *v35;
-          v37 = *v34;
-          v38 = v34[1];
-          v598 = v35[1];
-          v39 = _mm_sub_ps(v598, v35[2]);
-          v592 = v39;
-          v40 = _mm_sub_ps(v36, v35[2]);
-          v595 = v40;
-          v41 = _mm_sub_ps(
-                  _mm_mul_ps(_mm_shuffle_ps(v40, v40, 201), v39),
-                  _mm_mul_ps(_mm_shuffle_ps(v39, v39, 201), v40));
-          v42 = _mm_shuffle_ps(v41, v41, 201);
-          v43 = _mm_mul_ps(_mm_sub_ps(v37, v36), v42);
-          v44 = _mm_add_ps(
-                  _mm_add_ps(_mm_shuffle_ps(v43, v43, 85), _mm_shuffle_ps(v43, v43, 0)),
-                  _mm_shuffle_ps(v43, v43, 170));
-          v45 = _mm_mul_ps(_mm_sub_ps(v38, v36), v42);
-          v46 = _mm_add_ps(
-                  _mm_add_ps(_mm_shuffle_ps(v45, v45, 85), _mm_shuffle_ps(v45, v45, 0)),
-                  _mm_shuffle_ps(v45, v45, 170));
-          v47 = _mm_mul_ps(v44, v44);
-          v48 = _mm_mul_ps(v46, v46);
-          if ( _mm_movemask_ps(_mm_mul_ps(v44, v46)) )
+          v36 = v35->m_quad;
+          v37 = m_verticesA->m_quad;
+          v38 = m_verticesA[1].m_quad;
+          v558.m_quad = (__m128)v35[1];
+          v39 = _mm_sub_ps(v558.m_quad, v35[2].m_quad);
+          v552 = v39;
+          v555 = _mm_sub_ps(v36, v35[2].m_quad);
+          v40 = _mm_sub_ps(
+                  _mm_mul_ps(_mm_shuffle_ps(v555, v555, 201), v39),
+                  _mm_mul_ps(_mm_shuffle_ps(v39, v39, 201), v555));
+          v41 = _mm_shuffle_ps(v40, v40, 201);
+          v42 = _mm_mul_ps(_mm_sub_ps(v37, v36), v41);
+          v43 = _mm_add_ps(
+                  _mm_add_ps(_mm_shuffle_ps(v42, v42, 85), _mm_shuffle_ps(v42, v42, 0)),
+                  _mm_shuffle_ps(v42, v42, 170));
+          v44 = _mm_mul_ps(_mm_sub_ps(v38, v36), v41);
+          v45 = _mm_add_ps(
+                  _mm_add_ps(_mm_shuffle_ps(v44, v44, 85), _mm_shuffle_ps(v44, v44, 0)),
+                  _mm_shuffle_ps(v44, v44, 170));
+          v46 = _mm_mul_ps(v43, v43);
+          v47 = _mm_mul_ps(v45, v45);
+          if ( _mm_movemask_ps(_mm_mul_ps(v43, v45)) )
           {
-            v720 = _mm_sub_ps(v44, v46);
-            v49 = _mm_rcp_ps(v720);
-            v651 = _mm_mul_ps(_mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v49, v720)), v49), v44);
-            v50 = _mm_sub_ps(v35[1], *v35);
-            v51 = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(v34[1], *v34), v651), *v34);
-            v52 = _mm_sub_ps(v35[2], *v35);
-            v53 = _mm_sub_ps(v35[1], v51);
-            v54 = _mm_sub_ps(v35[2], v51);
-            v55 = _mm_sub_ps(*v35, v51);
-            v56 = _mm_sub_ps(
-                    _mm_mul_ps(_mm_shuffle_ps(v52, v52, 201), v50),
-                    _mm_mul_ps(_mm_shuffle_ps(v50, v50, 201), v52));
-            v57 = _mm_shuffle_ps(v56, v56, 201);
-            v58 = _mm_shuffle_ps(v57, v57, 210);
+            v674 = _mm_sub_ps(v43, v45);
+            v48 = _mm_rcp_ps(v674);
+            v605 = _mm_mul_ps(_mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v48, v674)), v48), v43);
+            v49 = _mm_sub_ps(v35[1].m_quad, v35->m_quad);
+            v50 = _mm_add_ps(
+                    _mm_mul_ps(_mm_sub_ps(m_verticesA[1].m_quad, m_verticesA->m_quad), v605),
+                    m_verticesA->m_quad);
+            v51 = _mm_sub_ps(v35[2].m_quad, v35->m_quad);
+            v52 = _mm_sub_ps(v35[1].m_quad, v50);
+            v53 = _mm_sub_ps(v35[2].m_quad, v50);
+            v54 = _mm_sub_ps(v35->m_quad, v50);
+            v55 = _mm_sub_ps(
+                    _mm_mul_ps(_mm_shuffle_ps(v51, v51, 201), v49),
+                    _mm_mul_ps(_mm_shuffle_ps(v49, v49, 201), v51));
+            v56 = _mm_shuffle_ps(v55, v55, 201);
+            v57 = _mm_shuffle_ps(v56, v56, 210);
+            v58 = _mm_shuffle_ps(v56, v56, 201);
             v59 = _mm_mul_ps(
                     _mm_sub_ps(
-                      _mm_mul_ps(_mm_shuffle_ps(v54, v54, 201), v58),
-                      _mm_mul_ps(_mm_shuffle_ps(v54, v54, 210), v57)),
-                    v53);
-            v60 = _mm_shuffle_ps(v53, v53, 210);
+                      _mm_mul_ps(_mm_shuffle_ps(v53, v53, 201), v57),
+                      _mm_mul_ps(_mm_shuffle_ps(v53, v53, 210), v58)),
+                    v52);
+            v60 = _mm_shuffle_ps(v52, v52, 210);
             v61 = _mm_mul_ps(
                     _mm_sub_ps(
-                      _mm_mul_ps(_mm_shuffle_ps(v55, v55, 201), v58),
-                      _mm_mul_ps(_mm_shuffle_ps(v55, v55, 210), v57)),
-                    v54);
-            v62 = _mm_mul_ps(_mm_shuffle_ps(v53, v53, 201), v58);
+                      _mm_mul_ps(_mm_shuffle_ps(v54, v54, 201), v57),
+                      _mm_mul_ps(_mm_shuffle_ps(v54, v54, 210), v58)),
+                    v53);
+            v62 = _mm_mul_ps(_mm_shuffle_ps(v52, v52, 201), v57);
             v63 = v59;
             v64 = _mm_unpackhi_ps(v59, v61);
             v65 = _mm_unpacklo_ps(v63, v61);
-            v66 = _mm_mul_ps(_mm_sub_ps(v62, _mm_mul_ps(v60, v57)), v55);
+            v66 = _mm_mul_ps(_mm_sub_ps(v62, _mm_mul_ps(v60, v58)), v54);
             v67 = _mm_movelh_ps(v65, v66);
             if ( (_mm_movemask_ps(
-                    _mm_cmpltps(
+                    _mm_cmplt_ps(
                       v19,
                       _mm_add_ps(
                         _mm_shuffle_ps(v64, v66, 228),
@@ -1383,24 +1344,24 @@ LABEL_13:
             }
             goto LABEL_23;
           }
-          v69 = _mm_cmpltps(v47, v48);
-          v70 = v35[2];
+          v69 = _mm_cmplt_ps(v46, v47);
+          v70 = v35[2].m_quad;
           v71 = _mm_or_ps(_mm_andnot_ps(v69, v38), _mm_and_ps(v69, v37));
-          v72 = v35[1];
-          v73 = _mm_sub_ps(v36, v70);
-          v74 = _mm_sub_ps(v70, v72);
-          v75 = _mm_sub_ps(v71, v72);
-          v76 = _mm_sub_ps(v72, v36);
+          v72 = _mm_sub_ps(v36, v70);
+          v73 = v35[1].m_quad;
+          v74 = _mm_sub_ps(v70, v73);
+          v75 = _mm_sub_ps(v71, v73);
+          v76 = _mm_sub_ps(v73, v36);
           v77 = _mm_sub_ps(v71, v70);
           v78 = _mm_shuffle_ps(v74, v74, 201);
-          v79 = _mm_shuffle_ps(v73, v73, 201);
-          v80 = _mm_sub_ps(v71, *v35);
-          v81 = _mm_sub_ps(_mm_mul_ps(v74, v79), _mm_mul_ps(v73, v78));
+          v79 = _mm_shuffle_ps(v72, v72, 201);
+          v80 = _mm_sub_ps(v71, v35->m_quad);
+          v81 = _mm_sub_ps(_mm_mul_ps(v74, v79), _mm_mul_ps(v72, v78));
           v20.m_quad = _mm_shuffle_ps(v81, v81, 201);
-          *(hkVector4f *)&v594.m_lastDimB.m_storage = (hkVector4f)v20.m_quad;
+          *(hkVector4f *)&v554.m_lastDimB.m_storage = (hkVector4f)v20.m_quad;
           v82 = _mm_sub_ps(_mm_mul_ps(v75, v78), _mm_mul_ps(_mm_shuffle_ps(v75, v75, 201), v74));
           v83 = _mm_mul_ps(_mm_shuffle_ps(v82, v82, 201), v20.m_quad);
-          v84 = _mm_sub_ps(_mm_mul_ps(v77, v79), _mm_mul_ps(_mm_shuffle_ps(v77, v77, 201), v73));
+          v84 = _mm_sub_ps(_mm_mul_ps(v77, v79), _mm_mul_ps(_mm_shuffle_ps(v77, v77, 201), v72));
           v85 = _mm_mul_ps(_mm_shuffle_ps(v80, v80, 201), v76);
           v86 = _mm_mul_ps(_mm_shuffle_ps(v84, v84, 201), v20.m_quad);
           v87 = _mm_mul_ps(_mm_shuffle_ps(v76, v76, 201), v80);
@@ -1411,7 +1372,7 @@ LABEL_13:
           v92.m_quad = _mm_add_ps(
                          _mm_shuffle_ps(_mm_unpackhi_ps(v83, v86), v90, 228),
                          _mm_add_ps(v91, _mm_shuffle_ps(_mm_movehl_ps(v91, v88), v90, 212)));
-          v93 = _mm_movemask_ps(_mm_cmpltps(v92.m_quad, v19)) & 7;
+          v93 = _mm_movemask_ps(_mm_cmplt_ps(v92.m_quad, v19)) & 7;
           if ( v93 == 7 )
           {
             v94 = _mm_mul_ps(_mm_sub_ps(v31, v29.m_quad), v20.m_quad);
@@ -1420,25 +1381,25 @@ LABEL_13:
                      _mm_add_ps(_mm_shuffle_ps(v94, v94, 85), _mm_shuffle_ps(v94, v94, 0)),
                      _mm_shuffle_ps(v94, v94, 170))) )
             {
-              v95 = *v35;
+              v95 = v35->m_quad;
               v20.m_quad = _mm_xor_ps(
                              v20.m_quad,
                              (__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 0));
-              *v35 = v598;
-              v35[1] = v95;
+              *v35 = (hkcdVertex)v558.m_quad;
+              v35[1] = (hkcdVertex)v95;
               v33 = query.m_quad;
-              *(hkVector4f *)&v594.m_lastDimB.m_storage = (hkVector4f)v20.m_quad;
+              *(hkVector4f *)&v554.m_lastDimB.m_storage = (hkVector4f)v20.m_quad;
               v92.m_quad = _mm_shuffle_ps(v92.m_quad, v92.m_quad, 225);
               supportOut = query.m_quad;
             }
           }
-          v594.m_checkTriangleDots = (hkVector4f)v92.m_quad;
+          v554.m_checkTriangleDots = (hkVector4f)v92.m_quad;
           if ( v93 != 7 )
           {
-            v39 = v592;
+            v39 = v552;
 LABEL_23:
-            v96 = _mm_sub_ps(v35[2], *v34);
-            v97 = _mm_sub_ps(v34[1], *v34);
+            v96 = _mm_sub_ps(v35[2].m_quad, m_verticesA->m_quad);
+            v97 = _mm_sub_ps(m_verticesA[1].m_quad, m_verticesA->m_quad);
             v98 = _mm_mul_ps(v97, v39);
             v99 = _mm_mul_ps(v97, v97);
             v100 = _mm_add_ps(
@@ -1453,25 +1414,25 @@ LABEL_23:
                      _mm_add_ps(_mm_shuffle_ps(v102, v102, 85), _mm_shuffle_ps(v102, v102, 0)),
                      _mm_shuffle_ps(v102, v102, 170));
             v105 = _mm_mul_ps(v39, v39);
-            v653 = _mm_add_ps(
+            v607 = _mm_add_ps(
                      _mm_add_ps(_mm_shuffle_ps(v99, v99, 85), _mm_shuffle_ps(v99, v99, 0)),
                      _mm_shuffle_ps(v99, v99, 170));
-            v655 = _mm_add_ps(
+            v609 = _mm_add_ps(
                      _mm_add_ps(_mm_shuffle_ps(v105, v105, 85), _mm_shuffle_ps(v105, v105, 0)),
                      _mm_shuffle_ps(v105, v105, 170));
-            v106 = _mm_max_ps(_mm_sub_ps(_mm_mul_ps(v655, v653), _mm_mul_ps(v100, v100)), *(__m128 *)&epsilon);
+            v106 = _mm_max_ps(_mm_sub_ps(_mm_mul_ps(v609, v607), _mm_mul_ps(v100, v100)), *(__m128 *)&epsilon);
             v107 = _mm_rcp_ps(v106);
-            v657 = v106;
+            v611 = v106;
             v108 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v107, v106)), v107);
-            v109 = _mm_rcp_ps(v655);
-            v659 = v108;
-            v110 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v109, v655)), v109);
-            v111 = _mm_rcp_ps(v653);
-            v746 = v110;
-            v740 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v111, v653)), v111);
-            v112 = _mm_cmpleps(v106, *(__m128 *)&epsilon);
-            v113 = _mm_sub_ps(_mm_mul_ps(v655, v103), _mm_mul_ps(v104, v100));
-            v114 = _mm_cmpltps(v113, v106);
+            v109 = _mm_rcp_ps(v609);
+            v613 = v108;
+            v110 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v109, v609)), v109);
+            v111 = _mm_rcp_ps(v607);
+            v700 = v110;
+            v694 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v111, v607)), v111);
+            v112 = _mm_cmple_ps(v106, *(__m128 *)&epsilon);
+            v113 = _mm_sub_ps(_mm_mul_ps(v609, v103), _mm_mul_ps(v104, v100));
+            v114 = _mm_cmplt_ps(v113, v106);
             v115 = _mm_sub_ps(
                      _mm_mul_ps(
                        _mm_or_ps(
@@ -1483,193 +1444,192 @@ LABEL_23:
                          _mm_and_ps(v112, v33)),
                        _mm_mul_ps(v110, v100)),
                      _mm_mul_ps(v110, v104));
-            v116 = _mm_cmpltps(v115, v33);
+            v116 = _mm_cmplt_ps(v115, v33);
             v117 = _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v115, v116), _mm_andnot_ps(v116, v33)));
-            v118 = _mm_add_ps(_mm_mul_ps(_mm_mul_ps(v740, v100), v117), _mm_mul_ps(v740, v103));
-            v119 = v35[2];
-            v120 = _mm_add_ps(_mm_mul_ps(v117, v592), v119);
-            v121 = _mm_sub_ps(v119, *v34);
-            v122 = _mm_cmpltps(v118, v33);
-            v123 = _mm_sub_ps(
+            v118 = _mm_add_ps(_mm_mul_ps(_mm_mul_ps(v694, v100), v117), _mm_mul_ps(v694, v103));
+            v119 = v35[2].m_quad;
+            v120 = _mm_cmplt_ps(v118, v33);
+            v121 = _mm_sub_ps(
                      _mm_add_ps(
                        _mm_mul_ps(
-                         _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v118, v122), _mm_andnot_ps(v122, v33))),
+                         _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v118, v120), _mm_andnot_ps(v120, v33))),
                          v97),
-                       *v34),
-                     v120);
-            v124 = _mm_mul_ps(v97, v595);
-            v125 = _mm_mul_ps(v123, v123);
-            v126 = _mm_add_ps(
-                     _mm_add_ps(_mm_shuffle_ps(v125, v125, 85), _mm_shuffle_ps(v125, v125, 0)),
-                     _mm_shuffle_ps(v125, v125, 170));
-            v127 = _mm_add_ps(
-                     _mm_add_ps(_mm_shuffle_ps(v124, v124, 85), _mm_shuffle_ps(v124, v124, 0)),
-                     _mm_shuffle_ps(v124, v124, 170));
-            v128 = v121;
-            v129 = _mm_mul_ps(v121, v595);
-            v130 = _mm_mul_ps(v128, v97);
+                       m_verticesA->m_quad),
+                     _mm_add_ps(_mm_mul_ps(v117, v552), v119));
+            v122 = _mm_mul_ps(v97, v555);
+            v123 = _mm_mul_ps(v121, v121);
+            v124 = _mm_add_ps(
+                     _mm_add_ps(_mm_shuffle_ps(v123, v123, 85), _mm_shuffle_ps(v123, v123, 0)),
+                     _mm_shuffle_ps(v123, v123, 170));
+            v125 = _mm_add_ps(
+                     _mm_add_ps(_mm_shuffle_ps(v122, v122, 85), _mm_shuffle_ps(v122, v122, 0)),
+                     _mm_shuffle_ps(v122, v122, 170));
+            v126 = _mm_sub_ps(v119, m_verticesA->m_quad);
+            v127 = _mm_mul_ps(v126, v555);
+            v128 = _mm_mul_ps(v126, v97);
+            v129 = _mm_add_ps(
+                     _mm_add_ps(_mm_shuffle_ps(v128, v128, 85), _mm_shuffle_ps(v128, v128, 0)),
+                     _mm_shuffle_ps(v128, v128, 170));
+            v130 = _mm_mul_ps(v555, v555);
             v131 = _mm_add_ps(
+                     _mm_add_ps(_mm_shuffle_ps(v127, v127, 85), _mm_shuffle_ps(v127, v127, 0)),
+                     _mm_shuffle_ps(v127, v127, 170));
+            v602[6] = v607;
+            v644 = _mm_add_ps(
                      _mm_add_ps(_mm_shuffle_ps(v130, v130, 85), _mm_shuffle_ps(v130, v130, 0)),
                      _mm_shuffle_ps(v130, v130, 170));
-            v132 = _mm_mul_ps(v595, v595);
-            v133 = _mm_add_ps(
-                     _mm_add_ps(_mm_shuffle_ps(v129, v129, 85), _mm_shuffle_ps(v129, v129, 0)),
-                     _mm_shuffle_ps(v129, v129, 170));
-            v648 = v653;
-            v690 = _mm_add_ps(
-                     _mm_add_ps(_mm_shuffle_ps(v132, v132, 85), _mm_shuffle_ps(v132, v132, 0)),
-                     _mm_shuffle_ps(v132, v132, 170));
-            v134 = _mm_max_ps(_mm_sub_ps(_mm_mul_ps(v690, v653), _mm_mul_ps(v127, v127)), *(__m128 *)&epsilon);
-            v135 = _mm_rcp_ps(v134);
-            v650 = v134;
-            v136 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v135, v134)), v135);
-            v137 = _mm_rcp_ps(v690);
-            v645 = v136;
-            v138 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v137, v690)), v137);
-            v139 = _mm_rcp_ps(v653);
-            v652 = v138;
-            v140 = _mm_cmpleps(v134, *(__m128 *)&epsilon);
-            v141 = _mm_sub_ps(_mm_mul_ps(v690, v131), _mm_mul_ps(v133, v127));
-            v695 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v139, v653)), v139);
-            v142 = _mm_cmpltps(v141, v134);
+            v132 = _mm_max_ps(_mm_sub_ps(_mm_mul_ps(v644, v607), _mm_mul_ps(v125, v125)), *(__m128 *)&epsilon);
+            v133 = _mm_rcp_ps(v132);
+            v604 = v132;
+            v134 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v133, v132)), v133);
+            v135 = _mm_rcp_ps(v644);
+            v602[3] = v134;
+            v136 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v135, v644)), v135);
+            v137 = _mm_rcp_ps(v607);
+            v606 = v136;
+            v138 = _mm_cmple_ps(v132, *(__m128 *)&epsilon);
+            v139 = _mm_sub_ps(_mm_mul_ps(v644, v129), _mm_mul_ps(v131, v125));
+            v649 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v137, v607)), v137);
+            v140 = _mm_cmplt_ps(v139, v132);
             v19 = 0i64;
-            v143 = _mm_sub_ps(
+            v141 = _mm_sub_ps(
                      _mm_mul_ps(
                        _mm_or_ps(
                          _mm_andnot_ps(
-                           v140,
+                           v138,
                            _mm_mul_ps(
-                             _mm_max_ps(aabbOut.m_quad, _mm_or_ps(_mm_and_ps(v142, v141), _mm_andnot_ps(v142, v134))),
-                             v136)),
-                         _mm_and_ps(v140, supportOut)),
-                       _mm_mul_ps(v138, v127)),
-                     _mm_mul_ps(v138, v133));
-            v144 = _mm_cmpltps(v143, supportOut);
-            v145 = v35[2];
-            v20.m_quad = *(__m128 *)&v594.m_lastDimB.m_storage;
-            v146 = _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v144, v143), _mm_andnot_ps(v144, supportOut)));
-            v147 = _mm_add_ps(_mm_mul_ps(_mm_mul_ps(v695, v127), v146), _mm_mul_ps(v695, v131));
-            v148 = _mm_cmpltps(v147, supportOut);
-            v149 = _mm_sub_ps(
+                             _mm_max_ps(aabbOut.m_quad, _mm_or_ps(_mm_and_ps(v140, v139), _mm_andnot_ps(v140, v132))),
+                             v134)),
+                         _mm_and_ps(v138, supportOut)),
+                       _mm_mul_ps(v136, v125)),
+                     _mm_mul_ps(v136, v131));
+            v142 = _mm_cmplt_ps(v141, supportOut);
+            v143 = v35[2].m_quad;
+            v20.m_quad = *(__m128 *)&v554.m_lastDimB.m_storage;
+            v144 = _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v142, v141), _mm_andnot_ps(v142, supportOut)));
+            v145 = _mm_add_ps(_mm_mul_ps(_mm_mul_ps(v649, v125), v144), _mm_mul_ps(v649, v129));
+            v146 = _mm_cmplt_ps(v145, supportOut);
+            v147 = _mm_sub_ps(
                      _mm_add_ps(
                        _mm_mul_ps(
-                         _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v148, v147), _mm_andnot_ps(v148, supportOut))),
+                         _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v146, v145), _mm_andnot_ps(v146, supportOut))),
                          v97),
-                       *v34),
-                     _mm_add_ps(_mm_mul_ps(v146, v595), v145));
-            v150 = _mm_mul_ps(v149, v149);
-            v151 = _mm_cmpltps(
+                       m_verticesA->m_quad),
+                     _mm_add_ps(_mm_mul_ps(v144, v555), v143));
+            v148 = _mm_mul_ps(v147, v147);
+            v149 = _mm_cmplt_ps(
                      _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v150, v150, 85), _mm_shuffle_ps(v150, v150, 0)),
-                       _mm_shuffle_ps(v150, v150, 170)),
-                     v126);
-            *v35 = _mm_or_ps(_mm_and_ps(*v35, v151), _mm_andnot_ps(v151, v35[1]));
-            v35[1] = v145;
+                       _mm_add_ps(_mm_shuffle_ps(v148, v148, 85), _mm_shuffle_ps(v148, v148, 0)),
+                       _mm_shuffle_ps(v148, v148, 170)),
+                     v124);
+            v35->m_quad = _mm_or_ps(_mm_and_ps(v35->m_quad, v149), _mm_andnot_ps(v149, v35[1].m_quad));
+            v35[1] = (hkcdVertex)v143;
 LABEL_38:
             v68 = 2;
             goto LABEL_39;
           }
-          *v34 = v71;
+          *m_verticesA = (hkcdVertex)v71;
           v68 = 0;
 LABEL_39:
-          v31 = v594.m_verticesA[0].m_quad;
-          v29.m_quad = (__m128)v594.m_verticesBinA[0];
+          v31 = v554.m_verticesA[0].m_quad;
+          v29.m_quad = (__m128)v554.m_verticesBinA[0];
           supportOut = query.m_quad;
-          v594.m_checkTriangleDots = (hkVector4f)v594.m_verticesBinA[0];
+          v554.m_checkTriangleDots = (hkVector4f)v554.m_verticesBinA[0];
           goto LABEL_40;
         }
-        v152 = *v35;
-        v153 = v34[1];
-        v154.m_quad = (__m128)v594.m_checkTriangleDots;
-        v155 = _mm_mul_ps(_mm_sub_ps(*v34, *v35), v20.m_quad);
+        v150 = v35->m_quad;
+        v151 = m_verticesA[1].m_quad;
+        v152.m_quad = (__m128)v554.m_checkTriangleDots;
+        v153 = _mm_mul_ps(_mm_sub_ps(m_verticesA->m_quad, v35->m_quad), v20.m_quad);
+        v154 = _mm_add_ps(
+                 _mm_add_ps(_mm_shuffle_ps(v153, v153, 85), _mm_shuffle_ps(v153, v153, 0)),
+                 _mm_shuffle_ps(v153, v153, 170));
+        v155 = _mm_mul_ps(_mm_sub_ps(v151, v35->m_quad), v20.m_quad);
         v156 = _mm_add_ps(
                  _mm_add_ps(_mm_shuffle_ps(v155, v155, 85), _mm_shuffle_ps(v155, v155, 0)),
                  _mm_shuffle_ps(v155, v155, 170));
-        v157 = _mm_mul_ps(_mm_sub_ps(v34[1], *v35), v20.m_quad);
-        v158 = _mm_add_ps(
-                 _mm_add_ps(_mm_shuffle_ps(v157, v157, 85), _mm_shuffle_ps(v157, v157, 0)),
-                 _mm_shuffle_ps(v157, v157, 170));
-        if ( (float)(v158.m128_f32[0] * v156.m128_f32[0]) < v19.m128_f32[0] )
+        if ( (float)(v156.m128_f32[0] * v154.m128_f32[0]) < v19.m128_f32[0] )
         {
-          v654 = _mm_sub_ps(v156, v158);
-          v159 = _mm_rcp_ps(v654);
-          v735 = _mm_mul_ps(_mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v654, v159)), v159), v156);
-          v152 = *v35;
-          v153 = v34[1];
-          v160 = _mm_sub_ps(v35[2], *v35);
-          v161 = _mm_sub_ps(v35[1], *v35);
-          v162 = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(v34[1], *v34), v735), *v34);
-          v163 = _mm_sub_ps(
-                   _mm_mul_ps(_mm_shuffle_ps(v160, v160, 201), v161),
-                   _mm_mul_ps(_mm_shuffle_ps(v161, v161, 201), v160));
-          v164 = _mm_shuffle_ps(v163, v163, 201);
-          v165 = _mm_sub_ps(v35[1], v162);
-          v166 = _mm_sub_ps(*v35, v162);
-          v167 = _mm_sub_ps(v35[2], v162);
-          v168 = _mm_shuffle_ps(v164, v164, 210);
-          v169 = _mm_mul_ps(
+          v608 = _mm_sub_ps(v154, v156);
+          v157 = _mm_rcp_ps(v608);
+          v689 = _mm_mul_ps(_mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v608, v157)), v157), v154);
+          v150 = v35->m_quad;
+          v151 = m_verticesA[1].m_quad;
+          v158 = _mm_sub_ps(v35[2].m_quad, v35->m_quad);
+          v159 = _mm_sub_ps(v35[1].m_quad, v35->m_quad);
+          v160 = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(v151, m_verticesA->m_quad), v689), m_verticesA->m_quad);
+          v161 = _mm_sub_ps(
+                   _mm_mul_ps(_mm_shuffle_ps(v158, v158, 201), v159),
+                   _mm_mul_ps(_mm_shuffle_ps(v159, v159, 201), v158));
+          v162 = _mm_shuffle_ps(v161, v161, 201);
+          v163 = _mm_sub_ps(v35[1].m_quad, v160);
+          v164 = _mm_sub_ps(v35->m_quad, v160);
+          v165 = _mm_sub_ps(v35[2].m_quad, v160);
+          v166 = _mm_shuffle_ps(v162, v162, 210);
+          v167 = _mm_shuffle_ps(v162, v162, 201);
+          v168 = _mm_mul_ps(
                    _mm_sub_ps(
-                     _mm_mul_ps(_mm_shuffle_ps(v167, v167, 201), v168),
-                     _mm_mul_ps(_mm_shuffle_ps(v167, v167, 210), v164)),
+                     _mm_mul_ps(_mm_shuffle_ps(v165, v165, 201), v166),
+                     _mm_mul_ps(_mm_shuffle_ps(v165, v165, 210), v167)),
+                   v163);
+          v169 = _mm_shuffle_ps(v163, v163, 210);
+          v170 = _mm_mul_ps(
+                   _mm_sub_ps(
+                     _mm_mul_ps(_mm_shuffle_ps(v164, v164, 201), v166),
+                     _mm_mul_ps(_mm_shuffle_ps(v164, v164, 210), v167)),
                    v165);
-          v170 = _mm_shuffle_ps(v165, v165, 210);
-          v171 = _mm_mul_ps(
-                   _mm_sub_ps(
-                     _mm_mul_ps(_mm_shuffle_ps(v166, v166, 201), v168),
-                     _mm_mul_ps(_mm_shuffle_ps(v166, v166, 210), v164)),
-                   v167);
-          v172 = _mm_mul_ps(_mm_shuffle_ps(v165, v165, 201), v168);
-          v173 = v169;
-          v174 = _mm_unpackhi_ps(v169, v171);
-          v175 = _mm_unpacklo_ps(v173, v171);
-          v176 = _mm_mul_ps(_mm_sub_ps(v172, _mm_mul_ps(v170, v164)), v166);
-          v177 = _mm_movelh_ps(v175, v176);
+          v171 = _mm_mul_ps(_mm_shuffle_ps(v163, v163, 201), v166);
+          v172 = v168;
+          v173 = _mm_unpackhi_ps(v168, v170);
+          v174 = _mm_unpacklo_ps(v172, v170);
+          v175 = _mm_mul_ps(_mm_sub_ps(v171, _mm_mul_ps(v169, v167)), v164);
+          v176 = _mm_movelh_ps(v174, v175);
           if ( (_mm_movemask_ps(
-                  _mm_cmpltps(
+                  _mm_cmplt_ps(
                     v19,
                     _mm_add_ps(
-                      _mm_shuffle_ps(v174, v176, 228),
-                      _mm_add_ps(v177, _mm_shuffle_ps(_mm_movehl_ps(v177, v175), v176, 212))))) & 7) == 7 )
+                      _mm_shuffle_ps(v173, v175, 228),
+                      _mm_add_ps(v176, _mm_shuffle_ps(_mm_movehl_ps(v176, v174), v175, 212))))) & 7) == 7 )
           {
             v68 = 1;
             goto LABEL_40;
           }
         }
-        v178 = v35[1];
-        v179 = v35[2];
-        v180 = _mm_sub_ps(v152, v179);
-        v181 = _mm_sub_ps(v35[1], v152);
-        v182 = _mm_shuffle_ps(v180, v180, 201);
-        v183 = v153;
-        v184 = v153;
-        v185 = _mm_sub_ps(v153, *v35);
-        v186 = _mm_sub_ps(v183, v178);
-        v187 = _mm_sub_ps(v35[2], v178);
-        v188 = _mm_sub_ps(v184, v179);
-        v189 = _mm_shuffle_ps(v187, v187, 201);
-        v190 = _mm_sub_ps(_mm_mul_ps(v187, v182), _mm_mul_ps(v180, v189));
-        v191 = _mm_shuffle_ps(v190, v190, 201);
-        v192 = _mm_sub_ps(_mm_mul_ps(v186, v189), _mm_mul_ps(_mm_shuffle_ps(v186, v186, 201), v187));
-        v193 = _mm_sub_ps(_mm_mul_ps(v188, v182), _mm_mul_ps(_mm_shuffle_ps(v188, v188, 201), v180));
-        v194 = _mm_mul_ps(_mm_shuffle_ps(v192, v192, 201), v191);
-        v195 = _mm_mul_ps(_mm_shuffle_ps(v193, v193, 201), v191);
-        v196 = _mm_unpacklo_ps(v194, v195);
-        v197 = _mm_sub_ps(
-                 _mm_mul_ps(_mm_shuffle_ps(v181, v181, 201), v185),
-                 _mm_mul_ps(_mm_shuffle_ps(v185, v185, 201), v181));
-        v198 = _mm_mul_ps(_mm_shuffle_ps(v197, v197, 201), v191);
-        v199 = _mm_movelh_ps(v196, v198);
-        v200.m_quad = _mm_add_ps(
-                        _mm_shuffle_ps(_mm_unpackhi_ps(v194, v195), v198, 228),
-                        _mm_add_ps(v199, _mm_shuffle_ps(_mm_movehl_ps(v199, v196), v198, 212)));
-        v594.m_checkTriangleDots = (hkVector4f)v200.m_quad;
-        v201 = _mm_movemask_ps(_mm_cmpltps(v200.m_quad, (__m128)0i64)) & 7;
-        switch ( v201 )
+        v177 = v35[1].m_quad;
+        v178 = v35[2].m_quad;
+        v179 = _mm_sub_ps(v150, v178);
+        v180 = _mm_sub_ps(v177, v150);
+        v181 = _mm_shuffle_ps(v179, v179, 201);
+        v182 = v151;
+        v183 = v151;
+        v184 = _mm_sub_ps(v151, v35->m_quad);
+        v185 = _mm_sub_ps(v182, v177);
+        v186 = _mm_sub_ps(v178, v177);
+        v187 = _mm_sub_ps(v183, v178);
+        v188 = _mm_shuffle_ps(v186, v186, 201);
+        v189 = _mm_sub_ps(_mm_mul_ps(v186, v181), _mm_mul_ps(v179, v188));
+        v190 = _mm_shuffle_ps(v189, v189, 201);
+        v191 = _mm_sub_ps(_mm_mul_ps(v185, v188), _mm_mul_ps(_mm_shuffle_ps(v185, v185, 201), v186));
+        v192 = _mm_sub_ps(_mm_mul_ps(v187, v181), _mm_mul_ps(_mm_shuffle_ps(v187, v187, 201), v179));
+        v193 = _mm_mul_ps(_mm_shuffle_ps(v191, v191, 201), v190);
+        v194 = _mm_mul_ps(_mm_shuffle_ps(v192, v192, 201), v190);
+        v195 = _mm_unpacklo_ps(v193, v194);
+        v196 = _mm_sub_ps(
+                 _mm_mul_ps(_mm_shuffle_ps(v180, v180, 201), v184),
+                 _mm_mul_ps(_mm_shuffle_ps(v184, v184, 201), v180));
+        v197 = _mm_mul_ps(_mm_shuffle_ps(v196, v196, 201), v190);
+        v198 = _mm_movelh_ps(v195, v197);
+        v199.m_quad = _mm_add_ps(
+                        _mm_shuffle_ps(_mm_unpackhi_ps(v193, v194), v197, 228),
+                        _mm_add_ps(v198, _mm_shuffle_ps(_mm_movehl_ps(v198, v195), v197, 212)));
+        v554.m_checkTriangleDots = (hkVector4f)v199.m_quad;
+        v200 = _mm_movemask_ps(_mm_cmplt_ps(v199.m_quad, (__m128)0i64)) & 7;
+        switch ( v200 )
         {
           case 7:
             v68 = 0;
             v19 = 0i64;
-            *v34 = v34[1];
+            *m_verticesA = (hkcdVertex)m_verticesA[1].m_quad;
             goto LABEL_39;
           case 6:
             goto LABEL_37;
@@ -1678,35 +1638,35 @@ LABEL_39:
           case 3:
             goto LABEL_55;
           case 1:
-            LODWORD(v202) = (unsigned __int128)_mm_shuffle_ps(v154.m_quad, v154.m_quad, 85);
-            LODWORD(v203) = (unsigned __int128)_mm_shuffle_ps(v154.m_quad, v154.m_quad, 170);
-            if ( (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v200.m_quad, v200.m_quad, 85)) - v202) * v203) > (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v200.m_quad, v200.m_quad, 170)) - v203) * v202) )
+            v201 = _mm_shuffle_ps(v152.m_quad, v152.m_quad, 85).m128_f32[0];
+            v202 = _mm_shuffle_ps(v152.m_quad, v152.m_quad, 170).m128_f32[0];
+            if ( (float)((float)(_mm_shuffle_ps(v199.m_quad, v199.m_quad, 85).m128_f32[0] - v201) * v202) > (float)((float)(_mm_shuffle_ps(v199.m_quad, v199.m_quad, 170).m128_f32[0] - v202) * v201) )
               goto LABEL_55;
             goto LABEL_54;
         }
-        if ( v201 != 2 )
+        if ( v200 != 2 )
         {
-          if ( v201 != 4
-            || (LODWORD(v256) = (unsigned __int128)_mm_shuffle_ps(v154.m_quad, v154.m_quad, 0),
-                LODWORD(v257) = (unsigned __int128)_mm_shuffle_ps(v154.m_quad, v154.m_quad, 85),
-                (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v200.m_quad, v200.m_quad, 0)) - v256) * v257) <= (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v200.m_quad, v200.m_quad, 85)) - v257) * v256)) )
+          if ( v200 != 4
+            || (v258 = _mm_shuffle_ps(v152.m_quad, v152.m_quad, 0).m128_f32[0],
+                v259 = _mm_shuffle_ps(v152.m_quad, v152.m_quad, 85).m128_f32[0],
+                (float)((float)(_mm_shuffle_ps(v199.m_quad, v199.m_quad, 0).m128_f32[0] - v258) * v259) <= (float)((float)(_mm_shuffle_ps(v199.m_quad, v199.m_quad, 85).m128_f32[0] - v259) * v258)) )
           {
 LABEL_37:
             v19 = 0i64;
-            *v35 = v35[2];
+            *v35 = (hkcdVertex)v35[2].m_quad;
             goto LABEL_38;
           }
 LABEL_54:
-          v35[1] = v35[2];
-          v29.m_quad = (__m128)v594.m_verticesBinA[0];
-          v31 = v594.m_verticesA[0].m_quad;
-          v594.m_checkTriangleDots = (hkVector4f)v594.m_verticesBinA[0];
+          v35[1] = (hkcdVertex)v35[2].m_quad;
+          v29.m_quad = (__m128)v554.m_verticesBinA[0];
+          v31 = v554.m_verticesA[0].m_quad;
+          v554.m_checkTriangleDots = (hkVector4f)v554.m_verticesBinA[0];
           supportOut = query.m_quad;
           goto LABEL_55;
         }
-        LODWORD(v204) = (unsigned __int128)_mm_shuffle_ps(v154.m_quad, v154.m_quad, 170);
-        LODWORD(v205) = (unsigned __int128)_mm_shuffle_ps(v154.m_quad, v154.m_quad, 0);
-        if ( (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v200.m_quad, v200.m_quad, 170)) - v204) * v205) > (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v200.m_quad, v200.m_quad, 0)) - v205) * v204) )
+        v203 = _mm_shuffle_ps(v152.m_quad, v152.m_quad, 170).m128_f32[0];
+        v204 = _mm_shuffle_ps(v152.m_quad, v152.m_quad, 0).m128_f32[0];
+        if ( (float)((float)(_mm_shuffle_ps(v199.m_quad, v199.m_quad, 170).m128_f32[0] - v203) * v204) > (float)((float)(_mm_shuffle_ps(v199.m_quad, v199.m_quad, 0).m128_f32[0] - v204) * v203) )
           goto LABEL_37;
 LABEL_55:
         v68 = 2;
@@ -1714,809 +1674,768 @@ LABEL_55:
 LABEL_40:
         if ( v68 )
         {
-          v206 = v68 - 1;
-          if ( !v206 )
+          v205 = v68 - 1;
+          if ( !v205 )
             goto LABEL_65;
-          if ( v206 != 1 )
+          if ( v205 != 1 )
             goto LABEL_150;
           dimA.m_storage = 2;
           dimB.m_storage = 2;
 LABEL_44:
-          v207 = _mm_sub_ps(v31, v29.m_quad);
-          v208 = _mm_sub_ps(v594.m_verticesA[1].m_quad, v31);
-          v209 = _mm_sub_ps(v594.m_verticesBinA[1].m_quad, v29.m_quad);
-          v210 = _mm_shuffle_ps(v209, v209, 201);
-          v211 = _mm_shuffle_ps(v208, v208, 201);
-          v598 = v208;
-          v212 = _mm_sub_ps(_mm_mul_ps(v208, v210), _mm_mul_ps(v209, v211));
-          v20.m_quad = _mm_shuffle_ps(v212, v212, 201);
-          *(hkVector4f *)&v594.m_lastDimB.m_storage = (hkVector4f)v20.m_quad;
-          v213 = _mm_sub_ps(_mm_mul_ps(v211, v20.m_quad), _mm_mul_ps(v208, v20.m_quad));
+          v206 = _mm_sub_ps(v31, v29.m_quad);
+          v207 = _mm_sub_ps(v554.m_verticesA[1].m_quad, v31);
+          v208 = _mm_sub_ps(v554.m_verticesBinA[1].m_quad, v29.m_quad);
+          v209 = _mm_shuffle_ps(v208, v208, 201);
+          v210 = _mm_shuffle_ps(v207, v207, 201);
+          v558.m_quad = v207;
+          v211 = _mm_sub_ps(_mm_mul_ps(v207, v209), _mm_mul_ps(v208, v210));
+          v20.m_quad = _mm_shuffle_ps(v211, v211, 201);
+          *(hkVector4f *)&v554.m_lastDimB.m_storage = (hkVector4f)v20.m_quad;
+          v212 = _mm_shuffle_ps(v20.m_quad, v20.m_quad, 201);
+          v213 = _mm_sub_ps(_mm_mul_ps(v210, v20.m_quad), _mm_mul_ps(v207, v212));
           v214 = _mm_shuffle_ps(v213, v213, 201);
-          v215 = _mm_sub_ps(_mm_mul_ps(v210, v20.m_quad), _mm_mul_ps(v209, v20.m_quad));
-          v216 = _mm_mul_ps(v207, v214);
-          v217 = _mm_mul_ps(_mm_sub_ps(v594.m_verticesBinA[1].m_quad, v31), v214);
-          v218 = _mm_shuffle_ps(v215, v215, 201);
-          v219 = _mm_shuffle_ps(v216, v217, 68);
-          v220 = _mm_mul_ps(v207, v218);
-          v221 = _mm_mul_ps(_mm_sub_ps(v29.m_quad, v594.m_verticesA[1].m_quad), v218);
-          v222 = _mm_shuffle_ps(v220, v221, 68);
-          v223 = _mm_add_ps(
-                   _mm_shuffle_ps(_mm_shuffle_ps(v220, v221, 238), _mm_shuffle_ps(v216, v217, 238), 136),
-                   _mm_add_ps(_mm_shuffle_ps(v222, v219, 221), _mm_shuffle_ps(v222, v219, 136)));
-          v224 = _mm_movemask_ps(_mm_cmpltps(v19, v223));
-          if ( v224 == 15 )
+          v215 = _mm_sub_ps(_mm_mul_ps(v209, v20.m_quad), _mm_mul_ps(v208, v212));
+          v216 = _mm_mul_ps(_mm_sub_ps(v554.m_verticesBinA[1].m_quad, v31), v214);
+          v217 = _mm_mul_ps(v206, v214);
+          v218 = _mm_shuffle_ps(v217, v216, 238);
+          v219 = _mm_shuffle_ps(v215, v215, 201);
+          v220 = _mm_shuffle_ps(v217, v216, 68);
+          v221 = _mm_mul_ps(_mm_sub_ps(v29.m_quad, v554.m_verticesA[1].m_quad), v219);
+          v222 = _mm_mul_ps(v206, v219);
+          v223 = _mm_shuffle_ps(v222, v221, 238);
+          v224 = _mm_shuffle_ps(v222, v221, 68);
+          v225 = _mm_add_ps(
+                   _mm_shuffle_ps(v223, v218, 136),
+                   _mm_add_ps(_mm_shuffle_ps(v224, v220, 221), _mm_shuffle_ps(v224, v220, 136)));
+          v226 = _mm_movemask_ps(_mm_cmplt_ps(v19, v225));
+          if ( v226 == 15 )
           {
-            v407 = _mm_mul_ps(v207, v20.m_quad);
-            v408 = _mm_shuffle_ps(v223, v223, 0);
-            v409 = _mm_add_ps(_mm_shuffle_ps(v223, v223, 85), v408);
-            v410 = _mm_rcp_ps(v409);
-            v665 = v409;
-            v745 = _mm_mul_ps(_mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v410, v409)), v410), v408);
-            v392 = _mm_xor_ps(
+            v366 = _mm_mul_ps(v206, v20.m_quad);
+            v367 = _mm_shuffle_ps(v225, v225, 0);
+            v368 = _mm_add_ps(_mm_shuffle_ps(v225, v225, 85), v367);
+            v369 = _mm_rcp_ps(v368);
+            v619 = v368;
+            v699 = _mm_mul_ps(_mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v369, v368)), v369), v367);
+            v351 = _mm_xor_ps(
                      (__m128)_mm_slli_epi32(
                                _mm_srli_epi32(
                                  (__m128i)_mm_add_ps(
-                                            _mm_add_ps(_mm_shuffle_ps(v407, v407, 85), _mm_shuffle_ps(v407, v407, 0)),
-                                            _mm_shuffle_ps(v407, v407, 170)),
+                                            _mm_add_ps(_mm_shuffle_ps(v366, v366, 85), _mm_shuffle_ps(v366, v366, 0)),
+                                            _mm_shuffle_ps(v366, v366, 170)),
                                  0x1Fu),
                                0x1Fu),
                      v20.m_quad);
-            v594.m_closestPointOnEdgeA.m_quad = _mm_add_ps(
-                                                  _mm_mul_ps(_mm_sub_ps(v594.m_verticesA[1].m_quad, v31), v745),
+            v554.m_closestPointOnEdgeA.m_quad = _mm_add_ps(
+                                                  _mm_mul_ps(_mm_sub_ps(v554.m_verticesA[1].m_quad, v31), v699),
                                                   v31);
             goto LABEL_149;
           }
-          v225 = v224 - 7;
-          if ( !v225 )
+          v227 = v226 - 7;
+          if ( !v227 )
           {
-            v29.m_quad = (__m128)v594.m_verticesBinA[1];
-            v594.m_checkTriangleDots = (hkVector4f)v594.m_verticesBinA[1];
-            v594.m_verticesBinA[0] = v594.m_verticesBinA[1];
+            v29.m_quad = (__m128)v554.m_verticesBinA[1];
+            v554.m_checkTriangleDots = (hkVector4f)v554.m_verticesBinA[1];
+            v554.m_verticesBinA[0] = v554.m_verticesBinA[1];
 LABEL_93:
             dimB.m_storage = 1;
 LABEL_136:
-            v521 = _mm_sub_ps(v31, v29.m_quad);
-            v522 = _mm_sub_ps(v594.m_verticesA[1].m_quad, v29.m_quad);
-            v523 = _mm_sub_ps(v594.m_verticesA[1].m_quad, v31);
-            v524 = _mm_mul_ps(v522, v523);
-            v525 = _mm_add_ps(
-                     _mm_add_ps(_mm_shuffle_ps(v524, v524, 85), _mm_shuffle_ps(v524, v524, 0)),
-                     _mm_shuffle_ps(v524, v524, 170));
-            v526 = _mm_mul_ps(v521, v523);
-            v527 = _mm_add_ps(
-                     _mm_add_ps(_mm_shuffle_ps(v526, v526, 85), _mm_shuffle_ps(v526, v526, 0)),
-                     _mm_shuffle_ps(v526, v526, 170));
-            if ( (float)(v527.m128_f32[0] * v525.m128_f32[0]) >= v19.m128_f32[0] )
+            v480 = _mm_sub_ps(v31, v29.m_quad);
+            v481 = _mm_sub_ps(v554.m_verticesA[1].m_quad, v29.m_quad);
+            v482 = _mm_sub_ps(v554.m_verticesA[1].m_quad, v31);
+            v483 = _mm_mul_ps(v481, v482);
+            v484 = _mm_add_ps(
+                     _mm_add_ps(_mm_shuffle_ps(v483, v483, 85), _mm_shuffle_ps(v483, v483, 0)),
+                     _mm_shuffle_ps(v483, v483, 170));
+            v485 = _mm_mul_ps(v480, v482);
+            v486 = _mm_add_ps(
+                     _mm_add_ps(_mm_shuffle_ps(v485, v485, 85), _mm_shuffle_ps(v485, v485, 0)),
+                     _mm_shuffle_ps(v485, v485, 170));
+            if ( (float)(v486.m128_f32[0] * v484.m128_f32[0]) >= v19.m128_f32[0] )
             {
-              v534 = _mm_cmpleps(v525, v19);
+              v493 = _mm_cmple_ps(v484, v19);
               dimA.m_storage = 1;
-              v31 = _mm_or_ps(_mm_andnot_ps(v534, v31), _mm_and_ps(v594.m_verticesA[1].m_quad, v534));
-              v594.m_verticesA[0].m_quad = v31;
-              v392 = _mm_sub_ps(v31, v29.m_quad);
+              v31 = _mm_or_ps(_mm_andnot_ps(v493, v31), _mm_and_ps(v554.m_verticesA[1].m_quad, v493));
+              v554.m_verticesA[0].m_quad = v31;
+              v351 = _mm_sub_ps(v31, v29.m_quad);
             }
             else
             {
               dimA.m_storage = 2;
-              v528 = _mm_sub_ps(_mm_mul_ps(v521, v525), _mm_mul_ps(v522, v527));
-              v529 = _mm_mul_ps(v523, v523);
-              v530 = _mm_shuffle_ps(v523, v523, 201);
-              v531 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v528, v528, 201), v523), _mm_mul_ps(v528, v530));
-              v675 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v529, v529, 85), _mm_shuffle_ps(v529, v529, 0)),
-                       _mm_shuffle_ps(v529, v529, 170));
-              v532 = _mm_shuffle_ps(v531, v531, 201);
-              v730 = _mm_rcp_ps(v675);
-              v533 = _mm_sub_ps(_mm_mul_ps(v532, v530), _mm_mul_ps(v532, v523));
-              v392 = _mm_mul_ps(_mm_shuffle_ps(v533, v533, 201), v730);
+              v487 = _mm_sub_ps(_mm_mul_ps(v480, v484), _mm_mul_ps(v481, v486));
+              v488 = _mm_mul_ps(v482, v482);
+              v489 = _mm_shuffle_ps(v482, v482, 201);
+              v490 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v487, v487, 201), v482), _mm_mul_ps(v487, v489));
+              v629 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v488, v488, 85), _mm_shuffle_ps(v488, v488, 0)),
+                       _mm_shuffle_ps(v488, v488, 170));
+              v491 = _mm_shuffle_ps(v490, v490, 201);
+              v684 = _mm_rcp_ps(v629);
+              v492 = _mm_sub_ps(_mm_mul_ps(v491, v489), _mm_mul_ps(_mm_shuffle_ps(v491, v491, 201), v482));
+              v351 = _mm_mul_ps(_mm_shuffle_ps(v492, v492, 201), v684);
             }
 LABEL_149:
-            *(__m128 *)&v594.m_lastDimB.m_storage = v392;
+            *(__m128 *)&v554.m_lastDimB.m_storage = v351;
 LABEL_150:
-            v20.m_quad = *(__m128 *)&v594.m_lastDimB.m_storage;
-            v594.m_lastDimB = dimB;
-            v260 = 0;
+            v20.m_quad = *(__m128 *)&v554.m_lastDimB.m_storage;
+            v554.m_lastDimB = dimB;
+            v262 = 0;
             goto LABEL_66;
           }
-          v226 = v225 - 4;
-          if ( !v226 )
+          v228 = v227 - 4;
+          if ( !v228 )
             goto LABEL_93;
-          v227 = v226 - 2;
-          if ( !v227 )
+          v229 = v228 - 2;
+          if ( !v229 )
           {
-            v31 = v594.m_verticesA[1].m_quad;
-            v594.m_verticesA[0] = v594.m_verticesA[1];
+            v31 = v554.m_verticesA[1].m_quad;
+            v554.m_verticesA[0] = v554.m_verticesA[1];
 LABEL_89:
             dimA.m_storage = 1;
 LABEL_90:
-            v393 = _mm_sub_ps(v29.m_quad, v31);
-            v394 = _mm_sub_ps(v594.m_verticesBinA[1].m_quad, v31);
-            v395 = _mm_sub_ps(v594.m_verticesBinA[1].m_quad, v29.m_quad);
-            v396 = _mm_mul_ps(v394, v395);
-            v397 = _mm_add_ps(
-                     _mm_add_ps(_mm_shuffle_ps(v396, v396, 85), _mm_shuffle_ps(v396, v396, 0)),
-                     _mm_shuffle_ps(v396, v396, 170));
-            v398 = _mm_mul_ps(v395, v393);
-            v399 = _mm_add_ps(
-                     _mm_add_ps(_mm_shuffle_ps(v398, v398, 85), _mm_shuffle_ps(v398, v398, 0)),
-                     _mm_shuffle_ps(v398, v398, 170));
-            if ( (float)(v399.m128_f32[0] * v397.m128_f32[0]) >= v19.m128_f32[0] )
+            v352 = _mm_sub_ps(v29.m_quad, v31);
+            v353 = _mm_sub_ps(v554.m_verticesBinA[1].m_quad, v31);
+            v354 = _mm_sub_ps(v554.m_verticesBinA[1].m_quad, v29.m_quad);
+            v355 = _mm_mul_ps(v353, v354);
+            v356 = _mm_add_ps(
+                     _mm_add_ps(_mm_shuffle_ps(v355, v355, 85), _mm_shuffle_ps(v355, v355, 0)),
+                     _mm_shuffle_ps(v355, v355, 170));
+            v357 = _mm_mul_ps(v354, v352);
+            v358 = _mm_add_ps(
+                     _mm_add_ps(_mm_shuffle_ps(v357, v357, 85), _mm_shuffle_ps(v357, v357, 0)),
+                     _mm_shuffle_ps(v357, v357, 170));
+            if ( (float)(v358.m128_f32[0] * v356.m128_f32[0]) >= v19.m128_f32[0] )
             {
-              v543 = _mm_cmpleps(v397, v19);
-              v400 = 1;
-              v29.m_quad = _mm_or_ps(_mm_and_ps(v594.m_verticesBinA[1].m_quad, v543), _mm_andnot_ps(v543, v29.m_quad));
-              v594.m_checkTriangleDots = (hkVector4f)v29.m_quad;
-              v392 = _mm_sub_ps(v31, v29.m_quad);
-              v594.m_verticesBinA[0].0 = (hkVector4f)v29.m_quad;
+              v502 = _mm_cmple_ps(v356, v19);
+              v359 = 1;
+              v29.m_quad = _mm_or_ps(_mm_and_ps(v554.m_verticesBinA[1].m_quad, v502), _mm_andnot_ps(v502, v29.m_quad));
+              v554.m_checkTriangleDots = (hkVector4f)v29.m_quad;
+              v351 = _mm_sub_ps(v31, v29.m_quad);
+              v554.m_verticesBinA[0] = (hkcdVertex)v29.m_quad;
             }
             else
             {
-              v400 = 2;
-              v401 = _mm_sub_ps(_mm_mul_ps(v397, v393), _mm_mul_ps(v399, v394));
-              v402 = _mm_mul_ps(v395, v395);
-              v403 = _mm_shuffle_ps(v395, v395, 201);
-              v680 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v402, v402, 85), _mm_shuffle_ps(v402, v402, 0)),
-                       _mm_shuffle_ps(v402, v402, 170));
-              v404 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v401, v401, 201), v395), _mm_mul_ps(v403, v401));
-              v715 = _mm_rcp_ps(v680);
-              v405 = _mm_shuffle_ps(v404, v404, 201);
-              v406 = _mm_sub_ps(_mm_mul_ps(v405, v395), _mm_mul_ps(v403, v405));
-              v392 = _mm_mul_ps(_mm_shuffle_ps(v406, v406, 201), v715);
+              v359 = 2;
+              v360 = _mm_sub_ps(_mm_mul_ps(v356, v352), _mm_mul_ps(v358, v353));
+              v361 = _mm_mul_ps(v354, v354);
+              v362 = _mm_shuffle_ps(v354, v354, 201);
+              v634 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v361, v361, 85), _mm_shuffle_ps(v361, v361, 0)),
+                       _mm_shuffle_ps(v361, v361, 170));
+              v363 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v360, v360, 201), v354), _mm_mul_ps(v362, v360));
+              v669 = _mm_rcp_ps(v634);
+              v364 = _mm_shuffle_ps(v363, v363, 201);
+              v365 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v364, v364, 201), v354), _mm_mul_ps(v362, v364));
+              v351 = _mm_mul_ps(_mm_shuffle_ps(v365, v365, 201), v669);
             }
-            dimB.m_storage = v400;
+            dimB.m_storage = v359;
             goto LABEL_149;
           }
-          if ( v227 == 1 )
+          if ( v229 == 1 )
             goto LABEL_89;
-          v228 = _mm_mul_ps(v209, v208);
-          v229 = _mm_sub_ps(v29.m_quad, v31);
-          v230 = _mm_add_ps(
-                   _mm_add_ps(_mm_shuffle_ps(v228, v228, 85), _mm_shuffle_ps(v228, v228, 0)),
-                   _mm_shuffle_ps(v228, v228, 170));
-          v231 = _mm_mul_ps(v229, v208);
-          v232 = _mm_mul_ps(v229, v209);
-          v233 = _mm_mul_ps(v209, v209);
-          v234 = _mm_add_ps(
-                   _mm_add_ps(_mm_shuffle_ps(v231, v231, 85), _mm_shuffle_ps(v231, v231, 0)),
-                   _mm_shuffle_ps(v231, v231, 170));
+          v230 = _mm_mul_ps(v208, v207);
+          v231 = _mm_sub_ps(v29.m_quad, v31);
+          v232 = _mm_add_ps(
+                   _mm_add_ps(_mm_shuffle_ps(v230, v230, 85), _mm_shuffle_ps(v230, v230, 0)),
+                   _mm_shuffle_ps(v230, v230, 170));
+          v233 = _mm_mul_ps(v231, v207);
+          v234 = _mm_mul_ps(v231, v208);
           v235 = _mm_mul_ps(v208, v208);
           v236 = _mm_add_ps(
-                   _mm_add_ps(_mm_shuffle_ps(v232, v232, 85), _mm_shuffle_ps(v232, v232, 0)),
-                   _mm_shuffle_ps(v232, v232, 170));
-          v656 = _mm_add_ps(
-                   _mm_add_ps(_mm_shuffle_ps(v235, v235, 85), _mm_shuffle_ps(v235, v235, 0)),
-                   _mm_shuffle_ps(v235, v235, 170));
-          v700 = _mm_add_ps(
                    _mm_add_ps(_mm_shuffle_ps(v233, v233, 85), _mm_shuffle_ps(v233, v233, 0)),
                    _mm_shuffle_ps(v233, v233, 170));
-          v237 = _mm_max_ps(_mm_sub_ps(_mm_mul_ps(v700, v656), _mm_mul_ps(v230, v230)), *(__m128 *)&epsilon);
-          v238 = _mm_rcp_ps(v237);
-          v658 = v237;
-          v239 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v238, v237)), v238);
-          v240 = _mm_rcp_ps(v700);
-          v725 = v239;
-          v241 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v240, v700)), v240);
-          v242 = _mm_rcp_ps(v656);
-          v660 = v241;
-          v243 = _mm_sub_ps(_mm_mul_ps(v700, v234), _mm_mul_ps(v236, v230));
-          v705 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v242, v656)), v242);
-          v244 = _mm_cmpltps(v243, v237);
-          v245 = _mm_cmpleps(v237, *(__m128 *)&epsilon);
-          v246 = _mm_mul_ps(
+          v237 = _mm_mul_ps(v207, v207);
+          v238 = _mm_add_ps(
+                   _mm_add_ps(_mm_shuffle_ps(v234, v234, 85), _mm_shuffle_ps(v234, v234, 0)),
+                   _mm_shuffle_ps(v234, v234, 170));
+          v610 = _mm_add_ps(
+                   _mm_add_ps(_mm_shuffle_ps(v237, v237, 85), _mm_shuffle_ps(v237, v237, 0)),
+                   _mm_shuffle_ps(v237, v237, 170));
+          v654 = _mm_add_ps(
+                   _mm_add_ps(_mm_shuffle_ps(v235, v235, 85), _mm_shuffle_ps(v235, v235, 0)),
+                   _mm_shuffle_ps(v235, v235, 170));
+          v239 = _mm_max_ps(_mm_sub_ps(_mm_mul_ps(v654, v610), _mm_mul_ps(v232, v232)), *(__m128 *)&epsilon);
+          v240 = _mm_rcp_ps(v239);
+          v612 = v239;
+          v241 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v240, v239)), v240);
+          v242 = _mm_rcp_ps(v654);
+          v679 = v241;
+          v243 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v242, v654)), v242);
+          v244 = _mm_rcp_ps(v610);
+          v614 = v243;
+          v245 = _mm_sub_ps(_mm_mul_ps(v654, v236), _mm_mul_ps(v238, v232));
+          v659 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v244, v610)), v244);
+          v246 = _mm_cmplt_ps(v245, v239);
+          v247 = _mm_cmple_ps(v239, *(__m128 *)&epsilon);
+          v248 = _mm_mul_ps(
                    _mm_or_ps(
                      _mm_andnot_ps(
-                       v245,
+                       v247,
                        _mm_mul_ps(
-                         _mm_max_ps(aabbOut.m_quad, _mm_or_ps(_mm_andnot_ps(v244, v237), _mm_and_ps(v243, v244))),
-                         v239)),
-                     _mm_and_ps(v245, supportOut)),
-                   _mm_mul_ps(v241, v230));
-          v247 = _mm_mul_ps(v705, v230);
-          v248 = _mm_mul_ps(v705, v234);
+                         _mm_max_ps(aabbOut.m_quad, _mm_or_ps(_mm_andnot_ps(v246, v239), _mm_and_ps(v245, v246))),
+                         v241)),
+                     _mm_and_ps(v247, supportOut)),
+                   _mm_mul_ps(v243, v232));
+          v249 = _mm_mul_ps(v659, v232);
+          v250 = _mm_mul_ps(v659, v236);
           v33 = supportOut;
-          v249 = _mm_sub_ps(v246, _mm_mul_ps(v241, v236));
+          v251 = _mm_sub_ps(v248, _mm_mul_ps(v243, v238));
           v19 = 0i64;
-          v250 = _mm_cmpltps(v249, supportOut);
-          v251 = _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v249, v250), _mm_andnot_ps(v250, supportOut)));
-          v252 = _mm_add_ps(_mm_mul_ps(v247, v251), v248);
-          v253 = _mm_cmpltps(v252, supportOut);
-          v254 = _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v252, v253), _mm_andnot_ps(v253, supportOut)));
-          v255 = _mm_movemask_ps(
-                   _mm_cmpeqps(
-                     _mm_movelh_ps(_mm_unpacklo_ps(v254, v254), _mm_unpacklo_ps(v251, v251)),
+          v252 = _mm_cmplt_ps(v251, supportOut);
+          v253 = _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v251, v252), _mm_andnot_ps(v252, supportOut)));
+          v254 = _mm_add_ps(_mm_mul_ps(v249, v253), v250);
+          v255 = _mm_cmplt_ps(v254, supportOut);
+          v256 = _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v254, v255), _mm_andnot_ps(v255, supportOut)));
+          v257 = _mm_movemask_ps(
+                   _mm_cmpeq_ps(
+                     _mm_movelh_ps(_mm_unpacklo_ps(v256, v256), _mm_unpacklo_ps(v253, v253)),
                      (__m128)xmmword_141A71330));
-          v594.m_closestPointOnEdgeA.m_quad = _mm_add_ps(_mm_mul_ps(v254, v598), v31);
-          if ( !v255 )
+          v554.m_closestPointOnEdgeA.m_quad = _mm_add_ps(_mm_mul_ps(v256, v558.m_quad), v31);
+          if ( !v257 )
           {
-            v391 = _mm_mul_ps(v207, v20.m_quad);
-            v392 = _mm_xor_ps(
+            v350 = _mm_mul_ps(v206, v20.m_quad);
+            v351 = _mm_xor_ps(
                      (__m128)_mm_slli_epi32(
                                _mm_srli_epi32(
                                  (__m128i)_mm_add_ps(
-                                            _mm_add_ps(_mm_shuffle_ps(v391, v391, 85), _mm_shuffle_ps(v391, v391, 0)),
-                                            _mm_shuffle_ps(v391, v391, 170)),
+                                            _mm_add_ps(_mm_shuffle_ps(v350, v350, 85), _mm_shuffle_ps(v350, v350, 0)),
+                                            _mm_shuffle_ps(v350, v350, 170)),
                                  0x1Fu),
                                0x1Fu),
                      v20.m_quad);
             goto LABEL_149;
           }
-          if ( v255 & 1 )
+          if ( (v257 & 1) != 0 )
           {
-            v31 = v594.m_verticesA[1].m_quad;
+            v31 = v554.m_verticesA[1].m_quad;
             dimA.m_storage = 1;
-            v594.m_verticesA[0] = v594.m_verticesA[1];
+            v554.m_verticesA[0] = v554.m_verticesA[1];
           }
           else
           {
-            v258 = dimA.m_storage;
-            if ( v255 & 2 )
-              v258 = 1;
-            dimA.m_storage = v258;
+            m_storage = dimA.m_storage;
+            if ( (v257 & 2) != 0 )
+              m_storage = 1;
+            dimA.m_storage = m_storage;
           }
-          if ( v255 & 4 )
+          if ( (v257 & 4) != 0 )
           {
-            v29.m_quad = (__m128)v594.m_verticesBinA[1];
+            v29.m_quad = (__m128)v554.m_verticesBinA[1];
             dimB.m_storage = 1;
-            v594.m_checkTriangleDots = (hkVector4f)v594.m_verticesBinA[1];
-            v594.m_verticesBinA[0] = v594.m_verticesBinA[1];
+            v554.m_checkTriangleDots = (hkVector4f)v554.m_verticesBinA[1];
+            v554.m_verticesBinA[0] = v554.m_verticesBinA[1];
           }
           else
           {
-            v259 = dimB.m_storage;
-            if ( v255 & 8 )
-              v259 = 1;
-            dimB.m_storage = v259;
+            v261 = dimB.m_storage;
+            if ( (v257 & 8) != 0 )
+              v261 = 1;
+            dimB.m_storage = v261;
           }
-          v32 = (dimB.m_storage | 8 * dimA.m_storage) - 9;
+          v32 = (dimB.m_storage | (8 * dimA.m_storage)) - 9;
           if ( v32 > 0x18 )
           {
 LABEL_65:
-            v260 = 1;
+            v262 = 1;
             goto LABEL_66;
           }
           continue;
         }
+        v20.m_quad = *(__m128 *)&v554.m_lastDimB.m_storage;
         if ( dimA.m_storage == 2 )
         {
-          v20.m_quad = *(__m128 *)&v594.m_lastDimB.m_storage;
           dimA.m_storage = 1;
-          v594.m_lastDimB = dimB;
+          v554.m_lastDimB = dimB;
         }
         else
         {
-          v20.m_quad = *(__m128 *)&v594.m_lastDimB.m_storage;
           dimB.m_storage = 1;
-          v594.m_lastDimB.m_storage = 1;
+          v554.m_lastDimB.m_storage = 1;
         }
-        v260 = 0;
+        v262 = 0;
 LABEL_66:
-        v261 = _mm_mul_ps(v20.m_quad, v20.m_quad);
-        v262 = _mm_add_ps(
-                 _mm_add_ps(_mm_shuffle_ps(v261, v261, 85), _mm_shuffle_ps(v261, v261, 0)),
-                 _mm_shuffle_ps(v261, v261, 170));
-        v263 = _mm_rsqrt_ps(v262);
-        v685 = v262;
-        v264 = _mm_andnot_ps(
-                 _mm_cmpleps(v262, v19),
+        v263 = _mm_mul_ps(v20.m_quad, v20.m_quad);
+        v264 = _mm_add_ps(
+                 _mm_add_ps(_mm_shuffle_ps(v263, v263, 85), _mm_shuffle_ps(v263, v263, 0)),
+                 _mm_shuffle_ps(v263, v263, 170));
+        v265 = _mm_rsqrt_ps(v264);
+        v639 = v264;
+        v266 = _mm_andnot_ps(
+                 _mm_cmple_ps(v264, v19),
                  _mm_mul_ps(
-                   _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v263, v262), v263)),
-                   _mm_mul_ps(v263, *(__m128 *)_xmm)));
-        v265 = _mm_mul_ps(_mm_sub_ps(v31, v29.m_quad), v20.m_quad);
-        v20.m_quad = _mm_mul_ps(v20.m_quad, v264);
-        *(hkVector4f *)&v594.m_lastDimB.m_storage = (hkVector4f)v20.m_quad;
-        if ( !v260
-          && (float)((float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v265, v265, 85))
-                                   + COERCE_FLOAT(_mm_shuffle_ps(v265, v265, 0)))
-                           + COERCE_FLOAT(_mm_shuffle_ps(v265, v265, 170)))
-                   * v264.m128_f32[0]) >= v627.m128_f32[0]
-          && v262.m128_f32[0] >= (float)((float)(v627.m128_f32[0] * v627.m128_f32[0])
-                                       * (float)(v627.m128_f32[0] * v627.m128_f32[0])) )
+                   _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v265, v264), v265)),
+                   _mm_mul_ps(v265, *(__m128 *)_xmm)));
+        v267 = _mm_mul_ps(_mm_sub_ps(v31, v29.m_quad), v20.m_quad);
+        v20.m_quad = _mm_mul_ps(v20.m_quad, v266);
+        *(hkVector4f *)&v554.m_lastDimB.m_storage = (hkVector4f)v20.m_quad;
+        if ( !v262
+          && (float)((float)((float)(_mm_shuffle_ps(v267, v267, 85).m128_f32[0]
+                                   + _mm_shuffle_ps(v267, v267, 0).m128_f32[0])
+                           + _mm_shuffle_ps(v267, v267, 170).m128_f32[0])
+                   * v266.m128_f32[0]) >= v587.m128_f32[0]
+          && v264.m128_f32[0] >= (float)((float)(v587.m128_f32[0] * v587.m128_f32[0])
+                                       * (float)(v587.m128_f32[0] * v587.m128_f32[0])) )
         {
-          v266 = aTb->m_rotation.m_col2.m_quad;
-          v267 = aTb->m_rotation.m_col0.m_quad;
-          v268 = (__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 0);
-          v269 = _mm_xor_ps(v268, v20.m_quad);
-          v602 = v269;
-          v270 = _mm_xor_ps(v269, v268);
-          v271 = _mm_unpacklo_ps(v267, aTb->m_rotation.m_col1.m_quad);
-          v272 = _mm_shuffle_ps(_mm_unpackhi_ps(v267, aTb->m_rotation.m_col1.m_quad), v266, 228);
-          v273 = _mm_movelh_ps(v271, v266);
-          v274 = _mm_movehl_ps(v273, v271);
-          v275 = shapeA->m_quad;
-          v276 = _mm_shuffle_ps(v274, v266, 212);
-          v277 = v269;
-          v623 = v275;
-          v624 = shapeA[1].m_quad;
-          v278 = shapeA[2].m_quad;
-          v593 = v275;
-          v279 = _mm_mul_ps(v275, v269);
-          v625 = v278;
-          v280 = shapeA[3].m_quad;
-          v603 = v278;
-          v626 = v280;
-          v281 = shapeB->m_quad;
-          v595 = v624;
-          v615 = v281;
-          v282 = shapeB[1].m_quad;
-          v606 = v280;
-          v616 = v282;
-          v283 = shapeB[2].m_quad;
-          v612 = v281;
-          v617 = v283;
-          v284 = shapeB[3].m_quad;
-          v646 = v269;
-          v614 = v282;
-          v611 = v283;
-          v613 = v284;
-          v618 = v284;
-          v285 = _mm_add_ps(
+          v268 = aTb->m_rotation.m_col2.m_quad;
+          v269 = aTb->m_rotation.m_col0.m_quad;
+          v270 = (__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 0);
+          v562 = _mm_xor_ps(v270, v20.m_quad);
+          v271 = _mm_xor_ps(v562, v270);
+          v272 = _mm_unpacklo_ps(v269, aTb->m_rotation.m_col1.m_quad);
+          v273 = _mm_shuffle_ps(_mm_unpackhi_ps(v269, aTb->m_rotation.m_col1.m_quad), v268, 228);
+          v274 = _mm_movelh_ps(v272, v268);
+          v275 = _mm_shuffle_ps(_mm_movehl_ps(v274, v272), v268, 212);
+          v276 = v562;
+          v583 = shapeA->m_quad;
+          v584 = shapeA[1].m_quad;
+          v553 = v583;
+          v277 = _mm_mul_ps(v583, v562);
+          v585 = shapeA[2].m_quad;
+          v278 = shapeA[3].m_quad;
+          v563 = v585;
+          v586 = v278;
+          v279 = shapeB->m_quad;
+          v555 = v584;
+          v575 = v279;
+          v280 = shapeB[1].m_quad;
+          v566 = v278;
+          v576 = v280;
+          v281 = shapeB[2].m_quad;
+          v572 = v279;
+          v577 = v281;
+          v282 = shapeB[3].m_quad;
+          v602[4] = v562;
+          v574 = v280;
+          v571 = v281;
+          v573 = v282;
+          v578 = v282;
+          v283 = _mm_add_ps(
                    _mm_add_ps(
-                     _mm_mul_ps(_mm_shuffle_ps(v270, v270, 85), v276),
-                     _mm_mul_ps(_mm_shuffle_ps(v270, v270, 0), v273)),
-                   _mm_mul_ps(_mm_shuffle_ps(v270, v270, 170), v272));
-          v598 = v285;
-          v647 = v285;
+                     _mm_mul_ps(_mm_shuffle_ps(v271, v271, 85), v275),
+                     _mm_mul_ps(_mm_shuffle_ps(v271, v271, 0), v274)),
+                   _mm_mul_ps(_mm_shuffle_ps(v271, v271, 170), v273));
+          v558.m_quad = v283;
+          v602[5] = v283;
+          v284 = _mm_add_ps(
+                   _mm_add_ps(_mm_shuffle_ps(v277, v277, 85), _mm_shuffle_ps(v277, v277, 0)),
+                   _mm_shuffle_ps(v277, v277, 170));
+          v285 = _mm_mul_ps(v584, v562);
+          v561 = v284;
+          v579 = v284;
           v286 = _mm_add_ps(
-                   _mm_add_ps(_mm_shuffle_ps(v279, v279, 85), _mm_shuffle_ps(v279, v279, 0)),
-                   _mm_shuffle_ps(v279, v279, 170));
-          v287 = _mm_mul_ps(v624, v277);
-          v601 = v286;
-          v619 = v286;
-          v288 = _mm_add_ps(
-                   _mm_add_ps(_mm_shuffle_ps(v287, v287, 85), _mm_shuffle_ps(v287, v287, 0)),
-                   _mm_shuffle_ps(v287, v287, 170));
-          v596 = v288;
-          v620 = v288;
-          v289 = _mm_mul_ps(v603, v277);
-          v290 = v610 - 4;
-          v291 = v608 - 4;
-          v292 = (__int64)&shapeA[4];
-          v293 = &shapeB[4].m_quad;
-          v294 = v608 - 4;
-          v295 = _mm_shuffle_ps(v289, v289, 85);
-          v296 = _mm_shuffle_ps(v289, v289, 0);
-          v297 = _mm_shuffle_ps(v289, v289, 170);
-          v298 = _mm_add_ps(v295, v296);
-          if ( v610 - 4 < v608 - 4 )
-            v294 = v610 - 4;
-          v299 = _mm_add_ps(v298, v297);
-          v300 = _mm_mul_ps(v280, v277);
-          v599 = v299;
-          v621 = v299;
+                   _mm_add_ps(_mm_shuffle_ps(v285, v285, 85), _mm_shuffle_ps(v285, v285, 0)),
+                   _mm_shuffle_ps(v285, v285, 170));
+          v556 = v286;
+          v580 = v286;
+          v287 = _mm_mul_ps(v585, v562);
+          v288 = v570 - 4;
+          v289 = v568 - 4;
+          v290 = shapeA + 4;
+          v291 = shapeB + 4;
+          v292 = v568 - 4;
+          v293 = _mm_shuffle_ps(v287, v287, 85);
+          v294 = _mm_shuffle_ps(v287, v287, 0);
+          v295 = _mm_shuffle_ps(v287, v287, 170);
+          v296 = _mm_add_ps(v293, v294);
+          if ( v570 - 4 < v568 - 4 )
+            v292 = v570 - 4;
+          v297 = _mm_add_ps(v296, v295);
+          v298 = _mm_mul_ps(v278, v562);
+          v559 = v297;
+          v581 = v297;
+          v299 = _mm_add_ps(
+                   _mm_add_ps(_mm_shuffle_ps(v298, v298, 85), _mm_shuffle_ps(v298, v298, 0)),
+                   _mm_shuffle_ps(v298, v298, 170));
+          v300 = _mm_mul_ps(v279, v283);
+          v557 = v299;
+          v582 = v299;
           v301 = _mm_add_ps(
                    _mm_add_ps(_mm_shuffle_ps(v300, v300, 85), _mm_shuffle_ps(v300, v300, 0)),
                    _mm_shuffle_ps(v300, v300, 170));
-          v302 = _mm_mul_ps(v281, v285);
-          v597 = v301;
-          v622 = v301;
+          v302 = _mm_mul_ps(v280, v283);
+          v565 = v301;
+          v588 = v301;
           v303 = _mm_add_ps(
                    _mm_add_ps(_mm_shuffle_ps(v302, v302, 85), _mm_shuffle_ps(v302, v302, 0)),
                    _mm_shuffle_ps(v302, v302, 170));
-          v304 = _mm_mul_ps(v282, v285);
-          v605 = v303;
-          v628 = v303;
+          v304 = _mm_mul_ps(v281, v283);
+          v560 = v303;
+          v589 = v303;
           v305 = _mm_add_ps(
                    _mm_add_ps(_mm_shuffle_ps(v304, v304, 85), _mm_shuffle_ps(v304, v304, 0)),
                    _mm_shuffle_ps(v304, v304, 170));
-          v306 = _mm_mul_ps(v283, v285);
-          v600 = v305;
-          v629 = v305;
-          v307 = _mm_add_ps(
-                   _mm_add_ps(_mm_shuffle_ps(v306, v306, 85), _mm_shuffle_ps(v306, v306, 0)),
-                   _mm_shuffle_ps(v306, v306, 170));
-          v308 = _mm_mul_ps(v284, v285);
-          v604 = v307;
-          v630 = v307;
+          v306 = _mm_mul_ps(v282, v283);
+          v564 = v305;
+          v590 = v305;
           supportOuta = _mm_add_ps(
-                          _mm_add_ps(_mm_shuffle_ps(v308, v308, 85), _mm_shuffle_ps(v308, v308, 0)),
-                          _mm_shuffle_ps(v308, v308, 170));
-          v631 = supportOuta;
-          if ( v294 > 0 )
+                          _mm_add_ps(_mm_shuffle_ps(v306, v306, 85), _mm_shuffle_ps(v306, v306, 0)),
+                          _mm_shuffle_ps(v306, v306, 170));
+          v591 = supportOuta;
+          if ( v292 > 0 )
           {
-            v309 = ((unsigned int)(v294 - 1) >> 2) + 1;
-            v310 = v309;
-            v309 *= 4;
-            v290 -= v309;
-            v291 -= v309;
+            v307 = ((unsigned int)(v292 - 1) >> 2) + 1;
+            v288 -= 4 * v307;
+            v289 -= 4 * v307;
             do
             {
-              v311 = _mm_mul_ps(v277, *(__m128 *)v292);
-              v666 = *(__m128 *)v292;
-              v312 = *(__m128 *)(v292 + 16);
-              v633 = v666;
-              v667 = v312;
-              v313 = *(__m128 *)(v292 + 32);
-              v637 = v312;
+              v308 = _mm_mul_ps(v276, v290->m_quad);
+              v620 = (__int128)v290->m_quad;
+              v309 = v290[1].m_quad;
+              v593 = v620;
+              v621 = v309;
+              v310 = v290[2].m_quad;
+              v597 = v309;
+              v311 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v308, v308, 85), _mm_shuffle_ps(v308, v308, 0)),
+                       _mm_shuffle_ps(v308, v308, 170));
+              v622 = v310;
+              v312 = _mm_mul_ps(v562, v309);
+              v623 = v290[3].m_quad;
+              v313 = v291->m_quad;
+              v599 = v310;
               v314 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v311, v311, 85), _mm_shuffle_ps(v311, v311, 0)),
-                       _mm_shuffle_ps(v311, v311, 170));
-              v668 = v313;
-              v315 = _mm_mul_ps(v602, v312);
-              v316 = v598;
-              v669 = *(__m128 *)(v292 + 48);
-              v317 = *v293;
-              v639 = v313;
-              v318 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v312, v312, 85), _mm_shuffle_ps(v312, v312, 0)),
+                       _mm_shuffle_ps(v312, v312, 170));
+              v625 = v313;
+              v315 = _mm_mul_ps(v562, v310);
+              v626 = v291[1].m_quad;
+              v316 = v291[2].m_quad;
+              v601 = v623;
+              v594 = v313;
+              v317 = _mm_add_ps(
                        _mm_add_ps(_mm_shuffle_ps(v315, v315, 85), _mm_shuffle_ps(v315, v315, 0)),
                        _mm_shuffle_ps(v315, v315, 170));
-              v671 = v317;
-              v319 = _mm_mul_ps(v602, v313);
-              v672 = v293[1];
-              v320 = v293[2];
-              v641 = v669;
-              v634 = v317;
-              v321 = _mm_add_ps(
+              v627 = v316;
+              v318 = v291[3].m_quad;
+              v319 = _mm_mul_ps(v562, v623);
+              v595 = v626;
+              v596 = v316;
+              v600 = v318;
+              v628 = v318;
+              v320 = _mm_add_ps(
                        _mm_add_ps(_mm_shuffle_ps(v319, v319, 85), _mm_shuffle_ps(v319, v319, 0)),
                        _mm_shuffle_ps(v319, v319, 170));
-              v673 = v320;
-              v322 = v293[3];
-              v323 = _mm_mul_ps(v602, v669);
-              v635 = v672;
-              v636 = v320;
-              v640 = v322;
-              v674 = v322;
-              v324 = _mm_add_ps(
+              v592 = v311;
+              v630 = v311;
+              v321 = _mm_mul_ps(v558.m_quad, v313);
+              v631 = v314;
+              v632 = v317;
+              v633 = v320;
+              v598 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v321, v321, 85), _mm_shuffle_ps(v321, v321, 0)),
+                       _mm_shuffle_ps(v321, v321, 170));
+              v635 = v598;
+              v322 = _mm_mul_ps(v558.m_quad, v626);
+              v648 = supportOuta;
+              v646 = v560;
+              v642 = v559;
+              v643 = v557;
+              v636 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v322, v322, 85), _mm_shuffle_ps(v322, v322, 0)),
+                       _mm_shuffle_ps(v322, v322, 170));
+              v323 = _mm_mul_ps(v558.m_quad, v316);
+              v647 = v564;
+              v652 = _mm_cmplt_ps(v559, v317);
+              v653 = _mm_cmplt_ps(v557, v320);
+              v637 = _mm_add_ps(
                        _mm_add_ps(_mm_shuffle_ps(v323, v323, 85), _mm_shuffle_ps(v323, v323, 0)),
                        _mm_shuffle_ps(v323, v323, 170));
-              v632 = v314;
-              v676 = v314;
-              v325 = _mm_mul_ps(v598, v317);
-              v677 = v318;
-              v678 = v321;
-              v679 = v324;
-              v326 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v325, v325, 85), _mm_shuffle_ps(v325, v325, 0)),
-                       _mm_shuffle_ps(v325, v325, 170));
-              v638 = v326;
-              v681 = v326;
-              v327 = _mm_mul_ps(v598, v672);
-              v328 = v600;
-              v694 = supportOuta;
-              v692 = v600;
-              v688 = v599;
-              v329 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v327, v327, 85), _mm_shuffle_ps(v327, v327, 0)),
-                       _mm_shuffle_ps(v327, v327, 170));
-              v330 = (__m128i)_mm_cmpltps(v599, v321);
-              v689 = v597;
-              v682 = v329;
-              v331 = (__m128i)_mm_cmpltps(v597, v324);
-              v332 = _mm_mul_ps(v598, v320);
-              v333 = v604;
-              v693 = v604;
-              _mm_store_si128((__m128i *)&v698, v330);
-              _mm_store_si128((__m128i *)&v699, v331);
-              v334 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v332, v332, 85), _mm_shuffle_ps(v332, v332, 0)),
-                       _mm_shuffle_ps(v332, v332, 170));
-              v683 = v334;
-              v335 = _mm_mul_ps(v316, v322);
-              v686 = v601;
-              v336 = (__m128i)_mm_cmpltps(v601, v314);
-              _mm_store_si128((__m128i *)&v696, v336);
-              v337 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v335, v335, 85), _mm_shuffle_ps(v335, v335, 0)),
-                       _mm_shuffle_ps(v335, v335, 170));
-              v687 = v596;
-              v338 = (__m128i)_mm_cmpltps(v596, v318);
-              v339 = (__m128i)_mm_cmpltps(v605, v326);
-              v691 = v605;
-              v340 = (__m128i)_mm_cmpltps(v328, v329);
-              v341 = (__m128i)_mm_cmpltps(v333, v334);
-              v342 = _mm_andnot_ps((__m128)v336, v601);
-              v343 = _mm_and_ps((__m128)v336, v632);
-              v344 = (__m128i)_mm_cmpltps(supportOuta, v337);
-              v684 = v337;
-              _mm_store_si128((__m128i *)&v697, v338);
-              _mm_store_si128((__m128i *)&v701, v339);
-              _mm_store_si128((__m128i *)&v702, v340);
-              _mm_store_si128((__m128i *)&v703, v341);
-              v601 = _mm_or_ps(v342, v343);
-              v619 = v601;
-              v345 = _mm_andnot_ps((__m128)v338, v596);
-              _mm_store_si128((__m128i *)&v704, v344);
-              v288 = _mm_or_ps(v345, _mm_and_ps((__m128)v338, v318));
-              v596 = v288;
-              v620 = v288;
-              v599 = _mm_or_ps(_mm_andnot_ps((__m128)v330, v599), _mm_and_ps((__m128)v330, v321));
-              v621 = v599;
-              v597 = _mm_or_ps(_mm_and_ps((__m128)v331, v324), _mm_andnot_ps((__m128)v331, v597));
-              v622 = v597;
-              v593 = _mm_or_ps(_mm_andnot_ps((__m128)v336, v593), _mm_and_ps((__m128)v336, v633));
-              v623 = v593;
-              v595 = _mm_or_ps(_mm_andnot_ps((__m128)v338, v595), _mm_and_ps((__m128)v338, v637));
-              v624 = v595;
-              v603 = _mm_or_ps(_mm_andnot_ps((__m128)v330, v603), _mm_and_ps((__m128)v330, v639));
-              v625 = v603;
-              v606 = _mm_or_ps(_mm_andnot_ps((__m128)v331, v606), _mm_and_ps((__m128)v331, v641));
-              v626 = v606;
-              v605 = _mm_or_ps(_mm_and_ps((__m128)v339, v638), _mm_andnot_ps((__m128)v339, v605));
-              v628 = v605;
-              v600 = _mm_or_ps(_mm_and_ps((__m128)v340, v329), _mm_andnot_ps((__m128)v340, v600));
-              v629 = v600;
-              v614 = _mm_or_ps(_mm_andnot_ps((__m128)v340, v614), _mm_and_ps((__m128)v340, v635));
-              v616 = v614;
-              v604 = _mm_or_ps(_mm_and_ps((__m128)v341, v334), _mm_andnot_ps((__m128)v341, v604));
-              v630 = v604;
-              v612 = _mm_or_ps(_mm_andnot_ps((__m128)v339, v612), _mm_and_ps((__m128)v339, v634));
-              v615 = v612;
-              supportOuta = _mm_or_ps(_mm_and_ps((__m128)v344, v337), _mm_andnot_ps((__m128)v344, supportOuta));
-              v631 = supportOuta;
-              v277 = v602;
-              v292 += 64i64;
-              v293 += 4;
-              v611 = _mm_or_ps(_mm_andnot_ps((__m128)v341, v611), _mm_and_ps((__m128)v341, v636));
-              v617 = v611;
-              v613 = _mm_or_ps(_mm_andnot_ps((__m128)v344, v613), _mm_and_ps((__m128)v344, v640));
-              v618 = v613;
-              --v310;
+              v324 = _mm_mul_ps(v558.m_quad, v318);
+              v640 = v561;
+              v650 = _mm_cmplt_ps(v561, v311);
+              v641 = v556;
+              v645 = v565;
+              v638 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v324, v324, 85), _mm_shuffle_ps(v324, v324, 0)),
+                       _mm_shuffle_ps(v324, v324, 170));
+              v651 = _mm_cmplt_ps(v556, v314);
+              v655 = _mm_cmplt_ps(v565, v598);
+              v656 = _mm_cmplt_ps(v560, v636);
+              v657 = _mm_cmplt_ps(v564, v637);
+              v561 = _mm_or_ps(_mm_andnot_ps(v650, v561), _mm_and_ps(v650, v311));
+              v579 = v561;
+              v658 = _mm_cmplt_ps(supportOuta, v638);
+              v286 = _mm_or_ps(_mm_andnot_ps(v651, v556), _mm_and_ps(v651, v314));
+              v556 = v286;
+              v580 = v286;
+              v559 = _mm_or_ps(_mm_andnot_ps(v652, v559), _mm_and_ps(v652, v317));
+              v581 = v559;
+              v557 = _mm_or_ps(_mm_and_ps(v653, v320), _mm_andnot_ps(v653, v557));
+              v582 = v557;
+              v553 = _mm_or_ps(_mm_andnot_ps(v650, v553), _mm_and_ps(v650, (__m128)v620));
+              v583 = v553;
+              v555 = _mm_or_ps(_mm_andnot_ps(v651, v555), _mm_and_ps(v651, v309));
+              v584 = v555;
+              v563 = _mm_or_ps(_mm_andnot_ps(v652, v563), _mm_and_ps(v652, v310));
+              v585 = v563;
+              v566 = _mm_or_ps(_mm_andnot_ps(v653, v566), _mm_and_ps(v653, v623));
+              v586 = v566;
+              v565 = _mm_or_ps(_mm_and_ps(v655, v598), _mm_andnot_ps(v655, v565));
+              v588 = v565;
+              v560 = _mm_or_ps(_mm_and_ps(v656, v636), _mm_andnot_ps(v656, v560));
+              v589 = v560;
+              v574 = _mm_or_ps(_mm_andnot_ps(v656, v574), _mm_and_ps(v656, v626));
+              v576 = v574;
+              v564 = _mm_or_ps(_mm_and_ps(v657, v637), _mm_andnot_ps(v657, v564));
+              v590 = v564;
+              v572 = _mm_or_ps(_mm_andnot_ps(v655, v572), _mm_and_ps(v655, v313));
+              v575 = v572;
+              supportOuta = _mm_or_ps(_mm_and_ps(v658, v638), _mm_andnot_ps(v658, supportOuta));
+              v591 = supportOuta;
+              v276 = v562;
+              v290 += 4;
+              v291 += 4;
+              v571 = _mm_or_ps(_mm_andnot_ps(v657, v571), _mm_and_ps(v657, v316));
+              v577 = v571;
+              v573 = _mm_or_ps(_mm_andnot_ps(v658, v573), _mm_and_ps(v658, v318));
+              v578 = v573;
+              --v307;
             }
-            while ( v310 );
-            v20.m_quad = *(__m128 *)&v594.m_lastDimB.m_storage;
-            v31 = v593;
+            while ( v307 );
+            v20.m_quad = *(__m128 *)&v554.m_lastDimB.m_storage;
+            v31 = v553;
           }
-          if ( v290 > 0 )
+          if ( v288 > 0 )
           {
-            v346 = v601;
-            v347 = v599;
-            v348 = (__m128 *)(v292 + 32);
-            v349 = ((unsigned int)(v290 - 1) >> 2) + 1;
+            v325 = v561;
+            v326 = v559;
+            p_m_quad = &v290[2].m_quad;
+            v328 = ((unsigned int)(v288 - 1) >> 2) + 1;
             do
             {
-              v350 = v348[-2];
-              v351 = _mm_mul_ps(v277, v350);
-              v706 = v348[-2];
-              v352 = v348[-1];
-              v353 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v351, v351, 85), _mm_shuffle_ps(v351, v351, 0)),
-                       _mm_shuffle_ps(v351, v351, 170));
-              v707 = v352;
-              v354 = *v348;
-              v355 = _mm_mul_ps(v277, v352);
-              v708 = v354;
-              v356 = v348[1];
-              v716 = v346;
-              v717 = v288;
-              v357 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v355, v355, 85), _mm_shuffle_ps(v355, v355, 0)),
-                       _mm_shuffle_ps(v355, v355, 170));
-              v358 = (__m128i)_mm_cmpltps(v288, v357);
-              v711 = v353;
-              v712 = v357;
-              v359 = _mm_mul_ps(v277, v354);
-              v718 = v347;
-              v709 = v356;
-              _mm_store_si128((__m128i *)&v722, v358);
-              v713 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v359, v359, 85), _mm_shuffle_ps(v359, v359, 0)),
-                       _mm_shuffle_ps(v359, v359, 170));
-              v360 = _mm_mul_ps(v277, v356);
-              v361 = (__m128i)_mm_cmpltps(v347, v713);
-              v362 = _mm_and_ps(v713, (__m128)v361);
-              _mm_store_si128((__m128i *)&v723, v361);
-              v363 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v360, v360, 85), _mm_shuffle_ps(v360, v360, 0)),
-                       _mm_shuffle_ps(v360, v360, 170));
-              v719 = v597;
-              v364 = (__m128i)_mm_cmpltps(v346, v353);
-              v365 = (__m128i)_mm_cmpltps(v597, v363);
-              v714 = v363;
-              _mm_store_si128((__m128i *)&v721, v364);
-              _mm_store_si128((__m128i *)&v724, v365);
-              v346 = _mm_or_ps(_mm_andnot_ps((__m128)v364, v346), _mm_and_ps(v353, (__m128)v364));
-              v619 = v346;
-              v288 = _mm_or_ps(_mm_andnot_ps((__m128)v358, v288), _mm_and_ps(v357, (__m128)v358));
-              v620 = v288;
-              v348 += 4;
-              v366 = _mm_and_ps(v354, (__m128)v361);
-              v597 = _mm_or_ps(_mm_andnot_ps((__m128)v365, v597), _mm_and_ps(v363, (__m128)v365));
-              v622 = v597;
-              v595 = _mm_or_ps(_mm_andnot_ps((__m128)v358, v595), _mm_and_ps(v352, (__m128)v358));
-              v624 = v595;
-              v347 = _mm_or_ps(_mm_andnot_ps((__m128)v361, v347), v362);
-              v593 = _mm_or_ps(_mm_andnot_ps((__m128)v364, v593), _mm_and_ps(v350, (__m128)v364));
-              v623 = v593;
-              v367 = _mm_andnot_ps((__m128)v361, v603);
-              v277 = v602;
-              v621 = v347;
-              v606 = _mm_or_ps(_mm_andnot_ps((__m128)v365, v606), _mm_and_ps(v356, (__m128)v365));
-              v626 = v606;
-              v603 = _mm_or_ps(v367, v366);
-              v625 = v603;
-              --v349;
+              v329 = p_m_quad[-2];
+              v330 = _mm_mul_ps(v276, v329);
+              v660 = v329;
+              v331 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v330, v330, 85), _mm_shuffle_ps(v330, v330, 0)),
+                       _mm_shuffle_ps(v330, v330, 170));
+              v661 = p_m_quad[-1];
+              v332 = _mm_mul_ps(v276, v661);
+              v662 = *p_m_quad;
+              v333 = p_m_quad[1];
+              v670 = v325;
+              v671 = v286;
+              v665 = v331;
+              v666 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v332, v332, 85), _mm_shuffle_ps(v332, v332, 0)),
+                       _mm_shuffle_ps(v332, v332, 170));
+              v334 = _mm_mul_ps(v276, v662);
+              v672 = v326;
+              v663 = v333;
+              v676 = _mm_cmplt_ps(v286, v666);
+              v667 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v334, v334, 85), _mm_shuffle_ps(v334, v334, 0)),
+                       _mm_shuffle_ps(v334, v334, 170));
+              v335 = _mm_mul_ps(v276, v333);
+              v677 = _mm_cmplt_ps(v326, v667);
+              v673 = v557;
+              v668 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v335, v335, 85), _mm_shuffle_ps(v335, v335, 0)),
+                       _mm_shuffle_ps(v335, v335, 170));
+              v675 = _mm_cmplt_ps(v325, v331);
+              v678 = _mm_cmplt_ps(v557, v668);
+              v325 = _mm_or_ps(_mm_andnot_ps(v675, v325), _mm_and_ps(v331, v675));
+              v579 = v325;
+              v286 = _mm_or_ps(_mm_andnot_ps(v676, v286), _mm_and_ps(v666, v676));
+              v580 = v286;
+              p_m_quad += 4;
+              v557 = _mm_or_ps(_mm_andnot_ps(v678, v557), _mm_and_ps(v668, v678));
+              v582 = v557;
+              v555 = _mm_or_ps(_mm_andnot_ps(v676, v555), _mm_and_ps(v661, v676));
+              v584 = v555;
+              v326 = _mm_or_ps(_mm_andnot_ps(v677, v326), _mm_and_ps(v667, v677));
+              v553 = _mm_or_ps(_mm_andnot_ps(v675, v553), _mm_and_ps(v329, v675));
+              v583 = v553;
+              v276 = v562;
+              v581 = v326;
+              v566 = _mm_or_ps(_mm_andnot_ps(v678, v566), _mm_and_ps(v333, v678));
+              v586 = v566;
+              v563 = _mm_or_ps(_mm_andnot_ps(v677, v563), _mm_and_ps(v662, v677));
+              v585 = v563;
+              --v328;
             }
-            while ( v349 );
-            v599 = v347;
-            v31 = v593;
-            v601 = v346;
-            v20.m_quad = *(__m128 *)&v594.m_lastDimB.m_storage;
-            v596 = v288;
+            while ( v328 );
+            v559 = v326;
+            v31 = v553;
+            v561 = v325;
+            v20.m_quad = *(__m128 *)&v554.m_lastDimB.m_storage;
+            v556 = v286;
           }
-          if ( v291 <= 0 )
+          if ( v289 <= 0 )
           {
-            v389 = v614;
-            v390 = v613;
+            v348 = v574;
+            v349 = v573;
           }
           else
           {
-            v368 = v605;
-            v369 = v600;
-            v370 = v604;
-            v371 = v293 + 2;
-            v372 = ((unsigned int)(v291 - 1) >> 2) + 1;
+            v336 = v565;
+            v337 = v560;
+            v338 = v564;
+            v339 = &v291[2].m_quad;
+            v340 = ((unsigned int)(v289 - 1) >> 2) + 1;
             do
             {
-              v373 = v371[-2];
-              v726 = v373;
-              v374 = v371[-1];
-              v375 = _mm_mul_ps(v598, v373);
-              v727 = v374;
-              v376 = *v371;
-              v377 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v375, v375, 85), _mm_shuffle_ps(v375, v375, 0)),
-                       _mm_shuffle_ps(v375, v375, 170));
-              v728 = v376;
-              v378 = v371[1];
-              v379 = _mm_mul_ps(v598, v374);
-              v736 = v368;
-              v737 = v369;
-              v731 = v377;
-              v738 = v370;
-              v732 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v379, v379, 85), _mm_shuffle_ps(v379, v379, 0)),
-                       _mm_shuffle_ps(v379, v379, 170));
-              v729 = v378;
-              v380 = _mm_mul_ps(v598, v376);
-              v381 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v380, v380, 85), _mm_shuffle_ps(v380, v380, 0)),
-                       _mm_shuffle_ps(v380, v380, 170));
-              v382 = _mm_mul_ps(v598, v378);
-              v383 = (__m128i)_mm_cmpltps(v369, v732);
-              v384 = (__m128i)_mm_cmpltps(v370, v381);
-              v733 = v381;
-              v385 = _mm_and_ps(v732, (__m128)v383);
-              _mm_store_si128((__m128i *)&v742, v383);
-              _mm_store_si128((__m128i *)&v743, v384);
-              v386 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v382, v382, 85), _mm_shuffle_ps(v382, v382, 0)),
-                       _mm_shuffle_ps(v382, v382, 170));
-              v739 = supportOuta;
-              v387 = (__m128i)_mm_cmpltps(v368, v377);
-              v388 = (__m128i)_mm_cmpltps(supportOuta, v386);
-              v734 = v386;
-              _mm_store_si128((__m128i *)&v741, v387);
-              _mm_store_si128((__m128i *)&v744, v388);
-              v368 = _mm_or_ps(_mm_andnot_ps((__m128)v387, v368), _mm_and_ps(v377, (__m128)v387));
-              v628 = v368;
-              v369 = _mm_or_ps(_mm_andnot_ps((__m128)v383, v369), v385);
-              v629 = v369;
-              v371 += 4;
-              supportOuta = _mm_or_ps(_mm_andnot_ps((__m128)v388, supportOuta), _mm_and_ps(v386, (__m128)v388));
-              v631 = supportOuta;
-              v612 = _mm_or_ps(_mm_and_ps(v373, (__m128)v387), _mm_andnot_ps((__m128)v387, v612));
-              v615 = v612;
-              v389 = _mm_or_ps(_mm_and_ps(v374, (__m128)v383), _mm_andnot_ps((__m128)v383, v614));
-              v614 = v389;
-              v616 = v389;
-              v611 = _mm_or_ps(_mm_and_ps(v376, (__m128)v384), _mm_andnot_ps((__m128)v384, v611));
-              v617 = v611;
-              v390 = _mm_or_ps(_mm_and_ps(v378, (__m128)v388), _mm_andnot_ps((__m128)v388, v613));
-              v370 = _mm_or_ps(_mm_andnot_ps((__m128)v384, v370), _mm_and_ps(v381, (__m128)v384));
-              v613 = v390;
-              v618 = v390;
-              v630 = v370;
-              --v372;
+              v680 = v339[-2];
+              v341 = _mm_mul_ps(v558.m_quad, v680);
+              v681 = v339[-1];
+              v342 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v341, v341, 85), _mm_shuffle_ps(v341, v341, 0)),
+                       _mm_shuffle_ps(v341, v341, 170));
+              v682 = *v339;
+              v343 = v339[1];
+              v344 = _mm_mul_ps(v558.m_quad, v681);
+              v690 = v336;
+              v691 = v337;
+              v685 = v342;
+              v692 = v338;
+              v686 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v344, v344, 85), _mm_shuffle_ps(v344, v344, 0)),
+                       _mm_shuffle_ps(v344, v344, 170));
+              v683 = v343;
+              v345 = _mm_mul_ps(v558.m_quad, v682);
+              v346 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v345, v345, 85), _mm_shuffle_ps(v345, v345, 0)),
+                       _mm_shuffle_ps(v345, v345, 170));
+              v347 = _mm_mul_ps(v558.m_quad, v343);
+              v687 = v346;
+              v696 = _mm_cmplt_ps(v337, v686);
+              v697 = _mm_cmplt_ps(v338, v346);
+              v693 = supportOuta;
+              v688 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v347, v347, 85), _mm_shuffle_ps(v347, v347, 0)),
+                       _mm_shuffle_ps(v347, v347, 170));
+              v695 = _mm_cmplt_ps(v336, v342);
+              v698 = _mm_cmplt_ps(supportOuta, v688);
+              v336 = _mm_or_ps(_mm_andnot_ps(v695, v336), _mm_and_ps(v342, v695));
+              v588 = v336;
+              v337 = _mm_or_ps(_mm_andnot_ps(v696, v337), _mm_and_ps(v686, v696));
+              v589 = v337;
+              v339 += 4;
+              supportOuta = _mm_or_ps(_mm_andnot_ps(v698, supportOuta), _mm_and_ps(v688, v698));
+              v591 = supportOuta;
+              v572 = _mm_or_ps(_mm_and_ps(v680, v695), _mm_andnot_ps(v695, v572));
+              v575 = v572;
+              v348 = _mm_or_ps(_mm_and_ps(v681, v696), _mm_andnot_ps(v696, v574));
+              v574 = v348;
+              v576 = v348;
+              v571 = _mm_or_ps(_mm_and_ps(v682, v697), _mm_andnot_ps(v697, v571));
+              v577 = v571;
+              v349 = _mm_or_ps(_mm_and_ps(v343, v698), _mm_andnot_ps(v698, v573));
+              v338 = _mm_or_ps(_mm_andnot_ps(v697, v338), _mm_and_ps(v346, v697));
+              v573 = v349;
+              v578 = v349;
+              v590 = v338;
+              --v340;
             }
-            while ( v372 );
-            v604 = v370;
-            v288 = v596;
-            v600 = v369;
-            v31 = v593;
-            v605 = v368;
-            v20.m_quad = *(__m128 *)&v594.m_lastDimB.m_storage;
+            while ( v340 );
+            v564 = v338;
+            v286 = v556;
+            v560 = v337;
+            v31 = v553;
+            v565 = v336;
+            v20.m_quad = *(__m128 *)&v554.m_lastDimB.m_storage;
           }
-          v544 = _mm_cmpltps(v599, v597);
-          v545 = _mm_cmpltps(v604, supportOuta);
-          v546 = _mm_cmpltps(v601, v288);
-          v547 = _mm_cmpltps(v605, v600);
-          v548 = _mm_cmpltps(
-                   _mm_or_ps(_mm_andnot_ps(v544, v599), _mm_and_ps(v544, v597)),
-                   _mm_or_ps(_mm_and_ps(v288, v546), _mm_andnot_ps(v546, v601)));
-          v549 = _mm_cmpltps(
-                   _mm_or_ps(_mm_and_ps(v545, supportOuta), _mm_andnot_ps(v545, v604)),
-                   _mm_or_ps(_mm_and_ps(v547, v600), _mm_andnot_ps(v547, v605)));
-          v550 = _mm_or_ps(
-                   _mm_andnot_ps(v549, _mm_or_ps(_mm_and_ps(v390, v545), _mm_andnot_ps(v545, v611))),
-                   _mm_and_ps(_mm_or_ps(_mm_and_ps(v389, v547), _mm_andnot_ps(v547, v612)), v549));
-          v551 = _mm_add_ps(
+          v503 = _mm_cmplt_ps(v559, v557);
+          v504 = _mm_cmplt_ps(v564, supportOuta);
+          v505 = _mm_cmplt_ps(v561, v286);
+          v506 = _mm_cmplt_ps(v565, v560);
+          v507 = _mm_cmplt_ps(
+                   _mm_or_ps(_mm_andnot_ps(v503, v559), _mm_and_ps(v503, v557)),
+                   _mm_or_ps(_mm_and_ps(v286, v505), _mm_andnot_ps(v505, v561)));
+          v508 = _mm_cmplt_ps(
+                   _mm_or_ps(_mm_and_ps(v504, supportOuta), _mm_andnot_ps(v504, v564)),
+                   _mm_or_ps(_mm_and_ps(v506, v560), _mm_andnot_ps(v506, v565)));
+          v509 = _mm_or_ps(
+                   _mm_andnot_ps(v508, _mm_or_ps(_mm_and_ps(v349, v504), _mm_andnot_ps(v504, v571))),
+                   _mm_and_ps(_mm_or_ps(_mm_and_ps(v348, v506), _mm_andnot_ps(v506, v572)), v508));
+          v510 = _mm_add_ps(
                    _mm_add_ps(
                      _mm_add_ps(
-                       _mm_mul_ps(_mm_shuffle_ps(v550, v550, 0), aTb->m_rotation.m_col0.m_quad),
-                       _mm_mul_ps(_mm_shuffle_ps(v550, v550, 85), aTb->m_rotation.m_col1.m_quad)),
-                     _mm_mul_ps(_mm_shuffle_ps(v550, v550, 170), aTb->m_rotation.m_col2.m_quad)),
+                       _mm_mul_ps(_mm_shuffle_ps(v509, v509, 0), aTb->m_rotation.m_col0.m_quad),
+                       _mm_mul_ps(_mm_shuffle_ps(v509, v509, 85), aTb->m_rotation.m_col1.m_quad)),
+                     _mm_mul_ps(_mm_shuffle_ps(v509, v509, 170), aTb->m_rotation.m_col2.m_quad)),
                    aTb->m_translation.m_quad);
-          v552 = _mm_or_ps(
-                   _mm_andnot_ps(v548, _mm_or_ps(_mm_and_ps(v606, v544), _mm_andnot_ps(v544, v603))),
-                   _mm_and_ps(_mm_or_ps(_mm_and_ps(v595, v546), _mm_andnot_ps(v546, v593)), v548));
-          v553 = _mm_shuffle_ps(v551, _mm_unpackhi_ps(v551, v550), 196);
-          v554 = _mm_mul_ps(_mm_sub_ps(v552, v553), v20.m_quad);
-          v555 = _mm_mul_ps(_mm_sub_ps(v552, v31), v602);
-          v556 = _mm_mul_ps(_mm_sub_ps(v553, v594.m_checkTriangleDots.m_quad), v20.m_quad);
-          v557 = _mm_unpacklo_ps(v554, v555);
-          v558 = _mm_movelh_ps(v557, v556);
-          v559 = _mm_shuffle_ps(_mm_unpackhi_ps(v554, v555), v556, 228);
-          v560 = _mm_mul_ps(_mm_sub_ps(v552, v594.m_verticesA[1].m_quad), v602);
-          v561 = _mm_add_ps(v558, _mm_shuffle_ps(_mm_movehl_ps(v558, v557), v556, 212));
-          v562 = _mm_mul_ps(_mm_sub_ps(v552, v594.m_verticesA[2].m_quad), v602);
-          v563 = _mm_mul_ps(_mm_sub_ps(v553, v594.m_verticesBinA[1].m_quad), v20.m_quad);
-          v564 = _mm_add_ps(v559, v561);
-          v565 = _mm_shuffle_ps(v560, v562, 68);
-          v566 = _mm_mul_ps(_mm_sub_ps(v553, v594.m_verticesBinA[2].m_quad), v20.m_quad);
-          v567 = _mm_shuffle_ps(v563, v566, 68);
-          v568 = _mm_shuffle_ps(v563, v566, 238);
-          v569 = _mm_add_ps(_mm_shuffle_ps(v565, v567, 221), _mm_shuffle_ps(v565, v567, 136));
-          v30 = v627;
-          v570 = _mm_cmpltps(_mm_add_ps(_mm_shuffle_ps(_mm_shuffle_ps(v560, v562, 238), v568, 136), v569), v627);
+          v511 = _mm_or_ps(
+                   _mm_andnot_ps(v507, _mm_or_ps(_mm_and_ps(v566, v503), _mm_andnot_ps(v503, v563))),
+                   _mm_and_ps(_mm_or_ps(_mm_and_ps(v555, v505), _mm_andnot_ps(v505, v553)), v507));
+          v512 = _mm_shuffle_ps(v510, _mm_unpackhi_ps(v510, v509), 196);
+          v513 = _mm_mul_ps(_mm_sub_ps(v511, v512), v20.m_quad);
+          v514 = _mm_mul_ps(_mm_sub_ps(v511, v31), v562);
+          v515 = _mm_mul_ps(_mm_sub_ps(v512, v554.m_checkTriangleDots.m_quad), v20.m_quad);
+          v516 = _mm_unpacklo_ps(v513, v514);
+          v517 = _mm_movelh_ps(v516, v515);
+          v518 = _mm_shuffle_ps(_mm_unpackhi_ps(v513, v514), v515, 228);
+          v519 = _mm_add_ps(v517, _mm_shuffle_ps(_mm_movehl_ps(v517, v516), v515, 212));
+          v520 = _mm_mul_ps(_mm_sub_ps(v511, v554.m_verticesA[2].m_quad), v562);
+          v521 = _mm_mul_ps(_mm_sub_ps(v512, v554.m_verticesBinA[1].m_quad), v20.m_quad);
+          v522 = _mm_add_ps(v518, v519);
+          v523 = _mm_mul_ps(_mm_sub_ps(v511, v554.m_verticesA[1].m_quad), v562);
+          v524 = _mm_shuffle_ps(v523, v520, 238);
+          v525 = _mm_shuffle_ps(v523, v520, 68);
+          v526 = _mm_mul_ps(_mm_sub_ps(v512, v554.m_verticesBinA[2].m_quad), v20.m_quad);
+          v527 = _mm_shuffle_ps(v521, v526, 68);
+          v528 = _mm_shuffle_ps(v521, v526, 238);
+          v529 = _mm_add_ps(_mm_shuffle_ps(v525, v527, 221), _mm_shuffle_ps(v525, v527, 136));
+          v30 = v587;
+          v530 = _mm_cmplt_ps(_mm_add_ps(_mm_shuffle_ps(v524, v528, 136), v529), v587);
           switch ( _mm_movemask_ps(
-                     _mm_cmpltps(
+                     _mm_cmplt_ps(
                        _mm_movelh_ps(
-                         _mm_unpacklo_ps(aTb[1].m_rotation.m_col1.m_quad, v627),
-                         _mm_unpacklo_ps(v627, v627)),
-                       v564)) & 7 )
+                         _mm_unpacklo_ps(aTb[1].m_rotation.m_col1.m_quad, v587),
+                         _mm_unpacklo_ps(v587, v587)),
+                       v522)) & 7 )
           {
             case 1:
             case 3:
             case 5:
             case 7:
-              v571 = vars0;
+              v531 = vars0;
               v28 = 5;
-              vars0->m_distance.m_real = _mm_shuffle_ps(v564, v564, 0);
-              v571->m_normalInA = (hkVector4f)v20.m_quad;
+              vars0->m_distance.m_real = _mm_shuffle_ps(v522, v522, 0);
+              v531->m_normalInA = (hkVector4f)v20.m_quad;
               goto LABEL_174;
             case 2:
               goto LABEL_154;
             case 4:
               goto LABEL_156;
             case 6:
-              if ( COERCE_FLOAT(_mm_shuffle_ps(v564, v564, 170)) > COERCE_FLOAT(_mm_shuffle_ps(v564, v564, 85)) )
+              if ( _mm_shuffle_ps(v522, v522, 170).m128_f32[0] > _mm_shuffle_ps(v522, v522, 85).m128_f32[0] )
               {
 LABEL_156:
-                if ( _mm_movemask_ps(v570) & hkcdGskBase::dimToMaskZ[dimB.m_storage] )
+                if ( (_mm_movemask_ps(v530) & hkcdGskBase::dimToMaskZ[dimB.m_storage]) != 0 )
                 {
 LABEL_159:
-                  v572 = vars0;
-                  v573 = _mm_mul_ps(_mm_sub_ps(v31, v594.m_checkTriangleDots.m_quad), v20.m_quad);
+                  v532 = vars0;
+                  v533 = _mm_mul_ps(_mm_sub_ps(v31, v554.m_checkTriangleDots.m_quad), v20.m_quad);
                   vars0->m_normalInA = (hkVector4f)v20.m_quad;
-                  v574 = _mm_add_ps(
-                           _mm_add_ps(_mm_shuffle_ps(v573, v573, 85), _mm_shuffle_ps(v573, v573, 0)),
-                           _mm_shuffle_ps(v573, v573, 170));
-                  v572->m_distance.m_real = v574;
+                  v534 = _mm_add_ps(
+                           _mm_add_ps(_mm_shuffle_ps(v533, v533, 85), _mm_shuffle_ps(v533, v533, 0)),
+                           _mm_shuffle_ps(v533, v533, 170));
+                  v532->m_distance.m_real = v534;
                   if ( dimA.m_storage == 1 )
                   {
-                    v572->m_pointAinA = (hkVector4f)v594.m_verticesA[0];
+                    v532->m_pointAinA = (hkVector4f)v554.m_verticesA[0];
                   }
                   else if ( dimB.m_storage == 1 )
                   {
-                    v572->m_pointAinA.m_quad = _mm_add_ps(_mm_mul_ps(v574, v20.m_quad), v594.m_verticesBinA[0].m_quad);
+                    v532->m_pointAinA.m_quad = _mm_add_ps(_mm_mul_ps(v534, v20.m_quad), v554.m_verticesBinA[0].m_quad);
                   }
                   else
                   {
-                    v572->m_pointAinA = v594.m_closestPointOnEdgeA;
+                    v532->m_pointAinA = v554.m_closestPointOnEdgeA;
                   }
                   goto LABEL_174;
                 }
                 v19 = 0i64;
-                v594.m_verticesBinA[dimB.m_storage++].m_quad = v553;
-                v29.m_quad = (__m128)v594.m_verticesBinA[0];
+                v554.m_verticesBinA[dimB.m_storage++].m_quad = v512;
+                v29.m_quad = (__m128)v554.m_verticesBinA[0];
               }
               else
               {
 LABEL_154:
-                if ( _mm_movemask_ps(v570) & hkcdGskBase::dimToMaskY[dimA.m_storage] )
+                if ( (_mm_movemask_ps(v530) & hkcdGskBase::dimToMaskY[dimA.m_storage]) != 0 )
                   goto LABEL_159;
-                v594.m_verticesA[dimA.m_storage++].m_quad = v552;
-                v29.m_quad = (__m128)v594.m_verticesBinA[0];
+                v554.m_verticesBinA[dimA.m_storage++ - 4].m_quad = v511;
+                v29.m_quad = (__m128)v554.m_verticesBinA[0];
                 v19 = 0i64;
               }
               break;
@@ -2527,17 +2446,17 @@ LABEL_154:
         }
         if ( aTb[1].m_rotation.m_col0.m_quad.m128_i32[0] )
         {
-          v575 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-          v576 = v575[1];
-          if ( v576 < v575[3] )
+          Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+          v536 = Value[1];
+          if ( v536 < Value[3] )
           {
-            *(_QWORD *)v576 = "TtPenetration";
-            v577 = __rdtsc();
-            *(_DWORD *)(v576 + 8) = v577;
-            v575[1] = v576 + 16;
+            *(_QWORD *)v536 = "TtPenetration";
+            v537 = __rdtsc();
+            *(_DWORD *)(v536 + 8) = v537;
+            Value[1] = v536 + 16;
           }
-          v578 = hkcdGskBase::handlePenetration(
-                   &v594,
+          v538 = hkcdGskBase::handlePenetration(
+                   &v554,
                    &shapeInterface,
                    &shapeA,
                    &shapeB,
@@ -2545,16 +2464,16 @@ LABEL_154:
                    &dimA,
                    &dimB,
                    vars0,
-                   &v649);
-          v579 = (_QWORD *)v575[1];
-          v28 = v578;
-          if ( (unsigned __int64)v579 < v575[3] )
+                   &v603);
+          v539 = (_QWORD *)Value[1];
+          v28 = v538;
+          if ( (unsigned __int64)v539 < Value[3] )
           {
-            *v579 = "Et";
-            v580 = __rdtsc();
-            v581 = (signed __int64)(v579 + 2);
-            *(_DWORD *)(v581 - 8) = v580;
-            v575[1] = v581;
+            *v539 = "Et";
+            v540 = __rdtsc();
+            v541 = v539 + 2;
+            *((_DWORD *)v541 - 2) = v540;
+            Value[1] = v541;
           }
         }
         else
@@ -2575,397 +2494,391 @@ LABEL_154:
           v28 = 6;
         }
 LABEL_174:
-        v582 = dimA.m_storage;
-        v583 = dimB.m_storage;
-        v584 = v594.m_verticesBinA[1].m_quad.m128_i8[12];
-        v585 = v594.m_verticesA[0].m_quad.m128_i8[12];
-        v586 = v594.m_verticesA[1].m_quad.m128_i8[12];
-        v587 = v594.m_verticesA[2].m_quad.m128_i8[12];
-        v588 = v594.m_verticesBinA[0].m_quad.m128_i8[12];
-        v4[(LOBYTE(dimA.m_storage) - 2) & 3] = v594.m_verticesBinA[2].m_quad.m128_i8[12];
-        *v4 = v585;
-        v4[1] = v586;
-        v4[2] = v587;
-        v4[v582] = v588;
-        v4[v582 + 1] = v584;
+        v542 = dimA.m_storage;
+        v543 = dimB.m_storage;
+        v544 = v554.m_verticesBinA[1].m_quad.m128_i8[12];
+        v545 = v554.m_verticesA[0].m_quad.m128_i8[12];
+        v546 = v554.m_verticesA[1].m_quad.m128_i8[12];
+        v547 = v554.m_verticesA[2].m_quad.m128_i8[12];
+        v548 = v554.m_verticesBinA[0].m_quad.m128_i8[12];
+        v4[(LOBYTE(dimA.m_storage) - 2) & 3] = v554.m_verticesBinA[2].m_quad.m128_i8[12];
+        *v4 = v545;
+        v4[1] = v546;
+        v4[2] = v547;
+        v4[v542] = v548;
+        v4[v542 + 1] = v544;
         result = v28;
-        v4[4] = v583 | 4 * (v28 | 16 * v582);
+        v4[4] = v543 | (4 * (v28 | (16 * v542)));
         return result;
       case 0x18u:
         v33 = g_vectorfConstants[0];
-        v411 = v29.m_quad;
-        v412 = (__m128 *)v594.m_verticesA;
+        v370 = v29.m_quad;
+        v371 = v554.m_verticesA;
 LABEL_97:
-        v413 = v412[1];
-        v414 = v412[2];
-        v415 = _mm_sub_ps(v412[1], *v412);
-        v416 = _mm_sub_ps(*v412, v414);
-        v417 = _mm_sub_ps(v412[3], *v412);
-        v418 = _mm_sub_ps(v412[2], v413);
-        v419 = _mm_sub_ps(v412[3], v413);
-        v420 = _mm_sub_ps(v412[3], v414);
-        v421 = _mm_sub_ps(
-                 _mm_mul_ps(_mm_shuffle_ps(v419, v419, 201), v418),
-                 _mm_mul_ps(_mm_shuffle_ps(v418, v418, 201), v419));
-        v422 = _mm_shuffle_ps(v421, v421, 201);
-        v423 = _mm_mul_ps(_mm_sub_ps(v411, v412[3]), v33);
-        v424 = _mm_sub_ps(
-                 _mm_mul_ps(_mm_shuffle_ps(v420, v420, 201), v416),
-                 _mm_mul_ps(_mm_shuffle_ps(v416, v416, 201), v420));
-        v425 = _mm_shuffle_ps(v424, v424, 201);
-        v426 = _mm_mul_ps(v423, v425);
-        v427 = _mm_mul_ps(v425, v425);
-        v428 = _mm_sub_ps(
-                 _mm_mul_ps(_mm_shuffle_ps(v417, v417, 201), v415),
-                 _mm_mul_ps(_mm_shuffle_ps(v415, v415, 201), v417));
-        v429 = _mm_mul_ps(v423, v422);
-        v430 = _mm_mul_ps(v422, v422);
-        v431 = _mm_shuffle_ps(v428, v428, 201);
-        v432 = _mm_unpacklo_ps(v429, v426);
-        v433 = _mm_unpackhi_ps(v429, v426);
-        v434 = _mm_mul_ps(v423, v431);
-        v435 = _mm_movelh_ps(v432, v434);
-        v436 = _mm_shuffle_ps(_mm_movehl_ps(v435, v432), v434, 212);
-        v437 = _mm_unpacklo_ps(v430, v427);
-        v438 = _mm_mul_ps(v431, v431);
-        v439 = (__m128i)_mm_add_ps(_mm_shuffle_ps(v433, v434, 228), _mm_add_ps(v435, v436));
-        v440 = _mm_movelh_ps(v437, v438);
-        v441 = _mm_add_ps(
-                 _mm_shuffle_ps(_mm_unpackhi_ps(v430, v427), v438, 228),
-                 _mm_add_ps(v440, _mm_shuffle_ps(_mm_movehl_ps(v440, v437), v438, 212)));
-        v442 = _mm_cmpeqps(v19, v441);
-        v443 = _mm_rcp_ps(v441);
-        v670 = v441;
-        v710 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v441, v443)), v443);
-        LODWORD(v751) = 897988542;
-        v444 = _mm_or_ps(
+        v372 = v371[1].m_quad;
+        v373 = v371[2].m_quad;
+        v374 = _mm_sub_ps(v372, v371->m_quad);
+        v375 = _mm_sub_ps(v371->m_quad, v373);
+        v376 = _mm_sub_ps(v371[3].m_quad, v371->m_quad);
+        v377 = _mm_sub_ps(v373, v372);
+        v378 = _mm_sub_ps(v371[3].m_quad, v372);
+        v379 = _mm_sub_ps(v371[3].m_quad, v373);
+        v380 = _mm_sub_ps(
+                 _mm_mul_ps(_mm_shuffle_ps(v378, v378, 201), v377),
+                 _mm_mul_ps(_mm_shuffle_ps(v377, v377, 201), v378));
+        v381 = _mm_shuffle_ps(v380, v380, 201);
+        v382 = _mm_mul_ps(_mm_sub_ps(v370, v371[3].m_quad), v33);
+        v383 = _mm_sub_ps(
+                 _mm_mul_ps(_mm_shuffle_ps(v379, v379, 201), v375),
+                 _mm_mul_ps(_mm_shuffle_ps(v375, v375, 201), v379));
+        v384 = _mm_shuffle_ps(v383, v383, 201);
+        v385 = _mm_mul_ps(v382, v384);
+        v386 = _mm_mul_ps(v384, v384);
+        v387 = _mm_sub_ps(
+                 _mm_mul_ps(_mm_shuffle_ps(v376, v376, 201), v374),
+                 _mm_mul_ps(_mm_shuffle_ps(v374, v374, 201), v376));
+        v388 = _mm_mul_ps(v382, v381);
+        v389 = _mm_mul_ps(v381, v381);
+        v390 = _mm_shuffle_ps(v387, v387, 201);
+        v391 = _mm_unpacklo_ps(v388, v385);
+        v392 = _mm_unpackhi_ps(v388, v385);
+        v393 = _mm_mul_ps(v382, v390);
+        v394 = _mm_movelh_ps(v391, v393);
+        v395 = _mm_shuffle_ps(_mm_movehl_ps(v394, v391), v393, 212);
+        v396 = _mm_unpacklo_ps(v389, v386);
+        v397 = _mm_mul_ps(v390, v390);
+        v398 = (__m128i)_mm_add_ps(_mm_shuffle_ps(v392, v393, 228), _mm_add_ps(v394, v395));
+        v399 = _mm_movelh_ps(v396, v397);
+        v400 = _mm_add_ps(
+                 _mm_shuffle_ps(_mm_unpackhi_ps(v389, v386), v397, 228),
+                 _mm_add_ps(v399, _mm_shuffle_ps(_mm_movehl_ps(v399, v396), v397, 212)));
+        v401 = _mm_rcp_ps(v400);
+        v624 = v400;
+        v664 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v400, v401)), v401);
+        v402 = _mm_cmpeq_ps(v19, v400);
+        LODWORD(v705) = 897988542;
+        v403 = _mm_or_ps(
                  _mm_andnot_ps(
-                   v442,
-                   _mm_mul_ps(_mm_mul_ps((__m128)_mm_srli_epi32(_mm_slli_epi32(v439, 1u), 1u), (__m128)v439), v710)),
-                 _mm_and_ps(v442, (__m128)xmmword_141A712A0));
-        v445 = _mm_max_ps(
-                 _mm_shuffle_ps(v444, v444, 170),
-                 _mm_max_ps(_mm_shuffle_ps(v444, v444, 85), _mm_shuffle_ps(v444, v444, 0)));
-        v446 = (unsigned __int8)hkVector4Comparison_maskToLastIndex[_mm_movemask_ps(
+                   v402,
+                   _mm_mul_ps(_mm_mul_ps((__m128)_mm_srli_epi32(_mm_slli_epi32(v398, 1u), 1u), (__m128)v398), v664)),
+                 _mm_and_ps(v402, (__m128)xmmword_141A712A0));
+        v404 = _mm_max_ps(
+                 _mm_shuffle_ps(v403, v403, 170),
+                 _mm_max_ps(_mm_shuffle_ps(v403, v403, 85), _mm_shuffle_ps(v403, v403, 0)));
+        v405 = (unsigned __int8)hkVector4Comparison_maskToLastIndex[_mm_movemask_ps(
                                                                       _mm_and_ps(
-                                                                        _mm_cmpleps(v445, v444),
+                                                                        _mm_cmple_ps(v404, v403),
                                                                         (__m128)xmmword_141C1F4F0))];
-        if ( v445.m128_f32[0] < COERCE_FLOAT(_mm_shuffle_ps((__m128)0x358637BEu, (__m128)0x358637BEu, 0)) )
+        if ( v404.m128_f32[0] < _mm_shuffle_ps((__m128)0x358637BEu, (__m128)0x358637BEu, 0).m128_f32[0] )
           goto LABEL_65;
-        v747 = 1066192077;
-        v447 = _mm_or_ps(
-                 _mm_and_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v446], (__m128)xmmword_141A712F0),
-                 _mm_andnot_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v446], v444));
-        if ( v445.m128_f32[0] <= (float)(fmax(
-                                           COERCE_FLOAT(_mm_shuffle_ps(v447, v447, 170)),
+        v701 = 1066192077;
+        v406 = _mm_or_ps(
+                 _mm_and_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v405], (__m128)xmmword_141A712F0),
+                 _mm_andnot_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v405], v403));
+        if ( v404.m128_f32[0] <= (float)(fmax(
+                                           _mm_shuffle_ps(v406, v406, 170).m128_f32[0],
                                            fmax(
-                                             COERCE_FLOAT(_mm_shuffle_ps(v447, v447, 85)),
-                                             COERCE_FLOAT(_mm_shuffle_ps(v447, v447, 0))))
-                                       * COERCE_FLOAT(_mm_shuffle_ps((__m128)0x3F8CCCCDu, (__m128)0x3F8CCCCDu, 0))) )
+                                             _mm_shuffle_ps(v406, v406, 85).m128_f32[0],
+                                             _mm_shuffle_ps(v406, v406, 0).m128_f32[0]))
+                                       * _mm_shuffle_ps((__m128)0x3F8CCCCDu, (__m128)0x3F8CCCCDu, 0).m128_f32[0]) )
         {
-          v448 = 2;
-          v449 = 1;
-          v450 = 4;
-          v451 = 16i64;
-          v452 = 32i64;
-          v453 = 0i64;
-          v454 = 3i64;
-          v455 = _mm_movemask_ps(_mm_cmpleps(v19, (__m128)v439));
+          v407 = 2;
+          v408 = 1;
+          v409 = 4;
+          v410 = 16i64;
+          v411 = 32i64;
+          v412 = 0i64;
+          v413 = 3i64;
+          v414 = _mm_movemask_ps(_mm_cmple_ps(v19, (__m128)v398));
           do
           {
-            if ( v449 & v455 && v448 & v455 )
+            if ( (v408 & v414) != 0 && (v407 & v414) != 0 )
             {
-              v456 = *(__m128 *)((char *)v412 + v452);
-              v457 = _mm_sub_ps(v412[v453], v456);
-              v458 = _mm_sub_ps(v412[3], v456);
-              v459 = _mm_sub_ps(v411, v456);
-              v460 = _mm_mul_ps(v458, v457);
-              v461 = _mm_sub_ps(*(__m128 *)((char *)v412 + v451), v456);
-              v462 = _mm_mul_ps(v459, v457);
-              v463 = _mm_mul_ps(v458, v461);
-              v464 = _mm_mul_ps(v459, v461);
-              if ( (float)((float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v462, v462, 85))
-                                         + COERCE_FLOAT(_mm_shuffle_ps(v462, v462, 0)))
-                                 + COERCE_FLOAT(_mm_shuffle_ps(v462, v462, 170)))
-                         * (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v463, v463, 85))
-                                         + COERCE_FLOAT(_mm_shuffle_ps(v463, v463, 0)))
-                                 + COERCE_FLOAT(_mm_shuffle_ps(v463, v463, 170)))) >= (float)((float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v460, v460, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v460, v460, 0))) + COERCE_FLOAT(_mm_shuffle_ps(v460, v460, 170)))
-                                                                                            * (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v464, v464, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v464, v464, 0))) + COERCE_FLOAT(_mm_shuffle_ps(v464, v464, 170)))) )
-                v448 = v449;
-              v455 &= ~v448;
+              v415 = *(__m128 *)((char *)&v371->m_quad + v411);
+              v416 = _mm_sub_ps(v371[v412].m_quad, v415);
+              v417 = _mm_sub_ps(v371[3].m_quad, v415);
+              v418 = _mm_sub_ps(v370, v415);
+              v419 = _mm_mul_ps(v417, v416);
+              v420 = _mm_sub_ps(*(__m128 *)((char *)&v371->m_quad + v410), v415);
+              v421 = _mm_mul_ps(v418, v416);
+              v422 = _mm_mul_ps(v417, v420);
+              v423 = _mm_mul_ps(v418, v420);
+              if ( (float)((float)((float)(_mm_shuffle_ps(v421, v421, 85).m128_f32[0]
+                                         + _mm_shuffle_ps(v421, v421, 0).m128_f32[0])
+                                 + _mm_shuffle_ps(v421, v421, 170).m128_f32[0])
+                         * (float)((float)(_mm_shuffle_ps(v422, v422, 85).m128_f32[0]
+                                         + _mm_shuffle_ps(v422, v422, 0).m128_f32[0])
+                                 + _mm_shuffle_ps(v422, v422, 170).m128_f32[0])) >= (float)((float)((float)(_mm_shuffle_ps(v419, v419, 85).m128_f32[0] + _mm_shuffle_ps(v419, v419, 0).m128_f32[0])
+                                                                                                  + _mm_shuffle_ps(v419, v419, 170).m128_f32[0])
+                                                                                          * (float)((float)(_mm_shuffle_ps(v423, v423, 85).m128_f32[0] + _mm_shuffle_ps(v423, v423, 0).m128_f32[0])
+                                                                                                  + _mm_shuffle_ps(v423, v423, 170).m128_f32[0])) )
+                v407 = v408;
+              v414 &= ~v407;
             }
-            v448 = v450;
-            v451 = v452;
-            v450 = v449;
-            v449 = __ROL4__(v449, 1);
-            v452 = v453 * 16;
-            ++v453;
-            --v454;
+            v407 = v409;
+            v410 = v411;
+            v409 = v408;
+            v408 = __ROL4__(v408, 1);
+            v411 = v412 * 16;
+            ++v412;
+            --v413;
           }
-          while ( v454 );
-          if ( v455 & 7 )
-            v446 = (unsigned __int8)hkVector4Comparison_maskToFirstIndex[v455];
+          while ( v413 );
+          if ( (v414 & 7) != 0 )
+            v405 = (unsigned __int8)hkVector4Comparison_maskToFirstIndex[v414];
           else
-            v446 = -1;
+            v405 = -1;
         }
-        if ( v446 < 0 )
+        if ( v405 < 0 )
           goto LABEL_65;
-        v412[v446] = v412[3];
-        v29.m_quad = (__m128)v594.m_verticesBinA[0];
-        v31 = v594.m_verticesA[0].m_quad;
-        v594.m_checkTriangleDots = (hkVector4f)v594.m_verticesBinA[0];
+        v371[v405] = (hkcdVertex)v371[3].m_quad;
+        v29.m_quad = (__m128)v554.m_verticesBinA[0];
+        v31 = v554.m_verticesA[0].m_quad;
+        v554.m_checkTriangleDots = (hkVector4f)v554.m_verticesBinA[0];
         if ( dimA.m_storage == 4 )
         {
           dimA.m_storage = 3;
 LABEL_112:
-          v465 = _mm_sub_ps(v31, v594.m_verticesA[2].m_quad);
-          v466 = _mm_shuffle_ps(v465, v465, 201);
-          v467 = _mm_sub_ps(v29.m_quad, v594.m_verticesA[1].m_quad);
-          v468 = _mm_sub_ps(v594.m_verticesA[2].m_quad, v594.m_verticesA[1].m_quad);
-          v469 = _mm_sub_ps(v29.m_quad, v594.m_verticesA[2].m_quad);
-          v470 = _mm_shuffle_ps(v468, v468, 201);
-          v471 = _mm_sub_ps(v594.m_verticesA[1].m_quad, v31);
-          v472 = _mm_sub_ps(v29.m_quad, v31);
-          v473 = _mm_sub_ps(_mm_mul_ps(v466, v468), _mm_mul_ps(v470, v465));
-          v474 = _mm_shuffle_ps(v473, v473, 201);
-          *(__m128 *)&v594.m_lastDimB.m_storage = v474;
-          v475 = _mm_sub_ps(_mm_mul_ps(v470, v467), _mm_mul_ps(_mm_shuffle_ps(v467, v467, 201), v468));
-          v476 = _mm_sub_ps(_mm_mul_ps(v466, v469), _mm_mul_ps(_mm_shuffle_ps(v469, v469, 201), v465));
-          v477 = _mm_mul_ps(_mm_shuffle_ps(v475, v475, 201), v474);
-          v478 = _mm_mul_ps(_mm_shuffle_ps(v476, v476, 201), v474);
-          v479 = _mm_sub_ps(
-                   _mm_mul_ps(_mm_shuffle_ps(v471, v471, 201), v472),
-                   _mm_mul_ps(_mm_shuffle_ps(v472, v472, 201), v471));
-          v480 = _mm_unpacklo_ps(v477, v478);
-          v481 = _mm_mul_ps(_mm_shuffle_ps(v479, v479, 201), v474);
-          v482 = _mm_movelh_ps(v480, v481);
-          v483.m_quad = _mm_add_ps(
-                          _mm_shuffle_ps(_mm_unpackhi_ps(v477, v478), v481, 228),
-                          _mm_add_ps(v482, _mm_shuffle_ps(_mm_movehl_ps(v482, v480), v481, 212)));
-          v484 = _mm_movemask_ps(_mm_cmpltps(v483.m_quad, v19)) & 7;
-          if ( v484 == 7 )
+          v424 = _mm_sub_ps(v31, v554.m_verticesA[2].m_quad);
+          v425 = _mm_shuffle_ps(v424, v424, 201);
+          v426 = _mm_sub_ps(v29.m_quad, v554.m_verticesA[1].m_quad);
+          v427 = _mm_sub_ps(v554.m_verticesA[2].m_quad, v554.m_verticesA[1].m_quad);
+          v428 = _mm_sub_ps(v29.m_quad, v554.m_verticesA[2].m_quad);
+          v429 = _mm_shuffle_ps(v427, v427, 201);
+          v430 = _mm_sub_ps(v554.m_verticesA[1].m_quad, v31);
+          v431 = _mm_sub_ps(v29.m_quad, v31);
+          v432 = _mm_sub_ps(_mm_mul_ps(v425, v427), _mm_mul_ps(v429, v424));
+          v433 = _mm_shuffle_ps(v432, v432, 201);
+          *(__m128 *)&v554.m_lastDimB.m_storage = v433;
+          v434 = _mm_sub_ps(_mm_mul_ps(v429, v426), _mm_mul_ps(_mm_shuffle_ps(v426, v426, 201), v427));
+          v435 = _mm_sub_ps(_mm_mul_ps(v425, v428), _mm_mul_ps(_mm_shuffle_ps(v428, v428, 201), v424));
+          v436 = _mm_mul_ps(_mm_shuffle_ps(v434, v434, 201), v433);
+          v437 = _mm_mul_ps(_mm_shuffle_ps(v435, v435, 201), v433);
+          v438 = _mm_sub_ps(
+                   _mm_mul_ps(_mm_shuffle_ps(v430, v430, 201), v431),
+                   _mm_mul_ps(_mm_shuffle_ps(v431, v431, 201), v430));
+          v439 = _mm_unpacklo_ps(v436, v437);
+          v440 = _mm_mul_ps(_mm_shuffle_ps(v438, v438, 201), v433);
+          v441 = _mm_movelh_ps(v439, v440);
+          v442.m_quad = _mm_add_ps(
+                          _mm_shuffle_ps(_mm_unpackhi_ps(v436, v437), v440, 228),
+                          _mm_add_ps(v441, _mm_shuffle_ps(_mm_movehl_ps(v441, v439), v440, 212)));
+          v443 = _mm_movemask_ps(_mm_cmplt_ps(v442.m_quad, v19)) & 7;
+          if ( v443 == 7 )
           {
-            v485 = _mm_mul_ps(_mm_sub_ps(v31, v29.m_quad), v474);
+            v444 = _mm_mul_ps(_mm_sub_ps(v31, v29.m_quad), v433);
             if ( _mm_movemask_ps(
                    _mm_add_ps(
-                     _mm_add_ps(_mm_shuffle_ps(v485, v485, 85), _mm_shuffle_ps(v485, v485, 0)),
-                     _mm_shuffle_ps(v485, v485, 170))) )
+                     _mm_add_ps(_mm_shuffle_ps(v444, v444, 85), _mm_shuffle_ps(v444, v444, 0)),
+                     _mm_shuffle_ps(v444, v444, 170))) )
             {
-              v594.m_verticesA[0] = v594.m_verticesA[1];
-              v486.m_quad = v31;
-              v31 = v594.m_verticesA[1].m_quad;
-              v594.m_verticesA[1] = (hkcdVertex)v486.m_quad;
-              *(__m128 *)&v594.m_lastDimB.m_storage = _mm_xor_ps(
-                                                        v474,
+              v554.m_verticesA[0] = v554.m_verticesA[1];
+              v445.m_quad = v31;
+              v31 = v554.m_verticesA[1].m_quad;
+              v554.m_verticesA[1] = (hkcdVertex)v445.m_quad;
+              *(__m128 *)&v554.m_lastDimB.m_storage = _mm_xor_ps(
+                                                        v433,
                                                         (__m128)_mm_shuffle_epi32(
                                                                   _mm_insert_epi16((__m128i)0i64, 0x8000u, 1),
                                                                   0));
-              v483.m_quad = _mm_shuffle_ps(v483.m_quad, v483.m_quad, 225);
+              v442.m_quad = _mm_shuffle_ps(v442.m_quad, v442.m_quad, 225);
             }
           }
-          v594.m_checkTriangleDots = (hkVector4f)v483.m_quad;
-          if ( v484 == 7 )
+          v554.m_checkTriangleDots = (hkVector4f)v442.m_quad;
+          if ( v443 == 7 )
             goto LABEL_150;
-          v487 = hkcdGskBase::maskToIndex[v484];
-          if ( (signed int)v487 < 0 )
+          v446 = hkcdGskBase::maskToIndex[v443];
+          if ( (int)v446 < 0 )
           {
-            v488 = v487 + 8;
-            if ( v488 < 3 )
+            v447 = v446 + 8;
+            if ( v447 < 3 )
             {
-              v594.m_verticesA[v488] = v594.m_verticesA[2];
+              v554.m_verticesBinA[v447 - 4] = v554.m_verticesA[2];
               goto LABEL_135;
             }
 LABEL_145:
             dimA.m_storage = 1;
             dimB.m_storage = 1;
 LABEL_146:
-            v392 = _mm_sub_ps(v31, v29.m_quad);
+            v351 = _mm_sub_ps(v31, v29.m_quad);
             goto LABEL_149;
           }
-          v513 = *(char *)(v487 + 5398197060i64);
-          v514 = v487;
-          v515 = *(char *)(v487 + 5398197062i64);
-          v516 = v594.m_verticesA[v514].m_quad;
-          v517 = _mm_sub_ps(v29.m_quad, v516);
-          v518 = _mm_sub_ps(v594.m_verticesA[v515].m_quad, v516);
-          v519 = _mm_mul_ps(_mm_sub_ps(v594.m_verticesA[v513].m_quad, v516), v517);
+          v472 = hkcdGskBase::vertexToEdgeLut[v446];
+          v473 = v446;
+          v474 = hkcdGskBase::vertexToEdgeLut[v446 + 2];
+          v475 = v554.m_verticesBinA[v473 - 4].m_quad;
+          v476 = _mm_sub_ps(v29.m_quad, v475);
+          v477 = _mm_sub_ps(v554.m_verticesBinA[v474 - 4].m_quad, v475);
+          v478 = _mm_mul_ps(_mm_sub_ps(v554.m_verticesBinA[v472 - 4].m_quad, v475), v476);
           if ( !_mm_movemask_ps(
                   _mm_add_ps(
-                    _mm_add_ps(_mm_shuffle_ps(v519, v519, 85), _mm_shuffle_ps(v519, v519, 0)),
-                    _mm_shuffle_ps(v519, v519, 170))) )
+                    _mm_add_ps(_mm_shuffle_ps(v478, v478, 85), _mm_shuffle_ps(v478, v478, 0)),
+                    _mm_shuffle_ps(v478, v478, 170))) )
           {
-            v594.m_verticesA[v515] = v594.m_verticesA[2];
+            v554.m_verticesBinA[v474 - 4] = v554.m_verticesA[2];
             goto LABEL_135;
           }
-          v520 = _mm_mul_ps(v518, v517);
-          v594.m_verticesA[v513] = v594.m_verticesA[2];
+          v479 = _mm_mul_ps(v477, v476);
+          v554.m_verticesBinA[v472 - 4] = v554.m_verticesA[2];
           if ( !_mm_movemask_ps(
                   _mm_add_ps(
-                    _mm_add_ps(_mm_shuffle_ps(v520, v520, 85), _mm_shuffle_ps(v520, v520, 0)),
-                    _mm_shuffle_ps(v520, v520, 170))) )
+                    _mm_add_ps(_mm_shuffle_ps(v479, v479, 85), _mm_shuffle_ps(v479, v479, 0)),
+                    _mm_shuffle_ps(v479, v479, 170))) )
           {
 LABEL_135:
-            v29.m_quad = (__m128)v594.m_verticesBinA[0];
-            v31 = v594.m_verticesA[0].m_quad;
-            v594.m_checkTriangleDots = (hkVector4f)v594.m_verticesBinA[0];
+            v29.m_quad = (__m128)v554.m_verticesBinA[0];
+            v31 = v554.m_verticesA[0].m_quad;
+            v554.m_checkTriangleDots = (hkVector4f)v554.m_verticesBinA[0];
             goto LABEL_136;
           }
           dimA.m_storage = 1;
-          if ( (_DWORD)v515 == 2 )
-            LODWORD(v515) = v513;
-          v594.m_verticesA[(signed int)v515] = v594.m_verticesA[1];
+          if ( (_DWORD)v474 == 2 )
+            LODWORD(v474) = v472;
+          v554.m_verticesBinA[(int)v474 - 4] = v554.m_verticesA[1];
 LABEL_133:
-          v31 = v594.m_verticesA[0].m_quad;
-          v29.m_quad = (__m128)v594.m_verticesBinA[0];
-          v594.m_checkTriangleDots = (hkVector4f)v594.m_verticesBinA[0];
-          v392 = _mm_sub_ps(v594.m_verticesA[0].m_quad, v594.m_verticesBinA[0].m_quad);
+          v31 = v554.m_verticesA[0].m_quad;
+          v29.m_quad = (__m128)v554.m_verticesBinA[0];
+          v554.m_checkTriangleDots = (hkVector4f)v554.m_verticesBinA[0];
+          v351 = _mm_sub_ps(v554.m_verticesA[0].m_quad, v554.m_verticesBinA[0].m_quad);
           goto LABEL_149;
         }
         dimB.m_storage = 3;
 LABEL_120:
-        v489 = _mm_sub_ps(v29.m_quad, v594.m_verticesBinA[2].m_quad);
-        v490 = _mm_sub_ps(v594.m_verticesBinA[2].m_quad, v594.m_verticesBinA[1].m_quad);
-        v491 = _mm_shuffle_ps(v489, v489, 201);
-        v492 = _mm_sub_ps(v31, v594.m_verticesBinA[1].m_quad);
-        v493 = _mm_shuffle_ps(v490, v490, 201);
-        v494 = _mm_sub_ps(v31, v594.m_verticesBinA[2].m_quad);
-        v495 = _mm_sub_ps(v594.m_verticesBinA[1].m_quad, v29.m_quad);
-        v496 = _mm_sub_ps(v31, v29.m_quad);
-        v497 = _mm_sub_ps(_mm_mul_ps(v490, v491), _mm_mul_ps(v489, v493));
-        v498 = _mm_shuffle_ps(v497, v497, 201);
-        *(__m128 *)&v594.m_lastDimB.m_storage = v498;
-        v499 = _mm_sub_ps(_mm_mul_ps(v492, v493), _mm_mul_ps(_mm_shuffle_ps(v492, v492, 201), v490));
-        v500 = _mm_mul_ps(_mm_shuffle_ps(v499, v499, 201), v498);
-        v501 = _mm_sub_ps(_mm_mul_ps(v494, v491), _mm_mul_ps(_mm_shuffle_ps(v494, v494, 201), v489));
-        v502 = _mm_mul_ps(_mm_shuffle_ps(v501, v501, 201), v498);
-        v503 = _mm_unpacklo_ps(v500, v502);
-        v504 = _mm_sub_ps(
-                 _mm_mul_ps(_mm_shuffle_ps(v495, v495, 201), v496),
-                 _mm_mul_ps(_mm_shuffle_ps(v496, v496, 201), v495));
-        v505 = _mm_mul_ps(_mm_shuffle_ps(v504, v504, 201), v498);
-        v506 = _mm_movelh_ps(v503, v505);
-        v507.m_quad = _mm_add_ps(
-                        _mm_shuffle_ps(_mm_unpackhi_ps(v500, v502), v505, 228),
-                        _mm_add_ps(v506, _mm_shuffle_ps(_mm_movehl_ps(v506, v503), v505, 212)));
-        v508 = _mm_movemask_ps(_mm_cmpltps(v507.m_quad, v19)) & 7;
-        if ( v508 == 7 )
+        v448 = _mm_sub_ps(v29.m_quad, v554.m_verticesBinA[2].m_quad);
+        v449 = _mm_sub_ps(v554.m_verticesBinA[2].m_quad, v554.m_verticesBinA[1].m_quad);
+        v450 = _mm_shuffle_ps(v448, v448, 201);
+        v451 = _mm_sub_ps(v31, v554.m_verticesBinA[1].m_quad);
+        v452 = _mm_shuffle_ps(v449, v449, 201);
+        v453 = _mm_sub_ps(v31, v554.m_verticesBinA[2].m_quad);
+        v454 = _mm_sub_ps(v554.m_verticesBinA[1].m_quad, v29.m_quad);
+        v455 = _mm_sub_ps(v31, v29.m_quad);
+        v456 = _mm_sub_ps(_mm_mul_ps(v449, v450), _mm_mul_ps(v448, v452));
+        v457 = _mm_shuffle_ps(v456, v456, 201);
+        *(__m128 *)&v554.m_lastDimB.m_storage = v457;
+        v458 = _mm_sub_ps(_mm_mul_ps(v451, v452), _mm_mul_ps(_mm_shuffle_ps(v451, v451, 201), v449));
+        v459 = _mm_mul_ps(_mm_shuffle_ps(v458, v458, 201), v457);
+        v460 = _mm_sub_ps(_mm_mul_ps(v453, v450), _mm_mul_ps(_mm_shuffle_ps(v453, v453, 201), v448));
+        v461 = _mm_mul_ps(_mm_shuffle_ps(v460, v460, 201), v457);
+        v462 = _mm_unpacklo_ps(v459, v461);
+        v463 = _mm_sub_ps(
+                 _mm_mul_ps(_mm_shuffle_ps(v454, v454, 201), v455),
+                 _mm_mul_ps(_mm_shuffle_ps(v455, v455, 201), v454));
+        v464 = _mm_mul_ps(_mm_shuffle_ps(v463, v463, 201), v457);
+        v465 = _mm_movelh_ps(v462, v464);
+        v466.m_quad = _mm_add_ps(
+                        _mm_shuffle_ps(_mm_unpackhi_ps(v459, v461), v464, 228),
+                        _mm_add_ps(v465, _mm_shuffle_ps(_mm_movehl_ps(v465, v462), v464, 212)));
+        v467 = _mm_movemask_ps(_mm_cmplt_ps(v466.m_quad, v19)) & 7;
+        if ( v467 == 7 )
         {
-          v509 = _mm_mul_ps(v498, v496);
+          v468 = _mm_mul_ps(v457, v455);
           if ( _mm_movemask_ps(
                  _mm_add_ps(
-                   _mm_add_ps(_mm_shuffle_ps(v509, v509, 85), _mm_shuffle_ps(v509, v509, 0)),
-                   _mm_shuffle_ps(v509, v509, 170))) )
+                   _mm_add_ps(_mm_shuffle_ps(v468, v468, 85), _mm_shuffle_ps(v468, v468, 0)),
+                   _mm_shuffle_ps(v468, v468, 170))) )
           {
-            v594.m_checkTriangleDots = (hkVector4f)v594.m_verticesBinA[1];
-            v594.m_verticesBinA[0] = v594.m_verticesBinA[1];
-            v510.m_quad = v29.m_quad;
-            v29.m_quad = (__m128)v594.m_verticesBinA[1];
-            v594.m_verticesBinA[1] = (hkcdVertex)v510.m_quad;
-            *(__m128 *)&v594.m_lastDimB.m_storage = _mm_xor_ps(
-                                                      v498,
+            v554.m_checkTriangleDots = (hkVector4f)v554.m_verticesBinA[1];
+            v554.m_verticesBinA[0] = v554.m_verticesBinA[1];
+            v469.m_quad = v29.m_quad;
+            v29.m_quad = (__m128)v554.m_verticesBinA[1];
+            v554.m_verticesBinA[1] = (hkcdVertex)v469.m_quad;
+            *(__m128 *)&v554.m_lastDimB.m_storage = _mm_xor_ps(
+                                                      v457,
                                                       (__m128)_mm_shuffle_epi32(
                                                                 _mm_insert_epi16((__m128i)0i64, 0x8000u, 1),
                                                                 0));
-            v507.m_quad = _mm_shuffle_ps(v507.m_quad, v507.m_quad, 225);
+            v466.m_quad = _mm_shuffle_ps(v466.m_quad, v466.m_quad, 225);
           }
         }
-        v594.m_checkTriangleDots = (hkVector4f)v507.m_quad;
-        if ( v508 == 7 )
+        v554.m_checkTriangleDots = (hkVector4f)v466.m_quad;
+        if ( v467 == 7 )
           goto LABEL_150;
-        v511 = hkcdGskBase::maskToIndex[v508];
-        if ( (signed int)v511 >= 0 )
+        v470 = hkcdGskBase::maskToIndex[v467];
+        if ( (int)v470 >= 0 )
         {
-          v535 = *(char *)(v511 + 5398197060i64);
-          v536 = v511;
-          v537 = *(char *)(v511 + 5398197062i64);
-          v538 = v594.m_verticesBinA[v536].m_quad;
-          v539 = _mm_sub_ps(v31, v538);
-          v540 = _mm_sub_ps(v594.m_verticesBinA[v537].m_quad, v538);
-          v541 = _mm_mul_ps(_mm_sub_ps(v594.m_verticesBinA[v535].m_quad, v538), v539);
+          v494 = hkcdGskBase::vertexToEdgeLut[v470];
+          v495 = v470;
+          v496 = hkcdGskBase::vertexToEdgeLut[v470 + 2];
+          v497 = v554.m_verticesBinA[v495].m_quad;
+          v498 = _mm_sub_ps(v31, v497);
+          v499 = _mm_sub_ps(v554.m_verticesBinA[v496].m_quad, v497);
+          v500 = _mm_mul_ps(_mm_sub_ps(v554.m_verticesBinA[v494].m_quad, v497), v498);
           if ( _mm_movemask_ps(
                  _mm_add_ps(
-                   _mm_add_ps(_mm_shuffle_ps(v541, v541, 85), _mm_shuffle_ps(v541, v541, 0)),
-                   _mm_shuffle_ps(v541, v541, 170))) )
+                   _mm_add_ps(_mm_shuffle_ps(v500, v500, 85), _mm_shuffle_ps(v500, v500, 0)),
+                   _mm_shuffle_ps(v500, v500, 170))) )
           {
-            v542 = _mm_mul_ps(v540, v539);
-            v594.m_verticesBinA[v535] = v594.m_verticesBinA[2];
+            v501 = _mm_mul_ps(v499, v498);
+            v554.m_verticesBinA[v494] = v554.m_verticesBinA[2];
             if ( _mm_movemask_ps(
                    _mm_add_ps(
-                     _mm_add_ps(_mm_shuffle_ps(v542, v542, 85), _mm_shuffle_ps(v542, v542, 0)),
-                     _mm_shuffle_ps(v542, v542, 170))) )
+                     _mm_add_ps(_mm_shuffle_ps(v501, v501, 85), _mm_shuffle_ps(v501, v501, 0)),
+                     _mm_shuffle_ps(v501, v501, 170))) )
             {
               dimB.m_storage = 1;
-              if ( (_DWORD)v537 == 2 )
-                LODWORD(v537) = v535;
-              v594.m_verticesBinA[(signed int)v537] = v594.m_verticesBinA[1];
+              if ( (_DWORD)v496 == 2 )
+                LODWORD(v496) = v494;
+              v554.m_verticesBinA[(int)v496] = v554.m_verticesBinA[1];
               goto LABEL_133;
             }
           }
           else
           {
-            v594.m_verticesBinA[v537] = v594.m_verticesBinA[2];
+            v554.m_verticesBinA[v496] = v554.m_verticesBinA[2];
           }
         }
         else
         {
-          v512 = v511 + 8;
-          if ( v512 >= 3 )
+          v471 = v470 + 8;
+          if ( v471 >= 3 )
             goto LABEL_145;
-          v594.m_verticesBinA[v512] = v594.m_verticesBinA[2];
+          v554.m_verticesBinA[v471] = v554.m_verticesBinA[2];
         }
-        v29.m_quad = (__m128)v594.m_verticesBinA[0];
-        v31 = v594.m_verticesA[0].m_quad;
-        v594.m_checkTriangleDots = (hkVector4f)v594.m_verticesBinA[0];
+        v29.m_quad = (__m128)v554.m_verticesBinA[0];
+        v31 = v554.m_verticesA[0].m_quad;
+        v554.m_checkTriangleDots = (hkVector4f)v554.m_verticesBinA[0];
         goto LABEL_90;
       default:
         goto LABEL_65;
     }
   }
-}   default:
+};
+        goto LABEL_90;
+      default:
         goto LABEL_65;
     }
   }
-})&v594.m_lastDimB.m_storage = _mm_xor_ps(
-                                                      v498,
-                                                      (__m128)_mm_shuffle_epi32(
-                                                                _mm_insert_epi16((__m128i)0i64, 0x8000u, 1),
-                                                                0));
-            v507.m_quad = _mm_shuffle_ps(v507.m_quad, v507.m_quad, 225);
-          }
-        }
-        v594.m_checkTriangleDots = (hkVector4f)v507.m_quad;
-        if ( v508 == 7 )
-      
+}
 
 // File Line: 87
 // RVA: 0x1310A10
 __int64 __fastcall hkcdGsk::getClosestPoint(const void *__formal, hkcdVertex *vertsA, int numVertsA, const void *a4)
 {
   hkcdVertex *v4; // r11
-  hkcdVertex *v5; // r9
+  __int64 *v5; // r9
   char *v6; // r10
   int v7; // ecx
   int v8; // eax
-  unsigned int v9; // ebx
+  int v9; // ebx
   __int64 v10; // rdx
-  hkcdVertex *v11; // r8
+  __int64 *v11; // r8
   __m128 *v12; // r11
   int v13; // ebx
   char *v14; // r10
   __m128 *v15; // r9
-  signed __int64 v16; // r8
+  __int64 v16; // r8
   hkTransformf *aTb; // rsi
   __m128 v18; // xmm10
   __m128 v19; // xmm13
   __int64 v20; // rcx
-  __m128 v21; // xmm3
-  signed __int64 v22; // rax
+  __m128 m_quad; // xmm3
+  __int64 v22; // rax
   __m128 v23; // xmm4
   __m128 v24; // xmm5
   __m128 v25; // xmm6
   __m128 v26; // xmm1
-  unsigned int v27; // er14
-  hkVector4f v28; // xmm12
+  unsigned int v27; // r14d
+  __m128 v28; // xmm12
   __m128 v29; // xmm2
   __m128 v30; // xmm14
   unsigned int v31; // eax
@@ -2973,239 +2886,239 @@ __int64 __fastcall hkcdGsk::getClosestPoint(const void *__formal, hkcdVertex *ve
   __m128 *v33; // rdx
   __m128 *v34; // rcx
   __m128 v35; // xmm5
-  __m128 v36; // xmm1
-  __m128 v37; // xmm6
-  __m128 v38; // xmm7
-  __m128 v39; // xmm1
-  __m128 v40; // xmm3
-  __m128 v41; // xmm2
-  __m128 v42; // xmm2
+  __m128 v36; // xmm6
+  __m128 v37; // xmm7
+  __m128 v38; // xmm3
+  __m128 v39; // xmm2
+  __m128 v40; // xmm2
+  __m128 v41; // xmm1
+  __m128 v42; // xmm4
   __m128 v43; // xmm1
-  __m128 v44; // xmm4
+  __m128 v44; // xmm2
   __m128 v45; // xmm1
-  __m128 v46; // xmm2
-  __m128 v47; // xmm1
-  __m128 v48; // xmm3
+  __m128 v46; // xmm3
+  __m128 v47; // xmm2
+  __m128 v48; // xmm1
   __m128 v49; // xmm2
-  __m128 v50; // xmm1
-  __m128 v51; // xmm2
-  __m128 v52; // xmm0
-  __m128 v53; // xmm7
-  __m128 v54; // xmm3
-  __m128 v55; // xmm6
-  __m128 v56; // xmm5
+  __m128 v50; // xmm0
+  __m128 v51; // xmm7
+  __m128 v52; // xmm3
+  __m128 v53; // xmm6
+  __m128 v54; // xmm5
+  __m128 v55; // xmm5
+  __m128 v56; // xmm1
   __m128 v57; // xmm5
-  __m128 v58; // xmm1
-  __m128 v59; // xmm4
-  __m128 v60; // xmm0
-  __m128 v61; // xmm2
-  __m128 v62; // xmm7
-  __m128 v63; // xmm1
-  __m128 v64; // xmm4
-  __m128 v65; // xmm1
-  __m128 v66; // xmm7
-  __m128 v67; // xmm2
-  signed int v68; // ecx
-  __m128 v69; // xmm1
-  __m128 v70; // xmm3
-  __m128 v71; // xmm15
-  __m128 v72; // xmm1
-  __m128 v73; // xmm6
-  __m128 v74; // xmm4
-  __m128 v75; // xmm9
-  __m128 v76; // xmm8
-  __m128 v77; // xmm7
-  __m128 v78; // xmm2
-  __m128 v79; // xmm5
-  __m128 v80; // xmm1
-  __m128 v81; // xmm13
+  __m128 v58; // xmm4
+  __m128 v59; // xmm0
+  __m128 v60; // xmm2
+  __m128 v61; // xmm7
+  __m128 v62; // xmm1
+  __m128 v63; // xmm4
+  __m128 v64; // xmm1
+  __m128 v65; // xmm7
+  __m128 v66; // xmm2
+  int v67; // ecx
+  __m128 v68; // xmm1
+  __m128 v69; // xmm3
+  __m128 v70; // xmm15
+  __m128 v71; // xmm6
+  __m128 v72; // xmm8
+  __m128 v73; // xmm4
+  __m128 v74; // xmm9
+  __m128 v75; // xmm8
+  __m128 v76; // xmm7
+  __m128 v77; // xmm2
+  __m128 v78; // xmm5
+  __m128 v79; // xmm1
+  __m128 v80; // xmm13
+  __m128 v81; // xmm9
   __m128 v82; // xmm9
-  __m128 v83; // xmm9
-  __m128 v84; // xmm7
-  __m128 v85; // xmm0
-  __m128 v86; // xmm7
-  __m128 v87; // xmm8
-  __m128 v88; // xmm1
+  __m128 v83; // xmm7
+  __m128 v84; // xmm0
+  __m128 v85; // xmm7
+  __m128 v86; // xmm8
+  __m128 v87; // xmm1
+  __m128 v88; // xmm8
   __m128 v89; // xmm8
-  __m128 v90; // xmm8
-  __m128 v91; // xmm2
-  __m128 v92; // xmm9
-  int v93; // er8
-  __m128 v94; // xmm14
-  __m128 v95; // xmm1
-  __m128 v96; // xmm2
-  __m128 v97; // xmm15
-  __m128 v98; // xmm1
-  __m128 v99; // xmm9
-  __m128 v100; // xmm1
-  __m128 v101; // xmm2
-  __m128 v102; // xmm8
-  __m128 v103; // xmm12
-  __m128 v104; // xmm1
-  __m128 v105; // xmm7
-  __m128 v106; // xmm4
-  __m128 v107; // xmm1
-  __m128 v108; // xmm2
-  __m128 v109; // xmm1
-  __m128 v110; // xmm3
+  __m128 v90; // xmm2
+  __m128 v91; // xmm9
+  int v92; // r8d
+  __m128 v93; // xmm14
+  __m128 v94; // xmm1
+  __m128 v95; // xmm2
+  __m128 v96; // xmm15
+  __m128 v97; // xmm1
+  __m128 v98; // xmm9
+  __m128 v99; // xmm1
+  __m128 v100; // xmm2
+  __m128 v101; // xmm8
+  __m128 v102; // xmm12
+  __m128 v103; // xmm1
+  __m128 v104; // xmm7
+  __m128 v105; // xmm4
+  __m128 v106; // xmm1
+  __m128 v107; // xmm2
+  __m128 v108; // xmm1
+  __m128 v109; // xmm3
+  __m128 v110; // xmm1
   __m128 v111; // xmm1
-  __m128 v112; // xmm1
-  __m128 v113; // xmm6
-  __m128 v114; // xmm0
-  __m128 v115; // xmm2
-  __m128 v116; // xmm0
-  __m128 v117; // xmm3
-  __m128 v118; // xmm1
-  __m128 v119; // xmm5
-  __m128 v120; // xmm3
-  __m128 v121; // xmm5
-  __m128 v122; // xmm0
-  __m128 v123; // xmm2
-  __m128 v124; // xmm1
-  __m128 v125; // xmm2
-  __m128 v126; // xmm11
-  __m128 v127; // xmm9
-  __m128 v128; // xmm1
-  __m128 v129; // xmm5
-  __m128 v130; // xmm1
-  __m128 v131; // xmm8
+  __m128 v112; // xmm6
+  __m128 v113; // xmm0
+  __m128 v114; // xmm2
+  __m128 v115; // xmm0
+  __m128 v116; // xmm3
+  __m128 v117; // xmm1
+  __m128 v118; // xmm5
+  __m128 v119; // xmm0
+  __m128 v120; // xmm2
+  __m128 v121; // xmm1
+  __m128 v122; // xmm2
+  __m128 v123; // xmm11
+  __m128 v124; // xmm9
+  __m128 v125; // xmm1
+  __m128 v126; // xmm5
+  __m128 v127; // xmm1
+  __m128 v128; // xmm8
+  __m128 v129; // xmm1
+  __m128 v130; // xmm7
+  __m128 v131; // xmm5
   __m128 v132; // xmm1
-  __m128 v133; // xmm7
-  __m128 v134; // xmm5
-  __m128 v135; // xmm1
-  __m128 v136; // xmm3
-  __m128 v137; // xmm1
-  __m128 v138; // xmm4
-  __m128 v139; // xmm1
-  __m128 v140; // xmm2
-  __m128 v141; // xmm6
-  __m128 v142; // xmm1
-  __m128 v143; // xmm3
-  __m128 v144; // xmm1
-  __m128 v145; // xmm5
-  __m128 v146; // xmm4
-  __m128 v147; // xmm2
-  __m128 v148; // xmm1
-  __m128 v149; // xmm3
-  __m128 v150; // xmm3
-  __m128 v151; // xmm2
-  __m128 v152; // xmm8
-  __m128 v153; // xmm15
-  __m128 v154; // xmm11
-  __m128 v155; // xmm1
-  __m128 v156; // xmm3
-  __m128 v157; // xmm1
-  __m128 v158; // xmm2
-  __m128 v159; // xmm0
-  __m128 v160; // xmm0
-  __m128 v161; // xmm1
-  __m128 v162; // xmm3
-  __m128 v163; // xmm6
-  __m128 v164; // xmm6
-  __m128 v165; // xmm7
-  __m128 v166; // xmm4
-  __m128 v167; // xmm5
-  __m128 v168; // xmm1
-  __m128 v169; // xmm3
-  __m128 v170; // xmm0
-  __m128 v171; // xmm2
-  __m128 v172; // xmm7
+  __m128 v133; // xmm3
+  __m128 v134; // xmm1
+  __m128 v135; // xmm4
+  __m128 v136; // xmm1
+  __m128 v137; // xmm2
+  __m128 v138; // xmm6
+  __m128 v139; // xmm0
+  __m128 v140; // xmm3
+  __m128 v141; // xmm0
+  __m128 v142; // xmm5
+  __m128 v143; // xmm4
+  __m128 v144; // xmm2
+  __m128 v145; // xmm0
+  __m128 v146; // xmm3
+  __m128 v147; // xmm3
+  __m128 v148; // xmm2
+  __m128 v149; // xmm8
+  __m128 v150; // xmm15
+  __m128 v151; // xmm11
+  __m128 v152; // xmm1
+  __m128 v153; // xmm3
+  __m128 v154; // xmm1
+  __m128 v155; // xmm2
+  __m128 v156; // xmm0
+  __m128 v157; // xmm0
+  __m128 v158; // xmm1
+  __m128 v159; // xmm3
+  __m128 v160; // xmm6
+  __m128 v161; // xmm6
+  __m128 v162; // xmm7
+  __m128 v163; // xmm4
+  __m128 v164; // xmm5
+  __m128 v165; // xmm1
+  __m128 v166; // xmm6
+  __m128 v167; // xmm3
+  __m128 v168; // xmm0
+  __m128 v169; // xmm2
+  __m128 v170; // xmm7
+  __m128 v171; // xmm1
+  __m128 v172; // xmm3
   __m128 v173; // xmm1
-  __m128 v174; // xmm3
-  __m128 v175; // xmm1
-  __m128 v176; // xmm7
-  __m128 v177; // xmm2
-  __m128 v178; // xmm1
-  __m128 v179; // xmm3
-  __m128 v180; // xmm6
-  __m128 v181; // xmm9
-  __m128 v182; // xmm5
-  __m128 v183; // xmm10
-  __m128 v184; // xmm7
-  __m128 v185; // xmm15
-  __m128 v186; // xmm10
-  __m128 v187; // xmm4
-  __m128 v188; // xmm7
-  __m128 v189; // xmm2
-  __m128 v190; // xmm8
-  __m128 v191; // xmm8
+  __m128 v174; // xmm7
+  __m128 v175; // xmm2
+  __m128 v176; // xmm1
+  __m128 v177; // xmm3
+  __m128 v178; // xmm6
+  __m128 v179; // xmm9
+  __m128 v180; // xmm5
+  __m128 v181; // xmm10
+  __m128 v182; // xmm7
+  __m128 v183; // xmm15
+  __m128 v184; // xmm10
+  __m128 v185; // xmm4
+  __m128 v186; // xmm7
+  __m128 v187; // xmm2
+  __m128 v188; // xmm8
+  __m128 v189; // xmm8
+  __m128 v190; // xmm10
+  __m128 v191; // xmm7
   __m128 v192; // xmm10
   __m128 v193; // xmm7
-  __m128 v194; // xmm10
-  __m128 v195; // xmm7
-  __m128 v196; // xmm1
-  __m128 v197; // xmm9
-  __m128 v198; // xmm9
-  __m128 v199; // xmm2
-  __m128 v200; // xmm10
-  int v201; // eax
+  __m128 v194; // xmm1
+  __m128 v195; // xmm9
+  __m128 v196; // xmm9
+  __m128 v197; // xmm2
+  __m128 v198; // xmm10
+  int v199; // eax
+  float v200; // xmm1_4
+  float v201; // xmm11_4
   float v202; // xmm1_4
   float v203; // xmm11_4
-  float v204; // xmm1_4
-  float v205; // xmm11_4
-  int v206; // ecx
-  __m128 v207; // xmm15
-  __m128 v208; // xmm7
-  __m128 v209; // xmm5
-  __m128 v210; // xmm2
-  __m128 v211; // xmm4
-  __m128 v212; // xmm13
+  int v204; // ecx
+  __m128 v205; // xmm15
+  __m128 v206; // xmm7
+  __m128 v207; // xmm5
+  __m128 v208; // xmm2
+  __m128 v209; // xmm4
+  __m128 v210; // xmm13
+  __m128 v211; // xmm1
+  __m128 v212; // xmm4
   __m128 v213; // xmm4
-  __m128 v214; // xmm4
-  __m128 v215; // xmm2
-  __m128 v216; // xmm0
-  __m128 v217; // xmm9
+  __m128 v214; // xmm2
+  __m128 v215; // xmm9
+  __m128 v216; // xmm1
+  __m128 v217; // xmm0
   __m128 v218; // xmm2
   __m128 v219; // xmm1
-  __m128 v220; // xmm6
-  __m128 v221; // xmm3
-  __m128 v222; // xmm2
-  __m128 v223; // xmm6
-  int v224; // ecx
+  __m128 v220; // xmm3
+  __m128 v221; // xmm2
+  __m128 v222; // xmm6
+  __m128 v223; // xmm2
+  __m128 v224; // xmm6
   int v225; // ecx
   int v226; // ecx
   int v227; // ecx
-  __m128 v228; // xmm1
-  __m128 v229; // xmm2
-  __m128 v230; // xmm11
-  __m128 v231; // xmm1
-  __m128 v232; // xmm2
-  __m128 v233; // xmm5
-  __m128 v234; // xmm10
-  __m128 v235; // xmm1
-  __m128 v236; // xmm9
-  __m128 v237; // xmm6
-  __m128 v238; // xmm1
-  __m128 v239; // xmm3
-  __m128 v240; // xmm1
-  __m128 v241; // xmm5
-  __m128 v242; // xmm1
-  __m128 v243; // xmm7
-  __m128 v244; // xmm0
-  __m128 v245; // xmm2
-  __m128 v246; // xmm1
-  __m128 v247; // xmm2
-  __m128 v248; // xmm8
-  __m128 v249; // xmm1
-  __m128 v250; // xmm0
-  __m128 v251; // xmm3
-  __m128 v252; // xmm2
-  __m128 v253; // xmm0
-  __m128 v254; // xmm1
-  int v255; // ecx
-  float v256; // xmm1_4
-  float v257; // xmm11_4
-  signed int v258; // eax
-  signed int v259; // eax
-  signed int v260; // eax
-  __m128 v261; // xmm1
-  __m128 v262; // xmm3
-  __m128 v263; // xmm2
-  __m128 v264; // xmm6
-  __m128 v265; // xmm2
-  __m128 v266; // xmm3
-  __m128 v267; // xmm4
-  __m128 v268; // xmm12
+  int v228; // ecx
+  __m128 v229; // xmm1
+  __m128 v230; // xmm2
+  __m128 v231; // xmm11
+  __m128 v232; // xmm1
+  __m128 v233; // xmm2
+  __m128 v234; // xmm5
+  __m128 v235; // xmm10
+  __m128 v236; // xmm1
+  __m128 v237; // xmm9
+  __m128 v238; // xmm6
+  __m128 v239; // xmm1
+  __m128 v240; // xmm3
+  __m128 v241; // xmm1
+  __m128 v242; // xmm5
+  __m128 v243; // xmm1
+  __m128 v244; // xmm7
+  __m128 v245; // xmm0
+  __m128 v246; // xmm2
+  __m128 v247; // xmm1
+  __m128 v248; // xmm2
+  __m128 v249; // xmm8
+  __m128 v250; // xmm1
+  __m128 v251; // xmm0
+  __m128 v252; // xmm3
+  __m128 v253; // xmm2
+  __m128 v254; // xmm0
+  __m128 v255; // xmm0
+  int v256; // ecx
+  float v257; // xmm1_4
+  float v258; // xmm11_4
+  int v259; // eax
+  int v260; // eax
+  int v261; // eax
+  __m128 v262; // xmm1
+  __m128 v263; // xmm3
+  __m128 v264; // xmm2
+  __m128 v265; // xmm6
+  __m128 v266; // xmm2
+  __m128 v267; // xmm3
+  __m128 v268; // xmm4
   __m128 v269; // xmm1
   __m128 v270; // xmm15
   __m128 v271; // xmm5
@@ -3214,497 +3127,462 @@ __int64 __fastcall hkcdGsk::getClosestPoint(const void *__formal, hkcdVertex *ve
   __m128 v274; // xmm1
   __m128 v275; // xmm4
   __m128 v276; // xmm2
-  __m128 v277; // xmm0
-  __m128 v278; // xmm1
-  __m128 v279; // xmm8
-  __m128 v280; // xmm10
-  __m128 v281; // xmm11
-  __m128 v282; // xmm7
-  __m128 v283; // xmm3
-  __m128 v284; // xmm1
-  __m128 v285; // xmm8
-  __m128 v286; // xmm9
-  __m128 v287; // xmm1
-  __m128 v288; // xmm1
-  int v289; // er8
-  int v290; // er9
-  __int64 v291; // rcx
-  __m128 v292; // xmm1
-  __m128 *v293; // rdx
-  int v294; // eax
-  __m128 v295; // xmm0
+  __m128 v277; // xmm8
+  __m128 v278; // xmm10
+  __m128 v279; // xmm11
+  __m128 v280; // xmm7
+  __m128 v281; // xmm3
+  __int128 v282; // xmm1
+  __m128 v283; // xmm8
+  __m128 v284; // xmm9
+  __m128 v285; // xmm1
+  __m128 v286; // xmm1
+  int v287; // r8d
+  int v288; // r9d
+  hkcdVertex *v289; // rcx
+  __m128 v290; // xmm1
+  __m128 *v291; // rdx
+  int v292; // eax
+  __m128 v293; // xmm0
+  __m128 v294; // xmm12
+  __m128 v295; // xmm1
   __m128 v296; // xmm12
   __m128 v297; // xmm1
-  __m128 v298; // xmm12
+  __m128 v298; // xmm6
   __m128 v299; // xmm1
-  __m128 v300; // xmm6
+  __m128 v300; // xmm15
   __m128 v301; // xmm1
-  __m128 v302; // xmm15
+  __m128 v302; // xmm2
   __m128 v303; // xmm1
   __m128 v304; // xmm2
   __m128 v305; // xmm1
-  __m128 v306; // xmm2
+  __int64 v306; // r10
   __m128 v307; // xmm1
-  unsigned int v308; // eax
-  __int64 v309; // r10
-  __m128 v310; // xmm1
-  __m128 v311; // xmm2
-  __m128 v312; // xmm4
-  __m128 v313; // xmm3
+  __m128 v308; // xmm2
+  __m128 v309; // xmm4
+  __m128 v310; // xmm3
+  __m128 v311; // xmm1
+  __m128 v312; // xmm6
+  __m128 v313; // xmm14
   __m128 v314; // xmm1
-  __m128 v315; // xmm6
-  __m128 v316; // xmm14
-  __m128 v317; // xmm1
-  __m128 v318; // xmm9
-  __m128 v319; // xmm12
-  __m128 v320; // xmm11
+  __m128 v315; // xmm9
+  __m128 v316; // xmm12
+  __m128 v317; // xmm11
+  __m128 v318; // xmm1
+  __m128 v319; // xmm10
+  __m128 v320; // xmm1
   __m128 v321; // xmm1
-  __m128 v322; // xmm10
-  __m128 v323; // xmm1
+  __m128 v322; // xmm1
+  __m128 v323; // xmm13
   __m128 v324; // xmm1
-  __m128 v325; // xmm15
-  __m128 v326; // xmm1
-  __m128 v327; // xmm13
-  __m128 v328; // xmm1
-  __m128i v329; // xmm8
-  __m128i v330; // xmm2
-  __m128i v331; // xmm3
-  __m128 v332; // xmm11
-  __m128i v333; // xmm4
-  __m128i v334; // xmm5
-  __m128i v335; // xmm9
-  __m128i v336; // xmm6
-  __m128 v337; // xmm0
-  __m128 v338; // xmm1
-  __m128i v339; // xmm7
-  __m128 v340; // xmm0
-  __m128 v341; // xmm13
-  __m128 v342; // xmm14
-  __m128 v343; // xmm15
-  __m128 *v344; // rcx
-  __int64 v345; // r8
-  __m128 v346; // xmm9
+  __m128 v325; // xmm13
+  __m128 v326; // xmm14
+  __m128 v327; // xmm15
+  __m128 *p_m_quad; // rcx
+  __int64 v329; // r8
+  __m128 v330; // xmm9
+  __m128 v331; // xmm1
+  __m128 v332; // xmm8
+  __m128 v333; // xmm1
+  __m128 v334; // xmm12
+  __m128 v335; // xmm1
+  __m128 v336; // xmm1
+  __m128 v337; // xmm13
+  __m128 v338; // xmm14
+  __m128 *v339; // rcx
+  __int64 v340; // rdx
+  __m128 v341; // xmm1
+  __m128 v342; // xmm8
+  __m128 v343; // xmm12
+  __m128 v344; // xmm1
+  __m128 v345; // xmm1
+  __m128 v346; // xmm6
   __m128 v347; // xmm1
-  __m128 v348; // xmm10
-  __m128 v349; // xmm8
-  __m128 v350; // xmm11
-  __m128 v351; // xmm1
-  __m128 v352; // xmm12
-  __m128 v353; // xmm7
-  __m128i v354; // xmm2
+  __m128 v348; // xmm9
+  __m128 v349; // xmm11
+  __m128 v350; // xmm15
+  __m128 v351; // xmm8
+  __m128 v352; // xmm6
+  __m128 v353; // xmm9
+  __m128 v354; // xmm5
   __m128 v355; // xmm1
-  __m128 v356; // xmm1
-  __m128i v357; // xmm3
-  __m128 v358; // xmm6
-  __m128 v359; // xmm4
-  __m128i v360; // xmm1
-  __m128i v361; // xmm5
-  __m128 v362; // xmm11
-  __m128 v363; // xmm0
-  __m128 v364; // xmm13
-  __m128 v365; // xmm14
-  __m128 *v366; // rcx
-  __int64 v367; // rdx
-  __m128 v368; // xmm9
-  __m128 v369; // xmm10
-  __m128 v370; // xmm1
-  __m128 v371; // xmm11
-  __m128 v372; // xmm8
-  __m128 v373; // xmm12
-  __m128 v374; // xmm1
-  __m128 v375; // xmm1
-  __m128 v376; // xmm6
-  __m128 v377; // xmm1
-  __m128i v378; // xmm2
-  __m128i v379; // xmm4
-  __m128 v380; // xmm7
-  __m128 v381; // xmm3
-  __m128i v382; // xmm1
-  __m128i v383; // xmm5
-  __m128 v384; // xmm9
-  __m128 v385; // xmm11
-  __m128 v386; // xmm15
-  __m128 v387; // xmm8
-  __m128 v388; // xmm6
+  __m128 v356; // xmm4
+  __m128 v357; // xmm1
+  __m128 v358; // xmm2
+  int v359; // eax
+  __m128 v360; // xmm4
+  __m128 v361; // xmm1
+  __m128 v362; // xmm2
+  __m128 v363; // xmm1
+  __m128 v364; // xmm1
+  __m128 v365; // xmm8
+  __m128 v366; // xmm15
+  __m128 v367; // xmm2
+  __m128 v368; // xmm6
+  __m128 v369; // xmm1
+  __m128 v370; // xmm15
+  __m128 *v371; // r9
+  __m128 v372; // xmm1
+  __m128 v373; // xmm2
+  __m128 v374; // xmm6
+  __m128 v375; // xmm4
+  __m128 v376; // xmm5
+  __m128 v377; // xmm3
+  __m128 v378; // xmm0
+  __m128 v379; // xmm1
+  __m128 v380; // xmm9
+  __m128 v381; // xmm9
+  __m128 v382; // xmm3
+  __m128 v383; // xmm8
+  __m128 v384; // xmm8
+  __m128 v385; // xmm0
+  __m128 v386; // xmm8
+  __m128 v387; // xmm4
+  __m128 v388; // xmm5
   __m128 v389; // xmm9
-  __m128 v390; // xmm5
+  __m128 v390; // xmm4
   __m128 v391; // xmm1
-  __m128 v392; // xmm4
-  __m128 v393; // xmm1
+  __m128 v392; // xmm5
+  __m128 v393; // xmm3
   __m128 v394; // xmm2
-  int v395; // eax
-  __m128 v396; // xmm4
-  __m128 v397; // xmm1
-  __m128 v398; // xmm2
-  __m128 v399; // xmm1
-  __m128 v400; // xmm1
-  __m128 v401; // xmm8
-  __m128 v402; // xmm15
-  __m128 v403; // xmm2
+  __m128 v395; // xmm0
+  __m128 v396; // xmm1
+  __m128 v397; // xmm4
+  __m128i v398; // xmm5
+  __m128 v399; // xmm2
+  __m128 v400; // xmm9
+  __m128 v401; // xmm0
+  __m128 v402; // xmm4
+  __m128 v403; // xmm4
   __m128 v404; // xmm6
-  __m128 v405; // xmm1
-  __m128 v406; // xmm15
-  __m128 *v407; // r9
-  __m128 v408; // xmm1
-  __m128 v409; // xmm2
-  __m128 v410; // xmm6
-  __m128 v411; // xmm4
-  __m128 v412; // xmm5
-  __m128 v413; // xmm3
-  __m128 v414; // xmm0
-  __m128 v415; // xmm1
-  __m128 v416; // xmm9
-  __m128 v417; // xmm9
-  __m128 v418; // xmm3
-  __m128 v419; // xmm8
-  __m128 v420; // xmm8
-  __m128 v421; // xmm0
-  __m128 v422; // xmm8
-  __m128 v423; // xmm4
+  int v405; // edx
+  __m128 v406; // xmm2
+  int v407; // eax
+  int v408; // ecx
+  int v409; // ebx
+  __int64 v410; // rdi
+  __int64 v411; // r10
+  __int64 v412; // r8
+  __int64 v413; // r11
+  int v414; // edx
+  __m128 v415; // xmm0
+  __m128 v416; // xmm2
+  __m128 v417; // xmm4
+  __m128 v418; // xmm7
+  __m128 v419; // xmm5
+  __m128 v420; // xmm1
+  __m128 v421; // xmm3
+  __m128 v422; // xmm4
+  __m128 v423; // xmm7
   __m128 v424; // xmm5
-  __m128 v425; // xmm9
-  __m128 v426; // xmm4
-  __m128 v427; // xmm1
-  __m128 v428; // xmm5
-  __m128 v429; // xmm3
-  __m128 v430; // xmm2
-  __m128 v431; // xmm0
-  __m128 v432; // xmm1
-  __m128 v433; // xmm4
-  __m128i v434; // xmm5
-  __m128 v435; // xmm2
-  __m128 v436; // xmm9
-  __m128 v437; // xmm2
-  __m128 v438; // xmm0
-  __m128 v439; // xmm4
-  __m128 v440; // xmm6
-  signed int v441; // edx
-  __m128 v442; // xmm2
-  signed int v443; // eax
-  signed int v444; // ecx
-  signed int v445; // ebx
-  signed __int64 v446; // rdi
-  signed __int64 v447; // r10
-  __int64 v448; // r8
-  signed __int64 v449; // r11
-  int v450; // edx
-  __m128 v451; // xmm0
-  __m128 v452; // xmm2
-  __m128 v453; // xmm4
+  __m128 v425; // xmm6
+  __m128 v426; // xmm1
+  __m128 v427; // xmm4
+  __m128 v428; // xmm2
+  __m128 v429; // xmm11
+  __m128 v430; // xmm7
+  __m128 v431; // xmm3
+  __m128 v432; // xmm8
+  __m128 v433; // xmm8
+  __m128 v434; // xmm11
+  __m128 v435; // xmm6
+  __m128 v436; // xmm11
+  __m128 v437; // xmm6
+  __m128 v438; // xmm7
+  __m128 v439; // xmm1
+  __m128 v440; // xmm7
+  __m128 v441; // xmm2
+  __m128 v442; // xmm11
+  int v443; // ecx
+  __m128 v444; // xmm2
+  __m128 v445; // xmm0
+  __int64 v446; // rcx
+  int v447; // ecx
+  __m128 v448; // xmm5
+  __m128 v449; // xmm3
+  __m128 v450; // xmm4
+  __m128 v451; // xmm11
+  __m128 v452; // xmm1
+  __m128 v453; // xmm6
   __m128 v454; // xmm7
-  __m128 v455; // xmm5
-  __m128 v456; // xmm1
-  __m128 v457; // xmm3
-  __m128 v458; // xmm4
-  __m128 v459; // xmm7
-  __m128 v460; // xmm5
+  __m128 v455; // xmm13
+  __m128 v456; // xmm8
+  __m128 v457; // xmm8
+  __m128 v458; // xmm11
+  __m128 v459; // xmm11
+  __m128 v460; // xmm6
   __m128 v461; // xmm6
   __m128 v462; // xmm1
-  __m128 v463; // xmm4
-  __m128 v464; // xmm2
-  __m128 v465; // xmm11
-  __m128 v466; // xmm7
-  __m128 v467; // xmm3
-  __m128 v468; // xmm8
-  __m128 v469; // xmm8
-  __m128 v470; // xmm11
-  __m128 v471; // xmm6
-  __m128 v472; // xmm11
-  __m128 v473; // xmm6
-  __m128 v474; // xmm7
-  __m128 v475; // xmm1
-  __m128 v476; // xmm7
-  __m128 v477; // xmm2
-  __m128 v478; // xmm11
-  int v479; // ecx
-  __m128 v480; // xmm2
-  hkcdVertex v481; // xmm0
-  __int64 v482; // rcx
-  signed int v483; // ecx
-  __m128 v484; // xmm5
-  __m128 v485; // xmm3
-  __m128 v486; // xmm4
-  __m128 v487; // xmm11
+  __m128 v463; // xmm7
+  __m128 v464; // xmm7
+  __m128 v465; // xmm2
+  __m128 v466; // xmm11
+  int v467; // ecx
+  __m128 v468; // xmm2
+  __m128 v469; // xmm0
+  __int64 v470; // rcx
+  int v471; // ecx
+  __int64 v472; // r9
+  __int64 v473; // rax
+  __int64 v474; // rcx
+  __m128 v475; // xmm0
+  __m128 v476; // xmm12
+  __m128 v477; // xmm3
+  __m128 v478; // xmm2
+  __m128 v479; // xmm3
+  __m128 v480; // xmm4
+  __m128 v481; // xmm9
+  __m128 v482; // xmm5
+  __m128 v483; // xmm1
+  __m128 v484; // xmm2
+  __m128 v485; // xmm1
+  __m128 v486; // xmm6
+  __m128 v487; // xmm4
   __m128 v488; // xmm1
-  __m128 v489; // xmm6
-  __m128 v490; // xmm7
-  __m128 v491; // xmm13
+  __m128 v489; // xmm2
+  __m128 v490; // xmm8
+  __m128 v491; // xmm8
   __m128 v492; // xmm8
-  __m128 v493; // xmm8
-  __m128 v494; // xmm11
-  __m128 v495; // xmm11
-  __m128 v496; // xmm6
-  __m128 v497; // xmm6
-  __m128 v498; // xmm1
-  __m128 v499; // xmm7
-  __m128 v500; // xmm7
-  __m128 v501; // xmm2
-  __m128 v502; // xmm11
-  int v503; // ecx
-  __m128 v504; // xmm2
-  hkcdVertex v505; // xmm0
-  __int64 v506; // rcx
-  signed int v507; // ecx
-  __int64 v508; // r9
-  __int64 v509; // rax
-  __int64 v510; // rcx
-  __m128 v511; // xmm0
-  __m128 v512; // xmm12
-  __m128 v513; // xmm3
-  __m128 v514; // xmm2
+  __m128 v493; // xmm2
+  __int64 v494; // r9
+  __int64 v495; // rax
+  __int64 v496; // rcx
+  __m128 v497; // xmm0
+  __m128 v498; // xmm14
+  __m128 v499; // xmm3
+  __m128 v500; // xmm2
+  __m128 v501; // xmm3
+  __m128 v502; // xmm4
+  __m128 v503; // xmm6
+  __m128 v504; // xmm8
+  __m128 v505; // xmm2
+  __m128 v506; // xmm4
+  __m128 v507; // xmm7
+  __m128 v508; // xmm3
+  __m128 v509; // xmm5
+  __m128 v510; // xmm9
+  __m128 v511; // xmm10
+  __m128 v512; // xmm9
+  __m128 v513; // xmm6
+  __m128 v514; // xmm0
   __m128 v515; // xmm3
-  __m128 v516; // xmm4
-  __m128 v517; // xmm9
-  __m128 v518; // xmm5
-  __m128 v519; // xmm1
-  __m128 v520; // xmm2
-  __m128 v521; // xmm1
-  __m128 v522; // xmm6
-  __m128 v523; // xmm4
+  __m128 v516; // xmm1
+  __m128 v517; // xmm2
+  __m128 v518; // xmm7
+  __m128 v519; // xmm6
+  __m128 v520; // xmm4
+  __m128 v521; // xmm3
+  __m128 v522; // xmm2
+  __m128 v523; // xmm0
   __m128 v524; // xmm1
-  __m128 v525; // xmm2
-  __m128 v526; // xmm8
-  __m128 v527; // xmm8
-  __m128 v528; // xmm8
-  __m128 v529; // xmm2
-  __int64 v530; // r9
-  __int64 v531; // rax
-  __int64 v532; // rcx
-  __m128 v533; // xmm0
-  __m128 v534; // xmm14
-  __m128 v535; // xmm3
-  __m128 v536; // xmm2
-  __m128 v537; // xmm3
-  __m128 v538; // xmm4
-  __m128 v539; // xmm6
-  __m128 v540; // xmm8
-  __m128 v541; // xmm2
-  __m128 v542; // xmm4
-  __m128 v543; // xmm7
-  __m128 v544; // xmm3
-  __m128 v545; // xmm5
-  __m128 v546; // xmm9
-  __m128 v547; // xmm10
-  __m128 v548; // xmm9
-  __m128 v549; // xmm6
-  __m128 v550; // xmm0
-  __m128 v551; // xmm3
-  __m128 v552; // xmm1
-  __m128 v553; // xmm2
-  __m128 v554; // xmm7
-  __m128 v555; // xmm6
-  __m128 v556; // xmm4
-  __m128 v557; // xmm3
-  __m128 v558; // xmm2
-  __m128 v559; // xmm0
-  __m128 v560; // xmm1
-  __m128 v561; // xmm3
-  __m128 v562; // xmm0
-  __m128 v563; // xmm7
-  __m128 v564; // xmm14
-  __m128 v565; // xmm1
-  _QWORD *v566; // rbx
-  unsigned __int64 v567; // rcx
-  unsigned __int64 v568; // rax
-  unsigned int v569; // eax
-  _QWORD *v570; // rcx
-  unsigned __int64 v571; // rax
-  signed __int64 v572; // rcx
-  __int64 v573; // rdi
-  char v574; // bl
-  char v575; // r11
-  char v576; // dl
-  char v577; // r8
-  char v578; // r9
-  char v579; // r10
+  __m128 v525; // xmm3
+  __m128 v526; // xmm0
+  __m128 v527; // xmm7
+  __m128 v528; // xmm14
+  __m128 v529; // xmm1
+  _QWORD *Value; // rbx
+  unsigned __int64 v531; // rcx
+  unsigned __int64 v532; // rax
+  unsigned int v533; // eax
+  _QWORD *v534; // rcx
+  unsigned __int64 v535; // rax
+  _QWORD *v536; // rcx
+  __int64 v537; // rdi
+  char v538; // bl
+  char v539; // r11
+  char v540; // dl
+  char v541; // r8
+  char v542; // r9
+  char v543; // r10
   __int64 result; // rax
-  char v581[24]; // [rsp+48h] [rbp-80h]
-  hkcdGskBase v582; // [rsp+60h] [rbp-68h]
-  __m128 v583; // [rsp+128h] [rbp+60h]
-  __m128 v584; // [rsp+138h] [rbp+70h]
-  __m128 v585; // [rsp+148h] [rbp+80h]
-  __m128 v586; // [rsp+158h] [rbp+90h]
-  __m128 v587; // [rsp+168h] [rbp+A0h]
-  __m128 v588; // [rsp+178h] [rbp+B0h]
-  __m128 v589; // [rsp+188h] [rbp+C0h]
-  __m128 v590; // [rsp+198h] [rbp+D0h]
-  __m128 v591; // [rsp+1A8h] [rbp+E0h]
-  __m128 v592; // [rsp+1B8h] [rbp+F0h]
-  __m128 v593; // [rsp+1C8h] [rbp+100h]
-  __m128 *shapeB; // [rsp+1D8h] [rbp+110h]
-  int v595; // [rsp+1E0h] [rbp+118h]
-  __m128 v596; // [rsp+1E8h] [rbp+120h]
-  hkcdVertex *shapeA; // [rsp+1F8h] [rbp+130h]
-  int v598; // [rsp+200h] [rbp+138h]
-  __m128 v599; // [rsp+208h] [rbp+140h]
-  __m128 v600; // [rsp+218h] [rbp+150h]
-  __m128 v601; // [rsp+228h] [rbp+160h]
-  __m128 v602; // [rsp+238h] [rbp+170h]
-  __m128 v603; // [rsp+248h] [rbp+180h]
-  __m128 v604; // [rsp+258h] [rbp+190h]
-  __m128 v605; // [rsp+268h] [rbp+1A0h]
-  __m128 v606; // [rsp+278h] [rbp+1B0h]
-  __m128 v607; // [rsp+288h] [rbp+1C0h]
-  __m128 v608; // [rsp+298h] [rbp+1D0h]
-  __m128 v609; // [rsp+2A8h] [rbp+1E0h]
-  __m128 v610; // [rsp+2B8h] [rbp+1F0h]
-  __m128 v611; // [rsp+2C8h] [rbp+200h]
-  __m128 v612; // [rsp+2D8h] [rbp+210h]
-  __m128 v613; // [rsp+2E8h] [rbp+220h]
-  __m128 v614; // [rsp+2F8h] [rbp+230h]
-  __m128 v615; // [rsp+308h] [rbp+240h]
-  __m128 v616; // [rsp+318h] [rbp+250h]
-  __m128 v617; // [rsp+328h] [rbp+260h]
-  __m128 v618; // [rsp+338h] [rbp+270h]
-  __m128 v619; // [rsp+348h] [rbp+280h]
-  __m128 v620; // [rsp+358h] [rbp+290h]
-  __m128 v621; // [rsp+368h] [rbp+2A0h]
-  __m128 v622; // [rsp+378h] [rbp+2B0h]
-  __m128 v623; // [rsp+388h] [rbp+2C0h]
-  __m128 v624; // [rsp+398h] [rbp+2D0h]
-  __m128 v625; // [rsp+3A8h] [rbp+2E0h]
-  __m128 v626; // [rsp+3B8h] [rbp+2F0h]
-  __m128 v627; // [rsp+3C8h] [rbp+300h]
-  __m128 v628; // [rsp+3D8h] [rbp+310h]
-  __m128 v629; // [rsp+3E8h] [rbp+320h]
-  __m128 v630; // [rsp+3F8h] [rbp+330h]
-  __m128 v631; // [rsp+408h] [rbp+340h]
-  __m128 v632; // [rsp+418h] [rbp+350h]
-  __m128 v633; // [rsp+428h] [rbp+360h]
-  __m128 v634; // [rsp+438h] [rbp+370h]
-  __m128 v635; // [rsp+448h] [rbp+380h]
-  __m128 v636; // [rsp+458h] [rbp+390h]
-  hkVector4f supportOut; // [rsp+468h] [rbp+3A0h]
-  __m128 v638; // [rsp+478h] [rbp+3B0h]
-  __m128 v639; // [rsp+488h] [rbp+3C0h]
-  __m128 v640; // [rsp+498h] [rbp+3D0h]
-  __m128 v641; // [rsp+4A8h] [rbp+3E0h]
-  __m128 v642; // [rsp+4B8h] [rbp+3F0h]
-  __m128 v643; // [rsp+4C8h] [rbp+400h]
-  __m128 v644; // [rsp+4D8h] [rbp+410h]
-  __m128 v645; // [rsp+4E8h] [rbp+420h]
-  __m128 v646; // [rsp+4F8h] [rbp+430h]
-  __m128 v647; // [rsp+508h] [rbp+440h]
-  __m128 v648; // [rsp+518h] [rbp+450h]
-  hkVector4f v649; // [rsp+528h] [rbp+460h]
-  hkVector4f v650; // [rsp+538h] [rbp+470h]
-  hkVector4f v651; // [rsp+548h] [rbp+480h]
-  hkVector4f v652; // [rsp+558h] [rbp+490h]
-  __m128 v653; // [rsp+568h] [rbp+4A0h]
-  __m128 v654; // [rsp+578h] [rbp+4B0h]
-  __m128 v655; // [rsp+588h] [rbp+4C0h]
-  __m128 v656; // [rsp+598h] [rbp+4D0h]
-  __m128 v657; // [rsp+5A8h] [rbp+4E0h]
-  __m128 v658; // [rsp+5B8h] [rbp+4F0h]
-  __m128 v659; // [rsp+5C8h] [rbp+500h]
-  __m128 v660; // [rsp+5D8h] [rbp+510h]
-  __m128 v661; // [rsp+5E8h] [rbp+520h]
-  __m128 v662; // [rsp+5F8h] [rbp+530h]
-  __m128 v663; // [rsp+608h] [rbp+540h]
-  __m128 v664; // [rsp+618h] [rbp+550h]
-  __m128 v665; // [rsp+628h] [rbp+560h]
-  __m128 v666; // [rsp+638h] [rbp+570h]
-  __m128 v667; // [rsp+648h] [rbp+580h]
-  __m128 v668; // [rsp+658h] [rbp+590h]
-  __m128 v669; // [rsp+668h] [rbp+5A0h]
-  __m128 v670; // [rsp+678h] [rbp+5B0h]
-  __m128 v671; // [rsp+688h] [rbp+5C0h]
-  __m128 v672; // [rsp+698h] [rbp+5D0h]
-  __m128 v673; // [rsp+6A8h] [rbp+5E0h]
-  __m128 v674; // [rsp+6B8h] [rbp+5F0h]
-  __m128 v675; // [rsp+6C8h] [rbp+600h]
-  __m128 v676; // [rsp+6D8h] [rbp+610h]
-  __int128 v677; // [rsp+6E8h] [rbp+620h]
-  __m128 v678; // [rsp+6F8h] [rbp+630h]
-  __m128 v679; // [rsp+708h] [rbp+640h]
-  __m128 v680; // [rsp+718h] [rbp+650h]
-  __m128 v681; // [rsp+728h] [rbp+660h]
-  __m128 v682; // [rsp+738h] [rbp+670h]
-  __m128 v683; // [rsp+748h] [rbp+680h]
-  __int128 v684; // [rsp+758h] [rbp+690h]
-  __int128 v685; // [rsp+768h] [rbp+6A0h]
-  __int128 v686; // [rsp+778h] [rbp+6B0h]
-  __int128 v687; // [rsp+788h] [rbp+6C0h]
-  __m128 v688; // [rsp+798h] [rbp+6D0h]
-  __int128 v689; // [rsp+7A8h] [rbp+6E0h]
-  __int128 v690; // [rsp+7B8h] [rbp+6F0h]
-  __int128 v691; // [rsp+7C8h] [rbp+700h]
-  __int128 v692; // [rsp+7D8h] [rbp+710h]
-  __m128 v693; // [rsp+7E8h] [rbp+720h]
-  __m128 v694; // [rsp+7F8h] [rbp+730h]
-  __m128 v695; // [rsp+808h] [rbp+740h]
-  __m128 v696; // [rsp+818h] [rbp+750h]
-  __m128 v697; // [rsp+828h] [rbp+760h]
-  __m128 v698; // [rsp+838h] [rbp+770h]
-  __m128 v699; // [rsp+848h] [rbp+780h]
-  __m128 v700; // [rsp+858h] [rbp+790h]
-  __m128 v701; // [rsp+868h] [rbp+7A0h]
-  __m128 v702; // [rsp+878h] [rbp+7B0h]
-  __m128 v703; // [rsp+888h] [rbp+7C0h]
-  __m128 v704; // [rsp+898h] [rbp+7D0h]
-  __m128 v705; // [rsp+8A8h] [rbp+7E0h]
-  __m128 v706; // [rsp+8B8h] [rbp+7F0h]
-  __int128 v707; // [rsp+8C8h] [rbp+800h]
-  __m128 v708; // [rsp+8D8h] [rbp+810h]
-  __int128 v709; // [rsp+8E8h] [rbp+820h]
-  __int128 v710; // [rsp+8F8h] [rbp+830h]
-  __int128 v711; // [rsp+908h] [rbp+840h]
-  __int128 v712; // [rsp+918h] [rbp+850h]
-  __m128 v713; // [rsp+928h] [rbp+860h]
-  __m128 v714; // [rsp+938h] [rbp+870h]
-  __m128 v715; // [rsp+948h] [rbp+880h]
-  __m128 v716; // [rsp+958h] [rbp+890h]
-  __m128 v717; // [rsp+968h] [rbp+8A0h]
-  __m128 v718; // [rsp+978h] [rbp+8B0h]
-  __m128 v719; // [rsp+988h] [rbp+8C0h]
-  __m128 v720; // [rsp+998h] [rbp+8D0h]
-  __m128 v721; // [rsp+9A8h] [rbp+8E0h]
-  __m128 v722; // [rsp+9B8h] [rbp+8F0h]
-  __m128 v723; // [rsp+9C8h] [rbp+900h]
-  __m128 v724; // [rsp+9D8h] [rbp+910h]
-  __m128 v725; // [rsp+9E8h] [rbp+920h]
-  __m128 v726; // [rsp+9F8h] [rbp+930h]
-  __m128 v727; // [rsp+A08h] [rbp+940h]
-  __m128 v728; // [rsp+A18h] [rbp+950h]
-  __int128 v729; // [rsp+A28h] [rbp+960h]
-  __int128 v730; // [rsp+A38h] [rbp+970h]
-  __int128 v731; // [rsp+A48h] [rbp+980h]
-  __int128 v732; // [rsp+A58h] [rbp+990h]
-  __m128 v733; // [rsp+A68h] [rbp+9A0h]
-  __m128 v734; // [rsp+A78h] [rbp+9B0h]
-  hkcdGskBase::ShapeInterface shapeInterface; // [rsp+B70h] [rbp+AA8h]
-  hkPadSpu<int> dimB; // [rsp+B78h] [rbp+AB0h]
-  __m128 *v737; // [rsp+B88h] [rbp+AC0h]
-  hkPadSpu<int> dimA; // [rsp+B90h] [rbp+AC8h]
+  _BYTE v545[56]; // [rsp+48h] [rbp-80h] BYREF
+  __m128 v546; // [rsp+88h] [rbp-40h] BYREF
+  __m128 v547; // [rsp+98h] [rbp-30h]
+  __m128 v548; // [rsp+A8h] [rbp-20h]
+  __int64 v549; // [rsp+C0h] [rbp-8h] BYREF
+  __m128 v550; // [rsp+C8h] [rbp+0h] BYREF
+  __m128 v551; // [rsp+D8h] [rbp+10h]
+  __m128 v552; // [rsp+E8h] [rbp+20h]
+  __m128 v553; // [rsp+118h] [rbp+50h]
+  __m128 v554; // [rsp+128h] [rbp+60h]
+  __m128 v555; // [rsp+138h] [rbp+70h]
+  __m128 v556; // [rsp+148h] [rbp+80h]
+  __m128 v557; // [rsp+158h] [rbp+90h]
+  __m128 v558; // [rsp+168h] [rbp+A0h]
+  __int128 v559; // [rsp+178h] [rbp+B0h]
+  __m128 v560; // [rsp+188h] [rbp+C0h]
+  __m128 v561; // [rsp+198h] [rbp+D0h]
+  __m128 v562; // [rsp+1A8h] [rbp+E0h]
+  __m128 v563; // [rsp+1B8h] [rbp+F0h]
+  __m128 v564; // [rsp+1C8h] [rbp+100h]
+  __m128 *shapeB; // [rsp+1D8h] [rbp+110h] BYREF
+  int m_storage; // [rsp+1E0h] [rbp+118h]
+  __m128 v567; // [rsp+1E8h] [rbp+120h]
+  hkcdVertex *shapeA; // [rsp+1F8h] [rbp+130h] BYREF
+  int v569; // [rsp+200h] [rbp+138h]
+  __m128 v570; // [rsp+208h] [rbp+140h]
+  __m128 v571; // [rsp+218h] [rbp+150h]
+  __m128 v572; // [rsp+228h] [rbp+160h]
+  __m128 v573; // [rsp+238h] [rbp+170h]
+  __m128 v574; // [rsp+248h] [rbp+180h]
+  __m128 v575; // [rsp+258h] [rbp+190h]
+  __m128 v576; // [rsp+268h] [rbp+1A0h]
+  __m128 v577; // [rsp+278h] [rbp+1B0h]
+  __m128 v578; // [rsp+288h] [rbp+1C0h]
+  __int128 v579; // [rsp+298h] [rbp+1D0h]
+  __m128 v580; // [rsp+2A8h] [rbp+1E0h]
+  __m128 v581; // [rsp+2B8h] [rbp+1F0h]
+  __m128 v582; // [rsp+2C8h] [rbp+200h]
+  __m128 v583; // [rsp+2D8h] [rbp+210h]
+  __m128 v584; // [rsp+2E8h] [rbp+220h]
+  __m128 v585; // [rsp+2F8h] [rbp+230h]
+  __m128 v586; // [rsp+308h] [rbp+240h]
+  __m128 v587; // [rsp+318h] [rbp+250h]
+  __m128 v588; // [rsp+328h] [rbp+260h]
+  __m128 v589; // [rsp+338h] [rbp+270h]
+  __m128 v590; // [rsp+348h] [rbp+280h]
+  __m128 v591; // [rsp+358h] [rbp+290h]
+  __int128 v592; // [rsp+368h] [rbp+2A0h]
+  __m128 v593; // [rsp+378h] [rbp+2B0h]
+  __m128 v594; // [rsp+388h] [rbp+2C0h]
+  __m128 v595; // [rsp+398h] [rbp+2D0h]
+  __m128 v596; // [rsp+3A8h] [rbp+2E0h]
+  __m128 v597; // [rsp+3B8h] [rbp+2F0h]
+  __m128 v598; // [rsp+3C8h] [rbp+300h]
+  __m128 v599; // [rsp+3D8h] [rbp+310h]
+  __m128 v600; // [rsp+3E8h] [rbp+320h]
+  __m128 v601[7]; // [rsp+3F8h] [rbp+330h] BYREF
+  hkVector4f supportOut; // [rsp+468h] [rbp+3A0h] BYREF
+  __m128 v603; // [rsp+478h] [rbp+3B0h]
+  __m128 v604; // [rsp+488h] [rbp+3C0h]
+  __m128 v605; // [rsp+498h] [rbp+3D0h]
+  __m128 v606; // [rsp+4A8h] [rbp+3E0h]
+  __m128 v607; // [rsp+4B8h] [rbp+3F0h]
+  __m128 v608; // [rsp+4C8h] [rbp+400h]
+  __m128 v609; // [rsp+4D8h] [rbp+410h]
+  __m128 v610; // [rsp+4E8h] [rbp+420h]
+  __m128 v611; // [rsp+4F8h] [rbp+430h]
+  __m128 v612; // [rsp+508h] [rbp+440h]
+  __m128 v613; // [rsp+518h] [rbp+450h]
+  hkVector4f v614; // [rsp+528h] [rbp+460h]
+  __m128 v615; // [rsp+538h] [rbp+470h]
+  __m128 v616; // [rsp+548h] [rbp+480h]
+  __m128 v617; // [rsp+558h] [rbp+490h]
+  __m128 v618; // [rsp+568h] [rbp+4A0h]
+  __int128 v619; // [rsp+578h] [rbp+4B0h]
+  __m128 v620; // [rsp+588h] [rbp+4C0h]
+  __m128 v621; // [rsp+598h] [rbp+4D0h]
+  __m128 v622; // [rsp+5A8h] [rbp+4E0h]
+  __m128 v623; // [rsp+5B8h] [rbp+4F0h]
+  __m128 v624; // [rsp+5C8h] [rbp+500h]
+  __m128 v625; // [rsp+5D8h] [rbp+510h]
+  __m128 v626; // [rsp+5E8h] [rbp+520h]
+  __m128 v627; // [rsp+5F8h] [rbp+530h]
+  __m128 v628; // [rsp+608h] [rbp+540h]
+  __m128 v629; // [rsp+618h] [rbp+550h]
+  __m128 v630; // [rsp+628h] [rbp+560h]
+  __m128 v631; // [rsp+638h] [rbp+570h]
+  __m128 v632; // [rsp+648h] [rbp+580h]
+  __m128 v633; // [rsp+658h] [rbp+590h]
+  __m128 v634; // [rsp+668h] [rbp+5A0h]
+  __m128 v635; // [rsp+678h] [rbp+5B0h]
+  __m128 v636; // [rsp+688h] [rbp+5C0h]
+  __m128 v637; // [rsp+698h] [rbp+5D0h]
+  __m128 v638; // [rsp+6A8h] [rbp+5E0h]
+  __m128 v639; // [rsp+6B8h] [rbp+5F0h]
+  __m128 v640; // [rsp+6C8h] [rbp+600h]
+  __m128 v641; // [rsp+6D8h] [rbp+610h]
+  __int128 v642; // [rsp+6E8h] [rbp+620h]
+  __m128 v643; // [rsp+6F8h] [rbp+630h]
+  __m128 v644; // [rsp+708h] [rbp+640h]
+  __m128 v645; // [rsp+718h] [rbp+650h]
+  __m128 v646; // [rsp+728h] [rbp+660h]
+  __m128 v647; // [rsp+738h] [rbp+670h]
+  __m128 v648; // [rsp+748h] [rbp+680h]
+  __m128 v649; // [rsp+758h] [rbp+690h]
+  __m128 v650; // [rsp+768h] [rbp+6A0h]
+  __m128 v651; // [rsp+778h] [rbp+6B0h]
+  __m128 v652; // [rsp+788h] [rbp+6C0h]
+  __m128 v653; // [rsp+798h] [rbp+6D0h]
+  __m128 v654; // [rsp+7A8h] [rbp+6E0h]
+  __m128 v655; // [rsp+7B8h] [rbp+6F0h]
+  __m128 v656; // [rsp+7C8h] [rbp+700h]
+  __m128 v657; // [rsp+7D8h] [rbp+710h]
+  __m128 v658; // [rsp+7E8h] [rbp+720h]
+  __m128 v659; // [rsp+7F8h] [rbp+730h]
+  __m128 v660; // [rsp+808h] [rbp+740h]
+  __m128 v661; // [rsp+818h] [rbp+750h]
+  __m128 v662; // [rsp+828h] [rbp+760h]
+  __m128 v663; // [rsp+838h] [rbp+770h]
+  __m128 v664; // [rsp+848h] [rbp+780h]
+  __m128 v665; // [rsp+858h] [rbp+790h]
+  __m128 v666; // [rsp+868h] [rbp+7A0h]
+  __m128 v667; // [rsp+878h] [rbp+7B0h]
+  __m128 v668; // [rsp+888h] [rbp+7C0h]
+  __m128 v669; // [rsp+898h] [rbp+7D0h]
+  __m128 v670; // [rsp+8A8h] [rbp+7E0h]
+  __m128 v671; // [rsp+8B8h] [rbp+7F0h]
+  __int128 v672; // [rsp+8C8h] [rbp+800h]
+  __m128 v673; // [rsp+8D8h] [rbp+810h]
+  __m128 v674; // [rsp+8E8h] [rbp+820h]
+  __m128 v675; // [rsp+8F8h] [rbp+830h]
+  __m128 v676; // [rsp+908h] [rbp+840h]
+  __m128 v677; // [rsp+918h] [rbp+850h]
+  __m128 v678; // [rsp+928h] [rbp+860h]
+  __m128 v679; // [rsp+938h] [rbp+870h]
+  __m128 v680; // [rsp+948h] [rbp+880h]
+  __m128 v681; // [rsp+958h] [rbp+890h]
+  __m128 v682; // [rsp+968h] [rbp+8A0h]
+  __m128 v683; // [rsp+978h] [rbp+8B0h]
+  __m128 v684; // [rsp+988h] [rbp+8C0h]
+  __m128 v685; // [rsp+998h] [rbp+8D0h]
+  __m128 v686; // [rsp+9A8h] [rbp+8E0h]
+  __m128 v687; // [rsp+9B8h] [rbp+8F0h]
+  __m128 v688; // [rsp+9C8h] [rbp+900h]
+  __m128 v689; // [rsp+9D8h] [rbp+910h]
+  __m128 v690; // [rsp+9E8h] [rbp+920h]
+  __m128 v691; // [rsp+9F8h] [rbp+930h]
+  __m128 v692; // [rsp+A08h] [rbp+940h]
+  __m128 v693; // [rsp+A18h] [rbp+950h]
+  __m128 v694; // [rsp+A28h] [rbp+960h]
+  __m128 v695; // [rsp+A38h] [rbp+970h]
+  __m128 v696; // [rsp+A48h] [rbp+980h]
+  __m128 v697; // [rsp+A58h] [rbp+990h]
+  __m128 v698; // [rsp+A68h] [rbp+9A0h]
+  __m128 v699; // [rsp+A78h] [rbp+9B0h]
+  hkcdGskBase::ShapeInterface shapeInterface; // [rsp+B70h] [rbp+AA8h] BYREF
+  hkPadSpu<int> dimB; // [rsp+B78h] [rbp+AB0h] BYREF
+  __m128 *v702; // [rsp+B88h] [rbp+AC0h]
+  hkPadSpu<int> dimA; // [rsp+B90h] [rbp+AC8h] BYREF
   hkTransformf *retaddr; // [rsp+B98h] [rbp+AD0h]
-  char *v740; // [rsp+BA0h] [rbp+AD8h]
-  hkcdGsk::GetClosestPointOutput *v741; // [rsp+BA8h] [rbp+AE0h]
+  char *v705; // [rsp+BA0h] [rbp+AD8h]
+  hkcdGsk::GetClosestPointOutput *v706; // [rsp+BA8h] [rbp+AE0h]
 
   shapeA = vertsA;
-  v598 = numVertsA;
+  v569 = numVertsA;
   v4 = vertsA;
-  v5 = v582.m_verticesBinA;
-  v6 = v740;
+  v5 = &v549;
+  v6 = v705;
   shapeInterface.vfptr = (hkcdGskBase::ShapeInterfaceVtbl *)&hkcdGsk_Vector4ShapeInterface::`vftable;
-  shapeB = v737;
-  v595 = dimA.m_storage;
-  v7 = (unsigned int)(unsigned __int8)v740[4] >> 6;
-  v8 = v740[4] & 3;
-  v9 = (unsigned int)(unsigned __int8)v740[4] >> 6;
+  shapeB = v702;
+  m_storage = dimA.m_storage;
+  v7 = (unsigned __int8)v705[4] >> 6;
+  v8 = v705[4] & 3;
+  v9 = v7;
   while ( 1 )
   {
     v10 = (unsigned __int8)*v6;
     v11 = v5;
-    ++v5;
+    v5 += 2;
     ++v6;
-    *v11 = v4[v10];
+    *(hkcdVertex *)v11 = v4[v10];
     if ( !--v9 )
       break;
     v4 = shapeA;
   }
-  v12 = &v630;
+  v12 = v601;
   v13 = v8;
-  v14 = &v740[(unsigned __int64)(unsigned __int8)v740[4] >> 6];
+  v14 = &v705[(unsigned __int64)(unsigned __int8)v705[4] >> 6];
   do
   {
     v15 = v12;
@@ -3720,60 +3598,46 @@ __int64 __fastcall hkcdGsk::getClosestPoint(const void *__formal, hkcdVertex *ve
   dimA.m_storage = v7;
   v18 = 0i64;
   v19 = 0i64;
-  *(_OWORD *)&v582.m_lastDimB.m_storage = 0i64;
+  *(_OWORD *)&v545[40] = 0i64;
   v20 = v8 - 1;
-  v21 = retaddr->m_rotation.m_col0.m_quad;
-  v22 = 16 * v20;
-  v649.m_quad = (__m128)retaddr->m_rotation.m_col0;
+  m_quad = retaddr->m_rotation.m_col0.m_quad;
+  v22 = v20;
+  v614.m_quad = (__m128)retaddr->m_rotation.m_col0;
   v23 = retaddr->m_rotation.m_col1.m_quad;
-  v650.m_quad = (__m128)retaddr->m_rotation.m_col1;
+  v615 = v23;
   v24 = retaddr->m_rotation.m_col2.m_quad;
-  v651.m_quad = (__m128)retaddr->m_rotation.m_col2;
+  v616 = v24;
   v25 = retaddr->m_translation.m_quad;
-  v652.m_quad = (__m128)retaddr->m_translation;
+  v617 = v25;
   do
   {
-    v26 = *(__m128 *)((char *)&v630 + v22);
-    v22 -= 16i64;
+    v26 = v601[v22--];
     --v20;
-    *(__m128 *)((char *)&v582.m_verticesBinA[1].m_quad + v22 + 8) = _mm_add_ps(
-                                                                      _mm_add_ps(
-                                                                        _mm_add_ps(
-                                                                          _mm_mul_ps(_mm_shuffle_ps(v26, v26, 85), v23),
-                                                                          _mm_mul_ps(_mm_shuffle_ps(v26, v26, 0), v21)),
-                                                                        _mm_mul_ps(_mm_shuffle_ps(v26, v26, 170), v24)),
-                                                                      v25);
+    *(__m128 *)((char *)&v551 + v22 * 16) = _mm_add_ps(
+                                              _mm_add_ps(
+                                                _mm_add_ps(
+                                                  _mm_mul_ps(_mm_shuffle_ps(v26, v26, 85), v23),
+                                                  _mm_mul_ps(_mm_shuffle_ps(v26, v26, 0), m_quad)),
+                                                _mm_mul_ps(_mm_shuffle_ps(v26, v26, 170), v24)),
+                                              v25);
   }
   while ( v20 >= 0 );
   v27 = 0;
-  v28.m_quad = _mm_shuffle_ps(
-                 *(__m128 *)((char *)&v582.m_verticesBinA[0].m_quad + 8),
-                 _mm_unpackhi_ps(*(__m128 *)((char *)&v582.m_verticesBinA[0].m_quad + 8), v630),
-                 196);
-  *(hkVector4f *)((char *)&v582.m_verticesBinA[0].0 + 8) = (hkVector4f)v28.m_quad;
-  *(__m128 *)((char *)&v582.m_verticesBinA[1].m_quad + 8) = _mm_shuffle_ps(
-                                                              *(__m128 *)((char *)&v582.m_verticesBinA[1].m_quad + 8),
-                                                              _mm_unpackhi_ps(
-                                                                *(__m128 *)((char *)&v582.m_verticesBinA[1].m_quad + 8),
-                                                                v631),
-                                                              196);
-  *(float *)&v737 = FLOAT_0_0000099999997;
-  *(__m128 *)((char *)&v582.m_verticesBinA[2].m_quad + 8) = _mm_shuffle_ps(
-                                                              *(__m128 *)((char *)&v582.m_verticesBinA[2].m_quad + 8),
-                                                              _mm_unpackhi_ps(
-                                                                *(__m128 *)((char *)&v582.m_verticesBinA[2].m_quad + 8),
-                                                                v632),
-                                                              196);
+  v28 = _mm_shuffle_ps(v550, _mm_unpackhi_ps(v550, v601[0]), 196);
+  v550 = v28;
+  v551 = _mm_shuffle_ps(v551, _mm_unpackhi_ps(v551, v601[1]), 196);
+  *(float *)&v702 = FLOAT_0_0000099999997;
+  v552 = _mm_shuffle_ps(v552, _mm_unpackhi_ps(v552, v601[2]), 196);
   v29 = _mm_shuffle_ps((__m128)LODWORD(FLOAT_0_0000099999997), (__m128)LODWORD(FLOAT_0_0000099999997), 0);
 LABEL_9:
-  v30 = *(__m128 *)((char *)&v582.m_verticesA[0].m_quad + 8);
-  *(float *)&v737 = aTb[1].m_rotation.m_col2.m_quad.m128_f32[0];
-  v582.m_checkTriangleDots = (hkVector4f)v28.m_quad;
-  *(hkcdVertex *)&v581[8] = *(hkcdVertex *)((char *)v582.m_verticesA + 8);
-  v31 = (dimB.m_storage | 8 * dimA.m_storage) - 9;
-  v603 = _mm_mul_ps(v29, _mm_shuffle_ps((__m128)(unsigned int)v737, (__m128)(unsigned int)v737, 0));
+  v30 = v546;
+  LODWORD(v702) = aTb[1].m_rotation.m_col2.m_quad.m128_i32[0];
+  *(__m128 *)&v545[24] = v28;
+  *(_QWORD *)&v545[16] = v546.m128_u64[1];
+  v31 = (dimB.m_storage | (8 * dimA.m_storage)) - 9;
+  v574 = _mm_mul_ps(v29, _mm_shuffle_ps((__m128)(unsigned int)v702, (__m128)(unsigned int)v702, 0));
   v32 = query.m_quad;
-  *(hkVector4f *)v581 = (hkVector4f)query.m_quad;
+  *(hkVector4f *)v545 = (hkVector4f)query.m_quad;
   while ( 2 )
   {
     switch ( v31 )
@@ -3785,378 +3649,376 @@ LABEL_9:
       case 2u:
         goto LABEL_119;
       case 3u:
-        v406 = v30;
-        v407 = (__m128 *)((char *)&v582.m_verticesBinA[0].m_quad + 8);
+        v370 = v30;
+        v371 = &v550;
         goto LABEL_96;
       case 8u:
         goto LABEL_135;
       case 9u:
         goto LABEL_43;
       case 0xAu:
-        v33 = (__m128 *)((char *)&v582.m_verticesA[0].m_quad + 8);
-        v34 = (__m128 *)((char *)&v582.m_verticesBinA[0].m_quad + 8);
+        v33 = &v546;
+        v34 = &v550;
         goto LABEL_13;
       case 0x10u:
         goto LABEL_111;
       case 0x11u:
-        v33 = (__m128 *)((char *)&v582.m_verticesBinA[0].m_quad + 8);
-        v34 = (__m128 *)((char *)&v582.m_verticesA[0].m_quad + 8);
+        v33 = &v550;
+        v34 = &v546;
 LABEL_13:
-        if ( *((_DWORD *)&v582.m_lastDimB + 2) == 2 )
+        if ( *(_DWORD *)&v545[48] == 2 )
         {
           v35 = *v34;
-          v36 = v34[1];
-          v37 = *v33;
-          v38 = v33[1];
-          v585 = v36;
-          v39 = _mm_sub_ps(v36, v34[2]);
-          v40 = _mm_sub_ps(v35, v34[2]);
-          *(__m128 *)&v581[16] = v39;
-          v583 = v40;
-          v41 = _mm_sub_ps(
-                  _mm_mul_ps(_mm_shuffle_ps(v40, v40, 201), v39),
-                  _mm_mul_ps(_mm_shuffle_ps(v39, v39, 201), v40));
-          v42 = _mm_shuffle_ps(v41, v41, 201);
-          v43 = _mm_mul_ps(_mm_sub_ps(v37, v35), v42);
+          v36 = *v33;
+          v37 = v33[1];
+          v556 = v34[1];
+          v38 = _mm_sub_ps(v35, v34[2]);
+          *(__m128 *)&v545[16] = _mm_sub_ps(v556, v34[2]);
+          v554 = v38;
+          v39 = _mm_sub_ps(
+                  _mm_mul_ps(_mm_shuffle_ps(v38, v38, 201), *(__m128 *)&v545[16]),
+                  _mm_mul_ps(_mm_shuffle_ps(*(__m128 *)&v545[16], *(__m128 *)&v545[16], 201), v38));
+          v40 = _mm_shuffle_ps(v39, v39, 201);
+          v41 = _mm_mul_ps(_mm_sub_ps(v36, v35), v40);
+          v42 = _mm_add_ps(
+                  _mm_add_ps(_mm_shuffle_ps(v41, v41, 85), _mm_shuffle_ps(v41, v41, 0)),
+                  _mm_shuffle_ps(v41, v41, 170));
+          v43 = _mm_mul_ps(_mm_sub_ps(v37, v35), v40);
           v44 = _mm_add_ps(
                   _mm_add_ps(_mm_shuffle_ps(v43, v43, 85), _mm_shuffle_ps(v43, v43, 0)),
                   _mm_shuffle_ps(v43, v43, 170));
-          v45 = _mm_mul_ps(_mm_sub_ps(v38, v35), v42);
-          v46 = _mm_add_ps(
-                  _mm_add_ps(_mm_shuffle_ps(v45, v45, 85), _mm_shuffle_ps(v45, v45, 0)),
-                  _mm_shuffle_ps(v45, v45, 170));
-          v47 = _mm_mul_ps(v44, v44);
-          v48 = _mm_mul_ps(v46, v46);
-          if ( _mm_movemask_ps(_mm_mul_ps(v44, v46)) )
+          v45 = _mm_mul_ps(v42, v42);
+          v46 = _mm_mul_ps(v44, v44);
+          if ( _mm_movemask_ps(_mm_mul_ps(v42, v44)) )
           {
-            v708 = _mm_sub_ps(v44, v46);
-            v49 = _mm_rcp_ps(v708);
-            v639 = _mm_mul_ps(_mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v49, v708)), v49), v44);
-            v50 = _mm_sub_ps(v34[1], *v34);
-            v51 = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(v33[1], *v33), v639), *v33);
-            v52 = _mm_sub_ps(v34[2], *v34);
-            v53 = _mm_sub_ps(v34[1], v51);
-            v54 = _mm_sub_ps(v34[2], v51);
-            v55 = _mm_sub_ps(*v34, v51);
-            v56 = _mm_sub_ps(
-                    _mm_mul_ps(_mm_shuffle_ps(v52, v52, 201), v50),
-                    _mm_mul_ps(_mm_shuffle_ps(v50, v50, 201), v52));
-            v57 = _mm_shuffle_ps(v56, v56, 201);
-            v58 = _mm_shuffle_ps(v57, v57, 210);
-            v59 = _mm_mul_ps(
+            v673 = _mm_sub_ps(v42, v44);
+            v47 = _mm_rcp_ps(v673);
+            v604 = _mm_mul_ps(_mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v47, v673)), v47), v42);
+            v48 = _mm_sub_ps(v34[1], *v34);
+            v49 = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(v33[1], *v33), v604), *v33);
+            v50 = _mm_sub_ps(v34[2], *v34);
+            v51 = _mm_sub_ps(v34[1], v49);
+            v52 = _mm_sub_ps(v34[2], v49);
+            v53 = _mm_sub_ps(*v34, v49);
+            v54 = _mm_sub_ps(
+                    _mm_mul_ps(_mm_shuffle_ps(v50, v50, 201), v48),
+                    _mm_mul_ps(_mm_shuffle_ps(v48, v48, 201), v50));
+            v55 = _mm_shuffle_ps(v54, v54, 201);
+            v56 = _mm_shuffle_ps(v55, v55, 210);
+            v57 = _mm_shuffle_ps(v55, v55, 201);
+            v58 = _mm_mul_ps(
                     _mm_sub_ps(
-                      _mm_mul_ps(_mm_shuffle_ps(v54, v54, 201), v58),
-                      _mm_mul_ps(_mm_shuffle_ps(v54, v54, 210), v57)),
-                    v53);
-            v60 = _mm_shuffle_ps(v53, v53, 210);
-            v61 = _mm_mul_ps(
+                      _mm_mul_ps(_mm_shuffle_ps(v52, v52, 201), v56),
+                      _mm_mul_ps(_mm_shuffle_ps(v52, v52, 210), v57)),
+                    v51);
+            v59 = _mm_shuffle_ps(v51, v51, 210);
+            v60 = _mm_mul_ps(
                     _mm_sub_ps(
-                      _mm_mul_ps(_mm_shuffle_ps(v55, v55, 201), v58),
-                      _mm_mul_ps(_mm_shuffle_ps(v55, v55, 210), v57)),
-                    v54);
-            v62 = _mm_mul_ps(_mm_shuffle_ps(v53, v53, 201), v58);
-            v63 = v59;
-            v64 = _mm_unpackhi_ps(v59, v61);
-            v65 = _mm_unpacklo_ps(v63, v61);
-            v66 = _mm_mul_ps(_mm_sub_ps(v62, _mm_mul_ps(v60, v57)), v55);
-            v67 = _mm_movelh_ps(v65, v66);
+                      _mm_mul_ps(_mm_shuffle_ps(v53, v53, 201), v56),
+                      _mm_mul_ps(_mm_shuffle_ps(v53, v53, 210), v57)),
+                    v52);
+            v61 = _mm_mul_ps(_mm_shuffle_ps(v51, v51, 201), v56);
+            v62 = v58;
+            v63 = _mm_unpackhi_ps(v58, v60);
+            v64 = _mm_unpacklo_ps(v62, v60);
+            v65 = _mm_mul_ps(_mm_sub_ps(v61, _mm_mul_ps(v59, v57)), v53);
+            v66 = _mm_movelh_ps(v64, v65);
             if ( (_mm_movemask_ps(
-                    _mm_cmpltps(
+                    _mm_cmplt_ps(
                       v18,
                       _mm_add_ps(
-                        _mm_shuffle_ps(v64, v66, 228),
-                        _mm_add_ps(v67, _mm_shuffle_ps(_mm_movehl_ps(v67, v65), v66, 212))))) & 7) == 7 )
+                        _mm_shuffle_ps(v63, v65, 228),
+                        _mm_add_ps(v66, _mm_shuffle_ps(_mm_movehl_ps(v66, v64), v65, 212))))) & 7) == 7 )
             {
-              v68 = 1;
+              v67 = 1;
               goto LABEL_39;
             }
             goto LABEL_22;
           }
-          v69 = _mm_cmpltps(v47, v48);
-          v70 = v34[2];
-          v71 = _mm_or_ps(_mm_andnot_ps(v69, v38), _mm_and_ps(v69, v37));
+          v68 = _mm_cmplt_ps(v45, v46);
+          v69 = v34[2];
+          v70 = _mm_or_ps(_mm_andnot_ps(v68, v37), _mm_and_ps(v68, v36));
+          v71 = _mm_sub_ps(v35, v69);
           v72 = v34[1];
-          v73 = _mm_sub_ps(v35, v70);
+          v73 = _mm_sub_ps(v69, v72);
           v74 = _mm_sub_ps(v70, v72);
-          v75 = _mm_sub_ps(v71, v72);
-          v76 = _mm_sub_ps(v72, v35);
-          v77 = _mm_sub_ps(v71, v70);
-          v78 = _mm_shuffle_ps(v74, v74, 201);
-          v79 = _mm_shuffle_ps(v73, v73, 201);
-          v80 = _mm_sub_ps(v71, *v34);
-          v81 = _mm_sub_ps(_mm_mul_ps(v74, v79), _mm_mul_ps(v73, v78));
-          v19 = _mm_shuffle_ps(v81, v81, 201);
-          *(__m128 *)&v582.m_lastDimB.m_storage = v19;
-          v82 = _mm_sub_ps(_mm_mul_ps(v75, v78), _mm_mul_ps(_mm_shuffle_ps(v75, v75, 201), v74));
-          v83 = _mm_mul_ps(_mm_shuffle_ps(v82, v82, 201), v19);
-          v84 = _mm_sub_ps(_mm_mul_ps(v77, v79), _mm_mul_ps(_mm_shuffle_ps(v77, v77, 201), v73));
-          v85 = _mm_mul_ps(_mm_shuffle_ps(v80, v80, 201), v76);
-          v86 = _mm_mul_ps(_mm_shuffle_ps(v84, v84, 201), v19);
-          v87 = _mm_mul_ps(_mm_shuffle_ps(v76, v76, 201), v80);
-          v88 = _mm_unpacklo_ps(v83, v86);
-          v89 = _mm_sub_ps(v87, v85);
-          v90 = _mm_mul_ps(_mm_shuffle_ps(v89, v89, 201), v19);
-          v91 = _mm_movelh_ps(v88, v90);
-          v92 = _mm_add_ps(
-                  _mm_shuffle_ps(_mm_unpackhi_ps(v83, v86), v90, 228),
-                  _mm_add_ps(v91, _mm_shuffle_ps(_mm_movehl_ps(v91, v88), v90, 212)));
-          v93 = _mm_movemask_ps(_mm_cmpltps(v92, v18)) & 7;
-          if ( v93 == 7 )
+          v75 = _mm_sub_ps(v72, v35);
+          v76 = _mm_sub_ps(v70, v69);
+          v77 = _mm_shuffle_ps(v73, v73, 201);
+          v78 = _mm_shuffle_ps(v71, v71, 201);
+          v79 = _mm_sub_ps(v70, *v34);
+          v80 = _mm_sub_ps(_mm_mul_ps(v73, v78), _mm_mul_ps(v71, v77));
+          v19 = _mm_shuffle_ps(v80, v80, 201);
+          *(__m128 *)&v545[40] = v19;
+          v81 = _mm_sub_ps(_mm_mul_ps(v74, v77), _mm_mul_ps(_mm_shuffle_ps(v74, v74, 201), v73));
+          v82 = _mm_mul_ps(_mm_shuffle_ps(v81, v81, 201), v19);
+          v83 = _mm_sub_ps(_mm_mul_ps(v76, v78), _mm_mul_ps(_mm_shuffle_ps(v76, v76, 201), v71));
+          v84 = _mm_mul_ps(_mm_shuffle_ps(v79, v79, 201), v75);
+          v85 = _mm_mul_ps(_mm_shuffle_ps(v83, v83, 201), v19);
+          v86 = _mm_mul_ps(_mm_shuffle_ps(v75, v75, 201), v79);
+          v87 = _mm_unpacklo_ps(v82, v85);
+          v88 = _mm_sub_ps(v86, v84);
+          v89 = _mm_mul_ps(_mm_shuffle_ps(v88, v88, 201), v19);
+          v90 = _mm_movelh_ps(v87, v89);
+          v91 = _mm_add_ps(
+                  _mm_shuffle_ps(_mm_unpackhi_ps(v82, v85), v89, 228),
+                  _mm_add_ps(v90, _mm_shuffle_ps(_mm_movehl_ps(v90, v87), v89, 212)));
+          v92 = _mm_movemask_ps(_mm_cmplt_ps(v91, v18)) & 7;
+          if ( v92 == 7 )
           {
-            v94 = _mm_mul_ps(_mm_sub_ps(v30, v28.m_quad), v19);
+            v93 = _mm_mul_ps(_mm_sub_ps(v30, v28), v19);
             if ( _mm_movemask_ps(
                    _mm_add_ps(
-                     _mm_add_ps(_mm_shuffle_ps(v94, v94, 85), _mm_shuffle_ps(v94, v94, 0)),
-                     _mm_shuffle_ps(v94, v94, 170))) )
+                     _mm_add_ps(_mm_shuffle_ps(v93, v93, 85), _mm_shuffle_ps(v93, v93, 0)),
+                     _mm_shuffle_ps(v93, v93, 170))) )
             {
-              v95 = *v34;
+              v94 = *v34;
               v19 = _mm_xor_ps(v19, (__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 0));
-              *v34 = v585;
-              v34[1] = v95;
+              *v34 = v556;
+              v34[1] = v94;
               v32 = query.m_quad;
-              *(__m128 *)&v582.m_lastDimB.m_storage = v19;
-              v92 = _mm_shuffle_ps(v92, v92, 225);
-              *(hkVector4f *)v581 = (hkVector4f)query.m_quad;
+              *(__m128 *)&v545[40] = v19;
+              v91 = _mm_shuffle_ps(v91, v91, 225);
+              *(hkVector4f *)v545 = (hkVector4f)query.m_quad;
             }
           }
-          *(__m128 *)((char *)&v582.m_checkTriangleDots.m_quad + 8) = v92;
-          if ( v93 != 7 )
+          *(__m128 *)&v545[32] = v91;
+          if ( v92 != 7 )
           {
 LABEL_22:
-            v96 = _mm_sub_ps(v34[2], *v33);
-            v97 = _mm_sub_ps(v33[1], *v33);
-            v98 = _mm_mul_ps(v97, *(__m128 *)&v581[16]);
-            v99 = _mm_add_ps(
-                    _mm_add_ps(_mm_shuffle_ps(v98, v98, 85), _mm_shuffle_ps(v98, v98, 0)),
-                    _mm_shuffle_ps(v98, v98, 170));
-            v100 = _mm_mul_ps(v96, v97);
-            v101 = _mm_mul_ps(v96, *(__m128 *)&v581[16]);
-            v102 = _mm_add_ps(
+            v95 = _mm_sub_ps(v34[2], *v33);
+            v96 = _mm_sub_ps(v33[1], *v33);
+            v97 = _mm_mul_ps(v96, *(__m128 *)&v545[16]);
+            v98 = _mm_add_ps(
+                    _mm_add_ps(_mm_shuffle_ps(v97, v97, 85), _mm_shuffle_ps(v97, v97, 0)),
+                    _mm_shuffle_ps(v97, v97, 170));
+            v99 = _mm_mul_ps(v95, v96);
+            v100 = _mm_mul_ps(v95, *(__m128 *)&v545[16]);
+            v101 = _mm_add_ps(
+                     _mm_add_ps(_mm_shuffle_ps(v99, v99, 85), _mm_shuffle_ps(v99, v99, 0)),
+                     _mm_shuffle_ps(v99, v99, 170));
+            v102 = _mm_mul_ps(v96, v96);
+            v103 = _mm_mul_ps(*(__m128 *)&v545[16], *(__m128 *)&v545[16]);
+            v606 = _mm_add_ps(
+                     _mm_add_ps(_mm_shuffle_ps(v102, v102, 85), _mm_shuffle_ps(v102, v102, 0)),
+                     _mm_shuffle_ps(v102, v102, 170));
+            v104 = _mm_add_ps(
                      _mm_add_ps(_mm_shuffle_ps(v100, v100, 85), _mm_shuffle_ps(v100, v100, 0)),
                      _mm_shuffle_ps(v100, v100, 170));
-            v103 = _mm_mul_ps(v97, v97);
-            v104 = _mm_mul_ps(*(__m128 *)&v581[16], *(__m128 *)&v581[16]);
-            v641 = _mm_add_ps(
+            v608 = _mm_add_ps(
                      _mm_add_ps(_mm_shuffle_ps(v103, v103, 85), _mm_shuffle_ps(v103, v103, 0)),
                      _mm_shuffle_ps(v103, v103, 170));
-            v105 = _mm_add_ps(
-                     _mm_add_ps(_mm_shuffle_ps(v101, v101, 85), _mm_shuffle_ps(v101, v101, 0)),
-                     _mm_shuffle_ps(v101, v101, 170));
-            v643 = _mm_add_ps(
-                     _mm_add_ps(_mm_shuffle_ps(v104, v104, 85), _mm_shuffle_ps(v104, v104, 0)),
-                     _mm_shuffle_ps(v104, v104, 170));
-            v106 = _mm_max_ps(_mm_sub_ps(_mm_mul_ps(v643, v641), _mm_mul_ps(v99, v99)), *(__m128 *)&epsilon);
-            v107 = _mm_rcp_ps(v106);
-            v645 = v106;
-            v108 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v107, v106)), v107);
-            v109 = _mm_rcp_ps(v643);
-            v647 = v108;
-            v110 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v109, v643)), v109);
-            v111 = _mm_rcp_ps(v641);
-            v734 = v110;
-            v728 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v111, v641)), v111);
-            v112 = _mm_cmpleps(v106, *(__m128 *)&epsilon);
-            v113 = _mm_sub_ps(_mm_mul_ps(v643, v102), _mm_mul_ps(v105, v99));
-            v114 = _mm_cmpltps(v113, v106);
-            v115 = _mm_sub_ps(
+            v105 = _mm_max_ps(_mm_sub_ps(_mm_mul_ps(v608, v606), _mm_mul_ps(v98, v98)), *(__m128 *)&epsilon);
+            v106 = _mm_rcp_ps(v105);
+            v610 = v105;
+            v107 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v106, v105)), v106);
+            v108 = _mm_rcp_ps(v608);
+            v612 = v107;
+            v109 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v108, v608)), v108);
+            v110 = _mm_rcp_ps(v606);
+            v699 = v109;
+            v693 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v110, v606)), v110);
+            v111 = _mm_cmple_ps(v105, *(__m128 *)&epsilon);
+            v112 = _mm_sub_ps(_mm_mul_ps(v608, v101), _mm_mul_ps(v104, v98));
+            v113 = _mm_cmplt_ps(v112, v105);
+            v114 = _mm_sub_ps(
                      _mm_mul_ps(
                        _mm_or_ps(
                          _mm_andnot_ps(
-                           v112,
+                           v111,
                            _mm_mul_ps(
-                             _mm_max_ps(aabbOut.m_quad, _mm_or_ps(_mm_and_ps(v113, v114), _mm_andnot_ps(v114, v106))),
-                             v108)),
-                         _mm_and_ps(v112, v32)),
-                       _mm_mul_ps(v110, v99)),
-                     _mm_mul_ps(v110, v105));
-            v116 = _mm_cmpltps(v115, v32);
-            v117 = _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v115, v116), _mm_andnot_ps(v116, v32)));
-            v118 = _mm_add_ps(_mm_mul_ps(_mm_mul_ps(v728, v99), v117), _mm_mul_ps(v728, v102));
-            v119 = v34[2];
-            v120 = _mm_add_ps(_mm_mul_ps(v117, *(__m128 *)&v581[16]), v119);
-            v121 = _mm_sub_ps(v119, *v33);
-            v122 = _mm_cmpltps(v118, v32);
-            v123 = _mm_sub_ps(
+                             _mm_max_ps(aabbOut.m_quad, _mm_or_ps(_mm_and_ps(v112, v113), _mm_andnot_ps(v113, v105))),
+                             v107)),
+                         _mm_and_ps(v111, v32)),
+                       _mm_mul_ps(v109, v98)),
+                     _mm_mul_ps(v109, v104));
+            v115 = _mm_cmplt_ps(v114, v32);
+            v116 = _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v114, v115), _mm_andnot_ps(v115, v32)));
+            v117 = _mm_add_ps(_mm_mul_ps(_mm_mul_ps(v693, v98), v116), _mm_mul_ps(v693, v101));
+            v118 = v34[2];
+            v119 = _mm_cmplt_ps(v117, v32);
+            v120 = _mm_sub_ps(
                      _mm_add_ps(
                        _mm_mul_ps(
-                         _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v118, v122), _mm_andnot_ps(v122, v32))),
-                         v97),
+                         _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v117, v119), _mm_andnot_ps(v119, v32))),
+                         v96),
                        *v33),
-                     v120);
-            v124 = _mm_mul_ps(v97, v583);
-            v125 = _mm_mul_ps(v123, v123);
-            v126 = _mm_add_ps(
-                     _mm_add_ps(_mm_shuffle_ps(v125, v125, 85), _mm_shuffle_ps(v125, v125, 0)),
-                     _mm_shuffle_ps(v125, v125, 170));
-            v127 = _mm_add_ps(
-                     _mm_add_ps(_mm_shuffle_ps(v124, v124, 85), _mm_shuffle_ps(v124, v124, 0)),
-                     _mm_shuffle_ps(v124, v124, 170));
-            v128 = v121;
-            v129 = _mm_mul_ps(v121, v583);
-            v130 = _mm_mul_ps(v128, v97);
-            v131 = _mm_add_ps(
-                     _mm_add_ps(_mm_shuffle_ps(v130, v130, 85), _mm_shuffle_ps(v130, v130, 0)),
-                     _mm_shuffle_ps(v130, v130, 170));
-            v132 = _mm_mul_ps(v583, v583);
-            v133 = _mm_add_ps(
+                     _mm_add_ps(_mm_mul_ps(v116, *(__m128 *)&v545[16]), v118));
+            v121 = _mm_mul_ps(v96, v554);
+            v122 = _mm_mul_ps(v120, v120);
+            v123 = _mm_add_ps(
+                     _mm_add_ps(_mm_shuffle_ps(v122, v122, 85), _mm_shuffle_ps(v122, v122, 0)),
+                     _mm_shuffle_ps(v122, v122, 170));
+            v124 = _mm_add_ps(
+                     _mm_add_ps(_mm_shuffle_ps(v121, v121, 85), _mm_shuffle_ps(v121, v121, 0)),
+                     _mm_shuffle_ps(v121, v121, 170));
+            v125 = _mm_sub_ps(v118, *v33);
+            v126 = _mm_mul_ps(v125, v554);
+            v127 = _mm_mul_ps(v125, v96);
+            v128 = _mm_add_ps(
+                     _mm_add_ps(_mm_shuffle_ps(v127, v127, 85), _mm_shuffle_ps(v127, v127, 0)),
+                     _mm_shuffle_ps(v127, v127, 170));
+            v129 = _mm_mul_ps(v554, v554);
+            v130 = _mm_add_ps(
+                     _mm_add_ps(_mm_shuffle_ps(v126, v126, 85), _mm_shuffle_ps(v126, v126, 0)),
+                     _mm_shuffle_ps(v126, v126, 170));
+            v601[6] = v606;
+            v643 = _mm_add_ps(
                      _mm_add_ps(_mm_shuffle_ps(v129, v129, 85), _mm_shuffle_ps(v129, v129, 0)),
                      _mm_shuffle_ps(v129, v129, 170));
-            v636 = v641;
-            v678 = _mm_add_ps(
-                     _mm_add_ps(_mm_shuffle_ps(v132, v132, 85), _mm_shuffle_ps(v132, v132, 0)),
-                     _mm_shuffle_ps(v132, v132, 170));
-            v134 = _mm_max_ps(_mm_sub_ps(_mm_mul_ps(v678, v641), _mm_mul_ps(v127, v127)), *(__m128 *)&epsilon);
-            v135 = _mm_rcp_ps(v134);
-            v638 = v134;
-            v136 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v135, v134)), v135);
-            v137 = _mm_rcp_ps(v678);
-            v633 = v136;
-            v138 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v137, v678)), v137);
-            v139 = _mm_rcp_ps(v641);
-            v640 = v138;
-            v140 = _mm_cmpleps(v134, *(__m128 *)&epsilon);
-            v141 = _mm_sub_ps(_mm_mul_ps(v678, v131), _mm_mul_ps(v133, v127));
-            v683 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v139, v641)), v139);
-            v142 = _mm_cmpltps(v141, v134);
-            v143 = _mm_sub_ps(
+            v131 = _mm_max_ps(_mm_sub_ps(_mm_mul_ps(v643, v606), _mm_mul_ps(v124, v124)), *(__m128 *)&epsilon);
+            v132 = _mm_rcp_ps(v131);
+            v603 = v131;
+            v133 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v132, v131)), v132);
+            v134 = _mm_rcp_ps(v643);
+            v601[3] = v133;
+            v135 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v134, v643)), v134);
+            v136 = _mm_rcp_ps(v606);
+            v605 = v135;
+            v137 = _mm_cmple_ps(v131, *(__m128 *)&epsilon);
+            v138 = _mm_sub_ps(_mm_mul_ps(v643, v128), _mm_mul_ps(v130, v124));
+            v648 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v136, v606)), v136);
+            v139 = _mm_cmplt_ps(v138, v131);
+            v140 = _mm_sub_ps(
                      _mm_mul_ps(
                        _mm_or_ps(
                          _mm_andnot_ps(
-                           v140,
+                           v137,
                            _mm_mul_ps(
-                             _mm_max_ps(aabbOut.m_quad, _mm_or_ps(_mm_and_ps(v142, v141), _mm_andnot_ps(v142, v134))),
-                             v136)),
-                         _mm_and_ps(v140, *(__m128 *)v581)),
-                       _mm_mul_ps(v138, v127)),
-                     _mm_mul_ps(v138, v133));
-            v144 = _mm_cmpltps(v143, *(__m128 *)v581);
-            v145 = v34[2];
-            v19 = *(__m128 *)&v582.m_lastDimB.m_storage;
+                             _mm_max_ps(aabbOut.m_quad, _mm_or_ps(_mm_and_ps(v139, v138), _mm_andnot_ps(v139, v131))),
+                             v133)),
+                         _mm_and_ps(v137, *(__m128 *)v545)),
+                       _mm_mul_ps(v135, v124)),
+                     _mm_mul_ps(v135, v130));
+            v141 = _mm_cmplt_ps(v140, *(__m128 *)v545);
+            v142 = v34[2];
+            v19 = *(__m128 *)&v545[40];
             v18 = 0i64;
-            v146 = _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v144, v143), _mm_andnot_ps(v144, *(__m128 *)v581)));
-            v147 = _mm_add_ps(_mm_mul_ps(_mm_mul_ps(v683, v127), v146), _mm_mul_ps(v683, v131));
-            v148 = _mm_cmpltps(v147, *(__m128 *)v581);
-            v149 = _mm_sub_ps(
+            v143 = _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v141, v140), _mm_andnot_ps(v141, *(__m128 *)v545)));
+            v144 = _mm_add_ps(_mm_mul_ps(_mm_mul_ps(v648, v124), v143), _mm_mul_ps(v648, v128));
+            v145 = _mm_cmplt_ps(v144, *(__m128 *)v545);
+            v146 = _mm_sub_ps(
                      _mm_add_ps(
                        _mm_mul_ps(
                          _mm_max_ps(
                            (__m128)0i64,
-                           _mm_or_ps(_mm_and_ps(v148, v147), _mm_andnot_ps(v148, *(__m128 *)v581))),
-                         v97),
+                           _mm_or_ps(_mm_and_ps(v145, v144), _mm_andnot_ps(v145, *(__m128 *)v545))),
+                         v96),
                        *v33),
-                     _mm_add_ps(_mm_mul_ps(v146, v583), v145));
-            v150 = _mm_mul_ps(v149, v149);
-            v151 = _mm_cmpltps(
+                     _mm_add_ps(_mm_mul_ps(v143, v554), v142));
+            v147 = _mm_mul_ps(v146, v146);
+            v148 = _mm_cmplt_ps(
                      _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v150, v150, 85), _mm_shuffle_ps(v150, v150, 0)),
-                       _mm_shuffle_ps(v150, v150, 170)),
-                     v126);
-            *v34 = _mm_or_ps(_mm_andnot_ps(v151, v34[1]), _mm_and_ps(*v34, v151));
-            v34[1] = v145;
+                       _mm_add_ps(_mm_shuffle_ps(v147, v147, 85), _mm_shuffle_ps(v147, v147, 0)),
+                       _mm_shuffle_ps(v147, v147, 170)),
+                     v123);
+            *v34 = _mm_or_ps(_mm_andnot_ps(v148, v34[1]), _mm_and_ps(*v34, v148));
+            v34[1] = v142;
 LABEL_37:
-            v68 = 2;
+            v67 = 2;
             goto LABEL_38;
           }
-          *v33 = v71;
-          v68 = 0;
+          *v33 = v70;
+          v67 = 0;
 LABEL_38:
-          v30 = *(__m128 *)((char *)&v582.m_verticesA[0].m_quad + 8);
-          v28.m_quad = *(__m128 *)((char *)v582.m_verticesBinA + 8);
-          *(hkVector4f *)v581 = (hkVector4f)query.m_quad;
-          *(hkcdVertex *)&v581[8] = *(hkcdVertex *)((char *)v582.m_verticesA + 8);
-          v582.m_checkTriangleDots = *(hkVector4f *)((char *)v582.m_verticesBinA + 8);
+          v30 = v546;
+          v28 = v550;
+          *(_QWORD *)v545 = 0x3F8000003F800000i64;
+          *(__m128 *)&v545[8] = v546;
+          *(__m128 *)&v545[24] = v550;
           goto LABEL_39;
         }
-        v152 = *v34;
-        v153 = v33[1];
-        v154 = *(__m128 *)((char *)&v582.m_checkTriangleDots.m_quad + 8);
-        v155 = _mm_mul_ps(_mm_sub_ps(*v33, *v34), v19);
-        v156 = _mm_add_ps(
-                 _mm_add_ps(_mm_shuffle_ps(v155, v155, 85), _mm_shuffle_ps(v155, v155, 0)),
-                 _mm_shuffle_ps(v155, v155, 170));
-        v157 = _mm_mul_ps(_mm_sub_ps(v33[1], *v34), v19);
-        v158 = _mm_add_ps(
-                 _mm_add_ps(_mm_shuffle_ps(v157, v157, 85), _mm_shuffle_ps(v157, v157, 0)),
-                 _mm_shuffle_ps(v157, v157, 170));
-        if ( (float)(v158.m128_f32[0] * v156.m128_f32[0]) < v18.m128_f32[0] )
+        v149 = *v34;
+        v150 = v33[1];
+        v151 = *(__m128 *)&v545[32];
+        v152 = _mm_mul_ps(_mm_sub_ps(*v33, *v34), v19);
+        v153 = _mm_add_ps(
+                 _mm_add_ps(_mm_shuffle_ps(v152, v152, 85), _mm_shuffle_ps(v152, v152, 0)),
+                 _mm_shuffle_ps(v152, v152, 170));
+        v154 = _mm_mul_ps(_mm_sub_ps(v150, *v34), v19);
+        v155 = _mm_add_ps(
+                 _mm_add_ps(_mm_shuffle_ps(v154, v154, 85), _mm_shuffle_ps(v154, v154, 0)),
+                 _mm_shuffle_ps(v154, v154, 170));
+        if ( (float)(v155.m128_f32[0] * v153.m128_f32[0]) < v18.m128_f32[0] )
         {
-          v642 = _mm_sub_ps(v156, v158);
-          v159 = _mm_rcp_ps(v642);
-          v723 = _mm_mul_ps(_mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v642, v159)), v159), v156);
-          v152 = *v34;
-          v153 = v33[1];
-          v160 = _mm_sub_ps(v34[2], *v34);
-          v161 = _mm_sub_ps(v34[1], *v34);
-          v162 = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(v33[1], *v33), v723), *v33);
-          v163 = _mm_sub_ps(
-                   _mm_mul_ps(_mm_shuffle_ps(v160, v160, 201), v161),
-                   _mm_mul_ps(_mm_shuffle_ps(v161, v161, 201), v160));
-          v164 = _mm_shuffle_ps(v163, v163, 201);
-          v165 = _mm_sub_ps(v34[1], v162);
-          v166 = _mm_sub_ps(*v34, v162);
-          v167 = _mm_sub_ps(v34[2], v162);
-          v168 = _mm_shuffle_ps(v164, v164, 210);
+          v607 = _mm_sub_ps(v153, v155);
+          v156 = _mm_rcp_ps(v607);
+          v688 = _mm_mul_ps(_mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v607, v156)), v156), v153);
+          v149 = *v34;
+          v150 = v33[1];
+          v157 = _mm_sub_ps(v34[2], *v34);
+          v158 = _mm_sub_ps(v34[1], *v34);
+          v159 = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(v150, *v33), v688), *v33);
+          v160 = _mm_sub_ps(
+                   _mm_mul_ps(_mm_shuffle_ps(v157, v157, 201), v158),
+                   _mm_mul_ps(_mm_shuffle_ps(v158, v158, 201), v157));
+          v161 = _mm_shuffle_ps(v160, v160, 201);
+          v162 = _mm_sub_ps(v34[1], v159);
+          v163 = _mm_sub_ps(*v34, v159);
+          v164 = _mm_sub_ps(v34[2], v159);
+          v165 = _mm_shuffle_ps(v161, v161, 210);
+          v166 = _mm_shuffle_ps(v161, v161, 201);
+          v167 = _mm_mul_ps(
+                   _mm_sub_ps(
+                     _mm_mul_ps(_mm_shuffle_ps(v164, v164, 201), v165),
+                     _mm_mul_ps(_mm_shuffle_ps(v164, v164, 210), v166)),
+                   v162);
+          v168 = _mm_shuffle_ps(v162, v162, 210);
           v169 = _mm_mul_ps(
                    _mm_sub_ps(
-                     _mm_mul_ps(_mm_shuffle_ps(v167, v167, 201), v168),
-                     _mm_mul_ps(_mm_shuffle_ps(v167, v167, 210), v164)),
-                   v165);
-          v170 = _mm_shuffle_ps(v165, v165, 210);
-          v171 = _mm_mul_ps(
-                   _mm_sub_ps(
-                     _mm_mul_ps(_mm_shuffle_ps(v166, v166, 201), v168),
-                     _mm_mul_ps(_mm_shuffle_ps(v166, v166, 210), v164)),
-                   v167);
-          v172 = _mm_mul_ps(_mm_shuffle_ps(v165, v165, 201), v168);
-          v173 = v169;
-          v174 = _mm_unpackhi_ps(v169, v171);
-          v175 = _mm_unpacklo_ps(v173, v171);
-          v176 = _mm_mul_ps(_mm_sub_ps(v172, _mm_mul_ps(v170, v164)), v166);
-          v177 = _mm_movelh_ps(v175, v176);
+                     _mm_mul_ps(_mm_shuffle_ps(v163, v163, 201), v165),
+                     _mm_mul_ps(_mm_shuffle_ps(v163, v163, 210), v166)),
+                   v164);
+          v170 = _mm_mul_ps(_mm_shuffle_ps(v162, v162, 201), v165);
+          v171 = v167;
+          v172 = _mm_unpackhi_ps(v167, v169);
+          v173 = _mm_unpacklo_ps(v171, v169);
+          v174 = _mm_mul_ps(_mm_sub_ps(v170, _mm_mul_ps(v168, v166)), v163);
+          v175 = _mm_movelh_ps(v173, v174);
           if ( (_mm_movemask_ps(
-                  _mm_cmpltps(
+                  _mm_cmplt_ps(
                     v18,
                     _mm_add_ps(
-                      _mm_shuffle_ps(v174, v176, 228),
-                      _mm_add_ps(v177, _mm_shuffle_ps(_mm_movehl_ps(v177, v175), v176, 212))))) & 7) == 7 )
+                      _mm_shuffle_ps(v172, v174, 228),
+                      _mm_add_ps(v175, _mm_shuffle_ps(_mm_movehl_ps(v175, v173), v174, 212))))) & 7) == 7 )
           {
-            v68 = 1;
+            v67 = 1;
             goto LABEL_39;
           }
         }
-        v178 = v34[1];
-        v179 = v34[2];
-        v180 = _mm_sub_ps(v152, v179);
-        v181 = _mm_sub_ps(v34[1], v152);
-        v182 = _mm_shuffle_ps(v180, v180, 201);
-        v183 = v153;
-        v184 = v153;
-        v185 = _mm_sub_ps(v153, *v34);
-        v186 = _mm_sub_ps(v183, v178);
-        v187 = _mm_sub_ps(v34[2], v178);
-        v188 = _mm_sub_ps(v184, v179);
-        v189 = _mm_shuffle_ps(v187, v187, 201);
-        v190 = _mm_sub_ps(_mm_mul_ps(v187, v182), _mm_mul_ps(v180, v189));
-        v191 = _mm_shuffle_ps(v190, v190, 201);
-        v192 = _mm_sub_ps(_mm_mul_ps(v186, v189), _mm_mul_ps(_mm_shuffle_ps(v186, v186, 201), v187));
-        v193 = _mm_sub_ps(_mm_mul_ps(v188, v182), _mm_mul_ps(_mm_shuffle_ps(v188, v188, 201), v180));
-        v194 = _mm_mul_ps(_mm_shuffle_ps(v192, v192, 201), v191);
-        v195 = _mm_mul_ps(_mm_shuffle_ps(v193, v193, 201), v191);
-        v196 = _mm_unpacklo_ps(v194, v195);
-        v197 = _mm_sub_ps(
-                 _mm_mul_ps(_mm_shuffle_ps(v181, v181, 201), v185),
-                 _mm_mul_ps(_mm_shuffle_ps(v185, v185, 201), v181));
-        v198 = _mm_mul_ps(_mm_shuffle_ps(v197, v197, 201), v191);
-        v199 = _mm_movelh_ps(v196, v198);
-        v200 = _mm_add_ps(
-                 _mm_shuffle_ps(_mm_unpackhi_ps(v194, v195), v198, 228),
-                 _mm_add_ps(v199, _mm_shuffle_ps(_mm_movehl_ps(v199, v196), v198, 212)));
-        *(__m128 *)((char *)&v582.m_checkTriangleDots.m_quad + 8) = v200;
-        v201 = _mm_movemask_ps(_mm_cmpltps(v200, (__m128)0i64)) & 7;
-        switch ( v201 )
+        v176 = v34[1];
+        v177 = v34[2];
+        v178 = _mm_sub_ps(v149, v177);
+        v179 = _mm_sub_ps(v176, v149);
+        v180 = _mm_shuffle_ps(v178, v178, 201);
+        v181 = v150;
+        v182 = v150;
+        v183 = _mm_sub_ps(v150, *v34);
+        v184 = _mm_sub_ps(v181, v176);
+        v185 = _mm_sub_ps(v177, v176);
+        v186 = _mm_sub_ps(v182, v177);
+        v187 = _mm_shuffle_ps(v185, v185, 201);
+        v188 = _mm_sub_ps(_mm_mul_ps(v185, v180), _mm_mul_ps(v178, v187));
+        v189 = _mm_shuffle_ps(v188, v188, 201);
+        v190 = _mm_sub_ps(_mm_mul_ps(v184, v187), _mm_mul_ps(_mm_shuffle_ps(v184, v184, 201), v185));
+        v191 = _mm_sub_ps(_mm_mul_ps(v186, v180), _mm_mul_ps(_mm_shuffle_ps(v186, v186, 201), v178));
+        v192 = _mm_mul_ps(_mm_shuffle_ps(v190, v190, 201), v189);
+        v193 = _mm_mul_ps(_mm_shuffle_ps(v191, v191, 201), v189);
+        v194 = _mm_unpacklo_ps(v192, v193);
+        v195 = _mm_sub_ps(
+                 _mm_mul_ps(_mm_shuffle_ps(v179, v179, 201), v183),
+                 _mm_mul_ps(_mm_shuffle_ps(v183, v183, 201), v179));
+        v196 = _mm_mul_ps(_mm_shuffle_ps(v195, v195, 201), v189);
+        v197 = _mm_movelh_ps(v194, v196);
+        v198 = _mm_add_ps(
+                 _mm_shuffle_ps(_mm_unpackhi_ps(v192, v193), v196, 228),
+                 _mm_add_ps(v197, _mm_shuffle_ps(_mm_movehl_ps(v197, v194), v196, 212)));
+        *(__m128 *)&v545[32] = v198;
+        v199 = _mm_movemask_ps(_mm_cmplt_ps(v198, (__m128)0i64)) & 7;
+        switch ( v199 )
         {
           case 7:
-            v68 = 0;
+            v67 = 0;
             v18 = 0i64;
             *v33 = v33[1];
             goto LABEL_38;
@@ -4167,18 +4029,18 @@ LABEL_38:
           case 3:
             goto LABEL_54;
           case 1:
-            LODWORD(v202) = (unsigned __int128)_mm_shuffle_ps(v154, v154, 85);
-            LODWORD(v203) = (unsigned __int128)_mm_shuffle_ps(v154, v154, 170);
-            if ( (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v200, v200, 85)) - v202) * v203) > (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v200, v200, 170)) - v203) * v202) )
+            v200 = _mm_shuffle_ps(v151, v151, 85).m128_f32[0];
+            v201 = _mm_shuffle_ps(v151, v151, 170).m128_f32[0];
+            if ( (float)((float)(_mm_shuffle_ps(v198, v198, 85).m128_f32[0] - v200) * v201) > (float)((float)(_mm_shuffle_ps(v198, v198, 170).m128_f32[0] - v201) * v200) )
               goto LABEL_54;
             goto LABEL_53;
         }
-        if ( v201 != 2 )
+        if ( v199 != 2 )
         {
-          if ( v201 != 4
-            || (LODWORD(v256) = (unsigned __int128)_mm_shuffle_ps(v154, v154, 0),
-                LODWORD(v257) = (unsigned __int128)_mm_shuffle_ps(v154, v154, 85),
-                (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v200, v200, 0)) - v256) * v257) <= (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v200, v200, 85)) - v257) * v256)) )
+          if ( v199 != 4
+            || (v257 = _mm_shuffle_ps(v151, v151, 0).m128_f32[0],
+                v258 = _mm_shuffle_ps(v151, v151, 85).m128_f32[0],
+                (float)((float)(_mm_shuffle_ps(v198, v198, 0).m128_f32[0] - v257) * v258) <= (float)((float)(_mm_shuffle_ps(v198, v198, 85).m128_f32[0] - v258) * v257)) )
           {
 LABEL_36:
             v18 = 0i64;
@@ -4187,835 +4049,785 @@ LABEL_36:
           }
 LABEL_53:
           v34[1] = v34[2];
-          v28.m_quad = *(__m128 *)((char *)v582.m_verticesBinA + 8);
-          v30 = *(__m128 *)((char *)&v582.m_verticesA[0].m_quad + 8);
-          v582.m_checkTriangleDots = *(hkVector4f *)((char *)v582.m_verticesBinA + 8);
-          *(hkcdVertex *)&v581[8] = *(hkcdVertex *)((char *)v582.m_verticesA + 8);
-          *(hkVector4f *)v581 = (hkVector4f)query.m_quad;
+          v28 = v550;
+          v30 = v546;
+          *(__m128 *)&v545[24] = v550;
+          *(_QWORD *)&v545[16] = v546.m128_u64[1];
+          *(hkVector4f *)v545 = (hkVector4f)query.m_quad;
           goto LABEL_54;
         }
-        LODWORD(v204) = (unsigned __int128)_mm_shuffle_ps(v154, v154, 170);
-        LODWORD(v205) = (unsigned __int128)_mm_shuffle_ps(v154, v154, 0);
-        if ( (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v200, v200, 170)) - v204) * v205) > (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v200, v200, 0)) - v205) * v204) )
+        v202 = _mm_shuffle_ps(v151, v151, 170).m128_f32[0];
+        v203 = _mm_shuffle_ps(v151, v151, 0).m128_f32[0];
+        if ( (float)((float)(_mm_shuffle_ps(v198, v198, 170).m128_f32[0] - v202) * v203) > (float)((float)(_mm_shuffle_ps(v198, v198, 0).m128_f32[0] - v203)
+                                                                                                 * v202) )
           goto LABEL_36;
 LABEL_54:
-        v68 = 2;
+        v67 = 2;
         v18 = 0i64;
 LABEL_39:
-        if ( v68 )
+        if ( v67 )
         {
-          v206 = v68 - 1;
-          if ( !v206 )
+          v204 = v67 - 1;
+          if ( !v204 )
             goto LABEL_64;
-          if ( v206 != 1 )
+          if ( v204 != 1 )
             goto LABEL_149;
           dimA.m_storage = 2;
           dimB.m_storage = 2;
 LABEL_43:
-          v207 = _mm_sub_ps(v30, v28.m_quad);
-          v208 = _mm_sub_ps(*(__m128 *)((char *)&v582.m_verticesA[1].m_quad + 8), v30);
-          v209 = _mm_sub_ps(*(__m128 *)((char *)&v582.m_verticesBinA[1].m_quad + 8), v28.m_quad);
-          *(hkcdVertex *)&v581[16] = *(hkcdVertex *)((char *)&v582.m_verticesA[1] + 8);
-          v210 = _mm_shuffle_ps(v209, v209, 201);
-          v211 = _mm_shuffle_ps(v208, v208, 201);
-          v585 = v208;
-          v212 = _mm_sub_ps(_mm_mul_ps(v208, v210), _mm_mul_ps(v209, v211));
-          v19 = _mm_shuffle_ps(v212, v212, 201);
-          *(__m128 *)&v582.m_lastDimB.m_storage = v19;
-          v213 = _mm_sub_ps(_mm_mul_ps(v211, v19), _mm_mul_ps(v208, v19));
-          v214 = _mm_shuffle_ps(v213, v213, 201);
-          v215 = _mm_sub_ps(_mm_mul_ps(v210, v19), _mm_mul_ps(v209, v19));
-          v216 = _mm_mul_ps(v207, v214);
-          v217 = _mm_mul_ps(_mm_sub_ps(*(__m128 *)((char *)&v582.m_verticesBinA[1].m_quad + 8), v30), v214);
-          v218 = _mm_shuffle_ps(v215, v215, 201);
-          v219 = _mm_shuffle_ps(v216, v217, 68);
-          v220 = _mm_mul_ps(v207, v218);
-          v221 = _mm_mul_ps(_mm_sub_ps(v28.m_quad, *(__m128 *)((char *)&v582.m_verticesA[1].m_quad + 8)), v218);
-          v222 = _mm_shuffle_ps(v220, v221, 68);
-          v223 = _mm_add_ps(
-                   _mm_shuffle_ps(_mm_shuffle_ps(v220, v221, 238), _mm_shuffle_ps(v216, v217, 238), 136),
-                   _mm_add_ps(_mm_shuffle_ps(v222, v219, 221), _mm_shuffle_ps(v222, v219, 136)));
-          v224 = _mm_movemask_ps(_mm_cmpltps(v18, v223));
-          if ( v224 == 15 )
+          v205 = _mm_sub_ps(v30, v28);
+          v206 = _mm_sub_ps(v547, v30);
+          v207 = _mm_sub_ps(v551, v28);
+          *(__m128 *)&v545[16] = v547;
+          v208 = _mm_shuffle_ps(v207, v207, 201);
+          v209 = _mm_shuffle_ps(v206, v206, 201);
+          v556 = v206;
+          v210 = _mm_sub_ps(_mm_mul_ps(v206, v208), _mm_mul_ps(v207, v209));
+          v19 = _mm_shuffle_ps(v210, v210, 201);
+          *(__m128 *)&v545[40] = v19;
+          v211 = _mm_shuffle_ps(v19, v19, 201);
+          v212 = _mm_sub_ps(_mm_mul_ps(v209, v19), _mm_mul_ps(v206, v211));
+          v213 = _mm_shuffle_ps(v212, v212, 201);
+          v214 = _mm_sub_ps(_mm_mul_ps(v208, v19), _mm_mul_ps(v207, v211));
+          v215 = _mm_mul_ps(_mm_sub_ps(v551, v30), v213);
+          v216 = _mm_mul_ps(v205, v213);
+          v217 = _mm_shuffle_ps(v216, v215, 238);
+          v218 = _mm_shuffle_ps(v214, v214, 201);
+          v219 = _mm_shuffle_ps(v216, v215, 68);
+          v220 = _mm_mul_ps(_mm_sub_ps(v28, v547), v218);
+          v221 = _mm_mul_ps(v205, v218);
+          v222 = _mm_shuffle_ps(v221, v220, 238);
+          v223 = _mm_shuffle_ps(v221, v220, 68);
+          v224 = _mm_add_ps(
+                   _mm_shuffle_ps(v222, v217, 136),
+                   _mm_add_ps(_mm_shuffle_ps(v223, v219, 221), _mm_shuffle_ps(v223, v219, 136)));
+          v225 = _mm_movemask_ps(_mm_cmplt_ps(v18, v224));
+          if ( v225 == 15 )
           {
-            v402 = _mm_mul_ps(v207, v19);
-            v403 = _mm_shuffle_ps(v223, v223, 0);
-            v404 = _mm_add_ps(_mm_shuffle_ps(v223, v223, 85), v403);
-            v405 = _mm_rcp_ps(v404);
-            v653 = v404;
-            v733 = _mm_mul_ps(_mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v405, v404)), v405), v403);
-            v387 = _mm_xor_ps(
+            v366 = _mm_mul_ps(v205, v19);
+            v367 = _mm_shuffle_ps(v224, v224, 0);
+            v368 = _mm_add_ps(_mm_shuffle_ps(v224, v224, 85), v367);
+            v369 = _mm_rcp_ps(v368);
+            v618 = v368;
+            v698 = _mm_mul_ps(_mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v369, v368)), v369), v367);
+            v351 = _mm_xor_ps(
                      (__m128)_mm_slli_epi32(
                                _mm_srli_epi32(
                                  (__m128i)_mm_add_ps(
-                                            _mm_add_ps(_mm_shuffle_ps(v402, v402, 85), _mm_shuffle_ps(v402, v402, 0)),
-                                            _mm_shuffle_ps(v402, v402, 170)),
+                                            _mm_add_ps(_mm_shuffle_ps(v366, v366, 85), _mm_shuffle_ps(v366, v366, 0)),
+                                            _mm_shuffle_ps(v366, v366, 170)),
                                  0x1Fu),
                                0x1Fu),
                      v19);
-            *(__m128 *)((char *)&v582.m_closestPointOnEdgeA.m_quad + 8) = _mm_add_ps(
-                                                                            _mm_mul_ps(
-                                                                              _mm_sub_ps(
-                                                                                *(__m128 *)((char *)&v582.m_verticesA[1].m_quad
-                                                                                          + 8),
-                                                                                v30),
-                                                                              v733),
-                                                                            v30);
+            v553 = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(v547, v30), v698), v30);
             goto LABEL_148;
           }
-          v225 = v224 - 7;
-          if ( !v225 )
+          v226 = v225 - 7;
+          if ( !v226 )
           {
-            v28.m_quad = *(__m128 *)((char *)&v582.m_verticesBinA[1] + 8);
-            v582.m_checkTriangleDots = *(hkVector4f *)((char *)&v582.m_verticesBinA[1] + 8);
-            *(hkcdVertex *)((char *)v582.m_verticesBinA + 8) = *(hkcdVertex *)((char *)&v582.m_verticesBinA[1] + 8);
+            v28 = v551;
+            *(__m128 *)&v545[24] = v551;
+            v550 = v551;
 LABEL_92:
             dimB.m_storage = 1;
 LABEL_135:
-            v516 = _mm_sub_ps(v30, v28.m_quad);
-            v517 = _mm_sub_ps(*(__m128 *)((char *)&v582.m_verticesA[1].m_quad + 8), v28.m_quad);
-            v518 = _mm_sub_ps(*(__m128 *)((char *)&v582.m_verticesA[1].m_quad + 8), v30);
-            v519 = _mm_mul_ps(v517, v518);
-            v520 = _mm_add_ps(
-                     _mm_add_ps(_mm_shuffle_ps(v519, v519, 85), _mm_shuffle_ps(v519, v519, 0)),
-                     _mm_shuffle_ps(v519, v519, 170));
-            v521 = _mm_mul_ps(v516, v518);
-            v522 = _mm_add_ps(
-                     _mm_add_ps(_mm_shuffle_ps(v521, v521, 85), _mm_shuffle_ps(v521, v521, 0)),
-                     _mm_shuffle_ps(v521, v521, 170));
-            if ( (float)(v522.m128_f32[0] * v520.m128_f32[0]) >= v18.m128_f32[0] )
+            v480 = _mm_sub_ps(v30, v28);
+            v481 = _mm_sub_ps(v547, v28);
+            v482 = _mm_sub_ps(v547, v30);
+            v483 = _mm_mul_ps(v481, v482);
+            v484 = _mm_add_ps(
+                     _mm_add_ps(_mm_shuffle_ps(v483, v483, 85), _mm_shuffle_ps(v483, v483, 0)),
+                     _mm_shuffle_ps(v483, v483, 170));
+            v485 = _mm_mul_ps(v480, v482);
+            v486 = _mm_add_ps(
+                     _mm_add_ps(_mm_shuffle_ps(v485, v485, 85), _mm_shuffle_ps(v485, v485, 0)),
+                     _mm_shuffle_ps(v485, v485, 170));
+            if ( (float)(v486.m128_f32[0] * v484.m128_f32[0]) >= v18.m128_f32[0] )
             {
-              v529 = _mm_cmpleps(v520, v18);
+              v493 = _mm_cmple_ps(v484, v18);
               dimA.m_storage = 1;
-              v30 = _mm_or_ps(
-                      _mm_andnot_ps(v529, v30),
-                      _mm_and_ps(*(__m128 *)((char *)&v582.m_verticesA[1].m_quad + 8), v529));
-              *(__m128 *)&v581[8] = v30;
-              *(__m128 *)((char *)&v582.m_verticesA[0].m_quad + 8) = v30;
-              v387 = _mm_sub_ps(v30, v28.m_quad);
+              v30 = _mm_or_ps(_mm_andnot_ps(v493, v30), _mm_and_ps(v547, v493));
+              *(_QWORD *)&v545[16] = v30.m128_u64[1];
+              v546 = v30;
+              v351 = _mm_sub_ps(v30, v28);
             }
             else
             {
               dimA.m_storage = 2;
-              v523 = _mm_sub_ps(_mm_mul_ps(v516, v520), _mm_mul_ps(v517, v522));
-              v524 = _mm_mul_ps(v518, v518);
-              v525 = _mm_shuffle_ps(v518, v518, 201);
-              v526 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v523, v523, 201), v518), _mm_mul_ps(v523, v525));
-              v663 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v524, v524, 85), _mm_shuffle_ps(v524, v524, 0)),
-                       _mm_shuffle_ps(v524, v524, 170));
-              v527 = _mm_shuffle_ps(v526, v526, 201);
-              v718 = _mm_rcp_ps(v663);
-              v528 = _mm_sub_ps(_mm_mul_ps(v527, v525), _mm_mul_ps(v527, v518));
-              v387 = _mm_mul_ps(_mm_shuffle_ps(v528, v528, 201), v718);
+              v487 = _mm_sub_ps(_mm_mul_ps(v480, v484), _mm_mul_ps(v481, v486));
+              v488 = _mm_mul_ps(v482, v482);
+              v489 = _mm_shuffle_ps(v482, v482, 201);
+              v490 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v487, v487, 201), v482), _mm_mul_ps(v487, v489));
+              v628 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v488, v488, 85), _mm_shuffle_ps(v488, v488, 0)),
+                       _mm_shuffle_ps(v488, v488, 170));
+              v491 = _mm_shuffle_ps(v490, v490, 201);
+              v683 = _mm_rcp_ps(v628);
+              v492 = _mm_sub_ps(_mm_mul_ps(v491, v489), _mm_mul_ps(_mm_shuffle_ps(v491, v491, 201), v482));
+              v351 = _mm_mul_ps(_mm_shuffle_ps(v492, v492, 201), v683);
             }
 LABEL_148:
-            *(__m128 *)&v582.m_lastDimB.m_storage = v387;
+            *(__m128 *)&v545[40] = v351;
 LABEL_149:
-            v19 = *(__m128 *)&v582.m_lastDimB.m_storage;
-            *(&v582.m_lastDimB + 2) = dimB;
-            v260 = 0;
+            v19 = *(__m128 *)&v545[40];
+            *(hkPadSpu<int> *)&v545[48] = dimB;
+            v261 = 0;
             goto LABEL_65;
           }
-          v226 = v225 - 4;
-          if ( !v226 )
-            goto LABEL_92;
-          v227 = v226 - 2;
+          v227 = v226 - 4;
           if ( !v227 )
+            goto LABEL_92;
+          v228 = v227 - 2;
+          if ( !v228 )
           {
-            v30 = *(__m128 *)((char *)&v582.m_verticesA[1].m_quad + 8);
-            *(hkcdVertex *)&v581[8] = *(hkcdVertex *)((char *)&v582.m_verticesA[1] + 8);
-            *(hkcdVertex *)((char *)v582.m_verticesA + 8) = *(hkcdVertex *)((char *)&v582.m_verticesA[1] + 8);
+            v30 = v547;
+            *(_QWORD *)&v545[16] = v547.m128_u64[1];
+            v546 = v547;
 LABEL_88:
             dimA.m_storage = 1;
 LABEL_89:
-            v388 = _mm_sub_ps(v28.m_quad, v30);
-            v389 = _mm_sub_ps(*(__m128 *)((char *)&v582.m_verticesBinA[1].m_quad + 8), v30);
-            v390 = _mm_sub_ps(*(__m128 *)((char *)&v582.m_verticesBinA[1].m_quad + 8), v28.m_quad);
-            v391 = _mm_mul_ps(v389, v390);
-            v392 = _mm_add_ps(
-                     _mm_add_ps(_mm_shuffle_ps(v391, v391, 85), _mm_shuffle_ps(v391, v391, 0)),
-                     _mm_shuffle_ps(v391, v391, 170));
-            v393 = _mm_mul_ps(v390, v388);
-            v394 = _mm_add_ps(
-                     _mm_add_ps(_mm_shuffle_ps(v393, v393, 85), _mm_shuffle_ps(v393, v393, 0)),
-                     _mm_shuffle_ps(v393, v393, 170));
-            if ( (float)(v394.m128_f32[0] * v392.m128_f32[0]) >= v18.m128_f32[0] )
+            v352 = _mm_sub_ps(v28, v30);
+            v353 = _mm_sub_ps(v551, v30);
+            v354 = _mm_sub_ps(v551, v28);
+            v355 = _mm_mul_ps(v353, v354);
+            v356 = _mm_add_ps(
+                     _mm_add_ps(_mm_shuffle_ps(v355, v355, 85), _mm_shuffle_ps(v355, v355, 0)),
+                     _mm_shuffle_ps(v355, v355, 170));
+            v357 = _mm_mul_ps(v354, v352);
+            v358 = _mm_add_ps(
+                     _mm_add_ps(_mm_shuffle_ps(v357, v357, 85), _mm_shuffle_ps(v357, v357, 0)),
+                     _mm_shuffle_ps(v357, v357, 170));
+            if ( (float)(v358.m128_f32[0] * v356.m128_f32[0]) >= v18.m128_f32[0] )
             {
-              v538 = _mm_cmpleps(v392, v18);
-              v395 = 1;
-              v28.m_quad = _mm_or_ps(
-                             _mm_and_ps(*(__m128 *)((char *)&v582.m_verticesBinA[1].m_quad + 8), v538),
-                             _mm_andnot_ps(v538, v28.m_quad));
-              v582.m_checkTriangleDots = (hkVector4f)v28.m_quad;
-              v387 = _mm_sub_ps(v30, v28.m_quad);
-              *(hkVector4f *)((char *)&v582.m_verticesBinA[0].0 + 8) = (hkVector4f)v28.m_quad;
+              v502 = _mm_cmple_ps(v356, v18);
+              v359 = 1;
+              v28 = _mm_or_ps(_mm_and_ps(v551, v502), _mm_andnot_ps(v502, v28));
+              *(__m128 *)&v545[24] = v28;
+              v351 = _mm_sub_ps(v30, v28);
+              v550 = v28;
             }
             else
             {
-              v395 = 2;
-              v396 = _mm_sub_ps(_mm_mul_ps(v392, v388), _mm_mul_ps(v394, v389));
-              v397 = _mm_mul_ps(v390, v390);
-              v398 = _mm_shuffle_ps(v390, v390, 201);
-              v668 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v397, v397, 85), _mm_shuffle_ps(v397, v397, 0)),
-                       _mm_shuffle_ps(v397, v397, 170));
-              v399 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v396, v396, 201), v390), _mm_mul_ps(v398, v396));
-              v703 = _mm_rcp_ps(v668);
-              v400 = _mm_shuffle_ps(v399, v399, 201);
-              v401 = _mm_sub_ps(_mm_mul_ps(v400, v390), _mm_mul_ps(v398, v400));
-              v387 = _mm_mul_ps(_mm_shuffle_ps(v401, v401, 201), v703);
+              v359 = 2;
+              v360 = _mm_sub_ps(_mm_mul_ps(v356, v352), _mm_mul_ps(v358, v353));
+              v361 = _mm_mul_ps(v354, v354);
+              v362 = _mm_shuffle_ps(v354, v354, 201);
+              v633 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v361, v361, 85), _mm_shuffle_ps(v361, v361, 0)),
+                       _mm_shuffle_ps(v361, v361, 170));
+              v363 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v360, v360, 201), v354), _mm_mul_ps(v362, v360));
+              v668 = _mm_rcp_ps(v633);
+              v364 = _mm_shuffle_ps(v363, v363, 201);
+              v365 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v364, v364, 201), v354), _mm_mul_ps(v362, v364));
+              v351 = _mm_mul_ps(_mm_shuffle_ps(v365, v365, 201), v668);
             }
-            dimB.m_storage = v395;
+            dimB.m_storage = v359;
             goto LABEL_148;
           }
-          if ( v227 == 1 )
+          if ( v228 == 1 )
             goto LABEL_88;
-          v228 = _mm_mul_ps(v209, v208);
-          v229 = _mm_sub_ps(v28.m_quad, v30);
-          v230 = _mm_add_ps(
-                   _mm_add_ps(_mm_shuffle_ps(v228, v228, 85), _mm_shuffle_ps(v228, v228, 0)),
-                   _mm_shuffle_ps(v228, v228, 170));
-          v231 = _mm_mul_ps(v229, v208);
-          v232 = _mm_mul_ps(v229, v209);
-          v233 = _mm_mul_ps(v209, v209);
-          v234 = _mm_add_ps(
-                   _mm_add_ps(_mm_shuffle_ps(v231, v231, 85), _mm_shuffle_ps(v231, v231, 0)),
-                   _mm_shuffle_ps(v231, v231, 170));
-          v235 = _mm_mul_ps(v208, v208);
-          v236 = _mm_add_ps(
+          v229 = _mm_mul_ps(v207, v206);
+          v230 = _mm_sub_ps(v28, v30);
+          v231 = _mm_add_ps(
+                   _mm_add_ps(_mm_shuffle_ps(v229, v229, 85), _mm_shuffle_ps(v229, v229, 0)),
+                   _mm_shuffle_ps(v229, v229, 170));
+          v232 = _mm_mul_ps(v230, v206);
+          v233 = _mm_mul_ps(v230, v207);
+          v234 = _mm_mul_ps(v207, v207);
+          v235 = _mm_add_ps(
                    _mm_add_ps(_mm_shuffle_ps(v232, v232, 85), _mm_shuffle_ps(v232, v232, 0)),
                    _mm_shuffle_ps(v232, v232, 170));
-          v644 = _mm_add_ps(
-                   _mm_add_ps(_mm_shuffle_ps(v235, v235, 85), _mm_shuffle_ps(v235, v235, 0)),
-                   _mm_shuffle_ps(v235, v235, 170));
-          v688 = _mm_add_ps(
+          v236 = _mm_mul_ps(v206, v206);
+          v237 = _mm_add_ps(
                    _mm_add_ps(_mm_shuffle_ps(v233, v233, 85), _mm_shuffle_ps(v233, v233, 0)),
                    _mm_shuffle_ps(v233, v233, 170));
-          v237 = _mm_max_ps(_mm_sub_ps(_mm_mul_ps(v688, v644), _mm_mul_ps(v230, v230)), *(__m128 *)&epsilon);
-          v238 = _mm_rcp_ps(v237);
-          v646 = v237;
-          v239 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v238, v237)), v238);
-          v240 = _mm_rcp_ps(v688);
-          v713 = v239;
-          v241 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v240, v688)), v240);
-          v242 = _mm_rcp_ps(v644);
-          v648 = v241;
-          v243 = _mm_sub_ps(_mm_mul_ps(v688, v234), _mm_mul_ps(v236, v230));
-          v693 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v242, v644)), v242);
-          v244 = _mm_cmpltps(v243, v237);
-          v245 = _mm_cmpleps(v237, *(__m128 *)&epsilon);
-          v246 = _mm_mul_ps(
+          v609 = _mm_add_ps(
+                   _mm_add_ps(_mm_shuffle_ps(v236, v236, 85), _mm_shuffle_ps(v236, v236, 0)),
+                   _mm_shuffle_ps(v236, v236, 170));
+          v653 = _mm_add_ps(
+                   _mm_add_ps(_mm_shuffle_ps(v234, v234, 85), _mm_shuffle_ps(v234, v234, 0)),
+                   _mm_shuffle_ps(v234, v234, 170));
+          v238 = _mm_max_ps(_mm_sub_ps(_mm_mul_ps(v653, v609), _mm_mul_ps(v231, v231)), *(__m128 *)&epsilon);
+          v239 = _mm_rcp_ps(v238);
+          v611 = v238;
+          v240 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v239, v238)), v239);
+          v241 = _mm_rcp_ps(v653);
+          v678 = v240;
+          v242 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v241, v653)), v241);
+          v243 = _mm_rcp_ps(v609);
+          v613 = v242;
+          v244 = _mm_sub_ps(_mm_mul_ps(v653, v235), _mm_mul_ps(v237, v231));
+          v658 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v243, v609)), v243);
+          v245 = _mm_cmplt_ps(v244, v238);
+          v246 = _mm_cmple_ps(v238, *(__m128 *)&epsilon);
+          v247 = _mm_mul_ps(
                    _mm_or_ps(
                      _mm_andnot_ps(
-                       v245,
+                       v246,
                        _mm_mul_ps(
-                         _mm_max_ps(aabbOut.m_quad, _mm_or_ps(_mm_andnot_ps(v244, v237), _mm_and_ps(v243, v244))),
-                         v239)),
-                     _mm_and_ps(v245, *(__m128 *)v581)),
-                   _mm_mul_ps(v241, v230));
-          v247 = _mm_mul_ps(v693, v230);
-          v248 = _mm_mul_ps(v693, v234);
-          v32 = *(__m128 *)v581;
-          v249 = _mm_sub_ps(v246, _mm_mul_ps(v241, v236));
+                         _mm_max_ps(aabbOut.m_quad, _mm_or_ps(_mm_andnot_ps(v245, v238), _mm_and_ps(v244, v245))),
+                         v240)),
+                     _mm_and_ps(v246, *(__m128 *)v545)),
+                   _mm_mul_ps(v242, v231));
+          v248 = _mm_mul_ps(v658, v231);
+          v249 = _mm_mul_ps(v658, v235);
+          v32 = *(__m128 *)v545;
+          v250 = _mm_sub_ps(v247, _mm_mul_ps(v242, v237));
           v18 = 0i64;
-          v250 = _mm_cmpltps(v249, *(__m128 *)v581);
-          v251 = _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v249, v250), _mm_andnot_ps(v250, *(__m128 *)v581)));
-          v252 = _mm_add_ps(_mm_mul_ps(v247, v251), v248);
-          v253 = _mm_cmpltps(v252, *(__m128 *)v581);
-          v254 = _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v252, v253), _mm_andnot_ps(v253, *(__m128 *)v581)));
-          v255 = _mm_movemask_ps(
-                   _mm_cmpeqps(
-                     _mm_movelh_ps(_mm_unpacklo_ps(v254, v254), _mm_unpacklo_ps(v251, v251)),
+          v251 = _mm_cmplt_ps(v250, *(__m128 *)v545);
+          v252 = _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v250, v251), _mm_andnot_ps(v251, *(__m128 *)v545)));
+          v253 = _mm_add_ps(_mm_mul_ps(v248, v252), v249);
+          v254 = _mm_cmplt_ps(v253, *(__m128 *)v545);
+          v255 = _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v253, v254), _mm_andnot_ps(v254, *(__m128 *)v545)));
+          v256 = _mm_movemask_ps(
+                   _mm_cmpeq_ps(
+                     _mm_movelh_ps(_mm_unpacklo_ps(v255, v255), _mm_unpacklo_ps(v252, v252)),
                      (__m128)xmmword_141A71330));
-          *(__m128 *)((char *)&v582.m_closestPointOnEdgeA.m_quad + 8) = _mm_add_ps(_mm_mul_ps(v254, v585), v30);
-          if ( !v255 )
+          v553 = _mm_add_ps(_mm_mul_ps(v255, v556), v30);
+          if ( !v256 )
           {
-            v386 = _mm_mul_ps(v207, v19);
-            v387 = _mm_xor_ps(
+            v350 = _mm_mul_ps(v205, v19);
+            v351 = _mm_xor_ps(
                      (__m128)_mm_slli_epi32(
                                _mm_srli_epi32(
                                  (__m128i)_mm_add_ps(
-                                            _mm_add_ps(_mm_shuffle_ps(v386, v386, 85), _mm_shuffle_ps(v386, v386, 0)),
-                                            _mm_shuffle_ps(v386, v386, 170)),
+                                            _mm_add_ps(_mm_shuffle_ps(v350, v350, 85), _mm_shuffle_ps(v350, v350, 0)),
+                                            _mm_shuffle_ps(v350, v350, 170)),
                                  0x1Fu),
                                0x1Fu),
                      v19);
             goto LABEL_148;
           }
-          if ( v255 & 1 )
+          if ( (v256 & 1) != 0 )
           {
-            v30 = *(__m128 *)&v581[16];
+            v30 = *(__m128 *)&v545[16];
             dimA.m_storage = 1;
-            *(_OWORD *)&v581[8] = *(_OWORD *)&v581[16];
-            *(hkcdVertex *)((char *)v582.m_verticesA + 8) = *(hkcdVertex *)&v581[8];
+            *(_OWORD *)&v545[8] = *(_OWORD *)&v545[16];
+            v546 = *(__m128 *)&v545[8];
           }
           else
           {
-            v258 = dimA.m_storage;
-            if ( v255 & 2 )
-              v258 = 1;
-            dimA.m_storage = v258;
-          }
-          if ( v255 & 4 )
-          {
-            v28.m_quad = *(__m128 *)((char *)&v582.m_verticesBinA[1] + 8);
-            dimB.m_storage = 1;
-            v582.m_checkTriangleDots = *(hkVector4f *)((char *)&v582.m_verticesBinA[1] + 8);
-            *(hkcdVertex *)((char *)v582.m_verticesBinA + 8) = *(hkcdVertex *)((char *)&v582.m_verticesBinA[1] + 8);
-          }
-          else
-          {
-            v259 = dimB.m_storage;
-            if ( v255 & 8 )
+            v259 = dimA.m_storage;
+            if ( (v256 & 2) != 0 )
               v259 = 1;
-            dimB.m_storage = v259;
+            dimA.m_storage = v259;
           }
-          v31 = (dimB.m_storage | 8 * dimA.m_storage) - 9;
+          if ( (v256 & 4) != 0 )
+          {
+            v28 = v551;
+            dimB.m_storage = 1;
+            *(__m128 *)&v545[24] = v551;
+            v550 = v551;
+          }
+          else
+          {
+            v260 = dimB.m_storage;
+            if ( (v256 & 8) != 0 )
+              v260 = 1;
+            dimB.m_storage = v260;
+          }
+          v31 = (dimB.m_storage | (8 * dimA.m_storage)) - 9;
           if ( v31 > 0x18 )
           {
 LABEL_64:
-            v260 = 1;
+            v261 = 1;
             goto LABEL_65;
           }
           continue;
         }
+        v19 = *(__m128 *)&v545[40];
         if ( dimA.m_storage == 2 )
         {
-          v19 = *(__m128 *)&v582.m_lastDimB.m_storage;
           dimA.m_storage = 1;
-          *(&v582.m_lastDimB + 2) = dimB;
+          *(hkPadSpu<int> *)&v545[48] = dimB;
         }
         else
         {
-          v19 = *(__m128 *)&v582.m_lastDimB.m_storage;
           dimB.m_storage = 1;
-          *((_DWORD *)&v582.m_lastDimB + 2) = 1;
+          *(_DWORD *)&v545[48] = 1;
         }
-        v260 = 0;
+        v261 = 0;
 LABEL_65:
-        v261 = _mm_mul_ps(v19, v19);
-        v262 = _mm_add_ps(
-                 _mm_add_ps(_mm_shuffle_ps(v261, v261, 85), _mm_shuffle_ps(v261, v261, 0)),
-                 _mm_shuffle_ps(v261, v261, 170));
-        v263 = _mm_rsqrt_ps(v262);
-        v673 = v262;
-        v264 = _mm_andnot_ps(
-                 _mm_cmpleps(v262, v18),
+        v262 = _mm_mul_ps(v19, v19);
+        v263 = _mm_add_ps(
+                 _mm_add_ps(_mm_shuffle_ps(v262, v262, 85), _mm_shuffle_ps(v262, v262, 0)),
+                 _mm_shuffle_ps(v262, v262, 170));
+        v264 = _mm_rsqrt_ps(v263);
+        v638 = v263;
+        v265 = _mm_andnot_ps(
+                 _mm_cmple_ps(v263, v18),
                  _mm_mul_ps(
-                   _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v263, v262), v263)),
-                   _mm_mul_ps(v263, *(__m128 *)_xmm)));
-        v265 = _mm_mul_ps(_mm_sub_ps(v30, v28.m_quad), v19);
-        v19 = _mm_mul_ps(v19, v264);
-        *(__m128 *)&v582.m_lastDimB.m_storage = v19;
-        if ( !v260
-          && (float)((float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v265, v265, 85))
-                                   + COERCE_FLOAT(_mm_shuffle_ps(v265, v265, 0)))
-                           + COERCE_FLOAT(_mm_shuffle_ps(v265, v265, 170)))
-                   * v264.m128_f32[0]) >= v603.m128_f32[0]
-          && v262.m128_f32[0] >= (float)((float)(v603.m128_f32[0] * v603.m128_f32[0])
-                                       * (float)(v603.m128_f32[0] * v603.m128_f32[0])) )
+                   _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v264, v263), v264)),
+                   _mm_mul_ps(v264, *(__m128 *)_xmm)));
+        v266 = _mm_mul_ps(_mm_sub_ps(v30, v28), v19);
+        v19 = _mm_mul_ps(v19, v265);
+        *(__m128 *)&v545[40] = v19;
+        if ( !v261
+          && (float)((float)((float)(_mm_shuffle_ps(v266, v266, 85).m128_f32[0]
+                                   + _mm_shuffle_ps(v266, v266, 0).m128_f32[0])
+                           + _mm_shuffle_ps(v266, v266, 170).m128_f32[0])
+                   * v265.m128_f32[0]) >= v574.m128_f32[0]
+          && v263.m128_f32[0] >= (float)((float)(v574.m128_f32[0] * v574.m128_f32[0])
+                                       * (float)(v574.m128_f32[0] * v574.m128_f32[0])) )
         {
-          v266 = aTb->m_rotation.m_col2.m_quad;
-          v267 = aTb->m_rotation.m_col0.m_quad;
-          v268 = shapeA->m_quad;
-          *(__m128 *)&v581[16] = v268;
+          v267 = aTb->m_rotation.m_col2.m_quad;
+          v268 = aTb->m_rotation.m_col0.m_quad;
+          *(hkcdVertex *)&v545[16] = (hkcdVertex)shapeA->m_quad;
           v269 = (__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 0);
           v270 = _mm_xor_ps(v269, v19);
-          v589 = v270;
+          v560 = v270;
           v271 = _mm_xor_ps(v270, v269);
-          v272 = v267;
-          v273 = _mm_unpackhi_ps(v267, aTb->m_rotation.m_col1.m_quad);
+          v272 = v268;
+          v273 = _mm_unpackhi_ps(v268, aTb->m_rotation.m_col1.m_quad);
           v274 = _mm_unpacklo_ps(v272, aTb->m_rotation.m_col1.m_quad);
-          v608 = v268;
-          v275 = _mm_shuffle_ps(v273, v266, 228);
-          v609 = shapeA[1].m_quad;
-          v276 = _mm_movelh_ps(v274, v266);
-          v277 = _mm_movehl_ps(v276, v274);
-          v278 = shapeA[2].m_quad;
-          v279 = _mm_mul_ps(_mm_shuffle_ps(v271, v271, 85), _mm_shuffle_ps(v277, v266, 212));
-          v610 = v278;
-          v280 = shapeA[3].m_quad;
-          v592 = v278;
-          v611 = v280;
-          v281 = *shapeB;
-          v612 = v281;
-          v282 = shapeB[1];
-          v283 = v270;
-          v613 = v282;
-          v284 = shapeB[2];
-          v583 = v609;
-          v285 = _mm_add_ps(
-                   _mm_add_ps(v279, _mm_mul_ps(_mm_shuffle_ps(v271, v271, 0), v276)),
+          v579 = *(_OWORD *)&v545[16];
+          v275 = _mm_shuffle_ps(v273, v267, 228);
+          v580 = shapeA[1].m_quad;
+          v276 = _mm_movelh_ps(v274, v267);
+          v277 = _mm_mul_ps(_mm_shuffle_ps(v271, v271, 85), _mm_shuffle_ps(_mm_movehl_ps(v276, v274), v267, 212));
+          v581 = shapeA[2].m_quad;
+          v278 = shapeA[3].m_quad;
+          v563 = v581;
+          v582 = v278;
+          v279 = *shapeB;
+          v583 = v279;
+          v280 = shapeB[1];
+          v281 = v270;
+          v584 = v280;
+          v282 = (__int128)shapeB[2];
+          v554 = v580;
+          v283 = _mm_add_ps(
+                   _mm_add_ps(v277, _mm_mul_ps(_mm_shuffle_ps(v271, v271, 0), v276)),
                    _mm_mul_ps(_mm_shuffle_ps(v271, v271, 170), v275));
-          v614 = v284;
-          v286 = shapeB[3];
-          v588 = v284;
-          v601 = v280;
-          v602 = v281;
-          v287 = _mm_mul_ps(v268, v270);
-          v596 = v282;
-          v600 = v286;
-          v615 = v286;
-          v634 = v270;
-          v591 = _mm_add_ps(
-                   _mm_add_ps(_mm_shuffle_ps(v287, v287, 85), _mm_shuffle_ps(v287, v287, 0)),
-                   _mm_shuffle_ps(v287, v287, 170));
-          v604 = v591;
-          v288 = _mm_mul_ps(v609, v270);
-          v585 = v285;
-          v635 = v285;
-          v586 = _mm_add_ps(
-                   _mm_add_ps(_mm_shuffle_ps(v288, v288, 85), _mm_shuffle_ps(v288, v288, 0)),
-                   _mm_shuffle_ps(v288, v288, 170));
-          v605 = v586;
-          v289 = v598 - 4;
-          v290 = v595 - 4;
-          v291 = (__int64)&shapeA[4];
-          v292 = _mm_mul_ps(v592, v270);
-          v293 = shapeB + 4;
-          v294 = v595 - 4;
-          v295 = _mm_shuffle_ps(v292, v292, 0);
-          v296 = _mm_shuffle_ps(v292, v292, 85);
-          v297 = _mm_shuffle_ps(v292, v292, 170);
-          if ( v598 - 4 < v595 - 4 )
-            v294 = v598 - 4;
-          v298 = _mm_add_ps(_mm_add_ps(v296, v295), v297);
-          v299 = _mm_mul_ps(v280, v270);
-          v587 = v298;
-          v606 = v298;
+          v585 = (__m128)v282;
+          v284 = shapeB[3];
+          v559 = v282;
+          v572 = v278;
+          v573 = v279;
+          v285 = _mm_mul_ps(*(__m128 *)&v545[16], v270);
+          v567 = v280;
+          v571 = v284;
+          v586 = v284;
+          v601[4] = v270;
+          v562 = _mm_add_ps(
+                   _mm_add_ps(_mm_shuffle_ps(v285, v285, 85), _mm_shuffle_ps(v285, v285, 0)),
+                   _mm_shuffle_ps(v285, v285, 170));
+          v575 = v562;
+          v286 = _mm_mul_ps(v580, v270);
+          v556 = v283;
+          v601[5] = v283;
+          v557 = _mm_add_ps(
+                   _mm_add_ps(_mm_shuffle_ps(v286, v286, 85), _mm_shuffle_ps(v286, v286, 0)),
+                   _mm_shuffle_ps(v286, v286, 170));
+          v576 = v557;
+          v287 = v569 - 4;
+          v288 = m_storage - 4;
+          v289 = shapeA + 4;
+          v290 = _mm_mul_ps(v581, v270);
+          v291 = shapeB + 4;
+          v292 = m_storage - 4;
+          v293 = _mm_shuffle_ps(v290, v290, 0);
+          v294 = _mm_shuffle_ps(v290, v290, 85);
+          v295 = _mm_shuffle_ps(v290, v290, 170);
+          if ( v569 - 4 < m_storage - 4 )
+            v292 = v569 - 4;
+          v296 = _mm_add_ps(_mm_add_ps(v294, v293), v295);
+          v297 = _mm_mul_ps(v278, v270);
+          v558 = v296;
+          v577 = v296;
+          v298 = _mm_add_ps(
+                   _mm_add_ps(_mm_shuffle_ps(v297, v297, 85), _mm_shuffle_ps(v297, v297, 0)),
+                   _mm_shuffle_ps(v297, v297, 170));
+          v299 = _mm_mul_ps(v279, v283);
+          *(__m128 *)v545 = v298;
+          v578 = v298;
           v300 = _mm_add_ps(
                    _mm_add_ps(_mm_shuffle_ps(v299, v299, 85), _mm_shuffle_ps(v299, v299, 0)),
                    _mm_shuffle_ps(v299, v299, 170));
-          v301 = _mm_mul_ps(v281, v285);
-          *(__m128 *)v581 = v300;
-          v607 = v300;
+          v301 = _mm_mul_ps(v280, v283);
+          v570 = v300;
+          v587 = v300;
           v302 = _mm_add_ps(
                    _mm_add_ps(_mm_shuffle_ps(v301, v301, 85), _mm_shuffle_ps(v301, v301, 0)),
                    _mm_shuffle_ps(v301, v301, 170));
-          v303 = _mm_mul_ps(v282, v285);
-          v599 = v302;
-          v616 = v302;
+          v303 = _mm_mul_ps((__m128)v559, v283);
+          v561 = v302;
+          v588 = v302;
           v304 = _mm_add_ps(
                    _mm_add_ps(_mm_shuffle_ps(v303, v303, 85), _mm_shuffle_ps(v303, v303, 0)),
                    _mm_shuffle_ps(v303, v303, 170));
-          v305 = _mm_mul_ps(v588, v285);
-          v590 = v304;
-          v617 = v304;
-          v306 = _mm_add_ps(
+          v305 = _mm_mul_ps(v284, v283);
+          v564 = v304;
+          v589 = v304;
+          v555 = _mm_add_ps(
                    _mm_add_ps(_mm_shuffle_ps(v305, v305, 85), _mm_shuffle_ps(v305, v305, 0)),
                    _mm_shuffle_ps(v305, v305, 170));
-          v307 = _mm_mul_ps(v286, v285);
-          v593 = v306;
-          v618 = v306;
-          v584 = _mm_add_ps(
-                   _mm_add_ps(_mm_shuffle_ps(v307, v307, 85), _mm_shuffle_ps(v307, v307, 0)),
-                   _mm_shuffle_ps(v307, v307, 170));
-          v619 = v584;
-          if ( v294 > 0 )
+          v590 = v555;
+          if ( v292 > 0 )
           {
-            v308 = ((unsigned int)(v294 - 1) >> 2) + 1;
-            v309 = v308;
-            v308 *= 4;
-            v289 -= v308;
-            v290 -= v308;
+            v306 = ((unsigned int)(v292 - 1) >> 2) + 1;
+            v287 -= 4 * v306;
+            v288 -= 4 * v306;
             do
             {
-              v310 = _mm_mul_ps(v283, *(__m128 *)v291);
-              v654 = *(__m128 *)v291;
-              v311 = *(__m128 *)(v291 + 16);
-              v621 = v654;
-              v655 = v311;
-              v312 = *(__m128 *)(v291 + 32);
-              v625 = v311;
+              v307 = _mm_mul_ps(v281, v289->m_quad);
+              v619 = (__int128)v289->m_quad;
+              v308 = v289[1].m_quad;
+              v592 = v619;
+              v620 = v308;
+              v309 = v289[2].m_quad;
+              v596 = v308;
+              v310 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v307, v307, 85), _mm_shuffle_ps(v307, v307, 0)),
+                       _mm_shuffle_ps(v307, v307, 170));
+              v621 = v309;
+              v311 = _mm_mul_ps(v560, v308);
+              v622 = v289[3].m_quad;
+              v312 = *v291;
+              v598 = v309;
               v313 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v310, v310, 85), _mm_shuffle_ps(v310, v310, 0)),
-                       _mm_shuffle_ps(v310, v310, 170));
-              v656 = v312;
-              v314 = _mm_mul_ps(v589, v311);
-              v657 = *(__m128 *)(v291 + 48);
-              v315 = *v293;
-              v627 = v312;
+                       _mm_add_ps(_mm_shuffle_ps(v311, v311, 85), _mm_shuffle_ps(v311, v311, 0)),
+                       _mm_shuffle_ps(v311, v311, 170));
+              v624 = v312;
+              v314 = _mm_mul_ps(v560, v309);
+              v625 = v291[1];
+              v315 = v291[2];
+              v600 = v622;
+              v593 = v312;
               v316 = _mm_add_ps(
                        _mm_add_ps(_mm_shuffle_ps(v314, v314, 85), _mm_shuffle_ps(v314, v314, 0)),
                        _mm_shuffle_ps(v314, v314, 170));
-              v659 = v315;
-              v317 = _mm_mul_ps(v589, v312);
-              v660 = v293[1];
-              v318 = v293[2];
-              v629 = v657;
-              v622 = v315;
+              v626 = v315;
+              v317 = v291[3];
+              v318 = _mm_mul_ps(v560, v622);
+              v594 = v625;
+              v595 = v315;
+              v599 = v317;
+              v627 = v317;
               v319 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v317, v317, 85), _mm_shuffle_ps(v317, v317, 0)),
-                       _mm_shuffle_ps(v317, v317, 170));
-              v661 = v318;
-              v320 = v293[3];
-              v321 = _mm_mul_ps(v589, v657);
-              v623 = v660;
-              v624 = v318;
-              v628 = v320;
-              v662 = v320;
-              v322 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v318, v318, 85), _mm_shuffle_ps(v318, v318, 0)),
+                       _mm_shuffle_ps(v318, v318, 170));
+              v591 = v310;
+              v629 = v310;
+              v320 = _mm_mul_ps(v556, v312);
+              v630 = v313;
+              v631 = v316;
+              v632 = v319;
+              v597 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v320, v320, 85), _mm_shuffle_ps(v320, v320, 0)),
+                       _mm_shuffle_ps(v320, v320, 170));
+              v634 = v597;
+              v321 = _mm_mul_ps(v556, v625);
+              v640 = v557;
+              v641 = v558;
+              v642 = *(_OWORD *)v545;
+              v646 = v564;
+              v635 = _mm_add_ps(
                        _mm_add_ps(_mm_shuffle_ps(v321, v321, 85), _mm_shuffle_ps(v321, v321, 0)),
                        _mm_shuffle_ps(v321, v321, 170));
-              v620 = v313;
-              v664 = v313;
-              v323 = _mm_mul_ps(v585, v315);
-              v665 = v316;
-              v666 = v319;
-              v667 = v322;
-              v626 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v323, v323, 85), _mm_shuffle_ps(v323, v323, 0)),
-                       _mm_shuffle_ps(v323, v323, 170));
-              v669 = v626;
-              v324 = _mm_mul_ps(v585, v660);
-              v675 = v586;
-              v676 = v587;
-              v677 = *(_OWORD *)v581;
-              v325 = _mm_add_ps(
+              v322 = _mm_mul_ps(v556, v315);
+              v647 = v555;
+              v323 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v322, v322, 85), _mm_shuffle_ps(v322, v322, 0)),
+                       _mm_shuffle_ps(v322, v322, 170));
+              v324 = _mm_mul_ps(v556, v317);
+              v639 = v562;
+              v636 = v323;
+              v644 = v570;
+              v645 = v561;
+              v637 = _mm_add_ps(
                        _mm_add_ps(_mm_shuffle_ps(v324, v324, 85), _mm_shuffle_ps(v324, v324, 0)),
                        _mm_shuffle_ps(v324, v324, 170));
-              v681 = v593;
-              v670 = v325;
-              v326 = _mm_mul_ps(v585, v318);
-              v682 = v584;
-              v327 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v326, v326, 85), _mm_shuffle_ps(v326, v326, 0)),
-                       _mm_shuffle_ps(v326, v326, 170));
-              v328 = _mm_mul_ps(v585, v320);
-              v329 = (__m128i)_mm_cmpltps(v593, v327);
-              v674 = v591;
-              v671 = v327;
-              v330 = (__m128i)_mm_cmpltps(v591, v313);
-              v331 = (__m128i)_mm_cmpltps(v586, v316);
-              v332 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v328, v328, 85), _mm_shuffle_ps(v328, v328, 0)),
-                       _mm_shuffle_ps(v328, v328, 170));
-              v333 = (__m128i)_mm_cmpltps(v587, v319);
-              v679 = v599;
-              v334 = (__m128i)_mm_cmpltps(*(__m128 *)v581, v322);
-              v335 = (__m128i)_mm_cmpltps(v584, v332);
-              v680 = v590;
-              v336 = (__m128i)_mm_cmpltps(v599, v626);
-              v337 = _mm_andnot_ps((__m128)v330, v591);
-              v672 = v332;
-              v338 = _mm_and_ps((__m128)v330, v620);
-              v339 = (__m128i)_mm_cmpltps(v590, v325);
-              _mm_store_si128((__m128i *)&v684, v330);
-              _mm_store_si128((__m128i *)&v685, v331);
-              _mm_store_si128((__m128i *)&v686, v333);
-              v591 = _mm_or_ps(v337, v338);
-              v604 = v591;
-              v340 = _mm_andnot_ps((__m128)v331, v586);
-              _mm_store_si128((__m128i *)&v687, v334);
-              _mm_store_si128((__m128i *)&v689, v336);
-              v586 = _mm_or_ps(_mm_and_ps((__m128)v331, v316), v340);
-              v605 = v586;
-              _mm_store_si128((__m128i *)&v690, v339);
-              _mm_store_si128((__m128i *)&v691, v329);
-              _mm_store_si128((__m128i *)&v692, v335);
-              v587 = _mm_or_ps(_mm_and_ps((__m128)v333, v319), _mm_andnot_ps((__m128)v333, v587));
-              v606 = v587;
-              *(__m128 *)v581 = _mm_or_ps(_mm_and_ps((__m128)v334, v322), _mm_andnot_ps((__m128)v334, *(__m128 *)v581));
-              v607 = *(__m128 *)v581;
-              *(__m128 *)&v581[16] = _mm_or_ps(
-                                       _mm_andnot_ps((__m128)v330, *(__m128 *)&v581[16]),
-                                       _mm_and_ps((__m128)v330, v621));
-              v608 = *(__m128 *)&v581[16];
-              v592 = _mm_or_ps(_mm_andnot_ps((__m128)v333, v592), _mm_and_ps((__m128)v333, v627));
-              v610 = v592;
-              v583 = _mm_or_ps(_mm_andnot_ps((__m128)v331, v583), _mm_and_ps((__m128)v331, v625));
-              v609 = v583;
-              v599 = _mm_or_ps(_mm_and_ps((__m128)v336, v626), _mm_andnot_ps((__m128)v336, v599));
-              v616 = v599;
-              v590 = _mm_or_ps(_mm_and_ps((__m128)v339, v325), _mm_andnot_ps((__m128)v339, v590));
-              v617 = v590;
-              v601 = _mm_or_ps(_mm_andnot_ps((__m128)v334, v601), _mm_and_ps((__m128)v334, v629));
-              v611 = v601;
-              v596 = _mm_or_ps(_mm_andnot_ps((__m128)v339, v596), _mm_and_ps((__m128)v339, v623));
-              v613 = v596;
-              v593 = _mm_or_ps(_mm_and_ps((__m128)v329, v327), _mm_andnot_ps((__m128)v329, v593));
-              v618 = v593;
-              v584 = _mm_or_ps(_mm_and_ps((__m128)v335, v332), _mm_andnot_ps((__m128)v335, v584));
-              v619 = v584;
-              v602 = _mm_or_ps(_mm_andnot_ps((__m128)v336, v602), _mm_and_ps((__m128)v336, v622));
-              v612 = v602;
-              v588 = _mm_or_ps(_mm_andnot_ps((__m128)v329, v588), _mm_and_ps((__m128)v329, v624));
-              v614 = v588;
-              v283 = v589;
-              v291 += 64i64;
-              v293 += 4;
-              v600 = _mm_or_ps(_mm_andnot_ps((__m128)v335, v600), _mm_and_ps((__m128)v335, v628));
-              v615 = v600;
-              --v309;
+              v649 = _mm_cmplt_ps(v562, v310);
+              v650 = _mm_cmplt_ps(v557, v313);
+              v651 = _mm_cmplt_ps(v558, v316);
+              v562 = _mm_or_ps(_mm_andnot_ps(v649, v562), _mm_and_ps(v649, v310));
+              v575 = v562;
+              v652 = _mm_cmplt_ps(*(__m128 *)v545, v319);
+              v654 = _mm_cmplt_ps(v570, v597);
+              v557 = _mm_or_ps(_mm_and_ps(v650, v313), _mm_andnot_ps(v650, v557));
+              v576 = v557;
+              v655 = _mm_cmplt_ps(v561, v635);
+              v656 = _mm_cmplt_ps(v564, v323);
+              v657 = _mm_cmplt_ps(v555, v637);
+              v558 = _mm_or_ps(_mm_and_ps(v651, v316), _mm_andnot_ps(v651, v558));
+              v577 = v558;
+              *(__m128 *)v545 = _mm_or_ps(_mm_and_ps(v652, v319), _mm_andnot_ps(v652, *(__m128 *)v545));
+              v578 = *(__m128 *)v545;
+              *(__m128 *)&v545[16] = _mm_or_ps(
+                                       _mm_andnot_ps(v649, *(__m128 *)&v545[16]),
+                                       _mm_and_ps(v649, (__m128)v619));
+              v579 = *(_OWORD *)&v545[16];
+              v563 = _mm_or_ps(_mm_andnot_ps(v651, v563), _mm_and_ps(v651, v309));
+              v581 = v563;
+              v554 = _mm_or_ps(_mm_andnot_ps(v650, v554), _mm_and_ps(v650, v308));
+              v580 = v554;
+              v570 = _mm_or_ps(_mm_and_ps(v654, v597), _mm_andnot_ps(v654, v570));
+              v587 = v570;
+              v561 = _mm_or_ps(_mm_and_ps(v655, v635), _mm_andnot_ps(v655, v561));
+              v588 = v561;
+              v572 = _mm_or_ps(_mm_andnot_ps(v652, v572), _mm_and_ps(v652, v622));
+              v582 = v572;
+              v567 = _mm_or_ps(_mm_andnot_ps(v655, v567), _mm_and_ps(v655, v625));
+              v584 = v567;
+              v564 = _mm_or_ps(_mm_and_ps(v656, v323), _mm_andnot_ps(v656, v564));
+              v589 = v564;
+              v555 = _mm_or_ps(_mm_and_ps(v657, v637), _mm_andnot_ps(v657, v555));
+              v590 = v555;
+              v573 = _mm_or_ps(_mm_andnot_ps(v654, v573), _mm_and_ps(v654, v312));
+              v583 = v573;
+              v559 = (__int128)_mm_or_ps(_mm_andnot_ps(v656, (__m128)v559), _mm_and_ps(v656, v315));
+              v585 = (__m128)v559;
+              v281 = v560;
+              v289 += 4;
+              v291 += 4;
+              v571 = _mm_or_ps(_mm_andnot_ps(v657, v571), _mm_and_ps(v657, v317));
+              v586 = v571;
+              --v306;
             }
-            while ( v309 );
-            v19 = *(__m128 *)&v582.m_lastDimB.m_storage;
-            v30 = *(__m128 *)&v581[8];
-            v302 = v599;
+            while ( v306 );
+            v19 = *(__m128 *)&v545[40];
+            v30 = *(__m128 *)&v545[8];
+            v300 = v570;
           }
-          if ( v289 > 0 )
+          if ( v287 > 0 )
           {
-            v341 = v591;
-            v342 = v586;
-            v343 = v587;
-            v344 = (__m128 *)(v291 + 32);
-            v345 = ((unsigned int)(v289 - 1) >> 2) + 1;
+            v325 = v562;
+            v326 = v557;
+            v327 = v558;
+            p_m_quad = &v289[2].m_quad;
+            v329 = ((unsigned int)(v287 - 1) >> 2) + 1;
             do
             {
-              v346 = v344[-2];
-              v347 = _mm_mul_ps(v283, v346);
-              v694 = v344[-2];
-              v348 = v344[-1];
-              v349 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v347, v347, 85), _mm_shuffle_ps(v347, v347, 0)),
-                       _mm_shuffle_ps(v347, v347, 170));
-              v695 = v348;
-              v350 = *v344;
-              v351 = _mm_mul_ps(v283, v348);
-              v696 = v350;
-              v352 = v344[1];
-              v704 = v341;
-              v705 = v342;
-              v353 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v351, v351, 85), _mm_shuffle_ps(v351, v351, 0)),
-                       _mm_shuffle_ps(v351, v351, 170));
-              v354 = (__m128i)_mm_cmpltps(v342, v353);
-              v699 = v349;
-              v700 = v353;
-              v355 = _mm_mul_ps(v283, v350);
-              v706 = v343;
-              v697 = v352;
-              _mm_store_si128((__m128i *)&v710, v354);
-              v701 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v355, v355, 85), _mm_shuffle_ps(v355, v355, 0)),
-                       _mm_shuffle_ps(v355, v355, 170));
-              v356 = _mm_mul_ps(v283, v352);
-              v357 = (__m128i)_mm_cmpltps(v343, v701);
-              v358 = _mm_and_ps(v701, (__m128)v357);
-              _mm_store_si128((__m128i *)&v711, v357);
-              v359 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v356, v356, 85), _mm_shuffle_ps(v356, v356, 0)),
-                       _mm_shuffle_ps(v356, v356, 170));
-              v707 = *(_OWORD *)v581;
-              v360 = (__m128i)_mm_cmpltps(v341, v349);
-              v361 = (__m128i)_mm_cmpltps(*(__m128 *)v581, v359);
-              v702 = v359;
-              _mm_store_si128((__m128i *)&v709, v360);
-              _mm_store_si128((__m128i *)&v712, v361);
-              v341 = _mm_or_ps(_mm_andnot_ps((__m128)v360, v341), _mm_and_ps(v349, (__m128)v360));
-              v604 = v341;
-              v342 = _mm_or_ps(_mm_andnot_ps((__m128)v354, v342), _mm_and_ps(v353, (__m128)v354));
-              v605 = v342;
-              v344 += 4;
-              v362 = _mm_and_ps(v350, (__m128)v357);
-              *(__m128 *)v581 = _mm_or_ps(_mm_andnot_ps((__m128)v361, *(__m128 *)v581), _mm_and_ps(v359, (__m128)v361));
-              v607 = *(__m128 *)v581;
-              v583 = _mm_or_ps(_mm_andnot_ps((__m128)v354, v583), _mm_and_ps(v348, (__m128)v354));
-              v609 = v583;
-              v343 = _mm_or_ps(_mm_andnot_ps((__m128)v357, v343), v358);
-              *(__m128 *)&v581[16] = _mm_or_ps(
-                                       _mm_andnot_ps((__m128)v360, *(__m128 *)&v581[16]),
-                                       _mm_and_ps(v346, (__m128)v360));
-              v608 = *(__m128 *)&v581[16];
-              v363 = _mm_andnot_ps((__m128)v357, v592);
-              v283 = v589;
-              v606 = v343;
-              v601 = _mm_or_ps(_mm_andnot_ps((__m128)v361, v601), _mm_and_ps(v352, (__m128)v361));
-              v611 = v601;
-              v592 = _mm_or_ps(v363, v362);
-              v610 = v592;
-              --v345;
+              v330 = p_m_quad[-2];
+              v331 = _mm_mul_ps(v281, v330);
+              v659 = v330;
+              v332 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v331, v331, 85), _mm_shuffle_ps(v331, v331, 0)),
+                       _mm_shuffle_ps(v331, v331, 170));
+              v660 = p_m_quad[-1];
+              v333 = _mm_mul_ps(v281, v660);
+              v661 = *p_m_quad;
+              v334 = p_m_quad[1];
+              v669 = v325;
+              v670 = v326;
+              v664 = v332;
+              v665 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v333, v333, 85), _mm_shuffle_ps(v333, v333, 0)),
+                       _mm_shuffle_ps(v333, v333, 170));
+              v335 = _mm_mul_ps(v281, v661);
+              v671 = v327;
+              v662 = v334;
+              v675 = _mm_cmplt_ps(v326, v665);
+              v666 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v335, v335, 85), _mm_shuffle_ps(v335, v335, 0)),
+                       _mm_shuffle_ps(v335, v335, 170));
+              v336 = _mm_mul_ps(v281, v334);
+              v676 = _mm_cmplt_ps(v327, v666);
+              v672 = *(_OWORD *)v545;
+              v667 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v336, v336, 85), _mm_shuffle_ps(v336, v336, 0)),
+                       _mm_shuffle_ps(v336, v336, 170));
+              v674 = _mm_cmplt_ps(v325, v332);
+              v677 = _mm_cmplt_ps(*(__m128 *)v545, v667);
+              v325 = _mm_or_ps(_mm_andnot_ps(v674, v325), _mm_and_ps(v332, v674));
+              v575 = v325;
+              v326 = _mm_or_ps(_mm_andnot_ps(v675, v326), _mm_and_ps(v665, v675));
+              v576 = v326;
+              p_m_quad += 4;
+              *(__m128 *)v545 = _mm_or_ps(_mm_andnot_ps(v677, *(__m128 *)v545), _mm_and_ps(v667, v677));
+              v578 = *(__m128 *)v545;
+              v554 = _mm_or_ps(_mm_andnot_ps(v675, v554), _mm_and_ps(v660, v675));
+              v580 = v554;
+              v327 = _mm_or_ps(_mm_andnot_ps(v676, v327), _mm_and_ps(v666, v676));
+              *(__m128 *)&v545[16] = _mm_or_ps(_mm_andnot_ps(v674, *(__m128 *)&v545[16]), _mm_and_ps(v330, v674));
+              v579 = *(_OWORD *)&v545[16];
+              v281 = v560;
+              v577 = v327;
+              v572 = _mm_or_ps(_mm_andnot_ps(v677, v572), _mm_and_ps(v334, v677));
+              v582 = v572;
+              v563 = _mm_or_ps(_mm_andnot_ps(v676, v563), _mm_and_ps(v661, v676));
+              v581 = v563;
+              --v329;
             }
-            while ( v345 );
-            v587 = v343;
-            v302 = v599;
-            v586 = v342;
-            v30 = *(__m128 *)&v581[8];
-            v591 = v341;
-            v19 = *(__m128 *)&v582.m_lastDimB.m_storage;
+            while ( v329 );
+            v558 = v327;
+            v300 = v570;
+            v557 = v326;
+            v30 = *(__m128 *)&v545[8];
+            v562 = v325;
+            v19 = *(__m128 *)&v545[40];
           }
-          if ( v290 <= 0 )
+          if ( v288 <= 0 )
           {
-            v384 = v596;
-            v385 = v600;
+            v348 = v567;
+            v349 = v571;
           }
           else
           {
-            v364 = v590;
-            v365 = v593;
-            v366 = v293 + 2;
-            v367 = ((unsigned int)(v290 - 1) >> 2) + 1;
+            v337 = v561;
+            v338 = v564;
+            v339 = v291 + 2;
+            v340 = ((unsigned int)(v288 - 1) >> 2) + 1;
             do
             {
-              v368 = v366[-2];
-              v714 = v368;
-              v369 = v366[-1];
-              v370 = _mm_mul_ps(v585, v368);
-              v715 = v369;
-              v371 = *v366;
-              v372 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v370, v370, 85), _mm_shuffle_ps(v370, v370, 0)),
-                       _mm_shuffle_ps(v370, v370, 170));
-              v716 = v371;
-              v373 = v366[1];
-              v374 = _mm_mul_ps(v585, v369);
-              v724 = v302;
-              v725 = v364;
-              v719 = v372;
-              v726 = v365;
-              v720 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v374, v374, 85), _mm_shuffle_ps(v374, v374, 0)),
-                       _mm_shuffle_ps(v374, v374, 170));
-              v717 = v373;
-              v375 = _mm_mul_ps(v585, v371);
-              v376 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v375, v375, 85), _mm_shuffle_ps(v375, v375, 0)),
-                       _mm_shuffle_ps(v375, v375, 170));
-              v377 = _mm_mul_ps(v585, v373);
-              v378 = (__m128i)_mm_cmpltps(v364, v720);
-              v379 = (__m128i)_mm_cmpltps(v365, v376);
-              v721 = v376;
-              v380 = _mm_and_ps(v720, (__m128)v378);
-              _mm_store_si128((__m128i *)&v730, v378);
-              _mm_store_si128((__m128i *)&v731, v379);
-              v381 = _mm_add_ps(
-                       _mm_add_ps(_mm_shuffle_ps(v377, v377, 85), _mm_shuffle_ps(v377, v377, 0)),
-                       _mm_shuffle_ps(v377, v377, 170));
-              v727 = v584;
-              v382 = (__m128i)_mm_cmpltps(v302, v372);
-              v383 = (__m128i)_mm_cmpltps(v584, v381);
-              v722 = v381;
-              _mm_store_si128((__m128i *)&v729, v382);
-              _mm_store_si128((__m128i *)&v732, v383);
-              v302 = _mm_or_ps(_mm_andnot_ps((__m128)v382, v302), _mm_and_ps(v372, (__m128)v382));
-              v616 = v302;
-              v364 = _mm_or_ps(_mm_andnot_ps((__m128)v378, v364), v380);
-              v617 = v364;
-              v366 += 4;
-              v584 = _mm_or_ps(_mm_andnot_ps((__m128)v383, v584), _mm_and_ps(v381, (__m128)v383));
-              v619 = v584;
-              v602 = _mm_or_ps(_mm_and_ps(v368, (__m128)v382), _mm_andnot_ps((__m128)v382, v602));
-              v612 = v602;
-              v384 = _mm_or_ps(_mm_and_ps(v369, (__m128)v378), _mm_andnot_ps((__m128)v378, v596));
-              v596 = v384;
-              v613 = v384;
-              v588 = _mm_or_ps(_mm_and_ps(v371, (__m128)v379), _mm_andnot_ps((__m128)v379, v588));
-              v614 = v588;
-              v385 = _mm_or_ps(_mm_and_ps(v373, (__m128)v383), _mm_andnot_ps((__m128)v383, v600));
-              v365 = _mm_or_ps(_mm_andnot_ps((__m128)v379, v365), _mm_and_ps(v376, (__m128)v379));
-              v600 = v385;
-              v615 = v385;
-              v618 = v365;
-              --v367;
+              v679 = v339[-2];
+              v341 = _mm_mul_ps(v556, v679);
+              v680 = v339[-1];
+              v342 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v341, v341, 85), _mm_shuffle_ps(v341, v341, 0)),
+                       _mm_shuffle_ps(v341, v341, 170));
+              v681 = *v339;
+              v343 = v339[1];
+              v344 = _mm_mul_ps(v556, v680);
+              v689 = v300;
+              v690 = v337;
+              v684 = v342;
+              v691 = v338;
+              v685 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v344, v344, 85), _mm_shuffle_ps(v344, v344, 0)),
+                       _mm_shuffle_ps(v344, v344, 170));
+              v682 = v343;
+              v345 = _mm_mul_ps(v556, v681);
+              v346 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v345, v345, 85), _mm_shuffle_ps(v345, v345, 0)),
+                       _mm_shuffle_ps(v345, v345, 170));
+              v347 = _mm_mul_ps(v556, v343);
+              v686 = v346;
+              v695 = _mm_cmplt_ps(v337, v685);
+              v696 = _mm_cmplt_ps(v338, v346);
+              v692 = v555;
+              v687 = _mm_add_ps(
+                       _mm_add_ps(_mm_shuffle_ps(v347, v347, 85), _mm_shuffle_ps(v347, v347, 0)),
+                       _mm_shuffle_ps(v347, v347, 170));
+              v694 = _mm_cmplt_ps(v300, v342);
+              v697 = _mm_cmplt_ps(v555, v687);
+              v300 = _mm_or_ps(_mm_andnot_ps(v694, v300), _mm_and_ps(v342, v694));
+              v587 = v300;
+              v337 = _mm_or_ps(_mm_andnot_ps(v695, v337), _mm_and_ps(v685, v695));
+              v588 = v337;
+              v339 += 4;
+              v555 = _mm_or_ps(_mm_andnot_ps(v697, v555), _mm_and_ps(v687, v697));
+              v590 = v555;
+              v573 = _mm_or_ps(_mm_and_ps(v679, v694), _mm_andnot_ps(v694, v573));
+              v583 = v573;
+              v348 = _mm_or_ps(_mm_and_ps(v680, v695), _mm_andnot_ps(v695, v567));
+              v567 = v348;
+              v584 = v348;
+              v559 = (__int128)_mm_or_ps(_mm_and_ps(v681, v696), _mm_andnot_ps(v696, (__m128)v559));
+              v585 = (__m128)v559;
+              v349 = _mm_or_ps(_mm_and_ps(v343, v697), _mm_andnot_ps(v697, v571));
+              v338 = _mm_or_ps(_mm_andnot_ps(v696, v338), _mm_and_ps(v346, v696));
+              v571 = v349;
+              v586 = v349;
+              v589 = v338;
+              --v340;
             }
-            while ( v367 );
-            v593 = v365;
-            v30 = *(__m128 *)&v581[8];
-            v590 = v364;
-            v19 = *(__m128 *)&v582.m_lastDimB.m_storage;
+            while ( v340 );
+            v564 = v338;
+            v30 = *(__m128 *)&v545[8];
+            v561 = v337;
+            v19 = *(__m128 *)&v545[40];
           }
-          v539 = _mm_cmpltps(v587, *(__m128 *)v581);
-          v540 = _mm_cmpltps(v591, v586);
-          v541 = _mm_cmpltps(v593, v584);
-          v542 = _mm_cmpltps(v302, v590);
-          v543 = _mm_cmpltps(
-                   _mm_or_ps(_mm_and_ps(v539, *(__m128 *)v581), _mm_andnot_ps(v539, v587)),
-                   _mm_or_ps(_mm_andnot_ps(v540, v591), _mm_and_ps(v540, v586)));
-          v544 = _mm_cmpltps(
-                   _mm_or_ps(_mm_and_ps(v541, v584), _mm_andnot_ps(v541, v593)),
-                   _mm_or_ps(_mm_and_ps(v542, v590), _mm_andnot_ps(v542, v302)));
-          v545 = _mm_or_ps(
-                   _mm_andnot_ps(v544, _mm_or_ps(_mm_and_ps(v385, v541), _mm_andnot_ps(v541, v588))),
-                   _mm_and_ps(_mm_or_ps(_mm_and_ps(v384, v542), _mm_andnot_ps(v542, v602)), v544));
-          v546 = _mm_add_ps(
+          v503 = _mm_cmplt_ps(v558, *(__m128 *)v545);
+          v504 = _mm_cmplt_ps(v562, v557);
+          v505 = _mm_cmplt_ps(v564, v555);
+          v506 = _mm_cmplt_ps(v300, v561);
+          v507 = _mm_cmplt_ps(
+                   _mm_or_ps(_mm_and_ps(v503, *(__m128 *)v545), _mm_andnot_ps(v503, v558)),
+                   _mm_or_ps(_mm_andnot_ps(v504, v562), _mm_and_ps(v504, v557)));
+          v508 = _mm_cmplt_ps(
+                   _mm_or_ps(_mm_and_ps(v505, v555), _mm_andnot_ps(v505, v564)),
+                   _mm_or_ps(_mm_and_ps(v506, v561), _mm_andnot_ps(v506, v300)));
+          v509 = _mm_or_ps(
+                   _mm_andnot_ps(v508, _mm_or_ps(_mm_and_ps(v349, v505), _mm_andnot_ps(v505, (__m128)v559))),
+                   _mm_and_ps(_mm_or_ps(_mm_and_ps(v348, v506), _mm_andnot_ps(v506, v573)), v508));
+          v510 = _mm_add_ps(
                    _mm_add_ps(
                      _mm_add_ps(
-                       _mm_mul_ps(_mm_shuffle_ps(v545, v545, 0), aTb->m_rotation.m_col0.m_quad),
-                       _mm_mul_ps(_mm_shuffle_ps(v545, v545, 85), aTb->m_rotation.m_col1.m_quad)),
-                     _mm_mul_ps(_mm_shuffle_ps(v545, v545, 170), aTb->m_rotation.m_col2.m_quad)),
+                       _mm_mul_ps(_mm_shuffle_ps(v509, v509, 0), aTb->m_rotation.m_col0.m_quad),
+                       _mm_mul_ps(_mm_shuffle_ps(v509, v509, 85), aTb->m_rotation.m_col1.m_quad)),
+                     _mm_mul_ps(_mm_shuffle_ps(v509, v509, 170), aTb->m_rotation.m_col2.m_quad)),
                    aTb->m_translation.m_quad);
-          v547 = _mm_or_ps(
-                   _mm_andnot_ps(v543, _mm_or_ps(_mm_and_ps(v601, v539), _mm_andnot_ps(v539, v592))),
-                   _mm_and_ps(_mm_or_ps(_mm_and_ps(v583, v540), _mm_andnot_ps(v540, *(__m128 *)&v581[16])), v543));
-          v548 = _mm_shuffle_ps(v546, _mm_unpackhi_ps(v546, v545), 196);
-          v549 = _mm_mul_ps(_mm_sub_ps(v547, v548), v19);
-          v550 = _mm_mul_ps(_mm_sub_ps(v547, v30), v589);
-          v551 = _mm_mul_ps(_mm_sub_ps(v548, v582.m_checkTriangleDots.m_quad), v19);
-          v552 = _mm_unpacklo_ps(v549, v550);
-          v553 = _mm_movelh_ps(v552, v551);
-          v554 = _mm_mul_ps(_mm_sub_ps(v547, *(__m128 *)((char *)&v582.m_verticesA[1].m_quad + 8)), v589);
-          v555 = _mm_add_ps(
-                   _mm_shuffle_ps(_mm_unpackhi_ps(v549, v550), v551, 228),
-                   _mm_add_ps(v553, _mm_shuffle_ps(_mm_movehl_ps(v553, v552), v551, 212)));
-          v556 = _mm_mul_ps(_mm_sub_ps(v547, *(__m128 *)((char *)&v582.m_verticesA[2].m_quad + 8)), v589);
-          v557 = _mm_mul_ps(_mm_sub_ps(v548, *(__m128 *)((char *)&v582.m_verticesBinA[1].m_quad + 8)), v19);
-          v558 = _mm_shuffle_ps(v554, v556, 68);
-          v559 = _mm_mul_ps(_mm_sub_ps(v548, *(__m128 *)((char *)&v582.m_verticesBinA[2].m_quad + 8)), v19);
-          v560 = _mm_shuffle_ps(v557, v559, 68);
-          v561 = _mm_shuffle_ps(v557, v559, 238);
-          v562 = _mm_add_ps(_mm_shuffle_ps(v558, v560, 221), _mm_shuffle_ps(v558, v560, 136));
-          v29 = v603;
-          v563 = _mm_cmpltps(_mm_add_ps(_mm_shuffle_ps(_mm_shuffle_ps(v554, v556, 238), v561, 136), v562), v603);
+          v511 = _mm_or_ps(
+                   _mm_andnot_ps(v507, _mm_or_ps(_mm_and_ps(v572, v503), _mm_andnot_ps(v503, v563))),
+                   _mm_and_ps(_mm_or_ps(_mm_and_ps(v554, v504), _mm_andnot_ps(v504, *(__m128 *)&v545[16])), v507));
+          v512 = _mm_shuffle_ps(v510, _mm_unpackhi_ps(v510, v509), 196);
+          v513 = _mm_mul_ps(_mm_sub_ps(v511, v512), v19);
+          v514 = _mm_mul_ps(_mm_sub_ps(v511, v30), v560);
+          v515 = _mm_mul_ps(_mm_sub_ps(v512, *(__m128 *)&v545[24]), v19);
+          v516 = _mm_unpacklo_ps(v513, v514);
+          v517 = _mm_movelh_ps(v516, v515);
+          v518 = _mm_mul_ps(_mm_sub_ps(v511, v547), v560);
+          v519 = _mm_add_ps(
+                   _mm_shuffle_ps(_mm_unpackhi_ps(v513, v514), v515, 228),
+                   _mm_add_ps(v517, _mm_shuffle_ps(_mm_movehl_ps(v517, v516), v515, 212)));
+          v520 = _mm_mul_ps(_mm_sub_ps(v511, v548), v560);
+          v521 = _mm_mul_ps(_mm_sub_ps(v512, v551), v19);
+          v522 = _mm_shuffle_ps(v518, v520, 68);
+          v523 = _mm_mul_ps(_mm_sub_ps(v512, v552), v19);
+          v524 = _mm_shuffle_ps(v521, v523, 68);
+          v525 = _mm_shuffle_ps(v521, v523, 238);
+          v526 = _mm_add_ps(_mm_shuffle_ps(v522, v524, 221), _mm_shuffle_ps(v522, v524, 136));
+          v29 = v574;
+          v527 = _mm_cmplt_ps(_mm_add_ps(_mm_shuffle_ps(_mm_shuffle_ps(v518, v520, 238), v525, 136), v526), v574);
           switch ( _mm_movemask_ps(
-                     _mm_cmpltps(
+                     _mm_cmplt_ps(
                        _mm_movelh_ps(
-                         _mm_unpacklo_ps(aTb[1].m_rotation.m_col1.m_quad, v603),
-                         _mm_unpacklo_ps(v603, v603)),
-                       v555)) & 7 )
+                         _mm_unpacklo_ps(aTb[1].m_rotation.m_col1.m_quad, v574),
+                         _mm_unpacklo_ps(v574, v574)),
+                       v519)) & 7 )
           {
             case 1:
             case 3:
             case 5:
             case 7:
               v27 = 5;
-              v741->m_distance.m_real = _mm_shuffle_ps(v555, v555, 0);
-              v741->m_normalInA.m_quad = v19;
+              v706->m_distance.m_real = _mm_shuffle_ps(v519, v519, 0);
+              v706->m_normalInA.m_quad = v19;
               goto LABEL_173;
             case 2:
               goto LABEL_153;
             case 4:
               goto LABEL_155;
             case 6:
-              if ( COERCE_FLOAT(_mm_shuffle_ps(v555, v555, 170)) > COERCE_FLOAT(_mm_shuffle_ps(v555, v555, 85)) )
+              if ( _mm_shuffle_ps(v519, v519, 170).m128_f32[0] > _mm_shuffle_ps(v519, v519, 85).m128_f32[0] )
               {
 LABEL_155:
-                if ( _mm_movemask_ps(v563) & hkcdGskBase::dimToMaskZ[dimB.m_storage] )
+                if ( (_mm_movemask_ps(v527) & hkcdGskBase::dimToMaskZ[dimB.m_storage]) != 0 )
                 {
 LABEL_158:
-                  v564 = _mm_mul_ps(_mm_sub_ps(v30, v582.m_checkTriangleDots.m_quad), v19);
-                  v741->m_normalInA.m_quad = v19;
-                  v565 = _mm_add_ps(
-                           _mm_add_ps(_mm_shuffle_ps(v564, v564, 85), _mm_shuffle_ps(v564, v564, 0)),
-                           _mm_shuffle_ps(v564, v564, 170));
-                  v741->m_distance.m_real = v565;
+                  v528 = _mm_mul_ps(_mm_sub_ps(v30, *(__m128 *)&v545[24]), v19);
+                  v706->m_normalInA.m_quad = v19;
+                  v529 = _mm_add_ps(
+                           _mm_add_ps(_mm_shuffle_ps(v528, v528, 85), _mm_shuffle_ps(v528, v528, 0)),
+                           _mm_shuffle_ps(v528, v528, 170));
+                  v706->m_distance.m_real = v529;
                   if ( dimA.m_storage == 1 )
                   {
-                    v741->m_pointAinA = *(hkVector4f *)((char *)v582.m_verticesA + 8);
+                    v706->m_pointAinA.m_quad = v546;
                   }
                   else if ( dimB.m_storage == 1 )
                   {
-                    v741->m_pointAinA.m_quad = _mm_add_ps(
-                                                 _mm_mul_ps(v565, v19),
-                                                 *(__m128 *)((char *)&v582.m_verticesBinA[0].m_quad + 8));
+                    v706->m_pointAinA.m_quad = _mm_add_ps(_mm_mul_ps(v529, v19), v550);
                   }
                   else
                   {
-                    v741->m_pointAinA = *(hkVector4f *)((char *)&v582.m_closestPointOnEdgeA + 8);
+                    v706->m_pointAinA.m_quad = v553;
                   }
                   goto LABEL_173;
                 }
                 v18 = 0i64;
-                *(__m128 *)((char *)&v582.m_verticesBinA[0].m_quad + 16 * dimB.m_storage++ + 8) = v548;
-                v28.m_quad = *(__m128 *)((char *)v582.m_verticesBinA + 8);
+                *(&v550 + dimB.m_storage++) = v512;
+                v28 = v550;
               }
               else
               {
 LABEL_153:
-                if ( _mm_movemask_ps(v563) & hkcdGskBase::dimToMaskY[dimA.m_storage] )
+                if ( (_mm_movemask_ps(v527) & hkcdGskBase::dimToMaskY[dimA.m_storage]) != 0 )
                   goto LABEL_158;
-                *(__m128 *)((char *)&v582.m_verticesA[0].m_quad + 16 * dimA.m_storage++ + 8) = v547;
-                v28.m_quad = *(__m128 *)((char *)v582.m_verticesBinA + 8);
+                *(&v546 + dimA.m_storage++) = v511;
+                v28 = v550;
                 v18 = 0i64;
               }
               break;
@@ -5026,34 +4838,34 @@ LABEL_153:
         }
         if ( aTb[1].m_rotation.m_col0.m_quad.m128_i32[0] )
         {
-          v566 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-          v567 = v566[1];
-          if ( v567 < v566[3] )
+          Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+          v531 = Value[1];
+          if ( v531 < Value[3] )
           {
-            *(_QWORD *)v567 = "TtPenetration";
-            v568 = __rdtsc();
-            *(_DWORD *)(v567 + 8) = v568;
-            v566[1] = v567 + 16;
+            *(_QWORD *)v531 = "TtPenetration";
+            v532 = __rdtsc();
+            *(_DWORD *)(v531 + 8) = v532;
+            Value[1] = v531 + 16;
           }
-          v569 = hkcdGskBase::handlePenetration(
-                   (hkcdGskBase *)((char *)&v582 + 8),
+          v533 = hkcdGskBase::handlePenetration(
+                   (hkcdGskBase *)&v545[32],
                    &shapeInterface,
                    &shapeA,
                    &shapeB,
                    aTb,
                    &dimA,
                    &dimB,
-                   v741,
+                   v706,
                    &supportOut);
-          v570 = (_QWORD *)v566[1];
-          v27 = v569;
-          if ( (unsigned __int64)v570 < v566[3] )
+          v534 = (_QWORD *)Value[1];
+          v27 = v533;
+          if ( (unsigned __int64)v534 < Value[3] )
           {
-            *v570 = "Et";
-            v571 = __rdtsc();
-            v572 = (signed __int64)(v570 + 2);
-            *(_DWORD *)(v572 - 8) = v571;
-            v566[1] = v572;
+            *v534 = "Et";
+            v535 = __rdtsc();
+            v536 = v534 + 2;
+            *((_DWORD *)v536 - 2) = v535;
+            Value[1] = v536;
           }
         }
         else
@@ -5074,368 +4886,356 @@ LABEL_153:
           v27 = 6;
         }
 LABEL_173:
-        v573 = dimA.m_storage;
-        v574 = dimB.m_storage;
-        v575 = v582.m_verticesBinA[2].m_quad.m128_i8[4];
-        v576 = v582.m_verticesA[1].m_quad.m128_i8[4];
-        v577 = v582.m_verticesA[2].m_quad.m128_i8[4];
-        v578 = v582.m_verticesA[3].m_quad.m128_i8[4];
-        v579 = v582.m_verticesBinA[1].m_quad.m128_i8[4];
-        v740[(LOBYTE(dimA.m_storage) - 2) & 3] = v582.m_verticesBinA[3].m_quad.m128_i8[4];
-        *v740 = v576;
-        v740[1] = v577;
-        v740[2] = v578;
-        v740[v573] = v579;
-        v740[v573 + 1] = v575;
+        v537 = dimA.m_storage;
+        v538 = dimB.m_storage;
+        v539 = v551.m128_i8[12];
+        v540 = v546.m128_i8[12];
+        v541 = v547.m128_i8[12];
+        v542 = v548.m128_i8[12];
+        v543 = v550.m128_i8[12];
+        v705[(LOBYTE(dimA.m_storage) - 2) & 3] = v552.m128_i8[12];
+        *v705 = v540;
+        v705[1] = v541;
+        v705[2] = v542;
+        v705[v537] = v543;
+        v705[v537 + 1] = v539;
         result = v27;
-        v740[4] = v574 | 4 * (v27 | 16 * v573);
+        v705[4] = v538 | (4 * (v27 | (16 * v537)));
         return result;
       case 0x18u:
         v32 = g_vectorfConstants[0];
-        v406 = v28.m_quad;
-        v407 = (__m128 *)((char *)&v582.m_verticesA[0].m_quad + 8);
+        v370 = v28;
+        v371 = &v546;
 LABEL_96:
-        v408 = v407[1];
-        v409 = v407[2];
-        v410 = _mm_sub_ps(v407[1], *v407);
-        v411 = _mm_sub_ps(*v407, v409);
-        v412 = _mm_sub_ps(v407[3], *v407);
-        v413 = _mm_sub_ps(v407[2], v408);
-        v414 = _mm_sub_ps(v407[3], v408);
-        v415 = _mm_sub_ps(v407[3], v409);
-        v416 = _mm_sub_ps(
-                 _mm_mul_ps(_mm_shuffle_ps(v414, v414, 201), v413),
-                 _mm_mul_ps(_mm_shuffle_ps(v413, v413, 201), v414));
-        v417 = _mm_shuffle_ps(v416, v416, 201);
-        v418 = _mm_mul_ps(_mm_sub_ps(v406, v407[3]), v32);
-        v419 = _mm_sub_ps(
-                 _mm_mul_ps(_mm_shuffle_ps(v415, v415, 201), v411),
-                 _mm_mul_ps(_mm_shuffle_ps(v411, v411, 201), v415));
-        v420 = _mm_shuffle_ps(v419, v419, 201);
-        v421 = _mm_mul_ps(v418, v420);
-        v422 = _mm_mul_ps(v420, v420);
-        v423 = _mm_sub_ps(
-                 _mm_mul_ps(_mm_shuffle_ps(v412, v412, 201), v410),
-                 _mm_mul_ps(_mm_shuffle_ps(v410, v410, 201), v412));
-        v424 = _mm_mul_ps(v418, v417);
-        v425 = _mm_mul_ps(v417, v417);
-        v426 = _mm_shuffle_ps(v423, v423, 201);
-        v427 = _mm_unpacklo_ps(v424, v421);
-        v428 = _mm_unpackhi_ps(v424, v421);
-        v429 = _mm_mul_ps(v418, v426);
-        v430 = _mm_movelh_ps(v427, v429);
-        v431 = _mm_shuffle_ps(_mm_movehl_ps(v430, v427), v429, 212);
-        v432 = _mm_unpacklo_ps(v425, v422);
-        v433 = _mm_mul_ps(v426, v426);
-        v434 = (__m128i)_mm_add_ps(_mm_shuffle_ps(v428, v429, 228), _mm_add_ps(v430, v431));
-        v435 = _mm_movelh_ps(v432, v433);
-        v436 = _mm_add_ps(
-                 _mm_shuffle_ps(_mm_unpackhi_ps(v425, v422), v433, 228),
-                 _mm_add_ps(v435, _mm_shuffle_ps(_mm_movehl_ps(v435, v432), v433, 212)));
-        v437 = _mm_cmpeqps(v18, v436);
-        v438 = _mm_rcp_ps(v436);
-        v658 = v436;
-        v698 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v436, v438)), v438);
-        v439 = _mm_or_ps(
+        v372 = v371[1];
+        v373 = v371[2];
+        v374 = _mm_sub_ps(v372, *v371);
+        v375 = _mm_sub_ps(*v371, v373);
+        v376 = _mm_sub_ps(v371[3], *v371);
+        v377 = _mm_sub_ps(v373, v372);
+        v378 = _mm_sub_ps(v371[3], v372);
+        v379 = _mm_sub_ps(v371[3], v373);
+        v380 = _mm_sub_ps(
+                 _mm_mul_ps(_mm_shuffle_ps(v378, v378, 201), v377),
+                 _mm_mul_ps(_mm_shuffle_ps(v377, v377, 201), v378));
+        v381 = _mm_shuffle_ps(v380, v380, 201);
+        v382 = _mm_mul_ps(_mm_sub_ps(v370, v371[3]), v32);
+        v383 = _mm_sub_ps(
+                 _mm_mul_ps(_mm_shuffle_ps(v379, v379, 201), v375),
+                 _mm_mul_ps(_mm_shuffle_ps(v375, v375, 201), v379));
+        v384 = _mm_shuffle_ps(v383, v383, 201);
+        v385 = _mm_mul_ps(v382, v384);
+        v386 = _mm_mul_ps(v384, v384);
+        v387 = _mm_sub_ps(
+                 _mm_mul_ps(_mm_shuffle_ps(v376, v376, 201), v374),
+                 _mm_mul_ps(_mm_shuffle_ps(v374, v374, 201), v376));
+        v388 = _mm_mul_ps(v382, v381);
+        v389 = _mm_mul_ps(v381, v381);
+        v390 = _mm_shuffle_ps(v387, v387, 201);
+        v391 = _mm_unpacklo_ps(v388, v385);
+        v392 = _mm_unpackhi_ps(v388, v385);
+        v393 = _mm_mul_ps(v382, v390);
+        v394 = _mm_movelh_ps(v391, v393);
+        v395 = _mm_shuffle_ps(_mm_movehl_ps(v394, v391), v393, 212);
+        v396 = _mm_unpacklo_ps(v389, v386);
+        v397 = _mm_mul_ps(v390, v390);
+        v398 = (__m128i)_mm_add_ps(_mm_shuffle_ps(v392, v393, 228), _mm_add_ps(v394, v395));
+        v399 = _mm_movelh_ps(v396, v397);
+        v400 = _mm_add_ps(
+                 _mm_shuffle_ps(_mm_unpackhi_ps(v389, v386), v397, 228),
+                 _mm_add_ps(v399, _mm_shuffle_ps(_mm_movehl_ps(v399, v396), v397, 212)));
+        v401 = _mm_rcp_ps(v400);
+        v623 = v400;
+        v663 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v400, v401)), v401);
+        v402 = _mm_cmpeq_ps(v18, v400);
+        v403 = _mm_or_ps(
                  _mm_andnot_ps(
-                   v437,
-                   _mm_mul_ps(_mm_mul_ps((__m128)_mm_srli_epi32(_mm_slli_epi32(v434, 1u), 1u), (__m128)v434), v698)),
-                 _mm_and_ps(v437, (__m128)xmmword_141A712A0));
-        v440 = _mm_max_ps(
-                 _mm_shuffle_ps(v439, v439, 170),
-                 _mm_max_ps(_mm_shuffle_ps(v439, v439, 85), _mm_shuffle_ps(v439, v439, 0)));
-        v441 = (unsigned __int8)hkVector4Comparison_maskToLastIndex[_mm_movemask_ps(
+                   v402,
+                   _mm_mul_ps(_mm_mul_ps((__m128)_mm_srli_epi32(_mm_slli_epi32(v398, 1u), 1u), (__m128)v398), v663)),
+                 _mm_and_ps(v402, (__m128)xmmword_141A712A0));
+        v404 = _mm_max_ps(
+                 _mm_shuffle_ps(v403, v403, 170),
+                 _mm_max_ps(_mm_shuffle_ps(v403, v403, 85), _mm_shuffle_ps(v403, v403, 0)));
+        v405 = (unsigned __int8)hkVector4Comparison_maskToLastIndex[_mm_movemask_ps(
                                                                       _mm_and_ps(
-                                                                        _mm_cmpleps(v440, v439),
+                                                                        _mm_cmple_ps(v404, v403),
                                                                         (__m128)xmmword_141C1F4F0))];
-        if ( v440.m128_f32[0] < COERCE_FLOAT(_mm_shuffle_ps((__m128)0x358637BEu, (__m128)0x358637BEu, 0)) )
+        if ( v404.m128_f32[0] < _mm_shuffle_ps((__m128)0x358637BEu, (__m128)0x358637BEu, 0).m128_f32[0] )
           goto LABEL_64;
         LODWORD(retaddr) = 1066192077;
-        v442 = _mm_or_ps(
-                 _mm_and_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v441], (__m128)xmmword_141A712F0),
-                 _mm_andnot_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v441], v439));
-        if ( v440.m128_f32[0] <= (float)(fmax(
-                                           COERCE_FLOAT(_mm_shuffle_ps(v442, v442, 170)),
+        v406 = _mm_or_ps(
+                 _mm_and_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v405], (__m128)xmmword_141A712F0),
+                 _mm_andnot_ps((__m128)`hkVector4f::getComponent::`2::indexToMask[v405], v403));
+        if ( v404.m128_f32[0] <= (float)(fmax(
+                                           _mm_shuffle_ps(v406, v406, 170).m128_f32[0],
                                            fmax(
-                                             COERCE_FLOAT(_mm_shuffle_ps(v442, v442, 85)),
-                                             COERCE_FLOAT(_mm_shuffle_ps(v442, v442, 0))))
-                                       * COERCE_FLOAT(_mm_shuffle_ps((__m128)0x3F8CCCCDu, (__m128)0x3F8CCCCDu, 0))) )
+                                             _mm_shuffle_ps(v406, v406, 85).m128_f32[0],
+                                             _mm_shuffle_ps(v406, v406, 0).m128_f32[0]))
+                                       * _mm_shuffle_ps((__m128)0x3F8CCCCDu, (__m128)0x3F8CCCCDu, 0).m128_f32[0]) )
         {
-          v443 = 2;
-          v444 = 1;
-          v445 = 4;
-          v446 = 16i64;
-          v447 = 32i64;
-          v448 = 0i64;
-          v449 = 3i64;
-          v450 = _mm_movemask_ps(_mm_cmpleps(v18, (__m128)v434));
+          v407 = 2;
+          v408 = 1;
+          v409 = 4;
+          v410 = 16i64;
+          v411 = 32i64;
+          v412 = 0i64;
+          v413 = 3i64;
+          v414 = _mm_movemask_ps(_mm_cmple_ps(v18, (__m128)v398));
           do
           {
-            if ( v444 & v450 && v443 & v450 )
+            if ( (v408 & v414) != 0 && (v407 & v414) != 0 )
             {
-              v451 = *(__m128 *)((char *)v407 + v447);
-              v452 = _mm_sub_ps(v407[v448], v451);
-              v453 = _mm_sub_ps(v407[3], v451);
-              v454 = _mm_sub_ps(v406, v451);
-              v455 = _mm_mul_ps(v453, v452);
-              v456 = _mm_sub_ps(*(__m128 *)((char *)v407 + v446), v451);
-              v457 = _mm_mul_ps(v454, v452);
-              v458 = _mm_mul_ps(v453, v456);
-              v459 = _mm_mul_ps(v454, v456);
-              if ( (float)((float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v457, v457, 85))
-                                         + COERCE_FLOAT(_mm_shuffle_ps(v457, v457, 0)))
-                                 + COERCE_FLOAT(_mm_shuffle_ps(v457, v457, 170)))
-                         * (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v458, v458, 85))
-                                         + COERCE_FLOAT(_mm_shuffle_ps(v458, v458, 0)))
-                                 + COERCE_FLOAT(_mm_shuffle_ps(v458, v458, 170)))) >= (float)((float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v455, v455, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v455, v455, 0))) + COERCE_FLOAT(_mm_shuffle_ps(v455, v455, 170)))
-                                                                                            * (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v459, v459, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v459, v459, 0))) + COERCE_FLOAT(_mm_shuffle_ps(v459, v459, 170)))) )
-                v443 = v444;
-              v450 &= ~v443;
+              v415 = *(__m128 *)((char *)v371 + v411);
+              v416 = _mm_sub_ps(v371[v412], v415);
+              v417 = _mm_sub_ps(v371[3], v415);
+              v418 = _mm_sub_ps(v370, v415);
+              v419 = _mm_mul_ps(v417, v416);
+              v420 = _mm_sub_ps(*(__m128 *)((char *)v371 + v410), v415);
+              v421 = _mm_mul_ps(v418, v416);
+              v422 = _mm_mul_ps(v417, v420);
+              v423 = _mm_mul_ps(v418, v420);
+              if ( (float)((float)((float)(_mm_shuffle_ps(v421, v421, 85).m128_f32[0]
+                                         + _mm_shuffle_ps(v421, v421, 0).m128_f32[0])
+                                 + _mm_shuffle_ps(v421, v421, 170).m128_f32[0])
+                         * (float)((float)(_mm_shuffle_ps(v422, v422, 85).m128_f32[0]
+                                         + _mm_shuffle_ps(v422, v422, 0).m128_f32[0])
+                                 + _mm_shuffle_ps(v422, v422, 170).m128_f32[0])) >= (float)((float)((float)(_mm_shuffle_ps(v419, v419, 85).m128_f32[0] + _mm_shuffle_ps(v419, v419, 0).m128_f32[0])
+                                                                                                  + _mm_shuffle_ps(v419, v419, 170).m128_f32[0])
+                                                                                          * (float)((float)(_mm_shuffle_ps(v423, v423, 85).m128_f32[0] + _mm_shuffle_ps(v423, v423, 0).m128_f32[0])
+                                                                                                  + _mm_shuffle_ps(v423, v423, 170).m128_f32[0])) )
+                v407 = v408;
+              v414 &= ~v407;
             }
-            v443 = v445;
-            v446 = v447;
-            v445 = v444;
-            v444 = __ROL4__(v444, 1);
-            v447 = v448 * 16;
-            ++v448;
-            --v449;
+            v407 = v409;
+            v410 = v411;
+            v409 = v408;
+            v408 = __ROL4__(v408, 1);
+            v411 = v412 * 16;
+            ++v412;
+            --v413;
           }
-          while ( v449 );
-          if ( v450 & 7 )
-            v441 = (unsigned __int8)hkVector4Comparison_maskToFirstIndex[v450];
+          while ( v413 );
+          if ( (v414 & 7) != 0 )
+            v405 = (unsigned __int8)hkVector4Comparison_maskToFirstIndex[v414];
           else
-            v441 = -1;
+            v405 = -1;
         }
-        if ( v441 < 0 )
+        if ( v405 < 0 )
           goto LABEL_64;
-        v407[v441] = v407[3];
-        v28.m_quad = *(__m128 *)((char *)v582.m_verticesBinA + 8);
-        v30 = *(__m128 *)((char *)&v582.m_verticesA[0].m_quad + 8);
-        v582.m_checkTriangleDots = *(hkVector4f *)((char *)v582.m_verticesBinA + 8);
-        *(hkcdVertex *)&v581[8] = *(hkcdVertex *)((char *)v582.m_verticesA + 8);
+        v371[v405] = v371[3];
+        v28 = v550;
+        v30 = v546;
+        *(__m128 *)&v545[24] = v550;
+        *(_QWORD *)&v545[16] = v546.m128_u64[1];
         if ( dimA.m_storage == 4 )
         {
           dimA.m_storage = 3;
 LABEL_111:
-          v460 = _mm_sub_ps(v30, *(__m128 *)((char *)&v582.m_verticesA[2].m_quad + 8));
-          v461 = _mm_shuffle_ps(v460, v460, 201);
-          v462 = _mm_sub_ps(v28.m_quad, *(__m128 *)((char *)&v582.m_verticesA[1].m_quad + 8));
-          v463 = _mm_sub_ps(
-                   *(__m128 *)((char *)&v582.m_verticesA[2].m_quad + 8),
-                   *(__m128 *)((char *)&v582.m_verticesA[1].m_quad + 8));
-          v464 = _mm_sub_ps(v28.m_quad, *(__m128 *)((char *)&v582.m_verticesA[2].m_quad + 8));
-          v465 = _mm_shuffle_ps(v463, v463, 201);
-          v466 = _mm_sub_ps(*(__m128 *)((char *)&v582.m_verticesA[1].m_quad + 8), v30);
-          v467 = _mm_sub_ps(v28.m_quad, v30);
-          v468 = _mm_sub_ps(_mm_mul_ps(v461, v463), _mm_mul_ps(v465, v460));
-          v469 = _mm_shuffle_ps(v468, v468, 201);
-          *(__m128 *)&v582.m_lastDimB.m_storage = v469;
-          v470 = _mm_sub_ps(_mm_mul_ps(v465, v462), _mm_mul_ps(_mm_shuffle_ps(v462, v462, 201), v463));
-          v471 = _mm_sub_ps(_mm_mul_ps(v461, v464), _mm_mul_ps(_mm_shuffle_ps(v464, v464, 201), v460));
-          v472 = _mm_mul_ps(_mm_shuffle_ps(v470, v470, 201), v469);
-          v473 = _mm_mul_ps(_mm_shuffle_ps(v471, v471, 201), v469);
-          v474 = _mm_sub_ps(
-                   _mm_mul_ps(_mm_shuffle_ps(v466, v466, 201), v467),
-                   _mm_mul_ps(_mm_shuffle_ps(v467, v467, 201), v466));
-          v475 = _mm_unpacklo_ps(v472, v473);
-          v476 = _mm_mul_ps(_mm_shuffle_ps(v474, v474, 201), v469);
-          v477 = _mm_movelh_ps(v475, v476);
-          v478 = _mm_add_ps(
-                   _mm_shuffle_ps(_mm_unpackhi_ps(v472, v473), v476, 228),
-                   _mm_add_ps(v477, _mm_shuffle_ps(_mm_movehl_ps(v477, v475), v476, 212)));
-          v479 = _mm_movemask_ps(_mm_cmpltps(v478, v18)) & 7;
-          if ( v479 == 7 )
+          v424 = _mm_sub_ps(v30, v548);
+          v425 = _mm_shuffle_ps(v424, v424, 201);
+          v426 = _mm_sub_ps(v28, v547);
+          v427 = _mm_sub_ps(v548, v547);
+          v428 = _mm_sub_ps(v28, v548);
+          v429 = _mm_shuffle_ps(v427, v427, 201);
+          v430 = _mm_sub_ps(v547, v30);
+          v431 = _mm_sub_ps(v28, v30);
+          v432 = _mm_sub_ps(_mm_mul_ps(v425, v427), _mm_mul_ps(v429, v424));
+          v433 = _mm_shuffle_ps(v432, v432, 201);
+          *(__m128 *)&v545[40] = v433;
+          v434 = _mm_sub_ps(_mm_mul_ps(v429, v426), _mm_mul_ps(_mm_shuffle_ps(v426, v426, 201), v427));
+          v435 = _mm_sub_ps(_mm_mul_ps(v425, v428), _mm_mul_ps(_mm_shuffle_ps(v428, v428, 201), v424));
+          v436 = _mm_mul_ps(_mm_shuffle_ps(v434, v434, 201), v433);
+          v437 = _mm_mul_ps(_mm_shuffle_ps(v435, v435, 201), v433);
+          v438 = _mm_sub_ps(
+                   _mm_mul_ps(_mm_shuffle_ps(v430, v430, 201), v431),
+                   _mm_mul_ps(_mm_shuffle_ps(v431, v431, 201), v430));
+          v439 = _mm_unpacklo_ps(v436, v437);
+          v440 = _mm_mul_ps(_mm_shuffle_ps(v438, v438, 201), v433);
+          v441 = _mm_movelh_ps(v439, v440);
+          v442 = _mm_add_ps(
+                   _mm_shuffle_ps(_mm_unpackhi_ps(v436, v437), v440, 228),
+                   _mm_add_ps(v441, _mm_shuffle_ps(_mm_movehl_ps(v441, v439), v440, 212)));
+          v443 = _mm_movemask_ps(_mm_cmplt_ps(v442, v18)) & 7;
+          if ( v443 == 7 )
           {
-            v480 = _mm_mul_ps(_mm_sub_ps(v30, v28.m_quad), v469);
+            v444 = _mm_mul_ps(_mm_sub_ps(v30, v28), v433);
             if ( _mm_movemask_ps(
                    _mm_add_ps(
-                     _mm_add_ps(_mm_shuffle_ps(v480, v480, 85), _mm_shuffle_ps(v480, v480, 0)),
-                     _mm_shuffle_ps(v480, v480, 170))) )
+                     _mm_add_ps(_mm_shuffle_ps(v444, v444, 85), _mm_shuffle_ps(v444, v444, 0)),
+                     _mm_shuffle_ps(v444, v444, 170))) )
             {
-              *(hkcdVertex *)&v581[8] = *(hkcdVertex *)((char *)&v582.m_verticesA[1] + 8);
-              *(hkcdVertex *)((char *)v582.m_verticesA + 8) = *(hkcdVertex *)((char *)&v582.m_verticesA[1] + 8);
-              v481.m_quad = v30;
-              v30 = *(__m128 *)((char *)&v582.m_verticesA[1].m_quad + 8);
-              *(hkcdVertex *)((char *)&v582.m_verticesA[1] + 8) = (hkcdVertex)v481.m_quad;
-              *(__m128 *)&v582.m_lastDimB.m_storage = _mm_xor_ps(
-                                                        v469,
-                                                        (__m128)_mm_shuffle_epi32(
-                                                                  _mm_insert_epi16((__m128i)0i64, 0x8000u, 1),
-                                                                  0));
-              v478 = _mm_shuffle_ps(v478, v478, 225);
+              *(_QWORD *)&v545[16] = v547.m128_u64[1];
+              v546 = v547;
+              v445 = v30;
+              v30 = v547;
+              v547 = v445;
+              *(__m128 *)&v545[40] = _mm_xor_ps(
+                                       v433,
+                                       (__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 0));
+              v442 = _mm_shuffle_ps(v442, v442, 225);
             }
           }
-          *(__m128 *)((char *)&v582.m_checkTriangleDots.m_quad + 8) = v478;
-          if ( v479 == 7 )
+          *(__m128 *)&v545[32] = v442;
+          if ( v443 == 7 )
             goto LABEL_149;
-          v482 = hkcdGskBase::maskToIndex[v479];
-          if ( (signed int)v482 < 0 )
+          v446 = hkcdGskBase::maskToIndex[v443];
+          if ( (int)v446 < 0 )
           {
-            v483 = v482 + 8;
-            if ( v483 < 3 )
+            v447 = v446 + 8;
+            if ( v447 < 3 )
             {
-              *(__m128 *)((char *)&v582.m_verticesA[0].m_quad + 16 * v483 + 8) = *(__m128 *)((char *)&v582.m_verticesA[2]
-                                                                                           + 8);
+              *(&v546 + v447) = v548;
               goto LABEL_134;
             }
 LABEL_144:
             dimA.m_storage = 1;
             dimB.m_storage = 1;
 LABEL_145:
-            v387 = _mm_sub_ps(v30, v28.m_quad);
+            v351 = _mm_sub_ps(v30, v28);
             goto LABEL_148;
           }
-          v508 = *(char *)(v482 + 5398197060i64);
-          v509 = v482;
-          v510 = *(char *)(v482 + 5398197062i64);
-          v511 = *(__m128 *)((char *)&v582.m_verticesA[0].m_quad + 16 * v509 + 8);
-          v512 = _mm_sub_ps(v28.m_quad, v511);
-          v513 = _mm_sub_ps(*(__m128 *)((char *)&v582.m_verticesA[0].m_quad + 16 * v510 + 8), v511);
-          v514 = _mm_mul_ps(_mm_sub_ps(*(__m128 *)((char *)&v582.m_verticesA[0].m_quad + 16 * v508 + 8), v511), v512);
+          v472 = hkcdGskBase::vertexToEdgeLut[v446];
+          v473 = v446;
+          v474 = hkcdGskBase::vertexToEdgeLut[v446 + 2];
+          v475 = *(&v546 + v473);
+          v476 = _mm_sub_ps(v28, v475);
+          v477 = _mm_sub_ps(*(&v546 + v474), v475);
+          v478 = _mm_mul_ps(_mm_sub_ps(*(&v546 + v472), v475), v476);
           if ( !_mm_movemask_ps(
                   _mm_add_ps(
-                    _mm_add_ps(_mm_shuffle_ps(v514, v514, 85), _mm_shuffle_ps(v514, v514, 0)),
-                    _mm_shuffle_ps(v514, v514, 170))) )
+                    _mm_add_ps(_mm_shuffle_ps(v478, v478, 85), _mm_shuffle_ps(v478, v478, 0)),
+                    _mm_shuffle_ps(v478, v478, 170))) )
           {
-            *(__m128 *)((char *)&v582.m_verticesA[0].m_quad + 16 * v510 + 8) = *(__m128 *)((char *)&v582.m_verticesA[2]
-                                                                                         + 8);
+            *(&v546 + v474) = v548;
             goto LABEL_134;
           }
-          v515 = _mm_mul_ps(v513, v512);
-          *(__m128 *)((char *)&v582.m_verticesA[0].m_quad + 16 * v508 + 8) = *(__m128 *)((char *)&v582.m_verticesA[2] + 8);
+          v479 = _mm_mul_ps(v477, v476);
+          *(&v546 + v472) = v548;
           if ( !_mm_movemask_ps(
                   _mm_add_ps(
-                    _mm_add_ps(_mm_shuffle_ps(v515, v515, 85), _mm_shuffle_ps(v515, v515, 0)),
-                    _mm_shuffle_ps(v515, v515, 170))) )
+                    _mm_add_ps(_mm_shuffle_ps(v479, v479, 85), _mm_shuffle_ps(v479, v479, 0)),
+                    _mm_shuffle_ps(v479, v479, 170))) )
           {
 LABEL_134:
-            v28.m_quad = *(__m128 *)((char *)v582.m_verticesBinA + 8);
-            v30 = *(__m128 *)((char *)&v582.m_verticesA[0].m_quad + 8);
-            v582.m_checkTriangleDots = *(hkVector4f *)((char *)v582.m_verticesBinA + 8);
-            *(hkcdVertex *)&v581[8] = *(hkcdVertex *)((char *)v582.m_verticesA + 8);
+            v28 = v550;
+            v30 = v546;
+            *(__m128 *)&v545[24] = v550;
+            *(_QWORD *)&v545[16] = v546.m128_u64[1];
             goto LABEL_135;
           }
           dimA.m_storage = 1;
-          if ( (_DWORD)v510 == 2 )
-            LODWORD(v510) = v508;
-          *(__m128 *)((char *)&v582.m_verticesA[0].m_quad + 16 * (signed int)v510 + 8) = *(__m128 *)((char *)&v582.m_verticesA[1] + 8);
+          if ( (_DWORD)v474 == 2 )
+            LODWORD(v474) = v472;
+          *(&v546 + (int)v474) = v547;
 LABEL_132:
-          v30 = *(__m128 *)((char *)&v582.m_verticesA[0].m_quad + 8);
-          v28.m_quad = *(__m128 *)((char *)v582.m_verticesBinA + 8);
-          v582.m_checkTriangleDots = *(hkVector4f *)((char *)v582.m_verticesBinA + 8);
-          *(hkcdVertex *)&v581[8] = *(hkcdVertex *)((char *)v582.m_verticesA + 8);
-          v387 = _mm_sub_ps(
-                   *(__m128 *)((char *)&v582.m_verticesA[0].m_quad + 8),
-                   *(__m128 *)((char *)&v582.m_verticesBinA[0].m_quad + 8));
+          v30 = v546;
+          v28 = v550;
+          *(__m128 *)&v545[24] = v550;
+          *(_QWORD *)&v545[16] = v546.m128_u64[1];
+          v351 = _mm_sub_ps(v546, v550);
           goto LABEL_148;
         }
         dimB.m_storage = 3;
 LABEL_119:
-        v484 = _mm_sub_ps(v28.m_quad, *(__m128 *)((char *)&v582.m_verticesBinA[2].m_quad + 8));
-        v485 = _mm_sub_ps(
-                 *(__m128 *)((char *)&v582.m_verticesBinA[2].m_quad + 8),
-                 *(__m128 *)((char *)&v582.m_verticesBinA[1].m_quad + 8));
-        v486 = _mm_shuffle_ps(v484, v484, 201);
-        v487 = _mm_sub_ps(v30, *(__m128 *)((char *)&v582.m_verticesBinA[1].m_quad + 8));
-        v488 = _mm_shuffle_ps(v485, v485, 201);
-        v489 = _mm_sub_ps(v30, *(__m128 *)((char *)&v582.m_verticesBinA[2].m_quad + 8));
-        v490 = _mm_sub_ps(*(__m128 *)((char *)&v582.m_verticesBinA[1].m_quad + 8), v28.m_quad);
-        v491 = _mm_sub_ps(v30, v28.m_quad);
-        v492 = _mm_sub_ps(_mm_mul_ps(v485, v486), _mm_mul_ps(v484, v488));
-        v493 = _mm_shuffle_ps(v492, v492, 201);
-        *(__m128 *)&v582.m_lastDimB.m_storage = v493;
-        v494 = _mm_sub_ps(_mm_mul_ps(v487, v488), _mm_mul_ps(_mm_shuffle_ps(v487, v487, 201), v485));
-        v495 = _mm_mul_ps(_mm_shuffle_ps(v494, v494, 201), v493);
-        v496 = _mm_sub_ps(_mm_mul_ps(v489, v486), _mm_mul_ps(_mm_shuffle_ps(v489, v489, 201), v484));
-        v497 = _mm_mul_ps(_mm_shuffle_ps(v496, v496, 201), v493);
-        v498 = _mm_unpacklo_ps(v495, v497);
-        v499 = _mm_sub_ps(
-                 _mm_mul_ps(_mm_shuffle_ps(v490, v490, 201), v491),
-                 _mm_mul_ps(_mm_shuffle_ps(v491, v491, 201), v490));
-        v500 = _mm_mul_ps(_mm_shuffle_ps(v499, v499, 201), v493);
-        v501 = _mm_movelh_ps(v498, v500);
-        v502 = _mm_add_ps(
-                 _mm_shuffle_ps(_mm_unpackhi_ps(v495, v497), v500, 228),
-                 _mm_add_ps(v501, _mm_shuffle_ps(_mm_movehl_ps(v501, v498), v500, 212)));
-        v503 = _mm_movemask_ps(_mm_cmpltps(v502, v18)) & 7;
-        if ( v503 == 7 )
+        v448 = _mm_sub_ps(v28, v552);
+        v449 = _mm_sub_ps(v552, v551);
+        v450 = _mm_shuffle_ps(v448, v448, 201);
+        v451 = _mm_sub_ps(v30, v551);
+        v452 = _mm_shuffle_ps(v449, v449, 201);
+        v453 = _mm_sub_ps(v30, v552);
+        v454 = _mm_sub_ps(v551, v28);
+        v455 = _mm_sub_ps(v30, v28);
+        v456 = _mm_sub_ps(_mm_mul_ps(v449, v450), _mm_mul_ps(v448, v452));
+        v457 = _mm_shuffle_ps(v456, v456, 201);
+        *(__m128 *)&v545[40] = v457;
+        v458 = _mm_sub_ps(_mm_mul_ps(v451, v452), _mm_mul_ps(_mm_shuffle_ps(v451, v451, 201), v449));
+        v459 = _mm_mul_ps(_mm_shuffle_ps(v458, v458, 201), v457);
+        v460 = _mm_sub_ps(_mm_mul_ps(v453, v450), _mm_mul_ps(_mm_shuffle_ps(v453, v453, 201), v448));
+        v461 = _mm_mul_ps(_mm_shuffle_ps(v460, v460, 201), v457);
+        v462 = _mm_unpacklo_ps(v459, v461);
+        v463 = _mm_sub_ps(
+                 _mm_mul_ps(_mm_shuffle_ps(v454, v454, 201), v455),
+                 _mm_mul_ps(_mm_shuffle_ps(v455, v455, 201), v454));
+        v464 = _mm_mul_ps(_mm_shuffle_ps(v463, v463, 201), v457);
+        v465 = _mm_movelh_ps(v462, v464);
+        v466 = _mm_add_ps(
+                 _mm_shuffle_ps(_mm_unpackhi_ps(v459, v461), v464, 228),
+                 _mm_add_ps(v465, _mm_shuffle_ps(_mm_movehl_ps(v465, v462), v464, 212)));
+        v467 = _mm_movemask_ps(_mm_cmplt_ps(v466, v18)) & 7;
+        if ( v467 == 7 )
         {
-          v504 = _mm_mul_ps(v493, v491);
+          v468 = _mm_mul_ps(v457, v455);
           if ( _mm_movemask_ps(
                  _mm_add_ps(
-                   _mm_add_ps(_mm_shuffle_ps(v504, v504, 85), _mm_shuffle_ps(v504, v504, 0)),
-                   _mm_shuffle_ps(v504, v504, 170))) )
+                   _mm_add_ps(_mm_shuffle_ps(v468, v468, 85), _mm_shuffle_ps(v468, v468, 0)),
+                   _mm_shuffle_ps(v468, v468, 170))) )
           {
-            v582.m_checkTriangleDots = *(hkVector4f *)((char *)&v582.m_verticesBinA[1] + 8);
-            *(hkcdVertex *)((char *)v582.m_verticesBinA + 8) = *(hkcdVertex *)((char *)&v582.m_verticesBinA[1] + 8);
-            v505.m_quad = v28.m_quad;
-            v28.m_quad = *(__m128 *)((char *)&v582.m_verticesBinA[1] + 8);
-            *(hkcdVertex *)((char *)&v582.m_verticesBinA[1] + 8) = (hkcdVertex)v505.m_quad;
-            *(__m128 *)&v582.m_lastDimB.m_storage = _mm_xor_ps(
-                                                      v493,
-                                                      (__m128)_mm_shuffle_epi32(
-                                                                _mm_insert_epi16((__m128i)0i64, 0x8000u, 1),
-                                                                0));
-            v502 = _mm_shuffle_ps(v502, v502, 225);
+            *(__m128 *)&v545[24] = v551;
+            v550 = v551;
+            v469 = v28;
+            v28 = v551;
+            v551 = v469;
+            *(__m128 *)&v545[40] = _mm_xor_ps(
+                                     v457,
+                                     (__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 0));
+            v466 = _mm_shuffle_ps(v466, v466, 225);
           }
         }
-        *(__m128 *)((char *)&v582.m_checkTriangleDots.m_quad + 8) = v502;
-        if ( v503 == 7 )
+        *(__m128 *)&v545[32] = v466;
+        if ( v467 == 7 )
           goto LABEL_149;
-        v506 = hkcdGskBase::maskToIndex[v503];
-        if ( (signed int)v506 >= 0 )
+        v470 = hkcdGskBase::maskToIndex[v467];
+        if ( (int)v470 >= 0 )
         {
-          v530 = *(char *)(v506 + 5398197060i64);
-          v531 = v506;
-          v532 = *(char *)(v506 + 5398197062i64);
-          v533 = *(__m128 *)((char *)&v582.m_verticesBinA[0].m_quad + 16 * v531 + 8);
-          v534 = _mm_sub_ps(v30, v533);
-          v535 = _mm_sub_ps(*(__m128 *)((char *)&v582.m_verticesBinA[0].m_quad + 16 * v532 + 8), v533);
-          v536 = _mm_mul_ps(_mm_sub_ps(*(__m128 *)((char *)&v582.m_verticesBinA[0].m_quad + 16 * v530 + 8), v533), v534);
+          v494 = hkcdGskBase::vertexToEdgeLut[v470];
+          v495 = v470;
+          v496 = hkcdGskBase::vertexToEdgeLut[v470 + 2];
+          v497 = *(&v550 + v495);
+          v498 = _mm_sub_ps(v30, v497);
+          v499 = _mm_sub_ps(*(&v550 + v496), v497);
+          v500 = _mm_mul_ps(_mm_sub_ps(*(&v550 + v494), v497), v498);
           if ( _mm_movemask_ps(
                  _mm_add_ps(
-                   _mm_add_ps(_mm_shuffle_ps(v536, v536, 85), _mm_shuffle_ps(v536, v536, 0)),
-                   _mm_shuffle_ps(v536, v536, 170))) )
+                   _mm_add_ps(_mm_shuffle_ps(v500, v500, 85), _mm_shuffle_ps(v500, v500, 0)),
+                   _mm_shuffle_ps(v500, v500, 170))) )
           {
-            v537 = _mm_mul_ps(v535, v534);
-            *(__m128 *)((char *)&v582.m_verticesBinA[0].m_quad + 16 * v530 + 8) = *(__m128 *)((char *)&v582.m_verticesBinA[2]
-                                                                                            + 8);
+            v501 = _mm_mul_ps(v499, v498);
+            *(&v550 + v494) = v552;
             if ( _mm_movemask_ps(
                    _mm_add_ps(
-                     _mm_add_ps(_mm_shuffle_ps(v537, v537, 85), _mm_shuffle_ps(v537, v537, 0)),
-                     _mm_shuffle_ps(v537, v537, 170))) )
+                     _mm_add_ps(_mm_shuffle_ps(v501, v501, 85), _mm_shuffle_ps(v501, v501, 0)),
+                     _mm_shuffle_ps(v501, v501, 170))) )
             {
               dimB.m_storage = 1;
-              if ( (_DWORD)v532 == 2 )
-                LODWORD(v532) = v530;
-              *(__m128 *)((char *)&v582.m_verticesBinA[0].m_quad + 16 * (signed int)v532 + 8) = *(__m128 *)((char *)&v582.m_verticesBinA[1] + 8);
+              if ( (_DWORD)v496 == 2 )
+                LODWORD(v496) = v494;
+              *(&v550 + (int)v496) = v551;
               goto LABEL_132;
             }
           }
           else
           {
-            *(__m128 *)((char *)&v582.m_verticesBinA[0].m_quad + 16 * v532 + 8) = *(__m128 *)((char *)&v582.m_verticesBinA[2]
-                                                                                            + 8);
+            *(&v550 + v496) = v552;
           }
         }
         else
         {
-          v507 = v506 + 8;
-          if ( v507 >= 3 )
+          v471 = v470 + 8;
+          if ( v471 >= 3 )
             goto LABEL_144;
-          *(__m128 *)((char *)&v582.m_verticesBinA[0].m_quad + 16 * v507 + 8) = *(__m128 *)((char *)&v582.m_verticesBinA[2]
-                                                                                          + 8);
+          *(&v550 + v471) = v552;
         }
-        v28.m_quad = *(__m128 *)((char *)v582.m_verticesBinA + 8);
-        v30 = *(__m128 *)((char *)&v582.m_verticesA[0].m_quad + 8);
-        v582.m_checkTriangleDots = *(hkVector4f *)((char *)v582.m_verticesBinA + 8);
-        *(hkcdVertex *)&v581[8] = *(hkcdVertex *)((char *)v582.m_verticesA + 8);
+        v28 = v550;
+        v30 = v546;
+        *(__m128 *)&v545[24] = v550;
+        *(_QWORD *)&v545[16] = v546.m128_u64[1];
         goto LABEL_89;
       default:
         goto LABEL_64;
     }
   }
-}L_89;
+}
+        goto LABEL_89;
       default:
         goto LABEL_64;
     }
@@ -5444,119 +5244,118 @@ LABEL_119:
 
 // File Line: 99
 // RVA: 0x1313AE0
-hkBool *__fastcall hkcdGsk::linearCast(hkBool *result, hkcdVertex *vertsShape, int numVertsShape, hkcdVertex *vertsCast, int numVertsCast, hkcdGsk::LinearCastInput *input, hkcdGsk::Cache *cache, hkcdGsk::LinearCastOutput *output)
+hkBool *__fastcall hkcdGsk::linearCast(
+        hkBool *result,
+        hkcdVertex *vertsShape,
+        int numVertsShape,
+        hkcdVertex *vertsCast,
+        int numVertsCast,
+        hkcdGsk::LinearCastInput *input,
+        hkcdGsk::Cache *cache,
+        hkcdGsk::LinearCastOutput *output)
 {
-  hkBool *v8; // rbx
-  hkcdVertex *shapeA; // [rsp+50h] [rbp-E8h]
+  hkcdVertex *shapeA; // [rsp+50h] [rbp-E8h] BYREF
   int v11; // [rsp+58h] [rbp-E0h]
-  hkcdVertex *shapeB; // [rsp+60h] [rbp-D8h]
+  hkcdVertex *shapeB; // [rsp+60h] [rbp-D8h] BYREF
   int v13; // [rsp+68h] [rbp-D0h]
-  hkcdGskImpl<hkcdGsk_Vector4ShapeInterface> v14; // [rsp+70h] [rbp-C8h]
-  void **v15; // [rsp+140h] [rbp+8h]
+  hkcdGskImpl<hkcdGsk_Vector4ShapeInterface> v14; // [rsp+70h] [rbp-C8h] BYREF
+  hkcdGsk_Vector4ShapeInterface v15; // [rsp+140h] [rbp+8h] BYREF
 
   shapeA = vertsShape;
-  v15 = &hkcdGsk_Vector4ShapeInterface::`vftable;
-  v8 = result;
+  v15.vfptr = (hkcdGskBase::ShapeInterfaceVtbl *)&hkcdGsk_Vector4ShapeInterface::`vftable;
   v13 = numVertsCast;
   v11 = numVertsShape;
   shapeB = vertsCast;
   hkcdGskImpl<hkcdGsk_Vector4ShapeInterface>::linearCast<hkcdGsk::Cache>(
     &v14,
     result,
-    (hkcdGsk_Vector4ShapeInterface *)&v15,
+    &v15,
     &shapeA,
     &shapeB,
     input,
     cache,
     &output->m_fractionInOut,
     &output->m_normalOut);
-  return v8;
+  return result;
 }
 
 // File Line: 110
 // RVA: 0x1313B80
-hkBool *__fastcall hkcdGsk::rayCast(hkBool *result, hkcdVertex *verts, int numVerts, hkcdGsk::RayCastInput *input, hkcdGsk::RayCastOutput *output)
+hkBool *__fastcall hkcdGsk::rayCast(
+        hkBool *result,
+        hkcdVertex *verts,
+        int numVerts,
+        hkcdGsk_Vector4Shape *input,
+        hkSimdFloat32 *output)
 {
-  hkBool *v5; // rbx
-  hkVector4f *normalOut; // [rsp+20h] [rbp-18h]
+  hkVector4f *normalOut; // [rsp+20h] [rbp-18h] BYREF
   int v8; // [rsp+28h] [rbp-10h]
 
-  v5 = result;
   v8 = numVerts;
   result->m_bool = hkcdGskBase::castRay<hkcdGsk_Vector4Shape>(
                      (hkcdGskBase *)&normalOut,
-                     (hkcdGsk_Vector4Shape *)input,
-                     (hkcdGsk::RayCastInput *)&output->m_fractionInOut,
-                     (hkSimdFloat32 *)output,
-                     (hkVector4f *)&verts->m_quad) != 0;
-  return v5;
+                     input,
+                     (hkcdGsk::RayCastInput *)&output[1],
+                     output,
+                     verts) != 0;
+  return result;
 }
 
 // File Line: 119
 // RVA: 0x1313BD0
-hkBool *__fastcall hkcdGsk::rayCast(hkBool *result, hkFourTransposedPointsf *fours, int numUnTransposed, hkcdGsk::RayCastInput *input, hkcdGsk::RayCastOutput *output)
+hkBool *__fastcall hkcdGsk::rayCast(
+        hkBool *result,
+        hkFourTransposedPointsf *fours,
+        int numUnTransposed,
+        hkcdGsk_Vector4Shape *input,
+        hkSimdFloat32 *output)
 {
-  hkcdGsk_Vector4Shape *v5; // r15
-  int v6; // ebp
-  hkFourTransposedPointsf *v7; // r12
-  hkBool *v8; // r14
   unsigned int v9; // esi
-  hkLifoAllocator *v10; // rax
-  hkcdVertex *v11; // rbx
+  hkLifoAllocator *Value; // rax
+  hkcdVertex *m_cur; // rbx
   int v12; // edx
   char *v13; // rcx
-  signed int v14; // edi
-  unsigned int v15; // eax
-  unsigned int v16; // ecx
-  signed int v17; // esi
-  hkLifoAllocator *v18; // rax
-  int v19; // er8
-  hkVector4f *normalOut; // [rsp+20h] [rbp-28h]
-  int v22; // [rsp+28h] [rbp-20h]
+  unsigned int v14; // eax
+  unsigned int m_slotID; // ecx
+  signed int v16; // esi
+  hkLifoAllocator *v17; // rax
+  int v18; // r8d
+  hkVector4f *normalOut; // [rsp+20h] [rbp-28h] BYREF
+  int v21; // [rsp+28h] [rbp-20h]
 
-  v5 = (hkcdGsk_Vector4Shape *)input;
-  v6 = numUnTransposed;
-  v7 = fours;
-  v8 = result;
   v9 = (numUnTransposed + 3) & 0xFFFFFFFC;
   if ( v9 )
   {
-    v10 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v11 = (hkcdVertex *)v10->m_cur;
+    Value = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    m_cur = (hkcdVertex *)Value->m_cur;
     v12 = (16 * v9 + 127) & 0xFFFFFF80;
-    v13 = (char *)v11 + v12;
-    if ( v12 > v10->m_slabSize || v13 > v10->m_end )
-      v11 = (hkcdVertex *)hkLifoAllocator::allocateFromNewSlab(v10, v12);
+    v13 = (char *)m_cur + v12;
+    if ( v12 > Value->m_slabSize || v13 > Value->m_end )
+      m_cur = (hkcdVertex *)hkLifoAllocator::allocateFromNewSlab(Value, v12);
     else
-      v10->m_cur = v13;
+      Value->m_cur = v13;
   }
   else
   {
-    v11 = 0i64;
+    m_cur = 0i64;
   }
-  v14 = v9 | 0x80000000;
-  hkFourTransposedPointsf::getOriginalVertices(v7, v6, v11);
-  v22 = v6;
-  v15 = hkcdGskBase::castRay<hkcdGsk_Vector4Shape>(
+  hkFourTransposedPointsf::getOriginalVertices(fours, numUnTransposed, m_cur);
+  v21 = numUnTransposed;
+  v14 = hkcdGskBase::castRay<hkcdGsk_Vector4Shape>(
           (hkcdGskBase *)&normalOut,
-          v5,
-          (hkcdGsk::RayCastInput *)&output->m_fractionInOut,
-          (hkSimdFloat32 *)output,
-          (hkVector4f *)&v11->m_quad);
-  v16 = hkMemoryRouter::s_memoryRouter.m_slotID;
-  v8->m_bool = v15 != 0;
-  v17 = (16 * v9 + 127) & 0xFFFFFF80;
-  v18 = (hkLifoAllocator *)TlsGetValue(v16);
-  v19 = (v17 + 15) & 0xFFFFFFF0;
-  if ( v17 > v18->m_slabSize || (char *)v11 + v19 != v18->m_cur || v18->m_firstNonLifoEnd == v11 )
-    hkLifoAllocator::slowBlockFree(v18, v11, v19);
+          input,
+          (hkcdGsk::RayCastInput *)&output[1],
+          output,
+          m_cur);
+  m_slotID = hkMemoryRouter::s_memoryRouter.m_slotID;
+  result->m_bool = v14 != 0;
+  v16 = (16 * v9 + 127) & 0xFFFFFF80;
+  v17 = (hkLifoAllocator *)TlsGetValue(m_slotID);
+  v18 = (v16 + 15) & 0xFFFFFFF0;
+  if ( v16 > v17->m_slabSize || (char *)m_cur + v18 != v17->m_cur || v17->m_firstNonLifoEnd == m_cur )
+    hkLifoAllocator::slowBlockFree(v17, (char *)m_cur, v18);
   else
-    v18->m_cur = v11;
-  if ( v14 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v11,
-      16 * v14);
-  return v8;
+    v17->m_cur = m_cur;
+  return result;
 }
 

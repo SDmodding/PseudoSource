@@ -2,17 +2,13 @@
 // RVA: 0x12B8B38
 int __fastcall wcscoll_l(const wchar_t *_string1, const wchar_t *_string2, localeinfo_struct *plocinfo)
 {
-  const wchar_t *v3; // rdi
-  const wchar_t *lpString2; // rbx
   const wchar_t *v5; // rcx
   int result; // eax
   int v7; // eax
-  _LocaleUpdate v8; // [rsp+30h] [rbp-28h]
+  _LocaleUpdate v8; // [rsp+30h] [rbp-28h] BYREF
 
-  v3 = _string1;
-  lpString2 = _string2;
   _LocaleUpdate::_LocaleUpdate(&v8, plocinfo);
-  if ( !v3 || !lpString2 )
+  if ( !_string1 || !_string2 )
   {
     *errno() = 22;
     invalid_parameter_noinfo();
@@ -23,10 +19,10 @@ LABEL_8:
   v5 = v8.localeinfo.locinfo->locale_name[1];
   if ( !v5 )
   {
-    result = wcscmp(v3, lpString2);
+    result = wcscmp(_string1, _string2);
     goto LABEL_10;
   }
-  v7 = _crtCompareStringW(v5, 0x1000u, v3, -1, lpString2, -1);
+  v7 = _crtCompareStringW(v5, 0x1000u, _string1, -1, _string2, -1);
   if ( !v7 )
   {
     *errno() = 22;
@@ -35,7 +31,7 @@ LABEL_8:
   result = v7 - 2;
 LABEL_10:
   if ( v8.updated )
-    v8.ptd->_ownlocale &= 0xFFFFFFFD;
+    v8.ptd->_ownlocale &= ~2u;
   return result;
 }
 

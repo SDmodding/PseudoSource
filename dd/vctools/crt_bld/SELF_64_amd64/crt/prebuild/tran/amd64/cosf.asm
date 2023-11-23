@@ -15,23 +15,23 @@ float __cdecl cosf(float X)
   double v10; // xmm4_8
   signed __int64 v11; // rcx
   double v12; // xmm1_8
-  int region; // [rsp+A0h] [rbp-58h]
-  long double r; // [rsp+B0h] [rbp-48h]
+  int region[4]; // [rsp+A0h] [rbp-58h] BYREF
+  long double r[9]; // [rsp+B0h] [rbp-48h] BYREF
 
   if ( (_mm_cvtsi128_si32(*(__m128i *)&X) & 0x7F800000) == 2139095040 )
     return cosf_special(X);
   v1 = 0i64;
   v2 = X;
   v3 = *(_QWORD *)&v2 & 0x7FFFFFFFFFFFFFFFi64;
-  if ( (*(_QWORD *)&v2 & 0x7FFFFFFFFFFFFFFFi64) > 4605249457297304856i64 )
+  if ( (*(_QWORD *)&v2 & 0x7FFFFFFFFFFFFFFFui64) > 0x3FE921FB54442D18i64 )
   {
     if ( *(_QWORD *)&v2 != v3 )
       v2 = 0.0 - v2;
     if ( v3 >= L__real_411E848000000000 )
     {
-      _remainder_piby2f(*(unsigned __int64 *)&v2, &r, &region);
-      v2 = r;
-      v5 = region;
+      _remainder_piby2f(*(unsigned __int64 *)&v2, r, region);
+      v2 = r[0];
+      v5 = region[0];
       v4 = v2 * v2;
       v6 = *(double *)&L__real_3fe0000000000000;
     }
@@ -40,12 +40,12 @@ float __cdecl cosf(float X)
       v7 = v2;
       v1.m128d_f64[0] = v2 * 0.6366197723675814 + 0.5;
       v8 = _mm_cvttpd_epi32(v1);
-      *(_QWORD *)&v9 = (unsigned __int128)_mm_cvtepi32_pd(v8);
+      v9 = _mm_cvtepi32_pd(v8).m128d_f64[0];
       v10 = v7 - 1.570796326734126 * v9;
       v5 = _mm_cvtsi128_si32(v8);
       v2 = v10 - 6.077100506506192e-11 * v9;
-      v11 = (unsigned __int64)(2 * COERCE_SIGNED_INT64(v10 - 6.077100506506192e-11 * v9)) >> 53;
-      if ( (signed __int64)((v3 >> 52) - v11) > 15 )
+      v11 = (unsigned __int64)(2i64 * *(_QWORD *)&v2) >> 53;
+      if ( (__int64)((v3 >> 52) - v11) > 15 )
         v2 = v10
            - 6.077100506303966e-11 * v9
            - (2.022266248795951e-21 * v9
@@ -60,10 +60,10 @@ float __cdecl cosf(float X)
       {
         if ( v11 <= 990 )
         {
-          if ( !(v5 & 1) )
+          if ( (v5 & 1) == 0 )
             v12 = *(double *)&L__real_3ff0000000000000;
         }
-        else if ( v5 & 1 )
+        else if ( (v5 & 1) != 0 )
         {
           v12 = v2 - 0.1666666666666667 * v2 * v4;
         }
@@ -81,7 +81,7 @@ float __cdecl cosf(float X)
     v5 = 0;
     v6 = *(double *)&L__real_3fe0000000000000;
   }
-  if ( v5 & 1 )
+  if ( (v5 & 1) != 0 )
     v12 = ((0.00000275573161037288 * v4 + -0.0001984126983676113) * (v4 * v4)
          + 0.00833333333333095 * v4
          + -0.1666666666666667)
@@ -97,8 +97,8 @@ float __cdecl cosf(float X)
         - (v6 * v4
          - 1.0);
 L__adjust_region_cos:
-  if ( (v5 + 1) & 2 )
-    v12 = 0.0 - v12;
+  if ( ((v5 + 1) & 2) != 0 )
+    return 0.0 - v12;
   return v12;
 }
 

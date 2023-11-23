@@ -6,7 +6,7 @@ UFG::qMatrix44 *__fastcall CullInfo::GetLocalWorld(CullInfo *this)
 
   result = (UFG::qMatrix44 *)this->mpLocalWorld;
   if ( !result )
-    result = &UFG::qMatrix44::msIdentity;
+    return &UFG::qMatrix44::msIdentity;
   return result;
 }
 

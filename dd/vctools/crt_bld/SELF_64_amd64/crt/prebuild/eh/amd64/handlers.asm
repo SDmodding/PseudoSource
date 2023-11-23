@@ -4,13 +4,11 @@ __int64 __fastcall CallSettingFrame(__int64 a1, __int64 *a2, __int64 a3)
 {
   void (*v3)(void); // rax
   __int64 v4; // rax
-  __int64 *v6; // [rsp+38h] [rbp+10h]
 
-  v6 = a2;
   v3 = (void (*)(void))NLG_Notify(a1, *a2, a3);
   v3();
-  v4 = _NLG_Return2();
-  return NLG_Notify(v4, *v6, 2i64);
+  _NLG_Return2();
+  return NLG_Notify(v4, *a2, 2i64);
 }
 
 // File Line: 88

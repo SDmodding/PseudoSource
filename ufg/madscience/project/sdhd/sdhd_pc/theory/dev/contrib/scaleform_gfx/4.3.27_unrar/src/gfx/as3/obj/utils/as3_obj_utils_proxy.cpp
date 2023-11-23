@@ -8,7 +8,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc2_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_142440628 = v1;
-  Scaleform::GFx::AS3::ThunkFunc2<Scaleform::GFx::AS3::Instances::fl_utils::Proxy,0,Scaleform::GFx::AS3::Value,unsigned int,Scaleform::GFx::AS3::Value const *>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_utils::Proxy *, Scaleform::GFx::AS3::Value *, unsigned int, Scaleform::GFx::AS3::Value *))Scaleform::GFx::AS3::Instances::fl_utils::Proxy::flash_proxycallProperty;
+  Scaleform::GFx::AS3::ThunkFunc2<Scaleform::GFx::AS3::Instances::fl_utils::Proxy,0,Scaleform::GFx::AS3::Value,unsigned int,Scaleform::GFx::AS3::Value const *>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_utils::Proxy *, Scaleform::GFx::AS3::Value *, unsigned int, Scaleform::GFx::AS3::Value *))Scaleform::GFx::AS3::Instances::fl_utils::Proxy::flash_proxycallProperty;
   return result;
 }
 
@@ -140,690 +140,657 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc2_Scaleform::GFx:
 
 // File Line: 80
 // RVA: 0x91F770
-void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::flash_proxycallProperty(Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this, Scaleform::GFx::AS3::Value *result, unsigned int argc, Scaleform::GFx::AS3::Value *const argv)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::flash_proxycallProperty(
+        Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this,
+        Scaleform::GFx::AS3::Value *result,
+        unsigned int argc,
+        Scaleform::GFx::AS3::Value *const argv)
 {
-  Scaleform::GFx::AS3::VM *v4; // rbx
+  Scaleform::GFx::AS3::VM *pVM; // rbx
   Scaleform::GFx::AS3::VM::Error *v5; // rax
-  Scaleform::GFx::ASStringNode *v6; // rcx
-  bool v7; // zf
-  Scaleform::GFx::AS3::VM::Error v8; // [rsp+28h] [rbp-20h]
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  Scaleform::GFx::AS3::VM::Error v8; // [rsp+28h] [rbp-20h] BYREF
 
-  v4 = this->pTraits.pObject->pVM;
-  Scaleform::GFx::AS3::VM::Error::Error(&v8, eProxyCallPropertyError, v4);
-  Scaleform::GFx::AS3::VM::ThrowError(v4, v5);
-  v6 = v8.Message.pNode;
-  v7 = v8.Message.pNode->RefCount == 1;
-  --v6->RefCount;
-  if ( v7 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v6);
+  pVM = this->pTraits.pObject->pVM;
+  Scaleform::GFx::AS3::VM::Error::Error(&v8, 2090, pVM);
+  Scaleform::GFx::AS3::VM::ThrowError(pVM, v5);
+  pNode = v8.Message.pNode;
+  if ( v8.Message.pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
 }
 
 // File Line: 88
 // RVA: 0x91F7C0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::flash_proxydeleteProperty(Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this, bool *result, Scaleform::GFx::AS3::Value *name)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::flash_proxydeleteProperty(
+        Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this,
+        bool *result,
+        Scaleform::GFx::AS3::Value *name)
 {
-  Scaleform::GFx::AS3::VM *v3; // rbx
+  Scaleform::GFx::AS3::VM *pVM; // rbx
   Scaleform::GFx::AS3::VM::Error *v4; // rax
-  Scaleform::GFx::ASStringNode *v5; // rcx
-  bool v6; // zf
-  Scaleform::GFx::AS3::VM::Error v7; // [rsp+28h] [rbp-20h]
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  Scaleform::GFx::AS3::VM::Error v7; // [rsp+28h] [rbp-20h] BYREF
 
-  v3 = this->pTraits.pObject->pVM;
-  Scaleform::GFx::AS3::VM::Error::Error(&v7, eProxyDeletePropertyError, v3);
-  Scaleform::GFx::AS3::VM::ThrowError(v3, v4);
-  v5 = v7.Message.pNode;
-  v6 = v7.Message.pNode->RefCount == 1;
-  --v5->RefCount;
-  if ( v6 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v5);
+  pVM = this->pTraits.pObject->pVM;
+  Scaleform::GFx::AS3::VM::Error::Error(&v7, 2092, pVM);
+  Scaleform::GFx::AS3::VM::ThrowError(pVM, v4);
+  pNode = v7.Message.pNode;
+  if ( v7.Message.pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
 }
 
 // File Line: 96
 // RVA: 0x91F810
-void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::flash_proxygetDescendants(Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Value *name)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::flash_proxygetDescendants(
+        Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Value *name)
 {
-  Scaleform::GFx::AS3::VM *v3; // rbx
+  Scaleform::GFx::AS3::VM *pVM; // rbx
   Scaleform::GFx::AS3::VM::Error *v4; // rax
-  Scaleform::GFx::ASStringNode *v5; // rcx
-  bool v6; // zf
-  Scaleform::GFx::AS3::VM::Error v7; // [rsp+28h] [rbp-20h]
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  Scaleform::GFx::AS3::VM::Error v7; // [rsp+28h] [rbp-20h] BYREF
 
-  v3 = this->pTraits.pObject->pVM;
-  Scaleform::GFx::AS3::VM::Error::Error(&v7, eProxyGetDescendantsError, v3);
-  Scaleform::GFx::AS3::VM::ThrowError(v3, v4);
-  v5 = v7.Message.pNode;
-  v6 = v7.Message.pNode->RefCount == 1;
-  --v5->RefCount;
-  if ( v6 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v5);
+  pVM = this->pTraits.pObject->pVM;
+  Scaleform::GFx::AS3::VM::Error::Error(&v7, 2093, pVM);
+  Scaleform::GFx::AS3::VM::ThrowError(pVM, v4);
+  pNode = v7.Message.pNode;
+  if ( v7.Message.pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
 }
 
 // File Line: 104
 // RVA: 0x91F860
-void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::flash_proxygetProperty(Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Value *name)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::flash_proxygetProperty(
+        Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Value *name)
 {
-  Scaleform::GFx::AS3::VM *v3; // rbx
+  Scaleform::GFx::AS3::VM *pVM; // rbx
   Scaleform::GFx::AS3::VM::Error *v4; // rax
-  Scaleform::GFx::ASStringNode *v5; // rcx
-  bool v6; // zf
-  Scaleform::GFx::AS3::VM::Error v7; // [rsp+28h] [rbp-20h]
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  Scaleform::GFx::AS3::VM::Error v7; // [rsp+28h] [rbp-20h] BYREF
 
-  v3 = this->pTraits.pObject->pVM;
-  Scaleform::GFx::AS3::VM::Error::Error(&v7, eProxyGetPropertyError, v3);
-  Scaleform::GFx::AS3::VM::ThrowError(v3, v4);
-  v5 = v7.Message.pNode;
-  v6 = v7.Message.pNode->RefCount == 1;
-  --v5->RefCount;
-  if ( v6 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v5);
+  pVM = this->pTraits.pObject->pVM;
+  Scaleform::GFx::AS3::VM::Error::Error(&v7, 2088, pVM);
+  Scaleform::GFx::AS3::VM::ThrowError(pVM, v4);
+  pNode = v7.Message.pNode;
+  if ( v7.Message.pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
 }
 
 // File Line: 112
 // RVA: 0x91F8B0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::flash_proxyhasProperty(Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this, bool *result, Scaleform::GFx::AS3::Value *name)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::flash_proxyhasProperty(
+        Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this,
+        bool *result,
+        Scaleform::GFx::AS3::Value *name)
 {
-  Scaleform::GFx::AS3::VM *v3; // rbx
+  Scaleform::GFx::AS3::VM *pVM; // rbx
   Scaleform::GFx::AS3::VM::Error *v4; // rax
-  Scaleform::GFx::ASStringNode *v5; // rcx
-  bool v6; // zf
-  Scaleform::GFx::AS3::VM::Error v7; // [rsp+28h] [rbp-20h]
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  Scaleform::GFx::AS3::VM::Error v7; // [rsp+28h] [rbp-20h] BYREF
 
-  v3 = this->pTraits.pObject->pVM;
-  Scaleform::GFx::AS3::VM::Error::Error(&v7, eProxyHasPropertyError, v3);
-  Scaleform::GFx::AS3::VM::ThrowError(v3, v4);
-  v5 = v7.Message.pNode;
-  v6 = v7.Message.pNode->RefCount == 1;
-  --v5->RefCount;
-  if ( v6 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v5);
+  pVM = this->pTraits.pObject->pVM;
+  Scaleform::GFx::AS3::VM::Error::Error(&v7, 2091, pVM);
+  Scaleform::GFx::AS3::VM::ThrowError(pVM, v4);
+  pNode = v7.Message.pNode;
+  if ( v7.Message.pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
 }
 
 // File Line: 120
 // RVA: 0x91F900
-void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::flash_proxyisAttribute(Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this, bool *result, Scaleform::GFx::AS3::Value *name)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::flash_proxyisAttribute(
+        Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this,
+        bool *result,
+        Scaleform::GFx::AS3::Value *name)
 {
-  Scaleform::GFx::AS3::FlashUI *v3; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v3 = this->pTraits.pObject->pVM->UI;
-  v3->vfptr->Output(v3, Output_Warning, "The method instance::Proxy::flash_proxyisAttribute() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method instance::Proxy::flash_proxyisAttribute() is not implemented\n");
 }
 
 // File Line: 127
 // RVA: 0x91F930
-void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::flash_proxynextName(Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this, Scaleform::GFx::ASString *result, int index)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::flash_proxynextName(
+        Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this,
+        Scaleform::GFx::ASString *result,
+        int index)
 {
-  Scaleform::GFx::AS3::VM *v3; // rbx
+  Scaleform::GFx::AS3::VM *pVM; // rbx
   Scaleform::GFx::AS3::VM::Error *v4; // rax
-  Scaleform::GFx::ASStringNode *v5; // rcx
-  bool v6; // zf
-  Scaleform::GFx::AS3::VM::Error v7; // [rsp+28h] [rbp-20h]
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  Scaleform::GFx::AS3::VM::Error v7; // [rsp+28h] [rbp-20h] BYREF
 
-  v3 = this->pTraits.pObject->pVM;
-  Scaleform::GFx::AS3::VM::Error::Error(&v7, eProxyNextNameError, v3);
-  Scaleform::GFx::AS3::VM::ThrowError(v3, v4);
-  v5 = v7.Message.pNode;
-  v6 = v7.Message.pNode->RefCount == 1;
-  --v5->RefCount;
-  if ( v6 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v5);
+  pVM = this->pTraits.pObject->pVM;
+  Scaleform::GFx::AS3::VM::Error::Error(&v7, 2106, pVM);
+  Scaleform::GFx::AS3::VM::ThrowError(pVM, v4);
+  pNode = v7.Message.pNode;
+  if ( v7.Message.pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
 }
 
 // File Line: 135
 // RVA: 0x91F980
-void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::flash_proxynextNameIndex(Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this, int *result, int index)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::flash_proxynextNameIndex(
+        Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this,
+        int *result,
+        int index)
 {
-  Scaleform::GFx::AS3::VM *v3; // rbx
+  Scaleform::GFx::AS3::VM *pVM; // rbx
   Scaleform::GFx::AS3::VM::Error *v4; // rax
-  Scaleform::GFx::ASStringNode *v5; // rcx
-  bool v6; // zf
-  Scaleform::GFx::AS3::VM::Error v7; // [rsp+28h] [rbp-20h]
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  Scaleform::GFx::AS3::VM::Error v7; // [rsp+28h] [rbp-20h] BYREF
 
-  v3 = this->pTraits.pObject->pVM;
-  Scaleform::GFx::AS3::VM::Error::Error(&v7, eProxyNextNameIndexError, v3);
-  Scaleform::GFx::AS3::VM::ThrowError(v3, v4);
-  v5 = v7.Message.pNode;
-  v6 = v7.Message.pNode->RefCount == 1;
-  --v5->RefCount;
-  if ( v6 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v5);
+  pVM = this->pTraits.pObject->pVM;
+  Scaleform::GFx::AS3::VM::Error::Error(&v7, 2105, pVM);
+  Scaleform::GFx::AS3::VM::ThrowError(pVM, v4);
+  pNode = v7.Message.pNode;
+  if ( v7.Message.pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
 }
 
 // File Line: 143
 // RVA: 0x91F9D0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::flash_proxynextValue(Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this, Scaleform::GFx::AS3::Value *result, int index)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::flash_proxynextValue(
+        Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this,
+        Scaleform::GFx::AS3::Value *result,
+        int index)
 {
-  Scaleform::GFx::AS3::VM *v3; // rbx
+  Scaleform::GFx::AS3::VM *pVM; // rbx
   Scaleform::GFx::AS3::VM::Error *v4; // rax
-  Scaleform::GFx::ASStringNode *v5; // rcx
-  bool v6; // zf
-  Scaleform::GFx::AS3::VM::Error v7; // [rsp+28h] [rbp-20h]
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  Scaleform::GFx::AS3::VM::Error v7; // [rsp+28h] [rbp-20h] BYREF
 
-  v3 = this->pTraits.pObject->pVM;
-  Scaleform::GFx::AS3::VM::Error::Error(&v7, eProxyNextValueError, v3);
-  Scaleform::GFx::AS3::VM::ThrowError(v3, v4);
-  v5 = v7.Message.pNode;
-  v6 = v7.Message.pNode->RefCount == 1;
-  --v5->RefCount;
-  if ( v6 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v5);
+  pVM = this->pTraits.pObject->pVM;
+  Scaleform::GFx::AS3::VM::Error::Error(&v7, 2107, pVM);
+  Scaleform::GFx::AS3::VM::ThrowError(pVM, v4);
+  pNode = v7.Message.pNode;
+  if ( v7.Message.pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
 }
 
 // File Line: 151
 // RVA: 0x91FA20
-void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::flash_proxysetProperty(Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Value *name, Scaleform::GFx::AS3::Value *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::flash_proxysetProperty(
+        Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Value *name,
+        Scaleform::GFx::AS3::Value *value)
 {
-  Scaleform::GFx::AS3::VM *v4; // rbx
+  Scaleform::GFx::AS3::VM *pVM; // rbx
   Scaleform::GFx::AS3::VM::Error *v5; // rax
-  Scaleform::GFx::ASStringNode *v6; // rcx
-  bool v7; // zf
-  Scaleform::GFx::AS3::VM::Error v8; // [rsp+28h] [rbp-20h]
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  Scaleform::GFx::AS3::VM::Error v8; // [rsp+28h] [rbp-20h] BYREF
 
-  v4 = this->pTraits.pObject->pVM;
-  Scaleform::GFx::AS3::VM::Error::Error(&v8, eProxySetPropertyError, v4);
-  Scaleform::GFx::AS3::VM::ThrowError(v4, v5);
-  v6 = v8.Message.pNode;
-  v7 = v8.Message.pNode->RefCount == 1;
-  --v6->RefCount;
-  if ( v7 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v6);
+  pVM = this->pTraits.pObject->pVM;
+  Scaleform::GFx::AS3::VM::Error::Error(&v8, 2089, pVM);
+  Scaleform::GFx::AS3::VM::ThrowError(pVM, v5);
+  pNode = v8.Message.pNode;
+  if ( v8.Message.pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
 }
 
 // File Line: 161
 // RVA: 0x8EAB40
-Scaleform::GFx::AS3::CheckResult *__fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::MakeName(Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this, Scaleform::GFx::AS3::CheckResult *result, Scaleform::GFx::AS3::Multiname *prop_name, Scaleform::GFx::AS3::Value *name)
+Scaleform::GFx::AS3::CheckResult *__fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::MakeName(
+        Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this,
+        Scaleform::GFx::AS3::CheckResult *result,
+        Expression::IMemberMap *prop_name,
+        Scaleform::GFx::AS3::Value *name)
 {
-  Scaleform::GFx::AS3::Value *v4; // r14
-  Scaleform::GFx::AS3::Multiname *v5; // rsi
-  Scaleform::GFx::AS3::CheckResult *v6; // rdi
-  Scaleform::GFx::AS3::VM *v7; // rbp
+  Scaleform::GFx::AS3::VM *pVM; // rbp
   Scaleform::GFx::ASStringNode *v8; // rcx
   bool v9; // zf
-  Scaleform::GFx::AS3::InstanceTraits::fl::QName *v10; // rbx
+  Scaleform::GFx::AS3::InstanceTraits::fl::QName *pObject; // rbx
   Scaleform::GFx::AS3::Instances::fl::Namespace *ns; // rax
-  Scaleform::GFx::AS3::Object **v12; // rax
-  Scaleform::GFx::ASStringNode *v13; // rcx
-  Scaleform::GFx::AS3::CheckResult v15; // [rsp+60h] [rbp+8h]
-  Scaleform::GFx::ASString resulta; // [rsp+70h] [rbp+18h]
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl::QName> *Instance; // rax
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl::QName> v15; // [rsp+60h] [rbp+8h] BYREF
+  Scaleform::GFx::ASString resulta; // [rsp+70h] [rbp+18h] BYREF
 
-  v4 = name;
-  v5 = prop_name;
-  v6 = result;
-  v7 = this->pTraits.pObject->pVM;
-  if ( (prop_name->Kind & 3u) > 1 )
+  pVM = this->pTraits.pObject->pVM;
+  if ( (unsigned __int64)((__int64)prop_name->vfptr & 3) > 1 )
   {
-    Scaleform::GFx::AS3::Value::Assign(name, &prop_name->Name);
+    Scaleform::GFx::AS3::Value::Assign(name, (Scaleform::GFx::AS3::Value *)&prop_name[1]);
 LABEL_8:
-    v6->Result = v7->HandleException == 0;
-    return v6;
+    result->Result = !pVM->HandleException;
+    return result;
   }
-  Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(
-    (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v7->StringManagerRef->Builtins,
+  Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(
+    pVM->StringManagerRef,
     &resulta);
-  if ( Scaleform::GFx::AS3::Value::Convert2String(&v5->Name, &v15, &resulta)->Result )
+  if ( Scaleform::GFx::AS3::Value::Convert2String(
+         (Scaleform::GFx::AS3::Value *)&prop_name[1],
+         (Scaleform::GFx::AS3::CheckResult *)&v15,
+         &resulta)->Result )
   {
-    v10 = (Scaleform::GFx::AS3::InstanceTraits::fl::QName *)v7->TraitsQName.pObject->ITraits.pObject;
-    ns = (Scaleform::GFx::AS3::Instances::fl::Namespace *)Scaleform::GFx::Stream::GetLog((Expression::IMemberMap *)v5);
-    v12 = (Scaleform::GFx::AS3::Object **)Scaleform::GFx::AS3::InstanceTraits::fl::QName::MakeInstance(
-                                            v10,
-                                            (Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl::QName> *)&v15,
-                                            (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v10->vfptr,
-                                            &resulta,
-                                            ns);
-    Scaleform::GFx::AS3::Value::Pick(v4, *v12);
-    v13 = resulta.pNode;
-    v9 = resulta.pNode->RefCount == 1;
-    --v13->RefCount;
+    pObject = (Scaleform::GFx::AS3::InstanceTraits::fl::QName *)pVM->TraitsQName.pObject->ITraits.pObject;
+    ns = (Scaleform::GFx::AS3::Instances::fl::Namespace *)Scaleform::GFx::Stream::GetLog(prop_name);
+    Instance = Scaleform::GFx::AS3::InstanceTraits::fl::QName::MakeInstance(pObject, &v15, pObject, &resulta, ns);
+    Scaleform::GFx::AS3::Value::Pick(name, Instance->pV);
+    pNode = resulta.pNode;
+    v9 = resulta.pNode->RefCount-- == 1;
     if ( v9 )
-      Scaleform::GFx::ASStringNode::ReleaseNode(v13);
+      Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
     goto LABEL_8;
   }
-  v6->Result = 0;
+  result->Result = 0;
   v8 = resulta.pNode;
-  v9 = resulta.pNode->RefCount == 1;
-  --v8->RefCount;
+  v9 = resulta.pNode->RefCount-- == 1;
   if ( v9 )
     Scaleform::GFx::ASStringNode::ReleaseNode(v8);
-  return v6;
+  return result;
 }
 
 // File Line: 184
 // RVA: 0x8DB030
-__int64 __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::GetMethodInd(Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this, const char *name)
+__int64 __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::GetMethodInd(
+        Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this,
+        const char *name)
 {
-  Scaleform::GFx::AS3::Traits *v2; // rdi
-  Scaleform::GFx::AS3::VM *v3; // r8
+  Scaleform::GFx::AS3::Traits *pObject; // rdi
+  Scaleform::GFx::AS3::VM *pVM; // r8
   Scaleform::GFx::AS3::Instances::fl::Namespace *v4; // rbx
   Scaleform::GFx::ASString *v5; // rax
-  unsigned __int64 v6; // rdx
-  Scaleform::GFx::AS3::SlotInfo *v7; // rbx
-  Scaleform::GFx::ASStringNode *v8; // rcx
-  bool v9; // zf
-  Scaleform::GFx::AS3::AbsoluteIndex ind; // [rsp+40h] [rbp+8h]
-  Scaleform::GFx::ASString result; // [rsp+50h] [rbp+18h]
+  unsigned __int64 FirstOwnSlotNum; // rdx
+  int *p_Value; // rbx
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  Scaleform::GFx::AS3::AbsoluteIndex ind; // [rsp+40h] [rbp+8h] BYREF
+  Scaleform::GFx::ASString result; // [rsp+50h] [rbp+18h] BYREF
 
-  v2 = this->pTraits.pObject;
-  v3 = v2->pVM;
-  v4 = v3->ProxyNamespace.pObject;
-  v5 = Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
-         (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v3->StringManagerRef->Builtins,
+  pObject = this->pTraits.pObject;
+  pVM = pObject->pVM;
+  v4 = pVM->ProxyNamespace.pObject;
+  v5 = Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
+         pVM->StringManagerRef,
          &result,
          name);
-  Scaleform::GFx::AS3::Slots::FindSlotInfoIndex((Scaleform::GFx::AS3::Slots *)&v2->FirstOwnSlotNum, &ind, v5, v4);
+  Scaleform::GFx::AS3::Slots::FindSlotInfoIndex(&pObject->Scaleform::GFx::AS3::Slots, &ind, v5, v4);
   if ( ind.Index < 0 )
   {
-    v7 = 0i64;
+    p_Value = 0i64;
   }
   else
   {
-    v6 = v2->FirstOwnSlotNum;
-    if ( ind.Index >= v6 )
-      v7 = &v2->VArray.Data.Data[LODWORD(ind.Index) - v6].Value;
+    FirstOwnSlotNum = pObject->FirstOwnSlotNum;
+    if ( ind.Index >= FirstOwnSlotNum )
+      p_Value = (int *)&pObject->VArray.Data.Data[LODWORD(ind.Index) - FirstOwnSlotNum].Value;
     else
-      v7 = Scaleform::GFx::AS3::Slots::GetSlotInfo(v2->Parent, ind);
+      p_Value = (int *)Scaleform::GFx::AS3::Slots::GetSlotInfo(pObject->Parent, ind);
   }
-  v8 = result.pNode;
-  v9 = result.pNode->RefCount == 1;
-  --v8->RefCount;
-  if ( v9 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v8);
-  return (unsigned int)(*(_DWORD *)v7 >> 15);
+  pNode = result.pNode;
+  if ( result.pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
+  return (unsigned int)(*p_Value >> 15);
 }
 
 // File Line: 195
 // RVA: 0x90A220
-Scaleform::GFx::AS3::CheckResult *__fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::SetProperty(Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this, Scaleform::GFx::AS3::CheckResult *result, Scaleform::GFx::AS3::Multiname *prop_name, Scaleform::GFx::AS3::Value *value)
+Scaleform::GFx::AS3::CheckResult *__fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::SetProperty(
+        Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this,
+        Scaleform::GFx::AS3::CheckResult *result,
+        Scaleform::GFx::AS3::Multiname *prop_name,
+        Scaleform::GFx::AS3::Value *value)
 {
-  Scaleform::GFx::AS3::Value *v4; // r15
-  Scaleform::GFx::AS3::Multiname *v5; // r13
-  Scaleform::GFx::AS3::CheckResult *v6; // r14
-  Scaleform::GFx::AS3::Instances::fl_utils::Proxy *obj; // rsi
-  Scaleform::GFx::AS3::Traits *v8; // rcx
-  Scaleform::GFx::AS3::VM *v9; // r12
-  Scaleform::GFx::AS3::SlotInfo *v10; // rax
+  Scaleform::GFx::AS3::Traits *pObject; // rcx
+  Scaleform::GFx::AS3::VM *pVM; // r12
+  Scaleform::GFx::AS3::SlotInfo *FixedSlot; // rax
   Scaleform::GFx::AS3::Traits *v11; // rdi
   Scaleform::GFx::AS3::VM *v12; // rdx
   Scaleform::GFx::AS3::Instances::fl::Namespace *v13; // rbx
-  Scaleform::GFx::ASString *v14; // rax
-  unsigned __int64 v15; // r8
-  Scaleform::GFx::AS3::SlotInfo *v16; // rbx
-  Scaleform::GFx::ASStringNode *v17; // rcx
-  bool v18; // zf
+  Scaleform::GFx::ASString *ConstString; // rax
+  unsigned __int64 FirstOwnSlotNum; // r8
+  int *p_Value; // rbx
+  Scaleform::GFx::ASStringNode *VObj; // rcx
   Scaleform::GFx::AS3::AbsoluteIndex v19; // rbx
-  Scaleform::GFx::AS3::VTable *v20; // rax
-  unsigned int v21; // ecx
+  Scaleform::GFx::AS3::VTable *VT; // rax
+  unsigned int Flags; // ecx
   Scaleform::GFx::AS3::Value *v22; // rax
-  Scaleform::GFx::AS3::Value other; // [rsp+40h] [rbp-98h]
-  Scaleform::GFx::AS3::Value func; // [rsp+60h] [rbp-78h]
-  Scaleform::GFx::AS3::Value name; // [rsp+88h] [rbp-50h]
+  Scaleform::GFx::AS3::Value other; // [rsp+40h] [rbp-98h] BYREF
+  Scaleform::GFx::AS3::Value func; // [rsp+60h] [rbp-78h] BYREF
+  Scaleform::GFx::AS3::Value name; // [rsp+88h] [rbp-50h] BYREF
   unsigned int v27; // [rsp+A8h] [rbp-30h]
   Scaleform::GFx::AS3::Value::Extra v28; // [rsp+B0h] [rbp-28h]
   Scaleform::GFx::AS3::Value::VU v29; // [rsp+B8h] [rbp-20h]
   __int64 v30; // [rsp+C8h] [rbp-10h]
-  Scaleform::GFx::AS3::Value v31; // [rsp+D0h] [rbp-8h]
-  __int64 v32; // [rsp+118h] [rbp+40h]
-  Scaleform::GFx::AS3::AbsoluteIndex ind; // [rsp+128h] [rbp+50h]
+  Scaleform::GFx::AS3::Value v31; // [rsp+D0h] [rbp-8h] BYREF
+  unsigned __int64 v32; // [rsp+118h] [rbp+40h] BYREF
+  Scaleform::GFx::AS3::AbsoluteIndex ind; // [rsp+128h] [rbp+50h] BYREF
 
   v30 = -2i64;
-  v4 = value;
-  v5 = prop_name;
-  v6 = result;
-  obj = this;
-  v8 = this->pTraits.pObject;
-  v9 = v8->pVM;
-  v10 = Scaleform::GFx::AS3::FindFixedSlot(
-          v8->pVM,
-          v8,
-          prop_name,
-          (unsigned __int64 *)&v32,
-          (Scaleform::GFx::AS3::Object *)&obj->vfptr);
-  if ( v10 )
+  pObject = this->pTraits.pObject;
+  pVM = pObject->pVM;
+  FixedSlot = Scaleform::GFx::AS3::FindFixedSlot(pVM, pObject, prop_name, &v32, this);
+  if ( FixedSlot )
   {
-    Scaleform::GFx::AS3::SlotInfo::SetSlotValue(v10, v6, v9, v4);
+    Scaleform::GFx::AS3::SlotInfo::SetSlotValue(FixedSlot, result, pVM, value);
   }
   else
   {
-    if ( obj->setPropertyInd < 0 )
+    if ( this->setPropertyInd < 0 )
     {
-      v11 = obj->pTraits.pObject;
+      v11 = this->pTraits.pObject;
       v12 = v11->pVM;
       v13 = v12->ProxyNamespace.pObject;
-      v14 = Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
-              (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v12->StringManagerRef->Builtins,
-              (Scaleform::GFx::ASString *)&other.value.VS._2,
-              "setProperty");
-      Scaleform::GFx::AS3::Slots::FindSlotInfoIndex((Scaleform::GFx::AS3::Slots *)&v11->FirstOwnSlotNum, &ind, v14, v13);
+      ConstString = Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
+                      v12->StringManagerRef,
+                      (Scaleform::GFx::ASString *)&other.value.VS._2,
+                      "setProperty");
+      Scaleform::GFx::AS3::Slots::FindSlotInfoIndex(&v11->Scaleform::GFx::AS3::Slots, &ind, ConstString, v13);
       if ( ind.Index < 0 )
       {
-        v16 = 0i64;
+        p_Value = 0i64;
       }
       else
       {
-        v15 = v11->FirstOwnSlotNum;
-        if ( ind.Index >= v15 )
-          v16 = &v11->VArray.Data.Data[LODWORD(ind.Index) - v15].Value;
+        FirstOwnSlotNum = v11->FirstOwnSlotNum;
+        if ( ind.Index >= FirstOwnSlotNum )
+          p_Value = (int *)&v11->VArray.Data.Data[LODWORD(ind.Index) - FirstOwnSlotNum].Value;
         else
-          v16 = Scaleform::GFx::AS3::Slots::GetSlotInfo(v11->Parent, ind);
+          p_Value = (int *)Scaleform::GFx::AS3::Slots::GetSlotInfo(v11->Parent, ind);
       }
-      v17 = (Scaleform::GFx::ASStringNode *)other.value.VS._2.VObj;
-      v18 = LODWORD(other.value.VS._2.VObj->pPrev) == 1;
-      --v17->RefCount;
-      if ( v18 )
-        Scaleform::GFx::ASStringNode::ReleaseNode(v17);
-      obj->setPropertyInd = *(_DWORD *)v16 >> 15;
+      VObj = (Scaleform::GFx::ASStringNode *)other.value.VS._2.VObj;
+      if ( LODWORD(other.value.VS._2.VObj->pPrev)-- == 1 )
+        Scaleform::GFx::ASStringNode::ReleaseNode(VObj);
+      this->setPropertyInd = *p_Value >> 15;
     }
-    v19.Index = obj->setPropertyInd;
-    v20 = Scaleform::GFx::AS3::Traits::GetVT(obj->pTraits.pObject);
-    Scaleform::GFx::AS3::VTable::GetValue(v20, &func, v19);
+    v19.Index = this->setPropertyInd;
+    VT = Scaleform::GFx::AS3::Traits::GetVT(this->pTraits.pObject);
+    Scaleform::GFx::AS3::VTable::GetValue(VT, &func, v19);
     other.Flags = 0;
     other.Bonus.pWeakProxy = 0i64;
     name.Flags = 0;
     name.Bonus.pWeakProxy = 0i64;
-    v21 = v4->Flags;
-    v27 = v21;
-    v28.pWeakProxy = (Scaleform::GFx::AS3::WeakProxy *)v4->Bonus;
-    v29 = v4->value;
-    if ( (char)(v21 & 0x1F) > 9 )
+    Flags = value->Flags;
+    v27 = Flags;
+    v28.pWeakProxy = (Scaleform::GFx::AS3::WeakProxy *)value->Bonus;
+    v29 = value->value;
+    if ( (Flags & 0x1F) > 9 )
     {
-      if ( (v21 >> 9) & 1 )
-        Scaleform::GFx::AS3::Value::AddRefWeakRef(v4);
+      if ( (Flags & 0x200) != 0 )
+        Scaleform::GFx::AS3::Value::AddRefWeakRef(value);
       else
-        Scaleform::GFx::AS3::Value::AddRefInternal(v4);
+        Scaleform::GFx::AS3::Value::AddRefInternal(value);
     }
     if ( Scaleform::GFx::AS3::Instances::fl_utils::Proxy::MakeName(
-           obj,
+           this,
            (Scaleform::GFx::AS3::CheckResult *)&ind,
-           v5,
+           (Expression::IMemberMap *)prop_name,
            &name)->Result )
     {
-      Scaleform::GFx::AS3::Value::Value(&v31, (Scaleform::GFx::AS3::Object *)&obj->vfptr);
+      Scaleform::GFx::AS3::Value::Value(&v31, this);
       func.Flags = 0;
       func.Bonus.pWeakProxy = 0i64;
-      Scaleform::GFx::AS3::VM::ExecuteInternalUnsafe(v9, &func, v22, &func, 2u, &name, 0);
+      Scaleform::GFx::AS3::VM::ExecuteInternalUnsafe(pVM, &func, v22, &func, 2u, &name, 0);
       Scaleform::GFx::AS3::Value::Swap(&func, &other);
       if ( (func.Flags & 0x1F) > 9 )
       {
-        if ( (func.Flags >> 9) & 1 )
+        if ( (func.Flags & 0x200) != 0 )
           Scaleform::GFx::AS3::Value::ReleaseWeakRef(&func);
         else
           Scaleform::GFx::AS3::Value::ReleaseInternal(&func);
       }
       if ( (v31.Flags & 0x1F) > 9 )
       {
-        if ( (v31.Flags >> 9) & 1 )
+        if ( (v31.Flags & 0x200) != 0 )
           Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v31);
         else
           Scaleform::GFx::AS3::Value::ReleaseInternal(&v31);
       }
-      v6->Result = v9->HandleException == 0;
+      result->Result = !pVM->HandleException;
     }
     else
     {
-      v6->Result = 0;
+      result->Result = 0;
     }
     `eh vector destructor iterator(&name, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
     if ( (other.Flags & 0x1F) > 9 )
     {
-      if ( (other.Flags >> 9) & 1 )
+      if ( (other.Flags & 0x200) != 0 )
         Scaleform::GFx::AS3::Value::ReleaseWeakRef(&other);
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&other);
     }
     if ( (func.Flags & 0x1F) > 9 )
     {
-      if ( (func.Flags >> 9) & 1 )
+      if ( (func.Flags & 0x200) != 0 )
         Scaleform::GFx::AS3::Value::ReleaseWeakRef(&func);
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&func);
     }
   }
-  return v6;
+  return result;
 }
 
 // File Line: 227
 // RVA: 0x8DC800
-Scaleform::GFx::AS3::CheckResult *__fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::GetProperty(Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this, Scaleform::GFx::AS3::CheckResult *result, Scaleform::GFx::AS3::Multiname *prop_name, Scaleform::GFx::AS3::Value *value)
+Scaleform::GFx::AS3::CheckResult *__fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::GetProperty(
+        Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this,
+        Scaleform::GFx::AS3::CheckResult *result,
+        Scaleform::GFx::AS3::Multiname *prop_name,
+        Scaleform::GFx::AS3::Value *value)
 {
-  Scaleform::GFx::AS3::Value *v4; // r14
-  Scaleform::GFx::AS3::Multiname *v5; // r12
-  Scaleform::GFx::AS3::CheckResult *v6; // rdi
-  Scaleform::GFx::AS3::Instances::fl_utils::Proxy *v7; // rsi
-  Scaleform::GFx::AS3::Traits *v8; // rcx
-  Scaleform::GFx::AS3::VM *v9; // r15
-  Scaleform::GFx::AS3::SlotInfo *v10; // rax
-  Scaleform::GFx::AS3::Value *v11; // rcx
+  Scaleform::GFx::AS3::Traits *pObject; // rcx
+  Scaleform::GFx::AS3::VM *pVM; // r15
+  Scaleform::GFx::AS3::SlotInfo *FixedSlot; // rax
+  Scaleform::GFx::AS3::Value *p_valuea; // rcx
   Scaleform::GFx::AS3::AbsoluteIndex v12; // rbx
-  Scaleform::GFx::AS3::VTable *v13; // rax
+  Scaleform::GFx::AS3::VTable *VT; // rax
   Scaleform::GFx::AS3::Value *v14; // rax
-  Scaleform::GFx::AS3::Value valuea; // [rsp+18h] [rbp-59h]
-  Scaleform::GFx::AS3::Value name; // [rsp+38h] [rbp-39h]
-  Scaleform::GFx::AS3::Value func; // [rsp+58h] [rbp-19h]
+  Scaleform::GFx::AS3::Value valuea; // [rsp+18h] [rbp-59h] BYREF
+  Scaleform::GFx::AS3::Value name; // [rsp+38h] [rbp-39h] BYREF
+  Scaleform::GFx::AS3::Value func; // [rsp+58h] [rbp-19h] BYREF
   __int64 v19; // [rsp+80h] [rbp+Fh]
-  Scaleform::GFx::AS3::Value v20; // [rsp+88h] [rbp+17h]
-  Scaleform::GFx::AS3::CheckResult resulta; // [rsp+D8h] [rbp+67h]
+  Scaleform::GFx::AS3::Value v20; // [rsp+88h] [rbp+17h] BYREF
+  Scaleform::GFx::AS3::CheckResult resulta; // [rsp+D8h] [rbp+67h] BYREF
 
   v19 = -2i64;
-  v4 = value;
-  v5 = prop_name;
-  v6 = result;
-  v7 = this;
-  v8 = this->pTraits.pObject;
-  v9 = v8->pVM;
-  v10 = Scaleform::GFx::AS3::FindFixedSlot(
-          v9,
-          v8,
-          prop_name,
-          (unsigned __int64 *)&v20.value.VS._2.VObj,
-          (Scaleform::GFx::AS3::Object *)&v7->vfptr);
-  if ( v10 )
+  pObject = this->pTraits.pObject;
+  pVM = pObject->pVM;
+  FixedSlot = Scaleform::GFx::AS3::FindFixedSlot(
+                pVM,
+                pObject,
+                prop_name,
+                (unsigned __int64 *)&v20.value.VS._2.VObj,
+                this);
+  if ( FixedSlot )
   {
     valuea.Bonus.pWeakProxy = 0i64;
-    if ( Scaleform::GFx::AS3::SlotInfo::GetSlotValueUnsafe(
-           v10,
-           &resulta,
-           &valuea,
-           (Scaleform::GFx::AS3::Object *)&v7->vfptr)->Result )
+    if ( Scaleform::GFx::AS3::SlotInfo::GetSlotValueUnsafe(FixedSlot, &resulta, &valuea, this)->Result )
     {
-      Scaleform::GFx::AS3::Value::Swap(&valuea, v4);
-      v6->Result = 1;
+      Scaleform::GFx::AS3::Value::Swap(&valuea, value);
+      result->Result = 1;
       if ( (valuea.Flags & 0x1F) > 9 )
       {
-        v11 = &valuea;
-        if ( (valuea.Flags >> 9) & 1 )
+        p_valuea = &valuea;
+        if ( (valuea.Flags & 0x200) != 0 )
         {
-          Scaleform::GFx::AS3::Value::ReleaseWeakRef(&valuea);
-          return v6;
+LABEL_5:
+          Scaleform::GFx::AS3::Value::ReleaseWeakRef(p_valuea);
+          return result;
         }
-LABEL_30:
-        Scaleform::GFx::AS3::Value::ReleaseInternal(v11);
-        return v6;
+LABEL_29:
+        Scaleform::GFx::AS3::Value::ReleaseInternal(p_valuea);
+        return result;
       }
-      return v6;
+      return result;
     }
     if ( (valuea.Flags & 0x1F) > 9 )
     {
-      if ( (valuea.Flags >> 9) & 1 )
+      if ( (valuea.Flags & 0x200) != 0 )
         Scaleform::GFx::AS3::Value::ReleaseWeakRef(&valuea);
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&valuea);
     }
   }
-  if ( v7->getPropertyInd < 0 )
-    v7->getPropertyInd = Scaleform::GFx::AS3::Instances::fl_utils::Proxy::GetMethodInd(v7, "getProperty");
-  v12.Index = v7->getPropertyInd;
-  v13 = Scaleform::GFx::AS3::Traits::GetVT(v7->pTraits.pObject);
-  Scaleform::GFx::AS3::VTable::GetValue(v13, &func, v12);
+  if ( this->getPropertyInd < 0 )
+    this->getPropertyInd = Scaleform::GFx::AS3::Instances::fl_utils::Proxy::GetMethodInd(this, "getProperty");
+  v12.Index = this->getPropertyInd;
+  VT = Scaleform::GFx::AS3::Traits::GetVT(this->pTraits.pObject);
+  Scaleform::GFx::AS3::VTable::GetValue(VT, &func, v12);
   name.Flags = 0;
   name.Bonus.pWeakProxy = 0i64;
-  if ( Scaleform::GFx::AS3::Instances::fl_utils::Proxy::MakeName(v7, &resulta, v5, &name)->Result )
+  if ( Scaleform::GFx::AS3::Instances::fl_utils::Proxy::MakeName(this, &resulta, prop_name, &name)->Result )
   {
-    Scaleform::GFx::AS3::Value::Value(&v20, (Scaleform::GFx::AS3::Object *)&v7->vfptr);
-    Scaleform::GFx::AS3::VM::ExecuteInternalUnsafe(v9, &func, v14, &valuea, 1u, &name, 0);
-    Scaleform::GFx::AS3::Value::Swap(&valuea, v4);
+    Scaleform::GFx::AS3::Value::Value(&v20, this);
+    Scaleform::GFx::AS3::VM::ExecuteInternalUnsafe(pVM, &func, v14, &valuea, 1u, &name, 0);
+    Scaleform::GFx::AS3::Value::Swap(&valuea, value);
     if ( (valuea.Flags & 0x1F) > 9 )
     {
-      if ( (valuea.Flags >> 9) & 1 )
+      if ( (valuea.Flags & 0x200) != 0 )
         Scaleform::GFx::AS3::Value::ReleaseWeakRef(&valuea);
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&valuea);
     }
     if ( (v20.Flags & 0x1F) > 9 )
     {
-      if ( (v20.Flags >> 9) & 1 )
+      if ( (v20.Flags & 0x200) != 0 )
         Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v20);
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&v20);
     }
-    v6->Result = v9->HandleException == 0;
+    result->Result = !pVM->HandleException;
   }
   else
   {
-    v6->Result = 0;
+    result->Result = 0;
   }
   if ( (name.Flags & 0x1F) > 9 )
   {
-    if ( (name.Flags >> 9) & 1 )
+    if ( (name.Flags & 0x200) != 0 )
       Scaleform::GFx::AS3::Value::ReleaseWeakRef(&name);
     else
       Scaleform::GFx::AS3::Value::ReleaseInternal(&name);
   }
   if ( (func.Flags & 0x1F) > 9 )
   {
-    v11 = &func;
-    if ( (func.Flags >> 9) & 1 )
-    {
-      Scaleform::GFx::AS3::Value::ReleaseWeakRef(&func);
-      return v6;
-    }
-    goto LABEL_30;
+    p_valuea = &func;
+    if ( (func.Flags & 0x200) != 0 )
+      goto LABEL_5;
+    goto LABEL_29;
   }
-  return v6;
+  return result;
 }
 
 // File Line: 264
 // RVA: 0x8C5230
-Scaleform::GFx::AS3::CheckResult *__fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::DeleteProperty(Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this, Scaleform::GFx::AS3::CheckResult *result, Scaleform::GFx::AS3::Multiname *prop_name)
+Scaleform::GFx::AS3::CheckResult *__fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::DeleteProperty(
+        Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this,
+        Scaleform::GFx::AS3::CheckResult *result,
+        Scaleform::GFx::AS3::Multiname *prop_name)
 {
-  Scaleform::GFx::AS3::Multiname *v3; // r12
-  Scaleform::GFx::AS3::CheckResult *v4; // rdi
-  Scaleform::GFx::AS3::Instances::fl_utils::Proxy *v5; // rsi
   char v6; // bl
-  Scaleform::GFx::AS3::Traits *v7; // r14
-  Scaleform::GFx::AS3::VM *v8; // r15
+  Scaleform::GFx::AS3::Traits *pObject; // r14
+  Scaleform::GFx::AS3::VM *pVM; // r15
   Scaleform::GFx::AS3::Instances::fl::Namespace *v9; // rbx
   Scaleform::GFx::ASString *v10; // rax
-  unsigned __int64 v11; // r8
-  Scaleform::GFx::AS3::SlotInfo *v12; // rbx
-  Scaleform::GFx::ASStringNode *v13; // rcx
-  bool v14; // zf
+  unsigned __int64 FirstOwnSlotNum; // r8
+  int *p_Value; // rbx
+  Scaleform::GFx::ASStringNode *pNode; // rcx
   Scaleform::GFx::AS3::AbsoluteIndex v15; // rbx
-  Scaleform::GFx::AS3::VTable *v16; // rax
+  Scaleform::GFx::AS3::VTable *VT; // rax
   Scaleform::GFx::AS3::Value *v17; // rax
-  Scaleform::GFx::AS3::Value other; // [rsp+18h] [rbp-79h]
-  Scaleform::GFx::AS3::Value name; // [rsp+38h] [rbp-59h]
-  Scaleform::GFx::AS3::Value func; // [rsp+58h] [rbp-39h]
-  Scaleform::GFx::ASString v22; // [rsp+78h] [rbp-19h]
-  Scaleform::GFx::AS3::Value v23; // [rsp+80h] [rbp-11h]
+  Scaleform::GFx::AS3::Value other; // [rsp+18h] [rbp-79h] BYREF
+  Scaleform::GFx::AS3::Value name; // [rsp+38h] [rbp-59h] BYREF
+  Scaleform::GFx::AS3::Value func; // [rsp+58h] [rbp-39h] BYREF
+  Scaleform::GFx::ASString v22; // [rsp+78h] [rbp-19h] BYREF
+  Scaleform::GFx::AS3::Value v23; // [rsp+80h] [rbp-11h] BYREF
   __int64 v24; // [rsp+A0h] [rbp+Fh]
-  Scaleform::GFx::AS3::Value v25; // [rsp+A8h] [rbp+17h]
-  Scaleform::GFx::AS3::CheckResult resulta[8]; // [rsp+110h] [rbp+7Fh]
-  __int64 v27; // [rsp+138h] [rbp+A7h]
+  Scaleform::GFx::AS3::Value v25; // [rsp+A8h] [rbp+17h] BYREF
+  Scaleform::GFx::AS3::CheckResult resulta[8]; // [rsp+110h] [rbp+7Fh] BYREF
+  Scaleform::GFx::AS3::CheckResult v27; // [rsp+138h] [rbp+A7h] BYREF
 
   v24 = -2i64;
-  v3 = prop_name;
-  v4 = result;
-  v5 = this;
   v6 = 1;
-  if ( Scaleform::GFx::AS3::Object::DeleteDynamicSlotValuePair(
-         (Scaleform::GFx::AS3::Object *)&this->vfptr,
-         (Scaleform::GFx::AS3::CheckResult *)&v27,
-         prop_name)->Result )
+  if ( Scaleform::GFx::AS3::Object::DeleteDynamicSlotValuePair(this, &v27, prop_name)->Result )
   {
 LABEL_45:
-    v4->Result = v6;
-    return v4;
+    result->Result = v6;
+    return result;
   }
-  v7 = v5->pTraits.pObject;
-  v8 = v7->pVM;
-  if ( v5->deletePropertyInd < 0 )
+  pObject = this->pTraits.pObject;
+  pVM = pObject->pVM;
+  if ( this->deletePropertyInd < 0 )
   {
-    v9 = v8->ProxyNamespace.pObject;
-    v10 = Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
-            (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v8->StringManagerRef->Builtins,
+    v9 = pVM->ProxyNamespace.pObject;
+    v10 = Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
+            pVM->StringManagerRef,
             &v22,
             "deleteProperty");
     Scaleform::GFx::AS3::Slots::FindSlotInfoIndex(
-      (Scaleform::GFx::AS3::Slots *)&v7->FirstOwnSlotNum,
+      &pObject->Scaleform::GFx::AS3::Slots,
       (Scaleform::GFx::AS3::AbsoluteIndex *)resulta,
       v10,
       v9);
-    if ( *(_QWORD *)&resulta[0].Result < 0i64 )
+    if ( *(__int64 *)&resulta[0].Result < 0 )
     {
-      v12 = 0i64;
+      p_Value = 0i64;
     }
     else
     {
-      v11 = v7->FirstOwnSlotNum;
-      if ( *(_QWORD *)&resulta[0].Result >= v11 )
-        v12 = &v7->VArray.Data.Data[*(unsigned int *)&resulta[0].Result - v11].Value;
+      FirstOwnSlotNum = pObject->FirstOwnSlotNum;
+      if ( *(_QWORD *)&resulta[0].Result >= FirstOwnSlotNum )
+        p_Value = (int *)&pObject->VArray.Data.Data[*(unsigned int *)&resulta[0].Result - FirstOwnSlotNum].Value;
       else
-        v12 = Scaleform::GFx::AS3::Slots::GetSlotInfo(
-                v7->Parent,
-                *(Scaleform::GFx::AS3::AbsoluteIndex *)&resulta[0].Result);
+        p_Value = (int *)Scaleform::GFx::AS3::Slots::GetSlotInfo(
+                           pObject->Parent,
+                           *(Scaleform::GFx::AS3::AbsoluteIndex *)&resulta[0].Result);
     }
-    v13 = v22.pNode;
-    v14 = v22.pNode->RefCount == 1;
-    --v13->RefCount;
-    if ( v14 )
-      Scaleform::GFx::ASStringNode::ReleaseNode(v13);
-    v5->deletePropertyInd = *(_DWORD *)v12 >> 15;
+    pNode = v22.pNode;
+    if ( v22.pNode->RefCount-- == 1 )
+      Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
+    this->deletePropertyInd = *p_Value >> 15;
   }
-  v15.Index = v5->deletePropertyInd;
-  v16 = Scaleform::GFx::AS3::Traits::GetVT(v5->pTraits.pObject);
-  Scaleform::GFx::AS3::VTable::GetValue(v16, &func, v15);
+  v15.Index = this->deletePropertyInd;
+  VT = Scaleform::GFx::AS3::Traits::GetVT(this->pTraits.pObject);
+  Scaleform::GFx::AS3::VTable::GetValue(VT, &func, v15);
   other.Bonus.pWeakProxy = 0i64;
   name.Flags = 0;
   name.Bonus.pWeakProxy = 0i64;
-  if ( Scaleform::GFx::AS3::Instances::fl_utils::Proxy::MakeName(v5, resulta, v3, &name)->Result )
+  if ( Scaleform::GFx::AS3::Instances::fl_utils::Proxy::MakeName(this, resulta, prop_name, &name)->Result )
   {
-    Scaleform::GFx::AS3::Value::Value(&v25, (Scaleform::GFx::AS3::Object *)&v5->vfptr);
+    Scaleform::GFx::AS3::Value::Value(&v25, this);
     v23.Flags = 0;
     v23.Bonus.pWeakProxy = 0i64;
-    Scaleform::GFx::AS3::VM::ExecuteInternalUnsafe(v8, &func, v17, &v23, 1u, &name, 0);
+    Scaleform::GFx::AS3::VM::ExecuteInternalUnsafe(pVM, &func, v17, &v23, 1u, &name, 0);
     Scaleform::GFx::AS3::Value::Swap(&v23, &other);
     if ( (v23.Flags & 0x1F) > 9 )
     {
-      if ( (v23.Flags >> 9) & 1 )
+      if ( (v23.Flags & 0x200) != 0 )
         Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v23);
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&v23);
     }
     if ( (v25.Flags & 0x1F) > 9 )
     {
-      if ( (v25.Flags >> 9) & 1 )
+      if ( (v25.Flags & 0x200) != 0 )
         Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v25);
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&v25);
     }
-    if ( !v8->HandleException )
+    if ( !pVM->HandleException )
     {
       v6 = Scaleform::GFx::AS3::Value::Convert2Boolean(&other);
       if ( (name.Flags & 0x1F) > 9 )
       {
-        if ( (name.Flags >> 9) & 1 )
+        if ( (name.Flags & 0x200) != 0 )
           Scaleform::GFx::AS3::Value::ReleaseWeakRef(&name);
         else
           Scaleform::GFx::AS3::Value::ReleaseInternal(&name);
       }
       if ( (other.Flags & 0x1F) > 9 )
       {
-        if ( (other.Flags >> 9) & 1 )
+        if ( (other.Flags & 0x200) != 0 )
           Scaleform::GFx::AS3::Value::ReleaseWeakRef(&other);
         else
           Scaleform::GFx::AS3::Value::ReleaseInternal(&other);
       }
       if ( (func.Flags & 0x1F) > 9 )
       {
-        if ( (func.Flags >> 9) & 1 )
+        if ( (func.Flags & 0x200) != 0 )
           Scaleform::GFx::AS3::Value::ReleaseWeakRef(&func);
         else
           Scaleform::GFx::AS3::Value::ReleaseInternal(&func);
@@ -831,146 +798,139 @@ LABEL_45:
       goto LABEL_45;
     }
   }
-  v4->Result = 0;
+  result->Result = 0;
   if ( (name.Flags & 0x1F) > 9 )
   {
-    if ( (name.Flags >> 9) & 1 )
+    if ( (name.Flags & 0x200) != 0 )
       Scaleform::GFx::AS3::Value::ReleaseWeakRef(&name);
     else
       Scaleform::GFx::AS3::Value::ReleaseInternal(&name);
   }
   if ( (other.Flags & 0x1F) > 9 )
   {
-    if ( (other.Flags >> 9) & 1 )
+    if ( (other.Flags & 0x200) != 0 )
       Scaleform::GFx::AS3::Value::ReleaseWeakRef(&other);
     else
       Scaleform::GFx::AS3::Value::ReleaseInternal(&other);
   }
   if ( (func.Flags & 0x1F) > 9 )
   {
-    if ( (func.Flags >> 9) & 1 )
+    if ( (func.Flags & 0x200) != 0 )
       Scaleform::GFx::AS3::Value::ReleaseWeakRef(&func);
     else
       Scaleform::GFx::AS3::Value::ReleaseInternal(&func);
   }
-  return v4;
+  return result;
 }
 
 // File Line: 300
 // RVA: 0x8CAAB0
-Scaleform::GFx::AS3::CheckResult *__fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::ExecutePropertyUnsafe(Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this, Scaleform::GFx::AS3::CheckResult *result, Scaleform::GFx::AS3::Multiname *prop_name, Scaleform::GFx::AS3::Value *a4)
+Scaleform::GFx::AS3::CheckResult *__fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::ExecutePropertyUnsafe(
+        Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this,
+        Scaleform::GFx::AS3::CheckResult *result,
+        Scaleform::GFx::AS3::Multiname *prop_name,
+        Scaleform::GFx::AS3::Value *a4)
 {
-  Scaleform::GFx::AS3::Value *v4; // r15
-  Scaleform::GFx::AS3::Multiname *v5; // r12
-  Scaleform::GFx::AS3::CheckResult *v6; // r14
-  Scaleform::GFx::AS3::Instances::fl_utils::Proxy *obj; // rdi
-  Scaleform::GFx::AS3::VM *v8; // rsi
-  Scaleform::GFx::AS3::SlotInfo *v9; // rax
+  Scaleform::GFx::AS3::VM *pVM; // rsi
+  Scaleform::GFx::AS3::SlotInfo *FixedSlot; // rax
   int v10; // ecx
   Scaleform::GFx::AS3::VM::Error *v11; // rax
-  Scaleform::GFx::ASStringNode *v12; // rcx
-  bool v13; // zf
+  Scaleform::GFx::ASStringNode *pNode; // rcx
   Scaleform::GFx::AS3::AbsoluteIndex v14; // rbx
-  Scaleform::GFx::AS3::VTable *v15; // rax
-  Scaleform::GFx::AS3::VM::Error v17; // [rsp+38h] [rbp-79h]
-  Scaleform::GFx::AS3::Value _this; // [rsp+48h] [rbp-69h]
-  Scaleform::GFx::AS3::Value v19; // [rsp+68h] [rbp-49h]
-  Scaleform::GFx::AS3::Value name; // [rsp+88h] [rbp-29h]
-  Scaleform::GFx::AS3::Value v21; // [rsp+A8h] [rbp-9h]
-  unsigned __int64 index; // [rsp+C8h] [rbp+17h]
-  __int64 v23; // [rsp+D0h] [rbp+1Fh]
-  Scaleform::GFx::AS3::CheckResult resulta; // [rsp+108h] [rbp+57h]
+  Scaleform::GFx::AS3::VTable *VT; // rax
+  Scaleform::GFx::AS3::VM::Error v17; // [rsp+38h] [rbp-79h] BYREF
+  Scaleform::GFx::AS3::Value _this; // [rsp+48h] [rbp-69h] BYREF
+  Scaleform::GFx::AS3::Value v19; // [rsp+68h] [rbp-49h] BYREF
+  Scaleform::GFx::AS3::Value name; // [rsp+88h] [rbp-29h] BYREF
+  Scaleform::GFx::AS3::Value v21; // [rsp+A8h] [rbp-9h] BYREF
+  unsigned __int64 index[7]; // [rsp+C8h] [rbp+17h] BYREF
+  Scaleform::GFx::AS3::CheckResult resulta; // [rsp+108h] [rbp+57h] BYREF
   void *retaddr; // [rsp+128h] [rbp+77h]
-  Scaleform::GFx::AS3::Value *v26; // [rsp+130h] [rbp+7Fh]
+  Scaleform::GFx::AS3::Value *v25; // [rsp+130h] [rbp+7Fh]
 
-  v23 = -2i64;
-  v4 = a4;
-  v5 = prop_name;
-  v6 = result;
-  obj = this;
-  v8 = this->pTraits.pObject->pVM;
-  Scaleform::GFx::AS3::Value::Value(&_this, (Scaleform::GFx::AS3::Object *)&this->vfptr);
-  v9 = Scaleform::GFx::AS3::FindFixedSlot(
-         obj->pTraits.pObject->pVM,
-         obj->pTraits.pObject,
-         v5,
-         &index,
-         (Scaleform::GFx::AS3::Object *)&obj->vfptr);
-  if ( v9 )
+  index[1] = -2i64;
+  pVM = this->pTraits.pObject->pVM;
+  Scaleform::GFx::AS3::Value::Value(&_this, this);
+  FixedSlot = Scaleform::GFx::AS3::FindFixedSlot(
+                this->pTraits.pObject->pVM,
+                this->pTraits.pObject,
+                prop_name,
+                index,
+                this);
+  if ( FixedSlot )
   {
     LODWORD(v17.Message.pNode) = 0;
     *(_QWORD *)&_this.Flags = 0i64;
     if ( Scaleform::GFx::AS3::SlotInfo::GetSlotValueUnsafe(
-           v9,
+           FixedSlot,
            &resulta,
            (Scaleform::GFx::AS3::Value *)&v17.Message,
-           (Scaleform::GFx::AS3::Object *)&obj->vfptr)->Result )
+           this)->Result )
     {
-      v10 = (_QWORD)v17.Message.pNode & 0x1F;
-      if ( (_QWORD)v17.Message.pNode & 0x1F && ((unsigned int)(v10 - 12) > 3 && v10 != 10 || _this.Bonus.pWeakProxy) )
+      v10 = (__int64)v17.Message.pNode & 0x1F;
+      if ( ((__int64)v17.Message.pNode & 0x1F) != 0
+        && ((unsigned int)(v10 - 12) > 3 && v10 != 10 || _this.Bonus.pWeakProxy) )
       {
         Scaleform::GFx::AS3::VM::ExecuteInternalUnsafe(
-          v8,
+          pVM,
           (Scaleform::GFx::AS3::Value *)&v17.Message,
           &_this,
-          v4,
+          a4,
           (unsigned int)retaddr,
-          v26,
+          v25,
           0);
       }
       else
       {
-        Scaleform::GFx::AS3::VM::Error::Error(&v17, eCallOfNonFunctionError, v8);
-        Scaleform::GFx::AS3::VM::ThrowTypeError(v8, v11);
-        v12 = v17.Message.pNode;
-        v13 = v17.Message.pNode->RefCount == 1;
-        --v12->RefCount;
-        if ( v13 )
-          Scaleform::GFx::ASStringNode::ReleaseNode(v12);
+        Scaleform::GFx::AS3::VM::Error::Error(&v17, 1006, pVM);
+        Scaleform::GFx::AS3::VM::ThrowTypeError(pVM, v11);
+        pNode = v17.Message.pNode;
+        if ( v17.Message.pNode->RefCount-- == 1 )
+          Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
       }
     }
 LABEL_23:
-    if ( ((_QWORD)v17.Message.pNode & 0x1F) > 9 )
+    if ( (unsigned __int64)((__int64)v17.Message.pNode & 0x1F) > 9 )
     {
-      if ( (LODWORD(v17.Message.pNode) >> 9) & 1 )
+      if ( ((__int64)v17.Message.pNode & 0x200) != 0 )
         Scaleform::GFx::AS3::Value::ReleaseWeakRef((Scaleform::GFx::AS3::Value *)&v17.Message);
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal((Scaleform::GFx::AS3::Value *)&v17.Message);
     }
-    v6->Result = v8->HandleException == 0;
+    result->Result = !pVM->HandleException;
     goto LABEL_28;
   }
-  if ( obj->callPropertyInd < 0 )
-    obj->callPropertyInd = Scaleform::GFx::AS3::Instances::fl_utils::Proxy::GetMethodInd(obj, "callProperty");
-  v14.Index = obj->callPropertyInd;
-  v15 = Scaleform::GFx::AS3::Traits::GetVT(obj->pTraits.pObject);
-  Scaleform::GFx::AS3::VTable::GetValue(v15, (Scaleform::GFx::AS3::Value *)&v17.Message, v14);
-  Scaleform::GFx::AS3::VM::MakeArray(v8, (Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl::Array> *)&v17);
+  if ( this->callPropertyInd < 0 )
+    this->callPropertyInd = Scaleform::GFx::AS3::Instances::fl_utils::Proxy::GetMethodInd(this, "callProperty");
+  v14.Index = this->callPropertyInd;
+  VT = Scaleform::GFx::AS3::Traits::GetVT(this->pTraits.pObject);
+  Scaleform::GFx::AS3::VTable::GetValue(VT, (Scaleform::GFx::AS3::Value *)&v17.Message, v14);
+  Scaleform::GFx::AS3::VM::MakeArray(pVM, (Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl::Array> *)&v17);
   Scaleform::GFx::AS3::Impl::SparseArray::Append(
     (Scaleform::GFx::AS3::Impl::SparseArray *)(*(_QWORD *)&v17.ID + 56i64),
     (unsigned int)retaddr,
-    v26);
+    v25);
   name.Flags = 0;
   name.Bonus.pWeakProxy = 0i64;
   v21.Flags = 0;
   v21.Bonus.pWeakProxy = 0i64;
   Scaleform::GFx::AS3::Value::PickUnsafe(&v21, *(Scaleform::GFx::AS3::Object **)&v17.ID);
-  if ( Scaleform::GFx::AS3::Instances::fl_utils::Proxy::MakeName(obj, &resulta, v5, &name)->Result )
+  if ( Scaleform::GFx::AS3::Instances::fl_utils::Proxy::MakeName(this, &resulta, prop_name, &name)->Result )
   {
     v19.Flags = 0;
     v19.Bonus.pWeakProxy = 0i64;
     Scaleform::GFx::AS3::VM::ExecuteInternalUnsafe(
-      v8,
+      pVM,
       (Scaleform::GFx::AS3::Value *)&v17.Message,
       &_this,
       &v19,
       2u,
       &name,
       0);
-    Scaleform::GFx::AS3::Value::Swap(&v19, v4);
+    Scaleform::GFx::AS3::Value::Swap(&v19, a4);
     if ( (v19.Flags & 0x1F) > 9 )
     {
-      if ( (v19.Flags >> 9) & 1 )
+      if ( (v19.Flags & 0x200) != 0 )
         Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v19);
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&v19);
@@ -978,11 +938,11 @@ LABEL_23:
     `eh vector destructor iterator(&name, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
     goto LABEL_23;
   }
-  v6->Result = 0;
+  result->Result = 0;
   `eh vector destructor iterator(&name, 0x20ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
-  if ( ((_QWORD)v17.Message.pNode & 0x1F) > 9 )
+  if ( (unsigned __int64)((__int64)v17.Message.pNode & 0x1F) > 9 )
   {
-    if ( (LODWORD(v17.Message.pNode) >> 9) & 1 )
+    if ( ((__int64)v17.Message.pNode & 0x200) != 0 )
       Scaleform::GFx::AS3::Value::ReleaseWeakRef((Scaleform::GFx::AS3::Value *)&v17.Message);
     else
       Scaleform::GFx::AS3::Value::ReleaseInternal((Scaleform::GFx::AS3::Value *)&v17.Message);
@@ -990,110 +950,99 @@ LABEL_23:
 LABEL_28:
   if ( (_this.Flags & 0x1F) > 9 )
   {
-    if ( (_this.Flags >> 9) & 1 )
+    if ( (_this.Flags & 0x200) != 0 )
       Scaleform::GFx::AS3::Value::ReleaseWeakRef(&_this);
     else
       Scaleform::GFx::AS3::Value::ReleaseInternal(&_this);
   }
-  return v6;
+  return result;
 }
 
 // File Line: 347
 // RVA: 0x8E2F90
-char __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::HasProperty(Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this, Scaleform::GFx::AS3::Multiname *prop_name, bool check_prototype)
+char __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::HasProperty(
+        Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this,
+        Scaleform::GFx::AS3::Multiname *prop_name,
+        bool check_prototype)
 {
-  Scaleform::GFx::AS3::Multiname *v3; // r14
-  Scaleform::GFx::AS3::Instances::fl_utils::Proxy *v4; // rdi
-  Scaleform::GFx::AS3::Traits *v6; // rsi
-  Scaleform::GFx::AS3::VM *v7; // r15
+  Scaleform::GFx::AS3::Traits *pObject; // rsi
+  Scaleform::GFx::AS3::VM *pVM; // r15
   Scaleform::GFx::AS3::Instances::fl::Namespace *v8; // rbx
   Scaleform::GFx::ASString *v9; // rax
-  unsigned __int64 v10; // r8
-  Scaleform::GFx::AS3::SlotInfo *v11; // rbx
-  Scaleform::GFx::ASStringNode *v12; // rcx
-  bool v13; // zf
+  unsigned __int64 FirstOwnSlotNum; // r8
+  int *p_Value; // rbx
+  Scaleform::GFx::ASStringNode *pNode; // rcx
   Scaleform::GFx::AS3::AbsoluteIndex v14; // rbx
-  Scaleform::GFx::AS3::VTable *v15; // rax
+  Scaleform::GFx::AS3::VTable *VT; // rax
   char v16; // bl
   Scaleform::GFx::AS3::Value *v17; // rax
-  Scaleform::GFx::AS3::Value name; // [rsp+18h] [rbp-79h]
-  Scaleform::GFx::AS3::Value v19; // [rsp+38h] [rbp-59h]
-  Scaleform::GFx::AS3::Value other; // [rsp+58h] [rbp-39h]
-  Scaleform::GFx::AS3::Value func; // [rsp+78h] [rbp-19h]
+  Scaleform::GFx::AS3::Value name; // [rsp+18h] [rbp-79h] BYREF
+  Scaleform::GFx::AS3::Value v19; // [rsp+38h] [rbp-59h] BYREF
+  Scaleform::GFx::AS3::Value other; // [rsp+58h] [rbp-39h] BYREF
+  Scaleform::GFx::AS3::Value func; // [rsp+78h] [rbp-19h] BYREF
   __int64 v22; // [rsp+98h] [rbp+7h]
-  Scaleform::GFx::AS3::Value v23; // [rsp+A8h] [rbp+17h]
-  __int64 v24; // [rsp+C8h] [rbp+37h]
-  Scaleform::GFx::AS3::AbsoluteIndex ind; // [rsp+F8h] [rbp+67h]
-  Scaleform::GFx::ASString result; // [rsp+110h] [rbp+7Fh]
+  Scaleform::GFx::AS3::Value v23; // [rsp+A8h] [rbp+17h] BYREF
+  unsigned __int64 v24[5]; // [rsp+C8h] [rbp+37h] BYREF
+  Scaleform::GFx::AS3::AbsoluteIndex ind; // [rsp+F8h] [rbp+67h] BYREF
+  Scaleform::GFx::ASString result; // [rsp+110h] [rbp+7Fh] BYREF
 
   v22 = -2i64;
-  v3 = prop_name;
-  v4 = this;
-  if ( Scaleform::GFx::AS3::FindFixedSlot(
-         this->pTraits.pObject->pVM,
-         this->pTraits.pObject,
-         prop_name,
-         (unsigned __int64 *)&v24,
-         (Scaleform::GFx::AS3::Object *)&this->vfptr) )
-  {
+  if ( Scaleform::GFx::AS3::FindFixedSlot(this->pTraits.pObject->pVM, this->pTraits.pObject, prop_name, v24, this) )
     return 1;
-  }
-  v6 = v4->pTraits.pObject;
-  v7 = v6->pVM;
-  if ( v4->hasPropertyInd < 0 )
+  pObject = this->pTraits.pObject;
+  pVM = pObject->pVM;
+  if ( this->hasPropertyInd < 0 )
   {
-    v8 = v7->ProxyNamespace.pObject;
-    v9 = Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
-           (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v7->StringManagerRef->Builtins,
+    v8 = pVM->ProxyNamespace.pObject;
+    v9 = Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
+           pVM->StringManagerRef,
            &result,
            "hasProperty");
-    Scaleform::GFx::AS3::Slots::FindSlotInfoIndex((Scaleform::GFx::AS3::Slots *)&v6->FirstOwnSlotNum, &ind, v9, v8);
+    Scaleform::GFx::AS3::Slots::FindSlotInfoIndex(&pObject->Scaleform::GFx::AS3::Slots, &ind, v9, v8);
     if ( ind.Index < 0 )
     {
-      v11 = 0i64;
+      p_Value = 0i64;
     }
     else
     {
-      v10 = v6->FirstOwnSlotNum;
-      if ( ind.Index >= v10 )
-        v11 = &v6->VArray.Data.Data[LODWORD(ind.Index) - v10].Value;
+      FirstOwnSlotNum = pObject->FirstOwnSlotNum;
+      if ( ind.Index >= FirstOwnSlotNum )
+        p_Value = (int *)&pObject->VArray.Data.Data[LODWORD(ind.Index) - FirstOwnSlotNum].Value;
       else
-        v11 = Scaleform::GFx::AS3::Slots::GetSlotInfo(v6->Parent, ind);
+        p_Value = (int *)Scaleform::GFx::AS3::Slots::GetSlotInfo(pObject->Parent, ind);
     }
-    v12 = result.pNode;
-    v13 = result.pNode->RefCount == 1;
-    --v12->RefCount;
-    if ( v13 )
-      Scaleform::GFx::ASStringNode::ReleaseNode(v12);
-    v4->hasPropertyInd = *(_DWORD *)v11 >> 15;
+    pNode = result.pNode;
+    if ( result.pNode->RefCount-- == 1 )
+      Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
+    this->hasPropertyInd = *p_Value >> 15;
   }
-  v14.Index = v4->hasPropertyInd;
-  v15 = Scaleform::GFx::AS3::Traits::GetVT(v4->pTraits.pObject);
-  Scaleform::GFx::AS3::VTable::GetValue(v15, &func, v14);
+  v14.Index = this->hasPropertyInd;
+  VT = Scaleform::GFx::AS3::Traits::GetVT(this->pTraits.pObject);
+  Scaleform::GFx::AS3::VTable::GetValue(VT, &func, v14);
   other.Flags = 0;
   other.Bonus.pWeakProxy = 0i64;
   name.Bonus.pWeakProxy = 0i64;
   if ( Scaleform::GFx::AS3::Instances::fl_utils::Proxy::MakeName(
-         v4,
+         this,
          (Scaleform::GFx::AS3::CheckResult *)&ind,
-         v3,
+         prop_name,
          &name)->Result )
   {
-    Scaleform::GFx::AS3::Value::Value(&v23, (Scaleform::GFx::AS3::Object *)&v4->vfptr);
+    Scaleform::GFx::AS3::Value::Value(&v23, this);
     v19.Flags = 0;
     v19.Bonus.pWeakProxy = 0i64;
-    Scaleform::GFx::AS3::VM::ExecuteInternalUnsafe(v7, &func, v17, &v19, 1u, &name, 0);
+    Scaleform::GFx::AS3::VM::ExecuteInternalUnsafe(pVM, &func, v17, &v19, 1u, &name, 0);
     Scaleform::GFx::AS3::Value::Swap(&v19, &other);
     if ( (v19.Flags & 0x1F) > 9 )
     {
-      if ( (v19.Flags >> 9) & 1 )
+      if ( (v19.Flags & 0x200) != 0 )
         Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v19);
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&v19);
     }
     if ( (v23.Flags & 0x1F) > 9 )
     {
-      if ( (v23.Flags >> 9) & 1 )
+      if ( (v23.Flags & 0x200) != 0 )
         Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v23);
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&v23);
@@ -1106,21 +1055,21 @@ char __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::HasProperty(Sca
   }
   if ( (name.Flags & 0x1F) > 9 )
   {
-    if ( (name.Flags >> 9) & 1 )
+    if ( (name.Flags & 0x200) != 0 )
       Scaleform::GFx::AS3::Value::ReleaseWeakRef(&name);
     else
       Scaleform::GFx::AS3::Value::ReleaseInternal(&name);
   }
   if ( (other.Flags & 0x1F) > 9 )
   {
-    if ( (other.Flags >> 9) & 1 )
+    if ( (other.Flags & 0x200) != 0 )
       Scaleform::GFx::AS3::Value::ReleaseWeakRef(&other);
     else
       Scaleform::GFx::AS3::Value::ReleaseInternal(&other);
   }
   if ( (func.Flags & 0x1F) > 9 )
   {
-    if ( (func.Flags >> 9) & 1 )
+    if ( (func.Flags & 0x200) != 0 )
       Scaleform::GFx::AS3::Value::ReleaseWeakRef(&func);
     else
       Scaleform::GFx::AS3::Value::ReleaseInternal(&func);
@@ -1130,84 +1079,80 @@ char __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::HasProperty(Sca
 
 // File Line: 382
 // RVA: 0x8DBB80
-void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::GetNextPropertyName(Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this, Scaleform::GFx::AS3::Value *name, Scaleform::GFx::AS3::GlobalSlotIndex ind)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::GetNextPropertyName(
+        Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this,
+        Scaleform::GFx::AS3::Value *name,
+        Scaleform::GFx::AS3::GlobalSlotIndex ind)
 {
-  Scaleform::GFx::AS3::Value *v3; // r14
-  Scaleform::GFx::AS3::Instances::fl_utils::Proxy *v4; // rdi
-  Scaleform::GFx::AS3::Traits *v5; // rsi
-  Scaleform::GFx::AS3::VM *v6; // r15
+  Scaleform::GFx::AS3::Traits *pObject; // rsi
+  Scaleform::GFx::AS3::VM *pVM; // r15
   Scaleform::GFx::AS3::Instances::fl::Namespace *v7; // rbx
   Scaleform::GFx::ASString *v8; // rax
-  unsigned __int64 v9; // r8
-  Scaleform::GFx::AS3::SlotInfo *v10; // rbx
-  Scaleform::GFx::ASStringNode *v11; // rcx
-  bool v12; // zf
+  unsigned __int64 FirstOwnSlotNum; // r8
+  int *p_Value; // rbx
+  Scaleform::GFx::ASStringNode *pNode; // rcx
   Scaleform::GFx::AS3::AbsoluteIndex v13; // rbx
-  Scaleform::GFx::AS3::VTable *v14; // rax
+  Scaleform::GFx::AS3::VTable *VT; // rax
   Scaleform::GFx::AS3::Value *v15; // rax
-  Scaleform::GFx::AS3::Value v16; // [rsp+40h] [rbp-59h]
-  Scaleform::GFx::AS3::Value ptr; // [rsp+60h] [rbp-39h]
-  Scaleform::GFx::AS3::Value func; // [rsp+80h] [rbp-19h]
+  Scaleform::GFx::AS3::Value v16; // [rsp+40h] [rbp-59h] BYREF
+  Scaleform::GFx::AS3::Value ptr; // [rsp+60h] [rbp-39h] BYREF
+  Scaleform::GFx::AS3::Value func; // [rsp+80h] [rbp-19h] BYREF
   __int64 v19; // [rsp+A0h] [rbp+7h]
-  Scaleform::GFx::AS3::Value v20; // [rsp+A8h] [rbp+Fh]
-  Scaleform::GFx::AS3::AbsoluteIndex inda; // [rsp+100h] [rbp+67h]
-  int v22; // [rsp+110h] [rbp+77h]
-  Scaleform::GFx::ASString result; // [rsp+118h] [rbp+7Fh]
+  Scaleform::GFx::AS3::Value v20; // [rsp+A8h] [rbp+Fh] BYREF
+  Scaleform::GFx::AS3::AbsoluteIndex inda; // [rsp+100h] [rbp+67h] BYREF
+  int Index; // [rsp+110h] [rbp+77h]
+  Scaleform::GFx::ASString result; // [rsp+118h] [rbp+7Fh] BYREF
 
-  v22 = ind.Index;
+  Index = ind.Index;
   v19 = -2i64;
-  v3 = name;
-  v4 = this;
-  v5 = this->pTraits.pObject;
-  v6 = v5->pVM;
+  pObject = this->pTraits.pObject;
+  pVM = pObject->pVM;
   if ( this->nextNameInd < 0 )
   {
-    v7 = v6->ProxyNamespace.pObject;
-    v8 = Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
-           (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v6->StringManagerRef->Builtins,
+    v7 = pVM->ProxyNamespace.pObject;
+    v8 = Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
+           pVM->StringManagerRef,
            &result,
            "nextName");
-    Scaleform::GFx::AS3::Slots::FindSlotInfoIndex((Scaleform::GFx::AS3::Slots *)&v5->FirstOwnSlotNum, &inda, v8, v7);
+    Scaleform::GFx::AS3::Slots::FindSlotInfoIndex(&pObject->Scaleform::GFx::AS3::Slots, &inda, v8, v7);
     if ( inda.Index < 0 )
     {
-      v10 = 0i64;
+      p_Value = 0i64;
     }
     else
     {
-      v9 = v5->FirstOwnSlotNum;
-      if ( inda.Index >= v9 )
-        v10 = &v5->VArray.Data.Data[LODWORD(inda.Index) - v9].Value;
+      FirstOwnSlotNum = pObject->FirstOwnSlotNum;
+      if ( inda.Index >= FirstOwnSlotNum )
+        p_Value = (int *)&pObject->VArray.Data.Data[LODWORD(inda.Index) - FirstOwnSlotNum].Value;
       else
-        v10 = Scaleform::GFx::AS3::Slots::GetSlotInfo(v5->Parent, inda);
+        p_Value = (int *)Scaleform::GFx::AS3::Slots::GetSlotInfo(pObject->Parent, inda);
     }
-    v11 = result.pNode;
-    v12 = result.pNode->RefCount == 1;
-    --v11->RefCount;
-    if ( v12 )
-      Scaleform::GFx::ASStringNode::ReleaseNode(v11);
-    v4->nextNameInd = *(_DWORD *)v10 >> 15;
+    pNode = result.pNode;
+    if ( result.pNode->RefCount-- == 1 )
+      Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
+    this->nextNameInd = *p_Value >> 15;
   }
-  v13.Index = v4->nextNameInd;
-  v14 = Scaleform::GFx::AS3::Traits::GetVT(v4->pTraits.pObject);
-  Scaleform::GFx::AS3::VTable::GetValue(v14, &func, v13);
+  v13.Index = this->nextNameInd;
+  VT = Scaleform::GFx::AS3::Traits::GetVT(this->pTraits.pObject);
+  Scaleform::GFx::AS3::VTable::GetValue(VT, &func, v13);
   ptr.Flags = 3;
   ptr.Bonus.pWeakProxy = 0i64;
-  ptr.value.VS._1.VInt = v22;
-  Scaleform::GFx::AS3::Value::Value(&v20, (Scaleform::GFx::AS3::Object *)&v4->vfptr);
+  ptr.value.VS._1.VInt = Index;
+  Scaleform::GFx::AS3::Value::Value(&v20, this);
   v16.Flags = 0;
   v16.Bonus.pWeakProxy = 0i64;
-  Scaleform::GFx::AS3::VM::ExecuteInternalUnsafe(v6, &func, v15, &v16, 1u, &ptr, 0);
-  Scaleform::GFx::AS3::Value::Swap(&v16, v3);
+  Scaleform::GFx::AS3::VM::ExecuteInternalUnsafe(pVM, &func, v15, &v16, 1u, &ptr, 0);
+  Scaleform::GFx::AS3::Value::Swap(&v16, name);
   if ( (v16.Flags & 0x1F) > 9 )
   {
-    if ( (v16.Flags >> 9) & 1 )
+    if ( (v16.Flags & 0x200) != 0 )
       Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v16);
     else
       Scaleform::GFx::AS3::Value::ReleaseInternal(&v16);
   }
   if ( (v20.Flags & 0x1F) > 9 )
   {
-    if ( (v20.Flags >> 9) & 1 )
+    if ( (v20.Flags & 0x200) != 0 )
       Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v20);
     else
       Scaleform::GFx::AS3::Value::ReleaseInternal(&v20);
@@ -1215,7 +1160,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::GetNextProperty
   `eh vector destructor iterator(&ptr, 0x20ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   if ( (func.Flags & 0x1F) > 9 )
   {
-    if ( (func.Flags >> 9) & 1 )
+    if ( (func.Flags & 0x200) != 0 )
       Scaleform::GFx::AS3::Value::ReleaseWeakRef(&func);
     else
       Scaleform::GFx::AS3::Value::ReleaseInternal(&func);
@@ -1224,198 +1169,194 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::GetNextProperty
 
 // File Line: 411
 // RVA: 0x8DB850
-Scaleform::GFx::AS3::GlobalSlotIndex *__fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::GetNextDynPropIndex(Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this, Scaleform::GFx::AS3::GlobalSlotIndex *result, Scaleform::GFx::AS3::GlobalSlotIndex ind)
+Scaleform::GFx::AS3::GlobalSlotIndex *__fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::GetNextDynPropIndex(
+        Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this,
+        Scaleform::GFx::AS3::GlobalSlotIndex *result,
+        Scaleform::GFx::AS3::GlobalSlotIndex ind)
 {
-  Scaleform::GFx::AS3::GlobalSlotIndex *v3; // rdi
-  Scaleform::GFx::AS3::Instances::fl_utils::Proxy *v4; // rsi
-  Scaleform::GFx::AS3::Traits *v5; // r14
-  Scaleform::GFx::AS3::VM *v6; // r15
+  Scaleform::GFx::AS3::Traits *pObject; // r14
+  Scaleform::GFx::AS3::VM *pVM; // r15
   Scaleform::GFx::AS3::Instances::fl::Namespace *v7; // rbx
   Scaleform::GFx::ASString *v8; // rax
-  unsigned __int64 v9; // r8
-  Scaleform::GFx::AS3::SlotInfo *v10; // rbx
-  Scaleform::GFx::ASStringNode *v11; // rcx
-  bool v12; // zf
+  unsigned __int64 FirstOwnSlotNum; // r8
+  int *p_Value; // rbx
+  Scaleform::GFx::ASStringNode *pNode; // rcx
   Scaleform::GFx::AS3::AbsoluteIndex v13; // rbx
-  Scaleform::GFx::AS3::VTable *v14; // rax
+  Scaleform::GFx::AS3::VTable *VT; // rax
   Scaleform::GFx::AS3::Value *v15; // rax
-  Scaleform::GFx::AS3::Value other; // [rsp+40h] [rbp-89h]
-  Scaleform::GFx::AS3::Value v18; // [rsp+60h] [rbp-69h]
-  Scaleform::GFx::AS3::Value ptr; // [rsp+80h] [rbp-49h]
-  Scaleform::GFx::AS3::Value func; // [rsp+A0h] [rbp-29h]
+  Scaleform::GFx::AS3::Value other; // [rsp+40h] [rbp-89h] BYREF
+  Scaleform::GFx::AS3::Value v18; // [rsp+60h] [rbp-69h] BYREF
+  Scaleform::GFx::AS3::Value ptr; // [rsp+80h] [rbp-49h] BYREF
+  Scaleform::GFx::AS3::Value func; // [rsp+A0h] [rbp-29h] BYREF
   __int64 v21; // [rsp+C0h] [rbp-9h]
-  Scaleform::GFx::AS3::Value v22; // [rsp+C8h] [rbp-1h]
-  Scaleform::GFx::AS3::AbsoluteIndex inda; // [rsp+130h] [rbp+67h]
-  Scaleform::GFx::ASString resulta; // [rsp+138h] [rbp+6Fh]
-  int v25; // [rsp+140h] [rbp+77h]
+  Scaleform::GFx::AS3::Value v22; // [rsp+C8h] [rbp-1h] BYREF
+  Scaleform::GFx::AS3::AbsoluteIndex inda; // [rsp+130h] [rbp+67h] BYREF
+  Scaleform::GFx::ASString resulta; // [rsp+138h] [rbp+6Fh] BYREF
+  int Index; // [rsp+140h] [rbp+77h]
 
-  v25 = ind.Index;
+  Index = ind.Index;
   v21 = -2i64;
-  v3 = result;
-  v4 = this;
   result->Index = 0;
-  v5 = this->pTraits.pObject;
-  v6 = v5->pVM;
+  pObject = this->pTraits.pObject;
+  pVM = pObject->pVM;
   if ( this->nextNameIndexInd < 0 )
   {
-    v7 = v6->ProxyNamespace.pObject;
-    v8 = Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
-           (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v6->StringManagerRef->Builtins,
+    v7 = pVM->ProxyNamespace.pObject;
+    v8 = Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
+           pVM->StringManagerRef,
            &resulta,
            "nextNameIndex");
-    Scaleform::GFx::AS3::Slots::FindSlotInfoIndex((Scaleform::GFx::AS3::Slots *)&v5->FirstOwnSlotNum, &inda, v8, v7);
+    Scaleform::GFx::AS3::Slots::FindSlotInfoIndex(&pObject->Scaleform::GFx::AS3::Slots, &inda, v8, v7);
     if ( inda.Index < 0 )
     {
-      v10 = 0i64;
+      p_Value = 0i64;
     }
     else
     {
-      v9 = v5->FirstOwnSlotNum;
-      if ( inda.Index >= v9 )
-        v10 = &v5->VArray.Data.Data[LODWORD(inda.Index) - v9].Value;
+      FirstOwnSlotNum = pObject->FirstOwnSlotNum;
+      if ( inda.Index >= FirstOwnSlotNum )
+        p_Value = (int *)&pObject->VArray.Data.Data[LODWORD(inda.Index) - FirstOwnSlotNum].Value;
       else
-        v10 = Scaleform::GFx::AS3::Slots::GetSlotInfo(v5->Parent, inda);
+        p_Value = (int *)Scaleform::GFx::AS3::Slots::GetSlotInfo(pObject->Parent, inda);
     }
-    v11 = resulta.pNode;
-    v12 = resulta.pNode->RefCount == 1;
-    --v11->RefCount;
-    if ( v12 )
-      Scaleform::GFx::ASStringNode::ReleaseNode(v11);
-    v4->nextNameIndexInd = *(_DWORD *)v10 >> 15;
+    pNode = resulta.pNode;
+    if ( resulta.pNode->RefCount-- == 1 )
+      Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
+    this->nextNameIndexInd = *p_Value >> 15;
   }
-  v13.Index = v4->nextNameIndexInd;
-  v14 = Scaleform::GFx::AS3::Traits::GetVT(v4->pTraits.pObject);
-  Scaleform::GFx::AS3::VTable::GetValue(v14, &func, v13);
+  v13.Index = this->nextNameIndexInd;
+  VT = Scaleform::GFx::AS3::Traits::GetVT(this->pTraits.pObject);
+  Scaleform::GFx::AS3::VTable::GetValue(VT, &func, v13);
   other.Flags = 0;
   other.Bonus.pWeakProxy = 0i64;
   ptr.Flags = 3;
   ptr.Bonus.pWeakProxy = 0i64;
-  ptr.value.VS._1.VInt = v25;
-  Scaleform::GFx::AS3::Value::Value(&v22, (Scaleform::GFx::AS3::Object *)&v4->vfptr);
+  ptr.value.VS._1.VInt = Index;
+  Scaleform::GFx::AS3::Value::Value(&v22, this);
   v18.Flags = 0;
   v18.Bonus.pWeakProxy = 0i64;
-  Scaleform::GFx::AS3::VM::ExecuteInternalUnsafe(v6, &func, v15, &v18, 1u, &ptr, 0);
+  Scaleform::GFx::AS3::VM::ExecuteInternalUnsafe(pVM, &func, v15, &v18, 1u, &ptr, 0);
   Scaleform::GFx::AS3::Value::Swap(&v18, &other);
   if ( (v18.Flags & 0x1F) > 9 )
   {
-    if ( (v18.Flags >> 9) & 1 )
+    if ( (v18.Flags & 0x200) != 0 )
       Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v18);
     else
       Scaleform::GFx::AS3::Value::ReleaseInternal(&v18);
   }
   if ( (v22.Flags & 0x1F) > 9 )
   {
-    if ( (v22.Flags >> 9) & 1 )
+    if ( (v22.Flags & 0x200) != 0 )
       Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v22);
     else
       Scaleform::GFx::AS3::Value::ReleaseInternal(&v22);
   }
-  if ( !v6->HandleException
+  if ( !pVM->HandleException
     && Scaleform::GFx::AS3::Value::Convert2UInt32(
          &other,
          (Scaleform::GFx::AS3::CheckResult *)&inda,
          (unsigned int *)&resulta)->Result )
   {
-    v3->Index = (unsigned int)resulta.pNode;
+    result->Index = (unsigned int)resulta.pNode;
   }
   `eh vector destructor iterator(&ptr, 0x20ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   if ( (other.Flags & 0x1F) > 9 )
   {
-    if ( (other.Flags >> 9) & 1 )
+    if ( (other.Flags & 0x200) != 0 )
       Scaleform::GFx::AS3::Value::ReleaseWeakRef(&other);
     else
       Scaleform::GFx::AS3::Value::ReleaseInternal(&other);
   }
   if ( (func.Flags & 0x1F) > 9 )
   {
-    if ( (func.Flags >> 9) & 1 )
+    if ( (func.Flags & 0x200) != 0 )
       Scaleform::GFx::AS3::Value::ReleaseWeakRef(&func);
     else
       Scaleform::GFx::AS3::Value::ReleaseInternal(&func);
   }
-  return v3;
-}
+  return result;
+}Ref(&func);
+    else
+      Scaleform::GFx::AS3::Value::ReleaseInternal(&func);
+  }
+  retu
 
 // File Line: 460
 // RVA: 0x8DBE00
-void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::GetNextPropertyValue(Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this, Scaleform::GFx::AS3::Value *value, Scaleform::GFx::AS3::GlobalSlotIndex ind)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::GetNextPropertyValue(
+        Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this,
+        Scaleform::GFx::AS3::Value *value,
+        Scaleform::GFx::AS3::GlobalSlotIndex ind)
 {
-  Scaleform::GFx::AS3::Value *v3; // r14
-  Scaleform::GFx::AS3::Instances::fl_utils::Proxy *v4; // rdi
-  Scaleform::GFx::AS3::Traits *v5; // rsi
-  Scaleform::GFx::AS3::VM *v6; // r15
+  Scaleform::GFx::AS3::Traits *pObject; // rsi
+  Scaleform::GFx::AS3::VM *pVM; // r15
   Scaleform::GFx::AS3::Instances::fl::Namespace *v7; // rbx
   Scaleform::GFx::ASString *v8; // rax
-  unsigned __int64 v9; // r8
-  Scaleform::GFx::AS3::SlotInfo *v10; // rbx
-  Scaleform::GFx::ASStringNode *v11; // rcx
-  bool v12; // zf
+  unsigned __int64 FirstOwnSlotNum; // r8
+  int *p_Value; // rbx
+  Scaleform::GFx::ASStringNode *pNode; // rcx
   Scaleform::GFx::AS3::AbsoluteIndex v13; // rbx
-  Scaleform::GFx::AS3::VTable *v14; // rax
+  Scaleform::GFx::AS3::VTable *VT; // rax
   Scaleform::GFx::AS3::Value *v15; // rax
-  Scaleform::GFx::AS3::Value v16; // [rsp+40h] [rbp-59h]
-  Scaleform::GFx::AS3::Value ptr; // [rsp+60h] [rbp-39h]
-  Scaleform::GFx::AS3::Value func; // [rsp+80h] [rbp-19h]
+  Scaleform::GFx::AS3::Value v16; // [rsp+40h] [rbp-59h] BYREF
+  Scaleform::GFx::AS3::Value ptr; // [rsp+60h] [rbp-39h] BYREF
+  Scaleform::GFx::AS3::Value func; // [rsp+80h] [rbp-19h] BYREF
   __int64 v19; // [rsp+A0h] [rbp+7h]
-  Scaleform::GFx::AS3::Value v20; // [rsp+A8h] [rbp+Fh]
-  Scaleform::GFx::AS3::AbsoluteIndex inda; // [rsp+100h] [rbp+67h]
-  int v22; // [rsp+110h] [rbp+77h]
-  Scaleform::GFx::ASString result; // [rsp+118h] [rbp+7Fh]
+  Scaleform::GFx::AS3::Value v20; // [rsp+A8h] [rbp+Fh] BYREF
+  Scaleform::GFx::AS3::AbsoluteIndex inda; // [rsp+100h] [rbp+67h] BYREF
+  int Index; // [rsp+110h] [rbp+77h]
+  Scaleform::GFx::ASString result; // [rsp+118h] [rbp+7Fh] BYREF
 
-  v22 = ind.Index;
+  Index = ind.Index;
   v19 = -2i64;
-  v3 = value;
-  v4 = this;
-  v5 = this->pTraits.pObject;
-  v6 = v5->pVM;
+  pObject = this->pTraits.pObject;
+  pVM = pObject->pVM;
   if ( this->nextValueInd < 0 )
   {
-    v7 = v6->ProxyNamespace.pObject;
-    v8 = Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
-           (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v6->StringManagerRef->Builtins,
+    v7 = pVM->ProxyNamespace.pObject;
+    v8 = Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
+           pVM->StringManagerRef,
            &result,
            "nextValue");
-    Scaleform::GFx::AS3::Slots::FindSlotInfoIndex((Scaleform::GFx::AS3::Slots *)&v5->FirstOwnSlotNum, &inda, v8, v7);
+    Scaleform::GFx::AS3::Slots::FindSlotInfoIndex(&pObject->Scaleform::GFx::AS3::Slots, &inda, v8, v7);
     if ( inda.Index < 0 )
     {
-      v10 = 0i64;
+      p_Value = 0i64;
     }
     else
     {
-      v9 = v5->FirstOwnSlotNum;
-      if ( inda.Index >= v9 )
-        v10 = &v5->VArray.Data.Data[LODWORD(inda.Index) - v9].Value;
+      FirstOwnSlotNum = pObject->FirstOwnSlotNum;
+      if ( inda.Index >= FirstOwnSlotNum )
+        p_Value = (int *)&pObject->VArray.Data.Data[LODWORD(inda.Index) - FirstOwnSlotNum].Value;
       else
-        v10 = Scaleform::GFx::AS3::Slots::GetSlotInfo(v5->Parent, inda);
+        p_Value = (int *)Scaleform::GFx::AS3::Slots::GetSlotInfo(pObject->Parent, inda);
     }
-    v11 = result.pNode;
-    v12 = result.pNode->RefCount == 1;
-    --v11->RefCount;
-    if ( v12 )
-      Scaleform::GFx::ASStringNode::ReleaseNode(v11);
-    v4->nextValueInd = *(_DWORD *)v10 >> 15;
+    pNode = result.pNode;
+    if ( result.pNode->RefCount-- == 1 )
+      Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
+    this->nextValueInd = *p_Value >> 15;
   }
-  v13.Index = v4->nextValueInd;
-  v14 = Scaleform::GFx::AS3::Traits::GetVT(v4->pTraits.pObject);
-  Scaleform::GFx::AS3::VTable::GetValue(v14, &func, v13);
+  v13.Index = this->nextValueInd;
+  VT = Scaleform::GFx::AS3::Traits::GetVT(this->pTraits.pObject);
+  Scaleform::GFx::AS3::VTable::GetValue(VT, &func, v13);
   ptr.Flags = 3;
   ptr.Bonus.pWeakProxy = 0i64;
-  ptr.value.VS._1.VInt = v22;
-  Scaleform::GFx::AS3::Value::Value(&v20, (Scaleform::GFx::AS3::Object *)&v4->vfptr);
+  ptr.value.VS._1.VInt = Index;
+  Scaleform::GFx::AS3::Value::Value(&v20, this);
   v16.Flags = 0;
   v16.Bonus.pWeakProxy = 0i64;
-  Scaleform::GFx::AS3::VM::ExecuteInternalUnsafe(v6, &func, v15, &v16, 1u, &ptr, 0);
-  Scaleform::GFx::AS3::Value::Swap(&v16, v3);
+  Scaleform::GFx::AS3::VM::ExecuteInternalUnsafe(pVM, &func, v15, &v16, 1u, &ptr, 0);
+  Scaleform::GFx::AS3::Value::Swap(&v16, value);
   if ( (v16.Flags & 0x1F) > 9 )
   {
-    if ( (v16.Flags >> 9) & 1 )
+    if ( (v16.Flags & 0x200) != 0 )
       Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v16);
     else
       Scaleform::GFx::AS3::Value::ReleaseInternal(&v16);
   }
   if ( (v20.Flags & 0x1F) > 9 )
   {
-    if ( (v20.Flags >> 9) & 1 )
+    if ( (v20.Flags & 0x200) != 0 )
       Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v20);
     else
       Scaleform::GFx::AS3::Value::ReleaseInternal(&v20);
@@ -1423,7 +1364,7 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::GetNextProperty
   `eh vector destructor iterator(&ptr, 0x20ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
   if ( (func.Flags & 0x1F) > 9 )
   {
-    if ( (func.Flags >> 9) & 1 )
+    if ( (func.Flags & 0x200) != 0 )
       Scaleform::GFx::AS3::Value::ReleaseWeakRef(&func);
     else
       Scaleform::GFx::AS3::Value::ReleaseInternal(&func);
@@ -1432,93 +1373,89 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::GetNextProperty
 
 // File Line: 487
 // RVA: 0x8D6A00
-void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::GetDescendants(Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this, Scaleform::GFx::AS3::Instances::fl::XMLList *list, Scaleform::GFx::AS3::Multiname *prop_name)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::GetDescendants(
+        Scaleform::GFx::AS3::Instances::fl_utils::Proxy *this,
+        Scaleform::GFx::AS3::Instances::fl::XMLList *list,
+        Scaleform::GFx::AS3::Multiname *prop_name)
 {
-  Scaleform::GFx::AS3::Multiname *v3; // r15
-  Scaleform::GFx::AS3::Instances::fl::XMLList *v4; // r14
-  Scaleform::GFx::AS3::Instances::fl_utils::Proxy *v5; // rdi
-  Scaleform::GFx::AS3::VM *v6; // rsi
+  Scaleform::GFx::AS3::VM *pVM; // rsi
   Scaleform::GFx::AS3::VM::Error *v7; // rax
-  Scaleform::GFx::ASStringNode *v8; // rcx
-  bool v9; // zf
+  Scaleform::GFx::ASStringNode *pWeakProxy; // rcx
   Scaleform::GFx::AS3::AbsoluteIndex v10; // rbx
-  Scaleform::GFx::AS3::VTable *v11; // rax
+  Scaleform::GFx::AS3::VTable *VT; // rax
   Scaleform::GFx::AS3::Value *v12; // rax
-  Scaleform::GFx::AS3::Instances::fl_vec::Vector_uint *v13; // rcx
-  unsigned int v14; // eax
-  Scaleform::GFx::AS3::Value name; // [rsp+40h] [rbp-79h]
-  Scaleform::GFx::AS3::Value other; // [rsp+60h] [rbp-59h]
-  Scaleform::GFx::AS3::VM::Error v17; // [rsp+80h] [rbp-39h]
-  Scaleform::GFx::AS3::Value result; // [rsp+A0h] [rbp-19h]
+  Scaleform::GFx::AS3::Instances::fl_vec::Vector_uint *pObject; // rcx
+  unsigned int RefCount; // eax
+  Scaleform::GFx::AS3::Value name; // [rsp+40h] [rbp-79h] BYREF
+  Scaleform::GFx::AS3::Value other; // [rsp+60h] [rbp-59h] BYREF
+  Scaleform::GFx::AS3::Value v17; // [rsp+80h] [rbp-39h] BYREF
+  Scaleform::GFx::AS3::Value result; // [rsp+A0h] [rbp-19h] BYREF
   __int64 v19; // [rsp+C0h] [rbp+7h]
-  Scaleform::GFx::AS3::Value v20; // [rsp+C8h] [rbp+Fh]
-  Scaleform::GFx::AS3::CheckResult v21; // [rsp+120h] [rbp+67h]
-  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_vec::Vector_uint> pobj; // [rsp+138h] [rbp+7Fh]
+  Scaleform::GFx::AS3::Value v20; // [rsp+C8h] [rbp+Fh] BYREF
+  Scaleform::GFx::AS3::CheckResult v21; // [rsp+120h] [rbp+67h] BYREF
+  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_vec::Vector_uint> pobj; // [rsp+138h] [rbp+7Fh] BYREF
 
   v19 = -2i64;
-  v3 = prop_name;
-  v4 = list;
-  v5 = this;
-  v6 = this->pTraits.pObject->pVM;
-  if ( v6->XMLSupport_.pObject->Enabled )
+  pVM = this->pTraits.pObject->pVM;
+  if ( pVM->XMLSupport_.pObject->Enabled )
   {
     if ( this->getDescendantsInd < 0 )
       this->getDescendantsInd = Scaleform::GFx::AS3::Instances::fl_utils::Proxy::GetMethodInd(this, "getDescendants");
-    v10.Index = v5->getDescendantsInd;
-    v11 = Scaleform::GFx::AS3::Traits::GetVT(v5->pTraits.pObject);
-    Scaleform::GFx::AS3::VTable::GetValue(v11, &result, v10);
+    v10.Index = this->getDescendantsInd;
+    VT = Scaleform::GFx::AS3::Traits::GetVT(this->pTraits.pObject);
+    Scaleform::GFx::AS3::VTable::GetValue(VT, &result, v10);
     other.Flags = 0;
     other.Bonus.pWeakProxy = 0i64;
     name.Flags = 0;
     name.Bonus.pWeakProxy = 0i64;
-    if ( Scaleform::GFx::AS3::Instances::fl_utils::Proxy::MakeName(v5, &v21, v3, &name)->Result )
+    if ( Scaleform::GFx::AS3::Instances::fl_utils::Proxy::MakeName(this, &v21, prop_name, &name)->Result )
     {
-      Scaleform::GFx::AS3::Value::Value(&v20, (Scaleform::GFx::AS3::Object *)&v5->vfptr);
-      v17.ID = 0;
-      v17.Message.pNode = 0i64;
-      Scaleform::GFx::AS3::VM::ExecuteInternalUnsafe(v6, &result, v12, (Scaleform::GFx::AS3::Value *)&v17, 1u, &name, 0);
-      Scaleform::GFx::AS3::Value::Swap((Scaleform::GFx::AS3::Value *)&v17, &other);
-      if ( (v17.ID & 0x1F) > 9 )
+      Scaleform::GFx::AS3::Value::Value(&v20, this);
+      v17.Flags = 0;
+      v17.Bonus.pWeakProxy = 0i64;
+      Scaleform::GFx::AS3::VM::ExecuteInternalUnsafe(pVM, &result, v12, &v17, 1u, &name, 0);
+      Scaleform::GFx::AS3::Value::Swap(&v17, &other);
+      if ( (v17.Flags & 0x1F) > 9 )
       {
-        if ( ((unsigned int)v17.ID >> 9) & 1 )
-          Scaleform::GFx::AS3::Value::ReleaseWeakRef((Scaleform::GFx::AS3::Value *)&v17);
+        if ( (v17.Flags & 0x200) != 0 )
+          Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v17);
         else
-          Scaleform::GFx::AS3::Value::ReleaseInternal((Scaleform::GFx::AS3::Value *)&v17);
+          Scaleform::GFx::AS3::Value::ReleaseInternal(&v17);
       }
       if ( (v20.Flags & 0x1F) > 9 )
       {
-        if ( (v20.Flags >> 9) & 1 )
+        if ( (v20.Flags & 0x200) != 0 )
           Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v20);
         else
           Scaleform::GFx::AS3::Value::ReleaseInternal(&v20);
       }
-      if ( !v6->HandleException )
+      if ( !pVM->HandleException )
       {
         pobj.pObject = 0i64;
         if ( Scaleform::GFx::AS3::VM::ConstructBuiltinObject<Scaleform::GFx::AS3::Instances::fl_geom::Rectangle>(
-               v6,
+               pVM,
                &v21,
-               &pobj,
+               (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Object> *)&pobj,
                "XMLList",
                1u,
                &other)->Result )
           Scaleform::GFx::AS3::Instances::fl::XMLList::Apppend(
-            v4,
+            list,
             (Scaleform::GFx::AS3::Instances::fl::XMLList *)pobj.pObject);
-        v13 = pobj.pObject;
+        pObject = pobj.pObject;
         if ( pobj.pObject )
         {
-          if ( (_QWORD)pobj.pObject & 1 )
+          if ( ((__int64)pobj.pObject & 1) != 0 )
           {
             --pobj.pObject;
           }
           else
           {
-            v14 = pobj.pObject->RefCount;
-            if ( v14 & 0x3FFFFF )
+            RefCount = pobj.pObject->RefCount;
+            if ( (RefCount & 0x3FFFFF) != 0 )
             {
-              pobj.pObject->RefCount = v14 - 1;
-              Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v13->vfptr);
+              pobj.pObject->RefCount = RefCount - 1;
+              Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(pObject);
             }
           }
         }
@@ -1526,21 +1463,21 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::GetDescendants(
     }
     if ( (name.Flags & 0x1F) > 9 )
     {
-      if ( (name.Flags >> 9) & 1 )
+      if ( (name.Flags & 0x200) != 0 )
         Scaleform::GFx::AS3::Value::ReleaseWeakRef(&name);
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&name);
     }
     if ( (other.Flags & 0x1F) > 9 )
     {
-      if ( (other.Flags >> 9) & 1 )
+      if ( (other.Flags & 0x200) != 0 )
         Scaleform::GFx::AS3::Value::ReleaseWeakRef(&other);
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&other);
     }
     if ( (result.Flags & 0x1F) > 9 )
     {
-      if ( (result.Flags >> 9) & 1 )
+      if ( (result.Flags & 0x200) != 0 )
         Scaleform::GFx::AS3::Value::ReleaseWeakRef(&result);
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&result);
@@ -1548,13 +1485,11 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_utils::Proxy::GetDescendants(
   }
   else
   {
-    Scaleform::GFx::AS3::VM::Error::Error(&v17, eNotImplementedError, this->pTraits.pObject->pVM);
-    Scaleform::GFx::AS3::VM::ThrowVerifyError(v6, v7);
-    v8 = v17.Message.pNode;
-    v9 = v17.Message.pNode->RefCount == 1;
-    --v8->RefCount;
-    if ( v9 )
-      Scaleform::GFx::ASStringNode::ReleaseNode(v8);
+    Scaleform::GFx::AS3::VM::Error::Error((Scaleform::GFx::AS3::VM::Error *)&v17, 1001, this->pTraits.pObject->pVM);
+    Scaleform::GFx::AS3::VM::ThrowVerifyError(pVM, v7);
+    pWeakProxy = (Scaleform::GFx::ASStringNode *)v17.Bonus.pWeakProxy;
+    if ( LODWORD(v17.Bonus.pWeakProxy[1].pObject)-- == 1 )
+      Scaleform::GFx::ASStringNode::ReleaseNode(pWeakProxy);
   }
 }
 
@@ -1580,52 +1515,49 @@ const char *dynamic_initializer_for__Scaleform::GFx::AS3::InstanceTraits::fl_uti
 
 // File Line: 571
 // RVA: 0x8EAEE0
-void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl_utils::Proxy::MakeObject(Scaleform::GFx::AS3::InstanceTraits::fl_utils::Proxy *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::InstanceTraits::Traits *t)
+void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl_utils::Proxy::MakeObject(
+        Scaleform::GFx::AS3::InstanceTraits::fl_utils::Proxy *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::InstanceTraits::fl_utils::Proxy *t)
 {
-  Scaleform::GFx::AS3::Value *v3; // rbx
-  Scaleform::GFx::AS3::Object **v4; // rax
-  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_utils::Proxy> resulta; // [rsp+48h] [rbp+20h]
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_utils::Proxy> *Instance; // rax
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_utils::Proxy> resulta; // [rsp+48h] [rbp+20h] BYREF
 
-  v3 = result;
-  v4 = (Scaleform::GFx::AS3::Object **)Scaleform::GFx::AS3::InstanceTraits::fl_utils::Proxy::MakeInstance(
-                                         &resulta,
-                                         (Scaleform::GFx::AS3::InstanceTraits::fl_utils::Proxy *)t);
-  Scaleform::GFx::AS3::Value::Pick(v3, *v4);
+  Instance = Scaleform::GFx::AS3::InstanceTraits::fl_utils::Proxy::MakeInstance(&resulta, t);
+  Scaleform::GFx::AS3::Value::Pick(result, Instance->pV);
 }
 
 // File Line: 593
 // RVA: 0x87F940
-Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl_utils::Proxy::MakeClassTraits(Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result, Scaleform::GFx::AS3::VM *vm)
+Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl_utils::Proxy::MakeClassTraits(
+        Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result,
+        Scaleform::GFx::AS3::VM *vm)
 {
-  Scaleform::GFx::AS3::VM *v2; // rbp
-  Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *v3; // rbx
-  Scaleform::MemoryHeap *v4; // rsi
+  Scaleform::MemoryHeap *MHeap; // rsi
   Scaleform::GFx::AS3::ClassTraits::fl::Object *v5; // rax
-  Scaleform::GFx::AS3::ClassTraits::fl::Object *v6; // rdi
+  Scaleform::GFx::AS3::ClassTraits::Traits *v6; // rdi
   Scaleform::GFx::AS3::InstanceTraits::fl::Object *v7; // rax
   Scaleform::GFx::AS3::InstanceTraits::fl::Object *v8; // rdi
   Scaleform::GFx::AS3::Class *v9; // rax
 
-  v2 = vm;
-  v3 = result;
-  v4 = vm->MHeap;
-  v5 = (Scaleform::GFx::AS3::ClassTraits::fl::Object *)v4->vfptr->Alloc(v4, 208ui64, 0i64);
+  MHeap = vm->MHeap;
+  v5 = (Scaleform::GFx::AS3::ClassTraits::fl::Object *)MHeap->vfptr->Alloc(MHeap, 208ui64, 0i64);
   v6 = v5;
   if ( v5 )
   {
-    Scaleform::GFx::AS3::ClassTraits::fl::Object::Object(v5, v2, &Scaleform::GFx::AS3::fl_utils::ProxyCI);
+    Scaleform::GFx::AS3::ClassTraits::fl::Object::Object(v5, vm, &Scaleform::GFx::AS3::fl_utils::ProxyCI);
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_utils::Proxy::`vftable;
   }
   else
   {
     v6 = 0i64;
   }
-  v3->pV = (Scaleform::GFx::AS3::ClassTraits::Traits *)&v6->vfptr;
-  v7 = (Scaleform::GFx::AS3::InstanceTraits::fl::Object *)v4->vfptr->Alloc(v4, 240ui64, 0i64);
+  result->pV = v6;
+  v7 = (Scaleform::GFx::AS3::InstanceTraits::fl::Object *)MHeap->vfptr->Alloc(MHeap, 240ui64, 0i64);
   v8 = v7;
   if ( v7 )
   {
-    Scaleform::GFx::AS3::InstanceTraits::fl::Object::Object(v7, v2, &Scaleform::GFx::AS3::fl_utils::ProxyCI);
+    Scaleform::GFx::AS3::InstanceTraits::fl::Object::Object(v7, vm, &Scaleform::GFx::AS3::fl_utils::ProxyCI);
     v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_utils::Proxy::`vftable;
   }
   else
@@ -1633,13 +1565,13 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
     v8 = 0i64;
   }
   Scaleform::GFx::AS3::ClassTraits::Traits::SetInstanceTraits(
-    v3->pV,
+    result->pV,
     (Scaleform::Pickable<Scaleform::GFx::AS3::InstanceTraits::Traits>)v8);
-  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))v4->vfptr->Alloc)(
-                                       v4,
+  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))MHeap->vfptr->Alloc)(
+                                       MHeap,
                                        72i64);
   if ( v9 )
-    Scaleform::GFx::AS3::Class::Class(v9, v3->pV);
-  return v3;
+    Scaleform::GFx::AS3::Class::Class(v9, result->pV);
+  return result;
 }
 

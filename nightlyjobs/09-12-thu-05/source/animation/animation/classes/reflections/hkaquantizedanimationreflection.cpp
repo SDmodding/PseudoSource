@@ -63,20 +63,21 @@ hkClass *__fastcall hkaQuantizedAnimation::staticClass()
 
 // File Line: 119
 // RVA: 0xB1DB90
-void __fastcall finishLoadedObjecthkaQuantizedAnimation(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaQuantizedAnimation(hkaQuantizedAnimation *p, int finishing)
 {
   if ( p )
   {
-    *(_QWORD *)p = &hkaQuantizedAnimation::`vftable;
-    JUMPOUT(finishing, 0, hkaQuantizedAnimation::handleEndian);
+    p->vfptr = (hkBaseObjectVtbl *)&hkaQuantizedAnimation::`vftable;
+    if ( finishing )
+      hkaQuantizedAnimation::handleEndian(p);
   }
 }
 
 // File Line: 125
 // RVA: 0xB1DBB0
-void __fastcall cleanupLoadedObjecthkaQuantizedAnimation(void *p)
+void __fastcall cleanupLoadedObjecthkaQuantizedAnimation(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 129
@@ -97,8 +98,8 @@ void **dynamic_initializer_for__hkaQuantizedAnimationTypeInfo__()
   hkaQuantizedAnimationTypeInfo.m_typeName = "hkaQuantizedAnimation";
   hkaQuantizedAnimationTypeInfo.m_vtable = result;
   hkaQuantizedAnimationTypeInfo.m_scopedName = "!hkaQuantizedAnimation";
-  hkaQuantizedAnimationTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaQuantizedAnimation;
-  hkaQuantizedAnimationTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaQuantizedAnimation;
+  hkaQuantizedAnimationTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaQuantizedAnimation;
+  hkaQuantizedAnimationTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaQuantizedAnimation;
   return result;
 }
 

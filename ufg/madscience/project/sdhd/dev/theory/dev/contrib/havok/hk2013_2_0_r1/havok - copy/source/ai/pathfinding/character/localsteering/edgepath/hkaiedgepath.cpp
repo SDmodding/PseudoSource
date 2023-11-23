@@ -1,31 +1,34 @@
 // File Line: 28
 // RVA: 0xBEA770
-void __fastcall hkaiEdgePath::fillFromFoundPath(hkaiEdgePath *this, hkaiPathfindingUtil::FindPathInput *findPathInput, hkaiPathfindingUtil::FindPathOutput *findPathOutput, float characterRadius, float leftTurnRadius, float rightTurnRadius, hkVector4f *worldUp, hkaiGeneralAccessor *accessor, hkaiNavMeshCutter *cutter)
+void __fastcall hkaiEdgePath::fillFromFoundPath(
+        hkaiEdgePath *this,
+        hkaiPathfindingUtil::FindPathInput *findPathInput,
+        hkaiPathfindingUtil::FindPathOutput *findPathOutput,
+        float characterRadius,
+        float leftTurnRadius,
+        float rightTurnRadius,
+        hkVector4f *worldUp,
+        hkaiGeneralAccessor *accessor,
+        hkaiNavMeshCutter *cutter)
 {
   hkaiGeneralAccessor *v9; // r12
-  hkaiEdgePath *v10; // r14
-  hkaiPathfindingUtil::FindPathOutput *v11; // rsi
   float v12; // xmm0_4
   float v13; // xmm2_4
-  unsigned int v14; // ebx
-  hkSimdFloat32 *v15; // rdx
-  __int64 v16; // r15
+  unsigned int m_startFaceKey; // ebx
+  hkSimdFloat32 *m_accessor; // rdx
+  __int64 m_size; // r15
   hkaiNavMeshCutter *v17; // r13
   unsigned int edgeIdx; // edi
   __int64 i; // rbx
-  __int64 v20; // rcx
+  __int64 m_goalIndex; // rcx
   unsigned int v21; // edi
   hkaiEdgePath::Edge *v22; // rbx
-  hkVector4f v23; // [rsp+50h] [rbp-30h]
-  int faceIndex[4]; // [rsp+60h] [rbp-20h]
-  hkVector4f b; // [rsp+70h] [rbp-10h]
-  hkaiPathfindingUtil::FindPathInput *v26; // [rsp+C8h] [rbp+48h]
-  unsigned int curFaceKey; // [rsp+D8h] [rbp+58h]
+  hkVector4f v23; // [rsp+50h] [rbp-30h] BYREF
+  int faceIndex[4]; // [rsp+60h] [rbp-20h] BYREF
+  hkVector4f b; // [rsp+70h] [rbp-10h] BYREF
+  unsigned int curFaceKey; // [rsp+D8h] [rbp+58h] BYREF
 
-  v26 = findPathInput;
   v9 = accessor;
-  v10 = this;
-  v11 = findPathOutput;
   v12 = rightTurnRadius;
   v13 = fmaxf(leftTurnRadius, characterRadius);
   curFaceKey = LODWORD(characterRadius);
@@ -33,45 +36,45 @@ void __fastcall hkaiEdgePath::fillFromFoundPath(hkaiEdgePath *this, hkaiPathfind
   this->m_leftTurnRadius = v13;
   leftTurnRadius = v12;
   this->m_rightTurnRadius = fmaxf(v12, *(float *)&curFaceKey);
-  v14 = findPathInput->m_startFaceKey;
-  curFaceKey = v14;
-  LODWORD(rightTurnRadius) = v14 >> 22;
-  hkaiGeneralAccessor::setSection(v9, v14 >> 22);
-  v10->m_edgeDataStriding = v9->m_accessor->m_edgeDataStriding;
-  v15 = (hkSimdFloat32 *)v9->m_accessor;
+  m_startFaceKey = findPathInput->m_startFaceKey;
+  curFaceKey = m_startFaceKey;
+  LODWORD(rightTurnRadius) = m_startFaceKey >> 22;
+  hkaiGeneralAccessor::setSection(v9, m_startFaceKey >> 22);
+  this->m_edgeDataStriding = v9->m_accessor->m_edgeDataStriding;
+  m_accessor = (hkSimdFloat32 *)v9->m_accessor;
   LOBYTE(leftTurnRadius) = v9->m_accessor->m_originalMesh.m_pntr->m_flags.m_storage & 1;
   if ( LOBYTE(leftTurnRadius) )
     hkaiNavMeshUtils::calcFaceNormal<hkaiNavMeshInstance>(
       (hkaiNavMeshUtils *)&b,
-      v15,
-      (hkaiNavMeshInstance *)(v14 & 0x3FFFFF),
-      (__int64)faceIndex);
+      m_accessor,
+      (hkaiNavMeshInstance *)(m_startFaceKey & 0x3FFFFF),
+      (__m128 *)faceIndex);
   else
     *(hkVector4f *)faceIndex = (hkVector4f)worldUp->m_quad;
-  hkaiEdgePath::expandEdges(v10, v11->m_visitedEdges.m_size);
-  v16 = v11->m_visitedEdges.m_size;
+  hkaiEdgePath::expandEdges(this, findPathOutput->m_visitedEdges.m_size);
+  m_size = findPathOutput->m_visitedEdges.m_size;
   v17 = cutter;
   edgeIdx = 0;
-  for ( i = 0i64; i < v16; ++edgeIdx )
+  for ( i = 0i64; i < m_size; ++edgeIdx )
     hkaiEdgePath::buildEdge(
-      v10,
+      this,
       v9,
       v17,
-      v11->m_visitedEdges.m_data[i++],
+      findPathOutput->m_visitedEdges.m_data[i++],
       (hkVector4f *)faceIndex,
       &curFaceKey,
       (int *)&rightTurnRadius,
       (bool *)&leftTurnRadius,
       edgeIdx);
-  if ( v11->m_outputParameters.m_status.m_storage == 1 )
+  if ( findPathOutput->m_outputParameters.m_status.m_storage == 1 )
   {
-    v20 = v11->m_outputParameters.m_goalIndex;
-    v21 = v26->m_goalFaceKeys.m_data[v20];
-    _mm_store_si128((__m128i *)&b, (__m128i)v26->m_goalPoints.m_data[v20].m_quad);
+    m_goalIndex = findPathOutput->m_outputParameters.m_goalIndex;
+    v21 = findPathInput->m_goalFaceKeys.m_data[m_goalIndex];
+    b.m_quad = (__m128)findPathInput->m_goalPoints.m_data[m_goalIndex];
     hkaiGeneralAccessor::setSection(v9, v21 >> 22);
     hkVector4f::setTransformedInversePos(&v23, &v9->m_accessor->m_referenceFrame.m_transform, &b);
     v23.m_quad = (__m128)_mm_srli_si128(_mm_slli_si128(_mm_load_si128((const __m128i *)&v23), 4), 4);
-    v22 = hkaiEdgePath::expandEdges(v10, 1);
+    v22 = hkaiEdgePath::expandEdges(this, 1);
     v22->m_left = (hkVector4f)v23.m_quad;
     v22->m_right = (hkVector4f)v23.m_quad;
     v22->m_up = *(hkVector4f *)faceIndex;
@@ -96,195 +99,198 @@ void __fastcall hkaiEdgePath::initTraversalState(hkaiEdgePath *this, hkaiEdgePat
 
 // File Line: 121
 // RVA: 0xBEACB0
-_BOOL8 __fastcall hkaiEdgePath::updateTraversalState(hkaiEdgePath *this, hkaiEdgePath::TraversalState *traversalStateInOut, hkVector4f *newPositionLocal, unsigned int newFaceKey, bool repairPath, float userEdgeTolerance, hkaiStreamingCollection *streamingCollection, hkaiNavMeshCutter *cutter)
+_BOOL8 __fastcall hkaiEdgePath::updateTraversalState(
+        hkaiEdgePath *this,
+        hkaiEdgePath::TraversalState *traversalStateInOut,
+        hkVector4f *newPositionLocal,
+        unsigned int newFaceKey,
+        bool repairPath,
+        float userEdgeTolerance,
+        hkaiStreamingCollection *streamingCollection,
+        hkaiNavMeshCutter *cutter)
 {
-  hkaiEdgePath::Edge *v8; // rbx
-  __int64 v9; // r13
-  unsigned int v10; // esi
-  hkVector4f *v11; // r12
-  hkaiEdgePath::TraversalState *v12; // r15
-  __int64 v14; // rdi
-  signed int v15; // er14
-  int v16; // ebp
+  hkaiEdgePath::Edge *m_data; // rbx
+  __int64 m_size; // r13
+  __int64 m_faceEdge; // rdi
+  int m_highestUserEdgeCrossed; // r14d
+  int m_trailingEdge; // ebp
   unsigned int v17; // esi
   bool v18; // zf
-  __m128 v19; // xmm6
-  __m128 v20; // xmm5
-  __m128 v21; // xmm6
-  __m128 v22; // xmm5
-  __m128 v23; // xmm1
-  __m128 v24; // xmm3
-  __m128 v25; // xmm1
-  __m128 v26; // xmm2
-  __m128 v27; // xmm4
-  __m128 v28; // xmm1
+  __m128 m_quad; // xmm5
+  __m128 v20; // xmm6
+  __m128 v21; // xmm5
+  __m128 v22; // xmm1
+  __m128 v23; // xmm3
+  __m128 v24; // xmm1
+  __m128 v25; // xmm2
+  __m128 v26; // xmm4
+  __m128 v27; // xmm1
+  __m128 v28; // xmm6
   __m128 v29; // xmm6
-  __m128 v30; // xmm6
-  int v31; // er9
-  __int64 v32; // r8
-  signed __int64 v33; // rdx
-  __m128 v34; // xmm6
-  signed __int64 v35; // rsi
-  signed __int64 v36; // r12
-  __m128 *v37; // rbx
-  __m128 v38; // xmm0
-  __m128 v39; // xmm1
-  __m128 v40; // xmm0
+  int v30; // r9d
+  __int64 v31; // r8
+  __int64 p_m_edge; // rdx
+  __m128 v33; // xmm6
+  __int64 v34; // rsi
+  __int64 v35; // r12
+  __m128 *p_m_quad; // rbx
+  __m128 v37; // xmm0
+  __m128 v38; // xmm1
+  __m128 v39; // xmm0
+  __m128 v40; // xmm2
   __m128 v41; // xmm2
-  __m128 v42; // xmm2
-  hkVector4f p; // [rsp+20h] [rbp-58h]
-  hkaiPersistentFaceKey persistentFaceKeyOut; // [rsp+80h] [rbp+8h]
+  hkVector4f p; // [rsp+20h] [rbp-58h] BYREF
+  hkaiPersistentFaceKey persistentFaceKeyOut; // [rsp+80h] [rbp+8h] BYREF
 
-  v8 = this->m_edges.m_data;
-  v9 = this->m_edges.m_size;
-  v10 = newFaceKey;
-  v11 = newPositionLocal;
-  v12 = traversalStateInOut;
+  m_data = this->m_edges.m_data;
+  m_size = this->m_edges.m_size;
   if ( newFaceKey == -1 )
   {
     hkaiEdgePath::updateTraversalStateNaive(this, traversalStateInOut, newPositionLocal);
     return 1i64;
   }
   hkaiNavMeshCutter::makePersistentFaceKey(cutter, newFaceKey, &persistentFaceKeyOut);
-  v14 = v12->m_faceEdge;
-  v15 = v12->m_highestUserEdgeCrossed;
-  v16 = v12->m_trailingEdge;
-  v17 = v10 >> 22;
-  if ( (_DWORD)v14 == -1
-    || v8[v14].m_edge.m_faceKey.m_key != persistentFaceKeyOut.m_key
-    || v8[v14].m_edge.m_faceKey.m_offset != persistentFaceKeyOut.m_offset )
+  m_faceEdge = traversalStateInOut->m_faceEdge;
+  m_highestUserEdgeCrossed = traversalStateInOut->m_highestUserEdgeCrossed;
+  m_trailingEdge = traversalStateInOut->m_trailingEdge;
+  v17 = newFaceKey >> 22;
+  if ( (_DWORD)m_faceEdge == -1
+    || m_data[m_faceEdge].m_edge.m_faceKey.m_key != persistentFaceKeyOut.m_key
+    || m_data[m_faceEdge].m_edge.m_faceKey.m_offset != persistentFaceKeyOut.m_offset )
   {
-    if ( (signed int)v14 >= (signed int)v9 - 1
-      || v8[(signed int)v14 + 1].m_edge.m_faceKey.m_key != persistentFaceKeyOut.m_key
-      || v8[(signed int)v14 + 1].m_edge.m_faceKey.m_offset != persistentFaceKeyOut.m_offset )
+    if ( (int)m_faceEdge < (int)m_size - 1
+      && m_data[(int)m_faceEdge + 1].m_edge.m_faceKey.m_key == persistentFaceKeyOut.m_key
+      && m_data[(int)m_faceEdge + 1].m_edge.m_faceKey.m_offset == persistentFaceKeyOut.m_offset )
     {
-      v31 = v15 + 1;
-      v32 = v15 + 1;
-      if ( v32 == v9 )
+      LODWORD(m_faceEdge) = m_faceEdge + 1;
+    }
+    else
+    {
+      v30 = m_highestUserEdgeCrossed + 1;
+      v31 = m_highestUserEdgeCrossed + 1;
+      if ( v31 == m_size )
       {
 LABEL_21:
         if ( repairPath )
         {
-          LODWORD(v14) = -1;
+          LODWORD(m_faceEdge) = -1;
           goto LABEL_32;
         }
       }
       else
       {
-        v33 = (signed __int64)&v8[v31].m_edge;
-        while ( *(_DWORD *)v33 != persistentFaceKeyOut.m_key || *(_WORD *)(v33 + 4) != persistentFaceKeyOut.m_offset )
+        p_m_edge = (__int64)&m_data[v30].m_edge;
+        while ( *(_DWORD *)p_m_edge != persistentFaceKeyOut.m_key
+             || *(_WORD *)(p_m_edge + 4) != persistentFaceKeyOut.m_offset )
         {
-          ++v32;
           ++v31;
-          v33 += 144i64;
-          if ( v32 == v9 )
+          ++v30;
+          p_m_edge += 144i64;
+          if ( v31 == m_size )
             goto LABEL_21;
         }
-        LODWORD(v14) = v31;
+        LODWORD(m_faceEdge) = v30;
       }
-    }
-    else
-    {
-      LODWORD(v14) = v14 + 1;
     }
   }
-  if ( (_DWORD)v14 != -1 )
+  if ( (_DWORD)m_faceEdge != -1 )
   {
-    v18 = v15 == (_DWORD)v14;
-    if ( v15 < (signed int)v14 )
+    v18 = m_highestUserEdgeCrossed == (_DWORD)m_faceEdge;
+    if ( m_highestUserEdgeCrossed < (int)m_faceEdge )
     {
-      if ( v8[(signed int)v14].m_flags.m_storage & 0x10 )
+      if ( (m_data[(int)m_faceEdge].m_flags.m_storage & 0x10) != 0
+        && v17 == m_data[(int)m_faceEdge].m_edge.m_faceKey.m_key >> 22 )
       {
-        if ( v17 == v8[(signed int)v14].m_edge.m_faceKey.m_key >> 22 )
+        m_quad = m_data[(int)m_faceEdge].m_left.m_quad;
+        v20 = _mm_sub_ps(m_quad, newPositionLocal->m_quad);
+        v21 = _mm_sub_ps(m_quad, m_data[(int)m_faceEdge].m_right.m_quad);
+        v22 = _mm_mul_ps(v21, v21);
+        v23 = _mm_add_ps(
+                _mm_add_ps(_mm_shuffle_ps(v22, v22, 85), _mm_shuffle_ps(v22, v22, 0)),
+                _mm_shuffle_ps(v22, v22, 170));
+        v24 = _mm_mul_ps(v20, v21);
+        v25 = _mm_rcp_ps(v23);
+        v26 = _mm_mul_ps(
+                _mm_add_ps(
+                  _mm_add_ps(_mm_shuffle_ps(v24, v24, 85), _mm_shuffle_ps(v24, v24, 0)),
+                  _mm_shuffle_ps(v24, v24, 170)),
+                _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v23, v25)), v25));
+        v27 = _mm_cmplt_ps(v26, query.m_quad);
+        v28 = _mm_sub_ps(
+                v20,
+                _mm_mul_ps(
+                  _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v26, v27), _mm_andnot_ps(v27, query.m_quad))),
+                  v21));
+        v29 = _mm_mul_ps(v28, v28);
+        if ( (float)((float)(_mm_shuffle_ps(v29, v29, 85).m128_f32[0] + _mm_shuffle_ps(v29, v29, 0).m128_f32[0])
+                   + _mm_shuffle_ps(v29, v29, 170).m128_f32[0]) < (float)(userEdgeTolerance * userEdgeTolerance) )
         {
-          v19 = v8[(signed int)v14].m_left.m_quad;
-          v20 = v19;
-          v21 = _mm_sub_ps(v19, v11->m_quad);
-          v22 = _mm_sub_ps(v20, v8[(signed int)v14].m_right.m_quad);
-          v23 = _mm_mul_ps(v22, v22);
-          v24 = _mm_add_ps(
-                  _mm_add_ps(_mm_shuffle_ps(v23, v23, 85), _mm_shuffle_ps(v23, v23, 0)),
-                  _mm_shuffle_ps(v23, v23, 170));
-          v25 = _mm_mul_ps(v21, v22);
-          v26 = _mm_rcp_ps(v24);
-          v27 = _mm_mul_ps(
-                  _mm_add_ps(
-                    _mm_add_ps(_mm_shuffle_ps(v25, v25, 85), _mm_shuffle_ps(v25, v25, 0)),
-                    _mm_shuffle_ps(v25, v25, 170)),
-                  _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v24, v26)), v26));
-          v28 = _mm_cmpltps(v27, query.m_quad);
-          v29 = _mm_sub_ps(
-                  v21,
-                  _mm_mul_ps(
-                    _mm_max_ps((__m128)0i64, _mm_or_ps(_mm_and_ps(v27, v28), _mm_andnot_ps(v28, query.m_quad))),
-                    v22));
-          v30 = _mm_mul_ps(v29, v29);
-          if ( (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v30, v30, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v30, v30, 0)))
-                     + COERCE_FLOAT(_mm_shuffle_ps(v30, v30, 170))) < (float)(userEdgeTolerance * userEdgeTolerance) )
-          {
-            v15 = v14;
-            v16 = v14 + 1;
-            goto LABEL_32;
-          }
+          m_highestUserEdgeCrossed = m_faceEdge;
+          m_trailingEdge = m_faceEdge + 1;
+          goto LABEL_32;
         }
       }
-      v18 = v15 == (_DWORD)v14;
+      v18 = m_highestUserEdgeCrossed == (_DWORD)m_faceEdge;
     }
     if ( v18 )
     {
-      v16 = v15 + 1;
+      m_trailingEdge = m_highestUserEdgeCrossed + 1;
     }
     else
     {
-      v34 = v11->m_quad;
-      v35 = (signed int)v14;
-      v36 = v15 + 1;
-      v16 = v14;
-      if ( (signed int)v14 > v36 )
+      v33 = newPositionLocal->m_quad;
+      v34 = (int)m_faceEdge;
+      v35 = m_highestUserEdgeCrossed + 1;
+      m_trailingEdge = m_faceEdge;
+      if ( (int)m_faceEdge > v35 )
       {
-        v37 = &v8[(signed int)v14 - 1].m_followingTransform.m_col1.m_quad;
+        p_m_quad = &m_data[(int)m_faceEdge - 1].m_followingTransform.m_col1.m_quad;
         do
         {
-          v34 = _mm_add_ps(
+          v33 = _mm_add_ps(
                   _mm_add_ps(
-                    _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v34, v34, 0), v37[-1]), v37[2]),
-                    _mm_mul_ps(_mm_shuffle_ps(v34, v34, 85), *v37)),
-                  _mm_mul_ps(_mm_shuffle_ps(v34, v34, 170), v37[1]));
-          v38 = v37[-4];
-          v39 = _mm_sub_ps(v37[-3], v34);
-          p.m_quad = v34;
-          v40 = _mm_sub_ps(v38, v34);
-          v41 = _mm_sub_ps(
-                  _mm_mul_ps(_mm_shuffle_ps(v40, v40, 201), v39),
-                  _mm_mul_ps(_mm_shuffle_ps(v39, v39, 201), v40));
-          v42 = _mm_mul_ps(_mm_shuffle_ps(v41, v41, 201), v37[-2]);
-          if ( (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v42, v42, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v42, v42, 0)))
-                     + COERCE_FLOAT(_mm_shuffle_ps(v42, v42, 170))) > 0.0 )
+                    _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v33, v33, 0), p_m_quad[-1]), p_m_quad[2]),
+                    _mm_mul_ps(_mm_shuffle_ps(v33, v33, 85), *p_m_quad)),
+                  _mm_mul_ps(_mm_shuffle_ps(v33, v33, 170), p_m_quad[1]));
+          v37 = p_m_quad[-4];
+          v38 = _mm_sub_ps(p_m_quad[-3], v33);
+          p.m_quad = v33;
+          v39 = _mm_sub_ps(v37, v33);
+          v40 = _mm_sub_ps(
+                  _mm_mul_ps(_mm_shuffle_ps(v39, v39, 201), v38),
+                  _mm_mul_ps(_mm_shuffle_ps(v38, v38, 201), v39));
+          v41 = _mm_mul_ps(_mm_shuffle_ps(v40, v40, 201), p_m_quad[-2]);
+          if ( (float)((float)(_mm_shuffle_ps(v41, v41, 85).m128_f32[0] + _mm_shuffle_ps(v41, v41, 0).m128_f32[0])
+                     + _mm_shuffle_ps(v41, v41, 170).m128_f32[0]) > 0.0 )
             break;
           if ( !hkaiEdgePathSteeringUtil::inCapsule(
                   &p,
-                  (hkVector4f *)&v37[-4],
-                  (hkVector4f *)&v37[-3],
-                  (hkVector4f *)&v37[-2]) )
+                  (hkVector4f *)&p_m_quad[-4],
+                  (hkVector4f *)&p_m_quad[-3],
+                  (hkVector4f *)&p_m_quad[-2]) )
             break;
-          --v35;
-          --v16;
-          v37 -= 9;
+          --v34;
+          --m_trailingEdge;
+          p_m_quad -= 9;
         }
-        while ( v35 > v36 );
+        while ( v34 > v35 );
       }
     }
   }
 LABEL_32:
-  v12->m_faceEdge = v14;
-  v12->m_trailingEdge = v16;
-  v12->m_highestUserEdgeCrossed = v15;
-  return (signed int)v14 >= 0;
+  traversalStateInOut->m_faceEdge = m_faceEdge;
+  traversalStateInOut->m_trailingEdge = m_trailingEdge;
+  traversalStateInOut->m_highestUserEdgeCrossed = m_highestUserEdgeCrossed;
+  return (int)m_faceEdge >= 0;
 }
 
 // File Line: 270
 // RVA: 0xBEB0D0
-void __fastcall hkaiEdgePath::getFutureEdgeRange(hkaiEdgePath *this, hkaiEdgePath::TraversalState *traversalState, hkaiEdgePath::Edge **begin, hkaiEdgePath::Edge **end)
+void __fastcall hkaiEdgePath::getFutureEdgeRange(
+        hkaiEdgePath *this,
+        hkaiEdgePath::TraversalState *traversalState,
+        hkaiEdgePath::Edge **begin,
+        hkaiEdgePath::Edge **end)
 {
   *begin = &this->m_edges.m_data[traversalState->m_trailingEdge];
   *end = &this->m_edges.m_data[this->m_edges.m_size];
@@ -292,7 +298,11 @@ void __fastcall hkaiEdgePath::getFutureEdgeRange(hkaiEdgePath *this, hkaiEdgePat
 
 // File Line: 277
 // RVA: 0xBEB100
-void __fastcall hkaiEdgePath::getFutureEdgeRange(hkaiEdgePath *this, int offset, hkaiEdgePath::Edge **begin, hkaiEdgePath::Edge **end)
+void __fastcall hkaiEdgePath::getFutureEdgeRange(
+        hkaiEdgePath *this,
+        int offset,
+        hkaiEdgePath::Edge **begin,
+        hkaiEdgePath::Edge **end)
 {
   *begin = &this->m_edges.m_data[offset];
   *end = &this->m_edges.m_data[this->m_edges.m_size];
@@ -304,104 +314,79 @@ hkaiEdgePath::Edge *__fastcall hkaiEdgePath::expandEdges(hkaiEdgePath *this, int
 {
   int v2; // edi
   int v3; // eax
-  int v4; // er9
-  int v5; // esi
-  hkaiEdgePath *v6; // rbp
+  int v4; // r9d
   int v7; // eax
-  __int64 v8; // rdi
-  int v9; // er9
+  __int64 m_size; // rdi
+  int v9; // r9d
   int v10; // eax
   int v11; // eax
-  hkResult result; // [rsp+48h] [rbp+10h]
+  hkResult result; // [rsp+48h] [rbp+10h] BYREF
 
   v2 = numNewEdges * this->m_edgeDataStriding;
   v3 = this->m_edgeData.m_capacityAndFlags & 0x3FFFFFFF;
   v4 = v2 + this->m_edgeData.m_size;
-  v5 = numNewEdges;
-  v6 = this;
   if ( v3 < v4 )
   {
     v7 = 2 * v3;
     if ( v4 < v7 )
       v4 = v7;
-    hkArrayUtil::_reserve(
-      &result,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &this->m_edgeData,
-      v4,
-      4);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, &this->m_edgeData, v4, 4);
   }
-  v6->m_edgeData.m_size += v2;
-  v8 = v6->m_edges.m_size;
-  v9 = v8 + v5;
-  v10 = v6->m_edges.m_capacityAndFlags & 0x3FFFFFFF;
-  if ( v10 < (signed int)v8 + v5 )
+  this->m_edgeData.m_size += v2;
+  m_size = this->m_edges.m_size;
+  v9 = m_size + numNewEdges;
+  v10 = this->m_edges.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v10 < (int)m_size + numNewEdges )
   {
     v11 = 2 * v10;
     if ( v9 < v11 )
       v9 = v11;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v6->m_edges, v9, 144);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, &this->m_edges, v9, 144);
   }
-  v6->m_edges.m_size += v5;
-  return &v6->m_edges.m_data[v8];
+  this->m_edges.m_size += numNewEdges;
+  return &this->m_edges.m_data[m_size];
 }
 
 // File Line: 289
 // RVA: 0xBEAA70
 hkaiEdgePath::Edge *__fastcall hkaiEdgePath::expandEdges(hkaiEdgePath *this, int numNewEdges, int **edgeDataPtrOut)
 {
-  __int64 v3; // r14
+  __int64 m_size; // r14
   int v4; // esi
-  int v5; // er9
+  int v5; // r9d
   int v6; // eax
-  int **v7; // r15
-  int v8; // edi
-  hkaiEdgePath *v9; // rbp
   int v10; // eax
   __int64 v11; // rsi
-  int v12; // er9
+  int v12; // r9d
   int v13; // eax
   int v14; // eax
-  hkResult result; // [rsp+58h] [rbp+10h]
+  hkResult result; // [rsp+58h] [rbp+10h] BYREF
 
-  v3 = this->m_edgeData.m_size;
+  m_size = this->m_edgeData.m_size;
   v4 = numNewEdges * this->m_edgeDataStriding;
-  v5 = v3 + v4;
+  v5 = m_size + v4;
   v6 = this->m_edgeData.m_capacityAndFlags & 0x3FFFFFFF;
-  v7 = edgeDataPtrOut;
-  v8 = numNewEdges;
-  v9 = this;
-  if ( v6 < (signed int)v3 + v4 )
+  if ( v6 < (int)m_size + v4 )
   {
     v10 = 2 * v6;
     if ( v5 < v10 )
       v5 = v10;
-    hkArrayUtil::_reserve(
-      &result,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &this->m_edgeData,
-      v5,
-      4);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, &this->m_edgeData, v5, 4);
   }
-  v9->m_edgeData.m_size += v4;
-  *v7 = &v9->m_edgeData.m_data[v3];
-  v11 = v9->m_edges.m_size;
-  v12 = v11 + v8;
-  v13 = v9->m_edges.m_capacityAndFlags & 0x3FFFFFFF;
-  if ( v13 < (signed int)v11 + v8 )
+  this->m_edgeData.m_size += v4;
+  *edgeDataPtrOut = &this->m_edgeData.m_data[m_size];
+  v11 = this->m_edges.m_size;
+  v12 = v11 + numNewEdges;
+  v13 = this->m_edges.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v13 < (int)v11 + numNewEdges )
   {
     v14 = 2 * v13;
     if ( v12 < v14 )
       v12 = v14;
-    hkArrayUtil::_reserve(
-      &result,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &v9->m_edges,
-      v12,
-      144);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, &this->m_edges, v12, 144);
   }
-  v9->m_edges.m_size += v8;
-  return &v9->m_edges.m_data[v11];
+  this->m_edges.m_size += numNewEdges;
+  return &this->m_edges.m_data[v11];
 }
 
 // File Line: 295
@@ -420,39 +405,42 @@ hkaiEdgePath::Edge *__fastcall hkaiEdgePath::getEdge(hkaiEdgePath *this, int edg
 
 // File Line: 308
 // RVA: 0xBEAC50
-void __fastcall hkaiEdgePath::getEdgePointsInGlobalSpace(hkaiEdgePath *this, int edgeIdx, hkaiStreamingCollection *streamingCollection, hkVector4f *leftGlobal, hkVector4f *rightGlobal)
+void __fastcall hkaiEdgePath::getEdgePointsInGlobalSpace(
+        hkaiEdgePath *this,
+        int edgeIdx,
+        hkaiStreamingCollection *streamingCollection,
+        hkVector4f *leftGlobal,
+        hkVector4f *rightGlobal)
 {
   hkaiEdgePath::getEdgePointsInGlobalSpace(&this->m_edges.m_data[edgeIdx], streamingCollection, leftGlobal, rightGlobal);
 }
 
 // File Line: 318
 // RVA: 0xBEABC0
-void __fastcall hkaiEdgePath::getEdgePointsInGlobalSpace(hkaiEdgePath::Edge *edge, hkaiStreamingCollection *streamingCollection, hkVector4f *leftGlobal, hkVector4f *rightGlobal)
+void __fastcall hkaiEdgePath::getEdgePointsInGlobalSpace(
+        hkaiEdgePath::Edge *edge,
+        hkaiStreamingCollection *streamingCollection,
+        hkVector4f *leftGlobal,
+        hkVector4f *rightGlobal)
 {
-  hkaiEdgePath::Edge *v4; // rbx
-  hkVector4f *v5; // rdi
-  hkaiNavMeshInstance *v6; // rdx
-  hkTransformf a; // [rsp+20h] [rbp-48h]
+  hkTransformf a; // [rsp+20h] [rbp-48h] BYREF
 
-  v4 = edge;
-  v5 = rightGlobal;
-  v6 = streamingCollection->m_instances.m_data[edge->m_edge.m_faceKey.m_key >> 22].m_instancePtr;
-  a.m_rotation.m_col0 = v6->m_referenceFrame.m_transform.m_rotation.m_col0;
-  a.m_rotation.m_col1 = v6->m_referenceFrame.m_transform.m_rotation.m_col1;
-  a.m_rotation.m_col2 = v6->m_referenceFrame.m_transform.m_rotation.m_col2;
-  a.m_translation = v6->m_referenceFrame.m_transform.m_translation;
+  a = streamingCollection->m_instances.m_data[edge->m_edge.m_faceKey.m_key >> 22].m_instancePtr->m_referenceFrame.m_transform;
   hkVector4f::setTransformedPos(leftGlobal, &a, &edge->m_left);
-  hkVector4f::setTransformedPos(v5, &a, &v4->m_right);
+  hkVector4f::setTransformedPos(rightGlobal, &a, &edge->m_right);
 }
 
 // File Line: 333
 // RVA: 0xBEB010
-void __fastcall hkaiEdgePath::updateTraversalStateNaive(hkaiEdgePath *this, hkaiEdgePath::TraversalState *traversalState, hkVector4f *newPositionGlobal)
+void __fastcall hkaiEdgePath::updateTraversalStateNaive(
+        hkaiEdgePath *this,
+        hkaiEdgePath::TraversalState *traversalState,
+        hkVector4f *newPositionGlobal)
 {
-  signed __int64 v3; // r10
-  int v4; // er9
-  signed __int64 v5; // rax
-  __m128 v6; // xmm3
+  __int64 m_trailingEdge; // r10
+  int v4; // r9d
+  __int64 v5; // rax
+  __m128 m_quad; // xmm3
   hkaiEdgePath::Edge *v7; // rcx
   __m128 v8; // xmm1
   __m128 v9; // xmm0
@@ -460,56 +448,54 @@ void __fastcall hkaiEdgePath::updateTraversalStateNaive(hkaiEdgePath *this, hkai
   __m128 v11; // xmm2
   int v12; // eax
 
-  v3 = traversalState->m_trailingEdge;
+  m_trailingEdge = traversalState->m_trailingEdge;
   v4 = this->m_edges.m_size - 1;
-  v5 = v3;
-  if ( v3 < v4 )
+  v5 = m_trailingEdge;
+  if ( m_trailingEdge < v4 )
   {
-    v6 = newPositionGlobal->m_quad;
-    v7 = &this->m_edges.m_data[v3];
+    m_quad = newPositionGlobal->m_quad;
+    v7 = &this->m_edges.m_data[m_trailingEdge];
     do
     {
-      v8 = _mm_sub_ps(v7->m_right.m_quad, v6);
-      v9 = _mm_sub_ps(v7->m_left.m_quad, v6);
+      v8 = _mm_sub_ps(v7->m_right.m_quad, m_quad);
+      v9 = _mm_sub_ps(v7->m_left.m_quad, m_quad);
       v10 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v9, v9, 201), v8), _mm_mul_ps(_mm_shuffle_ps(v8, v8, 201), v9));
       v11 = _mm_mul_ps(_mm_shuffle_ps(v10, v10, 201), v7->m_up.m_quad);
-      if ( (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v11, v11, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v11, v11, 0)))
-                 + COERCE_FLOAT(_mm_shuffle_ps(v11, v11, 170))) >= 0.0 )
+      if ( (float)((float)(_mm_shuffle_ps(v11, v11, 85).m128_f32[0] + _mm_shuffle_ps(v11, v11, 0).m128_f32[0])
+                 + _mm_shuffle_ps(v11, v11, 170).m128_f32[0]) >= 0.0 )
         break;
       ++v5;
-      LODWORD(v3) = v3 + 1;
+      LODWORD(m_trailingEdge) = m_trailingEdge + 1;
       ++v7;
     }
     while ( v5 < v4 );
   }
-  v12 = v3 - 1;
-  if ( (signed int)v3 - 1 < 0 )
+  v12 = m_trailingEdge - 1;
+  if ( (int)m_trailingEdge - 1 < 0 )
     v12 = 0;
   traversalState->m_trailingEdge = v12;
 }
 
 // File Line: 357
 // RVA: 0xBEB130
-signed __int64 __fastcall hkaiEdgePath::getGoal(hkaiEdgePath *this, int *goalSectionOut, hkVector4f *goalOut)
+__int64 __fastcall hkaiEdgePath::getGoal(hkaiEdgePath *this, int *goalSectionOut, hkVector4f *goalOut)
 {
-  int *v3; // r10
   hkaiEdgePath::Edge *v4; // rdx
-  unsigned int v5; // eax
-  signed int v6; // eax
-  signed __int64 result; // rax
+  unsigned int m_key; // eax
+  int v6; // eax
+  __int64 result; // rax
 
-  v3 = goalSectionOut;
   if ( !this->m_edges.m_size )
     return 0i64;
   v4 = &this->m_edges.m_data[this->m_edges.m_size];
-  if ( _mm_movemask_ps(_mm_cmpeqps(v4[-1].m_right.m_quad, v4[-1].m_left.m_quad)) != 15 )
+  if ( _mm_movemask_ps(_mm_cmpeq_ps(v4[-1].m_right.m_quad, v4[-1].m_left.m_quad)) != 15 )
     return 0i64;
-  v5 = v4[-1].m_edge.m_faceKey.m_key;
-  if ( v5 == -1 )
+  m_key = v4[-1].m_edge.m_faceKey.m_key;
+  if ( m_key == -1 )
     v6 = -1;
   else
-    v6 = v5 >> 22;
-  *v3 = v6;
+    v6 = m_key >> 22;
+  *goalSectionOut = v6;
   result = 1i64;
   *goalOut = v4[-1].m_left;
   return result;
@@ -519,25 +505,22 @@ signed __int64 __fastcall hkaiEdgePath::getGoal(hkaiEdgePath *this, int *goalSec
 // RVA: 0xBEB190
 _BOOL8 __fastcall hkaiEdgePath::hasGoal(hkaiEdgePath *this)
 {
-  _BOOL8 result; // rax
-
-  if ( this->m_edges.m_size )
-    result = _mm_movemask_ps(
-               _mm_cmpeqps(
-                 *((__m128 *)&this->m_edges.m_data[this->m_edges.m_size] - 8),
-                 this->m_edges.m_data[this->m_edges.m_size - 1].m_left.m_quad)) == 15;
-  else
-    result = 0i64;
-  return result;
+  return this->m_edges.m_size
+      && _mm_movemask_ps(
+           _mm_cmpeq_ps(
+             this->m_edges.m_data[this->m_edges.m_size - 1].m_right.m_quad,
+             this->m_edges.m_data[this->m_edges.m_size - 1].m_left.m_quad)) == 15;
 }
 
 // File Line: 396
 // RVA: 0xBEB2C0
-void __fastcall hkaiEdgePath::calcWallClimbingTransform(hkVector4f *leftPoint, hkVector4f *curUp, hkVector4f *newUp, hkMatrix4f *transformOut)
+void __fastcall hkaiEdgePath::calcWallClimbingTransform(
+        hkVector4f *leftPoint,
+        hkVector4f *curUp,
+        hkVector4f *newUp,
+        hkMatrix4f *transformOut)
 {
-  __m128 v4; // xmm7
-  hkVector4f *v5; // rbx
-  hkMatrix4f *v6; // rdi
+  __m128 m_quad; // xmm7
   __m128 v7; // xmm9
   __m128 v8; // xmm5
   __m128 v9; // xmm6
@@ -546,29 +529,24 @@ void __fastcall hkaiEdgePath::calcWallClimbingTransform(hkVector4f *leftPoint, h
   __m128 v12; // xmm1
   __m128 v13; // xmm3
   __m128 v14; // xmm2
-  __m128 v15; // xmm2
-  __m128 v16; // xmm0
-  __m128 v17; // xmm2
-  __m128 v18; // xmm0
-  __m128 v19; // xmm2
-  __m128 v20; // xmm1
-  __m128i v21; // xmm4
-  __m128i v22; // xmm2
-  __m128 v23; // xmm5
-  hkMatrix3f aTb; // [rsp+20h] [rbp-D8h]
-  hkMatrix3f bTc; // [rsp+50h] [rbp-A8h]
-  __m128 v26; // [rsp+80h] [rbp-78h]
-  __m128 v27; // [rsp+90h] [rbp-68h]
-  __m128 v28; // [rsp+A0h] [rbp-58h]
+  __m128 v15; // xmm0
+  __m128 v16; // xmm2
+  __m128 v17; // xmm0
+  __m128 v18; // xmm2
+  __m128 v19; // xmm1
+  __m128i m_col1; // xmm4
+  __m128i m_col0; // xmm2
+  hkVector4f v22; // xmm5
+  hkMatrix3f aTb; // [rsp+20h] [rbp-D8h] BYREF
+  hkMatrix3f bTc; // [rsp+50h] [rbp-A8h] BYREF
+  hkMatrix3f v25; // [rsp+80h] [rbp-78h] BYREF
 
-  v4 = curUp->m_quad;
-  v5 = leftPoint;
-  v6 = transformOut;
+  m_quad = curUp->m_quad;
   v7 = newUp->m_quad;
-  v8 = _mm_shuffle_ps(v4, v4, 201);
+  v8 = _mm_shuffle_ps(m_quad, m_quad, 201);
   v9 = _mm_shuffle_ps(v7, v7, 201);
   aTb.m_col2 = (hkVector4f)curUp->m_quad;
-  v10 = _mm_sub_ps(_mm_mul_ps(v7, v8), _mm_mul_ps(v9, v4));
+  v10 = _mm_sub_ps(_mm_mul_ps(v7, v8), _mm_mul_ps(v9, m_quad));
   v11 = _mm_shuffle_ps(v10, v10, 201);
   v12 = _mm_mul_ps(v11, v11);
   v13 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v12, v12, 85), _mm_shuffle_ps(v12, v12, 0)), _mm_shuffle_ps(v12, v12, 170));
@@ -576,50 +554,54 @@ void __fastcall hkaiEdgePath::calcWallClimbingTransform(hkVector4f *leftPoint, h
   aTb.m_col0.m_quad = _mm_mul_ps(
                         v11,
                         _mm_andnot_ps(
-                          _mm_cmpleps(v13, (__m128)0i64),
+                          _mm_cmple_ps(v13, (__m128)0i64),
                           _mm_mul_ps(
                             _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v14, v13), v14)),
                             _mm_mul_ps(*(__m128 *)_xmm, v14))));
   v15 = _mm_shuffle_ps(aTb.m_col0.m_quad, aTb.m_col0.m_quad, 201);
-  v16 = v15;
-  v17 = _mm_sub_ps(_mm_mul_ps(v15, v7), _mm_mul_ps(v9, aTb.m_col0.m_quad));
-  v18 = _mm_sub_ps(_mm_mul_ps(v16, v4), _mm_mul_ps(v8, aTb.m_col0.m_quad));
-  v19 = _mm_shuffle_ps(v17, v17, 201);
-  v20 = _mm_unpacklo_ps(aTb.m_col0.m_quad, v19);
-  aTb.m_col1.m_quad = _mm_shuffle_ps(v18, v18, 201);
-  bTc.m_col0.m_quad = _mm_movelh_ps(v20, v7);
-  bTc.m_col2.m_quad = _mm_shuffle_ps(_mm_unpackhi_ps(aTb.m_col0.m_quad, v19), v7, 228);
-  bTc.m_col1.m_quad = _mm_shuffle_ps(_mm_movehl_ps(bTc.m_col0.m_quad, v20), v7, 212);
-  hkMatrix3f::setMul((hkMatrix3f *)&v26, &aTb, &bTc);
-  v21 = (__m128i)v27;
-  v22 = (__m128i)v26;
-  v23 = _mm_sub_ps(
-          v5->m_quad,
-          _mm_add_ps(
-            _mm_add_ps(
-              _mm_mul_ps(_mm_shuffle_ps(v5->m_quad, v5->m_quad, 85), v27),
-              _mm_mul_ps(_mm_shuffle_ps(v5->m_quad, v5->m_quad, 0), v26)),
-            _mm_mul_ps(_mm_shuffle_ps(v5->m_quad, v5->m_quad, 170), v28)));
-  v6->m_col2.m_quad = v28;
-  v6->m_col0 = (hkVector4f)v22;
-  v6->m_col3.m_quad = v23;
-  v6->m_col1 = (hkVector4f)v21;
-  _mm_store_si128((__m128i *)v6, _mm_srli_si128(_mm_slli_si128(v22, 4), 4));
-  _mm_store_si128(
-    (__m128i *)&v6->m_col2,
-    _mm_srli_si128(_mm_slli_si128(_mm_load_si128((const __m128i *)&v6->m_col2), 4), 4));
-  _mm_store_si128((__m128i *)&v6->m_col1, _mm_srli_si128(_mm_slli_si128(v21, 4), 4));
-  v6->m_col3.m_quad = _mm_shuffle_ps(v23, _mm_unpackhi_ps(v23, query.m_quad), 196);
+  v16 = _mm_sub_ps(_mm_mul_ps(v15, v7), _mm_mul_ps(v9, aTb.m_col0.m_quad));
+  v17 = _mm_sub_ps(_mm_mul_ps(v15, m_quad), _mm_mul_ps(v8, aTb.m_col0.m_quad));
+  v18 = _mm_shuffle_ps(v16, v16, 201);
+  v19 = _mm_unpacklo_ps(aTb.m_col0.m_quad, v18);
+  aTb.m_col1.m_quad = _mm_shuffle_ps(v17, v17, 201);
+  bTc.m_col0.m_quad = _mm_movelh_ps(v19, v7);
+  bTc.m_col2.m_quad = _mm_shuffle_ps(_mm_unpackhi_ps(aTb.m_col0.m_quad, v18), v7, 228);
+  bTc.m_col1.m_quad = _mm_shuffle_ps(_mm_movehl_ps(bTc.m_col0.m_quad, v19), v7, 212);
+  hkMatrix3f::setMul(&v25, &aTb, &bTc);
+  m_col1 = (__m128i)v25.m_col1;
+  m_col0 = (__m128i)v25.m_col0;
+  v22.m_quad = _mm_sub_ps(
+                 leftPoint->m_quad,
+                 _mm_add_ps(
+                   _mm_add_ps(
+                     _mm_mul_ps(_mm_shuffle_ps(leftPoint->m_quad, leftPoint->m_quad, 85), v25.m_col1.m_quad),
+                     _mm_mul_ps(_mm_shuffle_ps(leftPoint->m_quad, leftPoint->m_quad, 0), v25.m_col0.m_quad)),
+                   _mm_mul_ps(_mm_shuffle_ps(leftPoint->m_quad, leftPoint->m_quad, 170), v25.m_col2.m_quad)));
+  transformOut->m_col2 = v25.m_col2;
+  transformOut->m_col0 = (hkVector4f)m_col0;
+  transformOut->m_col3 = (hkVector4f)v22.m_quad;
+  transformOut->m_col1 = (hkVector4f)m_col1;
+  transformOut->m_col0 = (hkVector4f)_mm_srli_si128(_mm_slli_si128(m_col0, 4), 4);
+  transformOut->m_col2 = (hkVector4f)_mm_srli_si128(
+                                       _mm_slli_si128(_mm_load_si128((const __m128i *)&transformOut->m_col2), 4),
+                                       4);
+  transformOut->m_col1 = (hkVector4f)_mm_srli_si128(_mm_slli_si128(m_col1, 4), 4);
+  transformOut->m_col3.m_quad = _mm_shuffle_ps(v22.m_quad, _mm_unpackhi_ps(v22.m_quad, query.m_quad), 196);
 }
 
 // File Line: 442
 // RVA: 0xBEB4B0
-void __fastcall hkaiEdgePath::calcFollowingTransform(hkVector4f *curLeftPoint, hkVector4f *curRightPoint, hkVector4f *curUp, hkVector4f *newLeftPoint, hkVector4f *newRightPoint, hkVector4f *newUp, hkMatrix4f *followingTransform)
+void __fastcall hkaiEdgePath::calcFollowingTransform(
+        hkVector4f *curLeftPoint,
+        hkVector4f *curRightPoint,
+        hkVector4f *curUp,
+        hkVector4f *newLeftPoint,
+        hkVector4f *newRightPoint,
+        hkVector4f *newUp,
+        hkMatrix4f *followingTransform)
 {
-  hkVector4f *v7; // rbx
-  hkVector4f *v8; // rdi
   __m128 v9; // xmm6
-  __m128 v10; // xmm12
+  __m128 m_quad; // xmm12
   __m128 v11; // xmm13
   __m128 v12; // xmm1
   __m128 v13; // xmm13
@@ -627,7 +609,7 @@ void __fastcall hkaiEdgePath::calcFollowingTransform(hkVector4f *curLeftPoint, h
   __m128 v15; // xmm3
   __m128 v16; // xmm2
   __m128 v17; // xmm7
-  __m128 v18; // xmm13
+  hkVector4f v18; // xmm13
   __m128 v19; // xmm7
   __m128 v20; // xmm8
   __m128 v21; // xmm8
@@ -654,21 +636,17 @@ void __fastcall hkaiEdgePath::calcFollowingTransform(hkVector4f *curLeftPoint, h
   __m128 v42; // xmm2
   __m128 v43; // xmm5
   hkVector4f v44; // xmm1
-  __m128i v45; // xmm4
+  __m128i m_col1; // xmm4
   hkVector4f v46; // xmm0
   hkVector4f v47; // xmm5
-  __m128i v48; // xmm0
-  hkSimdFloat32 scale; // [rsp+20h] [rbp-128h]
-  hkMatrix3f v50; // [rsp+30h] [rbp-118h]
-  hkMatrix3f bTc; // [rsp+60h] [rbp-E8h]
-  __m128 v52; // [rsp+90h] [rbp-B8h]
-  __m128 v53; // [rsp+A0h] [rbp-A8h]
-  __m128 v54; // [rsp+B0h] [rbp-98h]
+  __m128i si128; // xmm0
+  hkSimdFloat32 scale; // [rsp+20h] [rbp-128h] BYREF
+  hkMatrix3f v50; // [rsp+30h] [rbp-118h] BYREF
+  hkMatrix3f bTc; // [rsp+60h] [rbp-E8h] BYREF
+  hkMatrix3f v52; // [rsp+90h] [rbp-B8h] BYREF
 
-  v7 = newLeftPoint;
-  v8 = curLeftPoint;
   v9 = _mm_sub_ps(newRightPoint->m_quad, newLeftPoint->m_quad);
-  v10 = curUp->m_quad;
+  m_quad = curUp->m_quad;
   v11 = _mm_sub_ps(curRightPoint->m_quad, curLeftPoint->m_quad);
   v12 = _mm_mul_ps(v11, curUp->m_quad);
   v13 = _mm_sub_ps(
@@ -682,27 +660,27 @@ void __fastcall hkaiEdgePath::calcFollowingTransform(hkVector4f *curLeftPoint, h
   v15 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v14, v14, 85), _mm_shuffle_ps(v14, v14, 0)), _mm_shuffle_ps(v14, v14, 170));
   v16 = _mm_rsqrt_ps(v15);
   v17 = _mm_andnot_ps(
-          _mm_cmpleps(v15, (__m128)0i64),
+          _mm_cmple_ps(v15, (__m128)0i64),
           _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v16, v15), v16)), _mm_mul_ps(v16, *(__m128 *)_xmm)));
-  v18 = _mm_mul_ps(v13, v17);
+  v18.m_quad = _mm_mul_ps(v13, v17);
   v19 = _mm_mul_ps(v17, v15);
   v20 = _mm_sub_ps(
-          _mm_mul_ps(_mm_shuffle_ps(v18, v18, 201), curUp->m_quad),
-          _mm_mul_ps(_mm_shuffle_ps(v10, v10, 201), v18));
+          _mm_mul_ps(_mm_shuffle_ps(v18.m_quad, v18.m_quad, 201), curUp->m_quad),
+          _mm_mul_ps(_mm_shuffle_ps(m_quad, m_quad, 201), v18.m_quad));
   v21 = _mm_shuffle_ps(v20, v20, 201);
   v22 = _mm_mul_ps(v21, v21);
   v23 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v22, v22, 85), _mm_shuffle_ps(v22, v22, 0)), _mm_shuffle_ps(v22, v22, 170));
   v24 = _mm_rsqrt_ps(v23);
-  v52 = v18;
+  v52.m_col0 = (hkVector4f)v18.m_quad;
   v25 = newUp->m_quad;
-  v53 = _mm_mul_ps(
-          v21,
-          _mm_andnot_ps(
-            _mm_cmpleps(v23, (__m128)0i64),
-            _mm_mul_ps(
-              _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v24, v23), v24)),
-              _mm_mul_ps(v24, *(__m128 *)_xmm))));
-  v54 = v10;
+  v52.m_col1.m_quad = _mm_mul_ps(
+                        v21,
+                        _mm_andnot_ps(
+                          _mm_cmple_ps(v23, (__m128)0i64),
+                          _mm_mul_ps(
+                            _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v24, v23), v24)),
+                            _mm_mul_ps(v24, *(__m128 *)_xmm))));
+  v52.m_col2.m_quad = m_quad;
   v26 = _mm_mul_ps(v9, v25);
   v27 = _mm_sub_ps(
           v9,
@@ -715,7 +693,7 @@ void __fastcall hkaiEdgePath::calcFollowingTransform(hkVector4f *curLeftPoint, h
   v29 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v28, v28, 85), _mm_shuffle_ps(v28, v28, 0)), _mm_shuffle_ps(v28, v28, 170));
   v30 = _mm_rsqrt_ps(v29);
   v31 = _mm_andnot_ps(
-          _mm_cmpleps(v29, (__m128)0i64),
+          _mm_cmple_ps(v29, (__m128)0i64),
           _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v30, v29), v30)), _mm_mul_ps(v30, *(__m128 *)_xmm)));
   v32 = _mm_mul_ps(v27, v31);
   v33 = _mm_mul_ps(v31, v29);
@@ -728,7 +706,7 @@ void __fastcall hkaiEdgePath::calcFollowingTransform(hkVector4f *curLeftPoint, h
   v39 = _mm_rsqrt_ps(v38);
   v40 = _mm_mul_ps(
           _mm_andnot_ps(
-            _mm_cmpleps(v38, (__m128)0i64),
+            _mm_cmple_ps(v38, (__m128)0i64),
             _mm_mul_ps(
               _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v39, v38), v39)),
               _mm_mul_ps(v39, *(__m128 *)_xmm))),
@@ -737,641 +715,579 @@ void __fastcall hkaiEdgePath::calcFollowingTransform(hkVector4f *curLeftPoint, h
   bTc.m_col0.m_quad = _mm_movelh_ps(v41, v25);
   bTc.m_col2.m_quad = _mm_shuffle_ps(_mm_unpackhi_ps(v32, v40), v25, 228);
   bTc.m_col1.m_quad = _mm_shuffle_ps(_mm_movehl_ps(bTc.m_col0.m_quad, v41), v25, 212);
-  hkMatrix3f::setMul(&v50, (hkMatrix3f *)&v52, &bTc);
+  hkMatrix3f::setMul(&v50, &v52, &bTc);
   hkMatrix3f::mul(&v50, &scale);
-  v42 = v7->m_quad;
-  v43 = v8->m_quad;
+  v42 = newLeftPoint->m_quad;
+  v43 = curLeftPoint->m_quad;
   v44.m_quad = (__m128)v50.m_col0;
-  v45 = (__m128i)v50.m_col1;
+  m_col1 = (__m128i)v50.m_col1;
   followingTransform->m_col0 = v50.m_col0;
-  followingTransform->m_col1 = (hkVector4f)v45;
+  followingTransform->m_col1 = (hkVector4f)m_col1;
   v46.m_quad = (__m128)v50.m_col2;
   followingTransform->m_col2 = v50.m_col2;
   v47.m_quad = _mm_sub_ps(
                  v43,
                  _mm_add_ps(
                    _mm_add_ps(
-                     _mm_mul_ps(_mm_shuffle_ps(v42, v42, 85), (__m128)v45),
+                     _mm_mul_ps(_mm_shuffle_ps(v42, v42, 85), (__m128)m_col1),
                      _mm_mul_ps(_mm_shuffle_ps(v42, v42, 0), v44.m_quad)),
                    _mm_mul_ps(_mm_shuffle_ps(v42, v42, 170), v46.m_quad)));
-  _mm_store_si128((__m128i *)followingTransform, _mm_srli_si128(_mm_slli_si128((__m128i)v44.m_quad, 4), 4));
-  v48 = _mm_load_si128((const __m128i *)&followingTransform->m_col2);
-  _mm_store_si128((__m128i *)&followingTransform->m_col1, _mm_srli_si128(_mm_slli_si128(v45, 4), 4));
+  followingTransform->m_col0 = (hkVector4f)_mm_srli_si128(_mm_slli_si128((__m128i)v44.m_quad, 4), 4);
+  si128 = _mm_load_si128((const __m128i *)&followingTransform->m_col2);
+  followingTransform->m_col1 = (hkVector4f)_mm_srli_si128(_mm_slli_si128(m_col1, 4), 4);
   followingTransform->m_col3 = (hkVector4f)v47.m_quad;
-  _mm_store_si128((__m128i *)&followingTransform->m_col2, _mm_srli_si128(_mm_slli_si128(v48, 4), 4));
+  followingTransform->m_col2 = (hkVector4f)_mm_srli_si128(_mm_slli_si128(si128, 4), 4);
   followingTransform->m_col3.m_quad = _mm_shuffle_ps(v47.m_quad, _mm_unpackhi_ps(v47.m_quad, query.m_quad), 196);
 }
 
 // File Line: 501
 // RVA: 0xBEC040
-void __usercall hkaiEdgePath::replacePrefixWithEdge(hkaiEdgePath *this@<rcx>, int numToRemove@<edx>, unsigned int edgeFaceKey@<r8d>, unsigned int edgeKey@<r9d>, __m128 *a5@<xmm13>, hkaiStreamingCollection *streamingCollection, hkaiNavMeshCutter *cutter)
+void __fastcall hkaiEdgePath::replacePrefixWithEdge(
+        hkaiEdgePath *this,
+        int numToRemove,
+        unsigned int edgeFaceKey,
+        unsigned int edgeKey,
+        hkaiStreamingCollection *streamingCollection,
+        hkaiNavMeshCutter *cutter)
 {
-  int v7; // esi
-  hkaiEdgePath *v8; // rdi
-  unsigned int v9; // er15
-  unsigned int v10; // ebx
-  int v11; // er14
-  int v12; // eax
-  int v13; // ebx
-  int v14; // eax
-  int v15; // er9
-  __int64 v16; // rbp
-  int v17; // er14
-  int v18; // ebx
+  int m_size; // r14d
+  int v11; // eax
+  int v12; // ebx
+  int v13; // eax
+  int v14; // r9d
+  __int64 m_edgeDataStriding; // rbp
+  int v16; // r14d
+  int v17; // ebx
+  int v18; // eax
   int v19; // eax
-  int v20; // eax
-  int v21; // er9
-  int curSection; // [rsp+50h] [rbp-78h]
-  int faceIndex; // [rsp+60h] [rbp-68h]
-  char v24; // [rsp+70h] [rbp-58h]
-  hkSimdFloat32 *result; // [rsp+80h] [rbp-48h]
-  int v26; // [rsp+88h] [rbp-40h]
-  hkaiStreamingCollection::InstanceInfo *v27; // [rsp+90h] [rbp-38h]
-  bool curSectionIsWC; // [rsp+D8h] [rbp+10h]
-  unsigned int curFaceKey; // [rsp+E0h] [rbp+18h]
+  int v20; // r9d
+  int curSection[4]; // [rsp+50h] [rbp-78h] BYREF
+  __m128 faceIndex; // [rsp+60h] [rbp-68h] BYREF
+  hkaiNavMeshUtils v23; // [rsp+70h] [rbp-58h] BYREF
+  hkaiGeneralAccessor result[3]; // [rsp+80h] [rbp-48h] BYREF
+  bool curSectionIsWC; // [rsp+D8h] [rbp+10h] BYREF
+  unsigned int curFaceKey; // [rsp+E0h] [rbp+18h] BYREF
 
   curFaceKey = edgeFaceKey;
-  v7 = numToRemove;
-  v8 = this;
-  v9 = edgeKey;
-  v27 = streamingCollection->m_instances.m_data;
-  v10 = edgeFaceKey;
-  v26 = -1;
-  result = 0i64;
-  curSection = edgeFaceKey >> 22;
-  hkaiGeneralAccessor::setSection((hkaiGeneralAccessor *)&result, edgeFaceKey >> 22);
+  result[0].m_sectionInfo = streamingCollection->m_instances.m_data;
+  result[0].m_currentSection = -1;
+  result[0].m_accessor = 0i64;
+  curSection[0] = edgeFaceKey >> 22;
+  hkaiGeneralAccessor::setSection(result, edgeFaceKey >> 22);
   hkaiNavMeshUtils::calcFaceNormal<hkaiNavMeshInstance>(
-    (hkaiNavMeshUtils *)&v24,
-    result,
-    (hkaiNavMeshInstance *)(v10 & 0x3FFFFF),
-    (__int64)&faceIndex);
-  curSectionIsWC = *(_BYTE *)(result[6].m_real.m128_u64[0] + 120) & 1;
-  if ( v7 )
+    &v23,
+    (hkSimdFloat32 *)result[0].m_accessor,
+    (hkaiNavMeshInstance *)(edgeFaceKey & 0x3FFFFF),
+    &faceIndex);
+  curSectionIsWC = result[0].m_accessor->m_originalMesh.m_pntr->m_flags.m_storage & 1;
+  if ( numToRemove )
   {
-    if ( v7 != 1 )
+    if ( numToRemove != 1 )
     {
       hkArrayBase<hkaiEdgePath::Edge>::_spliceInto(
-        (hkArrayBase<hkaiEdgePath::Edge> *)&v8->m_edges.m_data,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
+        &this->m_edges,
+        &hkContainerHeapAllocator::s_alloc,
         0,
-        v7 - 1,
+        numToRemove - 1,
         0i64,
         0);
       hkArrayBase<unsigned int>::_spliceInto(
-        (hkArrayBase<unsigned int> *)&v8->m_edgeData,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
+        (hkArrayBase<unsigned int> *)&this->m_edgeData,
+        &hkContainerHeapAllocator::s_alloc,
         0,
-        (v7 - 1) * v8->m_edgeDataStriding,
+        (numToRemove - 1) * this->m_edgeDataStriding,
         0i64,
         0);
     }
   }
   else
   {
-    v11 = v8->m_edges.m_size;
-    v12 = v8->m_edges.m_capacityAndFlags & 0x3FFFFFFF;
-    v13 = v11 + 1;
-    if ( v11 + 1 > v12 )
+    m_size = this->m_edges.m_size;
+    v11 = this->m_edges.m_capacityAndFlags & 0x3FFFFFFF;
+    v12 = m_size + 1;
+    if ( m_size + 1 > v11 )
     {
-      if ( v12 >= v13 )
-      {
-        LODWORD(streamingCollection) = 0;
-      }
-      else
-      {
-        v14 = 2 * v12;
-        v15 = v11 + 1;
-        if ( v13 < v14 )
-          v15 = v14;
-        hkArrayUtil::_reserve(
-          (hkResult *)&streamingCollection,
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-          &v8->m_edges,
-          v15,
-          144);
-      }
+      v13 = 2 * v11;
+      v14 = m_size + 1;
+      if ( v12 < v13 )
+        v14 = v13;
+      hkArrayUtil::_reserve(
+        (hkResult *)&streamingCollection,
+        &hkContainerHeapAllocator::s_alloc,
+        &this->m_edges,
+        v14,
+        144);
     }
-    hkMemUtil::memMove(&v8->m_edges.m_data[1], v8->m_edges.m_data, 144 * v11);
-    v8->m_edges.m_size = v13;
-    v16 = v8->m_edgeDataStriding;
-    v17 = v8->m_edgeData.m_size;
-    v18 = v17 + v16;
-    v19 = v8->m_edgeData.m_capacityAndFlags & 0x3FFFFFFF;
-    if ( v17 + (signed int)v16 > v19 )
+    hkMemUtil::memMove(&this->m_edges.m_data[1], this->m_edges.m_data, 144 * m_size);
+    this->m_edges.m_size = v12;
+    m_edgeDataStriding = this->m_edgeDataStriding;
+    v16 = this->m_edgeData.m_size;
+    v17 = v16 + m_edgeDataStriding;
+    v18 = this->m_edgeData.m_capacityAndFlags & 0x3FFFFFFF;
+    if ( v16 + (int)m_edgeDataStriding > v18 )
     {
-      if ( v19 >= v18 )
-      {
-        LODWORD(streamingCollection) = 0;
-      }
-      else
-      {
-        v20 = 2 * v19;
-        v21 = v17 + v16;
-        if ( v18 < v20 )
-          v21 = v20;
-        hkArrayUtil::_reserve(
-          (hkResult *)&streamingCollection,
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-          &v8->m_edgeData,
-          v21,
-          4);
-      }
+      v19 = 2 * v18;
+      v20 = v16 + m_edgeDataStriding;
+      if ( v17 < v19 )
+        v20 = v19;
+      hkArrayUtil::_reserve(
+        (hkResult *)&streamingCollection,
+        &hkContainerHeapAllocator::s_alloc,
+        &this->m_edgeData,
+        v20,
+        4);
     }
-    hkMemUtil::memMove(&v8->m_edgeData.m_data[v16], v8->m_edgeData.m_data, 4 * v17);
-    v8->m_edgeData.m_size = v18;
+    hkMemUtil::memMove(&this->m_edgeData.m_data[m_edgeDataStriding], this->m_edgeData.m_data, 4 * v16);
+    this->m_edgeData.m_size = v17;
   }
   hkaiEdgePath::buildEdge(
-    v8,
-    (hkaiGeneralAccessor *)&result,
+    this,
+    result,
     cutter,
-    v9,
-    a5,
+    edgeKey,
     (hkVector4f *)&faceIndex,
     &curFaceKey,
-    &curSection,
+    curSection,
     &curSectionIsWC,
     0);
 }
 
 // File Line: 546
 // RVA: 0xBEC930
-__int64 __fastcall `anonymous namespace::moveCwInFace(hkaiGeneralAccessor *accessor, unsigned int *edgeKey, unsigned int faceKey)
+__int64 __fastcall `anonymous namespace::moveCwInFace(
+        hkaiGeneralAccessor *accessor,
+        unsigned int *edgeKey,
+        unsigned int faceKey)
 {
-  unsigned int v3; // ebx
-  unsigned int *v4; // rdi
-  hkaiNavMesh::Face *v5; // rax
-  int v6; // ecx
+  int v3; // ebx
+  hkaiNavMesh::Face *FaceFromPacked; // rax
+  unsigned int v6; // ecx
   int v7; // ecx
   __int64 result; // rax
 
   v3 = *edgeKey;
-  v4 = edgeKey;
-  v5 = hkaiGeneralAccessor::getFaceFromPacked(accessor, faceKey);
-  v6 = *v4 & 0x3FFFFF;
-  if ( v6 == v5->m_startEdgeIndex )
-    v7 = v5->m_numEdges + v5->m_startEdgeIndex - 1;
+  FaceFromPacked = hkaiGeneralAccessor::getFaceFromPacked(accessor, faceKey);
+  v6 = *edgeKey & 0x3FFFFF;
+  if ( v6 == FaceFromPacked->m_startEdgeIndex )
+    v7 = FaceFromPacked->m_numEdges + FaceFromPacked->m_startEdgeIndex - 1;
   else
     v7 = v6 - 1;
   result = 0i64;
-  *v4 = v7 | v3 & 0xFFC00000;
+  *edgeKey = v7 | v3 & 0xFFC00000;
   return result;
 }
 
 // File Line: 568
 // RVA: 0xBEC980
-__int64 __fastcall `anonymous namespace::moveCcwInFace(hkaiGeneralAccessor *accessor, unsigned int *edgeKey, unsigned int faceKey)
+__int64 __fastcall `anonymous namespace::moveCcwInFace(
+        hkaiGeneralAccessor *accessor,
+        unsigned int *edgeKey,
+        unsigned int faceKey)
 {
-  unsigned int v3; // ebx
-  unsigned int *v4; // rdi
-  hkaiNavMesh::Face *v5; // rax
-  int v6; // er8
-  int v7; // er9
+  int v3; // ebx
+  hkaiNavMesh::Face *FaceFromPacked; // rax
+  int m_startEdgeIndex; // r8d
+  unsigned int v7; // r9d
   __int64 result; // rax
 
   v3 = *edgeKey;
-  v4 = edgeKey;
-  v5 = hkaiGeneralAccessor::getFaceFromPacked(accessor, faceKey);
-  v6 = v5->m_startEdgeIndex;
-  v7 = *v4 & 0x3FFFFF;
-  if ( v7 != v5->m_numEdges + v5->m_startEdgeIndex - 1 )
-    v6 = v7 + 1;
+  FaceFromPacked = hkaiGeneralAccessor::getFaceFromPacked(accessor, faceKey);
+  m_startEdgeIndex = FaceFromPacked->m_startEdgeIndex;
+  v7 = *edgeKey & 0x3FFFFF;
+  if ( v7 != FaceFromPacked->m_numEdges + FaceFromPacked->m_startEdgeIndex - 1 )
+    m_startEdgeIndex = v7 + 1;
   result = 0i64;
-  *v4 = v6 | v3 & 0xFFC00000;
+  *edgeKey = m_startEdgeIndex | v3 & 0xFFC00000;
   return result;
 }
 
 // File Line: 590
 // RVA: 0xBEC9E0
-__int64 __fastcall `anonymous namespace::moveCwAroundVertex(hkaiGeneralAccessor *accessor, unsigned int *edgeKey, unsigned int *faceKey)
+__int64 __fastcall `anonymous namespace::moveCwAroundVertex(
+        hkaiGeneralAccessor *accessor,
+        unsigned int *edgeKey,
+        unsigned int *faceKey)
 {
-  unsigned int *v3; // rdi
-  unsigned int *v4; // rsi
-  hkaiGeneralAccessor *v5; // rbx
-  hkaiNavMesh::Edge *v6; // rax
+  hkaiNavMesh::Edge *EdgeFromPacked; // rax
   hkaiNavMesh::Edge *v7; // r9
-  char v8; // al
-  unsigned int v9; // edx
+  char m_storage; // al
+  unsigned int m_oppositeFace; // edx
   unsigned int v10; // ecx
   int v11; // eax
-  unsigned int v12; // edx
+  unsigned int m_oppositeEdge; // edx
   unsigned int v13; // ecx
   int v14; // eax
-  __int64 result; // rax
 
-  v3 = edgeKey;
-  v4 = faceKey;
-  v5 = accessor;
-  v6 = hkaiGeneralAccessor::getEdgeFromPacked(accessor, *edgeKey);
-  v7 = v6;
-  if ( v6->m_oppositeEdge == -1 || (v8 = v6->m_flags.m_storage, v8 & 0x20) )
+  EdgeFromPacked = hkaiGeneralAccessor::getEdgeFromPacked(accessor, *edgeKey);
+  v7 = EdgeFromPacked;
+  if ( EdgeFromPacked->m_oppositeEdge == -1 || (m_storage = EdgeFromPacked->m_flags.m_storage, (m_storage & 0x20) != 0) )
   {
-    *v3 = -1;
-    *v4 = -1;
-    result = (unsigned int)((v7->m_flags.m_storage & 0x40) != 0) + 1;
+    *edgeKey = -1;
+    *faceKey = -1;
+    return (unsigned int)((v7->m_flags.m_storage & 0x40) != 0) + 1;
   }
   else
   {
-    v9 = v7->m_oppositeFace;
-    if ( v8 & 0x40 )
-      v10 = v9 & 0xFFC00000;
+    m_oppositeFace = v7->m_oppositeFace;
+    if ( (m_storage & 0x40) != 0 )
+      v10 = m_oppositeFace & 0xFFC00000;
     else
-      v10 = v5->m_accessor->m_runtimeId << 22;
-    v11 = v10 | v9 & 0x3FFFFF;
-    if ( v9 == -1 )
+      v10 = accessor->m_accessor->m_runtimeId << 22;
+    v11 = v10 | m_oppositeFace & 0x3FFFFF;
+    if ( m_oppositeFace == -1 )
       v11 = -1;
-    *v4 = v11;
-    v12 = v7->m_oppositeEdge;
-    if ( v7->m_flags.m_storage & 0x40 )
-      v13 = v12 & 0xFFC00000;
+    *faceKey = v11;
+    m_oppositeEdge = v7->m_oppositeEdge;
+    if ( (v7->m_flags.m_storage & 0x40) != 0 )
+      v13 = m_oppositeEdge & 0xFFC00000;
     else
-      v13 = v5->m_accessor->m_runtimeId << 22;
-    v14 = v13 | v12 & 0x3FFFFF;
-    if ( v12 == -1 )
+      v13 = accessor->m_accessor->m_runtimeId << 22;
+    v14 = v13 | m_oppositeEdge & 0x3FFFFF;
+    if ( m_oppositeEdge == -1 )
       v14 = -1;
-    *v3 = v14;
-    `anonymous namespace::moveCcwInFace(v5, v3, *v4);
-    result = 0i64;
+    *edgeKey = v14;
+    `anonymous namespace::moveCcwInFace(accessor, edgeKey, *faceKey);
+    return 0i64;
   }
-  return result;
 }
 
 // File Line: 617
 // RVA: 0xBECAD0
-signed __int64 __fastcall `anonymous namespace::moveCcwAroundVertex(hkaiGeneralAccessor *accessor, unsigned int *edgeKey, unsigned int *faceKey)
+__int64 __fastcall `anonymous namespace::moveCcwAroundVertex(
+        hkaiGeneralAccessor *accessor,
+        unsigned int *edgeKey,
+        unsigned int *faceKey)
 {
-  unsigned int *v3; // rdi
-  unsigned int *v4; // rsi
-  hkaiGeneralAccessor *v5; // rbx
-  hkaiNavMesh::Edge *v6; // rax
+  hkaiNavMesh::Edge *EdgeFromPacked; // rax
   hkaiNavMesh::Edge *v7; // r9
-  char v8; // al
-  unsigned int v9; // edx
+  char m_storage; // al
+  unsigned int m_oppositeFace; // edx
   unsigned int v10; // ecx
   int v11; // eax
-  unsigned int v12; // edx
+  unsigned int m_oppositeEdge; // edx
   unsigned int v13; // ecx
   int v14; // eax
-  signed __int64 result; // rax
 
-  v3 = edgeKey;
-  v4 = faceKey;
-  v5 = accessor;
-  v6 = hkaiGeneralAccessor::getEdgeFromPacked(accessor, *edgeKey);
-  v7 = v6;
-  if ( v6->m_oppositeEdge == -1 || (v8 = v6->m_flags.m_storage, v8 & 0x20) )
+  EdgeFromPacked = hkaiGeneralAccessor::getEdgeFromPacked(accessor, *edgeKey);
+  v7 = EdgeFromPacked;
+  if ( EdgeFromPacked->m_oppositeEdge == -1 || (m_storage = EdgeFromPacked->m_flags.m_storage, (m_storage & 0x20) != 0) )
   {
-    *v3 = -1;
-    *v4 = -1;
-    result = 1i64;
+    *edgeKey = -1;
+    *faceKey = -1;
+    return 1i64;
   }
   else
   {
-    v9 = v7->m_oppositeFace;
-    if ( v8 & 0x40 )
-      v10 = v9 & 0xFFC00000;
+    m_oppositeFace = v7->m_oppositeFace;
+    if ( (m_storage & 0x40) != 0 )
+      v10 = m_oppositeFace & 0xFFC00000;
     else
-      v10 = v5->m_accessor->m_runtimeId << 22;
-    v11 = v10 | v9 & 0x3FFFFF;
-    if ( v9 == -1 )
+      v10 = accessor->m_accessor->m_runtimeId << 22;
+    v11 = v10 | m_oppositeFace & 0x3FFFFF;
+    if ( m_oppositeFace == -1 )
       v11 = -1;
-    *v4 = v11;
-    v12 = v7->m_oppositeEdge;
-    if ( v7->m_flags.m_storage & 0x40 )
-      v13 = v12 & 0xFFC00000;
+    *faceKey = v11;
+    m_oppositeEdge = v7->m_oppositeEdge;
+    if ( (v7->m_flags.m_storage & 0x40) != 0 )
+      v13 = m_oppositeEdge & 0xFFC00000;
     else
-      v13 = v5->m_accessor->m_runtimeId << 22;
-    v14 = v13 | v12 & 0x3FFFFF;
-    if ( v12 == -1 )
+      v13 = accessor->m_accessor->m_runtimeId << 22;
+    v14 = v13 | m_oppositeEdge & 0x3FFFFF;
+    if ( m_oppositeEdge == -1 )
       v14 = -1;
-    *v3 = v14;
-    `anonymous namespace::moveCwInFace(v5, v3, *v4);
-    result = 0i64;
+    *edgeKey = v14;
+    `anonymous namespace::moveCwInFace(accessor, edgeKey, *faceKey);
+    return 0i64;
   }
-  return result;
 }
 
 // File Line: 642
 // RVA: 0xBEC280
-signed __int64 __usercall hkaiEdgePath::pullPastInternalVertex@<rax>(hkaiEdgePath *this@<rcx>, int edgeIndex@<edx>, bool isLeft@<r8b>, hkaiEdgePath::TraversalState *curTraversalState@<r9>, __m128 *a5@<xmm13>, hkaiStreamingCollection *streamingCollection, hkaiNavMeshCutter *cutter)
+__int64 __fastcall hkaiEdgePath::pullPastInternalVertex(
+        hkaiEdgePath *this,
+        int edgeIndex,
+        bool isLeft,
+        hkaiEdgePath::TraversalState *curTraversalState,
+        hkaiStreamingCollection *streamingCollection,
+        hkaiNavMeshCutter *cutter)
 {
-  hkaiStreamingCollection *v7; // rsi
-  hkaiNavMeshCutter *v8; // r13
-  int v9; // er12
-  bool v10; // r15
-  hkaiEdgePath *v11; // rbx
+  hkaiStreamingCollection *v6; // rsi
+  hkaiNavMeshCutter *v7; // r13
+  int v8; // r12d
+  int m_faceEdge; // eax
   int v12; // eax
-  int v13; // eax
-  int v14; // er14
+  int v13; // r14d
+  int v14; // edi
   int v15; // edi
-  int v16; // edi
-  bool v17; // zf
-  hkaiEdgePath::Edge *v19; // rax
-  unsigned int v20; // esi
-  int v21; // edi
-  hkaiEdgePath::Edge *v22; // rax
-  unsigned int v23; // eax
-  int v24; // er12
-  MoveResult v25; // eax
-  MoveResult v26; // eax
-  hkResultEnum v27; // esi
-  __m128i v28; // xmm6
+  bool v16; // zf
+  hkaiEdgePath::Edge *Edge; // rax
+  unsigned int v19; // esi
+  int v20; // edi
+  unsigned int v21; // eax
+  int v22; // r12d
+  hkResultEnum m_enum; // esi
+  __m128 v26; // xmm6
+  int v27; // edi
+  int m_size; // edx
   int v29; // edi
-  int v30; // edx
-  int v31; // edi
-  int v32; // edx
-  int v33; // eax
-  int v34; // eax
-  int v35; // er9
-  int v36; // eax
-  int v37; // edx
-  int v38; // ecx
-  hkResultEnum v39; // eax
-  signed int v40; // edi
-  int v41; // edx
-  int v42; // eax
-  int v43; // eax
-  int v44; // er9
-  int v45; // er12
-  unsigned int edgeIdx; // edi
-  __int64 v47; // rdx
-  __int64 v48; // rcx
-  unsigned int curFaceKey; // [rsp+50h] [rbp-39h]
-  int curSection; // [rsp+54h] [rbp-35h]
-  hkVector4f curUp; // [rsp+60h] [rbp-29h]
-  hkaiGeneralAccessor accessor; // [rsp+70h] [rbp-19h]
-  unsigned int faceKey; // [rsp+E0h] [rbp+57h]
-  unsigned int edgeKey; // [rsp+E8h] [rbp+5Fh]
-  hkResult result; // [rsp+F8h] [rbp+6Fh]
+  unsigned int v30; // edx
+  int v31; // eax
+  int v32; // eax
+  int v33; // r9d
+  int v34; // edx
+  int m_edgeDataStriding; // ecx
+  int v36; // edi
+  unsigned int v37; // edx
+  int v38; // eax
+  int v39; // eax
+  int v40; // r9d
+  int v41; // r12d
+  int edgeIdx; // edi
+  __int64 v43; // rdx
+  __int64 v44; // rcx
+  unsigned int curFaceKey; // [rsp+50h] [rbp-39h] BYREF
+  int curSection[3]; // [rsp+54h] [rbp-35h] BYREF
+  hkVector4f curUp; // [rsp+60h] [rbp-29h] BYREF
+  hkaiGeneralAccessor accessor; // [rsp+70h] [rbp-19h] BYREF
+  unsigned int faceKey; // [rsp+E0h] [rbp+57h] BYREF
+  unsigned int edgeKey; // [rsp+E8h] [rbp+5Fh] BYREF
+  hkResult result; // [rsp+F8h] [rbp+6Fh] BYREF
 
   edgeKey = edgeIndex;
-  v7 = streamingCollection;
-  v8 = cutter;
-  v9 = 1;
-  v10 = isLeft;
-  v11 = this;
+  v6 = streamingCollection;
+  v7 = cutter;
+  v8 = 1;
   accessor.m_sectionInfo = streamingCollection->m_instances.m_data;
-  v12 = curTraversalState->m_faceEdge;
+  m_faceEdge = curTraversalState->m_faceEdge;
   accessor.m_currentSection = -1;
-  v13 = v12 + 1;
+  v12 = m_faceEdge + 1;
   accessor.m_accessor = 0i64;
-  v14 = edgeIndex;
-  if ( v13 > 1 )
-    v9 = v13;
-  if ( edgeIndex >= v9 )
+  v13 = edgeIndex;
+  if ( v12 > 1 )
+    v8 = v12;
+  if ( edgeIndex >= v8 )
   {
     do
     {
-      v15 = v14 - 1;
-      if ( !hkaiEdgePath::consecutiveEdgesShareVertex(v11, v14 - 1, v10, v7, v8) )
+      v14 = v13 - 1;
+      if ( !hkaiEdgePath::consecutiveEdgesShareVertex(this, v13 - 1, isLeft, v6, v7) )
         break;
-      --v14;
+      --v13;
     }
-    while ( v15 >= v9 );
+    while ( v14 >= v8 );
     edgeIndex = edgeKey;
   }
-  v16 = edgeIndex + 1;
-  v17 = edgeIndex + 1 == v11->m_edges.m_size;
-  if ( edgeIndex + 1 < v11->m_edges.m_size )
+  v15 = edgeIndex + 1;
+  v16 = edgeIndex + 1 == this->m_edges.m_size;
+  if ( edgeIndex + 1 < this->m_edges.m_size )
   {
     do
     {
-      if ( !hkaiEdgePath::consecutiveEdgesShareVertex(v11, v16 - 1, v10, v7, v8) )
+      if ( !hkaiEdgePath::consecutiveEdgesShareVertex(this, v15 - 1, isLeft, v6, v7) )
         break;
-      ++v16;
+      ++v15;
     }
-    while ( v16 < v11->m_edges.m_size );
-    v17 = v16 == v11->m_edges.m_size;
+    while ( v15 < this->m_edges.m_size );
+    v16 = v15 == this->m_edges.m_size;
   }
-  if ( v17 )
+  if ( v16 )
     return 1i64;
-  v19 = hkaiEdgePath::getEdge(v11, v16);
-  v20 = hkaiNavMeshCutter::resolvePersistentFaceKey(v8, &v19->m_edge.m_faceKey);
-  curFaceKey = v20;
-  if ( v20 == -1 )
+  Edge = hkaiEdgePath::getEdge(this, v15);
+  v19 = hkaiNavMeshCutter::resolvePersistentFaceKey(v7, &Edge->m_edge.m_faceKey);
+  curFaceKey = v19;
+  if ( v19 == -1 )
     return 2i64;
-  v21 = v16 - v14;
-  v22 = hkaiEdgePath::getEdge(v11, v14);
-  curUp.m_quad.m128_u64[0] = (unsigned __int64)v22;
-  v23 = hkaiEdgePathSteeringUtil::resolveEdgeToKey(v22, &accessor, v8, (unsigned int *)&streamingCollection);
-  curSection = v23;
-  if ( v23 == -1 )
+  v20 = v15 - v13;
+  curUp.m_quad.m128_u64[0] = (unsigned __int64)hkaiEdgePath::getEdge(this, v13);
+  v21 = hkaiEdgePathSteeringUtil::resolveEdgeToKey(
+          (hkaiEdgePath::Edge *)curUp.m_quad.m128_u64[0],
+          &accessor,
+          v7,
+          (unsigned int *)&streamingCollection);
+  curSection[0] = v21;
+  if ( v21 == -1 )
     return 2i64;
-  edgeKey = v23;
-  v24 = 0;
-  result.m_enum = (signed int)streamingCollection;
+  edgeKey = v21;
+  v22 = 0;
+  result.m_enum = (int)streamingCollection;
   faceKey = (unsigned int)streamingCollection;
-  v25 = v10 ? `anonymous namespace::moveCcwInFace(&accessor, &edgeKey, (unsigned int)streamingCollection) : `anonymous namespace::moveCwInFace(&accessor, &edgeKey, (unsigned int)streamingCollection);
-  if ( v25 )
+  if ( isLeft
+     ? `anonymous namespace::moveCcwInFace(&accessor, &edgeKey, (unsigned int)streamingCollection)
+     : `anonymous namespace::moveCwInFace(&accessor, &edgeKey, (unsigned int)streamingCollection) )
+  {
     return 2i64;
-  if ( result.m_enum != v20 )
+  }
+  if ( result.m_enum != v19 )
   {
     while ( 1 )
     {
-      ++v24;
-      v26 = v10 ? `anonymous namespace::moveCwAroundVertex(&accessor, &edgeKey, &faceKey) : `anonymous namespace::moveCcwAroundVertex(
-                                                                                               &accessor,
-                                                                                               &edgeKey,
-                                                                                               &faceKey);
-      if ( v26 )
+      ++v22;
+      if ( isLeft
+         ? `anonymous namespace::moveCwAroundVertex(&accessor, &edgeKey, &faceKey)
+         : `anonymous namespace::moveCcwAroundVertex(&accessor, &edgeKey, &faceKey) )
+      {
         return 2i64;
-      v27 = (signed int)streamingCollection;
+      }
+      m_enum = (int)streamingCollection;
       if ( faceKey == (_DWORD)streamingCollection )
         return 2i64;
       if ( faceKey == curFaceKey )
         goto LABEL_29;
     }
   }
-  v27 = (signed int)streamingCollection;
+  m_enum = (int)streamingCollection;
 LABEL_29:
-  v28 = *(__m128i *)(curUp.m_quad.m128_u64[0] + 32);
-  if ( v24 < v21 )
+  v26 = *(__m128 *)(curUp.m_quad.m128_u64[0] + 32);
+  if ( v22 < v20 )
   {
-    v29 = v21 - v24;
-    hkArrayBase<hkaiEdgePath::Edge>::_spliceInto(
-      (hkArrayBase<hkaiEdgePath::Edge> *)&v11->m_edges.m_data,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      v14,
-      v29,
-      0i64,
-      0);
+    v27 = v20 - v22;
+    hkArrayBase<hkaiEdgePath::Edge>::_spliceInto(&this->m_edges, &hkContainerHeapAllocator::s_alloc, v13, v27, 0i64, 0);
     hkArrayBase<unsigned int>::_spliceInto(
-      (hkArrayBase<unsigned int> *)&v11->m_edgeData,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      v14 * v11->m_edgeDataStriding,
-      v29 * v11->m_edgeDataStriding,
+      (hkArrayBase<unsigned int> *)&this->m_edgeData,
+      &hkContainerHeapAllocator::s_alloc,
+      v13 * this->m_edgeDataStriding,
+      v27 * this->m_edgeDataStriding,
       0i64,
       0);
-LABEL_45:
-    v27 = (signed int)streamingCollection;
-    goto LABEL_46;
+LABEL_41:
+    m_enum = (int)streamingCollection;
+    goto LABEL_42;
   }
-  if ( v24 > v21 )
+  if ( v22 > v20 )
   {
-    v30 = v11->m_edges.m_size;
-    edgeKey = v24 - v21;
-    v31 = v30 + v24 - v21;
-    v32 = v30 - v14;
-    v33 = v11->m_edges.m_capacityAndFlags & 0x3FFFFFFF;
-    faceKey = v32;
-    if ( v31 > v33 )
+    m_size = this->m_edges.m_size;
+    edgeKey = v22 - v20;
+    v29 = m_size + v22 - v20;
+    v30 = m_size - v13;
+    v31 = this->m_edges.m_capacityAndFlags & 0x3FFFFFFF;
+    faceKey = v30;
+    if ( v29 > v31 )
     {
-      if ( v33 >= v31 )
-      {
-        result.m_enum = 0;
-      }
-      else
-      {
-        v34 = 2 * v33;
-        v35 = v31;
-        if ( v31 < v34 )
-          v35 = v34;
-        hkArrayUtil::_reserve(
-          &result,
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-          &v11->m_edges,
-          v35,
-          144);
-        v32 = faceKey;
-      }
+      v32 = 2 * v31;
+      v33 = v29;
+      if ( v29 < v32 )
+        v33 = v32;
+      hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, &this->m_edges, v33, 144);
+      v30 = faceKey;
+    }
+    hkMemUtil::memMove(&this->m_edges.m_data[v13 + (__int64)(int)edgeKey], &this->m_edges.m_data[v13], 144 * v30);
+    this->m_edges.m_size = v29;
+    v34 = this->m_edgeData.m_size;
+    m_edgeDataStriding = this->m_edgeDataStriding;
+    result.m_enum = v13 * m_edgeDataStriding;
+    curFaceKey = edgeKey * m_edgeDataStriding;
+    v36 = v34 + edgeKey * m_edgeDataStriding;
+    v37 = v34 - v13 * m_edgeDataStriding;
+    v38 = this->m_edgeData.m_capacityAndFlags & 0x3FFFFFFF;
+    edgeKey = v37;
+    if ( v36 > v38 )
+    {
+      v39 = 2 * v38;
+      v40 = v36;
+      if ( v36 < v39 )
+        v40 = v39;
+      hkArrayUtil::_reserve((hkResult *)&faceKey, &hkContainerHeapAllocator::s_alloc, &this->m_edgeData, v40, 4);
+      v37 = edgeKey;
     }
     hkMemUtil::memMove(
-      &v11->m_edges.m_data[v14 + (signed __int64)(signed int)edgeKey],
-      &v11->m_edges.m_data[v14],
-      144 * v32);
-    v11->m_edges.m_size = v31;
-    v36 = v11->m_edgeDataStriding;
-    v37 = v11->m_edgeData.m_size;
-    v38 = v36;
-    v39 = v14 * v36;
-    result.m_enum = v39;
-    curFaceKey = edgeKey * v38;
-    v40 = v37 + edgeKey * v38;
-    v41 = v37 - v39;
-    v42 = v11->m_edgeData.m_capacityAndFlags & 0x3FFFFFFF;
-    edgeKey = v41;
-    if ( v40 > v42 )
-    {
-      if ( v42 >= v40 )
-      {
-        faceKey = 0;
-      }
-      else
-      {
-        v43 = 2 * v42;
-        v44 = v40;
-        if ( v40 < v43 )
-          v44 = v43;
-        hkArrayUtil::_reserve(
-          (hkResult *)&faceKey,
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-          &v11->m_edgeData,
-          v44,
-          4);
-        v41 = edgeKey;
-      }
-    }
-    hkMemUtil::memMove(
-      &v11->m_edgeData.m_data[(signed int)result.m_enum + (signed __int64)(signed int)curFaceKey],
-      &v11->m_edgeData.m_data[result.m_enum],
-      4 * v41);
-    v11->m_edgeData.m_size = v40;
-    goto LABEL_45;
+      &this->m_edgeData.m_data[(int)result.m_enum + (__int64)(int)curFaceKey],
+      &this->m_edgeData.m_data[result.m_enum],
+      4 * v37);
+    this->m_edgeData.m_size = v36;
+    goto LABEL_41;
   }
-LABEL_46:
-  _mm_store_si128((__m128i *)&curUp, v28);
-  faceKey = curSection;
-  result.m_enum = v27;
-  curSection = (unsigned int)v27 >> 22;
+LABEL_42:
+  curUp.m_quad = v26;
+  faceKey = curSection[0];
+  result.m_enum = m_enum;
+  curSection[0] = (unsigned int)m_enum >> 22;
   LOBYTE(edgeKey) = accessor.m_accessor->m_originalMesh.m_pntr->m_flags.m_storage & 1;
-  if ( v10 )
-    `anonymous namespace::moveCcwInFace(&accessor, &faceKey, v27);
+  if ( isLeft )
+    `anonymous namespace::moveCcwInFace(&accessor, &faceKey, m_enum);
   else
-    `anonymous namespace::moveCwInFace(&accessor, &faceKey, v27);
-  v45 = v14 + v24;
-  edgeIdx = v14;
-  if ( v14 != v45 )
+    `anonymous namespace::moveCwInFace(&accessor, &faceKey, m_enum);
+  v41 = v13 + v22;
+  edgeIdx = v13;
+  if ( v13 != v41 )
   {
     while ( 1 )
     {
-      curFaceKey = v27;
-      hkaiEdgePath::buildEdge(
-        v11,
-        &accessor,
-        v8,
-        faceKey,
-        a5,
-        &curUp,
-        &curFaceKey,
-        &curSection,
-        (bool *)&edgeKey,
-        edgeIdx);
-      if ( v10 )
+      curFaceKey = m_enum;
+      hkaiEdgePath::buildEdge(this, &accessor, v7, faceKey, &curUp, &curFaceKey, curSection, (bool *)&edgeKey, edgeIdx);
+      if ( isLeft )
         `anonymous namespace::moveCwAroundVertex(&accessor, &faceKey, (unsigned int *)&result);
       else
         `anonymous namespace::moveCcwAroundVertex(&accessor, &faceKey, (unsigned int *)&result);
-      if ( ++edgeIdx == v45 )
+      if ( ++edgeIdx == v41 )
         break;
-      v27 = result.m_enum;
+      m_enum = result.m_enum;
     }
   }
-  v47 = v14;
-  if ( v14 )
+  v43 = v13;
+  if ( v13 )
   {
-    v48 = 0i64;
+    v44 = 0i64;
     do
     {
-      ++v48;
-      *((_WORD *)&v11->m_edges.m_data[v48] - 10) = 0;
-      *((_WORD *)&v11->m_edges.m_data[v48] - 9) = 0;
-      --v47;
+      this->m_edges.m_data[v44++].m_leftFollowingCorner.m_data = 0;
+      this->m_edges.m_data[v44 - 1].m_rightFollowingCorner.m_data = 0;
+      --v43;
     }
-    while ( v47 );
+    while ( v43 );
   }
   return 0i64;
 }
 
 // File Line: 858
 // RVA: 0xBEB840
-void __usercall hkaiEdgePath::buildEdge(hkaiEdgePath *this@<rcx>, hkaiGeneralAccessor *accessor@<rdx>, hkaiNavMeshCutter *cutter@<r8>, unsigned int edgeKey@<r9d>, __m128 a5@<xmm13>, hkVector4f *curUp, unsigned int *curFaceKey, int *curSection, bool *curSectionIsWC, unsigned int edgeIdx)
+void __fastcall hkaiEdgePath::buildEdge(
+        hkaiEdgePath *this,
+        hkaiGeneralAccessor *accessor,
+        hkaiNavMeshCutter *cutter,
+        unsigned int edgeKey,
+        hkVector4f *curUp,
+        unsigned int *curFaceKey,
+        int *curSection,
+        bool *curSectionIsWC,
+        int edgeIdx)
 {
-  hkArray<int,hkContainerHeapAllocator> **v10; // rsi
-  unsigned int v11; // ebx
+  __m128 v9; // xmm13
   __m128 v12; // xmm7
   hkaiEdgePath::Edge *v13; // rdi
   __m128 v14; // xmm8
   __m128 v15; // xmm12
-  hkaiNavMesh::Edge *v16; // rax
-  hkArray<int,hkContainerHeapAllocator> *v17; // rcx
+  hkaiNavMesh::Edge *EdgeFromPacked; // rax
+  hkaiNavMeshInstance *m_accessor; // rcx
   hkaiNavMesh::Edge *v18; // r14
-  unsigned int v19; // edx
+  unsigned int m_oppositeEdge; // edx
   __m128 v20; // xmm13
   char v21; // r8
-  int v22; // er12
+  int m_runtimeId; // r12d
   unsigned int v23; // eax
-  int v24; // er15
+  int v24; // r15d
   bool v25; // zf
-  unsigned int v26; // edx
+  unsigned int m_oppositeFace; // edx
   unsigned int v27; // eax
-  int v28; // er13
-  __int64 v29; // rax
-  signed int v30; // edx
-  __m128 *v31; // rax
+  int v28; // r13d
+  __int64 m_a; // rax
+  int m_numOriginalVertices; // edx
+  __m128 *p_m_quad; // rax
   __m128 v32; // xmm9
-  __int64 v33; // rax
+  __int64 m_b; // rax
   __m128 *v34; // rax
   __m128 v35; // xmm10
   unsigned int v36; // edx
-  hkaiNavMesh::Face *v37; // rax
+  hkaiNavMesh::Face *FaceFromPacked; // rax
   int index; // ebx
-  unsigned int v39; // ST40_4
-  __m128 v40; // xmm6
-  __m128 v41; // xmm2
-  __m128 v42; // xmm6
-  __m128 v43; // xmm2
-  __m128 v44; // xmm0
-  __m128 v45; // xmm13
-  __m128 v46; // xmm1
-  __m128 v47; // xmm1
+  __m128 v39; // xmm6
+  __m128 v40; // xmm2
+  __m128 v41; // xmm6
+  __m128 v42; // xmm2
+  __m128 v43; // xmm0
+  __m128 v44; // xmm1
+  __m128 v45; // xmm1
+  __m128 v46; // xmm11
+  __m128 v47; // xmm6
   __m128 v48; // xmm11
   __m128 v49; // xmm6
   __m128 v50; // xmm13
@@ -1394,159 +1310,148 @@ void __usercall hkaiEdgePath::buildEdge(hkaiEdgePath *this@<rcx>, hkaiGeneralAcc
   int *v67; // rax
   int striding; // edx
   char v69; // al
-  char v70; // bl
+  bool v70; // bl
   hkVector4f *v71; // r14
-  hkArray<int,hkContainerHeapAllocator> *v72; // rbx
+  hkaiNavMeshInstance *v72; // rbx
   hkaiNavMesh::Edge *v73; // rax
-  signed int v74; // edx
+  int v74; // edx
   __int64 v75; // rcx
   __m128 *v76; // rcx
   __int64 v77; // rax
-  int *v78; // rax
+  __int128 *v78; // rax
   __int128 v79; // xmm0
   hkVector4f v80; // xmm0
+  unsigned int startFaceKeya; // [rsp+40h] [rbp-C0h]
   unsigned int startFaceKey; // [rsp+40h] [rbp-C0h]
-  hkSimdFloat32 result; // [rsp+50h] [rbp-B0h]
-  void *dst[2]; // [rsp+60h] [rbp-A0h]
-  hkSimdFloat32 maxClearance; // [rsp+70h] [rbp-90h]
-  int faceIndex[4]; // [rsp+80h] [rbp-80h]
-  hkVector4f leftPoint; // [rsp+90h] [rbp-70h]
-  hkVector4f curRightPoint; // [rsp+A0h] [rbp-60h]
-  hkaiEdgePath *v88; // [rsp+1A0h] [rbp+A0h]
-  int v89; // [rsp+1A8h] [rbp+A8h]
-  hkaiNavMeshCutter *cuttera; // [rsp+1B0h] [rbp+B0h]
-  unsigned int edgeKeya; // [rsp+1B8h] [rbp+B8h]
+  hkSimdFloat32 result; // [rsp+50h] [rbp-B0h] BYREF
+  void *dst[2]; // [rsp+60h] [rbp-A0h] BYREF
+  hkSimdFloat32 maxClearance; // [rsp+70h] [rbp-90h] BYREF
+  int faceIndex[4]; // [rsp+80h] [rbp-80h] BYREF
+  hkVector4f leftPoint; // [rsp+90h] [rbp-70h] BYREF
+  hkVector4f curRightPoint; // [rsp+A0h] [rbp-60h] BYREF
+  unsigned int v90; // [rsp+1A8h] [rbp+A8h]
   bool edgeKeyb; // [rsp+1B8h] [rbp+B8h]
   unsigned int edgeIdxa; // [rsp+1E0h] [rbp+E0h]
   unsigned int edgeIdxc; // [rsp+1E0h] [rbp+E0h]
+  unsigned int edgeIdxd; // [rsp+1E0h] [rbp+E0h]
+  unsigned int edgeIdxe; // [rsp+1E0h] [rbp+E0h]
   bool edgeIdxb; // [rsp+1E0h] [rbp+E0h]
 
-  edgeKeya = edgeKey;
-  cuttera = cutter;
-  v88 = this;
-  v10 = (hkArray<int,hkContainerHeapAllocator> **)accessor;
-  v11 = edgeKey;
   v12 = _mm_shuffle_ps((__m128)LODWORD(this->m_leftTurnRadius), (__m128)LODWORD(this->m_leftTurnRadius), 0);
   v13 = &this->m_edges.m_data[edgeIdx];
   v14 = _mm_shuffle_ps((__m128)LODWORD(this->m_rightTurnRadius), (__m128)LODWORD(this->m_rightTurnRadius), 0);
   v15 = _mm_shuffle_ps((__m128)LODWORD(this->m_characterRadius), (__m128)LODWORD(this->m_characterRadius), 0);
   dst[0] = hkaiEdgePath::getEdgeDataPtr(this, edgeIdx);
-  v16 = hkaiGeneralAccessor::getEdgeFromPacked((hkaiGeneralAccessor *)v10, v11);
-  v17 = *v10;
-  v18 = v16;
-  v89 = v11 & 0x3FFFFF;
-  maxClearance.m_real = _mm_shuffle_ps((__m128)LODWORD((*v10)[29].m_data), (__m128)LODWORD((*v10)[29].m_data), 0);
-  v19 = v16->m_oppositeEdge;
-  a5.m128_f32[0] = *(float *)&v17[29].m_data * 0.99000001;
-  v20 = _mm_shuffle_ps(a5, a5, 0);
-  v21 = v16->m_flags.m_storage & 0x40;
+  EdgeFromPacked = hkaiGeneralAccessor::getEdgeFromPacked(accessor, edgeKey);
+  m_accessor = accessor->m_accessor;
+  v18 = EdgeFromPacked;
+  v90 = edgeKey & 0x3FFFFF;
+  maxClearance.m_real = _mm_shuffle_ps(
+                          (__m128)LODWORD(accessor->m_accessor->m_maxGlobalClearance),
+                          (__m128)LODWORD(accessor->m_accessor->m_maxGlobalClearance),
+                          0);
+  m_oppositeEdge = EdgeFromPacked->m_oppositeEdge;
+  v9.m128_f32[0] = m_accessor->m_maxGlobalClearance * 0.99000001;
+  v20 = _mm_shuffle_ps(v9, v9, 0);
+  v21 = EdgeFromPacked->m_flags.m_storage & 0x40;
   if ( v21 )
-    v22 = v19 >> 22;
+    m_runtimeId = m_oppositeEdge >> 22;
   else
-    v22 = v17[29].m_size;
-  if ( v19 == -1 )
-    v22 = -1;
+    m_runtimeId = m_accessor->m_runtimeId;
+  if ( m_oppositeEdge == -1 )
+    m_runtimeId = -1;
   if ( v21 )
-    v23 = v19 & 0xFFC00000;
+    v23 = m_oppositeEdge & 0xFFC00000;
   else
-    v23 = v17[29].m_size << 22;
-  v24 = v23 | v19 & 0x3FFFFF;
-  v25 = v19 == -1;
-  v26 = v18->m_oppositeFace;
+    v23 = m_accessor->m_runtimeId << 22;
+  v24 = v23 | m_oppositeEdge & 0x3FFFFF;
+  v25 = m_oppositeEdge == -1;
+  m_oppositeFace = v18->m_oppositeFace;
   if ( v25 )
     v24 = -1;
   if ( v21 )
-    v27 = v26 & 0xFFC00000;
+    v27 = m_oppositeFace & 0xFFC00000;
   else
-    v27 = v17[29].m_size << 22;
-  v28 = v27 | v26 & 0x3FFFFF;
-  v29 = v18->m_a;
-  v25 = v26 == -1;
-  v30 = v17[3].m_size;
+    v27 = m_accessor->m_runtimeId << 22;
+  v28 = v27 | m_oppositeFace & 0x3FFFFF;
+  m_a = v18->m_a;
+  v25 = m_oppositeFace == -1;
+  m_numOriginalVertices = m_accessor->m_numOriginalVertices;
   if ( v25 )
     v28 = -1;
-  if ( (signed int)v29 >= v30 )
-    v31 = (__m128 *)&v17[19].m_data[4 * ((signed int)v29 - v30)];
+  if ( (int)m_a >= m_numOriginalVertices )
+    p_m_quad = &m_accessor->m_ownedVertices.m_data[(int)m_a - m_numOriginalVertices].m_quad;
   else
-    v31 = (__m128 *)&v17[3].m_data[4 * v29];
-  v32 = *v31;
-  v33 = v18->m_b;
-  if ( (signed int)v33 >= v30 )
-    v34 = (__m128 *)&v17[19].m_data[4 * ((signed int)v33 - v30)];
+    p_m_quad = &m_accessor->m_originalVertices[m_a].m_quad;
+  v32 = *p_m_quad;
+  m_b = v18->m_b;
+  if ( (int)m_b >= m_numOriginalVertices )
+    v34 = &m_accessor->m_ownedVertices.m_data[(int)m_b - m_numOriginalVertices].m_quad;
   else
-    v34 = (__m128 *)&v17[3].m_data[4 * v33];
+    v34 = &m_accessor->m_originalVertices[m_b].m_quad;
   v35 = *v34;
   v36 = *curFaceKey;
   curRightPoint.m_quad = v32;
   leftPoint.m_quad = v35;
-  v37 = hkaiGeneralAccessor::getFaceFromPacked((hkaiGeneralAccessor *)v10, v36);
+  FaceFromPacked = hkaiGeneralAccessor::getFaceFromPacked(accessor, v36);
   edgeIdxa = *curFaceKey;
-  index = v89 + 1;
-  if ( v89 + 1 >= v37->m_startEdgeIndex + v37->m_numEdges )
-    index = v37->m_startEdgeIndex;
-  hkaiGeneralAccessor::setSection((hkaiGeneralAccessor *)v10, edgeKeya >> 22);
+  index = v90 + 1;
+  if ( (int)(v90 + 1) >= FaceFromPacked->m_startEdgeIndex + FaceFromPacked->m_numEdges )
+    index = FaceFromPacked->m_startEdgeIndex;
+  hkaiGeneralAccessor::setSection(accessor, edgeKey >> 22);
   result.m_real.m128_u64[0] = (unsigned __int64)hkaiNavMeshInstance_get_hkaiNavMesh::Edge__7(
-                                                  (hkaiNavMesh::Edge *)(*v10)[2].m_data,
-                                                  (*v10)[2].m_size,
-                                                  (hkArray<hkaiNavMesh::Edge,hkContainerHeapAllocator> *)&(*v10)[16],
-                                                  (hkArray<hkaiNavMesh::Edge,hkContainerHeapAllocator> *)&(*v10)[18],
-                                                  *v10 + 13,
+                                                  accessor->m_accessor->m_originalEdges,
+                                                  accessor->m_accessor->m_numOriginalEdges,
+                                                  &accessor->m_accessor->m_instancedEdges,
+                                                  &accessor->m_accessor->m_ownedEdges,
+                                                  &accessor->m_accessor->m_edgeMap,
                                                   index);
-  hkaiGeneralAccessor::setSection((hkaiGeneralAccessor *)v10, edgeIdxa >> 22);
-  v39 = *((signed __int16 *)(*v10)[27].m_data + *(signed int *)result.m_real.m128_u64[0]) << 16;
-  v40 = _mm_shuffle_ps((__m128)v39, (__m128)v39, 0);
-  if ( v40.m128_f32[0] > maxClearance.m_real.m128_f32[0] )
+  hkaiGeneralAccessor::setSection(accessor, edgeIdxa >> 22);
+  startFaceKeya = accessor->m_accessor->m_globalClearanceCache.m_data[*(_DWORD *)result.m_real.m128_u64[0]].m_value << 16;
+  v39 = _mm_shuffle_ps((__m128)startFaceKeya, (__m128)startFaceKeya, 0);
+  if ( v39.m128_f32[0] > maxClearance.m_real.m128_f32[0] )
   {
     hkaiNavMeshTraversalUtils::computeGlobalClearance(
       &result,
-      (hkaiGeneralAccessor *)v10,
+      accessor,
       edgeIdxa,
       (hkaiNavMesh::Edge *)result.m_real.m128_u64[0],
       curUp,
       &maxClearance);
-    v40 = _mm_shuffle_ps(
-            (__m128)(unsigned int)((signed __int16)(COERCE_UNSIGNED_INT(result.m_real.m128_f32[0] * 1.0039062) >> 16) << 16),
-            (__m128)(unsigned int)((signed __int16)(COERCE_UNSIGNED_INT(result.m_real.m128_f32[0] * 1.0039062) >> 16) << 16),
-            0);
+    edgeIdxc = (__int16)(COERCE_INT(result.m_real.m128_f32[0] * 1.0039062) >> 16) << 16;
+    v39 = _mm_shuffle_ps((__m128)edgeIdxc, (__m128)edgeIdxc, 0);
   }
   startFaceKey = *curFaceKey;
-  hkaiGeneralAccessor::setSection((hkaiGeneralAccessor *)v10, *curFaceKey >> 22);
-  edgeIdxc = *((signed __int16 *)(*v10)[27].m_data + v18->m_a) << 16;
-  v41 = _mm_shuffle_ps((__m128)edgeIdxc, (__m128)edgeIdxc, 0);
-  if ( v41.m128_f32[0] > maxClearance.m_real.m128_f32[0] )
+  hkaiGeneralAccessor::setSection(accessor, *curFaceKey >> 22);
+  edgeIdxd = accessor->m_accessor->m_globalClearanceCache.m_data[v18->m_a].m_value << 16;
+  v40 = _mm_shuffle_ps((__m128)edgeIdxd, (__m128)edgeIdxd, 0);
+  if ( v40.m128_f32[0] > maxClearance.m_real.m128_f32[0] )
   {
-    hkaiNavMeshTraversalUtils::computeGlobalClearance(
-      &result,
-      (hkaiGeneralAccessor *)v10,
-      startFaceKey,
-      v18,
-      curUp,
-      &maxClearance);
-    v41 = _mm_shuffle_ps(
-            (__m128)(unsigned int)((signed __int16)(COERCE_UNSIGNED_INT(result.m_real.m128_f32[0] * 1.0039062) >> 16) << 16),
-            (__m128)(unsigned int)((signed __int16)(COERCE_UNSIGNED_INT(result.m_real.m128_f32[0] * 1.0039062) >> 16) << 16),
-            0);
+    hkaiNavMeshTraversalUtils::computeGlobalClearance(&result, accessor, startFaceKey, v18, curUp, &maxClearance);
+    edgeIdxe = (__int16)(COERCE_INT(result.m_real.m128_f32[0] * 1.0039062) >> 16) << 16;
+    v40 = _mm_shuffle_ps((__m128)edgeIdxe, (__m128)edgeIdxe, 0);
   }
+  v41 = _mm_max_ps(v39, aabbOut.m_quad);
   v42 = _mm_max_ps(v40, aabbOut.m_quad);
-  v43 = _mm_max_ps(v41, aabbOut.m_quad);
-  v44 = _mm_cmpleps(v20, v42);
-  v45 = _mm_cmpleps(v20, v43);
-  v46 = _mm_sub_ps(v35, v32);
-  v47 = _mm_mul_ps(v46, v46);
-  v48 = _mm_or_ps(_mm_andnot_ps(v44, v42), _mm_and_ps(v44, (__m128)xmmword_141A712B0));
-  v49 = _mm_or_ps(_mm_andnot_ps(v45, v43), _mm_and_ps(v45, (__m128)xmmword_141A712B0));
+  v43 = _mm_cmple_ps(v20, v41);
+  v44 = _mm_sub_ps(v35, v32);
+  v45 = _mm_mul_ps(v44, v44);
+  v46 = _mm_andnot_ps(v43, v41);
+  v47 = _mm_cmple_ps(v20, v42);
+  v48 = _mm_or_ps(v46, _mm_and_ps(v43, (__m128)xmmword_141A712B0));
+  v49 = _mm_or_ps(_mm_andnot_ps(v47, v42), _mm_and_ps(v47, (__m128)xmmword_141A712B0));
   v50 = _mm_max_ps(_mm_sub_ps(v15, v48), aabbOut.m_quad);
-  v51 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v47, v47, 85), _mm_shuffle_ps(v47, v47, 0)), _mm_shuffle_ps(v47, v47, 170));
+  v51 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v45, v45, 85), _mm_shuffle_ps(v45, v45, 0)), _mm_shuffle_ps(v45, v45, 170));
   v52 = _mm_max_ps(_mm_sub_ps(v15, v49), aabbOut.m_quad);
   v53 = _mm_rsqrt_ps(v51);
   v54 = _mm_andnot_ps(
-          _mm_cmpleps(v51, (__m128)0i64),
+          _mm_cmple_ps(v51, (__m128)0i64),
           _mm_mul_ps(
             _mm_mul_ps(
               _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v51, v53), v53)),
               _mm_mul_ps(*(__m128 *)_xmm, v53)),
             v51));
-  if ( v18->m_flags.m_storage & 0x10 )
+  if ( (v18->m_flags.m_storage & 0x10) != 0 )
   {
     v55 = 0i64;
     v56 = 0i64;
@@ -1590,48 +1495,48 @@ void __usercall hkaiEdgePath::buildEdge(hkaiEdgePath *this@<rcx>, hkaiGeneralAcc
   v13->m_left.m_quad = _mm_shuffle_ps(v35, _mm_unpackhi_ps(v35, _mm_sub_ps((__m128)0i64, v55)), 196);
   v13->m_right.m_quad = _mm_shuffle_ps(v32, _mm_unpackhi_ps(v32, v56), 196);
   v13->m_up = (hkVector4f)curUp->m_quad;
-  if ( v18->m_flags.m_storage & 0x10 )
+  if ( (v18->m_flags.m_storage & 0x10) != 0 )
   {
     v13->m_edge.m_edgeOffset = -1;
-    hkaiNavMeshCutter::makePersistentFaceKey(cuttera, *curFaceKey, &v13->m_edge.m_faceKey);
+    hkaiNavMeshCutter::makePersistentFaceKey(cutter, *curFaceKey, &v13->m_edge.m_faceKey);
   }
   else
   {
-    hkaiNavMeshCutter::makePersistentEdgeKey(cuttera, edgeKeya, *curFaceKey, &v13->m_edge);
+    hkaiNavMeshCutter::makePersistentEdgeKey(cutter, edgeKey, *curFaceKey, &v13->m_edge);
   }
   v13->m_flags.m_storage = v18->m_flags.m_storage;
   v67 = 0i64;
   *(_DWORD *)&v13->m_leftFollowingCorner.m_data = 0;
-  striding = (*v10)[5].m_size;
+  striding = accessor->m_accessor->m_edgeDataStriding;
   if ( striding )
     v67 = hkaiNavMeshInstance_getWithStriding_int__2(
-            (*v10)[5].m_data,
-            (*v10)[2].m_size,
-            *v10 + 23,
-            *v10 + 25,
-            *v10 + 13,
-            v89,
+            accessor->m_accessor->m_originalEdgeData,
+            accessor->m_accessor->m_numOriginalEdges,
+            &accessor->m_accessor->m_instancedEdgeData,
+            &accessor->m_accessor->m_ownedEdgeData,
+            &accessor->m_accessor->m_edgeMap,
+            v90,
             striding);
-  hkString::memCpy(dst[0], v67, 4 * v88->m_edgeDataStriding);
-  edgeIdxb = v22 != *curSection;
-  if ( edgeIdxb )
-  {
-    hkaiGeneralAccessor::setSection((hkaiGeneralAccessor *)v10, v22);
-    v69 = (*v10)[6].m_data[30] & 1;
-  }
-  else
+  hkString::memCpy(dst[0], v67, 4 * this->m_edgeDataStriding);
+  edgeIdxb = m_runtimeId != *curSection;
+  if ( m_runtimeId == *curSection )
   {
     v69 = *curSectionIsWC;
   }
+  else
+  {
+    hkaiGeneralAccessor::setSection(accessor, m_runtimeId);
+    v69 = accessor->m_accessor->m_originalMesh.m_pntr->m_flags.m_storage & 1;
+  }
   edgeKeyb = v69;
-  v70 = ((unsigned __int8)v18->m_flags.m_storage >> 4) & 1;
+  v70 = (v18->m_flags.m_storage & 0x10) != 0;
   if ( *curSectionIsWC || v69 )
   {
     hkaiNavMeshUtils::calcFaceNormal<hkaiNavMeshInstance>(
       (hkaiNavMeshUtils *)dst,
-      (hkSimdFloat32 *)*v10,
+      (hkSimdFloat32 *)accessor->m_accessor,
       (hkaiNavMeshInstance *)(v28 & 0x3FFFFF),
-      (__int64)faceIndex);
+      (__m128 *)faceIndex);
     v71 = curUp;
     v69 = 1;
   }
@@ -1642,26 +1547,26 @@ void __usercall hkaiEdgePath::buildEdge(hkaiEdgePath *this@<rcx>, hkaiGeneralAcc
   }
   if ( v70 || edgeIdxb )
   {
-    v72 = *v10;
+    v72 = accessor->m_accessor;
     v73 = hkaiNavMeshInstance_get_hkaiNavMesh::Edge__7(
-            (hkaiNavMesh::Edge *)(*v10)[2].m_data,
-            (*v10)[2].m_size,
-            (hkArray<hkaiNavMesh::Edge,hkContainerHeapAllocator> *)&(*v10)[16],
-            (hkArray<hkaiNavMesh::Edge,hkContainerHeapAllocator> *)&(*v10)[18],
-            *v10 + 13,
+            accessor->m_accessor->m_originalEdges,
+            accessor->m_accessor->m_numOriginalEdges,
+            &accessor->m_accessor->m_instancedEdges,
+            &accessor->m_accessor->m_ownedEdges,
+            &accessor->m_accessor->m_edgeMap,
             v24 & 0x3FFFFF);
-    v74 = v72[3].m_size;
+    v74 = v72->m_numOriginalVertices;
     v75 = v73->m_a;
-    if ( (signed int)v75 >= v74 )
-      v76 = (__m128 *)&v72[19].m_data[4 * ((signed int)v75 - v74)];
+    if ( (int)v75 >= v74 )
+      v76 = &v72->m_ownedVertices.m_data[(int)v75 - v74].m_quad;
     else
-      v76 = (__m128 *)&v72[3].m_data[4 * v75];
+      v76 = &v72->m_originalVertices[v75].m_quad;
     v77 = v73->m_b;
-    if ( (signed int)v77 >= v74 )
-      v78 = &v72[19].m_data[4 * ((signed int)v77 - v74)];
+    if ( (int)v77 >= v74 )
+      v78 = (__int128 *)&v72->m_ownedVertices.m_data[(int)v77 - v74];
     else
-      v78 = &v72[3].m_data[4 * v77];
-    v79 = *(_OWORD *)v78;
+      v78 = (__int128 *)&v72->m_originalVertices[v77];
+    v79 = *v78;
     result.m_real = *v76;
     *(_OWORD *)dst = v79;
     hkaiEdgePath::calcFollowingTransform(
@@ -1685,7 +1590,7 @@ void __usercall hkaiEdgePath::buildEdge(hkaiEdgePath *this@<rcx>, hkaiGeneralAcc
     v13->m_followingTransform.m_col3 = (hkVector4f)qi.m_vec.m_quad;
   }
   v80.m_quad = *(__m128 *)faceIndex;
-  *curSection = v22;
+  *curSection = m_runtimeId;
   *curFaceKey = v28;
   *curSectionIsWC = edgeKeyb;
   *v71 = (hkVector4f)v80.m_quad;
@@ -1709,12 +1614,17 @@ int *__fastcall hkaiEdgePath::getEdgeDataPtr(hkaiEdgePath *this, int edgeIdx)
 // RVA: 0xBEB1D0
 void __fastcall hkaiEdgePath::setFollowingCornerInfoInvalid(hkaiEdgePath *this, int startEdge, bool startIsLeft)
 {
-  hkaiEdgePath::getFollowingCornerInfoPacked(this, startEdge, startIsLeft)->m_data = -32768;
+  hkaiEdgePath::getFollowingCornerInfoPacked(this, startEdge, startIsLeft)->m_data = 0x8000;
 }
 
 // File Line: 1050
 // RVA: 0xBEB1F0
-void __fastcall hkaiEdgePath::setFollowingCornerInfoValid(hkaiEdgePath *this, int startEdge, bool startIsLeft, int followingCornerEdge, bool followingCornerIsLeft)
+void __fastcall hkaiEdgePath::setFollowingCornerInfoValid(
+        hkaiEdgePath *this,
+        int startEdge,
+        bool startIsLeft,
+        __int16 followingCornerEdge,
+        bool followingCornerIsLeft)
 {
   hkaiEdgePath::getFollowingCornerInfoPacked(this, startEdge, startIsLeft)->m_data = (followingCornerEdge - startEdge) | ((followingCornerIsLeft | 6) << 13);
 }
@@ -1728,50 +1638,53 @@ __int64 __fastcall hkaiEdgePath::hasFollowingCornerInfo(hkaiEdgePath *this, int 
 
 // File Line: 1061
 // RVA: 0xBEB260
-signed __int64 __fastcall hkaiEdgePath::getFollowingCornerInfo(hkaiEdgePath *this, int startEdge, bool startIsLeft, int *followingCornerEdgeOut, bool *followingCornerIsLeftOut)
+__int64 __fastcall hkaiEdgePath::getFollowingCornerInfo(
+        hkaiEdgePath *this,
+        int startEdge,
+        bool startIsLeft,
+        int *followingCornerEdgeOut,
+        bool *followingCornerIsLeftOut)
 {
-  int *v5; // rdi
-  int v6; // ebx
-  hkaiEdgePath::FollowingCornerInfo *v7; // rax
+  hkaiEdgePath::FollowingCornerInfo *FollowingCornerInfoPacked; // rax
 
-  v5 = followingCornerEdgeOut;
-  v6 = startEdge;
-  v7 = hkaiEdgePath::getFollowingCornerInfoPacked(this, startEdge, startIsLeft);
-  if ( !(v7->m_data & 0x4000) )
+  FollowingCornerInfoPacked = hkaiEdgePath::getFollowingCornerInfoPacked(this, startEdge, startIsLeft);
+  if ( (FollowingCornerInfoPacked->m_data & 0x4000) == 0 )
     return 0i64;
-  *v5 = v6 + (v7->m_data & 0x1FFF);
-  *followingCornerIsLeftOut = (v7->m_data >> 13) & 1;
+  *followingCornerEdgeOut = startEdge + (FollowingCornerInfoPacked->m_data & 0x1FFF);
+  *followingCornerIsLeftOut = (FollowingCornerInfoPacked->m_data & 0x2000) != 0;
   return 1i64;
 }
 
 // File Line: 1076
 // RVA: 0xBEC7D0
-hkaiEdgePath::FollowingCornerInfo *__fastcall hkaiEdgePath::getFollowingCornerInfoPacked(hkaiEdgePath *this, int startEdge, bool startIsLeft)
+hkaiEdgePath::FollowingCornerInfo *__fastcall hkaiEdgePath::getFollowingCornerInfoPacked(
+        hkaiEdgePath *this,
+        int startEdge,
+        bool startIsLeft)
 {
   hkaiEdgePath::Edge *v3; // rax
-  hkaiEdgePath::FollowingCornerInfo *result; // rax
 
   v3 = &this->m_edges.m_data[startEdge];
   if ( startIsLeft )
-    result = &v3->m_leftFollowingCorner;
+    return &v3->m_leftFollowingCorner;
   else
-    result = &v3->m_rightFollowingCorner;
-  return result;
+    return &v3->m_rightFollowingCorner;
 }
 
 // File Line: 1082
 // RVA: 0xBEC800
-hkaiEdgePath::FollowingCornerInfo *__fastcall hkaiEdgePath::getFollowingCornerInfoPacked(hkaiEdgePath *this, int startEdge, bool startIsLeft)
+hkaiEdgePath::FollowingCornerInfo *__fastcall hkaiEdgePath::getFollowingCornerInfoPacked(
+        hkaiEdgePath *this,
+        int startEdge,
+        bool startIsLeft)
 {
   hkaiEdgePath::Edge *v3; // rax
-  hkaiEdgePath::FollowingCornerInfo *result; // rax
 
   v3 = &this->m_edges.m_data[startEdge];
   if ( startIsLeft )
-    result = &v3->m_leftFollowingCorner;
+    return &v3->m_leftFollowingCorner;
   else
-    result = &v3->m_rightFollowingCorner;
-  return result;
+    return &v3->m_rightFollowingCorner;
 }
 
 // File Line: 1092
@@ -1780,12 +1693,12 @@ void __fastcall hkaiEdgePath::hkaiEdgePath(hkaiEdgePath *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->vfptr = (hkBaseObjectVtbl *)&hkaiEdgePath::`vftable;
-  this->m_edges.m_capacityAndFlags = 2147483648;
+  this->m_edges.m_capacityAndFlags = 0x80000000;
   this->m_edges.m_data = 0i64;
   this->m_edges.m_size = 0;
   this->m_edgeData.m_data = 0i64;
   this->m_edgeData.m_size = 0;
-  this->m_edgeData.m_capacityAndFlags = 2147483648;
+  this->m_edgeData.m_capacityAndFlags = 0x80000000;
   *(_QWORD *)&this->m_edgeDataStriding = 0i64;
   this->m_rightTurnRadius = 0.0;
 }
@@ -1799,54 +1712,52 @@ void __fastcall hkaiEdgePath::hkaiEdgePath(hkaiEdgePath *this, hkFinishLoadedObj
 
 // File Line: 1109
 // RVA: 0xBEC6B0
-__int64 __fastcall hkaiEdgePath::consecutiveEdgesShareVertex(hkaiEdgePath *this, int firstEdgeIndex, bool checkLeft, hkaiStreamingCollection *streamingCollection, hkaiNavMeshCutter *cutter)
+__int64 __fastcall hkaiEdgePath::consecutiveEdgesShareVertex(
+        hkaiEdgePath *this,
+        int firstEdgeIndex,
+        bool checkLeft,
+        hkaiStreamingCollection *streamingCollection,
+        hkaiNavMeshCutter *cutter)
 {
-  hkaiStreamingCollection::InstanceInfo *v5; // rax
+  hkaiStreamingCollection::InstanceInfo *m_data; // rax
   unsigned int v6; // ebp
-  bool v7; // r14
-  int v8; // ebx
-  hkaiEdgePath *v9; // rdi
-  hkaiEdgePath::Edge *v10; // rsi
+  hkaiEdgePath::Edge *Edge; // rsi
   hkaiEdgePath::Edge *v11; // rbx
   hkaiNavMeshCutter *v12; // rdi
   unsigned int v13; // eax
   MoveResult v14; // eax
   unsigned int v15; // eax
-  unsigned int faceKeyOut; // [rsp+20h] [rbp-38h]
-  unsigned int v18; // [rsp+24h] [rbp-34h]
-  hkaiGeneralAccessor accessor; // [rsp+28h] [rbp-30h]
-  unsigned int edgeKey; // [rsp+68h] [rbp+10h]
-  unsigned int faceKey; // [rsp+78h] [rbp+20h]
+  unsigned int faceKeyOut; // [rsp+20h] [rbp-38h] BYREF
+  unsigned int v18; // [rsp+24h] [rbp-34h] BYREF
+  hkaiGeneralAccessor accessor; // [rsp+28h] [rbp-30h] BYREF
+  unsigned int edgeKey; // [rsp+68h] [rbp+10h] BYREF
+  unsigned int faceKey; // [rsp+78h] [rbp+20h] BYREF
 
-  v5 = streamingCollection->m_instances.m_data;
+  m_data = streamingCollection->m_instances.m_data;
   v6 = 0;
-  v7 = checkLeft;
-  v8 = firstEdgeIndex;
-  v9 = this;
   accessor.m_currentSection = -1;
-  accessor.m_sectionInfo = v5;
+  accessor.m_sectionInfo = m_data;
   accessor.m_accessor = 0i64;
-  v10 = hkaiEdgePath::getEdge(this, firstEdgeIndex);
-  v11 = hkaiEdgePath::getEdge(v9, v8 + 1);
-  if ( _mm_movemask_ps(_mm_cmpeqps(v10->m_right.m_quad, v10->m_left.m_quad)) == 15 )
+  Edge = hkaiEdgePath::getEdge(this, firstEdgeIndex);
+  v11 = hkaiEdgePath::getEdge(this, firstEdgeIndex + 1);
+  if ( _mm_movemask_ps(_mm_cmpeq_ps(Edge->m_right.m_quad, Edge->m_left.m_quad)) == 15 )
     return 0i64;
-  if ( v10->m_flags.m_storage & 0x10 )
+  if ( (Edge->m_flags.m_storage & 0x10) != 0 )
     return 0i64;
-  if ( _mm_movemask_ps(_mm_cmpeqps(v11->m_right.m_quad, v11->m_left.m_quad)) == 15 )
+  if ( _mm_movemask_ps(_mm_cmpeq_ps(v11->m_right.m_quad, v11->m_left.m_quad)) == 15 )
     return 0i64;
-  if ( v11->m_flags.m_storage & 0x10 )
+  if ( (v11->m_flags.m_storage & 0x10) != 0 )
     return 0i64;
   v12 = cutter;
-  v13 = hkaiEdgePathSteeringUtil::resolveEdgeToKey(v10, &accessor, cutter, &faceKeyOut);
+  v13 = hkaiEdgePathSteeringUtil::resolveEdgeToKey(Edge, &accessor, cutter, &faceKeyOut);
   if ( v13 == -1 )
     return 0i64;
   edgeKey = v13;
   faceKey = faceKeyOut;
-  v14 = v7 ? `anonymous namespace::moveCcwAroundVertex(&accessor, &edgeKey, &faceKey) : `anonymous namespace::moveCwAroundVertex(
-                                                                                           &accessor,
-                                                                                           &edgeKey,
-                                                                                           &faceKey);
-  if ( v14 == 1 )
+  v14 = checkLeft
+      ? `anonymous namespace::moveCcwAroundVertex(&accessor, &edgeKey, &faceKey)
+      : `anonymous namespace::moveCwAroundVertex(&accessor, &edgeKey, &faceKey);
+  if ( v14 == MOVERESULT_HIT_NONTRAVERSABLE )
     return 0i64;
   v15 = hkaiEdgePathSteeringUtil::resolveEdgeToKey(v11, &accessor, v12, &v18);
   LOBYTE(v6) = edgeKey == v15;

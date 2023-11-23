@@ -2,34 +2,31 @@
 // RVA: 0x93E110
 void __fastcall Scaleform::Lock::Lock(Scaleform::Lock *this, unsigned int spinCount)
 {
-  unsigned int v2; // edi
-  Scaleform::Lock *v3; // rbx
-  HMODULE v4; // rax
-  int (__fastcall *v5)(_RTL_CRITICAL_SECTION *, unsigned int); // rax
+  HMODULE LibraryW; // rax
+  int (__fastcall *ProcAddress)(_RTL_CRITICAL_SECTION *, unsigned int); // rax
 
-  v2 = spinCount;
-  v3 = this;
   if ( initTried )
   {
-    v5 = pInitFn;
+    ProcAddress = pInitFn;
   }
   else
   {
-    v4 = LoadLibraryW(L"kernel32.dll");
-    v5 = (int (__fastcall *)(_RTL_CRITICAL_SECTION *, unsigned int))GetProcAddress(
-                                                                      v4,
-                                                                      "InitializeCriticalSectionAndSpinCount");
+    LibraryW = LoadLibraryW(L"kernel32.dll");
+    ProcAddress = (int (__fastcall *)(_RTL_CRITICAL_SECTION *, unsigned int))GetProcAddress(
+                                                                               LibraryW,
+                                                                               "InitializeCriticalSectionAndSpinCount");
     initTried = 1;
-    pInitFn = v5;
+    pInitFn = ProcAddress;
   }
-  if ( v5 )
-    v5(&v3->cs, v2);
+  if ( ProcAddress )
+    ProcAddress(&this->cs, spinCount);
   else
-    InitializeCriticalSection(&v3->cs);
+    InitializeCriticalSection(&this->cs);
 }
 
 // File Line: 72
 // RVA: 0x94B200
+// attributes: thunk
 void __stdcall Scaleform::Lock::~Lock(LPCRITICAL_SECTION lpCriticalSection)
 {
   DeleteCriticalSection(lpCriticalSection);

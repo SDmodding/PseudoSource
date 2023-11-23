@@ -28,12 +28,12 @@ hkClass *__fastcall hkpBridgeConstraintAtom::staticClass()
 
 // File Line: 67
 // RVA: 0xD44F50
-void __fastcall finishLoadedObjecthkpBridgeConstraintAtom(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpBridgeConstraintAtom(hkpBridgeConstraintAtom *p, int finishing)
 {
   if ( p )
   {
     if ( finishing )
-      hkpBridgeConstraintAtom::init((hkpBridgeConstraintAtom *)p, *((hkpConstraintData **)p + 2));
+      hkpBridgeConstraintAtom::init(p, p->m_constraintData);
   }
 }
 
@@ -74,12 +74,12 @@ hkClass *__fastcall hkpBridgeAtoms::staticClass()
 
 // File Line: 119
 // RVA: 0xD44F80
-void __fastcall finishLoadedObjecthkpBridgeAtoms(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpBridgeAtoms(hkpBridgeConstraintAtom *p, int finishing)
 {
   if ( p )
   {
     if ( finishing )
-      hkpBridgeConstraintAtom::init((hkpBridgeConstraintAtom *)p, *((hkpConstraintData **)p + 2));
+      hkpBridgeConstraintAtom::init(p, p->m_constraintData);
   }
 }
 

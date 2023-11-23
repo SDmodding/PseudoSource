@@ -67,28 +67,20 @@ __int64 __fastcall UFG::qPropertyCollection::IsMemImaged(UFG::qPropertyCollectio
 // RVA: 0x1F6F90
 UFG::qPropertySet *__fastcall UFG::qPropertyCollection::GetOwningSet(UFG::qPropertyCollection *this)
 {
-  UFG::qPropertySet *result; // rax
-
-  if ( this->mFlags & 0x10 )
-    result = (UFG::qPropertySet *)UFG::qOffset64<char const *>::Get((UFG::qOffset64<char const *> *)&this->mOwner, 0i64);
+  if ( (this->mFlags & 0x10) != 0 )
+    return (UFG::qPropertySet *)UFG::qOffset64<char const *>::Get((UFG::qOffset64<char const *> *)&this->mOwner, 0i64);
   else
-    result = 0i64;
-  return result;
+    return 0i64;
 }
 
 // File Line: 280
 // RVA: 0x1F6F70
 UFG::qPropertyList *__fastcall UFG::qPropertyCollection::GetOwningList(UFG::qPropertyCollection *this)
 {
-  UFG::qPropertyList *result; // rax
-
-  if ( this->mFlags & 0x20 )
-    result = (UFG::qPropertyList *)UFG::qOffset64<char const *>::Get(
-                                     (UFG::qOffset64<char const *> *)&this->mOwner,
-                                     0i64);
+  if ( (this->mFlags & 0x20) != 0 )
+    return (UFG::qPropertyList *)UFG::qOffset64<char const *>::Get((UFG::qOffset64<char const *> *)&this->mOwner, 0i64);
   else
-    result = 0i64;
-  return result;
+    return 0i64;
 }
 
 // File Line: 308
@@ -100,9 +92,20 @@ UFG::allocator::free_link *__fastcall UFG::qPropertySet::operator new(unsigned _
 
 // File Line: 389
 // RVA: 0x1F8E80
-void *__fastcall UFG::qPropertySet::GetValuePtr(UFG::qPropertySet *this, unsigned int type_uid, unsigned int name_uid, UFG::qPropertyDepth depth, UFG::qPropertySet **owningSet)
+// attributes: thunk
+char *__fastcall UFG::qPropertySet::GetValuePtr(
+        UFG::qPropertySet *this,
+        unsigned int type_uid,
+        unsigned int name_uid,
+        UFG::qPropertyDepth depth,
+        UFG::qPropertySet **owningSet)
 {
-  return UFG::qPropertySet::GetValuePtr(this, type_uid, name_uid, depth, owningSet);
+  return ?GetValuePtr@qPropertySet@UFG@@QEAAPEAXKKW4qPropertyDepth@2@PEAPEBV12@@Z(
+           this,
+           type_uid,
+           name_uid,
+           depth,
+           owningSet);
 }
 
 // File Line: 473

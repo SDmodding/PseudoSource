@@ -6,7 +6,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_play_length__()
 
   v0 = UFG::qStringHash32("play_length", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_play_length, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_play_length__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_play_length__);
 }
 
 // File Line: 53
@@ -17,7 +17,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_source_value__()
 
   v0 = UFG::qStringHash32("source_value", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_source_value, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_source_value__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_source_value__);
 }
 
 // File Line: 54
@@ -28,7 +28,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_target_value__()
 
   v0 = UFG::qStringHash32("target_value", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_target_value, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_target_value__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_target_value__);
 }
 
 // File Line: 55
@@ -39,7 +39,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_enable__()
 
   v0 = UFG::qStringHash32("enable", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_enable, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_enable__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_enable__);
 }
 
 // File Line: 59
@@ -50,7 +50,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_rpm_neutral__()
 
   v0 = UFG::qStringHash32("rpm_neutral", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_rpm_neutral, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_rpm_neutral__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_rpm_neutral__);
 }
 
 // File Line: 64
@@ -61,7 +61,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_acceleration_factor__()
 
   v0 = UFG::qStringHash32("acceleration_factor", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_acceleration_factor, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_acceleration_factor__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_acceleration_factor__);
 }
 
 // File Line: 65
@@ -72,7 +72,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_blend_mode__()
 
   v0 = UFG::qStringHash32("blend_mode", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_blend_mode, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_blend_mode__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_blend_mode__);
 }
 
 // File Line: 66
@@ -83,7 +83,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_burnout__()
 
   v0 = UFG::qStringHash32("burnout", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_burnout, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_burnout__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_burnout__);
 }
 
 // File Line: 67
@@ -94,7 +94,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_ramming__()
 
   v0 = UFG::qStringHash32("ramming", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_ramming, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_ramming__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_ramming__);
 }
 
 // File Line: 68
@@ -105,7 +105,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_engine_damage__()
 
   v0 = UFG::qStringHash32("engine_damage", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_engine_damage, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_engine_damage__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_engine_damage__);
 }
 
 // File Line: 69
@@ -116,7 +116,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_gas__()
 
   v0 = UFG::qStringHash32("gas", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_gas, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_gas__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_gas__);
 }
 
 // File Line: 70
@@ -127,7 +127,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_delta_gas__()
 
   v0 = UFG::qStringHash32("delta_gas", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_delta_gas, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_delta_gas__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_delta_gas__);
 }
 
 // File Line: 71
@@ -138,7 +138,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_skid_angle__()
 
   v0 = UFG::qStringHash32("skid_angle", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_skid_angle, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_skid_angle__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_skid_angle__);
 }
 
 // File Line: 72
@@ -149,7 +149,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_skid_strength__()
 
   v0 = UFG::qStringHash32("skid_strength", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_skid_strength, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_skid_strength__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_skid_strength__);
 }
 
 // File Line: 73
@@ -160,7 +160,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_speed__()
 
   v0 = UFG::qStringHash32("speed", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_speed, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_speed__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_speed__);
 }
 
 // File Line: 74
@@ -171,7 +171,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_modelled_speed__()
 
   v0 = UFG::qStringHash32("modelled_speed", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_modelled_speed, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_modelled_speed__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_modelled_speed__);
 }
 
 // File Line: 75
@@ -182,7 +182,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_steering__()
 
   v0 = UFG::qStringHash32("steering", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_steering, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_steering__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_steering__);
 }
 
 // File Line: 76
@@ -193,7 +193,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_time_in_state__()
 
   v0 = UFG::qStringHash32("time_in_state", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_time_in_state, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_time_in_state__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_time_in_state__);
 }
 
 // File Line: 77
@@ -204,7 +204,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_time_after_rpm_lookup__()
 
   v0 = UFG::qStringHash32("time_after_rpm_lookup", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_time_after_rpm_lookup, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_time_after_rpm_lookup__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_time_after_rpm_lookup__);
 }
 
 // File Line: 78
@@ -215,7 +215,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_pitch_angle__()
 
   v0 = UFG::qStringHash32("pitch_angle", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_pitch_angle, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_pitch_angle__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_pitch_angle__);
 }
 
 // File Line: 79
@@ -226,7 +226,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_rpm__()
 
   v0 = UFG::qStringHash32("rpm", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_rpm, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_rpm__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_rpm__);
 }
 
 // File Line: 80
@@ -237,7 +237,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_load__()
 
   v0 = UFG::qStringHash32("load", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_load, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_load__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_load__);
 }
 
 // File Line: 81
@@ -248,7 +248,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_wheels_in_air__()
 
   v0 = UFG::qStringHash32("wheels_in_air", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_wheels_in_air, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_wheels_in_air__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_wheels_in_air__);
 }
 
 // File Line: 82
@@ -259,7 +259,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_delta_speed__()
 
   v0 = UFG::qStringHash32("delta_speed", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_delta_speed, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_delta_speed__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_delta_speed__);
 }
 
 // File Line: 83
@@ -270,7 +270,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_limiter_threshold__()
 
   v0 = UFG::qStringHash32("limiter_threshold", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_limiter_threshold, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_limiter_threshold__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_limiter_threshold__);
 }
 
 // File Line: 84
@@ -281,7 +281,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_none__()
 
   v0 = UFG::qStringHash32("none", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_none, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_none__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_none__);
 }
 
 // File Line: 85
@@ -292,7 +292,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_tmp_a__()
 
   v0 = UFG::qStringHash32("tmp_a", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_tmp_a, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_tmp_a__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_tmp_a__);
 }
 
 // File Line: 86
@@ -303,7 +303,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_friction_multiplier__()
 
   v0 = UFG::qStringHash32("friction_multiplier", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_friction_multiplier, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_friction_multiplier__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_friction_multiplier__);
 }
 
 // File Line: 91
@@ -314,7 +314,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_add__()
 
   v0 = UFG::qStringHash32("add", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_add, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_add__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_add__);
 }
 
 // File Line: 92
@@ -325,7 +325,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_multiply__()
 
   v0 = UFG::qStringHash32("multiply", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_multiply, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_multiply__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_multiply__);
 }
 
 // File Line: 93
@@ -336,7 +336,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_subtract__()
 
   v0 = UFG::qStringHash32("subtract", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_subtract, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_subtract__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_subtract__);
 }
 
 // File Line: 94
@@ -347,7 +347,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_max__()
 
   v0 = UFG::qStringHash32("max", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_max, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_max__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_max__);
 }
 
 // File Line: 95
@@ -358,7 +358,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_min__()
 
   v0 = UFG::qStringHash32("min", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_min, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_min__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_min__);
 }
 
 // File Line: 96
@@ -369,7 +369,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_replace__()
 
   v0 = UFG::qStringHash32("replace", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_replace, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_replace__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_replace__);
 }
 
 // File Line: 101
@@ -380,7 +380,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_Accel__()
 
   v0 = UFG::qStringHash32("Accel", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_Accel, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_Accel__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_Accel__);
 }
 
 // File Line: 102
@@ -391,7 +391,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_Brake__()
 
   v0 = UFG::qStringHash32("Brake", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_Brake, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_Brake__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_Brake__);
 }
 
 // File Line: 103
@@ -402,7 +402,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_Decel__()
 
   v0 = UFG::qStringHash32("Decel", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_Decel, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_Decel__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_Decel__);
 }
 
 // File Line: 104
@@ -413,7 +413,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_Downshift__()
 
   v0 = UFG::qStringHash32("Downshift", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_Downshift, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_Downshift__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_Downshift__);
 }
 
 // File Line: 105
@@ -424,7 +424,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_Collision__()
 
   v0 = UFG::qStringHash32("Collision", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_Collision, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_Collision__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_Collision__);
 }
 
 // File Line: 106
@@ -435,7 +435,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_Idle__()
 
   v0 = UFG::qStringHash32("Idle", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_Idle, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_Idle__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_Idle__);
 }
 
 // File Line: 107
@@ -446,7 +446,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_InAir__()
 
   v0 = UFG::qStringHash32("InAir", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_InAir, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_InAir__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_InAir__);
 }
 
 // File Line: 108
@@ -457,7 +457,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_Neutral__()
 
   v0 = UFG::qStringHash32("Neutral", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_Neutral, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_Neutral__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_Neutral__);
 }
 
 // File Line: 109
@@ -468,7 +468,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_Off__()
 
   v0 = UFG::qStringHash32("Off", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_Off, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_Off__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_Off__);
 }
 
 // File Line: 110
@@ -479,7 +479,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_Upshift__()
 
   v0 = UFG::qStringHash32("Upshift", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_Upshift, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_Upshift__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_Upshift__);
 }
 
 // File Line: 111
@@ -490,7 +490,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_Reverse__()
 
   v0 = UFG::qStringHash32("Reverse", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_Reverse, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_Reverse__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_Reverse__);
 }
 
 // File Line: 112
@@ -501,7 +501,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_Default__()
 
   v0 = UFG::qStringHash32("Default", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_Default, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_Default__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_Default__);
 }
 
 // File Line: 113
@@ -512,7 +512,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_RevLimit__()
 
   v0 = UFG::qStringHash32("RevLimit", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_RevLimit, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_RevLimit__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_RevLimit__);
 }
 
 // File Line: 114
@@ -523,7 +523,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_Rev__()
 
   v0 = UFG::qStringHash32("Rev", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_Rev, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_Rev__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_Rev__);
 }
 
 // File Line: 115
@@ -534,7 +534,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_Transition__()
 
   v0 = UFG::qStringHash32("Transition", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_Transition, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_Transition__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_Transition__);
 }
 
 // File Line: 116
@@ -545,7 +545,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_Global__()
 
   v0 = UFG::qStringHash32("Global", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_Global, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_Global__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_Global__);
 }
 
 // File Line: 117
@@ -556,7 +556,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_Drifting__()
 
   v0 = UFG::qStringHash32("Drifting", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_Drifting, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_Drifting__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_Drifting__);
 }
 
 // File Line: 118
@@ -567,7 +567,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_Wheelie__()
 
   v0 = UFG::qStringHash32("Wheelie", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_Wheelie, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_Wheelie__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_Wheelie__);
 }
 
 // File Line: 124
@@ -578,7 +578,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_type_accel__()
 
   v0 = UFG::qStringHash32("type_accel", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_type_accel, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_type_accel__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_type_accel__);
 }
 
 // File Line: 125
@@ -589,7 +589,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_type_decel__()
 
   v0 = UFG::qStringHash32("type_decel", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_type_decel, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_type_decel__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_type_decel__);
 }
 
 // File Line: 126
@@ -600,7 +600,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_type_upshift__()
 
   v0 = UFG::qStringHash32("type_upshift", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_type_upshift, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_type_upshift__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_type_upshift__);
 }
 
 // File Line: 127
@@ -611,7 +611,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_type_downshift__()
 
   v0 = UFG::qStringHash32("type_downshift", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_type_downshift, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_type_downshift__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_type_downshift__);
 }
 
 // File Line: 128
@@ -622,7 +622,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_type_load__()
 
   v0 = UFG::qStringHash32("type_load", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_type_load, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_type_load__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_type_load__);
 }
 
 // File Line: 129
@@ -633,7 +633,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_type_reverse__()
 
   v0 = UFG::qStringHash32("type_reverse", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_type_reverse, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_type_reverse__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_type_reverse__);
 }
 
 // File Line: 130
@@ -644,7 +644,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_type_generic__()
 
   v0 = UFG::qStringHash32("type_generic", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_type_generic, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_type_generic__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_type_generic__);
 }
 
 // File Line: 135
@@ -655,7 +655,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_vehicle_event__()
 
   v0 = UFG::qStringHash32("vehicle_event", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_vehicle_event, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_vehicle_event__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_vehicle_event__);
 }
 
 // File Line: 136
@@ -666,7 +666,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_wwise_event__()
 
   v0 = UFG::qStringHash32("wwise_event", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_wwise_event, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_wwise_event__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_wwise_event__);
 }
 
 // File Line: 137
@@ -677,7 +677,7 @@ __int64 UFG::_dynamic_initializer_for__EngineModelSym_pull_wwise_event__()
 
   v0 = UFG::qStringHash32("pull_wwise_event", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineModelSym_pull_wwise_event, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__EngineModelSym_pull_wwise_event__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__EngineModelSym_pull_wwise_event__);
 }
 
 // File Line: 142
@@ -686,7 +686,7 @@ __int64 UFG::_dynamic_initializer_for__veh_player_car__()
 {
   veh_player_car.mUID = UFG::qWiseSymbolUIDFromString("veh_player_car", 0x811C9DC5);
   _((AMD_HD3D *)veh_player_car.mUID);
-  return atexit(UFG::_dynamic_atexit_destructor_for__veh_player_car__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__veh_player_car__);
 }
 
 // File Line: 143
@@ -695,7 +695,7 @@ __int64 UFG::_dynamic_initializer_for__veh_player_engine_limiter__()
 {
   veh_player_engine_limiter.mUID = UFG::qWiseSymbolUIDFromString("veh_player_engine_limiter", 0x811C9DC5);
   _((AMD_HD3D *)veh_player_engine_limiter.mUID);
-  return atexit(UFG::_dynamic_atexit_destructor_for__veh_player_engine_limiter__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__veh_player_engine_limiter__);
 }
 
 // File Line: 144
@@ -704,7 +704,7 @@ __int64 UFG::_dynamic_initializer_for__vehicle_desired_speed__()
 {
   vehicle_desired_speed.mUID = UFG::qWiseSymbolUIDFromString("vehicle_desired_speed", 0x811C9DC5);
   _((AMD_HD3D *)vehicle_desired_speed.mUID);
-  return atexit(UFG::_dynamic_atexit_destructor_for__vehicle_desired_speed__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__vehicle_desired_speed__);
 }
 
 // File Line: 145
@@ -713,43 +713,42 @@ __int64 UFG::_dynamic_initializer_for__vehicle_speed__()
 {
   vehicle_speed.mUID = UFG::qWiseSymbolUIDFromString("vehicle_speed", 0x811C9DC5);
   _((AMD_HD3D *)vehicle_speed.mUID);
-  return atexit(UFG::_dynamic_atexit_destructor_for__vehicle_speed__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__vehicle_speed__);
 }
 
 // File Line: 313
 // RVA: 0x688BC0
-float __fastcall UFG::FrictionMultiplierInput::ReadInput(UFG::FrictionMultiplierInput *this, UFG::EngineModel2 *em, float delta_sec)
+float __fastcall UFG::FrictionMultiplierInput::ReadInput(
+        UFG::FrictionMultiplierInput *this,
+        UFG::EngineModel2 *em,
+        float delta_sec)
 {
-  UFG::FrictionMultiplierInput *v3; // rbx
-  UFG::PhysicsMoverInterface *v4; // rcx
+  UFG::PhysicsMoverInterface *m_pPointer; // rcx
 
-  v3 = this;
-  v4 = (UFG::PhysicsMoverInterface *)em->m_pVehAudComponent->m_physicsMoverInterface.m_pPointer;
-  if ( v4 )
-    v3->m_value = UFG::CalcAverageFrictionMultiplier(v4);
-  return v3->m_value;
+  m_pPointer = (UFG::PhysicsMoverInterface *)em->m_pVehAudComponent->m_physicsMoverInterface.m_pPointer;
+  if ( m_pPointer )
+    this->m_value = UFG::CalcAverageFrictionMultiplier(m_pPointer);
+  return this->m_value;
 }
 
 // File Line: 336
 // RVA: 0x688FE0
 float __fastcall UFG::TmpAInput::ReadInput(UFG::TmpAInput *this, UFG::EngineModel2 *em, float delta_sec)
 {
-  UFG::TmpAInput *v3; // rbx
   UFG::qBaseTreeRB *v4; // rax
-  signed __int64 v5; // rax
+  float *v5; // rax
   float result; // xmm0_4
 
-  v3 = this;
   if ( !EngineModelSym_tmp_a.mUID )
     return 0.0;
   v4 = UFG::qBaseTreeRB::Get(&em->m_outputs->m_outputsTree.mTree, EngineModelSym_tmp_a.mUID);
   if ( !v4 )
     return 0.0;
-  v5 = (signed __int64)&v4[-1].mNULL.mChild[1];
+  v5 = (float *)&v4[-1].mNULL.mChild[1];
   if ( !v5 )
     return 0.0;
-  result = *(float *)(v5 + 60);
-  v3->m_value = result;
+  result = v5[15];
+  this->m_value = result;
   return result;
 }
 
@@ -757,15 +756,15 @@ float __fastcall UFG::TmpAInput::ReadInput(UFG::TmpAInput *this, UFG::EngineMode
 // RVA: 0x688E40
 float __fastcall UFG::RammingInput::ReadInput(UFG::RammingInput *this, UFG::EngineModel2 *em, float delta_sec)
 {
-  UFG::SimComponent *v3; // rdx
-  char *v5; // rbx
+  UFG::SimComponent *m_pPointer; // rdx
+  float *p_m_value; // rbx
   float v6; // xmm1_4
 
-  v3 = em->m_pVehAudComponent->m_physicsMoverInterface.m_pPointer;
-  if ( !v3 )
+  m_pPointer = em->m_pVehAudComponent->m_physicsMoverInterface.m_pPointer;
+  if ( !m_pPointer )
     return 0.0;
-  v5 = (char *)&this->m_value;
-  if ( BYTE4(v3[14].vfptr) & 8 )
+  p_m_value = &this->m_value;
+  if ( (BYTE4(m_pPointer[14].vfptr) & 8) != 0 )
   {
     v6 = delta_sec + this->m_timeRamming;
     this->m_timeRamming = v6;
@@ -773,61 +772,58 @@ float __fastcall UFG::RammingInput::ReadInput(UFG::RammingInput *this, UFG::Engi
   }
   else
   {
-    *(_DWORD *)v5 = 0;
+    *p_m_value = 0.0;
   }
-  return *(float *)v5;
+  return *p_m_value;
 }
 
 // File Line: 402
 // RVA: 0x688A60
 float __fastcall UFG::BurnoutInput::ReadInput(UFG::BurnoutInput *this, UFG::EngineModel2 *em, float delta_sec)
 {
-  UFG::EngineModel2 *v3; // rbx
-  UFG::BurnoutInput *v4; // rsi
-  signed __int64 v6; // rdi
+  float *v6; // rdi
   UFG::qBaseTreeRB *v7; // rax
-  signed __int64 v8; // rax
+  float *v8; // rax
   UFG::qBaseTreeRB *v9; // rax
 
-  v3 = em;
-  v4 = this;
   if ( !em->m_pVehAudComponent->m_envModel )
     return 0.0;
   v6 = 0i64;
   if ( EngineModelSym_wheels_in_air.mUID
     && (v7 = UFG::qBaseTreeRB::Get(&em->m_inputs->m_inputsTree.mTree, EngineModelSym_wheels_in_air.mUID)) != 0i64 )
   {
-    v8 = (signed __int64)&v7[-1].mNULL.mChild[1];
+    v8 = (float *)&v7[-1].mNULL.mChild[1];
   }
   else
   {
     v8 = 0i64;
   }
-  if ( 1.0 != *(float *)(v8 + 68) )
-    return v3->m_pVehAudComponent->m_envModel->m_burnoutAmount.m_currentValue;
+  if ( 1.0 != v8[17] )
+    return em->m_pVehAudComponent->m_envModel->m_burnoutAmount.m_currentValue;
   if ( EngineModelSym_gas.mUID )
   {
-    v9 = UFG::qBaseTreeRB::Get(&v3->m_inputs->m_inputsTree.mTree, EngineModelSym_gas.mUID);
+    v9 = UFG::qBaseTreeRB::Get(&em->m_inputs->m_inputsTree.mTree, EngineModelSym_gas.mUID);
     if ( v9 )
-      v6 = (signed __int64)&v9[-1].mNULL.mChild[1];
+      v6 = (float *)&v9[-1].mNULL.mChild[1];
   }
-  UFG::qApproach(&v4->m_value, *(float *)(v6 + 68), 3.0, delta_sec);
-  return v4->m_value;
+  UFG::qApproach(&this->m_value, v6[17], 3.0, delta_sec);
+  return this->m_value;
 }
 
 // File Line: 429
 // RVA: 0x688BA0
-float __fastcall UFG::EngineDamageInput::ReadInput(UFG::EngineDamageInput *this, UFG::EngineModel2 *em, float delta_sec)
+float __fastcall UFG::EngineDamageInput::ReadInput(
+        UFG::EngineDamageInput *this,
+        UFG::EngineModel2 *em,
+        float delta_sec)
 {
-  UFG::SimComponent *v3; // rcx
-  float result; // xmm0_4
+  UFG::SimComponent *m_pPointer; // rcx
 
-  v3 = em->m_pVehAudComponent->m_physicsMoverInterface.m_pPointer;
-  if ( v3 )
-    result = *(float *)&v3[2].m_BoundComponentHandles.mNode.mPrev;
+  m_pPointer = em->m_pVehAudComponent->m_physicsMoverInterface.m_pPointer;
+  if ( m_pPointer )
+    return *(float *)&m_pPointer[2].m_BoundComponentHandles.mNode.mPrev;
   else
-    result = 0.0;
-  return result;
+    return 0.0;
 }
 
 // File Line: 455
@@ -853,7 +849,10 @@ float __fastcall UFG::TimeInStateInput::ReadInput(UFG::TimeInStateInput *this, U
 
 // File Line: 507
 // RVA: 0x688FA0
-float __fastcall UFG::TimeAfterRpmLookupInput::ReadInput(UFG::TimeAfterRpmLookupInput *this, UFG::EngineModel2 *em, float delta_sec)
+float __fastcall UFG::TimeAfterRpmLookupInput::ReadInput(
+        UFG::TimeAfterRpmLookupInput *this,
+        UFG::EngineModel2 *em,
+        float delta_sec)
 {
   return em->m_engineStateMachine->m_timeAfterRpmLookup * 1000.0;
 }
@@ -863,64 +862,61 @@ float __fastcall UFG::TimeAfterRpmLookupInput::ReadInput(UFG::TimeAfterRpmLookup
 float __fastcall UFG::RpmInput::ReadInput(UFG::RpmInput *this, UFG::EngineModel2 *em, float delta_sec)
 {
   UFG::qBaseTreeRB *v3; // rax
-  signed __int64 v4; // rax
-  float result; // xmm0_4
+  float *v4; // rax
 
   if ( EngineModelSym_rpm.mUID
     && (v3 = UFG::qBaseTreeRB::Get(&em->m_outputs->m_outputsTree.mTree, EngineModelSym_rpm.mUID)) != 0i64
-    && (v4 = (signed __int64)&v3[-1].mNULL.mChild[1]) != 0 )
+    && (v4 = (float *)&v3[-1].mNULL.mChild[1]) != 0i64 )
   {
-    result = *(float *)(v4 + 60);
+    return v4[15];
   }
   else
   {
-    result = 0.0;
+    return 0.0;
   }
-  return result;
 }
 
 // File Line: 547
 // RVA: 0x688F10
-float __fastcall UFG::SkidStrengthInput::ReadInput(UFG::SkidStrengthInput *this, UFG::EngineModel2 *em, float delta_sec)
+float __fastcall UFG::SkidStrengthInput::ReadInput(
+        UFG::SkidStrengthInput *this,
+        UFG::EngineModel2 *em,
+        float delta_sec)
 {
-  UFG::EnvironmentalModel *v3; // rcx
-  float result; // xmm0_4
+  UFG::EnvironmentalModel *m_envModel; // rcx
 
-  v3 = em->m_pVehAudComponent->m_envModel;
-  if ( v3 )
-    result = v3->m_skidStrength.m_currentValue;
+  m_envModel = em->m_pVehAudComponent->m_envModel;
+  if ( m_envModel )
+    return m_envModel->m_skidStrength.m_currentValue;
   else
-    result = 0.0;
-  return result;
+    return 0.0;
 }
 
 // File Line: 571
 // RVA: 0x688EF0
 float __fastcall UFG::SkidAngleInput::ReadInput(UFG::SkidAngleInput *this, UFG::EngineModel2 *em, float delta_sec)
 {
-  UFG::EnvironmentalModel *v3; // rcx
-  float result; // xmm0_4
+  UFG::EnvironmentalModel *m_envModel; // rcx
 
-  v3 = em->m_pVehAudComponent->m_envModel;
-  if ( v3 )
-    result = v3->m_skidAngle.m_currentValue;
+  m_envModel = em->m_pVehAudComponent->m_envModel;
+  if ( m_envModel )
+    return m_envModel->m_skidAngle.m_currentValue;
   else
-    result = 0.0;
-  return result;
+    return 0.0;
 }
 
 // File Line: 595
 // RVA: 0x688F40
 float __fastcall UFG::SteeringInput::ReadInput(UFG::SteeringInput *this, UFG::EngineModel2 *em, float delta_sec)
 {
-  UFG::SimComponent *v3; // rdx
+  UFG::SimComponent *m_pPointer; // rdx
   float v4; // xmm1_4
-  float value; // [rsp+38h] [rbp+10h]
+  float value; // [rsp+38h] [rbp+10h] BYREF
 
-  v3 = em->m_pVehAudComponent->m_physicsMoverInterface.m_pPointer;
-  if ( !v3 )
+  m_pPointer = em->m_pVehAudComponent->m_physicsMoverInterface.m_pPointer;
+  if ( !m_pPointer )
     return 0.0;
-  LODWORD(v4) = v3[1].m_TypeUID & _xmm;
+  LODWORD(v4) = m_pPointer[1].m_TypeUID & _xmm;
   value = this->m_prevValue;
   UFG::qApproach(&value, v4, 1.0, delta_sec);
   return value;
@@ -928,31 +924,29 @@ float __fastcall UFG::SteeringInput::ReadInput(UFG::SteeringInput *this, UFG::En
 
 // File Line: 634
 // RVA: 0x689060
-float __fastcall UFG::GasInput::ReadInputAI(UFG::GasInput *this, UFG::EngineModel2 *em, float delta_sec, UFG::AiDriverComponent *pCarAI)
+float __fastcall UFG::GasInput::ReadInputAI(
+        UFG::GasInput *this,
+        UFG::EngineModel2 *em,
+        float delta_sec,
+        UFG::AiDriverComponent *pCarAI)
 {
-  UFG::GasInput *v4; // rdi
-  UFG::EngineModel2 *v5; // rbx
-  UFG::AiDriverComponent *v6; // rbp
-  UFG::VehicleAudioComponent::eDriverType v7; // esi
-  float v8; // xmm7_4
+  UFG::VehicleAudioComponent::eDriverType m_eDriverType; // esi
+  float m_fDesiredSpeed; // xmm7_4
   float v9; // xmm7_4
   float v10; // xmm7_4
 
-  v4 = this;
-  v5 = em;
-  v6 = pCarAI;
   if ( EngineModelSym_delta_speed.mUID )
     UFG::qBaseTreeRB::Get(&em->m_inputs->m_inputsTree.mTree, EngineModelSym_delta_speed.mUID);
   if ( EngineModelSym_speed.mUID )
-    UFG::qBaseTreeRB::Get(&v5->m_inputs->m_inputsTree.mTree, EngineModelSym_speed.mUID);
-  v7 = v5->m_pVehAudComponent->m_eDriverType;
-  v8 = v6->m_fDesiredSpeed;
+    UFG::qBaseTreeRB::Get(&em->m_inputs->m_inputsTree.mTree, EngineModelSym_speed.mUID);
+  m_eDriverType = em->m_pVehAudComponent->m_eDriverType;
+  m_fDesiredSpeed = pCarAI->m_fDesiredSpeed;
   UFG::qApproach(
-    &v4->m_speed,
-    v6->m_fCurrentForwardSpeed * 3.5999999,
+    &this->m_speed,
+    pCarAI->m_fCurrentForwardSpeed * 3.5999999,
     UFG::EngineModel2::sm_AiSpeedRateLimit,
     delta_sec);
-  v9 = (float)(v8 * 3.5999999) - v4->m_speed;
+  v9 = (float)(m_fDesiredSpeed * 3.5999999) - this->m_speed;
   if ( COERCE_FLOAT(LODWORD(v9) & _xmm) >= 1.0 )
   {
     if ( v9 <= COERCE_FLOAT(LODWORD(UFG::EngineModel2::sm_AiGasBrakesSpeedRange) ^ _xmm[0]) )
@@ -964,52 +958,48 @@ float __fastcall UFG::GasInput::ReadInputAI(UFG::GasInput *this, UFG::EngineMode
   else
   {
     v10 = UFG::EngineModel2::sm_AiMinGasBrakes;
-    if ( v7 != 1 && v4->m_gasBrakes <= 0.0 )
+    if ( m_eDriverType != eDriverType_PlayerPassenger && this->m_gasBrakes <= 0.0 )
       LODWORD(v10) = LODWORD(UFG::EngineModel2::sm_AiMinGasBrakes) ^ _xmm[0];
   }
-  UFG::qApproach(&v4->m_gasBrakes, v10, UFG::EngineModel2::sm_AiGasBrakesRateLimit, delta_sec);
-  return v4->m_gasBrakes;
+  UFG::qApproach(&this->m_gasBrakes, v10, UFG::EngineModel2::sm_AiGasBrakesRateLimit, delta_sec);
+  return this->m_gasBrakes;
 }
 
 // File Line: 696
 // RVA: 0x688BF0
 float __fastcall UFG::GasInput::ReadInput(UFG::GasInput *this, UFG::EngineModel2 *em, float delta_sec)
 {
-  UFG::VehicleAudioComponent *v3; // rax
-  UFG::GasInput *v4; // rdi
-  UFG::SimObjectCVBase *v5; // rcx
-  UFG::SimComponent *v6; // rbx
-  UFG::EngineModel2 *v7; // rsi
+  UFG::VehicleAudioComponent *m_pVehAudComponent; // rax
+  UFG::SimObjectCVBase *m_pSimObject; // rcx
+  UFG::SimComponent *m_pPointer; // rbx
   UFG::AiDriverComponent *v8; // r15
   UFG::VehicleAudioComponent *v9; // rcx
   UFG::SimObjectCVBase *v10; // rcx
   UFG::HumanDriverComponent *v11; // rax
-  UFG::CruiseControl *v12; // rax
+  UFG::CruiseControl *mCruiseControl; // rax
   float result; // xmm0_4
   float v14; // xmm6_4
-  __int64 v15; // rdx
+  __int64 mControllerIndex; // rdx
   UFG::InputActionData *v16; // rax
   UFG::InputActionData *v17; // rax
   UFG::qBaseTreeRB *v18; // rax
-  signed __int64 v19; // r14
+  float *v19; // r14
   UFG::qBaseTreeRB *v20; // rax
-  signed __int64 v21; // rbx
+  float *v21; // rbx
   UFG::qBaseTreeRB *v22; // rax
-  signed __int64 v23; // rbp
+  UFG::qBaseNodeRB **v23; // rbp
   float v24; // xmm0_4
   float v25; // xmm1_4
-  float v26; // xmm0_4
+  float m_smoothedIsLosingSpeed; // xmm0_4
 
-  v3 = em->m_pVehAudComponent;
-  v4 = this;
-  v5 = (UFG::SimObjectCVBase *)v3->m_pSimObject;
-  v6 = v3->m_physicsMoverInterface.m_pPointer;
-  v7 = em;
-  if ( v5 )
-    v8 = UFG::SimObjectCVBase::GetComponent<UFG::AiDriverComponent>(v5);
+  m_pVehAudComponent = em->m_pVehAudComponent;
+  m_pSimObject = (UFG::SimObjectCVBase *)m_pVehAudComponent->m_pSimObject;
+  m_pPointer = m_pVehAudComponent->m_physicsMoverInterface.m_pPointer;
+  if ( m_pSimObject )
+    v8 = UFG::SimObjectCVBase::GetComponent<UFG::AiDriverComponent>(m_pSimObject);
   else
     v8 = 0i64;
-  v9 = v7->m_pVehAudComponent;
+  v9 = em->m_pVehAudComponent;
   if ( v9->m_eDriverType == eDriverType_Player )
   {
     v10 = (UFG::SimObjectCVBase *)v9->m_pSimObject;
@@ -1018,87 +1008,87 @@ float __fastcall UFG::GasInput::ReadInput(UFG::GasInput *this, UFG::EngineModel2
       v11 = UFG::SimObjectCVBase::GetComponent<UFG::HumanDriverComponent>(v10);
       if ( v11 )
       {
-        v12 = v11->mCruiseControl;
-        if ( v12 )
+        mCruiseControl = v11->mCruiseControl;
+        if ( mCruiseControl )
         {
-          if ( v12->mIsActive )
+          if ( mCruiseControl->mIsActive )
           {
             result = FLOAT_0_1;
-            v4->m_gasBrakes = 0.1;
+            this->m_gasBrakes = 0.1;
             return result;
           }
         }
       }
     }
-    LODWORD(v14) = *(_DWORD *)(&v6[1].m_SimObjIndex + 1) ^ _xmm[0];
-    if ( !LODWORD(v6[12].m_BoundComponentHandles.mNode.mNext) )
+    LODWORD(v14) = *(_DWORD *)(&m_pPointer[1].m_SimObjIndex + 1) ^ _xmm[0];
+    if ( !LODWORD(m_pPointer[12].m_BoundComponentHandles.mNode.mNext) )
     {
-      v15 = (signed int)UFG::gInputSystem->mControllers[UFG::gActiveControllerNum]->mControllerIndex;
-      v16 = UFG::ActionDef_Brake.mDataPerController[v15];
+      mControllerIndex = (int)UFG::gInputSystem->mControllers[UFG::gActiveControllerNum]->mControllerIndex;
+      v16 = UFG::ActionDef_Brake.mDataPerController[mControllerIndex];
       if ( v16 )
       {
         if ( v16->mActionTrue )
         {
-          v17 = UFG::ActionDef_Accelerate.mDataPerController[v15];
+          v17 = UFG::ActionDef_Accelerate.mDataPerController[mControllerIndex];
           if ( !v17 || !v17->mActionTrue )
-            LODWORD(v14) ^= _xmm[0];
+            v14 = *(float *)(&m_pPointer[1].m_SimObjIndex + 1);
         }
       }
-      v4->m_gasBrakes = v14;
-      return v4->m_gasBrakes;
+      this->m_gasBrakes = v14;
+      return this->m_gasBrakes;
     }
     if ( v14 <= 0.80000001 )
     {
-      v4->m_smoothedIsLosingSpeed = 0.0;
+      this->m_smoothedIsLosingSpeed = 0.0;
     }
     else
     {
       if ( EngineModelSym_delta_speed.mUID
-        && (v18 = UFG::qBaseTreeRB::Get(&v7->m_inputs->m_inputsTree.mTree, EngineModelSym_delta_speed.mUID)) != 0i64 )
+        && (v18 = UFG::qBaseTreeRB::Get(&em->m_inputs->m_inputsTree.mTree, EngineModelSym_delta_speed.mUID)) != 0i64 )
       {
-        v19 = (signed __int64)&v18[-1].mNULL.mChild[1];
+        v19 = (float *)&v18[-1].mNULL.mChild[1];
       }
       else
       {
         v19 = 0i64;
       }
       if ( EngineModelSym_speed.mUID
-        && (v20 = UFG::qBaseTreeRB::Get(&v7->m_inputs->m_inputsTree.mTree, EngineModelSym_speed.mUID)) != 0i64 )
+        && (v20 = UFG::qBaseTreeRB::Get(&em->m_inputs->m_inputsTree.mTree, EngineModelSym_speed.mUID)) != 0i64 )
       {
-        v21 = (signed __int64)&v20[-1].mNULL.mChild[1];
+        v21 = (float *)&v20[-1].mNULL.mChild[1];
       }
       else
       {
         v21 = 0i64;
       }
       if ( EngineModelSym_burnout.mUID
-        && (v22 = UFG::qBaseTreeRB::Get(&v7->m_inputs->m_inputsTree.mTree, EngineModelSym_burnout.mUID)) != 0i64 )
+        && (v22 = UFG::qBaseTreeRB::Get(&em->m_inputs->m_inputsTree.mTree, EngineModelSym_burnout.mUID)) != 0i64 )
       {
-        v23 = (signed __int64)&v22[-1].mNULL.mChild[1];
+        v23 = &v22[-1].mNULL.mChild[1];
       }
       else
       {
         v23 = 0i64;
       }
-      v24 = *(float *)(v21 + 68);
+      v24 = v21[17];
       v25 = 0.0;
-      if ( v24 <= 125.0 && v24 >= 5.0 && *(float *)(v19 + 68) < -20.0 )
+      if ( v24 <= 125.0 && v24 >= 5.0 && v19[17] < -20.0 )
         v25 = *(float *)&FLOAT_1_0;
-      UFG::qApproach(&v4->m_smoothedIsLosingSpeed, v25, 5.0, delta_sec);
-      v26 = v4->m_smoothedIsLosingSpeed;
-      if ( v26 > 0.60000002 )
+      UFG::qApproach(&this->m_smoothedIsLosingSpeed, v25, 5.0, delta_sec);
+      m_smoothedIsLosingSpeed = this->m_smoothedIsLosingSpeed;
+      if ( m_smoothedIsLosingSpeed > 0.60000002 )
       {
-        LODWORD(v4->m_gasBrakes) = COERCE_UNSIGNED_INT(v26 * 0.69999999) ^ _xmm[0];
-        *(_DWORD *)(v23 + 68) = 0;
-        goto LABEL_40;
+        LODWORD(this->m_gasBrakes) = COERCE_UNSIGNED_INT(m_smoothedIsLosingSpeed * 0.69999999) ^ _xmm[0];
+        *((_DWORD *)v23 + 17) = 0;
+        goto LABEL_39;
       }
     }
-    v4->m_gasBrakes = v14;
+    this->m_gasBrakes = v14;
   }
-LABEL_40:
+LABEL_39:
   if ( !v8 )
-    return v4->m_gasBrakes;
-  return UFG::GasInput::ReadInputAI(v4, v7, delta_sec, v8);
+    return this->m_gasBrakes;
+  return UFG::GasInput::ReadInputAI(this, em, delta_sec, v8);
 }
 
 // File Line: 812
@@ -1106,158 +1096,134 @@ LABEL_40:
 float __fastcall UFG::DeltaSpeedInput::ReadInput(UFG::DeltaSpeedInput *this, UFG::EngineModel2 *em, float delta_sec)
 {
   UFG::qBaseTreeRB *v3; // rax
-  signed __int64 v4; // rax
+  float *v4; // rax
 
   if ( EngineModelSym_speed.mUID
     && (v3 = UFG::qBaseTreeRB::Get(&em->m_inputs->m_inputsTree.mTree, EngineModelSym_speed.mUID)) != 0i64 )
   {
-    v4 = (signed __int64)&v3[-1].mNULL.mChild[1];
+    v4 = (float *)&v3[-1].mNULL.mChild[1];
   }
   else
   {
     v4 = 0i64;
   }
-  return (float)(*(float *)(v4 + 68) - *(float *)(v4 + 72)) * (float)(1.0 / delta_sec);
+  return (float)(v4[17] - v4[18]) * (float)(1.0 / delta_sec);
 }
 
 // File Line: 830
 // RVA: 0x689030
 float __fastcall UFG::WheelsInAirInput::ReadInput(UFG::WheelsInAirInput *this, UFG::EngineModel2 *em, float delta_sec)
 {
-  float result; // xmm0_4
-
   if ( UFG::VehicleAudioComponent::WheelsInAir(em->m_pVehAudComponent) )
-    result = *(float *)&FLOAT_1_0;
+    return *(float *)&FLOAT_1_0;
   else
-    result = 0.0;
-  return result;
+    return 0.0;
 }
 
 // File Line: 843
 // RVA: 0x6683A0
 void __fastcall UFG::EngineModelInputs::EngineModelInputs(UFG::EngineModelInputs *this, UFG::EngineModel2 *parent)
 {
-  UFG::EngineModel2 *v2; // rbx
-  UFG::EngineModelInputs *v3; // rdi
-  UFG::qBaseTreeRB *v4; // rsi
-  unsigned int v5; // ebp
+  UFG::qTreeRB<UFG::EngineModelInput,UFG::EngineModelInput,1> *p_m_inputsTree; // rsi
+  UFG::VehicleAudioComponent::eDriverType m_eDriverType; // ebp
   UFG::allocator::free_link *v6; // rax
   UFG::allocator::free_link *v7; // rdx
-  UFG::allocator::free_link *v8; // rcx
+  unsigned int mUID; // ecx
   UFG::qBaseNodeRB *v9; // rbx
-  _QWORD *v10; // rcx
-  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v11; // rax
-  UFG::qBaseNodeRB *v12; // rdx
-  UFG::allocator::free_link *v13; // rax
-  UFG::allocator::free_link *v14; // rdx
-  UFG::allocator::free_link *v15; // rcx
-  _QWORD *v16; // rcx
-  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v17; // rax
-  UFG::qBaseNodeRB *v18; // rdx
-  UFG::allocator::free_link *v19; // rax
-  UFG::allocator::free_link *v20; // rdx
-  UFG::allocator::free_link *v21; // rcx
-  _QWORD *v22; // rcx
-  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v23; // rax
-  UFG::qBaseNodeRB *v24; // rdx
-  UFG::allocator::free_link *v25; // rax
-  UFG::allocator::free_link *v26; // rdx
-  UFG::allocator::free_link *v27; // rcx
-  _QWORD *v28; // rcx
-  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v29; // rax
-  UFG::qBaseNodeRB *v30; // rdx
-  UFG::allocator::free_link *v31; // rax
-  UFG::allocator::free_link *v32; // rdx
-  UFG::allocator::free_link *v33; // rcx
-  _QWORD *v34; // rcx
+  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *mPrev; // rax
+  UFG::qBaseNodeRB *v11; // rdx
+  UFG::allocator::free_link *v12; // rax
+  UFG::allocator::free_link *v13; // rdx
+  unsigned int v14; // ecx
+  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v15; // rax
+  UFG::qBaseNodeRB *v16; // rdx
+  UFG::allocator::free_link *v17; // rax
+  UFG::allocator::free_link *v18; // rdx
+  unsigned int v19; // ecx
+  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v20; // rax
+  UFG::qBaseNodeRB *v21; // rdx
+  UFG::allocator::free_link *v22; // rax
+  UFG::allocator::free_link *v23; // rdx
+  unsigned int v24; // ecx
+  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v25; // rax
+  UFG::qBaseNodeRB *v26; // rdx
+  UFG::allocator::free_link *v27; // rax
+  UFG::allocator::free_link *v28; // rdx
+  unsigned int v29; // ecx
+  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v30; // rax
+  UFG::qBaseNodeRB *v31; // rdx
+  UFG::allocator::free_link *v32; // rax
+  UFG::allocator::free_link *v33; // rdx
+  unsigned int v34; // ecx
   UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v35; // rax
   UFG::qBaseNodeRB *v36; // rdx
   UFG::allocator::free_link *v37; // rax
   UFG::allocator::free_link *v38; // rdx
-  UFG::allocator::free_link *v39; // rcx
-  _QWORD *v40; // rcx
-  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v41; // rax
-  UFG::qBaseNodeRB *v42; // rdx
-  UFG::allocator::free_link *v43; // rax
-  UFG::allocator::free_link *v44; // rdx
-  UFG::allocator::free_link *v45; // rcx
-  _QWORD *v46; // rcx
-  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v47; // rax
-  UFG::qBaseNodeRB *v48; // rdx
-  UFG::allocator::free_link *v49; // rax
-  UFG::allocator::free_link *v50; // rdx
-  UFG::allocator::free_link *v51; // rcx
-  _QWORD *v52; // rcx
-  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v53; // rax
-  UFG::qBaseNodeRB *v54; // rdx
-  UFG::allocator::free_link *v55; // rax
-  UFG::allocator::free_link *v56; // rdx
-  UFG::allocator::free_link *v57; // rcx
-  _QWORD *v58; // rcx
-  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v59; // rax
-  UFG::qBaseNodeRB *v60; // rdx
-  UFG::allocator::free_link *v61; // rax
-  UFG::allocator::free_link *v62; // rdx
-  UFG::allocator::free_link *v63; // rcx
-  _QWORD *v64; // rcx
+  unsigned int v39; // ecx
+  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v40; // rax
+  UFG::qBaseNodeRB *v41; // rdx
+  UFG::allocator::free_link *v42; // rax
+  UFG::allocator::free_link *v43; // rdx
+  unsigned int v44; // ecx
+  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v45; // rax
+  UFG::qBaseNodeRB *v46; // rdx
+  UFG::allocator::free_link *v47; // rax
+  UFG::allocator::free_link *v48; // rdx
+  unsigned int v49; // ecx
+  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v50; // rax
+  UFG::qBaseNodeRB *v51; // rdx
+  UFG::allocator::free_link *v52; // rax
+  UFG::allocator::free_link *v53; // rdx
+  unsigned int v54; // ecx
+  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v55; // rax
+  UFG::qBaseNodeRB *v56; // rdx
+  UFG::allocator::free_link *v57; // rax
+  UFG::allocator::free_link *v58; // rdx
+  unsigned int v59; // ecx
+  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v60; // rax
+  UFG::qBaseNodeRB *v61; // rdx
+  UFG::allocator::free_link *v62; // rax
+  UFG::allocator::free_link *v63; // rdx
+  unsigned int v64; // ecx
   UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v65; // rax
   UFG::qBaseNodeRB *v66; // rdx
   UFG::allocator::free_link *v67; // rax
   UFG::allocator::free_link *v68; // rdx
-  UFG::allocator::free_link *v69; // rcx
-  _QWORD *v70; // rcx
-  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v71; // rax
-  UFG::qBaseNodeRB *v72; // rdx
-  UFG::allocator::free_link *v73; // rax
-  UFG::allocator::free_link *v74; // rdx
-  UFG::allocator::free_link *v75; // rcx
-  _QWORD *v76; // rcx
-  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v77; // rax
-  UFG::qBaseNodeRB *v78; // rdx
-  UFG::allocator::free_link *v79; // rax
-  UFG::allocator::free_link *v80; // rdx
-  UFG::allocator::free_link *v81; // rcx
-  _QWORD *v82; // rcx
-  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v83; // rax
-  UFG::qBaseNodeRB *v84; // rdx
-  UFG::allocator::free_link *v85; // rax
-  UFG::allocator::free_link *v86; // rdx
-  UFG::allocator::free_link *v87; // rcx
-  _QWORD *v88; // rcx
-  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v89; // rax
-  UFG::qBaseNodeRB *v90; // rdx
-  UFG::allocator::free_link *v91; // rax
-  UFG::allocator::free_link *v92; // rdx
-  UFG::allocator::free_link *v93; // rcx
-  _QWORD *v94; // rcx
-  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v95; // rax
-  UFG::qBaseNodeRB *v96; // rdx
-  UFG::allocator::free_link *v97; // rax
-  UFG::allocator::free_link *v98; // rdx
-  UFG::allocator::free_link *v99; // rcx
-  _QWORD *v100; // rcx
-  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v101; // rax
+  unsigned int v69; // ecx
+  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v70; // rax
+  UFG::qBaseNodeRB *v71; // rdx
+  UFG::allocator::free_link *v72; // rax
+  UFG::allocator::free_link *v73; // rdx
+  unsigned int v74; // ecx
+  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v75; // rax
+  UFG::qBaseNodeRB *v76; // rdx
+  UFG::allocator::free_link *v77; // rax
+  UFG::allocator::free_link *v78; // rdx
+  unsigned int v79; // ecx
+  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v80; // rax
+  UFG::qBaseNodeRB *v81; // rdx
+  UFG::allocator::free_link *v82; // rax
+  UFG::allocator::free_link *v83; // rdx
+  unsigned int v84; // ecx
+  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v85; // rax
 
-  v2 = parent;
-  v3 = this;
   this->m_inputsList.mNode.mPrev = &this->m_inputsList.mNode;
   this->m_inputsList.mNode.mNext = &this->m_inputsList.mNode;
-  v4 = &this->m_inputsTree.mTree;
+  p_m_inputsTree = &this->m_inputsTree;
   UFG::qBaseTreeRB::qBaseTreeRB(&this->m_inputsTree.mTree);
-  v5 = v2->m_pVehAudComponent->m_eDriverType;
+  m_eDriverType = parent->m_pVehAudComponent->m_eDriverType;
   v6 = UFG::qMalloc(0x50ui64, "EngineModelInputs", 0i64);
   v7 = v6;
   if ( v6 )
   {
-    v8 = v6 + 1;
-    v8->mNext = v8;
-    v8[1].mNext = v8;
-    LODWORD(v8) = EngineModelSym_speed;
+    v6[1].mNext = v6 + 1;
+    v6[2].mNext = v6 + 1;
+    mUID = EngineModelSym_speed.mUID;
     v9 = 0i64;
     v6[3].mNext = 0i64;
     v6[4].mNext = 0i64;
     v6[5].mNext = 0i64;
-    LODWORD(v6[6].mNext) = (_DWORD)v8;
+    LODWORD(v6[6].mNext) = mUID;
     v6->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
     v6[7].mNext = 0i64;
     LODWORD(v6[8].mNext) = EngineModelSym_speed;
@@ -1269,652 +1235,622 @@ void __fastcall UFG::EngineModelInputs::EngineModelInputs(UFG::EngineModelInputs
     v9 = 0i64;
     v7 = 0i64;
   }
-  v10 = &v7[1].mNext;
-  v11 = v3->m_inputsList.mNode.mPrev;
-  v11->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v7[1];
-  *v10 = v11;
-  v10[1] = v3;
-  v3->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v7[1];
+  mPrev = this->m_inputsList.mNode.mPrev;
+  mPrev->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v7[1];
+  v7[1].mNext = (UFG::allocator::free_link *)mPrev;
+  v7[2].mNext = (UFG::allocator::free_link *)this;
+  this->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v7[1];
   if ( v7 )
-    v12 = (UFG::qBaseNodeRB *)&v7[3];
+    v11 = (UFG::qBaseNodeRB *)&v7[3];
   else
-    v12 = 0i64;
-  UFG::qBaseTreeRB::Add(v4, v12);
-  v13 = UFG::qMalloc(0x50ui64, "EngineModelInputs", 0i64);
-  v14 = v13;
+    v11 = 0i64;
+  UFG::qBaseTreeRB::Add(&p_m_inputsTree->mTree, v11);
+  v12 = UFG::qMalloc(0x50ui64, "EngineModelInputs", 0i64);
+  v13 = v12;
+  if ( v12 )
+  {
+    v12[1].mNext = v12 + 1;
+    v12[2].mNext = v12 + 1;
+    v14 = EngineModelSym_engine_damage.mUID;
+    v12[3].mNext = 0i64;
+    v12[4].mNext = 0i64;
+    v12[5].mNext = 0i64;
+    LODWORD(v12[6].mNext) = v14;
+    v12->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
+    v12[7].mNext = 0i64;
+    LODWORD(v12[8].mNext) = EngineModelSym_engine_damage;
+    HIDWORD(v12[8].mNext) = 0;
+    v12->mNext = (UFG::allocator::free_link *)&UFG::EngineDamageInput::`vftable;
+  }
+  else
+  {
+    v13 = 0i64;
+  }
+  v15 = this->m_inputsList.mNode.mPrev;
+  v15->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v13[1];
+  v13[1].mNext = (UFG::allocator::free_link *)v15;
+  v13[2].mNext = (UFG::allocator::free_link *)this;
+  this->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v13[1];
   if ( v13 )
+    v16 = (UFG::qBaseNodeRB *)&v13[3];
+  else
+    v16 = 0i64;
+  UFG::qBaseTreeRB::Add(&p_m_inputsTree->mTree, v16);
+  v17 = UFG::qMalloc(0x50ui64, "EngineModelInputs", 0i64);
+  v18 = v17;
+  if ( v17 )
   {
-    v15 = v13 + 1;
-    v15->mNext = v15;
-    v15[1].mNext = v15;
-    LODWORD(v15) = EngineModelSym_engine_damage;
-    v13[3].mNext = 0i64;
-    v13[4].mNext = 0i64;
-    v13[5].mNext = 0i64;
-    LODWORD(v13[6].mNext) = (_DWORD)v15;
-    v13->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
-    v13[7].mNext = 0i64;
-    LODWORD(v13[8].mNext) = EngineModelSym_engine_damage;
-    HIDWORD(v13[8].mNext) = 0;
-    v13->mNext = (UFG::allocator::free_link *)&UFG::EngineDamageInput::`vftable;
+    v17[1].mNext = v17 + 1;
+    v17[2].mNext = v17 + 1;
+    v19 = EngineModelSym_time_in_state.mUID;
+    v17[3].mNext = 0i64;
+    v17[4].mNext = 0i64;
+    v17[5].mNext = 0i64;
+    LODWORD(v17[6].mNext) = v19;
+    v17->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
+    v17[7].mNext = 0i64;
+    LODWORD(v17[8].mNext) = EngineModelSym_time_in_state;
+    HIDWORD(v17[8].mNext) = 0;
+    v17->mNext = (UFG::allocator::free_link *)&UFG::TimeInStateInput::`vftable;
   }
   else
   {
-    v14 = 0i64;
-  }
-  v16 = &v14[1].mNext;
-  v17 = v3->m_inputsList.mNode.mPrev;
-  v17->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v14[1];
-  *v16 = v17;
-  v16[1] = v3;
-  v3->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v14[1];
-  if ( v14 )
-    v18 = (UFG::qBaseNodeRB *)&v14[3];
-  else
     v18 = 0i64;
-  UFG::qBaseTreeRB::Add(v4, v18);
-  v19 = UFG::qMalloc(0x50ui64, "EngineModelInputs", 0i64);
-  v20 = v19;
-  if ( v19 )
+  }
+  v20 = this->m_inputsList.mNode.mPrev;
+  v20->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v18[1];
+  v18[1].mNext = (UFG::allocator::free_link *)v20;
+  v18[2].mNext = (UFG::allocator::free_link *)this;
+  this->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v18[1];
+  if ( v18 )
+    v21 = (UFG::qBaseNodeRB *)&v18[3];
+  else
+    v21 = 0i64;
+  UFG::qBaseTreeRB::Add(&p_m_inputsTree->mTree, v21);
+  v22 = UFG::qMalloc(0x50ui64, "EngineModelInputs", 0i64);
+  v23 = v22;
+  if ( v22 )
   {
-    v21 = v19 + 1;
-    v21->mNext = v21;
-    v21[1].mNext = v21;
-    LODWORD(v21) = EngineModelSym_time_in_state;
-    v19[3].mNext = 0i64;
-    v19[4].mNext = 0i64;
-    v19[5].mNext = 0i64;
-    LODWORD(v19[6].mNext) = (_DWORD)v21;
-    v19->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
-    v19[7].mNext = 0i64;
-    LODWORD(v19[8].mNext) = EngineModelSym_time_in_state;
-    HIDWORD(v19[8].mNext) = 0;
-    v19->mNext = (UFG::allocator::free_link *)&UFG::TimeInStateInput::`vftable;
+    v22[1].mNext = v22 + 1;
+    v22[2].mNext = v22 + 1;
+    v24 = EngineModelSym_rpm.mUID;
+    v22[3].mNext = 0i64;
+    v22[4].mNext = 0i64;
+    v22[5].mNext = 0i64;
+    LODWORD(v22[6].mNext) = v24;
+    v22->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
+    v22[7].mNext = 0i64;
+    LODWORD(v22[8].mNext) = EngineModelSym_rpm;
+    HIDWORD(v22[8].mNext) = 0;
+    v22->mNext = (UFG::allocator::free_link *)&UFG::RpmInput::`vftable;
   }
   else
   {
-    v20 = 0i64;
+    v23 = 0i64;
   }
-  v22 = &v20[1].mNext;
-  v23 = v3->m_inputsList.mNode.mPrev;
-  v23->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v20[1];
-  *v22 = v23;
-  v22[1] = v3;
-  v3->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v20[1];
-  if ( v20 )
-    v24 = (UFG::qBaseNodeRB *)&v20[3];
+  v25 = this->m_inputsList.mNode.mPrev;
+  v25->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v23[1];
+  v23[1].mNext = (UFG::allocator::free_link *)v25;
+  v23[2].mNext = (UFG::allocator::free_link *)this;
+  this->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v23[1];
+  if ( v23 )
+    v26 = (UFG::qBaseNodeRB *)&v23[3];
   else
-    v24 = 0i64;
-  UFG::qBaseTreeRB::Add(v4, v24);
-  v25 = UFG::qMalloc(0x50ui64, "EngineModelInputs", 0i64);
-  v26 = v25;
-  if ( v25 )
-  {
-    v27 = v25 + 1;
-    v27->mNext = v27;
-    v27[1].mNext = v27;
-    LODWORD(v27) = EngineModelSym_rpm;
-    v25[3].mNext = 0i64;
-    v25[4].mNext = 0i64;
-    v25[5].mNext = 0i64;
-    LODWORD(v25[6].mNext) = (_DWORD)v27;
-    v25->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
-    v25[7].mNext = 0i64;
-    LODWORD(v25[8].mNext) = EngineModelSym_rpm;
-    HIDWORD(v25[8].mNext) = 0;
-    v25->mNext = (UFG::allocator::free_link *)&UFG::RpmInput::`vftable;
-  }
-  else
-  {
     v26 = 0i64;
-  }
-  v28 = &v26[1].mNext;
-  v29 = v3->m_inputsList.mNode.mPrev;
-  v29->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v26[1];
-  *v28 = v29;
-  v28[1] = v3;
-  v3->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v26[1];
-  if ( v26 )
-    v30 = (UFG::qBaseNodeRB *)&v26[3];
-  else
-    v30 = 0i64;
-  UFG::qBaseTreeRB::Add(v4, v30);
-  v31 = UFG::qMalloc(0x50ui64, "EngineModelInputs", 0i64);
-  v32 = v31;
-  if ( v31 )
+  UFG::qBaseTreeRB::Add(&p_m_inputsTree->mTree, v26);
+  v27 = UFG::qMalloc(0x50ui64, "EngineModelInputs", 0i64);
+  v28 = v27;
+  if ( v27 )
   {
-    v33 = v31 + 1;
-    v33->mNext = v33;
-    v33[1].mNext = v33;
-    LODWORD(v33) = EngineModelSym_time_after_rpm_lookup;
-    v31[3].mNext = 0i64;
-    v31[4].mNext = 0i64;
-    v31[5].mNext = 0i64;
-    LODWORD(v31[6].mNext) = (_DWORD)v33;
-    v31->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
-    v31[7].mNext = 0i64;
-    LODWORD(v31[8].mNext) = EngineModelSym_time_after_rpm_lookup;
-    HIDWORD(v31[8].mNext) = 0;
-    v31->mNext = (UFG::allocator::free_link *)&UFG::TimeAfterRpmLookupInput::`vftable;
+    v27[1].mNext = v27 + 1;
+    v27[2].mNext = v27 + 1;
+    v29 = EngineModelSym_time_after_rpm_lookup.mUID;
+    v27[3].mNext = 0i64;
+    v27[4].mNext = 0i64;
+    v27[5].mNext = 0i64;
+    LODWORD(v27[6].mNext) = v29;
+    v27->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
+    v27[7].mNext = 0i64;
+    LODWORD(v27[8].mNext) = EngineModelSym_time_after_rpm_lookup;
+    HIDWORD(v27[8].mNext) = 0;
+    v27->mNext = (UFG::allocator::free_link *)&UFG::TimeAfterRpmLookupInput::`vftable;
   }
   else
   {
-    v32 = 0i64;
+    v28 = 0i64;
   }
-  v34 = &v32[1].mNext;
-  v35 = v3->m_inputsList.mNode.mPrev;
-  v35->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v32[1];
-  *v34 = v35;
-  v34[1] = v3;
-  v3->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v32[1];
+  v30 = this->m_inputsList.mNode.mPrev;
+  v30->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v28[1];
+  v28[1].mNext = (UFG::allocator::free_link *)v30;
+  v28[2].mNext = (UFG::allocator::free_link *)this;
+  this->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v28[1];
+  if ( v28 )
+    v31 = (UFG::qBaseNodeRB *)&v28[3];
+  else
+    v31 = 0i64;
+  UFG::qBaseTreeRB::Add(&p_m_inputsTree->mTree, v31);
+  v32 = UFG::qMalloc(0x50ui64, "EngineModelInputs", 0i64);
+  v33 = v32;
   if ( v32 )
-    v36 = (UFG::qBaseNodeRB *)&v32[3];
+  {
+    v32[1].mNext = v32 + 1;
+    v32[2].mNext = v32 + 1;
+    v34 = EngineModelSym_skid_strength.mUID;
+    v32[3].mNext = 0i64;
+    v32[4].mNext = 0i64;
+    v32[5].mNext = 0i64;
+    LODWORD(v32[6].mNext) = v34;
+    v32->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
+    v32[7].mNext = 0i64;
+    LODWORD(v32[8].mNext) = EngineModelSym_skid_strength;
+    HIDWORD(v32[8].mNext) = 0;
+    v32->mNext = (UFG::allocator::free_link *)&UFG::SkidStrengthInput::`vftable;
+  }
+  else
+  {
+    v33 = 0i64;
+  }
+  v35 = this->m_inputsList.mNode.mPrev;
+  v35->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v33[1];
+  v33[1].mNext = (UFG::allocator::free_link *)v35;
+  v33[2].mNext = (UFG::allocator::free_link *)this;
+  this->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v33[1];
+  if ( v33 )
+    v36 = (UFG::qBaseNodeRB *)&v33[3];
   else
     v36 = 0i64;
-  UFG::qBaseTreeRB::Add(v4, v36);
+  UFG::qBaseTreeRB::Add(&p_m_inputsTree->mTree, v36);
   v37 = UFG::qMalloc(0x50ui64, "EngineModelInputs", 0i64);
   v38 = v37;
   if ( v37 )
   {
-    v39 = v37 + 1;
-    v39->mNext = v39;
-    v39[1].mNext = v39;
-    LODWORD(v39) = EngineModelSym_skid_strength;
+    v37[1].mNext = v37 + 1;
+    v37[2].mNext = v37 + 1;
+    v39 = EngineModelSym_skid_angle.mUID;
     v37[3].mNext = 0i64;
     v37[4].mNext = 0i64;
     v37[5].mNext = 0i64;
-    LODWORD(v37[6].mNext) = (_DWORD)v39;
+    LODWORD(v37[6].mNext) = v39;
     v37->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
     v37[7].mNext = 0i64;
-    LODWORD(v37[8].mNext) = EngineModelSym_skid_strength;
+    LODWORD(v37[8].mNext) = EngineModelSym_skid_angle;
     HIDWORD(v37[8].mNext) = 0;
-    v37->mNext = (UFG::allocator::free_link *)&UFG::SkidStrengthInput::`vftable;
+    v37->mNext = (UFG::allocator::free_link *)&UFG::SkidAngleInput::`vftable;
   }
   else
   {
     v38 = 0i64;
   }
-  v40 = &v38[1].mNext;
-  v41 = v3->m_inputsList.mNode.mPrev;
-  v41->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v38[1];
-  *v40 = v41;
-  v40[1] = v3;
-  v3->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v38[1];
+  v40 = this->m_inputsList.mNode.mPrev;
+  v40->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v38[1];
+  v38[1].mNext = (UFG::allocator::free_link *)v40;
+  v38[2].mNext = (UFG::allocator::free_link *)this;
+  this->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v38[1];
   if ( v38 )
-    v42 = (UFG::qBaseNodeRB *)&v38[3];
+    v41 = (UFG::qBaseNodeRB *)&v38[3];
   else
-    v42 = 0i64;
-  UFG::qBaseTreeRB::Add(v4, v42);
-  v43 = UFG::qMalloc(0x50ui64, "EngineModelInputs", 0i64);
-  v44 = v43;
+    v41 = 0i64;
+  UFG::qBaseTreeRB::Add(&p_m_inputsTree->mTree, v41);
+  v42 = UFG::qMalloc(0x50ui64, "EngineModelInputs", 0i64);
+  v43 = v42;
+  if ( v42 )
+  {
+    v42[1].mNext = v42 + 1;
+    v42[2].mNext = v42 + 1;
+    v44 = EngineModelSym_steering.mUID;
+    v42[3].mNext = 0i64;
+    v42[4].mNext = 0i64;
+    v42[5].mNext = 0i64;
+    LODWORD(v42[6].mNext) = v44;
+    v42->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
+    v42[7].mNext = 0i64;
+    LODWORD(v42[8].mNext) = EngineModelSym_steering;
+    HIDWORD(v42[8].mNext) = 0;
+    v42->mNext = (UFG::allocator::free_link *)&UFG::SteeringInput::`vftable;
+  }
+  else
+  {
+    v43 = 0i64;
+  }
+  v45 = this->m_inputsList.mNode.mPrev;
+  v45->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v43[1];
+  v43[1].mNext = (UFG::allocator::free_link *)v45;
+  v43[2].mNext = (UFG::allocator::free_link *)this;
+  this->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v43[1];
   if ( v43 )
+    v46 = (UFG::qBaseNodeRB *)&v43[3];
+  else
+    v46 = 0i64;
+  UFG::qBaseTreeRB::Add(&p_m_inputsTree->mTree, v46);
+  v47 = UFG::qMalloc(0x60ui64, "EngineModelInputs", 0i64);
+  v48 = v47;
+  if ( v47 )
   {
-    v45 = v43 + 1;
-    v45->mNext = v45;
-    v45[1].mNext = v45;
-    LODWORD(v45) = EngineModelSym_skid_angle;
-    v43[3].mNext = 0i64;
-    v43[4].mNext = 0i64;
-    v43[5].mNext = 0i64;
-    LODWORD(v43[6].mNext) = (_DWORD)v45;
-    v43->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
-    v43[7].mNext = 0i64;
-    LODWORD(v43[8].mNext) = EngineModelSym_skid_angle;
-    HIDWORD(v43[8].mNext) = 0;
-    v43->mNext = (UFG::allocator::free_link *)&UFG::SkidAngleInput::`vftable;
+    v47[1].mNext = v47 + 1;
+    v47[2].mNext = v47 + 1;
+    v49 = EngineModelSym_gas.mUID;
+    v47[3].mNext = 0i64;
+    v47[4].mNext = 0i64;
+    v47[5].mNext = 0i64;
+    LODWORD(v47[6].mNext) = v49;
+    v47->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
+    v47[7].mNext = 0i64;
+    LODWORD(v47[8].mNext) = EngineModelSym_gas;
+    HIDWORD(v47[8].mNext) = 0;
+    v47->mNext = (UFG::allocator::free_link *)&UFG::GasInput::`vftable;
+    v47[10].mNext = 0i64;
+    v47[11].mNext = 0i64;
   }
   else
   {
-    v44 = 0i64;
-  }
-  v46 = &v44[1].mNext;
-  v47 = v3->m_inputsList.mNode.mPrev;
-  v47->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v44[1];
-  *v46 = v47;
-  v46[1] = v3;
-  v3->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v44[1];
-  if ( v44 )
-    v48 = (UFG::qBaseNodeRB *)&v44[3];
-  else
     v48 = 0i64;
-  UFG::qBaseTreeRB::Add(v4, v48);
-  v49 = UFG::qMalloc(0x50ui64, "EngineModelInputs", 0i64);
-  v50 = v49;
-  if ( v49 )
+  }
+  v50 = this->m_inputsList.mNode.mPrev;
+  v50->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v48[1];
+  v48[1].mNext = (UFG::allocator::free_link *)v50;
+  v48[2].mNext = (UFG::allocator::free_link *)this;
+  this->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v48[1];
+  if ( v48 )
+    v51 = (UFG::qBaseNodeRB *)&v48[3];
+  else
+    v51 = 0i64;
+  UFG::qBaseTreeRB::Add(&p_m_inputsTree->mTree, v51);
+  v52 = UFG::qMalloc(0x50ui64, "EngineModelInputs", 0i64);
+  v53 = v52;
+  if ( v52 )
   {
-    v51 = v49 + 1;
-    v51->mNext = v51;
-    v51[1].mNext = v51;
-    LODWORD(v51) = EngineModelSym_steering;
-    v49[3].mNext = 0i64;
-    v49[4].mNext = 0i64;
-    v49[5].mNext = 0i64;
-    LODWORD(v49[6].mNext) = (_DWORD)v51;
-    v49->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
-    v49[7].mNext = 0i64;
-    LODWORD(v49[8].mNext) = EngineModelSym_steering;
-    HIDWORD(v49[8].mNext) = 0;
-    v49->mNext = (UFG::allocator::free_link *)&UFG::SteeringInput::`vftable;
+    v52[1].mNext = v52 + 1;
+    v52[2].mNext = v52 + 1;
+    v54 = EngineModelSym_tmp_a.mUID;
+    v52[3].mNext = 0i64;
+    v52[4].mNext = 0i64;
+    v52[5].mNext = 0i64;
+    LODWORD(v52[6].mNext) = v54;
+    v52->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
+    v52[7].mNext = 0i64;
+    LODWORD(v52[8].mNext) = EngineModelSym_tmp_a;
+    HIDWORD(v52[8].mNext) = 0;
+    v52->mNext = (UFG::allocator::free_link *)&UFG::TmpAInput::`vftable;
   }
   else
   {
-    v50 = 0i64;
+    v53 = 0i64;
   }
-  v52 = &v50[1].mNext;
-  v53 = v3->m_inputsList.mNode.mPrev;
-  v53->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v50[1];
-  *v52 = v53;
-  v52[1] = v3;
-  v3->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v50[1];
-  if ( v50 )
-    v54 = (UFG::qBaseNodeRB *)&v50[3];
+  v55 = this->m_inputsList.mNode.mPrev;
+  v55->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v53[1];
+  v53[1].mNext = (UFG::allocator::free_link *)v55;
+  v53[2].mNext = (UFG::allocator::free_link *)this;
+  this->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v53[1];
+  if ( v53 )
+    v56 = (UFG::qBaseNodeRB *)&v53[3];
   else
-    v54 = 0i64;
-  UFG::qBaseTreeRB::Add(v4, v54);
-  v55 = UFG::qMalloc(0x60ui64, "EngineModelInputs", 0i64);
-  v56 = v55;
-  if ( v55 )
-  {
-    v57 = v55 + 1;
-    v57->mNext = v57;
-    v57[1].mNext = v57;
-    LODWORD(v57) = EngineModelSym_gas;
-    v55[3].mNext = 0i64;
-    v55[4].mNext = 0i64;
-    v55[5].mNext = 0i64;
-    LODWORD(v55[6].mNext) = (_DWORD)v57;
-    v55->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
-    v55[7].mNext = 0i64;
-    LODWORD(v55[8].mNext) = EngineModelSym_gas;
-    HIDWORD(v55[8].mNext) = 0;
-    v55->mNext = (UFG::allocator::free_link *)&UFG::GasInput::`vftable;
-    v55[10].mNext = 0i64;
-    v55[11].mNext = 0i64;
-  }
-  else
-  {
     v56 = 0i64;
-  }
-  v58 = &v56[1].mNext;
-  v59 = v3->m_inputsList.mNode.mPrev;
-  v59->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v56[1];
-  *v58 = v59;
-  v58[1] = v3;
-  v3->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v56[1];
-  if ( v56 )
-    v60 = (UFG::qBaseNodeRB *)&v56[3];
-  else
-    v60 = 0i64;
-  UFG::qBaseTreeRB::Add(v4, v60);
-  v61 = UFG::qMalloc(0x50ui64, "EngineModelInputs", 0i64);
-  v62 = v61;
-  if ( v61 )
+  UFG::qBaseTreeRB::Add(&p_m_inputsTree->mTree, v56);
+  v57 = UFG::qMalloc(0x50ui64, "EngineModelInputs", 0i64);
+  v58 = v57;
+  if ( v57 )
   {
-    v63 = v61 + 1;
-    v63->mNext = v63;
-    v63[1].mNext = v63;
-    LODWORD(v63) = EngineModelSym_tmp_a;
-    v61[3].mNext = 0i64;
-    v61[4].mNext = 0i64;
-    v61[5].mNext = 0i64;
-    LODWORD(v61[6].mNext) = (_DWORD)v63;
-    v61->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
-    v61[7].mNext = 0i64;
-    LODWORD(v61[8].mNext) = EngineModelSym_tmp_a;
-    HIDWORD(v61[8].mNext) = 0;
-    v61->mNext = (UFG::allocator::free_link *)&UFG::TmpAInput::`vftable;
+    v57[1].mNext = v57 + 1;
+    v57[2].mNext = v57 + 1;
+    v59 = EngineModelSym_delta_speed.mUID;
+    v57[3].mNext = 0i64;
+    v57[4].mNext = 0i64;
+    v57[5].mNext = 0i64;
+    LODWORD(v57[6].mNext) = v59;
+    v57->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
+    v57[7].mNext = 0i64;
+    LODWORD(v57[8].mNext) = EngineModelSym_delta_speed;
+    HIDWORD(v57[8].mNext) = 0;
+    v57->mNext = (UFG::allocator::free_link *)&UFG::DeltaSpeedInput::`vftable;
+    *(UFG::allocator::free_link **)((char *)&v57[8].mNext + 4) = 0i64;
   }
   else
   {
-    v62 = 0i64;
+    v58 = 0i64;
   }
-  v64 = &v62[1].mNext;
-  v65 = v3->m_inputsList.mNode.mPrev;
-  v65->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v62[1];
-  *v64 = v65;
-  v64[1] = v3;
-  v3->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v62[1];
-  if ( v62 )
-    v66 = (UFG::qBaseNodeRB *)&v62[3];
+  v60 = this->m_inputsList.mNode.mPrev;
+  v60->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v58[1];
+  v58[1].mNext = (UFG::allocator::free_link *)v60;
+  v58[2].mNext = (UFG::allocator::free_link *)this;
+  this->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v58[1];
+  if ( v58 )
+    v61 = (UFG::qBaseNodeRB *)&v58[3];
   else
-    v66 = 0i64;
-  UFG::qBaseTreeRB::Add(v4, v66);
-  v67 = UFG::qMalloc(0x50ui64, "EngineModelInputs", 0i64);
-  v68 = v67;
-  if ( v67 )
+    v61 = 0i64;
+  UFG::qBaseTreeRB::Add(&p_m_inputsTree->mTree, v61);
+  if ( (unsigned int)m_eDriverType <= eDriverType_PlayerPassenger )
   {
-    v69 = v67 + 1;
-    v69->mNext = v69;
-    v69[1].mNext = v69;
-    LODWORD(v69) = EngineModelSym_delta_speed;
-    v67[3].mNext = 0i64;
-    v67[4].mNext = 0i64;
-    v67[5].mNext = 0i64;
-    LODWORD(v67[6].mNext) = (_DWORD)v69;
-    v67->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
-    v67[7].mNext = 0i64;
-    LODWORD(v67[8].mNext) = EngineModelSym_delta_speed;
-    HIDWORD(v67[8].mNext) = 0;
-    v67->mNext = (UFG::allocator::free_link *)&UFG::DeltaSpeedInput::`vftable;
-    *(UFG::allocator::free_link **)((char *)&v67[8].mNext + 4) = 0i64;
-  }
-  else
-  {
-    v68 = 0i64;
-  }
-  v70 = &v68[1].mNext;
-  v71 = v3->m_inputsList.mNode.mPrev;
-  v71->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v68[1];
-  *v70 = v71;
-  v70[1] = v3;
-  v3->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v68[1];
-  if ( v68 )
-    v72 = (UFG::qBaseNodeRB *)&v68[3];
-  else
-    v72 = 0i64;
-  UFG::qBaseTreeRB::Add(v4, v72);
-  if ( v5 <= 1 )
-  {
-    v73 = UFG::qMalloc(0x50ui64, "EngineModelInputs", 0i64);
-    v74 = v73;
+    v62 = UFG::qMalloc(0x50ui64, "EngineModelInputs", 0i64);
+    v63 = v62;
+    if ( v62 )
+    {
+      v62[1].mNext = v62 + 1;
+      v62[2].mNext = v62 + 1;
+      v64 = EngineModelSym_pitch_angle.mUID;
+      v62[3].mNext = 0i64;
+      v62[4].mNext = 0i64;
+      v62[5].mNext = 0i64;
+      LODWORD(v62[6].mNext) = v64;
+      v62->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
+      v62[7].mNext = 0i64;
+      LODWORD(v62[8].mNext) = EngineModelSym_pitch_angle;
+      HIDWORD(v62[8].mNext) = 0;
+      v62->mNext = (UFG::allocator::free_link *)&UFG::PitchAngleInput::`vftable;
+    }
+    else
+    {
+      v63 = 0i64;
+    }
+    v65 = this->m_inputsList.mNode.mPrev;
+    v65->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v63[1];
+    v63[1].mNext = (UFG::allocator::free_link *)v65;
+    v63[2].mNext = (UFG::allocator::free_link *)this;
+    this->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v63[1];
+    if ( v63 )
+      v66 = (UFG::qBaseNodeRB *)&v63[3];
+    else
+      v66 = 0i64;
+    UFG::qBaseTreeRB::Add(&p_m_inputsTree->mTree, v66);
+    v67 = UFG::qMalloc(0x58ui64, "EngineModelInputs", 0i64);
+    v68 = v67;
+    if ( v67 )
+    {
+      v67[1].mNext = v67 + 1;
+      v67[2].mNext = v67 + 1;
+      v69 = EngineModelSym_ramming.mUID;
+      v67[3].mNext = 0i64;
+      v67[4].mNext = 0i64;
+      v67[5].mNext = 0i64;
+      LODWORD(v67[6].mNext) = v69;
+      v67->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
+      v67[7].mNext = 0i64;
+      LODWORD(v67[8].mNext) = EngineModelSym_ramming;
+      HIDWORD(v67[8].mNext) = 0;
+      v67->mNext = (UFG::allocator::free_link *)&UFG::RammingInput::`vftable;
+      LODWORD(v67[10].mNext) = 0;
+    }
+    else
+    {
+      v68 = 0i64;
+    }
+    v70 = this->m_inputsList.mNode.mPrev;
+    v70->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v68[1];
+    v68[1].mNext = (UFG::allocator::free_link *)v70;
+    v68[2].mNext = (UFG::allocator::free_link *)this;
+    this->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v68[1];
+    if ( v68 )
+      v71 = (UFG::qBaseNodeRB *)&v68[3];
+    else
+      v71 = 0i64;
+    UFG::qBaseTreeRB::Add(&p_m_inputsTree->mTree, v71);
+    v72 = UFG::qMalloc(0x50ui64, "EngineModelInputs", 0i64);
+    v73 = v72;
+    if ( v72 )
+    {
+      v72[1].mNext = v72 + 1;
+      v72[2].mNext = v72 + 1;
+      v74 = EngineModelSym_wheels_in_air.mUID;
+      v72[3].mNext = 0i64;
+      v72[4].mNext = 0i64;
+      v72[5].mNext = 0i64;
+      LODWORD(v72[6].mNext) = v74;
+      v72->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
+      v72[7].mNext = 0i64;
+      LODWORD(v72[8].mNext) = EngineModelSym_wheels_in_air;
+      HIDWORD(v72[8].mNext) = 0;
+      v72->mNext = (UFG::allocator::free_link *)&UFG::WheelsInAirInput::`vftable;
+    }
+    else
+    {
+      v73 = 0i64;
+    }
+    v75 = this->m_inputsList.mNode.mPrev;
+    v75->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v73[1];
+    v73[1].mNext = (UFG::allocator::free_link *)v75;
+    v73[2].mNext = (UFG::allocator::free_link *)this;
+    this->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v73[1];
     if ( v73 )
+      v76 = (UFG::qBaseNodeRB *)&v73[3];
+    else
+      v76 = 0i64;
+    UFG::qBaseTreeRB::Add(&p_m_inputsTree->mTree, v76);
+    v77 = UFG::qMalloc(0x50ui64, "EngineModelInputs", 0i64);
+    v78 = v77;
+    if ( v77 )
     {
-      v75 = v73 + 1;
-      v75->mNext = v75;
-      v75[1].mNext = v75;
-      LODWORD(v75) = EngineModelSym_pitch_angle;
-      v73[3].mNext = 0i64;
-      v73[4].mNext = 0i64;
-      v73[5].mNext = 0i64;
-      LODWORD(v73[6].mNext) = (_DWORD)v75;
-      v73->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
-      v73[7].mNext = 0i64;
-      LODWORD(v73[8].mNext) = EngineModelSym_pitch_angle;
-      HIDWORD(v73[8].mNext) = 0;
-      v73->mNext = (UFG::allocator::free_link *)&UFG::PitchAngleInput::`vftable;
+      v77[1].mNext = v77 + 1;
+      v77[2].mNext = v77 + 1;
+      v79 = EngineModelSym_burnout.mUID;
+      v77[3].mNext = 0i64;
+      v77[4].mNext = 0i64;
+      v77[5].mNext = 0i64;
+      LODWORD(v77[6].mNext) = v79;
+      v77->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
+      v77[7].mNext = 0i64;
+      LODWORD(v77[8].mNext) = EngineModelSym_burnout;
+      HIDWORD(v77[8].mNext) = 0;
+      v77->mNext = (UFG::allocator::free_link *)&UFG::BurnoutInput::`vftable;
     }
     else
     {
-      v74 = 0i64;
-    }
-    v76 = &v74[1].mNext;
-    v77 = v3->m_inputsList.mNode.mPrev;
-    v77->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v74[1];
-    *v76 = v77;
-    v76[1] = v3;
-    v3->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v74[1];
-    if ( v74 )
-      v78 = (UFG::qBaseNodeRB *)&v74[3];
-    else
       v78 = 0i64;
-    UFG::qBaseTreeRB::Add(v4, v78);
-    v79 = UFG::qMalloc(0x58ui64, "EngineModelInputs", 0i64);
-    v80 = v79;
-    if ( v79 )
+    }
+    v80 = this->m_inputsList.mNode.mPrev;
+    v80->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v78[1];
+    v78[1].mNext = (UFG::allocator::free_link *)v80;
+    v78[2].mNext = (UFG::allocator::free_link *)this;
+    this->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v78[1];
+    if ( v78 )
+      v81 = (UFG::qBaseNodeRB *)&v78[3];
+    else
+      v81 = 0i64;
+    UFG::qBaseTreeRB::Add(&p_m_inputsTree->mTree, v81);
+    v82 = UFG::qMalloc(0x50ui64, "EngineModelInputs", 0i64);
+    v83 = v82;
+    if ( v82 )
     {
-      v81 = v79 + 1;
-      v81->mNext = v81;
-      v81[1].mNext = v81;
-      LODWORD(v81) = EngineModelSym_ramming;
-      v79[3].mNext = 0i64;
-      v79[4].mNext = 0i64;
-      v79[5].mNext = 0i64;
-      LODWORD(v79[6].mNext) = (_DWORD)v81;
-      v79->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
-      v79[7].mNext = 0i64;
-      LODWORD(v79[8].mNext) = EngineModelSym_ramming;
-      HIDWORD(v79[8].mNext) = 0;
-      v79->mNext = (UFG::allocator::free_link *)&UFG::RammingInput::`vftable;
-      LODWORD(v79[10].mNext) = 0;
+      v82[1].mNext = v82 + 1;
+      v82[2].mNext = v82 + 1;
+      v84 = EngineModelSym_friction_multiplier.mUID;
+      v82[3].mNext = 0i64;
+      v82[4].mNext = 0i64;
+      v82[5].mNext = 0i64;
+      LODWORD(v82[6].mNext) = v84;
+      v82->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
+      v82[7].mNext = 0i64;
+      LODWORD(v82[8].mNext) = EngineModelSym_friction_multiplier;
+      HIDWORD(v82[8].mNext) = 0;
+      v82->mNext = (UFG::allocator::free_link *)&UFG::FrictionMultiplierInput::`vftable;
     }
     else
     {
-      v80 = 0i64;
+      v83 = 0i64;
     }
-    v82 = &v80[1].mNext;
-    v83 = v3->m_inputsList.mNode.mPrev;
-    v83->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v80[1];
-    *v82 = v83;
-    v82[1] = v3;
-    v3->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v80[1];
-    if ( v80 )
-      v84 = (UFG::qBaseNodeRB *)&v80[3];
-    else
-      v84 = 0i64;
-    UFG::qBaseTreeRB::Add(v4, v84);
-    v85 = UFG::qMalloc(0x50ui64, "EngineModelInputs", 0i64);
-    v86 = v85;
-    if ( v85 )
-    {
-      v87 = v85 + 1;
-      v87->mNext = v87;
-      v87[1].mNext = v87;
-      LODWORD(v87) = EngineModelSym_wheels_in_air;
-      v85[3].mNext = 0i64;
-      v85[4].mNext = 0i64;
-      v85[5].mNext = 0i64;
-      LODWORD(v85[6].mNext) = (_DWORD)v87;
-      v85->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
-      v85[7].mNext = 0i64;
-      LODWORD(v85[8].mNext) = EngineModelSym_wheels_in_air;
-      HIDWORD(v85[8].mNext) = 0;
-      v85->mNext = (UFG::allocator::free_link *)&UFG::WheelsInAirInput::`vftable;
-    }
-    else
-    {
-      v86 = 0i64;
-    }
-    v88 = &v86[1].mNext;
-    v89 = v3->m_inputsList.mNode.mPrev;
-    v89->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v86[1];
-    *v88 = v89;
-    v88[1] = v3;
-    v3->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v86[1];
-    if ( v86 )
-      v90 = (UFG::qBaseNodeRB *)&v86[3];
-    else
-      v90 = 0i64;
-    UFG::qBaseTreeRB::Add(v4, v90);
-    v91 = UFG::qMalloc(0x50ui64, "EngineModelInputs", 0i64);
-    v92 = v91;
-    if ( v91 )
-    {
-      v93 = v91 + 1;
-      v93->mNext = v93;
-      v93[1].mNext = v93;
-      LODWORD(v93) = EngineModelSym_burnout;
-      v91[3].mNext = 0i64;
-      v91[4].mNext = 0i64;
-      v91[5].mNext = 0i64;
-      LODWORD(v91[6].mNext) = (_DWORD)v93;
-      v91->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
-      v91[7].mNext = 0i64;
-      LODWORD(v91[8].mNext) = EngineModelSym_burnout;
-      HIDWORD(v91[8].mNext) = 0;
-      v91->mNext = (UFG::allocator::free_link *)&UFG::BurnoutInput::`vftable;
-    }
-    else
-    {
-      v92 = 0i64;
-    }
-    v94 = &v92[1].mNext;
-    v95 = v3->m_inputsList.mNode.mPrev;
-    v95->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v92[1];
-    *v94 = v95;
-    v94[1] = v3;
-    v3->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v92[1];
-    if ( v92 )
-      v96 = (UFG::qBaseNodeRB *)&v92[3];
-    else
-      v96 = 0i64;
-    UFG::qBaseTreeRB::Add(v4, v96);
-    v97 = UFG::qMalloc(0x50ui64, "EngineModelInputs", 0i64);
-    v98 = v97;
-    if ( v97 )
-    {
-      v99 = v97 + 1;
-      v99->mNext = v99;
-      v99[1].mNext = v99;
-      LODWORD(v99) = EngineModelSym_friction_multiplier;
-      v97[3].mNext = 0i64;
-      v97[4].mNext = 0i64;
-      v97[5].mNext = 0i64;
-      LODWORD(v97[6].mNext) = (_DWORD)v99;
-      v97->mNext = (UFG::allocator::free_link *)&UFG::EngineModelInput::`vftable;
-      v97[7].mNext = 0i64;
-      LODWORD(v97[8].mNext) = EngineModelSym_friction_multiplier;
-      HIDWORD(v97[8].mNext) = 0;
-      v97->mNext = (UFG::allocator::free_link *)&UFG::FrictionMultiplierInput::`vftable;
-    }
-    else
-    {
-      v98 = 0i64;
-    }
-    v100 = &v98[1].mNext;
-    v101 = v3->m_inputsList.mNode.mPrev;
-    v101->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v98[1];
-    *v100 = v101;
-    v100[1] = v3;
-    v3->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v98[1];
-    if ( v98 )
-      v9 = (UFG::qBaseNodeRB *)&v98[3];
-    UFG::qBaseTreeRB::Add(v4, v9);
+    v85 = this->m_inputsList.mNode.mPrev;
+    v85->mNext = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v83[1];
+    v83[1].mNext = (UFG::allocator::free_link *)v85;
+    v83[2].mNext = (UFG::allocator::free_link *)this;
+    this->m_inputsList.mNode.mPrev = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v83[1];
+    if ( v83 )
+      v9 = (UFG::qBaseNodeRB *)&v83[3];
+    UFG::qBaseTreeRB::Add(&p_m_inputsTree->mTree, v9);
   }
 }
 
 // File Line: 900
 // RVA: 0x6891A0
-void __usercall UFG::EngineModelInputs::ReadInputs(UFG::EngineModelInputs *this@<rcx>, UFG::EngineModel2 *em@<rdx>, float delta_sec@<xmm2>, int a4@<xmm0>)
+void __fastcall UFG::EngineModelInputs::ReadInputs(
+        UFG::EngineModelInputs *this,
+        UFG::EngineModel2 *em,
+        float delta_sec)
 {
-  int *v4; // rsi
-  UFG::EngineModelInputs *v5; // rdi
-  UFG::EngineModel2 *v6; // rbp
-  UFG::qBaseNodeRB *v7; // rbx
+  int *p_mCount; // rsi
+  UFG::EngineModelInputs *p_mNext; // rdi
+  UFG::qBaseNodeRB *mParent; // rbx
 
-  v4 = &this[-1].m_inputsTree.mTree.mCount;
-  v5 = (UFG::EngineModelInputs *)&this->m_inputsList.mNode.mNext[-1].mNext;
-  v6 = em;
-  if ( v5 != (UFG::EngineModelInputs *)&this[-1].m_inputsTree.mTree.mCount )
+  p_mCount = &this[-1].m_inputsTree.mTree.mCount;
+  p_mNext = (UFG::EngineModelInputs *)&this->m_inputsList.mNode.mNext[-1].mNext;
+  if ( p_mNext != (UFG::EngineModelInputs *)&this[-1].m_inputsTree.mTree.mCount )
   {
     do
     {
-      v7 = v5->m_inputsTree.mTree.mRoot.mParent;
-      v5->m_inputsTree.mTree.mNULL.mUID = HIDWORD(v5->m_inputsTree.mTree.mNULL.mChild[1]);
-      ((void (__fastcall *)(UFG::EngineModelInputs *, UFG::EngineModel2 *))v5->m_inputsList.mNode.mPrev->mNext)(v5, v6);
-      HIDWORD(v5->m_inputsTree.mTree.mNULL.mChild[1]) = a4;
-      v5 = (UFG::EngineModelInputs *)&v7[-1].mUID;
+      mParent = p_mNext->m_inputsTree.mTree.mRoot.mParent;
+      p_mNext->m_inputsTree.mTree.mNULL.mUID = HIDWORD(p_mNext->m_inputsTree.mTree.mNULL.mChild[1]);
+      *((float *)&p_mNext->m_inputsTree.mTree.mNULL.mChild[1] + 1) = ((float (__fastcall *)(UFG::EngineModelInputs *, UFG::EngineModel2 *))p_mNext->m_inputsList.mNode.mPrev->mNext)(
+                                                                       p_mNext,
+                                                                       em);
+      p_mNext = (UFG::EngineModelInputs *)&mParent[-1].mUID;
     }
-    while ( &v7[-1].mUID != (unsigned int *)v4 );
+    while ( &mParent[-1].mUID != (unsigned int *)p_mCount );
   }
 }
 
 // File Line: 929
 // RVA: 0x69BC00
-void __fastcall UFG::FrictionMultiplierOutput::WriteOutput(UFG::FrictionMultiplierOutput *this, float delta_sec, UFG::EngineModel2 *em)
+void __fastcall UFG::FrictionMultiplierOutput::WriteOutput(
+        UFG::FrictionMultiplierOutput *this,
+        float delta_sec,
+        UFG::EngineModel2 *em)
 {
-  UFG::EngineModel2 *v3; // rsi
-  UFG::FrictionMultiplierOutput *v4; // rbx
   UFG::qBaseTreeRB *v5; // rax
-  signed __int64 v6; // rax
-  UFG::EngineModelInput *v7; // rax
-  float v8; // xmm0_4
-  float v9; // xmm2_4
-  float v10; // xmm6_4
+  UFG::EngineModelInput *v6; // rax
+  UFG::EngineModelInput *frictionMultiplierInput; // rax
+  float m_value; // xmm0_4
+  float m_fallRate; // xmm2_4
+  float m_currentValue; // xmm6_4
 
-  v3 = em;
-  v4 = this;
-  if ( !(`UFG::FrictionMultiplierOutput::WriteOutput::`2::`local static guard & 1) )
+  if ( (`UFG::FrictionMultiplierOutput::WriteOutput::`2::`local static guard & 1) == 0 )
   {
     `UFG::FrictionMultiplierOutput::WriteOutput::`2::`local static guard |= 1u;
     `UFG::FrictionMultiplierOutput::WriteOutput::`2::rtpcId = AK::SoundEngine::GetIDFromString("vehicle_friction_multiplier");
   }
-  if ( !v4->frictionMultiplierInput )
+  if ( !this->frictionMultiplierInput )
   {
     if ( EngineModelSym_friction_multiplier.mUID
-      && (v5 = UFG::qBaseTreeRB::Get(&v3->m_inputs->m_inputsTree.mTree, EngineModelSym_friction_multiplier.mUID)) != 0i64 )
+      && (v5 = UFG::qBaseTreeRB::Get(&em->m_inputs->m_inputsTree.mTree, EngineModelSym_friction_multiplier.mUID)) != 0i64 )
     {
-      v6 = (signed __int64)&v5[-1].mNULL.mChild[1];
+      v6 = (UFG::EngineModelInput *)&v5[-1].mNULL.mChild[1];
     }
     else
     {
       v6 = 0i64;
     }
-    v4->frictionMultiplierInput = (UFG::EngineModelInput *)v6;
+    this->frictionMultiplierInput = v6;
   }
-  v7 = v4->frictionMultiplierInput;
-  if ( v7 )
+  frictionMultiplierInput = this->frictionMultiplierInput;
+  if ( frictionMultiplierInput )
   {
-    v8 = v7->m_value;
-    v4->m_value = v8;
-    v4->m_rlf.m_targetValue = v8;
-    if ( v8 < v4->m_rlf.m_currentValue )
-      v9 = v4->m_rlf.m_fallRate;
+    m_value = frictionMultiplierInput->m_value;
+    this->m_value = m_value;
+    this->m_rlf.m_targetValue = m_value;
+    if ( m_value < this->m_rlf.m_currentValue )
+      m_fallRate = this->m_rlf.m_fallRate;
     else
-      v9 = v4->m_rlf.m_riseRate;
-    UFG::qApproach(&v4->m_rlf.m_currentValue, v8, v9, delta_sec);
-    v10 = v4->m_rlf.m_currentValue;
-    if ( v10 != v4->m_prevSetValue )
+      m_fallRate = this->m_rlf.m_riseRate;
+    UFG::qApproach(&this->m_rlf.m_currentValue, m_value, m_fallRate, delta_sec);
+    m_currentValue = this->m_rlf.m_currentValue;
+    if ( m_currentValue != this->m_prevSetValue )
     {
       UFG::AudioEntity::SetRtpcValue(
-        (UFG::AudioEntity *)&v3->m_pVehAudComponent->vfptr,
+        &em->m_pVehAudComponent->UFG::AudioEntity,
         `UFG::FrictionMultiplierOutput::WriteOutput::`2::rtpcId,
-        v4->m_rlf.m_currentValue);
-      v4->m_prevSetValue = v10;
+        this->m_rlf.m_currentValue);
+      this->m_prevSetValue = m_currentValue;
     }
   }
 }
 
 // File Line: 987
 // RVA: 0x69BE70
-void __fastcall UFG::ModelledSpeedOutput::WriteOutput(UFG::ModelledSpeedOutput *this, float delta_sec, UFG::EngineModel2 *em)
+void __fastcall UFG::ModelledSpeedOutput::WriteOutput(
+        UFG::ModelledSpeedOutput *this,
+        float delta_sec,
+        UFG::EngineModel2 *em)
 {
-  float v3; // xmm6_4
-  UFG::ModelledSpeedOutput *v4; // rbx
+  float m_value; // xmm6_4
 
-  v3 = this->m_value;
-  v4 = this;
-  if ( v3 != this->m_prevSetValue )
+  m_value = this->m_value;
+  if ( m_value != this->m_prevSetValue )
   {
-    UFG::AudioEntity::SetRtpcValue((UFG::AudioEntity *)&em->m_pVehAudComponent->vfptr, vehicle_modelled_speed.mUID, v3);
-    v4->m_prevSetValue = v3;
+    UFG::AudioEntity::SetRtpcValue(&em->m_pVehAudComponent->UFG::AudioEntity, vehicle_modelled_speed.mUID, m_value);
+    this->m_prevSetValue = m_value;
   }
 }
 
 // File Line: 1020
 // RVA: 0x69BCF0
-void __fastcall UFG::LimiterThresholdOutput::WriteOutput(UFG::LimiterThresholdOutput *this, float delta_sec, UFG::EngineModel2 *em)
+void __fastcall UFG::LimiterThresholdOutput::WriteOutput(
+        UFG::LimiterThresholdOutput *this,
+        float delta_sec,
+        UFG::EngineModel2 *em)
 {
-  float v3; // xmm6_4
-  UFG::LimiterThresholdOutput *v4; // rbx
-  float v5; // xmm1_4
-  float v6; // xmm2_4
-  float v7; // xmm6_4
-  UFG::TiDo *v8; // rax
+  float m_targetValue; // xmm1_4
+  float m_fallRate; // xmm2_4
+  float m_currentValue; // xmm6_4
+  UFG::TiDo *Instance; // rax
 
-  v3 = delta_sec;
-  v4 = this;
-  if ( !(`UFG::LimiterThresholdOutput::WriteOutput::`2::`local static guard & 1) )
+  if ( (`UFG::LimiterThresholdOutput::WriteOutput::`2::`local static guard & 1) == 0 )
   {
     `UFG::LimiterThresholdOutput::WriteOutput::`2::`local static guard |= 1u;
     `UFG::LimiterThresholdOutput::WriteOutput::`2::limiterRtpc = AK::SoundEngine::GetIDFromString("vehicle_limiter_threshold");
   }
-  v4->m_rateLimitedValue.m_targetValue = v4->m_value;
-  v5 = v4->m_rateLimitedValue.m_targetValue;
-  if ( v5 < v4->m_rateLimitedValue.m_currentValue )
-    v6 = v4->m_rateLimitedValue.m_fallRate;
+  this->m_rateLimitedValue.m_targetValue = this->m_value;
+  m_targetValue = this->m_rateLimitedValue.m_targetValue;
+  if ( m_targetValue < this->m_rateLimitedValue.m_currentValue )
+    m_fallRate = this->m_rateLimitedValue.m_fallRate;
   else
-    v6 = v4->m_rateLimitedValue.m_riseRate;
-  UFG::qApproach(&v4->m_rateLimitedValue.m_currentValue, v5, v6, v3);
-  v7 = v4->m_rateLimitedValue.m_currentValue;
-  if ( `UFG::LimiterThresholdOutput::WriteOutput::`2::last_limiter_value != v7 )
+    m_fallRate = this->m_rateLimitedValue.m_riseRate;
+  UFG::qApproach(&this->m_rateLimitedValue.m_currentValue, m_targetValue, m_fallRate, delta_sec);
+  m_currentValue = this->m_rateLimitedValue.m_currentValue;
+  if ( `UFG::LimiterThresholdOutput::WriteOutput::`2::last_limiter_value != m_currentValue )
   {
-    v8 = UFG::TiDo::GetInstance();
+    Instance = UFG::TiDo::GetInstance();
     UFG::TiDo::SetWwiseRtpcValue(
-      v8,
+      Instance,
       `UFG::LimiterThresholdOutput::WriteOutput::`2::limiterRtpc,
-      v7,
+      m_currentValue,
       0xFFFFFFFFFFFFFFFFui64);
-    `UFG::LimiterThresholdOutput::WriteOutput::`2::last_limiter_value = v4->m_rateLimitedValue.m_currentValue;
+    `UFG::LimiterThresholdOutput::WriteOutput::`2::last_limiter_value = this->m_rateLimitedValue.m_currentValue;
   }
 }
 
@@ -1922,12 +1858,10 @@ void __fastcall UFG::LimiterThresholdOutput::WriteOutput(UFG::LimiterThresholdOu
 // RVA: 0x66A440
 void __fastcall UFG::RpmOutput::RpmOutput(UFG::RpmOutput *this, UFG::EngineModel2 *em)
 {
-  UFG::EngineModel2 *v2; // rsi
-  UFG::RpmOutput *v3; // rdi
-  UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *v4; // rax
+  unsigned int mUID; // eax
   char *v5; // rbx
-  UFG::qPropertySet *v6; // rbp
-  char *v7; // rax
+  UFG::qPropertySet *mpPropertySet; // rbp
+  char *MemImagePtr; // rax
   __int64 v8; // rcx
   UFG::qPropertySet *v9; // rdx
   UFG::qPropertySet *v10; // rbp
@@ -1936,24 +1870,21 @@ void __fastcall UFG::RpmOutput::RpmOutput(UFG::RpmOutput *this, UFG::EngineModel
   UFG::qPropertySet *v13; // rbp
   char *v14; // rax
   float v15; // xmm0_4
-  UFG::VehicleAudioSubTypeParameters *v16; // rcx
-  float v17; // xmm7_4
+  UFG::VehicleAudioSubTypeParameters *m_pSubTypeParameters; // rcx
+  float m_maxRpm; // xmm7_4
   UFG::qPropertySet *v18; // rbp
   char *v19; // rax
   float v20; // xmm6_4
   UFG::qPropertySet *v21; // rsi
 
-  v2 = em;
-  v3 = this;
-  v4 = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&this->mPrev;
-  v4->mPrev = v4;
-  v4->mNext = v4;
-  LODWORD(v4) = EngineModelSym_rpm;
+  this->mPrev = &this->UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput>;
+  this->mNext = &this->UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput>;
+  mUID = EngineModelSym_rpm.mUID;
   v5 = 0i64;
   this->mNode.mParent = 0i64;
   this->mNode.mChild[0] = 0i64;
   this->mNode.mChild[1] = 0i64;
-  this->mNode.mUID = (unsigned int)v4;
+  this->mNode.mUID = mUID;
   this->vfptr = (UFG::EngineModelOutputVtbl *)&UFG::EngineModelOutput::`vftable;
   this->mName.mUID = -1;
   this->m_value = 0.0;
@@ -1963,24 +1894,24 @@ void __fastcall UFG::RpmOutput::RpmOutput(UFG::RpmOutput *this, UFG::EngineModel
   this->m_rateLimitedRPM.m_fallRate = 10000000.0;
   *(_QWORD *)&this->m_rateLimitedRPM.m_max = 1065353216i64;
   this->m_prevSetValue = -1.0;
-  v6 = em->m_pVehAudComponent->m_pSubTypeParameters->mpPropertySet;
-  if ( Vehicles_Audio_Base_BaseVehicleBase::IsClass(v6->mSchemaName.mUID) )
-    v7 = UFG::qPropertySet::GetMemImagePtr(v6);
+  mpPropertySet = em->m_pVehAudComponent->m_pSubTypeParameters->mpPropertySet;
+  if ( Vehicles_Audio_Base_BaseVehicleBase::IsClass(mpPropertySet->mSchemaName.mUID) )
+    MemImagePtr = UFG::qPropertySet::GetMemImagePtr(mpPropertySet);
   else
-    v7 = 0i64;
-  v8 = *((_QWORD *)v7 + 16);
+    MemImagePtr = 0i64;
+  v8 = *((_QWORD *)MemImagePtr + 16);
   if ( v8 )
-    v9 = (UFG::qPropertySet *)&v7[v8 + 128];
+    v9 = (UFG::qPropertySet *)&MemImagePtr[v8 + 128];
   else
     v9 = 0i64;
-  UFG::VehicleAudioParameters::SetRLFFromPropertySet(&v3->m_rateLimitedRPM, v9);
-  v10 = v2->m_pVehAudComponent->m_pSubTypeParameters->mpPropertySet;
+  UFG::VehicleAudioParameters::SetRLFFromPropertySet(&this->m_rateLimitedRPM, v9);
+  v10 = em->m_pVehAudComponent->m_pSubTypeParameters->mpPropertySet;
   if ( Vehicles_Audio_Base_BaseVehicleBase::IsClass(v10->mSchemaName.mUID) )
     v11 = UFG::qPropertySet::GetMemImagePtr(v10);
   else
     v11 = 0i64;
   v12 = *((float *)v11 + 20);
-  v13 = v2->m_pVehAudComponent->m_pSubTypeParameters->mpPropertySet;
+  v13 = em->m_pVehAudComponent->m_pSubTypeParameters->mpPropertySet;
   if ( Vehicles_Audio_Base_BaseVehicleBase::IsClass(v13->mSchemaName.mUID) )
     v14 = UFG::qPropertySet::GetMemImagePtr(v13);
   else
@@ -1988,32 +1919,32 @@ void __fastcall UFG::RpmOutput::RpmOutput(UFG::RpmOutput *this, UFG::EngineModel
   v15 = *((float *)v14 + 21);
   if ( v12 >= v15 )
     v12 = *((float *)v14 + 21);
-  v16 = v2->m_pVehAudComponent->m_pSubTypeParameters;
-  v17 = v16->m_engineCurve->m_maxRpm;
-  if ( v17 > 0.0 )
+  m_pSubTypeParameters = em->m_pVehAudComponent->m_pSubTypeParameters;
+  m_maxRpm = m_pSubTypeParameters->m_engineCurve->m_maxRpm;
+  if ( m_maxRpm > 0.0 )
   {
     if ( v15 <= 0.0 )
-      v15 = v16->m_engineCurve->m_maxRpm;
+      v15 = m_pSubTypeParameters->m_engineCurve->m_maxRpm;
     if ( v12 <= 0.0 )
       v12 = v15;
-    v3->m_rpmScaleFactor = (float)(UFG::qRandom(v15 - v12, &UFG::qDefaultSeed) + v12) / v17;
-    v18 = v2->m_pVehAudComponent->m_pSubTypeParameters->mpPropertySet;
+    this->m_rpmScaleFactor = (float)(UFG::qRandom(v15 - v12, (unsigned int *)&UFG::qDefaultSeed) + v12) / m_maxRpm;
+    v18 = em->m_pVehAudComponent->m_pSubTypeParameters->mpPropertySet;
     if ( Vehicles_Audio_Base_BaseVehicleBase::IsClass(v18->mSchemaName.mUID) )
       v19 = UFG::qPropertySet::GetMemImagePtr(v18);
     else
       v19 = 0i64;
     v20 = *((float *)v19 + 22);
-    v21 = v2->m_pVehAudComponent->m_pSubTypeParameters->mpPropertySet;
+    v21 = em->m_pVehAudComponent->m_pSubTypeParameters->mpPropertySet;
     if ( Vehicles_Audio_Base_BaseVehicleBase::IsClass(v21->mSchemaName.mUID) )
       v5 = UFG::qPropertySet::GetMemImagePtr(v21);
-    v3->m_rpmOffset = UFG::qRandom(
-                        COERCE_FLOAT(COERCE_UNSIGNED_INT(*((float *)v5 + 23) - v20) & _xmm),
-                        &UFG::qDefaultSeed);
-    v3->m_rateLimitedRPM.m_max = v17;
+    this->m_rpmOffset = UFG::qRandom(
+                          COERCE_FLOAT(COERCE_UNSIGNED_INT(*((float *)v5 + 23) - v20) & _xmm),
+                          (unsigned int *)&UFG::qDefaultSeed);
+    this->m_rateLimitedRPM.m_max = m_maxRpm;
   }
   else
   {
-    v3->m_rpmScaleFactor = 1.0;
+    this->m_rpmScaleFactor = 1.0;
   }
 }
 
@@ -2021,42 +1952,36 @@ void __fastcall UFG::RpmOutput::RpmOutput(UFG::RpmOutput *this, UFG::EngineModel
 // RVA: 0x69BEB0
 void __fastcall UFG::RpmOutput::WriteOutput(UFG::RpmOutput *this, float delta_sec, UFG::EngineModel2 *em)
 {
-  UFG::EngineModel2 *v3; // rsi
-  float v4; // xmm6_4
-  UFG::RpmOutput *v5; // rdi
   float v6; // xmm0_4
-  float v7; // xmm1_4
-  float v8; // xmm2_4
-  float v9; // xmm6_4
+  float m_min; // xmm1_4
+  float m_fallRate; // xmm2_4
+  float m_currentValue; // xmm6_4
 
-  v3 = em;
-  v4 = delta_sec;
-  v5 = this;
-  if ( !(`UFG::RpmOutput::WriteOutput::`2::`local static guard & 1) )
+  if ( (`UFG::RpmOutput::WriteOutput::`2::`local static guard & 1) == 0 )
   {
     `UFG::RpmOutput::WriteOutput::`2::`local static guard |= 1u;
     `UFG::RpmOutput::WriteOutput::`2::rpmId = AK::SoundEngine::GetIDFromString("RPM_Vehicle");
   }
-  v6 = (float)(v5->m_rpmScaleFactor * v5->m_value) + v5->m_rpmOffset;
-  v5->m_rateLimitedRPM.m_targetValue = v6;
-  v7 = v6;
-  if ( v6 <= v5->m_rateLimitedRPM.m_min )
-    v7 = v5->m_rateLimitedRPM.m_min;
-  if ( v7 >= v5->m_rateLimitedRPM.m_max )
-    v7 = v5->m_rateLimitedRPM.m_max;
-  if ( v5->m_rateLimitedRPM.m_targetValue < v5->m_rateLimitedRPM.m_currentValue )
-    v8 = v5->m_rateLimitedRPM.m_fallRate;
+  v6 = (float)(this->m_rpmScaleFactor * this->m_value) + this->m_rpmOffset;
+  this->m_rateLimitedRPM.m_targetValue = v6;
+  m_min = v6;
+  if ( v6 <= this->m_rateLimitedRPM.m_min )
+    m_min = this->m_rateLimitedRPM.m_min;
+  if ( m_min >= this->m_rateLimitedRPM.m_max )
+    m_min = this->m_rateLimitedRPM.m_max;
+  if ( this->m_rateLimitedRPM.m_targetValue < this->m_rateLimitedRPM.m_currentValue )
+    m_fallRate = this->m_rateLimitedRPM.m_fallRate;
   else
-    v8 = v5->m_rateLimitedRPM.m_riseRate;
-  UFG::qApproach(&v5->m_rateLimitedRPM.m_currentValue, v7, v8, v4);
-  v9 = v5->m_rateLimitedRPM.m_currentValue;
-  if ( v9 != v5->m_prevSetValue )
+    m_fallRate = this->m_rateLimitedRPM.m_riseRate;
+  UFG::qApproach(&this->m_rateLimitedRPM.m_currentValue, m_min, m_fallRate, delta_sec);
+  m_currentValue = this->m_rateLimitedRPM.m_currentValue;
+  if ( m_currentValue != this->m_prevSetValue )
   {
     UFG::AudioEntity::SetRtpcValue(
-      (UFG::AudioEntity *)&v3->m_pVehAudComponent->vfptr,
+      &em->m_pVehAudComponent->UFG::AudioEntity,
       `UFG::RpmOutput::WriteOutput::`2::rpmId,
-      v5->m_rateLimitedRPM.m_currentValue);
-    v5->m_prevSetValue = v9;
+      this->m_rateLimitedRPM.m_currentValue);
+    this->m_prevSetValue = m_currentValue;
   }
 }
 
@@ -2064,23 +1989,20 @@ void __fastcall UFG::RpmOutput::WriteOutput(UFG::RpmOutput *this, float delta_se
 // RVA: 0x669AC0
 void __fastcall UFG::LoadOutput::LoadOutput(UFG::LoadOutput *this, UFG::EngineModel2 *em)
 {
-  UFG::LoadOutput *v2; // rdi
-  UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *v3; // rax
+  unsigned int mUID; // eax
   UFG::qPropertySet *v4; // rbx
-  UFG::qPropertySet *v5; // rbp
-  char *v6; // rax
+  UFG::qPropertySet *mpPropertySet; // rbp
+  char *MemImagePtr; // rax
   __int64 v7; // rcx
 
-  v2 = this;
-  v3 = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&this->mPrev;
-  v3->mPrev = v3;
-  v3->mNext = v3;
-  LODWORD(v3) = EngineModelSym_load;
+  this->mPrev = &this->UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput>;
+  this->mNext = &this->UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput>;
+  mUID = EngineModelSym_load.mUID;
   v4 = 0i64;
   this->mNode.mParent = 0i64;
   this->mNode.mChild[0] = 0i64;
   this->mNode.mChild[1] = 0i64;
-  this->mNode.mUID = (unsigned int)v3;
+  this->mNode.mUID = mUID;
   this->vfptr = (UFG::EngineModelOutputVtbl *)&UFG::EngineModelOutput::`vftable;
   this->mName.mUID = -1;
   this->m_value = 0.0;
@@ -2092,66 +2014,60 @@ void __fastcall UFG::LoadOutput::LoadOutput(UFG::LoadOutput *this, UFG::EngineMo
   this->m_prevSetValue = -1.0;
   this->m_rateLimitedLoad.m_max = 1.0;
   this->m_rateLimitedLoad.m_min = -1.0;
-  v5 = em->m_pVehAudComponent->m_pSubTypeParameters->mpPropertySet;
-  if ( Vehicles_Audio_Base_BaseVehicleBase::IsClass(v5->mSchemaName.mUID) )
-    v6 = UFG::qPropertySet::GetMemImagePtr(v5);
+  mpPropertySet = em->m_pVehAudComponent->m_pSubTypeParameters->mpPropertySet;
+  if ( Vehicles_Audio_Base_BaseVehicleBase::IsClass(mpPropertySet->mSchemaName.mUID) )
+    MemImagePtr = UFG::qPropertySet::GetMemImagePtr(mpPropertySet);
   else
-    v6 = 0i64;
-  v7 = *((_QWORD *)v6 + 9);
+    MemImagePtr = 0i64;
+  v7 = *((_QWORD *)MemImagePtr + 9);
   if ( v7 )
-    v4 = (UFG::qPropertySet *)&v6[v7 + 72];
-  UFG::VehicleAudioParameters::SetRLFFromPropertySet(&v2->m_rateLimitedLoad, v4);
+    v4 = (UFG::qPropertySet *)&MemImagePtr[v7 + 72];
+  UFG::VehicleAudioParameters::SetRLFFromPropertySet(&this->m_rateLimitedLoad, v4);
 }
 
 // File Line: 1146
 // RVA: 0x69BDA0
 void __fastcall UFG::LoadOutput::WriteOutput(UFG::LoadOutput *this, float delta_sec, UFG::EngineModel2 *em)
 {
-  UFG::EngineModel2 *v3; // rsi
-  float v4; // xmm6_4
-  UFG::LoadOutput *v5; // rdi
-  float v6; // xmm1_4
-  float v7; // xmm2_4
-  float v8; // xmm6_4
+  float m_targetValue; // xmm1_4
+  float m_fallRate; // xmm2_4
+  float m_currentValue; // xmm6_4
 
-  v3 = em;
-  v4 = delta_sec;
-  v5 = this;
-  if ( !(`UFG::LoadOutput::WriteOutput::`2::`local static guard & 1) )
+  if ( (`UFG::LoadOutput::WriteOutput::`2::`local static guard & 1) == 0 )
   {
     `UFG::LoadOutput::WriteOutput::`2::`local static guard |= 1u;
     `UFG::LoadOutput::WriteOutput::`2::loadId = AK::SoundEngine::GetIDFromString("engine_load");
   }
-  v5->m_rateLimitedLoad.m_targetValue = v5->m_value;
-  v6 = v5->m_rateLimitedLoad.m_targetValue;
-  if ( v6 <= v5->m_rateLimitedLoad.m_min )
-    v6 = v5->m_rateLimitedLoad.m_min;
-  if ( v6 >= v5->m_rateLimitedLoad.m_max )
-    v6 = v5->m_rateLimitedLoad.m_max;
-  if ( v5->m_rateLimitedLoad.m_targetValue < v5->m_rateLimitedLoad.m_currentValue )
-    v7 = v5->m_rateLimitedLoad.m_fallRate;
+  this->m_rateLimitedLoad.m_targetValue = this->m_value;
+  m_targetValue = this->m_rateLimitedLoad.m_targetValue;
+  if ( m_targetValue <= this->m_rateLimitedLoad.m_min )
+    m_targetValue = this->m_rateLimitedLoad.m_min;
+  if ( m_targetValue >= this->m_rateLimitedLoad.m_max )
+    m_targetValue = this->m_rateLimitedLoad.m_max;
+  if ( this->m_rateLimitedLoad.m_targetValue < this->m_rateLimitedLoad.m_currentValue )
+    m_fallRate = this->m_rateLimitedLoad.m_fallRate;
   else
-    v7 = v5->m_rateLimitedLoad.m_riseRate;
-  UFG::qApproach(&v5->m_rateLimitedLoad.m_currentValue, v6, v7, v4);
-  v8 = v5->m_rateLimitedLoad.m_currentValue;
-  if ( v8 != v5->m_prevSetValue )
+    m_fallRate = this->m_rateLimitedLoad.m_riseRate;
+  UFG::qApproach(&this->m_rateLimitedLoad.m_currentValue, m_targetValue, m_fallRate, delta_sec);
+  m_currentValue = this->m_rateLimitedLoad.m_currentValue;
+  if ( m_currentValue != this->m_prevSetValue )
   {
     UFG::AudioEntity::SetRtpcValue(
-      (UFG::AudioEntity *)&v3->m_pVehAudComponent->vfptr,
+      &em->m_pVehAudComponent->UFG::AudioEntity,
       `UFG::LoadOutput::WriteOutput::`2::loadId,
-      v5->m_rateLimitedLoad.m_currentValue);
-    v5->m_prevSetValue = v8;
+      this->m_rateLimitedLoad.m_currentValue);
+    this->m_prevSetValue = m_currentValue;
   }
 }
 
 // File Line: 1190
 // RVA: 0x69BBB0
-void __fastcall UFG::AccelerationFactorOutput::WriteOutput(UFG::AccelerationFactorOutput *this, float delta_sec, UFG::EngineModel2 *em)
+void __fastcall UFG::AccelerationFactorOutput::WriteOutput(
+        UFG::AccelerationFactorOutput *this,
+        float delta_sec,
+        UFG::EngineModel2 *em)
 {
-  UFG::AccelerationFactorOutput *v3; // rbx
-
-  v3 = this;
-  if ( `UFG::AccelerationFactorOutput::WriteOutput::`2::`local static guard & 1 )
+  if ( (`UFG::AccelerationFactorOutput::WriteOutput::`2::`local static guard & 1) != 0 )
   {
     this->m_prevValue = this->m_value;
   }
@@ -2159,7 +2075,7 @@ void __fastcall UFG::AccelerationFactorOutput::WriteOutput(UFG::AccelerationFact
   {
     `UFG::AccelerationFactorOutput::WriteOutput::`2::`local static guard |= 1u;
     `UFG::AccelerationFactorOutput::WriteOutput::`2::acceleration_factor_id = AK::SoundEngine::GetIDFromString("acceleration_factor");
-    v3->m_prevValue = v3->m_value;
+    this->m_prevValue = this->m_value;
   }
 }
 
@@ -2167,315 +2083,289 @@ void __fastcall UFG::AccelerationFactorOutput::WriteOutput(UFG::AccelerationFact
 // RVA: 0x668D10
 void __fastcall UFG::EngineModelOutputs::EngineModelOutputs(UFG::EngineModelOutputs *this, UFG::EngineModel2 *em)
 {
-  UFG::EngineModel2 *v2; // rbp
-  UFG::EngineModelOutputs *v3; // rdi
-  UFG::qBaseTreeRB *v4; // rsi
+  UFG::qTreeRB<UFG::EngineModelOutput,UFG::EngineModelOutput,1> *p_m_outputsTree; // rsi
   UFG::allocator::free_link *v5; // rax
   UFG::qBaseNodeRB *v6; // rbx
   __int64 v7; // rax
   __int64 v8; // rdx
-  UFG::EngineModelOutputs **v9; // rcx
-  UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *v10; // rax
-  UFG::qBaseNodeRB *v11; // rdx
-  UFG::allocator::free_link *v12; // rax
-  __int64 v13; // rax
-  __int64 v14; // rdx
-  UFG::EngineModelOutputs **v15; // rcx
-  UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *v16; // rax
-  UFG::qBaseNodeRB *v17; // rdx
-  UFG::allocator::free_link *v18; // rax
-  UFG::allocator::free_link *v19; // rdx
-  UFG::allocator::free_link *v20; // rcx
-  UFG::EngineModelOutputs **v21; // rcx
-  UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *v22; // rax
-  UFG::qBaseNodeRB *v23; // rdx
-  UFG::allocator::free_link *v24; // rax
-  UFG::allocator::free_link *v25; // rdx
-  UFG::allocator::free_link *v26; // rcx
-  UFG::EngineModelOutputs **v27; // rcx
-  UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *v28; // rax
-  UFG::qBaseNodeRB *v29; // rdx
-  UFG::allocator::free_link *v30; // rax
-  UFG::allocator::free_link *v31; // rdx
-  UFG::allocator::free_link *v32; // rcx
-  UFG::EngineModelOutputs **v33; // rcx
+  UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *mNext; // rax
+  UFG::qBaseNodeRB *v10; // rdx
+  UFG::allocator::free_link *v11; // rax
+  __int64 v12; // rax
+  __int64 v13; // rdx
+  UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *v14; // rax
+  UFG::qBaseNodeRB *v15; // rdx
+  UFG::allocator::free_link *v16; // rax
+  UFG::allocator::free_link *v17; // rdx
+  unsigned int mUID; // ecx
+  UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *v19; // rax
+  UFG::qBaseNodeRB *v20; // rdx
+  UFG::allocator::free_link *v21; // rax
+  UFG::allocator::free_link *v22; // rdx
+  unsigned int v23; // ecx
+  UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *v24; // rax
+  UFG::qBaseNodeRB *v25; // rdx
+  UFG::allocator::free_link *v26; // rax
+  UFG::allocator::free_link *v27; // rdx
+  unsigned int v28; // ecx
+  UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *v29; // rax
+  UFG::qBaseNodeRB *v30; // rdx
+  UFG::allocator::free_link *v31; // rax
+  UFG::allocator::free_link *v32; // rdx
+  unsigned int v33; // ecx
   UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *v34; // rax
   UFG::qBaseNodeRB *v35; // rdx
   UFG::allocator::free_link *v36; // rax
   UFG::allocator::free_link *v37; // rdx
-  UFG::allocator::free_link *v38; // rcx
-  UFG::EngineModelOutputs **v39; // rcx
-  UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *v40; // rax
-  UFG::qBaseNodeRB *v41; // rdx
-  UFG::allocator::free_link *v42; // rax
-  UFG::allocator::free_link *v43; // rdx
-  UFG::allocator::free_link *v44; // rcx
-  UFG::EngineModelOutputs **v45; // rcx
-  UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *v46; // rax
-  UFG::qBaseNodeRB *v47; // rdx
-  UFG::allocator::free_link *v48; // rax
-  UFG::allocator::free_link *v49; // rdx
-  UFG::allocator::free_link *v50; // rcx
-  UFG::EngineModelOutputs **v51; // rcx
-  UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *v52; // rax
+  unsigned int v38; // ecx
+  UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *v39; // rax
+  UFG::qBaseNodeRB *v40; // rdx
+  UFG::allocator::free_link *v41; // rax
+  UFG::allocator::free_link *v42; // rdx
+  unsigned int v43; // ecx
+  UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *v44; // rax
 
-  v2 = em;
-  v3 = this;
   this->m_outputsList.mNode.mPrev = &this->m_outputsList.mNode;
   this->m_outputsList.mNode.mNext = &this->m_outputsList.mNode;
-  v4 = &this->m_outputsTree.mTree;
+  p_m_outputsTree = &this->m_outputsTree;
   UFG::qBaseTreeRB::qBaseTreeRB(&this->m_outputsTree.mTree);
   v5 = UFG::qMalloc(0x68ui64, "EngineModelOutputs", 0i64);
   v6 = 0i64;
   if ( v5 )
   {
-    UFG::RpmOutput::RpmOutput((UFG::RpmOutput *)v5, v2);
+    UFG::RpmOutput::RpmOutput((UFG::RpmOutput *)v5, em);
     v8 = v7;
   }
   else
   {
     v8 = 0i64;
   }
-  v9 = (UFG::EngineModelOutputs **)(v8 + 8);
-  v10 = v3->m_outputsList.mNode.mNext;
-  v3->m_outputsList.mNode.mNext = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)(v8 + 8);
-  *v9 = v3;
-  v9[1] = (UFG::EngineModelOutputs *)v10;
-  v10->mPrev = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)(v8 + 8);
+  mNext = this->m_outputsList.mNode.mNext;
+  this->m_outputsList.mNode.mNext = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)(v8 + 8);
+  *(_QWORD *)(v8 + 8) = this;
+  *(_QWORD *)(v8 + 16) = mNext;
+  mNext->mPrev = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)(v8 + 8);
   if ( v8 )
-    v11 = (UFG::qBaseNodeRB *)(v8 + 24);
+    v10 = (UFG::qBaseNodeRB *)(v8 + 24);
   else
-    v11 = 0i64;
-  UFG::qBaseTreeRB::Add(v4, v11);
-  v12 = UFG::qMalloc(0x60ui64, "EngineModelOutputs", 0i64);
-  if ( v12 )
+    v10 = 0i64;
+  UFG::qBaseTreeRB::Add(&p_m_outputsTree->mTree, v10);
+  v11 = UFG::qMalloc(0x60ui64, "EngineModelOutputs", 0i64);
+  if ( v11 )
   {
-    UFG::LoadOutput::LoadOutput((UFG::LoadOutput *)v12, v2);
-    v14 = v13;
+    UFG::LoadOutput::LoadOutput((UFG::LoadOutput *)v11, em);
+    v13 = v12;
   }
   else
   {
-    v14 = 0i64;
+    v13 = 0i64;
   }
-  v15 = (UFG::EngineModelOutputs **)(v14 + 8);
-  v16 = v3->m_outputsList.mNode.mNext;
-  v3->m_outputsList.mNode.mNext = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)(v14 + 8);
-  *v15 = v3;
-  v15[1] = (UFG::EngineModelOutputs *)v16;
-  v16->mPrev = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)(v14 + 8);
-  if ( v14 )
-    v17 = (UFG::qBaseNodeRB *)(v14 + 24);
+  v14 = this->m_outputsList.mNode.mNext;
+  this->m_outputsList.mNode.mNext = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)(v13 + 8);
+  *(_QWORD *)(v13 + 8) = this;
+  *(_QWORD *)(v13 + 16) = v14;
+  v14->mPrev = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)(v13 + 8);
+  if ( v13 )
+    v15 = (UFG::qBaseNodeRB *)(v13 + 24);
   else
+    v15 = 0i64;
+  UFG::qBaseTreeRB::Add(&p_m_outputsTree->mTree, v15);
+  v16 = UFG::qMalloc(0x48ui64, "EngineModelOutputs", 0i64);
+  v17 = v16;
+  if ( v16 )
+  {
+    v16[1].mNext = v16 + 1;
+    v16[2].mNext = v16 + 1;
+    mUID = EngineModelSym_acceleration_factor.mUID;
+    v16[3].mNext = 0i64;
+    v16[4].mNext = 0i64;
+    v16[5].mNext = 0i64;
+    LODWORD(v16[6].mNext) = mUID;
+    v16->mNext = (UFG::allocator::free_link *)&UFG::EngineModelOutput::`vftable;
+    LODWORD(v16[7].mNext) = -1;
+    HIDWORD(v16[7].mNext) = 0;
+    v16->mNext = (UFG::allocator::free_link *)&UFG::AccelerationFactorOutput::`vftable;
+    HIDWORD(v16[7].mNext) = 1065353216;
+    LODWORD(v16[8].mNext) = 1065353216;
+  }
+  else
+  {
     v17 = 0i64;
-  UFG::qBaseTreeRB::Add(v4, v17);
-  v18 = UFG::qMalloc(0x48ui64, "EngineModelOutputs", 0i64);
-  v19 = v18;
-  if ( v18 )
+  }
+  v19 = this->m_outputsList.mNode.mNext;
+  this->m_outputsList.mNode.mNext = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&v17[1];
+  v17[1].mNext = (UFG::allocator::free_link *)this;
+  v17[2].mNext = (UFG::allocator::free_link *)v19;
+  v19->mPrev = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&v17[1];
+  if ( v17 )
+    v20 = (UFG::qBaseNodeRB *)&v17[3];
+  else
+    v20 = 0i64;
+  UFG::qBaseTreeRB::Add(&p_m_outputsTree->mTree, v20);
+  v21 = UFG::qMalloc(0x48ui64, "EngineModelOutputs", 0i64);
+  v22 = v21;
+  if ( v21 )
   {
-    v20 = v18 + 1;
-    v20->mNext = v20;
-    v20[1].mNext = v20;
-    LODWORD(v20) = EngineModelSym_acceleration_factor;
-    v18[3].mNext = 0i64;
-    v18[4].mNext = 0i64;
-    v18[5].mNext = 0i64;
-    LODWORD(v18[6].mNext) = (_DWORD)v20;
-    v18->mNext = (UFG::allocator::free_link *)&UFG::EngineModelOutput::`vftable;
-    LODWORD(v18[7].mNext) = -1;
-    HIDWORD(v18[7].mNext) = 0;
-    v18->mNext = (UFG::allocator::free_link *)&UFG::AccelerationFactorOutput::`vftable;
-    HIDWORD(v18[7].mNext) = 1065353216;
-    LODWORD(v18[8].mNext) = 1065353216;
+    v21[1].mNext = v21 + 1;
+    v21[2].mNext = v21 + 1;
+    v23 = EngineModelSym_modelled_speed.mUID;
+    v21[3].mNext = 0i64;
+    v21[4].mNext = 0i64;
+    v21[5].mNext = 0i64;
+    LODWORD(v21[6].mNext) = v23;
+    v21->mNext = (UFG::allocator::free_link *)&UFG::EngineModelOutput::`vftable;
+    LODWORD(v21[7].mNext) = -1;
+    HIDWORD(v21[7].mNext) = 0;
+    v21->mNext = (UFG::allocator::free_link *)&UFG::ModelledSpeedOutput::`vftable;
+    LODWORD(v21[8].mNext) = -1082130432;
   }
   else
   {
-    v19 = 0i64;
+    v22 = 0i64;
   }
-  v21 = (UFG::EngineModelOutputs **)&v19[1];
-  v22 = v3->m_outputsList.mNode.mNext;
-  v3->m_outputsList.mNode.mNext = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&v19[1];
-  *v21 = v3;
-  v21[1] = (UFG::EngineModelOutputs *)v22;
-  v22->mPrev = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&v19[1];
-  if ( v19 )
-    v23 = (UFG::qBaseNodeRB *)&v19[3];
+  v24 = this->m_outputsList.mNode.mNext;
+  this->m_outputsList.mNode.mNext = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&v22[1];
+  v22[1].mNext = (UFG::allocator::free_link *)this;
+  v22[2].mNext = (UFG::allocator::free_link *)v24;
+  v24->mPrev = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&v22[1];
+  if ( v22 )
+    v25 = (UFG::qBaseNodeRB *)&v22[3];
   else
-    v23 = 0i64;
-  UFG::qBaseTreeRB::Add(v4, v23);
-  v24 = UFG::qMalloc(0x48ui64, "EngineModelOutputs", 0i64);
-  v25 = v24;
-  if ( v24 )
-  {
-    v26 = v24 + 1;
-    v26->mNext = v26;
-    v26[1].mNext = v26;
-    LODWORD(v26) = EngineModelSym_modelled_speed;
-    v24[3].mNext = 0i64;
-    v24[4].mNext = 0i64;
-    v24[5].mNext = 0i64;
-    LODWORD(v24[6].mNext) = (_DWORD)v26;
-    v24->mNext = (UFG::allocator::free_link *)&UFG::EngineModelOutput::`vftable;
-    LODWORD(v24[7].mNext) = -1;
-    HIDWORD(v24[7].mNext) = 0;
-    v24->mNext = (UFG::allocator::free_link *)&UFG::ModelledSpeedOutput::`vftable;
-    LODWORD(v24[8].mNext) = -1082130432;
-  }
-  else
-  {
     v25 = 0i64;
-  }
-  v27 = (UFG::EngineModelOutputs **)&v25[1];
-  v28 = v3->m_outputsList.mNode.mNext;
-  v3->m_outputsList.mNode.mNext = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&v25[1];
-  *v27 = v3;
-  v27[1] = (UFG::EngineModelOutputs *)v28;
-  v28->mPrev = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&v25[1];
-  if ( v25 )
-    v29 = (UFG::qBaseNodeRB *)&v25[3];
-  else
-    v29 = 0i64;
-  UFG::qBaseTreeRB::Add(v4, v29);
-  if ( v2->m_pVehAudComponent->m_eDriverType == eDriverType_Player )
+  UFG::qBaseTreeRB::Add(&p_m_outputsTree->mTree, v25);
+  if ( em->m_pVehAudComponent->m_eDriverType == eDriverType_Player )
   {
-    v30 = UFG::qMalloc(0x50ui64, "EngineModelOutputs", 0i64);
-    v31 = v30;
-    if ( v30 )
+    v26 = UFG::qMalloc(0x50ui64, "EngineModelOutputs", 0i64);
+    v27 = v26;
+    if ( v26 )
     {
-      v32 = v30 + 1;
-      v32->mNext = v32;
-      v32[1].mNext = v32;
-      LODWORD(v32) = EngineModelSym_limiter_threshold;
-      v30[3].mNext = 0i64;
-      v30[4].mNext = 0i64;
-      v30[5].mNext = 0i64;
-      LODWORD(v30[6].mNext) = (_DWORD)v32;
-      v30->mNext = (UFG::allocator::free_link *)&UFG::EngineModelOutput::`vftable;
-      LODWORD(v30[7].mNext) = -1;
-      HIDWORD(v30[7].mNext) = 0;
-      v30->mNext = (UFG::allocator::free_link *)&UFG::LimiterThresholdOutput::`vftable;
-      v30[8].mNext = 0i64;
-      LODWORD(v30[9].mNext) = 1259902592;
-      HIDWORD(v30[9].mNext) = 1259902592;
-      HIDWORD(v30[7].mNext) = 0;
+      v26[1].mNext = v26 + 1;
+      v26[2].mNext = v26 + 1;
+      v28 = EngineModelSym_limiter_threshold.mUID;
+      v26[3].mNext = 0i64;
+      v26[4].mNext = 0i64;
+      v26[5].mNext = 0i64;
+      LODWORD(v26[6].mNext) = v28;
+      v26->mNext = (UFG::allocator::free_link *)&UFG::EngineModelOutput::`vftable;
+      LODWORD(v26[7].mNext) = -1;
+      HIDWORD(v26[7].mNext) = 0;
+      v26->mNext = (UFG::allocator::free_link *)&UFG::LimiterThresholdOutput::`vftable;
+      v26[8].mNext = 0i64;
+      LODWORD(v26[9].mNext) = 1259902592;
+      HIDWORD(v26[9].mNext) = 1259902592;
+      HIDWORD(v26[7].mNext) = 0;
     }
     else
     {
-      v31 = 0i64;
+      v27 = 0i64;
     }
-    v33 = (UFG::EngineModelOutputs **)&v31[1];
-    v34 = v3->m_outputsList.mNode.mNext;
-    v3->m_outputsList.mNode.mNext = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&v31[1];
-    *v33 = v3;
-    v33[1] = (UFG::EngineModelOutputs *)v34;
-    v34->mPrev = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&v31[1];
+    v29 = this->m_outputsList.mNode.mNext;
+    this->m_outputsList.mNode.mNext = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&v27[1];
+    v27[1].mNext = (UFG::allocator::free_link *)this;
+    v27[2].mNext = (UFG::allocator::free_link *)v29;
+    v29->mPrev = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&v27[1];
+    if ( v27 )
+      v30 = (UFG::qBaseNodeRB *)&v27[3];
+    else
+      v30 = 0i64;
+    UFG::qBaseTreeRB::Add(&p_m_outputsTree->mTree, v30);
+    v31 = UFG::qMalloc(0x60ui64, "EngineModelOutputs", 0i64);
+    v32 = v31;
     if ( v31 )
-      v35 = (UFG::qBaseNodeRB *)&v31[3];
+    {
+      v31[1].mNext = v31 + 1;
+      v31[2].mNext = v31 + 1;
+      v33 = EngineModelSym_friction_multiplier.mUID;
+      v31[3].mNext = 0i64;
+      v31[4].mNext = 0i64;
+      v31[5].mNext = 0i64;
+      LODWORD(v31[6].mNext) = v33;
+      v31->mNext = (UFG::allocator::free_link *)&UFG::EngineModelOutput::`vftable;
+      LODWORD(v31[7].mNext) = -1;
+      HIDWORD(v31[7].mNext) = 0;
+      v31->mNext = (UFG::allocator::free_link *)&UFG::FrictionMultiplierOutput::`vftable;
+      v31[8].mNext = 0i64;
+      LODWORD(v31[9].mNext) = 1259902592;
+      HIDWORD(v31[9].mNext) = 1259902592;
+      LODWORD(v31[11].mNext) = 0;
+      LODWORD(v31[9].mNext) = 1092616192;
+      HIDWORD(v31[9].mNext) = 1092616192;
+      HIDWORD(v31[8].mNext) = 0;
+      v31[10].mNext = 0i64;
+    }
+    else
+    {
+      v32 = 0i64;
+    }
+    v34 = this->m_outputsList.mNode.mNext;
+    this->m_outputsList.mNode.mNext = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&v32[1];
+    v32[1].mNext = (UFG::allocator::free_link *)this;
+    v32[2].mNext = (UFG::allocator::free_link *)v34;
+    v34->mPrev = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&v32[1];
+    if ( v32 )
+      v35 = (UFG::qBaseNodeRB *)&v32[3];
     else
       v35 = 0i64;
-    UFG::qBaseTreeRB::Add(v4, v35);
-    v36 = UFG::qMalloc(0x60ui64, "EngineModelOutputs", 0i64);
-    v37 = v36;
-    if ( v36 )
-    {
-      v38 = v36 + 1;
-      v38->mNext = v38;
-      v38[1].mNext = v38;
-      LODWORD(v38) = EngineModelSym_friction_multiplier;
-      v36[3].mNext = 0i64;
-      v36[4].mNext = 0i64;
-      v36[5].mNext = 0i64;
-      LODWORD(v36[6].mNext) = (_DWORD)v38;
-      v36->mNext = (UFG::allocator::free_link *)&UFG::EngineModelOutput::`vftable;
-      LODWORD(v36[7].mNext) = -1;
-      HIDWORD(v36[7].mNext) = 0;
-      v36->mNext = (UFG::allocator::free_link *)&UFG::FrictionMultiplierOutput::`vftable;
-      v36[8].mNext = 0i64;
-      LODWORD(v36[9].mNext) = 1259902592;
-      HIDWORD(v36[9].mNext) = 1259902592;
-      LODWORD(v36[11].mNext) = 0;
-      LODWORD(v36[9].mNext) = 1092616192;
-      HIDWORD(v36[9].mNext) = 1092616192;
-      HIDWORD(v36[8].mNext) = 0;
-      v36[10].mNext = 0i64;
-    }
-    else
-    {
-      v37 = 0i64;
-    }
-    v39 = (UFG::EngineModelOutputs **)&v37[1];
-    v40 = v3->m_outputsList.mNode.mNext;
-    v3->m_outputsList.mNode.mNext = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&v37[1];
-    *v39 = v3;
-    v39[1] = (UFG::EngineModelOutputs *)v40;
-    v40->mPrev = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&v37[1];
-    if ( v37 )
-      v41 = (UFG::qBaseNodeRB *)&v37[3];
-    else
-      v41 = 0i64;
-    UFG::qBaseTreeRB::Add(v4, v41);
+    UFG::qBaseTreeRB::Add(&p_m_outputsTree->mTree, v35);
   }
-  v42 = UFG::qMalloc(0x40ui64, "EngineModelOutputs", 0i64);
-  v43 = v42;
+  v36 = UFG::qMalloc(0x40ui64, "EngineModelOutputs", 0i64);
+  v37 = v36;
+  if ( v36 )
+  {
+    v36[1].mNext = v36 + 1;
+    v36[2].mNext = v36 + 1;
+    v38 = EngineModelSym_none.mUID;
+    v36[3].mNext = 0i64;
+    v36[4].mNext = 0i64;
+    v36[5].mNext = 0i64;
+    LODWORD(v36[6].mNext) = v38;
+    v36->mNext = (UFG::allocator::free_link *)&UFG::EngineModelOutput::`vftable;
+    LODWORD(v36[7].mNext) = -1;
+    HIDWORD(v36[7].mNext) = 0;
+    v36->mNext = (UFG::allocator::free_link *)&UFG::NoOutput::`vftable;
+  }
+  else
+  {
+    v37 = 0i64;
+  }
+  v39 = this->m_outputsList.mNode.mNext;
+  this->m_outputsList.mNode.mNext = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&v37[1];
+  v37[1].mNext = (UFG::allocator::free_link *)this;
+  v37[2].mNext = (UFG::allocator::free_link *)v39;
+  v39->mPrev = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&v37[1];
+  if ( v37 )
+    v40 = (UFG::qBaseNodeRB *)&v37[3];
+  else
+    v40 = 0i64;
+  UFG::qBaseTreeRB::Add(&p_m_outputsTree->mTree, v40);
+  v41 = UFG::qMalloc(0x40ui64, "EngineModelOutputs", 0i64);
+  v42 = v41;
+  if ( v41 )
+  {
+    v41[1].mNext = v41 + 1;
+    v41[2].mNext = v41 + 1;
+    v43 = EngineModelSym_tmp_a.mUID;
+    v41[3].mNext = 0i64;
+    v41[4].mNext = 0i64;
+    v41[5].mNext = 0i64;
+    LODWORD(v41[6].mNext) = v43;
+    v41->mNext = (UFG::allocator::free_link *)&UFG::EngineModelOutput::`vftable;
+    LODWORD(v41[7].mNext) = -1;
+    HIDWORD(v41[7].mNext) = 0;
+    v41->mNext = (UFG::allocator::free_link *)&UFG::TmpAOutput::`vftable;
+  }
+  else
+  {
+    v42 = 0i64;
+  }
+  v44 = this->m_outputsList.mNode.mNext;
+  this->m_outputsList.mNode.mNext = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&v42[1];
+  v42[1].mNext = (UFG::allocator::free_link *)this;
+  v42[2].mNext = (UFG::allocator::free_link *)v44;
+  v44->mPrev = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&v42[1];
   if ( v42 )
-  {
-    v44 = v42 + 1;
-    v44->mNext = v44;
-    v44[1].mNext = v44;
-    LODWORD(v44) = EngineModelSym_none;
-    v42[3].mNext = 0i64;
-    v42[4].mNext = 0i64;
-    v42[5].mNext = 0i64;
-    LODWORD(v42[6].mNext) = (_DWORD)v44;
-    v42->mNext = (UFG::allocator::free_link *)&UFG::EngineModelOutput::`vftable;
-    LODWORD(v42[7].mNext) = -1;
-    HIDWORD(v42[7].mNext) = 0;
-    v42->mNext = (UFG::allocator::free_link *)&UFG::NoOutput::`vftable;
-  }
-  else
-  {
-    v43 = 0i64;
-  }
-  v45 = (UFG::EngineModelOutputs **)&v43[1];
-  v46 = v3->m_outputsList.mNode.mNext;
-  v3->m_outputsList.mNode.mNext = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&v43[1];
-  *v45 = v3;
-  v45[1] = (UFG::EngineModelOutputs *)v46;
-  v46->mPrev = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&v43[1];
-  if ( v43 )
-    v47 = (UFG::qBaseNodeRB *)&v43[3];
-  else
-    v47 = 0i64;
-  UFG::qBaseTreeRB::Add(v4, v47);
-  v48 = UFG::qMalloc(0x40ui64, "EngineModelOutputs", 0i64);
-  v49 = v48;
-  if ( v48 )
-  {
-    v50 = v48 + 1;
-    v50->mNext = v50;
-    v50[1].mNext = v50;
-    LODWORD(v50) = EngineModelSym_tmp_a;
-    v48[3].mNext = 0i64;
-    v48[4].mNext = 0i64;
-    v48[5].mNext = 0i64;
-    LODWORD(v48[6].mNext) = (_DWORD)v50;
-    v48->mNext = (UFG::allocator::free_link *)&UFG::EngineModelOutput::`vftable;
-    LODWORD(v48[7].mNext) = -1;
-    HIDWORD(v48[7].mNext) = 0;
-    v48->mNext = (UFG::allocator::free_link *)&UFG::TmpAOutput::`vftable;
-  }
-  else
-  {
-    v49 = 0i64;
-  }
-  v51 = (UFG::EngineModelOutputs **)&v49[1];
-  v52 = v3->m_outputsList.mNode.mNext;
-  v3->m_outputsList.mNode.mNext = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&v49[1];
-  *v51 = v3;
-  v51[1] = (UFG::EngineModelOutputs *)v52;
-  v52->mPrev = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&v49[1];
-  if ( v49 )
-    v6 = (UFG::qBaseNodeRB *)&v49[3];
-  UFG::qBaseTreeRB::Add(v4, v6);
+    v6 = (UFG::qBaseNodeRB *)&v42[3];
+  UFG::qBaseTreeRB::Add(&p_m_outputsTree->mTree, v6);
 }
 
 // File Line: 1311
@@ -2538,13 +2428,10 @@ UFG::qStaticSymbol *__fastcall UFG::MaxBlendMode::GetName(UFG::MaxBlendMode *thi
 // RVA: 0x676BA0
 float __fastcall UFG::MaxBlendMode::DoBlend(UFG::MaxBlendMode *this, float a, float b)
 {
-  float result; // xmm0_4
-
   if ( a <= b )
-    result = b;
+    return b;
   else
-    result = a;
-  return result;
+    return a;
 }
 
 // File Line: 1356
@@ -2558,13 +2445,10 @@ UFG::qStaticSymbol *__fastcall UFG::MinBlendMode::GetName(UFG::MinBlendMode *thi
 // RVA: 0x676BB0
 float __fastcall UFG::MinBlendMode::DoBlend(UFG::MinBlendMode *this, float a, float b)
 {
-  float result; // xmm0_4
-
   if ( a >= b )
-    result = b;
+    return b;
   else
-    result = a;
-  return result;
+    return a;
 }
 
 // File Line: 1365
@@ -2578,178 +2462,164 @@ UFG::qStaticSymbol *__fastcall UFG::NoBlendMode::GetName(UFG::NoBlendMode *this)
 // RVA: 0x668150
 void __fastcall UFG::EngineModelBlendModes::EngineModelBlendModes(UFG::EngineModelBlendModes *this)
 {
-  UFG::EngineModelBlendModes *v1; // rbx
   UFG::allocator::free_link *v2; // rax
-  UFG::allocator::free_link *v3; // rcx
-  UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *v4; // rcx
-  UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *v5; // rax
-  UFG::allocator::free_link *v6; // rax
-  UFG::allocator::free_link *v7; // rcx
-  UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *v8; // rcx
-  UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *v9; // rax
-  UFG::allocator::free_link *v10; // rax
-  UFG::allocator::free_link *v11; // rcx
+  UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *v3; // rcx
+  UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *mNext; // rax
+  UFG::allocator::free_link *v5; // rax
+  UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *v6; // rcx
+  UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *v7; // rax
+  UFG::allocator::free_link *v8; // rax
+  UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *v9; // rcx
+  UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *v10; // rax
+  UFG::allocator::free_link *v11; // rax
   UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *v12; // rcx
   UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *v13; // rax
   UFG::allocator::free_link *v14; // rax
-  UFG::allocator::free_link *v15; // rcx
-  UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *v16; // rcx
-  UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *v17; // rax
-  UFG::allocator::free_link *v18; // rax
-  UFG::allocator::free_link *v19; // rcx
-  UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *v20; // rcx
-  UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *v21; // rax
-  UFG::allocator::free_link *v22; // rax
-  UFG::allocator::free_link *v23; // rcx
-  UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *v24; // r8
-  UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *v25; // rax
-  UFG::allocator::free_link *v26; // rax
-  UFG::allocator::free_link *v27; // rcx
-  UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *v28; // rcx
-  UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *v29; // rax
+  UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *v15; // rcx
+  UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *v16; // rax
+  UFG::allocator::free_link *v17; // rax
+  UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *v18; // r8
+  UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *v19; // rax
+  UFG::allocator::free_link *v20; // rax
+  UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *v21; // rcx
+  UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *v22; // rax
 
-  v1 = this;
   this->m_modes.mNode.mPrev = &this->m_modes.mNode;
   this->m_modes.mNode.mNext = &this->m_modes.mNode;
   v2 = UFG::qMalloc(0x18ui64, "EngineModelBlendModes", 0i64);
   if ( v2 )
   {
-    v3 = v2 + 1;
-    v3->mNext = v3;
-    v3[1].mNext = v3;
+    v2[1].mNext = v2 + 1;
+    v2[2].mNext = v2 + 1;
     v2->mNext = (UFG::allocator::free_link *)&UFG::EngineModelBlendMode::`vftable;
     v2->mNext = (UFG::allocator::free_link *)&UFG::ReplaceBlendMode::`vftable;
   }
-  v4 = (UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *)&v2[1];
-  v5 = v1->m_modes.mNode.mNext;
-  v1->m_modes.mNode.mNext = v4;
-  v4->mPrev = &v1->m_modes.mNode;
-  v4->mNext = v5;
-  v5->mPrev = v4;
-  v6 = UFG::qMalloc(0x18ui64, "EngineModelBlendModes", 0i64);
-  if ( v6 )
+  v3 = (UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *)&v2[1];
+  mNext = this->m_modes.mNode.mNext;
+  this->m_modes.mNode.mNext = v3;
+  v3->mPrev = &this->m_modes.mNode;
+  v3->mNext = mNext;
+  mNext->mPrev = v3;
+  v5 = UFG::qMalloc(0x18ui64, "EngineModelBlendModes", 0i64);
+  if ( v5 )
   {
-    v7 = v6 + 1;
-    v7->mNext = v7;
-    v7[1].mNext = v7;
-    v6->mNext = (UFG::allocator::free_link *)&UFG::EngineModelBlendMode::`vftable;
-    v6->mNext = (UFG::allocator::free_link *)&UFG::AddBlendMode::`vftable;
+    v5[1].mNext = v5 + 1;
+    v5[2].mNext = v5 + 1;
+    v5->mNext = (UFG::allocator::free_link *)&UFG::EngineModelBlendMode::`vftable;
+    v5->mNext = (UFG::allocator::free_link *)&UFG::AddBlendMode::`vftable;
   }
-  v8 = (UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *)&v6[1];
-  v9 = v1->m_modes.mNode.mNext;
-  v1->m_modes.mNode.mNext = v8;
-  v8->mPrev = &v1->m_modes.mNode;
-  v8->mNext = v9;
-  v9->mPrev = v8;
-  v10 = UFG::qMalloc(0x18ui64, "EngineModelBlendModes", 0i64);
-  if ( v10 )
+  v6 = (UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *)&v5[1];
+  v7 = this->m_modes.mNode.mNext;
+  this->m_modes.mNode.mNext = v6;
+  v6->mPrev = &this->m_modes.mNode;
+  v6->mNext = v7;
+  v7->mPrev = v6;
+  v8 = UFG::qMalloc(0x18ui64, "EngineModelBlendModes", 0i64);
+  if ( v8 )
   {
-    v11 = v10 + 1;
-    v11->mNext = v11;
-    v11[1].mNext = v11;
-    v10->mNext = (UFG::allocator::free_link *)&UFG::EngineModelBlendMode::`vftable;
-    v10->mNext = (UFG::allocator::free_link *)&UFG::SubtractBlendMode::`vftable;
+    v8[1].mNext = v8 + 1;
+    v8[2].mNext = v8 + 1;
+    v8->mNext = (UFG::allocator::free_link *)&UFG::EngineModelBlendMode::`vftable;
+    v8->mNext = (UFG::allocator::free_link *)&UFG::SubtractBlendMode::`vftable;
   }
-  v12 = (UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *)&v10[1];
-  v13 = v1->m_modes.mNode.mNext;
-  v1->m_modes.mNode.mNext = v12;
-  v12->mPrev = &v1->m_modes.mNode;
+  v9 = (UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *)&v8[1];
+  v10 = this->m_modes.mNode.mNext;
+  this->m_modes.mNode.mNext = v9;
+  v9->mPrev = &this->m_modes.mNode;
+  v9->mNext = v10;
+  v10->mPrev = v9;
+  v11 = UFG::qMalloc(0x18ui64, "EngineModelBlendModes", 0i64);
+  if ( v11 )
+  {
+    v11[1].mNext = v11 + 1;
+    v11[2].mNext = v11 + 1;
+    v11->mNext = (UFG::allocator::free_link *)&UFG::EngineModelBlendMode::`vftable;
+    v11->mNext = (UFG::allocator::free_link *)&UFG::MultiplyBlendMode::`vftable;
+  }
+  v12 = (UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *)&v11[1];
+  v13 = this->m_modes.mNode.mNext;
+  this->m_modes.mNode.mNext = v12;
+  v12->mPrev = &this->m_modes.mNode;
   v12->mNext = v13;
   v13->mPrev = v12;
   v14 = UFG::qMalloc(0x18ui64, "EngineModelBlendModes", 0i64);
   if ( v14 )
   {
-    v15 = v14 + 1;
-    v15->mNext = v15;
-    v15[1].mNext = v15;
+    v14[1].mNext = v14 + 1;
+    v14[2].mNext = v14 + 1;
     v14->mNext = (UFG::allocator::free_link *)&UFG::EngineModelBlendMode::`vftable;
-    v14->mNext = (UFG::allocator::free_link *)&UFG::MultiplyBlendMode::`vftable;
+    v14->mNext = (UFG::allocator::free_link *)&UFG::MaxBlendMode::`vftable;
   }
-  v16 = (UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *)&v14[1];
-  v17 = v1->m_modes.mNode.mNext;
-  v1->m_modes.mNode.mNext = v16;
-  v16->mPrev = &v1->m_modes.mNode;
-  v16->mNext = v17;
-  v17->mPrev = v16;
-  v18 = UFG::qMalloc(0x18ui64, "EngineModelBlendModes", 0i64);
-  if ( v18 )
+  v15 = (UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *)&v14[1];
+  v16 = this->m_modes.mNode.mNext;
+  this->m_modes.mNode.mNext = v15;
+  v15->mPrev = &this->m_modes.mNode;
+  v15->mNext = v16;
+  v16->mPrev = v15;
+  v17 = UFG::qMalloc(0x18ui64, "EngineModelBlendModes", 0i64);
+  if ( v17 )
   {
-    v19 = v18 + 1;
-    v19->mNext = v19;
-    v19[1].mNext = v19;
-    v18->mNext = (UFG::allocator::free_link *)&UFG::EngineModelBlendMode::`vftable;
-    v18->mNext = (UFG::allocator::free_link *)&UFG::MaxBlendMode::`vftable;
+    v17[1].mNext = v17 + 1;
+    v17[2].mNext = v17 + 1;
+    v17->mNext = (UFG::allocator::free_link *)&UFG::EngineModelBlendMode::`vftable;
+    v17->mNext = (UFG::allocator::free_link *)&UFG::MinBlendMode::`vftable;
   }
-  v20 = (UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *)&v18[1];
-  v21 = v1->m_modes.mNode.mNext;
-  v1->m_modes.mNode.mNext = v20;
-  v20->mPrev = &v1->m_modes.mNode;
-  v20->mNext = v21;
-  v21->mPrev = v20;
-  v22 = UFG::qMalloc(0x18ui64, "EngineModelBlendModes", 0i64);
-  if ( v22 )
+  v18 = (UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *)&v17[1];
+  v19 = this->m_modes.mNode.mNext;
+  this->m_modes.mNode.mNext = v18;
+  v18->mPrev = &this->m_modes.mNode;
+  v18->mNext = v19;
+  v19->mPrev = v18;
+  v20 = UFG::qMalloc(0x18ui64, "EngineModelBlendModes", 0i64);
+  if ( v20 )
   {
-    v23 = v22 + 1;
-    v23->mNext = v23;
-    v23[1].mNext = v23;
-    v22->mNext = (UFG::allocator::free_link *)&UFG::EngineModelBlendMode::`vftable;
-    v22->mNext = (UFG::allocator::free_link *)&UFG::MinBlendMode::`vftable;
+    v20[1].mNext = v20 + 1;
+    v20[2].mNext = v20 + 1;
+    v20->mNext = (UFG::allocator::free_link *)&UFG::EngineModelBlendMode::`vftable;
+    v20->mNext = (UFG::allocator::free_link *)&UFG::NoBlendMode::`vftable;
   }
-  v24 = (UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *)&v22[1];
-  v25 = v1->m_modes.mNode.mNext;
-  v1->m_modes.mNode.mNext = v24;
-  v24->mPrev = &v1->m_modes.mNode;
-  v24->mNext = v25;
-  v25->mPrev = v24;
-  v26 = UFG::qMalloc(0x18ui64, "EngineModelBlendModes", 0i64);
-  if ( v26 )
-  {
-    v27 = v26 + 1;
-    v27->mNext = v27;
-    v27[1].mNext = v27;
-    v26->mNext = (UFG::allocator::free_link *)&UFG::EngineModelBlendMode::`vftable;
-    v26->mNext = (UFG::allocator::free_link *)&UFG::NoBlendMode::`vftable;
-  }
-  v28 = (UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *)&v26[1];
-  v29 = v1->m_modes.mNode.mNext;
-  v1->m_modes.mNode.mNext = v28;
-  v28->mPrev = &v1->m_modes.mNode;
-  v28->mNext = v29;
-  v29->mPrev = v28;
+  v21 = (UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> *)&v20[1];
+  v22 = this->m_modes.mNode.mNext;
+  this->m_modes.mNode.mNext = v21;
+  v21->mPrev = &this->m_modes.mNode;
+  v21->mNext = v22;
+  v22->mPrev = v21;
 }
 
 // File Line: 1420
 // RVA: 0x673BA0
 float __fastcall UFG::CalcAverageFrictionMultiplier(UFG::PhysicsMoverInterface *pMover)
 {
-  UFG::PhysicsVehicle *v1; // rax
+  UFG::PhysicsVehicle *mPhysicsVehicle; // rax
   int v2; // ebx
   UFG::PhysicsVehicle *v3; // rdi
   float v4; // xmm6_4
   int v5; // eax
   float v6; // xmm7_4
-  float v7; // xmm0_4
+  float WheelFrictionMultiplier; // xmm0_4
 
   if ( !pMover )
     return *(float *)&FLOAT_1_0;
-  v1 = pMover->mPhysicsVehicle;
-  if ( !v1 )
+  mPhysicsVehicle = pMover->mPhysicsVehicle;
+  if ( !mPhysicsVehicle )
     return *(float *)&FLOAT_1_0;
   v2 = 0;
   v3 = 0i64;
-  if ( *((_BYTE *)v1 + 604) & 7 )
+  if ( (*((_BYTE *)mPhysicsVehicle + 604) & 7) != 0 )
     v3 = pMover->mPhysicsVehicle;
   if ( !v3 )
     return *(float *)&FLOAT_1_0;
   v4 = 0.0;
   v5 = *((_DWORD *)v3 + 151) & 7;
-  if ( v5 > 0 )
+  if ( v5 )
   {
     v6 = 1.0 / (float)v5;
     do
     {
-      v7 = UFG::PhysicsWheeledVehicle::GetWheelFrictionMultiplier((UFG::PhysicsWheeledVehicle *)v3, v2++);
-      v4 = v4 + (float)(v7 * v6);
+      WheelFrictionMultiplier = UFG::PhysicsWheeledVehicle::GetWheelFrictionMultiplier(
+                                  (UFG::PhysicsWheeledVehicle *)v3,
+                                  v2++);
+      v4 = v4 + (float)(WheelFrictionMultiplier * v6);
     }
     while ( v2 < (*((_DWORD *)v3 + 151) & 7) );
   }
@@ -2758,105 +2628,104 @@ float __fastcall UFG::CalcAverageFrictionMultiplier(UFG::PhysicsMoverInterface *
 
 // File Line: 1544
 // RVA: 0x6986B0
-void __fastcall UFG::Base_EngineState::UpdateRPMFromSpeedBasedCurve(UFG::Base_EngineState *this, UFG::AudioCurve *curve, float speed)
+void __fastcall UFG::Base_EngineState::UpdateRPMFromSpeedBasedCurve(
+        UFG::Base_EngineState *this,
+        UFG::AudioCurve *curve,
+        float speed)
 {
-  UFG::Base_EngineState *v3; // rdi
-  UFG::AudioCurve *v4; // rsi
-  float v5; // xmm0_4
-  signed __int64 v6; // rbx
+  float Value; // xmm0_4
+  float *v6; // rbx
   UFG::qBaseTreeRB *v7; // rax
-  signed __int64 v8; // rax
+  float *v8; // rax
   UFG::qBaseTreeRB *v9; // rax
-  UFG::EngineStateMachine *v10; // rdx
+  UFG::EngineStateMachine *m_esm; // rdx
   UFG::EngineStateMachine *v11; // rax
 
-  v3 = this;
-  v4 = curve;
-  v5 = UFG::LinearGraph<float>::GetValue(&curve->m_graphCurve, speed);
+  Value = UFG::LinearGraph<float>::GetValue(&curve->m_graphCurve, speed);
   v6 = 0i64;
   if ( EngineModelSym_rpm.mUID
-    && (v7 = UFG::qBaseTreeRB::Get(&v3->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree, EngineModelSym_rpm.mUID)) != 0i64 )
+    && (v7 = UFG::qBaseTreeRB::Get(&this->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree, EngineModelSym_rpm.mUID)) != 0i64 )
   {
-    v8 = (signed __int64)&v7[-1].mNULL.mChild[1];
+    v8 = (float *)&v7[-1].mNULL.mChild[1];
   }
   else
   {
     v8 = 0i64;
   }
-  *(float *)(v8 + 60) = v5;
+  v8[15] = Value;
   if ( EngineModelSym_modelled_speed.mUID )
   {
     v9 = UFG::qBaseTreeRB::Get(
-           &v3->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
+           &this->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
            EngineModelSym_modelled_speed.mUID);
     if ( v9 )
-      v6 = (signed __int64)&v9[-1].mNULL.mChild[1];
+      v6 = (float *)&v9[-1].mNULL.mChild[1];
   }
-  *(float *)(v6 + 60) = speed;
-  if ( speed > (float)v4->m_maxSpeed )
+  v6[15] = speed;
+  if ( speed > (float)curve->m_maxSpeed )
   {
-    v10 = v3->m_esm;
-    if ( v10->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve->m_gears.size > v10->inputs.curGear + 1 )
-      v10->m_event = 7;
+    m_esm = this->m_esm;
+    if ( m_esm->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve->m_gears.size > m_esm->inputs.curGear + 1 )
+      m_esm->m_event = eEVENT_UPSHIFT;
   }
-  if ( speed < (float)v4->m_minSpeed )
+  if ( speed < (float)curve->m_minSpeed )
   {
-    v11 = v3->m_esm;
+    v11 = this->m_esm;
     if ( v11->inputs.curGear )
-      v11->m_event = 8;
+      v11->m_event = eEVENT_DOWNSHIFT;
   }
 }
 
 // File Line: 1569
 // RVA: 0x685390
-void __usercall UFG::Base_EngineState::OnEvent(UFG::Base_EngineState *this@<rcx>, UFG::EngineStateMachine::Event event@<edx>, int a3@<xmm0>)
+void __fastcall UFG::Base_EngineState::OnEvent(UFG::Base_EngineState *this, UFG::EngineStateMachine::Event event)
 {
   switch ( event )
   {
-    case 2:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, 0, a3);
+    case eEVENT_STOP:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_OFF);
       break;
-    case 7:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_UPSHIFT, a3);
+    case eEVENT_UPSHIFT:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_UPSHIFT);
       break;
-    case 14:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_COLLISION, a3);
+    case eEVENT_COLLISION:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_COLLISION);
       break;
-    case 8:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_DOWNSHIFT, a3);
+    case eEVENT_DOWNSHIFT:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_DOWNSHIFT);
       break;
-    case 3:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_GAS, a3);
+    case eEVENT_GAS:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_GAS);
       break;
-    case 4:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_BRAKE, a3);
+    case eEVENT_BRAKE:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_BRAKE);
       break;
-    case 6:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_REVERSE, a3);
+    case eEVENT_REVERSE:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_REVERSE);
       break;
-    case 9:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_IDLE, a3);
+    case eEVENT_IDLE:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_IDLE);
       break;
-    case 10:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_INAIR, a3);
+    case eEVENT_INAIR:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_INAIR);
       break;
-    case 11:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_NEUTRAL, a3);
+    case eEVENT_NEUTRAL:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_NEUTRAL);
       break;
-    case 5:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_DECEL, a3);
+    case eEVENT_DECEL:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_DECEL);
       break;
-    case 12:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_REVLIMIT, a3);
+    case eEVENT_REVLIMIT:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_REVLIMIT);
       break;
-    case 13:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_TRANSITION, a3);
+    case eEVENT_TRANSITION:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_TRANSITION);
       break;
-    case 16:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_DRIFTING, a3);
+    case eEVENT_DRIFT:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_DRIFTING);
       break;
-    case 17:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_WHEELIE, a3);
+    case eEVENT_WHEELIE:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_WHEELIE);
       break;
   }
 }
@@ -2872,84 +2741,91 @@ UFG::qStaticSymbol *__fastcall UFG::Off_EngineState::GetName(UFG::Off_EngineStat
 // RVA: 0x685100
 void __fastcall UFG::Off_EngineState::OnEnter(UFG::Off_EngineState *this, UFG::EngineStateMachine::State exitingState)
 {
-  UFG::Off_EngineState *v2; // rbx
-  UFG::EngineModel2 *v3; // rcx
-  UFG::VehicleAudioComponent::eDriverType v4; // edx
+  UFG::EngineModel2 *m_engineModel; // rcx
+  UFG::VehicleAudioComponent::eDriverType m_eDriverType; // edx
   UFG::AudioEvent *v5; // rcx
-  unsigned int v6; // esi
-  UFG::VehicleAudioComponent *v7; // rdi
+  unsigned int traffic_fadeout_time_ms; // esi
+  UFG::VehicleAudioComponent *m_pVehAudComponent; // rdi
   UFG::qWiseSymbol *v8; // rax
-  unsigned int v9; // edx
+  unsigned int mUID; // edx
   UFG::qWiseSymbol *v10; // rax
-  UFG::AudioEvent *v11; // rcx
+  UFG::AudioEvent *m_pEvent; // rcx
   UFG::qBaseTreeRB *v12; // rax
-  signed __int64 v13; // rax
+  UFG::qBaseNodeRB **v13; // rax
   UFG::qBaseTreeRB *v14; // rax
-  signed __int64 v15; // rax
+  UFG::qBaseNodeRB **v15; // rax
   UFG::qBaseTreeRB *v16; // rax
 
-  v2 = this;
-  v3 = this->m_esm->m_engineModel;
-  v4 = v3->m_pVehAudComponent->m_eDriverType;
-  if ( v4 == 2 || v4 == 5 )
+  m_engineModel = this->m_esm->m_engineModel;
+  m_eDriverType = m_engineModel->m_pVehAudComponent->m_eDriverType;
+  if ( m_eDriverType == eDriverType_Traffic || m_eDriverType == eDriverType_Cop )
   {
-    v11 = v3->m_ecEngine.m_pEvent;
-    if ( v11 )
-      UFG::AudioEvent::StopAndForget(v11, 0x1F4u);
+    m_pEvent = m_engineModel->m_ecEngine.m_pEvent;
+    if ( m_pEvent )
+      UFG::AudioEvent::StopAndForget(m_pEvent, 500);
   }
   else
   {
-    v5 = v3->m_ecEngine.m_pEvent;
+    v5 = m_engineModel->m_ecEngine.m_pEvent;
     if ( v5 )
-      UFG::AudioEvent::StopAndForget(v5, 0xC8u);
-    v6 = 0;
-    v7 = v2->m_esm->m_engineModel->m_pVehAudComponent;
-    if ( v7->m_eDriverType )
-      v6 = UFG::VehicleAudioComponent::sm_configPs->traffic_fadeout_time_ms;
+      UFG::AudioEvent::StopAndForget(v5, 200);
+    traffic_fadeout_time_ms = 0;
+    m_pVehAudComponent = this->m_esm->m_engineModel->m_pVehAudComponent;
+    if ( m_pVehAudComponent->m_eDriverType )
+      traffic_fadeout_time_ms = UFG::VehicleAudioComponent::sm_configPs->traffic_fadeout_time_ms;
     v8 = UFG::qPropertySet::Get<UFG::qWiseSymbol>(
-           v7->m_pEnginePropertySet,
-           (UFG::qSymbol *)&UFG::VehAudPropSym_engine_shutdown.mUID,
+           m_pVehAudComponent->m_pEnginePropertySet,
+           (UFG::qArray<unsigned long,0> *)&UFG::VehAudPropSym_engine_shutdown,
            DEPTH_RECURSE);
     if ( v8 )
     {
-      v9 = v8->mUID;
+      mUID = v8->mUID;
     }
     else
     {
       v10 = UFG::qPropertySet::Get<UFG::qWiseSymbol>(
-              v7->m_pSubTypeParameters->mpPropertySet,
-              (UFG::qSymbol *)&UFG::VehAudPropSym_engine_shutdown.mUID,
+              m_pVehAudComponent->m_pSubTypeParameters->mpPropertySet,
+              (UFG::qArray<unsigned long,0> *)&UFG::VehAudPropSym_engine_shutdown,
               DEPTH_RECURSE);
       if ( v10 )
-        v9 = v10->mUID;
+        mUID = v10->mUID;
       else
-        v9 = 0;
+        mUID = 0;
     }
-    UFG::AudioEntity::CreateAndPlayEvent((UFG::AudioEntity *)&v7->vfptr, v9, 0i64, v6, 0i64);
+    UFG::AudioEntity::CreateAndPlayEvent(
+      &m_pVehAudComponent->UFG::AudioEntity,
+      mUID,
+      0i64,
+      traffic_fadeout_time_ms,
+      0i64);
   }
   if ( EngineModelSym_rpm.mUID
-    && (v12 = UFG::qBaseTreeRB::Get(&v2->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree, EngineModelSym_rpm.mUID)) != 0i64 )
+    && (v12 = UFG::qBaseTreeRB::Get(
+                &this->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
+                EngineModelSym_rpm.mUID)) != 0i64 )
   {
-    v13 = (signed __int64)&v12[-1].mNULL.mChild[1];
+    v13 = &v12[-1].mNULL.mChild[1];
   }
   else
   {
     v13 = 0i64;
   }
-  *(_DWORD *)(v13 + 60) = 0;
+  *((_DWORD *)v13 + 15) = 0;
   if ( EngineModelSym_load.mUID
-    && (v14 = UFG::qBaseTreeRB::Get(&v2->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree, EngineModelSym_load.mUID)) != 0i64 )
+    && (v14 = UFG::qBaseTreeRB::Get(
+                &this->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
+                EngineModelSym_load.mUID)) != 0i64 )
   {
-    v15 = (signed __int64)&v14[-1].mNULL.mChild[1];
+    v15 = &v14[-1].mNULL.mChild[1];
   }
   else
   {
     v15 = 0i64;
   }
-  *(_DWORD *)(v15 + 60) = 0;
+  *((_DWORD *)v15 + 15) = 0;
   if ( EngineModelSym_modelled_speed.mUID
     && (v16 = UFG::qBaseTreeRB::Get(
-                &v2->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
+                &this->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
                 EngineModelSym_modelled_speed.mUID)) != 0i64 )
   {
     HIDWORD(v16->mNULL.mParent) = 0;
@@ -2964,43 +2840,46 @@ void __fastcall UFG::Off_EngineState::OnEnter(UFG::Off_EngineState *this, UFG::E
 // RVA: 0x685900
 void __fastcall UFG::Off_EngineState::OnExit(UFG::Off_EngineState *this, UFG::EngineStateMachine::State enteringState)
 {
-  UFG::Off_EngineState *v2; // rsi
-  UFG::VehicleAudioComponent *v3; // rbx
-  UFG::VehicleAudioComponent::eDriverType v4; // eax
-  unsigned int v5; // edi
+  UFG::VehicleAudioComponent *m_pVehAudComponent; // rbx
+  UFG::VehicleAudioComponent::eDriverType m_eDriverType; // eax
+  unsigned int traffic_fadeout_time_ms; // edi
   UFG::qWiseSymbol *v6; // rax
-  unsigned int v7; // edx
+  unsigned int mUID; // edx
 
-  v2 = this;
-  v3 = this->m_esm->m_engineModel->m_pVehAudComponent;
-  v4 = v3->m_eDriverType;
-  if ( v4 != 2 && v4 != 5 )
+  m_pVehAudComponent = this->m_esm->m_engineModel->m_pVehAudComponent;
+  m_eDriverType = m_pVehAudComponent->m_eDriverType;
+  if ( m_eDriverType != eDriverType_Traffic && m_eDriverType != eDriverType_Cop )
   {
-    v5 = 0;
-    if ( v4 )
-      v5 = UFG::VehicleAudioComponent::sm_configPs->traffic_fadeout_time_ms;
+    traffic_fadeout_time_ms = 0;
+    if ( m_eDriverType )
+      traffic_fadeout_time_ms = UFG::VehicleAudioComponent::sm_configPs->traffic_fadeout_time_ms;
     v6 = UFG::qPropertySet::Get<UFG::qWiseSymbol>(
-           v3->m_pEnginePropertySet,
-           (UFG::qSymbol *)&UFG::VehAudPropSym_engine_ignition.mUID,
+           m_pVehAudComponent->m_pEnginePropertySet,
+           (UFG::qArray<unsigned long,0> *)&UFG::VehAudPropSym_engine_ignition,
            DEPTH_RECURSE);
     if ( v6
       || (v6 = UFG::qPropertySet::Get<UFG::qWiseSymbol>(
-                 v3->m_pSubTypeParameters->mpPropertySet,
-                 (UFG::qSymbol *)&UFG::VehAudPropSym_engine_ignition.mUID,
+                 m_pVehAudComponent->m_pSubTypeParameters->mpPropertySet,
+                 (UFG::qArray<unsigned long,0> *)&UFG::VehAudPropSym_engine_ignition,
                  DEPTH_RECURSE)) != 0i64 )
     {
-      v7 = v6->mUID;
+      mUID = v6->mUID;
     }
     else
     {
-      v7 = 0;
+      mUID = 0;
     }
-    UFG::AudioEntity::CreateAndPlayEvent((UFG::AudioEntity *)&v3->vfptr, v7, 0i64, v5, 0i64);
+    UFG::AudioEntity::CreateAndPlayEvent(
+      &m_pVehAudComponent->UFG::AudioEntity,
+      mUID,
+      0i64,
+      traffic_fadeout_time_ms,
+      0i64);
   }
   UFG::VehicleAudioComponent::PlayVehicleEvent(
-    v2->m_esm->m_engineModel->m_pVehAudComponent,
-    (UFG::qSymbol *)&UFG::VehAudPropSym_engine_loop.mUID,
-    &v2->m_esm->m_engineModel->m_ecEngine,
+    this->m_esm->m_engineModel->m_pVehAudComponent,
+    &UFG::VehAudPropSym_engine_loop,
+    &this->m_esm->m_engineModel->m_ecEngine,
     0);
 }
 
@@ -3008,39 +2887,39 @@ void __fastcall UFG::Off_EngineState::OnExit(UFG::Off_EngineState *this, UFG::En
 // RVA: 0x691CA0
 void __fastcall UFG::Off_EngineState::Update(UFG::Off_EngineState *this, float delta_sec)
 {
-  UFG::Off_EngineState *v2; // rbx
-  UFG::EngineModelOutputs *v3; // rcx
+  UFG::EngineModelOutputs *m_outputs; // rcx
   UFG::qBaseTreeRB *v4; // rax
-  signed __int64 v5; // rax
+  UFG::qBaseNodeRB **v5; // rax
   UFG::qBaseTreeRB *v6; // rax
-  signed __int64 v7; // rax
+  UFG::qBaseNodeRB **v7; // rax
   UFG::qBaseTreeRB *v8; // rax
 
-  v2 = this;
-  v3 = this->m_esm->m_engineModel->m_outputs;
+  m_outputs = this->m_esm->m_engineModel->m_outputs;
   if ( EngineModelSym_rpm.mUID
-    && (v4 = UFG::qBaseTreeRB::Get(&v3->m_outputsTree.mTree, EngineModelSym_rpm.mUID)) != 0i64 )
+    && (v4 = UFG::qBaseTreeRB::Get(&m_outputs->m_outputsTree.mTree, EngineModelSym_rpm.mUID)) != 0i64 )
   {
-    v5 = (signed __int64)&v4[-1].mNULL.mChild[1];
+    v5 = &v4[-1].mNULL.mChild[1];
   }
   else
   {
     v5 = 0i64;
   }
-  *(_DWORD *)(v5 + 60) = 0;
+  *((_DWORD *)v5 + 15) = 0;
   if ( EngineModelSym_load.mUID
-    && (v6 = UFG::qBaseTreeRB::Get(&v2->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree, EngineModelSym_load.mUID)) != 0i64 )
+    && (v6 = UFG::qBaseTreeRB::Get(
+               &this->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
+               EngineModelSym_load.mUID)) != 0i64 )
   {
-    v7 = (signed __int64)&v6[-1].mNULL.mChild[1];
+    v7 = &v6[-1].mNULL.mChild[1];
   }
   else
   {
     v7 = 0i64;
   }
-  *(_DWORD *)(v7 + 60) = 0;
+  *((_DWORD *)v7 + 15) = 0;
   if ( EngineModelSym_modelled_speed.mUID
     && (v8 = UFG::qBaseTreeRB::Get(
-               &v2->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
+               &this->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
                EngineModelSym_modelled_speed.mUID)) != 0i64 )
   {
     HIDWORD(v8->mNULL.mParent) = 0;
@@ -3053,10 +2932,10 @@ void __fastcall UFG::Off_EngineState::Update(UFG::Off_EngineState *this, float d
 
 // File Line: 1683
 // RVA: 0x6855E0
-void __usercall UFG::Off_EngineState::OnEvent(UFG::Off_EngineState *this@<rcx>, UFG::EngineStateMachine::Event event@<edx>, int a3@<xmm0>)
+void __fastcall UFG::Off_EngineState::OnEvent(UFG::Off_EngineState *this, UFG::EngineStateMachine::Event event)
 {
-  if ( event == 1 )
-    UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_IDLE, a3);
+  if ( event == eEVENT_START )
+    UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_IDLE);
 }
 
 // File Line: 1693
@@ -3068,50 +2947,50 @@ UFG::qStaticSymbol *__fastcall UFG::Idle_EngineState::GetName(UFG::Idle_EngineSt
 
 // File Line: 1698
 // RVA: 0x684F50
-void __fastcall UFG::Idle_EngineState::OnEnter(UFG::Idle_EngineState *this, UFG::EngineStateMachine::State exitingState)
+void __fastcall UFG::Idle_EngineState::OnEnter(
+        UFG::Idle_EngineState *this,
+        UFG::EngineStateMachine::State exitingState)
 {
-  UFG::Idle_EngineState *v2; // rbx
-  UFG::AudioCurveSet *v3; // rax
-  UFG::AudioCurve *v4; // rax
+  UFG::AudioCurveSet *Gear; // rax
+  UFG::AudioCurve *Curve; // rax
 
-  v2 = this;
   this->m_esm->inputs.curGear = 0;
-  v3 = UFG::EngineCurve::GetGear(this->m_esm->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve, 0);
-  v4 = UFG::AudioCurveSet::FindCurve(v3, (UFG::qSymbol *)&EngineModelSym_type_decel.mUID);
-  v2->m_curCurve = v4;
-  if ( v4 )
-    v2->m_idleRpm = UFG::AudioCurve::FindMinValue(v4);
+  Gear = UFG::EngineCurve::GetGear(
+           this->m_esm->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve,
+           0);
+  Curve = UFG::AudioCurveSet::FindCurve(Gear, &EngineModelSym_type_decel);
+  this->m_curCurve = Curve;
+  if ( Curve )
+    this->m_idleRpm = UFG::AudioCurve::FindMinValue(Curve);
   else
-    v2->m_idleRpm = 0.0;
+    this->m_idleRpm = 0.0;
 }
 
 // File Line: 1717
 // RVA: 0x691C00
 void __fastcall UFG::Idle_EngineState::Update(UFG::Idle_EngineState *this, float delta_sec)
 {
-  float v2; // xmm6_4
-  UFG::Idle_EngineState *v3; // rbx
-  UFG::EngineModelOutputs *v4; // rcx
+  float m_idleRpm; // xmm6_4
+  UFG::EngineModelOutputs *m_outputs; // rcx
   UFG::qBaseTreeRB *v5; // rax
-  signed __int64 v6; // rax
+  float *v6; // rax
   UFG::qBaseTreeRB *v7; // rax
 
-  v2 = this->m_idleRpm;
-  v3 = this;
-  v4 = this->m_esm->m_engineModel->m_outputs;
+  m_idleRpm = this->m_idleRpm;
+  m_outputs = this->m_esm->m_engineModel->m_outputs;
   if ( EngineModelSym_rpm.mUID
-    && (v5 = UFG::qBaseTreeRB::Get(&v4->m_outputsTree.mTree, EngineModelSym_rpm.mUID)) != 0i64 )
+    && (v5 = UFG::qBaseTreeRB::Get(&m_outputs->m_outputsTree.mTree, EngineModelSym_rpm.mUID)) != 0i64 )
   {
-    v6 = (signed __int64)&v5[-1].mNULL.mChild[1];
+    v6 = (float *)&v5[-1].mNULL.mChild[1];
   }
   else
   {
     v6 = 0i64;
   }
-  *(float *)(v6 + 60) = v2;
+  v6[15] = m_idleRpm;
   if ( EngineModelSym_modelled_speed.mUID
     && (v7 = UFG::qBaseTreeRB::Get(
-               &v3->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
+               &this->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
                EngineModelSym_modelled_speed.mUID)) != 0i64 )
   {
     HIDWORD(v7->mNULL.mParent) = 0;
@@ -3131,140 +3010,140 @@ UFG::qStaticSymbol *__fastcall UFG::Neutral_EngineState::GetName(UFG::Neutral_En
 
 // File Line: 1730
 // RVA: 0x684FC0
-void __fastcall UFG::Neutral_EngineState::OnEnter(UFG::Neutral_EngineState *this, UFG::EngineStateMachine::State exitingState)
+void __fastcall UFG::Neutral_EngineState::OnEnter(
+        UFG::Neutral_EngineState *this,
+        UFG::EngineStateMachine::State exitingState)
 {
-  UFG::Neutral_EngineState *v2; // rsi
-  UFG::AudioCurveSet *v3; // rax
-  UFG::AudioCurve *v4; // rax
-  signed __int64 v5; // rbx
+  UFG::AudioCurveSet *NamedCurveSet; // rax
+  UFG::AudioCurve *Curve; // rax
+  float *v5; // rbx
   UFG::qBaseTreeRB *v6; // rax
-  signed __int64 v7; // rax
-  float v8; // xmm0_4
-  unsigned int v9; // edx
-  UFG::qBaseTreeRB *v10; // rax
-  signed __int64 v11; // rdi
-  UFG::EngineModel2 *v12; // rsi
-  UFG::qBaseTreeRB *v13; // rax
+  float *v7; // rax
+  unsigned int mUID; // edx
+  UFG::qBaseTreeRB *v9; // rax
+  UFG::qBaseNodeRB **v10; // rdi
+  UFG::EngineModel2 *m_engineModel; // rsi
+  UFG::qBaseTreeRB *v12; // rax
 
-  v2 = this;
-  v3 = UFG::EngineCurve::FindNamedCurveSet(
-         this->m_esm->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_parentEngineCurve,
-         (UFG::qSymbol *)&EngineModelSym_Neutral.mUID);
-  v2->m_neutralCurveSet = v3;
-  if ( v3 )
+  NamedCurveSet = UFG::EngineCurve::FindNamedCurveSet(
+                    this->m_esm->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_parentEngineCurve,
+                    &EngineModelSym_Neutral);
+  this->m_neutralCurveSet = NamedCurveSet;
+  if ( NamedCurveSet )
   {
-    v4 = UFG::AudioCurveSet::FindCurve(v3, (UFG::qSymbol *)&EngineModelSym_type_generic.mUID);
-    v2->m_curCurve = v4;
-    if ( v4 )
+    Curve = UFG::AudioCurveSet::FindCurve(NamedCurveSet, &EngineModelSym_type_generic);
+    this->m_curCurve = Curve;
+    if ( Curve )
     {
       v5 = 0i64;
       if ( EngineModelSym_rpm.mUID
         && (v6 = UFG::qBaseTreeRB::Get(
-                   &v2->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
+                   &this->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
                    EngineModelSym_rpm.mUID)) != 0i64 )
       {
-        v7 = (signed __int64)&v6[-1].mNULL.mChild[1];
+        v7 = (float *)&v6[-1].mNULL.mChild[1];
       }
       else
       {
         v7 = 0i64;
       }
-      v8 = UFG::LinearGraph<float>::GetDomainValue(&v2->m_curCurve->m_graphCurve, *(const float *)(v7 + 60)) * 0.001;
-      v2->m_esm->m_timeAfterRpmLookup = v8;
-      v9 = EngineModelSym_time_after_rpm_lookup.mUID;
+      this->m_esm->m_timeAfterRpmLookup = UFG::LinearGraph<float>::GetDomainValue(
+                                            &this->m_curCurve->m_graphCurve,
+                                            v7[15])
+                                        * 0.001;
+      mUID = EngineModelSym_time_after_rpm_lookup.mUID;
       if ( !EngineModelSym_time_after_rpm_lookup.mUID
-        || (v10 = UFG::qBaseTreeRB::Get(
-                    &v2->m_esm->m_engineModel->m_inputs->m_inputsTree.mTree,
-                    EngineModelSym_time_after_rpm_lookup.mUID),
-            v9 = EngineModelSym_time_after_rpm_lookup.mUID,
-            v11 = (signed __int64)&v10[-1].mNULL.mChild[1],
-            !v10) )
+        || (v9 = UFG::qBaseTreeRB::Get(
+                   &this->m_esm->m_engineModel->m_inputs->m_inputsTree.mTree,
+                   EngineModelSym_time_after_rpm_lookup.mUID),
+            mUID = EngineModelSym_time_after_rpm_lookup.mUID,
+            v10 = &v9[-1].mNULL.mChild[1],
+            !v9) )
       {
-        v11 = 0i64;
+        v10 = 0i64;
       }
-      v12 = v2->m_esm->m_engineModel;
-      if ( v9 )
+      m_engineModel = this->m_esm->m_engineModel;
+      if ( mUID )
       {
-        v13 = UFG::qBaseTreeRB::Get(&v12->m_inputs->m_inputsTree.mTree, v9);
-        if ( v13 )
-          v5 = (signed __int64)&v13[-1].mNULL.mChild[1];
+        v12 = UFG::qBaseTreeRB::Get(&m_engineModel->m_inputs->m_inputsTree.mTree, mUID);
+        if ( v12 )
+          v5 = (float *)&v12[-1].mNULL.mChild[1];
       }
-      (*(void (__fastcall **)(signed __int64, UFG::EngineModel2 *))(*(_QWORD *)v11 + 8i64))(v11, v12);
-      *(float *)(v5 + 68) = v8;
+      v5[17] = ((float (__fastcall *)(UFG::qBaseNodeRB **, UFG::EngineModel2 *))(*v10)->mChild[0])(v10, m_engineModel);
     }
   }
 }
 
 // File Line: 1751
 // RVA: 0x685810
-void __fastcall UFG::Neutral_EngineState::OnExit(UFG::Neutral_EngineState *this, UFG::EngineStateMachine::State enteringState)
+void __fastcall UFG::Neutral_EngineState::OnExit(
+        UFG::Neutral_EngineState *this,
+        UFG::EngineStateMachine::State enteringState)
 {
-  UFG::Neutral_EngineState *v2; // rdi
   unsigned int v3; // ebx
-  UFG::EngineModelInputs *v4; // rcx
+  UFG::EngineModelInputs *m_inputs; // rcx
   UFG::qBaseTreeRB *v5; // rax
-  signed __int64 v6; // rax
+  float *v6; // rax
   float v7; // xmm6_4
-  UFG::VehicleAudioSubTypeParameters *v8; // rcx
-  UFG::EngineCurve *v9; // rax
-  UFG::AudioCurve *v10; // rax
+  UFG::VehicleAudioSubTypeParameters *m_pSubTypeParameters; // rcx
+  UFG::EngineCurve *m_engineCurve; // rax
+  UFG::AudioCurve *GearCurve; // rax
   UFG::VehicleAudioSubTypeParameters *v11; // rcx
 
-  v2 = this;
   v3 = 0;
-  v4 = this->m_esm->m_engineModel->m_inputs;
+  m_inputs = this->m_esm->m_engineModel->m_inputs;
   if ( EngineModelSym_speed.mUID
-    && (v5 = UFG::qBaseTreeRB::Get(&v4->m_inputsTree.mTree, EngineModelSym_speed.mUID)) != 0i64 )
+    && (v5 = UFG::qBaseTreeRB::Get(&m_inputs->m_inputsTree.mTree, EngineModelSym_speed.mUID)) != 0i64 )
   {
-    v6 = (signed __int64)&v5[-1].mNULL.mChild[1];
+    v6 = (float *)&v5[-1].mNULL.mChild[1];
   }
   else
   {
     v6 = 0i64;
   }
-  v7 = *(float *)(v6 + 68);
-  v8 = v2->m_esm->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters;
-  v9 = v8->m_engineCurve;
-  if ( v8->m_engineCurve->m_gears.size > 0 )
+  v7 = v6[17];
+  m_pSubTypeParameters = this->m_esm->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters;
+  m_engineCurve = m_pSubTypeParameters->m_engineCurve;
+  if ( m_pSubTypeParameters->m_engineCurve->m_gears.size )
   {
     while ( 1 )
     {
-      v10 = UFG::EngineCurve::FindGearCurve(v9, v3, (UFG::qSymbol *)&EngineModelSym_type_accel.mUID);
-      if ( (float)v10->m_minSpeed <= v7 && (float)v10->m_maxSpeed >= v7 )
+      GearCurve = UFG::EngineCurve::FindGearCurve(m_engineCurve, v3, &EngineModelSym_type_accel);
+      if ( (float)GearCurve->m_minSpeed <= v7 && (float)GearCurve->m_maxSpeed >= v7 )
         break;
       ++v3;
-      v11 = v2->m_esm->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters;
-      v9 = v11->m_engineCurve;
+      v11 = this->m_esm->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters;
+      m_engineCurve = v11->m_engineCurve;
       if ( v3 >= v11->m_engineCurve->m_gears.size )
         return;
     }
-    v2->m_esm->inputs.curGear = v3;
+    this->m_esm->inputs.curGear = v3;
   }
 }
 
 // File Line: 1812
 // RVA: 0x685560
-void __usercall UFG::Neutral_EngineState::OnEvent(UFG::Neutral_EngineState *this@<rcx>, UFG::EngineStateMachine::Event event@<edx>, int a3@<xmm0>)
+void __fastcall UFG::Neutral_EngineState::OnEvent(UFG::Neutral_EngineState *this, UFG::EngineStateMachine::Event event)
 {
   switch ( event )
   {
-    case 2:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, 0, a3);
+    case eEVENT_STOP:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_OFF);
       break;
-    case 14:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_COLLISION, a3);
+    case eEVENT_COLLISION:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_COLLISION);
       break;
-    case 6:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_REVERSE, a3);
+    case eEVENT_REVERSE:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_REVERSE);
       break;
-    case 3:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_GAS, a3);
+    case eEVENT_GAS:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_GAS);
       break;
-    case 9:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_IDLE, a3);
+    case eEVENT_IDLE:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_IDLE);
       break;
-    case 13:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_TRANSITION, a3);
+    case eEVENT_TRANSITION:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_TRANSITION);
       break;
   }
 }
@@ -3285,23 +3164,32 @@ UFG::qStaticSymbol *__fastcall UFG::Collision_EngineState::GetName(UFG::Collisio
 
 // File Line: 1870
 // RVA: 0x684C30
-void __fastcall UFG::Collision_EngineState::OnEnter(UFG::InAir_EngineState *this, UFG::EngineStateMachine::State exitingState)
+// attributes: thunk
+void __fastcall UFG::Collision_EngineState::OnEnter(
+        UFG::InAir_EngineState *this,
+        UFG::EngineStateMachine::State exitingState)
 {
-  UFG::Neutral_EngineState::OnEnter((UFG::Neutral_EngineState *)&this->vfptr, exitingState);
+  UFG::Neutral_EngineState::OnEnter(this, exitingState);
 }
 
 // File Line: 1875
 // RVA: 0x6857B0
-void __fastcall UFG::Collision_EngineState::OnExit(UFG::InAir_EngineState *this, UFG::EngineStateMachine::State enteringState)
+// attributes: thunk
+void __fastcall UFG::Collision_EngineState::OnExit(
+        UFG::InAir_EngineState *this,
+        UFG::EngineStateMachine::State enteringState)
 {
-  UFG::Neutral_EngineState::OnExit((UFG::Neutral_EngineState *)&this->vfptr, enteringState);
+  UFG::Neutral_EngineState::OnExit(this, enteringState);
 }
 
 // File Line: 1885
 // RVA: 0x6854C0
-void __fastcall UFG::Collision_EngineState::OnEvent(UFG::Collision_EngineState *this, UFG::EngineStateMachine::Event event)
+void __fastcall UFG::Collision_EngineState::OnEvent(
+        UFG::Collision_EngineState *this,
+        UFG::EngineStateMachine::Event event)
 {
-  JUMPOUT(LODWORD(this->m_esm->m_eventParameter), this->m_esm->m_timeInCurState, UFG::Neutral_EngineState::OnEvent);
+  if ( this->m_esm->m_eventParameter < this->m_esm->m_timeInCurState )
+    UFG::Neutral_EngineState::OnEvent(this, event);
 }
 
 // File Line: 1898
@@ -3329,58 +3217,56 @@ UFG::qStaticSymbol *__fastcall UFG::Wheelie_EngineState::GetName(UFG::Wheelie_En
 // RVA: 0x694E10
 void __fastcall UFG::Wheelie_EngineState::Update(UFG::Wheelie_EngineState *this, float delta_sec)
 {
-  UFG::Wheelie_EngineState *v2; // rdi
   UFG::PhysicsWheeledVehicle *v3; // rbx
-  UFG::EngineModelInputs *v4; // rcx
+  UFG::EngineModelInputs *m_inputs; // rcx
   UFG::qBaseTreeRB *v5; // rax
-  signed __int64 v6; // rax
-  UFG::SimComponent *v7; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v8; // rax
+  UFG::qBaseNodeRB **v6; // rax
+  UFG::SimComponent *m_pPointer; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rax
 
-  v2 = this;
   v3 = 0i64;
-  v4 = this->m_esm->m_engineModel->m_inputs;
+  m_inputs = this->m_esm->m_engineModel->m_inputs;
   if ( EngineModelSym_burnout.mUID
-    && (v5 = UFG::qBaseTreeRB::Get(&v4->m_inputsTree.mTree, EngineModelSym_burnout.mUID)) != 0i64 )
+    && (v5 = UFG::qBaseTreeRB::Get(&m_inputs->m_inputsTree.mTree, EngineModelSym_burnout.mUID)) != 0i64 )
   {
-    v6 = (signed __int64)&v5[-1].mNULL.mChild[1];
+    v6 = &v5[-1].mNULL.mChild[1];
   }
   else
   {
     v6 = 0i64;
   }
-  *(_DWORD *)(v6 + 68) = 1065353216;
-  v7 = v2->m_esm->m_engineModel->m_pVehAudComponent->m_physicsMoverInterface.m_pPointer;
-  v8 = v7[10].m_SafePointerList.mNode.mPrev;
-  if ( !v8 )
-    goto LABEL_13;
-  if ( BYTE4(v8[37].mNext) & 7 )
-    v3 = (UFG::PhysicsWheeledVehicle *)v7[10].m_SafePointerList.mNode.mPrev;
+  *((_DWORD *)v6 + 17) = 1065353216;
+  m_pPointer = this->m_esm->m_engineModel->m_pVehAudComponent->m_physicsMoverInterface.m_pPointer;
+  mPrev = m_pPointer[10].m_SafePointerList.mNode.mPrev;
+  if ( !mPrev )
+    goto LABEL_10;
+  if ( (BYTE4(mPrev[37].mNext) & 7) != 0 )
+    v3 = (UFG::PhysicsWheeledVehicle *)m_pPointer[10].m_SafePointerList.mNode.mPrev;
   if ( !v3 || UFG::PhysicsWheeledVehicle::IsWheelOnGround(v3, 0) )
-LABEL_13:
-    v2->m_esm->m_event = 13;
+LABEL_10:
+    this->m_esm->m_event = eEVENT_TRANSITION;
 }
 
 // File Line: 1956
 // RVA: 0x685660
-void __usercall UFG::Wheelie_EngineState::OnEvent(UFG::Wheelie_EngineState *this@<rcx>, UFG::EngineStateMachine::Event event@<edx>, int a3@<xmm0>)
+void __fastcall UFG::Wheelie_EngineState::OnEvent(UFG::Wheelie_EngineState *this, UFG::EngineStateMachine::Event event)
 {
   switch ( event )
   {
-    case 2:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, 0, a3);
+    case eEVENT_STOP:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_OFF);
       break;
-    case 13:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_TRANSITION, a3);
+    case eEVENT_TRANSITION:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_TRANSITION);
       break;
-    case 4:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_BRAKE, a3);
+    case eEVENT_BRAKE:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_BRAKE);
       break;
-    case 11:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_NEUTRAL, a3);
+    case eEVENT_NEUTRAL:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_NEUTRAL);
       break;
-    case 9:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_IDLE, a3);
+    case eEVENT_IDLE:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_IDLE);
       break;
   }
 }
@@ -3394,31 +3280,36 @@ UFG::qStaticSymbol *__fastcall UFG::Drifting_EngineState::GetName(UFG::Drifting_
 
 // File Line: 1987
 // RVA: 0x684EC0
-void __fastcall UFG::Drifting_EngineState::OnEnter(UFG::Drifting_EngineState *this, UFG::EngineStateMachine::State exitingState)
+void __fastcall UFG::Drifting_EngineState::OnEnter(
+        UFG::Drifting_EngineState *this,
+        UFG::EngineStateMachine::State exitingState)
 {
-  UFG::Drifting_EngineState *v2; // rbx
-  UFG::EngineModelInputs *v3; // rcx
+  UFG::EngineModelInputs *m_inputs; // rcx
   UFG::qBaseTreeRB *v4; // rax
-  signed __int64 v5; // rax
+  float *v5; // rax
   UFG::qBaseTreeRB *v6; // rax
 
-  v2 = this;
-  v3 = this->m_esm->m_engineModel->m_inputs;
-  if ( EngineModelSym_rpm.mUID && (v4 = UFG::qBaseTreeRB::Get(&v3->m_inputsTree.mTree, EngineModelSym_rpm.mUID)) != 0i64 )
-    v5 = (signed __int64)&v4[-1].mNULL.mChild[1];
-  else
-    v5 = 0i64;
-  v2->m_rpmOnEnterState = *(float *)(v5 + 72);
-  if ( EngineModelSym_limiter_threshold.mUID
-    && (v6 = UFG::qBaseTreeRB::Get(
-               &v2->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
-               EngineModelSym_limiter_threshold.mUID)) != 0i64 )
+  m_inputs = this->m_esm->m_engineModel->m_inputs;
+  if ( EngineModelSym_rpm.mUID
+    && (v4 = UFG::qBaseTreeRB::Get(&m_inputs->m_inputsTree.mTree, EngineModelSym_rpm.mUID)) != 0i64 )
   {
-    v2->m_limiterThresholdOnEnterState = *((float *)&v6->mNULL.mParent + 1);
+    v5 = (float *)&v4[-1].mNULL.mChild[1];
   }
   else
   {
-    LODWORD(v2->m_limiterThresholdOnEnterState) = MEMORY[0x3C];
+    v5 = 0i64;
+  }
+  this->m_rpmOnEnterState = v5[18];
+  if ( EngineModelSym_limiter_threshold.mUID
+    && (v6 = UFG::qBaseTreeRB::Get(
+               &this->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
+               EngineModelSym_limiter_threshold.mUID)) != 0i64 )
+  {
+    this->m_limiterThresholdOnEnterState = *((float *)&v6->mNULL.mParent + 1);
+  }
+  else
+  {
+    LODWORD(this->m_limiterThresholdOnEnterState) = MEMORY[0x3C];
   }
 }
 
@@ -3426,68 +3317,68 @@ void __fastcall UFG::Drifting_EngineState::OnEnter(UFG::Drifting_EngineState *th
 // RVA: 0x6907F0
 void __fastcall UFG::Drifting_EngineState::Update(UFG::Drifting_EngineState *this, float delta_sec)
 {
-  UFG::Drifting_EngineState *v2; // rbx
-  signed __int64 v3; // rdi
-  UFG::EngineModelOutputs *v4; // rcx
+  UFG::qBaseNodeRB **v3; // rdi
+  UFG::EngineModelOutputs *m_outputs; // rcx
   UFG::qBaseTreeRB *v5; // rax
-  signed __int64 v6; // rsi
+  UFG::qBaseNodeRB **v6; // rsi
   UFG::qBaseTreeRB *v7; // rax
-  UFG::EngineStateMachine *v8; // rdx
-  UFG::PhysicsMoverInterface *v9; // rdi
+  UFG::EngineStateMachine *m_esm; // rdx
+  UFG::PhysicsMoverInterface *m_pPointer; // rdi
 
-  v2 = this;
   v3 = 0i64;
-  v4 = this->m_esm->m_engineModel->m_outputs;
+  m_outputs = this->m_esm->m_engineModel->m_outputs;
   if ( !EngineModelSym_limiter_threshold.mUID
-    || (v5 = UFG::qBaseTreeRB::Get(&v4->m_outputsTree.mTree, EngineModelSym_limiter_threshold.mUID),
-        v6 = (signed __int64)&v5[-1].mNULL.mChild[1],
+    || (v5 = UFG::qBaseTreeRB::Get(&m_outputs->m_outputsTree.mTree, EngineModelSym_limiter_threshold.mUID),
+        v6 = &v5[-1].mNULL.mChild[1],
         !v5) )
   {
     v6 = 0i64;
   }
   if ( EngineModelSym_rpm.mUID )
   {
-    v7 = UFG::qBaseTreeRB::Get(&v2->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree, EngineModelSym_rpm.mUID);
+    v7 = UFG::qBaseTreeRB::Get(&this->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree, EngineModelSym_rpm.mUID);
     if ( v7 )
-      v3 = (signed __int64)&v7[-1].mNULL.mChild[1];
+      v3 = &v7[-1].mNULL.mChild[1];
   }
   if ( v6 )
-    *(float *)(v6 + 60) = v2->m_limiterThresholdOnEnterState;
+    *((_DWORD *)v6 + 15) = LODWORD(this->m_limiterThresholdOnEnterState);
   if ( v3 )
-    *(float *)(v3 + 60) = v2->m_rpmOnEnterState;
-  v8 = v2->m_esm;
-  v9 = (UFG::PhysicsMoverInterface *)v8->m_engineModel->m_pVehAudComponent->m_physicsMoverInterface.m_pPointer;
-  if ( !v8->m_stateSpecificCurveSet
-    || v2->m_esm->m_stateSpecificCurveSet->m_name.mUID != *(_DWORD *)v2->vfptr->GetName((UFG::Base_EngineState *)&v2->vfptr)
-    || v9 && UFG::CalcAverageFrictionMultiplier(v9) >= 1.0 )
+    *((_DWORD *)v3 + 15) = LODWORD(this->m_rpmOnEnterState);
+  m_esm = this->m_esm;
+  m_pPointer = (UFG::PhysicsMoverInterface *)m_esm->m_engineModel->m_pVehAudComponent->m_physicsMoverInterface.m_pPointer;
+  if ( !m_esm->m_stateSpecificCurveSet
+    || this->m_esm->m_stateSpecificCurveSet->m_name.mUID != this->vfptr->GetName(this)->mUID
+    || m_pPointer && UFG::CalcAverageFrictionMultiplier(m_pPointer) >= 1.0 )
   {
-    v2->m_esm->m_event = 13;
+    this->m_esm->m_event = eEVENT_TRANSITION;
   }
 }
 
 // File Line: 2030
 // RVA: 0x6854E0
-void __usercall UFG::Drifting_EngineState::OnEvent(UFG::Drifting_EngineState *this@<rcx>, UFG::EngineStateMachine::Event event@<edx>, int a3@<xmm0>)
+void __fastcall UFG::Drifting_EngineState::OnEvent(
+        UFG::Drifting_EngineState *this,
+        UFG::EngineStateMachine::Event event)
 {
   switch ( event )
   {
-    case 2:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, 0, a3);
+    case eEVENT_STOP:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_OFF);
       break;
-    case 13:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_TRANSITION, a3);
+    case eEVENT_TRANSITION:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_TRANSITION);
       break;
-    case 4:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_BRAKE, a3);
+    case eEVENT_BRAKE:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_BRAKE);
       break;
-    case 11:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_NEUTRAL, a3);
+    case eEVENT_NEUTRAL:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_NEUTRAL);
       break;
-    case 9:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_IDLE, a3);
+    case eEVENT_IDLE:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_IDLE);
       break;
-    case 12:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_REVLIMIT, a3);
+    case eEVENT_REVLIMIT:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_REVLIMIT);
       break;
   }
 }
@@ -3503,60 +3394,65 @@ UFG::qStaticSymbol *__fastcall UFG::Accel_EngineState::GetName(UFG::Accel_Engine
 // RVA: 0x67A2F0
 float __fastcall UFG::Accel_EngineState::GetDefaultLoad(UFG::Accel_EngineState *this)
 {
-  UFG::EngineModelInputs *v1; // rcx
+  UFG::EngineModelInputs *m_inputs; // rcx
   UFG::qBaseTreeRB *v2; // rax
-  float result; // xmm0_4
 
-  v1 = this->m_esm->m_engineModel->m_inputs;
-  if ( EngineModelSym_gas.mUID && (v2 = UFG::qBaseTreeRB::Get(&v1->m_inputsTree.mTree, EngineModelSym_gas.mUID)) != 0i64 )
-    result = *((float *)v2->mNULL.mChild + 1);
+  m_inputs = this->m_esm->m_engineModel->m_inputs;
+  if ( EngineModelSym_gas.mUID
+    && (v2 = UFG::qBaseTreeRB::Get(&m_inputs->m_inputsTree.mTree, EngineModelSym_gas.mUID)) != 0i64 )
+  {
+    return *((float *)v2->mNULL.mChild + 1);
+  }
   else
-    result = MEMORY[0x44];
-  return result;
+  {
+    return MEMORY[0x44];
+  }
 }
 
 // File Line: 2070
 // RVA: 0x684A10
-void __fastcall UFG::Accel_EngineState::OnEnter(UFG::Accel_EngineState *this, UFG::EngineStateMachine::State exitingState)
+void __fastcall UFG::Accel_EngineState::OnEnter(
+        UFG::Accel_EngineState *this,
+        UFG::EngineStateMachine::State exitingState)
 {
-  UFG::EngineStateMachine *v2; // rax
-  unsigned int v3; // ebx
-  UFG::Accel_EngineState *v4; // rdi
+  UFG::EngineStateMachine *m_esm; // rax
+  unsigned int curGear; // ebx
   UFG::qBaseTreeRB *v5; // rax
-  signed __int64 v6; // rax
+  float *v6; // rax
   float v7; // xmm8_4
-  UFG::AudioCurveSet *v8; // rax
-  UFG::AudioCurve *v9; // rax
+  UFG::AudioCurveSet *Gear; // rax
+  UFG::AudioCurve *Curve; // rax
   UFG::EngineStateMachine *v10; // rsi
-  float v11; // xmm6_4
-  signed int v12; // ebx
+  float mPlayLength; // xmm6_4
+  int m_minSpeed; // ebx
   float v13; // xmm0_4
   float v14; // xmm1_4
 
-  v2 = this->m_esm;
-  v3 = v2->inputs.curGear;
-  v4 = this;
+  m_esm = this->m_esm;
+  curGear = m_esm->inputs.curGear;
   if ( EngineModelSym_rpm.mUID
-    && (v5 = UFG::qBaseTreeRB::Get(&v2->m_engineModel->m_outputs->m_outputsTree.mTree, EngineModelSym_rpm.mUID)) != 0i64 )
+    && (v5 = UFG::qBaseTreeRB::Get(&m_esm->m_engineModel->m_outputs->m_outputsTree.mTree, EngineModelSym_rpm.mUID)) != 0i64 )
   {
-    v6 = (signed __int64)&v5[-1].mNULL.mChild[1];
+    v6 = (float *)&v5[-1].mNULL.mChild[1];
   }
   else
   {
     v6 = 0i64;
   }
-  v7 = *(float *)(v6 + 60);
-  v8 = UFG::EngineCurve::GetGear(v4->m_esm->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve, v3);
-  v9 = UFG::AudioCurveSet::FindCurve(v8, (UFG::qSymbol *)&EngineModelSym_type_accel.mUID);
-  v10 = v4->m_esm;
-  v4->m_curCurve = v9;
-  v4->m_timeForTimeBasedCurve = v10->m_timeInCurState;
-  v11 = v9->mPlayLength;
-  if ( v11 > 0.0 && v10->m_findTimeFromRpm )
+  v7 = v6[15];
+  Gear = UFG::EngineCurve::GetGear(
+           this->m_esm->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve,
+           curGear);
+  Curve = UFG::AudioCurveSet::FindCurve(Gear, &EngineModelSym_type_accel);
+  v10 = this->m_esm;
+  this->m_curCurve = Curve;
+  this->m_timeForTimeBasedCurve = v10->m_timeInCurState;
+  mPlayLength = Curve->mPlayLength;
+  if ( mPlayLength > 0.0 && v10->m_findTimeFromRpm )
   {
-    v12 = v9->m_minSpeed;
-    v13 = (float)(UFG::LinearGraph<float>::GetDomainValue(&v9->m_graphCurve, v7) - (float)v12)
-        / (float)(v9->m_maxSpeed - v12);
+    m_minSpeed = Curve->m_minSpeed;
+    v13 = (float)(UFG::LinearGraph<float>::GetDomainValue(&Curve->m_graphCurve, v7) - (float)m_minSpeed)
+        / (float)(Curve->m_maxSpeed - m_minSpeed);
     if ( v13 <= 0.0 )
     {
       v13 = 0.0;
@@ -3569,95 +3465,92 @@ void __fastcall UFG::Accel_EngineState::OnEnter(UFG::Accel_EngineState *this, UF
     }
     v14 = v13;
 LABEL_12:
-    v4->m_timeForTimeBasedCurve = v11 * v14;
+    this->m_timeForTimeBasedCurve = mPlayLength * v14;
     v10->m_findTimeFromRpm = 0;
   }
 }
 
 // File Line: 2088
 // RVA: 0x6856C0
-void __fastcall UFG::Accel_EngineState::OnExit(UFG::Accel_EngineState *this, UFG::EngineStateMachine::State enteringState)
+void __fastcall UFG::Accel_EngineState::OnExit(
+        UFG::Accel_EngineState *this,
+        UFG::EngineStateMachine::State enteringState)
 {
-  UFG::EngineStateMachine *v2; // rax
+  UFG::EngineStateMachine *m_esm; // rax
 
-  v2 = this->m_esm;
-  v2->m_findTimeFromRpm = enteringState != 8;
+  m_esm = this->m_esm;
+  m_esm->m_findTimeFromRpm = enteringState != eSTATE_UPSHIFT;
 }
 
 // File Line: 2103
 // RVA: 0x68EFC0
 void __fastcall UFG::Accel_EngineState::Update(UFG::Accel_EngineState *this, float delta_sec)
 {
-  UFG::Accel_EngineState *v2; // rdi
-  UFG::EngineStateMachine *v3; // rax
-  signed __int64 v4; // rbx
+  UFG::EngineStateMachine *m_esm; // rax
+  float *v4; // rbx
   UFG::qBaseTreeRB *v5; // rax
-  signed __int64 v6; // rax
+  float *v6; // rax
   float v7; // xmm6_4
   UFG::qBaseTreeRB *v8; // rax
-  signed __int64 v9; // rax
-  UFG::AudioCurve *v10; // rdx
+  float *v9; // rax
+  UFG::AudioCurve *m_curCurve; // rdx
   float v11; // xmm6_4
   float v12; // xmm9_4
   float v13; // xmm6_4
-  float v14; // xmm0_4
+  float Value; // xmm0_4
   UFG::qBaseTreeRB *v15; // rax
-  signed __int64 v16; // rax
+  float *v16; // rax
   UFG::AudioCurve *v17; // rax
   float v18; // xmm0_4
   float v19; // xmm6_4
   UFG::qBaseTreeRB *v20; // rax
   UFG::EngineStateMachine *v21; // rdx
-  unsigned int v22; // er8
+  unsigned int curGear; // r8d
   UFG::qBaseTreeRB *v23; // rax
-  signed __int64 v24; // rbx
+  float *v24; // rbx
 
-  v2 = this;
-  v3 = this->m_esm;
+  m_esm = this->m_esm;
   if ( this->m_curCurve->mPlayLength <= 0.0 )
   {
     if ( EngineModelSym_speed.mUID
-      && (v23 = UFG::qBaseTreeRB::Get(&v3->m_engineModel->m_inputs->m_inputsTree.mTree, EngineModelSym_speed.mUID)) != 0i64 )
+      && (v23 = UFG::qBaseTreeRB::Get(&m_esm->m_engineModel->m_inputs->m_inputsTree.mTree, EngineModelSym_speed.mUID)) != 0i64 )
     {
-      v24 = (signed __int64)&v23[-1].mNULL.mChild[1];
+      v24 = (float *)&v23[-1].mNULL.mChild[1];
     }
     else
     {
       v24 = 0i64;
     }
-    UFG::Base_EngineState::UpdateRPMFromSpeedBasedCurve(
-      (UFG::Base_EngineState *)&v2->vfptr,
-      v2->m_curCurve,
-      *(float *)(v24 + 68));
+    UFG::Base_EngineState::UpdateRPMFromSpeedBasedCurve(this, this->m_curCurve, v24[17]);
   }
   else
   {
     v4 = 0i64;
     if ( EngineModelSym_gas.mUID
-      && (v5 = UFG::qBaseTreeRB::Get(&v3->m_engineModel->m_inputs->m_inputsTree.mTree, EngineModelSym_gas.mUID)) != 0i64 )
+      && (v5 = UFG::qBaseTreeRB::Get(&m_esm->m_engineModel->m_inputs->m_inputsTree.mTree, EngineModelSym_gas.mUID)) != 0i64 )
     {
-      v6 = (signed __int64)&v5[-1].mNULL.mChild[1];
+      v6 = (float *)&v5[-1].mNULL.mChild[1];
     }
     else
     {
       v6 = 0i64;
     }
-    v7 = *(float *)(v6 + 68);
+    v7 = v6[17];
     if ( EngineModelSym_acceleration_factor.mUID
       && (v8 = UFG::qBaseTreeRB::Get(
-                 &v2->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
+                 &this->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
                  EngineModelSym_acceleration_factor.mUID)) != 0i64 )
     {
-      v9 = (signed __int64)&v8[-1].mNULL.mChild[1];
+      v9 = (float *)&v8[-1].mNULL.mChild[1];
     }
     else
     {
       v9 = 0i64;
     }
-    v10 = v2->m_curCurve;
-    v11 = (float)((float)(v7 * *(float *)(v9 + 64)) * delta_sec) + v2->m_timeForTimeBasedCurve;
-    v2->m_timeForTimeBasedCurve = v11;
-    v12 = v11 / v10->mPlayLength;
+    m_curCurve = this->m_curCurve;
+    v11 = (float)((float)(v7 * v9[16]) * delta_sec) + this->m_timeForTimeBasedCurve;
+    this->m_timeForTimeBasedCurve = v11;
+    v12 = v11 / m_curCurve->mPlayLength;
     if ( v12 <= 0.0 )
     {
       v12 = 0.0;
@@ -3666,7 +3559,7 @@ void __fastcall UFG::Accel_EngineState::Update(UFG::Accel_EngineState *this, flo
     {
       v12 = *(float *)&FLOAT_1_0;
     }
-    v13 = v11 / v10->mPlayLength;
+    v13 = v11 / m_curCurve->mPlayLength;
     if ( v13 <= 0.0 )
     {
       v13 = 0.0;
@@ -3675,23 +3568,23 @@ void __fastcall UFG::Accel_EngineState::Update(UFG::Accel_EngineState *this, flo
     {
       v13 = *(float *)&FLOAT_1_0;
     }
-    v14 = UFG::LinearGraph<float>::GetValue(
-            &v10->m_graphCurve,
-            (float)((float)(v10->m_maxSpeed - v10->m_minSpeed) * v13) + (float)v10->m_minSpeed);
+    Value = UFG::LinearGraph<float>::GetValue(
+              &m_curCurve->m_graphCurve,
+              (float)((float)(m_curCurve->m_maxSpeed - m_curCurve->m_minSpeed) * v13) + (float)m_curCurve->m_minSpeed);
     if ( EngineModelSym_rpm.mUID
       && (v15 = UFG::qBaseTreeRB::Get(
-                  &v2->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
+                  &this->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
                   EngineModelSym_rpm.mUID)) != 0i64 )
     {
-      v16 = (signed __int64)&v15[-1].mNULL.mChild[1];
+      v16 = (float *)&v15[-1].mNULL.mChild[1];
     }
     else
     {
       v16 = 0i64;
     }
-    *(float *)(v16 + 60) = v14;
-    v17 = v2->m_curCurve;
-    v18 = v2->m_timeForTimeBasedCurve / v17->mPlayLength;
+    v16[15] = Value;
+    v17 = this->m_curCurve;
+    v18 = this->m_timeForTimeBasedCurve / v17->mPlayLength;
     if ( v18 <= 0.0 )
     {
       v18 = 0.0;
@@ -3704,19 +3597,19 @@ void __fastcall UFG::Accel_EngineState::Update(UFG::Accel_EngineState *this, flo
     if ( EngineModelSym_modelled_speed.mUID )
     {
       v20 = UFG::qBaseTreeRB::Get(
-              &v2->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
+              &this->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
               EngineModelSym_modelled_speed.mUID);
       if ( v20 )
-        v4 = (signed __int64)&v20[-1].mNULL.mChild[1];
+        v4 = (float *)&v20[-1].mNULL.mChild[1];
     }
-    *(float *)(v4 + 60) = v19;
+    v4[15] = v19;
     if ( v12 == 1.0 )
     {
-      v21 = v2->m_esm;
-      v22 = v21->inputs.curGear;
-      if ( v21->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve->m_gears.size <= v22 + 1 )
-        v21->inputs.curGear = v22 - 1;
-      v2->m_esm->m_event = 7;
+      v21 = this->m_esm;
+      curGear = v21->inputs.curGear;
+      if ( v21->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve->m_gears.size <= curGear + 1 )
+        v21->inputs.curGear = curGear - 1;
+      this->m_esm->m_event = eEVENT_UPSHIFT;
     }
   }
 }
@@ -3730,56 +3623,61 @@ UFG::qStaticSymbol *__fastcall UFG::Reverse_EngineState::GetName(UFG::Reverse_En
 
 // File Line: 2148
 // RVA: 0x6852F0
-void __fastcall UFG::Reverse_EngineState::OnEnter(UFG::Reverse_EngineState *this, UFG::EngineStateMachine::State exitingState)
+void __fastcall UFG::Reverse_EngineState::OnEnter(
+        UFG::Reverse_EngineState *this,
+        UFG::EngineStateMachine::State exitingState)
 {
-  UFG::Reverse_EngineState *v2; // rbx
-  UFG::AudioCurveSet *v3; // rax
+  UFG::AudioCurveSet *NamedCurveSet; // rax
 
-  v2 = this;
-  v3 = UFG::EngineCurve::FindNamedCurveSet(
-         this->m_esm->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve,
-         (UFG::qSymbol *)&EngineModelSym_Reverse.mUID);
-  if ( v3 )
-    v2->m_curCurve = UFG::AudioCurveSet::FindCurve(v3, (UFG::qSymbol *)&EngineModelSym_type_reverse.mUID);
-  v2->m_timeForTimeBasedCurve = v2->m_esm->m_timeInCurState;
+  NamedCurveSet = UFG::EngineCurve::FindNamedCurveSet(
+                    this->m_esm->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve,
+                    &EngineModelSym_Reverse);
+  if ( NamedCurveSet )
+    this->m_curCurve = UFG::AudioCurveSet::FindCurve(NamedCurveSet, &EngineModelSym_type_reverse);
+  this->m_timeForTimeBasedCurve = this->m_esm->m_timeInCurState;
 }
 
 // File Line: 2161
 // RVA: 0x6859D0
-void __fastcall UFG::Reverse_EngineState::OnExit(UFG::Reverse_EngineState *this, UFG::EngineStateMachine::State enteringState)
+void __fastcall UFG::Reverse_EngineState::OnExit(
+        UFG::Reverse_EngineState *this,
+        UFG::EngineStateMachine::State enteringState)
 {
-  UFG::Reverse_EngineState *v2; // rbx
-  unsigned int v3; // ebp
-  UFG::VehicleAudioComponent *v4; // rsi
+  unsigned int traffic_fadeout_time_ms; // ebp
+  UFG::VehicleAudioComponent *m_pVehAudComponent; // rsi
   UFG::qWiseSymbol *v5; // rax
-  unsigned int v6; // edx
+  unsigned int mUID; // edx
 
-  v2 = this;
   if ( this->m_isPlayingBeep )
   {
-    v3 = 0;
-    v4 = this->m_esm->m_engineModel->m_pVehAudComponent;
-    if ( v4->m_eDriverType )
-      v3 = UFG::VehicleAudioComponent::sm_configPs->traffic_fadeout_time_ms;
+    traffic_fadeout_time_ms = 0;
+    m_pVehAudComponent = this->m_esm->m_engineModel->m_pVehAudComponent;
+    if ( m_pVehAudComponent->m_eDriverType )
+      traffic_fadeout_time_ms = UFG::VehicleAudioComponent::sm_configPs->traffic_fadeout_time_ms;
     v5 = UFG::qPropertySet::Get<UFG::qWiseSymbol>(
-           v4->m_pEnginePropertySet,
-           (UFG::qSymbol *)&UFG::VehAudPropSym_engine_reverse_beep_stop.mUID,
+           m_pVehAudComponent->m_pEnginePropertySet,
+           (UFG::qArray<unsigned long,0> *)&UFG::VehAudPropSym_engine_reverse_beep_stop,
            DEPTH_RECURSE);
     if ( v5
       || (v5 = UFG::qPropertySet::Get<UFG::qWiseSymbol>(
-                 v4->m_pSubTypeParameters->mpPropertySet,
-                 (UFG::qSymbol *)&UFG::VehAudPropSym_engine_reverse_beep_stop.mUID,
+                 m_pVehAudComponent->m_pSubTypeParameters->mpPropertySet,
+                 (UFG::qArray<unsigned long,0> *)&UFG::VehAudPropSym_engine_reverse_beep_stop,
                  DEPTH_RECURSE)) != 0i64 )
     {
-      v6 = v5->mUID;
+      mUID = v5->mUID;
     }
     else
     {
-      v6 = 0;
+      mUID = 0;
     }
-    UFG::AudioEntity::CreateAndPlayEvent((UFG::AudioEntity *)&v4->vfptr, v6, 0i64, v3, 0i64);
-    v2->m_curCurve = 0i64;
-    v2->m_isPlayingBeep = 0;
+    UFG::AudioEntity::CreateAndPlayEvent(
+      &m_pVehAudComponent->UFG::AudioEntity,
+      mUID,
+      0i64,
+      traffic_fadeout_time_ms,
+      0i64);
+    this->m_curCurve = 0i64;
+    this->m_isPlayingBeep = 0;
   }
   else
   {
@@ -3792,118 +3690,126 @@ void __fastcall UFG::Reverse_EngineState::OnExit(UFG::Reverse_EngineState *this,
 // RVA: 0x693B00
 void __fastcall UFG::Reverse_EngineState::Update(UFG::Reverse_EngineState *this, float delta_sec)
 {
-  signed __int64 v2; // rbx
-  UFG::Reverse_EngineState *v3; // rdi
-  UFG::EngineModelInputs *v4; // rcx
+  UFG::qBaseNodeRB **v2; // rbx
+  UFG::EngineModelInputs *m_inputs; // rcx
   UFG::qBaseTreeRB *v5; // rax
-  signed __int64 v6; // rax
+  float *v6; // rax
   float v7; // xmm7_4
   UFG::qBaseTreeRB *v8; // rax
-  signed __int64 v9; // rax
+  UFG::qBaseNodeRB **v9; // rax
   int v10; // xmm8_4
   UFG::qBaseTreeRB *v11; // rax
-  signed __int64 v12; // rax
-  unsigned int v13; // ebp
-  UFG::VehicleAudioComponent *v14; // rsi
+  float *v12; // rax
+  unsigned int traffic_fadeout_time_ms; // ebp
+  UFG::VehicleAudioComponent *m_pVehAudComponent; // rsi
   UFG::qWiseSymbol *v15; // rax
-  unsigned int v16; // edx
+  unsigned int mUID; // edx
   UFG::qWiseSymbol *v17; // rax
-  UFG::EngineStateMachine *v18; // rax
+  UFG::EngineStateMachine *m_esm; // rax
   unsigned int v19; // ebp
   UFG::VehicleAudioComponent *v20; // rsi
   UFG::qWiseSymbol *v21; // rax
   unsigned int v22; // edx
   UFG::qWiseSymbol *v23; // rax
-  UFG::AudioCurve *v24; // rcx
+  UFG::AudioCurve *m_curCurve; // rcx
   UFG::qBaseTreeRB *v25; // rax
-  signed __int64 v26; // rax
+  float *v26; // rax
   float v27; // xmm7_4
   UFG::qBaseTreeRB *v28; // rax
-  signed __int64 v29; // rax
+  float *v29; // rax
   UFG::AudioCurve *v30; // rdx
-  float v31; // xmm0_4
+  float m_timeForTimeBasedCurve; // xmm0_4
   float v32; // xmm7_4
   float v33; // xmm0_4
-  float v34; // xmm0_4
+  float Value; // xmm0_4
   UFG::qBaseTreeRB *v35; // rax
-  signed __int64 v36; // rax
+  float *v36; // rax
   UFG::AudioCurve *v37; // rax
   float v38; // xmm0_4
   float v39; // xmm6_4
   UFG::qBaseTreeRB *v40; // rax
   float v41; // xmm0_4
   UFG::qBaseTreeRB *v42; // rax
-  signed __int64 v43; // rax
+  float *v43; // rax
   UFG::qBaseTreeRB *v44; // rax
 
   v2 = 0i64;
-  v3 = this;
-  v4 = this->m_esm->m_engineModel->m_inputs;
-  if ( EngineModelSym_gas.mUID && (v5 = UFG::qBaseTreeRB::Get(&v4->m_inputsTree.mTree, EngineModelSym_gas.mUID)) != 0i64 )
-    v6 = (signed __int64)&v5[-1].mNULL.mChild[1];
-  else
-    v6 = 0i64;
-  v7 = *(float *)(v6 + 68);
-  if ( EngineModelSym_speed.mUID
-    && (v8 = UFG::qBaseTreeRB::Get(&v3->m_esm->m_engineModel->m_inputs->m_inputsTree.mTree, EngineModelSym_speed.mUID)) != 0i64 )
+  m_inputs = this->m_esm->m_engineModel->m_inputs;
+  if ( EngineModelSym_gas.mUID
+    && (v5 = UFG::qBaseTreeRB::Get(&m_inputs->m_inputsTree.mTree, EngineModelSym_gas.mUID)) != 0i64 )
   {
-    v9 = (signed __int64)&v8[-1].mNULL.mChild[1];
+    v6 = (float *)&v5[-1].mNULL.mChild[1];
+  }
+  else
+  {
+    v6 = 0i64;
+  }
+  v7 = v6[17];
+  if ( EngineModelSym_speed.mUID
+    && (v8 = UFG::qBaseTreeRB::Get(&this->m_esm->m_engineModel->m_inputs->m_inputsTree.mTree, EngineModelSym_speed.mUID)) != 0i64 )
+  {
+    v9 = &v8[-1].mNULL.mChild[1];
   }
   else
   {
     v9 = 0i64;
   }
-  v10 = *(_DWORD *)(v9 + 68);
+  v10 = *((_DWORD *)v9 + 17);
   if ( EngineModelSym_time_in_state.mUID
     && (v11 = UFG::qBaseTreeRB::Get(
-                &v3->m_esm->m_engineModel->m_inputs->m_inputsTree.mTree,
+                &this->m_esm->m_engineModel->m_inputs->m_inputsTree.mTree,
                 EngineModelSym_time_in_state.mUID)) != 0i64 )
   {
-    v12 = (signed __int64)&v11[-1].mNULL.mChild[1];
+    v12 = (float *)&v11[-1].mNULL.mChild[1];
   }
   else
   {
     v12 = 0i64;
   }
-  if ( v7 > 0.0099999998 && *(float *)(v12 + 68) > 0.2 && !v3->m_isPlayingBeep )
+  if ( v7 > 0.0099999998 && v12[17] > 0.2 && !this->m_isPlayingBeep )
   {
-    v13 = 0;
-    v14 = v3->m_esm->m_engineModel->m_pVehAudComponent;
-    if ( v14->m_eDriverType )
-      v13 = UFG::VehicleAudioComponent::sm_configPs->traffic_fadeout_time_ms;
+    traffic_fadeout_time_ms = 0;
+    m_pVehAudComponent = this->m_esm->m_engineModel->m_pVehAudComponent;
+    if ( m_pVehAudComponent->m_eDriverType )
+      traffic_fadeout_time_ms = UFG::VehicleAudioComponent::sm_configPs->traffic_fadeout_time_ms;
     v15 = UFG::qPropertySet::Get<UFG::qWiseSymbol>(
-            v14->m_pEnginePropertySet,
-            (UFG::qSymbol *)&UFG::VehAudPropSym_engine_reverse_beep_start.mUID,
+            m_pVehAudComponent->m_pEnginePropertySet,
+            (UFG::qArray<unsigned long,0> *)&UFG::VehAudPropSym_engine_reverse_beep_start,
             DEPTH_RECURSE);
     if ( v15 )
     {
-      v16 = v15->mUID;
+      mUID = v15->mUID;
     }
     else
     {
       v17 = UFG::qPropertySet::Get<UFG::qWiseSymbol>(
-              v14->m_pSubTypeParameters->mpPropertySet,
-              (UFG::qSymbol *)&UFG::VehAudPropSym_engine_reverse_beep_start.mUID,
+              m_pVehAudComponent->m_pSubTypeParameters->mpPropertySet,
+              (UFG::qArray<unsigned long,0> *)&UFG::VehAudPropSym_engine_reverse_beep_start,
               DEPTH_RECURSE);
       if ( v17 )
-        v16 = v17->mUID;
+        mUID = v17->mUID;
       else
-        v16 = 0;
+        mUID = 0;
     }
-    UFG::AudioEntity::CreateAndPlayEvent((UFG::AudioEntity *)&v14->vfptr, v16, 0i64, v13, 0i64);
-    v3->m_isPlayingBeep = 1;
+    UFG::AudioEntity::CreateAndPlayEvent(
+      &m_pVehAudComponent->UFG::AudioEntity,
+      mUID,
+      0i64,
+      traffic_fadeout_time_ms,
+      0i64);
+    this->m_isPlayingBeep = 1;
   }
-  if ( v7 == 0.0 && v3->m_isPlayingBeep )
+  if ( v7 == 0.0 && this->m_isPlayingBeep )
   {
-    v18 = v3->m_esm;
-    v3->m_isPlayingBeep = 0;
+    m_esm = this->m_esm;
+    this->m_isPlayingBeep = 0;
     v19 = 0;
-    v20 = v18->m_engineModel->m_pVehAudComponent;
+    v20 = m_esm->m_engineModel->m_pVehAudComponent;
     if ( v20->m_eDriverType )
       v19 = UFG::VehicleAudioComponent::sm_configPs->traffic_fadeout_time_ms;
     v21 = UFG::qPropertySet::Get<UFG::qWiseSymbol>(
             v20->m_pEnginePropertySet,
-            (UFG::qSymbol *)&UFG::VehAudPropSym_engine_reverse_beep_stop.mUID,
+            (UFG::qArray<unsigned long,0> *)&UFG::VehAudPropSym_engine_reverse_beep_stop,
             DEPTH_RECURSE);
     if ( v21 )
     {
@@ -3913,57 +3819,56 @@ void __fastcall UFG::Reverse_EngineState::Update(UFG::Reverse_EngineState *this,
     {
       v23 = UFG::qPropertySet::Get<UFG::qWiseSymbol>(
               v20->m_pSubTypeParameters->mpPropertySet,
-              (UFG::qSymbol *)&UFG::VehAudPropSym_engine_reverse_beep_stop.mUID,
+              (UFG::qArray<unsigned long,0> *)&UFG::VehAudPropSym_engine_reverse_beep_stop,
               DEPTH_RECURSE);
       if ( v23 )
         v22 = v23->mUID;
       else
         v22 = 0;
     }
-    UFG::AudioEntity::CreateAndPlayEvent((UFG::AudioEntity *)&v20->vfptr, v22, 0i64, v19, 0i64);
+    UFG::AudioEntity::CreateAndPlayEvent(&v20->UFG::AudioEntity, v22, 0i64, v19, 0i64);
   }
-  v24 = v3->m_curCurve;
-  if ( v24 )
+  m_curCurve = this->m_curCurve;
+  if ( m_curCurve )
   {
-    if ( v24->mPlayLength > 0.0 )
+    if ( m_curCurve->mPlayLength > 0.0 )
     {
       if ( EngineModelSym_gas.mUID
         && (v25 = UFG::qBaseTreeRB::Get(
-                    &v3->m_esm->m_engineModel->m_inputs->m_inputsTree.mTree,
+                    &this->m_esm->m_engineModel->m_inputs->m_inputsTree.mTree,
                     EngineModelSym_gas.mUID)) != 0i64 )
       {
-        v26 = (signed __int64)&v25[-1].mNULL.mChild[1];
+        v26 = (float *)&v25[-1].mNULL.mChild[1];
       }
       else
       {
         v26 = 0i64;
       }
-      v27 = *(float *)(v26 + 68);
+      v27 = v26[17];
       if ( EngineModelSym_acceleration_factor.mUID
         && (v28 = UFG::qBaseTreeRB::Get(
-                    &v3->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
+                    &this->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
                     EngineModelSym_acceleration_factor.mUID)) != 0i64 )
       {
-        v29 = (signed __int64)&v28[-1].mNULL.mChild[1];
+        v29 = (float *)&v28[-1].mNULL.mChild[1];
       }
       else
       {
         v29 = 0i64;
       }
       if ( v27 <= 0.0 )
-        v3->m_timeForTimeBasedCurve = v3->m_timeForTimeBasedCurve - delta_sec;
+        this->m_timeForTimeBasedCurve = this->m_timeForTimeBasedCurve - delta_sec;
       else
-        v3->m_timeForTimeBasedCurve = (float)((float)(v27 * *(float *)(v29 + 64)) * delta_sec)
-                                    + v3->m_timeForTimeBasedCurve;
-      v30 = v3->m_curCurve;
-      v31 = v3->m_timeForTimeBasedCurve;
-      if ( v31 <= 0.0 )
-        v31 = 0.0;
-      if ( v31 >= v30->mPlayLength )
-        v31 = v30->mPlayLength;
+        this->m_timeForTimeBasedCurve = (float)((float)(v27 * v29[16]) * delta_sec) + this->m_timeForTimeBasedCurve;
+      v30 = this->m_curCurve;
+      m_timeForTimeBasedCurve = this->m_timeForTimeBasedCurve;
+      if ( m_timeForTimeBasedCurve <= 0.0 )
+        m_timeForTimeBasedCurve = 0.0;
+      if ( m_timeForTimeBasedCurve >= v30->mPlayLength )
+        m_timeForTimeBasedCurve = v30->mPlayLength;
       v32 = *(float *)&FLOAT_1_0;
-      v3->m_timeForTimeBasedCurve = v31;
-      v33 = v31 / v30->mPlayLength;
+      this->m_timeForTimeBasedCurve = m_timeForTimeBasedCurve;
+      v33 = m_timeForTimeBasedCurve / v30->mPlayLength;
       if ( v33 <= 0.0 )
       {
         v33 = 0.0;
@@ -3972,23 +3877,23 @@ void __fastcall UFG::Reverse_EngineState::Update(UFG::Reverse_EngineState *this,
       {
         v33 = *(float *)&FLOAT_1_0;
       }
-      v34 = UFG::LinearGraph<float>::GetValue(
-              &v30->m_graphCurve,
-              (float)((float)(v30->m_maxSpeed - v30->m_minSpeed) * v33) + (float)v30->m_minSpeed);
+      Value = UFG::LinearGraph<float>::GetValue(
+                &v30->m_graphCurve,
+                (float)((float)(v30->m_maxSpeed - v30->m_minSpeed) * v33) + (float)v30->m_minSpeed);
       if ( EngineModelSym_rpm.mUID
         && (v35 = UFG::qBaseTreeRB::Get(
-                    &v3->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
+                    &this->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
                     EngineModelSym_rpm.mUID)) != 0i64 )
       {
-        v36 = (signed __int64)&v35[-1].mNULL.mChild[1];
+        v36 = (float *)&v35[-1].mNULL.mChild[1];
       }
       else
       {
         v36 = 0i64;
       }
-      *(float *)(v36 + 60) = v34;
-      v37 = v3->m_curCurve;
-      v38 = v3->m_timeForTimeBasedCurve / v37->mPlayLength;
+      v36[15] = Value;
+      v37 = this->m_curCurve;
+      v38 = this->m_timeForTimeBasedCurve / v37->mPlayLength;
       if ( v38 <= 0.0 )
       {
         v38 = 0.0;
@@ -4003,37 +3908,43 @@ LABEL_64:
       if ( EngineModelSym_modelled_speed.mUID )
       {
         v40 = UFG::qBaseTreeRB::Get(
-                &v3->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
+                &this->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
                 EngineModelSym_modelled_speed.mUID);
         if ( v40 )
-          v2 = (signed __int64)&v40[-1].mNULL.mChild[1];
+          v2 = &v40[-1].mNULL.mChild[1];
       }
-      *(float *)(v2 + 60) = v39;
+      *((float *)v2 + 15) = v39;
       return;
     }
-    v41 = UFG::LinearGraph<float>::GetValue(&v24->m_graphCurve, COERCE_CONST_FLOAT(v10 & _xmm));
+    v41 = UFG::LinearGraph<float>::GetValue(&m_curCurve->m_graphCurve, COERCE_FLOAT(v10 & _xmm));
     if ( EngineModelSym_rpm.mUID
       && (v42 = UFG::qBaseTreeRB::Get(
-                  &v3->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
+                  &this->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
                   EngineModelSym_rpm.mUID)) != 0i64 )
     {
-      v43 = (signed __int64)&v42[-1].mNULL.mChild[1];
+      v43 = (float *)&v42[-1].mNULL.mChild[1];
     }
     else
     {
       v43 = 0i64;
     }
-    *(float *)(v43 + 60) = v41;
+    v43[15] = v41;
     if ( EngineModelSym_modelled_speed.mUID )
     {
       v44 = UFG::qBaseTreeRB::Get(
-              &v3->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
+              &this->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
               EngineModelSym_modelled_speed.mUID);
       if ( v44 )
-        v2 = (signed __int64)&v44[-1].mNULL.mChild[1];
+        v2 = &v44[-1].mNULL.mChild[1];
     }
-    *(_DWORD *)(v2 + 60) = v10;
+    *((_DWORD *)v2 + 15) = v10;
   }
+}ed_speed.mUID);
+      if ( v44 )
+        v2 = &v44[-1].mNULL.mChild[1];
+    }
+    *((_DWORD *)v2 + 15) = v10;
+  }
 }
 
 // File Line: 2239
@@ -4045,58 +3956,60 @@ UFG::qStaticSymbol *__fastcall UFG::Decel_EngineState::GetName(UFG::Decel_Engine
 
 // File Line: 2244
 // RVA: 0x684C40
-void __fastcall UFG::Decel_EngineState::OnEnter(UFG::Decel_EngineState *this, UFG::EngineStateMachine::State exitingState)
+void __fastcall UFG::Decel_EngineState::OnEnter(
+        UFG::Decel_EngineState *this,
+        UFG::EngineStateMachine::State exitingState)
 {
-  UFG::EngineStateMachine *v2; // rax
-  UFG::Decel_EngineState *v3; // rdi
-  unsigned int v4; // ebx
+  UFG::EngineStateMachine *m_esm; // rax
+  unsigned int curGear; // ebx
   UFG::qBaseTreeRB *v5; // rax
-  signed __int64 v6; // rax
+  float *v6; // rax
   float v7; // xmm8_4
-  UFG::AudioCurveSet *v8; // rax
-  UFG::AudioCurve *v9; // rax
-  float v10; // xmm6_4
+  UFG::AudioCurveSet *Gear; // rax
+  UFG::AudioCurve *Curve; // rax
+  float mPlayLength; // xmm6_4
   UFG::EngineStateMachine *v11; // rbp
-  signed int v12; // ebx
+  int m_minSpeed; // ebx
   float v13; // xmm0_4
   float v14; // xmm1_4
   float v15; // xmm0_4
 
-  v2 = this->m_esm;
-  v3 = this;
-  v4 = v2->inputs.curGear;
+  m_esm = this->m_esm;
+  curGear = m_esm->inputs.curGear;
   if ( EngineModelSym_speed.mUID )
-    UFG::qBaseTreeRB::Get(&v2->m_engineModel->m_inputs->m_inputsTree.mTree, EngineModelSym_speed.mUID);
+    UFG::qBaseTreeRB::Get(&m_esm->m_engineModel->m_inputs->m_inputsTree.mTree, EngineModelSym_speed.mUID);
   if ( EngineModelSym_rpm.mUID
-    && (v5 = UFG::qBaseTreeRB::Get(&v3->m_esm->m_engineModel->m_inputs->m_inputsTree.mTree, EngineModelSym_rpm.mUID)) != 0i64 )
+    && (v5 = UFG::qBaseTreeRB::Get(&this->m_esm->m_engineModel->m_inputs->m_inputsTree.mTree, EngineModelSym_rpm.mUID)) != 0i64 )
   {
-    v6 = (signed __int64)&v5[-1].mNULL.mChild[1];
+    v6 = (float *)&v5[-1].mNULL.mChild[1];
   }
   else
   {
     v6 = 0i64;
   }
-  v7 = *(float *)(v6 + 68);
-  v8 = UFG::EngineCurve::GetGear(v3->m_esm->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve, v4);
-  v9 = UFG::AudioCurveSet::FindCurve(v8, (UFG::qSymbol *)&EngineModelSym_type_decel.mUID);
-  v3->m_curCurve = v9;
-  if ( v9 )
+  v7 = v6[17];
+  Gear = UFG::EngineCurve::GetGear(
+           this->m_esm->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve,
+           curGear);
+  Curve = UFG::AudioCurveSet::FindCurve(Gear, &EngineModelSym_type_decel);
+  this->m_curCurve = Curve;
+  if ( Curve )
   {
-    v10 = v9->mPlayLength;
-    if ( v10 > 0.0 )
+    mPlayLength = Curve->mPlayLength;
+    if ( mPlayLength > 0.0 )
     {
-      v11 = v3->m_esm;
+      v11 = this->m_esm;
       if ( !v11->m_findTimeFromRpm )
       {
 LABEL_16:
-        v15 = v3->m_curCurve->mPlayLength - v10;
-        v3->m_esm->m_timeInCurState = v15;
-        v3->m_timeForTimeBasedCurve = v15;
+        v15 = this->m_curCurve->mPlayLength - mPlayLength;
+        this->m_esm->m_timeInCurState = v15;
+        this->m_timeForTimeBasedCurve = v15;
         return;
       }
-      v12 = v9->m_minSpeed;
-      v13 = (float)(UFG::LinearGraph<float>::GetDomainValue(&v9->m_graphCurve, v7) - (float)v12)
-          / (float)(v9->m_maxSpeed - v12);
+      m_minSpeed = Curve->m_minSpeed;
+      v13 = (float)(UFG::LinearGraph<float>::GetDomainValue(&Curve->m_graphCurve, v7) - (float)m_minSpeed)
+          / (float)(Curve->m_maxSpeed - m_minSpeed);
       if ( v13 <= 0.0 )
       {
         v13 = 0.0;
@@ -4109,7 +4022,7 @@ LABEL_16:
       }
       v14 = v13;
 LABEL_15:
-      v10 = v10 * v14;
+      mPlayLength = mPlayLength * v14;
       v11->m_findTimeFromRpm = 0;
       goto LABEL_16;
     }
@@ -4118,40 +4031,37 @@ LABEL_15:
 
 // File Line: 2271
 // RVA: 0x6857C0
-void __fastcall UFG::Decel_EngineState::OnExit(UFG::Decel_EngineState *this, UFG::EngineStateMachine::State enteringState)
+void __fastcall UFG::Decel_EngineState::OnExit(
+        UFG::Decel_EngineState *this,
+        UFG::EngineStateMachine::State enteringState)
 {
-  UFG::EngineStateMachine *v2; // rax
+  UFG::EngineStateMachine *m_esm; // rax
 
-  v2 = this->m_esm;
-  v2->m_findTimeFromRpm = enteringState != 9;
+  m_esm = this->m_esm;
+  m_esm->m_findTimeFromRpm = enteringState != eSTATE_DOWNSHIFT;
 }
 
 // File Line: 2286
 // RVA: 0x6906C0
 void __fastcall UFG::Decel_EngineState::Update(UFG::Decel_EngineState *this, float delta_sec)
 {
-  UFG::Decel_EngineState *v2; // rbx
-  UFG::EngineModelInputs *v3; // rcx
+  UFG::EngineModelInputs *m_inputs; // rcx
   UFG::qBaseTreeRB *v4; // rax
-  signed __int64 v5; // rax
+  float *v5; // rax
 
-  v2 = this;
   if ( this->m_curCurve->mPlayLength <= 0.0 )
   {
-    v3 = this->m_esm->m_engineModel->m_inputs;
+    m_inputs = this->m_esm->m_engineModel->m_inputs;
     if ( EngineModelSym_speed.mUID
-      && (v4 = UFG::qBaseTreeRB::Get(&v3->m_inputsTree.mTree, EngineModelSym_speed.mUID)) != 0i64 )
+      && (v4 = UFG::qBaseTreeRB::Get(&m_inputs->m_inputsTree.mTree, EngineModelSym_speed.mUID)) != 0i64 )
     {
-      v5 = (signed __int64)&v4[-1].mNULL.mChild[1];
+      v5 = (float *)&v4[-1].mNULL.mChild[1];
     }
     else
     {
       v5 = 0i64;
     }
-    UFG::Base_EngineState::UpdateRPMFromSpeedBasedCurve(
-      (UFG::Base_EngineState *)&v2->vfptr,
-      v2->m_curCurve,
-      *(float *)(v5 + 68));
+    UFG::Base_EngineState::UpdateRPMFromSpeedBasedCurve(this, this->m_curCurve, v5[17]);
   }
   else
   {
@@ -4164,36 +4074,34 @@ void __fastcall UFG::Decel_EngineState::Update(UFG::Decel_EngineState *this, flo
 void __fastcall UFG::Decel_EngineState::UpdateRPMFromTimeBasedDecelCurve(UFG::Decel_EngineState *this, float delta_sec)
 {
   char v2; // si
-  UFG::Decel_EngineState *v3; // rbx
-  float v4; // xmm7_4
-  UFG::EngineStateMachine *v5; // rax
-  unsigned int v6; // er8
-  float v7; // xmm9_4
-  UFG::AudioCurveSet *v8; // rax
-  UFG::AudioCurve *v9; // rax
-  unsigned int v10; // edx
-  signed __int64 v11; // rdi
+  float m_maxSpeed; // xmm7_4
+  UFG::EngineStateMachine *m_esm; // rax
+  unsigned int curGear; // r8d
+  UFG::AudioCurveSet *Gear; // rax
+  UFG::AudioCurve *Curve; // rax
+  unsigned int mUID; // edx
+  float *v11; // rdi
   UFG::qBaseTreeRB *v12; // rax
-  signed __int64 v13; // rax
+  float *v13; // rax
   float v14; // xmm8_4
   UFG::qBaseTreeRB *v15; // rax
-  signed __int64 v16; // rax
+  float *v16; // rax
   float v17; // xmm0_4
   float v18; // xmm4_4
-  UFG::AudioCurve *v19; // rdx
-  float v20; // xmm5_4
-  float v21; // xmm10_4
+  UFG::AudioCurve *m_curCurve; // rdx
+  float m_timeForTimeBasedCurve; // xmm5_4
+  float mPlayLength; // xmm10_4
   float v22; // xmm1_4
   float v23; // xmm2_4
   float v24; // xmm3_4
   float v25; // xmm2_4
   float v26; // xmm1_4
-  signed int v27; // ecx
+  int m_minSpeed; // ecx
   int v28; // eax
   float v29; // xmm7_4
-  float v30; // xmm0_4
+  float Value; // xmm0_4
   UFG::qBaseTreeRB *v31; // rax
-  signed __int64 v32; // rax
+  float *v32; // rax
   UFG::qBaseTreeRB *v33; // rax
   UFG::EngineStateMachine *v34; // rax
   unsigned int v35; // edx
@@ -4201,63 +4109,65 @@ void __fastcall UFG::Decel_EngineState::UpdateRPMFromTimeBasedDecelCurve(UFG::De
   bool v37; // cf
 
   v2 = 0;
-  v3 = this;
-  v4 = 0.0;
-  v5 = this->m_esm;
-  v6 = v5->inputs.curGear;
-  v7 = delta_sec;
-  if ( v6 )
+  m_maxSpeed = 0.0;
+  m_esm = this->m_esm;
+  curGear = m_esm->inputs.curGear;
+  if ( curGear )
   {
-    v8 = UFG::EngineCurve::GetGear(v5->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve, v6 - 1);
-    v9 = UFG::AudioCurveSet::FindCurve(v8, (UFG::qSymbol *)&EngineModelSym_type_decel.mUID);
-    if ( v9->mPlayLength <= 0.0 )
+    Gear = UFG::EngineCurve::GetGear(
+             m_esm->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve,
+             curGear - 1);
+    Curve = UFG::AudioCurveSet::FindCurve(Gear, &EngineModelSym_type_decel);
+    if ( Curve->mPlayLength <= 0.0 )
     {
       v2 = 1;
-      v4 = (float)v9->m_maxSpeed;
+      m_maxSpeed = (float)Curve->m_maxSpeed;
     }
   }
-  v10 = EngineModelSym_speed.mUID;
+  mUID = EngineModelSym_speed.mUID;
   v11 = 0i64;
   if ( EngineModelSym_speed.mUID
-    && (v12 = UFG::qBaseTreeRB::Get(&v3->m_esm->m_engineModel->m_inputs->m_inputsTree.mTree, EngineModelSym_speed.mUID),
-        v10 = EngineModelSym_speed.mUID,
+    && (v12 = UFG::qBaseTreeRB::Get(
+                &this->m_esm->m_engineModel->m_inputs->m_inputsTree.mTree,
+                EngineModelSym_speed.mUID),
+        mUID = EngineModelSym_speed.mUID,
         v12) )
   {
-    v13 = (signed __int64)&v12[-1].mNULL.mChild[1];
+    v13 = (float *)&v12[-1].mNULL.mChild[1];
   }
   else
   {
     v13 = 0i64;
   }
-  v14 = *(float *)(v13 + 68);
-  if ( v10 && (v15 = UFG::qBaseTreeRB::Get(&v3->m_esm->m_engineModel->m_inputs->m_inputsTree.mTree, v10)) != 0i64 )
-    v16 = (signed __int64)&v15[-1].mNULL.mChild[1];
+  v14 = v13[17];
+  if ( mUID && (v15 = UFG::qBaseTreeRB::Get(&this->m_esm->m_engineModel->m_inputs->m_inputsTree.mTree, mUID)) != 0i64 )
+    v16 = (float *)&v15[-1].mNULL.mChild[1];
   else
     v16 = 0i64;
-  v17 = *(float *)(v16 + 72) - v14;
+  v17 = v16[18] - v14;
   if ( v17 <= 0.0 )
     v17 = 0.0;
   v18 = *(float *)&FLOAT_1_0;
-  v19 = v3->m_curCurve;
-  v20 = v3->m_timeForTimeBasedCurve;
-  v21 = v19->mPlayLength;
-  v22 = v19->mPlayLength - v20;
-  if ( v22 <= 0.0 )
+  m_curCurve = this->m_curCurve;
+  m_timeForTimeBasedCurve = this->m_timeForTimeBasedCurve;
+  mPlayLength = m_curCurve->mPlayLength;
+  v22 = mPlayLength - m_timeForTimeBasedCurve;
+  if ( (float)(mPlayLength - m_timeForTimeBasedCurve) <= 0.0 )
     v22 = 0.0;
-  v23 = v14 - (float)(v22 * (float)((float)(1.0 / v7) * v17));
-  if ( v2 && v23 > v4 )
+  v23 = v14 - (float)(v22 * (float)((float)(1.0 / delta_sec) * v17));
+  if ( v2 && v23 > m_maxSpeed )
   {
     v24 = FLOAT_10_0;
-    v25 = v23 - v4;
+    v25 = v23 - m_maxSpeed;
     if ( v25 >= 10.0 )
     {
       v24 = v25;
       if ( v25 < 1.0 )
         v24 = *(float *)&FLOAT_1_0;
     }
-    v7 = (float)(1.0 / v24) * v7;
+    delta_sec = (float)(1.0 / v24) * delta_sec;
   }
-  v26 = v22 / v21;
+  v26 = v22 / mPlayLength;
   if ( v26 <= 0.0 )
   {
     v26 = 0.0;
@@ -4268,47 +4178,47 @@ void __fastcall UFG::Decel_EngineState::UpdateRPMFromTimeBasedDecelCurve(UFG::De
   }
   v18 = v26;
 LABEL_27:
-  v27 = v19->m_minSpeed;
-  v28 = v19->m_maxSpeed - v27;
-  v3->m_timeForTimeBasedCurve = v20 + v7;
-  v29 = (float)((float)v28 * v18) + (float)v27;
-  v30 = UFG::LinearGraph<float>::GetValue(&v19->m_graphCurve, v29);
+  m_minSpeed = m_curCurve->m_minSpeed;
+  v28 = m_curCurve->m_maxSpeed - m_minSpeed;
+  this->m_timeForTimeBasedCurve = m_timeForTimeBasedCurve + delta_sec;
+  v29 = (float)((float)v28 * v18) + (float)m_minSpeed;
+  Value = UFG::LinearGraph<float>::GetValue(&m_curCurve->m_graphCurve, v29);
   if ( EngineModelSym_rpm.mUID
-    && (v31 = UFG::qBaseTreeRB::Get(&v3->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree, EngineModelSym_rpm.mUID)) != 0i64 )
+    && (v31 = UFG::qBaseTreeRB::Get(
+                &this->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
+                EngineModelSym_rpm.mUID)) != 0i64 )
   {
-    v32 = (signed __int64)&v31[-1].mNULL.mChild[1];
+    v32 = (float *)&v31[-1].mNULL.mChild[1];
   }
   else
   {
     v32 = 0i64;
   }
-  *(float *)(v32 + 60) = v30;
+  v32[15] = Value;
   if ( EngineModelSym_modelled_speed.mUID )
   {
     v33 = UFG::qBaseTreeRB::Get(
-            &v3->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
+            &this->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
             EngineModelSym_modelled_speed.mUID);
     if ( v33 )
-      v11 = (signed __int64)&v33[-1].mNULL.mChild[1];
+      v11 = (float *)&v33[-1].mNULL.mChild[1];
   }
-  *(float *)(v11 + 60) = v29;
-  v34 = v3->m_esm;
+  v11[15] = v29;
+  v34 = this->m_esm;
   v35 = v34->inputs.curGear;
   if ( v35 )
   {
     v36 = UFG::EngineCurve::GetGear(
             v34->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve,
             v35 - 1);
-    if ( UFG::AudioCurveSet::FindCurve(v36, (UFG::qSymbol *)&EngineModelSym_type_decel.mUID)->mPlayLength <= 0.0 )
-      v37 = v14 < (float)v3->m_curCurve->m_minSpeed;
+    if ( UFG::AudioCurveSet::FindCurve(v36, &EngineModelSym_type_decel)->mPlayLength <= 0.0 )
+      v37 = v14 < (float)this->m_curCurve->m_minSpeed;
     else
-      v37 = v21 < v3->m_timeForTimeBasedCurve;
+      v37 = mPlayLength < this->m_timeForTimeBasedCurve;
     if ( v37 )
-      v3->m_esm->m_event = 8;
+      this->m_esm->m_event = eEVENT_DOWNSHIFT;
   }
-}loat)v3->m_curCurve->m_minSpeed;
-    else
-    
+}
 
 // File Line: 2370
 // RVA: 0x67A840
@@ -4319,111 +4229,108 @@ UFG::qStaticSymbol *__fastcall UFG::Brake_EngineState::GetName(UFG::Brake_Engine
 
 // File Line: 2375
 // RVA: 0x684B40
-void __fastcall UFG::Brake_EngineState::OnEnter(UFG::Brake_EngineState *this, UFG::EngineStateMachine::State exitingState)
+void __fastcall UFG::Brake_EngineState::OnEnter(
+        UFG::Brake_EngineState *this,
+        UFG::EngineStateMachine::State exitingState)
 {
-  UFG::EngineStateMachine::State v2; // ebp
-  UFG::Brake_EngineState *v3; // rbx
-  unsigned int v4; // esi
-  UFG::VehicleAudioComponent *v5; // rdi
+  unsigned int traffic_fadeout_time_ms; // esi
+  UFG::VehicleAudioComponent *m_pVehAudComponent; // rdi
   UFG::qWiseSymbol *v6; // rax
-  unsigned int v7; // edx
+  unsigned int mUID; // edx
 
-  v2 = exitingState;
-  v3 = this;
   if ( !this->m_ecBrakeSqueal.m_pEvent )
     UFG::VehicleAudioComponent::PlayVehicleEvent(
       this->m_esm->m_engineModel->m_pVehAudComponent,
-      (UFG::qSymbol *)&UFG::VehAudPropSym_engine_brake_squeal_init.mUID,
+      &UFG::VehAudPropSym_engine_brake_squeal_init,
       &this->m_ecBrakeSqueal,
       0);
-  v4 = 0;
-  v5 = v3->m_esm->m_engineModel->m_pVehAudComponent;
-  if ( v5->m_eDriverType )
-    v4 = UFG::VehicleAudioComponent::sm_configPs->traffic_fadeout_time_ms;
+  traffic_fadeout_time_ms = 0;
+  m_pVehAudComponent = this->m_esm->m_engineModel->m_pVehAudComponent;
+  if ( m_pVehAudComponent->m_eDriverType )
+    traffic_fadeout_time_ms = UFG::VehicleAudioComponent::sm_configPs->traffic_fadeout_time_ms;
   v6 = UFG::qPropertySet::Get<UFG::qWiseSymbol>(
-         v5->m_pEnginePropertySet,
-         (UFG::qSymbol *)&UFG::VehAudPropSym_engine_brake_squeal_start.mUID,
+         m_pVehAudComponent->m_pEnginePropertySet,
+         (UFG::qArray<unsigned long,0> *)&UFG::VehAudPropSym_engine_brake_squeal_start,
          DEPTH_RECURSE);
   if ( v6
     || (v6 = UFG::qPropertySet::Get<UFG::qWiseSymbol>(
-               v5->m_pSubTypeParameters->mpPropertySet,
-               (UFG::qSymbol *)&UFG::VehAudPropSym_engine_brake_squeal_start.mUID,
+               m_pVehAudComponent->m_pSubTypeParameters->mpPropertySet,
+               (UFG::qArray<unsigned long,0> *)&UFG::VehAudPropSym_engine_brake_squeal_start,
                DEPTH_RECURSE)) != 0i64 )
   {
-    v7 = v6->mUID;
+    mUID = v6->mUID;
   }
   else
   {
-    v7 = 0;
+    mUID = 0;
   }
-  UFG::AudioEntity::CreateAndPlayEvent((UFG::AudioEntity *)&v5->vfptr, v7, 0i64, v4, 0i64);
-  UFG::Neutral_EngineState::OnEnter((UFG::Neutral_EngineState *)&v3->vfptr, v2);
+  UFG::AudioEntity::CreateAndPlayEvent(&m_pVehAudComponent->UFG::AudioEntity, mUID, 0i64, traffic_fadeout_time_ms, 0i64);
+  UFG::Neutral_EngineState::OnEnter(this, exitingState);
 }
 
 // File Line: 2388
 // RVA: 0x6856E0
-void __fastcall UFG::Brake_EngineState::OnExit(UFG::Brake_EngineState *this, UFG::EngineStateMachine::State enteringState)
+void __fastcall UFG::Brake_EngineState::OnExit(
+        UFG::Brake_EngineState *this,
+        UFG::EngineStateMachine::State enteringState)
 {
-  unsigned int v2; // esi
-  UFG::EngineStateMachine::State v3; // ebp
-  UFG::Brake_EngineState *v4; // rbx
-  UFG::VehicleAudioComponent *v5; // rdi
+  unsigned int traffic_fadeout_time_ms; // esi
+  UFG::VehicleAudioComponent *m_pVehAudComponent; // rdi
   UFG::qWiseSymbol *v6; // rax
-  unsigned int v7; // edx
+  unsigned int mUID; // edx
   UFG::qWiseSymbol *v8; // rax
-  UFG::AudioEvent *v9; // rcx
+  UFG::AudioEvent *m_pEvent; // rcx
 
-  v2 = 0;
-  v3 = enteringState;
-  v4 = this;
-  v5 = this->m_esm->m_engineModel->m_pVehAudComponent;
-  if ( v5->m_eDriverType )
-    v2 = UFG::VehicleAudioComponent::sm_configPs->traffic_fadeout_time_ms;
+  traffic_fadeout_time_ms = 0;
+  m_pVehAudComponent = this->m_esm->m_engineModel->m_pVehAudComponent;
+  if ( m_pVehAudComponent->m_eDriverType )
+    traffic_fadeout_time_ms = UFG::VehicleAudioComponent::sm_configPs->traffic_fadeout_time_ms;
   v6 = UFG::qPropertySet::Get<UFG::qWiseSymbol>(
-         v5->m_pEnginePropertySet,
-         (UFG::qSymbol *)&UFG::VehAudPropSym_engine_brake_squeal_stop.mUID,
+         m_pVehAudComponent->m_pEnginePropertySet,
+         (UFG::qArray<unsigned long,0> *)&UFG::VehAudPropSym_engine_brake_squeal_stop,
          DEPTH_RECURSE);
   if ( v6 )
   {
-    v7 = v6->mUID;
+    mUID = v6->mUID;
   }
   else
   {
     v8 = UFG::qPropertySet::Get<UFG::qWiseSymbol>(
-           v5->m_pSubTypeParameters->mpPropertySet,
-           (UFG::qSymbol *)&UFG::VehAudPropSym_engine_brake_squeal_stop.mUID,
+           m_pVehAudComponent->m_pSubTypeParameters->mpPropertySet,
+           (UFG::qArray<unsigned long,0> *)&UFG::VehAudPropSym_engine_brake_squeal_stop,
            DEPTH_RECURSE);
     if ( v8 )
-      v7 = v8->mUID;
+      mUID = v8->mUID;
     else
-      v7 = 0;
+      mUID = 0;
   }
-  UFG::AudioEntity::CreateAndPlayEvent((UFG::AudioEntity *)&v5->vfptr, v7, 0i64, v2, 0i64);
-  v9 = v4->m_ecBrakeSqueal.m_pEvent;
-  if ( v9 )
-    UFG::AudioEvent::StopAndForget(v9, 0xC8u);
-  UFG::Neutral_EngineState::OnExit((UFG::Neutral_EngineState *)&v4->vfptr, v3);
+  UFG::AudioEntity::CreateAndPlayEvent(&m_pVehAudComponent->UFG::AudioEntity, mUID, 0i64, traffic_fadeout_time_ms, 0i64);
+  m_pEvent = this->m_ecBrakeSqueal.m_pEvent;
+  if ( m_pEvent )
+    UFG::AudioEvent::StopAndForget(m_pEvent, 200);
+  UFG::Neutral_EngineState::OnExit(this, enteringState);
 }
 
 // File Line: 2400
 // RVA: 0x6905E0
 void __fastcall UFG::Collision_EngineState::Update(UFG::Neutral_EngineState *this, float delta_sec)
 {
-  UFG::AudioCurveSet *v2; // rdx
+  UFG::AudioCurveSet *m_neutralCurveSet; // rdx
 
-  v2 = this->m_neutralCurveSet;
-  if ( v2 )
+  m_neutralCurveSet = this->m_neutralCurveSet;
+  if ( m_neutralCurveSet )
   {
     if ( this->m_curCurve )
-      UFG::EngineModel2::EvaluateCurveSet(this->m_esm->m_engineModel, v2);
+      UFG::EngineModel2::EvaluateCurveSet(this->m_esm->m_engineModel, m_neutralCurveSet);
   }
 }
 
 // File Line: 2405
 // RVA: 0x6854B0
-void __usercall UFG::Brake_EngineState::OnEvent(UFG::Brake_EngineState *this@<rcx>, UFG::EngineStateMachine::Event event@<edx>, int a3@<xmm0>)
+// attributes: thunk
+void __fastcall UFG::Brake_EngineState::OnEvent(UFG::Brake_EngineState *this, UFG::EngineStateMachine::Event event)
 {
-  UFG::Base_EngineState::OnEvent((UFG::Base_EngineState *)&this->vfptr, event, a3);
+  UFG::Base_EngineState::OnEvent(this, event);
 }
 
 // File Line: 2412
@@ -4435,118 +4342,118 @@ UFG::qStaticSymbol *__fastcall UFG::Downshift_EngineState::GetName(UFG::Downshif
 
 // File Line: 2417
 // RVA: 0x684DB0
-void __fastcall UFG::Downshift_EngineState::OnEnter(UFG::Downshift_EngineState *this, UFG::EngineStateMachine::State exitingState)
+void __fastcall UFG::Downshift_EngineState::OnEnter(
+        UFG::Downshift_EngineState *this,
+        UFG::EngineStateMachine::State exitingState)
 {
-  UFG::Downshift_EngineState *v2; // rdi
   signed int v3; // ebx
-  UFG::EngineModelInputs *v4; // rcx
+  UFG::EngineModelInputs *m_inputs; // rcx
   UFG::qBaseTreeRB *v5; // rax
-  signed __int64 v6; // rax
+  float *v6; // rax
   float v7; // xmm6_4
-  UFG::AudioCurveSet *v8; // rax
-  UFG::AudioCurve *v9; // rax
+  UFG::AudioCurveSet *Gear; // rax
+  UFG::AudioCurve *Curve; // rax
 
-  v2 = this;
-  if ( exitingState == 5 )
+  if ( exitingState == eSTATE_DECEL )
   {
     v3 = 0;
-    v4 = this->m_esm->m_engineModel->m_inputs;
+    m_inputs = this->m_esm->m_engineModel->m_inputs;
     if ( EngineModelSym_speed.mUID
-      && (v5 = UFG::qBaseTreeRB::Get(&v4->m_inputsTree.mTree, EngineModelSym_speed.mUID)) != 0i64 )
+      && (v5 = UFG::qBaseTreeRB::Get(&m_inputs->m_inputsTree.mTree, EngineModelSym_speed.mUID)) != 0i64 )
     {
-      v6 = (signed __int64)&v5[-1].mNULL.mChild[1];
+      v6 = (float *)&v5[-1].mNULL.mChild[1];
     }
     else
     {
       v6 = 0i64;
     }
-    v7 = *(float *)(v6 + 68);
+    v7 = v6[17];
     do
     {
-      v8 = UFG::EngineCurve::GetGear(
-             v2->m_esm->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve,
-             v3);
-      v9 = UFG::AudioCurveSet::FindCurve(v8, (UFG::qSymbol *)&EngineModelSym_type_decel.mUID);
-      if ( v9 && v9->mPlayLength <= 0.0 && (float)v9->m_minSpeed < v7 && (float)v9->m_maxSpeed > v7 )
-        v2->m_esm->inputs.curGear = v3 + 1;
+      Gear = UFG::EngineCurve::GetGear(
+               this->m_esm->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve,
+               v3);
+      Curve = UFG::AudioCurveSet::FindCurve(Gear, &EngineModelSym_type_decel);
+      if ( Curve && Curve->mPlayLength <= 0.0 && (float)Curve->m_minSpeed < v7 && (float)Curve->m_maxSpeed > v7 )
+        this->m_esm->inputs.curGear = v3 + 1;
       ++v3;
     }
     while ( v3 < 2 );
   }
-  v2->m_curCurve = UFG::EngineCurve::FindGearCurve(
-                     v2->m_esm->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve,
-                     v2->m_esm->inputs.curGear,
-                     (UFG::qSymbol *)&EngineModelSym_type_downshift.mUID);
+  this->m_curCurve = UFG::EngineCurve::FindGearCurve(
+                       this->m_esm->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve,
+                       this->m_esm->inputs.curGear,
+                       &EngineModelSym_type_downshift);
 }
 
 // File Line: 2440
 // RVA: 0x6857E0
-void __fastcall UFG::Downshift_EngineState::OnExit(UFG::Downshift_EngineState *this, UFG::EngineStateMachine::State enteringState)
+void __fastcall UFG::Downshift_EngineState::OnExit(
+        UFG::Downshift_EngineState *this,
+        UFG::EngineStateMachine::State enteringState)
 {
-  UFG::EngineStateMachine *v2; // rdx
+  UFG::EngineStateMachine *m_esm; // rdx
   float v3; // xmm0_4
-  signed int v4; // eax
+  int v4; // eax
 
-  v2 = this->m_esm;
-  v3 = (float)(v2->inputs.curGear - 1);
-  v4 = (signed int)v3;
+  m_esm = this->m_esm;
+  v3 = (float)(m_esm->inputs.curGear - 1);
+  v4 = (int)v3;
   if ( v3 <= 0.0 )
-    v4 = (signed int)0.0;
-  v2->inputs.curGear = v4;
+    v4 = (int)0.0;
+  m_esm->inputs.curGear = v4;
 }
 
 // File Line: 2445
 // RVA: 0x690730
 void __fastcall UFG::Downshift_EngineState::Update(UFG::Upshift_EngineState *this, float delta_sec)
 {
-  UFG::Upshift_EngineState *v2; // rdi
-  UFG::AudioCurve *v3; // rcx
-  UFG::EngineStateMachine *v4; // rbx
-  float v5; // xmm0_4
+  UFG::AudioCurve *m_curCurve; // rcx
+  UFG::EngineStateMachine *m_esm; // rbx
+  float Value; // xmm0_4
   UFG::qBaseTreeRB *v6; // rax
-  signed __int64 v7; // rax
+  float *v7; // rax
   UFG::EngineStateMachine *v8; // rdx
 
-  v2 = this;
-  v3 = this->m_curCurve;
-  if ( v3 )
+  m_curCurve = this->m_curCurve;
+  if ( m_curCurve )
   {
-    v4 = v2->m_esm;
-    v5 = UFG::LinearGraph<float>::GetValue(&v3->m_graphCurve, v4->m_timeInCurState * 1000.0);
+    m_esm = this->m_esm;
+    Value = UFG::LinearGraph<float>::GetValue(&m_curCurve->m_graphCurve, m_esm->m_timeInCurState * 1000.0);
     if ( EngineModelSym_rpm.mUID
-      && (v6 = UFG::qBaseTreeRB::Get(&v4->m_engineModel->m_outputs->m_outputsTree.mTree, EngineModelSym_rpm.mUID)) != 0i64 )
+      && (v6 = UFG::qBaseTreeRB::Get(&m_esm->m_engineModel->m_outputs->m_outputsTree.mTree, EngineModelSym_rpm.mUID)) != 0i64 )
     {
-      v7 = (signed __int64)&v6[-1].mNULL.mChild[1];
+      v7 = (float *)&v6[-1].mNULL.mChild[1];
     }
     else
     {
       v7 = 0i64;
     }
-    *(float *)(v7 + 60) = v5;
-    v8 = v2->m_esm;
-    if ( (float)(v8->m_timeInCurState * 1000.0) > (float)v2->m_curCurve->m_maxSpeed )
-      v8->m_event = 13;
+    v7[15] = Value;
+    v8 = this->m_esm;
+    if ( (float)(v8->m_timeInCurState * 1000.0) > (float)this->m_curCurve->m_maxSpeed )
+      v8->m_event = eEVENT_TRANSITION;
   }
   else
   {
-    v2->m_esm->m_event = 13;
+    this->m_esm->m_event = eEVENT_TRANSITION;
   }
 }
 
 // File Line: 2463
 // RVA: 0x685620
-void __usercall UFG::Upshift_EngineState::OnEvent(UFG::Upshift_EngineState *this@<rcx>, UFG::EngineStateMachine::Event event@<edx>, int a3@<xmm0>)
+void __fastcall UFG::Upshift_EngineState::OnEvent(UFG::Upshift_EngineState *this, UFG::EngineStateMachine::Event event)
 {
   switch ( event )
   {
-    case 2:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, 0, a3);
+    case eEVENT_STOP:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_OFF);
       break;
-    case 13:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_TRANSITION, a3);
+    case eEVENT_TRANSITION:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_TRANSITION);
       break;
-    case 9:
-      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_IDLE, a3);
+    case eEVENT_IDLE:
+      UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_IDLE);
       break;
   }
 }
@@ -4560,26 +4467,30 @@ UFG::qStaticSymbol *__fastcall UFG::Upshift_EngineState::GetName(UFG::Upshift_En
 
 // File Line: 2486
 // RVA: 0x685350
-void __fastcall UFG::Upshift_EngineState::OnEnter(UFG::Upshift_EngineState *this, UFG::EngineStateMachine::State exitingState)
+void __fastcall UFG::Upshift_EngineState::OnEnter(
+        UFG::Upshift_EngineState *this,
+        UFG::EngineStateMachine::State exitingState)
 {
   this->m_curCurve = UFG::EngineCurve::FindGearCurve(
                        this->m_esm->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve,
                        this->m_esm->inputs.curGear,
-                       (UFG::qSymbol *)&EngineModelSym_type_upshift.mUID);
+                       &EngineModelSym_type_upshift);
 }
 
 // File Line: 2491
 // RVA: 0x685AA0
-void __fastcall UFG::Upshift_EngineState::OnExit(UFG::Upshift_EngineState *this, UFG::EngineStateMachine::State enteringState)
+void __fastcall UFG::Upshift_EngineState::OnExit(
+        UFG::Upshift_EngineState *this,
+        UFG::EngineStateMachine::State enteringState)
 {
-  UFG::EngineStateMachine *v2; // r8
+  UFG::EngineStateMachine *m_esm; // r8
   unsigned int v3; // edx
 
-  v2 = this->m_esm;
-  v3 = v2->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve->m_gears.size - 1;
-  if ( v2->inputs.curGear + 1 < v3 )
-    v3 = v2->inputs.curGear + 1;
-  v2->inputs.curGear = v3;
+  m_esm = this->m_esm;
+  v3 = m_esm->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve->m_gears.size - 1;
+  if ( m_esm->inputs.curGear + 1 < v3 )
+    v3 = m_esm->inputs.curGear + 1;
+  m_esm->inputs.curGear = v3;
 }
 
 // File Line: 2532
@@ -4591,56 +4502,56 @@ UFG::qStaticSymbol *__fastcall UFG::RevLimit_EngineState::GetName(UFG::RevLimit_
 
 // File Line: 2537
 // RVA: 0x6852A0
-void __fastcall UFG::RevLimit_EngineState::OnEnter(UFG::RevLimit_EngineState *this, UFG::EngineStateMachine::State exitingState)
+void __fastcall UFG::RevLimit_EngineState::OnEnter(
+        UFG::RevLimit_EngineState *this,
+        UFG::EngineStateMachine::State exitingState)
 {
-  UFG::RevLimit_EngineState *v2; // rbx
-  UFG::AudioCurveSet *v3; // rax
+  UFG::AudioCurveSet *NamedCurveSet; // rax
 
-  v2 = this;
-  v3 = UFG::EngineCurve::FindNamedCurveSet(
-         this->m_esm->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve,
-         (UFG::qSymbol *)&EngineModelSym_RevLimit.mUID);
-  v2->m_curCurveSet = v3;
-  if ( v3 )
-    v2->m_curCurve = UFG::AudioCurveSet::FindCurve(v3, (UFG::qSymbol *)&EngineModelSym_type_generic.mUID);
+  NamedCurveSet = UFG::EngineCurve::FindNamedCurveSet(
+                    this->m_esm->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve,
+                    &EngineModelSym_RevLimit);
+  this->m_curCurveSet = NamedCurveSet;
+  if ( NamedCurveSet )
+    this->m_curCurve = UFG::AudioCurveSet::FindCurve(NamedCurveSet, &EngineModelSym_type_generic);
 }
 
 // File Line: 2551
 // RVA: 0x693A70
 void __fastcall UFG::RevLimit_EngineState::Update(UFG::RevLimit_EngineState *this, float delta_sec)
 {
-  UFG::RevLimit_EngineState *v2; // rbx
-  UFG::EngineStateMachine *v3; // rdx
+  UFG::EngineStateMachine *m_esm; // rdx
 
-  v2 = this;
   if ( this->m_curCurve )
   {
     UFG::EngineModel2::EvaluateCurveSet(this->m_esm->m_engineModel, this->m_curCurveSet);
-    v3 = v2->m_esm;
-    if ( (float)(v3->m_timeInCurState * 1000.0) > (float)v2->m_curCurve->m_maxSpeed )
+    m_esm = this->m_esm;
+    if ( (float)(m_esm->m_timeInCurState * 1000.0) > (float)this->m_curCurve->m_maxSpeed )
     {
       if ( EngineModelSym_rpm.mUID )
-        UFG::qBaseTreeRB::Get(&v3->m_engineModel->m_outputs->m_outputsTree.mTree, EngineModelSym_rpm.mUID);
-      v2->m_esm->m_event = 13;
+        UFG::qBaseTreeRB::Get(&m_esm->m_engineModel->m_outputs->m_outputsTree.mTree, EngineModelSym_rpm.mUID);
+      this->m_esm->m_event = eEVENT_TRANSITION;
     }
   }
   else
   {
-    this->m_esm->m_event = 13;
+    this->m_esm->m_event = eEVENT_TRANSITION;
   }
 }
 
 // File Line: 2569
 // RVA: 0x6855F0
-void __usercall UFG::RevLimit_EngineState::OnEvent(UFG::RevLimit_EngineState *this@<rcx>, UFG::EngineStateMachine::Event event@<edx>, int a3@<xmm0>)
+void __fastcall UFG::RevLimit_EngineState::OnEvent(
+        UFG::RevLimit_EngineState *this,
+        UFG::EngineStateMachine::Event event)
 {
-  if ( event == 2 )
+  if ( event == eEVENT_STOP )
   {
-    UFG::EngineStateMachine::ChangeState(this->m_esm, 0, a3);
+    UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_OFF);
   }
-  else if ( event == 13 )
+  else if ( event == eEVENT_TRANSITION )
   {
-    UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_TRANSITION, a3);
+    UFG::EngineStateMachine::ChangeState(this->m_esm, eSTATE_TRANSITION);
   }
 }
 
@@ -4648,159 +4559,202 @@ void __usercall UFG::RevLimit_EngineState::OnEvent(UFG::RevLimit_EngineState *th
 // RVA: 0x6691C0
 void __fastcall UFG::EngineStateMachine::EngineStateMachine(UFG::EngineStateMachine *this, UFG::EngineModel2 *em)
 {
-  UFG::EngineStateMachine *v2; // rbx
-  UFG::allocator::free_link *v3; // rax
-  UFG::allocator::free_link *v4; // rax
-  UFG::allocator::free_link *v5; // rax
-  UFG::allocator::free_link *v6; // rax
-  UFG::allocator::free_link *v7; // rax
-  UFG::allocator::free_link *v8; // rax
-  UFG::allocator::free_link *v9; // rax
-  UFG::allocator::free_link *v10; // rax
-  UFG::allocator::free_link *v11; // rax
+  UFG::Base_EngineState *v3; // rax
+  UFG::Base_EngineState *v4; // rax
+  UFG::Base_EngineState *v5; // rax
+  UFG::Base_EngineState *v6; // rax
+  UFG::Base_EngineState *v7; // rax
+  UFG::Base_EngineState *v8; // rax
+  UFG::Base_EngineState *v9; // rax
+  UFG::Base_EngineState *v10; // rax
+  UFG::Base_EngineState *v11; // rax
   UFG::allocator::free_link *v12; // rax
-  UFG::allocator::free_link *v13; // rax
-  UFG::allocator::free_link *v14; // rax
-  UFG::allocator::free_link *v15; // rax
-  UFG::allocator::free_link *v16; // rax
-  UFG::allocator::free_link *v17; // rax
+  UFG::Base_EngineState *v13; // rax
+  UFG::Base_EngineState *v14; // rax
+  UFG::Base_EngineState *v15; // rax
+  UFG::Base_EngineState *v16; // rax
+  UFG::Base_EngineState *v17; // rax
   UFG::allocator::free_link *v18; // rax
 
-  v2 = this;
   this->vfptr = (UFG::EngineStateMachineVtbl *)&UFG::EngineStateMachine::`vftable;
   *(_QWORD *)&this->inputs.curGear = 0i64;
-  this->m_curState = 0;
+  this->m_curState = eSTATE_OFF;
   this->m_findTimeFromRpm = 0;
   this->m_stateSpecificCurveSet = 0i64;
   this->m_engineModel = em;
   memset(this->m_states, 0, sizeof(this->m_states));
-  v3 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x18ui64, "EngineStateMachine.Off", 0i64, 1u);
+  v3 = (UFG::Base_EngineState *)UFG::qMemoryPool::Allocate(
+                                  &g_AudioComponentPool,
+                                  0x18ui64,
+                                  "EngineStateMachine.Off",
+                                  0i64,
+                                  1u);
   if ( v3 )
   {
-    v3->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
-    v3[1].mNext = 0i64;
-    v3[2].mNext = (UFG::allocator::free_link *)v2;
-    v3->mNext = (UFG::allocator::free_link *)&UFG::Off_EngineState::`vftable;
+    v3->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Base_EngineState::`vftable;
+    v3->m_curCurve = 0i64;
+    v3->m_esm = this;
+    v3->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Off_EngineState::`vftable;
   }
   else
   {
     v3 = 0i64;
   }
-  v2->m_states[0] = (UFG::Base_EngineState *)v3;
-  v4 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x20ui64, "EngineStateMachine.Idle", 0i64, 1u);
+  this->m_states[0] = v3;
+  v4 = (UFG::Base_EngineState *)UFG::qMemoryPool::Allocate(
+                                  &g_AudioComponentPool,
+                                  0x20ui64,
+                                  "EngineStateMachine.Idle",
+                                  0i64,
+                                  1u);
   if ( v4 )
   {
-    v4->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
-    v4[1].mNext = 0i64;
-    v4[2].mNext = (UFG::allocator::free_link *)v2;
-    v4->mNext = (UFG::allocator::free_link *)&UFG::Idle_EngineState::`vftable;
+    v4->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Base_EngineState::`vftable;
+    v4->m_curCurve = 0i64;
+    v4->m_esm = this;
+    v4->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Idle_EngineState::`vftable;
   }
   else
   {
     v4 = 0i64;
   }
-  v2->m_states[1] = (UFG::Base_EngineState *)v4;
-  v5 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x20ui64, "EngineStateMachine.Idle", 0i64, 1u);
+  this->m_states[1] = v4;
+  v5 = (UFG::Base_EngineState *)UFG::qMemoryPool::Allocate(
+                                  &g_AudioComponentPool,
+                                  0x20ui64,
+                                  "EngineStateMachine.Idle",
+                                  0i64,
+                                  1u);
   if ( v5 )
   {
-    v5->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
-    v5[1].mNext = 0i64;
-    v5[2].mNext = (UFG::allocator::free_link *)v2;
-    v5->mNext = (UFG::allocator::free_link *)&UFG::Neutral_EngineState::`vftable;
-    v5->mNext = (UFG::allocator::free_link *)&UFG::InAir_EngineState::`vftable;
+    v5->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Base_EngineState::`vftable;
+    v5->m_curCurve = 0i64;
+    v5->m_esm = this;
+    v5->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Neutral_EngineState::`vftable;
+    v5->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::InAir_EngineState::`vftable;
   }
   else
   {
     v5 = 0i64;
   }
-  v2->m_states[2] = (UFG::Base_EngineState *)v5;
-  v6 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x20ui64, "EngineStateMachine.Collision", 0i64, 1u);
+  this->m_states[2] = v5;
+  v6 = (UFG::Base_EngineState *)UFG::qMemoryPool::Allocate(
+                                  &g_AudioComponentPool,
+                                  0x20ui64,
+                                  "EngineStateMachine.Collision",
+                                  0i64,
+                                  1u);
   if ( v6 )
   {
-    v6->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
-    v6[1].mNext = 0i64;
-    v6[2].mNext = (UFG::allocator::free_link *)v2;
-    v6->mNext = (UFG::allocator::free_link *)&UFG::Neutral_EngineState::`vftable;
-    v6->mNext = (UFG::allocator::free_link *)&UFG::Collision_EngineState::`vftable;
+    v6->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Base_EngineState::`vftable;
+    v6->m_curCurve = 0i64;
+    v6->m_esm = this;
+    v6->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Neutral_EngineState::`vftable;
+    v6->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Collision_EngineState::`vftable;
   }
   else
   {
     v6 = 0i64;
   }
-  v2->m_states[12] = (UFG::Base_EngineState *)v6;
-  v7 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x18ui64, "EngineStateMachine.Collision", 0i64, 1u);
+  this->m_states[12] = v6;
+  v7 = (UFG::Base_EngineState *)UFG::qMemoryPool::Allocate(
+                                  &g_AudioComponentPool,
+                                  0x18ui64,
+                                  "EngineStateMachine.Collision",
+                                  0i64,
+                                  1u);
   if ( v7 )
   {
-    v7->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
-    v7[1].mNext = 0i64;
-    v7[2].mNext = (UFG::allocator::free_link *)v2;
-    v7->mNext = (UFG::allocator::free_link *)&UFG::Rev_EngineState::`vftable;
+    v7->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Base_EngineState::`vftable;
+    v7->m_curCurve = 0i64;
+    v7->m_esm = this;
+    v7->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Rev_EngineState::`vftable;
   }
   else
   {
     v7 = 0i64;
   }
-  v2->m_states[13] = (UFG::Base_EngineState *)v7;
-  v8 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x20ui64, "EngineStateMachine.Neutral", 0i64, 1u);
+  this->m_states[13] = v7;
+  v8 = (UFG::Base_EngineState *)UFG::qMemoryPool::Allocate(
+                                  &g_AudioComponentPool,
+                                  0x20ui64,
+                                  "EngineStateMachine.Neutral",
+                                  0i64,
+                                  1u);
   if ( v8 )
   {
-    v8->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
-    v8[1].mNext = 0i64;
-    v8[2].mNext = (UFG::allocator::free_link *)v2;
-    v8->mNext = (UFG::allocator::free_link *)&UFG::Neutral_EngineState::`vftable;
+    v8->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Base_EngineState::`vftable;
+    v8->m_curCurve = 0i64;
+    v8->m_esm = this;
+    v8->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Neutral_EngineState::`vftable;
   }
   else
   {
     v8 = 0i64;
   }
-  v2->m_states[3] = (UFG::Base_EngineState *)v8;
-  v9 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x20ui64, "EngineStateMachine.Gas", 0i64, 1u);
+  this->m_states[3] = v8;
+  v9 = (UFG::Base_EngineState *)UFG::qMemoryPool::Allocate(
+                                  &g_AudioComponentPool,
+                                  0x20ui64,
+                                  "EngineStateMachine.Gas",
+                                  0i64,
+                                  1u);
   if ( v9 )
   {
-    v9->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
-    v9[1].mNext = 0i64;
-    v9[2].mNext = (UFG::allocator::free_link *)v2;
-    v9->mNext = (UFG::allocator::free_link *)&UFG::Accel_EngineState::`vftable;
+    v9->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Base_EngineState::`vftable;
+    v9->m_curCurve = 0i64;
+    v9->m_esm = this;
+    v9->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Accel_EngineState::`vftable;
   }
   else
   {
     v9 = 0i64;
   }
-  v2->m_states[4] = (UFG::Base_EngineState *)v9;
-  v10 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x20ui64, "EngineStateMachine.Decel", 0i64, 1u);
+  this->m_states[4] = v9;
+  v10 = (UFG::Base_EngineState *)UFG::qMemoryPool::Allocate(
+                                   &g_AudioComponentPool,
+                                   0x20ui64,
+                                   "EngineStateMachine.Decel",
+                                   0i64,
+                                   1u);
   if ( v10 )
   {
-    v10->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
-    v10[1].mNext = 0i64;
-    v10[2].mNext = (UFG::allocator::free_link *)v2;
-    v10->mNext = (UFG::allocator::free_link *)&UFG::Decel_EngineState::`vftable;
+    v10->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Base_EngineState::`vftable;
+    v10->m_curCurve = 0i64;
+    v10->m_esm = this;
+    v10->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Decel_EngineState::`vftable;
   }
   else
   {
     v10 = 0i64;
   }
-  v2->m_states[5] = (UFG::Base_EngineState *)v10;
-  v11 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x28ui64, "EngineStateMachine.Brake", 0i64, 1u);
+  this->m_states[5] = v10;
+  v11 = (UFG::Base_EngineState *)UFG::qMemoryPool::Allocate(
+                                   &g_AudioComponentPool,
+                                   0x28ui64,
+                                   "EngineStateMachine.Brake",
+                                   0i64,
+                                   1u);
   if ( v11 )
   {
-    v11->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
-    v11[1].mNext = 0i64;
-    v11[2].mNext = (UFG::allocator::free_link *)v2;
-    v11->mNext = (UFG::allocator::free_link *)&UFG::Neutral_EngineState::`vftable;
-    v11->mNext = (UFG::allocator::free_link *)&UFG::Brake_EngineState::`vftable;
-    v11[4].mNext = 0i64;
+    v11->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Base_EngineState::`vftable;
+    v11->m_curCurve = 0i64;
+    v11->m_esm = this;
+    v11->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Neutral_EngineState::`vftable;
+    v11->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Brake_EngineState::`vftable;
+    v11[1].m_curCurve = 0i64;
   }
   else
   {
     v11 = 0i64;
   }
-  v2->m_states[6] = (UFG::Base_EngineState *)v11;
+  this->m_states[6] = v11;
   v12 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x20ui64, "EngineStateMachine.Reverse", 0i64, 1u);
   if ( v12 )
   {
     v12->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
     v12[1].mNext = 0i64;
-    v12[2].mNext = (UFG::allocator::free_link *)v2;
+    v12[2].mNext = (UFG::allocator::free_link *)this;
     v12->mNext = (UFG::allocator::free_link *)&UFG::Reverse_EngineState::`vftable;
     BYTE4(v12[3].mNext) = 0;
   }
@@ -4808,78 +4762,103 @@ void __fastcall UFG::EngineStateMachine::EngineStateMachine(UFG::EngineStateMach
   {
     v12 = 0i64;
   }
-  v2->m_states[7] = (UFG::Base_EngineState *)v12;
-  v13 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x18ui64, "EngineStateMachine.Upshift", 0i64, 1u);
+  this->m_states[7] = (UFG::Base_EngineState *)v12;
+  v13 = (UFG::Base_EngineState *)UFG::qMemoryPool::Allocate(
+                                   &g_AudioComponentPool,
+                                   0x18ui64,
+                                   "EngineStateMachine.Upshift",
+                                   0i64,
+                                   1u);
   if ( v13 )
   {
-    v13->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
-    v13[1].mNext = 0i64;
-    v13[2].mNext = (UFG::allocator::free_link *)v2;
-    v13->mNext = (UFG::allocator::free_link *)&UFG::Upshift_EngineState::`vftable;
+    v13->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Base_EngineState::`vftable;
+    v13->m_curCurve = 0i64;
+    v13->m_esm = this;
+    v13->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Upshift_EngineState::`vftable;
   }
   else
   {
     v13 = 0i64;
   }
-  v2->m_states[8] = (UFG::Base_EngineState *)v13;
-  v14 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x18ui64, "EngineStateMachine.Downshift", 0i64, 1u);
+  this->m_states[8] = v13;
+  v14 = (UFG::Base_EngineState *)UFG::qMemoryPool::Allocate(
+                                   &g_AudioComponentPool,
+                                   0x18ui64,
+                                   "EngineStateMachine.Downshift",
+                                   0i64,
+                                   1u);
   if ( v14 )
   {
-    v14->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
-    v14[1].mNext = 0i64;
-    v14[2].mNext = (UFG::allocator::free_link *)v2;
-    v14->mNext = (UFG::allocator::free_link *)&UFG::Downshift_EngineState::`vftable;
+    v14->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Base_EngineState::`vftable;
+    v14->m_curCurve = 0i64;
+    v14->m_esm = this;
+    v14->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Downshift_EngineState::`vftable;
   }
   else
   {
     v14 = 0i64;
   }
-  v2->m_states[9] = (UFG::Base_EngineState *)v14;
-  v15 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x20ui64, "EngineStateMachine.RevLimit", 0i64, 1u);
+  this->m_states[9] = v14;
+  v15 = (UFG::Base_EngineState *)UFG::qMemoryPool::Allocate(
+                                   &g_AudioComponentPool,
+                                   0x20ui64,
+                                   "EngineStateMachine.RevLimit",
+                                   0i64,
+                                   1u);
   if ( v15 )
   {
-    v15->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
-    v15[1].mNext = 0i64;
-    v15[2].mNext = (UFG::allocator::free_link *)v2;
-    v15->mNext = (UFG::allocator::free_link *)&UFG::RevLimit_EngineState::`vftable;
+    v15->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Base_EngineState::`vftable;
+    v15->m_curCurve = 0i64;
+    v15->m_esm = this;
+    v15->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::RevLimit_EngineState::`vftable;
   }
   else
   {
     v15 = 0i64;
   }
-  v2->m_states[10] = (UFG::Base_EngineState *)v15;
-  v16 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x18ui64, "EngineStateMachine.Transition", 0i64, 1u);
+  this->m_states[10] = v15;
+  v16 = (UFG::Base_EngineState *)UFG::qMemoryPool::Allocate(
+                                   &g_AudioComponentPool,
+                                   0x18ui64,
+                                   "EngineStateMachine.Transition",
+                                   0i64,
+                                   1u);
   if ( v16 )
   {
-    v16->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
-    v16[1].mNext = 0i64;
-    v16[2].mNext = (UFG::allocator::free_link *)v2;
-    v16->mNext = (UFG::allocator::free_link *)&UFG::Transition_EngineState::`vftable;
+    v16->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Base_EngineState::`vftable;
+    v16->m_curCurve = 0i64;
+    v16->m_esm = this;
+    v16->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Transition_EngineState::`vftable;
   }
   else
   {
     v16 = 0i64;
   }
-  v2->m_states[11] = (UFG::Base_EngineState *)v16;
-  v17 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x28ui64, "EngineStateMachine.Drifting", 0i64, 1u);
+  this->m_states[11] = v16;
+  v17 = (UFG::Base_EngineState *)UFG::qMemoryPool::Allocate(
+                                   &g_AudioComponentPool,
+                                   0x28ui64,
+                                   "EngineStateMachine.Drifting",
+                                   0i64,
+                                   1u);
   if ( v17 )
   {
-    v17->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
-    v17[1].mNext = 0i64;
-    v17[2].mNext = (UFG::allocator::free_link *)v2;
-    v17->mNext = (UFG::allocator::free_link *)&UFG::Drifting_EngineState::`vftable;
+    v17->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Base_EngineState::`vftable;
+    v17->m_curCurve = 0i64;
+    v17->m_esm = this;
+    v17->vfptr = (UFG::Base_EngineStateVtbl *)&UFG::Drifting_EngineState::`vftable;
   }
   else
   {
     v17 = 0i64;
   }
-  v2->m_states[14] = (UFG::Base_EngineState *)v17;
+  this->m_states[14] = v17;
   v18 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x20ui64, "EngineStateMachine.Wheelie", 0i64, 1u);
   if ( v18 )
   {
     v18->mNext = (UFG::allocator::free_link *)&UFG::Base_EngineState::`vftable;
     v18[1].mNext = 0i64;
-    v18[2].mNext = (UFG::allocator::free_link *)v2;
+    v18[2].mNext = (UFG::allocator::free_link *)this;
     v18->mNext = (UFG::allocator::free_link *)&UFG::Wheelie_EngineState::`vftable;
     LODWORD(v18[3].mNext) = 0;
   }
@@ -4887,100 +4866,97 @@ void __fastcall UFG::EngineStateMachine::EngineStateMachine(UFG::EngineStateMach
   {
     v18 = 0i64;
   }
-  v2->m_states[15] = (UFG::Base_EngineState *)v18;
+  this->m_states[15] = (UFG::Base_EngineState *)v18;
 }
 
 // File Line: 2639
 // RVA: 0x6742D0
-void __usercall UFG::EngineStateMachine::ChangeState(UFG::EngineStateMachine *this@<rcx>, UFG::EngineStateMachine::State newState@<edx>, int a3@<xmm0>)
+void __fastcall UFG::EngineStateMachine::ChangeState(
+        UFG::EngineStateMachine *this,
+        UFG::EngineStateMachine::State newState)
 {
-  __int64 v3; // rbp
-  UFG::EngineStateMachine *v4; // rdi
-  UFG::EngineModel2 *v5; // rax
-  UFG::qBaseNodeRB **v6; // rbx
-  UFG::qBaseTreeRB *v7; // rax
-  UFG::qBaseNodeRB **v8; // rsi
-  UFG::EngineModel2 *v9; // rdx
-  UFG::qBaseTreeRB *v10; // rax
-  UFG::EngineModel2 *v11; // rdx
-  UFG::Base_EngineState *v12; // rcx
+  __int64 v2; // rbp
+  UFG::EngineModel2 *m_engineModel; // rax
+  float *v5; // rbx
+  UFG::qBaseTreeRB *v6; // rax
+  float *v7; // rsi
+  UFG::EngineModel2 *v8; // rdx
+  UFG::qBaseTreeRB *v9; // rax
+  UFG::EngineModel2 *v10; // rdx
+  UFG::Base_EngineState *v11; // rcx
 
-  v3 = newState;
-  v4 = this;
+  v2 = newState;
   if ( newState == this->m_curState )
   {
-    this->m_curState = v3;
+    this->m_curState = newState;
   }
   else
   {
-    v5 = this->m_engineModel;
-    v6 = 0i64;
+    m_engineModel = this->m_engineModel;
+    v5 = 0i64;
     *(_QWORD *)&this->m_timeInCurState = 0i64;
     if ( !EngineModelSym_time_in_state.mUID
-      || (v7 = UFG::qBaseTreeRB::Get(&v5->m_inputs->m_inputsTree.mTree, EngineModelSym_time_in_state.mUID),
-          v8 = &v7[-1].mNULL.mChild[1],
-          !v7) )
+      || (v6 = UFG::qBaseTreeRB::Get(&m_engineModel->m_inputs->m_inputsTree.mTree, EngineModelSym_time_in_state.mUID),
+          v7 = (float *)&v6[-1].mNULL.mChild[1],
+          !v6) )
     {
-      v8 = 0i64;
+      v7 = 0i64;
     }
-    v9 = v4->m_engineModel;
-    *((_DWORD *)v8 + 18) = *((_DWORD *)v8 + 17);
-    ((void (__fastcall *)(UFG::qBaseNodeRB **, UFG::EngineModel2 *))(*v8)->mChild[0])(v8, v9);
-    *((_DWORD *)v8 + 17) = a3;
+    v8 = this->m_engineModel;
+    v7[18] = v7[17];
+    v7[17] = (*(float (__fastcall **)(float *, UFG::EngineModel2 *))(*(_QWORD *)v7 + 8i64))(v7, v8);
     if ( EngineModelSym_time_after_rpm_lookup.mUID )
     {
-      v10 = UFG::qBaseTreeRB::Get(
-              &v4->m_engineModel->m_inputs->m_inputsTree.mTree,
-              EngineModelSym_time_after_rpm_lookup.mUID);
-      if ( v10 )
-        v6 = &v10[-1].mNULL.mChild[1];
+      v9 = UFG::qBaseTreeRB::Get(
+             &this->m_engineModel->m_inputs->m_inputsTree.mTree,
+             EngineModelSym_time_after_rpm_lookup.mUID);
+      if ( v9 )
+        v5 = (float *)&v9[-1].mNULL.mChild[1];
     }
-    v11 = v4->m_engineModel;
-    *((_DWORD *)v6 + 18) = *((_DWORD *)v6 + 17);
-    ((void (__fastcall *)(UFG::qBaseNodeRB **, UFG::EngineModel2 *))(*v6)->mChild[0])(v6, v11);
-    *((_DWORD *)v6 + 17) = a3;
-    v12 = v4->m_states[v4->m_curState];
-    v12->vfptr->OnExit(v12, (UFG::EngineStateMachine::State)v3);
-    v4->m_states[v3]->vfptr->OnEnter(v4->m_states[v3], v4->m_curState);
-    v4->m_curState = v3;
+    v10 = this->m_engineModel;
+    v5[18] = v5[17];
+    v5[17] = (*(float (__fastcall **)(float *, UFG::EngineModel2 *))(*(_QWORD *)v5 + 8i64))(v5, v10);
+    v11 = this->m_states[this->m_curState];
+    v11->vfptr->OnExit(v11, (UFG::EngineStateMachine::State)v2);
+    this->m_states[v2]->vfptr->OnEnter(this->m_states[v2], this->m_curState);
+    this->m_curState = v2;
   }
 }
 
 // File Line: 2665
 // RVA: 0x690EC0
-void __usercall UFG::EngineStateMachine::Update(UFG::EngineStateMachine *this@<rcx>, float delta_sec@<xmm1>, float a3@<xmm0>)
+void __fastcall UFG::EngineStateMachine::Update(UFG::EngineStateMachine *this, float delta_sec)
 {
-  UFG::EngineStateMachine *v3; // rbx
-  float v4; // xmm6_4
+  UFG::Base_EngineState *v4; // rcx
   UFG::Base_EngineState *v5; // rdi
   UFG::qBaseTreeRB *v6; // rax
-  signed __int64 v7; // rax
+  UFG::qBaseNodeRB **v7; // rax
   UFG::qBaseTreeRB *v8; // rax
-  signed __int64 v9; // rax
+  UFG::qBaseNodeRB **v9; // rax
   UFG::qBaseTreeRB *v10; // rax
-  signed __int64 v11; // rsi
-  UFG::Base_EngineStateVtbl *v12; // rax
-  _DWORD *v13; // rax
-  UFG::EngineCurve *v14; // rcx
-  UFG::AudioCurveSet *v15; // rax
-  UFG::AudioCurveSet *v16; // rsi
-  UFG::qSymbol *v17; // rax
-  UFG::AudioCurveSet *v18; // rsi
-  UFG::qSymbol *v19; // rax
-  UFG::AudioCurveSet *v20; // rax
-  UFG::AudioCurveSet *v21; // rdx
-  float v22; // xmm1_4
+  float *v11; // rsi
+  float v12; // xmm0_4
+  UFG::Base_EngineStateVtbl *vfptr; // rax
+  UFG::qSymbol *v14; // rax
+  UFG::EngineCurve *m_engineCurve; // rcx
+  UFG::AudioCurveSet *NamedCurveSet; // rax
+  UFG::AudioCurveSet *Gear; // rsi
+  UFG::qSymbol *v18; // rax
+  UFG::AudioCurveSet *v19; // rsi
+  UFG::qSymbol *v20; // rax
+  UFG::AudioCurveSet *ChildCurveSet; // rax
+  UFG::AudioCurveSet *m_stateSpecificCurveSet; // rdx
+  float v23; // xmm1_4
 
-  v3 = this;
-  v4 = delta_sec;
   do
   {
-    if ( v3->m_event )
+    if ( this->m_event )
     {
-      ((void (*)(void))v3->m_states[v3->m_curState]->vfptr->OnEvent)();
-      v3->m_event = 0;
+      v4 = this->m_states[this->m_curState];
+      ((void (__fastcall *)(UFG::Base_EngineState *))v4->vfptr->OnEvent)(v4);
+      this->m_event = eEVENT_NO_EVENT;
     }
-    v5 = v3->m_states[v3->m_curState];
+    v5 = this->m_states[this->m_curState];
     if ( EngineModelSym_limiter_threshold.mUID )
     {
       v6 = UFG::qBaseTreeRB::Get(
@@ -4988,9 +4964,9 @@ void __usercall UFG::EngineStateMachine::Update(UFG::EngineStateMachine *this@<r
              EngineModelSym_limiter_threshold.mUID);
       if ( v6 )
       {
-        v7 = (signed __int64)&v6[-1].mNULL.mChild[1];
+        v7 = &v6[-1].mNULL.mChild[1];
         if ( v7 )
-          *(_DWORD *)(v7 + 60) = 0;
+          *((_DWORD *)v7 + 15) = 0;
       }
     }
     if ( EngineModelSym_acceleration_factor.mUID
@@ -4998,74 +4974,72 @@ void __usercall UFG::EngineStateMachine::Update(UFG::EngineStateMachine *this@<r
                  &v5->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
                  EngineModelSym_acceleration_factor.mUID)) != 0i64 )
     {
-      v9 = (signed __int64)&v8[-1].mNULL.mChild[1];
+      v9 = &v8[-1].mNULL.mChild[1];
     }
     else
     {
       v9 = 0i64;
     }
-    *(_DWORD *)(v9 + 60) = 1065353216;
+    *((_DWORD *)v9 + 15) = 1065353216;
     if ( !EngineModelSym_load.mUID
       || (v10 = UFG::qBaseTreeRB::Get(
                   &v5->m_esm->m_engineModel->m_outputs->m_outputsTree.mTree,
                   EngineModelSym_load.mUID),
-          v11 = (signed __int64)&v10[-1].mNULL.mChild[1],
+          v11 = (float *)&v10[-1].mNULL.mChild[1],
           !v10) )
     {
       v11 = 0i64;
     }
-    v5->vfptr->GetDefaultLoad(v5);
-    v12 = v5->vfptr;
-    *(float *)(v11 + 60) = a3;
-    v13 = (_DWORD *)v12->GetName(v5);
-    v14 = v5->m_esm->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve;
-    if ( *v13 == EngineModelSym_Reverse.mUID )
+    v12 = v5->vfptr->GetDefaultLoad(v5);
+    vfptr = v5->vfptr;
+    v11[15] = v12;
+    v14 = vfptr->GetName(v5);
+    m_engineCurve = v5->m_esm->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve;
+    if ( v14->mUID == EngineModelSym_Reverse.mUID )
     {
-      v15 = UFG::EngineCurve::FindNamedCurveSet(v14, (UFG::qSymbol *)&EngineModelSym_Reverse.mUID);
+      NamedCurveSet = UFG::EngineCurve::FindNamedCurveSet(m_engineCurve, &EngineModelSym_Reverse);
     }
     else
     {
-      v16 = UFG::EngineCurve::GetGear(v14, v3->inputs.curGear);
-      if ( !v16 )
-        goto LABEL_21;
-      v17 = v5->vfptr->GetName(v5);
-      v15 = UFG::AudioCurveSet::FindChildCurveSet(v16, v17);
+      Gear = UFG::EngineCurve::GetGear(m_engineCurve, this->inputs.curGear);
+      if ( !Gear )
+        goto LABEL_20;
+      v18 = v5->vfptr->GetName(v5);
+      NamedCurveSet = UFG::AudioCurveSet::FindChildCurveSet(Gear, v18);
     }
-    if ( !v15 )
+    if ( !NamedCurveSet )
     {
+LABEL_20:
+      this->m_stateSpecificCurveSet = 0i64;
+      goto LABEL_21;
+    }
+    this->m_stateSpecificCurveSet = NamedCurveSet;
 LABEL_21:
-      v3->m_stateSpecificCurveSet = 0i64;
-      goto LABEL_22;
-    }
-    v3->m_stateSpecificCurveSet = v15;
-LABEL_22:
     ((void (__fastcall *)(UFG::Base_EngineState *))v5->vfptr->Update)(v5);
-    v18 = UFG::EngineCurve::FindNamedCurveSet(
+    v19 = UFG::EngineCurve::FindNamedCurveSet(
             v5->m_esm->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve,
-            (UFG::qSymbol *)&EngineModelSym_Default.mUID);
-    if ( v18 )
+            &EngineModelSym_Default);
+    if ( v19 )
     {
-      v19 = v5->vfptr->GetName(v5);
-      v20 = UFG::AudioCurveSet::FindChildCurveSet(v18, v19);
-      if ( v20 )
-        UFG::EngineModel2::EvaluateCurveSet(v5->m_esm->m_engineModel, v20);
+      v20 = v5->vfptr->GetName(v5);
+      ChildCurveSet = UFG::AudioCurveSet::FindChildCurveSet(v19, v20);
+      if ( ChildCurveSet )
+        UFG::EngineModel2::EvaluateCurveSet(v5->m_esm->m_engineModel, ChildCurveSet);
     }
-    v21 = v3->m_stateSpecificCurveSet;
-    if ( v21 )
-      UFG::EngineModel2::EvaluateCurveSet(v5->m_esm->m_engineModel, v21);
-    a3 = v4 + v3->m_timeInCurState;
-    v22 = v4 + v3->m_timeAfterRpmLookup;
-    v3->m_timeInCurState = a3;
-    v3->m_timeAfterRpmLookup = v22;
+    m_stateSpecificCurveSet = this->m_stateSpecificCurveSet;
+    if ( m_stateSpecificCurveSet )
+      UFG::EngineModel2::EvaluateCurveSet(v5->m_esm->m_engineModel, m_stateSpecificCurveSet);
+    v23 = delta_sec + this->m_timeAfterRpmLookup;
+    this->m_timeInCurState = delta_sec + this->m_timeInCurState;
+    this->m_timeAfterRpmLookup = v23;
   }
-  while ( v3->m_event );
+  while ( this->m_event );
 }
 
 // File Line: 2857
 // RVA: 0x667FF0
 void __fastcall UFG::EngineModel2::EngineModel2(UFG::EngineModel2 *this, UFG::VehicleAudioComponent *component)
 {
-  UFG::EngineModel2 *v2; // rbx
   UFG::allocator::free_link *v3; // rax
   UFG::EngineModelInputs *v4; // rax
   UFG::allocator::free_link *v5; // rax
@@ -5074,9 +5048,8 @@ void __fastcall UFG::EngineModel2::EngineModel2(UFG::EngineModel2 *this, UFG::Ve
   UFG::EngineModelBlendModes *v8; // rax
   UFG::allocator::free_link *v9; // rax
   UFG::EngineStateMachine *v10; // rax
-  UFG::AudioCurveSet *v11; // rax
+  UFG::AudioCurveSet *NamedCurveSet; // rax
 
-  v2 = this;
   this->m_ecEngine.m_pEvent = 0i64;
   *(_QWORD *)&this->m_accelerationRlf.m_currentValue = 0i64;
   this->m_accelerationRlf.m_riseRate = 10000000.0;
@@ -5084,466 +5057,443 @@ void __fastcall UFG::EngineModel2::EngineModel2(UFG::EngineModel2 *this, UFG::Ve
   this->m_pVehAudComponent = component;
   v3 = UFG::qMalloc(0x58ui64, "EngineModelInputs", 0i64);
   if ( v3 )
-    UFG::EngineModelInputs::EngineModelInputs((UFG::EngineModelInputs *)v3, v2);
+    UFG::EngineModelInputs::EngineModelInputs((UFG::EngineModelInputs *)v3, this);
   else
     v4 = 0i64;
-  v2->m_inputs = v4;
+  this->m_inputs = v4;
   v5 = UFG::qMalloc(0x58ui64, "EngineModelOutputs", 0i64);
   if ( v5 )
-    UFG::EngineModelOutputs::EngineModelOutputs((UFG::EngineModelOutputs *)v5, v2);
+    UFG::EngineModelOutputs::EngineModelOutputs((UFG::EngineModelOutputs *)v5, this);
   else
     v6 = 0i64;
-  v2->m_outputs = v6;
+  this->m_outputs = v6;
   v7 = UFG::qMalloc(0x10ui64, "EngineModelBlendModes", 0i64);
   if ( v7 )
     UFG::EngineModelBlendModes::EngineModelBlendModes((UFG::EngineModelBlendModes *)v7);
   else
     v8 = 0i64;
-  v2->m_blendModes = v8;
+  this->m_blendModes = v8;
   v9 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0xB8ui64, "EngineStateMachine", 0i64, 1u);
   if ( v9 )
-    UFG::EngineStateMachine::EngineStateMachine((UFG::EngineStateMachine *)v9, v2);
+    UFG::EngineStateMachine::EngineStateMachine((UFG::EngineStateMachine *)v9, this);
   else
     v10 = 0i64;
-  v2->m_engineStateMachine = v10;
-  v2->m_prevSimSpeed = 100000.0;
-  v2->m_turboChargeAccum = 0.0;
-  v2->m_prevMixState = in_vehicle.mUID;
-  v11 = UFG::EngineCurve::FindNamedCurveSet(
-          v2->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve,
-          (UFG::qSymbol *)&EngineModelSym_RevLimit.mUID);
-  v2->m_revLimitCurve = 0i64;
-  if ( v11 )
-    v2->m_revLimitCurve = UFG::AudioCurveSet::FindCurve(v11, (UFG::qSymbol *)&EngineModelSym_type_generic.mUID);
+  this->m_engineStateMachine = v10;
+  this->m_prevSimSpeed = 100000.0;
+  this->m_turboChargeAccum = 0.0;
+  this->m_prevMixState = in_vehicle.mUID;
+  NamedCurveSet = UFG::EngineCurve::FindNamedCurveSet(
+                    this->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve,
+                    &EngineModelSym_RevLimit);
+  this->m_revLimitCurve = 0i64;
+  if ( NamedCurveSet )
+    this->m_revLimitCurve = UFG::AudioCurveSet::FindCurve(NamedCurveSet, &EngineModelSym_type_generic);
 }
 
 // File Line: 2882
 // RVA: 0x66C840
 void __fastcall UFG::EngineModel2::~EngineModel2(UFG::EngineModel2 *this, __int64 a2)
 {
-  UFG::EngineModel2 *v2; // rdi
-  UFG::EngineModelOutputs *v3; // rax
-  UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> **v4; // rbx
-  signed __int64 i; // rsi
-  UFG::EngineStateMachine *v6; // rcx
+  UFG::EngineModelOutputs *m_outputs; // rax
+  int *p_mNext; // rbx
+  int *i; // rsi
+  UFG::EngineStateMachine *m_engineStateMachine; // rcx
   UFG::EngineModelOutputs *v7; // rsi
-  UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *v8; // rdx
-  UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *v9; // rax
-  UFG::qList<Render::SoftbodyCollisionShape,Render::SoftbodyCollisionShape,1,0> *v10; // rbx
+  UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *mPrev; // rdx
+  UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *mNext; // rax
+  UFG::qList<Render::SoftbodyCollisionShape,Render::SoftbodyCollisionShape,1,0> *m_blendModes; // rbx
   UFG::qNode<Render::SoftbodyCollisionShape,Render::SoftbodyCollisionShape> *v11; // rdx
   UFG::qNode<Render::SoftbodyCollisionShape,Render::SoftbodyCollisionShape> *v12; // rax
-  UFG::EngineModelInputs *v13; // rsi
+  UFG::EngineModelInputs *m_inputs; // rsi
   UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v14; // rdx
   UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v15; // rax
-  UFG::AudioEvent *v16; // rcx
+  UFG::AudioEvent *m_pEvent; // rcx
 
-  v2 = this;
-  v3 = this->m_outputs;
-  if ( v3 )
+  m_outputs = this->m_outputs;
+  if ( m_outputs )
   {
-    v4 = &v3->m_outputsList.mNode.mNext[-1].mNext;
-    for ( i = (signed __int64)&v3[-1].m_outputsTree.mTree.mCount;
-          v4 != (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> **)i;
-          v4 = &v4[2][-1].mNext )
-    {
-      ((void (__fastcall *)(UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> **, __int64, UFG::EngineModel2 *))(*v4)->mNext)(
-        v4,
-        a2,
-        v2);
-    }
+    p_mNext = (int *)&m_outputs->m_outputsList.mNode.mNext[-1].mNext;
+    for ( i = &m_outputs[-1].m_outputsTree.mTree.mCount; p_mNext != i; p_mNext = (int *)(*((_QWORD *)p_mNext + 2) - 8i64) )
+      (*(void (__fastcall **)(int *, __int64, UFG::EngineModel2 *))(*(_QWORD *)p_mNext + 8i64))(p_mNext, a2, this);
   }
-  v6 = v2->m_engineStateMachine;
-  if ( v6 )
-    v6->vfptr->__vecDelDtor(v6, 1u);
-  v7 = v2->m_outputs;
+  m_engineStateMachine = this->m_engineStateMachine;
+  if ( m_engineStateMachine )
+    m_engineStateMachine->vfptr->__vecDelDtor(m_engineStateMachine, 1u);
+  v7 = this->m_outputs;
   if ( v7 )
   {
     UFG::qTreeRB<UFG::EngineModelInput,UFG::EngineModelInput,1>::DeleteAll(&v7->m_outputsTree);
     UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)&v7->m_outputsTree);
     UFG::qList<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption,1,0>::DeleteNodes((UFG::qList<UFG::GUIObjectBase,UFG::GUIObjectBase,1,0> *)v7);
-    v8 = v7->m_outputsList.mNode.mPrev;
-    v9 = v7->m_outputsList.mNode.mNext;
-    v8->mNext = v9;
-    v9->mPrev = v8;
+    mPrev = v7->m_outputsList.mNode.mPrev;
+    mNext = v7->m_outputsList.mNode.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
     v7->m_outputsList.mNode.mPrev = &v7->m_outputsList.mNode;
     v7->m_outputsList.mNode.mNext = &v7->m_outputsList.mNode;
     operator delete[](v7);
   }
-  v10 = (UFG::qList<Render::SoftbodyCollisionShape,Render::SoftbodyCollisionShape,1,0> *)v2->m_blendModes;
-  if ( v10 )
+  m_blendModes = (UFG::qList<Render::SoftbodyCollisionShape,Render::SoftbodyCollisionShape,1,0> *)this->m_blendModes;
+  if ( m_blendModes )
   {
-    UFG::qList<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode,1,0>::DeleteNodes(v10);
-    v11 = v10->mNode.mPrev;
-    v12 = v10->mNode.mNext;
+    UFG::qList<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode,1,0>::DeleteNodes(m_blendModes);
+    v11 = m_blendModes->mNode.mPrev;
+    v12 = m_blendModes->mNode.mNext;
     v11->mNext = v12;
     v12->mPrev = v11;
-    v10->mNode.mPrev = &v10->mNode;
-    v10->mNode.mNext = &v10->mNode;
-    operator delete[](v10);
+    m_blendModes->mNode.mPrev = &m_blendModes->mNode;
+    m_blendModes->mNode.mNext = &m_blendModes->mNode;
+    operator delete[](m_blendModes);
   }
-  v13 = v2->m_inputs;
-  if ( v2->m_inputs )
+  m_inputs = this->m_inputs;
+  if ( this->m_inputs )
   {
-    UFG::qTreeRB<UFG::EngineModelInput,UFG::EngineModelInput,1>::DeleteAll((UFG::qTreeRB<UFG::EngineModelOutput,UFG::EngineModelOutput,1> *)&v13->m_inputsTree);
-    UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)&v13->m_inputsTree);
-    UFG::qList<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption,1,0>::DeleteNodes((UFG::qList<UFG::GUIObjectBase,UFG::GUIObjectBase,1,0> *)v13);
-    v14 = v13->m_inputsList.mNode.mPrev;
-    v15 = v13->m_inputsList.mNode.mNext;
+    UFG::qTreeRB<UFG::EngineModelInput,UFG::EngineModelInput,1>::DeleteAll((UFG::qTreeRB<UFG::EngineModelOutput,UFG::EngineModelOutput,1> *)&m_inputs->m_inputsTree);
+    UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)&m_inputs->m_inputsTree);
+    UFG::qList<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption,1,0>::DeleteNodes((UFG::qList<UFG::GUIObjectBase,UFG::GUIObjectBase,1,0> *)m_inputs);
+    v14 = m_inputs->m_inputsList.mNode.mPrev;
+    v15 = m_inputs->m_inputsList.mNode.mNext;
     v14->mNext = v15;
     v15->mPrev = v14;
-    v13->m_inputsList.mNode.mPrev = &v13->m_inputsList.mNode;
-    v13->m_inputsList.mNode.mNext = &v13->m_inputsList.mNode;
-    operator delete[](v13);
+    m_inputs->m_inputsList.mNode.mPrev = &m_inputs->m_inputsList.mNode;
+    m_inputs->m_inputsList.mNode.mNext = &m_inputs->m_inputsList.mNode;
+    operator delete[](m_inputs);
   }
-  v16 = v2->m_ecEngine.m_pEvent;
-  if ( v16 )
-    UFG::AudioEvent::OnControllerDestroy(v16);
+  m_pEvent = this->m_ecEngine.m_pEvent;
+  if ( m_pEvent )
+    UFG::AudioEvent::OnControllerDestroy(m_pEvent);
 }
 
 // File Line: 2925
 // RVA: 0x690930
-void __usercall UFG::EngineModel2::Update(UFG::EngineModel2 *this@<rcx>, float delta_sec@<xmm1>, int a3@<xmm0>)
+void __fastcall UFG::EngineModel2::Update(UFG::EngineModel2 *this, float delta_sec)
 {
-  UFG::EngineModel2 *v3; // rbx
-  UFG::VehicleAudioComponent::eDriverType v4; // ebp
-  float v5; // xmm7_4
+  float Value; // xmm0_4
+  UFG::VehicleAudioComponent::eDriverType m_eDriverType; // ebp
   float v6; // xmm8_4
-  signed __int64 v7; // rdi
+  float *v7; // rdi
   UFG::qBaseTreeRB *v8; // rax
-  signed __int64 v9; // r15
+  float *v9; // r15
   UFG::qBaseTreeRB *v10; // rax
-  signed __int64 v11; // r13
+  float *v11; // r13
   UFG::qBaseTreeRB *v12; // rax
-  signed __int64 v13; // r12
-  UFG::PhysicsMoverInterface *v14; // r14
+  float *v13; // r12
+  UFG::PhysicsMoverInterface *m_pPointer; // r14
   UFG::qBaseTreeRB *v15; // rax
-  signed __int64 v16; // rax
+  float *v16; // rax
   float v17; // xmm12_4
   UFG::qBaseTreeRB *v18; // rax
-  signed __int64 v19; // rax
+  float *v19; // rax
   float v20; // xmm11_4
-  char v21; // si
-  float v22; // xmm6_4
-  int v23; // xmm10_4
+  bool v21; // si
+  float m_targetValue; // xmm6_4
+  float v23; // xmm10_4
   UFG::qBaseTreeRB *v24; // rax
   bool v25; // di
-  UFG::AudioCurve *v26; // rcx
-  UFG::AudioCurveSet *v27; // rax
-  UFG::VehicleAudioComponent *v28; // rax
-  UFG::EnvironmentalModel *v29; // rcx
-  UFG::EngineStateMachine *v30; // rax
+  UFG::AudioCurve *m_revLimitCurve; // rcx
+  UFG::AudioCurveSet *Gear; // rax
+  UFG::VehicleAudioComponent *m_pVehAudComponent; // rax
+  UFG::EnvironmentalModel *m_envModel; // rcx
+  UFG::EngineStateMachine *m_engineStateMachine; // rax
   float v31; // xmm1_4
-  float v32; // xmm2_4
+  float m_fallRate; // xmm2_4
   __int64 v33; // rdx
-  UFG::EngineModelOutputs *v34; // rax
-  signed __int64 v35; // rsi
-  int *v36; // rdi
+  UFG::EngineModelOutputs *m_outputs; // rax
+  int *p_mCount; // rsi
+  int *p_mNext; // rdi
   UFG::VehicleAudioComponent *v37; // rax
-  float v38; // xmm6_4
-  UFG::TiDo *v39; // rax
+  float m_currentValue; // xmm6_4
+  UFG::TiDo *Instance; // rax
   UFG::VehicleAudioComponent *v40; // rdi
   unsigned int v41; // esi
-  UFG::VehicleAudioComponent::eDriverType v42; // [rsp+C0h] [rbp+8h]
 
-  v3 = this;
-  v4 = this->m_pVehAudComponent->m_eDriverType;
-  v5 = delta_sec;
-  v42 = this->m_pVehAudComponent->m_eDriverType;
-  UFG::EngineModelInputs::ReadInputs(this->m_inputs, this, delta_sec, a3);
+  m_eDriverType = this->m_pVehAudComponent->m_eDriverType;
+  UFG::EngineModelInputs::ReadInputs(this->m_inputs, this, delta_sec);
   v6 = 0.0;
   v7 = 0i64;
   if ( !EngineModelSym_wheels_in_air.mUID
-    || (v8 = UFG::qBaseTreeRB::Get(&v3->m_inputs->m_inputsTree.mTree, EngineModelSym_wheels_in_air.mUID),
-        v9 = (signed __int64)&v8[-1].mNULL.mChild[1],
+    || (v8 = UFG::qBaseTreeRB::Get(&this->m_inputs->m_inputsTree.mTree, EngineModelSym_wheels_in_air.mUID),
+        v9 = (float *)&v8[-1].mNULL.mChild[1],
         !v8) )
   {
     v9 = 0i64;
   }
   if ( !EngineModelSym_skid_angle.mUID
-    || (v10 = UFG::qBaseTreeRB::Get(&v3->m_inputs->m_inputsTree.mTree, EngineModelSym_skid_angle.mUID),
-        v11 = (signed __int64)&v10[-1].mNULL.mChild[1],
+    || (v10 = UFG::qBaseTreeRB::Get(&this->m_inputs->m_inputsTree.mTree, EngineModelSym_skid_angle.mUID),
+        v11 = (float *)&v10[-1].mNULL.mChild[1],
         !v10) )
   {
     v11 = 0i64;
   }
   if ( !EngineModelSym_burnout.mUID
-    || (v12 = UFG::qBaseTreeRB::Get(&v3->m_inputs->m_inputsTree.mTree, EngineModelSym_burnout.mUID),
-        v13 = (signed __int64)&v12[-1].mNULL.mChild[1],
+    || (v12 = UFG::qBaseTreeRB::Get(&this->m_inputs->m_inputsTree.mTree, EngineModelSym_burnout.mUID),
+        v13 = (float *)&v12[-1].mNULL.mChild[1],
         !v12) )
   {
     v13 = 0i64;
   }
-  if ( v3->m_engineStateMachine->m_event == eEVENT_NO_EVENT )
+  if ( this->m_engineStateMachine->m_event == eEVENT_NO_EVENT )
   {
-    v14 = (UFG::PhysicsMoverInterface *)v3->m_pVehAudComponent->m_physicsMoverInterface.m_pPointer;
+    m_pPointer = (UFG::PhysicsMoverInterface *)this->m_pVehAudComponent->m_physicsMoverInterface.m_pPointer;
     if ( EngineModelSym_gas.mUID
-      && (v15 = UFG::qBaseTreeRB::Get(&v3->m_inputs->m_inputsTree.mTree, EngineModelSym_gas.mUID)) != 0i64 )
+      && (v15 = UFG::qBaseTreeRB::Get(&this->m_inputs->m_inputsTree.mTree, EngineModelSym_gas.mUID)) != 0i64 )
     {
-      v16 = (signed __int64)&v15[-1].mNULL.mChild[1];
+      v16 = (float *)&v15[-1].mNULL.mChild[1];
     }
     else
     {
       v16 = 0i64;
     }
-    v17 = *(float *)(v16 + 68);
+    v17 = v16[17];
     if ( EngineModelSym_rpm.mUID
-      && (v18 = UFG::qBaseTreeRB::Get(&v3->m_outputs->m_outputsTree.mTree, EngineModelSym_rpm.mUID)) != 0i64 )
+      && (v18 = UFG::qBaseTreeRB::Get(&this->m_outputs->m_outputsTree.mTree, EngineModelSym_rpm.mUID)) != 0i64 )
     {
-      v19 = (signed __int64)&v18[-1].mNULL.mChild[1];
+      v19 = (float *)&v18[-1].mNULL.mChild[1];
     }
     else
     {
       v19 = 0i64;
     }
-    v20 = *(float *)(v19 + 60);
+    v20 = v19[15];
     v21 = 0;
-    v22 = v3->m_pVehAudComponent->m_rateLimitedSpeed.m_targetValue;
-    v23 = (int)FLOAT_1_0;
-    if ( v14 && v4 == eDriverType_Player )
+    m_targetValue = this->m_pVehAudComponent->m_rateLimitedSpeed.m_targetValue;
+    v23 = *(float *)&FLOAT_1_0;
+    if ( m_pPointer && m_eDriverType == eDriverType_Player )
     {
-      if ( v14->mNumWheels )
+      if ( m_pPointer->mNumWheels )
       {
-        v21 = (*((_DWORD *)&v14->mInput + 4) >> 2) & 1;
+        v21 = (*((_DWORD *)&m_pPointer->mInput + 4) & 4) != 0;
       }
       else
       {
         if ( EngineModelSym_steering.mUID )
         {
-          v24 = UFG::qBaseTreeRB::Get(&v3->m_inputs->m_inputsTree.mTree, EngineModelSym_steering.mUID);
+          v24 = UFG::qBaseTreeRB::Get(&this->m_inputs->m_inputsTree.mTree, EngineModelSym_steering.mUID);
           if ( v24 )
-            v7 = (signed __int64)&v24[-1].mNULL.mChild[1];
+            v7 = (float *)&v24[-1].mNULL.mChild[1];
         }
-        if ( 1.0 == *(float *)(v7 + 68) )
+        if ( 1.0 == v7[17] )
           v21 = 0;
       }
-      *(float *)&a3 = UFG::CalcAverageFrictionMultiplier(v14);
-      v23 = a3;
+      Value = UFG::CalcAverageFrictionMultiplier(m_pPointer);
+      v23 = Value;
     }
     v25 = v17 < 0.0 || v21;
-    v26 = v3->m_revLimitCurve;
-    if ( v26
-      && (*(float *)&a3 = UFG::LinearGraph<float>::GetValue(&v26->m_graphCurve, 0.0), v20 > *(float *)&a3)
+    m_revLimitCurve = this->m_revLimitCurve;
+    if ( m_revLimitCurve
+      && (Value = UFG::LinearGraph<float>::GetValue(&m_revLimitCurve->m_graphCurve, 0.0), v20 > Value)
       && v17 > 0.0 )
     {
-      v3->m_engineStateMachine->m_event = eEVENT_REVLIMIT;
+      this->m_engineStateMachine->m_event = eEVENT_REVLIMIT;
     }
     else
     {
-      if ( *(float *)&v23 < 0.69999999 && !v25 && !v21 && !(*((_BYTE *)&v14->mInput + 16) & 0x20) && v22 > 2.8 )
+      if ( v23 < 0.69999999 && !v25 && !v21 && (*((_BYTE *)&m_pPointer->mInput + 16) & 0x20) == 0 && m_targetValue > 2.8 )
       {
-        *(float *)&a3 = FLOAT_0_40000001;
-        if ( *(float *)(v11 + 68) > 0.40000001 )
+        Value = FLOAT_0_40000001;
+        if ( v11[17] > 0.40000001 )
         {
-          v27 = UFG::EngineCurve::GetGear(
-                  v3->m_engineStateMachine->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve,
-                  v3->m_engineStateMachine->inputs.curGear);
-          if ( v27 && UFG::AudioCurveSet::FindChildCurveSet(v27, (UFG::qSymbol *)&EngineModelSym_Drifting.mUID) )
-            v3->m_engineStateMachine->m_event = 16;
+          Gear = UFG::EngineCurve::GetGear(
+                   this->m_engineStateMachine->m_engineModel->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve,
+                   this->m_engineStateMachine->inputs.curGear);
+          if ( Gear && UFG::AudioCurveSet::FindChildCurveSet(Gear, &EngineModelSym_Drifting) )
+            this->m_engineStateMachine->m_event = eEVENT_DRIFT;
           goto LABEL_75;
         }
       }
-      if ( v9 && 1.0 == *(float *)(v9 + 68) && v17 <= 0.0 )
+      if ( v9 && 1.0 == v9[17] && v17 <= 0.0 )
       {
-        v3->m_engineStateMachine->m_event = eEVENT_INAIR;
+        this->m_engineStateMachine->m_event = eEVENT_INAIR;
       }
       else
       {
-        v28 = v3->m_pVehAudComponent;
-        if ( v28->m_eDriverType == 6 )
+        m_pVehAudComponent = this->m_pVehAudComponent;
+        if ( m_pVehAudComponent->m_eDriverType == eDriverType_GhostRider )
         {
-          v3->m_engineStateMachine->m_event = eEVENT_NEUTRAL;
+          this->m_engineStateMachine->m_event = eEVENT_NEUTRAL;
           goto LABEL_75;
         }
-        v29 = v28->m_envModel;
-        if ( !v29 || (*(float *)&a3 = FLOAT_0_1, v29->m_burnoutAmount.m_currentValue <= 0.1) || v22 <= 2.8 )
+        m_envModel = m_pVehAudComponent->m_envModel;
+        if ( !m_envModel
+          || (Value = FLOAT_0_1, m_envModel->m_burnoutAmount.m_currentValue <= 0.1)
+          || m_targetValue <= 2.8 )
         {
-          if ( v25 && v22 > 0.5 )
+          if ( v25 && m_targetValue > 0.5 )
           {
-            if ( v42 == eDriverType_Player )
+            if ( m_eDriverType == eDriverType_Player )
             {
-              v3->m_engineStateMachine->m_event = 4;
+              this->m_engineStateMachine->m_event = eEVENT_BRAKE;
               goto LABEL_75;
             }
-            v30 = v3->m_engineStateMachine;
-            if ( v42 - 4 > 1 )
+            m_engineStateMachine = this->m_engineStateMachine;
+            if ( (unsigned int)(m_eDriverType - 4) > 1 )
             {
-              v30->m_event = eEVENT_DECEL;
+              m_engineStateMachine->m_event = eEVENT_DECEL;
               goto LABEL_75;
             }
             if ( v17 == -1.0 )
             {
-              v30->m_event = eEVENT_BRAKE;
+              m_engineStateMachine->m_event = eEVENT_BRAKE;
               goto LABEL_75;
             }
           }
           else
           {
-            if ( v17 > 0.0 && v22 >= 2.8 )
+            if ( v17 > 0.0 && m_targetValue >= 2.8 )
             {
-              v3->m_engineStateMachine->m_event = 3;
+              this->m_engineStateMachine->m_event = eEVENT_GAS;
               goto LABEL_75;
             }
-            if ( v22 < -10.0 )
+            if ( m_targetValue < -10.0 )
             {
-              v3->m_engineStateMachine->m_event = 6;
+              this->m_engineStateMachine->m_event = eEVENT_REVERSE;
               goto LABEL_75;
             }
-            *(float *)&a3 = FLOAT_5_0;
-            if ( v22 < 5.0 )
+            Value = FLOAT_5_0;
+            if ( m_targetValue < 5.0 )
             {
-              if ( !v13 || *(float *)(v13 + 68) < 1.0 )
-                v3->m_engineStateMachine->m_event = 9;
+              if ( !v13 || v13[17] < 1.0 )
+                this->m_engineStateMachine->m_event = eEVENT_IDLE;
               goto LABEL_75;
             }
-            v30 = v3->m_engineStateMachine;
+            m_engineStateMachine = this->m_engineStateMachine;
           }
-          v30->m_event = 5;
+          m_engineStateMachine->m_event = eEVENT_DECEL;
           goto LABEL_75;
         }
-        v3->m_engineStateMachine->m_event = 3;
+        this->m_engineStateMachine->m_event = eEVENT_GAS;
       }
     }
 LABEL_75:
     if ( delta_sec > 0.0 )
-      v6 = (float)(v22 - v3->m_prevSimSpeed) * (float)(1.0 / delta_sec);
-    v3->m_accelerationRlf.m_targetValue = v6;
-    v3->m_accelerationRlf.m_riseRate = 50.0;
-    v3->m_accelerationRlf.m_fallRate = 25.0;
-    v31 = v3->m_accelerationRlf.m_targetValue;
-    if ( v31 < v3->m_accelerationRlf.m_currentValue )
-      v32 = v3->m_accelerationRlf.m_fallRate;
+      v6 = (float)(m_targetValue - this->m_prevSimSpeed) * (float)(1.0 / delta_sec);
+    this->m_accelerationRlf.m_targetValue = v6;
+    this->m_accelerationRlf.m_riseRate = 50.0;
+    this->m_accelerationRlf.m_fallRate = 25.0;
+    v31 = this->m_accelerationRlf.m_targetValue;
+    if ( v31 < this->m_accelerationRlf.m_currentValue )
+      m_fallRate = this->m_accelerationRlf.m_fallRate;
     else
-      v32 = v3->m_accelerationRlf.m_riseRate;
-    UFG::qApproach(&v3->m_accelerationRlf.m_currentValue, v31, v32, v5);
-    v3->m_prevSimSpeed = v22;
+      m_fallRate = this->m_accelerationRlf.m_riseRate;
+    UFG::qApproach(&this->m_accelerationRlf.m_currentValue, v31, m_fallRate, delta_sec);
+    this->m_prevSimSpeed = m_targetValue;
   }
-  UFG::EngineStateMachine::Update(v3->m_engineStateMachine, v5, *(float *)&a3);
-  if ( (unsigned int)(v3->m_engineStateMachine->m_curState - 8) > 2
-    && v3->m_pVehAudComponent->m_eDriverType == eDriverType_Player
+  UFG::EngineStateMachine::Update(this->m_engineStateMachine, delta_sec, Value);
+  if ( (unsigned int)(this->m_engineStateMachine->m_curState - 8) > 2
+    && this->m_pVehAudComponent->m_eDriverType == eDriverType_Player
     && !UFG::gDebugPlayerCarsUseAiData )
   {
-    UFG::EngineModel2::UpdateGlobalCurves(v3, v5);
+    UFG::EngineModel2::UpdateGlobalCurves(this, delta_sec);
   }
-  v34 = v3->m_outputs;
-  v35 = (signed __int64)&v34[-1].m_outputsTree.mTree.mCount;
-  v36 = (int *)&v34->m_outputsList.mNode.mNext[-1].mNext;
-  if ( v36 != &v34[-1].m_outputsTree.mTree.mCount )
+  m_outputs = this->m_outputs;
+  p_mCount = &m_outputs[-1].m_outputsTree.mTree.mCount;
+  p_mNext = (int *)&m_outputs->m_outputsList.mNode.mNext[-1].mNext;
+  if ( p_mNext != &m_outputs[-1].m_outputsTree.mTree.mCount )
   {
     do
     {
-      (*(void (__fastcall **)(int *, __int64, UFG::EngineModel2 *))(*(_QWORD *)v36 + 8i64))(v36, v33, v3);
-      v36 = (int *)(*((_QWORD *)v36 + 2) - 8i64);
+      (*(void (__fastcall **)(int *, __int64, UFG::EngineModel2 *))(*(_QWORD *)p_mNext + 8i64))(p_mNext, v33, this);
+      p_mNext = (int *)(*((_QWORD *)p_mNext + 2) - 8i64);
     }
-    while ( v36 != (int *)v35 );
+    while ( p_mNext != p_mCount );
   }
   UFG::AudioEntity::SetRtpcValue(
-    (UFG::AudioEntity *)&v3->m_pVehAudComponent->vfptr,
+    &this->m_pVehAudComponent->UFG::AudioEntity,
     vehicle_speed.mUID,
-    v3->m_pVehAudComponent->m_rateLimitedSpeed.m_currentValue);
-  v37 = v3->m_pVehAudComponent;
-  if ( v37->m_eDriverType <= eDriverType_PlayerPassenger )
+    this->m_pVehAudComponent->m_rateLimitedSpeed.m_currentValue);
+  v37 = this->m_pVehAudComponent;
+  if ( v37->m_eDriverType <= (unsigned int)eDriverType_PlayerPassenger )
   {
-    v38 = v37->m_rateLimitedSpeed.m_currentValue;
-    v39 = UFG::TiDo::GetInstance();
-    UFG::TiDo::SetWwiseRtpcValue(v39, vehicle_speed.mUID, v38, 0xFFFFFFFFFFFFFFFFui64);
+    m_currentValue = v37->m_rateLimitedSpeed.m_currentValue;
+    Instance = UFG::TiDo::GetInstance();
+    UFG::TiDo::SetWwiseRtpcValue(Instance, vehicle_speed.mUID, m_currentValue, 0xFFFFFFFFFFFFFFFFui64);
   }
-  if ( !v3->m_ecEngine.m_pEvent && v3->m_engineStateMachine->m_curState )
+  if ( !this->m_ecEngine.m_pEvent && this->m_engineStateMachine->m_curState )
   {
-    v40 = v3->m_pVehAudComponent;
+    v40 = this->m_pVehAudComponent;
     v41 = v40->m_eDriverType;
     if ( v41 <= 1 || (UFG::VehicleAudioComponent::HasDriver(v40) || v40->m_bOverrideDriverType) && v41 - 3 <= 2 )
       UFG::VehicleAudioComponent::PlayVehicleEvent(
-        v3->m_pVehAudComponent,
-        (UFG::qSymbol *)&UFG::VehAudPropSym_engine_loop.mUID,
-        &v3->m_ecEngine,
+        this->m_pVehAudComponent,
+        (UFG::qArray<unsigned long,0> *)&UFG::VehAudPropSym_engine_loop,
+        &this->m_ecEngine,
         0);
   }
-  UFG::EngineModel2::UpdateTurbo(v3, v5);
-  UFG::EngineModel2::UpdateMixStates(v3, v5);
+  UFG::EngineModel2::UpdateTurbo(this, delta_sec);
+  UFG::EngineModel2::UpdateMixStates(this, delta_sec);
 }
 
 // File Line: 3135
 // RVA: 0x6983B0
 void __fastcall UFG::EngineModel2::UpdateMixStates(UFG::EngineModel2 *this, float delta_sec)
 {
-  UFG::EngineModel2 *v2; // rdi
-  UFG::EngineModelInputs *v3; // rcx
+  UFG::EngineModelInputs *m_inputs; // rcx
   UFG::qBaseTreeRB *v4; // rax
-  signed __int64 v5; // rsi
-  UFG::VehicleAudioComponent *v6; // rax
-  UFG::EnvironmentalModel *v7; // rbp
-  UFG::SimObjectCVBase *v8; // rcx
+  float *v5; // rsi
+  UFG::VehicleAudioComponent *m_pVehAudComponent; // rax
+  UFG::EnvironmentalModel *m_envModel; // rbp
+  UFG::SimObjectCVBase *m_pSimObject; // rcx
   UFG::HumanDriverComponent *v9; // rax
-  char v10; // bl
-  UFG::CruiseControl *v11; // rcx
-  UFG::TiDo *v12; // rax
+  bool mIsActive; // bl
+  UFG::CruiseControl *mCruiseControl; // rcx
+  UFG::TiDo *Instance; // rax
   unsigned int v13; // eax
   UFG::TiDo *v14; // rax
   UFG::TiDo *v15; // rax
   UFG::TiDo *v16; // rax
   UFG::TiDo *v17; // rax
   UFG::TiDo *v18; // rax
-  unsigned int state; // [rsp+70h] [rbp+8h]
+  unsigned int state; // [rsp+70h] [rbp+8h] BYREF
 
-  v2 = this;
   if ( this->m_pVehAudComponent->m_eDriverType )
     return;
-  v3 = this->m_inputs;
+  m_inputs = this->m_inputs;
   if ( EngineModelSym_wheels_in_air.mUID )
-    UFG::qBaseTreeRB::Get(&v3->m_inputsTree.mTree, EngineModelSym_wheels_in_air.mUID);
+    UFG::qBaseTreeRB::Get(&m_inputs->m_inputsTree.mTree, EngineModelSym_wheels_in_air.mUID);
   if ( EngineModelSym_ramming.mUID
-    && (v4 = UFG::qBaseTreeRB::Get(&v2->m_inputs->m_inputsTree.mTree, EngineModelSym_ramming.mUID)) != 0i64 )
+    && (v4 = UFG::qBaseTreeRB::Get(&this->m_inputs->m_inputsTree.mTree, EngineModelSym_ramming.mUID)) != 0i64 )
   {
-    v5 = (signed __int64)&v4[-1].mNULL.mChild[1];
+    v5 = (float *)&v4[-1].mNULL.mChild[1];
   }
   else
   {
     v5 = 0i64;
   }
-  v6 = v2->m_pVehAudComponent;
-  v7 = v6->m_envModel;
-  v8 = (UFG::SimObjectCVBase *)v6->m_pSimObject;
-  if ( v8 )
-    v9 = UFG::SimObjectCVBase::GetComponent<UFG::HumanDriverComponent>(v8);
+  m_pVehAudComponent = this->m_pVehAudComponent;
+  m_envModel = m_pVehAudComponent->m_envModel;
+  m_pSimObject = (UFG::SimObjectCVBase *)m_pVehAudComponent->m_pSimObject;
+  if ( m_pSimObject )
+    v9 = UFG::SimObjectCVBase::GetComponent<UFG::HumanDriverComponent>(m_pSimObject);
   else
     v9 = 0i64;
-  v10 = 0;
+  mIsActive = 0;
   if ( v9 )
   {
-    v11 = v9->mCruiseControl;
-    if ( v11 )
-    {
-      v10 = 0;
-      if ( v11->mIsActive )
-        v10 = 1;
-    }
+    mCruiseControl = v9->mCruiseControl;
+    if ( mCruiseControl )
+      mIsActive = mCruiseControl->mIsActive;
   }
-  v12 = UFG::TiDo::GetInstance();
-  UFG::TiDo::Debug_GetWwiseState(v12, ms_vehicle.mUID, &state);
-  if ( !v5 || *(float *)(v5 + 68) <= 0.0 )
-    goto LABEL_21;
+  Instance = UFG::TiDo::GetInstance();
+  UFG::TiDo::Debug_GetWwiseState(Instance, ms_vehicle.mUID, &state);
+  if ( !v5 || v5[17] <= 0.0 )
+    goto LABEL_20;
   v13 = state;
   if ( state != in_vehicle_ramming.mUID )
   {
-    if ( !(_S14_5 & 1) )
+    if ( (_S14_5 & 1) == 0 )
     {
       _S14_5 |= 1u;
       play_veh_ram_skid = UFG::TiDo::CalcWwiseUid("play_veh_ram_skid");
     }
     v14 = UFG::TiDo::GetInstance();
     UFG::AudioEntity::SetWwiseState(v14, ms_vehicle.mUID, in_vehicle_ramming.mUID);
-    UFG::AudioEntity::CreateAndPlayEvent(
-      (UFG::AudioEntity *)&v2->m_pVehAudComponent->vfptr,
-      play_veh_ram_skid,
-      0i64,
-      0,
-      0i64);
-LABEL_21:
+    UFG::AudioEntity::CreateAndPlayEvent(&this->m_pVehAudComponent->UFG::AudioEntity, play_veh_ram_skid, 0i64, 0, 0i64);
+LABEL_20:
     v13 = state;
   }
-  if ( v7 )
+  if ( m_envModel )
   {
-    if ( v7->m_hangTime > 0.1
+    if ( m_envModel->m_hangTime > 0.1
       && v13 != in_vehicle_focus.mUID
       && v13 != in_vehicle_in_air.mUID
       && v13 != in_vehicle_big_air.mUID )
@@ -5552,23 +5502,23 @@ LABEL_21:
       UFG::AudioEntity::SetWwiseState(v15, ms_vehicle.mUID, in_vehicle_in_air.mUID);
       v13 = state;
     }
-    if ( 0.0 == v7->m_hangTime && v13 == in_vehicle_big_air.mUID )
+    if ( m_envModel->m_hangTime == 0.0 && v13 == in_vehicle_big_air.mUID )
     {
       v16 = UFG::TiDo::GetInstance();
       UFG::AudioEntity::SetWwiseState(v16, ms_vehicle.mUID, in_vehicle.mUID);
       v13 = state;
     }
   }
-  if ( v10 )
+  if ( mIsActive )
   {
     v17 = UFG::TiDo::GetInstance();
     UFG::AudioEntity::SetWwiseState(v17, ms_vehicle.mUID, in_vehicle_focus.mUID);
     v13 = state;
   }
-  if ( v7
-    && v7->m_hangTime < 0.1
-    && 0.0 == *(float *)(v5 + 68)
-    && !v10
+  if ( m_envModel
+    && m_envModel->m_hangTime < 0.1
+    && v5[17] == 0.0
+    && !mIsActive
     && v13 != in_vehicle.mUID
     && v13 != in_vehicle_big_air.mUID )
   {
@@ -5581,58 +5531,56 @@ LABEL_21:
 // RVA: 0x69B4A0
 void __fastcall UFG::EngineModel2::UpdateTurbo(UFG::EngineModel2 *this, float delta_sec)
 {
-  UFG::EngineModel2 *v2; // rbx
-  UFG::qPropertySet *v3; // rdi
-  char *v4; // rax
+  UFG::qPropertySet *mpPropertySet; // rdi
+  char *MemImagePtr; // rax
   float v5; // xmm0_4
   float v6; // xmm7_4
   float v7; // xmm6_4
   UFG::qBaseTreeRB *v8; // rax
-  signed __int64 v9; // rax
+  float *v9; // rax
   float v10; // xmm6_4
   UFG::qPropertySet *v11; // rdi
   char *v12; // rax
   float v13; // xmm0_4
 
-  v2 = this;
-  v3 = this->m_pVehAudComponent->m_pSubTypeParameters->mpPropertySet;
-  if ( Vehicles_Audio_Base_BaseVehicleBase::IsClass(v3->mSchemaName.mUID) )
-    v4 = UFG::qPropertySet::GetMemImagePtr(v3);
+  mpPropertySet = this->m_pVehAudComponent->m_pSubTypeParameters->mpPropertySet;
+  if ( Vehicles_Audio_Base_BaseVehicleBase::IsClass(mpPropertySet->mSchemaName.mUID) )
+    MemImagePtr = UFG::qPropertySet::GetMemImagePtr(mpPropertySet);
   else
-    v4 = 0i64;
-  v5 = *((float *)v4 + 36);
+    MemImagePtr = 0i64;
+  v5 = *((float *)MemImagePtr + 36);
   if ( v5 <= 0.000099999997 )
     v5 = FLOAT_0_000099999997;
   v6 = *(float *)&FLOAT_1_0;
   v7 = 1.0 / v5;
   if ( EngineModelSym_load.mUID
-    && (v8 = UFG::qBaseTreeRB::Get(&v2->m_outputs->m_outputsTree.mTree, EngineModelSym_load.mUID)) != 0i64 )
+    && (v8 = UFG::qBaseTreeRB::Get(&this->m_outputs->m_outputsTree.mTree, EngineModelSym_load.mUID)) != 0i64 )
   {
-    v9 = (signed __int64)&v8[-1].mNULL.mChild[1];
+    v9 = (float *)&v8[-1].mNULL.mChild[1];
   }
   else
   {
     v9 = 0i64;
   }
-  if ( *(float *)(v9 + 60) <= 0.0 )
+  if ( v9[15] <= 0.0 )
   {
-    if ( v2->m_turboChargeAccum >= 0.99000001 )
+    if ( this->m_turboChargeAccum >= 0.99000001 )
     {
-      v11 = v2->m_pVehAudComponent->m_pSubTypeParameters->mpPropertySet;
+      v11 = this->m_pVehAudComponent->m_pSubTypeParameters->mpPropertySet;
       if ( Vehicles_Audio_Base_BaseVehicleBase::IsClass(v11->mSchemaName.mUID) )
         v12 = UFG::qPropertySet::GetMemImagePtr(v11);
       else
         v12 = 0i64;
       UFG::AudioEntity::CreateAndPlayEvent(
-        (UFG::AudioEntity *)&v2->m_pVehAudComponent->vfptr,
+        &this->m_pVehAudComponent->UFG::AudioEntity,
         *((_DWORD *)v12 + 37),
         0i64,
         0,
         0i64);
-      v2->m_turboChargeAccum = 0.0;
+      this->m_turboChargeAccum = 0.0;
     }
-    v13 = v2->m_turboChargeAccum - (float)(v7 * delta_sec);
-    v2->m_turboChargeAccum = v13;
+    v13 = this->m_turboChargeAccum - (float)(v7 * delta_sec);
+    this->m_turboChargeAccum = v13;
     if ( v13 <= 0.0 )
     {
       v13 = 0.0;
@@ -5645,8 +5593,8 @@ void __fastcall UFG::EngineModel2::UpdateTurbo(UFG::EngineModel2 *this, float de
   }
   else
   {
-    v10 = (float)(v7 * delta_sec) + v2->m_turboChargeAccum;
-    v2->m_turboChargeAccum = v10;
+    v10 = (float)(v7 * delta_sec) + this->m_turboChargeAccum;
+    this->m_turboChargeAccum = v10;
     if ( v10 <= 0.0 )
     {
       v10 = 0.0;
@@ -5658,93 +5606,91 @@ void __fastcall UFG::EngineModel2::UpdateTurbo(UFG::EngineModel2 *this, float de
     v6 = v10;
   }
 LABEL_26:
-  v2->m_turboChargeAccum = v6;
+  this->m_turboChargeAccum = v6;
 }
 
 // File Line: 3247
 // RVA: 0x696EF0
 void __fastcall UFG::EngineModel2::UpdateGlobalCurves(UFG::EngineModel2 *this, float delta_sec)
 {
-  UFG::EngineModel2 *v2; // rbx
-  UFG::AudioCurveSet *v3; // rax
+  UFG::AudioCurveSet *NamedCurveSet; // rax
   UFG::AudioCurveSet *v4; // rax
 
-  v2 = this;
-  v3 = UFG::EngineCurve::FindNamedCurveSet(
-         this->m_pVehAudComponent->m_pSubTypeParameters->m_parentEngineCurve,
-         (UFG::qSymbol *)&EngineModelSym_Global.mUID);
-  if ( v3 )
-    UFG::EngineModel2::EvaluateCurveSet(v2, v3);
+  NamedCurveSet = UFG::EngineCurve::FindNamedCurveSet(
+                    this->m_pVehAudComponent->m_pSubTypeParameters->m_parentEngineCurve,
+                    &EngineModelSym_Global);
+  if ( NamedCurveSet )
+    UFG::EngineModel2::EvaluateCurveSet(this, NamedCurveSet);
   v4 = UFG::EngineCurve::FindNamedCurveSet(
-         v2->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve,
-         (UFG::qSymbol *)&EngineModelSym_Global.mUID);
+         this->m_pVehAudComponent->m_pSubTypeParameters->m_engineCurve,
+         &EngineModelSym_Global);
   if ( v4 )
-    UFG::EngineModel2::EvaluateCurveSet(v2, v4);
+    UFG::EngineModel2::EvaluateCurveSet(this, v4);
 }
 
 // File Line: 3266
 // RVA: 0x6872C0
-void __fastcall UFG::EngineModel2::PlayCurveTriggeredSounds(UFG::EngineModel2 *this, UFG::AudioCurve *ac, UFG::EngineModelInput *input)
+void __fastcall UFG::EngineModel2::PlayCurveTriggeredSounds(
+        UFG::EngineModel2 *this,
+        UFG::AudioCurve *ac,
+        UFG::EngineModelInput *input)
 {
-  UFG::EngineModelInput *v3; // r15
-  UFG::AudioCurve *v4; // rbp
-  UFG::EngineModel2 *v5; // r13
-  UFG::qArray<UFG::AudioCurve::PointProperties,0> *v6; // r14
-  unsigned int v7; // edi
-  int v8; // esi
+  UFG::qArray<UFG::AudioCurve::PointProperties,0> *mPointProperties; // r14
+  unsigned int size; // edi
+  int DomainBracket; // esi
   int v9; // eax
   unsigned int v10; // edx
-  UFG::AudioCurve::PointProperties *v11; // r8
-  signed __int64 v12; // rdi
-  unsigned int v13; // ebx
-  UFG::VehicleAudioComponent *v14; // rdi
-  unsigned int v15; // esi
+  UFG::AudioCurve::PointProperties *p; // r8
+  __int64 v12; // rdi
+  unsigned int mUID; // ebx
+  UFG::VehicleAudioComponent *m_pVehAudComponent; // rdi
+  unsigned int traffic_fadeout_time_ms; // esi
   UFG::qWiseSymbol *v16; // rax
   unsigned int v17; // edx
   UFG::qWiseSymbol *v18; // rax
-  UFG::qSymbol name; // [rsp+78h] [rbp+10h]
+  UFG::qArray<unsigned long,0> name; // [rsp+78h] [rbp+10h] BYREF
   unsigned int v20; // [rsp+88h] [rbp+20h]
 
-  v3 = input;
-  v4 = ac;
-  v5 = this;
-  v6 = ac->mPointProperties;
-  if ( v6 )
+  mPointProperties = ac->mPointProperties;
+  if ( mPointProperties )
   {
-    v7 = v6->size;
-    if ( v6->size )
+    size = mPointProperties->size;
+    if ( mPointProperties->size )
     {
-      v8 = UFG::LinearGraph<float>::FindDomainBracket(
-             (UFG::LinearGraph<UFG::qVector3> *)&ac->m_graphCurve,
-             input->m_value);
+      DomainBracket = UFG::LinearGraph<float>::FindDomainBracket(
+                        (UFG::LinearGraph<UFG::qVector3> *)&ac->m_graphCurve,
+                        input->m_value);
       v9 = UFG::LinearGraph<float>::FindDomainBracket(
-             (UFG::LinearGraph<UFG::qVector3> *)&v4->m_graphCurve,
-             v3->m_prevValue);
-      if ( v8 != v9 )
+             (UFG::LinearGraph<UFG::qVector3> *)&ac->m_graphCurve,
+             input->m_prevValue);
+      if ( DomainBracket != v9 )
       {
-        if ( v8 > v9 )
-          v8 = v9;
+        if ( DomainBracket > v9 )
+          DomainBracket = v9;
         v10 = 0;
-        if ( v7 )
+        if ( size )
         {
-          v11 = v6->p;
-          while ( v11[v10].mPointIndex != v8 )
+          p = mPointProperties->p;
+          while ( p[v10].mPointIndex != DomainBracket )
           {
-            if ( ++v10 >= v7 )
+            if ( ++v10 >= size )
               return;
           }
           v12 = v10;
-          v13 = v11[v10].mEvent.mUID;
-          v20 = v13;
-          _((AMD_HD3D *)v13);
-          name.mUID = v4->mPointProperties->p[v12].mVehicleEvent.mUID;
-          if ( name.mUID != -1 )
+          mUID = p[v10].mEvent.mUID;
+          v20 = mUID;
+          _((AMD_HD3D *)mUID);
+          name.size = ac->mPointProperties->p[v12].mVehicleEvent.mUID;
+          if ( name.size != -1 )
           {
-            v14 = v5->m_pVehAudComponent;
-            v15 = 0;
-            if ( v14->m_eDriverType )
-              v15 = UFG::VehicleAudioComponent::sm_configPs->traffic_fadeout_time_ms;
-            v16 = UFG::qPropertySet::Get<UFG::qWiseSymbol>(v14->m_pEnginePropertySet, &name, DEPTH_RECURSE);
+            m_pVehAudComponent = this->m_pVehAudComponent;
+            traffic_fadeout_time_ms = 0;
+            if ( m_pVehAudComponent->m_eDriverType )
+              traffic_fadeout_time_ms = UFG::VehicleAudioComponent::sm_configPs->traffic_fadeout_time_ms;
+            v16 = UFG::qPropertySet::Get<UFG::qWiseSymbol>(
+                    m_pVehAudComponent->m_pEnginePropertySet,
+                    &name,
+                    DEPTH_RECURSE);
             if ( v16 )
             {
               v17 = v16->mUID;
@@ -5752,7 +5698,7 @@ void __fastcall UFG::EngineModel2::PlayCurveTriggeredSounds(UFG::EngineModel2 *t
             else
             {
               v18 = UFG::qPropertySet::Get<UFG::qWiseSymbol>(
-                      v14->m_pSubTypeParameters->mpPropertySet,
+                      m_pVehAudComponent->m_pSubTypeParameters->mpPropertySet,
                       &name,
                       DEPTH_RECURSE);
               if ( v18 )
@@ -5760,11 +5706,16 @@ void __fastcall UFG::EngineModel2::PlayCurveTriggeredSounds(UFG::EngineModel2 *t
               else
                 v17 = 0;
             }
-            UFG::AudioEntity::CreateAndPlayEvent((UFG::AudioEntity *)&v14->vfptr, v17, 0i64, v15, 0i64);
+            UFG::AudioEntity::CreateAndPlayEvent(
+              &m_pVehAudComponent->UFG::AudioEntity,
+              v17,
+              0i64,
+              traffic_fadeout_time_ms,
+              0i64);
           }
-          if ( v13 )
-            UFG::AudioEntity::CreateAndPlayEvent((UFG::AudioEntity *)&v5->m_pVehAudComponent->vfptr, v13, 0i64, 0, 0i64);
-          _((AMD_HD3D *)v13);
+          if ( mUID )
+            UFG::AudioEntity::CreateAndPlayEvent(&this->m_pVehAudComponent->UFG::AudioEntity, mUID, 0i64, 0, 0i64);
+          _((AMD_HD3D *)mUID);
         }
       }
     }
@@ -5776,154 +5727,142 @@ void __fastcall UFG::EngineModel2::PlayCurveTriggeredSounds(UFG::EngineModel2 *t
 void __fastcall UFG::EngineModel2::EvaluateCurveSet(UFG::EngineModel2 *this, UFG::AudioCurveSet *acs)
 {
   UFG::EngineModel2 *v2; // rbx
-  UFG::EngineModelInputs *v3; // rcx
+  UFG::EngineModelInputs *m_inputs; // rcx
   unsigned int v4; // ebp
-  unsigned int v5; // edx
+  unsigned int mUID; // edx
   UFG::qBaseTreeRB *v6; // rax
   UFG::qBaseTreeRB *v7; // rax
   unsigned int v8; // eax
   UFG::AudioCurveSet *i; // rdx
-  __int64 v10; // rcx
-  UFG::AudioCurve **v11; // rax
-  UFG::AudioCurve *v12; // rsi
-  UFG::allocator::free_link *v13; // rax
-  UFG::AudioCurveSymbolManager *v14; // rbx
-  UFG::qSymbol *v15; // rcx
-  signed __int64 v16; // rdx
-  unsigned int v17; // ebx
-  unsigned int v18; // edi
-  unsigned int v19; // esi
-  UFG::qBaseTreeRB *v20; // rax
-  UFG::qBaseTreeRB *v21; // rax
-  UFG::EngineModelBlendModes *v22; // rax
-  UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> **v23; // rbx
-  signed __int64 v24; // rdi
-  float v25; // xmm0_4
-  __int128 v26; // xmm2
-  signed __int64 v27; // [rsp+30h] [rbp-68h]
-  signed __int64 v28; // [rsp+38h] [rbp-60h]
-  signed __int64 v29; // [rsp+40h] [rbp-58h]
+  UFG::AudioCurve *v10; // rsi
+  UFG::allocator::free_link *v11; // rax
+  UFG::AudioCurveSymbolManager *v12; // rbx
+  UFG::qSymbol *v13; // rcx
+  __int64 v14; // rdx
+  unsigned int v15; // ebx
+  unsigned int v16; // edi
+  unsigned int v17; // esi
+  UFG::qBaseTreeRB *v18; // rax
+  UFG::qBaseTreeRB *v19; // rax
+  UFG::EngineModelBlendModes *m_blendModes; // rax
+  UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> **p_mNext; // rbx
+  UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> **v22; // rdi
+  float *v23; // [rsp+30h] [rbp-68h]
+  UFG::qBaseNodeRB **v24; // [rsp+38h] [rbp-60h]
+  UFG::qBaseNodeRB **v25; // [rsp+40h] [rbp-58h]
   UFG::AudioCurve *ac; // [rsp+48h] [rbp-50h]
-  UFG::EngineModel2 *v31; // [rsp+A0h] [rbp+8h]
-  UFG::AudioCurveSet *v32; // [rsp+A8h] [rbp+10h]
-  unsigned int v33; // [rsp+B0h] [rbp+18h]
+  unsigned int v29; // [rsp+B0h] [rbp+18h]
   UFG::EngineModelInput *input; // [rsp+B8h] [rbp+20h]
 
-  v32 = acs;
-  v31 = this;
   v2 = this;
-  v3 = this->m_inputs;
+  m_inputs = this->m_inputs;
   v4 = 0;
-  v5 = EngineModelSym_tmp_a.mUID;
+  mUID = EngineModelSym_tmp_a.mUID;
   if ( EngineModelSym_tmp_a.mUID
-    && (v6 = UFG::qBaseTreeRB::Get(&v3->m_inputsTree.mTree, EngineModelSym_tmp_a.mUID),
-        v5 = EngineModelSym_tmp_a.mUID,
+    && (v6 = UFG::qBaseTreeRB::Get(&m_inputs->m_inputsTree.mTree, EngineModelSym_tmp_a.mUID),
+        mUID = EngineModelSym_tmp_a.mUID,
         v6) )
   {
-    v29 = (signed __int64)&v6[-1].mNULL.mChild[1];
+    v25 = &v6[-1].mNULL.mChild[1];
   }
   else
   {
-    v29 = 0i64;
+    v25 = 0i64;
   }
-  if ( v5 && (v7 = UFG::qBaseTreeRB::Get(&v2->m_outputs->m_outputsTree.mTree, v5)) != 0i64 )
-    v28 = (signed __int64)&v7[-1].mNULL.mChild[1];
+  if ( mUID && (v7 = UFG::qBaseTreeRB::Get(&v2->m_outputs->m_outputsTree.mTree, mUID)) != 0i64 )
+    v24 = &v7[-1].mNULL.mChild[1];
   else
-    v28 = 0i64;
+    v24 = 0i64;
   v8 = 0;
-  v33 = 0;
-  for ( i = v32; v8 < v32->m_curves.size; i = v32 )
+  v29 = 0;
+  for ( i = acs; v8 < acs->m_curves.size; i = acs )
   {
-    v10 = v8;
-    v11 = i->m_curves.p;
-    v12 = v11[v10];
-    ac = v11[v10];
+    v10 = i->m_curves.p[v8];
+    ac = v10;
     if ( !UFG::AudioCurveSymbolManager::ms_instance )
     {
-      v13 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x400ui64, "AudioCurveSymbolManager", 0i64, 1u);
-      v14 = (UFG::AudioCurveSymbolManager *)v13;
-      if ( v13 )
+      v11 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x400ui64, "AudioCurveSymbolManager", 0i64, 1u);
+      v12 = (UFG::AudioCurveSymbolManager *)v11;
+      if ( v11 )
       {
-        `eh vector constructor iterator(v13, 4ui64, 255, (void (__fastcall *)(void *))BackInfo::BackInfo);
-        v14->m_numSymbols = 1;
-        v15 = (UFG::qSymbol *)v14;
-        v16 = 254i64;
+        `eh vector constructor iterator(v11, 4ui64, 255, (void (__fastcall *)(void *))BackInfo::BackInfo);
+        v12->m_numSymbols = 1;
+        v13 = (UFG::qSymbol *)v12;
+        v14 = 254i64;
         do
         {
-          v15->mUID = UFG::gNullQSymbol.mUID;
-          ++v15;
-          --v16;
+          v13->mUID = UFG::gNullQSymbol.mUID;
+          ++v13;
+          --v14;
         }
-        while ( v16 );
+        while ( v14 );
       }
       else
       {
-        v14 = 0i64;
+        v12 = 0i64;
       }
-      UFG::AudioCurveSymbolManager::ms_instance = v14;
-      v2 = v31;
+      UFG::AudioCurveSymbolManager::ms_instance = v12;
+      v2 = this;
     }
-    if ( UFG::AudioCurveSymbolManager::ms_instance->m_symbols[v12->mId].mUID == EngineModelSym_type_generic.mUID
-      && v12->mPlayLength >= 0.0 )
+    if ( UFG::AudioCurveSymbolManager::ms_instance->m_symbols[v10->mId].mUID == EngineModelSym_type_generic.mUID
+      && v10->mPlayLength >= 0.0 )
     {
-      v17 = UFG::AudioCurve::GetSourceValueSymbol(v12)->mUID;
-      v18 = UFG::AudioCurve::GetTargetValueSymbol(v12)->mUID;
-      v19 = UFG::AudioCurve::GetBlendModeSymbol(v12)->mUID;
-      if ( v17 == UFG::gNullQSymbol.mUID || v18 == UFG::gNullQSymbol.mUID || v19 == UFG::gNullQSymbol.mUID )
-        goto LABEL_45;
-      if ( v17 && (v20 = UFG::qBaseTreeRB::Get(&v31->m_inputs->m_inputsTree.mTree, v17)) != 0i64 )
-        input = (UFG::EngineModelInput *)&v20[-1].mNULL.mChild[1];
+      v15 = UFG::AudioCurve::GetSourceValueSymbol(v10)->mUID;
+      v16 = UFG::AudioCurve::GetTargetValueSymbol(v10)->mUID;
+      v17 = UFG::AudioCurve::GetBlendModeSymbol(v10)->mUID;
+      if ( v15 == UFG::gNullQSymbol.mUID || v16 == UFG::gNullQSymbol.mUID || v17 == UFG::gNullQSymbol.mUID )
+        goto LABEL_39;
+      if ( v15 && (v18 = UFG::qBaseTreeRB::Get(&this->m_inputs->m_inputsTree.mTree, v15)) != 0i64 )
+        input = (UFG::EngineModelInput *)&v18[-1].mNULL.mChild[1];
       else
         input = 0i64;
-      if ( v18 && (v21 = UFG::qBaseTreeRB::Get(&v31->m_outputs->m_outputsTree.mTree, v18)) != 0i64 )
-        v27 = (signed __int64)&v21[-1].mNULL.mChild[1];
+      if ( v16 && (v19 = UFG::qBaseTreeRB::Get(&this->m_outputs->m_outputsTree.mTree, v16)) != 0i64 )
+        v23 = (float *)&v19[-1].mNULL.mChild[1];
       else
-        v27 = 0i64;
-      v22 = v31->m_blendModes;
-      v23 = &v22->m_modes.mNode.mNext[-1].mNext;
-      v24 = (signed __int64)&v22[-1].m_modes.mNode.mNext;
-      if ( v23 == &v22[-1].m_modes.mNode.mNext )
+        v23 = 0i64;
+      m_blendModes = this->m_blendModes;
+      p_mNext = &m_blendModes->m_modes.mNode.mNext[-1].mNext;
+      v22 = &m_blendModes[-1].m_modes.mNode.mNext;
+      if ( p_mNext == &m_blendModes[-1].m_modes.mNode.mNext )
       {
 LABEL_33:
-        v23 = 0i64;
+        p_mNext = 0i64;
       }
       else
       {
-        while ( *(_DWORD *)((__int64 (__fastcall *)(UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> **))(*v23)->mPrev)(v23) != v19 )
+        while ( *(_DWORD *)((__int64 (__fastcall *)(UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> **))(*p_mNext)->mPrev)(p_mNext) != v17 )
         {
-          v23 = &v23[2][-1].mNext;
-          if ( v23 == (UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> **)v24 )
+          p_mNext = &p_mNext[2][-1].mNext;
+          if ( p_mNext == v22 )
             goto LABEL_33;
         }
       }
-      if ( input && v27 && v23 )
+      if ( !input || !v23 || !p_mNext )
       {
-        UFG::EngineModel2::PlayCurveTriggeredSounds(v31, ac, input);
-        v25 = UFG::LinearGraph<float>::GetValue(&ac->m_graphCurve, input->m_value);
-        v26 = *(unsigned int *)(v27 + 60);
-        ((void (__fastcall *)(UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> **))(*v23)->mNext)(v23);
-        *(float *)(v27 + 60) = v25;
-        v2 = v31;
-        if ( v27 == v28 )
-          (*(void (__fastcall **)(signed __int64, UFG::EngineModel2 *))(*(_QWORD *)v29 + 8i64))(v29, v31);
+LABEL_39:
+        v2 = this;
       }
       else
       {
-LABEL_45:
-        v2 = v31;
+        UFG::EngineModel2::PlayCurveTriggeredSounds(this, ac, input);
+        UFG::LinearGraph<float>::GetValue(&ac->m_graphCurve, input->m_value);
+        v23[15] = ((float (__fastcall *)(UFG::qNode<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode> **))(*p_mNext)->mNext)(p_mNext);
+        v2 = this;
+        if ( v23 == (float *)v24 )
+          ((void (__fastcall *)(UFG::qBaseNodeRB **, UFG::EngineModel2 *))(*v25)->mChild[0])(v25, this);
       }
     }
-    v8 = v33 + 1;
-    v33 = v8;
+    v8 = v29 + 1;
+    v29 = v8;
   }
   if ( i->m_childCurveSets.size )
   {
     do
     {
       UFG::EngineModel2::EvaluateCurveSet(v2, i->m_childCurveSets.p[v4++]);
-      i = v32;
+      i = acs;
     }
-    while ( v4 < v32->m_childCurveSets.size );
+    while ( v4 < acs->m_childCurveSets.size );
   }
 }
 

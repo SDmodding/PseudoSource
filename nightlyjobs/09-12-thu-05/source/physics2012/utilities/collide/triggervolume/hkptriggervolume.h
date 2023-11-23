@@ -4,7 +4,7 @@ __int64 dynamic_initializer_for__HK_TRIGGER_VOLUME_DEBUG_COLOR__()
 {
   __int64 result; // rax
 
-  result = hkColor::rgbFromChars(255, 255, 255, 112);
+  result = hkColor::rgbFromChars(0xFFu, 0xFFu, 0xFFu, 0x70u);
   HK_TRIGGER_VOLUME_DEBUG_COLOR = result;
   return result;
 }

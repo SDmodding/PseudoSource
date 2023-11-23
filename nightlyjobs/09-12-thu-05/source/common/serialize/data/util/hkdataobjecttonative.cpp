@@ -2,68 +2,62 @@
 // RVA: 0xE60720
 hkClass *__fastcall hkDataObjectToNative::findClassOf(hkDataObjectToNative *this, hkDataObject *obj)
 {
-  hkDataObjectToNative *v2; // rbx
   __int64 v3; // rax
   __int64 v4; // rax
 
-  v2 = this;
-  v3 = ((__int64 (*)(void))obj->m_impl->vfptr[2].__vecDelDtor)();
+  v3 = ((__int64 (__fastcall *)(hkDataObjectImpl *))obj->m_impl->vfptr[2].__vecDelDtor)(obj->m_impl);
   v4 = (*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v3 + 16i64))(v3);
-  return (hkClass *)v2->m_classReg->vfptr[2].__vecDelDtor((hkBaseObject *)&v2->m_classReg->vfptr, v4);
+  return (hkClass *)this->m_classReg->vfptr[2].__vecDelDtor(this->m_classReg, v4);
 }
 
 // File Line: 59
 // RVA: 0xE5FC90
-hkVariant *__fastcall hkDataObjectToNative::allocateObject(hkDataObjectToNative *this, hkVariant *result, hkDataObject *obj, hkDataObjectToNative::CopyInfoOut *infoOut)
+hkVariant *__fastcall hkDataObjectToNative::allocateObject(
+        hkDataObjectToNative *this,
+        hkVariant *result,
+        hkDataObject *obj,
+        hkDataObjectToNative::CopyInfoOut *infoOut)
 {
-  hkDataObjectToNative *v4; // rsi
-  hkDataObjectToNative::CopyInfoOut *v5; // r15
-  hkDataObject *v6; // rdi
-  hkVariant *v7; // rbx
   __int64 v8; // rax
   __int64 v9; // rax
   __int64 v10; // rax
   hkClass *v11; // rsi
   __int64 v12; // rax
-  int v13; // er14
-  unsigned int v14; // er14
-  _QWORD **v15; // rax
+  int ObjectSize; // r14d
+  unsigned int v14; // r14d
+  _QWORD **Value; // rax
   void *v16; // rbp
-  signed __int64 v17; // rcx
+  hkDataObjectToNative::Alloc *v17; // rcx
 
-  v4 = this;
-  v5 = infoOut;
-  v6 = obj;
-  v7 = result;
   if ( ((__int64 (*)(void))obj->m_impl->vfptr[2].__vecDelDtor)()
-    && (v8 = ((__int64 (*)(void))v6->m_impl->vfptr[2].__vecDelDtor)(),
+    && (v8 = ((__int64 (__fastcall *)(hkDataObjectImpl *))obj->m_impl->vfptr[2].__vecDelDtor)(obj->m_impl),
         (*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v8 + 16i64))(v8))
-    && (v9 = ((__int64 (*)(void))v6->m_impl->vfptr[2].__vecDelDtor)(),
+    && (v9 = ((__int64 (__fastcall *)(hkDataObjectImpl *))obj->m_impl->vfptr[2].__vecDelDtor)(obj->m_impl),
         v10 = (*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v9 + 16i64))(v9),
-        (v11 = (hkClass *)v4->m_classReg->vfptr[2].__vecDelDtor((hkBaseObject *)&v4->m_classReg->vfptr, v10)) != 0i64) )
+        (v11 = (hkClass *)this->m_classReg->vfptr[2].__vecDelDtor(this->m_classReg, v10)) != 0i64) )
   {
-    v12 = ((__int64 (*)(void))v6->m_impl->vfptr[2].__vecDelDtor)();
+    v12 = ((__int64 (__fastcall *)(hkDataObjectImpl *))obj->m_impl->vfptr[2].__vecDelDtor)(obj->m_impl);
     (*(void (__fastcall **)(__int64))(*(_QWORD *)v12 + 24i64))(v12);
     hkClass::getDescribedVersion(v11);
-    v13 = hkClass::getObjectSize(v11);
-    v14 = (unsigned __int64)hkDataObjectUtil::getExtraStorageSize(v11, v6) + v13;
-    v15 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v16 = (void *)(*(__int64 (__fastcall **)(_QWORD *, _QWORD))(*v15[11] + 8i64))(v15[11], v14);
-    if ( v5->allocs.m_size == (v5->allocs.m_capacityAndFlags & 0x3FFFFFFF) )
-      hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, &v5->allocs, 16);
-    v17 = (signed __int64)&v5->allocs.m_data[v5->allocs.m_size++];
-    *(_QWORD *)v17 = v16;
-    *(_DWORD *)(v17 + 8) = v14;
+    ObjectSize = hkClass::getObjectSize(v11);
+    v14 = hkDataObjectUtil::getExtraStorageSize(v11, obj) + ObjectSize;
+    Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    v16 = (void *)(*(__int64 (__fastcall **)(_QWORD *, _QWORD))(*Value[11] + 8i64))(Value[11], v14);
+    if ( infoOut->allocs.m_size == (infoOut->allocs.m_capacityAndFlags & 0x3FFFFFFF) )
+      hkArrayUtil::_reserveMore(&hkContainerTempAllocator::s_alloc, (const void **)&infoOut->allocs.m_data, 16);
+    v17 = &infoOut->allocs.m_data[infoOut->allocs.m_size++];
+    v17->m_addr = v16;
+    v17->m_size = v14;
     hkString::memSet(v16, 0, v14);
-    v7->m_object = v16;
-    v7->m_class = v11;
+    result->m_object = v16;
+    result->m_class = v11;
   }
   else
   {
-    v7->m_object = 0i64;
-    v7->m_class = 0i64;
+    result->m_object = 0i64;
+    result->m_class = 0i64;
   }
-  return v7;
+  return result;
 }
 
 // File Line: 91
@@ -75,860 +69,823 @@ _BOOL8 __fastcall canFastCopy(hkClassMember::Type type)
 
 // File Line: 133
 // RVA: 0xE60760
-hkResult *__usercall hkDataObjectToNative::copyIntoNativeArray@<rax>(hkDataObjectToNative *this@<rcx>, hkResult *result@<rdx>, void *address@<r8>, hkClassMember *member@<r9>, int a5@<xmm0>, hkDataArray *srcArray, hkDataObjectToNative::CopyInfoOut *copyInfoOut)
+hkResult *__fastcall hkDataObjectToNative::copyIntoNativeArray(
+        hkDataObjectToNative *this,
+        hkResult *result,
+        _DWORD *address,
+        hkClassMember *member,
+        hkDataArray *srcArray,
+        hkDataObjectToNative::CopyInfoOut *copyInfoOut)
 {
-  hkDataArray *v7; // r14
-  hkDataObjectToNative *v8; // r13
-  hkClassMember *v9; // r12
-  hkResult *v10; // rbx
-  signed int v11; // er15
-  hkResult *v12; // rax
-  hkClassMember::Type v13; // ebx
-  hkClassMember::TypeProperties *v14; // rdi
-  int v15; // er12
-  int v16; // esi
-  int v17; // er14
-  _QWORD **v18; // rax
-  void *v19; // rax
-  void *v20; // r15
-  int v21; // edi
-  hkDataObjectToNative::CopyInfoOut *v22; // rcx
-  unsigned int v23; // er13
+  hkDataArray *v6; // r14
+  int v10; // r15d
+  hkResult *v11; // rax
+  hkClassMember::Type m_storage; // ebx
+  hkClassMember::TypeProperties *ClassMemberTypeProperties; // rdi
+  int m_size; // r12d
+  int v15; // esi
+  int v16; // r14d
+  _QWORD **v17; // rax
+  void *v18; // rax
+  void *v19; // r15
+  int v20; // edi
+  hkDataObjectToNative::CopyInfoOut *v21; // rcx
+  unsigned int v22; // r13d
+  hkDataArrayImpl *m_impl; // rcx
   unsigned int v24; // esi
-  hkDataRefCountedVtbl *v25; // rax
-  hkResultEnum v26; // edi
-  int v27; // er13
-  __int64 v28; // r12
-  __int64 v29; // rbx
-  _QWORD **v30; // rax
-  __int64 v31; // rax
-  signed int v32; // er13
-  hkDataObjectImpl *v33; // r15
-  __int64 v34; // rdi
-  int v35; // eax
-  _QWORD **v36; // rax
-  __int64 v37; // rax
-  __int64 v38; // rdi
-  char v39; // al
-  _QWORD **v40; // rax
-  __int64 v41; // rax
-  __int64 v42; // rdi
-  char v43; // al
-  _QWORD **v44; // rax
-  __int64 v45; // rax
-  __int64 v46; // rdi
-  char v47; // al
-  __int64 v48; // rcx
-  __int64 v49; // rdi
-  __int16 v50; // ax
-  __int64 v51; // rcx
-  __int64 v52; // rdi
-  __int16 v53; // ax
-  __int64 v54; // rcx
-  __int64 v55; // rdi
-  int v56; // eax
-  __int64 v57; // rcx
-  __int64 v58; // rdi
-  int v59; // eax
-  __int64 v60; // rcx
-  __int64 v61; // rdi
-  __int64 v62; // rax
-  __int64 v63; // rcx
-  __int64 v64; // rdi
-  __int64 v65; // rax
-  __int64 v66; // rcx
-  __int64 v67; // rdi
-  __int64 v68; // rax
-  __int64 v69; // rcx
-  __int64 v70; // rdi
-  __int64 v71; // rcx
-  __int64 v72; // rdi
+  hkDataRefCountedVtbl *vfptr; // rax
+  int m_enum; // edi
+  int v27; // r13d
+  int v28; // eax
+  __int64 v29; // r12
+  __int64 v30; // rbx
+  _QWORD **Value; // rax
+  __int64 v32; // rax
+  int v33; // r13d
+  hkDataObjectImpl *v34; // r15
+  __int64 i; // rdi
+  int v36; // eax
+  _QWORD **v37; // rax
+  __int64 v38; // rax
+  __int64 j; // rdi
+  char v40; // al
+  _QWORD **v41; // rax
+  __int64 v42; // rax
+  __int64 k; // rdi
+  char v44; // al
+  _QWORD **v45; // rax
+  __int64 v46; // rax
+  __int64 m; // rdi
+  char v48; // al
+  __int64 v49; // rcx
+  __int64 n; // rdi
+  __int16 v51; // ax
+  __int64 v52; // rcx
+  __int64 ii; // rdi
+  __int16 v54; // ax
+  __int64 v55; // rcx
+  __int64 jj; // rdi
+  int v57; // eax
+  __int64 v58; // rcx
+  __int64 kk; // rdi
+  int v60; // eax
+  __int64 v61; // rcx
+  __int64 mm; // rdi
+  __int64 v63; // rax
+  __int64 v64; // rcx
+  __int64 nn; // rdi
+  __int64 v66; // rax
+  __int64 v67; // rcx
+  __int64 i2; // rdi
+  __int64 v69; // rax
+  __int64 v70; // rcx
+  __int64 i1; // rdi
+  float v72; // xmm0_4
   __int64 v73; // rcx
-  hkDataObjectImpl *v74; // rdi
-  hkDataObjectImpl *v75; // rax
+  __int64 i3; // rdi
+  float v75; // xmm0_4
   __int64 v76; // rcx
   hkDataObjectImpl *v77; // rdi
   hkDataObjectImpl *v78; // rax
   __int64 v79; // rcx
-  signed __int64 v80; // rdi
-  _OWORD *v81; // rax
+  hkDataObjectImpl *v80; // rdi
+  hkDataObjectImpl *v81; // rax
   __int64 v82; // rcx
-  signed __int64 v83; // rdi
-  _OWORD *v84; // rax
+  hkDataObjectImpl *v83; // rdi
+  hkDataObjectImpl *v84; // rax
   __int64 v85; // rcx
-  signed __int64 v86; // rdi
-  _OWORD *v87; // rax
+  hkDataObjectImpl *v86; // rdi
+  hkDataObjectImpl *v87; // rax
   __int64 v88; // rcx
-  signed __int64 v89; // r13
-  _OWORD *v90; // rax
+  hkDataObjectImpl *v89; // rdi
+  hkDataObjectImpl *v90; // rax
   __int64 v91; // rcx
-  signed __int64 v92; // r13
-  _OWORD *v93; // rax
-  __int64 v94; // rax
-  __int64 v95; // rbx
-  hkClass *v96; // r13
-  bool v97; // zf
-  int v98; // ebx
-  __int64 v99; // rcx
-  int v100; // eax
-  int v101; // eax
-  hkDataRefCountedVtbl *v102; // rdx
-  int v103; // ebx
+  hkDataObjectImpl *v92; // r13
+  hkDataObjectImpl *v93; // rax
+  __int64 v94; // rcx
+  hkDataObjectImpl *v95; // r13
+  hkDataObjectImpl *v96; // rax
+  __int64 v97; // rax
+  __int64 v98; // rbx
+  hkClass *v99; // r13
+  bool v100; // zf
+  int v101; // ebx
+  __int64 v102; // rcx
+  int ObjectSize; // eax
   int v104; // eax
-  char *v105; // rdi
-  hkDataObjectImpl *v106; // rax
-  hkDataObjectImpl *v107; // rbx
-  _DWORD *v108; // rsi
-  __int64 v109; // rcx
+  hkDataArrayImpl *v105; // rcx
+  hkDataRefCountedVtbl *v106; // rdx
+  int v107; // ebx
+  int v108; // eax
+  char *v109; // rdi
   hkDataObjectImpl *v110; // rax
-  hkDataObjectImpl *v111; // rdi
-  hkDataObjectToNative::CopyInfoOut *v112; // r15
-  __int64 v113; // rax
-  __int64 v114; // rbx
-  hkDataObjectToNative::CopyInfoOut *v115; // rbx
-  int v116; // er12
-  signed __int64 v117; // rcx
-  __int64 v118; // rcx
-  hkDataObjectImpl *v119; // rax
-  hkVariant *v120; // rdi
-  hkDataObjectToNative::CopyInfoOut *v121; // r15
-  __int64 v122; // rax
-  __int64 v123; // rbx
-  __int64 v124; // rcx
-  __int64 v125; // rax
-  int v126; // ecx
-  int v127; // edx
-  hkDataArrayImpl *v128; // rax
-  __int64 v129; // rcx
-  __int64 v130; // rax
-  int v131; // ecx
-  int v132; // edx
-  hkDataArrayImpl *v133; // rax
-  int v134; // [rsp+40h] [rbp-59h]
-  int v135; // [rsp+44h] [rbp-55h]
-  hkDataObject srcObj; // [rsp+48h] [rbp-51h]
-  int v137; // [rsp+50h] [rbp-49h]
-  hkStridedBasicArray dst; // [rsp+58h] [rbp-41h]
-  hkResult resulta; // [rsp+70h] [rbp-29h]
-  hkResult v140; // [rsp+74h] [rbp-25h]
-  hkResult v141; // [rsp+78h] [rbp-21h]
-  hkStridedBasicArray src; // [rsp+80h] [rbp-19h]
-  hkDataObjectToNative *v143; // [rsp+F0h] [rbp+57h]
-  hkResult *v144; // [rsp+F8h] [rbp+5Fh]
-  _DWORD *v145; // [rsp+100h] [rbp+67h]
-  hkClassMember *membera; // [rsp+108h] [rbp+6Fh]
+  hkDataObjectImpl *v111; // rbx
+  _DWORD *v112; // rsi
+  __int64 v113; // rcx
+  hkDataObjectImpl *v114; // rax
+  hkDataObjectImpl *v115; // rdi
+  hkDataObjectToNative::CopyInfoOut *v116; // r15
+  __int64 v117; // rax
+  __int64 v118; // rbx
+  hkDataObjectToNative::CopyInfoOut *v119; // rbx
+  int v120; // r12d
+  __int64 v121; // rcx
+  __int64 v122; // rcx
+  hkDataObjectImpl *v123; // rax
+  hkVariant *v124; // rdi
+  hkDataObjectToNative::CopyInfoOut *v125; // r15
+  __int64 v126; // rax
+  __int64 v127; // rbx
+  __int64 v128; // rcx
+  __int64 v129; // rax
+  int v130; // ecx
+  int v131; // edx
+  hkDataArrayImpl *v132; // rax
+  __int64 v133; // rcx
+  __int64 v134; // rax
+  int v135; // ecx
+  int v136; // edx
+  hkDataArrayImpl *v137; // rax
+  int v138; // [rsp+40h] [rbp-59h] BYREF
+  int v139; // [rsp+44h] [rbp-55h] BYREF
+  hkDataObject srcObj; // [rsp+48h] [rbp-51h] BYREF
+  int v141; // [rsp+50h] [rbp-49h] BYREF
+  hkStridedBasicArray dst; // [rsp+58h] [rbp-41h] BYREF
+  hkResult resulta; // [rsp+70h] [rbp-29h] BYREF
+  hkResult v144; // [rsp+74h] [rbp-25h] BYREF
+  hkResult v145; // [rsp+78h] [rbp-21h] BYREF
+  hkStridedBasicArray src; // [rsp+80h] [rbp-19h] BYREF
 
-  membera = member;
-  v145 = address;
-  v144 = result;
-  v143 = this;
-  v7 = srcArray;
-  v8 = this;
-  v9 = member;
-  v10 = result;
-  v11 = -1;
-  if ( ((unsigned int (*)(void))srcArray->m_impl->vfptr[5].__vecDelDtor)() )
+  v6 = srcArray;
+  v10 = -1;
+  if ( ((unsigned int (__fastcall *)(hkDataArrayImpl *))srcArray->m_impl->vfptr[5].__vecDelDtor)(srcArray->m_impl) )
   {
-    v13 = (unsigned __int8)v9->m_subtype.m_storage;
-    v14 = hkClassMember::getClassMemberTypeProperties(v13);
-    if ( v14->m_size <= 0
-      || !canFastCopy(v13)
-      || (((void (__fastcall *)(hkDataArrayImpl *, hkDataArray **, hkStridedBasicArray *))v7->m_impl->vfptr[8].__vecDelDtor)(
-            v7->m_impl,
+    m_storage = (unsigned __int8)member->m_subtype.m_storage;
+    ClassMemberTypeProperties = hkClassMember::getClassMemberTypeProperties(m_storage);
+    if ( ClassMemberTypeProperties->m_size <= 0
+      || !canFastCopy(m_storage)
+      || (((void (__fastcall *)(hkDataArrayImpl *, hkDataArray **, hkStridedBasicArray *))v6->m_impl->vfptr[8].__vecDelDtor)(
+            v6->m_impl,
             &srcArray,
             &src),
           (_DWORD)srcArray) )
     {
-      v23 = v9->m_flags.m_storage;
+      v22 = member->m_flags.m_storage;
+      m_impl = v6->m_impl;
       v24 = 0;
-      v25 = v7->m_impl->vfptr;
-      LOWORD(v23) = ~(_WORD)v23;
-      v26 = 0;
-      v135 = 0;
-      v27 = (v23 >> 9) & 1;
+      vfptr = v6->m_impl->vfptr;
+      LOWORD(v22) = ~(_WORD)v22;
+      m_enum = 0;
+      v139 = 0;
+      v27 = (v22 >> 9) & 1;
       LODWORD(srcObj.m_impl) = v27;
-      v28 = ((signed int (*)(void))v25[5].__vecDelDtor)();
+      v28 = ((__int64 (__fastcall *)(hkDataArrayImpl *))vfptr[5].__vecDelDtor)(m_impl);
       v29 = v28;
-      switch ( membera->m_subtype.m_storage )
+      v30 = v28;
+      switch ( member->m_subtype.m_storage )
       {
         case 0:
           goto $LN872_0;
         case 1:
-          v30 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-          v134 = v28;
-          v31 = (*(__int64 (__fastcall **)(_QWORD *, int *))(*v30[11] + 24i64))(v30[11], &v134);
-          v32 = 1;
-          LODWORD(srcArray) = v134;
-          v33 = (hkDataObjectImpl *)v31;
-          if ( (signed int)v28 > 0 )
+          Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+          v138 = v29;
+          v32 = (*(__int64 (__fastcall **)(_QWORD *, int *))(*Value[11] + 24i64))(Value[11], &v138);
+          v33 = 1;
+          LODWORD(srcArray) = v138;
+          v34 = (hkDataObjectImpl *)v32;
+          if ( (int)v29 > 0 )
           {
-            v34 = 0i64;
-            do
+            for ( i = 0i64; i < v29; *((_BYTE *)v34 + i - 1) = v36 != 0 )
             {
-              v35 = (__int64)v7->m_impl->vfptr[17].__vecDelDtor((hkDataRefCounted *)v7->m_impl, v24);
-              ++v34;
+              v36 = (int)v6->m_impl->vfptr[17].__vecDelDtor(v6->m_impl, v24);
+              ++i;
               ++v24;
-              *((_BYTE *)v33 + v34 - 1) = v35 != 0;
             }
-            while ( v34 < v28 );
-            v26 = v135;
+            m_enum = v139;
           }
           goto LABEL_131;
         case 2:
-          v36 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-          v134 = v28;
-          v37 = (*(__int64 (__fastcall **)(_QWORD *, int *))(*v36[11] + 24i64))(v36[11], &v134);
-          v32 = 1;
-          LODWORD(srcArray) = v134;
-          v33 = (hkDataObjectImpl *)v37;
-          if ( (signed int)v28 > 0 )
+          v37 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+          v138 = v29;
+          v38 = (*(__int64 (__fastcall **)(_QWORD *, int *))(*v37[11] + 24i64))(v37[11], &v138);
+          v33 = 1;
+          LODWORD(srcArray) = v138;
+          v34 = (hkDataObjectImpl *)v38;
+          if ( (int)v29 > 0 )
           {
-            v38 = 0i64;
-            do
+            for ( j = 0i64; j < v29; *((_BYTE *)v34 + j - 1) = v40 )
             {
-              v39 = (__int64)v7->m_impl->vfptr[17].__vecDelDtor((hkDataRefCounted *)v7->m_impl, v24);
-              ++v38;
+              v40 = (char)v6->m_impl->vfptr[17].__vecDelDtor(v6->m_impl, v24);
+              ++j;
               ++v24;
-              *((_BYTE *)v33 + v38 - 1) = v39;
             }
-            while ( v38 < v28 );
-            v26 = v135;
+            m_enum = v139;
           }
           goto LABEL_131;
         case 3:
-          v40 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-          v134 = v28;
-          v41 = (*(__int64 (__fastcall **)(_QWORD *, int *))(*v40[11] + 24i64))(v40[11], &v134);
-          v32 = 1;
-          LODWORD(srcArray) = v134;
-          v33 = (hkDataObjectImpl *)v41;
-          if ( (signed int)v28 > 0 )
+          v41 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+          v138 = v29;
+          v42 = (*(__int64 (__fastcall **)(_QWORD *, int *))(*v41[11] + 24i64))(v41[11], &v138);
+          v33 = 1;
+          LODWORD(srcArray) = v138;
+          v34 = (hkDataObjectImpl *)v42;
+          if ( (int)v29 > 0 )
           {
-            v42 = 0i64;
-            do
+            for ( k = 0i64; k < v29; *((_BYTE *)v34 + k - 1) = v44 )
             {
-              v43 = (__int64)v7->m_impl->vfptr[17].__vecDelDtor((hkDataRefCounted *)v7->m_impl, v24);
-              ++v42;
+              v44 = (char)v6->m_impl->vfptr[17].__vecDelDtor(v6->m_impl, v24);
+              ++k;
               ++v24;
-              *((_BYTE *)v33 + v42 - 1) = v43;
             }
-            while ( v42 < v28 );
-            v26 = v135;
+            m_enum = v139;
           }
           goto LABEL_131;
         case 4:
-          v44 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-          v134 = v28;
-          v45 = (*(__int64 (__fastcall **)(_QWORD *, int *))(*v44[11] + 24i64))(v44[11], &v134);
-          v32 = 1;
-          LODWORD(srcArray) = v134;
-          v33 = (hkDataObjectImpl *)v45;
-          if ( (signed int)v28 > 0 )
+          v45 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+          v138 = v29;
+          v46 = (*(__int64 (__fastcall **)(_QWORD *, int *))(*v45[11] + 24i64))(v45[11], &v138);
+          v33 = 1;
+          LODWORD(srcArray) = v138;
+          v34 = (hkDataObjectImpl *)v46;
+          if ( (int)v29 > 0 )
           {
-            v46 = 0i64;
-            do
+            for ( m = 0i64; m < v29; *((_BYTE *)v34 + m - 1) = v48 )
             {
-              v47 = (__int64)v7->m_impl->vfptr[17].__vecDelDtor((hkDataRefCounted *)v7->m_impl, v24);
-              ++v46;
+              v48 = (char)v6->m_impl->vfptr[17].__vecDelDtor(v6->m_impl, v24);
+              ++m;
               ++v24;
-              *((_BYTE *)v33 + v46 - 1) = v47;
             }
-            while ( v46 < v28 );
-            v26 = v135;
+            m_enum = v139;
           }
           goto LABEL_131;
         case 5:
-          v48 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
-          v134 = 2 * v28;
-          v32 = 2;
-          v33 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v48 + 24i64))(v48, &v134);
-          LODWORD(srcArray) = v134 / 2;
-          if ( (signed int)v28 > 0 )
+          v49 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
+          v138 = 2 * v29;
+          v33 = 2;
+          v34 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v49 + 24i64))(v49, &v138);
+          LODWORD(srcArray) = v138 / 2;
+          if ( (int)v29 > 0 )
           {
-            v49 = 0i64;
-            do
+            for ( n = 0i64; n < v29; *((_WORD *)v34 + n - 1) = v51 )
             {
-              v50 = (__int64)v7->m_impl->vfptr[17].__vecDelDtor((hkDataRefCounted *)v7->m_impl, v24);
-              ++v49;
+              v51 = (__int16)v6->m_impl->vfptr[17].__vecDelDtor(v6->m_impl, v24);
+              ++n;
               ++v24;
-              *((_WORD *)v33 + v49 - 1) = v50;
             }
-            while ( v49 < v28 );
-            v26 = v135;
+            m_enum = v139;
           }
           goto LABEL_131;
         case 6:
-          v51 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
-          v134 = 2 * v28;
-          v32 = 2;
-          v33 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v51 + 24i64))(v51, &v134);
-          LODWORD(srcArray) = v134 / 2;
-          if ( (signed int)v28 > 0 )
+          v52 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
+          v138 = 2 * v29;
+          v33 = 2;
+          v34 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v52 + 24i64))(v52, &v138);
+          LODWORD(srcArray) = v138 / 2;
+          if ( (int)v29 > 0 )
           {
-            v52 = 0i64;
-            do
+            for ( ii = 0i64; ii < v29; *((_WORD *)v34 + ii - 1) = v54 )
             {
-              v53 = (__int64)v7->m_impl->vfptr[17].__vecDelDtor((hkDataRefCounted *)v7->m_impl, v24);
-              ++v52;
+              v54 = (__int16)v6->m_impl->vfptr[17].__vecDelDtor(v6->m_impl, v24);
+              ++ii;
               ++v24;
-              *((_WORD *)v33 + v52 - 1) = v53;
             }
-            while ( v52 < v28 );
-            v26 = v135;
+            m_enum = v139;
           }
           goto LABEL_131;
         case 7:
-          v54 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
-          v134 = 4 * v28;
-          v32 = 4;
-          v33 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v54 + 24i64))(v54, &v134);
-          LODWORD(srcArray) = v134 / 4;
-          if ( (signed int)v28 > 0 )
+          v55 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
+          v138 = 4 * v29;
+          v33 = 4;
+          v34 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v55 + 24i64))(v55, &v138);
+          LODWORD(srcArray) = v138 / 4;
+          if ( (int)v29 > 0 )
           {
-            v55 = 0i64;
-            do
+            for ( jj = 0i64; jj < v29; *((_DWORD *)v34 + jj - 1) = v57 )
             {
-              v56 = (__int64)v7->m_impl->vfptr[17].__vecDelDtor((hkDataRefCounted *)v7->m_impl, v24);
-              ++v55;
+              v57 = (int)v6->m_impl->vfptr[17].__vecDelDtor(v6->m_impl, v24);
+              ++jj;
               ++v24;
-              *((_DWORD *)v33 + v55 - 1) = v56;
             }
-            while ( v55 < v28 );
-            v26 = v135;
+            m_enum = v139;
           }
           goto LABEL_131;
         case 8:
-          v57 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
-          v134 = 4 * v28;
-          v32 = 4;
-          v33 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v57 + 24i64))(v57, &v134);
-          LODWORD(srcArray) = v134 / 4;
-          if ( (signed int)v28 > 0 )
+          v58 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
+          v138 = 4 * v29;
+          v33 = 4;
+          v34 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v58 + 24i64))(v58, &v138);
+          LODWORD(srcArray) = v138 / 4;
+          if ( (int)v29 > 0 )
           {
-            v58 = 0i64;
-            do
+            for ( kk = 0i64; kk < v29; *((_DWORD *)v34 + kk - 1) = v60 )
             {
-              v59 = (__int64)v7->m_impl->vfptr[17].__vecDelDtor((hkDataRefCounted *)v7->m_impl, v24);
-              ++v58;
+              v60 = (int)v6->m_impl->vfptr[17].__vecDelDtor(v6->m_impl, v24);
+              ++kk;
               ++v24;
-              *((_DWORD *)v33 + v58 - 1) = v59;
             }
-            while ( v58 < v28 );
-            v26 = v135;
+            m_enum = v139;
           }
           goto LABEL_131;
         case 9:
-          v60 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
-          v134 = 8 * v28;
-          v32 = 8;
-          v33 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v60 + 24i64))(v60, &v134);
-          LODWORD(srcArray) = v134 / 8;
-          if ( (signed int)v28 > 0 )
+          v61 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
+          v138 = 8 * v29;
+          v33 = 8;
+          v34 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v61 + 24i64))(v61, &v138);
+          LODWORD(srcArray) = v138 / 8;
+          if ( (int)v29 > 0 )
           {
-            v61 = 0i64;
-            do
+            for ( mm = 0i64; mm < v29; *((_QWORD *)v34 + mm - 1) = v63 )
             {
-              v62 = (__int64)v7->m_impl->vfptr[19].__vecDelDtor((hkDataRefCounted *)v7->m_impl, v24);
-              ++v61;
+              v63 = (__int64)v6->m_impl->vfptr[19].__vecDelDtor(v6->m_impl, v24);
+              ++mm;
               ++v24;
-              *((_QWORD *)v33 + v61 - 1) = v62;
             }
-            while ( v61 < v28 );
-            v26 = v135;
+            m_enum = v139;
           }
           goto LABEL_131;
         case 0xA:
-          v63 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
-          v134 = 8 * v28;
-          v32 = 8;
-          v33 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v63 + 24i64))(v63, &v134);
-          LODWORD(srcArray) = v134 / 8;
-          if ( (signed int)v28 > 0 )
+          v64 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
+          v138 = 8 * v29;
+          v33 = 8;
+          v34 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v64 + 24i64))(v64, &v138);
+          LODWORD(srcArray) = v138 / 8;
+          if ( (int)v29 > 0 )
           {
-            v64 = 0i64;
-            do
+            for ( nn = 0i64; nn < v29; *((_QWORD *)v34 + nn - 1) = v66 )
             {
-              v65 = (__int64)v7->m_impl->vfptr[19].__vecDelDtor((hkDataRefCounted *)v7->m_impl, v24);
-              ++v64;
+              v66 = (__int64)v6->m_impl->vfptr[19].__vecDelDtor(v6->m_impl, v24);
+              ++nn;
               ++v24;
-              *((_QWORD *)v33 + v64 - 1) = v65;
             }
-            while ( v64 < v28 );
-            v26 = v135;
+            m_enum = v139;
           }
           goto LABEL_131;
         case 0xB:
-          v69 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
-          v134 = 4 * v28;
-          v32 = 4;
-          v33 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v69 + 24i64))(v69, &v134);
-          LODWORD(srcArray) = v134 / 4;
-          if ( (signed int)v28 > 0 )
+          v70 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
+          v138 = 4 * v29;
+          v33 = 4;
+          v34 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v70 + 24i64))(v70, &v138);
+          LODWORD(srcArray) = v138 / 4;
+          if ( (int)v29 > 0 )
           {
-            v70 = 0i64;
-            do
+            for ( i1 = 0i64; i1 < v29; *((float *)v34 + i1 - 1) = v72 )
             {
-              v7->m_impl->vfptr[15].__vecDelDtor((hkDataRefCounted *)v7->m_impl, v24);
-              ++v70;
+              v72 = ((float (__fastcall *)(hkDataArrayImpl *, _QWORD))v6->m_impl->vfptr[15].__vecDelDtor)(
+                      v6->m_impl,
+                      v24);
+              ++i1;
               ++v24;
-              *((_DWORD *)v33 + v70 - 1) = a5;
             }
-            while ( v70 < v28 );
-            v26 = v135;
+            m_enum = v139;
           }
           goto LABEL_131;
         case 0xC:
-          v73 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
-          v134 = 16 * v28;
-          v32 = 16;
-          v33 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v73 + 24i64))(v73, &v134);
-          LODWORD(srcArray) = v134 / 16;
-          if ( (signed int)v28 > 0 )
+          v76 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
+          v138 = 16 * v29;
+          v33 = 16;
+          v34 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v76 + 24i64))(v76, &v138);
+          LODWORD(srcArray) = v138 / 16;
+          if ( (int)v29 > 0 )
           {
-            v74 = v33;
+            v77 = v34;
             do
             {
-              v75 = (hkDataObjectImpl *)v7->m_impl->vfptr[11].__vecDelDtor((hkDataRefCounted *)v7->m_impl, v24++);
-              ++v74;
-              v74[-1] = *v75;
-              --v29;
+              v78 = (hkDataObjectImpl *)v6->m_impl->vfptr[11].__vecDelDtor(v6->m_impl, v24++);
+              ++v77;
+              v77[-1] = *v78;
+              --v30;
             }
-            while ( v29 );
-            v26 = v135;
+            while ( v30 );
+            m_enum = v139;
           }
           goto LABEL_131;
         case 0xD:
-          v76 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
-          v134 = 16 * v28;
-          v32 = 16;
-          v33 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v76 + 24i64))(v76, &v134);
-          LODWORD(srcArray) = v134 / 16;
-          if ( (signed int)v28 > 0 )
+          v79 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
+          v138 = 16 * v29;
+          v33 = 16;
+          v34 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v79 + 24i64))(v79, &v138);
+          LODWORD(srcArray) = v138 / 16;
+          if ( (int)v29 > 0 )
           {
-            v77 = v33;
+            v80 = v34;
             do
             {
-              v78 = (hkDataObjectImpl *)v7->m_impl->vfptr[11].__vecDelDtor((hkDataRefCounted *)v7->m_impl, v24++);
-              ++v77;
-              v77[-1] = *v78;
-              --v29;
+              v81 = (hkDataObjectImpl *)v6->m_impl->vfptr[11].__vecDelDtor(v6->m_impl, v24++);
+              ++v80;
+              v80[-1] = *v81;
+              --v30;
             }
-            while ( v29 );
-            v26 = v135;
+            while ( v30 );
+            m_enum = v139;
           }
           goto LABEL_131;
         case 0xE:
-          v79 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
-          v134 = 48 * v28;
-          v32 = 48;
-          v33 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v79 + 24i64))(v79, &v134);
-          LODWORD(srcArray) = v134 / 48;
-          if ( (signed int)v28 > 0 )
+          v82 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
+          v138 = 48 * v29;
+          v33 = 48;
+          v34 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v82 + 24i64))(v82, &v138);
+          LODWORD(srcArray) = v138 / 48;
+          if ( (int)v29 > 0 )
           {
-            v80 = (signed __int64)&v33[2];
+            v83 = v34 + 2;
             do
             {
-              v81 = (_OWORD *)v7->m_impl->vfptr[11].__vecDelDtor((hkDataRefCounted *)v7->m_impl, v24++);
-              v80 += 48i64;
-              *(_OWORD *)(v80 - 80) = *v81;
-              *(_OWORD *)(v80 - 64) = v81[1];
-              *(_OWORD *)(v80 - 48) = v81[2];
-              --v29;
+              v84 = (hkDataObjectImpl *)v6->m_impl->vfptr[11].__vecDelDtor(v6->m_impl, v24++);
+              v83 += 3;
+              v83[-5] = *v84;
+              v83[-4] = v84[1];
+              v83[-3] = v84[2];
+              --v30;
             }
-            while ( v29 );
-            v26 = v135;
+            while ( v30 );
+            m_enum = v139;
           }
           goto LABEL_131;
         case 0xF:
-          v82 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
-          v134 = 48 * v28;
-          v32 = 48;
-          v33 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v82 + 24i64))(v82, &v134);
-          LODWORD(srcArray) = v134 / 48;
-          if ( (signed int)v28 > 0 )
+          v85 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
+          v138 = 48 * v29;
+          v33 = 48;
+          v34 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v85 + 24i64))(v85, &v138);
+          LODWORD(srcArray) = v138 / 48;
+          if ( (int)v29 > 0 )
           {
-            v83 = (signed __int64)&v33[2];
+            v86 = v34 + 2;
             do
             {
-              v84 = (_OWORD *)v7->m_impl->vfptr[11].__vecDelDtor((hkDataRefCounted *)v7->m_impl, v24++);
-              v83 += 48i64;
-              *(_OWORD *)(v83 - 80) = *v84;
-              *(_OWORD *)(v83 - 64) = v84[1];
-              *(_OWORD *)(v83 - 48) = v84[2];
-              --v29;
+              v87 = (hkDataObjectImpl *)v6->m_impl->vfptr[11].__vecDelDtor(v6->m_impl, v24++);
+              v86 += 3;
+              v86[-5] = *v87;
+              v86[-4] = v87[1];
+              v86[-3] = v87[2];
+              --v30;
             }
-            while ( v29 );
-            v26 = v135;
+            while ( v30 );
+            m_enum = v139;
           }
           goto LABEL_131;
         case 0x10:
-          v85 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
-          v134 = 48 * v28;
-          v32 = 48;
-          v33 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v85 + 24i64))(v85, &v134);
-          LODWORD(srcArray) = v134 / 48;
-          if ( (signed int)v28 > 0 )
+          v88 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
+          v138 = 48 * v29;
+          v33 = 48;
+          v34 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v88 + 24i64))(v88, &v138);
+          LODWORD(srcArray) = v138 / 48;
+          if ( (int)v29 > 0 )
           {
-            v86 = (signed __int64)&v33[2];
+            v89 = v34 + 2;
             do
             {
-              v87 = (_OWORD *)v7->m_impl->vfptr[11].__vecDelDtor((hkDataRefCounted *)v7->m_impl, v24++);
-              v86 += 48i64;
-              *(_OWORD *)(v86 - 80) = *v87;
-              *(_OWORD *)(v86 - 64) = v87[1];
-              *(_OWORD *)(v86 - 48) = v87[2];
-              --v29;
+              v90 = (hkDataObjectImpl *)v6->m_impl->vfptr[11].__vecDelDtor(v6->m_impl, v24++);
+              v89 += 3;
+              v89[-5] = *v90;
+              v89[-4] = v90[1];
+              v89[-3] = v90[2];
+              --v30;
             }
-            while ( v29 );
-            v26 = v135;
+            while ( v30 );
+            m_enum = v139;
           }
           goto LABEL_131;
         case 0x11:
-          v88 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
-          v134 = (_DWORD)v28 << 6;
-          v32 = 64;
-          v33 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v88 + 24i64))(v88, &v134);
-          LODWORD(srcArray) = v134 / 64;
-          if ( (signed int)v28 > 0 )
+          v91 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
+          v138 = (_DWORD)v29 << 6;
+          v33 = 64;
+          v34 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v91 + 24i64))(v91, &v138);
+          LODWORD(srcArray) = v138 / 64;
+          if ( (int)v29 > 0 )
           {
-            v89 = (signed __int64)&v33[2];
+            v92 = v34 + 2;
             do
             {
-              v90 = (_OWORD *)v7->m_impl->vfptr[11].__vecDelDtor((hkDataRefCounted *)v7->m_impl, v24++);
-              v89 += 64i64;
-              *(_OWORD *)(v89 - 96) = *v90;
-              *(_OWORD *)(v89 - 80) = v90[1];
-              *(_OWORD *)(v89 - 64) = v90[2];
-              *(_OWORD *)(v89 - 48) = v90[3];
-              --v29;
+              v93 = (hkDataObjectImpl *)v6->m_impl->vfptr[11].__vecDelDtor(v6->m_impl, v24++);
+              v92 += 4;
+              v92[-6] = *v93;
+              v92[-5] = v93[1];
+              v92[-4] = v93[2];
+              v92[-3] = v93[3];
+              --v30;
             }
-            while ( v29 );
-            v32 = 64;
+            while ( v30 );
+            v33 = 64;
           }
           goto LABEL_131;
         case 0x12:
-          v91 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
-          v135 = (_DWORD)v28 << 6;
-          v32 = 64;
-          v33 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v91 + 24i64))(v91, &v135);
-          v134 = 64;
-          LODWORD(srcArray) = v135 / 64;
-          if ( (signed int)v28 <= 0 )
+          v94 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
+          v139 = (_DWORD)v29 << 6;
+          v33 = 64;
+          v34 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v94 + 24i64))(v94, &v139);
+          v138 = 64;
+          LODWORD(srcArray) = v139 / 64;
+          if ( (int)v29 <= 0 )
             goto LABEL_131;
-          v92 = (signed __int64)&v33[2];
+          v95 = v34 + 2;
           do
           {
-            v93 = (_OWORD *)v7->m_impl->vfptr[11].__vecDelDtor((hkDataRefCounted *)v7->m_impl, v24++);
-            v92 += 64i64;
-            *(_OWORD *)(v92 - 96) = *v93;
-            *(_OWORD *)(v92 - 80) = v93[1];
-            *(_OWORD *)(v92 - 64) = v93[2];
-            *(_OWORD *)(v92 - 48) = v93[3];
-            --v29;
+            v96 = (hkDataObjectImpl *)v6->m_impl->vfptr[11].__vecDelDtor(v6->m_impl, v24++);
+            v95 += 4;
+            v95[-6] = *v96;
+            v95[-5] = v96[1];
+            v95[-4] = v96[2];
+            v95[-3] = v96[3];
+            --v30;
           }
-          while ( v29 );
+          while ( v30 );
           goto LABEL_130;
         case 0x14:
-          v109 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
-          v137 = 8 * v28;
-          v110 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v109 + 24i64))(v109, &v137);
-          v134 = 8;
-          v33 = v110;
-          srcObj.m_impl = v110;
-          LODWORD(srcArray) = v137 / 8;
-          hkString::memSet(v110, 0, 8 * v28);
-          if ( (signed int)v28 <= 0 )
+          v113 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
+          v141 = 8 * v29;
+          v114 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v113 + 24i64))(v113, &v141);
+          v138 = 8;
+          v34 = v114;
+          srcObj.m_impl = v114;
+          LODWORD(srcArray) = v141 / 8;
+          hkString::memSet(v114, 0, 8 * v29);
+          if ( (int)v29 <= 0 )
             goto LABEL_130;
-          v111 = v33;
-          v112 = copyInfoOut;
+          v115 = v34;
+          v116 = copyInfoOut;
           do
           {
-            v113 = (__int64)v7->m_impl->vfptr[21].__vecDelDtor((hkDataRefCounted *)v7->m_impl, v24);
-            v114 = v113;
-            *(_QWORD *)&dst.m_type = v113;
-            if ( v113 )
+            v117 = (__int64)v6->m_impl->vfptr[21].__vecDelDtor(v6->m_impl, v24);
+            v118 = v117;
+            *(_QWORD *)&dst.m_type = v117;
+            if ( v117 )
             {
-              ++*(_WORD *)(v113 + 10);
-              ++*(_DWORD *)(v113 + 12);
+              ++*(_WORD *)(v117 + 10);
+              ++*(_DWORD *)(v117 + 12);
             }
-            hkDataObjectToNative::CopyInfoOut::addPointer(v112, (hkDataObject *)&dst, v111, v27);
-            if ( v114 )
+            hkDataObjectToNative::CopyInfoOut::addPointer(v116, (hkDataObject *)&dst, v115, v27);
+            if ( v118 )
             {
-              --*(_WORD *)(v114 + 10);
-              v97 = (*(_DWORD *)(v114 + 12))-- == 1;
-              if ( v97 )
-                (**(void (__fastcall ***)(__int64, signed __int64))v114)(v114, 1i64);
+              --*(_WORD *)(v118 + 10);
+              v100 = (*(_DWORD *)(v118 + 12))-- == 1;
+              if ( v100 )
+                (**(void (__fastcall ***)(__int64, __int64))v118)(v118, 1i64);
             }
             ++v24;
-            v111 = (hkDataObjectImpl *)((char *)v111 + 8);
+            v115 = (hkDataObjectImpl *)((char *)v115 + 8);
           }
-          while ( (signed int)v24 < (signed int)v28 );
+          while ( (int)v24 < (int)v29 );
           goto LABEL_129;
         case 0x19:
-          v94 = (__int64)v7->m_impl->vfptr[21].__vecDelDtor((hkDataRefCounted *)v7->m_impl, 0);
-          v95 = v94;
-          srcArray = (hkDataArray *)v94;
-          if ( v94 )
+          v97 = (__int64)v6->m_impl->vfptr[21].__vecDelDtor(v6->m_impl, 0i64);
+          v98 = v97;
+          srcArray = (hkDataArray *)v97;
+          if ( v97 )
           {
-            ++*(_WORD *)(v94 + 10);
-            ++*(_DWORD *)(v94 + 12);
+            ++*(_WORD *)(v97 + 10);
+            ++*(_DWORD *)(v97 + 12);
           }
-          v96 = hkDataObjectToNative::getMemberClassAndCheck(v143, membera, (hkDataObject *)&srcArray);
-          if ( v95 )
+          v99 = hkDataObjectToNative::getMemberClassAndCheck(this, member, (hkDataObject *)&srcArray);
+          if ( v98 )
           {
-            --*(_WORD *)(v95 + 10);
-            v97 = (*(_DWORD *)(v95 + 12))-- == 1;
-            if ( v97 )
-              (**(void (__fastcall ***)(__int64, signed __int64))v95)(v95, 1i64);
+            --*(_WORD *)(v98 + 10);
+            v100 = (*(_DWORD *)(v98 + 12))-- == 1;
+            if ( v100 )
+              (**(void (__fastcall ***)(__int64, __int64))v98)(v98, 1i64);
           }
-          if ( !v96 )
+          if ( !v99 )
             goto $LN872_0;
-          v98 = v28 * hkClass::getObjectSize(v96);
-          v99 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
-          v135 = v98;
-          v33 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v99 + 24i64))(v99, &v135);
-          v100 = hkClass::getObjectSize(v96);
-          LODWORD(srcArray) = v135 / v100;
-          v101 = hkClass::getObjectSize(v96);
-          v102 = v7->m_impl->vfptr;
-          v134 = v101;
-          v103 = ((__int64 (*)(void))v102[5].__vecDelDtor)();
-          v104 = hkClass::getObjectSize(v96);
-          hkString::memSet(v33, 0, v103 * v104);
-          if ( (signed int)v28 > 0 )
+          v101 = v29 * hkClass::getObjectSize(v99);
+          v102 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
+          v139 = v101;
+          v34 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v102 + 24i64))(v102, &v139);
+          ObjectSize = hkClass::getObjectSize(v99);
+          LODWORD(srcArray) = v139 / ObjectSize;
+          v104 = hkClass::getObjectSize(v99);
+          v105 = v6->m_impl;
+          v106 = v6->m_impl->vfptr;
+          v138 = v104;
+          v107 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v106[5].__vecDelDtor)(v105);
+          v108 = hkClass::getObjectSize(v99);
+          hkString::memSet(v34, 0, v107 * v108);
+          if ( (int)v29 > 0 )
           {
             do
             {
-              if ( v26 )
+              if ( m_enum )
                 break;
-              v105 = (char *)v33 + (signed int)(v24 * (unsigned __int64)hkClass::getObjectSize(v96));
-              v106 = (hkDataObjectImpl *)v7->m_impl->vfptr[21].__vecDelDtor((hkDataRefCounted *)v7->m_impl, v24);
-              v107 = v106;
-              srcObj.m_impl = v106;
-              if ( v106 )
+              v109 = (char *)v34 + (int)(v24 * hkClass::getObjectSize(v99));
+              v110 = (hkDataObjectImpl *)v6->m_impl->vfptr[21].__vecDelDtor(v6->m_impl, v24);
+              v111 = v110;
+              srcObj.m_impl = v110;
+              if ( v110 )
               {
-                ++v106->m_externalCount;
-                ++v106->m_count;
+                ++v110->m_externalCount;
+                ++v110->m_count;
               }
-              v26 = hkDataObjectToNative::fillNativeMembers(v143, &resulta, v105, &srcObj, copyInfoOut)->m_enum;
-              if ( v107 )
+              m_enum = hkDataObjectToNative::fillNativeMembers(this, &resulta, v109, &srcObj, copyInfoOut)->m_enum;
+              if ( v111 )
               {
-                --v107->m_externalCount;
-                v97 = v107->m_count-- == 1;
-                if ( v97 )
-                  v107->vfptr->__vecDelDtor((hkDataRefCounted *)&v107->vfptr, 1u);
+                --v111->m_externalCount;
+                v100 = v111->m_count-- == 1;
+                if ( v100 )
+                  v111->vfptr->__vecDelDtor(v111, 1u);
               }
               ++v24;
             }
-            while ( (signed int)v24 < (signed int)v28 );
+            while ( (int)v24 < (int)v29 );
           }
-          v32 = v134;
-          if ( v134 > 0 )
+          v33 = v138;
+          if ( v138 > 0 )
             goto LABEL_131;
-          v11 = (signed int)srcArray;
+          v10 = (int)srcArray;
 $LN872_0:
-          v108 = v145;
-          goto LABEL_116;
+          v112 = address;
+          break;
         case 0x1C:
-          v118 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
-          v137 = 16 * v28;
-          v119 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v118 + 24i64))(v118, &v137);
-          v134 = 16;
-          v33 = v119;
-          srcObj.m_impl = v119;
-          LODWORD(srcArray) = v137 / 16;
-          hkString::memSet(v119, 0, 16 * v28);
-          if ( (signed int)v28 > 0 )
+          v122 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
+          v141 = 16 * v29;
+          v123 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v122 + 24i64))(v122, &v141);
+          v138 = 16;
+          v34 = v123;
+          srcObj.m_impl = v123;
+          LODWORD(srcArray) = v141 / 16;
+          hkString::memSet(v123, 0, 16 * v29);
+          if ( (int)v29 <= 0 )
+            goto LABEL_130;
+          v124 = (hkVariant *)v34;
+          v125 = copyInfoOut;
+          do
           {
-            v120 = (hkVariant *)v33;
-            v121 = copyInfoOut;
-            do
+            v126 = (__int64)v6->m_impl->vfptr[21].__vecDelDtor(v6->m_impl, v24);
+            v127 = v126;
+            *(_QWORD *)&dst.m_type = v126;
+            if ( v126 )
             {
-              v122 = (__int64)v7->m_impl->vfptr[21].__vecDelDtor((hkDataRefCounted *)v7->m_impl, v24);
-              v123 = v122;
-              *(_QWORD *)&dst.m_type = v122;
-              if ( v122 )
-              {
-                ++*(_WORD *)(v122 + 10);
-                ++*(_DWORD *)(v122 + 12);
-              }
-              hkDataObjectToNative::CopyInfoOut::addVariant(v121, (hkDataObject *)&dst, v120, v27);
-              if ( v123 )
-              {
-                --*(_WORD *)(v123 + 10);
-                v97 = (*(_DWORD *)(v123 + 12))-- == 1;
-                if ( v97 )
-                  (**(void (__fastcall ***)(__int64, signed __int64))v123)(v123, 1i64);
-              }
-              ++v24;
-              ++v120;
+              ++*(_WORD *)(v126 + 10);
+              ++*(_DWORD *)(v126 + 12);
             }
-            while ( (signed int)v24 < (signed int)v28 );
-LABEL_129:
-            v26 = v135;
-            v33 = srcObj.m_impl;
+            hkDataObjectToNative::CopyInfoOut::addVariant(v125, (hkDataObject *)&dst, v124, v27);
+            if ( v127 )
+            {
+              --*(_WORD *)(v127 + 10);
+              v100 = (*(_DWORD *)(v127 + 12))-- == 1;
+              if ( v100 )
+                (**(void (__fastcall ***)(__int64, __int64))v127)(v127, 1i64);
+            }
+            ++v24;
+            ++v124;
           }
+          while ( (int)v24 < (int)v29 );
+LABEL_129:
+          m_enum = v139;
+          v34 = srcObj.m_impl;
 LABEL_130:
-          v32 = v134;
-          goto LABEL_131;
+          v33 = v138;
+LABEL_131:
+          v112 = address;
+          v119 = copyInfoOut;
+          address[2] = v29;
+          *(_QWORD *)address = v34;
+          v120 = v33 * v29;
+          if ( v119->allocs.m_size == (v119->allocs.m_capacityAndFlags & 0x3FFFFFFF) )
+            hkArrayUtil::_reserveMore(&hkContainerTempAllocator::s_alloc, (const void **)&v119->allocs.m_data, 16);
+          v121 = (__int64)&v119->allocs.m_data[v119->allocs.m_size++];
+          *(_QWORD *)v121 = v34;
+          v10 = (int)srcArray;
+          *(_DWORD *)(v121 + 8) = v120;
+          break;
         case 0x1D:
-          v124 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
-          v137 = 8 * v28;
-          v125 = (*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v124 + 24i64))(v124, &v137);
-          v126 = 0;
-          v32 = 8;
-          v33 = (hkDataObjectImpl *)v125;
-          v134 = 0;
-          LODWORD(srcArray) = v137 / 8;
-          if ( (signed int)v28 > 0 )
+          v128 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
+          v141 = 8 * v29;
+          v129 = (*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v128 + 24i64))(v128, &v141);
+          v130 = 0;
+          v33 = 8;
+          v34 = (hkDataObjectImpl *)v129;
+          v138 = 0;
+          LODWORD(srcArray) = v141 / 8;
+          if ( (int)v29 > 0 )
           {
-            v127 = 0;
-            v135 = 0;
+            v131 = 0;
+            v139 = 0;
             do
             {
-              if ( v26 )
+              if ( m_enum )
                 break;
-              v128 = v7->m_impl;
-              LODWORD(dst.m_data) = v126;
-              *(_QWORD *)&dst.m_type = v128;
-              v26 = hkDataObjectToNative::fillNativeSimpleMember<hkDataArray_Value>(
-                      v143,
-                      &v140,
-                      (char *)v33 + v127,
-                      (hkClassMember::Type)(unsigned __int8)membera->m_subtype.m_storage,
-                      (hkDataArray_Value *)&dst,
-                      0i64,
-                      (unsigned int)srcObj.m_impl,
-                      copyInfoOut)->m_enum;
-              v126 = v134 + 1;
-              v127 = v135 + 8;
-              v134 = v126;
-              v135 += 8;
+              v132 = v6->m_impl;
+              LODWORD(dst.m_data) = v130;
+              *(_QWORD *)&dst.m_type = v132;
+              m_enum = hkDataObjectToNative::fillNativeSimpleMember<hkDataArray_Value>(
+                         this,
+                         &v144,
+                         (char *)v34 + v131,
+                         (hkClassMember::Type)(unsigned __int8)member->m_subtype.m_storage,
+                         (hkDataArray_Value *)&dst,
+                         0i64,
+                         (unsigned int)srcObj.m_impl,
+                         copyInfoOut)->m_enum;
+              v130 = v138 + 1;
+              v131 = v139 + 8;
+              v138 = v130;
+              v139 += 8;
             }
-            while ( v126 < (signed int)v28 );
+            while ( v130 < (int)v29 );
           }
           goto LABEL_131;
         case 0x1E:
-          v66 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
-          v134 = 8 * v28;
-          v32 = 8;
-          v33 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v66 + 24i64))(v66, &v134);
-          LODWORD(srcArray) = v134 / 8;
-          if ( (signed int)v28 > 0 )
+          v67 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
+          v138 = 8 * v29;
+          v33 = 8;
+          v34 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v67 + 24i64))(v67, &v138);
+          LODWORD(srcArray) = v138 / 8;
+          if ( (int)v29 > 0 )
           {
-            v67 = 0i64;
-            do
+            for ( i2 = 0i64; i2 < v29; *((_QWORD *)v34 + i2 - 1) = v69 )
             {
-              v68 = (__int64)v7->m_impl->vfptr[19].__vecDelDtor((hkDataRefCounted *)v7->m_impl, v24);
-              ++v67;
+              v69 = (__int64)v6->m_impl->vfptr[19].__vecDelDtor(v6->m_impl, v24);
+              ++i2;
               ++v24;
-              *((_QWORD *)v33 + v67 - 1) = v68;
             }
-            while ( v67 < v28 );
-            v26 = v135;
+            m_enum = v139;
           }
           goto LABEL_131;
         case 0x20:
-          v71 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
-          v134 = 2 * v28;
-          v32 = 2;
-          v33 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v71 + 24i64))(v71, &v134);
-          LODWORD(srcArray) = v134 / 2;
-          if ( (signed int)v28 > 0 )
+          v73 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
+          v138 = 2 * v29;
+          v33 = 2;
+          v34 = (hkDataObjectImpl *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v73 + 24i64))(v73, &v138);
+          LODWORD(srcArray) = v138 / 2;
+          if ( (int)v29 > 0 )
           {
-            v72 = 0i64;
-            do
+            for ( i3 = 0i64; i3 < v29; *((_WORD *)v34 + i3 - 1) = HIWORD(v75) )
             {
-              v7->m_impl->vfptr[15].__vecDelDtor((hkDataRefCounted *)v7->m_impl, v24);
-              ++v72;
+              v75 = ((float (__fastcall *)(hkDataArrayImpl *, _QWORD))v6->m_impl->vfptr[15].__vecDelDtor)(
+                      v6->m_impl,
+                      v24);
+              ++i3;
               ++v24;
-              LODWORD(srcObj.m_impl) = a5;
-              *((_WORD *)v33 + v72 - 1) = HIWORD(a5);
+              *(float *)&srcObj.m_impl = v75;
             }
-            while ( v72 < v28 );
-            v26 = v135;
+            m_enum = v139;
           }
           goto LABEL_131;
         case 0x21:
-          v129 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
-          v137 = 8 * v28;
-          v130 = (*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v129 + 24i64))(v129, &v137);
-          v131 = 0;
-          v32 = 8;
-          v33 = (hkDataObjectImpl *)v130;
-          v134 = 0;
-          LODWORD(srcArray) = v137 / 8;
-          if ( (signed int)v28 > 0 )
+          v133 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
+          v141 = 8 * v29;
+          v134 = (*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v133 + 24i64))(v133, &v141);
+          v135 = 0;
+          v33 = 8;
+          v34 = (hkDataObjectImpl *)v134;
+          v138 = 0;
+          LODWORD(srcArray) = v141 / 8;
+          if ( (int)v29 > 0 )
           {
-            v132 = 0;
-            v135 = 0;
+            v136 = 0;
+            v139 = 0;
             do
             {
-              if ( v26 )
+              if ( m_enum )
                 break;
-              v133 = v7->m_impl;
-              LODWORD(dst.m_data) = v131;
-              *(_QWORD *)&dst.m_type = v133;
-              v26 = hkDataObjectToNative::fillNativeSimpleMember<hkDataArray_Value>(
-                      v143,
-                      &v141,
-                      (char *)v33 + v132,
-                      (hkClassMember::Type)(unsigned __int8)membera->m_subtype.m_storage,
-                      (hkDataArray_Value *)&dst,
-                      0i64,
-                      (unsigned int)srcObj.m_impl,
-                      copyInfoOut)->m_enum;
-              v131 = v134 + 1;
-              v132 = v135 + 8;
-              v134 = v131;
-              v135 += 8;
+              v137 = v6->m_impl;
+              LODWORD(dst.m_data) = v135;
+              *(_QWORD *)&dst.m_type = v137;
+              m_enum = hkDataObjectToNative::fillNativeSimpleMember<hkDataArray_Value>(
+                         this,
+                         &v145,
+                         (char *)v34 + v136,
+                         (hkClassMember::Type)(unsigned __int8)member->m_subtype.m_storage,
+                         (hkDataArray_Value *)&dst,
+                         0i64,
+                         (unsigned int)srcObj.m_impl,
+                         copyInfoOut)->m_enum;
+              v135 = v138 + 1;
+              v136 = v139 + 8;
+              v138 = v135;
+              v139 += 8;
             }
-            while ( v131 < (signed int)v28 );
+            while ( v135 < (int)v29 );
           }
-LABEL_131:
-          v108 = v145;
-          v115 = copyInfoOut;
-          v145[2] = v28;
-          *(_QWORD *)v145 = v33;
-          v116 = v32 * v28;
-          if ( v115->allocs.m_size == (v115->allocs.m_capacityAndFlags & 0x3FFFFFFF) )
-            hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, &v115->allocs, 16);
-          v117 = (signed __int64)&v115->allocs.m_data[v115->allocs.m_size++];
-          *(_QWORD *)v117 = v33;
-          v11 = (signed int)srcArray;
-          *(_DWORD *)(v117 + 8) = v116;
-LABEL_116:
-          if ( membera->m_type.m_storage == 22 )
-          {
-            if ( !v143->m_allocatedOnHeap )
-              v11 |= 0x80000000;
-            v108[3] = v11;
-          }
-          v12 = v144;
-          v144->m_enum = v26;
-          break;
+          goto LABEL_131;
         default:
-          v12 = v144;
-          v144->m_enum = 1;
-          break;
+          v11 = result;
+          result->m_enum = HK_FAILURE;
+          return v11;
       }
+      if ( member->m_type.m_storage == 22 )
+      {
+        if ( !this->m_allocatedOnHeap )
+          v10 |= 0x80000000;
+        v112[3] = v10;
+      }
+      v11 = result;
+      result->m_enum = m_enum;
     }
     else
     {
-      v15 = src.m_size;
-      v16 = v14->m_size;
-      v17 = v16 * src.m_size;
-      LODWORD(srcArray) = v16 * src.m_size;
-      v18 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v19 = (void *)(*(__int64 (__fastcall **)(_QWORD *, hkDataArray **))(*v18[11] + 24i64))(v18[11], &srcArray);
-      dst.m_type = v13;
-      v20 = v19;
+      m_size = src.m_size;
+      v15 = ClassMemberTypeProperties->m_size;
+      v16 = v15 * src.m_size;
+      LODWORD(srcArray) = v15 * src.m_size;
+      v17 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+      v18 = (void *)(*(__int64 (__fastcall **)(_QWORD *, hkDataArray **))(*v17[11] + 24i64))(v17[11], &srcArray);
+      dst.m_type = m_storage;
+      v19 = v18;
       dst.m_size = src.m_size;
-      dst.m_stride = v16;
+      dst.m_stride = v15;
       dst.m_tupleSize = 1;
-      dst.m_data = v19;
-      v21 = (signed int)srcArray / v16;
-      switch ( v13 )
+      dst.m_data = v18;
+      v20 = (int)srcArray / v15;
+      switch ( m_storage )
       {
         case 12:
         case 13:
@@ -943,54 +900,59 @@ LABEL_116:
         case 18:
           dst.m_tupleSize = 16;
 LABEL_10:
-          dst.m_type = 11;
+          dst.m_type = TYPE_NULL_CONTACT_MGR|0x8;
           break;
         default:
           break;
       }
       hkVariantDataUtil::convertArray(&src, &dst);
-      if ( v16 > 0 )
+      if ( v15 > 0 )
       {
-        v22 = copyInfoOut;
-        *(_QWORD *)v145 = v20;
-        v145[2] = v15;
-        hkDataObjectToNative::CopyInfoOut::addAlloc(v22, v20, v17);
+        v21 = copyInfoOut;
+        *(_QWORD *)address = v19;
+        address[2] = m_size;
+        hkDataObjectToNative::CopyInfoOut::addAlloc(v21, v19, v16);
       }
-      if ( membera->m_type.m_storage == 22 )
+      if ( member->m_type.m_storage == 22 )
       {
-        if ( !v8->m_allocatedOnHeap )
-          v21 |= 0x80000000;
-        v145[3] = v21;
+        if ( !this->m_allocatedOnHeap )
+          v20 |= 0x80000000;
+        address[3] = v20;
       }
-      v12 = v144;
-      v144->m_enum = 0;
+      v11 = result;
+      result->m_enum = HK_SUCCESS;
     }
   }
   else
   {
-    v12 = v10;
-    v10->m_enum = 0;
+    v11 = result;
+    result->m_enum = HK_SUCCESS;
   }
-  return v12;
+  return v11;
 }
 
 // File Line: 452
 // RVA: 0xE617F0
-hkResult *__usercall hkDataObjectToNative::copyIntoRelArray@<rax>(hkDataObjectToNative *this@<rcx>, hkResult *result@<rdx>, void *address@<r8>, hkClassMember *member@<r9>, int a5@<xmm0>, hkDataArray *srcArray, hkDataObjectToNative::CopyInfoOut *copyInfoOut, void **relArrayAddress)
+hkResult *__fastcall hkDataObjectToNative::copyIntoRelArray(
+        hkDataObjectToNative *this,
+        hkResult *result,
+        unsigned __int16 *address,
+        hkClassMember *member,
+        hkDataArray *srcArray,
+        hkDataObjectToNative::CopyInfoOut *copyInfoOut,
+        void **relArrayAddress)
 {
-  hkDataArray *v8; // r14
-  signed int v9; // esi
-  hkClassMember *v10; // r13
-  _DWORD *v11; // rdi
-  hkResult *v12; // rbx
-  hkDataRefCountedVtbl *v13; // rax
+  hkDataArray *v7; // r14
+  int v8; // esi
+  hkDataArrayImpl *m_impl; // rcx
+  hkDataRefCountedVtbl *vfptr; // rax
   hkResult *v14; // rax
-  unsigned int v15; // er12
-  hkResultEnum v16; // edi
-  int owningReference; // er12
+  unsigned int m_storage; // r12d
+  hkResultEnum m_enum; // edi
+  int owningReference; // r12d
   void **v18; // r15
-  signed int v19; // ebp
-  __int64 v20; // r12
+  int v19; // ebp
+  unsigned __int16 v20; // r12
   __int64 v21; // rbx
   int v22; // eax
   __int64 v23; // rbx
@@ -1014,1137 +976,1095 @@ hkResult *__usercall hkDataObjectToNative::copyIntoRelArray@<rax>(hkDataObjectTo
   __int64 v41; // rbx
   __int64 v42; // rax
   __int64 v43; // rbx
-  hkDataArrayImpl *v44; // rcx
-  __int64 v45; // rbx
-  char *v46; // rax
-  __int64 v47; // rbx
-  _OWORD *v48; // rax
+  float v44; // xmm0_4
+  hkDataArrayImpl *v45; // rcx
+  __int64 v46; // rbx
+  float v47; // xmm0_4
+  char *v48; // rax
   __int64 v49; // rbx
   _OWORD *v50; // rax
   __int64 v51; // rbx
   _OWORD *v52; // rax
-  char *v53; // rcx
-  __int64 v54; // rbx
-  _OWORD *v55; // rax
-  char *v56; // rcx
-  __int64 v57; // rbx
-  _OWORD *v58; // rax
-  char *v59; // rcx
-  __int64 v60; // rbx
-  _OWORD *v61; // rax
-  char *v62; // rcx
-  __int64 v63; // rbx
-  _OWORD *v64; // rax
-  char *v65; // rcx
-  __int64 v66; // rax
-  __int64 v67; // rbx
-  hkClass *v68; // r13
-  bool v69; // zf
-  signed int v70; // eax
-  hkDataRefCountedVtbl *v71; // rdx
-  int v72; // ebx
-  int v73; // eax
-  hkDataObjectToNative::CopyInfoOut *v74; // rbp
-  char *v75; // rbx
-  hkDataObjectImpl *v76; // rax
-  hkResult *v77; // rax
-  hkDataObjectImpl *v78; // rcx
-  int v79; // eax
-  void *v80; // rcx
-  hkDataObjectToNative::CopyInfoOut *v81; // r13
-  hkDataObjectImpl *v82; // rax
-  hkDataObjectImpl *v83; // rbx
-  int v84; // eax
-  void *v85; // rcx
-  hkDataObjectToNative::CopyInfoOut *v86; // r13
-  hkDataObjectImpl *v87; // rax
-  hkDataObjectImpl *v88; // rbx
-  __int16 v89; // ax
-  hkDataArrayImpl *v90; // rcx
-  int v91; // ebx
-  int v92; // ecx
-  hkClassMember::Type v93; // er9
-  char *v94; // r8
-  hkResult *v95; // rax
-  hkDataArrayImpl *v96; // rcx
-  int v97; // eax
-  __int16 v98; // ax
+  __int64 v53; // rbx
+  _OWORD *v54; // rax
+  char *v55; // rcx
+  __int64 v56; // rbx
+  _OWORD *v57; // rax
+  char *v58; // rcx
+  __int64 v59; // rbx
+  _OWORD *v60; // rax
+  char *v61; // rcx
+  __int64 v62; // rbx
+  _OWORD *v63; // rax
+  char *v64; // rcx
+  __int64 v65; // rbx
+  _OWORD *v66; // rax
+  char *v67; // rcx
+  __int64 v68; // rax
+  __int64 v69; // rbx
+  hkClass *v70; // r13
+  bool v71; // zf
+  int ObjectSize; // eax
+  hkDataArrayImpl *v73; // rcx
+  hkDataRefCountedVtbl *v74; // rdx
+  int v75; // ebx
+  int v76; // eax
+  hkDataObjectToNative::CopyInfoOut *v77; // rbp
+  char *v78; // rbx
+  hkDataObjectImpl *v79; // rax
+  hkResult *v80; // rax
+  hkDataObjectImpl *v81; // rcx
+  int v82; // eax
+  void *v83; // rcx
+  hkDataObjectToNative::CopyInfoOut *v84; // r13
+  hkDataObjectImpl *v85; // rax
+  hkDataObjectImpl *v86; // rbx
+  int v87; // eax
+  void *v88; // rcx
+  hkDataObjectToNative::CopyInfoOut *v89; // r13
+  hkDataObjectImpl *v90; // rax
+  hkDataObjectImpl *v91; // rbx
+  __int16 v92; // ax
+  hkDataArrayImpl *v93; // rcx
+  int v94; // ebx
+  int v95; // ecx
+  hkClassMember::Type v96; // r9d
+  char *v97; // r8
+  hkResult *v98; // rax
   hkDataArrayImpl *v99; // rcx
-  hkDataRefCountedVtbl *v100; // rax
-  int v101; // ebx
-  int v102; // ebp
-  hkClassMember::Type v103; // er9
-  char *v104; // r8
-  hkDataObject obj; // [rsp+5Ah] [rbp-68h]
-  hkResult resulta; // [rsp+62h] [rbp-60h]
-  hkResult v107; // [rsp+66h] [rbp-5Ch]
-  hkResult v108; // [rsp+6Ah] [rbp-58h]
-  hkDataObject srcObj; // [rsp+72h] [rbp-50h]
-  hkDataArray_Value value; // [rsp+7Ah] [rbp-48h]
-  hkDataObjectToNative *v111; // [rsp+CAh] [rbp+8h]
-  hkResult *v112; // [rsp+D2h] [rbp+10h]
-  _WORD *v113; // [rsp+DAh] [rbp+18h]
+  int v100; // eax
+  __int16 v101; // ax
+  hkDataArrayImpl *v102; // rcx
+  hkDataRefCountedVtbl *v103; // rax
+  int v104; // ebx
+  int v105; // ebp
+  hkClassMember::Type v106; // r9d
+  char *v107; // r8
+  hkDataObject obj; // [rsp+5Ah] [rbp-68h] BYREF
+  hkResult resulta; // [rsp+62h] [rbp-60h] BYREF
+  hkResult v110; // [rsp+66h] [rbp-5Ch] BYREF
+  hkResult v111; // [rsp+6Ah] [rbp-58h] BYREF
+  hkDataObject srcObj; // [rsp+72h] [rbp-50h] BYREF
+  hkDataArray_Value value; // [rsp+7Ah] [rbp-48h] BYREF
 
-  v113 = address;
-  v112 = result;
-  v111 = this;
-  v8 = srcArray;
-  v9 = 0;
-  v10 = member;
-  v11 = address;
-  v12 = result;
-  v13 = srcArray->m_impl->vfptr;
+  v7 = srcArray;
+  v8 = 0;
+  m_impl = srcArray->m_impl;
+  vfptr = srcArray->m_impl->vfptr;
   LODWORD(obj.m_impl) = 0;
-  if ( ((unsigned int (*)(void))v13[5].__vecDelDtor)() )
+  if ( ((unsigned int (__fastcall *)(hkDataArrayImpl *))vfptr[5].__vecDelDtor)(m_impl) )
   {
-    v15 = v10->m_flags.m_storage;
-    v16 = 0;
-    LOWORD(v15) = ~(_WORD)v15;
-    owningReference = (v15 >> 9) & 1;
+    m_storage = member->m_flags.m_storage;
+    m_enum = HK_SUCCESS;
+    LOWORD(m_storage) = ~(_WORD)m_storage;
+    owningReference = (m_storage >> 9) & 1;
     v18 = relArrayAddress;
-    switch ( v10->m_subtype.m_storage )
+    switch ( member->m_subtype.m_storage )
     {
       case 0:
         goto $LN1_70;
       case 1:
         v19 = 1;
-        LOWORD(v20) = ((__int64 (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)();
+        v20 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl);
         v21 = 0i64;
-        if ( ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() > 0 )
+        if ( ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) > 0 )
         {
           do
           {
-            v22 = (__int64)v8->m_impl->vfptr[17].__vecDelDtor((hkDataRefCounted *)v8->m_impl, v9);
+            v22 = (int)v7->m_impl->vfptr[17].__vecDelDtor(v7->m_impl, (unsigned int)v8);
             ++v21;
-            ++v9;
+            ++v8;
             *((char *)*v18 + v21 - 1) = v22 != 0;
           }
-          while ( v9 < ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() );
+          while ( v8 < ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) );
         }
         goto LABEL_127;
       case 2:
         v19 = 1;
-        v20 = ((unsigned __int16 (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)();
+        v20 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl);
         v23 = 0i64;
-        if ( ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() > 0 )
+        if ( ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) > 0 )
         {
           do
           {
-            v24 = (__int64)v8->m_impl->vfptr[17].__vecDelDtor((hkDataRefCounted *)v8->m_impl, v9++);
+            v24 = (char)v7->m_impl->vfptr[17].__vecDelDtor(v7->m_impl, (unsigned int)v8++);
             *((_BYTE *)*v18 + v23++) = v24;
           }
-          while ( v9 < ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() );
+          while ( v8 < ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) );
         }
         goto LABEL_127;
       case 3:
         v19 = 1;
-        v20 = ((unsigned __int16 (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)();
+        v20 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl);
         v25 = 0i64;
-        if ( ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() > 0 )
+        if ( ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) > 0 )
         {
           do
           {
-            v26 = (__int64)v8->m_impl->vfptr[17].__vecDelDtor((hkDataRefCounted *)v8->m_impl, v9++);
+            v26 = (char)v7->m_impl->vfptr[17].__vecDelDtor(v7->m_impl, (unsigned int)v8++);
             *((_BYTE *)*v18 + v25++) = v26;
           }
-          while ( v9 < ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() );
+          while ( v8 < ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) );
         }
         goto LABEL_127;
       case 4:
         v19 = 1;
-        v20 = ((unsigned __int16 (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)();
+        v20 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl);
         v27 = 0i64;
-        if ( ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() > 0 )
+        if ( ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) > 0 )
         {
           do
           {
-            v28 = (__int64)v8->m_impl->vfptr[17].__vecDelDtor((hkDataRefCounted *)v8->m_impl, v9++);
+            v28 = (char)v7->m_impl->vfptr[17].__vecDelDtor(v7->m_impl, (unsigned int)v8++);
             *((_BYTE *)*v18 + v27++) = v28;
           }
-          while ( v9 < ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() );
+          while ( v8 < ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) );
         }
         goto LABEL_127;
       case 5:
         v19 = 2;
-        v20 = ((unsigned __int16 (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)();
-        if ( ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() > 0 )
+        v20 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl);
+        if ( ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) > 0 )
         {
           v29 = 0i64;
           do
           {
-            v30 = (__int64)v8->m_impl->vfptr[17].__vecDelDtor((hkDataRefCounted *)v8->m_impl, v9++);
+            v30 = (__int16)v7->m_impl->vfptr[17].__vecDelDtor(v7->m_impl, (unsigned int)v8++);
             *(_WORD *)((char *)*v18 + v29) = v30;
             v29 += 2i64;
           }
-          while ( v9 < ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() );
+          while ( v8 < ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) );
         }
         goto LABEL_127;
       case 6:
         v19 = 2;
-        v20 = ((unsigned __int16 (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)();
-        if ( ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() > 0 )
+        v20 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl);
+        if ( ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) > 0 )
         {
           v31 = 0i64;
           do
           {
-            v32 = (__int64)v8->m_impl->vfptr[17].__vecDelDtor((hkDataRefCounted *)v8->m_impl, v9++);
+            v32 = (__int16)v7->m_impl->vfptr[17].__vecDelDtor(v7->m_impl, (unsigned int)v8++);
             *(_WORD *)((char *)*v18 + v31) = v32;
             v31 += 2i64;
           }
-          while ( v9 < ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() );
+          while ( v8 < ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) );
         }
         goto LABEL_127;
       case 7:
         v19 = 4;
-        v20 = ((unsigned __int16 (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)();
-        if ( ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() > 0 )
+        v20 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl);
+        if ( ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) > 0 )
         {
           v33 = 0i64;
           do
           {
-            v34 = (__int64)v8->m_impl->vfptr[17].__vecDelDtor((hkDataRefCounted *)v8->m_impl, v9++);
+            v34 = (int)v7->m_impl->vfptr[17].__vecDelDtor(v7->m_impl, (unsigned int)v8++);
             *(_DWORD *)((char *)*v18 + v33) = v34;
             v33 += 4i64;
           }
-          while ( v9 < ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() );
+          while ( v8 < ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) );
         }
         goto LABEL_127;
       case 8:
         v19 = 4;
-        v20 = ((unsigned __int16 (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)();
-        if ( ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() > 0 )
+        v20 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl);
+        if ( ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) > 0 )
         {
           v35 = 0i64;
           do
           {
-            v36 = (__int64)v8->m_impl->vfptr[17].__vecDelDtor((hkDataRefCounted *)v8->m_impl, v9++);
+            v36 = (int)v7->m_impl->vfptr[17].__vecDelDtor(v7->m_impl, (unsigned int)v8++);
             *(_DWORD *)((char *)*v18 + v35) = v36;
             v35 += 4i64;
           }
-          while ( v9 < ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() );
+          while ( v8 < ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) );
         }
         goto LABEL_127;
       case 9:
         v19 = 8;
-        v20 = ((unsigned __int16 (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)();
-        if ( ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() > 0 )
+        v20 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl);
+        if ( ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) > 0 )
         {
           v37 = 0i64;
           do
           {
-            v38 = (__int64)v8->m_impl->vfptr[19].__vecDelDtor((hkDataRefCounted *)v8->m_impl, v9++);
+            v38 = (__int64)v7->m_impl->vfptr[19].__vecDelDtor(v7->m_impl, (unsigned int)v8++);
             *(_QWORD *)((char *)*v18 + v37) = v38;
             v37 += 8i64;
           }
-          while ( v9 < ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() );
+          while ( v8 < ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) );
         }
         goto LABEL_127;
       case 0xA:
         v19 = 8;
-        v20 = ((unsigned __int16 (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)();
-        if ( ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() > 0 )
+        v20 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl);
+        if ( ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) > 0 )
         {
           v39 = 0i64;
           do
           {
-            v40 = (__int64)v8->m_impl->vfptr[19].__vecDelDtor((hkDataRefCounted *)v8->m_impl, v9++);
+            v40 = (__int64)v7->m_impl->vfptr[19].__vecDelDtor(v7->m_impl, (unsigned int)v8++);
             *(_QWORD *)((char *)*v18 + v39) = v40;
             v39 += 8i64;
           }
-          while ( v9 < ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() );
+          while ( v8 < ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) );
         }
         goto LABEL_127;
       case 0xB:
         v19 = 4;
-        v20 = ((unsigned __int16 (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)();
-        if ( ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() > 0 )
+        v20 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl);
+        if ( ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) > 0 )
         {
           v43 = 0i64;
           do
           {
-            v8->m_impl->vfptr[15].__vecDelDtor((hkDataRefCounted *)v8->m_impl, v9);
-            v44 = v8->m_impl;
-            *(_DWORD *)((char *)*v18 + v43) = a5;
-            ++v9;
+            v44 = ((float (__fastcall *)(hkDataArrayImpl *, _QWORD))v7->m_impl->vfptr[15].__vecDelDtor)(
+                    v7->m_impl,
+                    (unsigned int)v8);
+            v45 = v7->m_impl;
+            *(float *)((char *)*v18 + v43) = v44;
+            ++v8;
             v43 += 4i64;
           }
-          while ( v9 < ((signed int (*)(void))v44->vfptr[5].__vecDelDtor)() );
+          while ( v8 < ((int (__fastcall *)(hkDataArrayImpl *))v45->vfptr[5].__vecDelDtor)(v45) );
         }
         goto LABEL_127;
       case 0xC:
         v19 = 16;
-        v20 = ((unsigned __int16 (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)();
-        if ( ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() > 0 )
-        {
-          v47 = 0i64;
-          do
-          {
-            v48 = (_OWORD *)v8->m_impl->vfptr[11].__vecDelDtor((hkDataRefCounted *)v8->m_impl, v9++);
-            v47 += 16i64;
-            *(_OWORD *)((char *)*v18 + v47 - 16) = *v48;
-          }
-          while ( v9 < ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() );
-        }
-        goto LABEL_127;
-      case 0xD:
-        v19 = 16;
-        v20 = ((unsigned __int16 (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)();
-        if ( ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() > 0 )
+        v20 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl);
+        if ( ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) > 0 )
         {
           v49 = 0i64;
           do
           {
-            v50 = (_OWORD *)v8->m_impl->vfptr[11].__vecDelDtor((hkDataRefCounted *)v8->m_impl, v9++);
+            v50 = v7->m_impl->vfptr[11].__vecDelDtor(v7->m_impl, (unsigned int)v8++);
             v49 += 16i64;
             *(_OWORD *)((char *)*v18 + v49 - 16) = *v50;
           }
-          while ( v9 < ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() );
+          while ( v8 < ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) );
         }
         goto LABEL_127;
-      case 0xE:
-        v19 = 48;
-        v20 = ((unsigned __int16 (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)();
-        if ( ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() > 0 )
+      case 0xD:
+        v19 = 16;
+        v20 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl);
+        if ( ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) > 0 )
         {
           v51 = 0i64;
           do
           {
-            v52 = (_OWORD *)v8->m_impl->vfptr[11].__vecDelDtor((hkDataRefCounted *)v8->m_impl, v9);
-            v53 = (char *)*v18;
-            ++v9;
-            v51 += 48i64;
-            *(_OWORD *)&v53[v51 - 48] = *v52;
-            *(_OWORD *)&v53[v51 - 32] = v52[1];
-            *(_OWORD *)&v53[v51 - 16] = v52[2];
+            v52 = v7->m_impl->vfptr[11].__vecDelDtor(v7->m_impl, (unsigned int)v8++);
+            v51 += 16i64;
+            *(_OWORD *)((char *)*v18 + v51 - 16) = *v52;
           }
-          while ( v9 < ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() );
+          while ( v8 < ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) );
+        }
+        goto LABEL_127;
+      case 0xE:
+        v19 = 48;
+        v20 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl);
+        if ( ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) > 0 )
+        {
+          v53 = 0i64;
+          do
+          {
+            v54 = v7->m_impl->vfptr[11].__vecDelDtor(v7->m_impl, (unsigned int)v8);
+            v55 = (char *)*v18;
+            ++v8;
+            v53 += 48i64;
+            *(_OWORD *)&v55[v53 - 48] = *v54;
+            *(_OWORD *)&v55[v53 - 32] = v54[1];
+            *(_OWORD *)&v55[v53 - 16] = v54[2];
+          }
+          while ( v8 < ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) );
         }
         goto LABEL_127;
       case 0xF:
         v19 = 48;
-        v20 = ((unsigned __int16 (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)();
-        if ( ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() > 0 )
+        v20 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl);
+        if ( ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) > 0 )
         {
-          v54 = 0i64;
+          v56 = 0i64;
           do
           {
-            v55 = (_OWORD *)v8->m_impl->vfptr[11].__vecDelDtor((hkDataRefCounted *)v8->m_impl, v9);
-            v56 = (char *)*v18;
-            ++v9;
-            v54 += 48i64;
-            *(_OWORD *)&v56[v54 - 48] = *v55;
-            *(_OWORD *)&v56[v54 - 32] = v55[1];
-            *(_OWORD *)&v56[v54 - 16] = v55[2];
+            v57 = v7->m_impl->vfptr[11].__vecDelDtor(v7->m_impl, (unsigned int)v8);
+            v58 = (char *)*v18;
+            ++v8;
+            v56 += 48i64;
+            *(_OWORD *)&v58[v56 - 48] = *v57;
+            *(_OWORD *)&v58[v56 - 32] = v57[1];
+            *(_OWORD *)&v58[v56 - 16] = v57[2];
           }
-          while ( v9 < ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() );
+          while ( v8 < ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) );
         }
         goto LABEL_127;
       case 0x10:
         v19 = 48;
-        v20 = ((unsigned __int16 (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)();
-        if ( ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() > 0 )
+        v20 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl);
+        if ( ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) > 0 )
         {
-          v57 = 0i64;
+          v59 = 0i64;
           do
           {
-            v58 = (_OWORD *)v8->m_impl->vfptr[11].__vecDelDtor((hkDataRefCounted *)v8->m_impl, v9);
-            v59 = (char *)*v18;
-            ++v9;
-            v57 += 48i64;
-            *(_OWORD *)&v59[v57 - 48] = *v58;
-            *(_OWORD *)&v59[v57 - 32] = v58[1];
-            *(_OWORD *)&v59[v57 - 16] = v58[2];
+            v60 = v7->m_impl->vfptr[11].__vecDelDtor(v7->m_impl, (unsigned int)v8);
+            v61 = (char *)*v18;
+            ++v8;
+            v59 += 48i64;
+            *(_OWORD *)&v61[v59 - 48] = *v60;
+            *(_OWORD *)&v61[v59 - 32] = v60[1];
+            *(_OWORD *)&v61[v59 - 16] = v60[2];
           }
-          while ( v9 < ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() );
+          while ( v8 < ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) );
         }
         goto LABEL_127;
       case 0x11:
         v19 = 64;
-        v20 = ((unsigned __int16 (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)();
-        if ( ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() > 0 )
+        v20 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl);
+        if ( ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) > 0 )
         {
-          v60 = 0i64;
+          v62 = 0i64;
           do
           {
-            v61 = (_OWORD *)v8->m_impl->vfptr[11].__vecDelDtor((hkDataRefCounted *)v8->m_impl, v9);
-            v62 = (char *)*v18;
-            ++v9;
-            v60 += 64i64;
-            *(_OWORD *)&v62[v60 - 64] = *v61;
-            *(_OWORD *)&v62[v60 - 48] = v61[1];
-            *(_OWORD *)&v62[v60 - 32] = v61[2];
-            *(_OWORD *)&v62[v60 - 16] = v61[3];
+            v63 = v7->m_impl->vfptr[11].__vecDelDtor(v7->m_impl, (unsigned int)v8);
+            v64 = (char *)*v18;
+            ++v8;
+            v62 += 64i64;
+            *(_OWORD *)&v64[v62 - 64] = *v63;
+            *(_OWORD *)&v64[v62 - 48] = v63[1];
+            *(_OWORD *)&v64[v62 - 32] = v63[2];
+            *(_OWORD *)&v64[v62 - 16] = v63[3];
           }
-          while ( v9 < ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() );
+          while ( v8 < ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) );
         }
         goto LABEL_127;
       case 0x12:
         v19 = 64;
-        v20 = ((unsigned __int16 (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)();
-        if ( ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() > 0 )
+        v20 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl);
+        if ( ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) > 0 )
         {
-          v63 = 0i64;
+          v65 = 0i64;
           do
           {
-            v64 = (_OWORD *)v8->m_impl->vfptr[11].__vecDelDtor((hkDataRefCounted *)v8->m_impl, v9);
-            v65 = (char *)*v18;
-            ++v9;
-            v63 += 64i64;
-            *(_OWORD *)&v65[v63 - 64] = *v64;
-            *(_OWORD *)&v65[v63 - 48] = v64[1];
-            *(_OWORD *)&v65[v63 - 32] = v64[2];
-            *(_OWORD *)&v65[v63 - 16] = v64[3];
+            v66 = v7->m_impl->vfptr[11].__vecDelDtor(v7->m_impl, (unsigned int)v8);
+            v67 = (char *)*v18;
+            ++v8;
+            v65 += 64i64;
+            *(_OWORD *)&v67[v65 - 64] = *v66;
+            *(_OWORD *)&v67[v65 - 48] = v66[1];
+            *(_OWORD *)&v67[v65 - 32] = v66[2];
+            *(_OWORD *)&v67[v65 - 16] = v66[3];
           }
-          while ( v9 < ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() );
+          while ( v8 < ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) );
         }
         goto LABEL_127;
       case 0x14:
-        v79 = ((__int64 (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)();
-        v80 = *v18;
-        LODWORD(srcArray) = v79;
+        v82 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl);
+        v83 = *v18;
+        LODWORD(srcArray) = v82;
         v19 = 8;
-        hkString::memSet(v80, 0, 8 * (unsigned __int16)v79);
-        if ( ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() > 0 )
+        hkString::memSet(v83, 0, 8 * (unsigned __int16)v82);
+        if ( ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) > 0 )
         {
-          v81 = copyInfoOut;
+          v84 = copyInfoOut;
           do
           {
-            v82 = (hkDataObjectImpl *)v8->m_impl->vfptr[21].__vecDelDtor((hkDataRefCounted *)v8->m_impl, v9);
-            v83 = v82;
-            obj.m_impl = v82;
-            if ( v82 )
+            v85 = (hkDataObjectImpl *)v7->m_impl->vfptr[21].__vecDelDtor(v7->m_impl, (unsigned int)v8);
+            v86 = v85;
+            obj.m_impl = v85;
+            if ( v85 )
             {
-              ++v82->m_externalCount;
-              ++v82->m_count;
+              ++v85->m_externalCount;
+              ++v85->m_count;
             }
-            hkDataObjectToNative::CopyInfoOut::addPointer(v81, &obj, (char *)*v18 + 8 * v9, owningReference);
-            if ( v83 )
+            hkDataObjectToNative::CopyInfoOut::addPointer(v84, &obj, (char *)*v18 + 8 * v8, owningReference);
+            if ( v86 )
             {
-              --v83->m_externalCount;
-              v69 = v83->m_count-- == 1;
-              if ( v69 )
-                v83->vfptr->__vecDelDtor((hkDataRefCounted *)&v83->vfptr, 1u);
+              --v86->m_externalCount;
+              v71 = v86->m_count-- == 1;
+              if ( v71 )
+                v86->vfptr->__vecDelDtor(v86, 1u);
             }
-            ++v9;
+            ++v8;
           }
-          while ( v9 < ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() );
+          while ( v8 < ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) );
         }
         goto LABEL_126;
       case 0x19:
-        v66 = (__int64)v8->m_impl->vfptr[21].__vecDelDtor((hkDataRefCounted *)v8->m_impl, 0);
-        v67 = v66;
-        srcArray = (hkDataArray *)v66;
-        if ( v66 )
-        {
-          ++*(_WORD *)(v66 + 10);
-          ++*(_DWORD *)(v66 + 12);
-        }
-        v68 = hkDataObjectToNative::getMemberClassAndCheck(v111, v10, (hkDataObject *)&srcArray);
-        if ( v67 )
-        {
-          --*(_WORD *)(v67 + 10);
-          v69 = (*(_DWORD *)(v67 + 12))-- == 1;
-          if ( v69 )
-            (**(void (__fastcall ***)(__int64, signed __int64))v67)(v67, 1i64);
-        }
+        v68 = (__int64)v7->m_impl->vfptr[21].__vecDelDtor(v7->m_impl, 0i64);
+        v69 = v68;
+        srcArray = (hkDataArray *)v68;
         if ( v68 )
         {
-          LOWORD(srcArray) = ((__int64 (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)();
-          v70 = hkClass::getObjectSize(v68);
-          v71 = v8->m_impl->vfptr;
-          v19 = v70;
-          LODWORD(obj.m_impl) = v70;
-          v72 = ((__int64 (*)(void))v71[5].__vecDelDtor)();
-          v73 = hkClass::getObjectSize(v68);
-          hkString::memSet(*v18, 0, v72 * v73);
-          if ( ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() > 0 )
+          ++*(_WORD *)(v68 + 10);
+          ++*(_DWORD *)(v68 + 12);
+        }
+        v70 = hkDataObjectToNative::getMemberClassAndCheck(this, member, (hkDataObject *)&srcArray);
+        if ( v69 )
+        {
+          --*(_WORD *)(v69 + 10);
+          v71 = (*(_DWORD *)(v69 + 12))-- == 1;
+          if ( v71 )
+            (**(void (__fastcall ***)(__int64, __int64))v69)(v69, 1i64);
+        }
+        if ( v70 )
+        {
+          LOWORD(srcArray) = ((__int64 (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl);
+          ObjectSize = hkClass::getObjectSize(v70);
+          v73 = v7->m_impl;
+          v74 = v7->m_impl->vfptr;
+          v19 = ObjectSize;
+          LODWORD(obj.m_impl) = ObjectSize;
+          v75 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v74[5].__vecDelDtor)(v73);
+          v76 = hkClass::getObjectSize(v70);
+          hkString::memSet(*v18, 0, v75 * v76);
+          if ( ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) > 0 )
           {
-            v74 = copyInfoOut;
+            v77 = copyInfoOut;
             do
             {
-              if ( v16 )
+              if ( m_enum )
                 break;
-              v75 = (char *)*v18 + (signed int)(v9 * (unsigned __int64)hkClass::getObjectSize(v68));
-              v76 = (hkDataObjectImpl *)v8->m_impl->vfptr[21].__vecDelDtor((hkDataRefCounted *)v8->m_impl, v9);
-              srcObj.m_impl = v76;
-              if ( v76 )
+              v78 = (char *)*v18 + (int)(v8 * hkClass::getObjectSize(v70));
+              v79 = (hkDataObjectImpl *)v7->m_impl->vfptr[21].__vecDelDtor(v7->m_impl, (unsigned int)v8);
+              srcObj.m_impl = v79;
+              if ( v79 )
               {
-                ++v76->m_externalCount;
-                ++v76->m_count;
+                ++v79->m_externalCount;
+                ++v79->m_count;
               }
-              v77 = hkDataObjectToNative::fillNativeMembers(v111, &resulta, v75, &srcObj, v74);
-              v78 = srcObj.m_impl;
-              v16 = v77->m_enum;
+              v80 = hkDataObjectToNative::fillNativeMembers(this, &resulta, v78, &srcObj, v77);
+              v81 = srcObj.m_impl;
+              m_enum = v80->m_enum;
               if ( srcObj.m_impl )
               {
                 --srcObj.m_impl->m_externalCount;
-                v69 = v78->m_count-- == 1;
-                if ( v69 )
-                  v78->vfptr->__vecDelDtor((hkDataRefCounted *)&v78->vfptr, 1u);
+                v71 = v81->m_count-- == 1;
+                if ( v71 )
+                  v81->vfptr->__vecDelDtor(v81, 1u);
               }
-              ++v9;
+              ++v8;
             }
-            while ( v9 < ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() );
-            v19 = (signed int)obj.m_impl;
+            while ( v8 < ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) );
+            v19 = (int)obj.m_impl;
           }
           if ( v19 > 0 )
             goto LABEL_126;
         }
         goto $LN1_70;
       case 0x1C:
-        v84 = ((__int64 (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)();
-        v85 = *v18;
-        LODWORD(srcArray) = v84;
+        v87 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl);
+        v88 = *v18;
+        LODWORD(srcArray) = v87;
         v19 = 16;
-        hkString::memSet(v85, 0, 16 * (unsigned __int16)v84);
-        if ( ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() > 0 )
+        hkString::memSet(v88, 0, 16 * (unsigned __int16)v87);
+        if ( ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) > 0 )
         {
-          v86 = copyInfoOut;
+          v89 = copyInfoOut;
           do
           {
-            v87 = (hkDataObjectImpl *)v8->m_impl->vfptr[21].__vecDelDtor((hkDataRefCounted *)v8->m_impl, v9);
-            v88 = v87;
-            obj.m_impl = v87;
-            if ( v87 )
+            v90 = (hkDataObjectImpl *)v7->m_impl->vfptr[21].__vecDelDtor(v7->m_impl, (unsigned int)v8);
+            v91 = v90;
+            obj.m_impl = v90;
+            if ( v90 )
             {
-              ++v87->m_externalCount;
-              ++v87->m_count;
+              ++v90->m_externalCount;
+              ++v90->m_count;
             }
-            hkDataObjectToNative::CopyInfoOut::addVariant(v86, &obj, (hkVariant *)*v18 + v9, owningReference);
-            if ( v88 )
+            hkDataObjectToNative::CopyInfoOut::addVariant(v89, &obj, (hkVariant *)*v18 + v8, owningReference);
+            if ( v91 )
             {
-              --v88->m_externalCount;
-              v69 = v88->m_count-- == 1;
-              if ( v69 )
-                v88->vfptr->__vecDelDtor((hkDataRefCounted *)&v88->vfptr, 1u);
+              --v91->m_externalCount;
+              v71 = v91->m_count-- == 1;
+              if ( v71 )
+                v91->vfptr->__vecDelDtor(v91, 1u);
             }
-            ++v9;
+            ++v8;
           }
-          while ( v9 < ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() );
+          while ( v8 < ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) );
         }
         goto LABEL_126;
       case 0x1D:
-        v89 = ((__int64 (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)();
-        v90 = v8->m_impl;
+        v92 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl);
+        v93 = v7->m_impl;
         v19 = 8;
-        LOWORD(srcArray) = v89;
-        v91 = 0;
-        if ( ((signed int (*)(void))v90->vfptr[5].__vecDelDtor)() > 0 )
+        LOWORD(srcArray) = v92;
+        v94 = 0;
+        if ( ((int (__fastcall *)(hkDataArrayImpl *))v93->vfptr[5].__vecDelDtor)(v93) > 0 )
         {
-          v92 = 0;
+          v95 = 0;
           LODWORD(obj.m_impl) = 0;
           do
           {
-            if ( v16 )
+            if ( m_enum )
               break;
-            v93 = (unsigned __int8)v10->m_subtype.m_storage;
-            v94 = (char *)*v18 + v92;
-            value.m_impl = v8->m_impl;
-            value.m_index = v91;
-            v95 = hkDataObjectToNative::fillNativeSimpleMember<hkDataArray_Value>(
-                    v111,
-                    &v107,
-                    v94,
-                    v93,
+            v96 = (unsigned __int8)member->m_subtype.m_storage;
+            v97 = (char *)*v18 + v95;
+            value.m_impl = v7->m_impl;
+            value.m_index = v94;
+            v98 = hkDataObjectToNative::fillNativeSimpleMember<hkDataArray_Value>(
+                    this,
+                    &v110,
+                    v97,
+                    v96,
                     &value,
                     0i64,
                     owningReference,
                     copyInfoOut);
-            v96 = v8->m_impl;
-            v16 = v95->m_enum;
+            v99 = v7->m_impl;
+            m_enum = v98->m_enum;
             LODWORD(obj.m_impl) += 8;
-            ++v91;
-            v97 = ((__int64 (*)(void))v96->vfptr[5].__vecDelDtor)();
-            v92 = (int)obj.m_impl;
+            ++v94;
+            v100 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v99->vfptr[5].__vecDelDtor)(v99);
+            v95 = (int)obj.m_impl;
           }
-          while ( v91 < v97 );
+          while ( v94 < v100 );
         }
         goto LABEL_126;
       case 0x1E:
         v19 = 8;
-        v20 = ((unsigned __int16 (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)();
-        if ( ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() > 0 )
+        v20 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl);
+        if ( ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) > 0 )
         {
           v41 = 0i64;
           do
           {
-            v42 = (__int64)v8->m_impl->vfptr[19].__vecDelDtor((hkDataRefCounted *)v8->m_impl, v9++);
+            v42 = (__int64)v7->m_impl->vfptr[19].__vecDelDtor(v7->m_impl, (unsigned int)v8++);
             *(_QWORD *)((char *)*v18 + v41) = v42;
             v41 += 8i64;
           }
-          while ( v9 < ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() );
+          while ( v8 < ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) );
         }
         goto LABEL_127;
       case 0x20:
         v19 = 2;
-        v20 = ((unsigned __int16 (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)();
-        if ( ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() > 0 )
+        v20 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl);
+        if ( ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) > 0 )
         {
-          v45 = 0i64;
+          v46 = 0i64;
           do
           {
-            v8->m_impl->vfptr[15].__vecDelDtor((hkDataRefCounted *)v8->m_impl, v9);
-            v46 = (char *)*v18;
-            ++v9;
-            v45 += 2i64;
-            LODWORD(srcArray) = a5;
-            *(_WORD *)&v46[v45 - 2] = HIWORD(a5);
+            v47 = ((float (__fastcall *)(hkDataArrayImpl *, _QWORD))v7->m_impl->vfptr[15].__vecDelDtor)(
+                    v7->m_impl,
+                    (unsigned int)v8);
+            v48 = (char *)*v18;
+            ++v8;
+            v46 += 2i64;
+            *(float *)&srcArray = v47;
+            *(_WORD *)&v48[v46 - 2] = HIWORD(v47);
           }
-          while ( v9 < ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() );
+          while ( v8 < ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) );
         }
         goto LABEL_127;
       case 0x21:
-        v98 = ((__int64 (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)();
-        v99 = v8->m_impl;
+        v101 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl);
+        v102 = v7->m_impl;
         v19 = 8;
-        LOWORD(srcArray) = v98;
-        v100 = v99->vfptr;
+        LOWORD(srcArray) = v101;
+        v103 = v102->vfptr;
         LODWORD(obj.m_impl) = 8;
-        v101 = 0;
-        if ( ((signed int (*)(void))v100[5].__vecDelDtor)() > 0 )
+        v104 = 0;
+        if ( ((int (__fastcall *)(hkDataArrayImpl *))v103[5].__vecDelDtor)(v102) > 0 )
         {
-          v102 = 0;
+          v105 = 0;
           do
           {
-            if ( v16 )
+            if ( m_enum )
               break;
-            v103 = (unsigned __int8)v10->m_subtype.m_storage;
-            value.m_impl = v8->m_impl;
-            v104 = (char *)*v18 + v102;
-            value.m_index = v101;
-            v16 = hkDataObjectToNative::fillNativeSimpleMember<hkDataArray_Value>(
-                    v111,
-                    &v108,
-                    v104,
-                    v103,
-                    &value,
-                    0i64,
-                    owningReference,
-                    copyInfoOut)->m_enum;
-            ++v101;
-            v102 += 8;
+            v106 = (unsigned __int8)member->m_subtype.m_storage;
+            value.m_impl = v7->m_impl;
+            v107 = (char *)*v18 + v105;
+            value.m_index = v104;
+            m_enum = hkDataObjectToNative::fillNativeSimpleMember<hkDataArray_Value>(
+                       this,
+                       &v111,
+                       v107,
+                       v106,
+                       &value,
+                       0i64,
+                       owningReference,
+                       copyInfoOut)->m_enum;
+            ++v104;
+            v105 += 8;
           }
-          while ( v101 < ((signed int (*)(void))v8->m_impl->vfptr[5].__vecDelDtor)() );
-          v19 = (signed int)obj.m_impl;
+          while ( v104 < ((int (__fastcall *)(hkDataArrayImpl *))v7->m_impl->vfptr[5].__vecDelDtor)(v7->m_impl) );
+          v19 = (int)obj.m_impl;
         }
 LABEL_126:
-        LOWORD(v20) = (_WORD)srcArray;
+        v20 = (unsigned __int16)srcArray;
 LABEL_127:
-        v113[1] = *(_WORD *)v18 - (_WORD)v113;
-        *v18 = (char *)*v18 + ((v19 * (unsigned __int16)v20 + 15) & 0xFFFFFFFFFFFFFFF0ui64);
-        *v113 = v20;
+        address[1] = *(_WORD *)v18 - (_WORD)address;
+        *v18 = (char *)*v18 + ((v19 * v20 + 15) & 0xFFFFFFFFFFFFFFF0ui64);
+        *address = v20;
 $LN1_70:
-        v14 = v112;
-        v112->m_enum = v16;
+        v14 = result;
+        result->m_enum = m_enum;
         break;
       default:
-        v12->m_enum = 1;
-        v14 = v12;
+        result->m_enum = HK_FAILURE;
+        v14 = result;
         break;
     }
   }
   else
   {
-    v12->m_enum = 0;
-    *v11 = 0;
-    v14 = v12;
+    result->m_enum = HK_SUCCESS;
+    *(_DWORD *)address = 0;
+    return result;
   }
   return v14;
 }
 
 // File Line: 655
 // RVA: 0xE62500
-hkResult *__fastcall hkDataObjectToNative::fillNativeEnumMember(hkDataObjectToNative *this, hkResult *result, void *address, hkClassMember *member, hkDataObject_Value *value)
+hkResult *__fastcall hkDataObjectToNative::fillNativeEnumMember(
+        hkDataObjectToNative *this,
+        hkResult *result,
+        void *address,
+        hkClassMember *member,
+        hkDataObject_Value *value)
 {
-  int v5; // eax
-  hkClassMember *v6; // rdi
-  void *v7; // rsi
-  hkResult *v8; // rbx
-  hkResult *v9; // rax
+  int m_storage; // eax
   int v10; // eax
 
-  v5 = (unsigned __int8)member->m_type.m_storage;
-  v6 = member;
-  v7 = address;
-  v8 = result;
-  if ( v5 == 24 || v5 == 31 )
+  m_storage = (unsigned __int8)member->m_type.m_storage;
+  if ( m_storage == 24 || m_storage == 31 )
   {
     if ( member->m_enum )
     {
-      v10 = (__int64)value->m_impl->vfptr[12].__vecDelDtor(
-                       (hkDataRefCounted *)value->m_impl,
-                       (unsigned int)value->m_handle);
-      hkClassMember::setEnumValue(v6, v7, v10);
+      v10 = (int)value->m_impl->vfptr[12].__vecDelDtor(value->m_impl, value->m_handle);
+      hkClassMember::setEnumValue(member, address, v10);
     }
-    v8->m_enum = 0;
-    v9 = v8;
+    result->m_enum = HK_SUCCESS;
+    return result;
   }
   else
   {
-    result->m_enum = 1;
-    v9 = result;
+    result->m_enum = HK_FAILURE;
+    return result;
   }
-  return v9;
 }
 
 // File Line: 695
 // RVA: 0xE62B30
-hkResult *__usercall hkDataObjectToNative::fillNativeSimpleMember<hkDataObject_Value>@<rax>(hkDataObjectToNative *this@<rcx>, hkResult *result@<rdx>, void *address@<r8>, hkClassMember::Type mtype@<r9d>, hkResultEnum a5@<xmm0>, hkDataObject_Value *value, hkClass *structClass, unsigned int owningReference, hkDataObjectToNative::CopyInfoOut *copyInfoOut)
+hkResult *__fastcall hkDataObjectToNative::fillNativeSimpleMember<hkDataObject_Value>(
+        hkDataObjectToNative *this,
+        hkResult *result,
+        hkVariant *address,
+        hkClassMember::Type mtype,
+        hkDataObject_Value *value,
+        hkClass *structClass,
+        unsigned int owningReference,
+        hkDataObjectToNative::CopyInfoOut *copyInfoOut)
 {
-  hkVariant *v9; // rdi
-  hkResult *v10; // rsi
-  hkDataObjectToNative *v11; // rbp
-  int v12; // eax
-  char v13; // al
-  __int16 v14; // ax
-  int v15; // eax
-  void *v16; // rax
-  hkDataObjectImpl *v17; // rax
-  hkDataObjectImpl *v18; // rbx
-  hkDataObjectImpl *v19; // rax
-  hkResult *v20; // rax
-  hkDataObjectImpl *v21; // rcx
-  bool v22; // bl
-  bool v23; // zf
-  hkVariant *v24; // rax
+  int v11; // eax
+  char v12; // al
+  __int16 v13; // ax
+  int v14; // eax
+  void *v15; // rax
+  float v16; // xmm0_4
+  hkResultEnum v17; // xmm0_4
+  hkDataObjectImpl *v18; // rax
+  hkDataObjectImpl *v19; // rbx
+  hkDataObjectImpl *v20; // rax
+  hkResult *v21; // rax
+  hkDataObjectImpl *m_impl; // rcx
+  bool v23; // bl
+  bool v24; // zf
   hkVariant *v25; // rax
   hkVariant *v26; // rax
-  hkDataObject_Value *v27; // rbx
-  const char *v28; // rax
+  hkVariant *v27; // rax
+  hkDataObject_Value *v28; // rbx
   char *v29; // rax
-  char *v30; // rbx
-  hkDataObject_Value *v31; // rbx
-  const char *v32; // rax
-  hkDataObjectImpl *v33; // rax
-  hkDataObject srcObj; // [rsp+30h] [rbp-18h]
-  hkDataObject obj; // [rsp+38h] [rbp-10h]
-  hkResult resulta; // [rsp+68h] [rbp+20h]
+  char *v30; // rax
+  char *v31; // rbx
+  hkDataObject_Value *v32; // rbx
+  char *v33; // rax
+  hkDataObjectImpl *v34; // rax
+  hkDataObject srcObj; // [rsp+30h] [rbp-18h] BYREF
+  hkDataObject obj; // [rsp+38h] [rbp-10h] BYREF
+  hkResult resulta; // [rsp+68h] [rbp+20h] BYREF
 
-  v9 = (hkVariant *)address;
-  v10 = result;
-  v11 = this;
   switch ( mtype )
   {
     case 1:
-      v12 = (__int64)value->m_impl->vfptr[12].__vecDelDtor(
-                       (hkDataRefCounted *)value->m_impl,
-                       (unsigned int)value->m_handle);
-      v10->m_enum = 0;
-      LOBYTE(v9->m_object) = v12 != 0;
-      return v10;
+      v11 = (int)value->m_impl->vfptr[12].__vecDelDtor(value->m_impl, value->m_handle);
+      result->m_enum = HK_SUCCESS;
+      LOBYTE(address->m_object) = v11 != 0;
+      return result;
     case 2:
     case 3:
     case 4:
-      v13 = (__int64)value->m_impl->vfptr[12].__vecDelDtor(
-                       (hkDataRefCounted *)value->m_impl,
-                       (unsigned int)value->m_handle);
-      v10->m_enum = 0;
-      LOBYTE(v9->m_object) = v13;
-      return v10;
+      v12 = (char)value->m_impl->vfptr[12].__vecDelDtor(value->m_impl, value->m_handle);
+      result->m_enum = HK_SUCCESS;
+      LOBYTE(address->m_object) = v12;
+      return result;
     case 5:
     case 6:
-      v14 = (__int64)value->m_impl->vfptr[12].__vecDelDtor(
-                       (hkDataRefCounted *)value->m_impl,
-                       (unsigned int)value->m_handle);
-      v10->m_enum = 0;
-      LOWORD(v9->m_object) = v14;
-      return v10;
+      v13 = (__int16)value->m_impl->vfptr[12].__vecDelDtor(value->m_impl, value->m_handle);
+      result->m_enum = HK_SUCCESS;
+      LOWORD(address->m_object) = v13;
+      return result;
     case 7:
     case 8:
-      v15 = (__int64)value->m_impl->vfptr[12].__vecDelDtor(
-                       (hkDataRefCounted *)value->m_impl,
-                       (unsigned int)value->m_handle);
-      v10->m_enum = 0;
-      LODWORD(v9->m_object) = v15;
-      return v10;
+      v14 = (int)value->m_impl->vfptr[12].__vecDelDtor(value->m_impl, value->m_handle);
+      result->m_enum = HK_SUCCESS;
+      LODWORD(address->m_object) = v14;
+      return result;
     case 9:
     case 10:
     case 30:
-      v16 = value->m_impl->vfptr[12].__vecDelDtor((hkDataRefCounted *)value->m_impl, (unsigned int)value->m_handle);
-      v10->m_enum = 0;
-      v9->m_object = v16;
-      return v10;
+      v15 = value->m_impl->vfptr[12].__vecDelDtor(value->m_impl, value->m_handle);
+      result->m_enum = HK_SUCCESS;
+      address->m_object = v15;
+      return result;
     case 11:
-      value->m_impl->vfptr[15].__vecDelDtor((hkDataRefCounted *)value->m_impl, (unsigned int)value->m_handle);
-      v10->m_enum = 0;
-      LODWORD(v9->m_object) = a5;
-      return v10;
+      v16 = ((float (__fastcall *)(hkDataObjectImpl *, const struct _hkDataObject_MemberHandle *))value->m_impl->vfptr[15].__vecDelDtor)(
+              value->m_impl,
+              value->m_handle);
+      result->m_enum = HK_SUCCESS;
+      *(float *)&address->m_object = v16;
+      return result;
     case 12:
     case 13:
-      v24 = (hkVariant *)((__int64 (__fastcall *)(hkDataObjectImpl *, const struct _hkDataObject_MemberHandle *, signed __int64))value->m_impl->vfptr[14].__vecDelDtor)(
+      v25 = (hkVariant *)((__int64 (__fastcall *)(hkDataObjectImpl *, const struct _hkDataObject_MemberHandle *, __int64))value->m_impl->vfptr[14].__vecDelDtor)(
                            value->m_impl,
                            value->m_handle,
                            4i64);
-      v10->m_enum = 0;
-      *v9 = *v24;
-      return v10;
+      result->m_enum = HK_SUCCESS;
+      *address = *v25;
+      return result;
     case 14:
     case 15:
     case 16:
-      v25 = (hkVariant *)((__int64 (__fastcall *)(hkDataObjectImpl *, const struct _hkDataObject_MemberHandle *, signed __int64))value->m_impl->vfptr[14].__vecDelDtor)(
+      v26 = (hkVariant *)((__int64 (__fastcall *)(hkDataObjectImpl *, const struct _hkDataObject_MemberHandle *, __int64))value->m_impl->vfptr[14].__vecDelDtor)(
                            value->m_impl,
                            value->m_handle,
                            12i64);
-      v10->m_enum = 0;
-      *v9 = *v25;
-      v9[1] = v25[1];
-      v9[2] = v25[2];
-      return v10;
+      result->m_enum = HK_SUCCESS;
+      *address = *v26;
+      address[1] = v26[1];
+      address[2] = v26[2];
+      return result;
     case 17:
     case 18:
-      v26 = (hkVariant *)((__int64 (__fastcall *)(hkDataObjectImpl *, const struct _hkDataObject_MemberHandle *, signed __int64))value->m_impl->vfptr[14].__vecDelDtor)(
+      v27 = (hkVariant *)((__int64 (__fastcall *)(hkDataObjectImpl *, const struct _hkDataObject_MemberHandle *, __int64))value->m_impl->vfptr[14].__vecDelDtor)(
                            value->m_impl,
                            value->m_handle,
                            16i64);
-      v10->m_enum = 0;
-      *v9 = *v26;
-      v9[1] = v26[1];
-      v9[2] = v26[2];
-      v9[3] = v26[3];
-      return v10;
+      result->m_enum = HK_SUCCESS;
+      *address = *v27;
+      address[1] = v27[1];
+      address[2] = v27[2];
+      address[3] = v27[3];
+      return result;
     case 20:
       if ( !structClass )
         goto LABEL_41;
-      v17 = (hkDataObjectImpl *)value->m_impl->vfptr[13].__vecDelDtor(
-                                  (hkDataRefCounted *)value->m_impl,
-                                  (unsigned int)value->m_handle);
-      v18 = v17;
-      obj.m_impl = v17;
-      if ( v17 )
+      v18 = (hkDataObjectImpl *)value->m_impl->vfptr[13].__vecDelDtor(value->m_impl, value->m_handle);
+      v19 = v18;
+      obj.m_impl = v18;
+      if ( v18 )
       {
-        ++v17->m_externalCount;
-        ++v17->m_count;
+        ++v18->m_externalCount;
+        ++v18->m_count;
       }
-      hkDataObjectToNative::CopyInfoOut::addPointer(copyInfoOut, &obj, v9, owningReference);
+      hkDataObjectToNative::CopyInfoOut::addPointer(copyInfoOut, &obj, address, owningReference);
       goto LABEL_38;
     case 25:
       if ( !structClass )
         goto LABEL_41;
-      v19 = (hkDataObjectImpl *)value->m_impl->vfptr[13].__vecDelDtor(
-                                  (hkDataRefCounted *)value->m_impl,
-                                  (unsigned int)value->m_handle);
-      srcObj.m_impl = v19;
-      if ( v19 )
+      v20 = (hkDataObjectImpl *)value->m_impl->vfptr[13].__vecDelDtor(value->m_impl, value->m_handle);
+      srcObj.m_impl = v20;
+      if ( v20 )
       {
-        ++v19->m_externalCount;
-        ++v19->m_count;
+        ++v20->m_externalCount;
+        ++v20->m_count;
       }
-      v20 = hkDataObjectToNative::fillNativeMembers(v11, &resulta, v9, &srcObj, copyInfoOut);
-      v21 = srcObj.m_impl;
-      v22 = v20->m_enum == 1;
+      v21 = hkDataObjectToNative::fillNativeMembers(this, &resulta, (char *)address, &srcObj, copyInfoOut);
+      m_impl = srcObj.m_impl;
+      v23 = v21->m_enum == HK_FAILURE;
       if ( srcObj.m_impl )
       {
         --srcObj.m_impl->m_externalCount;
-        v23 = v21->m_count-- == 1;
-        if ( v23 )
-          v21->vfptr->__vecDelDtor((hkDataRefCounted *)&v21->vfptr, 1u);
+        v24 = m_impl->m_count-- == 1;
+        if ( v24 )
+          m_impl->vfptr->__vecDelDtor(m_impl, 1u);
       }
-      if ( !v22 )
+      if ( !v23 )
         goto LABEL_41;
-      v10->m_enum = 1;
-      return v10;
+      result->m_enum = HK_FAILURE;
+      return result;
     case 28:
       if ( this->m_allocatedOnHeap )
         goto LABEL_42;
-      v33 = (hkDataObjectImpl *)value->m_impl->vfptr[13].__vecDelDtor(
-                                  (hkDataRefCounted *)value->m_impl,
-                                  (unsigned int)value->m_handle);
-      v18 = v33;
-      obj.m_impl = v33;
-      if ( v33 )
+      v34 = (hkDataObjectImpl *)value->m_impl->vfptr[13].__vecDelDtor(value->m_impl, value->m_handle);
+      v19 = v34;
+      obj.m_impl = v34;
+      if ( v34 )
       {
-        ++v33->m_externalCount;
-        ++v33->m_count;
+        ++v34->m_externalCount;
+        ++v34->m_count;
       }
-      hkDataObjectToNative::CopyInfoOut::addVariant(copyInfoOut, &obj, v9, owningReference);
+      hkDataObjectToNative::CopyInfoOut::addVariant(copyInfoOut, &obj, address, owningReference);
 LABEL_38:
-      if ( v18 )
+      if ( v19 )
       {
-        --v18->m_externalCount;
-        v23 = v18->m_count-- == 1;
-        if ( v23 )
-          v18->vfptr->__vecDelDtor((hkDataRefCounted *)&v18->vfptr, 1u);
+        --v19->m_externalCount;
+        v24 = v19->m_count-- == 1;
+        if ( v24 )
+          v19->vfptr->__vecDelDtor(v19, 1u);
       }
 LABEL_41:
-      v10->m_enum = 0;
-      return v10;
+      result->m_enum = HK_SUCCESS;
+      return result;
     case 29:
       if ( this->m_allocatedOnHeap )
         goto LABEL_42;
-      v27 = value;
-      if ( !(__int64)value->m_impl->vfptr[11].__vecDelDtor(
-                       (hkDataRefCounted *)value->m_impl,
-                       (unsigned int)value->m_handle) )
-        goto LABEL_28;
-      v28 = (const char *)v27->m_impl->vfptr[11].__vecDelDtor(
-                            (hkDataRefCounted *)v27->m_impl,
-                            (unsigned int)v27->m_handle);
-      v29 = hkString::strDup(v28);
-      v30 = v29;
-      if ( v29 )
-        goto LABEL_27;
-      goto LABEL_29;
-    case 32:
-      value->m_impl->vfptr[15].__vecDelDtor((hkDataRefCounted *)value->m_impl, (unsigned int)value->m_handle);
-      v10->m_enum = 0;
-      resulta.m_enum = a5;
-      LOWORD(v9->m_object) = HIWORD(a5);
-      return v10;
-    case 33:
-      v31 = value;
-      if ( !(__int64)value->m_impl->vfptr[11].__vecDelDtor(
-                       (hkDataRefCounted *)value->m_impl,
-                       (unsigned int)value->m_handle) )
+      v28 = value;
+      if ( value->m_impl->vfptr[11].__vecDelDtor(value->m_impl, value->m_handle) )
       {
-LABEL_28:
-        v30 = 0i64;
-LABEL_29:
-        v9->m_object = v30;
-        v10->m_enum = 0;
-        return v10;
-      }
-      v32 = (const char *)v31->m_impl->vfptr[11].__vecDelDtor(
-                            (hkDataRefCounted *)v31->m_impl,
-                            (unsigned int)v31->m_handle);
-      v29 = hkString::strDup(v32);
-      v30 = v29;
-      if ( !v29 )
-        goto LABEL_29;
-      if ( v11->m_allocatedOnHeap )
-      {
-        v10->m_enum = 0;
-        v9->m_object = v29 + 1;
+        v29 = (char *)v28->m_impl->vfptr[11].__vecDelDtor(v28->m_impl, v28->m_handle);
+        v30 = hkString::strDup(v29);
+        v31 = v30;
+        if ( v30 )
+        {
+LABEL_27:
+          hkDataObjectToNative::CopyInfoOut::addAlloc(copyInfoOut, v30, -1);
+          address->m_object = v31;
+          result->m_enum = HK_SUCCESS;
+          return result;
+        }
       }
       else
       {
-LABEL_27:
-        hkDataObjectToNative::CopyInfoOut::addAlloc(copyInfoOut, v29, -1);
-        v9->m_object = v30;
-        v10->m_enum = 0;
+LABEL_28:
+        v31 = 0i64;
       }
-      return v10;
+LABEL_29:
+      address->m_object = v31;
+      result->m_enum = HK_SUCCESS;
+      return result;
+    case 32:
+      *(float *)&v17 = ((float (__fastcall *)(hkDataObjectImpl *, const struct _hkDataObject_MemberHandle *))value->m_impl->vfptr[15].__vecDelDtor)(
+                         value->m_impl,
+                         value->m_handle);
+      result->m_enum = HK_SUCCESS;
+      resulta.m_enum = v17;
+      LOWORD(address->m_object) = HIWORD(v17);
+      return result;
+    case 33:
+      v32 = value;
+      if ( !value->m_impl->vfptr[11].__vecDelDtor(value->m_impl, value->m_handle) )
+        goto LABEL_28;
+      v33 = (char *)v32->m_impl->vfptr[11].__vecDelDtor(v32->m_impl, v32->m_handle);
+      v30 = hkString::strDup(v33);
+      v31 = v30;
+      if ( !v30 )
+        goto LABEL_29;
+      if ( !this->m_allocatedOnHeap )
+        goto LABEL_27;
+      result->m_enum = HK_SUCCESS;
+      address->m_object = v30 + 1;
+      return result;
     default:
 LABEL_42:
-      result->m_enum = 1;
-      return v10;
+      result->m_enum = HK_FAILURE;
+      return result;
   }
-}  v10->m_enum = 0;
-      }
-      return v10;
-    default:
-LABEL_42:
-      result->m_enum = 1;
-      return v10;
-  }
 }
 
 // File Line: 839
 // RVA: 0xE5FDF0
-hkResult *__fastcall hkDataObjectToNative::fillNativeMembers(hkDataObjectToNative *this, hkResult *result, void *dstObject, hkDataObject *srcObj, hkDataObjectToNative::CopyInfoOut *copyInfoOut)
+hkResult *__fastcall hkDataObjectToNative::fillNativeMembers(
+        hkDataObjectToNative *this,
+        hkResult *result,
+        char *dstObject,
+        hkDataObject *srcObj,
+        hkDataObjectToNative::CopyInfoOut *copyInfoOut)
 {
-  char *v5; // rsi
-  hkResultEnum v6; // edi
-  hkClass *v7; // rax
-  hkClass *v8; // rbx
-  __int64 v9; // rcx
-  hkClass *v10; // rax
-  int v11; // ebx
-  hkClassMember *v12; // rax
-  __int64 v13; // rbx
-  hkClassMember *v14; // rsi
-  char *v15; // rbx
-  const char *v16; // r8
-  hkDataObjectImpl *v17; // rcx
-  int v18; // ebx
-  const char *v19; // rax
+  hkResultEnum m_enum; // edi
+  __int64 v7; // rcx
+  hkClass *Parent; // rax
+  int v9; // ebx
+  hkClassMember *DeclaredMember; // rax
+  __int64 m_offset; // rbx
+  hkClassMember *v12; // rsi
+  char *v13; // rbx
+  const char *m_name; // r8
+  hkDataObjectImpl *m_impl; // rcx
+  unsigned int SizeInBytes; // ebx
+  const char *DeclaredDefault; // rax
+  int v18; // eax
+  int v19; // r8d
   int v20; // eax
-  int v21; // er8
-  int v22; // eax
-  unsigned int v23; // edx
-  int v24; // edx
+  unsigned int m_storage; // edx
+  int v22; // edx
   hkClass *structClass; // rax
-  hkDataArrayImpl *v26; // rax
-  hkDataArrayImpl *v27; // rbx
-  hkDataRefCountedVtbl *v28; // rax
-  int v29; // ecx
-  hkClass *v30; // rax
-  hkResult *v31; // rax
-  int v32; // eax
-  hkDataArrayImpl *v33; // rax
-  hkResult *v34; // rax
-  hkDataArrayImpl *v35; // rcx
-  bool v36; // zf
-  hkDataRefCountedVtbl *v37; // rax
+  hkDataArrayImpl *v24; // rax
+  hkDataArrayImpl *v25; // rbx
+  hkDataRefCountedVtbl *vfptr; // rax
+  int v27; // ecx
+  hkClass *Class; // rax
+  hkResult *v29; // rax
+  int v30; // eax
+  hkDataArrayImpl *v31; // rax
+  hkResult *v32; // rax
+  hkDataArrayImpl *v33; // rcx
+  bool v34; // zf
+  hkDataRefCountedVtbl *v35; // rax
+  hkDataArrayImpl *v36; // rax
+  char v37; // al
   hkDataArrayImpl *v38; // rax
-  char v39; // al
-  hkDataArrayImpl *v40; // rax
-  int v41; // esi
-  int v42; // eax
-  int v43; // eax
-  bool v44; // sf
-  unsigned __int8 v45; // of
-  hkDataRefCountedVtbl *v46; // rax
-  hkDataArrayImpl *v47; // rax
-  hkClass *v48; // rax
-  __int64 v49; // rax
-  hkDataArrayImpl *v50; // rsi
-  __int64 v51; // rax
-  int v52; // ebx
-  hkDataObjectImpl *v53; // rax
-  hkDataObjectImpl *v54; // rbx
-  hkClass *v55; // rax
-  hkDataRefCountedVtbl *v56; // rax
-  hkDataArrayImpl *v57; // rax
-  hkDataObjectImpl *v58; // rax
-  hkDataObjectImpl *v59; // rsi
-  hkClass *v60; // rax
-  int v61; // eax
-  _DWORD *v62; // rsi
-  hkClass *v63; // rcx
-  int v64; // eax
-  __int64 v65; // rcx
-  void *v66; // rax
-  void **v67; // rsi
-  int v68; // er8
-  signed int v69; // esi
-  hkDataObjectImpl *v70; // rax
-  hkResult *v71; // rax
-  hkDataObjectImpl *v72; // rcx
-  hkResult *v73; // rax
-  int n; // [rsp+40h] [rbp-C0h]
-  int v75; // [rsp+44h] [rbp-BCh]
-  int v76; // [rsp+48h] [rbp-B8h]
+  int v39; // esi
+  int v40; // eax
+  bool v41; // cc
+  hkDataRefCountedVtbl *v42; // rax
+  hkDataArrayImpl *v43; // rax
+  hkClass *v44; // rax
+  __int64 v45; // rax
+  hkDataArrayImpl *v46; // rsi
+  __int64 v47; // rax
+  int v48; // ebx
+  hkDataObjectImpl *v49; // rax
+  hkDataObjectImpl *v50; // rbx
+  hkClass *v51; // rax
+  hkDataRefCountedVtbl *v52; // rax
+  hkDataArrayImpl *v53; // rax
+  hkDataObjectImpl *v54; // rax
+  hkDataObjectImpl *v55; // rsi
+  hkClass *v56; // rax
+  int v57; // eax
+  _DWORD *v58; // rsi
+  hkClass *v59; // rcx
+  int ObjectSize; // eax
+  __int64 v61; // rcx
+  void *v62; // rax
+  void **v63; // rsi
+  int v64; // r8d
+  signed int v65; // esi
+  hkDataObjectImpl *v66; // rax
+  hkResult *v67; // rax
+  hkDataObjectImpl *v68; // rcx
+  hkResult *v69; // rax
+  int n; // [rsp+40h] [rbp-C0h] BYREF
+  int CstyleArraySize; // [rsp+44h] [rbp-BCh]
+  int v72; // [rsp+48h] [rbp-B8h]
   hkClassMember::Type mtype; // [rsp+4Ch] [rbp-B4h]
   void *dst; // [rsp+50h] [rbp-B0h]
   unsigned int owningReference; // [rsp+58h] [rbp-A8h]
-  hkDataObject_Value value; // [rsp+60h] [rbp-A0h]
+  hkDataObject_Value value; // [rsp+60h] [rbp-A0h] BYREF
   int declaredIndex; // [rsp+70h] [rbp-90h]
   hkClass *klass; // [rsp+78h] [rbp-88h]
-  hkDataArray v83; // [rsp+80h] [rbp-80h]
-  hkDataObject v84; // [rsp+88h] [rbp-78h]
-  hkDataObject obj; // [rsp+90h] [rbp-70h]
-  hkDataArray srcArray; // [rsp+98h] [rbp-68h]
-  hkResult v87; // [rsp+A0h] [rbp-60h]
-  hkResult v88; // [rsp+A4h] [rbp-5Ch]
-  void *relArrayAddress; // [rsp+A8h] [rbp-58h]
-  hkResult v90; // [rsp+B0h] [rbp-50h]
-  hkResult v91; // [rsp+B4h] [rbp-4Ch]
-  hkResult v92; // [rsp+B8h] [rbp-48h]
-  hkResult resulta; // [rsp+BCh] [rbp-44h]
-  hkResult v94; // [rsp+C0h] [rbp-40h]
-  hkResult v95; // [rsp+C4h] [rbp-3Ch]
-  hkResult v96; // [rsp+C8h] [rbp-38h]
-  hkResult v97; // [rsp+CCh] [rbp-34h]
-  hkDataArray_Value v98; // [rsp+D0h] [rbp-30h]
-  hkDataArray_Value v99; // [rsp+E0h] [rbp-20h]
-  hkDataArray_Value v100; // [rsp+F0h] [rbp-10h]
-  __int64 v101; // [rsp+100h] [rbp+0h]
-  __int64 v102; // [rsp+108h] [rbp+8h]
-  __int64 v103; // [rsp+110h] [rbp+10h]
-  __int64 v104; // [rsp+118h] [rbp+18h]
-  hkDataObjectToNative *v105; // [rsp+150h] [rbp+50h]
-  hkResult *v106; // [rsp+158h] [rbp+58h]
-  char *objectStart; // [rsp+160h] [rbp+60h]
-  hkDataObject *v108; // [rsp+168h] [rbp+68h]
+  hkDataArray v79; // [rsp+80h] [rbp-80h] BYREF
+  hkDataObject v80; // [rsp+88h] [rbp-78h] BYREF
+  hkDataObject obj; // [rsp+90h] [rbp-70h] BYREF
+  hkDataArray srcArray; // [rsp+98h] [rbp-68h] BYREF
+  hkResult v83; // [rsp+A0h] [rbp-60h] BYREF
+  hkResult v84; // [rsp+A4h] [rbp-5Ch] BYREF
+  void *relArrayAddress; // [rsp+A8h] [rbp-58h] BYREF
+  hkResult v86; // [rsp+B0h] [rbp-50h] BYREF
+  hkResult v87; // [rsp+B4h] [rbp-4Ch] BYREF
+  hkResult v88; // [rsp+B8h] [rbp-48h] BYREF
+  hkResult resulta; // [rsp+BCh] [rbp-44h] BYREF
+  hkResult v90; // [rsp+C0h] [rbp-40h] BYREF
+  hkResult v91; // [rsp+C4h] [rbp-3Ch] BYREF
+  hkResult v92; // [rsp+C8h] [rbp-38h] BYREF
+  hkResult v93; // [rsp+CCh] [rbp-34h] BYREF
+  hkDataArray_Value v94; // [rsp+D0h] [rbp-30h] BYREF
+  hkDataArray_Value v95; // [rsp+E0h] [rbp-20h] BYREF
+  hkDataArray_Value v96; // [rsp+F0h] [rbp-10h] BYREF
+  __int64 v97[3]; // [rsp+100h] [rbp+0h] BYREF
+  __int64 v98; // [rsp+118h] [rbp+18h]
 
-  v108 = srcObj;
-  objectStart = (char *)dstObject;
-  v106 = result;
-  v105 = this;
-  v5 = (char *)dstObject;
-  v6 = 0;
-  v7 = hkDataObjectToNative::findClassOf(this, srcObj);
-  v8 = v7;
-  klass = v7;
-  hkClass::getObjectSize(v7);
-  v9 = (signed int)((unsigned __int64)hkClass::getObjectSize(v8) + 15);
-  v10 = v8;
-  relArrayAddress = &v5[v9 & 0xFFFFFFFFFFFFFFF0ui64];
-  if ( !v8 )
+  m_enum = HK_SUCCESS;
+  klass = hkDataObjectToNative::findClassOf(this, srcObj);
+  hkClass::getObjectSize(klass);
+  v7 = (int)(hkClass::getObjectSize(klass) + 15);
+  Parent = klass;
+  relArrayAddress = &dstObject[v7 & 0xFFFFFFFFFFFFFFF0ui64];
+  if ( !klass )
   {
 LABEL_98:
-    v73 = v106;
-    v106->m_enum = v6;
-    return v73;
+    v69 = result;
+    result->m_enum = m_enum;
+    return v69;
   }
   while ( 1 )
   {
-    v11 = 0;
+    v9 = 0;
     declaredIndex = 0;
-    if ( (signed int)hkClass::getNumDeclaredMembers(v10) > 0 )
+    if ( (int)hkClass::getNumDeclaredMembers(Parent) > 0 )
       break;
 LABEL_97:
-    v10 = hkClass::getParent(klass);
-    klass = v10;
-    if ( !v10 )
+    Parent = hkClass::getParent(klass);
+    klass = Parent;
+    if ( !Parent )
       goto LABEL_98;
   }
   while ( 1 )
   {
-    v12 = hkClass::getDeclaredMember(klass, v11);
-    v13 = v12->m_offset;
-    v14 = v12;
-    v83.m_impl = (hkDataArrayImpl *)v12;
-    v15 = &objectStart[v13];
-    v16 = v12->m_name;
-    mtype = (unsigned __int8)v12->m_type.m_storage;
-    dst = v15;
-    ((void (__fastcall *)(hkDataObjectImpl *, hkDataObject_Value *, const char *))v108->m_impl->vfptr[3].__vecDelDtor)(
-      v108->m_impl,
+    DeclaredMember = hkClass::getDeclaredMember(klass, v9);
+    m_offset = DeclaredMember->m_offset;
+    v12 = DeclaredMember;
+    v79.m_impl = (hkDataArrayImpl *)DeclaredMember;
+    v13 = &dstObject[m_offset];
+    m_name = DeclaredMember->m_name;
+    mtype = (unsigned __int8)DeclaredMember->m_type.m_storage;
+    dst = v13;
+    ((void (__fastcall *)(hkDataObjectImpl *, hkDataObject_Value *, const char *))srcObj->m_impl->vfptr[3].__vecDelDtor)(
+      srcObj->m_impl,
       &value,
-      v16);
-    v17 = value.m_impl;
+      m_name);
+    m_impl = value.m_impl;
     if ( value.m_impl )
     {
-      if ( value.m_impl->vfptr[26].__vecDelDtor((hkDataRefCounted *)value.m_impl, (unsigned int)value.m_handle) )
+      if ( value.m_impl->vfptr[26].__vecDelDtor(value.m_impl, value.m_handle) )
         goto LABEL_17;
-      v17 = value.m_impl;
+      m_impl = value.m_impl;
     }
-    v101 = 0i64;
-    v102 = 0i64;
-    v103 = 0i64;
-    v104 = 0i64;
-    if ( v17 )
-      ((void (__fastcall *)(hkDataObjectImpl *, const struct _hkDataObject_MemberHandle *, __int64 *))v17->vfptr[25].__vecDelDtor)(
-        v17,
+    memset(v97, 0, sizeof(v97));
+    v98 = 0i64;
+    if ( m_impl )
+      ((void (__fastcall *)(hkDataObjectImpl *, const struct _hkDataObject_MemberHandle *, __int64 *))m_impl->vfptr[25].__vecDelDtor)(
+        m_impl,
         value.m_handle,
-        &v101);
-    if ( v14->m_type.m_storage == 22 )
-      *((_DWORD *)v15 + 3) = 2147483648;
-    if ( !(unsigned int)hkClass::hasDeclaredDefault(klass, declaredIndex)
-      || !((unsigned int (*)(void))v108->m_impl->vfptr[27].__vecDelDtor)() )
+        v97);
+    if ( v12->m_type.m_storage == 22 )
+      *((_DWORD *)v13 + 3) = 0x80000000;
+    if ( !hkClass::hasDeclaredDefault(klass, declaredIndex)
+      || !((unsigned int (__fastcall *)(hkDataObjectImpl *))srcObj->m_impl->vfptr[27].__vecDelDtor)(srcObj->m_impl) )
     {
       break;
     }
-    v18 = hkClassMember::getSizeInBytes(v14);
-    v19 = hkClass::getDeclaredDefault(klass, declaredIndex);
-    hkString::memCpy(dst, v19, v18);
+    SizeInBytes = hkClassMember::getSizeInBytes(v12);
+    DeclaredDefault = hkClass::getDeclaredDefault(klass, declaredIndex);
+    hkString::memCpy(dst, DeclaredDefault, SizeInBytes);
 LABEL_96:
-    v11 = ++declaredIndex;
-    if ( v11 >= (signed int)hkClass::getNumDeclaredMembers(klass) )
+    v9 = ++declaredIndex;
+    if ( v9 >= (int)hkClass::getNumDeclaredMembers(klass) )
       goto LABEL_97;
   }
-  if ( (!value.m_impl || !v104) && (mtype != 25 || v14->m_flags.m_storage & 0x400) )
+  if ( (!value.m_impl || !v98) && (mtype != 25 || (v12->m_flags.m_storage & 0x400) != 0) )
     goto LABEL_96;
 LABEL_17:
-  if ( (unsigned int)hkClassMember::getCstyleArraySize(v14) )
+  if ( (unsigned int)hkClassMember::getCstyleArraySize(v12) )
   {
-    v75 = hkClassMember::getCstyleArraySize(v14);
-    v20 = hkClassMember::getSizeInBytes(v14);
-    v21 = v75;
-    v22 = v20 / v75;
+    CstyleArraySize = hkClassMember::getCstyleArraySize(v12);
+    v18 = hkClassMember::getSizeInBytes(v12);
+    v19 = CstyleArraySize;
+    v20 = v18 / CstyleArraySize;
   }
   else
   {
-    v75 = 1;
-    v22 = hkClassMember::getSizeInBytes(v14);
-    v21 = v75;
+    CstyleArraySize = 1;
+    v20 = hkClassMember::getSizeInBytes(v12);
+    v19 = CstyleArraySize;
   }
-  v23 = v14->m_flags.m_storage;
-  v76 = v22;
-  LOWORD(v23) = ~(_WORD)v23;
-  v24 = (v23 >> 9) & 1;
-  owningReference = v24;
+  m_storage = v12->m_flags.m_storage;
+  v72 = v20;
+  LOWORD(m_storage) = ~(_WORD)m_storage;
+  v22 = (m_storage >> 9) & 1;
+  owningReference = v22;
   switch ( mtype )
   {
     case 1:
@@ -2171,415 +2091,397 @@ LABEL_17:
     case 30:
     case 32:
     case 33:
-      if ( v21 == 1 )
+      if ( v19 == 1 )
       {
-        structClass = hkClassMember::getClass(v14);
-        v6 = hkDataObjectToNative::fillNativeSimpleMember<hkDataObject_Value>(
-               v105,
-               &resulta,
-               v15,
-               mtype,
-               &value,
-               structClass,
-               owningReference,
-               copyInfoOut)->m_enum;
+        structClass = hkClassMember::getClass(v12);
+        m_enum = hkDataObjectToNative::fillNativeSimpleMember<hkDataObject_Value>(
+                   this,
+                   &resulta,
+                   v13,
+                   mtype,
+                   &value,
+                   structClass,
+                   owningReference,
+                   copyInfoOut)->m_enum;
         goto LABEL_95;
       }
-      v26 = (hkDataArrayImpl *)value.m_impl->vfptr[10].__vecDelDtor(
-                                 (hkDataRefCounted *)value.m_impl,
-                                 (unsigned int)value.m_handle);
-      v27 = v26;
-      if ( v26 )
+      v24 = (hkDataArrayImpl *)value.m_impl->vfptr[10].__vecDelDtor(value.m_impl, value.m_handle);
+      v25 = v24;
+      if ( v24 )
       {
-        ++v26->m_externalCount;
-        ++v26->m_count;
+        ++v24->m_externalCount;
+        ++v24->m_count;
       }
-      v28 = v26->vfptr;
-      v75 = 0;
-      if ( ((signed int (__fastcall *)(hkDataArrayImpl *))v28[5].__vecDelDtor)(v27) > 0 )
+      vfptr = v24->vfptr;
+      CstyleArraySize = 0;
+      if ( ((int (__fastcall *)(hkDataArrayImpl *))vfptr[5].__vecDelDtor)(v25) > 0 )
       {
-        v29 = v75;
+        v27 = CstyleArraySize;
         n = 0;
         do
         {
-          if ( v6 )
+          if ( m_enum )
             break;
-          v98.m_index = v29;
-          v98.m_impl = v27;
-          v30 = hkClassMember::getClass(v14);
-          v31 = hkDataObjectToNative::fillNativeSimpleMember<hkDataArray_Value>(
-                  v105,
-                  &v96,
+          v94.m_index = v27;
+          v94.m_impl = v25;
+          Class = hkClassMember::getClass(v12);
+          v29 = hkDataObjectToNative::fillNativeSimpleMember<hkDataArray_Value>(
+                  this,
+                  &v92,
                   (char *)dst + n,
                   mtype,
-                  &v98,
-                  v30,
+                  &v94,
+                  Class,
                   owningReference,
                   copyInfoOut);
-          ++v75;
-          v6 = v31->m_enum;
-          n += v76;
-          v32 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v27->vfptr[5].__vecDelDtor)(v27);
-          v29 = v75;
+          ++CstyleArraySize;
+          m_enum = v29->m_enum;
+          n += v72;
+          v30 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v25->vfptr[5].__vecDelDtor)(v25);
+          v27 = CstyleArraySize;
         }
-        while ( v75 < v32 );
+        while ( CstyleArraySize < v30 );
       }
       goto LABEL_92;
     case 20:
-      v39 = v14->m_subtype.m_storage;
-      if ( v39 == 2 )
+      v37 = v12->m_subtype.m_storage;
+      if ( v37 == 2 )
       {
-        if ( v21 == 1 )
+        if ( v19 == 1 )
         {
-          v6 = hkDataObjectToNative::fillNativeSimpleMember<hkDataObject_Value>(
-                 v105,
-                 &v94,
-                 v15,
-                 (hkClassMember::Type)29,
-                 &value,
-                 0i64,
-                 v24,
-                 copyInfoOut)->m_enum;
+          m_enum = hkDataObjectToNative::fillNativeSimpleMember<hkDataObject_Value>(
+                     this,
+                     &v90,
+                     v13,
+                     (hkClassMember::Type)29,
+                     &value,
+                     0i64,
+                     v22,
+                     copyInfoOut)->m_enum;
           goto LABEL_95;
         }
-        v40 = (hkDataArrayImpl *)value.m_impl->vfptr[10].__vecDelDtor(
-                                   (hkDataRefCounted *)value.m_impl,
-                                   (unsigned int)value.m_handle);
-        v27 = v40;
-        if ( v40 )
+        v38 = (hkDataArrayImpl *)value.m_impl->vfptr[10].__vecDelDtor(value.m_impl, value.m_handle);
+        v25 = v38;
+        if ( v38 )
         {
-          ++v40->m_externalCount;
-          ++v40->m_count;
+          ++v38->m_externalCount;
+          ++v38->m_count;
         }
-        v41 = 0;
-        if ( ((signed int (__fastcall *)(hkDataArrayImpl *))v40->vfptr[5].__vecDelDtor)(v40) > 0 )
+        v39 = 0;
+        if ( ((int (__fastcall *)(hkDataArrayImpl *))v38->vfptr[5].__vecDelDtor)(v38) > 0 )
         {
-          v42 = 0;
+          v40 = 0;
           n = 0;
           do
           {
-            if ( v6 )
+            if ( m_enum )
               break;
-            v100.m_impl = v27;
-            v100.m_index = v41;
-            v6 = hkDataObjectToNative::fillNativeSimpleMember<hkDataArray_Value>(
-                   v105,
-                   &v88,
-                   (char *)dst + v42,
-                   (hkClassMember::Type)29,
-                   &v100,
-                   0i64,
-                   owningReference,
-                   copyInfoOut)->m_enum;
-            n += v76;
-            ++v41;
-            v43 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v27->vfptr[5].__vecDelDtor)(v27);
-            v45 = __OFSUB__(v41, v43);
-            v44 = v41 - v43 < 0;
-            v42 = n;
+            v96.m_impl = v25;
+            v96.m_index = v39;
+            m_enum = hkDataObjectToNative::fillNativeSimpleMember<hkDataArray_Value>(
+                       this,
+                       &v84,
+                       (char *)dst + v40,
+                       (hkClassMember::Type)29,
+                       &v96,
+                       0i64,
+                       owningReference,
+                       copyInfoOut)->m_enum;
+            n += v72;
+            v41 = ++v39 < ((int (__fastcall *)(hkDataArrayImpl *))v25->vfptr[5].__vecDelDtor)(v25);
+            v40 = n;
           }
-          while ( v44 ^ v45 );
+          while ( v41 );
         }
 LABEL_92:
-        --v27->m_externalCount;
-        v36 = v27->m_count-- == 1;
-        if ( !v36 )
+        --v25->m_externalCount;
+        v34 = v25->m_count-- == 1;
+        if ( !v34 )
           goto LABEL_95;
-        v37 = v27->vfptr;
-        v35 = v27;
+        v35 = v25->vfptr;
+        v33 = v25;
 LABEL_94:
-        v37->__vecDelDtor((hkDataRefCounted *)&v35->vfptr, 1u);
+        v35->__vecDelDtor(v33, 1u);
         goto LABEL_95;
       }
-      if ( v39 != 25 )
+      if ( v37 != 25 )
         goto LABEL_95;
-      v46 = value.m_impl->vfptr;
-      if ( v21 == 1 )
+      v42 = value.m_impl->vfptr;
+      if ( v19 == 1 )
       {
-        v47 = (hkDataArrayImpl *)v46[13].__vecDelDtor(
-                                   (hkDataRefCounted *)&value.m_impl->vfptr,
-                                   (unsigned int)value.m_handle);
-        v27 = v47;
-        v83.m_impl = v47;
-        if ( v47 )
+        v43 = (hkDataArrayImpl *)v42[13].__vecDelDtor(value.m_impl, (unsigned int)value.m_handle);
+        v25 = v43;
+        v79.m_impl = v43;
+        if ( v43 )
         {
-          ++v47->m_externalCount;
-          ++v47->m_count;
+          ++v43->m_externalCount;
+          ++v43->m_count;
         }
-        v48 = hkDataObjectToNative::getMemberClassAndCheck(v105, v14, (hkDataObject *)&v83);
-        v6 = hkDataObjectToNative::fillNativeSimpleMember<hkDataObject_Value>(
-               v105,
-               &v91,
-               dst,
-               mtype,
-               &value,
-               v48,
-               owningReference,
-               copyInfoOut)->m_enum;
-        if ( v27 )
+        v44 = hkDataObjectToNative::getMemberClassAndCheck(this, v12, (hkDataObject *)&v79);
+        m_enum = hkDataObjectToNative::fillNativeSimpleMember<hkDataObject_Value>(
+                   this,
+                   &v87,
+                   dst,
+                   mtype,
+                   &value,
+                   v44,
+                   owningReference,
+                   copyInfoOut)->m_enum;
+        if ( v25 )
           goto LABEL_92;
       }
       else
       {
-        v49 = (__int64)v46[10].__vecDelDtor((hkDataRefCounted *)&value.m_impl->vfptr, (unsigned int)value.m_handle);
-        v50 = (hkDataArrayImpl *)v49;
-        if ( v49 )
+        v45 = (__int64)v42[10].__vecDelDtor(value.m_impl, (unsigned int)value.m_handle);
+        v46 = (hkDataArrayImpl *)v45;
+        if ( v45 )
         {
-          ++*(_WORD *)(v49 + 10);
-          ++*(_DWORD *)(v49 + 12);
+          ++*(_WORD *)(v45 + 10);
+          ++*(_DWORD *)(v45 + 12);
         }
-        v51 = *(_QWORD *)v49;
-        v52 = 0;
+        v47 = *(_QWORD *)v45;
+        v48 = 0;
         n = 0;
-        if ( (*(signed int (__fastcall **)(hkDataArrayImpl *))(v51 + 40))(v50) > 0 )
+        if ( (*(int (__fastcall **)(hkDataArrayImpl *))(v47 + 40))(v46) > 0 )
         {
-          v75 = 0;
+          CstyleArraySize = 0;
           do
           {
-            if ( v6 )
+            if ( m_enum )
               break;
-            v53 = (hkDataObjectImpl *)v50->vfptr[21].__vecDelDtor((hkDataRefCounted *)&v50->vfptr, v52);
-            v54 = v53;
-            v84.m_impl = v53;
-            if ( v53 )
+            v49 = (hkDataObjectImpl *)v46->vfptr[21].__vecDelDtor(v46, v48);
+            v50 = v49;
+            v80.m_impl = v49;
+            if ( v49 )
             {
-              ++v53->m_externalCount;
-              ++v53->m_count;
+              ++v49->m_externalCount;
+              ++v49->m_count;
             }
-            v99.m_index = n;
-            v99.m_impl = v50;
-            v55 = hkDataObjectToNative::getMemberClassAndCheck(v105, (hkClassMember *)v83.m_impl, &v84);
-            v6 = hkDataObjectToNative::fillNativeSimpleMember<hkDataArray_Value>(
-                   v105,
-                   &v87,
-                   (char *)dst + v75,
-                   mtype,
-                   &v99,
-                   v55,
-                   owningReference,
-                   copyInfoOut)->m_enum;
-            if ( v54 )
+            v95.m_index = n;
+            v95.m_impl = v46;
+            v51 = hkDataObjectToNative::getMemberClassAndCheck(this, (hkClassMember *)v79.m_impl, &v80);
+            m_enum = hkDataObjectToNative::fillNativeSimpleMember<hkDataArray_Value>(
+                       this,
+                       &v83,
+                       (char *)dst + CstyleArraySize,
+                       mtype,
+                       &v95,
+                       v51,
+                       owningReference,
+                       copyInfoOut)->m_enum;
+            if ( v50 )
             {
-              --v54->m_externalCount;
-              v36 = v54->m_count-- == 1;
-              if ( v36 )
-                v54->vfptr->__vecDelDtor((hkDataRefCounted *)&v54->vfptr, 1u);
+              --v50->m_externalCount;
+              v34 = v50->m_count-- == 1;
+              if ( v34 )
+                v50->vfptr->__vecDelDtor(v50, 1u);
             }
-            v75 += v76;
-            v56 = v50->vfptr;
-            v52 = ++n;
+            CstyleArraySize += v72;
+            v52 = v46->vfptr;
+            v48 = ++n;
           }
-          while ( v52 < ((signed int (__fastcall *)(hkDataArrayImpl *))v56[5].__vecDelDtor)(v50) );
+          while ( v48 < ((int (__fastcall *)(hkDataArrayImpl *))v52[5].__vecDelDtor)(v46) );
         }
-        --v50->m_externalCount;
-        v36 = v50->m_count-- == 1;
-        if ( v36 )
+        --v46->m_externalCount;
+        v34 = v46->m_count-- == 1;
+        if ( v34 )
         {
-          v37 = v50->vfptr;
-          v35 = v50;
+          v35 = v46->vfptr;
+          v33 = v46;
           goto LABEL_94;
         }
       }
 LABEL_95:
-      if ( v6 != 1 )
+      if ( m_enum != HK_FAILURE )
         goto LABEL_96;
 LABEL_99:
-      v73 = v106;
-      v106->m_enum = 1;
+      v69 = result;
+      result->m_enum = HK_FAILURE;
       break;
     case 22:
     case 26:
-      if ( v105->m_allocatedOnHeap
-        && (v14->m_type.m_storage == 26 || (unsigned __int8)(v14->m_subtype.m_storage - 28) <= 1u) )
+      if ( this->m_allocatedOnHeap
+        && (v12->m_type.m_storage == 26 || (unsigned __int8)(v12->m_subtype.m_storage - 28) <= 1u) )
       {
         goto LABEL_99;
       }
-      v33 = (hkDataArrayImpl *)value.m_impl->vfptr[10].__vecDelDtor(
-                                 (hkDataRefCounted *)value.m_impl,
-                                 (unsigned int)value.m_handle);
-      srcArray.m_impl = v33;
-      if ( v33 )
+      v31 = (hkDataArrayImpl *)value.m_impl->vfptr[10].__vecDelDtor(value.m_impl, value.m_handle);
+      srcArray.m_impl = v31;
+      if ( v31 )
       {
-        ++v33->m_externalCount;
-        ++v33->m_count;
+        ++v31->m_externalCount;
+        ++v31->m_count;
       }
-      v34 = hkDataObjectToNative::copyIntoNativeArray(v105, &v92, v15, v14, &srcArray, copyInfoOut);
-      v35 = srcArray.m_impl;
-      v6 = v34->m_enum;
+      v32 = hkDataObjectToNative::copyIntoNativeArray(this, &v88, v13, v12, &srcArray, copyInfoOut);
+      v33 = srcArray.m_impl;
+      m_enum = v32->m_enum;
       if ( !srcArray.m_impl )
         goto LABEL_95;
       --srcArray.m_impl->m_externalCount;
-      v36 = v35->m_count-- == 1;
-      if ( !v36 )
+      v34 = v33->m_count-- == 1;
+      if ( !v34 )
         goto LABEL_95;
-      v37 = v35->vfptr;
+      v35 = v33->vfptr;
       goto LABEL_94;
     case 24:
     case 31:
-      v6 = hkDataObjectToNative::fillNativeEnumMember(v105, &v97, v15, v14, &value, klass)->m_enum;
+      m_enum = hkDataObjectToNative::fillNativeEnumMember(this, &v93, v13, v12, &value, klass)->m_enum;
       goto LABEL_95;
     case 27:
-      if ( v105->m_allocatedOnHeap )
+      if ( this->m_allocatedOnHeap )
         goto LABEL_99;
-      v57 = (hkDataArrayImpl *)value.m_impl->vfptr[10].__vecDelDtor(
-                                 (hkDataRefCounted *)value.m_impl,
-                                 (unsigned int)value.m_handle);
-      v27 = v57;
-      if ( v57 )
+      v53 = (hkDataArrayImpl *)value.m_impl->vfptr[10].__vecDelDtor(value.m_impl, value.m_handle);
+      v25 = v53;
+      if ( v53 )
       {
-        ++v57->m_externalCount;
-        ++v57->m_count;
+        ++v53->m_externalCount;
+        ++v53->m_count;
       }
-      v58 = (hkDataObjectImpl *)v57->vfptr[21].__vecDelDtor((hkDataRefCounted *)&v57->vfptr, 0);
-      v59 = v58;
-      v84.m_impl = v58;
-      if ( v58 )
+      v54 = (hkDataObjectImpl *)v53->vfptr[21].__vecDelDtor(v53, 0);
+      v55 = v54;
+      v80.m_impl = v54;
+      if ( v54 )
       {
-        ++v58->m_externalCount;
-        ++v58->m_count;
+        ++v54->m_externalCount;
+        ++v54->m_count;
       }
-      v60 = hkDataObjectToNative::getMemberClassAndCheck(v105, (hkClassMember *)v83.m_impl, &v84);
-      *(_QWORD *)dst = v60;
-      if ( v59 )
+      v56 = hkDataObjectToNative::getMemberClassAndCheck(this, (hkClassMember *)v79.m_impl, &v80);
+      *(_QWORD *)dst = v56;
+      if ( v55 )
       {
-        --v59->m_externalCount;
-        v36 = v59->m_count-- == 1;
-        if ( v36 )
-          v59->vfptr->__vecDelDtor((hkDataRefCounted *)&v59->vfptr, 1u);
+        --v55->m_externalCount;
+        v34 = v55->m_count-- == 1;
+        if ( v34 )
+          v55->vfptr->__vecDelDtor(v55, 1u);
       }
-      v61 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v27->vfptr[5].__vecDelDtor)(v27);
-      v62 = dst;
-      v63 = *(hkClass **)dst;
-      *((_DWORD *)dst + 4) = v61;
-      v64 = hkClass::getObjectSize(v63);
-      LODWORD(v62) = v64 * v62[4];
-      v76 = v64;
-      v65 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
-      n = (signed int)v62;
-      v66 = (void *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v65 + 24i64))(v65, &n);
-      v67 = (void **)dst;
-      v68 = n;
-      *((_QWORD *)dst + 1) = v66;
-      hkString::memSet(v66, 0, v68);
-      hkDataObjectToNative::CopyInfoOut::addAlloc(copyInfoOut, v67[1], v76 * *((_DWORD *)v67 + 4));
-      v69 = 0;
-      if ( *((_DWORD *)dst + 4) > 0 )
+      v57 = ((__int64 (__fastcall *)(hkDataArrayImpl *))v25->vfptr[5].__vecDelDtor)(v25);
+      v58 = dst;
+      v59 = *(hkClass **)dst;
+      *((_DWORD *)dst + 4) = v57;
+      ObjectSize = hkClass::getObjectSize(v59);
+      LODWORD(v58) = ObjectSize * v58[4];
+      v72 = ObjectSize;
+      v61 = *((_QWORD *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID) + 11);
+      n = (int)v58;
+      v62 = (void *)(*(__int64 (__fastcall **)(__int64, int *))(*(_QWORD *)v61 + 24i64))(v61, &n);
+      v63 = (void **)dst;
+      v64 = n;
+      *((_QWORD *)dst + 1) = v62;
+      hkString::memSet(v62, 0, v64);
+      hkDataObjectToNative::CopyInfoOut::addAlloc(copyInfoOut, v63[1], v72 * *((_DWORD *)v63 + 4));
+      v65 = 0;
+      if ( *((int *)dst + 4) > 0 )
       {
         n = 0;
         do
         {
-          if ( v6 )
+          if ( m_enum )
             break;
-          v70 = (hkDataObjectImpl *)v27->vfptr[21].__vecDelDtor((hkDataRefCounted *)&v27->vfptr, v69);
-          obj.m_impl = v70;
-          if ( v70 )
+          v66 = (hkDataObjectImpl *)v25->vfptr[21].__vecDelDtor(v25, v65);
+          obj.m_impl = v66;
+          if ( v66 )
           {
-            ++v70->m_externalCount;
-            ++v70->m_count;
+            ++v66->m_externalCount;
+            ++v66->m_count;
           }
-          v71 = hkDataObjectToNative::fillNativeMembers(
-                  v105,
-                  &v90,
+          v67 = hkDataObjectToNative::fillNativeMembers(
+                  this,
+                  &v86,
                   (void *)(*((_QWORD *)dst + 1) + n),
                   &obj,
                   copyInfoOut);
-          v72 = obj.m_impl;
-          v6 = v71->m_enum;
+          v68 = obj.m_impl;
+          m_enum = v67->m_enum;
           if ( obj.m_impl )
           {
             --obj.m_impl->m_externalCount;
-            v36 = v72->m_count-- == 1;
-            if ( v36 )
-              v72->vfptr->__vecDelDtor((hkDataRefCounted *)&v72->vfptr, 1u);
+            v34 = v68->m_count-- == 1;
+            if ( v34 )
+              v68->vfptr->__vecDelDtor(v68, 1u);
           }
-          ++v69;
-          n += v76;
+          ++v65;
+          n += v72;
         }
-        while ( v69 < *((_DWORD *)dst + 4) );
+        while ( v65 < *((_DWORD *)dst + 4) );
       }
       goto LABEL_92;
     case 34:
-      if ( v105->m_allocatedOnHeap
-        && (v14->m_type.m_storage == 26 || (unsigned __int8)(v14->m_subtype.m_storage - 28) <= 1u) )
+      if ( this->m_allocatedOnHeap
+        && (v12->m_type.m_storage == 26 || (unsigned __int8)(v12->m_subtype.m_storage - 28) <= 1u) )
       {
         goto LABEL_99;
       }
-      v38 = (hkDataArrayImpl *)value.m_impl->vfptr[10].__vecDelDtor(
-                                 (hkDataRefCounted *)value.m_impl,
-                                 (unsigned int)value.m_handle);
-      v27 = v38;
-      v83.m_impl = v38;
-      if ( v38 )
+      v36 = (hkDataArrayImpl *)value.m_impl->vfptr[10].__vecDelDtor(value.m_impl, value.m_handle);
+      v25 = v36;
+      v79.m_impl = v36;
+      if ( v36 )
       {
-        ++v38->m_externalCount;
-        ++v38->m_count;
+        ++v36->m_externalCount;
+        ++v36->m_count;
       }
-      v6 = hkDataObjectToNative::copyIntoRelArray(
-             v105,
-             &v95,
-             dst,
-             v14,
-             &v83,
-             copyInfoOut,
-             &relArrayAddress,
-             objectStart)->m_enum;
-      if ( v27 )
+      m_enum = hkDataObjectToNative::copyIntoRelArray(
+                 this,
+                 &v91,
+                 dst,
+                 v12,
+                 &v79,
+                 copyInfoOut,
+                 &relArrayAddress,
+                 dstObject)->m_enum;
+      if ( v25 )
         goto LABEL_92;
       goto LABEL_95;
     default:
       goto LABEL_99;
   }
-  return v73;
+  return v69;
 }
 
 // File Line: 1077
 // RVA: 0xE62590
-hkClass *__fastcall hkDataObjectToNative::getMemberClassAndCheck(hkDataObjectToNative *this, hkClassMember *member, hkDataObject *obj)
+hkClass *__fastcall hkDataObjectToNative::getMemberClassAndCheck(
+        hkDataObjectToNative *this,
+        hkClassMember *member,
+        hkDataObject *obj)
 {
-  hkDataObject *v3; // rbx
-  hkClassMember *v4; // rbp
-  hkDataObjectToNative *v5; // r14
   hkClass *v6; // rax
-  hkClass *v7; // rdi
+  hkClass *Class; // rdi
   __int64 v8; // rax
   __int64 v9; // rax
   const char *v10; // rsi
   hkClass *v11; // rbx
-  const char *v12; // rax
-  hkVariant *v13; // rax
+  const char *Name; // rax
+  hkVariant *Attribute; // rax
   bool v14; // zf
-  hkBool result; // [rsp+50h] [rbp+18h]
+  hkBool result; // [rsp+50h] [rbp+18h] BYREF
 
-  v3 = obj;
-  v4 = member;
-  v5 = this;
   if ( !obj->m_impl )
     return 0i64;
-  v7 = hkClassMember::getClass(member);
-  v8 = ((__int64 (*)(void))v3->m_impl->vfptr[2].__vecDelDtor)();
+  Class = hkClassMember::getClass(member);
+  v8 = ((__int64 (__fastcall *)(hkDataObjectImpl *))obj->m_impl->vfptr[2].__vecDelDtor)(obj->m_impl);
   v9 = (*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v8 + 16i64))(v8);
   v10 = (const char *)v9;
   if ( v9 )
-    v11 = (hkClass *)v5->m_classReg->vfptr[2].__vecDelDtor((hkBaseObject *)&v5->m_classReg->vfptr, v9);
+    v11 = (hkClass *)this->m_classReg->vfptr[2].__vecDelDtor(this->m_classReg, v9);
   else
     v11 = 0i64;
-  if ( !v7 )
+  if ( !Class )
     return v11;
   if ( !v11 )
     return 0i64;
-  v12 = hkClass::getName(v7);
-  if ( !(unsigned int)hkString::strCmp(v12, v10) )
-    return v7;
-  if ( hkClass::isSuperClass(v7, &result, v11)->m_bool )
+  Name = hkClass::getName(Class);
+  if ( !(unsigned int)hkString::strCmp(Name, v10) )
+    return Class;
+  if ( hkClass::isSuperClass(Class, &result, v11)->m_bool )
     return v11;
-  v13 = hkClassMember::getAttribute(v4, "hk.DataObjectType");
-  if ( !v13 )
-    return v7;
-  v7 = (hkClass *)v5->m_classReg->vfptr[2].__vecDelDtor((hkBaseObject *)v5->m_classReg, *(_QWORD *)v13->m_object);
-  v14 = hkClass::isSuperClass(v7, &result, v11)->m_bool == 0;
+  Attribute = hkClassMember::getAttribute(member, "hk.DataObjectType");
+  if ( !Attribute )
+    return Class;
+  Class = (hkClass *)this->m_classReg->vfptr[2].__vecDelDtor(this->m_classReg, *(_QWORD *)Attribute->m_object);
+  v14 = hkClass::isSuperClass(Class, &result, v11)->m_bool == 0;
   v6 = v11;
   if ( v14 )
-    return v7;
+    return Class;
   return v6;
 }
 

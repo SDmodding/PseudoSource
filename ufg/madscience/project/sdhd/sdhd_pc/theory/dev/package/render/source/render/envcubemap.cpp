@@ -38,90 +38,87 @@ void __fastcall Render::EnvCubeMap::Init(Render::EnvCubeMap *this, Illusion::Tar
 
 // File Line: 90
 // RVA: 0x9990
-void __fastcall Render::EnvCubeMap::UpdateMatrices(Render::EnvCubeMap *this, UFG::qVector3 *position, float near_plane, float far_plane)
+void __fastcall Render::EnvCubeMap::UpdateMatrices(
+        Render::EnvCubeMap *this,
+        UFG::qVector3 *position,
+        float near_plane,
+        float far_plane)
 {
-  Render::EnvCubeMap *v4; // rsi
-  UFG::qVector3 *v5; // rbp
   UFG::qVector3 *v6; // r14
-  float *v7; // rdi
-  signed __int64 v8; // rbx
-  signed __int64 v9; // r15
+  float *p_z; // rdi
+  UFG::qVector4 *v8; // rbx
+  __int64 v9; // r15
   float v10; // xmm1_4
-  float v11; // xmm0_4
+  float z; // xmm0_4
   UFG::qVector4 v12; // xmm1
-  __int128 v13; // xmm1
-  __int128 v14; // xmm0
-  __int128 v15; // xmm1
-  __int128 v16; // xmm0
-  UFG::qVector3 target; // [rsp+30h] [rbp-A8h]
-  UFG::qMatrix44 dest; // [rsp+40h] [rbp-98h]
-  __int128 v19; // [rsp+80h] [rbp-58h]
-  __int128 v20; // [rsp+90h] [rbp-48h]
-  __int128 v21; // [rsp+A0h] [rbp-38h]
-  __int128 v22; // [rsp+B0h] [rbp-28h]
+  UFG::qVector4 v13; // xmm1
+  UFG::qVector4 v14; // xmm0
+  UFG::qVector4 v15; // xmm1
+  UFG::qVector4 v16; // xmm0
+  UFG::qVector3 target; // [rsp+30h] [rbp-A8h] BYREF
+  UFG::qMatrix44 dest; // [rsp+40h] [rbp-98h] BYREF
+  UFG::qMatrix44 v19; // [rsp+80h] [rbp-58h] BYREF
 
-  v4 = this;
-  v5 = position;
-  UFG::qPerspectiveMatrix((UFG::qMatrix44 *)&v19, 1.5707964, 1.0, near_plane, far_plane);
+  UFG::qPerspectiveMatrix(&v19, 1.5707964, 1.0, near_plane, far_plane);
   v6 = Render::gCubeMapUpOffset;
-  v7 = &Render::gCubeMapLookatOffset[0].z;
-  v8 = (signed __int64)&v4->mViewSettings[0].mWorldView.v2;
+  p_z = &Render::gCubeMapLookatOffset[0].z;
+  v8 = &this->mViewSettings[0].mWorldView.v2;
   v9 = 6i64;
   do
   {
-    v10 = v5->y - *(v7 - 1);
-    target.x = v5->x - *(v7 - 2);
-    v11 = v5->z;
+    v10 = position->y - *(p_z - 1);
+    target.x = position->x - *(p_z - 2);
+    z = position->z;
     target.y = v10;
-    target.z = v11 - *v7;
-    UFG::qLookAtMatrix(&dest, v5, &target, v6);
+    target.z = z - *p_z;
+    UFG::qLookAtMatrix(&dest, position, &target, v6);
     v12 = dest.v1;
-    v8 += 144i64;
+    v8 += 9;
     ++v6;
-    v7 += 3;
-    *(UFG::qVector4 *)(v8 - 176) = dest.v0;
-    *(UFG::qVector4 *)(v8 - 160) = v12;
-    v13 = v19;
-    *(UFG::qVector4 *)(v8 - 144) = dest.v2;
-    *(UFG::qVector4 *)(v8 - 128) = dest.v3;
-    v14 = v20;
-    *(_OWORD *)(v8 - 112) = v13;
-    v15 = v21;
-    *(_OWORD *)(v8 - 96) = v14;
-    v16 = v22;
-    *(_OWORD *)(v8 - 80) = v15;
-    *(_OWORD *)(v8 - 64) = v16;
+    p_z += 3;
+    v8[-11] = dest.v0;
+    v8[-10] = v12;
+    v13 = v19.v0;
+    v8[-9] = dest.v2;
+    v8[-8] = dest.v3;
+    v14 = v19.v1;
+    v8[-7] = v13;
+    v15 = v19.v2;
+    v8[-6] = v14;
+    v16 = v19.v3;
+    v8[-5] = v15;
+    v8[-4] = v16;
     --v9;
   }
   while ( v9 );
-  *(_QWORD *)&v4->mFrameTime = 0i64;
+  *(_QWORD *)&this->mFrameTime = 0i64;
 }
 
 // File Line: 114
 // RVA: 0x9480
-void __fastcall Render::EnvCubeMap::Render(Render::EnvCubeMap *this, void (__fastcall *render_scene_callback)(Render::View *, void *, void *), unsigned int side_num, Illusion::SubmitContext *submit_context, void *user_data1, void *user_data2)
+void __fastcall Render::EnvCubeMap::Render(
+        Render::EnvCubeMap *this,
+        void (__fastcall *render_scene_callback)(Render::View *, void *, void *),
+        unsigned int side_num,
+        Illusion::SubmitContext *submit_context,
+        void *user_data1,
+        void *user_data2)
 {
-  Illusion::SubmitContext *v6; // r15
   unsigned int v7; // edi
-  void (__fastcall *v8)(Render::View *, void *, void *); // r12
-  Render::EnvCubeMap *v9; // rbx
-  unsigned int v10; // er14
+  unsigned int v10; // r14d
   const char **v11; // rsi
   Render::ViewSettings *v12; // rbp
-  Illusion::Target *v13; // rdx
-  unsigned int v14; // er9
+  Illusion::Target *mSideTarget; // rdx
+  unsigned int v14; // r9d
   const char *v15; // r8
   float v16; // xmm0_4
   bool v17; // zf
-  Render::ViewSettings *v18; // rax
-  Render::Poly poly; // [rsp+50h] [rbp-358h]
-  Render::View v20; // [rsp+60h] [rbp-348h]
-  Render::View v21; // [rsp+1F0h] [rbp-1B8h]
+  Render::ViewSettings *Identity; // rax
+  Render::Poly poly; // [rsp+50h] [rbp-358h] BYREF
+  Render::View v20; // [rsp+60h] [rbp-348h] BYREF
+  Render::View v21; // [rsp+1F0h] [rbp-1B8h] BYREF
 
-  v6 = submit_context;
   v7 = side_num;
-  v8 = render_scene_callback;
-  v9 = this;
   if ( side_num == -1 )
   {
     v7 = 0;
@@ -133,13 +130,13 @@ void __fastcall Render::EnvCubeMap::Render(Render::EnvCubeMap *this, void (__fas
   }
   if ( v7 < v10 )
   {
-    v11 = (const char **)(&this->mTarget + v7 + 4i64 * v7 + 121);
+    v11 = (const char **)(&this->mFaceName[0].mData + 4 * v7 + v7);
     v12 = &this->mViewSettings[v7];
     do
     {
-      Render::View::View(&v20, v12, v6);
-      v13 = v9->mSideTarget;
-      if ( v13 )
+      Render::View::View(&v20, v12, submit_context);
+      mSideTarget = this->mSideTarget;
+      if ( mSideTarget )
       {
         v14 = 0;
         v15 = "EnvMapMSAASide";
@@ -147,23 +144,23 @@ void __fastcall Render::EnvCubeMap::Render(Render::EnvCubeMap *this, void (__fas
       else
       {
         v15 = *v11;
-        v13 = v9->mTarget;
+        mSideTarget = this->mTarget;
         v14 = v7;
       }
-      Render::View::BeginTarget(&v20, v13, v15, v14, 0, 0i64, 1, 0, 0, 0);
-      v8(&v20, user_data1, user_data2);
+      Render::View::BeginTarget(&v20, mSideTarget, v15, v14, 0, 0i64, 1, 0, 0, 0);
+      render_scene_callback(&v20, user_data1, user_data2);
       Render::View::EndTarget(&v20);
-      v16 = v20.mViewMetrics.mTargetTiming + v9->mFrameTime;
-      v9->mNumDrawCalls += v20.mViewMetrics.mNumMeshsRendered;
-      v17 = v9->mSideTarget == 0i64;
-      v9->mFrameTime = v16;
+      v16 = v20.mViewMetrics.mTargetTiming + this->mFrameTime;
+      this->mNumDrawCalls += v20.mViewMetrics.mNumMeshsRendered;
+      v17 = this->mSideTarget == 0i64;
+      this->mFrameTime = v16;
       if ( !v17 )
       {
-        v18 = Render::ViewSettings::GetIdentity();
-        Render::View::View(&v21, v18, v6);
-        Render::View::BeginTarget(&v21, v9->mTarget, *v11, v7, 0, 0i64, 1, 0, 0, 0);
+        Identity = Render::ViewSettings::GetIdentity();
+        Render::View::View(&v21, Identity, submit_context);
+        Render::View::BeginTarget(&v21, this->mTarget, *v11, v7, 0, 0i64, 1, 0, 0, 0);
         Scaleform::Ptr<Scaleform::Render::Texture>::Ptr<Scaleform::Render::Texture>(&poly);
-        Render::View::Draw(&v21, &poly, v9->mMSAADownsampleMaterial, 0i64);
+        Render::View::Draw(&v21, &poly, this->mMSAADownsampleMaterial, 0i64);
         Render::View::EndTarget(&v21);
       }
       ++v7;
@@ -176,71 +173,75 @@ void __fastcall Render::EnvCubeMap::Render(Render::EnvCubeMap *this, void (__fas
 
 // File Line: 156
 // RVA: 0x9790
-void __fastcall Render::EnvCubeMap::RenderSphericalMap(Render::EnvCubeMap *this, Illusion::Target *spherical_target, Illusion::SubmitContext *submit_context, float blend_amount)
+void __fastcall Render::EnvCubeMap::RenderSphericalMap(
+        Render::EnvCubeMap *this,
+        Illusion::Target *spherical_target,
+        Illusion::SubmitContext *submit_context,
+        float blend_amount)
 {
   unsigned int v4; // ebp
-  Illusion::SubmitContext *v5; // rbx
-  Illusion::Target *v6; // rdi
-  Render::EnvCubeMap *v7; // r14
-  Render::ViewSettings *v8; // rax
+  Render::ViewSettings *Identity; // rax
   _WORD *v9; // rsi
-  Illusion::Material *v10; // rbx
-  __int64 v11; // rax
+  Illusion::Material *mMaterial; // rbx
+  __int64 mOffset; // rax
   _WORD *v12; // rax
-  unsigned int v13; // er8
+  unsigned int mUID; // r8d
   __int64 v14; // rax
   _WORD *v15; // rax
   __int64 v16; // rax
   _WORD *v17; // rax
   Illusion::Material *v18; // rbx
   __int64 v19; // rax
-  UFG::qColour colour; // [rsp+50h] [rbp-1C8h]
-  Render::View v21; // [rsp+60h] [rbp-1B8h]
-  Render::Poly poly; // [rsp+220h] [rbp+8h]
+  UFG::qColour colour; // [rsp+50h] [rbp-1C8h] BYREF
+  Render::View v21; // [rsp+60h] [rbp-1B8h] BYREF
+  Render::Poly poly; // [rsp+220h] [rbp+8h] BYREF
 
   v4 = 662883558;
-  v5 = submit_context;
-  v6 = spherical_target;
-  v7 = this;
   if ( blend_amount < 1.0 )
     v4 = -1551679522;
-  v8 = Render::ViewSettings::GetIdentity();
-  Render::View::View(&v21, v8, v5);
+  Identity = Render::ViewSettings::GetIdentity();
+  Render::View::View(&v21, Identity, submit_context);
   v9 = 0i64;
-  Render::View::BeginTarget(&v21, v6, "EnvToSphericalMap", 0, 0, 0i64, 1, 0, 0, 0);
-  v10 = Render::gRenderUtilities.mMaterial;
-  if ( LODWORD(Render::gRenderUtilities.mMaterial[1].mResourceHandles.mNode.mNext) != kCubeToSphericalUID )
+  Render::View::BeginTarget(&v21, spherical_target, "EnvToSphericalMap", 0, 0, 0i64, 1, 0, 0, 0);
+  mMaterial = Render::gRenderUtilities.mMaterial;
+  if ( LODWORD(Render::gRenderUtilities.mMaterial[1].mResourceHandles.UFG::qResourceData::mNode.mNext) != kCubeToSphericalUID )
   {
     UFG::qResourceHandle::Init(
       (UFG::qResourceHandle *)&Render::gRenderUtilities.mMaterial[1].mNode.mChild[1],
       Render::gRenderUtilities.mMaterial[1].mTypeUID,
       kCubeToSphericalUID);
-    v11 = v10->mMaterialUser.mOffset;
-    if ( v11 )
-      v12 = (_WORD *)((char *)&v10->mMaterialUser + v11);
+    mOffset = mMaterial->mMaterialUser.mOffset;
+    if ( mOffset )
+      v12 = (_WORD *)((char *)&mMaterial->mMaterialUser + mOffset);
     else
       v12 = 0i64;
     *v12 |= 0x20u;
-    v10 = Render::gRenderUtilities.mMaterial;
+    mMaterial = Render::gRenderUtilities.mMaterial;
   }
-  v13 = v7->mTarget->mTargetTexture[0]->mNode.mUID;
-  if ( LODWORD(v10[1].mStateBlockMask.mFlags[0]) != v13 )
+  mUID = this->mTarget->mTargetTexture[0]->mNode.mUID;
+  if ( LODWORD(mMaterial[1].mStateBlockMask.mFlags[0]) != mUID )
   {
-    UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v10[1].mDebugName[20], v10[1].mStateBlockMask.mFlags[1], v13);
-    v14 = v10->mMaterialUser.mOffset;
+    UFG::qResourceHandle::Init(
+      (UFG::qResourceHandle *)&mMaterial[1].mDebugName[20],
+      mMaterial[1].mStateBlockMask.mFlags[1],
+      mUID);
+    v14 = mMaterial->mMaterialUser.mOffset;
     if ( v14 )
-      v15 = (_WORD *)((char *)&v10->mMaterialUser + v14);
+      v15 = (_WORD *)((char *)&mMaterial->mMaterialUser + v14);
     else
       v15 = 0i64;
     *v15 |= 0x20u;
-    v10 = Render::gRenderUtilities.mMaterial;
+    mMaterial = Render::gRenderUtilities.mMaterial;
   }
-  if ( v10[2].mNode.mUID != v4 )
+  if ( mMaterial[2].mNode.mUID != v4 )
   {
-    UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v10[2], (unsigned int)v10[2].mResourceHandles.mNode.mPrev, v4);
-    v16 = v10->mMaterialUser.mOffset;
+    UFG::qResourceHandle::Init(
+      (UFG::qResourceHandle *)&mMaterial[2],
+      (unsigned int)mMaterial[2].mResourceHandles.UFG::qResourceData::mNode.mPrev,
+      v4);
+    v16 = mMaterial->mMaterialUser.mOffset;
     if ( v16 )
-      v17 = (_WORD *)((char *)&v10->mMaterialUser + v16);
+      v17 = (_WORD *)((char *)&mMaterial->mMaterialUser + v16);
     else
       v17 = 0i64;
     *v17 |= 0x20u;
@@ -258,7 +259,7 @@ void __fastcall Render::EnvCubeMap::RenderSphericalMap(Render::EnvCubeMap *this,
   {
     UFG::qResourceHandle::Init(
       (UFG::qResourceHandle *)&Render::gRenderUtilities.mMaterial[2],
-      (unsigned int)Render::gRenderUtilities.mMaterial[2].mResourceHandles.mNode.mPrev,
+      (unsigned int)Render::gRenderUtilities.mMaterial[2].mResourceHandles.UFG::qResourceData::mNode.mPrev,
       0x2782CCE6u);
     v19 = v18->mMaterialUser.mOffset;
     if ( v19 )
@@ -269,17 +270,20 @@ void __fastcall Render::EnvCubeMap::RenderSphericalMap(Render::EnvCubeMap *this,
 
 // File Line: 182
 // RVA: 0x9660
-void __fastcall Render::EnvCubeMap::RenderDebugOverlay(Render::EnvCubeMap *this, Render::View *view, int x, int y, int size)
+void __fastcall Render::EnvCubeMap::RenderDebugOverlay(
+        Render::EnvCubeMap *this,
+        Render::View *view,
+        int x,
+        int y,
+        int size)
 {
-  Render::View *v5; // r14
   int *v6; // rbx
   signed __int64 v7; // rbp
-  signed __int64 v8; // rdi
+  __int64 v8; // rdi
   __int64 v9; // rax
-  UFG::qColour v10; // [rsp+50h] [rbp-18h]
+  UFG::qColour v10; // [rsp+50h] [rbp-18h] BYREF
 
-  v5 = view;
-  if ( !(_S1 & 1) )
+  if ( (_S1 & 1) == 0 )
   {
     _S1 |= 1u;
     placement_table[0][0] = 2 * size + x;
@@ -304,7 +308,7 @@ void __fastcall Render::EnvCubeMap::RenderDebugOverlay(Render::EnvCubeMap *this,
     if ( v9 )
     {
       v10 = UFG::qColour::White;
-      Render::View::DrawIcon(v5, *(_DWORD *)(v9 + 24), *(v6 - 1), *v6, size, size, &v10, 0x2782CCE6u);
+      Render::View::DrawIcon(view, *(_DWORD *)(v9 + 24), *(v6 - 1), *v6, size, size, &v10, 0x2782CCE6u);
     }
     v6 += 2;
     --v8;

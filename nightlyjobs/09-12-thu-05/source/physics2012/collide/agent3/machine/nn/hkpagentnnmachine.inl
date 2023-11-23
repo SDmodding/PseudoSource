@@ -1,81 +1,77 @@
 // File Line: 25
 // RVA: 0xD42A90
-void __fastcall hkAgentNnMachine_initInputAtTime(hkpAgent3Input *in, hkAgentNnMachineBodyTemp *temp, hkpAgent3Input *out)
+void __fastcall hkAgentNnMachine_initInputAtTime(
+        hkpAgent3Input *in,
+        hkAgentNnMachineBodyTemp *temp,
+        hkpAgent3Input *out)
 {
-  hkpAgent3Input *v3; // rdi
-  hkTransformf *v4; // rbp
-  hkpAgent3Input *v5; // r14
-  hkAgentNnMachineBodyTemp *v6; // rbx
-  signed __int64 v7; // r9
-  unsigned int v8; // ecx
-  hkpCdBody *v9; // rax
-  unsigned int v10; // ecx
+  hkTransformf *p_m_transA; // rbp
+  unsigned int m_shapeKey; // ecx
+  hkpCdBody *m_storage; // rax
+  unsigned int v9; // ecx
+  hkpCdBody *v10; // rax
   hkpCdBody *v11; // rax
-  hkpCdBody *v12; // rax
 
-  v3 = in;
-  v4 = &temp->m_transA;
-  v5 = out;
-  v6 = temp;
+  p_m_transA = &temp->m_transA;
   hkSweptTransformUtil::lerp2(
     (hkSweptTransformf *)((char *)in->m_bodyA.m_storage->m_motion + 64),
     in->m_input.m_storage->m_stepInfo.m_startTime.m_storage,
     &temp->m_transA);
   hkSweptTransformUtil::lerp2(
-    (hkSweptTransformf *)((char *)v3->m_bodyB.m_storage->m_motion + 64),
-    v3->m_input.m_storage->m_stepInfo.m_startTime.m_storage,
-    &v6->m_transB);
-  v5->m_bodyA.m_storage = &v6->m_bodyA;
-  v7 = (signed __int64)&v6->m_bodyB;
-  v5->m_bodyB.m_storage = &v6->m_bodyB;
-  v5->m_contactMgr.m_storage = v3->m_contactMgr.m_storage;
-  v5->m_input.m_storage = v3->m_input.m_storage;
-  v8 = v3->m_bodyA.m_storage->m_shapeKey;
-  v6->m_bodyA.m_shape = v3->m_bodyA.m_storage->m_shape;
-  v6->m_bodyA.m_shapeKey = v8;
-  v9 = v3->m_bodyB.m_storage;
-  v10 = v9->m_shapeKey;
-  *(_QWORD *)v7 = v9->m_shape;
-  *(_DWORD *)(v7 + 8) = v10;
-  v11 = v3->m_bodyA.m_storage;
-  v6->m_bodyA.m_motion = v4;
-  v6->m_bodyA.m_parent = v11;
-  if ( v6 != (hkAgentNnMachineBodyTemp *)-32i64 )
+    (hkSweptTransformf *)((char *)in->m_bodyB.m_storage->m_motion + 64),
+    in->m_input.m_storage->m_stepInfo.m_startTime.m_storage,
+    &temp->m_transB);
+  out->m_bodyA.m_storage = &temp->m_bodyA;
+  out->m_bodyB.m_storage = &temp->m_bodyB;
+  out->m_contactMgr.m_storage = in->m_contactMgr.m_storage;
+  out->m_input.m_storage = in->m_input.m_storage;
+  m_shapeKey = in->m_bodyA.m_storage->m_shapeKey;
+  temp->m_bodyA.m_shape = in->m_bodyA.m_storage->m_shape;
+  temp->m_bodyA.m_shapeKey = m_shapeKey;
+  m_storage = in->m_bodyB.m_storage;
+  v9 = m_storage->m_shapeKey;
+  temp->m_bodyB.m_shape = m_storage->m_shape;
+  temp->m_bodyB.m_shapeKey = v9;
+  v10 = in->m_bodyA.m_storage;
+  temp->m_bodyA.m_motion = p_m_transA;
+  temp->m_bodyA.m_parent = v10;
+  if ( temp != (hkAgentNnMachineBodyTemp *)-32i64 )
   {
-    v12 = v3->m_bodyB.m_storage;
-    v6->m_bodyB.m_motion = &v6->m_transB;
-    v6->m_bodyB.m_parent = v12;
+    v11 = in->m_bodyB.m_storage;
+    temp->m_bodyB.m_motion = &temp->m_transB;
+    temp->m_bodyB.m_parent = v11;
   }
-  hkTransformf::setMulInverseMul(&v5->m_aTb, v4, &v6->m_transB);
+  hkTransformf::setMulInverseMul(&out->m_aTb, p_m_transA, &temp->m_transB);
 }
 
 // File Line: 51
 // RVA: 0xD42B80
-void __fastcall hkAgentNnMachine_InlineProcessAgent(hkpAgentNnEntry *entry, hkpProcessCollisionInput *input, int *numTim, hkpProcessCollisionOutput *output, hkpContactMgr *mgr)
+void __fastcall hkAgentNnMachine_InlineProcessAgent(
+        hkpAgentNnEntry *entry,
+        hkpProcessCollisionInput *input,
+        int *numTim,
+        hkpProcessCollisionOutput *output,
+        hkpContactMgr *mgr)
 {
-  hkpAgentNnEntry *v5; // rbx
-  hkpProcessCollisionOutput *v6; // r13
-  int *v7; // r12
-  hkpProcessCollisionInput *v8; // rdi
-  _QWORD *v9; // r10
+  _QWORD *Value; // r10
   _QWORD *v10; // rcx
   unsigned __int64 v11; // rax
-  signed __int64 v12; // rcx
-  int v13; // esi
-  hkpCdBody *v14; // r14
-  hkpCdBody *v15; // r15
+  _QWORD *v12; // rcx
+  int m_streamCommand; // esi
+  hkpLinkedCollidable *v14; // r14
+  hkpLinkedCollidable *v15; // r15
   int v16; // eax
-  __int64 v17; // rax
-  hkTransformf *v18; // rdx
+  hkpContactMgr *m_contactMgr; // rax
+  hkTransformf *m_motion; // rdx
   hkTransformf *v19; // r8
-  __m128 v20; // xmm0
+  __m128 m_quad; // xmm0
   __m128 v21; // xmm2
   __m128 v22; // xmm1
   __m128 v23; // xmm4
   __m128 v24; // xmm5
-  signed __int64 v25; // r8
+  char *p_m_contactMgr; // r8
   hkVector4f *v26; // r9
-  __int64 v27; // r8
+  hkpContactMgr *v27; // r8
   hkTransformf *v28; // rcx
   hkTransformf *v29; // rdx
   __m128 v30; // xmm0
@@ -83,108 +79,99 @@ void __fastcall hkAgentNnMachine_InlineProcessAgent(hkpAgentNnEntry *entry, hkpP
   __m128 v32; // xmm1
   __m128 v33; // xmm5
   __m128 v34; // xmm4
-  __m128 v35; // xmm6
-  float v36; // xmm1_4
-  bool v37; // zf
-  __m128 v38; // xmm6
-  __m128 *v39; // rsi
-  __m128 v40; // xmm2
-  _QWORD *v41; // rax
-  _QWORD *v42; // rcx
-  _QWORD *v43; // r8
-  unsigned __int64 v44; // rax
-  signed __int64 v45; // rcx
+  float m_storage; // xmm1_4
+  bool v36; // zf
+  __m128 v37; // xmm6
+  __m128 *v38; // rsi
+  __m128 v39; // xmm2
+  _QWORD *v40; // rax
+  _QWORD *v41; // rcx
+  _QWORD *v42; // r8
+  unsigned __int64 v43; // rax
+  _QWORD *v44; // rcx
+  int m_shapeKey; // ecx
   int v46; // ecx
-  int v47; // ecx
-  __m128 v48; // xmm3
+  __m128 v47; // xmm3
+  __m128 v48; // xmm2
   __m128 v49; // xmm2
-  __m128 v50; // xmm2
-  __m128 v51; // xmm1
-  hkTransformf *v52; // [rsp+30h] [rbp-C8h]
-  hkTransformf *v53; // [rsp+38h] [rbp-C0h]
-  hkpCdBody *v54; // [rsp+40h] [rbp-B8h]
-  hkpCdBody *v55; // [rsp+48h] [rbp-B0h]
-  __int64 v56; // [rsp+50h] [rbp-A8h]
-  hkpProcessCollisionInput *v57; // [rsp+58h] [rbp-A0h]
-  __int64 v58; // [rsp+60h] [rbp-98h]
-  hkTransformf v59; // [rsp+70h] [rbp-88h]
-  __m128 v60; // [rsp+B8h] [rbp-40h]
-  hkpShape *v61; // [rsp+C8h] [rbp-30h]
-  int v62; // [rsp+D0h] [rbp-28h]
-  hkTransformf *v63; // [rsp+D8h] [rbp-20h]
-  hkpCdBody *v64; // [rsp+E0h] [rbp-18h]
-  hkpShape *v65; // [rsp+E8h] [rbp-10h]
-  int v66; // [rsp+F0h] [rbp-8h]
-  hkTransformf *v67; // [rsp+F8h] [rbp+0h]
-  hkpCdBody *v68; // [rsp+100h] [rbp+8h]
-  hkTransformf transformOut; // [rsp+108h] [rbp+10h]
-  hkTransformf bTc; // [rsp+148h] [rbp+50h]
-  __int64 *v71; // [rsp+188h] [rbp+90h]
-  __int64 *v72; // [rsp+190h] [rbp+98h]
-  __int64 v73; // [rsp+198h] [rbp+A0h]
-  hkpProcessCollisionInput *v74; // [rsp+1A0h] [rbp+A8h]
-  __int64 v75; // [rsp+1A8h] [rbp+B0h]
-  hkTransformf v76; // [rsp+1B8h] [rbp+C0h]
-  hkpCdBody v77; // [rsp+1F8h] [rbp+100h]
-  hkpCdBody newCdBodies; // [rsp+278h] [rbp+180h]
-  hkMotionState newMotionStates; // [rsp+2F8h] [rbp+200h]
-  hkMotionState v80; // [rsp+5B8h] [rbp+4C0h]
-  void *cdBodyHasTransformFlag; // [rsp+8B8h] [rbp+7C0h]
+  __m128 v50; // xmm1
+  hkTransformf *v51; // [rsp+30h] [rbp-C8h]
+  hkTransformf *v52; // [rsp+38h] [rbp-C0h]
+  hkpLinkedCollidable *v53; // [rsp+40h] [rbp-B8h] BYREF
+  hkpLinkedCollidable *v54; // [rsp+48h] [rbp-B0h]
+  __int64 v55; // [rsp+50h] [rbp-A8h]
+  hkpProcessCollisionInput *v56; // [rsp+58h] [rbp-A0h]
+  hkpContactMgr *v57; // [rsp+60h] [rbp-98h]
+  hkTransformf v58; // [rsp+70h] [rbp-88h] BYREF
+  __m128 v59; // [rsp+B8h] [rbp-40h]
+  hkpShape *m_shape; // [rsp+C8h] [rbp-30h] BYREF
+  int v61; // [rsp+D0h] [rbp-28h]
+  hkTransformf *p_transformOut; // [rsp+D8h] [rbp-20h]
+  hkpLinkedCollidable *v63; // [rsp+E0h] [rbp-18h]
+  hkpShape *v64; // [rsp+E8h] [rbp-10h] BYREF
+  int v65; // [rsp+F0h] [rbp-8h]
+  hkTransformf *p_bTc; // [rsp+F8h] [rbp+0h]
+  hkpLinkedCollidable *v67; // [rsp+100h] [rbp+8h]
+  hkTransformf transformOut; // [rsp+108h] [rbp+10h] BYREF
+  hkTransformf bTc; // [rsp+148h] [rbp+50h] BYREF
+  __int64 v70[6]; // [rsp+188h] [rbp+90h] BYREF
+  hkTransformf v71; // [rsp+1B8h] [rbp+C0h] BYREF
+  hkpCdBody v72; // [rsp+1F8h] [rbp+100h] BYREF
+  hkpCdBody newCdBodies; // [rsp+278h] [rbp+180h] BYREF
+  hkMotionState newMotionStates; // [rsp+2F8h] [rbp+200h] BYREF
+  hkMotionState v75; // [rsp+5B8h] [rbp+4C0h] BYREF
+  void *cdBodyHasTransformFlag; // [rsp+8B8h] [rbp+7C0h] BYREF
 
-  v5 = entry;
-  v6 = output;
-  v7 = numTim;
-  v8 = input;
-  v9 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v10 = (_QWORD *)v9[1];
-  if ( (unsigned __int64)v10 < v9[3] )
+  Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v10 = (_QWORD *)Value[1];
+  if ( (unsigned __int64)v10 < Value[3] )
   {
     *v10 = "TtProcessNnEntry";
     v11 = __rdtsc();
-    v12 = (signed __int64)(v10 + 2);
-    *(_DWORD *)(v12 - 8) = v11;
-    v9[1] = v12;
+    v12 = v10 + 2;
+    *((_DWORD *)v12 - 2) = v11;
+    Value[1] = v12;
   }
-  v13 = (unsigned __int8)v5->m_streamCommand;
-  v14 = (hkpCdBody *)&v5->m_collidable[0]->m_shape;
-  v15 = (hkpCdBody *)&v5->m_collidable[1]->m_shape;
-  v16 = v13 - 2;
+  m_streamCommand = (unsigned __int8)entry->m_streamCommand;
+  v14 = entry->m_collidable[0];
+  v15 = entry->m_collidable[1];
+  v16 = m_streamCommand - 2;
   while ( 2 )
   {
     switch ( v16 )
     {
       case 0:
-        v17 = (__int64)v5->m_contactMgr;
-        v54 = v14;
-        v55 = v15;
-        v57 = v8;
-        v58 = v17;
-        v56 = 0i64;
-        v18 = (hkTransformf *)v14->m_motion;
+        m_contactMgr = entry->m_contactMgr;
+        v53 = v14;
+        v54 = v15;
+        v56 = input;
+        v57 = m_contactMgr;
+        v55 = 0i64;
+        m_motion = (hkTransformf *)v14->m_motion;
         v19 = (hkTransformf *)v15->m_motion;
-        v20 = v18[1].m_rotation.m_col1.m_quad;
+        m_quad = m_motion[1].m_rotation.m_col1.m_quad;
         v21 = v19[1].m_rotation.m_col1.m_quad;
         v22 = _mm_shuffle_ps(
-                (__m128)LODWORD(v8->m_stepInfo.m_deltaTime.m_storage),
-                (__m128)LODWORD(v8->m_stepInfo.m_deltaTime.m_storage),
+                (__m128)LODWORD(input->m_stepInfo.m_deltaTime.m_storage),
+                (__m128)LODWORD(input->m_stepInfo.m_deltaTime.m_storage),
                 0);
-        v23 = _mm_mul_ps(_mm_shuffle_ps(v18[1].m_rotation.m_col1.m_quad, v20, 255), v22);
+        v23 = _mm_mul_ps(_mm_shuffle_ps(m_quad, m_quad, 255), v22);
         v24 = _mm_mul_ps(_mm_shuffle_ps(v21, v21, 255), v22);
-        v60 = _mm_add_ps(
-                _mm_mul_ps(_mm_sub_ps(v18[1].m_rotation.m_col0.m_quad, v20), v23),
+        v59 = _mm_add_ps(
+                _mm_mul_ps(_mm_sub_ps(m_motion[1].m_rotation.m_col0.m_quad, m_quad), v23),
                 _mm_mul_ps(_mm_sub_ps(v21, v19[1].m_rotation.m_col0.m_quad), v24));
-        v60 = _mm_shuffle_ps(
-                v60,
+        v59 = _mm_shuffle_ps(
+                v59,
                 _mm_unpackhi_ps(
-                  v60,
+                  v59,
                   _mm_add_ps(
                     _mm_mul_ps(
                       _mm_mul_ps(
-                        _mm_shuffle_ps(v18[2].m_rotation.m_col1.m_quad, v18[2].m_rotation.m_col1.m_quad, 255),
+                        _mm_shuffle_ps(m_motion[2].m_rotation.m_col1.m_quad, m_motion[2].m_rotation.m_col1.m_quad, 255),
                         v23),
                       _mm_shuffle_ps(
-                        (__m128)v18[2].m_rotation.m_col2.m_quad.m128_u32[0],
-                        (__m128)v18[2].m_rotation.m_col2.m_quad.m128_u32[0],
+                        (__m128)m_motion[2].m_rotation.m_col2.m_quad.m128_u32[0],
+                        (__m128)m_motion[2].m_rotation.m_col2.m_quad.m128_u32[0],
                         0)),
                     _mm_mul_ps(
                       _mm_mul_ps(
@@ -195,39 +182,38 @@ void __fastcall hkAgentNnMachine_InlineProcessAgent(hkpAgentNnEntry *entry, hkpP
                         (__m128)v19[2].m_rotation.m_col2.m_quad.m128_u32[0],
                         0)))),
                 196);
-        hkTransformf::setMulInverseMul(&v59, v18, v19);
-        v25 = (signed __int64)&v5[1].m_contactMgr;
+        hkTransformf::setMulInverseMul(&v58, m_motion, v19);
+        p_m_contactMgr = (char *)&entry[1].m_contactMgr;
         v26 = 0i64;
         goto LABEL_13;
       case 2:
-        v27 = (__int64)v5->m_contactMgr;
-        v54 = v14;
-        v55 = v15;
-        v57 = v8;
-        v58 = v27;
-        v56 = 0i64;
+        v27 = entry->m_contactMgr;
+        v53 = v14;
+        v54 = v15;
+        v56 = input;
+        v57 = v27;
+        v55 = 0i64;
         v28 = (hkTransformf *)v14->m_motion;
         v29 = (hkTransformf *)v15->m_motion;
-        v53 = v28;
-        v52 = v29;
+        v52 = v28;
+        v51 = v29;
         v30 = v28[1].m_rotation.m_col1.m_quad;
         v31 = v29[1].m_rotation.m_col1.m_quad;
         v32 = _mm_shuffle_ps(
-                (__m128)LODWORD(v8->m_stepInfo.m_deltaTime.m_storage),
-                (__m128)LODWORD(v8->m_stepInfo.m_deltaTime.m_storage),
+                (__m128)LODWORD(input->m_stepInfo.m_deltaTime.m_storage),
+                (__m128)LODWORD(input->m_stepInfo.m_deltaTime.m_storage),
                 0);
-        v33 = _mm_mul_ps(_mm_shuffle_ps(v28[1].m_rotation.m_col1.m_quad, v30, 255), v32);
+        v33 = _mm_mul_ps(_mm_shuffle_ps(v30, v30, 255), v32);
         v34 = _mm_mul_ps(_mm_shuffle_ps(v31, v31, 255), v32);
-        v35 = _mm_add_ps(
+        v59 = _mm_add_ps(
                 _mm_mul_ps(_mm_sub_ps(v28[1].m_rotation.m_col0.m_quad, v30), v33),
                 _mm_mul_ps(_mm_sub_ps(v31, v29[1].m_rotation.m_col0.m_quad), v34));
-        v60 = v35;
-        v36 = v8->m_stepInfo.m_startTime.m_storage;
-        v37 = v36 == *(float *)&v5[1].0;
-        v38 = _mm_shuffle_ps(
-                v35,
+        m_storage = input->m_stepInfo.m_startTime.m_storage;
+        v36 = m_storage == *(float *)&entry[1].hkpAgentEntry;
+        v37 = _mm_shuffle_ps(
+                v59,
                 _mm_unpackhi_ps(
-                  v35,
+                  v59,
                   _mm_add_ps(
                     _mm_mul_ps(
                       _mm_mul_ps(
@@ -246,141 +232,132 @@ void __fastcall hkAgentNnMachine_InlineProcessAgent(hkpAgentNnEntry *entry, hkpP
                         (__m128)v28[2].m_rotation.m_col2.m_quad.m128_u32[0],
                         0)))),
                 196);
-        v60 = v38;
-        if ( v37 )
+        v59 = v37;
+        if ( v36 )
           goto LABEL_18;
-        if ( v8->m_collisionQualityInfo.m_storage->m_useContinuousPhysics.m_storage )
+        if ( input->m_collisionQualityInfo.m_storage->m_useContinuousPhysics.m_storage )
         {
-          v73 = 0i64;
-          hkSweptTransformUtil::lerp2((hkSweptTransformf *)((char *)v14->m_motion + 64), v36, &transformOut);
+          v70[2] = 0i64;
+          hkSweptTransformUtil::lerp2((hkSweptTransformf *)((char *)v14->m_motion + 64), m_storage, &transformOut);
           hkSweptTransformUtil::lerp2(
-            (hkSweptTransformf *)((char *)v55->m_motion + 64),
-            v57->m_stepInfo.m_startTime.m_storage,
+            (hkSweptTransformf *)((char *)v54->m_motion + 64),
+            v56->m_stepInfo.m_startTime.m_storage,
             &bTc);
-          v71 = (__int64 *)&v61;
-          v72 = (__int64 *)&v65;
-          v75 = v58;
-          v74 = v57;
+          v70[0] = (__int64)&m_shape;
+          v70[1] = (__int64)&v64;
+          v70[4] = (__int64)v57;
+          v70[3] = (__int64)v56;
+          m_shapeKey = v53->m_shapeKey;
+          m_shape = v53->m_shape;
+          v61 = m_shapeKey;
           v46 = v54->m_shapeKey;
-          v61 = v54->m_shape;
-          v62 = v46;
-          v47 = v55->m_shapeKey;
-          v65 = v55->m_shape;
-          v63 = &transformOut;
-          v64 = v54;
-          v68 = v55;
-          v66 = v47;
-          v67 = &bTc;
-          hkTransformf::setMulInverseMul(&v76, &transformOut, &bTc);
-          v8->m_dispatcher.m_storage->m_agent3Func[(unsigned __int8)v5->m_agentType].m_sepNormalFunc(
-            (hkpAgent3Input *)&v71,
-            (hkpAgentEntry *)&v5->m_streamCommand,
-            v5[1].m_collidable,
-            (hkVector4f *)&v5[1].m_contactMgr);
-          v27 = v58;
-          v28 = v53;
-          v38 = v60;
-          v29 = v52;
+          v64 = v54->m_shape;
+          p_transformOut = &transformOut;
+          v63 = v53;
+          v67 = v54;
+          v65 = v46;
+          p_bTc = &bTc;
+          hkTransformf::setMulInverseMul(&v71, &transformOut, &bTc);
+          input->m_dispatcher.m_storage->m_agent3Func[(unsigned __int8)entry->m_agentType].m_sepNormalFunc(
+            (hkpAgent3Input *)v70,
+            entry,
+            entry[1].m_collidable,
+            (hkVector4f *)&entry[1].m_contactMgr);
+          v27 = v57;
+          v28 = v52;
+          v37 = v59;
+          v29 = v51;
 LABEL_18:
-          v48 = *(__m128 *)&v5[1].m_contactMgr;
-          v39 = (__m128 *)&v5[1].m_contactMgr;
-          v5[1].0 = (hkpAgentEntry)LODWORD(v8->m_stepInfo.m_endTime.m_storage);
-          v49 = _mm_mul_ps(v38, v48);
-          v50 = _mm_shuffle_ps(v49, _mm_unpackhi_ps(v49, v38), 196);
-          v51 = _mm_add_ps(_mm_shuffle_ps(v50, v50, 78), v50);
-          v40 = _mm_sub_ps(_mm_shuffle_ps(v48, v48, 255), _mm_add_ps(_mm_shuffle_ps(v51, v51, 177), v51));
-          if ( v40.m128_f32[0] >= COERCE_FLOAT(
-                                    _mm_shuffle_ps(
-                                      (__m128)LODWORD(v8->m_tolerance.m_storage),
-                                      (__m128)LODWORD(v8->m_tolerance.m_storage),
-                                      0)) )
+          v47 = *(__m128 *)&entry[1].m_contactMgr;
+          v38 = (__m128 *)&entry[1].m_contactMgr;
+          entry[1].hkpAgentEntry = (hkpAgentEntry)LODWORD(input->m_stepInfo.m_endTime.m_storage);
+          v48 = _mm_mul_ps(v37, v47);
+          v49 = _mm_shuffle_ps(v48, _mm_unpackhi_ps(v48, v37), 196);
+          v50 = _mm_add_ps(_mm_shuffle_ps(v49, v49, 78), v49);
+          v39 = _mm_sub_ps(_mm_shuffle_ps(v47, v47, 255), _mm_add_ps(_mm_shuffle_ps(v50, v50, 177), v50));
+          if ( v39.m128_f32[0] >= _mm_shuffle_ps(
+                                    (__m128)LODWORD(input->m_tolerance.m_storage),
+                                    (__m128)LODWORD(input->m_tolerance.m_storage),
+                                    0).m128_f32[0] )
           {
-            v37 = v5->m_numContactPoints == 0;
-            *v39 = _mm_shuffle_ps(v48, _mm_unpackhi_ps(v48, v40), 196);
-            if ( !v37 )
-              v8->m_dispatcher.m_storage->m_agent3Func[(unsigned __int8)v5->m_agentType].m_cleanupFunc(
-                (hkpAgentEntry *)&v5->m_streamCommand,
-                v5[1].m_collidable,
-                (hkpContactMgr *)v27,
-                v6->m_constraintOwner.m_storage);
-            ++*v7;
+            v36 = entry->m_numContactPoints == 0;
+            *v38 = _mm_shuffle_ps(v47, _mm_unpackhi_ps(v47, v39), 196);
+            if ( !v36 )
+              input->m_dispatcher.m_storage->m_agent3Func[(unsigned __int8)entry->m_agentType].m_cleanupFunc(
+                entry,
+                entry[1].m_collidable,
+                v27,
+                output->m_constraintOwner.m_storage);
+            ++*numTim;
             goto LABEL_14;
           }
         }
         else
         {
-          v39 = (__m128 *)&v5[1].m_contactMgr;
-          v5[1].0 = (hkpAgentEntry)LODWORD(v8->m_stepInfo.m_endTime.m_storage);
-          v40.m128_i32[0] = xmmword_141A712F0;
-          *(__m128 *)&v5[1].m_contactMgr = _mm_shuffle_ps(
-                                             aabbOut.m_quad,
-                                             _mm_unpackhi_ps(aabbOut.m_quad, (__m128)xmmword_141A712F0),
-                                             196);
+          v38 = (__m128 *)&entry[1].m_contactMgr;
+          entry[1].hkpAgentEntry = (hkpAgentEntry)LODWORD(input->m_stepInfo.m_endTime.m_storage);
+          v39.m128_i32[0] = -8388626;
+          *(__m128 *)&entry[1].m_contactMgr = _mm_shuffle_ps(
+                                                aabbOut.m_quad,
+                                                _mm_unpackhi_ps(aabbOut.m_quad, (__m128)xmmword_141A712F0),
+                                                196);
         }
-        v59.m_translation.m_quad.m128_i32[2] = v40.m128_i32[0];
-        hkTransformf::setMulInverseMul(&v59, v28, v29);
-        v26 = (hkVector4f *)v39;
-        v25 = (signed __int64)v5[1].m_collidable;
+        v58.m_translation.m_quad.m128_i32[2] = v39.m128_i32[0];
+        hkTransformf::setMulInverseMul(&v58, v28, v29);
+        v26 = (hkVector4f *)v38;
+        p_m_contactMgr = (char *)entry[1].m_collidable;
 LABEL_13:
-        v8->m_dispatcher.m_storage->m_agent3Func[(unsigned __int8)v5->m_agentType].m_processFunc(
-          (hkpAgent3ProcessInput *)&v54,
-          (hkpAgentEntry *)&v5->m_streamCommand,
-          (void *)v25,
+        input->m_dispatcher.m_storage->m_agent3Func[(unsigned __int8)entry->m_agentType].m_processFunc(
+          (hkpAgent3ProcessInput *)&v53,
+          entry,
+          p_m_contactMgr,
           v26,
-          v6);
+          output);
 LABEL_14:
-        v41 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-        v42 = (_QWORD *)v41[1];
-        v43 = v41;
-        if ( (unsigned __int64)v42 < v41[3] )
+        v40 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+        v41 = (_QWORD *)v40[1];
+        v42 = v40;
+        if ( (unsigned __int64)v41 < v40[3] )
         {
-          *v42 = "Et";
-          v44 = __rdtsc();
-          v45 = (signed __int64)(v42 + 2);
-          *(_DWORD *)(v45 - 8) = v44;
-          v43[1] = v45;
+          *v41 = "Et";
+          v43 = __rdtsc();
+          v44 = v41 + 2;
+          *((_DWORD *)v44 - 2) = v43;
+          v42[1] = v44;
         }
         return;
       case 4:
-        ((void (__fastcall *)(hkpContactMgr *, hkpCdBody *, hkpCdBody *, hkpProcessCollisionInput *, hkpProcessCollisionOutput *))v5[1].m_contactMgr->vfptr[3].__vecDelDtor)(
-          v5[1].m_contactMgr,
+        ((void (__fastcall *)(hkpContactMgr *, hkpLinkedCollidable *, hkpLinkedCollidable *, hkpProcessCollisionInput *, hkpProcessCollisionOutput *))entry[1].m_contactMgr->vfptr[3].__vecDelDtor)(
+          entry[1].m_contactMgr,
           v14,
           v15,
-          v8,
-          v6);
+          input,
+          output);
         goto LABEL_14;
       case 8:
       case 10:
       case 12:
-        v14 = hkAgentMachine_processTransformedShapes(
-                v14,
-                &newCdBodies,
-                &newMotionStates,
-                4,
-                (hkPadSpu<unsigned char> *)&cdBodyHasTransformFlag);
-        v13 &= 0xF7u;
-        v15 = hkAgentMachine_processTransformedShapes(
-                v15,
-                &v77,
-                &v80,
-                4,
-                (hkPadSpu<unsigned char> *)&cdBodyHasTransformFlag);
-        v16 = v13 - 2;
-        if ( (unsigned int)(v13 - 2) <= 0xC )
+        v14 = (hkpLinkedCollidable *)hkAgentMachine_processTransformedShapes(
+                                       v14,
+                                       &newCdBodies,
+                                       &newMotionStates,
+                                       4,
+                                       (hkPadSpu<unsigned char> *)&cdBodyHasTransformFlag);
+        m_streamCommand &= 0xF7u;
+        v15 = (hkpLinkedCollidable *)hkAgentMachine_processTransformedShapes(
+                                       v15,
+                                       &v72,
+                                       &v75,
+                                       4,
+                                       (hkPadSpu<unsigned char> *)&cdBodyHasTransformFlag);
+        v16 = m_streamCommand - 2;
+        if ( (unsigned int)(m_streamCommand - 2) <= 0xC )
           continue;
         goto LABEL_14;
       default:
         goto LABEL_14;
     }
   }
-}           v15,
-                &v77,
-                &v80,
-                4,
-                (hkPadSpu<unsigned char> *)&cdBodyHasTransformFlag);
-        v16 = v13 - 2;
-        if ( (unsigned int)(v13 - 2) <= 0xC )
-          continue;
-        goto LABEL_14;
-    
+}                      4,
+             
 

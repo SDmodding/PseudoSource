@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkaiNavMeshFaceClass__()
     0i64,
     0i64,
     0,
-    6u);
+    6);
 }
 
 // File Line: 122
@@ -62,7 +62,7 @@ void dynamic_initializer_for__hkaiNavMeshEdgeClass__()
     0i64,
     0i64,
     0,
-    8u);
+    8);
 }
 
 // File Line: 173
@@ -97,7 +97,7 @@ void dynamic_initializer_for__hkaiNavMeshClass__()
     &hkaiNavMesh_Default,
     0i64,
     0,
-    0xEu);
+    14);
 }
 
 // File Line: 254
@@ -109,23 +109,24 @@ hkClass *__fastcall hkaiNavMesh::staticClass()
 
 // File Line: 261
 // RVA: 0xBB69D0
-void __fastcall finishLoadedObjecthkaiNavMesh(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiNavMesh(hkaiNavMesh *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiNavMesh::hkaiNavMesh);
+  if ( p )
+    hkaiNavMesh::hkaiNavMesh(p, finishing);
 }
 
 // File Line: 267
 // RVA: 0xBB69F0
-void __fastcall cleanupLoadedObjecthkaiNavMesh(void *p)
+void __fastcall cleanupLoadedObjecthkaiNavMesh(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 271
 // RVA: 0xBB6A00
 hkBaseObjectVtbl *__fastcall getVtablehkaiNavMesh()
 {
-  hkaiNavMesh v1; // [rsp+20h] [rbp-B8h]
+  hkaiNavMesh v1; // [rsp+20h] [rbp-B8h] BYREF
 
   hkaiNavMesh::hkaiNavMesh(&v1, 0);
   return v1.vfptr;
@@ -142,8 +143,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiNavMeshTypeInfo__()
   hkaiNavMeshTypeInfo.m_typeName = "hkaiNavMesh";
   hkaiNavMeshTypeInfo.m_vtable = result;
   hkaiNavMeshTypeInfo.m_scopedName = "!hkaiNavMesh";
-  hkaiNavMeshTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiNavMesh;
-  hkaiNavMeshTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiNavMesh;
+  hkaiNavMeshTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiNavMesh;
+  hkaiNavMeshTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiNavMesh;
   return result;
 }
 

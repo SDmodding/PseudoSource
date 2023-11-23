@@ -28,23 +28,24 @@ hkClass *__fastcall hkpBvShape::staticClass()
 
 // File Line: 66
 // RVA: 0xCEAEF0
-void __fastcall finishLoadedObjecthkpBvShape(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpBvShape(hkpBvShape *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpBvShape::hkpBvShape);
+  if ( p )
+    hkpBvShape::hkpBvShape(p, finishing);
 }
 
 // File Line: 72
 // RVA: 0xCEAF10
-void __fastcall cleanupLoadedObjecthkpBvShape(void *p)
+void __fastcall cleanupLoadedObjecthkpBvShape(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 76
 // RVA: 0xCEAF20
 hkBaseObjectVtbl *__fastcall getVtablehkpBvShape()
 {
-  hkpBvShape v1; // [rsp+20h] [rbp-48h]
+  hkpBvShape v1; // [rsp+20h] [rbp-48h] BYREF
 
   hkpBvShape::hkpBvShape(&v1, 0);
   return v1.vfptr;
@@ -61,8 +62,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpBvShapeTypeInfo__()
   hkpBvShapeTypeInfo.m_typeName = "hkpBvShape";
   hkpBvShapeTypeInfo.m_vtable = result;
   hkpBvShapeTypeInfo.m_scopedName = "!hkpBvShape";
-  hkpBvShapeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpBvShape;
-  hkpBvShapeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpBvShape;
+  hkpBvShapeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpBvShape;
+  hkpBvShapeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpBvShape;
   return result;
 }
 

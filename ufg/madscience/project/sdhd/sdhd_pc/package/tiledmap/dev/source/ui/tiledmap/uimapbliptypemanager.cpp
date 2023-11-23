@@ -6,7 +6,7 @@ __int64 UFG::_dynamic_initializer_for__UIBlipSymbol_caption__()
 
   v0 = UFG::qStringHash32("caption", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UIBlipSymbol_caption, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__UIBlipSymbol_caption__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__UIBlipSymbol_caption__);
 }
 
 // File Line: 58
@@ -38,22 +38,20 @@ UFG::UIMapBlipTypeManager *__fastcall UFG::UIMapBlipTypeManager::getInstance()
     }
     sUIMapBlipTypeManager = v1;
     UFG::UIMapBlipTypeManager::Init(v1);
-    result = sUIMapBlipTypeManager;
+    return sUIMapBlipTypeManager;
   }
   return result;
 }
 
 // File Line: 71
 // RVA: 0xCEF00
-bool __fastcall UFG::fnSortBlipTypeSets(UFG::qPropertySet *const *a, UFG::qPropertySet *const *b)
+bool __fastcall UFG::fnSortBlipTypeSets(UFG::qPropertySet **a, UFG::qPropertySet **b)
 {
-  UFG::qPropertySet **v2; // rdi
   char *v3; // rbx
   char *v4; // rdi
 
-  v2 = (UFG::qPropertySet **)b;
-  v3 = PropertyUtils::Get<char const *>(*a, (UFG::qSymbol *)&UIBlipSymbol_typeName.mUID, DEPTH_RECURSE);
-  v4 = PropertyUtils::Get<char const *>(*v2, (UFG::qSymbol *)&UIBlipSymbol_typeName.mUID, DEPTH_RECURSE);
+  v3 = PropertyUtils::Get<char const *>(*a, &UIBlipSymbol_typeName, DEPTH_RECURSE);
+  v4 = PropertyUtils::Get<char const *>(*b, &UIBlipSymbol_typeName, DEPTH_RECURSE);
   LODWORD(v3) = UFG::qStringHashUpper32(v3, 0xFFFFFFFF);
   return (unsigned int)v3 < (unsigned int)UFG::qStringHashUpper32(v4, 0xFFFFFFFF);
 }
@@ -62,21 +60,20 @@ bool __fastcall UFG::fnSortBlipTypeSets(UFG::qPropertySet *const *a, UFG::qPrope
 // RVA: 0xC5210
 void __fastcall UFG::UIMapBlipTypeManager::Init(UFG::UIMapBlipTypeManager *this)
 {
-  UFG::UIMapBlipTypeManager *v1; // r14
   UFG::qSymbol *v2; // rax
-  UFG::qPropertySet *v3; // rax
+  UFG::qPropertySet *PropertySet; // rax
   UFG::qPropertyList *v4; // rax
-  unsigned int v5; // edi
-  unsigned int v6; // edx
-  unsigned int v7; // edx
+  unsigned int mNumElements; // edi
+  unsigned int size; // edx
+  unsigned int capacity; // edx
   unsigned int v8; // edx
   unsigned int v9; // ecx
   char *v10; // r15
   unsigned int v11; // esi
-  unsigned int v12; // er12
-  unsigned int v13; // er13
+  unsigned int v12; // r12d
+  unsigned int v13; // r13d
   UFG::qPropertyList *v14; // r14
-  char *v15; // rax
+  char *ValuePtr; // rax
   unsigned int v16; // ecx
   unsigned int v17; // edi
   unsigned int v18; // ebx
@@ -100,121 +97,115 @@ void __fastcall UFG::UIMapBlipTypeManager::Init(UFG::UIMapBlipTypeManager *this)
   float v36; // xmm7_4
   unsigned int *v37; // rax
   int *v38; // rcx
-  unsigned int v39; // er12
+  unsigned int v39; // r12d
   unsigned int *v40; // rax
   int *v41; // rcx
-  unsigned int v42; // er13
-  unsigned int *v43; // rax
-  int *v44; // rcx
-  __int64 v45; // rax
-  bool *v46; // rax
-  char *v47; // rcx
-  bool *v48; // rax
-  char *v49; // rcx
-  bool *v50; // rax
-  bool *v51; // rcx
-  float *v52; // rax
-  float *v53; // rcx
-  float v54; // xmm8_4
-  bool *v55; // rax
-  char *v56; // rdx
-  bool *v57; // rax
-  char *v58; // rdx
-  UFG::qSymbol *v59; // rax
-  unsigned int v60; // ebx
-  UFG::UIHKMinimapBlipType *v61; // rdi
-  __int64 v62; // rdi
-  UFG::UIHKMinimapBlipType *v63; // rcx
-  UFG::UIHKMinimapBlipType *v64; // rcx
-  char v65; // [rsp+1h] [rbp-80h]
-  char v66; // [rsp+2h] [rbp-7Fh]
-  char v67; // [rsp+3h] [rbp-7Eh]
-  char v68; // [rsp+4h] [rbp-7Dh]
-  char v69; // [rsp+5h] [rbp-7Ch]
-  __int64 v70; // [rsp+8h] [rbp-79h]
-  char *v71; // [rsp+10h] [rbp-71h]
-  float v72; // [rsp+18h] [rbp-69h]
-  float v73; // [rsp+1Ch] [rbp-65h]
-  int v74; // [rsp+20h] [rbp-61h]
-  unsigned int v75; // [rsp+24h] [rbp-5Dh]
-  int v76; // [rsp+28h] [rbp-59h]
-  int v77; // [rsp+2Ch] [rbp-55h]
-  __int64 v78; // [rsp+30h] [rbp-51h]
-  UFG::qSymbolUC v79; // [rsp+38h] [rbp-49h]
-  char v80; // [rsp+3Ch] [rbp-45h]
-  char v81; // [rsp+3Dh] [rbp-44h]
-  char v82; // [rsp+3Eh] [rbp-43h]
-  char v83; // [rsp+3Fh] [rbp-42h]
-  __int64 v84; // [rsp+40h] [rbp-41h]
-  UFG::qSymbol *v85; // [rsp+48h] [rbp-39h]
+  unsigned int v42; // r13d
+  bool *v43; // rax
+  char *v44; // rcx
+  bool *v45; // rax
+  char *v46; // rcx
+  bool *v47; // rax
+  bool *v48; // rcx
+  float *v49; // rax
+  float *v50; // rcx
+  float v51; // xmm8_4
+  bool *v52; // rax
+  char *v53; // rdx
+  bool *v54; // rax
+  char *v55; // rdx
+  UFG::qSymbol *v56; // rax
+  unsigned int v57; // ebx
+  UFG::UIHKMinimapBlipType *p; // rdi
+  __int64 v59; // rdi
+  UFG::UIHKMinimapBlipType *v60; // rcx
+  UFG::UIHKMinimapBlipType *v61; // rcx
+  char v62; // [rsp+1h] [rbp-80h] BYREF
+  char v63; // [rsp+2h] [rbp-7Fh]
+  char v64; // [rsp+3h] [rbp-7Eh]
+  char v65; // [rsp+4h] [rbp-7Dh] BYREF
+  char v66; // [rsp+5h] [rbp-7Ch] BYREF
+  __int64 v67; // [rsp+8h] [rbp-79h]
+  char *v68; // [rsp+10h] [rbp-71h]
+  float v69; // [rsp+18h] [rbp-69h] BYREF
+  float v70; // [rsp+1Ch] [rbp-65h] BYREF
+  int v71[3]; // [rsp+20h] [rbp-61h] BYREF
+  int v72; // [rsp+2Ch] [rbp-55h] BYREF
+  __int64 v73; // [rsp+30h] [rbp-51h]
+  UFG::qSymbolUC v74; // [rsp+38h] [rbp-49h] BYREF
+  char v75; // [rsp+3Ch] [rbp-45h]
+  char v76; // [rsp+3Dh] [rbp-44h] BYREF
+  char v77; // [rsp+3Eh] [rbp-43h]
+  char mUID; // [rsp+3Fh] [rbp-42h]
+  __int64 v79; // [rsp+40h] [rbp-41h]
+  UFG::qSymbol *v80; // [rsp+48h] [rbp-39h]
   char *pszSymbolString; // [rsp+50h] [rbp-31h]
   char *text; // [rsp+58h] [rbp-29h]
-  __int64 v88; // [rsp+60h] [rbp-21h]
-  UFG::UIMapBlipTypeManager *v89; // [rsp+E8h] [rbp+67h]
-  UFG::qSymbol result[2]; // [rsp+F0h] [rbp+6Fh]
-  unsigned int v91; // [rsp+F8h] [rbp+77h]
-  char *v92; // [rsp+100h] [rbp+7Fh]
-  __int64 v93; // [rsp+130h] [rbp+AFh]
+  __int64 v83; // [rsp+60h] [rbp-21h]
+  UFG::UIMapBlipTypeManager *v84; // [rsp+E8h] [rbp+67h] BYREF
+  UFG::qSymbol result[2]; // [rsp+F0h] [rbp+6Fh] BYREF
+  unsigned int v86; // [rsp+F8h] [rbp+77h] BYREF
+  char *v87; // [rsp+100h] [rbp+7Fh] BYREF
+  UFG::qSymbol v88; // [rsp+130h] [rbp+AFh] BYREF
 
-  v88 = -2i64;
-  v1 = this;
-  v2 = UFG::qSymbol::create_from_string((UFG::qSymbol *)&v93, "UI-MinimapBlipTypes");
-  v3 = UFG::PropertySetManager::GetPropertySet(v2);
-  v1->mPSSetData = v3;
-  if ( v3 )
+  v83 = -2i64;
+  v2 = UFG::qSymbol::create_from_string(&v88, "UI-MinimapBlipTypes");
+  PropertySet = UFG::PropertySetManager::GetPropertySet(v2);
+  this->mPSSetData = PropertySet;
+  if ( PropertySet )
   {
-    v4 = UFG::qPropertySet::Get<UFG::qPropertyList>(v3, (UFG::qSymbol *)&UIBlipSymbol_blipTypes.mUID, DEPTH_RECURSE);
+    v4 = UFG::qPropertySet::Get<UFG::qPropertyList>(PropertySet, &UIBlipSymbol_blipTypes, DEPTH_RECURSE);
     *(_QWORD *)&result[0].mUID = v4;
     if ( v4 )
     {
-      v5 = v4->mNumElements;
-      v91 = v5;
-      v6 = v1->mData.size;
-      if ( (signed int)(v5 - v1->mData.size) <= 0 )
+      mNumElements = v4->mNumElements;
+      v86 = mNumElements;
+      size = this->mData.size;
+      if ( (int)(mNumElements - this->mData.size) <= 0 )
       {
-        v9 = v1->mData.size - v5;
-        if ( v1->mData.size != v5 )
+        v9 = this->mData.size - mNumElements;
+        if ( v9 )
         {
-          if ( v9 < v6 )
-            v1->mData.size = v6 - v9;
+          if ( v9 < size )
+            this->mData.size = size - v9;
           else
-            v1->mData.size = 0;
+            this->mData.size = 0;
         }
       }
       else
       {
-        v7 = v1->mData.capacity;
-        if ( v5 > v7 )
+        capacity = this->mData.capacity;
+        if ( mNumElements > capacity )
         {
-          if ( v7 )
-            v8 = 2 * v7;
+          if ( capacity )
+            v8 = 2 * capacity;
           else
             v8 = 1;
-          for ( ; v8 < v5; v8 *= 2 )
+          for ( ; v8 < mNumElements; v8 *= 2 )
             ;
-          if ( v8 - v5 > 0x10000 )
-            v8 = v5 + 0x10000;
-          UFG::qArray<UFG::UIHKMinimapBlipType,0>::Reallocate(&v1->mData, v8, "UIMapBlipTypeManager");
+          if ( v8 - mNumElements > 0x10000 )
+            v8 = mNumElements + 0x10000;
+          UFG::qArray<UFG::UIHKMinimapBlipType,0>::Reallocate(&this->mData, v8, "UIMapBlipTypeManager");
         }
-        v1->mData.size = v5;
+        this->mData.size = mNumElements;
       }
-      v1->mNumTypes = v5;
+      this->mNumTypes = mNumElements;
       v10 = 0i64;
-      v71 = 0i64;
+      v68 = 0i64;
       v11 = 0;
-      v70 = 0i64;
+      v67 = 0i64;
       v12 = 0;
       v13 = 0;
-      if ( v5 )
+      if ( mNumElements )
       {
         v14 = *(UFG::qPropertyList **)&result[0].mUID;
         do
         {
-          v15 = UFG::qPropertyList::GetValuePtr(v14, 0x1Au, v13);
-          if ( v15 && *(_QWORD *)v15 )
-            v92 = &v15[*(_QWORD *)v15];
+          ValuePtr = UFG::qPropertyList::GetValuePtr(v14, 0x1Au, v13);
+          if ( ValuePtr && *(_QWORD *)ValuePtr )
+            v87 = &ValuePtr[*(_QWORD *)ValuePtr];
           else
-            v92 = 0i64;
+            v87 = 0i64;
           v16 = v11;
           v17 = v11 + 1;
           if ( v11 + 1 > v12 )
@@ -252,242 +243,227 @@ void __fastcall UFG::UIMapBlipTypeManager::Init(UFG::UIMapBlipTypeManager *this)
                 operator delete[](v10);
               }
               v10 = (char *)v21;
-              v71 = (char *)v21;
+              v68 = (char *)v21;
               v12 = v18;
-              HIDWORD(v70) = v18;
+              HIDWORD(v67) = v18;
               v16 = v11;
             }
           }
           ++v11;
-          LODWORD(v70) = v17;
-          *(_QWORD *)&v10[8 * v16] = v92;
+          LODWORD(v67) = v17;
+          *(_QWORD *)&v10[8 * v16] = v87;
           ++v13;
-          v5 = v91;
+          mNumElements = v86;
         }
-        while ( v13 < v91 );
-        v1 = v89;
+        while ( v13 < v86 );
+        this = v84;
       }
       UFG::qQuickSortImpl<UFG::UIMapBlip *,bool (*)(UFG::UIMapBlip * const &,UFG::UIMapBlip * const &)>(
         (UFG::qPropertySet **)v10,
-        (UFG::qPropertySet **)&v10[8 * ((signed int)v11 - 1i64)],
+        (UFG::qPropertySet **)&v10[8 * v11 - 8],
         UFG::fnSortBlipTypeSets);
-      if ( v5 )
+      if ( mNumElements )
       {
-        LOBYTE(v89) = 0;
+        LOBYTE(v84) = 0;
         LOBYTE(result[0].mUID) = 0;
-        LOBYTE(v91) = 1;
-        LOBYTE(v92) = 0;
-        v72 = FLOAT_150_0;
-        v74 = 0;
-        v77 = 0;
+        LOBYTE(v86) = 1;
+        LOBYTE(v87) = 0;
+        v69 = FLOAT_150_0;
+        v71[0] = 0;
+        v72 = 0;
+        v71[2] = 0;
+        v66 = 0;
+        v65 = 1;
+        HIBYTE(v74.mUID) = 0;
+        v70 = FLOAT_0_80000001;
+        v62 = 0;
         v76 = 0;
-        v69 = 0;
-        v68 = 1;
-        HIBYTE(v79.mUID) = 0;
-        v73 = FLOAT_0_80000001;
-        v65 = 0;
-        v81 = 0;
         v24 = 0i64;
-        v78 = 0i64;
-        v84 = v5;
+        v73 = 0i64;
+        v79 = mNumElements;
         do
         {
           v25 = *(UFG::qPropertySet **)v10;
           pszSymbolString = PropertyUtils::Get<char const *>(
                               *(UFG::qPropertySet **)v10,
-                              (UFG::qSymbol *)&UIBlipSymbol_typeName.mUID,
+                              &UIBlipSymbol_typeName,
                               DEPTH_RECURSE);
-          v85 = UFG::qPropertySet::Get<UFG::qSymbol>(v25, (UFG::qSymbol *)&UIBlipSymbol_icon.mUID, DEPTH_RECURSE);
-          text = UFG::qPropertySet::Get<char const *>(v25, (UFG::qSymbol *)&UIBlipSymbol_caption.mUID, DEPTH_RECURSE);
-          v26 = UFG::qPropertySet::Get<bool>(v25, (UFG::qSymbol *)&UIBlipSymbol_isWorldMapOnly.mUID, DEPTH_RECURSE);
-          v27 = (char *)&v89;
+          v80 = UFG::qPropertySet::Get<UFG::qSymbol>(v25, &UIBlipSymbol_icon, DEPTH_RECURSE);
+          text = UFG::qPropertySet::Get<char const *>(v25, &UIBlipSymbol_caption, DEPTH_RECURSE);
+          v26 = UFG::qPropertySet::Get<bool>(v25, &UIBlipSymbol_isWorldMapOnly, DEPTH_RECURSE);
+          v27 = (char *)&v84;
           if ( v26 )
             v27 = (char *)v26;
-          v67 = *v27;
-          v28 = UFG::qPropertySet::Get<bool>(v25, (UFG::qSymbol *)&UIBlipSymbol_isObjective.mUID, DEPTH_RECURSE);
+          v64 = *v27;
+          v28 = UFG::qPropertySet::Get<bool>(v25, &UIBlipSymbol_isObjective, DEPTH_RECURSE);
           v29 = result;
           if ( v28 )
             v29 = (UFG::qSymbol *)v28;
-          v83 = v29->mUID;
-          v30 = UFG::qPropertySet::Get<bool>(v25, (UFG::qSymbol *)&UIBlipSymbol_isDistanceFiltered.mUID, DEPTH_RECURSE);
-          v31 = &v91;
+          mUID = v29->mUID;
+          v30 = UFG::qPropertySet::Get<bool>(v25, &UIBlipSymbol_isDistanceFiltered, DEPTH_RECURSE);
+          v31 = &v86;
           if ( v30 )
             v31 = (unsigned int *)v30;
-          BYTE1(v79.mUID) = *(_BYTE *)v31;
-          v32 = UFG::qPropertySet::Get<bool>(
-                  v25,
-                  (UFG::qSymbol *)&UIBlipSymbol_isDistanceFilteredOnWorldMap.mUID,
-                  DEPTH_RECURSE);
-          v33 = (__int64 *)&v92;
+          BYTE1(v74.mUID) = *(_BYTE *)v31;
+          v32 = UFG::qPropertySet::Get<bool>(v25, &UIBlipSymbol_isDistanceFilteredOnWorldMap, DEPTH_RECURSE);
+          v33 = (__int64 *)&v87;
           if ( v32 )
             v33 = (__int64 *)v32;
-          BYTE2(v79.mUID) = *(_BYTE *)v33;
-          v34 = UFG::qPropertySet::Get<float>(v25, (UFG::qSymbol *)&UIBlipSymbol_filterDistance.mUID, DEPTH_RECURSE);
-          v35 = &v72;
+          BYTE2(v74.mUID) = *(_BYTE *)v33;
+          v34 = UFG::qPropertySet::Get<float>(v25, &UIBlipSymbol_filterDistance, DEPTH_RECURSE);
+          v35 = &v69;
           if ( v34 )
             v35 = v34;
           v36 = *v35;
-          v37 = UFG::qPropertySet::Get<unsigned long>(
-                  v25,
-                  (UFG::qSymbol *)&UIBlipSymbol_radiusColor.mUID,
-                  DEPTH_RECURSE);
-          v38 = &v74;
+          v37 = UFG::qPropertySet::Get<unsigned long>(v25, &UIBlipSymbol_radiusColor, DEPTH_RECURSE);
+          v38 = v71;
           if ( v37 )
             v38 = (int *)v37;
           v39 = *v38;
-          v40 = UFG::qPropertySet::Get<unsigned long>(
-                  v25,
-                  (UFG::qSymbol *)&UIBlipSymbol_innerRadiusColor.mUID,
-                  DEPTH_RECURSE);
-          v41 = &v77;
+          v40 = UFG::qPropertySet::Get<unsigned long>(v25, &UIBlipSymbol_innerRadiusColor, DEPTH_RECURSE);
+          v41 = &v72;
           if ( v40 )
             v41 = (int *)v40;
           v42 = *v41;
-          v43 = UFG::qPropertySet::Get<unsigned long>(v25, (UFG::qSymbol *)&UIBlipSymbol_drawDepth.mUID, DEPTH_RECURSE);
-          v44 = &v76;
+          UFG::qPropertySet::Get<unsigned long>(v25, &UIBlipSymbol_drawDepth, DEPTH_RECURSE);
+          v43 = UFG::qPropertySet::Get<bool>(v25, &UIBlipSymbol_isHiddenIndoors, DEPTH_RECURSE);
+          v44 = &v66;
           if ( v43 )
-            v44 = (int *)v43;
-          v45 = (unsigned int)*v44;
-          v46 = UFG::qPropertySet::Get<bool>(v25, (UFG::qSymbol *)&UIBlipSymbol_isHiddenIndoors.mUID, DEPTH_RECURSE);
-          v47 = &v69;
-          if ( v46 )
-            v47 = (char *)v46;
-          v80 = *v47;
-          v48 = UFG::qPropertySet::Get<bool>(v25, (UFG::qSymbol *)&UIBlipSymbol_hasAltitude.mUID, DEPTH_RECURSE);
-          v49 = &v68;
-          if ( v48 )
-            v49 = (char *)v48;
-          v82 = *v49;
-          v50 = UFG::qPropertySet::Get<bool>(
-                  v25,
-                  (UFG::qSymbol *)&UIBlipSymbol_isWorldMapZoomFiltered.mUID,
-                  DEPTH_RECURSE);
-          v51 = (bool *)&v79.mUID + 3;
-          if ( v50 )
-            v51 = v50;
-          LOBYTE(v84) = *v51;
-          v52 = UFG::qPropertySet::Get<float>(v25, (UFG::qSymbol *)&UIBlipSymbol_worldMapZoomFilter.mUID, DEPTH_RECURSE);
-          v53 = &v73;
+            v44 = (char *)v43;
+          v75 = *v44;
+          v45 = UFG::qPropertySet::Get<bool>(v25, &UIBlipSymbol_hasAltitude, DEPTH_RECURSE);
+          v46 = &v65;
+          if ( v45 )
+            v46 = (char *)v45;
+          v77 = *v46;
+          v47 = UFG::qPropertySet::Get<bool>(v25, &UIBlipSymbol_isWorldMapZoomFiltered, DEPTH_RECURSE);
+          v48 = (bool *)&v74.mUID + 3;
+          if ( v47 )
+            v48 = v47;
+          LOBYTE(v79) = *v48;
+          v49 = UFG::qPropertySet::Get<float>(v25, &UIBlipSymbol_worldMapZoomFilter, DEPTH_RECURSE);
+          v50 = &v70;
+          if ( v49 )
+            v50 = v49;
+          v51 = *v50;
+          v52 = UFG::qPropertySet::Get<bool>(v25, &UIBlipSymbol_isProximityUnlockable, DEPTH_RECURSE);
+          v53 = &v62;
           if ( v52 )
-            v53 = v52;
-          v54 = *v53;
-          v55 = UFG::qPropertySet::Get<bool>(
-                  v25,
-                  (UFG::qSymbol *)&UIBlipSymbol_isProximityUnlockable.mUID,
-                  DEPTH_RECURSE);
-          v56 = &v65;
-          if ( v55 )
-            v56 = (char *)v55;
-          v66 = *v56;
-          v57 = UFG::qPropertySet::Get<bool>(v25, (UFG::qSymbol *)&UIBlipSymbol_hideOnBorder.mUID, DEPTH_RECURSE);
-          v58 = &v81;
-          if ( v57 )
-            v58 = (char *)v57;
-          LOBYTE(v79.mUID) = *v58;
-          v59 = UFG::qPropertySet::Get<UFG::qSymbol>(
-                  v25,
-                  (UFG::qSymbol *)&UIBlipSymbol_progressionFlow.mUID,
-                  DEPTH_RECURSE);
-          if ( v59 )
-            v60 = v59->mUID;
+            v53 = (char *)v52;
+          v63 = *v53;
+          v54 = UFG::qPropertySet::Get<bool>(v25, &UIBlipSymbol_hideOnBorder, DEPTH_RECURSE);
+          v55 = &v76;
+          if ( v54 )
+            v55 = (char *)v54;
+          LOBYTE(v74.mUID) = *v55;
+          v56 = UFG::qPropertySet::Get<UFG::qSymbol>(v25, &UIBlipSymbol_progressionFlow, DEPTH_RECURSE);
+          if ( v56 )
+            v57 = v56->mUID;
           else
-            v60 = qSymbol_none.mUID;
-          v61 = v1->mData.p;
-          v61[v24].TypeNameSymbol = (UFG::qSymbolUC)UFG::qSymbolUC::create_from_string(&v79, pszSymbolString)->mUID;
-          v1->mData.p[v24].Icon = (UFG::qSymbol)v85->mUID;
-          v62 = v78;
-          UFG::qString::Set((UFG::qString *)((char *)&v1->mData.p->Caption + v78), text);
-          v1->mData.p[v24].IsWorldMapOnly = v67;
-          v1->mData.p[v24].IsObjective = v83;
-          *(_WORD *)&v1->mData.p[v24].IsDistanceFiltered = *(_WORD *)((char *)&v79.mUID + 1);
-          v1->mData.p[v24].FilterDistance = v36;
-          v63 = v1->mData.p;
-          v63[v24].RadiusColor.r = (float)(v39 >> 24) * 0.0039215689;
-          v63[v24].RadiusColor.g = (float)BYTE2(v39) * 0.0039215689;
-          v63[v24].RadiusColor.b = (float)BYTE1(v39) * 0.0039215689;
-          v63[v24].RadiusColor.a = (float)(unsigned __int8)v39 * 0.0039215689;
-          v64 = v1->mData.p;
-          v64[v24].InnerRadiusColor.r = (float)(v42 >> 24) * 0.0039215689;
-          v64[v24].InnerRadiusColor.g = (float)BYTE2(v42) * 0.0039215689;
-          v64[v24].InnerRadiusColor.b = (float)BYTE1(v42) * 0.0039215689;
-          v64[v24].InnerRadiusColor.a = (float)(unsigned __int8)v42 * 0.0039215689;
-          v1->mData.p[v24].DrawDepth = v75;
-          v1->mData.p[v24].IsHiddenIndoors = v80;
-          v1->mData.p[v24].HasAltitude = v82;
-          v1->mData.p[v24].IsWorldMapZoomFiltered = v84;
-          v1->mData.p[v24].WorldMapZoomFilter = v54;
-          v1->mData.p[v24].IsProximityUnlockable = v66;
-          v1->mData.p[v24].HideOnBorder = v79.mUID;
-          v1->mData.p[v24].ProgressionFlow.mUID = v60;
-          v78 = v62 + 112;
+            v57 = qSymbol_none.mUID;
+          p = this->mData.p;
+          p[v24].TypeNameSymbol = (UFG::qSymbolUC)UFG::qSymbolUC::create_from_string(&v74, pszSymbolString)->mUID;
+          this->mData.p[v24].Icon = (UFG::qSymbol)v80->mUID;
+          v59 = v73;
+          UFG::qString::Set((UFG::qString *)((char *)&this->mData.p->Caption + v73), text);
+          this->mData.p[v24].IsWorldMapOnly = v64;
+          this->mData.p[v24].IsObjective = mUID;
+          *(_WORD *)&this->mData.p[v24].IsDistanceFiltered = *(_WORD *)((char *)&v74.mUID + 1);
+          this->mData.p[v24].FilterDistance = v36;
+          v60 = this->mData.p;
+          v60[v24].RadiusColor.r = (float)HIBYTE(v39) * 0.0039215689;
+          v60[v24].RadiusColor.g = (float)BYTE2(v39) * 0.0039215689;
+          v60[v24].RadiusColor.b = (float)BYTE1(v39) * 0.0039215689;
+          v60[v24].RadiusColor.a = (float)(unsigned __int8)v39 * 0.0039215689;
+          v61 = this->mData.p;
+          v61[v24].InnerRadiusColor.r = (float)HIBYTE(v42) * 0.0039215689;
+          v61[v24].InnerRadiusColor.g = (float)BYTE2(v42) * 0.0039215689;
+          v61[v24].InnerRadiusColor.b = (float)BYTE1(v42) * 0.0039215689;
+          v61[v24].InnerRadiusColor.a = (float)(unsigned __int8)v42 * 0.0039215689;
+          this->mData.p[v24].DrawDepth = v71[1];
+          this->mData.p[v24].IsHiddenIndoors = v75;
+          this->mData.p[v24].HasAltitude = v77;
+          this->mData.p[v24].IsWorldMapZoomFiltered = v79;
+          this->mData.p[v24].WorldMapZoomFilter = v51;
+          this->mData.p[v24].IsProximityUnlockable = v63;
+          this->mData.p[v24].HideOnBorder = v74.mUID;
+          this->mData.p[v24].ProgressionFlow.mUID = v57;
+          v73 = v59 + 112;
           v10 += 8;
           ++v24;
-          --v84;
+          --v79;
         }
-        while ( v84 );
-        v10 = v71;
+        while ( v79 );
+        v10 = v68;
       }
       if ( v10 )
         operator delete[](v10);
     }
   }
+}    v10 = v68;
+      }
+      if ( v10 )
+        operator delete[](v10);
+    }
+  }
 }
 
 // File Line: 197
 // RVA: 0xC4A90
-UFG::UIHKMinimapBlipType *__fastcall UFG::UIMapBlipTypeManager::GetType(UFG::UIMapBlipTypeManager *this, UFG::qSymbolUC *typeName)
+UFG::UIHKMinimapBlipType *__fastcall UFG::UIMapBlipTypeManager::GetType(
+        UFG::UIMapBlipTypeManager *this,
+        UFG::qSymbolUC *typeName)
 {
-  unsigned int v2; // er10
-  unsigned int v4; // er8
+  unsigned int mUID; // r10d
+  unsigned int mNumTypes; // r8d
   __int64 v5; // r11
-  UFG::UIHKMinimapBlipType *v6; // rbx
+  UFG::UIHKMinimapBlipType *p; // rbx
   unsigned int v7; // edx
-  unsigned int v8; // er8
-  unsigned int v9; // eax
-  unsigned int v10; // er9
+  unsigned int v8; // r8d
+  int v9; // eax
+  unsigned int v10; // r9d
 
-  v2 = typeName->mUID;
+  mUID = typeName->mUID;
   if ( typeName->mUID == -1 )
     return 0i64;
-  v4 = this->mNumTypes;
+  mNumTypes = this->mNumTypes;
   v5 = 0i64;
-  if ( !v4 )
+  if ( !mNumTypes )
     return (UFG::UIHKMinimapBlipType *)v5;
-  v6 = this->mData.p;
+  p = this->mData.p;
   v7 = 0;
-  v8 = v4 - 1;
+  v8 = mNumTypes - 1;
   while ( 1 )
   {
     v9 = v7 + ((v8 - v7) >> 1);
-    v10 = v6[v7 + ((v8 - v7) >> 1)].TypeNameSymbol.mUID;
-    if ( v10 >= v2 )
+    v10 = *(unsigned int *)((char *)&p->TypeNameSymbol.mUID + (unsigned int)(112 * v9));
+    if ( v10 >= mUID )
       break;
     v7 = v9 + 1;
 LABEL_9:
     if ( v7 > v8 )
       return 0i64;
   }
-  if ( v10 > v2 )
+  if ( v10 > mUID )
   {
     v8 = v9 - 1;
     goto LABEL_9;
   }
-  return &v6[v9];
+  return (UFG::UIHKMinimapBlipType *)((char *)p + (unsigned int)(112 * v9));
 }
 
 // File Line: 241
 // RVA: 0xC5DB0
-UFG::UIHKMinimapBlipType *__fastcall UFG::UIMapBlipTypeManager::IsTypeSupportedByProgressionFlow(UFG::qSymbolUC *iconType)
+UFG::UIHKMinimapBlipType *__fastcall UFG::UIMapBlipTypeManager::IsTypeSupportedByProgressionFlow(
+        UFG::qSymbolUC *iconType)
 {
-  UFG::qSymbolUC *v1; // rbx
-  UFG::UIMapBlipTypeManager *v2; // rax
+  UFG::UIMapBlipTypeManager *Instance; // rax
   UFG::UIHKMinimapBlipType *result; // rax
   UFG::UIHKMinimapBlipType *v4; // rbx
   UFG::ProgressionTracker *v5; // rax
 
-  v1 = iconType;
-  v2 = UFG::UIMapBlipTypeManager::getInstance();
-  result = UFG::UIMapBlipTypeManager::GetType(v2, v1);
+  Instance = UFG::UIMapBlipTypeManager::getInstance();
+  result = UFG::UIMapBlipTypeManager::GetType(Instance, iconType);
   v4 = result;
   if ( result )
     result = (UFG::UIHKMinimapBlipType *)(result->ProgressionFlow.mUID == qSymbol_none.mUID

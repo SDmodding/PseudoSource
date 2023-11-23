@@ -3,19 +3,31 @@
 void UFG::TSUI_HUD_Race::BindAtomics(void)
 {
   SSClass *v0; // rbx
+  ASymbol rebind; // [rsp+20h] [rbp-18h]
+  ASymbol rebinda; // [rsp+20h] [rbp-18h]
+  ASymbol rebindb; // [rsp+20h] [rbp-18h]
+  ASymbol rebindc; // [rsp+20h] [rbp-18h]
+  ASymbol rebindd; // [rsp+20h] [rbp-18h]
+  ASymbol rebinde; // [rsp+20h] [rbp-18h]
 
+  LOBYTE(rebind.i_uid) = 0;
   v0 = SSBrain::get_class("RaceHUD");
-  SSClass::register_method_func(v0, "set_seconds", UFG::TSUI_HUD_Race::MthdC_set_seconds, 1, 0);
-  SSClass::register_method_func(v0, "set_timer", UFG::TSUI_HUD_Race::MthdC_set_timer, 1, 0);
-  SSClass::register_method_func(v0, "start_countdown", UFG::TSUI_HUD_Race::MthdC_start_countdown, 1, 0);
-  SSClass::register_method_func(v0, "set_player_position", UFG::TSUI_HUD_Race::MthdC_set_player_position, 1, 0);
-  SSClass::register_method_func(v0, "clear", UFG::TSUI_HUD_Race::MthdC_clear, 1, 0);
+  SSClass::register_method_func(v0, "set_seconds", UFG::TSUI_HUD_Race::MthdC_set_seconds, 1, rebind);
+  LOBYTE(rebinda.i_uid) = 0;
+  SSClass::register_method_func(v0, "set_timer", UFG::TSUI_HUD_Race::MthdC_set_timer, 1, rebinda);
+  LOBYTE(rebindb.i_uid) = 0;
+  SSClass::register_method_func(v0, "start_countdown", UFG::TSUI_HUD_Race::MthdC_start_countdown, 1, rebindb);
+  LOBYTE(rebindc.i_uid) = 0;
+  SSClass::register_method_func(v0, "set_player_position", UFG::TSUI_HUD_Race::MthdC_set_player_position, 1, rebindc);
+  LOBYTE(rebindd.i_uid) = 0;
+  SSClass::register_method_func(v0, "clear", UFG::TSUI_HUD_Race::MthdC_clear, 1, rebindd);
+  LOBYTE(rebinde.i_uid) = 0;
   SSClass::register_method_func(
     v0,
     "minimap_set_route_visible",
     UFG::TSUI_HUD_Race::MthdC_minimap_set_route_visible,
     1,
-    0);
+    rebinde);
 }
 
 // File Line: 47
@@ -29,9 +41,9 @@ void __fastcall UFG::TSUI_HUD_Race::MthdC_set_seconds(SSInvokedMethod *pScope, S
     v2 = *(float *)&(*pScope->i_data.i_array_p)->i_data_p->i_user_data * 1000.0;
     UFG::UIHKRaceTimerWidget::SetTime(
       UFG::UIHKScreenHud::RaceTimer,
-      (signed int)v2 / 1000 / 60,
-      (signed int)v2 / 1000 % 60,
-      (signed int)v2 % 1000);
+      (int)v2 / 1000 / 60,
+      (int)v2 / 1000 % 60,
+      (int)v2 % 1000);
     UFG::UIHKRaceTimerWidget::SetVisible(UFG::UIHKScreenHud::RaceTimer, 1);
     UFG::UIHKRacePositionWidget::SetVisible((UFG::UIHKRacePositionWidget *)UFG::UIHKScreenHud::RacePercentage, 1);
   }
@@ -60,10 +72,9 @@ void __fastcall UFG::TSUI_HUD_Race::MthdC_start_countdown(SSInvokedMethod *pScop
   UFG::UIScreenInvoke *v3; // rbx
   UFG::allocator::free_link *v4; // rax
   UFG::ProgressionTracker *v5; // rax
-  UFG::GameSlice *v6; // rax
-  char *v7; // rbx
-  int v8; // eax
-  const char *v9; // rdx
+  char *mText; // rbx
+  int v7; // eax
+  const char *v8; // rdx
 
   v2 = UFG::qMemoryPool::Allocate(&gScaleformMemoryPool, 0x40ui64, "TSUI_HUD_Race UIScreenInvoke", 0i64, 1u);
   v3 = (UFG::UIScreenInvoke *)v2;
@@ -73,7 +84,7 @@ void __fastcall UFG::TSUI_HUD_Race::MthdC_start_countdown(SSInvokedMethod *pScop
     v4->mNext = v4;
     v4[1].mNext = v4;
     v3->vfptr = (UFG::UIScreenInvokeVtbl *)&UFG::UIScreenInvoke::`vftable;
-    UFG::qString::qString(&v3->command, &customWorldMapCaption);
+    UFG::qString::qString(&v3->command, &customCaption);
   }
   else
   {
@@ -84,13 +95,12 @@ void __fastcall UFG::TSUI_HUD_Race::MthdC_start_countdown(SSInvokedMethod *pScop
     UFG::qString::Set(&v3->command, "Race_StartCountdown");
     UFG::UIHKScreenGlobalOverlay::QueueInvoke(v3);
     v5 = UFG::ProgressionTracker::Instance();
-    v6 = UFG::ProgressionTracker::GetActiveMaster(v5);
-    v7 = v6->mScriptClassName.mText;
-    v8 = UFG::qStringCompare(v6->mScriptClassName.mText, "RaceStartCase", -1);
-    v9 = "R_NP_04";
-    if ( v8 )
-      v9 = v7;
-    UFG::UITiledMapRaceSplines::SetLayerName(UFG::UIHKScreenHud::RacePath, v9);
+    mText = UFG::ProgressionTracker::GetActiveMaster(v5)->mScriptClassName.mText;
+    v7 = UFG::qStringCompare(mText, "RaceStartCase", -1);
+    v8 = "R_NP_04";
+    if ( v7 )
+      v8 = mText;
+    UFG::UITiledMapRaceSplines::SetLayerName(UFG::UIHKScreenHud::RacePath, v8);
   }
 }
 
@@ -98,21 +108,22 @@ void __fastcall UFG::TSUI_HUD_Race::MthdC_start_countdown(SSInvokedMethod *pScop
 // RVA: 0x4EE720
 void __fastcall UFG::TSUI_HUD_Race::MthdC_set_player_position(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSData **v2; // r8
-  unsigned int v3; // ebx
+  SSData **i_array_p; // r8
+  unsigned int i_user_data; // ebx
 
-  v2 = pScope->i_data.i_array_p;
-  v3 = v2[1]->i_data_p->i_user_data;
+  i_array_p = pScope->i_data.i_array_p;
+  i_user_data = i_array_p[1]->i_data_p->i_user_data;
   if ( UFG::UIHKScreenHud::RacePosition )
   {
-    UFG::UIHKRacePositionWidget::SetPlayerRank(UFG::UIHKScreenHud::RacePosition, (*v2)->i_data_p->i_user_data);
-    UFG::UIHKRacePositionWidget::SetNumRacers(UFG::UIHKScreenHud::RacePosition, v3);
+    UFG::UIHKRacePositionWidget::SetPlayerRank(UFG::UIHKScreenHud::RacePosition, (*i_array_p)->i_data_p->i_user_data);
+    UFG::UIHKRacePositionWidget::SetNumRacers(UFG::UIHKScreenHud::RacePosition, i_user_data);
     UFG::UIHKRacePositionWidget::SetVisible(UFG::UIHKScreenHud::RacePosition, 1);
   }
 }
 
 // File Line: 116
 // RVA: 0x4E4320
+// attributes: thunk
 void __fastcall UFG::TSUI_HUD_Race::MthdC_clear(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
   UFG::UIHKScreenHud::RaceClear();

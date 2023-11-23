@@ -1,390 +1,370 @@
 // File Line: 151
 // RVA: 0x12DE418
-void __fastcall std::basic_filebuf<char,std::char_traits<char>>::~basic_filebuf<char,std::char_traits<char>>(std::basic_filebuf<char,std::char_traits<char> > *this)
+void __fastcall std::filebuf::~filebuf<char,std::char_traits<char>>(std::filebuf *this)
 {
   bool v1; // zf
-  std::basic_filebuf<char,std::char_traits<char> > *v2; // rbx
-  char **v3; // rcx
-  char *v4; // rdx
-  std::locale *v5; // rbx
-  void (__fastcall ***v6)(_QWORD, signed __int64); // rax
+  char **IGfirst; // rcx
+  char *Set_egptr; // rdx
+  std::locale *Plocale; // rbx
+  std::_Facet_base *v6; // rax
 
   v1 = this->_Myfile == 0i64;
-  v2 = this;
-  this->vfptr = (std::basic_streambuf<char,std::char_traits<char> >Vtbl *)&std::basic_filebuf<char,std::char_traits<char>>::`vftable;
+  this->vfptr = (std::streambufVtbl *)&std::filebuf::`vftable;
   if ( !v1 )
   {
-    v3 = this->_IGfirst;
-    if ( *v3 == &v2->_Mychar )
+    IGfirst = this->_IGfirst;
+    if ( *IGfirst == &this->_Mychar )
     {
-      v4 = v2->_Set_egptr;
-      *v3 = v2->_Set_eback;
-      *v2->_IGnext = v4;
-      *v2->_IGcount = 0;
+      Set_egptr = this->_Set_egptr;
+      *IGfirst = this->_Set_eback;
+      *this->_IGnext = Set_egptr;
+      *this->_IGcount = 0;
     }
   }
-  if ( v2->_Closef )
+  if ( this->_Closef )
   {
-    if ( v2->_Myfile )
+    if ( this->_Myfile )
     {
-      std::basic_filebuf<char,std::char_traits<char>>::_Endwrite(v2);
-      fclose(v2->_Myfile);
+      std::filebuf::_Endwrite(this);
+      fclose(this->_Myfile);
     }
-    std::basic_filebuf<char,std::char_traits<char>>::_Init(v2, 0i64, _Closefl);
+    std::filebuf::_Init(this, 0i64, _Closefl);
   }
-  v2->vfptr = (std::basic_streambuf<char,std::char_traits<char> >Vtbl *)&std::basic_streambuf<char,std::char_traits<char>>::`vftable;
-  v5 = v2->_Plocale;
-  if ( v5 )
+  this->vfptr = (std::streambufVtbl *)&std::streambuf::`vftable;
+  Plocale = this->_Plocale;
+  if ( Plocale )
   {
-    if ( v5->_Ptr )
+    if ( Plocale->_Ptr )
     {
-      v6 = (void (__fastcall ***)(_QWORD, signed __int64))((__int64 (*)(void))v5->_Ptr->vfptr->_Decref)();
+      v6 = Plocale->_Ptr->vfptr->_Decref(Plocale->_Ptr);
       if ( v6 )
-        (**v6)(v6, 1i64);
+        v6->vfptr->__vecDelDtor(v6, 1u);
     }
-    Illusion::ShaderParam::operator delete(v5);
+    Illusion::ShaderParam::operator delete(Plocale);
   }
 }
 
 // File Line: 355
 // RVA: 0x12DE8B0
-void __fastcall std::basic_filebuf<char,std::char_traits<char>>::_Lock(std::basic_filebuf<char,std::char_traits<char> > *this)
+void __fastcall std::filebuf::_Lock(std::filebuf *this)
 {
-  _iobuf *v1; // rcx
+  _iobuf *Myfile; // rcx
 
-  v1 = this->_Myfile;
-  if ( v1 )
-    lock_file(v1);
+  Myfile = this->_Myfile;
+  if ( Myfile )
+    lock_file(Myfile);
 }
 
 // File Line: 361
 // RVA: 0x12DE8CC
-void __fastcall std::basic_filebuf<char,std::char_traits<char>>::_Unlock(std::basic_filebuf<char,std::char_traits<char> > *this)
+void __fastcall std::filebuf::_Unlock(std::filebuf *this)
 {
-  _iobuf *v1; // rcx
+  _iobuf *Myfile; // rcx
 
-  v1 = this->_Myfile;
-  if ( v1 )
-    unlock_file(v1);
+  Myfile = this->_Myfile;
+  if ( Myfile )
+    unlock_file(Myfile);
 }
 
 // File Line: 369
 // RVA: 0x12DE954
-__int64 __fastcall std::basic_filebuf<char,std::char_traits<char>>::overflow(std::basic_filebuf<char,std::char_traits<char> > *this, int _Meta)
+__int64 __fastcall std::filebuf::overflow(std::filebuf *this, unsigned int _Meta)
 {
-  unsigned int v2; // esi
-  std::basic_filebuf<char,std::char_traits<char> > *v3; // rdi
   unsigned int v4; // ebx
-  __int64 result; // rax
-  char **v6; // rax
-  int *v7; // rdx
+  char **IPnext; // rax
+  int *IPcount; // rdx
   char **v8; // rdx
   char *v9; // r8
-  char **v10; // rdx
-  char *v11; // rcx
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v12; // rdx
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v13; // r8
-  std::codecvt<char,char,int> *v14; // rcx
-  std::_Facet_baseVtbl *v15; // r10
-  signed int v16; // eax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v17; // rax
-  __int64 v18; // r14
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v19; // rcx
-  char v20; // [rsp+18h] [rbp-19h]
-  char v21; // [rsp+19h] [rbp-18h]
-  char *v22; // [rsp+20h] [rbp-11h]
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v23; // [rsp+28h] [rbp-9h]
-  unsigned __int64 v24; // [rsp+30h] [rbp-1h]
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > v25; // [rsp+38h] [rbp+7h]
+  char **IGfirst; // rdx
+  char *Set_egptr; // rcx
+  std::string *Ptr; // rdx
+  std::string *v13; // r8
+  std::codecvt<char,char,int> *Pcvt; // rcx
+  std::_Facet_baseVtbl *vfptr; // r10
+  int v16; // eax
+  std::string *v17; // rax
+  signed __int64 v18; // r14
+  std::string *v19; // rcx
+  char v20; // [rsp+18h] [rbp-19h] BYREF
+  char v21[7]; // [rsp+19h] [rbp-18h] BYREF
+  char *v22; // [rsp+20h] [rbp-11h] BYREF
+  std::string *v23; // [rsp+28h] [rbp-9h] BYREF
+  __int64 v24; // [rsp+30h] [rbp-1h]
+  std::string v25; // [rsp+38h] [rbp+7h] BYREF
 
   v24 = -2i64;
-  v2 = _Meta;
-  v3 = this;
   v4 = -1;
   if ( _Meta == -1 )
     return 0i64;
-  v6 = this->_IPnext;
-  if ( *v6 && (v7 = this->_IPcount, *v6 < &(*v6)[*v7]) )
+  IPnext = this->_IPnext;
+  if ( *IPnext && (IPcount = this->_IPcount, *IPnext < &(*IPnext)[*IPcount]) )
   {
-    --*v7;
+    --*IPcount;
     v8 = this->_IPnext;
     v9 = (*v8)++;
-    *v9 = v2;
-    result = v2;
+    *v9 = _Meta;
+    return _Meta;
   }
   else
   {
     if ( this->_Myfile )
     {
-      v10 = this->_IGfirst;
-      if ( *v10 == &this->_Mychar )
+      IGfirst = this->_IGfirst;
+      if ( *IGfirst == &this->_Mychar )
       {
-        v11 = this->_Set_egptr;
-        *v10 = v3->_Set_eback;
-        *v3->_IGnext = v11;
-        *v3->_IGcount = 0;
+        Set_egptr = this->_Set_egptr;
+        *IGfirst = this->_Set_eback;
+        *this->_IGnext = Set_egptr;
+        *this->_IGcount = 0;
       }
-      if ( v3->_Pcvt )
+      if ( this->_Pcvt )
       {
         v25._Myres = 15i64;
         v25._Mysize = 0i64;
         v25._Bx._Buf[0] = 0;
-        std::basic_string<char,std::char_traits<char>,std::allocator<char>>::assign(&v25, 8ui64, 0);
+        std::string::assign(&v25, 8ui64, 0);
         while ( 1 )
         {
-          v12 = &v25;
+          Ptr = &v25;
           if ( v25._Myres >= 0x10 )
-            v12 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v25._Bx._Ptr;
+            Ptr = (std::string *)v25._Bx._Ptr;
           v13 = &v25;
           if ( v25._Myres >= 0x10 )
-            v13 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v25._Bx._Ptr;
-          v14 = v3->_Pcvt;
-          v15 = v14->vfptr;
+            v13 = (std::string *)v25._Bx._Ptr;
+          Pcvt = this->_Pcvt;
+          vfptr = Pcvt->vfptr;
           v25._Bx._Ptr = (char *)&v23;
-          v24 = (unsigned __int64)v12 + v25._Mysize;
+          v24 = (__int64)Ptr + v25._Mysize;
           v23 = v13;
           v22 = (char *)&v22;
-          v16 = ((__int64 (__fastcall *)(std::codecvt<char,char,int> *, int *, char *, char *))v15[2]._Incref)(
-                  v14,
-                  &v3->_State,
+          v16 = ((__int64 (__fastcall *)(std::codecvt<char,char,int> *, int *, char *, char *))vfptr[2]._Incref)(
+                  Pcvt,
+                  &this->_State,
                   &v20,
-                  &v21);
+                  v21);
           if ( v16 < 0 )
             break;
           if ( v16 > 1 )
           {
-            if ( v16 == 3 && (unsigned int)fputc(v20, v3->_Myfile) != -1 )
-              v4 = v2;
+            if ( v16 == 3 && (unsigned int)fputc(v20, this->_Myfile) != -1 )
+              v4 = _Meta;
             break;
           }
           v17 = &v25;
           if ( v25._Myres >= 0x10 )
-            v17 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v25._Bx._Ptr;
+            v17 = (std::string *)v25._Bx._Ptr;
           v18 = (char *)v23 - (char *)v17;
           if ( v23 != v17 )
           {
             v19 = &v25;
             if ( v25._Myres >= 0x10 )
-              v19 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v25._Bx._Ptr;
-            if ( v18 != fwrite(v19, 1ui64, (char *)v23 - (char *)v17, v3->_Myfile) )
+              v19 = (std::string *)v25._Bx._Ptr;
+            if ( v18 != fwrite(v19->_Bx._Buf, 1ui64, (char *)v23 - (char *)v17, this->_Myfile) )
               break;
           }
-          v3->_Wrotesome = 1;
+          this->_Wrotesome = 1;
           if ( v22 != &v20 )
           {
-            v4 = v2;
+            v4 = _Meta;
             break;
           }
           if ( !v18 )
           {
             if ( v25._Mysize >= 0x20 )
               break;
-            std::basic_string<char,std::char_traits<char>,std::allocator<char>>::append(&v25, 8ui64, 0);
+            std::string::append(&v25, 8ui64, 0);
           }
         }
         if ( v25._Myres >= 0x10 )
           Illusion::ShaderParam::operator delete(v25._Bx._Ptr);
       }
-      else if ( (unsigned int)fputc((char)v2, v3->_Myfile) != -1 )
+      else if ( (unsigned int)fputc((char)_Meta, this->_Myfile) != -1 )
       {
-        v4 = v2;
+        return _Meta;
       }
     }
-    result = v4;
+    return v4;
   }
-  return result;
-}fputc((char)v2, v3->_Myfile) != -1 )
-      {
-        v4 = 
+}
 
 // File Line: 430
 // RVA: 0x12DEB78
-signed __int64 __fastcall std::basic_filebuf<char,std::char_traits<char>>::pbackfail(std::basic_filebuf<char,std::char_traits<char> > *this, int _Meta)
+__int64 __fastcall std::filebuf::pbackfail(std::filebuf *this, unsigned int _Meta)
 {
-  unsigned int v2; // edi
-  std::basic_filebuf<char,std::char_traits<char> > *v3; // rbx
   char *v4; // rdx
   unsigned int v5; // ecx
-  _iobuf *v7; // rdx
-  char **v8; // r8
-  char *v9; // rdx
-  char **v10; // r9
+  _iobuf *Myfile; // rdx
+  char **IGnext; // r8
+  char *p_Mychar; // rdx
+  char **IGfirst; // r9
 
-  v2 = _Meta;
-  v3 = this;
   v4 = *this->_IGnext;
   v5 = 0;
-  if ( !v4 || *v3->_IGfirst >= v4 || v2 != -1 && (unsigned __int8)*(v4 - 1) != v2 )
+  if ( !v4 || *this->_IGfirst >= v4 || _Meta != -1 && (unsigned __int8)*(v4 - 1) != _Meta )
   {
-    v7 = v3->_Myfile;
-    if ( v7 && v2 != -1 )
+    Myfile = this->_Myfile;
+    if ( Myfile && _Meta != -1 )
     {
-      if ( !v3->_Pcvt && (unsigned int)ungetc((unsigned __int8)v2, v7) != -1 )
-        return v2;
-      v8 = v3->_IGnext;
-      v9 = &v3->_Mychar;
-      if ( *v8 != &v3->_Mychar )
+      if ( !this->_Pcvt && (unsigned int)ungetc((unsigned __int8)_Meta, Myfile) != -1 )
+        return _Meta;
+      IGnext = this->_IGnext;
+      p_Mychar = &this->_Mychar;
+      if ( *IGnext != &this->_Mychar )
       {
-        v10 = v3->_IGfirst;
-        *v9 = v2;
-        if ( *v10 != v9 )
+        IGfirst = this->_IGfirst;
+        *p_Mychar = _Meta;
+        if ( *IGfirst != p_Mychar )
         {
-          v3->_Set_eback = *v10;
-          v3->_Set_egptr = &(*v8)[*v3->_IGcount];
+          this->_Set_eback = *IGfirst;
+          this->_Set_egptr = &(*IGnext)[*this->_IGcount];
         }
-        *v10 = v9;
-        *v3->_IGnext = v9;
-        *v3->_IGcount = 1;
-        return v2;
+        *IGfirst = p_Mychar;
+        *this->_IGnext = p_Mychar;
+        *this->_IGcount = 1;
+        return _Meta;
       }
     }
     return 0xFFFFFFFFi64;
   }
-  ++*v3->_IGcount;
-  --*v3->_IGnext;
-  if ( v2 != -1 )
-    v5 = v2;
+  ++*this->_IGcount;
+  --*this->_IGnext;
+  if ( _Meta != -1 )
+    return _Meta;
   return v5;
 }
 
 // File Line: 455
 // RVA: 0x12DF120
-signed __int64 __fastcall std::basic_filebuf<char,std::char_traits<char>>::underflow(std::basic_filebuf<char,std::char_traits<char> > *this)
+__int64 __fastcall std::filebuf::underflow(std::filebuf *this)
 {
-  std::basic_filebuf<char,std::char_traits<char> > *v1; // rbx
   char *v2; // rcx
-  signed __int64 result; // rax
+  __int64 result; // rax
   unsigned int v4; // edi
 
-  v1 = this;
   v2 = *this->_IGnext;
-  if ( v2 && v2 < &v2[*v1->_IGcount] )
+  if ( v2 && v2 < &v2[*this->_IGcount] )
     return (unsigned __int8)*v2;
-  v4 = v1->vfptr->uflow((std::basic_streambuf<char,std::char_traits<char> > *)&v1->vfptr);
+  v4 = this->vfptr->uflow(this);
   result = 0xFFFFFFFFi64;
   if ( v4 != -1 )
   {
-    v1->vfptr->pbackfail((std::basic_streambuf<char,std::char_traits<char> > *)&v1->vfptr, v4);
-    result = v4;
+    this->vfptr->pbackfail(this, v4);
+    return v4;
   }
   return result;
 }
 
 // File Line: 470
 // RVA: 0x12DEED4
-signed __int64 __fastcall std::basic_filebuf<char,std::char_traits<char>>::uflow(std::basic_filebuf<char,std::char_traits<char> > *this)
+__int64 __fastcall std::filebuf::uflow(std::filebuf *this)
 {
-  std::basic_filebuf<char,std::char_traits<char> > *v1; // rbx
   char *v2; // rcx
-  int *v3; // rdx
+  int *IGcount; // rdx
   __int64 v4; // r8
-  char **v5; // rcx
+  char **IGnext; // rcx
   char *v6; // rdx
-  signed __int64 result; // rax
-  char **v8; // rdx
-  char *v9; // rcx
+  char **IGfirst; // rdx
+  char *Set_egptr; // rcx
   int v10; // eax
   unsigned int i; // edi
   int v12; // eax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v13; // rdx
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v14; // r8
-  std::codecvt<char,char,int> *v15; // rcx
-  std::_Facet_baseVtbl *v16; // r10
-  signed int v17; // eax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v18; // rax
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v19; // r8
-  __int64 *v20; // rcx
+  std::string *Ptr; // rdx
+  std::string *v14; // r8
+  std::codecvt<char,char,int> *Pcvt; // rcx
+  std::_Facet_baseVtbl *vfptr; // r10
+  int v17; // eax
+  std::string *v18; // rax
+  std::string *v19; // r8
+  __int64 v20; // rcx
   int v21; // eax
   __int64 v22; // rdi
-  __int64 *dst; // [rsp+28h] [rbp-9h]
-  char *v24; // [rsp+30h] [rbp-1h]
-  __int64 *v25; // [rsp+38h] [rbp+7h]
-  __int64 v26; // [rsp+40h] [rbp+Fh]
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > v27; // [rsp+48h] [rbp+17h]
+  __int64 *dst; // [rsp+28h] [rbp-9h] BYREF
+  __int64 v24; // [rsp+30h] [rbp-1h] BYREF
+  __int64 v25[2]; // [rsp+38h] [rbp+7h] BYREF
+  std::string v26; // [rsp+48h] [rbp+17h] BYREF
 
-  v26 = -2i64;
-  v1 = this;
+  v25[1] = -2i64;
   v2 = *this->_IGnext;
-  if ( v2 && (v3 = v1->_IGcount, v4 = *v3, v2 < &v2[v4]) )
+  if ( v2 && (IGcount = this->_IGcount, v4 = *IGcount, v2 < &v2[v4]) )
   {
-    *v3 = v4 - 1;
-    v5 = v1->_IGnext;
-    v6 = (*v5)++;
-    result = (unsigned __int8)*v6;
+    *IGcount = v4 - 1;
+    IGnext = this->_IGnext;
+    v6 = (*IGnext)++;
+    return (unsigned __int8)*v6;
   }
-  else if ( v1->_Myfile )
+  else if ( this->_Myfile )
   {
-    v8 = v1->_IGfirst;
-    if ( *v8 == &v1->_Mychar )
+    IGfirst = this->_IGfirst;
+    if ( *IGfirst == &this->_Mychar )
     {
-      v9 = v1->_Set_egptr;
-      *v8 = v1->_Set_eback;
-      *v1->_IGnext = v9;
-      *v1->_IGcount = 0;
+      Set_egptr = this->_Set_egptr;
+      *IGfirst = this->_Set_eback;
+      *this->_IGnext = Set_egptr;
+      *this->_IGcount = 0;
     }
-    if ( v1->_Pcvt )
+    if ( this->_Pcvt )
     {
-      v27._Myres = 15i64;
-      v27._Mysize = 0i64;
-      v27._Bx._Buf[0] = 0;
-      v12 = fgetc(v1->_Myfile);
-      for ( i = -1; v12 != -1; v12 = fgetc(v1->_Myfile) )
+      v26._Myres = 15i64;
+      v26._Mysize = 0i64;
+      v26._Bx._Buf[0] = 0;
+      v12 = fgetc(this->_Myfile);
+      for ( i = -1; v12 != -1; v12 = fgetc(this->_Myfile) )
       {
-        std::basic_string<char,std::char_traits<char>,std::allocator<char>>::append(&v27, 1ui64, v12);
-        v13 = &v27;
-        if ( v27._Myres >= 0x10 )
-          v13 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v27._Bx._Ptr;
-        v14 = &v27;
-        if ( v27._Myres >= 0x10 )
-          v14 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v27._Bx._Ptr;
-        v15 = v1->_Pcvt;
-        v16 = v15->vfptr;
-        v25 = (__int64 *)&v25;
-        v24 = (char *)&dst + 1;
+        std::string::append(&v26, 1ui64, v12);
+        Ptr = &v26;
+        if ( v26._Myres >= 0x10 )
+          Ptr = (std::string *)v26._Bx._Ptr;
+        v14 = &v26;
+        if ( v26._Myres >= 0x10 )
+          v14 = (std::string *)v26._Bx._Ptr;
+        Pcvt = this->_Pcvt;
+        vfptr = Pcvt->vfptr;
+        v25[0] = (__int64)v25;
+        v24 = (__int64)&dst + 1;
         dst = (__int64 *)&dst;
-        v17 = ((__int64 (__fastcall *)(std::codecvt<char,char,int> *, int *, std::basic_string<char,std::char_traits<char>,std::allocator<char> > *, unsigned __int64, char **))v16[2].__vecDelDtor)(
-                v15,
-                &v1->_State,
+        v17 = ((__int64 (__fastcall *)(std::codecvt<char,char,int> *, int *, std::string *, unsigned __int64, __int64 *))vfptr[2].__vecDelDtor)(
+                Pcvt,
+                &this->_State,
                 v14,
-                (unsigned __int64)v13 + v27._Mysize,
+                (unsigned __int64)Ptr + v26._Mysize,
                 &v24);
         if ( v17 < 0 )
           break;
         if ( v17 <= 1 )
         {
-          v18 = &v27;
-          if ( v25 != (__int64 *)&dst )
+          v18 = &v26;
+          if ( (__int64 **)v25[0] != &dst )
           {
-            if ( v27._Myres >= 0x10 )
-              LODWORD(v18) = *(_DWORD *)v27._Bx._Buf;
-            v20 = (__int64 *)v24;
-            v21 = LODWORD(v27._Mysize) + (_DWORD)v18 - (_DWORD)v24;
+            if ( v26._Myres >= 0x10 )
+              LODWORD(v18) = *(_DWORD *)v26._Bx._Buf;
+            v20 = v24;
+            v21 = LODWORD(v26._Mysize) + (_DWORD)v18 - v24;
             v22 = v21;
             if ( v21 > 0 )
             {
               while ( 1 )
               {
-                ungetc(*((char *)v20 + --v22), v1->_Myfile);
+                ungetc(*(char *)(--v22 + v20), this->_Myfile);
                 if ( v22 <= 0 )
                   break;
-                v20 = (__int64 *)v24;
+                v20 = v24;
               }
             }
             goto LABEL_35;
           }
-          if ( v27._Myres >= 0x10 )
-            v18 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v27._Bx._Ptr;
-          std::basic_string<char,std::char_traits<char>,std::allocator<char>>::erase(&v27, 0i64, v24 - (char *)v18);
+          if ( v26._Myres >= 0x10 )
+            v18 = (std::string *)v26._Bx._Ptr;
+          std::string::erase(&v26, 0i64, v24 - (_QWORD)v18);
         }
         else
         {
           if ( v17 != 3 )
             break;
-          if ( v27._Mysize >= 1 )
+          if ( v26._Mysize )
           {
-            v19 = &v27;
-            if ( v27._Myres >= 0x10 )
-              v19 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v27._Bx._Ptr;
+            v19 = &v26;
+            if ( v26._Myres >= 0x10 )
+              v19 = (std::string *)v26._Bx._Ptr;
             memcpy_s(&dst, 1ui64, v19, 1ui64);
 LABEL_35:
             i = (unsigned __int8)dst;
@@ -392,184 +372,166 @@ LABEL_35:
           }
         }
       }
-      if ( v27._Myres >= 0x10 )
-        Illusion::ShaderParam::operator delete(v27._Bx._Ptr);
+      if ( v26._Myres >= 0x10 )
+        Illusion::ShaderParam::operator delete(v26._Bx._Ptr);
     }
     else
     {
-      v10 = fgetc(v1->_Myfile);
+      v10 = fgetc(this->_Myfile);
       i = -1;
       if ( v10 != -1 )
-        i = (unsigned __int8)v10;
+        return (unsigned __int8)v10;
     }
-    result = i;
+    return i;
   }
   else
   {
-    result = 0xFFFFFFFFi64;
+    return 0xFFFFFFFFi64;
   }
-  return result;
 }
 
 // File Line: 537
 // RVA: 0x12DEC48
-std::fpos<int> *__fastcall std::basic_filebuf<char,std::char_traits<char>>::seekoff(std::basic_filebuf<char,std::char_traits<char> > *this, std::fpos<int> *result, __int64 _Off, int _Way)
+std::fpos<int> *__fastcall std::filebuf::seekoff(
+        std::filebuf *this,
+        std::fpos<int> *result,
+        __int64 _Off,
+        unsigned int _Way)
 {
-  char *v4; // r14
-  int v5; // ebp
+  char *p_Mychar; // r14
   __int64 v6; // rsi
-  std::fpos<int> *v7; // rbx
-  std::basic_filebuf<char,std::char_traits<char> > *v8; // rdi
-  char **v9; // rdx
-  char *v10; // rcx
+  char **IGfirst; // rdx
+  char *Set_egptr; // rcx
   __int64 v11; // rax
-  __int64 pos; // [rsp+40h] [rbp+8h]
+  __int64 pos; // [rsp+40h] [rbp+8h] BYREF
 
-  v4 = &this->_Mychar;
-  v5 = _Way;
+  p_Mychar = &this->_Mychar;
   v6 = _Off;
-  v7 = result;
-  v8 = this;
-  if ( *(std::basic_filebuf<char,std::char_traits<char> > **)this->_IGnext == (std::basic_filebuf<char,std::char_traits<char> > *)&this->_Mychar
-    && _Way == 1
-    && !this->_Pcvt )
-  {
+  if ( *(std::filebuf **)this->_IGnext == (std::filebuf *)&this->_Mychar && _Way == 1 && !this->_Pcvt )
     v6 = _Off - 1;
-  }
   if ( !this->_Myfile
-    || !std::basic_filebuf<char,std::char_traits<char>>::_Endwrite(this)
-    || (v6 || v5 != 1) && (unsigned int)fseeki64(v8->_Myfile, v6, v5)
-    || fgetpos(v8->_Myfile, &pos) )
+    || !std::filebuf::_Endwrite(this)
+    || (v6 || _Way != 1) && (unsigned int)fseeki64(this->_Myfile, v6, _Way)
+    || fgetpos(this->_Myfile, &pos) )
   {
-    v7->_Fpos = 0i64;
-    v7->_Mystate = 0;
-    v7->_Myoff = std::_BADOFF;
+    result->_Fpos = 0i64;
+    result->_Mystate = 0;
+    result->_Myoff = std::_BADOFF;
   }
   else
   {
-    v9 = v8->_IGfirst;
-    if ( *v9 == v4 )
+    IGfirst = this->_IGfirst;
+    if ( *IGfirst == p_Mychar )
     {
-      v10 = v8->_Set_egptr;
-      *v9 = v8->_Set_eback;
-      *v8->_IGnext = v10;
-      *v8->_IGcount = 0;
+      Set_egptr = this->_Set_egptr;
+      *IGfirst = this->_Set_eback;
+      *this->_IGnext = Set_egptr;
+      *this->_IGcount = 0;
     }
     v11 = pos;
-    v7->_Myoff = 0i64;
-    v7->_Fpos = v11;
-    v7->_Mystate = v8->_State;
+    result->_Myoff = 0i64;
+    result->_Fpos = v11;
+    result->_Mystate = this->_State;
   }
-  return v7;
+  return result;
 }
 
 // File Line: 559
 // RVA: 0x12DED34
-std::fpos<int> *__fastcall std::basic_filebuf<char,std::char_traits<char>>::seekpos(std::basic_filebuf<char,std::char_traits<char> > *this, std::fpos<int> *result, std::fpos<int> *_Pos, int __formal)
+std::fpos<int> *__fastcall std::filebuf::seekpos(
+        std::filebuf *this,
+        std::fpos<int> *result,
+        std::fpos<int> *_Pos,
+        int __formal)
 {
   bool v4; // zf
-  __int64 v5; // rsi
-  std::fpos<int> *v6; // r14
-  std::fpos<int> *v7; // rbx
-  std::basic_filebuf<char,std::char_traits<char> > *v8; // rdi
-  char **v9; // rdx
-  char *v10; // rcx
+  __int64 Myoff; // rsi
+  char **IGfirst; // rdx
+  char *Set_egptr; // rcx
   __int64 v11; // rax
-  __int64 pos; // [rsp+30h] [rbp+8h]
+  __int64 pos; // [rsp+30h] [rbp+8h] BYREF
 
   v4 = this->_Myfile == 0i64;
-  v5 = _Pos->_Myoff;
+  Myoff = _Pos->_Myoff;
   pos = _Pos->_Fpos;
-  v6 = _Pos;
-  v7 = result;
-  v8 = this;
   if ( v4
-    || !std::basic_filebuf<char,std::char_traits<char>>::_Endwrite(this)
-    || fsetpos(v8->_Myfile, &pos)
-    || v5 && (unsigned int)fseeki64(v8->_Myfile, v5, 1)
-    || fgetpos(v8->_Myfile, &pos) )
+    || !std::filebuf::_Endwrite(this)
+    || fsetpos(this->_Myfile, &pos)
+    || Myoff && (unsigned int)fseeki64(this->_Myfile, Myoff, 1u)
+    || fgetpos(this->_Myfile, &pos) )
   {
-    v7->_Fpos = 0i64;
-    v7->_Mystate = 0;
-    v7->_Myoff = std::_BADOFF;
+    result->_Fpos = 0i64;
+    result->_Mystate = 0;
+    result->_Myoff = std::_BADOFF;
   }
   else
   {
-    v9 = v8->_IGfirst;
-    v8->_State = v6->_Mystate;
-    if ( *v9 == &v8->_Mychar )
+    IGfirst = this->_IGfirst;
+    this->_State = _Pos->_Mystate;
+    if ( *IGfirst == &this->_Mychar )
     {
-      v10 = v8->_Set_egptr;
-      *v9 = v8->_Set_eback;
-      *v8->_IGnext = v10;
-      *v8->_IGcount = 0;
+      Set_egptr = this->_Set_egptr;
+      *IGfirst = this->_Set_eback;
+      *this->_IGnext = Set_egptr;
+      *this->_IGcount = 0;
     }
     v11 = pos;
-    v7->_Myoff = 0i64;
-    v7->_Fpos = v11;
-    v7->_Mystate = v8->_State;
+    result->_Myoff = 0i64;
+    result->_Fpos = v11;
+    result->_Mystate = this->_State;
   }
-  return v7;
+  return result;
 }
 
 // File Line: 577
 // RVA: 0x12DEE38
-std::basic_filebuf<char,std::char_traits<char> > *__fastcall std::basic_filebuf<char,std::char_traits<char>>::setbuf(std::basic_filebuf<char,std::char_traits<char> > *this, char *_Buffer, __int64 _Count)
+std::filebuf *__fastcall std::filebuf::setbuf(std::filebuf *this, char *_Buffer, unsigned __int64 _Count)
 {
-  std::basic_filebuf<char,std::char_traits<char> > *v3; // rbx
-  _iobuf *v4; // rcx
-  __int64 v5; // r9
-  int v6; // er8
+  _iobuf *Myfile; // rcx
+  int v6; // r8d
 
-  v3 = this;
-  v4 = this->_Myfile;
-  v5 = _Count;
-  if ( !v4 )
+  Myfile = this->_Myfile;
+  if ( !Myfile )
     return 0i64;
   v6 = _Buffer || _Count ? 0 : 4;
-  if ( setvbuf(v4, _Buffer, v6, v5) )
+  if ( setvbuf(Myfile, _Buffer, v6, _Count) )
     return 0i64;
-  std::basic_filebuf<char,std::char_traits<char>>::_Init(v3, v3->_Myfile, _Openfl);
-  return v3;
+  std::filebuf::_Init(this, this->_Myfile, _Openfl);
+  return this;
 }
 
 // File Line: 590
 // RVA: 0x12DEE8C
-__int64 __fastcall std::basic_filebuf<char,std::char_traits<char>>::sync(std::basic_filebuf<char,std::char_traits<char> > *this)
+__int64 __fastcall std::filebuf::sync(std::filebuf *this)
 {
-  std::basic_filebuf<char,std::char_traits<char> > *v1; // rdi
   unsigned int v2; // ebx
 
-  v1 = this;
-  if ( !this->_Myfile
-    || (v2 = -1, this->vfptr->overflow((std::basic_streambuf<char,std::char_traits<char> > *)this, -1) == -1)
-    || fflush(v1->_Myfile) >= 0 )
-  {
-    v2 = 0;
-  }
+  if ( !this->_Myfile )
+    return 0;
+  v2 = -1;
+  if ( this->vfptr->overflow(this, -1) == -1 || fflush(this->_Myfile) >= 0 )
+    return 0;
   return v2;
 }
 
 // File Line: 597
 // RVA: 0x12DE930
-void __fastcall std::basic_filebuf<char,std::char_traits<char>>::imbue(std::basic_filebuf<char,std::char_traits<char> > *this, std::locale *_Loc)
+void __fastcall std::filebuf::imbue(std::filebuf *this, std::locale *_Loc)
 {
-  std::basic_filebuf<char,std::char_traits<char> > *v2; // rbx
   std::codecvt<char,char,int> *v3; // rax
 
-  v2 = this;
-  v3 = (std::codecvt<char,char,int> *)std::use_facet<std::codecvt<char,char,int>>(_Loc);
-  std::basic_filebuf<char,std::char_traits<char>>::_Initcvt(v2, v3);
+  v3 = std::use_facet<std::codecvt<char,char,int>>(_Loc);
+  std::filebuf::_Initcvt(this, v3);
 }
 
 // File Line: 602
 // RVA: 0x12DE77C
-void __fastcall std::basic_filebuf<char,std::char_traits<char>>::_Init(std::basic_filebuf<char,std::char_traits<char> > *this, _iobuf *_File, std::basic_filebuf<char,std::char_traits<char> >::_Initfl _Which)
+void __fastcall std::filebuf::_Init(std::filebuf *this, _iobuf *_File, std::filebuf::_Initfl _Which)
 {
   int v3; // eax
 
   this->_IPfirst = &this->_Pfirst;
-  this->_Closef = _Which == 1;
+  this->_Closef = _Which == _Openfl;
   this->_Wrotesome = 0;
   this->_IGfirst = &this->_Gfirst;
   this->_IGnext = &this->_Gnext;
@@ -592,77 +554,74 @@ void __fastcall std::basic_filebuf<char,std::char_traits<char>>::_Init(std::basi
     this->_IPcount = &_File->_cnt;
   }
   this->_Myfile = _File;
-  v3 = `std::basic_filebuf<char,std::char_traits<char>>::_Init::`2::_Stinit;
+  v3 = `std::filebuf::_Init::`2::_Stinit;
   this->_Pcvt = 0i64;
   this->_State = v3;
 }
 
 // File Line: 634
 // RVA: 0x12DE530
-char __fastcall std::basic_filebuf<char,std::char_traits<char>>::_Endwrite(std::basic_filebuf<char,std::char_traits<char> > *this)
+char __fastcall std::filebuf::_Endwrite(std::filebuf *this)
 {
-  std::basic_filebuf<char,std::char_traits<char> > *v1; // rdi
   char v2; // bl
   char v4; // si
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v5; // rdx
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v6; // r8
+  std::string *Ptr; // rdx
+  std::string *v6; // r8
   int v7; // ecx
   int v8; // ecx
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v9; // rax
+  std::string *v9; // rax
   __int64 v10; // r14
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v11; // rcx
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v12; // [rsp+30h] [rbp-40h]
-  __int64 v13; // [rsp+38h] [rbp-38h]
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > v14; // [rsp+40h] [rbp-30h]
+  std::string *v11; // rcx
+  __int64 v12[2]; // [rsp+30h] [rbp-40h] BYREF
+  std::string v13; // [rsp+40h] [rbp-30h] BYREF
 
-  v13 = -2i64;
-  v1 = this;
+  v12[1] = -2i64;
   v2 = 0;
   if ( !this->_Pcvt || !this->_Wrotesome )
     return 1;
-  if ( this->vfptr->overflow((std::basic_streambuf<char,std::char_traits<char> > *)this, -1) == -1 )
+  if ( this->vfptr->overflow(this, -1) == -1 )
     return 0;
-  v14._Myres = 15i64;
-  v14._Mysize = 0i64;
-  v14._Bx._Buf[0] = 0;
-  std::basic_string<char,std::char_traits<char>,std::allocator<char>>::assign(&v14, 8ui64, 0);
+  v13._Myres = 15i64;
+  v13._Mysize = 0i64;
+  v13._Bx._Buf[0] = 0;
+  std::string::assign(&v13, 8ui64, 0);
   v4 = 1;
   while ( 1 )
   {
-    v5 = &v14;
-    if ( v14._Myres >= 0x10 )
-      v5 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v14._Bx._Ptr;
-    v6 = &v14;
-    if ( v14._Myres >= 0x10 )
-      v6 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v14._Bx._Ptr;
-    v7 = ((__int64 (__fastcall *)(std::codecvt<char,char,int> *, int *, std::basic_string<char,std::char_traits<char>,std::allocator<char> > *, unsigned __int64, std::basic_string<char,std::char_traits<char>,std::allocator<char> > **))v1->_Pcvt->vfptr[2]._Decref)(
-           v1->_Pcvt,
-           &v1->_State,
+    Ptr = &v13;
+    if ( v13._Myres >= 0x10 )
+      Ptr = (std::string *)v13._Bx._Ptr;
+    v6 = &v13;
+    if ( v13._Myres >= 0x10 )
+      v6 = (std::string *)v13._Bx._Ptr;
+    v7 = ((__int64 (__fastcall *)(std::codecvt<char,char,int> *, int *, std::string *, char *, __int64 *))this->_Pcvt->vfptr[2]._Decref)(
+           this->_Pcvt,
+           &this->_State,
            v6,
-           (unsigned __int64)v5 + v14._Mysize,
-           &v12);
+           (char *)Ptr + v13._Mysize,
+           v12);
     if ( !v7 )
     {
-      v1->_Wrotesome = 0;
+      this->_Wrotesome = 0;
       goto LABEL_14;
     }
     v8 = v7 - 1;
     if ( v8 )
       break;
 LABEL_14:
-    v9 = &v14;
-    if ( v14._Myres >= 0x10 )
-      v9 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v14._Bx._Ptr;
-    v10 = (char *)v12 - (char *)v9;
-    if ( v12 != v9 )
+    v9 = &v13;
+    if ( v13._Myres >= 0x10 )
+      v9 = (std::string *)v13._Bx._Ptr;
+    v10 = v12[0] - (_QWORD)v9;
+    if ( (std::string *)v12[0] != v9 )
     {
-      v11 = &v14;
-      if ( v14._Myres >= 0x10 )
-        v11 = (std::basic_string<char,std::char_traits<char>,std::allocator<char> > *)v14._Bx._Ptr;
-      if ( v10 != fwrite(v11, 1ui64, (char *)v12 - (char *)v9, v1->_Myfile) )
+      v11 = &v13;
+      if ( v13._Myres >= 0x10 )
+        v11 = (std::string *)v13._Bx._Ptr;
+      if ( v10 != fwrite(v11->_Bx._Buf, 1ui64, v12[0] - (_QWORD)v9, this->_Myfile) )
         goto LABEL_26;
     }
-    if ( !v1->_Wrotesome )
+    if ( !this->_Wrotesome )
     {
       v2 = 1;
 LABEL_26:
@@ -670,46 +629,41 @@ LABEL_26:
       goto LABEL_27;
     }
     if ( !v10 )
-      std::basic_string<char,std::char_traits<char>,std::allocator<char>>::append(&v14, 8ui64, 0);
+      std::string::append(&v13, 8ui64, 0);
   }
   if ( v8 != 2 )
     goto LABEL_28;
 LABEL_27:
   v2 = v4;
 LABEL_28:
-  if ( v14._Myres >= 0x10 )
-    Illusion::ShaderParam::operator delete(v14._Bx._Ptr);
+  if ( v13._Myres >= 0x10 )
+    Illusion::ShaderParam::operator delete(v13._Bx._Ptr);
   return v2;
 }
 
 // File Line: 675
 // RVA: 0x12DE828
-void __fastcall std::basic_filebuf<char,std::char_traits<char>>::_Initcvt(std::basic_filebuf<char,std::char_traits<char> > *this, std::codecvt<char,char,int> *_Newpcvt)
+void __fastcall std::filebuf::_Initcvt(std::filebuf *this, std::codecvt<char,char,int> *_Newpcvt)
 {
-  std::basic_filebuf<char,std::char_traits<char> > *v2; // rbx
-  std::codecvt<char,char,int> *v3; // rdi
-
-  v2 = this;
-  v3 = _Newpcvt;
   if ( ((unsigned __int8 (__fastcall *)(std::codecvt<char,char,int> *))_Newpcvt->vfptr[1].__vecDelDtor)(_Newpcvt) )
   {
-    v2->_Pcvt = 0i64;
+    this->_Pcvt = 0i64;
   }
   else
   {
-    v2->_Pcvt = v3;
-    v2->_IGfirst = &v2->_Gfirst;
-    v2->_IPfirst = &v2->_Pfirst;
-    v2->_IGnext = &v2->_Gnext;
-    v2->_IPnext = &v2->_Pnext;
-    v2->_IGcount = &v2->_Gcount;
-    v2->_IPcount = &v2->_Pcount;
-    v2->_Pfirst = 0i64;
-    *v2->_IPnext = 0i64;
-    *v2->_IPcount = 0;
-    *v2->_IGfirst = 0i64;
-    *v2->_IGnext = 0i64;
-    *v2->_IGcount = 0;
+    this->_Pcvt = _Newpcvt;
+    this->_IGfirst = &this->_Gfirst;
+    this->_IPfirst = &this->_Pfirst;
+    this->_IGnext = &this->_Gnext;
+    this->_IPnext = &this->_Pnext;
+    this->_IGcount = &this->_Gcount;
+    this->_IPcount = &this->_Pcount;
+    this->_Pfirst = 0i64;
+    *this->_IPnext = 0i64;
+    *this->_IPcount = 0;
+    *this->_IGfirst = 0i64;
+    *this->_IGnext = 0i64;
+    *this->_IGcount = 0;
   }
 }
 

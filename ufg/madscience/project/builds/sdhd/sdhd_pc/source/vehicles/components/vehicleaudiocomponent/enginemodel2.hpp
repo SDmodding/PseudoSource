@@ -2,24 +2,20 @@
 // RVA: 0x66C9B0
 void __fastcall UFG::EngineModelInput::~EngineModelInput(UFG::EngineModelInput *this)
 {
-  UFG::EngineModelInput *v1; // rbx
-  UFG::AudioEvent *v2; // rcx
-  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v3; // rdx
-  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v4; // rcx
-  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *v5; // rax
+  UFG::AudioEvent *m_pEvent; // rcx
+  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *mPrev; // rcx
+  UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *mNext; // rax
 
-  v1 = this;
   this->vfptr = (UFG::EngineModelInputVtbl *)&UFG::EngineModelInput::`vftable;
-  v2 = this->m_eventController.m_pEvent;
-  if ( v2 )
-    UFG::AudioEvent::OnControllerDestroy(v2);
-  v3 = (UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput> *)&v1->mPrev;
-  v4 = v1->mPrev;
-  v5 = v1->mNext;
-  v4->mNext = v5;
-  v5->mPrev = v4;
-  v3->mPrev = v3;
-  v3->mNext = v3;
+  m_pEvent = this->m_eventController.m_pEvent;
+  if ( m_pEvent )
+    UFG::AudioEvent::OnControllerDestroy(m_pEvent);
+  mPrev = this->mPrev;
+  mNext = this->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->mPrev = &this->UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput>;
+  this->mNext = &this->UFG::qNode<UFG::EngineModelInput,UFG::EngineModelInput>;
 }
 
 // File Line: 119
@@ -27,15 +23,15 @@ void __fastcall UFG::EngineModelInput::~EngineModelInput(UFG::EngineModelInput *
 void __fastcall UFG::EngineModelOutput::~EngineModelOutput(UFG::EngineModelOutput *this)
 {
   UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *v1; // rdx
-  UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *v2; // rcx
-  UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *v3; // rax
+  UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *mPrev; // rcx
+  UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *mNext; // rax
 
   this->vfptr = (UFG::EngineModelOutputVtbl *)&UFG::EngineModelOutput::`vftable;
-  v1 = (UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput> *)&this->mPrev;
-  v2 = this->mPrev;
-  v3 = v1->mNext;
-  v2->mNext = v3;
-  v3->mPrev = v2;
+  v1 = &this->UFG::qNode<UFG::EngineModelOutput,UFG::EngineModelOutput>;
+  mPrev = this->mPrev;
+  mNext = v1->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
 }
@@ -49,7 +45,7 @@ void __fastcall UFG::Base_EngineState::~Base_EngineState(UFG::Base_EngineState *
 
 // File Line: 496
 // RVA: 0x66DB90
-void __fastcall UFG::AmbientConversationConfigurator::Action::operator delete(void *ptr, const char *name)
+void __fastcall UFG::AmbientConversationConfigurator::Action::operator delete(char *ptr, const char *name)
 {
   UFG::qMemoryPool::Free(&g_AudioComponentPool, ptr);
 }

@@ -1,6 +1,6 @@
 // File Line: 41
 // RVA: 0x12BF21C
-signed __int64 __fastcall close(int fh)
+__int64 __fastcall close(int fh)
 {
   __int64 v1; // rdi
   __int64 v2; // rbx
@@ -13,9 +13,9 @@ signed __int64 __fastcall close(int fh)
     *errno() = 9;
     return 0xFFFFFFFFi64;
   }
-  if ( (signed int)ioinit() < 0 )
+  if ( (int)ioinit() < 0 )
     return 0xFFFFFFFFi64;
-  if ( (signed int)v1 < 0 || (unsigned int)v1 >= nhandle || (v2 = v1 & 0x1F, !(_pioinfo[v1 >> 5][v2].osfile & 1)) )
+  if ( (int)v1 < 0 || (unsigned int)v1 >= nhandle || (v2 = v1 & 0x1F, (_pioinfo[v1 >> 5][v2].osfile & 1) == 0) )
   {
     *_doserrno() = 0;
     *errno() = 9;
@@ -23,7 +23,7 @@ signed __int64 __fastcall close(int fh)
     return 0xFFFFFFFFi64;
   }
   _lock_fhandle(v1);
-  if ( _pioinfo[v1 >> 5][v2].osfile & 1 )
+  if ( (_pioinfo[v1 >> 5][v2].osfile & 1) != 0 )
   {
     v3 = close_nolock(v1);
   }
@@ -38,32 +38,32 @@ signed __int64 __fastcall close(int fh)
 
 // File Line: 72
 // RVA: 0x12BF2EC
-signed __int64 __fastcall close_nolock(int fh)
+__int64 __fastcall close_nolock(int fh)
 {
   __int64 v1; // rdi
-  __int64 v3; // rbx
+  __int64 osfhandle; // rbx
   void *v4; // rax
-  unsigned int v5; // ebx
+  unsigned int LastError; // ebx
 
   v1 = fh;
-  if ( (signed int)ioinit() < 0 )
+  if ( (int)ioinit() < 0 )
     return 0xFFFFFFFFi64;
   if ( get_osfhandle(v1) == -1
-    || ((_DWORD)v1 == 1 && _pioinfo[0][2].osfile & 1 || (_DWORD)v1 == 2 && _pioinfo[0][1].osfile & 1)
-    && (v3 = get_osfhandle(2), get_osfhandle(1) == v3)
+    || ((_DWORD)v1 == 1 && (_pioinfo[0][2].osfile & 1) != 0 || (_DWORD)v1 == 2 && (_pioinfo[0][1].osfile & 1) != 0)
+    && (osfhandle = get_osfhandle(2), get_osfhandle(1) == osfhandle)
     || (v4 = (void *)get_osfhandle(v1), CloseHandle(v4)) )
   {
-    v5 = 0;
+    LastError = 0;
   }
   else
   {
-    v5 = GetLastError();
+    LastError = GetLastError();
   }
   free_osfhnd(v1);
   _pioinfo[v1 >> 5][v1 & 0x1F].osfile = 0;
-  if ( v5 )
+  if ( LastError )
   {
-    dosmaperr(v5);
+    dosmaperr(LastError);
     return 0xFFFFFFFFi64;
   }
   return 0i64;

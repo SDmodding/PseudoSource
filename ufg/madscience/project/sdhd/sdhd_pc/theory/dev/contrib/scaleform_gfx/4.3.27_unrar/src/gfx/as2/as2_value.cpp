@@ -1,93 +1,85 @@
 // File Line: 40
 // RVA: 0x720FB0
-bool __fastcall Scaleform::GFx::AS2::StringToNumber(long double *result, const char *str)
+bool __fastcall Scaleform::GFx::AS2::StringToNumber(long double *result, char *str)
 {
-  long double *v2; // r14
-  const char *v3; // rdi
-  signed __int64 v4; // rbx
+  __int64 v4; // rbx
   int v5; // ecx
   double v6; // xmm0_8
   const char *v7; // rsi
-  signed int v8; // ebp
+  int v8; // ebp
   char *v9; // rax
-  char *endptr; // [rsp+48h] [rbp+10h]
+  char *endptr; // [rsp+48h] [rbp+10h] BYREF
 
-  v2 = result;
-  v3 = str;
   endptr = 0i64;
   v4 = -1i64;
   do
     ++v4;
   while ( str[v4] );
   if ( *str != 48 )
-    goto LABEL_24;
+    goto LABEL_8;
   v5 = str[1];
   if ( (unsigned int)(v5 - 65) <= 0x19 )
     v5 += 32;
   if ( v5 != 120 )
   {
-LABEL_24:
+LABEL_8:
     if ( strcspn(str, ".Ee") != v4 )
     {
-      v6 = Scaleform::SFstrtod(v3, &endptr);
+      v6 = Scaleform::SFstrtod(str, &endptr);
       goto LABEL_18;
     }
-    v7 = v3;
+    v7 = str;
     v8 = 1;
-    if ( *v3 == 45 )
+    if ( *str == 45 )
     {
       v8 = -1;
     }
-    else if ( *v3 != 43 )
+    else if ( *str != 43 )
     {
 LABEL_14:
-      if ( *v7 != 48 || strspn(v7, "01234567") != v4 )
-        v6 = Scaleform::SFstrtod(v7, &endptr) * (double)v8;
+      if ( *v7 == 48 && strspn(v7, "01234567") == v4 )
+        v6 = (double)(int)(v8 * strtoul(v7, &endptr, 8));
       else
-        v6 = (double)(signed int)(v8 * strtoul(v7, &endptr, 8));
+        v6 = Scaleform::SFstrtod(v7, &endptr) * (double)v8;
       goto LABEL_18;
     }
     --v4;
-    v7 = v3 + 1;
+    v7 = str + 1;
     goto LABEL_14;
   }
-  v6 = (double)(signed int)strtoul(str, &endptr, 0);
+  v6 = (double)(int)strtoul(str, &endptr, 0);
 LABEL_18:
   v9 = endptr;
-  *v2 = v6;
-  return v9 != v3 && !*v9;
+  *result = v6;
+  return v9 != str && !*v9;
 }
 
 // File Line: 126
 // RVA: 0x6CD530
-void __usercall Scaleform::GFx::AS2::Value::Value(Scaleform::GFx::AS2::Value *this@<rcx>, Scaleform::GFx::AS2::Value *v@<rdx>, __int64 a3@<rdi>)
+void __fastcall Scaleform::GFx::AS2::Value::Value(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::Value *v)
 {
-  Scaleform::GFx::AS2::Value *v3; // rbx
-  Scaleform::GFx::AS2::Value *v4; // rdi
-  Scaleform::GFx::ASStringNode *v5; // rax
+  __int64 v2; // rdi
+  Scaleform::GFx::ASStringNode *pStringNode; // rax
   Scaleform::GFx::ASStringNode *v6; // rcx
   __int64 v7; // rax
-  Scaleform::GFx::AS2::FunctionRefBase *v8; // rcx
-  Scaleform::GFx::AS2::FunctionObject *v9; // r8
-  Scaleform::GFx::AS2::LocalFrame *v10; // rdx
-  char v11; // al
-  Scaleform::GFx::AS2::RefCountBaseGC<323> *v12; // rcx
-  unsigned int v13; // edx
-  Scaleform::GFx::AS2::RefCountBaseGC<323> *v14; // rcx
-  unsigned int v15; // eax
-  Scaleform::GFx::ASStringNode *v16; // rcx
-  Scaleform::GFx::ASStringNode *v17; // rax
-  Scaleform::GFx::AS2::FunctionRefBase *v18; // rcx
-  Scaleform::GFx::ASStringNode *v19; // rdx
-  Scaleform::GFx::AS2::LocalFrame *v20; // rdx
-  Scaleform::GFx::AS2::RefCountBaseGC<323> *v21; // [rsp+28h] [rbp-20h]
-  Scaleform::GFx::AS2::RefCountBaseGC<323> *v22; // [rsp+30h] [rbp-18h]
-  char v23; // [rsp+38h] [rbp-10h]
-  __int64 v24; // [rsp+40h] [rbp-8h]
+  Scaleform::GFx::ASStringNode *v8; // r8
+  Scaleform::GFx::AS2::LocalFrame *v9; // rdx
+  char v10; // al
+  Scaleform::GFx::AS2::RefCountBaseGC<323> *v11; // rcx
+  unsigned int RefCount; // edx
+  Scaleform::GFx::AS2::RefCountBaseGC<323> *v13; // rcx
+  unsigned int v14; // eax
+  Scaleform::GFx::ASStringNode *v15; // rcx
+  Scaleform::GFx::ASStringNode *v16; // rax
+  $05405293094FBBD0121C32E32235DD0F *v17; // rcx
+  Scaleform::GFx::ASStringNode *v18; // rdx
+  Scaleform::GFx::AS2::LocalFrame *pLocalFrame; // rdx
+  Scaleform::GFx::AS2::RefCountBaseGC<323> *v20; // [rsp+28h] [rbp-20h] BYREF
+  Scaleform::GFx::AS2::RefCountBaseGC<323> *v21; // [rsp+30h] [rbp-18h]
+  char v22; // [rsp+38h] [rbp-10h]
+  __int64 v23; // [rsp+40h] [rbp-8h]
 
-  v24 = a3;
-  v3 = v;
-  v4 = this;
+  v23 = v2;
   this->T.Type = v->T.Type;
   switch ( v->T.Type )
   {
@@ -102,93 +94,95 @@ void __usercall Scaleform::GFx::AS2::Value::Value(Scaleform::GFx::AS2::Value *th
       break;
     case 5:
     case 0xB:
-      v5 = v->V.pStringNode;
-      this->V.pStringNode = v5;
-      ++v5->RefCount;
+      pStringNode = v->V.pStringNode;
+      this->V.pStringNode = pStringNode;
+      ++pStringNode->RefCount;
       break;
     case 6:
       v6 = v->V.pStringNode;
       if ( v6 )
       {
-        if ( (*(unsigned int (__cdecl **)(unsigned int *))(*(_QWORD *)&v6->Size + 16i64))(&v6->Size) != 23 )
+        if ( (*(unsigned int (__fastcall **)(unsigned int *))(*(_QWORD *)&v6->Size + 16i64))(&v6->Size) != 23 )
         {
-          v16 = v3->V.pStringNode;
+          v15 = v->V.pStringNode;
           goto LABEL_30;
         }
-        v4->T.Type = 8;
-        v7 = (*(__int64 (__fastcall **)(unsigned int *, Scaleform::GFx::AS2::RefCountBaseGC<323> **))(*(_QWORD *)&v3->V.pStringNode->Size + 96i64))(
-               &v3->V.pStringNode->Size,
-               &v21);
-        v8 = (Scaleform::GFx::AS2::FunctionRefBase *)&v4->NV.8;
-        v8->Flags = 0;
-        v9 = *(Scaleform::GFx::AS2::FunctionObject **)v7;
-        v8->Function = *(Scaleform::GFx::AS2::FunctionObject **)v7;
+        this->T.Type = 8;
+        v7 = (*(__int64 (__fastcall **)(unsigned int *, Scaleform::GFx::AS2::RefCountBaseGC<323> **))(*(_QWORD *)&v->V.pStringNode->Size + 96i64))(
+               &v->V.pStringNode->Size,
+               &v20);
+        this->V.FunctionValue.Flags = 0;
+        v8 = *(Scaleform::GFx::ASStringNode **)v7;
+        this->V.pStringNode = *(Scaleform::GFx::ASStringNode **)v7;
+        if ( v8 )
+          v8->RefCount = (v8->RefCount + 1) & 0x8FFFFFFF;
+        this->V.FunctionValue.pLocalFrame = 0i64;
+        v9 = *(Scaleform::GFx::AS2::LocalFrame **)(v7 + 8);
         if ( v9 )
-          v9->RefCount = (v9->RefCount + 1) & 0x8FFFFFFF;
-        v4->V.FunctionValue.pLocalFrame = 0i64;
-        v10 = *(Scaleform::GFx::AS2::LocalFrame **)(v7 + 8);
-        if ( v10 )
-          Scaleform::GFx::AS2::FunctionRefBase::SetLocalFrame(v8, v10, *(_BYTE *)(v7 + 16) & 1);
-        v11 = v23;
-        if ( !(v23 & 2) )
+          Scaleform::GFx::AS2::FunctionRefBase::SetLocalFrame(&this->V.FunctionValue, v9, *(_BYTE *)(v7 + 16) & 1);
+        v10 = v22;
+        if ( (v22 & 2) == 0 )
         {
-          v12 = v21;
+          v11 = v20;
+          if ( v20 )
+          {
+            RefCount = v20->RefCount;
+            if ( (RefCount & 0x3FFFFFF) != 0 )
+            {
+              v20->RefCount = RefCount - 1;
+              Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v11);
+              v10 = v22;
+            }
+          }
+        }
+        v20 = 0i64;
+        if ( (v10 & 1) == 0 )
+        {
+          v13 = v21;
           if ( v21 )
           {
-            v13 = v21->RefCount;
-            if ( v13 & 0x3FFFFFF )
+            v14 = v21->RefCount;
+            if ( (v14 & 0x3FFFFFF) != 0 )
             {
-              v21->RefCount = v13 - 1;
-              Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v12);
-              v11 = v23;
+              v21->RefCount = v14 - 1;
+              Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v13);
             }
           }
         }
         v21 = 0i64;
-        if ( !(v11 & 1) )
-        {
-          v14 = v22;
-          if ( v22 )
-          {
-            v15 = v22->RefCount;
-            if ( v15 & 0x3FFFFFF )
-            {
-              v22->RefCount = v15 - 1;
-              Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v14);
-            }
-          }
-        }
-        v22 = 0i64;
       }
       else
       {
-        v4->V.pStringNode = 0i64;
+        this->V.pStringNode = 0i64;
       }
       break;
     case 7:
-      v17 = v->V.pStringNode;
-      this->V.pStringNode = v17;
-      if ( v17 )
-        ++LODWORD(v17->pData);
+      v16 = v->V.pStringNode;
+      this->V.pStringNode = v16;
+      if ( v16 )
+        ++LODWORD(v16->pData);
       break;
     case 8:
     case 0xC:
-      v18 = (Scaleform::GFx::AS2::FunctionRefBase *)&this->NV.8;
-      v18->Flags = 0;
-      v19 = v->V.pStringNode;
-      v18->Function = (Scaleform::GFx::AS2::FunctionObject *)v19;
-      if ( v19 )
-        v19->RefCount = (v19->RefCount + 1) & 0x8FFFFFFF;
-      v4->V.FunctionValue.pLocalFrame = 0i64;
-      v20 = v3->V.FunctionValue.pLocalFrame;
-      if ( v20 )
-        Scaleform::GFx::AS2::FunctionRefBase::SetLocalFrame(v18, v20, v3->V.FunctionValue.Flags & 1);
+      v17 = &this->V.8;
+      this->V.FunctionValue.Flags = 0;
+      v18 = v->V.pStringNode;
+      this->V.pStringNode = v18;
+      if ( v18 )
+        v18->RefCount = (v18->RefCount + 1) & 0x8FFFFFFF;
+      this->V.FunctionValue.pLocalFrame = 0i64;
+      pLocalFrame = v->V.FunctionValue.pLocalFrame;
+      if ( pLocalFrame )
+        Scaleform::GFx::AS2::FunctionRefBase::SetLocalFrame(
+          (Scaleform::GFx::AS2::FunctionRefBase *)v17,
+          pLocalFrame,
+          v->V.FunctionValue.Flags & 1);
       break;
     case 9:
-      v16 = v->V.pStringNode;
+      v15 = v->V.pStringNode;
 LABEL_30:
-      v4->V.pStringNode = v16;
-      v16->RefCount = (v16->RefCount + 1) & 0x8FFFFFFF;
+      this->V.pStringNode = v15;
+      v15->RefCount = (v15->RefCount + 1) & 0x8FFFFFFF;
       break;
     default:
       return;
@@ -197,136 +191,132 @@ LABEL_30:
 
 // File Line: 191
 // RVA: 0x6D3710
-void __usercall Scaleform::GFx::AS2::Value::operator=(Scaleform::GFx::AS2::Value *this@<rcx>, Scaleform::GFx::AS2::Value *v@<rdx>, __int64 a3@<rdi>)
+void __fastcall Scaleform::GFx::AS2::Value::operator=(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::Value *v)
 {
-  Scaleform::GFx::AS2::Value *v3; // rbx
-  Scaleform::GFx::AS2::Value *v4; // rdi
-  Scaleform::GFx::ASStringNode *v5; // rax
+  __int64 v2; // rdi
+  Scaleform::GFx::ASStringNode *pStringNode; // rax
   Scaleform::GFx::ASStringNode *v6; // rcx
   __int64 v7; // rax
-  Scaleform::GFx::AS2::FunctionRefBase *v8; // rcx
-  Scaleform::GFx::AS2::FunctionObject *v9; // r8
-  Scaleform::GFx::AS2::LocalFrame *v10; // rdx
-  char v11; // al
-  Scaleform::GFx::AS2::RefCountBaseGC<323> *v12; // rcx
-  unsigned int v13; // edx
-  Scaleform::GFx::AS2::RefCountBaseGC<323> *v14; // rcx
-  unsigned int v15; // eax
-  Scaleform::GFx::ASStringNode *v16; // rax
-  Scaleform::GFx::AS2::FunctionRefBase *v17; // rcx
-  Scaleform::GFx::AS2::FunctionObject *v18; // rdx
-  Scaleform::GFx::AS2::LocalFrame *v19; // rdx
-  Scaleform::GFx::ASStringNode *v20; // rcx
-  Scaleform::GFx::AS2::RefCountBaseGC<323> *v21; // [rsp+28h] [rbp-20h]
-  Scaleform::GFx::AS2::RefCountBaseGC<323> *v22; // [rsp+30h] [rbp-18h]
-  char v23; // [rsp+38h] [rbp-10h]
-  __int64 v24; // [rsp+40h] [rbp-8h]
+  Scaleform::GFx::ASStringNode *v8; // r8
+  Scaleform::GFx::AS2::LocalFrame *v9; // rdx
+  char v10; // al
+  Scaleform::GFx::AS2::RefCountBaseGC<323> *v11; // rcx
+  unsigned int RefCount; // edx
+  Scaleform::GFx::AS2::RefCountBaseGC<323> *v13; // rcx
+  unsigned int v14; // eax
+  Scaleform::GFx::ASStringNode *v15; // rax
+  Scaleform::GFx::ASStringNode *v16; // rdx
+  Scaleform::GFx::AS2::LocalFrame *pLocalFrame; // rdx
+  Scaleform::GFx::ASStringNode *v18; // rcx
+  Scaleform::GFx::AS2::RefCountBaseGC<323> *v19; // [rsp+28h] [rbp-20h] BYREF
+  Scaleform::GFx::AS2::RefCountBaseGC<323> *v20; // [rsp+30h] [rbp-18h]
+  char v21; // [rsp+38h] [rbp-10h]
+  __int64 v22; // [rsp+40h] [rbp-8h]
 
-  v24 = a3;
-  v3 = v;
-  v4 = this;
+  v22 = v2;
   if ( this->T.Type >= 5u )
     Scaleform::GFx::AS2::Value::DropRefs(this);
-  v4->T.Type = v3->T.Type;
-  switch ( v3->T.Type )
+  this->T.Type = v->T.Type;
+  switch ( v->T.Type )
   {
     case 2:
-      v4->V.BooleanValue = v3->V.BooleanValue;
+      this->V.BooleanValue = v->V.BooleanValue;
       break;
     case 3:
-      v4->V.pStringNode = v3->V.pStringNode;
+      this->V.pStringNode = v->V.pStringNode;
       break;
     case 4:
-      v4->NV.Int32Value = v3->NV.Int32Value;
+      this->NV.Int32Value = v->NV.Int32Value;
       break;
     case 5:
     case 0xB:
-      v5 = v3->V.pStringNode;
-      v4->V.pStringNode = v5;
-      ++v5->RefCount;
+      pStringNode = v->V.pStringNode;
+      this->V.pStringNode = pStringNode;
+      ++pStringNode->RefCount;
       break;
     case 6:
-      v6 = v3->V.pStringNode;
+      v6 = v->V.pStringNode;
       if ( v6 )
       {
-        if ( (*(unsigned int (__fastcall **)(unsigned int *, signed __int64))(*(_QWORD *)&v6->Size + 16i64))(
+        if ( (*(unsigned int (__fastcall **)(unsigned int *, unsigned __int64))(*(_QWORD *)&v6->Size + 16i64))(
                &v6->Size,
-               5368709120i64) != 23 )
+               0x140000000ui64) != 23 )
           goto $LN1_32;
-        v4->T.Type = 8;
-        v7 = (*(__int64 (__fastcall **)(unsigned int *, Scaleform::GFx::AS2::RefCountBaseGC<323> **))(*(_QWORD *)&v3->V.pStringNode->Size + 96i64))(
-               &v3->V.pStringNode->Size,
-               &v21);
-        v8 = (Scaleform::GFx::AS2::FunctionRefBase *)&v4->NV.8;
-        v8->Flags = 0;
-        v9 = *(Scaleform::GFx::AS2::FunctionObject **)v7;
-        v8->Function = *(Scaleform::GFx::AS2::FunctionObject **)v7;
+        this->T.Type = 8;
+        v7 = (*(__int64 (__fastcall **)(unsigned int *, Scaleform::GFx::AS2::RefCountBaseGC<323> **))(*(_QWORD *)&v->V.pStringNode->Size + 96i64))(
+               &v->V.pStringNode->Size,
+               &v19);
+        this->V.FunctionValue.Flags = 0;
+        v8 = *(Scaleform::GFx::ASStringNode **)v7;
+        this->V.pStringNode = *(Scaleform::GFx::ASStringNode **)v7;
+        if ( v8 )
+          v8->RefCount = (v8->RefCount + 1) & 0x8FFFFFFF;
+        this->V.FunctionValue.pLocalFrame = 0i64;
+        v9 = *(Scaleform::GFx::AS2::LocalFrame **)(v7 + 8);
         if ( v9 )
-          v9->RefCount = (v9->RefCount + 1) & 0x8FFFFFFF;
-        v4->V.FunctionValue.pLocalFrame = 0i64;
-        v10 = *(Scaleform::GFx::AS2::LocalFrame **)(v7 + 8);
-        if ( v10 )
-          Scaleform::GFx::AS2::FunctionRefBase::SetLocalFrame(v8, v10, *(_BYTE *)(v7 + 16) & 1);
-        v11 = v23;
-        if ( !(v23 & 2) )
+          Scaleform::GFx::AS2::FunctionRefBase::SetLocalFrame(&this->V.FunctionValue, v9, *(_BYTE *)(v7 + 16) & 1);
+        v10 = v21;
+        if ( (v21 & 2) == 0 )
         {
-          v12 = v21;
-          if ( v21 )
+          v11 = v19;
+          if ( v19 )
           {
-            v13 = v21->RefCount;
-            if ( v13 & 0x3FFFFFF )
+            RefCount = v19->RefCount;
+            if ( (RefCount & 0x3FFFFFF) != 0 )
             {
-              v21->RefCount = v13 - 1;
-              Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v12);
-              v11 = v23;
+              v19->RefCount = RefCount - 1;
+              Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v11);
+              v10 = v21;
             }
           }
         }
-        v21 = 0i64;
-        if ( !(v11 & 1) )
+        v19 = 0i64;
+        if ( (v10 & 1) == 0 )
         {
-          v14 = v22;
-          if ( v22 )
+          v13 = v20;
+          if ( v20 )
           {
-            v15 = v22->RefCount;
-            if ( v15 & 0x3FFFFFF )
+            v14 = v20->RefCount;
+            if ( (v14 & 0x3FFFFFF) != 0 )
             {
-              v22->RefCount = v15 - 1;
-              Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v14);
+              v20->RefCount = v14 - 1;
+              Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v13);
             }
           }
         }
-        v22 = 0i64;
+        v20 = 0i64;
       }
       else
       {
-        v4->V.pStringNode = 0i64;
+        this->V.pStringNode = 0i64;
       }
       break;
     case 7:
-      v16 = v3->V.pStringNode;
-      v4->V.pStringNode = v16;
-      if ( v16 )
-        ++LODWORD(v16->pData);
+      v15 = v->V.pStringNode;
+      this->V.pStringNode = v15;
+      if ( v15 )
+        ++LODWORD(v15->pData);
       break;
     case 8:
     case 0xC:
-      v17 = (Scaleform::GFx::AS2::FunctionRefBase *)&v4->NV.8;
-      v17->Flags = 0;
-      v18 = v3->V.FunctionValue.Function;
-      v17->Function = v18;
-      if ( v18 )
-        v18->RefCount = (v18->RefCount + 1) & 0x8FFFFFFF;
-      v4->V.FunctionValue.pLocalFrame = 0i64;
-      v19 = v3->V.FunctionValue.pLocalFrame;
-      if ( v19 )
-        Scaleform::GFx::AS2::FunctionRefBase::SetLocalFrame(v17, v19, v3->V.FunctionValue.Flags & 1);
+      this->V.FunctionValue.Flags = 0;
+      v16 = v->V.pStringNode;
+      this->V.pStringNode = v16;
+      if ( v16 )
+        v16->RefCount = (v16->RefCount + 1) & 0x8FFFFFFF;
+      this->V.FunctionValue.pLocalFrame = 0i64;
+      pLocalFrame = v->V.FunctionValue.pLocalFrame;
+      if ( pLocalFrame )
+        Scaleform::GFx::AS2::FunctionRefBase::SetLocalFrame(
+          &this->V.FunctionValue,
+          pLocalFrame,
+          v->V.FunctionValue.Flags & 1);
       break;
     case 9:
 $LN1_32:
-      v20 = v3->V.pStringNode;
-      v4->V.pStringNode = v20;
-      v20->RefCount = (v20->RefCount + 1) & 0x8FFFFFFF;
+      v18 = v->V.pStringNode;
+      this->V.pStringNode = v18;
+      v18->RefCount = (v18->RefCount + 1) & 0x8FFFFFFF;
       break;
     default:
       return;
@@ -335,206 +325,196 @@ $LN1_32:
 
 // File Line: 262
 // RVA: 0x6CD7A0
-void __fastcall Scaleform::GFx::AS2::Value::Value(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::Object *pobj)
+void __fastcall Scaleform::GFx::AS2::Value::Value(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::ASStringNode *pobj)
 {
-  Scaleform::GFx::AS2::Object *v2; // rbx
-  Scaleform::GFx::AS2::Value *v3; // rdi
-  __int64 v4; // rax
-  Scaleform::GFx::AS2::FunctionRefBase *v5; // rcx
-  Scaleform::GFx::AS2::FunctionObject *v6; // r8
-  Scaleform::GFx::AS2::LocalFrame *v7; // rdx
-  char v8; // al
-  Scaleform::GFx::AS2::RefCountBaseGC<323> *v9; // rcx
-  unsigned int v10; // edx
-  Scaleform::GFx::AS2::RefCountBaseGC<323> *v11; // rcx
-  unsigned int v12; // eax
-  Scaleform::GFx::AS2::RefCountBaseGC<323> *v13; // [rsp+28h] [rbp-20h]
-  Scaleform::GFx::AS2::RefCountBaseGC<323> *v14; // [rsp+30h] [rbp-18h]
-  char v15; // [rsp+38h] [rbp-10h]
+  Scaleform::GFx::AS2::FunctionRef *v4; // rax
+  Scaleform::GFx::ASStringNode *Function; // r8
+  Scaleform::GFx::AS2::LocalFrame *pLocalFrame; // rdx
+  char v7; // al
+  Scaleform::GFx::AS2::RefCountBaseGC<323> *v8; // rcx
+  unsigned int RefCount; // edx
+  Scaleform::GFx::AS2::RefCountBaseGC<323> *v10; // rcx
+  unsigned int v11; // eax
+  Scaleform::GFx::AS2::RefCountBaseGC<323> *v12; // [rsp+28h] [rbp-20h] BYREF
+  Scaleform::GFx::AS2::RefCountBaseGC<323> *v13; // [rsp+30h] [rbp-18h]
+  char v14; // [rsp+38h] [rbp-10h]
 
-  v2 = pobj;
-  v3 = this;
-  if ( pobj
-    && (*(unsigned int (__fastcall **)(Scaleform::GFx::AS2::ObjectInterfaceVtbl **))&pobj->vfptr->gap8[8])(&pobj->vfptr) == 23 )
+  if ( pobj && (*(unsigned int (__fastcall **)(unsigned int *))(*(_QWORD *)&pobj->Size + 16i64))(&pobj->Size) == 23 )
   {
-    v3->T.Type = 8;
-    v4 = (__int64)v2->vfptr->ToFunction(
-                    (Scaleform::GFx::AS2::ObjectInterface *)&v2->vfptr,
-                    (Scaleform::GFx::AS2::FunctionRef *)&v13);
-    v5 = (Scaleform::GFx::AS2::FunctionRefBase *)&v3->NV.8;
-    v5->Flags = 0;
-    v6 = *(Scaleform::GFx::AS2::FunctionObject **)v4;
-    v5->Function = *(Scaleform::GFx::AS2::FunctionObject **)v4;
-    if ( v6 )
-      v6->RefCount = (v6->RefCount + 1) & 0x8FFFFFFF;
-    v3->V.FunctionValue.pLocalFrame = 0i64;
-    v7 = *(Scaleform::GFx::AS2::LocalFrame **)(v4 + 8);
-    if ( v7 )
-      Scaleform::GFx::AS2::FunctionRefBase::SetLocalFrame(v5, v7, *(_BYTE *)(v4 + 16) & 1);
-    v8 = v15;
-    if ( !(v15 & 2) )
+    this->T.Type = 8;
+    v4 = (Scaleform::GFx::AS2::FunctionRef *)(*(__int64 (__fastcall **)(unsigned int *, Scaleform::GFx::AS2::RefCountBaseGC<323> **))(*(_QWORD *)&pobj->Size + 96i64))(
+                                               &pobj->Size,
+                                               &v12);
+    this->V.FunctionValue.Flags = 0;
+    Function = (Scaleform::GFx::ASStringNode *)v4->Function;
+    this->V.pStringNode = (Scaleform::GFx::ASStringNode *)v4->Function;
+    if ( Function )
+      Function->RefCount = (Function->RefCount + 1) & 0x8FFFFFFF;
+    this->V.FunctionValue.pLocalFrame = 0i64;
+    pLocalFrame = v4->pLocalFrame;
+    if ( pLocalFrame )
+      Scaleform::GFx::AS2::FunctionRefBase::SetLocalFrame(&this->V.FunctionValue, pLocalFrame, v4->Flags & 1);
+    v7 = v14;
+    if ( (v14 & 2) == 0 )
     {
-      v9 = v13;
+      v8 = v12;
+      if ( v12 )
+      {
+        RefCount = v12->RefCount;
+        if ( (RefCount & 0x3FFFFFF) != 0 )
+        {
+          v12->RefCount = RefCount - 1;
+          Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v8);
+          v7 = v14;
+        }
+      }
+    }
+    v12 = 0i64;
+    if ( (v7 & 1) == 0 )
+    {
+      v10 = v13;
       if ( v13 )
       {
-        v10 = v13->RefCount;
-        if ( v10 & 0x3FFFFFF )
+        v11 = v13->RefCount;
+        if ( (v11 & 0x3FFFFFF) != 0 )
         {
-          v13->RefCount = v10 - 1;
-          Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v9);
-          v8 = v15;
+          v13->RefCount = v11 - 1;
+          Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v10);
         }
       }
     }
     v13 = 0i64;
-    if ( !(v8 & 1) )
-    {
-      v11 = v14;
-      if ( v14 )
-      {
-        v12 = v14->RefCount;
-        if ( v12 & 0x3FFFFFF )
-        {
-          v14->RefCount = v12 - 1;
-          Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v11);
-        }
-      }
-    }
-    v14 = 0i64;
   }
   else
   {
-    v3->T.Type = 6;
-    v3->V.pStringNode = (Scaleform::GFx::ASStringNode *)v2;
-    if ( v2 )
-      v2->RefCount = (v2->RefCount + 1) & 0x8FFFFFFF;
+    this->T.Type = 6;
+    this->V.pStringNode = pobj;
+    if ( pobj )
+      pobj->RefCount = (pobj->RefCount + 1) & 0x8FFFFFFF;
   }
 }
 
 // File Line: 294
 // RVA: 0x6CD740
-void __fastcall Scaleform::GFx::AS2::Value::Value(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::FunctionRef *func)
+void __fastcall Scaleform::GFx::AS2::Value::Value(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::FunctionRef *func)
 {
-  Scaleform::GFx::AS2::FunctionRefBase *v2; // rcx
-  Scaleform::GFx::AS2::FunctionObject *v3; // r8
+  $05405293094FBBD0121C32E32235DD0F *v2; // rcx
+  Scaleform::GFx::AS2::FunctionObject *Function; // r8
 
   this->T.Type = 8;
-  v2 = (Scaleform::GFx::AS2::FunctionRefBase *)&this->NV.8;
-  v2->Flags = 0;
-  v3 = func->Function;
-  v2->Function = func->Function;
-  if ( v3 )
-    v3->RefCount = (v3->RefCount + 1) & 0x8FFFFFFF;
-  v2->pLocalFrame = 0i64;
+  v2 = &this->V.8;
+  v2->FunctionValue.Flags = 0;
+  Function = func->Function;
+  v2->pStringNode = (Scaleform::GFx::ASStringNode *)func->Function;
+  if ( Function )
+    Function->RefCount = (Function->RefCount + 1) & 0x8FFFFFFF;
+  v2->FunctionValue.pLocalFrame = 0i64;
   if ( func->pLocalFrame )
-    Scaleform::GFx::AS2::FunctionRefBase::SetLocalFrame(v2, func->pLocalFrame, func->Flags & 1);
+    Scaleform::GFx::AS2::FunctionRefBase::SetLocalFrame(
+      (Scaleform::GFx::AS2::FunctionRefBase *)v2,
+      func->pLocalFrame,
+      func->Flags & 1);
 }
 
 // File Line: 309
 // RVA: 0x6D2890
 void __fastcall Scaleform::GFx::AS2::Value::~Value(Scaleform::GFx::AS2::Value *this)
 {
-  JUMPOUT(this->T.Type, 5, Scaleform::GFx::AS2::Value::DropRefs);
+  if ( this->T.Type >= 5u )
+    Scaleform::GFx::AS2::Value::DropRefs(this);
 }
 
 // File Line: 317
 // RVA: 0x6BF120
-void __fastcall Scaleform::GFx::AS2::Value::ForEachChild_GC<Scaleform::GFx::AS2::RefCountBaseGC<323>::MarkInCycleFunctor>(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::RefCountCollector<323> *prcc)
+void __fastcall Scaleform::GFx::AS2::Value::ForEachChild_GC<Scaleform::GFx::AS2::RefCountBaseGC<323>::MarkInCycleFunctor>(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::RefCountCollector<323> *prcc)
 {
-  char v2; // al
-  Scaleform::GFx::AS2::RefCountCollector<323> *v3; // r8
-  Scaleform::GFx::ASStringNode *v4; // rdx
+  char Type; // al
+  Scaleform::GFx::ASStringNode *pStringNode; // rdx
 
-  v2 = this->T.Type;
-  v3 = prcc;
+  Type = this->T.Type;
   if ( this->T.Type == 8 )
   {
     Scaleform::GFx::AS2::FunctionRefBase::ForEachChild_GC<Scaleform::GFx::AS2::RefCountBaseGC<323>::MarkInCycleFunctor>(
-      (Scaleform::GFx::AS2::FunctionRefBase *)&this->NV.8,
+      &this->V.FunctionValue,
       prcc);
     return;
   }
-  if ( v2 != 6 || (v4 = this->V.pStringNode) == 0i64 )
+  if ( Type != 6 || (pStringNode = this->V.pStringNode) == 0i64 )
   {
-    if ( v2 != 9 )
+    if ( Type != 9 )
       return;
-    v4 = this->V.pStringNode;
+    pStringNode = this->V.pStringNode;
   }
-  if ( !((--v4->RefCount >> 27) & 1) )
+  if ( (--pStringNode->RefCount & 0x8000000) == 0 )
   {
-    v4->pLower = *(Scaleform::GFx::ASStringNode **)v3->pLastPtr->pRCC->Roots.gap0;
-    v4->pManager = (Scaleform::GFx::ASStringManager *)v3->pLastPtr->pRCC;
-    *(_QWORD *)v3->pLastPtr->pRCC->Roots.gap0 = v4;
-    v3->pLastPtr->pRCC = (Scaleform::GFx::AS2::RefCountCollector<323> *)v4;
-    v3->pLastPtr = (Scaleform::GFx::AS2::RefCountBaseGC<323> *)v4;
-    v4->RefCount |= 0x8000000u;
+    pStringNode->pLower = *(Scaleform::GFx::ASStringNode **)prcc->pLastPtr->pRCC->Roots.gap0;
+    pStringNode->pManager = (Scaleform::GFx::ASStringManager *)prcc->pLastPtr->pRCC;
+    *(_QWORD *)prcc->pLastPtr->pRCC->Roots.gap0 = pStringNode;
+    prcc->pLastPtr->pRCC = (Scaleform::GFx::AS2::RefCountCollector<323> *)pStringNode;
+    prcc->pLastPtr = (Scaleform::GFx::AS2::RefCountBaseGC<323> *)pStringNode;
+    pStringNode->RefCount |= 0x8000000u;
   }
 }
 
 // File Line: 339
 // RVA: 0x7221F0
-Scaleform::GFx::ASString *__fastcall Scaleform::GFx::AS2::Value::ToStringImpl(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::ASString *result, Scaleform::GFx::AS2::Environment *penv, int precision, bool debug)
+Scaleform::GFx::ASString *__fastcall Scaleform::GFx::AS2::Value::ToStringImpl(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::ASString *result,
+        Scaleform::GFx::AS2::Environment *penv,
+        int precision,
+        bool debug)
 {
-  Scaleform::GFx::AS2::Environment *v5; // rdi
-  Scaleform::GFx::ASString *v6; // rbx
-  Scaleform::GFx::AS2::Value *v7; // rsi
-  Scaleform::GFx::AS2::ASStringContext *v8; // r14
+  Scaleform::GFx::AS2::ASStringContext *p_StringContext; // r14
   Scaleform::GFx::ASStringNode *v9; // r10
-  Scaleform::GFx::ASStringNode *v10; // rdi
-  int v11; // er9
+  Scaleform::GFx::ASStringNode *vfptr; // rdi
+  int v11; // r9d
   const char *v12; // rax
   Scaleform::GFx::ASString *v13; // rax
-  Scaleform::GFx::ASStringNode *v14; // rcx
+  Scaleform::GFx::ASStringNode *pNode; // rcx
   bool v15; // zf
   const char *v16; // rax
   Scaleform::GFx::ASString *v17; // rax
-  Scaleform::GFx::ASStringNode *v18; // rcx
-  Scaleform::GFx::AS2::ObjectInterfaceVtbl **v19; // rax
-  __int64 v20; // r15
-  unsigned __int16 v21; // cx
-  Scaleform::GFx::ASString *v22; // rax
-  Scaleform::GFx::ASStringNode *v23; // rcx
-  char v24; // al
-  Scaleform::GFx::AS2::FunctionObject *v25; // rcx
-  unsigned int v26; // edx
-  Scaleform::GFx::AS2::LocalFrame *v27; // rcx
-  unsigned int v28; // eax
-  Scaleform::GFx::ASStringNode *v29; // rcx
-  const char *v30; // rax
-  Scaleform::GFx::ASString *v31; // rax
-  Scaleform::GFx::ASStringNode *v32; // rcx
-  Scaleform::GFx::ASString *v33; // rdx
-  Scaleform::GFx::ASString *v34; // rax
-  Scaleform::GFx::ASStringNode *v35; // rcx
-  Scaleform::GFx::ASString *v36; // rax
+  Scaleform::GFx::AS2::ObjectInterface *v18; // rax
+  Scaleform::GFx::AS2::ObjectInterface *v19; // r15
+  unsigned __int16 FuncCallNestingLevel; // cx
+  Scaleform::GFx::ASString *v21; // rax
+  Scaleform::GFx::ASStringNode *v22; // rcx
+  char Flags; // al
+  Scaleform::GFx::AS2::FunctionObject *Function; // rcx
+  unsigned int RefCount; // edx
+  Scaleform::GFx::AS2::LocalFrame *pLocalFrame; // rcx
+  unsigned int v27; // eax
+  Scaleform::GFx::ASStringNode *pStringNode; // rcx
+  const char *v29; // rax
+  Scaleform::GFx::ASString *v30; // rax
+  Scaleform::GFx::ASStringNode *v31; // rcx
+  Scaleform::GFx::ASString *CharacterNamePath; // rdx
+  Scaleform::GFx::ASString *v33; // rax
+  Scaleform::GFx::ASStringNode *v34; // rcx
+  Scaleform::GFx::ASString *v35; // rax
+  Scaleform::GFx::ASStringNode *v36; // rcx
   Scaleform::GFx::ASStringNode *v37; // rcx
-  Scaleform::GFx::ASStringNode *v38; // rcx
-  Scaleform::GFx::AS2::FunctionRef v40; // [rsp+28h] [rbp-A9h]
-  Scaleform::GFx::ASString v41; // [rsp+40h] [rbp-91h]
-  Scaleform::GFx::ASString v42; // [rsp+48h] [rbp-89h]
-  Scaleform::GFx::ASString v43; // [rsp+50h] [rbp-81h]
-  Scaleform::GFx::ASString v44; // [rsp+58h] [rbp-79h]
-  char destStr[8]; // [rsp+60h] [rbp-71h]
-  Scaleform::GFx::AS2::Value *v46; // [rsp+68h] [rbp-69h]
-  __int64 v47; // [rsp+70h] [rbp-61h]
-  __int64 v48; // [rsp+78h] [rbp-59h]
-  __int64 v49; // [rsp+80h] [rbp-51h]
-  char v50; // [rsp+88h] [rbp-49h]
-  Scaleform::GFx::AS2::Environment *v51; // [rsp+90h] [rbp-41h]
-  __int64 v52; // [rsp+98h] [rbp-39h]
-  Scaleform::GFx::AS2::Value v53; // [rsp+A0h] [rbp-31h]
-  Scaleform::GFx::AS2::Value v54; // [rsp+C0h] [rbp-11h]
-  __int64 v55; // [rsp+E0h] [rbp+Fh]
-  Scaleform::GFx::ASString resulta; // [rsp+130h] [rbp+5Fh]
-  Scaleform::GFx::ASString *v57; // [rsp+138h] [rbp+67h]
-  Scaleform::GFx::ASString v58; // [rsp+140h] [rbp+6Fh]
+  Scaleform::GFx::AS2::FunctionRef v39; // [rsp+28h] [rbp-A9h] BYREF
+  Scaleform::GFx::ASString v40; // [rsp+40h] [rbp-91h] BYREF
+  Scaleform::GFx::ASString v41; // [rsp+48h] [rbp-89h] BYREF
+  Scaleform::GFx::ASString v42; // [rsp+50h] [rbp-81h] BYREF
+  Scaleform::GFx::ASString v43; // [rsp+58h] [rbp-79h] BYREF
+  Scaleform::GFx::AS2::FnCall destStr; // [rsp+60h] [rbp-71h] BYREF
+  Scaleform::GFx::AS2::Value v45; // [rsp+A0h] [rbp-31h] BYREF
+  Scaleform::GFx::AS2::Value v46; // [rsp+C0h] [rbp-11h] BYREF
+  __int64 v47; // [rsp+E0h] [rbp+Fh]
+  Scaleform::GFx::ASString resulta; // [rsp+130h] [rbp+5Fh] BYREF
+  Scaleform::GFx::ASString *v49; // [rsp+138h] [rbp+67h]
+  Scaleform::GFx::ASString v50; // [rsp+140h] [rbp+6Fh] BYREF
 
-  v57 = result;
-  v55 = -2i64;
-  v5 = penv;
-  v6 = result;
-  v7 = this;
-  v8 = &penv->StringContext;
+  v49 = result;
+  v47 = -2i64;
+  p_StringContext = &penv->StringContext;
   v9 = *(Scaleform::GFx::ASStringNode **)&penv->StringContext.pContext->pMovieRoot->pASMovieRoot.pObject[7].AVMVersion;
   result->pNode = v9;
   ++v9->RefCount;
@@ -542,278 +522,263 @@ Scaleform::GFx::ASString *__fastcall Scaleform::GFx::AS2::Value::ToStringImpl(Sc
   {
     case 0:
     case 0xA:
-      v10 = (Scaleform::GFx::ASStringNode *)v8->pContext->pMovieRoot->pASMovieRoot.pObject[18].vfptr;
+      vfptr = (Scaleform::GFx::ASStringNode *)p_StringContext->pContext->pMovieRoot->pASMovieRoot.pObject[18].vfptr;
       goto LABEL_51;
     case 1:
       Scaleform::GFx::ASString::operator=(
         result,
-        (Scaleform::GFx::ASString *)&v8->pContext->pMovieRoot->pASMovieRoot.pObject[18].RefCount);
-      return v6;
+        (Scaleform::GFx::ASString *)&p_StringContext->pContext->pMovieRoot->pASMovieRoot.pObject[18].RefCount);
+      return result;
     case 2:
       Scaleform::GFx::ASString::operator=(
         result,
-        (Scaleform::GFx::ASString *)&(&v8->pContext->pMovieRoot->pASMovieRoot.pObject->vfptr)[93i64
-                                                                                            - (this->V.BooleanValue != 0)]);
-      return v6;
+        (Scaleform::GFx::ASString *)&(&p_StringContext->pContext->pMovieRoot->pASMovieRoot.pObject->vfptr)[93i64 - this->V.BooleanValue]);
+      return result;
     case 3:
       if ( precision >= 0 )
         v11 = -precision;
       else
         v11 = 10;
-      v12 = Scaleform::GFx::NumberUtil::ToString(this->NV.NumberValue, destStr, 0x40ui64, v11);
-      v13 = Scaleform::GFx::AS2::Environment::CreateString(v5, &resulta, v12);
-      Scaleform::GFx::ASString::operator=(v6, v13);
-      v14 = resulta.pNode;
-      v15 = resulta.pNode->RefCount == 1;
-      --v14->RefCount;
+      v12 = Scaleform::GFx::NumberUtil::ToString(this->NV.NumberValue, (char *)&destStr, 0x40ui64, v11);
+      v13 = Scaleform::GFx::AS2::Environment::CreateString(penv, &resulta, v12);
+      Scaleform::GFx::ASString::operator=(result, v13);
+      pNode = resulta.pNode;
+      v15 = resulta.pNode->RefCount-- == 1;
       if ( v15 )
-        Scaleform::GFx::ASStringNode::ReleaseNode(v14);
-      return v6;
+        goto LABEL_7;
+      return result;
     case 4:
-      v16 = Scaleform::GFx::NumberUtil::IntToString(this->NV.Int32Value, destStr, 0x40ui64);
-      v17 = Scaleform::GFx::AS2::Environment::CreateString(v5, &v58, v16);
-      Scaleform::GFx::ASString::operator=(v6, v17);
-      v18 = v58.pNode;
-      v15 = v58.pNode->RefCount == 1;
-      --v18->RefCount;
+      v16 = Scaleform::GFx::NumberUtil::IntToString(this->NV.Int32Value, (char *)&destStr, 0x40ui64);
+      v17 = Scaleform::GFx::AS2::Environment::CreateString(penv, &v50, v16);
+      Scaleform::GFx::ASString::operator=(result, v17);
+      pNode = v50.pNode;
+      v15 = v50.pNode->RefCount-- == 1;
       if ( v15 )
-        Scaleform::GFx::ASStringNode::ReleaseNode(v18);
-      return v6;
+LABEL_7:
+        Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
+      return result;
     case 5:
-      v10 = this->V.pStringNode;
+      vfptr = this->V.pStringNode;
       goto LABEL_51;
     case 6:
     case 7:
-      v54.T.Type = 0;
-      v19 = Scaleform::GFx::AS2::Value::ToObjectInterface(this, penv);
-      v20 = (__int64)v19;
+      v46.T.Type = 0;
+      v18 = Scaleform::GFx::AS2::Value::ToObjectInterface(this, penv);
+      v19 = v18;
       if ( !debug
-        && v19
-        && ((unsigned __int8 (__fastcall *)(Scaleform::GFx::AS2::ObjectInterfaceVtbl **, Scaleform::GFx::AS2::ASStringContext *, Scaleform::GFx::ASMovieRootBase *, Scaleform::GFx::AS2::Value *, signed int))(*v19)->GetMemberRaw)(
-             v19,
-             v8,
-             &v8->pContext->pMovieRoot->pASMovieRoot.pObject[25],
-             &v54,
+        && v18
+        && ((unsigned __int8 (__fastcall *)(Scaleform::GFx::AS2::ObjectInterface *, Scaleform::GFx::AS2::ASStringContext *, Scaleform::GFx::ASMovieRootBase *, Scaleform::GFx::AS2::Value *, int))v18->vfptr->GetMemberRaw)(
+             v18,
+             p_StringContext,
+             &p_StringContext->pContext->pMovieRoot->pASMovieRoot.pObject[25],
+             &v46,
              1) )
       {
-        v21 = v5->FuncCallNestingLevel;
-        v5->FuncCallNestingLevel = v21 + 1;
-        if ( v21 >= 0xFFu )
+        FuncCallNestingLevel = penv->FuncCallNestingLevel;
+        penv->FuncCallNestingLevel = FuncCallNestingLevel + 1;
+        if ( FuncCallNestingLevel >= 0xFFu )
         {
           Scaleform::GFx::ASString::operator=(
-            v6,
-            (Scaleform::GFx::ASString *)&v8->pContext->pMovieRoot->pASMovieRoot.pObject[24].pASSupport);
+            result,
+            (Scaleform::GFx::ASString *)&p_StringContext->pContext->pMovieRoot->pASMovieRoot.pObject[24].pASSupport);
         }
         else
         {
-          v53.T.Type = 0;
-          Scaleform::GFx::AS2::Value::ToFunction(&v54, &v40, v5);
-          if ( v40.Function )
+          v45.T.Type = 0;
+          Scaleform::GFx::AS2::Value::ToFunction(&v46, &v39, penv);
+          if ( v39.Function )
           {
-            *(_QWORD *)destStr = &Scaleform::GFx::AS2::FnCall::`vftable;
-            v46 = &v53;
-            v47 = v20;
-            v50 = 0;
-            v48 = 0i64;
-            v49 = 0i64;
-            v51 = v5;
-            v52 = 0i64;
-            ((void (__fastcall *)(Scaleform::GFx::AS2::FunctionObject *, char *, Scaleform::GFx::AS2::LocalFrame *, _QWORD))v40.Function->vfptr[3].Finalize_GC)(
-              v40.Function,
-              destStr,
-              v40.pLocalFrame,
+            destStr.vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>Vtbl *)&Scaleform::GFx::AS2::FnCall::`vftable;
+            destStr.Result = &v45;
+            destStr.ThisPtr = v19;
+            memset(&destStr.ThisFunctionRef, 0, 17);
+            destStr.Env = penv;
+            *(_QWORD *)&destStr.NArgs = 0i64;
+            ((void (__fastcall *)(Scaleform::GFx::AS2::FunctionObject *, Scaleform::GFx::AS2::FnCall *, Scaleform::GFx::AS2::LocalFrame *, _QWORD))v39.Function->vfptr[3].Finalize_GC)(
+              v39.Function,
+              &destStr,
+              v39.pLocalFrame,
               0i64);
-            Scaleform::GFx::AS2::FnCall::~FnCall((Scaleform::GFx::AS2::FnCall *)destStr);
+            Scaleform::GFx::AS2::FnCall::~FnCall(&destStr);
           }
-          v22 = Scaleform::GFx::AS2::Value::ToString(&v53, &v44, v5, -1);
-          Scaleform::GFx::ASString::operator=(v6, v22);
-          v23 = v44.pNode;
-          v15 = v44.pNode->RefCount == 1;
-          --v23->RefCount;
+          v21 = Scaleform::GFx::AS2::Value::ToString(&v45, &v43, penv, -1);
+          Scaleform::GFx::ASString::operator=(result, v21);
+          v22 = v43.pNode;
+          v15 = v43.pNode->RefCount-- == 1;
           if ( v15 )
-            Scaleform::GFx::ASStringNode::ReleaseNode(v23);
-          v24 = v40.Flags;
-          if ( !(v40.Flags & 2) )
+            Scaleform::GFx::ASStringNode::ReleaseNode(v22);
+          Flags = v39.Flags;
+          if ( (v39.Flags & 2) == 0 )
           {
-            v25 = v40.Function;
-            if ( v40.Function )
+            Function = v39.Function;
+            if ( v39.Function )
             {
-              v26 = v40.Function->RefCount;
-              if ( v26 & 0x3FFFFFF )
+              RefCount = v39.Function->RefCount;
+              if ( (RefCount & 0x3FFFFFF) != 0 )
               {
-                v40.Function->RefCount = v26 - 1;
-                Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v25->vfptr);
-                v24 = v40.Flags;
+                v39.Function->RefCount = RefCount - 1;
+                Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(Function);
+                Flags = v39.Flags;
               }
             }
           }
-          v40.Function = 0i64;
-          if ( !(v24 & 1) )
+          v39.Function = 0i64;
+          if ( (Flags & 1) == 0 )
           {
-            v27 = v40.pLocalFrame;
-            if ( v40.pLocalFrame )
+            pLocalFrame = v39.pLocalFrame;
+            if ( v39.pLocalFrame )
             {
-              v28 = v40.pLocalFrame->RefCount;
-              if ( v28 & 0x3FFFFFF )
+              v27 = v39.pLocalFrame->RefCount;
+              if ( (v27 & 0x3FFFFFF) != 0 )
               {
-                v40.pLocalFrame->RefCount = v28 - 1;
-                Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v27->vfptr);
+                v39.pLocalFrame->RefCount = v27 - 1;
+                Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(pLocalFrame);
               }
             }
           }
-          v40.pLocalFrame = 0i64;
-          if ( v53.T.Type >= 5u )
-            Scaleform::GFx::AS2::Value::DropRefs(&v53);
+          v39.pLocalFrame = 0i64;
+          if ( v45.T.Type >= 5u )
+            Scaleform::GFx::AS2::Value::DropRefs(&v45);
         }
-        --v5->FuncCallNestingLevel;
+        --penv->FuncCallNestingLevel;
       }
-      else if ( v7->T.Type == 6
-             && (v29 = v7->V.pStringNode) != 0i64
-             && (v30 = (const char *)(*(__int64 (__fastcall **)(unsigned int *, Scaleform::GFx::AS2::Environment *))(*(_QWORD *)&v29->Size + 8i64))(
-                                       &v29->Size,
-                                       v5)) != 0i64 )
+      else if ( this->T.Type == 6
+             && (pStringNode = this->V.pStringNode) != 0i64
+             && (v29 = (const char *)(*(__int64 (__fastcall **)(unsigned int *, Scaleform::GFx::AS2::Environment *))(*(_QWORD *)&pStringNode->Size + 8i64))(
+                                       &pStringNode->Size,
+                                       penv)) != 0i64 )
       {
-        v31 = Scaleform::GFx::AS2::Environment::CreateString(v5, &v42, v30);
-        Scaleform::GFx::ASString::operator=(v6, v31);
-        v32 = v42.pNode;
-        v15 = v42.pNode->RefCount == 1;
-        --v32->RefCount;
+        v30 = Scaleform::GFx::AS2::Environment::CreateString(penv, &v41, v29);
+        Scaleform::GFx::ASString::operator=(result, v30);
+        v31 = v41.pNode;
+        v15 = v41.pNode->RefCount-- == 1;
         if ( v15 )
-          Scaleform::GFx::ASStringNode::ReleaseNode(v32);
+          Scaleform::GFx::ASStringNode::ReleaseNode(v31);
       }
       else
       {
-        if ( v7->T.Type == 7 && v7->V.pStringNode )
-          v33 = Scaleform::GFx::AS2::Value::GetCharacterNamePath(v7, v5);
+        if ( this->T.Type == 7 && this->V.pStringNode )
+          CharacterNamePath = Scaleform::GFx::AS2::Value::GetCharacterNamePath(this, penv);
         else
-          v33 = (Scaleform::GFx::ASString *)&v8->pContext->pMovieRoot->pASMovieRoot.pObject[24].AVMVersion;
-        Scaleform::GFx::ASString::operator=(v6, v33);
+          CharacterNamePath = (Scaleform::GFx::ASString *)&p_StringContext->pContext->pMovieRoot->pASMovieRoot.pObject[24].AVMVersion;
+        Scaleform::GFx::ASString::operator=(result, CharacterNamePath);
       }
-      if ( v54.T.Type >= 5u )
-        Scaleform::GFx::AS2::Value::DropRefs(&v54);
-      return v6;
+      if ( v46.T.Type >= 5u )
+        Scaleform::GFx::AS2::Value::DropRefs(&v46);
+      return result;
     case 8:
     case 0xB:
-      v10 = (Scaleform::GFx::ASStringNode *)v8->pContext->pMovieRoot->pASMovieRoot.pObject[24].pMovieImpl;
+      vfptr = (Scaleform::GFx::ASStringNode *)p_StringContext->pContext->pMovieRoot->pASMovieRoot.pObject[24].pMovieImpl;
       goto LABEL_51;
     case 9:
-      v34 = Scaleform::GFx::AS2::Environment::CreateConstString(penv, &v43, "[property]");
-      Scaleform::GFx::ASString::operator=(v6, v34);
-      v35 = v43.pNode;
-      v15 = v43.pNode->RefCount == 1;
-      --v35->RefCount;
+      v33 = Scaleform::GFx::AS2::Environment::CreateConstString(penv, &v42, "[property]");
+      Scaleform::GFx::ASString::operator=(result, v33);
+      v34 = v42.pNode;
+      v15 = v42.pNode->RefCount-- == 1;
       if ( v15 )
-        Scaleform::GFx::ASStringNode::ReleaseNode(v35);
-      break;
+        Scaleform::GFx::ASStringNode::ReleaseNode(v34);
+      return result;
     case 0xC:
-      v36 = Scaleform::GFx::AS2::Environment::CreateConstString(penv, &v41, "[resolveHandler]");
-      Scaleform::GFx::ASString::operator=(v6, v36);
-      v37 = v41.pNode;
-      v15 = v41.pNode->RefCount == 1;
-      --v37->RefCount;
+      v35 = Scaleform::GFx::AS2::Environment::CreateConstString(penv, &v40, "[resolveHandler]");
+      Scaleform::GFx::ASString::operator=(result, v35);
+      v36 = v40.pNode;
+      v15 = v40.pNode->RefCount-- == 1;
+      if ( v15 )
+        Scaleform::GFx::ASStringNode::ReleaseNode(v36);
+      return result;
+    default:
+      vfptr = *(Scaleform::GFx::ASStringNode **)&p_StringContext->pContext->pMovieRoot->pASMovieRoot.pObject[17].RefCount;
+LABEL_51:
+      ++vfptr->RefCount;
+      v37 = result->pNode;
+      v15 = result->pNode->RefCount-- == 1;
       if ( v15 )
         Scaleform::GFx::ASStringNode::ReleaseNode(v37);
-      break;
-    default:
-      v10 = *(Scaleform::GFx::ASStringNode **)&v8->pContext->pMovieRoot->pASMovieRoot.pObject[17].RefCount;
-LABEL_51:
-      ++v10->RefCount;
-      v38 = result->pNode;
-      v15 = result->pNode->RefCount == 1;
-      --v38->RefCount;
-      if ( v15 )
-        Scaleform::GFx::ASStringNode::ReleaseNode(v38);
-      v6->pNode = v10;
-      break;
+      result->pNode = vfptr;
+      return result;
   }
-  return v6;
 }
 
 // File Line: 488
 // RVA: 0x7214A0
-Scaleform::GFx::ASString *__fastcall Scaleform::GFx::AS2::Value::ToDebugString(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::ASString *result, Scaleform::GFx::AS2::Environment *penv)
+Scaleform::GFx::ASString *__fastcall Scaleform::GFx::AS2::Value::ToDebugString(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::ASString *result,
+        Scaleform::GFx::AS2::Environment *penv)
 {
-  Scaleform::GFx::ASString *v3; // rbx
-
-  v3 = result;
   Scaleform::GFx::AS2::Value::ToStringImpl(this, result, penv, -1, 1);
-  return v3;
+  return result;
 }
 
 // File Line: 495
 // RVA: 0x7226B0
-Scaleform::GFx::ASString *__fastcall Scaleform::GFx::AS2::Value::ToStringVersioned(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::ASString *result, Scaleform::GFx::AS2::Environment *penv, unsigned int version)
+Scaleform::GFx::ASString *__fastcall Scaleform::GFx::AS2::Value::ToStringVersioned(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::ASString *result,
+        Scaleform::GFx::AS2::Environment *penv,
+        unsigned int version)
 {
-  Scaleform::GFx::ASString *v4; // rbx
-  Scaleform::GFx::ASString *v5; // rax
-  Scaleform::GFx::ASMovieRootBase *v6; // rax
-  Scaleform::GFx::ASStringNode *v7; // rcx
+  Scaleform::GFx::ASMovieRootBase *pObject; // rax
+  Scaleform::GFx::ASStringNode *vfptr; // rcx
 
-  v4 = result;
-  if ( this->T.Type && this->T.Type != 10 )
+  if ( !this->T.Type || this->T.Type == 10 )
   {
-    Scaleform::GFx::AS2::Value::ToStringImpl(this, result, penv, -1, 0);
-    v5 = v4;
+    pObject = penv->StringContext.pContext->pMovieRoot->pASMovieRoot.pObject;
+    if ( version - 1 > 5 )
+      vfptr = (Scaleform::GFx::ASStringNode *)pObject[18].vfptr;
+    else
+      vfptr = *(Scaleform::GFx::ASStringNode **)&pObject[7].AVMVersion;
+    result->pNode = vfptr;
+    ++vfptr->RefCount;
+    return result;
   }
   else
   {
-    v6 = penv->StringContext.pContext->pMovieRoot->pASMovieRoot.pObject;
-    if ( version - 1 > 5 )
-      v7 = (Scaleform::GFx::ASStringNode *)v6[18].vfptr;
-    else
-      v7 = *(Scaleform::GFx::ASStringNode **)&v6[7].AVMVersion;
-    result->pNode = v7;
-    ++v7->RefCount;
-    v5 = result;
+    Scaleform::GFx::AS2::Value::ToStringImpl(this, result, penv, -1, 0);
+    return result;
   }
-  return v5;
 }
 
 // File Line: 515
 // RVA: 0x721750
-long double __fastcall Scaleform::GFx::AS2::Value::ToNumber(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::Environment *penv)
+long double __fastcall Scaleform::GFx::AS2::Value::ToNumber(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::Environment *penv)
 {
-  Scaleform::GFx::AS2::Environment *v2; // rbx
-  Scaleform::GFx::AS2::Value *v3; // rdi
-  char v4; // al
-  bool v6; // cf
-  bool v7; // zf
-  Scaleform::GFx::AS2::ObjectInterface *v8; // rax
-  Scaleform::GFx::AS2::ObjectInterface *v9; // rsi
-  unsigned __int16 v10; // cx
-  double v11; // xmm0_8
-  double v12; // xmm6_8
-  char v13; // al
-  Scaleform::GFx::AS2::FunctionObject *v14; // rcx
-  unsigned int v15; // edx
-  Scaleform::GFx::AS2::LocalFrame *v16; // rcx
-  unsigned int v17; // eax
-  const char *v18; // rax
-  unsigned int v19; // eax
-  Scaleform::GFx::AS2::FunctionRef result; // [rsp+18h] [rbp-69h]
-  Scaleform::GFx::AS2::Value v21; // [rsp+30h] [rbp-51h]
-  Scaleform::GFx::AS2::FnCall v22; // [rsp+58h] [rbp-29h]
-  Scaleform::GFx::AS2::Value v23; // [rsp+98h] [rbp+17h]
-  __int64 v24; // [rsp+B8h] [rbp+37h]
-  double retaddr; // [rsp+E8h] [rbp+67h]
+  char Type; // al
+  bool v6; // cc
+  Scaleform::GFx::AS2::ObjectInterface *v7; // rax
+  Scaleform::GFx::AS2::ObjectInterface *v8; // rsi
+  unsigned __int16 FuncCallNestingLevel; // cx
+  double v10; // xmm0_8
+  double v11; // xmm6_8
+  char Flags; // al
+  Scaleform::GFx::AS2::FunctionObject *Function; // rcx
+  unsigned int RefCount; // edx
+  Scaleform::GFx::AS2::LocalFrame *pLocalFrame; // rcx
+  unsigned int v16; // eax
+  const char *v17; // rax
+  Scaleform::GFx::AS2::FunctionRef result; // [rsp+18h] [rbp-69h] BYREF
+  Scaleform::GFx::AS2::Value v19; // [rsp+30h] [rbp-51h] BYREF
+  Scaleform::GFx::AS2::FnCall v20; // [rsp+58h] [rbp-29h] BYREF
+  Scaleform::GFx::AS2::Value v21; // [rsp+98h] [rbp+17h] BYREF
+  __int64 v22; // [rsp+B8h] [rbp+37h]
+  double retaddr; // [rsp+E8h] [rbp+67h] BYREF
 
-  v24 = -2i64;
-  v2 = penv;
-  v3 = this;
-  v4 = this->T.Type;
+  v22 = -2i64;
+  Type = this->T.Type;
   if ( this->T.Type == 3 )
     return this->NV.NumberValue;
-  switch ( v4 )
+  switch ( Type )
   {
     case 4:
       return (double)this->NV.Int32Value;
     case 5:
-      if ( Scaleform::GFx::AS2::StringToNumber(&retaddr, this->V.pStringNode->pData) )
+      if ( Scaleform::GFx::AS2::StringToNumber(&retaddr, (char *)this->V.pStringNode->pData) )
         return retaddr;
       return Scaleform::GFx::NumberUtil::NaN();
     case 1:
-      v6 = penv->StringContext.SWFVersion < 6u;
-      v7 = penv->StringContext.SWFVersion == 6;
+      v6 = penv->StringContext.SWFVersion <= 6u;
       goto LABEL_49;
     case 2:
       if ( this->V.BooleanValue )
@@ -822,215 +787,212 @@ long double __fastcall Scaleform::GFx::AS2::Value::ToNumber(Scaleform::GFx::AS2:
     case 7:
       return Scaleform::GFx::NumberUtil::NaN();
   }
-  if ( (v4 != 6 || !this->V.pStringNode) && v4 != 8 )
+  if ( (Type != 6 || !this->V.pStringNode) && Type != 8 )
   {
-    if ( v4 && v4 != 10 )
+    if ( Type && Type != 10 )
       return 0.0;
-    v19 = (unsigned __int8)penv->StringContext.SWFVersion - 1;
-    v6 = v19 < 5;
-    v7 = v19 == 5;
+    v6 = (unsigned int)(unsigned __int8)penv->StringContext.SWFVersion - 1 <= 5;
 LABEL_49:
-    if ( !v6 && !v7 )
+    if ( !v6 )
       return Scaleform::GFx::NumberUtil::NaN();
     return 0.0;
   }
-  v23.T.Type = 0;
-  v8 = Scaleform::GFx::AS2::Value::ToObjectInterface(this, penv);
-  v9 = v8;
-  if ( v2
-    && v8->vfptr->GetMemberRaw(
-         v8,
-         &v2->StringContext,
-         (Scaleform::GFx::ASString *)&v2->StringContext.pContext->pMovieRoot->pASMovieRoot.pObject[25].RefCount,
-         &v23) )
+  v21.T.Type = 0;
+  v7 = Scaleform::GFx::AS2::Value::ToObjectInterface(this, penv);
+  v8 = v7;
+  if ( penv
+    && v7->vfptr->GetMemberRaw(
+         v7,
+         &penv->StringContext,
+         (Scaleform::GFx::ASString *)&penv->StringContext.pContext->pMovieRoot->pASMovieRoot.pObject[25].RefCount,
+         &v21) )
   {
-    v10 = v2->FuncCallNestingLevel;
-    v2->FuncCallNestingLevel = v10 + 1;
-    if ( v10 >= 0xFFu )
+    FuncCallNestingLevel = penv->FuncCallNestingLevel;
+    penv->FuncCallNestingLevel = FuncCallNestingLevel + 1;
+    if ( FuncCallNestingLevel >= 0xFFu )
     {
-      v12 = Scaleform::GFx::NumberUtil::NaN();
+      v11 = Scaleform::GFx::NumberUtil::NaN();
     }
     else
     {
-      v21.T.Type = 0;
-      Scaleform::GFx::AS2::Value::ToFunction(&v23, &result, v2);
+      v19.T.Type = 0;
+      Scaleform::GFx::AS2::Value::ToFunction(&v21, &result, penv);
       if ( result.Function )
       {
-        v22.vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>Vtbl *)&Scaleform::GFx::AS2::FnCall::`vftable;
-        v22.Result = &v21;
-        v22.ThisPtr = v9;
-        v22.ThisFunctionRef.Flags = 0;
-        v22.ThisFunctionRef.Function = 0i64;
-        v22.ThisFunctionRef.pLocalFrame = 0i64;
-        v22.Env = v2;
-        *(_QWORD *)&v22.NArgs = 0i64;
+        v20.vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>Vtbl *)&Scaleform::GFx::AS2::FnCall::`vftable;
+        v20.Result = &v19;
+        v20.ThisPtr = v8;
+        memset(&v20.ThisFunctionRef, 0, 17);
+        v20.Env = penv;
+        *(_QWORD *)&v20.NArgs = 0i64;
         ((void (__fastcall *)(Scaleform::GFx::AS2::FunctionObject *, Scaleform::GFx::AS2::FnCall *, Scaleform::GFx::AS2::LocalFrame *, _QWORD))result.Function->vfptr[3].Finalize_GC)(
           result.Function,
-          &v22,
+          &v20,
           result.pLocalFrame,
           0i64);
-        Scaleform::GFx::AS2::FnCall::~FnCall(&v22);
+        Scaleform::GFx::AS2::FnCall::~FnCall(&v20);
       }
-      if ( (unsigned __int8)(v21.T.Type - 1) > 4u )
-        v11 = Scaleform::GFx::NumberUtil::NaN();
+      if ( (unsigned __int8)(v19.T.Type - 1) > 4u )
+        v10 = Scaleform::GFx::NumberUtil::NaN();
       else
-        v11 = Scaleform::GFx::AS2::Value::ToNumber(&v21, v2);
-      v12 = v11;
-      v13 = result.Flags;
-      if ( !(result.Flags & 2) )
+        v10 = Scaleform::GFx::AS2::Value::ToNumber(&v19, penv);
+      v11 = v10;
+      Flags = result.Flags;
+      if ( (result.Flags & 2) == 0 )
       {
-        v14 = result.Function;
+        Function = result.Function;
         if ( result.Function )
         {
-          v15 = result.Function->RefCount;
-          if ( v15 & 0x3FFFFFF )
+          RefCount = result.Function->RefCount;
+          if ( (RefCount & 0x3FFFFFF) != 0 )
           {
-            result.Function->RefCount = v15 - 1;
-            Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v14->vfptr);
-            v13 = result.Flags;
+            result.Function->RefCount = RefCount - 1;
+            Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(Function);
+            Flags = result.Flags;
           }
         }
       }
       result.Function = 0i64;
-      if ( !(v13 & 1) )
+      if ( (Flags & 1) == 0 )
       {
-        v16 = result.pLocalFrame;
+        pLocalFrame = result.pLocalFrame;
         if ( result.pLocalFrame )
         {
-          v17 = result.pLocalFrame->RefCount;
-          if ( v17 & 0x3FFFFFF )
+          v16 = result.pLocalFrame->RefCount;
+          if ( (v16 & 0x3FFFFFF) != 0 )
           {
-            result.pLocalFrame->RefCount = v17 - 1;
-            Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v16->vfptr);
+            result.pLocalFrame->RefCount = v16 - 1;
+            Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(pLocalFrame);
           }
         }
       }
       result.pLocalFrame = 0i64;
-      if ( v21.T.Type >= 5u )
-        Scaleform::GFx::AS2::Value::DropRefs(&v21);
+      if ( v19.T.Type >= 5u )
+        Scaleform::GFx::AS2::Value::DropRefs(&v19);
     }
-    --v2->FuncCallNestingLevel;
+    --penv->FuncCallNestingLevel;
   }
-  else if ( v3->T.Type == 7 )
+  else if ( this->T.Type == 7 )
   {
-    v12 = Scaleform::GFx::NumberUtil::NaN();
+    v11 = Scaleform::GFx::NumberUtil::NaN();
   }
   else
   {
-    v18 = (const char *)(*(__int64 (__fastcall **)(Scaleform::GFx::AS2::ObjectInterface *, Scaleform::GFx::AS2::Environment *))v9->vfptr->gap8)(
-                          v9,
-                          v2);
-    if ( v18 )
-      v12 = atof(v18);
+    v17 = (const char *)(*(__int64 (__fastcall **)(Scaleform::GFx::AS2::ObjectInterface *, Scaleform::GFx::AS2::Environment *))v8->vfptr->gap8)(
+                          v8,
+                          penv);
+    if ( v17 )
+      v11 = atof(v17);
     else
-      v12 = 0.0;
+      v11 = 0.0;
   }
-  if ( v23.T.Type >= 5u )
-    Scaleform::GFx::AS2::Value::DropRefs(&v23);
-  return v12;
+  if ( v21.T.Type >= 5u )
+    Scaleform::GFx::AS2::Value::DropRefs(&v21);
+  return v11;
 }
 
 // File Line: 634
 // RVA: 0x721610
-__int64 __usercall Scaleform::GFx::AS2::Value::ToInt32@<rax>(Scaleform::GFx::AS2::Value *this@<rcx>, Scaleform::GFx::AS2::Environment *penv@<rdx>, __m128d a3@<xmm0>)
+__int64 __fastcall Scaleform::GFx::AS2::Value::ToInt32(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::Environment *penv)
 {
+  __m128d v2; // xmm0
   __int64 result; // rax
   double v4; // xmm6_8
   __m128d v5; // xmm0
-  __int64 v6; // rcx
+  int v6; // ecx
 
   if ( this->T.Type == 4 )
     return this->NV.UInt32Value;
-  a3.m128d_f64[0] = Scaleform::GFx::AS2::Value::ToNumber(this, penv);
-  v4 = a3.m128d_f64[0];
-  if ( (*(_QWORD *)&a3.m128d_f64[0] & 0x7FF0000000000000i64) == 9218868437227405312i64 || a3.m128d_f64[0] == 0.0 )
+  v2.m128d_f64[0] = Scaleform::GFx::AS2::Value::ToNumber(this, penv);
+  v4 = v2.m128d_f64[0];
+  if ( (*(_QWORD *)&v2.m128d_f64[0] & 0x7FF0000000000000i64) == 0x7FF0000000000000i64 || v2.m128d_f64[0] == 0.0 )
     return 0i64;
-  if ( a3.m128d_f64[0] >= -2147483648.0 && a3.m128d_f64[0] <= 2147483647.0 )
-    return (unsigned int)(signed int)a3.m128d_f64[0];
-  v5 = _mm_and_pd(a3, (__m128d)_xmm);
-  v6 = (unsigned int)(signed int)v5.m128d_f64[0];
-  if ( v6 != 0x8000000000000000i64 && (double)(signed int)v6 != v5.m128d_f64[0] )
-    v5.m128d_f64[0] = (double)(signed int)(v6 - (_mm_movemask_pd(_mm_unpckl_pd(v5, v5)) & 1));
-  result = (unsigned int)(signed int)fmod(v5.m128d_f64[0], 4294967296.0);
+  if ( v2.m128d_f64[0] >= -2147483648.0 && v2.m128d_f64[0] <= 2147483647.0 )
+    return (unsigned int)(int)v2.m128d_f64[0];
+  v5 = _mm_and_pd(v2, (__m128d)_xmm);
+  v6 = (int)v5.m128d_f64[0];
+  if ( (double)v6 != v5.m128d_f64[0] )
+    v5.m128d_f64[0] = (double)(v6 - (_mm_movemask_pd(_mm_unpacklo_pd(v5, v5)) & 1));
+  result = (unsigned int)(int)fmod(v5.m128d_f64[0], 4294967296.0);
   if ( v4 < 0.0 )
-    result = (unsigned int)-(signed int)result;
+    return (unsigned int)-(int)result;
   return result;
 }
 
 // File Line: 663
 // RVA: 0x722740
-__int64 __usercall Scaleform::GFx::AS2::Value::ToUInt32@<rax>(Scaleform::GFx::AS2::Value *this@<rcx>, Scaleform::GFx::AS2::Environment *penv@<rdx>, __m128d a3@<xmm0>)
+__int64 __fastcall Scaleform::GFx::AS2::Value::ToUInt32(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::Environment *penv)
 {
+  __m128d v2; // xmm0
   __int64 result; // rax
   double v4; // xmm6_8
   __m128d v5; // xmm0
-  __int64 v6; // rcx
+  int v6; // ecx
 
   if ( this->T.Type == 4 )
     return this->NV.UInt32Value;
-  a3.m128d_f64[0] = Scaleform::GFx::AS2::Value::ToNumber(this, penv);
-  v4 = a3.m128d_f64[0];
-  if ( (*(_QWORD *)&a3.m128d_f64[0] & 0x7FF0000000000000i64) == 9218868437227405312i64 || a3.m128d_f64[0] == 0.0 )
+  v2.m128d_f64[0] = Scaleform::GFx::AS2::Value::ToNumber(this, penv);
+  v4 = v2.m128d_f64[0];
+  if ( (*(_QWORD *)&v2.m128d_f64[0] & 0x7FF0000000000000i64) == 0x7FF0000000000000i64 || v2.m128d_f64[0] == 0.0 )
     return 0i64;
-  if ( a3.m128d_f64[0] >= 0.0 && a3.m128d_f64[0] <= 4294967295.0 )
-    return (unsigned int)(signed int)a3.m128d_f64[0];
-  v5 = _mm_and_pd(a3, (__m128d)_xmm);
-  v6 = (unsigned int)(signed int)v5.m128d_f64[0];
-  if ( v6 != 0x8000000000000000i64 && (double)(signed int)v6 != v5.m128d_f64[0] )
-    v5.m128d_f64[0] = (double)(signed int)(v6 - (_mm_movemask_pd(_mm_unpckl_pd(v5, v5)) & 1));
-  result = (unsigned int)(signed int)fmod(v5.m128d_f64[0], 4294967296.0);
+  if ( v2.m128d_f64[0] >= 0.0 && v2.m128d_f64[0] <= 4294967295.0 )
+    return (unsigned int)(int)v2.m128d_f64[0];
+  v5 = _mm_and_pd(v2, (__m128d)_xmm);
+  v6 = (int)v5.m128d_f64[0];
+  if ( (double)v6 != v5.m128d_f64[0] )
+    v5.m128d_f64[0] = (double)(v6 - (_mm_movemask_pd(_mm_unpacklo_pd(v5, v5)) & 1));
+  result = (unsigned int)(int)fmod(v5.m128d_f64[0], 4294967296.0);
   if ( v4 < 0.0 )
-    result = (unsigned int)-(signed int)result;
+    return (unsigned int)-(int)result;
   return result;
 }
 
 // File Line: 688
 // RVA: 0x7212C0
-char __fastcall Scaleform::GFx::AS2::Value::ToBool(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::Environment *penv)
+char __fastcall Scaleform::GFx::AS2::Value::ToBool(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::Environment *penv)
 {
-  char v2; // al
-  Scaleform::GFx::AS2::Environment *v3; // r9
-  Scaleform::GFx::ASStringNode *v4; // rdx
-  char v5; // al
+  char Type; // al
+  Scaleform::GFx::ASStringNode *pStringNode; // rdx
   double v6; // xmm6_8
   Scaleform::GFx::ASStringNode *v7; // rax
-  long double result; // [rsp+40h] [rbp+8h]
+  long double result; // [rsp+40h] [rbp+8h] BYREF
 
-  v2 = this->T.Type;
-  v3 = penv;
+  Type = this->T.Type;
   if ( this->T.Type == 5 )
   {
-    v4 = this->V.pStringNode;
-    if ( !v4->Size )
+    pStringNode = this->V.pStringNode;
+    if ( !pStringNode->Size )
       return 0;
-    if ( v3->StringContext.SWFVersion > 6u )
+    if ( penv->StringContext.SWFVersion > 6u )
     {
-      v5 = 1;
+      return 1;
     }
     else
     {
-      if ( !Scaleform::GFx::AS2::StringToNumber(&result, v4->pData) )
+      if ( !Scaleform::GFx::AS2::StringToNumber(&result, (char *)pStringNode->pData) )
         return 0;
       v6 = result;
-      if ( Scaleform::GFx::NumberUtil::IsNaN(result) )
-        v5 = 0;
-      else
-        v5 = v6 != 0.0;
+      return !Scaleform::GFx::NumberUtil::IsNaN(result) && v6 != 0.0;
     }
   }
   else
   {
-    switch ( v2 )
+    switch ( Type )
     {
       case 3:
         v7 = this->V.pStringNode;
-        if ( ((unsigned __int64)v7 & 0x7FF0000000000000i64) == 9218868437227405312i64
-          && (unsigned __int64)v7 & 0xFFFFFFFFFFFFFi64 )
+        if ( ((unsigned __int64)v7 & 0x7FF0000000000000i64) == 0x7FF0000000000000i64
+          && ((unsigned __int64)v7 & 0xFFFFFFFFFFFFFi64) != 0 )
         {
           return 0;
         }
-        v5 = this->NV.NumberValue != 0.0;
-        break;
+        return this->NV.NumberValue != 0.0;
       case 4:
         return this->NV.Int32Value != 0;
       case 2:
@@ -1042,114 +1004,91 @@ char __fastcall Scaleform::GFx::AS2::Value::ToBool(Scaleform::GFx::AS2::Value *t
       case 8:
         return this->V.pStringNode != 0i64;
       default:
-        v5 = v2 == 11;
-        break;
+        return Type == 11;
     }
   }
-  return v5;
 }
 
 // File Line: 771
 // RVA: 0x721A10
-Scaleform::GFx::AS2::Object *__fastcall Scaleform::GFx::AS2::Value::ToObject(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::Environment *penv)
+Scaleform::GFx::AS2::Object *__fastcall Scaleform::GFx::AS2::Value::ToObject(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::Environment *penv)
 {
-  Scaleform::GFx::AS2::Environment *v2; // rdi
-  Scaleform::GFx::AS2::Value *v3; // rbx
-  int v4; // ecx
+  int Type; // ecx
   __int64 v5; // rdi
   char v6; // al
   Scaleform::GFx::AS2::RefCountBaseGC<323> *v7; // rcx
   int v8; // edx
-  Scaleform::GFx::ASStringNode *v9; // rcx
-  unsigned int v10; // edx
+  Scaleform::GFx::ASStringNode *pStringNode; // rcx
+  unsigned int RefCount; // edx
   Scaleform::GFx::AS2::Object *result; // rax
-  Scaleform::GFx::AS2::RefCountBaseGC<323> *v12; // rcx
-  int v13; // edx
-  Scaleform::GFx::ASStringNode *v14; // rcx
-  unsigned int v15; // eax
-  Scaleform::GFx::InteractiveObject *v16; // rcx
-  signed __int64 v17; // rcx
-  __int64 v18; // rax
-  Scaleform::GFx::AS2::Object *v19; // rbx
-  Scaleform::GFx::AS2::Value value; // [rsp+28h] [rbp-30h]
+  Scaleform::GFx::ASStringNode *v12; // rcx
+  unsigned int v13; // eax
+  Scaleform::GFx::InteractiveObject *Target; // rcx
+  char *v15; // rcx
+  __int64 v16; // rax
+  Scaleform::GFx::AS2::Object *v17; // rbx
+  Scaleform::GFx::AS2::Value value; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = penv;
-  v3 = this;
-  v4 = (unsigned __int8)this->T.Type;
-  if ( v4 == 6 )
-    return v3->V.pObjectValue;
-  if ( v4 == 8 )
+  Type = (unsigned __int8)this->T.Type;
+  if ( Type == 6 )
+    return this->V.pObjectValue;
+  if ( Type == 8 )
   {
-    result = v3->V.pObjectValue;
+    result = this->V.pObjectValue;
     if ( result )
       return result;
     return 0i64;
   }
-  if ( v4 != 9 )
+  if ( Type != 9 )
   {
-    if ( v4 == 11 )
+    if ( Type == 11 )
     {
-      Scaleform::GFx::AS2::Value::ResolveFunctionName(v3, (Scaleform::GFx::AS2::FunctionRef *)&value, penv);
+      Scaleform::GFx::AS2::Value::ResolveFunctionName(this, (Scaleform::GFx::AS2::FunctionRef *)&value, penv);
       v5 = *(_QWORD *)&value.T.Type;
       v6 = *((_BYTE *)&value.NV + 16);
       if ( *(_QWORD *)&value.T.Type )
       {
-        if ( !(*((char *)&value.NV + 16) & 2) )
+        if ( (*(_BYTE *)(&value.NV + 1) & 2) == 0 )
         {
           v7 = *(Scaleform::GFx::AS2::RefCountBaseGC<323> **)&value.T.Type;
-          if ( *(_QWORD *)&value.T.Type )
+          v8 = *(_DWORD *)(*(_QWORD *)&value.T.Type + 24i64);
+          if ( (v8 & 0x3FFFFFF) != 0 )
           {
-            v8 = *(_DWORD *)(*(_QWORD *)&value.T.Type + 24i64);
-            if ( v8 & 0x3FFFFFF )
-            {
-              *(_DWORD *)(*(_QWORD *)&value.T.Type + 24i64) = v8 - 1;
-              Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v7);
-              v6 = *((_BYTE *)&value.NV + 16);
-            }
+            *(_DWORD *)(*(_QWORD *)&value.T.Type + 24i64) = v8 - 1;
+            Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v7);
+            v6 = *((_BYTE *)&value.NV + 16);
           }
         }
         *(_QWORD *)&value.T.Type = 0i64;
-        if ( !(v6 & 1) )
+        if ( (v6 & 1) == 0 )
         {
-          v9 = value.V.pStringNode;
+          pStringNode = value.V.pStringNode;
           if ( value.V.pStringNode )
           {
-            v10 = value.V.pStringNode->RefCount;
-            if ( v10 & 0x3FFFFFF )
+            RefCount = value.V.pStringNode->RefCount;
+            if ( (RefCount & 0x3FFFFFF) != 0 )
             {
-              value.V.pStringNode->RefCount = v10 - 1;
-              Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)v9);
+              value.V.pStringNode->RefCount = RefCount - 1;
+              Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)pStringNode);
             }
           }
         }
         value.V.pStringNode = 0i64;
         return (Scaleform::GFx::AS2::Object *)v5;
       }
-      if ( !(*((char *)&value.NV + 16) & 2) )
-      {
-        v12 = *(Scaleform::GFx::AS2::RefCountBaseGC<323> **)&value.T.Type;
-        if ( *(_QWORD *)&value.T.Type )
-        {
-          v13 = *(_DWORD *)(*(_QWORD *)&value.T.Type + 24i64);
-          if ( v13 & 0x3FFFFFF )
-          {
-            *(_DWORD *)(*(_QWORD *)&value.T.Type + 24i64) = v13 - 1;
-            Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v12);
-            v6 = *((_BYTE *)&value.NV + 16);
-          }
-        }
-      }
       *(_QWORD *)&value.T.Type = 0i64;
-      if ( !(v6 & 1) )
+      if ( (*(_BYTE *)(&value.NV + 1) & 1) == 0 )
       {
-        v14 = value.V.pStringNode;
+        v12 = value.V.pStringNode;
         if ( value.V.pStringNode )
         {
-          v15 = value.V.pStringNode->RefCount;
-          if ( v15 & 0x3FFFFFF )
+          v13 = value.V.pStringNode->RefCount;
+          if ( (v13 & 0x3FFFFFF) != 0 )
           {
-            value.V.pStringNode->RefCount = v15 - 1;
-            Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)v14);
+            value.V.pStringNode->RefCount = v13 - 1;
+            Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)v12);
           }
         }
       }
@@ -1157,33 +1096,39 @@ Scaleform::GFx::AS2::Object *__fastcall Scaleform::GFx::AS2::Value::ToObject(Sca
     }
     return 0i64;
   }
-  v16 = penv->Target;
+  Target = penv->Target;
+  if ( !Target )
+    return 0i64;
+  v15 = (char *)Target + 4 * (unsigned __int8)Target->AvmObjOffset;
+  v16 = (*(__int64 (__fastcall **)(char *))(*(_QWORD *)v15 + 8i64))(v15);
   if ( !v16 )
     return 0i64;
-  v17 = (signed __int64)v16 + 4 * (unsigned __int8)v16->AvmObjOffset;
-  v18 = (*(__int64 (__cdecl **)(signed __int64))(*(_QWORD *)v17 + 8i64))(v17);
-  if ( !v18 )
-    return 0i64;
   value.T.Type = 0;
-  if ( !Scaleform::GFx::AS2::Value::GetPropertyValue(v3, v2, (Scaleform::GFx::AS2::ObjectInterface *)(v18 + 8), &value) )
+  if ( !Scaleform::GFx::AS2::Value::GetPropertyValue(
+          this,
+          penv,
+          (Scaleform::GFx::AS2::ObjectInterface *)(v16 + 8),
+          &value) )
   {
     if ( value.T.Type >= 5u )
       Scaleform::GFx::AS2::Value::DropRefs(&value);
     return 0i64;
   }
-  v19 = Scaleform::GFx::AS2::Value::ToObject(&value, v2);
+  v17 = Scaleform::GFx::AS2::Value::ToObject(&value, penv);
   if ( value.T.Type >= 5u )
     Scaleform::GFx::AS2::Value::DropRefs(&value);
-  return v19;
-}lue::ToObject(&valu
+  return v17;
+}
 
 // File Line: 824
 // RVA: 0x721440
-Scaleform::GFx::InteractiveObject *__fastcall Scaleform::GFx::AS2::Value::ToCharacter(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::Environment *penv)
+Scaleform::GFx::InteractiveObject *__fastcall Scaleform::GFx::AS2::Value::ToCharacter(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::Environment *penv)
 {
-  Scaleform::GFx::ASStringNode *v2; // rcx
+  Scaleform::GFx::ASStringNode *pStringNode; // rcx
   Scaleform::GFx::DisplayObject *v3; // rax
-  Scaleform::GFx::InteractiveObject *v4; // rdx
+  Scaleform::GFx::DisplayObject *v4; // rdx
   char v5; // cl
   Scaleform::GFx::InteractiveObject *result; // rax
 
@@ -1191,53 +1136,56 @@ Scaleform::GFx::InteractiveObject *__fastcall Scaleform::GFx::AS2::Value::ToChar
     return 0i64;
   if ( !penv )
     return 0i64;
-  v2 = this->V.pStringNode;
-  if ( !v2 )
+  pStringNode = this->V.pStringNode;
+  if ( !pStringNode )
     return 0i64;
   v3 = Scaleform::GFx::CharacterHandle::ResolveCharacter(
-         (Scaleform::GFx::CharacterHandle *)v2,
+         (Scaleform::GFx::CharacterHandle *)pStringNode,
          penv->Target->pASRoot->pMovieImpl);
-  v4 = (Scaleform::GFx::InteractiveObject *)v3;
+  v4 = v3;
   if ( !v3 )
     return 0i64;
-  v5 = LOBYTE(v3->Flags) >> 7;
+  v5 = LOBYTE(v3->Scaleform::GFx::DisplayObjectBase::Flags) >> 7;
   result = 0i64;
-  if ( v5 & 1 )
-    result = v4;
+  if ( (v5 & 1) != 0 )
+    return (Scaleform::GFx::InteractiveObject *)v4;
   return result;
 }
 
 // File Line: 837
 // RVA: 0x721BD0
-Scaleform::GFx::AS2::ObjectInterfaceVtbl **__fastcall Scaleform::GFx::AS2::Value::ToObjectInterface(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::Environment *penv)
+Scaleform::GFx::AS2::ObjectInterface *__fastcall Scaleform::GFx::AS2::Value::ToObjectInterface(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::Environment *penv)
 {
-  Scaleform::GFx::ASStringNode *v2; // rcx
+  Scaleform::GFx::ASStringNode *pStringNode; // rcx
   Scaleform::GFx::DisplayObject *v3; // rax
   Scaleform::GFx::DisplayObject *v4; // rcx
-  __int64 v5; // rax
-  Scaleform::GFx::AS2::Object *v7; // rax
+  char *v5; // rcx
+  __int64 v6; // rax
+  Scaleform::GFx::AS2::Object *v8; // rax
 
   if ( this->T.Type == 7 )
   {
     if ( penv )
     {
-      v2 = this->V.pStringNode;
-      if ( v2 )
+      pStringNode = this->V.pStringNode;
+      if ( pStringNode )
       {
         v3 = Scaleform::GFx::CharacterHandle::ResolveCharacter(
-               (Scaleform::GFx::CharacterHandle *)v2,
+               (Scaleform::GFx::CharacterHandle *)pStringNode,
                penv->Target->pASRoot->pMovieImpl);
         if ( v3 )
         {
           v4 = 0i64;
-          if ( SLOBYTE(v3->Flags) < 0 )
+          if ( SLOBYTE(v3->Scaleform::GFx::DisplayObjectBase::Flags) < 0 )
             v4 = v3;
           if ( v4 )
           {
-            v5 = ((__int64 (*)(void))(*(Scaleform::RefCountNTSImplCoreVtbl **)((char *)&v4->vfptr
-                                                                             + 4 * (unsigned __int8)v4->AvmObjOffset))[1].__vecDelDtor)();
-            if ( v5 )
-              return (Scaleform::GFx::AS2::ObjectInterfaceVtbl **)(v5 + 8);
+            v5 = (char *)v4 + 4 * (unsigned __int8)v4->AvmObjOffset;
+            v6 = (*(__int64 (__fastcall **)(char *))(*(_QWORD *)v5 + 8i64))(v5);
+            if ( v6 )
+              return (Scaleform::GFx::AS2::ObjectInterface *)(v6 + 8);
           }
         }
       }
@@ -1245,36 +1193,34 @@ Scaleform::GFx::AS2::ObjectInterfaceVtbl **__fastcall Scaleform::GFx::AS2::Value
   }
   else
   {
-    v7 = Scaleform::GFx::AS2::Value::ToObject(this, penv);
-    if ( v7 )
-      return &v7->vfptr;
+    v8 = Scaleform::GFx::AS2::Value::ToObject(this, penv);
+    if ( v8 )
+      return &v8->Scaleform::GFx::AS2::ObjectInterface;
   }
   return 0i64;
 }
 
 // File Line: 848
 // RVA: 0x721570
-Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::Value::ToFunction(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::FunctionRef *result, Scaleform::GFx::AS2::Environment *penv)
+Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::Value::ToFunction(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::FunctionRef *result,
+        Scaleform::GFx::AS2::Environment *penv)
 {
-  Scaleform::GFx::AS2::FunctionRef *v3; // rbx
-  Scaleform::GFx::ASStringNode *v5; // rdx
-  Scaleform::GFx::AS2::LocalFrame *v6; // rdx
+  Scaleform::GFx::AS2::FunctionObject *Function; // rdx
+  Scaleform::GFx::AS2::LocalFrame *pLocalFrame; // rdx
 
-  v3 = result;
   if ( this->T.Type == 8 )
   {
     result->Flags = 0;
-    v5 = this->V.pStringNode;
-    v3->Function = (Scaleform::GFx::AS2::FunctionObject *)v5;
-    if ( v5 )
-      v5->RefCount = (v5->RefCount + 1) & 0x8FFFFFFF;
-    v3->pLocalFrame = 0i64;
-    v6 = this->V.FunctionValue.pLocalFrame;
-    if ( v6 )
-      Scaleform::GFx::AS2::FunctionRefBase::SetLocalFrame(
-        (Scaleform::GFx::AS2::FunctionRefBase *)&v3->Function,
-        v6,
-        this->V.FunctionValue.Flags & 1);
+    Function = this->V.FunctionValue.Function;
+    result->Function = Function;
+    if ( Function )
+      Function->RefCount = (Function->RefCount + 1) & 0x8FFFFFFF;
+    result->pLocalFrame = 0i64;
+    pLocalFrame = this->V.FunctionValue.pLocalFrame;
+    if ( pLocalFrame )
+      Scaleform::GFx::AS2::FunctionRefBase::SetLocalFrame(result, pLocalFrame, this->V.FunctionValue.Flags & 1);
   }
   else
   {
@@ -1287,140 +1233,130 @@ Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::Value::ToFunct
     }
     Scaleform::GFx::AS2::Value::ResolveFunctionName(this, result, penv);
   }
-  return v3;
+  return result;
 }
 
 // File Line: 861
 // RVA: 0x722040
-Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::Value::ToResolveHandler(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::FunctionRef *result)
+Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::Value::ToResolveHandler(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::FunctionRef *result)
 {
-  Scaleform::GFx::AS2::FunctionRef *v2; // rbx
   bool v3; // zf
-  Scaleform::GFx::ASStringNode *v4; // rdx
-  Scaleform::GFx::AS2::LocalFrame *v5; // rdx
-  Scaleform::GFx::AS2::FunctionRef *v6; // rax
+  Scaleform::GFx::AS2::FunctionObject *Function; // rdx
+  Scaleform::GFx::AS2::LocalFrame *pLocalFrame; // rdx
 
-  v2 = result;
   v3 = this->T.Type == 12;
   result->Flags = 0;
   if ( v3 )
   {
-    v4 = this->V.pStringNode;
-    v2->Function = (Scaleform::GFx::AS2::FunctionObject *)v4;
-    if ( v4 )
-      v4->RefCount = (v4->RefCount + 1) & 0x8FFFFFFF;
-    v2->pLocalFrame = 0i64;
-    v5 = this->V.FunctionValue.pLocalFrame;
-    if ( v5 )
-      Scaleform::GFx::AS2::FunctionRefBase::SetLocalFrame(
-        (Scaleform::GFx::AS2::FunctionRefBase *)&v2->Function,
-        v5,
-        this->V.FunctionValue.Flags & 1);
-    v6 = v2;
+    Function = this->V.FunctionValue.Function;
+    result->Function = Function;
+    if ( Function )
+      Function->RefCount = (Function->RefCount + 1) & 0x8FFFFFFF;
+    result->pLocalFrame = 0i64;
+    pLocalFrame = this->V.FunctionValue.pLocalFrame;
+    if ( pLocalFrame )
+      Scaleform::GFx::AS2::FunctionRefBase::SetLocalFrame(result, pLocalFrame, this->V.FunctionValue.Flags & 1);
+    return result;
   }
   else
   {
     result->Function = 0i64;
     result->pLocalFrame = 0i64;
-    v6 = result;
+    return result;
   }
-  return v6;
 }
 
 // File Line: 869
 // RVA: 0x6DF5D0
-void __fastcall Scaleform::GFx::AS2::Value::ConvertToNumber(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::Environment *pEnv)
+void __fastcall Scaleform::GFx::AS2::Value::ConvertToNumber(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::Environment *pEnv)
 {
-  Scaleform::GFx::AS2::Value *v2; // rbx
   double v3; // xmm0_8
 
-  v2 = this;
   v3 = Scaleform::GFx::AS2::Value::ToNumber(this, pEnv);
-  if ( v2->T.Type < 5u )
+  if ( this->T.Type < 5u )
   {
-    v2->NV.NumberValue = v3;
-    v2->T.Type = 3;
+    this->NV.NumberValue = v3;
+    this->T.Type = 3;
   }
   else
   {
-    Scaleform::GFx::AS2::Value::DropRefs(v2);
-    v2->T.Type = 3;
-    v2->NV.NumberValue = v3;
+    Scaleform::GFx::AS2::Value::DropRefs(this);
+    this->T.Type = 3;
+    this->NV.NumberValue = v3;
   }
 }
 
 // File Line: 886
 // RVA: 0x6DF620
-void __fastcall Scaleform::GFx::AS2::Value::ConvertToStringVersioned(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::Environment *pEnv, unsigned int version)
+void __fastcall Scaleform::GFx::AS2::Value::ConvertToStringVersioned(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::Environment *pEnv,
+        unsigned int version)
 {
-  Scaleform::GFx::AS2::Value *v3; // rbx
-  Scaleform::GFx::ASStringNode *v4; // rax
+  Scaleform::GFx::ASStringNode *pNode; // rax
   Scaleform::GFx::ASStringNode *v5; // rcx
-  bool v6; // zf
-  Scaleform::GFx::ASString result; // [rsp+40h] [rbp+8h]
+  Scaleform::GFx::ASString result; // [rsp+40h] [rbp+8h] BYREF
 
-  v3 = this;
   Scaleform::GFx::AS2::Value::ToStringVersioned(this, &result, pEnv, version);
-  Scaleform::GFx::AS2::Value::DropRefs(v3);
-  v3->T.Type = 5;
-  v4 = result.pNode;
-  v3->NV.8 = ($B8BD913BABC9324639AA48504BEFB2FC)result.pNode;
-  ++v4->RefCount;
+  Scaleform::GFx::AS2::Value::DropRefs(this);
+  this->T.Type = 5;
+  pNode = result.pNode;
+  this->NV.8 = ($B8BD913BABC9324639AA48504BEFB2FC)result.pNode;
+  ++pNode->RefCount;
   v5 = result.pNode;
-  v6 = result.pNode->RefCount == 1;
-  --v5->RefCount;
-  if ( v6 )
+  if ( result.pNode->RefCount-- == 1 )
     Scaleform::GFx::ASStringNode::ReleaseNode(v5);
 }
 
 // File Line: 896
 // RVA: 0x713130
-void __fastcall Scaleform::GFx::AS2::Value::SetAsObject(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::Object *obj)
+void __fastcall Scaleform::GFx::AS2::Value::SetAsObject(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::ASStringNode *obj)
 {
-  Scaleform::GFx::AS2::Object *v2; // rbx
-  Scaleform::GFx::AS2::Value *v3; // rdi
-  Scaleform::GFx::AS2::FunctionRefBase *v4; // rax
+  Scaleform::GFx::AS2::FunctionRef *v4; // rax
   char v5; // al
   Scaleform::GFx::AS2::RefCountBaseGC<323> *v6; // rcx
-  unsigned int v7; // edx
+  unsigned int RefCount; // edx
   Scaleform::GFx::AS2::RefCountBaseGC<323> *v8; // rcx
   unsigned int v9; // eax
-  Scaleform::GFx::AS2::RefCountBaseGC<323> *v10; // [rsp+28h] [rbp-20h]
+  Scaleform::GFx::AS2::RefCountBaseGC<323> *v10; // [rsp+28h] [rbp-20h] BYREF
   Scaleform::GFx::AS2::RefCountBaseGC<323> *v11; // [rsp+30h] [rbp-18h]
   char v12; // [rsp+38h] [rbp-10h]
 
-  v2 = obj;
-  v3 = this;
-  if ( obj
-    && (*(unsigned int (__fastcall **)(Scaleform::GFx::AS2::ObjectInterfaceVtbl **))&obj->vfptr->gap8[8])(&obj->vfptr) == 23 )
+  if ( obj && (*(unsigned int (__fastcall **)(unsigned int *))(*(_QWORD *)&obj->Size + 16i64))(&obj->Size) == 23 )
   {
-    v4 = (Scaleform::GFx::AS2::FunctionRefBase *)v2->vfptr->ToFunction(
-                                                   (Scaleform::GFx::AS2::ObjectInterface *)&v2->vfptr,
-                                                   (Scaleform::GFx::AS2::FunctionRef *)&v10);
-    Scaleform::GFx::AS2::Value::SetAsFunction(v3, v4);
+    v4 = (Scaleform::GFx::AS2::FunctionRef *)(*(__int64 (__fastcall **)(unsigned int *, Scaleform::GFx::AS2::RefCountBaseGC<323> **))(*(_QWORD *)&obj->Size + 96i64))(
+                                               &obj->Size,
+                                               &v10);
+    Scaleform::GFx::AS2::Value::SetAsFunction(this, v4);
     v5 = v12;
-    if ( !(v12 & 2) )
+    if ( (v12 & 2) == 0 )
     {
       v6 = v10;
       if ( v10 )
       {
-        v7 = v10->RefCount;
-        if ( v7 & 0x3FFFFFF )
+        RefCount = v10->RefCount;
+        if ( (RefCount & 0x3FFFFFF) != 0 )
         {
-          v10->RefCount = v7 - 1;
+          v10->RefCount = RefCount - 1;
           Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v6);
           v5 = v12;
         }
       }
     }
     v10 = 0i64;
-    if ( !(v5 & 1) )
+    if ( (v5 & 1) == 0 )
     {
       v8 = v11;
       if ( v11 )
       {
         v9 = v11->RefCount;
-        if ( v9 & 0x3FFFFFF )
+        if ( (v9 & 0x3FFFFFF) != 0 )
         {
           v11->RefCount = v9 - 1;
           Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v8);
@@ -1429,159 +1365,145 @@ void __fastcall Scaleform::GFx::AS2::Value::SetAsObject(Scaleform::GFx::AS2::Val
     }
     v11 = 0i64;
   }
-  else if ( v3->T.Type != 6 || v3->V.pObjectValue != v2 )
+  else if ( this->T.Type != 6 || this->V.pStringNode != obj )
   {
-    Scaleform::GFx::AS2::Value::DropRefs(v3);
-    v3->T.Type = 6;
-    v3->V.pStringNode = (Scaleform::GFx::ASStringNode *)v2;
-    if ( v2 )
-      v2->RefCount = (v2->RefCount + 1) & 0x8FFFFFFF;
+    Scaleform::GFx::AS2::Value::DropRefs(this);
+    this->T.Type = 6;
+    this->V.pStringNode = obj;
+    if ( obj )
+      obj->RefCount = (obj->RefCount + 1) & 0x8FFFFFFF;
   }
 }
 
 // File Line: 912
 // RVA: 0x713080
-void __fastcall Scaleform::GFx::AS2::Value::SetAsCharacterHandle(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::CharacterHandle *pchar)
+void __fastcall Scaleform::GFx::AS2::Value::SetAsCharacterHandle(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::ASStringNode *pchar)
 {
-  Scaleform::GFx::CharacterHandle *v2; // rbx
-  Scaleform::GFx::AS2::Value *v3; // rdi
-
-  v2 = pchar;
-  v3 = this;
-  if ( this->T.Type != 7 || this->V.pCharHandle != pchar )
+  if ( this->T.Type != 7 || this->V.pStringNode != pchar )
   {
     Scaleform::GFx::AS2::Value::DropRefs(this);
-    v3->T.Type = 7;
-    v3->V.pStringNode = (Scaleform::GFx::ASStringNode *)v2;
-    if ( v2 )
-      ++v2->RefCount;
+    this->T.Type = 7;
+    this->V.pStringNode = pchar;
+    if ( pchar )
+      ++LODWORD(pchar->pData);
   }
 }
 
 // File Line: 924
 // RVA: 0x713020
-void __fastcall Scaleform::GFx::AS2::Value::SetAsCharacter(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::InteractiveObject *pchar)
+void __fastcall Scaleform::GFx::AS2::Value::SetAsCharacter(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::InteractiveObject *pchar)
 {
-  Scaleform::GFx::AS2::Value *v2; // rdi
-  Scaleform::GFx::CharacterHandle *v3; // rbx
+  Scaleform::GFx::CharacterHandle *pObject; // rbx
 
-  v2 = this;
   if ( pchar )
   {
-    v3 = pchar->pNameHandle.pObject;
-    if ( !v3 )
-      v3 = Scaleform::GFx::DisplayObject::CreateCharacterHandle((Scaleform::GFx::DisplayObject *)&pchar->vfptr);
+    pObject = pchar->pNameHandle.pObject;
+    if ( !pObject )
+      pObject = Scaleform::GFx::DisplayObject::CreateCharacterHandle(pchar);
   }
   else
   {
-    v3 = 0i64;
+    pObject = 0i64;
   }
-  if ( v2->T.Type != 7 || v2->V.pCharHandle != v3 )
+  if ( this->T.Type != 7 || this->V.pCharHandle != pObject )
   {
-    Scaleform::GFx::AS2::Value::DropRefs(v2);
-    v2->T.Type = 7;
-    v2->V.pStringNode = (Scaleform::GFx::ASStringNode *)v3;
-    if ( v3 )
-      ++v3->RefCount;
+    Scaleform::GFx::AS2::Value::DropRefs(this);
+    this->T.Type = 7;
+    this->V.pStringNode = (Scaleform::GFx::ASStringNode *)pObject;
+    if ( pObject )
+      ++pObject->RefCount;
   }
 }
 
 // File Line: 934
 // RVA: 0x713220
-void __fastcall Scaleform::GFx::AS2::Value::SetAsObjectInterface(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::ObjectInterface *pobj)
+void __fastcall Scaleform::GFx::AS2::Value::SetAsObjectInterface(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::ObjectInterface *pobj)
 {
-  Scaleform::GFx::AS2::Value *v2; // rdi
-  Scaleform::GFx::AS2::ObjectInterface *v3; // rbx
-  unsigned int v4; // eax
-  bool v5; // cf
-  bool v6; // zf
-  Scaleform::GFx::AS2::ObjectInterfaceVtbl *v7; // rax
-  Scaleform::GFx::DisplayObject *v8; // rcx
-  Scaleform::GFx::CharacterHandle *v9; // rbx
-  Scaleform::GFx::AS2::Object *v10; // rbx
+  bool v4; // cc
+  Scaleform::GFx::AS2::ObjectInterfaceVtbl *vfptr; // rax
+  Scaleform::GFx::DisplayObject *v6; // rcx
+  Scaleform::GFx::ASStringNode *pObject; // rbx
+  Scaleform::GFx::ASStringNode *v8; // rbx
 
-  v2 = this;
-  v3 = pobj;
-  v4 = (unsigned __int64)(*(__int64 (__fastcall **)(Scaleform::GFx::AS2::ObjectInterface *))&pobj->vfptr->gap8[8])(pobj)
-     - 2;
-  v5 = v4 < 3;
-  v6 = v4 == 3;
-  v7 = v3->vfptr;
-  if ( v5 || v6 )
+  v4 = (*(unsigned int (__fastcall **)(Scaleform::GFx::AS2::ObjectInterface *))&pobj->vfptr->gap8[8])(pobj) - 2 <= 3;
+  vfptr = pobj->vfptr;
+  if ( v4 )
   {
-    if ( (*(unsigned int (__fastcall **)(Scaleform::GFx::AS2::ObjectInterface *))&v7->gap8[8])(v3) - 2 <= 3
-      && (v8 = (Scaleform::GFx::DisplayObject *)v3[1].vfptr) != 0i64 )
+    if ( (*(unsigned int (__fastcall **)(Scaleform::GFx::AS2::ObjectInterface *))&vfptr->gap8[8])(pobj) - 2 <= 3
+      && (v6 = (Scaleform::GFx::DisplayObject *)pobj[1].vfptr) != 0i64 )
     {
-      v9 = v8->pNameHandle.pObject;
-      if ( !v9 )
-        v9 = Scaleform::GFx::DisplayObject::CreateCharacterHandle(v8);
+      pObject = (Scaleform::GFx::ASStringNode *)v6->pNameHandle.pObject;
+      if ( !pObject )
+        pObject = (Scaleform::GFx::ASStringNode *)Scaleform::GFx::DisplayObject::CreateCharacterHandle(v6);
     }
     else
     {
-      v9 = 0i64;
+      pObject = 0i64;
     }
-    if ( v2->T.Type != 7 || v2->V.pCharHandle != v9 )
+    if ( this->T.Type != 7 || this->V.pStringNode != pObject )
     {
-      Scaleform::GFx::AS2::Value::DropRefs(v2);
-      v2->T.Type = 7;
-      v2->V.pStringNode = (Scaleform::GFx::ASStringNode *)v9;
-      if ( v9 )
-        ++v9->RefCount;
+      Scaleform::GFx::AS2::Value::DropRefs(this);
+      this->T.Type = 7;
+      this->V.pStringNode = pObject;
+      if ( pObject )
+        ++LODWORD(pObject->pData);
     }
   }
   else
   {
-    if ( (*(unsigned int (__fastcall **)(Scaleform::GFx::AS2::ObjectInterface *))&v7->gap8[8])(v3) - 6 > 0x26 )
-      v10 = 0i64;
+    if ( (*(unsigned int (__fastcall **)(Scaleform::GFx::AS2::ObjectInterface *))&vfptr->gap8[8])(pobj) - 6 > 0x26 )
+      v8 = 0i64;
     else
-      v10 = (Scaleform::GFx::AS2::Object *)&v3[-2];
-    Scaleform::GFx::AS2::Value::SetAsObject(v2, v10);
+      v8 = (Scaleform::GFx::ASStringNode *)&pobj[-2];
+    Scaleform::GFx::AS2::Value::SetAsObject(this, v8);
   }
 }
 
 // File Line: 944
 // RVA: 0x7130C0
-void __fastcall Scaleform::GFx::AS2::Value::SetAsFunction(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::FunctionRefBase *func)
+void __fastcall Scaleform::GFx::AS2::Value::SetAsFunction(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::FunctionRefBase *func)
 {
-  Scaleform::GFx::AS2::FunctionRefBase *v2; // rdi
-  Scaleform::GFx::AS2::Value *v3; // rbx
-  Scaleform::GFx::AS2::FunctionRefBase *v4; // rcx
-  Scaleform::GFx::AS2::FunctionObject *v5; // rdx
-  Scaleform::GFx::AS2::LocalFrame *v6; // rdx
+  Scaleform::GFx::AS2::FunctionObject *Function; // rdx
+  Scaleform::GFx::AS2::LocalFrame *pLocalFrame; // rdx
 
-  v2 = func;
-  v3 = this;
   if ( this->T.Type != 8 || this->V.pStringNode != (Scaleform::GFx::ASStringNode *)func->Function )
   {
     Scaleform::GFx::AS2::Value::DropRefs(this);
-    v3->T.Type = 8;
-    v4 = (Scaleform::GFx::AS2::FunctionRefBase *)&v3->NV.8;
-    v4->Flags = 0;
-    v5 = v2->Function;
-    v4->Function = v2->Function;
-    if ( v5 )
-      v5->RefCount = (v5->RefCount + 1) & 0x8FFFFFFF;
-    v3->V.FunctionValue.pLocalFrame = 0i64;
-    v6 = v2->pLocalFrame;
-    if ( v6 )
-      Scaleform::GFx::AS2::FunctionRefBase::SetLocalFrame(v4, v6, v2->Flags & 1);
+    this->T.Type = 8;
+    this->V.FunctionValue.Flags = 0;
+    Function = func->Function;
+    this->V.pStringNode = (Scaleform::GFx::ASStringNode *)func->Function;
+    if ( Function )
+      Function->RefCount = (Function->RefCount + 1) & 0x8FFFFFFF;
+    this->V.FunctionValue.pLocalFrame = 0i64;
+    pLocalFrame = func->pLocalFrame;
+    if ( pLocalFrame )
+      Scaleform::GFx::AS2::FunctionRefBase::SetLocalFrame(&this->V.FunctionValue, pLocalFrame, func->Flags & 1);
   }
 }
 
 // File Line: 962
 // RVA: 0x6D7950
-void __fastcall Scaleform::GFx::AS2::Value::Add(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::Environment *penv, Scaleform::GFx::AS2::Value *v)
+void __fastcall Scaleform::GFx::AS2::Value::Add(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::Environment *penv,
+        Scaleform::GFx::AS2::Value *v)
 {
-  Scaleform::GFx::AS2::Value *v3; // rbx
-  Scaleform::GFx::AS2::Environment *v4; // rsi
-  Scaleform::GFx::AS2::Value *v5; // rdi
   Scaleform::GFx::AS2::Value *v6; // rax
   Scaleform::GFx::AS2::Value *v7; // rax
-  char v8; // bl
+  char Type; // bl
   double v9; // xmm6_8
   double v10; // xmm6_8
-  unsigned int v11; // ebx
-  Scaleform::GFx::ASStringNode *v12; // rcx
+  unsigned int SWFVersion; // ebx
+  Scaleform::GFx::ASStringNode *pNode; // rcx
   bool v13; // zf
   Scaleform::GFx::ASString *v14; // rbx
   Scaleform::GFx::ASString *v15; // rax
@@ -1591,103 +1513,95 @@ void __fastcall Scaleform::GFx::AS2::Value::Add(Scaleform::GFx::AS2::Value *this
   Scaleform::GFx::ASString *v19; // rsi
   Scaleform::GFx::ASStringNode *v20; // rax
   Scaleform::GFx::ASStringNode *v21; // rcx
-  Scaleform::GFx::AS2::Value v22; // [rsp+18h] [rbp-39h]
-  Scaleform::GFx::ASString v23; // [rsp+38h] [rbp-19h]
-  Scaleform::GFx::ASString v24; // [rsp+40h] [rbp-11h]
-  Scaleform::GFx::AS2::Value v25; // [rsp+48h] [rbp-9h]
-  Scaleform::GFx::AS2::Value result; // [rsp+68h] [rbp+17h]
+  Scaleform::GFx::AS2::Value v22; // [rsp+18h] [rbp-39h] BYREF
+  Scaleform::GFx::ASString v23; // [rsp+38h] [rbp-19h] BYREF
+  Scaleform::GFx::ASString v24; // [rsp+40h] [rbp-11h] BYREF
+  Scaleform::GFx::AS2::Value v25; // [rsp+48h] [rbp-9h] BYREF
+  Scaleform::GFx::AS2::Value result; // [rsp+68h] [rbp+17h] BYREF
   __int64 v27; // [rsp+88h] [rbp+37h]
-  Scaleform::GFx::ASString v28; // [rsp+D0h] [rbp+7Fh]
+  Scaleform::GFx::ASString v28; // [rsp+D0h] [rbp+7Fh] BYREF
 
   v27 = -2i64;
-  v3 = v;
-  v4 = penv;
-  v5 = this;
   v25.T.Type = 0;
-  v6 = Scaleform::GFx::AS2::Value::ToPrimitive(this, &result, penv, 0);
-  Scaleform::GFx::AS2::Value::operator=(&v22, v6, (__int64)v5);
+  v6 = Scaleform::GFx::AS2::Value::ToPrimitive(this, &result, penv, NoHint);
+  Scaleform::GFx::AS2::Value::operator=(&v22, v6);
   if ( result.T.Type >= 5u )
     Scaleform::GFx::AS2::Value::DropRefs(&result);
-  v7 = Scaleform::GFx::AS2::Value::ToPrimitive(v3, &result, v4, 0);
-  Scaleform::GFx::AS2::Value::operator=(&v25, v7, (__int64)v5);
+  v7 = Scaleform::GFx::AS2::Value::ToPrimitive(v, &result, penv, NoHint);
+  Scaleform::GFx::AS2::Value::operator=(&v25, v7);
   if ( result.T.Type >= 5u )
     Scaleform::GFx::AS2::Value::DropRefs(&result);
-  v8 = v22.T.Type;
+  Type = v22.T.Type;
   if ( v22.T.Type == 5 || v25.T.Type == 5 )
   {
-    v11 = (unsigned __int8)v4->StringContext.SWFVersion;
-    Scaleform::GFx::AS2::Value::ToStringVersioned(&v22, &v28, v4, v11);
+    SWFVersion = (unsigned __int8)penv->StringContext.SWFVersion;
+    Scaleform::GFx::AS2::Value::ToStringVersioned(&v22, &v28, penv, SWFVersion);
     Scaleform::GFx::AS2::Value::DropRefs(&v22);
     v22.T.Type = 5;
     v22.NV.8 = ($B8BD913BABC9324639AA48504BEFB2FC)v28.pNode;
-    ++v22.V.pStringNode->RefCount;
-    v12 = v28.pNode;
-    v13 = v28.pNode->RefCount == 1;
-    --v12->RefCount;
+    ++v28.pNode->RefCount;
+    pNode = v28.pNode;
+    v13 = v28.pNode->RefCount-- == 1;
     if ( v13 )
-      Scaleform::GFx::ASStringNode::ReleaseNode(v12);
-    v14 = Scaleform::GFx::AS2::Value::ToStringVersioned(&v25, &v24, v4, v11);
-    v15 = Scaleform::GFx::AS2::Value::ToString(&v22, &v23, v4, -1);
+      Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
+    v14 = Scaleform::GFx::AS2::Value::ToStringVersioned(&v25, &v24, penv, SWFVersion);
+    v15 = Scaleform::GFx::AS2::Value::ToString(&v22, &v23, penv, -1);
     Scaleform::GFx::ASString::operator+(v15, &v28, v14);
     v16 = v23.pNode;
-    v13 = v23.pNode->RefCount == 1;
-    --v16->RefCount;
+    v13 = v23.pNode->RefCount-- == 1;
     if ( v13 )
       Scaleform::GFx::ASStringNode::ReleaseNode(v16);
     Scaleform::GFx::AS2::Value::DropRefs(&v22);
-    v8 = 5;
+    Type = 5;
     v22.T.Type = 5;
     v22.NV.8 = ($B8BD913BABC9324639AA48504BEFB2FC)v28.pNode;
-    ++v22.V.pStringNode->RefCount;
+    ++v28.pNode->RefCount;
     v17 = v28.pNode;
-    v13 = v28.pNode->RefCount == 1;
-    --v17->RefCount;
+    v13 = v28.pNode->RefCount-- == 1;
     if ( v13 )
       Scaleform::GFx::ASStringNode::ReleaseNode(v17);
     v18 = v24.pNode;
-    v13 = v24.pNode->RefCount == 1;
-    --v18->RefCount;
+    v13 = v24.pNode->RefCount-- == 1;
     if ( v13 )
       Scaleform::GFx::ASStringNode::ReleaseNode(v18);
-    v19 = Scaleform::GFx::AS2::Value::ToString(&v22, &v28, v4, -1);
-    if ( v5->T.Type >= 5u )
-      Scaleform::GFx::AS2::Value::DropRefs(v5);
-    v5->T.Type = 5;
+    v19 = Scaleform::GFx::AS2::Value::ToString(&v22, &v28, penv, -1);
+    if ( this->T.Type >= 5u )
+      Scaleform::GFx::AS2::Value::DropRefs(this);
+    this->T.Type = 5;
     v20 = v19->pNode;
-    v5->NV.8 = ($B8BD913BABC9324639AA48504BEFB2FC)v19->pNode;
+    this->NV.8 = ($B8BD913BABC9324639AA48504BEFB2FC)v19->pNode;
     ++v20->RefCount;
     v21 = v28.pNode;
-    v13 = v28.pNode->RefCount == 1;
-    --v21->RefCount;
+    v13 = v28.pNode->RefCount-- == 1;
     if ( v13 )
       Scaleform::GFx::ASStringNode::ReleaseNode(v21);
   }
   else
   {
-    v9 = Scaleform::GFx::AS2::Value::ToNumber(&v25, v4);
-    v10 = v9 + Scaleform::GFx::AS2::Value::ToNumber(&v22, v4);
-    if ( v5->T.Type >= 5u )
-      Scaleform::GFx::AS2::Value::DropRefs(v5);
-    v5->T.Type = 3;
-    v5->NV.NumberValue = v10;
+    v9 = Scaleform::GFx::AS2::Value::ToNumber(&v25, penv);
+    v10 = v9 + Scaleform::GFx::AS2::Value::ToNumber(&v22, penv);
+    if ( this->T.Type >= 5u )
+      Scaleform::GFx::AS2::Value::DropRefs(this);
+    this->T.Type = 3;
+    this->NV.NumberValue = v10;
   }
   if ( v25.T.Type >= 5u )
     Scaleform::GFx::AS2::Value::DropRefs(&v25);
-  if ( (unsigned __int8)v8 >= 5u )
+  if ( (unsigned __int8)Type >= 5u )
     Scaleform::GFx::AS2::Value::DropRefs(&v22);
 }
 
 // File Line: 983
 // RVA: 0x6D7B70
-void __fastcall Scaleform::GFx::AS2::Value::Add(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::Environment *penv, int v2)
+void __fastcall Scaleform::GFx::AS2::Value::Add(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::Environment *penv,
+        int v2)
 {
-  signed int v3; // er14
-  Scaleform::GFx::AS2::Environment *v4; // rsi
-  Scaleform::GFx::AS2::Value *v5; // rdi
   Scaleform::GFx::AS2::Value *v6; // rax
-  char v7; // bl
-  unsigned int v8; // ebx
-  Scaleform::GFx::ASStringNode *v9; // rcx
+  char Type; // bl
+  unsigned int SWFVersion; // ebx
+  Scaleform::GFx::ASStringNode *pNode; // rcx
   bool v10; // zf
   Scaleform::GFx::ASString *v11; // rbx
   Scaleform::GFx::ASString *v12; // rax
@@ -1698,196 +1612,177 @@ void __fastcall Scaleform::GFx::AS2::Value::Add(Scaleform::GFx::AS2::Value *this
   Scaleform::GFx::ASStringNode *v17; // rax
   Scaleform::GFx::ASStringNode *v18; // rcx
   double v19; // xmm6_8
-  Scaleform::GFx::ASString v20; // [rsp+8h] [rbp-29h]
-  Scaleform::GFx::ASString v21; // [rsp+10h] [rbp-21h]
-  Scaleform::GFx::AS2::Value v22; // [rsp+20h] [rbp-11h]
-  Scaleform::GFx::AS2::Value result; // [rsp+40h] [rbp+Fh]
-  Scaleform::GFx::ASString v24; // [rsp+B0h] [rbp+7Fh]
+  Scaleform::GFx::ASString v20; // [rsp+8h] [rbp-29h] BYREF
+  Scaleform::GFx::ASString v21; // [rsp+10h] [rbp-21h] BYREF
+  Scaleform::GFx::AS2::Value v22; // [rsp+20h] [rbp-11h] BYREF
+  Scaleform::GFx::AS2::Value result; // [rsp+40h] [rbp+Fh] BYREF
+  Scaleform::GFx::ASString v24; // [rsp+B0h] [rbp+7Fh] BYREF
 
-  v3 = v2;
-  v4 = penv;
-  v5 = this;
   v22.T.Type = 0;
-  v6 = Scaleform::GFx::AS2::Value::ToPrimitive(this, &result, penv, 0);
-  Scaleform::GFx::AS2::Value::operator=(&v22, v6, (__int64)v5);
+  v6 = Scaleform::GFx::AS2::Value::ToPrimitive(this, &result, penv, NoHint);
+  Scaleform::GFx::AS2::Value::operator=(&v22, v6);
   if ( result.T.Type >= 5u )
     Scaleform::GFx::AS2::Value::DropRefs(&result);
-  v7 = v22.T.Type;
+  Type = v22.T.Type;
   if ( v22.T.Type == 5 )
   {
-    v8 = (unsigned __int8)v4->StringContext.SWFVersion;
-    Scaleform::GFx::AS2::Value::ToStringVersioned(&v22, &v24, v4, v8);
+    SWFVersion = (unsigned __int8)penv->StringContext.SWFVersion;
+    Scaleform::GFx::AS2::Value::ToStringVersioned(&v22, &v24, penv, SWFVersion);
     Scaleform::GFx::AS2::Value::DropRefs(&v22);
     v22.T.Type = 5;
     v22.NV.8 = ($B8BD913BABC9324639AA48504BEFB2FC)v24.pNode;
-    ++v22.V.pStringNode->RefCount;
-    v9 = v24.pNode;
-    v10 = v24.pNode->RefCount == 1;
-    --v9->RefCount;
+    ++v24.pNode->RefCount;
+    pNode = v24.pNode;
+    v10 = v24.pNode->RefCount-- == 1;
     if ( v10 )
-      Scaleform::GFx::ASStringNode::ReleaseNode(v9);
+      Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
     result.T.Type = 4;
-    result.NV.Int32Value = v3;
-    v11 = Scaleform::GFx::AS2::Value::ToStringVersioned(&result, &v21, v4, v8);
-    v12 = Scaleform::GFx::AS2::Value::ToString(&v22, &v20, v4, -1);
+    result.NV.Int32Value = v2;
+    v11 = Scaleform::GFx::AS2::Value::ToStringVersioned(&result, &v21, penv, SWFVersion);
+    v12 = Scaleform::GFx::AS2::Value::ToString(&v22, &v20, penv, -1);
     Scaleform::GFx::ASString::operator+(v12, &v24, v11);
     v13 = v20.pNode;
-    v10 = v20.pNode->RefCount == 1;
-    --v13->RefCount;
+    v10 = v20.pNode->RefCount-- == 1;
     if ( v10 )
       Scaleform::GFx::ASStringNode::ReleaseNode(v13);
     Scaleform::GFx::AS2::Value::DropRefs(&v22);
-    v7 = 5;
+    Type = 5;
     v22.T.Type = 5;
     v22.NV.8 = ($B8BD913BABC9324639AA48504BEFB2FC)v24.pNode;
-    ++v22.V.pStringNode->RefCount;
+    ++v24.pNode->RefCount;
     v14 = v24.pNode;
-    v10 = v24.pNode->RefCount == 1;
-    --v14->RefCount;
+    v10 = v24.pNode->RefCount-- == 1;
     if ( v10 )
       Scaleform::GFx::ASStringNode::ReleaseNode(v14);
     v15 = v21.pNode;
-    v10 = v21.pNode->RefCount == 1;
-    --v15->RefCount;
+    v10 = v21.pNode->RefCount-- == 1;
     if ( v10 )
       Scaleform::GFx::ASStringNode::ReleaseNode(v15);
-    v16 = Scaleform::GFx::AS2::Value::ToString(&v22, &v24, v4, -1);
-    if ( v5->T.Type >= 5u )
-      Scaleform::GFx::AS2::Value::DropRefs(v5);
-    v5->T.Type = 5;
+    v16 = Scaleform::GFx::AS2::Value::ToString(&v22, &v24, penv, -1);
+    if ( this->T.Type >= 5u )
+      Scaleform::GFx::AS2::Value::DropRefs(this);
+    this->T.Type = 5;
     v17 = v16->pNode;
-    v5->NV.8 = ($B8BD913BABC9324639AA48504BEFB2FC)v16->pNode;
+    this->NV.8 = ($B8BD913BABC9324639AA48504BEFB2FC)v16->pNode;
     ++v17->RefCount;
     v18 = v24.pNode;
-    v10 = v24.pNode->RefCount == 1;
-    --v18->RefCount;
+    v10 = v24.pNode->RefCount-- == 1;
     if ( v10 )
       Scaleform::GFx::ASStringNode::ReleaseNode(v18);
   }
   else
   {
-    v19 = Scaleform::GFx::AS2::Value::ToNumber(&v22, v4) + (double)v3;
-    if ( v5->T.Type >= 5u )
-      Scaleform::GFx::AS2::Value::DropRefs(v5);
-    v5->T.Type = 3;
-    v5->NV.NumberValue = v19;
+    v19 = Scaleform::GFx::AS2::Value::ToNumber(&v22, penv) + (double)v2;
+    if ( this->T.Type >= 5u )
+      Scaleform::GFx::AS2::Value::DropRefs(this);
+    this->T.Type = 3;
+    this->NV.NumberValue = v19;
   }
-  if ( (unsigned __int8)v7 >= 5u )
+  if ( (unsigned __int8)Type >= 5u )
     Scaleform::GFx::AS2::Value::DropRefs(&v22);
 }
 
 // File Line: 1003
 // RVA: 0x721100
-void __fastcall Scaleform::GFx::AS2::Value::Sub(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::Environment *penv, Scaleform::GFx::AS2::Value *v)
+void __fastcall Scaleform::GFx::AS2::Value::Sub(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::Environment *penv,
+        Scaleform::GFx::AS2::Value *v)
 {
-  Scaleform::GFx::AS2::Value *v3; // rdi
-  Scaleform::GFx::AS2::Environment *v4; // rbx
-  Scaleform::GFx::AS2::Value *v5; // rsi
   double v6; // xmm6_8
   double v7; // xmm7_8
 
-  v3 = v;
-  v4 = penv;
-  v5 = this;
   v6 = Scaleform::GFx::AS2::Value::ToNumber(this, penv);
-  v7 = Scaleform::GFx::AS2::Value::ToNumber(v3, v4);
-  if ( v5->T.Type >= 5u )
-    Scaleform::GFx::AS2::Value::DropRefs(v5);
-  v5->NV.NumberValue = v6 - v7;
-  v5->T.Type = 3;
+  v7 = Scaleform::GFx::AS2::Value::ToNumber(v, penv);
+  if ( this->T.Type >= 5u )
+    Scaleform::GFx::AS2::Value::DropRefs(this);
+  this->NV.NumberValue = v6 - v7;
+  this->T.Type = 3;
 }
 
 // File Line: 1010
 // RVA: 0x721170
-void __fastcall Scaleform::GFx::AS2::Value::Sub(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::Environment *penv, int v2)
+void __fastcall Scaleform::GFx::AS2::Value::Sub(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::Environment *penv,
+        int v2)
 {
-  int v3; // edi
-  Scaleform::GFx::AS2::Value *v4; // rbx
   double v5; // xmm6_8
 
-  v3 = v2;
-  v4 = this;
   v5 = Scaleform::GFx::AS2::Value::ToNumber(this, penv);
-  if ( v4->T.Type >= 5u )
-    Scaleform::GFx::AS2::Value::DropRefs(v4);
-  v4->T.Type = 3;
-  v4->NV.NumberValue = v5 - (double)v3;
+  if ( this->T.Type >= 5u )
+    Scaleform::GFx::AS2::Value::DropRefs(this);
+  this->T.Type = 3;
+  this->NV.NumberValue = v5 - (double)v2;
 }
 
 // File Line: 1016
 // RVA: 0x703160
-void __fastcall Scaleform::GFx::AS2::Value::Mul(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::Environment *penv, Scaleform::GFx::AS2::Value *v)
+void __fastcall Scaleform::GFx::AS2::Value::Mul(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::Environment *penv,
+        Scaleform::GFx::AS2::Value *v)
 {
-  Scaleform::GFx::AS2::Value *v3; // rdi
-  Scaleform::GFx::AS2::Environment *v4; // rbx
-  Scaleform::GFx::AS2::Value *v5; // rsi
   double v6; // xmm7_8
   double v7; // xmm6_8
 
-  v3 = v;
-  v4 = penv;
-  v5 = this;
   v6 = Scaleform::GFx::AS2::Value::ToNumber(this, penv);
-  v7 = Scaleform::GFx::AS2::Value::ToNumber(v3, v4);
-  if ( v5->T.Type >= 5u )
-    Scaleform::GFx::AS2::Value::DropRefs(v5);
-  v5->T.Type = 3;
-  v5->NV.NumberValue = v7 * v6;
+  v7 = Scaleform::GFx::AS2::Value::ToNumber(v, penv);
+  if ( this->T.Type >= 5u )
+    Scaleform::GFx::AS2::Value::DropRefs(this);
+  this->T.Type = 3;
+  this->NV.NumberValue = v7 * v6;
 }
 
 // File Line: 1024
 // RVA: 0x700440
-char __fastcall Scaleform::GFx::AS2::Value::IsEqual(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::Environment *penv, Scaleform::GFx::AS2::Value *v)
+char __fastcall Scaleform::GFx::AS2::Value::IsEqual(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::Environment *penv,
+        Scaleform::GFx::AS2::Value *v)
 {
-  Scaleform::GFx::AS2::Value *v3; // rbx
-  Scaleform::GFx::AS2::Environment *v4; // rdi
-  Scaleform::GFx::AS2::Value *v5; // rsi
-  char v6; // r9
-  bool v7; // al
+  char Type; // r9
+  char v7; // al
   unsigned __int8 v8; // r8
-  bool v9; // cl
-  bool v10; // bl
-  signed int v12; // ecx
-  Scaleform::GFx::AS2::Value *v13; // rcx
+  char v9; // cl
+  bool IsEqual; // bl
+  int v12; // ecx
+  Scaleform::GFx::AS2::Value *p_result; // rcx
   Scaleform::GFx::ASString *v14; // rax
-  Scaleform::GFx::ASStringNode *v15; // rcx
-  Scaleform::GFx::ASStringNode *v16; // rcx
-  signed int v17; // ecx
+  Scaleform::GFx::ASStringNode *pStringNode; // rcx
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  int v17; // ecx
   long double v18; // xmm0_8
-  double v19; // xmm7_8
-  bool v20; // bl
-  __int128 v21; // xmm6
-  signed int v22; // ecx
-  bool v23; // zf
-  Scaleform::GFx::ASStringNode *v24; // rax
-  Scaleform::GFx::ASString *v25; // rbx
-  Scaleform::GFx::AS2::Value result; // [rsp+8h] [rbp-69h]
-  Scaleform::GFx::AS2::Value v27; // [rsp+28h] [rbp-49h]
-  Scaleform::GFx::AS2::Value va; // [rsp+48h] [rbp-29h]
-  Scaleform::GFx::AS2::Value v29; // [rsp+68h] [rbp-9h]
-  __int64 v30; // [rsp+88h] [rbp+17h]
-  Scaleform::GFx::ASString v31; // [rsp+D8h] [rbp+67h]
+  long double NumberValue; // xmm7_8
+  bool IsNaN; // bl
+  int v21; // ecx
+  bool v22; // zf
+  Scaleform::GFx::ASStringNode *v23; // rax
+  Scaleform::GFx::ASString *CharacterNamePath; // rbx
+  Scaleform::GFx::AS2::Value result; // [rsp+8h] [rbp-69h] BYREF
+  Scaleform::GFx::AS2::Value v26; // [rsp+28h] [rbp-49h] BYREF
+  Scaleform::GFx::AS2::Value va; // [rsp+48h] [rbp-29h] BYREF
+  Scaleform::GFx::AS2::Value v28; // [rsp+68h] [rbp-9h] BYREF
+  __int64 v29; // [rsp+88h] [rbp+17h]
+  Scaleform::GFx::ASString v30; // [rsp+D8h] [rbp+67h] BYREF
   Scaleform::GFx::ASStringNode *retaddr; // [rsp+E8h] [rbp+77h]
 
-  v30 = -2i64;
-  v3 = v;
-  v4 = penv;
-  v5 = this;
-  v6 = this->T.Type;
-  v7 = this->T.Type <= 1u || v6 == 10;
+  v29 = -2i64;
+  Type = this->T.Type;
+  v7 = this->T.Type <= 1u || Type == 10;
   v8 = v->T.Type;
   v9 = v8 <= 1u || v8 == 10;
   if ( v7 || v9 )
     return v7 == v9;
-  switch ( v6 )
+  switch ( Type )
   {
     case 2:
-      v29.T.Type = 3;
-      v29.V.pStringNode = COERCE_SCALEFORM__GFX__ASSTRINGNODE__(Scaleform::GFx::AS2::Value::ToNumber(v5, penv));
-      v10 = Scaleform::GFx::AS2::Value::IsEqual(&v29, v4, v3);
-      if ( v29.T.Type < 5u )
-        return v10;
-      v13 = &v29;
+      v28.T.Type = 3;
+      v28.V.pStringNode = COERCE_SCALEFORM_GFX_ASSTRINGNODE_(Scaleform::GFx::AS2::Value::ToNumber(this, penv));
+      IsEqual = Scaleform::GFx::AS2::Value::IsEqual(&v28, penv, v);
+      if ( v28.T.Type < 5u )
+        return IsEqual;
+      p_result = &v28;
       goto LABEL_26;
     case 3:
       if ( v8 != 2 && v8 <= 0xBu )
@@ -1895,137 +1790,135 @@ char __fastcall Scaleform::GFx::AS2::Value::IsEqual(Scaleform::GFx::AS2::Value *
         v17 = 2368;
         if ( _bittest(&v17, v8) )
         {
-          Scaleform::GFx::AS2::Value::ToPrimitive(v3, &result, penv, 0);
-          if ( (unsigned __int8)(result.T.Type - 1) > 4u )
-            v10 = 0;
-          else
-            v10 = Scaleform::GFx::AS2::Value::IsEqual(v5, v4, &result);
+          Scaleform::GFx::AS2::Value::ToPrimitive(v, &result, penv, NoHint);
+          if ( (unsigned __int8)(result.T.Type - 1) <= 4u )
+            goto LABEL_49;
+          IsEqual = 0;
           goto LABEL_24;
         }
       }
-      v18 = Scaleform::GFx::AS2::Value::ToNumber(v3, penv);
-      v19 = v5->NV.NumberValue;
-      v20 = Scaleform::GFx::NumberUtil::IsNaN(v5->NV.NumberValue);
-      if ( v20 && Scaleform::GFx::NumberUtil::IsNaN(v18) )
+      v18 = Scaleform::GFx::AS2::Value::ToNumber(v, penv);
+      NumberValue = this->NV.NumberValue;
+      IsNaN = Scaleform::GFx::NumberUtil::IsNaN(NumberValue);
+      if ( IsNaN && Scaleform::GFx::NumberUtil::IsNaN(v18) )
         return 1;
-      if ( !v20 && !Scaleform::GFx::NumberUtil::IsNaN(v18) )
-        return v19 == v18;
+      if ( !IsNaN && !Scaleform::GFx::NumberUtil::IsNaN(v18) )
+        return NumberValue == v18;
       return 0;
     case 4:
       if ( v8 == 3 )
       {
         result.T.Type = 0;
-        v21 = COERCE_UNSIGNED_INT64((double)v5->NV.Int32Value);
-        v10 = Scaleform::GFx::AS2::Value::IsEqual(&result, penv, v3);
-        goto LABEL_24;
+        goto LABEL_62;
       }
       if ( v8 == 2 )
-        return v5->NV.Int32Value == Scaleform::GFx::AS2::Value::ToInt32(v3, penv);
+        return this->NV.Int32Value == Scaleform::GFx::AS2::Value::ToInt32(v, penv);
       if ( v8 > 0xBu )
-        return v5->NV.Int32Value == Scaleform::GFx::AS2::Value::ToInt32(v3, penv);
-      v22 = 2368;
-      if ( !_bittest(&v22, v8) )
-        return v5->NV.Int32Value == Scaleform::GFx::AS2::Value::ToInt32(v3, penv);
-      Scaleform::GFx::AS2::Value::ToPrimitive(v3, &result, penv, 0);
-      if ( (unsigned __int8)(result.T.Type - 1) > 4u )
-        v10 = 0;
-      else
-        v10 = Scaleform::GFx::AS2::Value::IsEqual(v5, v4, &result);
+        return this->NV.Int32Value == Scaleform::GFx::AS2::Value::ToInt32(v, penv);
+      v21 = 2368;
+      if ( !_bittest(&v21, v8) )
+        return this->NV.Int32Value == Scaleform::GFx::AS2::Value::ToInt32(v, penv);
+      Scaleform::GFx::AS2::Value::ToPrimitive(v, &result, penv, NoHint);
+      if ( (unsigned __int8)(result.T.Type - 1) <= 4u )
+        goto LABEL_49;
+      IsEqual = 0;
       goto LABEL_24;
     case 5:
       if ( (unsigned __int8)(v8 - 3) <= 1u )
       {
-        v27.T.Type = 3;
-        v27.V.pStringNode = COERCE_SCALEFORM__GFX__ASSTRINGNODE__(Scaleform::GFx::AS2::Value::ToNumber(v5, penv));
-        v10 = Scaleform::GFx::AS2::Value::IsEqual(&v27, v4, v3);
-        if ( v27.T.Type >= 5u )
-          Scaleform::GFx::AS2::Value::DropRefs(&v27);
-        return v10;
+        v26.T.Type = 3;
+        v26.V.pStringNode = COERCE_SCALEFORM_GFX_ASSTRINGNODE_(Scaleform::GFx::AS2::Value::ToNumber(this, penv));
+        IsEqual = Scaleform::GFx::AS2::Value::IsEqual(&v26, penv, v);
+        if ( v26.T.Type >= 5u )
+          Scaleform::GFx::AS2::Value::DropRefs(&v26);
+        return IsEqual;
       }
       if ( v8 == 2 )
       {
         va.T.Type = 3;
-        va.V.pStringNode = COERCE_SCALEFORM__GFX__ASSTRINGNODE__(Scaleform::GFx::AS2::Value::ToNumber(v3, penv));
-        v10 = Scaleform::GFx::AS2::Value::IsEqual(v5, v4, &va);
+        va.V.pStringNode = COERCE_SCALEFORM_GFX_ASSTRINGNODE_(Scaleform::GFx::AS2::Value::ToNumber(v, penv));
+        IsEqual = Scaleform::GFx::AS2::Value::IsEqual(this, penv, &va);
         if ( va.T.Type < 5u )
-          return v10;
+          return IsEqual;
         Scaleform::GFx::AS2::Value::DropRefs(&va);
-        return v10;
+        return IsEqual;
       }
       if ( v8 <= 0xBu )
       {
         v12 = 2368;
         if ( _bittest(&v12, v8) )
         {
-          Scaleform::GFx::AS2::Value::ToPrimitive(v3, &result, penv, 0);
+          Scaleform::GFx::AS2::Value::ToPrimitive(v, &result, penv, NoHint);
           if ( (unsigned __int8)(result.T.Type - 1) > 4u )
-            v10 = 0;
+            IsEqual = 0;
           else
-            v10 = Scaleform::GFx::AS2::Value::IsEqual(v5, v4, &result);
+LABEL_49:
+            IsEqual = Scaleform::GFx::AS2::Value::IsEqual(this, penv, &result);
           goto LABEL_24;
         }
       }
-      v14 = Scaleform::GFx::AS2::Value::ToString(v3, &v31, penv, -1);
-      v15 = v5->V.pStringNode;
-      retaddr = v15;
-      ++v15->RefCount;
-      v10 = v15 == v14->pNode;
-      v23 = v15->RefCount-- == 1;
-      if ( v23 )
-        Scaleform::GFx::ASStringNode::ReleaseNode(v15);
-      v16 = v31.pNode;
-      v23 = v31.pNode->RefCount == 1;
-      --v16->RefCount;
-      if ( v23 )
+      v14 = Scaleform::GFx::AS2::Value::ToString(v, &v30, penv, -1);
+      pStringNode = this->V.pStringNode;
+      retaddr = pStringNode;
+      ++pStringNode->RefCount;
+      IsEqual = pStringNode == v14->pNode;
+      v22 = pStringNode->RefCount-- == 1;
+      if ( v22 )
+        Scaleform::GFx::ASStringNode::ReleaseNode(pStringNode);
+      pNode = v30.pNode;
+      v22 = v30.pNode->RefCount-- == 1;
+      if ( v22 )
       {
-        Scaleform::GFx::ASStringNode::ReleaseNode(v16);
-        return v10;
+        Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
+        return IsEqual;
       }
-      return v10;
+      return IsEqual;
     case 6:
     case 8:
       if ( (unsigned __int8)(v8 - 2) <= 3u )
       {
-        Scaleform::GFx::AS2::Value::ToPrimitive(v5, &result, penv, 0);
+        Scaleform::GFx::AS2::Value::ToPrimitive(this, &result, penv, NoHint);
         if ( (unsigned __int8)(result.T.Type - 1) > 4u )
-          v10 = 0;
+          IsEqual = 0;
         else
-          v10 = Scaleform::GFx::AS2::Value::IsEqual(&result, v4, v3);
+LABEL_62:
+          IsEqual = Scaleform::GFx::AS2::Value::IsEqual(&result, penv, v);
 LABEL_24:
         if ( result.T.Type < 5u )
-          return v10;
-        v13 = &result;
+          return IsEqual;
+        p_result = &result;
 LABEL_26:
-        Scaleform::GFx::AS2::Value::DropRefs(v13);
-        return v10;
+        Scaleform::GFx::AS2::Value::DropRefs(p_result);
+        return IsEqual;
       }
-      if ( (v6 != 6 || v8 != 6) && (v6 != 8 || v8 != 8) )
+      if ( (Type != 6 || v8 != 6) && (Type != 8 || v8 != 8) )
         return 0;
-      v23 = v5->V.pStringNode == v3->V.pStringNode;
+      v22 = this->V.pStringNode == v->V.pStringNode;
       break;
     case 7:
       if ( v8 != 7 )
         return 0;
-      v24 = v5->V.pStringNode;
-      if ( !v24 || !v3->V.pStringNode )
-        return v24 == v3->V.pStringNode;
-      v25 = Scaleform::GFx::AS2::Value::GetCharacterNamePath(v3, penv);
-      return Scaleform::GFx::AS2::Value::GetCharacterNamePath(v5, v4)->pNode == v25->pNode;
+      v23 = this->V.pStringNode;
+      if ( !v23 || !v->V.pStringNode )
+        return v23 == v->V.pStringNode;
+      CharacterNamePath = Scaleform::GFx::AS2::Value::GetCharacterNamePath(v, penv);
+      return Scaleform::GFx::AS2::Value::GetCharacterNamePath(this, penv)->pNode == CharacterNamePath->pNode;
     default:
-      return v6 == v8;
+      return Type == (char)v8;
   }
-  return v23;
+  return v22;
 }
 
 // File Line: 1150
 // RVA: 0x6DEA50
-Scaleform::GFx::AS2::Value *__fastcall Scaleform::GFx::AS2::Value::Compare(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::Value *result, Scaleform::GFx::AS2::Environment *penv, Scaleform::GFx::AS2::Value *v)
+Scaleform::GFx::AS2::Value *__fastcall Scaleform::GFx::AS2::Value::Compare(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::Value *result,
+        Scaleform::GFx::AS2::Environment *penv,
+        Scaleform::GFx::AS2::Value *v)
 {
-  Scaleform::GFx::AS2::Value *v4; // r14
-  Scaleform::GFx::AS2::Environment *v5; // rsi
-  Scaleform::GFx::AS2::Value *v6; // rdi
   int v7; // ebx
-  bool v8; // al
+  bool IsEqual; // al
   Scaleform::GFx::ASString *v9; // rbx
   Scaleform::GFx::ASString *v10; // rax
   bool v11; // al
@@ -2035,184 +1928,166 @@ Scaleform::GFx::AS2::Value *__fastcall Scaleform::GFx::AS2::Value::Compare(Scale
   Scaleform::GFx::ASString *v15; // rbx
   Scaleform::GFx::ASString *v16; // rax
   bool v17; // al
-  Scaleform::GFx::ASStringNode *v18; // rcx
-  Scaleform::GFx::ASStringNode *v19; // rcx
-  double v20; // xmm0_8
-  long double v21; // xmm6_8
-  long double v22; // xmm7_8
-  bool v23; // al
-  Scaleform::GFx::ASString v25; // [rsp+10h] [rbp-39h]
-  Scaleform::GFx::ASString v26; // [rsp+18h] [rbp-31h]
-  __int64 v27; // [rsp+20h] [rbp-29h]
-  Scaleform::GFx::AS2::Value v28; // [rsp+28h] [rbp-21h]
-  Scaleform::GFx::AS2::Value resulta; // [rsp+48h] [rbp-1h]
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  double v19; // xmm0_8
+  long double v20; // xmm6_8
+  long double v21; // xmm7_8
+  bool v22; // al
+  Scaleform::GFx::ASString v24; // [rsp+10h] [rbp-39h] BYREF
+  Scaleform::GFx::ASString v25; // [rsp+18h] [rbp-31h] BYREF
+  __int64 v26; // [rsp+20h] [rbp-29h]
+  Scaleform::GFx::AS2::Value v27; // [rsp+28h] [rbp-21h] BYREF
+  Scaleform::GFx::AS2::Value resulta; // [rsp+48h] [rbp-1h] BYREF
 
-  v27 = -2i64;
-  v4 = v;
-  v5 = penv;
-  v6 = result;
-  v7 = (signed int)result;
-  if ( (_DWORD)result )
+  v26 = -2i64;
+  v7 = (int)result;
+  if ( !(_DWORD)result )
   {
-    Scaleform::GFx::AS2::Value::ToPrimitive(this, &resulta, penv, 0);
-    Scaleform::GFx::AS2::Value::ToPrimitive(v4, &v28, v5, 0);
-    if ( resulta.T.Type != 5 || v28.T.Type != 5 )
+    IsEqual = Scaleform::GFx::AS2::Value::IsEqual(this, penv, v);
+    result->T.Type = 2;
+    result->V.BooleanValue = IsEqual;
+    return result;
+  }
+  Scaleform::GFx::AS2::Value::ToPrimitive(this, &resulta, penv, NoHint);
+  Scaleform::GFx::AS2::Value::ToPrimitive(v, &v27, penv, NoHint);
+  if ( resulta.T.Type == 5 && v27.T.Type == 5 )
+  {
+    if ( v7 >= 0 )
     {
-      if ( (v5->StringContext.SWFVersion <= 6u
-         || resulta.T.Type && resulta.T.Type != 10 && v28.T.Type && v28.T.Type != 10)
-        && ((v20 = Scaleform::GFx::AS2::Value::ToNumber(&resulta, v5), v7 >= 0) ? (v22 = v20,
-                                                                                   v21 = Scaleform::GFx::AS2::Value::ToNumber(
-                                                                                           &v28,
-                                                                                           v5)) : (v21 = v20,
-                                                                                                   v22 = Scaleform::GFx::AS2::Value::ToNumber(&v28, v5)),
-            (v26.pNode = *(Scaleform::GFx::ASStringNode **)&v21,
-             (*(_QWORD *)&v21 & 0x7FF0000000000000i64) != 9218868437227405312i64)
-         || !(*(_QWORD *)&v21 & 0xFFFFFFFFFFFFFi64)) )
-      {
-        v26.pNode = *(Scaleform::GFx::ASStringNode **)&v22;
-        if ( (*(_QWORD *)&v22 & 0x7FF0000000000000i64) == 9218868437227405312i64 && *(_QWORD *)&v22 & 0xFFFFFFFFFFFFFi64 )
-        {
-          v6->T.Type = 0;
-        }
-        else
-        {
-          if ( v21 == v22 )
-          {
-            v23 = 0;
-          }
-          else if ( Scaleform::GFx::NumberUtil::IsNEGATIVE_ZERO(v21) && Scaleform::GFx::NumberUtil::IsPOSITIVE_ZERO(v22) )
-          {
-            v23 = 0;
-          }
-          else if ( Scaleform::GFx::NumberUtil::IsNEGATIVE_ZERO(v22) && Scaleform::GFx::NumberUtil::IsPOSITIVE_ZERO(v21) )
-          {
-            v23 = 0;
-          }
-          else
-          {
-            v26.pNode = *(Scaleform::GFx::ASStringNode **)&v21;
-            if ( v21 == 1.797693134862316e308/*+Inf*/ )
-            {
-              v23 = 0;
-            }
-            else
-            {
-              v26.pNode = *(Scaleform::GFx::ASStringNode **)&v22;
-              if ( v22 == 1.797693134862316e308/*+Inf*/ )
-              {
-                v23 = 1;
-              }
-              else
-              {
-                v26.pNode = *(Scaleform::GFx::ASStringNode **)&v22;
-                if ( v22 == -1.797693134862316e308/*-Inf*/ )
-                {
-                  v23 = 0;
-                }
-                else
-                {
-                  v26.pNode = *(Scaleform::GFx::ASStringNode **)&v21;
-                  if ( v21 == -1.797693134862316e308/*-Inf*/ )
-                    v23 = 1;
-                  else
-                    v23 = v22 > v21;
-                }
-              }
-            }
-          }
-          v6->T.Type = 2;
-          v6->V.BooleanValue = v23;
-        }
-      }
-      else
-      {
-        v6->T.Type = 0;
-      }
-    }
-    else if ( v7 >= 0 )
-    {
-      v15 = Scaleform::GFx::AS2::Value::ToString(&v28, &v25, v5, -1);
-      v16 = Scaleform::GFx::AS2::Value::ToString(&resulta, &v26, v5, -1);
-      if ( v16->pNode == v15->pNode )
-        v17 = 0;
-      else
-        v17 = Scaleform::GFx::ASString::operator<(v16, v15) == 0;
-      v6->T.Type = 2;
-      v6->V.BooleanValue = v17;
-      v18 = v26.pNode;
-      v13 = v26.pNode->RefCount == 1;
-      --v18->RefCount;
+      v15 = Scaleform::GFx::AS2::Value::ToString(&v27, &v24, penv, -1);
+      v16 = Scaleform::GFx::AS2::Value::ToString(&resulta, &v25, penv, -1);
+      v17 = v16->pNode != v15->pNode && !Scaleform::GFx::ASString::operator<(v16, v15);
+      result->T.Type = 2;
+      result->V.BooleanValue = v17;
+      pNode = v25.pNode;
+      v13 = v25.pNode->RefCount-- == 1;
       if ( v13 )
-        Scaleform::GFx::ASStringNode::ReleaseNode(v18);
-      v19 = v25.pNode;
-      v13 = v25.pNode->RefCount == 1;
-      --v19->RefCount;
-      if ( v13 )
-        Scaleform::GFx::ASStringNode::ReleaseNode(v19);
+        Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
+      v14 = v24.pNode;
+      v13 = v24.pNode->RefCount-- == 1;
+      if ( !v13 )
+        goto LABEL_49;
     }
     else
     {
-      v9 = Scaleform::GFx::AS2::Value::ToString(&v28, &v26, v5, -1);
-      v10 = Scaleform::GFx::AS2::Value::ToString(&resulta, &v25, v5, -1);
+      v9 = Scaleform::GFx::AS2::Value::ToString(&v27, &v25, penv, -1);
+      v10 = Scaleform::GFx::AS2::Value::ToString(&resulta, &v24, penv, -1);
       v11 = Scaleform::GFx::ASString::operator<(v10, v9);
-      v6->T.Type = 2;
-      v6->V.BooleanValue = v11;
-      v12 = v25.pNode;
-      v13 = v25.pNode->RefCount == 1;
-      --v12->RefCount;
+      result->T.Type = 2;
+      result->V.BooleanValue = v11;
+      v12 = v24.pNode;
+      v13 = v24.pNode->RefCount-- == 1;
       if ( v13 )
         Scaleform::GFx::ASStringNode::ReleaseNode(v12);
-      v14 = v26.pNode;
-      v13 = v26.pNode->RefCount == 1;
-      --v14->RefCount;
-      if ( v13 )
-        Scaleform::GFx::ASStringNode::ReleaseNode(v14);
+      v14 = v25.pNode;
+      v13 = v25.pNode->RefCount-- == 1;
+      if ( !v13 )
+        goto LABEL_49;
     }
-    if ( v28.T.Type >= 5u )
-      Scaleform::GFx::AS2::Value::DropRefs(&v28);
-    if ( resulta.T.Type >= 5u )
-      Scaleform::GFx::AS2::Value::DropRefs(&resulta);
+    Scaleform::GFx::ASStringNode::ReleaseNode(v14);
+  }
+  else if ( penv->StringContext.SWFVersion > 6u
+         && (!resulta.T.Type || resulta.T.Type == 10 || !v27.T.Type || v27.T.Type == 10)
+         || ((v19 = Scaleform::GFx::AS2::Value::ToNumber(&resulta, penv), v7 >= 0)
+           ? (v21 = v19, v20 = Scaleform::GFx::AS2::Value::ToNumber(&v27, penv))
+           : (v20 = v19, v21 = Scaleform::GFx::AS2::Value::ToNumber(&v27, penv)),
+             (v25.pNode = *(Scaleform::GFx::ASStringNode **)&v20,
+              (*(_QWORD *)&v20 & 0x7FF0000000000000i64) == 0x7FF0000000000000i64)
+          && (*(_QWORD *)&v20 & 0xFFFFFFFFFFFFFi64) != 0) )
+  {
+    result->T.Type = 0;
   }
   else
   {
-    v8 = Scaleform::GFx::AS2::Value::IsEqual(this, penv, v);
-    v6->T.Type = 2;
-    v6->V.BooleanValue = v8;
+    v25.pNode = *(Scaleform::GFx::ASStringNode **)&v21;
+    if ( (*(_QWORD *)&v21 & 0x7FF0000000000000i64) == 0x7FF0000000000000i64
+      && (*(_QWORD *)&v21 & 0xFFFFFFFFFFFFFi64) != 0 )
+    {
+      result->T.Type = 0;
+    }
+    else
+    {
+      if ( v20 == v21 )
+      {
+        v22 = 0;
+      }
+      else if ( Scaleform::GFx::NumberUtil::IsNEGATIVE_ZERO(v20) && Scaleform::GFx::NumberUtil::IsPOSITIVE_ZERO(v21) )
+      {
+        v22 = 0;
+      }
+      else if ( Scaleform::GFx::NumberUtil::IsNEGATIVE_ZERO(v21) && Scaleform::GFx::NumberUtil::IsPOSITIVE_ZERO(v20) )
+      {
+        v22 = 0;
+      }
+      else
+      {
+        v25.pNode = *(Scaleform::GFx::ASStringNode **)&v20;
+        if ( v20 == INFINITY )
+        {
+          v22 = 0;
+        }
+        else
+        {
+          v25.pNode = *(Scaleform::GFx::ASStringNode **)&v21;
+          if ( v21 == INFINITY )
+          {
+            v22 = 1;
+          }
+          else
+          {
+            v25.pNode = *(Scaleform::GFx::ASStringNode **)&v21;
+            if ( v21 == -INFINITY )
+            {
+              v22 = 0;
+            }
+            else
+            {
+              v25.pNode = *(Scaleform::GFx::ASStringNode **)&v20;
+              v22 = v20 == -INFINITY || v21 > v20;
+            }
+          }
+        }
+      }
+      result->T.Type = 2;
+      result->V.BooleanValue = v22;
+    }
   }
-  return v6;
+LABEL_49:
+  if ( v27.T.Type >= 5u )
+    Scaleform::GFx::AS2::Value::DropRefs(&v27);
+  if ( resulta.T.Type >= 5u )
+    Scaleform::GFx::AS2::Value::DropRefs(&resulta);
+  return result;
 }
 
 // File Line: 1206
 // RVA: 0x720B30
-void __fastcall Scaleform::GFx::AS2::Value::StringConcat(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::Environment *penv, Scaleform::GFx::ASString *str)
+void __fastcall Scaleform::GFx::AS2::Value::StringConcat(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::Environment *penv,
+        Scaleform::GFx::ASString *str)
 {
-  Scaleform::GFx::ASString *v3; // rbx
-  Scaleform::GFx::AS2::Value *v4; // rdi
   Scaleform::GFx::ASString *v5; // rax
-  Scaleform::GFx::ASStringNode *v6; // rcx
+  Scaleform::GFx::ASStringNode *pNode; // rcx
   bool v7; // zf
   Scaleform::GFx::ASStringNode *v8; // rax
   Scaleform::GFx::ASStringNode *v9; // rcx
-  Scaleform::GFx::ASString v10; // [rsp+40h] [rbp+8h]
-  Scaleform::GFx::ASString result; // [rsp+58h] [rbp+20h]
+  Scaleform::GFx::ASString v10; // [rsp+40h] [rbp+8h] BYREF
+  Scaleform::GFx::ASString result; // [rsp+58h] [rbp+20h] BYREF
 
-  v3 = str;
-  v4 = this;
   v5 = Scaleform::GFx::AS2::Value::ToString(this, &result, penv, -1);
-  Scaleform::GFx::ASString::operator+(v5, &v10, v3);
-  v6 = result.pNode;
-  v7 = result.pNode->RefCount == 1;
-  --v6->RefCount;
+  Scaleform::GFx::ASString::operator+(v5, &v10, str);
+  pNode = result.pNode;
+  v7 = result.pNode->RefCount-- == 1;
   if ( v7 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v6);
-  Scaleform::GFx::AS2::Value::DropRefs(v4);
-  v4->T.Type = 5;
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
+  Scaleform::GFx::AS2::Value::DropRefs(this);
+  this->T.Type = 5;
   v8 = v10.pNode;
-  v4->NV.8 = ($B8BD913BABC9324639AA48504BEFB2FC)v10.pNode;
+  this->NV.8 = ($B8BD913BABC9324639AA48504BEFB2FC)v10.pNode;
   ++v8->RefCount;
   v9 = v10.pNode;
-  v7 = v10.pNode->RefCount == 1;
-  --v9->RefCount;
+  v7 = v10.pNode->RefCount-- == 1;
   if ( v7 )
     Scaleform::GFx::ASStringNode::ReleaseNode(v9);
 }
@@ -2221,37 +2096,35 @@ void __fastcall Scaleform::GFx::AS2::Value::StringConcat(Scaleform::GFx::AS2::Va
 // RVA: 0x6E2CE0
 void __fastcall Scaleform::GFx::AS2::Value::DropRefs(Scaleform::GFx::AS2::Value *this)
 {
-  Scaleform::GFx::AS2::Value *v1; // rbx
-  Scaleform::GFx::ASStringNode *v2; // rcx
+  Scaleform::GFx::ASStringNode *pStringNode; // rcx
   bool v3; // zf
   Scaleform::GFx::AS2::RefCountBaseGC<323> *v4; // rcx
   unsigned int v5; // eax
-  Scaleform::GFx::AS2::RefCountBaseGC<323> *v6; // rcx
+  Scaleform::GFx::AS2::LocalFrame *pLocalFrame; // rcx
   unsigned int v7; // eax
   Scaleform::GFx::ASStringNode *v8; // rdi
-  Scaleform::GFx::AS2::RefCountBaseGC<323> *v9; // rcx
-  unsigned int v10; // eax
+  Scaleform::GFx::AS2::RefCountBaseGC<323> *pObjectValue; // rcx
+  unsigned int RefCount; // eax
 
-  v1 = this;
   switch ( this->T.Type )
   {
     case 5:
     case 0xB:
-      v2 = this->V.pStringNode;
-      v3 = v2->RefCount-- == 1;
+      pStringNode = this->V.pStringNode;
+      v3 = pStringNode->RefCount-- == 1;
       if ( v3 )
-        Scaleform::GFx::ASStringNode::ReleaseNode(v2);
+        Scaleform::GFx::ASStringNode::ReleaseNode(pStringNode);
       break;
     case 6:
     case 9:
-      v9 = (Scaleform::GFx::AS2::RefCountBaseGC<323> *)this->V.pStringNode;
-      if ( v9 )
+      pObjectValue = this->V.pObjectValue;
+      if ( pObjectValue )
       {
-        v10 = v9->RefCount;
-        if ( v10 & 0x3FFFFFF )
+        RefCount = pObjectValue->RefCount;
+        if ( (RefCount & 0x3FFFFFF) != 0 )
         {
-          v9->RefCount = v10 - 1;
-          Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v9);
+          pObjectValue->RefCount = RefCount - 1;
+          Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(pObjectValue);
         }
         goto LABEL_19;
       }
@@ -2260,49 +2133,49 @@ void __fastcall Scaleform::GFx::AS2::Value::DropRefs(Scaleform::GFx::AS2::Value 
       v8 = this->V.pStringNode;
       if ( v8 )
       {
-        if ( --LODWORD(v8->pData) > 0 )
+        if ( (int)--LODWORD(v8->pData) > 0 )
         {
 LABEL_19:
-          v1->V.pStringNode = 0i64;
+          this->V.pStringNode = 0i64;
         }
         else
         {
           Scaleform::GFx::CharacterHandle::~CharacterHandle((Scaleform::GFx::CharacterHandle *)v8);
           Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v8);
-          v1->V.pStringNode = 0i64;
+          this->V.pStringNode = 0i64;
         }
       }
       break;
     case 8:
     case 0xC:
-      v4 = (Scaleform::GFx::AS2::RefCountBaseGC<323> *)this->V.pStringNode;
+      v4 = this->V.pObjectValue;
       if ( v4 )
       {
-        if ( !(v1->V.FunctionValue.Flags & 2) )
+        if ( (this->V.FunctionValue.Flags & 2) == 0 )
         {
           v5 = v4->RefCount;
-          if ( v5 & 0x3FFFFFF )
+          if ( (v5 & 0x3FFFFFF) != 0 )
           {
             v4->RefCount = v5 - 1;
             Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v4);
           }
         }
-        v3 = (v1->V.FunctionValue.Flags & 1) == 0;
-        v1->V.pStringNode = 0i64;
+        v3 = (this->V.FunctionValue.Flags & 1) == 0;
+        this->V.pStringNode = 0i64;
         if ( v3 )
         {
-          v6 = (Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v1->V.FunctionValue.pLocalFrame->vfptr;
-          if ( v6 )
+          pLocalFrame = this->V.FunctionValue.pLocalFrame;
+          if ( pLocalFrame )
           {
-            v7 = v6->RefCount;
-            if ( v7 & 0x3FFFFFF )
+            v7 = pLocalFrame->RefCount;
+            if ( (v7 & 0x3FFFFFF) != 0 )
             {
-              v6->RefCount = v7 - 1;
-              Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v6);
+              pLocalFrame->RefCount = v7 - 1;
+              Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(pLocalFrame);
             }
           }
         }
-        v1->V.FunctionValue.pLocalFrame = 0i64;
+        this->V.FunctionValue.pLocalFrame = 0i64;
       }
       break;
     default:
@@ -2312,295 +2185,265 @@ LABEL_19:
 
 // File Line: 1311
 // RVA: 0x721C60
-Scaleform::GFx::AS2::Value *__fastcall Scaleform::GFx::AS2::Value::ToPrimitive(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::Value *result, Scaleform::GFx::AS2::Environment *penv, Scaleform::GFx::AS2::Value::Hint __formal)
+Scaleform::GFx::AS2::Value *__fastcall Scaleform::GFx::AS2::Value::ToPrimitive(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::Value *result,
+        Scaleform::GFx::AS2::Environment *penv,
+        Scaleform::GFx::AS2::Value::Hint __formal)
 {
-  Scaleform::GFx::AS2::Environment *v4; // rbx
-  Scaleform::GFx::AS2::Value *v5; // rdi
-  Scaleform::GFx::AS2::Value *v6; // rsi
-  char v7; // cl
-  Scaleform::GFx::AS2::FunctionObject *v8; // rax
-  Scaleform::GFx::AS2::FunctionRefBase *v9; // rcx
-  char v10; // al
-  Scaleform::GFx::AS2::FunctionObject *v11; // rcx
-  unsigned int v12; // edx
-  Scaleform::GFx::AS2::LocalFrame *v13; // rcx
-  unsigned int v14; // eax
-  char v15; // al
-  Scaleform::GFx::AS2::FunctionObject *v16; // rcx
-  unsigned int v17; // edx
-  Scaleform::GFx::AS2::LocalFrame *v18; // rcx
-  unsigned int v19; // eax
-  Scaleform::GFx::AS2::ObjectInterfaceVtbl **v20; // rax
-  Scaleform::GFx::AS2::ObjectInterface *v21; // r14
-  unsigned __int16 v22; // cx
-  char v23; // al
-  Scaleform::GFx::AS2::FunctionObject *v24; // rcx
-  unsigned int v25; // edx
-  Scaleform::GFx::AS2::LocalFrame *v26; // rcx
-  unsigned int v27; // eax
-  Scaleform::GFx::AS2::Value *v28; // rcx
-  Scaleform::GFx::ASStringNode *v29; // rcx
-  const char *v30; // rax
-  Scaleform::GFx::ASStringNode *v31; // rcx
-  bool v32; // zf
-  Scaleform::GFx::AS2::FunctionRef resulta; // [rsp+28h] [rbp-81h]
-  Scaleform::GFx::AS2::Value v35; // [rsp+48h] [rbp-61h]
-  Scaleform::GFx::AS2::FnCall v36; // [rsp+70h] [rbp-39h]
-  Scaleform::GFx::AS2::Value v; // [rsp+B0h] [rbp+7h]
-  __int64 v38; // [rsp+D0h] [rbp+27h]
-  Scaleform::GFx::ASString v39; // [rsp+110h] [rbp+67h]
-  Scaleform::GFx::AS2::Value *v40; // [rsp+118h] [rbp+6Fh]
+  char Type; // cl
+  Scaleform::GFx::ASStringNode *v8; // rax
+  char v9; // al
+  Scaleform::GFx::AS2::RefCountBaseGC<323> *v10; // rcx
+  int v11; // edx
+  Scaleform::GFx::ASStringNode *pStringNode; // rcx
+  unsigned int RefCount; // eax
+  Scaleform::GFx::ASStringNode *v14; // rcx
+  unsigned int v15; // eax
+  Scaleform::GFx::AS2::ObjectInterface *v16; // rax
+  Scaleform::GFx::AS2::ObjectInterface *v17; // r14
+  unsigned __int16 FuncCallNestingLevel; // cx
+  char v19; // al
+  Scaleform::GFx::AS2::RefCountBaseGC<323> *v20; // rcx
+  int v21; // edx
+  Scaleform::GFx::ASStringNode *v22; // rcx
+  unsigned int v23; // eax
+  Scaleform::GFx::AS2::Value *p_v; // rcx
+  Scaleform::GFx::ASStringNode *v25; // rcx
+  const char *v26; // rax
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  Scaleform::GFx::AS2::Value resulta; // [rsp+28h] [rbp-81h] BYREF
+  Scaleform::GFx::AS2::Value v31; // [rsp+48h] [rbp-61h] BYREF
+  Scaleform::GFx::AS2::FnCall v32; // [rsp+70h] [rbp-39h] BYREF
+  Scaleform::GFx::AS2::Value v; // [rsp+B0h] [rbp+7h] BYREF
+  __int64 v34; // [rsp+D0h] [rbp+27h]
+  Scaleform::GFx::ASString v35; // [rsp+110h] [rbp+67h] BYREF
+  Scaleform::GFx::AS2::Value *v36; // [rsp+118h] [rbp+6Fh]
 
-  v40 = result;
-  v38 = -2i64;
-  v4 = penv;
-  v5 = result;
-  v6 = this;
-  v7 = this->T.Type;
-  if ( (unsigned __int8)(v7 - 6) > 2u )
+  v36 = result;
+  v34 = -2i64;
+  Type = this->T.Type;
+  if ( (unsigned __int8)(Type - 6) > 2u )
   {
-    if ( v7 == 11 )
+    if ( Type == 11 )
     {
-      Scaleform::GFx::AS2::Value::ResolveFunctionName(v6, &resulta, penv);
-      v8 = resulta.Function;
-      if ( resulta.Function )
+      Scaleform::GFx::AS2::Value::ResolveFunctionName(this, (Scaleform::GFx::AS2::FunctionRef *)&resulta, penv);
+      v8 = *(Scaleform::GFx::ASStringNode **)&resulta.T.Type;
+      if ( *(_QWORD *)&resulta.T.Type )
       {
-        v5->T.Type = 8;
-        v9 = (Scaleform::GFx::AS2::FunctionRefBase *)&v5->NV.8;
-        v9->Flags = 0;
-        v9->Function = v8;
+        result->T.Type = 8;
+        result->V.FunctionValue.Flags = 0;
+        result->V.pStringNode = v8;
         ++v8->RefCount;
         v8->RefCount &= 0x8FFFFFFF;
-        v9->pLocalFrame = 0i64;
-        if ( resulta.pLocalFrame )
-          Scaleform::GFx::AS2::FunctionRefBase::SetLocalFrame(v9, resulta.pLocalFrame, resulta.Flags & 1);
-        v10 = resulta.Flags;
-        if ( !(resulta.Flags & 2) )
+        result->V.FunctionValue.pLocalFrame = 0i64;
+        if ( resulta.V.pStringNode )
+          Scaleform::GFx::AS2::FunctionRefBase::SetLocalFrame(
+            &result->V.FunctionValue,
+            (Scaleform::GFx::AS2::LocalFrame *)resulta.V.pStringNode,
+            *(_BYTE *)(&resulta.NV + 1) & 1);
+        v9 = *((_BYTE *)&resulta.NV + 16);
+        if ( (*(_BYTE *)(&resulta.NV + 1) & 2) == 0 )
         {
-          v11 = resulta.Function;
-          if ( resulta.Function )
+          v10 = *(Scaleform::GFx::AS2::RefCountBaseGC<323> **)&resulta.T.Type;
+          if ( *(_QWORD *)&resulta.T.Type )
           {
-            v12 = resulta.Function->RefCount;
-            if ( v12 & 0x3FFFFFF )
+            v11 = *(_DWORD *)(*(_QWORD *)&resulta.T.Type + 24i64);
+            if ( (v11 & 0x3FFFFFF) != 0 )
             {
-              resulta.Function->RefCount = v12 - 1;
-              Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v11->vfptr);
-              v10 = resulta.Flags;
+              *(_DWORD *)(*(_QWORD *)&resulta.T.Type + 24i64) = v11 - 1;
+              Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v10);
+              v9 = *((_BYTE *)&resulta.NV + 16);
             }
           }
         }
-        resulta.Function = 0i64;
-        if ( !(v10 & 1) )
+        *(_QWORD *)&resulta.T.Type = 0i64;
+        if ( (v9 & 1) == 0 )
         {
-          v13 = resulta.pLocalFrame;
-          if ( resulta.pLocalFrame )
+          pStringNode = resulta.V.pStringNode;
+          if ( resulta.V.pStringNode )
           {
-            v14 = resulta.pLocalFrame->RefCount;
-            if ( v14 & 0x3FFFFFF )
+            RefCount = resulta.V.pStringNode->RefCount;
+            if ( (RefCount & 0x3FFFFFF) != 0 )
             {
-              resulta.pLocalFrame->RefCount = v14 - 1;
-              Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v13->vfptr);
+              resulta.V.pStringNode->RefCount = RefCount - 1;
+              Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)pStringNode);
             }
           }
         }
-        resulta.pLocalFrame = 0i64;
-        return v5;
+        resulta.V.pStringNode = 0i64;
+        return result;
       }
-      v15 = resulta.Flags;
-      if ( !(resulta.Flags & 2) )
+      *(_QWORD *)&resulta.T.Type = 0i64;
+      if ( (*(_BYTE *)(&resulta.NV + 1) & 1) == 0 )
       {
-        v16 = resulta.Function;
-        if ( resulta.Function )
+        v14 = resulta.V.pStringNode;
+        if ( resulta.V.pStringNode )
         {
-          v17 = resulta.Function->RefCount;
-          if ( v17 & 0x3FFFFFF )
+          v15 = resulta.V.pStringNode->RefCount;
+          if ( (v15 & 0x3FFFFFF) != 0 )
           {
-            resulta.Function->RefCount = v17 - 1;
-            Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v16->vfptr);
-            v15 = resulta.Flags;
+            resulta.V.pStringNode->RefCount = v15 - 1;
+            Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)v14);
           }
         }
       }
-      resulta.Function = 0i64;
-      if ( !(v15 & 1) )
-      {
-        v18 = resulta.pLocalFrame;
-        if ( resulta.pLocalFrame )
-        {
-          v19 = resulta.pLocalFrame->RefCount;
-          if ( v19 & 0x3FFFFFF )
-          {
-            resulta.pLocalFrame->RefCount = v19 - 1;
-            Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v18->vfptr);
-          }
-        }
-      }
-      resulta.pLocalFrame = 0i64;
+      resulta.V.pStringNode = 0i64;
     }
-    Scaleform::GFx::AS2::Value::Value(v5, v6, (__int64)v5);
-    return v5;
+    Scaleform::GFx::AS2::Value::Value(result, this);
+    return result;
   }
-  v35.T.Type = 0;
-  v20 = Scaleform::GFx::AS2::Value::ToObjectInterface(v6, penv);
-  v21 = (Scaleform::GFx::AS2::ObjectInterface *)v20;
-  if ( v4
-    && v20
-    && ((unsigned __int8 (__fastcall *)(Scaleform::GFx::AS2::ObjectInterfaceVtbl **, Scaleform::GFx::AS2::ASStringContext *, volatile int *, Scaleform::GFx::AS2::Value *, _DWORD))(*v20)->GetMemberRaw)(
-         v20,
-         &v4->StringContext,
-         &v4->StringContext.pContext->pMovieRoot->pASMovieRoot.pObject[25].RefCount,
-         &v35,
+  v31.T.Type = 0;
+  v16 = Scaleform::GFx::AS2::Value::ToObjectInterface(this, penv);
+  v17 = v16;
+  if ( penv
+    && v16
+    && ((unsigned __int8 (__fastcall *)(Scaleform::GFx::AS2::ObjectInterface *, Scaleform::GFx::AS2::ASStringContext *, volatile int *, Scaleform::GFx::AS2::Value *, _DWORD))v16->vfptr->GetMemberRaw)(
+         v16,
+         &penv->StringContext,
+         &penv->StringContext.pContext->pMovieRoot->pASMovieRoot.pObject[25].RefCount,
+         &v31,
          0) )
   {
     v.T.Type = 0;
-    v22 = v4->FuncCallNestingLevel;
-    v4->FuncCallNestingLevel = v22 + 1;
-    if ( v22 < 0xFFu )
+    FuncCallNestingLevel = penv->FuncCallNestingLevel;
+    penv->FuncCallNestingLevel = FuncCallNestingLevel + 1;
+    if ( FuncCallNestingLevel < 0xFFu )
     {
-      Scaleform::GFx::AS2::Value::ToFunction(&v35, &resulta, v4);
-      if ( resulta.Function )
+      Scaleform::GFx::AS2::Value::ToFunction(&v31, (Scaleform::GFx::AS2::FunctionRef *)&resulta, penv);
+      if ( *(_QWORD *)&resulta.T.Type )
       {
-        v36.vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>Vtbl *)&Scaleform::GFx::AS2::FnCall::`vftable;
-        v36.Result = &v;
-        v36.ThisPtr = v21;
-        v36.ThisFunctionRef.Flags = 0;
-        v36.ThisFunctionRef.Function = 0i64;
-        v36.ThisFunctionRef.pLocalFrame = 0i64;
-        v36.Env = v4;
-        *(_QWORD *)&v36.NArgs = 0i64;
-        ((void (__fastcall *)(Scaleform::GFx::AS2::FunctionObject *, Scaleform::GFx::AS2::FnCall *, Scaleform::GFx::AS2::LocalFrame *, _QWORD))resulta.Function->vfptr[3].Finalize_GC)(
-          resulta.Function,
-          &v36,
-          resulta.pLocalFrame,
+        v32.vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>Vtbl *)&Scaleform::GFx::AS2::FnCall::`vftable;
+        v32.Result = &v;
+        v32.ThisPtr = v17;
+        memset(&v32.ThisFunctionRef, 0, 17);
+        v32.Env = penv;
+        *(_QWORD *)&v32.NArgs = 0i64;
+        (*(void (__fastcall **)(_QWORD, Scaleform::GFx::AS2::FnCall *, Scaleform::GFx::ASStringNode *, _QWORD))(**(_QWORD **)&resulta.T.Type + 80i64))(
+          *(_QWORD *)&resulta.T.Type,
+          &v32,
+          resulta.V.pStringNode,
           0i64);
-        Scaleform::GFx::AS2::FnCall::~FnCall(&v36);
+        Scaleform::GFx::AS2::FnCall::~FnCall(&v32);
       }
-      v23 = resulta.Flags;
-      if ( !(resulta.Flags & 2) )
+      v19 = *((_BYTE *)&resulta.NV + 16);
+      if ( (*(_BYTE *)(&resulta.NV + 1) & 2) == 0 )
       {
-        v24 = resulta.Function;
-        if ( resulta.Function )
+        v20 = *(Scaleform::GFx::AS2::RefCountBaseGC<323> **)&resulta.T.Type;
+        if ( *(_QWORD *)&resulta.T.Type )
         {
-          v25 = resulta.Function->RefCount;
-          if ( v25 & 0x3FFFFFF )
+          v21 = *(_DWORD *)(*(_QWORD *)&resulta.T.Type + 24i64);
+          if ( (v21 & 0x3FFFFFF) != 0 )
           {
-            resulta.Function->RefCount = v25 - 1;
-            Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v24->vfptr);
-            v23 = resulta.Flags;
+            *(_DWORD *)(*(_QWORD *)&resulta.T.Type + 24i64) = v21 - 1;
+            Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v20);
+            v19 = *((_BYTE *)&resulta.NV + 16);
           }
         }
       }
-      resulta.Function = 0i64;
-      if ( !(v23 & 1) )
+      *(_QWORD *)&resulta.T.Type = 0i64;
+      if ( (v19 & 1) == 0 )
       {
-        v26 = resulta.pLocalFrame;
-        if ( resulta.pLocalFrame )
+        v22 = resulta.V.pStringNode;
+        if ( resulta.V.pStringNode )
         {
-          v27 = resulta.pLocalFrame->RefCount;
-          if ( v27 & 0x3FFFFFF )
+          v23 = resulta.V.pStringNode->RefCount;
+          if ( (v23 & 0x3FFFFFF) != 0 )
           {
-            resulta.pLocalFrame->RefCount = v27 - 1;
-            Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v26->vfptr);
+            resulta.V.pStringNode->RefCount = v23 - 1;
+            Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)v22);
           }
         }
       }
-      resulta.pLocalFrame = 0i64;
+      resulta.V.pStringNode = 0i64;
     }
-    --v4->FuncCallNestingLevel;
-    Scaleform::GFx::AS2::Value::Value(v5, &v, (__int64)v5);
+    --penv->FuncCallNestingLevel;
+    Scaleform::GFx::AS2::Value::Value(result, &v);
     if ( v.T.Type < 5u )
-      goto LABEL_55;
-    v28 = &v;
+      goto LABEL_51;
+    p_v = &v;
   }
   else
   {
-    LOBYTE(resulta.Function) = 0;
-    if ( v6->T.Type == 7 && v6->V.pStringNode )
+    resulta.T.Type = 0;
+    if ( this->T.Type == 7 && this->V.pStringNode )
     {
-      LOBYTE(resulta.Function) = 5;
-      resulta.pLocalFrame = (Scaleform::GFx::AS2::LocalFrame *)Scaleform::GFx::AS2::Value::GetCharacterNamePath(v6, v4)->pNode;
-      ++resulta.pLocalFrame->RefCount;
+      resulta.T.Type = 5;
+      resulta.NV.8 = ($B8BD913BABC9324639AA48504BEFB2FC)Scaleform::GFx::AS2::Value::GetCharacterNamePath(this, penv)->pNode;
+      ++resulta.V.pStringNode->RefCount;
     }
     else
     {
-      if ( v6->T.Type == 6
-        && (v29 = v6->V.pStringNode) != 0i64
-        && (v30 = (const char *)(*(__int64 (__fastcall **)(unsigned int *, Scaleform::GFx::AS2::Environment *))(*(_QWORD *)&v29->Size + 8i64))(
-                                  &v29->Size,
-                                  v4)) != 0i64 )
+      if ( this->T.Type == 6
+        && (v25 = this->V.pStringNode) != 0i64
+        && (v26 = (const char *)(*(__int64 (__fastcall **)(unsigned int *, Scaleform::GFx::AS2::Environment *))(*(_QWORD *)&v25->Size + 8i64))(
+                                  &v25->Size,
+                                  penv)) != 0i64 )
       {
-        LOBYTE(resulta.Function) = 5;
-        resulta.pLocalFrame = (Scaleform::GFx::AS2::LocalFrame *)Scaleform::GFx::AS2::Environment::CreateString(
-                                                                   v4,
-                                                                   &v39,
-                                                                   v30)->pNode;
-        ++resulta.pLocalFrame->RefCount;
+        resulta.T.Type = 5;
+        resulta.NV.8 = ($B8BD913BABC9324639AA48504BEFB2FC)Scaleform::GFx::AS2::Environment::CreateString(
+                                                            penv,
+                                                            &v35,
+                                                            v26)->pNode;
+        ++resulta.V.pStringNode->RefCount;
       }
       else
       {
-        LOBYTE(resulta.Function) = 5;
-        resulta.pLocalFrame = (Scaleform::GFx::AS2::LocalFrame *)Scaleform::GFx::AS2::Value::ToString(v6, &v39, v4, -1)->pNode;
-        ++resulta.pLocalFrame->RefCount;
+        resulta.T.Type = 5;
+        resulta.NV.8 = ($B8BD913BABC9324639AA48504BEFB2FC)Scaleform::GFx::AS2::Value::ToString(this, &v35, penv, -1)->pNode;
+        ++resulta.V.pStringNode->RefCount;
       }
-      v31 = v39.pNode;
-      v32 = v39.pNode->RefCount == 1;
-      --v31->RefCount;
-      if ( v32 )
-        Scaleform::GFx::ASStringNode::ReleaseNode(v31);
+      pNode = v35.pNode;
+      if ( v35.pNode->RefCount-- == 1 )
+        Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
     }
-    Scaleform::GFx::AS2::Value::Value(v5, (Scaleform::GFx::AS2::Value *)&resulta, (__int64)v5);
-    if ( LOBYTE(resulta.Function) < 5u )
-      goto LABEL_55;
-    v28 = (Scaleform::GFx::AS2::Value *)&resulta;
+    Scaleform::GFx::AS2::Value::Value(result, &resulta);
+    if ( resulta.T.Type < 5u )
+      goto LABEL_51;
+    p_v = &resulta;
   }
-  Scaleform::GFx::AS2::Value::DropRefs(v28);
-LABEL_55:
-  if ( v35.T.Type >= 5u )
-    Scaleform::GFx::AS2::Value::DropRefs(&v35);
-  return v5;
+  Scaleform::GFx::AS2::Value::DropRefs(p_v);
+LABEL_51:
+  if ( v31.T.Type >= 5u )
+    Scaleform::GFx::AS2::Value::DropRefs(&v31);
+  return result;
 }
 
 // File Line: 1385
 // RVA: 0x6F4E50
-char __fastcall Scaleform::GFx::AS2::Value::GetPropertyValue(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::Environment *penv, Scaleform::GFx::AS2::ObjectInterface *pthis, Scaleform::GFx::AS2::Value *value)
+char __fastcall Scaleform::GFx::AS2::Value::GetPropertyValue(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::Environment *penv,
+        Scaleform::GFx::AS2::ObjectInterface *pthis,
+        Scaleform::GFx::AS2::Value *value)
 {
-  Scaleform::GFx::AS2::Value *v4; // rdi
-  Scaleform::GFx::AS2::Environment *v5; // rbx
-  Scaleform::GFx::AS2::Value v; // [rsp+28h] [rbp-70h]
-  Scaleform::GFx::AS2::FnCall v8; // [rsp+48h] [rbp-50h]
+  Scaleform::GFx::AS2::Value v; // [rsp+28h] [rbp-70h] BYREF
+  Scaleform::GFx::AS2::FnCall v8; // [rsp+48h] [rbp-50h] BYREF
 
-  v4 = value;
-  v5 = penv;
   if ( this->T.Type != 9 || !penv )
     return 0;
   if ( !*(_QWORD *)&this->V.pStringNode->Size )
   {
-    if ( ((unsigned __int8 (__fastcall *)(Scaleform::GFx::AS2::Environment *, Scaleform::GFx::AS2::Environment *, Scaleform::GFx::AS2::ObjectInterface *))penv->vfptr->IsVerboseActionErrors)(
-           penv,
-           penv,
-           pthis) )
-    {
-      Scaleform::GFx::AS2::Environment::LogScriptError(v5, "Getter method is null.");
-    }
+    if ( penv->vfptr->IsVerboseActionErrors(penv) )
+      Scaleform::GFx::AS2::Environment::LogScriptError(penv, "Getter method is null.");
     return 0;
   }
   v.T.Type = 0;
   v8.vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>Vtbl *)&Scaleform::GFx::AS2::FnCall::`vftable;
   v8.Result = &v;
   v8.ThisPtr = pthis;
-  v8.ThisFunctionRef.Flags = 0;
-  v8.ThisFunctionRef.Function = 0i64;
-  v8.ThisFunctionRef.pLocalFrame = 0i64;
+  memset(&v8.ThisFunctionRef, 0, 17);
   v8.Env = penv;
   *(_QWORD *)&v8.NArgs = 0i64;
-  (*(void (__fastcall **)(_QWORD, Scaleform::GFx::AS2::FnCall *, const char *, _QWORD, signed __int64))(**(_QWORD **)&this->V.pStringNode->Size + 80i64))(
+  (*(void (__fastcall **)(_QWORD, Scaleform::GFx::AS2::FnCall *, const char *, _QWORD, __int64))(**(_QWORD **)&this->V.pStringNode->Size
+                                                                                               + 80i64))(
     *(_QWORD *)&this->V.pStringNode->Size,
     &v8,
     this->V.pStringNode[1].pData,
     0i64,
     -2i64);
   Scaleform::GFx::AS2::FnCall::~FnCall(&v8);
-  Scaleform::GFx::AS2::Value::operator=(v4, &v, (__int64)v4);
+  Scaleform::GFx::AS2::Value::operator=(value, &v);
   if ( v.T.Type >= 5u )
     Scaleform::GFx::AS2::Value::DropRefs(&v);
   return 1;
@@ -2608,242 +2451,222 @@ char __fastcall Scaleform::GFx::AS2::Value::GetPropertyValue(Scaleform::GFx::AS2
 
 // File Line: 1405
 // RVA: 0x71AE70
-void __fastcall Scaleform::GFx::AS2::Value::SetPropertyValue(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::Environment *penv, Scaleform::GFx::AS2::ObjectInterface *pthis, Scaleform::GFx::AS2::Value *val)
+void __fastcall Scaleform::GFx::AS2::Value::SetPropertyValue(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::Environment *penv,
+        Scaleform::GFx::AS2::ObjectInterface *pthis,
+        Scaleform::GFx::AS2::Value *val)
 {
-  Scaleform::GFx::AS2::Value *v4; // rbp
-  Scaleform::GFx::AS2::ObjectInterface *v5; // r14
-  Scaleform::GFx::AS2::Environment *v6; // rdi
-  Scaleform::GFx::AS2::Value *v7; // rsi
-  Scaleform::GFx::AS2::Value *v8; // rcx
+  Scaleform::GFx::AS2::Value *pCurrent; // rcx
   int v9; // edx
   Scaleform::GFx::AS2::Value *v10; // rcx
   Scaleform::GFx::AS2::Value *v11; // [rsp+28h] [rbp-80h]
-  Scaleform::GFx::AS2::Value v12; // [rsp+30h] [rbp-78h]
-  Scaleform::GFx::AS2::FnCall v13; // [rsp+50h] [rbp-58h]
+  Scaleform::GFx::AS2::Value v12; // [rsp+30h] [rbp-78h] BYREF
+  Scaleform::GFx::AS2::FnCall v13; // [rsp+50h] [rbp-58h] BYREF
 
-  v4 = val;
-  v5 = pthis;
-  v6 = penv;
-  v7 = this;
   if ( this->T.Type == 9 && penv )
   {
     if ( this->V.pStringNode[1].pLower )
     {
       v12.T.Type = 0;
-      ++penv->Stack.pCurrent;
-      if ( penv->Stack.pCurrent >= penv->Stack.pPageEnd )
+      if ( ++penv->Stack.pCurrent >= penv->Stack.pPageEnd )
         Scaleform::GFx::AS2::PagedStack<Scaleform::GFx::AS2::Value,32>::PushPage(&penv->Stack);
-      v8 = v6->Stack.pCurrent;
-      v11 = v6->Stack.pCurrent;
-      if ( v8 )
-        Scaleform::GFx::AS2::Value::Value(v8, v4, (__int64)v6);
-      v9 = ((_QWORD)((char *)v6->Stack.pCurrent - (char *)v6->Stack.pPageStart) >> 5)
-         + 32 * v6->Stack.Pages.Data.Size
-         - 32;
+      pCurrent = penv->Stack.pCurrent;
+      v11 = pCurrent;
+      if ( pCurrent )
+        Scaleform::GFx::AS2::Value::Value(pCurrent, val);
+      v9 = penv->Stack.pCurrent - penv->Stack.pPageStart + 32 * penv->Stack.Pages.Data.Size - 32;
       v13.vfptr = (Scaleform::GFx::LogBase<Scaleform::GFx::AS2::FnCall>Vtbl *)&Scaleform::GFx::AS2::FnCall::`vftable;
       v13.Result = &v12;
-      v13.ThisPtr = v5;
-      v13.ThisFunctionRef.Flags = 0;
-      v13.ThisFunctionRef.Function = 0i64;
-      v13.ThisFunctionRef.pLocalFrame = 0i64;
-      v13.Env = v6;
+      v13.ThisPtr = pthis;
+      memset(&v13.ThisFunctionRef, 0, 17);
+      v13.Env = penv;
       v13.NArgs = 1;
       v13.FirstArgBottomIndex = v9;
-      (*((void (__fastcall **)(Scaleform::GFx::ASStringNode *, Scaleform::GFx::AS2::FnCall *, _QWORD, _QWORD, signed __int64, Scaleform::GFx::AS2::Value *))v7->V.pStringNode[1].pLower->pData
+      (*((void (__fastcall **)(Scaleform::GFx::ASStringNode *, Scaleform::GFx::AS2::FnCall *, _QWORD, _QWORD, __int64, Scaleform::GFx::AS2::Value *))this->V.pStringNode[1].pLower->$09FB520FFAA77E97CDD800E2BDD737E6::pData
        + 10))(
-        v7->V.pStringNode[1].pLower,
+        this->V.pStringNode[1].pLower,
         &v13,
-        *(_QWORD *)&v7->V.pStringNode[1].RefCount,
+        *(_QWORD *)&this->V.pStringNode[1].RefCount,
         0i64,
         -2i64,
         v11);
       Scaleform::GFx::AS2::FnCall::~FnCall(&v13);
-      v10 = v6->Stack.pCurrent;
+      v10 = penv->Stack.pCurrent;
       if ( v10->T.Type >= 5u )
         Scaleform::GFx::AS2::Value::DropRefs(v10);
-      --v6->Stack.pCurrent;
-      if ( v6->Stack.pCurrent < v6->Stack.pPageStart )
-        Scaleform::GFx::AS2::PagedStack<Scaleform::GFx::AS2::Value,32>::PopPage(&v6->Stack);
+      if ( --penv->Stack.pCurrent < penv->Stack.pPageStart )
+        Scaleform::GFx::AS2::PagedStack<Scaleform::GFx::AS2::Value,32>::PopPage(&penv->Stack);
       if ( v12.T.Type >= 5u )
         Scaleform::GFx::AS2::Value::DropRefs(&v12);
     }
-    else if ( penv->vfptr->IsVerboseActionErrors((Scaleform::GFx::LogBase<Scaleform::GFx::AS2::Environment> *)penv) )
+    else if ( penv->vfptr->IsVerboseActionErrors(penv) )
     {
-      Scaleform::GFx::AS2::Environment::LogScriptError(v6, "Setter method is null.");
+      Scaleform::GFx::AS2::Environment::LogScriptError(penv, "Setter method is null.");
     }
   }
 }
 
 // File Line: 1425
 // RVA: 0x6EEDC0
-Scaleform::GFx::ASString *__fastcall Scaleform::GFx::AS2::Value::GetCharacterNamePath(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::Environment *penv)
+Scaleform::GFx::ASString *__fastcall Scaleform::GFx::AS2::Value::GetCharacterNamePath(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::Environment *penv)
 {
-  Scaleform::GFx::AS2::Value *v2; // rbx
-  Scaleform::GFx::ASStringNode *v3; // rcx
-  Scaleform::GFx::AS2::Environment *v4; // rdi
-  Scaleform::GFx::ASString *result; // rax
+  Scaleform::GFx::ASStringNode *pStringNode; // rcx
 
-  v2 = this;
-  v3 = this->V.pStringNode;
-  v4 = penv;
-  if ( v3
+  pStringNode = this->V.pStringNode;
+  if ( pStringNode
     && Scaleform::GFx::CharacterHandle::ResolveCharacter(
-         (Scaleform::GFx::CharacterHandle *)v3,
+         (Scaleform::GFx::CharacterHandle *)pStringNode,
          penv->Target->pASRoot->pMovieImpl) )
   {
-    result = (Scaleform::GFx::ASString *)&v2->V.pStringNode->RefCount;
+    return (Scaleform::GFx::ASString *)&this->V.pStringNode->RefCount;
   }
   else
   {
-    result = (Scaleform::GFx::ASString *)&v4->StringContext.pContext->pMovieRoot->pASMovieRoot.pObject[7].AVMVersion;
+    return (Scaleform::GFx::ASString *)&penv->StringContext.pContext->pMovieRoot->pASMovieRoot.pObject[7].AVMVersion;
   }
-  return result;
 }
 
 // File Line: 1434
 // RVA: 0x712120
-Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::Value::ResolveFunctionName(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::FunctionRef *result, Scaleform::GFx::AS2::Environment *penv)
+Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::Value::ResolveFunctionName(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::FunctionRef *result,
+        Scaleform::GFx::AS2::Environment *penv)
 {
-  Scaleform::GFx::AS2::Environment *v3; // rsi
-  Scaleform::GFx::AS2::FunctionRef *v4; // rbx
-  Scaleform::GFx::AS2::Value *v5; // rdi
   Scaleform::GFx::ASStringNode *v6; // rcx
-  Scaleform::GFx::ASStringNode *v7; // rdi
+  Scaleform::GFx::ASStringNode *pStringNode; // rdi
   bool v8; // zf
-  Scaleform::GFx::AS2::GlobalContext::ClassRegEntry *v9; // rax
+  Scaleform::GFx::AS2::FunctionObject *v9; // rax
   Scaleform::GFx::AS2::RefCountBaseGC<323> *v10; // rdx
-  int v11; // eax
-  Scaleform::GFx::AS2::FunctionRef *v12; // rax
-  Scaleform::GFx::ASString functionName; // [rsp+80h] [rbp+18h]
+  unsigned int RefCount; // eax
+  Scaleform::GFx::ASString functionName; // [rsp+80h] [rbp+18h] BYREF
 
-  v3 = penv;
-  v4 = result;
-  v5 = this;
   if ( penv && this->T.Type == 11 )
   {
     v6 = *(Scaleform::GFx::ASStringNode **)&penv->StringContext.pContext->pMovieRoot->pASMovieRoot.pObject[7].AVMVersion;
     functionName.pNode = v6;
     ++v6->RefCount;
-    v7 = v5->V.pStringNode;
-    ++v7->RefCount;
+    pStringNode = this->V.pStringNode;
+    ++pStringNode->RefCount;
     v8 = v6->RefCount-- == 1;
     if ( v8 )
       Scaleform::GFx::ASStringNode::ReleaseNode(v6);
-    functionName.pNode = v7;
-    v9 = Scaleform::GFx::AS2::GlobalContext::ResolveFunctionName(v3->StringContext.pContext, &functionName);
-    v10 = (Scaleform::GFx::AS2::RefCountBaseGC<323> *)v9;
+    functionName.pNode = pStringNode;
+    v9 = (Scaleform::GFx::AS2::FunctionObject *)Scaleform::GFx::AS2::GlobalContext::ResolveFunctionName(
+                                                  penv->StringContext.pContext,
+                                                  &functionName);
+    v10 = v9;
     if ( v9 )
-      LODWORD(v9[1].ResolvedFunc.pObject) = (LODWORD(v9[1].ResolvedFunc.pObject) + 1) & 0x8FFFFFFF;
-    v4->Flags = 0;
-    v4->Function = (Scaleform::GFx::AS2::FunctionObject *)v9;
+      v9->RefCount = (v9->RefCount + 1) & 0x8FFFFFFF;
+    result->Flags = 0;
+    result->Function = v9;
     if ( v9 )
-      LODWORD(v9[1].ResolvedFunc.pObject) = (LODWORD(v9[1].ResolvedFunc.pObject) + 1) & 0x8FFFFFFF;
-    v4->pLocalFrame = 0i64;
+      v9->RefCount = (v9->RefCount + 1) & 0x8FFFFFFF;
+    result->pLocalFrame = 0i64;
     if ( v9 )
     {
-      v11 = (int)v9[1].ResolvedFunc.pObject;
-      if ( v11 & 0x3FFFFFF )
+      RefCount = v9->RefCount;
+      if ( (RefCount & 0x3FFFFFF) != 0 )
       {
-        v10->RefCount = v11 - 1;
+        v10->RefCount = RefCount - 1;
         Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v10);
       }
     }
-    v8 = v7->RefCount-- == 1;
+    v8 = pStringNode->RefCount-- == 1;
     if ( v8 )
-      Scaleform::GFx::ASStringNode::ReleaseNode(v7);
-    v12 = v4;
+      Scaleform::GFx::ASStringNode::ReleaseNode(pStringNode);
+    return result;
   }
   else
   {
     result->Flags = 0;
     result->Function = 0i64;
     result->pLocalFrame = 0i64;
-    v12 = result;
+    return result;
   }
-  return v12;
 }
 
 // File Line: 1447
 // RVA: 0x6E2560
-void __fastcall Scaleform::GFx::AS2::Value::Div(Scaleform::GFx::AS2::Value *this, Scaleform::GFx::AS2::Environment *penv, Scaleform::GFx::AS2::Value *v)
+void __fastcall Scaleform::GFx::AS2::Value::Div(
+        Scaleform::GFx::AS2::Value *this,
+        Scaleform::GFx::AS2::Environment *penv,
+        Scaleform::GFx::AS2::Value *v)
 {
-  Scaleform::GFx::AS2::Value *v3; // rdi
-  Scaleform::GFx::AS2::Environment *v4; // rbx
-  Scaleform::GFx::AS2::Value *v5; // rsi
   double v6; // xmm6_8
   double v7; // xmm0_8
   double v8; // xmm6_8
 
-  v3 = v;
-  v4 = penv;
-  v5 = this;
   v6 = Scaleform::GFx::AS2::Value::ToNumber(this, penv);
-  v7 = Scaleform::GFx::AS2::Value::ToNumber(v3, v4);
-  if ( (*(_QWORD *)&v6 & 0x7FF0000000000000i64) == 9218868437227405312i64 && *(_QWORD *)&v6 & 0xFFFFFFFFFFFFFi64
-    || (*(_QWORD *)&v7 & 0x7FF0000000000000i64) == 9218868437227405312i64 && *(_QWORD *)&v7 & 0xFFFFFFFFFFFFFi64 )
+  v7 = Scaleform::GFx::AS2::Value::ToNumber(v, penv);
+  if ( (*(_QWORD *)&v6 & 0x7FF0000000000000i64) == 0x7FF0000000000000i64 && (*(_QWORD *)&v6 & 0xFFFFFFFFFFFFFi64) != 0
+    || (*(_QWORD *)&v7 & 0x7FF0000000000000i64) == 0x7FF0000000000000i64 && (*(_QWORD *)&v7 & 0xFFFFFFFFFFFFFi64) != 0 )
   {
-    v8 = Scaleform::GFx::NumberUtil::NaN();
+    goto LABEL_8;
   }
-  else if ( v7 == 0.0 )
+  if ( v7 == 0.0 )
   {
     if ( v6 == 0.0 )
     {
+LABEL_8:
       v8 = Scaleform::GFx::NumberUtil::NaN();
+      goto LABEL_13;
     }
-    else if ( v6 < 0.0 )
-    {
+    if ( v6 < 0.0 )
       v8 = Scaleform::GFx::NumberUtil::NEGATIVE_INFINITY();
-    }
     else
-    {
       v8 = Scaleform::GFx::NumberUtil::POSITIVE_INFINITY();
-    }
   }
   else
   {
     v8 = v6 / v7;
   }
-  if ( v5->T.Type >= 5u )
-    Scaleform::GFx::AS2::Value::DropRefs(v5);
-  v5->NV.NumberValue = v8;
-  v5->T.Type = 3;
+LABEL_13:
+  if ( this->T.Type >= 5u )
+    Scaleform::GFx::AS2::Value::DropRefs(this);
+  this->NV.NumberValue = v8;
+  this->T.Type = 3;
 }
 
 // File Line: 1473
 // RVA: 0x6CD8D0
-void __fastcall Scaleform::GFx::AS2::ValueGuard::ValueGuard(Scaleform::GFx::AS2::ValueGuard *this, Scaleform::GFx::AS2::Environment *penv, Scaleform::GFx::AS2::Value *val)
+void __fastcall Scaleform::GFx::AS2::ValueGuard::ValueGuard(
+        Scaleform::GFx::AS2::ValueGuard *this,
+        Scaleform::GFx::AS2::Environment *penv,
+        Scaleform::GFx::AS2::Value *val)
 {
-  Scaleform::GFx::AS2::Value *v3; // rdi
-  Scaleform::GFx::AS2::ValueGuard *v4; // rbx
-  Scaleform::GFx::CharacterHandle *v5; // rcx
+  Scaleform::GFx::ASStringNode *pStringNode; // rcx
   Scaleform::GFx::DisplayObject *v6; // rax
   Scaleform::GFx::InteractiveObject *v7; // rcx
 
-  v3 = val;
-  v4 = this;
   this->pEnv = penv;
-  Scaleform::GFx::AS2::Value::Value(&this->mValue, val, (__int64)val);
-  if ( v3->T.Type == 7 )
+  Scaleform::GFx::AS2::Value::Value(&this->mValue, val);
+  if ( val->T.Type == 7 )
   {
-    if ( v4->pEnv
-      && (v5 = v3->V.pCharHandle) != 0i64
-      && (v6 = Scaleform::GFx::CharacterHandle::ResolveCharacter(v5, v4->pEnv->Target->pASRoot->pMovieImpl)) != 0i64 )
+    if ( this->pEnv
+      && (pStringNode = val->V.pStringNode) != 0i64
+      && (v6 = Scaleform::GFx::CharacterHandle::ResolveCharacter(
+                 (Scaleform::GFx::CharacterHandle *)pStringNode,
+                 this->pEnv->Target->pASRoot->pMovieImpl)) != 0i64 )
     {
       v7 = 0i64;
-      if ( SLOBYTE(v6->Flags) < 0 )
+      if ( SLOBYTE(v6->Scaleform::GFx::DisplayObjectBase::Flags) < 0 )
         v7 = (Scaleform::GFx::InteractiveObject *)v6;
     }
     else
     {
       v7 = 0i64;
     }
-    v4->pChar = v7;
+    this->pChar = v7;
     if ( v7 )
       ++v7->RefCount;
   }
   else
   {
-    v4->pChar = 0i64;
+    this->pChar = 0i64;
   }
 }
 
@@ -2851,39 +2674,37 @@ void __fastcall Scaleform::GFx::AS2::ValueGuard::ValueGuard(Scaleform::GFx::AS2:
 // RVA: 0x6D28A0
 void __fastcall Scaleform::GFx::AS2::ValueGuard::~ValueGuard(Scaleform::GFx::AS2::ValueGuard *this)
 {
-  Scaleform::GFx::AS2::ValueGuard *v1; // rbx
-  Scaleform::GFx::InteractiveObject *v2; // rcx
+  Scaleform::GFx::InteractiveObject *pChar; // rcx
 
-  v1 = this;
-  v2 = this->pChar;
-  if ( v2 )
-    Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v2->vfptr);
-  if ( v1->mValue.T.Type >= 5u )
-    Scaleform::GFx::AS2::Value::DropRefs(&v1->mValue);
+  pChar = this->pChar;
+  if ( pChar )
+    Scaleform::RefCountNTSImpl::Release(pChar);
+  if ( this->mValue.T.Type >= 5u )
+    Scaleform::GFx::AS2::Value::DropRefs(&this->mValue);
 }
 
 // File Line: 1510
 // RVA: 0x6DA880
-Scaleform::GFx::AS2::Value *__fastcall Scaleform::GFx::AS2::FnCall::Arg(Scaleform::GFx::AS2::FnCall *this, int n)
+Scaleform::GFx::AS2::PagedStack<Scaleform::GFx::AS2::Value,32>::Page *__fastcall Scaleform::GFx::AS2::FnCall::Arg(
+        Scaleform::GFx::AS2::FnCall *this,
+        int n)
 {
-  Scaleform::GFx::AS2::Environment *v2; // r8
-  unsigned int v3; // er9
-  Scaleform::GFx::AS2::Value *result; // rax
+  Scaleform::GFx::AS2::Environment *Env; // r8
+  unsigned int v3; // r9d
 
-  v2 = this->Env;
+  Env = this->Env;
   v3 = this->FirstArgBottomIndex - n;
-  if ( v3 > 32 * (LODWORD(v2->Stack.Pages.Data.Size) - 1)
-          + (unsigned int)((_QWORD)((char *)v2->Stack.pCurrent - (char *)v2->Stack.pPageStart) >> 5) )
-    result = 0i64;
+  if ( v3 > 32 * (LODWORD(Env->Stack.Pages.Data.Size) - 1) + (unsigned int)(Env->Stack.pCurrent - Env->Stack.pPageStart) )
+    return 0i64;
   else
-    result = &v2->Stack.Pages.Data.Data[(unsigned __int64)v3 >> 5]->Values[v3 & 0x1F];
-  return result;
+    return (Scaleform::GFx::AS2::PagedStack<Scaleform::GFx::AS2::Value,32>::Page *)((char *)Env->Stack.Pages.Data.Data[(unsigned __int64)v3 >> 5]
+                                                                                  + 32 * (v3 & 0x1F));
 }
 
 // File Line: 1527
 // RVA: 0x7010E0
 __int64 __fastcall Scaleform::GFx::AS2::FnCall::IsVerboseActionErrors(Scaleform::GFx::AS2::FnCall *this)
 {
-  return ((__int64 (*)(void))this->Env->vfptr->IsVerboseActionErrors)();
+  return ((__int64 (__fastcall *)(Scaleform::GFx::AS2::Environment *))this->Env->vfptr->IsVerboseActionErrors)(this->Env);
 }
 

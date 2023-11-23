@@ -28,23 +28,26 @@ hkClass *__fastcall hkpListShapeBreakableMaterial::staticClass()
 
 // File Line: 58
 // RVA: 0xD50E50
-void __fastcall finishLoadedObjecthkpListShapeBreakableMaterial(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpListShapeBreakableMaterial(
+        hkpListShapeBreakableMaterial *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpListShapeBreakableMaterial::hkpListShapeBreakableMaterial);
+  if ( p )
+    hkpListShapeBreakableMaterial::hkpListShapeBreakableMaterial(p, finishing);
 }
 
 // File Line: 64
 // RVA: 0xD50E70
-void __fastcall cleanupLoadedObjecthkpListShapeBreakableMaterial(void *p)
+void __fastcall cleanupLoadedObjecthkpListShapeBreakableMaterial(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 68
 // RVA: 0xD50E80
 hkBaseObjectVtbl *__fastcall getVtablehkpListShapeBreakableMaterial()
 {
-  hkpListShapeBreakableMaterial v1; // [rsp+20h] [rbp-48h]
+  hkpListShapeBreakableMaterial v1; // [rsp+20h] [rbp-48h] BYREF
 
   hkpListShapeBreakableMaterial::hkpListShapeBreakableMaterial(&v1, 0);
   return v1.vfptr;
@@ -61,8 +64,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpListShapeBreakableMaterialTypeInfo
   hkpListShapeBreakableMaterialTypeInfo.m_typeName = "hkpListShapeBreakableMaterial";
   hkpListShapeBreakableMaterialTypeInfo.m_vtable = result;
   hkpListShapeBreakableMaterialTypeInfo.m_scopedName = "!hkpListShapeBreakableMaterial";
-  hkpListShapeBreakableMaterialTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpListShapeBreakableMaterial;
-  hkpListShapeBreakableMaterialTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpListShapeBreakableMaterial;
+  hkpListShapeBreakableMaterialTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpListShapeBreakableMaterial;
+  hkpListShapeBreakableMaterialTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpListShapeBreakableMaterial;
   return result;
 }
 

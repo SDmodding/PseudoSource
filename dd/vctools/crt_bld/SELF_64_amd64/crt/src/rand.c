@@ -15,6 +15,6 @@ __int64 __fastcall rand()
   v0 = getptd();
   v1 = 214013 * v0->_holdrand + 2531011;
   v0->_holdrand = v1;
-  return (v1 >> 16) & 0x7FFF;
+  return HIWORD(v1) & 0x7FFF;
 }
 

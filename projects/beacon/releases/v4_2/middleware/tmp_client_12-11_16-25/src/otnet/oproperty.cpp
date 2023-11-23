@@ -1,112 +1,108 @@
 // File Line: 35
 // RVA: 0xEC5348
-void __fastcall OSuite::ZOProperty::ZOProperty(OSuite::ZOProperty *this, OSuite::ZOEdmProperty *const pEdmProperty, OSuite::ZString *baseUrl)
+void __fastcall OSuite::ZOProperty::ZOProperty(
+        OSuite::ZOProperty *this,
+        OSuite::ZOEdmProperty *const pEdmProperty,
+        OSuite::ZString *baseUrl)
 {
-  OSuite::ZOEdmProperty *v3; // rbx
-  OSuite::ZOProperty *v4; // rdi
-  OSuite::EdmType v5; // eax
+  OSuite::EdmType m_Type; // eax
   OSuite::ZObject *v6; // rdx
   OSuite::ZOProperty **v7; // rax
 
-  v3 = pEdmProperty;
-  v4 = this;
-  OSuite::ZAtomBase::ZAtomBase((OSuite::ZAtomBase *)&this->vfptr, baseUrl);
-  v4->m_bNull = 0;
-  v4->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOProperty::`vftable;
-  v5 = v3->m_Type;
-  v4->m_pEdmProperty = v3;
-  v4->m_Type = v5;
-  OSuite::ZString::ZString(&v4->m_Name, &v3->m_Name);
-  OSuite::ZString::ZString(&v4->m_Value);
-  OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase((OSuite::ZObject *)&v4->m_SubProperties.vfptr, v6);
-  v4->m_SubProperties.m_pList = 0i64;
-  v4->m_SubProperties.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
-  v4->m_SubProperties.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
-  v7 = (OSuite::ZOProperty **)OSuite::ZObject::malloc((OSuite::ZObject *)&v4->m_SubProperties.vfptr, 0x80ui64, 0i64);
-  v4->m_SubProperties.m_nTop = 0i64;
-  v4->m_SubProperties.m_nSize = 16i64;
-  v4->m_SubProperties.m_pList = v7;
+  OSuite::ZAtomBase::ZAtomBase(this, baseUrl);
+  this->m_bNull = 0;
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOProperty::`vftable;
+  m_Type = pEdmProperty->m_Type;
+  this->m_pEdmProperty = pEdmProperty;
+  this->m_Type = m_Type;
+  OSuite::ZString::ZString(&this->m_Name, &pEdmProperty->m_Name);
+  OSuite::ZString::ZString(&this->m_Value);
+  OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase(&this->m_SubProperties, v6);
+  this->m_SubProperties.m_pList = 0i64;
+  this->m_SubProperties.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+  this->m_SubProperties.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
+  v7 = (OSuite::ZOProperty **)OSuite::ZObject::malloc(&this->m_SubProperties, 0x80ui64, 0i64);
+  this->m_SubProperties.m_nTop = 0i64;
+  this->m_SubProperties.m_nSize = 16i64;
+  this->m_SubProperties.m_pList = v7;
 }
 
 // File Line: 44
 // RVA: 0xEC5288
-void __fastcall OSuite::ZOProperty::ZOProperty(OSuite::ZOProperty *this, OSuite::ZString *name, OSuite::ZString *baseUrl)
+void __fastcall OSuite::ZOProperty::ZOProperty(
+        OSuite::ZOProperty *this,
+        OSuite::ZString *name,
+        OSuite::ZString *baseUrl)
 {
-  OSuite::ZString *v3; // rbx
-  OSuite::ZOProperty *v4; // rsi
   OSuite::ZObject *v5; // rdx
   OSuite::ZOProperty **v6; // rax
 
-  v3 = name;
-  v4 = this;
-  OSuite::ZAtomBase::ZAtomBase((OSuite::ZAtomBase *)&this->vfptr, baseUrl);
-  v4->m_pEdmProperty = 0i64;
-  v4->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOProperty::`vftable;
-  v4->m_bNull = 0;
-  OSuite::ZString::ZString(&v4->m_Name, v3);
-  OSuite::ZString::ZString(&v4->m_Value);
-  OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase((OSuite::ZObject *)&v4->m_SubProperties.vfptr, v5);
-  v4->m_SubProperties.m_pList = 0i64;
-  v4->m_SubProperties.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
-  v4->m_SubProperties.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
-  v6 = (OSuite::ZOProperty **)OSuite::ZObject::malloc((OSuite::ZObject *)&v4->m_SubProperties.vfptr, 0x80ui64, 0i64);
-  v4->m_SubProperties.m_nTop = 0i64;
-  v4->m_SubProperties.m_pList = v6;
-  v4->m_SubProperties.m_nSize = 16i64;
-  v4->m_Type = OSuite::deduceEdmTypeFromName(&v4->m_Name);
+  OSuite::ZAtomBase::ZAtomBase(this, baseUrl);
+  this->m_pEdmProperty = 0i64;
+  this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOProperty::`vftable;
+  this->m_bNull = 0;
+  OSuite::ZString::ZString(&this->m_Name, name);
+  OSuite::ZString::ZString(&this->m_Value);
+  OSuite::ZRedBlackTreeBase::ZElementBase::ZElementBase(&this->m_SubProperties, v5);
+  this->m_SubProperties.m_pList = 0i64;
+  this->m_SubProperties.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+  this->m_SubProperties.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
+  v6 = (OSuite::ZOProperty **)OSuite::ZObject::malloc(&this->m_SubProperties, 0x80ui64, 0i64);
+  this->m_SubProperties.m_nTop = 0i64;
+  this->m_SubProperties.m_pList = v6;
+  this->m_SubProperties.m_nSize = 16i64;
+  this->m_Type = OSuite::deduceEdmTypeFromName(&this->m_Name);
 }
 
 // File Line: 51
 // RVA: 0xEC53F8
 void __fastcall OSuite::ZOProperty::~ZOProperty(OSuite::ZOProperty *this)
 {
-  OSuite::ZObject *v1; // rdi
-  OSuite::ZOProperty *v2; // r14
-  unsigned __int64 v3; // rsi
-  OSuite::ZListBase *v4; // rbx
+  OSuite::TList<OSuite::ZOProperty *> *p_m_SubProperties; // rdi
+  unsigned __int64 m_nIndex; // rsi
+  OSuite::ZListBase *m_pListBase; // rbx
   unsigned __int64 v5; // rbp
-  void (__fastcall ***v6)(_QWORD, signed __int64); // rcx
-  OSuite::ZObjectVtbl *v7; // rdx
-  OSuite::ZObjectVtbl *v8; // rax
-  OSuite::ZObjectVtbl *v9; // rdx
-  OSuite::ZListBase::ZListIteratorBase v10; // [rsp+20h] [rbp-38h]
+  void (__fastcall ***v6)(_QWORD, __int64); // rcx
+  OSuite::ZOProperty **m_pList; // rdx
+  OSuite::ZOProperty **v8; // rax
+  OSuite::ZOProperty **v9; // rdx
+  OSuite::ZListBase::ZListIteratorBase v10; // [rsp+20h] [rbp-38h] BYREF
 
   v10.m_pListBase = 0i64;
-  v1 = (OSuite::ZObject *)&this->m_SubProperties.vfptr;
+  p_m_SubProperties = &this->m_SubProperties;
   this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZOProperty::`vftable;
-  v2 = this;
-  OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(&v10, (OSuite::ZListBase *)&this->m_SubProperties.vfptr);
+  OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(&v10, &this->m_SubProperties);
   v10.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   while ( !OSuite::ZListBase::ZListIteratorBase::AtEnd(&v10) )
   {
     OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)v10.m_pListBase);
-    v3 = v10.m_nIndex;
-    v4 = v10.m_pListBase;
+    m_nIndex = v10.m_nIndex;
+    m_pListBase = v10.m_pListBase;
     v5 = v10.m_nIndex + 1;
     OSuite::TList<OSuite::ZONavigationProperty *>::Grow(
       (OSuite::TList<OSuite::ZRedBlackTreeBase::ZElementBase *> *)v10.m_pListBase,
       v10.m_nIndex + 1);
-    if ( v3 >= v4->m_nTop )
-      v4->m_nTop = v5;
-    v6 = *(void (__fastcall ****)(_QWORD, signed __int64))(v4[1].m_nSize + 8 * v3);
+    if ( m_nIndex >= m_pListBase->m_nTop )
+      m_pListBase->m_nTop = v5;
+    v6 = *(void (__fastcall ****)(_QWORD, __int64))(m_pListBase[1].m_nSize + 8 * m_nIndex);
     if ( v6 )
       (**v6)(v6, 1i64);
     OSuite::ZListBase::ZListIteratorBase::Next(&v10);
   }
-  v7 = v1[4].vfptr;
+  m_pList = p_m_SubProperties->m_pList;
   v10.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
-  OSuite::ZObject::free(v1, v7);
-  v8 = (OSuite::ZObjectVtbl *)OSuite::ZObject::malloc(v1, 0x80ui64, 0i64);
-  v1[2].vfptr = 0i64;
-  v1[1].vfptr = (OSuite::ZObjectVtbl *)16;
-  v1[4].vfptr = v8;
-  v9 = v1[4].vfptr;
-  v1->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
-  v1[3].vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
-  OSuite::ZObject::free(v1, v9);
-  OSuite::ZString::~ZString(&v2->m_Value);
-  OSuite::ZString::~ZString(&v2->m_Name);
-  OSuite::ZAtomBase::~ZAtomBase((OSuite::ZAtomBase *)&v2->vfptr);
+  OSuite::ZObject::free(p_m_SubProperties, m_pList);
+  v8 = (OSuite::ZOProperty **)OSuite::ZObject::malloc(p_m_SubProperties, 0x80ui64, 0i64);
+  p_m_SubProperties->m_nTop = 0i64;
+  p_m_SubProperties->m_nSize = 16i64;
+  p_m_SubProperties->m_pList = v8;
+  v9 = p_m_SubProperties->m_pList;
+  p_m_SubProperties->OSuite::ZListBase::OSuite::ZObject::vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuitePrivate::ZPlayerConsumableData::ZRequest *>::`vftable{for `OSuite::ZListBase};
+  p_m_SubProperties->OSuite::IHashable::vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonObject *>::`vftable{for `OSuite::IHashable};
+  OSuite::ZObject::free(p_m_SubProperties, v9);
+  OSuite::ZString::~ZString(&this->m_Value);
+  OSuite::ZString::~ZString(&this->m_Name);
+  OSuite::ZAtomBase::~ZAtomBase(this);
 }
 
 // File Line: 61
@@ -120,54 +116,52 @@ __int64 __fastcall OSuite::ZOProperty::Type(OSuite::ZOProperty *this)
 // RVA: 0xEC5EAC
 void __fastcall OSuite::ZOProperty::ResetToDefault(OSuite::ZOProperty *this)
 {
-  OSuite::EdmType v1; // edx
-  OSuite::ZOProperty *v2; // rbx
-  int v3; // edx
-  int v4; // edx
-  int v5; // edx
+  OSuite::EdmType m_Type; // edx
+  __int32 v3; // edx
+  __int32 v4; // edx
+  __int32 v5; // edx
   int v6; // edx
   OSuite::ZDateTime *v7; // rax
   OSuite::ZString *v8; // rax
   OSuite::ZString *v9; // rax
-  OSuite::ZDateTime *v10; // rcx
+  OSuite::ZDateTime *p_result; // rcx
   OSuite::ZDateTime *v11; // rax
   OSuite::ZString *v12; // rax
-  OSuite::ZString *v13; // rcx
-  int v14; // edx
-  int v15; // edx
-  int v16; // edx
+  OSuite::ZString *p_that; // rcx
+  __int32 v14; // edx
+  __int32 v15; // edx
+  __int32 v16; // edx
   int v17; // edx
-  unsigned __int64 v18; // rdi
-  OSuite::ZListBase *v19; // rbx
+  unsigned __int64 m_nIndex; // rdi
+  OSuite::ZListBase *m_pListBase; // rbx
   unsigned __int64 v20; // rsi
   OSuite::ZDateTime *v21; // rax
   OSuite::ZString *v22; // rax
   OSuite::ZString *v23; // rax
-  OSuite::ZString v24; // [rsp+20h] [rbp-D8h]
-  OSuite::ZUuid v25; // [rsp+38h] [rbp-C0h]
-  OSuite::ZString v26; // [rsp+58h] [rbp-A0h]
-  OSuite::ZString v27; // [rsp+70h] [rbp-88h]
-  OSuite::ZString that; // [rsp+98h] [rbp-60h]
-  OSuite::ZString v29; // [rsp+B0h] [rbp-48h]
-  OSuite::ZString v30; // [rsp+C8h] [rbp-30h]
-  OSuite::ZDateTime v31; // [rsp+E0h] [rbp-18h]
-  OSuite::ZString v32; // [rsp+F8h] [rbp+0h]
-  OSuite::ZDateTime result; // [rsp+110h] [rbp+18h]
-  OSuite::ZDateTime v34; // [rsp+128h] [rbp+30h]
-  OSuite::ZString v35; // [rsp+140h] [rbp+48h]
-  OSuite::ZString v36; // [rsp+158h] [rbp+60h]
-  OSuite::ZString v37; // [rsp+170h] [rbp+78h]
-  OSuite::ZListBase::ZListIteratorBase v38; // [rsp+188h] [rbp+90h]
+  OSuite::ZString v24; // [rsp+20h] [rbp-D8h] BYREF
+  OSuite::ZUuid v25; // [rsp+38h] [rbp-C0h] BYREF
+  OSuite::ZString v26; // [rsp+58h] [rbp-A0h] BYREF
+  OSuite::ZString v27; // [rsp+70h] [rbp-88h] BYREF
+  OSuite::ZString that; // [rsp+98h] [rbp-60h] BYREF
+  OSuite::ZString v29; // [rsp+B0h] [rbp-48h] BYREF
+  OSuite::ZString v30; // [rsp+C8h] [rbp-30h] BYREF
+  OSuite::ZDateTime v31; // [rsp+E0h] [rbp-18h] BYREF
+  OSuite::ZString v32; // [rsp+F8h] [rbp+0h] BYREF
+  OSuite::ZDateTime result; // [rsp+110h] [rbp+18h] BYREF
+  OSuite::ZDateTime v34; // [rsp+128h] [rbp+30h] BYREF
+  OSuite::ZString v35; // [rsp+140h] [rbp+48h] BYREF
+  OSuite::ZString v36; // [rsp+158h] [rbp+60h] BYREF
+  OSuite::ZString v37; // [rsp+170h] [rbp+78h] BYREF
+  OSuite::ZListBase::ZListIteratorBase v38; // [rsp+188h] [rbp+90h] BYREF
 
-  v1 = this->m_Type;
-  v2 = this;
-  if ( (signed int)v1 <= 7 )
+  m_Type = this->m_Type;
+  if ( m_Type <= EDM_DOUBLE )
   {
-    if ( (signed int)v1 < 6 )
+    if ( m_Type < EDM_DECIMAL )
     {
-      if ( v1 == EDM_NULL )
+      if ( m_Type == EDM_NULL )
         return;
-      v3 = v1 - 1;
+      v3 = m_Type - 1;
       if ( v3 )
       {
         v4 = v3 - 1;
@@ -181,9 +175,9 @@ void __fastcall OSuite::ZOProperty::ResetToDefault(OSuite::ZOProperty *this)
             {
               v11 = OSuite::ZDateTime::CurrentDateTime(&v31);
               v12 = OSuite::ZDateTime::ISO8601Date(v11, &v37);
-              OSuite::ZString::operator=(&v2->m_Value, v12);
+              OSuite::ZString::operator=(&this->m_Value, v12);
               OSuite::ZString::~ZString(&v37);
-              v10 = &v31;
+              p_result = &v31;
               goto LABEL_11;
             }
             if ( v6 == 1 )
@@ -191,56 +185,56 @@ void __fastcall OSuite::ZOProperty::ResetToDefault(OSuite::ZOProperty *this)
               v7 = OSuite::ZDateTime::CurrentDateTime(&result);
               v8 = OSuite::ZDateTime::ISO8601Date(v7, &v35);
               v9 = OSuite::ZString::operator+(v8, &v30, "Z");
-              OSuite::ZString::operator=(&v2->m_Value, v9);
+              OSuite::ZString::operator=(&this->m_Value, v9);
               OSuite::ZString::~ZString(&v30);
               OSuite::ZString::~ZString(&v35);
-              v10 = &result;
+              p_result = &result;
 LABEL_11:
-              OSuite::ZJsonSerializer::~ZJsonSerializer(v10);
+              OSuite::ZJsonSerializer::~ZJsonSerializer(p_result);
               return;
             }
 LABEL_20:
             OSuite::ZString::ZString(&v26, "0");
-            OSuite::ZString::operator=(&v2->m_Value, &v26);
-            v13 = &v26;
+            OSuite::ZString::operator=(&this->m_Value, &v26);
+            p_that = &v26;
             goto LABEL_31;
           }
           OSuite::ZString::ZString(&that, "00");
-          OSuite::ZString::operator=(&v2->m_Value, &that);
-          v13 = &that;
+          OSuite::ZString::operator=(&this->m_Value, &that);
+          p_that = &that;
         }
         else
         {
           OSuite::ZString::ZString(&v27, "false");
-          OSuite::ZString::operator=(&v2->m_Value, &v27);
-          v13 = &v27;
+          OSuite::ZString::operator=(&this->m_Value, &v27);
+          p_that = &v27;
         }
       }
       else
       {
-        OSuite::ZString::ZString(&v24, &customWorldMapCaption);
-        OSuite::ZString::operator=(&v2->m_Value, &v24);
-        v13 = &v24;
+        OSuite::ZString::ZString(&v24, &customCaption);
+        OSuite::ZString::operator=(&this->m_Value, &v24);
+        p_that = &v24;
       }
 LABEL_31:
-      OSuite::ZString::~ZString(v13);
+      OSuite::ZString::~ZString(p_that);
       return;
     }
 LABEL_29:
     OSuite::ZString::ZString(&v29, "0.0");
-    OSuite::ZString::operator=(&v2->m_Value, &v29);
-    v13 = &v29;
+    OSuite::ZString::operator=(&this->m_Value, &v29);
+    p_that = &v29;
     goto LABEL_31;
   }
-  v14 = v1 - 8;
+  v14 = m_Type - 8;
   if ( !v14 )
   {
-    v25.vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZUuid::`vftable{for `OSuite::ZObject};
-    v25.vfptr = (OSuite::IHashableVtbl *)&OSuite::ZUuid::`vftable{for `OSuite::IHashable};
+    v25.OSuite::ZObject::vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZUuid::`vftable{for `OSuite::ZObject};
+    v25.OSuite::IHashable::vfptr = (OSuite::IHashableVtbl *)&OSuite::ZUuid::`vftable{for `OSuite::IHashable};
     OSuite::psock::uuid::create(v25.m_anUuid, 1);
     v23 = OSuite::ZUuid::ToString(&v25, &v36);
-    OSuite::ZString::operator=(&v2->m_Value, v23);
-    v13 = &v36;
+    OSuite::ZString::operator=(&this->m_Value, v23);
+    p_that = &v36;
     goto LABEL_31;
   }
   v15 = v14 - 5;
@@ -249,9 +243,9 @@ LABEL_29:
   v16 = v15 - 1;
   if ( !v16 )
   {
-    OSuite::ZString::ZString((OSuite::ZString *)((char *)&v27 + 16), &customWorldMapCaption);
-    OSuite::ZString::operator=(&v2->m_Value, (OSuite::ZString *)((char *)&v27 + 16));
-    v13 = (OSuite::ZString *)((char *)&v27 + 16);
+    OSuite::ZString::ZString((OSuite::ZString *)&v27.m_pString, &customCaption);
+    OSuite::ZString::operator=(&this->m_Value, (OSuite::ZString *)&v27.m_pString);
+    p_that = (OSuite::ZString *)&v27.m_pString;
     goto LABEL_31;
   }
   v17 = v16 - 1;
@@ -259,28 +253,28 @@ LABEL_29:
   {
     v21 = OSuite::ZDateTime::CurrentDateTime(&v34);
     v22 = OSuite::ZDateTime::ISO8601Time(v21, &v32);
-    OSuite::ZString::operator=(&v2->m_Value, v22);
+    OSuite::ZString::operator=(&this->m_Value, v22);
     OSuite::ZString::~ZString(&v32);
-    v10 = &v34;
+    p_result = &v34;
     goto LABEL_11;
   }
   if ( v17 != 1 )
     goto LABEL_20;
   v38.m_pListBase = 0i64;
-  OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(&v38, (OSuite::ZListBase *)&this->m_SubProperties.vfptr);
+  OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(&v38, &this->m_SubProperties);
   v38.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   while ( !OSuite::ZListBase::ZListIteratorBase::AtEnd(&v38) )
   {
     OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)v38.m_pListBase);
-    v18 = v38.m_nIndex;
-    v19 = v38.m_pListBase;
+    m_nIndex = v38.m_nIndex;
+    m_pListBase = v38.m_pListBase;
     v20 = v38.m_nIndex + 1;
     OSuite::TList<OSuite::ZONavigationProperty *>::Grow(
       (OSuite::TList<OSuite::ZRedBlackTreeBase::ZElementBase *> *)v38.m_pListBase,
       v38.m_nIndex + 1);
-    if ( v18 >= v19->m_nTop )
-      v19->m_nTop = v20;
-    OSuite::ZOProperty::ResetToDefault(*(OSuite::ZOProperty **)(v19[1].m_nSize + 8 * v18));
+    if ( m_nIndex >= m_pListBase->m_nTop )
+      m_pListBase->m_nTop = v20;
+    OSuite::ZOProperty::ResetToDefault(*(OSuite::ZOProperty **)(m_pListBase[1].m_nSize + 8 * m_nIndex));
     OSuite::ZListBase::ZListIteratorBase::Next(&v38);
   }
 }
@@ -289,16 +283,12 @@ LABEL_29:
 // RVA: 0xEC5784
 char __fastcall OSuite::ZOProperty::GetValue(OSuite::ZOProperty *this, OSuite::ZString *outValue)
 {
-  OSuite::ZString *v2; // rdi
-  OSuite::ZOProperty *v3; // rbx
-  OSuite::ZString *v4; // rsi
+  OSuite::ZString *p_m_Value; // rdi
 
-  v2 = &this->m_Value;
-  v3 = this;
-  v4 = outValue;
-  if ( !OSuite::ZString::operator bool(&this->m_Value) || v3->m_bNull || v3->m_Type != 14 )
+  p_m_Value = &this->m_Value;
+  if ( !OSuite::ZString::operator bool(&this->m_Value) || this->m_bNull || this->m_Type != EDM_STRING )
     return 0;
-  OSuite::ZString::operator=(v4, v2);
+  OSuite::ZString::operator=(outValue, p_m_Value);
   return 1;
 }
 
@@ -306,21 +296,17 @@ char __fastcall OSuite::ZOProperty::GetValue(OSuite::ZOProperty *this, OSuite::Z
 // RVA: 0xEC5710
 char __fastcall OSuite::ZOProperty::GetValue(OSuite::ZOProperty *this, int *outValue)
 {
-  OSuite::ZString *v2; // rdi
-  OSuite::ZOProperty *v3; // rbx
-  int *v4; // rsi
+  OSuite::ZString *p_m_Value; // rdi
 
-  v2 = &this->m_Value;
-  v3 = this;
-  v4 = outValue;
+  p_m_Value = &this->m_Value;
   if ( !OSuite::ZString::operator bool(&this->m_Value)
-    || v3->m_bNull
-    || v3->m_Type != 10
-    || (unsigned __int64)(OSuite::ZString::ToInt(v2) + 0x80000000i64) > 0xFFFFFFFF )
+    || this->m_bNull
+    || this->m_Type != EDM_INT32
+    || (unsigned __int64)(OSuite::ZString::ToInt(p_m_Value) + 0x80000000i64) > 0xFFFFFFFF )
   {
     return 0;
   }
-  *v4 = OSuite::ZString::ToInt(v2);
+  *outValue = OSuite::ZString::ToInt(p_m_Value);
   return 1;
 }
 
@@ -328,16 +314,12 @@ char __fastcall OSuite::ZOProperty::GetValue(OSuite::ZOProperty *this, int *outV
 // RVA: 0xEC57E0
 char __fastcall OSuite::ZOProperty::GetValue(OSuite::ZOProperty *this, __int64 *outValue)
 {
-  OSuite::ZString *v2; // rdi
-  OSuite::ZOProperty *v3; // rbx
-  __int64 *v4; // rsi
+  OSuite::ZString *p_m_Value; // rdi
 
-  v2 = &this->m_Value;
-  v3 = this;
-  v4 = outValue;
-  if ( !OSuite::ZString::operator bool(&this->m_Value) || v3->m_bNull || v3->m_Type != 11 )
+  p_m_Value = &this->m_Value;
+  if ( !OSuite::ZString::operator bool(&this->m_Value) || this->m_bNull || this->m_Type != EDM_INT64 )
     return 0;
-  *v4 = OSuite::ZString::ToInt(v2);
+  *outValue = OSuite::ZString::ToInt(p_m_Value);
   return 1;
 }
 
@@ -345,16 +327,12 @@ char __fastcall OSuite::ZOProperty::GetValue(OSuite::ZOProperty *this, __int64 *
 // RVA: 0xEC583C
 char __fastcall OSuite::ZOProperty::GetValue(OSuite::ZOProperty *this, bool *outValue)
 {
-  OSuite::ZString *v2; // rdi
-  OSuite::ZOProperty *v3; // rbx
-  bool *v4; // rsi
+  OSuite::ZString *p_m_Value; // rdi
 
-  v2 = &this->m_Value;
-  v3 = this;
-  v4 = outValue;
-  if ( !OSuite::ZString::operator bool(&this->m_Value) || v3->m_bNull || v3->m_Type != 2 )
+  p_m_Value = &this->m_Value;
+  if ( !OSuite::ZString::operator bool(&this->m_Value) || this->m_bNull || this->m_Type != EDM_BOOLEAN )
     return 0;
-  *v4 = OSuite::ZString::EqualsCaseInsensitive(v2, "true");
+  *outValue = OSuite::ZString::EqualsCaseInsensitive(p_m_Value, "true");
   return 1;
 }
 
@@ -362,16 +340,14 @@ char __fastcall OSuite::ZOProperty::GetValue(OSuite::ZOProperty *this, bool *out
 // RVA: 0xEC63B8
 char __fastcall OSuite::ZOProperty::SetValue(OSuite::ZOProperty *this, const char *inValue)
 {
-  OSuite::ZOProperty *v2; // rbx
-  OSuite::ZString that; // [rsp+20h] [rbp-28h]
+  OSuite::ZString that; // [rsp+20h] [rbp-28h] BYREF
 
-  v2 = this;
-  if ( !inValue || this->m_Type != 14 )
+  if ( !inValue || this->m_Type != EDM_STRING )
     return 0;
   OSuite::ZString::ZString(&that, inValue);
-  OSuite::ZString::operator=(&v2->m_Value, &that);
+  OSuite::ZString::operator=(&this->m_Value, &that);
   OSuite::ZString::~ZString(&that);
-  v2->m_bNull = 0;
+  this->m_bNull = 0;
   return 1;
 }
 
@@ -379,15 +355,10 @@ char __fastcall OSuite::ZOProperty::SetValue(OSuite::ZOProperty *this, const cha
 // RVA: 0xEC62C0
 char __fastcall OSuite::ZOProperty::SetValue(OSuite::ZOProperty *this, OSuite::ZString *inValue)
 {
-  OSuite::ZOProperty *v2; // rbx
-  OSuite::ZString *v3; // rdi
-
-  v2 = this;
-  v3 = inValue;
-  if ( !OSuite::ZString::operator bool(inValue) || v2->m_Type != 14 )
+  if ( !OSuite::ZString::operator bool(inValue) || this->m_Type != EDM_STRING )
     return 0;
-  OSuite::ZString::operator=(&v2->m_Value, v3);
-  v2->m_bNull = 0;
+  OSuite::ZString::operator=(&this->m_Value, inValue);
+  this->m_bNull = 0;
   return 1;
 }
 
@@ -395,39 +366,37 @@ char __fastcall OSuite::ZOProperty::SetValue(OSuite::ZOProperty *this, OSuite::Z
 // RVA: 0xEC6204
 char __fastcall OSuite::ZOProperty::SetValue(OSuite::ZOProperty *this, OSuite::ZDateTime *inValue)
 {
-  OSuite::EdmType v2; // eax
-  OSuite::ZOProperty *v3; // rbx
+  OSuite::EdmType m_Type; // eax
   OSuite::ZString *v4; // rax
-  OSuite::ZString *v5; // rcx
+  OSuite::ZString *p_result; // rcx
   OSuite::ZString *v7; // rax
   OSuite::ZString *v8; // rax
   OSuite::ZString *v9; // rax
-  OSuite::ZString result; // [rsp+20h] [rbp-38h]
-  OSuite::ZString v11; // [rsp+38h] [rbp-20h]
+  OSuite::ZString result; // [rsp+20h] [rbp-38h] BYREF
+  OSuite::ZString v11; // [rsp+38h] [rbp-20h] BYREF
 
-  v2 = this->m_Type;
-  v3 = this;
-  switch ( v2 )
+  m_Type = this->m_Type;
+  switch ( m_Type )
   {
-    case 4:
+    case EDM_DATETIME:
       v4 = OSuite::ZDateTime::ISO8601Date(inValue, &result);
-      OSuite::ZString::operator=(&v3->m_Value, v4);
-      v5 = &result;
+      OSuite::ZString::operator=(&this->m_Value, v4);
+      p_result = &result;
 LABEL_3:
-      OSuite::ZString::~ZString(v5);
-      v3->m_bNull = 0;
+      OSuite::ZString::~ZString(p_result);
+      this->m_bNull = 0;
       return 1;
-    case 5:
+    case EDM_DATETIMEOFFSET:
       v7 = OSuite::ZDateTime::ISO8601Date(inValue, &v11);
       v8 = OSuite::ZString::operator+(v7, &result, "Z");
-      OSuite::ZString::operator=(&v3->m_Value, v8);
+      OSuite::ZString::operator=(&this->m_Value, v8);
       OSuite::ZString::~ZString(&result);
 LABEL_6:
-      v5 = &v11;
+      p_result = &v11;
       goto LABEL_3;
-    case 15:
+    case EDM_TIME:
       v9 = OSuite::ZDateTime::ISO8601Time(inValue, &v11);
-      OSuite::ZString::operator=(&v3->m_Value, v9);
+      OSuite::ZString::operator=(&this->m_Value, v9);
       goto LABEL_6;
   }
   return 0;
@@ -435,25 +404,21 @@ LABEL_6:
 
 // File Line: 349
 // RVA: 0xEC630C
-char __fastcall OSuite::ZOProperty::SetValue(OSuite::ZOProperty *this, int inValue)
+char __fastcall OSuite::ZOProperty::SetValue(OSuite::ZOProperty *this, unsigned int inValue)
 {
-  unsigned int v2; // edi
-  OSuite::ZOProperty *v3; // rbx
   OSuite::ZString *v4; // rax
-  OSuite::ZString result; // [rsp+20h] [rbp-58h]
-  OSuite::ZStringBuilder v7; // [rsp+38h] [rbp-40h]
+  OSuite::ZString result; // [rsp+20h] [rbp-58h] BYREF
+  OSuite::ZStringBuilder v7; // [rsp+38h] [rbp-40h] BYREF
 
-  v2 = inValue;
-  v3 = this;
-  if ( this->m_Type != 10 )
+  if ( this->m_Type != EDM_INT32 )
     return 0;
   v7.m_Chars.m_pList = 0i64;
   OSuite::ZStringBuilder::ZStringBuilder(&v7, 0x10ui64);
-  OSuite::ZStringBuilder::AppendFormat(&v7, "%d", v2);
+  OSuite::ZStringBuilder::AppendFormat(&v7, "%d", inValue);
   v4 = OSuite::ZStringBuilder::ToString(&v7, &result);
-  OSuite::ZString::operator=(&v3->m_Value, v4);
+  OSuite::ZString::operator=(&this->m_Value, v4);
   OSuite::ZString::~ZString(&result);
-  v3->m_bNull = 0;
+  this->m_bNull = 0;
   OSuite::ZUtf8Buffer::~ZUtf8Buffer(&v7);
   return 1;
 }
@@ -462,56 +427,49 @@ char __fastcall OSuite::ZOProperty::SetValue(OSuite::ZOProperty *this, int inVal
 // RVA: 0xEC55E4
 unsigned __int64 __fastcall OSuite::ZOProperty::GetBinarySize(OSuite::ZOProperty *this)
 {
-  unsigned __int64 result; // rax
-
-  if ( this->m_bNull || this->m_Type != 1 )
-    result = 0i64;
+  if ( this->m_bNull || this->m_Type != EDM_BINARY )
+    return 0i64;
   else
-    result = OSuite::ZMimeEntity::Base64DecodedLength(&this->m_Value);
-  return result;
+    return OSuite::ZMimeEntity::Base64DecodedLength(&this->m_Value);
 }
 
 // File Line: 447
 // RVA: 0xEC5578
 bool __fastcall OSuite::ZOProperty::GetBinary(OSuite::ZOProperty *this, char *buffer, unsigned __int64 bufferLength)
 {
-  bool v3; // bl
-  char *v4; // rbp
-  OSuite::ZOProperty *v5; // rdi
+  char v3; // bl
 
   v3 = 0;
-  v4 = buffer;
-  v5 = this;
   if ( buffer
     && bufferLength
     && !this->m_bNull
-    && this->m_Type == 1
+    && this->m_Type == EDM_BINARY
     && OSuite::ZOProperty::GetBinarySize(this) == bufferLength )
   {
-    v3 = OSuite::ZMimeEntity::Base64Decode(v4, &v5->m_Value);
+    return OSuite::ZMimeEntity::Base64Decode(buffer, &this->m_Value);
   }
   return v3;
 }
 
 // File Line: 476
 // RVA: 0xEC5614
-OSuite::ZOProperty *__fastcall OSuite::ZOProperty::GetSubProperty(OSuite::ZOProperty *this, const char *subPropertyName)
+OSuite::ZOProperty *__fastcall OSuite::ZOProperty::GetSubProperty(
+        OSuite::ZOProperty *this,
+        const char *subPropertyName)
 {
-  OSuite::ZOProperty *v2; // rbx
-  unsigned __int64 v3; // rsi
-  OSuite::ZListBase *v4; // rbx
+  unsigned __int64 m_nIndex; // rsi
+  OSuite::ZListBase *m_pListBase; // rbx
   unsigned __int64 v5; // rdi
   __int64 v6; // rbx
-  OSuite::ZListBase::ZListIteratorBase v8; // [rsp+20h] [rbp-40h]
-  OSuite::ZString that; // [rsp+38h] [rbp-28h]
+  OSuite::ZListBase::ZListIteratorBase v8; // [rsp+20h] [rbp-40h] BYREF
+  OSuite::ZString that; // [rsp+38h] [rbp-28h] BYREF
 
-  v2 = this;
   if ( !subPropertyName )
     return 0i64;
   that.m_pString = 0i64;
   OSuite::ZString::ZString(&that, subPropertyName);
   v8.m_pListBase = 0i64;
-  OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(&v8, (OSuite::ZListBase *)&v2->m_SubProperties.vfptr);
+  OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(&v8, &this->m_SubProperties);
   v8.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
   while ( 1 )
   {
@@ -521,15 +479,15 @@ OSuite::ZOProperty *__fastcall OSuite::ZOProperty::GetSubProperty(OSuite::ZOProp
       return 0i64;
     }
     OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)v8.m_pListBase);
-    v3 = v8.m_nIndex;
-    v4 = v8.m_pListBase;
+    m_nIndex = v8.m_nIndex;
+    m_pListBase = v8.m_pListBase;
     v5 = v8.m_nIndex + 1;
     OSuite::TList<OSuite::ZONavigationProperty *>::Grow(
       (OSuite::TList<OSuite::ZRedBlackTreeBase::ZElementBase *> *)v8.m_pListBase,
       v8.m_nIndex + 1);
-    if ( v3 >= v4->m_nTop )
-      v4->m_nTop = v5;
-    v6 = *(_QWORD *)(v4[1].m_nSize + 8 * v3);
+    if ( m_nIndex >= m_pListBase->m_nTop )
+      m_pListBase->m_nTop = v5;
+    v6 = *(_QWORD *)(m_pListBase[1].m_nSize + 8 * m_nIndex);
     if ( OSuite::ZString::operator==((OSuite::ZString *)(v6 + 152), &that) )
       break;
     OSuite::ZListBase::ZListIteratorBase::Next(&v8);
@@ -541,27 +499,28 @@ OSuite::ZOProperty *__fastcall OSuite::ZOProperty::GetSubProperty(OSuite::ZOProp
 
 // File Line: 527
 // RVA: 0xEC5938
-void __fastcall OSuite::ZOProperty::ParseJsonValue(OSuite::ZOProperty *this, OSuite::ZString *__formal, OSuite::ZJsonValue *pJson)
+void __fastcall OSuite::ZOProperty::ParseJsonValue(
+        OSuite::ZOProperty *this,
+        OSuite::ZString *__formal,
+        OSuite::ZJsonValue *pJson)
 {
-  OSuite::ZJsonValue *v3; // r14
-  OSuite::ZOProperty *v4; // rsi
   OSuite::ZJsonValue *v5; // r13
   OSuite::ZJsonValue *v6; // rax
   OSuite::ZOnlineSuite *v7; // rax
   OSuite::ZWebServiceClient *v8; // rbx
   OSuite::ZOMetadata *v9; // rax
   OSuite::ZOEdmComplexType *v10; // rax
-  OSuite::TMap<void *,OSuite::ZObjectAccessor::InternalObjectAccessor *> *v11; // rcx
+  OSuite::TMap<OSuite::ZString,OSuite::ZJsonValue *> *p_m_Pairs; // rcx
   OSuite::ZOEdmComplexType *v12; // rbx
-  void *(__fastcall *v13)(OSuite::IHashable *, unsigned int); // r12
-  OSuite::ZString *v14; // r15
+  void *(__fastcall *vecDelDtor)(OSuite::IHashable *, unsigned int); // r12
+  OSuite::ZString *p_ComputeHash; // r15
   OSuite::ZOProperty *v15; // rax
   OSuite::ZOProperty *v16; // rbx
   OSuite::ZOEdmProperty *v17; // rax
   OSuite::ZOProperty *v18; // rax
   OSuite::ZOProperty *v19; // r14
-  OSuite::ZString *v20; // rcx
-  OSuite::ZString *v21; // rbx
+  OSuite::ZString *p_result; // rcx
+  OSuite::ZString *p_m_Value; // rbx
   bool v22; // al
   unsigned __int64 v23; // rax
   OSuite::ZString *v24; // rax
@@ -574,102 +533,97 @@ void __fastcall OSuite::ZOProperty::ParseJsonValue(OSuite::ZOProperty *this, OSu
   unsigned __int64 v31; // rax
   OSuite::ZString *v32; // rax
   int v33; // esi
-  int v34; // eax
+  int IndexOf; // eax
   __int64 v35; // rax
   OSuite::ZString *v36; // rax
   OSuite::ZError *v37; // rax
   OSuite::ZOEdmComplexType *v38; // [rsp+20h] [rbp-E0h]
-  OSuite::ZString sName; // [rsp+28h] [rbp-D8h]
-  OSuite::ZString result; // [rsp+40h] [rbp-C0h]
-  OSuite::ZString v41; // [rsp+58h] [rbp-A8h]
-  OSuite::ZString v42; // [rsp+70h] [rbp-90h]
-  OSuite::ZString v43; // [rsp+88h] [rbp-78h]
-  OSuite::ZString v44; // [rsp+A0h] [rbp-60h]
-  OSuite::ZString fullyQualifiedName; // [rsp+B8h] [rbp-48h]
-  OSuite::ZString v46; // [rsp+D0h] [rbp-30h]
-  OSuite::ZUrl url; // [rsp+F0h] [rbp-10h]
+  OSuite::ZString sName; // [rsp+28h] [rbp-D8h] BYREF
+  OSuite::ZString result; // [rsp+40h] [rbp-C0h] BYREF
+  OSuite::ZString v41; // [rsp+58h] [rbp-A8h] BYREF
+  OSuite::ZString v42; // [rsp+70h] [rbp-90h] BYREF
+  OSuite::ZString v43; // [rsp+88h] [rbp-78h] BYREF
+  OSuite::ZString v44; // [rsp+A0h] [rbp-60h] BYREF
+  OSuite::ZString fullyQualifiedName; // [rsp+B8h] [rbp-48h] BYREF
+  OSuite::ZString v46; // [rsp+D0h] [rbp-30h] BYREF
+  OSuite::ZUrl url; // [rsp+F0h] [rbp-10h] BYREF
 
-  v3 = pJson;
-  v4 = this;
-  if ( pJson->m_Type != 1 )
+  if ( pJson->m_Type != JSONTYPE_OBJECT )
   {
-    v21 = &this->m_Value;
+    p_m_Value = &this->m_Value;
     OSuite::ZString::operator=(&this->m_Value, &pJson->m_literal);
-    v22 = OSuite::ZString::operator==(v21, "null");
-    v4->m_bNull = v22;
+    v22 = OSuite::ZString::operator==(p_m_Value, "null");
+    this->m_bNull = v22;
     if ( v22 )
       return;
-    switch ( v4->m_Type )
+    switch ( this->m_Type )
     {
-      case 4:
-        if ( OSuite::ZString::StartsWith(v21, "\\/Date") == 1 )
+      case EDM_DATETIME:
+        if ( OSuite::ZString::StartsWith(p_m_Value, "\\/Date") )
         {
-          v33 = OSuite::ZString::IndexOf(v21, 40, 0i64);
-          v34 = OSuite::ZString::LastIndexOf(v21, 41);
-          if ( v33 > 0 && v34 > 0 && v34 > v33 )
+          v33 = OSuite::ZString::IndexOf(p_m_Value, 40, 0i64);
+          IndexOf = OSuite::ZString::LastIndexOf(p_m_Value, 41);
+          if ( v33 > 0 && IndexOf > 0 && IndexOf > v33 )
           {
             fullyQualifiedName.m_pString = 0i64;
-            OSuite::ZString::Slice(v21, &fullyQualifiedName, v33 + 1, v34 - v33 - 1);
+            OSuite::ZString::Slice(p_m_Value, &fullyQualifiedName, v33 + 1, IndexOf - v33 - 1);
             v35 = OSuite::ZString::ToInt(&fullyQualifiedName);
-            OSuite::ZDateTime::ZDateTime(
-              (OSuite::ZDateTime *)&v46,
-              ((unsigned __int64)((unsigned __int128)(v35 * (signed __int128)2361183241434822607i64) >> 64) >> 63)
-            + ((signed __int64)((unsigned __int128)(v35 * (signed __int128)2361183241434822607i64) >> 64) >> 7));
+            OSuite::ZDateTime::ZDateTime((OSuite::ZDateTime *)&v46, v35 / 1000);
             v36 = OSuite::ZDateTime::ISO8601Date((OSuite::ZDateTime *)&v46, &v44);
-            OSuite::ZString::operator=(v21, v36);
+            OSuite::ZString::operator=(p_m_Value, v36);
             OSuite::ZString::~ZString(&v44);
             OSuite::ZJsonSerializer::~ZJsonSerializer((OSuite::ZDateTime *)&v46);
             goto LABEL_17;
           }
         }
         break;
-      case 5:
-        if ( OSuite::ZString::StartsWith(v21, "datetimeoffset") == 1 )
+      case EDM_DATETIMEOFFSET:
+        if ( OSuite::ZString::StartsWith(p_m_Value, "datetimeoffset") )
         {
-          v31 = OSuite::ZString::Count(v21);
-          v32 = OSuite::ZString::Slice(v21, &v43, 0xFui64, v31 - 16);
-          OSuite::ZString::operator=(v21, v32);
-          v20 = &v43;
+          v31 = OSuite::ZString::Count(p_m_Value);
+          v32 = OSuite::ZString::Slice(p_m_Value, &v43, 0xFui64, v31 - 16);
+          OSuite::ZString::operator=(p_m_Value, v32);
+          p_result = &v43;
           goto LABEL_34;
         }
         break;
-      case 6:
-        if ( OSuite::ZString::EndsWith(v21, "M") || OSuite::ZString::EndsWith(v21, "m") )
+      case EDM_DECIMAL:
+        if ( OSuite::ZString::EndsWith(p_m_Value, "M") || OSuite::ZString::EndsWith(p_m_Value, "m") )
         {
-          v29 = OSuite::ZString::Count(v21);
-          v30 = OSuite::ZString::Slice(v21, &v41, 0i64, v29 - 1);
-          OSuite::ZString::operator=(v21, v30);
-          v20 = &v41;
+          v29 = OSuite::ZString::Count(p_m_Value);
+          v30 = OSuite::ZString::Slice(p_m_Value, &v41, 0i64, v29 - 1);
+          OSuite::ZString::operator=(p_m_Value, v30);
+          p_result = &v41;
           goto LABEL_34;
         }
         break;
-      case 8:
-        if ( OSuite::ZString::StartsWith(v21, "guid") == 1 )
+      case EDM_GUID:
+        if ( OSuite::ZString::StartsWith(p_m_Value, "guid") )
         {
-          v27 = OSuite::ZString::Count(v21);
-          v28 = OSuite::ZString::Slice(v21, &v42, 5ui64, v27 - 6);
-          OSuite::ZString::operator=(v21, v28);
-          v20 = &v42;
+          v27 = OSuite::ZString::Count(p_m_Value);
+          v28 = OSuite::ZString::Slice(p_m_Value, &v42, 5ui64, v27 - 6);
+          OSuite::ZString::operator=(p_m_Value, v28);
+          p_result = &v42;
           goto LABEL_34;
         }
         break;
-      case 0xD:
-        if ( OSuite::ZString::EndsWith(v21, "f") )
+      case EDM_SINGLE:
+        if ( OSuite::ZString::EndsWith(p_m_Value, "f") )
         {
-          v25 = OSuite::ZString::Count(v21);
-          v26 = OSuite::ZString::Slice(v21, &result, 0i64, v25 - 1);
-          OSuite::ZString::operator=(v21, v26);
-          v20 = &result;
+          v25 = OSuite::ZString::Count(p_m_Value);
+          v26 = OSuite::ZString::Slice(p_m_Value, &result, 0i64, v25 - 1);
+          OSuite::ZString::operator=(p_m_Value, v26);
+          p_result = &result;
           goto LABEL_34;
         }
         break;
-      case 0xF:
-        if ( OSuite::ZString::StartsWith(v21, "time") == 1 )
+      case EDM_TIME:
+        if ( OSuite::ZString::StartsWith(p_m_Value, "time") )
         {
-          v23 = OSuite::ZString::Count(v21);
-          v24 = OSuite::ZString::Slice(v21, &sName, 5ui64, v23 - 6);
-          OSuite::ZString::operator=(v21, v24);
-          v20 = &sName;
+          v23 = OSuite::ZString::Count(p_m_Value);
+          v24 = OSuite::ZString::Slice(p_m_Value, &sName, 5ui64, v23 - 6);
+          OSuite::ZString::operator=(p_m_Value, v24);
+          p_result = &sName;
           goto LABEL_34;
         }
         break;
@@ -679,7 +633,7 @@ void __fastcall OSuite::ZOProperty::ParseJsonValue(OSuite::ZOProperty *this, OSu
     goto LABEL_42;
   }
   OSuite::ZString::ZString(&sName, "__metadata");
-  v5 = OSuite::ZJsonObject::Value(v3->m_object, &sName);
+  v5 = OSuite::ZJsonObject::Value(pJson->m_object, &sName);
   OSuite::ZString::~ZString(&sName);
   if ( !v5 )
   {
@@ -693,27 +647,27 @@ LABEL_42:
   v6 = OSuite::ZJsonObject::Value(v5->m_object, &v46);
   OSuite::ZString::ZString(&fullyQualifiedName, &v6->m_literal);
   OSuite::ZString::~ZString(&v46);
-  OSuite::ZUrl::ZUrl(&url, &v4->m_sBaseURL);
+  OSuite::ZUrl::ZUrl(&url, &this->m_sBaseURL);
   v7 = OSuite::ZOnlineSuite::Instance();
   v8 = OSuite::ZOnlineSuite::GetForUrl(v7, &url);
   OSuite::ZUrl::~ZUrl(&url);
   v9 = OSuite::ZWebServiceClient::Metadata(v8);
   v10 = OSuite::ZOMetadata::ComplexType(v9, &fullyQualifiedName);
-  v11 = (OSuite::TMap<void *,OSuite::ZObjectAccessor::InternalObjectAccessor *> *)&v3->m_object->m_Pairs;
+  p_m_Pairs = &pJson->m_object->m_Pairs;
   v12 = v10;
   v38 = v10;
-  url.vfptr = 0i64;
+  url.OSuite::IHashable::vfptr = 0i64;
   url.m_sHost.vfptr = 0i64;
   url.m_sHost.vfptr = 0i64;
   url.m_urlParameters.vfptr = 0i64;
   OSuite::TMap<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>::Iterator(
-    v11,
+    (OSuite::TMap<void *,OSuite::ZObjectAccessor::InternalObjectAccessor *> *)p_m_Pairs,
     (OSuite::TMap<void *,OSuite::ZObjectAccessor::InternalObjectAccessor *>::ZIterator *)&url);
-  while ( !OSuite::ZString::IsNull((OSuite::ZString *)((char *)&url.m_sProtocol + 16)) )
+  while ( !OSuite::ZString::IsNull((OSuite::ZString *)&url.m_sProtocol.m_pString) )
   {
-    v13 = url.m_sHost.vfptr[4].__vecDelDtor;
-    v14 = (OSuite::ZString *)&url.m_sHost.vfptr[2].ComputeHash;
-    if ( (char *)v13 == (char *)v5 )
+    vecDelDtor = url.m_sHost.vfptr[4].__vecDelDtor;
+    p_ComputeHash = (OSuite::ZString *)&url.m_sHost.vfptr[2].ComputeHash;
+    if ( (char *)vecDelDtor == (char *)v5 )
       goto LABEL_13;
     v15 = (OSuite::ZOProperty *)OSuite::ZObject::operator new(0xF0ui64);
     if ( v12 )
@@ -730,8 +684,8 @@ LABEL_42:
       v15->m_Name.m_pString = 0i64;
       v15->m_Value.m_pString = 0i64;
       v15->m_SubProperties.m_pList = 0i64;
-      v17 = OSuite::ZOEdmComplexType::Property(v38, v14);
-      OSuite::ZOProperty::ZOProperty(v16, v17, &v4->m_sBaseURL);
+      v17 = OSuite::ZOEdmComplexType::Property(v38, p_ComputeHash);
+      OSuite::ZOProperty::ZOProperty(v16, v17, &this->m_sBaseURL);
     }
     else
     {
@@ -750,51 +704,50 @@ LABEL_11:
       v15->m_Name.m_pString = 0i64;
       v15->m_Value.m_pString = 0i64;
       v15->m_SubProperties.m_pList = 0i64;
-      OSuite::ZOProperty::ZOProperty(v15, v14, &v4->m_sBaseURL);
+      OSuite::ZOProperty::ZOProperty(v15, p_ComputeHash, &this->m_sBaseURL);
     }
     v19 = v18;
 LABEL_12:
     ((void (__fastcall *)(OSuite::ZOProperty *, OSuite::ZString *, void *(__fastcall *)(OSuite::IHashable *, unsigned int)))v19->vfptr[3].__vecDelDtor)(
       v19,
-      v14,
-      v13);
+      p_ComputeHash,
+      vecDelDtor);
     OSuite::TList<OSuite::ZONavigationProperty *>::Grow(
-      (OSuite::TList<OSuite::ZRedBlackTreeBase::ZElementBase *> *)&v4->m_SubProperties,
-      v4->m_SubProperties.m_nTop + 1);
-    v4->m_SubProperties.m_pList[v4->m_SubProperties.m_nTop++] = v19;
+      (OSuite::TList<OSuite::ZRedBlackTreeBase::ZElementBase *> *)&this->m_SubProperties,
+      this->m_SubProperties.m_nTop + 1);
+    this->m_SubProperties.m_pList[this->m_SubProperties.m_nTop++] = v19;
     v12 = v38;
 LABEL_13:
     OSuite::TMap<void *,OSuite::ZObjectAccessor::InternalObjectAccessor *>::ZIterator::Next((OSuite::TMap<void *,OSuite::ZObjectAccessor::InternalObjectAccessor *>::ZIterator *)&url);
   }
-  url.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZJsonValue *>::ZIterator::`vftable;
-  url.m_sProtocol.vfptr = (OSuite::IHashableVtbl *)&OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum  OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64>>::ZIterator::`vftable;
+  url.OSuite::ZObject::vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZJsonValue *>::ZIterator::`vftable;
+  url.m_sProtocol.vfptr = (OSuite::IHashableVtbl *)&OSuite::TOrderedMap<unsigned __int64,OSuite::TPair<enum OSuite::ZError::EError,OSuite::ZString>,OSuite::TOperatorComparer<unsigned __int64>>::ZIterator::`vftable;
   url.m_sProtocol.m_pString = (OSuite::ZString::InternalString *)&OSuite::ZRedBlackTreeBase::TIterator<OSuite::TKeyValueElement<OSuite::ZString,OSuite::ZUsageTracker::ZResourceUsage *>>::`vftable;
   url.m_sHost.m_pString = (OSuite::ZString::InternalString *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::ZObject};
   url.m_sFakeHost.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<OSuite::ZRedBlackTreeBase::ZElementBase *>::`vftable{for `OSuite::IHashable};
   if ( url.m_urlParameters.vfptr )
-    (*(void (__fastcall **)(OSuite::IHashableVtbl *, signed __int64))url.m_urlParameters.vfptr->__vecDelDtor)(
+    (*(void (__fastcall **)(OSuite::IHashableVtbl *, __int64))url.m_urlParameters.vfptr->__vecDelDtor)(
       url.m_urlParameters.vfptr,
       1i64);
 LABEL_17:
-  v20 = &fullyQualifiedName;
+  p_result = &fullyQualifiedName;
 LABEL_34:
-  OSuite::ZString::~ZString(v20);
+  OSuite::ZString::~ZString(p_result);
 }
 
 // File Line: 668
 // RVA: 0xEC6408
-void __fastcall OSuite::ZOProperty::ToJson(OSuite::ZOProperty *this, OSuite::ZJsonObject *pJson, OSuite::ZHttp::EMethod eMethod)
+void __fastcall OSuite::ZOProperty::ToJson(OSuite::ZOProperty *this, OSuite::ZJsonObject *pJson, unsigned int eMethod)
 {
   OSuite::ZJsonValue *v3; // rbx
   OSuite::ZJsonObject *v4; // r13
-  OSuite::ZOProperty *v5; // rdi
   OSuite::ZJsonValue *v6; // rax
   OSuite::ZJsonValue *v7; // rsi
   OSuite::ZJsonValue *v8; // rax
   OSuite::ZJsonObject *v9; // rax
   OSuite::ZJsonObject *v10; // rax
   OSuite::ZJsonObject *v11; // r12
-  OSuite::ZOEdmBase *v12; // rcx
+  OSuite::ZOEdmProperty *m_pEdmProperty; // rcx
   char v13; // si
   OSuite::ZString *v14; // rax
   OSuite::ZJsonObject *v15; // rax
@@ -807,19 +760,19 @@ void __fastcall OSuite::ZOProperty::ToJson(OSuite::ZOProperty *this, OSuite::ZJs
   OSuite::ZJsonValue *v22; // rax
   OSuite::ZJsonValue *v23; // r14
   unsigned __int64 v24; // r15
-  OSuite::ZString::InternalString *v25; // r14
-  __int64 v26; // r13
+  OSuite::ZString::InternalString *m_pString; // r14
+  unsigned __int64 v26; // r13
   __int64 v27; // rcx
   OSuite::ZJsonValue *v28; // rax
   OSuite::ZJsonValue *v29; // rax
-  signed int v30; // ecx
+  OSuite::EdmType m_Type; // ecx
   bool v31; // r14
-  int v32; // ecx
-  int v33; // ecx
-  int v34; // ecx
+  __int32 v32; // ecx
+  __int32 v33; // ecx
+  __int32 v34; // ecx
   int v35; // ecx
   OSuite::ZString *v36; // rax
-  OSuite::ZString *v37; // rcx
+  OSuite::ZString *p_result; // rcx
   OSuite::ZString *v38; // rax
   OSuite::ZString *v39; // rax
   OSuite::ZString *v40; // rax
@@ -833,33 +786,28 @@ void __fastcall OSuite::ZOProperty::ToJson(OSuite::ZOProperty *this, OSuite::ZJs
   OSuite::ZString *v48; // rax
   OSuite::ZString *v49; // rax
   OSuite::ZJsonValue *v50; // rax
-  OSuite::ZHttp::EMethod v51; // [rsp+20h] [rbp-E0h]
-  OSuite::ZJsonObject *v52; // [rsp+28h] [rbp-D8h]
-  OSuite::ZString result; // [rsp+30h] [rbp-D0h]
-  OSuite::ZString v54; // [rsp+48h] [rbp-B8h]
-  OSuite::ZString v55; // [rsp+60h] [rbp-A0h]
-  OSuite::ZString v56; // [rsp+78h] [rbp-88h]
-  OSuite::ZString v57; // [rsp+90h] [rbp-70h]
-  OSuite::ZString v58; // [rsp+A8h] [rbp-58h]
-  OSuite::ZString v59; // [rsp+C0h] [rbp-40h]
-  OSuite::ZString v60; // [rsp+D8h] [rbp-28h]
-  OSuite::ZString v61; // [rsp+F0h] [rbp-10h]
-  OSuite::ZString v62; // [rsp+108h] [rbp+8h]
-  OSuite::ZString v63; // [rsp+120h] [rbp+20h]
-  OSuite::ZString sValue; // [rsp+138h] [rbp+38h]
-  OSuite::ZString sName; // [rsp+150h] [rbp+50h]
-  OSuite::ZString v66; // [rsp+168h] [rbp+68h]
+  OSuite::ZString result; // [rsp+30h] [rbp-D0h] BYREF
+  OSuite::ZString v54; // [rsp+48h] [rbp-B8h] BYREF
+  OSuite::ZString v55; // [rsp+60h] [rbp-A0h] BYREF
+  OSuite::ZString v56; // [rsp+78h] [rbp-88h] BYREF
+  OSuite::ZString v57; // [rsp+90h] [rbp-70h] BYREF
+  OSuite::ZString v58; // [rsp+A8h] [rbp-58h] BYREF
+  OSuite::ZString v59; // [rsp+C0h] [rbp-40h] BYREF
+  OSuite::ZString v60; // [rsp+D8h] [rbp-28h] BYREF
+  OSuite::ZString v61; // [rsp+F0h] [rbp-10h] BYREF
+  OSuite::ZString v62; // [rsp+108h] [rbp+8h] BYREF
+  OSuite::ZString v63; // [rsp+120h] [rbp+20h] BYREF
+  OSuite::ZString sValue; // [rsp+138h] [rbp+38h] BYREF
+  OSuite::ZString sName; // [rsp+150h] [rbp+50h] BYREF
+  OSuite::ZString v66; // [rsp+168h] [rbp+68h] BYREF
   unsigned __int64 v67; // [rsp+180h] [rbp+80h]
-  OSuite::ZStringBuilder v68; // [rsp+188h] [rbp+88h]
+  OSuite::ZStringBuilder v68; // [rsp+188h] [rbp+88h] BYREF
 
   v3 = 0i64;
-  v51 = eMethod;
   v4 = pJson;
-  v52 = pJson;
-  v5 = this;
   if ( !this->m_bNull )
   {
-    if ( this->m_Type == 16 )
+    if ( this->m_Type == EDM_COMPLEX )
     {
       v9 = (OSuite::ZJsonObject *)OSuite::ZObject::operator new(0x28ui64);
       if ( v9 )
@@ -872,25 +820,25 @@ void __fastcall OSuite::ZOProperty::ToJson(OSuite::ZOProperty *this, OSuite::ZJs
       {
         v11 = 0i64;
       }
-      v12 = (OSuite::ZOEdmBase *)&v5->m_pEdmProperty->vfptr;
+      m_pEdmProperty = this->m_pEdmProperty;
       sValue.m_pString = 0i64;
-      if ( v12 )
+      if ( m_pEdmProperty )
       {
         v13 = 2;
-        v14 = OSuite::ZOEdmBase::FullyQualifiedName(v12, &result);
+        v14 = OSuite::ZOEdmBase::FullyQualifiedName(m_pEdmProperty, &result);
       }
       else
       {
         v13 = 4;
-        v14 = OSuite::ZString::operator+(&v5->m_Name, &sName, "_complex");
+        v14 = OSuite::ZString::operator+(&this->m_Name, &sName, "_complex");
       }
       OSuite::ZString::ZString(&sValue, v14);
-      if ( v13 & 4 )
+      if ( (v13 & 4) != 0 )
       {
-        v13 &= 0xFBu;
+        v13 &= ~4u;
         OSuite::ZString::~ZString(&sName);
       }
-      if ( v13 & 2 )
+      if ( (v13 & 2) != 0 )
         OSuite::ZString::~ZString(&result);
       v15 = (OSuite::ZJsonObject *)OSuite::ZObject::operator new(0x28ui64);
       if ( v15 )
@@ -938,38 +886,35 @@ void __fastcall OSuite::ZOProperty::ToJson(OSuite::ZOProperty *this, OSuite::ZJs
       v66.m_pString = 0i64;
       OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(
         (OSuite::ZListBase::ZListIteratorBase *)&sName,
-        (OSuite::ZListBase *)&v5->m_SubProperties.vfptr);
-      sName.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
-      v66.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TConstIterator<OSuite::TList<OSuite::ZOEdmEndRole *>::ZIterator,OSuite::ZOEdmEndRole *,int>::`vftable;
+        &this->m_SubProperties);
+      sName.OSuite::ZObject::vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
+      v66.OSuite::ZObject::vfptr = (OSuite::ZObjectVtbl *)&OSuite::TConstIterator<OSuite::TList<OSuite::ZOEdmEndRole *>::ZIterator,OSuite::ZOEdmEndRole *,int>::`vftable;
       OSuite::ZListBase::ZListIteratorBase::ZListIteratorBase(
-        (OSuite::ZListBase::ZListIteratorBase *)&v66.vfptr,
+        (OSuite::ZListBase::ZListIteratorBase *)&v66.OSuite::IHashable,
         (OSuite::ZListBase::ZListIteratorBase *)&sName);
-      v66.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
-      if ( !OSuite::ZListBase::ZListIteratorBase::AtEnd((OSuite::ZListBase::ZListIteratorBase *)&v66.vfptr) )
+      v66.OSuite::IHashable::vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
+      if ( !OSuite::ZListBase::ZListIteratorBase::AtEnd((OSuite::ZListBase::ZListIteratorBase *)&v66.OSuite::IHashable) )
       {
         do
         {
           OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)v66.m_pString);
           v24 = v67;
-          v25 = v66.m_pString;
+          m_pString = v66.m_pString;
           v26 = v67 + 1;
           OSuite::TList<OSuite::ZONavigationProperty *>::Grow(
             (OSuite::TList<OSuite::ZRedBlackTreeBase::ZElementBase *> *)v66.m_pString,
             v67 + 1);
-          if ( v24 >= *(_QWORD *)&v25->m_nHash )
-            *(_QWORD *)&v25->m_nHash = v26;
-          v27 = *(_QWORD *)(v25[1].m_nLength + 8 * v24);
-          (*(void (__fastcall **)(__int64, OSuite::ZJsonObject *, _QWORD))(*(_QWORD *)v27 + 16i64))(
-            v27,
-            v11,
-            (unsigned int)v51);
-          OSuite::ZListBase::ZListIteratorBase::Next((OSuite::ZListBase::ZListIteratorBase *)&v66.vfptr);
+          if ( v24 >= *(_QWORD *)&m_pString->m_nHash )
+            *(_QWORD *)&m_pString->m_nHash = v26;
+          v27 = *(_QWORD *)(*(_QWORD *)&m_pString->m_szString[12] + 8 * v24);
+          (*(void (__fastcall **)(__int64, OSuite::ZJsonObject *, _QWORD))(*(_QWORD *)v27 + 16i64))(v27, v11, eMethod);
+          OSuite::ZListBase::ZListIteratorBase::Next((OSuite::ZListBase::ZListIteratorBase *)&v66.OSuite::IHashable);
         }
-        while ( !OSuite::ZListBase::ZListIteratorBase::AtEnd((OSuite::ZListBase::ZListIteratorBase *)&v66.vfptr) );
-        v4 = v52;
+        while ( !OSuite::ZListBase::ZListIteratorBase::AtEnd((OSuite::ZListBase::ZListIteratorBase *)&v66.OSuite::IHashable) );
+        v4 = pJson;
       }
-      v66.vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
-      v66.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TConstIterator<OSuite::TList<OSuite::ZOEdmEndRole *>::ZIterator,OSuite::ZOEdmEndRole *,int>::`vftable;
+      v66.OSuite::IHashable::vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<OSuite::ZJsonValue *>::ZIterator::`vftable;
+      v66.OSuite::ZObject::vfptr = (OSuite::ZObjectVtbl *)&OSuite::TConstIterator<OSuite::TList<OSuite::ZOEdmEndRole *>::ZIterator,OSuite::ZOEdmEndRole *,int>::`vftable;
       v28 = (OSuite::ZJsonValue *)OSuite::ZObject::operator new(0x60ui64);
       if ( !v28 )
         goto LABEL_59;
@@ -981,13 +926,13 @@ void __fastcall OSuite::ZOProperty::ToJson(OSuite::ZOProperty *this, OSuite::ZJs
     }
     sValue.m_pString = 0i64;
     OSuite::ZString::ZString(&sValue, &this->m_Value);
-    v30 = v5->m_Type;
+    m_Type = this->m_Type;
     v31 = 1;
-    if ( v30 <= 7 )
+    if ( m_Type <= EDM_DOUBLE )
     {
-      if ( v30 != 7 )
+      if ( m_Type != EDM_DOUBLE )
       {
-        v32 = v30 - 1;
+        v32 = m_Type - 1;
         if ( v32 )
         {
           v33 = v32 - 2;
@@ -1005,16 +950,16 @@ void __fastcall OSuite::ZOProperty::ToJson(OSuite::ZOProperty *this, OSuite::ZJs
                 OSuite::ZString::operator=(&sValue, v40);
                 OSuite::ZString::~ZString(&v57);
                 OSuite::ZString::~ZString(&v58);
-                v37 = &v54;
+                p_result = &v54;
                 goto LABEL_55;
               }
               if ( v35 == 1 )
               {
                 v36 = OSuite::ZString::operator+(&sValue, &result, "m");
                 OSuite::ZString::operator=(&sValue, v36);
-                v37 = &result;
+                p_result = &result;
 LABEL_55:
-                OSuite::ZString::~ZString(v37);
+                OSuite::ZString::~ZString(p_result);
                 goto LABEL_56;
               }
               goto LABEL_53;
@@ -1034,7 +979,7 @@ LABEL_56:
             if ( !v50 )
             {
 LABEL_59:
-              OSuite::ZJsonObject::Add(v4, &v5->m_Name, v3);
+              OSuite::ZJsonObject::Add(v4, &this->m_Name, v3);
 LABEL_60:
               OSuite::ZString::~ZString(&sValue);
               return;
@@ -1053,7 +998,7 @@ LABEL_52:
       OSuite::ZString::operator=(&sValue, &sValue);
       goto LABEL_56;
     }
-    if ( v30 == 8 )
+    if ( m_Type == EDM_GUID )
     {
       OSuite::ZString::ZString(&v66, "guid");
       v48 = OSuite::ZString::operator+(v47, &v60, &sValue);
@@ -1061,30 +1006,30 @@ LABEL_52:
       OSuite::ZString::operator=(&sValue, v49);
       OSuite::ZString::~ZString(&v63);
       OSuite::ZString::~ZString(&v60);
-      v37 = &v66;
+      p_result = &v66;
       goto LABEL_55;
     }
-    if ( v30 > 10 )
+    if ( m_Type > EDM_INT32 )
     {
-      if ( v30 <= 12 )
+      if ( m_Type <= EDM_SBYTE )
         goto LABEL_52;
-      switch ( v30 )
+      switch ( m_Type )
       {
-        case 13:
+        case EDM_SINGLE:
           v46 = OSuite::ZString::operator+(&sValue, &v61, "f");
           OSuite::ZString::operator=(&sValue, v46);
-          v37 = &v61;
+          p_result = &v61;
           goto LABEL_55;
-        case 14:
+        case EDM_STRING:
           goto LABEL_52;
-        case 15:
+        case EDM_TIME:
           OSuite::ZString::ZString(&v59, "time");
           v44 = OSuite::ZString::operator+(v43, &v55, &sValue);
           v45 = OSuite::ZString::operator+(v44, &v56, "");
           OSuite::ZString::operator=(&sValue, v45);
           OSuite::ZString::~ZString(&v56);
           OSuite::ZString::~ZString(&v55);
-          v37 = &v59;
+          p_result = &v59;
           goto LABEL_55;
       }
     }
@@ -1107,8 +1052,8 @@ LABEL_53:
   {
     v8 = 0i64;
   }
-  OSuite::ZJsonObject::Add(v4, &v5->m_Name, v8);
-  if ( (unsigned __int8)v3 & 1 )
+  OSuite::ZJsonObject::Add(v4, &this->m_Name, v8);
+  if ( ((unsigned __int8)v3 & 1) != 0 )
     goto LABEL_60;
 }
 

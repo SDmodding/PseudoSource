@@ -3,18 +3,15 @@
 hkSeekableStreamReader *dynamic_initializer_for__UFG::AIAwareness::KnowledgeSpace::mSpaceCandidates__()
 {
   hkSeekableStreamReader *v0; // rbx
-  signed int v1; // edi
+  int i; // edi
   hkSeekableStreamReader *result; // rax
 
   v0 = &UFG::AIAwareness::KnowledgeSpace::mSpaceCandidates;
-  v1 = 499;
-  do
+  for ( i = 499; i >= 0; --i )
   {
     result = Assembly::GetRCX(v0);
     v0 = (hkSeekableStreamReader *)((char *)v0 + 100);
-    --v1;
   }
-  while ( v1 >= 0 );
   return result;
 }
 
@@ -22,75 +19,77 @@ hkSeekableStreamReader *dynamic_initializer_for__UFG::AIAwareness::KnowledgeSpac
 // RVA: 0x39AD50
 void __fastcall UFG::AIAwareness::KnowledgeSpace::GlobalUpdate(float deltaTime)
 {
-  UFG::DataStreamer::Handle *v1; // r8
-  signed int v2; // er10
-  unsigned __int16 v3; // r9
-  signed int v4; // er11
-  UFG::qNode<UFG::DataStreamer::Handle,UFG::DataStreamer::Handle> *v5; // rax
-  UFG::qNode<UFG::DataStreamer::Handle,UFG::DataStreamer::Handle> *v6; // rcx
-  signed __int64 v7; // rax
-  signed __int64 v8; // rcx
-  unsigned __int64 v9; // rdx
-  __int64 v10; // rcx
-  int v11; // xmm0_4
-  int v12; // xmm1_4
-  int v13; // xmm0_4
-  int v14; // xmm1_4
-  __int128 v15; // xmm3
-  __int128 v16; // xmm2
-  __int128 v17; // xmm1
+  UFG::DataStreamer::Handle *p_mNext; // r8
+  int v2; // r10d
+  UFG::qNode<UFG::DataStreamer::Handle,UFG::DataStreamer::Handle> *mNext; // rax
+  unsigned __int16 v4; // r9
+  int v5; // r11d
+  UFG::qNode<UFG::DataStreamer::Handle,UFG::DataStreamer::Handle> *v6; // rax
+  UFG::qNode<UFG::DataStreamer::Handle,UFG::DataStreamer::Handle> *v7; // rcx
+  UFG::qNode<UFG::DataStreamer::Handle,UFG::DataStreamer::Handle> **v8; // rax
+  UFG::qNode<UFG::DataStreamer::Handle,UFG::DataStreamer::Handle> *v9; // rcx
+  UFG::qNode<UFG::DataStreamer::Handle,UFG::DataStreamer::Handle> *v10; // rdx
+  __int64 v11; // rcx
+  int mPrev_high; // xmm0_4
+  int v13; // xmm1_4
+  int v14; // xmm0_4
+  int v15; // xmm1_4
+  UFG::qNode<UFG::DataStreamer::Handle,UFG::DataStreamer::Handle> v16; // xmm3
+  UFG::qNode<UFG::DataStreamer::Handle,UFG::DataStreamer::Handle> v17; // xmm2
+  UFG::qNode<UFG::DataStreamer::Handle,UFG::DataStreamer::Handle> v18; // xmm1
 
-  v1 = (UFG::DataStreamer::Handle *)&UFG::SceneryGroupComponent::s_SceneryGroupComponentList.mNode.mNext[-6].mNext;
+  p_mNext = (UFG::DataStreamer::Handle *)&UFG::SceneryGroupComponent::s_SceneryGroupComponentList.mNode.mNext[-6].mNext;
   v2 = 0;
   UFG::AIAwareness::KnowledgeSpace::mNumSpaceCandidates = 0;
   if ( (UFG::qNode<UFG::DataStreamer::Handle,UFG::DataStreamer::Handle> **)&UFG::SceneryGroupComponent::s_SceneryGroupComponentList.mNode.mNext[-6].mNext != &UFG::SectionChooser::mStreamBSPDebugData.mNext )
   {
     while ( 1 )
     {
-      v3 = 0;
-      v4 = WORD2(v1[2].mNext[5].mNext);
-      if ( v4 > 0 )
+      mNext = p_mNext[2].mNext;
+      v4 = 0;
+      v5 = WORD2(mNext[5].mNext);
+      if ( WORD2(mNext[5].mNext) )
         break;
 LABEL_8:
-      v1 = (UFG::DataStreamer::Handle *)&v1[2].mPrev[-6].mNext;
-      if ( v1 == (UFG::DataStreamer::Handle *)&UFG::SectionChooser::mStreamBSPDebugData.mNext )
+      p_mNext = (UFG::DataStreamer::Handle *)&p_mNext[2].mPrev[-6].mNext;
+      if ( p_mNext == (UFG::DataStreamer::Handle *)&UFG::SectionChooser::mStreamBSPDebugData.mNext )
         return;
     }
     while ( 1 )
     {
-      v5 = v1[2].mNext;
-      v6 = v5[7].mNext;
-      v7 = (signed __int64)&v5[7].mNext;
-      v8 = (signed __int64)(v6 ? (UFG::qNode<UFG::DataStreamer::Handle,UFG::DataStreamer::Handle> *)((char *)v6 + v7) : 0i64);
-      v9 = v8 + ((unsigned __int64)v3 << 7);
+      v6 = p_mNext[2].mNext;
+      v7 = v6[7].mNext;
+      v8 = &v6[7].mNext;
+      v9 = v7 ? (UFG::qNode<UFG::DataStreamer::Handle,UFG::DataStreamer::Handle> *)((char *)v7 + (_QWORD)v8) : 0i64;
+      v10 = &v9[8 * (unsigned __int64)v4];
       if ( v2 >= 500 )
         break;
-      v10 = v2;
-      ++v3;
+      v11 = v2;
+      ++v4;
       ++v2;
-      v10 *= 100i64;
-      *(_DWORD *)(v10 + 5406203008i64) = 0;
-      v11 = *(_DWORD *)(v9 + 4);
-      v12 = *(_DWORD *)(v9 + 8);
-      *(_DWORD *)(v10 + 5406203012i64) = *(_DWORD *)v9;
-      *(_DWORD *)(v10 + 5406203016i64) = v11;
-      *(_DWORD *)(v10 + 5406203020i64) = v12;
-      v13 = *(_DWORD *)(v9 + 20);
-      v14 = *(_DWORD *)(v9 + 24);
-      *(_DWORD *)(v10 + 5406203024i64) = *(_DWORD *)(v9 + 16);
-      *(_DWORD *)(v10 + 5406203028i64) = v13;
-      *(_DWORD *)(v10 + 5406203032i64) = v14;
-      v15 = *(_OWORD *)(v9 + 80);
-      v16 = *(_OWORD *)(v9 + 96);
-      v17 = *(_OWORD *)(v9 + 112);
-      *(_OWORD *)(v10 + 5406203036i64) = *(_OWORD *)(v9 + 64);
+      v11 *= 100i64;
+      *(_DWORD *)((char *)&UFG::AIAwareness::KnowledgeSpace::mSpaceCandidates.vfptr + v11) = 0;
+      mPrev_high = HIDWORD(v10->mPrev);
+      v13 = (int)v10->mNext;
+      *(_DWORD *)((char *)&UFG::AIAwareness::KnowledgeSpace::mSpaceCandidates.vfptr + v11 + 4) = v10->mPrev;
+      *(_DWORD *)((char *)&UFG::AIAwareness::KnowledgeSpace::mSpaceCandidates.m_memSizeAndFlags + v11) = mPrev_high;
+      *(_DWORD *)((char *)&UFG::AIAwareness::KnowledgeSpace::mSpaceCandidates.m_referenceCount + v11 + 2) = v13;
+      v14 = HIDWORD(v10[1].mPrev);
+      v15 = (int)v10[1].mNext;
+      *(_DWORD *)((char *)&unk_1423C1C90 + v11) = v10[1].mPrev;
+      *(_DWORD *)((char *)&unk_1423C1C94 + v11) = v14;
+      *(_DWORD *)((char *)&unk_1423C1C98 + v11) = v15;
+      v16 = v10[5];
+      v17 = v10[6];
+      v18 = v10[7];
+      *(UFG::qNode<UFG::DataStreamer::Handle,UFG::DataStreamer::Handle> *)((char *)&unk_1423C1C9C + v11) = v10[4];
       UFG::AIAwareness::KnowledgeSpace::mNumSpaceCandidates = v2;
-      *(_OWORD *)(v10 + 5406203052i64) = v15;
-      *(_OWORD *)(v10 + 5406203068i64) = v16;
-      *(_OWORD *)(v10 + 5406203084i64) = v17;
-      *(_DWORD *)(v10 + 5406203100i64) = 2;
-      *(_WORD *)(v10 + 5406203104i64) = 512;
-      if ( v3 >= v4 )
+      *(UFG::qNode<UFG::DataStreamer::Handle,UFG::DataStreamer::Handle> *)((char *)&unk_1423C1CAC + v11) = v16;
+      *(UFG::qNode<UFG::DataStreamer::Handle,UFG::DataStreamer::Handle> *)((char *)&unk_1423C1CBC + v11) = v17;
+      *(UFG::qNode<UFG::DataStreamer::Handle,UFG::DataStreamer::Handle> *)((char *)&unk_1423C1CCC + v11) = v18;
+      *(_DWORD *)((char *)&unk_1423C1CDC + v11) = 2;
+      *(_WORD *)((char *)&unk_1423C1CE0 + v11) = 512;
+      if ( v4 >= v5 )
         goto LABEL_8;
     }
   }
@@ -100,151 +99,148 @@ LABEL_8:
 // RVA: 0x39B820
 void __fastcall UFG::AIAwareness::KnowledgeSpace::Update(UFG::AIAwareness::KnowledgeSpace *this, float deltaTime)
 {
-  int v2; // er10
-  UFG::AIAwareness::KnowledgeSpace *v3; // r9
+  int v2; // r10d
   UFG::AIAwareness::KnowledgeSpace *v4; // r8
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v5; // rdx
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mSimObject; // rdx
   bool v6; // sf
   __int64 v7; // rax
-  signed __int64 v8; // r11
-  float v9; // xmm0_4
-  float v10; // xmm1_4
-  UFG::SimObject *v11; // rbx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v12; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v13; // rax
+  UFG::AIAwareness::KnowledgeSpace::PositionCandidate *v8; // r11
+  float y; // xmm0_4
+  float z; // xmm1_4
+  UFG::SimObject *m_pPointer; // rbx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v14; // rax
 
   v2 = 0;
-  v3 = this;
   this->mHasOverridingTarget = 0;
   if ( this->mNumPositionCandidates > 0 )
   {
     v4 = this;
-    v5 = &this->mPositionCandidates[0].mSimObject;
+    p_mSimObject = &this->mPositionCandidates[0].mSimObject;
     do
     {
-      if ( v4->mPositionCandidates[0].mPriority == 2 )
-        v3->mHasOverridingTarget = 1;
+      if ( v4->mPositionCandidates[0].mPriority == TARGETPRIORITY_OVERRIDE )
+        this->mHasOverridingTarget = 1;
       if ( v4->mPositionCandidates[0].mLockRefCount <= 0
         && (v6 = (char)(v4->mPositionCandidates[0].mRefCount - 1) < 0, --v4->mPositionCandidates[0].mRefCount, v6) )
       {
-        v7 = --v3->mNumPositionCandidates;
+        v7 = --this->mNumPositionCandidates;
         if ( v2 == (_DWORD)v7 )
           return;
-        v8 = (signed __int64)&v3->mPositionCandidates[v7];
-        v4->mPositionCandidates[0].mPriority = *(_DWORD *)v8;
-        v9 = *(float *)(v8 + 8);
-        v10 = *(float *)(v8 + 12);
-        v4->mPositionCandidates[0].mPosition.x = *(float *)(v8 + 4);
-        v4->mPositionCandidates[0].mPosition.y = v9;
-        v4->mPositionCandidates[0].mPosition.z = v10;
-        v4->mPositionCandidates[0].mName.mUID = *(_DWORD *)(v8 + 16);
-        v11 = *(UFG::SimObject **)(v8 + 40);
-        if ( v5->m_pPointer )
+        v8 = &this->mPositionCandidates[v7];
+        v4->mPositionCandidates[0].mPriority = v8->mPriority;
+        y = v8->mPosition.y;
+        z = v8->mPosition.z;
+        v4->mPositionCandidates[0].mPosition.x = v8->mPosition.x;
+        v4->mPositionCandidates[0].mPosition.y = y;
+        v4->mPositionCandidates[0].mPosition.z = z;
+        v4->mPositionCandidates[0].mName.mUID = v8->mName.mUID;
+        m_pPointer = v8->mSimObject.m_pPointer;
+        if ( p_mSimObject->m_pPointer )
         {
-          v12 = v5->mPrev;
-          v13 = v5->mNext;
-          v12->mNext = v13;
-          v13->mPrev = v12;
-          v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v5->mPrev;
-          v5->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v5->mPrev;
+          mPrev = p_mSimObject->mPrev;
+          mNext = p_mSimObject->mNext;
+          mPrev->mNext = mNext;
+          mNext->mPrev = mPrev;
+          p_mSimObject->mPrev = p_mSimObject;
+          p_mSimObject->mNext = p_mSimObject;
         }
-        v5->m_pPointer = v11;
-        if ( v11 )
+        p_mSimObject->m_pPointer = m_pPointer;
+        if ( m_pPointer )
         {
-          v14 = v11->m_SafePointerList.mNode.mPrev;
-          v14->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v5->mPrev;
-          v5->mPrev = v14;
-          v5->mNext = &v11->m_SafePointerList.mNode;
-          v11->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v5->mPrev;
+          v14 = m_pPointer->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+          v14->mNext = p_mSimObject;
+          p_mSimObject->mPrev = v14;
+          p_mSimObject->mNext = &m_pPointer->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+          m_pPointer->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = p_mSimObject;
         }
-        v4->mPositionCandidates[0].mType = *(_DWORD *)(v8 + 48);
-        v4->mPositionCandidates[0].mLockRefCount = *(_BYTE *)(v8 + 52);
-        v4->mPositionCandidates[0].mRefCount = *(_BYTE *)(v8 + 53);
+        v4->mPositionCandidates[0].mType = v8->mType;
+        v4->mPositionCandidates[0].mLockRefCount = v8->mLockRefCount;
+        v4->mPositionCandidates[0].mRefCount = v8->mRefCount;
       }
       else
       {
         ++v2;
         v4 = (UFG::AIAwareness::KnowledgeSpace *)((char *)v4 + 56);
-        v5 = (UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *)((char *)v5 + 56);
+        p_mSimObject = (UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *)((char *)p_mSimObject + 56);
       }
     }
-    while ( v2 < v3->mNumPositionCandidates );
+    while ( v2 < this->mNumPositionCandidates );
   }
 }
 
 // File Line: 132
 // RVA: 0x39A6F0
-void __fastcall UFG::AIAwareness::KnowledgeSpace::AddTargetSimObject(UFG::AIAwareness::KnowledgeSpace *this, UFG::SimObject *pSimObject, UFG::AIAwareness::TargetPriority priority)
+void __fastcall UFG::AIAwareness::KnowledgeSpace::AddTargetSimObject(
+        UFG::AIAwareness::KnowledgeSpace *this,
+        UFG::SimObject *pSimObject,
+        UFG::AIAwareness::TargetPriority priority)
 {
-  UFG::AIAwareness::KnowledgeSpace *v3; // r10
-  signed int v4; // ecx
-  UFG::SimObject *v5; // rbx
-  __int64 v6; // r11
-  UFG::qSymbol *v7; // r9
-  float v8; // xmm1_4
-  float v9; // xmm2_4
-  signed __int64 v10; // rax
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v11; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v12; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v13; // rax
+  int v4; // ecx
+  __int64 mNumPositionCandidates; // r11
+  UFG::qSymbol *p_mName; // r9
+  float y; // xmm1_4
+  float z; // xmm2_4
+  __int64 v10; // rax
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mSimObject; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v14; // rax
-  signed __int64 v15; // rax
+  __int64 v15; // rax
 
-  v3 = this;
   v4 = 0;
-  v5 = pSimObject;
-  v6 = v3->mNumPositionCandidates;
-  if ( (signed int)v6 <= 0 )
+  mNumPositionCandidates = this->mNumPositionCandidates;
+  if ( (int)mNumPositionCandidates <= 0 )
     goto LABEL_6;
-  v7 = &v3->mPositionCandidates[0].mName;
-  while ( v7[8].mUID != 1 || v7->mUID != pSimObject->m_Name.mUID )
+  p_mName = &this->mPositionCandidates[0].mName;
+  while ( p_mName[8].mUID != 1 || p_mName->mUID != pSimObject->m_Name.mUID )
   {
     ++v4;
-    v7 += 14;
-    if ( v4 >= (signed int)v6 )
+    p_mName += 14;
+    if ( v4 >= (int)mNumPositionCandidates )
       goto LABEL_6;
   }
   if ( v4 < 0 )
   {
 LABEL_6:
-    if ( (signed int)v6 < 100 )
+    if ( (int)mNumPositionCandidates < 100 )
     {
-      v3->mPositionCandidates[v6].mPriority = priority;
-      v8 = UFG::qVector3::msZero.y;
-      v9 = UFG::qVector3::msZero.z;
-      v10 = v3->mNumPositionCandidates;
-      v3->mPositionCandidates[v10].mPosition.x = UFG::qVector3::msZero.x;
-      v3->mPositionCandidates[v10].mPosition.y = v8;
-      v3->mPositionCandidates[v10].mPosition.z = v9;
-      v3->mPositionCandidates[v3->mNumPositionCandidates].mName.mUID = pSimObject->m_Name.mUID;
-      v11 = &v3->mPositionCandidates[v3->mNumPositionCandidates].mSimObject;
-      if ( v11->m_pPointer )
+      this->mPositionCandidates[mNumPositionCandidates].mPriority = priority;
+      y = UFG::qVector3::msZero.y;
+      z = UFG::qVector3::msZero.z;
+      v10 = this->mNumPositionCandidates;
+      this->mPositionCandidates[v10].mPosition.x = UFG::qVector3::msZero.x;
+      this->mPositionCandidates[v10].mPosition.y = y;
+      this->mPositionCandidates[v10].mPosition.z = z;
+      this->mPositionCandidates[this->mNumPositionCandidates].mName.mUID = pSimObject->m_Name.mUID;
+      p_mSimObject = &this->mPositionCandidates[this->mNumPositionCandidates].mSimObject;
+      if ( p_mSimObject->m_pPointer )
       {
-        v12 = v11->mPrev;
-        v13 = v11->mNext;
-        v12->mNext = v13;
-        v13->mPrev = v12;
-        v11->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v11->mPrev;
-        v11->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v11->mPrev;
+        mPrev = p_mSimObject->mPrev;
+        mNext = p_mSimObject->mNext;
+        mPrev->mNext = mNext;
+        mNext->mPrev = mPrev;
+        p_mSimObject->mPrev = p_mSimObject;
+        p_mSimObject->mNext = p_mSimObject;
       }
-      v11->m_pPointer = v5;
-      v14 = v5->m_SafePointerList.mNode.mPrev;
-      v14->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v11->mPrev;
-      v11->mPrev = v14;
-      v11->mNext = &v5->m_SafePointerList.mNode;
-      v5->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v11->mPrev;
-      v3->mPositionCandidates[v3->mNumPositionCandidates].mType = 1;
-      v3->mPositionCandidates[v3->mNumPositionCandidates].mLockRefCount = 0;
-      v3->mPositionCandidates[v3->mNumPositionCandidates++].mRefCount = 2;
+      p_mSimObject->m_pPointer = pSimObject;
+      v14 = pSimObject->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+      v14->mNext = p_mSimObject;
+      p_mSimObject->mPrev = v14;
+      p_mSimObject->mNext = &pSimObject->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+      pSimObject->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = p_mSimObject;
+      this->mPositionCandidates[this->mNumPositionCandidates].mType = CANDIDATETYPE_SIMOBJECT;
+      this->mPositionCandidates[this->mNumPositionCandidates].mLockRefCount = 0;
+      this->mPositionCandidates[this->mNumPositionCandidates++].mRefCount = 2;
     }
   }
   else
   {
     v15 = v4;
-    ++v3->mPositionCandidates[v15].mRefCount;
-    if ( v3->mPositionCandidates[v15].mPriority < priority )
-      v3->mPositionCandidates[v15].mPriority = priority;
+    ++this->mPositionCandidates[v15].mRefCount;
+    if ( this->mPositionCandidates[v15].mPriority < priority )
+      this->mPositionCandidates[v15].mPriority = priority;
   }
 }
 

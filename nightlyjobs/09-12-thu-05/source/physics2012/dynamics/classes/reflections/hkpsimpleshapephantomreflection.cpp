@@ -63,23 +63,24 @@ hkClass *__fastcall hkpSimpleShapePhantom::staticClass()
 
 // File Line: 112
 // RVA: 0xD4F6D0
-void __fastcall finishLoadedObjecthkpSimpleShapePhantom(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpSimpleShapePhantom(hkpSimpleShapePhantom *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpSimpleShapePhantom::hkpSimpleShapePhantom);
+  if ( p )
+    hkpSimpleShapePhantom::hkpSimpleShapePhantom(p, finishing);
 }
 
 // File Line: 118
 // RVA: 0xD4F6F0
-void __fastcall cleanupLoadedObjecthkpSimpleShapePhantom(void *p)
+void __fastcall cleanupLoadedObjecthkpSimpleShapePhantom(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 122
 // RVA: 0xD4F700
 hkBaseObjectVtbl *__fastcall getVtablehkpSimpleShapePhantom()
 {
-  hkpSimpleShapePhantom v1; // [rsp+20h] [rbp-1C8h]
+  hkpSimpleShapePhantom v1; // [rsp+20h] [rbp-1C8h] BYREF
 
   hkpSimpleShapePhantom::hkpSimpleShapePhantom(&v1, 0);
   return v1.vfptr;
@@ -96,8 +97,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpSimpleShapePhantomTypeInfo__()
   hkpSimpleShapePhantomTypeInfo.m_typeName = "hkpSimpleShapePhantom";
   hkpSimpleShapePhantomTypeInfo.m_vtable = result;
   hkpSimpleShapePhantomTypeInfo.m_scopedName = "!hkpSimpleShapePhantom";
-  hkpSimpleShapePhantomTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpSimpleShapePhantom;
-  hkpSimpleShapePhantomTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpSimpleShapePhantom;
+  hkpSimpleShapePhantomTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpSimpleShapePhantom;
+  hkpSimpleShapePhantomTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpSimpleShapePhantom;
   return result;
 }
 

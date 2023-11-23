@@ -28,17 +28,17 @@ hkClass *__fastcall hkpVehicleDefaultSteering::staticClass()
 
 // File Line: 67
 // RVA: 0xE256A0
-void __fastcall finishLoadedObjecthkpVehicleDefaultSteering(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpVehicleDefaultSteering(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleDefaultSteering::`vftable;
+    *p = &hkpVehicleDefaultSteering::`vftable;
 }
 
 // File Line: 73
 // RVA: 0xE256C0
-void __fastcall cleanupLoadedObjecthkpVehicleDefaultSteering(void *p)
+void __fastcall cleanupLoadedObjecthkpVehicleDefaultSteering(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 77
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkpVehicleDefaultSteeringTypeInfo__()
   hkpVehicleDefaultSteeringTypeInfo.m_typeName = "hkpVehicleDefaultSteering";
   hkpVehicleDefaultSteeringTypeInfo.m_vtable = result;
   hkpVehicleDefaultSteeringTypeInfo.m_scopedName = "!hkpVehicleDefaultSteering";
-  hkpVehicleDefaultSteeringTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpVehicleDefaultSteering;
-  hkpVehicleDefaultSteeringTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpVehicleDefaultSteering;
+  hkpVehicleDefaultSteeringTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpVehicleDefaultSteering;
+  hkpVehicleDefaultSteeringTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpVehicleDefaultSteering;
   return result;
 }
 

@@ -27,7 +27,7 @@ void dynamic_initializer_for__hkxIndexBufferClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 78
@@ -39,17 +39,17 @@ hkClass *__fastcall hkxIndexBuffer::staticClass()
 
 // File Line: 85
 // RVA: 0xE31F90
-void __fastcall finishLoadedObjecthkxIndexBuffer(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxIndexBuffer(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxIndexBuffer::`vftable;
+    *p = &hkxIndexBuffer::`vftable;
 }
 
 // File Line: 91
 // RVA: 0xE31FB0
-void __fastcall cleanupLoadedObjecthkxIndexBuffer(void *p)
+void __fastcall cleanupLoadedObjecthkxIndexBuffer(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 95
@@ -70,8 +70,8 @@ void **dynamic_initializer_for__hkxIndexBufferTypeInfo__()
   hkxIndexBufferTypeInfo.m_typeName = "hkxIndexBuffer";
   hkxIndexBufferTypeInfo.m_vtable = result;
   hkxIndexBufferTypeInfo.m_scopedName = "!hkxIndexBuffer";
-  hkxIndexBufferTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxIndexBuffer;
-  hkxIndexBufferTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxIndexBuffer;
+  hkxIndexBufferTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxIndexBuffer;
+  hkxIndexBufferTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxIndexBuffer;
   return result;
 }
 

@@ -1,9 +1,12 @@
 // File Line: 40
 // RVA: 0xB87F0
-void __fastcall HavokJobMemoryPoolTagger::onStartJob(HavokJobMemoryPoolTagger *this, hkJobType t, unsigned int m_jobSubType)
+void __fastcall HavokJobMemoryPoolTagger::onStartJob(
+        HavokJobMemoryPoolTagger *this,
+        hkJobType t,
+        unsigned int m_jobSubType)
 {
-  signed __int64 v3; // r8
-  __int32 v4; // edx
+  __int64 v3; // r8
+  int v4; // edx
   int v5; // edx
   bool v6; // zf
   char v7; // dl
@@ -51,14 +54,14 @@ LABEL_10:
 
 // File Line: 69
 // RVA: 0xB8070
-void __fastcall CustomHavokMemoryAllocator::initDefaultPools(CustomHavokMemoryAllocator *this, unsigned int maxRigidBodies)
+void __fastcall CustomHavokMemoryAllocator::initDefaultPools(
+        CustomHavokMemoryAllocator *this,
+        unsigned int maxRigidBodies)
 {
-  CustomHavokMemoryAllocator *v2; // rdi
   signed int v3; // ebx
   char *v4; // rax
   char *v5; // rax
 
-  v2 = this;
   this->m_pools[1] = &gAIMemoryPool;
   this->m_pools[2] = &gPhysicsMemoryPool;
   this->m_pools[3] = &gPhysicsMemoryPool;
@@ -66,19 +69,18 @@ void __fastcall CustomHavokMemoryAllocator::initDefaultPools(CustomHavokMemoryAl
   v4 = UFG::qMalloc(0x2460ui64, "qMemoryPool", 0x800ui64);
   if ( v4 )
     UFG::qMemoryPool::qMemoryPool((UFG::qMemoryPool *)v4);
-  v2->m_pools[0] = (UFG::qMemoryPool *)v4;
+  this->m_pools[0] = (UFG::qMemoryPool *)v4;
   v5 = UFG::qMemoryPool::Allocate(&gPhysicsMemoryPool, v3, "hkpRigidBodyBuffer", 0i64, 1u);
-  v2->mRigidBodyBuffer = v5;
-  UFG::qMemoryPool::Init(v2->m_pools[0], "hkpRigidBodyPool", v5, v3, 0, 1, 1u, &gPhysicsMemoryPool, 1, 1);
+  this->mRigidBodyBuffer = v5;
+  UFG::qMemoryPool::Init(this->m_pools[0], "hkpRigidBodyPool", v5, v3, 0, 1, 1u, &gPhysicsMemoryPool, 1, 1);
 }
 
 // File Line: 101
 // RVA: 0xB6C70
 char *__fastcall CustomHavokMemoryAllocator::bufAlloc(CustomHavokMemoryAllocator *this, int *reqNumBytesInOut)
 {
-  CustomHavokMemoryAllocator *v2; // rbx
   const char *v3; // r8
-  signed __int64 v4; // r10
+  __int64 v4; // r10
   unsigned __int64 v5; // rdx
   __int64 v6; // r9
   const char *v7; // rax
@@ -86,15 +88,14 @@ char *__fastcall CustomHavokMemoryAllocator::bufAlloc(CustomHavokMemoryAllocator
   unsigned __int64 v9; // r9
   UFG::qMemoryPool *v10; // rcx
 
-  v2 = this;
   v3 = "UnknownHavokAllocation";
   v4 = *((_QWORD *)NtCurrentTeb()->Reserved1[11] + tls_index) + 16i64;
   v5 = *reqNumBytesInOut;
   v6 = *(char *)(v4 + 80);
   v7 = *(const char **)(v4 + 8 * v6 + 16);
-  v8 = *(signed int *)(v4 + 4 * v6);
+  v8 = *(int *)(v4 + 4 * v6);
   v9 = *(_QWORD *)(v4 + 8 * v6 + 48);
-  v10 = v2->m_pools[v8];
+  v10 = this->m_pools[v8];
   if ( v7 )
     v3 = v7;
   return UFG::qMemoryPool::Allocate(v10, v5, v3, v9, 1u);
@@ -102,42 +103,38 @@ char *__fastcall CustomHavokMemoryAllocator::bufAlloc(CustomHavokMemoryAllocator
 
 // File Line: 116
 // RVA: 0xB6D20
-char *__fastcall CustomHavokMemoryAllocator::bufRealloc(CustomHavokMemoryAllocator *this, void *pold, __int64 oldNumBytes, int *reqNumBytesInOut)
+char *__fastcall CustomHavokMemoryAllocator::bufRealloc(
+        CustomHavokMemoryAllocator *this,
+        char *pold,
+        __int64 oldNumBytes,
+        int *reqNumBytesInOut)
 {
-  int *v4; // rbx
-  char *v5; // r11
   unsigned __int64 v6; // r9
-  signed __int64 v8; // rdx
-  UFG::qMemoryPool **v9; // r8
+  __int64 v8; // rdx
+  UFG::qMemoryPool **i; // r8
 
-  v4 = reqNumBytesInOut;
-  v5 = (char *)pold;
-  v6 = (signed int)oldNumBytes;
+  v6 = (int)oldNumBytes;
   if ( !pold )
     return (char *)((__int64 (__fastcall *)(CustomHavokMemoryAllocator *, int *, __int64, _QWORD))this->vfptr->bufAlloc)(
                      this,
-                     v4,
+                     reqNumBytesInOut,
                      oldNumBytes,
-                     (signed int)oldNumBytes);
+                     (int)oldNumBytes);
   v8 = 0i64;
-  v9 = this->m_pools;
-  while ( v5 >= (*v9)->mEnd || v5 < (*v9)->mStart )
+  for ( i = this->m_pools; pold >= (*i)->mEnd || pold < (*i)->mStart; ++i )
   {
-    ++v8;
-    ++v9;
-    if ( v8 >= 4 )
+    if ( ++v8 >= 4 )
       return 0i64;
   }
-  return UFG::qMemoryPool::Realloc(*v9, v5, *v4, v6, "realloc2", 0i64);
+  return UFG::qMemoryPool::Realloc(*i, pold, *reqNumBytesInOut, v6, "realloc2", 0i64);
 }
 
 // File Line: 180
 // RVA: 0xB6710
-char *__fastcall CustomHavokMemoryAllocator::blockAlloc(CustomHavokMemoryAllocator *this, __int64 numBytes)
+char *__fastcall CustomHavokMemoryAllocator::blockAlloc(CustomHavokMemoryAllocator *this, int numBytes)
 {
   _QWORD *v2; // rax
-  CustomHavokMemoryAllocator *v3; // r11
-  signed __int64 v4; // r10
+  __int64 v4; // r10
   const char *v5; // r8
   __int64 v6; // r9
   const char *v7; // rax
@@ -146,15 +143,13 @@ char *__fastcall CustomHavokMemoryAllocator::blockAlloc(CustomHavokMemoryAllocat
   UFG::qMemoryPool *v10; // rcx
 
   v2 = NtCurrentTeb()->Reserved1[11];
-  v3 = this;
-  numBytes = (signed int)numBytes;
   v4 = v2[tls_index] + 16i64;
   v5 = "UnknownHavokAllocation";
   v6 = *(char *)(v2[tls_index] + 96i64);
   v7 = *(const char **)(v4 + 8 * v6 + 16);
-  v8 = *(signed int *)(v4 + 4 * v6);
+  v8 = *(int *)(v4 + 4 * v6);
   v9 = *(_QWORD *)(v4 + 8 * v6 + 48);
-  v10 = v3->m_pools[v8];
+  v10 = this->m_pools[v8];
   if ( v7 )
     v5 = v7;
   return UFG::qMemoryPool::Allocate(v10, numBytes, v5, v9, 1u);
@@ -162,120 +157,114 @@ char *__fastcall CustomHavokMemoryAllocator::blockAlloc(CustomHavokMemoryAllocat
 
 // File Line: 205
 // RVA: 0xB67A0
-void __fastcall CustomHavokMemoryAllocator::blockFree(CustomHavokMemoryAllocator *this, void *p, int numBytes)
+void __fastcall CustomHavokMemoryAllocator::blockFree(CustomHavokMemoryAllocator *this, char *p, int numBytes)
 {
-  signed __int64 v3; // rax
-  UFG::qMemoryPool **v4; // r9
+  __int64 v3; // rax
+  UFG::qMemoryPool **i; // r9
 
   if ( p )
   {
     v3 = 0i64;
-    v4 = this->m_pools;
-    while ( p >= (*v4)->mEnd || p < (*v4)->mStart )
+    for ( i = this->m_pools; p >= (*i)->mEnd || p < (*i)->mStart; ++i )
     {
-      ++v3;
-      ++v4;
-      if ( v3 >= 4 )
+      if ( ++v3 >= 4 )
       {
         operator delete[](p);
         return;
       }
     }
-    UFG::qMemoryPool::Free(*v4, p);
+    UFG::qMemoryPool::Free(*i, p);
   }
 }
 
 // File Line: 232
 // RVA: 0xB7F50
-unsigned __int64 __fastcall CustomHavokMemoryAllocator::getAllocatedSize(CustomHavokMemoryAllocator *this, const void *obj, int nbytes)
+unsigned __int64 __fastcall CustomHavokMemoryAllocator::getAllocatedSize(
+        CustomHavokMemoryAllocator *this,
+        char *obj,
+        int nbytes)
 {
-  signed __int64 v3; // rax
-  UFG::qMemoryPool **v4; // r9
+  __int64 v3; // rax
+  UFG::qMemoryPool **i; // r9
 
   v3 = 0i64;
-  v4 = this->m_pools;
-  while ( obj >= (*v4)->mEnd || obj < (*v4)->mStart )
+  for ( i = this->m_pools; obj >= (*i)->mEnd || obj < (*i)->mStart; ++i )
   {
-    ++v3;
-    ++v4;
-    if ( v3 >= 4 )
+    if ( ++v3 >= 4 )
       return 0i64;
   }
-  return UFG::qMemoryPool::Size(*v4, (void *)obj);
+  return UFG::qMemoryPool::Size(*i, obj);
 }
 
 // File Line: 254
 // RVA: 0xB6CE0
 char *__fastcall HavokTempMemoryAllocator::bufAlloc(HavokTempMemoryAllocator *this, int *reqNumBytesInOut)
 {
-  return UFG::qMemoryPool::Allocate(this->mPool, *reqNumBytesInOut, &customWorldMapCaption, 0i64, 1u);
+  return UFG::qMemoryPool::Allocate(this->mPool, *reqNumBytesInOut, &customCaption, 0i64, 1u);
 }
 
 // File Line: 269
 // RVA: 0xB6DB0
-char *__fastcall HavokTempMemoryAllocator::bufRealloc(HavokTempMemoryAllocator *this, void *pold, int oldNumBytes, int *reqNumBytesInOut)
+char *__fastcall HavokTempMemoryAllocator::bufRealloc(
+        HavokTempMemoryAllocator *this,
+        void *pold,
+        int oldNumBytes,
+        int *reqNumBytesInOut)
 {
-  char *result; // rax
-
   if ( pold )
-    result = UFG::qMemoryPool::Realloc(this->mPool, pold, *reqNumBytesInOut, oldNumBytes, "realloc3", 0i64);
+    return UFG::qMemoryPool::Realloc(this->mPool, pold, *reqNumBytesInOut, oldNumBytes, "realloc3", 0i64);
   else
-    result = 0i64;
-  return result;
+    return 0i64;
 }
 
 // File Line: 292
 // RVA: 0x98BC0
 void __fastcall HavokTempMemoryAllocator::HavokTempMemoryAllocator(HavokTempMemoryAllocator *this)
 {
-  HavokTempMemoryAllocator *v1; // rbx
   char *v2; // rax
   char *v3; // rax
 
-  v1 = this;
   this->vfptr = (hkMemoryAllocatorVtbl *)&hkMemoryAllocator::`vftable;
   this->vfptr = (hkMemoryAllocatorVtbl *)&HavokTempMemoryAllocator::`vftable;
   v2 = UFG::qMalloc(9312ui64, "qMemoryPool", 2048ui64);
   if ( v2 )
     UFG::qMemoryPool::qMemoryPool((UFG::qMemoryPool *)v2);
-  v1->mPool = (UFG::qMemoryPool *)v2;
+  this->mPool = (UFG::qMemoryPool *)v2;
   v3 = UFG::qMemoryPool::Allocate(UFG::gMainMemoryPool, 0x300000ui64, "HavokTempMemoryAllocator", 0i64, 1u);
-  v1->mBuffer = v3;
-  UFG::qMemoryPool::Init(v1->mPool, "HavokTmpPool", v3, 0x300000i64, 0x100000, 1, 1u, UFG::gMainMemoryPool, 1, 1);
+  this->mBuffer = v3;
+  UFG::qMemoryPool::Init(this->mPool, "HavokTmpPool", v3, 0x300000i64, 0x100000, 1, 1u, UFG::gMainMemoryPool, 1, 1);
 }
 
 // File Line: 313
 // RVA: 0x9C4D0
 void __fastcall HavokTempMemoryAllocator::~HavokTempMemoryAllocator(HavokTempMemoryAllocator *this)
 {
-  HavokTempMemoryAllocator *v1; // rbx
-  UFG::qMemoryPool *v2; // rcx
-  UFG::qNode<UFG::qMemoryPool,UFG::qMemoryPool> *v3; // rdx
-  UFG::qNode<UFG::qMemoryPool,UFG::qMemoryPool> *v4; // rax
+  UFG::qMemoryPool *mPool; // rcx
+  UFG::qNode<UFG::qMemoryPool,UFG::qMemoryPool> *mPrev; // rdx
+  UFG::qNode<UFG::qMemoryPool,UFG::qMemoryPool> *mNext; // rax
 
-  v1 = this;
   this->vfptr = (hkMemoryAllocatorVtbl *)&HavokTempMemoryAllocator::`vftable;
   UFG::qMemoryPool::Close(this->mPool);
-  v2 = v1->mPool;
-  if ( v2 )
+  mPool = this->mPool;
+  if ( mPool )
   {
-    v3 = v2->mPrev;
-    v4 = v2->mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v2->mPrev = (UFG::qNode<UFG::qMemoryPool,UFG::qMemoryPool> *)&v2->mPrev;
-    v2->mNext = (UFG::qNode<UFG::qMemoryPool,UFG::qMemoryPool> *)&v2->mPrev;
-    operator delete[](v2);
+    mPrev = mPool->mPrev;
+    mNext = mPool->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    mPool->mPrev = mPool;
+    mPool->mNext = mPool;
+    operator delete[](mPool);
   }
-  UFG::qMemoryPool::Free(UFG::gMainMemoryPool, v1->mBuffer);
-  hkMemoryAllocator::~hkMemoryAllocator((hkMemoryAllocator *)&v1->vfptr);
+  UFG::qMemoryPool::Free(UFG::gMainMemoryPool, this->mBuffer);
+  hkMemoryAllocator::~hkMemoryAllocator(this);
 }
 
 // File Line: 324
 // RVA: 0xB6770
 char *__fastcall HavokTempMemoryAllocator::blockAlloc(HavokTempMemoryAllocator *this, int numBytes)
 {
-  return UFG::qMemoryPool::Allocate(this->mPool, numBytes, &customWorldMapCaption, 0i64, 1u);
+  return UFG::qMemoryPool::Allocate(this->mPool, numBytes, &customCaption, 0i64, 1u);
 }
 
 // File Line: 335
@@ -288,88 +277,83 @@ void __fastcall HavokTempMemoryAllocator::blockFree(HavokTempMemoryAllocator *th
 
 // File Line: 348
 // RVA: 0xB7FA0
-unsigned __int64 __fastcall HavokTempMemoryAllocator::getAllocatedSize(HavokTempMemoryAllocator *this, const void *obj, int nbytes)
+unsigned __int64 __fastcall HavokTempMemoryAllocator::getAllocatedSize(
+        HavokTempMemoryAllocator *this,
+        void *obj,
+        int nbytes)
 {
-  return UFG::qMemoryPool::Size(this->mPool, (void *)obj);
+  return UFG::qMemoryPool::Size(this->mPool, obj);
 }
 
 // File Line: 358
 // RVA: 0x98770
 void __fastcall CustomHavokMemorySystem::CustomHavokMemorySystem(CustomHavokMemorySystem *this)
 {
-  CustomHavokMemorySystem *v1; // rbx
-
-  v1 = this;
   this->vfptr = (hkMemorySystemVtbl *)&hkMemorySystem::`vftable;
   this->vfptr = (hkMemorySystemVtbl *)&CustomHavokMemorySystem::`vftable;
   this->m_frameInfo = 0i64;
   this->m_allocator = 0i64;
   hkMemoryRouter::hkMemoryRouter(&this->m_mainRouter);
-  hkSolverAllocator::hkSolverAllocator(&v1->m_solverAllocator);
-  HavokTempMemoryAllocator::HavokTempMemoryAllocator(&v1->m_tempAllocator);
-  CustomHavokMemorySystem::mInstance = v1;
+  hkSolverAllocator::hkSolverAllocator(&this->m_solverAllocator);
+  HavokTempMemoryAllocator::HavokTempMemoryAllocator(&this->m_tempAllocator);
+  CustomHavokMemorySystem::mInstance = this;
 }
 
 // File Line: 371
 // RVA: 0xB8550
-hkMemoryRouter *__fastcall CustomHavokMemorySystem::mainInit(CustomHavokMemorySystem *this, hkMemorySystem::FrameInfo *info, hkFlags<enum hkMemorySystem::FlagBits,int> flags)
+hkMemoryRouter *__fastcall CustomHavokMemorySystem::mainInit(
+        CustomHavokMemorySystem *this,
+        hkMemorySystem::FrameInfo *info,
+        hkFlags<enum hkMemorySystem::FlagBits,int> flags)
 {
-  hkMemorySystem::FrameInfo *v3; // rsi
-  CustomHavokMemorySystem *v4; // rbx
-  signed __int64 v5; // rdi
+  __int64 v5; // rdi
   char v6; // r8
-  __int64 v7; // rax
-  char v8; // cl
-  char *v9; // rax
-  char v10; // al
-  unsigned int v11; // esi
-  void *v12; // rax
-  char v13; // al
-  unsigned int v15; // [rsp+50h] [rbp+18h]
+  char v7; // cl
+  char *v8; // rax
+  char m_storage; // al
+  unsigned int m_solverBufferSize; // esi
+  void *v11; // rax
+  char v12; // al
 
-  v15 = flags.m_storage;
-  v3 = info;
-  v4 = this;
   v5 = *((_QWORD *)NtCurrentTeb()->Reserved1[11] + tls_index) + 16i64;
   v6 = ++*(_BYTE *)(v5 + 80);
-  v7 = v6;
-  *(_DWORD *)(v5 + 4 * v7) = 3;
-  *(_QWORD *)(v5 + 8 * v7 + 16) = "HavokMemorySystem::mainInit";
-  *(_QWORD *)(v5 + 8 * v7 + 48) = 0i64;
-  v8 = *(_BYTE *)(v5 + 81);
-  if ( v6 > v8 )
-    v8 = v6;
-  *(_BYTE *)(v5 + 81) = v8;
-  v9 = UFG::qMalloc(4ui64, "FrameInfo", 0i64);
-  if ( v9 )
-    hkMemorySystem::FrameInfo::FrameInfo((hkMemorySystem::FrameInfo *)v9, v3->m_solverBufferSize);
-  v4->m_frameInfo = (hkMemorySystem::FrameInfo *)v9;
-  v10 = v15;
-  if ( v15 & 1 )
+  *(_DWORD *)(v5 + 4i64 * v6) = 3;
+  *(_QWORD *)(v5 + 8i64 * v6 + 16) = "HavokMemorySystem::mainInit";
+  *(_QWORD *)(v5 + 8i64 * v6 + 48) = 0i64;
+  v7 = *(_BYTE *)(v5 + 81);
+  if ( v6 > v7 )
+    v7 = v6;
+  *(_BYTE *)(v5 + 81) = v7;
+  v8 = UFG::qMalloc(4ui64, "FrameInfo", 0i64);
+  if ( v8 )
+    hkMemorySystem::FrameInfo::FrameInfo((hkMemorySystem::FrameInfo *)v8, info->m_solverBufferSize);
+  this->m_frameInfo = (hkMemorySystem::FrameInfo *)v8;
+  m_storage = flags.m_storage;
+  if ( (flags.m_storage & 1) != 0 )
   {
-    ((void (__fastcall *)(CustomHavokMemorySystem *, hkMemoryRouter *, const char *, _QWORD, signed __int64))v4->vfptr->threadInit)(
-      v4,
-      &v4->m_mainRouter,
+    ((void (__fastcall *)(CustomHavokMemorySystem *, hkMemoryRouter *, const char *, _QWORD, __int64))this->vfptr->threadInit)(
+      this,
+      &this->m_mainRouter,
       "main",
-      v15,
+      (unsigned int)flags.m_storage,
       -2i64);
-    v10 = v15;
+    m_storage = flags.m_storage;
   }
-  if ( v10 & 2 )
+  if ( (m_storage & 2) != 0 )
   {
-    v11 = v4->m_frameInfo->m_solverBufferSize;
-    if ( v11 )
+    m_solverBufferSize = this->m_frameInfo->m_solverBufferSize;
+    if ( m_solverBufferSize )
     {
-      v12 = (void *)(*((__int64 (__fastcall **)(hkMemoryAllocator *, _QWORD))&v4->m_allocator->vfptr->__vecDelDtor + 1))(
-                      v4->m_allocator,
-                      v11);
-      hkSolverAllocator::setBuffer(&v4->m_solverAllocator, v12, v11);
+      v11 = (void *)(*((__int64 (__fastcall **)(hkMemoryAllocator *, _QWORD))&this->m_allocator->vfptr->__vecDelDtor + 1))(
+                      this->m_allocator,
+                      m_solverBufferSize);
+      hkSolverAllocator::setBuffer(&this->m_solverAllocator, v11, m_solverBufferSize);
     }
   }
-  v13 = *(_BYTE *)(v5 + 80);
-  if ( v13 > 0 )
+  v12 = *(_BYTE *)(v5 + 80);
+  if ( v12 > 0 )
   {
-    *(_BYTE *)(v5 + 80) = v13 - 1;
+    *(_BYTE *)(v5 + 80) = v12 - 1;
   }
   else
   {
@@ -378,104 +362,97 @@ hkMemoryRouter *__fastcall CustomHavokMemorySystem::mainInit(CustomHavokMemorySy
     *(_QWORD *)(v5 + 16) = 0i64;
     *(_QWORD *)(v5 + 48) = 0i64;
   }
-  return &v4->m_mainRouter;
+  return &this->m_mainRouter;
 }
 
 // File Line: 398
 // RVA: 0xB8680
-hkResult *__fastcall CustomHavokMemorySystem::mainQuit(CustomHavokMemorySystem *this, hkResult *result, hkFlags<enum hkMemorySystem::FlagBits,int> flags)
+hkResult *__fastcall CustomHavokMemorySystem::mainQuit(
+        CustomHavokMemorySystem *this,
+        hkResult *result,
+        hkFlags<enum hkMemorySystem::FlagBits,int> flags)
 {
-  hkResult *v3; // rdi
-  CustomHavokMemorySystem *v4; // rbx
-  int v6; // [rsp+40h] [rbp+18h]
+  int v5; // edx
+  char m_storage; // [rsp+40h] [rbp+18h]
 
-  v6 = flags.m_storage;
-  v3 = result;
-  v4 = this;
-  if ( flags.m_storage & 2
-    && LODWORD(this->m_solverAllocator.m_bufferEnd) != LODWORD(this->m_solverAllocator.m_bufferStart) )
+  m_storage = flags.m_storage;
+  if ( (flags.m_storage & 2) != 0 )
   {
-    this->m_allocator->vfptr->blockFree(
-      this->m_allocator,
-      this->m_solverAllocator.m_bufferStart,
-      LODWORD(this->m_solverAllocator.m_bufferEnd) - LODWORD(this->m_solverAllocator.m_bufferStart));
-    hkSolverAllocator::setBuffer(&v4->m_solverAllocator, 0i64, 0);
-    LOBYTE(flags.m_storage) = v6;
+    v5 = LODWORD(this->m_solverAllocator.m_bufferEnd) - LODWORD(this->m_solverAllocator.m_bufferStart);
+    if ( v5 )
+    {
+      this->m_allocator->vfptr->blockFree(this->m_allocator, this->m_solverAllocator.m_bufferStart, v5);
+      hkSolverAllocator::setBuffer(&this->m_solverAllocator, 0i64, 0);
+      LOBYTE(flags.m_storage) = m_storage;
+    }
   }
-  if ( flags.m_storage & 1 )
+  if ( (flags.m_storage & 1) != 0 )
   {
-    ((void (__fastcall *)(CustomHavokMemorySystem *, hkMemoryRouter *))v4->vfptr->threadQuit)(v4, &v4->m_mainRouter);
-    v4->m_allocator = 0i64;
+    ((void (__fastcall *)(CustomHavokMemorySystem *, hkMemoryRouter *))this->vfptr->threadQuit)(
+      this,
+      &this->m_mainRouter);
+    this->m_allocator = 0i64;
   }
-  v3->m_enum = 0;
-  return v3;
+  result->m_enum = HK_SUCCESS;
+  return result;
 }
 
 // File Line: 419
 // RVA: 0xB8D20
-void __fastcall CustomHavokMemorySystem::threadInit(CustomHavokMemorySystem *this, hkMemoryRouter *router, const char *name, hkFlags<enum hkMemorySystem::FlagBits,int> flags)
+void __fastcall CustomHavokMemorySystem::threadInit(
+        CustomHavokMemorySystem *this,
+        hkMemoryRouter *router,
+        const char *name,
+        hkFlags<enum hkMemorySystem::FlagBits,int> flags)
 {
-  hkMemoryRouter *v4; // rbx
-  CustomHavokMemorySystem *v5; // rdi
-  hkMemoryAllocator *v6; // rax
+  hkMemoryAllocator *m_allocator; // rax
 
-  v4 = router;
-  v5 = this;
-  if ( flags.m_storage & 1 )
+  if ( (flags.m_storage & 1) != 0 )
   {
     router->m_temp = 0i64;
     router->m_heap = this->m_allocator;
-    v6 = this->m_allocator;
+    m_allocator = this->m_allocator;
     router->m_solver = 0i64;
-    router->m_debug = v6;
+    router->m_debug = m_allocator;
   }
-  if ( flags.m_storage & 2 )
+  if ( (flags.m_storage & 2) != 0 )
   {
     hkLifoAllocator::init(&router->m_stack, this->m_allocator, this->m_allocator, this->m_allocator);
-    v4->m_temp = (hkMemoryAllocator *)&v5->m_tempAllocator.vfptr;
-    v4->m_solver = (hkMemoryAllocator *)&v5->m_solverAllocator.vfptr;
+    router->m_temp = &this->m_tempAllocator;
+    router->m_solver = &this->m_solverAllocator;
   }
 }
 
 // File Line: 440
 // RVA: 0xB8D90
-void __fastcall CustomHavokMemorySystem::threadQuit(CustomHavokMemorySystem *this, hkMemoryRouter *router, hkFlags<enum hkMemorySystem::FlagBits,int> flags)
+void __fastcall CustomHavokMemorySystem::threadQuit(
+        CustomHavokMemorySystem *this,
+        hkMemoryRouter *router,
+        hkFlags<enum hkMemorySystem::FlagBits,int> flags)
 {
-  hkMemoryRouter *v3; // rbx
-  int v4; // [rsp+40h] [rbp+18h]
+  char m_storage; // [rsp+40h] [rbp+18h]
 
-  v4 = flags.m_storage;
-  v3 = router;
-  if ( flags.m_storage & 2 )
+  m_storage = flags.m_storage;
+  if ( (flags.m_storage & 2) != 0 )
   {
     router->m_temp = 0i64;
     router->m_solver = 0i64;
     hkLifoAllocator::quit(&router->m_stack, 0i64);
-    LOBYTE(flags.m_storage) = v4;
+    LOBYTE(flags.m_storage) = m_storage;
   }
-  if ( flags.m_storage & 1 )
-    hkMemUtil::memSet(v3, 0, 128);
+  if ( (flags.m_storage & 1) != 0 )
+    hkMemUtil::memSet(router, 0, 128);
 }
 
 // File Line: 477
 // RVA: 0xB8980
 void __fastcall CustomHavokMemorySystem::printStatistics(CustomHavokMemorySystem *this, hkOstream *ostr)
 {
-  hkMemoryAllocator *v2; // rcx
-  __int64 v3; // [rsp+20h] [rbp-38h]
-  __int64 v4; // [rsp+28h] [rbp-30h]
-  __int64 v5; // [rsp+30h] [rbp-28h]
-  __int64 v6; // [rsp+38h] [rbp-20h]
-  __int64 v7; // [rsp+40h] [rbp-18h]
-  __int64 v8; // [rsp+48h] [rbp-10h]
+  hkMemoryAllocator *m_allocator; // rcx
+  _BYTE v3[56]; // [rsp+20h] [rbp-38h] BYREF
 
-  v2 = this->m_allocator;
-  v3 = -1i64;
-  v4 = -1i64;
-  v5 = -1i64;
-  v6 = -1i64;
-  v7 = -1i64;
-  v8 = -1i64;
-  v2->vfptr->getMemoryStatistics(v2, (hkMemoryAllocator::MemoryStatistics *)&v3);
+  m_allocator = this->m_allocator;
+  memset(v3, 255, 48);
+  m_allocator->vfptr->getMemoryStatistics(m_allocator, (hkMemoryAllocator::MemoryStatistics *)v3);
 }
 

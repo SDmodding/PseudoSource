@@ -106,15 +106,13 @@ void __fastcall Illusion::AlphaState::OnAddPlat(Illusion::AlphaState *this)
 // RVA: 0xA1EDC0
 void __fastcall Illusion::AlphaState::OnRemovePlat(Illusion::AlphaState *this)
 {
-  Illusion::AlphaState *v1; // rbx
-  UFG::qBaseNodeRB *v2; // rcx
+  UFG::qBaseNodeRB *mParent; // rcx
 
-  v1 = this;
-  v2 = this[1].mNode.mParent;
-  if ( v2 )
+  mParent = this[1].mNode.mParent;
+  if ( mParent )
   {
-    ((void (*)(void))v2->mParent->mChild[1])();
-    v1[1].mNode.mParent = 0i64;
+    ((void (__fastcall *)(UFG::qBaseNodeRB *))mParent->mParent->mChild[1])(mParent);
+    this[1].mNode.mParent = 0i64;
   }
 }
 
@@ -122,36 +120,26 @@ void __fastcall Illusion::AlphaState::OnRemovePlat(Illusion::AlphaState *this)
 // RVA: 0xA1DE90
 void __fastcall Illusion::AlphaStatePlat::OnAdd(Illusion::AlphaStatePlat *this)
 {
-  Illusion::AlphaStatePlat *v1; // rbx
   __int64 v2; // rdx
   __int64 v3; // r8
-  char v4; // r9
+  char mD3DBlendState; // r9
   bool v5; // zf
   char v6; // dl
-  __int64 Dst; // [rsp+20h] [rbp-118h]
-  BOOL v8; // [rsp+28h] [rbp-110h]
-  int v9; // [rsp+2Ch] [rbp-10Ch]
-  int v10; // [rsp+30h] [rbp-108h]
-  int v11; // [rsp+34h] [rbp-104h]
-  int v12; // [rsp+38h] [rbp-100h]
-  int v13; // [rsp+3Ch] [rbp-FCh]
-  int v14; // [rsp+40h] [rbp-F8h]
-  char v15; // [rsp+44h] [rbp-F4h]
+  __int64 Dst[35]; // [rsp+20h] [rbp-118h] BYREF
 
-  v1 = this;
-  memset(&Dst, 0, 0x108ui64);
-  v2 = BYTE1(v1[-3].mD3DBlendState);
-  v3 = BYTE2(v1[-3].mD3DBlendState);
-  v4 = (char)v1[-2].mD3DBlendState;
-  v5 = LOBYTE(v1[-3].mD3DBlendState) == 0;
-  Dst = 0i64;
-  v8 = !v5;
-  v9 = Illusion::HardwareState::sBlendMode[v2];
-  v10 = Illusion::HardwareState::sBlendMode[v3];
-  v11 = Illusion::HardwareState::sBlendEquation[BYTE3(v1[-3].mD3DBlendState)];
-  if ( v4 )
+  memset(Dst, 0, 0x108ui64);
+  v2 = BYTE1(this[-3].mD3DBlendState);
+  v3 = BYTE2(this[-3].mD3DBlendState);
+  mD3DBlendState = (char)this[-2].mD3DBlendState;
+  v5 = LOBYTE(this[-3].mD3DBlendState) == 0;
+  Dst[0] = 0i64;
+  LODWORD(Dst[1]) = !v5;
+  HIDWORD(Dst[1]) = Illusion::HardwareState::sBlendMode[v2];
+  LODWORD(Dst[2]) = Illusion::HardwareState::sBlendMode[v3];
+  HIDWORD(Dst[2]) = Illusion::HardwareState::sBlendEquation[BYTE3(this[-3].mD3DBlendState)];
+  if ( mD3DBlendState )
   {
-    LOBYTE(v2) = BYTE1(v1[-2].mD3DBlendState);
+    LOBYTE(v2) = BYTE1(this[-2].mD3DBlendState);
   }
   else
   {
@@ -171,10 +159,10 @@ void __fastcall Illusion::AlphaStatePlat::OnAdd(Illusion::AlphaStatePlat *this)
         break;
     }
   }
-  v12 = Illusion::HardwareState::sBlendMode[(unsigned __int8)v2];
-  if ( v4 )
+  LODWORD(Dst[3]) = Illusion::HardwareState::sBlendMode[(unsigned __int8)v2];
+  if ( mD3DBlendState )
   {
-    LOBYTE(v3) = BYTE2(v1[-2].mD3DBlendState);
+    LOBYTE(v3) = BYTE2(this[-2].mD3DBlendState);
   }
   else
   {
@@ -194,14 +182,14 @@ void __fastcall Illusion::AlphaStatePlat::OnAdd(Illusion::AlphaStatePlat *this)
         break;
     }
   }
-  v6 = BYTE3(v1[-2].mD3DBlendState);
-  v13 = Illusion::HardwareState::sBlendMode[(unsigned __int8)v3];
-  v14 = Illusion::HardwareState::sBlendEquation[BYTE4(v1[-3].mD3DBlendState)];
-  v15 |= v6 & 8 | v6 & 4 | v6 & 2 | v6 & 1;
+  v6 = BYTE3(this[-2].mD3DBlendState);
+  HIDWORD(Dst[3]) = Illusion::HardwareState::sBlendMode[(unsigned __int8)v3];
+  LODWORD(Dst[4]) = Illusion::HardwareState::sBlendEquation[BYTE4(this[-3].mD3DBlendState)];
+  BYTE4(Dst[4]) |= v6 & 8 | v6 & 4 | v6 & 2 | v6 & 1;
   ((void (__fastcall *)(ID3D11Device *, __int64 *, Illusion::AlphaStatePlat *))UFG::gD3D11Device->vfptr->VSSetSamplers)(
     UFG::gD3D11Device,
-    &Dst,
-    v1);
+    Dst,
+    this);
 }
 
 // File Line: 220
@@ -215,22 +203,20 @@ void __fastcall Illusion::RasterState::OnAddPlat(Illusion::RasterState *this)
 // RVA: 0xA1EDF0
 void __fastcall Illusion::RasterState::OnRemovePlat(Illusion::RasterState *this)
 {
-  Illusion::RasterState *v1; // rbx
   UFG::qBaseNodeRB *v2; // rcx
-  UFG::qBaseNodeRB *v3; // rcx
+  UFG::qBaseNodeRB *mParent; // rcx
 
-  v1 = this;
   v2 = this[1].mNode.mChild[0];
   if ( v2 )
   {
-    ((void (*)(void))v2->mParent->mChild[1])();
-    v1[1].mNode.mChild[0] = 0i64;
+    ((void (__fastcall *)(UFG::qBaseNodeRB *))v2->mParent->mChild[1])(v2);
+    this[1].mNode.mChild[0] = 0i64;
   }
-  v3 = v1[1].mNode.mParent;
-  if ( v3 )
+  mParent = this[1].mNode.mParent;
+  if ( mParent )
   {
-    ((void (*)(void))v3->mParent->mChild[1])();
-    v1[1].mNode.mParent = 0i64;
+    ((void (__fastcall *)(UFG::qBaseNodeRB *))mParent->mParent->mChild[1])(mParent);
+    this[1].mNode.mParent = 0i64;
   }
 }
 
@@ -238,83 +224,62 @@ void __fastcall Illusion::RasterState::OnRemovePlat(Illusion::RasterState *this)
 // RVA: 0xA1DFE0
 void __fastcall Illusion::RasterStatePlat::OnAdd(Illusion::RasterStatePlat *this)
 {
-  Illusion::RasterStatePlat *v1; // rbx
-  __int64 v2; // rdx
+  __int64 mD3DRasterizerState_low; // rdx
   __int64 v3; // r8
-  __int64 v4; // r9
+  __int64 mD3DDepthState_high; // r9
   __int64 v5; // r10
   char v6; // cl
   int v7; // eax
   __int64 v8; // rax
-  int v9; // [rsp+20h] [rbp-60h]
-  int v10; // [rsp+24h] [rbp-5Ch]
-  __int64 v11; // [rsp+28h] [rbp-58h]
-  __int64 v12; // [rsp+30h] [rbp-50h]
-  int v13; // [rsp+38h] [rbp-48h]
-  __int64 v14; // [rsp+3Ch] [rbp-44h]
-  int v15; // [rsp+44h] [rbp-3Ch]
-  BOOL Dst; // [rsp+48h] [rbp-38h]
-  BOOL v17; // [rsp+4Ch] [rbp-34h]
-  int v18; // [rsp+50h] [rbp-30h]
-  BOOL v19; // [rsp+54h] [rbp-2Ch]
-  char v20; // [rsp+58h] [rbp-28h]
-  char v21; // [rsp+59h] [rbp-27h]
-  unsigned int v22; // [rsp+5Ch] [rbp-24h]
-  unsigned int v23; // [rsp+60h] [rbp-20h]
-  unsigned int v24; // [rsp+64h] [rbp-1Ch]
-  int v25; // [rsp+68h] [rbp-18h]
-  unsigned int v26; // [rsp+6Ch] [rbp-14h]
-  unsigned int v27; // [rsp+70h] [rbp-10h]
-  unsigned int v28; // [rsp+74h] [rbp-Ch]
-  int v29; // [rsp+78h] [rbp-8h]
+  __int64 v9[5]; // [rsp+20h] [rbp-60h] BYREF
+  int Dst[14]; // [rsp+48h] [rbp-38h] BYREF
 
-  v1 = this;
-  memset(&Dst, 0, 0x34ui64);
-  v2 = LOBYTE(v1[-2].mD3DRasterizerState);
-  v3 = BYTE1(v1[-2].mD3DRasterizerState);
-  v4 = HIBYTE(v1[-2].mD3DDepthState);
-  v5 = BYTE6(v1[-2].mD3DDepthState);
-  v6 = BYTE2(v1[-2].mD3DRasterizerState);
-  v20 = -1;
-  Dst = LOBYTE(v1[-3].mD3DRasterizerState) != 0;
-  v17 = BYTE1(v1[-3].mD3DRasterizerState) != 0;
-  v18 = Illusion::HardwareState::sCompareFunction[BYTE2(v1[-3].mD3DRasterizerState)];
-  v19 = BYTE6(v1[-3].mD3DRasterizerState) != 0;
-  v21 = BYTE1(v1[-1].mD3DDepthState);
-  v22 = Illusion::HardwareState::sStencilOperation[v2];
-  v23 = Illusion::HardwareState::sStencilOperation[v3];
-  v24 = Illusion::HardwareState::sStencilOperation[v4];
-  v25 = Illusion::HardwareState::sCompareFunction[v5];
+  memset(Dst, 0, 0x34ui64);
+  mD3DRasterizerState_low = LOBYTE(this[-2].mD3DRasterizerState);
+  v3 = BYTE1(this[-2].mD3DRasterizerState);
+  mD3DDepthState_high = HIBYTE(this[-2].mD3DDepthState);
+  v5 = BYTE6(this[-2].mD3DDepthState);
+  v6 = BYTE2(this[-2].mD3DRasterizerState);
+  LOBYTE(Dst[4]) = -1;
+  Dst[0] = LOBYTE(this[-3].mD3DRasterizerState) != 0;
+  Dst[1] = BYTE1(this[-3].mD3DRasterizerState) != 0;
+  Dst[2] = Illusion::HardwareState::sCompareFunction[BYTE2(this[-3].mD3DRasterizerState)];
+  Dst[3] = BYTE6(this[-3].mD3DRasterizerState) != 0;
+  BYTE1(Dst[4]) = BYTE1(this[-1].mD3DDepthState);
+  Dst[5] = Illusion::HardwareState::sStencilOperation[mD3DRasterizerState_low];
+  Dst[6] = Illusion::HardwareState::sStencilOperation[v3];
+  Dst[7] = Illusion::HardwareState::sStencilOperation[mD3DDepthState_high];
+  Dst[8] = Illusion::HardwareState::sCompareFunction[v5];
   if ( v6 )
-    LOBYTE(v2) = HIBYTE(v1[-2].mD3DRasterizerState);
-  v26 = Illusion::HardwareState::sStencilOperation[(unsigned __int8)v2];
+    LOBYTE(mD3DRasterizerState_low) = HIBYTE(this[-2].mD3DRasterizerState);
+  Dst[9] = Illusion::HardwareState::sStencilOperation[(unsigned __int8)mD3DRasterizerState_low];
   if ( v6 )
-    LOBYTE(v3) = v1[-1].mD3DDepthState;
-  v27 = Illusion::HardwareState::sStencilOperation[(unsigned __int8)v3];
+    LOBYTE(v3) = this[-1].mD3DDepthState;
+  Dst[10] = Illusion::HardwareState::sStencilOperation[(unsigned __int8)v3];
   if ( v6 )
-    LOBYTE(v4) = BYTE6(v1[-2].mD3DRasterizerState);
-  v28 = Illusion::HardwareState::sStencilOperation[(unsigned __int8)v4];
+    LOBYTE(mD3DDepthState_high) = BYTE6(this[-2].mD3DRasterizerState);
+  Dst[11] = Illusion::HardwareState::sStencilOperation[(unsigned __int8)mD3DDepthState_high];
   if ( v6 )
-    LOBYTE(v5) = BYTE5(v1[-2].mD3DRasterizerState);
-  v29 = Illusion::HardwareState::sCompareFunction[(unsigned __int8)v5];
-  ((void (__fastcall *)(ID3D11Device *, BOOL *, Illusion::RasterStatePlat *))UFG::gD3D11Device->vfptr->SetPredication)(
+    LOBYTE(v5) = BYTE5(this[-2].mD3DRasterizerState);
+  Dst[12] = Illusion::HardwareState::sCompareFunction[(unsigned __int8)v5];
+  ((void (__fastcall *)(ID3D11Device *, int *, Illusion::RasterStatePlat *))UFG::gD3D11Device->vfptr->SetPredication)(
     UFG::gD3D11Device,
-    &Dst,
-    v1);
-  memset(&v9, 0, 0x28ui64);
-  v7 = Illusion::HardwareState::sFillMode[BYTE2(v1[-1].mD3DDepthState)];
-  v11 = 1i64;
-  v12 = 0i64;
-  v9 = v7;
-  v8 = BYTE3(v1[-3].mD3DRasterizerState);
-  v13 = 1;
+    Dst,
+    this);
+  memset(v9, 0, sizeof(v9));
+  v7 = Illusion::HardwareState::sFillMode[BYTE2(this[-1].mD3DDepthState)];
+  v9[1] = 1i64;
+  v9[2] = 0i64;
+  LODWORD(v9[0]) = v7;
+  v8 = BYTE3(this[-3].mD3DRasterizerState);
+  LODWORD(v9[3]) = 1;
   LODWORD(v8) = Illusion::HardwareState::sCullMode[v8];
-  v14 = 1i64;
-  v15 = 0;
-  v10 = v8;
-  ((void (__fastcall *)(ID3D11Device *, int *, ID3D11RasterizerState **))UFG::gD3D11Device->vfptr->GSSetShaderResources)(
+  *(__int64 *)((char *)&v9[3] + 4) = 1i64;
+  HIDWORD(v9[4]) = 0;
+  HIDWORD(v9[0]) = v8;
+  ((void (__fastcall *)(ID3D11Device *, __int64 *, ID3D11RasterizerState **))UFG::gD3D11Device->vfptr->GSSetShaderResources)(
     UFG::gD3D11Device,
-    &v9,
-    &v1->mD3DRasterizerState);
+    v9,
+    &this->mD3DRasterizerState);
 }
 

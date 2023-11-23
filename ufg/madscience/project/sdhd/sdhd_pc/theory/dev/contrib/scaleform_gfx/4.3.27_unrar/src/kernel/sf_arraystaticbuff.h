@@ -1,84 +1,81 @@
 // File Line: 36
 // RVA: 0x8A1250
-void __fastcall Scaleform::ArrayStaticBuffPOD<Scaleform::Render::Image *,32,2>::~ArrayStaticBuffPOD<Scaleform::Render::Image *,32,2>(Scaleform::ArrayStaticBuffPOD<Scaleform::RefCountImpl *,32,2> *this)
+void __fastcall Scaleform::ArrayStaticBuffPOD<Scaleform::Render::Image *,32,2>::~ArrayStaticBuffPOD<Scaleform::Render::Image *,32,2>(
+        Scaleform::ArrayStaticBuffPOD<Scaleform::RefCountImpl *,32,2> *this)
 {
-  Scaleform::RefCountImpl **v1; // rdi
-  Scaleform::ArrayStaticBuffPOD<Scaleform::RefCountImpl *,32,2> *v2; // rbx
+  Scaleform::RefCountImpl **Static; // rdi
 
-  v1 = this->Static;
-  v2 = this;
+  Static = this->Static;
   if ( this->Data == this->Static )
   {
-    this->Data = v1;
+    this->Data = Static;
     this->Size = 0i64;
   }
   else
   {
-    ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-    v2->Data = v1;
-    v2->Size = 0i64;
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+    this->Data = Static;
+    this->Size = 0i64;
   }
 }
 
 // File Line: 49
 // RVA: 0x9A2720
-void __fastcall Scaleform::ArrayStaticBuffPOD<Scaleform::Render::Font *,32,2>::PushBack(Scaleform::ArrayStaticBuffPOD<Scaleform::RefCountImpl *,32,2> *this, Scaleform::RefCountImpl *const *val)
+void __fastcall Scaleform::ArrayStaticBuffPOD<Scaleform::Render::Font *,32,2>::PushBack(
+        Scaleform::ArrayStaticBuffPOD<Scaleform::RefCountImpl *,32,2> *this,
+        Scaleform::RefCountImpl **val)
 {
-  Scaleform::ArrayStaticBuffPOD<Scaleform::RefCountImpl *,32,2> *v2; // rbx
-  unsigned __int64 v3; // rcx
-  Scaleform::RefCountImpl *const *v4; // rdi
-  Scaleform::MemoryHeap *v5; // rcx
-  signed __int64 v6; // r8
+  unsigned __int64 Size; // rcx
+  Scaleform::MemoryHeap *pHeap; // rcx
+  unsigned __int64 v6; // r8
   Scaleform::RefCountImpl **v7; // rax
   Scaleform::RefCountImpl **v8; // rcx
-  Scaleform::RefCountImpl **v9; // rdx
-  signed __int64 v10; // rax
+  Scaleform::RefCountImpl **Static; // rdx
+  __int64 v10; // rax
   __int128 v11; // xmm0
-  unsigned __int64 v12; // rax
-  Scaleform::RefCountImpl **v13; // rdx
-  signed __int64 v14; // rax
+  unsigned __int64 Reserved; // rax
+  Scaleform::RefCountImpl **Data; // rdx
+  unsigned __int64 v14; // rax
 
-  v2 = this;
-  v3 = this->Size;
-  v4 = val;
-  if ( v3 >= 0x20 )
+  Size = this->Size;
+  if ( Size >= 0x20 )
   {
-    if ( v3 == 32 )
+    if ( Size == 32 )
     {
-      v5 = v2->pHeap;
-      v6 = 2 * v2->Reserved;
-      v2->Reserved = v6;
-      if ( v5 )
-        v7 = (Scaleform::RefCountImpl **)v5->vfptr->Alloc(v5, 8 * v6, 0i64);
+      pHeap = this->pHeap;
+      v6 = 2 * this->Reserved;
+      this->Reserved = v6;
+      if ( pHeap )
+        v7 = (Scaleform::RefCountImpl **)pHeap->vfptr->Alloc(pHeap, 8 * v6, 0i64);
       else
         v7 = (Scaleform::RefCountImpl **)Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap(
                                            Scaleform::Memory::pGlobalHeap,
-                                           v2,
+                                           this,
                                            8 * v6,
                                            0i64);
       v8 = v7;
-      v2->Data = v7;
-      v9 = v2->Static;
-      if ( ((unsigned __int8)v7 | (unsigned __int8)((_BYTE)v2 + 24)) & 0xF )
+      this->Data = v7;
+      Static = this->Static;
+      if ( (((unsigned __int8)v7 | (unsigned __int8)((_BYTE)this + 24)) & 0xF) != 0 )
       {
-        memmove(v7, v9, 0x100ui64);
+        memmove(v7, Static, 0x100ui64);
       }
       else
       {
         v10 = 2i64;
         do
         {
-          v11 = *(_OWORD *)v9;
+          v11 = *(_OWORD *)Static;
           v8 += 16;
-          v9 += 16;
+          Static += 16;
           *((_OWORD *)v8 - 8) = v11;
-          *((_OWORD *)v8 - 7) = *((_OWORD *)v9 - 7);
-          *((_OWORD *)v8 - 6) = *((_OWORD *)v9 - 6);
-          *((_OWORD *)v8 - 5) = *((_OWORD *)v9 - 5);
-          *((_OWORD *)v8 - 4) = *((_OWORD *)v9 - 4);
-          *((_OWORD *)v8 - 3) = *((_OWORD *)v9 - 3);
-          *((_OWORD *)v8 - 2) = *((_OWORD *)v9 - 2);
-          *((_OWORD *)v8 - 1) = *((_OWORD *)v9 - 1);
+          *((_OWORD *)v8 - 7) = *((_OWORD *)Static - 7);
+          *((_OWORD *)v8 - 6) = *((_OWORD *)Static - 6);
+          *((_OWORD *)v8 - 5) = *((_OWORD *)Static - 5);
+          *((_OWORD *)v8 - 4) = *((_OWORD *)Static - 4);
+          *((_OWORD *)v8 - 3) = *((_OWORD *)Static - 3);
+          *((_OWORD *)v8 - 2) = *((_OWORD *)Static - 2);
+          *((_OWORD *)v8 - 1) = *((_OWORD *)Static - 1);
           --v10;
         }
         while ( v10 );
@@ -86,37 +83,35 @@ void __fastcall Scaleform::ArrayStaticBuffPOD<Scaleform::Render::Font *,32,2>::P
     }
     else
     {
-      v12 = v2->Reserved;
-      if ( v3 >= v12 )
+      Reserved = this->Reserved;
+      if ( Size >= Reserved )
       {
-        v13 = v2->Data;
-        v14 = 2 * v12;
-        v2->Reserved = v14;
-        v2->Data = (Scaleform::RefCountImpl **)Scaleform::Memory::pGlobalHeap->vfptr->Realloc(
-                                                 Scaleform::Memory::pGlobalHeap,
-                                                 v13,
-                                                 8 * v14);
+        Data = this->Data;
+        v14 = 2 * Reserved;
+        this->Reserved = v14;
+        this->Data = (Scaleform::RefCountImpl **)Scaleform::Memory::pGlobalHeap->vfptr->Realloc(
+                                                   Scaleform::Memory::pGlobalHeap,
+                                                   Data,
+                                                   8 * v14);
       }
     }
-    v2->Data[v2->Size++] = *v4;
+    this->Data[this->Size++] = *val;
   }
   else
   {
-    v2->Static[v3] = *val;
-    ++v2->Size;
+    this->Static[Size] = *val;
+    ++this->Size;
   }
 }
 
 // File Line: 112
 // RVA: 0x7865C0
-void __fastcall Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2>::~ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2>(Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2> *this)
+void __fastcall Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2>::~ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2>(
+        Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2> *this)
 {
-  Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2> *v1; // rbx
-
-  v1 = this;
   Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2>::Clear(this);
   `eh vector destructor iterator(
-    v1->Static,
+    this->Static,
     8ui64,
     32,
     (void (__fastcall *)(void *))Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent>::~SPtr<Scaleform::GFx::AS3::Instances::fl_events::IOErrorEvent>);
@@ -124,197 +119,186 @@ void __fastcall Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::
 
 // File Line: 117
 // RVA: 0x7B3D40
-void __fastcall Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2>::Clear(Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2> *this)
+void __fastcall Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2>::Clear(
+        Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2> *this)
 {
-  Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2> *v1; // rbx
-  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *v2; // rbp
-  Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2> *v3; // rsi
+  Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2> *Data; // rbx
+  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *Static; // rbp
   unsigned __int64 i; // rdi
-  Scaleform::MemoryHeap *v5; // rcx
-  unsigned int v6; // eax
+  Scaleform::MemoryHeap *pHeap; // rcx
+  unsigned int RefCount; // eax
 
-  v1 = (Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2> *)this->Data;
-  v2 = this->Static;
-  v3 = this;
-  if ( v1 == (Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2> *)this->Static )
+  Data = (Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2> *)this->Data;
+  Static = this->Static;
+  if ( Data == (Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2> *)this->Static )
   {
-    this->Data = v2;
+    this->Data = Static;
     this->Size = 0i64;
   }
   else
   {
     for ( i = this->Size; i; --i )
     {
-      v5 = v1->pHeap;
-      if ( v1->pHeap )
+      pHeap = Data->pHeap;
+      if ( Data->pHeap )
       {
-        if ( (unsigned __int8)v5 & 1 )
+        if ( ((unsigned __int8)pHeap & 1) != 0 )
         {
-          v1->pHeap = (Scaleform::MemoryHeap *)((char *)v5 - 1);
+          Data->pHeap = (Scaleform::MemoryHeap *)((char *)pHeap - 1);
         }
         else
         {
-          v6 = v5->RefCount;
-          if ( v6 & 0x3FFFFF )
+          RefCount = pHeap->RefCount;
+          if ( (RefCount & 0x3FFFFF) != 0 )
           {
-            v5->RefCount = v6 - 1;
-            Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)v5);
+            pHeap->RefCount = RefCount - 1;
+            Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)pHeap);
           }
         }
       }
-      v1 = (Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2> *)((char *)v1 + 8);
+      Data = (Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2> *)((char *)Data + 8);
     }
-    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v3->Data);
-    v3->Data = v2;
-    v3->Size = 0i64;
+    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, this->Data);
+    this->Data = Static;
+    this->Size = 0i64;
   }
 }
 
 // File Line: 128
 // RVA: 0x80A950
-void __fastcall Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2>::PushBack(Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2> *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *val)
+void __fastcall Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2>::PushBack(
+        Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2> *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML> *val)
 {
-  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *v2; // r15
-  Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2> *v3; // rdi
-  unsigned __int64 v4; // rax
+  unsigned __int64 Size; // rax
   unsigned __int64 v5; // r8
-  Scaleform::MemoryHeap *v6; // rcx
-  __int64 v7; // rax
+  Scaleform::MemoryHeap *pHeap; // rcx
+  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *v7; // rax
   unsigned __int64 v8; // rbp
-  unsigned __int64 v9; // rcx
+  unsigned __int64 Reserved; // rcx
   Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *i; // rax
-  signed __int64 v11; // rsi
+  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *Static; // rsi
   Scaleform::GFx::AS3::RefCountBaseGC<328> **v12; // rbx
   Scaleform::GFx::AS3::RefCountBaseGC<328> *v13; // rcx
-  unsigned int v14; // eax
+  unsigned int RefCount; // eax
   unsigned __int64 v15; // rcx
   unsigned __int64 v16; // rcx
   unsigned __int64 v17; // r8
-  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *v18; // rdx
+  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *j; // rdx
   unsigned __int64 v19; // rcx
-  Scaleform::GFx::AS3::RefCountBaseGC<328> **v20; // rbx
-  Scaleform::GFx::AS3::RefCountBaseGC<328> *v21; // rcx
+  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *v20; // rbx
+  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> v21; // rcx
   unsigned int v22; // eax
 
-  v2 = val;
-  v3 = this;
-  v4 = this->Size;
-  if ( v4 >= 0x20 )
+  Size = this->Size;
+  if ( Size >= 0x20 )
   {
-    if ( v4 == 32 )
+    if ( Size == 32 )
     {
       v5 = 2 * this->Reserved;
       this->Reserved = v5;
-      v6 = this->pHeap;
-      if ( v6 )
-        v7 = (__int64)v6->vfptr->Alloc(v6, 8 * v5, 0i64);
+      pHeap = this->pHeap;
+      if ( pHeap )
+        v7 = (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *)pHeap->vfptr->Alloc(pHeap, 8 * v5, 0i64);
       else
-        v7 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2> *, unsigned __int64, _QWORD, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap)(
-               Scaleform::Memory::pGlobalHeap,
-               v3,
-               8 * v5,
-               0i64,
-               -2i64);
-      v3->Data = (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *)v7;
+        v7 = (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, Scaleform::ArrayStaticBuff<Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>,32,2> *, unsigned __int64, _QWORD, __int64))Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap)(Scaleform::Memory::pGlobalHeap, this, 8 * v5, 0i64, -2i64);
+      this->Data = v7;
       v8 = 0i64;
-      v9 = v3->Reserved;
-      for ( i = v3->Data; v9; --v9 )
+      Reserved = this->Reserved;
+      for ( i = this->Data; Reserved; --Reserved )
       {
         if ( i )
           i->pObject = 0i64;
         ++i;
       }
-      if ( v3->Size )
+      if ( this->Size )
       {
-        v11 = (signed __int64)v3->Static;
+        Static = this->Static;
         do
         {
-          v12 = (Scaleform::GFx::AS3::RefCountBaseGC<328> **)((char *)v3->Data + -24i64 - (_QWORD)v3 + v11);
-          if ( (Scaleform::GFx::AS3::RefCountBaseGC<328> **)v11 != v12 )
+          v12 = (Scaleform::GFx::AS3::Instances::fl_display::DisplayObject **)((char *)&this->Data->pObject
+                                                                             + (unsigned __int64)Static
+                                                                             - 24
+                                                                             - (_QWORD)this);
+          if ( Static != (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *)v12 )
           {
-            if ( *(_QWORD *)v11 )
-              *(_DWORD *)(*(_QWORD *)v11 + 32i64) = (*(_DWORD *)(*(_QWORD *)v11 + 32i64) + 1) & 0x8FBFFFFF;
+            if ( Static->pObject )
+              Static->pObject->RefCount = (Static->pObject->RefCount + 1) & 0x8FBFFFFF;
             v13 = *v12;
             if ( *v12 )
             {
-              if ( (unsigned __int8)v13 & 1 )
+              if ( ((unsigned __int8)v13 & 1) != 0 )
               {
                 *v12 = (Scaleform::GFx::AS3::RefCountBaseGC<328> *)((char *)v13 - 1);
               }
               else
               {
-                v14 = v13->RefCount;
-                if ( v14 & 0x3FFFFF )
+                RefCount = v13->RefCount;
+                if ( (RefCount & 0x3FFFFF) != 0 )
                 {
-                  v13->RefCount = v14 - 1;
+                  v13->RefCount = RefCount - 1;
                   Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(v13);
                 }
               }
             }
-            *v12 = *(Scaleform::GFx::AS3::RefCountBaseGC<328> **)v11;
+            *v12 = Static->pObject;
           }
           ++v8;
-          v11 += 8i64;
+          ++Static;
         }
-        while ( v8 < v3->Size );
+        while ( v8 < this->Size );
       }
     }
     else
     {
       v15 = this->Reserved;
-      if ( v4 >= v15 )
+      if ( Size >= v15 )
       {
-        v3->Reserved = 2 * v15;
-        v3->Data = (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *)Scaleform::Memory::pGlobalHeap->vfptr->Realloc(Scaleform::Memory::pGlobalHeap, v3->Data, 16 * v15);
-        v16 = v3->Size;
-        v17 = v3->Reserved - v16;
-        v18 = &v3->Data[v16];
-        if ( v3->Reserved != v16 )
+        this->Reserved = 2 * v15;
+        this->Data = (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *)Scaleform::Memory::pGlobalHeap->vfptr->Realloc(Scaleform::Memory::pGlobalHeap, this->Data, 16 * v15);
+        v16 = this->Size;
+        v17 = this->Reserved - v16;
+        for ( j = &this->Data[v16]; v17; --v17 )
         {
-          do
-          {
-            if ( v18 )
-              v18->pObject = 0i64;
-            ++v18;
-            --v17;
-          }
-          while ( v17 );
+          if ( j )
+            j->pObject = 0i64;
+          ++j;
         }
       }
     }
-    v19 = v3->Size;
-    v20 = (Scaleform::GFx::AS3::RefCountBaseGC<328> **)&v3->Data[v19];
-    v3->Size = v19 + 1;
-    if ( v2 != (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *)v20 )
+    v19 = this->Size;
+    v20 = &this->Data[v19];
+    this->Size = v19 + 1;
+    if ( val != (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML> *)v20 )
     {
-      if ( v2->pObject )
-        v2->pObject->RefCount = (v2->pObject->RefCount + 1) & 0x8FBFFFFF;
-      v21 = *v20;
-      if ( *v20 )
+      if ( val->pObject )
+        val->pObject->RefCount = (val->pObject->RefCount + 1) & 0x8FBFFFFF;
+      v21.pObject = v20->pObject;
+      if ( v20->pObject )
       {
-        if ( (unsigned __int8)v21 & 1 )
+        if ( ((__int64)v21.pObject & 1) != 0 )
         {
-          *v20 = (Scaleform::GFx::AS3::RefCountBaseGC<328> *)((char *)v21 - 1);
+          v20->pObject = (Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *)((char *)v21.pObject - 1);
         }
         else
         {
-          v22 = v21->RefCount;
-          if ( v22 & 0x3FFFFF )
+          v22 = v21.pObject->RefCount;
+          if ( (v22 & 0x3FFFFF) != 0 )
           {
-            v21->RefCount = v22 - 1;
-            Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(v21);
+            v21.pObject->RefCount = v22 - 1;
+            Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(v21.pObject);
           }
         }
       }
-      *v20 = (Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v2->pObject->vfptr;
+      v20->pObject = (Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *)val->pObject;
     }
   }
   else
   {
-    this->Size = v4 + 1;
+    this->Size = Size + 1;
     Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Object>::operator=(
-      (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML> *)&this->Static[v4],
-      (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML> *)val);
+      (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML> *)&this->Static[Size],
+      val);
   }
 }
 

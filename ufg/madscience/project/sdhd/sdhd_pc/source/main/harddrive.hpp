@@ -2,91 +2,83 @@
 // RVA: 0xA341B0
 void __fastcall UFG::HDDmanager::AddSaveDataFileName(UFG::HDDmanager *this, const char *pFileName)
 {
-  const char *v2; // rsi
-  UFG::HDDmanager *v3; // rbx
   UFG::qString *v4; // rax
   UFG::qNode<UFG::qString,UFG::qString> *v5; // rax
   UFG::qNode<UFG::qString,UFG::qString> *v6; // rcx
-  UFG::qNode<UFG::qString,UFG::qString> *v7; // rax
+  UFG::qNode<UFG::qString,UFG::qString> *mPrev; // rax
 
-  v2 = pFileName;
-  v3 = this;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mSaveDataFileMutex);
   v4 = (UFG::qString *)UFG::qMalloc(0x28ui64, "HDDmanager", 0i64);
   if ( v4 )
   {
-    UFG::qString::qString(v4, v2);
+    UFG::qString::qString(v4, pFileName);
     v6 = v5;
   }
   else
   {
     v6 = 0i64;
   }
-  v7 = v3->mSaveDataFiles.mNode.mPrev;
-  v7->mNext = v6;
-  v6->mPrev = v7;
-  v6->mNext = &v3->mSaveDataFiles.mNode;
-  v3->mSaveDataFiles.mNode.mPrev = v6;
-  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&v3->mSaveDataFileMutex);
+  mPrev = this->mSaveDataFiles.mNode.mPrev;
+  mPrev->mNext = v6;
+  v6->mPrev = mPrev;
+  v6->mNext = &this->mSaveDataFiles.mNode;
+  this->mSaveDataFiles.mNode.mPrev = v6;
+  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&this->mSaveDataFileMutex);
 }
 
 // File Line: 484
 // RVA: 0xA345D0
 void __fastcall UFG::HDDmanager::ResetSaveDataFileNameList(UFG::HDDmanager *this)
 {
-  _RTL_CRITICAL_SECTION *v1; // rdi
-  UFG::HDDmanager *v2; // rbx
-  signed __int64 v3; // rbx
-  __int64 *i; // rax
-  __int64 v5; // r8
-  _QWORD *v6; // rdx
+  _RTL_CRITICAL_SECTION *p_mSaveDataFileMutex; // rdi
+  UFG::qList<UFG::qString,UFG::qString,1,0> *p_mSaveDataFiles; // rbx
+  UFG::qList<UFG::qString,UFG::qString,1,0> *i; // rax
+  UFG::qNode<UFG::qString,UFG::qString> *mPrev; // r8
+  UFG::qNode<UFG::qString,UFG::qString> *mNext; // rdx
 
-  v1 = (_RTL_CRITICAL_SECTION *)&this->mSaveDataFileMutex;
-  v2 = this;
+  p_mSaveDataFileMutex = (_RTL_CRITICAL_SECTION *)&this->mSaveDataFileMutex;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mSaveDataFileMutex);
-  v3 = (signed __int64)&v2->mSaveDataFiles;
-  for ( i = *(__int64 **)(v3 + 8); i != (__int64 *)v3; i = *(__int64 **)(v3 + 8) )
+  p_mSaveDataFiles = &this->mSaveDataFiles;
+  for ( i = (UFG::qList<UFG::qString,UFG::qString,1,0> *)p_mSaveDataFiles->mNode.mNext;
+        i != p_mSaveDataFiles;
+        i = (UFG::qList<UFG::qString,UFG::qString,1,0> *)p_mSaveDataFiles->mNode.mNext )
   {
-    v5 = *i;
-    v6 = (_QWORD *)i[1];
-    *(_QWORD *)(v5 + 8) = v6;
-    *v6 = v5;
-    *i = (__int64)i;
-    i[1] = (__int64)i;
+    mPrev = i->mNode.mPrev;
+    mNext = i->mNode.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    i->mNode.mPrev = &i->mNode;
+    i->mNode.mNext = &i->mNode;
   }
-  UFG::qMutex::Unlock(v1);
+  UFG::qMutex::Unlock(p_mSaveDataFileMutex);
 }
 
 // File Line: 492
 // RVA: 0x4ABFE0
 __int64 __fastcall UFG::HDDmanager::IsFileNameInList(UFG::HDDmanager *this, const char *pFileName)
 {
-  _RTL_CRITICAL_SECTION *v2; // r14
-  const char *v3; // rbp
-  UFG::HDDmanager *v4; // rdi
+  _RTL_CRITICAL_SECTION *p_mSaveDataFileMutex; // r14
   unsigned __int8 v5; // si
-  UFG::qNode<UFG::qString,UFG::qString> *v6; // rbx
-  signed __int64 v7; // rdi
+  UFG::qNode<UFG::qString,UFG::qString> *mNext; // rbx
+  UFG::qList<UFG::qString,UFG::qString,1,0> *p_mSaveDataFiles; // rdi
 
-  v2 = (_RTL_CRITICAL_SECTION *)&this->mSaveDataFileMutex;
-  v3 = pFileName;
-  v4 = this;
+  p_mSaveDataFileMutex = (_RTL_CRITICAL_SECTION *)&this->mSaveDataFileMutex;
   v5 = 0;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mSaveDataFileMutex);
-  v6 = v4->mSaveDataFiles.mNode.mNext;
-  v7 = (signed __int64)&v4->mSaveDataFiles;
-  if ( v6 != (UFG::qNode<UFG::qString,UFG::qString> *)v7 )
+  mNext = this->mSaveDataFiles.mNode.mNext;
+  p_mSaveDataFiles = &this->mSaveDataFiles;
+  if ( mNext != (UFG::qNode<UFG::qString,UFG::qString> *)p_mSaveDataFiles )
   {
-    while ( (unsigned int)UFG::qStringCompare(v3, (const char *)v6[1].mNext, -1) )
+    while ( (unsigned int)UFG::qStringCompare(pFileName, (const char *)mNext[1].mNext, -1) )
     {
-      v6 = v6->mNext;
-      if ( v6 == (UFG::qNode<UFG::qString,UFG::qString> *)v7 )
+      mNext = mNext->mNext;
+      if ( mNext == (UFG::qNode<UFG::qString,UFG::qString> *)p_mSaveDataFiles )
         goto LABEL_6;
     }
     v5 = 1;
   }
 LABEL_6:
-  UFG::qMutex::Unlock(v2);
+  UFG::qMutex::Unlock(p_mSaveDataFileMutex);
   return v5;
 }
 

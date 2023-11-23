@@ -1,54 +1,52 @@
 // File Line: 97
 // RVA: 0x20E180
-UFG::qVector3 *__fastcall UFG::Editor::Utility::NDC_To_World(UFG::qVector3 *result, UFG::Editor::View *view, UFG::qVector3 *ndc)
+UFG::qVector3 *__fastcall UFG::Editor::Utility::NDC_To_World(
+        UFG::qVector3 *result,
+        UFG::Editor::View *view,
+        UFG::qVector3 *ndc)
 {
-  UFG::Editor::Camera *v3; // rdi
-  UFG::qVector3 *v4; // rbp
-  UFG::qVector3 *v5; // rsi
-  UFG::BaseCameraComponent *v6; // rax
-  signed __int64 v7; // rax
+  UFG::Editor::Camera *mCamera; // rdi
+  UFG::BaseCameraComponent *mCurrentCamera; // rax
+  UFG::Camera *p_mCamera; // rax
   UFG::BaseCameraComponent *v8; // rcx
-  UFG::qMatrix44 *v9; // rbx
-  UFG::qMatrix44 *v10; // rax
+  UFG::qMatrix44 *ViewProjection; // rbx
+  UFG::qMatrix44 *MatView; // rax
   UFG::qVector3 *v11; // rax
-  float v12; // xmm7_4
-  float v13; // xmm4_4
+  float z; // xmm7_4
+  float y; // xmm4_4
   float v14; // xmm6_4
   float v15; // xmm3_4
   float v16; // xmm0_4
-  UFG::qMatrix44 d; // [rsp+20h] [rbp-B8h]
-  UFG::qMatrix44 resulta; // [rsp+60h] [rbp-78h]
+  UFG::qMatrix44 d; // [rsp+20h] [rbp-B8h] BYREF
+  UFG::qMatrix44 resulta; // [rsp+60h] [rbp-78h] BYREF
 
-  v3 = view->mCamera;
-  v4 = ndc;
-  v5 = result;
-  v6 = UFG::Director::Get()->mCurrentCamera;
-  if ( v6 && (v7 = (signed __int64)&v6->mCamera) != 0 && !*(_BYTE *)(v7 + 256) )
+  mCamera = view->mCamera;
+  mCurrentCamera = UFG::Director::Get()->mCurrentCamera;
+  if ( mCurrentCamera && (p_mCamera = &mCurrentCamera->mCamera) != 0i64 && !p_mCamera->bUseOverrideMatrices )
   {
     v8 = UFG::Director::Get()->mCurrentCamera;
     if ( v8 )
-      v9 = UFG::Camera::GetViewProjection(&v8->mCamera);
+      ViewProjection = UFG::Camera::GetViewProjection(&v8->mCamera);
     else
-      v9 = UFG::Camera::GetViewProjection(0i64);
+      ViewProjection = UFG::Camera::GetViewProjection(0i64);
   }
   else
   {
-    v9 = &v3->mProj;
+    ViewProjection = &mCamera->mProj;
   }
-  v10 = UFG::Editor::Camera::GetMatView(v3, &resulta);
-  UFG::qMatrix44::operator*(v10, &d, v9);
+  MatView = UFG::Editor::Camera::GetMatView(mCamera, &resulta);
+  UFG::qMatrix44::operator*(MatView, &d, ViewProjection);
   UFG::qInverse(&d, &d);
-  v11 = v5;
-  v12 = v4->z;
-  v13 = v4->y;
-  v14 = (float)((float)((float)(d.v1.y * v13) + (float)(d.v0.y * v4->x)) + (float)(d.v2.y * v12)) + d.v3.y;
-  v15 = (float)((float)((float)(d.v1.z * v13) + (float)(d.v0.z * v4->x)) + (float)(d.v2.z * v12)) + d.v3.z;
-  v16 = 1.0
-      / (float)((float)((float)((float)(d.v1.w * v13) + (float)(d.v0.w * v4->x)) + (float)(d.v2.w * v12)) + d.v3.w);
-  v5->x = (float)((float)((float)((float)(d.v1.x * v13) + (float)(d.v0.x * v4->x)) + (float)(d.v2.x * v12)) + d.v3.x)
-        * v16;
-  v5->y = v14 * v16;
-  v5->z = v15 * v16;
+  v11 = result;
+  z = ndc->z;
+  y = ndc->y;
+  v14 = (float)((float)((float)(d.v1.y * y) + (float)(d.v0.y * ndc->x)) + (float)(d.v2.y * z)) + d.v3.y;
+  v15 = (float)((float)((float)(d.v1.z * y) + (float)(d.v0.z * ndc->x)) + (float)(d.v2.z * z)) + d.v3.z;
+  v16 = 1.0 / (float)((float)((float)((float)(d.v1.w * y) + (float)(d.v0.w * ndc->x)) + (float)(d.v2.w * z)) + d.v3.w);
+  result->x = (float)((float)((float)((float)(d.v1.x * y) + (float)(d.v0.x * ndc->x)) + (float)(d.v2.x * z)) + d.v3.x)
+            * v16;
+  result->y = v14 * v16;
+  result->z = v15 * v16;
   return v11;
 }
 
@@ -56,48 +54,46 @@ UFG::qVector3 *__fastcall UFG::Editor::Utility::NDC_To_World(UFG::qVector3 *resu
 // RVA: 0x2126B0
 void __fastcall UFG::Editor::Utility::Round(float *r, float p)
 {
-  float *v2; // r8
-  bool v3; // cf
-  bool v4; // zf
-  __m128 v5; // xmm2
-  signed int v6; // edx
-  signed int v7; // ecx
+  bool v3; // cc
+  __m128 v4; // xmm2
+  int v5; // edx
+  int v6; // ecx
 
-  v5 = (__m128)*(unsigned int *)r;
-  v2 = r;
-  v3 = v5.m128_f32[0] < 0.0;
-  v4 = v5.m128_f32[0] == 0.0;
-  v5.m128_f32[0] = v5.m128_f32[0] / p;
-  if ( v3 || v4 )
+  v4 = (__m128)*(unsigned int *)r;
+  v3 = v4.m128_f32[0] <= 0.0;
+  v4.m128_f32[0] = v4.m128_f32[0] / p;
+  if ( v3 )
   {
-    v5.m128_f32[0] = v5.m128_f32[0] - 0.5;
-    v7 = (signed int)v5.m128_f32[0];
-    if ( (signed int)v5.m128_f32[0] != 0x80000000 && (float)v7 != v5.m128_f32[0] )
-      v5.m128_f32[0] = (float)((_mm_movemask_ps(_mm_unpacklo_ps(v5, v5)) & 1 ^ 1) + v7);
-    *v2 = v5.m128_f32[0] * p;
+    v4.m128_f32[0] = v4.m128_f32[0] - 0.5;
+    v6 = (int)v4.m128_f32[0];
+    if ( (int)v4.m128_f32[0] != 0x80000000 && (float)v6 != v4.m128_f32[0] )
+      v4.m128_f32[0] = (float)(!(_mm_movemask_ps(_mm_unpacklo_ps(v4, v4)) & 1) + v6);
+    *r = v4.m128_f32[0] * p;
   }
   else
   {
-    v5.m128_f32[0] = v5.m128_f32[0] + 0.5;
-    v6 = (signed int)v5.m128_f32[0];
-    if ( (signed int)v5.m128_f32[0] != 0x80000000 && (float)v6 != v5.m128_f32[0] )
-      v5.m128_f32[0] = (float)(v6 - (_mm_movemask_ps(_mm_unpacklo_ps(v5, v5)) & 1));
-    *r = v5.m128_f32[0] * p;
+    v4.m128_f32[0] = v4.m128_f32[0] + 0.5;
+    v5 = (int)v4.m128_f32[0];
+    if ( (int)v4.m128_f32[0] != 0x80000000 && (float)v5 != v4.m128_f32[0] )
+      v4.m128_f32[0] = (float)(v5 - (_mm_movemask_ps(_mm_unpacklo_ps(v4, v4)) & 1));
+    *r = v4.m128_f32[0] * p;
   }
 }
 
 // File Line: 270
 // RVA: 0x209E60
-void __fastcall UFG::Editor::Utility::FindMinimalBoundingSphere(UFG::qVector3 *center, float *radius, UFG::qVector3 *points, int numPoints)
+void __fastcall UFG::Editor::Utility::FindMinimalBoundingSphere(
+        UFG::qVector3 *center,
+        float *radius,
+        UFG::qVector3 *points,
+        int numPoints)
 {
-  UFG::qVector3 *v4; // rbx
-  float *v5; // r10
-  float v6; // xmm0_4
-  float v7; // xmm1_4
+  float y; // xmm0_4
+  float z; // xmm1_4
   float v8; // xmm5_4
   float v9; // xmm4_4
-  signed __int64 v10; // rdi
-  signed __int64 v11; // r11
+  __int64 v10; // rdi
+  __int64 v11; // r11
   float v12; // xmm15_4
   float v13; // xmm12_4
   float v14; // xmm13_4
@@ -107,7 +103,7 @@ void __fastcall UFG::Editor::Utility::FindMinimalBoundingSphere(UFG::qVector3 *c
   float v18; // xmm8_4
   float v19; // xmm9_4
   float v20; // xmm10_4
-  float *v21; // rax
+  float *p_z; // rax
   unsigned __int64 v22; // rdx
   float v23; // xmm0_4
   float v24; // xmm1_4
@@ -121,7 +117,7 @@ void __fastcall UFG::Editor::Utility::FindMinimalBoundingSphere(UFG::qVector3 *c
   float v32; // xmm1_4
   float v33; // xmm2_4
   float *v34; // rdx
-  signed __int64 v35; // rax
+  __int64 v35; // rax
   float v36; // xmm0_4
   float v37; // xmm1_4
   float v38; // xmm14_4
@@ -151,7 +147,7 @@ void __fastcall UFG::Editor::Utility::FindMinimalBoundingSphere(UFG::qVector3 *c
   float v62; // xmm6_4
   float v63; // xmm0_4
   float v64; // xmm2_4
-  signed __int64 v65; // r8
+  __int64 v65; // r8
   float *v66; // rdx
   __m128 v67; // xmm2
   float v68; // xmm5_4
@@ -166,17 +162,15 @@ void __fastcall UFG::Editor::Utility::FindMinimalBoundingSphere(UFG::qVector3 *c
   float v77; // [rsp+14h] [rbp-C4h]
   float v78; // [rsp+F0h] [rbp+18h]
 
-  v4 = points;
-  v5 = radius;
   if ( points && numPoints >= 1 )
   {
     if ( numPoints == 1 )
     {
-      v6 = points->y;
-      v7 = points->z;
+      y = points->y;
+      z = points->z;
       center->x = points->x;
-      center->y = v6;
-      center->z = v7;
+      center->y = y;
+      center->z = z;
       *radius = 0.0;
     }
     else
@@ -203,174 +197,174 @@ void __fastcall UFG::Editor::Utility::FindMinimalBoundingSphere(UFG::qVector3 *c
       v20 = FLOAT_N1_0e32;
       if ( numPoints >= 4i64 )
       {
-        v21 = &points[1].z;
+        p_z = &points[1].z;
         v22 = ((unsigned __int64)(numPoints - 4i64) >> 2) + 1;
         v11 = 4 * v22;
         do
         {
-          v23 = *(v21 - 5);
+          v23 = *(p_z - 5);
           if ( v8 > v23 )
           {
-            v13 = *(v21 - 4);
-            v14 = *(v21 - 3);
-            v8 = *(v21 - 5);
+            v13 = *(p_z - 4);
+            v14 = *(p_z - 3);
+            v8 = *(p_z - 5);
           }
           if ( v9 < v23 )
           {
-            v15 = *(v21 - 4);
-            v16 = *(v21 - 3);
-            v9 = *(v21 - 5);
+            v15 = *(p_z - 4);
+            v16 = *(p_z - 3);
+            v9 = *(p_z - 5);
           }
-          v24 = *(v21 - 4);
+          v24 = *(p_z - 4);
           if ( v17 > v24 )
           {
-            v12 = *(v21 - 5);
-            v17 = *(v21 - 4);
-            v78 = *(v21 - 3);
+            v12 = *(p_z - 5);
+            v17 = *(p_z - 4);
+            v78 = *(p_z - 3);
           }
           if ( v18 < v24 )
           {
-            v73 = *(v21 - 5);
-            v18 = *(v21 - 4);
-            v76 = *(v21 - 3);
+            v73 = *(p_z - 5);
+            v18 = *(p_z - 4);
+            v76 = *(p_z - 3);
           }
-          v25 = *(v21 - 3);
+          v25 = *(p_z - 3);
           if ( v19 > v25 )
           {
-            v75 = *(v21 - 5);
-            v77 = *(v21 - 4);
-            v19 = *(v21 - 3);
+            v75 = *(p_z - 5);
+            v77 = *(p_z - 4);
+            v19 = *(p_z - 3);
           }
           if ( v20 < v25 )
           {
-            v72 = *(v21 - 5);
-            v74 = *(v21 - 4);
-            v20 = *(v21 - 3);
+            v72 = *(p_z - 5);
+            v74 = *(p_z - 4);
+            v20 = *(p_z - 3);
           }
-          v26 = *(v21 - 2);
+          v26 = *(p_z - 2);
           if ( v8 > v26 )
           {
-            v13 = *(v21 - 1);
-            v14 = *v21;
-            v8 = *(v21 - 2);
+            v13 = *(p_z - 1);
+            v14 = *p_z;
+            v8 = *(p_z - 2);
           }
           if ( v9 < v26 )
           {
-            v15 = *(v21 - 1);
-            v16 = *v21;
-            v9 = *(v21 - 2);
+            v15 = *(p_z - 1);
+            v16 = *p_z;
+            v9 = *(p_z - 2);
           }
-          v27 = *(v21 - 1);
+          v27 = *(p_z - 1);
           if ( v17 > v27 )
           {
-            v12 = *(v21 - 2);
-            v17 = *(v21 - 1);
-            v78 = *v21;
+            v12 = *(p_z - 2);
+            v17 = *(p_z - 1);
+            v78 = *p_z;
           }
           if ( v18 < v27 )
           {
-            v73 = *(v21 - 2);
-            v18 = *(v21 - 1);
-            v76 = *v21;
+            v73 = *(p_z - 2);
+            v18 = *(p_z - 1);
+            v76 = *p_z;
           }
-          if ( v19 > *v21 )
+          if ( v19 > *p_z )
           {
-            v75 = *(v21 - 2);
-            v77 = *(v21 - 1);
-            v19 = *v21;
+            v75 = *(p_z - 2);
+            v77 = *(p_z - 1);
+            v19 = *p_z;
           }
-          if ( v20 < *v21 )
+          if ( v20 < *p_z )
           {
-            v72 = *(v21 - 2);
-            v74 = *(v21 - 1);
-            v20 = *v21;
+            v72 = *(p_z - 2);
+            v74 = *(p_z - 1);
+            v20 = *p_z;
           }
-          v28 = v21[1];
+          v28 = p_z[1];
           if ( v8 > v28 )
           {
-            v13 = v21[2];
-            v14 = v21[3];
-            v8 = v21[1];
+            v13 = p_z[2];
+            v14 = p_z[3];
+            v8 = p_z[1];
           }
           if ( v9 < v28 )
           {
-            v15 = v21[2];
-            v16 = v21[3];
-            v9 = v21[1];
+            v15 = p_z[2];
+            v16 = p_z[3];
+            v9 = p_z[1];
           }
-          v29 = v21[2];
+          v29 = p_z[2];
           if ( v17 > v29 )
           {
-            v12 = v21[1];
-            v17 = v21[2];
-            v78 = v21[3];
+            v12 = p_z[1];
+            v17 = p_z[2];
+            v78 = p_z[3];
           }
           if ( v18 < v29 )
           {
-            v73 = v21[1];
-            v18 = v21[2];
-            v76 = v21[3];
+            v73 = p_z[1];
+            v18 = p_z[2];
+            v76 = p_z[3];
           }
-          v30 = v21[3];
+          v30 = p_z[3];
           if ( v19 > v30 )
           {
-            v75 = v21[1];
-            v77 = v21[2];
-            v19 = v21[3];
+            v75 = p_z[1];
+            v77 = p_z[2];
+            v19 = p_z[3];
           }
           if ( v20 < v30 )
           {
-            v72 = v21[1];
-            v74 = v21[2];
-            v20 = v21[3];
+            v72 = p_z[1];
+            v74 = p_z[2];
+            v20 = p_z[3];
           }
-          v31 = v21[4];
+          v31 = p_z[4];
           if ( v8 > v31 )
           {
-            v13 = v21[5];
-            v14 = v21[6];
-            v8 = v21[4];
+            v13 = p_z[5];
+            v14 = p_z[6];
+            v8 = p_z[4];
           }
           if ( v9 < v31 )
           {
-            v15 = v21[5];
-            v16 = v21[6];
-            v9 = v21[4];
+            v15 = p_z[5];
+            v16 = p_z[6];
+            v9 = p_z[4];
           }
-          v32 = v21[5];
+          v32 = p_z[5];
           if ( v17 > v32 )
           {
-            v12 = v21[4];
-            v17 = v21[5];
-            v78 = v21[6];
+            v12 = p_z[4];
+            v17 = p_z[5];
+            v78 = p_z[6];
           }
           if ( v18 < v32 )
           {
-            v73 = v21[4];
-            v18 = v21[5];
-            v76 = v21[6];
+            v73 = p_z[4];
+            v18 = p_z[5];
+            v76 = p_z[6];
           }
-          v33 = v21[6];
+          v33 = p_z[6];
           if ( v19 > v33 )
           {
-            v75 = v21[4];
-            v77 = v21[5];
-            v19 = v21[6];
+            v75 = p_z[4];
+            v77 = p_z[5];
+            v19 = p_z[6];
           }
           if ( v20 < v33 )
           {
-            v72 = v21[4];
-            v74 = v21[5];
-            v20 = v21[6];
+            v72 = p_z[4];
+            v74 = p_z[5];
+            v20 = p_z[6];
           }
-          v21 += 12;
+          p_z += 12;
           --v22;
         }
         while ( v22 );
       }
       if ( v11 < numPoints )
       {
-        v34 = &points->x + v11 + 2 * (v11 + 1);
+        v34 = &points->z + 2 * v11 + v11;
         v35 = numPoints - v11;
         do
         {
@@ -451,7 +445,7 @@ void __fastcall UFG::Editor::Utility::FindMinimalBoundingSphere(UFG::qVector3 *c
       center->y = v41;
       v42 = (float)((float)((float)(v15 - v41) * (float)(v15 - v41)) + (float)((float)(v9 - v40) * (float)(v9 - v40)))
           + (float)((float)(v16 - v39) * (float)(v16 - v39));
-      *v5 = fsqrt(v42);
+      *radius = fsqrt(v42);
       if ( numPoints >= 4i64 )
       {
         v43 = &points[1].z;
@@ -465,9 +459,9 @@ void __fastcall UFG::Editor::Utility::FindMinimalBoundingSphere(UFG::qVector3 *c
                           + (float)((float)(*(v43 - 3) - center->z) * (float)(*(v43 - 3) - center->z));
           if ( v45.m128_f32[0] > v42 )
           {
-            LODWORD(v46) = (unsigned __int128)_mm_sqrt_ps(v45);
-            v47 = (float)(v46 + *v5) * 0.5;
-            *v5 = v47;
+            v46 = _mm_sqrt_ps(v45).m128_f32[0];
+            v47 = (float)(v46 + *radius) * 0.5;
+            *radius = v47;
             v48 = (float)(v47 * center->y) + (float)((float)(v46 - v47) * *(v43 - 4));
             v49 = (float)(1.0 / v46) * (float)((float)(v47 * center->z) + (float)((float)(v46 - v47) * *(v43 - 3)));
             center->x = (float)(1.0 / v46)
@@ -481,9 +475,9 @@ void __fastcall UFG::Editor::Utility::FindMinimalBoundingSphere(UFG::qVector3 *c
                           + (float)((float)(*v43 - center->z) * (float)(*v43 - center->z));
           if ( v50.m128_f32[0] > v42 )
           {
-            LODWORD(v51) = (unsigned __int128)_mm_sqrt_ps(v50);
-            v52 = (float)(v51 + *v5) * 0.5;
-            *v5 = v52;
+            v51 = _mm_sqrt_ps(v50).m128_f32[0];
+            v52 = (float)(v51 + *radius) * 0.5;
+            *radius = v52;
             v53 = (float)(v52 * center->y) + (float)((float)(v51 - v52) * *(v43 - 1));
             v54 = (float)(1.0 / v51) * (float)((float)(v52 * center->z) + (float)((float)(v51 - v52) * *v43));
             center->x = (float)(1.0 / v51)
@@ -497,9 +491,9 @@ void __fastcall UFG::Editor::Utility::FindMinimalBoundingSphere(UFG::qVector3 *c
                           + (float)((float)(v43[3] - center->z) * (float)(v43[3] - center->z));
           if ( v55.m128_f32[0] > v42 )
           {
-            LODWORD(v56) = (unsigned __int128)_mm_sqrt_ps(v55);
-            v57 = (float)(v56 + *v5) * 0.5;
-            *v5 = v57;
+            v56 = _mm_sqrt_ps(v55).m128_f32[0];
+            v57 = (float)(v56 + *radius) * 0.5;
+            *radius = v57;
             v58 = (float)(v57 * center->y) + (float)((float)(v56 - v57) * v43[2]);
             v59 = (float)(1.0 / v56) * (float)((float)(v57 * center->z) + (float)((float)(v56 - v57) * v43[3]));
             center->x = (float)(1.0 / v56) * (float)((float)(v57 * center->x) + (float)((float)(v56 - v57) * v43[1]));
@@ -512,9 +506,9 @@ void __fastcall UFG::Editor::Utility::FindMinimalBoundingSphere(UFG::qVector3 *c
                           + (float)((float)(v43[6] - center->z) * (float)(v43[6] - center->z));
           if ( v60.m128_f32[0] > v42 )
           {
-            LODWORD(v61) = (unsigned __int128)_mm_sqrt_ps(v60);
-            v62 = (float)(v61 + *v5) * 0.5;
-            *v5 = v62;
+            v61 = _mm_sqrt_ps(v60).m128_f32[0];
+            v62 = (float)(v61 + *radius) * 0.5;
+            *radius = v62;
             v63 = (float)(1.0 / v61) * (float)((float)(v62 * center->y) + (float)((float)(v61 - v62) * v43[5]));
             v64 = (float)(1.0 / v61) * (float)((float)(v62 * center->z) + (float)((float)(v61 - v62) * v43[6]));
             center->x = (float)(1.0 / v61) * (float)((float)(v62 * center->x) + (float)((float)(v61 - v62) * v43[4]));
@@ -529,7 +523,7 @@ void __fastcall UFG::Editor::Utility::FindMinimalBoundingSphere(UFG::qVector3 *c
       if ( v10 < numPoints )
       {
         v65 = numPoints - v10;
-        v66 = &v4->x + v10 + 2 * (v10 + 1);
+        v66 = &points->z + 2 * v10 + v10;
         do
         {
           v67 = (__m128)*((unsigned int *)v66 - 1);
@@ -538,9 +532,9 @@ void __fastcall UFG::Editor::Utility::FindMinimalBoundingSphere(UFG::qVector3 *c
                           + (float)((float)(*v66 - center->z) * (float)(*v66 - center->z));
           if ( v67.m128_f32[0] > v42 )
           {
-            LODWORD(v68) = (unsigned __int128)_mm_sqrt_ps(v67);
-            v69 = (float)(v68 + *v5) * 0.5;
-            *v5 = v69;
+            v68 = _mm_sqrt_ps(v67).m128_f32[0];
+            v69 = (float)(v68 + *radius) * 0.5;
+            *radius = v69;
             v70 = (float)(1.0 / v68) * (float)((float)(v69 * center->y) + (float)((float)(v68 - v69) * *(v66 - 1)));
             v71 = (float)(1.0 / v68) * (float)((float)(v69 * center->z) + (float)((float)(v68 - v69) * *v66));
             center->x = (float)(1.0 / v68)
@@ -563,21 +557,21 @@ void __fastcall UFG::Editor::Utility::FindMinimalBoundingSphere(UFG::qVector3 *c
 
 // File Line: 463
 // RVA: 0x205F90
-UFG::qMatrix44 *__fastcall UFG::Editor::Utility::ComputeLocalMatrix(UFG::qMatrix44 *result, UFG::qPropertySet *obj, UFG::qMatrix44 *W)
+UFG::qMatrix44 *__fastcall UFG::Editor::Utility::ComputeLocalMatrix(
+        UFG::qMatrix44 *result,
+        UFG::qPropertySet *obj,
+        UFG::qMatrix44 *W)
 {
-  UFG::qPropertySet *v3; // rsi
-  UFG::qMatrix44 *v4; // rdi
-  UFG::qMatrix44 *v5; // rbx
   unsigned int *v6; // rax
-  __int64 v7; // rax
+  __int64 mOffset; // rax
   UFG::qPropertySet *v8; // rdx
   __int64 v9; // rax
-  signed __int64 v10; // rdx
-  UFG::qMatrix44 *v11; // rax
-  __m128 v12; // ST20_16
-  __m128 v13; // ST30_16
-  __m128 v14; // ST40_16
-  __m128 v15; // ST50_16
+  UFG::qOffset64<UFG::qPropertyCollection *> *p_mOwner; // rdx
+  UFG::qMatrix44 *SceneObjectWorldMatrix; // rax
+  float y; // xmm1_4
+  float z; // xmm0_4
+  float v14; // xmm1_4
+  float x; // xmm0_4
   float v16; // xmm1_4
   float v17; // xmm0_4
   float v18; // xmm1_4
@@ -589,468 +583,451 @@ UFG::qMatrix44 *__fastcall UFG::Editor::Utility::ComputeLocalMatrix(UFG::qMatrix
   float v24; // xmm1_4
   float v25; // xmm0_4
   float v26; // xmm1_4
-  float v27; // xmm0_4
+  float v27; // eax
   float v28; // xmm1_4
-  float v29; // xmm0_4
+  float v29; // xmm2_4
   float v30; // xmm1_4
   float v31; // eax
-  float v32; // xmm1_4
-  float v33; // xmm2_4
-  float v34; // xmm1_4
-  float v35; // eax
-  float v36; // xmm2_4
-  float v37; // xmm1_4
-  float v38; // eax
-  float v39; // xmm2_4
-  float v40; // xmm1_4
-  float v41; // eax
-  float v42; // xmm2_4
-  UFG::qMatrix44 resulta; // [rsp+60h] [rbp-A0h]
-  UFG::qMatrix44 v45; // [rsp+A0h] [rbp-60h]
-  UFG::qMatrix44 d; // [rsp+E0h] [rbp-20h]
-  UFG::qMatrix44 m; // [rsp+120h] [rbp+20h]
+  float v32; // xmm2_4
+  float v33; // xmm1_4
+  float v34; // eax
+  float v35; // xmm2_4
+  float v36; // xmm1_4
+  float v37; // eax
+  float v38; // xmm2_4
+  UFG::qVector4 v40; // [rsp+20h] [rbp-E0h]
+  UFG::qVector4 v41; // [rsp+30h] [rbp-D0h]
+  UFG::qVector4 v42; // [rsp+40h] [rbp-C0h]
+  UFG::qVector4 v43; // [rsp+50h] [rbp-B0h]
+  UFG::qMatrix44 resulta; // [rsp+60h] [rbp-A0h] BYREF
+  UFG::qMatrix44 v45; // [rsp+A0h] [rbp-60h] BYREF
+  UFG::qMatrix44 d; // [rsp+E0h] [rbp-20h] BYREF
+  UFG::qMatrix44 m; // [rsp+120h] [rbp+20h] BYREF
 
-  v3 = obj;
-  v4 = W;
-  v5 = result;
-  v6 = UFG::qPropertySet::Get<unsigned long>(obj, (UFG::qSymbol *)&UFG::Editor::gsymXformParent.mUID, DEPTH_RECURSE);
+  v6 = UFG::qPropertySet::Get<unsigned long>(
+         obj,
+         (UFG::qArray<unsigned long,0> *)&UFG::Editor::gsymXformParent,
+         DEPTH_RECURSE);
   if ( v6 && *v6 )
   {
-    v7 = v3->mOwner.mOffset;
-    if ( v7 && (v8 = (UFG::qPropertySet *)((char *)&v3->mOwner + v7)) != 0i64 )
+    mOffset = obj->mOwner.mOffset;
+    if ( mOffset && (v8 = (UFG::qPropertySet *)((char *)&obj->mOwner + mOffset)) != 0i64 )
     {
-      while ( !((v8->mFlags >> 1) & 1) )
+      while ( (v8->mFlags & 2) == 0 )
       {
         v9 = v8->mOwner.mOffset;
-        v10 = (signed __int64)&v8->mOwner;
+        p_mOwner = &v8->mOwner;
         if ( v9 )
         {
-          v8 = (UFG::qPropertySet *)(v9 + v10);
+          v8 = (UFG::qPropertySet *)((char *)p_mOwner + v9);
           if ( v8 )
             continue;
         }
         goto LABEL_8;
       }
-      v11 = UFG::Editor::SceneManager::GetSceneObjectWorldMatrix(&resulta, v8);
+      SceneObjectWorldMatrix = UFG::Editor::SceneManager::GetSceneObjectWorldMatrix(&resulta, v8);
     }
     else
     {
 LABEL_8:
-      v11 = &resulta;
+      SceneObjectWorldMatrix = &resulta;
       resulta = UFG::qMatrix44::msIdentity;
     }
-    v12 = (__m128)v11->v0;
-    v13 = (__m128)v11->v1;
-    v14 = (__m128)v11->v2;
-    v15 = (__m128)v11->v3;
-    UFG::qInverseAffine(&d, v4);
+    v40 = SceneObjectWorldMatrix->v0;
+    v41 = SceneObjectWorldMatrix->v1;
+    v42 = SceneObjectWorldMatrix->v2;
+    v43 = SceneObjectWorldMatrix->v3;
+    UFG::qInverseAffine(&d, W);
     m.v0 = (UFG::qVector4)_mm_add_ps(
                             _mm_add_ps(
                               _mm_add_ps(
-                                _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v12, v12, 0), (__m128)d.v0), (__m128)0i64),
-                                _mm_mul_ps(_mm_shuffle_ps(v12, v12, 85), (__m128)d.v1)),
-                              _mm_mul_ps(_mm_shuffle_ps(v12, v12, 170), (__m128)d.v2)),
-                            _mm_mul_ps(_mm_shuffle_ps(v12, v12, 255), (__m128)d.v3));
+                                _mm_add_ps(
+                                  _mm_mul_ps(_mm_shuffle_ps((__m128)v40, (__m128)v40, 0), (__m128)d.v0),
+                                  (__m128)0i64),
+                                _mm_mul_ps(_mm_shuffle_ps((__m128)v40, (__m128)v40, 85), (__m128)d.v1)),
+                              _mm_mul_ps(_mm_shuffle_ps((__m128)v40, (__m128)v40, 170), (__m128)d.v2)),
+                            _mm_mul_ps(_mm_shuffle_ps((__m128)v40, (__m128)v40, 255), (__m128)d.v3));
     m.v1 = (UFG::qVector4)_mm_add_ps(
                             _mm_add_ps(
                               _mm_add_ps(
-                                _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v13, v13, 0), (__m128)d.v0), (__m128)0i64),
-                                _mm_mul_ps(_mm_shuffle_ps(v13, v13, 85), (__m128)d.v1)),
-                              _mm_mul_ps(_mm_shuffle_ps(v13, v13, 170), (__m128)d.v2)),
-                            _mm_mul_ps(_mm_shuffle_ps(v13, v13, 255), (__m128)d.v3));
+                                _mm_add_ps(
+                                  _mm_mul_ps(_mm_shuffle_ps((__m128)v41, (__m128)v41, 0), (__m128)d.v0),
+                                  (__m128)0i64),
+                                _mm_mul_ps(_mm_shuffle_ps((__m128)v41, (__m128)v41, 85), (__m128)d.v1)),
+                              _mm_mul_ps(_mm_shuffle_ps((__m128)v41, (__m128)v41, 170), (__m128)d.v2)),
+                            _mm_mul_ps(_mm_shuffle_ps((__m128)v41, (__m128)v41, 255), (__m128)d.v3));
     m.v2 = (UFG::qVector4)_mm_add_ps(
                             _mm_add_ps(
                               _mm_add_ps(
-                                _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v14, v14, 0), (__m128)d.v0), (__m128)0i64),
-                                _mm_mul_ps(_mm_shuffle_ps(v14, v14, 85), (__m128)d.v1)),
-                              _mm_mul_ps(_mm_shuffle_ps(v14, v14, 170), (__m128)d.v2)),
-                            _mm_mul_ps(_mm_shuffle_ps(v14, v14, 255), (__m128)d.v3));
+                                _mm_add_ps(
+                                  _mm_mul_ps(_mm_shuffle_ps((__m128)v42, (__m128)v42, 0), (__m128)d.v0),
+                                  (__m128)0i64),
+                                _mm_mul_ps(_mm_shuffle_ps((__m128)v42, (__m128)v42, 85), (__m128)d.v1)),
+                              _mm_mul_ps(_mm_shuffle_ps((__m128)v42, (__m128)v42, 170), (__m128)d.v2)),
+                            _mm_mul_ps(_mm_shuffle_ps((__m128)v42, (__m128)v42, 255), (__m128)d.v3));
     m.v3 = (UFG::qVector4)_mm_add_ps(
                             _mm_add_ps(
                               _mm_add_ps(
-                                _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v15, v15, 0), (__m128)d.v0), (__m128)0i64),
-                                _mm_mul_ps(_mm_shuffle_ps(v15, v15, 85), (__m128)d.v1)),
-                              _mm_mul_ps(_mm_shuffle_ps(v15, v15, 170), (__m128)d.v2)),
-                            _mm_mul_ps(_mm_shuffle_ps(v15, v15, 255), (__m128)d.v3));
+                                _mm_add_ps(
+                                  _mm_mul_ps(_mm_shuffle_ps((__m128)v43, (__m128)v43, 0), (__m128)d.v0),
+                                  (__m128)0i64),
+                                _mm_mul_ps(_mm_shuffle_ps((__m128)v43, (__m128)v43, 85), (__m128)d.v1)),
+                              _mm_mul_ps(_mm_shuffle_ps((__m128)v43, (__m128)v43, 170), (__m128)d.v2)),
+                            _mm_mul_ps(_mm_shuffle_ps((__m128)v43, (__m128)v43, 255), (__m128)d.v3));
     UFG::qInverseAffine(&v45, &m);
-    v16 = v45.v0.y;
-    v5->v0.x = v45.v0.x;
-    v17 = v45.v0.z;
-    v5->v0.y = v16;
-    v18 = v45.v0.w;
-    v5->v0.z = v17;
-    v19 = v45.v1.x;
-    v5->v0.w = v18;
-    v20 = v45.v1.y;
-    v5->v1.x = v19;
-    v21 = v45.v1.z;
-    v5->v1.y = v20;
-    v22 = v45.v1.w;
-    v5->v1.z = v21;
-    v23 = v45.v2.x;
-    v5->v1.w = v22;
-    v24 = v45.v2.y;
-    v5->v2.x = v23;
-    v25 = v45.v2.z;
-    v5->v2.y = v24;
-    v26 = v45.v2.w;
-    v5->v2.z = v25;
-    v27 = v45.v3.x;
-    v5->v2.w = v26;
-    v28 = v45.v3.y;
-    v5->v3.x = v27;
-    v29 = v45.v3.z;
-    v5->v3.y = v28;
-    v30 = v45.v3.w;
-    v5->v3.z = v29;
-    v5->v3.w = v30;
+    y = v45.v0.y;
+    result->v0.x = v45.v0.x;
+    z = v45.v0.z;
+    result->v0.y = y;
+    v14 = v45.v0.w;
+    result->v0.z = z;
+    x = v45.v1.x;
+    result->v0.w = v14;
+    v16 = v45.v1.y;
+    result->v1.x = x;
+    v17 = v45.v1.z;
+    result->v1.y = v16;
+    v18 = v45.v1.w;
+    result->v1.z = v17;
+    v19 = v45.v2.x;
+    result->v1.w = v18;
+    v20 = v45.v2.y;
+    result->v2.x = v19;
+    v21 = v45.v2.z;
+    result->v2.y = v20;
+    v22 = v45.v2.w;
+    result->v2.z = v21;
+    v23 = v45.v3.x;
+    result->v2.w = v22;
+    v24 = v45.v3.y;
+    result->v3.x = v23;
+    v25 = v45.v3.z;
+    result->v3.y = v24;
+    v26 = v45.v3.w;
+    result->v3.z = v25;
+    result->v3.w = v26;
   }
   else
   {
-    v31 = v4->v0.x;
-    v32 = v4->v0.z;
-    v33 = v4->v0.w;
-    v5->v0.y = v4->v0.y;
-    v5->v0.z = v32;
-    v5->v0.x = v31;
-    v5->v0.w = v33;
-    v34 = v4->v1.z;
-    v35 = v4->v1.x;
-    v36 = v4->v1.w;
-    v5->v1.y = v4->v1.y;
-    v5->v1.z = v34;
-    v5->v1.x = v35;
-    v5->v1.w = v36;
-    v37 = v4->v2.z;
-    v38 = v4->v2.x;
-    v39 = v4->v2.w;
-    v5->v2.y = v4->v2.y;
-    v5->v2.z = v37;
-    v5->v2.x = v38;
-    v5->v2.w = v39;
-    v40 = v4->v3.z;
-    v41 = v4->v3.x;
-    v42 = v4->v3.w;
-    v5->v3.y = v4->v3.y;
-    v5->v3.z = v40;
-    v5->v3.x = v41;
-    v5->v3.w = v42;
+    v27 = W->v0.x;
+    v28 = W->v0.z;
+    v29 = W->v0.w;
+    result->v0.y = W->v0.y;
+    result->v0.z = v28;
+    result->v0.x = v27;
+    result->v0.w = v29;
+    v30 = W->v1.z;
+    v31 = W->v1.x;
+    v32 = W->v1.w;
+    result->v1.y = W->v1.y;
+    result->v1.z = v30;
+    result->v1.x = v31;
+    result->v1.w = v32;
+    v33 = W->v2.z;
+    v34 = W->v2.x;
+    v35 = W->v2.w;
+    result->v2.y = W->v2.y;
+    result->v2.z = v33;
+    result->v2.x = v34;
+    result->v2.w = v35;
+    v36 = W->v3.z;
+    v37 = W->v3.x;
+    v38 = W->v3.w;
+    result->v3.y = W->v3.y;
+    result->v3.z = v36;
+    result->v3.x = v37;
+    result->v3.w = v38;
   }
-  return v5;
+  return result;
 }
 
 // File Line: 569
 // RVA: 0x21EA70
-UFG::qVector3 *__fastcall UFG::Editor::Utility::World_To_NDC(UFG::qVector3 *result, UFG::Editor::View *view, UFG::qVector3 *wld, UFG::qMatrix44 *modelMat, bool *negativePerspectiveDivide)
+UFG::qVector3 *__fastcall UFG::Editor::Utility::World_To_NDC(
+        UFG::qVector3 *result,
+        UFG::Editor::View *view,
+        UFG::qVector3 *wld,
+        UFG::qMatrix44 *modelMat,
+        bool *negativePerspectiveDivide)
 {
-  UFG::Editor::Camera *v5; // rdi
-  UFG::qMatrix44 *v6; // r14
-  UFG::qVector3 *v7; // rbp
-  UFG::Editor::View *v8; // rsi
-  UFG::qVector3 *v9; // rbx
-  UFG::BaseCameraComponent *v10; // rax
-  signed __int64 v11; // rax
+  UFG::Editor::Camera *mCamera; // rdi
+  UFG::BaseCameraComponent *mCurrentCamera; // rax
+  UFG::Camera *p_mCamera; // rax
   UFG::BaseCameraComponent *v12; // rcx
-  UFG::qMatrix44 *v13; // rdi
-  UFG::qMatrix44 *v14; // rax
+  UFG::qMatrix44 *ViewProjection; // rdi
+  UFG::qMatrix44 *MatView; // rax
   UFG::qMatrix44 *v15; // rax
-  float v16; // xmm2_4
-  float v17; // xmm4_4
+  float y; // xmm2_4
+  float z; // xmm4_4
   float v18; // xmm5_4
   float v19; // xmm6_4
   float v20; // xmm7_4
   float v21; // xmm8_4
   UFG::qVector3 *v22; // rax
-  UFG::qMatrix44 v23; // [rsp+20h] [rbp-F8h]
-  UFG::qMatrix44 resulta; // [rsp+60h] [rbp-B8h]
-  UFG::qMatrix44 v25; // [rsp+A0h] [rbp-78h]
+  UFG::qMatrix44 v23; // [rsp+20h] [rbp-F8h] BYREF
+  UFG::qMatrix44 resulta; // [rsp+60h] [rbp-B8h] BYREF
+  UFG::qMatrix44 v25; // [rsp+A0h] [rbp-78h] BYREF
 
-  v5 = view->mCamera;
-  v6 = modelMat;
-  v7 = wld;
-  v8 = view;
-  v9 = result;
-  v10 = UFG::Director::Get()->mCurrentCamera;
-  if ( v10 && (v11 = (signed __int64)&v10->mCamera) != 0 && !*(_BYTE *)(v11 + 256) )
+  mCamera = view->mCamera;
+  mCurrentCamera = UFG::Director::Get()->mCurrentCamera;
+  if ( mCurrentCamera && (p_mCamera = &mCurrentCamera->mCamera) != 0i64 && !p_mCamera->bUseOverrideMatrices )
   {
     v12 = UFG::Director::Get()->mCurrentCamera;
     if ( v12 )
-      v13 = UFG::Camera::GetViewProjection(&v12->mCamera);
+      ViewProjection = UFG::Camera::GetViewProjection(&v12->mCamera);
     else
-      v13 = UFG::Camera::GetViewProjection(0i64);
+      ViewProjection = UFG::Camera::GetViewProjection(0i64);
   }
   else
   {
-    v13 = &v5->mProj;
+    ViewProjection = &mCamera->mProj;
   }
-  v14 = UFG::Editor::Camera::GetMatView(v8->mCamera, &resulta);
-  v15 = UFG::qMatrix44::operator*(v6, &v25, v14);
-  UFG::qMatrix44::operator*(v15, &v23, v13);
-  v16 = v7->y;
-  v17 = v7->z;
-  v18 = (float)((float)((float)(v23.v1.x * v16) + (float)(v23.v0.x * v7->x)) + (float)(v23.v2.x * v17)) + v23.v3.x;
-  v19 = (float)((float)((float)(v23.v1.y * v16) + (float)(v23.v0.y * v7->x)) + (float)(v23.v2.y * v17)) + v23.v3.y;
-  v20 = (float)((float)((float)(v23.v1.z * v16) + (float)(v23.v0.z * v7->x)) + (float)(v23.v2.z * v17)) + v23.v3.z;
-  v21 = (float)((float)((float)(v23.v1.w * v16) + (float)(v23.v0.w * v7->x)) + (float)(v23.v2.w * v17)) + v23.v3.w;
+  MatView = UFG::Editor::Camera::GetMatView(view->mCamera, &resulta);
+  v15 = UFG::qMatrix44::operator*(modelMat, &v25, MatView);
+  UFG::qMatrix44::operator*(v15, &v23, ViewProjection);
+  y = wld->y;
+  z = wld->z;
+  v18 = (float)((float)((float)(v23.v1.x * y) + (float)(v23.v0.x * wld->x)) + (float)(v23.v2.x * z)) + v23.v3.x;
+  v19 = (float)((float)((float)(v23.v1.y * y) + (float)(v23.v0.y * wld->x)) + (float)(v23.v2.y * z)) + v23.v3.y;
+  v20 = (float)((float)((float)(v23.v1.z * y) + (float)(v23.v0.z * wld->x)) + (float)(v23.v2.z * z)) + v23.v3.z;
+  v21 = (float)((float)((float)(v23.v1.w * y) + (float)(v23.v0.w * wld->x)) + (float)(v23.v2.w * z)) + v23.v3.w;
   if ( negativePerspectiveDivide )
     *negativePerspectiveDivide = v21 < 0.0;
-  v22 = v9;
-  v9->y = v19 * (float)(1.0 / v21);
-  v9->z = v20 * (float)(1.0 / v21);
-  v9->x = v18 * (float)(1.0 / v21);
+  v22 = result;
+  result->y = v19 * (float)(1.0 / v21);
+  result->z = v20 * (float)(1.0 / v21);
+  result->x = v18 * (float)(1.0 / v21);
   return v22;
 }
 
 // File Line: 605
 // RVA: 0x207700
-__int64 __fastcall UFG::Editor::Utility::DecomposeAffineEulerSmart_RoundedDegrees(UFG::qVector3 *soln, UFG::qMatrix44 *affine, bool biasPos)
+__int64 __fastcall UFG::Editor::Utility::DecomposeAffineEulerSmart_RoundedDegrees(
+        UFG::qVector3 *soln,
+        UFG::qMatrix44 *affine,
+        bool biasPos)
 {
-  bool v3; // bl
-  UFG::qMatrix44 *v4; // rdi
-  UFG::qVector3 *v5; // rsi
   unsigned __int8 v6; // dl
-  __m128 v7; // xmm5
-  bool v8; // cf
-  bool v9; // zf
-  __m128 v10; // xmm8
-  __m128 v11; // xmm6
-  __m128 v12; // xmm7
-  __m128 v13; // xmm4
-  __m128 v14; // xmm3
-  signed int v15; // ecx
+  __m128 y_low; // xmm5
+  bool v8; // cc
+  __m128 x_low; // xmm8
+  __m128 z_low; // xmm6
+  __m128 v11; // xmm7
+  __m128 v12; // xmm4
+  __m128 v13; // xmm3
+  int v14; // ecx
+  int v15; // ecx
   int v16; // ecx
-  signed int v17; // ecx
-  float v18; // xmm8_4
-  float v19; // xmm5_4
-  signed int v20; // ecx
+  float v17; // xmm8_4
+  float v18; // xmm5_4
+  int v19; // ecx
+  int v20; // ecx
   int v21; // ecx
-  signed int v22; // ecx
-  float v23; // xmm5_4
-  float v24; // xmm6_4
-  signed int v25; // ecx
+  float v22; // xmm5_4
+  float v23; // xmm6_4
+  int v24; // ecx
+  int v25; // ecx
   int v26; // ecx
-  signed int v27; // ecx
-  float v28; // xmm6_4
-  float v29; // xmm7_4
-  signed int v30; // ecx
+  float v27; // xmm6_4
+  float v28; // xmm7_4
+  int v29; // ecx
+  int v30; // ecx
   int v31; // ecx
-  signed int v32; // ecx
-  float v33; // xmm7_4
-  float v34; // xmm4_4
-  signed int v35; // ecx
+  float v32; // xmm7_4
+  float v33; // xmm4_4
+  int v34; // ecx
+  int v35; // ecx
   int v36; // ecx
-  signed int v37; // ecx
-  float v38; // xmm4_4
-  float v39; // xmm3_4
-  signed int v40; // ecx
+  float v37; // xmm4_4
+  float v38; // xmm3_4
+  int v39; // ecx
+  int v40; // ecx
   int v41; // ecx
-  signed int v42; // ecx
-  float v43; // xmm8_4
-  float v44; // xmm4_4
-  float v45; // xmm7_4
-  UFG::qVector3 *v46; // rcx
-  float v47; // xmm6_4
-  float v48; // xmm5_4
-  UFG::qVector3 sol_a; // [rsp+20h] [rbp-78h]
-  UFG::qVector3 sol_b; // [rsp+30h] [rbp-68h]
+  float v42; // xmm8_4
+  float v43; // xmm4_4
+  float v44; // xmm7_4
+  UFG::qVector3 *p_sol_a; // rcx
+  float v46; // xmm6_4
+  float v47; // xmm5_4
+  UFG::qVector3 sol_a; // [rsp+20h] [rbp-78h] BYREF
+  UFG::qVector3 sol_b; // [rsp+30h] [rbp-68h] BYREF
 
-  v3 = biasPos;
-  v4 = affine;
-  v5 = soln;
   UFG::Editor::Utility::Round(&soln->x, 0.1);
-  UFG::Editor::Utility::Round(&v5->y, 0.1);
-  UFG::Editor::Utility::Round(&v5->z, 0.1);
-  v6 = UFG::qDecomposeAffineEuler(&sol_a, &sol_b, v4, v3);
-  v10 = (__m128)LODWORD(sol_a.x);
-  v10.m128_f32[0] = (float)(sol_a.x * 180.0) * 0.31830987;
-  v7 = (__m128)LODWORD(sol_a.y);
-  v11 = (__m128)LODWORD(sol_a.z);
-  v12 = (__m128)LODWORD(sol_b.x);
-  v13 = (__m128)LODWORD(sol_b.y);
-  v14 = (__m128)LODWORD(sol_b.z);
-  v7.m128_f32[0] = (float)(sol_a.y * 180.0) * 0.31830987;
-  v8 = v10.m128_f32[0] < 0.0;
-  v9 = v10.m128_f32[0] == 0.0;
-  v10.m128_f32[0] = v10.m128_f32[0] * 10.0;
-  v11.m128_f32[0] = (float)(sol_a.z * 180.0) * 0.31830987;
-  v12.m128_f32[0] = (float)(sol_b.x * 180.0) * 0.31830987;
-  v13.m128_f32[0] = (float)(sol_b.y * 180.0) * 0.31830987;
-  v14.m128_f32[0] = (float)(sol_b.z * 180.0) * 0.31830987;
-  if ( v8 || v9 )
+  UFG::Editor::Utility::Round(&soln->y, 0.1);
+  UFG::Editor::Utility::Round(&soln->z, 0.1);
+  v6 = UFG::qDecomposeAffineEuler(&sol_a, &sol_b, affine, biasPos);
+  x_low = (__m128)LODWORD(sol_a.x);
+  x_low.m128_f32[0] = (float)(sol_a.x * 180.0) * 0.31830987;
+  y_low = (__m128)LODWORD(sol_a.y);
+  z_low = (__m128)LODWORD(sol_a.z);
+  v11 = (__m128)LODWORD(sol_b.x);
+  v12 = (__m128)LODWORD(sol_b.y);
+  v13 = (__m128)LODWORD(sol_b.z);
+  y_low.m128_f32[0] = (float)(sol_a.y * 180.0) * 0.31830987;
+  v8 = x_low.m128_f32[0] <= 0.0;
+  x_low.m128_f32[0] = x_low.m128_f32[0] * 10.0;
+  z_low.m128_f32[0] = (float)(sol_a.z * 180.0) * 0.31830987;
+  v11.m128_f32[0] = (float)(sol_b.x * 180.0) * 0.31830987;
+  v12.m128_f32[0] = (float)(sol_b.y * 180.0) * 0.31830987;
+  v13.m128_f32[0] = (float)(sol_b.z * 180.0) * 0.31830987;
+  if ( v8 )
   {
-    v10.m128_f32[0] = v10.m128_f32[0] - 0.5;
-    v17 = (signed int)v10.m128_f32[0];
-    if ( (signed int)v10.m128_f32[0] != 0x80000000 && (float)v17 != v10.m128_f32[0] )
+    x_low.m128_f32[0] = x_low.m128_f32[0] - 0.5;
+    v16 = (int)x_low.m128_f32[0];
+    if ( (int)x_low.m128_f32[0] != 0x80000000 && (float)v16 != x_low.m128_f32[0] )
     {
-      v16 = (_mm_movemask_ps(_mm_unpacklo_ps(v10, v10)) & 1 ^ 1) + v17;
+      v15 = !(_mm_movemask_ps(_mm_unpacklo_ps(x_low, x_low)) & 1) + v16;
       goto LABEL_8;
     }
   }
   else
   {
-    v10.m128_f32[0] = v10.m128_f32[0] + 0.5;
-    v15 = (signed int)v10.m128_f32[0];
-    if ( (signed int)v10.m128_f32[0] != 0x80000000 && (float)v15 != v10.m128_f32[0] )
+    x_low.m128_f32[0] = x_low.m128_f32[0] + 0.5;
+    v14 = (int)x_low.m128_f32[0];
+    if ( (int)x_low.m128_f32[0] != 0x80000000 && (float)v14 != x_low.m128_f32[0] )
     {
-      v16 = v15 - (_mm_movemask_ps(_mm_unpacklo_ps(v10, v10)) & 1);
+      v15 = v14 - (_mm_movemask_ps(_mm_unpacklo_ps(x_low, x_low)) & 1);
 LABEL_8:
-      v10.m128_f32[0] = (float)v16;
-      goto LABEL_9;
+      x_low.m128_f32[0] = (float)v15;
     }
   }
-LABEL_9:
-  v18 = v10.m128_f32[0] * 0.1;
-  v8 = v7.m128_f32[0] < 0.0;
-  v9 = v7.m128_f32[0] == 0.0;
-  v19 = v7.m128_f32[0] * 10.0;
-  sol_a.x = v18;
-  if ( v8 || v9 )
+  v17 = x_low.m128_f32[0] * 0.1;
+  v8 = y_low.m128_f32[0] <= 0.0;
+  v18 = y_low.m128_f32[0] * 10.0;
+  sol_a.x = v17;
+  if ( v8 )
   {
-    v7.m128_f32[0] = v19 - 0.5;
-    v22 = (signed int)v7.m128_f32[0];
-    if ( (signed int)v7.m128_f32[0] != 0x80000000 && (float)v22 != v7.m128_f32[0] )
+    y_low.m128_f32[0] = v18 - 0.5;
+    v21 = (int)y_low.m128_f32[0];
+    if ( (int)y_low.m128_f32[0] != 0x80000000 && (float)v21 != y_low.m128_f32[0] )
     {
-      v21 = (_mm_movemask_ps(_mm_unpacklo_ps(v7, v7)) & 1 ^ 1) + v22;
+      v20 = !(_mm_movemask_ps(_mm_unpacklo_ps(y_low, y_low)) & 1) + v21;
       goto LABEL_16;
     }
   }
   else
   {
-    v7.m128_f32[0] = v19 + 0.5;
-    v20 = (signed int)v7.m128_f32[0];
-    if ( (signed int)v7.m128_f32[0] != 0x80000000 && (float)v20 != v7.m128_f32[0] )
+    y_low.m128_f32[0] = v18 + 0.5;
+    v19 = (int)y_low.m128_f32[0];
+    if ( (int)y_low.m128_f32[0] != 0x80000000 && (float)v19 != y_low.m128_f32[0] )
     {
-      v21 = v20 - (_mm_movemask_ps(_mm_unpacklo_ps(v7, v7)) & 1);
+      v20 = v19 - (_mm_movemask_ps(_mm_unpacklo_ps(y_low, y_low)) & 1);
 LABEL_16:
-      v7.m128_f32[0] = (float)v21;
-      goto LABEL_17;
+      y_low.m128_f32[0] = (float)v20;
     }
   }
-LABEL_17:
-  v23 = v7.m128_f32[0] * 0.1;
-  v8 = v11.m128_f32[0] < 0.0;
-  v9 = v11.m128_f32[0] == 0.0;
-  v24 = v11.m128_f32[0] * 10.0;
-  sol_a.y = v23;
-  if ( v8 || v9 )
+  v22 = y_low.m128_f32[0] * 0.1;
+  v8 = z_low.m128_f32[0] <= 0.0;
+  v23 = z_low.m128_f32[0] * 10.0;
+  sol_a.y = v22;
+  if ( v8 )
   {
-    v11.m128_f32[0] = v24 - 0.5;
-    v27 = (signed int)v11.m128_f32[0];
-    if ( (signed int)v11.m128_f32[0] != 0x80000000 && (float)v27 != v11.m128_f32[0] )
+    z_low.m128_f32[0] = v23 - 0.5;
+    v26 = (int)z_low.m128_f32[0];
+    if ( (int)z_low.m128_f32[0] != 0x80000000 && (float)v26 != z_low.m128_f32[0] )
     {
-      v26 = (_mm_movemask_ps(_mm_unpacklo_ps(v11, v11)) & 1 ^ 1) + v27;
+      v25 = !(_mm_movemask_ps(_mm_unpacklo_ps(z_low, z_low)) & 1) + v26;
       goto LABEL_24;
     }
   }
   else
   {
-    v11.m128_f32[0] = v24 + 0.5;
-    v25 = (signed int)v11.m128_f32[0];
-    if ( (signed int)v11.m128_f32[0] != 0x80000000 && (float)v25 != v11.m128_f32[0] )
+    z_low.m128_f32[0] = v23 + 0.5;
+    v24 = (int)z_low.m128_f32[0];
+    if ( (int)z_low.m128_f32[0] != 0x80000000 && (float)v24 != z_low.m128_f32[0] )
     {
-      v26 = v25 - (_mm_movemask_ps(_mm_unpacklo_ps(v11, v11)) & 1);
+      v25 = v24 - (_mm_movemask_ps(_mm_unpacklo_ps(z_low, z_low)) & 1);
 LABEL_24:
-      v11.m128_f32[0] = (float)v26;
-      goto LABEL_25;
+      z_low.m128_f32[0] = (float)v25;
     }
   }
-LABEL_25:
-  v28 = v11.m128_f32[0] * 0.1;
-  v8 = v12.m128_f32[0] < 0.0;
-  v9 = v12.m128_f32[0] == 0.0;
-  v29 = v12.m128_f32[0] * 10.0;
-  sol_a.z = v28;
-  if ( v8 || v9 )
+  v27 = z_low.m128_f32[0] * 0.1;
+  v8 = v11.m128_f32[0] <= 0.0;
+  v28 = v11.m128_f32[0] * 10.0;
+  sol_a.z = v27;
+  if ( v8 )
   {
-    v12.m128_f32[0] = v29 - 0.5;
-    v32 = (signed int)v12.m128_f32[0];
-    if ( (signed int)v12.m128_f32[0] != 0x80000000 && (float)v32 != v12.m128_f32[0] )
+    v11.m128_f32[0] = v28 - 0.5;
+    v31 = (int)v11.m128_f32[0];
+    if ( (int)v11.m128_f32[0] != 0x80000000 && (float)v31 != v11.m128_f32[0] )
     {
-      v31 = (_mm_movemask_ps(_mm_unpacklo_ps(v12, v12)) & 1 ^ 1) + v32;
+      v30 = !(_mm_movemask_ps(_mm_unpacklo_ps(v11, v11)) & 1) + v31;
       goto LABEL_32;
     }
   }
   else
   {
-    v12.m128_f32[0] = v29 + 0.5;
-    v30 = (signed int)v12.m128_f32[0];
-    if ( (signed int)v12.m128_f32[0] != 0x80000000 && (float)v30 != v12.m128_f32[0] )
+    v11.m128_f32[0] = v28 + 0.5;
+    v29 = (int)v11.m128_f32[0];
+    if ( (int)v11.m128_f32[0] != 0x80000000 && (float)v29 != v11.m128_f32[0] )
     {
-      v31 = v30 - (_mm_movemask_ps(_mm_unpacklo_ps(v12, v12)) & 1);
+      v30 = v29 - (_mm_movemask_ps(_mm_unpacklo_ps(v11, v11)) & 1);
 LABEL_32:
-      v12.m128_f32[0] = (float)v31;
-      goto LABEL_33;
+      v11.m128_f32[0] = (float)v30;
     }
   }
-LABEL_33:
-  v33 = v12.m128_f32[0] * 0.1;
-  v8 = v13.m128_f32[0] < 0.0;
-  v9 = v13.m128_f32[0] == 0.0;
-  v34 = v13.m128_f32[0] * 10.0;
-  sol_b.x = v33;
-  if ( v8 || v9 )
+  v32 = v11.m128_f32[0] * 0.1;
+  v8 = v12.m128_f32[0] <= 0.0;
+  v33 = v12.m128_f32[0] * 10.0;
+  sol_b.x = v32;
+  if ( v8 )
   {
-    v13.m128_f32[0] = v34 - 0.5;
-    v37 = (signed int)v13.m128_f32[0];
-    if ( (signed int)v13.m128_f32[0] != 0x80000000 && (float)v37 != v13.m128_f32[0] )
+    v12.m128_f32[0] = v33 - 0.5;
+    v36 = (int)v12.m128_f32[0];
+    if ( (int)v12.m128_f32[0] != 0x80000000 && (float)v36 != v12.m128_f32[0] )
     {
-      v36 = (_mm_movemask_ps(_mm_unpacklo_ps(v13, v13)) & 1 ^ 1) + v37;
+      v35 = !(_mm_movemask_ps(_mm_unpacklo_ps(v12, v12)) & 1) + v36;
       goto LABEL_40;
     }
   }
   else
   {
-    v13.m128_f32[0] = v34 + 0.5;
-    v35 = (signed int)v13.m128_f32[0];
-    if ( (signed int)v13.m128_f32[0] != 0x80000000 && (float)v35 != v13.m128_f32[0] )
+    v12.m128_f32[0] = v33 + 0.5;
+    v34 = (int)v12.m128_f32[0];
+    if ( (int)v12.m128_f32[0] != 0x80000000 && (float)v34 != v12.m128_f32[0] )
     {
-      v36 = v35 - (_mm_movemask_ps(_mm_unpacklo_ps(v13, v13)) & 1);
+      v35 = v34 - (_mm_movemask_ps(_mm_unpacklo_ps(v12, v12)) & 1);
 LABEL_40:
-      v13.m128_f32[0] = (float)v36;
-      goto LABEL_41;
+      v12.m128_f32[0] = (float)v35;
     }
   }
-LABEL_41:
-  v38 = v13.m128_f32[0] * 0.1;
-  v8 = v14.m128_f32[0] < 0.0;
-  v9 = v14.m128_f32[0] == 0.0;
-  v39 = v14.m128_f32[0] * 10.0;
-  sol_b.y = v38;
-  if ( v8 || v9 )
+  v37 = v12.m128_f32[0] * 0.1;
+  v8 = v13.m128_f32[0] <= 0.0;
+  v38 = v13.m128_f32[0] * 10.0;
+  sol_b.y = v37;
+  if ( v8 )
   {
-    v14.m128_f32[0] = v39 - 0.5;
-    v42 = (signed int)v14.m128_f32[0];
-    if ( (signed int)v14.m128_f32[0] != 0x80000000 && (float)v42 != v14.m128_f32[0] )
+    v13.m128_f32[0] = v38 - 0.5;
+    v41 = (int)v13.m128_f32[0];
+    if ( (int)v13.m128_f32[0] != 0x80000000 && (float)v41 != v13.m128_f32[0] )
     {
-      v41 = (_mm_movemask_ps(_mm_unpacklo_ps(v14, v14)) & 1 ^ 1) + v42;
+      v40 = !(_mm_movemask_ps(_mm_unpacklo_ps(v13, v13)) & 1) + v41;
       goto LABEL_48;
     }
   }
   else
   {
-    v14.m128_f32[0] = v39 + 0.5;
-    v40 = (signed int)v14.m128_f32[0];
-    if ( (signed int)v14.m128_f32[0] != 0x80000000 && (float)v40 != v14.m128_f32[0] )
+    v13.m128_f32[0] = v38 + 0.5;
+    v39 = (int)v13.m128_f32[0];
+    if ( (int)v13.m128_f32[0] != 0x80000000 && (float)v39 != v13.m128_f32[0] )
     {
-      v41 = v40 - (_mm_movemask_ps(_mm_unpacklo_ps(v14, v14)) & 1);
+      v40 = v39 - (_mm_movemask_ps(_mm_unpacklo_ps(v13, v13)) & 1);
 LABEL_48:
-      v14.m128_f32[0] = (float)v41;
-      goto LABEL_49;
+      v13.m128_f32[0] = (float)v40;
     }
   }
-LABEL_49:
-  v43 = (float)(v18 - v5->x) * (float)(v18 - v5->x);
-  v44 = (float)(v38 - v5->y) * (float)(v38 - v5->y);
-  v45 = (float)(v33 - v5->x) * (float)(v33 - v5->x);
-  v46 = &sol_a;
-  v47 = v28 - v5->z;
-  v48 = v23 - v5->y;
-  sol_b.z = v14.m128_f32[0] * 0.1;
-  if ( (float)((float)(v44 + v45) + (float)((float)(sol_b.z - v5->z) * (float)(sol_b.z - v5->z))) <= (float)((float)(v43 + (float)(v48 * v48)) + (float)(v47 * v47)) )
-    v46 = &sol_b;
-  v5->x = v46->x;
-  v5->y = v46->y;
-  v5->z = v46->z;
+  v42 = (float)(v17 - soln->x) * (float)(v17 - soln->x);
+  v43 = (float)(v37 - soln->y) * (float)(v37 - soln->y);
+  v44 = (float)(v32 - soln->x) * (float)(v32 - soln->x);
+  p_sol_a = &sol_a;
+  v46 = v27 - soln->z;
+  v47 = v22 - soln->y;
+  sol_b.z = v13.m128_f32[0] * 0.1;
+  if ( (float)((float)(v43 + v44) + (float)((float)(sol_b.z - soln->z) * (float)(sol_b.z - soln->z))) <= (float)((float)(v42 + (float)(v47 * v47)) + (float)(v46 * v46)) )
+    p_sol_a = &sol_b;
+  soln->x = p_sol_a->x;
+  soln->y = p_sol_a->y;
+  soln->z = p_sol_a->z;
   return v6;
 }
 

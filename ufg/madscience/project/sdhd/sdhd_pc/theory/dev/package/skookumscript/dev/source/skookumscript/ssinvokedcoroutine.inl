@@ -2,89 +2,84 @@
 // RVA: 0x1307D0
 void __fastcall SSInvokedCoroutine::pool_delete(SSInvokedCoroutine *icoroutine_p)
 {
-  unsigned int v1; // eax
-  SSInvokedCoroutine *v2; // rdi
-  SSActor *v3; // rbx
-  AList<SSInvokedBase,SSInvokedBase> *v4; // rdx
-  AList<SSInvokedBase,SSInvokedBase> *v5; // rcx
-  AList<SSInvokedBase,SSInvokedBase> *v6; // rax
+  unsigned int i_ptr_id; // eax
+  SSActor *i_obj_p; // rbx
+  AList<SSInvokedBase,SSInvokedBase> *p_i_calls; // rdx
+  SSInvokedCoroutine *i_next_p; // rcx
+  SSInvokedCoroutine *v6; // rax
   AListNode<SSInvokedBase,SSInvokedBase> *v7; // rcx
-  AListNode<SSInvokedBase,SSInvokedBase> *v8; // rax
-  AListNode<SSInvokedBase,SSInvokedBase> *v9; // rdx
-  SSObjectBase *v10; // rcx
-  bool v11; // zf
-  AObjReusePool<SSInvokedCoroutine> *v12; // rax
-  AObjBlock<SSInvokedCoroutine> *v13; // rcx
-  unsigned __int64 v14; // rdx
-  bool v15; // cf
-  APArray<SSInvokedCoroutine,SSInvokedCoroutine,ACompareAddress<SSInvokedCoroutine> > *v16; // rcx
+  AListNode<SSInvokedBase,SSInvokedBase> *i_prev_p; // rax
+  SSObjectBase *v9; // rcx
+  AObjReusePool<SSInvokedCoroutine> *pool; // rax
+  AObjBlock<SSInvokedCoroutine> *i_block_p; // rcx
+  unsigned __int64 i_objects_a; // rdx
+  bool v14; // cf
+  APArray<SSInvokedCoroutine,SSInvokedCoroutine,ACompareAddress<SSInvokedCoroutine> > *p_i_exp_pool; // rcx
 
-  v1 = icoroutine_p->i_ptr_id;
-  v2 = icoroutine_p;
-  if ( v1 && v1 <= SSObjectBase::c_ptr_id_prev )
+  i_ptr_id = icoroutine_p->i_ptr_id;
+  if ( i_ptr_id && i_ptr_id <= SSObjectBase::c_ptr_id_prev )
   {
-    if ( icoroutine_p->i_flags & 3 )
+    if ( (icoroutine_p->i_flags & 3) != 0 )
     {
-      v3 = icoroutine_p->i_updater_p.i_obj_p;
-      if ( v3 )
+      i_obj_p = icoroutine_p->i_updater_p.i_obj_p;
+      if ( i_obj_p )
       {
-        if ( icoroutine_p->i_updater_p.i_ptr_id == v3->i_ptr_id )
+        if ( icoroutine_p->i_updater_p.i_ptr_id == i_obj_p->i_ptr_id )
         {
           SSActor::coroutine_track_updating_stop(icoroutine_p->i_updater_p.i_obj_p, icoroutine_p);
-          SSActor::coroutine_track_pending_stop(v3, v2);
+          SSActor::coroutine_track_pending_stop(i_obj_p, icoroutine_p);
         }
       }
     }
-    SSData::empty_table((APSortedLogical<SSData,ASymbol> *)&v2->i_data);
-    AMemory::c_free_func(v2->i_data.i_array_p);
-    v4 = &v2->i_calls;
-    v2->i_data.i_array_p = 0i64;
-    v2->i_data.i_count = 0;
-    v2->i_data.i_size = 0;
-    v5 = (AList<SSInvokedBase,SSInvokedBase> *)v2->i_calls.i_sentinel.i_next_p;
-    if ( v5 != &v2->i_calls )
+    SSData::empty_table((APSortedLogical<SSData,ASymbol> *)&icoroutine_p->i_data);
+    AMemory::c_free_func(icoroutine_p->i_data.i_array_p);
+    p_i_calls = &icoroutine_p->i_calls;
+    icoroutine_p->i_data.i_array_p = 0i64;
+    icoroutine_p->i_data.i_count = 0;
+    icoroutine_p->i_data.i_size = 0;
+    i_next_p = (SSInvokedCoroutine *)icoroutine_p->i_calls.i_sentinel.SSInvokedContextBase::SSInvokedBase::i_next_p;
+    if ( i_next_p != (SSInvokedCoroutine *)&icoroutine_p->i_calls )
     {
       do
       {
-        v6 = v5;
-        v5 = (AList<SSInvokedBase,SSInvokedBase> *)v5->i_sentinel.i_next_p;
-        v6->i_sentinel.i_next_p = &v6->i_sentinel;
-        v6->i_sentinel.i_prev_p = &v6->i_sentinel;
+        v6 = i_next_p;
+        i_next_p = (SSInvokedCoroutine *)i_next_p->vfptr;
+        v6->vfptr = (SSObjectBaseVtbl *)v6;
+        *(_QWORD *)&v6->i_ptr_id = v6;
       }
-      while ( v5 != v4 );
-      v4->i_sentinel.i_next_p = &v4->i_sentinel;
-      v2->i_calls.i_sentinel.i_prev_p = &v2->i_calls.i_sentinel;
+      while ( i_next_p != (SSInvokedCoroutine *)p_i_calls );
+      p_i_calls->i_sentinel.i_next_p = &p_i_calls->i_sentinel;
+      icoroutine_p->i_calls.i_sentinel.i_prev_p = &icoroutine_p->i_calls.i_sentinel;
     }
-    v7 = v2->i_next_p;
-    v8 = v2->i_prev_p;
-    v9 = (AListNode<SSInvokedBase,SSInvokedBase> *)&v2->i_next_p;
-    v7->i_prev_p = v8;
-    v8->i_next_p = v7;
-    v9->i_prev_p = v9;
-    v9->i_next_p = v9;
-    v2->i_ptr_id = 0;
-    v10 = v2->i_scope_p.i_obj_p;
-    if ( v10 )
+    v7 = icoroutine_p->i_next_p;
+    i_prev_p = icoroutine_p->i_prev_p;
+    v7->i_prev_p = i_prev_p;
+    i_prev_p->i_next_p = v7;
+    icoroutine_p->i_prev_p = &icoroutine_p->AListNode<SSInvokedBase,SSInvokedBase>;
+    icoroutine_p->i_next_p = &icoroutine_p->AListNode<SSInvokedBase,SSInvokedBase>;
+    icoroutine_p->i_ptr_id = 0;
+    v9 = icoroutine_p->i_scope_p.i_obj_p;
+    if ( v9 )
     {
-      if ( v2->i_scope_p.i_ptr_id == v10->i_ptr_id )
+      if ( icoroutine_p->i_scope_p.i_ptr_id == v9->i_ptr_id && LODWORD(v9[1].vfptr)-- == 1 )
       {
-        v11 = LODWORD(v10[1].vfptr)-- == 1;
-        if ( v11 )
-        {
-          LODWORD(v10[1].vfptr) = 2147483648;
-          ((void (*)(void))v10->vfptr[1].get_scope_context)();
-        }
+        LODWORD(v9[1].vfptr) = 0x80000000;
+        v9->vfptr[1].get_scope_context(v9);
       }
     }
-    v12 = SSInvokedCoroutine::get_pool();
-    v13 = v12->i_block_p;
-    v14 = (unsigned __int64)v13->i_objects_a;
-    if ( (unsigned __int64)v2 < v14
-      || (v15 = (unsigned __int64)v2 < v14 + 168i64 * v13->i_size, v16 = &v12->i_pool, !v15) )
+    pool = SSInvokedCoroutine::get_pool();
+    i_block_p = pool->i_block_p;
+    i_objects_a = (unsigned __int64)i_block_p->i_objects_a;
+    if ( (unsigned __int64)icoroutine_p < i_objects_a
+      || (v14 = (unsigned __int64)icoroutine_p < i_objects_a + 168i64 * i_block_p->i_size,
+          p_i_exp_pool = &pool->i_pool,
+          !v14) )
     {
-      v16 = &v12->i_exp_pool;
+      p_i_exp_pool = &pool->i_exp_pool;
     }
-    APArray<SSInvokedCoroutine,SSInvokedCoroutine,ACompareAddress<SSInvokedCoroutine>>::append(v16, v2);
+    APArray<SSInvokedCoroutine,SSInvokedCoroutine,ACompareAddress<SSInvokedCoroutine>>::append(
+      p_i_exp_pool,
+      icoroutine_p);
   }
 }
 

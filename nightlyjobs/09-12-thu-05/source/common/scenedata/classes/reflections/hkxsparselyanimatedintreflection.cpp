@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkxSparselyAnimatedIntClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 56
@@ -28,17 +28,17 @@ hkClass *__fastcall hkxSparselyAnimatedInt::staticClass()
 
 // File Line: 63
 // RVA: 0xE33060
-void __fastcall finishLoadedObjecthkxSparselyAnimatedInt(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxSparselyAnimatedInt(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxSparselyAnimatedInt::`vftable;
+    *p = &hkxSparselyAnimatedInt::`vftable;
 }
 
 // File Line: 69
 // RVA: 0xE33080
-void __fastcall cleanupLoadedObjecthkxSparselyAnimatedInt(void *p)
+void __fastcall cleanupLoadedObjecthkxSparselyAnimatedInt(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 73
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkxSparselyAnimatedIntTypeInfo__()
   hkxSparselyAnimatedIntTypeInfo.m_typeName = "hkxSparselyAnimatedInt";
   hkxSparselyAnimatedIntTypeInfo.m_vtable = result;
   hkxSparselyAnimatedIntTypeInfo.m_scopedName = "!hkxSparselyAnimatedInt";
-  hkxSparselyAnimatedIntTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxSparselyAnimatedInt;
-  hkxSparselyAnimatedIntTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxSparselyAnimatedInt;
+  hkxSparselyAnimatedIntTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxSparselyAnimatedInt;
+  hkxSparselyAnimatedIntTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxSparselyAnimatedInt;
   return result;
 }
 

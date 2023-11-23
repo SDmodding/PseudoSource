@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkpVehicleInstanceWheelInfoClass__()
     0i64,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 88
@@ -51,7 +51,7 @@ void dynamic_initializer_for__hkpVehicleInstanceClass__()
     &hkpVehicleInstance_Default,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 181
@@ -63,23 +63,24 @@ hkClass *__fastcall hkpVehicleInstance::staticClass()
 
 // File Line: 188
 // RVA: 0xE25920
-void __fastcall finishLoadedObjecthkpVehicleInstance(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpVehicleInstance(hkpVehicleInstance *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpVehicleInstance::hkpVehicleInstance);
+  if ( p )
+    hkpVehicleInstance::hkpVehicleInstance(p, finishing);
 }
 
 // File Line: 194
 // RVA: 0xE25940
-void __fastcall cleanupLoadedObjecthkpVehicleInstance(void *p)
+void __fastcall cleanupLoadedObjecthkpVehicleInstance(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 198
 // RVA: 0xE25950
 hkBaseObjectVtbl *__fastcall getVtablehkpVehicleInstance()
 {
-  hkpVehicleInstance v1; // [rsp+20h] [rbp-F8h]
+  hkpVehicleInstance v1; // [rsp+20h] [rbp-F8h] BYREF
 
   hkpVehicleInstance::hkpVehicleInstance(&v1, 0);
   return v1.vfptr;
@@ -96,8 +97,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpVehicleInstanceTypeInfo__()
   hkpVehicleInstanceTypeInfo.m_typeName = "hkpVehicleInstance";
   hkpVehicleInstanceTypeInfo.m_vtable = result;
   hkpVehicleInstanceTypeInfo.m_scopedName = "!hkpVehicleInstance";
-  hkpVehicleInstanceTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpVehicleInstance;
-  hkpVehicleInstanceTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpVehicleInstance;
+  hkpVehicleInstanceTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpVehicleInstance;
+  hkpVehicleInstanceTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpVehicleInstance;
   return result;
 }
 

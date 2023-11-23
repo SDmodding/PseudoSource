@@ -3,21 +3,21 @@
 __int64 UFG::ProfileWizard::_dynamic_initializer_for__gProfileEntries__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::ProfileWizard::gProfileEntries.mTree);
-  return atexit(UFG::ProfileWizard::_dynamic_atexit_destructor_for__gProfileEntries__);
+  return atexit((int (__fastcall *)())UFG::ProfileWizard::_dynamic_atexit_destructor_for__gProfileEntries__);
 }
 
 // File Line: 185
 // RVA: 0x1530880
 __int64 UFG::ProfileWizard::_dynamic_initializer_for__gProfileSystems__()
 {
-  return atexit(UFG::ProfileWizard::_dynamic_atexit_destructor_for__gProfileSystems__);
+  return atexit((int (__fastcall *)())UFG::ProfileWizard::_dynamic_atexit_destructor_for__gProfileSystems__);
 }
 
 // File Line: 868
 // RVA: 0x15308A0
 __int64 UFG::ProfileWizard::_dynamic_initializer_for__gRenderWizardEntries__()
 {
-  return atexit(UFG::ProfileWizard::_dynamic_atexit_destructor_for__gRenderWizardEntries__);
+  return atexit((int (__fastcall *)())UFG::ProfileWizard::_dynamic_atexit_destructor_for__gRenderWizardEntries__);
 }
 
 // File Line: 1210
@@ -37,6 +37,6 @@ __int64 UFG::ProfileWizard::_dynamic_initializer_for__gProfileGraph__()
   UFG::ProfileWizard::gProfileGraph.mPosY = 700;
   UFG::ProfileWizard::gProfileGraph.mSizeX = 900;
   UFG::ProfileWizard::gProfileGraph.mSizeY = 200;
-  return atexit(UFG::ProfileWizard::_dynamic_atexit_destructor_for__gProfileGraph__);
+  return atexit((int (__fastcall *)())UFG::ProfileWizard::_dynamic_atexit_destructor_for__gProfileGraph__);
 }
 

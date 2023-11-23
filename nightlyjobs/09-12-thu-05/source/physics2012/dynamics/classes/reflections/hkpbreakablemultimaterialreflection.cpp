@@ -63,23 +63,26 @@ hkClass *__fastcall hkpBreakableMultiMaterial::InverseMapping::staticClass()
 
 // File Line: 113
 // RVA: 0xD4FFD0
-void __fastcall finishLoadedObjecthkpBreakableMultiMaterialInverseMapping(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpBreakableMultiMaterialInverseMapping(
+        hkpBreakableMultiMaterial::InverseMapping *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpBreakableMultiMaterial::InverseMapping::InverseMapping);
+  if ( p )
+    hkpBreakableMultiMaterial::InverseMapping::InverseMapping(p, finishing);
 }
 
 // File Line: 119
 // RVA: 0xD4FFF0
-void __fastcall cleanupLoadedObjecthkpBreakableMultiMaterialInverseMapping(void *p)
+void __fastcall cleanupLoadedObjecthkpBreakableMultiMaterialInverseMapping(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 123
 // RVA: 0xD50000
 hkBaseObjectVtbl *__fastcall getVtablehkpBreakableMultiMaterialInverseMapping()
 {
-  hkpBreakableMultiMaterial::InverseMapping v1; // [rsp+20h] [rbp-38h]
+  hkpBreakableMultiMaterial::InverseMapping v1; // [rsp+20h] [rbp-38h] BYREF
 
   hkpBreakableMultiMaterial::InverseMapping::InverseMapping(&v1, 0);
   return v1.vfptr;
@@ -96,8 +99,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpBreakableMultiMaterialInverseMappi
   hkpBreakableMultiMaterialInverseMappingTypeInfo.m_typeName = "hkpBreakableMultiMaterialInverseMapping";
   hkpBreakableMultiMaterialInverseMappingTypeInfo.m_vtable = result;
   hkpBreakableMultiMaterialInverseMappingTypeInfo.m_scopedName = "!hkpBreakableMultiMaterial::InverseMapping";
-  hkpBreakableMultiMaterialInverseMappingTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpBreakableMultiMaterialInverseMapping;
-  hkpBreakableMultiMaterialInverseMappingTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpBreakableMultiMaterialInverseMapping;
+  hkpBreakableMultiMaterialInverseMappingTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpBreakableMultiMaterialInverseMapping;
+  hkpBreakableMultiMaterialInverseMappingTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpBreakableMultiMaterialInverseMapping;
   return result;
 }
 

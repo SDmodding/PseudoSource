@@ -1,6 +1,6 @@
 // File Line: 112
 // RVA: 0xA3D840
-signed __int64 __fastcall UFG::DxController::RawPadDataSize(UFG::DxController *this)
+__int64 __fastcall UFG::DxController::RawPadDataSize(UFG::DxController *this)
 {
   return 44i64;
 }

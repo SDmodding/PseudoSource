@@ -2,84 +2,73 @@
 // RVA: 0x203BD0
 void __fastcall UFG::Editor::SmartHandle::~SmartHandle(UFG::Editor::SmartHandle *this)
 {
-  UFG::Editor::SmartHandle *v1; // rbx
-  UFG::Editor::SmartHandleObject *v2; // rcx
-  UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *v3; // rdx
-  UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *v4; // rax
+  UFG::Editor::SmartHandleObject *mPtr; // rcx
+  UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *mPrev; // rdx
+  UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *mNext; // rax
   UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *v5; // rcx
   UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *v6; // rax
 
-  v1 = this;
-  v2 = this->mPtr;
-  if ( v2 )
+  mPtr = this->mPtr;
+  if ( mPtr )
   {
-    v3 = v1->mPrev;
-    v4 = v1->mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v1->mPrev = (UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *)&v1->mPrev;
-    v1->mNext = (UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *)&v1->mPrev;
-    if ( (UFG::qList<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList,1,0> *)v2->mSmartHandleList.mNode.mNext == &v2->mSmartHandleList
-      && v2 )
-    {
-      v2->vfptr->__vecDelDtor(v2, 1u);
-    }
-    v1->mPtr = 0i64;
+    mPrev = this->mPrev;
+    mNext = this->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    this->mPrev = this;
+    this->mNext = this;
+    if ( (UFG::qList<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList,1,0> *)mPtr->mSmartHandleList.mNode.mNext == &mPtr->mSmartHandleList )
+      mPtr->vfptr->__vecDelDtor(mPtr, 1u);
+    this->mPtr = 0i64;
   }
-  v1->mPtr = 0i64;
-  v5 = v1->mPrev;
-  v6 = v1->mNext;
+  this->mPtr = 0i64;
+  v5 = this->mPrev;
+  v6 = this->mNext;
   v5->mNext = v6;
   v6->mPrev = v5;
-  v1->mPrev = (UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *)&v1->mPrev;
-  v1->mNext = (UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *)&v1->mPrev;
+  this->mPrev = this;
+  this->mNext = this;
 }
 
 // File Line: 73
 // RVA: 0x202ED0
-void __fastcall UFG::Editor::TypedSmartHandle<2296309086,UFG::Editor::FnObject>::~TypedSmartHandle<2296309086,UFG::Editor::FnObject>(UFG::Editor::TypedSmartHandle<2296309086,UFG::Editor::FnObject> *this)
+void __fastcall UFG::Editor::TypedSmartHandle<2296309086,UFG::Editor::FnObject>::~TypedSmartHandle<2296309086,UFG::Editor::FnObject>(
+        UFG::Editor::TypedSmartHandle<2296309086,UFG::Editor::FnObject> *this)
 {
-  UFG::Editor::TypedSmartHandle<2296309086,UFG::Editor::FnObject> *v1; // rbx
-  UFG::Editor::SmartHandleObject *v2; // rcx
-  UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *v3; // rdx
-  UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *v4; // rax
+  UFG::Editor::SmartHandleObject *mPtr; // rcx
+  UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *mPrev; // rdx
+  UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *mNext; // rax
 
-  v1 = this;
-  v2 = this->mPtr;
-  if ( v2 )
+  mPtr = this->mPtr;
+  if ( mPtr )
   {
-    v3 = v1->mPrev;
-    v4 = v1->mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v1->mPrev = (UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *)&v1->mPrev;
-    v1->mNext = (UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *)&v1->mPrev;
-    if ( (UFG::qList<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList,1,0> *)v2->mSmartHandleList.mNode.mNext == &v2->mSmartHandleList
-      && v2 )
-    {
-      v2->vfptr->__vecDelDtor(v2, 1u);
-    }
-    v1->mPtr = 0i64;
+    mPrev = this->mPrev;
+    mNext = this->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    this->mPrev = this;
+    this->mNext = this;
+    if ( (UFG::qList<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList,1,0> *)mPtr->mSmartHandleList.mNode.mNext == &mPtr->mSmartHandleList )
+      mPtr->vfptr->__vecDelDtor(mPtr, 1u);
+    this->mPtr = 0i64;
   }
-  v1->mPtr = 0i64;
-  UFG::Editor::SmartHandle::~SmartHandle((UFG::Editor::SmartHandle *)&v1->mPrev);
+  this->mPtr = 0i64;
+  UFG::Editor::SmartHandle::~SmartHandle(this);
 }
 
 // File Line: 79
 // RVA: 0x20D610
-void __fastcall UFG::Editor::TypedSmartHandle<2296309086,UFG::Editor::FnObject>::Init(UFG::Editor::TypedSmartHandle<2296309086,UFG::Editor::FnObject> *this, unsigned int id)
+void __fastcall UFG::Editor::TypedSmartHandle<2296309086,UFG::Editor::FnObject>::Init(
+        UFG::Editor::TypedSmartHandle<2296309086,UFG::Editor::FnObject> *this,
+        unsigned int id)
 {
-  unsigned int v2; // edi
-  UFG::Editor::TypedSmartHandle<2296309086,UFG::Editor::FnObject> *v3; // rbx
   UFG::qBaseTreeRB *v4; // rax
   UFG::qBaseTreeRB *v5; // rax
-  signed __int64 v6; // rcx
-  UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *v7; // rcx
-  UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *v8; // rax
+  UFG::Editor::SmartHandleObject *p_mCount; // rcx
+  UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *p_mNode; // rcx
+  UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *mPrev; // rax
 
-  v2 = id;
-  v3 = this;
-  if ( !(_S26 & 1) )
+  if ( (_S26 & 1) == 0 )
   {
     _S26 |= 1u;
     UFG::qBaseTreeRB::qBaseTreeRB(&sSmartWarehouse.mInventories.mTree);
@@ -88,22 +77,22 @@ void __fastcall UFG::Editor::TypedSmartHandle<2296309086,UFG::Editor::FnObject>:
   v4 = UFG::qBaseTreeRB::Get(&sSmartWarehouse.mInventories.mTree, 0x88DEE55E);
   if ( v4 )
   {
-    if ( v2 )
+    if ( id )
     {
-      v5 = UFG::qBaseTreeRB::Get((UFG::qBaseTreeRB *)((char *)v4 + 40), v2);
+      v5 = UFG::qBaseTreeRB::Get((UFG::qBaseTreeRB *)v4->mNULL.mChild, id);
       if ( v5 )
       {
-        v6 = (signed __int64)&v5[-1].mCount;
-        if ( v5 != (UFG::qBaseTreeRB *)8 && !v3->mPtr )
+        p_mCount = (UFG::Editor::SmartHandleObject *)&v5[-1].mCount;
+        if ( v5 != (UFG::qBaseTreeRB *)8 && !this->mPtr )
         {
-          v3->mTypeId = *(_DWORD *)(v6 + 56);
-          v3->mPtr = (UFG::Editor::SmartHandleObject *)v6;
-          v7 = (UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *)(v6 + 40);
-          v8 = v7->mPrev;
-          v8->mNext = (UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *)&v3->mPrev;
-          v3->mPrev = v8;
-          v3->mNext = v7;
-          v7->mPrev = (UFG::qNode<UFG::Editor::SmartHandle,UFG::Editor::SmartHandleList> *)&v3->mPrev;
+          this->mTypeId = p_mCount->mTypeId;
+          this->mPtr = p_mCount;
+          p_mNode = &p_mCount->mSmartHandleList.mNode;
+          mPrev = p_mNode->mPrev;
+          mPrev->mNext = this;
+          this->mPrev = mPrev;
+          this->mNext = p_mNode;
+          p_mNode->mPrev = this;
         }
       }
     }

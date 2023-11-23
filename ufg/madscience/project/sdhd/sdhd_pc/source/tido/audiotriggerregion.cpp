@@ -4,7 +4,7 @@ __int64 dynamic_initializer_for__UFG::AudioTriggerRegion::msActiveMixUid__()
 {
   UFG::AudioTriggerRegion::msActiveMixUid.mUID = UFG::qWiseSymbol::get_null()->mUID;
   _((AMD_HD3D *)UFG::AudioTriggerRegion::msActiveMixUid.mUID);
-  return atexit(dynamic_atexit_destructor_for__UFG::AudioTriggerRegion::msActiveMixUid__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::AudioTriggerRegion::msActiveMixUid__);
 }
 
 // File Line: 98
@@ -19,7 +19,7 @@ UFG::ComponentIDDesc *__fastcall UFG::AudioTriggerRegion::GetDesc(UFG::AudioTrig
 __int64 dynamic_initializer_for__UFG::AudioTriggerRegion::msAudioTriggerRegions__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::AudioTriggerRegion::msAudioTriggerRegions.mTree);
-  return atexit(dynamic_atexit_destructor_for__UFG::AudioTriggerRegion::msAudioTriggerRegions__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::AudioTriggerRegion::msAudioTriggerRegions__);
 }
 
 // File Line: 106
@@ -28,44 +28,36 @@ __int64 UFG::_dynamic_initializer_for__default_symbol__()
 {
   default_symbol_0.mUID = UFG::qWiseSymbolUIDFromString("default", 0x811C9DC5);
   _((AMD_HD3D *)default_symbol_0.mUID);
-  return atexit(UFG::_dynamic_atexit_destructor_for__default_symbol__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__default_symbol__);
 }
 
 // File Line: 118
 // RVA: 0x592DA0
-void __fastcall UFG::AudioTriggerRegion::AudioTriggerRegion(UFG::AudioTriggerRegion *this, UFG::qSymbol *name, UFG::SimObject *pSimObj)
+void __fastcall UFG::AudioTriggerRegion::AudioTriggerRegion(
+        UFG::AudioTriggerRegion *this,
+        UFG::qSymbol *name,
+        UFG::SimObject *pSimObj)
 {
-  UFG::SimObject *v3; // rdi
-  UFG::qSymbol *v4; // rsi
-  UFG::AudioTriggerRegion *v5; // r14
-  unsigned int v6; // eax
-  UFG::qList<UFG::AudioTriggerRegionTag,UFG::AudioTriggerRegionTag,1,0> *v7; // [rsp+58h] [rbp+10h]
+  unsigned int mUID; // eax
 
-  v3 = pSimObj;
-  v4 = name;
-  v5 = this;
-  UFG::TriggerRegion::TriggerRegion((UFG::TriggerRegion *)&this->vfptr, name, pSimObj, 0);
-  UFG::AudioEntity::AudioEntity((UFG::AudioEntity *)&v5->vfptr);
-  v6 = v4->mUID;
-  v5->mNode.mParent = 0i64;
-  v5->mNode.mChild[0] = 0i64;
-  v5->mNode.mChild[1] = 0i64;
-  v5->mNode.mUID = v6;
-  v5->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AudioTriggerRegion::`vftable{for `UFG::TriggerRegion};
-  v5->vfptr = (UFG::AudioEntityVtbl *)&UFG::AudioTriggerRegion::`vftable{for `UFG::AudioEntity};
-  v7 = &v5->mTags;
-  v7->mNode.mPrev = &v7->mNode;
-  v7->mNode.mNext = &v7->mNode;
-  UFG::RegionContainmentInfo::RegionContainmentInfo(&v5->m_regionsContainingMe);
-  UFG::RegionContainmentInfo::RegionContainmentInfo(&v5->m_regionsIContain);
-  UFG::RegionContainmentInfo::RegionContainmentInfo(&v5->m_thingsIContain);
-  UFG::SimComponent::AddType(
-    (UFG::SimComponent *)&v5->vfptr,
-    UFG::AudioTriggerRegion::_AudioTriggerRegionTypeUID,
-    "AudioTriggerRegion");
-  UFG::AudioTriggerRegion::InitTrigger(v5, v3);
-  v5->m_name = (UFG::qSymbol)v4->mUID;
-  v5->m_bEnableEnvironments = 0;
+  UFG::TriggerRegion::TriggerRegion(this, name, pSimObj, 0);
+  UFG::AudioEntity::AudioEntity(&this->UFG::AudioEntity);
+  mUID = name->mUID;
+  this->UFG::qNodeRB<UFG::AudioTriggerRegion>::mNode.mParent = 0i64;
+  this->UFG::qNodeRB<UFG::AudioTriggerRegion>::mNode.mChild[0] = 0i64;
+  this->UFG::qNodeRB<UFG::AudioTriggerRegion>::mNode.mChild[1] = 0i64;
+  this->UFG::qNodeRB<UFG::AudioTriggerRegion>::mNode.mUID = mUID;
+  this->UFG::TriggerRegion::UFG::MarkerBase::UFG::HintComponentBase::UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AudioTriggerRegion::`vftable{for `UFG::TriggerRegion};
+  this->UFG::AudioEntity::vfptr = (UFG::AudioEntityVtbl *)&UFG::AudioTriggerRegion::`vftable{for `UFG::AudioEntity};
+  this->mTags.mNode.mPrev = &this->mTags.mNode;
+  this->mTags.mNode.mNext = &this->mTags.mNode;
+  UFG::RegionContainmentInfo::RegionContainmentInfo(&this->m_regionsContainingMe);
+  UFG::RegionContainmentInfo::RegionContainmentInfo(&this->m_regionsIContain);
+  UFG::RegionContainmentInfo::RegionContainmentInfo(&this->m_thingsIContain);
+  UFG::SimComponent::AddType(this, UFG::AudioTriggerRegion::_AudioTriggerRegionTypeUID, "AudioTriggerRegion");
+  UFG::AudioTriggerRegion::InitTrigger(this, pSimObj);
+  this->m_name = (UFG::qSymbol)name->mUID;
+  this->m_bEnableEnvironments = 0;
   UFG::AudioTriggerRegion::sm_hierarchyIsDirty = 1;
 }
 
@@ -73,14 +65,13 @@ void __fastcall UFG::AudioTriggerRegion::AudioTriggerRegion(UFG::AudioTriggerReg
 // RVA: 0x593EB0
 void __fastcall UFG::AudioTriggerRegion::~AudioTriggerRegion(UFG::AudioTriggerRegion *this)
 {
-  UFG::AudioTriggerRegion *v1; // rdi
-  UFG::qList<UFG::GUIObjectBase,UFG::GUIObjectBase,1,0> *v2; // rsi
-  unsigned int *v3; // rax
-  unsigned int *v4; // rbx
+  UFG::qList<UFG::GUIObjectBase,UFG::GUIObjectBase,1,0> *p_mTags; // rsi
+  unsigned int *p_mNext; // rax
+  unsigned int *i; // rbx
   _QWORD *v5; // rdx
   __int64 v6; // rcx
   _QWORD *v7; // rax
-  UFG::qSymbol *v8; // rcx
+  UFG::qSymbol *p; // rcx
   UFG::qSymbol *v9; // rbx
   UFG::qSymbol *v10; // rcx
   UFG::qSymbol *v11; // rbx
@@ -88,118 +79,110 @@ void __fastcall UFG::AudioTriggerRegion::~AudioTriggerRegion(UFG::AudioTriggerRe
   UFG::qSymbol *v13; // rbx
   int v14; // edx
   hkGeometryUtils::IVertices *v15; // rcx
-  int v16; // er8
-  UFG::qNode<UFG::GUIObjectBase,UFG::GUIObjectBase> *v17; // rdx
-  UFG::qNode<UFG::GUIObjectBase,UFG::GUIObjectBase> *v18; // rax
+  int v16; // r8d
+  UFG::qNode<UFG::GUIObjectBase,UFG::GUIObjectBase> *mPrev; // rdx
+  UFG::qNode<UFG::GUIObjectBase,UFG::GUIObjectBase> *mNext; // rax
 
-  v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AudioTriggerRegion::`vftable{for `UFG::TriggerRegion};
-  this->vfptr = (UFG::AudioEntityVtbl *)&UFG::AudioTriggerRegion::`vftable{for `UFG::AudioEntity};
-  v2 = (UFG::qList<UFG::GUIObjectBase,UFG::GUIObjectBase,1,0> *)&this->mTags;
-  v3 = (unsigned int *)&this->mTags.mNode.mNext[-1].mNext;
-  v4 = &this->mNode.mUID;
-  if ( v3 != &this->mNode.mUID )
+  this->UFG::TriggerRegion::UFG::MarkerBase::UFG::HintComponentBase::UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AudioTriggerRegion::`vftable{for `UFG::TriggerRegion};
+  this->UFG::AudioEntity::vfptr = (UFG::AudioEntityVtbl *)&UFG::AudioTriggerRegion::`vftable{for `UFG::AudioEntity};
+  p_mTags = (UFG::qList<UFG::GUIObjectBase,UFG::GUIObjectBase,1,0> *)&this->mTags;
+  p_mNext = (unsigned int *)&this->mTags.mNode.mNext[-1].mNext;
+  for ( i = &this->UFG::qNodeRB<UFG::AudioTriggerRegion>::mNode.mUID;
+        p_mNext != i;
+        p_mNext = (unsigned int *)&p_mTags->mNode.mNext[-1].mNext )
   {
-    do
-    {
-      v5 = v3 + 2;
-      v6 = *((_QWORD *)v3 + 1);
-      v7 = (_QWORD *)*((_QWORD *)v3 + 2);
-      *(_QWORD *)(v6 + 8) = v7;
-      *v7 = v6;
-      *v5 = v5;
-      v5[1] = v5;
-      if ( v5 != (_QWORD *)8 )
-        (*(void (__fastcall **)(_QWORD *, signed __int64))*(v5 - 1))(v5 - 1, 1i64);
-      v3 = (unsigned int *)&v2->mNode.mNext[-1].mNext;
-    }
-    while ( v3 != v4 );
+    v5 = p_mNext + 2;
+    v6 = *((_QWORD *)p_mNext + 1);
+    v7 = (_QWORD *)*((_QWORD *)p_mNext + 2);
+    *(_QWORD *)(v6 + 8) = v7;
+    *v7 = v6;
+    *v5 = v5;
+    v5[1] = v5;
+    if ( v5 != (_QWORD *)8 )
+      (*(void (__fastcall **)(_QWORD *, __int64))*(v5 - 1))(v5 - 1, 1i64);
   }
-  v8 = v1->m_regionsContainingMe.m_regionsContainedIn.p;
-  if ( v8 )
+  p = this->m_regionsContainingMe.m_regionsContainedIn.p;
+  if ( p )
   {
-    v9 = v8 - 1;
-    `eh vector destructor iterator(v8, 4ui64, v8[-1].mUID, (void (__fastcall *)(void *))_);
+    v9 = p - 1;
+    `eh vector destructor iterator(p, 4ui64, p[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v9);
   }
-  v1->m_regionsContainingMe.m_regionsContainedIn.p = 0i64;
-  *(_QWORD *)&v1->m_regionsContainingMe.m_regionsContainedIn.size = 0i64;
-  v10 = v1->m_regionsIContain.m_regionsContainedIn.p;
+  this->m_regionsContainingMe.m_regionsContainedIn.p = 0i64;
+  *(_QWORD *)&this->m_regionsContainingMe.m_regionsContainedIn.size = 0i64;
+  v10 = this->m_regionsIContain.m_regionsContainedIn.p;
   if ( v10 )
   {
     v11 = v10 - 1;
     `eh vector destructor iterator(v10, 4ui64, v10[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v11);
   }
-  v1->m_regionsIContain.m_regionsContainedIn.p = 0i64;
-  *(_QWORD *)&v1->m_regionsIContain.m_regionsContainedIn.size = 0i64;
-  v12 = v1->m_thingsIContain.m_regionsContainedIn.p;
+  this->m_regionsIContain.m_regionsContainedIn.p = 0i64;
+  *(_QWORD *)&this->m_regionsIContain.m_regionsContainedIn.size = 0i64;
+  v12 = this->m_thingsIContain.m_regionsContainedIn.p;
   if ( v12 )
   {
     v13 = v12 - 1;
     `eh vector destructor iterator(v12, 4ui64, v12[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v13);
   }
-  v1->m_thingsIContain.m_regionsContainedIn.p = 0i64;
-  *(_QWORD *)&v1->m_thingsIContain.m_regionsContainedIn.size = 0i64;
+  this->m_thingsIContain.m_regionsContainedIn.p = 0i64;
+  *(_QWORD *)&this->m_thingsIContain.m_regionsContainedIn.size = 0i64;
   UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
     (UFG::qBaseTreeVariableRB<unsigned __int64> *)&UFG::AudioTriggerRegion::msAudioTriggerRegions,
-    (UFG::qBaseNodeVariableRB<unsigned __int64> *)&v1->mNode);
+    (UFG::qBaseNodeVariableRB<unsigned __int64> *)&this->UFG::qNodeRB<UFG::AudioTriggerRegion>);
   UFG::AudioTriggerRegion::sm_hierarchyIsDirty = 1;
   if ( Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(v15, v14, v16) )
-    UFG::AudioEntity::Shutdown((UFG::AudioEntity *)&v1->vfptr);
-  UFG::RegionContainmentInfo::~RegionContainmentInfo(&v1->m_thingsIContain);
-  UFG::RegionContainmentInfo::~RegionContainmentInfo(&v1->m_regionsIContain);
-  UFG::RegionContainmentInfo::~RegionContainmentInfo(&v1->m_regionsContainingMe);
-  UFG::qList<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption,1,0>::DeleteNodes(v2);
-  v17 = v2->mNode.mPrev;
-  v18 = v2->mNode.mNext;
-  v17->mNext = v18;
-  v18->mPrev = v17;
-  v2->mNode.mPrev = &v2->mNode;
-  v2->mNode.mNext = &v2->mNode;
-  UFG::AudioEntity::~AudioEntity((UFG::AudioEntity *)&v1->vfptr);
-  UFG::TriggerRegion::~TriggerRegion((UFG::TriggerRegion *)&v1->vfptr);
+    UFG::AudioEntity::Shutdown(&this->UFG::AudioEntity);
+  UFG::RegionContainmentInfo::~RegionContainmentInfo(&this->m_thingsIContain);
+  UFG::RegionContainmentInfo::~RegionContainmentInfo(&this->m_regionsIContain);
+  UFG::RegionContainmentInfo::~RegionContainmentInfo(&this->m_regionsContainingMe);
+  UFG::qList<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption,1,0>::DeleteNodes(p_mTags);
+  mPrev = p_mTags->mNode.mPrev;
+  mNext = p_mTags->mNode.mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  p_mTags->mNode.mPrev = &p_mTags->mNode;
+  p_mTags->mNode.mNext = &p_mTags->mNode;
+  UFG::AudioEntity::~AudioEntity(&this->UFG::AudioEntity);
+  UFG::TriggerRegion::~TriggerRegion(this);
 }
 
 // File Line: 164
 // RVA: 0x5A3A60
 void __fastcall UFG::AudioTriggerRegion::OnDetach(UFG::AudioTriggerRegion *this)
 {
-  UFG::AudioTriggerRegion *v1; // rbx
   UFG::AudioListener *v2; // r8
-  signed int v3; // edx
-  unsigned int v4; // ecx
+  int v3; // edx
+  unsigned int size; // ecx
   hkGeometryUtils::IVertices *v5; // rcx
   unsigned int v6; // edx
-  UFG::qSymbol *v7; // r9
+  UFG::qSymbol *p; // r9
   unsigned int v8; // eax
   char *v9; // rax
   UFG::AudioTriggerRegionTag *i; // rdi
   unsigned int v11; // eax
   __int64 v12; // rsi
   __int64 v13; // rbp
-  UFG::AudioEntity *v14; // rax
+  UFG::AudioEntity *Entity; // rax
   UFG::AudioEntity *v15; // rdi
-  UFG::RegionContainmentInfo *v16; // rax
-  UFG::RegionContainmentInfo *v17; // r10
-  __int64 v18; // rdx
-  unsigned int v19; // eax
-  UFG::qSymbol *v20; // r8
-  unsigned int v21; // eax
-  UFG::AudioTriggerRegionEvent thisEvent; // [rsp+28h] [rbp-40h]
+  UFG::RegionContainmentInfo *ContainmentInfo; // r10
+  __int64 v17; // rdx
+  unsigned int v18; // eax
+  UFG::qSymbol *v19; // r8
+  unsigned int v20; // eax
+  UFG::AudioTriggerRegionEvent thisEvent; // [rsp+28h] [rbp-40h] BYREF
 
-  v1 = this;
   v2 = UFG::AudioListener::sm_pInstance;
   if ( UFG::AudioListener::sm_pInstance )
   {
     v3 = 0;
-    v4 = UFG::AudioListener::sm_pInstance->m_containmentInfo.m_regionsContainedIn.size;
-    if ( v4 )
+    size = UFG::AudioListener::sm_pInstance->m_containmentInfo.m_regionsContainedIn.size;
+    if ( size )
     {
-      while ( v1->i_name.mUID != UFG::AudioListener::sm_pInstance->m_containmentInfo.m_regionsContainedIn.p[v3].mUID )
+      while ( this->i_name.mUID != UFG::AudioListener::sm_pInstance->m_containmentInfo.m_regionsContainedIn.p[v3].mUID )
       {
-        if ( ++v3 >= v4 )
+        if ( ++v3 >= size )
           goto LABEL_5;
       }
     }
@@ -214,8 +197,8 @@ LABEL_5:
       v6 = UFG::AudioListener::sm_pInstance->m_containmentInfo.m_regionsContainedIn.size;
       if ( v6 )
       {
-        v7 = UFG::AudioListener::sm_pInstance->m_containmentInfo.m_regionsContainedIn.p;
-        while ( v1->i_name.mUID != v7[(_QWORD)v5].mUID )
+        p = UFG::AudioListener::sm_pInstance->m_containmentInfo.m_regionsContainedIn.p;
+        while ( this->i_name.mUID != p[(_QWORD)v5].mUID )
         {
           v5 = (hkGeometryUtils::IVertices *)(unsigned int)((_DWORD)v5 + 1);
           if ( (unsigned int)v5 >= v6 )
@@ -223,7 +206,7 @@ LABEL_5:
         }
         if ( (_DWORD)v5 != -1 )
         {
-          v7[(_QWORD)v5] = v7[v6 - 1];
+          p[(_QWORD)v5] = p[v6 - 1];
           v8 = v2->m_containmentInfo.m_regionsContainedIn.size;
           if ( v8 > 1 )
             v2->m_containmentInfo.m_regionsContainedIn.size = v8 - 1;
@@ -234,57 +217,56 @@ LABEL_5:
 LABEL_16:
       if ( UFG::TiDo::sm_ambiencesInfo )
       {
-        v9 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v1->i_name);
+        v9 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&this->UFG::qNamed);
         UFG::qPrintf("AudioTriggerRegion:: Lst Exit :: %s\n", v9);
       }
-      for ( i = (UFG::AudioTriggerRegionTag *)&v1->mTags.mNode.mNext[-1].mNext;
-            i != (UFG::AudioTriggerRegionTag *)&v1->mNode.mUID;
+      for ( i = (UFG::AudioTriggerRegionTag *)&this->mTags.mNode.mNext[-1].mNext;
+            i != (UFG::AudioTriggerRegionTag *)&this->UFG::qNodeRB<UFG::AudioTriggerRegion>::mNode.mUID;
             i = (UFG::AudioTriggerRegionTag *)&i->mNext[-1].mNext )
       {
-        UFG::AudioTriggerRegionEvent::AudioTriggerRegionEvent(&thisEvent, 0i64, v1, i);
-        UFG::AudioTriggerRegion::RemoveAudioZoneListener(v1, &thisEvent);
+        UFG::AudioTriggerRegionEvent::AudioTriggerRegionEvent(&thisEvent, 0i64, this, i);
+        UFG::AudioTriggerRegion::RemoveAudioZoneListener(this, &thisEvent);
         thisEvent.vfptr = (UFG::AudioTriggerRegionEventVtbl *)&UFG::AudioTriggerRegionEvent::`vftable;
         _((AMD_HD3D *)thisEvent.mAudioModeUid.mUID);
         _((AMD_HD3D *)thisEvent.mAudioUidOnExit.mUID);
         _((AMD_HD3D *)thisEvent.mAudioUidOnEnter.mUID);
       }
       if ( Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(v5, v6, (int)v2) )
-        UFG::AudioEntity::Shutdown((UFG::AudioEntity *)&v1->vfptr);
+        UFG::AudioEntity::Shutdown(&this->UFG::AudioEntity);
     }
   }
-  v11 = v1->m_thingsIContain.m_regionsContainedIn.size;
+  v11 = this->m_thingsIContain.m_regionsContainedIn.size;
   if ( v11 )
   {
     v12 = 0i64;
     v13 = v11;
     do
     {
-      v14 = (UFG::AudioEntity *)UFG::TiDo::GetEntity(&v1->m_thingsIContain.m_regionsContainedIn.p[v12]);
-      v15 = v14;
-      if ( v14 )
+      Entity = (UFG::AudioEntity *)UFG::TiDo::GetEntity(&this->m_thingsIContain.m_regionsContainedIn.p[v12]);
+      v15 = Entity;
+      if ( Entity )
       {
-        UFG::AudioTriggerRegion::OnExited(v1, v14, 0);
-        v16 = UFG::AudioEntity::GetContainmentInfo(v15);
-        v17 = v16;
-        v18 = 0i64;
-        v19 = v16->m_regionsContainedIn.size;
-        if ( v19 )
+        UFG::AudioTriggerRegion::OnExited(this, Entity, 0);
+        ContainmentInfo = UFG::AudioEntity::GetContainmentInfo(v15);
+        v17 = 0i64;
+        v18 = ContainmentInfo->m_regionsContainedIn.size;
+        if ( v18 )
         {
-          v20 = v17->m_regionsContainedIn.p;
-          while ( v1->i_name.mUID != v20[v18].mUID )
+          v19 = ContainmentInfo->m_regionsContainedIn.p;
+          while ( this->i_name.mUID != v19[v17].mUID )
           {
-            v18 = (unsigned int)(v18 + 1);
-            if ( (unsigned int)v18 >= v19 )
+            v17 = (unsigned int)(v17 + 1);
+            if ( (unsigned int)v17 >= v18 )
               goto LABEL_34;
           }
-          if ( (_DWORD)v18 != -1 )
+          if ( (_DWORD)v17 != -1 )
           {
-            v20[v18] = v20[v19 - 1];
-            v21 = v17->m_regionsContainedIn.size;
-            if ( v21 > 1 )
-              v17->m_regionsContainedIn.size = v21 - 1;
+            v19[v17] = v19[v18 - 1];
+            v20 = ContainmentInfo->m_regionsContainedIn.size;
+            if ( v20 > 1 )
+              ContainmentInfo->m_regionsContainedIn.size = v20 - 1;
             else
-              v17->m_regionsContainedIn.size = 0;
+              ContainmentInfo->m_regionsContainedIn.size = 0;
           }
         }
       }
@@ -298,95 +280,92 @@ LABEL_34:
 
 // File Line: 197
 // RVA: 0x59FFE0
-void __fastcall UFG::AudioTriggerRegion::InitTrigger(UFG::AudioTriggerRegion *this, UFG::SimObject *pSimObj)
+void __fastcall UFG::AudioTriggerRegion::InitTrigger(UFG::AudioTriggerRegion *this, UFG::SimComponent *pSimObj)
 {
-  UFG::SimObject *v2; // rax
-  UFG::AudioTriggerRegion *v3; // rbx
-  UFG::qSafePointer<UFG::SimComponent,UFG::SimComponent> *v4; // r8
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v5; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v6; // rcx
-  UFG::qList<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList,1,0> *v7; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v8; // rax
+  UFG::SimComponent *ComponentOfType; // rax
+  UFG::qSafePointer<UFG::SimComponent,UFG::SimComponent> *p_mpRegion; // r8
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *p_mNode; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v8; // rax
 
-  v2 = pSimObj;
-  v3 = this;
+  ComponentOfType = pSimObj;
   if ( pSimObj )
-    v2 = (UFG::SimObject *)UFG::SimObject::GetComponentOfType(pSimObj, UFG::RegionComponent::_TypeUID);
-  v4 = &v3->mpRegion;
-  if ( v3->mpRegion.m_pPointer )
+    ComponentOfType = UFG::SimObject::GetComponentOfType((UFG::SimObject *)pSimObj, UFG::RegionComponent::_TypeUID);
+  p_mpRegion = &this->mpRegion;
+  if ( this->mpRegion.m_pPointer )
   {
-    v5 = v4->mPrev;
-    v6 = v3->mpRegion.mNext;
-    v5->mNext = v6;
-    v6->mPrev = v5;
-    v4->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v4->mPrev;
-    v3->mpRegion.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v3->mpRegion.mPrev;
+    mPrev = p_mpRegion->mPrev;
+    mNext = this->mpRegion.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mpRegion->mPrev = p_mpRegion;
+    this->mpRegion.mNext = &this->mpRegion;
   }
-  v3->mpRegion.m_pPointer = (UFG::SimComponent *)v2;
-  if ( v2 )
+  this->mpRegion.m_pPointer = ComponentOfType;
+  if ( ComponentOfType )
   {
-    v7 = &v2->m_SafePointerList;
-    v8 = v2->m_SafePointerList.mNode.mPrev;
-    v8->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)v4;
-    v4->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)v8;
-    v3->mpRegion.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)v7;
-    v7->mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)v4;
+    p_mNode = &ComponentOfType->m_SafePointerList.mNode;
+    v8 = ComponentOfType->m_SafePointerList.mNode.mPrev;
+    v8->mNext = p_mpRegion;
+    p_mpRegion->mPrev = v8;
+    this->mpRegion.mNext = p_mNode;
+    p_mNode->mPrev = p_mpRegion;
   }
-  *(_QWORD *)&v3->m_occValue = 0i64;
-  v3->m_obsValue = 0.0;
-  UFG::qBaseTreeRB::Add(&UFG::AudioTriggerRegion::msAudioTriggerRegions.mTree, &v3->mNode);
+  *(_QWORD *)&this->m_occValue = 0i64;
+  this->m_obsValue = 0.0;
+  UFG::qBaseTreeRB::Add(
+    &UFG::AudioTriggerRegion::msAudioTriggerRegions.mTree,
+    &this->UFG::qNodeRB<UFG::AudioTriggerRegion>::mNode);
 }
 
 // File Line: 226
 // RVA: 0x59F520
 bool __fastcall UFG::AudioTriggerRegion::HasComponent(UFG::SceneObjectProperties *pSceneObj)
 {
-  UFG::SceneObjectProperties *v1; // rax
-  UFG::qPropertySet *v2; // rcx
+  UFG::qPropertySet *mpWritableProperties; // rcx
 
-  v1 = pSceneObj;
-  v2 = pSceneObj->mpWritableProperties;
-  if ( !v2 )
-    v2 = v1->mpConstProperties;
+  mpWritableProperties = pSceneObj->mpWritableProperties;
+  if ( !mpWritableProperties )
+    mpWritableProperties = pSceneObj->mpConstProperties;
   return UFG::qPropertySet::GetParentFromName(
-           v2,
-           (UFG::qSymbol *)&TiDoSymX_propset_componentATRegion.mUID,
+           mpWritableProperties,
+           (UFG::qArray<unsigned long,0> *)&TiDoSymX_propset_componentATRegion,
            DEPTH_RECURSE) != 0i64;
 }
 
 // File Line: 236
 // RVA: 0x5A8520
-UFG::AudioTriggerRegion *__fastcall UFG::AudioTriggerRegion::PropertiesOnActivate(UFG::SceneObjectProperties *pSceneObj)
+UFG::AudioTriggerRegion *__fastcall UFG::AudioTriggerRegion::PropertiesOnActivate(
+        UFG::SceneObjectProperties *pSceneObj)
 {
-  UFG::SceneObjectProperties *v1; // rsi
   UFG::allocator::free_link *v2; // rbp
-  UFG::SimObject *v3; // rbx
+  UFG::SimObject *m_pSimObject; // rbx
   UFG::qSymbol *v4; // rax
   __int64 v5; // rax
   __int64 v6; // rbx
-  UFG::qPropertySet *v7; // rcx
+  UFG::qPropertySet *mpWritableProperties; // rcx
   bool *v8; // rax
-  UFG::qPropertySet *v9; // rcx
+  UFG::qPropertySet *mpConstProperties; // rcx
   UFG::qPropertyList *v10; // r14
-  unsigned int v11; // ebp
+  unsigned int mNumElements; // ebp
   unsigned int v12; // edi
   UFG::qWiseSymbol **v13; // rsi
-  char *v14; // rax
+  char *ValuePtr; // rax
   UFG::qPropertySet *v15; // rcx
   UFG::qWiseSymbol *v16; // rax
   UFG::qWiseSymbol *v17; // rcx
   UFG::qWiseSymbol *v18; // rax
-  UFG::qSymbol result; // [rsp+68h] [rbp+10h]
+  UFG::qSymbol result; // [rsp+68h] [rbp+10h] BYREF
   UFG::allocator::free_link *v21; // [rsp+70h] [rbp+18h]
 
-  v1 = pSceneObj;
   v2 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x2F0ui64, "AudioTriggerRegion", 0i64, 1u);
   v21 = v2;
   if ( v2 )
   {
-    v3 = v1->m_pSimObject;
-    v4 = UFG::SceneObjectProperties::operator UFG::qSymbol const(v1, &result);
-    UFG::AudioTriggerRegion::AudioTriggerRegion((UFG::AudioTriggerRegion *)v2, v4, v3);
+    m_pSimObject = pSceneObj->m_pSimObject;
+    v4 = (UFG::qSymbol *)UFG::SceneObjectProperties::operator UFG::qSymbol const(pSceneObj, (UFG::qWiseSymbol *)&result);
+    UFG::AudioTriggerRegion::AudioTriggerRegion((UFG::AudioTriggerRegion *)v2, v4, m_pSimObject);
     v6 = v5;
   }
   else
@@ -395,26 +374,32 @@ UFG::AudioTriggerRegion *__fastcall UFG::AudioTriggerRegion::PropertiesOnActivat
   }
   if ( v6 )
   {
-    v7 = v1->mpWritableProperties;
-    if ( !v7 )
-      v7 = v1->mpConstProperties;
-    v8 = UFG::qPropertySet::Get<bool>(v7, (UFG::qSymbol *)&TiDoSym_ControlEmitters.mUID, DEPTH_RECURSE);
+    mpWritableProperties = pSceneObj->mpWritableProperties;
+    if ( !mpWritableProperties )
+      mpWritableProperties = pSceneObj->mpConstProperties;
+    v8 = UFG::qPropertySet::Get<bool>(
+           mpWritableProperties,
+           (UFG::qArray<unsigned long,0> *)&TiDoSym_ControlEmitters,
+           DEPTH_RECURSE);
     if ( v8 && *v8 )
       *(_DWORD *)(v6 + 736) |= 8u;
-    v9 = v1->mpWritableProperties;
-    if ( !v9 )
-      v9 = v1->mpConstProperties;
-    v10 = UFG::qPropertySet::Get<UFG::qPropertyList>(v9, (UFG::qSymbol *)&TiDoSym_TagList.mUID, DEPTH_RECURSE);
-    v11 = v10->mNumElements;
+    mpConstProperties = pSceneObj->mpWritableProperties;
+    if ( !mpConstProperties )
+      mpConstProperties = pSceneObj->mpConstProperties;
+    v10 = UFG::qPropertySet::Get<UFG::qPropertyList>(
+            mpConstProperties,
+            (UFG::qArray<unsigned long,0> *)&TiDoSym_TagList,
+            DEPTH_RECURSE);
+    mNumElements = v10->mNumElements;
     v12 = 0;
-    if ( v11 )
+    if ( mNumElements )
     {
       v13 = (UFG::qWiseSymbol **)(v6 + 640);
       do
       {
-        v14 = UFG::qPropertyList::GetValuePtr(v10, 0x1Au, v12);
-        if ( v14 && *(_QWORD *)v14 )
-          v15 = (UFG::qPropertySet *)&v14[*(_QWORD *)v14];
+        ValuePtr = UFG::qPropertyList::GetValuePtr(v10, 0x1Au, v12);
+        if ( ValuePtr && *(_QWORD *)ValuePtr )
+          v15 = (UFG::qPropertySet *)&ValuePtr[*(_QWORD *)ValuePtr];
         else
           v15 = 0i64;
         v16 = UFG::AudioTriggerRegionTag::FromPropertySet(v15);
@@ -440,7 +425,7 @@ UFG::AudioTriggerRegion *__fastcall UFG::AudioTriggerRegion::PropertiesOnActivat
         *v13 = v17;
         ++v12;
       }
-      while ( v12 < v11 );
+      while ( v12 < mNumElements );
     }
     UFG::AudioTriggerRegion::CheckRegionContainment((UFG::AudioTriggerRegion *)v6, 0);
   }
@@ -451,81 +436,80 @@ UFG::AudioTriggerRegion *__fastcall UFG::AudioTriggerRegion::PropertiesOnActivat
 // RVA: 0x596F70
 void __fastcall UFG::AudioTriggerRegion::AudioEntityUpdate(UFG::AudioTriggerRegion *this, float delta_sec)
 {
-  UFG::qNode<UFG::AudioEvent,UFG::AudioEvent> *v2; // rbx
-  UFG::AudioTriggerRegion *v3; // rdi
-  float v4; // xmm6_4
+  UFG::qNode<UFG::AudioEvent,UFG::AudioEvent> *mPrev; // rbx
   UFG::qNode<UFG::AudioEvent,UFG::AudioEvent> v5; // xmm1
   UFG::qList<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase,0,0> v6; // xmm3
   UFG::qNode<UFG::AudioEvent,UFG::AudioEvent> v7; // xmm2
 
-  v2 = this[-1].m_events.mNode.mPrev;
-  v3 = this;
-  v4 = delta_sec;
-  UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)this[-1].m_events.mNode.mPrev);
-  v5 = v2[11];
-  v6 = (UFG::qList<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase,0,0>)v2[9];
-  v7 = v2[10];
-  *(UFG::qNode<UFG::AudioEvent,UFG::AudioEvent> *)&v3->m_Flags = v2[8];
-  v3->m_BoundComponentHandles = v6;
-  *(UFG::qNode<UFG::AudioEvent,UFG::AudioEvent> *)&v3->i_name.mUID = v7;
-  *(UFG::qNode<UFG::AudioEvent,UFG::AudioEvent> *)v3->mNode.mChild = v5;
-  UFG::AudioEntity::AudioEntityUpdate((UFG::AudioEntity *)v3, v4);
+  mPrev = this[-1].m_events.UFG::AudioEntity::mNode.UFG::AudioEntity::mPrev;
+  UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)mPrev);
+  v5 = mPrev[11];
+  v6 = (UFG::qList<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase,0,0>)mPrev[9];
+  v7 = mPrev[10];
+  *(UFG::qNode<UFG::AudioEvent,UFG::AudioEvent> *)&this->m_Flags = mPrev[8];
+  this->m_BoundComponentHandles = v6;
+  *(UFG::qNode<UFG::AudioEvent,UFG::AudioEvent> *)&this->i_name.mUID = v7;
+  *(UFG::qNode<UFG::AudioEvent,UFG::AudioEvent> *)this->UFG::TriggerRegion::UFG::MarkerBase::UFG::qNodeRB<UFG::MarkerBase>::mNode.mChild = v5;
+  UFG::AudioEntity::AudioEntityUpdate((UFG::AudioEntity *)this, delta_sec);
 }
 
 // File Line: 411
 // RVA: 0x5A3D70
-void __fastcall UFG::AudioTriggerRegion::OnEntered(UFG::AudioTriggerRegion *this, UFG::AudioEntity *pTriggeringEntity, int listener)
+void __fastcall UFG::AudioTriggerRegion::OnEntered(
+        UFG::AudioTriggerRegion *this,
+        UFG::AudioEntity *pTriggeringEntity,
+        bool listener)
 {
-  char v3; // r15
-  UFG::AudioEntity *v4; // rbp
-  UFG::AudioTriggerRegion *v5; // rsi
   char *v6; // rax
-  signed __int64 i; // rbx
-  UFG::AudioEntity *v8; // rdi
+  UFG::AudioTriggerRegionTag *i; // rbx
+  UFG::AudioEntity *mTriggeringEntity; // rdi
   unsigned int v9; // eax
-  UFG::AudioTriggerRegionEvent thisEvent; // [rsp+28h] [rbp-60h]
-  bool global; // [rsp+90h] [rbp+8h]
+  UFG::AudioTriggerRegionEvent thisEvent; // [rsp+28h] [rbp-60h] BYREF
+  bool global; // [rsp+90h] [rbp+8h] BYREF
 
-  v3 = listener;
-  v4 = pTriggeringEntity;
-  v5 = this;
   if ( Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(
          (hkGeometryUtils::IVertices *)this,
          (int)pTriggeringEntity,
          listener)
-    && v3 )
+    && listener )
   {
-    UFG::AudioEntity::Init((UFG::AudioEntity *)&v5->vfptr, &v5->m_pSimObject->m_Name, &UFG::qMatrix44::msIdentity);
+    UFG::AudioEntity::Init(
+      &this->UFG::AudioEntity,
+      (UFG::qSymbolUC *)&this->m_pSimObject->m_Name,
+      &UFG::qMatrix44::msIdentity);
   }
-  if ( UFG::TiDo::sm_ambiencesInfo && v3 )
+  if ( UFG::TiDo::sm_ambiencesInfo && listener )
   {
-    v6 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v5->i_name);
+    v6 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&this->UFG::qNamed);
     UFG::qPrintf("AudioTriggerRegion:: Lst Enter :: %s\n", v6);
   }
-  for ( i = (signed __int64)&v5->mTags.mNode.mNext[-1].mNext;
-        (unsigned int *)i != &v5->mNode.mUID;
-        i = *(_QWORD *)(i + 16) - 8i64 )
+  for ( i = (UFG::AudioTriggerRegionTag *)&this->mTags.mNode.mNext[-1].mNext;
+        i != (UFG::AudioTriggerRegionTag *)&this->UFG::qNodeRB<UFG::AudioTriggerRegion>::mNode.mUID;
+        i = (UFG::AudioTriggerRegionTag *)&i->mNext[-1].mNext )
   {
-    UFG::AudioTriggerRegionEvent::AudioTriggerRegionEvent(&thisEvent, v4, v5, (UFG::AudioTriggerRegionTag *)i);
-    UFG::qWiseSymbol::operator=((UFG::qWiseSymbol *)(i + 52), (UFG::qWiseSymbol *)(i + 36));
-    if ( *(_DWORD *)(i + 24) == 8 && v4 )
+    UFG::AudioTriggerRegionEvent::AudioTriggerRegionEvent(&thisEvent, pTriggeringEntity, this, i);
+    UFG::qWiseSymbol::operator=(&i->mAudioModeUidOnExit, &i->mAudioModeUidOnEnter);
+    if ( i->mAudioType == 8 && pTriggeringEntity )
     {
-      *(float *)(i + 60) = v4->m_environment.mDryLevel;
-      *(float *)(i + 64) = UFG::AudioEntity::GetWetLevelForEffect(v4, *(_DWORD *)(i + 28));
+      i->mAudioDryLevelOnExit = pTriggeringEntity->m_environment.mDryLevel;
+      i->mAudioWetLevelOnExit = UFG::AudioEntity::GetWetLevelForEffect(pTriggeringEntity, i->mAudioUidOnEnter.mUID);
     }
-    if ( *(_DWORD *)(i + 24) == 3 && v4 )
+    if ( i->mAudioType == 3 && pTriggeringEntity )
     {
       global = 0;
-      *(float *)(i + 56) = UFG::AudioEntity::Debug_GetRtpcValue(v4, *(_DWORD *)(i + 28), &global);
-      UFG::qWiseSymbol::operator=((UFG::qWiseSymbol *)(i + 52), (UFG::qWiseSymbol *)(i + 36));
+      i->mAudioRtpcValOnExit = UFG::AudioEntity::Debug_GetRtpcValue(
+                                 pTriggeringEntity,
+                                 i->mAudioUidOnEnter.mUID,
+                                 &global);
+      UFG::qWiseSymbol::operator=(&i->mAudioModeUidOnExit, &i->mAudioModeUidOnEnter);
     }
-    if ( v3 )
+    if ( listener )
     {
-      UFG::AudioTriggerRegion::ApplyAudioZoneListener(v5, &thisEvent);
+      UFG::AudioTriggerRegion::ApplyAudioZoneListener(this, &thisEvent);
     }
     else
     {
-      v8 = thisEvent.mTriggeringEntity;
+      mTriggeringEntity = thisEvent.mTriggeringEntity;
       if ( thisEvent.mTriggeringEntity )
       {
         switch ( thisEvent.mAudioType )
@@ -534,14 +518,14 @@ void __fastcall UFG::AudioTriggerRegion::OnEntered(UFG::AudioTriggerRegion *this
             if ( UFG::AudioEventPropertyManager::Find(thisEvent.mAudioUidOnEnter.mUID) )
             {
               v9 = _S44_0;
-              if ( !(_S44_0 & 1) )
+              if ( (_S44_0 & 1) == 0 )
               {
                 _S44_0 |= 1u;
                 UFG::qWiseSymbol::create_from_string(&stru_14242FA88, "set_minimap_enter");
                 atexit(UFG::AudioTriggerRegion::HandleIntExtForEntities_::_4_::_dynamic_atexit_destructor_for__set_minimap_enter__);
                 v9 = _S44_0;
               }
-              if ( !(v9 & 2) )
+              if ( (v9 & 2) == 0 )
               {
                 _S44_0 = v9 | 2;
                 UFG::qWiseSymbol::create_from_string(&stru_14242FA90, "set_minimap_exit");
@@ -549,8 +533,8 @@ void __fastcall UFG::AudioTriggerRegion::OnEntered(UFG::AudioTriggerRegion *this
               }
               if ( thisEvent.mAudioUidOnEnter.mUID == stru_14242FA88.mUID )
               {
-                ++v8->m_interiorCount;
-                v8->m_bOcclusionIsDirty = 1;
+                ++mTriggeringEntity->m_interiorCount;
+                mTriggeringEntity->m_bOcclusionIsDirty = 1;
               }
             }
             break;
@@ -565,7 +549,7 @@ void __fastcall UFG::AudioTriggerRegion::OnEntered(UFG::AudioTriggerRegion *this
                    thisEvent.mTriggeringEntity,
                    &thisEvent.mAudioModeUid) )
             {
-              UFG::AudioTriggerRegion::HandleEnvironmentRegionEnter(v5, &thisEvent);
+              UFG::AudioTriggerRegion::HandleEnvironmentRegionEnter(this, &thisEvent);
             }
             break;
           case 0xCu:
@@ -579,43 +563,39 @@ void __fastcall UFG::AudioTriggerRegion::OnEntered(UFG::AudioTriggerRegion *this
     _((AMD_HD3D *)thisEvent.mAudioUidOnExit.mUID);
     _((AMD_HD3D *)thisEvent.mAudioUidOnEnter.mUID);
   }
-}(AMD_HD3D *)thisEvent.mAudioUidOnExit.mUID);
-    _((AMD_HD3D *)thisEvent.mAudioUidOnEnte
+}
 
 // File Line: 461
 // RVA: 0x5A4060
-void __fastcall UFG::AudioTriggerRegion::OnExited(UFG::AudioTriggerRegion *this, UFG::AudioEntity *pTriggeringEntity, bool listener)
+void __fastcall UFG::AudioTriggerRegion::OnExited(
+        UFG::AudioTriggerRegion *this,
+        UFG::AudioEntity *pTriggeringEntity,
+        bool listener)
 {
-  bool v3; // r14
-  UFG::AudioEntity *v4; // r12
-  UFG::AudioTriggerRegion *v5; // rsi
   char *v6; // rax
   UFG::AudioTriggerRegionTag *i; // rdi
-  UFG::AudioEntity *v8; // rbx
+  UFG::AudioEntity *mTriggeringEntity; // rbx
   UFG::qBaseTreeRB *v9; // rbp
   unsigned int v10; // ecx
-  UFG::AudioTriggerRegionEvent thisEvent; // [rsp+28h] [rbp-60h]
+  UFG::AudioTriggerRegionEvent thisEvent; // [rsp+28h] [rbp-60h] BYREF
 
-  v3 = listener;
-  v4 = pTriggeringEntity;
-  v5 = this;
   if ( UFG::TiDo::sm_ambiencesInfo && listener )
   {
-    v6 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&this->i_name);
+    v6 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&this->UFG::qNamed);
     UFG::qPrintf("AudioTriggerRegion:: Lst Exit :: %s\n", v6);
   }
-  for ( i = (UFG::AudioTriggerRegionTag *)&v5->mTags.mNode.mNext[-1].mNext;
-        i != (UFG::AudioTriggerRegionTag *)&v5->mNode.mUID;
+  for ( i = (UFG::AudioTriggerRegionTag *)&this->mTags.mNode.mNext[-1].mNext;
+        i != (UFG::AudioTriggerRegionTag *)&this->UFG::qNodeRB<UFG::AudioTriggerRegion>::mNode.mUID;
         i = (UFG::AudioTriggerRegionTag *)&i->mNext[-1].mNext )
   {
-    UFG::AudioTriggerRegionEvent::AudioTriggerRegionEvent(&thisEvent, v4, v5, i);
-    if ( v3 )
+    UFG::AudioTriggerRegionEvent::AudioTriggerRegionEvent(&thisEvent, pTriggeringEntity, this, i);
+    if ( listener )
     {
-      UFG::AudioTriggerRegion::RemoveAudioZoneListener(v5, &thisEvent);
+      UFG::AudioTriggerRegion::RemoveAudioZoneListener(this, &thisEvent);
     }
     else
     {
-      v8 = thisEvent.mTriggeringEntity;
+      mTriggeringEntity = thisEvent.mTriggeringEntity;
       if ( thisEvent.mTriggeringEntity )
       {
         switch ( thisEvent.mAudioType )
@@ -625,14 +605,14 @@ void __fastcall UFG::AudioTriggerRegion::OnExited(UFG::AudioTriggerRegion *this,
             if ( v9 )
             {
               v10 = _S44_0;
-              if ( !(_S44_0 & 1) )
+              if ( (_S44_0 & 1) == 0 )
               {
                 _S44_0 |= 1u;
                 UFG::qWiseSymbol::create_from_string(&stru_14242FA88, "set_minimap_enter");
                 atexit(UFG::AudioTriggerRegion::HandleIntExtForEntities_::_4_::_dynamic_atexit_destructor_for__set_minimap_enter__);
                 v10 = _S44_0;
               }
-              if ( !(v10 & 2) )
+              if ( (v10 & 2) == 0 )
               {
                 _S44_0 = v10 | 2;
                 UFG::qWiseSymbol::create_from_string(&stru_14242FA90, "set_minimap_exit");
@@ -640,8 +620,8 @@ void __fastcall UFG::AudioTriggerRegion::OnExited(UFG::AudioTriggerRegion *this,
               }
               if ( HIDWORD(v9->mNULL.mChild[0][2].mChild[1]) == stru_14242FA90.mUID )
               {
-                --v8->m_interiorCount;
-                v8->m_bOcclusionIsDirty = 1;
+                --mTriggeringEntity->m_interiorCount;
+                mTriggeringEntity->m_bOcclusionIsDirty = 1;
               }
             }
             break;
@@ -653,7 +633,7 @@ void __fastcall UFG::AudioTriggerRegion::OnExited(UFG::AudioTriggerRegion *this,
             break;
           case 8u:
             if ( thisEvent.mTriggeringEntity->m_environment.totalEnv > 0 )
-              UFG::AudioTriggerRegion::HandleEnvironmentRegionExit(v5, &thisEvent);
+              UFG::AudioTriggerRegion::HandleEnvironmentRegionExit(this, &thisEvent);
             break;
           case 0xCu:
             thisEvent.mTriggeringEntity->m_inDoorRegion = 0;
@@ -670,9 +650,9 @@ void __fastcall UFG::AudioTriggerRegion::OnExited(UFG::AudioTriggerRegion *this,
          (hkGeometryUtils::IVertices *)this,
          (int)pTriggeringEntity,
          listener)
-    && v3 )
+    && listener )
   {
-    UFG::AudioEntity::Shutdown((UFG::AudioEntity *)&v5->vfptr);
+    UFG::AudioEntity::Shutdown(&this->UFG::AudioEntity);
   }
 }
 
@@ -680,30 +660,29 @@ void __fastcall UFG::AudioTriggerRegion::OnExited(UFG::AudioTriggerRegion *this,
 // RVA: 0x597960
 void __fastcall UFG::AudioTriggerRegion::CheckEntity(UFG::AudioEntity *pIn)
 {
-  float v1; // xmm1_4
-  UFG::AudioEntity *v2; // r15
-  float v3; // xmm0_4
-  Render::SkinningCacheNode *v4; // rax
-  UFG::AudioTriggerRegion *v5; // r14
-  UFG::qBaseNodeRB *v6; // rdx
-  UFG::qBaseTreeRB *v7; // rax
-  signed __int64 v8; // r12
-  unsigned int v9; // eax
-  UFG::RegionContainmentInfo *v10; // rax
+  float y; // xmm1_4
+  float z; // xmm0_4
+  Render::SkinningCacheNode *Head; // rax
+  UFG::AudioTriggerRegion *p_mCachedBufferPtr; // r14
+  UFG::qBaseNodeRB *p_mNode; // rdx
+  UFG::qBaseTreeRB *Next; // rax
+  UFG::AudioTriggerRegion *mChild; // r12
+  unsigned int m_typeFlags; // eax
+  UFG::RegionContainmentInfo *ContainmentInfo; // rax
   unsigned int v11; // ecx
-  unsigned int v12; // edx
-  UFG::qSymbol *v13; // rax
+  unsigned int size; // edx
+  UFG::qSymbol *p; // rax
   bool v14; // bl
   UFG::RegionContainmentInfo *v15; // rax
   unsigned int v16; // ebp
   unsigned int v17; // edi
   UFG::RegionContainmentInfo *v18; // rsi
-  unsigned int *v19; // rbx
+  unsigned int *p_mUID; // rbx
   UFG::qBaseTreeRB *v20; // rax
-  signed __int64 v21; // rdx
+  UFG::qBaseNodeRB **v21; // rdx
   int v22; // eax
   char v23; // r10
-  unsigned int v24; // er8
+  unsigned int v24; // r8d
   unsigned int v25; // ecx
   UFG::qSymbol *v26; // rax
   char v27; // al
@@ -713,52 +692,51 @@ void __fastcall UFG::AudioTriggerRegion::CheckEntity(UFG::AudioEntity *pIn)
   unsigned int v31; // edi
   unsigned int *v32; // rbx
   UFG::qBaseTreeRB *v33; // rax
-  signed __int64 v34; // rdx
+  UFG::qBaseNodeRB **v34; // rdx
   int v35; // eax
   char v36; // r10
-  unsigned int v37; // er8
+  unsigned int v37; // r8d
   unsigned int v38; // ecx
   UFG::qSymbol *v39; // rax
   char v40; // al
-  UFG::qVector3 pos; // [rsp+20h] [rbp-28h]
+  UFG::qVector3 pos; // [rsp+20h] [rbp-28h] BYREF
 
-  v1 = pIn->m_WorldMatrix.v3.y;
-  v2 = pIn;
+  y = pIn->m_WorldMatrix.v3.y;
   pos.x = pIn->m_WorldMatrix.v3.x;
-  v3 = pIn->m_WorldMatrix.v3.z;
-  pos.y = v1;
-  pos.z = v3;
-  v4 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::AudioTriggerRegion::msAudioTriggerRegions);
-  if ( v4 )
+  z = pIn->m_WorldMatrix.v3.z;
+  pos.y = y;
+  pos.z = z;
+  Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::AudioTriggerRegion::msAudioTriggerRegions);
+  if ( Head )
   {
-    v5 = (UFG::AudioTriggerRegion *)&v4[-16].mCachedBufferPtr;
-    if ( v4 != (Render::SkinningCacheNode *)608 )
+    p_mCachedBufferPtr = (UFG::AudioTriggerRegion *)&Head[-16].mCachedBufferPtr;
+    if ( Head != (Render::SkinningCacheNode *)608 )
     {
       do
       {
-        if ( v5 )
-          v6 = &v5->mNode;
+        if ( p_mCachedBufferPtr )
+          p_mNode = &p_mCachedBufferPtr->UFG::qNodeRB<UFG::AudioTriggerRegion>::mNode;
         else
-          v6 = 0i64;
-        v7 = UFG::qBaseTreeRB::GetNext(&UFG::AudioTriggerRegion::msAudioTriggerRegions.mTree, v6);
-        if ( v7 )
-          v8 = (signed __int64)v7[-9].mNULL.mChild;
+          p_mNode = 0i64;
+        Next = UFG::qBaseTreeRB::GetNext(&UFG::AudioTriggerRegion::msAudioTriggerRegions.mTree, p_mNode);
+        if ( Next )
+          mChild = (UFG::AudioTriggerRegion *)Next[-9].mNULL.mChild;
         else
-          v8 = 0i64;
-        v9 = v5->m_typeFlags;
-        if ( v9 & 1 || v9 & 2 || v9 & 4 || v9 & 0x20 )
+          mChild = 0i64;
+        m_typeFlags = p_mCachedBufferPtr->m_typeFlags;
+        if ( (m_typeFlags & 1) != 0 || (m_typeFlags & 2) != 0 || (m_typeFlags & 4) != 0 || (m_typeFlags & 0x20) != 0 )
         {
-          v10 = UFG::AudioEntity::GetContainmentInfo(v2);
+          ContainmentInfo = UFG::AudioEntity::GetContainmentInfo(pIn);
           v11 = 0;
-          v12 = v10->m_regionsContainedIn.size;
-          if ( v12 )
+          size = ContainmentInfo->m_regionsContainedIn.size;
+          if ( size )
           {
-            v13 = v10->m_regionsContainedIn.p;
-            while ( v5->i_name.mUID != v13->mUID )
+            p = ContainmentInfo->m_regionsContainedIn.p;
+            while ( p_mCachedBufferPtr->i_name.mUID != p->mUID )
             {
               ++v11;
-              ++v13;
-              if ( v11 >= v12 )
+              ++p;
+              if ( v11 >= size )
                 goto LABEL_17;
             }
           }
@@ -768,27 +746,27 @@ LABEL_17:
             v11 = -1;
           }
           v14 = v11 != -1;
-          if ( UFG::TriggerRegion::IsHitPoint((UFG::TriggerRegion *)&v5->vfptr, &pos) )
+          if ( UFG::TriggerRegion::IsHitPoint(p_mCachedBufferPtr, &pos) )
           {
             if ( !v14 )
             {
-              v15 = UFG::AudioEntity::GetContainmentInfo(v2);
-              v16 = v5->m_regionsContainingMe.m_regionsContainedIn.size;
+              v15 = UFG::AudioEntity::GetContainmentInfo(pIn);
+              v16 = p_mCachedBufferPtr->m_regionsContainingMe.m_regionsContainedIn.size;
               v17 = 0;
               v18 = v15;
               if ( v16 )
               {
-                v19 = &v5->m_regionsContainingMe.m_regionsContainedIn.p->mUID;
-                while ( *v19 )
+                p_mUID = &p_mCachedBufferPtr->m_regionsContainingMe.m_regionsContainedIn.p->mUID;
+                while ( *p_mUID )
                 {
-                  v20 = UFG::qBaseTreeRB::Get(&UFG::AudioTriggerRegion::msAudioTriggerRegions.mTree, *v19);
+                  v20 = UFG::qBaseTreeRB::Get(&UFG::AudioTriggerRegion::msAudioTriggerRegions.mTree, *p_mUID);
                   if ( !v20 )
                     break;
-                  v21 = (signed __int64)v20[-9].mNULL.mChild;
+                  v21 = v20[-9].mNULL.mChild;
                   if ( v20 == (UFG::qBaseTreeRB *)608 )
                     goto LABEL_31;
-                  v22 = *(_DWORD *)(v21 + 736);
-                  if ( !(v22 & 1) && !(v22 & 2) && !(v22 & 4) && !(v22 & 0x20) )
+                  v22 = *((_DWORD *)v21 + 184);
+                  if ( (v22 & 1) == 0 && (v22 & 2) == 0 && (v22 & 4) == 0 && (v22 & 0x20) == 0 )
                     goto LABEL_31;
                   v23 = 1;
 LABEL_32:
@@ -797,7 +775,7 @@ LABEL_32:
                   if ( !v24 )
                     goto LABEL_38;
                   v26 = v18->m_regionsContainedIn.p;
-                  while ( *v19 != v26->mUID )
+                  while ( *p_mUID != v26->mUID )
                   {
                     ++v25;
                     ++v26;
@@ -814,7 +792,7 @@ LABEL_38:
                     }
                   }
                   ++v17;
-                  ++v19;
+                  ++p_mUID;
                   if ( v17 >= v16 )
                     goto LABEL_41;
                 }
@@ -828,42 +806,43 @@ LABEL_41:
 LABEL_42:
               if ( v27 )
               {
-                UFG::AudioTriggerRegion::SetEntered(v2, v5);
-                UFG::AudioTriggerRegion::OnEntered(v5, v2, 0);
+                UFG::AudioTriggerRegion::SetEntered(pIn, p_mCachedBufferPtr);
+                UFG::AudioTriggerRegion::OnEntered(p_mCachedBufferPtr, pIn, 0);
               }
             }
           }
           else if ( v14 )
           {
-            v28 = UFG::AudioEntity::GetContainmentInfo(v2);
-            v29 = v5->m_regionsIContain.m_regionsContainedIn.size;
+            v28 = UFG::AudioEntity::GetContainmentInfo(pIn);
+            v29 = p_mCachedBufferPtr->m_regionsIContain.m_regionsContainedIn.size;
             v30 = v28;
-            if ( !v29 || (v31 = 0, !v29) )
+            if ( !v29 )
             {
-LABEL_68:
+LABEL_67:
               v40 = 1;
-LABEL_69:
+LABEL_68:
               if ( v40 )
               {
-                UFG::AudioTriggerRegion::SetExited(v2, v5);
-                UFG::AudioTriggerRegion::OnExited(v5, v2, 0);
+                UFG::AudioTriggerRegion::SetExited(pIn, p_mCachedBufferPtr);
+                UFG::AudioTriggerRegion::OnExited(p_mCachedBufferPtr, pIn, 0);
               }
-              goto LABEL_71;
+              goto LABEL_70;
             }
-            v32 = &v5->m_regionsIContain.m_regionsContainedIn.p->mUID;
+            v31 = 0;
+            v32 = &p_mCachedBufferPtr->m_regionsIContain.m_regionsContainedIn.p->mUID;
             while ( 2 )
             {
               if ( *v32
                 && (v33 = UFG::qBaseTreeRB::Get(&UFG::AudioTriggerRegion::msAudioTriggerRegions.mTree, *v32)) != 0i64 )
               {
-                v34 = (signed __int64)v33[-9].mNULL.mChild;
+                v34 = v33[-9].mNULL.mChild;
                 if ( v33 != (UFG::qBaseTreeRB *)608 )
                 {
-                  v35 = *(_DWORD *)(v34 + 736);
-                  if ( v35 & 1 || v35 & 2 || v35 & 4 || v35 & 0x20 )
+                  v35 = *((_DWORD *)v34 + 184);
+                  if ( (v35 & 1) != 0 || (v35 & 2) != 0 || (v35 & 4) != 0 || (v35 & 0x20) != 0 )
                   {
                     v36 = 1;
-                    goto LABEL_59;
+                    goto LABEL_58;
                   }
                 }
               }
@@ -872,7 +851,7 @@ LABEL_69:
                 v34 = 0i64;
               }
               v36 = 0;
-LABEL_59:
+LABEL_58:
               v37 = v30->m_regionsContainedIn.size;
               v38 = 0;
               if ( v37 )
@@ -883,27 +862,27 @@ LABEL_59:
                   ++v38;
                   ++v39;
                   if ( v38 >= v37 )
-                    goto LABEL_67;
+                    goto LABEL_66;
                 }
                 if ( v38 != -1 && v34 && v36 )
                 {
                   v40 = 0;
-                  goto LABEL_69;
+                  goto LABEL_68;
                 }
               }
-LABEL_67:
+LABEL_66:
               ++v31;
               ++v32;
               if ( v31 >= v29 )
-                goto LABEL_68;
+                goto LABEL_67;
               continue;
             }
           }
         }
-LABEL_71:
-        v5 = (UFG::AudioTriggerRegion *)v8;
+LABEL_70:
+        p_mCachedBufferPtr = mChild;
       }
-      while ( v8 );
+      while ( mChild );
     }
   }
 }
@@ -912,45 +891,41 @@ LABEL_71:
 // RVA: 0x5AAC80
 void __fastcall UFG::AudioTriggerRegion::SetEntered(UFG::AudioEntity *pIn, UFG::AudioTriggerRegion *region)
 {
-  UFG::AudioTriggerRegion *v2; // rbp
-  UFG::AudioEntity *v3; // rdi
-  UFG::RegionContainmentInfo *v4; // rax
-  unsigned int v5; // er8
-  UFG::qArray<UFG::qSymbol,0> *v6; // r9
+  UFG::RegionContainmentInfo *ContainmentInfo; // rax
+  unsigned int size; // r8d
+  UFG::qArray<UFG::qSymbol,0> *p_m_regionsContainedIn; // r9
   unsigned int v7; // ebx
   unsigned int v8; // eax
-  UFG::qSymbol *v9; // rcx
-  UFG::qSymbol *v10; // rax
+  UFG::qSymbol *p; // rcx
+  UFG::qSymbol *Name; // rax
   unsigned int v11; // edx
   UFG::qSymbol *v12; // rcx
-  UFG::qSymbol result; // [rsp+30h] [rbp+8h]
+  UFG::qSymbol result; // [rsp+30h] [rbp+8h] BYREF
 
-  v2 = region;
-  v3 = pIn;
-  v4 = UFG::AudioEntity::GetContainmentInfo(pIn);
-  v5 = v4->m_regionsContainedIn.size;
-  v6 = &v4->m_regionsContainedIn;
+  ContainmentInfo = UFG::AudioEntity::GetContainmentInfo(pIn);
+  size = ContainmentInfo->m_regionsContainedIn.size;
+  p_m_regionsContainedIn = &ContainmentInfo->m_regionsContainedIn;
   v7 = 0;
   v8 = 0;
-  if ( !v5 )
+  if ( !size )
     goto LABEL_7;
-  v9 = v6->p;
-  while ( v2->i_name.mUID != v9->mUID )
+  p = p_m_regionsContainedIn->p;
+  while ( region->i_name.mUID != p->mUID )
   {
     ++v8;
-    ++v9;
-    if ( v8 >= v5 )
+    ++p;
+    if ( v8 >= size )
       goto LABEL_7;
   }
   if ( v8 == -1 )
 LABEL_7:
-    UFG::qArray<UFG::qSymbol,0>::Add(v6, &v2->i_name, "RegionContainmentInfo.Array");
-  v10 = UFG::AudioEntity::GetName(v3, &result);
-  v11 = v2->m_thingsIContain.m_regionsContainedIn.size;
+    UFG::qArray<UFG::qSymbol,0>::Add(p_m_regionsContainedIn, &region->i_name, "RegionContainmentInfo.Array");
+  Name = UFG::AudioEntity::GetName(pIn, &result);
+  v11 = region->m_thingsIContain.m_regionsContainedIn.size;
   if ( !v11 )
     goto LABEL_14;
-  v12 = v2->m_thingsIContain.m_regionsContainedIn.p;
-  while ( v10->mUID != v12->mUID )
+  v12 = region->m_thingsIContain.m_regionsContainedIn.p;
+  while ( Name->mUID != v12->mUID )
   {
     ++v7;
     ++v12;
@@ -959,154 +934,147 @@ LABEL_7:
   }
   if ( v7 == -1 )
 LABEL_14:
-    UFG::qArray<UFG::qSymbol,0>::Add(&v2->m_thingsIContain.m_regionsContainedIn, v10, "RegionContainmentInfo.Array");
-  v3->m_bOcclusionIsDirty = 1;
+    UFG::qArray<UFG::qSymbol,0>::Add(
+      &region->m_thingsIContain.m_regionsContainedIn,
+      Name,
+      "RegionContainmentInfo.Array");
+  pIn->m_bOcclusionIsDirty = 1;
 }
 
 // File Line: 675
 // RVA: 0x5AAD50
 void __fastcall UFG::AudioTriggerRegion::SetExited(UFG::AudioEntity *pIn, UFG::AudioTriggerRegion *region)
 {
-  UFG::AudioTriggerRegion *v2; // rdi
-  UFG::AudioEntity *v3; // rbx
-  UFG::RegionContainmentInfo *v4; // rax
-  UFG::RegionContainmentInfo *v5; // r9
-  unsigned int v6; // eax
-  __int64 v7; // r8
-  UFG::qSymbol *v8; // rcx
-  unsigned int v9; // eax
-  UFG::qSymbol *v10; // rax
-  unsigned int v11; // ecx
-  __int64 v12; // rdx
-  unsigned int v13; // er8
-  UFG::qSymbol *v14; // rax
-  unsigned int v15; // eax
-  UFG::qSymbol result; // [rsp+30h] [rbp+8h]
+  UFG::RegionContainmentInfo *ContainmentInfo; // r9
+  unsigned int size; // eax
+  __int64 v6; // r8
+  UFG::qSymbol *p; // rcx
+  unsigned int v8; // eax
+  UFG::qSymbol *Name; // rax
+  unsigned int v10; // ecx
+  __int64 v11; // rdx
+  unsigned int mUID; // r8d
+  UFG::qSymbol *i; // rax
+  unsigned int v14; // eax
+  UFG::qSymbol result; // [rsp+30h] [rbp+8h] BYREF
 
-  v2 = region;
-  v3 = pIn;
-  v4 = UFG::AudioEntity::GetContainmentInfo(pIn);
-  v5 = v4;
-  v6 = v4->m_regionsContainedIn.size;
-  v7 = 0i64;
-  if ( v6 )
+  ContainmentInfo = UFG::AudioEntity::GetContainmentInfo(pIn);
+  size = ContainmentInfo->m_regionsContainedIn.size;
+  v6 = 0i64;
+  if ( size )
   {
-    v8 = v5->m_regionsContainedIn.p;
-    while ( v2->i_name.mUID != v8->mUID )
+    p = ContainmentInfo->m_regionsContainedIn.p;
+    while ( region->i_name.mUID != p->mUID )
     {
-      v7 = (unsigned int)(v7 + 1);
-      ++v8;
-      if ( (unsigned int)v7 >= v6 )
+      v6 = (unsigned int)(v6 + 1);
+      ++p;
+      if ( (unsigned int)v6 >= size )
         goto LABEL_10;
     }
-    if ( (_DWORD)v7 != -1 )
+    if ( (_DWORD)v6 != -1 )
     {
-      v5->m_regionsContainedIn.p[v7].mUID = v5->m_regionsContainedIn.p[v6 - 1].mUID;
-      v9 = v5->m_regionsContainedIn.size;
-      if ( v9 > 1 )
-        v5->m_regionsContainedIn.size = v9 - 1;
+      ContainmentInfo->m_regionsContainedIn.p[v6].mUID = ContainmentInfo->m_regionsContainedIn.p[size - 1].mUID;
+      v8 = ContainmentInfo->m_regionsContainedIn.size;
+      if ( v8 > 1 )
+        ContainmentInfo->m_regionsContainedIn.size = v8 - 1;
       else
-        v5->m_regionsContainedIn.size = 0;
+        ContainmentInfo->m_regionsContainedIn.size = 0;
     }
   }
 LABEL_10:
-  v10 = UFG::AudioEntity::GetName(v3, &result);
-  v11 = v2->m_thingsIContain.m_regionsContainedIn.size;
-  v12 = 0i64;
-  if ( v11 )
+  Name = UFG::AudioEntity::GetName(pIn, &result);
+  v10 = region->m_thingsIContain.m_regionsContainedIn.size;
+  v11 = 0i64;
+  if ( v10 )
   {
-    v13 = v10->mUID;
-    v14 = v2->m_thingsIContain.m_regionsContainedIn.p;
-    while ( v13 != v14->mUID )
+    mUID = Name->mUID;
+    for ( i = region->m_thingsIContain.m_regionsContainedIn.p; mUID != i->mUID; ++i )
     {
-      v12 = (unsigned int)(v12 + 1);
-      ++v14;
-      if ( (unsigned int)v12 >= v11 )
+      v11 = (unsigned int)(v11 + 1);
+      if ( (unsigned int)v11 >= v10 )
       {
-        v3->m_bOcclusionIsDirty = 1;
+        pIn->m_bOcclusionIsDirty = 1;
         return;
       }
     }
-    if ( (_DWORD)v12 != -1 )
+    if ( (_DWORD)v11 != -1 )
     {
-      v2->m_thingsIContain.m_regionsContainedIn.p[v12].mUID = v2->m_thingsIContain.m_regionsContainedIn.p[v11 - 1].mUID;
-      v15 = v2->m_thingsIContain.m_regionsContainedIn.size;
-      if ( v15 <= 1 )
+      region->m_thingsIContain.m_regionsContainedIn.p[v11].mUID = region->m_thingsIContain.m_regionsContainedIn.p[v10 - 1].mUID;
+      v14 = region->m_thingsIContain.m_regionsContainedIn.size;
+      if ( v14 <= 1 )
       {
-        v2->m_thingsIContain.m_regionsContainedIn.size = 0;
-        v3->m_bOcclusionIsDirty = 1;
+        region->m_thingsIContain.m_regionsContainedIn.size = 0;
+        pIn->m_bOcclusionIsDirty = 1;
         return;
       }
-      v2->m_thingsIContain.m_regionsContainedIn.size = v15 - 1;
+      region->m_thingsIContain.m_regionsContainedIn.size = v14 - 1;
     }
   }
-  v3->m_bOcclusionIsDirty = 1;
+  pIn->m_bOcclusionIsDirty = 1;
 }
 
 // File Line: 688
 // RVA: 0x597F30
 void __fastcall UFG::AudioTriggerRegion::CheckListener(UFG::AudioListener *pIn)
 {
-  UFG::AudioListener *v1; // r15
-  float v2; // xmm1_4
-  float v3; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
   char v4; // si
-  Render::SkinningCacheNode *v5; // rax
-  signed __int64 v6; // rbx
+  Render::SkinningCacheNode *Head; // rax
+  Illusion::Buffer **p_mCachedBufferPtr; // rbx
   UFG::qBaseNodeRB *v7; // rdx
-  UFG::qBaseTreeRB *v8; // rax
-  signed __int64 v9; // r14
-  unsigned int v10; // ecx
-  unsigned int v11; // edx
+  UFG::qBaseTreeRB *Next; // rax
+  UFG::qBaseNodeRB **mChild; // r14
+  int v10; // ecx
+  unsigned int size; // edx
   bool v12; // di
   int v13; // edx
   hkGeometryUtils::IVertices *v14; // rcx
-  int v15; // er8
+  int v15; // r8d
   char *v16; // rax
   UFG::AudioTriggerRegionTag *i; // rdi
   int v18; // ecx
   unsigned int v19; // edx
-  UFG::qSymbol *v20; // r8
+  UFG::qSymbol *p; // r8
   hkGeometryUtils::IVertices *v21; // rcx
   unsigned int v22; // edx
   unsigned int v23; // eax
   char *v24; // rax
   UFG::AudioTriggerRegionTag *j; // rdi
-  UFG::qVector3 pos; // [rsp+20h] [rbp-B8h]
+  UFG::qVector3 pos; // [rsp+20h] [rbp-B8h] BYREF
   __int64 v27; // [rsp+30h] [rbp-A8h]
-  UFG::AudioTriggerRegionEvent thisEvent; // [rsp+38h] [rbp-A0h]
-  UFG::AudioTriggerRegionEvent v29; // [rsp+70h] [rbp-68h]
+  UFG::AudioTriggerRegionEvent thisEvent; // [rsp+38h] [rbp-A0h] BYREF
+  UFG::AudioTriggerRegionEvent v29; // [rsp+70h] [rbp-68h] BYREF
 
   v27 = -2i64;
-  v1 = pIn;
-  v2 = pIn->m_triggerPosition.y;
-  v3 = pIn->m_triggerPosition.z;
+  y = pIn->m_triggerPosition.y;
+  z = pIn->m_triggerPosition.z;
   pos.x = pIn->m_triggerPosition.x;
-  pos.y = v2;
-  pos.z = v3;
+  pos.y = y;
+  pos.z = z;
   v4 = 0;
-  v5 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::AudioTriggerRegion::msAudioTriggerRegions);
-  if ( v5 )
+  Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::AudioTriggerRegion::msAudioTriggerRegions);
+  if ( Head )
   {
-    v6 = (signed __int64)&v5[-16].mCachedBufferPtr;
-    if ( v5 != (Render::SkinningCacheNode *)608 )
+    p_mCachedBufferPtr = &Head[-16].mCachedBufferPtr;
+    if ( Head != (Render::SkinningCacheNode *)608 )
     {
       while ( 1 )
       {
-        v7 = (UFG::qBaseNodeRB *)(v6 + 608);
-        if ( !v6 )
+        v7 = (UFG::qBaseNodeRB *)(p_mCachedBufferPtr + 76);
+        if ( !p_mCachedBufferPtr )
           v7 = 0i64;
-        v8 = UFG::qBaseTreeRB::GetNext(&UFG::AudioTriggerRegion::msAudioTriggerRegions.mTree, v7);
-        v9 = (signed __int64)v8[-9].mNULL.mChild;
-        if ( !v8 )
-          v9 = 0i64;
+        Next = UFG::qBaseTreeRB::GetNext(&UFG::AudioTriggerRegion::msAudioTriggerRegions.mTree, v7);
+        mChild = Next[-9].mNULL.mChild;
+        if ( !Next )
+          mChild = 0i64;
         v10 = 0;
-        v11 = v1->m_containmentInfo.m_regionsContainedIn.size;
-        if ( v11 )
+        size = pIn->m_containmentInfo.m_regionsContainedIn.size;
+        if ( size )
         {
-          while ( *(_DWORD *)(v6 + 64) != v1->m_containmentInfo.m_regionsContainedIn.p[v10].mUID )
+          while ( *((_DWORD *)p_mCachedBufferPtr + 16) != pIn->m_containmentInfo.m_regionsContainedIn.p[v10].mUID )
           {
-            if ( ++v10 >= v11 )
+            if ( ++v10 >= size )
               goto LABEL_10;
           }
         }
@@ -1116,43 +1084,47 @@ LABEL_10:
           v10 = -1;
         }
         v12 = v10 != -1;
-        if ( UFG::TriggerRegion::IsHitPoint((UFG::TriggerRegion *)v6, &pos) )
+        if ( UFG::TriggerRegion::IsHitPoint((UFG::TriggerRegion *)p_mCachedBufferPtr, &pos) )
         {
           if ( v12
             || !UFG::AudioTriggerRegion::CheckContainmentForEntry(
-                  (UFG::AudioTriggerRegion *)v6,
-                  &v1->m_containmentInfo,
+                  (UFG::AudioTriggerRegion *)p_mCachedBufferPtr,
+                  &pIn->m_containmentInfo,
                   1) )
           {
             goto LABEL_44;
           }
           if ( Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(v14, v13, v15) )
             UFG::AudioEntity::Init(
-              (UFG::AudioEntity *)(v6 + 288),
-              (UFG::qSymbol *)(*(_QWORD *)(v6 + 40) + 72i64),
+              (UFG::AudioEntity *)(p_mCachedBufferPtr + 36),
+              (UFG::qSymbolUC *)&p_mCachedBufferPtr[5]->mDebugName[20],
               &UFG::qMatrix44::msIdentity);
           if ( UFG::TiDo::sm_ambiencesInfo )
           {
-            v16 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)(v6 + 64));
+            v16 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)p_mCachedBufferPtr + 16);
             UFG::qPrintf("AudioTriggerRegion:: Lst Enter :: %s\n", v16);
           }
-          for ( i = (UFG::AudioTriggerRegionTag *)(*(_QWORD *)(v6 + 648) - 8i64);
-                i != (UFG::AudioTriggerRegionTag *)(v6 + 632);
+          for ( i = (UFG::AudioTriggerRegionTag *)&p_mCachedBufferPtr[81][-1].pad1;
+                i != (UFG::AudioTriggerRegionTag *)(p_mCachedBufferPtr + 79);
                 i = (UFG::AudioTriggerRegionTag *)&i->mNext[-1].mNext )
           {
-            UFG::AudioTriggerRegionEvent::AudioTriggerRegionEvent(&thisEvent, 0i64, (UFG::AudioTriggerRegion *)v6, i);
+            UFG::AudioTriggerRegionEvent::AudioTriggerRegionEvent(
+              &thisEvent,
+              0i64,
+              (UFG::AudioTriggerRegion *)p_mCachedBufferPtr,
+              i);
             UFG::qWiseSymbol::operator=(&i->mAudioModeUidOnExit, &i->mAudioModeUidOnEnter);
-            UFG::AudioTriggerRegion::ApplyAudioZoneListener((UFG::AudioTriggerRegion *)v6, &thisEvent);
+            UFG::AudioTriggerRegion::ApplyAudioZoneListener((UFG::AudioTriggerRegion *)p_mCachedBufferPtr, &thisEvent);
             thisEvent.vfptr = (UFG::AudioTriggerRegionEventVtbl *)&UFG::AudioTriggerRegionEvent::`vftable;
             _((AMD_HD3D *)thisEvent.mAudioModeUid.mUID);
             _((AMD_HD3D *)thisEvent.mAudioUidOnExit.mUID);
             _((AMD_HD3D *)thisEvent.mAudioUidOnEnter.mUID);
           }
           v18 = 0;
-          v19 = v1->m_containmentInfo.m_regionsContainedIn.size;
+          v19 = pIn->m_containmentInfo.m_regionsContainedIn.size;
           if ( !v19 )
             goto LABEL_25;
-          while ( *(_DWORD *)(v6 + 64) != v1->m_containmentInfo.m_regionsContainedIn.p[v18].mUID )
+          while ( *((_DWORD *)p_mCachedBufferPtr + 16) != pIn->m_containmentInfo.m_regionsContainedIn.p[v18].mUID )
           {
             if ( ++v18 >= v19 )
               goto LABEL_25;
@@ -1160,26 +1132,26 @@ LABEL_10:
           if ( v18 == -1 )
 LABEL_25:
             UFG::qArray<UFG::qSymbol,0>::Add(
-              &v1->m_containmentInfo.m_regionsContainedIn,
-              (UFG::qSymbol *)(v6 + 64),
+              &pIn->m_containmentInfo.m_regionsContainedIn,
+              (UFG::qSymbol *)p_mCachedBufferPtr + 16,
               "RegionContainmentInfo.Array");
         }
         else
         {
           if ( !v12
             || !UFG::AudioTriggerRegion::CheckContainmentForExit(
-                  (UFG::AudioTriggerRegion *)v6,
-                  &v1->m_containmentInfo,
+                  (UFG::AudioTriggerRegion *)p_mCachedBufferPtr,
+                  &pIn->m_containmentInfo,
                   1) )
           {
             goto LABEL_44;
           }
           v21 = 0i64;
-          v22 = v1->m_containmentInfo.m_regionsContainedIn.size;
+          v22 = pIn->m_containmentInfo.m_regionsContainedIn.size;
           if ( v22 )
           {
-            v20 = v1->m_containmentInfo.m_regionsContainedIn.p;
-            while ( *(_DWORD *)(v6 + 64) != v20[(_QWORD)v21].mUID )
+            p = pIn->m_containmentInfo.m_regionsContainedIn.p;
+            while ( *((_DWORD *)p_mCachedBufferPtr + 16) != p[(_QWORD)v21].mUID )
             {
               v21 = (hkGeometryUtils::IVertices *)(unsigned int)((_DWORD)v21 + 1);
               if ( (unsigned int)v21 >= v22 )
@@ -1187,38 +1159,42 @@ LABEL_25:
             }
             if ( (_DWORD)v21 != -1 )
             {
-              v20[(_QWORD)v21] = v20[v22 - 1];
-              v23 = v1->m_containmentInfo.m_regionsContainedIn.size;
+              p[(_QWORD)v21] = p[v22 - 1];
+              v23 = pIn->m_containmentInfo.m_regionsContainedIn.size;
               if ( v23 > 1 )
-                v1->m_containmentInfo.m_regionsContainedIn.size = v23 - 1;
+                pIn->m_containmentInfo.m_regionsContainedIn.size = v23 - 1;
               else
-                v1->m_containmentInfo.m_regionsContainedIn.size = 0;
+                pIn->m_containmentInfo.m_regionsContainedIn.size = 0;
             }
           }
 LABEL_37:
           if ( UFG::TiDo::sm_ambiencesInfo )
           {
-            v24 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)(v6 + 64));
+            v24 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)p_mCachedBufferPtr + 16);
             UFG::qPrintf("AudioTriggerRegion:: Lst Exit :: %s\n", v24);
           }
-          for ( j = (UFG::AudioTriggerRegionTag *)(*(_QWORD *)(v6 + 648) - 8i64);
-                j != (UFG::AudioTriggerRegionTag *)(v6 + 632);
+          for ( j = (UFG::AudioTriggerRegionTag *)&p_mCachedBufferPtr[81][-1].pad1;
+                j != (UFG::AudioTriggerRegionTag *)(p_mCachedBufferPtr + 79);
                 j = (UFG::AudioTriggerRegionTag *)&j->mNext[-1].mNext )
           {
-            UFG::AudioTriggerRegionEvent::AudioTriggerRegionEvent(&v29, 0i64, (UFG::AudioTriggerRegion *)v6, j);
-            UFG::AudioTriggerRegion::RemoveAudioZoneListener((UFG::AudioTriggerRegion *)v6, &v29);
+            UFG::AudioTriggerRegionEvent::AudioTriggerRegionEvent(
+              &v29,
+              0i64,
+              (UFG::AudioTriggerRegion *)p_mCachedBufferPtr,
+              j);
+            UFG::AudioTriggerRegion::RemoveAudioZoneListener((UFG::AudioTriggerRegion *)p_mCachedBufferPtr, &v29);
             v29.vfptr = (UFG::AudioTriggerRegionEventVtbl *)&UFG::AudioTriggerRegionEvent::`vftable;
             _((AMD_HD3D *)v29.mAudioModeUid.mUID);
             _((AMD_HD3D *)v29.mAudioUidOnExit.mUID);
             _((AMD_HD3D *)v29.mAudioUidOnEnter.mUID);
           }
-          if ( Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(v21, v22, (int)v20) )
-            UFG::AudioEntity::Shutdown((UFG::AudioEntity *)(v6 + 288));
+          if ( Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(v21, v22, (int)p) )
+            UFG::AudioEntity::Shutdown((UFG::AudioEntity *)(p_mCachedBufferPtr + 36));
         }
         v4 = 1;
 LABEL_44:
-        v6 = v9;
-        if ( !v9 )
+        p_mCachedBufferPtr = (Illusion::Buffer **)mChild;
+        if ( !mChild )
         {
           if ( v4 )
             UFG::TiDo::MarkAllOcclusionInfosDirty();
@@ -1233,51 +1209,45 @@ LABEL_44:
 // RVA: 0x598290
 void __fastcall UFG::AudioTriggerRegion::CheckRegionContainment(UFG::AudioTriggerRegion *regionToCheck, bool listSkip)
 {
-  UFG::AudioTriggerRegion *v2; // rdi
-  UFG::RegionComponent *v3; // rcx
-  bool v4; // bl
-  UFG::qBaseTreeRB *v5; // rax
+  UFG::RegionComponent *m_pPointer; // rcx
+  UFG::qBaseTreeRB *Next; // rax
   UFG::AudioTriggerRegion *v6; // rbx
   UFG::RegionComponent *v7; // rcx
-  unsigned int v8; // edx
+  unsigned int size; // edx
   unsigned int v9; // eax
-  UFG::qSymbol *v10; // rcx
+  UFG::qSymbol *p; // rcx
   unsigned int v11; // edx
   unsigned int v12; // eax
   UFG::qSymbol *v13; // rcx
-  UFG::qSymbol *v14; // rdx
-  UFG::qArray<UFG::qSymbol,0> *v15; // rcx
+  UFG::qNamed *v14; // rdx
+  UFG::qArray<UFG::qSymbol,0> *p_m_regionsContainedIn; // rcx
   unsigned int v16; // edx
   unsigned int v17; // eax
   UFG::qSymbol *v18; // rcx
   unsigned int v19; // edx
   unsigned int v20; // eax
   UFG::qSymbol *v21; // rcx
-  UFG::qBox v22; // [rsp+20h] [rbp-30h]
-  UFG::qBox pBox; // [rsp+38h] [rbp-18h]
+  UFG::qBox v22; // [rsp+20h] [rbp-30h] BYREF
+  UFG::qBox pBox; // [rsp+38h] [rbp-18h] BYREF
 
-  v2 = regionToCheck;
-  v3 = (UFG::RegionComponent *)regionToCheck->mpRegion.m_pPointer;
-  v4 = listSkip;
-  *(_QWORD *)&pBox.mMin.x = 0i64;
-  *(_QWORD *)&pBox.mMin.z = 0i64;
-  *(_QWORD *)&pBox.mMax.y = 0i64;
-  UFG::RegionComponent::GetBoundingBox(v3, &pBox);
-  if ( v4 )
-    v5 = UFG::qBaseTreeRB::GetNext(&UFG::AudioTriggerRegion::msAudioTriggerRegions.mTree, &v2->mNode);
+  m_pPointer = (UFG::RegionComponent *)regionToCheck->mpRegion.m_pPointer;
+  memset(&pBox, 0, sizeof(pBox));
+  UFG::RegionComponent::GetBoundingBox(m_pPointer, &pBox);
+  if ( listSkip )
+    Next = UFG::qBaseTreeRB::GetNext(
+             &UFG::AudioTriggerRegion::msAudioTriggerRegions.mTree,
+             &regionToCheck->UFG::qNodeRB<UFG::AudioTriggerRegion>::mNode);
   else
-    v5 = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::AudioTriggerRegion::msAudioTriggerRegions);
+    Next = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::AudioTriggerRegion::msAudioTriggerRegions);
   while ( 1 )
   {
-    v6 = (UFG::AudioTriggerRegion *)(v5 ? v5[-9].mNULL.mChild : 0i64);
+    v6 = Next ? (UFG::AudioTriggerRegion *)Next[-9].mNULL.mChild : 0i64;
     if ( !v6 )
       break;
-    if ( v6 == v2 )
+    if ( v6 == regionToCheck )
       goto LABEL_48;
     v7 = (UFG::RegionComponent *)v6->mpRegion.m_pPointer;
-    *(_QWORD *)&v22.mMin.x = 0i64;
-    *(_QWORD *)&v22.mMin.z = 0i64;
-    *(_QWORD *)&v22.mMax.y = 0i64;
+    memset(&v22, 0, sizeof(v22));
     UFG::RegionComponent::GetBoundingBox(v7, &v22);
     if ( v22.mMin.x <= pBox.mMax.x
       && v22.mMax.x >= pBox.mMin.x
@@ -1286,58 +1256,58 @@ void __fastcall UFG::AudioTriggerRegion::CheckRegionContainment(UFG::AudioTrigge
       && v22.mMin.z <= pBox.mMax.z
       && v22.mMax.z >= pBox.mMin.z )
     {
-      if ( UFG::AudioTriggerRegion::Contains(v6, v2) == 1 )
+      if ( UFG::AudioTriggerRegion::Contains(v6, regionToCheck) == eContainmentType_FullyContained )
       {
-        v8 = v2->m_regionsContainingMe.m_regionsContainedIn.size;
+        size = regionToCheck->m_regionsContainingMe.m_regionsContainedIn.size;
         v9 = 0;
-        if ( !v8 )
+        if ( !size )
           goto LABEL_22;
-        v10 = v2->m_regionsContainingMe.m_regionsContainedIn.p;
-        while ( v6->i_name.mUID != v10->mUID )
+        p = regionToCheck->m_regionsContainingMe.m_regionsContainedIn.p;
+        while ( v6->i_name.mUID != p->mUID )
         {
           ++v9;
-          ++v10;
-          if ( v9 >= v8 )
+          ++p;
+          if ( v9 >= size )
             goto LABEL_22;
         }
         if ( v9 == -1 )
 LABEL_22:
           UFG::qArray<UFG::qSymbol,0>::Add(
-            &v2->m_regionsContainingMe.m_regionsContainedIn,
+            &regionToCheck->m_regionsContainingMe.m_regionsContainedIn,
             &v6->i_name,
             "RegionContainmentInfo.Array");
         v11 = v6->m_regionsIContain.m_regionsContainedIn.size;
         v12 = 0;
         if ( !v11 )
-          goto LABEL_51;
+          goto LABEL_29;
         v13 = v6->m_regionsIContain.m_regionsContainedIn.p;
-        while ( v2->i_name.mUID != v13->mUID )
+        while ( regionToCheck->i_name.mUID != v13->mUID )
         {
           ++v12;
           ++v13;
           if ( v12 >= v11 )
           {
-            v14 = &v2->i_name;
-            v15 = &v6->m_regionsIContain.m_regionsContainedIn;
+            v14 = &regionToCheck->UFG::qNamed;
+            p_m_regionsContainedIn = &v6->m_regionsIContain.m_regionsContainedIn;
             goto LABEL_45;
           }
         }
         if ( v12 == -1 )
         {
-LABEL_51:
-          v14 = &v2->i_name;
-          v15 = &v6->m_regionsIContain.m_regionsContainedIn;
+LABEL_29:
+          v14 = &regionToCheck->UFG::qNamed;
+          p_m_regionsContainedIn = &v6->m_regionsIContain.m_regionsContainedIn;
           goto LABEL_45;
         }
       }
-      else if ( UFG::AudioTriggerRegion::Contains(v2, v6) == 1 )
+      else if ( UFG::AudioTriggerRegion::Contains(regionToCheck, v6) == eContainmentType_FullyContained )
       {
         v16 = v6->m_regionsContainingMe.m_regionsContainedIn.size;
         v17 = 0;
         if ( !v16 )
           goto LABEL_37;
         v18 = v6->m_regionsContainingMe.m_regionsContainedIn.p;
-        while ( v2->i_name.mUID != v18->mUID )
+        while ( regionToCheck->i_name.mUID != v18->mUID )
         {
           ++v17;
           ++v18;
@@ -1348,13 +1318,13 @@ LABEL_51:
 LABEL_37:
           UFG::qArray<UFG::qSymbol,0>::Add(
             &v6->m_regionsContainingMe.m_regionsContainedIn,
-            &v2->i_name,
+            &regionToCheck->i_name,
             "RegionContainmentInfo.Array");
-        v19 = v2->m_regionsIContain.m_regionsContainedIn.size;
+        v19 = regionToCheck->m_regionsIContain.m_regionsContainedIn.size;
         v20 = 0;
         if ( !v19 )
           goto LABEL_44;
-        v21 = v2->m_regionsIContain.m_regionsContainedIn.p;
+        v21 = regionToCheck->m_regionsIContain.m_regionsContainedIn.p;
         while ( v6->i_name.mUID != v21->mUID )
         {
           ++v20;
@@ -1365,10 +1335,10 @@ LABEL_37:
         if ( v20 == -1 )
         {
 LABEL_44:
-          v14 = &v6->i_name;
-          v15 = &v2->m_regionsIContain.m_regionsContainedIn;
+          v14 = &v6->UFG::qNamed;
+          p_m_regionsContainedIn = &regionToCheck->m_regionsIContain.m_regionsContainedIn;
 LABEL_45:
-          UFG::qArray<UFG::qSymbol,0>::Add(v15, v14, "RegionContainmentInfo.Array");
+          UFG::qArray<UFG::qSymbol,0>::Add(p_m_regionsContainedIn, &v14->i_name, "RegionContainmentInfo.Array");
         }
       }
       ++UFG::g_dbgPass;
@@ -1376,7 +1346,9 @@ LABEL_45:
     }
     ++UFG::g_dbgFail;
 LABEL_48:
-    v5 = UFG::qBaseTreeRB::GetNext(&UFG::AudioTriggerRegion::msAudioTriggerRegions.mTree, &v6->mNode);
+    Next = UFG::qBaseTreeRB::GetNext(
+             &UFG::AudioTriggerRegion::msAudioTriggerRegions.mTree,
+             &v6->UFG::qNodeRB<UFG::AudioTriggerRegion>::mNode);
   }
 }
 
@@ -1386,79 +1358,79 @@ __int64 UFG::_dynamic_initializer_for__sPolyVsPolyCache__()
 {
   UFG::sPolyVsPolyCache.mTree.mNULL.mParent = (UFG::qBaseNodeVariableRB<unsigned __int64> *)((unsigned __int64)&UFG::sPolyVsPolyCache.mTree.mNULL & 0xFFFFFFFFFFFFFFFEui64);
   UFG::sPolyVsPolyCache.mTree.mRoot.mParent = (UFG::qBaseNodeVariableRB<unsigned __int64> *)((unsigned __int64)&UFG::sPolyVsPolyCache.mTree.mNULL & 0xFFFFFFFFFFFFFFFEui64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__sPolyVsPolyCache__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__sPolyVsPolyCache__);
 }
 
 // File Line: 838
 // RVA: 0x59C2F0
-UFG::AudioTriggerRegion *__fastcall UFG::AudioTriggerRegion::FindInnermostRegionOfTypeContainingObject(UFG::AudioTriggerRegion *this, UFG::RegionContainmentInfo *objectContainment, UFG::AudioTriggerRegion::eTypeFlags type)
+UFG::qBaseNodeRB **__fastcall UFG::AudioTriggerRegion::FindInnermostRegionOfTypeContainingObject(
+        UFG::AudioTriggerRegion *this,
+        UFG::RegionContainmentInfo *objectContainment,
+        UFG::AudioTriggerRegion::eTypeFlags type)
 {
-  UFG::AudioTriggerRegion::eTypeFlags v3; // er15
-  signed __int64 v4; // r12
-  __int64 v5; // rsi
+  UFG::qBaseNodeRB **v4; // r12
+  __int64 size; // rsi
   unsigned int v6; // ebp
   UFG::allocator::free_link *v7; // rax
   unsigned __int64 v8; // rax
-  unsigned int *v9; // r13
-  _QWORD *v10; // rbx
-  unsigned int *v11; // rdi
+  UFG::qSymbol *p; // r13
+  UFG::allocator::free_link *v10; // rbx
+  UFG::qSymbol *v11; // rdi
   __int64 v12; // r14
   UFG::qBaseTreeRB *v13; // rax
-  signed __int64 v14; // rax
+  UFG::qBaseNodeRB **mChild; // rax
   UFG::allocator::free_link *v15; // r15
-  unsigned int *v16; // r14
+  UFG::qSymbol *v16; // r14
   __int64 v17; // rcx
   __int64 v18; // rbp
-  unsigned int v19; // eax
-  signed __int64 v20; // rbx
+  unsigned int mUID; // eax
+  UFG::allocator::free_link *mNext; // rbx
   char v21; // si
-  unsigned int *v22; // r11
+  UFG::qSymbol *v22; // r11
   __int64 v23; // rdi
   __int64 v24; // rcx
-  unsigned int v25; // er8
+  unsigned int v25; // r8d
   UFG::allocator::free_link *mem; // [rsp+30h] [rbp-48h]
-  __int64 v28; // [rsp+38h] [rbp-40h]
-  void *ptr; // [rsp+40h] [rbp-38h]
-  __int64 v30; // [rsp+88h] [rbp+10h]
+  UFG::qArray<UFG::qSymbol,0> v28; // [rsp+38h] [rbp-40h] BYREF
+  __int64 v29; // [rsp+88h] [rbp+10h]
 
-  v3 = type;
-  ptr = 0i64;
-  v28 = 0i64;
-  UFG::qArray<UFG::qSymbol,0>::Clone(&objectContainment->m_regionsContainedIn, (UFG::qArray<UFG::qSymbol,0> *)&v28);
+  v28.p = 0i64;
+  *(_QWORD *)&v28.size = 0i64;
+  UFG::qArray<UFG::qSymbol,0>::Clone(&objectContainment->m_regionsContainedIn, &v28);
   v4 = 0i64;
-  v5 = (unsigned int)v28;
-  v6 = v28;
+  size = v28.size;
+  v6 = v28.size;
   v7 = 0i64;
   mem = 0i64;
-  if ( (_DWORD)v28 )
+  if ( v28.size )
   {
-    v8 = 8i64 * (unsigned int)v28;
-    if ( !is_mul_ok((unsigned int)v28, 8ui64) )
+    v8 = 8i64 * v28.size;
+    if ( !is_mul_ok(v28.size, 8ui64) )
       v8 = -1i64;
     v7 = UFG::qMalloc(v8, "qArray.Reallocate(Constructor)", 0i64);
     mem = v7;
   }
-  v9 = (unsigned int *)ptr;
-  if ( (_DWORD)v5 )
+  p = v28.p;
+  if ( (_DWORD)size )
   {
-    v10 = &v7->mNext;
-    v11 = (unsigned int *)ptr;
-    v12 = v5;
+    v10 = v7;
+    v11 = v28.p;
+    v12 = size;
     do
     {
-      if ( *v11
-        && (v13 = UFG::qBaseTreeRB::Get(&UFG::AudioTriggerRegion::msAudioTriggerRegions.mTree, *v11)) != 0i64
-        && (v14 = (signed __int64)v13[-9].mNULL.mChild) != 0
-        && v3 & *(_DWORD *)(v14 + 736) )
+      if ( v11->mUID
+        && (v13 = UFG::qBaseTreeRB::Get(&UFG::AudioTriggerRegion::msAudioTriggerRegions.mTree, v11->mUID)) != 0i64
+        && (mChild = v13[-9].mNULL.mChild) != 0i64
+        && (type & (_DWORD)mChild[92]) != 0 )
       {
-        v4 = v14;
-        *v10 = v14;
+        v4 = mChild;
+        v10->mNext = (UFG::allocator::free_link *)mChild;
       }
       else
       {
-        *v11 = UFG::gNullQSymbol.mUID;
+        v11->mUID = UFG::gNullQSymbol.mUID;
         --v6;
-        *v10 = 0i64;
+        v10->mNext = 0i64;
       }
       ++v11;
       ++v10;
@@ -1466,33 +1438,33 @@ UFG::AudioTriggerRegion *__fastcall UFG::AudioTriggerRegion::FindInnermostRegion
     }
     while ( v12 );
   }
-  if ( v6 > 1 && (_DWORD)v5 )
+  if ( v6 > 1 && (_DWORD)size )
   {
     v15 = mem;
-    v16 = v9;
-    v17 = v5;
-    v30 = v5;
-    v18 = v5;
-    v19 = UFG::gNullQSymbol.mUID;
+    v16 = p;
+    v17 = size;
+    v29 = size;
+    v18 = size;
+    mUID = UFG::gNullQSymbol.mUID;
     do
     {
-      if ( *v16 != v19 )
+      if ( v16->mUID != mUID )
       {
-        v20 = (signed __int64)v15->mNext;
+        mNext = v15->mNext;
         v21 = 0;
-        v22 = v9;
+        v22 = p;
         v23 = v17;
         do
         {
-          if ( *v22 != v19 )
+          if ( v22->mUID != mUID )
           {
-            if ( v20 )
+            if ( mNext )
             {
               v24 = 0i64;
-              v25 = *(_DWORD *)(v20 + 688);
+              v25 = (unsigned int)mNext[86].mNext;
               if ( v25 )
               {
-                while ( *v22 != *(_DWORD *)(*(_QWORD *)(v20 + 696) + 4 * v24) )
+                while ( v22->mUID != *((_DWORD *)&mNext[87].mNext->mNext + v24) )
                 {
                   v24 = (unsigned int)(v24 + 1);
                   if ( (unsigned int)v24 >= v25 )
@@ -1500,10 +1472,10 @@ UFG::AudioTriggerRegion *__fastcall UFG::AudioTriggerRegion::FindInnermostRegion
                 }
                 if ( (_DWORD)v24 != -1 )
                 {
-                  *v16 = v19;
+                  v16->mUID = mUID;
                   v15->mNext = 0i64;
                   v21 = 1;
-                  v19 = UFG::gNullQSymbol.mUID;
+                  mUID = UFG::gNullQSymbol.mUID;
                 }
               }
             }
@@ -1514,8 +1486,8 @@ LABEL_27:
         }
         while ( v23 );
         if ( !v21 )
-          v4 = v20;
-        v17 = v30;
+          v4 = (UFG::qBaseNodeRB **)mNext;
+        v17 = v29;
       }
       ++v16;
       ++v15;
@@ -1525,31 +1497,32 @@ LABEL_27:
   }
   if ( mem )
     operator delete[](mem);
-  if ( v9 )
+  if ( p )
   {
-    `eh vector destructor iterator(v9, 4ui64, *(v9 - 1), (void (__fastcall *)(void *))_);
-    operator delete[](v9 - 1);
+    `eh vector destructor iterator(p, 4ui64, p[-1].mUID, (void (__fastcall *)(void *))_);
+    operator delete[](&p[-1]);
   }
-  return (UFG::AudioTriggerRegion *)v4;
+  return v4;
 }
 
 // File Line: 913
 // RVA: 0x598D20
-__int64 __fastcall UFG::AudioTriggerRegion::Contains(UFG::AudioTriggerRegion *this, UFG::AudioTriggerRegion *audioRegion)
+__int64 __fastcall UFG::AudioTriggerRegion::Contains(
+        UFG::AudioTriggerRegion *this,
+        UFG::AudioTriggerRegion *audioRegion)
 {
   UFG::AudioTriggerRegion *v2; // rsi
-  UFG::AudioTriggerRegion *v3; // r13
-  UFG::RegionComponent *v4; // r10
-  UFG::RegionBase *v5; // rbx
+  UFG::RegionComponent *m_pPointer; // r10
+  UFG::RegionBase *mPtr; // rbx
   unsigned __int64 v6; // r9
   UFG::qTreeRB64<UFG::PolyVsPolyCache,UFG::PolyVsPolyCache,1> *v7; // rax
   UFG::qTreeRB64<UFG::PolyVsPolyCache,UFG::PolyVsPolyCache,1> *i; // rcx
-  UFG::TransformNodeComponent *v10; // rbp
-  __int64 v11; // r14
-  unsigned int v12; // er12
-  int v13; // edi
-  __int64 v14; // rsi
-  UFG::RegionBaseVtbl *v15; // rax
+  UFG::TransformNodeComponent *XformNode; // rbp
+  unsigned int mRefCount; // r12d
+  int v12; // edi
+  __int64 v13; // rsi
+  __int64 v14; // r14
+  UFG::RegionBaseVtbl *vfptr; // rax
   float v16; // xmm2_4
   float v17; // xmm6_4
   float v18; // xmm11_4
@@ -1558,28 +1531,25 @@ __int64 __fastcall UFG::AudioTriggerRegion::Contains(UFG::AudioTriggerRegion *th
   float v21; // xmm12_4
   float v22; // xmm10_4
   float v23; // xmm8_4
-  unsigned int v24; // ebx
+  unsigned int j; // ebx
   float v25; // xmm6_4
   float v26; // xmm5_4
   float v27; // xmm4_4
   float v28; // xmm3_4
   float v29; // xmm2_4
   float v30; // xmm4_4
-  unsigned int v31; // er15
-  UFG::SimObject *v32; // rbx
+  unsigned int v31; // r15d
+  UFG::SimObject *m_pSimObject; // rbx
   UFG::SimObject *v33; // rdi
   UFG::allocator::free_link *v34; // rax
   UFG::qBaseNodeVariableRB<unsigned __int64> *v35; // r8
-  __int64 v36; // rdx
+  __int64 mUID; // rdx
   __int64 v37; // rcx
-  UFG::qVector3 pos; // [rsp+28h] [rbp-B0h]
-  UFG::AudioTriggerRegion *v39; // [rsp+E8h] [rbp+10h]
+  UFG::qVector3 pos; // [rsp+28h] [rbp-B0h] BYREF
 
-  v39 = audioRegion;
   v2 = audioRegion;
-  v3 = this;
-  v4 = (UFG::RegionComponent *)audioRegion->mpRegion.m_pPointer;
-  v5 = v4->mpRegion.mPtr;
+  m_pPointer = (UFG::RegionComponent *)audioRegion->mpRegion.m_pPointer;
+  mPtr = m_pPointer->mpRegion.mPtr;
   v6 = this->m_pSimObject->m_Name.mUID | ((unsigned __int64)audioRegion->m_pSimObject->m_Name.mUID << 32);
   if ( v6 )
   {
@@ -1605,111 +1575,113 @@ __int64 __fastcall UFG::AudioTriggerRegion::Contains(UFG::AudioTriggerRegion *th
       return LODWORD(v7->mTree.mNULL.mParent);
   }
 LABEL_15:
-  v10 = UFG::RegionComponent::GetXformNode(v4);
-  UFG::TransformNodeComponent::UpdateWorldTransform(v10);
-  LODWORD(v11) = 0;
-  if ( v5->vfptr->GetType(v5) == 8 )
+  XformNode = (UFG::TransformNodeComponent *)UFG::RegionComponent::GetXformNode(m_pPointer);
+  UFG::TransformNodeComponent::UpdateWorldTransform(XformNode);
+  if ( mPtr->vfptr->GetType(mPtr) == RegionType_polygon )
   {
-    v12 = v5[1].mRefCount;
-    v13 = 0;
-    if ( v12 )
+    mRefCount = mPtr[1].mRefCount;
+    v12 = 0;
+    if ( mRefCount )
     {
-      v14 = 0i64;
-      v11 = v12;
+      v13 = 0i64;
+      v14 = mRefCount;
       do
       {
-        v15 = v5[1].vfptr;
-        v16 = (float)((float)((float)(*(float *)((char *)&v15->__vecDelDtor + v14 + 4) * v10->mWorldTransform.v1.y)
-                            + (float)(*(float *)((char *)&v15->__vecDelDtor + v14) * v10->mWorldTransform.v0.y))
-                    + (float)(*(float *)((char *)&v15->__vecDelDtor + v14 + 8) * v10->mWorldTransform.v2.y))
-            + v10->mWorldTransform.v3.y;
-        v17 = (float)((float)((float)(*(float *)((char *)&v15->__vecDelDtor + v14 + 4) * v10->mWorldTransform.v1.z)
-                            + (float)(*(float *)((char *)&v15->__vecDelDtor + v14) * v10->mWorldTransform.v0.z))
-                    + (float)(*(float *)((char *)&v15->__vecDelDtor + v14 + 8) * v10->mWorldTransform.v2.z))
-            + v10->mWorldTransform.v3.z;
-        pos.x = (float)((float)((float)(*(float *)((char *)&v15->__vecDelDtor + v14) * v10->mWorldTransform.v0.x)
-                              + (float)(*(float *)((char *)&v15->__vecDelDtor + v14 + 4) * v10->mWorldTransform.v1.x))
-                      + (float)(*(float *)((char *)&v15->__vecDelDtor + v14 + 8) * v10->mWorldTransform.v2.x))
-              + v10->mWorldTransform.v3.x;
+        vfptr = mPtr[1].vfptr;
+        v16 = (float)((float)((float)(*(float *)((char *)&vfptr->__vecDelDtor + v13 + 4)
+                                    * XformNode->mWorldTransform.v1.y)
+                            + (float)(*(float *)((char *)&vfptr->__vecDelDtor + v13) * XformNode->mWorldTransform.v0.y))
+                    + (float)(*(float *)((char *)&vfptr->__vecDelDtor + v13 + 8) * XformNode->mWorldTransform.v2.y))
+            + XformNode->mWorldTransform.v3.y;
+        v17 = (float)((float)((float)(*(float *)((char *)&vfptr->__vecDelDtor + v13 + 4)
+                                    * XformNode->mWorldTransform.v1.z)
+                            + (float)(*(float *)((char *)&vfptr->__vecDelDtor + v13) * XformNode->mWorldTransform.v0.z))
+                    + (float)(*(float *)((char *)&vfptr->__vecDelDtor + v13 + 8) * XformNode->mWorldTransform.v2.z))
+            + XformNode->mWorldTransform.v3.z;
+        pos.x = (float)((float)((float)(*(float *)((char *)&vfptr->__vecDelDtor + v13) * XformNode->mWorldTransform.v0.x)
+                              + (float)(*(float *)((char *)&vfptr->__vecDelDtor + v13 + 4)
+                                      * XformNode->mWorldTransform.v1.x))
+                      + (float)(*(float *)((char *)&vfptr->__vecDelDtor + v13 + 8) * XformNode->mWorldTransform.v2.x))
+              + XformNode->mWorldTransform.v3.x;
         pos.y = v16;
         pos.z = v17;
-        if ( UFG::RegionComponent::IsHitPoint((UFG::RegionComponent *)v3->mpRegion.m_pPointer, &pos) )
-          ++v13;
-        v14 += 12i64;
-        --v11;
+        if ( UFG::RegionComponent::IsHitPoint((UFG::RegionComponent *)this->mpRegion.m_pPointer, &pos) )
+          ++v12;
+        v13 += 12i64;
+        --v14;
       }
-      while ( v11 );
-      v2 = v39;
+      while ( v14 );
+      v2 = audioRegion;
     }
   }
   else
   {
-    if ( v5->vfptr->GetType(v5) != 3 )
+    if ( mPtr->vfptr->GetType(mPtr) != RegionType_box )
     {
 LABEL_40:
       v31 = 1;
       goto LABEL_41;
     }
-    v18 = *(float *)&v5[1].vfptr;
-    v19 = *((float *)&v5[1].vfptr + 1);
-    v20 = *(float *)&v5[1].mRefCount;
-    v21 = *((float *)&v5[1].mRefCount + 1);
-    v22 = *(float *)&v5[2].vfptr;
-    v23 = *((float *)&v5[2].vfptr + 1);
-    v13 = 0;
-    v12 = 8;
-    v24 = 0;
-    do
+    v18 = *(float *)&mPtr[1].vfptr;
+    v19 = *((float *)&mPtr[1].vfptr + 1);
+    v20 = *(float *)&mPtr[1].mRefCount;
+    v21 = *((float *)&mPtr[1].mRefCount + 1);
+    v22 = *(float *)&mPtr[2].vfptr;
+    v23 = *((float *)&mPtr[2].vfptr + 1);
+    v12 = 0;
+    mRefCount = 8;
+    for ( j = 0; j < 8; ++j )
     {
-      if ( v24 & 4 )
+      if ( (j & 4) != 0 )
         v25 = v23;
       else
         v25 = v20;
-      if ( v24 & 2 )
+      if ( (j & 2) != 0 )
         v26 = v22;
       else
         v26 = v19;
-      if ( v24 & 1 )
+      if ( (j & 1) != 0 )
         v27 = v21;
       else
         v27 = v18;
-      v28 = (float)((float)((float)(v27 * v10->mWorldTransform.v0.x) + (float)(v26 * v10->mWorldTransform.v1.x))
-                  + (float)(v25 * v10->mWorldTransform.v2.x))
-          + v10->mWorldTransform.v3.x;
-      v29 = (float)((float)((float)(v27 * v10->mWorldTransform.v0.y) + (float)(v26 * v10->mWorldTransform.v1.y))
-                  + (float)(v25 * v10->mWorldTransform.v2.y))
-          + v10->mWorldTransform.v3.y;
-      v30 = (float)((float)((float)(v27 * v10->mWorldTransform.v0.z) + (float)(v26 * v10->mWorldTransform.v1.z))
-                  + (float)(v25 * v10->mWorldTransform.v2.z))
-          + v10->mWorldTransform.v3.z;
+      v28 = (float)((float)((float)(v27 * XformNode->mWorldTransform.v0.x)
+                          + (float)(v26 * XformNode->mWorldTransform.v1.x))
+                  + (float)(v25 * XformNode->mWorldTransform.v2.x))
+          + XformNode->mWorldTransform.v3.x;
+      v29 = (float)((float)((float)(v27 * XformNode->mWorldTransform.v0.y)
+                          + (float)(v26 * XformNode->mWorldTransform.v1.y))
+                  + (float)(v25 * XformNode->mWorldTransform.v2.y))
+          + XformNode->mWorldTransform.v3.y;
+      v30 = (float)((float)((float)(v27 * XformNode->mWorldTransform.v0.z)
+                          + (float)(v26 * XformNode->mWorldTransform.v1.z))
+                  + (float)(v25 * XformNode->mWorldTransform.v2.z))
+          + XformNode->mWorldTransform.v3.z;
       pos.x = v28;
       pos.y = v29;
       pos.z = v30;
-      if ( UFG::RegionComponent::IsHitPoint((UFG::RegionComponent *)v3->mpRegion.m_pPointer, &pos) )
-        ++v13;
-      ++v24;
+      if ( UFG::RegionComponent::IsHitPoint((UFG::RegionComponent *)this->mpRegion.m_pPointer, &pos) )
+        ++v12;
     }
-    while ( v24 < 8 );
   }
-  if ( v13 == v12 )
+  if ( v12 == mRefCount )
     goto LABEL_40;
-  if ( v13 )
+  if ( v12 )
     v31 = 2;
   else
-    v31 = v11;
+    v31 = 0;
 LABEL_41:
-  v32 = v3->m_pSimObject;
+  m_pSimObject = this->m_pSimObject;
   v33 = v2->m_pSimObject;
   v34 = UFG::qMalloc(0x28ui64, "PolyVsPolyCache", 0i64);
   v35 = (UFG::qBaseNodeVariableRB<unsigned __int64> *)v34;
   if ( v34 )
   {
-    v36 = v32->m_Name.mUID;
+    mUID = m_pSimObject->m_Name.mUID;
     v37 = v33->m_Name.mUID;
     v34->mNext = 0i64;
     v34[1].mNext = 0i64;
     v34[2].mNext = 0i64;
-    v34[3].mNext = (UFG::allocator::free_link *)(v36 | (v37 << 32));
+    v34[3].mNext = (UFG::allocator::free_link *)(mUID | (v37 << 32));
     LODWORD(v34[4].mNext) = v31;
   }
   else
@@ -1724,118 +1696,114 @@ LABEL_41:
 // RVA: 0x5B01F0
 void UFG::AudioTriggerRegion::UpdateContainmentHierarchy(void)
 {
-  Render::SkinningCacheNode *v0; // rax
-  signed __int64 v1; // rbx
-  char *v2; // rcx
+  Render::SkinningCacheNode *Head; // rax
+  UFG::qBaseNodeRB *p_mCachedBufferPtr; // rbx
+  UFG::qBaseNodeRB *mParent; // rcx
   char *v3; // rdi
   char *v4; // rcx
   char *v5; // rdi
-  UFG::qBaseTreeRB *v6; // rax
+  UFG::qBaseTreeRB *Next; // rax
   Render::SkinningCacheNode *v7; // rax
-  UFG::AudioTriggerRegion *v8; // rbx
+  UFG::AudioTriggerRegion *mChild; // rbx
   UFG::qBaseTreeRB *v9; // rax
 
-  v0 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::AudioTriggerRegion::msAudioTriggerRegions);
-  v1 = (signed __int64)&v0[-16].mCachedBufferPtr;
-  if ( !v0 )
-    v1 = 0i64;
-  while ( v1 )
+  Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::AudioTriggerRegion::msAudioTriggerRegions);
+  p_mCachedBufferPtr = (UFG::qBaseNodeRB *)&Head[-16].mCachedBufferPtr;
+  if ( !Head )
+    p_mCachedBufferPtr = 0i64;
+  while ( p_mCachedBufferPtr )
   {
-    v2 = *(char **)(v1 + 672);
-    if ( v2 )
+    mParent = p_mCachedBufferPtr[21].mParent;
+    if ( mParent )
     {
-      v3 = v2 - 4;
-      `eh vector destructor iterator(v2, 4ui64, *((_DWORD *)v2 - 1), (void (__fastcall *)(void *))_);
+      v3 = (char *)(&mParent[-1].mUID + 1);
+      `eh vector destructor iterator(mParent, 4ui64, *(&mParent[-1].mUID + 1), (void (__fastcall *)(void *))_);
       operator delete[](v3);
     }
-    *(_QWORD *)(v1 + 672) = 0i64;
-    *(_QWORD *)(v1 + 664) = 0i64;
-    v4 = *(char **)(v1 + 696);
+    p_mCachedBufferPtr[21].mParent = 0i64;
+    *(_QWORD *)&p_mCachedBufferPtr[20].mUID = 0i64;
+    v4 = *(char **)&p_mCachedBufferPtr[21].mUID;
     if ( v4 )
     {
       v5 = v4 - 4;
       `eh vector destructor iterator(v4, 4ui64, *((_DWORD *)v4 - 1), (void (__fastcall *)(void *))_);
       operator delete[](v5);
     }
-    *(_QWORD *)(v1 + 696) = 0i64;
-    *(_QWORD *)(v1 + 688) = 0i64;
-    v6 = UFG::qBaseTreeRB::GetNext(
-           &UFG::AudioTriggerRegion::msAudioTriggerRegions.mTree,
-           (UFG::qBaseNodeRB *)(v1 + 608));
-    if ( v6 )
-      v1 = (signed __int64)v6[-9].mNULL.mChild;
+    *(_QWORD *)&p_mCachedBufferPtr[21].mUID = 0i64;
+    p_mCachedBufferPtr[21].mChild[1] = 0i64;
+    Next = UFG::qBaseTreeRB::GetNext(&UFG::AudioTriggerRegion::msAudioTriggerRegions.mTree, p_mCachedBufferPtr + 19);
+    if ( Next )
+      p_mCachedBufferPtr = (UFG::qBaseNodeRB *)Next[-9].mNULL.mChild;
     else
-      v1 = 0i64;
+      p_mCachedBufferPtr = 0i64;
   }
   v7 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::AudioTriggerRegion::msAudioTriggerRegions);
-  v8 = (UFG::AudioTriggerRegion *)&v7[-16].mCachedBufferPtr;
+  mChild = (UFG::AudioTriggerRegion *)&v7[-16].mCachedBufferPtr;
   if ( !v7 )
 LABEL_12:
-    v8 = 0i64;
-  while ( v8 )
+    mChild = 0i64;
+  while ( mChild )
   {
-    UFG::AudioTriggerRegion::CheckRegionContainment(v8, 1);
-    v9 = UFG::qBaseTreeRB::GetNext(&UFG::AudioTriggerRegion::msAudioTriggerRegions.mTree, &v8->mNode);
+    UFG::AudioTriggerRegion::CheckRegionContainment(mChild, 1);
+    v9 = UFG::qBaseTreeRB::GetNext(
+           &UFG::AudioTriggerRegion::msAudioTriggerRegions.mTree,
+           &mChild->UFG::qNodeRB<UFG::AudioTriggerRegion>::mNode);
     if ( !v9 )
       goto LABEL_12;
-    v8 = (UFG::AudioTriggerRegion *)v9[-9].mNULL.mChild;
+    mChild = (UFG::AudioTriggerRegion *)v9[-9].mNULL.mChild;
   }
   UFG::AudioTriggerRegion::sm_hierarchyIsDirty = 0;
 }
 
 // File Line: 1036
 // RVA: 0x597750
-char __fastcall UFG::AudioTriggerRegion::CheckContainmentForEntry(UFG::AudioTriggerRegion *this, UFG::RegionContainmentInfo *info, bool listener)
+char __fastcall UFG::AudioTriggerRegion::CheckContainmentForEntry(
+        UFG::AudioTriggerRegion *this,
+        UFG::RegionContainmentInfo *info,
+        bool listener)
 {
-  unsigned int v3; // ebp
-  unsigned int v4; // edi
-  bool v5; // r12
-  UFG::RegionContainmentInfo *v6; // r14
-  UFG::AudioTriggerRegion *v7; // r15
-  __int64 v8; // rsi
-  UFG::qSymbol *v9; // rbx
-  unsigned int v10; // edx
+  unsigned int size; // ebp
+  int v4; // edi
+  __int64 i; // rsi
+  UFG::qSymbol *p; // rbx
+  unsigned int mUID; // edx
   UFG::qBaseTreeRB *v11; // rax
-  signed __int64 v12; // r8
+  UFG::qBaseNodeRB **mChild; // r8
   int v13; // eax
   char v14; // r10
   unsigned int v15; // edx
   unsigned int v16; // eax
   UFG::qSymbol *v17; // rcx
 
-  v3 = this->m_regionsContainingMe.m_regionsContainedIn.size;
+  size = this->m_regionsContainingMe.m_regionsContainedIn.size;
   v4 = 0;
-  v5 = listener;
-  v6 = info;
-  v7 = this;
-  if ( !v3 )
+  if ( !size )
     return 1;
-  v8 = 0i64;
-  while ( 1 )
+  for ( i = 0i64; ; ++i )
   {
-    v9 = v7->m_regionsContainingMe.m_regionsContainedIn.p;
-    v10 = v9[v8].mUID;
-    if ( !v10 || (v11 = UFG::qBaseTreeRB::Get(&UFG::AudioTriggerRegion::msAudioTriggerRegions.mTree, v10)) == 0i64 )
+    p = this->m_regionsContainingMe.m_regionsContainedIn.p;
+    mUID = p[i].mUID;
+    if ( !mUID || (v11 = UFG::qBaseTreeRB::Get(&UFG::AudioTriggerRegion::msAudioTriggerRegions.mTree, mUID)) == 0i64 )
     {
-      v12 = 0i64;
+      mChild = 0i64;
 LABEL_12:
       v14 = 0;
       goto LABEL_13;
     }
-    v12 = (signed __int64)v11[-9].mNULL.mChild;
+    mChild = v11[-9].mNULL.mChild;
     if ( v11 == (UFG::qBaseTreeRB *)608 )
       goto LABEL_12;
-    v13 = *(_DWORD *)(v12 + 736);
-    if ( !(v13 & 1) && !(v13 & 2) && !(v13 & 4) && !(v13 & 0x20) )
+    v13 = *((_DWORD *)mChild + 184);
+    if ( (v13 & 1) == 0 && (v13 & 2) == 0 && (v13 & 4) == 0 && (v13 & 0x20) == 0 )
       goto LABEL_12;
     v14 = 1;
 LABEL_13:
-    v15 = v6->m_regionsContainedIn.size;
+    v15 = info->m_regionsContainedIn.size;
     v16 = 0;
     if ( v15 )
     {
-      v17 = v6->m_regionsContainedIn.p;
-      while ( v9[v8].mUID != v17->mUID )
+      v17 = info->m_regionsContainedIn.p;
+      while ( p[i].mUID != v17->mUID )
       {
         ++v16;
         ++v17;
@@ -1846,111 +1814,98 @@ LABEL_13:
         goto LABEL_22;
     }
 LABEL_19:
-    if ( v12 )
-    {
-      if ( v5 || v14 )
-        return 0;
-    }
+    if ( mChild && (listener || v14) )
+      break;
 LABEL_22:
-    ++v4;
-    ++v8;
-    if ( v4 >= v3 )
+    if ( ++v4 >= size )
       return 1;
   }
+  return 0;
 }
 
 // File Line: 1079
 // RVA: 0x597850
-char __fastcall UFG::AudioTriggerRegion::CheckContainmentForExit(UFG::AudioTriggerRegion *this, UFG::RegionContainmentInfo *info, bool listener)
+char __fastcall UFG::AudioTriggerRegion::CheckContainmentForExit(
+        UFG::AudioTriggerRegion *this,
+        UFG::RegionContainmentInfo *info,
+        bool listener)
 {
-  unsigned int v3; // ebp
-  bool v4; // r12
-  UFG::RegionContainmentInfo *v5; // r14
-  UFG::AudioTriggerRegion *v6; // r15
-  unsigned int v8; // edi
-  __int64 v9; // rsi
-  UFG::qSymbol *v10; // rbx
-  unsigned int v11; // edx
+  unsigned int size; // ebp
+  int v8; // edi
+  __int64 i; // rsi
+  UFG::qSymbol *p; // rbx
+  unsigned int mUID; // edx
   UFG::qBaseTreeRB *v12; // rax
-  signed __int64 v13; // rdx
+  UFG::qBaseNodeRB **mChild; // rdx
   int v14; // eax
   char v15; // r10
-  unsigned int v16; // er8
+  unsigned int v16; // r8d
   unsigned int v17; // eax
   UFG::qSymbol *v18; // rcx
 
-  v3 = this->m_regionsIContain.m_regionsContainedIn.size;
-  v4 = listener;
-  v5 = info;
-  v6 = this;
-  if ( !v3 )
+  size = this->m_regionsIContain.m_regionsContainedIn.size;
+  if ( !size )
     return 1;
   v8 = 0;
-  if ( !v3 )
-    return 1;
-  v9 = 0i64;
-  while ( 1 )
+  for ( i = 0i64; ; ++i )
   {
-    v10 = v6->m_regionsIContain.m_regionsContainedIn.p;
-    v11 = v10[v9].mUID;
-    if ( !v11 || (v12 = UFG::qBaseTreeRB::Get(&UFG::AudioTriggerRegion::msAudioTriggerRegions.mTree, v11)) == 0i64 )
+    p = this->m_regionsIContain.m_regionsContainedIn.p;
+    mUID = p[i].mUID;
+    if ( !mUID || (v12 = UFG::qBaseTreeRB::Get(&UFG::AudioTriggerRegion::msAudioTriggerRegions.mTree, mUID)) == 0i64 )
     {
-      v13 = 0i64;
+      mChild = 0i64;
 LABEL_14:
       v15 = 0;
       goto LABEL_15;
     }
-    v13 = (signed __int64)v12[-9].mNULL.mChild;
+    mChild = v12[-9].mNULL.mChild;
     if ( v12 == (UFG::qBaseTreeRB *)608 )
       goto LABEL_14;
-    v14 = *(_DWORD *)(v13 + 736);
-    if ( !(v14 & 1) && !(v14 & 2) && !(v14 & 4) && !(v14 & 0x20) )
+    v14 = *((_DWORD *)mChild + 184);
+    if ( (v14 & 1) == 0 && (v14 & 2) == 0 && (v14 & 4) == 0 && (v14 & 0x20) == 0 )
       goto LABEL_14;
     v15 = 1;
 LABEL_15:
-    v16 = v5->m_regionsContainedIn.size;
+    v16 = info->m_regionsContainedIn.size;
     v17 = 0;
     if ( v16 )
     {
-      v18 = v5->m_regionsContainedIn.p;
-      while ( v10[v9].mUID != v18->mUID )
+      v18 = info->m_regionsContainedIn.p;
+      while ( p[i].mUID != v18->mUID )
       {
         ++v17;
         ++v18;
         if ( v17 >= v16 )
           goto LABEL_24;
       }
-      if ( v17 != -1 && v13 && (v4 || v15) )
-        return 0;
+      if ( v17 != -1 && mChild && (listener || v15) )
+        break;
     }
 LABEL_24:
-    ++v8;
-    ++v9;
-    if ( v8 >= v3 )
+    if ( ++v8 >= size )
       return 1;
   }
+  return 0;
 }
 
 // File Line: 1243
 // RVA: 0x5967B0
-void __fastcall UFG::AudioTriggerRegion::ApplyAudioZoneListener(UFG::AudioTriggerRegion *this, UFG::AudioTriggerRegionEvent *thisEvent)
+void __fastcall UFG::AudioTriggerRegion::ApplyAudioZoneListener(
+        UFG::AudioTriggerRegion *this,
+        UFG::AudioTriggerRegionEvent *thisEvent)
 {
-  UFG::AudioTriggerRegion *v2; // rbx
-  UFG::AudioTriggerRegion *v3; // rcx
-  UFG::AudioTriggerRegionEvent *v4; // rsi
+  UFG::AudioTriggerRegion *mRegionEntity; // rcx
   UFG::qBaseTreeRB *v5; // rax
-  UFG::qWiseSymbol *v6; // rcx
+  UFG::qWiseSymbol *p_mUID; // rcx
   UFG::qBaseTreeRB *v7; // rax
-  unsigned int v8; // ebx
+  unsigned int mUID; // ebx
   unsigned int v9; // edi
-  UFG::TiDo *v10; // rax
+  UFG::TiDo *Instance; // rax
   UFG::TiDo *v11; // rax
-  UFG::qSymbol result; // [rsp+48h] [rbp+10h]
+  UFG::qSymbol result; // [rsp+48h] [rbp+10h] BYREF
 
-  v2 = this;
-  v3 = thisEvent->mRegionEntity;
-  v4 = thisEvent;
-  if ( v3 )
+  mRegionEntity = thisEvent->mRegionEntity;
+  if ( mRegionEntity )
   {
     switch ( thisEvent->mAudioType )
     {
@@ -1958,24 +1913,24 @@ void __fastcall UFG::AudioTriggerRegion::ApplyAudioZoneListener(UFG::AudioTrigge
         v5 = UFG::AudioEventPropertyManager::Find(thisEvent->mAudioUidOnEnter.mUID);
         if ( v5 )
         {
-          v6 = (UFG::qWiseSymbol *)&v5->mNULL.mChild[0][2].mUID;
-          if ( v6->mUID != -1 )
-            UFG::SoundBankManager::QueueBankForLoad(v6);
+          p_mUID = (UFG::qWiseSymbol *)&v5->mNULL.mChild[0][2].mUID;
+          if ( p_mUID->mUID != -1 )
+            UFG::SoundBankManager::QueueBankForLoad(p_mUID);
         }
-        v7 = UFG::AudioEventPropertyManager::Find(v4->mAudioUidOnEnter.mUID);
+        v7 = UFG::AudioEventPropertyManager::Find(thisEvent->mAudioUidOnEnter.mUID);
         if ( v7 && LOBYTE(v7->mNULL.mChild[0][3].mChild[0]) )
-          UFG::AudioTriggerRegion::HandleRefCountedEvent(v2, v4, 1);
+          UFG::AudioTriggerRegion::HandleRefCountedEvent(this, thisEvent, 1);
         else
           UFG::AudioEntity::CreateAndPlayEvent(
-            (UFG::AudioEntity *)&UFG::AmbienceAudio::m_instance->vfptr,
-            v4->mAudioUidOnEnter.mUID,
+            UFG::AmbienceAudio::m_instance,
+            thisEvent->mAudioUidOnEnter.mUID,
             0i64,
             0,
             0i64);
         break;
       case 3u:
         UFG::AudioEntity::SetRtpcValue(
-          (UFG::AudioEntity *)&v3->vfptr,
+          &mRegionEntity->UFG::AudioEntity,
           thisEvent->mAudioUidOnEnter.mUID,
           thisEvent->mAudioRtpcVal);
         break;
@@ -1983,66 +1938,64 @@ void __fastcall UFG::AudioTriggerRegion::ApplyAudioZoneListener(UFG::AudioTrigge
         goto $LN8_52;
       case 5u:
         UFG::AudioEntity::SetWwiseSwitch(
-          (UFG::AudioEntity *)&v3->vfptr,
+          &mRegionEntity->UFG::AudioEntity,
           thisEvent->mAudioUidOnEnter.mUID,
           thisEvent->mAudioModeUid.mUID);
         break;
       case 7u:
         UFG::TiDo::GetInstance();
-        UFG::TiDo::LoadWwiseBank(&v4->mAudioUidOnEnter);
+        UFG::TiDo::LoadWwiseBank(&thisEvent->mAudioUidOnEnter);
         break;
       case 0xAu:
         UFG::TiDo::GetInstance();
-        UFG::TiDo::UnloadWwiseBank(&v4->mAudioUidOnEnter);
+        UFG::TiDo::UnloadWwiseBank(&thisEvent->mAudioUidOnEnter);
         break;
       case 0xBu:
         UFG::qWiseSymbol::operator=(&UFG::AudioTriggerRegion::msActiveMixUid, &thisEvent->mAudioUidOnEnter);
 $LN8_52:
-        v8 = v4->mAudioUidOnEnter.mUID;
-        v9 = v4->mAudioModeUid.mUID;
-        v10 = UFG::TiDo::GetInstance();
-        UFG::AudioEntity::SetWwiseState(v10, v9, v8);
+        mUID = thisEvent->mAudioUidOnEnter.mUID;
+        v9 = thisEvent->mAudioModeUid.mUID;
+        Instance = UFG::TiDo::GetInstance();
+        UFG::AudioEntity::SetWwiseState(Instance, v9, mUID);
         break;
       case 0xCu:
         UFG::DoorStateManager::sm_doorRegionName.mUID = UFG::AudioEntity::GetName(
-                                                          (UFG::AudioEntity *)&v3->vfptr,
+                                                          &mRegionEntity->UFG::AudioEntity,
                                                           &result)->mUID;
-        UFG::qWiseSymbol::operator=(&UFG::DoorStateManager::sm_outdoorState, &v4->mAudioUidOnExit);
-        UFG::qWiseSymbol::operator=(&UFG::DoorStateManager::sm_indoorState, &v4->mAudioUidOnEnter);
+        UFG::qWiseSymbol::operator=(&UFG::DoorStateManager::sm_outdoorState, &thisEvent->mAudioUidOnExit);
+        UFG::qWiseSymbol::operator=(&UFG::DoorStateManager::sm_indoorState, &thisEvent->mAudioUidOnEnter);
         UFG::DoorStateManager::OnEnterRegion();
         break;
       default:
         break;
     }
     v11 = UFG::TiDo::GetInstance();
-    v11->vfptr->OnTriggerRegionEnter(v11, v4);
+    v11->vfptr->OnTriggerRegionEnter(v11, thisEvent);
   }
 }
 
 // File Line: 1377
 // RVA: 0x5A9D20
-void __fastcall UFG::AudioTriggerRegion::RemoveAudioZoneListener(UFG::AudioTriggerRegion *this, UFG::AudioTriggerRegionEvent *thisEvent)
+void __fastcall UFG::AudioTriggerRegion::RemoveAudioZoneListener(
+        UFG::AudioTriggerRegion *this,
+        UFG::AudioTriggerRegionEvent *thisEvent)
 {
-  UFG::AudioTriggerRegion *v2; // r9
-  UFG::AudioTriggerRegionEvent *v3; // rsi
-  UFG::AudioTriggerRegion *v4; // rbx
+  UFG::AudioTriggerRegion *mRegionEntity; // r9
   UFG::AudioEntity *v5; // r9
   UFG::qBaseTreeRB *v6; // rax
   UFG::qBaseTreeRB *v7; // rax
-  UFG::qWiseSymbol *v8; // rcx
-  unsigned int v9; // ebx
+  UFG::qWiseSymbol *p_mUID; // rcx
+  unsigned int mUID; // ebx
   unsigned int v10; // edi
-  UFG::TiDo *v11; // rax
-  UFG::qWiseSymbol *v12; // rax
+  UFG::TiDo *Instance; // rax
+  UFG::qWiseSymbol *null; // rax
   UFG::qWiseSymbol *v13; // rax
   UFG::TiDo *v14; // rax
 
-  v2 = thisEvent->mRegionEntity;
-  v3 = thisEvent;
-  v4 = this;
-  if ( v2 )
+  mRegionEntity = thisEvent->mRegionEntity;
+  if ( mRegionEntity )
   {
-    v5 = (UFG::AudioEntity *)&v2->vfptr;
+    v5 = &mRegionEntity->UFG::AudioEntity;
     if ( v5 )
     {
       switch ( thisEvent->mAudioType )
@@ -2050,49 +2003,49 @@ void __fastcall UFG::AudioTriggerRegion::RemoveAudioZoneListener(UFG::AudioTrigg
         case 1u:
           v6 = UFG::AudioEventPropertyManager::Find(thisEvent->mAudioUidOnExit.mUID);
           if ( v6 && LOBYTE(v6->mNULL.mChild[0][3].mChild[0]) )
-            UFG::AudioTriggerRegion::HandleRefCountedEvent(v4, v3, 0);
+            UFG::AudioTriggerRegion::HandleRefCountedEvent(this, thisEvent, 0);
           else
             UFG::AudioEntity::CreateAndPlayEvent(
-              (UFG::AudioEntity *)&UFG::AmbienceAudio::m_instance->vfptr,
-              v3->mAudioUidOnExit.mUID,
+              UFG::AmbienceAudio::m_instance,
+              thisEvent->mAudioUidOnExit.mUID,
               0i64,
               0,
               0i64);
-          v7 = UFG::AudioEventPropertyManager::Find(v3->mAudioUidOnEnter.mUID);
+          v7 = UFG::AudioEventPropertyManager::Find(thisEvent->mAudioUidOnEnter.mUID);
           if ( v7 )
           {
-            v8 = (UFG::qWiseSymbol *)&v7->mNULL.mChild[0][2].mUID;
-            if ( v8->mUID != -1 )
-              UFG::SoundBankManager::QueueBankForUnload(v8);
+            p_mUID = (UFG::qWiseSymbol *)&v7->mNULL.mChild[0][2].mUID;
+            if ( p_mUID->mUID != -1 )
+              UFG::SoundBankManager::QueueBankForUnload(p_mUID);
           }
           break;
         case 3u:
           UFG::AudioEntity::SetRtpcValue(v5, thisEvent->mAudioUidOnExit.mUID, thisEvent->mAudioRtpcVal);
           break;
         case 4u:
-          v9 = thisEvent->mAudioUidOnExit.mUID;
+          mUID = thisEvent->mAudioUidOnExit.mUID;
           v10 = thisEvent->mAudioModeUid.mUID;
-          v11 = UFG::TiDo::GetInstance();
-          UFG::AudioEntity::SetWwiseState(v11, v10, v9);
+          Instance = UFG::TiDo::GetInstance();
+          UFG::AudioEntity::SetWwiseState(Instance, v10, mUID);
           break;
         case 5u:
           UFG::AudioEntity::SetWwiseSwitch(v5, thisEvent->mAudioUidOnExit.mUID, thisEvent->mAudioModeUid.mUID);
           break;
         case 7u:
           UFG::TiDo::GetInstance();
-          UFG::TiDo::UnloadWwiseBank(&v3->mAudioUidOnExit);
+          UFG::TiDo::UnloadWwiseBank(&thisEvent->mAudioUidOnExit);
           break;
         case 0xAu:
           UFG::TiDo::GetInstance();
-          UFG::TiDo::LoadWwiseBank(&v3->mAudioUidOnExit);
+          UFG::TiDo::LoadWwiseBank(&thisEvent->mAudioUidOnExit);
           break;
         case 0xBu:
           UFG::AudioTriggerRegion::HandleMixRegionExit(this);
           break;
         case 0xCu:
           UFG::DoorStateManager::sm_doorRegionName.mUID = UFG::gNullQSymbol.mUID;
-          v12 = UFG::qWiseSymbol::get_null();
-          UFG::qWiseSymbol::operator=(&UFG::DoorStateManager::sm_outdoorState, v12);
+          null = UFG::qWiseSymbol::get_null();
+          UFG::qWiseSymbol::operator=(&UFG::DoorStateManager::sm_outdoorState, null);
           v13 = UFG::qWiseSymbol::get_null();
           UFG::qWiseSymbol::operator=(&UFG::DoorStateManager::sm_indoorState, v13);
           UFG::DoorStateManager::OnExitRegion();
@@ -2101,72 +2054,70 @@ void __fastcall UFG::AudioTriggerRegion::RemoveAudioZoneListener(UFG::AudioTrigg
           break;
       }
       v14 = UFG::TiDo::GetInstance();
-      v14->vfptr->OnTriggerRegionExit(v14, v3);
+      v14->vfptr->OnTriggerRegionExit(v14, thisEvent);
     }
   }
 }
 
 // File Line: 1514
 // RVA: 0x59EC10
-void __fastcall UFG::AudioTriggerRegion::HandleRefCountedEvent(UFG::AudioTriggerRegion *this, UFG::AudioTriggerRegionEvent *thisEvent, bool enter)
+void __fastcall UFG::AudioTriggerRegion::HandleRefCountedEvent(
+        UFG::AudioTriggerRegion *this,
+        UFG::AudioTriggerRegionEvent *thisEvent,
+        bool enter)
 {
-  bool v3; // si
-  UFG::AudioTriggerRegionEvent *v4; // rbx
-  UFG::qWiseSymbol *v5; // rdx
+  UFG::qWiseSymbol *p_mAudioUidOnEnter; // rdx
   unsigned int v6; // eax
   UFG::qBaseTreeRB *v7; // rax
   UFG::qBaseTreeRB *v8; // rdi
-  const char *v9; // rax
+  char *v9; // rax
   int v10; // eax
   bool v11; // al
-  bool v12; // al
-  const char *v13; // rbx
-  const char *v14; // rax
-  UFG::qWiseSymbol v15; // [rsp+60h] [rbp+18h]
+  char *v12; // rbx
+  char *v13; // rax
+  UFG::qWiseSymbol v14; // [rsp+60h] [rbp+18h] BYREF
 
-  v3 = enter;
-  v4 = thisEvent;
-  v15.mUID = -1;
+  v14.mUID = -1;
   _((AMD_HD3D *)0xFFFFFFFFi64);
-  v5 = &v4->mAudioUidOnEnter;
-  if ( !v3 )
-    v5 = &v4->mAudioUidOnExit;
-  UFG::qWiseSymbol::operator=(&v15, v5);
+  p_mAudioUidOnEnter = &thisEvent->mAudioUidOnEnter;
+  if ( !enter )
+    p_mAudioUidOnEnter = &thisEvent->mAudioUidOnExit;
+  UFG::qWiseSymbol::operator=(&v14, p_mAudioUidOnEnter);
   v6 = _S42;
-  if ( !(_S42 & 1) )
+  if ( (_S42 & 1) == 0 )
   {
     _S42 |= 1u;
     UFG::qWiseSymbol::create_from_string(&set_minimap_enter, "set_minimap_enter");
     atexit(UFG::AudioTriggerRegion::HandleRefCountedEvent_::_7_::_dynamic_atexit_destructor_for__set_minimap_enter__);
     v6 = _S42;
   }
-  if ( !(v6 & 2) )
+  if ( (v6 & 2) == 0 )
   {
     _S42 = v6 | 2;
     UFG::qWiseSymbol::create_from_string(&set_minimap_exit, "set_minimap_exit");
     atexit(UFG::AudioTriggerRegion::HandleRefCountedEvent_::_7_::_dynamic_atexit_destructor_for__set_minimap_exit__);
     v6 = _S42;
   }
-  if ( !(v6 & 4) )
+  if ( (v6 & 4) == 0 )
   {
     _S42 = v6 | 4;
     UFG::qWiseSymbol::create_from_string(&set_rain_override, "set_rain_override");
     atexit(UFG::AudioTriggerRegion::HandleRefCountedEvent_::_7_::_dynamic_atexit_destructor_for__set_rain_override__);
   }
-  v7 = UFG::AudioEventPropertyManager::Find(v15.mUID);
+  v7 = UFG::AudioEventPropertyManager::Find(v14.mUID);
   v8 = v7;
-  if ( !v3 )
+  if ( !enter )
   {
     if ( !--LODWORD(v7->mNULL.mParent) )
     {
       if ( UFG::TiDo::sm_ambiencesInfo )
       {
-        v13 = UFG::qWiseSymbol::as_cstr_dbg((UFG::qWiseSymbol *)&v7->mNULL.mChild[0][2].mChild[1] + 1);
-        v14 = UFG::qWiseSymbol::as_cstr_dbg(&v15);
-        UFG::qPrintf("AudioTriggerRegion:: Triggering dynamic inverse event: %s %s\n", v14, v13);
+        v12 = UFG::qWiseSymbol::as_cstr_dbg((UFG::qWiseSymbol *)&v7->mNULL.mChild[0][2].mChild[1] + 1);
+        v13 = UFG::qWiseSymbol::as_cstr_dbg(&v14);
+        UFG::qPrintf("AudioTriggerRegion:: Triggering dynamic inverse event: %s %s\n", v13, v12);
       }
       UFG::AudioEntity::CreateAndPlayEvent(
-        (UFG::AudioEntity *)&UFG::AmbienceAudio::m_instance->vfptr,
+        UFG::AmbienceAudio::m_instance,
         HIDWORD(v8->mNULL.mChild[0][2].mChild[1]),
         0i64,
         0,
@@ -2190,20 +2141,15 @@ void __fastcall UFG::AudioTriggerRegion::HandleRefCountedEvent(UFG::AudioTrigger
   {
     if ( UFG::TiDo::sm_ambiencesInfo )
     {
-      v9 = UFG::qWiseSymbol::as_cstr_dbg(&v15);
+      v9 = UFG::qWiseSymbol::as_cstr_dbg(&v14);
       UFG::qPrintf("AudioTriggerRegion:: Triggering dynamic event: %s\n", v9);
     }
-    UFG::AudioEntity::CreateAndPlayEvent(
-      (UFG::AudioEntity *)&UFG::AmbienceAudio::m_instance->vfptr,
-      v15.mUID,
-      0i64,
-      0,
-      0i64);
+    UFG::AudioEntity::CreateAndPlayEvent(UFG::AmbienceAudio::m_instance, v14.mUID, 0i64, 0, 0i64);
   }
   ++LODWORD(v8->mNULL.mParent);
-  if ( v15.mUID == set_minimap_enter.mUID )
+  if ( v14.mUID == set_minimap_enter.mUID )
   {
-    v10 = UFG::AudioTriggerRegion::sm_interiorTransitionCount++ + 1;
+    v10 = ++UFG::AudioTriggerRegion::sm_interiorTransitionCount;
     if ( UFG::DoorStateManager::sm_active )
     {
       v11 = v10 > 0;
@@ -2225,22 +2171,21 @@ LABEL_21:
     }
   }
 LABEL_22:
-  if ( v15.mUID == set_rain_override.mUID )
+  if ( v14.mUID == set_rain_override.mUID )
   {
     ++UFG::AudioTriggerRegion::sm_rainDrawOverride;
     if ( UFG::DoorStateManager::sm_active )
     {
-      v12 = UFG::AudioTriggerRegion::sm_interiorTransitionCount > 0;
       if ( UFG::DoorStateManager::sm_inside )
       {
-        if ( !v12 )
+        if ( UFG::AudioTriggerRegion::sm_interiorTransitionCount <= 0 )
         {
           UFG::DoorStateManager::sm_inside = 0;
           UFG::DoorStateManager::SetDoorMix();
           goto LABEL_40;
         }
       }
-      else if ( v12 )
+      else if ( UFG::AudioTriggerRegion::sm_interiorTransitionCount > 0 )
       {
         UFG::DoorStateManager::sm_inside = 1;
         UFG::DoorStateManager::SetDoorMix();
@@ -2248,290 +2193,293 @@ LABEL_22:
       }
       UFG::DoorStateManager::sm_inside = UFG::AudioTriggerRegion::sm_interiorTransitionCount > 0;
       UFG::DoorStateManager::SetDoorMix();
-      goto LABEL_40;
     }
   }
 LABEL_40:
-  _((AMD_HD3D *)v15.mUID);
+  _((AMD_HD3D *)v14.mUID);
 }
 
 // File Line: 1617
 // RVA: 0x59EAC0
 char __fastcall UFG::AudioTriggerRegion::HandleMixRegionExit(UFG::AudioTriggerRegion *this)
 {
-  UFG::AudioTriggerRegion *v1; // rdi
-  UFG::AudioTriggerRegion *v2; // rbx
+  UFG::AudioTriggerRegion *InnermostRegionOfTypeContainingObject; // rbx
   unsigned int v3; // edx
-  UFG::AudioTriggerRegionTag *v4; // r9
-  char result; // al
-  UFG::TiDo *v6; // rax
-  UFG::AudioTriggerRegionEvent thisEvent; // [rsp+28h] [rbp-40h]
+  UFG::AudioTriggerRegionTag *p_mNext; // r9
+  UFG::TiDo *Instance; // rax
+  UFG::AudioTriggerRegionEvent thisEvent; // [rsp+28h] [rbp-40h] BYREF
 
-  v1 = this;
-  v2 = UFG::AudioTriggerRegion::FindInnermostRegionOfTypeContainingObject(
-         this,
-         &UFG::AudioListener::sm_pInstance->m_containmentInfo,
-         eAudioTriggerRegionType_Mix);
+  InnermostRegionOfTypeContainingObject = (UFG::AudioTriggerRegion *)UFG::AudioTriggerRegion::FindInnermostRegionOfTypeContainingObject(
+                                                                       this,
+                                                                       &UFG::AudioListener::sm_pInstance->m_containmentInfo,
+                                                                       eAudioTriggerRegionType_Mix);
   v3 = _S43_0;
-  if ( !(_S43_0 & 1) )
+  if ( (_S43_0 & 1) == 0 )
   {
     _S43_0 |= 1u;
     UFG::qWiseSymbol::create_from_string(&ms_location, "ms_location");
     atexit(UFG::AudioTriggerRegion::HandleMixRegionExit_::_2_::_dynamic_atexit_destructor_for__ms_location__);
     v3 = _S43_0;
   }
-  if ( v2
-    && (v4 = (UFG::AudioTriggerRegionTag *)&v2->mTags.mNode.mNext[-1].mNext,
-        v4 != (UFG::AudioTriggerRegionTag *)&v2->mNode.mUID) )
-  {
-    while ( v4->mAudioType != 11 || v4->mAudioModeUidOnEnter.mUID != ms_location.mUID )
-    {
-      v4 = (UFG::AudioTriggerRegionTag *)&v4->mNext[-1].mNext;
-      if ( v4 == (UFG::AudioTriggerRegionTag *)&v2->mNode.mUID )
-        goto LABEL_10;
-    }
-    UFG::AudioTriggerRegionEvent::AudioTriggerRegionEvent(&thisEvent, 0i64, v2, v4);
-    UFG::AudioTriggerRegion::ApplyAudioZoneListener(v1, &thisEvent);
-    thisEvent.vfptr = (UFG::AudioTriggerRegionEventVtbl *)&UFG::AudioTriggerRegionEvent::`vftable;
-    _((AMD_HD3D *)thisEvent.mAudioModeUid.mUID);
-    _((AMD_HD3D *)thisEvent.mAudioUidOnExit.mUID);
-    _((AMD_HD3D *)thisEvent.mAudioUidOnEnter.mUID);
-    result = 1;
-  }
-  else
+  if ( !InnermostRegionOfTypeContainingObject
+    || (p_mNext = (UFG::AudioTriggerRegionTag *)&InnermostRegionOfTypeContainingObject->mTags.mNode.mNext[-1].mNext,
+        p_mNext == (UFG::AudioTriggerRegionTag *)&InnermostRegionOfTypeContainingObject->UFG::qNodeRB<UFG::AudioTriggerRegion>::mNode.mUID) )
   {
 LABEL_10:
-    if ( !(v3 & 2) )
+    if ( (v3 & 2) == 0 )
     {
       _S43_0 = v3 | 2;
       UFG::qWiseSymbol::create_from_string(&gbl_exterior, "gbl_exterior");
       atexit(UFG::AudioTriggerRegion::HandleMixRegionExit_::_10_::_dynamic_atexit_destructor_for__gbl_exterior__);
     }
-    v6 = UFG::TiDo::GetInstance();
-    UFG::AudioEntity::SetWwiseState(v6, ms_location.mUID, gbl_exterior.mUID);
-    result = 0;
+    Instance = UFG::TiDo::GetInstance();
+    UFG::AudioEntity::SetWwiseState(Instance, ms_location.mUID, gbl_exterior.mUID);
+    return 0;
   }
-  return result;
+  else
+  {
+    while ( p_mNext->mAudioType != 11 || p_mNext->mAudioModeUidOnEnter.mUID != ms_location.mUID )
+    {
+      p_mNext = (UFG::AudioTriggerRegionTag *)&p_mNext->mNext[-1].mNext;
+      if ( p_mNext == (UFG::AudioTriggerRegionTag *)&InnermostRegionOfTypeContainingObject->UFG::qNodeRB<UFG::AudioTriggerRegion>::mNode.mUID )
+        goto LABEL_10;
+    }
+    UFG::AudioTriggerRegionEvent::AudioTriggerRegionEvent(
+      &thisEvent,
+      0i64,
+      InnermostRegionOfTypeContainingObject,
+      p_mNext);
+    UFG::AudioTriggerRegion::ApplyAudioZoneListener(this, &thisEvent);
+    thisEvent.vfptr = (UFG::AudioTriggerRegionEventVtbl *)&UFG::AudioTriggerRegionEvent::`vftable;
+    _((AMD_HD3D *)thisEvent.mAudioModeUid.mUID);
+    _((AMD_HD3D *)thisEvent.mAudioUidOnExit.mUID);
+    _((AMD_HD3D *)thisEvent.mAudioUidOnEnter.mUID);
+    return 1;
+  }
 }
 
 // File Line: 1649
 // RVA: 0x59E6D0
-void __fastcall UFG::AudioTriggerRegion::HandleEnvironmentRegionExit(UFG::AudioTriggerRegion *this, UFG::AudioTriggerRegionEvent *thisEvent)
+void __fastcall UFG::AudioTriggerRegion::HandleEnvironmentRegionExit(
+        UFG::AudioTriggerRegion *this,
+        UFG::AudioTriggerRegionEvent *thisEvent)
 {
-  UFG::AudioEntity *v2; // rsi
-  UFG::AudioTriggerRegion *v3; // rbx
-  UFG::AudioTriggerRegionEvent *v4; // rdi
+  UFG::AudioEntity *mTriggeringEntity; // rsi
   float v5; // xmm8_4
   float v6; // xmm6_4
-  UFG::RegionContainmentInfo *v7; // rax
-  UFG::AudioTriggerRegion *v8; // rax
-  signed __int64 v9; // rbp
-  signed __int64 v10; // rbx
-  UFG::qSymbolUC *v11; // rax
+  UFG::RegionContainmentInfo *ContainmentInfo; // rax
+  UFG::qBaseNodeRB **InnermostRegionOfTypeContainingObject; // rax
+  UFG::qBaseNodeRB **v9; // rbp
+  __int64 p_mUID; // rbx
+  UFG::qSymbolUC *Name; // rax
   char *v12; // rax
-  const char *v13; // rbx
+  char *v13; // rbx
   UFG::qSymbolUC *v14; // rax
   char *v15; // rax
-  UFG::qSymbol result; // [rsp+68h] [rbp+10h]
+  UFG::qSymbol result; // [rsp+68h] [rbp+10h] BYREF
 
-  v2 = thisEvent->mTriggeringEntity;
-  v3 = this;
-  v4 = thisEvent;
+  mTriggeringEntity = thisEvent->mTriggeringEntity;
   v5 = 0.0;
   v6 = 0.0;
-  v7 = UFG::AudioEntity::GetContainmentInfo(v2);
-  v8 = UFG::AudioTriggerRegion::FindInnermostRegionOfTypeContainingObject(v3, v7, eAudioTriggerRegionType_Environment);
-  if ( v8 )
+  ContainmentInfo = UFG::AudioEntity::GetContainmentInfo(mTriggeringEntity);
+  InnermostRegionOfTypeContainingObject = UFG::AudioTriggerRegion::FindInnermostRegionOfTypeContainingObject(
+                                            this,
+                                            ContainmentInfo,
+                                            eAudioTriggerRegionType_Environment);
+  if ( InnermostRegionOfTypeContainingObject )
   {
-    v9 = (signed __int64)&v8->mNode.mUID;
-    v10 = (signed __int64)&v8->mTags.mNode.mNext[-1].mNext;
-    if ( (unsigned int *)v10 != &v8->mNode.mUID )
+    v9 = InnermostRegionOfTypeContainingObject + 79;
+    p_mUID = (__int64)&InnermostRegionOfTypeContainingObject[81][-1].mUID;
+    if ( (UFG::qBaseNodeRB **)p_mUID != InnermostRegionOfTypeContainingObject + 79 )
     {
       do
       {
-        if ( *(_DWORD *)(v10 + 24) == 8 && v4->mAudioUidOnEnter.mUID == *(_DWORD *)(v10 + 28) )
+        if ( *(_DWORD *)(p_mUID + 24) == 8 && thisEvent->mAudioUidOnEnter.mUID == *(_DWORD *)(p_mUID + 28) )
         {
-          v6 = *(float *)(v10 + 48);
-          v5 = *(float *)(v10 + 44);
+          v6 = *(float *)(p_mUID + 48);
+          v5 = *(float *)(p_mUID + 44);
           if ( v6 > 0.0 )
-            UFG::AudioCategoryPropertyManager::SetAuxSendRtpcForEnvironment((UFG::qWiseSymbol *)(v10 + 28), v2);
+            UFG::AudioCategoryPropertyManager::SetAuxSendRtpcForEnvironment(
+              (UFG::qWiseSymbol *)(p_mUID + 28),
+              mTriggeringEntity);
         }
-        v10 = *(_QWORD *)(v10 + 16) - 8i64;
+        p_mUID = *(_QWORD *)(p_mUID + 16) - 8i64;
       }
-      while ( v10 != v9 );
+      while ( (UFG::qBaseNodeRB **)p_mUID != v9 );
     }
   }
   else
   {
-    UFG::AudioCategoryPropertyManager::SetAuxSendRtpcForEnvironment((UFG::qWiseSymbol *)&default_symbol_0.mUID, v2);
+    UFG::AudioCategoryPropertyManager::SetAuxSendRtpcForEnvironment(&default_symbol_0, mTriggeringEntity);
   }
   if ( UFG::AudioEntity::sm_displayEnvironmentInfo )
   {
-    v11 = (UFG::qSymbolUC *)UFG::AudioEntity::GetName(v4->mTriggeringEntity, &result);
-    v12 = UFG::qSymbol::as_cstr_dbg(v11);
+    Name = (UFG::qSymbolUC *)UFG::AudioEntity::GetName(thisEvent->mTriggeringEntity, &result);
+    v12 = UFG::qSymbol::as_cstr_dbg(Name);
     if ( strstr(v12, UFG::AudioEntity::sm_environmentInfoFilter.mData) )
     {
-      v13 = UFG::qWiseSymbol::as_cstr_dbg(&v4->mAudioUidOnEnter);
-      v14 = (UFG::qSymbolUC *)UFG::AudioEntity::GetName((UFG::AudioEntity *)&v4->mRegionEntity->vfptr, &result);
+      v13 = UFG::qWiseSymbol::as_cstr_dbg(&thisEvent->mAudioUidOnEnter);
+      v14 = (UFG::qSymbolUC *)UFG::AudioEntity::GetName(&thisEvent->mRegionEntity->UFG::AudioEntity, &result);
       v15 = UFG::qSymbol::as_cstr_dbg(v14);
       UFG::qPrintf("AudioTriggerRegion: Exiting: %s, Removing environment: %s\n", v15, v13);
     }
   }
-  UFG::AudioEntity::RemoveEnvironment(v2, v4->mAudioUidOnEnter.mUID, v5, v6);
+  UFG::AudioEntity::RemoveEnvironment(mTriggeringEntity, thisEvent->mAudioUidOnEnter.mUID, v5, v6);
 }
 
 // File Line: 1697
 // RVA: 0x59E550
-void __fastcall UFG::AudioTriggerRegion::HandleEnvironmentRegionEnter(UFG::AudioTriggerRegion *this, UFG::AudioTriggerRegionEvent *thisEvent)
+void __fastcall UFG::AudioTriggerRegion::HandleEnvironmentRegionEnter(
+        UFG::AudioTriggerRegion *this,
+        UFG::AudioTriggerRegionEvent *thisEvent)
 {
-  UFG::AudioEntity *v2; // rsi
-  UFG::AudioTriggerRegion *v3; // rbx
-  UFG::AudioTriggerRegionEvent *v4; // rdi
+  UFG::AudioEntity *mTriggeringEntity; // rsi
   float v5; // xmm7_4
   float wetLevel; // xmm8_4
-  UFG::RegionContainmentInfo *v7; // rax
-  UFG::AudioTriggerRegion *v8; // rax
-  signed __int64 v9; // rbp
-  signed __int64 v10; // rbx
-  UFG::qSymbolUC *v11; // rax
+  UFG::RegionContainmentInfo *ContainmentInfo; // rax
+  UFG::qBaseNodeRB **InnermostRegionOfTypeContainingObject; // rax
+  UFG::qBaseNodeRB **v9; // rbp
+  __int64 p_mUID; // rbx
+  UFG::qSymbolUC *Name; // rax
   char *v12; // rax
-  const char *v13; // rbx
+  char *v13; // rbx
   UFG::qSymbolUC *v14; // rax
   char *v15; // rax
-  UFG::qSymbol result; // [rsp+78h] [rbp+10h]
+  UFG::qSymbol result; // [rsp+78h] [rbp+10h] BYREF
 
-  v2 = thisEvent->mTriggeringEntity;
-  v3 = this;
-  v4 = thisEvent;
+  mTriggeringEntity = thisEvent->mTriggeringEntity;
   v5 = 0.0;
   wetLevel = 0.0;
-  v7 = UFG::AudioEntity::GetContainmentInfo(v2);
-  v8 = UFG::AudioTriggerRegion::FindInnermostRegionOfTypeContainingObject(v3, v7, eAudioTriggerRegionType_Environment);
-  if ( v8 )
+  ContainmentInfo = UFG::AudioEntity::GetContainmentInfo(mTriggeringEntity);
+  InnermostRegionOfTypeContainingObject = UFG::AudioTriggerRegion::FindInnermostRegionOfTypeContainingObject(
+                                            this,
+                                            ContainmentInfo,
+                                            eAudioTriggerRegionType_Environment);
+  if ( InnermostRegionOfTypeContainingObject )
   {
-    v9 = (signed __int64)&v8->mNode.mUID;
-    v10 = (signed __int64)&v8->mTags.mNode.mNext[-1].mNext;
-    if ( (unsigned int *)v10 != &v8->mNode.mUID )
+    v9 = InnermostRegionOfTypeContainingObject + 79;
+    p_mUID = (__int64)&InnermostRegionOfTypeContainingObject[81][-1].mUID;
+    if ( (UFG::qBaseNodeRB **)p_mUID != InnermostRegionOfTypeContainingObject + 79 )
     {
       do
       {
-        if ( *(_DWORD *)(v10 + 24) == 8 )
+        if ( *(_DWORD *)(p_mUID + 24) == 8 )
         {
-          if ( v4->mAudioUidOnEnter.mUID == *(_DWORD *)(v10 + 28) )
+          if ( thisEvent->mAudioUidOnEnter.mUID == *(_DWORD *)(p_mUID + 28) )
           {
-            v5 = *(float *)(v10 + 44);
-            wetLevel = *(float *)(v10 + 48);
+            v5 = *(float *)(p_mUID + 44);
+            wetLevel = *(float *)(p_mUID + 48);
           }
-          if ( *(float *)(v10 + 48) > 0.0 )
-            UFG::AudioCategoryPropertyManager::SetAuxSendRtpcForEnvironment((UFG::qWiseSymbol *)(v10 + 28), v2);
+          if ( *(float *)(p_mUID + 48) > 0.0 )
+            UFG::AudioCategoryPropertyManager::SetAuxSendRtpcForEnvironment(
+              (UFG::qWiseSymbol *)(p_mUID + 28),
+              mTriggeringEntity);
         }
-        v10 = *(_QWORD *)(v10 + 16) - 8i64;
+        p_mUID = *(_QWORD *)(p_mUID + 16) - 8i64;
       }
-      while ( v10 != v9 );
+      while ( (UFG::qBaseNodeRB **)p_mUID != v9 );
     }
   }
   else
   {
-    UFG::AudioCategoryPropertyManager::SetAuxSendRtpcForEnvironment((UFG::qWiseSymbol *)&default_symbol_0.mUID, v2);
+    UFG::AudioCategoryPropertyManager::SetAuxSendRtpcForEnvironment(&default_symbol_0, mTriggeringEntity);
   }
   if ( UFG::AudioEntity::sm_displayEnvironmentInfo )
   {
-    v11 = (UFG::qSymbolUC *)UFG::AudioEntity::GetName(v4->mTriggeringEntity, &result);
-    v12 = UFG::qSymbol::as_cstr_dbg(v11);
+    Name = (UFG::qSymbolUC *)UFG::AudioEntity::GetName(thisEvent->mTriggeringEntity, &result);
+    v12 = UFG::qSymbol::as_cstr_dbg(Name);
     if ( strstr(v12, UFG::AudioEntity::sm_environmentInfoFilter.mData) )
     {
-      v13 = UFG::qWiseSymbol::as_cstr_dbg(&v4->mAudioUidOnEnter);
-      v14 = (UFG::qSymbolUC *)UFG::AudioEntity::GetName((UFG::AudioEntity *)&v4->mRegionEntity->vfptr, &result);
+      v13 = UFG::qWiseSymbol::as_cstr_dbg(&thisEvent->mAudioUidOnEnter);
+      v14 = (UFG::qSymbolUC *)UFG::AudioEntity::GetName(&thisEvent->mRegionEntity->UFG::AudioEntity, &result);
       v15 = UFG::qSymbol::as_cstr_dbg(v14);
       UFG::qPrintf("AudioTriggerRegion: Entering: %s, Adding environment: %s\n", v15, v13);
     }
   }
-  UFG::AudioEntity::ApplyEnvironment(v2, v4->mAudioUidOnEnter.mUID, 1.0, v5, wetLevel, &v4->mAudioModeUid);
+  UFG::AudioEntity::ApplyEnvironment(
+    mTriggeringEntity,
+    thisEvent->mAudioUidOnEnter.mUID,
+    1.0,
+    v5,
+    wetLevel,
+    &thisEvent->mAudioModeUid);
 }
 
 // File Line: 1815
 // RVA: 0x598520
-UFG::qSymbol *__fastcall UFG::AudioTriggerRegion::CheckRegionForDoors(UFG::qSymbol *result, UFG::qTreeRB<UFG::DoorNode,UFG::DoorNode,1> *doorTree)
+UFG::qSymbol *__fastcall UFG::AudioTriggerRegion::CheckRegionForDoors(
+        UFG::qSymbol *result,
+        UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *doorTree)
 {
-  unsigned int v2; // ebx
-  UFG::qSymbol *v3; // r15
-  UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *v4; // r14
-  Render::SkinningCacheNode *v5; // rax
-  signed __int64 v6; // rsi
+  unsigned int mUID; // ebx
+  Render::SkinningCacheNode *Head; // rax
+  UFG::TriggerRegion *p_mCachedBufferPtr; // rsi
   UFG::qBaseNodeRB *v7; // rdx
-  UFG::qBaseTreeRB *v8; // rax
-  signed __int64 v9; // rbp
+  UFG::qBaseTreeRB *Next; // rax
+  __int64 v9; // rbp
   UFG::qBaseTreeRB *v10; // rdi
 
-  v2 = UFG::gNullQSymbol.mUID;
-  v3 = result;
-  v4 = (UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)doorTree;
-  v5 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::AudioTriggerRegion::msAudioTriggerRegions);
-  if ( v5 && (v6 = (signed __int64)&v5[-16].mCachedBufferPtr, v5 != (Render::SkinningCacheNode *)608) )
+  mUID = UFG::gNullQSymbol.mUID;
+  Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::AudioTriggerRegion::msAudioTriggerRegions);
+  if ( !Head
+    || (p_mCachedBufferPtr = (UFG::TriggerRegion *)&Head[-16].mCachedBufferPtr, Head == (Render::SkinningCacheNode *)608) )
+  {
+LABEL_15:
+    result->mUID = mUID;
+  }
+  else
   {
     while ( 1 )
     {
-      v7 = (UFG::qBaseNodeRB *)(v6 ? v6 + 608 : 0i64);
-      v8 = UFG::qBaseTreeRB::GetNext(&UFG::AudioTriggerRegion::msAudioTriggerRegions.mTree, v7);
-      v9 = (signed __int64)(v8 ? v8[-9].mNULL.mChild : 0i64);
-      if ( *(_BYTE *)(v6 + 736) & 0x20 )
+      v7 = p_mCachedBufferPtr ? (UFG::qBaseNodeRB *)&p_mCachedBufferPtr[2].m_Flags : 0i64;
+      Next = UFG::qBaseTreeRB::GetNext(&UFG::AudioTriggerRegion::msAudioTriggerRegions.mTree, v7);
+      v9 = Next ? (__int64)Next[-9].mNULL.mChild : 0i64;
+      if ( ((__int64)p_mCachedBufferPtr[2].UFG::qNode<UFG::TriggerRegion,CullInfo>::mPrev & 0x20) != 0 )
       {
-        v10 = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead(v4);
+        v10 = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead(doorTree);
         if ( v10 )
           break;
       }
 LABEL_14:
-      v6 = v9;
+      p_mCachedBufferPtr = (UFG::TriggerRegion *)v9;
       if ( !v9 )
         goto LABEL_15;
     }
-    while ( !UFG::TriggerRegion::IsHitPoint(
-               (UFG::TriggerRegion *)v6,
-               (UFG::qVector3 *)((char *)&v10->mNULL.mParent + 4))
-         || v2 != UFG::gNullQSymbol.mUID )
+    while ( !UFG::TriggerRegion::IsHitPoint(p_mCachedBufferPtr, (UFG::qVector3 *)((char *)&v10->mNULL.mParent + 4))
+         || mUID != UFG::gNullQSymbol.mUID )
     {
-      v10 = UFG::qBaseTreeRB::GetNext((UFG::qBaseTreeRB *)v4, &v10->mRoot);
+      v10 = UFG::qBaseTreeRB::GetNext((UFG::qBaseTreeRB *)doorTree, &v10->mRoot);
       if ( !v10 )
         goto LABEL_14;
     }
-    v3->mUID = (unsigned int)v10->mNULL.mParent;
+    result->mUID = (unsigned int)v10->mNULL.mParent;
   }
-  else
-  {
-LABEL_15:
-    v3->mUID = v2;
-  }
-  return v3;
+  return result;
 }
 
 // File Line: 1848
 // RVA: 0x592EA0
-void __fastcall UFG::AudioTriggerRegionEvent::AudioTriggerRegionEvent(UFG::AudioTriggerRegionEvent *this, UFG::AudioEntity *triggeringEntity, UFG::AudioTriggerRegion *regionEntity, UFG::AudioTriggerRegionTag *tag)
+void __fastcall UFG::AudioTriggerRegionEvent::AudioTriggerRegionEvent(
+        UFG::AudioTriggerRegionEvent *this,
+        UFG::AudioEntity *triggeringEntity,
+        UFG::AudioTriggerRegion *regionEntity,
+        UFG::AudioTriggerRegionTag *tag)
 {
-  UFG::qWiseSymbol *v4; // r15
-  UFG::AudioTriggerRegion *v5; // r14
-  UFG::AudioEntity *v6; // rbp
-  UFG::AudioTriggerRegionEvent *v7; // r12
-
-  v4 = (UFG::qWiseSymbol *)tag;
-  v5 = regionEntity;
-  v6 = triggeringEntity;
-  v7 = this;
   this->vfptr = (UFG::AudioTriggerRegionEventVtbl *)&UFG::AudioTriggerRegionEvent::`vftable;
   this->mAudioUidOnEnter.mUID = -1;
   _((AMD_HD3D *)0xFFFFFFFFi64);
-  v7->mAudioUidOnExit.mUID = -1;
+  this->mAudioUidOnExit.mUID = -1;
   _((AMD_HD3D *)0xFFFFFFFFi64);
-  v7->mAudioModeUid.mUID = -1;
+  this->mAudioModeUid.mUID = -1;
   _((AMD_HD3D *)0xFFFFFFFFi64);
-  v7->mTriggeringEntity = v6;
-  v7->mRegionEntity = v5;
-  v7->mAudioType = v4[6].mUID;
-  UFG::qWiseSymbol::operator=(&v7->mAudioUidOnEnter, v4 + 7);
-  UFG::qWiseSymbol::operator=(&v7->mAudioUidOnExit, v4 + 8);
-  UFG::qWiseSymbol::operator=(&v7->mAudioModeUid, v4 + 9);
-  LODWORD(v7->mAudioRtpcVal) = v4[10];
-  LODWORD(v7->mAudioDryLevel) = v4[11];
-  LODWORD(v7->mAudioWetLevel) = v4[12];
+  this->mTriggeringEntity = triggeringEntity;
+  this->mRegionEntity = regionEntity;
+  this->mAudioType = tag->mAudioType;
+  UFG::qWiseSymbol::operator=(&this->mAudioUidOnEnter, &tag->mAudioUidOnEnter);
+  UFG::qWiseSymbol::operator=(&this->mAudioUidOnExit, &tag->mAudioUidOnExit);
+  UFG::qWiseSymbol::operator=(&this->mAudioModeUid, &tag->mAudioModeUidOnEnter);
+  this->mAudioRtpcVal = tag->mAudioRtpcValOnEnter;
+  this->mAudioDryLevel = tag->mAudioDryLevelOnEnter;
+  this->mAudioWetLevel = tag->mAudioWetLevelOnEnter;
 }
 

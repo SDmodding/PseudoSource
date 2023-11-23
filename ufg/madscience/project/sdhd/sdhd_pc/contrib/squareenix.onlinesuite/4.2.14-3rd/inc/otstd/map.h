@@ -1,16 +1,16 @@
 // File Line: 148
 // RVA: 0x428140
-void __fastcall OSuite::TMap<OSuite::ZString,OSuite::ZString>::TMap<OSuite::ZString,OSuite::ZString>(OSuite::TMap<OSuite::ZString,OSuite::ZString> *this, unsigned __int64 nHashSize)
+void __fastcall OSuite::TMap<OSuite::ZString,OSuite::ZString>::TMap<OSuite::ZString,OSuite::ZString>(
+        OSuite::TMap<OSuite::ZString,OSuite::ZString> *this,
+        unsigned __int64 nHashSize)
 {
-  OSuite::TMap<OSuite::ZString,OSuite::ZString> *v2; // rbx
-  signed __int64 v3; // rdi
+  OSuite::TOrderedMap<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString> > *v3; // rdi
   int v4; // esi
   UFG::allocator::free_link *v5; // rax
-  signed __int64 v6; // rax
-  unsigned __int8 v7; // cf
+  __int64 v6; // rax
+  bool v7; // cf
   unsigned __int64 v8; // rax
 
-  v2 = this;
   this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZString>::`vftable;
   this->m_nHashSize = nHashSize;
   v3 = 0i64;
@@ -18,8 +18,8 @@ void __fastcall OSuite::TMap<OSuite::ZString,OSuite::ZString>::TMap<OSuite::ZStr
   v4 = nHashSize;
   if ( (_DWORD)nHashSize )
   {
-    v6 = 40i64 * (signed int)nHashSize;
-    if ( !is_mul_ok((signed int)nHashSize, 0x28ui64) )
+    v6 = 40i64 * (int)nHashSize;
+    if ( !is_mul_ok((int)nHashSize, 0x28ui64) )
       v6 = -1i64;
     v7 = __CFADD__(v6, 8i64);
     v8 = v6 + 8;
@@ -34,60 +34,58 @@ void __fastcall OSuite::TMap<OSuite::ZString,OSuite::ZString>::TMap<OSuite::ZStr
   if ( v5 )
   {
     LODWORD(v5->mNext) = v4;
-    v3 = (signed __int64)&v5[1];
+    v3 = (OSuite::TOrderedMap<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString> > *)&v5[1];
     `eh vector constructor iterator(
       &v5[1],
       0x28ui64,
       v4,
       (void (__fastcall *)(void *))OSuite::TOrderedMap<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString>>::TOrderedMap<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString>>);
   }
-  v2->m_pLists = (OSuite::TOrderedMap<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString> > *)v3;
+  this->m_pLists = v3;
 }
 
 // File Line: 216
 // RVA: 0x428C40
-void __fastcall OSuite::TMap<OSuite::ZString,OSuite::ZString>::~TMap<OSuite::ZString,OSuite::ZString>(OSuite::TMap<OSuite::ZString,OSuite::ZString> *this)
+void __fastcall OSuite::TMap<OSuite::ZString,OSuite::ZString>::~TMap<OSuite::ZString,OSuite::ZString>(
+        OSuite::TMap<OSuite::ZString,OSuite::ZString> *this)
 {
-  OSuite::TOrderedMap<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString> > *v1; // rcx
+  OSuite::TOrderedMap<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString> > *m_pLists; // rcx
 
   this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TMap<OSuite::ZString,OSuite::ZString>::`vftable;
-  v1 = this->m_pLists;
-  if ( v1 )
+  m_pLists = this->m_pLists;
+  if ( m_pLists )
   {
-    if ( LODWORD(v1[-1].m_Comparer.vfptr) )
-      v1->vfptr->__vecDelDtor((OSuite::ZObject *)&v1->vfptr, 3u);
+    if ( LODWORD(m_pLists[-1].m_Comparer.vfptr) )
+      m_pLists->vfptr->__vecDelDtor(m_pLists, 3u);
     else
-      operator delete[](&v1[-1].m_Comparer.vfptr);
+      operator delete[](&m_pLists[-1].m_Comparer.OSuite::ZObject);
   }
 }
 
 // File Line: 272
 // RVA: 0x42E250
-void __fastcall OSuite::TMap<OSuite::ZString,OSuite::ZString>::Insert(OSuite::TMap<OSuite::ZString,OSuite::ZString> *this, OSuite::ZString *key, OSuite::ZString *value)
+void __fastcall OSuite::TMap<OSuite::ZString,OSuite::ZString>::Insert(
+        OSuite::TMap<OSuite::ZString,OSuite::ZString> *this,
+        OSuite::ZString *key,
+        OSuite::ZString *value)
 {
-  OSuite::ZString *v3; // rbp
-  OSuite::ZString *v4; // rdi
-  OSuite::TMap<OSuite::ZString,OSuite::ZString> *v5; // rsi
   OSuite::IHashable *v6; // rcx
-  signed __int64 v7; // rbx
+  __int64 v7; // rbx
   unsigned __int64 v8; // rax
-  OSuite::TOrderedMap<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString> > *v9; // rcx
+  OSuite::TOrderedMap<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString> > *m_pLists; // rcx
 
-  v3 = value;
-  v4 = key;
-  v5 = this;
   if ( key )
-    v6 = (OSuite::IHashable *)&key->vfptr;
+    v6 = &key->OSuite::IHashable;
   else
     v6 = 0i64;
-  v7 = (signed int)((v5->m_nHashSize - 1) & (unsigned __int64)((__int64 (*)(void))v6->vfptr->ComputeHash)());
-  v8 = OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&v5->m_pLists[v7].vfptr);
-  v9 = v5->m_pLists;
-  v5->m_nCount -= v8;
+  v7 = (int)((this->m_nHashSize - 1) & ((__int64 (__fastcall *)(OSuite::IHashable *))v6->vfptr->ComputeHash)(v6));
+  v8 = OSuite::ZHttpStreamReader::Tell(&this->m_pLists[v7]);
+  m_pLists = this->m_pLists;
+  this->m_nCount -= v8;
   OSuite::TOrderedMap<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString>>::Insert(
-    &v9[v7],
-    v4,
-    v3);
-  v5->m_nCount += OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&v5->m_pLists[v7].vfptr);
+    &m_pLists[v7],
+    key,
+    value);
+  this->m_nCount += OSuite::ZHttpStreamReader::Tell(&this->m_pLists[v7]);
 }
 

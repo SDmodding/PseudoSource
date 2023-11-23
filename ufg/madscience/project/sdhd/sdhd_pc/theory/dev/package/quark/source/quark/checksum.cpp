@@ -1,27 +1,19 @@
 // File Line: 289
 // RVA: 0x182B70
-__int64 __fastcall UFG::qDataHash32(const void *data, unsigned __int64 num_bytes, unsigned int prev_hash)
+__int64 __fastcall UFG::qDataHash32(char *data, unsigned __int64 num_bytes, unsigned int prev_hash)
 {
-  unsigned __int64 v3; // r10
   char *v4; // r9
-  unsigned int v5; // edx
+  unsigned int i; // edx
   char v6; // al
 
-  v3 = num_bytes;
-  v4 = (char *)data;
+  v4 = data;
   if ( data )
   {
-    v5 = 0;
-    if ( v3 )
+    for ( i = 0; i < num_bytes; prev_hash = (prev_hash << 8) ^ sCrcTable32[(unsigned __int8)(v6 ^ HIBYTE(prev_hash))] )
     {
-      do
-      {
-        v6 = *v4;
-        ++v5;
-        ++v4;
-        prev_hash = (prev_hash << 8) ^ sCrcTable32[(unsigned __int8)(v6 ^ HIBYTE(prev_hash))];
-      }
-      while ( v5 < v3 );
+      v6 = *v4;
+      ++i;
+      ++v4;
     }
   }
   return prev_hash;
@@ -29,28 +21,20 @@ __int64 __fastcall UFG::qDataHash32(const void *data, unsigned __int64 num_bytes
 
 // File Line: 306
 // RVA: 0x182BC0
-unsigned __int64 __fastcall UFG::qDataHash64(const void *data, unsigned __int64 num_bytes, unsigned __int64 prev_hash)
+unsigned __int64 __fastcall UFG::qDataHash64(char *data, unsigned __int64 num_bytes, unsigned __int64 prev_hash)
 {
-  unsigned __int64 v3; // r10
   char *v4; // r9
-  unsigned int v5; // edx
+  unsigned int i; // edx
   char v6; // al
 
-  v3 = num_bytes;
-  v4 = (char *)data;
+  v4 = data;
   if ( data )
   {
-    v5 = 0;
-    if ( v3 )
+    for ( i = 0; i < num_bytes; prev_hash = (prev_hash >> 8) ^ sCrcTable64[(unsigned __int8)(prev_hash ^ v6)] )
     {
-      do
-      {
-        v6 = *v4;
-        ++v5;
-        ++v4;
-        prev_hash = (prev_hash >> 8) ^ sCrcTable64[(unsigned __int8)(prev_hash ^ v6)];
-      }
-      while ( v5 < v3 );
+      v6 = *v4;
+      ++i;
+      ++v4;
     }
   }
   return prev_hash;
@@ -108,15 +92,13 @@ unsigned __int64 __fastcall UFG::qStringHash64(const char *data, unsigned __int6
 
 // File Line: 361
 // RVA: 0x18B720
-__int64 __fastcall UFG::qStringHashUpper32(const char *str, unsigned int prevHash)
+__int64 __fastcall UFG::qStringHashUpper32(const char *str, int prevHash)
 {
-  unsigned int v2; // er8
   const char *v3; // r9
   char v4; // al
   unsigned int v5; // ecx
-  unsigned int v6; // er8
+  unsigned int v6; // r8d
 
-  v2 = prevHash;
   v3 = str;
   if ( str )
   {
@@ -128,28 +110,26 @@ __int64 __fastcall UFG::qStringHashUpper32(const char *str, unsigned int prevHas
         if ( v4 <= 0x7A && v4 >= 0x61 )
           v4 -= 0x20;
         ++v3;
-        v5 = v2 << 8;
-        v6 = sCrcTable32[(unsigned __int8)(v4 ^ HIBYTE(v2))];
+        v5 = prevHash << 8;
+        v6 = sCrcTable32[(unsigned __int8)(v4 ^ HIBYTE(prevHash))];
         v4 = *v3;
-        v2 = v5 ^ v6;
+        prevHash = v5 ^ v6;
       }
       while ( *v3 );
     }
   }
-  return v2;
+  return (unsigned int)prevHash;
 }
 
 // File Line: 378
 // RVA: 0x18B780
 unsigned __int64 __fastcall UFG::qStringHashUpper64(const char *data, unsigned __int64 prev_hash)
 {
-  unsigned __int64 v2; // r8
   const char *v3; // r9
   char v4; // al
   unsigned __int64 v5; // rcx
   unsigned __int64 v6; // r8
 
-  v2 = prev_hash;
   v3 = data;
   if ( data )
   {
@@ -161,14 +141,14 @@ unsigned __int64 __fastcall UFG::qStringHashUpper64(const char *data, unsigned _
         if ( v4 <= 122 && v4 >= 97 )
           v4 -= 32;
         ++v3;
-        v5 = v2;
-        v6 = sCrcTable64[(unsigned __int8)(v2 ^ v4)];
+        v5 = prev_hash;
+        v6 = sCrcTable64[(unsigned __int8)(prev_hash ^ v4)];
         v4 = *v3;
-        v2 = (v5 >> 8) ^ v6;
+        prev_hash = (v5 >> 8) ^ v6;
       }
       while ( *v3 );
     }
   }
-  return v2;
+  return prev_hash;
 }
 

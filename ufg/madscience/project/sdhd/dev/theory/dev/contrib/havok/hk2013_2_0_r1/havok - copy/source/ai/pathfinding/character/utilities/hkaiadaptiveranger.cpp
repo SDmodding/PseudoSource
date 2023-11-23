@@ -1,8 +1,11 @@
 // File Line: 22
 // RVA: 0xC10B80
-void __fastcall hkaiAdaptiveRanger::updateRange(hkaiAdaptiveRanger *this, unsigned int idealTargetCount, unsigned int actualTargetCount)
+void __fastcall hkaiAdaptiveRanger::updateRange(
+        hkaiAdaptiveRanger *this,
+        unsigned int idealTargetCount,
+        unsigned int actualTargetCount)
 {
-  signed int v3; // er8
+  signed int v3; // r8d
   signed int v4; // edx
   float v5; // xmm0_4
 

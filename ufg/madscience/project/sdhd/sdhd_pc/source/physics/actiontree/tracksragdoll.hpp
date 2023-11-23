@@ -119,7 +119,8 @@ void __fastcall RagdollChangeVelocityTrackingStrTrack::Create()
 
 // File Line: 381
 // RVA: 0x2C20F0
-const char *__fastcall RagdollChangeVelocityTrackingParamsRawTrack::GetClassname(RagdollChangeVelocityTrackingParamsRawTrack *this)
+const char *__fastcall RagdollChangeVelocityTrackingParamsRawTrack::GetClassname(
+        RagdollChangeVelocityTrackingParamsRawTrack *this)
 {
   return RagdollChangeVelocityTrackingParamsRawTrack::sClassName;
 }

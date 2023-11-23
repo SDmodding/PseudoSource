@@ -2,20 +2,20 @@
 // RVA: 0x14671E0
 unsigned __int64 dynamic_initializer_for__NetMetrics::mUpBandWidthData__()
 {
-  signed int v0; // edi
-  char *v1; // rbx
+  int v0; // edi
+  float *p_mAverageUsage; // rbx
   unsigned __int64 result; // rax
 
   v0 = 39;
-  v1 = (char *)&NetMetrics::mUpBandWidthData[0][0].mAverageUsage;
+  p_mAverageUsage = &NetMetrics::mUpBandWidthData[0][0].mAverageUsage;
   do
   {
-    *((_DWORD *)v1 - 5) = 0;
-    *(_QWORD *)(v1 - 4) = 0i64;
+    *(p_mAverageUsage - 5) = 0.0;
+    *(_QWORD *)(p_mAverageUsage - 1) = 0i64;
     result = UFG::qGetTicks();
     --v0;
-    *(_QWORD *)(v1 - 12) = result;
-    v1 += 24;
+    *(_QWORD *)(p_mAverageUsage - 3) = result;
+    p_mAverageUsage += 6;
   }
   while ( v0 >= 0 );
   return result;
@@ -25,20 +25,20 @@ unsigned __int64 dynamic_initializer_for__NetMetrics::mUpBandWidthData__()
 // RVA: 0x1467100
 unsigned __int64 dynamic_initializer_for__NetMetrics::mDownBandWidthData__()
 {
-  signed int v0; // edi
-  char *v1; // rbx
+  int v0; // edi
+  float *p_mAverageUsage; // rbx
   unsigned __int64 result; // rax
 
   v0 = 39;
-  v1 = (char *)&NetMetrics::mDownBandWidthData[0][0].mAverageUsage;
+  p_mAverageUsage = &NetMetrics::mDownBandWidthData[0][0].mAverageUsage;
   do
   {
-    *((_DWORD *)v1 - 5) = 0;
-    *(_QWORD *)(v1 - 4) = 0i64;
+    *(p_mAverageUsage - 5) = 0.0;
+    *(_QWORD *)(p_mAverageUsage - 1) = 0i64;
     result = UFG::qGetTicks();
     --v0;
-    *(_QWORD *)(v1 - 12) = result;
-    v1 += 24;
+    *(_QWORD *)(p_mAverageUsage - 3) = result;
+    p_mAverageUsage += 6;
   }
   while ( v0 >= 0 );
   return result;

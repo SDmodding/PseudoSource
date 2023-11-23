@@ -1,6 +1,12 @@
 // File Line: 19
 // RVA: 0xD63B90
-hkSimdFloat32 *__fastcall hkpSimpleContactConstraintUtil::calculateSeparatingVelocity(hkSimdFloat32 *result, hkpRigidBody *bodyA, hkpRigidBody *bodyB, hkVector4f *centerOfMassInWorldA, hkVector4f *centerOfMassInWorldB, hkContactPoint *cp)
+hkSimdFloat32 *__fastcall hkpSimpleContactConstraintUtil::calculateSeparatingVelocity(
+        hkSimdFloat32 *result,
+        hkpRigidBody *bodyA,
+        hkpRigidBody *bodyB,
+        hkVector4f *centerOfMassInWorldA,
+        hkVector4f *centerOfMassInWorldB,
+        hkContactPoint *cp)
 {
   __m128 v6; // xmm2
   hkSimdFloat32 *v7; // rax

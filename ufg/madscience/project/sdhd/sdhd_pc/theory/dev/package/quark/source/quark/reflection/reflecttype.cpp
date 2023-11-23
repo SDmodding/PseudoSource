@@ -1,8 +1,11 @@
 // File Line: 26
 // RVA: 0x160A70
-void __fastcall UFG::SerializeOperation::SerializeOperation(UFG::SerializeOperation *this, unsigned __int64 type_uid, void (__fastcall *load)(char *), void (__fastcall *unload)(char *))
+void __fastcall UFG::SerializeOperation::SerializeOperation(
+        UFG::SerializeOperation *this,
+        unsigned __int64 type_uid,
+        void (__fastcall *load)(char *),
+        void (__fastcall *unload)(char *))
 {
-  UFG::SerializeOperation *v4; // rbx
   UFG::qOpRegistry *v5; // rax
 
   this->mBaseNode.mUID = 0i64;
@@ -14,67 +17,65 @@ void __fastcall UFG::SerializeOperation::SerializeOperation(UFG::SerializeOperat
   this->mOnLoadFunc = load;
   this->mOnUnloadFunc = unload;
   this->mBaseNode.mUID = type_uid;
-  v4 = this;
   v5 = UFG::qOpRegistry::Instance();
-  UFG::qTree64Base::Add(&v5->mOpTree.mTree, &v4->mBaseNode);
+  UFG::qTree64Base::Add(&v5->mOpTree.mTree, &this->mBaseNode);
 }
 
 // File Line: 37
 // RVA: 0x15FF50
-void __fastcall UFG::EditNotification::EditNotification(UFG::EditNotification *this, unsigned __int64 type_uid, void (__fastcall *changed)(char *, UFG::qReflectField *, UFG::qReflectType *, char *, void *), void (__fastcall *reload)(char *, void *), void *user_data)
+void __fastcall UFG::EditNotification::EditNotification(
+        UFG::EditNotification *this,
+        unsigned __int64 type_uid,
+        void (__fastcall *changed)(char *, UFG::qReflectField *, UFG::qReflectType *, char *, void *),
+        void (__fastcall *reload)(char *, void *),
+        void *user_data)
 {
-  UFG::EditNotification *v5; // rbx
-  UFG::qOpRegistry *v6; // rax
-  UFG::qNode<UFG::EditNotification,UFG::EditNotification> *v7; // rcx
-  UFG::qNode<UFG::EditNotification,UFG::EditNotification> *v8; // rax
+  UFG::qList<UFG::EditNotification,UFG::EditNotification,1,0> *p_mNotificationList; // rcx
+  UFG::qNode<UFG::EditNotification,UFG::EditNotification> *mPrev; // rax
 
-  v5 = this;
-  this->mPrev = (UFG::qNode<UFG::EditNotification,UFG::EditNotification> *)&this->mPrev;
-  this->mNext = (UFG::qNode<UFG::EditNotification,UFG::EditNotification> *)&this->mPrev;
+  this->mPrev = this;
+  this->mNext = this;
   this->mTypeUID = type_uid;
   this->mUserData = user_data;
   this->mOnPropertyChangedFunc = changed;
   this->mOnObjectReloadedFunc = reload;
-  v6 = UFG::qOpRegistry::Instance();
-  v7 = &v6->mNotificationList.mNode;
-  v8 = v6->mNotificationList.mNode.mPrev;
-  v8->mNext = (UFG::qNode<UFG::EditNotification,UFG::EditNotification> *)&v5->mPrev;
-  v5->mPrev = v8;
-  v5->mNext = v7;
-  v7->mPrev = (UFG::qNode<UFG::EditNotification,UFG::EditNotification> *)&v5->mPrev;
+  p_mNotificationList = &UFG::qOpRegistry::Instance()->mNotificationList;
+  mPrev = p_mNotificationList->mNode.mPrev;
+  mPrev->mNext = this;
+  this->mPrev = mPrev;
+  this->mNext = &p_mNotificationList->mNode;
+  p_mNotificationList->mNode.mPrev = this;
 }
 
 // File Line: 42
 // RVA: 0x162DD0
 void __fastcall UFG::EditNotification::~EditNotification(UFG::EditNotification *this)
 {
-  UFG::EditNotification *v1; // rbx
-  UFG::qNode<UFG::EditNotification,UFG::EditNotification> *v2; // rdx
-  UFG::qNode<UFG::EditNotification,UFG::EditNotification> *v3; // rax
+  UFG::qNode<UFG::EditNotification,UFG::EditNotification> *mPrev; // rdx
+  UFG::qNode<UFG::EditNotification,UFG::EditNotification> *mNext; // rax
   UFG::qNode<UFG::EditNotification,UFG::EditNotification> *v4; // rdx
   UFG::qNode<UFG::EditNotification,UFG::EditNotification> *v5; // rax
 
-  v1 = this;
   UFG::qOpRegistry::Instance();
-  v2 = v1->mPrev;
-  v3 = v1->mNext;
-  v2->mNext = v3;
-  v3->mPrev = v2;
-  v1->mPrev = (UFG::qNode<UFG::EditNotification,UFG::EditNotification> *)&v1->mPrev;
-  v1->mNext = (UFG::qNode<UFG::EditNotification,UFG::EditNotification> *)&v1->mPrev;
-  v4 = v1->mPrev;
-  v5 = v1->mNext;
+  mPrev = this->mPrev;
+  mNext = this->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->mPrev = this;
+  this->mNext = this;
+  v4 = this->mPrev;
+  v5 = this->mNext;
   v4->mNext = v5;
   v5->mPrev = v4;
-  v1->mPrev = (UFG::qNode<UFG::EditNotification,UFG::EditNotification> *)&v1->mPrev;
-  v1->mNext = (UFG::qNode<UFG::EditNotification,UFG::EditNotification> *)&v1->mPrev;
+  this->mPrev = this;
+  this->mNext = this;
 }
 
 // File Line: 57
 // RVA: 0x173F20
 UFG::qOpRegistry *__fastcall UFG::qOpRegistry::Instance()
 {
-  if ( !(_S10_0 & 1) )
+  if ( (_S10_0 & 1) == 0 )
   {
     _S10_0 |= 1u;
     sOpsInstance.mOpTree.mTree.mHead.mUID = 0i64;
@@ -93,17 +94,14 @@ UFG::qOpRegistry *__fastcall UFG::qOpRegistry::Instance()
 
 // File Line: 89
 // RVA: 0x178750
-void __fastcall UFG::OnLoadHandle(char *object_data)
+void __fastcall UFG::OnLoadHandle(UFG::qReflectHandleBase *object_data)
 {
   if ( object_data )
   {
-    *(_QWORD *)object_data = object_data;
-    *((_QWORD *)object_data + 1) = object_data;
+    object_data->mPrev = object_data;
+    object_data->mNext = object_data;
   }
-  UFG::qReflectHandleBase::Init(
-    (UFG::qReflectHandleBase *)object_data,
-    *((_QWORD *)object_data + 2),
-    *((_QWORD *)object_data + 3));
+  UFG::qReflectHandleBase::Init(object_data, object_data->mTypeUID, object_data->mNameUID);
 }
 
 // File Line: 99
@@ -211,9 +209,13 @@ void UFG::_dynamic_initializer_for__gqWiseSymbolSerialize__()
 
 // File Line: 121
 // RVA: 0x178740
-void __fastcall UFG::OnHandlePropertyChanged(char *object, UFG::qReflectField *field, UFG::qReflectType *field_type, char *field_data)
+void __fastcall UFG::OnHandlePropertyChanged(
+        UFG::qReflectHandleBase *object,
+        UFG::qReflectField *field,
+        UFG::qReflectType *field_type,
+        char *field_data)
 {
-  UFG::qReflectHandleBase::Init((UFG::qReflectHandleBase *)object, *((_QWORD *)object + 2), *((_QWORD *)object + 3));
+  UFG::qReflectHandleBase::Init(object, object->mTypeUID, object->mNameUID);
 }
 
 // File Line: 127
@@ -223,9 +225,8 @@ __int64 UFG::_dynamic_initializer_for__gHandleChangedNotifier__()
   const char *v0; // r8
   unsigned __int64 v1; // rdx
   char v2; // al
-  UFG::qOpRegistry *v3; // rax
-  UFG::qNode<UFG::EditNotification,UFG::EditNotification> *v4; // rcx
-  UFG::qNode<UFG::EditNotification,UFG::EditNotification> *v5; // rax
+  UFG::qList<UFG::EditNotification,UFG::EditNotification,1,0> *p_mNotificationList; // rcx
+  UFG::qNode<UFG::EditNotification,UFG::EditNotification> *mPrev; // rax
 
   v0 = "UFG::qReflectHandleBase";
   v1 = -1i64;
@@ -240,14 +241,13 @@ __int64 UFG::_dynamic_initializer_for__gHandleChangedNotifier__()
   UFG::gHandleChangedNotifier.mUserData = 0i64;
   UFG::gHandleChangedNotifier.mOnPropertyChangedFunc = (void (__fastcall *)(char *, UFG::qReflectField *, UFG::qReflectType *, char *, void *))UFG::OnHandlePropertyChanged;
   UFG::gHandleChangedNotifier.mOnObjectReloadedFunc = (void (__fastcall *)(char *, void *))_;
-  v3 = UFG::qOpRegistry::Instance();
-  v4 = &v3->mNotificationList.mNode;
-  v5 = v3->mNotificationList.mNode.mPrev;
-  v5->mNext = (UFG::qNode<UFG::EditNotification,UFG::EditNotification> *)&UFG::gHandleChangedNotifier;
-  UFG::gHandleChangedNotifier.mPrev = v5;
-  UFG::gHandleChangedNotifier.mNext = v4;
-  v4->mPrev = (UFG::qNode<UFG::EditNotification,UFG::EditNotification> *)&UFG::gHandleChangedNotifier;
-  return atexit(UFG::_dynamic_atexit_destructor_for__gHandleChangedNotifier__);
+  p_mNotificationList = &UFG::qOpRegistry::Instance()->mNotificationList;
+  mPrev = p_mNotificationList->mNode.mPrev;
+  mPrev->mNext = &UFG::gHandleChangedNotifier;
+  UFG::gHandleChangedNotifier.mPrev = mPrev;
+  UFG::gHandleChangedNotifier.mNext = &p_mNotificationList->mNode;
+  p_mNotificationList->mNode.mPrev = &UFG::gHandleChangedNotifier;
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gHandleChangedNotifier__);
 }
 
 // File Line: 142
@@ -266,14 +266,16 @@ void __fastcall UFG::FactoryOperation::FactoryOperation(UFG::FactoryOperation *t
 
 // File Line: 149
 // RVA: 0x160130
-void __fastcall UFG::FactoryOperation::FactoryOperation(UFG::FactoryOperation *this, unsigned __int64 type_uid, UFG::qReflectObject *(__fastcall *createFn)(unsigned __int64), void (__fastcall *deleteFn)(char *))
+void __fastcall UFG::FactoryOperation::FactoryOperation(
+        UFG::FactoryOperation *this,
+        unsigned __int64 type_uid,
+        UFG::qReflectObject *(__fastcall *createFn)(unsigned __int64),
+        void (__fastcall *deleteFn)(char *))
 {
-  UFG::FactoryOperation *v4; // rbx
   UFG::qTree64<UFG::FactoryOperation,UFG::FactoryOperation,0> *v5; // rax
   const char *v6; // rdi
   UFG::qMemoryPool *v7; // rcx
 
-  v4 = this;
   this->mBaseNode.mUID = 0i64;
   this->mBaseNode.mParent = &this->mBaseNode;
   this->mBaseNode.mChildren[0] = &this->mBaseNode;
@@ -311,49 +313,47 @@ void __fastcall UFG::FactoryOperation::FactoryOperation(UFG::FactoryOperation *t
     }
     UFG::FactoryOperation::sOperations = v5;
   }
-  UFG::qTree64Base::Add(&v5->mTree, &v4->mBaseNode);
+  UFG::qTree64Base::Add(&v5->mTree, &this->mBaseNode);
 }
 
 // File Line: 164
 // RVA: 0x1713D0
 char *__fastcall UFG::qReflectObject::GetName(UFG::qReflectObject *this)
 {
-  unsigned __int64 v1; // rbx
-  UFG::qReflectObject *v2; // rdi
+  unsigned __int64 mTypeUID; // rbx
   UFG::qReflectWarehouse *v3; // rax
   UFG::qReflectWarehouse *v4; // rdx
 
-  v1 = this->mTypeUID;
-  v2 = this;
+  mTypeUID = this->mTypeUID;
   v3 = UFG::qReflectWarehouse::Instance();
   v4 = (UFG::qReflectWarehouse *)v3->mInventoryTree.mTree.mHead.mChildren[0];
   if ( v4 == v3 )
-    return &customWorldMapCaption;
-  while ( v4->mInventoryTree.mTree.mHead.mUID < v1 )
+    return &customCaption;
+  while ( v4->mInventoryTree.mTree.mHead.mUID < mTypeUID )
   {
     v4 = (UFG::qReflectWarehouse *)v4->mInventoryTree.mTree.mHead.mChildren[1];
 LABEL_6:
     if ( v4 == v3 )
-      return &customWorldMapCaption;
+      return &customCaption;
   }
-  if ( v4->mInventoryTree.mTree.mHead.mUID > v1 )
+  if ( v4->mInventoryTree.mTree.mHead.mUID > mTypeUID )
   {
     v4 = (UFG::qReflectWarehouse *)v4->mInventoryTree.mTree.mHead.mChildren[0];
     goto LABEL_6;
   }
   if ( v4 == (UFG::qReflectWarehouse *)8 )
-    return &customWorldMapCaption;
+    return &customCaption;
   return UFG::qReflectInventoryBase::FindObjectName(
            (UFG::qReflectInventoryBase *)&v4[-1].mInventoryTree.mTree.mCount,
-           v2->mBaseNode.mUID);
+           (UFG::qReflectInventoryBaseVtbl *)this->mBaseNode.mUID);
 }
 
 // File Line: 183
 // RVA: 0x161910
 void __fastcall UFG::qReflectHandleBase::qReflectHandleBase(UFG::qReflectHandleBase *this)
 {
-  this->mPrev = (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)&this->mPrev;
-  this->mNext = (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)&this->mPrev;
+  this->mPrev = this;
+  this->mNext = this;
   this->mTypeUID = 0i64;
   this->mNameUID = 0i64;
   this->mData = 0i64;
@@ -361,10 +361,12 @@ void __fastcall UFG::qReflectHandleBase::qReflectHandleBase(UFG::qReflectHandleB
 
 // File Line: 195
 // RVA: 0x1618B0
-void __fastcall UFG::qReflectHandleBase::qReflectHandleBase(UFG::qReflectHandleBase *this, UFG::qReflectHandleBase *other)
+void __fastcall UFG::qReflectHandleBase::qReflectHandleBase(
+        UFG::qReflectHandleBase *this,
+        UFG::qReflectHandleBase *other)
 {
-  this->mPrev = (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)&this->mPrev;
-  this->mNext = (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)&this->mPrev;
+  this->mPrev = this;
+  this->mNext = this;
   UFG::qReflectHandleBase::Init(this, other->mTypeUID, other->mNameUID);
 }
 
@@ -372,58 +374,56 @@ void __fastcall UFG::qReflectHandleBase::qReflectHandleBase(UFG::qReflectHandleB
 // RVA: 0x163F80
 void __fastcall UFG::qReflectHandleBase::~qReflectHandleBase(UFG::qReflectHandleBase *this)
 {
-  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *v1; // rdx
-  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *v2; // rax
+  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *mPrev; // rdx
+  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *mNext; // rax
   UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *v3; // rdx
   UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *v4; // rax
 
-  v1 = this->mPrev;
-  v2 = this->mNext;
-  v1->mNext = v2;
-  v2->mPrev = v1;
-  this->mPrev = (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)&this->mPrev;
-  this->mNext = (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)&this->mPrev;
+  mPrev = this->mPrev;
+  mNext = this->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->mPrev = this;
+  this->mNext = this;
   this->mData = 0i64;
   v3 = this->mPrev;
   v4 = this->mNext;
   v3->mNext = v4;
   v4->mPrev = v3;
-  this->mPrev = (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)&this->mPrev;
-  this->mNext = (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)&this->mPrev;
+  this->mPrev = this;
+  this->mNext = this;
 }
 
 // File Line: 205
 // RVA: 0x164790
-UFG::qReflectHandleBase *__fastcall UFG::qReflectHandleBase::operator=(UFG::qReflectHandleBase *this, UFG::qReflectHandleBase *other)
+UFG::qReflectHandleBase *__fastcall UFG::qReflectHandleBase::operator=(
+        UFG::qReflectHandleBase *this,
+        UFG::qReflectHandleBase *other)
 {
-  UFG::qReflectHandleBase *v2; // rbx
-
-  v2 = this;
   UFG::qReflectHandleBase::Init(this, other->mTypeUID, other->mNameUID);
-  return v2;
+  return this;
 }
 
 // File Line: 212
 // RVA: 0x173420
-void __fastcall UFG::qReflectHandleBase::Init(UFG::qReflectHandleBase *this, unsigned __int64 type_uid, unsigned __int64 name_uid)
+void __fastcall UFG::qReflectHandleBase::Init(
+        UFG::qReflectHandleBase *this,
+        unsigned __int64 type_uid,
+        unsigned __int64 name_uid)
 {
-  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *v3; // rax
-  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *v4; // r9
-  UFG::qReflectInventoryBase *v5; // rsi
-  unsigned __int64 v6; // rbx
-  UFG::qReflectHandleBase *v7; // rdi
+  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *mNext; // rax
+  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *mPrev; // r9
+  UFG::qReflectInventoryBase *p_mCount; // rsi
   UFG::qReflectWarehouse *v8; // rax
   UFG::qReflectWarehouse *v9; // rcx
 
-  v3 = this->mNext;
-  v4 = this->mPrev;
-  v5 = 0i64;
-  v4->mNext = v3;
-  v3->mPrev = v4;
-  v6 = type_uid;
-  v7 = this;
-  this->mPrev = (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)&this->mPrev;
-  this->mNext = (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)&this->mPrev;
+  mNext = this->mNext;
+  mPrev = this->mPrev;
+  p_mCount = 0i64;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->mPrev = this;
+  this->mNext = this;
   this->mData = 0i64;
   this->mTypeUID = type_uid;
   this->mNameUID = name_uid;
@@ -433,21 +433,21 @@ void __fastcall UFG::qReflectHandleBase::Init(UFG::qReflectHandleBase *this, uns
   v9 = (UFG::qReflectWarehouse *)v8->mInventoryTree.mTree.mHead.mChildren[0];
   if ( v9 == v8 )
     goto LABEL_10;
-  while ( v9->mInventoryTree.mTree.mHead.mUID < v6 )
+  while ( v9->mInventoryTree.mTree.mHead.mUID < type_uid )
   {
     v9 = (UFG::qReflectWarehouse *)v9->mInventoryTree.mTree.mHead.mChildren[1];
 LABEL_7:
     if ( v9 == v8 )
       goto LABEL_10;
   }
-  if ( v9->mInventoryTree.mTree.mHead.mUID > v6 )
+  if ( v9->mInventoryTree.mTree.mHead.mUID > type_uid )
   {
     v9 = (UFG::qReflectWarehouse *)v9->mInventoryTree.mTree.mHead.mChildren[0];
     goto LABEL_7;
   }
-  v5 = (UFG::qReflectInventoryBase *)&v9[-1].mInventoryTree.mTree.mCount;
+  p_mCount = (UFG::qReflectInventoryBase *)&v9[-1].mInventoryTree.mTree.mCount;
 LABEL_10:
-  UFG::qReflectInventoryBase::AttachHandle(v5, v7);
+  UFG::qReflectInventoryBase::AttachHandle(p_mCount, this);
 }
 
 // File Line: 227

@@ -109,17 +109,17 @@ hkClass *__fastcall hkpMoppCode::staticClass()
 
 // File Line: 195
 // RVA: 0xD98F30
-void __fastcall finishLoadedObjecthkpMoppCode(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpMoppCode(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpMoppCode::`vftable;
+    *p = &hkpMoppCode::`vftable;
 }
 
 // File Line: 201
 // RVA: 0xD98F50
-void __fastcall cleanupLoadedObjecthkpMoppCode(void *p)
+void __fastcall cleanupLoadedObjecthkpMoppCode(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 205
@@ -140,8 +140,8 @@ void **dynamic_initializer_for__hkpMoppCodeTypeInfo__()
   hkpMoppCodeTypeInfo.m_typeName = "hkpMoppCode";
   hkpMoppCodeTypeInfo.m_vtable = result;
   hkpMoppCodeTypeInfo.m_scopedName = "!hkpMoppCode";
-  hkpMoppCodeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpMoppCode;
-  hkpMoppCodeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpMoppCode;
+  hkpMoppCodeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpMoppCode;
+  hkpMoppCodeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpMoppCode;
   return result;
 }
 

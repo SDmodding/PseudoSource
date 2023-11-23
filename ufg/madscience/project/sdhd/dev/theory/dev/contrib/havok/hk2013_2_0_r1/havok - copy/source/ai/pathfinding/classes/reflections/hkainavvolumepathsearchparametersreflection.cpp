@@ -27,7 +27,7 @@ void dynamic_initializer_for__hkaiNavVolumePathSearchParametersClass__()
     &hkaiNavVolumePathSearchParameters_Default,
     0i64,
     0,
-    4u);
+    4);
 }
 
 // File Line: 102

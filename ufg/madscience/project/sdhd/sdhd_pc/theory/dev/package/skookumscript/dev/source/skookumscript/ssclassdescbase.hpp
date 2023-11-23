@@ -9,10 +9,7 @@ void __fastcall SSClassDescBase::~SSClassDescBase(SSClassDescBase *this)
 // RVA: 0x11E6F0
 bool __fastcall SSClassDescBase::is_actor_instance(SSClassDescBase *this)
 {
-  SSClassDescBase *v1; // rbx
-
-  v1 = this;
-  return ((unsigned __int8 (*)(void))this->vfptr->is_actor_class)() && !v1->vfptr->is_metaclass(v1);
+  return this->vfptr->is_actor_class(this) && !this->vfptr->is_metaclass(this);
 }
 
 // File Line: 201

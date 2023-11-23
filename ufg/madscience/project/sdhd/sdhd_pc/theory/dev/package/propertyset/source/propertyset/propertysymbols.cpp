@@ -7,14 +7,14 @@ void MakeSureHashesCalculated(void)
   if ( !done )
   {
     for ( i = 0; i < 0x1C; ++i )
-      dataTypeMap[i].mXMLTagHashUpper = UFG::qStringHashUpper32(dataTypeMap[i].mpszXMLTag, 0xFFFFFFFF);
+      dataTypeMap[i].mXMLTagHashUpper = UFG::qStringHashUpper32(dataTypeMap[i].mpszXMLTag, -1);
     done = 1;
   }
 }
 
 // File Line: 90
 // RVA: 0x1F8460
-const char *__fastcall GetStringFromPropertySetType(ePropertyType eDataType)
+const char *__fastcall GetStringFromPropertySetType(unsigned int eDataType)
 {
   unsigned int i; // [rsp+20h] [rbp-18h]
 
@@ -23,21 +23,19 @@ const char *__fastcall GetStringFromPropertySetType(ePropertyType eDataType)
     if ( dataTypeMap[i].mDataType == eDataType )
       return dataTypeMap[i].mpszXMLTag;
   }
-  UFG::qPrintf("Failed to get Property String for DataType value [%d]\n", (unsigned int)eDataType);
+  UFG::qPrintf("Failed to get Property String for DataType value [%d]\n", eDataType);
   return 0i64;
 }
 
 // File Line: 108
 // RVA: 0x1F7B70
-signed __int64 __fastcall GetPropertySetDataTypeFromString(const char *pszDataType)
+__int64 __fastcall GetPropertySetDataTypeFromString(const char *pszDataType)
 {
   unsigned int i; // [rsp+20h] [rbp-18h]
   int v3; // [rsp+24h] [rbp-14h]
-  char *str; // [rsp+40h] [rbp+8h]
 
-  str = (char *)pszDataType;
   MakeSureHashesCalculated();
-  v3 = UFG::qStringHashUpper32(str, 0xFFFFFFFF);
+  v3 = UFG::qStringHashUpper32(pszDataType, -1);
   for ( i = 0; i < 0x1C; ++i )
   {
     if ( dataTypeMap[i].mXMLTagHashUpper == v3 )
@@ -50,91 +48,83 @@ signed __int64 __fastcall GetPropertySetDataTypeFromString(const char *pszDataTy
 // RVA: 0x1EED30
 void __fastcall qPropertySetVariant::operator=(qPropertySetVariant *this, qPropertySetVariant *other)
 {
-  float v2; // ST40_4
-  signed __int64 v3; // ST60_8
-  float v4; // ST58_4
-  float v5; // ST44_4
-  float *v6; // ST28_8
-  float v7; // ST38_4
-  float v8; // ST68_4
-  float v9; // ST3C_4
-  qPropertySetVariant *v10; // [rsp+90h] [rbp+8h]
-  qPropertySetVariant *v11; // [rsp+98h] [rbp+10h]
+  float v2; // [rsp+38h] [rbp-50h]
+  float w; // [rsp+3Ch] [rbp-4Ch]
+  float y; // [rsp+40h] [rbp-48h]
+  float z; // [rsp+44h] [rbp-44h]
+  float v6; // [rsp+58h] [rbp-30h]
+  float v7; // [rsp+68h] [rbp-20h]
 
-  v11 = other;
-  v10 = this;
   qPropertySetVariant::Clear(this);
-  v10->meType = v11->meType;
-  switch ( v11->meType )
+  this->meType = other->meType;
+  switch ( other->meType )
   {
-    case 0:
-      v10->mValueI8 = v11->mValueI8;
+    case UID_int8:
+      this->mValueI8 = other->mValueI8;
       break;
-    case 1:
-      v10->mValueI16 = v11->mValueI16;
+    case UID_int16:
+      this->mValueI16 = other->mValueI16;
       break;
-    case 2:
-      v10->mValueI32 = v11->mValueI32;
+    case UID_int32:
+      this->mValueI32 = other->mValueI32;
       break;
-    case 3:
-      v10->mValueI64 = v11->mValueI64;
+    case UID_int64:
+      this->mValueI64 = other->mValueI64;
       break;
-    case 4:
-      v10->16 = v11->16;
+    case UID_int128:
+      this->16 = other->16;
       break;
-    case 5:
-      v10->mValueI8 = v11->mValueI8;
+    case UID_uint8:
+      this->mValueI8 = other->mValueI8;
       break;
-    case 6:
-      v10->mValueI16 = v11->mValueI16;
+    case UID_uint16:
+      this->mValueI16 = other->mValueI16;
       break;
-    case 7:
-      v10->mValueI32 = v11->mValueI32;
+    case UID_uint32:
+      this->mValueI32 = other->mValueI32;
       break;
-    case 8:
-      v10->mValueI64 = v11->mValueI64;
+    case UID_uint64:
+      this->mValueI64 = other->mValueI64;
       break;
-    case 9:
-      v10->mValueI8 = v11->mValueI8;
+    case UID_bool:
+      this->mValueI8 = other->mValueI8;
       break;
-    case 0xA:
-      v10->mValueI32 = v11->mValueI32;
+    case UID_float:
+      this->mValueI32 = other->mValueI32;
       break;
-    case 0xB:
-    case 0xC:
-      UFG::qString::operator=(&v10->mValueString, &v11->mValueString);
+    case UID_double:
+    case UID_string:
+      UFG::qString::operator=(&this->mValueString, &other->mValueString);
       break;
-    case 0x11:
-      v2 = v11->mValueVector2.y;
-      v10->mValueVector2.x = v11->mValueVector2.x;
-      v10->mValueVector2.y = v2;
+    case UID_qVector2:
+      y = other->mValueVector2.y;
+      this->mValueVector2.x = other->mValueVector2.x;
+      this->mValueVector2.y = y;
       break;
-    case 0x12:
-      v3 = (signed __int64)&v10->mValueVector3;
-      v4 = v11->mValueVector3.y;
-      v5 = v11->mValueVector3.z;
-      v10->mValueVector3.x = v11->mValueVector3.x;
-      *(float *)(v3 + 4) = v4;
-      *(float *)(v3 + 8) = v5;
+    case UID_qVector3:
+      v6 = other->mValueVector3.y;
+      z = other->mValueVector3.z;
+      this->mValueVector3.x = other->mValueVector3.x;
+      this->mValueVector3.y = v6;
+      this->mValueVector3.z = z;
       break;
-    case 0x13:
-      v6 = &v10->mValueVector4.x;
-      v7 = v11->mValueVector4.y;
-      v8 = v11->mValueVector4.z;
-      v9 = v11->mValueVector4.w;
-      v10->mValueVector4.x = v11->mValueVector4.x;
-      v6[1] = v7;
-      v6[2] = v8;
-      v6[3] = v9;
+    case UID_qVector4:
+      v2 = other->mValueVector4.y;
+      v7 = other->mValueVector4.z;
+      w = other->mValueVector4.w;
+      this->mValueVector4.x = other->mValueVector4.x;
+      this->mValueVector4.y = v2;
+      this->mValueVector4.z = v7;
+      this->mValueVector4.w = w;
       break;
-    case 0x16:
-      UFG::qSymbol::qSymbol(&v10->mValueSymbol, &v11->mValueSymbol);
+    case UID_qSymbol:
+      UFG::qSymbol::qSymbol(&this->mValueSymbol, &other->mValueSymbol);
       break;
-    case 0x17:
-      UFG::qSymbol::qSymbol((UFG::qSymbol *)&v10->mValueSymbolUC, (UFG::qSymbol *)&v11->mValueSymbolUC);
+    case UID_qSymbolUC:
+      UFG::qSymbol::qSymbol((UFG::qSymbol *)&this->mValueSymbolUC, (UFG::qSymbol *)&other->mValueSymbolUC);
       break;
-    case 0x18:
-      UFG::qWiseSymbol::operator=(&v10->mValueWiseSymbol, &v11->mValueWiseSymbol);
+    case UID_qWiseSymbol:
+      UFG::qWiseSymbol::operator=(&this->mValueWiseSymbol, &other->mValueWiseSymbol);
       break;
     default:
       return;
@@ -145,93 +135,89 @@ void __fastcall qPropertySetVariant::operator=(qPropertySetVariant *this, qPrope
 // RVA: 0x1EF180
 bool __fastcall qPropertySetVariant::operator==(qPropertySetVariant *this, qPropertySetVariant *other)
 {
-  _BOOL8 v2; // rax
-  char *text_b; // ST90_8
-  const char *v4; // rax
-  bool v6; // [rsp+30h] [rbp-78h]
-  bool v7; // [rsp+38h] [rbp-70h]
-  bool v8; // [rsp+40h] [rbp-68h]
-  qPropertySetVariant *v9; // [rsp+B0h] [rbp+8h]
+  bool result; // al
+  const char *UsedSpace; // rax
+  bool v4; // [rsp+30h] [rbp-78h]
+  bool v5; // [rsp+38h] [rbp-70h]
+  bool v6; // [rsp+40h] [rbp-68h]
+  char *text_b; // [rsp+90h] [rbp-18h]
 
-  v9 = this;
   switch ( this->meType )
   {
-    case 0:
-      LOBYTE(v2) = this->mValueI8 == other->mValueI8;
+    case UID_int8:
+      result = this->mValueI8 == other->mValueI8;
       break;
-    case 1:
-      LOBYTE(v2) = this->mValueI16 == other->mValueI16;
+    case UID_int16:
+      result = this->mValueI16 == other->mValueI16;
       break;
-    case 2:
-      LOBYTE(v2) = this->mValueI32 == other->mValueI32;
+    case UID_int32:
+      result = this->mValueI32 == other->mValueI32;
       break;
-    case 3:
-      LOBYTE(v2) = this->mValueI64 == other->mValueI64;
+    case UID_int64:
+      result = this->mValueI64 == other->mValueI64;
       break;
-    case 4:
-      LOBYTE(v2) = 0;
+    case UID_int128:
+      result = 0;
       break;
-    case 5:
-      LOBYTE(v2) = this->mValueI8 == other->mValueI8;
+    case UID_uint8:
+      result = this->mValueI8 == other->mValueI8;
       break;
-    case 6:
-      LOBYTE(v2) = this->mValueI128.m128_u16[0] == other->mValueI128.m128_u16[0];
+    case UID_uint16:
+      result = this->mValueI128.m128_u16[0] == other->mValueI128.m128_u16[0];
       break;
-    case 7:
-      LOBYTE(v2) = this->mValueI32 == other->mValueI32;
+    case UID_uint32:
+      result = this->mValueI32 == other->mValueI32;
       break;
-    case 8:
-      LOBYTE(v2) = this->mValueI64 == other->mValueI64;
+    case UID_uint64:
+      result = this->mValueI64 == other->mValueI64;
       break;
-    case 9:
-      LOBYTE(v2) = this->mValueI8 == other->mValueI8;
+    case UID_bool:
+      result = this->mValueI8 == other->mValueI8;
       break;
-    case 0xA:
-      LOBYTE(v2) = other->mValueI128.m128_f32[0] == this->mValueI128.m128_f32[0];
+    case UID_float:
+      result = other->mValueI128.m128_f32[0] == this->mValueI128.m128_f32[0];
       break;
-    case 0xB:
-      LOBYTE(v2) = *(double *)&other->mValueI64 == *(double *)&this->mValueI64;
+    case UID_double:
+      result = other->mValueDouble == this->mValueDouble;
       break;
-    case 0xC:
+    case UID_string:
       text_b = (char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)&other->mValueString);
-      v4 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)&v9->mValueString);
-      v2 = (unsigned int)UFG::qStringCompare(v4, text_b, -1) == 0;
+      UsedSpace = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)&this->mValueString);
+      result = (unsigned int)UFG::qStringCompare(UsedSpace, text_b, -1) == 0;
       break;
-    case 0x11:
-      v6 = other->mValueVector2.x == this->mValueVector2.x && other->mValueVector2.y == this->mValueVector2.y;
-      LOBYTE(v2) = v6;
+    case UID_qVector2:
+      v4 = other->mValueVector2.x == this->mValueVector2.x && other->mValueVector2.y == this->mValueVector2.y;
+      result = v4;
       break;
-    case 0x12:
-      v7 = other->mValueVector3.x == this->mValueVector3.x
+    case UID_qVector3:
+      v5 = other->mValueVector3.x == this->mValueVector3.x
         && other->mValueVector3.y == this->mValueVector3.y
         && other->mValueVector3.z == this->mValueVector3.z;
-      LOBYTE(v2) = v7;
+      result = v5;
       break;
-    case 0x13:
-      v8 = other->mValueVector4.x == this->mValueVector4.x
+    case UID_qVector4:
+      v6 = other->mValueVector4.x == this->mValueVector4.x
         && other->mValueVector4.y == this->mValueVector4.y
         && other->mValueVector4.z == this->mValueVector4.z
         && other->mValueVector4.w == this->mValueVector4.w;
-      LOBYTE(v2) = v8;
+      result = v6;
       break;
-    case 0x16:
-      LOBYTE(v2) = UFG::qSymbol::operator==(&this->mValueSymbol, &other->mValueSymbol);
+    case UID_qSymbol:
+      result = UFG::qSymbol::operator==(&this->mValueSymbol, &other->mValueSymbol);
       break;
-    case 0x17:
-      LOBYTE(v2) = UFG::qSymbol::operator==(
-                     (UFG::qSymbol *)&this->mValueSymbolUC,
-                     (UFG::qSymbol *)&other->mValueSymbolUC);
+    case UID_qSymbolUC:
+      result = UFG::qSymbol::operator==((UFG::qSymbol *)&this->mValueSymbolUC, (UFG::qSymbol *)&other->mValueSymbolUC);
       break;
-    case 0x18:
-      LOBYTE(v2) = UFG::qSymbol::operator==(
-                     (UFG::qSymbol *)&this->mValueWiseSymbol,
-                     (UFG::qSymbol *)&other->mValueWiseSymbol);
+    case UID_qWiseSymbol:
+      result = UFG::qSymbol::operator==(
+                 (UFG::qSymbol *)&this->mValueWiseSymbol,
+                 (UFG::qSymbol *)&other->mValueWiseSymbol);
       break;
     default:
-      LOBYTE(v2) = 0;
+      result = 0;
       break;
   }
-  return v2;
+  return result;
 }
 
 // File Line: 237
@@ -239,12 +225,10 @@ bool __fastcall qPropertySetVariant::operator==(qPropertySetVariant *this, qProp
 void __fastcall qPropertySetVariant::Clear(qPropertySetVariant *this)
 {
   UFG::qString *v1; // rax
-  UFG::qString v2; // [rsp+38h] [rbp-30h]
-  qPropertySetVariant *v3; // [rsp+70h] [rbp+8h]
+  UFG::qString v2; // [rsp+38h] [rbp-30h] BYREF
 
-  v3 = this;
   UFG::qString::qString(&v2);
-  UFG::qString::operator=(&v3->mValueString, v1);
+  UFG::qString::operator=(&this->mValueString, v1);
   UFG::qString::~qString(&v2);
 }
 
@@ -254,56 +238,54 @@ void __fastcall qPropertySetVariant::ToString(qPropertySetVariant *this, UFG::qS
 {
   char *v2; // rax
   char *v3; // rax
-  const char *v4; // rax
-  UFG::qString *v5; // [rsp+68h] [rbp+10h]
+  char *v4; // rax
 
-  v5 = value;
   switch ( this->meType )
   {
-    case 0:
+    case UID_int8:
       UFG::qString::Format(value, "%d", (unsigned int)this->mValueI8);
       break;
-    case 1:
+    case UID_int16:
       UFG::qString::Format(value, "%d", (unsigned int)this->mValueI16);
       break;
-    case 2:
+    case UID_int32:
       UFG::qString::Format(value, "%d", this->mValueI128.m128_u32[0]);
       break;
-    case 3:
+    case UID_int64:
       UFG::qString::Format(value, "%d64", this->mValueI128.m128_u32[0]);
       break;
-    case 5:
+    case UID_uint8:
       UFG::qString::Format(value, "%u", (unsigned __int8)this->mValueI8);
       break;
-    case 6:
+    case UID_uint16:
       UFG::qString::Format(value, "%u", this->mValueI128.m128_u16[0]);
       break;
-    case 7:
+    case UID_uint32:
       UFG::qString::Format(value, "%u", this->mValueI128.m128_u32[0]);
       break;
-    case 8:
+    case UID_uint64:
       UFG::qString::Format(value, "%u64", this->mValueI128.m128_u32[0]);
       break;
-    case 9:
+    case UID_bool:
       if ( this->mValueI8 )
         UFG::qString::operator=(value, "true");
       else
         UFG::qString::operator=(value, "false");
       break;
-    case 0xA:
+    case UID_float:
       UFG::qString::Format(value, "%f", this->mValueI128.m128_f32[0]);
       break;
-    case 0xB:
-    case 0xC:
+    case UID_double:
+    case UID_string:
       UFG::qString::operator=(value, &this->mValueString);
       break;
-    case 0x11:
+    case UID_qVector2:
       UFG::qString::Format(value, "%f,%f", this->mValueVector2.x, this->mValueVector2.y);
       break;
-    case 0x12:
+    case UID_qVector3:
       UFG::qString::Format(value, "%f,%f,%f", this->mValueVector3.x, this->mValueVector3.y, this->mValueVector3.z);
       break;
-    case 0x13:
+    case UID_qVector4:
       UFG::qString::Format(
         value,
         "%f,%f,%f,%f",
@@ -312,29 +294,25 @@ void __fastcall qPropertySetVariant::ToString(qPropertySetVariant *this, UFG::qS
         this->mValueVector4.z,
         this->mValueVector4.w);
       break;
-    case 0x14:
+    case UID_qMatrix44:
+    case UID_TransRot:
+    case UID_qTransQuat:
       UFG::qString::operator=(value, "?TODO?");
       break;
-    case 0x15:
-    case 0x16:
+    case UID_qResHandle:
+    case UID_qSymbol:
       v2 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&this->mValueSymbol);
-      UFG::qString::operator=(v5, v2);
+      UFG::qString::operator=(value, v2);
       break;
-    case 0x17:
+    case UID_qSymbolUC:
       v3 = UFG::qSymbol::as_cstr_dbg(&this->mValueSymbolUC);
-      UFG::qString::operator=(v5, v3);
+      UFG::qString::operator=(value, v3);
       break;
-    case 0x18:
+    case UID_qWiseSymbol:
       v4 = UFG::qWiseSymbol::as_cstr_dbg(&this->mValueWiseSymbol);
-      UFG::qString::operator=(v5, v4);
+      UFG::qString::operator=(value, v4);
       break;
-    case 0x1B:
-      UFG::qString::operator=(value, "?TODO?");
-      break;
-    case 0x1C:
-      UFG::qString::operator=(value, "?TODO?");
-      break;
-    case 0x1D:
+    case UID_Invalid:
       UFG::qString::operator=(value, "?INVALID?");
       break;
     default:
@@ -344,9 +322,12 @@ void __fastcall qPropertySetVariant::ToString(qPropertySetVariant *this, UFG::qS
 
 // File Line: 348
 // RVA: 0x1FD0A0
-void __fastcall qPropertySetVariant::SetFromString(qPropertySetVariant *this, UFG::qString *value, ePropertyType eType)
+void __fastcall qPropertySetVariant::SetFromString(
+        qPropertySetVariant *this,
+        hkMemoryResourceContainer *value,
+        ePropertyType eType)
 {
-  const char *v3; // rax
+  const char *UsedSpace; // rax
   const char *v4; // rax
   const char *v5; // rax
   const char *v6; // rax
@@ -354,201 +335,189 @@ void __fastcall qPropertySetVariant::SetFromString(qPropertySetVariant *this, UF
   const char *v8; // rax
   const char *v9; // rax
   const char *v10; // rax
-  const char *v11; // rax
+  char *v11; // rax
   const char *v12; // rax
   const char *v13; // rax
   const char *v14; // rax
   const char *v15; // rax
-  UFG::qSymbol result; // [rsp+24h] [rbp-54h]
-  UFG::qSymbolUC v17; // [rsp+28h] [rbp-50h]
-  UFG::qWiseSymbol v18; // [rsp+2Ch] [rbp-4Ch]
-  UFG::qSymbol *source; // [rsp+30h] [rbp-48h]
-  UFG::qSymbol *v20; // [rsp+38h] [rbp-40h]
-  UFG::qWiseSymbol *v21; // [rsp+40h] [rbp-38h]
-  UFG::qSymbol *v22; // [rsp+48h] [rbp-30h]
-  UFG::qWiseSymbol *v23; // [rsp+50h] [rbp-28h]
-  UFG::qSymbol *v24; // [rsp+58h] [rbp-20h]
-  __int64 v25; // [rsp+60h] [rbp-18h]
-  qPropertySetVariant *v26; // [rsp+80h] [rbp+8h]
+  UFG::qSymbol result; // [rsp+24h] [rbp-54h] BYREF
+  AMD_HD3D v17; // [rsp+28h] [rbp-50h] BYREF
+  IAmdDxExtQuadBufferStereo *v18; // [rsp+48h] [rbp-30h]
+  UFG::qWiseSymbol *mExtension; // [rsp+50h] [rbp-28h]
+  UFG::qSymbol *v20; // [rsp+58h] [rbp-20h]
+  __int64 v21; // [rsp+60h] [rbp-18h]
 
-  v26 = this;
-  v25 = -2i64;
+  v21 = -2i64;
   this->meType = eType;
   switch ( eType )
   {
-    case 0:
-      v3 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)value);
-      v26->mValueI8 = UFG::qToInt32(v3, 0);
+    case UID_int8:
+      UsedSpace = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace(value);
+      this->mValueI8 = UFG::qToInt32(UsedSpace, 0);
       break;
-    case 1:
-      v4 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)value);
-      v26->mValueI16 = UFG::qToInt32(v4, 0);
+    case UID_int16:
+      v4 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace(value);
+      this->mValueI16 = UFG::qToInt32(v4, 0);
       break;
-    case 2:
-      v5 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)value);
-      v26->mValueI32 = UFG::qToInt32(v5, 0);
+    case UID_int32:
+      v5 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace(value);
+      this->mValueI32 = UFG::qToInt32(v5, 0);
       break;
-    case 3:
-      v6 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)value);
-      v26->mValueI64 = UFG::qToInt64(v6, 0i64);
+    case UID_int64:
+      v6 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace(value);
+      this->mValueI64 = UFG::qToInt64(v6, 0i64);
       break;
-    case 4:
+    case UID_int128:
       return;
-    case 5:
-      v7 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)value);
-      v26->mValueI8 = UFG::qToUInt32(v7, 0);
+    case UID_uint8:
+      v7 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace(value);
+      this->mValueI8 = UFG::qToUInt32(v7, 0);
       break;
-    case 6:
-      v8 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)value);
-      v26->mValueI16 = UFG::qToUInt32(v8, 0);
+    case UID_uint16:
+      v8 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace(value);
+      this->mValueI16 = UFG::qToUInt32(v8, 0);
       break;
-    case 7:
-      v9 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)value);
-      v26->mValueI32 = UFG::qToUInt32(v9, 0);
+    case UID_uint32:
+      v9 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace(value);
+      this->mValueI32 = UFG::qToUInt32(v9, 0);
       break;
-    case 8:
-      v10 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)value);
-      v26->mValueI64 = UFG::qToUInt64(v10, 0i64);
+    case UID_uint64:
+      v10 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace(value);
+      this->mValueI64 = UFG::qToUInt64(v10, 0i64);
       break;
-    case 9:
-      v11 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)value);
-      v26->mValueI8 = UFG::qToBool(v11, 0);
+    case UID_bool:
+      v11 = (char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace(value);
+      this->mValueI8 = UFG::qToBool(v11, 0);
       break;
-    case 10:
-      v12 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)value);
-      v26->mValueI128.m128_f32[0] = UFG::qToFloat(v12, 0.0);
+    case UID_float:
+      v12 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace(value);
+      this->mValueI128.m128_f32[0] = UFG::qToFloat(v12, 0.0);
       break;
-    case 11:
-    case 12:
-      UFG::qString::operator=(&this->mValueString, value);
+    case UID_double:
+    case UID_string:
+      UFG::qString::operator=(&this->mValueString, (UFG::qString *)value);
       break;
-    case 22:
-      v13 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)value);
-      v24 = UFG::qSymbol::create_from_string(&result, v13);
-      source = v24;
-      UFG::qSymbol::qSymbol(&v26->mValueSymbol, v24);
+    case UID_qSymbol:
+      v13 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace(value);
+      v20 = UFG::qSymbol::create_from_string(&result, v13);
+      *(_QWORD *)&v17.mWidth = v20;
+      UFG::qSymbol::qSymbol(&this->mValueSymbol, v20);
       _((AMD_HD3D *)&result);
       break;
-    case 23:
-      v14 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)value);
-      v22 = (UFG::qSymbol *)UFG::qSymbolUC::create_from_string(&v17, v14);
-      v20 = v22;
-      UFG::qSymbol::qSymbol((UFG::qSymbol *)&v26->mValueSymbolUC, v22);
-      _((AMD_HD3D *)&v17);
+    case UID_qSymbolUC:
+      v14 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace(value);
+      v18 = (IAmdDxExtQuadBufferStereo *)UFG::qSymbolUC::create_from_string((UFG::qSymbolUC *)&v17, v14);
+      v17.mStereo = v18;
+      UFG::qSymbol::qSymbol((UFG::qSymbol *)&this->mValueSymbolUC, (UFG::qSymbol *)v18);
+      _(&v17);
       break;
-    case 24:
-      v15 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace((hkMemoryResourceContainer *)value);
-      v21 = UFG::qWiseSymbol::create_from_string(&v18, v15);
-      v23 = v21;
-      UFG::qWiseSymbol::operator=(&v26->mValueWiseSymbol, v21);
-      UFG::qWiseSymbol::~qWiseSymbol(&v18);
+    case UID_qWiseSymbol:
+      v15 = (const char *)Scaleform::SysAllocPagedMalloc::GetUsedSpace(value);
+      v17.mExtension = (IAmdDxExt *)UFG::qWiseSymbol::create_from_string((UFG::qWiseSymbol *)&v17.mLineOffset, v15);
+      mExtension = (UFG::qWiseSymbol *)v17.mExtension;
+      UFG::qWiseSymbol::operator=(&this->mValueWiseSymbol, (UFG::qWiseSymbol *)v17.mExtension);
+      UFG::qWiseSymbol::~qWiseSymbol((UFG::qWiseSymbol *)&v17.mLineOffset);
       break;
     default:
-      this->meType = 29;
+      this->meType = UID_Invalid;
       break;
   }
 }
 
 // File Line: 401
 // RVA: 0x1FCA70
-void __fastcall qPropertySetVariant::Set(qPropertySetVariant *this, const void *dataPtr, ePropertyType eType)
+void __fastcall qPropertySetVariant::Set(qPropertySetVariant *this, char *dataPtr, ePropertyType eType)
 {
-  float v3; // ST60_4
-  UFG::qVector3 *v4; // ST38_8
-  float v5; // ST44_4
-  float v6; // ST54_4
-  _DWORD *v7; // ST28_8
-  int v8; // ST5C_4
-  int v9; // ST40_4
-  int v10; // ST48_4
-  _OWORD *v11; // ST30_8
-  __int128 v12; // STB0_16
-  __int128 v13; // STD0_16
-  __int128 v14; // STF0_16
+  float v3; // [rsp+40h] [rbp-C8h]
+  float v4; // [rsp+44h] [rbp-C4h]
+  float v5; // [rsp+48h] [rbp-C0h]
+  float v6; // [rsp+54h] [rbp-B4h]
+  float v7; // [rsp+5Ch] [rbp-ACh]
+  float v8; // [rsp+60h] [rbp-A8h]
+  UFG::qVector4 v9; // [rsp+B0h] [rbp-58h]
+  UFG::qVector4 v10; // [rsp+D0h] [rbp-38h]
+  UFG::qVector4 v11; // [rsp+F0h] [rbp-18h]
 
   this->meType = eType;
   switch ( eType )
   {
-    case 0:
-      this->mValueI8 = *(_BYTE *)dataPtr;
+    case UID_int8:
+      this->mValueI8 = *dataPtr;
       break;
-    case 1:
+    case UID_int16:
       this->mValueI16 = *(_WORD *)dataPtr;
       break;
-    case 2:
+    case UID_int32:
       this->mValueI32 = *(_DWORD *)dataPtr;
       break;
-    case 3:
+    case UID_int64:
       this->mValueI64 = *(_QWORD *)dataPtr;
       break;
-    case 5:
-      this->mValueI8 = *(_BYTE *)dataPtr;
+    case UID_uint8:
+      this->mValueI8 = *dataPtr;
       break;
-    case 6:
+    case UID_uint16:
       this->mValueI16 = *(_WORD *)dataPtr;
       break;
-    case 7:
+    case UID_uint32:
       this->mValueI32 = *(_DWORD *)dataPtr;
       break;
-    case 8:
+    case UID_uint64:
       this->mValueI64 = *(_QWORD *)dataPtr;
       break;
-    case 9:
-      this->mValueI8 = *(_BYTE *)dataPtr != 0;
+    case UID_bool:
+      this->mValueI8 = *dataPtr != 0;
       break;
-    case 10:
+    case UID_float:
       this->mValueI32 = *(_DWORD *)dataPtr;
       break;
-    case 11:
+    case UID_double:
       this->mValueI64 = *(_QWORD *)dataPtr;
       break;
-    case 12:
+    case UID_string:
       if ( *(_QWORD *)dataPtr )
-        UFG::qString::operator=(&this->mValueString, (const char *)dataPtr + *(_QWORD *)dataPtr);
+        UFG::qString::operator=(&this->mValueString, &dataPtr[*(_QWORD *)dataPtr]);
       else
         UFG::qString::operator=(&this->mValueString, 0i64);
       break;
-    case 17:
-      v3 = *((float *)dataPtr + 1);
+    case UID_qVector2:
+      v8 = *((float *)dataPtr + 1);
       this->mValueVector2.x = *(float *)dataPtr;
-      this->mValueVector2.y = v3;
+      this->mValueVector2.y = v8;
       break;
-    case 18:
-      v4 = &this->mValueVector3;
-      v5 = *((float *)dataPtr + 1);
+    case UID_qVector3:
+      v4 = *((float *)dataPtr + 1);
       v6 = *((float *)dataPtr + 2);
       this->mValueVector3.x = *(float *)dataPtr;
-      v4->y = v5;
-      v4->z = v6;
+      this->mValueVector3.y = v4;
+      this->mValueVector3.z = v6;
       break;
-    case 19:
-      v7 = (_DWORD *)&this->mValueVector4.x;
-      v8 = *((_DWORD *)dataPtr + 1);
-      v9 = *((_DWORD *)dataPtr + 2);
-      v10 = *((_DWORD *)dataPtr + 3);
+    case UID_qVector4:
+      v7 = *((float *)dataPtr + 1);
+      v3 = *((float *)dataPtr + 2);
+      v5 = *((float *)dataPtr + 3);
       this->mValueVector4.x = *(float *)dataPtr;
-      v7[1] = v8;
-      v7[2] = v9;
-      v7[3] = v10;
+      this->mValueVector4.y = v7;
+      this->mValueVector4.z = v3;
+      this->mValueVector4.w = v5;
       break;
-    case 20:
-      v11 = (_OWORD *)&this->mValueMatrix44.v0.x;
-      v12 = *((_OWORD *)dataPtr + 1);
-      v13 = *((_OWORD *)dataPtr + 2);
-      v14 = *((_OWORD *)dataPtr + 3);
+    case UID_qMatrix44:
+      v9 = (UFG::qVector4)*((_OWORD *)dataPtr + 1);
+      v10 = (UFG::qVector4)*((_OWORD *)dataPtr + 2);
+      v11 = (UFG::qVector4)*((_OWORD *)dataPtr + 3);
       this->mValueMatrix44.v0 = *(UFG::qVector4 *)dataPtr;
-      v11[1] = v12;
-      v11[2] = v13;
-      v11[3] = v14;
+      this->mValueMatrix44.v1 = v9;
+      this->mValueMatrix44.v2 = v10;
+      this->mValueMatrix44.v3 = v11;
       break;
-    case 21:
-    case 22:
+    case UID_qResHandle:
+    case UID_qSymbol:
       UFG::qSymbol::qSymbol(&this->mValueSymbol, (UFG::qSymbol *)dataPtr);
       break;
-    case 23:
+    case UID_qSymbolUC:
       UFG::qSymbol::qSymbol((UFG::qSymbol *)&this->mValueSymbolUC, (UFG::qSymbol *)dataPtr);
       break;
-    case 24:
+    case UID_qWiseSymbol:
       UFG::qWiseSymbol::operator=(&this->mValueWiseSymbol, (UFG::qWiseSymbol *)dataPtr);
       break;
     default:

@@ -84,65 +84,79 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
 
 // File Line: 236
 // RVA: 0x926BF0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::StyleSheet::styleNamesGet(Scaleform::GFx::AS3::Instances::fl_text::StyleSheet *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array> *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::StyleSheet::styleNamesGet(
+        Scaleform::GFx::AS3::Instances::fl_text::StyleSheet *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array> *result)
 {
-  Scaleform::GFx::AS3::FlashUI *v2; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v2 = this->pTraits.pObject->pVM->UI;
-  v2->vfptr->Output(
-    v2,
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(
+    UI,
     Output_Warning,
     "The method StyleSheet::styleNamesGet() is not supported because core dependencies have been removed\n");
 }
 
 // File Line: 267
 // RVA: 0x91E220
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::StyleSheet::clear(Scaleform::GFx::AS3::Instances::fl_text::StyleSheet *this, Scaleform::GFx::AS3::Value *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::StyleSheet::clear(
+        Scaleform::GFx::AS3::Instances::fl_text::StyleSheet *this,
+        Scaleform::GFx::AS3::Value *result)
 {
-  Scaleform::GFx::AS3::FlashUI *v2; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v2 = this->pTraits.pObject->pVM->UI;
-  v2->vfptr->Output(
-    v2,
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(
+    UI,
     Output_Warning,
     "The method StyleSheet::clear() is not supported because core dependencies have been removed\n");
 }
 
 // File Line: 287
 // RVA: 0x920870
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::StyleSheet::getStyle(Scaleform::GFx::AS3::Instances::fl_text::StyleSheet *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Object> *result, Scaleform::GFx::ASString *styleName)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::StyleSheet::getStyle(
+        Scaleform::GFx::AS3::Instances::fl_text::StyleSheet *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Object> *result,
+        Scaleform::GFx::ASString *styleName)
 {
-  Scaleform::GFx::AS3::FlashUI *v3; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v3 = this->pTraits.pObject->pVM->UI;
-  v3->vfptr->Output(
-    v3,
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(
+    UI,
     Output_Warning,
     "The method StyleSheet::getStyle() is not supported because core dependencies have been removed\n");
 }
 
 // File Line: 455
 // RVA: 0x921B10
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::StyleSheet::parseCSS(Scaleform::GFx::AS3::Instances::fl_text::StyleSheet *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::ASString *CSSText)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::StyleSheet::parseCSS(
+        Scaleform::GFx::AS3::Instances::fl_text::StyleSheet *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::ASString *CSSText)
 {
-  Scaleform::GFx::AS3::FlashUI *v3; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v3 = this->pTraits.pObject->pVM->UI;
-  v3->vfptr->Output(
-    v3,
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(
+    UI,
     Output_Warning,
     "The method StyleSheet::parseCSS() is not supported because core dependencies have been removed\n");
 }
 
 // File Line: 487
 // RVA: 0x9267E0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::StyleSheet::setStyle(Scaleform::GFx::AS3::Instances::fl_text::StyleSheet *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::ASString *styleName, Scaleform::GFx::AS3::Value *styleObject)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::StyleSheet::setStyle(
+        Scaleform::GFx::AS3::Instances::fl_text::StyleSheet *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::ASString *styleName,
+        Scaleform::GFx::AS3::Value *styleObject)
 {
-  Scaleform::GFx::AS3::FlashUI *v4; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v4 = this->pTraits.pObject->pVM->UI;
-  ((void (__fastcall *)(Scaleform::GFx::AS3::FlashUI *, signed __int64, const char *, Scaleform::GFx::AS3::Value *))v4->vfptr->Output)(
-    v4,
+  UI = this->pTraits.pObject->pVM->UI;
+  ((void (__fastcall *)(Scaleform::GFx::AS3::FlashUI *, __int64, const char *, Scaleform::GFx::AS3::Value *))UI->vfptr->Output)(
+    UI,
     2i64,
     "The method StyleSheet::setStyle() is not supported because core dependencies have been removed\n",
     styleObject);
@@ -150,55 +164,55 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_text::StyleSheet::setStyle(Sc
 
 // File Line: 541
 // RVA: 0x9273D0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::StyleSheet::transform(Scaleform::GFx::AS3::Instances::fl_text::StyleSheet *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_text::TextFormat> *result, Scaleform::GFx::AS3::Value *formatObject)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::StyleSheet::transform(
+        Scaleform::GFx::AS3::Instances::fl_text::StyleSheet *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_text::TextFormat> *result,
+        Scaleform::GFx::AS3::Value *formatObject)
 {
-  Scaleform::GFx::AS3::FlashUI *v3; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v3 = this->pTraits.pObject->pVM->UI;
-  v3->vfptr->Output(
-    v3,
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(
+    UI,
     Output_Warning,
     "The method StyleSheet::transform() is not supported because core dependencies have been removed\n");
 }
 
 // File Line: 623
 // RVA: 0x8EAFD0
-void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl_text::StyleSheet::MakeObject(Scaleform::GFx::AS3::InstanceTraits::fl_text::StyleSheet *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::InstanceTraits::Traits *t)
+void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl_text::StyleSheet::MakeObject(
+        Scaleform::GFx::AS3::InstanceTraits::fl_text::StyleSheet *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::InstanceTraits::fl_text::StyleSheet *t)
 {
-  Scaleform::GFx::AS3::Value *v3; // rbx
-  Scaleform::GFx::AS3::Object **v4; // rax
-  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_text::StyleSheet> resulta; // [rsp+48h] [rbp+20h]
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_text::StyleSheet> *Instance; // rax
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_text::StyleSheet> resulta; // [rsp+48h] [rbp+20h] BYREF
 
-  v3 = result;
-  v4 = (Scaleform::GFx::AS3::Object **)Scaleform::GFx::AS3::InstanceTraits::fl_text::StyleSheet::MakeInstance(
-                                         &resulta,
-                                         (Scaleform::GFx::AS3::InstanceTraits::fl_text::StyleSheet *)t);
-  Scaleform::GFx::AS3::Value::Pick(v3, *v4);
+  Instance = Scaleform::GFx::AS3::InstanceTraits::fl_text::StyleSheet::MakeInstance(&resulta, t);
+  Scaleform::GFx::AS3::Value::Pick(result, Instance->pV);
 }
 
 // File Line: 645
 // RVA: 0x86D610
-Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl_text::StyleSheet::MakeClassTraits(Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result, Scaleform::GFx::AS3::VM *vm)
+Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl_text::StyleSheet::MakeClassTraits(
+        Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result,
+        Scaleform::GFx::AS3::VM *vm)
 {
-  Scaleform::GFx::AS3::VM *v2; // rbp
-  Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *v3; // rbx
-  Scaleform::MemoryHeap *v4; // rsi
+  Scaleform::MemoryHeap *MHeap; // rsi
   Scaleform::GFx::AS3::ClassTraits::fl_events::EventDispatcher *v5; // rax
-  Scaleform::GFx::AS3::ClassTraits::fl_events::EventDispatcher *v6; // rdi
+  Scaleform::GFx::AS3::ClassTraits::Traits *v6; // rdi
   Scaleform::GFx::AS3::InstanceTraits::fl_events::EventDispatcher *v7; // rax
   Scaleform::GFx::AS3::InstanceTraits::fl_events::EventDispatcher *v8; // rdi
   Scaleform::GFx::AS3::Class *v9; // rax
 
-  v2 = vm;
-  v3 = result;
-  v4 = vm->MHeap;
-  v5 = (Scaleform::GFx::AS3::ClassTraits::fl_events::EventDispatcher *)v4->vfptr->Alloc(v4, 208ui64, 0i64);
+  MHeap = vm->MHeap;
+  v5 = (Scaleform::GFx::AS3::ClassTraits::fl_events::EventDispatcher *)MHeap->vfptr->Alloc(MHeap, 208ui64, 0i64);
   v6 = v5;
   if ( v5 )
   {
     Scaleform::GFx::AS3::ClassTraits::fl_events::EventDispatcher::EventDispatcher(
       v5,
-      v2,
+      vm,
       &Scaleform::GFx::AS3::fl_text::StyleSheetCI);
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_text::StyleSheet::`vftable;
   }
@@ -206,14 +220,14 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   {
     v6 = 0i64;
   }
-  v3->pV = (Scaleform::GFx::AS3::ClassTraits::Traits *)&v6->vfptr;
-  v7 = (Scaleform::GFx::AS3::InstanceTraits::fl_events::EventDispatcher *)v4->vfptr->Alloc(v4, 240ui64, 0i64);
+  result->pV = v6;
+  v7 = (Scaleform::GFx::AS3::InstanceTraits::fl_events::EventDispatcher *)MHeap->vfptr->Alloc(MHeap, 240ui64, 0i64);
   v8 = v7;
   if ( v7 )
   {
     Scaleform::GFx::AS3::InstanceTraits::fl_events::EventDispatcher::EventDispatcher(
       v7,
-      v2,
+      vm,
       &Scaleform::GFx::AS3::fl_text::StyleSheetCI);
     v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_text::StyleSheet::`vftable;
   }
@@ -222,13 +236,13 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
     v8 = 0i64;
   }
   Scaleform::GFx::AS3::ClassTraits::Traits::SetInstanceTraits(
-    v3->pV,
+    result->pV,
     (Scaleform::Pickable<Scaleform::GFx::AS3::InstanceTraits::Traits>)v8);
-  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))v4->vfptr->Alloc)(
-                                       v4,
+  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))MHeap->vfptr->Alloc)(
+                                       MHeap,
                                        72i64);
   if ( v9 )
-    Scaleform::GFx::AS3::Class::Class(v9, v3->pV);
-  return v3;
+    Scaleform::GFx::AS3::Class::Class(v9, result->pV);
+  return result;
 }
 

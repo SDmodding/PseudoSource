@@ -1,6 +1,6 @@
 // File Line: 40
 // RVA: 0x12BB9B4
-signed __int64 __fastcall fileno(_iobuf *stream)
+__int64 __fastcall fileno(_iobuf *stream)
 {
   if ( stream )
     return (unsigned int)stream->_file;

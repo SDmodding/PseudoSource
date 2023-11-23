@@ -13,21 +13,19 @@ void __fastcall AkMemPool::Init(AkMemPool *this)
 
 // File Line: 243
 // RVA: 0xAA0A50
-signed __int64 __fastcall AK::MemoryMgr::InitBase(int in_iNumPools)
+__int64 __fastcall AK::MemoryMgr::InitBase(int in_iNumPools)
 {
-  int v1; // ebp
   __int64 v2; // rsi
   AkMemPool *v3; // rax
   __int64 v5; // rdi
   AkMemPool *v6; // rbx
 
-  v1 = in_iNumPools;
   v2 = in_iNumPools;
   v3 = (AkMemPool *)AK::AllocHook(112i64 * in_iNumPools);
   AK::MemoryMgr::s_pMemPools = v3;
   if ( !v3 )
     return 2i64;
-  if ( v1 > 0 )
+  if ( in_iNumPools > 0 )
   {
     v5 = 0i64;
     do
@@ -52,7 +50,7 @@ signed __int64 __fastcall AK::MemoryMgr::InitBase(int in_iNumPools)
     }
     while ( v2 );
   }
-  AK::MemoryMgr::s_iMaxNumPools = v1;
+  AK::MemoryMgr::s_iMaxNumPools = in_iNumPools;
   AK::MemoryMgr::s_iNumPools = 0;
   s_bInitialized_0 = 1;
   return 1i64;
@@ -90,7 +88,7 @@ void __fastcall AK::MemoryMgr::Term(AK::MemoryMgr *this, unsigned __int64 a2, un
       }
       while ( v3 < AK::MemoryMgr::s_iMaxNumPools );
     }
-    UFG::SurfaceBankNode::operator delete(AK::MemoryMgr::s_pMemPools, a2, a3);
+    UFG::SurfaceBankNode::operator delete((char *)AK::MemoryMgr::s_pMemPools, a2, a3);
     AK::MemoryMgr::s_iMaxNumPools = 0;
     AK::MemoryMgr::s_iNumPools = 0;
     AK::MemoryMgr::s_pMemPools = 0i64;
@@ -109,24 +107,22 @@ __int64 __fastcall AK::MemoryMgr::GetPoolAttributes(int in_poolId)
 // RVA: 0xAA0BC0
 void *__fastcall AK::MemoryMgr::Malloc(int in_PoolId, unsigned __int64 in_ulSize)
 {
-  unsigned __int64 v2; // rsi
   AkMemPool *v4; // rdi
-  unsigned int v5; // eax
-  void *v6; // rcx
+  unsigned int ulAlign; // eax
+  void *pTlsfPool; // rcx
   void *v7; // rax
   void *v8; // rsi
 
-  v2 = in_ulSize;
   if ( !in_ulSize )
     return 0i64;
   v4 = &AK::MemoryMgr::s_pMemPools[in_PoolId];
   EnterCriticalSection(&v4->lock.m_csLock);
-  v5 = v4->ulAlign;
-  v6 = v4->pTlsfPool;
-  if ( v5 <= 4 )
-    v7 = tlsf_malloc(v6, v2);
+  ulAlign = v4->ulAlign;
+  pTlsfPool = v4->pTlsfPool;
+  if ( ulAlign <= 4 )
+    v7 = tlsf_malloc(pTlsfPool, in_ulSize);
   else
-    v7 = tlsf_memalign(v6, v5, v2);
+    v7 = tlsf_memalign(pTlsfPool, ulAlign, in_ulSize);
   v8 = v7;
   if ( v7 )
     v4->ulUsed += tlsf_block_size(v7) + 8;
@@ -139,18 +135,16 @@ void *__fastcall AK::MemoryMgr::Malloc(int in_PoolId, unsigned __int64 in_ulSize
 void *__fastcall AK::MemoryMgr::Malign(int in_poolId, unsigned __int64 in_uSize, unsigned int in_uAlignment)
 {
   unsigned __int64 v3; // rbp
-  unsigned __int64 v4; // rsi
   AkMemPool *v6; // rdi
   void *v7; // rax
   void *v8; // rsi
 
   v3 = in_uAlignment;
-  v4 = in_uSize;
   if ( !in_uSize )
     return 0i64;
   v6 = &AK::MemoryMgr::s_pMemPools[in_poolId];
   EnterCriticalSection(&v6->lock.m_csLock);
-  v7 = tlsf_memalign(v6->pTlsfPool, v3, v4);
+  v7 = tlsf_memalign(v6->pTlsfPool, v3, in_uSize);
   v8 = v7;
   if ( v7 )
     v6->ulUsed += tlsf_block_size(v7) + 8;
@@ -160,22 +154,20 @@ void *__fastcall AK::MemoryMgr::Malign(int in_poolId, unsigned __int64 in_uSize,
 
 // File Line: 556
 // RVA: 0xAA08F0
-signed __int64 __fastcall AK::MemoryMgr::Free(int in_PoolId, void *in_pvMemAddress)
+__int64 __fastcall AK::MemoryMgr::Free(int in_PoolId, void *in_pvMemAddress)
 {
-  void *v2; // rsi
   AkMemPool *v3; // rdi
   int v4; // eax
-  void *v5; // rcx
+  void *pTlsfPool; // rcx
 
-  v2 = in_pvMemAddress;
   if ( in_pvMemAddress )
   {
     v3 = &AK::MemoryMgr::s_pMemPools[in_PoolId];
     EnterCriticalSection(&v3->lock.m_csLock);
-    v4 = tlsf_block_size(v2);
-    v5 = v3->pTlsfPool;
+    v4 = tlsf_block_size(in_pvMemAddress);
+    pTlsfPool = v3->pTlsfPool;
     v3->ulUsed -= v4 + 8;
-    tlsf_free(v5, v2);
+    tlsf_free(pTlsfPool, in_pvMemAddress);
     LeaveCriticalSection(&v3->lock.m_csLock);
   }
   return 1i64;
@@ -186,43 +178,43 @@ signed __int64 __fastcall AK::MemoryMgr::Free(int in_PoolId, void *in_pvMemAddre
 AkLinkedBuffer *__fastcall AK::MemoryMgr::GetBlock(int in_poolId)
 {
   AkMemPool *v1; // rax
-  AkLinkedBuffer *v2; // rdx
+  AkLinkedBuffer *m_pFirst; // rdx
 
   v1 = &AK::MemoryMgr::s_pMemPools[in_poolId];
-  v2 = v1->listBuffers.m_pFirst;
-  if ( v2 )
+  m_pFirst = v1->listBuffers.m_pFirst;
+  if ( m_pFirst )
   {
-    if ( !v2->pNextItem )
+    if ( !m_pFirst->pNextItem )
     {
       v1->listBuffers.m_pFirst = 0i64;
       v1->listBuffers.m_pLast = 0i64;
       v1->ulUsed += v1->ulBlockSize;
-      return v2;
+      return m_pFirst;
     }
-    v1->listBuffers.m_pFirst = v2->pNextItem;
+    v1->listBuffers.m_pFirst = m_pFirst->pNextItem;
     v1->ulUsed += v1->ulBlockSize;
   }
-  return v2;
+  return m_pFirst;
 }
 
 // File Line: 617
 // RVA: 0xAA0C50
-signed __int64 __fastcall AK::MemoryMgr::ReleaseBlock(int in_PoolId, void *in_pvMemAddress)
+__int64 __fastcall AK::MemoryMgr::ReleaseBlock(int in_PoolId, AkLinkedBuffer *in_pvMemAddress)
 {
   AkMemPool *v2; // r8
-  AkLinkedBuffer *v3; // rax
-  signed __int64 result; // rax
+  AkLinkedBuffer *m_pLast; // rax
+  __int64 result; // rax
 
   v2 = &AK::MemoryMgr::s_pMemPools[in_PoolId];
   v2->ulUsed -= v2->ulBlockSize;
-  *(_QWORD *)in_pvMemAddress = 0i64;
-  v3 = v2->listBuffers.m_pLast;
-  if ( v3 )
-    v3->pNextItem = (AkLinkedBuffer *)in_pvMemAddress;
+  in_pvMemAddress->pNextItem = 0i64;
+  m_pLast = v2->listBuffers.m_pLast;
+  if ( m_pLast )
+    m_pLast->pNextItem = in_pvMemAddress;
   else
-    v2->listBuffers.m_pFirst = (AkLinkedBuffer *)in_pvMemAddress;
+    v2->listBuffers.m_pFirst = in_pvMemAddress;
   result = 1i64;
-  v2->listBuffers.m_pLast = (AkLinkedBuffer *)in_pvMemAddress;
+  v2->listBuffers.m_pLast = in_pvMemAddress;
   return result;
 }
 
@@ -235,12 +227,15 @@ __int64 __fastcall AK::MemoryMgr::GetBlockSize(int in_poolId)
 
 // File Line: 665
 // RVA: 0xAA08C0
-signed __int64 __fastcall AK::MemoryMgr::CheckPoolId(int in_PoolId)
+__int64 __fastcall AK::MemoryMgr::CheckPoolId(int in_PoolId)
 {
-  signed __int64 result; // rax
+  __int64 result; // rax
 
-  if ( in_PoolId >= AK::MemoryMgr::s_iMaxNumPools || (result = 1i64, !AK::MemoryMgr::s_pMemPools[in_PoolId].ulNumBlocks) )
-    result = 14i64;
+  if ( in_PoolId >= AK::MemoryMgr::s_iMaxNumPools )
+    return 14i64;
+  result = 1i64;
+  if ( !AK::MemoryMgr::s_pMemPools[in_PoolId].ulNumBlocks )
+    return 14i64;
   return result;
 }
 
@@ -248,14 +243,12 @@ signed __int64 __fastcall AK::MemoryMgr::CheckPoolId(int in_PoolId)
 // RVA: 0xAA09E0
 void __fastcall AK::MemoryMgr::GetPoolMemoryUsed(int in_poolId, AK::MemoryMgr::PoolMemInfo *out_memInfo)
 {
-  AK::MemoryMgr::PoolMemInfo *v2; // rsi
   AkMemPool *v3; // rdi
 
-  v2 = out_memInfo;
   v3 = &AK::MemoryMgr::s_pMemPools[in_poolId];
   EnterCriticalSection(&v3->lock.m_csLock);
-  v2->uUsed = v3->ulUsed;
-  v2->uReserved = v3->ulTotalAvailable;
+  out_memInfo->uUsed = v3->ulUsed;
+  out_memInfo->uReserved = v3->ulTotalAvailable;
   LeaveCriticalSection(&v3->lock.m_csLock);
 }
 

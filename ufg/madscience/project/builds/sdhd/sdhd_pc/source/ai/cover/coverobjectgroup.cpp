@@ -2,60 +2,48 @@
 // RVA: 0x335DD0
 void __fastcall UFG::CoverObjectGroup::~CoverObjectGroup(UFG::CoverObjectGroup *this)
 {
-  UFG::CoverObjectGroup *v1; // rbx
-  signed __int64 v2; // rdi
-  signed __int64 v3; // rsi
+  __int64 i; // rdi
+  __int64 v3; // rsi
   UFG::CoverObjectBase *v4; // rcx
   UFG::CoverObjectBase *v5; // rcx
-  bool v6; // zf
-  UFG::CoverObjectBase **v7; // rcx
+  UFG::CoverObjectBase **p; // rcx
 
-  v1 = this;
   this->vfptr = (UFG::CoverObjectBaseVtbl *)&UFG::CoverObjectGroup::`vftable;
-  v2 = 0i64;
-  if ( this->m_aChildObjects.size )
+  for ( i = 0i64; (unsigned int)i < this->m_aChildObjects.size; i = (unsigned int)(i + 1) )
   {
-    do
-    {
-      v3 = v2;
-      v4 = v1->m_aChildObjects.p[v2];
-      if ( (UFG::CoverObjectGroup *)((__int64 (__cdecl *)(UFG::CoverObjectBase *))v4->vfptr->GetCoverObjectGroup)(v4) == v1 )
-        v1->m_aChildObjects.p[v3]->vfptr->SetCoverObjectGroup(v1->m_aChildObjects.p[v3], 0i64);
-      v5 = v1->m_aChildObjects.p[v3];
-      v6 = v5->m_iRefCount-- == 1;
-      if ( v6 )
-        v5->vfptr->__vecDelDtor(v5, 1u);
-      v2 = (unsigned int)(v2 + 1);
-    }
-    while ( (unsigned int)v2 < v1->m_aChildObjects.size );
+    v3 = i;
+    v4 = this->m_aChildObjects.p[i];
+    if ( v4->vfptr->GetCoverObjectGroup(v4) == this )
+      this->m_aChildObjects.p[v3]->vfptr->SetCoverObjectGroup(this->m_aChildObjects.p[v3], 0i64);
+    v5 = this->m_aChildObjects.p[v3];
+    if ( v5->m_iRefCount-- == 1 )
+      v5->vfptr->__vecDelDtor(v5, 1u);
   }
-  v7 = v1->m_aChildObjects.p;
-  if ( v7 )
-    operator delete[](v7);
-  v1->m_aChildObjects.p = 0i64;
-  *(_QWORD *)&v1->m_aChildObjects.size = 0i64;
-  v1->vfptr = (UFG::CoverObjectBaseVtbl *)&UFG::CoverObjectBase::`vftable;
+  p = this->m_aChildObjects.p;
+  if ( p )
+    operator delete[](p);
+  this->m_aChildObjects.p = 0i64;
+  *(_QWORD *)&this->m_aChildObjects.size = 0i64;
+  this->vfptr = (UFG::CoverObjectBaseVtbl *)&UFG::CoverObjectBase::`vftable;
 }
 
 // File Line: 33
 // RVA: 0x36BF60
 char __fastcall UFG::CoverObjectGroup::IsValid(UFG::CoverObjectGroup *this)
 {
-  unsigned int v1; // eax
-  UFG::CoverObjectGroup *v2; // rdi
-  __int64 v4; // rbx
+  __int64 v3; // rbx
+  UFG::CoverObjectBase *v4; // rcx
 
-  v1 = this->m_aChildObjects.size;
-  v2 = this;
-  if ( v1 < 2 )
+  if ( this->m_aChildObjects.size < 2 )
     return 0;
-  v4 = 0i64;
-  if ( !v1 )
-    return 1;
-  while ( (*((unsigned __int8 (**)(void))&v2->m_aChildObjects.p[v4]->vfptr->__vecDelDtor + 2))() )
+  v3 = 0i64;
+  while ( 1 )
   {
-    v4 = (unsigned int)(v4 + 1);
-    if ( (unsigned int)v4 >= v2->m_aChildObjects.size )
+    v4 = this->m_aChildObjects.p[v3];
+    if ( !(*((unsigned __int8 (__fastcall **)(UFG::CoverObjectBase *))&v4->vfptr->__vecDelDtor + 2))(v4) )
+      break;
+    v3 = (unsigned int)(v3 + 1);
+    if ( (unsigned int)v3 >= this->m_aChildObjects.size )
       return 1;
   }
   return 0;
@@ -65,58 +53,54 @@ char __fastcall UFG::CoverObjectGroup::IsValid(UFG::CoverObjectGroup *this)
 // RVA: 0x3409E0
 void __fastcall UFG::CoverObjectGroup::AddObject(UFG::CoverObjectGroup *this, UFG::CoverObjectBase *pCoverObject)
 {
-  UFG::CoverObjectBaseVtbl *v2; // rax
-  UFG::CoverObjectBase *v3; // r14
-  UFG::CoverObjectGroup *v4; // rbx
-  unsigned int v5; // er12
-  signed __int64 v6; // rbp
+  UFG::CoverObjectBaseVtbl *vfptr; // rax
+  unsigned int size; // r12d
+  __int64 v6; // rbp
   unsigned int v7; // edi
   UFG::CoverObjectBase *v8; // rsi
   unsigned int v9; // ecx
-  unsigned int v10; // edi
+  unsigned int capacity; // edi
   unsigned int v11; // esi
   unsigned int v12; // edi
   unsigned __int64 v13; // rax
   UFG::allocator::free_link *v14; // rax
   UFG::CoverObjectBase **v15; // r15
-  signed __int64 v16; // r8
-  signed __int64 v17; // r8
-  signed __int64 v18; // r9
+  __int64 v16; // r8
+  __int64 v17; // r8
+  __int64 v18; // r9
 
-  v2 = pCoverObject->vfptr;
+  vfptr = pCoverObject->vfptr;
   ++pCoverObject->m_iRefCount;
-  v3 = pCoverObject;
-  v4 = this;
-  v2->SetCoverObjectGroup(pCoverObject, this);
-  v5 = v4->m_aChildObjects.size;
+  vfptr->SetCoverObjectGroup(pCoverObject, this);
+  size = this->m_aChildObjects.size;
   v6 = 0i64;
-  if ( (*((unsigned __int8 (__fastcall **)(UFG::CoverObjectBase *))&v3->vfptr->__vecDelDtor + 2))(v3) )
+  if ( (*((unsigned __int8 (__fastcall **)(UFG::CoverObjectBase *))&pCoverObject->vfptr->__vecDelDtor + 2))(pCoverObject) )
   {
     v7 = 0;
-    if ( v4->m_aChildObjects.size > 0 )
+    if ( this->m_aChildObjects.size )
     {
       while ( 1 )
       {
-        v8 = v4->m_aChildObjects.p[v7];
+        v8 = this->m_aChildObjects.p[v7];
         if ( (*((unsigned __int8 (__fastcall **)(UFG::CoverObjectBase *))&v8->vfptr->__vecDelDtor + 2))(v8) )
         {
-          if ( v3->vfptr->IsConnectedTo(v3, v8) && v3->vfptr->IsLeftOf(v3, v8) )
+          if ( pCoverObject->vfptr->IsConnectedTo(pCoverObject, v8) && pCoverObject->vfptr->IsLeftOf(pCoverObject, v8) )
             break;
         }
-        if ( ++v7 >= v4->m_aChildObjects.size )
+        if ( ++v7 >= this->m_aChildObjects.size )
           goto LABEL_9;
       }
-      v5 = v7;
+      size = v7;
     }
   }
 LABEL_9:
-  v9 = v4->m_aChildObjects.size;
-  v10 = v4->m_aChildObjects.capacity;
+  v9 = this->m_aChildObjects.size;
+  capacity = this->m_aChildObjects.capacity;
   v11 = v9 + 1;
-  if ( v9 + 1 > v10 )
+  if ( v9 + 1 > capacity )
   {
-    if ( v10 )
-      v12 = 2 * v10;
+    if ( capacity )
+      v12 = 2 * capacity;
     else
       v12 = 1;
     for ( ; v12 < v11; v12 *= 2 )
@@ -132,223 +116,207 @@ LABEL_9:
         v13 = -1i64;
       v14 = UFG::qMalloc(v13, "qArray.Insert", 0i64);
       v15 = (UFG::CoverObjectBase **)v14;
-      if ( v4->m_aChildObjects.p )
+      if ( this->m_aChildObjects.p )
       {
-        if ( v4->m_aChildObjects.size > 0 )
+        if ( this->m_aChildObjects.size )
         {
           do
           {
             v16 = v6;
             v6 = (unsigned int)(v6 + 1);
-            v14[v16] = (UFG::allocator::free_link)v4->m_aChildObjects.p[v16];
+            v14[v16] = (UFG::allocator::free_link)this->m_aChildObjects.p[v16];
           }
-          while ( (unsigned int)v6 < v4->m_aChildObjects.size );
+          while ( (unsigned int)v6 < this->m_aChildObjects.size );
         }
-        operator delete[](v4->m_aChildObjects.p);
+        operator delete[](this->m_aChildObjects.p);
       }
-      v4->m_aChildObjects.p = v15;
-      v4->m_aChildObjects.capacity = v12;
+      this->m_aChildObjects.p = v15;
+      this->m_aChildObjects.capacity = v12;
     }
   }
   v17 = v11 - 1;
-  v4->m_aChildObjects.size = v11;
-  if ( (unsigned int)v17 > v5 )
+  this->m_aChildObjects.size = v11;
+  if ( (unsigned int)v17 > size )
   {
     v18 = v17;
     do
     {
       v17 = (unsigned int)(v17 - 1);
-      --v18;
-      v4->m_aChildObjects.p[v18 + 1] = v4->m_aChildObjects.p[v17];
+      this->m_aChildObjects.p[v18--] = this->m_aChildObjects.p[v17];
     }
-    while ( (unsigned int)v17 > v5 );
+    while ( (unsigned int)v17 > size );
   }
-  v4->m_aChildObjects.p[v5] = v3;
+  this->m_aChildObjects.p[size] = pCoverObject;
 }
 
 // File Line: 92
 // RVA: 0x3407E0
 void __fastcall UFG::CoverObjectGroup::AddGroup(UFG::CoverObjectGroup *this, UFG::CoverObjectBase *pGroupObject)
 {
-  __int64 v2; // r12
-  UFG::CoverObjectBase *v3; // r13
-  UFG::CoverObjectGroup *v4; // rbx
-  UFG::CoverObjectBase *v5; // r14
-  UFG::CoverObjectBaseVtbl *v6; // rax
-  unsigned int v7; // er15
-  __int64 v8; // rdi
-  UFG::CoverObjectBase *v9; // rsi
-  unsigned int v10; // ecx
-  unsigned int v11; // edi
-  unsigned int v12; // esi
-  unsigned int v13; // edi
-  unsigned __int64 v14; // rax
-  UFG::allocator::free_link *v15; // rax
-  UFG::CoverObjectBase **v16; // rbp
-  signed __int64 v17; // r9
-  signed __int64 v18; // r8
-  signed __int64 v19; // r8
-  signed __int64 v20; // r9
+  __int64 i; // r12
+  __int64 v5; // rcx
+  UFG::CoverObjectBase *v6; // r14
+  UFG::CoverObjectBaseVtbl *vfptr; // rax
+  unsigned int size; // r15d
+  __int64 v9; // rdi
+  UFG::CoverObjectBase *v10; // rsi
+  unsigned int v11; // ecx
+  unsigned int capacity; // edi
+  unsigned int v13; // esi
+  unsigned int v14; // edi
+  unsigned __int64 v15; // rax
+  UFG::allocator::free_link *v16; // rax
+  UFG::CoverObjectBase **v17; // rbp
+  __int64 j; // r9
+  __int64 v19; // r8
+  __int64 v20; // r8
+  __int64 v21; // r9
 
-  v2 = 0i64;
-  v3 = pGroupObject;
-  v4 = this;
-  if ( LODWORD(pGroupObject[1].vfptr) )
+  for ( i = 0i64; (unsigned int)i < LODWORD(pGroupObject[1].vfptr); i = (unsigned int)(i + 1) )
   {
-    do
+    v5 = *(_QWORD *)(8 * i + *(_QWORD *)&pGroupObject[1].m_iRefCount);
+    if ( (*(unsigned __int8 (__fastcall **)(__int64))(*(_QWORD *)v5 + 16i64))(v5) )
     {
-      if ( (*(unsigned __int8 (**)(void))(**(_QWORD **)(8 * v2 + *(_QWORD *)&v3[1].m_iRefCount) + 16i64))() )
+      v6 = *(UFG::CoverObjectBase **)(8 * i + *(_QWORD *)&pGroupObject[1].m_iRefCount);
+      vfptr = v6->vfptr;
+      ++v6->m_iRefCount;
+      vfptr->SetCoverObjectGroup(v6, this);
+      size = this->m_aChildObjects.size;
+      if ( (*((unsigned __int8 (__fastcall **)(UFG::CoverObjectBase *))&v6->vfptr->__vecDelDtor + 2))(v6) )
       {
-        v5 = *(UFG::CoverObjectBase **)(8 * v2 + *(_QWORD *)&v3[1].m_iRefCount);
-        v6 = v5->vfptr;
-        ++v5->m_iRefCount;
-        v6->SetCoverObjectGroup(v5, v4);
-        v7 = v4->m_aChildObjects.size;
-        if ( (*((unsigned __int8 (__fastcall **)(UFG::CoverObjectBase *))&v5->vfptr->__vecDelDtor + 2))(v5) )
+        v9 = 0i64;
+        if ( this->m_aChildObjects.size )
         {
-          v8 = 0i64;
-          if ( v4->m_aChildObjects.size )
+          while ( 1 )
           {
-            while ( 1 )
+            v10 = this->m_aChildObjects.p[v9];
+            if ( (*((unsigned __int8 (__fastcall **)(UFG::CoverObjectBase *))&v10->vfptr->__vecDelDtor + 2))(v10) )
             {
-              v9 = v4->m_aChildObjects.p[v8];
-              if ( (*((unsigned __int8 (__fastcall **)(UFG::CoverObjectBase *))&v9->vfptr->__vecDelDtor + 2))(v9) )
-              {
-                if ( v5->vfptr->IsConnectedTo(v5, v9) && v5->vfptr->IsLeftOf(v5, v9) )
-                  break;
-              }
-              v8 = (unsigned int)(v8 + 1);
-              if ( (unsigned int)v8 >= v4->m_aChildObjects.size )
-                goto LABEL_11;
+              if ( v6->vfptr->IsConnectedTo(v6, v10) && v6->vfptr->IsLeftOf(v6, v10) )
+                break;
             }
-            v7 = v8;
+            v9 = (unsigned int)(v9 + 1);
+            if ( (unsigned int)v9 >= this->m_aChildObjects.size )
+              goto LABEL_11;
           }
+          size = v9;
         }
-LABEL_11:
-        v10 = v4->m_aChildObjects.size;
-        v11 = v4->m_aChildObjects.capacity;
-        v12 = v10 + 1;
-        if ( v10 + 1 > v11 )
-        {
-          if ( v11 )
-            v13 = 2 * v11;
-          else
-            v13 = 1;
-          for ( ; v13 < v12; v13 *= 2 )
-            ;
-          if ( v13 <= 2 )
-            v13 = 2;
-          if ( v13 - v12 > 0x10000 )
-            v13 = v10 + 65537;
-          if ( v13 != v10 )
-          {
-            v14 = 8i64 * v13;
-            if ( !is_mul_ok(v13, 8ui64) )
-              v14 = -1i64;
-            v15 = UFG::qMalloc(v14, "qArray.Insert", 0i64);
-            v16 = (UFG::CoverObjectBase **)v15;
-            if ( v4->m_aChildObjects.p )
-            {
-              v17 = 0i64;
-              if ( v4->m_aChildObjects.size )
-              {
-                do
-                {
-                  v18 = v17;
-                  v17 = (unsigned int)(v17 + 1);
-                  v15[v18] = (UFG::allocator::free_link)v4->m_aChildObjects.p[v18];
-                }
-                while ( (unsigned int)v17 < v4->m_aChildObjects.size );
-              }
-              operator delete[](v4->m_aChildObjects.p);
-            }
-            v4->m_aChildObjects.p = v16;
-            v4->m_aChildObjects.capacity = v13;
-          }
-        }
-        v19 = v12 - 1;
-        v4->m_aChildObjects.size = v12;
-        if ( (unsigned int)v19 > v7 )
-        {
-          v20 = v19;
-          do
-          {
-            v19 = (unsigned int)(v19 - 1);
-            --v20;
-            v4->m_aChildObjects.p[v20 + 1] = v4->m_aChildObjects.p[v19];
-          }
-          while ( (unsigned int)v19 > v7 );
-        }
-        v4->m_aChildObjects.p[v7] = v5;
       }
-      v2 = (unsigned int)(v2 + 1);
+LABEL_11:
+      v11 = this->m_aChildObjects.size;
+      capacity = this->m_aChildObjects.capacity;
+      v13 = v11 + 1;
+      if ( v11 + 1 > capacity )
+      {
+        if ( capacity )
+          v14 = 2 * capacity;
+        else
+          v14 = 1;
+        for ( ; v14 < v13; v14 *= 2 )
+          ;
+        if ( v14 <= 2 )
+          v14 = 2;
+        if ( v14 - v13 > 0x10000 )
+          v14 = v11 + 65537;
+        if ( v14 != v11 )
+        {
+          v15 = 8i64 * v14;
+          if ( !is_mul_ok(v14, 8ui64) )
+            v15 = -1i64;
+          v16 = UFG::qMalloc(v15, "qArray.Insert", 0i64);
+          v17 = (UFG::CoverObjectBase **)v16;
+          if ( this->m_aChildObjects.p )
+          {
+            for ( j = 0i64;
+                  (unsigned int)j < this->m_aChildObjects.size;
+                  v16[v19] = (UFG::allocator::free_link)this->m_aChildObjects.p[v19] )
+            {
+              v19 = j;
+              j = (unsigned int)(j + 1);
+            }
+            operator delete[](this->m_aChildObjects.p);
+          }
+          this->m_aChildObjects.p = v17;
+          this->m_aChildObjects.capacity = v14;
+        }
+      }
+      v20 = v13 - 1;
+      this->m_aChildObjects.size = v13;
+      if ( (unsigned int)v20 > size )
+      {
+        v21 = v20;
+        do
+        {
+          v20 = (unsigned int)(v20 - 1);
+          this->m_aChildObjects.p[v21--] = this->m_aChildObjects.p[v20];
+        }
+        while ( (unsigned int)v20 > size );
+      }
+      this->m_aChildObjects.p[size] = v6;
     }
-    while ( (unsigned int)v2 < LODWORD(v3[1].vfptr) );
   }
 }
 
 // File Line: 107
 // RVA: 0x35C110
-UFG::CoverPosition *__fastcall UFG::CoverObjectGroup::GetCoverPosition(UFG::CoverObjectGroup *this, UFG::qVector3 *vCharPos, UFG::CoverPosition *pCurrentPosition, float fRange)
+UFG::CoverPosition *__fastcall UFG::CoverObjectGroup::GetCoverPosition(
+        UFG::CoverObjectGroup *this,
+        UFG::qVector3 *vCharPos,
+        UFG::CoverPosition *pCurrentPosition,
+        float fRange)
 {
-  UFG::qVector3 *v4; // rbp
-  UFG::CoverObjectGroup *v5; // rdi
   float v6; // xmm6_4
   UFG::CoverPosition *result; // rax
   UFG::CoverPosition *v8; // rbx
   __int64 v9; // rsi
-  UFG::CoverObjectBase **v10; // rcx
+  UFG::CoverObjectBase **p; // rcx
   UFG::CoverObjectParkour *v11; // r14
   UFG::CoverObjectParkour *v12; // r15
-  float v13; // xmm0_4
-  UFG::CoverPosition *v14; // rax
+  UFG::CoverPosition *InbetweenParkourPosition; // rax
+  float v14; // xmm0_4
   float v15; // xmm1_4
   float v16; // xmm0_4
 
-  v4 = vCharPos;
-  v5 = this;
   v6 = 0.0;
   result = UFG::CoverObjectGroup::GetCoverPositionExact(this, vCharPos);
   v8 = result;
-  if ( !result || 0.0 == result->m_fDistToLeft && 0.0 == result->m_fDistToRight )
+  if ( !result || result->m_fDistToLeft == 0.0 && result->m_fDistToRight == 0.0 )
   {
     v9 = 0i64;
-    if ( v5->m_aChildObjects.size != 1 )
+    if ( this->m_aChildObjects.size != 1 )
     {
       while ( 1 )
       {
-        v10 = v5->m_aChildObjects.p;
-        v11 = (UFG::CoverObjectParkour *)v10[v9];
+        p = this->m_aChildObjects.p;
+        v11 = (UFG::CoverObjectParkour *)p[v9];
         v9 = (unsigned int)(v9 + 1);
-        v12 = (UFG::CoverObjectParkour *)v10[(unsigned int)v9];
-        if ( v11->vfptr->IsParkour((UFG::CoverObjectBase *)&v11->vfptr) )
+        v12 = (UFG::CoverObjectParkour *)p[(unsigned int)v9];
+        if ( v11->vfptr->IsParkour(v11) )
         {
-          v13 = UFG::ParkourHandle::GetHalfLength(v11->m_pParkourHandle.m_pPointer) * 2.0;
-          v6 = v6 + v13;
-          if ( v12->vfptr->IsParkour((UFG::CoverObjectBase *)&v12->vfptr) )
+          v6 = v6 + (float)(UFG::ParkourHandle::GetHalfLength(v11->m_pParkourHandle.m_pPointer) * 2.0);
+          if ( v12->vfptr->IsParkour(v12) )
           {
-            v14 = UFG::CoverObjectGroup::GetInbetweenParkourPosition(v5, v11, v12, v4, v8);
-            v8 = v14;
-            if ( v14 )
+            InbetweenParkourPosition = UFG::CoverObjectGroup::GetInbetweenParkourPosition(this, v11, v12, vCharPos, v8);
+            v8 = InbetweenParkourPosition;
+            if ( InbetweenParkourPosition )
             {
-              if ( v14->m_bInbetweenParkourLine )
+              if ( InbetweenParkourPosition->m_bInbetweenParkourLine )
                 break;
             }
           }
         }
-        if ( (unsigned int)v9 >= v5->m_aChildObjects.size - 1 )
-          goto LABEL_16;
+        if ( (unsigned int)v9 >= this->m_aChildObjects.size - 1 )
+          return v8;
       }
-      v14->vfptr->GetHeight((UFG::CoverObjectBase *)&v14->vfptr);
-      if ( v13 <= 0.5 || v13 >= 1.6 )
+      v14 = InbetweenParkourPosition->vfptr->GetHeight(InbetweenParkourPosition);
+      if ( v14 <= 0.5 || v14 >= 1.6 )
         v15 = UFG::CoverObjectBase::ms_fHighSideOffset;
       else
         v15 = UFG::CoverObjectBase::ms_fLowSideOffset;
-      v16 = (float)(v5->m_fTotalLength - v6) - v15;
+      v16 = (float)(this->m_fTotalLength - v6) - v15;
       v8->m_fDistToLeft = v6 - v15;
       v8->m_fDistToRight = v16;
-LABEL_16:
-      result = v8;
+      return v8;
     }
   }
   return result;
@@ -356,104 +324,96 @@ LABEL_16:
 
 // File Line: 160
 // RVA: 0x35C850
-UFG::CoverPosition *__fastcall UFG::CoverObjectGroup::GetCoverPositionExact(UFG::CoverObjectGroup *this, UFG::qVector3 *vCharPos)
+UFG::CoverPosition *__fastcall UFG::CoverObjectGroup::GetCoverPositionExact(
+        UFG::CoverObjectGroup *this,
+        UFG::qVector3 *vCharPos)
 {
   UFG::CoverPosition *v2; // rsi
-  UFG::qVector3 *v3; // r15
-  UFG::CoverObjectGroup *v4; // r14
   float v5; // xmm9_4
-  unsigned int v6; // ebp
+  unsigned int i; // ebp
   UFG::ParkourHandle **v7; // rdi
   __int64 v8; // rbx
   float v9; // xmm6_4
   float v10; // xmm7_4
   float v11; // xmm6_4
   float v12; // xmm0_4
-  float v13; // xmm2_4
+  float v13; // xmm0_4
   float v14; // xmm0_4
 
   v2 = 0i64;
-  v3 = vCharPos;
-  v4 = this;
   v5 = 0.0;
-  v6 = 0;
-  if ( this->m_aChildObjects.size )
+  for ( i = 0; i < this->m_aChildObjects.size; ++i )
   {
-    do
+    v7 = (UFG::ParkourHandle **)this->m_aChildObjects.p[i];
+    if ( ((unsigned __int8 (__fastcall *)(UFG::ParkourHandle **))(*v7)->m_SafePointerList.mNode.mNext)(v7) )
     {
-      v7 = (UFG::ParkourHandle **)v4->m_aChildObjects.p[v6];
-      if ( ((unsigned __int8 (__fastcall *)(UFG::ParkourHandle **))(*v7)->m_SafePointerList.mNode.mNext)(v7) )
+      v8 = ((__int64 (__fastcall *)(UFG::ParkourHandle **, UFG::qVector3 *, _QWORD))(*v7)->mCachedRightNeighbor.mNext)(
+             v7,
+             vCharPos,
+             0i64);
+      if ( !v8 )
+        goto LABEL_19;
+      if ( !((unsigned __int8 (__fastcall *)(UFG::ParkourHandle **))(*v7)->mSimObject.mNext)(v7) )
+        goto LABEL_16;
+      v9 = *(float *)(v8 + 200);
+      v10 = (float)(UFG::ParkourHandle::GetHalfLength(*(UFG::ParkourHandle **)(v8 + 48)) + v9) + v5;
+      v11 = this->m_fTotalLength - v10;
+      if ( v10 >= v11 )
+        v12 = this->m_fTotalLength - v10;
+      else
+        v12 = v10;
+      if ( v12 >= 0.5
+        || (float)((float)((float)(0.5 - v12) * (float)(0.5 - v12))
+                 + (float)((float)(0.5 - COERCE_FLOAT(*(_DWORD *)(v8 + 204) & _xmm))
+                         * (float)(0.5 - COERCE_FLOAT(*(_DWORD *)(v8 + 204) & _xmm)))) <= 0.25 )
       {
-        v8 = ((__int64 (__fastcall *)(UFG::ParkourHandle **, UFG::qVector3 *, _QWORD))(*v7)->mCachedRightNeighbor.mNext)(
-               v7,
-               v3,
-               0i64);
-        if ( !v8 )
-          goto LABEL_19;
-        if ( !((unsigned __int8 (__fastcall *)(UFG::ParkourHandle **))(*v7)->mSimObject.mNext)(v7) )
-          goto LABEL_16;
-        v9 = *(float *)(v8 + 200);
-        v10 = (float)(UFG::ParkourHandle::GetHalfLength(*(UFG::ParkourHandle **)(v8 + 48)) + v9) + v5;
-        v11 = v4->m_fTotalLength - v10;
-        if ( v10 >= v11 )
-          v12 = v4->m_fTotalLength - v10;
+        v13 = (*(float (__fastcall **)(__int64))(*(_QWORD *)v8 + 224i64))(v8);
+        if ( v13 <= 0.5 || v13 >= 1.6 )
+          v14 = UFG::CoverObjectBase::ms_fHighSideOffset;
         else
-          v12 = v10;
-        if ( v12 >= 0.5
-          || (v13 = 0.5 - v12,
-              LODWORD(v12) = *(_DWORD *)(v8 + 204) & _xmm,
-              (float)((float)(v13 * v13) + (float)((float)(0.5 - v12) * (float)(0.5 - v12))) <= 0.25) )
-        {
-          (*(void (__fastcall **)(__int64))(*(_QWORD *)v8 + 224i64))(v8);
-          if ( v12 <= 0.5 || v12 >= 1.6 )
-            v14 = UFG::CoverObjectBase::ms_fHighSideOffset;
-          else
-            v14 = UFG::CoverObjectBase::ms_fLowSideOffset;
-          *(float *)(v8 + 208) = v10 - v14;
-          *(float *)(v8 + 212) = v11 - v14;
+          v14 = UFG::CoverObjectBase::ms_fLowSideOffset;
+        *(float *)(v8 + 208) = v10 - v14;
+        *(float *)(v8 + 212) = v11 - v14;
 LABEL_16:
-          if ( v2 )
-          {
-            UFG::CoverPosition::operator+=(v2, (UFG::CoverPosition *)v8);
-            (**(void (__fastcall ***)(__int64, signed __int64))v8)(v8, 1i64);
-          }
-          else
-          {
-            v2 = (UFG::CoverPosition *)v8;
-          }
-LABEL_19:
-          if ( ((unsigned __int8 (__fastcall *)(UFG::ParkourHandle **))(*v7)->mSimObject.mNext)(v7) )
-            v5 = v5 + (float)(UFG::ParkourHandle::GetHalfLength(v7[6]) * 2.0);
-          goto LABEL_21;
+        if ( v2 )
+        {
+          UFG::CoverPosition::operator+=(v2, (UFG::CoverPosition *)v8);
+          (**(void (__fastcall ***)(__int64, __int64))v8)(v8, 1i64);
         }
-        (**(void (__fastcall ***)(__int64, signed __int64))v8)(v8, 1i64);
+        else
+        {
+          v2 = (UFG::CoverPosition *)v8;
+        }
+LABEL_19:
+        if ( ((unsigned __int8 (__fastcall *)(UFG::ParkourHandle **))(*v7)->mSimObject.mNext)(v7) )
+          v5 = v5 + (float)(UFG::ParkourHandle::GetHalfLength(v7[6]) * 2.0);
+        continue;
       }
-LABEL_21:
-      ++v6;
+      (**(void (__fastcall ***)(__int64, __int64))v8)(v8, 1i64);
     }
-    while ( v6 < v4->m_aChildObjects.size );
   }
   return v2;
 }
 
 // File Line: 231
 // RVA: 0x360250
-UFG::CoverPosition *__fastcall UFG::CoverObjectGroup::GetInbetweenParkourPosition(UFG::CoverObjectGroup *this, UFG::CoverObjectParkour *pLeftChild, UFG::CoverObjectParkour *pRightChild, UFG::qVector3 *vCharPos)
+UFG::CoverPosition *__fastcall UFG::CoverObjectGroup::GetInbetweenParkourPosition(
+        UFG::CoverObjectGroup *this,
+        UFG::CoverObjectParkour *pLeftChild,
+        UFG::CoverObjectParkour *pRightChild,
+        UFG::qVector3 *vCharPos)
 {
-  UFG::qVector3 *v4; // r15
-  UFG::CoverObjectParkour *v5; // rdi
-  UFG::CoverObjectParkour *v6; // rbx
-  UFG::ParkourHandle *v7; // rsi
+  UFG::ParkourHandle *m_pPointer; // rsi
   UFG::ParkourHandle *v8; // r14
   float v9; // xmm14_4
   float v10; // xmm15_4
-  float v11; // xmm1_4
+  float z; // xmm1_4
   float v12; // xmm11_4
   float v13; // xmm6_4
   float v14; // xmm7_4
   float v15; // xmm10_4
   float v16; // xmm9_4
-  __m128 v17; // xmm8
+  __m128 x_low; // xmm8
   __m128 v18; // xmm3
   float v19; // xmm1_4
   float v20; // xmm10_4
@@ -473,53 +433,50 @@ UFG::CoverPosition *__fastcall UFG::CoverObjectGroup::GetInbetweenParkourPositio
   UFG::allocator::free_link *v34; // rax
   UFG::CoverPosition *v35; // rax
   float v37; // [rsp+20h] [rbp-B8h]
-  UFG::qVector3 v38; // [rsp+28h] [rbp-B0h]
-  UFG::qVector3 result; // [rsp+38h] [rbp-A0h]
-  UFG::qVector3 out; // [rsp+48h] [rbp-90h]
-  UFG::qVector3 v41; // [rsp+58h] [rbp-80h]
-  UFG::qVector3 v42; // [rsp+64h] [rbp-74h]
-  __int64 v43; // [rsp+70h] [rbp-68h]
-  float v44; // [rsp+78h] [rbp-60h]
-  float v45; // [rsp+7Ch] [rbp-5Ch]
+  UFG::qVector3 v38; // [rsp+28h] [rbp-B0h] BYREF
+  UFG::qVector3 result; // [rsp+38h] [rbp-A0h] BYREF
+  UFG::qVector3 out; // [rsp+48h] [rbp-90h] BYREF
+  UFG::qVector3 v41; // [rsp+58h] [rbp-80h] BYREF
+  UFG::qVector3 v42; // [rsp+64h] [rbp-74h] BYREF
+  __int64 v43; // [rsp+70h] [rbp-68h] BYREF
+  float p1_4; // [rsp+78h] [rbp-60h]
+  float p1_8; // [rsp+7Ch] [rbp-5Ch]
   float v46; // [rsp+150h] [rbp+78h]
   float v47; // [rsp+158h] [rbp+80h]
   UFG::allocator::free_link *vars0; // [rsp+160h] [rbp+88h]
   UFG::CoverPosition *retaddr; // [rsp+168h] [rbp+90h]
 
   v43 = -2i64;
-  v4 = vCharPos;
-  v5 = pRightChild;
-  v6 = pLeftChild;
-  v7 = pLeftChild->m_pParkourHandle.m_pPointer;
+  m_pPointer = pLeftChild->m_pParkourHandle.m_pPointer;
   v8 = pRightChild->m_pParkourHandle.m_pPointer;
-  UFG::ParkourHandle::GetAxis(v7, &result);
+  UFG::ParkourHandle::GetAxis(m_pPointer, &result);
   UFG::ParkourHandle::GetAxis(v8, &v38);
-  UFG::ParkourHandle::GetEndpoints(v7, (UFG::qVector3 *)((char *)&v42 + 4), (UFG::qVector3 *)((char *)&v43 + 4));
+  UFG::ParkourHandle::GetEndpoints(m_pPointer, (UFG::qVector3 *)&v42.y, (UFG::qVector3 *)((char *)&v43 + 4));
   UFG::ParkourHandle::GetEndpoints(v8, &v41, &v42);
-  v9 = (float)(v45 + v41.z) * 0.5;
-  v46 = (float)(v44 + v41.y) * 0.5;
+  v9 = (float)(p1_8 + v41.z) * 0.5;
+  v46 = (float)(p1_4 + v41.y) * 0.5;
   v10 = (float)(*((float *)&v43 + 1) + v41.x) * 0.5;
-  v47 = (float)(v5->m_fParkourSyncZOffset + v6->m_fParkourSyncZOffset) * 0.5;
-  v11 = v4->z;
-  v12 = v4->z - v9;
-  v13 = v4->y - v46;
-  v37 = v4->y - v46;
-  v14 = v4->x - v10;
-  *(float *)&vars0 = v4->x - v10;
-  if ( (float)((float)(v9 + v47) - v11) >= kfMaxHeightDiff_1 )
+  v47 = (float)(pRightChild->m_fParkourSyncZOffset + pLeftChild->m_fParkourSyncZOffset) * 0.5;
+  z = vCharPos->z;
+  v12 = z - v9;
+  v13 = vCharPos->y - v46;
+  v37 = v13;
+  v14 = vCharPos->x - v10;
+  *(float *)&vars0 = v14;
+  if ( (float)((float)(v9 + v47) - z) >= kfMaxHeightDiff_1 )
     return retaddr;
-  UFG::ParkourHandle::GetNormal(v7, &out);
+  UFG::ParkourHandle::GetNormal(m_pPointer, &out);
   UFG::ParkourHandle::GetNormal(v8, &v41);
   v15 = out.z + v41.z;
   v16 = out.y + v41.y;
-  v17 = (__m128)LODWORD(out.x);
-  v17.m128_f32[0] = out.x + v41.x;
-  v18 = v17;
-  v18.m128_f32[0] = (float)((float)(v17.m128_f32[0] * v17.m128_f32[0]) + (float)(v16 * v16)) + (float)(v15 * v15);
-  v19 = v18.m128_f32[0] == 0.0 ? 0.0 : 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v18));
+  x_low = (__m128)LODWORD(out.x);
+  x_low.m128_f32[0] = out.x + v41.x;
+  v18 = x_low;
+  v18.m128_f32[0] = (float)((float)(x_low.m128_f32[0] * x_low.m128_f32[0]) + (float)(v16 * v16)) + (float)(v15 * v15);
+  v19 = v18.m128_f32[0] == 0.0 ? 0.0 : 1.0 / _mm_sqrt_ps(v18).m128_f32[0];
   v20 = v15 * v19;
   v21 = v16 * v19;
-  v22 = v17.m128_f32[0] * v19;
+  v22 = x_low.m128_f32[0] * v19;
   v23 = (float)((float)(v22 * v14) + (float)(v21 * v13)) + (float)(v20 * v12);
   if ( v23 <= 0.0 || v23 >= 1.0 )
     return retaddr;
@@ -529,15 +486,16 @@ UFG::CoverPosition *__fastcall UFG::CoverObjectGroup::GetInbetweenParkourPositio
   v26.m128_f32[0] = result.x + v38.x;
   v27 = v26;
   v27.m128_f32[0] = (float)((float)(v26.m128_f32[0] * v26.m128_f32[0]) + (float)(v25 * v25)) + (float)(v24 * v24);
-  v28 = v27.m128_f32[0] == 0.0 ? 0.0 : 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v27));
+  v28 = v27.m128_f32[0] == 0.0 ? 0.0 : 1.0 / _mm_sqrt_ps(v27).m128_f32[0];
   v29 = v24 * v28;
   v30 = v25 * v28;
   v31 = v26.m128_f32[0] * v28;
   v32 = (float)(v31 * *(float *)&vars0) + (float)(v30 * v37);
   if ( v32 <= -0.5
     || v32 >= 0.5
-    || (float)((float)((float)(*((float *)&v43 + 1) - v4->x) * result.x) + (float)(result.y * (float)(v44 - v4->y))) > 0.0
-    || (float)((float)((float)(v41.x - v4->x) * v38.x) + (float)(v38.y * (float)(v41.y - v4->y))) < 0.0 )
+    || (float)((float)((float)(*((float *)&v43 + 1) - vCharPos->x) * result.x)
+             + (float)(result.y * (float)(p1_4 - vCharPos->y))) > 0.0
+    || (float)((float)((float)(v41.x - vCharPos->x) * v38.x) + (float)(v38.y * (float)(v41.y - vCharPos->y))) < 0.0 )
   {
     return retaddr;
   }
@@ -568,19 +526,20 @@ UFG::CoverPosition *__fastcall UFG::CoverObjectGroup::GetInbetweenParkourPositio
   v33->m_vInbetweenParkourAxis.z = v29;
   v33->m_fParkourSyncZOffset = v47;
   v33->m_bFoundParkourSync = 1;
-  UFG::CoverPosition::SetParkourHandle(v33, v7);
+  UFG::CoverPosition::SetParkourHandle(v33, m_pPointer);
   return v33;
 }
 
 // File Line: 359
 // RVA: 0x35CDD0
-bool __fastcall UFG::CoverObjectGroup::GetCoverPositions(UFG::CoverObjectGroup *this, UFG::qArray<UFG::CoverPosition *,0> *aCoverPositions)
+bool __fastcall UFG::CoverObjectGroup::GetCoverPositions(
+        UFG::CoverObjectGroup *this,
+        UFG::qArray<UFG::CoverPosition *,0> *aCoverPositions)
 {
-  UFG::qArray<UFG::CoverPosition *,0> *v2; // rdi
   UFG::CoverObjectGroup *v3; // r14
-  float v4; // xmm11_4
+  float m_fTotalLength; // xmm11_4
   float v5; // xmm0_4
-  signed int v6; // ebx
+  int v6; // ebx
   float v7; // xmm11_4
   int v8; // ebp
   float v9; // xmm9_4
@@ -595,74 +554,72 @@ bool __fastcall UFG::CoverObjectGroup::GetCoverPositions(UFG::CoverObjectGroup *
   UFG::CoverPosition *v18; // rax
   UFG::CoverPosition *v19; // r15
   float v20; // xmm0_4
-  float v21; // xmm2_4
-  float v22; // xmm0_4
-  __int64 v23; // r12
-  unsigned int v24; // esi
-  unsigned int v25; // ebx
-  unsigned int v26; // ebx
-  unsigned __int64 v27; // rax
-  UFG::allocator::free_link *v28; // r14
-  unsigned int v29; // er9
-  unsigned int v30; // er12
-  UFG::CoverObjectBase *v31; // r14
-  int v32; // esi
-  UFG::CoverPosition *v33; // r15
-  UFG::CoverObjectBaseVtbl *v34; // rbx
-  __int64 v35; // rax
+  float v21; // xmm0_4
+  float v22; // xmm2_4
+  float v23; // xmm0_4
+  __int64 size; // r12
+  unsigned int v25; // esi
+  unsigned int capacity; // ebx
+  unsigned int v27; // ebx
+  unsigned __int64 v28; // rax
+  UFG::CoverPosition **v29; // r14
+  unsigned int i; // r9d
+  unsigned int v31; // r12d
+  UFG::CoverObjectBase *v32; // r14
+  int v33; // esi
+  UFG::CoverPosition *v34; // r15
+  UFG::CoverObjectBaseVtbl *vfptr; // rbx
   __int64 v36; // rax
-  __int64 v37; // rcx
-  int v38; // eax
-  __int64 v39; // rdx
-  UFG::CoverCorner *v40; // rdx
-  __int64 v41; // rax
-  __int64 v42; // rcx
-  signed __int64 v43; // rcx
-  UFG::allocator::free_link *v44; // rcx
-  __int64 v45; // rdx
-  UFG::CoverCorner *v46; // rdx
-  __int64 v47; // rax
-  __int64 v48; // rdx
-  signed __int64 v49; // r8
-  UFG::CoverPosition *v50; // rax
-  UFG::CoverPosition *v51; // r15
-  __int64 v52; // rbp
-  unsigned int v53; // esi
-  unsigned int v54; // ebx
+  __int64 v37; // rax
+  __int64 v38; // rcx
+  int v39; // eax
+  __int64 v40; // rdx
+  UFG::CoverCorner *v41; // rdx
+  __int64 v42; // rax
+  __int64 v43; // rcx
+  __int64 v44; // rcx
+  UFG::allocator::free_link *v45; // rcx
+  __int64 v46; // rdx
+  UFG::CoverCorner *v47; // rdx
+  __int64 v48; // rax
+  __int64 v49; // rdx
+  __int64 v50; // r8
+  UFG::CoverPosition *v51; // rax
+  UFG::CoverPosition *v52; // r15
+  __int64 v53; // rbp
+  unsigned int v54; // esi
   unsigned int v55; // ebx
-  unsigned __int64 v56; // rax
-  UFG::allocator::free_link *v57; // rax
-  UFG::CoverPosition **v58; // r14
-  unsigned int v59; // er9
-  char v61; // [rsp+28h] [rbp-F0h]
-  UFG::CoverObjectGroup *v62; // [rsp+120h] [rbp+8h]
-  int v63; // [rsp+128h] [rbp+10h]
-  signed int v64; // [rsp+130h] [rbp+18h]
+  unsigned int v56; // ebx
+  unsigned __int64 v57; // rax
+  UFG::allocator::free_link *v58; // rax
+  UFG::CoverPosition **v59; // r14
+  unsigned int j; // r9d
+  char v62; // [rsp+28h] [rbp-F0h] BYREF
+  int v64; // [rsp+128h] [rbp+10h]
+  int v65; // [rsp+130h] [rbp+18h]
 
-  v62 = this;
-  v2 = aCoverPositions;
   v3 = this;
-  v4 = this->m_fTotalLength;
-  if ( v4 > 0.5 )
+  m_fTotalLength = this->m_fTotalLength;
+  if ( m_fTotalLength > 0.5 )
   {
     v5 = *(float *)&FLOAT_1_0;
-    if ( (float)(signed int)(float)(v4 * 1.0526316) >= 1.0 )
-      v5 = (float)(signed int)(float)(v4 * 1.0526316);
-    v6 = (signed int)v5;
-    v64 = (signed int)v5;
-    v7 = v4 / (float)(signed int)v5;
+    if ( (float)(int)(float)(m_fTotalLength * 1.0526316) >= 1.0 )
+      v5 = (float)(int)(float)(m_fTotalLength * 1.0526316);
+    v6 = (int)v5;
+    v65 = (int)v5;
+    v7 = m_fTotalLength / (float)(int)v5;
     v8 = 0;
     v9 = 0.0;
-    if ( !(*(unsigned __int8 (__cdecl **)(UFG::CoverObjectBase *))(**(_QWORD **)this->m_aChildObjects.p + 48i64))(*this->m_aChildObjects.p) )
+    if ( !(*(unsigned __int8 (__fastcall **)(UFG::CoverObjectBase *))(**(_QWORD **)this->m_aChildObjects.p + 48i64))(*this->m_aChildObjects.p) )
     {
       do
         v10 = v3->m_aChildObjects.p[++v8];
-      while ( !((unsigned __int8 (__cdecl *)(UFG::CoverObjectBase *))v10->vfptr->IsParkour)(v10) );
+      while ( !v10->vfptr->IsParkour(v10) );
     }
     v11 = v3->m_aChildObjects.p[v8];
     v12 = UFG::ParkourHandle::GetHalfLength((UFG::ParkourHandle *)v11[1].m_pCoverObjectGroup) * 2.0;
     v13 = 0;
-    v63 = 0;
+    v64 = 0;
     if ( v6 > 0 )
     {
       do
@@ -671,7 +628,7 @@ bool __fastcall UFG::CoverObjectGroup::GetCoverPositions(UFG::CoverObjectGroup *
         while ( v14 > v12 )
         {
           v15 = v3->m_aChildObjects.p[++v8];
-          if ( ((unsigned __int8 (__cdecl *)(UFG::CoverObjectBase *))v15->vfptr->IsParkour)(v15) )
+          if ( v15->vfptr->IsParkour(v15) )
           {
             v11 = v3->m_aChildObjects.p[v8];
             v9 = v12;
@@ -694,223 +651,201 @@ bool __fastcall UFG::CoverObjectGroup::GetCoverPositions(UFG::CoverObjectGroup *
         v20 = *(&v11[1].m_fPriority + 1);
         v19->m_bFoundParkourSync = 1;
         v19->m_fParkourSyncZOffset = v20;
-        v19->vfptr->GetHeight((UFG::CoverObjectBase *)&v19->vfptr);
-        if ( v20 <= 0.5 || v20 >= 1.6 )
-          v21 = UFG::CoverObjectBase::ms_fHighSideOffset;
+        v21 = v19->vfptr->GetHeight(v19);
+        if ( v21 <= 0.5 || v21 >= 1.6 )
+          v22 = UFG::CoverObjectBase::ms_fHighSideOffset;
         else
-          v21 = UFG::CoverObjectBase::ms_fLowSideOffset;
-        v22 = (float)(v3->m_fTotalLength - v14) - v21;
-        v19->m_fDistToLeft = v14 - v21;
-        v19->m_fDistToRight = v22;
-        v23 = v2->size;
-        v24 = v23 + 1;
-        v25 = v2->capacity;
-        if ( (signed int)v23 + 1 > v25 )
+          v22 = UFG::CoverObjectBase::ms_fLowSideOffset;
+        v23 = (float)(v3->m_fTotalLength - v14) - v22;
+        v19->m_fDistToLeft = v14 - v22;
+        v19->m_fDistToRight = v23;
+        size = aCoverPositions->size;
+        v25 = size + 1;
+        capacity = aCoverPositions->capacity;
+        if ( (int)size + 1 > capacity )
         {
-          if ( v25 )
-            v26 = 2 * v25;
+          if ( capacity )
+            v27 = 2 * capacity;
           else
-            v26 = 1;
-          for ( ; v26 < v24; v26 *= 2 )
+            v27 = 1;
+          for ( ; v27 < v25; v27 *= 2 )
             ;
-          if ( v26 <= 2 )
-            v26 = 2;
-          if ( v26 - v24 > 0x10000 )
-            v26 = v23 + 65537;
-          if ( v26 != (_DWORD)v23 )
+          if ( v27 <= 2 )
+            v27 = 2;
+          if ( v27 - v25 > 0x10000 )
+            v27 = size + 65537;
+          if ( v27 != (_DWORD)size )
           {
-            v27 = 8i64 * v26;
-            if ( !is_mul_ok(v26, 8ui64) )
-              v27 = -1i64;
-            v28 = UFG::qMalloc(v27, "qArray.Add", 0i64);
-            if ( v2->p )
+            v28 = 8i64 * v27;
+            if ( !is_mul_ok(v27, 8ui64) )
+              v28 = -1i64;
+            v29 = (UFG::CoverPosition **)UFG::qMalloc(v28, "qArray.Add", 0i64);
+            if ( aCoverPositions->p )
             {
-              v29 = 0;
-              if ( v2->size )
-              {
-                do
-                {
-                  v28[v29] = (UFG::allocator::free_link)v2->p[v29];
-                  ++v29;
-                }
-                while ( v29 < v2->size );
-              }
-              operator delete[](v2->p);
+              for ( i = 0; i < aCoverPositions->size; ++i )
+                v29[i] = aCoverPositions->p[i];
+              operator delete[](aCoverPositions->p);
             }
-            v2->p = (UFG::CoverPosition **)v28;
-            v2->capacity = v26;
-            v3 = v62;
+            aCoverPositions->p = v29;
+            aCoverPositions->capacity = v27;
+            v3 = this;
           }
         }
-        v2->size = v24;
-        v2->p[v23] = v19;
-        v13 = v63 + 1;
-        v63 = v13;
+        aCoverPositions->size = v25;
+        aCoverPositions->p[size] = v19;
+        v13 = v64 + 1;
+        v64 = v13;
       }
-      while ( v13 < v64 );
+      while ( v13 < v65 );
     }
   }
-  v30 = 0;
+  v31 = 0;
   if ( v3->m_aChildObjects.size )
   {
     do
     {
-      v31 = v3->m_aChildObjects.p[v30];
-      if ( v31->vfptr->IsCorner(v31) )
+      v32 = v3->m_aChildObjects.p[v31];
+      if ( v32->vfptr->IsCorner(v32) )
       {
-        v32 = 0;
-        if ( v2->size )
+        v33 = 0;
+        if ( aCoverPositions->size )
         {
           while ( 1 )
           {
-            v33 = v2->p[v32];
-            v34 = v31->vfptr;
-            v35 = (__int64)v33->vfptr->GetSyncPos((UFG::CoverObjectBase *)&v2->p[v32]->vfptr, (UFG::qVector3 *)&v61);
-            v36 = ((__int64 (__fastcall *)(UFG::CoverObjectBase *, __int64, _QWORD))v34->GetCoverPosition)(
-                    v31,
-                    v35,
+            v34 = aCoverPositions->p[v33];
+            vfptr = v32->vfptr;
+            v36 = (__int64)v34->vfptr->GetSyncPos(v34, (UFG::qVector3 *)&v62);
+            v37 = ((__int64 (__fastcall *)(UFG::CoverObjectBase *, __int64, _QWORD))vfptr->GetCoverPosition)(
+                    v32,
+                    v36,
                     0i64);
-            v37 = v36;
-            if ( v36 )
+            v38 = v37;
+            if ( v37 )
               break;
-            if ( ++v32 >= v2->size )
+            if ( ++v33 >= aCoverPositions->size )
               goto LABEL_56;
           }
-          v38 = *(_DWORD *)(v36 + 8);
-          *(_DWORD *)(v37 + 8) = v38;
-          if ( !v38 )
-            (**(void (__fastcall ***)(__int64, signed __int64))v37)(v37, 1i64);
-          v39 = *(_QWORD *)&v31[2].m_fPriority;
-          if ( v39 )
+          v39 = *(_DWORD *)(v37 + 8);
+          *(_DWORD *)(v38 + 8) = v39;
+          if ( !v39 )
+            (**(void (__fastcall ***)(__int64, __int64))v38)(v38, 1i64);
+          v40 = *(_QWORD *)&v32[2].m_fPriority;
+          if ( v40 )
           {
-            v40 = (UFG::CoverCorner *)(v39 + 24);
+            v41 = (UFG::CoverCorner *)(v40 + 24);
           }
           else
           {
-            v41 = *(_QWORD *)&v31[1].m_fPriority;
-            if ( v41 )
+            v42 = *(_QWORD *)&v32[1].m_fPriority;
+            if ( v42 )
             {
-              v42 = *(_QWORD *)(v41 + 96);
-              if ( v42 )
-                v43 = v41 + v42 + 96;
+              v43 = *(_QWORD *)(v42 + 96);
+              if ( v43 )
+                v44 = v42 + v43 + 96;
               else
-                v43 = 0i64;
-              v40 = (UFG::CoverCorner *)(v43 + 48i64 * LOWORD(v31[1].vfptr));
+                v44 = 0i64;
+              v41 = (UFG::CoverCorner *)(v44 + 48i64 * LOWORD(v32[1].vfptr));
             }
             else
             {
-              v40 = 0i64;
+              v41 = 0i64;
             }
           }
-          if ( v40->m_eCoverSide.mValue == 1 )
-            UFG::CoverCornerHandle::operator=(&v33->m_RightCorner, v40);
+          if ( v41->m_eCoverSide.mValue == 1 )
+            UFG::CoverCornerHandle::operator=(&v34->m_RightCorner, v41);
           else
-            UFG::CoverCornerHandle::operator=(&v33->m_LeftCorner, v40);
+            UFG::CoverCornerHandle::operator=(&v34->m_LeftCorner, v41);
         }
         else
         {
 LABEL_56:
-          v44 = UFG::qMalloc(0x170ui64, "CoverPosition", 0i64);
-          if ( v44 )
+          v45 = UFG::qMalloc(0x170ui64, "CoverPosition", 0i64);
+          if ( v45 )
           {
-            v45 = *(_QWORD *)&v31[2].m_fPriority;
-            if ( v45 )
+            v46 = *(_QWORD *)&v32[2].m_fPriority;
+            if ( v46 )
             {
-              v46 = (UFG::CoverCorner *)(v45 + 24);
+              v47 = (UFG::CoverCorner *)(v46 + 24);
             }
             else
             {
-              v47 = *(_QWORD *)&v31[1].m_fPriority;
-              if ( v47 )
+              v48 = *(_QWORD *)&v32[1].m_fPriority;
+              if ( v48 )
               {
-                v48 = *(_QWORD *)(v47 + 96);
-                if ( v48 )
-                  v49 = v47 + v48 + 96;
+                v49 = *(_QWORD *)(v48 + 96);
+                if ( v49 )
+                  v50 = v48 + v49 + 96;
                 else
-                  v49 = 0i64;
-                v46 = (UFG::CoverCorner *)(v49 + 48i64 * LOWORD(v31[1].vfptr));
+                  v50 = 0i64;
+                v47 = (UFG::CoverCorner *)(v50 + 48i64 * LOWORD(v32[1].vfptr));
               }
               else
               {
-                v46 = 0i64;
+                v47 = 0i64;
               }
             }
-            UFG::CoverPosition::CoverPosition((UFG::CoverPosition *)v44, v46);
-            v51 = v50;
+            UFG::CoverPosition::CoverPosition((UFG::CoverPosition *)v45, v47);
+            v52 = v51;
           }
           else
           {
-            v51 = 0i64;
+            v52 = 0i64;
           }
-          v52 = v2->size;
-          v53 = v52 + 1;
-          v54 = v2->capacity;
-          if ( (signed int)v52 + 1 > v54 )
+          v53 = aCoverPositions->size;
+          v54 = v53 + 1;
+          v55 = aCoverPositions->capacity;
+          if ( (int)v53 + 1 > v55 )
           {
-            if ( v54 )
-              v55 = 2 * v54;
+            if ( v55 )
+              v56 = 2 * v55;
             else
-              v55 = 1;
-            for ( ; v55 < v53; v55 *= 2 )
+              v56 = 1;
+            for ( ; v56 < v54; v56 *= 2 )
               ;
-            if ( v55 <= 2 )
-              v55 = 2;
-            if ( v55 - v53 > 0x10000 )
-              v55 = v52 + 65537;
-            if ( v55 != (_DWORD)v52 )
+            if ( v56 <= 2 )
+              v56 = 2;
+            if ( v56 - v54 > 0x10000 )
+              v56 = v53 + 65537;
+            if ( v56 != (_DWORD)v53 )
             {
-              v56 = 8i64 * v55;
-              if ( !is_mul_ok(v55, 8ui64) )
-                v56 = -1i64;
-              v57 = UFG::qMalloc(v56, "qArray.Add", 0i64);
-              v58 = (UFG::CoverPosition **)v57;
-              if ( v2->p )
+              v57 = 8i64 * v56;
+              if ( !is_mul_ok(v56, 8ui64) )
+                v57 = -1i64;
+              v58 = UFG::qMalloc(v57, "qArray.Add", 0i64);
+              v59 = (UFG::CoverPosition **)v58;
+              if ( aCoverPositions->p )
               {
-                v59 = 0;
-                if ( v2->size )
-                {
-                  do
-                  {
-                    v57[v59] = (UFG::allocator::free_link)v2->p[v59];
-                    ++v59;
-                  }
-                  while ( v59 < v2->size );
-                }
-                operator delete[](v2->p);
+                for ( j = 0; j < aCoverPositions->size; ++j )
+                  v58[j] = (UFG::allocator::free_link)aCoverPositions->p[j];
+                operator delete[](aCoverPositions->p);
               }
-              v2->p = v58;
-              v2->capacity = v55;
+              aCoverPositions->p = v59;
+              aCoverPositions->capacity = v56;
             }
           }
-          v2->size = v53;
-          v2->p[v52] = v51;
+          aCoverPositions->size = v54;
+          aCoverPositions->p[v53] = v52;
         }
       }
-      ++v30;
-      v3 = v62;
+      ++v31;
+      v3 = this;
     }
-    while ( v30 < v62->m_aChildObjects.size );
+    while ( v31 < this->m_aChildObjects.size );
   }
-  return v2->size != 0;
+  return aCoverPositions->size != 0;
 }
 
 // File Line: 457
 // RVA: 0x398FE0
 void __fastcall UFG::CoverObjectGroup::UpdateTransforms(UFG::CoverObjectGroup *this)
 {
-  __int64 v1; // rbx
-  UFG::CoverObjectGroup *v2; // rdi
+  __int64 i; // rbx
+  UFG::CoverObjectBase *v3; // rcx
 
-  v1 = 0i64;
-  v2 = this;
-  if ( this->m_aChildObjects.size )
+  for ( i = 0i64; (unsigned int)i < this->m_aChildObjects.size; i = (unsigned int)(i + 1) )
   {
-    do
-    {
-      ((void (*)(void))v2->m_aChildObjects.p[v1]->vfptr->UpdateTransforms)();
-      v1 = (unsigned int)(v1 + 1);
-    }
-    while ( (unsigned int)v1 < v2->m_aChildObjects.size );
+    v3 = this->m_aChildObjects.p[i];
+    v3->vfptr->UpdateTransforms(v3);
   }
 }
 

@@ -2,29 +2,29 @@
 // RVA: 0x1413A0
 void __fastcall UFG::DialogArgSet::~DialogArgSet(UFG::DialogArgSet *this)
 {
-  Render::Skinning *v1; // rdi
-  Render::SkinningCacheNode *v2; // rbx
+  Render::Skinning *p_m_argList; // rdi
+  Render::SkinningCacheNode *Head; // rbx
   Render::SkinningCacheNode *v3; // rbx
 
   this->vfptr = (UFG::DialogArgSetVtbl *)&UFG::DialogArgSet::`vftable;
-  v1 = (Render::Skinning *)&this->m_argList;
+  p_m_argList = (Render::Skinning *)&this->m_argList;
   if ( this->m_argList.mTree.mCount )
   {
     do
     {
-      v2 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead(&v1->mSkinnedVertexBuffers);
-      UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(&v1->mSkinnedVertexBuffers.mTree, &v2->mNode);
-      UFG::qMemoryPool::Free(&g_AudioComponentPool, v2);
+      Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead(&p_m_argList->mSkinnedVertexBuffers);
+      UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(&p_m_argList->mSkinnedVertexBuffers.mTree, &Head->mNode);
+      UFG::qMemoryPool::Free(&g_AudioComponentPool, Head);
     }
-    while ( v1->mSkinnedVertexBuffers.mTree.mCount );
+    while ( p_m_argList->mSkinnedVertexBuffers.mTree.mCount );
   }
-  while ( v1->mSkinnedVertexBuffers.mTree.mCount )
+  while ( p_m_argList->mSkinnedVertexBuffers.mTree.mCount )
   {
-    v3 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead(&v1->mSkinnedVertexBuffers);
-    UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(&v1->mSkinnedVertexBuffers.mTree, &v3->mNode);
+    v3 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead(&p_m_argList->mSkinnedVertexBuffers);
+    UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(&p_m_argList->mSkinnedVertexBuffers.mTree, &v3->mNode);
     UFG::qMemoryPool::Free(&g_AudioComponentPool, v3);
   }
-  UFG::qBaseTreeRB::~qBaseTreeRB(v1);
+  UFG::qBaseTreeRB::~qBaseTreeRB(p_m_argList);
 }
 
 // File Line: 64
@@ -32,15 +32,15 @@ void __fastcall UFG::DialogArgSet::~DialogArgSet(UFG::DialogArgSet *this)
 void __fastcall UFG::DialogEvent::Resize(UFG::DialogEvent *this, unsigned int size)
 {
   unsigned int v2; // eax
-  UFG::qArray<unsigned long,0> *v3; // rdi
-  signed int v4; // edx
+  UFG::qArray<unsigned long,0> *p_m_args; // rdi
+  int v4; // edx
   unsigned int v5; // ebx
-  unsigned int v6; // edx
+  unsigned int capacity; // edx
   unsigned int v7; // edx
   unsigned int v8; // edx
 
   v2 = this->m_args.size;
-  v3 = &this->m_args;
+  p_m_args = &this->m_args;
   v4 = size - v2;
   if ( v4 <= 0 )
   {
@@ -48,19 +48,19 @@ void __fastcall UFG::DialogEvent::Resize(UFG::DialogEvent *this, unsigned int si
     if ( v8 )
     {
       if ( v8 < v2 )
-        v3->size = v2 - v8;
+        p_m_args->size = v2 - v8;
       else
-        v3->size = 0;
+        p_m_args->size = 0;
     }
   }
   else
   {
     v5 = v2 + v4;
-    v6 = this->m_args.capacity;
-    if ( v5 > v6 )
+    capacity = this->m_args.capacity;
+    if ( v5 > capacity )
     {
-      if ( v6 )
-        v7 = 2 * v6;
+      if ( capacity )
+        v7 = 2 * capacity;
       else
         v7 = 1;
       for ( ; v7 < v5; v7 *= 2 )
@@ -71,7 +71,7 @@ void __fastcall UFG::DialogEvent::Resize(UFG::DialogEvent *this, unsigned int si
         v7 = v5 + 0x10000;
       UFG::qArray<long,0>::Reallocate(&this->m_args, v7, "DialgouEvent.Resize");
     }
-    v3->size = v5;
+    p_m_args->size = v5;
   }
 }
 

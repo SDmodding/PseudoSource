@@ -52,21 +52,21 @@ void UFG::_dynamic_initializer_for__gDBG_lookahead_modified__()
 
 // File Line: 90
 // RVA: 0x4CA680
-char __fastcall UFG::LookAheadOnRoadNetwork(UFG::RoadLaneLookAhead *start_conditions, float distance, UFG::RoadLaneLookAheadResult *result)
+char __fastcall UFG::LookAheadOnRoadNetwork(
+        UFG::RoadLaneLookAhead *start_conditions,
+        float distance,
+        UFG::RoadLaneLookAheadResult *result)
 {
-  UFG::RoadLaneLookAheadResult *v3; // r12
-  UFG::RoadLaneLookAhead *v4; // r13
-  float v5; // xmm9_4
-  UFG::RoadNetworkLane *v6; // rax
+  UFG::RoadNetworkLane *mStartLane; // rax
   UFG::RoadNetworkNode *v7; // rcx
-  __m128 v8; // xmm1
-  float v9; // xmm2_4
+  __m128 y_low; // xmm1
+  float y; // xmm2_4
   float v10; // xmm0_4
   float v11; // xmm2_4
-  float v12; // xmm0_4
-  char v13; // al
+  float Length; // xmm0_4
+  char mForwards; // al
   float v14; // xmm8_4
-  float v15; // xmm1_4
+  float mStartT; // xmm1_4
   float v16; // xmm2_4
   float v17; // xmm2_4
   float v18; // xmm9_4
@@ -77,36 +77,36 @@ char __fastcall UFG::LookAheadOnRoadNetwork(UFG::RoadLaneLookAhead *start_condit
   float v23; // xmm1_4
   UFG::RoadNetworkLane *v24; // rdi
   float i; // xmm9_4
-  __int64 v26; // rax
-  signed __int64 v27; // r8
-  unsigned int v28; // er15
+  __int64 mOffset; // rax
+  char *v27; // r8
+  unsigned int v28; // r15d
   __int64 v29; // r10
   __int64 v30; // r9
-  char *v31; // rcx
+  _OWORD *v31; // rcx
   __int64 v32; // r11
-  signed __int64 v33; // rax
-  signed __int64 v34; // rdx
+  char *v33; // rax
+  char *v34; // rdx
   __int64 v35; // rax
-  __int64 v36; // rdx
-  float v37; // xmm5_4
+  char *v36; // rdx
+  float z; // xmm5_4
   float v38; // xmm4_4
-  float v39; // xmm3_4
+  float x; // xmm3_4
   __int64 v40; // rax
-  signed __int64 v41; // r8
+  char *v41; // r8
   __int64 v42; // r10
   __int64 v43; // r9
-  char *v44; // rcx
+  _OWORD *v44; // rcx
   __int64 v45; // r11
-  signed __int64 v46; // rax
-  signed __int64 v47; // rdx
+  char *v46; // rax
+  char *v47; // rdx
   __int64 v48; // rax
-  __int64 v49; // rdx
+  char *v49; // rdx
   float v50; // xmm2_4
   float v51; // xmm1_4
-  unsigned int v52; // er14
+  unsigned int v52; // r14d
   unsigned int v53; // edi
   float v54; // xmm6_4
-  char *v55; // rbx
+  _BYTE *v55; // rbx
   char v56; // si
   float v57; // xmm3_4
   __int64 v58; // rax
@@ -128,147 +128,144 @@ char __fastcall UFG::LookAheadOnRoadNetwork(UFG::RoadLaneLookAhead *start_condit
   float v74; // xmm1_4
   float v75; // xmm4_4
   float v76; // xmm5_4
-  UFG::qVector3 tangent; // [rsp+20h] [rbp-B8h]
-  UFG::qVector3 v79; // [rsp+30h] [rbp-A8h]
-  UFG::qVector3 pos; // [rsp+40h] [rbp-98h]
-  UFG::qVector3 v81; // [rsp+50h] [rbp-88h]
-  UFG::qVector3 resulta; // [rsp+60h] [rbp-78h]
-  UFG::RoadNetworkLane *v83; // [rsp+70h] [rbp-68h]
-  char v84[248]; // [rsp+78h] [rbp-60h]
+  UFG::qVector3 tangent; // [rsp+20h] [rbp-B8h] BYREF
+  UFG::qVector3 v79; // [rsp+30h] [rbp-A8h] BYREF
+  UFG::qVector3 pos; // [rsp+40h] [rbp-98h] BYREF
+  UFG::qVector3 v81; // [rsp+50h] [rbp-88h] BYREF
+  UFG::qVector3 resulta; // [rsp+60h] [rbp-78h] BYREF
+  _BYTE v84[248]; // [rsp+78h] [rbp-60h] BYREF
 
-  v3 = result;
-  v4 = start_conditions;
-  v5 = distance;
   UFG::RoadNetworkLane::GetNearestPoint(
     start_conditions->mStartLane,
     &resulta,
     &start_conditions->mPosVehicle,
     &start_conditions->mStartT);
-  v6 = v4->mStartLane;
-  if ( v6->mNode.mOffset )
-    v7 = (UFG::RoadNetworkNode *)((char *)v6 + v6->mNode.mOffset);
+  mStartLane = start_conditions->mStartLane;
+  if ( mStartLane->mNode.mOffset )
+    v7 = (UFG::RoadNetworkNode *)((char *)mStartLane + mStartLane->mNode.mOffset);
   else
     v7 = 0i64;
-  UFG::RoadNetworkNode::GetTangent(v7, &v81, v6->mLaneIndex, v4->mStartT);
-  v8 = (__m128)LODWORD(v4->mPosVehicle.y);
-  v9 = v81.y;
-  v8.m128_f32[0] = (float)((float)(v8.m128_f32[0] - resulta.y) * (float)(v8.m128_f32[0] - resulta.y))
-                 + (float)((float)(v4->mPosVehicle.x - resulta.x) * (float)(v4->mPosVehicle.x - resulta.x));
-  LODWORD(v10) = (unsigned __int128)_mm_sqrt_ps(v8);
-  v8.m128_i32[0] = LODWORD(v81.z);
-  v3->mfDistanceToLane = v10;
-  v11 = (float)((float)(v9 * v4->mVecVehicle.y) + (float)(v81.x * v4->mVecVehicle.x))
-      + (float)(v8.m128_f32[0] * v4->mVecVehicle.z);
-  v3->mfDot = v11;
-  v3->mForwards = v11 > 0.0;
-  v12 = UFG::RoadNetworkLane::GetLength(v4->mStartLane);
-  v13 = v3->mForwards;
+  UFG::RoadNetworkNode::GetTangent(v7, &v81, mStartLane->mLaneIndex, start_conditions->mStartT);
+  y_low = (__m128)LODWORD(start_conditions->mPosVehicle.y);
+  y = v81.y;
+  y_low.m128_f32[0] = (float)((float)(y_low.m128_f32[0] - resulta.y) * (float)(y_low.m128_f32[0] - resulta.y))
+                    + (float)((float)(start_conditions->mPosVehicle.x - resulta.x)
+                            * (float)(start_conditions->mPosVehicle.x - resulta.x));
+  LODWORD(v10) = _mm_sqrt_ps(y_low).m128_u32[0];
+  y_low.m128_i32[0] = LODWORD(v81.z);
+  result->mfDistanceToLane = v10;
+  v11 = (float)((float)(y * start_conditions->mVecVehicle.y) + (float)(v81.x * start_conditions->mVecVehicle.x))
+      + (float)(y_low.m128_f32[0] * start_conditions->mVecVehicle.z);
+  result->mfDot = v11;
+  result->mForwards = v11 > 0.0;
+  Length = UFG::RoadNetworkLane::GetLength(start_conditions->mStartLane);
+  mForwards = result->mForwards;
   v14 = *(float *)&FLOAT_1_0;
-  v15 = v4->mStartT;
-  if ( v13 )
-    v16 = 1.0 - v15;
+  mStartT = start_conditions->mStartT;
+  if ( mForwards )
+    v16 = 1.0 - mStartT;
   else
-    v16 = v4->mStartT;
-  v17 = v16 * v12;
-  if ( v17 <= v5 )
+    v16 = start_conditions->mStartT;
+  v17 = v16 * Length;
+  if ( v17 <= distance )
   {
-    v24 = v4->mStartLane;
-    for ( i = v5 - v17; ; i = i - v66 )
+    v24 = start_conditions->mStartLane;
+    for ( i = distance - v17; ; i = i - v66 )
     {
-      if ( v13 )
+      if ( mForwards )
       {
         UFG::RoadNetworkLane::GetPosAndTangent(v24, 1.0, &pos, &tangent);
-        v26 = v24->mNextConnection.mOffset;
-        if ( !v26 || (v27 = (signed __int64)&v24->mNextConnection + v26) == 0 )
+        mOffset = v24->mNextConnection.mOffset;
+        if ( !mOffset || (v27 = (char *)&v24->mNextConnection + mOffset) == 0i64 )
         {
           v67 = pos.y + (float)(tangent.y * i);
           v68 = pos.z + (float)(tangent.z * i);
-          v3->mFinalPos.x = pos.x + (float)(tangent.x * i);
-          v3->mFinalPos.y = v67;
-          v3->mFinalPos.z = v68;
+          result->mFinalPos.x = pos.x + (float)(tangent.x * i);
+          result->mFinalPos.y = v67;
+          result->mFinalPos.z = v68;
           return 1;
         }
         v28 = *(_DWORD *)v27;
         if ( *(_DWORD *)v27 )
         {
-          v29 = *(_QWORD *)(v27 + 8);
+          v29 = *((_QWORD *)v27 + 1);
           v30 = 0i64;
           v31 = v84;
           v32 = v28;
           do
           {
             if ( v29 )
-              v33 = v27 + v29 + 8;
+              v33 = &v27[v29 + 8];
             else
               v33 = 0i64;
-            v34 = v30 + v33;
-            v35 = *(_QWORD *)(v30 + v33);
+            v34 = &v33[v30];
+            v35 = *(_QWORD *)&v33[v30];
             if ( v35 )
-              v35 += v34;
-            v36 = *(_QWORD *)(v35 + 88);
+              v35 += (__int64)v34;
+            v36 = *(char **)(v35 + 88);
             *((_QWORD *)v31 - 1) = v35;
             if ( v36 )
               v36 += v35 + 88;
-            v31 += 16;
+            ++v31;
             v30 += 8i64;
-            *(v31 - 16) = v36 == v27;
+            *((_BYTE *)v31 - 16) = v36 == v27;
             --v32;
           }
           while ( v32 );
         }
-        v37 = tangent.z;
+        z = tangent.z;
         v38 = tangent.y;
-        v39 = tangent.x;
+        x = tangent.x;
       }
       else
       {
         UFG::RoadNetworkLane::GetPosAndTangent(v24, 0.0, &pos, &tangent);
-        v39 = tangent.x * -1.0;
+        x = tangent.x * -1.0;
         v38 = tangent.y * -1.0;
         tangent.x = tangent.x * -1.0;
         tangent.y = tangent.y * -1.0;
-        v37 = tangent.z * -1.0;
+        z = tangent.z * -1.0;
         tangent.z = tangent.z * -1.0;
         v40 = v24->mPrevConnection.mOffset;
-        if ( !v40 || (v41 = (signed __int64)&v24->mPrevConnection + v40) == 0 )
+        if ( !v40 || (v41 = (char *)&v24->mPrevConnection + v40) == 0i64 )
         {
           v75 = (float)(v38 * i) + pos.y;
-          v76 = (float)(v37 * i) + pos.z;
-          v3->mFinalPos.x = (float)(v39 * i) + pos.x;
-          v3->mFinalPos.y = v75;
-          v3->mFinalPos.z = v76;
+          v76 = (float)(z * i) + pos.z;
+          result->mFinalPos.x = (float)(x * i) + pos.x;
+          result->mFinalPos.y = v75;
+          result->mFinalPos.z = v76;
           return 1;
         }
         v28 = *(_DWORD *)v41;
         if ( *(_DWORD *)v41 )
         {
-          v42 = *(_QWORD *)(v41 + 8);
+          v42 = *((_QWORD *)v41 + 1);
           v43 = 0i64;
           v44 = v84;
           v45 = v28;
           do
           {
             if ( v42 )
-              v46 = v41 + v42 + 8;
+              v46 = &v41[v42 + 8];
             else
               v46 = 0i64;
-            v47 = v43 + v46;
-            v48 = *(_QWORD *)(v43 + v46);
+            v47 = &v46[v43];
+            v48 = *(_QWORD *)&v46[v43];
             if ( v48 )
-              v48 += v47;
-            v49 = *(_QWORD *)(v48 + 96);
+              v48 += (__int64)v47;
+            v49 = *(char **)(v48 + 96);
             *((_QWORD *)v44 - 1) = v48;
             if ( v49 )
               v49 += v48 + 96;
-            v44 += 16;
+            ++v44;
             v43 += 8i64;
-            *(v44 - 16) = v49 != v41;
+            *((_BYTE *)v44 - 16) = v49 != v41;
             --v45;
           }
           while ( v45 );
         }
       }
-      v50 = (float)((float)(v39 * v39) + (float)(v38 * v38)) + (float)(v37 * v37);
+      v50 = (float)((float)(x * x) + (float)(v38 * v38)) + (float)(z * z);
       if ( v50 == 0.0 )
         v51 = 0.0;
       else
@@ -276,9 +273,9 @@ char __fastcall UFG::LookAheadOnRoadNetwork(UFG::RoadLaneLookAhead *start_condit
       v52 = 0;
       v53 = 0;
       v54 = FLOAT_N2_0;
-      tangent.x = v39 * v51;
+      tangent.x = x * v51;
       tangent.y = v38 * v51;
-      tangent.z = v37 * v51;
+      tangent.z = z * v51;
       if ( v28 )
       {
         v55 = v84;
@@ -312,10 +309,10 @@ char __fastcall UFG::LookAheadOnRoadNetwork(UFG::RoadLaneLookAhead *start_condit
           if ( v63.m128_f32[0] == 0.0 )
             v64 = 0.0;
           else
-            v64 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v63));
-          v65 = (float)((float)((float)(v61.m128_f32[0] * v64) * v4->mVecVehicle.y)
-                      + (float)((float)(v60 * v64) * v4->mVecVehicle.x))
-              + (float)((float)(v62 * v64) * v4->mVecVehicle.z);
+            v64 = 1.0 / _mm_sqrt_ps(v63).m128_f32[0];
+          v65 = (float)((float)((float)(v61.m128_f32[0] * v64) * start_conditions->mVecVehicle.y)
+                      + (float)((float)(v60 * v64) * start_conditions->mVecVehicle.x))
+              + (float)((float)(v62 * v64) * start_conditions->mVecVehicle.z);
           if ( v65 > v54 )
           {
             v52 = v53;
@@ -328,9 +325,9 @@ char __fastcall UFG::LookAheadOnRoadNetwork(UFG::RoadLaneLookAhead *start_condit
       }
       if ( v54 < 0.707 )
         i = i * (float)((float)(v54 + 1.0) * 0.5858230814294083);
-      v24 = *(&v83 + 2 * v52);
-      v66 = UFG::RoadNetworkLane::GetLength(*(&v83 + 2 * v52));
-      v13 = v84[16 * v52];
+      v24 = *(UFG::RoadNetworkLane **)&v84[16 * v52 - 8];
+      v66 = UFG::RoadNetworkLane::GetLength(v24);
+      mForwards = v84[16 * v52];
       if ( i < v66 )
       {
         if ( v66 < 0.001 )
@@ -341,13 +338,13 @@ LABEL_86:
           v73 = v72->y;
           v74 = v72->z;
           *(float *)&v72 = v72->x;
-          v3->mFinalPos.z = v74;
-          v3->mFinalPos.y = v73;
-          LODWORD(v3->mFinalPos.x) = (_DWORD)v72;
+          result->mFinalPos.z = v74;
+          result->mFinalPos.y = v73;
+          LODWORD(result->mFinalPos.x) = (_DWORD)v72;
           return 1;
         }
         v70 = i / v66;
-        if ( v13 )
+        if ( mForwards )
         {
           if ( v70 <= 0.0 )
           {
@@ -378,12 +375,12 @@ LABEL_85:
       }
     }
   }
-  if ( v12 >= 0.001 )
+  if ( Length >= 0.001 )
   {
-    v18 = v5 / v12;
-    if ( v13 )
+    v18 = distance / Length;
+    if ( mForwards )
     {
-      v19 = v18 + v15;
+      v19 = v18 + mStartT;
       if ( v19 <= 0.0 )
       {
         v19 = 0.0;
@@ -396,7 +393,7 @@ LABEL_85:
     }
     else
     {
-      v20 = v15 - v18;
+      v20 = mStartT - v18;
       if ( v20 <= 0.0 )
       {
         v20 = 0.0;
@@ -408,33 +405,38 @@ LABEL_85:
       v14 = v20;
     }
 LABEL_21:
-    v21 = UFG::RoadNetworkLane::GetPos(v4->mStartLane, &pos, v14);
+    v21 = UFG::RoadNetworkLane::GetPos(start_conditions->mStartLane, &pos, v14);
     v22 = v21->y;
     v23 = v21->z;
     *(float *)&v21 = v21->x;
-    v3->mFinalPos.z = v23;
-    v3->mFinalPos.y = v22;
-    LODWORD(v3->mFinalPos.x) = (_DWORD)v21;
+    result->mFinalPos.z = v23;
+    result->mFinalPos.y = v22;
+    LODWORD(result->mFinalPos.x) = (_DWORD)v21;
     return 1;
   }
-  UFG::RoadNetworkLane::GetPos(v4->mStartLane, &pos, 0.0);
+  UFG::RoadNetworkLane::GetPos(start_conditions->mStartLane, &pos, 0.0);
   return 1;
 }
 
 // File Line: 267
 // RVA: 0x4CAD10
-void __fastcall UFG::RoadnetworkLookahead::Process(UFG::RoadnetworkLookahead *this, UFG::qVector3 *viewerPosition, UFG::qVector3 *_viewerDirection, UFG::qVector3 *_viewerCameraDirection, UFG::qVector3 *_viewerVelocity, float deltaTime, bool enabled)
+void __fastcall UFG::RoadnetworkLookahead::Process(
+        UFG::RoadnetworkLookahead *this,
+        UFG::qVector3 *viewerPosition,
+        UFG::qVector3 *_viewerDirection,
+        UFG::qVector3 *_viewerCameraDirection,
+        UFG::qVector3 *_viewerVelocity,
+        float deltaTime,
+        bool enabled)
 {
-  float v7; // xmm2_4
-  float v8; // xmm1_4
-  UFG::RoadnetworkLookahead *v9; // rbx
-  int *v10; // rbp
+  float y; // xmm2_4
+  float z; // xmm1_4
   float v11; // xmm6_4
   float v12; // xmm0_4
   float v13; // xmm8_4
   float v14; // xmm9_4
   float v15; // xmm12_4
-  __int128 v16; // xmm11
+  __int128 y_low; // xmm11
   float v17; // xmm13_4
   float v18; // xmm14_4
   float v19; // xmm15_4
@@ -445,106 +447,94 @@ void __fastcall UFG::RoadnetworkLookahead::Process(UFG::RoadnetworkLookahead *th
   float v24; // xmm8_4
   float v25; // xmm6_4
   float v26; // xmm1_4
-  float v27; // xmm2_4
+  float mCurrentLookaheadDistance; // xmm2_4
   float v28; // xmm1_4
   float v29; // xmm3_4
   float v30; // xmm2_4
-  UFG::CharacterOccupantComponent *v31; // rdi
-  UFG::SimObject *v32; // rax
+  UFG::CharacterOccupantComponent *m_pComponent; // rdi
+  UFG::SimObject *CurrentVehicle; // rax
   UFG::SimObject *v33; // rdi
-  UFG::SimComponentHolder *v34; // rdi
+  UFG::SimComponentHolder *p; // rdi
   UFG::SimComponent *v35; // rsi
-  UFG::SimComponent *v36; // rdi
-  UFG::RoadNetworkGuide *v37; // rsi
-  UFG::RoadNetworkLocation *v38; // rax
+  UFG::TransformNodeComponent *v36; // rdi
+  UFG::RoadNetworkGuide *p_mNext; // rsi
+  UFG::RoadNetworkLocation *Name; // rax
   UFG::RoadNetworkLocation *v39; // rax
-  float v40; // xmm0_4
-  int v41; // xmm1_4
-  int v42; // xmm0_4
-  int v43; // xmm1_4
-  int v44; // xmm0_4
+  float m_LaneT; // xmm0_4
+  float v41; // xmm1_4
+  float v42; // xmm0_4
+  float v43; // xmm1_4
+  float v44; // xmm0_4
   float v45; // xmm1_4
   float v46; // xmm1_4
   float v47; // xmm2_4
-  float v48; // xmm2_4
-  float v49; // xmm1_4
-  float v50; // xmm2_4
-  float v51; // xmm1_4
-  float v52; // xmm0_4
-  float v53; // xmm1_4
-  float v54; // xmm0_4
-  float v55; // xmm1_4
-  float v56; // xmm2_4
-  float v57; // [rsp+20h] [rbp-128h]
-  UFG::RoadLaneLookAheadResult result; // [rsp+28h] [rbp-120h]
-  UFG::qVector3 pos; // [rsp+40h] [rbp-108h]
-  UFG::qVector3 direction; // [rsp+4Ch] [rbp-FCh]
-  UFG::RoadNetworkLane *v61; // [rsp+58h] [rbp-F0h]
-  float v62; // [rsp+60h] [rbp-E8h]
-  int v63; // [rsp+64h] [rbp-E4h]
-  int v64; // [rsp+68h] [rbp-E0h]
-  int v65; // [rsp+6Ch] [rbp-DCh]
-  int v66; // [rsp+70h] [rbp-D8h]
-  int v67; // [rsp+74h] [rbp-D4h]
-  int v68; // [rsp+78h] [rbp-D0h]
+  float v48; // xmm1_4
+  float v49; // xmm2_4
+  float v50; // xmm1_4
+  float v51; // xmm0_4
+  float v52; // xmm1_4
+  float v53; // xmm0_4
+  float v54; // xmm1_4
+  float v55; // xmm2_4
+  float v56; // [rsp+20h] [rbp-128h]
+  UFG::RoadLaneLookAheadResult result; // [rsp+28h] [rbp-120h] BYREF
+  UFG::RoadLaneLookAhead pos; // [rsp+40h] [rbp-108h] BYREF
   float fy; // [rsp+150h] [rbp+8h]
   float fx; // [rsp+158h] [rbp+10h]
-  float v71; // [rsp+160h] [rbp+18h]
-  float v72; // [rsp+168h] [rbp+20h]
+  float v61; // [rsp+160h] [rbp+18h]
+  float x; // [rsp+168h] [rbp+20h]
   float _viewerVelocitya; // [rsp+170h] [rbp+28h]
 
-  v7 = _viewerDirection->y;
-  v8 = viewerPosition->z;
-  v9 = this;
-  v72 = _viewerCameraDirection->x;
-  fy = _viewerDirection->y;
-  v10 = (int *)_viewerDirection;
+  y = _viewerDirection->y;
+  z = viewerPosition->z;
+  x = _viewerCameraDirection->x;
+  fy = y;
   v11 = _viewerDirection->x;
-  v71 = _viewerCameraDirection->y;
-  v57 = _viewerCameraDirection->z;
+  v61 = _viewerCameraDirection->y;
+  v56 = _viewerCameraDirection->z;
   v12 = viewerPosition->y;
   fx = v11;
   v13 = 0.0;
   v14 = 0.0;
   v15 = _viewerVelocity->x;
-  v16 = LODWORD(_viewerVelocity->y);
+  y_low = LODWORD(_viewerVelocity->y);
   this->mViewerPosition.x = viewerPosition->x;
   this->mViewerPosition.y = v12;
-  this->mViewerPosition.z = v8;
+  this->mViewerPosition.z = z;
   this->mViewerDirection.x = v11;
   this->mViewerDirection.z = 0.0;
-  this->mViewerDirection.y = v7;
+  this->mViewerDirection.y = y;
   this->mViewerVelocity.x = v15;
-  LODWORD(this->mViewerVelocity.y) = v16;
+  LODWORD(this->mViewerVelocity.y) = y_low;
   this->mViewerVelocity.z = 0.0;
   v17 = UFG::qVector3::msZero.x;
   v18 = UFG::qVector3::msZero.y;
   v19 = UFG::qVector3::msZero.z;
   UFG::StreamFileWrapper::SetSupressCaching_HighSpeed(0);
   v20 = LocalPlayer;
-  if ( v9->mEnabled
+  if ( this->mEnabled
     && enabled
     && LocalPlayer->m_Components.p[44].m_pComponent
-    && (v21 = (__m128)v16,
-        v21.m128_f32[0] = (float)(*(float *)&v16 * *(float *)&v16) + (float)(v15 * v15),
-        COERCE_FLOAT(_mm_sqrt_ps(v21)) < 100.0) )
+    && (v21 = (__m128)y_low,
+        v21.m128_f32[0] = (float)(*(float *)&y_low * *(float *)&y_low) + (float)(v15 * v15),
+        _mm_sqrt_ps(v21).m128_f32[0] < 100.0) )
   {
     v22 = v15 * v11;
     v23 = 0.0;
-    v24 = (float)(*(float *)&v16 * fy) + v22;
+    v24 = (float)(*(float *)&y_low * y) + v22;
     if ( UFG::MAX_LOOKAHEAD_SPEED != UFG::MIN_LOOKAHEAD_SPEED )
     {
       if ( v24 <= UFG::MIN_LOOKAHEAD_SPEED )
         v25 = UFG::MIN_LOOKAHEAD_SPEED;
       else
-        v25 = (float)(*(float *)&v16 * fy) + v22;
+        v25 = (float)(*(float *)&y_low * y) + v22;
       if ( v25 >= UFG::MAX_LOOKAHEAD_SPEED )
         v25 = UFG::MAX_LOOKAHEAD_SPEED;
       v23 = (float)((float)(v25 - UFG::MIN_LOOKAHEAD_SPEED) * UFG::MAX_LOOKAHEAD_DIST)
           / (float)(UFG::MAX_LOOKAHEAD_SPEED - UFG::MIN_LOOKAHEAD_SPEED);
     }
-    _viewerVelocitya = atan2f(fy, fx);
-    v26 = _viewerVelocitya - v9->mfCurrentAngle;
+    _viewerVelocitya = atan2f(y, fx);
+    v26 = _viewerVelocitya - this->mfCurrentAngle;
     if ( v26 >= -3.1415927 )
     {
       if ( v26 >= 3.1415927 )
@@ -554,93 +544,89 @@ void __fastcall UFG::RoadnetworkLookahead::Process(UFG::RoadnetworkLookahead *th
     {
       v26 = v26 + 6.2831855;
     }
-    v27 = v9->mCurrentLookaheadDistance;
-    if ( v23 <= v27 )
+    mCurrentLookaheadDistance = this->mCurrentLookaheadDistance;
+    if ( v23 <= mCurrentLookaheadDistance )
     {
-      v28 = (float)((float)(COERCE_FLOAT(LODWORD(v26) & _xmm) * 0.31830987) * (float)(v27 - v23)) * 2.0;
+      v28 = (float)((float)(COERCE_FLOAT(LODWORD(v26) & _xmm) * 0.31830987) * (float)(mCurrentLookaheadDistance - v23))
+          * 2.0;
       if ( v28 < 0.0 )
         v28 = 0.0;
-      v9->mCurrentLookaheadDistance = v27 - (float)((float)(deltaTime * 29.999998) * v28);
+      this->mCurrentLookaheadDistance = mCurrentLookaheadDistance - (float)((float)(deltaTime * 29.999998) * v28);
     }
     else
     {
-      v9->mCurrentLookaheadDistance = v23;
+      this->mCurrentLookaheadDistance = v23;
     }
     if ( v24 < 0.0 )
     {
-      v29 = v21.m128_f32[0] == 0.0 ? 0.0 : 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v21));
+      v29 = v21.m128_f32[0] == 0.0 ? 0.0 : 1.0 / _mm_sqrt_ps(v21).m128_f32[0];
       LODWORD(v30) = COERCE_UNSIGNED_INT(
-                       (float)((float)((float)((float)(*(float *)&v16 * v29) * v71) + (float)((float)(v15 * v29) * v72))
-                             + (float)((float)(v29 * 0.0) * v57))
-                     * (float)((float)((float)((float)(*(float *)&v16 * v29) * fy) + (float)((float)(v15 * v29) * fx))
+                       (float)((float)((float)((float)(*(float *)&y_low * v29) * v61) + (float)((float)(v15 * v29) * x))
+                             + (float)((float)(v29 * 0.0) * v56))
+                     * (float)((float)((float)((float)(*(float *)&y_low * v29) * fy) + (float)((float)(v15 * v29) * fx))
                              + (float)((float)(v29 * 0.0) * 0.0))) ^ _xmm[0];
       if ( v30 > 0.80000001 )
-        v9->mCurrentLookaheadDistance = (1.0
-                                       - (float)((float)(v30 - 0.80000001) * 5.0000005)
-                                       * 0.02
-                                       * (float)(deltaTime * 29.999998))
-                                      * v9->mCurrentLookaheadDistance;
+        this->mCurrentLookaheadDistance = (1.0
+                                         - (float)((float)(v30 - 0.80000001) * 5.0000005)
+                                         * 0.02
+                                         * (float)(deltaTime * 29.999998))
+                                        * this->mCurrentLookaheadDistance;
     }
-    if ( v9->mCurrentLookaheadDistance > 0.0 )
+    if ( this->mCurrentLookaheadDistance > 0.0 && (v20->m_Flags & 0x4000) != 0 )
     {
-      if ( (v20->m_Flags >> 14) & 1 )
+      m_pComponent = (UFG::CharacterOccupantComponent *)v20->m_Components.p[44].m_pComponent;
+      UFG::StreamFileWrapper::SetSupressCaching_HighSpeed(1);
+      if ( m_pComponent )
       {
-        v31 = (UFG::CharacterOccupantComponent *)v20->m_Components.p[44].m_pComponent;
-        UFG::StreamFileWrapper::SetSupressCaching_HighSpeed(1);
-        if ( v31 )
+        CurrentVehicle = (UFG::SimObject *)UFG::CharacterOccupantComponent::GetCurrentVehicle(m_pComponent);
+        v33 = CurrentVehicle;
+        if ( CurrentVehicle )
         {
-          v32 = (UFG::SimObject *)UFG::CharacterOccupantComponent::GetCurrentVehicle(v31);
-          v33 = v32;
-          if ( v32 )
+          if ( !UFG::SimObjectUtility::IsBoat(CurrentVehicle) )
           {
-            if ( !UFG::SimObjectUtility::IsBoat(v32) )
+            p = v33->m_Components.p;
+            v35 = p[24].m_pComponent;
+            if ( v35 )
             {
-              v34 = v33->m_Components.p;
-              v35 = v34[24].m_pComponent;
-              if ( v35 )
+              v36 = (UFG::TransformNodeComponent *)p[2].m_pComponent;
+              p_mNext = (UFG::RoadNetworkGuide *)&v35[5].m_BoundComponentHandles.mNode.mNext;
+              UFG::TransformNodeComponent::UpdateWorldTransform(v36);
+              if ( UFG::RoadNetworkGuide::IsCurrentLocationValid(p_mNext) )
               {
-                v36 = v34[2].m_pComponent;
-                v37 = (UFG::RoadNetworkGuide *)&v35[5].m_BoundComponentHandles.mNode.mNext;
-                UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v36);
-                if ( (unsigned __int8)UFG::RoadNetworkGuide::IsCurrentLocationValid(v37) )
+                Name = Scaleform::GFx::AS3::Instances::fl::XML::GetName(p_mNext);
+                if ( UFG::RoadNetworkLocation::IsValid(Name) )
                 {
-                  v38 = Scaleform::GFx::AS3::Instances::fl::XML::GetName(v37);
-                  if ( (unsigned __int8)UFG::RoadNetworkLocation::IsValid(v38) )
+                  v39 = Scaleform::GFx::AS3::Instances::fl::XML::GetName(p_mNext);
+                  UFG::RoadNetworkLocation::GetVectors(v39, &pos.mPosLaneNearestPosition, &pos.mVecLaneNearestTangent);
+                  pos.mStartLane = Scaleform::GFx::AS3::Instances::fl::XML::GetName(p_mNext)->m_CurrentLane;
+                  m_LaneT = Scaleform::GFx::AS3::Instances::fl::XML::GetName(p_mNext)->m_LaneT;
+                  pos.mVecVehicle.x = _viewerDirection->x;
+                  v41 = _viewerDirection->z;
+                  pos.mStartT = m_LaneT;
+                  v42 = _viewerDirection->y;
+                  pos.mVecVehicle.z = v41;
+                  v43 = v36->mWorldTransform.v3.y;
+                  pos.mVecVehicle.y = v42;
+                  pos.mPosVehicle.x = v36->mWorldTransform.v3.x;
+                  v44 = v36->mWorldTransform.v3.z;
+                  pos.mPosVehicle.y = v43;
+                  v45 = this->mCurrentLookaheadDistance;
+                  pos.mPosVehicle.z = v44;
+                  UFG::LookAheadOnRoadNetwork(&pos, v45, &result);
+                  if ( result.mfDistanceToLane < 10.0 )
                   {
-                    v39 = Scaleform::GFx::AS3::Instances::fl::XML::GetName(v37);
-                    UFG::RoadNetworkLocation::GetVectors(v39, &pos, &direction);
-                    v61 = Scaleform::GFx::AS3::Instances::fl::XML::GetName(v37)->m_CurrentLane;
-                    v40 = Scaleform::GFx::AS3::Instances::fl::XML::GetName(v37)->m_LaneT;
-                    v63 = *v10;
-                    v41 = v10[2];
-                    v62 = v40;
-                    v42 = v10[1];
-                    v65 = v41;
-                    v43 = HIDWORD(v36[2].m_BoundComponentHandles.mNode.mPrev);
-                    v64 = v42;
-                    v66 = (int)v36[2].m_BoundComponentHandles.mNode.mPrev;
-                    v44 = (int)v36[2].m_BoundComponentHandles.mNode.mNext;
-                    v67 = v43;
-                    v45 = v9->mCurrentLookaheadDistance;
-                    v68 = v44;
-                    UFG::LookAheadOnRoadNetwork((UFG::RoadLaneLookAhead *)&pos, v45, &result);
-                    if ( result.mfDistanceToLane < 10.0 )
-                    {
-                      v17 = result.mFinalPos.x;
-                      v18 = result.mFinalPos.y;
-                      v19 = result.mFinalPos.z;
-                      v14 = (float)(10.0 - result.mfDistanceToLane) * 0.1;
-                    }
-                    v46 = *((float *)&v36[2].m_BoundComponentHandles.mNode.mPrev + 1);
-                    v47 = *(float *)&v36[2].m_BoundComponentHandles.mNode.mNext;
-                    UFG::gDBG_posVehicle.x = *(float *)&v36[2].m_BoundComponentHandles.mNode.mPrev;
-                    UFG::gDBG_posVehicle.y = v46;
-                    UFG::gDBG_posLaneNearestPosition = pos;
-                    UFG::gDBG_posVehicle.z = v47;
-                    UFG::gDBG_final_pos.x = result.mFinalPos.x;
-                    UFG::gDBG_final_pos.y = result.mFinalPos.y;
-                    UFG::gDBG_final_pos.z = result.mFinalPos.z;
+                    v17 = result.mFinalPos.x;
+                    v18 = result.mFinalPos.y;
+                    v19 = result.mFinalPos.z;
+                    v14 = (float)(10.0 - result.mfDistanceToLane) * 0.1;
                   }
+                  v46 = v36->mWorldTransform.v3.y;
+                  v47 = v36->mWorldTransform.v3.z;
+                  UFG::gDBG_posVehicle.x = v36->mWorldTransform.v3.x;
+                  UFG::gDBG_posVehicle.y = v46;
+                  UFG::gDBG_posLaneNearestPosition = pos.mPosLaneNearestPosition;
+                  UFG::gDBG_posVehicle.z = v47;
+                  UFG::gDBG_final_pos = result.mFinalPos;
                 }
               }
             }
@@ -652,95 +638,93 @@ void __fastcall UFG::RoadnetworkLookahead::Process(UFG::RoadnetworkLookahead *th
   }
   else
   {
-    v9->mCurrentLookaheadDistance = 0.0;
+    this->mCurrentLookaheadDistance = 0.0;
   }
-  v48 = v9->mCurrentLookaheadDistance;
-  v49 = v48;
-  v50 = (float)(v48 * v9->mViewerDirection.z) + v9->mViewerPosition.z;
-  v51 = (float)(v49 * v9->mViewerDirection.x) + v9->mViewerPosition.x;
-  v52 = (float)(v9->mCurrentLookaheadDistance * v9->mViewerDirection.y) + v9->mViewerPosition.y;
-  v9->mCurrentLookaheadPos.z = v50;
-  v9->mCurrentLookaheadPos.x = v51;
-  v9->mCurrentLookaheadPos.y = v52;
-  UFG::gDBG_lookahead_original.x = v51;
-  UFG::gDBG_lookahead_original.y = v52;
-  UFG::gDBG_lookahead_original.z = v50;
+  v48 = this->mCurrentLookaheadDistance;
+  v49 = (float)(v48 * this->mViewerDirection.z) + this->mViewerPosition.z;
+  v50 = (float)(v48 * this->mViewerDirection.x) + this->mViewerPosition.x;
+  v51 = (float)(this->mCurrentLookaheadDistance * this->mViewerDirection.y) + this->mViewerPosition.y;
+  this->mCurrentLookaheadPos.z = v49;
+  this->mCurrentLookaheadPos.x = v50;
+  this->mCurrentLookaheadPos.y = v51;
+  UFG::gDBG_lookahead_original.x = v50;
+  UFG::gDBG_lookahead_original.y = v51;
+  UFG::gDBG_lookahead_original.z = v49;
   if ( v14 > 0.0 )
   {
-    v53 = v9->mCurrentLookaheadPos.y + (float)((float)(v18 - v9->mCurrentLookaheadPos.y) * v14);
-    v54 = v9->mCurrentLookaheadPos.z + (float)((float)(v19 - v9->mCurrentLookaheadPos.z) * v14);
-    v9->mCurrentLookaheadPos.x = v9->mCurrentLookaheadPos.x + (float)((float)(v17 - v9->mCurrentLookaheadPos.x) * v14);
-    v9->mCurrentLookaheadPos.y = v53;
-    v9->mCurrentLookaheadPos.z = v54;
+    v52 = this->mCurrentLookaheadPos.y + (float)((float)(v18 - this->mCurrentLookaheadPos.y) * v14);
+    v53 = this->mCurrentLookaheadPos.z + (float)((float)(v19 - this->mCurrentLookaheadPos.z) * v14);
+    this->mCurrentLookaheadPos.x = this->mCurrentLookaheadPos.x
+                                 + (float)((float)(v17 - this->mCurrentLookaheadPos.x) * v14);
+    this->mCurrentLookaheadPos.y = v52;
+    this->mCurrentLookaheadPos.z = v53;
   }
-  v55 = v9->mCurrentLookaheadPos.y;
-  v56 = v9->mCurrentLookaheadPos.z;
-  UFG::gDBG_lookahead_modified.x = v9->mCurrentLookaheadPos.x;
-  UFG::gDBG_lookahead_modified.y = v55;
-  UFG::gDBG_lookahead_modified.z = v56;
-  v9->mfCurrentAngle = v13;
+  v54 = this->mCurrentLookaheadPos.y;
+  v55 = this->mCurrentLookaheadPos.z;
+  UFG::gDBG_lookahead_modified.x = this->mCurrentLookaheadPos.x;
+  UFG::gDBG_lookahead_modified.y = v54;
+  UFG::gDBG_lookahead_modified.z = v55;
+  this->mfCurrentAngle = v13;
 }
 
 // File Line: 419
 // RVA: 0x4CA0D0
 void __fastcall UFG::RoadnetworkLookahead::DebugDraw(UFG::RoadnetworkLookahead *this, Render::View *pView)
 {
-  Render::View *v2; // rbx
   unsigned int v3; // eax
 
-  v2 = pView;
   v3 = _S5_10;
-  if ( !(_S5_10 & 1) )
+  if ( (_S5_10 & 1) == 0 )
   {
     v3 = _S5_10 | 1;
     _S5_10 |= 1u;
     drawinfoWhite.mColour1 = UFG::qColour::White;
     drawinfoWhite.mColour2 = UFG::qColour::White;
     drawinfoWhite.mScale = 1.0;
-    drawinfoWhite.mAlphaBlend = 662883558;
+    drawinfoWhite.mAlphaBlend = AlphaState_none;
     *(_WORD *)&drawinfoWhite.mDepthBuffer = 256;
     drawinfoWhite.mDepthBias = 0;
     drawinfoWhite.mPreDrawCallback = 0i64;
   }
-  if ( !(v3 & 2) )
+  if ( (v3 & 2) == 0 )
   {
     v3 |= 2u;
     _S5_10 = v3;
     drawinfoRed.mColour1 = UFG::qColour::Red;
     drawinfoRed.mColour2 = UFG::qColour::Red;
     drawinfoRed.mScale = 1.0;
-    drawinfoRed.mAlphaBlend = 662883558;
+    drawinfoRed.mAlphaBlend = AlphaState_none;
     *(_WORD *)&drawinfoRed.mDepthBuffer = 256;
     drawinfoRed.mDepthBias = 0;
     drawinfoRed.mPreDrawCallback = 0i64;
   }
-  if ( !(v3 & 4) )
+  if ( (v3 & 4) == 0 )
   {
     v3 |= 4u;
     _S5_10 = v3;
     drawinfoBlue.mColour1 = UFG::qColour::Blue;
     drawinfoBlue.mColour2 = UFG::qColour::Blue;
     drawinfoBlue.mScale = 1.0;
-    drawinfoBlue.mAlphaBlend = 662883558;
+    drawinfoBlue.mAlphaBlend = AlphaState_none;
     *(_WORD *)&drawinfoBlue.mDepthBuffer = 256;
     drawinfoBlue.mDepthBias = 0;
     drawinfoBlue.mPreDrawCallback = 0i64;
   }
-  if ( !(v3 & 8) )
+  if ( (v3 & 8) == 0 )
   {
     _S5_10 = v3 | 8;
     drawinfoGreen.mColour1 = UFG::qColour::Green;
     drawinfoGreen.mColour2 = UFG::qColour::Green;
     drawinfoGreen.mScale = 1.0;
-    drawinfoGreen.mAlphaBlend = 662883558;
+    drawinfoGreen.mAlphaBlend = AlphaState_none;
     *(_WORD *)&drawinfoGreen.mDepthBuffer = 256;
     drawinfoGreen.mDepthBias = 0;
     drawinfoGreen.mPreDrawCallback = 0i64;
   }
   Render::View::DrawSegment(pView, &UFG::gDBG_posVehicle, &UFG::gDBG_posLaneNearestPosition, &drawinfoRed);
-  Render::View::DrawSegment(v2, &UFG::gDBG_posVehicle, &UFG::gDBG_final_pos, &drawinfoWhite);
-  Render::View::DrawCross(v2, &UFG::gDBG_final_pos, &drawinfoWhite);
-  Render::View::DrawCross(v2, &UFG::gDBG_lookahead_original, &drawinfoBlue);
-  Render::View::DrawCross(v2, &UFG::gDBG_lookahead_modified, &drawinfoGreen);
+  Render::View::DrawSegment(pView, &UFG::gDBG_posVehicle, &UFG::gDBG_final_pos, &drawinfoWhite);
+  Render::View::DrawCross(pView, &UFG::gDBG_final_pos, &drawinfoWhite);
+  Render::View::DrawCross(pView, &UFG::gDBG_lookahead_original, &drawinfoBlue);
+  Render::View::DrawCross(pView, &UFG::gDBG_lookahead_modified, &drawinfoGreen);
 }
 

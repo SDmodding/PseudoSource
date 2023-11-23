@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkaiGraphPathSearchParametersClass__()
     &hkaiGraphPathSearchParameters_Default,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 85

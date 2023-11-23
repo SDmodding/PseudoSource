@@ -63,7 +63,7 @@ void dynamic_initializer_for__hkaiUserEdgeUtilsUserEdgeSetupClass__()
     &hkaiUserEdgeUtilsUserEdgeSetup_Default,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 177
@@ -109,7 +109,7 @@ void dynamic_initializer_for__hkaiUserEdgeUtilsUserEdgePairClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 233
@@ -191,17 +191,17 @@ hkClass *__fastcall hkaiUserEdgeSetupArray::staticClass()
 
 // File Line: 330
 // RVA: 0xBB78C0
-void __fastcall finishLoadedObjecthkaiUserEdgeSetupArray(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiUserEdgeSetupArray(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiUserEdgeSetupArray::`vftable;
+    *p = &hkaiUserEdgeSetupArray::`vftable;
 }
 
 // File Line: 336
 // RVA: 0xBB78E0
-void __fastcall cleanupLoadedObjecthkaiUserEdgeSetupArray(void *p)
+void __fastcall cleanupLoadedObjecthkaiUserEdgeSetupArray(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 340
@@ -222,8 +222,8 @@ void **dynamic_initializer_for__hkaiUserEdgeSetupArrayTypeInfo__()
   hkaiUserEdgeSetupArrayTypeInfo.m_typeName = "hkaiUserEdgeSetupArray";
   hkaiUserEdgeSetupArrayTypeInfo.m_vtable = result;
   hkaiUserEdgeSetupArrayTypeInfo.m_scopedName = "!hkaiUserEdgeSetupArray";
-  hkaiUserEdgeSetupArrayTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiUserEdgeSetupArray;
-  hkaiUserEdgeSetupArrayTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiUserEdgeSetupArray;
+  hkaiUserEdgeSetupArrayTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiUserEdgeSetupArray;
+  hkaiUserEdgeSetupArrayTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiUserEdgeSetupArray;
   return result;
 }
 
@@ -257,17 +257,17 @@ hkClass *__fastcall hkaiUserEdgePairArray::staticClass()
 
 // File Line: 398
 // RVA: 0xBB7900
-void __fastcall finishLoadedObjecthkaiUserEdgePairArray(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiUserEdgePairArray(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiUserEdgePairArray::`vftable;
+    *p = &hkaiUserEdgePairArray::`vftable;
 }
 
 // File Line: 404
 // RVA: 0xBB7920
-void __fastcall cleanupLoadedObjecthkaiUserEdgePairArray(void *p)
+void __fastcall cleanupLoadedObjecthkaiUserEdgePairArray(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 408
@@ -288,8 +288,8 @@ void **dynamic_initializer_for__hkaiUserEdgePairArrayTypeInfo__()
   hkaiUserEdgePairArrayTypeInfo.m_typeName = "hkaiUserEdgePairArray";
   hkaiUserEdgePairArrayTypeInfo.m_vtable = result;
   hkaiUserEdgePairArrayTypeInfo.m_scopedName = "!hkaiUserEdgePairArray";
-  hkaiUserEdgePairArrayTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiUserEdgePairArray;
-  hkaiUserEdgePairArrayTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiUserEdgePairArray;
+  hkaiUserEdgePairArrayTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiUserEdgePairArray;
+  hkaiUserEdgePairArrayTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiUserEdgePairArray;
   return result;
 }
 

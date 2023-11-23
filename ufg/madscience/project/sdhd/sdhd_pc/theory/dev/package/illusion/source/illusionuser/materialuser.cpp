@@ -9,34 +9,34 @@ void __fastcall Illusion::MaterialUser::MaterialUser(Illusion::MaterialUser *thi
 // RVA: 0x95F10
 void __fastcall Illusion::MaterialUser::OnLoad(Illusion::MaterialUser *this, Illusion::Material *material)
 {
-  __int64 v2; // r8
-  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v3; // r9
+  __int64 mNumParams; // r8
+  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *mPrev; // r9
   UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v4; // r10
-  UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0> *v5; // rax
-  __int16 v6; // dx
+  UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0> *p_mResourceHandles; // rax
+  __int16 mNext; // dx
 
-  v2 = material->mNumParams;
-  v3 = 0i64;
+  mNumParams = material->mNumParams;
+  mPrev = 0i64;
   v4 = 0i64;
-  if ( (_DWORD)v2 )
+  if ( (_DWORD)mNumParams )
   {
-    v5 = &material[1].mResourceHandles;
+    p_mResourceHandles = &material[1].mResourceHandles;
     do
     {
-      v6 = (__int16)v5[-2].mNode.mNext;
-      if ( v6 == 9 )
+      mNext = (__int16)p_mResourceHandles[-2].mNode.mNext;
+      if ( mNext == 9 )
       {
-        v3 = v5->mNode.mPrev;
+        mPrev = p_mResourceHandles->mNode.mPrev;
       }
-      else if ( v6 == 10 )
+      else if ( mNext == 10 )
       {
-        v4 = v5->mNode.mPrev;
+        v4 = p_mResourceHandles->mNode.mPrev;
       }
-      v5 = (UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0> *)((char *)v5 + 56);
-      --v2;
+      p_mResourceHandles = (UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0> *)((char *)p_mResourceHandles + 56);
+      --mNumParams;
     }
-    while ( v2 );
-    if ( v3 && BYTE5(v3[5].mNext) )
+    while ( mNumParams );
+    if ( mPrev && BYTE5(mPrev[5].mNext) )
       this->mShadowFlags |= 1u;
     if ( v4 )
     {

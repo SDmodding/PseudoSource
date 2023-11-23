@@ -63,26 +63,26 @@ hkClass *__fastcall hkpPairCollisionFilter::staticClass()
 
 // File Line: 116
 // RVA: 0xD50EE0
-void __fastcall finishLoadedObjecthkpPairCollisionFilter(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpPairCollisionFilter(_QWORD *p, int finishing)
 {
   if ( p )
   {
-    *(_QWORD *)p = &hkpPairCollisionFilter::`vftable{for `hkReferencedObject};
-    *((_QWORD *)p + 2) = &hkpPairCollisionFilter::`vftable{for `hkpCollidableCollidableFilter};
-    *((_QWORD *)p + 3) = &hkpPairCollisionFilter::`vftable{for `hkpShapeCollectionFilter};
-    *((_QWORD *)p + 4) = &hkpPairCollisionFilter::`vftable{for `hkpRayShapeCollectionFilter};
-    *((_QWORD *)p + 5) = &hkpPairCollisionFilter::`vftable{for `hkpRayCollidableFilter};
+    *p = &hkpPairCollisionFilter::`vftable{for `hkReferencedObject};
+    p[2] = &hkpPairCollisionFilter::`vftable{for `hkpCollidableCollidableFilter};
+    p[3] = &hkpPairCollisionFilter::`vftable{for `hkpShapeCollectionFilter};
+    p[4] = &hkpPairCollisionFilter::`vftable{for `hkpRayShapeCollectionFilter};
+    p[5] = &hkpPairCollisionFilter::`vftable{for `hkpRayCollidableFilter};
     *((_DWORD *)p + 21) = -1;
-    *((_QWORD *)p + 9) = 0i64;
+    p[9] = 0i64;
     *((_DWORD *)p + 20) = 0;
   }
 }
 
 // File Line: 122
 // RVA: 0xD50F40
-void __fastcall cleanupLoadedObjecthkpPairCollisionFilter(void *p)
+void __fastcall cleanupLoadedObjecthkpPairCollisionFilter(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 126
@@ -103,8 +103,8 @@ void **dynamic_initializer_for__hkpPairCollisionFilterTypeInfo__()
   hkpPairCollisionFilterTypeInfo.m_typeName = "hkpPairCollisionFilter";
   hkpPairCollisionFilterTypeInfo.m_vtable = result;
   hkpPairCollisionFilterTypeInfo.m_scopedName = "!hkpPairCollisionFilter";
-  hkpPairCollisionFilterTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpPairCollisionFilter;
-  hkpPairCollisionFilterTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpPairCollisionFilter;
+  hkpPairCollisionFilterTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpPairCollisionFilter;
+  hkpPairCollisionFilterTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpPairCollisionFilter;
   return result;
 }
 

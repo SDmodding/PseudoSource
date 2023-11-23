@@ -28,17 +28,17 @@ hkClass *__fastcall hkaiVaultAnalyzer::staticClass()
 
 // File Line: 69
 // RVA: 0xC325F0
-void __fastcall finishLoadedObjecthkaiVaultAnalyzer(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiVaultAnalyzer(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiVaultAnalyzer::`vftable;
+    *p = &hkaiVaultAnalyzer::`vftable;
 }
 
 // File Line: 75
 // RVA: 0xC32610
-void __fastcall cleanupLoadedObjecthkaiVaultAnalyzer(void *p)
+void __fastcall cleanupLoadedObjecthkaiVaultAnalyzer(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 79
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkaiVaultAnalyzerTypeInfo__()
   hkaiVaultAnalyzerTypeInfo.m_typeName = "hkaiVaultAnalyzer";
   hkaiVaultAnalyzerTypeInfo.m_vtable = result;
   hkaiVaultAnalyzerTypeInfo.m_scopedName = "!hkaiVaultAnalyzer";
-  hkaiVaultAnalyzerTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiVaultAnalyzer;
-  hkaiVaultAnalyzerTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiVaultAnalyzer;
+  hkaiVaultAnalyzerTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiVaultAnalyzer;
+  hkaiVaultAnalyzerTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiVaultAnalyzer;
   return result;
 }
 

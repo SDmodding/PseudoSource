@@ -1,173 +1,168 @@
 // File Line: 23
 // RVA: 0xD2FEF0
-float __fastcall hkCpuWorldGetClosestPointsCollector::addBroadPhaseHandle(hkCpuWorldGetClosestPointsCollector *this, hkpBroadPhaseHandle *broadphaseHandle, int castIndex)
+float __fastcall hkCpuWorldGetClosestPointsCollector::addBroadPhaseHandle(
+        hkCpuWorldGetClosestPointsCollector *this,
+        hkpBroadPhaseHandle *broadphaseHandle,
+        int castIndex)
 {
-  hkCpuWorldGetClosestPointsCollector *v3; // rbx
   hkpCollidable *v4; // rdi
-  hkpShape *v5; // rsi
-  hkpCollidable *v6; // r8
-  hkpFixedBufferCdPointCollector *v7; // rax
-  char v9; // [rsp+30h] [rbp+8h]
+  hkpShape *m_shape; // rsi
+  hkpCollidable *m_collidable; // r8
+  hkpFixedBufferCdPointCollector *m_castCollector; // rax
+  char v9; // [rsp+30h] [rbp+8h] BYREF
 
-  v3 = this;
   v4 = (hkpCollidable *)((char *)broadphaseHandle + SBYTE1(broadphaseHandle[1].m_id));
-  v5 = v4->m_shape;
-  if ( v4->m_shape && (v6 = this->m_collidable, v6 != v4) )
+  m_shape = v4->m_shape;
+  if ( !v4->m_shape || (m_collidable = this->m_collidable, m_collidable == v4) )
   {
-    if ( *(_BYTE *)this->m_filter->vfptr->isCollisionEnabled(
-                     (hkpCollidableCollidableFilter *)&this->m_filter->vfptr,
-                     (hkBool *)&v9,
-                     v6,
-                     v4) )
-      (*((void (__fastcall **)(hkpCollidable *, hkpCollidable *, hkpLinearCastCollisionInput *, hkpFixedBufferCdPointCollector *))&v3->m_input.m_dispatcher.m_storage->vfptr
-       + 5
-       * ((unsigned __int8)v3->m_input.m_dispatcher.m_storage->m_agent2Types[v3->m_shapeType][(unsigned __int8)v5->m_type.m_storage]
-        + 79i64)))(
-        v3->m_collidable,
-        v4,
-        &v3->m_input,
-        v3->m_castCollector);
-    v7 = v3->m_castCollector;
+    m_castCollector = this->m_castCollector;
   }
   else
   {
-    v7 = this->m_castCollector;
+    if ( this->m_filter->vfptr->isCollisionEnabled(
+           &this->m_filter->hkpCollidableCollidableFilter,
+           &v9,
+           m_collidable,
+           v4)->m_bool )
+      this->m_input.m_dispatcher.m_storage->m_agent2Func[(unsigned __int8)this->m_input.m_dispatcher.m_storage->m_agent2Types[this->m_shapeType][(unsigned __int8)m_shape->m_type.m_storage]].m_getClosestPointFunc(
+        this->m_collidable,
+        v4,
+        &this->m_input,
+        this->m_castCollector);
+    m_castCollector = this->m_castCollector;
   }
-  return v7->m_earlyOutDistance;
+  return m_castCollector->m_earlyOutDistance;
 }
 
 // File Line: 42
 // RVA: 0xD2FFA0
 __int64 __fastcall hkCpuWorldGetClosestPointsJob(hkJobQueue *jobQueue, hkJobQueue::JobQueueEntry *nextJobOut)
 {
-  hkJobQueue *v2; // r13
-  hkJobQueue::JobQueueEntry *v3; // rsi
-  _QWORD *v4; // rax
+  _QWORD *Value; // rax
   _QWORD *v5; // rcx
   _QWORD *v6; // r8
   unsigned __int64 v7; // rax
-  signed __int64 v8; // rcx
+  _QWORD *v8; // rcx
   __int64 v9; // rcx
   __int64 v10; // r12
-  int v11; // er15
+  int v11; // r15d
   __int64 v12; // r14
   __int64 v13; // rdi
-  float v14; // xmm2_4
-  __int64 v15; // rax
-  unsigned int v16; // ecx
-  __int64 v17; // rax
-  __int64 v18; // rdx
-  unsigned __int8 *v19; // rbx
-  float v20; // xmm2_4
-  int v21; // xmm0_4
-  int v22; // eax
-  _QWORD *v23; // rax
+  __int64 v14; // rax
+  unsigned int v15; // ecx
+  __int64 v16; // rdx
+  unsigned __int8 *v17; // rbx
+  int v18; // xmm0_4
+  int v19; // eax
+  _QWORD *v20; // rax
+  _QWORD *v21; // rcx
+  _QWORD *v22; // r8
+  unsigned __int64 v23; // rax
   _QWORD *v24; // rcx
-  _QWORD *v25; // r8
-  unsigned __int64 v26; // rax
-  signed __int64 v27; // rcx
-  void **v29; // [rsp+20h] [rbp-C8h]
-  int v30; // [rsp+28h] [rbp-C0h]
-  __int64 v31; // [rsp+30h] [rbp-B8h]
-  __int64 v32; // [rsp+38h] [rbp-B0h]
-  void **v33; // [rsp+40h] [rbp-A8h]
-  __int64 v34; // [rsp+48h] [rbp-A0h]
-  void ***v35; // [rsp+50h] [rbp-98h]
-  __int64 v36; // [rsp+58h] [rbp-90h]
-  int v37; // [rsp+60h] [rbp-88h]
-  int v38; // [rsp+68h] [rbp-80h]
-  __int64 v39; // [rsp+70h] [rbp-78h]
-  __int64 v40; // [rsp+78h] [rbp-70h]
-  int v41; // [rsp+80h] [rbp-68h]
-  __int128 v42; // [rsp+88h] [rbp-60h]
-  __int128 v43; // [rsp+98h] [rbp-50h]
-  __int128 v44; // [rsp+A8h] [rbp-40h]
-  float v45; // [rsp+C8h] [rbp-20h]
-  __int64 v46; // [rsp+D0h] [rbp-18h]
-  char v47; // [rsp+D8h] [rbp-10h]
-  hkJobQueue *v48; // [rsp+138h] [rbp+50h]
+  void **v26; // [rsp+20h] [rbp-C8h] BYREF
+  int v27; // [rsp+28h] [rbp-C0h]
+  __int64 v28; // [rsp+30h] [rbp-B8h]
+  __int64 v29; // [rsp+38h] [rbp-B0h]
+  void **v30; // [rsp+40h] [rbp-A8h] BYREF
+  __int64 v31; // [rsp+48h] [rbp-A0h]
+  void ***v32; // [rsp+50h] [rbp-98h]
+  __int64 v33; // [rsp+58h] [rbp-90h]
+  int v34; // [rsp+60h] [rbp-88h]
+  int v35; // [rsp+68h] [rbp-80h]
+  __int64 v36; // [rsp+70h] [rbp-78h]
+  __int64 v37; // [rsp+78h] [rbp-70h]
+  int v38; // [rsp+80h] [rbp-68h]
+  __int128 v39; // [rsp+88h] [rbp-60h]
+  __int128 v40; // [rsp+98h] [rbp-50h]
+  __int128 v41; // [rsp+A8h] [rbp-40h]
+  float v42; // [rsp+C8h] [rbp-20h]
+  __int64 v43; // [rsp+D0h] [rbp-18h]
+  char v44[56]; // [rsp+D8h] [rbp-10h] BYREF
+  hkJobQueue *v45; // [rsp+138h] [rbp+50h]
 
-  v2 = jobQueue;
-  v3 = nextJobOut;
-  v4 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v5 = (_QWORD *)v4[1];
-  v6 = v4;
-  if ( (unsigned __int64)v5 < v4[3] )
+  Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v5 = (_QWORD *)Value[1];
+  v6 = Value;
+  if ( (unsigned __int64)v5 < Value[3] )
   {
     *v5 = "TtCollQueryWorldGetClosestPoints";
     v7 = __rdtsc();
-    v8 = (signed __int64)(v5 + 2);
-    *(_DWORD *)(v8 - 8) = v7;
+    v8 = v5 + 2;
+    *((_DWORD *)v8 - 2) = v7;
     v6[1] = v8;
   }
-  v9 = *(_QWORD *)&v3->m_data[16];
-  v10 = *(_QWORD *)&v3->m_data[32];
-  v32 = 1i64;
-  v30 = 2139095022;
-  v45 = FLOAT_1_1920929eN7;
-  v29 = &hkpFixedBufferCdPointCollector::`vftable;
-  v31 = 0i64;
+  v9 = *(_QWORD *)&nextJobOut->m_data[16];
+  v10 = *(_QWORD *)&nextJobOut->m_data[32];
+  v29 = 1i64;
+  v27 = 2139095022;
+  v42 = FLOAT_1_1920929eN7;
+  v26 = &hkpFixedBufferCdPointCollector::`vftable;
+  v28 = 0i64;
   v11 = 0;
-  v33 = &hkCpuWorldGetClosestPointsCollector::`vftable;
-  v34 = *(_QWORD *)(v9 + 24);
-  v35 = &v29;
-  v39 = *(_QWORD *)v9;
-  v40 = *(unsigned int *)(v9 + 8);
-  HIDWORD(v40) = *(_DWORD *)(v9 + 12);
-  v38 = *(_DWORD *)(v9 + 16);
-  v39 = *(_QWORD *)(v9 + 24);
-  v40 = *(_QWORD *)(v9 + 32);
-  v41 = *(_DWORD *)(v9 + 40);
-  v42 = *(_OWORD *)(v9 + 48);
-  v43 = *(_OWORD *)(v9 + 64);
-  v44 = *(_OWORD *)(v9 + 80);
-  v46 = *(_QWORD *)(v9 + 144);
-  if ( *(_DWORD *)&v3->m_data[56] > 0 )
+  v30 = &hkCpuWorldGetClosestPointsCollector::`vftable;
+  v31 = *(_QWORD *)(v9 + 24);
+  v32 = &v26;
+  v36 = *(_QWORD *)v9;
+  v37 = *(unsigned int *)(v9 + 8);
+  HIDWORD(v37) = *(_DWORD *)(v9 + 12);
+  v35 = *(_DWORD *)(v9 + 16);
+  v36 = *(_QWORD *)(v9 + 24);
+  v37 = *(_QWORD *)(v9 + 32);
+  v38 = *(_DWORD *)(v9 + 40);
+  v39 = *(_OWORD *)(v9 + 48);
+  v40 = *(_OWORD *)(v9 + 64);
+  v41 = *(_OWORD *)(v9 + 80);
+  v43 = *(_QWORD *)(v9 + 144);
+  if ( *(int *)&nextJobOut->m_data[56] > 0 )
   {
     v12 = 0i64;
     do
     {
-      v13 = *(_QWORD *)&v3->m_data[48];
-      v14 = *(float *)&v3->m_data[40];
-      v15 = *(_QWORD *)(v12 + v13 + 8);
-      v16 = *(_DWORD *)(v12 + v13 + 16);
-      v29 = &hkpFixedBufferCdPointCollector::`vftable;
-      v31 = v15;
-      v17 = *(_QWORD *)&v3->m_data[16];
-      v32 = v16;
-      v30 = 2139095022;
-      v18 = *(_QWORD *)(v12 + v13);
-      v19 = *(unsigned __int8 **)v18;
-      v20 = v14 - (float)(*(float *)(v17 + 16) * 0.5);
-      (*(void (__fastcall **)(unsigned __int8 *, _QWORD, _QWORD, char *))(*(_QWORD *)v19 + 32i64))(
-        v19,
-        *(_QWORD *)(v18 + 16),
-        *(_QWORD *)v19,
-        &v47);
-      v21 = *(_DWORD *)&v3->m_data[40];
-      v36 = *(_QWORD *)(v12 + v13);
-      v22 = v19[16];
-      v38 = v21;
-      v37 = v22;
-      (*(void (__fastcall **)(__int64, char *, void ***))(*(_QWORD *)v10 + 160i64))(v10, &v47, &v33);
+      v13 = *(_QWORD *)&nextJobOut->m_data[48];
+      v14 = *(_QWORD *)(v12 + v13 + 8);
+      v15 = *(_DWORD *)(v12 + v13 + 16);
+      v26 = &hkpFixedBufferCdPointCollector::`vftable;
+      v28 = v14;
+      v29 = v15;
+      v27 = 2139095022;
+      v16 = *(_QWORD *)(v12 + v13);
+      v17 = *(unsigned __int8 **)v16;
+      (*(void (__fastcall **)(unsigned __int8 *, _QWORD, _QWORD, char *, void **, int, __int64, _QWORD, void **, __int64, void ***))(*(_QWORD *)v17 + 32i64))(
+        v17,
+        *(_QWORD *)(v16 + 16),
+        *(_QWORD *)v17,
+        v44,
+        &hkpFixedBufferCdPointCollector::`vftable,
+        2139095022,
+        v14,
+        v15,
+        v30,
+        v31,
+        v32);
+      v18 = *(_DWORD *)&nextJobOut->m_data[40];
+      v33 = *(_QWORD *)(v12 + v13);
+      v19 = v17[16];
+      v35 = v18;
+      v34 = v19;
+      (*(void (__fastcall **)(__int64, char *, void ***))(*(_QWORD *)v10 + 160i64))(v10, v44, &v30);
       ++v11;
-      *(_DWORD *)(v12 + v13 + 20) = HIDWORD(v32);
+      *(_DWORD *)(v12 + v13 + 20) = HIDWORD(v29);
       v12 += 24i64;
     }
-    while ( v11 < *(_DWORD *)&v3->m_data[56] );
-    v2 = v48;
+    while ( v11 < *(_DWORD *)&nextJobOut->m_data[56] );
+    jobQueue = v45;
   }
-  v23 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v24 = (_QWORD *)v23[1];
-  v25 = v23;
-  if ( (unsigned __int64)v24 < v23[3] )
+  v20 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v21 = (_QWORD *)v20[1];
+  v22 = v20;
+  if ( (unsigned __int64)v21 < v20[3] )
   {
-    *v24 = "Et";
-    v26 = __rdtsc();
-    v27 = (signed __int64)(v24 + 2);
-    *(_DWORD *)(v27 - 8) = v26;
-    v25[1] = v27;
+    *v21 = "Et";
+    v23 = __rdtsc();
+    v24 = v21 + 2;
+    *((_DWORD *)v24 - 2) = v23;
+    v22[1] = v24;
   }
-  return hkJobQueue::finishJobAndGetNextJob(v2, v3, v3, 0);
+  return hkJobQueue::finishJobAndGetNextJob(jobQueue, nextJobOut, nextJobOut, WAIT_FOR_NEXT_JOB);
 }
 

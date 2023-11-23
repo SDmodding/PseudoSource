@@ -3,649 +3,712 @@
 void __fastcall FSHA1Transform(unsigned int *state, const char *buffer)
 {
   unsigned int *v2; // rsi
-  unsigned int *v3; // ST68_8
-  unsigned int v4; // edi
-  unsigned int v5; // ebx
-  int v6; // edx
-  unsigned int v7; // er9
-  unsigned int v8; // ST38_4
-  int v9; // er10
-  int v10; // er8
+  unsigned int v3; // edi
+  unsigned int v4; // ebx
+  unsigned int v5; // edx
+  unsigned int v6; // r9d
+  int v7; // edx
+  unsigned int v8; // r9d
+  int v9; // r10d
+  int v10; // r8d
   int v11; // ecx
-  unsigned int v12; // er11
-  unsigned int v13; // ST40_4
-  int v14; // er11
-  unsigned int v15; // ST30_4
-  int v16; // ecx
-  int v17; // edx
-  int v18; // ecx
-  unsigned int v19; // ST34_4
-  int v20; // er8
-  int v21; // ecx
-  unsigned int v22; // ST48_4
-  int v23; // er9
-  int v24; // ecx
-  unsigned int v25; // ST60_4
-  int v26; // er10
-  unsigned int v27; // ST58_4
-  int v28; // ecx
-  int v29; // er11
-  int v30; // ecx
-  unsigned int v31; // ST2C_4
-  int v32; // edx
-  int v33; // ecx
-  unsigned int v34; // ST28_4
-  int v35; // er8
-  unsigned int v36; // ebx
-  unsigned int v37; // ST44_4
-  int v38; // ecx
-  int v39; // ebx
-  int v40; // er9
-  unsigned int v41; // ST3C_4
-  int v42; // er9
-  int v43; // er10
-  unsigned int v44; // er10
-  int v45; // er11
+  int v12; // r9d
+  unsigned int v13; // r11d
+  int v14; // ecx
+  int v15; // r10d
+  int v16; // edx
+  int v17; // ecx
+  int v18; // r11d
+  int v19; // r8d
+  int v20; // ecx
+  int v21; // edx
+  int v22; // r9d
+  int v23; // ecx
+  int v24; // r8d
+  int v25; // r10d
+  int v26; // ecx
+  int v27; // r9d
+  int v28; // r11d
+  int v29; // ecx
+  int v30; // r10d
+  int v31; // edx
+  int v32; // ecx
+  int v33; // r11d
+  int v34; // r8d
+  int v35; // ecx
+  int v36; // edx
+  int v37; // ebx
+  int v38; // r9d
+  int v39; // r8d
+  int v40; // r9d
+  int v41; // r10d
+  int v42; // ebx
+  int v43; // r10d
+  int v44; // r11d
+  int v45; // r9d
   int v46; // ecx
-  unsigned int v47; // ST54_4
-  int v48; // er11
-  int v49; // er11
-  unsigned int v50; // edx
-  unsigned int v51; // ST20_4
-  int v52; // edx
-  unsigned int v53; // er8
-  int v54; // ecx
-  unsigned int v55; // ST24_4
-  int v56; // er8
-  int v57; // ST4C_4
-  int v58; // er12
-  int v59; // ST30_4
+  int v47; // eax
+  int v48; // r10d
+  int v49; // r11d
+  int v50; // edx
+  int v51; // ecx
+  int v52; // r11d
+  int v53; // r8d
+  int v54; // r12d
+  int v55; // ecx
+  int v56; // edx
+  int v57; // r12d
+  int v58; // r9d
+  int v59; // ebx
   int v60; // ecx
-  int v61; // er12
-  int v62; // er9
-  int v63; // ST38_4
-  int v64; // ebx
-  int v65; // ecx
-  int v66; // er10
-  int v67; // ecx
-  int v68; // er11
-  int v69; // edx
-  int v70; // ecx
-  int v71; // er8
-  int v72; // ST40_4
-  int v73; // edi
-  int v74; // er9
-  int v75; // ecx
-  int v76; // er14
-  int v77; // er15
-  int v78; // er10
+  int v61; // r8d
+  int v62; // r10d
+  int v63; // ecx
+  int v64; // r9d
+  int v65; // r11d
+  int v66; // edx
+  int v67; // r10d
+  int v68; // ecx
+  int v69; // r11d
+  int v70; // r8d
+  int v71; // edi
+  int v72; // r9d
+  int v73; // edx
+  int v74; // ecx
+  int v75; // r8d
+  int v76; // r14d
+  int v77; // r15d
+  int v78; // r10d
   int v79; // ecx
-  int v80; // er13
-  int v81; // er11
-  int v82; // ecx
-  int v83; // edx
-  int v84; // ecx
-  int v85; // er8
-  int v86; // ST2C_4
-  int v87; // ecx
-  int v88; // er9
+  int v80; // r9d
+  int v81; // r13d
+  int v82; // r11d
+  int v83; // ecx
+  int v84; // r10d
+  int v85; // edx
+  int v86; // ecx
+  int v87; // r11d
+  int v88; // r8d
   int v89; // ecx
-  int v90; // ST3C_4
-  int v91; // er10
+  int v90; // edx
+  int v91; // r9d
   int v92; // ecx
-  int v93; // ST34_4
-  int v94; // er11
+  int v93; // r8d
+  int v94; // r10d
   int v95; // ecx
-  int v96; // ST28_4
-  int v97; // edx
+  int v96; // r9d
+  int v97; // r11d
   int v98; // ecx
-  int v99; // ST20_4
-  int v100; // er8
-  int v101; // ST24_4
-  int v102; // ecx
-  int v103; // er9
+  int v99; // r10d
+  int v100; // edx
+  int v101; // ecx
+  int v102; // r11d
+  int v103; // r8d
   int v104; // ecx
-  int v105; // ST4C_4
-  int v106; // er10
+  int v105; // edx
+  int v106; // r9d
   int v107; // ecx
-  int v108; // ST54_4
-  int v109; // er11
+  int v108; // r8d
+  int v109; // r10d
   int v110; // ecx
-  int v111; // ST5C_4
-  int v112; // edx
+  int v111; // r9d
+  int v112; // r11d
   int v113; // ecx
-  int v114; // ST48_4
-  int v115; // eax
-  int v116; // er12
-  int v117; // er8
-  int v118; // ST34_4
-  int v119; // ecx
-  int v120; // er9
-  int v121; // ecx
-  int v122; // ST58_4
-  int v123; // er10
-  int v124; // ecx
-  int v125; // ST38_4
-  int v126; // ebx
-  int v127; // er11
-  int v128; // er15
-  int v129; // edi
-  int v130; // ST44_4
-  int v131; // ebx
-  int v132; // ST30_4
-  int v133; // ecx
-  int v134; // er8
-  int v135; // eax
-  int v136; // er13
-  int v137; // ST50_4
-  int v138; // ecx
-  unsigned int v139; // eax
-  int v140; // er9
-  int v141; // ST3C_4
-  int v142; // eax
-  int v143; // ecx
-  int v144; // er10
-  int v145; // ST28_4
-  int v146; // ecx
-  int v147; // er11
-  int v148; // ST2C_4
-  int v149; // ebx
-  int v150; // ST40_4
-  int v151; // ecx
-  int v152; // ST20_4
-  int v153; // er8
-  int v154; // ecx
-  int v155; // er9
-  int v156; // ST24_4
-  int v157; // ecx
-  int v158; // er10
-  int v159; // ST5C_4
-  int v160; // ST4C_4
+  int v114; // r10d
+  int v115; // edx
+  int v116; // ecx
+  int v117; // r11d
+  int v118; // r12d
+  int v119; // r8d
+  int v120; // ecx
+  int v121; // edx
+  int v122; // r9d
+  int v123; // ecx
+  int v124; // r8d
+  int v125; // r10d
+  int v126; // ecx
+  int v127; // r9d
+  int v128; // ebx
+  int v129; // r11d
+  int v130; // r10d
+  int v131; // r15d
+  int v132; // edi
+  int v133; // ebx
+  int v134; // ecx
+  int v135; // r11d
+  int v136; // r8d
+  int v137; // eax
+  int v138; // r13d
+  int v139; // ecx
+  int v140; // ebx
+  unsigned int v141; // eax
+  int v142; // r9d
+  int v143; // eax
+  int v144; // ecx
+  int v145; // r8d
+  int v146; // r10d
+  int v147; // ecx
+  int v148; // r9d
+  int v149; // r11d
+  int v150; // ebx
+  int v151; // r10d
+  int v152; // ecx
+  int v153; // r11d
+  int v154; // r8d
+  int v155; // ecx
+  int v156; // ebx
+  int v157; // r9d
+  int v158; // ecx
+  int v159; // r8d
+  int v160; // r10d
   int v161; // ecx
-  int v162; // er11
-  int v163; // ecx
-  int v164; // eax
-  int v165; // ecx
-  int v166; // eax
-  int v167; // ebx
-  int v168; // ecx
-  int v169; // ecx
-  int v170; // er12
-  int v171; // eax
-  unsigned int v172; // er14
-  int v173; // ST34_4
-  int v174; // ST48_4
-  int v175; // er8
+  int v162; // r9d
+  int v163; // r11d
+  int v164; // ecx
+  int v165; // eax
+  int v166; // r10d
+  int v167; // ecx
+  int v168; // eax
+  int v169; // ebx
+  int v170; // ecx
+  int v171; // r11d
+  int v172; // ecx
+  int v173; // r12d
+  int v174; // eax
+  int v175; // r8d
   int v176; // ecx
-  int v177; // ecx
-  int v178; // eax
-  int v179; // er9
-  int v180; // ecx
-  int v181; // er10
-  int v182; // ecx
-  int v183; // er11
+  int v177; // ebx
+  int v178; // ecx
+  int v179; // eax
+  int v180; // r9d
+  int v181; // ecx
+  int v182; // r8d
+  int v183; // r10d
   int v184; // ecx
-  int v185; // ST38_4
-  int v186; // eax
-  int v187; // edi
-  int v188; // ST30_4
-  int v189; // ecx
-  int v190; // ebx
-  int v191; // ST44_4
-  int v192; // ecx
-  int v193; // er9
-  int v194; // ST50_4
-  int v195; // ecx
-  int v196; // er10
-  int v197; // eax
-  int v198; // er13
-  int v199; // ecx
-  int v200; // ecx
-  int v201; // eax
-  int v202; // ST60_4
-  int v203; // er11
+  int v185; // r9d
+  int v186; // r11d
+  int v187; // ecx
+  int v188; // r10d
+  int v189; // eax
+  int v190; // edi
+  int v191; // ecx
+  int v192; // r11d
+  int v193; // ebx
+  int v194; // ecx
+  int v195; // edi
+  int v196; // r9d
+  int v197; // ecx
+  int v198; // ebx
+  int v199; // r10d
+  int v200; // eax
+  int v201; // r13d
+  int v202; // ecx
+  int v203; // r9d
   int v204; // ecx
-  int v205; // ecx
-  int v206; // ST3C_4
-  int v207; // er8
-  int v208; // ST2C_4
-  int v209; // eax
-  int v210; // er8
-  int v211; // ST40_4
-  int v212; // edx
-  int v213; // ST20_4
-  int v214; // er9
-  int v215; // eax
-  int v216; // er10
+  int v205; // eax
+  int v206; // r11d
+  int v207; // ecx
+  int v208; // r10d
+  int v209; // ecx
+  int v210; // r8d
+  int v211; // eax
+  int v212; // r11d
+  int v213; // r8d
+  int v214; // edx
+  int v215; // r9d
+  int v216; // r8d
   int v217; // eax
-  int v218; // ST28_4
-  int v219; // ST24_4
-  int v220; // ebx
-  int v221; // er13
-  int v222; // er11
-  int v223; // eax
-  int v224; // er14
-  int v225; // er8
-  int v226; // ST4C_4
-  int v227; // ST34_4
-  int v228; // ST54_4
+  int v218; // edx
+  int v219; // r10d
+  int v220; // eax
+  int v221; // r9d
+  int v222; // ebx
+  int v223; // r13d
+  int v224; // r11d
+  int v225; // eax
+  int v226; // r10d
+  int v227; // r14d
+  int v228; // r8d
   int v229; // edx
-  int v230; // er9
-  int v231; // eax
-  int v232; // er15
-  int v233; // er10
-  int v234; // er14
-  int v235; // eax
-  int v236; // er11
-  int v237; // ST5C_4
-  int v238; // ST38_4
-  int v239; // ecx
-  int v240; // eax
-  int v241; // er11
-  int v242; // ebx
-  int v243; // er13
-  int v244; // eax
-  int v245; // ST30_4
-  int v246; // er15
-  int v247; // er8
-  int v248; // eax
-  int v249; // er12
-  int v250; // eax
-  int v251; // er14
-  int v252; // edx
-  int v253; // eax
-  int v254; // er10
-  int v255; // eax
-  int v256; // er11
-  int v257; // edi
-  int v258; // er9
-  unsigned int v259; // ebx
-  unsigned int v260; // eax
-  int v261; // er10
-  int v262; // er8
-  unsigned int v263; // eax
-  unsigned int v264; // er8
-  int v265; // er15
-  unsigned int *v266; // r9
-  int v267; // eax
-  int v268; // edx
-  int Dst; // [rsp+70h] [rbp-29h]
-  int v270; // [rsp+74h] [rbp-25h]
-  int v271; // [rsp+78h] [rbp-21h]
-  int v272; // [rsp+7Ch] [rbp-1Dh]
-  int v273; // [rsp+80h] [rbp-19h]
-  int v274; // [rsp+84h] [rbp-15h]
-  int v275; // [rsp+88h] [rbp-11h]
-  int v276; // [rsp+8Ch] [rbp-Dh]
-  int v277; // [rsp+90h] [rbp-9h]
-  int v278; // [rsp+94h] [rbp-5h]
-  int v279; // [rsp+98h] [rbp-1h]
-  int v280; // [rsp+9Ch] [rbp+3h]
-  int v281; // [rsp+A0h] [rbp+7h]
-  int v282; // [rsp+A4h] [rbp+Bh]
-  int v283; // [rsp+A8h] [rbp+Fh]
-  int v284; // [rsp+ACh] [rbp+13h]
+  int v230; // r11d
+  int v231; // r9d
+  int v232; // r8d
+  int v233; // eax
+  int v234; // edx
+  int v235; // r15d
+  int v236; // r10d
+  int v237; // r14d
+  int v238; // eax
+  int v239; // r9d
+  int v240; // r11d
+  int v241; // ecx
+  int v242; // eax
+  int v243; // r10d
+  int v244; // r11d
+  int v245; // ebx
+  int v246; // r13d
+  int v247; // eax
+  int v248; // r11d
+  int v249; // r15d
+  int v250; // r8d
+  int v251; // eax
+  int v252; // ebx
+  int v253; // r12d
+  int v254; // eax
+  int v255; // r15d
+  int v256; // r14d
+  int v257; // edx
+  int v258; // eax
+  int v259; // r10d
+  int v260; // r12d
+  int v261; // eax
+  int v262; // r14d
+  int v263; // r11d
+  int v264; // edi
+  int v265; // r9d
+  unsigned int v266; // ebx
+  unsigned int v267; // eax
+  int v268; // edi
+  int v269; // r10d
+  unsigned int v270; // eax
+  int v271; // ebx
+  unsigned int v272; // r8d
+  int v273; // eax
+  int v274; // r10d
+  int v275; // edx
+  unsigned int v276; // [rsp+20h] [rbp-79h]
+  int v277; // [rsp+20h] [rbp-79h]
+  int v278; // [rsp+20h] [rbp-79h]
+  int v279; // [rsp+20h] [rbp-79h]
+  unsigned int v280; // [rsp+24h] [rbp-75h]
+  int v281; // [rsp+24h] [rbp-75h]
+  int v282; // [rsp+24h] [rbp-75h]
+  int v283; // [rsp+24h] [rbp-75h]
+  unsigned int v284; // [rsp+28h] [rbp-71h]
+  int v285; // [rsp+28h] [rbp-71h]
+  int v286; // [rsp+28h] [rbp-71h]
+  int v287; // [rsp+28h] [rbp-71h]
+  unsigned int v288; // [rsp+2Ch] [rbp-6Dh]
+  int v289; // [rsp+2Ch] [rbp-6Dh]
+  int v290; // [rsp+2Ch] [rbp-6Dh]
+  int v291; // [rsp+2Ch] [rbp-6Dh]
+  unsigned int v292; // [rsp+30h] [rbp-69h]
+  int v293; // [rsp+30h] [rbp-69h]
+  int v294; // [rsp+30h] [rbp-69h]
+  int v295; // [rsp+30h] [rbp-69h]
+  int v296; // [rsp+30h] [rbp-69h]
+  unsigned int v297; // [rsp+34h] [rbp-65h]
+  int v298; // [rsp+34h] [rbp-65h]
+  int v299; // [rsp+34h] [rbp-65h]
+  int v300; // [rsp+34h] [rbp-65h]
+  unsigned int v301; // [rsp+38h] [rbp-61h]
+  int v302; // [rsp+38h] [rbp-61h]
+  int v303; // [rsp+38h] [rbp-61h]
+  int v304; // [rsp+38h] [rbp-61h]
+  int v305; // [rsp+38h] [rbp-61h]
+  unsigned int v306; // [rsp+3Ch] [rbp-5Dh]
+  int v307; // [rsp+3Ch] [rbp-5Dh]
+  int v308; // [rsp+3Ch] [rbp-5Dh]
+  int v309; // [rsp+3Ch] [rbp-5Dh]
+  unsigned int v310; // [rsp+40h] [rbp-59h]
+  int v311; // [rsp+40h] [rbp-59h]
+  int v312; // [rsp+40h] [rbp-59h]
+  int v313; // [rsp+40h] [rbp-59h]
+  unsigned int v314; // [rsp+44h] [rbp-55h]
+  int v315; // [rsp+44h] [rbp-55h]
+  int v316; // [rsp+44h] [rbp-55h]
+  unsigned int v317; // [rsp+48h] [rbp-51h]
+  int v318; // [rsp+48h] [rbp-51h]
+  int v319; // [rsp+48h] [rbp-51h]
+  int v320; // [rsp+4Ch] [rbp-4Dh]
+  int v321; // [rsp+4Ch] [rbp-4Dh]
+  int v322; // [rsp+4Ch] [rbp-4Dh]
+  int v323; // [rsp+4Ch] [rbp-4Dh]
+  unsigned int v324; // [rsp+50h] [rbp-49h]
+  int v325; // [rsp+50h] [rbp-49h]
+  int v326; // [rsp+50h] [rbp-49h]
+  unsigned int v327; // [rsp+54h] [rbp-45h]
+  int v328; // [rsp+54h] [rbp-45h]
+  int v329; // [rsp+54h] [rbp-45h]
+  int v330; // [rsp+54h] [rbp-45h]
+  unsigned int v331; // [rsp+58h] [rbp-41h]
+  int v332; // [rsp+58h] [rbp-41h]
+  unsigned int v333; // [rsp+5Ch] [rbp-3Dh]
+  int v334; // [rsp+5Ch] [rbp-3Dh]
+  int v335; // [rsp+5Ch] [rbp-3Dh]
+  int v336; // [rsp+5Ch] [rbp-3Dh]
+  unsigned int v337; // [rsp+60h] [rbp-39h]
+  int v338; // [rsp+60h] [rbp-39h]
+  int Dst; // [rsp+70h] [rbp-29h] BYREF
+  int v341; // [rsp+74h] [rbp-25h]
+  int v342; // [rsp+78h] [rbp-21h]
+  int v343; // [rsp+7Ch] [rbp-1Dh]
+  int v344; // [rsp+80h] [rbp-19h]
+  int v345; // [rsp+84h] [rbp-15h]
+  int v346; // [rsp+88h] [rbp-11h]
+  int v347; // [rsp+8Ch] [rbp-Dh]
+  int v348; // [rsp+90h] [rbp-9h]
+  int v349; // [rsp+94h] [rbp-5h]
+  int v350; // [rsp+98h] [rbp-1h]
+  int v351; // [rsp+9Ch] [rbp+3h]
+  int v352; // [rsp+A0h] [rbp+7h]
+  int v353; // [rsp+A4h] [rbp+Bh]
+  int v354; // [rsp+A8h] [rbp+Fh]
+  int v355; // [rsp+ACh] [rbp+13h]
 
   v2 = state;
-  v3 = state;
   memmove(&Dst, buffer, 0x40ui64);
-  v4 = v2[2];
-  v5 = v2[3];
-  v6 = __ROR4__(v2[1], 2);
-  v7 = v2[4]
-     + __ROL4__(*v2, 5)
-     + (v5 ^ v2[1] & (v4 ^ v2[3]))
-     + (__ROL4__(Dst, 8) & 0xFF00FF | __ROR4__(Dst, 8) & 0xFF00FF00)
-     + 1518500249;
-  v8 = __ROL4__(v270, 8) & 0xFF00FF | __ROR4__(v270, 8) & 0xFF00FF00;
-  v9 = v5 + 1518500249 + v8 + __ROL4__(v7, 5) + (v4 ^ *v2 & (v6 ^ v4));
+  v3 = v2[2];
+  v4 = v2[3];
+  v5 = __ROL4__(Dst, 8) & 0xFF00FF | __ROR4__(Dst, 8) & 0xFF00FF00;
+  v6 = v5 + 1518500249;
+  v333 = v5;
+  v7 = __ROR4__(v2[1], 2);
+  v8 = v2[4] + __ROL4__(*v2, 5) + (v4 ^ v2[1] & (v3 ^ v4)) + v6;
+  v301 = __ROL4__(v341, 8) & 0xFF00FF | __ROR4__(v341, 8) & 0xFF00FF00;
+  v9 = v4 + 1518500249 + v301 + __ROL4__(v8, 5) + (v3 ^ *v2 & (v7 ^ v3));
   v10 = __ROR4__(*v2, 2);
-  v11 = (v6 ^ v7 & (v10 ^ v6)) + 1518500249;
-  v7 = __ROR4__(v7, 2);
-  v12 = __ROL4__(v271, 8) & 0xFF00FF | __ROR4__(v271, 8) & 0xFF00FF00;
-  v13 = v12;
-  v14 = v4 + v11 + __ROL4__(v9, 5) + v12;
-  v15 = __ROL4__(v272, 8) & 0xFF00FF | __ROR4__(v272, 8) & 0xFF00FF00;
-  v16 = v9 & (v10 ^ v7);
-  v9 = __ROR4__(v9, 2);
-  v17 = v15 + __ROL4__(v14, 5) + (v10 ^ v16) + v6 + 1518500249;
-  v18 = v7 ^ v14 & (v9 ^ v7);
-  v19 = __ROL4__(v273, 8) & 0xFF00FF | __ROR4__(v273, 8) & 0xFF00FF00;
-  v14 = __ROR4__(v14, 2);
-  v20 = v19 + __ROL4__(v17, 5) + v18 + v10 + 1518500249;
-  v21 = v9 ^ v17 & (v14 ^ v9);
-  v22 = __ROL4__(v274, 8) & 0xFF00FF | __ROR4__(v274, 8) & 0xFF00FF00;
-  v17 = __ROR4__(v17, 2);
-  v23 = v22 + 1518500249 + __ROL4__(v20, 5) + v21 + v7;
-  v24 = v14 ^ v20 & (v17 ^ v14);
-  v25 = __ROL4__(v275, 8) & 0xFF00FF | __ROR4__(v275, 8) & 0xFF00FF00;
-  v20 = __ROR4__(v20, 2);
-  v26 = v25 + 1518500249 + __ROL4__(v23, 5) + v24 + v9;
-  v27 = __ROL4__(v276, 8) & 0xFF00FF | __ROR4__(v276, 8) & 0xFF00FF00;
-  v28 = v27 + __ROL4__(v26, 5) + 1518500249 + (v17 ^ v23 & (v20 ^ v17));
-  v23 = __ROR4__(v23, 2);
-  v29 = v28 + v14;
-  v30 = v20 ^ v26 & (v20 ^ v23);
-  v26 = __ROR4__(v26, 2);
-  v31 = __ROL4__(v277, 8) & 0xFF00FF | __ROR4__(v277, 8) & 0xFF00FF00;
-  v32 = v31 + __ROL4__(v29, 5) + 1518500249 + v30 + v17;
-  v33 = v23 ^ v29 & (v26 ^ v23);
-  v29 = __ROR4__(v29, 2);
-  v34 = __ROL4__(v278, 8) & 0xFF00FF | __ROR4__(v278, 8) & 0xFF00FF00;
-  v35 = v34 + __ROL4__(v32, 5) + 1518500249 + v33 + v20;
-  v36 = __ROL4__(v279, 8) & 0xFF00FF | __ROR4__(v279, 8) & 0xFF00FF00;
-  v37 = v36;
-  v38 = v26 ^ v32 & (v29 ^ v26);
-  v32 = __ROR4__(v32, 2);
-  v39 = v23 + 1518500249 + v38 + __ROL4__(v35, 5) + v36;
-  v40 = v35 & (v32 ^ v29);
-  v35 = __ROR4__(v35, 2);
-  v41 = __ROL4__(v280, 8) & 0xFF00FF | __ROR4__(v280, 8) & 0xFF00FF00;
-  v42 = v26 + 1518500249 + v41 + __ROL4__(v39, 5) + (v29 ^ v40);
-  v43 = v32 ^ v39 & (v35 ^ v32);
-  v39 = __ROR4__(v39, 2);
-  v44 = v29 + 1518500249 + (__ROL4__(v281, 8) & 0xFF00FF | __ROR4__(v281, 8) & 0xFF00FF00) + __ROL4__(v42, 5) + v43;
-  v45 = v35 ^ v42 & (v35 ^ v39);
-  v42 = __ROR4__(v42, 2);
-  v46 = v39 ^ v44 & (v42 ^ v39);
-  v47 = __ROL4__(v282, 8) & 0xFF00FF | __ROR4__(v282, 8) & 0xFF00FF00;
-  v48 = v47 + __ROL4__(v44, 5) + v45;
-  v44 = __ROR4__(v44, 2);
-  v49 = v32 + 1518500249 + v48;
-  v50 = __ROL4__(v283, 8) & 0xFF00FF | __ROR4__(v283, 8) & 0xFF00FF00;
-  v51 = v50;
-  v52 = v35 + 1518500249 + v46 + __ROL4__(v49, 5) + v50;
-  v53 = __ROL4__(v284, 8) & 0xFF00FF | __ROR4__(v284, 8) & 0xFF00FF00;
-  v54 = v42 ^ v49 & (v44 ^ v42);
-  v49 = __ROR4__(v49, 2);
-  v55 = v53;
-  v56 = v39 + 1518500249 + v54 + __ROL4__(v52, 5) + v53;
-  v57 = __ROL4__((__ROL4__(Dst, 8) & 0xFF00FF | __ROR4__(Dst, 8) & 0xFF00FF00) ^ v13 ^ v31 ^ v47, 1);
-  v58 = v15 ^ v22 ^ v41;
-  v59 = __ROL4__(v8 ^ v15 ^ v34 ^ v51, 1);
-  v60 = v52 & (v49 ^ v44);
-  v52 = __ROR4__(v52, 2);
-  v61 = __ROL4__(v57 ^ v58, 1);
-  v62 = v57 + __ROL4__(v56, 5) + 1518500249 + (v44 ^ v60) + v42;
-  v63 = __ROL4__(v13 ^ v19 ^ v37 ^ v55, 1);
-  v64 = __ROL4__(v59 ^ v19 ^ v25 ^ (__ROL4__(v281, 8) & 0xFF00FF | __ROR4__(v281, 8) & 0xFF00FF00), 1);
-  v65 = v49 ^ v56 & (v52 ^ v49);
-  v56 = __ROR4__(v56, 2);
-  v66 = v59 + __ROL4__(v62, 5) + 1518500249 + v65 + v44;
-  v67 = v52 ^ v62 & (v52 ^ v56);
-  v62 = __ROR4__(v62, 2);
-  v68 = v63 + __ROL4__(v66, 5) + 1518500249 + v67 + v49;
-  v69 = v61 + __ROL4__(v68, 5) + 1518500249 + (v56 ^ v66 & (v62 ^ v56)) + v52;
-  v66 = __ROR4__(v66, 2);
-  v70 = v68 ^ v66 ^ v62;
-  v68 = __ROR4__(v68, 2);
-  v71 = v64 + __ROL4__(v69, 5) + 1859775393 + v70 + v56;
-  v72 = __ROL4__(v63 ^ v22 ^ v27 ^ v47, 1);
-  v73 = __ROL4__(v57 ^ v72 ^ v31 ^ v37, 1);
-  v74 = v72 + __ROL4__(v71, 5) + 1859775393 + (v69 ^ v68 ^ v66) + v62;
-  v69 = __ROR4__(v69, 2);
-  v75 = v68 ^ v71;
-  v71 = __ROR4__(v71, 2);
-  v76 = __ROL4__(v61 ^ v25 ^ v31 ^ v51, 1);
-  v77 = __ROL4__(v64 ^ v27 ^ v34 ^ v55, 1);
-  v78 = v76 + __ROL4__(v74, 5) + 1859775393 + (v69 ^ v75) + v66;
-  v79 = v74 ^ v71;
-  v74 = __ROR4__(v74, 2);
-  v80 = __ROL4__(v59 ^ v76 ^ v34 ^ v41, 1);
-  v81 = v77 + __ROL4__(v78, 5) + 1859775393 + (v69 ^ v79) + v68;
-  v82 = v78 ^ v74 ^ v71;
-  v78 = __ROR4__(v78, 2);
-  v83 = v73 + __ROL4__(v81, 5) + 1859775393 + v82 + v69;
-  v84 = v81 ^ v78 ^ v74;
-  v81 = __ROR4__(v81, 2);
-  v85 = v80 + __ROL4__(v83, 5) + 1859775393 + v84 + v71;
-  v86 = __ROL4__(v63 ^ v77 ^ v37 ^ (__ROL4__(v281, 8) & 0xFF00FF | __ROR4__(v281, 8) & 0xFF00FF00), 1);
-  v87 = v83 ^ v81 ^ v78;
-  v83 = __ROR4__(v83, 2);
-  v88 = v86 + 1859775393 + __ROL4__(v85, 5) + v87 + v74;
-  v89 = v81 ^ v85;
-  v85 = __ROR4__(v85, 2);
-  v90 = __ROL4__(v61 ^ v73 ^ v41 ^ v47, 1);
-  v91 = v90 + 1859775393 + __ROL4__(v88, 5) + (v83 ^ v89) + v78;
-  v92 = v83 ^ v88 ^ v85;
-  v93 = __ROL4__(v64 ^ v80 ^ (__ROL4__(v281, 8) & 0xFF00FF | __ROR4__(v281, 8) & 0xFF00FF00) ^ v51, 1);
-  v88 = __ROR4__(v88, 2);
-  v94 = v93 + 1859775393 + __ROL4__(v91, 5) + v92 + v81;
-  v95 = v91 ^ v88 ^ v85;
-  v91 = __ROR4__(v91, 2);
-  v96 = __ROL4__(v72 ^ v86 ^ v47 ^ v55, 1);
-  v97 = v96 + 1859775393 + __ROL4__(v94, 5) + v95 + v83;
-  v98 = v94 ^ v91 ^ v88;
-  v99 = __ROL4__(v57 ^ v76 ^ v90 ^ v51, 1);
-  v94 = __ROR4__(v94, 2);
-  v100 = v99 + 1859775393 + __ROL4__(v97, 5) + v98 + v85;
-  v101 = __ROL4__(v59 ^ v77 ^ v93 ^ v55, 1);
-  v102 = v97 ^ v94 ^ v91;
-  v97 = __ROR4__(v97, 2);
-  v103 = v101 + 1859775393 + __ROL4__(v100, 5) + v102 + v88;
-  v104 = v94 ^ v100;
-  v100 = __ROR4__(v100, 2);
-  v105 = __ROL4__(v57 ^ v63 ^ v73 ^ v96, 1);
-  v106 = v105 + 1859775393 + __ROL4__(v103, 5) + (v97 ^ v104) + v91;
-  v107 = v103 ^ v100;
-  v103 = __ROR4__(v103, 2);
-  v108 = __ROL4__(v59 ^ v61 ^ v80 ^ v99, 1);
-  v109 = v108 + 1859775393 + __ROL4__(v106, 5) + (v97 ^ v107) + v94;
-  v110 = v106 ^ v103 ^ v100;
-  LODWORD(v2) = __ROL4__(v63 ^ v64 ^ v86 ^ v101, 1);
-  v111 = __ROL4__(v63 ^ v64 ^ v86 ^ v101, 1);
-  v106 = __ROR4__(v106, 2);
-  v112 = (_DWORD)v2 + __ROL4__(v109, 5) + 1859775393 + v110 + v97;
-  v113 = v109 ^ v106 ^ v103;
-  v114 = __ROL4__(v105 ^ v61 ^ v72 ^ v90, 1);
-  v109 = __ROR4__(v109, 2);
-  v115 = v114 + 1859775393 + __ROL4__(v112, 5);
-  v116 = v93;
-  v117 = v115 + v113 + v100;
-  v118 = __ROL4__(v108 ^ v64 ^ v76 ^ v93, 1);
-  v119 = v112 ^ v109 ^ v106;
-  v112 = __ROR4__(v112, 2);
-  v120 = v118 + __ROL4__(v117, 5) + 1859775393 + v119 + v103;
-  v121 = v112 ^ v109 ^ v117;
-  v117 = __ROR4__(v117, 2);
-  v122 = __ROL4__((unsigned int)v2 ^ v72 ^ v77 ^ v96, 1);
-  v123 = v122 + 1859775393 + __ROL4__(v120, 5) + v121 + v106;
-  v124 = v112 ^ v120 ^ v117;
-  v125 = __ROL4__(v114 ^ v76 ^ v73 ^ v99, 1);
-  v120 = __ROR4__(v120, 2);
-  v126 = v123 ^ v120 ^ v117;
-  v127 = v125 + 1859775393 + __ROL4__(v123, 5) + v124 + v109;
-  LODWORD(v2) = v77 ^ v80 ^ v101;
-  v123 = __ROR4__(v123, 2);
-  v128 = v122 ^ v73 ^ v86;
-  v129 = v90;
-  LODWORD(v2) = __ROL4__(v118 ^ (unsigned int)v2, 1);
-  v130 = __ROL4__(v105 ^ v128, 1);
-  v131 = v112 + 1859775393 + (_DWORD)v2 + __ROL4__(v127, 5) + v126;
-  v132 = (signed int)v2;
-  v133 = v130 + (v127 & v123 | v120 & (v127 | v123));
-  v127 = __ROR4__(v127, 2);
-  v134 = v117 + v133 + __ROL4__(v131, 5) - 1894007588;
-  v135 = __ROL4__(v108 ^ v125 ^ v80 ^ v90, 1);
-  v136 = v111;
-  v137 = v135;
-  v138 = v135 + (v131 & v127 | v123 & (v131 | v127));
-  v131 = __ROR4__(v131, 2);
-  v139 = (unsigned int)v2 ^ v86 ^ v116;
-  LODWORD(v2) = v96;
-  v140 = v120 + v138 + __ROL4__(v134, 5) - 1894007588;
-  v141 = __ROL4__(v111 ^ v139, 1);
-  v142 = v131 & v134;
-  v143 = v127 & (v131 | v134);
-  v134 = __ROR4__(v134, 2);
-  v144 = v123 + v141 + (v142 | v143) + __ROL4__(v140, 5) - 1894007588;
-  v145 = __ROL4__(v114 ^ v130 ^ v129 ^ v96, 1);
-  v146 = v145 + (v140 & v134 | v131 & (v140 | v134));
-  v140 = __ROR4__(v140, 2);
-  v147 = v127 + v146 + __ROL4__(v144, 5) - 1894007588;
-  v148 = __ROL4__(v118 ^ v137 ^ v116 ^ v99, 1);
-  v149 = v131 + v148 + (v144 & v140 | v134 & (v144 | v140)) + __ROL4__(v147, 5) - 1894007588;
-  v144 = __ROR4__(v144, 2);
-  v150 = __ROL4__(v122 ^ v141 ^ (unsigned int)v2 ^ v101, 1);
-  v151 = v147 & v144 | v140 & (v147 | v144);
-  v147 = __ROR4__(v147, 2);
-  v152 = __ROL4__(v105 ^ v125 ^ v145 ^ v99, 1);
-  v153 = v134 + v150 + v151 + __ROL4__(v149, 5) - 1894007588;
-  v154 = v149 & v147 | v144 & (v149 | v147);
-  v149 = __ROR4__(v149, 2);
-  v155 = v140 + v152 + v154 + __ROL4__(v153, 5) - 1894007588;
-  v156 = __ROL4__(v108 ^ v132 ^ v148 ^ v101, 1);
-  v157 = v156 + (v149 & v153 | v147 & (v149 | v153));
-  v153 = __ROR4__(v153, 2);
-  v158 = v144 + v157 + __ROL4__(v155, 5) - 1894007588;
-  v159 = __ROL4__(v105 ^ v111 ^ v130 ^ v150, 1);
-  v160 = __ROL4__(v108 ^ v114 ^ v137 ^ v152, 1);
-  v161 = v155 & v153 | v149 & (v155 | v153);
-  v155 = __ROR4__(v155, 2);
-  v162 = v147 + v159 + v161 + __ROL4__(v158, 5) - 1894007588;
-  v163 = v153 & (v158 | v155);
-  v164 = v158 & v155;
-  v158 = __ROR4__(v158, 2);
-  v165 = v160 + (v164 | v163);
-  v166 = v162 & v158;
-  v167 = v149 + v165 + __ROL4__(v162, 5) - 1894007588;
-  v168 = v155 & (v162 | v158);
-  v162 = __ROR4__(v162, 2);
-  LODWORD(v2) = __ROL4__(v136 ^ v118 ^ v141 ^ v156, 1);
-  v169 = v153 + (_DWORD)v2 + (v166 | v168);
-  v170 = __ROL4__(v160 ^ v118 ^ v125 ^ v148, 1);
-  v171 = v167 & v162;
-  v172 = (unsigned int)v2 ^ v122 ^ v132 ^ v150;
-  v173 = __ROL4__(v136 ^ v118 ^ v141 ^ v156, 1);
-  v174 = __ROL4__(v159 ^ v114 ^ v122 ^ v145, 1);
-  v175 = v169 + __ROL4__(v167, 5) - 1894007588;
-  v176 = v167 | v162;
-  v167 = __ROR4__(v167, 2);
-  v177 = v171 | v158 & v176;
-  v178 = v167 & v175;
-  v179 = v155 + v174 + v177 + __ROL4__(v175, 5) - 1894007588;
-  v180 = v167 | v175;
-  v175 = __ROR4__(v175, 2);
-  v181 = v158 + v170 + (v178 | v162 & v180) + __ROL4__(v179, 5) - 1894007588;
-  v182 = __ROL4__(v172, 1) + (v179 & v175 | v167 & (v179 | v175)) - 1894007588;
-  v179 = __ROR4__(v179, 2);
-  v183 = __ROL4__(v181, 5) + v182 + v162;
-  v184 = v181 & v179 | v175 & (v181 | v179);
-  v181 = __ROR4__(v181, 2);
-  v185 = __ROL4__(v174 ^ v125 ^ v130 ^ v152, 1);
-  v186 = v183 & v181;
-  v187 = v167 - 1894007588 + v185 + v184 + __ROL4__(v183, 5);
-  v188 = __ROL4__(v170 ^ v132 ^ v137 ^ v156, 1);
-  v189 = v183 | v181;
-  v183 = __ROR4__(v183, 2);
-  v190 = v175 - 1894007588 + v188 + (v186 | v179 & v189) + __ROL4__(v187, 5);
-  v191 = __ROL4__(v159 ^ __ROL4__(v172, 1) ^ v130 ^ v141, 1);
-  v192 = v179 + v191 + (v187 & v183 | v181 & (v187 | v183));
-  v187 = __ROR4__(v187, 2);
-  v193 = v192 + __ROL4__(v190, 5) - 1894007588;
-  v194 = __ROL4__(v160 ^ v185 ^ v137 ^ v145, 1);
-  v195 = v194 + (v187 & v190 | v183 & (v187 | v190));
-  v190 = __ROR4__(v190, 2);
-  v196 = v181 + v195 + __ROL4__(v193, 5) - 1894007588;
-  v197 = v193 & v190;
-  v198 = __ROL4__(v173 ^ v188 ^ v141 ^ v148, 1);
-  v199 = v187 & (v193 | v190);
-  v193 = __ROR4__(v193, 2);
-  v200 = v183 + v198 + (v197 | v199);
-  v201 = v196 & v193;
-  v202 = __ROL4__(v173 ^ v188 ^ v141 ^ v148, 1);
-  v203 = v200 + __ROL4__(v196, 5) - 1894007588;
-  v204 = v196 | v193;
-  v196 = __ROR4__(v196, 2);
-  v205 = v201 | v190 & v204;
-  v206 = __ROL4__(v174 ^ v191 ^ v145 ^ v150, 1);
-  v207 = __ROL4__(v203, 5);
-  v208 = __ROL4__(v170 ^ v194 ^ v148 ^ v152, 1);
-  v209 = v190 - 899497514 + v208 + (v203 ^ v196 ^ v193);
-  v203 = __ROR4__(v203, 2);
-  v210 = v187 + v206 + v205 - 1894007588 + v207;
-  v211 = __ROL4__(__ROL4__(v172, 1) ^ v198 ^ v150 ^ v156, 1);
-  v212 = v209 + __ROL4__(v210, 5);
-  v213 = __ROL4__(v159 ^ v185 ^ v206 ^ v152, 1);
-  v214 = v193 + v211 + (v210 ^ v203 ^ v196) + __ROL4__(v212, 5) - 899497514;
-  v210 = __ROR4__(v210, 2);
-  v215 = v213 + (v210 ^ v203 ^ v212);
-  v212 = __ROR4__(v212, 2);
-  v216 = v196 + v215 + __ROL4__(v214, 5) - 899497514;
-  v217 = v210 ^ v214 ^ v212;
-  v218 = __ROL4__(v160 ^ v174 ^ v194 ^ v213, 1);
-  v214 = __ROR4__(v214, 2);
-  v219 = __ROL4__(v160 ^ v188 ^ v208 ^ v156, 1);
-  v220 = v170 ^ v198 ^ v219;
-  v221 = __ROL4__(v172, 1);
-  v222 = v203 + v219 + v217 + __ROL4__(v216, 5) - 899497514;
-  v223 = v216 ^ v214 ^ v212;
-  v216 = __ROR4__(v216, 2);
-  v224 = __ROL4__(v159 ^ v173 ^ v191 ^ v211, 1);
-  v225 = v210 + v224 + v223 + __ROL4__(v222, 5) - 899497514;
-  v226 = __ROL4__(v159 ^ v173 ^ v191 ^ v211, 1);
-  v227 = __ROL4__(v173 ^ v220, 1);
-  v228 = __ROL4__(v224 ^ v174 ^ v221 ^ v206, 1);
-  v229 = v212 + v218 + (v222 ^ v216 ^ v214) + __ROL4__(v225, 5) - 899497514;
-  v222 = __ROR4__(v222, 2);
-  v230 = v214 + v227 + (v225 ^ v222 ^ v216) + __ROL4__(v229, 5) - 899497514;
-  v225 = __ROR4__(v225, 2);
-  v231 = v216 + v228 + (v225 ^ v222 ^ v229);
-  v229 = __ROR4__(v229, 2);
-  v232 = v185;
-  v233 = v231 + __ROL4__(v230, 5) - 899497514;
-  v234 = __ROL4__(v218 ^ v170 ^ v185 ^ v208, 1);
-  v235 = v234 + (v225 ^ v230 ^ v229) - 899497514;
-  v230 = __ROR4__(v230, 2);
-  v236 = v235 + v222;
-  v237 = __ROL4__(v227 ^ v221 ^ v188 ^ v211, 1);
-  v238 = __ROL4__(v218 ^ v170 ^ v185 ^ v208, 1);
-  v239 = __ROL4__(v233, 5);
-  v240 = v225 + v237 - 899497514 + (v233 ^ v230 ^ v229);
-  v233 = __ROR4__(v233, 2);
-  v241 = v239 + v236;
-  v242 = v240 + __ROL4__(v241, 5);
-  v243 = __ROL4__(v234 ^ v188 ^ v194 ^ v219, 1);
-  v244 = v241 ^ v233 ^ v230;
-  v245 = __ROL4__(v228 ^ v232 ^ v191 ^ v213, 1);
-  v241 = __ROR4__(v241, 2);
-  v246 = v229 + v245 + v244 - 899497514 + __ROL4__(v242, 5);
-  v247 = __ROL4__(v226 ^ v237 ^ v191 ^ v202, 1);
-  v248 = v230 + v243 + (v242 ^ v241 ^ v233) - 899497514;
-  v242 = __ROR4__(v242, 2);
-  v249 = v248 + __ROL4__(v246, 5);
-  v250 = v233 - 899497514 + v247 + (v242 ^ v241 ^ v246);
-  v246 = __ROR4__(v246, 2);
-  v251 = v250 + __ROL4__(v249, 5);
-  v252 = __ROL4__(v228 ^ v247 ^ v206 ^ v211, 1);
-  v253 = v242 ^ v249 ^ v246;
-  v254 = __ROL4__(v218 ^ v245 ^ v194 ^ v206, 1);
-  v249 = __ROR4__(v249, 2);
-  LODWORD(v2) = v241 - 899497514 + v254 + v253 + __ROL4__(v251, 5);
-  v255 = v251 ^ v249 ^ v246;
-  v251 = __ROR4__(v251, 2);
-  v256 = __ROL4__(v227 ^ v243 ^ v202 ^ v208, 1);
-  v257 = v242 - 899497514 + v256 + v255 + __ROL4__((_DWORD)v2, 5);
-  v258 = __ROL4__(v238 ^ v254 ^ v208 ^ v213, 1);
-  v259 = v246 - 899497514 + v252 + ((unsigned int)v2 ^ v251 ^ v249) + __ROL4__(v257, 5);
+  v11 = (v7 ^ v8 & (v10 ^ v7)) + 1518500249;
+  v12 = __ROR4__(v8, 2);
+  v310 = __ROL4__(v342, 8) & 0xFF00FF | __ROR4__(v342, 8) & 0xFF00FF00;
+  v13 = v3 + v11 + __ROL4__(v9, 5) + v310;
+  v292 = __ROL4__(v343, 8) & 0xFF00FF | __ROR4__(v343, 8) & 0xFF00FF00;
+  v14 = v9 & (v10 ^ v12);
+  v15 = __ROR4__(v9, 2);
+  v16 = v292 + __ROL4__(v13, 5) + (v10 ^ v14) + v7 + 1518500249;
+  v17 = v12 ^ v13 & (v15 ^ v12);
+  v297 = __ROL4__(v344, 8) & 0xFF00FF | __ROR4__(v344, 8) & 0xFF00FF00;
+  v18 = __ROR4__(v13, 2);
+  v19 = v297 + __ROL4__(v16, 5) + v17 + v10 + 1518500249;
+  v20 = v15 ^ v16 & (v18 ^ v15);
+  v317 = __ROL4__(v345, 8) & 0xFF00FF | __ROR4__(v345, 8) & 0xFF00FF00;
+  v21 = __ROR4__(v16, 2);
+  v22 = v317 + 1518500249 + __ROL4__(v19, 5) + v20 + v12;
+  v23 = v18 ^ v19 & (v21 ^ v18);
+  v337 = __ROL4__(v346, 8) & 0xFF00FF | __ROR4__(v346, 8) & 0xFF00FF00;
+  v24 = __ROR4__(v19, 2);
+  v25 = v337 + 1518500249 + __ROL4__(v22, 5) + v23 + v15;
+  v331 = __ROL4__(v347, 8) & 0xFF00FF | __ROR4__(v347, 8) & 0xFF00FF00;
+  v26 = v331 + __ROL4__(v25, 5) + 1518500249 + (v21 ^ v22 & (v24 ^ v21));
+  v27 = __ROR4__(v22, 2);
+  v28 = v26 + v18;
+  v29 = v24 ^ v25 & (v24 ^ v27);
+  v30 = __ROR4__(v25, 2);
+  v288 = __ROL4__(v348, 8) & 0xFF00FF | __ROR4__(v348, 8) & 0xFF00FF00;
+  v31 = v288 + __ROL4__(v28, 5) + 1518500249 + v29 + v21;
+  v32 = v27 ^ v28 & (v30 ^ v27);
+  v33 = __ROR4__(v28, 2);
+  v284 = __ROL4__(v349, 8) & 0xFF00FF | __ROR4__(v349, 8) & 0xFF00FF00;
+  v34 = v284 + __ROL4__(v31, 5) + 1518500249 + v32 + v24;
+  v314 = __ROL4__(v350, 8) & 0xFF00FF | __ROR4__(v350, 8) & 0xFF00FF00;
+  v35 = v30 ^ v31 & (v33 ^ v30);
+  v36 = __ROR4__(v31, 2);
+  v37 = v27 + 1518500249 + v35 + __ROL4__(v34, 5) + v314;
+  v38 = v34 & (v36 ^ v33);
+  v39 = __ROR4__(v34, 2);
+  v306 = __ROL4__(v351, 8) & 0xFF00FF | __ROR4__(v351, 8) & 0xFF00FF00;
+  v40 = v30 + 1518500249 + v306 + __ROL4__(v37, 5) + (v33 ^ v38);
+  v41 = v36 ^ v37 & (v39 ^ v36);
+  v324 = __ROL4__(v352, 8) & 0xFF00FF | __ROR4__(v352, 8) & 0xFF00FF00;
+  v42 = __ROR4__(v37, 2);
+  v43 = v33 + 1518500249 + v324 + __ROL4__(v40, 5) + v41;
+  v44 = v39 ^ v40 & (v39 ^ v42);
+  v45 = __ROR4__(v40, 2);
+  v46 = v42 ^ v43 & (v45 ^ v42);
+  v327 = __ROL4__(v353, 8) & 0xFF00FF | __ROR4__(v353, 8) & 0xFF00FF00;
+  v47 = __ROL4__(v43, 5);
+  v48 = __ROR4__(v43, 2);
+  v49 = v36 + 1518500249 + v327 + v47 + v44;
+  v276 = __ROL4__(v354, 8) & 0xFF00FF | __ROR4__(v354, 8) & 0xFF00FF00;
+  v50 = v39 + 1518500249 + v46 + __ROL4__(v49, 5) + v276;
+  v51 = v45 ^ v49 & (v48 ^ v45);
+  v52 = __ROR4__(v49, 2);
+  v280 = __ROL4__(v355, 8) & 0xFF00FF | __ROR4__(v355, 8) & 0xFF00FF00;
+  v53 = v42 + 1518500249 + v51 + __ROL4__(v50, 5) + v280;
+  v320 = __ROL4__(v333 ^ v310 ^ v288 ^ v327, 1);
+  v54 = v292 ^ v317 ^ v306;
+  v293 = __ROL4__(v301 ^ v292 ^ v284 ^ v276, 1);
+  v55 = v50 & (v52 ^ v48);
+  v56 = __ROR4__(v50, 2);
+  v57 = __ROL4__(v320 ^ v54, 1);
+  v58 = v320 + __ROL4__(v53, 5) + 1518500249 + (v48 ^ v55) + v45;
+  v302 = __ROL4__(v310 ^ v297 ^ v314 ^ v280, 1);
+  v59 = __ROL4__(v293 ^ v297 ^ v337 ^ v324, 1);
+  v60 = v52 ^ v53 & (v56 ^ v52);
+  v61 = __ROR4__(v53, 2);
+  v62 = v293 + __ROL4__(v58, 5) + 1518500249 + v60 + v48;
+  v63 = v56 ^ v58 & (v56 ^ v61);
+  v64 = __ROR4__(v58, 2);
+  v65 = v302 + __ROL4__(v62, 5) + 1518500249 + v63 + v52;
+  v66 = v57 + __ROL4__(v65, 5) + 1518500249 + (v61 ^ v62 & (v64 ^ v61)) + v56;
+  v67 = __ROR4__(v62, 2);
+  v68 = v65 ^ v67 ^ v64;
+  v69 = __ROR4__(v65, 2);
+  v70 = v59 + __ROL4__(v66, 5) + 1859775393 + v68 + v61;
+  v311 = __ROL4__(v302 ^ v317 ^ v331 ^ v327, 1);
+  v71 = __ROL4__(v320 ^ v311 ^ v288 ^ v314, 1);
+  v72 = v311 + __ROL4__(v70, 5) + 1859775393 + (v66 ^ v69 ^ v67) + v64;
+  v73 = __ROR4__(v66, 2);
+  v74 = v69 ^ v70;
+  v75 = __ROR4__(v70, 2);
+  v76 = __ROL4__(v57 ^ v337 ^ v288 ^ v276, 1);
+  v77 = __ROL4__(v59 ^ v331 ^ v284 ^ v280, 1);
+  v78 = v76 + __ROL4__(v72, 5) + 1859775393 + (v73 ^ v74) + v67;
+  v79 = v72 ^ v75;
+  v80 = __ROR4__(v72, 2);
+  v81 = __ROL4__(v293 ^ v76 ^ v284 ^ v306, 1);
+  v82 = v77 + __ROL4__(v78, 5) + 1859775393 + (v73 ^ v79) + v69;
+  v83 = v78 ^ v80 ^ v75;
+  v84 = __ROR4__(v78, 2);
+  v85 = v71 + __ROL4__(v82, 5) + 1859775393 + v83 + v73;
+  v86 = v82 ^ v84 ^ v80;
+  v87 = __ROR4__(v82, 2);
+  v88 = v81 + __ROL4__(v85, 5) + 1859775393 + v86 + v75;
+  v289 = __ROL4__(v302 ^ v77 ^ v314 ^ v324, 1);
+  v89 = v85 ^ v87 ^ v84;
+  v90 = __ROR4__(v85, 2);
+  v91 = v289 + 1859775393 + __ROL4__(v88, 5) + v89 + v80;
+  v92 = v87 ^ v88;
+  v93 = __ROR4__(v88, 2);
+  v307 = __ROL4__(v57 ^ v71 ^ v306 ^ v327, 1);
+  v94 = v307 + 1859775393 + __ROL4__(v91, 5) + (v90 ^ v92) + v84;
+  v95 = v90 ^ v91 ^ v93;
+  v298 = __ROL4__(v59 ^ v81 ^ v324 ^ v276, 1);
+  v96 = __ROR4__(v91, 2);
+  v97 = v298 + 1859775393 + __ROL4__(v94, 5) + v95 + v87;
+  v98 = v94 ^ v96 ^ v93;
+  v99 = __ROR4__(v94, 2);
+  v285 = __ROL4__(v311 ^ v289 ^ v327 ^ v280, 1);
+  v100 = v285 + 1859775393 + __ROL4__(v97, 5) + v98 + v90;
+  v101 = v97 ^ v99 ^ v96;
+  v277 = __ROL4__(v320 ^ v76 ^ v307 ^ v276, 1);
+  v102 = __ROR4__(v97, 2);
+  v103 = v277 + 1859775393 + __ROL4__(v100, 5) + v101 + v93;
+  v281 = __ROL4__(v293 ^ v77 ^ v298 ^ v280, 1);
+  v104 = v100 ^ v102 ^ v99;
+  v105 = __ROR4__(v100, 2);
+  v106 = v281 + 1859775393 + __ROL4__(v103, 5) + v104 + v96;
+  v107 = v102 ^ v103;
+  v108 = __ROR4__(v103, 2);
+  v321 = __ROL4__(v320 ^ v302 ^ v71 ^ v285, 1);
+  v109 = v321 + 1859775393 + __ROL4__(v106, 5) + (v105 ^ v107) + v99;
+  v110 = v106 ^ v108;
+  v111 = __ROR4__(v106, 2);
+  v328 = __ROL4__(v293 ^ v57 ^ v81 ^ v277, 1);
+  v112 = v328 + 1859775393 + __ROL4__(v109, 5) + (v105 ^ v110) + v102;
+  v113 = v109 ^ v111 ^ v108;
+  v334 = __ROL4__(v302 ^ v59 ^ v289 ^ v281, 1);
+  v114 = __ROR4__(v109, 2);
+  v115 = v334 + __ROL4__(v112, 5) + 1859775393 + v113 + v105;
+  v116 = v112 ^ v114 ^ v111;
+  v318 = __ROL4__(v321 ^ v57 ^ v311 ^ v307, 1);
+  v117 = __ROR4__(v112, 2);
+  v118 = v298;
+  v119 = v318 + 1859775393 + __ROL4__(v115, 5) + v116 + v108;
+  v299 = __ROL4__(v328 ^ v59 ^ v76 ^ v298, 1);
+  v120 = v115 ^ v117 ^ v114;
+  v121 = __ROR4__(v115, 2);
+  v122 = v299 + __ROL4__(v119, 5) + 1859775393 + v120 + v111;
+  v123 = v121 ^ v117 ^ v119;
+  v124 = __ROR4__(v119, 2);
+  v332 = __ROL4__(v334 ^ v311 ^ v77 ^ v285, 1);
+  v125 = v332 + 1859775393 + __ROL4__(v122, 5) + v123 + v114;
+  v126 = v121 ^ v122 ^ v124;
+  v303 = __ROL4__(v318 ^ v76 ^ v71 ^ v277, 1);
+  v127 = __ROR4__(v122, 2);
+  v128 = v125 ^ v127 ^ v124;
+  v129 = v303 + 1859775393 + __ROL4__(v125, 5) + v126 + v117;
+  LODWORD(v2) = v77 ^ v81 ^ v281;
+  v130 = __ROR4__(v125, 2);
+  v131 = v332 ^ v71 ^ v289;
+  v132 = v307;
+  LODWORD(v2) = __ROL4__(v299 ^ (unsigned int)v2, 1);
+  v315 = __ROL4__(v321 ^ v131, 1);
+  v133 = v121 + 1859775393 + (_DWORD)v2 + __ROL4__(v129, 5) + v128;
+  v294 = (int)v2;
+  v134 = v315 + (v129 & v130 | v127 & (v129 | v130));
+  v135 = __ROR4__(v129, 2);
+  v136 = v124 + v134 + __ROL4__(v133, 5) - 1894007588;
+  v137 = __ROL4__(v328 ^ v303 ^ v81 ^ v307, 1);
+  v138 = v334;
+  v325 = v137;
+  v139 = v137 + (v133 & v135 | v130 & (v133 | v135));
+  v140 = __ROR4__(v133, 2);
+  v141 = (unsigned int)v2 ^ v289 ^ v118;
+  LODWORD(v2) = v285;
+  v142 = v127 + v139 + __ROL4__(v136, 5) - 1894007588;
+  v308 = __ROL4__(v334 ^ v141, 1);
+  v143 = v140 & v136;
+  v144 = v135 & (v140 | v136);
+  v145 = __ROR4__(v136, 2);
+  v146 = v130 + v308 + (v143 | v144) + __ROL4__(v142, 5) - 1894007588;
+  v286 = __ROL4__(v318 ^ v315 ^ v132 ^ v285, 1);
+  v147 = v286 + (v142 & v145 | v140 & (v142 | v145));
+  v148 = __ROR4__(v142, 2);
+  v149 = v135 + v147 + __ROL4__(v146, 5) - 1894007588;
+  v290 = __ROL4__(v299 ^ v325 ^ v118 ^ v277, 1);
+  v150 = v140 + v290 + (v146 & v148 | v145 & (v146 | v148)) + __ROL4__(v149, 5) - 1894007588;
+  v151 = __ROR4__(v146, 2);
+  v312 = __ROL4__(v332 ^ v308 ^ (unsigned int)v2 ^ v281, 1);
+  v152 = v149 & v151 | v148 & (v149 | v151);
+  v153 = __ROR4__(v149, 2);
+  v278 = __ROL4__(v321 ^ v303 ^ v286 ^ v277, 1);
+  v154 = v145 + v312 + v152 + __ROL4__(v150, 5) - 1894007588;
+  v155 = v150 & v153 | v151 & (v150 | v153);
+  v156 = __ROR4__(v150, 2);
+  v157 = v148 + v278 + v155 + __ROL4__(v154, 5) - 1894007588;
+  v282 = __ROL4__(v328 ^ v294 ^ v290 ^ v281, 1);
+  v158 = v282 + (v156 & v154 | v153 & (v156 | v154));
+  v159 = __ROR4__(v154, 2);
+  v160 = v151 + v158 + __ROL4__(v157, 5) - 1894007588;
+  v335 = __ROL4__(v321 ^ v334 ^ v315 ^ v312, 1);
+  v322 = __ROL4__(v328 ^ v318 ^ v325 ^ v278, 1);
+  v161 = v157 & v159 | v156 & (v157 | v159);
+  v162 = __ROR4__(v157, 2);
+  v163 = v153 + v335 + v161 + __ROL4__(v160, 5) - 1894007588;
+  v164 = v159 & (v160 | v162);
+  v165 = v160 & v162;
+  v166 = __ROR4__(v160, 2);
+  v167 = v322 + (v165 | v164);
+  v168 = v163 & v166;
+  v169 = v156 + v167 + __ROL4__(v163, 5) - 1894007588;
+  v170 = v162 & (v163 | v166);
+  v171 = __ROR4__(v163, 2);
+  LODWORD(v2) = __ROL4__(v138 ^ v299 ^ v308 ^ v282, 1);
+  v172 = v159 + (_DWORD)v2 + (v168 | v170);
+  v173 = __ROL4__(v322 ^ v299 ^ v303 ^ v290, 1);
+  v174 = v169 & v171;
+  v319 = __ROL4__(v335 ^ v318 ^ v332 ^ v286, 1);
+  v175 = v172 + __ROL4__(v169, 5) - 1894007588;
+  v176 = v169 | v171;
+  v177 = __ROR4__(v169, 2);
+  v329 = __ROL4__((unsigned int)v2 ^ v332 ^ v294 ^ v312, 1);
+  v178 = v174 | v166 & v176;
+  v179 = v177 & v175;
+  v180 = v162 + v319 + v178 + __ROL4__(v175, 5) - 1894007588;
+  v181 = v177 | v175;
+  v182 = __ROR4__(v175, 2);
+  v183 = v166 + v173 + (v179 | v171 & v181) + __ROL4__(v180, 5) - 1894007588;
+  v184 = v329 + (v180 & v182 | v177 & (v180 | v182)) - 1894007588;
+  v185 = __ROR4__(v180, 2);
+  v186 = __ROL4__(v183, 5) + v184 + v171;
+  v187 = v183 & v185 | v182 & (v183 | v185);
+  v188 = __ROR4__(v183, 2);
+  v304 = __ROL4__(v319 ^ v303 ^ v315 ^ v278, 1);
+  v189 = v186 & v188;
+  v190 = v177 - 1894007588 + v304 + v187 + __ROL4__(v186, 5);
+  v295 = __ROL4__(v173 ^ v294 ^ v325 ^ v282, 1);
+  v191 = v186 | v188;
+  v192 = __ROR4__(v186, 2);
+  v193 = v182 - 1894007588 + v295 + (v189 | v185 & v191) + __ROL4__(v190, 5);
+  v316 = __ROL4__(v335 ^ v329 ^ v315 ^ v308, 1);
+  v194 = v185 + v316 + (v190 & v192 | v188 & (v190 | v192));
+  v195 = __ROR4__(v190, 2);
+  v196 = v194 + __ROL4__(v193, 5) - 1894007588;
+  v326 = __ROL4__(v322 ^ v304 ^ v325 ^ v286, 1);
+  v197 = v326 + (v195 & v193 | v192 & (v195 | v193));
+  v198 = __ROR4__(v193, 2);
+  v199 = v188 + v197 + __ROL4__(v196, 5) - 1894007588;
+  v200 = v196 & v198;
+  v201 = __ROL4__((unsigned int)v2 ^ v295 ^ v308 ^ v290, 1);
+  v202 = v195 & (v196 | v198);
+  v203 = __ROR4__(v196, 2);
+  v204 = v192 + v201 + (v200 | v202);
+  v205 = v199 & v203;
+  v338 = v201;
+  v206 = v204 + __ROL4__(v199, 5) - 1894007588;
+  v207 = v199 | v203;
+  v208 = __ROR4__(v199, 2);
+  v209 = v205 | v198 & v207;
+  v309 = __ROL4__(v319 ^ v316 ^ v286 ^ v312, 1);
+  v210 = __ROL4__(v206, 5);
+  v291 = __ROL4__(v173 ^ v326 ^ v290 ^ v278, 1);
+  v211 = v198 - 899497514 + v291 + (v206 ^ v208 ^ v203);
+  v212 = __ROR4__(v206, 2);
+  v213 = v195 + v309 + v209 - 1894007588 + v210;
+  v313 = __ROL4__(v329 ^ v201 ^ v312 ^ v282, 1);
+  v214 = v211 + __ROL4__(v213, 5);
+  v279 = __ROL4__(v335 ^ v304 ^ v309 ^ v278, 1);
+  v215 = v203 + v313 + (v213 ^ v212 ^ v208) + __ROL4__(v214, 5) - 899497514;
+  v216 = __ROR4__(v213, 2);
+  v217 = v279 + (v216 ^ v212 ^ v214);
+  v218 = __ROR4__(v214, 2);
+  v219 = v208 + v217 + __ROL4__(v215, 5) - 899497514;
+  v220 = v216 ^ v215 ^ v218;
+  v287 = __ROL4__(v322 ^ v319 ^ v326 ^ v279, 1);
+  v221 = __ROR4__(v215, 2);
+  v283 = __ROL4__(v322 ^ v295 ^ v291 ^ v282, 1);
+  v222 = v173 ^ v201 ^ v283;
+  v223 = v329;
+  v224 = v212 + v283 + v220 + __ROL4__(v219, 5) - 899497514;
+  v225 = v219 ^ v221 ^ v218;
+  v226 = __ROR4__(v219, 2);
+  v227 = __ROL4__(v335 ^ (unsigned int)v2 ^ v316 ^ v313, 1);
+  v228 = v216 + v227 + v225 + __ROL4__(v224, 5) - 899497514;
+  v323 = v227;
+  v300 = __ROL4__((unsigned int)v2 ^ v222, 1);
+  v330 = __ROL4__(v227 ^ v319 ^ v329 ^ v309, 1);
+  v229 = v218 + v287 + (v224 ^ v226 ^ v221) + __ROL4__(v228, 5) - 899497514;
+  v230 = __ROR4__(v224, 2);
+  v231 = v221 + v300 + (v228 ^ v230 ^ v226) + __ROL4__(v229, 5) - 899497514;
+  v232 = __ROR4__(v228, 2);
+  v233 = v226 + v330 + (v232 ^ v230 ^ v229);
+  v234 = __ROR4__(v229, 2);
+  v235 = v304;
+  v236 = v233 + __ROL4__(v231, 5) - 899497514;
+  v237 = __ROL4__(v287 ^ v173 ^ v304 ^ v291, 1);
+  v238 = v237 + (v232 ^ v231 ^ v234) - 899497514;
+  v239 = __ROR4__(v231, 2);
+  v240 = v238 + v230;
+  v336 = __ROL4__(v300 ^ v223 ^ v295 ^ v313, 1);
+  v305 = v237;
+  v241 = __ROL4__(v236, 5);
+  v242 = v232 + v336 - 899497514 + (v236 ^ v239 ^ v234);
+  v243 = __ROR4__(v236, 2);
+  v244 = v241 + v240;
+  v245 = v242 + __ROL4__(v244, 5);
+  v246 = __ROL4__(v237 ^ v295 ^ v326 ^ v283, 1);
+  v247 = v244 ^ v243 ^ v239;
+  v296 = __ROL4__(v330 ^ v235 ^ v316 ^ v279, 1);
+  v248 = __ROR4__(v244, 2);
+  v249 = v234 + v296 + v247 - 899497514 + __ROL4__(v245, 5);
+  v250 = __ROL4__(v323 ^ v336 ^ v316 ^ v338, 1);
+  v251 = v239 + v246 + (v245 ^ v248 ^ v243) - 899497514;
+  v252 = __ROR4__(v245, 2);
+  v253 = v251 + __ROL4__(v249, 5);
+  v254 = v243 - 899497514 + v250 + (v252 ^ v248 ^ v249);
+  v255 = __ROR4__(v249, 2);
+  v256 = v254 + __ROL4__(v253, 5);
+  v257 = __ROL4__(v330 ^ v250 ^ v309 ^ v313, 1);
+  v258 = v252 ^ v253 ^ v255;
+  v259 = __ROL4__(v287 ^ v296 ^ v326 ^ v309, 1);
+  v260 = __ROR4__(v253, 2);
+  LODWORD(v2) = v248 - 899497514 + v259 + v258 + __ROL4__(v256, 5);
+  v261 = v256 ^ v260 ^ v255;
+  v262 = __ROR4__(v256, 2);
+  v263 = __ROL4__(v300 ^ v246 ^ v338 ^ v291, 1);
+  v264 = v252 - 899497514 + v263 + v261 + __ROL4__((_DWORD)v2, 5);
+  v265 = __ROL4__(v305 ^ v259 ^ v291 ^ v279, 1);
+  v266 = v255 - 899497514 + v257 + ((unsigned int)v2 ^ v262 ^ v260) + __ROL4__(v264, 5);
   LODWORD(v2) = __ROR4__((_DWORD)v2, 2);
-  v260 = v257 ^ (unsigned int)v2 ^ v251;
-  v257 = __ROR4__(v257, 2);
-  v261 = v249 + v258 + v260 - 899497514 + __ROL4__(v259, 5);
-  v262 = __ROL4__(v261, 5) + __ROL4__(v237 ^ v256 ^ v211 ^ v219, 1);
-  v263 = v259;
-  v259 = __ROR4__(v259, 2);
-  v264 = v251 + (v257 ^ (unsigned int)v2 ^ v263) - 899497514 + v262;
-  v265 = v258 ^ v219;
-  v266 = v3;
-  v267 = v257 ^ v261 ^ v259;
-  v261 = __ROR4__(v261, 2);
-  v266[3] += v261;
-  v268 = (_DWORD)v2 + v267 - 899497514 + __ROL4__(v264, 5) + __ROL4__(v226 ^ v245 ^ v213 ^ v252, 1);
-  v266[1] += v268;
-  v266[2] += __ROR4__(v264, 2);
-  *v266 += __ROL4__(v268, 5) + __ROL4__(v218 ^ v243 ^ v265, 1) - 899497514 + v257 + (v264 ^ v261 ^ v259);
-  v266[4] += v259;
+  v267 = v264 ^ (unsigned int)v2 ^ v262;
+  v268 = __ROR4__(v264, 2);
+  v269 = v260 + v265 + v267 - 899497514 + __ROL4__(v266, 5);
+  v270 = v266;
+  v271 = __ROR4__(v266, 2);
+  v272 = v262
+       + (v268 ^ (unsigned int)v2 ^ v270)
+       - 899497514
+       + __ROL4__(v269, 5)
+       + __ROL4__(v336 ^ v263 ^ v313 ^ v283, 1);
+  v273 = v268 ^ v269 ^ v271;
+  v274 = __ROR4__(v269, 2);
+  state[3] += v274;
+  v275 = (_DWORD)v2 + v273 - 899497514 + __ROL4__(v272, 5) + __ROL4__(v323 ^ v296 ^ v279 ^ v257, 1);
+  state[1] += v275;
+  state[2] += __ROR4__(v272, 2);
+  *state += __ROL4__(v275, 5) + __ROL4__(v287 ^ v246 ^ v265 ^ v283, 1) - 899497514 + v268 + (v272 ^ v274 ^ v271);
+  state[4] += v271;
 }
 
 // File Line: 113
@@ -665,23 +728,17 @@ void __fastcall SHA1_Init(SHA1_CTX *context)
 // RVA: 0xEF2728
 void __fastcall SHA1_Update(SHA1_CTX *context, const char *data, unsigned int len)
 {
-  SHA1_CTX *v3; // rbx
-  unsigned int v4; // esi
-  unsigned int v5; // er9
-  const char *v6; // r14
+  unsigned int v5; // r9d
   unsigned int v7; // ecx
   unsigned int v8; // edi
   unsigned int i; // ebp
 
-  v3 = context;
-  v4 = len;
   v5 = context->count[0] + 8 * len;
-  v6 = data;
   v7 = (context->count[0] >> 3) & 0x3F;
-  v3->count[0] = v5;
+  context->count[0] = v5;
   if ( v5 < 8 * len )
-    ++v3->count[1];
-  v3->count[1] += len >> 29;
+    ++context->count[1];
+  context->count[1] += len >> 29;
   if ( v7 + len <= 0x3F )
   {
     v8 = 0;
@@ -689,16 +746,16 @@ void __fastcall SHA1_Update(SHA1_CTX *context, const char *data, unsigned int le
   else
   {
     v8 = 64 - v7;
-    memmove(&v3->buffer[v7], data, 64 - v7);
-    FSHA1Transform(v3->state, v3->buffer);
-    for ( i = v8 + 63; i < v4; i += 64 )
+    memmove(&context->buffer[v7], data, 64 - v7);
+    FSHA1Transform(context->state, context->buffer);
+    for ( i = v8 + 63; i < len; i += 64 )
     {
-      FSHA1Transform(v3->state, &v6[v8]);
+      FSHA1Transform(context->state, &data[v8]);
       v8 += 64;
     }
     v7 = 0;
   }
-  memmove(&v3->buffer[v7], &v6[v8], v4 - v8);
+  memmove(&context->buffer[v7], &data[v8], len - v8);
 }
 
 // File Line: 168
@@ -706,23 +763,19 @@ void __fastcall SHA1_Update(SHA1_CTX *context, const char *data, unsigned int le
 void __fastcall SHA1_Final(char *digest, SHA1_CTX *context)
 {
   unsigned int v2; // ebx
-  SHA1_CTX *v3; // rdi
-  char *v4; // r14
-  unsigned int v5; // er8
+  unsigned int v5; // r8d
   char *v6; // r9
-  int v7; // ecx
+  char v7; // cl
   _BOOL8 v8; // rax
   unsigned __int64 v9; // r8
   char v10; // al
   char v11; // cl
   unsigned __int64 v12; // rax
-  char data; // [rsp+20h] [rbp-28h]
+  char data[8]; // [rsp+20h] [rbp-28h] BYREF
 
   v2 = 0;
-  v3 = context;
-  v4 = digest;
   v5 = 0;
-  v6 = &data;
+  v6 = data;
   do
   {
     v7 = 8 * (3 - (v5 & 3));
@@ -730,23 +783,23 @@ void __fastcall SHA1_Final(char *digest, SHA1_CTX *context)
     *v6++ = context->count[v8] >> v7;
   }
   while ( v5 < 8 );
-  SHA1_Update(context, "â‚¬", 1u);
-  while ( (v3->count[0] & 0x1F8) != 448 )
-    SHA1_Update(v3, byte_1416A7BD8, 1u);
-  SHA1_Update(v3, &data, 8u);
+  SHA1_Update(context, "€", 1u);
+  while ( (context->count[0] & 0x1F8) != 448 )
+    SHA1_Update(context, byte_1416A7BD8, 1u);
+  SHA1_Update(context, data, 8u);
   v9 = 0i64;
   do
   {
     v10 = v2++;
     v11 = 3 - (v10 & 3);
     v12 = v9++;
-    *v4++ = v3->state[v12 >> 2] >> 8 * v11;
+    *digest++ = context->state[v12 >> 2] >> (8 * v11);
   }
   while ( v2 < 0x14 );
-  memset(v3->buffer, 0, 0x40ui64);
-  memset(v3, 0, 0x14ui64);
-  memset(v3->count, 0, 8ui64);
-  memset(&data, 0, 8ui64);
-  FSHA1Transform(v3->state, v3->buffer);
+  memset(context->buffer, 0, sizeof(context->buffer));
+  memset(context, 0, 0x14ui64);
+  memset(context->count, 0, sizeof(context->count));
+  memset(data, 0, sizeof(data));
+  FSHA1Transform(context->state, context->buffer);
 }
 

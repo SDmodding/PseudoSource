@@ -2,28 +2,24 @@
 // RVA: 0x3DE8F0
 void __fastcall UFG::ScalingPoseDriver::ScalingPoseDriver(UFG::ScalingPoseDriver *this)
 {
-  UFG::ScalingPoseDriver *v1; // rdi
   UFG::qReflectObjectType<UFG::PartTemplateInstance,UFG::qReflectObject> *v2; // rcx
-  const char *v3; // rax
+  const char *TypeName; // rax
 
-  v1 = this;
-  PoseDriver::PoseDriver((PoseDriver *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&UFG::ScalingPoseDriver::`vftable;
-  UFG::qReflectHandleBase::qReflectHandleBase((UFG::qReflectHandleBase *)&v1->mTemplateInstance.mPrev);
-  v3 = UFG::qReflectObjectType<UFG::PartTemplateInstance,UFG::qReflectObject>::GetTypeName(v2);
-  v1->mTemplateInstance.mTypeUID = UFG::qStringHash64(v3, 0xFFFFFFFFFFFFFFFFui64);
+  PoseDriver::PoseDriver(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&UFG::ScalingPoseDriver::`vftable;
+  UFG::qReflectHandleBase::qReflectHandleBase(&this->mTemplateInstance);
+  TypeName = UFG::qReflectObjectType<UFG::PartTemplateInstance,UFG::qReflectObject>::GetTypeName(v2);
+  this->mTemplateInstance.mTypeUID = UFG::qStringHash64(TypeName, 0xFFFFFFFFFFFFFFFFui64);
 }
 
 // File Line: 39
 // RVA: 0x3DEAA0
 Expression::IMemberMap *__fastcall UFG::ScalingPoseDriver::CreateClone(UFG::ScalingPoseDriver *this)
 {
-  UFG::ScalingPoseDriver *v1; // rdi
   char *v2; // rax
   __int64 v3; // rax
   __int64 v4; // rbx
 
-  v1 = this;
   v2 = UFG::qMemoryPool2::Allocate(
          &gActionTreeMemoryPool,
          0x58ui64,
@@ -39,15 +35,13 @@ Expression::IMemberMap *__fastcall UFG::ScalingPoseDriver::CreateClone(UFG::Scal
   {
     v4 = 0i64;
   }
-  *(_QWORD *)(v4 + 8) = v1->mResourceOwner;
-  *(_QWORD *)(v4 + 32) = v1->mResourceOwner;
-  *(_BYTE *)(v4 + 40) = v1->mActive;
-  *(_BYTE *)(v4 + 41) = v1->mDisabled;
-  *(_BYTE *)(v4 + 42) = v1->mBreakpoint;
-  *(_DWORD *)(v4 + 44) = v1->mName.mUID;
-  UFG::qReflectHandleBase::operator=(
-    (UFG::qReflectHandleBase *)(v4 + 48),
-    (UFG::qReflectHandleBase *)&v1->mTemplateInstance.mPrev);
+  *(_QWORD *)(v4 + 8) = this->PoseDriver::Expression::IMemberMap::mResourceOwner;
+  *(_QWORD *)(v4 + 32) = this->PoseDriver::mResourceOwner;
+  *(_BYTE *)(v4 + 40) = this->mActive;
+  *(_BYTE *)(v4 + 41) = this->mDisabled;
+  *(_BYTE *)(v4 + 42) = this->mBreakpoint;
+  *(_DWORD *)(v4 + 44) = this->mName.mUID;
+  UFG::qReflectHandleBase::operator=((UFG::qReflectHandleBase *)(v4 + 48), &this->mTemplateInstance);
   return (Expression::IMemberMap *)v4;
 }
 
@@ -55,28 +49,28 @@ Expression::IMemberMap *__fastcall UFG::ScalingPoseDriver::CreateClone(UFG::Scal
 // RVA: 0x3DF420
 void __fastcall UFG::ScalingPoseDriver::UpdatePose(UFG::ScalingPoseDriver *this, SkeletalPose *pose)
 {
-  UFG::qReflectObject *v2; // rax
+  UFG::qReflectObject *mData; // rax
   SkeletalPose *v3; // r12
   UFG::qTree64Base::BaseNode *v4; // rdx
-  Skeleton *v5; // r8
-  __int64 v6; // rax
+  Skeleton *mUFGSkeleton; // r8
+  __int64 m_size; // rax
   unsigned int v7; // ebp
   __int64 v8; // r14
   __int64 v9; // rdi
-  UFG::qTree64Base::BaseNode *v10; // rsi
+  UFG::qTree64Base::BaseNode *mParent; // rsi
   unsigned int v11; // eax
   __int64 v12; // rbx
   __int64 v13; // r13
   UFG::qTree64Base::BaseNode *v14; // r15
-  int v15; // eax
+  int BoneID; // eax
   __int64 v16; // r12
   UFG::ScalingPoseDriver *v17; // rax
-  UFG::ScalingPreset *v18; // rcx
-  const char *v19; // rdx
-  UFG::ScalingPreset::RegionValues *v20; // rax
-  float v21; // xmm3_4
-  float v22; // xmm2_4
-  float v23; // xmm1_4
+  UFG::qReflectObjectVtbl *vfptr; // rcx
+  const char *mUID; // rdx
+  UFG::ScalingPreset::RegionValues *ScaleValues; // rax
+  float mScaleX; // xmm3_4
+  float mScaleY; // xmm2_4
+  float mScaleZ; // xmm1_4
   UFG::qReflectObject *v24; // rcx
   unsigned int v25; // edx
   float v26; // xmm0_4
@@ -93,40 +87,36 @@ void __fastcall UFG::ScalingPoseDriver::UpdatePose(UFG::ScalingPoseDriver *this,
   __int64 v37; // rax
   __m128 v38; // xmm2
   __m128 v39; // xmm3
-  signed __int64 v40; // rax
+  __int64 v40; // rax
   __m128 v41; // xmm1
   __m128 v42; // xmm4
   hkVector4f *v43; // rsi
-  hkQsTransformf *v44; // rax
+  hkQsTransformf *QsTransformLS; // rax
   hkVector4f v45; // xmm0
   Skeleton *v46; // [rsp+20h] [rbp-B28h]
   UFG::qTree64Base::BaseNode *v47; // [rsp+28h] [rbp-B20h]
-  hkQsTransformf matrixLS; // [rsp+30h] [rbp-B18h]
-  __int128 v49; // [rsp+60h] [rbp-AE8h]
-  char v50; // [rsp+70h] [rbp-AD8h]
-  UFG::ScalingPoseDriver *v51; // [rsp+B50h] [rbp+8h]
-  SkeletalPose *v52; // [rsp+B58h] [rbp+10h]
+  hkQsTransformf matrixLS; // [rsp+30h] [rbp-B18h] BYREF
+  __int128 v49; // [rsp+60h] [rbp-AE8h] BYREF
+  char v50[2672]; // [rsp+70h] [rbp-AD8h] BYREF
   unsigned int v53; // [rsp+B60h] [rbp+18h]
   int v54; // [rsp+B68h] [rbp+20h]
 
-  v52 = pose;
-  v51 = this;
-  v2 = this->mTemplateInstance.mData;
+  mData = this->mTemplateInstance.mData;
   v3 = pose;
-  if ( v2 )
+  if ( mData )
   {
-    v4 = v2[1].mBaseNode.mNeighbours[0];
+    v4 = mData[1].mBaseNode.mNeighbours[0];
     v47 = v4;
     if ( v4 )
     {
-      v5 = v3->mRigHandle.mUFGSkeleton;
-      v46 = v5;
-      v6 = v5->mhkaSkeleton->m_bones.m_size;
-      v54 = v6;
-      if ( (signed int)v6 > 0 )
+      mUFGSkeleton = v3->mRigHandle.mUFGSkeleton;
+      v46 = mUFGSkeleton;
+      m_size = mUFGSkeleton->mhkaSkeleton->m_bones.m_size;
+      v54 = m_size;
+      if ( (int)m_size > 0 )
       {
         v49 = *(_OWORD *)_xmm;
-        qmemcpy(&v50, &v49, 8 * ((unsigned __int64)(16 * v6 - 9) >> 3));
+        qmemcpy(v50, &v49, 8 * ((unsigned __int64)(16 * m_size - 9) >> 3));
       }
       v7 = 0;
       v53 = (unsigned int)v4[4].mChildren[0];
@@ -136,61 +126,61 @@ void __fastcall UFG::ScalingPoseDriver::UpdatePose(UFG::ScalingPoseDriver *this,
         v9 = 0i64;
         while ( 1 )
         {
-          v10 = v4[4].mParent;
-          v11 = (unsigned int)v10[v9].mChildren[1];
+          mParent = v4[4].mParent;
+          v11 = (unsigned int)mParent[v9].mChildren[1];
           if ( !v11 )
             goto LABEL_38;
           v12 = 0i64;
           v13 = v11;
           do
           {
-            v14 = v10[v9].mChildren[0];
-            v15 = Skeleton::GetBoneID(v3->mRigHandle.mUFGSkeleton, *(_DWORD *)((char *)&v14->mUID + v12 + 4));
-            v16 = v15;
-            if ( v15 < 0 )
+            v14 = mParent[v9].mChildren[0];
+            BoneID = Skeleton::GetBoneID(v3->mRigHandle.mUFGSkeleton, *(_DWORD *)((char *)&v14->mUID + v12 + 4));
+            v16 = BoneID;
+            if ( BoneID < 0 )
               goto LABEL_36;
-            v17 = v51;
-            v18 = (UFG::ScalingPreset *)v51->mTemplateInstance.mData[2].vfptr;
-            if ( !v18 )
+            v17 = this;
+            vfptr = this->mTemplateInstance.mData[2].vfptr;
+            if ( !vfptr )
               goto LABEL_17;
-            if ( LODWORD(v10[v9].mParent) )
-              v19 = (const char *)v10[v9].mUID;
+            if ( LODWORD(mParent[v9].mParent) )
+              mUID = (const char *)mParent[v9].mUID;
             else
-              v19 = &customWorldMapCaption;
-            v20 = UFG::ScalingPreset::GetScaleValues(v18, v19);
-            if ( !v20 )
+              mUID = &customCaption;
+            ScaleValues = UFG::ScalingPreset::GetScaleValues((UFG::ScalingPreset *)vfptr, mUID);
+            if ( !ScaleValues )
             {
-              v17 = v51;
+              v17 = this;
 LABEL_17:
               v24 = v17->mTemplateInstance.mData;
               v25 = (unsigned int)v24[2].mBaseNode.mChildren[1];
               if ( v25 <= v7 )
-                v21 = *(float *)v10[v9].mNeighbours;
+                mScaleX = *(float *)mParent[v9].mNeighbours;
               else
-                v21 = *(float *)((char *)&v24[2].mBaseNode.mChildren[0]->mUID + v8);
+                mScaleX = *(float *)((char *)&v24[2].mBaseNode.mChildren[0]->mUID + v8);
               if ( v25 <= v7 )
-                v22 = *(float *)v10[v9].mNeighbours;
+                mScaleY = *(float *)mParent[v9].mNeighbours;
               else
-                v22 = *(float *)((char *)&v24[2].mBaseNode.mChildren[0]->mUID + v8);
+                mScaleY = *(float *)((char *)&v24[2].mBaseNode.mChildren[0]->mUID + v8);
               if ( v25 <= v7 )
-                v23 = *(float *)v10[v9].mNeighbours;
+                mScaleZ = *(float *)mParent[v9].mNeighbours;
               else
-                v23 = *(float *)((char *)&v24[2].mBaseNode.mChildren[0]->mUID + v8);
+                mScaleZ = *(float *)((char *)&v24[2].mBaseNode.mChildren[0]->mUID + v8);
               goto LABEL_26;
             }
-            v21 = v20->mScaleX;
-            v22 = v20->mScaleY;
-            v23 = v20->mScaleZ;
+            mScaleX = ScaleValues->mScaleX;
+            mScaleY = ScaleValues->mScaleY;
+            mScaleZ = ScaleValues->mScaleZ;
 LABEL_26:
             v27 = (__m128)*(unsigned int *)((char *)&v14->mParent + v12);
             v26 = 1.0 - v27.m128_f32[0];
-            v29 = (__m128)*(unsigned int *)((char *)&v14->mParent + v12);
-            v30 = (__m128)*(unsigned int *)((char *)&v14->mParent + v12);
-            v29.m128_f32[0] = v29.m128_f32[0] * v21;
-            v27.m128_f32[0] = (float)(v27.m128_f32[0] * v23) + (float)(1.0 - v27.m128_f32[0]);
+            v29 = v27;
+            v30 = v27;
+            v29.m128_f32[0] = v27.m128_f32[0] * mScaleX;
+            v27.m128_f32[0] = (float)(v27.m128_f32[0] * mScaleZ) + (float)(1.0 - v27.m128_f32[0]);
             v28 = *(_OWORD *)_xmm;
             v29.m128_f32[0] = v29.m128_f32[0] + v26;
-            v30.m128_f32[0] = (float)(v30.m128_f32[0] * v22) + v26;
+            v30.m128_f32[0] = (float)(v30.m128_f32[0] * mScaleY) + v26;
             switch ( *(_DWORD *)((char *)&v14->mUID + v12) )
             {
               case 0:
@@ -221,9 +211,9 @@ LABEL_34:
               default:
                 break;
             }
-            *(&v49 + v16) = v28;
+            *(_OWORD *)&v50[16 * v16 - 16] = v28;
 LABEL_36:
-            v3 = v52;
+            v3 = pose;
             v12 += 12i64;
             --v13;
           }
@@ -235,7 +225,7 @@ LABEL_38:
           v8 += 4i64;
           if ( v7 >= v53 )
           {
-            v5 = v46;
+            mUFGSkeleton = v46;
             break;
           }
         }
@@ -244,21 +234,21 @@ LABEL_38:
       v34 = v54 - 1;
       if ( v54 - 1 >= 0 )
       {
-        v35 = (__m128 *)(&v49 + v33);
-        v36 = &v5->mhkaSkeleton->m_parentIndices.m_data[v33];
+        v35 = (__m128 *)&v50[16 * v33 - 16];
+        v36 = &mUFGSkeleton->mhkaSkeleton->m_parentIndices.m_data[v33];
         do
         {
           v37 = *v36;
-          if ( (signed int)v37 > 0 )
+          if ( (int)v37 > 0 )
           {
             v38 = (__m128)(unsigned int)FLOAT_1_0;
             v39 = (__m128)(unsigned int)FLOAT_1_0;
             v40 = 2 * v37;
-            v41 = *(__m128 *)((char *)&v49 + 8 * v40);
+            v41 = *(__m128 *)&v50[8 * v40 - 16];
             v42 = (__m128)(unsigned int)FLOAT_1_0;
-            v38.m128_f32[0] = 1.0 / *((float *)&v49 + 2 * v40 + 2);
+            v38.m128_f32[0] = 1.0 / *(float *)&v50[8 * v40 - 8];
             v42.m128_f32[0] = 1.0 / v41.m128_f32[0];
-            v39.m128_f32[0] = 1.0 / COERCE_FLOAT(_mm_shuffle_ps(v41, v41, 85));
+            v39.m128_f32[0] = 1.0 / _mm_shuffle_ps(v41, v41, 85).m128_f32[0];
             *v35 = _mm_mul_ps(
                      _mm_unpacklo_ps(_mm_unpacklo_ps(v42, v38), _mm_unpacklo_ps(v39, (__m128)(unsigned int)FLOAT_1_0)),
                      *v35);
@@ -271,13 +261,13 @@ LABEL_38:
       }
       if ( v33 >= 0 )
       {
-        v43 = (hkVector4f *)(&v49 + v33);
+        v43 = (hkVector4f *)&v50[16 * v33 - 16];
         do
         {
-          v44 = SkeletalPose::GetQsTransformLS(v3, v33);
-          matrixLS.m_translation = v44->m_translation;
+          QsTransformLS = SkeletalPose::GetQsTransformLS(v3, v33);
+          matrixLS.m_translation = QsTransformLS->m_translation;
           v45.m_quad = v43->m_quad;
-          matrixLS.m_rotation = v44->m_rotation;
+          matrixLS.m_rotation = QsTransformLS->m_rotation;
           matrixLS.m_scale = (hkVector4f)v45.m_quad;
           SkeletalPose::SetQsTransformLS(v3, v33--, &matrixLS);
           --v43;
@@ -307,34 +297,32 @@ void UFG::CustomizeBindings::InitBindings(void)
   UFG::PartCustomizer::sSaveInstanceData = UFG::CustomizeBindings::SaveInstanceData;
   UFG::PartCustomizer::sUpdateCustomizationData = (void (__fastcall *)(UFG::SimObject *, UFG::PartTemplateInstance *))_;
   UFG::PartCustomizer::sCustomizeComplete = UFG::CustomizeBindings::CustomizeComplete;
-  UFG::PartCustomizer::sConfigureParts = UFG::CustomizeBindings::ConfigureParts;
+  UFG::PartCustomizer::sConfigureParts = (void (__fastcall *)(UFG::SimObject *, UFG::PartTemplateInstance *))UFG::CustomizeBindings::ConfigureParts;
   UFG::PartCustomizer::sQueueCompositeBuild = UFG::CustomizeBindings::QueueCompositeBuild;
   UFG::PartCustomizer::sSetCameraOperation = (void (__fastcall *)(UFG::SimObject *, UFG::qReflectObject *))_;
-  UFG::PartCustomizer::sGetAvailableParts = UFG::CustomizeBindings::GetAvailableParts;
+  UFG::PartCustomizer::sGetAvailableParts = (void (__fastcall *)(UFG::qArray<UFG::PartDefinition *,0> *, UFG::qSymbolUC *))UFG::CustomizeBindings::GetAvailableParts;
 }
 
 // File Line: 225
 // RVA: 0x3DF370
-void __fastcall UFG::CustomizeBindings::SaveInstanceData(UFG::SimObject *sim_object, UFG::PartTemplateInstance *templateInstance)
+void __fastcall UFG::CustomizeBindings::SaveInstanceData(
+        UFG::SimObject *sim_object,
+        UFG::PartTemplateInstance *templateInstance)
 {
   UFG::GameStatTracker *v2; // rax
   UFG::GameStatTracker *v3; // rax
-  UFG::PersistentData::Binary binary; // [rsp+20h] [rbp-18h]
-  unsigned int buffer_size; // [rsp+50h] [rbp+18h]
-  char *buffer; // [rsp+58h] [rbp+20h]
+  UFG::PersistentData::Binary binary; // [rsp+20h] [rbp-18h] BYREF
+  unsigned int buffer_size; // [rsp+50h] [rbp+18h] BYREF
+  char *buffer; // [rsp+58h] [rbp+20h] BYREF
 
   buffer = 0i64;
   buffer_size = 0;
-  if ( (unsigned __int8)DNA::WriteToBuffer(
-                          (UFG::qReflectObject *)&templateInstance->vfptr,
-                          "PartTemplate",
-                          (const char **)&buffer,
-                          &buffer_size) )
+  if ( (unsigned __int8)DNA::WriteToBuffer(templateInstance, "PartTemplate", (const char **)&buffer, &buffer_size) )
   {
     binary.mpBuffer = buffer;
     binary.mSize = buffer_size;
     v2 = UFG::GameStatTracker::Instance();
-    UFG::GameStatTracker::SetStat(v2, 0, &binary);
+    UFG::GameStatTracker::SetStat(v2, CustomizationData, &binary);
     v3 = UFG::GameStatTracker::Instance();
     UFG::GameStatTracker::SetStat(v3, CustomizationVersion, 4);
   }
@@ -342,69 +330,67 @@ void __fastcall UFG::CustomizeBindings::SaveInstanceData(UFG::SimObject *sim_obj
 
 // File Line: 239
 // RVA: 0x3DEEB0
-void __fastcall UFG::CustomizeBindings::OnResetLocalPlayer(UFG::SimObject *sim_object)
+void __fastcall UFG::CustomizeBindings::OnResetLocalPlayer(UFG::SimObjectCVBase *sim_object)
 {
-  unsigned __int16 v1; // dx
-  UFG::CharacterAnimationComponent *v2; // rax
+  signed __int16 m_Flags; // dx
+  UFG::CharacterAnimationComponent *ComponentOfTypeHK; // rax
   UFG::CharacterAnimationComponent *v3; // rbx
   char *v4; // rax
   __int64 v5; // rax
   __int64 v6; // rdi
-  Creature *v7; // rdx
-  UFG::qList<PoseDriver,PoseDriver,1,0> *v8; // rdx
-  UFG::qNode<PoseDriver,PoseDriver> **v9; // rcx
-  UFG::qNode<PoseDriver,PoseDriver> *v10; // rax
+  Creature *mCreature; // rdx
+  UFG::qList<PoseDriver,PoseDriver,1,0> *p_mPoseDrivers; // rdx
+  UFG::qNode<PoseDriver,PoseDriver> *mPrev; // rax
 
   if ( sim_object )
   {
-    v1 = sim_object->m_Flags;
-    if ( (v1 >> 14) & 1 )
+    m_Flags = sim_object->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
     {
-      v2 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectCVBase *)sim_object);
+      ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(sim_object);
     }
-    else if ( (v1 & 0x8000u) == 0 )
+    else if ( (m_Flags & 0x2000) != 0 )
     {
-      if ( (v1 >> 13) & 1 )
-        v2 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)sim_object);
-      else
-        v2 = (UFG::CharacterAnimationComponent *)((v1 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                     (UFG::SimObjectGame *)sim_object,
-                                                                     UFG::CharacterAnimationComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(sim_object, UFG::CharacterAnimationComponent::_TypeUID));
+      ComponentOfTypeHK = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)sim_object);
+    }
+    else if ( (m_Flags & 0x1000) != 0 )
+    {
+      ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                sim_object,
+                                                                UFG::CharacterAnimationComponent::_TypeUID);
     }
     else
     {
-      v2 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectCVBase *)sim_object);
+      ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                sim_object,
+                                                                UFG::CharacterAnimationComponent::_TypeUID);
     }
-    v3 = v2;
-    if ( v2 )
+    v3 = ComponentOfTypeHK;
+    if ( ComponentOfTypeHK && UFG::CustomizeBindings::sCustomization )
     {
-      if ( UFG::CustomizeBindings::sCustomization )
+      v4 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0x58ui64, "IMemberMap", 0i64, 1u);
+      if ( v4 )
       {
-        v4 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0x58ui64, "IMemberMap", 0i64, 1u);
-        if ( v4 )
-        {
-          UFG::ScalingPoseDriver::ScalingPoseDriver((UFG::ScalingPoseDriver *)v4);
-          v6 = v5;
-        }
-        else
-        {
-          v6 = 0i64;
-        }
-        UFG::qReflectHandleBase::Init(
-          (UFG::qReflectHandleBase *)(v6 + 48),
-          *(_QWORD *)(v6 + 64),
-          UFG::CustomizeBindings::sCustomization->mBaseNode.mUID);
-        v7 = v3->mCreature;
-        if ( v7 )
-        {
-          v8 = &v7->mPoseDrivers;
-          v9 = (UFG::qNode<PoseDriver,PoseDriver> **)(v6 + 16);
-          v10 = v8->mNode.mPrev;
-          v10->mNext = (UFG::qNode<PoseDriver,PoseDriver> *)(v6 + 16);
-          *v9 = v10;
-          v9[1] = &v8->mNode;
-          v8->mNode.mPrev = (UFG::qNode<PoseDriver,PoseDriver> *)(v6 + 16);
-        }
+        UFG::ScalingPoseDriver::ScalingPoseDriver((UFG::ScalingPoseDriver *)v4);
+        v6 = v5;
+      }
+      else
+      {
+        v6 = 0i64;
+      }
+      UFG::qReflectHandleBase::Init(
+        (UFG::qReflectHandleBase *)(v6 + 48),
+        *(_QWORD *)(v6 + 64),
+        UFG::CustomizeBindings::sCustomization->mBaseNode.mUID);
+      mCreature = v3->mCreature;
+      if ( mCreature )
+      {
+        p_mPoseDrivers = &mCreature->mPoseDrivers;
+        mPrev = p_mPoseDrivers->mNode.mPrev;
+        mPrev->mNext = (UFG::qNode<PoseDriver,PoseDriver> *)(v6 + 16);
+        *(_QWORD *)(v6 + 16) = mPrev;
+        *(_QWORD *)(v6 + 24) = p_mPoseDrivers;
+        p_mPoseDrivers->mNode.mPrev = (UFG::qNode<PoseDriver,PoseDriver> *)(v6 + 16);
       }
     }
   }
@@ -412,60 +398,52 @@ void __fastcall UFG::CustomizeBindings::OnResetLocalPlayer(UFG::SimObject *sim_o
 
 // File Line: 269
 // RVA: 0x3DE9C0
-void __fastcall UFG::CustomizeBindings::ConfigureParts(UFG::SimObject *sim_object, UFG::PartTemplateInstance *templateInstance)
+void __fastcall UFG::CustomizeBindings::ConfigureParts(
+        UFG::SimObjectGame *sim_object,
+        UFG::PartTemplateInstance *templateInstance)
 {
-  UFG::PartTemplateInstance *v2; // rsi
-  unsigned __int16 v3; // dx
-  UFG::StreamedResourceComponent *v4; // rdi
+  signed __int16 m_Flags; // dx
+  UFG::StreamedResourceComponent *m_pComponent; // rdi
   UFG::SimComponent *v5; // rax
-  unsigned int v6; // ebx
-  signed __int64 v7; // r8
-  UFG::PartDefinition *v8; // rdx
+  unsigned int i; // ebx
+  UFG::PartTemplateInstance::SlotEntry *v7; // r8
+  UFG::PartDefinition *mData; // rdx
 
   if ( sim_object )
   {
-    v2 = templateInstance;
-    v3 = sim_object->m_Flags;
-    if ( (v3 >> 14) & 1 )
+    m_Flags = sim_object->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v4 = (UFG::StreamedResourceComponent *)sim_object->m_Components.p[10].m_pComponent;
+      m_pComponent = (UFG::StreamedResourceComponent *)sim_object->m_Components.p[10].m_pComponent;
     }
-    else if ( (v3 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v3 >> 13) & 1 )
+      if ( (m_Flags & 0x2000) != 0 )
       {
-        v4 = (UFG::StreamedResourceComponent *)sim_object->m_Components.p[7].m_pComponent;
+        m_pComponent = (UFG::StreamedResourceComponent *)sim_object->m_Components.p[7].m_pComponent;
       }
       else
       {
-        v5 = (v3 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                (UFG::SimObjectGame *)sim_object,
-                                UFG::StreamedResourceComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(
-                                                                              sim_object,
-                                                                              UFG::StreamedResourceComponent::_TypeUID);
-        v4 = (UFG::StreamedResourceComponent *)v5;
+        v5 = (m_Flags & 0x1000) != 0
+           ? UFG::SimObjectGame::GetComponentOfTypeHK(sim_object, UFG::StreamedResourceComponent::_TypeUID)
+           : UFG::SimObject::GetComponentOfType(sim_object, UFG::StreamedResourceComponent::_TypeUID);
+        m_pComponent = (UFG::StreamedResourceComponent *)v5;
       }
     }
     else
     {
-      v4 = (UFG::StreamedResourceComponent *)sim_object->m_Components.p[10].m_pComponent;
+      m_pComponent = (UFG::StreamedResourceComponent *)sim_object->m_Components.p[10].m_pComponent;
     }
-    if ( v4 )
+    if ( m_pComponent )
     {
-      UFG::StreamedResourceComponent::ClearResources(v4);
-      UFG::StreamedResourceComponent::ResetResources(v4);
-      v6 = 0;
-      if ( v2->mSlots.mData.mNumItems )
+      UFG::StreamedResourceComponent::ClearResources(m_pComponent);
+      UFG::StreamedResourceComponent::ResetResources(m_pComponent);
+      for ( i = 0; i < templateInstance->mSlots.mData.mNumItems; ++i )
       {
-        do
-        {
-          v7 = (signed __int64)&v2->mSlots.mData.mItems[v6];
-          v8 = *(UFG::PartDefinition **)(v7 + 40);
-          if ( v8 )
-            UFG::StreamedResourceComponent::AddPart(v4, v8, (UFG::qSymbolUC *)(v7 + 48));
-          ++v6;
-        }
-        while ( v6 < v2->mSlots.mData.mNumItems );
+        v7 = &templateInstance->mSlots.mData.mItems[i];
+        mData = (UFG::PartDefinition *)v7->mBasePart.mPart.mData;
+        if ( mData )
+          UFG::StreamedResourceComponent::AddPart(m_pComponent, mData, &v7->mBasePart.mTextureSet);
       }
     }
   }
@@ -473,14 +451,17 @@ void __fastcall UFG::CustomizeBindings::ConfigureParts(UFG::SimObject *sim_objec
 
 // File Line: 288
 // RVA: 0x3DF330
-void __fastcall UFG::CustomizeBindings::QueueCompositeBuild(UFG::SimObject *sim_object, bool reset_textures, UFG::PartTemplateInstance *templateInstance)
+void __fastcall UFG::CustomizeBindings::QueueCompositeBuild(
+        UFG::SimObject *sim_object,
+        bool reset_textures,
+        UFG::PartTemplateInstance *templateInstance)
 {
   UFG::PartCompositeBuilder *v3; // rax
-  UFG::PartCompositeBuilder::CompositeBuildParams buildParams; // [rsp+20h] [rbp-28h]
+  UFG::PartCompositeBuilder::CompositeBuildParams buildParams; // [rsp+20h] [rbp-28h] BYREF
 
   buildParams.mCallbackParam = sim_object;
   buildParams.mDefinition = templateInstance;
-  buildParams.mCallback = UFG::CustomizeBindings::OnCompositeFinished;
+  buildParams.mCallback = (void (__fastcall *)(UFG::PartTemplateInstance *, void *))UFG::CustomizeBindings::OnCompositeFinished;
   buildParams.mResetTextures = reset_textures;
   v3 = UFG::PartCompositeBuilder::Instance();
   UFG::PartCompositeBuilder::SubmitCompositeBuild(v3, &buildParams);
@@ -488,7 +469,9 @@ void __fastcall UFG::CustomizeBindings::QueueCompositeBuild(UFG::SimObject *sim_
 
 // File Line: 312
 // RVA: 0x3DEB40
-void __fastcall UFG::CustomizeBindings::CustomizeComplete(UFG::SimObject *sim_object, UFG::PartTemplateInstance *templateInstance)
+void __fastcall UFG::CustomizeBindings::CustomizeComplete(
+        UFG::SimObject *sim_object,
+        UFG::PartTemplateInstance *templateInstance)
 {
   UFG::GameSaveLoad *v2; // rax
 
@@ -498,196 +481,184 @@ void __fastcall UFG::CustomizeBindings::CustomizeComplete(UFG::SimObject *sim_ob
 
 // File Line: 321
 // RVA: 0x3DF3E0
-bool __fastcall UFG::SortPartsByName(UFG::PartDefinition *const *a, UFG::PartDefinition *const *b)
+bool __fastcall UFG::SortPartsByName(UFG::qReflectObject **a, UFG::qReflectObject **b)
 {
-  UFG::qReflectObject **v2; // rbx
-  char *v3; // rdi
+  char *Name; // rdi
   char *v4; // rax
 
-  v2 = (UFG::qReflectObject **)a;
-  v3 = UFG::qReflectObject::GetName(*(UFG::qReflectObject **)b);
-  v4 = UFG::qReflectObject::GetName(*v2);
-  return (signed int)UFG::qStringCompare(v4, v3, -1) < 0;
+  Name = UFG::qReflectObject::GetName(*b);
+  v4 = UFG::qReflectObject::GetName(*a);
+  return (int)UFG::qStringCompare(v4, Name, -1) < 0;
 }
 
 // File Line: 326
 // RVA: 0x3DEB60
-void __fastcall UFG::CustomizeBindings::GetAvailableParts(UFG::qArray<UFG::PartDefinition *,0> *parts, UFG::qSymbolUC *slot_name)
+void __fastcall UFG::CustomizeBindings::GetAvailableParts(
+        UFG::qReflectObjectType<UFG::PartDefinition,UFG::qReflectObject> *parts,
+        UFG::qSymbolUC *slot_name)
 {
-  UFG::qSymbolUC *v2; // r13
-  UFG::qArray<UFG::PartDefinition *,0> *v3; // rdi
-  const char *v4; // rax
+  const char *StaticTypeName; // rax
   unsigned __int64 v5; // rbx
   UFG::qReflectWarehouse *v6; // rax
-  UFG::qReflectInventoryBase *v7; // rax
-  UFG::qTree64Base *v8; // r12
-  UFG::qTree64Base *v9; // rax
-  signed __int64 v10; // rbp
-  __int64 v11; // r15
-  unsigned int v12; // ebx
-  unsigned int v13; // esi
-  unsigned int v14; // ebx
-  unsigned __int64 v15; // rax
-  UFG::allocator::free_link *v16; // rax
-  UFG::PartDefinition **v17; // r14
-  signed __int64 v18; // r9
-  signed __int64 v19; // r8
-  UFG::PartDefinition **v20; // rax
-  UFG::qTree64Base *v21; // rax
+  UFG::qTree64<UFG::qReflectObject,UFG::qReflectObject,0> *p_mItems; // r12
+  UFG::qTree64Base *Head; // rax
+  UFG::PartDefinition *p_mCount; // rbp
+  __int64 vfptr_low; // r15
+  unsigned int vfptr_high; // ebx
+  unsigned int v12; // esi
+  unsigned int v13; // ebx
+  unsigned __int64 v14; // rax
+  UFG::allocator::free_link *v15; // rax
+  UFG::PartDefinition **v16; // r14
+  __int64 i; // r9
+  __int64 v18; // r8
+  UFG::PartDefinition **mUID; // rax
+  UFG::qTree64Base *Next; // rax
 
-  v2 = slot_name;
-  v3 = parts;
-  v4 = UFG::qReflectObjectType<UFG::PartDefinition,UFG::qReflectObject>::GetStaticTypeName((UFG::qReflectObjectType<UFG::PartDefinition,UFG::qReflectObject> *)parts);
-  v5 = UFG::qStringHash64(v4, 0xFFFFFFFFFFFFFFFFui64);
+  StaticTypeName = UFG::qReflectObjectType<UFG::PartDefinition,UFG::qReflectObject>::GetStaticTypeName(parts);
+  v5 = UFG::qStringHash64(StaticTypeName, 0xFFFFFFFFFFFFFFFFui64);
   v6 = UFG::qReflectWarehouse::Instance();
-  v7 = UFG::qReflectWarehouse::GetInventory(v6, v5);
-  v8 = &v7->mItems.mTree;
-  v9 = UFG::qTree64Base::GetHead(&v7->mItems.mTree);
-  if ( v9 )
+  p_mItems = &UFG::qReflectWarehouse::GetInventory(v6, v5)->mItems;
+  Head = UFG::qTree64Base::GetHead(&p_mItems->mTree);
+  if ( Head )
   {
-    v10 = (signed __int64)&v9[-1].mCount;
-    if ( v9 != (UFG::qTree64Base *)8 )
+    p_mCount = (UFG::PartDefinition *)&Head[-1].mCount;
+    if ( Head != (UFG::qTree64Base *)8 )
     {
       do
       {
-        if ( *(_DWORD *)(v10 + 96) == v2->mUID )
+        if ( p_mCount->mSlotName.mUID == slot_name->mUID )
         {
-          v11 = v3->size;
-          v12 = v3->capacity;
-          v13 = v11 + 1;
-          if ( (signed int)v11 + 1 > v12 )
+          vfptr_low = LODWORD(parts->vfptr);
+          vfptr_high = HIDWORD(parts->vfptr);
+          v12 = vfptr_low + 1;
+          if ( (int)vfptr_low + 1 > vfptr_high )
           {
-            if ( v12 )
-              v14 = 2 * v12;
+            if ( vfptr_high )
+              v13 = 2 * vfptr_high;
             else
-              v14 = 1;
-            for ( ; v14 < v13; v14 *= 2 )
+              v13 = 1;
+            for ( ; v13 < v12; v13 *= 2 )
               ;
-            if ( v14 <= 2 )
-              v14 = 2;
-            if ( v14 - v13 > 0x10000 )
-              v14 = v11 + 65537;
-            if ( v14 != (_DWORD)v11 )
+            if ( v13 <= 2 )
+              v13 = 2;
+            if ( v13 - v12 > 0x10000 )
+              v13 = vfptr_low + 65537;
+            if ( v13 != (_DWORD)vfptr_low )
             {
-              v15 = 8i64 * v14;
-              if ( !is_mul_ok(v14, 8ui64) )
-                v15 = -1i64;
-              v16 = UFG::qMalloc(v15, "qArray.Add", 0i64);
-              v17 = (UFG::PartDefinition **)v16;
-              if ( v3->p )
+              v14 = 8i64 * v13;
+              if ( !is_mul_ok(v13, 8ui64) )
+                v14 = -1i64;
+              v15 = UFG::qMalloc(v14, "qArray.Add", 0i64);
+              v16 = (UFG::PartDefinition **)v15;
+              if ( parts->mBaseNode.mUID )
               {
-                v18 = 0i64;
-                if ( v3->size )
+                for ( i = 0i64;
+                      (unsigned int)i < LODWORD(parts->vfptr);
+                      v15[v18] = *(UFG::allocator::free_link *)(v18 * 8 + parts->mBaseNode.mUID) )
                 {
-                  do
-                  {
-                    v19 = v18;
-                    v18 = (unsigned int)(v18 + 1);
-                    v16[v19] = (UFG::allocator::free_link)v3->p[v19];
-                  }
-                  while ( (unsigned int)v18 < v3->size );
+                  v18 = i;
+                  i = (unsigned int)(i + 1);
                 }
-                operator delete[](v3->p);
+                operator delete[]((void *)parts->mBaseNode.mUID);
               }
-              v3->p = v17;
-              v3->capacity = v14;
+              parts->mBaseNode.mUID = (unsigned __int64)v16;
+              HIDWORD(parts->vfptr) = v13;
             }
           }
-          v20 = v3->p;
-          v3->size = v13;
-          v20[v11] = (UFG::PartDefinition *)v10;
+          mUID = (UFG::PartDefinition **)parts->mBaseNode.mUID;
+          LODWORD(parts->vfptr) = v12;
+          mUID[vfptr_low] = p_mCount;
         }
-        v21 = UFG::qTree64Base::GetNext(v8, (UFG::qTree64Base::BaseNode *)(v10 + 8));
-        if ( !v21 )
+        Next = UFG::qTree64Base::GetNext(&p_mItems->mTree, &p_mCount->mBaseNode);
+        if ( !Next )
           break;
-        v10 = (signed __int64)&v21[-1].mCount;
+        p_mCount = (UFG::PartDefinition *)&Next[-1].mCount;
       }
-      while ( v21 != (UFG::qTree64Base *)8 );
+      while ( Next != (UFG::qTree64Base *)8 );
     }
   }
   UFG::qQuickSortImpl<UFG::UIMapBlip *,bool (*)(UFG::UIMapBlip * const &,UFG::UIMapBlip * const &)>(
-    (UFG::qPropertySet **)v3->p,
-    (UFG::qPropertySet **)&v3->p[(signed int)v3->size - 1i64],
+    (UFG::qPropertySet **)parts->mBaseNode.mUID,
+    (UFG::qPropertySet **)(parts->mBaseNode.mUID + 8 * (SLODWORD(parts->vfptr) - 1i64)),
     (bool (__fastcall *)(UFG::qPropertySet *const *, UFG::qPropertySet *const *))UFG::SortPartsByName);
 }
 
 // File Line: 371
 // RVA: 0x3DED90
-void __fastcall UFG::CustomizeBindings::OnCompositeFinished(UFG::PartTemplateInstance *instance, void *user_data)
+void __fastcall UFG::CustomizeBindings::OnCompositeFinished(
+        UFG::PartTemplateInstance *instance,
+        UFG::SimObjectGame *user_data)
 {
-  UFG::SimObjectGame *v2; // rbx
-  unsigned __int16 v3; // dx
-  UFG::PartTemplateInstance *v4; // rsi
-  UFG::SimComponent *v5; // rdi
-  UFG::SimComponent *v6; // rax
-  unsigned __int16 v7; // cx
-  UFG::StreamedResourceComponent *v8; // rax
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rdi
+  UFG::SimComponent *ComponentOfTypeHK; // rax
+  __int16 v7; // cx
+  UFG::StreamedResourceComponent *ComponentOfType; // rax
 
   if ( user_data )
   {
-    v2 = (UFG::SimObjectGame *)user_data;
-    v3 = *((_WORD *)user_data + 38);
-    v4 = instance;
-    if ( (v3 >> 14) & 1 )
+    m_Flags = user_data->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v5 = v2->m_Components.p[14].m_pComponent;
+      m_pComponent = user_data->m_Components.p[14].m_pComponent;
     }
-    else if ( (v3 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v3 >> 13) & 1 )
+      if ( (m_Flags & 0x2000) != 0 )
       {
-        v5 = v2->m_Components.p[9].m_pComponent;
+        m_pComponent = user_data->m_Components.p[9].m_pComponent;
       }
       else
       {
-        if ( (v3 >> 12) & 1 )
-          v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::CompositeDrawableComponent::_TypeUID);
+        if ( (m_Flags & 0x1000) != 0 )
+          ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                user_data,
+                                UFG::CompositeDrawableComponent::_TypeUID);
         else
-          v6 = UFG::SimObject::GetComponentOfType(
-                 (UFG::SimObject *)&v2->vfptr,
-                 UFG::CompositeDrawableComponent::_TypeUID);
-        v5 = v6;
+          ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(user_data, UFG::CompositeDrawableComponent::_TypeUID);
+        m_pComponent = ComponentOfTypeHK;
       }
     }
     else
     {
-      v5 = v2->m_Components.p[14].m_pComponent;
+      m_pComponent = user_data->m_Components.p[14].m_pComponent;
     }
-    v7 = v2->m_Flags;
-    if ( (v7 >> 14) & 1 )
+    v7 = user_data->m_Flags;
+    if ( (v7 & 0x4000) != 0 )
     {
-      v8 = (UFG::StreamedResourceComponent *)v2->m_Components.p[10].m_pComponent;
+      ComponentOfType = (UFG::StreamedResourceComponent *)user_data->m_Components.p[10].m_pComponent;
     }
-    else if ( (v7 & 0x8000u) == 0 )
+    else if ( v7 >= 0 )
     {
-      if ( (v7 >> 13) & 1 )
+      if ( (v7 & 0x2000) != 0 )
       {
-        v8 = (UFG::StreamedResourceComponent *)v2->m_Components.p[7].m_pComponent;
+        ComponentOfType = (UFG::StreamedResourceComponent *)user_data->m_Components.p[7].m_pComponent;
       }
-      else if ( (v7 >> 12) & 1 )
+      else if ( (v7 & 0x1000) != 0 )
       {
-        v8 = (UFG::StreamedResourceComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                 v2,
-                                                 UFG::StreamedResourceComponent::_TypeUID);
+        ComponentOfType = (UFG::StreamedResourceComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                              user_data,
+                                                              UFG::StreamedResourceComponent::_TypeUID);
       }
       else
       {
-        v8 = (UFG::StreamedResourceComponent *)UFG::SimObject::GetComponentOfType(
-                                                 (UFG::SimObject *)&v2->vfptr,
-                                                 UFG::StreamedResourceComponent::_TypeUID);
+        ComponentOfType = (UFG::StreamedResourceComponent *)UFG::SimObject::GetComponentOfType(
+                                                              user_data,
+                                                              UFG::StreamedResourceComponent::_TypeUID);
       }
     }
     else
     {
-      v8 = (UFG::StreamedResourceComponent *)v2->m_Components.p[10].m_pComponent;
+      ComponentOfType = (UFG::StreamedResourceComponent *)user_data->m_Components.p[10].m_pComponent;
     }
-    if ( v5 )
+    if ( m_pComponent )
     {
-      if ( v8 )
+      if ( ComponentOfType )
         UFG::StreamedResourceComponent::UpdateMaterialModifiers(
-          v8,
-          (Illusion::MaterialModifierParams<10> *)&v5[1].m_BoundComponentHandles,
-          v4);
+          ComponentOfType,
+          (Illusion::MaterialModifierParams<10> *)&m_pComponent[1].m_BoundComponentHandles,
+          instance);
     }
   }
 }
@@ -701,7 +672,7 @@ __int64 dynamic_initializer_for__gRigsHandle__()
   gRigsHandle.mImpl = 0i64;
   *(_DWORD *)&gRigsHandle.mFlags = 536870915;
   gRigsHandle._mTargetState.mValue = 1;
-  return atexit(dynamic_atexit_destructor_for__gRigsHandle__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gRigsHandle__);
 }
 
 // File Line: 482
@@ -713,7 +684,7 @@ __int64 dynamic_initializer_for__gPhysicsHandle__()
   gPhysicsHandle.mImpl = 0i64;
   *(_DWORD *)&gPhysicsHandle.mFlags = 536870915;
   gPhysicsHandle._mTargetState.mValue = 1;
-  return atexit(dynamic_atexit_destructor_for__gPhysicsHandle__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gPhysicsHandle__);
 }
 
 // File Line: 483
@@ -725,7 +696,7 @@ __int64 dynamic_initializer_for__gDatabaseHandle__()
   gDatabaseHandle.mImpl = 0i64;
   *(_DWORD *)&gDatabaseHandle.mFlags = 536870915;
   gDatabaseHandle._mTargetState.mValue = 1;
-  return atexit(dynamic_atexit_destructor_for__gDatabaseHandle__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gDatabaseHandle__);
 }
 
 // File Line: 494
@@ -756,17 +727,15 @@ void PartDatabase_ReleaseDatabase(void)
 // RVA: 0x3DF080
 void __fastcall PartDatabase_QueryPoolSize(unsigned int *mainMemory, unsigned int *textureMemory)
 {
-  unsigned int *v2; // rdi
-
-  v2 = textureMemory;
   *mainMemory = g_HK_PartsDBMemoryPoolSize
               + g_HK_TrueCrowdMemoryPoolSize
-              - (((unsigned __int64)UFG::StreamFileWrapper::GetAllocationSize(PART_DATABASE) + 4095) & 0xFFFFF000);
-  *v2 = g_HK_TrueCrowdTexturePoolSize + g_HK_PartsDBTexturePoolSize;
+              - ((UFG::StreamFileWrapper::GetAllocationSize(PART_DATABASE) + 4095) & 0xFFFFF000);
+  *textureMemory = g_HK_TrueCrowdTexturePoolSize + g_HK_PartsDBTexturePoolSize;
 }
 
 // File Line: 517
 // RVA: 0x3DF070
+// attributes: thunk
 __int64 __fastcall PartDatabase_QueryFileSize(const char *filename)
 {
   return UFG::StreamFileWrapper::GetAllocationSize(filename);
@@ -776,15 +745,12 @@ __int64 __fastcall PartDatabase_QueryFileSize(const char *filename)
 // RVA: 0x3DF040
 void __fastcall PartDatabase_PartHasBeenLoaded(UFG::DataStreamer::Handle *handle, UFG::PartRequest *callbackParam)
 {
-  UFG::PartRequest *v2; // rbx
   UFG::PartDatabase *v3; // rax
 
-  ++callbackParam->mLoadCount;
-  v2 = callbackParam;
-  if ( callbackParam->mLoadCount == 2 )
+  if ( ++callbackParam->mLoadCount == 2 )
   {
     v3 = UFG::PartDatabase::Instance();
-    UFG::PartDatabase::OnStreamingComplete(v3, v2);
+    UFG::PartDatabase::OnStreamingComplete(v3, callbackParam);
   }
 }
 
@@ -792,20 +758,18 @@ void __fastcall PartDatabase_PartHasBeenLoaded(UFG::DataStreamer::Handle *handle
 // RVA: 0x3DF0E0
 _BOOL8 __fastcall PartDatabase_QueueStream(UFG::PartRequest *pRequest)
 {
-  UFG::PartRequest *callbackParam; // rsi
   UFG::DataStreamer::PRIORITY v2; // ebx
   int v3; // eax
   int v4; // eax
-  UFG::allocator::free_link *v5; // rax
+  UFG::DataStreamer::Handle *v5; // rax
   char v6; // bp
   UFG::DataStreamer::Handle *v7; // rax
   bool v8; // bl
-  UFG::qString v10; // [rsp+48h] [rbp-80h]
-  UFG::qString result; // [rsp+70h] [rbp-58h]
+  UFG::qString v10; // [rsp+48h] [rbp-80h] BYREF
+  UFG::qString v11; // [rsp+70h] [rbp-58h] BYREF
 
-  callbackParam = pRequest;
-  v2 = 0x2000;
-  v3 = (unsigned __int64)UFG::PartRequest::GetHighestBucket(pRequest) - 1;
+  v2 = DEFAULT_PRIORITY;
+  v3 = UFG::PartRequest::GetHighestBucket(pRequest) - 1;
   if ( v3 && (v4 = v3 - 1) != 0 )
   {
     if ( v4 == 1 )
@@ -815,37 +779,37 @@ _BOOL8 __fastcall PartDatabase_QueueStream(UFG::PartRequest *pRequest)
   {
     v2 = 12287;
   }
-  UFG::PartDefinition::GetModelFileName((UFG::PartDefinition *)callbackParam->mPartDefHandle.mData, &result);
-  v5 = UFG::qMalloc(0x30ui64, "PartDatabase_QueueStream", 0i64);
+  UFG::PartDefinition::GetModelFileName((UFG::PartDefinition *)pRequest->mPartDefHandle.mData, &v11);
+  v5 = (UFG::DataStreamer::Handle *)UFG::qMalloc(0x30ui64, "PartDatabase_QueueStream", 0i64);
   if ( v5 )
   {
+    v5->mPrev = v5;
     v5->mNext = v5;
-    v5[1].mNext = v5;
-    v5[2].mNext = 0i64;
-    v5[3].mNext = 0i64;
-    v5[4].mNext = 0i64;
-    LODWORD(v5[5].mNext) = 536870915;
-    WORD2(v5[5].mNext) = 1;
+    v5->mCallback = 0i64;
+    v5->mCallbackParam = 0i64;
+    v5->mImpl = 0i64;
+    *(_DWORD *)&v5->mFlags = 536870915;
+    v5->_mTargetState.mValue = 1;
   }
   else
   {
     v5 = 0i64;
   }
-  callbackParam->mModelDataStreamerHandle = v5;
+  pRequest->mModelDataStreamerHandle = v5;
   v6 = UFG::DataStreamer::QueueStream(
-         (UFG::DataStreamer::Handle *)v5,
-         result.mData,
+         v5,
+         v11.mData,
          gStreamingPoolId,
          v2,
          0,
          (void (__fastcall *)(UFG::DataStreamer::Handle *, void *))PartDatabase_PartHasBeenLoaded,
-         callbackParam);
-  UFG::PartDefinition::GetTextureFileName((UFG::PartDefinition *)callbackParam->mPartDefHandle.mData, &v10);
+         pRequest);
+  UFG::PartDefinition::GetTextureFileName((UFG::PartDefinition *)pRequest->mPartDefHandle.mData, &v10);
   v7 = (UFG::DataStreamer::Handle *)UFG::qMalloc(0x30ui64, "PartDatabase_QueueStream", 0i64);
   if ( v7 )
   {
-    v7->mPrev = (UFG::qNode<UFG::DataStreamer::Handle,UFG::DataStreamer::Handle> *)&v7->mPrev;
-    v7->mNext = (UFG::qNode<UFG::DataStreamer::Handle,UFG::DataStreamer::Handle> *)&v7->mPrev;
+    v7->mPrev = v7;
+    v7->mNext = v7;
     v7->mCallback = 0i64;
     v7->mCallbackParam = 0i64;
     v7->mImpl = 0i64;
@@ -856,7 +820,7 @@ _BOOL8 __fastcall PartDatabase_QueueStream(UFG::PartRequest *pRequest)
   {
     v7 = 0i64;
   }
-  callbackParam->mTextureDataStreamerHandle = v7;
+  pRequest->mTextureDataStreamerHandle = v7;
   v8 = v6
     && UFG::DataStreamer::QueueStream(
          v7,
@@ -865,9 +829,9 @@ _BOOL8 __fastcall PartDatabase_QueueStream(UFG::PartRequest *pRequest)
          v2,
          0,
          (void (__fastcall *)(UFG::DataStreamer::Handle *, void *))PartDatabase_PartHasBeenLoaded,
-         callbackParam);
+         pRequest);
   UFG::qString::~qString(&v10);
-  UFG::qString::~qString(&result);
+  UFG::qString::~qString(&v11);
   return v8;
 }
 
@@ -875,34 +839,32 @@ _BOOL8 __fastcall PartDatabase_QueueStream(UFG::PartRequest *pRequest)
 // RVA: 0x3DF2C0
 void __fastcall PartDatabase_ReleaseStream(UFG::PartRequest *pRequest)
 {
-  UFG::DataStreamer::Handle *v1; // rdi
-  UFG::PartRequest *v2; // rbx
-  UFG::DataStreamer::Handle *v3; // rdi
+  UFG::DataStreamer::Handle *mModelDataStreamerHandle; // rdi
+  UFG::DataStreamer::Handle *mTextureDataStreamerHandle; // rdi
 
-  v1 = (UFG::DataStreamer::Handle *)pRequest->mModelDataStreamerHandle;
-  v2 = pRequest;
-  UFG::DataStreamer::ReleaseStream((UFG::DataStreamer::Handle *)pRequest->mModelDataStreamerHandle);
-  if ( v1 )
+  mModelDataStreamerHandle = (UFG::DataStreamer::Handle *)pRequest->mModelDataStreamerHandle;
+  UFG::DataStreamer::ReleaseStream(mModelDataStreamerHandle);
+  if ( mModelDataStreamerHandle )
   {
-    UFG::DataStreamer::Handle::~Handle(v1);
-    operator delete[](v1);
+    UFG::DataStreamer::Handle::~Handle(mModelDataStreamerHandle);
+    operator delete[](mModelDataStreamerHandle);
   }
-  v3 = (UFG::DataStreamer::Handle *)v2->mTextureDataStreamerHandle;
-  v2->mModelDataStreamerHandle = 0i64;
-  UFG::DataStreamer::ReleaseStream(v3);
-  if ( v3 )
+  mTextureDataStreamerHandle = (UFG::DataStreamer::Handle *)pRequest->mTextureDataStreamerHandle;
+  pRequest->mModelDataStreamerHandle = 0i64;
+  UFG::DataStreamer::ReleaseStream(mTextureDataStreamerHandle);
+  if ( mTextureDataStreamerHandle )
   {
-    UFG::DataStreamer::Handle::~Handle(v3);
-    operator delete[](v3);
+    UFG::DataStreamer::Handle::~Handle(mTextureDataStreamerHandle);
+    operator delete[](mTextureDataStreamerHandle);
   }
-  v2->mTextureDataStreamerHandle = 0i64;
+  pRequest->mTextureDataStreamerHandle = 0i64;
 }
 
 // File Line: 594
 // RVA: 0x3DEFC0
 char __fastcall PartDatabase_IsStreamingStalled()
 {
-  UFG::StreamingMemory::DATA_TYPE dataTypes; // [rsp+30h] [rbp+8h]
+  UFG::StreamingMemory::DATA_TYPE dataTypes; // [rsp+30h] [rbp+8h] BYREF
   UFG::StreamingMemory::DATA_TYPE v2; // [rsp+34h] [rbp+Ch]
 
   dataTypes = gStreamingPoolId;

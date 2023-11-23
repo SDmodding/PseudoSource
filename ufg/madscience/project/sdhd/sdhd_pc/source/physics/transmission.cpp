@@ -1,259 +1,227 @@
 // File Line: 25
 // RVA: 0x46A340
-void __fastcall UFG::Transmission::InitializeFromPropertySet(UFG::Transmission *this, UFG::WheeledVehiclePhysicsDef *vehicle_data_ptr, int numWheels, int firstFrontWheel, int lastFrontWheel, int firstRearWheel, int lastRearWheel)
+void __fastcall UFG::Transmission::InitializeFromPropertySet(
+        UFG::Transmission *this,
+        UFG::WheeledVehiclePhysicsDef *vehicle_data_ptr,
+        int numWheels,
+        int firstFrontWheel,
+        int lastFrontWheel,
+        int firstRearWheel,
+        int lastRearWheel)
 {
-  signed __int64 v7; // r13
-  int v8; // ebp
+  __int64 v7; // r13
   int v9; // eax
-  UFG::WheeledVehiclePhysicsDef *v10; // rbx
-  UFG::Transmission *v11; // rsi
   int v12; // eax
-  int v13; // er9
-  signed __int64 v14; // rbp
+  int v13; // r9d
+  __int64 mNumItems; // rbp
   int v15; // eax
   int v16; // eax
-  int v17; // er9
+  int v17; // r9d
   int v18; // eax
   int v19; // eax
-  int v20; // er9
+  int v20; // r9d
   int v21; // eax
   int v22; // eax
-  int v23; // er9
-  signed __int64 v24; // rdx
+  int v23; // r9d
+  __int64 v24; // rdx
   int v25; // eax
-  int v26; // er9
-  int v27; // eax
-  int v28; // eax
-  int v29; // er9
-  int v30; // eax
-  int v31; // eax
-  int v32; // er9
-  signed __int64 v33; // r8
-  signed __int64 v34; // rdx
-  signed __int64 v35; // r9
-  signed __int64 v36; // rdx
-  signed __int64 v37; // r8
-  signed __int64 v38; // r9
-  hkResult result; // [rsp+70h] [rbp+18h]
+  int v26; // r9d
+  int v27; // r9d
+  int v28; // r9d
+  __int64 v29; // r8
+  __int64 v30; // rdx
+  __int64 v31; // r9
+  __int64 v32; // rdx
+  __int64 v33; // r8
+  __int64 v34; // r9
+  hkResult result; // [rsp+70h] [rbp+18h] BYREF
 
   this->m_clutchDelayTime = vehicle_data_ptr->drivetrain_clutchDelayTime;
   v7 = firstFrontWheel;
   this->m_reverseGearRatio = vehicle_data_ptr->drivetrain_reverseGearRatio;
-  v8 = numWheels;
   v9 = this->m_wheelsTorqueRatio.m_capacityAndFlags & 0x3FFFFFFF;
-  v10 = vehicle_data_ptr;
-  v11 = this;
   if ( v9 < numWheels )
   {
     v12 = 2 * v9;
     v13 = numWheels;
     if ( numWheels < v12 )
       v13 = v12;
-    hkArrayUtil::_reserve(
-      &result,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &this->m_wheelsTorqueRatio,
-      v13,
-      4);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, &this->m_wheelsTorqueRatio, v13, 4);
   }
-  v11->m_wheelsTorqueRatio.m_size = v8;
-  v14 = v10->drivetrain_gearRatioTable.mData.mNumItems;
-  v15 = v11->m_gearsRatio.m_capacityAndFlags & 0x3FFFFFFF;
-  if ( (signed int)v14 <= 0 )
+  this->m_wheelsTorqueRatio.m_size = numWheels;
+  mNumItems = vehicle_data_ptr->drivetrain_gearRatioTable.mData.mNumItems;
+  v15 = this->m_gearsRatio.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( (int)mNumItems <= 0 )
   {
-    if ( v15 < 5 )
+    if ( (this->m_gearsRatio.m_capacityAndFlags & 0x3FFFFFFFu) < 5 )
     {
       v25 = 2 * v15;
       v26 = 5;
       if ( v25 > 5 )
         v26 = v25;
-      hkArrayUtil::_reserve(
-        &result,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        &v11->m_gearsRatio,
-        v26,
-        4);
+      hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, &this->m_gearsRatio, v26, 4);
     }
-    v11->m_gearsRatio.m_size = 5;
-    *v11->m_gearsRatio.m_data = v10->drivetrain_gearRatio1;
-    *((_DWORD *)v11->m_gearsRatio.m_data + 1) = LODWORD(v10->drivetrain_gearRatio2);
-    *((_DWORD *)v11->m_gearsRatio.m_data + 2) = LODWORD(v10->drivetrain_gearRatio3);
-    *((_DWORD *)v11->m_gearsRatio.m_data + 3) = LODWORD(v10->drivetrain_gearRatio4);
-    *((_DWORD *)v11->m_gearsRatio.m_data + 4) = LODWORD(v10->drivetrain_gearRatio5);
-    v11->m_downshiftRPM = v10->drivetrain_downshiftRPM;
-    v11->m_upshiftRPM = v10->drivetrain_upshiftRPM;
-    v27 = v11->mUpshiftRPM.m_capacityAndFlags & 0x3FFFFFFF;
-    if ( v27 < 5 )
+    this->m_gearsRatio.m_size = 5;
+    *this->m_gearsRatio.m_data = vehicle_data_ptr->drivetrain_gearRatio1;
+    *((_DWORD *)this->m_gearsRatio.m_data + 1) = LODWORD(vehicle_data_ptr->drivetrain_gearRatio2);
+    *((_DWORD *)this->m_gearsRatio.m_data + 2) = LODWORD(vehicle_data_ptr->drivetrain_gearRatio3);
+    *((_DWORD *)this->m_gearsRatio.m_data + 3) = LODWORD(vehicle_data_ptr->drivetrain_gearRatio4);
+    *((_DWORD *)this->m_gearsRatio.m_data + 4) = LODWORD(vehicle_data_ptr->drivetrain_gearRatio5);
+    this->m_downshiftRPM = vehicle_data_ptr->drivetrain_downshiftRPM;
+    this->m_upshiftRPM = vehicle_data_ptr->drivetrain_upshiftRPM;
+    if ( (this->mUpshiftRPM.m_capacityAndFlags & 0x3FFFFFFFu) < 5 )
     {
-      v28 = 2 * v27;
-      v29 = 5;
-      if ( v28 > 5 )
-        v29 = v28;
-      hkArrayUtil::_reserve(
-        &result,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        &v11->mUpshiftRPM,
-        v29,
-        4);
+      v27 = 5;
+      if ( 2 * (this->mUpshiftRPM.m_capacityAndFlags & 0x3FFFFFFF) > 5 )
+        v27 = 2 * (this->mUpshiftRPM.m_capacityAndFlags & 0x3FFFFFFF);
+      hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, &this->mUpshiftRPM, v27, 4);
     }
-    v11->mUpshiftRPM.m_size = 5;
-    *v11->mUpshiftRPM.m_data = v11->m_upshiftRPM;
-    *((_DWORD *)v11->mUpshiftRPM.m_data + 1) = LODWORD(v11->m_upshiftRPM);
-    *((_DWORD *)v11->mUpshiftRPM.m_data + 2) = LODWORD(v11->m_upshiftRPM);
-    *((_DWORD *)v11->mUpshiftRPM.m_data + 3) = LODWORD(v11->m_upshiftRPM);
-    *((_DWORD *)v11->mUpshiftRPM.m_data + 4) = LODWORD(v11->m_upshiftRPM);
-    v30 = v11->mDownshiftRPM.m_capacityAndFlags & 0x3FFFFFFF;
-    if ( v30 < 5 )
+    this->mUpshiftRPM.m_size = 5;
+    *this->mUpshiftRPM.m_data = this->m_upshiftRPM;
+    *((_DWORD *)this->mUpshiftRPM.m_data + 1) = LODWORD(this->m_upshiftRPM);
+    *((_DWORD *)this->mUpshiftRPM.m_data + 2) = LODWORD(this->m_upshiftRPM);
+    *((_DWORD *)this->mUpshiftRPM.m_data + 3) = LODWORD(this->m_upshiftRPM);
+    *((_DWORD *)this->mUpshiftRPM.m_data + 4) = LODWORD(this->m_upshiftRPM);
+    if ( (this->mDownshiftRPM.m_capacityAndFlags & 0x3FFFFFFFu) < 5 )
     {
-      v31 = 2 * v30;
-      v32 = 5;
-      if ( v31 > 5 )
-        v32 = v31;
-      hkArrayUtil::_reserve(
-        &result,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        &v11->mDownshiftRPM,
-        v32,
-        4);
+      v28 = 5;
+      if ( 2 * (this->mDownshiftRPM.m_capacityAndFlags & 0x3FFFFFFF) > 5 )
+        v28 = 2 * (this->mDownshiftRPM.m_capacityAndFlags & 0x3FFFFFFF);
+      hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, &this->mDownshiftRPM, v28, 4);
     }
-    v11->mDownshiftRPM.m_size = 5;
-    *v11->mDownshiftRPM.m_data = v11->m_downshiftRPM;
-    *((_DWORD *)v11->mDownshiftRPM.m_data + 1) = LODWORD(v11->m_downshiftRPM);
-    *((_DWORD *)v11->mDownshiftRPM.m_data + 2) = LODWORD(v11->m_downshiftRPM);
-    *((_DWORD *)v11->mDownshiftRPM.m_data + 3) = LODWORD(v11->m_downshiftRPM);
-    *((_DWORD *)v11->mDownshiftRPM.m_data + 4) = LODWORD(v11->m_downshiftRPM);
+    this->mDownshiftRPM.m_size = 5;
+    *this->mDownshiftRPM.m_data = this->m_downshiftRPM;
+    *((_DWORD *)this->mDownshiftRPM.m_data + 1) = LODWORD(this->m_downshiftRPM);
+    *((_DWORD *)this->mDownshiftRPM.m_data + 2) = LODWORD(this->m_downshiftRPM);
+    *((_DWORD *)this->mDownshiftRPM.m_data + 3) = LODWORD(this->m_downshiftRPM);
+    *((_DWORD *)this->mDownshiftRPM.m_data + 4) = LODWORD(this->m_downshiftRPM);
   }
   else
   {
-    if ( v15 < (signed int)v14 )
+    if ( v15 < (int)mNumItems )
     {
       v16 = 2 * v15;
-      v17 = v14;
-      if ( (signed int)v14 < v16 )
+      v17 = vehicle_data_ptr->drivetrain_gearRatioTable.mData.mNumItems;
+      if ( (int)mNumItems < v16 )
         v17 = v16;
-      hkArrayUtil::_reserve(
-        &result,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        &v11->m_gearsRatio,
-        v17,
-        4);
+      hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, &this->m_gearsRatio, v17, 4);
     }
-    v11->m_gearsRatio.m_size = v14;
-    v18 = v11->mUpshiftRPM.m_capacityAndFlags & 0x3FFFFFFF;
-    if ( v18 < (signed int)v14 )
+    this->m_gearsRatio.m_size = mNumItems;
+    v18 = this->mUpshiftRPM.m_capacityAndFlags & 0x3FFFFFFF;
+    if ( v18 < (int)mNumItems )
     {
       v19 = 2 * v18;
-      v20 = v14;
-      if ( (signed int)v14 < v19 )
+      v20 = mNumItems;
+      if ( (int)mNumItems < v19 )
         v20 = v19;
-      hkArrayUtil::_reserve(
-        &result,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        &v11->mUpshiftRPM,
-        v20,
-        4);
+      hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, &this->mUpshiftRPM, v20, 4);
     }
-    v11->mUpshiftRPM.m_size = v14;
-    v21 = v11->mDownshiftRPM.m_capacityAndFlags & 0x3FFFFFFF;
-    if ( v21 < (signed int)v14 )
+    this->mUpshiftRPM.m_size = mNumItems;
+    v21 = this->mDownshiftRPM.m_capacityAndFlags & 0x3FFFFFFF;
+    if ( v21 < (int)mNumItems )
     {
       v22 = 2 * v21;
-      v23 = v14;
-      if ( (signed int)v14 < v22 )
+      v23 = mNumItems;
+      if ( (int)mNumItems < v22 )
         v23 = v22;
-      hkArrayUtil::_reserve(
-        &result,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        &v11->mDownshiftRPM,
-        v23,
-        4);
+      hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, &this->mDownshiftRPM, v23, 4);
     }
     v24 = 0i64;
-    v11->mDownshiftRPM.m_size = v14;
-    if ( v14 >= 4 )
+    this->mDownshiftRPM.m_size = mNumItems;
+    if ( mNumItems >= 4 )
     {
       do
       {
         v24 += 4i64;
-        v11->m_gearsRatio.m_data[v24 - 4] = v10->drivetrain_gearRatioTable.mData.mItems[v24 - 4];
-        v11->mUpshiftRPM.m_data[v24 - 4] = v10->drivetrain_upshiftTable.mData.mItems[v24 - 4];
-        v11->mDownshiftRPM.m_data[v24 - 4] = v10->drivetrain_downshiftTable.mData.mItems[v24 - 4];
-        v11->m_gearsRatio.m_data[v24 - 3] = v10->drivetrain_gearRatioTable.mData.mItems[v24 - 3];
-        v11->mUpshiftRPM.m_data[v24 - 3] = v10->drivetrain_upshiftTable.mData.mItems[v24 - 3];
-        v11->mDownshiftRPM.m_data[v24 - 3] = v10->drivetrain_downshiftTable.mData.mItems[v24 - 3];
-        v11->m_gearsRatio.m_data[v24 - 2] = v10->drivetrain_gearRatioTable.mData.mItems[v24 - 2];
-        v11->mUpshiftRPM.m_data[v24 - 2] = v10->drivetrain_upshiftTable.mData.mItems[v24 - 2];
-        v11->mDownshiftRPM.m_data[v24 - 2] = v10->drivetrain_downshiftTable.mData.mItems[v24 - 2];
-        v11->m_gearsRatio.m_data[v24 - 1] = v10->drivetrain_gearRatioTable.mData.mItems[v24 - 1];
-        v11->mUpshiftRPM.m_data[v24 - 1] = v10->drivetrain_upshiftTable.mData.mItems[v24 - 1];
-        v11->mDownshiftRPM.m_data[v24 - 1] = v10->drivetrain_downshiftTable.mData.mItems[v24 - 1];
+        this->m_gearsRatio.m_data[v24 - 4] = vehicle_data_ptr->drivetrain_gearRatioTable.mData.mItems[v24 - 4];
+        this->mUpshiftRPM.m_data[v24 - 4] = vehicle_data_ptr->drivetrain_upshiftTable.mData.mItems[v24 - 4];
+        this->mDownshiftRPM.m_data[v24 - 4] = vehicle_data_ptr->drivetrain_downshiftTable.mData.mItems[v24 - 4];
+        this->m_gearsRatio.m_data[v24 - 3] = vehicle_data_ptr->drivetrain_gearRatioTable.mData.mItems[v24 - 3];
+        this->mUpshiftRPM.m_data[v24 - 3] = vehicle_data_ptr->drivetrain_upshiftTable.mData.mItems[v24 - 3];
+        this->mDownshiftRPM.m_data[v24 - 3] = vehicle_data_ptr->drivetrain_downshiftTable.mData.mItems[v24 - 3];
+        this->m_gearsRatio.m_data[v24 - 2] = vehicle_data_ptr->drivetrain_gearRatioTable.mData.mItems[v24 - 2];
+        this->mUpshiftRPM.m_data[v24 - 2] = vehicle_data_ptr->drivetrain_upshiftTable.mData.mItems[v24 - 2];
+        this->mDownshiftRPM.m_data[v24 - 2] = vehicle_data_ptr->drivetrain_downshiftTable.mData.mItems[v24 - 2];
+        this->m_gearsRatio.m_data[v24 - 1] = vehicle_data_ptr->drivetrain_gearRatioTable.mData.mItems[v24 - 1];
+        this->mUpshiftRPM.m_data[v24 - 1] = vehicle_data_ptr->drivetrain_upshiftTable.mData.mItems[v24 - 1];
+        this->mDownshiftRPM.m_data[v24 - 1] = vehicle_data_ptr->drivetrain_downshiftTable.mData.mItems[v24 - 1];
       }
-      while ( v24 < v14 - 3 );
+      while ( v24 < mNumItems - 3 );
     }
-    for ( ; v24 < v14; v11->mDownshiftRPM.m_data[v24 - 1] = v10->drivetrain_downshiftTable.mData.mItems[v24 - 1] )
+    for ( ;
+          v24 < mNumItems;
+          this->mDownshiftRPM.m_data[v24 - 1] = vehicle_data_ptr->drivetrain_downshiftTable.mData.mItems[v24 - 1] )
     {
       ++v24;
-      v11->m_gearsRatio.m_data[v24 - 1] = v10->drivetrain_gearRatioTable.mData.mItems[v24 - 1];
-      v11->mUpshiftRPM.m_data[v24 - 1] = v10->drivetrain_upshiftTable.mData.mItems[v24 - 1];
+      this->m_gearsRatio.m_data[v24 - 1] = vehicle_data_ptr->drivetrain_gearRatioTable.mData.mItems[v24 - 1];
+      this->mUpshiftRPM.m_data[v24 - 1] = vehicle_data_ptr->drivetrain_upshiftTable.mData.mItems[v24 - 1];
     }
   }
-  v33 = lastFrontWheel;
-  v34 = v7;
+  v29 = lastFrontWheel;
+  v30 = v7;
   if ( v7 <= lastFrontWheel )
   {
     if ( lastFrontWheel - v7 + 1 >= 4 )
     {
-      v35 = lastFrontWheel - 3i64;
+      v31 = lastFrontWheel - 3i64;
       do
       {
-        v34 += 4i64;
-        v11->m_wheelsTorqueRatio.m_data[v34 - 4] = v10->drivetrain_frontWheelTorqueRatio;
-        v11->m_wheelsTorqueRatio.m_data[v34 - 3] = v10->drivetrain_frontWheelTorqueRatio;
-        v11->m_wheelsTorqueRatio.m_data[v34 - 2] = v10->drivetrain_frontWheelTorqueRatio;
-        v11->m_wheelsTorqueRatio.m_data[v34 - 1] = v10->drivetrain_frontWheelTorqueRatio;
+        v30 += 4i64;
+        this->m_wheelsTorqueRatio.m_data[v30 - 4] = vehicle_data_ptr->drivetrain_frontWheelTorqueRatio;
+        this->m_wheelsTorqueRatio.m_data[v30 - 3] = vehicle_data_ptr->drivetrain_frontWheelTorqueRatio;
+        this->m_wheelsTorqueRatio.m_data[v30 - 2] = vehicle_data_ptr->drivetrain_frontWheelTorqueRatio;
+        this->m_wheelsTorqueRatio.m_data[v30 - 1] = vehicle_data_ptr->drivetrain_frontWheelTorqueRatio;
       }
-      while ( v34 <= v35 );
+      while ( v30 <= v31 );
     }
-    for ( ; v34 <= v33; v11->m_wheelsTorqueRatio.m_data[v34 - 1] = v10->drivetrain_frontWheelTorqueRatio )
-      ++v34;
+    for ( ; v30 <= v29; this->m_wheelsTorqueRatio.m_data[v30 - 1] = vehicle_data_ptr->drivetrain_frontWheelTorqueRatio )
+      ++v30;
   }
-  v36 = firstRearWheel;
-  v37 = lastRearWheel;
-  if ( firstRearWheel <= (signed __int64)lastRearWheel )
+  v32 = firstRearWheel;
+  v33 = lastRearWheel;
+  if ( firstRearWheel <= (__int64)lastRearWheel )
   {
-    if ( lastRearWheel - (signed __int64)firstRearWheel + 1 >= 4 )
+    if ( lastRearWheel - (__int64)firstRearWheel + 1 >= 4 )
     {
-      v38 = lastRearWheel - 3i64;
+      v34 = lastRearWheel - 3i64;
       do
       {
-        v36 += 4i64;
-        v11->m_wheelsTorqueRatio.m_data[v36 - 4] = v10->drivetrain_rearWheelTorqueRatio;
-        v11->m_wheelsTorqueRatio.m_data[v36 - 3] = v10->drivetrain_rearWheelTorqueRatio;
-        v11->m_wheelsTorqueRatio.m_data[v36 - 2] = v10->drivetrain_rearWheelTorqueRatio;
-        v11->m_wheelsTorqueRatio.m_data[v36 - 1] = v10->drivetrain_rearWheelTorqueRatio;
+        v32 += 4i64;
+        this->m_wheelsTorqueRatio.m_data[v32 - 4] = vehicle_data_ptr->drivetrain_rearWheelTorqueRatio;
+        this->m_wheelsTorqueRatio.m_data[v32 - 3] = vehicle_data_ptr->drivetrain_rearWheelTorqueRatio;
+        this->m_wheelsTorqueRatio.m_data[v32 - 2] = vehicle_data_ptr->drivetrain_rearWheelTorqueRatio;
+        this->m_wheelsTorqueRatio.m_data[v32 - 1] = vehicle_data_ptr->drivetrain_rearWheelTorqueRatio;
       }
-      while ( v36 <= v38 );
+      while ( v32 <= v34 );
     }
-    for ( ; v36 <= v37; v11->m_wheelsTorqueRatio.m_data[v36 - 1] = v10->drivetrain_rearWheelTorqueRatio )
-      ++v36;
+    for ( ; v32 <= v33; this->m_wheelsTorqueRatio.m_data[v32 - 1] = vehicle_data_ptr->drivetrain_rearWheelTorqueRatio )
+      ++v32;
   }
-  v11->m_primaryTransmissionRatio = v10->drivetrain_finalDriveRatio;
+  this->m_primaryTransmissionRatio = vehicle_data_ptr->drivetrain_finalDriveRatio;
 }
 
 // File Line: 92
 // RVA: 0x4879D0
-void __fastcall UFG::Transmission::getCurrentRatio(UFG::Transmission *this, hkpVehicleInstance *vehicle, hkpVehicleTransmission::TransmissionOutput *transmissionOut)
+double __fastcall UFG::Transmission::getCurrentRatio(
+        UFG::Transmission *this,
+        hkpVehicleInstance *vehicle,
+        hkpVehicleTransmission::TransmissionOutput *transmissionOut)
 {
-  if ( !(*((_BYTE *)this + 104) & 1) )
-    hkpVehicleDefaultTransmission::getCurrentRatio(
-      (hkpVehicleDefaultTransmission *)&this->vfptr,
-      vehicle,
-      transmissionOut);
+  double result; // xmm0_8
+
+  if ( (*((_BYTE *)this + 104) & 1) != 0 )
+    return 0.0;
+  *(float *)&result = hkpVehicleDefaultTransmission::getCurrentRatio(this, vehicle, transmissionOut);
+  return result;
 }
 
 // File Line: 102
 // RVA: 0x483DD0
-hkBool *__fastcall UFG::Transmission::calcIsReversing(UFG::Transmission *this, hkBool *result, hkpVehicleInstance *vehicle, hkpVehicleTransmission::TransmissionOutput *transmissionOut)
+hkBool *__fastcall UFG::Transmission::calcIsReversing(
+        UFG::Transmission *this,
+        hkBool *result,
+        hkpVehicleInstance *vehicle,
+        hkpVehicleTransmission::TransmissionOutput *transmissionOut)
 {
   result->m_bool = (char)vehicle->m_tryingToReverse;
   return result;
@@ -261,96 +229,96 @@ hkBool *__fastcall UFG::Transmission::calcIsReversing(UFG::Transmission *this, h
 
 // File Line: 109
 // RVA: 0x484120
-float __usercall UFG::Transmission::calcTransmissionRPM@<xmm0>(UFG::Transmission *this@<rcx>, hkpVehicleInstance *vehicle@<rdx>, hkpVehicleTransmission::TransmissionOutput *transmissionOut@<r8>, float a4@<xmm0>)
+float __fastcall UFG::Transmission::calcTransmissionRPM(
+        UFG::Transmission *this,
+        hkpVehicleInstance *vehicle,
+        hkpVehicleTransmission::TransmissionOutput *transmissionOut)
 {
-  signed __int64 v4; // r10
-  hkpVehicleTransmission::TransmissionOutput *v5; // rdi
-  signed __int64 v6; // r9
-  hkpVehicleInstance *v7; // rbx
-  UFG::Transmission *v8; // r11
-  float v9; // xmm6_4
-  float *v10; // rax
-  float *v11; // rdx
-  unsigned __int64 v12; // rcx
-  float v13; // xmm1_4
-  float v14; // xmm0_4
-  float v15; // xmm6_4
-  signed __int64 v16; // rdx
-  float *v17; // r8
-  signed __int64 v18; // r9
-  float v19; // xmm0_4
+  __int64 v3; // r10
+  __int64 m_numWheels; // r9
+  float v8; // xmm6_4
+  float *v9; // rax
+  float *p_m_spinVelocity; // rdx
+  unsigned __int64 v11; // rcx
+  float v12; // xmm1_4
+  float v13; // xmm0_4
+  float *v14; // rdx
+  float *v15; // r8
+  __int64 v16; // r9
+  float v17; // xmm0_4
 
-  v4 = 0i64;
-  v5 = transmissionOut;
-  v6 = vehicle->m_data->m_numWheels;
-  v7 = vehicle;
-  v8 = this;
-  v9 = 0.0;
-  if ( v6 >= 4 )
+  v3 = 0i64;
+  m_numWheels = vehicle->m_data->m_numWheels;
+  v8 = 0.0;
+  if ( m_numWheels >= 4 )
   {
-    v10 = this->m_wheelsTorqueRatio.m_data + 2;
-    v11 = &vehicle->m_wheelsInfo.m_data[1].m_spinVelocity;
-    v12 = ((unsigned __int64)(v6 - 4) >> 2) + 1;
-    v4 = 4 * v12;
+    v9 = this->m_wheelsTorqueRatio.m_data + 2;
+    p_m_spinVelocity = &vehicle->m_wheelsInfo.m_data[1].m_spinVelocity;
+    v11 = ((unsigned __int64)(m_numWheels - 4) >> 2) + 1;
+    v3 = 4 * v11;
     do
     {
-      v13 = *(v11 - 56);
-      v14 = *v11;
-      v10 += 4;
-      v11 += 224;
-      v15 = (float)((float)((float)((float)(v13 * 60.0) * 0.15915494) * *(v10 - 6)) + v9)
-          + (float)((float)((float)(v14 * 60.0) * 0.15915494) * *(v10 - 5));
-      a4 = (float)((float)(*(v11 - 112) * 60.0) * 0.15915494) * *(v10 - 3);
-      v9 = (float)(v15 + (float)((float)((float)(*(v11 - 168) * 60.0) * 0.15915494) * *(v10 - 4))) + a4;
-      --v12;
+      v12 = *(p_m_spinVelocity - 56);
+      v13 = *p_m_spinVelocity;
+      v9 += 4;
+      p_m_spinVelocity += 224;
+      v8 = (float)((float)((float)((float)((float)((float)(v12 * 60.0) * 0.15915494) * *(v9 - 6)) + v8)
+                         + (float)((float)((float)(v13 * 60.0) * 0.15915494) * *(v9 - 5)))
+                 + (float)((float)((float)(*(p_m_spinVelocity - 168) * 60.0) * 0.15915494) * *(v9 - 4)))
+         + (float)((float)((float)(*(p_m_spinVelocity - 112) * 60.0) * 0.15915494) * *(v9 - 3));
+      --v11;
     }
-    while ( v12 );
+    while ( v11 );
   }
-  if ( v4 < v6 )
+  if ( v3 < m_numWheels )
   {
-    v16 = (signed __int64)&v8->m_wheelsTorqueRatio.m_data[v4];
-    v17 = &v7->m_wheelsInfo.m_data[v4].m_spinVelocity;
-    v18 = v6 - v4;
+    v14 = &this->m_wheelsTorqueRatio.m_data[v3];
+    v15 = &vehicle->m_wheelsInfo.m_data[v3].m_spinVelocity;
+    v16 = m_numWheels - v3;
     do
     {
-      v19 = *v17;
-      v17 += 56;
-      v16 += 4i64;
-      a4 = (float)((float)(v19 * 60.0) * 0.15915494) * *(float *)(v16 - 4);
-      v9 = v9 + a4;
-      --v18;
+      v17 = *v15;
+      v15 += 56;
+      v8 = v8 + (float)((float)((float)(v17 * 60.0) * 0.15915494) * *v14++);
+      --v16;
     }
-    while ( v18 );
+    while ( v16 );
   }
-  ((void (__fastcall *)(UFG::Transmission *, hkpVehicleInstance *, hkpVehicleTransmission::TransmissionOutput *))v8->vfptr[4].__vecDelDtor)(
-    v8,
-    v7,
-    v5);
-  return a4 * v9;
+  return ((float (__fastcall *)(UFG::Transmission *, hkpVehicleInstance *, hkpVehicleTransmission::TransmissionOutput *))this->vfptr[4].__vecDelDtor)(
+           this,
+           vehicle,
+           transmissionOut)
+       * v8;
 }
 
 // File Line: 142
 // RVA: 0x484020
-float __usercall UFG::Transmission::calcMainTransmittedTorque@<xmm0>(UFG::Transmission *this@<rcx>, hkpVehicleInstance *vehicle@<rdx>, hkpVehicleTransmission::TransmissionOutput *transmissionOut@<r8>, float a4@<xmm0>)
+float __fastcall UFG::Transmission::calcMainTransmittedTorque(
+        UFG::Transmission *this,
+        hkpVehicleInstance *vehicle,
+        hkpVehicleTransmission::TransmissionOutput *transmissionOut)
 {
-  float v5; // xmm6_4
+  float m_torque; // xmm6_4
 
   if ( transmissionOut->m_delayed.m_bool )
     return 0.0;
-  v5 = vehicle->m_torque;
-  ((void (*)(void))this->vfptr[4].__vecDelDtor)();
-  return a4 * v5;
+  m_torque = vehicle->m_torque;
+  return ((float (__fastcall *)(UFG::Transmission *))this->vfptr[4].__vecDelDtor)(this) * m_torque;
 }
 
 // File Line: 159
 // RVA: 0x4895E0
-void __fastcall UFG::Transmission::updateCurrentGear(UFG::Transmission *this, const float deltaTime, hkpVehicleInstance *vehicle, hkpVehicleTransmission::TransmissionOutput *transmissionOut)
+void __fastcall UFG::Transmission::updateCurrentGear(
+        UFG::Transmission *this,
+        const float deltaTime,
+        hkpVehicleInstance *vehicle,
+        hkpVehicleTransmission::TransmissionOutput *transmissionOut)
 {
   bool v4; // zf
   float v5; // xmm2_4
-  __int64 v6; // rdx
-  float v7; // xmm0_4
-  float v8; // eax
+  __int64 m_currentGear; // rdx
+  float m_transmissionRPM; // xmm0_4
+  float m_clutchDelayTime; // eax
   __int64 v9; // rdx
   float v10; // eax
 
@@ -361,17 +329,17 @@ void __fastcall UFG::Transmission::updateCurrentGear(UFG::Transmission *this, co
     transmissionOut->m_delayed.m_bool = 0;
   if ( !transmissionOut->m_isReversing.m_bool )
   {
-    v6 = transmissionOut->m_currentGear;
-    v7 = transmissionOut->m_transmissionRPM;
-    if ( transmissionOut->m_transmissionRPM < this->mDownshiftRPM.m_data[v6] && (char)v6 > 0 )
+    m_currentGear = transmissionOut->m_currentGear;
+    m_transmissionRPM = transmissionOut->m_transmissionRPM;
+    if ( transmissionOut->m_transmissionRPM < this->mDownshiftRPM.m_data[m_currentGear] && (char)m_currentGear > 0 )
     {
-      transmissionOut->m_currentGear = v6 - 1;
-      v8 = this->m_clutchDelayTime;
+      transmissionOut->m_currentGear = m_currentGear - 1;
+      m_clutchDelayTime = this->m_clutchDelayTime;
       transmissionOut->m_delayed.m_bool = 1;
-      transmissionOut->m_clutchDelayCountdown = v8;
+      transmissionOut->m_clutchDelayCountdown = m_clutchDelayTime;
     }
     v9 = transmissionOut->m_currentGear;
-    if ( v7 > this->mUpshiftRPM.m_data[v9] && (char)v9 + 1 < this->m_gearsRatio.m_size )
+    if ( m_transmissionRPM > this->mUpshiftRPM.m_data[v9] && (char)v9 + 1 < this->m_gearsRatio.m_size )
     {
       transmissionOut->m_currentGear = v9 + 1;
       v10 = this->m_clutchDelayTime;

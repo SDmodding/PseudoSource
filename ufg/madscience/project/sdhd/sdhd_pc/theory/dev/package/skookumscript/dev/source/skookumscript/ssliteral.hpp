@@ -2,6 +2,6 @@
 // RVA: 0x11F230
 bool __fastcall SSLiteral::is_nil(SSLiteral *this)
 {
-  return !this || this->i_kind == 7;
+  return !this || this->i_kind == Type_string;
 }
 

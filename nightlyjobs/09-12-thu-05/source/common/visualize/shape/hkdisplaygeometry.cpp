@@ -2,17 +2,15 @@
 // RVA: 0xE76D20
 void __fastcall hkDisplayGeometry::~hkDisplayGeometry(hkDisplayGeometry *this)
 {
-  hkDisplayGeometry *v1; // rbx
-  hkGeometry *v2; // rcx
+  hkGeometry *m_geometry; // rcx
 
-  v1 = this;
   this->vfptr = (hkBaseObjectVtbl *)&hkDisplayGeometry::`vftable;
-  v2 = this->m_geometry;
-  if ( v2 )
+  m_geometry = this->m_geometry;
+  if ( m_geometry )
   {
-    v2->vfptr->__vecDelDtor((hkBaseObject *)&v2->vfptr, 1u);
-    v1->m_geometry = 0i64;
+    m_geometry->vfptr->__vecDelDtor(m_geometry, 1u);
+    this->m_geometry = 0i64;
   }
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 

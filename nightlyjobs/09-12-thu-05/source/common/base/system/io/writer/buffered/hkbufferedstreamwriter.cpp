@@ -21,31 +21,34 @@ void dynamic_initializer_for__hkBufferedStreamWriterClass__()
 
 // File Line: 32
 // RVA: 0xC82460
-void __fastcall hkBufferedStreamWriter::hkBufferedStreamWriter(hkBufferedStreamWriter *this, hkStreamWriter *s, int bufSize)
+void __fastcall hkBufferedStreamWriter::hkBufferedStreamWriter(
+        hkBufferedStreamWriter *this,
+        hkStreamWriter *s,
+        int bufSize)
 {
-  hkBufferedStreamWriter *v3; // rbx
-  int v4; // edi
-  hkMemoryAllocator **v5; // rax
+  hkMemoryAllocator **Value; // rax
   char *v6; // rax
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_stream = s;
   this->vfptr = (hkBaseObjectVtbl *)&hkBufferedStreamWriter::`vftable;
-  v3 = this;
   this->m_ownBuffer.m_bool = 1;
-  v4 = bufSize;
   if ( s )
-    hkReferencedObject::addReference((hkReferencedObject *)&s->vfptr);
-  v5 = (hkMemoryAllocator **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v6 = (char *)hkMemoryRouter::alignedAlloc(v5[11], v4, 64);
-  v3->m_bufSize = 0;
-  v3->m_bufCapacity = v4;
-  v3->m_buf = v6;
+    hkReferencedObject::addReference(s);
+  Value = (hkMemoryAllocator **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v6 = (char *)hkMemoryRouter::alignedAlloc(Value[11], bufSize, 64);
+  this->m_bufSize = 0;
+  this->m_bufCapacity = bufSize;
+  this->m_buf = v6;
 }
 
 // File Line: 49
 // RVA: 0xC824E0
-void __fastcall hkBufferedStreamWriter::hkBufferedStreamWriter(hkBufferedStreamWriter *this, void *mem, int memSize, hkBool memoryIsString)
+void __fastcall hkBufferedStreamWriter::hkBufferedStreamWriter(
+        hkBufferedStreamWriter *this,
+        char *mem,
+        unsigned int memSize,
+        hkBool memoryIsString)
 {
   int v4; // eax
 
@@ -53,7 +56,7 @@ void __fastcall hkBufferedStreamWriter::hkBufferedStreamWriter(hkBufferedStreamW
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_stream = 0i64;
   this->m_bufSize = 0;
-  this->m_buf = (char *)mem;
+  this->m_buf = mem;
   v4 = memSize - 1;
   if ( !memoryIsString.m_bool )
     v4 = memSize;
@@ -67,57 +70,53 @@ void __fastcall hkBufferedStreamWriter::hkBufferedStreamWriter(hkBufferedStreamW
 // RVA: 0xC82540
 void __fastcall hkBufferedStreamWriter::~hkBufferedStreamWriter(hkBufferedStreamWriter *this)
 {
-  hkBufferedStreamWriter *v1; // rdi
-  hkReferencedObject *v2; // rcx
-  char *v3; // rbx
-  hkMemoryAllocator **v4; // rax
+  hkStreamWriter *m_stream; // rcx
+  int *m_buf; // rbx
+  hkMemoryAllocator **Value; // rax
 
-  v1 = this;
   this->vfptr = (hkBaseObjectVtbl *)&hkBufferedStreamWriter::`vftable;
   hkBufferedStreamWriter::flush(this);
-  v2 = (hkReferencedObject *)&v1->m_stream->vfptr;
-  if ( v2 )
-    hkReferencedObject::removeReference(v2);
-  if ( v1->m_ownBuffer.m_bool )
+  m_stream = this->m_stream;
+  if ( m_stream )
+    hkReferencedObject::removeReference(m_stream);
+  if ( this->m_ownBuffer.m_bool )
   {
-    v3 = v1->m_buf;
-    v4 = (hkMemoryAllocator **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    hkMemoryRouter::alignedFree(v4[11], v3);
+    m_buf = (int *)this->m_buf;
+    Value = (hkMemoryAllocator **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    hkMemoryRouter::alignedFree(Value[11], m_buf);
   }
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 70
 // RVA: 0xC82830
 __int64 __fastcall hkBufferedStreamWriter::flushBuffer(hkBufferedStreamWriter *this)
 {
-  hkBufferedStreamWriter *v1; // rsi
-  int v2; // edi
+  int m_bufSize; // edi
   int v3; // ebx
   int v4; // eax
 
-  v1 = this;
   if ( !this->m_stream )
     return 0i64;
-  v2 = this->m_bufSize;
+  m_bufSize = this->m_bufSize;
   v3 = 0;
-  if ( v2 <= 0 )
+  if ( m_bufSize <= 0 )
   {
 LABEL_5:
-    v1->m_bufSize = 0;
+    this->m_bufSize = 0;
   }
   else
   {
     while ( 1 )
     {
-      v4 = ((__int64 (__fastcall *)(hkStreamWriter *, char *, _QWORD))v1->m_stream->vfptr[2].__vecDelDtor)(
-             v1->m_stream,
-             &v1->m_buf[v3],
-             (unsigned int)(v2 - v3));
+      v4 = ((__int64 (__fastcall *)(hkStreamWriter *, char *, _QWORD))this->m_stream->vfptr[2].__vecDelDtor)(
+             this->m_stream,
+             &this->m_buf[v3],
+             (unsigned int)(m_bufSize - v3));
       v3 += v4;
       if ( !v4 )
         break;
-      if ( v3 >= v2 )
+      if ( v3 >= m_bufSize )
         goto LABEL_5;
     }
   }
@@ -126,38 +125,34 @@ LABEL_5:
 
 // File Line: 94
 // RVA: 0xC825B0
-__int64 __fastcall hkBufferedStreamWriter::write(hkBufferedStreamWriter *this, const void *mem, int memSize)
+__int64 __fastcall hkBufferedStreamWriter::write(hkBufferedStreamWriter *this, char *mem, int memSize)
 {
-  unsigned int v3; // er14
-  char *v4; // r15
-  int v5; // ebx
-  hkBufferedStreamWriter *v6; // rsi
-  int v7; // ebp
-  int v8; // edi
+  unsigned int v3; // r14d
+  signed int v5; // ebx
+  signed int v7; // ebp
+  int m_bufSize; // edi
 
   v3 = memSize;
-  v4 = (char *)mem;
   v5 = this->m_bufCapacity - this->m_bufSize;
-  v6 = this;
   v7 = memSize;
   if ( memSize <= v5 )
   {
 LABEL_4:
-    hkString::memCpy(&v6->m_buf[v6->m_bufSize], v4, v7);
-    v6->m_bufSize += v7;
+    hkString::memCpy(&this->m_buf[this->m_bufSize], mem, v7);
+    this->m_bufSize += v7;
   }
   else
   {
     while ( 1 )
     {
-      hkString::memCpy(&v6->m_buf[v6->m_bufSize], v4, v5);
-      v6->m_bufSize += v5;
-      v8 = v6->m_bufSize;
+      hkString::memCpy(&this->m_buf[this->m_bufSize], mem, v5);
+      this->m_bufSize += v5;
+      m_bufSize = this->m_bufSize;
       v7 -= v5;
-      v4 += v5;
-      if ( hkBufferedStreamWriter::flushBuffer(v6) != v8 )
+      mem += v5;
+      if ( hkBufferedStreamWriter::flushBuffer(this) != m_bufSize )
         break;
-      v5 = v6->m_bufCapacity - v6->m_bufSize;
+      v5 = this->m_bufCapacity - this->m_bufSize;
       if ( v7 <= v5 )
         goto LABEL_4;
     }
@@ -170,140 +165,124 @@ LABEL_4:
 // RVA: 0xC82660
 void __fastcall hkBufferedStreamWriter::flush(hkBufferedStreamWriter *this)
 {
-  hkBufferedStreamWriter *v1; // rbx
-  hkStreamWriter *v2; // rcx
+  hkStreamWriter *m_stream; // rcx
 
-  v1 = this;
   hkBufferedStreamWriter::flushBuffer(this);
-  v2 = v1->m_stream;
-  if ( v2 )
-    ((void (*)(void))v2->vfptr[2].__first_virtual_table_function__)();
+  m_stream = this->m_stream;
+  if ( m_stream )
+    m_stream->vfptr[2].__first_virtual_table_function__(m_stream);
 }
 
 // File Line: 131
 // RVA: 0xC82690
 hkBool *__fastcall hkBufferedStreamWriter::isOk(hkBufferedStreamWriter *this, hkBool *result)
 {
-  hkStreamWriter *v2; // r8
-  hkBool *v3; // rbx
-  hkBool *v4; // rax
-  char v5; // [rsp+30h] [rbp+8h]
+  hkStreamWriter *m_stream; // r8
+  char v5; // [rsp+30h] [rbp+8h] BYREF
 
-  v2 = this->m_stream;
-  v3 = result;
-  if ( v2 )
+  m_stream = this->m_stream;
+  if ( m_stream )
   {
-    result->m_bool = *(char *)((__int64 (__fastcall *)(hkStreamWriter *, char *))v2->vfptr[1].__first_virtual_table_function__)(
+    result->m_bool = *(char *)((__int64 (__fastcall *)(hkStreamWriter *, char *))m_stream->vfptr[1].__first_virtual_table_function__)(
                                 this->m_stream,
                                 &v5);
-    v4 = v3;
+    return result;
   }
   else
   {
     result->m_bool = this->m_bufSize != this->m_bufCapacity;
-    v4 = result;
+    return result;
   }
-  return v4;
 }
 
 // File Line: 138
 // RVA: 0xC826F0
 hkBool *__fastcall hkBufferedStreamWriter::seekTellSupported(hkBufferedStreamWriter *this, hkBool *result)
 {
-  hkStreamWriter *v2; // rcx
-  hkBool *v3; // rbx
-  hkBool *v4; // rax
-  char v5; // [rsp+30h] [rbp+8h]
+  hkStreamWriter *m_stream; // rcx
+  char v5; // [rsp+30h] [rbp+8h] BYREF
 
-  v2 = this->m_stream;
-  v3 = result;
-  if ( v2 )
+  m_stream = this->m_stream;
+  if ( m_stream )
   {
-    result->m_bool = *(char *)v2->vfptr[3].__vecDelDtor((hkBaseObject *)&v2->vfptr, (unsigned int)&v5);
-    v4 = v3;
+    result->m_bool = *(char *)m_stream->vfptr[3].__vecDelDtor(m_stream, (unsigned int)&v5);
+    return result;
   }
   else
   {
     result->m_bool = 1;
-    v4 = result;
+    return result;
   }
-  return v4;
 }
 
 // File Line: 145
 // RVA: 0xC82740
-hkResult *__fastcall hkBufferedStreamWriter::seek(hkBufferedStreamWriter *this, hkResult *result, int relOffset, hkStreamWriter::SeekWhence whence)
+hkResult *__fastcall hkBufferedStreamWriter::seek(
+        hkBufferedStreamWriter *this,
+        hkResult *result,
+        unsigned int relOffset,
+        unsigned int whence)
 {
-  hkStreamWriter::SeekWhence v4; // ebx
-  unsigned int v5; // esi
-  hkResult *v6; // r14
-  hkBufferedStreamWriter *v7; // rdi
-  int v8; // ecx
+  int m_bufCapacity; // ecx
   hkResultEnum v9; // eax
 
-  v4 = whence;
-  v5 = relOffset;
-  v6 = result;
-  v7 = this;
   if ( !this->m_stream )
   {
-    v8 = -1;
+    m_bufCapacity = -1;
     if ( whence )
     {
       if ( whence == 1 )
       {
-        v8 = relOffset + v7->m_bufSize;
+        m_bufCapacity = relOffset + this->m_bufSize;
       }
       else if ( whence == 2 )
       {
-        v8 = v7->m_bufSize - relOffset;
+        m_bufCapacity = this->m_bufSize - relOffset;
       }
     }
     else
     {
-      v8 = relOffset;
+      m_bufCapacity = relOffset;
     }
-    v9 = 0;
-    if ( v8 >= 0 )
+    v9 = HK_SUCCESS;
+    if ( m_bufCapacity >= 0 )
     {
-      if ( v8 <= v7->m_bufCapacity )
+      if ( m_bufCapacity <= this->m_bufCapacity )
       {
 LABEL_14:
-        v7->m_bufSize = v8;
+        this->m_bufSize = m_bufCapacity;
         result->m_enum = v9;
-        return v6;
+        return result;
       }
-      v8 = v7->m_bufCapacity;
+      m_bufCapacity = this->m_bufCapacity;
     }
     else
     {
-      v8 = 0;
+      m_bufCapacity = 0;
     }
-    v9 = 1;
+    v9 = HK_FAILURE;
     goto LABEL_14;
   }
   hkBufferedStreamWriter::flushBuffer(this);
-  ((void (__fastcall *)(hkStreamWriter *, hkResult *, _QWORD, _QWORD))v7->m_stream->vfptr[3].__first_virtual_table_function__)(
-    v7->m_stream,
-    v6,
-    v5,
-    (unsigned int)v4);
-  return v6;
+  ((void (__fastcall *)(hkStreamWriter *, hkResult *, _QWORD, _QWORD))this->m_stream->vfptr[3].__first_virtual_table_function__)(
+    this->m_stream,
+    result,
+    relOffset,
+    whence);
+  return result;
 }
 
 // File Line: 185
 // RVA: 0xC827F0
-signed __int64 __fastcall hkBufferedStreamWriter::tell(hkBufferedStreamWriter *this)
+__int64 __fastcall hkBufferedStreamWriter::tell(hkBufferedStreamWriter *this)
 {
-  hkBufferedStreamWriter *v1; // rbx
-  hkStreamWriter *v2; // rcx
+  hkStreamWriter *m_stream; // rcx
   int v3; // edx
 
-  v1 = this;
-  v2 = this->m_stream;
-  if ( v2 )
+  m_stream = this->m_stream;
+  if ( m_stream )
   {
-    v3 = ((__int64 (*)(void))v2->vfptr[4].__vecDelDtor)();
+    v3 = ((__int64 (__fastcall *)(hkStreamWriter *))m_stream->vfptr[4].__vecDelDtor)(m_stream);
     if ( v3 < 0 )
       return 0xFFFFFFFFi64;
   }
@@ -311,6 +290,6 @@ signed __int64 __fastcall hkBufferedStreamWriter::tell(hkBufferedStreamWriter *t
   {
     v3 = 0;
   }
-  return (unsigned int)(v3 + v1->m_bufSize);
+  return (unsigned int)(v3 + this->m_bufSize);
 }
 

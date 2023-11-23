@@ -28,17 +28,17 @@ hkClass *__fastcall hkpVehicleDefaultSimulation::staticClass()
 
 // File Line: 67
 // RVA: 0xE255D0
-void __fastcall finishLoadedObjecthkpVehicleDefaultSimulation(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpVehicleDefaultSimulation(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleDefaultSimulation::`vftable;
+    *p = &hkpVehicleDefaultSimulation::`vftable;
 }
 
 // File Line: 73
 // RVA: 0xE255F0
-void __fastcall cleanupLoadedObjecthkpVehicleDefaultSimulation(void *p)
+void __fastcall cleanupLoadedObjecthkpVehicleDefaultSimulation(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 77
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkpVehicleDefaultSimulationTypeInfo__()
   hkpVehicleDefaultSimulationTypeInfo.m_typeName = "hkpVehicleDefaultSimulation";
   hkpVehicleDefaultSimulationTypeInfo.m_vtable = result;
   hkpVehicleDefaultSimulationTypeInfo.m_scopedName = "!hkpVehicleDefaultSimulation";
-  hkpVehicleDefaultSimulationTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpVehicleDefaultSimulation;
-  hkpVehicleDefaultSimulationTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpVehicleDefaultSimulation;
+  hkpVehicleDefaultSimulationTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpVehicleDefaultSimulation;
+  hkpVehicleDefaultSimulationTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpVehicleDefaultSimulation;
   return result;
 }
 

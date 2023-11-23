@@ -4,7 +4,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_STREAMING_TEXTURE_FINISHED__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("STREAMING_TEXTURE_FINISHED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("STREAMING_TEXTURE_FINISHED", -1);
   UI_HASH_STREAMING_TEXTURE_FINISHED = result;
   return result;
 }

@@ -1,29 +1,25 @@
 // File Line: 24
 // RVA: 0xA25CB0
-void __fastcall UFG::UIGfxFsCommandHandler::Callback(UFG::UIGfxFsCommandHandler *this, Scaleform::GFx::Movie *movie, const char *command, const char *arg)
+void __fastcall UFG::UIGfxFsCommandHandler::Callback(
+        UFG::UIGfxFsCommandHandler *this,
+        UFG::allocator::free_link *movie,
+        const char *command,
+        const char *arg)
 {
-  const char *v4; // rsi
-  const char *v5; // rbp
-  Scaleform::GFx::Movie *v6; // r14
   char v7; // di
   UFG::allocator::free_link *v8; // rbx
   int v9; // eax
-  UFG::allocator::free_link *v10; // rcx
-  UFG::qString text; // [rsp+48h] [rbp-30h]
+  UFG::qString text; // [rsp+48h] [rbp-30h] BYREF
 
-  v4 = arg;
-  v5 = command;
-  v6 = movie;
   v7 = 0;
   v8 = UFG::qMemoryPool::Allocate(&gScaleformMemoryPool, 0x68ui64, "UIGfxFsCommandHandler::Callback", 0i64, 1u);
   if ( v8 )
   {
-    UFG::qString::qString(&text, v4);
+    UFG::qString::qString(&text, arg);
     v7 = 1;
-    v9 = UFG::qStringHashUpper32(v5, 0xFFFFFFFF);
-    v10 = v8 + 1;
-    v10->mNext = v10;
-    v10[1].mNext = v10;
+    v9 = UFG::qStringHashUpper32(command, -1);
+    v8[1].mNext = v8 + 1;
+    v8[2].mNext = v8 + 1;
     v8->mNext = (UFG::allocator::free_link *)&UFG::UICommand::`vftable;
     LODWORD(v8[3].mNext) = -1;
     v8[4].mNext = 0i64;
@@ -34,7 +30,7 @@ void __fastcall UFG::UIGfxFsCommandHandler::Callback(UFG::UIGfxFsCommandHandler 
     LODWORD(v8[3].mNext) = 5;
     v8->mNext = (UFG::allocator::free_link *)&UFG::UIMessageFlash::`vftable;
     UFG::qString::qString((UFG::qString *)&v8[7], &text);
-    v8[12].mNext = (UFG::allocator::free_link *)v6;
+    v8[12].mNext = movie;
     LODWORD(v8[3].mNext) = 7;
     HIDWORD(v8[6].mNext) = 4;
   }
@@ -42,10 +38,8 @@ void __fastcall UFG::UIGfxFsCommandHandler::Callback(UFG::UIGfxFsCommandHandler 
   {
     v8 = 0i64;
   }
-  if ( v7 & 1 )
+  if ( (v7 & 1) != 0 )
     UFG::qString::~qString(&text);
-  UFG::UIScreenManagerBase::queueMessageEx(
-    (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-    (UFG::UIMessage *)v8);
+  UFG::UIScreenManagerBase::queueMessageEx(UFG::UIScreenManager::s_instance, (UFG::UIMessage *)v8);
 }
 

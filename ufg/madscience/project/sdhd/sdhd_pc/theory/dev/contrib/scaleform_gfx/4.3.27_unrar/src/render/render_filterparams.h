@@ -17,7 +17,9 @@ void __fastcall Scaleform::Render::BlurFilterParams::BlurFilterParams(Scaleform:
 
 // File Line: 119
 // RVA: 0x8C8AE0
-bool __fastcall Scaleform::Render::BlurFilterParams::EqualsAll(Scaleform::Render::BlurFilterParams *this, Scaleform::Render::BlurFilterParams *b)
+bool __fastcall Scaleform::Render::BlurFilterParams::EqualsAll(
+        Scaleform::Render::BlurFilterParams *this,
+        Scaleform::Render::BlurFilterParams *b)
 {
   return this->Mode == b->Mode
       && b->BlurX == this->BlurX
@@ -26,6 +28,7 @@ bool __fastcall Scaleform::Render::BlurFilterParams::EqualsAll(Scaleform::Render
       && b->Offset.x == this->Offset.x
       && b->Offset.y == this->Offset.y
       && b->Strength == this->Strength
-      && *(_QWORD *)&this->Colors[0].Channels.Blue == *(_QWORD *)&b->Colors[0].Channels.Blue;
+      && this->Colors[0].Raw == b->Colors[0].Raw
+      && this->Colors[1].Raw == b->Colors[1].Raw;
 }
 

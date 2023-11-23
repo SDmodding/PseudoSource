@@ -2,72 +2,70 @@
 // RVA: 0x614B50
 void __fastcall UFG::UIHKMissionHealthWidget::Update(UFG::UIHKMissionHealthWidget *this, UFG::UIScreen *screen)
 {
-  UFG::UIHKMissionHealthWidget *v2; // rbx
-  Scaleform::GFx::Movie *v3; // rdi
-  bool v4; // si
-  double v5; // xmm6_8
-  long double v6; // rsi
-  Scaleform::GFx::Value pargs; // [rsp+38h] [rbp-48h]
+  Scaleform::GFx::Movie *pObject; // rdi
+  bool mVisible; // si
+  Scaleform::GFx::Value::ValueUnion v5; // xmm6_8
+  char *mData; // rsi
+  Scaleform::GFx::Value pargs; // [rsp+38h] [rbp-48h] BYREF
 
   if ( screen )
   {
-    v2 = this;
-    v3 = screen->mRenderable->m_movie.pObject;
-    if ( v3 )
+    pObject = screen->mRenderable->m_movie.pObject;
+    if ( pObject )
     {
       pargs.pObjectInterface = 0i64;
-      pargs.Type = 0;
+      pargs.Type = VT_Undefined;
       if ( this->mVisibleChanged )
       {
         this->mVisibleChanged = 0;
-        v4 = this->mVisible;
-        if ( ((unsigned int)pargs.Type >> 6) & 1 )
+        mVisible = this->mVisible;
+        if ( (pargs.Type & 0x40) != 0 )
         {
-          (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
+          (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&pargs.pObjectInterface->vfptr->gap8[8])(
             pargs.pObjectInterface,
             &pargs,
-            *(_QWORD *)&pargs.mValue.NValue);
+            pargs.mValue);
           pargs.pObjectInterface = 0i64;
         }
-        pargs.Type = 2;
-        pargs.mValue.BValue = v4;
-        Scaleform::GFx::Movie::Invoke(v3, "MissionHealth_SetVisible", 0i64, &pargs, 1u);
+        pargs.Type = VT_Boolean;
+        pargs.mValue.BValue = mVisible;
+        Scaleform::GFx::Movie::Invoke(pObject, "MissionHealth_SetVisible", 0i64, &pargs, 1u);
       }
-      if ( v2->mVisible && v2->mChanged )
+      if ( this->mVisible && this->mChanged )
       {
-        v2->mChanged = 0;
-        v5 = v2->mHealth;
-        if ( ((unsigned int)pargs.Type >> 6) & 1 )
+        this->mChanged = 0;
+        v5.NValue = this->mHealth;
+        if ( (pargs.Type & 0x40) != 0 )
         {
-          (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
+          (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&pargs.pObjectInterface->vfptr->gap8[8])(
             pargs.pObjectInterface,
             &pargs,
-            *(_QWORD *)&pargs.mValue.NValue);
+            pargs.mValue);
           pargs.pObjectInterface = 0i64;
         }
-        pargs.Type = 5;
-        pargs.mValue.NValue = v5;
-        Scaleform::GFx::Movie::Invoke(v3, "MissionHealth_SetHealth", 0i64, &pargs, 1u);
-        v6 = *(double *)&v2->mCaption.mData;
-        if ( ((unsigned int)pargs.Type >> 6) & 1 )
+        pargs.Type = VT_Number;
+        pargs.mValue = v5;
+        Scaleform::GFx::Movie::Invoke(pObject, "MissionHealth_SetHealth", 0i64, &pargs, 1u);
+        mData = this->mCaption.mData;
+        if ( (pargs.Type & 0x40) != 0 )
         {
-          (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
+          (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&pargs.pObjectInterface->vfptr->gap8[8])(
             pargs.pObjectInterface,
             &pargs,
-            *(_QWORD *)&pargs.mValue.NValue);
+            pargs.mValue);
           pargs.pObjectInterface = 0i64;
         }
-        pargs.Type = 6;
-        pargs.mValue.NValue = v6;
-        Scaleform::GFx::Movie::Invoke(v3, "MissionHealth_SetCaption", 0i64, &pargs, 1u);
-        if ( v2->mSuccess )
-          Scaleform::GFx::Movie::Invoke(v3, "MissionHealth_Success", 0i64, 0i64, 0);
+        pargs.Type = VT_String;
+        pargs.mValue.pString = mData;
+        Scaleform::GFx::Movie::Invoke(pObject, "MissionHealth_SetCaption", 0i64, &pargs, 1u);
+        if ( this->mSuccess )
+          Scaleform::GFx::Movie::Invoke(pObject, "MissionHealth_Success", 0i64, 0i64, 0);
       }
-      if ( ((unsigned int)pargs.Type >> 6) & 1 )
-        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
+      if ( (pargs.Type & 0x40) != 0 )
+        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&pargs.pObjectInterface->vfptr->gap8[8])(
           pargs.pObjectInterface,
           &pargs,
-          *(_QWORD *)&pargs.mValue.NValue);
+          pargs.mValue);
     }
   }
 }

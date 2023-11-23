@@ -2,26 +2,24 @@
 // RVA: 0x12DE214
 void __fastcall std::ios_base::_Ios_base_dtor(std::ios_base *_This)
 {
-  unsigned __int64 v1; // rax
-  std::ios_base *v2; // rbx
-  std::locale *v3; // rbx
-  void (__fastcall ***v4)(_QWORD, signed __int64); // rax
+  unsigned __int64 Stdstr; // rax
+  std::locale *Ploc; // rbx
+  std::_Facet_base *v4; // rax
 
-  v1 = _This->_Stdstr;
-  v2 = _This;
-  if ( !v1 || (--stdopens[v1], stdopens[v1] <= 0) )
+  Stdstr = _This->_Stdstr;
+  if ( !Stdstr || (--stdopens[Stdstr], stdopens[Stdstr] <= 0) )
   {
     std::ios_base::_Tidy(_This);
-    v3 = v2->_Ploc;
-    if ( v3 )
+    Ploc = _This->_Ploc;
+    if ( Ploc )
     {
-      if ( v3->_Ptr )
+      if ( Ploc->_Ptr )
       {
-        v4 = (void (__fastcall ***)(_QWORD, signed __int64))((__int64 (*)(void))v3->_Ptr->vfptr->_Decref)();
+        v4 = Ploc->_Ptr->vfptr->_Decref(Ploc->_Ptr);
         if ( v4 )
-          (**v4)(v4, 1i64);
+          v4->vfptr->__vecDelDtor(v4, 1u);
       }
-      Illusion::ShaderParam::operator delete(v3);
+      Illusion::ShaderParam::operator delete(Ploc);
     }
   }
 }
@@ -30,27 +28,25 @@ void __fastcall std::ios_base::_Ios_base_dtor(std::ios_base *_This)
 // RVA: 0x12DE1A0
 void __fastcall std::ios_base::_Addstd(std::ios_base *_This)
 {
-  std::ios_base *v1; // rbx
-  unsigned __int64 v2; // rcx
+  unsigned __int64 Stdstr; // rcx
   std::ios_base *v3; // rax
-  std::_Lockit v4; // [rsp+30h] [rbp+8h]
+  std::_Lockit v4; // [rsp+30h] [rbp+8h] BYREF
 
-  v1 = _This;
   std::_Lockit::_Lockit(&v4, 2);
-  v1->_Stdstr = 1i64;
+  _This->_Stdstr = 1i64;
   do
   {
-    v2 = v1->_Stdstr;
-    v3 = stdstr[v2];
+    Stdstr = _This->_Stdstr;
+    v3 = stdstr[Stdstr];
     if ( !v3 )
       break;
-    if ( v3 == v1 )
+    if ( v3 == _This )
       break;
-    v1->_Stdstr = v2 + 1;
+    _This->_Stdstr = Stdstr + 1;
   }
-  while ( v2 + 1 < 8 );
-  stdstr[v1->_Stdstr] = v1;
-  ++stdopens[v1->_Stdstr];
+  while ( Stdstr + 1 < 8 );
+  stdstr[_This->_Stdstr] = _This;
+  ++stdopens[_This->_Stdstr];
   std::_Lockit::~_Lockit(&v4);
 }
 

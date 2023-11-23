@@ -27,7 +27,7 @@ void dynamic_initializer_for__hkxAnimatedVectorClass__()
     0i64,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 59
@@ -39,17 +39,17 @@ hkClass *__fastcall hkxAnimatedVector::staticClass()
 
 // File Line: 66
 // RVA: 0xE317A0
-void __fastcall finishLoadedObjecthkxAnimatedVector(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxAnimatedVector(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxAnimatedVector::`vftable;
+    *p = &hkxAnimatedVector::`vftable;
 }
 
 // File Line: 72
 // RVA: 0xE317C0
-void __fastcall cleanupLoadedObjecthkxAnimatedVector(void *p)
+void __fastcall cleanupLoadedObjecthkxAnimatedVector(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 76
@@ -70,8 +70,8 @@ void **dynamic_initializer_for__hkxAnimatedVectorTypeInfo__()
   hkxAnimatedVectorTypeInfo.m_typeName = "hkxAnimatedVector";
   hkxAnimatedVectorTypeInfo.m_vtable = result;
   hkxAnimatedVectorTypeInfo.m_scopedName = "!hkxAnimatedVector";
-  hkxAnimatedVectorTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxAnimatedVector;
-  hkxAnimatedVectorTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxAnimatedVector;
+  hkxAnimatedVectorTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxAnimatedVector;
+  hkxAnimatedVectorTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxAnimatedVector;
   return result;
 }
 

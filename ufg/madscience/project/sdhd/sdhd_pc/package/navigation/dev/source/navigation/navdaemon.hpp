@@ -2,22 +2,22 @@
 // RVA: 0x262550
 void __fastcall UFG::FindPathDeferredQuery::FindPathDeferredQuery(UFG::FindPathDeferredQuery *this)
 {
-  float v1; // xmm1_4
-  float v2; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
   float v3; // xmm1_4
   float v4; // xmm2_4
 
   this->vfptr = (UFG::DaemonQueryInputVtbl *)&UFG::DaemonQueryInput::`vftable;
   *(_QWORD *)&this->m_daemonType = 0i64;
-  this->m_mode = 1;
+  this->m_mode = Mode_Deferred;
   this->m_pOutput = 0i64;
   this->vfptr = (UFG::DaemonQueryInputVtbl *)&UFG::FindPathDeferredQuery::`vftable;
   this->m_npFrom.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable;
-  v1 = UFG::qVector3::msZero.y;
-  v2 = UFG::qVector3::msZero.z;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
   this->m_npFrom.m_vPosition.x = UFG::qVector3::msZero.x;
-  this->m_npFrom.m_vPosition.y = v1;
-  this->m_npFrom.m_vPosition.z = v2;
+  this->m_npFrom.m_vPosition.y = y;
+  this->m_npFrom.m_vPosition.z = z;
   this->m_npFrom.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
   this->m_npFrom.m_bValid = 0;
   this->m_npFrom.m_hkvMeshPosition = (hkVector4f)hkvZero_5.m_quad;
@@ -38,25 +38,26 @@ void __fastcall UFG::FindPathDeferredQuery::FindPathDeferredQuery(UFG::FindPathD
 
 // File Line: 210
 // RVA: 0x5195A0
-void __fastcall UFG::SpawnTraversalImmediateQuery::SpawnTraversalImmediateQuery(UFG::SpawnTraversalImmediateQuery *this)
+void __fastcall UFG::SpawnTraversalImmediateQuery::SpawnTraversalImmediateQuery(
+        UFG::SpawnTraversalImmediateQuery *this)
 {
-  float v1; // xmm1_4
-  float v2; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
   float v3; // xmm1_4
   float v4; // xmm2_4
 
   this->vfptr = (UFG::DaemonQueryInputVtbl *)&UFG::DaemonQueryInput::`vftable;
-  this->m_daemonType = 0;
+  this->m_daemonType = DaemonType_Navigation;
   *(_QWORD *)&this->m_internalType = 4i64;
   this->m_pOutput = 0i64;
   this->vfptr = (UFG::DaemonQueryInputVtbl *)&UFG::SpawnTraversalImmediateQuery::`vftable;
   this->mpNavParams = 0i64;
   this->mSearchOrigin.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::NavPositionBase::`vftable;
-  v1 = UFG::qVector3::msZero.y;
-  v2 = UFG::qVector3::msZero.z;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
   this->mSearchOrigin.m_vPosition.x = UFG::qVector3::msZero.x;
-  this->mSearchOrigin.m_vPosition.y = v1;
-  this->mSearchOrigin.m_vPosition.z = v2;
+  this->mSearchOrigin.m_vPosition.y = y;
+  this->mSearchOrigin.m_vPosition.z = z;
   this->mSearchOrigin.vfptr = (UFG::NavPositionBaseVtbl *)&UFG::HavokNavPosition::`vftable;
   this->mSearchOrigin.m_bValid = 0;
   *(_QWORD *)&this->mSearchOrigin.m_packedKey = -1i64;

@@ -7,7 +7,10 @@ void __fastcall UFG::qPrintChannel::Print(UFG::qPrintChannel *this, const char *
 
 // File Line: 96
 // RVA: 0xC67A0
-void __fastcall UFG::qPrintChannel::Print(UFG::qPrintChannel *this, UFG::qPrintChannel::OutputLevel output_level, const char *format)
+void __fastcall UFG::qPrintChannel::Print(
+        UFG::qPrintChannel *this,
+        UFG::qPrintChannel::OutputLevel output_level,
+        const char *format)
 {
   ;
 }

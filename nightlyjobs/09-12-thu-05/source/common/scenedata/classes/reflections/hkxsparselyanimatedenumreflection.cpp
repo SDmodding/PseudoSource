@@ -28,17 +28,17 @@ hkClass *__fastcall hkxEnum::Item::staticClass()
 
 // File Line: 64
 // RVA: 0xE31C70
-void __fastcall finishLoadedObjecthkxEnumItem(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxEnumItem(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
   if ( p )
-    hkStringPtr::hkStringPtr((hkStringPtr *)p + 1, (hkFinishLoadedObjectFlag)finishing);
+    hkStringPtr::hkStringPtr(p + 1, finishing);
 }
 
 // File Line: 70
 // RVA: 0xE31C90
-void __fastcall cleanupLoadedObjecthkxEnumItem(void *p)
+void __fastcall cleanupLoadedObjecthkxEnumItem(hkStringPtr *p)
 {
-  hkStringPtr::~hkStringPtr((hkStringPtr *)p + 1);
+  hkStringPtr::~hkStringPtr(p + 1);
 }
 
 // File Line: 107
@@ -71,17 +71,17 @@ hkClass *__fastcall hkxEnum::staticClass()
 
 // File Line: 117
 // RVA: 0xE31CA0
-void __fastcall finishLoadedObjecthkxEnum(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxEnum(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxEnum::`vftable;
+    *p = &hkxEnum::`vftable;
 }
 
 // File Line: 123
 // RVA: 0xE31CC0
-void __fastcall cleanupLoadedObjecthkxEnum(void *p)
+void __fastcall cleanupLoadedObjecthkxEnum(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 127
@@ -102,8 +102,8 @@ void **dynamic_initializer_for__hkxEnumTypeInfo__()
   hkxEnumTypeInfo.m_typeName = "hkxEnum";
   hkxEnumTypeInfo.m_vtable = result;
   hkxEnumTypeInfo.m_scopedName = "!hkxEnum";
-  hkxEnumTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxEnum;
-  hkxEnumTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxEnum;
+  hkxEnumTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxEnum;
+  hkxEnumTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxEnum;
   return result;
 }
 
@@ -125,7 +125,7 @@ void dynamic_initializer_for__hkxSparselyAnimatedEnumClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 179
@@ -137,17 +137,17 @@ hkClass *__fastcall hkxSparselyAnimatedEnum::staticClass()
 
 // File Line: 186
 // RVA: 0xE31CE0
-void __fastcall finishLoadedObjecthkxSparselyAnimatedEnum(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxSparselyAnimatedEnum(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxSparselyAnimatedEnum::`vftable;
+    *p = &hkxSparselyAnimatedEnum::`vftable;
 }
 
 // File Line: 192
 // RVA: 0xE31D00
-void __fastcall cleanupLoadedObjecthkxSparselyAnimatedEnum(void *p)
+void __fastcall cleanupLoadedObjecthkxSparselyAnimatedEnum(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 196
@@ -168,8 +168,8 @@ void **dynamic_initializer_for__hkxSparselyAnimatedEnumTypeInfo__()
   hkxSparselyAnimatedEnumTypeInfo.m_typeName = "hkxSparselyAnimatedEnum";
   hkxSparselyAnimatedEnumTypeInfo.m_vtable = result;
   hkxSparselyAnimatedEnumTypeInfo.m_scopedName = "!hkxSparselyAnimatedEnum";
-  hkxSparselyAnimatedEnumTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxSparselyAnimatedEnum;
-  hkxSparselyAnimatedEnumTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxSparselyAnimatedEnum;
+  hkxSparselyAnimatedEnumTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxSparselyAnimatedEnum;
+  hkxSparselyAnimatedEnumTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxSparselyAnimatedEnum;
   return result;
 }
 

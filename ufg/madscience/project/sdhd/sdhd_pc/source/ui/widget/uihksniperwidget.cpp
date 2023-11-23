@@ -26,23 +26,19 @@ void __fastcall UFG::UIHKSniperWidget::~UIHKSniperWidget(UFG::UIHKSniperWidget *
 // RVA: 0x5D7CD0
 void __fastcall UFG::UIHKSniperWidget::Exit(UFG::UIHKSniperWidget *this, UFG::UIScreen *screen)
 {
-  UFG::UIScreen *v2; // rdi
-  UFG::UIHKSniperWidget *v3; // rbx
   UFG::UIHKScreenGlobalOverlay *v4; // rax
-  Scaleform::GFx::Movie *v5; // rcx
+  Scaleform::GFx::Movie *pObject; // rcx
 
-  v2 = screen;
-  v3 = this;
   if ( (unsigned int)(this->mState - 1) <= 1 )
   {
     v4 = UFG::UIHKScreenGlobalOverlay::mThis;
     if ( !UFG::UIHKScreenGlobalOverlay::mThis )
       v4 = &gGlobalOverlaySentinel;
     UFG::UIHKHelpBarWidget::Hide(&v4->HelpBar, UI_HASH_SNIPER);
-    v5 = v2->mRenderable->m_movie.pObject;
-    if ( v5 )
-      Scaleform::GFx::Movie::Invoke(v5, "SniperRifle_Outro", 0i64, 0i64, 0);
-    v3->mState = 3;
+    pObject = screen->mRenderable->m_movie.pObject;
+    if ( pObject )
+      Scaleform::GFx::Movie::Invoke(pObject, "SniperRifle_Outro", 0i64, 0i64, 0);
+    this->mState = STATE_FOUND_SIGNAL;
   }
 }
 
@@ -50,72 +46,70 @@ void __fastcall UFG::UIHKSniperWidget::Exit(UFG::UIHKSniperWidget *this, UFG::UI
 // RVA: 0x617570
 void __fastcall UFG::UIHKSniperWidget::Update(UFG::UIHKSniperWidget *this, UFG::UIScreen *screen)
 {
-  UFG::UIScreen *v2; // rdi
-  UFG::UIHKSniperWidget *v3; // rbx
-  UFG::SimObjectCharacter *v4; // rax
-  UFG::SimComponentHolder *v5; // rax
-  UFG::SimComponent *v6; // rdx
+  UFG::SimObjectCharacter *LocalPlayer; // rax
+  UFG::SimComponentHolder *p; // rax
+  UFG::SimComponent *m_pComponent; // rdx
   UFG::SimObjectGame *v7; // r8
-  unsigned __int16 v8; // cx
-  UFG::SimComponent *v9; // rax
+  __int16 m_Flags; // cx
+  UFG::SimComponent *ComponentOfType; // rax
 
-  v2 = screen;
-  v3 = this;
-  v4 = UFG::GetLocalPlayer();
-  if ( v4
-    && (v5 = v4->m_Components.p, (v6 = v5[20].m_pComponent) != 0i64)
-    && v5[7].m_pComponent
-    && (v7 = *(UFG::SimObjectGame **)(56i64 * *(unsigned __int8 *)(*(_QWORD *)&v6[1].m_Flags + 25i64)
-                                    + *(_QWORD *)&v6[1].m_TypeUID
+  LocalPlayer = UFG::GetLocalPlayer();
+  if ( LocalPlayer
+    && (p = LocalPlayer->m_Components.p, (m_pComponent = p[20].m_pComponent) != 0i64)
+    && p[7].m_pComponent
+    && (v7 = *(UFG::SimObjectGame **)(56i64 * *(unsigned __int8 *)(*(_QWORD *)&m_pComponent[1].m_Flags + 25i64)
+                                    + *(_QWORD *)&m_pComponent[1].m_TypeUID
                                     + 40)) != 0i64
-    && (v8 = v7->m_Flags, !((v8 >> 14) & 1))
-    && (v8 & 0x8000u) == 0
-    && (!((v8 >> 13) & 1) ? (!((v8 >> 12) & 1) ? (v9 = UFG::SimObject::GetComponentOfType(
-                                                         (UFG::SimObject *)&v7->vfptr,
-                                                         UFG::InventoryItemComponent::_TypeUID)) : (v9 = UFG::SimObjectGame::GetComponentOfTypeHK(v7, UFG::InventoryItemComponent::_TypeUID))) : (v9 = v7->m_Components.p[11].m_pComponent),
-        v9) )
+    && (m_Flags = v7->m_Flags, (m_Flags & 0x4000) == 0)
+    && m_Flags >= 0
+    && ((m_Flags & 0x2000) == 0
+      ? ((m_Flags & 0x1000) == 0
+       ? (ComponentOfType = UFG::SimObject::GetComponentOfType(v7, UFG::InventoryItemComponent::_TypeUID))
+       : (ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(v7, UFG::InventoryItemComponent::_TypeUID)))
+      : (ComponentOfType = v7->m_Components.p[11].m_pComponent),
+        ComponentOfType) )
   {
-    v3->mSniperMode = 0;
+    this->mSniperMode = 0;
   }
   else
   {
-    UFG::UIHKSniperWidget::Exit(v3, v2);
+    UFG::UIHKSniperWidget::Exit(this, screen);
   }
 }
 
 // File Line: 132
 // RVA: 0x5EAED0
-void __fastcall UFG::UIHKSniperWidget::HandleMessage(UFG::UIHKSniperWidget *this, UFG::UIScreen *screen, unsigned int msgId)
+void __fastcall UFG::UIHKSniperWidget::HandleMessage(
+        UFG::UIHKSniperWidget *this,
+        UFG::UIScreen *screen,
+        unsigned int msgId)
 {
-  UFG::UIHKSniperWidget *v3; // rbx
-  Scaleform::GFx::Movie *v4; // rdi
-  Scaleform::GFx::Value value; // [rsp+28h] [rbp-40h]
+  Scaleform::GFx::Movie *pObject; // rdi
+  Scaleform::GFx::Value value; // [rsp+28h] [rbp-40h] BYREF
 
-  v3 = this;
-  if ( this->mState == 2 )
+  if ( this->mState == STATE_LOOKING_FOR_SIGNAL )
   {
-    this->mState = 1;
+    this->mState = STATE_SETTING;
   }
-  else if ( this->mState == 3 )
+  else if ( this->mState == STATE_FOUND_SIGNAL )
   {
-    v4 = screen->mRenderable->m_movie.pObject;
-    if ( v4 )
+    pObject = screen->mRenderable->m_movie.pObject;
+    if ( pObject )
     {
       value.pObjectInterface = 0i64;
-      value.Type = 0;
-      value.Type = 2;
+      value.Type = VT_Boolean;
       value.mValue.BValue = 0;
-      Scaleform::GFx::Movie::SetVariable(v4, "mc_SniperRifleOverlay._visible", &value, 1i64);
-      v3->mState = 0;
-      if ( ((unsigned int)value.Type >> 6) & 1 )
+      Scaleform::GFx::Movie::SetVariable(pObject, "mc_SniperRifleOverlay._visible", &value, 1i64);
+      this->mState = STATE_HIDE;
+      if ( (value.Type & 0x40) != 0 )
       {
-        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
+        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&value.pObjectInterface->vfptr->gap8[8])(
           value.pObjectInterface,
           &value,
-          *(_QWORD *)&value.mValue.NValue);
+          value.mValue);
         value.pObjectInterface = 0i64;
       }
-      value.Type = 0;
+      value.Type = VT_Undefined;
     }
   }
 }

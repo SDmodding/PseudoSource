@@ -2,7 +2,7 @@
 // RVA: 0x157B910
 __int64 dynamic_initializer_for__UFG::VehicleSubjectComponent::s_VehicleSubjectComponentList__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::VehicleSubjectComponent::s_VehicleSubjectComponentList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::VehicleSubjectComponent::s_VehicleSubjectComponentList__);
 }
 
 // File Line: 32
@@ -14,12 +14,13 @@ UFG::ComponentIDDesc *__fastcall UFG::VehicleSubjectComponent::GetDesc(UFG::Vehi
 
 // File Line: 36
 // RVA: 0x66B920
-void __fastcall UFG::VehicleSubjectComponent::VehicleSubjectComponent(UFG::VehicleSubjectComponent *this, unsigned int name_uid)
+void __fastcall UFG::VehicleSubjectComponent::VehicleSubjectComponent(
+        UFG::VehicleSubjectComponent *this,
+        unsigned int name_uid)
 {
-  UFG::VehicleSubjectComponent *v2; // rdi
-  UFG::qNode<UFG::VehicleSubjectComponent,UFG::VehicleSubjectComponent> *v3; // rbx
-  UFG::qList<UFG::SimObjectPointer,UFG::SimObjectPointer,1,0> *v4; // rax
-  UFG::qNode<UFG::VehicleSubjectComponent,UFG::VehicleSubjectComponent> *v5; // rax
+  UFG::qNode<UFG::VehicleSubjectComponent,UFG::VehicleSubjectComponent> *mPrev; // rax
+  float y; // xmm1_4
+  float z; // xmm2_4
   float v6; // xmm1_4
   float v7; // xmm2_4
   float v8; // xmm1_4
@@ -28,168 +29,161 @@ void __fastcall UFG::VehicleSubjectComponent::VehicleSubjectComponent(UFG::Vehic
   float v11; // xmm2_4
   float v12; // xmm1_4
   float v13; // xmm2_4
-  float v14; // xmm1_4
-  float v15; // xmm2_4
-  UFG::qVector4 v16; // xmm1
-  UFG::qVector4 v17; // xmm2
-  UFG::qVector4 v18; // xmm3
-  UFG::qVector4 v19; // xmm1
-  UFG::qVector4 v20; // xmm2
-  UFG::qVector4 v21; // xmm3
-  UFG::ChaseCameraParameters *v22; // rax
-  UFG::qList<UFG::SimObjectPointer,UFG::SimObjectPointer,1,0> *result; // [rsp+50h] [rbp+18h]
+  UFG::qVector4 v14; // xmm1
+  UFG::qVector4 v15; // xmm2
+  UFG::qVector4 v16; // xmm3
+  UFG::qVector4 v17; // xmm1
+  UFG::qVector4 v18; // xmm2
+  UFG::qVector4 v19; // xmm3
+  UFG::ChaseCameraParameters *v20; // rax
+  UFG::qList<UFG::SimObjectPointer,UFG::SimObjectPointer,1,0> *result; // [rsp+50h] [rbp+18h] BYREF
 
-  v2 = this;
-  UFG::CameraSubject::CameraSubject((UFG::CameraSubject *)&this->vfptr, name_uid);
-  v3 = (UFG::qNode<UFG::VehicleSubjectComponent,UFG::VehicleSubjectComponent> *)&v2->mPrev;
-  v3->mPrev = v3;
-  v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleSubjectComponent::`vftable;
-  UFG::RebindingComponentHandle<UFG::AiDriverComponent,0>::RebindingComponentHandle<UFG::AiDriverComponent,0>(&v2->pAiDriver);
-  UFG::RebindingComponentHandle<UFG::RoadSpaceComponent,0>::RebindingComponentHandle<UFG::RoadSpaceComponent,0>(&v2->pRoadSpace);
-  UFG::RebindingComponentHandle<UFG::PhysicsMoverInterface,0>::RebindingComponentHandle<UFG::PhysicsMoverInterface,0>(&v2->pPhysicsMover);
-  UFG::RebindingComponentHandle<UFG::VehicleOccupantComponent,0>::RebindingComponentHandle<UFG::VehicleOccupantComponent,0>(&v2->pVehicleOccupants);
-  UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent,0>::RebindingComponentHandle<UFG::CharacterAnimationComponent,0>(&v2->pAnimation);
-  UFG::RebindingComponentHandle<UFG::TargetingSystemVehicleComponent,0>::RebindingComponentHandle<UFG::TargetingSystemVehicleComponent,0>(&v2->pTargetingSystem);
-  *(_QWORD *)&v2->mBox.mMin.x = 0i64;
-  *(_QWORD *)&v2->mBox.mMin.z = 0i64;
-  *(_QWORD *)&v2->mBox.mMax.y = 0i64;
-  v4 = &v2->mChaserList;
-  result = v4;
-  v4->mNode.mPrev = &v4->mNode;
-  v4->mNode.mNext = &v4->mNode;
-  v2->mFollowOverrideContext.mUID = -1;
-  v5 = UFG::VehicleSubjectComponent::s_VehicleSubjectComponentList.mNode.mPrev;
-  UFG::VehicleSubjectComponent::s_VehicleSubjectComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::VehicleSubjectComponent,UFG::VehicleSubjectComponent> *)&v2->mPrev;
-  v3->mPrev = v5;
-  v2->mNext = (UFG::qNode<UFG::VehicleSubjectComponent,UFG::VehicleSubjectComponent> *)&UFG::VehicleSubjectComponent::s_VehicleSubjectComponentList;
-  UFG::VehicleSubjectComponent::s_VehicleSubjectComponentList.mNode.mPrev = (UFG::qNode<UFG::VehicleSubjectComponent,UFG::VehicleSubjectComponent> *)&v2->mPrev;
+  UFG::CameraSubject::CameraSubject(this, name_uid);
+  this->mPrev = &this->UFG::qNode<UFG::VehicleSubjectComponent,UFG::VehicleSubjectComponent>;
+  this->mNext = &this->UFG::qNode<UFG::VehicleSubjectComponent,UFG::VehicleSubjectComponent>;
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleSubjectComponent::`vftable;
+  UFG::RebindingComponentHandle<UFG::AiDriverComponent,0>::RebindingComponentHandle<UFG::AiDriverComponent,0>(&this->pAiDriver);
+  UFG::RebindingComponentHandle<UFG::RoadSpaceComponent,0>::RebindingComponentHandle<UFG::RoadSpaceComponent,0>(&this->pRoadSpace);
+  UFG::RebindingComponentHandle<UFG::PhysicsMoverInterface,0>::RebindingComponentHandle<UFG::PhysicsMoverInterface,0>(&this->pPhysicsMover);
+  UFG::RebindingComponentHandle<UFG::VehicleOccupantComponent,0>::RebindingComponentHandle<UFG::VehicleOccupantComponent,0>(&this->pVehicleOccupants);
+  UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent,0>::RebindingComponentHandle<UFG::CharacterAnimationComponent,0>(&this->pAnimation);
+  UFG::RebindingComponentHandle<UFG::TargetingSystemVehicleComponent,0>::RebindingComponentHandle<UFG::TargetingSystemVehicleComponent,0>(&this->pTargetingSystem);
+  *(_QWORD *)&this->mBox.mMin.x = 0i64;
+  *(_QWORD *)&this->mBox.mMin.z = 0i64;
+  *(_QWORD *)&this->mBox.mMax.y = 0i64;
+  result = &this->mChaserList;
+  this->mChaserList.mNode.mPrev = &this->mChaserList.mNode;
+  this->mChaserList.mNode.mNext = &this->mChaserList.mNode;
+  this->mFollowOverrideContext.mUID = -1;
+  mPrev = UFG::VehicleSubjectComponent::s_VehicleSubjectComponentList.mNode.mPrev;
+  UFG::VehicleSubjectComponent::s_VehicleSubjectComponentList.mNode.mPrev->mNext = &this->UFG::qNode<UFG::VehicleSubjectComponent,UFG::VehicleSubjectComponent>;
+  this->mPrev = mPrev;
+  this->mNext = (UFG::qNode<UFG::VehicleSubjectComponent,UFG::VehicleSubjectComponent> *)&UFG::VehicleSubjectComponent::s_VehicleSubjectComponentList;
+  UFG::VehicleSubjectComponent::s_VehicleSubjectComponentList.mNode.mPrev = &this->UFG::qNode<UFG::VehicleSubjectComponent,UFG::VehicleSubjectComponent>;
   UFG::SimComponent::AddType(
-    (UFG::SimComponent *)&v2->vfptr,
+    this,
     UFG::VehicleSubjectComponent::_VehicleSubjectComponentTypeUID,
     "VehicleSubjectComponent");
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
+  this->vAngularVelocity.x = UFG::qVector3::msZero.x;
+  this->vAngularVelocity.y = y;
+  this->vAngularVelocity.z = z;
   v6 = UFG::qVector3::msZero.y;
   v7 = UFG::qVector3::msZero.z;
-  v2->vAngularVelocity.x = UFG::qVector3::msZero.x;
-  v2->vAngularVelocity.y = v6;
-  v2->vAngularVelocity.z = v7;
-  v8 = UFG::qVector3::msZero.y;
-  v9 = UFG::qVector3::msZero.z;
-  v2->vVelocity.x = UFG::qVector3::msZero.x;
-  v2->vVelocity.y = v8;
-  v2->vVelocity.z = v9;
-  v10 = UFG::qVector3::msUnity.y;
-  v11 = UFG::qVector3::msUnity.z;
-  v2->vUp.x = UFG::qVector3::msUnity.x;
-  v2->vUp.y = v10;
-  v2->vUp.z = v11;
+  this->vVelocity.x = UFG::qVector3::msZero.x;
+  this->vVelocity.y = v6;
+  this->vVelocity.z = v7;
+  v8 = UFG::qVector3::msUnity.y;
+  v9 = UFG::qVector3::msUnity.z;
+  this->vUp.x = UFG::qVector3::msUnity.x;
+  this->vUp.y = v8;
+  this->vUp.z = v9;
+  v10 = UFG::qVector3::msZero.y;
+  v11 = UFG::qVector3::msZero.z;
+  this->vOriginOffset.x = UFG::qVector3::msZero.x;
+  this->vOriginOffset.y = v10;
+  this->vOriginOffset.z = v11;
+  *(_QWORD *)&this->rAimLookOffsetLowZ = 0i64;
+  this->rAimDistFromSide = 1.8;
+  *(_QWORD *)&this->rAimDistFromBumper = 1053609165i64;
+  this->rAimOriginOffsetConstX = 0.0;
   v12 = UFG::qVector3::msZero.y;
   v13 = UFG::qVector3::msZero.z;
-  v2->vOriginOffset.x = UFG::qVector3::msZero.x;
-  v2->vOriginOffset.y = v12;
-  v2->vOriginOffset.z = v13;
-  *(_QWORD *)&v2->rAimLookOffsetLowZ = 0i64;
-  v2->rAimDistFromSide = 1.8;
-  *(_QWORD *)&v2->rAimDistFromBumper = 1053609165i64;
-  v2->rAimOriginOffsetConstX = 0.0;
-  v14 = UFG::qVector3::msZero.y;
-  v15 = UFG::qVector3::msZero.z;
-  v2->mPositionOffset.x = UFG::qVector3::msZero.x;
-  v2->mPositionOffset.y = v14;
-  v2->mPositionOffset.z = v15;
-  v16 = UFG::qMatrix44::msIdentity.v1;
-  v17 = UFG::qMatrix44::msIdentity.v2;
-  v18 = UFG::qMatrix44::msIdentity.v3;
-  v2->mLocalWorldOffset.v0 = UFG::qMatrix44::msIdentity.v0;
-  v2->mLocalWorldOffset.v1 = v16;
-  v2->mLocalWorldOffset.v2 = v17;
-  v2->mLocalWorldOffset.v3 = v18;
-  v19 = UFG::qMatrix44::msIdentity.v1;
-  v20 = UFG::qMatrix44::msIdentity.v2;
-  v21 = UFG::qMatrix44::msIdentity.v3;
-  v2->mWorldLocalOffset.v0 = UFG::qMatrix44::msIdentity.v0;
-  v2->mWorldLocalOffset.v1 = v19;
-  v2->mWorldLocalOffset.v2 = v20;
-  v2->mWorldLocalOffset.v3 = v21;
-  *(_WORD *)&v2->bFleeing = 256;
-  v2->bCanPassRight = 1;
-  v2->mRadius = 0.0;
-  v19.x = UFG::qVector3::msZero.y;
-  v20.x = UFG::qVector3::msZero.z;
-  v2->mBox.mMin.x = UFG::qVector3::msZero.x;
-  v2->mBox.mMin.y = v19.x;
-  v2->mBox.mMin.z = v20.x;
-  v19.x = UFG::qVector3::msZero.y;
-  v20.x = UFG::qVector3::msZero.z;
-  v2->mBox.mMax.x = UFG::qVector3::msZero.x;
-  v2->mBox.mMax.y = v19.x;
-  v2->mBox.mMax.z = v20.x;
-  v2->mSeatBone = -2;
-  v2->pActionHijacker = 0i64;
-  v2->pPlayerOccupant = 0i64;
-  v2->mFollowOverrideContext.mUID = UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&result, 0xFFFFFFFF)->mUID;
-  v22 = UFG::DefaultChaseParameters();
-  v2->pChaseParametersAim = v22;
-  v2->pChaseParametersFlee = v22;
-  v2->pChaseParametersRace = v22;
-  v2->pChaseParametersDrive = v22;
-  v2->pChaseParametersBurnout = v22;
-  v2->pChaseParametersLookUp = v22;
-  v2->pChaseParametersLookBack = v22;
-  v2->pChaseParametersLookSide = v22;
-  v2->pChaseParametersPassenger = v22;
-  v2->pChaseParametersHijackBack = v22;
-  v2->pChaseParametersHijackSide = v22;
-  v2->pChaseParametersHijackFront = v22;
-  v2->pChaseParametersHijackTop = v22;
+  this->mPositionOffset.x = UFG::qVector3::msZero.x;
+  this->mPositionOffset.y = v12;
+  this->mPositionOffset.z = v13;
+  v14 = UFG::qMatrix44::msIdentity.v1;
+  v15 = UFG::qMatrix44::msIdentity.v2;
+  v16 = UFG::qMatrix44::msIdentity.v3;
+  this->mLocalWorldOffset.v0 = UFG::qMatrix44::msIdentity.v0;
+  this->mLocalWorldOffset.v1 = v14;
+  this->mLocalWorldOffset.v2 = v15;
+  this->mLocalWorldOffset.v3 = v16;
+  v17 = UFG::qMatrix44::msIdentity.v1;
+  v18 = UFG::qMatrix44::msIdentity.v2;
+  v19 = UFG::qMatrix44::msIdentity.v3;
+  this->mWorldLocalOffset.v0 = UFG::qMatrix44::msIdentity.v0;
+  this->mWorldLocalOffset.v1 = v17;
+  this->mWorldLocalOffset.v2 = v18;
+  this->mWorldLocalOffset.v3 = v19;
+  *(_WORD *)&this->bFleeing = 256;
+  this->bCanPassRight = 1;
+  this->mRadius = 0.0;
+  v17.x = UFG::qVector3::msZero.y;
+  v18.x = UFG::qVector3::msZero.z;
+  this->mBox.mMin.x = UFG::qVector3::msZero.x;
+  this->mBox.mMin.y = v17.x;
+  this->mBox.mMin.z = v18.x;
+  v17.x = UFG::qVector3::msZero.y;
+  v18.x = UFG::qVector3::msZero.z;
+  this->mBox.mMax.x = UFG::qVector3::msZero.x;
+  this->mBox.mMax.y = v17.x;
+  this->mBox.mMax.z = v18.x;
+  this->mSeatBone = -2;
+  this->pActionHijacker = 0i64;
+  this->pPlayerOccupant = 0i64;
+  this->mFollowOverrideContext.mUID = UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&result, 0xFFFFFFFF)->mUID;
+  v20 = UFG::DefaultChaseParameters();
+  this->pChaseParametersAim = v20;
+  this->pChaseParametersFlee = v20;
+  this->pChaseParametersRace = v20;
+  this->pChaseParametersDrive = v20;
+  this->pChaseParametersBurnout = v20;
+  this->pChaseParametersLookUp = v20;
+  this->pChaseParametersLookBack = v20;
+  this->pChaseParametersLookSide = v20;
+  this->pChaseParametersPassenger = v20;
+  this->pChaseParametersHijackBack = v20;
+  this->pChaseParametersHijackSide = v20;
+  this->pChaseParametersHijackFront = v20;
+  this->pChaseParametersHijackTop = v20;
 }
 
 // File Line: 86
 // RVA: 0x66D7A0
 void __fastcall UFG::VehicleSubjectComponent::~VehicleSubjectComponent(UFG::VehicleSubjectComponent *this)
 {
-  UFG::VehicleSubjectComponent *v1; // rsi
   UFG::qNode<UFG::VehicleSubjectComponent,UFG::VehicleSubjectComponent> *v2; // rdi
-  UFG::qNode<UFG::VehicleSubjectComponent,UFG::VehicleSubjectComponent> *v3; // rcx
-  UFG::qNode<UFG::VehicleSubjectComponent,UFG::VehicleSubjectComponent> *v4; // rax
+  UFG::qNode<UFG::VehicleSubjectComponent,UFG::VehicleSubjectComponent> *mPrev; // rcx
+  UFG::qNode<UFG::VehicleSubjectComponent,UFG::VehicleSubjectComponent> *mNext; // rax
   UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *v5; // rcx
   UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *v6; // rax
   UFG::qNode<UFG::VehicleSubjectComponent,UFG::VehicleSubjectComponent> *v7; // rcx
   UFG::qNode<UFG::VehicleSubjectComponent,UFG::VehicleSubjectComponent> *v8; // rax
 
-  v1 = this;
   this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleSubjectComponent::`vftable;
   if ( this == UFG::VehicleSubjectComponent::s_VehicleSubjectComponentpCurrentIterator )
     UFG::VehicleSubjectComponent::s_VehicleSubjectComponentpCurrentIterator = (UFG::VehicleSubjectComponent *)&this->mPrev[-18];
-  v2 = (UFG::qNode<UFG::VehicleSubjectComponent,UFG::VehicleSubjectComponent> *)&this->mPrev;
-  v3 = this->mPrev;
-  v4 = v2->mNext;
-  v3->mNext = v4;
-  v4->mPrev = v3;
+  v2 = &this->UFG::qNode<UFG::VehicleSubjectComponent,UFG::VehicleSubjectComponent>;
+  mPrev = this->mPrev;
+  mNext = v2->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  UFG::qList<UFG::FractureConnectivity::Connection,UFG::FractureConnectivity::Connection,1,0>::DeleteNodes((UFG::qList<UFG::qReflectField,UFG::qReflectField,1,0> *)&v1->mChaserList);
-  UFG::VehicleSubjectComponent::HandleChaserListChange(v1);
-  UFG::qList<UFG::FractureConnectivity::Connection,UFG::FractureConnectivity::Connection,1,0>::DeleteNodes((UFG::qList<UFG::qReflectField,UFG::qReflectField,1,0> *)&v1->mChaserList);
-  v5 = v1->mChaserList.mNode.mPrev;
-  v6 = v1->mChaserList.mNode.mNext;
+  UFG::qList<UFG::FractureConnectivity::Connection,UFG::FractureConnectivity::Connection,1,0>::DeleteNodes((UFG::qList<UFG::qReflectField,UFG::qReflectField,1,0> *)&this->mChaserList);
+  UFG::VehicleSubjectComponent::HandleChaserListChange(this);
+  UFG::qList<UFG::FractureConnectivity::Connection,UFG::FractureConnectivity::Connection,1,0>::DeleteNodes((UFG::qList<UFG::qReflectField,UFG::qReflectField,1,0> *)&this->mChaserList);
+  v5 = this->mChaserList.mNode.mPrev;
+  v6 = this->mChaserList.mNode.mNext;
   v5->mNext = v6;
   v6->mPrev = v5;
-  v1->mChaserList.mNode.mPrev = &v1->mChaserList.mNode;
-  v1->mChaserList.mNode.mNext = &v1->mChaserList.mNode;
-  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->pTargetingSystem);
-  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->pAnimation);
-  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->pVehicleOccupants);
-  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->pPhysicsMover);
-  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->pRoadSpace);
-  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->pAiDriver);
+  this->mChaserList.mNode.mPrev = &this->mChaserList.mNode;
+  this->mChaserList.mNode.mNext = &this->mChaserList.mNode;
+  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&this->pTargetingSystem);
+  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&this->pAnimation);
+  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&this->pVehicleOccupants);
+  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&this->pPhysicsMover);
+  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&this->pRoadSpace);
+  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&this->pAiDriver);
   v7 = v2->mPrev;
   v8 = v2->mNext;
   v7->mNext = v8;
   v8->mPrev = v7;
   v2->mPrev = v2;
   v2->mNext = v2;
-  UFG::CameraSubject::~CameraSubject((UFG::CameraSubject *)&v1->vfptr);
+  UFG::CameraSubject::~CameraSubject(this);
 }
 
 // File Line: 98
@@ -198,71 +192,72 @@ bool __fastcall UFG::VehicleSubjectComponent::HasComponent(UFG::SceneObjectPrope
 {
   return PropertyUtils::HasComponentPropertySet(
            pSceneObj,
-           (UFG::qSymbol *)&SimSymX_propset_componentVehicleSubject.mUID);
+           (UFG::qArray<unsigned long,0> *)&SimSymX_propset_componentVehicleSubject);
 }
 
 // File Line: 104
 // RVA: 0x687D80
-UFG::SimComponent *__fastcall UFG::VehicleSubjectComponent::PropertiesOnActivate(UFG::SceneObjectProperties *scene_object_properties)
+UFG::VehicleSubjectComponent *__fastcall UFG::VehicleSubjectComponent::PropertiesOnActivate(
+        UFG::SceneObjectProperties *scene_object_properties)
 {
-  UFG::SceneObjectProperties *v1; // rbx
-  unsigned int v2; // edi
-  UFG::qMemoryPool *v3; // rax
+  unsigned int m_NameUID; // edi
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
   UFG::allocator::free_link *v4; // rax
   UFG::SimComponent *v5; // rax
   UFG::SimComponent *v6; // rdi
-  UFG::SimObject *v7; // rdx
-  unsigned __int16 v8; // cx
+  UFG::SimObject *m_pSimObject; // rdx
+  __int16 m_Flags; // cx
   unsigned int v9; // ebx
-  UFG::SimObjectModifier v11; // [rsp+38h] [rbp-30h]
+  UFG::SimObjectModifier v11; // [rsp+38h] [rbp-30h] BYREF
 
-  v1 = scene_object_properties;
-  v2 = scene_object_properties->m_NameUID;
-  v3 = UFG::GetSimulationMemoryPool();
-  v4 = UFG::qMemoryPool::Allocate(v3, 0x3D8ui64, "VehicleSubjectComponent", 0i64, 1u);
+  m_NameUID = scene_object_properties->m_NameUID;
+  SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+  v4 = UFG::qMemoryPool::Allocate(SimulationMemoryPool, 0x3D8ui64, "VehicleSubjectComponent", 0i64, 1u);
   if ( v4 )
   {
-    UFG::VehicleSubjectComponent::VehicleSubjectComponent((UFG::VehicleSubjectComponent *)v4, v2);
+    UFG::VehicleSubjectComponent::VehicleSubjectComponent((UFG::VehicleSubjectComponent *)v4, m_NameUID);
     v6 = v5;
   }
   else
   {
     v6 = 0i64;
   }
-  v7 = v1->m_pSimObject;
-  v8 = v7->m_Flags;
-  if ( (v8 >> 14) & 1 || (v8 & 0x8000u) == 0 )
+  m_pSimObject = scene_object_properties->m_pSimObject;
+  m_Flags = m_pSimObject->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 || m_Flags >= 0 )
     v9 = -1;
   else
     v9 = 31;
-  UFG::SimObjectModifier::SimObjectModifier(&v11, v7, 1);
+  UFG::SimObjectModifier::SimObjectModifier(&v11, m_pSimObject, 1);
   UFG::SimObjectModifier::AttachComponent(&v11, v6, v9);
   UFG::SimObjectModifier::Close(&v11);
   UFG::SimObjectModifier::~SimObjectModifier(&v11);
-  return v6;
+  return (UFG::VehicleSubjectComponent *)v6;
 }
 
 // File Line: 112
 // RVA: 0x68D200
-void __fastcall UFG::VehicleSubjectComponent::TeleportEventHandler(UFG::VehicleSubjectComponent *this, UFG::Event *event)
+void __fastcall UFG::VehicleSubjectComponent::TeleportEventHandler(
+        UFG::VehicleSubjectComponent *this,
+        UFG::Event *event)
 {
-  UFG::SimObject *v2; // rdi
+  UFG::SimObject *m_pSimObject; // rdi
   UFG::SimObject *v3; // rcx
-  UFG::SimComponent *v4; // rax
+  UFG::SimComponent *ComponentOfType; // rax
   UFG::ChaseCameraComponent *v5; // rbx
 
-  v2 = this->m_pSimObject;
+  m_pSimObject = this->m_pSimObject;
   v3 = UFG::Director::Get()->mCurrentCamera->m_pSimObject;
   if ( v3 )
   {
-    v4 = UFG::SimObject::GetComponentOfType(v3, UFG::ChaseCameraComponent::_TypeUID);
-    v5 = (UFG::ChaseCameraComponent *)v4;
-    if ( v4 )
+    ComponentOfType = UFG::SimObject::GetComponentOfType(v3, UFG::ChaseCameraComponent::_TypeUID);
+    v5 = (UFG::ChaseCameraComponent *)ComponentOfType;
+    if ( ComponentOfType )
     {
-      if ( v2 == (UFG::SimObject *)((__int64 (__fastcall *)(UFG::SimComponent *))v4->vfptr[17].__vecDelDtor)(v4) )
+      if ( m_pSimObject == (UFG::SimObject *)((__int64 (__fastcall *)(UFG::SimComponent *))ComponentOfType->vfptr[17].__vecDelDtor)(ComponentOfType) )
       {
         ((void (__fastcall *)(UFG::ChaseCameraComponent *))v5->vfptr[14].__vecDelDtor)(v5);
-        v5->vfptr[16].__vecDelDtor((UFG::qSafePointerNode<UFG::SimComponent> *)&v5->vfptr, (unsigned int)v2);
+        v5->vfptr[16].__vecDelDtor(v5, (unsigned int)m_pSimObject);
         UFG::ChaseCameraComponent::LockEye(v5, 0);
         ((void (__fastcall *)(UFG::ChaseCameraComponent *))v5->vfptr[15].__vecDelDtor)(v5);
         ((void (__fastcall *)(UFG::ChaseCameraComponent *))v5->vfptr[31].__vecDelDtor)(v5);
@@ -273,21 +268,19 @@ void __fastcall UFG::VehicleSubjectComponent::TeleportEventHandler(UFG::VehicleS
 
 // File Line: 127
 // RVA: 0x66F370
-void __fastcall UFG::VehicleSubjectComponent::AddChaser(UFG::VehicleSubjectComponent *this, UFG::SimObject *chaser)
+void __fastcall UFG::VehicleSubjectComponent::AddChaser(
+        UFG::VehicleSubjectComponent *this,
+        UFG::allocator::free_link *chaser)
 {
-  UFG::SimObject *v2; // rdi
-  UFG::VehicleSubjectComponent *v3; // rsi
-  UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *v4; // rax
-  UFG::qList<UFG::SimObjectPointer,UFG::SimObjectPointer,1,0> *v5; // rbx
+  UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *mNext; // rax
+  UFG::qList<UFG::SimObjectPointer,UFG::SimObjectPointer,1,0> *p_mChaserList; // rbx
   UFG::allocator::free_link *v6; // rax
   UFG::allocator::free_link *v7; // rcx
-  UFG::allocator::free_link *v8; // rax
+  UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *mPrev; // rax
 
-  v2 = chaser;
-  v3 = this;
-  v4 = this->mChaserList.mNode.mNext;
-  v5 = &this->mChaserList;
-  if ( v4 == (UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *)&this->mChaserList )
+  mNext = this->mChaserList.mNode.mNext;
+  p_mChaserList = &this->mChaserList;
+  if ( mNext == (UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *)&this->mChaserList )
   {
 LABEL_4:
     v6 = UFG::qMalloc(0x18ui64, "VehicleEffectsComponent.SimObjectPointer", 0i64);
@@ -296,122 +289,118 @@ LABEL_4:
     {
       v6->mNext = v6;
       v6[1].mNext = v6;
-      v6[2].mNext = (UFG::allocator::free_link *)v2;
+      v6[2].mNext = chaser;
     }
     else
     {
       v7 = 0i64;
     }
-    v8 = (UFG::allocator::free_link *)v5->mNode.mPrev;
-    v8[1].mNext = v7;
-    v7->mNext = v8;
-    v7[1].mNext = (UFG::allocator::free_link *)v5;
-    v5->mNode.mPrev = (UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *)v7;
+    mPrev = p_mChaserList->mNode.mPrev;
+    mPrev->mNext = (UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *)v7;
+    v7->mNext = (UFG::allocator::free_link *)mPrev;
+    v7[1].mNext = (UFG::allocator::free_link *)p_mChaserList;
+    p_mChaserList->mNode.mPrev = (UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *)v7;
   }
   else
   {
-    while ( chaser != (UFG::SimObject *)v4[1].mPrev )
+    while ( chaser != (UFG::allocator::free_link *)mNext[1].mPrev )
     {
-      v4 = v4->mNext;
-      if ( v4 == (UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *)v5 )
+      mNext = mNext->mNext;
+      if ( mNext == (UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *)p_mChaserList )
         goto LABEL_4;
     }
   }
-  UFG::VehicleSubjectComponent::HandleChaserListChange(v3);
+  UFG::VehicleSubjectComponent::HandleChaserListChange(this);
 }
 
 // File Line: 134
 // RVA: 0x689660
 void __fastcall UFG::VehicleSubjectComponent::RemoveChaser(UFG::VehicleSubjectComponent *this, UFG::SimObject *chaser)
 {
-  UFG::VehicleSubjectComponent *v2; // rdi
-  UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *v3; // rcx
-  UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *v4; // rdx
+  UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *mNext; // rcx
+  UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *mPrev; // rdx
   UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *v5; // rax
   UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *v6; // rdx
   UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *v7; // rax
-  UFG::SimComponent *v8; // rdx
+  UFG::SimComponent *m_pSimComponent; // rdx
 
-  v2 = this;
-  v3 = this->mChaserList.mNode.mNext;
-  if ( v3 != (UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *)&v2->mChaserList )
+  mNext = this->mChaserList.mNode.mNext;
+  if ( mNext != (UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *)&this->mChaserList )
   {
-    while ( chaser != (UFG::SimObject *)v3[1].mPrev )
+    while ( chaser != (UFG::SimObject *)mNext[1].mPrev )
     {
-      v3 = v3->mNext;
-      if ( v3 == (UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *)&v2->mChaserList )
+      mNext = mNext->mNext;
+      if ( mNext == (UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *)&this->mChaserList )
         goto LABEL_6;
     }
-    v4 = v3->mPrev;
-    v5 = v3->mNext;
-    v4->mNext = v5;
-    v5->mPrev = v4;
-    v3->mPrev = v3;
-    v3->mNext = v3;
-    v6 = v3->mPrev;
-    v7 = v3->mNext;
+    mPrev = mNext->mPrev;
+    v5 = mNext->mNext;
+    mPrev->mNext = v5;
+    v5->mPrev = mPrev;
+    mNext->mPrev = mNext;
+    mNext->mNext = mNext;
+    v6 = mNext->mPrev;
+    v7 = mNext->mNext;
     v6->mNext = v7;
     v7->mPrev = v6;
-    v3->mPrev = v3;
-    v3->mNext = v3;
-    operator delete[](v3);
+    mNext->mPrev = mNext;
+    mNext->mNext = mNext;
+    operator delete[](mNext);
   }
 LABEL_6:
-  if ( (UFG::qList<UFG::SimObjectPointer,UFG::SimObjectPointer,1,0> *)v2->mChaserList.mNode.mNext == &v2->mChaserList )
+  if ( (UFG::qList<UFG::SimObjectPointer,UFG::SimObjectPointer,1,0> *)this->mChaserList.mNode.mNext == &this->mChaserList )
   {
-    v8 = v2->pRoadSpace.m_pSimComponent;
-    if ( v8 )
+    m_pSimComponent = this->pRoadSpace.m_pSimComponent;
+    if ( m_pSimComponent )
     {
-      if ( v8[30].m_TypeUID & 1 )
-        UFG::Simulation::DestroySimComponent(&UFG::gSim, v8);
+      if ( (m_pSimComponent[30].m_TypeUID & 1) != 0 )
+        UFG::Simulation::DestroySimComponent(&UFG::gSim, m_pSimComponent);
     }
   }
-  UFG::VehicleSubjectComponent::HandleChaserListChange(v2);
+  UFG::VehicleSubjectComponent::HandleChaserListChange(this);
 }
 
 // File Line: 150
 // RVA: 0x67BB30
 void __fastcall UFG::VehicleSubjectComponent::HandleChaserListChange(UFG::VehicleSubjectComponent *this)
 {
-  UFG::VehicleSubjectComponent *v1; // rdi
-  UFG::SimComponent *v2; // rax
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v3; // rbx
-  UFG::qList<UFG::SimObjectPointer,UFG::SimObjectPointer,1,0> *v4; // rsi
+  UFG::SimComponent *m_pSimComponent; // rax
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mPrev; // rbx
+  UFG::qList<UFG::SimObjectPointer,UFG::SimObjectPointer,1,0> *p_mChaserList; // rsi
   UFG::allocator::free_link *v5; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v6; // rax
 
-  v1 = this;
   if ( this->pRoadSpace.m_pSimComponent )
   {
-    v2 = this->pRoadSpace.m_pSimComponent;
-    v3 = v2[26].m_BoundComponentHandles.mNode.mPrev;
-    v4 = &this->mChaserList;
+    m_pSimComponent = this->pRoadSpace.m_pSimComponent;
+    mPrev = m_pSimComponent[26].m_BoundComponentHandles.mNode.mPrev;
+    p_mChaserList = &this->mChaserList;
     if ( (UFG::qList<UFG::SimObjectPointer,UFG::SimObjectPointer,1,0> *)this->mChaserList.mNode.mNext == &this->mChaserList )
     {
-      if ( v3 )
+      if ( mPrev )
       {
-        UFG::VehicleFormations::~VehicleFormations((UFG::VehicleFormations *)v2[26].m_BoundComponentHandles.mNode.mPrev);
-        operator delete[](v3);
-        v1->pRoadSpace.m_pSimComponent[26].m_BoundComponentHandles.mNode.mPrev = 0i64;
+        UFG::VehicleFormations::~VehicleFormations((UFG::VehicleFormations *)m_pSimComponent[26].m_BoundComponentHandles.mNode.mPrev);
+        operator delete[](mPrev);
+        this->pRoadSpace.m_pSimComponent[26].m_BoundComponentHandles.mNode.mPrev = 0i64;
       }
     }
     else
     {
-      if ( !v3 )
+      if ( !mPrev )
       {
         v5 = UFG::qMalloc(0x268ui64, "VehicleEffectsComponent.VehicleFormations", 0i64);
         if ( v5 )
         {
-          UFG::VehicleFormations::VehicleFormations((UFG::VehicleFormations *)v5, v1, v4);
-          v3 = v6;
+          UFG::VehicleFormations::VehicleFormations((UFG::VehicleFormations *)v5, this, p_mChaserList);
+          mPrev = v6;
         }
         else
         {
-          v3 = 0i64;
+          mPrev = 0i64;
         }
-        v1->pRoadSpace.m_pSimComponent[26].m_BoundComponentHandles.mNode.mPrev = v3;
+        this->pRoadSpace.m_pSimComponent[26].m_BoundComponentHandles.mNode.mPrev = mPrev;
       }
-      BYTE6(v3[38].mPrev) = 1;
+      BYTE6(mPrev[38].mPrev) = 1;
     }
   }
 }
@@ -420,140 +409,113 @@ void __fastcall UFG::VehicleSubjectComponent::HandleChaserListChange(UFG::Vehicl
 // RVA: 0x67F330
 bool __fastcall UFG::VehicleSubjectComponent::IsInReverse(UFG::VehicleSubjectComponent *this)
 {
-  UFG::SimComponent *v1; // rax
+  UFG::SimComponent *m_pSimComponent; // rax
 
-  v1 = this->pPhysicsMover.m_pSimComponent;
-  return v1 && (_QWORD)v1[1].m_pSimObject & 1;
+  m_pSimComponent = this->pPhysicsMover.m_pSimComponent;
+  return m_pSimComponent && ((__int64)m_pSimComponent[1].m_pSimObject & 1) != 0;
 }
 
 // File Line: 189
 // RVA: 0x67ED90
 bool __fastcall UFG::VehicleSubjectComponent::IsGas(UFG::VehicleSubjectComponent *this)
 {
-  UFG::PhysicsMoverInterface *v1; // rax
+  UFG::PhysicsMoverInterface *m_pSimComponent; // rax
 
-  v1 = (UFG::PhysicsMoverInterface *)this->pPhysicsMover.m_pSimComponent;
-  return v1 && v1->mInput.mRawGasBrakes < -0.2;
+  m_pSimComponent = (UFG::PhysicsMoverInterface *)this->pPhysicsMover.m_pSimComponent;
+  return m_pSimComponent && m_pSimComponent->mInput.mRawGasBrakes < -0.2;
 }
 
 // File Line: 195
 // RVA: 0x67F220
 bool __fastcall UFG::VehicleSubjectComponent::IsInAir(UFG::VehicleSubjectComponent *this)
 {
-  UFG::SimComponent *v1; // rcx
-  bool result; // al
+  UFG::SimComponent *m_pSimComponent; // rcx
 
-  v1 = this->pPhysicsMover.m_pSimComponent;
-  if ( v1 )
-    v1 = (UFG::SimComponent *)v1[10].m_SafePointerList.mNode.mPrev;
-  if ( v1 )
-    result = ((__int64 (*)(void))v1->vfptr[14].__vecDelDtor)();
+  m_pSimComponent = this->pPhysicsMover.m_pSimComponent;
+  if ( m_pSimComponent )
+    m_pSimComponent = (UFG::SimComponent *)m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
+  if ( m_pSimComponent )
+    return ((__int64 (__fastcall *)(UFG::SimComponent *))m_pSimComponent->vfptr[14].__vecDelDtor)(m_pSimComponent);
   else
-    result = 0;
-  return result;
+    return 0;
 }
 
 // File Line: 222
 // RVA: 0x681F10
-__int64 __fastcall UFG::VehicleSubjectComponent::NumChasersCloserThan(UFG::VehicleSubjectComponent *this, float distance)
+__int64 __fastcall UFG::VehicleSubjectComponent::NumChasersCloserThan(
+        UFG::VehicleSubjectComponent *this,
+        float distance)
 {
-  UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *v2; // rbx
-  UFG::qList<UFG::SimObjectPointer,UFG::SimObjectPointer,1,0> *v3; // rbp
-  unsigned int v4; // edi
-  UFG::VehicleSubjectComponent *v5; // r14
-  UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *v6; // rax
+  UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *mNext; // rbx
+  UFG::qList<UFG::SimObjectPointer,UFG::SimObjectPointer,1,0> *p_mChaserList; // rbp
+  unsigned int i; // edi
+  UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *mPrev; // rax
   float *v7; // rsi
   float *v8; // rax
 
-  v2 = this->mChaserList.mNode.mNext;
-  v3 = &this->mChaserList;
-  v4 = 0;
-  v5 = this;
-  if ( v2 != (UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *)&this->mChaserList )
+  mNext = this->mChaserList.mNode.mNext;
+  p_mChaserList = &this->mChaserList;
+  for ( i = 0; mNext != (UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *)p_mChaserList; mNext = mNext->mNext )
   {
-    do
+    mPrev = mNext[1].mPrev;
+    if ( mPrev )
     {
-      v6 = v2[1].mPrev;
-      if ( v6 )
+      v7 = (float *)mPrev[5].mNext;
+      if ( v7 )
       {
-        v7 = (float *)v6[5].mNext;
-        if ( v7 )
-        {
-          UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v6[5].mNext);
-          v8 = (float *)((__int64 (__fastcall *)(UFG::VehicleSubjectComponent *))v5->vfptr[17].__vecDelDtor)(v5);
-          if ( (float)((float)((float)((float)(v8[1] - v7[45]) * (float)(v8[1] - v7[45]))
-                             + (float)((float)(*v8 - v7[44]) * (float)(*v8 - v7[44])))
-                     + (float)((float)(v8[2] - v7[46]) * (float)(v8[2] - v7[46]))) < (float)(distance * distance) )
-            ++v4;
-        }
+        UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)mPrev[5].mNext);
+        v8 = (float *)((__int64 (__fastcall *)(UFG::VehicleSubjectComponent *))this->vfptr[17].__vecDelDtor)(this);
+        if ( (float)((float)((float)((float)(v8[1] - v7[45]) * (float)(v8[1] - v7[45]))
+                           + (float)((float)(*v8 - v7[44]) * (float)(*v8 - v7[44])))
+                   + (float)((float)(v8[2] - v7[46]) * (float)(v8[2] - v7[46]))) < (float)(distance * distance) )
+          ++i;
       }
-      v2 = v2->mNext;
     }
-    while ( v2 != (UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *)v3 );
   }
-  return v4;
+  return i;
 }
 
 // File Line: 240
 // RVA: 0x689220
-void __fastcall UFG::VehicleSubjectComponent::ReassignChasersTo(UFG::VehicleSubjectComponent *this, UFG::SimObject *new_target)
+void __fastcall UFG::VehicleSubjectComponent::ReassignChasersTo(
+        UFG::VehicleSubjectComponent *this,
+        UFG::SimObjectVehicle *new_target)
 {
-  UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *v2; // rbx
-  UFG::qList<UFG::SimObjectPointer,UFG::SimObjectPointer,1,0> *v3; // rdi
-  UFG::SimObject *v4; // rsi
-  UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *v5; // rax
-  UFG::SimObjectCVBase *v6; // rcx
-  unsigned __int16 v7; // dx
-  UFG::AiDriverComponent *v8; // rax
+  UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *mNext; // rbx
+  UFG::qList<UFG::SimObjectPointer,UFG::SimObjectPointer,1,0> *p_mChaserList; // rdi
+  UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *i; // rax
+  UFG::SimObjectCVBase *mPrev; // rcx
+  __int16 m_Flags; // dx
+  UFG::AiDriverComponent *ComponentOfTypeHK; // rax
 
-  v2 = this->mChaserList.mNode.mNext;
-  v3 = &this->mChaserList;
-  v4 = new_target;
-  v5 = v2;
-  if ( v2 != (UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *)&this->mChaserList )
+  mNext = this->mChaserList.mNode.mNext;
+  p_mChaserList = &this->mChaserList;
+  for ( i = mNext; mNext != (UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *)p_mChaserList; i = mNext )
   {
-    do
+    mPrev = (UFG::SimObjectCVBase *)i[1].mPrev;
+    mNext = mNext->mNext;
+    if ( mPrev )
     {
-      v6 = (UFG::SimObjectCVBase *)v5[1].mPrev;
-      v2 = v2->mNext;
-      if ( v6 )
+      m_Flags = mPrev->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
       {
-        v7 = v6->m_Flags;
-        if ( (v7 >> 14) & 1 )
-        {
-          v8 = UFG::SimObjectCVBase::GetComponent<UFG::AiDriverComponent>(v6);
-        }
-        else if ( (v7 & 0x8000u) == 0 )
-        {
-          if ( (v7 >> 13) & 1 )
-          {
-            v8 = (UFG::AiDriverComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                             (UFG::SimObjectGame *)&v6->vfptr,
-                                             UFG::AiDriverComponent::_TypeUID);
-          }
-          else if ( (v7 >> 12) & 1 )
-          {
-            v8 = (UFG::AiDriverComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                             (UFG::SimObjectGame *)&v6->vfptr,
-                                             UFG::AiDriverComponent::_TypeUID);
-          }
-          else
-          {
-            v8 = (UFG::AiDriverComponent *)UFG::SimObject::GetComponentOfType(
-                                             (UFG::SimObject *)&v6->vfptr,
-                                             UFG::AiDriverComponent::_TypeUID);
-          }
-        }
-        else
-        {
-          v8 = UFG::SimObjectCVBase::GetComponent<UFG::AiDriverComponent>(v6);
-        }
-        if ( v8 )
-          UFG::AiDriverComponent::SetChaseTarget(v8, v4);
+        ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::AiDriverComponent>(mPrev);
       }
-      v5 = v2;
+      else if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+      {
+        ComponentOfTypeHK = (UFG::AiDriverComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                        mPrev,
+                                                        UFG::AiDriverComponent::_TypeUID);
+      }
+      else
+      {
+        ComponentOfTypeHK = (UFG::AiDriverComponent *)UFG::SimObject::GetComponentOfType(
+                                                        mPrev,
+                                                        UFG::AiDriverComponent::_TypeUID);
+      }
+      if ( ComponentOfTypeHK )
+        UFG::AiDriverComponent::SetChaseTarget(ComponentOfTypeHK, new_target);
     }
-    while ( v2 != (UFG::qNode<UFG::SimObjectPointer,UFG::SimObjectPointer> *)v3 );
   }
 }
 
@@ -565,210 +527,204 @@ __int64 UFG::_dynamic_initializer_for__default_chase_parameter_set__()
 
   v0 = UFG::qStringHash32("Cameras-ChaseCameraCommon", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::default_chase_parameter_set, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__default_chase_parameter_set__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__default_chase_parameter_set__);
 }
 
 // File Line: 254
 // RVA: 0x683B10
-void __fastcall UFG::VehicleSubjectComponent::OnAttach(UFG::VehicleSubjectComponent *this, UFG::SimObject *object)
+void __fastcall UFG::VehicleSubjectComponent::OnAttach(
+        UFG::VehicleSubjectComponent *this,
+        UFG::SimObjectVehicle *object)
 {
-  UFG::SimObjectVehicle *v2; // rsi
-  UFG::VehicleSubjectComponent *v3; // rbx
-  UFG::RebindingComponentHandle<UFG::AiDriverComponent,0> *v4; // rcx
-  UFG::qSymbol *v5; // rdi
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v6; // r8
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v7; // rax
+  UFG::RebindingComponentHandle<UFG::AiDriverComponent,0> *p_pAiDriver; // rcx
+  UFG::qSymbol *MemImagePtr; // rdi
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mPrev; // r8
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mNext; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v8; // rdx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v9; // rax
-  UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent,0> *v10; // r8
+  UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent,0> *p_pAnimation; // r8
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v11; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v12; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v13; // rdx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v14; // rax
-  UFG::RebindingComponentHandle<UFG::TargetingSystemVehicleComponent,0> *v15; // r8
+  UFG::RebindingComponentHandle<UFG::TargetingSystemVehicleComponent,0> *p_pTargetingSystem; // r8
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v16; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v17; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v18; // rdx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v19; // rax
-  UFG::SimObject *v20; // rcx
-  UFG::SceneObjectProperties *v21; // rsi
+  UFG::SimObject *m_pSimObject; // rcx
+  UFG::SceneObjectProperties *m_pSceneObj; // rsi
   UFG::qPropertySet *v22; // rax
   UFG::qStaticSymbol *v23; // r14
-  UFG::qPropertySet *v24; // rax
-  float v25; // xmm1_4
-  float v26; // xmm2_4
-  UFG::qPropertySet *v27; // rax
-  UFG::qPropertySet *v28; // rax
-  UFG::qPropertySet *v29; // rax
-  UFG::qPropertySet *v30; // rax
-  UFG::qPropertySet *v31; // rax
-  UFG::qPropertySet *v32; // rax
-  UFG::qPropertySet *v33; // rsi
-  UFG::qSymbol _override; // [rsp+50h] [rbp+8h]
-  UFG::qSymbol *v35; // [rsp+58h] [rbp+10h]
+  UFG::qVector3 *v24; // rax
+  float y; // xmm1_4
+  float z; // xmm2_4
+  float *v27; // rax
+  float *v28; // rax
+  float *v29; // rax
+  float *v30; // rax
+  float *v31; // rax
+  float *v32; // rax
+  UFG::qPropertySet *PropertySet; // rsi
+  UFG::qSymbol _override; // [rsp+50h] [rbp+8h] BYREF
+  UFG::qSymbol *p_override; // [rsp+58h] [rbp+10h]
 
-  v2 = (UFG::SimObjectVehicle *)object;
-  v3 = this;
-  UFG::CameraSubject::OnAttach((UFG::CameraSubject *)&this->vfptr, object);
-  v4 = &v3->pAiDriver;
-  v5 = 0i64;
-  if ( v3->pAiDriver.m_pSimComponent )
+  UFG::CameraSubject::OnAttach(this, object);
+  p_pAiDriver = &this->pAiDriver;
+  MemImagePtr = 0i64;
+  if ( this->pAiDriver.m_pSimComponent )
   {
-    v6 = v4->mPrev;
-    v7 = v3->pAiDriver.mNext;
-    v6->mNext = v7;
-    v7->mPrev = v6;
-    v3->pAiDriver.m_pSimComponent = 0i64;
+    mPrev = p_pAiDriver->mPrev;
+    mNext = this->pAiDriver.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    this->pAiDriver.m_pSimComponent = 0i64;
 LABEL_7:
-    v3->pAiDriver.m_pSimObject = 0i64;
-    v3->pAiDriver.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v3->pAiDriver.mPrev;
-    v4->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v4->mPrev;
+    this->pAiDriver.m_pSimObject = 0i64;
+    this->pAiDriver.mNext = &this->pAiDriver;
+    p_pAiDriver->mPrev = p_pAiDriver;
     goto LABEL_8;
   }
-  if ( v3->pAiDriver.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::AiDriverComponent,0> *)v4->mPrev != v4
-     || (UFG::RebindingComponentHandle<UFG::AiDriverComponent,0> *)v3->pAiDriver.mNext != &v3->pAiDriver) )
+  if ( this->pAiDriver.m_pSimObject && (p_pAiDriver->mPrev != p_pAiDriver || this->pAiDriver.mNext != &this->pAiDriver) )
   {
-    v8 = v4->mPrev;
-    v9 = v3->pAiDriver.mNext;
+    v8 = p_pAiDriver->mPrev;
+    v9 = this->pAiDriver.mNext;
     v8->mNext = v9;
     v9->mPrev = v8;
     goto LABEL_7;
   }
 LABEL_8:
-  v3->pAiDriver.m_Changed = 1;
-  v3->pAiDriver.m_pSimObject = (UFG::SimObject *)&v2->vfptr;
-  v3->pAiDriver.m_TypeUID = UFG::AiDriverComponent::_TypeUID;
-  UFG::RebindingComponentHandle<UFG::AiDriverComponent,0>::BindInternal<UFG::SimObjectVehicle>(v4, v2);
-  UFG::RebindingComponentHandle<UFG::RoadSpaceComponent,0>::Bind<UFG::SimObjectVehicle>(&v3->pRoadSpace, v2);
-  UFG::RebindingComponentHandle<UFG::PhysicsMoverInterface,0>::Bind<UFG::SimObjectVehicle>(&v3->pPhysicsMover, v2);
-  v10 = &v3->pAnimation;
-  if ( v3->pAnimation.m_pSimComponent )
+  this->pAiDriver.m_Changed = 1;
+  this->pAiDriver.m_pSimObject = object;
+  this->pAiDriver.m_TypeUID = UFG::AiDriverComponent::_TypeUID;
+  UFG::RebindingComponentHandle<UFG::AiDriverComponent,0>::BindInternal<UFG::SimObjectVehicle>(p_pAiDriver, object);
+  UFG::RebindingComponentHandle<UFG::RoadSpaceComponent,0>::Bind<UFG::SimObjectVehicle>(&this->pRoadSpace, object);
+  UFG::RebindingComponentHandle<UFG::PhysicsMoverInterface,0>::Bind<UFG::SimObjectVehicle>(&this->pPhysicsMover, object);
+  p_pAnimation = &this->pAnimation;
+  if ( this->pAnimation.m_pSimComponent )
   {
-    v11 = v10->mPrev;
-    v12 = v3->pAnimation.mNext;
+    v11 = p_pAnimation->mPrev;
+    v12 = this->pAnimation.mNext;
     v11->mNext = v12;
     v12->mPrev = v11;
-    v3->pAnimation.m_pSimComponent = 0i64;
+    this->pAnimation.m_pSimComponent = 0i64;
 LABEL_14:
-    v3->pAnimation.m_pSimObject = 0i64;
-    v3->pAnimation.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v3->pAnimation.mPrev;
-    v10->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v10->mPrev;
+    this->pAnimation.m_pSimObject = 0i64;
+    this->pAnimation.mNext = &this->pAnimation;
+    p_pAnimation->mPrev = p_pAnimation;
     goto LABEL_15;
   }
-  if ( v3->pAnimation.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent,0> *)v10->mPrev != v10
-     || (UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent,0> *)v3->pAnimation.mNext != &v3->pAnimation) )
+  if ( this->pAnimation.m_pSimObject
+    && (p_pAnimation->mPrev != p_pAnimation || this->pAnimation.mNext != &this->pAnimation) )
   {
-    v13 = v10->mPrev;
-    v14 = v3->pAnimation.mNext;
+    v13 = p_pAnimation->mPrev;
+    v14 = this->pAnimation.mNext;
     v13->mNext = v14;
     v14->mPrev = v13;
     goto LABEL_14;
   }
 LABEL_15:
-  v3->pAnimation.m_Changed = 1;
-  v3->pAnimation.m_pSimObject = (UFG::SimObject *)&v2->vfptr;
-  v3->pAnimation.m_TypeUID = UFG::CharacterAnimationComponent::_TypeUID;
+  this->pAnimation.m_Changed = 1;
+  this->pAnimation.m_pSimObject = object;
+  this->pAnimation.m_TypeUID = UFG::CharacterAnimationComponent::_TypeUID;
   UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent,0>::BindInternal<UFG::SimObjectVehicle>(
-    &v3->pAnimation,
-    (UFG::SimObjectCharacter *)v2);
-  v15 = &v3->pTargetingSystem;
-  if ( v3->pTargetingSystem.m_pSimComponent )
+    &this->pAnimation,
+    (UFG::SimObjectCharacter *)object);
+  p_pTargetingSystem = &this->pTargetingSystem;
+  if ( this->pTargetingSystem.m_pSimComponent )
   {
-    v16 = v15->mPrev;
-    v17 = v3->pTargetingSystem.mNext;
+    v16 = p_pTargetingSystem->mPrev;
+    v17 = this->pTargetingSystem.mNext;
     v16->mNext = v17;
     v17->mPrev = v16;
-    v3->pTargetingSystem.m_pSimComponent = 0i64;
+    this->pTargetingSystem.m_pSimComponent = 0i64;
 LABEL_21:
-    v3->pTargetingSystem.m_pSimObject = 0i64;
-    v3->pTargetingSystem.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v3->pTargetingSystem.mPrev;
-    v15->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v15->mPrev;
+    this->pTargetingSystem.m_pSimObject = 0i64;
+    this->pTargetingSystem.mNext = &this->pTargetingSystem;
+    p_pTargetingSystem->mPrev = p_pTargetingSystem;
     goto LABEL_22;
   }
-  if ( v3->pTargetingSystem.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::TargetingSystemVehicleComponent,0> *)v15->mPrev != v15
-     || (UFG::RebindingComponentHandle<UFG::TargetingSystemVehicleComponent,0> *)v3->pTargetingSystem.mNext != &v3->pTargetingSystem) )
+  if ( this->pTargetingSystem.m_pSimObject
+    && (p_pTargetingSystem->mPrev != p_pTargetingSystem || this->pTargetingSystem.mNext != &this->pTargetingSystem) )
   {
-    v18 = v15->mPrev;
-    v19 = v3->pTargetingSystem.mNext;
+    v18 = p_pTargetingSystem->mPrev;
+    v19 = this->pTargetingSystem.mNext;
     v18->mNext = v19;
     v19->mPrev = v18;
     goto LABEL_21;
   }
 LABEL_22:
-  v3->pTargetingSystem.m_Changed = 1;
-  v3->pTargetingSystem.m_pSimObject = (UFG::SimObject *)&v2->vfptr;
-  v3->pTargetingSystem.m_TypeUID = UFG::TargetingSystemVehicleComponent::_TypeUID;
+  this->pTargetingSystem.m_Changed = 1;
+  this->pTargetingSystem.m_pSimObject = object;
+  this->pTargetingSystem.m_TypeUID = UFG::TargetingSystemVehicleComponent::_TypeUID;
   UFG::RebindingComponentHandle<UFG::TargetingSystemVehicleComponent,0>::BindInternal<UFG::SimObjectVehicle>(
-    &v3->pTargetingSystem,
-    v2);
+    &this->pTargetingSystem,
+    object);
   UFG::RebindingComponentHandle<UFG::VehicleOccupantComponent,0>::Bind<UFG::SimObjectVehicle>(
-    &v3->pVehicleOccupants,
-    v2);
-  if ( v3->pPhysicsMover.m_pSimComponent )
+    &this->pVehicleOccupants,
+    object);
+  if ( this->pPhysicsMover.m_pSimComponent )
   {
-    v20 = v3->pPhysicsMover.m_pSimComponent->m_pSimObject;
-    v21 = v20->m_pSceneObj;
-    if ( v21 )
+    m_pSimObject = this->pPhysicsMover.m_pSimComponent->m_pSimObject;
+    m_pSceneObj = m_pSimObject->m_pSceneObj;
+    if ( m_pSceneObj )
     {
       v22 = PropertyUtils::Get<UFG::qSymbol>(
-              v20->m_pSceneObj,
-              (UFG::qSymbol *)&CAMERA_SYMBOL_ChaseCameraParameters.mUID);
+              m_pSimObject->m_pSceneObj,
+              (UFG::qArray<unsigned long,0> *)&CAMERA_SYMBOL_ChaseCameraParameters);
       v23 = &UFG::default_chase_parameter_set;
       if ( v22 )
         v23 = (UFG::qStaticSymbol *)v22;
-      v24 = PropertyUtils::Get<UFG::qVector3>(v21, (UFG::qSymbol *)&CAMERA_SYMBOL_OriginOffset.mUID);
+      v24 = PropertyUtils::Get<UFG::qVector3>(m_pSceneObj, (UFG::qArray<unsigned long,0> *)&CAMERA_SYMBOL_OriginOffset);
       if ( v24 )
       {
-        v25 = *(float *)&v24->mPad0;
-        v26 = *(float *)&v24->mOwner.mOffset;
-        LODWORD(v3->vOriginOffset.x) = v24->mFlags;
-        v3->vOriginOffset.y = v25;
-        v3->vOriginOffset.z = v26;
+        y = v24->y;
+        z = v24->z;
+        this->vOriginOffset.x = v24->x;
+        this->vOriginOffset.y = y;
+        this->vOriginOffset.z = z;
       }
-      v27 = PropertyUtils::Get<float>(v21, (UFG::qSymbol *)&CAMERA_SYMBOL_AimLookOffsetLowZ.mUID);
+      v27 = PropertyUtils::Get<float>(m_pSceneObj, (UFG::qArray<unsigned long,0> *)&CAMERA_SYMBOL_AimLookOffsetLowZ);
       if ( v27 )
-        LODWORD(v3->rAimLookOffsetLowZ) = v27->mFlags;
-      v28 = PropertyUtils::Get<float>(v21, (UFG::qSymbol *)&CAMERA_SYMBOL_AimLookOffsetHighZ.mUID);
+        this->rAimLookOffsetLowZ = *v27;
+      v28 = PropertyUtils::Get<float>(m_pSceneObj, (UFG::qArray<unsigned long,0> *)&CAMERA_SYMBOL_AimLookOffsetHighZ);
       if ( v28 )
-        LODWORD(v3->rAimLookOffsetHighZ) = v28->mFlags;
-      v29 = PropertyUtils::Get<float>(v21, (UFG::qSymbol *)&CAMERA_SYMBOL_AimDistFromSide.mUID);
+        this->rAimLookOffsetHighZ = *v28;
+      v29 = PropertyUtils::Get<float>(m_pSceneObj, (UFG::qArray<unsigned long,0> *)&CAMERA_SYMBOL_AimDistFromSide);
       if ( v29 )
-        LODWORD(v3->rAimDistFromSide) = v29->mFlags;
-      v30 = PropertyUtils::Get<float>(v21, (UFG::qSymbol *)&CAMERA_SYMBOL_AimDistFromBumper.mUID);
+        this->rAimDistFromSide = *v29;
+      v30 = PropertyUtils::Get<float>(m_pSceneObj, (UFG::qArray<unsigned long,0> *)&CAMERA_SYMBOL_AimDistFromBumper);
       if ( v30 )
-        LODWORD(v3->rAimDistFromBumper) = v30->mFlags;
-      v31 = PropertyUtils::Get<float>(v21, (UFG::qSymbol *)&CAMERA_SYMBOL_AimOriginOffsetX.mUID);
+        this->rAimDistFromBumper = *v30;
+      v31 = PropertyUtils::Get<float>(m_pSceneObj, (UFG::qArray<unsigned long,0> *)&CAMERA_SYMBOL_AimOriginOffsetX);
       if ( v31 )
-        LODWORD(v3->rAimOriginOffsetX) = v31->mFlags;
-      v32 = PropertyUtils::Get<float>(v21, (UFG::qSymbol *)&CAMERA_SYMBOL_AimOriginOffsetConstX.mUID);
+        this->rAimOriginOffsetX = *v31;
+      v32 = PropertyUtils::Get<float>(m_pSceneObj, (UFG::qArray<unsigned long,0> *)&CAMERA_SYMBOL_AimOriginOffsetConstX);
       if ( v32 )
-        LODWORD(v3->rAimOriginOffsetConstX) = v32->mFlags;
-      v35 = &_override;
+        this->rAimOriginOffsetConstX = *v32;
+      p_override = &_override;
       _override.mUID = v23->mUID;
-      if ( UFG::CharacterSubjectComponent::IsOverrideSymbolValid((__int64)&_override) )
+      if ( UFG::CharacterSubjectComponent::IsOverrideSymbolValid(&_override) )
       {
-        v3->mFollowOverrideContext.mUID = v23->mUID;
+        this->mFollowOverrideContext.mUID = v23->mUID;
         v23 = &UFG::default_chase_parameter_set;
       }
-      v33 = UFG::PropertySetManager::GetPropertySet((UFG::qSymbol *)&v23->mUID);
-      if ( Cameras_ChaseCameraCommon::IsClass(v33->mSchemaName.mUID) )
-        v5 = (UFG::qSymbol *)UFG::qPropertySet::GetMemImagePtr(v33);
-      v3->pChaseParametersAim = UFG::FindChaseParameters(v5);
-      v3->pChaseParametersFlee = UFG::FindChaseParameters(v5 + 1);
-      v3->pChaseParametersRace = UFG::FindChaseParameters(v5 + 2);
-      v3->pChaseParametersDrive = UFG::FindChaseParameters(v5 + 3);
-      v3->pChaseParametersBurnout = UFG::FindChaseParameters(v5 + 4);
-      v3->pChaseParametersLookUp = UFG::FindChaseParameters(v5 + 5);
-      v3->pChaseParametersLookBack = UFG::FindChaseParameters(v5 + 6);
-      v3->pChaseParametersLookSide = UFG::FindChaseParameters(v5 + 7);
-      v3->pChaseParametersPassenger = UFG::FindChaseParameters(v5 + 8);
-      v3->pChaseParametersHijackBack = UFG::FindChaseParameters(v5 + 9);
-      v3->pChaseParametersHijackSide = UFG::FindChaseParameters(v5 + 10);
-      v3->pChaseParametersHijackFront = UFG::FindChaseParameters(v5 + 11);
-      v3->pChaseParametersHijackTop = UFG::FindChaseParameters(v5 + 12);
+      PropertySet = UFG::PropertySetManager::GetPropertySet(v23);
+      if ( Cameras_ChaseCameraCommon::IsClass(PropertySet->mSchemaName.mUID) )
+        MemImagePtr = (UFG::qSymbol *)UFG::qPropertySet::GetMemImagePtr(PropertySet);
+      this->pChaseParametersAim = UFG::FindChaseParameters(MemImagePtr);
+      this->pChaseParametersFlee = UFG::FindChaseParameters(MemImagePtr + 1);
+      this->pChaseParametersRace = UFG::FindChaseParameters(MemImagePtr + 2);
+      this->pChaseParametersDrive = UFG::FindChaseParameters(MemImagePtr + 3);
+      this->pChaseParametersBurnout = UFG::FindChaseParameters(MemImagePtr + 4);
+      this->pChaseParametersLookUp = UFG::FindChaseParameters(MemImagePtr + 5);
+      this->pChaseParametersLookBack = UFG::FindChaseParameters(MemImagePtr + 6);
+      this->pChaseParametersLookSide = UFG::FindChaseParameters(MemImagePtr + 7);
+      this->pChaseParametersPassenger = UFG::FindChaseParameters(MemImagePtr + 8);
+      this->pChaseParametersHijackBack = UFG::FindChaseParameters(MemImagePtr + 9);
+      this->pChaseParametersHijackSide = UFG::FindChaseParameters(MemImagePtr + 10);
+      this->pChaseParametersHijackFront = UFG::FindChaseParameters(MemImagePtr + 11);
+      this->pChaseParametersHijackTop = UFG::FindChaseParameters(MemImagePtr + 12);
     }
   }
 }
@@ -777,221 +733,217 @@ LABEL_22:
 // RVA: 0x684660
 void __fastcall UFG::VehicleSubjectComponent::OnDetach(UFG::VehicleSubjectComponent *this)
 {
-  UFG::RebindingComponentHandle<UFG::VehicleOccupantComponent,0> *v1; // r8
-  UFG::VehicleSubjectComponent *v2; // rbx
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v3; // rdx
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v4; // rax
+  UFG::RebindingComponentHandle<UFG::VehicleOccupantComponent,0> *p_pVehicleOccupants; // r8
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mPrev; // rdx
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mNext; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v5; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v6; // rax
-  UFG::RebindingComponentHandle<UFG::TargetingSystemVehicleComponent,0> *v7; // rdx
+  UFG::RebindingComponentHandle<UFG::TargetingSystemVehicleComponent,0> *p_pTargetingSystem; // rdx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v8; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v9; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v10; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v11; // rax
-  UFG::RebindingComponentHandle<UFG::PhysicsMoverInterface,0> *v12; // rdx
+  UFG::RebindingComponentHandle<UFG::PhysicsMoverInterface,0> *p_pPhysicsMover; // rdx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v13; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v14; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v15; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v16; // rax
-  UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent,0> *v17; // rdx
+  UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent,0> *p_pAnimation; // rdx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v18; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v19; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v20; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v21; // rax
-  UFG::RebindingComponentHandle<UFG::RoadSpaceComponent,0> *v22; // rdx
+  UFG::RebindingComponentHandle<UFG::RoadSpaceComponent,0> *p_pRoadSpace; // rdx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v23; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v24; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v25; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v26; // rax
-  UFG::RebindingComponentHandle<UFG::AiDriverComponent,0> *v27; // rdx
+  UFG::RebindingComponentHandle<UFG::AiDriverComponent,0> *p_pAiDriver; // rdx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v28; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v29; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v30; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v31; // rax
-  float v32; // xmm1_4
-  float v33; // xmm2_4
-  UFG::qWiseSymbol result; // [rsp+30h] [rbp+8h]
+  float y; // xmm1_4
+  float z; // xmm2_4
+  UFG::qWiseSymbol result; // [rsp+30h] [rbp+8h] BYREF
 
-  v1 = &this->pVehicleOccupants;
-  v2 = this;
+  p_pVehicleOccupants = &this->pVehicleOccupants;
   if ( this->pVehicleOccupants.m_pSimComponent )
   {
-    v3 = v1->mPrev;
-    v4 = this->pVehicleOccupants.mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
+    mPrev = p_pVehicleOccupants->mPrev;
+    mNext = this->pVehicleOccupants.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
     this->pVehicleOccupants.m_pSimComponent = 0i64;
 LABEL_7:
-    v1->m_pSimObject = 0i64;
-    v1->mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v1->mPrev;
-    v1->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v1->mPrev;
+    p_pVehicleOccupants->m_pSimObject = 0i64;
+    p_pVehicleOccupants->mNext = p_pVehicleOccupants;
+    p_pVehicleOccupants->mPrev = p_pVehicleOccupants;
     goto LABEL_8;
   }
   if ( this->pVehicleOccupants.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::VehicleOccupantComponent,0> *)v1->mPrev != v1
-     || (UFG::RebindingComponentHandle<UFG::VehicleOccupantComponent,0> *)this->pVehicleOccupants.mNext != &this->pVehicleOccupants) )
+    && (p_pVehicleOccupants->mPrev != p_pVehicleOccupants || this->pVehicleOccupants.mNext != &this->pVehicleOccupants) )
   {
-    v5 = v1->mPrev;
-    v6 = v1->mNext;
+    v5 = p_pVehicleOccupants->mPrev;
+    v6 = p_pVehicleOccupants->mNext;
     v5->mNext = v6;
     v6->mPrev = v5;
     goto LABEL_7;
   }
 LABEL_8:
-  v7 = &v2->pTargetingSystem;
-  v1->m_Changed = 1;
-  if ( v2->pTargetingSystem.m_pSimComponent )
+  p_pTargetingSystem = &this->pTargetingSystem;
+  p_pVehicleOccupants->m_Changed = 1;
+  if ( this->pTargetingSystem.m_pSimComponent )
   {
-    v8 = v7->mPrev;
-    v9 = v2->pTargetingSystem.mNext;
+    v8 = p_pTargetingSystem->mPrev;
+    v9 = this->pTargetingSystem.mNext;
     v8->mNext = v9;
     v9->mPrev = v8;
-    v2->pTargetingSystem.m_pSimComponent = 0i64;
+    this->pTargetingSystem.m_pSimComponent = 0i64;
 LABEL_14:
-    v2->pTargetingSystem.m_pSimObject = 0i64;
-    v2->pTargetingSystem.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v2->pTargetingSystem.mPrev;
-    v7->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v7->mPrev;
+    this->pTargetingSystem.m_pSimObject = 0i64;
+    this->pTargetingSystem.mNext = &this->pTargetingSystem;
+    p_pTargetingSystem->mPrev = p_pTargetingSystem;
     goto LABEL_15;
   }
-  if ( v2->pTargetingSystem.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::TargetingSystemVehicleComponent,0> *)v7->mPrev != v7
-     || (UFG::RebindingComponentHandle<UFG::TargetingSystemVehicleComponent,0> *)v2->pTargetingSystem.mNext != &v2->pTargetingSystem) )
+  if ( this->pTargetingSystem.m_pSimObject
+    && (p_pTargetingSystem->mPrev != p_pTargetingSystem || this->pTargetingSystem.mNext != &this->pTargetingSystem) )
   {
-    v10 = v7->mPrev;
-    v11 = v2->pTargetingSystem.mNext;
+    v10 = p_pTargetingSystem->mPrev;
+    v11 = this->pTargetingSystem.mNext;
     v10->mNext = v11;
     v11->mPrev = v10;
     goto LABEL_14;
   }
 LABEL_15:
-  v2->pTargetingSystem.m_Changed = 1;
-  v12 = &v2->pPhysicsMover;
-  if ( v2->pPhysicsMover.m_pSimComponent )
+  this->pTargetingSystem.m_Changed = 1;
+  p_pPhysicsMover = &this->pPhysicsMover;
+  if ( this->pPhysicsMover.m_pSimComponent )
   {
-    v13 = v12->mPrev;
-    v14 = v2->pPhysicsMover.mNext;
+    v13 = p_pPhysicsMover->mPrev;
+    v14 = this->pPhysicsMover.mNext;
     v13->mNext = v14;
     v14->mPrev = v13;
-    v2->pPhysicsMover.m_pSimComponent = 0i64;
+    this->pPhysicsMover.m_pSimComponent = 0i64;
 LABEL_21:
-    v2->pPhysicsMover.m_pSimObject = 0i64;
-    v2->pPhysicsMover.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v2->pPhysicsMover.mPrev;
-    v12->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v12->mPrev;
+    this->pPhysicsMover.m_pSimObject = 0i64;
+    this->pPhysicsMover.mNext = &this->pPhysicsMover;
+    p_pPhysicsMover->mPrev = p_pPhysicsMover;
     goto LABEL_22;
   }
-  if ( v2->pPhysicsMover.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::PhysicsMoverInterface,0> *)v12->mPrev != v12
-     || (UFG::RebindingComponentHandle<UFG::PhysicsMoverInterface,0> *)v2->pPhysicsMover.mNext != &v2->pPhysicsMover) )
+  if ( this->pPhysicsMover.m_pSimObject
+    && (p_pPhysicsMover->mPrev != p_pPhysicsMover || this->pPhysicsMover.mNext != &this->pPhysicsMover) )
   {
-    v15 = v12->mPrev;
-    v16 = v2->pPhysicsMover.mNext;
+    v15 = p_pPhysicsMover->mPrev;
+    v16 = this->pPhysicsMover.mNext;
     v15->mNext = v16;
     v16->mPrev = v15;
     goto LABEL_21;
   }
 LABEL_22:
-  v2->pPhysicsMover.m_Changed = 1;
-  v17 = &v2->pAnimation;
-  if ( v2->pAnimation.m_pSimComponent )
+  this->pPhysicsMover.m_Changed = 1;
+  p_pAnimation = &this->pAnimation;
+  if ( this->pAnimation.m_pSimComponent )
   {
-    v18 = v17->mPrev;
-    v19 = v2->pAnimation.mNext;
+    v18 = p_pAnimation->mPrev;
+    v19 = this->pAnimation.mNext;
     v18->mNext = v19;
     v19->mPrev = v18;
-    v2->pAnimation.m_pSimComponent = 0i64;
+    this->pAnimation.m_pSimComponent = 0i64;
 LABEL_28:
-    v2->pAnimation.m_pSimObject = 0i64;
-    v2->pAnimation.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v2->pAnimation.mPrev;
-    v17->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v17->mPrev;
+    this->pAnimation.m_pSimObject = 0i64;
+    this->pAnimation.mNext = &this->pAnimation;
+    p_pAnimation->mPrev = p_pAnimation;
     goto LABEL_29;
   }
-  if ( v2->pAnimation.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent,0> *)v17->mPrev != v17
-     || (UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent,0> *)v2->pAnimation.mNext != &v2->pAnimation) )
+  if ( this->pAnimation.m_pSimObject
+    && (p_pAnimation->mPrev != p_pAnimation || this->pAnimation.mNext != &this->pAnimation) )
   {
-    v20 = v17->mPrev;
-    v21 = v2->pAnimation.mNext;
+    v20 = p_pAnimation->mPrev;
+    v21 = this->pAnimation.mNext;
     v20->mNext = v21;
     v21->mPrev = v20;
     goto LABEL_28;
   }
 LABEL_29:
-  v2->pAnimation.m_Changed = 1;
-  v22 = &v2->pRoadSpace;
-  if ( v2->pRoadSpace.m_pSimComponent )
+  this->pAnimation.m_Changed = 1;
+  p_pRoadSpace = &this->pRoadSpace;
+  if ( this->pRoadSpace.m_pSimComponent )
   {
-    v23 = v22->mPrev;
-    v24 = v2->pRoadSpace.mNext;
+    v23 = p_pRoadSpace->mPrev;
+    v24 = this->pRoadSpace.mNext;
     v23->mNext = v24;
     v24->mPrev = v23;
-    v2->pRoadSpace.m_pSimComponent = 0i64;
+    this->pRoadSpace.m_pSimComponent = 0i64;
 LABEL_35:
-    v2->pRoadSpace.m_pSimObject = 0i64;
-    v2->pRoadSpace.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v2->pRoadSpace.mPrev;
-    v22->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v22->mPrev;
+    this->pRoadSpace.m_pSimObject = 0i64;
+    this->pRoadSpace.mNext = &this->pRoadSpace;
+    p_pRoadSpace->mPrev = p_pRoadSpace;
     goto LABEL_36;
   }
-  if ( v2->pRoadSpace.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::RoadSpaceComponent,0> *)v22->mPrev != v22
-     || (UFG::RebindingComponentHandle<UFG::RoadSpaceComponent,0> *)v2->pRoadSpace.mNext != &v2->pRoadSpace) )
+  if ( this->pRoadSpace.m_pSimObject
+    && (p_pRoadSpace->mPrev != p_pRoadSpace || this->pRoadSpace.mNext != &this->pRoadSpace) )
   {
-    v25 = v22->mPrev;
-    v26 = v2->pRoadSpace.mNext;
+    v25 = p_pRoadSpace->mPrev;
+    v26 = this->pRoadSpace.mNext;
     v25->mNext = v26;
     v26->mPrev = v25;
     goto LABEL_35;
   }
 LABEL_36:
-  v2->pRoadSpace.m_Changed = 1;
-  v27 = &v2->pAiDriver;
-  if ( v2->pAiDriver.m_pSimComponent )
+  this->pRoadSpace.m_Changed = 1;
+  p_pAiDriver = &this->pAiDriver;
+  if ( this->pAiDriver.m_pSimComponent )
   {
-    v28 = v27->mPrev;
-    v29 = v2->pAiDriver.mNext;
+    v28 = p_pAiDriver->mPrev;
+    v29 = this->pAiDriver.mNext;
     v28->mNext = v29;
     v29->mPrev = v28;
-    v2->pAiDriver.m_pSimComponent = 0i64;
+    this->pAiDriver.m_pSimComponent = 0i64;
 LABEL_42:
-    v2->pAiDriver.m_pSimObject = 0i64;
-    v2->pAiDriver.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v2->pAiDriver.mPrev;
-    v27->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v27->mPrev;
+    this->pAiDriver.m_pSimObject = 0i64;
+    this->pAiDriver.mNext = &this->pAiDriver;
+    p_pAiDriver->mPrev = p_pAiDriver;
     goto LABEL_43;
   }
-  if ( v2->pAiDriver.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::AiDriverComponent,0> *)v27->mPrev != v27
-     || (UFG::RebindingComponentHandle<UFG::AiDriverComponent,0> *)v2->pAiDriver.mNext != &v2->pAiDriver) )
+  if ( this->pAiDriver.m_pSimObject && (p_pAiDriver->mPrev != p_pAiDriver || this->pAiDriver.mNext != &this->pAiDriver) )
   {
-    v30 = v27->mPrev;
-    v31 = v2->pAiDriver.mNext;
+    v30 = p_pAiDriver->mPrev;
+    v31 = this->pAiDriver.mNext;
     v30->mNext = v31;
     v31->mPrev = v30;
     goto LABEL_42;
   }
 LABEL_43:
-  v2->pAiDriver.m_Changed = 1;
-  v2->mFollowOverrideContext.mUID = UFG::qSymbol::qSymbol(&result, 0xFFFFFFFF)->mUID;
-  v32 = UFG::qVector3::msZero.y;
-  v33 = UFG::qVector3::msZero.z;
-  v2->vOriginOffset.x = UFG::qVector3::msZero.x;
-  v2->vOriginOffset.y = v32;
-  v2->vOriginOffset.z = v33;
-  *(_QWORD *)&v2->rAimLookOffsetLowZ = 0i64;
-  v2->rAimDistFromSide = 1.8;
-  *(_QWORD *)&v2->rAimDistFromBumper = 1053609165i64;
-  v2->rAimOriginOffsetConstX = 0.0;
-  UFG::CameraSubject::OnDetach((UFG::CameraSubject *)&v2->vfptr);
-  v2->mSeatBone = -2;
-}
+  this->pAiDriver.m_Changed = 1;
+  this->mFollowOverrideContext.mUID = UFG::qSymbol::qSymbol(&result, 0xFFFFFFFF)->mUID;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
+  this->vOriginOffset.x = UFG::qVector3::msZero.x;
+  this->vOriginOffset.y = y;
+  this->vOriginOffset.z = z;
+  *(_QWORD *)&this->rAimLookOffsetLowZ = 0i64;
+  this->rAimDistFromSide = 1.8;
+  *(_QWORD *)&this->rAimDistFromBumper = 1053609165i64;
+  this->rAimOriginOffsetConstX = 0.0;
+  UFG::CameraSubject::OnDetach(this);
+  this->mSeatBone = -2;
+};
+  this->rAimDistFromSide = 1.8;
+  *(_QWORD *)&this->rAimDistFromBumper = 1053609165i64;
+  this->rAimOriginOffsetConstX = 0.0;
+  UFG::CameraSubject::OnDetach(this);
+  thi
 
 // File Line: 367
 // RVA: 0x67A1E0
-UFG::SimObject *__fastcall UFG::VehicleSubjectComponent::GetChaseTarget(UFG::VehicleSubjectComponent *this)
+UFG::qBaseNodeRB *__fastcall UFG::VehicleSubjectComponent::GetChaseTarget(UFG::VehicleSubjectComponent *this)
 {
-  UFG::SimObject *result; // rax
+  UFG::qBaseNodeRB *result; // rax
 
-  result = (UFG::SimObject *)this->pRoadSpace.m_pSimComponent;
+  result = (UFG::qBaseNodeRB *)this->pRoadSpace.m_pSimComponent;
   if ( result )
-    result = (UFG::SimObject *)result[13].mNode.mParent;
+    return result[53].mChild[0];
   return result;
 }
 
@@ -1003,7 +955,7 @@ UFG::SimComponent *__fastcall UFG::VehicleSubjectComponent::IsParkedWithDriver(U
 
   result = this->pAiDriver.m_pSimComponent;
   if ( result )
-    result = (UFG::SimComponent *)BYTE1(result[22].m_BoundComponentHandles.mNode.mNext);
+    return (UFG::SimComponent *)BYTE1(result[22].m_BoundComponentHandles.mNode.mNext);
   return result;
 }
 
@@ -1011,30 +963,28 @@ UFG::SimComponent *__fastcall UFG::VehicleSubjectComponent::IsParkedWithDriver(U
 // RVA: 0x67F3C0
 bool __fastcall UFG::VehicleSubjectComponent::IsParkedWithoutDriver(UFG::VehicleSubjectComponent *this)
 {
-  UFG::SimComponent *v1; // rax
+  UFG::SimComponent *m_pSimComponent; // rax
 
-  v1 = this->pVehicleOccupants.m_pSimComponent;
-  return v1 && v1[1].m_SafePointerList.mNode.mNext;
+  m_pSimComponent = this->pVehicleOccupants.m_pSimComponent;
+  return m_pSimComponent && m_pSimComponent[1].m_SafePointerList.mNode.mNext;
 }
 
 // File Line: 390
 // RVA: 0x67F530
-signed __int64 __fastcall UFG::VehicleSubjectComponent::IsRacing(UFG::VehicleSubjectComponent *this)
+__int64 __fastcall UFG::VehicleSubjectComponent::IsRacing(UFG::VehicleSubjectComponent *this)
 {
-  UFG::VehicleSubjectComponent *v1; // rbx
-  UFG::SimComponent *v2; // rax
+  UFG::SimComponent *m_pSimComponent; // rax
   UFG::SimComponent *v4; // rax
 
-  v1 = this;
-  if ( ((unsigned __int8 (*)(void))this->vfptr[32].__vecDelDtor)() )
+  if ( ((unsigned __int8 (__fastcall *)(UFG::VehicleSubjectComponent *))this->vfptr[32].__vecDelDtor)(this) )
   {
-    v2 = v1->pRoadSpace.m_pSimComponent;
-    if ( !v2 || !v2[26].m_SafePointerList.mNode.mPrev )
+    m_pSimComponent = this->pRoadSpace.m_pSimComponent;
+    if ( !m_pSimComponent || !m_pSimComponent[26].m_SafePointerList.mNode.mPrev )
       return 0i64;
   }
   else
   {
-    v4 = v1->pAiDriver.m_pSimComponent;
+    v4 = this->pAiDriver.m_pSimComponent;
     if ( !v4 || LODWORD(v4[13].m_SafePointerList.mNode.mPrev) != 6 )
       return 0i64;
   }
@@ -1045,83 +995,85 @@ signed __int64 __fastcall UFG::VehicleSubjectComponent::IsRacing(UFG::VehicleSub
 // RVA: 0x67ED60
 bool __fastcall UFG::VehicleSubjectComponent::IsEnemy(UFG::VehicleSubjectComponent *this)
 {
-  UFG::SimComponent *v1; // rax
+  UFG::SimComponent *m_pSimComponent; // rax
 
-  v1 = this->pVehicleOccupants.m_pSimComponent;
-  return v1 && v1[1].m_pSimObject && this->pAiDriver.m_pSimComponent;
+  m_pSimComponent = this->pVehicleOccupants.m_pSimComponent;
+  return m_pSimComponent && m_pSimComponent[1].m_pSimObject && this->pAiDriver.m_pSimComponent;
 }
 
 // File Line: 412
 // RVA: 0x67F3E0
 bool __fastcall UFG::VehicleSubjectComponent::IsPlayer(UFG::VehicleSubjectComponent *this)
 {
-  UFG::SimComponent *v1; // rax
+  UFG::SimComponent *m_pSimComponent; // rax
 
-  v1 = this->pVehicleOccupants.m_pSimComponent;
-  return v1 && v1[1].m_pSimObject && !this->pAiDriver.m_pSimComponent;
+  m_pSimComponent = this->pVehicleOccupants.m_pSimComponent;
+  return m_pSimComponent && m_pSimComponent[1].m_pSimObject && !this->pAiDriver.m_pSimComponent;
 }
 
 // File Line: 417
 // RVA: 0x67EAB0
 bool __fastcall UFG::VehicleSubjectComponent::IsCop(UFG::VehicleSubjectComponent *this)
 {
-  UFG::SimObjectGame *v1; // rcx
-  unsigned __int16 v2; // dx
-  UFG::SimComponent *v3; // rax
-  bool result; // al
+  UFG::SimObjectGame *m_pSimObject; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
 
-  v1 = (UFG::SimObjectGame *)this->m_pSimObject;
-  if ( v1
-    && ((v2 = v1->m_Flags, !((v2 >> 14) & 1)) ? ((v2 & 0x8000u) == 0 ? (!((v2 >> 13) & 1) ? (!((v2 >> 12) & 1) ? (v3 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v1->vfptr, UFG::CopUnitComponent::_TypeUID)) : (v3 = UFG::SimObjectGame::GetComponentOfTypeHK(v1, UFG::CopUnitComponent::_TypeUID))) : (v3 = UFG::SimObjectGame::GetComponentOfTypeHK(v1, UFG::CopUnitComponent::_TypeUID))) : (v3 = v1->m_Components.p[17].m_pComponent)) : (v3 = v1->m_Components.p[17].m_pComponent),
-        v3) )
+  m_pSimObject = (UFG::SimObjectGame *)this->m_pSimObject;
+  if ( m_pSimObject
+    && ((m_Flags = m_pSimObject->m_Flags, (m_Flags & 0x4000) == 0)
+      ? (m_Flags >= 0
+       ? ((m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+        ? (ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(m_pSimObject, UFG::CopUnitComponent::_TypeUID))
+        : (ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::CopUnitComponent::_TypeUID)))
+       : (ComponentOfTypeHK = m_pSimObject->m_Components.p[17].m_pComponent))
+      : (ComponentOfTypeHK = m_pSimObject->m_Components.p[17].m_pComponent),
+        ComponentOfTypeHK) )
   {
-    result = v3[7].m_Flags & 1;
+    return ComponentOfTypeHK[7].m_Flags & 1;
   }
   else
   {
-    result = 0;
+    return 0;
   }
-  return result;
 }
 
 // File Line: 425
 // RVA: 0x67E970
 bool __fastcall UFG::VehicleSubjectComponent::IsAmbient(UFG::VehicleSubjectComponent *this)
 {
-  UFG::SimComponent *v1; // rcx
+  UFG::SimComponent *m_pSimComponent; // rcx
 
-  v1 = this->pAiDriver.m_pSimComponent;
-  return v1 && ((unsigned __int8 (*)(void))v1->vfptr[16].__vecDelDtor)();
+  m_pSimComponent = this->pAiDriver.m_pSimComponent;
+  return m_pSimComponent
+      && ((unsigned __int8 (__fastcall *)(UFG::SimComponent *))m_pSimComponent->vfptr[16].__vecDelDtor)(m_pSimComponent);
 }
 
 // File Line: 430
 // RVA: 0x67E9A0
 bool __fastcall UFG::VehicleSubjectComponent::IsAttacking(UFG::VehicleSubjectComponent *this)
 {
-  UFG::SimComponent *v1; // rax
+  UFG::SimComponent *m_pSimComponent; // rax
 
-  v1 = this->pAiDriver.m_pSimComponent;
-  return v1 && v1[22].m_TypeUID != 7;
+  m_pSimComponent = this->pAiDriver.m_pSimComponent;
+  return m_pSimComponent && m_pSimComponent[22].m_TypeUID != 7;
 }
 
 // File Line: 435
 // RVA: 0x67EB80
 bool __fastcall UFG::VehicleSubjectComponent::IsDoingWheelie(UFG::VehicleSubjectComponent *this)
 {
-  UFG::SimComponent *v1; // rax
-  int v2; // ecx
+  UFG::SimComponent *m_pSimComponent; // rax
+  int m_pSimObject; // ecx
   bool result; // al
 
-  v1 = this->pPhysicsMover.m_pSimComponent;
+  m_pSimComponent = this->pPhysicsMover.m_pSimComponent;
   result = 0;
-  if ( v1 )
+  if ( m_pSimComponent )
   {
-    v2 = (int)v1[1].m_pSimObject;
-    if ( v2 & 8 )
-    {
-      if ( !_bittest(&v2, 8u) )
-        result = 1;
-    }
+    m_pSimObject = (int)m_pSimComponent[1].m_pSimObject;
+    if ( (m_pSimObject & 8) != 0 && (m_pSimObject & 0x100) == 0 )
+      return 1;
   }
   return result;
 }
@@ -1134,7 +1086,7 @@ UFG::SimComponent *__fastcall UFG::VehicleSubjectComponent::IsDoingBurnout(UFG::
 
   result = this->pPhysicsMover.m_pSimComponent;
   if ( result )
-    result = (UFG::SimComponent *)((LODWORD(result[1].m_pSimObject) >> 5) & 1);
+    return (UFG::SimComponent *)((LODWORD(result[1].m_pSimObject) >> 5) & 1);
   return result;
 }
 
@@ -1146,7 +1098,7 @@ UFG::SimComponent *__fastcall UFG::VehicleSubjectComponent::IsDoingOneEighty(UFG
 
   result = this->pPhysicsMover.m_pSimComponent;
   if ( result )
-    result = (UFG::SimComponent *)((LODWORD(result[1].m_pSimObject) >> 4) & 1);
+    return (UFG::SimComponent *)((LODWORD(result[1].m_pSimObject) >> 4) & 1);
   return result;
 }
 
@@ -1156,9 +1108,9 @@ __int64 UFG::_dynamic_initializer_for__symSeatSync01__()
 {
   unsigned int v0; // eax
 
-  v0 = UFG::qStringHashUpper32("SeatSync01", 0xFFFFFFFF);
+  v0 = UFG::qStringHashUpper32("SeatSync01", -1);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&symSeatSync01, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__symSeatSync01__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__symSeatSync01__);
 }
 
 // File Line: 450
@@ -1167,23 +1119,24 @@ __int64 UFG::_dynamic_initializer_for__symSeatSync__()
 {
   unsigned int v0; // eax
 
-  v0 = UFG::qStringHashUpper32("SeatSync", 0xFFFFFFFF);
+  v0 = UFG::qStringHashUpper32("SeatSync", -1);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&symSeatSync, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__symSeatSync__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__symSeatSync__);
 }
 
 // File Line: 453
 // RVA: 0x694760
-void __fastcall UFG::VehicleSubjectComponent::Update(UFG::VehicleSubjectComponent *this, float delta_sec, UFG::SimObjectVehicle *playerVehicle)
+void __fastcall UFG::VehicleSubjectComponent::Update(
+        UFG::VehicleSubjectComponent *this,
+        float delta_sec,
+        UFG::SimObjectVehicle *playerVehicle)
 {
-  UFG::VehicleSubjectComponent *v3; // rdi
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v4; // rsi
   bool v5; // zf
-  float v6; // xmm7_4
   UFG::SimObjectCharacter *v7; // rax
   Creature *v8; // rcx
-  float v9; // xmm1_4
-  float v10; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
   float v11; // xmm5_4
   float v12; // xmm1_4
   float v13; // xmm2_4
@@ -1192,17 +1145,17 @@ void __fastcall UFG::VehicleSubjectComponent::Update(UFG::VehicleSubjectComponen
   float v16; // xmm1_4
   float v17; // xmm2_4
   float v18; // xmm4_4
-  UFG::SimComponent *v19; // rbx
-  UFG::PhysicsVehicle *v20; // rcx
+  UFG::SimComponent *m_pSimComponent; // rbx
+  UFG::PhysicsVehicle *mPrev; // rcx
   float v21; // xmm0_4
   float v22; // xmm1_4
-  float v23; // xmm2_4
+  float x; // xmm2_4
   UFG::SimComponent *v24; // rbx
   UFG::PhysicsVehicle *v25; // rcx
   float v26; // xmm0_4
   float v27; // xmm1_4
   float v28; // xmm2_4
-  float *v29; // rax
+  UFG::SimComponent *v29; // rax
   __int64 v30; // rax
   __m128 v31; // xmm1
   float v32; // xmm6_4
@@ -1210,97 +1163,96 @@ void __fastcall UFG::VehicleSubjectComponent::Update(UFG::VehicleSubjectComponen
   __m128 v34; // xmm1
   float v35; // xmm2_4
   UFG::CopSystem *v36; // rbx
-  signed int v37; // er14
-  UFG::RoadNetworkLocation *v38; // rbx
+  int BoneID; // r14d
+  UFG::RoadNetworkLocation *Name; // rbx
   UFG::SimComponent *v39; // rbp
-  UFG::TargetingSimObject *v40; // rbx
-  signed __int64 i; // rbp
+  UFG::TargetingSimObject *mNext; // rbx
+  UFG::TargetingSimObject *i; // rbp
   bool v42; // cl
   __int64 v43; // rbx
-  unsigned int v44; // eax
+  int v44; // eax
   float v45; // xmm1_4
   float v46; // xmm0_4
   UFG::qVector4 v47; // xmm3
   UFG::qVector4 v48; // xmm2
-  UFG::qVector4 *v49; // rdx
-  UFG::qVector4 v50; // xmm0
-  UFG::qVector4 v51; // xmm1
-  float v52; // xmm10_4
-  float v53; // xmm9_4
-  float v54; // xmm5_4
-  float v55; // xmm11_4
-  float v56; // xmm6_4
-  float v57; // xmm7_4
-  float v58; // xmm8_4
-  float v59; // xmm11_4
-  float v60; // xmm9_4
-  float v61; // xmm6_4
-  float v62; // xmm4_4
-  float v63; // xmm5_4
-  float v64; // xmm10_4
-  float v65; // xmm8_4
-  float v66; // xmm11_4
-  UFG::qVector3 result; // [rsp+20h] [rbp-78h]
+  UFG::qVector4 v49; // xmm0
+  UFG::qVector4 v50; // xmm1
+  float v51; // xmm10_4
+  float v52; // xmm9_4
+  float v53; // xmm5_4
+  float v54; // xmm11_4
+  float v55; // xmm6_4
+  float v56; // xmm7_4
+  float v57; // xmm8_4
+  float v58; // xmm11_4
+  float v59; // xmm9_4
+  float v60; // xmm6_4
+  float v61; // xmm4_4
+  float v62; // xmm5_4
+  float v63; // xmm10_4
+  float v64; // xmm8_4
+  float v65; // xmm11_4
+  UFG::qVector3 result; // [rsp+20h] [rbp-78h] BYREF
 
   this->vUp.z = 1.0;
-  v3 = this;
   v4 = 0i64;
   *(_QWORD *)&this->vUp.x = 0i64;
-  v5 = this->m_pSimObject == (UFG::SimObject *)playerVehicle;
-  v6 = delta_sec;
+  v5 = this->m_pSimObject == playerVehicle;
   this->pPlayerOccupant = 0i64;
   v7 = 0i64;
   if ( v5 )
     v7 = LocalPlayer;
-  this->pPlayerOccupant = (UFG::SimObject *)&v7->vfptr;
+  this->pPlayerOccupant = v7;
   if ( this->pAnimation.m_pSimComponent )
   {
     v8 = *(Creature **)&this->pAnimation.m_pSimComponent[2].m_TypeUID;
     if ( v8 )
     {
-      Creature::GetTransform(v8, &v3->mLocalWorld);
-      UFG::qInverseAffine(&v3->mWorldLocal, &v3->mLocalWorld);
+      Creature::GetTransform(v8, &this->mLocalWorld);
+      UFG::qInverseAffine(&this->mWorldLocal, &this->mLocalWorld);
     }
   }
-  v9 = UFG::qVector3::msZero.y;
-  v10 = UFG::qVector3::msZero.z;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
   v11 = 0.0;
-  v3->vVelocity.x = UFG::qVector3::msZero.x;
-  v3->vVelocity.y = v9;
-  v3->vVelocity.z = v10;
+  this->vVelocity.x = UFG::qVector3::msZero.x;
+  this->vVelocity.y = y;
+  this->vVelocity.z = z;
   v12 = UFG::qVector3::msZero.y;
   v13 = UFG::qVector3::msZero.z;
-  v3->vAngularVelocity.x = UFG::qVector3::msZero.x;
+  this->vAngularVelocity.x = UFG::qVector3::msZero.x;
   v14 = *(float *)&FLOAT_1_0;
-  v3->vAngularVelocity.y = v12;
+  this->vAngularVelocity.y = v12;
   v15 = *(float *)&FLOAT_1_0;
   v16 = FLOAT_N1_0;
-  v3->vAngularVelocity.z = v13;
+  this->vAngularVelocity.z = v13;
   v17 = *(float *)&FLOAT_1_0;
   v18 = FLOAT_N1_0;
-  if ( v3->pPhysicsMover.m_pSimComponent )
+  if ( this->pPhysicsMover.m_pSimComponent )
   {
-    v19 = v3->pPhysicsMover.m_pSimComponent;
-    v20 = (UFG::PhysicsVehicle *)v19[10].m_SafePointerList.mNode.mPrev;
-    if ( !v20 || (unsigned __int8)UFG::PhysicsVehicle::IsSuspended(v20) )
+    m_pSimComponent = this->pPhysicsMover.m_pSimComponent;
+    mPrev = (UFG::PhysicsVehicle *)m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
+    if ( !mPrev || UFG::PhysicsVehicle::IsSuspended(mPrev) )
     {
-      v23 = UFG::qVector3::msZero.x;
+      x = UFG::qVector3::msZero.x;
       v22 = UFG::qVector3::msZero.y;
       v21 = UFG::qVector3::msZero.z;
     }
     else
     {
-      UFG::PhysicsVehicle::GetVelocity((UFG::PhysicsVehicle *)v19[10].m_SafePointerList.mNode.mPrev, &result);
+      UFG::PhysicsVehicle::GetVelocity(
+        (UFG::PhysicsVehicle *)m_pSimComponent[10].m_SafePointerList.mNode.mPrev,
+        &result);
       v21 = result.z;
       v22 = result.y;
-      v23 = result.x;
+      x = result.x;
     }
-    v24 = v3->pPhysicsMover.m_pSimComponent;
-    v3->vVelocity.x = v23;
-    v3->vVelocity.y = v22;
-    v3->vVelocity.z = v21;
+    v24 = this->pPhysicsMover.m_pSimComponent;
+    this->vVelocity.x = x;
+    this->vVelocity.y = v22;
+    this->vVelocity.z = v21;
     v25 = (UFG::PhysicsVehicle *)v24[10].m_SafePointerList.mNode.mPrev;
-    if ( !v25 || (unsigned __int8)UFG::PhysicsVehicle::IsSuspended(v25) )
+    if ( !v25 || UFG::PhysicsVehicle::IsSuspended(v25) )
     {
       v28 = UFG::qVector3::msZero.x;
       v27 = UFG::qVector3::msZero.y;
@@ -1313,103 +1265,101 @@ void __fastcall UFG::VehicleSubjectComponent::Update(UFG::VehicleSubjectComponen
       v27 = result.y;
       v28 = result.x;
     }
-    v29 = (float *)v3->pPhysicsMover.m_pSimComponent;
-    v3->vAngularVelocity.x = v28;
-    v3->vAngularVelocity.y = v27;
-    v3->vAngularVelocity.z = v26;
-    v16 = v29[167];
-    v18 = v29[168];
-    v11 = v29[169];
-    v14 = v29[170];
-    v17 = v29[171];
-    v15 = v29[172];
+    v29 = this->pPhysicsMover.m_pSimComponent;
+    this->vAngularVelocity.x = v28;
+    this->vAngularVelocity.y = v27;
+    this->vAngularVelocity.z = v26;
+    v16 = *(float *)&v29[10].m_NameUID;
+    v18 = *(float *)&v29[10].m_Flags;
+    v11 = *(float *)(&v29[10].m_SimObjIndex + 1);
+    v14 = *(float *)&v29[10].m_pSimObject;
+    v17 = *((float *)&v29[10].m_pSimObject + 1);
+    v15 = *(float *)&v29[10].m_BoundComponentHandles.mNode.mPrev;
   }
-  v3->mBox.mMin.x = v16;
-  v3->mBox.mMin.y = v18;
-  v3->mBox.mMin.z = v11;
-  v3->mBox.mMax.x = v14;
-  v3->mBox.mMax.y = v17;
-  v3->mBox.mMax.z = v15;
-  v30 = ((__int64 (__fastcall *)(UFG::VehicleSubjectComponent *))v3->vfptr[24].__vecDelDtor)(v3);
+  this->mBox.mMin.x = v16;
+  this->mBox.mMin.y = v18;
+  this->mBox.mMin.z = v11;
+  this->mBox.mMax.x = v14;
+  this->mBox.mMax.y = v17;
+  this->mBox.mMax.z = v15;
+  v30 = ((__int64 (__fastcall *)(UFG::VehicleSubjectComponent *))this->vfptr[24].__vecDelDtor)(this);
   v31 = (__m128)*(unsigned int *)(v30 + 4);
   v31.m128_f32[0] = (float)(v31.m128_f32[0] * v31.m128_f32[0]) + (float)(*(float *)v30 * *(float *)v30);
-  LODWORD(v32) = (unsigned __int128)_mm_sqrt_ps(v31);
-  v33 = ((__int64 (__fastcall *)(UFG::VehicleSubjectComponent *))v3->vfptr[23].__vecDelDtor)(v3);
+  v32 = _mm_sqrt_ps(v31).m128_f32[0];
+  v33 = ((__int64 (__fastcall *)(UFG::VehicleSubjectComponent *))this->vfptr[23].__vecDelDtor)(this);
   v34 = (__m128)*(unsigned int *)(v33 + 4);
   v34.m128_f32[0] = (float)(v34.m128_f32[0] * v34.m128_f32[0]) + (float)(*(float *)v33 * *(float *)v33);
-  LODWORD(v35) = (unsigned __int128)_mm_sqrt_ps(v34);
+  v35 = _mm_sqrt_ps(v34).m128_f32[0];
   if ( v35 <= v32 )
     v35 = v32;
-  v3->mRadius = v35;
-  v3->bFleeing = 0;
-  if ( v3->pPlayerOccupant )
+  this->mRadius = v35;
+  this->bFleeing = 0;
+  if ( this->pPlayerOccupant )
   {
     v36 = UFG::CopSystem::Instance();
     if ( ((unsigned __int8 (__fastcall *)(UFG::CopSystem *))v36->vfptr[6].__vecDelDtor)(v36) )
     {
       if ( ((unsigned int (__fastcall *)(UFG::CopSystem *))v36->vfptr[32].__vecDelDtor)(v36) )
-        v3->bFleeing = 1;
+        this->bFleeing = 1;
     }
   }
-  v37 = -1;
-  *(_WORD *)&v3->bCanPassLeft = 257;
-  if ( v3->pRoadSpace.m_pSimComponent && LOBYTE(v3->pRoadSpace.m_pSimComponent[8].m_Flags) )
+  BoneID = -1;
+  *(_WORD *)&this->bCanPassLeft = 257;
+  if ( this->pRoadSpace.m_pSimComponent && LOBYTE(this->pRoadSpace.m_pSimComponent[8].m_Flags) )
   {
-    v38 = Scaleform::GFx::AS3::Instances::fl::XML::GetName((UFG::RoadNetworkGuide *)&v3->pRoadSpace.m_pSimComponent[5].m_BoundComponentHandles.mNode.mNext);
-    v3->bCanPassRight = UFG::RoadNetworkLocation::CanReachLane(v38, 1);
-    v3->bCanPassLeft = UFG::RoadNetworkLocation::CanReachLane(v38, -1);
+    Name = Scaleform::GFx::AS3::Instances::fl::XML::GetName((UFG::RoadNetworkGuide *)&this->pRoadSpace.m_pSimComponent[5].m_BoundComponentHandles.mNode.mNext);
+    this->bCanPassRight = UFG::RoadNetworkLocation::CanReachLane(Name, 1);
+    this->bCanPassLeft = UFG::RoadNetworkLocation::CanReachLane(Name, -1);
   }
-  v3->pActionHijacker = 0i64;
-  if ( v3->pTargetingSystem.m_pSimComponent )
+  this->pActionHijacker = 0i64;
+  if ( this->pTargetingSystem.m_pSimComponent )
   {
-    v39 = v3->pTargetingSystem.m_pSimComponent;
-    v40 = (UFG::TargetingSimObject *)v39[1].m_BoundComponentHandles.mNode.mPrev;
-    for ( i = (signed __int64)&v39[1].m_pSimObject;
-          v40 != (UFG::TargetingSimObject *)i;
-          v40 = (UFG::TargetingSimObject *)v40->mNext )
+    v39 = this->pTargetingSystem.m_pSimComponent;
+    mNext = (UFG::TargetingSimObject *)v39[1].m_BoundComponentHandles.mNode.mPrev;
+    for ( i = (UFG::TargetingSimObject *)&v39[1].m_pSimObject; mNext != i; mNext = (UFG::TargetingSimObject *)mNext->mNext )
     {
-      if ( v40->m_pTarget.m_pPointer && v40->m_bLock && v40->m_eTargetType.mValue == eTARGET_TYPE_VEHICLE_ACTION_HIJACK )
-        v3->pActionHijacker = UFG::TargetingSimObject::GetOwner(v40);
-    }
-  }
-  if ( v3->pAnimation.m_pSimComponent )
-  {
-    v42 = v3->mSeatBone == -2;
-    if ( v3->pAnimation.m_Changed )
-    {
-      v3->pAnimation.m_Changed = 0;
-      v42 = 1;
-    }
-    v43 = *(_QWORD *)&v3->pAnimation.m_pSimComponent[2].m_TypeUID;
-    if ( v43 && v42 )
-    {
-      v44 = *(_QWORD *)(v43 + 440) ? (unsigned int)Skeleton::GetBoneID(*(Skeleton **)(v43 + 480), symSeatSync01.mUID) : -1;
-      v3->mSeatBone = v44;
-      if ( v44 == -1 )
+      if ( mNext->m_pTarget.m_pPointer
+        && mNext->m_bLock
+        && mNext->m_eTargetType.mValue == eTARGET_TYPE_VEHICLE_ACTION_HIJACK )
       {
-        if ( *(_QWORD *)(v43 + 440) )
-          v37 = Skeleton::GetBoneID(*(Skeleton **)(v43 + 480), symSeatSync.mUID);
-        v3->mSeatBone = v37;
+        this->pActionHijacker = (UFG::SimObject *)UFG::TargetingSimObject::GetOwner(mNext);
       }
     }
   }
-  if ( v3->pPhysicsMover.m_pSimComponent )
-    v4 = v3->pPhysicsMover.m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
+  if ( this->pAnimation.m_pSimComponent )
+  {
+    v42 = this->mSeatBone == -2;
+    if ( this->pAnimation.m_Changed )
+    {
+      this->pAnimation.m_Changed = 0;
+      v42 = 1;
+    }
+    v43 = *(_QWORD *)&this->pAnimation.m_pSimComponent[2].m_TypeUID;
+    if ( v43 && v42 )
+    {
+      v44 = *(_QWORD *)(v43 + 440) ? Skeleton::GetBoneID(*(Skeleton **)(v43 + 480), symSeatSync01.mUID) : -1;
+      this->mSeatBone = v44;
+      if ( v44 == -1 )
+      {
+        if ( *(_QWORD *)(v43 + 440) )
+          BoneID = Skeleton::GetBoneID(*(Skeleton **)(v43 + 480), symSeatSync.mUID);
+        this->mSeatBone = BoneID;
+      }
+    }
+  }
+  if ( this->pPhysicsMover.m_pSimComponent )
+    v4 = this->pPhysicsMover.m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
   if ( v4
     && ((unsigned __int8 (__fastcall *)(UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *))v4->mPrev[7].mPrev)(v4) )
   {
-    if ( !v3->bPinnedOrientation )
-      UFG::CameraSubject::PinOrientationSmooth((UFG::CameraSubject *)&v3->vfptr, PinOrientMode_Velocity);
+    if ( !this->bPinnedOrientation )
+      UFG::CameraSubject::PinOrientationSmooth(this, PinOrientMode_Velocity);
   }
-  else if ( v3->bPinnedOrientation )
+  else if ( this->bPinnedOrientation )
   {
-    v3->bPinnedOrientation = 0;
+    this->bPinnedOrientation = 0;
   }
-  UFG::CameraSubject::UpdateBase(
-    (UFG::CameraSubject *)&v3->vfptr,
-    v6,
-    UFG::bCameraDebugDraw,
-    &UFG::gCameraSubjectUpdateParams);
+  UFG::CameraSubject::UpdateBase(this, delta_sec, UFG::bCameraDebugDraw, &UFG::gCameraSubjectUpdateParams);
   if ( UFG::ChaseCameraComponent::bOffsetTune )
   {
     v45 = UFG::ChaseCameraComponent::rOffsetTuneY;
@@ -1418,88 +1368,78 @@ void __fastcall UFG::VehicleSubjectComponent::Update(UFG::VehicleSubjectComponen
   }
   else
   {
-    v45 = v3->vOriginOffset.y;
-    result.x = v3->vOriginOffset.x;
-    v46 = v3->vOriginOffset.z;
+    v45 = this->vOriginOffset.y;
+    result.x = this->vOriginOffset.x;
+    v46 = this->vOriginOffset.z;
   }
-  v47 = v3->mLocalWorld.v1;
-  v48 = v3->mLocalWorld.v2;
-  v49 = &v3->mLocalWorldOffset.v0;
+  v47 = this->mLocalWorld.v1;
+  v48 = this->mLocalWorld.v2;
   result.z = v46;
-  v50 = v3->mLocalWorld.v0;
+  v49 = this->mLocalWorld.v0;
   result.y = v45;
-  v51 = v3->mLocalWorld.v3;
-  v52 = result.x;
-  v53 = result.y;
-  v54 = result.x;
-  v55 = result.z;
-  *v49 = v50;
-  v49[1] = v47;
-  v49[2] = v48;
-  v49[3] = v51;
-  v50.x = v53 * v3->mLocalWorldOffset.v1.x;
-  v56 = v55 * v3->mLocalWorldOffset.v2.x;
-  v57 = v55 * v3->mLocalWorldOffset.v2.y;
-  v51.x = v53 * v3->mLocalWorldOffset.v1.y;
-  v48.x = v53 * v3->mLocalWorldOffset.v1.z;
-  v58 = v55 * v3->mLocalWorldOffset.v2.z;
-  v59 = v55 * v3->mLocalWorldOffset.v2.w;
-  v60 = v53 * v3->mLocalWorldOffset.v1.w;
-  v61 = (float)(v56 + (float)((float)(v52 * v3->mLocalWorldOffset.v0.x) + v50.x)) + v3->mLocalWorldOffset.v3.x;
-  v62 = v52 * v3->mLocalWorldOffset.v0.y;
-  v63 = v54 * v3->mLocalWorldOffset.v0.z;
-  v64 = v52 * v3->mLocalWorldOffset.v0.w;
-  v3->mLocalWorldOffset.v3.x = v61;
-  v65 = (float)(v58 + (float)(v63 + v48.x)) + v3->mLocalWorldOffset.v3.z;
-  v66 = (float)(v59 + (float)(v64 + v60)) + v3->mLocalWorldOffset.v3.w;
-  v3->mLocalWorldOffset.v3.y = (float)(v57 + (float)(v62 + v51.x)) + v3->mLocalWorldOffset.v3.y;
-  v3->mLocalWorldOffset.v3.z = v65;
-  v3->mLocalWorldOffset.v3.w = v66;
-  v51.x = v3->mLocalWorld.v3.y;
-  v48.x = v3->mLocalWorld.v3.z;
-  v3->mPositionOffset.x = v3->mLocalWorld.v3.x;
-  v3->mPositionOffset.y = v51.x;
-  v3->mPositionOffset.z = v48.x;
-  UFG::qInverseAffine(&v3->mWorldLocalOffset, &v3->mLocalWorldOffset);
+  v50 = this->mLocalWorld.v3;
+  v51 = result.x;
+  v52 = result.y;
+  v53 = result.x;
+  v54 = result.z;
+  this->mLocalWorldOffset.v0 = v49;
+  this->mLocalWorldOffset.v1 = v47;
+  this->mLocalWorldOffset.v2 = v48;
+  this->mLocalWorldOffset.v3 = v50;
+  v49.x = v52 * this->mLocalWorldOffset.v1.x;
+  v55 = v54 * this->mLocalWorldOffset.v2.x;
+  v56 = v54 * this->mLocalWorldOffset.v2.y;
+  v50.x = v52 * this->mLocalWorldOffset.v1.y;
+  v48.x = v52 * this->mLocalWorldOffset.v1.z;
+  v57 = v54 * this->mLocalWorldOffset.v2.z;
+  v58 = v54 * this->mLocalWorldOffset.v2.w;
+  v59 = v52 * this->mLocalWorldOffset.v1.w;
+  v60 = (float)(v55 + (float)((float)(v51 * this->mLocalWorldOffset.v0.x) + v49.x)) + this->mLocalWorldOffset.v3.x;
+  v61 = v51 * this->mLocalWorldOffset.v0.y;
+  v62 = v53 * this->mLocalWorldOffset.v0.z;
+  v63 = v51 * this->mLocalWorldOffset.v0.w;
+  this->mLocalWorldOffset.v3.x = v60;
+  v64 = (float)(v57 + (float)(v62 + v48.x)) + this->mLocalWorldOffset.v3.z;
+  v65 = (float)(v58 + (float)(v63 + v59)) + this->mLocalWorldOffset.v3.w;
+  this->mLocalWorldOffset.v3.y = (float)(v56 + (float)(v61 + v50.x)) + this->mLocalWorldOffset.v3.y;
+  this->mLocalWorldOffset.v3.z = v64;
+  this->mLocalWorldOffset.v3.w = v65;
+  v50.x = this->mLocalWorld.v3.y;
+  v48.x = this->mLocalWorld.v3.z;
+  this->mPositionOffset.x = this->mLocalWorld.v3.x;
+  this->mPositionOffset.y = v50.x;
+  this->mPositionOffset.z = v48.x;
+  UFG::qInverseAffine(&this->mWorldLocalOffset, &this->mLocalWorldOffset);
 }
 
 // File Line: 665
 // RVA: 0x694EB0
 void __fastcall UFG::VehicleSubjectComponent::UpdateAll(float delta_sec)
 {
-  UFG::SimObjectVehicle *v1; // rsi
-  unsigned __int16 v2; // dx
-  UFG::CharacterOccupantComponent *v3; // rax
+  UFG::SimObjectVehicle *CurrentVehicle; // rsi
+  signed __int16 m_Flags; // dx
+  UFG::CharacterOccupantComponent *m_pComponent; // rax
   UFG::VehicleSubjectComponent *v4; // rcx
   UFG::qList<UFG::VehicleSubjectComponent,UFG::VehicleSubjectComponent,1,0> *v5; // rbx
 
-  v1 = 0i64;
+  CurrentVehicle = 0i64;
   if ( LocalPlayer )
   {
-    v2 = LocalPlayer->m_Flags;
-    if ( (v2 >> 14) & 1 )
-    {
-      v3 = (UFG::CharacterOccupantComponent *)LocalPlayer->m_Components.p[44].m_pComponent;
-    }
-    else if ( (v2 & 0x8000u) == 0 )
-    {
-      if ( (v2 >> 13) & 1 )
-        v3 = (UFG::CharacterOccupantComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                  (UFG::SimObjectGame *)&LocalPlayer->vfptr,
-                                                  UFG::CharacterOccupantComponent::_TypeUID);
-      else
-        v3 = (UFG::CharacterOccupantComponent *)((v2 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                    (UFG::SimObjectGame *)&LocalPlayer->vfptr,
-                                                                    UFG::CharacterOccupantComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&LocalPlayer->vfptr, UFG::CharacterOccupantComponent::_TypeUID));
-    }
+    m_Flags = LocalPlayer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
+      m_pComponent = (UFG::CharacterOccupantComponent *)LocalPlayer->m_Components.p[44].m_pComponent;
     else
-    {
-      v3 = (UFG::CharacterOccupantComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                (UFG::SimObjectGame *)&LocalPlayer->vfptr,
-                                                UFG::CharacterOccupantComponent::_TypeUID);
-    }
-    if ( v3 )
-      v1 = (UFG::SimObjectVehicle *)UFG::CharacterOccupantComponent::GetCurrentVehicle(v3);
+      m_pComponent = (UFG::CharacterOccupantComponent *)(m_Flags < 0
+                                                      || (m_Flags & 0x2000) != 0
+                                                      || (m_Flags & 0x1000) != 0
+                                                       ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                           LocalPlayer,
+                                                           UFG::CharacterOccupantComponent::_TypeUID)
+                                                       : UFG::SimObject::GetComponentOfType(
+                                                           LocalPlayer,
+                                                           UFG::CharacterOccupantComponent::_TypeUID));
+    if ( m_pComponent )
+      CurrentVehicle = (UFG::SimObjectVehicle *)UFG::CharacterOccupantComponent::GetCurrentVehicle(m_pComponent);
   }
   v4 = (UFG::VehicleSubjectComponent *)&UFG::VehicleSubjectComponent::s_VehicleSubjectComponentList.mNode.mNext[-18];
   if ( (UFG::qList<UFG::VehicleSubjectComponent,UFG::VehicleSubjectComponent,1,0> *)&UFG::VehicleSubjectComponent::s_VehicleSubjectComponentList.mNode.mNext[-18] != &UFG::VehicleSubjectComponent::s_VehicleSubjectComponentList - 18 )
@@ -1507,7 +1447,7 @@ void __fastcall UFG::VehicleSubjectComponent::UpdateAll(float delta_sec)
     do
     {
       v5 = (UFG::qList<UFG::VehicleSubjectComponent,UFG::VehicleSubjectComponent,1,0> *)&v4->mNext[-18];
-      UFG::VehicleSubjectComponent::Update(v4, delta_sec, v1);
+      UFG::VehicleSubjectComponent::Update(v4, delta_sec, CurrentVehicle);
       v4 = (UFG::VehicleSubjectComponent *)v5;
     }
     while ( v5 != &UFG::VehicleSubjectComponent::s_VehicleSubjectComponentList - 18 );
@@ -1516,40 +1456,42 @@ void __fastcall UFG::VehicleSubjectComponent::UpdateAll(float delta_sec)
 
 // File Line: 752
 // RVA: 0x67A800
-float __fastcall UFG::VehicleSubjectComponent::GetMass(UFG::VehicleSubjectComponent *this)
+double __fastcall UFG::VehicleSubjectComponent::GetMass(UFG::VehicleSubjectComponent *this)
 {
-  UFG::SimComponent *v1; // rcx
+  UFG::SimComponent *m_pSimComponent; // rcx
+  UFG::PhysicsVehicle *mPrev; // rcx
 
-  v1 = this->pPhysicsMover.m_pSimComponent;
-  if ( v1 )
-    JUMPOUT(v1[10].m_SafePointerList.mNode.mPrev, 0i64, UFG::PhysicsVehicle::GetMass);
-  return 0.0;
+  m_pSimComponent = this->pPhysicsMover.m_pSimComponent;
+  if ( m_pSimComponent && (mPrev = (UFG::PhysicsVehicle *)m_pSimComponent[10].m_SafePointerList.mNode.mPrev) != 0i64 )
+    return UFG::PhysicsVehicle::GetMass(mPrev);
+  else
+    return 0.0;
 }
 
 // File Line: 765
 // RVA: 0x67B230
 float __fastcall UFG::VehicleSubjectComponent::GetSpeed(UFG::VehicleSubjectComponent *this)
 {
-  UFG::SimComponent *v1; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v2; // rax
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v3; // rcx
-  __m128 v4; // xmm2
+  UFG::SimComponent *m_pSimComponent; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rcx
+  __m128 mPrev_low; // xmm2
   float result; // xmm0_4
 
-  v1 = this->pPhysicsMover.m_pSimComponent;
-  if ( !v1 )
+  m_pSimComponent = this->pPhysicsMover.m_pSimComponent;
+  if ( !m_pSimComponent )
     return 0.0;
-  v2 = v1[10].m_SafePointerList.mNode.mPrev;
-  if ( !v2 )
-    return *((float *)&v1[10].m_BoundComponentHandles.mNode.mPrev + 1);
-  v3 = v2[6].mPrev[10].mNext;
-  if ( !v3 )
-    return *((float *)&v1[10].m_BoundComponentHandles.mNode.mPrev + 1);
-  v4 = (__m128)LODWORD(v3[35].mPrev);
-  v4.m128_f32[0] = (float)((float)(v4.m128_f32[0] * v4.m128_f32[0])
-                         + (float)(*((float *)&v3[35].mPrev + 1) * *((float *)&v3[35].mPrev + 1)))
-                 + (float)(*(float *)&v3[35].mNext * *(float *)&v3[35].mNext);
-  LODWORD(result) = (unsigned __int128)_mm_sqrt_ps(v4);
+  mPrev = m_pSimComponent[10].m_SafePointerList.mNode.mPrev;
+  if ( !mPrev )
+    return *((float *)&m_pSimComponent[10].m_BoundComponentHandles.mNode.mPrev + 1);
+  mNext = mPrev[6].mPrev[10].mNext;
+  if ( !mNext )
+    return *((float *)&m_pSimComponent[10].m_BoundComponentHandles.mNode.mPrev + 1);
+  mPrev_low = (__m128)LODWORD(mNext[35].mPrev);
+  mPrev_low.m128_f32[0] = (float)((float)(mPrev_low.m128_f32[0] * mPrev_low.m128_f32[0])
+                                + (float)(*((float *)&mNext[35].mPrev + 1) * *((float *)&mNext[35].mPrev + 1)))
+                        + (float)(*(float *)&mNext[35].mNext * *(float *)&mNext[35].mNext);
+  LODWORD(result) = _mm_sqrt_ps(mPrev_low).m128_u32[0];
   return result;
 }
 
@@ -1557,51 +1499,49 @@ float __fastcall UFG::VehicleSubjectComponent::GetSpeed(UFG::VehicleSubjectCompo
 // RVA: 0x67A6A0
 float __fastcall UFG::VehicleSubjectComponent::GetForwardSpeed(UFG::VehicleSubjectComponent *this)
 {
-  UFG::PhysicsMoverInterface *v1; // rax
-  float result; // xmm0_4
+  UFG::PhysicsMoverInterface *m_pSimComponent; // rax
 
-  v1 = (UFG::PhysicsMoverInterface *)this->pPhysicsMover.m_pSimComponent;
-  if ( v1 )
-    result = v1->mForwardSpeed;
+  m_pSimComponent = (UFG::PhysicsMoverInterface *)this->pPhysicsMover.m_pSimComponent;
+  if ( m_pSimComponent )
+    return m_pSimComponent->mForwardSpeed;
   else
-    result = 0.0;
-  return result;
+    return 0.0;
 }
 
 // File Line: 785
 // RVA: 0x67E9C0
 bool __fastcall UFG::VehicleSubjectComponent::IsBike(UFG::VehicleSubjectComponent *this)
 {
-  UFG::PhysicsMoverInterface *v1; // rax
+  UFG::PhysicsMoverInterface *m_pSimComponent; // rax
 
-  v1 = (UFG::PhysicsMoverInterface *)this->pPhysicsMover.m_pSimComponent;
-  return v1 && v1->mNumWheels == 2;
+  m_pSimComponent = (UFG::PhysicsMoverInterface *)this->pPhysicsMover.m_pSimComponent;
+  return m_pSimComponent && m_pSimComponent->mNumWheels == 2;
 }
 
 // File Line: 790
 // RVA: 0x67E9E0
 bool __fastcall UFG::VehicleSubjectComponent::IsBoat(UFG::VehicleSubjectComponent *this)
 {
-  UFG::SimComponent *v1; // rax
+  UFG::SimComponent *m_pSimComponent; // rax
 
-  v1 = this->pPhysicsMover.m_pSimComponent;
-  return v1 && !LODWORD(v1[12].m_BoundComponentHandles.mNode.mNext);
+  m_pSimComponent = this->pPhysicsMover.m_pSimComponent;
+  return m_pSimComponent && !LODWORD(m_pSimComponent[12].m_BoundComponentHandles.mNode.mNext);
 }
 
 // File Line: 795
 // RVA: 0x679720
-signed __int64 __fastcall UFG::VehicleSubjectComponent::GetBoxSide(UFG::VehicleSubjectComponent *this, UFG::qVector3 *position)
+signed __int64 __fastcall UFG::VehicleSubjectComponent::GetBoxSide(
+        UFG::VehicleSubjectComponent *this,
+        UFG::qVector3 *position)
 {
-  UFG::qVector3 *v2; // rdi
-  UFG::VehicleSubjectComponent *v3; // rsi
   float *v4; // rbx
   float *v5; // rax
   float v6; // xmm9_4
   float v7; // xmm10_4
-  float v8; // xmm6_4
-  float v9; // xmm11_4
+  float x; // xmm6_4
+  float y; // xmm11_4
   float v10; // xmm8_4
-  float v11; // xmm7_4
+  float z; // xmm7_4
   float *v12; // rax
   float v13; // xmm13_4
   float v14; // xmm9_4
@@ -1609,7 +1549,7 @@ signed __int64 __fastcall UFG::VehicleSubjectComponent::GetBoxSide(UFG::VehicleS
   float v16; // xmm0_4
   signed __int64 result; // rax
   float v18; // [rsp+28h] [rbp-130h]
-  UFG::qVector3 verts; // [rsp+40h] [rbp-118h]
+  UFG::qVector3 verts; // [rsp+40h] [rbp-118h] BYREF
   float v20; // [rsp+4Ch] [rbp-10Ch]
   float v21; // [rsp+50h] [rbp-108h]
   float v22; // [rsp+54h] [rbp-104h]
@@ -1631,21 +1571,19 @@ signed __int64 __fastcall UFG::VehicleSubjectComponent::GetBoxSide(UFG::VehicleS
   float v38; // [rsp+168h] [rbp+10h]
   float v39; // [rsp+178h] [rbp+20h]
 
-  v2 = position;
-  v3 = this;
-  UFG::CameraSubject::GetBoxVerts((UFG::CameraSubject *)&this->vfptr, &verts, 0.0);
-  v4 = (float *)((__int64 (__fastcall *)(UFG::VehicleSubjectComponent *))v3->vfptr[24].__vecDelDtor)(v3);
-  v5 = (float *)((__int64 (__fastcall *)(UFG::VehicleSubjectComponent *))v3->vfptr[23].__vecDelDtor)(v3);
+  UFG::CameraSubject::GetBoxVerts(this, &verts, 0.0);
+  v4 = (float *)((__int64 (__fastcall *)(UFG::VehicleSubjectComponent *))this->vfptr[24].__vecDelDtor)(this);
+  v5 = (float *)((__int64 (__fastcall *)(UFG::VehicleSubjectComponent *))this->vfptr[23].__vecDelDtor)(this);
   v6 = (float)(v4[1] + v5[1]) * 0.5;
   v7 = (float)(v4[2] + v5[2]) * 0.5;
-  v8 = v2->x;
-  v9 = v2->y;
+  x = position->x;
+  y = position->y;
   v10 = (float)(*v5 + *v4) * 0.5;
-  v11 = v2->z;
-  v12 = (float *)((__int64 (__fastcall *)(UFG::VehicleSubjectComponent *))v3->vfptr[19].__vecDelDtor)(v3);
-  v39 = (float)((float)((float)((float)(v9 * v12[4]) + (float)(v8 * *v12)) + (float)(v11 * v12[8])) + v12[12]) - v10;
-  v38 = (float)((float)((float)((float)(v9 * v12[5]) + (float)(v8 * v12[1])) + (float)(v11 * v12[9])) + v12[13]) - v6;
-  v18 = (float)((float)((float)((float)(v9 * v12[6]) + (float)(v8 * v12[2])) + (float)(v11 * v12[10])) + v12[14]) - v7;
+  z = position->z;
+  v12 = (float *)((__int64 (__fastcall *)(UFG::VehicleSubjectComponent *))this->vfptr[19].__vecDelDtor)(this);
+  v39 = (float)((float)((float)((float)(y * v12[4]) + (float)(x * *v12)) + (float)(z * v12[8])) + v12[12]) - v10;
+  v38 = (float)((float)((float)((float)(y * v12[5]) + (float)(x * v12[1])) + (float)(z * v12[9])) + v12[13]) - v6;
+  v18 = (float)((float)((float)((float)(y * v12[6]) + (float)(x * v12[2])) + (float)(z * v12[10])) + v12[14]) - v7;
   v13 = (float)((float)((float)((float)(v22 * v29) - (float)(v20 * v31)) * v38)
               + (float)((float)((float)(v21 * v31) - (float)(v22 * v30)) * v39))
       + (float)((float)((float)(v20 * v30) - (float)(v21 * v29)) * v18);
@@ -1706,37 +1644,39 @@ LABEL_14:
 
 // File Line: 831
 // RVA: 0x67B350
-UFG::SimComponent *__fastcall UFG::VehicleSubjectComponent::GetTargetingSystem(UFG::VehicleSubjectComponent *this)
+UFG::TargetingSystemBaseComponent *__fastcall UFG::VehicleSubjectComponent::GetTargetingSystem(
+        UFG::VehicleSubjectComponent *this)
 {
-  UFG::VehicleSubjectComponent *v1; // rax
-  UFG::SimObjectGame *v2; // rcx
-  unsigned __int16 v3; // dx
+  UFG::SimObjectGame *pPlayerOccupant; // rcx
+  __int16 m_Flags; // dx
   unsigned int v5; // edx
   bool v6; // zf
 
-  v1 = this;
-  v2 = (UFG::SimObjectGame *)this->pPlayerOccupant;
-  if ( !v2 )
-    return v1->pTargetingSystem.m_pSimComponent;
-  v3 = v2->m_Flags;
-  if ( (v3 >> 14) & 1 || (v3 & 0x8000u) != 0 )
-    return v2->m_Components.p[20].m_pComponent;
-  if ( (v3 >> 13) & 1 )
+  pPlayerOccupant = (UFG::SimObjectGame *)this->pPlayerOccupant;
+  if ( !pPlayerOccupant )
+    return (UFG::TargetingSystemBaseComponent *)this->pTargetingSystem.m_pSimComponent;
+  m_Flags = pPlayerOccupant->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
+    return (UFG::TargetingSystemBaseComponent *)pPlayerOccupant->m_Components.p[20].m_pComponent;
+  if ( (m_Flags & 0x2000) != 0 )
   {
     v5 = UFG::TargetingSystemBaseComponent::_TypeUID;
-    return UFG::SimObjectGame::GetComponentOfTypeHK(v2, v5);
+    return (UFG::TargetingSystemBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(pPlayerOccupant, v5);
   }
-  v6 = ((v3 >> 12) & 1) == 0;
+  v6 = (m_Flags & 0x1000) == 0;
   v5 = UFG::TargetingSystemBaseComponent::_TypeUID;
   if ( !v6 )
-    return UFG::SimObjectGame::GetComponentOfTypeHK(v2, v5);
-  return UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::TargetingSystemBaseComponent::_TypeUID);
+    return (UFG::TargetingSystemBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(pPlayerOccupant, v5);
+  return (UFG::TargetingSystemBaseComponent *)UFG::SimObject::GetComponentOfType(
+                                                pPlayerOccupant,
+                                                UFG::TargetingSystemBaseComponent::_TypeUID);
 }
 
 // File Line: 837
 // RVA: 0x67B3C0
-UFG::SimComponent *__fastcall UFG::VehicleSubjectComponent::GetTargetingSystemVehicle(UFG::VehicleSubjectComponent *this)
+UFG::TargetingSystemVehicleComponent *__fastcall UFG::VehicleSubjectComponent::GetTargetingSystemVehicle(
+        UFG::VehicleSubjectComponent *this)
 {
-  return this->pTargetingSystem.m_pSimComponent;
+  return (UFG::TargetingSystemVehicleComponent *)this->pTargetingSystem.m_pSimComponent;
 }
 

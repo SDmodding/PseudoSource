@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkaiHierarchyUtilsClusterSettingsClass__()
     &hkaiHierarchyUtilsClusterSettings_Default,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 84
@@ -28,9 +28,12 @@ hkClass *__fastcall hkaiHierarchyUtils::ClusterSettings::staticClass()
 
 // File Line: 91
 // RVA: 0xBB7C60
-void __fastcall finishLoadedObjecthkaiHierarchyUtilsClusterSettings(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiHierarchyUtilsClusterSettings(
+        hkaiHierarchyUtils::ClusterSettings *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiHierarchyUtils::ClusterSettings::ClusterSettings);
+  if ( p )
+    hkaiHierarchyUtils::ClusterSettings::ClusterSettings(p, finishing);
 }
 
 // File Line: 97

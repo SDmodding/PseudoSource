@@ -28,48 +28,46 @@ hkClass *__fastcall hkpLinkedCollidable::staticClass()
 
 // File Line: 66
 // RVA: 0xCEAFE0
-void __fastcall finishLoadedObjecthkpLinkedCollidable(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpLinkedCollidable(_DWORD *p, int finishing)
 {
   if ( p )
   {
     if ( finishing )
     {
-      *((_DWORD *)p + 20) = 0;
+      p[20] = 0;
       *((_QWORD *)p + 11) = 0i64;
       *((_QWORD *)p + 12) = 0i64;
-      *((_DWORD *)p + 12) = 1;
-      *((_DWORD *)p + 16) = 0;
+      p[12] = 1;
+      p[16] = 0;
       *((_BYTE *)p + 41) = -36;
     }
     *((_QWORD *)p + 14) = 0i64;
-    *((_DWORD *)p + 30) = 0;
-    *((_DWORD *)p + 31) = 2147483648;
+    p[30] = 0;
+    p[31] = 0x80000000;
   }
 }
 
 // File Line: 72
 // RVA: 0xCEB030
-void __fastcall cleanupLoadedObjecthkpLinkedCollidable(void *p)
+void __fastcall cleanupLoadedObjecthkpLinkedCollidable(_DWORD *p)
 {
-  int v1; // er8
-  _QWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 31);
-  v2 = p;
-  *((_DWORD *)p + 30) = 0;
+  v1 = p[31];
+  p[30] = 0;
   if ( v1 < 0 )
   {
     *((_QWORD *)p + 14) = 0i64;
-    *((_DWORD *)p + 31) = 2147483648;
+    p[31] = 0x80000000;
   }
   else
   {
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       (void *)*((_QWORD *)p + 14),
       16 * v1);
-    v2[14] = 0i64;
-    *((_DWORD *)v2 + 31) = 2147483648;
+    *((_QWORD *)p + 14) = 0i64;
+    p[31] = 0x80000000;
   }
 }
 

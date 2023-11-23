@@ -2,38 +2,32 @@
 // RVA: 0x12C6800
 void __fastcall _remainder_piby2f(unsigned __int64 ux, long double *r, int *region)
 {
-  long double *v3; // rdi
-  int v4; // er11
-  int *v5; // rbx
+  int v4; // r11d
   unsigned __int64 v6; // r10
-  int v7; // er9
-  int v8; // er11
+  int v7; // r9d
+  int v8; // r11d
   __int64 v9; // r8
   unsigned __int64 v10; // rax
   unsigned __int64 v11; // rdx
   unsigned __int64 v12; // rcx
-  unsigned __int64 v13; // rcx
-  signed __int64 v14; // r8
-  __int64 v15; // rax
-  signed int v16; // er9
-  unsigned __int64 v17; // rdx
+  unsigned __int64 v13; // r8
+  unsigned __int64 v14; // rcx
+  __int64 v15; // r8
+  __int64 v16; // rax
+  int v17; // r9d
   unsigned __int64 v18; // rdx
-  int v19; // esi
-  unsigned __int64 v20; // rdx
-  __int64 *v21; // r10
-  unsigned __int64 v22; // r8
-  __int64 *v23; // rax
-  int v24; // er10
-  unsigned __int64 v25; // rax
-  unsigned __int64 v26; // [rsp+18h] [rbp-80h]
-  unsigned __int64 v27; // [rsp+20h] [rbp-78h]
-  unsigned __int64 v28; // [rsp+28h] [rbp-70h]
-  __int64 v29; // [rsp+30h] [rbp-68h]
+  __int64 v19; // rdx
+  int v20; // esi
+  unsigned __int64 v21; // rdx
+  __int64 *v22; // r10
+  unsigned __int64 v23; // r8
+  __int64 *v24; // rax
+  int v25; // r10d
+  __int64 v26; // rax
+  __int64 v27[9]; // [rsp+18h] [rbp-80h] BYREF
 
-  v29 = 0i64;
-  v3 = r;
+  v27[3] = 0i64;
   v4 = ((ux >> 52) & 0x7FF) - 1023;
-  v5 = region;
   v6 = (ux & 0xFFFFFE0000000i64 | 0x10000000000000i64) >> 29;
   v7 = v4 / 36;
   v8 = v4 % 36;
@@ -41,64 +35,65 @@ void __fastcall _remainder_piby2f(unsigned __int64 ux, long double *r, int *regi
   v10 = v6 * pibits_0[v9];
   v11 = (v10 >> 36) + v6 * pibits_0[v9 - 1];
   v12 = pibits_0[v9 - 2];
-  v28 = v10 & 0xFFFFFFFFFi64;
+  v27[2] = v10 & 0xFFFFFFFFFi64;
   v13 = (v11 >> 36) + v6 * v12;
-  v27 = v11 & 0xFFFFFFFFFi64;
-  v14 = v13 & 0xFFFFFFFFFi64;
-  v15 = v7;
-  v16 = 1;
-  v17 = pibits_0[v15];
-  v26 = v13 & 0xFFFFFFFFFi64;
-  v18 = ((v13 & 0xFFFFFFFFFi64 | (((v13 >> 36) + v6 * v17) << 36)) >> (35 - (unsigned __int8)v8)) & 7;
-  v19 = v18 & 1;
-  if ( v18 & 1 )
+  v14 = v13 >> 36;
+  v27[1] = v11 & 0xFFFFFFFFFi64;
+  v15 = v13 & 0xFFFFFFFFFi64;
+  v16 = v7;
+  v17 = 1;
+  v18 = pibits_0[v16];
+  v27[0] = v15;
+  v19 = ((v15 | ((v14 + v6 * v18) << 36)) >> (35 - (unsigned __int8)v8)) & 7;
+  v20 = v19 & 1;
+  if ( (v19 & 1) != 0 )
   {
-    *v5 = ((unsigned __int8)((signed int)v18 >> 1) + 1) & 3;
-    v20 = ~v14 & ((1i64 << (36 - (unsigned __int8)v8)) - 1);
-    if ( v20 < 0x10000 )
+    *region = ((unsigned __int8)((int)v19 >> 1) + 1) & 3;
+    v21 = ~v15 & ((1i64 << (36 - (unsigned __int8)v8)) - 1);
+    if ( v21 < 0x10000 )
     {
-      v21 = (__int64 *)&v26;
+      v22 = v27;
       do
       {
-        ++v21;
-        ++v16;
-        v20 = (v20 << 36) | ~*v21 & 0xFFFFFFFFFi64;
+        ++v22;
+        ++v17;
+        v21 = (v21 << 36) | ~*v22 & 0xFFFFFFFFFi64;
       }
-      while ( v20 < 0x10000 );
+      while ( v21 < 0x10000 );
     }
-    v22 = ~*(&v26 + v16) & 0xFFFFFFFFFi64;
+    v23 = ~v27[v17] & 0xFFFFFFFFFi64;
   }
   else
   {
-    *v5 = (signed int)v18 >> 1;
-    v20 = v14 & ((1i64 << (36 - (unsigned __int8)v8)) - 1);
-    if ( v20 < 0x10000 )
+    *region = (int)v19 >> 1;
+    v21 = v15 & ((1i64 << (36 - (unsigned __int8)v8)) - 1);
+    if ( v21 < 0x10000 )
     {
-      v23 = (__int64 *)&v26;
+      v24 = v27;
       do
       {
-        ++v23;
-        ++v16;
-        v20 = *v23 | (v20 << 36);
+        ++v24;
+        ++v17;
+        v21 = *v24 | (v21 << 36);
       }
-      while ( v20 < 0x10000 );
+      while ( v21 < 0x10000 );
     }
-    v22 = *(&v26 + v16);
+    v23 = v27[v17];
   }
-  v24 = 0;
-  while ( v20 < 0x400000000000i64 )
+  v25 = 0;
+  while ( v21 < 0x400000000000i64 )
   {
-    v24 += 6;
-    v20 <<= 6;
+    v25 += 6;
+    v21 <<= 6;
   }
-  while ( v20 < 0x10000000000000i64 )
+  while ( v21 < 0x10000000000000i64 )
   {
-    ++v24;
-    v20 *= 2i64;
+    ++v25;
+    v21 *= 2i64;
   }
-  v25 = (v20 | (v22 >> (36 - (unsigned __int8)v24))) & 0xFFFFFFFFFFFFFi64 | ((v8 - 36 * v16 - v24 + 52 + 1023i64) << 52);
-  if ( v19 )
-    v25 = (v20 | (v22 >> (36 - (unsigned __int8)v24))) & 0xFFFFFFFFFFFFFi64 | ((v8 - 36 * v16 - v24 + 52 + 1023i64) << 52) | 0x8000000000000000ui64;
-  *v3 = *(double *)&v25 * 1.570796326794897;
+  v26 = (v21 | (v23 >> (36 - (unsigned __int8)v25))) & 0xFFFFFFFFFFFFFi64 | ((v8 - 36 * v17 - v25 + 52 + 1023i64) << 52);
+  if ( v20 )
+    v26 |= 0x8000000000000000ui64;
+  *r = *(double *)&v26 * 1.570796326794897;
 }
 

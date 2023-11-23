@@ -2,17 +2,10 @@
 // RVA: 0x10DF60
 void __fastcall SSActorClass::append_instance(SSActorClass *this, SSActor *actor)
 {
-  SSActor *v2; // rdi
-  SSActorClass *i; // rbx
-
-  v2 = actor;
-  for ( i = this; v2->i_name.i_uid != ASymbol::get_null()->i_uid; i = (SSActorClass *)i->i_superclass_p )
+  for ( ; actor->i_name.i_uid != ASymbol::get_null()->i_uid; this = (SSActorClass *)this->i_superclass_p )
   {
-    APSorted<SSActor,ASymbol,ACompareLogical<ASymbol>>::append(
-      (APSorted<SSActor,ASymbol,ACompareLogical<ASymbol> > *)&i->i_instances.i_count,
-      v2,
-      0i64);
-    if ( !((unsigned __int8 (*)(void))i->i_superclass_p->vfptr->is_actor_class)() )
+    APSorted<SSActor,ASymbol,ACompareLogical<ASymbol>>::append(&this->i_instances, actor, 0i64);
+    if ( !this->i_superclass_p->SSClass::vfptr->is_actor_class(this->i_superclass_p) )
       break;
   }
 }
@@ -21,36 +14,32 @@ void __fastcall SSActorClass::append_instance(SSActorClass *this, SSActor *actor
 // RVA: 0x13BDB0
 void __fastcall SSActorClass::remove_instance(SSActorClass *this, SSActor *actor)
 {
-  SSActor *v2; // rsi
-  SSActorClass *v3; // rbx
-  APSortedLogical<SSActor,ASymbol> *v4; // rdi
+  APSortedLogical<SSActor,ASymbol> *p_i_instances; // rdi
   __int64 v5; // rdx
-  SSActor **v6; // rax
-  unsigned int find_pos_p; // [rsp+48h] [rbp+10h]
+  SSActor **i_array_p; // rax
+  unsigned int find_pos_p; // [rsp+48h] [rbp+10h] BYREF
 
-  v2 = actor;
-  v3 = this;
   if ( actor->i_name.i_uid != ASymbol::get_null()->i_uid )
   {
-    v4 = &v3->i_instances;
+    p_i_instances = &this->i_instances;
     if ( APSorted<SSActor,ASymbol,ACompareLogical<ASymbol>>::find_elem(
-           (APSorted<SSActor,ASymbol,ACompareLogical<ASymbol> > *)&v3->i_instances.i_count,
-           v2,
+           &this->i_instances,
+           actor,
            &find_pos_p,
            0,
            0xFFFFFFFF) )
     {
       v5 = find_pos_p;
-      v6 = v3->i_instances.i_array_p;
-      memmove(&v6[v5], &v6[v5 + 1], 8i64 * (unsigned int)(--v4->i_count - v5));
+      i_array_p = this->i_instances.i_array_p;
+      memmove(&i_array_p[v5], &i_array_p[v5 + 1], 8i64 * (unsigned int)(--p_i_instances->i_count - v5));
     }
-    if ( ((unsigned __int8 (*)(void))v3->i_superclass_p->vfptr->is_actor_class)() )
-      SSActorClass::remove_instance((SSActorClass *)v3->i_superclass_p, v2);
-    if ( !v4->i_count )
+    if ( this->i_superclass_p->SSClass::vfptr->is_actor_class(this->i_superclass_p) )
+      SSActorClass::remove_instance((SSActorClass *)this->i_superclass_p, actor);
+    if ( !p_i_instances->i_count )
     {
-      APSizedArrayBase<SSActor>::compact((APSizedArrayBase<SSActor> *)&v3->i_instances.i_count);
-      if ( v3->i_flags & 8 )
-        ((void (__fastcall *)(SSActorClass *))v3->vfptr[1].find_common_type)(v3);
+      APSizedArrayBase<SSActor>::compact(&this->i_instances);
+      if ( (this->i_flags & 8) != 0 )
+        ((void (__fastcall *)(SSActorClass *))this->vfptr[1].find_common_type)(this);
     }
   }
 }

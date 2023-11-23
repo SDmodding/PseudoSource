@@ -2,7 +2,7 @@
 // RVA: 0x81BC0
 Broadcaster *__fastcall Broadcaster::GetBroadcaster()
 {
-  if ( !(`Broadcaster::GetBroadcaster::`2::`local static guard & 1) )
+  if ( (`Broadcaster::GetBroadcaster::`2::`local static guard & 1) == 0 )
   {
     `Broadcaster::GetBroadcaster::`2::`local static guard |= 1u;
     UFG::qString::qString(&`Broadcaster::GetBroadcaster::`2::singleton.mUserName);

@@ -7,7 +7,11 @@ const char *__fastcall UEL::ArgumentExpression::GetClassname(UEL::ArgumentExpres
 
 // File Line: 41
 // RVA: 0x24F690
-UEL::Value *__fastcall UEL::ArgumentExpression::Eval(UEL::ArgumentExpression *this, UEL::Value *result, UEL::ParametersBase *parameters, UFG::qArray<UEL::Value,0> *args)
+UEL::Value *__fastcall UEL::ArgumentExpression::Eval(
+        UEL::ArgumentExpression *this,
+        UEL::Value *result,
+        UEL::ParametersBase *parameters,
+        UFG::qArray<UEL::Value,0> *args)
 {
   result->type.mBaseType.mValue = 0;
   result->type.mDetailedType = UFG::gNullQSymbol;

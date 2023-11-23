@@ -28,23 +28,24 @@ hkClass *__fastcall hkMemoryMeshBody::staticClass()
 
 // File Line: 71
 // RVA: 0x13195D0
-void __fastcall finishLoadedObjecthkMemoryMeshBody(void *p, int finishing)
+void __fastcall finishLoadedObjecthkMemoryMeshBody(hkMemoryMeshBody *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkMemoryMeshBody::hkMemoryMeshBody);
+  if ( p )
+    hkMemoryMeshBody::hkMemoryMeshBody(p, finishing);
 }
 
 // File Line: 77
 // RVA: 0x13195F0
-void __fastcall cleanupLoadedObjecthkMemoryMeshBody(void *p)
+void __fastcall cleanupLoadedObjecthkMemoryMeshBody(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 81
 // RVA: 0x1319600
 hkBaseObjectVtbl *__fastcall getVtablehkMemoryMeshBody()
 {
-  hkMemoryMeshBody v1; // [rsp+20h] [rbp-88h]
+  hkMemoryMeshBody v1; // [rsp+20h] [rbp-88h] BYREF
 
   hkMemoryMeshBody::hkMemoryMeshBody(&v1, 0);
   return v1.vfptr;
@@ -61,8 +62,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkMemoryMeshBodyTypeInfo__()
   hkMemoryMeshBodyTypeInfo.m_typeName = "hkMemoryMeshBody";
   hkMemoryMeshBodyTypeInfo.m_vtable = result;
   hkMemoryMeshBodyTypeInfo.m_scopedName = "!hkMemoryMeshBody";
-  hkMemoryMeshBodyTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkMemoryMeshBody;
-  hkMemoryMeshBodyTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkMemoryMeshBody;
+  hkMemoryMeshBodyTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkMemoryMeshBody;
+  hkMemoryMeshBodyTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkMemoryMeshBody;
   return result;
 }
 

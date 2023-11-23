@@ -2,109 +2,111 @@
 // RVA: 0xCF2F80
 void __fastcall hkpGroupFilter::hkpGroupFilter(hkpGroupFilter *this)
 {
-  hkpGroupFilter *v1; // rbx
-  unsigned int *v2; // rdi
-  signed __int64 v3; // rcx
+  unsigned int *m_collisionLookupTable; // rdi
+  __int64 v3; // rcx
 
-  v1 = this;
-  hkpCollisionFilter::hkpCollisionFilter((hkpCollisionFilter *)&this->vfptr);
-  v1->vfptr = (hkBaseObjectVtbl *)&hkpGroupFilter::`vftable{for `hkReferencedObject};
-  v2 = v1->m_collisionLookupTable;
-  v1->vfptr = (hkpCollidableCollidableFilterVtbl *)&hkpGroupFilter::`vftable{for `hkpCollidableCollidableFilter};
-  v1->m_type.m_storage = 2;
-  v1->vfptr = (hkpShapeCollectionFilterVtbl *)&hkpGroupFilter::`vftable{for `hkpShapeCollectionFilter};
+  hkpCollisionFilter::hkpCollisionFilter(this);
+  this->hkpCollisionFilter::hkReferencedObject::hkBaseObject::vfptr = (hkBaseObjectVtbl *)&hkpGroupFilter::`vftable{for `hkReferencedObject};
+  m_collisionLookupTable = this->m_collisionLookupTable;
+  this->hkpCollisionFilter::hkpCollidableCollidableFilter::vfptr = (hkpCollidableCollidableFilterVtbl *)&hkpGroupFilter::`vftable{for `hkpCollidableCollidableFilter};
+  this->m_type.m_storage = 2;
+  this->hkpCollisionFilter::hkpShapeCollectionFilter::vfptr = (hkpShapeCollectionFilterVtbl *)&hkpGroupFilter::`vftable{for `hkpShapeCollectionFilter};
   v3 = 32i64;
-  v1->vfptr = (hkpRayShapeCollectionFilterVtbl *)&hkpGroupFilter::`vftable{for `hkpRayShapeCollectionFilter};
-  v1->vfptr = (hkpRayCollidableFilterVtbl *)&hkpGroupFilter::`vftable{for `hkpRayCollidableFilter};
+  this->hkpCollisionFilter::hkpRayShapeCollectionFilter::vfptr = (hkpRayShapeCollectionFilterVtbl *)&hkpGroupFilter::`vftable{for `hkpRayShapeCollectionFilter};
+  this->hkpCollisionFilter::hkpRayCollidableFilter::vfptr = (hkpRayCollidableFilterVtbl *)&hkpGroupFilter::`vftable{for `hkpRayCollidableFilter};
   while ( v3 )
   {
-    *v2 = -1;
-    ++v2;
+    *m_collisionLookupTable++ = -1;
     --v3;
   }
-  v1->m_nextFreeSystemGroup = 0;
+  this->m_nextFreeSystemGroup = 0;
 }
 
 // File Line: 32
 // RVA: 0xCF3000
 void __fastcall hkpGroupFilter::~hkpGroupFilter(hkpGroupFilter *this)
 {
-  this->vfptr = (hkpRayCollidableFilterVtbl *)&hkpRayCollidableFilter::`vftable;
-  this->vfptr = (hkpRayShapeCollectionFilterVtbl *)&hkpRayShapeCollectionFilter::`vftable;
-  this->vfptr = (hkpShapeCollectionFilterVtbl *)&hkpShapeCollectionFilter::`vftable;
-  this->vfptr = (hkpCollidableCollidableFilterVtbl *)&hkpCollidableCollidableFilter::`vftable;
-  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+  this->hkpCollisionFilter::hkpRayCollidableFilter::vfptr = (hkpRayCollidableFilterVtbl *)&hkpRayCollidableFilter::`vftable;
+  this->hkpCollisionFilter::hkpRayShapeCollectionFilter::vfptr = (hkpRayShapeCollectionFilterVtbl *)&hkpRayShapeCollectionFilter::`vftable;
+  this->hkpCollisionFilter::hkpShapeCollectionFilter::vfptr = (hkpShapeCollectionFilterVtbl *)&hkpShapeCollectionFilter::`vftable;
+  this->hkpCollisionFilter::hkpCollidableCollidableFilter::vfptr = (hkpCollidableCollidableFilterVtbl *)&hkpCollidableCollidableFilter::`vftable;
+  this->hkpCollisionFilter::hkReferencedObject::hkBaseObject::vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 39
 // RVA: 0xCF33C0
-hkBool *__fastcall hkpGroupFilter::isCollisionEnabled(hkpGroupFilter *this, hkBool *result, unsigned int infoA, unsigned int infoB)
+hkBool *__fastcall hkpGroupFilter::isCollisionEnabled(
+        hkpGroupFilter *this,
+        hkBool *result,
+        unsigned int infoA,
+        unsigned int infoB)
 {
   hkBool *v4; // rax
   unsigned int v5; // eax
 
-  if ( (infoB ^ infoA) & 0xFFFF0000 || !(infoA & 0xFFFF0000) )
+  if ( ((infoB ^ infoA) & 0xFFFF0000) != 0 || (infoA & 0xFFFF0000) == 0 )
   {
     v5 = this->m_collisionLookupTable[infoA & 0x1F];
-    result->m_bool = _bittest((const signed int *)&v5, infoB & 0x1F);
-    v4 = result;
+    result->m_bool = _bittest((const int *)&v5, infoB & 0x1F);
+    return result;
   }
-  else if ( (infoA ^ (infoB >> 5)) & 0x3E0 )
+  else if ( ((infoA ^ (infoB >> 5)) & 0x3E0) != 0 )
   {
     v4 = result;
-    if ( (infoB ^ (infoA >> 5)) & 0x3E0 )
-      result->m_bool = 1;
-    else
-      result->m_bool = 0;
+    result->m_bool = ((infoB ^ (infoA >> 5)) & 0x3E0) != 0;
   }
   else
   {
     result->m_bool = 0;
-    v4 = result;
+    return result;
   }
   return v4;
 }
 
 // File Line: 81
 // RVA: 0xCF3130
-hkBool *__fastcall hkpGroupFilter::isCollisionEnabled(hkpGroupFilter *this, hkBool *result, hkpCollidable *a, hkpCollidable *b)
+hkBool *__fastcall hkpGroupFilter::isCollisionEnabled(
+        hkpGroupFilter *this,
+        hkBool *result,
+        hkpCollidable *a,
+        hkpCollidable *b)
 {
-  hkBool *v4; // rbx
-
-  v4 = result;
   hkpGroupFilter::isCollisionEnabled(
     (hkpGroupFilter *)((char *)this - 16),
     result,
     a->m_broadPhaseHandle.m_collisionFilterInfo,
     b->m_broadPhaseHandle.m_collisionFilterInfo);
-  return v4;
+  return result;
 }
 
 // File Line: 87
 // RVA: 0xCF3280
-hkBool *__fastcall hkpGroupFilter::isCollisionEnabled(hkpGroupFilter *this, hkBool *result, hkpCollisionInput *input, hkpCdBody *collectionBodyA, hkpCdBody *collectionBodyB, hkpShapeContainer *containerShapeA, hkpShapeContainer *containerShapeB, unsigned int keyA, unsigned int keyB)
+hkBool *__fastcall hkpGroupFilter::isCollisionEnabled(
+        hkpGroupFilter *this,
+        hkBool *result,
+        hkpCollisionInput *input,
+        hkpCdBody *collectionBodyA,
+        hkpCdBody *collectionBodyB,
+        hkpShapeContainer *containerShapeA,
+        hkpShapeContainer *containerShapeB,
+        unsigned int keyA,
+        unsigned int keyB)
 {
-  hkpGroupFilter *v9; // rbp
-  hkBool *v10; // rsi
-  hkpCdBody *v11; // rbx
   unsigned int v12; // edi
   hkpCdBody *i; // rax
   unsigned int v14; // eax
   hkpCdBody *v15; // rcx
   hkpCdBody *j; // rax
 
-  v9 = this;
-  v10 = result;
-  v11 = collectionBodyA;
   v12 = ((__int64 (__fastcall *)(hkpShapeContainer *, _QWORD, hkpCollisionInput *))containerShapeA->vfptr->getCollisionFilterInfo)(
           containerShapeA,
           keyA,
           input);
   if ( v12 == -1 )
   {
-    for ( i = v11->m_parent; i; i = i->m_parent )
-      v11 = i;
-    v12 = *(&v11[1].m_shapeKey + 1);
+    for ( i = collectionBodyA->m_parent; i; i = i->m_parent )
+      collectionBodyA = i;
+    v12 = *(&collectionBodyA[1].m_shapeKey + 1);
   }
   v14 = containerShapeB->vfptr->getCollisionFilterInfo(containerShapeB, keyB);
   if ( v14 == -1 )
@@ -114,33 +116,32 @@ hkBool *__fastcall hkpGroupFilter::isCollisionEnabled(hkpGroupFilter *this, hkBo
       v15 = j;
     v14 = *(&v15[1].m_shapeKey + 1);
   }
-  hkpGroupFilter::isCollisionEnabled((hkpGroupFilter *)((char *)v9 - 24), v10, v12, v14);
-  return v10;
+  hkpGroupFilter::isCollisionEnabled((hkpGroupFilter *)((char *)this - 24), result, v12, v14);
+  return result;
 }
 
 // File Line: 105
 // RVA: 0xCF3160
-hkBool *__fastcall hkpGroupFilter::isCollisionEnabled(hkpGroupFilter *this, hkBool *result, hkpCollisionInput *input, hkpCdBody *a, hkpCdBody *b, hkpShapeContainer *bContainer, unsigned int bKey)
+hkBool *__fastcall hkpGroupFilter::isCollisionEnabled(
+        hkpGroupFilter *this,
+        hkBool *result,
+        hkpCollisionInput *input,
+        hkpCdBody *a,
+        hkpCdBody *b,
+        hkpShapeContainer *bContainer,
+        unsigned int bKey)
 {
-  hkpGroupFilter *v7; // r14
-  hkBool *v8; // rdi
-  hkpCdBody *v9; // rbx
-  hkpCollisionInput *v10; // rsi
   unsigned int v11; // ebp
   hkpCdBody *v12; // r10
   hkpCdBody *i; // rax
-  hkpCdBody *v14; // rdx
-  hkpCdBody **v15; // r8
+  hkpCdBody *m_parent; // rdx
+  hkpCdBody **p_m_parent; // r8
   unsigned int v16; // ecx
   unsigned int v17; // eax
   hkpCdBody *v18; // rax
   hkpCdBody *v19; // rcx
   __int64 v20; // rax
 
-  v7 = this;
-  v8 = result;
-  v9 = a;
-  v10 = input;
   v11 = bContainer->vfptr->getCollisionFilterInfo(bContainer, bKey);
   if ( v11 == -1 )
   {
@@ -149,43 +150,40 @@ hkBool *__fastcall hkpGroupFilter::isCollisionEnabled(hkpGroupFilter *this, hkBo
       v12 = i;
     v11 = *(&v12[1].m_shapeKey + 1);
   }
-  v14 = v9->m_parent;
-  v15 = &v9->m_parent;
-  if ( v14 )
+  m_parent = a->m_parent;
+  p_m_parent = &a->m_parent;
+  if ( m_parent )
   {
     while ( 1 )
     {
-      v16 = v10->m_dispatcher.m_storage->m_hasAlternateType[(unsigned __int8)v14->m_shape->m_type.m_storage];
-      if ( _bittest((const signed int *)&v16, 0x12u) )
+      v16 = input->m_dispatcher.m_storage->m_hasAlternateType[(unsigned __int8)m_parent->m_shape->m_type.m_storage];
+      if ( (v16 & 0x40000) != 0 )
       {
-        v17 = ((__int64 (__fastcall *)(hkpShape *, _QWORD, hkpCdBody **))v14->m_shape[1].vfptr[2].__vecDelDtor)(
-                &v14->m_shape[1],
-                v9->m_shapeKey,
-                v15);
+        v17 = ((__int64 (__fastcall *)(hkpShape *, _QWORD, hkpCdBody **))m_parent->m_shape[1].vfptr[2].__vecDelDtor)(
+                &m_parent->m_shape[1],
+                a->m_shapeKey,
+                p_m_parent);
         goto LABEL_18;
       }
-      if ( _bittest((const signed int *)&v16, 0x16u) )
+      if ( (v16 & 0x400000) != 0 )
       {
-        v20 = ((__int64 (__fastcall *)(hkpShape *, hkpCdBody *, hkpCdBody **))v14->m_shape->vfptr[7].__vecDelDtor)(
-                v14->m_shape,
-                v14,
-                v15);
-        v17 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)v20 + 32i64))(v20, v9->m_shapeKey);
+        v20 = ((__int64 (__fastcall *)(hkpShape *))m_parent->m_shape->vfptr[7].__vecDelDtor)(m_parent->m_shape);
+        v17 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)v20 + 32i64))(v20, a->m_shapeKey);
         goto LABEL_18;
       }
-      if ( _bittest((const signed int *)&v16, 0x19u) )
+      if ( (v16 & 0x2000000) != 0 )
         break;
-      if ( _bittest((const signed int *)&v16, 0x1Au) )
+      if ( (v16 & 0x4000000) != 0 )
       {
-        v8->m_bool = 1;
-        return v8;
+        result->m_bool = 1;
+        return result;
       }
-      v9 = v14;
-      v14 = v14->m_parent;
-      if ( !v14 )
+      a = m_parent;
+      m_parent = m_parent->m_parent;
+      if ( !m_parent )
         goto LABEL_11;
     }
-    v18 = *v15;
+    v18 = *p_m_parent;
     do
     {
       v19 = v18;
@@ -197,64 +195,67 @@ hkBool *__fastcall hkpGroupFilter::isCollisionEnabled(hkpGroupFilter *this, hkBo
   else
   {
 LABEL_11:
-    v17 = *(&v9[1].m_shapeKey + 1);
+    v17 = *(&a[1].m_shapeKey + 1);
   }
 LABEL_18:
-  hkpGroupFilter::isCollisionEnabled((hkpGroupFilter *)((char *)v7 - 24), v8, v17, v11);
-  return v8;
+  hkpGroupFilter::isCollisionEnabled((hkpGroupFilter *)((char *)this - 24), result, v17, v11);
+  return result;
 }
 
 // File Line: 179
 // RVA: 0xCF3330
-hkBool *__fastcall hkpGroupFilter::isCollisionEnabled(hkpGroupFilter *this, hkBool *result, hkpShapeRayCastInput *aInput, hkpShapeContainer *bContainer, unsigned int bKey)
+hkBool *__fastcall hkpGroupFilter::isCollisionEnabled(
+        hkpGroupFilter *this,
+        hkBool *result,
+        hkpShapeRayCastInput *aInput,
+        hkpShapeContainer *bContainer,
+        unsigned int bKey)
 {
-  hkBool *v5; // rsi
-  hkpGroupFilter *v6; // rbx
-  hkpShapeRayCastInput *v7; // rdi
   unsigned int v8; // eax
 
-  v5 = result;
-  v6 = this;
-  v7 = aInput;
   v8 = bContainer->vfptr->getCollisionFilterInfo(bContainer, bKey);
-  hkpGroupFilter::isCollisionEnabled((hkpGroupFilter *)((char *)v6 - 32), v5, v7->m_filterInfo, v8);
-  return v5;
+  hkpGroupFilter::isCollisionEnabled((hkpGroupFilter *)((char *)this - 32), result, aInput->m_filterInfo, v8);
+  return result;
 }
 
 // File Line: 185
 // RVA: 0xCF3390
-hkBool *__fastcall hkpGroupFilter::isCollisionEnabled(hkpGroupFilter *this, hkBool *result, hkpWorldRayCastInput *aInput, hkpCollidable *collidableB)
+hkBool *__fastcall hkpGroupFilter::isCollisionEnabled(
+        hkpGroupFilter *this,
+        hkBool *result,
+        hkpWorldRayCastInput *aInput,
+        hkpCollidable *collidableB)
 {
-  hkBool *v4; // rbx
-
-  v4 = result;
   hkpGroupFilter::isCollisionEnabled(
     (hkpGroupFilter *)((char *)this - 40),
     result,
     aInput->m_filterInfo,
     collidableB->m_broadPhaseHandle.m_collisionFilterInfo);
-  return v4;
+  return result;
 }
 
 // File Line: 192
 // RVA: 0xCF30B0
-void __fastcall hkpGroupFilter::enableCollisionsUsingBitfield(hkpGroupFilter *this, unsigned int layerBitsA, unsigned int layerBitsB)
+void __fastcall hkpGroupFilter::enableCollisionsUsingBitfield(
+        hkpGroupFilter *this,
+        unsigned int layerBitsA,
+        unsigned int layerBitsB)
 {
-  signed int v3; // er9
-  unsigned int *v4; // rax
-  signed __int64 v5; // rcx
+  int v3; // r9d
+  unsigned int *m_collisionLookupTable; // rax
+  __int64 v5; // rcx
 
   v3 = 1;
-  v4 = this->m_collisionLookupTable;
+  m_collisionLookupTable = this->m_collisionLookupTable;
   v5 = 32i64;
   do
   {
-    if ( v3 & layerBitsA )
-      *v4 |= layerBitsB;
-    if ( v3 & layerBitsB )
-      *v4 |= layerBitsA;
+    if ( (v3 & layerBitsA) != 0 )
+      *m_collisionLookupTable |= layerBitsB;
+    if ( (v3 & layerBitsB) != 0 )
+      *m_collisionLookupTable |= layerBitsA;
     v3 = __ROL4__(v3, 1);
-    ++v4;
+    ++m_collisionLookupTable;
     --v5;
   }
   while ( v5 );
@@ -278,23 +279,26 @@ void __fastcall hkpGroupFilter::disableCollisionsBetween(hkpGroupFilter *this, i
 
 // File Line: 229
 // RVA: 0xCF30F0
-void __fastcall hkpGroupFilter::disableCollisionsUsingBitfield(hkpGroupFilter *this, unsigned int layerBitsA, unsigned int layerBitsB)
+void __fastcall hkpGroupFilter::disableCollisionsUsingBitfield(
+        hkpGroupFilter *this,
+        unsigned int layerBitsA,
+        unsigned int layerBitsB)
 {
-  signed int v3; // er9
-  unsigned int *v4; // rax
-  signed __int64 v5; // r10
+  int v3; // r9d
+  unsigned int *m_collisionLookupTable; // rax
+  __int64 v5; // r10
 
   v3 = 1;
-  v4 = this->m_collisionLookupTable;
+  m_collisionLookupTable = this->m_collisionLookupTable;
   v5 = 32i64;
   do
   {
-    if ( v3 & layerBitsA )
-      *v4 &= ~layerBitsB;
-    if ( v3 & layerBitsB )
-      *v4 &= ~layerBitsA;
+    if ( (v3 & layerBitsA) != 0 )
+      *m_collisionLookupTable &= ~layerBitsB;
+    if ( (v3 & layerBitsB) != 0 )
+      *m_collisionLookupTable &= ~layerBitsA;
     v3 = __ROL4__(v3, 1);
-    ++v4;
+    ++m_collisionLookupTable;
     --v5;
   }
   while ( v5 );

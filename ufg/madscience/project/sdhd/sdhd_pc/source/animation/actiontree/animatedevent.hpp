@@ -1,37 +1,34 @@
 // File Line: 16
 // RVA: 0x2DD940
-void __fastcall UFG::AnimatedEvent::AnimatedEvent(UFG::AnimatedEvent *this, const char *name, UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *object)
+void __fastcall UFG::AnimatedEvent::AnimatedEvent(
+        UFG::AnimatedEvent *this,
+        const char *name,
+        UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *object)
 {
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v3; // rbx
-  UFG::AnimatedEvent *v4; // rdi
-  UFG::qNode<UFG::Event,UFG::Event> *v5; // rax
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v6; // rdx
-  UFG::SimObject *v7; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v8; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v9; // rax
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_pSimObject; // rdx
+  UFG::SimObject *m_pPointer; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *p_mNode; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rax
 
-  v3 = object;
-  v4 = this;
-  v5 = (UFG::qNode<UFG::Event,UFG::Event> *)&this->mPrev;
-  v5->mPrev = v5;
-  v5->mNext = v5;
+  this->mPrev = &this->UFG::qNode<UFG::Event,UFG::Event>;
+  this->mNext = &this->UFG::qNode<UFG::Event,UFG::Event>;
   this->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
   this->m_NamePTR = name;
   this->m_EventUID = UFG::qStringHash32(name, 0xFFFFFFFF);
-  v4->vfptr = (UFG::EventVtbl *)&UFG::AnimatedEvent::`vftable;
-  v6 = &v4->pSimObject;
-  v6->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v6->mPrev;
-  v6->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v6->mPrev;
-  v7 = v3->m_pPointer;
-  v4->pSimObject.m_pPointer = v7;
-  if ( v7 )
+  this->vfptr = (UFG::EventVtbl *)&UFG::AnimatedEvent::`vftable;
+  p_pSimObject = &this->pSimObject;
+  this->pSimObject.mPrev = &this->pSimObject;
+  this->pSimObject.mNext = &this->pSimObject;
+  m_pPointer = object->m_pPointer;
+  this->pSimObject.m_pPointer = m_pPointer;
+  if ( m_pPointer )
   {
-    v8 = &v7->m_SafePointerList.mNode;
-    v9 = v8->mPrev;
-    v9->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v6->mPrev;
-    v6->mPrev = v9;
-    v4->pSimObject.mNext = v8;
-    v8->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v6->mPrev;
+    p_mNode = &m_pPointer->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+    mPrev = p_mNode->mPrev;
+    mPrev->mNext = p_pSimObject;
+    p_pSimObject->mPrev = mPrev;
+    this->pSimObject.mNext = p_mNode;
+    p_mNode->mPrev = p_pSimObject;
   }
 }
 

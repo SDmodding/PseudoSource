@@ -2,45 +2,39 @@
 // RVA: 0x130C30
 SSData *__fastcall SSData::pool_new(ASymbol *name)
 {
-  ASymbol *v1; // rdi
-  AObjReusePool<SSData> *v2; // rax
-  AObjReusePool<SSData> *v3; // rbx
+  AObjReusePool<SSData> *pool; // rbx
+  unsigned int i_count; // eax
   unsigned int v4; // eax
-  unsigned int v5; // eax
-  unsigned int v6; // eax
-  __int64 v7; // rcx
-  SSData **v8; // rax
+  __int64 v5; // rcx
+  SSData **i_array_p; // rax
   SSData *result; // rax
-  unsigned int v10; // eax
+  unsigned int v8; // eax
 
-  v1 = name;
-  v2 = SSData::get_pool();
-  v3 = v2;
-  v4 = v2->i_pool.i_count;
-  if ( v4 )
+  pool = SSData::get_pool();
+  if ( pool->i_pool.i_count )
   {
-    v10 = v4 - 1;
-    v3->i_pool.i_count = v10;
-    v7 = v10;
-    v8 = v3->i_pool.i_array_p;
+    v8 = pool->i_pool.i_count - 1;
+    pool->i_pool.i_count = v8;
+    v5 = v8;
+    i_array_p = pool->i_pool.i_array_p;
     goto LABEL_8;
   }
-  if ( !v3->i_exp_pool.i_count )
-    AObjReusePool<SSData>::append_block(v3, v3->i_expand_size);
-  v5 = v3->i_exp_pool.i_count;
-  if ( v5 )
+  if ( !pool->i_exp_pool.i_count )
+    AObjReusePool<SSData>::append_block(pool, pool->i_expand_size);
+  i_count = pool->i_exp_pool.i_count;
+  if ( i_count )
   {
-    v6 = v5 - 1;
-    v3->i_exp_pool.i_count = v6;
-    v7 = v6;
-    v8 = v3->i_exp_pool.i_array_p;
+    v4 = i_count - 1;
+    pool->i_exp_pool.i_count = v4;
+    v5 = v4;
+    i_array_p = pool->i_exp_pool.i_array_p;
 LABEL_8:
-    result = v8[v7];
+    result = i_array_p[v5];
     goto LABEL_9;
   }
   result = 0i64;
 LABEL_9:
-  result->i_name = (ASymbol)v1->i_uid;
+  result->i_name = (ASymbol)name->i_uid;
   result->i_data_p = SSBrain::c_nil_p;
   return result;
 }

@@ -2,107 +2,103 @@
 // RVA: 0x39FF70
 void __fastcall SkeletalAnimationHandle::~SkeletalAnimationHandle(SkeletalAnimationHandle *this)
 {
-  SkeletalAnimationHandle *v1; // rbx
-  UFG::qSafePointer<SkeletalAnimation,SkeletalAnimation> *v2; // rdx
-  UFG::qNode<UFG::qSafePointerBase<SkeletalAnimation>,UFG::qSafePointerNodeList> *v3; // rcx
-  UFG::qNode<UFG::qSafePointerBase<SkeletalAnimation>,UFG::qSafePointerNodeList> *v4; // rax
+  UFG::qSafePointer<SkeletalAnimation,SkeletalAnimation> *p_m_SkeletalAnimation; // rdx
+  UFG::qNode<UFG::qSafePointerBase<SkeletalAnimation>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<SkeletalAnimation>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<SkeletalAnimation>,UFG::qSafePointerNodeList> *v5; // rcx
   UFG::qNode<UFG::qSafePointerBase<SkeletalAnimation>,UFG::qSafePointerNodeList> *v6; // rax
   UFG::qNode<SkeletalAnimationHandle,SkeletalAnimationList> *v7; // rcx
   UFG::qNode<SkeletalAnimationHandle,SkeletalAnimationList> *v8; // rax
 
-  v1 = this;
   SkeletalAnimationHandle::Unbind(this);
-  v2 = &v1->m_SkeletalAnimation;
-  if ( v1->m_SkeletalAnimation.m_pPointer )
+  p_m_SkeletalAnimation = &this->m_SkeletalAnimation;
+  if ( this->m_SkeletalAnimation.m_pPointer )
   {
-    v3 = v2->mPrev;
-    v4 = v1->m_SkeletalAnimation.mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<SkeletalAnimation>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-    v1->m_SkeletalAnimation.mNext = (UFG::qNode<UFG::qSafePointerBase<SkeletalAnimation>,UFG::qSafePointerNodeList> *)&v1->m_SkeletalAnimation.mPrev;
+    mPrev = p_m_SkeletalAnimation->mPrev;
+    mNext = this->m_SkeletalAnimation.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_m_SkeletalAnimation->mPrev = p_m_SkeletalAnimation;
+    this->m_SkeletalAnimation.mNext = &this->m_SkeletalAnimation;
   }
-  v1->m_SkeletalAnimation.m_pPointer = 0i64;
-  v5 = v2->mPrev;
-  v6 = v1->m_SkeletalAnimation.mNext;
+  this->m_SkeletalAnimation.m_pPointer = 0i64;
+  v5 = p_m_SkeletalAnimation->mPrev;
+  v6 = this->m_SkeletalAnimation.mNext;
   v5->mNext = v6;
   v6->mPrev = v5;
-  v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<SkeletalAnimation>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->m_SkeletalAnimation.mNext = (UFG::qNode<UFG::qSafePointerBase<SkeletalAnimation>,UFG::qSafePointerNodeList> *)&v1->m_SkeletalAnimation.mPrev;
-  v7 = v1->mPrev;
-  v8 = v1->mNext;
+  p_m_SkeletalAnimation->mPrev = p_m_SkeletalAnimation;
+  this->m_SkeletalAnimation.mNext = &this->m_SkeletalAnimation;
+  v7 = this->mPrev;
+  v8 = this->mNext;
   v7->mNext = v8;
   v8->mPrev = v7;
-  v1->mPrev = (UFG::qNode<SkeletalAnimationHandle,SkeletalAnimationList> *)&v1->mPrev;
-  v1->mNext = (UFG::qNode<SkeletalAnimationHandle,SkeletalAnimationList> *)&v1->mPrev;
+  this->mPrev = this;
+  this->mNext = this;
 }
 
 // File Line: 130
 // RVA: 0x3AAC20
 void __fastcall SkeletalAnimationHandle::Init(SkeletalAnimationHandle *this)
 {
-  unsigned int v1; // edx
-  signed __int64 v2; // rbx
-  SkeletalAnimationHandle *v3; // rdi
+  unsigned int mUID; // edx
+  char *v2; // rbx
   UFG::qBaseTreeRB *v4; // rax
-  signed __int64 v5; // r8
-  UFG::qSafePointer<SkeletalAnimation,SkeletalAnimation> *v6; // rdx
-  UFG::qNode<UFG::qSafePointerBase<SkeletalAnimation>,UFG::qSafePointerNodeList> *v7; // rcx
-  UFG::qNode<UFG::qSafePointerBase<SkeletalAnimation>,UFG::qSafePointerNodeList> *v8; // rax
+  SkeletalAnimation *p_mNULL; // r8
+  UFG::qSafePointer<SkeletalAnimation,SkeletalAnimation> *p_m_SkeletalAnimation; // rdx
+  UFG::qNode<UFG::qSafePointerBase<SkeletalAnimation>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<SkeletalAnimation>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<SkeletalAnimation>,UFG::qSafePointerNodeList> *v9; // rax
-  SkeletalAnimation *v10; // rcx
-  UFG::qNode<SkeletalAnimationHandle,SkeletalAnimationList> *v11; // rcx
+  SkeletalAnimation *m_pPointer; // rcx
+  UFG::qNode<SkeletalAnimationHandle,SkeletalAnimationList> *p_mNode; // rcx
   UFG::qNode<SkeletalAnimationHandle,SkeletalAnimationList> *v12; // rax
   SkeletalAnimation *v13; // rax
-  __int64 v14; // rcx
+  __int64 mOffset; // rcx
 
-  v1 = this->m_SkeletalAnimationName.mUID;
+  mUID = this->m_SkeletalAnimationName.mUID;
   v2 = 0i64;
-  v3 = this;
-  if ( !v1
-    || (v4 = UFG::qBaseTreeRB::Get(&AnimationDataBase::sAnimationDataBase->mAnimations.mTree, v1),
-        v5 = (signed __int64)&v4[-1].mNULL,
+  if ( !mUID
+    || (v4 = UFG::qBaseTreeRB::Get(&AnimationDataBase::sAnimationDataBase->mAnimations.mTree, mUID),
+        p_mNULL = (SkeletalAnimation *)&v4[-1].mNULL,
         !v4) )
   {
-    v5 = 0i64;
+    p_mNULL = 0i64;
   }
-  v6 = &v3->m_SkeletalAnimation;
-  if ( v3->m_SkeletalAnimation.m_pPointer )
+  p_m_SkeletalAnimation = &this->m_SkeletalAnimation;
+  if ( this->m_SkeletalAnimation.m_pPointer )
   {
-    v7 = v6->mPrev;
-    v8 = v3->m_SkeletalAnimation.mNext;
-    v7->mNext = v8;
-    v8->mPrev = v7;
-    v6->mPrev = (UFG::qNode<UFG::qSafePointerBase<SkeletalAnimation>,UFG::qSafePointerNodeList> *)&v6->mPrev;
-    v3->m_SkeletalAnimation.mNext = (UFG::qNode<UFG::qSafePointerBase<SkeletalAnimation>,UFG::qSafePointerNodeList> *)&v3->m_SkeletalAnimation.mPrev;
+    mPrev = p_m_SkeletalAnimation->mPrev;
+    mNext = this->m_SkeletalAnimation.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_m_SkeletalAnimation->mPrev = p_m_SkeletalAnimation;
+    this->m_SkeletalAnimation.mNext = &this->m_SkeletalAnimation;
   }
-  v3->m_SkeletalAnimation.m_pPointer = (SkeletalAnimation *)v5;
-  if ( v5 )
+  this->m_SkeletalAnimation.m_pPointer = p_mNULL;
+  if ( p_mNULL )
   {
-    v9 = *(UFG::qNode<UFG::qSafePointerBase<SkeletalAnimation>,UFG::qSafePointerNodeList> **)(v5 + 24);
-    v9->mNext = (UFG::qNode<UFG::qSafePointerBase<SkeletalAnimation>,UFG::qSafePointerNodeList> *)&v6->mPrev;
-    v6->mPrev = v9;
-    v3->m_SkeletalAnimation.mNext = (UFG::qNode<UFG::qSafePointerBase<SkeletalAnimation>,UFG::qSafePointerNodeList> *)(v5 + 24);
-    *(_QWORD *)(v5 + 24) = v6;
+    v9 = p_mNULL->m_SafePointerList.UFG::qSafePointerNode<SkeletalAnimation>::mNode.UFG::qSafePointerNode<SkeletalAnimation>::mPrev;
+    v9->mNext = p_m_SkeletalAnimation;
+    p_m_SkeletalAnimation->mPrev = v9;
+    this->m_SkeletalAnimation.mNext = &p_mNULL->m_SafePointerList.UFG::qSafePointerNode<SkeletalAnimation>::mNode;
+    p_mNULL->m_SafePointerList.UFG::qSafePointerNode<SkeletalAnimation>::mNode.UFG::qSafePointerNode<SkeletalAnimation>::mPrev = p_m_SkeletalAnimation;
   }
-  v10 = v3->m_SkeletalAnimation.m_pPointer;
-  if ( v10 )
+  m_pPointer = this->m_SkeletalAnimation.m_pPointer;
+  if ( m_pPointer )
   {
-    v11 = &v10->m_SkeletalAnimationHandles.mNode;
-    v12 = v11->mPrev;
-    v12->mNext = (UFG::qNode<SkeletalAnimationHandle,SkeletalAnimationList> *)&v3->mPrev;
-    v3->mPrev = v12;
-    v3->mNext = v11;
-    v11->mPrev = (UFG::qNode<SkeletalAnimationHandle,SkeletalAnimationList> *)&v3->mPrev;
-    v13 = v3->m_SkeletalAnimation.m_pPointer;
+    p_mNode = &m_pPointer->m_SkeletalAnimationHandles.mNode;
+    v12 = p_mNode->mPrev;
+    v12->mNext = this;
+    this->mPrev = v12;
+    this->mNext = p_mNode;
+    p_mNode->mPrev = this;
+    v13 = this->m_SkeletalAnimation.m_pPointer;
     ++v13->mRefCount;
     ++v13->mRefCountTotal;
-    v14 = v13->m_pAnimationGroup.mOffset;
-    if ( v14 )
-      v2 = (signed __int64)&v13->m_pAnimationGroup + v14;
-    ++*(_DWORD *)(v2 + 184);
-    ++*(_DWORD *)(v2 + 192);
+    mOffset = v13->m_pAnimationGroup.mOffset;
+    if ( mOffset )
+      v2 = (char *)&v13->m_pAnimationGroup + mOffset;
+    ++*((_DWORD *)v2 + 46);
+    ++*((_DWORD *)v2 + 48);
   }
 }
 
@@ -110,38 +106,36 @@ void __fastcall SkeletalAnimationHandle::Init(SkeletalAnimationHandle *this)
 // RVA: 0x3B0380
 void __fastcall SkeletalAnimationHandle::Unbind(SkeletalAnimationHandle *this)
 {
-  SkeletalAnimation *v1; // rbx
-  SkeletalAnimationHandle *v2; // rdi
-  __int64 v3; // rax
+  SkeletalAnimation *m_pPointer; // rbx
+  __int64 mOffset; // rax
   AnimationGroup *v4; // rcx
-  UFG::qSafePointer<SkeletalAnimation,SkeletalAnimation> *v5; // rdx
-  UFG::qNode<UFG::qSafePointerBase<SkeletalAnimation>,UFG::qSafePointerNodeList> *v6; // rcx
-  UFG::qNode<UFG::qSafePointerBase<SkeletalAnimation>,UFG::qSafePointerNodeList> *v7; // rax
+  UFG::qSafePointer<SkeletalAnimation,SkeletalAnimation> *p_m_SkeletalAnimation; // rdx
+  UFG::qNode<UFG::qSafePointerBase<SkeletalAnimation>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<SkeletalAnimation>,UFG::qSafePointerNodeList> *mNext; // rax
 
-  v1 = this->m_SkeletalAnimation.m_pPointer;
-  v2 = this;
-  if ( v1 )
+  m_pPointer = this->m_SkeletalAnimation.m_pPointer;
+  if ( m_pPointer )
   {
-    v3 = v1->m_pAnimationGroup.mOffset;
-    if ( v3 )
-      v4 = (AnimationGroup *)((char *)&v1->m_pAnimationGroup + v3);
+    mOffset = m_pPointer->m_pAnimationGroup.mOffset;
+    if ( mOffset )
+      v4 = (AnimationGroup *)((char *)&m_pPointer->m_pAnimationGroup + mOffset);
     else
       v4 = 0i64;
     --v4->mAnimRefCount;
     if ( !v4->mRefCount && !v4->mAnimRefCount )
       AnimationGroup::DestroyStreamHandle(v4);
-    v5 = &v2->m_SkeletalAnimation;
-    --v1->mRefCount;
-    if ( v2->m_SkeletalAnimation.m_pPointer )
+    p_m_SkeletalAnimation = &this->m_SkeletalAnimation;
+    --m_pPointer->mRefCount;
+    if ( this->m_SkeletalAnimation.m_pPointer )
     {
-      v6 = v5->mPrev;
-      v7 = v2->m_SkeletalAnimation.mNext;
-      v6->mNext = v7;
-      v7->mPrev = v6;
-      v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<SkeletalAnimation>,UFG::qSafePointerNodeList> *)&v5->mPrev;
-      v2->m_SkeletalAnimation.mNext = (UFG::qNode<UFG::qSafePointerBase<SkeletalAnimation>,UFG::qSafePointerNodeList> *)&v2->m_SkeletalAnimation.mPrev;
+      mPrev = p_m_SkeletalAnimation->mPrev;
+      mNext = this->m_SkeletalAnimation.mNext;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
+      p_m_SkeletalAnimation->mPrev = p_m_SkeletalAnimation;
+      this->m_SkeletalAnimation.mNext = &this->m_SkeletalAnimation;
     }
-    v2->m_SkeletalAnimation.m_pPointer = 0i64;
+    this->m_SkeletalAnimation.m_pPointer = 0i64;
   }
 }
 
@@ -176,7 +170,7 @@ const char *dynamic_initializer_for__sAnimTrackFactoryList__()
 __int64 dynamic_initializer_for__gAnimTrackFactory__()
 {
   Expression::MemberMapFactory::MemberMapFactory(&gAnimTrackFactory, sAnimTrackFactoryList, sAnimTrackFactoryListNum);
-  return atexit(dynamic_atexit_destructor_for__gAnimTrackFactory__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gAnimTrackFactory__);
 }
 
 // File Line: 217
@@ -194,171 +188,156 @@ __int64 dynamic_initializer_for__SkeletalAnimation::sClassNameUID__()
 // RVA: 0x39E610
 void __fastcall SkeletalAnimation::SkeletalAnimation(SkeletalAnimation *this)
 {
-  SkeletalAnimation *v1; // rdi
-  UFG::qNode<SkeletalAnimation,SkeletalAnimation> *v2; // rax
-  UFG::qList<SkeletalAnimationHandle,SkeletalAnimationList,0,0> *v3; // [rsp+48h] [rbp+10h]
-
-  v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  UFG::qSafePointerNode<SkeletalAnimation>::qSafePointerNode<SkeletalAnimation>((UFG::qSafePointerNode<SkeletalAnimation> *)&this->vfptr);
-  v1->mNode.mParent = 0i64;
-  v1->mNode.mChild[0] = 0i64;
-  v1->mNode.mChild[1] = 0i64;
-  v2 = (UFG::qNode<SkeletalAnimation,SkeletalAnimation> *)&v1->mPrev;
-  v2->mPrev = v2;
-  v2->mNext = v2;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SkeletalAnimation::`vftable{for `Expression::IMemberMap};
-  v1->vfptr = (UFG::qSafePointerNode<SkeletalAnimation>Vtbl *)&SkeletalAnimation::`vftable{for `UFG::qSafePointerNode<SkeletalAnimation>};
-  UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v1->m_AnimationResourceHandle.mPrev);
-  v1->m_AnimationResourceHandle.m_pSkeletalAnimationOwner = 0i64;
-  v1->m_AnimationResourceHandle.m_bUnloading = 0;
-  v1->m_pFallbackAnimation = 0i64;
-  v3 = &v1->m_SkeletalAnimationHandles;
-  v3->mNode.mPrev = &v3->mNode;
-  v3->mNode.mNext = &v3->mNode;
-  *(_QWORD *)&v1->mNameSymbol.mUID = -1i64;
-  *(_QWORD *)&v1->mRefCount = 0i64;
-  *(_QWORD *)&v1->mBlendMode = 0i64;
-  v1->mDurationCached = 3.4028235e38;
-  v1->mTracks.mOffset = 0i64;
-  v1->mMotionPhaseChannel.mOffset = 0i64;
+  UFG::qSafePointerNode<SkeletalAnimation>::qSafePointerNode<SkeletalAnimation>(&this->UFG::qSafePointerNode<SkeletalAnimation>);
+  this->mNode.mParent = 0i64;
+  this->mNode.mChild[0] = 0i64;
+  this->mNode.mChild[1] = 0i64;
+  this->mPrev = &this->UFG::qNode<SkeletalAnimation,SkeletalAnimation>;
+  this->mNext = &this->UFG::qNode<SkeletalAnimation,SkeletalAnimation>;
+  this->Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&SkeletalAnimation::`vftable{for `Expression::IMemberMap};
+  this->UFG::qSafePointerNode<SkeletalAnimation>::vfptr = (UFG::qSafePointerNode<SkeletalAnimation>Vtbl *)&SkeletalAnimation::`vftable{for `UFG::qSafePointerNode<SkeletalAnimation>};
+  UFG::qResourceHandle::qResourceHandle(&this->m_AnimationResourceHandle);
+  this->m_AnimationResourceHandle.m_pSkeletalAnimationOwner = 0i64;
+  this->m_AnimationResourceHandle.m_bUnloading = 0;
+  this->m_pFallbackAnimation = 0i64;
+  this->m_SkeletalAnimationHandles.mNode.mPrev = &this->m_SkeletalAnimationHandles.mNode;
+  this->m_SkeletalAnimationHandles.mNode.mNext = &this->m_SkeletalAnimationHandles.mNode;
+  *(_QWORD *)&this->mNameSymbol.mUID = -1i64;
+  *(_QWORD *)&this->mRefCount = 0i64;
+  *(_QWORD *)&this->mBlendMode = 0i64;
+  this->mDurationCached = 3.4028235e38;
+  this->mTracks.mOffset = 0i64;
+  this->mMotionPhaseChannel.mOffset = 0i64;
 }
 
 // File Line: 315
 // RVA: 0x39FD90
 void __fastcall SkeletalAnimation::~SkeletalAnimation(SkeletalAnimation *this)
 {
-  SkeletalAnimation *v1; // rdi
   UFG::qSafePointerNode<UFG::ParkourHandle> *v2; // rsi
-  __int64 v3; // rax
+  __int64 mOffset; // rax
   __int64 v4; // rax
   char *v5; // rcx
   __int64 v6; // rax
-  signed __int64 v7; // rcx
+  char *v7; // rcx
   __int64 v8; // rax
-  signed __int64 v9; // rcx
-  UFG::qList<SkeletalAnimationHandle,SkeletalAnimationList,0,0> *v10; // r8
-  UFG::qList<SkeletalAnimationHandle,SkeletalAnimationList,0,0> *v11; // rax
-  UFG::qNode<SkeletalAnimationHandle,SkeletalAnimationList> *v12; // rdx
-  UFG::qNode<SkeletalAnimationHandle,SkeletalAnimationList> *v13; // rcx
-  UFG::qNode<SkeletalAnimationHandle,SkeletalAnimationList> *v14; // rcx
+  char *v9; // rcx
+  UFG::qList<SkeletalAnimationHandle,SkeletalAnimationList,0,0> *p_m_SkeletalAnimationHandles; // r8
+  SkeletalAnimation *mNext; // rax
+  Expression::IMemberMapVtbl *vfptr; // rdx
+  Expression::IMemberMap *mResourceOwner; // rcx
+  UFG::qNode<SkeletalAnimationHandle,SkeletalAnimationList> *mPrev; // rcx
   UFG::qNode<SkeletalAnimationHandle,SkeletalAnimationList> *v15; // rax
-  UFG::qResourceInventory *v16; // rax
+  UFG::qResourceInventory *Inventory; // rax
   UFG::qResourceWarehouse *v17; // rax
-  UFG::qNode<SkeletalAnimation,SkeletalAnimation> *v18; // rdx
-  UFG::qNode<SkeletalAnimation,SkeletalAnimation> *v19; // rcx
-  UFG::qNode<SkeletalAnimation,SkeletalAnimation> *v20; // rax
-  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v21; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v22; // rax
+  UFG::qNode<SkeletalAnimation,SkeletalAnimation> *v18; // rcx
+  UFG::qNode<SkeletalAnimation,SkeletalAnimation> *v19; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v20; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v21; // rax
 
-  v1 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&SkeletalAnimation::`vftable{for `Expression::IMemberMap};
-  v2 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)&this->vfptr;
-  this->vfptr = (UFG::qSafePointerNode<SkeletalAnimation>Vtbl *)&SkeletalAnimation::`vftable{for `UFG::qSafePointerNode<SkeletalAnimation>};
-  v3 = this->m_pAnimationGroup.mOffset;
-  if ( v3 && (UFG::qOffset64<AnimationGroup *> *)((char *)&this->m_pAnimationGroup + v3) )
+  this->Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&SkeletalAnimation::`vftable{for `Expression::IMemberMap};
+  v2 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)&this->UFG::qSafePointerNode<SkeletalAnimation>;
+  this->UFG::qSafePointerNode<SkeletalAnimation>::vfptr = (UFG::qSafePointerNode<SkeletalAnimation>Vtbl *)&SkeletalAnimation::`vftable{for `UFG::qSafePointerNode<SkeletalAnimation>};
+  mOffset = this->m_pAnimationGroup.mOffset;
+  if ( mOffset && (UFG::qOffset64<AnimationGroup *> *)((char *)&this->m_pAnimationGroup + mOffset) )
   {
     v4 = this->m_pAnimationGroup.mOffset;
     if ( v4 )
       v5 = (char *)&this->m_pAnimationGroup + v4;
     else
       v5 = 0i64;
-    BinPtrArray<UELNode,0,0>::Remove((BinPtrArray<ActionNode,0,0> *)(v5 + 120), (ActionNode *)v1);
+    BinPtrArray<UELNode,0,0>::Remove((BinPtrArray<ActionNode,0,0> *)(v5 + 120), (ActionNode *)this);
   }
   UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
     (UFG::qBaseTreeVariableRB<unsigned __int64> *)&AnimationDataBase::sAnimationDataBase->mAnimations,
-    (UFG::qBaseNodeVariableRB<unsigned __int64> *)&v1->mNode);
-  v6 = v1->mTracks.mOffset;
+    (UFG::qBaseNodeVariableRB<unsigned __int64> *)&this->UFG::qNodeRB<SkeletalAnimation>);
+  v6 = this->mTracks.mOffset;
   if ( v6 )
   {
-    v7 = (signed __int64)&v1->mTracks + v6;
+    v7 = (char *)&this->mTracks + v6;
     if ( v7 )
-      (*(void (__fastcall **)(signed __int64, signed __int64))(*(_QWORD *)v7 + 8i64))(v7, 1i64);
+      (*(void (__fastcall **)(char *, __int64))(*(_QWORD *)v7 + 8i64))(v7, 1i64);
   }
-  v8 = v1->mMotionPhaseChannel.mOffset;
+  v8 = this->mMotionPhaseChannel.mOffset;
   if ( v8 )
   {
-    v9 = (signed __int64)&v1->mMotionPhaseChannel + v8;
+    v9 = (char *)&this->mMotionPhaseChannel + v8;
     if ( v9 )
-      (*(void (__fastcall **)(signed __int64, signed __int64))(*(_QWORD *)v9 + 8i64))(v9, 1i64);
+      (*(void (__fastcall **)(char *, __int64))(*(_QWORD *)v9 + 8i64))(v9, 1i64);
   }
-  v10 = &v1->m_SkeletalAnimationHandles;
-  v11 = (UFG::qList<SkeletalAnimationHandle,SkeletalAnimationList,0,0> *)v1->m_SkeletalAnimationHandles.mNode.mNext;
-  if ( v11 != &v1->m_SkeletalAnimationHandles )
+  p_m_SkeletalAnimationHandles = &this->m_SkeletalAnimationHandles;
+  mNext = (SkeletalAnimation *)this->m_SkeletalAnimationHandles.mNode.mNext;
+  if ( mNext != (SkeletalAnimation *)&this->m_SkeletalAnimationHandles )
   {
     do
     {
-      v12 = v11->mNode.mPrev;
-      v13 = v11->mNode.mNext;
-      v12->mNext = v13;
-      v13->mPrev = v12;
-      v11->mNode.mPrev = &v11->mNode;
-      v11->mNode.mNext = &v11->mNode;
-      v11 = (UFG::qList<SkeletalAnimationHandle,SkeletalAnimationList,0,0> *)v1->m_SkeletalAnimationHandles.mNode.mNext;
+      vfptr = mNext->Expression::IMemberMap::vfptr;
+      mResourceOwner = mNext->mResourceOwner;
+      vfptr->__vecDelDtor = (void *(__fastcall *)(Expression::IMemberMap *, unsigned int))mResourceOwner;
+      mResourceOwner->vfptr = vfptr;
+      mNext->Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)mNext;
+      mNext->mResourceOwner = mNext;
+      mNext = (SkeletalAnimation *)this->m_SkeletalAnimationHandles.mNode.mNext;
     }
-    while ( v11 != v10 );
+    while ( mNext != (SkeletalAnimation *)p_m_SkeletalAnimationHandles );
   }
-  v14 = v10->mNode.mPrev;
-  v15 = v1->m_SkeletalAnimationHandles.mNode.mNext;
-  v14->mNext = v15;
-  v15->mPrev = v14;
-  v10->mNode.mPrev = &v10->mNode;
-  v1->m_SkeletalAnimationHandles.mNode.mNext = &v1->m_SkeletalAnimationHandles.mNode;
-  v16 = `UFG::qGetResourceInventory<UFG::AnimationResource>::`2::result;
+  mPrev = p_m_SkeletalAnimationHandles->mNode.mPrev;
+  v15 = this->m_SkeletalAnimationHandles.mNode.mNext;
+  mPrev->mNext = v15;
+  v15->mPrev = mPrev;
+  p_m_SkeletalAnimationHandles->mNode.mPrev = &p_m_SkeletalAnimationHandles->mNode;
+  this->m_SkeletalAnimationHandles.mNode.mNext = &this->m_SkeletalAnimationHandles.mNode;
+  Inventory = `UFG::qGetResourceInventory<UFG::AnimationResource>::`2::result;
   if ( !`UFG::qGetResourceInventory<UFG::AnimationResource>::`2::result )
   {
     v17 = UFG::qResourceWarehouse::Instance();
-    v16 = UFG::qResourceWarehouse::GetInventory(v17, 0x53F1685Eu);
-    `UFG::qGetResourceInventory<UFG::AnimationResource>::`2::result = v16;
+    Inventory = UFG::qResourceWarehouse::GetInventory(v17, 0x53F1685Eu);
+    `UFG::qGetResourceInventory<UFG::AnimationResource>::`2::result = Inventory;
   }
-  UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->m_AnimationResourceHandle.mPrev, v16);
-  UFG::qResourceHandle::~qResourceHandle((UFG::qResourceHandle *)&v1->m_AnimationResourceHandle.mPrev);
-  v18 = (UFG::qNode<SkeletalAnimation,SkeletalAnimation> *)&v1->mPrev;
-  v19 = v1->mPrev;
-  v20 = v1->mNext;
-  v19->mNext = v20;
-  v20->mPrev = v19;
-  v18->mPrev = v18;
-  v18->mNext = v18;
+  UFG::qResourceHandle::Close(&this->m_AnimationResourceHandle, Inventory);
+  UFG::qResourceHandle::~qResourceHandle(&this->m_AnimationResourceHandle);
+  v18 = this->mPrev;
+  v19 = this->mNext;
+  v18->mNext = v19;
+  v19->mPrev = v18;
+  this->mPrev = &this->UFG::qNode<SkeletalAnimation,SkeletalAnimation>;
+  this->mNext = &this->UFG::qNode<SkeletalAnimation,SkeletalAnimation>;
   v2->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<SkeletalAnimation>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull(v2);
   UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes(&v2->m_SafePointerList);
-  v21 = v2->m_SafePointerList.mNode.mPrev;
-  v22 = v2->m_SafePointerList.mNode.mNext;
-  v21->mNext = v22;
-  v22->mPrev = v21;
+  v20 = v2->m_SafePointerList.mNode.mPrev;
+  v21 = v2->m_SafePointerList.mNode.mNext;
+  v20->mNext = v21;
+  v21->mPrev = v20;
   v2->m_SafePointerList.mNode.mPrev = &v2->m_SafePointerList.mNode;
   v2->m_SafePointerList.mNode.mNext = &v2->m_SafePointerList.mNode;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 335
 // RVA: 0x3AE9C0
 void __fastcall SkeletalAnimation::Serialize(SkeletalAnimation *this, IActionTreeSerializer *serializer)
 {
-  __int64 v2; // rax
-  IActionTreeSerializer *v3; // rbx
-  SkeletalAnimation *v4; // rdi
+  __int64 mOffset; // rax
   Expression::IMemberMap *v5; // rdx
   __int64 v6; // rax
   Expression::IMemberMap *v7; // rdx
 
-  v2 = this->mTracks.mOffset;
-  v3 = serializer;
-  v4 = this;
-  if ( v2 )
+  mOffset = this->mTracks.mOffset;
+  if ( mOffset )
   {
-    v5 = (Expression::IMemberMap *)((char *)&this->mTracks + v2);
+    v5 = (Expression::IMemberMap *)((char *)&this->mTracks + mOffset);
     if ( v5 )
-      IActionTreeSerializer::PushObjectToSerialize(v3, v5);
+      IActionTreeSerializer::PushObjectToSerialize(serializer, v5);
   }
-  v6 = v4->mMotionPhaseChannel.mOffset;
+  v6 = this->mMotionPhaseChannel.mOffset;
   if ( v6 )
   {
-    v7 = (Expression::IMemberMap *)((char *)&v4->mMotionPhaseChannel + v6);
+    v7 = (Expression::IMemberMap *)((char *)&this->mMotionPhaseChannel + v6);
     if ( v7 )
-      IActionTreeSerializer::PushObjectToSerialize(v3, v7);
+      IActionTreeSerializer::PushObjectToSerialize(serializer, v7);
   }
 }
 
@@ -366,20 +345,24 @@ void __fastcall SkeletalAnimation::Serialize(SkeletalAnimation *this, IActionTre
 // RVA: 0x3AC400
 void __fastcall SkeletalAnimation::OnSave(SkeletalAnimation *this)
 {
-  __int64 v1; // rax
+  __int64 mOffset; // rax
+  MotionPhaseChannel *v2; // rcx
 
-  v1 = this->mMotionPhaseChannel.mOffset;
-  if ( v1 )
-    JUMPOUT((char *)&this->mMotionPhaseChannel + v1, 0i64, MotionPhaseChannel::Sort);
+  mOffset = this->mMotionPhaseChannel.mOffset;
+  if ( mOffset )
+  {
+    v2 = (MotionPhaseChannel *)((char *)&this->mMotionPhaseChannel + mOffset);
+    if ( v2 )
+      MotionPhaseChannel::Sort(v2);
+  }
 }
 
 // File Line: 432
 // RVA: 0x3AC000
 void __fastcall SkeletalAnimation::OnLoad(SkeletalAnimation *this)
 {
-  SkeletalAnimation *v1; // rsi
-  UFG::qResourceData *v2; // rbx
-  SkeletalAnimation *v3; // rax
+  UFG::qResourceData *mData; // rbx
+  SkeletalAnimation *m_pFallbackAnimation; // rax
   UFG::qResourceData *v4; // rbx
   hkReferencedObject *v5; // rcx
   hkReferencedObject *v6; // rbx
@@ -387,21 +370,20 @@ void __fastcall SkeletalAnimation::OnLoad(SkeletalAnimation *this)
   char v8; // di
   hkReferencedObject *v9; // rcx
   __int64 v10; // rbp
-  hkReferencedObject *v11; // [rsp+58h] [rbp+10h]
-  hkReferencedObject *v12; // [rsp+60h] [rbp+18h]
+  hkReferencedObject *v11; // [rsp+58h] [rbp+10h] BYREF
+  hkReferencedObject *v12; // [rsp+60h] [rbp+18h] BYREF
 
-  v1 = this;
-  v2 = this->m_AnimationResourceHandle.mData;
-  if ( v2 )
+  mData = this->m_AnimationResourceHandle.mData;
+  if ( mData )
   {
-    v2 = (UFG::qResourceData *)v2[1].mNode.mChild[0];
-    if ( v2 )
+    mData = (UFG::qResourceData *)mData[1].mNode.mChild[0];
+    if ( mData )
       goto LABEL_7;
   }
-  v3 = this->m_pFallbackAnimation;
-  if ( v3 )
+  m_pFallbackAnimation = this->m_pFallbackAnimation;
+  if ( m_pFallbackAnimation )
   {
-    v4 = v3->m_AnimationResourceHandle.mData;
+    v4 = m_pFallbackAnimation->m_AnimationResourceHandle.mData;
     if ( !v4 )
     {
 LABEL_10:
@@ -412,58 +394,56 @@ LABEL_10:
       v6 = v12;
       goto LABEL_11;
     }
-    v2 = (UFG::qResourceData *)v4[1].mNode.mChild[0];
+    mData = (UFG::qResourceData *)v4[1].mNode.mChild[0];
   }
-  if ( !v2 )
+  if ( !mData )
     goto LABEL_10;
 LABEL_7:
-  v5 = *(hkReferencedObject **)&v2->mNode.mUID;
+  v5 = *(hkReferencedObject **)&mData->mNode.mUID;
   if ( v5 )
     hkReferencedObject::addReference(v5);
-  v6 = *(hkReferencedObject **)&v2->mNode.mUID;
+  v6 = *(hkReferencedObject **)&mData->mNode.mUID;
   v12 = v6;
   v7 = (__int64 *)&v12;
   v8 = 1;
   v9 = v11;
 LABEL_11:
   v10 = *v7;
-  if ( v8 & 2 )
+  if ( (v8 & 2) != 0 )
   {
-    v8 &= 0xFDu;
+    v8 &= ~2u;
     if ( v9 )
       hkReferencedObject::removeReference(v9);
     v11 = 0i64;
   }
-  if ( v8 & 1 )
+  if ( (v8 & 1) != 0 )
   {
     if ( v6 )
       hkReferencedObject::removeReference(v6);
     v12 = 0i64;
   }
   if ( v10 )
-    v1->mDurationCached = *(float *)(v10 + 20);
+    this->mDurationCached = *(float *)(v10 + 20);
   else
-    v1->mDurationCached = 3.4028235e38;
+    this->mDurationCached = 3.4028235e38;
 }
 
 // File Line: 447
 // RVA: 0x3AC430
 void __fastcall SkeletalAnimation::OnUnload(SkeletalAnimation *this)
 {
-  char **v1; // rsi
-  SkeletalAnimation *v2; // rbp
-  char *v3; // rbx
-  __int64 v4; // rdx
-  _QWORD *v5; // rax
-  __int64 v6; // rdi
-  __int64 v7; // rax
+  UFG::qList<SkeletalAnimationHandle,SkeletalAnimationList,0,0> *p_m_SkeletalAnimationHandles; // rsi
+  UFG::qNode<SkeletalAnimationHandle,SkeletalAnimationList> *mPrev; // rbx
+  UFG::qNode<SkeletalAnimationHandle,SkeletalAnimationList> *v4; // rdx
+  UFG::qNode<SkeletalAnimationHandle,SkeletalAnimationList> *mNext; // rax
+  UFG::qNode<SkeletalAnimationHandle,SkeletalAnimationList> *v6; // rdi
+  UFG::qNode<SkeletalAnimationHandle,SkeletalAnimationList> *v7; // rax
   AnimationGroup *v8; // rcx
-  __int64 *v9; // rdx
-  __int64 v10; // rcx
-  _QWORD *v11; // rax
+  UFG::qNode<SkeletalAnimationHandle,SkeletalAnimationList> **p_mNext; // rdx
+  UFG::qNode<SkeletalAnimationHandle,SkeletalAnimationList> *v10; // rcx
+  UFG::qNode<SkeletalAnimationHandle,SkeletalAnimationList> *v11; // rax
 
-  v1 = (char **)&this->m_SkeletalAnimationHandles;
-  v2 = this;
+  p_m_SkeletalAnimationHandles = &this->m_SkeletalAnimationHandles;
   if ( (UFG::qList<SkeletalAnimationHandle,SkeletalAnimationList,0,0> *)this->m_SkeletalAnimationHandles.mNode.mNext == &this->m_SkeletalAnimationHandles )
   {
     this->mDurationCached = 3.4028235e38;
@@ -472,40 +452,40 @@ void __fastcall SkeletalAnimation::OnUnload(SkeletalAnimation *this)
   {
     do
     {
-      v3 = *v1;
-      v4 = *(_QWORD *)*v1;
-      v5 = (_QWORD *)*((_QWORD *)*v1 + 1);
-      *(_QWORD *)(v4 + 8) = v5;
-      *v5 = v4;
-      *(_QWORD *)v3 = v3;
-      *((_QWORD *)v3 + 1) = v3;
-      v6 = *((_QWORD *)v3 + 5);
+      mPrev = p_m_SkeletalAnimationHandles->mNode.mPrev;
+      v4 = p_m_SkeletalAnimationHandles->mNode.mPrev->mPrev;
+      mNext = p_m_SkeletalAnimationHandles->mNode.mPrev->mNext;
+      v4->mNext = mNext;
+      mNext->mPrev = v4;
+      mPrev->mPrev = mPrev;
+      mPrev->mNext = mPrev;
+      v6 = mPrev[2].mNext;
       if ( v6 )
       {
-        v7 = *(_QWORD *)(v6 + 160);
+        v7 = v6[10].mPrev;
         if ( v7 )
-          v8 = (AnimationGroup *)(v7 + v6 + 160);
+          v8 = (AnimationGroup *)((char *)&v6[10] + (_QWORD)v7);
         else
           v8 = 0i64;
         --v8->mAnimRefCount;
         if ( !v8->mRefCount && !v8->mAnimRefCount )
           AnimationGroup::DestroyStreamHandle(v8);
-        --*(_WORD *)(v6 + 192);
-        v9 = (__int64 *)(v3 + 24);
-        if ( *((_QWORD *)v3 + 5) )
+        --LOWORD(v6[12].mPrev);
+        p_mNext = &mPrev[1].mNext;
+        if ( mPrev[2].mNext )
         {
-          v10 = *v9;
-          v11 = (_QWORD *)*((_QWORD *)v3 + 4);
-          *(_QWORD *)(v10 + 8) = v11;
-          *v11 = v10;
-          *v9 = (__int64)v9;
-          *((_QWORD *)v3 + 4) = v3 + 24;
+          v10 = *p_mNext;
+          v11 = mPrev[2].mPrev;
+          v10->mNext = v11;
+          v11->mPrev = v10;
+          *p_mNext = (UFG::qNode<SkeletalAnimationHandle,SkeletalAnimationList> *)p_mNext;
+          mPrev[2].mPrev = (UFG::qNode<SkeletalAnimationHandle,SkeletalAnimationList> *)((char *)mPrev + 24);
         }
-        *((_QWORD *)v3 + 5) = 0i64;
+        mPrev[2].mNext = 0i64;
       }
     }
-    while ( v1[1] != (char *)v1 );
-    v2->mDurationCached = 3.4028235e38;
+    while ( (UFG::qList<SkeletalAnimationHandle,SkeletalAnimationList,0,0> *)p_m_SkeletalAnimationHandles->mNode.mNext != p_m_SkeletalAnimationHandles );
+    this->mDurationCached = 3.4028235e38;
   }
 }
 
@@ -513,120 +493,108 @@ void __fastcall SkeletalAnimation::OnUnload(SkeletalAnimation *this)
 // RVA: 0x3A7A50
 char __fastcall SkeletalAnimation::GetAnimationRootOrigin(SkeletalAnimation *this, UFG::qMatrix44 *outMatrix)
 {
-  UFG::qResourceData *v2; // rax
-  UFG::qMatrix44 *v3; // rbx
-  SkeletalAnimation *v4; // rcx
+  UFG::qResourceData *mData; // rax
+  SkeletalAnimation *m_pFallbackAnimation; // rcx
   UFG::qResourceData *v5; // rax
-  _WORD *v6; // rcx
-  signed int v7; // ST20_4
+  __int16 *v6; // rcx
   char result; // al
-  UFG::qVector4 v9; // xmm2
-  unsigned int v10; // [rsp+30h] [rbp-88h]
-  unsigned int v11; // [rsp+34h] [rbp-84h]
-  unsigned int v12; // [rsp+38h] [rbp-80h]
-  unsigned int v13; // [rsp+3Ch] [rbp-7Ch]
-  unsigned int v14; // [rsp+40h] [rbp-78h]
-  unsigned int v15; // [rsp+44h] [rbp-74h]
-  unsigned int v16; // [rsp+48h] [rbp-70h]
-  hkQsTransformf v17; // [rsp+50h] [rbp-68h]
-  char v18; // [rsp+80h] [rbp-38h]
+  UFG::qVector4 v8; // xmm2
+  int v9[8]; // [rsp+30h] [rbp-88h] BYREF
+  hkQsTransformf v10; // [rsp+50h] [rbp-68h] BYREF
+  char v11[56]; // [rsp+80h] [rbp-38h] BYREF
 
-  v2 = this->m_AnimationResourceHandle.mData;
-  v3 = outMatrix;
-  if ( !v2 || (v2 = (UFG::qResourceData *)v2[1].mNode.mChild[0]) == 0i64 )
+  mData = this->m_AnimationResourceHandle.mData;
+  if ( !mData || (mData = (UFG::qResourceData *)mData[1].mNode.mChild[0]) == 0i64 )
   {
-    v4 = this->m_pFallbackAnimation;
-    if ( v4 )
+    m_pFallbackAnimation = this->m_pFallbackAnimation;
+    if ( m_pFallbackAnimation )
     {
-      v5 = v4->m_AnimationResourceHandle.mData;
+      v5 = m_pFallbackAnimation->m_AnimationResourceHandle.mData;
       if ( !v5 )
         goto LABEL_9;
-      v2 = (UFG::qResourceData *)v5[1].mNode.mChild[0];
+      mData = (UFG::qResourceData *)v5[1].mNode.mChild[0];
     }
-    if ( !v2 )
+    if ( !mData )
       goto LABEL_9;
   }
-  v6 = *(_WORD **)&v2->mNode.mUID;
+  v6 = *(__int16 **)&mData->mNode.mUID;
   if ( v6[14] >= 7 )
   {
-    v7 = 7;
-    (*(void (__fastcall **)(_WORD *, unsigned int *, signed __int64, char *, signed int, unsigned int *))(*(_QWORD *)v6 + 32i64))(
+    (*(void (__fastcall **)(__int16 *, int *, __int64, char *, int, int *))(*(_QWORD *)v6 + 32i64))(
       v6,
-      &v10,
+      v9,
       1i64,
-      &v18,
-      v7,
-      &v10);
-    v17.m_scale = (hkVector4f)query.m_quad;
-    v17.m_rotation.m_vec.m_quad = _mm_unpacklo_ps(
-                                    _mm_unpacklo_ps((__m128)v13, (__m128)v15),
-                                    _mm_unpacklo_ps((__m128)v14, (__m128)v16));
-    v17.m_translation.m_quad = _mm_unpacklo_ps(
-                                 _mm_unpacklo_ps((__m128)v10, (__m128)v12),
-                                 _mm_unpacklo_ps((__m128)v11, (__m128)0i64));
-    hkQsTransformf::get4x4ColumnMajor(&v17, &v3->v0.x);
+      v11,
+      7,
+      v9);
+    v10.m_scale = (hkVector4f)query.m_quad;
+    v10.m_rotation.m_vec.m_quad = _mm_unpacklo_ps(
+                                    _mm_unpacklo_ps((__m128)(unsigned int)v9[3], (__m128)(unsigned int)v9[5]),
+                                    _mm_unpacklo_ps((__m128)(unsigned int)v9[4], (__m128)(unsigned int)v9[6]));
+    v10.m_translation.m_quad = _mm_unpacklo_ps(
+                                 _mm_unpacklo_ps((__m128)(unsigned int)v9[0], (__m128)(unsigned int)v9[2]),
+                                 _mm_unpacklo_ps((__m128)(unsigned int)v9[1], (__m128)0i64));
+    hkQsTransformf::get4x4ColumnMajor(&v10, &outMatrix->v0.x);
     return 1;
   }
 LABEL_9:
-  v9 = 0i64;
+  v8 = 0i64;
   result = 0;
-  v9.x = (float)1;
-  outMatrix->v0 = v9;
-  outMatrix->v1 = (UFG::qVector4)_mm_shuffle_ps((__m128)v9, (__m128)v9, 81);
-  outMatrix->v2 = (UFG::qVector4)_mm_shuffle_ps((__m128)v9, (__m128)v9, 69);
-  outMatrix->v3 = (UFG::qVector4)_mm_shuffle_ps((__m128)v9, (__m128)v9, 21);
+  v8.x = (float)1;
+  outMatrix->v0 = v8;
+  outMatrix->v1 = (UFG::qVector4)_mm_shuffle_ps((__m128)v8, (__m128)v8, 81);
+  outMatrix->v2 = (UFG::qVector4)_mm_shuffle_ps((__m128)v8, (__m128)v8, 69);
+  outMatrix->v3 = (UFG::qVector4)_mm_shuffle_ps((__m128)v8, (__m128)v8, 21);
   return result;
 }
 
 // File Line: 1154
 // RVA: 0x3AE2B0
-void __fastcall SkeletalAnimation::ResolveFallbackAnimation(SkeletalAnimation *this, SkeletalAnimation *pGlobalFallbackAnimation)
+void __fastcall SkeletalAnimation::ResolveFallbackAnimation(
+        SkeletalAnimation *this,
+        SkeletalAnimation *pGlobalFallbackAnimation)
 {
-  SkeletalAnimation *v2; // rsi
-  SkeletalAnimation *v3; // rdi
-  unsigned int *v4; // rax
-  signed __int64 v5; // rbx
-  __int64 v6; // rax
-  signed __int64 v7; // rax
-  unsigned int v8; // edx
+  UFG::qSymbolUC *p_mFallbackAnimSymbol; // rax
+  SkeletalAnimation *p_mNULL; // rbx
+  __int64 mOffset; // rax
+  UFG::qSymbolUC *v7; // rax
+  unsigned int mUID; // edx
   UFG::qBaseTreeRB *v9; // rax
 
-  v2 = pGlobalFallbackAnimation;
-  v3 = this;
-  if ( !(_S7_8 & 1) )
+  if ( (_S7_8 & 1) == 0 )
   {
     _S7_8 |= 1u;
     UFG::qSymbolUC::create_from_string(&symFallbackAnimSymbol_refpose, "refpose");
     atexit(SkeletalAnimation::ResolveFallbackAnimation_::_2_::_dynamic_atexit_destructor_for__symFallbackAnimSymbol_refpose__);
   }
-  v4 = &v3->mFallbackAnimSymbol.mUID;
-  v5 = 0i64;
-  if ( v3->mFallbackAnimSymbol.mUID == -1 )
+  p_mFallbackAnimSymbol = &this->mFallbackAnimSymbol;
+  p_mNULL = 0i64;
+  if ( this->mFallbackAnimSymbol.mUID == -1 )
   {
-    v6 = v3->m_pAnimationGroup.mOffset;
-    if ( v6 )
-      v7 = (signed __int64)&v3->m_pAnimationGroup + v6;
+    mOffset = this->m_pAnimationGroup.mOffset;
+    if ( mOffset )
+      v7 = (UFG::qSymbolUC *)((char *)&this->m_pAnimationGroup + mOffset);
     else
       v7 = 0i64;
-    v4 = (unsigned int *)(v7 + 176);
+    p_mFallbackAnimSymbol = v7 + 44;
   }
-  v8 = *v4;
-  if ( *v4 == -1 )
-    goto LABEL_18;
-  if ( symFallbackAnimSymbol_refpose.mUID == v8 )
+  mUID = p_mFallbackAnimSymbol->mUID;
+  if ( p_mFallbackAnimSymbol->mUID == -1 )
+    goto LABEL_15;
+  if ( symFallbackAnimSymbol_refpose.mUID == mUID )
   {
-    v3->m_pFallbackAnimation = 0i64;
+    this->m_pFallbackAnimation = 0i64;
     return;
   }
-  if ( v8 )
+  if ( mUID )
   {
-    v9 = UFG::qBaseTreeRB::Get(&AnimationDataBase::sAnimationDataBase->mAnimations.mTree, v8);
+    v9 = UFG::qBaseTreeRB::Get(&AnimationDataBase::sAnimationDataBase->mAnimations.mTree, mUID);
     if ( v9 )
-      v5 = (signed __int64)&v9[-1].mNULL;
+      p_mNULL = (SkeletalAnimation *)&v9[-1].mNULL;
   }
-  v3->m_pFallbackAnimation = (SkeletalAnimation *)v5;
-  if ( !v5 )
-LABEL_18:
-    v3->m_pFallbackAnimation = v2;
+  this->m_pFallbackAnimation = p_mNULL;
+  if ( !p_mNULL )
+LABEL_15:
+    this->m_pFallbackAnimation = pGlobalFallbackAnimation;
 }
 

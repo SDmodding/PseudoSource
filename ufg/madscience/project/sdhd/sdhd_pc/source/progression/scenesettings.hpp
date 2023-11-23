@@ -11,11 +11,8 @@ void __fastcall UFG::SceneSettings::LayerSetup::LayerSetup(UFG::SceneSettings::L
 // RVA: 0x48A860
 void __fastcall UFG::SceneSettings::AltLayerSetup::AltLayerSetup(UFG::SceneSettings::AltLayerSetup *this)
 {
-  UFG::SceneSettings::AltLayerSetup *v1; // rbx
-
-  v1 = this;
   UFG::qString::qString(&this->mLayerName);
-  *(_WORD *)&v1->mFlush = 0;
+  *(_WORD *)&this->mFlush = 0;
 }
 
 // File Line: 51
@@ -39,7 +36,7 @@ void __fastcall UFG::SceneSettings::DisguiseSetup::DisguiseSetup(UFG::SceneSetti
 // RVA: 0x48CE40
 void __fastcall UFG::SecondaryObjective::SecondaryObjective(UFG::SecondaryObjective *this)
 {
-  this->mStatus = 0;
+  this->mStatus = STATUS_INACTIVE;
   UFG::qString::qString(&this->mCaption);
 }
 

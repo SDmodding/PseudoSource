@@ -1,66 +1,62 @@
 // File Line: 43
 // RVA: 0xE20DD0
-void __fastcall hkpSaveContactPointsUtil::saveContactPoints(hkpSaveContactPointsUtil::SavePointsInput *input, hkpWorld *world, hkpPhysicsSystemWithContacts *sys)
+void __fastcall hkpSaveContactPointsUtil::saveContactPoints(
+        hkpSaveContactPointsUtil::SavePointsInput *input,
+        hkpWorld *world,
+        hkpPhysicsSystemWithContacts *sys)
 {
-  int v3; // eax
+  int m_size; // eax
   hkProcess **v4; // r9
-  hkpPhysicsSystemWithContacts *v5; // r15
-  hkpWorld *v6; // r13
   __int64 v7; // r8
-  hkpSimulationIsland **v8; // r10
+  hkpSimulationIsland **m_data; // r10
   __int64 v9; // rcx
   hkProcess *v10; // rax
-  signed __int64 v11; // rcx
+  __int64 v11; // rcx
   __int64 v12; // rcx
-  signed __int64 v13; // rax
+  __int64 v13; // rax
   unsigned __int16 *v14; // r14
   int v15; // ebp
   int v16; // ecx
   __int64 v17; // r12
   hkpAgentNnEntry *v18; // rdi
-  unsigned __int64 v19; // rsi
-  _QWORD **v20; // rax
+  hkpAgentNnEntry *v19; // rsi
+  _QWORD **Value; // rax
   hkpSerializedAgentNnEntry *v21; // rax
   hkpSerializedAgentNnEntry *v22; // rax
   hkpSerializedAgentNnEntry *v23; // rbx
-  signed __int64 v24; // [rsp+30h] [rbp-78h]
+  __int64 v24; // [rsp+30h] [rbp-78h]
   __int64 v25; // [rsp+38h] [rbp-70h]
   unsigned __int16 *v26; // [rsp+40h] [rbp-68h]
-  hkArrayBase<hkProcess *> v27; // [rsp+48h] [rbp-60h]
-  __int64 v28; // [rsp+58h] [rbp-50h]
-  __int64 v29; // [rsp+60h] [rbp-48h]
-  hkpSaveContactPointsUtil::SavePointsInput *inputa; // [rsp+B0h] [rbp+8h]
-  int v31; // [rsp+B8h] [rbp+10h]
-  hkResult result; // [rsp+C8h] [rbp+20h]
+  hkArrayBase<hkProcess *> v27; // [rsp+48h] [rbp-60h] BYREF
+  __int64 v28[3]; // [rsp+58h] [rbp-50h]
+  int v30; // [rsp+B8h] [rbp+10h] BYREF
+  hkResult result; // [rsp+C8h] [rbp+20h] BYREF
 
-  inputa = input;
-  v3 = world->m_activeSimulationIslands.m_size;
+  m_size = world->m_activeSimulationIslands.m_size;
   v4 = 0i64;
   v27.m_data = 0i64;
   v27.m_size = 0;
-  v5 = sys;
-  v6 = world;
-  v27.m_capacityAndFlags = 2147483648;
-  if ( v3 > 0 )
+  v27.m_capacityAndFlags = 0x80000000;
+  if ( m_size > 0 )
   {
-    v31 = 8 * v3;
+    v30 = 8 * m_size;
     v4 = (hkProcess **)((__int64 (__fastcall *)(hkContainerHeapAllocator::Allocator *, int *, hkpPhysicsSystemWithContacts *, _QWORD))hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc)(
                          &hkContainerHeapAllocator::s_alloc,
-                         &v31,
+                         &v30,
                          sys,
                          0i64);
     v27.m_data = v4;
-    v27.m_capacityAndFlags = v31 / 8;
+    v27.m_capacityAndFlags = v30 / 8;
   }
-  v7 = v6->m_activeSimulationIslands.m_size;
-  v8 = v6->m_activeSimulationIslands.m_data;
+  v7 = world->m_activeSimulationIslands.m_size;
+  m_data = world->m_activeSimulationIslands.m_data;
   v9 = 0i64;
   v27.m_size = v7;
-  if ( (signed int)v7 > 0 )
+  if ( (int)v7 > 0 )
   {
     do
     {
-      v10 = (hkProcess *)v8[v9++];
+      v10 = (hkProcess *)m_data[v9++];
       v4[v9 - 1] = v10;
     }
     while ( v9 < v7 );
@@ -68,11 +64,11 @@ void __fastcall hkpSaveContactPointsUtil::saveContactPoints(hkpSaveContactPoints
   }
   hkArrayBase<hkpEntity *>::_insertAt(
     &v27,
-    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
+    &hkContainerHeapAllocator::s_alloc,
     v7,
-    (hkProcess *const *)v6->m_inactiveSimulationIslands.m_data,
-    v6->m_inactiveSimulationIslands.m_size);
-  v31 = 0;
+    (hkProcess *const *)world->m_inactiveSimulationIslands.m_data,
+    world->m_inactiveSimulationIslands.m_size);
+  v30 = 0;
   if ( v27.m_size > 0 )
   {
     v11 = 0i64;
@@ -80,16 +76,16 @@ void __fastcall hkpSaveContactPointsUtil::saveContactPoints(hkpSaveContactPoints
     do
     {
       v12 = *(__int64 *)((char *)v27.m_data + v11);
-      v28 = v12 + 152;
-      v29 = v12 + 120;
+      v28[0] = v12 + 152;
+      v28[1] = v12 + 120;
       v13 = 0i64;
       v24 = 0i64;
       do
       {
-        v14 = (unsigned __int16 *)*(&v28 + v13);
+        v14 = (unsigned __int16 *)v28[v13];
         v15 = 0;
         v16 = *((_DWORD *)v14 + 4);
-        v26 = (unsigned __int16 *)*(&v28 + v13);
+        v26 = v14;
         if ( v16 > 0 )
         {
           v17 = 0i64;
@@ -99,16 +95,16 @@ void __fastcall hkpSaveContactPointsUtil::saveContactPoints(hkpSaveContactPoints
             v17 += 8i64;
             v18 = *(hkpAgentNnEntry **)(v17 + *((_QWORD *)v14 + 1) - 8);
             if ( v15 == v16 )
-              v19 = (unsigned __int64)v18 + *v14;
+              v19 = (hkpAgentNnEntry *)((char *)v18 + *v14);
             else
-              v19 = (unsigned __int64)&v18[24];
-            if ( (unsigned __int64)v18 < v19 )
+              v19 = v18 + 24;
+            if ( v18 < v19 )
             {
               do
               {
-                v20 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-                v21 = (hkpSerializedAgentNnEntry *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v20[11] + 8i64))(
-                                                     v20[11],
+                Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+                v21 = (hkpSerializedAgentNnEntry *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(
+                                                     Value[11],
                                                      400i64);
                 if ( v21 )
                 {
@@ -119,12 +115,17 @@ void __fastcall hkpSaveContactPointsUtil::saveContactPoints(hkpSaveContactPoints
                 {
                   v23 = 0i64;
                 }
-                if ( hkpSaveContactPointsUtil::serializeCollisionEntry(&result, inputa, v18, v6->m_collisionInput, v23)->m_enum == HK_SUCCESS )
-                  hkpPhysicsSystemWithContacts::addContact(v5, v23);
-                hkReferencedObject::removeReference((hkReferencedObject *)&v23->vfptr);
+                if ( hkpSaveContactPointsUtil::serializeCollisionEntry(
+                       &result,
+                       input,
+                       v18,
+                       world->m_collisionInput,
+                       v23)->m_enum == HK_SUCCESS )
+                  hkpPhysicsSystemWithContacts::addContact(sys, v23);
+                hkReferencedObject::removeReference(v23);
                 v18 = (hkpAgentNnEntry *)((char *)v18 + (unsigned __int8)v18->m_size);
               }
-              while ( (unsigned __int64)v18 < v19 );
+              while ( v18 < v19 );
               v14 = v26;
             }
             v16 = *((_DWORD *)v14 + 4);
@@ -136,86 +137,84 @@ void __fastcall hkpSaveContactPointsUtil::saveContactPoints(hkpSaveContactPoints
       }
       while ( v13 < 2 );
       v11 = v25 + 8;
-      ++v31;
+      ++v30;
       v25 += 8i64;
     }
-    while ( v31 < v27.m_size );
+    while ( v30 < v27.m_size );
   }
   v27.m_size = 0;
   if ( v27.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       v27.m_data,
       8 * v27.m_capacityAndFlags);
 }
 
 // File Line: 74
 // RVA: 0xE210A0
-void __fastcall hkpSaveContactPointsUtil::saveContactPoints(hkpSaveContactPointsUtil::SavePointsInput *input, hkpEntity **entities, int numEntities, hkpPhysicsSystemWithContacts *sys)
+void __fastcall hkpSaveContactPointsUtil::saveContactPoints(
+        hkpSaveContactPointsUtil::SavePointsInput *input,
+        hkpEntity **entities,
+        int numEntities,
+        hkpPhysicsSystemWithContacts *sys)
 {
   __int64 v4; // rsi
-  hkpPhysicsSystemWithContacts *v5; // r15
-  hkpWorld *v6; // r13
+  hkpWorld *m_world; // r13
   __int64 v7; // rbx
   hkpEntity **v8; // rdi
-  hkpSaveContactPointsUtil::SavePointsInput *v9; // r12
   __int64 v10; // rbp
-  hkpLinkedCollidable *v11; // rcx
+  hkpLinkedCollidable *p_m_collidable; // rcx
   int v12; // edi
-  hkpLinkedCollidable::CollisionEntry *v13; // r14
-  int v14; // eax
-  _QWORD **v15; // rax
+  hkpLinkedCollidable::CollisionEntry *m_data; // r14
+  int Key; // eax
+  _QWORD **Value; // rax
   hkpSerializedAgentNnEntry *v16; // rax
   hkpSerializedAgentNnEntry *v17; // rax
   hkpSerializedAgentNnEntry *serializedEntryOut; // rbx
   __int64 i; // [rsp+30h] [rbp-68h]
-  hkArray<hkpLinkedCollidable::CollisionEntry,hkContainerHeapAllocator> entries; // [rsp+38h] [rbp-60h]
-  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > v21; // [rsp+48h] [rbp-50h]
-  hkpEntity **v22; // [rsp+A8h] [rbp+10h]
-  hkResult result; // [rsp+B0h] [rbp+18h]
+  hkArray<hkpLinkedCollidable::CollisionEntry,hkContainerHeapAllocator> entries; // [rsp+38h] [rbp-60h] BYREF
+  AMD_HD3D v21[2]; // [rsp+48h] [rbp-50h] BYREF
+  hkResult result; // [rsp+B0h] [rbp+18h] BYREF
 
-  v22 = entities;
   v4 = 0i64;
-  v5 = sys;
-  v6 = (*entities)->m_world;
+  m_world = (*entities)->m_world;
   v7 = numEntities;
   v8 = entities;
-  v21.m_elem = 0i64;
-  v21.m_numElems = 0;
-  v21.m_hashMod = -1;
-  v9 = input;
+  *(_QWORD *)&v21[0].mEnableStereo = 0i64;
+  v21[0].mWidth = 0;
+  v21[0].mHeight = -1;
   if ( numEntities )
     hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::reserve(
-      &v21,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
+      (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)v21,
+      &hkContainerHeapAllocator::s_alloc,
       numEntities);
   v10 = 0i64;
-  for ( i = v7; v10 < v7; entries.m_capacityAndFlags = 2147483648 )
+  for ( i = v7; v10 < v7; entries.m_capacityAndFlags = 0x80000000 )
   {
     hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::insert(
-      &v21,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
+      (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)v21,
+      &hkContainerHeapAllocator::s_alloc,
       (unsigned __int64)&v8[v10]->m_collidable,
       0i64);
-    v11 = &v8[v10]->m_collidable;
+    p_m_collidable = &v8[v10]->m_collidable;
     entries.m_data = 0i64;
     entries.m_size = 0;
-    entries.m_capacityAndFlags = 2147483648;
-    hkpLinkedCollidable::getCollisionEntriesSorted(v11, &entries);
+    entries.m_capacityAndFlags = 0x80000000;
+    hkpLinkedCollidable::getCollisionEntriesSorted(p_m_collidable, &entries);
     v12 = 0;
     if ( entries.m_size > 0 )
     {
       do
       {
-        v13 = entries.m_data;
-        v14 = (unsigned __int64)hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::findKey(
-                                  &v21,
-                                  (unsigned __int64)entries.m_data[v4].m_partner);
-        if ( v14 > v21.m_hashMod )
+        m_data = entries.m_data;
+        Key = (unsigned int)hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::findKey(
+                              (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)v21,
+                              (unsigned __int64)entries.m_data[v4].m_partner);
+        if ( Key > (int)v21[0].mHeight )
         {
-          v15 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-          v16 = (hkpSerializedAgentNnEntry *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v15[11] + 8i64))(
-                                               v15[11],
+          Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+          v16 = (hkpSerializedAgentNnEntry *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(
+                                               Value[11],
                                                400i64);
           if ( v16 )
           {
@@ -228,12 +227,12 @@ void __fastcall hkpSaveContactPointsUtil::saveContactPoints(hkpSaveContactPoints
           }
           if ( hkpSaveContactPointsUtil::serializeCollisionEntry(
                  &result,
-                 v9,
-                 v13[v4].m_agentEntry,
-                 v6->m_collisionInput,
+                 input,
+                 m_data[v4].m_agentEntry,
+                 m_world->m_collisionInput,
                  serializedEntryOut)->m_enum == HK_SUCCESS )
-            hkpPhysicsSystemWithContacts::addContact(v5, serializedEntryOut);
-          hkReferencedObject::removeReference((hkReferencedObject *)&serializedEntryOut->vfptr);
+            hkpPhysicsSystemWithContacts::addContact(sys, serializedEntryOut);
+          hkReferencedObject::removeReference(serializedEntryOut);
         }
         ++v12;
         ++v4;
@@ -245,155 +244,147 @@ void __fastcall hkpSaveContactPointsUtil::saveContactPoints(hkpSaveContactPoints
     entries.m_size = 0;
     if ( entries.m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+        &hkContainerHeapAllocator::s_alloc,
         entries.m_data,
         16 * entries.m_capacityAndFlags);
-    v8 = v22;
+    v8 = entities;
     ++v10;
     entries.m_data = 0i64;
   }
   hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::clearAndDeallocate(
-    &v21,
-    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr);
-  _((AMD_HD3D *)&v21);
+    (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)v21,
+    &hkContainerHeapAllocator::s_alloc);
+  _(v21);
 }
 
 // File Line: 109
 // RVA: 0xE21280
-void __fastcall hkpSaveContactPointsUtil::saveContactPoints(hkpSaveContactPointsUtil::SavePointsInput *input, hkpAgentNnEntry **entries, int numEntries, hkpPhysicsSystemWithContacts *sys)
+void __fastcall hkpSaveContactPointsUtil::saveContactPoints(
+        hkpSaveContactPointsUtil::SavePointsInput *input,
+        hkpAgentNnEntry **entries,
+        int numEntries,
+        hkpPhysicsSystemWithContacts *sys)
 {
-  hkpPhysicsSystemWithContacts *v4; // rbp
-  hkpAgentNnEntry **v5; // r14
   hkpLinkedCollidable *v6; // r10
-  hkpSaveContactPointsUtil::SavePointsInput *v7; // r12
   char *v8; // rax
   __int64 v9; // r15
   __int64 v10; // rdi
-  __int64 v11; // rsi
-  _QWORD **v12; // rax
+  __int64 i; // rsi
+  _QWORD **Value; // rax
   hkpSerializedAgentNnEntry *v13; // rax
   hkpSerializedAgentNnEntry *v14; // rax
   hkpSerializedAgentNnEntry *serializedEntryOut; // rbx
-  hkResult result; // [rsp+70h] [rbp+18h]
+  hkResult result; // [rsp+70h] [rbp+18h] BYREF
 
-  v4 = sys;
-  v5 = entries;
   v6 = (*entries)->m_collidable[0];
-  v7 = input;
   if ( v6->m_broadPhaseHandle.m_type == 1 )
     v8 = (char *)v6 + v6->m_ownerOffset;
   else
     v8 = 0i64;
   v9 = *((_QWORD *)v8 + 2);
   v10 = 0i64;
-  v11 = numEntries;
-  if ( numEntries > 0 )
+  for ( i = numEntries; v10 < i; ++v10 )
   {
-    do
+    Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    v13 = (hkpSerializedAgentNnEntry *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(
+                                         Value[11],
+                                         400i64);
+    if ( v13 )
     {
-      v12 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v13 = (hkpSerializedAgentNnEntry *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v12[11] + 8i64))(
-                                           v12[11],
-                                           400i64);
-      if ( v13 )
-      {
-        hkpSerializedAgentNnEntry::hkpSerializedAgentNnEntry(v13);
-        serializedEntryOut = v14;
-      }
-      else
-      {
-        serializedEntryOut = 0i64;
-      }
-      if ( hkpSaveContactPointsUtil::serializeCollisionEntry(
-             &result,
-             v7,
-             v5[v10],
-             *(hkpProcessCollisionInput **)(v9 + 184),
-             serializedEntryOut)->m_enum == HK_SUCCESS )
-        hkpPhysicsSystemWithContacts::addContact(v4, serializedEntryOut);
-      hkReferencedObject::removeReference((hkReferencedObject *)&serializedEntryOut->vfptr);
-      ++v10;
+      hkpSerializedAgentNnEntry::hkpSerializedAgentNnEntry(v13);
+      serializedEntryOut = v14;
     }
-    while ( v10 < v11 );
+    else
+    {
+      serializedEntryOut = 0i64;
+    }
+    if ( hkpSaveContactPointsUtil::serializeCollisionEntry(
+           &result,
+           input,
+           entries[v10],
+           *(hkpProcessCollisionInput **)(v9 + 184),
+           serializedEntryOut)->m_enum == HK_SUCCESS )
+      hkpPhysicsSystemWithContacts::addContact(sys, serializedEntryOut);
+    hkReferencedObject::removeReference(serializedEntryOut);
   }
 }
 
 // File Line: 152
 // RVA: 0xE22B90
-unsigned __int64 __fastcall `anonymous namespace::hkEntitySelectorListed::isEntityOk(hkEntitySelectorListed *this, hkpEntity *entity)
+unsigned __int64 __fastcall `anonymous namespace::hkEntitySelectorListed::isEntityOk(
+        hkEntitySelectorListed *this,
+        hkpEntity *entity)
 {
   return hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::getWithDefault(
-           (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&this->m_map.m_elem,
+           &this->m_map,
            (unsigned __int64)entity,
            0i64);
 }
 
 // File Line: 164
 // RVA: 0xE22BA0
-void __fastcall hkpSaveContactPointsUtil::loadContactPointsInternal(hkpSaveContactPointsUtil::LoadPointsInput *input, hkpPhysicsSystemWithContacts *sys, hkpWorld *world, hkpSaveContactPointsUtil::EntitySelector *selector)
+void __fastcall hkpSaveContactPointsUtil::loadContactPointsInternal(
+        hkpSaveContactPointsUtil::LoadPointsInput *input,
+        hkpPhysicsSystemWithContacts *sys,
+        hkpWorld *world,
+        hkpSaveContactPointsUtil::EntitySelector *selector)
 {
   hkpSaveContactPointsUtil::EntitySelector *v4; // r13
-  hkpWorld *v5; // rsi
-  int v6; // er15
-  hkpPhysicsSystemWithContacts *v7; // rdi
+  int v6; // r15d
   hkpSaveContactPointsUtil::LoadPointsInput *v8; // r14
   __int64 i; // r12
   hkpSerializedAgentNnEntry *v10; // rbx
-  hkpEntity *v11; // rbp
-  __int64 v12; // r14
+  hkpRigidBody *m_bodyA; // rbp
+  __int64 m_bodyB; // r14
   hkpAgentNnEntry *entry; // r13
-  hkpEntity *entityB; // ST20_8
-  __int64 v15; // rax
-  bool v16; // zf
-  hkpSaveContactPointsUtil::LoadPointsInput *inputa; // [rsp+80h] [rbp+8h]
-  hkResult result; // [rsp+88h] [rbp+10h]
+  __int64 v14; // rax
+  bool v15; // zf
+  hkpLinkedCollidable *entityB; // [rsp+20h] [rbp-58h]
+  hkResult result; // [rsp+88h] [rbp+10h] BYREF
   hkpSaveContactPointsUtil::EntitySelector *v19; // [rsp+98h] [rbp+20h]
 
   v19 = selector;
-  inputa = input;
   ++world->m_criticalOperationsLockCount;
   v4 = selector;
-  v5 = world;
   v6 = sys->m_contacts.m_size - 1;
-  v7 = sys;
   v8 = input;
   for ( i = v6; i >= 0; --i )
   {
-    v10 = v7->m_contacts.m_data[i];
+    v10 = sys->m_contacts.m_data[i];
     if ( v10->m_useEntityIds.m_bool )
     {
-      v11 = v8->m_getEntityFromId(v10->m_bodyAId);
-      v12 = (__int64)v8->m_getEntityFromId(v10->m_bodyBId);
+      m_bodyA = (hkpRigidBody *)v8->m_getEntityFromId(v10->m_bodyAId);
+      m_bodyB = (__int64)v8->m_getEntityFromId(v10->m_bodyBId);
     }
     else
     {
-      v11 = v10->m_bodyA;
-      v12 = (__int64)v10->m_bodyB;
+      m_bodyA = (hkpRigidBody *)v10->m_bodyA;
+      m_bodyB = (__int64)v10->m_bodyB;
     }
-    if ( v11 && v12 && (v4->vfptr->isEntityOk(v4, v11) || v4->vfptr->isEntityOk(v4, (hkpEntity *)v12)) )
+    if ( m_bodyA && m_bodyB && (v4->vfptr->isEntityOk(v4, m_bodyA) || v4->vfptr->isEntityOk(v4, (hkpEntity *)m_bodyB)) )
     {
-      entry = hkAgentNnMachine_FindAgent(&v11->m_collidable, (hkpLinkedCollidable *)(v12 + 32));
+      entry = hkAgentNnMachine_FindAgent(&m_bodyA->m_collidable, (hkpLinkedCollidable *)(m_bodyB + 32));
       if ( entry )
       {
         if ( *(_DWORD *)v10->m_endianCheckBuffer != 259 )
-          hkpSaveContactPointsEndianUtil::swapEndianTypeInCollisionEntry(v5->m_collisionInput, v10);
-        entityB = (hkpEntity *)v12;
-        v8 = inputa;
+          hkpSaveContactPointsEndianUtil::swapEndianTypeInCollisionEntry(world->m_collisionInput, v10);
+        entityB = (hkpLinkedCollidable *)m_bodyB;
+        v8 = input;
         hkpSaveContactPointsUtil::deserializeCollisionEntry(
           &result,
-          inputa,
+          input,
           v10,
-          v11,
+          m_bodyA,
           entityB,
-          v5->m_collisionInput,
+          world->m_collisionInput,
           entry);
-        if ( inputa->m_removeSerializedAgentsWhenLoaded && result.m_enum == 1 )
+        if ( input->m_removeSerializedAgentsWhenLoaded && result.m_enum == HK_FAILURE )
         {
-          hkReferencedObject::removeReference((hkReferencedObject *)&v7->m_contacts.m_data[i]->vfptr);
-          v15 = --v7->m_contacts.m_size;
+          hkReferencedObject::removeReference(sys->m_contacts.m_data[i]);
+          v14 = --sys->m_contacts.m_size;
           v4 = v19;
-          if ( (_DWORD)v15 != v6 )
-            v7->m_contacts.m_data[i] = v7->m_contacts.m_data[v15];
+          if ( (_DWORD)v14 != v6 )
+            sys->m_contacts.m_data[i] = sys->m_contacts.m_data[v14];
         }
         else
         {
@@ -403,28 +394,31 @@ void __fastcall hkpSaveContactPointsUtil::loadContactPointsInternal(hkpSaveConta
       }
       v4 = v19;
     }
-    v8 = inputa;
+    v8 = input;
 LABEL_18:
     --v6;
   }
-  v16 = v5->m_criticalOperationsLockCount-- == 1;
-  if ( v16 && !v5->m_blockExecutingPendingOperations.m_bool )
+  v15 = world->m_criticalOperationsLockCount-- == 1;
+  if ( v15 && !world->m_blockExecutingPendingOperations.m_bool )
   {
-    if ( v5->m_pendingOperationsCount )
-      hkpWorld::internal_executePendingOperations(v5);
-    if ( v5->m_pendingOperationQueueCount == 1 )
+    if ( world->m_pendingOperationsCount )
+      hkpWorld::internal_executePendingOperations(world);
+    if ( world->m_pendingOperationQueueCount == 1 )
     {
-      if ( v5->m_pendingBodyOperationsCount )
-        hkpWorld::internal_executePendingBodyOperations(v5);
+      if ( world->m_pendingBodyOperationsCount )
+        hkpWorld::internal_executePendingBodyOperations(world);
     }
   }
 }
 
 // File Line: 222
 // RVA: 0xE21360
-void __fastcall hkpSaveContactPointsUtil::loadContactPoints(hkpSaveContactPointsUtil::LoadPointsInput *input, hkpPhysicsSystemWithContacts *sys, hkpWorld *world)
+void __fastcall hkpSaveContactPointsUtil::loadContactPoints(
+        hkpSaveContactPointsUtil::LoadPointsInput *input,
+        hkpPhysicsSystemWithContacts *sys,
+        hkpWorld *world)
 {
-  hkpSaveContactPointsUtil::EntitySelector selector; // [rsp+48h] [rbp+20h]
+  hkpSaveContactPointsUtil::EntitySelector selector; // [rsp+48h] [rbp+20h] BYREF
 
   selector.vfptr = (hkpSaveContactPointsUtil::EntitySelectorVtbl *)&`anonymous namespace::hkEntitySelectorAll::`vftable;
   hkpSaveContactPointsUtil::loadContactPointsInternal(input, sys, world, &selector);
@@ -432,145 +426,139 @@ void __fastcall hkpSaveContactPointsUtil::loadContactPoints(hkpSaveContactPoints
 
 // File Line: 228
 // RVA: 0xE21390
-void __fastcall hkpSaveContactPointsUtil::loadContactPoints(hkpSaveContactPointsUtil::LoadPointsInput *input, hkpPhysicsSystemWithContacts *sys, hkpEntity **entities, int numEntities)
+void __fastcall hkpSaveContactPointsUtil::loadContactPoints(
+        hkpSaveContactPointsUtil::LoadPointsInput *input,
+        hkpPhysicsSystemWithContacts *sys,
+        hkpEntity **entities,
+        int numEntities)
 {
-  hkpSaveContactPointsUtil::LoadPointsInput *v4; // r14
   __int64 v5; // rbx
-  hkpWorld *v6; // r15
+  hkpWorld *m_world; // r15
   __int64 v7; // rdi
-  hkpEntity **v8; // rsi
-  hkpPhysicsSystemWithContacts *v9; // rbp
-  hkpSaveContactPointsUtil::EntitySelector selector; // [rsp+20h] [rbp-38h]
-  hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > v11; // [rsp+28h] [rbp-30h]
+  hkpSaveContactPointsUtil::EntitySelector selector; // [rsp+20h] [rbp-38h] BYREF
+  AMD_HD3D v11; // [rsp+28h] [rbp-30h] BYREF
 
-  v4 = input;
   v5 = 0i64;
-  v6 = (*entities)->m_world;
+  m_world = (*entities)->m_world;
   selector.vfptr = (hkpSaveContactPointsUtil::EntitySelectorVtbl *)&`anonymous namespace::hkEntitySelectorListed::`vftable;
   v7 = numEntities;
-  v8 = entities;
-  v9 = sys;
-  v11.m_elem = 0i64;
-  v11.m_numElems = 0;
-  v11.m_hashMod = -1;
-  hkMultiMap<unsigned __int64,unsigned __int64,hkMultiMapOperations<unsigned __int64>,hkContainerHeapAllocator>::clear(&v11);
+  *(_QWORD *)&v11.mEnableStereo = 0i64;
+  v11.mWidth = 0;
+  v11.mHeight = -1;
+  hkMultiMap<unsigned __int64,unsigned __int64,hkMultiMapOperations<unsigned __int64>,hkContainerHeapAllocator>::clear((hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&v11);
   hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::reserve(
-    &v11,
-    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
+    (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&v11,
+    &hkContainerHeapAllocator::s_alloc,
     v7);
   if ( v7 > 0 )
   {
     do
       hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::insert(
-        &v11,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        (unsigned __int64)v8[v5++],
+        (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&v11,
+        &hkContainerHeapAllocator::s_alloc,
+        (unsigned __int64)entities[v5++],
         1ui64);
     while ( v5 < v7 );
   }
-  hkpSaveContactPointsUtil::loadContactPointsInternal(v4, v9, v6, &selector);
+  hkpSaveContactPointsUtil::loadContactPointsInternal(input, sys, m_world, &selector);
   hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::clearAndDeallocate(
-    &v11,
-    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr);
-  _((AMD_HD3D *)&v11);
+    (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&v11,
+    &hkContainerHeapAllocator::s_alloc);
+  _(&v11);
 }
 
 // File Line: 239
 // RVA: 0xE21470
-hkResult *__fastcall hkpSaveContactPointsUtil::serializeCollisionEntry(hkResult *result, hkpSaveContactPointsUtil::SavePointsInput *input, hkpAgentNnEntry *entry, hkpProcessCollisionInput *collisionInput, hkpSerializedAgentNnEntry *serializedEntryOut)
+hkResult *__fastcall hkpSaveContactPointsUtil::serializeCollisionEntry(
+        hkResult *result,
+        hkpSaveContactPointsUtil::SavePointsInput *input,
+        hkpAgentNnEntry *entry,
+        hkpProcessCollisionInput *collisionInput,
+        hkpSerializedAgentNnEntry *serializedEntryOut)
 {
-  hkResult *v5; // rdi
-  hkpProcessCollisionInput *v6; // rsi
-  hkpAgentNnEntry *v7; // rbp
-  hkpSaveContactPointsUtil::SavePointsInput *v8; // r13
   hkpSerializedAgentNnEntry *v9; // rbx
-  int v10; // er8
-  hkpContactMgr *v11; // r14
-  int v12; // er15
+  int v10; // r8d
+  hkpContactMgr *m_contactMgr; // r14
+  int vfptr; // r15d
   int v13; // eax
   int v14; // eax
-  int v15; // er9
+  int v15; // r9d
   __int64 v16; // rdx
-  int v17; // er8
+  int v17; // r8d
   char v18; // al
   __int64 v19; // rsi
-  int v20; // er15
+  int v20; // r15d
   int v21; // eax
   int v22; // eax
-  int v23; // er9
-  int v24; // er15
+  int v23; // r9d
+  int v24; // r15d
   int v25; // eax
   int v26; // eax
-  int v27; // er9
+  int v27; // r9d
   __int64 v28; // rcx
   hkpLinkedCollidable *v29; // rax
-  hkReferencedObject *v30; // rcx
+  hkpEntity *v30; // rcx
   hkpLinkedCollidable *v31; // rax
   hkpEntity *v32; // rsi
-  bool v33; // al
-  hkResult *v34; // rax
-  int n; // [rsp+40h] [rbp-38h]
-  hkResult resulta; // [rsp+44h] [rbp-34h]
-  hkpAgent1nTrack *agent1nTrackOut; // [rsp+48h] [rbp-30h]
-  hkpSerializedAgentNnEntry::SerializedAgentType agentTypeOut; // [rsp+90h] [rbp+18h]
+  bool m_useEntityIds; // al
+  int n; // [rsp+40h] [rbp-38h] BYREF
+  hkResult resulta; // [rsp+44h] [rbp-34h] BYREF
+  hkpAgent1nTrack *agent1nTrackOut; // [rsp+48h] [rbp-30h] BYREF
+  hkpSerializedAgentNnEntry::SerializedAgentType agentTypeOut; // [rsp+90h] [rbp+18h] BYREF
 
-  v5 = result;
-  v6 = collisionInput;
-  v7 = entry;
-  v8 = input;
-  if ( ((unsigned int (*)(void))entry->m_contactMgr->vfptr[6].__first_virtual_table_function__)()
-    || !*(_WORD *)(*(_QWORD *)&v7->m_contactMgr[4].m_memSizeAndFlags + 4i64) )
+  if ( ((unsigned int (__fastcall *)(hkpContactMgr *))entry->m_contactMgr->vfptr[6].__first_virtual_table_function__)(entry->m_contactMgr)
+    || !*(_WORD *)(*(_QWORD *)&entry->m_contactMgr[4].m_memSizeAndFlags + 4i64) )
   {
-    v5->m_enum = 1;
-    v34 = v5;
+    result->m_enum = HK_FAILURE;
+    return result;
   }
   else
   {
     v9 = serializedEntryOut;
     n = -1;
-    agentTypeOut = 0;
+    agentTypeOut = INVALID_AGENT_TYPE;
     if ( hkpSaveContactPointsUtil::serializeEntry(
            &resulta,
-           (hkpAgentEntry *)&v7->m_streamCommand,
+           entry,
            (hkBool)1,
-           v6,
+           collisionInput,
            &n,
            &agentTypeOut,
            &agent1nTrackOut,
            &serializedEntryOut->m_trackInfo)->m_enum )
     {
-      v5->m_enum = 1;
+      result->m_enum = HK_FAILURE;
     }
     else
     {
       v10 = n;
       v9->m_agentType.m_storage = agentTypeOut;
       if ( v10 )
-        hkString::memCpy(v9->m_nnEntryData, v7, v10);
-      v11 = v7->m_contactMgr;
-      v12 = (int)v11[3].vfptr;
+        hkString::memCpy(v9->m_nnEntryData, entry, v10);
+      m_contactMgr = entry->m_contactMgr;
+      vfptr = (int)m_contactMgr[3].vfptr;
       v13 = v9->m_cpIdMgr.m_capacityAndFlags & 0x3FFFFFFF;
-      if ( v13 < v12 )
+      if ( v13 < vfptr )
       {
         v14 = 2 * v13;
-        v15 = (int)v11[3].vfptr;
-        if ( v12 < v14 )
+        v15 = (int)m_contactMgr[3].vfptr;
+        if ( vfptr < v14 )
           v15 = v14;
         hkArrayUtil::_reserve(
           (hkResult *)&agentTypeOut,
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-          &v9->m_cpIdMgr,
+          &hkContainerHeapAllocator::s_alloc,
+          (const void **)&v9->m_cpIdMgr.m_data,
           v15,
           1);
       }
       v16 = 0i64;
       v17 = 0;
-      for ( v9->m_cpIdMgr.m_size = v12; v17 < v9->m_cpIdMgr.m_size; v9->m_cpIdMgr.m_data[v16 - 1] = v18 )
+      for ( v9->m_cpIdMgr.m_size = vfptr; v17 < v9->m_cpIdMgr.m_size; v9->m_cpIdMgr.m_data[v16++] = v18 )
       {
         ++v17;
-        v18 = *(_BYTE *)(v16++ + *(_QWORD *)&v11[2].m_type);
+        v18 = *(_BYTE *)(v16 + *(_QWORD *)&m_contactMgr[2].m_type);
       }
-      v19 = *(_QWORD *)&v11[4].m_memSizeAndFlags;
+      v19 = *(_QWORD *)&m_contactMgr[4].m_memSizeAndFlags;
       v20 = *(unsigned __int16 *)(v19 + 4) * *(unsigned __int8 *)(v19 + 10);
       v21 = v9->m_propertiesStream.m_capacityAndFlags & 0x3FFFFFFF;
       if ( v21 < v20 )
@@ -581,8 +569,8 @@ hkResult *__fastcall hkpSaveContactPointsUtil::serializeCollisionEntry(hkResult 
           v23 = v22;
         hkArrayUtil::_reserve(
           (hkResult *)&agentTypeOut,
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-          &v9->m_propertiesStream,
+          &hkContainerHeapAllocator::s_alloc,
+          (const void **)&v9->m_propertiesStream.m_data,
           v23,
           1);
       }
@@ -601,14 +589,14 @@ hkResult *__fastcall hkpSaveContactPointsUtil::serializeCollisionEntry(hkResult 
           v27 = v26;
         hkArrayUtil::_reserve(
           (hkResult *)&agentTypeOut,
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-          &v9->m_contactPoints,
+          &hkContainerHeapAllocator::s_alloc,
+          (const void **)&v9->m_contactPoints.m_data,
           v27,
           32);
       }
       v9->m_contactPoints.m_size = v24;
       hkString::memCpy(v9->m_contactPoints.m_data, (const void *)(v19 + 48), 32 * *(unsigned __int16 *)(v19 + 4));
-      v28 = *(_QWORD *)&v11[4].m_memSizeAndFlags;
+      v28 = *(_QWORD *)&m_contactMgr[4].m_memSizeAndFlags;
       v9->m_atom.m_type.m_storage = *(_WORD *)v28;
       v9->m_atom.m_sizeOfAllAtoms = *(_WORD *)(v28 + 2);
       v9->m_atom.m_numContactPoints = *(_WORD *)(v28 + 4);
@@ -628,88 +616,91 @@ hkResult *__fastcall hkpSaveContactPointsUtil::serializeCollisionEntry(hkResult 
       v9->m_atom.m_info.m_data[1] = *(float *)(v28 + 36);
       v9->m_atom.m_info.m_data[2] = *(float *)(v28 + 40);
       v9->m_atom.m_info.m_data[3] = *(float *)(v28 + 44);
-      v29 = v7->m_collidable[0];
+      v29 = entry->m_collidable[0];
       if ( v29->m_broadPhaseHandle.m_type == 1 )
-        v30 = (hkReferencedObject *)((char *)v29 + v29->m_ownerOffset);
+        v30 = (hkpEntity *)((char *)v29 + v29->m_ownerOffset);
       else
         v30 = 0i64;
-      v31 = v7->m_collidable[1];
+      v31 = entry->m_collidable[1];
       if ( v31->m_broadPhaseHandle.m_type == 1 )
         v32 = (hkpEntity *)((char *)v31 + v31->m_ownerOffset);
       else
         v32 = 0i64;
-      v33 = v8->m_useEntityIds;
-      v9->m_useEntityIds.m_bool = v8->m_useEntityIds;
-      if ( v33 )
+      m_useEntityIds = input->m_useEntityIds;
+      v9->m_useEntityIds.m_bool = input->m_useEntityIds;
+      if ( m_useEntityIds )
       {
-        v9->m_bodyAId = v8->m_getIdForEntity((hkpEntity *)v30);
-        v9->m_bodyBId = v8->m_getIdForEntity(v32);
+        v9->m_bodyAId = input->m_getIdForEntity(v30);
+        v9->m_bodyBId = input->m_getIdForEntity(v32);
       }
       else
       {
-        v9->m_bodyA = (hkpEntity *)v30;
+        v9->m_bodyA = v30;
         v9->m_bodyB = v32;
         hkReferencedObject::addReference(v30);
-        hkReferencedObject::addReference((hkReferencedObject *)&v9->m_bodyB->vfptr);
+        hkReferencedObject::addReference(v9->m_bodyB);
       }
-      v5->m_enum = 0;
+      result->m_enum = HK_SUCCESS;
     }
-    v34 = v5;
+    return result;
   }
-  return v34;
 }
 
 // File Line: 321
 // RVA: 0xE217F0
-hkResult *__fastcall hkpSaveContactPointsUtil::deserializeCollisionEntry(hkResult *result, hkpSaveContactPointsUtil::LoadPointsInput *input, hkpSerializedAgentNnEntry *serializedEntryIn, hkpEntity *entityA, hkpEntity *entityB, hkpProcessCollisionInput *collisionInput, hkpAgentNnEntry *entry)
+hkResult *__fastcall hkpSaveContactPointsUtil::deserializeCollisionEntry(
+        hkResult *result,
+        hkpSaveContactPointsUtil::LoadPointsInput *input,
+        hkpSerializedAgentNnEntry *serializedEntryIn,
+        hkpRigidBody *entityA,
+        hkpLinkedCollidable *entityB,
+        hkpProcessCollisionInput *collisionInput,
+        hkpAgentNnEntry *entry)
 {
-  hkpEntity *v7; // r15
+  hkpRigidBody *v7; // r15
   hkpAgentNnEntry *nnEntry; // rbx
   hkpSimulationIsland *constraintOwner; // rax
-  hkpContactMgr *v10; // rsi
-  hkpSerializedAgentNnEntry *v11; // r13
+  hkpContactMgr *m_contactMgr; // rsi
   hkpSimulationIsland *v12; // r8
-  hkpEntity *v13; // r14
-  hkResult *v14; // r12
   hkpProcessCollisionInput *v15; // rdi
   hkpLinkedCollidable *v16; // rcx
   hkpEntity *v17; // rax
   unsigned __int16 v18; // cx
   hkBaseObjectVtbl *v19; // rcx
-  hkBaseObjectVtbl *v20; // rdx
-  void (__fastcall *v21)(hkBaseObject *); // rcx
-  int v22; // er12
+  hkBaseObjectVtbl *vfptr; // rdx
+  void (__fastcall *first_virtual_table_function)(hkBaseObject *); // rcx
+  int m_size; // r12d
   int v23; // eax
   int v24; // eax
-  int v25; // er9
-  int v26; // er12
+  int v25; // r9d
+  int v26; // r12d
   __int64 v27; // rdx
-  int i; // er8
+  int i; // r8d
   char v29; // al
   hkpLinkedCollidable *v30; // rax
   char *v31; // rbx
   hkpWorld *v32; // rbx
   __int64 v33; // r10
-  signed int v34; // ecx
-  int v35; // er8
-  int v36; // er9
+  int v34; // ecx
+  int v35; // r8d
+  int v36; // r9d
   int v37; // edx
   hkBaseObjectVtbl *v38; // rcx
   _DWORD *v39; // rax
   hkBaseObjectVtbl *v40; // rcx
   __int64 v41; // rdi
   unsigned int v42; // ebx
-  _QWORD **v43; // rax
-  int v44; // ebx
-  hkpSimpleContactConstraintAtom *v45; // rax
+  _QWORD **Value; // rax
+  int m_numContactPoints; // ebx
+  hkpSimpleContactConstraintAtom *Atom; // rax
   __int64 v46; // rcx
   hkBaseObjectVtbl *v47; // rcx
   __int64 v48; // r8
-  signed int v49; // ecx
-  int v50; // er9
-  int v51; // er10
+  int v49; // ecx
+  int v50; // r9d
+  int v51; // r10d
   int v52; // edx
-  int v53; // er11
+  int v53; // r11d
   _DWORD *v54; // r8
   int v55; // eax
   hkBaseObjectVtbl *v56; // rcx
@@ -717,7 +708,7 @@ hkResult *__fastcall hkpSaveContactPointsUtil::deserializeCollisionEntry(hkResul
   __int64 v58; // r8
   hkpSaveContactPointsUtil::LoadPointsInput *v59; // rbx
   __int64 v60; // rcx
-  signed __int64 v61; // rdx
+  __int64 v61; // rdx
   unsigned int v62; // eax
   hkBaseObjectVtbl *v63; // rax
   int v64; // eax
@@ -725,126 +716,119 @@ hkResult *__fastcall hkpSaveContactPointsUtil::deserializeCollisionEntry(hkResul
   bool v66; // zf
   unsigned __int16 v67; // di
   hkpContactPointProperties *v68; // rbx
-  hkContactPoint *v69; // rax
+  __int64 v69; // rax
   __int64 v70; // rdi
-  __int64 v71; // r13
+  __int64 j; // r13
   unsigned __int16 v72; // r12
   __int64 v73; // rbx
-  hkpGskCache *v74; // rax
-  hkpWorld *v75; // rcx
-  int v76; // er8
-  hkResult *v77; // rax
-  int v78; // [rsp+34h] [rbp-CCh]
+  hkContactPoint *v74; // rax
+  hkpWorld *m_world; // rcx
+  int v76; // r8d
+  __int16 v78; // [rsp+34h] [rbp-CCh]
   __int16 v79; // [rsp+34h] [rbp-CCh]
   __int16 v80; // [rsp+38h] [rbp-C8h]
   __int16 v81; // [rsp+38h] [rbp-C8h]
   __int16 v82; // [rsp+3Ch] [rbp-C4h]
   __int16 v83; // [rsp+3Ch] [rbp-C4h]
-  _WORD *v84; // [rsp+40h] [rbp-C0h]
+  _WORD *v84; // [rsp+40h] [rbp-C0h] BYREF
   int v85; // [rsp+48h] [rbp-B8h]
   int v86; // [rsp+4Ch] [rbp-B4h]
-  hkpContactPointAddedEvent event; // [rsp+50h] [rbp-B0h]
-  __int64 v88; // [rsp+A8h] [rbp-58h]
-  __int64 v89; // [rsp+B0h] [rbp-50h]
-  char v90; // [rsp+C0h] [rbp-40h]
-  __int64 v91; // [rsp+C8h] [rbp-38h]
-  int v92; // [rsp+30F0h] [rbp+2FF0h]
-  __int64 v93; // [rsp+3110h] [rbp+3010h]
-  hkResult *v94; // [rsp+31B0h] [rbp+30B0h]
-  hkpSaveContactPointsUtil::LoadPointsInput *v95; // [rsp+31B8h] [rbp+30B8h]
-  hkpCdBody *v96; // [rsp+31C0h] [rbp+30C0h]
+  hkpContactPointEvent event; // [rsp+50h] [rbp-B0h] BYREF
+  char v88; // [rsp+C0h] [rbp-40h] BYREF
+  __int64 v89; // [rsp+C8h] [rbp-38h]
+  int v90; // [rsp+30F0h] [rbp+2FF0h]
+  __int64 v91; // [rsp+3110h] [rbp+3010h]
+  hkpRigidBody *p_m_collidable; // [rsp+31C0h] [rbp+30C0h]
 
-  v95 = input;
-  v94 = result;
-  v7 = entityB;
+  v7 = (hkpRigidBody *)entityB;
   nnEntry = entry;
   constraintOwner = entityA->m_simulationIsland;
-  v10 = entry->m_contactMgr;
-  v11 = serializedEntryIn;
-  v12 = entityB->m_simulationIsland;
-  v13 = entityA;
-  v14 = result;
+  m_contactMgr = entry->m_contactMgr;
+  v12 = *(hkpSimulationIsland **)&entityB[2].m_broadPhaseHandle.m_type;
   if ( constraintOwner != v12 )
   {
     if ( entityA->m_motion.m_type.m_storage == 5 )
     {
-      constraintOwner = entityB->m_simulationIsland;
+      constraintOwner = *(hkpSimulationIsland **)&entityB[2].m_broadPhaseHandle.m_type;
     }
-    else if ( entityB->m_motion.m_type.m_storage != 5 )
+    else if ( LOBYTE(entityB[2].m_boundingVolumeData.m_childShapeKeys) != 5 )
     {
-      constraintOwner = hkpWorldAgentUtil::getIslandFromAgentEntry(entry, entityA->m_simulationIsland, v12);
+      constraintOwner = hkpWorldAgentUtil::getIslandFromAgentEntry(
+                          (hkpAgentNnSector *)entry,
+                          entityA->m_simulationIsland,
+                          v12);
     }
   }
   v15 = collisionInput;
   if ( hkpSaveContactPointsUtil::destroyOldEntry(
          (hkResult *)&entityB,
-         (hkpSerializedAgentNnEntry::SerializedAgentType)v11->m_agentType.m_storage,
+         (hkpSerializedAgentNnEntry::SerializedAgentType)serializedEntryIn->m_agentType.m_storage,
          collisionInput,
-         (hkpDynamicsContactMgr *)v10,
-         (hkpConstraintOwner *)&constraintOwner->vfptr,
+         (hkpDynamicsContactMgr *)m_contactMgr,
+         constraintOwner,
          nnEntry)->m_enum )
-    goto LABEL_73;
+    goto LABEL_70;
   v16 = nnEntry->m_collidable[0];
   v17 = 0i64;
   if ( v16->m_broadPhaseHandle.m_type == 1 )
     v17 = (hkpEntity *)((char *)v16 + v16->m_ownerOffset);
-  if ( v13 != v17 )
+  if ( entityA != v17 )
   {
     nnEntry->m_collidable[0] = nnEntry->m_collidable[1];
     nnEntry->m_collidable[1] = v16;
     v18 = nnEntry->m_agentIndexOnCollidable[0];
     nnEntry->m_agentIndexOnCollidable[0] = nnEntry->m_agentIndexOnCollidable[1];
     nnEntry->m_agentIndexOnCollidable[1] = v18;
-    v19 = *(hkBaseObjectVtbl **)&v10[6].m_type;
-    *(_QWORD *)&v10[6].m_type = v10[7].vfptr;
-    v10[7].vfptr = v19;
-    v20 = v10[9].vfptr;
-    if ( v20 )
+    v19 = *(hkBaseObjectVtbl **)&m_contactMgr[6].m_type;
+    *(_QWORD *)&m_contactMgr[6].m_type = m_contactMgr[7].vfptr;
+    m_contactMgr[7].vfptr = v19;
+    vfptr = m_contactMgr[9].vfptr;
+    if ( vfptr )
     {
-      v21 = v20->__first_virtual_table_function__;
-      v20->__first_virtual_table_function__ = (void (__fastcall *)(hkBaseObject *))v20[1].__vecDelDtor;
-      v20[1].__vecDelDtor = (void *(__fastcall *)(hkBaseObject *, unsigned int))v21;
-      BYTE2(v10[9].vfptr[2].__first_virtual_table_function__) = BYTE2(v10[9].vfptr[2].__first_virtual_table_function__) == 0;
+      first_virtual_table_function = vfptr->__first_virtual_table_function__;
+      vfptr->__first_virtual_table_function__ = (void (__fastcall *)(hkBaseObject *))vfptr[1].__vecDelDtor;
+      vfptr[1].__vecDelDtor = (void *(__fastcall *)(hkBaseObject *, unsigned int))first_virtual_table_function;
+      BYTE2(m_contactMgr[9].vfptr[2].__first_virtual_table_function__) = BYTE2(m_contactMgr[9].vfptr[2].__first_virtual_table_function__) == 0;
     }
   }
   if ( hkpSaveContactPointsUtil::deserializeEntry(
          (hkResult *)&entityB,
-         v11,
-         (hkpSerializedAgentNnEntry::SerializedAgentType)v11->m_agentType.m_storage,
-         &v11->m_trackInfo,
+         serializedEntryIn,
+         (hkpSerializedAgentNnEntry::SerializedAgentType)serializedEntryIn->m_agentType.m_storage,
+         &serializedEntryIn->m_trackInfo,
          v15,
          nnEntry)->m_enum )
   {
-LABEL_73:
-    v14->m_enum = 1;
-    v77 = v14;
+LABEL_70:
+    result->m_enum = HK_FAILURE;
+    return result;
   }
   else
   {
-    v22 = v11->m_cpIdMgr.m_size;
-    v23 = HIDWORD(v10[3].vfptr) & 0x3FFFFFFF;
-    if ( v23 < v22 )
+    m_size = serializedEntryIn->m_cpIdMgr.m_size;
+    v23 = HIDWORD(m_contactMgr[3].vfptr) & 0x3FFFFFFF;
+    if ( v23 < m_size )
     {
       v24 = 2 * v23;
-      v25 = v11->m_cpIdMgr.m_size;
-      if ( v22 < v24 )
+      v25 = serializedEntryIn->m_cpIdMgr.m_size;
+      if ( m_size < v24 )
         v25 = v24;
       hkArrayUtil::_reserve(
         (hkResult *)&entityB,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        &v10[2].m_type,
+        &hkContainerHeapAllocator::s_alloc,
+        (const void **)&m_contactMgr[2].m_type,
         v25,
         1);
     }
-    LODWORD(v10[3].vfptr) = v22;
+    LODWORD(m_contactMgr[3].vfptr) = m_size;
     v26 = 0;
     v27 = 0i64;
-    for ( i = 0; i < SLODWORD(v10[3].vfptr); *(_BYTE *)(v27 + *(_QWORD *)&v10[2].m_type - 1) = v29 )
+    for ( i = 0; i < SLODWORD(m_contactMgr[3].vfptr); *(_BYTE *)(v27 + *(_QWORD *)&m_contactMgr[2].m_type - 1) = v29 )
     {
       ++i;
-      v29 = v11->m_cpIdMgr.m_data[v27++];
+      v29 = serializedEntryIn->m_cpIdMgr.m_data[v27++];
     }
-    if ( !*(_WORD *)(*(_QWORD *)&v10[4].m_memSizeAndFlags + 4i64) )
+    if ( !*(_WORD *)(*(_QWORD *)&m_contactMgr[4].m_memSizeAndFlags + 4i64) )
     {
       v30 = nnEntry->m_collidable[0];
       if ( v30->m_broadPhaseHandle.m_type == 1 )
@@ -854,38 +838,38 @@ LABEL_73:
       v32 = (hkpWorld *)*((_QWORD *)v31 + 2);
       --v32->m_criticalOperationsLockCount;
       v32->m_blockExecutingPendingOperations.m_bool = 1;
-      hkpWorldOperationUtil::addConstraintImmediately(v32, (hkpConstraintInstance *)&v10[5], DO_FIRE_CALLBACKS);
+      hkpWorldOperationUtil::addConstraintImmediately(v32, (hkpConstraintInstance *)&m_contactMgr[5], DO_FIRE_CALLBACKS);
       ++v32->m_criticalOperationsLockCount;
       v32->m_blockExecutingPendingOperations.m_bool = 0;
     }
-    v33 = *(_QWORD *)&v10[4].m_memSizeAndFlags;
+    v33 = *(_QWORD *)&m_contactMgr[4].m_memSizeAndFlags;
     v34 = *(unsigned __int16 *)(v33 + 4);
     v35 = v34 + 2;
     v36 = v34 + 3;
     v80 = v34 + 2;
     v82 = v34 + 3;
     v37 = 112 * (v34 >> 1) + 48 * ((*(_WORD *)(v33 + 4) & 1) + 3);
-    v78 = 112 * (v34 >> 1) + 48 * ((*(_WORD *)(v33 + 4) & 1) + 3);
-    if ( v34 >= 2 )
+    v78 = v37;
+    if ( (unsigned int)v34 >= 2 )
     {
       v37 += 48;
       v35 = v34 + 3;
       v36 = v34 + 4;
       v82 = v34 + 4;
-      LOWORD(v78) = v37;
+      v78 = v37;
       v80 = v34 + 3;
     }
-    LODWORD(entityB) = *(signed __int16 *)(v33 + 20) << 16;
+    LODWORD(entityB) = *(__int16 *)(v33 + 20) << 16;
     if ( *(float *)&entityB != 0.0 )
     {
       v37 += 96;
       v35 += 2;
       v36 += 3;
       v82 = v36;
-      LOWORD(v78) = v37;
+      v78 = v37;
       v80 = v35;
     }
-    v38 = v10[9].vfptr;
+    v38 = m_contactMgr[9].vfptr;
     if ( v38 )
     {
       v39 = *(_DWORD **)(*((_QWORD *)&v38->__first_virtual_table_function__
@@ -894,40 +878,40 @@ LABEL_73:
       v39[5] -= v37;
       v39[6] -= v35;
       v39[7] -= v36;
-      v40 = v10[9].vfptr;
+      v40 = m_contactMgr[9].vfptr;
       HIWORD(v40[2].__vecDelDtor) -= v80;
       LOWORD(v40[2].__first_virtual_table_function__) -= v82;
       WORD2(v40[2].__vecDelDtor) -= v78;
     }
-    v41 = *(_QWORD *)&v10[4].m_memSizeAndFlags;
+    v41 = *(_QWORD *)&m_contactMgr[4].m_memSizeAndFlags;
     v42 = atomSizeRoundUp(*(unsigned __int16 *)(v41 + 2));
-    v43 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    (*(void (__fastcall **)(_QWORD *, __int64, _QWORD))(*v43[11] + 16i64))(v43[11], v41, v42);
-    v44 = v11->m_atom.m_numContactPoints;
-    v45 = hkpSimpleContactConstraintAtomUtil::allocateAtom(
-            v44,
-            (unsigned __int8)v11->m_atom.m_numUserDatasForBodyA,
-            (unsigned __int8)v11->m_atom.m_numUserDatasForBodyB,
-            v11->m_atom.m_maxNumContactPoints);
-    *(_QWORD *)&v10[4].m_memSizeAndFlags = v45;
-    v45->m_numContactPoints = v44;
-    v46 = *(_QWORD *)&v10[4].m_memSizeAndFlags;
-    *(_WORD *)(v46 + 16) = v11->m_atom.m_info.m_flags;
-    *(_WORD *)(v46 + 18) = v11->m_atom.m_info.m_biNormalAxis;
-    *(_WORD *)(v46 + 20) = v11->m_atom.m_info.m_rollingFrictionMultiplier.m_value;
-    *(_WORD *)(v46 + 22) = v11->m_atom.m_info.m_internalData1.m_value;
-    *(_WORD *)(v46 + 24) = v11->m_atom.m_info.m_rhsRolling[0].m_value;
-    *(_WORD *)(v46 + 26) = v11->m_atom.m_info.m_rhsRolling[1].m_value;
-    *(float *)(v46 + 28) = v11->m_atom.m_info.m_contactRadius;
-    *(float *)(v46 + 32) = v11->m_atom.m_info.m_data[0];
-    *(float *)(v46 + 36) = v11->m_atom.m_info.m_data[1];
-    *(float *)(v46 + 40) = v11->m_atom.m_info.m_data[2];
-    *(float *)(v46 + 44) = v11->m_atom.m_info.m_data[3];
-    v47 = v10[9].vfptr;
-    v10[4].m_type = v11->m_atom.m_sizeOfAllAtoms;
-    v47[1].__first_virtual_table_function__ = *(void (__fastcall **)(hkBaseObject *))&v10[4].m_memSizeAndFlags;
-    LOWORD(v10[9].vfptr[2].__vecDelDtor) = *(_WORD *)(*(_QWORD *)&v10[4].m_memSizeAndFlags + 2i64);
-    v48 = *(_QWORD *)&v10[4].m_memSizeAndFlags;
+    Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    (*(void (__fastcall **)(_QWORD *, __int64, _QWORD))(*Value[11] + 16i64))(Value[11], v41, v42);
+    m_numContactPoints = serializedEntryIn->m_atom.m_numContactPoints;
+    Atom = hkpSimpleContactConstraintAtomUtil::allocateAtom(
+             m_numContactPoints,
+             (unsigned __int8)serializedEntryIn->m_atom.m_numUserDatasForBodyA,
+             (unsigned __int8)serializedEntryIn->m_atom.m_numUserDatasForBodyB,
+             serializedEntryIn->m_atom.m_maxNumContactPoints);
+    *(_QWORD *)&m_contactMgr[4].m_memSizeAndFlags = Atom;
+    Atom->m_numContactPoints = m_numContactPoints;
+    v46 = *(_QWORD *)&m_contactMgr[4].m_memSizeAndFlags;
+    *(_WORD *)(v46 + 16) = serializedEntryIn->m_atom.m_info.m_flags;
+    *(_WORD *)(v46 + 18) = serializedEntryIn->m_atom.m_info.m_biNormalAxis;
+    *(_WORD *)(v46 + 20) = serializedEntryIn->m_atom.m_info.m_rollingFrictionMultiplier.m_value;
+    *(_WORD *)(v46 + 22) = serializedEntryIn->m_atom.m_info.m_internalData1.m_value;
+    *(_WORD *)(v46 + 24) = serializedEntryIn->m_atom.m_info.m_rhsRolling[0].m_value;
+    *(_WORD *)(v46 + 26) = serializedEntryIn->m_atom.m_info.m_rhsRolling[1].m_value;
+    *(float *)(v46 + 28) = serializedEntryIn->m_atom.m_info.m_contactRadius;
+    *(float *)(v46 + 32) = serializedEntryIn->m_atom.m_info.m_data[0];
+    *(float *)(v46 + 36) = serializedEntryIn->m_atom.m_info.m_data[1];
+    *(float *)(v46 + 40) = serializedEntryIn->m_atom.m_info.m_data[2];
+    *(float *)(v46 + 44) = serializedEntryIn->m_atom.m_info.m_data[3];
+    v47 = m_contactMgr[9].vfptr;
+    m_contactMgr[4].m_type = serializedEntryIn->m_atom.m_sizeOfAllAtoms;
+    v47[1].__first_virtual_table_function__ = *(void (__fastcall **)(hkBaseObject *))&m_contactMgr[4].m_memSizeAndFlags;
+    LOWORD(m_contactMgr[9].vfptr[2].__vecDelDtor) = *(_WORD *)(*(_QWORD *)&m_contactMgr[4].m_memSizeAndFlags + 2i64);
+    v48 = *(_QWORD *)&m_contactMgr[4].m_memSizeAndFlags;
     v49 = *(unsigned __int16 *)(v48 + 4);
     v50 = v49 + 2;
     v51 = v49 + 3;
@@ -936,7 +920,7 @@ LABEL_73:
     v52 = 112 * (v49 >> 1) + 48 * ((*(_WORD *)(v48 + 4) & 1) + 3);
     v79 = 112 * (v49 >> 1) + 48 * ((*(_WORD *)(v48 + 4) & 1) + 3);
     v53 = v52 + 48;
-    if ( v49 >= 2 )
+    if ( (unsigned int)v49 >= 2 )
     {
       v50 = v49 + 3;
       v52 += 48;
@@ -945,7 +929,7 @@ LABEL_73:
       v79 = v53;
       v81 = v49 + 3;
     }
-    LODWORD(entityB) = *(signed __int16 *)(v48 + 20) << 16;
+    LODWORD(entityB) = *(__int16 *)(v48 + 20) << 16;
     if ( *(float *)&entityB != 0.0 )
     {
       v52 += 96;
@@ -956,10 +940,10 @@ LABEL_73:
       v81 = v50;
       v83 = v51;
     }
-    v54 = *(_DWORD **)(*((_QWORD *)&v10[9].vfptr->__first_virtual_table_function__
-                       + BYTE2(v10[9].vfptr[2].__first_virtual_table_function__))
+    v54 = *(_DWORD **)(*((_QWORD *)&m_contactMgr[9].vfptr->__first_virtual_table_function__
+                       + BYTE2(m_contactMgr[9].vfptr[2].__first_virtual_table_function__))
                      + 296i64);
-    if ( v10[9].vfptr )
+    if ( m_contactMgr[9].vfptr )
     {
       v55 = v52;
       if ( v54[4] > v53 )
@@ -970,29 +954,32 @@ LABEL_73:
       v54[6] += v50;
       v54[7] += v51;
       v54[4] = v55;
-      v56 = v10[9].vfptr;
+      v56 = m_contactMgr[9].vfptr;
       HIWORD(v56[2].__vecDelDtor) += v81;
       LOWORD(v56[2].__first_virtual_table_function__) += v83;
       WORD2(v56[2].__vecDelDtor) += v79;
-      v57 = WORD2(v10[9].vfptr[2].__vecDelDtor);
+      v57 = WORD2(m_contactMgr[9].vfptr[2].__vecDelDtor);
       if ( v54[4] > v57 )
         v57 = v54[4];
       v54[4] = v57;
     }
     hkString::memCpy(
-      (void *)(32i64 * *(unsigned __int16 *)(*(_QWORD *)&v10[4].m_memSizeAndFlags + 6i64)
-             + *(_QWORD *)&v10[4].m_memSizeAndFlags
+      (void *)(32i64 * *(unsigned __int16 *)(*(_QWORD *)&m_contactMgr[4].m_memSizeAndFlags + 6i64)
+             + *(_QWORD *)&m_contactMgr[4].m_memSizeAndFlags
              + 48i64),
-      v11->m_propertiesStream.m_data,
-      v44 * *(unsigned __int8 *)(*(_QWORD *)&v10[4].m_memSizeAndFlags + 10i64));
-    hkString::memCpy((void *)(*(_QWORD *)&v10[4].m_memSizeAndFlags + 48i64), v11->m_contactPoints.m_data, 32 * v44);
-    v59 = v95;
-    if ( v95->m_zeroUserDataInContactPointProperties )
+      serializedEntryIn->m_propertiesStream.m_data,
+      m_numContactPoints * *(unsigned __int8 *)(*(_QWORD *)&m_contactMgr[4].m_memSizeAndFlags + 10i64));
+    hkString::memCpy(
+      (void *)(*(_QWORD *)&m_contactMgr[4].m_memSizeAndFlags + 48i64),
+      serializedEntryIn->m_contactPoints.m_data,
+      32 * m_numContactPoints);
+    v59 = input;
+    if ( input->m_zeroUserDataInContactPointProperties )
     {
-      v60 = *(_QWORD *)&v10[4].m_memSizeAndFlags;
+      v60 = *(_QWORD *)&m_contactMgr[4].m_memSizeAndFlags;
       v58 = 0i64;
       v61 = 32i64 * *(unsigned __int16 *)(v60 + 6) + v60 + 48;
-      if ( *(_WORD *)(v60 + 4) > 0u )
+      if ( *(_WORD *)(v60 + 4) )
       {
         v62 = *(unsigned __int8 *)(v60 + 10);
         do
@@ -1001,58 +988,58 @@ LABEL_73:
           v58 = (unsigned int)(v58 + 1);
           v61 += v62;
         }
-        while ( (signed int)v58 < *(unsigned __int16 *)(*(_QWORD *)&v10[4].m_memSizeAndFlags + 4i64) );
+        while ( (int)v58 < *(unsigned __int16 *)(*(_QWORD *)&m_contactMgr[4].m_memSizeAndFlags + 4i64) );
       }
     }
-    v63 = v10->vfptr;
+    v63 = m_contactMgr->vfptr;
     v84 = 0i64;
     v85 = 0;
-    v86 = 2147483648;
-    ((void (__fastcall *)(hkpContactMgr *, _WORD **, __int64))v63[6].__vecDelDtor)(v10, &v84, v58);
+    v86 = 0x80000000;
+    ((void (__fastcall *)(hkpContactMgr *, _WORD **, __int64))v63[6].__vecDelDtor)(m_contactMgr, &v84, v58);
     v64 = v85;
-    if ( v95->m_fireContactPointAddedCallbacks && v85 > 0 )
+    if ( input->m_fireContactPointAddedCallbacks && v85 > 0 )
     {
       v65 = 0i64;
       do
       {
-        v66 = v59->m_passCollidablePointersInCollisionCallbacks == 0;
+        v66 = !v59->m_passCollidablePointersInCollisionCallbacks;
         entityB = 0i64;
         v67 = v84[v65];
-        v92 = 2139095022;
-        v93 = 0i64;
+        v90 = 2139095022;
         v91 = 0i64;
-        v96 = 0i64;
+        v89 = 0i64;
+        p_m_collidable = 0i64;
         if ( !v66 )
         {
-          entityB = (hkpEntity *)((char *)v13 + 32);
-          v96 = (hkpCdBody *)&v7->m_collidable.m_shape;
+          entityB = &entityA->m_collidable;
+          p_m_collidable = (hkpRigidBody *)&v7->m_collidable;
         }
-        v68 = (hkpContactPointProperties *)v10->vfptr[5].__vecDelDtor((hkBaseObject *)&v10->vfptr, v67);
-        v69 = (hkContactPoint *)((__int64 (__fastcall *)(hkpContactMgr *, _QWORD))v10->vfptr[5].__first_virtual_table_function__)(
-                                  v10,
-                                  v67);
-        event.m_type.m_storage = 1;
-        event.m_contactPoint = v69;
-        event.m_bodyA = (hkpCdBody *)entityB;
-        event.m_collisionInput = collisionInput;
-        event.m_bodyB = v96;
-        event.m_collisionOutput = (hkpProcessCollisionOutput *)&v90;
+        v68 = (hkpContactPointProperties *)m_contactMgr->vfptr[5].__vecDelDtor(m_contactMgr, v67);
+        v69 = ((__int64 (__fastcall *)(hkpContactMgr *, _QWORD))m_contactMgr->vfptr[5].__first_virtual_table_function__)(
+                m_contactMgr,
+                v67);
+        LODWORD(event.m_bodies[1]) = 1;
+        *(_QWORD *)&event.m_type = v69;
+        *(_QWORD *)&event.m_source = entityB;
+        event.m_rotateNormal = (float *)collisionInput;
+        event.m_bodies[0] = p_m_collidable;
+        event.m_shapeKeyStorage = (unsigned int *)&v88;
         event.m_contactPointProperties = v68;
-        event.m_internalContactMgr = (hkpDynamicsContactMgr *)v10;
-        LOWORD(v88) = v67;
-        event.m_gskCache = 0i64;
-        *(_QWORD *)&event.m_projectedVelocity = 0i64;
-        if ( v10->m_type )
-          WORD1(v88) = 0;
+        event.m_separatingVelocity = (float *)m_contactMgr;
+        LOWORD(event.m_accumulators[0]) = v67;
+        event.m_contactPoint = 0i64;
+        *(_QWORD *)&event.m_firingCallbacksForFullManifold.m_bool = 0i64;
+        if ( m_contactMgr->m_type )
+          WORD1(event.m_accumulators[0]) = 0;
         else
-          WORD1(v88) = v10[1].m_referenceCount;
-        hkpWorldCallbackUtil::fireContactPointAdded(v13->m_world, &event);
-        if ( v13->m_contactListeners.m_size )
-          hkpEntityCallbackUtil::fireContactPointAddedInternal(v13, &event);
+          WORD1(event.m_accumulators[0]) = m_contactMgr[1].m_referenceCount;
+        hkpWorldCallbackUtil::fireContactPointAdded(entityA->m_world, (hkpContactPointAddedEvent *)&event);
+        if ( entityA->m_contactListeners.m_size )
+          hkpEntityCallbackUtil::fireContactPointAddedInternal(entityA, (hkpContactPointAddedEvent *)&event);
         if ( v7->m_contactListeners.m_size )
-          hkpEntityCallbackUtil::fireContactPointAddedInternal(v7, &event);
+          hkpEntityCallbackUtil::fireContactPointAddedInternal(v7, (hkpContactPointAddedEvent *)&event);
         v64 = v85;
-        v59 = v95;
+        v59 = input;
         ++v26;
         ++v65;
       }
@@ -1061,89 +1048,75 @@ LABEL_73:
     if ( v59->m_fireContactPointCallbacks )
     {
       v70 = 0i64;
-      v71 = v64;
-      if ( v64 > 0 )
+      for ( j = v64; v70 < j; ++v70 )
       {
-        do
+        v72 = v84[v70];
+        if ( (*((_BYTE *)m_contactMgr->vfptr[5].__vecDelDtor(m_contactMgr, v72) + 19) & 1) == 0 )
         {
-          v72 = v84[v70];
-          if ( !(*(_BYTE *)((__int64)v10->vfptr[5].__vecDelDtor((hkBaseObject *)&v10->vfptr, v72) + 19) & 1) )
-          {
-            v73 = (__int64)v10->vfptr[5].__vecDelDtor((hkBaseObject *)&v10->vfptr, v72);
-            v74 = (hkpGskCache *)((__int64 (__fastcall *)(hkpContactMgr *, _QWORD))v10->vfptr[5].__first_virtual_table_function__)(
-                                   v10,
-                                   v72);
-            v75 = v13->m_world;
-            event.m_contactPointProperties = (hkpContactPointProperties *)v73;
-            _mm_store_si128((__m128i *)&event.m_internalContactMgr, (__m128i)0i64);
-            event.m_gskCache = v74;
-            LODWORD(event.m_bodyA) = 2;
-            event.m_callbackFiredFrom = (hkpEntity *)v10;
-            event.m_collisionOutput = (hkpProcessCollisionOutput *)(v73 + 32);
-            event.m_bodyB = (hkpCdBody *)v13;
-            *(_QWORD *)&event.m_type.m_storage = v7;
-            LODWORD(event.m_contactPoint) = 4;
-            LOWORD(event.m_projectedVelocity) = 0;
-            BYTE2(event.m_projectedVelocity) = 0;
-            v88 = 0i64;
-            v89 = 0i64;
-            hkpWorldCallbackUtil::fireContactPointCallback(v75, (hkpContactPointEvent *)&event);
-            LODWORD(event.m_bodyA) = 0;
-            if ( v13->m_contactListeners.m_size )
-              hkpEntityCallbackUtil::fireContactPointCallbackInternal(v13, (hkpContactPointEvent *)&event);
-            LODWORD(event.m_bodyA) = 1;
-            if ( v7->m_contactListeners.m_size )
-              hkpEntityCallbackUtil::fireContactPointCallbackInternal(v7, (hkpContactPointEvent *)&event);
-          }
-          ++v70;
+          v73 = (__int64)m_contactMgr->vfptr[5].__vecDelDtor(m_contactMgr, v72);
+          v74 = (hkContactPoint *)((__int64 (__fastcall *)(hkpContactMgr *, _QWORD))m_contactMgr->vfptr[5].__first_virtual_table_function__)(
+                                    m_contactMgr,
+                                    v72);
+          m_world = entityA->m_world;
+          event.m_contactPointProperties = (hkpContactPointProperties *)v73;
+          *(_OWORD *)&event.m_separatingVelocity = 0i64;
+          event.m_contactPoint = v74;
+          event.m_source = SOURCE_WORLD;
+          event.m_contactMgr = (hkpSimpleConstraintContactMgr *)m_contactMgr;
+          event.m_shapeKeyStorage = (unsigned int *)(v73 + 32);
+          event.m_bodies[0] = entityA;
+          event.m_bodies[1] = v7;
+          event.m_type = 4;
+          *(_WORD *)&event.m_firingCallbacksForFullManifold.m_bool = 0;
+          event.m_lastCallbackForFullManifold.m_bool = 0;
+          event.m_accumulators[0] = 0i64;
+          event.m_accumulators[1] = 0i64;
+          hkpWorldCallbackUtil::fireContactPointCallback(m_world, &event);
+          event.m_source = SOURCE_A;
+          if ( entityA->m_contactListeners.m_size )
+            hkpEntityCallbackUtil::fireContactPointCallbackInternal(entityA, &event);
+          event.m_source = SOURCE_B;
+          if ( v7->m_contactListeners.m_size )
+            hkpEntityCallbackUtil::fireContactPointCallbackInternal(v7, &event);
         }
-        while ( v70 < v71 );
       }
     }
-    hkAgentNnMachine_InvalidateTimInAgent(entry, (hkpCollisionInput *)&collisionInput->m_dispatcher);
+    hkAgentNnMachine_InvalidateTimInAgent(entry, collisionInput);
     v76 = v86;
-    v94->m_enum = 0;
+    result->m_enum = HK_SUCCESS;
     v85 = 0;
     if ( v76 >= 0 )
-      hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-        v84,
-        2 * (v76 & 0x3FFFFFFF));
-    v77 = v94;
+      hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v84, 2 * (v76 & 0x3FFFFFFF));
+    return result;
   }
-  return v77;
-}::s_alloc,
-        v84,
-        2 * (v76 & 0x3FFFFFFF));
-    v77 = v94;
-  }
-  return v77;
 }
 
 // File Line: 532
 // RVA: 0xE22060
-hkResult *__fastcall hkpSaveContactPointsUtil::serializeEntry(hkResult *result, hkpAgentEntry *entry, hkBool isNnEntry, hkpProcessCollisionInput *input, int *sizeOfThisEntryOut, hkpSerializedAgentNnEntry::SerializedAgentType *agentTypeOut, hkpAgent1nTrack **agent1nTrackOut, hkpSerializedTrack1nInfo *trackInfoOut)
+hkResult *__fastcall hkpSaveContactPointsUtil::serializeEntry(
+        hkResult *result,
+        hkpAgentEntry *entry,
+        hkBool isNnEntry,
+        hkpProcessCollisionInput *input,
+        int *sizeOfThisEntryOut,
+        hkpSerializedAgentNnEntry::SerializedAgentType *agentTypeOut,
+        hkpAgent1nTrack **agent1nTrackOut,
+        hkpSerializedTrack1nInfo *trackInfoOut)
 {
-  hkpProcessCollisionInput *v8; // r15
-  hkpAgentEntry *v9; // rsi
-  hkResult *v10; // rbx
-  signed __int64 v11; // rdi
-  signed __int64 v12; // rax
+  __int64 v11; // rdi
+  __int64 v12; // rax
   char *v13; // rdi
-  hkpSerializedAgentNnEntry::SerializedAgentType v14; // eax
-  hkpAgent1nTrack *v15; // rax
+  int SerializedAgentType; // eax
+  hkpAgent1nTrack *Agent1nTrack; // rax
 
-  v8 = input;
   *agent1nTrackOut = 0i64;
-  v9 = entry;
-  v10 = result;
   switch ( entry->m_streamCommand )
   {
     case 0:
     case 1:
       *sizeOfThisEntryOut = 16;
-      result->m_enum = 0;
-      return v10;
+      result->m_enum = HK_SUCCESS;
+      return result;
     case 2:
     case 3:
     case 0xA:
@@ -1161,48 +1134,48 @@ LABEL_4:
       if ( isNnEntry.m_bool )
         v11 = v12;
       v13 = &entry->m_streamCommand + v11;
-      v14 = hkpSaveContactPointsUtil::getSerializedAgentType(input->m_dispatcher.m_storage->m_agent3Func[(unsigned __int8)entry->m_agentType].m_processFunc);
-      *agentTypeOut = v14;
-      if ( (signed int)v14 <= 0 )
+      SerializedAgentType = hkpSaveContactPointsUtil::getSerializedAgentType(input->m_dispatcher.m_storage->m_agent3Func[(unsigned __int8)entry->m_agentType].m_processFunc);
+      *agentTypeOut = SerializedAgentType;
+      if ( SerializedAgentType <= 0 )
         goto $LN1_63;
-      if ( (signed int)v14 <= 4 )
+      if ( SerializedAgentType <= 4 )
       {
-        *agentTypeOut = v14;
-        *sizeOfThisEntryOut = (unsigned __int8)v9->m_size;
+        *agentTypeOut = SerializedAgentType;
+        *sizeOfThisEntryOut = (unsigned __int8)entry->m_size;
 $LN6_211:
-        v10->m_enum = 0;
-        return v10;
+        result->m_enum = HK_SUCCESS;
+        return result;
       }
-      if ( v14 == 5 )
+      if ( SerializedAgentType == 5 )
       {
-        *agentTypeOut = 5;
-        *sizeOfThisEntryOut = (unsigned __int8)v9->m_size;
-        if ( !(v13[11] & 0x20) )
+        *agentTypeOut = CONVEX_LIST_AGENT3;
+        *sizeOfThisEntryOut = (unsigned __int8)entry->m_size;
+        if ( (v13[11] & 0x20) == 0 )
         {
-          v15 = hkConvexListAgent3::getAgent1nTrack(v9, v13);
-          *agent1nTrackOut = v15;
-          hkpSaveContactPointsUtil::serialize1nTrack(v10, &v15->m_sectors, v8, trackInfoOut);
-          return v10;
+          Agent1nTrack = hkConvexListAgent3::getAgent1nTrack(entry, v13);
+          *agent1nTrackOut = Agent1nTrack;
+          hkpSaveContactPointsUtil::serialize1nTrack(result, &Agent1nTrack->m_sectors, input, trackInfoOut);
+          return result;
         }
         goto $LN6_211;
       }
-      if ( (unsigned int)(v14 - 6) > 3 )
+      if ( (unsigned int)(SerializedAgentType - 6) > 3 )
       {
 $LN1_63:
-        v10->m_enum = 1;
+        result->m_enum = HK_FAILURE;
       }
       else
       {
-        *sizeOfThisEntryOut = (unsigned __int8)v9->m_size;
-        *agentTypeOut = v14;
+        *sizeOfThisEntryOut = (unsigned __int8)entry->m_size;
+        *agentTypeOut = SerializedAgentType;
         *agent1nTrackOut = (hkpAgent1nTrack *)(v13 + 8);
         hkpSaveContactPointsUtil::serialize1nTrack(
-          v10,
+          result,
           (hkArray<hkpAgent1nSector *,hkContainerHeapAllocator> *)(v13 + 8),
-          v8,
+          input,
           trackInfoOut);
       }
-      return v10;
+      return result;
     case 8:
       goto $LN6_211;
     default:
@@ -1212,194 +1185,189 @@ $LN1_63:
 
 // File Line: 645
 // RVA: 0xE221F0
-hkResult *__fastcall hkpSaveContactPointsUtil::destroyOldEntry(hkResult *result, hkpSerializedAgentNnEntry::SerializedAgentType agentType, hkpProcessCollisionInput *input, hkpDynamicsContactMgr *mgr, hkpConstraintOwner *constraintOwner, hkpAgentNnEntry *nnEntry)
+hkResult *__fastcall hkpSaveContactPointsUtil::destroyOldEntry(
+        hkResult *result,
+        hkpSerializedAgentNnEntry::SerializedAgentType agentType,
+        hkpProcessCollisionInput *input,
+        hkpDynamicsContactMgr *mgr,
+        hkpConstraintOwner *constraintOwner,
+        hkpAgentNnEntry *nnEntry)
 {
-  hkpDynamicsContactMgr *v6; // r12
-  hkpSerializedAgentNnEntry::SerializedAgentType v7; // ebp
-  int v8; // eax
-  hkResult *v9; // rbx
-  char *v11; // rsi
-  hkpCollisionDispatcher *v12; // r14
-  __int64 v13; // r15
+  int m_streamCommand; // eax
+  char *p_m_contactMgr; // rsi
+  hkpCollisionDispatcher *m_storage; // r14
+  __int64 m_agentType; // r15
 
-  v6 = mgr;
-  v7 = agentType;
-  v8 = (unsigned __int8)nnEntry->m_streamCommand;
-  v9 = result;
-  if ( v8 == 2 )
+  m_streamCommand = (unsigned __int8)nnEntry->m_streamCommand;
+  if ( m_streamCommand == 2 )
   {
-    v11 = (char *)&nnEntry[1].m_contactMgr;
+    p_m_contactMgr = (char *)&nnEntry[1].m_contactMgr;
   }
   else
   {
-    if ( v8 != 4 )
+    if ( m_streamCommand != 4 )
     {
-      result->m_enum = 1;
+      result->m_enum = HK_FAILURE;
       return result;
     }
-    v11 = (char *)nnEntry[1].m_collidable;
+    p_m_contactMgr = (char *)nnEntry[1].m_collidable;
   }
-  v12 = input->m_dispatcher.m_storage;
-  v13 = (unsigned __int8)nnEntry->m_agentType;
-  if ( hkpSaveContactPointsUtil::getSerializedAgentType(input->m_dispatcher.m_storage->m_agent3Func[v13].m_processFunc) == agentType
-    && v7 )
+  m_storage = input->m_dispatcher.m_storage;
+  m_agentType = (unsigned __int8)nnEntry->m_agentType;
+  if ( hkpSaveContactPointsUtil::getSerializedAgentType(input->m_dispatcher.m_storage->m_agent3Func[m_agentType].m_processFunc) == agentType
+    && agentType )
   {
-    v12->m_agent3Func[v13].m_destroyFunc(
-      (hkpAgentEntry *)&nnEntry->m_streamCommand,
-      v11,
-      (hkpContactMgr *)&v6->vfptr,
-      constraintOwner,
-      v12);
-    v9->m_enum = 0;
+    m_storage->m_agent3Func[m_agentType].m_destroyFunc(nnEntry, p_m_contactMgr, mgr, constraintOwner, m_storage);
+    result->m_enum = HK_SUCCESS;
   }
   else
   {
-    v9->m_enum = 1;
+    result->m_enum = HK_FAILURE;
   }
-  return v9;
+  return result;
 }
 
 // File Line: 692
 // RVA: 0xE222B0
-hkResult *__fastcall hkpSaveContactPointsUtil::deserializeEntry(hkResult *result, hkpSerializedAgentNnEntry *serializedEntryIn, hkpSerializedAgentNnEntry::SerializedAgentType agentType, hkpSerializedTrack1nInfo *serializedTrack, hkpProcessCollisionInput *input, hkpAgentNnEntry *nnEntry)
+hkResult *__fastcall hkpSaveContactPointsUtil::deserializeEntry(
+        hkResult *result,
+        hkpSerializedAgentNnEntry *serializedEntryIn,
+        int agentType,
+        hkpSerializedTrack1nInfo *serializedTrack,
+        hkpProcessCollisionInput *input,
+        hkpAgentNnEntry *nnEntry)
 {
-  hkpSerializedTrack1nInfo *v6; // r12
-  hkpSerializedAgentNnEntry::SerializedAgentType v7; // esi
-  int v8; // eax
-  hkpSerializedAgentNnEntry *v9; // r14
-  hkResult *v10; // rbx
-  char *v12; // rbp
-  hkpAgent1nTrack *v13; // r9
+  int m_streamCommand; // eax
+  char *p_m_contactMgr; // rbp
+  hkpAgent1nTrack *Agent1nTrack; // r9
   bool v14; // zf
 
-  v6 = serializedTrack;
-  v7 = agentType;
-  v8 = (unsigned __int8)nnEntry->m_streamCommand;
-  v9 = serializedEntryIn;
-  v10 = result;
-  if ( v8 == 2 )
+  m_streamCommand = (unsigned __int8)nnEntry->m_streamCommand;
+  if ( m_streamCommand == 2 )
   {
-    v12 = (char *)&nnEntry[1].m_contactMgr;
+    p_m_contactMgr = (char *)&nnEntry[1].m_contactMgr;
   }
   else
   {
-    if ( v8 != 4 )
+    if ( m_streamCommand != 4 )
     {
-      result->m_enum = 1;
+      result->m_enum = HK_FAILURE;
       return result;
     }
-    v12 = (char *)nnEntry[1].m_collidable;
+    p_m_contactMgr = (char *)nnEntry[1].m_collidable;
   }
   if ( hkpSaveContactPointsUtil::getSerializedAgentType(input->m_dispatcher.m_storage->m_agent3Func[(unsigned __int8)nnEntry->m_agentType].m_processFunc) != agentType
-    || (signed int)v7 <= 0 )
+    || agentType <= 0 )
   {
 LABEL_19:
-    v10->m_enum = 1;
-    return v10;
+    result->m_enum = HK_FAILURE;
+    return result;
   }
-  if ( (signed int)v7 <= 4 )
+  if ( agentType <= 4 )
   {
-    hkString::memCpy(&nnEntry[1], &v9->m_nnEntryData[40], 80 * (unsigned __int8)nnEntry->m_nnTrackType.m_storage - 40);
-    nnEntry->m_numContactPoints = v9->m_nnEntryData[2];
-    nnEntry->m_size = v9->m_nnEntryData[3];
+    hkString::memCpy(
+      &nnEntry[1],
+      &serializedEntryIn->m_nnEntryData[40],
+      80 * (unsigned __int8)nnEntry->m_nnTrackType.m_storage - 40);
+    nnEntry->m_numContactPoints = serializedEntryIn->m_nnEntryData[2];
+    nnEntry->m_size = serializedEntryIn->m_nnEntryData[3];
   }
   else
   {
-    if ( v7 != 5 )
+    if ( agentType != 5 )
     {
-      if ( (unsigned int)(v7 - 6) <= 3 )
+      if ( (unsigned int)(agentType - 6) <= 3 )
       {
         hkString::memCpy(
           &nnEntry[1],
-          &v9->m_nnEntryData[40],
+          &serializedEntryIn->m_nnEntryData[40],
           80 * (unsigned __int8)nnEntry->m_nnTrackType.m_storage - 40);
-        v13 = (hkpAgent1nTrack *)(v12 + 8);
-        v14 = v12 + 8 == 0i64;
+        Agent1nTrack = (hkpAgent1nTrack *)(p_m_contactMgr + 8);
+        v14 = p_m_contactMgr + 8 == 0i64;
 LABEL_12:
         if ( !v14 )
         {
-          v13->m_sectors.m_data = 0i64;
-          v13->m_sectors.m_size = 0;
-          v13->m_sectors.m_capacityAndFlags = 2147483648;
+          Agent1nTrack->m_sectors.m_data = 0i64;
+          Agent1nTrack->m_sectors.m_size = 0;
+          Agent1nTrack->m_sectors.m_capacityAndFlags = 0x80000000;
         }
-        hkpSaveContactPointsUtil::deserialize1nTrack(v10, v6, input, &v13->m_sectors);
-        return v10;
+        hkpSaveContactPointsUtil::deserialize1nTrack(result, serializedTrack, input, &Agent1nTrack->m_sectors);
+        return result;
       }
       goto LABEL_19;
     }
-    hkString::memCpy(&nnEntry[1], &v9->m_nnEntryData[40], 80 * (unsigned __int8)nnEntry->m_nnTrackType.m_storage - 40);
-    nnEntry->m_numContactPoints = v9->m_nnEntryData[2];
-    nnEntry->m_size = v9->m_nnEntryData[3];
-    if ( !(v12[11] & 0x20) )
+    hkString::memCpy(
+      &nnEntry[1],
+      &serializedEntryIn->m_nnEntryData[40],
+      80 * (unsigned __int8)nnEntry->m_nnTrackType.m_storage - 40);
+    nnEntry->m_numContactPoints = serializedEntryIn->m_nnEntryData[2];
+    nnEntry->m_size = serializedEntryIn->m_nnEntryData[3];
+    if ( (p_m_contactMgr[11] & 0x20) == 0 )
     {
-      v13 = hkConvexListAgent3::getAgent1nTrack((hkpAgentEntry *)&nnEntry->m_streamCommand, v12);
-      v14 = v13 == 0i64;
+      Agent1nTrack = hkConvexListAgent3::getAgent1nTrack(nnEntry, p_m_contactMgr);
+      v14 = Agent1nTrack == 0i64;
       goto LABEL_12;
     }
   }
-  v10->m_enum = 0;
-  return v10;
+  result->m_enum = HK_SUCCESS;
+  return result;
 }
 
 // File Line: 791
 // RVA: 0xE22460
-hkResult *__fastcall hkpSaveContactPointsUtil::serialize1nTrack(hkResult *result, hkArray<hkpAgent1nSector *,hkContainerHeapAllocator> *sectorsIn, hkpProcessCollisionInput *input, hkpSerializedTrack1nInfo *trackInfoOut)
+hkResult *__fastcall hkpSaveContactPointsUtil::serialize1nTrack(
+        hkResult *result,
+        hkArray<hkpAgent1nSector *,hkContainerHeapAllocator> *sectorsIn,
+        hkpProcessCollisionInput *input,
+        hkpSerializedTrack1nInfo *trackInfoOut)
 {
-  hkpSerializedTrack1nInfo *v4; // r14
-  int v5; // er9
+  int m_size; // r9d
   hkArray<hkpAgent1nSector *,hkContainerHeapAllocator> *v6; // rbx
   hkResult *v7; // rdi
   int v8; // eax
   int v9; // eax
-  int v10; // er12
+  int v10; // r12d
   __int64 v11; // r13
   hkpAgent1nSector *v12; // rsi
-  hkpAgentEntry *v13; // rbp
+  hkpAgentEntry *m_data; // rbp
   unsigned __int64 v14; // r15
   _QWORD **v15; // rax
   __int64 v16; // rax
   hkpSerializedSubTrack1nInfo *v17; // rbx
   _QWORD **v18; // rax
-  _QWORD **v19; // rax
+  _QWORD **Value; // rax
   hkpAgent1nSector *v20; // rax
   hkpAgent1nSector *v21; // rcx
   hkpAgent1nSector *v22; // rcx
-  signed __int64 v23; // rax
+  __int64 v23; // rax
   __int128 v24; // xmm0
   _QWORD **v26; // rax
-  hkpSerializedAgentNnEntry::SerializedAgentType agentTypeOut; // [rsp+40h] [rbp-58h]
-  hkResult resulta; // [rsp+44h] [rbp-54h]
-  hkpAgent1nTrack *agent1nTrackOut; // [rsp+48h] [rbp-50h]
-  hkResult *v30; // [rsp+A0h] [rbp+8h]
-  hkArray<hkpAgent1nSector *,hkContainerHeapAllocator> *v31; // [rsp+A8h] [rbp+10h]
-  hkpProcessCollisionInput *inputa; // [rsp+B0h] [rbp+18h]
-  int sizeOfThisEntryOut; // [rsp+B8h] [rbp+20h]
+  hkpSerializedAgentNnEntry::SerializedAgentType agentTypeOut; // [rsp+40h] [rbp-58h] BYREF
+  hkResult resulta; // [rsp+44h] [rbp-54h] BYREF
+  hkpAgent1nTrack *agent1nTrackOut; // [rsp+48h] [rbp-50h] BYREF
+  int sizeOfThisEntryOut; // [rsp+B8h] [rbp+20h] BYREF
 
-  inputa = input;
-  v31 = sectorsIn;
-  v30 = result;
-  v4 = trackInfoOut;
-  v5 = sectorsIn->m_size;
+  m_size = sectorsIn->m_size;
   v6 = sectorsIn;
   v7 = result;
-  v8 = v4->m_sectors.m_capacityAndFlags & 0x3FFFFFFF;
-  if ( v8 < v5 )
+  v8 = trackInfoOut->m_sectors.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v8 < m_size )
   {
     v9 = 2 * v8;
-    if ( v5 < v9 )
-      v5 = v9;
+    if ( m_size < v9 )
+      m_size = v9;
     hkArrayUtil::_reserve(
       (hkResult *)&sizeOfThisEntryOut,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      v4,
-      v5,
+      &hkContainerHeapAllocator::s_alloc,
+      (const void **)&trackInfoOut->m_sectors.m_data,
+      m_size,
       8);
   }
   v10 = 0;
   if ( v6->m_size <= 0 )
   {
 LABEL_31:
-    v7->m_enum = 0;
+    v7->m_enum = HK_SUCCESS;
   }
   else
   {
@@ -1407,24 +1375,24 @@ LABEL_31:
     while ( 1 )
     {
       v12 = v6->m_data[v11];
-      v13 = (hkpAgentEntry *)v12->m_data;
+      m_data = (hkpAgentEntry *)v12->m_data;
       v14 = (unsigned __int64)&v12->m_data[v12->m_bytesAllocated];
       if ( (unsigned __int64)v12->m_data < v14 )
         break;
 LABEL_19:
-      if ( v4->m_sectors.m_size == (v4->m_sectors.m_capacityAndFlags & 0x3FFFFFFF) )
-        hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v4, 8);
-      ++v4->m_sectors.m_size;
-      v19 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v20 = (hkpAgent1nSector *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v19[11] + 8i64))(v19[11], 512i64);
+      if ( trackInfoOut->m_sectors.m_size == (trackInfoOut->m_sectors.m_capacityAndFlags & 0x3FFFFFFF) )
+        hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&trackInfoOut->m_sectors.m_data, 8);
+      ++trackInfoOut->m_sectors.m_size;
+      Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+      v20 = (hkpAgent1nSector *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 512i64);
       v21 = v20;
       if ( v20 )
         v20->m_bytesAllocated = 0;
       else
         v21 = 0i64;
-      v4->m_sectors.m_data[v11] = v21;
-      v22 = v4->m_sectors.m_data[v11];
-      if ( ((unsigned __int8)v22 | (unsigned __int8)v12) & 0xF )
+      trackInfoOut->m_sectors.m_data[v11] = v21;
+      v22 = trackInfoOut->m_sectors.m_data[v11];
+      if ( (((unsigned __int8)v22 | (unsigned __int8)v12) & 0xF) != 0 )
       {
         memmove(v22, v12, 0x200ui64);
       }
@@ -1452,7 +1420,7 @@ LABEL_19:
       ++v11;
       if ( v10 >= v6->m_size )
       {
-        v7 = v30;
+        v7 = result;
         goto LABEL_31;
       }
     }
@@ -1461,16 +1429,16 @@ LABEL_19:
       agent1nTrackOut = 0i64;
       sizeOfThisEntryOut = 0;
       v15 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v16 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v15[11] + 8i64))(v15[11], 40i64);
+      v16 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*v15[11] + 8i64))(v15[11], 40i64);
       v17 = (hkpSerializedSubTrack1nInfo *)v16;
       if ( v16 )
       {
         *(_QWORD *)v16 = 0i64;
         *(_DWORD *)(v16 + 8) = 0;
-        *(_DWORD *)(v16 + 12) = 2147483648;
+        *(_DWORD *)(v16 + 12) = 0x80000000;
         *(_QWORD *)(v16 + 16) = 0i64;
         *(_DWORD *)(v16 + 24) = 0;
-        *(_QWORD *)(v16 + 28) = -2147483648i64;
+        *(_QWORD *)(v16 + 28) = 0xFFFFFFFF80000000ui64;
       }
       else
       {
@@ -1478,113 +1446,111 @@ LABEL_19:
       }
       if ( hkpSaveContactPointsUtil::serializeEntry(
              &resulta,
-             v13,
+             m_data,
              0,
-             inputa,
+             input,
              &sizeOfThisEntryOut,
              &agentTypeOut,
              &agent1nTrackOut,
-             (hkpSerializedTrack1nInfo *)&v17->m_sectors)->m_enum )
+             v17)->m_enum )
         break;
       if ( v17->m_sectors.m_size )
       {
         v17->m_sectorIndex = v10;
         v17->m_offsetInSector = (_DWORD)agent1nTrackOut - (_DWORD)v12 - 16;
-        if ( v4->m_subTracks.m_size == (v4->m_subTracks.m_capacityAndFlags & 0x3FFFFFFF) )
-          hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v4->m_subTracks, 8);
-        v4->m_subTracks.m_data[v4->m_subTracks.m_size++] = v17;
+        if ( trackInfoOut->m_subTracks.m_size == (trackInfoOut->m_subTracks.m_capacityAndFlags & 0x3FFFFFFF) )
+          hkArrayUtil::_reserveMore(
+            &hkContainerHeapAllocator::s_alloc,
+            (const void **)&trackInfoOut->m_subTracks.m_data,
+            8);
+        trackInfoOut->m_subTracks.m_data[trackInfoOut->m_subTracks.m_size++] = v17;
       }
       else
       {
-        hkpSerializedTrack1nInfo::~hkpSerializedTrack1nInfo((hkpSerializedTrack1nInfo *)&v17->m_sectors);
+        hkpSerializedTrack1nInfo::~hkpSerializedTrack1nInfo(v17);
         v18 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-        (*(void (__fastcall **)(_QWORD *, hkpSerializedSubTrack1nInfo *, signed __int64))(*v18[11] + 16i64))(
+        (*(void (__fastcall **)(_QWORD *, hkpSerializedSubTrack1nInfo *, __int64))(*v18[11] + 16i64))(
           v18[11],
           v17,
           40i64);
       }
-      v13 = (hkpAgentEntry *)((char *)v13 + sizeOfThisEntryOut);
-      if ( (unsigned __int64)v13 >= v14 )
+      m_data = (hkpAgentEntry *)((char *)m_data + sizeOfThisEntryOut);
+      if ( (unsigned __int64)m_data >= v14 )
       {
-        v6 = v31;
+        v6 = sectorsIn;
         goto LABEL_19;
       }
     }
     if ( v17 )
     {
-      hkpSerializedTrack1nInfo::~hkpSerializedTrack1nInfo((hkpSerializedTrack1nInfo *)&v17->m_sectors);
+      hkpSerializedTrack1nInfo::~hkpSerializedTrack1nInfo(v17);
       v26 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      (*(void (__fastcall **)(_QWORD *, hkpSerializedSubTrack1nInfo *, signed __int64))(*v26[11] + 16i64))(
-        v26[11],
-        v17,
-        40i64);
+      (*(void (__fastcall **)(_QWORD *, hkpSerializedSubTrack1nInfo *, __int64))(*v26[11] + 16i64))(v26[11], v17, 40i64);
     }
-    v7 = v30;
-    v30->m_enum = 1;
+    v7 = result;
+    result->m_enum = HK_FAILURE;
   }
   return v7;
 }
 
 // File Line: 844
 // RVA: 0xE22790
-hkResult *__fastcall hkpSaveContactPointsUtil::deserialize1nTrack(hkResult *result, hkpSerializedTrack1nInfo *serializedTrack, hkpProcessCollisionInput *input, hkArray<hkpAgent1nSector *,hkContainerHeapAllocator> *sectorsOut)
+hkResult *__fastcall hkpSaveContactPointsUtil::deserialize1nTrack(
+        hkResult *result,
+        hkpSerializedTrack1nInfo *serializedTrack,
+        hkpProcessCollisionInput *input,
+        hkArray<hkpAgent1nSector *,hkContainerHeapAllocator> *sectorsOut)
 {
-  int v4; // ebx
-  hkArray<hkpAgent1nSector *,hkContainerHeapAllocator> *v5; // rbp
+  int m_size; // ebx
   int v6; // eax
-  hkpSerializedTrack1nInfo *v7; // rsi
   int v8; // eax
-  int v9; // er9
+  int v9; // r9d
   int v10; // edi
   __int64 v11; // rbx
-  _QWORD **v12; // rax
+  _QWORD **Value; // rax
   hkpAgent1nSector *v13; // rax
   hkpAgent1nSector *v14; // rcx
   hkpAgent1nSector *v15; // rcx
   hkpAgent1nSector *v16; // rdx
-  signed __int64 v17; // rax
+  __int64 v17; // rax
   __int128 v18; // xmm0
   int v19; // ebx
   __int64 v20; // rdi
   hkpSerializedSubTrack1nInfo *v21; // rdx
   hkArray<hkpAgent1nSector *,hkContainerHeapAllocator> *v22; // r9
   hkResult *v23; // rax
-  hkResult *v24; // [rsp+50h] [rbp+8h]
-  hkResult resulta; // [rsp+58h] [rbp+10h]
+  hkResult resulta; // [rsp+58h] [rbp+10h] BYREF
   hkpProcessCollisionInput *inputa; // [rsp+60h] [rbp+18h]
 
   inputa = input;
-  v24 = result;
-  v4 = serializedTrack->m_sectors.m_size;
-  v5 = sectorsOut;
+  m_size = serializedTrack->m_sectors.m_size;
   v6 = sectorsOut->m_capacityAndFlags & 0x3FFFFFFF;
-  v7 = serializedTrack;
-  if ( v6 < v4 )
+  if ( v6 < m_size )
   {
     v8 = 2 * v6;
     v9 = serializedTrack->m_sectors.m_size;
-    if ( v4 < v8 )
+    if ( m_size < v8 )
       v9 = v8;
-    hkArrayUtil::_reserve(&resulta, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v5, v9, 8);
+    hkArrayUtil::_reserve(&resulta, &hkContainerHeapAllocator::s_alloc, (const void **)&sectorsOut->m_data, v9, 8);
   }
-  v5->m_size = v4;
+  sectorsOut->m_size = m_size;
   v10 = 0;
-  if ( v7->m_sectors.m_size > 0 )
+  if ( serializedTrack->m_sectors.m_size > 0 )
   {
     v11 = 0i64;
     do
     {
-      v12 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v13 = (hkpAgent1nSector *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v12[11] + 8i64))(v12[11], 512i64);
+      Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+      v13 = (hkpAgent1nSector *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 512i64);
       v14 = v13;
       if ( v13 )
         v13->m_bytesAllocated = 0;
       else
         v14 = 0i64;
-      v5->m_data[v11] = v14;
-      v15 = v5->m_data[v11];
-      v16 = v7->m_sectors.m_data[v11];
-      if ( ((unsigned __int8)v15 | (unsigned __int8)v7->m_sectors.m_data[v11]) & 0xF )
+      sectorsOut->m_data[v11] = v14;
+      v15 = sectorsOut->m_data[v11];
+      v16 = serializedTrack->m_sectors.m_data[v11];
+      if ( (((unsigned __int8)v15 | (unsigned __int8)v16) & 0xF) != 0 )
       {
         memmove(v15, v16, 0x200ui64);
       }
@@ -1611,50 +1577,47 @@ hkResult *__fastcall hkpSaveContactPointsUtil::deserialize1nTrack(hkResult *resu
       ++v10;
       ++v11;
     }
-    while ( v10 < v7->m_sectors.m_size );
+    while ( v10 < serializedTrack->m_sectors.m_size );
   }
   v19 = 0;
-  if ( v7->m_subTracks.m_size <= 0 )
+  if ( serializedTrack->m_subTracks.m_size <= 0 )
   {
 LABEL_22:
-    v23 = v24;
-    v24->m_enum = 0;
+    v23 = result;
+    result->m_enum = HK_SUCCESS;
   }
   else
   {
     v20 = 0i64;
     while ( 1 )
     {
-      v21 = v7->m_subTracks.m_data[v20];
-      v22 = (hkArray<hkpAgent1nSector *,hkContainerHeapAllocator> *)&v5->m_data[v21->m_sectorIndex]->m_data[v21->m_offsetInSector];
+      v21 = serializedTrack->m_subTracks.m_data[v20];
+      v22 = (hkArray<hkpAgent1nSector *,hkContainerHeapAllocator> *)&sectorsOut->m_data[v21->m_sectorIndex]->m_data[v21->m_offsetInSector];
       if ( v22 )
       {
         v22->m_data = 0i64;
         v22->m_size = 0;
-        v22->m_capacityAndFlags = 2147483648;
+        v22->m_capacityAndFlags = 0x80000000;
       }
-      if ( hkpSaveContactPointsUtil::deserialize1nTrack(
-             &resulta,
-             (hkpSerializedTrack1nInfo *)&v21->m_sectors,
-             inputa,
-             v22)->m_enum == 1 )
+      if ( hkpSaveContactPointsUtil::deserialize1nTrack(&resulta, v21, inputa, v22)->m_enum == HK_FAILURE )
         break;
       ++v19;
       ++v20;
-      if ( v19 >= v7->m_subTracks.m_size )
+      if ( v19 >= serializedTrack->m_subTracks.m_size )
         goto LABEL_22;
     }
-    v23 = v24;
-    v24->m_enum = 1;
+    v23 = result;
+    result->m_enum = HK_FAILURE;
   }
   return v23;
 }
 
 // File Line: 880
 // RVA: 0xE22970
-signed __int64 __fastcall hkpSaveContactPointsUtil::getSerializedAgentType(void *(__fastcall *func)(hkpAgent3ProcessInput *, hkpAgentEntry *, void *, hkVector4f *, hkpProcessCollisionOutput *))
+__int64 __fastcall hkpSaveContactPointsUtil::getSerializedAgentType(
+        void *(__fastcall *func)(hkpAgent3ProcessInput *, hkpAgentEntry *, void *, hkVector4f *, hkpProcessCollisionOutput *))
 {
-  signed __int64 result; // rax
+  __int64 result; // rax
 
   if ( (char *)func == (char *)hkBoxBoxAgent3::process )
     return 1i64;
@@ -1674,7 +1637,7 @@ signed __int64 __fastcall hkpSaveContactPointsUtil::getSerializedAgentType(void 
     return 8i64;
   result = 0i64;
   if ( (char *)func == (char *)hkpCollectionAgent3::process )
-    result = 9i64;
+    return 9i64;
   return result;
 }
 

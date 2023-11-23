@@ -279,62 +279,58 @@ void __fastcall Illusion::RenderStateInit(Illusion *this)
 __int64 Illusion::_dynamic_initializer_for__gAlphaStateInventory__()
 {
   UFG::qResourceInventory::qResourceInventory(
-    (UFG::qResourceInventory *)&Illusion::gAlphaStateInventory.vfptr,
+    &Illusion::gAlphaStateInventory,
     "AlphaStateInventory",
     0x12C800F2u,
     0x1BCFF4D5u,
     0,
     0);
   Illusion::gAlphaStateInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::AlphaStateInventory::`vftable;
-  return atexit(Illusion::_dynamic_atexit_destructor_for__gAlphaStateInventory__);
+  return atexit((int (__fastcall *)())Illusion::_dynamic_atexit_destructor_for__gAlphaStateInventory__);
 }
 
 // File Line: 377
 // RVA: 0x8DC40
-void __fastcall Illusion::AlphaStateInventory::Add(Illusion::AlphaStateInventory *this, UFG::qResourceData *resource_data)
+void __fastcall Illusion::AlphaStateInventory::Add(
+        Illusion::AlphaStateInventory *this,
+        Illusion::AlphaState *resource_data)
 {
-  Illusion::AlphaStateInventory *v2; // rdi
-  UFG::qResourceData *v3; // rbx
-
-  v2 = this;
-  v3 = resource_data;
-  Illusion::AlphaState::OnAddPlat((Illusion::AlphaState *)resource_data);
-  UFG::qResourceInventory::Add((UFG::qResourceInventory *)&v2->vfptr, v3);
+  Illusion::AlphaState::OnAddPlat(resource_data);
+  UFG::qResourceInventory::Add(this, resource_data);
 }
 
 // File Line: 388
 // RVA: 0x947E0
-void __fastcall Illusion::AlphaStateInventory::Remove(Illusion::AlphaStateInventory *this, UFG::qResourceData *resource_data)
+void __fastcall Illusion::AlphaStateInventory::Remove(
+        Illusion::AlphaStateInventory *this,
+        Illusion::AlphaState *resource_data)
 {
-  Illusion::AlphaState *v2; // rbx
-
-  v2 = (Illusion::AlphaState *)resource_data;
-  UFG::qResourceInventory::Remove((UFG::qResourceInventory *)&this->vfptr, resource_data);
-  Illusion::AlphaState::OnRemovePlat(v2);
+  UFG::qResourceInventory::Remove(this, resource_data);
+  Illusion::AlphaState::OnRemovePlat(resource_data);
 }
 
 // File Line: 399
 // RVA: 0x92BD0
-signed __int64 __fastcall Illusion::AlphaStateInventory::Load(Illusion::AlphaStateInventory *this, UFG::qChunk *chunk)
+__int64 __fastcall Illusion::AlphaStateInventory::Load(Illusion::AlphaStateInventory *this, UFG::qChunk *chunk)
 {
   if ( chunk->mUID != 466613461 )
   {
     if ( chunk->mUID != this->mChunkUID )
       return 0i64;
-    this->vfptr->Add((UFG::qResourceInventory *)this, (UFG::qResourceData *)((char *)&chunk[1] + chunk->mDataOffset));
+    this->vfptr->Add(this, (UFG::qResourceData *)((char *)&chunk[1] + chunk->mDataOffset));
   }
   return 1i64;
 }
 
 // File Line: 418
 // RVA: 0x95AA0
-signed __int64 __fastcall Illusion::AlphaStateInventory::Unload(Illusion::AlphaStateInventory *this, UFG::qChunk *chunk)
+__int64 __fastcall Illusion::AlphaStateInventory::Unload(Illusion::AlphaStateInventory *this, UFG::qChunk *chunk)
 {
   if ( chunk->mUID != 466613461 )
   {
     if ( chunk->mUID != this->mChunkUID )
       return 0i64;
-    this->vfptr->Remove((UFG::qResourceInventory *)this, (UFG::qResourceData *)((char *)&chunk[1] + chunk->mDataOffset));
+    this->vfptr->Remove(this, (UFG::qResourceData *)((char *)&chunk[1] + chunk->mDataOffset));
   }
   return 1i64;
 }
@@ -344,62 +340,58 @@ signed __int64 __fastcall Illusion::AlphaStateInventory::Unload(Illusion::AlphaS
 __int64 Illusion::_dynamic_initializer_for__gRasterStateInventory__()
 {
   UFG::qResourceInventory::qResourceInventory(
-    (UFG::qResourceInventory *)&Illusion::gRasterStateInventory.vfptr,
+    &Illusion::gRasterStateInventory,
     "RasterStateInventory",
     0x3BC715E0u,
     0xB27A4B38,
     0,
     0);
   Illusion::gRasterStateInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::RasterStateInventory::`vftable;
-  return atexit(Illusion::_dynamic_atexit_destructor_for__gRasterStateInventory__);
+  return atexit((int (__fastcall *)())Illusion::_dynamic_atexit_destructor_for__gRasterStateInventory__);
 }
 
 // File Line: 465
 // RVA: 0x8DDD0
-void __fastcall Illusion::RasterStateInventory::Add(Illusion::RasterStateInventory *this, UFG::qResourceData *resource_data)
+void __fastcall Illusion::RasterStateInventory::Add(
+        Illusion::RasterStateInventory *this,
+        Illusion::RasterState *resource_data)
 {
-  Illusion::RasterStateInventory *v2; // rdi
-  UFG::qResourceData *v3; // rbx
-
-  v2 = this;
-  v3 = resource_data;
-  Illusion::RasterState::OnAddPlat((Illusion::RasterState *)resource_data);
-  UFG::qResourceInventory::Add((UFG::qResourceInventory *)&v2->vfptr, v3);
+  Illusion::RasterState::OnAddPlat(resource_data);
+  UFG::qResourceInventory::Add(this, resource_data);
 }
 
 // File Line: 476
 // RVA: 0x94930
-void __fastcall Illusion::RasterStateInventory::Remove(Illusion::RasterStateInventory *this, UFG::qResourceData *resource_data)
+void __fastcall Illusion::RasterStateInventory::Remove(
+        Illusion::RasterStateInventory *this,
+        Illusion::RasterState *resource_data)
 {
-  Illusion::RasterState *v2; // rbx
-
-  v2 = (Illusion::RasterState *)resource_data;
-  UFG::qResourceInventory::Remove((UFG::qResourceInventory *)&this->vfptr, resource_data);
-  Illusion::RasterState::OnRemovePlat(v2);
+  UFG::qResourceInventory::Remove(this, resource_data);
+  Illusion::RasterState::OnRemovePlat(resource_data);
 }
 
 // File Line: 487
 // RVA: 0x92C50
-signed __int64 __fastcall Illusion::RasterStateInventory::Load(Illusion::RasterStateInventory *this, UFG::qChunk *chunk)
+__int64 __fastcall Illusion::RasterStateInventory::Load(Illusion::RasterStateInventory *this, UFG::qChunk *chunk)
 {
   if ( chunk->mUID != -1300608200 )
   {
     if ( chunk->mUID != this->mChunkUID )
       return 0i64;
-    this->vfptr->Add((UFG::qResourceInventory *)this, (UFG::qResourceData *)((char *)&chunk[1] + chunk->mDataOffset));
+    this->vfptr->Add(this, (UFG::qResourceData *)((char *)&chunk[1] + chunk->mDataOffset));
   }
   return 1i64;
 }
 
 // File Line: 506
 // RVA: 0x95B20
-signed __int64 __fastcall Illusion::RasterStateInventory::Unload(Illusion::RasterStateInventory *this, UFG::qChunk *chunk)
+__int64 __fastcall Illusion::RasterStateInventory::Unload(Illusion::RasterStateInventory *this, UFG::qChunk *chunk)
 {
   if ( chunk->mUID != -1300608200 )
   {
     if ( chunk->mUID != this->mChunkUID )
       return 0i64;
-    this->vfptr->Remove((UFG::qResourceInventory *)this, (UFG::qResourceData *)((char *)&chunk[1] + chunk->mDataOffset));
+    this->vfptr->Remove(this, (UFG::qResourceData *)((char *)&chunk[1] + chunk->mDataOffset));
   }
   return 1i64;
 }

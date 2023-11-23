@@ -1,65 +1,63 @@
 // File Line: 31
 // RVA: 0xABFC70
-signed __int64 __fastcall res_unpack(vorbis_info_residue *info, codec_setup_info *ci, oggpack_buffer *opb, CAkVorbisAllocator *VorbisAllocator)
+_BOOL8 __fastcall res_unpack(
+        vorbis_info_residue *info,
+        codec_setup_info *ci,
+        oggpack_buffer *opb,
+        CAkVorbisAllocator *VorbisAllocator)
 {
-  codec_setup_info *v4; // r15
-  vorbis_info_residue *v5; // rdi
-  CAkVorbisAllocator *v6; // rbx
-  oggpack_buffer *v7; // rbp
   unsigned __int8 v8; // al
   unsigned int v9; // ecx
-  unsigned int v10; // er8
-  char *v11; // rdx
-  int v12; // eax
+  unsigned int v10; // r8d
+  char *pCurrentAddress; // rdx
+  int partitions; // eax
   int v13; // eax
   unsigned int v14; // ecx
-  unsigned int v15; // er8
+  unsigned int v15; // r8d
   char *v16; // rdx
-  signed int v17; // esi
+  int v17; // esi
   __int64 v18; // r14
-  int v19; // ebx
+  char v19; // bl
   __int64 v20; // rsi
-  signed int v21; // er14
-  signed int v22; // ebx
+  int i; // r14d
+  int j; // ebx
   unsigned __int8 v23; // al
-  signed __int64 result; // rax
 
-  v4 = ci;
-  v5 = info;
   *(_QWORD *)&info->type = 0i64;
   info->stagemasks = 0i64;
   info->stagebooks = 0i64;
   *(_QWORD *)&info->begin = 0i64;
   *(_QWORD *)&info->grouping = 0i64;
-  v6 = VorbisAllocator;
-  v7 = opb;
   info->type = oggpack_read(opb, 2);
-  v5->begin = oggpack_read(v7, 24);
-  v5->end = oggpack_read(v7, 24);
-  v5->grouping = (unsigned __int64)oggpack_read(v7, 24) + 1;
-  v5->partitions = (unsigned __int64)oggpack_read(v7, 6) + 1;
-  v8 = oggpack_read(v7, 8);
-  v5->groupbook = v8;
-  if ( v8 >= v4->books )
-    goto $errout;
-  if ( v5->partitions && (v9 = (v5->partitions + 3) & 0xFFFFFFFC, v10 = v9 + v6->CurrentSize, v10 <= v6->MaxSize) )
+  info->begin = oggpack_read(opb, 24);
+  info->end = oggpack_read(opb, 24);
+  info->grouping = oggpack_read(opb, 24) + 1;
+  info->partitions = oggpack_read(opb, 6) + 1;
+  v8 = oggpack_read(opb, 8);
+  info->groupbook = v8;
+  if ( v8 >= ci->books )
+    return 1i64;
+  if ( info->partitions
+    && (v9 = (info->partitions + 3) & 0xFFFFFFFC,
+        v10 = v9 + VorbisAllocator->CurrentSize,
+        v10 <= VorbisAllocator->MaxSize) )
   {
-    v11 = v6->pCurrentAddress;
-    v6->CurrentSize = v10;
-    v6->pCurrentAddress = &v11[v9];
+    pCurrentAddress = VorbisAllocator->pCurrentAddress;
+    VorbisAllocator->CurrentSize = v10;
+    VorbisAllocator->pCurrentAddress = &pCurrentAddress[v9];
   }
   else
   {
-    v11 = 0i64;
+    pCurrentAddress = 0i64;
   }
-  v12 = v5->partitions;
-  v5->stagemasks = v11;
-  v13 = 8 * v12;
-  if ( v13 && (v14 = (v13 + 3) & 0xFFFFFFFC, v15 = v14 + v6->CurrentSize, v15 <= v6->MaxSize) )
+  partitions = info->partitions;
+  info->stagemasks = pCurrentAddress;
+  v13 = 8 * partitions;
+  if ( v13 && (v14 = (v13 + 3) & 0xFFFFFFFC, v15 = v14 + VorbisAllocator->CurrentSize, v15 <= VorbisAllocator->MaxSize) )
   {
-    v16 = v6->pCurrentAddress;
-    v6->CurrentSize = v15;
-    v6->pCurrentAddress = &v16[v14];
+    v16 = VorbisAllocator->pCurrentAddress;
+    VorbisAllocator->CurrentSize = v15;
+    VorbisAllocator->pCurrentAddress = &v16[v14];
   }
   else
   {
@@ -67,519 +65,483 @@ signed __int64 __fastcall res_unpack(vorbis_info_residue *info, codec_setup_info
   }
   v17 = 0;
   v18 = 0i64;
-  v5->stagebooks = v16;
-  if ( v5->partitions > 0 )
+  for ( info->stagebooks = v16; v17 < info->partitions; info->stagemasks[v18++] = v19 )
   {
-    do
-    {
-      v19 = oggpack_read(v7, 3);
-      if ( (unsigned int)oggpack_read(v7, 1) )
-        v19 |= 8 * (unsigned __int64)oggpack_read(v7, 5);
-      ++v17;
-      v5->stagemasks[++v18 - 1] = v19;
-    }
-    while ( v17 < v5->partitions );
+    v19 = oggpack_read(opb, 3);
+    if ( (unsigned int)oggpack_read(opb, 1) )
+      v19 |= 8 * oggpack_read(opb, 5);
+    ++v17;
   }
   v20 = 0i64;
-  v21 = 0;
-  if ( v5->partitions > 0 )
+  for ( i = 0; i < info->partitions; ++v20 )
   {
-    do
+    for ( j = 0; j < 8; ++j )
     {
-      v22 = 0;
-      do
+      if ( (((unsigned __int8)info->stagemasks[v20] >> j) & 1) != 0 )
       {
-        if ( ((unsigned __int8)v5->stagemasks[v20] >> v22) & 1 )
-        {
-          v23 = oggpack_read(v7, 8);
-          if ( v23 >= v4->books )
-            goto $errout;
-          v5->stagebooks[8 * v20 + v22] = v23;
-          if ( v22 + 1 > v5->stages )
-            v5->stages = v22 + 1;
-        }
-        else
-        {
-          v5->stagebooks[8 * v20 + v22] = -1;
-        }
-        ++v22;
+        v23 = oggpack_read(opb, 8);
+        if ( v23 >= ci->books )
+          return 1i64;
+        info->stagebooks[8 * v20 + j] = v23;
+        if ( j + 1 > info->stages )
+          info->stages = j + 1;
       }
-      while ( v22 < 8 );
-      ++v21;
-      ++v20;
+      else
+      {
+        info->stagebooks[8 * v20 + j] = -1;
+      }
     }
-    while ( v21 < v5->partitions );
+    ++i;
   }
-  if ( v7->headend < 0 )
-$errout:
-    result = 1i64;
-  else
-    result = 0i64;
-  return result;
+  return opb->headend < 0;
 }
 
 // File Line: 98
 // RVA: 0xABF640
 __int64 __fastcall res_inverse(vorbis_dsp_state *vd, vorbis_info_residue *info, int **in, int *nonzero, int ch)
 {
-  vorbis_info_residue *v5; // r13
-  codec_setup_info *v6; // rdx
+  codec_setup_info *csi; // rdx
   vorbis_dsp_state *v7; // r15
-  int v8; // ecx
-  codebook *v9; // rax
-  __int64 v10; // r12
+  int grouping; // ecx
+  codebook *book_param; // rax
+  __int64 dim; // r12
   int v11; // ebx
-  bool v12; // sf
-  unsigned __int8 v13; // of
-  __int64 v14; // rax
-  int v15; // edx
-  __int64 v16; // r14
+  bool v12; // cc
+  __int64 W; // rax
+  int v14; // edx
+  __int64 v15; // r14
+  int v16; // edx
   int v17; // edx
-  int v18; // edx
-  int v19; // eax
-  signed __int64 v20; // rcx
-  __int64 v21; // rsi
-  int **v22; // rdx
-  int v23; // edi
-  unsigned __int64 v24; // rcx
-  signed __int64 v25; // rax
-  void *v26; // rsp
-  int *v27; // r9
-  signed __int64 v28; // rcx
-  int v29; // edx
-  __int64 v30; // rax
-  int v31; // ebx
-  __int64 v32; // r11
-  __int64 v33; // rax
-  int v34; // ecx
-  __int64 v35; // rsi
-  signed __int64 v36; // rdx
-  signed __int64 v37; // rcx
-  __int64 v38; // rdi
-  signed __int64 v39; // r9
-  signed __int64 v40; // r10
-  signed __int64 v41; // r8
-  __int64 v42; // rdx
-  _BYTE *v43; // rax
-  __int64 v44; // rbx
-  unsigned int v45; // er10
-  __int64 v46; // r11
-  char *v47; // r9
-  unsigned int v48; // er8
-  int v49; // eax
-  int v50; // er9
-  int v51; // edx
-  int v52; // er12
-  int v53; // er14
-  int **v54; // rbx
-  __int64 v55; // r8
-  int v56; // eax
-  int v57; // ebx
+  int v18; // eax
+  __int64 v19; // rcx
+  __int64 v20; // rsi
+  int **v21; // rdx
+  int v22; // edi
+  unsigned __int64 v23; // rcx
+  __int64 v24; // rax
+  void *v25; // rsp
+  int *v26; // r9
+  __int64 v27; // rcx
+  int v28; // edx
+  __int64 v29; // rax
+  int v30; // ebx
+  __int64 v31; // r11
+  __int64 v32; // rax
+  int v33; // ecx
+  __int64 v34; // rsi
+  __int64 v35; // rdx
+  char *v36; // rcx
+  __int64 v37; // rdi
+  __int64 v38; // r9
+  __int64 v39; // r10
+  __int64 v40; // r8
+  _BYTE *v41; // rdx
+  _BYTE *v42; // rax
+  __int64 v43; // rbx
+  unsigned int v44; // r10d
+  __int64 v45; // r11
+  char *v46; // r9
+  unsigned int v47; // r8d
+  int v48; // eax
+  int v49; // r9d
+  int v50; // edx
+  int v51; // r12d
+  unsigned __int8 v52; // r14
+  int **v53; // rbx
+  __int64 v54; // r8
+  int v55; // eax
+  int begin; // ebx
+  int end; // edx
   int v58; // edx
-  int v59; // edx
-  __int64 v60; // rsi
-  unsigned __int64 v61; // rcx
-  signed __int64 v62; // rax
-  void *v63; // rsp
-  int v64; // ecx
-  int v65; // er10
-  signed __int64 v66; // rax
-  int v67; // ecx
-  __int64 v68; // r9
-  __int64 v69; // rdx
-  int v70; // er15
-  int v71; // er14
-  __int64 v72; // rbx
-  int v73; // eax
-  int v74; // er8
-  __int64 v75; // rdi
-  signed __int64 v76; // rdx
-  char *v77; // rcx
-  unsigned int v78; // er10
-  char *v79; // r9
-  __int64 v80; // r11
-  unsigned int v81; // er8
-  signed int v82; // esi
-  int v83; // edi
-  __int64 v84; // rcx
-  int v85; // eax
-  int v87; // [rsp+30h] [rbp+0h]
-  int v88; // [rsp+34h] [rbp+4h]
+  __int64 v59; // rsi
+  unsigned __int64 v60; // rcx
+  __int64 v61; // rax
+  void *v62; // rsp
+  int v63; // ecx
+  int v64; // r10d
+  __int64 i; // rax
+  int v66; // ecx
+  __int64 v67; // r9
+  __int64 v68; // rdx
+  int v69; // r15d
+  int v70; // r14d
+  __int64 v71; // rbx
+  int v72; // eax
+  int v73; // r8d
+  __int64 v74; // rdi
+  __int64 v75; // rdx
+  char *v76; // rcx
+  unsigned int v77; // r10d
+  char *v78; // r9
+  __int64 v79; // r11
+  unsigned int v80; // r8d
+  int v81; // esi
+  int v82; // edi
+  __int64 v83; // rcx
+  int stages; // eax
+  int v86; // [rsp+30h] [rbp+0h] BYREF
+  int v87; // [rsp+34h] [rbp+4h]
   int n; // [rsp+38h] [rbp+8h]
-  __int64 v90; // [rsp+40h] [rbp+10h]
-  __int64 v91; // [rsp+48h] [rbp+18h]
-  __int64 v92; // [rsp+50h] [rbp+20h]
-  __int64 v93; // [rsp+58h] [rbp+28h]
-  __int64 v94; // [rsp+60h] [rbp+30h]
+  __int64 v89; // [rsp+40h] [rbp+10h]
+  __int64 v90; // [rsp+48h] [rbp+18h]
+  __int64 v91; // [rsp+50h] [rbp+20h]
+  __int64 v92; // [rsp+58h] [rbp+28h]
+  __int64 v93; // [rsp+60h] [rbp+30h]
   codebook *book; // [rsp+68h] [rbp+38h]
-  codec_setup_info *v96; // [rsp+70h] [rbp+40h]
-  __int64 v97; // [rsp+78h] [rbp+48h]
-  __int64 v98[14]; // [rsp+80h] [rbp+50h]
-  vorbis_dsp_state *b; // [rsp+100h] [rbp+D0h]
-  int v100; // [rsp+108h] [rbp+D8h]
-  int **a; // [rsp+110h] [rbp+E0h]
+  codec_setup_info *v95; // [rsp+70h] [rbp+40h]
+  __int64 v97[14]; // [rsp+80h] [rbp+50h] BYREF
+  int v99; // [rsp+108h] [rbp+D8h]
 
-  a = in;
-  b = vd;
-  v5 = info;
-  v6 = vd->csi;
+  csi = vd->csi;
   v7 = vd;
-  v8 = v5->grouping;
-  v9 = v6->book_param;
-  v10 = v9[(unsigned __int8)v5->groupbook].dim;
+  grouping = info->grouping;
+  book_param = csi->book_param;
+  dim = book_param[(unsigned __int8)info->groupbook].dim;
   v11 = 0;
-  v13 = __OFSUB__(v5->type, 2);
-  v12 = v5->type - 2 < 0;
-  book = &v9[(unsigned __int8)v5->groupbook];
-  v14 = v7->state.W;
-  v96 = v6;
-  v15 = v6->blocksizes[v14];
-  n = v8;
-  v100 = v10;
-  v16 = v10;
-  v94 = v10;
-  if ( !(v12 ^ v13) )
+  v12 = info->type < 2;
+  book = &book_param[(unsigned __int8)info->groupbook];
+  W = v7->state.W;
+  v95 = csi;
+  v14 = csi->blocksizes[W];
+  n = grouping;
+  v99 = dim;
+  v15 = dim;
+  v93 = dim;
+  if ( !v12 )
   {
-    v57 = v5->begin;
-    v58 = ch * v15 >> 1;
-    if ( v5->end < v58 )
-      v58 = v5->end;
-    v59 = v58 - v57;
-    if ( v59 <= 0 )
+    begin = info->begin;
+    end = (ch * v14) >> 1;
+    if ( info->end < end )
+      end = info->end;
+    v58 = end - begin;
+    if ( v58 <= 0 )
       return 0i64;
-    v60 = v59 / v8;
-    v61 = (signed int)v10 * (((signed int)v60 + (signed int)v10 - 1) / (signed int)v10);
-    v62 = v61 + 15;
-    if ( v61 + 15 <= v61 )
-      v62 = 1152921504606846960i64;
-    v63 = alloca(v62);
-    v64 = 0;
-    v65 = v57 / ch;
-    v87 = v57 / ch;
-    v66 = 0i64;
-    if ( ch > 0 )
+    v59 = v58 / grouping;
+    v60 = (int)dim * (((int)v59 + (int)dim - 1) / (int)dim);
+    v61 = v60 + 15;
+    if ( v60 + 15 <= v60 )
+      v61 = 0xFFFFFFFFFFFFFF0i64;
+    v62 = alloca(v61 & 0xFFFFFFFFFFFFFFF0ui64);
+    v63 = 0;
+    v64 = begin / ch;
+    v86 = begin / ch;
+    for ( i = 0i64; i < ch; ++v63 )
     {
-      do
-      {
-        if ( nonzero[v66] )
-          break;
-        ++v66;
-        ++v64;
-      }
-      while ( v66 < ch );
+      if ( nonzero[i] )
+        break;
+      ++i;
     }
-    if ( v64 == ch )
+    if ( v63 == ch )
       return 0i64;
-    v67 = 0;
-    v68 = 0i64;
-    v88 = 0;
-    v90 = 0i64;
-    v69 = v60;
-    v91 = v60;
-    v70 = n / ch;
-    if ( v5->stages <= 0 )
+    v66 = 0;
+    v67 = 0i64;
+    v87 = 0;
+    v89 = 0i64;
+    v68 = v59;
+    v90 = v59;
+    v69 = n / ch;
+    if ( info->stages <= 0 )
       return 0i64;
     while ( 1 )
     {
-      v71 = 0;
-      v72 = 0i64;
-      if ( v69 > 0 )
+      v70 = 0;
+      v71 = 0i64;
+      if ( v68 > 0 )
       {
-        v73 = v10;
-        v74 = __ROL4__(1, v67);
-        n = __ROL4__(1, v67);
+        v72 = dim;
+        v73 = __ROL4__(1, v66);
+        n = v73;
         while ( 1 )
         {
-          if ( !v67 )
+          if ( !v66 )
           {
-            v75 = v94;
-            *((_BYTE *)&v87 + v94 + v72 - 1) = 1;
-            if ( v75 - 2 >= 0 )
+            v74 = v93;
+            *((_BYTE *)&v86 + v93 + v71 - 1) = 1;
+            if ( v74 - 2 >= 0 )
             {
-              v76 = v75 - 1;
-              v77 = (char *)&v87 + v72 + v75 - 2;
+              v75 = v74 - 1;
+              v76 = (char *)&v86 + v71 + v74 - 2;
               do
               {
-                --v77;
-                v77[1] = v77[2] * v5->partitions;
                 --v76;
+                v76[1] = v76[2] * info->partitions;
+                --v75;
               }
-              while ( v76 );
+              while ( v75 );
             }
-            v78 = ak_vorbis_book_decode(book, &b->opb);
-            if ( v75 > 0 )
+            v77 = ak_vorbis_book_decode(book, &vd->opb);
+            if ( v74 > 0 )
             {
-              v79 = (char *)&v87 + v72;
-              v80 = v75;
+              v78 = (char *)&v86 + v71;
+              v79 = v74;
               do
               {
-                v81 = *v79++;
-                *(v79 - 1) = v78 / v81;
-                v78 -= v81 * (char)(v78 / v81);
-                --v80;
+                v80 = *v78++;
+                *(v78 - 1) = v77 / v80;
+                v77 -= v80 * (char)(v77 / v80);
+                --v79;
               }
-              while ( v80 );
+              while ( v79 );
             }
-            v65 = v87;
+            v64 = v86;
+            v67 = v89;
+            LOBYTE(v73) = n;
             v68 = v90;
-            LOBYTE(v74) = n;
-            v69 = v91;
-            v73 = v75;
+            v72 = v74;
           }
-          v82 = 0;
-          if ( v73 > 0 )
+          v81 = 0;
+          if ( v72 > 0 )
             break;
 LABEL_79:
-          v68 = v90;
-          v67 = v88;
-          v65 = v87;
-          if ( v72 >= v69 )
+          v67 = v89;
+          v66 = v87;
+          v64 = v86;
+          if ( v71 >= v68 )
             goto LABEL_80;
         }
-        v83 = v65 + v70 * v71;
-        while ( v72 < v69 )
+        v82 = v64 + v69 * v70;
+        while ( v71 < v68 )
         {
-          v84 = *((char *)&v87 + v72);
-          if ( (unsigned __int8)v74 & v5->stagemasks[v84] )
+          v83 = *((char *)&v86 + v71);
+          if ( ((unsigned __int8)v73 & info->stagemasks[v83]) != 0 )
           {
             vorbis_book_decodevv_add_2ch(
-              &v96->book_param[(unsigned __int8)v5->stagebooks[8 * v84 + v68]],
-              a,
-              v83,
-              &b->opb,
-              v70,
+              &v95->book_param[(unsigned __int8)info->stagebooks[8 * v83 + v67]],
+              in,
+              v82,
+              &vd->opb,
+              v69,
               -8);
-            v69 = v91;
-            LOBYTE(v74) = n;
+            v68 = v90;
+            LOBYTE(v73) = n;
           }
-          v73 = v10;
-          v68 = v90;
-          ++v82;
+          v72 = dim;
+          v67 = v89;
+          ++v81;
+          ++v70;
+          v82 += v69;
           ++v71;
-          v83 += v70;
-          ++v72;
-          if ( v82 >= (signed int)v10 )
+          if ( v81 >= (int)dim )
             goto LABEL_79;
         }
 LABEL_80:
-        v68 = v90;
-        v67 = v88;
-        v65 = v87;
+        v67 = v89;
+        v66 = v87;
+        v64 = v86;
       }
-      v85 = v5->stages;
+      stages = info->stages;
+      ++v66;
       ++v67;
-      ++v68;
-      v88 = v67;
-      v90 = v68;
-      if ( v67 >= v85 )
+      v87 = v66;
+      v89 = v67;
+      if ( v66 >= stages )
         return 0i64;
     }
   }
-  v17 = v15 >> 1;
-  if ( v5->end < v17 )
-    v17 = v5->end;
-  v18 = v17 - v5->begin;
-  if ( v18 <= 0 )
+  v16 = v14 >> 1;
+  if ( info->end < v16 )
+    v16 = info->end;
+  v17 = v16 - info->begin;
+  if ( v17 <= 0 )
     return 0i64;
-  v19 = v18 / v8;
-  v20 = 0i64;
-  v21 = v19;
+  v18 = v17 / grouping;
+  v19 = 0i64;
+  v20 = v18;
   if ( ch <= 0i64 )
     return 0i64;
-  v22 = in;
+  v21 = in;
   do
   {
-    if ( nonzero[v20] )
+    if ( nonzero[v19] )
     {
       ++v11;
-      ++v22;
-      *(v22 - 1) = in[v20];
+      *v21++ = in[v19];
     }
-    ++v20;
+    ++v19;
   }
-  while ( v20 < ch );
+  while ( v19 < ch );
   if ( !v11 )
     return 0i64;
-  v23 = v10 * ((v19 + (signed int)v10 - 1) / (signed int)v10);
-  v24 = v11 * v23;
-  v25 = v24 + 15;
-  if ( v24 + 15 <= v24 )
-    v25 = 1152921504606846960i64;
-  v26 = alloca(v25);
-  v27 = &v87;
-  v28 = 1i64;
-  v93 = v11;
-  v98[0] = (__int64)&v87;
+  v22 = dim * ((v18 + (int)dim - 1) / (int)dim);
+  v23 = v11 * v22;
+  v24 = v23 + 15;
+  if ( v23 + 15 <= v23 )
+    v24 = 0xFFFFFFFFFFFFFF0i64;
+  v25 = alloca(v24 & 0xFFFFFFFFFFFFFFF0ui64);
+  v26 = &v86;
+  v27 = 1i64;
+  v92 = v11;
+  v97[0] = (__int64)&v86;
   if ( v11 > 1i64 )
   {
-    v29 = v23;
+    v28 = v22;
     do
     {
-      v30 = v29;
-      ++v28;
-      v29 += v23;
-      *(&v97 + v28) = (__int64)v27 + v30;
-      v27 = (int *)v98[0];
+      v29 = v28;
+      ++v27;
+      v28 += v22;
+      v97[v27 - 1] = (__int64)v26 + v29;
+      v26 = (int *)v97[0];
     }
-    while ( v28 < v11 );
+    while ( v27 < v11 );
   }
-  v31 = 0;
-  v32 = 0i64;
-  v33 = v21;
-  v87 = 0;
-  v92 = 0i64;
-  v91 = v21;
-  if ( v5->stages <= 0 )
+  v30 = 0;
+  v31 = 0i64;
+  v32 = v20;
+  v86 = 0;
+  v91 = 0i64;
+  v90 = v20;
+  if ( info->stages <= 0 )
     return 0i64;
   while ( 1 )
   {
-    v34 = 0;
-    v35 = 0i64;
-    v88 = 0;
-    if ( v33 > 0 )
+    v33 = 0;
+    v34 = 0i64;
+    v87 = 0;
+    if ( v32 > 0 )
       break;
 LABEL_51:
-    v56 = v5->stages;
+    v55 = info->stages;
+    ++v30;
     ++v31;
-    ++v32;
-    v87 = v31;
-    v92 = v32;
-    if ( v31 >= v56 )
+    v86 = v30;
+    v91 = v31;
+    if ( v30 >= v55 )
       return 0i64;
-    LODWORD(v10) = v100;
-    v33 = v91;
-    v27 = (int *)v98[0];
+    LODWORD(dim) = v99;
+    v32 = v90;
+    v26 = (int *)v97[0];
   }
-  while ( v31 )
+  while ( v30 )
   {
-    v38 = v93;
+    v37 = v92;
 LABEL_36:
-    v49 = 0;
-    LODWORD(v90) = 0;
-    if ( (signed int)v10 > 0 )
+    v48 = 0;
+    LODWORD(v89) = 0;
+    if ( (int)dim > 0 )
     {
-      v50 = n;
-      v51 = v100;
-      v52 = n * v34;
-      while ( v35 < v91 )
+      v49 = n;
+      v50 = v99;
+      v51 = n * v33;
+      while ( v34 < v90 )
       {
-        v53 = __ROL4__(1, v31);
-        if ( v38 > 0 )
+        v52 = __ROL4__(1, v30);
+        if ( v37 > 0 )
         {
-          v54 = a;
+          v53 = in;
           do
           {
-            v55 = (*(char **)((char *)v54 + (char *)v98 - (char *)a))[v35];
-            if ( (unsigned __int8)v53 & v5->stagemasks[v55] )
+            v54 = (*(char **)((char *)v53 + (char *)v97 - (char *)in))[v34];
+            if ( (v52 & info->stagemasks[v54]) != 0 )
             {
               vorbis_book_decodev_add(
-                &v96->book_param[(unsigned __int8)v5->stagebooks[8 * v55 + v32]],
-                &(*v54)[v52 + v5->begin],
-                &b->opb,
-                v50,
+                &v95->book_param[(unsigned __int8)info->stagebooks[8 * v54 + v31]],
+                &(*v53)[v51 + info->begin],
+                &vd->opb,
+                v49,
                 -8);
-              v50 = n;
+              v49 = n;
             }
-            v32 = v92;
-            ++v54;
-            --v38;
+            v31 = v91;
+            ++v53;
+            --v37;
           }
-          while ( v38 );
-          v49 = v90;
-          v38 = v93;
-          v51 = v100;
-          v31 = v87;
+          while ( v37 );
+          v48 = v89;
+          v37 = v92;
+          v50 = v99;
+          v30 = v86;
         }
-        v32 = v92;
-        ++v49;
-        v34 = v88 + 1;
-        v52 += v50;
-        ++v35;
-        ++v88;
-        LODWORD(v90) = v49;
-        if ( v49 >= v51 )
+        v31 = v91;
+        ++v48;
+        v33 = v87 + 1;
+        v51 += v49;
+        ++v34;
+        ++v87;
+        LODWORD(v89) = v48;
+        if ( v48 >= v50 )
         {
-          v16 = v94;
-          v7 = b;
-          LODWORD(v10) = v94;
+          v15 = v93;
+          v7 = vd;
+          LODWORD(dim) = v93;
           goto LABEL_47;
         }
       }
-      v16 = v94;
-      v7 = b;
+      v15 = v93;
+      v7 = vd;
       goto LABEL_51;
     }
 LABEL_47:
-    v32 = v92;
-    v27 = (int *)v98[0];
-    if ( v35 >= v91 )
+    v31 = v91;
+    v26 = (int *)v97[0];
+    if ( v34 >= v90 )
       goto LABEL_51;
   }
-  *((_BYTE *)v27 + v16 + v35 - 1) = 1;
-  if ( v16 - 2 >= 0 )
+  *((_BYTE *)v26 + v15 + v34 - 1) = 1;
+  if ( v15 - 2 >= 0 )
   {
-    v36 = v16 - 1;
-    v37 = (signed __int64)v27 + v35 + v16 - 2;
+    v35 = v15 - 1;
+    v36 = (char *)v26 + v34 + v15 - 2;
     do
     {
-      --v37;
-      *(_BYTE *)(v37 + 1) = *(_BYTE *)(v37 + 2) * v5->partitions;
       --v36;
+      v36[1] = v36[2] * info->partitions;
+      --v35;
     }
-    while ( v36 );
+    while ( v35 );
   }
-  v38 = v93;
-  v39 = 1i64;
-  if ( v93 > 1 )
+  v37 = v92;
+  v38 = 1i64;
+  if ( v92 > 1 )
   {
-    v40 = v16 - 1;
+    v39 = v15 - 1;
     do
     {
-      v41 = v16 - 1;
-      if ( v40 >= 0 )
+      v40 = v15 - 1;
+      if ( v39 >= 0 )
       {
-        v42 = v40 + v35 + v98[v39];
-        v43 = (_BYTE *)(v40 + v35 + *(&v97 + v39));
+        v41 = (_BYTE *)(v39 + v34 + v97[v38]);
+        v42 = (_BYTE *)(v39 + v34 + v97[v38 - 1]);
         do
         {
-          --v41;
-          *(_BYTE *)(--v42 + 1) = *v43--;
+          --v40;
+          *v41-- = *v42--;
         }
-        while ( v41 >= 0 );
+        while ( v40 >= 0 );
       }
-      ++v39;
+      ++v38;
     }
-    while ( v39 < v38 );
+    while ( v38 < v37 );
   }
-  v44 = 0i64;
-  if ( v38 <= 0 )
+  v43 = 0i64;
+  if ( v37 <= 0 )
   {
 LABEL_35:
-    v31 = v87;
-    v34 = v88;
+    v30 = v86;
+    v33 = v87;
     goto LABEL_36;
   }
   while ( 1 )
   {
-    v45 = ak_vorbis_book_decode(book, &v7->opb);
+    v44 = ak_vorbis_book_decode(book, &v7->opb);
     if ( v7->opb.headend < 0 )
       return 0i64;
-    if ( v16 > 0 )
+    if ( v15 > 0 )
     {
-      v46 = v16;
-      v47 = (char *)(v35 + v98[v44]);
+      v45 = v15;
+      v46 = (char *)(v34 + v97[v43]);
       do
       {
-        v48 = *v47++;
-        *(v47 - 1) = v45 / v48;
-        v45 -= v48 * (char)(v45 / v48);
-        --v46;
+        v47 = *v46++;
+        *(v46 - 1) = v44 / v47;
+        v44 -= v47 * (char)(v44 / v47);
+        --v45;
       }
-      while ( v46 );
+      while ( v45 );
     }
-    if ( ++v44 >= v38 )
+    if ( ++v43 >= v37 )
     {
-      v32 = v92;
+      v31 = v91;
       goto LABEL_35;
     }
   }

@@ -3,18 +3,18 @@
 __int64 dynamic_initializer_for__hkMonitorStream__m_instance__()
 {
   hkMonitorStream__m_instance.m_slotID = TlsAlloc();
-  return atexit(dynamic_atexit_destructor_for__hkMonitorStream__m_instance__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__hkMonitorStream__m_instance__);
 }
 
 // File Line: 24
 // RVA: 0xC5C560
 void hkMonitorStream::init(void)
 {
-  _QWORD **v0; // rax
+  _QWORD **Value; // rax
   _QWORD *v1; // rbx
 
-  v0 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v1 = (_QWORD *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v0[12] + 8i64))(v0[12], 40i64);
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v1 = (_QWORD *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[12] + 8i64))(Value[12], 40i64);
   TlsSetValue(hkMonitorStream__m_instance.m_slotID, v1);
   *((_BYTE *)v1 + 32) = 0;
   *v1 = 0i64;
@@ -27,29 +27,27 @@ void hkMonitorStream::init(void)
 // RVA: 0xC5C5C0
 void __fastcall hkMonitorStream::quit(hkMonitorStream *this)
 {
-  hkMonitorStream *v1; // rbx
-  LPVOID v2; // rax
-  char *v3; // rdi
+  LPVOID Value; // rax
+  char *m_storage; // rdi
   LPVOID v4; // rsi
   char *v5; // rbx
   _QWORD **v6; // rax
   _QWORD **v7; // rax
 
-  v1 = this;
-  v2 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v3 = v1->m_start.m_storage;
-  v4 = v2;
-  if ( v1->m_start.m_storage && v1->m_isBufferAllocatedOnTheHeap.m_bool )
+  Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  m_storage = this->m_start.m_storage;
+  v4 = Value;
+  if ( this->m_start.m_storage && this->m_isBufferAllocatedOnTheHeap.m_bool )
   {
-    v5 = v1->m_capacity.m_storage;
+    v5 = this->m_capacity.m_storage;
     v6 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
     (*(void (__fastcall **)(_QWORD *, char *, _QWORD))(*v6[12] + 32i64))(
       v6[12],
-      v3,
-      (unsigned int)((_DWORD)v5 - (_DWORD)v3));
+      m_storage,
+      (unsigned int)((_DWORD)v5 - (_DWORD)m_storage));
   }
   v7 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  (*(void (__fastcall **)(_QWORD *, LPVOID, signed __int64))(*v7[12] + 16i64))(v7[12], v4, 40i64);
+  (*(void (__fastcall **)(_QWORD *, LPVOID, __int64))(*v7[12] + 16i64))(v7[12], v4, 40i64);
   TlsSetValue(hkMonitorStream__m_instance.m_slotID, 0i64);
 }
 
@@ -57,22 +55,18 @@ void __fastcall hkMonitorStream::quit(hkMonitorStream *this)
 // RVA: 0xC5C440
 void __fastcall hkMonitorStream::resize(hkMonitorStream *this, int newSize)
 {
-  char *v2; // rbp
+  char *m_storage; // rbp
   char *v3; // rdi
-  int v4; // esi
-  hkMonitorStream *v5; // rbx
-  _QWORD **v6; // rax
+  _QWORD **Value; // rax
   _QWORD **v7; // rax
-  __int64 v8; // rax
+  char *v8; // rax
   __int64 v9; // rcx
   char *v10; // rax
-  int v11; // [rsp+38h] [rbp+10h]
+  int v11; // [rsp+38h] [rbp+10h] BYREF
 
-  v2 = this->m_capacity.m_storage;
+  m_storage = this->m_capacity.m_storage;
   v3 = this->m_start.m_storage;
-  v4 = newSize;
-  v5 = this;
-  if ( (char *)newSize != (char *)(this->m_capacity.m_storage - this->m_start.m_storage) )
+  if ( (char *)newSize != (char *)(m_storage - this->m_start.m_storage) )
   {
     if ( newSize <= 0 )
     {
@@ -84,23 +78,23 @@ void __fastcall hkMonitorStream::resize(hkMonitorStream *this, int newSize)
       {
         if ( this->m_isBufferAllocatedOnTheHeap.m_bool )
         {
-          v6 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-          (*(void (__fastcall **)(_QWORD *, char *, _QWORD))(*v6[12] + 32i64))(
-            v6[12],
+          Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+          (*(void (__fastcall **)(_QWORD *, char *, _QWORD))(*Value[12] + 32i64))(
+            Value[12],
             v3,
-            (unsigned int)((_DWORD)v2 - (_DWORD)v3));
+            (unsigned int)((_DWORD)m_storage - (_DWORD)v3));
         }
       }
-      v5->m_isBufferAllocatedOnTheHeap.m_bool = 1;
+      this->m_isBufferAllocatedOnTheHeap.m_bool = 1;
       v7 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v11 = v4;
-      v8 = (*(__int64 (__fastcall **)(_QWORD *, int *))(*v7[12] + 24i64))(v7[12], &v11);
+      v11 = newSize;
+      v8 = (char *)(*(__int64 (__fastcall **)(_QWORD *, int *))(*v7[12] + 24i64))(v7[12], &v11);
       v9 = v11;
-      v5->m_start.m_storage = (char *)v8;
-      v5->m_end.m_storage = (char *)v8;
-      v10 = (char *)(v9 + v8);
-      v5->m_capacity.m_storage = v10;
-      v5->m_capacityMinus16.m_storage = v10 - 32;
+      this->m_start.m_storage = v8;
+      this->m_end.m_storage = v8;
+      v10 = &v8[v9];
+      this->m_capacity.m_storage = v10;
+      this->m_capacityMinus16.m_storage = v10 - 32;
     }
   }
 }
@@ -110,19 +104,15 @@ void __fastcall hkMonitorStream::resize(hkMonitorStream *this, int newSize)
 void __fastcall hkMonitorStream::setStaticBuffer(hkMonitorStream *this, char *buffer, int bufferSize)
 {
   __int64 v3; // rsi
-  char *v4; // rdi
-  hkMonitorStream *v5; // rbx
 
   v3 = bufferSize;
-  v4 = buffer;
-  v5 = this;
   if ( this->m_isBufferAllocatedOnTheHeap.m_bool )
     hkMonitorStream::resize(this, 0);
-  v5->m_isBufferAllocatedOnTheHeap.m_bool = 0;
-  v5->m_capacity.m_storage = &v4[v3];
-  v5->m_start.m_storage = v4;
-  v5->m_capacityMinus16.m_storage = &v4[v3 - 32];
-  v5->m_end.m_storage = v4;
+  this->m_isBufferAllocatedOnTheHeap.m_bool = 0;
+  this->m_capacity.m_storage = &buffer[v3];
+  this->m_start.m_storage = buffer;
+  this->m_capacityMinus16.m_storage = &buffer[v3 - 32];
+  this->m_end.m_storage = buffer;
 }
 
 // File Line: 109

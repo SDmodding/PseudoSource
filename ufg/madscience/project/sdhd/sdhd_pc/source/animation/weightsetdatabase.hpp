@@ -16,54 +16,43 @@ __int64 __fastcall Weightset::GetClassNameUID(Weightset *this)
 // RVA: 0x39EA20
 void __fastcall WeightSetGroup::WeightSetGroup(WeightSetGroup *this)
 {
-  WeightSetGroup *v1; // rbx
-  UFG::qNode<WeightSetGroup,WeightSetGroup> *v2; // rax
-  BinString *v3; // rcx
+  BinString *p_mName; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  v2 = (UFG::qNode<WeightSetGroup,WeightSetGroup> *)&this->mPrev;
-  v2->mPrev = v2;
-  v2->mNext = v2;
+  this->mPrev = &this->UFG::qNode<WeightSetGroup,WeightSetGroup>;
+  this->mNext = &this->UFG::qNode<WeightSetGroup,WeightSetGroup>;
   this->vfptr = (Expression::IMemberMapVtbl *)&WeightSetGroup::`vftable;
-  v3 = &this->mName;
-  v3->mOffset = 1i64;
-  BinString::Set(v3, &customWorldMapCaption);
-  v1->mWeightsets.mCount = 0;
-  v1->mWeightsets.mData.mOffset = 0i64;
+  p_mName = &this->mName;
+  p_mName->mOffset = 1i64;
+  BinString::Set(p_mName, &customCaption);
+  this->mWeightsets.mCount = 0;
+  this->mWeightsets.mData.mOffset = 0i64;
 }
 
 // File Line: 173
 // RVA: 0x29F8F0
 void __fastcall WeightSetGroup::~WeightSetGroup(WeightSetGroup *this)
 {
-  WeightSetGroup *v1; // rbx
   char *v2; // rcx
-  UFG::qNode<WeightSetGroup,WeightSetGroup> *v3; // rdx
-  UFG::qNode<WeightSetGroup,WeightSetGroup> *v4; // rcx
-  UFG::qNode<WeightSetGroup,WeightSetGroup> *v5; // rax
+  UFG::qNode<WeightSetGroup,WeightSetGroup> *mPrev; // rcx
+  UFG::qNode<WeightSetGroup,WeightSetGroup> *mNext; // rax
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&WeightSetGroup::`vftable;
   BinPtrArray<JointReferences,1,0>::Clear((BinPtrArray<ITrack,1,0> *)&this->mWeightsets);
-  if ( !(~LOBYTE(v1->mName.mOffset) & 1) )
+  if ( (this->mName.mOffset & 1) != 0 && (this->mName.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v1->mName.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v2 = (char *)&v1->mName + (v1->mName.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v2 != BinString::sEmptyString )
-        operator delete[](v2);
-    }
+    v2 = (char *)&this->mName + (this->mName.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v2 != BinString::sEmptyString )
+      operator delete[](v2);
   }
-  v3 = (UFG::qNode<WeightSetGroup,WeightSetGroup> *)&v1->mPrev;
-  v4 = v1->mPrev;
-  v5 = v1->mNext;
-  v4->mNext = v5;
-  v5->mPrev = v4;
-  v3->mPrev = v3;
-  v3->mNext = v3;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  mPrev = this->mPrev;
+  mNext = this->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->mPrev = &this->UFG::qNode<WeightSetGroup,WeightSetGroup>;
+  this->mNext = &this->UFG::qNode<WeightSetGroup,WeightSetGroup>;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 175
@@ -75,6 +64,7 @@ __int64 __fastcall WeightSetGroup::GetClassNameUID(WeightSetGroup *this)
 
 // File Line: 215
 // RVA: 0x2C30B0
+// attributes: thunk
 WeightSetDataBase *__fastcall WeightSetGroup::GetResourceOwner(WeightSetGroup *this)
 {
   return WeightSetDataBase::GetInstance();

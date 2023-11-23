@@ -28,9 +28,12 @@ hkClass *__fastcall hkpLinearClearanceConstraintData::Atoms::staticClass()
 
 // File Line: 103
 // RVA: 0xD43C00
-void __fastcall finishLoadedObjecthkpLinearClearanceConstraintDataAtoms(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpLinearClearanceConstraintDataAtoms(
+        hkpLinearClearanceConstraintData::Atoms *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpLinearClearanceConstraintData::Atoms::Atoms);
+  if ( p )
+    hkpLinearClearanceConstraintData::Atoms::Atoms(p, finishing);
 }
 
 // File Line: 109
@@ -70,36 +73,29 @@ hkClass *__fastcall hkpLinearClearanceConstraintData::staticClass()
 
 // File Line: 157
 // RVA: 0xD43C30
-void __fastcall finishLoadedObjecthkpLinearClearanceConstraintData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpLinearClearanceConstraintData(char *p, hkFinishLoadedObjectFlag finishing)
 {
-  int v2; // edi
-  char *v3; // rbx
-
   if ( p )
   {
-    v2 = finishing;
-    v3 = (char *)p;
-    hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    *(_QWORD *)v3 = &hkpLinearClearanceConstraintData::`vftable;
-    hkpLinearClearanceConstraintData::Atoms::Atoms(
-      (hkpLinearClearanceConstraintData::Atoms *)(v3 + 32),
-      (hkFinishLoadedObjectFlag)v2);
+    hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, finishing);
+    *(_QWORD *)p = &hkpLinearClearanceConstraintData::`vftable;
+    hkpLinearClearanceConstraintData::Atoms::Atoms((hkpLinearClearanceConstraintData::Atoms *)(p + 32), finishing);
   }
 }
 
 // File Line: 163
 // RVA: 0xD43C70
-void __fastcall cleanupLoadedObjecthkpLinearClearanceConstraintData(void *p)
+void __fastcall cleanupLoadedObjecthkpLinearClearanceConstraintData(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 167
 // RVA: 0xD43C80
 hkBaseObjectVtbl *__fastcall getVtablehkpLinearClearanceConstraintData()
 {
-  hkpConstraintData v1; // [rsp+20h] [rbp-148h]
-  hkpLinearClearanceConstraintData::Atoms v2; // [rsp+40h] [rbp-128h]
+  hkpConstraintData v1; // [rsp+20h] [rbp-148h] BYREF
+  hkpLinearClearanceConstraintData::Atoms v2; // [rsp+40h] [rbp-128h] BYREF
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
   v1.vfptr = (hkBaseObjectVtbl *)&hkpLinearClearanceConstraintData::`vftable;
@@ -118,8 +114,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpLinearClearanceConstraintDataTypeI
   hkpLinearClearanceConstraintDataTypeInfo.m_typeName = "hkpLinearClearanceConstraintData";
   hkpLinearClearanceConstraintDataTypeInfo.m_vtable = result;
   hkpLinearClearanceConstraintDataTypeInfo.m_scopedName = "!hkpLinearClearanceConstraintData";
-  hkpLinearClearanceConstraintDataTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpLinearClearanceConstraintData;
-  hkpLinearClearanceConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpLinearClearanceConstraintData;
+  hkpLinearClearanceConstraintDataTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpLinearClearanceConstraintData;
+  hkpLinearClearanceConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpLinearClearanceConstraintData;
   return result;
 }
 

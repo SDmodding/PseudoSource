@@ -84,118 +84,125 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
 
 // File Line: 51
 // RVA: 0x7820D0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundChannel::SoundChannel(Scaleform::GFx::AS3::Instances::fl_media::SoundChannel *this, Scaleform::GFx::AS3::InstanceTraits::Traits *t)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundChannel::SoundChannel(
+        Scaleform::GFx::AS3::Instances::fl_media::SoundChannel *this,
+        Scaleform::GFx::AS3::InstanceTraits::Traits *t)
 {
-  Scaleform::GFx::AS3::InstanceTraits::Traits *v2; // rbx
-  Scaleform::GFx::AS3::Instances::fl_media::SoundChannel *v3; // rdi
-
-  v2 = t;
-  v3 = this;
-  Scaleform::GFx::AS3::Instance::Instance((Scaleform::GFx::AS3::Instance *)&this->vfptr, t);
-  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable;
-  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::`vftable;
-  v3->VMRef = v2->pVM;
-  v3->pImpl.pObject = 0i64;
-  v3->pImpl.Owner = 1;
-  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_media::SoundChannel::`vftable;
+  Scaleform::GFx::AS3::Instance::Instance(this, t);
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable;
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::`vftable;
+  this->VMRef = t->pVM;
+  this->pImpl.pObject = 0i64;
+  this->pImpl.Owner = 1;
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_media::SoundChannel::`vftable;
 }
 
 // File Line: 57
 // RVA: 0x8514A0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundChannel::leftPeakGet(Scaleform::GFx::AS3::Instances::fl_media::SoundChannel *this, long double *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundChannel::leftPeakGet(
+        Scaleform::GFx::AS3::Instances::fl_media::SoundChannel *this,
+        long double *result)
 {
-  Scaleform::GFx::AS3::FlashUI *v2; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v2 = this->pTraits.pObject->pVM->UI;
-  v2->vfptr->Output(v2, Output_Warning, "The method SoundChannel::leftPeakGet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method SoundChannel::leftPeakGet() is not implemented\n");
 }
 
 // File Line: 64
 // RVA: 0x857AF0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundChannel::positionGet(Scaleform::GFx::AS3::Instances::fl_media::SoundChannel *this, long double *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundChannel::positionGet(
+        Scaleform::GFx::AS3::Instances::fl_media::SoundChannel *this,
+        long double *result)
 {
-  Scaleform::GFx::AS3::FlashUI *v2; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v2 = this->pTraits.pObject->pVM->UI;
-  v2->vfptr->Output(v2, Output_Warning, "The method SoundChannel::positionGet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method SoundChannel::positionGet() is not implemented\n");
 }
 
 // File Line: 78
 // RVA: 0x859D30
-void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundChannel::rightPeakGet(Scaleform::GFx::AS3::Instances::fl_media::SoundChannel *this, long double *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundChannel::rightPeakGet(
+        Scaleform::GFx::AS3::Instances::fl_media::SoundChannel *this,
+        long double *result)
 {
-  Scaleform::GFx::AS3::FlashUI *v2; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v2 = this->pTraits.pObject->pVM->UI;
-  v2->vfptr->Output(v2, Output_Warning, "The method SoundChannel::rightPeakGet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method SoundChannel::rightPeakGet() is not implemented\n");
 }
 
 // File Line: 85
 // RVA: 0x85F710
-void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundChannel::soundTransformGet(Scaleform::GFx::AS3::Instances::fl_media::SoundChannel *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_media::SoundTransform> *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundChannel::soundTransformGet(
+        Scaleform::GFx::AS3::Instances::fl_media::SoundChannel *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_media::SoundTransform> *result)
 {
-  Scaleform::GFx::AS3::FlashUI *v2; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v2 = this->pTraits.pObject->pVM->UI;
-  v2->vfptr->Output(v2, Output_Warning, "The method SoundChannel::soundTransformGet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method SoundChannel::soundTransformGet() is not implemented\n");
 }
 
 // File Line: 106
 // RVA: 0x85F7A0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundChannel::soundTransformSet(Scaleform::GFx::AS3::Instances::fl_media::SoundChannel *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundChannel::soundTransformSet(
+        Scaleform::GFx::AS3::Instances::fl_media::SoundChannel *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *value)
 {
-  Scaleform::GFx::AS3::FlashUI *v3; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v3 = this->pTraits.pObject->pVM->UI;
-  v3->vfptr->Output(v3, Output_Warning, "The method SoundChannel::soundTransformSet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method SoundChannel::soundTransformSet() is not implemented\n");
 }
 
 // File Line: 124
 // RVA: 0x8600B0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundChannel::stop(Scaleform::GFx::AS3::Instances::fl_media::SoundChannel *this, Scaleform::GFx::AS3::Value *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundChannel::stop(
+        Scaleform::GFx::AS3::Instances::fl_media::SoundChannel *this,
+        Scaleform::GFx::AS3::Value *result)
 {
-  Scaleform::GFx::AS3::FlashUI *v2; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v2 = this->pTraits.pObject->pVM->UI;
-  v2->vfptr->Output(v2, Output_Warning, "The method SoundChannel::stop() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method SoundChannel::stop() is not implemented\n");
 }
 
 // File Line: 189
 // RVA: 0x800060
-void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl_media::SoundChannel::MakeObject(Scaleform::GFx::AS3::InstanceTraits::fl_media::SoundChannel *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::InstanceTraits::Traits *t)
+void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl_media::SoundChannel::MakeObject(
+        Scaleform::GFx::AS3::InstanceTraits::fl_media::SoundChannel *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::InstanceTraits::fl_media::SoundChannel *t)
 {
-  Scaleform::GFx::AS3::Value *v3; // rbx
-  Scaleform::GFx::AS3::Object **v4; // rax
-  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_media::SoundChannel> resulta; // [rsp+48h] [rbp+20h]
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_media::SoundChannel> *Instance; // rax
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_media::SoundChannel> resulta; // [rsp+48h] [rbp+20h] BYREF
 
-  v3 = result;
-  v4 = (Scaleform::GFx::AS3::Object **)Scaleform::GFx::AS3::InstanceTraits::fl_media::SoundChannel::MakeInstance(
-                                         &resulta,
-                                         (Scaleform::GFx::AS3::InstanceTraits::fl_media::SoundChannel *)t);
-  Scaleform::GFx::AS3::Value::Pick(v3, *v4);
+  Instance = Scaleform::GFx::AS3::InstanceTraits::fl_media::SoundChannel::MakeInstance(&resulta, t);
+  Scaleform::GFx::AS3::Value::Pick(result, Instance->pV);
 }
 
 // File Line: 211
 // RVA: 0x766A40
-Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl_media::SoundChannel::MakeClassTraits(Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result, Scaleform::GFx::AS3::VM *vm)
+Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl_media::SoundChannel::MakeClassTraits(
+        Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result,
+        Scaleform::GFx::AS3::VM *vm)
 {
-  Scaleform::GFx::AS3::VM *v2; // rbp
-  Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *v3; // rdi
-  Scaleform::MemoryHeap *v4; // rsi
+  Scaleform::MemoryHeap *MHeap; // rsi
   Scaleform::GFx::AS3::ClassTraits::Traits *v5; // rax
   Scaleform::GFx::AS3::ClassTraits::Traits *v6; // rbx
   Scaleform::GFx::AS3::InstanceTraits::CTraits *v7; // rax
   Scaleform::GFx::AS3::InstanceTraits::CTraits *v8; // rbx
   Scaleform::GFx::AS3::Class *v9; // rax
 
-  v2 = vm;
-  v3 = result;
-  v4 = vm->MHeap;
-  v5 = (Scaleform::GFx::AS3::ClassTraits::Traits *)v4->vfptr->Alloc(v4, 208ui64, 0i64);
+  MHeap = vm->MHeap;
+  v5 = (Scaleform::GFx::AS3::ClassTraits::Traits *)MHeap->vfptr->Alloc(MHeap, 208ui64, 0i64);
   v6 = v5;
   if ( v5 )
   {
-    Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl_media::SoundChannelCI);
+    Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, vm, &Scaleform::GFx::AS3::fl_media::SoundChannelCI);
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_events::EventDispatcher::`vftable;
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_media::SoundChannel::`vftable;
@@ -204,12 +211,12 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   {
     v6 = 0i64;
   }
-  v3->pV = v6;
-  v7 = (Scaleform::GFx::AS3::InstanceTraits::CTraits *)v4->vfptr->Alloc(v4, 240ui64, 0i64);
+  result->pV = v6;
+  v7 = (Scaleform::GFx::AS3::InstanceTraits::CTraits *)MHeap->vfptr->Alloc(MHeap, 240ui64, 0i64);
   v8 = v7;
   if ( v7 )
   {
-    Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, v2, &Scaleform::GFx::AS3::fl_media::SoundChannelCI);
+    Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, vm, &Scaleform::GFx::AS3::fl_media::SoundChannelCI);
     v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
     v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_events::EventDispatcher::`vftable;
     v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_media::SoundChannel::`vftable;
@@ -219,13 +226,13 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
     v8 = 0i64;
   }
   Scaleform::GFx::AS3::ClassTraits::Traits::SetInstanceTraits(
-    v3->pV,
+    result->pV,
     (Scaleform::Pickable<Scaleform::GFx::AS3::InstanceTraits::Traits>)v8);
-  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))v4->vfptr->Alloc)(
-                                       v4,
+  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))MHeap->vfptr->Alloc)(
+                                       MHeap,
                                        72i64);
   if ( v9 )
-    Scaleform::GFx::AS3::Class::Class(v9, v3->pV);
-  return v3;
+    Scaleform::GFx::AS3::Class::Class(v9, result->pV);
+  return result;
 }
 

@@ -2,33 +2,31 @@
 // RVA: 0x12B906C
 void __fastcall dosmaperr(unsigned int oserrno)
 {
-  unsigned int v1; // edi
   _tiddata *v2; // rax
-  unsigned int *v3; // rax
+  unsigned int *p_tdoserrno; // rax
   _tiddata *v4; // rax
-  int *v5; // rbx
+  int *p_terrno; // rbx
 
-  v1 = oserrno;
   v2 = getptd_noexit();
   if ( v2 )
-    v3 = &v2->_tdoserrno;
+    p_tdoserrno = &v2->_tdoserrno;
   else
-    v3 = &DoserrorNoMem;
-  *v3 = v1;
+    p_tdoserrno = &DoserrorNoMem;
+  *p_tdoserrno = oserrno;
   v4 = getptd_noexit();
-  v5 = &ErrnoNoMem;
+  p_terrno = &ErrnoNoMem;
   if ( v4 )
-    v5 = &v4->_terrno;
-  *v5 = get_errno_from_oserr(v1);
+    p_terrno = &v4->_terrno;
+  *p_terrno = get_errno_from_oserr(oserrno);
 }
 
 // File Line: 119
 // RVA: 0x12B90DC
-signed __int64 __fastcall get_errno_from_oserr(unsigned int oserrno)
+__int64 __fastcall get_errno_from_oserr(unsigned int oserrno)
 {
   int v1; // edx
   errentry *v2; // r8
-  signed __int64 result; // rax
+  __int64 result; // rax
 
   v1 = 0;
   v2 = errtable;
@@ -44,7 +42,7 @@ signed __int64 __fastcall get_errno_from_oserr(unsigned int oserrno)
     return 13i64;
   result = 22i64;
   if ( oserrno - 188 <= 0xE )
-    result = 8i64;
+    return 8i64;
   return result;
 }
 
@@ -53,14 +51,12 @@ signed __int64 __fastcall get_errno_from_oserr(unsigned int oserrno)
 int *__fastcall errno()
 {
   _tiddata *v0; // rax
-  int *result; // rax
 
   v0 = getptd_noexit();
   if ( v0 )
-    result = &v0->_terrno;
+    return &v0->_terrno;
   else
-    result = &ErrnoNoMem;
-  return result;
+    return &ErrnoNoMem;
 }
 
 // File Line: 292
@@ -68,13 +64,11 @@ int *__fastcall errno()
 unsigned int *__fastcall _doserrno()
 {
   _tiddata *v0; // rax
-  unsigned int *result; // rax
 
   v0 = getptd_noexit();
   if ( v0 )
-    result = &v0->_tdoserrno;
+    return &v0->_tdoserrno;
   else
-    result = &DoserrorNoMem;
-  return result;
+    return &DoserrorNoMem;
 }
 

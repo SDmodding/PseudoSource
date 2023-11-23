@@ -7,31 +7,39 @@ void __fastcall hkpConstraintData::hkpConstraintData(hkpConstraintData *this, hk
 
 // File Line: 23
 // RVA: 0xD450D0
-void __fastcall hkpConstraintData::addInstance(hkpConstraintData *this, struct hkpConstraintRuntime *runtime, int sizeOfRuntime)
+void __fastcall hkpConstraintData::addInstance(
+        hkpConstraintData *this,
+        struct hkpConstraintRuntime *runtime,
+        unsigned int sizeOfRuntime)
 {
   if ( runtime )
-    hkString::memSet((void *)runtime, 0, sizeOfRuntime);
+    hkString::memSet(runtime, 0, sizeOfRuntime);
 }
 
 // File Line: 31
 // RVA: 0xD450C0
-hkpSolverResults *__fastcall hkpConstraintData::getSolverResults(hkpConstraintData *this, struct hkpConstraintRuntime *runtime)
+hkpSolverResults *__fastcall hkpConstraintData::getSolverResults(
+        hkpConstraintData *this,
+        struct hkpConstraintRuntime *runtime)
 {
   return (hkpSolverResults *)runtime;
 }
 
 // File Line: 58
 // RVA: 0xD45110
-void __fastcall hkpConstraintData::getConstraintInfoUtil(hkpConstraintAtom *atoms, int sizeOfAllAtoms, hkpConstraintData::ConstraintInfo *infoOut)
+void __fastcall hkpConstraintData::getConstraintInfoUtil(
+        hkpConstraintAtom *atoms,
+        unsigned int sizeOfAllAtoms,
+        hkpConstraintData::ConstraintInfo *infoOut)
 {
-  unsigned __int16 *v3; // r9
+  hkpConstraintAtom *v3; // r9
   hkpConstraintAtom *v4; // r10
-  unsigned int v5; // eax
-  int v6; // ecx
-  int v7; // ecx
+  unsigned int m_storage; // eax
+  int m_storage_high; // ecx
+  int m_storage_low; // ecx
 
-  v3 = &atoms->m_type.m_storage;
-  v4 = (hkpConstraintAtom *)((char *)atoms + sizeOfAllAtoms);
+  v3 = atoms;
+  v4 = (hkpConstraintAtom *)((char *)atoms + (int)sizeOfAllAtoms);
   infoOut->m_atoms = atoms;
   infoOut->m_sizeOfAllAtoms = sizeOfAllAtoms;
   infoOut->m_maxSizeOfSchema = 0;
@@ -41,15 +49,15 @@ void __fastcall hkpConstraintData::getConstraintInfoUtil(hkpConstraintAtom *atom
   {
     do
     {
-      v5 = *v3;
+      m_storage = v3->m_type.m_storage;
       while ( 2 )
       {
-        switch ( v5 )
+        switch ( m_storage )
         {
           case 0u:
-            v3 = (unsigned __int16 *)(((unsigned __int64)v3 + 15) & 0xFFFFFFFFFFFFFFF0ui64);
-            v5 = *v3;
-            if ( v5 <= 0x22 )
+            v3 = (hkpConstraintAtom *)(((unsigned __int64)&v3[7].m_type.m_storage + 1) & 0xFFFFFFFFFFFFFFF0ui64);
+            m_storage = v3->m_type.m_storage;
+            if ( m_storage <= 0x22 )
               continue;
             goto LABEL_13;
           case 1u:
@@ -106,10 +114,10 @@ LABEL_11:
             v3 += 12;
             goto LABEL_13;
           case 0xDu:
-            v6 = *((unsigned __int8 *)v3 + 3);
-            infoOut->m_numSolverResults += v6;
-            infoOut->m_sizeOfSchemas += 32 * v6;
-            infoOut->m_numSolverElemTemps += v6;
+            m_storage_high = HIBYTE(v3[1].m_type.m_storage);
+            infoOut->m_numSolverResults += m_storage_high;
+            infoOut->m_sizeOfSchemas += 32 * m_storage_high;
+            infoOut->m_numSolverElemTemps += m_storage_high;
             goto $LN3_166;
           case 0xFu:
           case 0x10u:
@@ -119,10 +127,10 @@ LABEL_11:
             v3 += 16;
             goto LABEL_13;
           case 0x11u:
-            v7 = *((unsigned __int8 *)v3 + 4);
-            infoOut->m_sizeOfSchemas += 48 * v7;
-            infoOut->m_numSolverResults += 2 * v7;
-            infoOut->m_numSolverElemTemps += 2 * v7;
+            m_storage_low = LOBYTE(v3[2].m_type.m_storage);
+            infoOut->m_sizeOfSchemas += 48 * m_storage_low;
+            infoOut->m_numSolverResults += 2 * m_storage_low;
+            infoOut->m_numSolverElemTemps += 2 * m_storage_low;
             goto $LN3_166;
           case 0x12u:
             infoOut->m_sizeOfSchemas += 64;
@@ -174,7 +182,7 @@ $LN4_181:
 LABEL_13:
       ;
     }
-    while ( v3 < (unsigned __int16 *)v4 );
+    while ( v3 < v4 );
   }
 }
 
@@ -243,30 +251,42 @@ void __fastcall hkpConstraintData::setSolvingMethod(hkpConstraintData *this, hkp
 
 // File Line: 233
 // RVA: 0xD450A0
-hkResult *__fastcall hkpConstraintData::setInertiaStabilizationFactor(hkpConstraintData *this, hkResult *result, const float inertiaStabilizationFactor)
+hkResult *__fastcall hkpConstraintData::setInertiaStabilizationFactor(
+        hkpConstraintData *this,
+        hkResult *result,
+        const float inertiaStabilizationFactor)
 {
-  result->m_enum = 1;
+  result->m_enum = HK_FAILURE;
   return result;
 }
 
 // File Line: 238
 // RVA: 0xD450B0
-hkResult *__fastcall hkpConstraintData::getInertiaStabilizationFactor(hkpConstraintData *this, hkResult *result, float *inertiaStabilizationFactorOut)
+hkResult *__fastcall hkpConstraintData::getInertiaStabilizationFactor(
+        hkpConstraintData *this,
+        hkResult *result,
+        float *inertiaStabilizationFactorOut)
 {
-  result->m_enum = 1;
+  result->m_enum = HK_FAILURE;
   return result;
 }
 
 // File Line: 243
 // RVA: 0xD450F0
-void __fastcall hkpConstraintData::buildJacobian(hkpConstraintData *this, hkpConstraintQueryIn *in, hkpConstraintQueryOut *out)
+void __fastcall hkpConstraintData::buildJacobian(
+        hkpConstraintData *this,
+        hkpConstraintQueryIn *in,
+        hkpConstraintQueryOut *out)
 {
   ;
 }
 
 // File Line: 248
 // RVA: 0xD45100
-void __fastcall hkpConstraintData::buildJacobianCallback(hkpConstraintData *this, hkpConstraintQueryIn *in, hkpConstraintQueryOut *out)
+void __fastcall hkpConstraintData::buildJacobianCallback(
+        hkpConstraintData *this,
+        hkpConstraintQueryIn *in,
+        hkpConstraintQueryOut *out)
 {
   ;
 }

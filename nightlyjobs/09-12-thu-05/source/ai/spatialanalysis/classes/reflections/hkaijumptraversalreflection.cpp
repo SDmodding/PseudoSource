@@ -28,17 +28,17 @@ hkClass *__fastcall hkaiJumpAnalyzer::staticClass()
 
 // File Line: 65
 // RVA: 0xC32300
-void __fastcall finishLoadedObjecthkaiJumpAnalyzer(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiJumpAnalyzer(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiJumpAnalyzer::`vftable;
+    *p = &hkaiJumpAnalyzer::`vftable;
 }
 
 // File Line: 71
 // RVA: 0xC32320
-void __fastcall cleanupLoadedObjecthkaiJumpAnalyzer(void *p)
+void __fastcall cleanupLoadedObjecthkaiJumpAnalyzer(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 75
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkaiJumpAnalyzerTypeInfo__()
   hkaiJumpAnalyzerTypeInfo.m_typeName = "hkaiJumpAnalyzer";
   hkaiJumpAnalyzerTypeInfo.m_vtable = result;
   hkaiJumpAnalyzerTypeInfo.m_scopedName = "!hkaiJumpAnalyzer";
-  hkaiJumpAnalyzerTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiJumpAnalyzer;
-  hkaiJumpAnalyzerTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiJumpAnalyzer;
+  hkaiJumpAnalyzerTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiJumpAnalyzer;
+  hkaiJumpAnalyzerTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiJumpAnalyzer;
   return result;
 }
 

@@ -28,17 +28,17 @@ hkClass *__fastcall hkpPhysicsData::staticClass()
 
 // File Line: 67
 // RVA: 0xE0B310
-void __fastcall finishLoadedObjecthkpPhysicsData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpPhysicsData(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpPhysicsData::`vftable;
+    *p = &hkpPhysicsData::`vftable;
 }
 
 // File Line: 73
 // RVA: 0xE0B330
-void __fastcall cleanupLoadedObjecthkpPhysicsData(void *p)
+void __fastcall cleanupLoadedObjecthkpPhysicsData(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 77
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkpPhysicsDataTypeInfo__()
   hkpPhysicsDataTypeInfo.m_typeName = "hkpPhysicsData";
   hkpPhysicsDataTypeInfo.m_vtable = result;
   hkpPhysicsDataTypeInfo.m_scopedName = "!hkpPhysicsData";
-  hkpPhysicsDataTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpPhysicsData;
-  hkpPhysicsDataTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpPhysicsData;
+  hkpPhysicsDataTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpPhysicsData;
+  hkpPhysicsDataTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpPhysicsData;
   return result;
 }
 

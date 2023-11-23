@@ -2,7 +2,7 @@
 // RVA: 0x172530
 UFG::qTreeRB<UFG::qSharedStringData,UFG::qSharedStringData,0> *__fastcall UFG::GetStringDataList()
 {
-  if ( !(_S4_4 & 1) )
+  if ( (_S4_4 & 1) == 0 )
   {
     _S4_4 |= 1u;
     sStringData.mTree.mNULL.mChild[0] = &sStringData.mTree.mNULL;
@@ -26,7 +26,7 @@ UFG::qSharedStringData *__fastcall UFG::qSharedStringData::GetEmptyString()
   UFG::qSharedStringData *result; // rax
   UFG::qMemoryPool *v1; // rcx
   UFG::allocator::free_link *v2; // rbx
-  UFG::qTreeRB<UFG::qSharedStringData,UFG::qSharedStringData,0> *v3; // rax
+  UFG::qTreeRB<UFG::qSharedStringData,UFG::qSharedStringData,0> *StringDataList; // rax
 
   result = sEmptyString;
   if ( !sEmptyString )
@@ -52,9 +52,9 @@ UFG::qSharedStringData *__fastcall UFG::qSharedStringData::GetEmptyString()
     ++LODWORD(v2[4].mNext);
     LOBYTE(v2[6].mNext) = 0;
     LOWORD(v2[5].mNext) = 0;
-    v3 = UFG::GetStringDataList();
-    UFG::qBaseTreeRB::Add(&v3->mTree, (UFG::qBaseNodeRB *)v2);
-    result = sEmptyString;
+    StringDataList = UFG::GetStringDataList();
+    UFG::qBaseTreeRB::Add(&StringDataList->mTree, (UFG::qBaseNodeRB *)v2);
+    return sEmptyString;
   }
   return result;
 }
@@ -63,12 +63,12 @@ UFG::qSharedStringData *__fastcall UFG::qSharedStringData::GetEmptyString()
 // RVA: 0x161EF0
 void __fastcall UFG::qSharedString::qSharedString(UFG::qSharedString *this)
 {
-  UFG::qSharedStringData *v1; // rax
+  UFG::qSharedStringData *EmptyString; // rax
 
   this->mText = 0i64;
   this->mText = (char *)&UFG::qSharedStringData::GetEmptyString()[1];
-  v1 = UFG::qSharedStringData::GetEmptyString();
-  ++v1->mRefCount;
+  EmptyString = UFG::qSharedStringData::GetEmptyString();
+  ++EmptyString->mRefCount;
 }
 
 // File Line: 111
@@ -83,30 +83,26 @@ void __fastcall UFG::qSharedString::qSharedString(UFG::qSharedString *this, UFG:
 // RVA: 0x161E30
 void UFG::qSharedString::qSharedString(UFG::qSharedString *this, const char *format, ...)
 {
-  UFG::qSharedString *v2; // rbx
-  UFG::qSharedStringData *v3; // rax
+  UFG::qSharedStringData *EmptyString; // rax
   int v4; // eax
-  UFG::qPrintInfo info; // [rsp+30h] [rbp-4138h]
-  char text; // [rsp+160h] [rbp-4008h]
-  char *fmt; // [rsp+4178h] [rbp+10h]
-  va_list va; // [rsp+4180h] [rbp+18h]
+  UFG::qPrintInfo info; // [rsp+30h] [rbp-4138h] BYREF
+  char text[16392]; // [rsp+160h] [rbp-4008h] BYREF
+  va_list va; // [rsp+4180h] [rbp+18h] BYREF
 
   va_start(va, format);
-  fmt = (char *)format;
-  v2 = this;
   this->mText = 0i64;
-  v3 = UFG::qSharedStringData::GetEmptyString();
-  UFG::qSharedString::SetData(v2, v3);
-  if ( fmt )
+  EmptyString = UFG::qSharedStringData::GetEmptyString();
+  UFG::qSharedString::SetData(this, EmptyString);
+  if ( format )
   {
     info.mStdOutBuffer.NumChars = 0;
     info.OutStringLen = 0x4000;
     info.PrintChannel = -1;
-    info.OutString = &text;
+    info.OutString = text;
     info.StdOut = 0;
-    v4 = UFG::qPrintEngine(&info, fmt, va);
+    v4 = UFG::qPrintEngine(&info, format, va);
     if ( v4 )
-      UFG::qSharedString::Set(v2, &text, v4, 0i64, 0);
+      UFG::qSharedString::Set(this, text, v4, 0i64, 0);
   }
 }
 
@@ -114,22 +110,24 @@ void UFG::qSharedString::qSharedString(UFG::qSharedString *this, const char *for
 // RVA: 0x164380
 void __fastcall UFG::qSharedString::~qSharedString(UFG::qSharedString *this)
 {
-  char *v1; // rbx
+  char *mText; // rbx
   unsigned int v2; // eax
-  UFG::qBaseTreeVariableRB<unsigned __int64> *v3; // rax
+  UFG::qBaseTreeVariableRB<unsigned __int64> *StringDataList; // rax
 
-  v1 = this->mText;
+  mText = this->mText;
   v2 = *((_DWORD *)this->mText - 4);
   if ( v2 > 1 )
   {
-    *((_DWORD *)v1 - 4) = v2 - 1;
+    *((_DWORD *)mText - 4) = v2 - 1;
   }
   else
   {
-    v3 = (UFG::qBaseTreeVariableRB<unsigned __int64> *)UFG::GetStringDataList();
-    UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(v3, (UFG::qBaseNodeVariableRB<unsigned __int64> *)(v1 - 48));
-    *((_WORD *)v1 - 4) = 0x1FFF;
-    UFG::qMemoryPool::Free(UFG::gMainMemoryPool, v1 - 48);
+    StringDataList = (UFG::qBaseTreeVariableRB<unsigned __int64> *)UFG::GetStringDataList();
+    UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
+      StringDataList,
+      (UFG::qBaseNodeVariableRB<unsigned __int64> *)(mText - 48));
+    *((_WORD *)mText - 4) = 0x1FFF;
+    UFG::qMemoryPool::Free(UFG::gMainMemoryPool, mText - 48);
   }
 }
 
@@ -137,66 +135,67 @@ void __fastcall UFG::qSharedString::~qSharedString(UFG::qSharedString *this)
 // RVA: 0x17CCB0
 void __fastcall UFG::qSharedString::SetData(UFG::qSharedString *this, UFG::qSharedStringData *data)
 {
-  UFG::qSharedStringData *v2; // rbx
-  UFG::qSharedString *v3; // rsi
-  char *v4; // rdi
+  char *mText; // rdi
   unsigned int v5; // eax
-  UFG::qBaseTreeVariableRB<unsigned __int64> *v6; // rax
+  UFG::qBaseTreeVariableRB<unsigned __int64> *StringDataList; // rax
 
-  v2 = data;
-  v3 = this;
   if ( data != (UFG::qSharedStringData *)this->mText - 1 )
   {
     if ( data )
       ++data->mRefCount;
-    v4 = this->mText;
+    mText = this->mText;
     if ( this->mText )
     {
-      v5 = *((_DWORD *)v4 - 4);
+      v5 = *((_DWORD *)mText - 4);
       if ( v5 > 1 )
       {
-        *((_DWORD *)v4 - 4) = v5 - 1;
+        *((_DWORD *)mText - 4) = v5 - 1;
       }
       else
       {
-        v6 = (UFG::qBaseTreeVariableRB<unsigned __int64> *)UFG::GetStringDataList();
-        UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(v6, (UFG::qBaseNodeVariableRB<unsigned __int64> *)(v4 - 48));
-        *((_WORD *)v4 - 4) = 0x1FFF;
-        UFG::qMemoryPool::Free(UFG::gMainMemoryPool, v4 - 48);
+        StringDataList = (UFG::qBaseTreeVariableRB<unsigned __int64> *)UFG::GetStringDataList();
+        UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
+          StringDataList,
+          (UFG::qBaseNodeVariableRB<unsigned __int64> *)(mText - 48));
+        *((_WORD *)mText - 4) = 0x1FFF;
+        UFG::qMemoryPool::Free(UFG::gMainMemoryPool, mText - 48);
       }
     }
-    v3->mText = (char *)&v2[1];
+    this->mText = (char *)&data[1];
   }
 }
 
 // File Line: 183
 // RVA: 0x17C710
-void __fastcall UFG::qSharedString::Set(UFG::qSharedString *this, const char *text, int length, const char *textb, int lengthb)
+void __fastcall UFG::qSharedString::Set(
+        UFG::qSharedString *this,
+        const char *text,
+        int length,
+        const char *textb,
+        int lengthb)
 {
-  const char *v5; // rsi
   unsigned __int64 v6; // r13
   const char *v7; // r14
-  UFG::qSharedString *v8; // r15
-  signed int v9; // ebx
-  unsigned int v10; // er8
+  unsigned int v9; // ebx
+  unsigned int v10; // r8d
   const char *v11; // rdx
-  unsigned int v12; // er8
-  UFG::qTreeRB<UFG::qSharedStringData,UFG::qSharedStringData,0> *v13; // rax
-  UFG::qSharedStringData *v14; // rax
-  UFG::qSharedStringData *v15; // rdi
-  char *v16; // rbx
+  unsigned int v12; // r8d
+  UFG::qTreeRB<UFG::qSharedStringData,UFG::qSharedStringData,0> *StringDataList; // rax
+  UFG::qTreeRB<UFG::qSharedStringData,UFG::qSharedStringData,0> *EmptyString; // rax
+  UFG::qTreeRB<UFG::qSharedStringData,UFG::qSharedStringData,0> *v15; // rdi
+  char *mText; // rbx
   unsigned int v17; // eax
   UFG::qBaseTreeVariableRB<unsigned __int64> *v18; // rax
   __int64 v19; // rdi
   UFG::qMemoryPool *v20; // rcx
   UFG::allocator::free_link *v21; // rax
   UFG::allocator::free_link *v22; // rdi
-  signed __int64 v23; // rbp
+  char *v23; // rbp
   UFG::allocator::free_link *v24; // rcx
-  const char *v25; // r14
+  signed __int64 v25; // r14
   unsigned __int64 v26; // rdx
   __int64 v27; // rdx
-  _BYTE *v28; // rcx
+  char *v28; // rcx
   const char *v29; // rsi
   UFG::qTreeRB<UFG::qSharedStringData,UFG::qSharedStringData,0> *v30; // rax
   char *v31; // rbx
@@ -204,10 +203,8 @@ void __fastcall UFG::qSharedString::Set(UFG::qSharedString *this, const char *te
   UFG::qBaseTreeVariableRB<unsigned __int64> *v33; // rax
   __int64 v34; // [rsp+88h] [rbp+10h]
 
-  v5 = textb;
   v6 = length;
   v7 = text;
-  v8 = this;
   v9 = -1;
   if ( text )
   {
@@ -236,40 +233,40 @@ void __fastcall UFG::qSharedString::Set(UFG::qSharedString *this, const char *te
       while ( v12 < (unsigned __int64)lengthb );
     }
   }
-  if ( (unsigned int)(v9 - 1) > 0xFFFFFFFD )
+  if ( v9 - 1 > 0xFFFFFFFD )
   {
-    v14 = UFG::qSharedStringData::GetEmptyString();
+    EmptyString = (UFG::qTreeRB<UFG::qSharedStringData,UFG::qSharedStringData,0> *)UFG::qSharedStringData::GetEmptyString();
   }
   else
   {
-    v13 = UFG::GetStringDataList();
-    v14 = UFG::qTreeRB<UFG::qFileMapLocation,UFG::qFileMapLocation,1>::Get(v13, v9);
+    StringDataList = UFG::GetStringDataList();
+    EmptyString = UFG::qTreeRB<UFG::qFileMapLocation,UFG::qFileMapLocation,1>::Get(StringDataList, v9);
   }
-  v15 = v14;
-  if ( v14 )
+  v15 = EmptyString;
+  if ( EmptyString )
   {
-    if ( v14 != (UFG::qSharedStringData *)v8->mText - 1 )
+    if ( EmptyString != (UFG::qTreeRB<UFG::qSharedStringData,UFG::qSharedStringData,0> *)(this->mText - 48) )
     {
-      ++v14->mRefCount;
-      v16 = v8->mText;
-      if ( v8->mText )
+      ++LODWORD(EmptyString->mTree.mNULL.mParent);
+      mText = this->mText;
+      if ( this->mText )
       {
-        v17 = *((_DWORD *)v16 - 4);
+        v17 = *((_DWORD *)mText - 4);
         if ( v17 > 1 )
         {
-          *((_DWORD *)v16 - 4) = v17 - 1;
+          *((_DWORD *)mText - 4) = v17 - 1;
         }
         else
         {
           v18 = (UFG::qBaseTreeVariableRB<unsigned __int64> *)UFG::GetStringDataList();
           UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
             v18,
-            (UFG::qBaseNodeVariableRB<unsigned __int64> *)(v16 - 48));
-          *((_WORD *)v16 - 4) = 0x1FFF;
-          UFG::qMemoryPool::Free(UFG::gMainMemoryPool, v16 - 48);
+            (UFG::qBaseNodeVariableRB<unsigned __int64> *)(mText - 48));
+          *((_WORD *)mText - 4) = 0x1FFF;
+          UFG::qMemoryPool::Free(UFG::gMainMemoryPool, mText - 48);
         }
       }
-      v8->mText = (char *)&v15[1];
+      this->mText = (char *)&v15->mTree.mNULL.mChild[1];
     }
   }
   else
@@ -294,27 +291,27 @@ void __fastcall UFG::qSharedString::Set(UFG::qSharedString *this, const char *te
       LODWORD(v21[4].mNext) = 0;
       HIDWORD(v21[4].mNext) = -1;
     }
-    v23 = (signed __int64)&v21[6];
-    if ( (signed int)v6 > 0 )
+    v23 = (char *)&v21[6];
+    if ( (int)v6 > 0 )
     {
       v24 = v21 + 6;
-      v25 = &v7[-v23];
+      v25 = v7 - v23;
       v26 = v6;
       do
       {
-        LOBYTE(v24->mNext) = *((_BYTE *)&v24->mNext + (_QWORD)v25);
+        LOBYTE(v24->mNext) = *((_BYTE *)&v24->mNext + v25);
         v24 = (UFG::allocator::free_link *)((char *)v24 + 1);
         --v26;
       }
       while ( v26 );
     }
-    if ( v5 )
+    if ( textb )
     {
       v27 = lengthb;
       if ( lengthb > 0 )
       {
-        v28 = (_BYTE *)(v23 + v6);
-        v29 = &v5[-v6 - v23];
+        v28 = &v23[v6];
+        v29 = (const char *)(&textb[-v6] - v23);
         do
         {
           *v28 = v28[(_QWORD)v29];
@@ -324,15 +321,15 @@ void __fastcall UFG::qSharedString::Set(UFG::qSharedString *this, const char *te
         while ( v27 );
       }
     }
-    *(_BYTE *)(v34 + v23) = 0;
+    v23[v34] = 0;
     LOWORD(v21[5].mNext) = lengthb + v6;
     v30 = UFG::GetStringDataList();
     UFG::qBaseTreeRB::Add(&v30->mTree, (UFG::qBaseNodeRB *)v22);
-    if ( v22 != (UFG::allocator::free_link *)v8->mText - 6 )
+    if ( v22 != (UFG::allocator::free_link *)this->mText - 6 )
     {
       ++LODWORD(v22[4].mNext);
-      v31 = v8->mText;
-      if ( v8->mText )
+      v31 = this->mText;
+      if ( this->mText )
       {
         v32 = *((_DWORD *)v31 - 4);
         if ( v32 > 1 )
@@ -349,7 +346,7 @@ void __fastcall UFG::qSharedString::Set(UFG::qSharedString *this, const char *te
           UFG::qMemoryPool::Free(UFG::gMainMemoryPool, v31 - 48);
         }
       }
-      v8->mText = (char *)v23;
+      this->mText = v23;
     }
   }
 }
@@ -359,15 +356,13 @@ void __fastcall UFG::qSharedString::Set(UFG::qSharedString *this, const char *te
 void __fastcall UFG::qSharedString::Set(UFG::qSharedString *this, const char *text)
 {
   const char *v2; // rax
-  char v3; // r8
   int v4; // eax
 
   if ( text )
   {
     v2 = text;
-    do
-      v3 = *v2++;
-    while ( v3 );
+    while ( *v2++ )
+      ;
     v4 = (_DWORD)v2 - (_DWORD)text - 1;
   }
   else
@@ -381,25 +376,21 @@ void __fastcall UFG::qSharedString::Set(UFG::qSharedString *this, const char *te
 // RVA: 0x1647B0
 UFG::qSharedString *__fastcall UFG::qSharedString::operator=(UFG::qSharedString *this, const char *text)
 {
-  UFG::qSharedString *v2; // rbx
   int v3; // eax
   const char *v4; // rax
-  char v5; // cl
 
-  v2 = this;
   if ( text )
   {
     v4 = text;
-    do
-      v5 = *v4++;
-    while ( v5 );
+    while ( *v4++ )
+      ;
     v3 = (_DWORD)v4 - (_DWORD)text - 1;
   }
   else
   {
     v3 = 0;
   }
-  UFG::qSharedString::Set(v2, text, v3, 0i64, 0);
-  return v2;
+  UFG::qSharedString::Set(this, text, v3, 0i64, 0);
+  return this;
 }
 

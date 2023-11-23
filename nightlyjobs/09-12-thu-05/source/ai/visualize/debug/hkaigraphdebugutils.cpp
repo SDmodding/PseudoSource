@@ -3,7 +3,7 @@
 void __fastcall hkaiGraphDebugUtils::DebugInfo::DebugInfo(hkaiGraphDebugUtils::DebugInfo *this)
 {
   *(_DWORD *)&this->m_showNodes.m_bool = 257;
-  this->m_materialColors.m_capacityAndFlags = 2147483648;
+  this->m_materialColors.m_capacityAndFlags = 0x80000000;
   this->m_materialColors.m_data = 0i64;
   this->m_materialColors.m_size = 0;
   *(_WORD *)&this->m_colorNodesByUserData.m_bool = 257;
@@ -15,7 +15,7 @@ void __fastcall hkaiGraphDebugUtils::DebugInfo::DebugInfo(hkaiGraphDebugUtils::D
   this->m_edgeLabelColor = hkColor::PURPLE;
   this->m_instanceEnabled.m_storage.m_words.m_data = 0i64;
   this->m_instanceEnabled.m_storage.m_words.m_size = 0;
-  this->m_instanceEnabled.m_storage.m_words.m_capacityAndFlags = 2147483648;
+  this->m_instanceEnabled.m_storage.m_words.m_capacityAndFlags = 0x80000000;
   this->m_instanceEnabled.m_storage.m_numBits = 0;
   this->m_displayTransform.m_col0 = (hkVector4f)transform.m_quad;
   this->m_displayTransform.m_col1 = (hkVector4f)direction.m_quad;
@@ -29,79 +29,91 @@ void __fastcall hkaiGraphDebugUtils::DebugInfo::DebugInfo(hkaiGraphDebugUtils::D
 
 // File Line: 47
 // RVA: 0xC4F5A0
-void __fastcall drawDirectedGraphEdge(hkaiDirectedGraphInstance *clusterGraph, int ei, hkaiStreamingCollection *collection, hkaiGraphDebugUtils::DebugInfo *settings, hkVector4f *nodePosition, const unsigned int *nodeDataPtr, hkDebugDisplayHandler *displayHandler, int tag)
+void __fastcall drawDirectedGraphEdge(
+        hkaiDirectedGraphInstance *clusterGraph,
+        int ei,
+        hkaiStreamingCollection *collection,
+        hkaiGraphDebugUtils::DebugInfo *settings,
+        hkVector4f *nodePosition,
+        const unsigned int *nodeDataPtr,
+        hkDebugDisplayHandler *displayHandler,
+        int tag)
 {
-  int v8; // eax
-  hkaiStreamingCollection *v9; // r11
-  hkaiDirectedGraphInstance *v10; // r10
-  hkaiDirectedGraphExplicitCost::Edge *v11; // rax
-  signed __int64 v12; // rcx
-  int v13; // edx
+  int m_numOriginalEdges; // eax
+  hkaiDirectedGraphInstance *m_clusterGraphInstance; // r10
+  hkaiDirectedGraphExplicitCost::Edge *m_data; // rax
+  hkaiDirectedGraphExplicitCost::Edge *v12; // rcx
+  unsigned int m_target; // edx
   unsigned int v14; // eax
-  int v15; // er8
+  int v15; // r8d
   unsigned int v16; // eax
-  int v17; // er8
+  int v17; // r8d
   __int64 v18; // rax
-  int v19; // edx
-  unsigned int v20; // ecx
-  __m128 v21; // xmm1
+  int m_externalEdgeColor; // edx
+  unsigned int m_size; // ecx
+  __m128 m_quad; // xmm1
   __m128 v22; // xmm3
-  hkVector4f end; // [rsp+40h] [rbp-18h]
-  char v24; // [rsp+68h] [rbp+10h]
+  hkVector4f end; // [rsp+40h] [rbp-18h] BYREF
+  char v24; // [rsp+68h] [rbp+10h] BYREF
 
-  v8 = clusterGraph->m_numOriginalEdges;
-  v9 = collection;
-  v10 = clusterGraph;
-  if ( ei >= v8 )
+  m_numOriginalEdges = clusterGraph->m_numOriginalEdges;
+  m_clusterGraphInstance = clusterGraph;
+  if ( ei >= m_numOriginalEdges )
   {
-    ei -= v8;
-    v11 = clusterGraph->m_ownedEdges.m_data;
+    ei -= m_numOriginalEdges;
+    m_data = clusterGraph->m_ownedEdges.m_data;
   }
   else
   {
-    v11 = clusterGraph->m_originalEdges;
+    m_data = clusterGraph->m_originalEdges;
   }
-  v12 = (signed __int64)&v11[ei];
-  v13 = *(_DWORD *)(v12 + 4);
-  if ( *(_BYTE *)(v12 + 2) & 0x40 )
-    v14 = v13 & 0xFFC00000;
+  v12 = &m_data[ei];
+  m_target = v12->m_target;
+  if ( (v12->m_flags.m_storage & 0x40) != 0 )
+    v14 = m_target & 0xFFC00000;
   else
-    v14 = v10->m_runtimeId << 22;
-  v15 = v14 | v13 & 0x3FFFFF;
-  if ( v13 == -1 )
+    v14 = m_clusterGraphInstance->m_runtimeId << 22;
+  v15 = v14 | m_target & 0x3FFFFF;
+  if ( m_target == -1 )
     v15 = -1;
   v16 = v15;
   v17 = v15 & 0x3FFFFF;
   v18 = v16 >> 22;
-  if ( *(_BYTE *)(v12 + 2) & 0x40 )
+  if ( (v12->m_flags.m_storage & 0x40) != 0 )
   {
-    if ( (signed int)v18 >= 0 )
-      v10 = v9->m_instances.m_data[v18].m_clusterGraphInstance;
+    if ( (int)v18 >= 0 )
+      m_clusterGraphInstance = collection->m_instances.m_data[v18].m_clusterGraphInstance;
     else
-      v10 = 0i64;
-    v19 = settings->m_externalEdgeColor;
+      m_clusterGraphInstance = 0i64;
+    m_externalEdgeColor = settings->m_externalEdgeColor;
   }
   else
   {
-    v19 = settings->m_internalEdgeColor;
+    m_externalEdgeColor = settings->m_internalEdgeColor;
   }
   if ( nodeDataPtr )
   {
     if ( settings->m_colorEdgesByUserData.m_bool )
     {
-      v20 = settings->m_materialColors.m_size;
-      if ( v20 )
-        v19 = settings->m_materialColors.m_data[*nodeDataPtr % v20];
+      m_size = settings->m_materialColors.m_size;
+      if ( m_size )
+        m_externalEdgeColor = settings->m_materialColors.m_data[*nodeDataPtr % m_size];
     }
   }
-  v21 = v10->m_originalPositions[v17].m_quad;
+  m_quad = m_clusterGraphInstance->m_originalPositions[v17].m_quad;
   v22 = _mm_add_ps(
           _mm_add_ps(
             _mm_add_ps(
-              _mm_mul_ps(_mm_shuffle_ps(v21, v21, 85), v10->m_transform.m_rotation.m_col1.m_quad),
-              _mm_mul_ps(_mm_shuffle_ps(v21, v21, 0), v10->m_transform.m_rotation.m_col0.m_quad)),
-            _mm_mul_ps(_mm_shuffle_ps(v21, v21, 170), v10->m_transform.m_rotation.m_col2.m_quad)),
-          v10->m_transform.m_translation.m_quad);
+              _mm_mul_ps(
+                _mm_shuffle_ps(m_quad, m_quad, 85),
+                m_clusterGraphInstance->m_transform.m_rotation.m_col1.m_quad),
+              _mm_mul_ps(
+                _mm_shuffle_ps(m_quad, m_quad, 0),
+                m_clusterGraphInstance->m_transform.m_rotation.m_col0.m_quad)),
+            _mm_mul_ps(
+              _mm_shuffle_ps(m_quad, m_quad, 170),
+              m_clusterGraphInstance->m_transform.m_rotation.m_col2.m_quad)),
+          m_clusterGraphInstance->m_transform.m_translation.m_quad);
   end.m_quad = _mm_add_ps(
                  _mm_mul_ps(
                    _mm_sub_ps(
@@ -116,13 +128,20 @@ void __fastcall drawDirectedGraphEdge(hkaiDirectedGraphInstance *clusterGraph, i
                    (__m128)xmmword_141A711B0),
                  nodePosition->m_quad);
   if ( displayHandler )
-    displayHandler->vfptr->displayLine(displayHandler, (hkResult *)&v24, nodePosition, &end, v19, 0, tag);
+    displayHandler->vfptr->displayLine(
+      displayHandler,
+      (hkResult *)&v24,
+      nodePosition,
+      &end,
+      m_externalEdgeColor,
+      0,
+      tag);
   else
     hkDebugDisplay::displayLine(
       hkSingleton<hkDebugDisplay>::s_instance,
       nodePosition,
       &end,
-      v19,
+      m_externalEdgeColor,
       0,
       (int)hkDebugDisplayProcess::m_tag);
 }
@@ -131,24 +150,19 @@ void __fastcall drawDirectedGraphEdge(hkaiDirectedGraphInstance *clusterGraph, i
 // RVA: 0xC4F760
 void __fastcall formatUserData_unsigned_int_(hkStringBuf *label, const unsigned int *dataPtr, int N)
 {
-  int v3; // er15
   int v4; // esi
-  const unsigned int *v5; // rbx
   __int64 v6; // rax
   __int64 v7; // rdi
-  hkStringBuf *v8; // r14
-  __int64 v9; // rbp
-  int v10; // er15
-  const char *v11; // r9
+  __int64 v9; // r8
+  __int64 v10; // rbp
+  int v11; // r15d
+  const char *v12; // r9
 
   if ( N > 0 )
   {
-    v3 = N;
     v4 = 0;
-    v5 = dataPtr;
     v6 = 0i64;
     v7 = N;
-    v8 = label;
     while ( !dataPtr[v6] )
     {
       if ( ++v6 >= N )
@@ -156,162 +170,158 @@ void __fastcall formatUserData_unsigned_int_(hkStringBuf *label, const unsigned 
     }
     if ( N == 1 )
     {
-      if ( *dataPtr )
-        hkStringBuf::printf(label, "[%d]");
+      v9 = *dataPtr;
+      if ( (_DWORD)v9 )
+        hkStringBuf::printf(label, "[%d]", v9);
     }
     else
     {
       hkStringBuf::operator=(label, "[");
-      v9 = 0i64;
-      v10 = v3 - 1;
+      v10 = 0i64;
+      v11 = N - 1;
       do
       {
-        v11 = ", ";
-        if ( v4 == v10 )
-          v11 = "]";
-        hkStringBuf::appendPrintf(v8, "%d%s", v5[v9++], v11);
+        v12 = ", ";
+        if ( v4 == v11 )
+          v12 = "]";
+        hkStringBuf::appendPrintf(label, "%d%s", dataPtr[v10++], v12);
         ++v4;
       }
-      while ( v9 < v7 );
+      while ( v10 < v7 );
     }
   }
 }
 
 // File Line: 128
 // RVA: 0xC4F000
-void __fastcall hkaiGraphDebugUtils::showGraphCollection(hkaiGraphDebugUtils::DebugInfo *settings, hkaiStreamingCollection *collection, hkDebugDisplayHandler *displayHandler, int tag)
+void __fastcall hkaiGraphDebugUtils::showGraphCollection(
+        hkaiGraphDebugUtils::DebugInfo *settings,
+        hkaiStreamingCollection *collection,
+        hkDebugDisplayHandler *displayHandler,
+        int tag)
 {
-  hkDebugDisplayHandler *v4; // r12
-  signed __int64 v5; // r8
-  unsigned int v6; // ebx
-  int v7; // er13
+  __int64 m_size; // r8
+  int v6; // ebx
   hkaiStreamingCollection *v8; // rax
-  hkaiGraphDebugUtils::DebugInfo *v9; // rsi
-  char *v10; // rcx
-  signed __int64 v11; // r9
+  char *m_data; // rcx
+  __int64 v11; // r9
   hkaiDirectedGraphInstance *v12; // r14
   unsigned int v13; // edx
-  signed __int64 v14; // rdi
+  __int64 v14; // rdi
   __int64 v15; // rcx
   __m128 v16; // xmm1
-  int v17; // eax
+  int m_nodeDataStriding; // eax
   __m128 v18; // xmm2
   const unsigned int *v19; // r15
-  unsigned int v20; // er9
+  int m_nodeColor; // r9d
   unsigned int v21; // ecx
-  float v22; // xmm2_4
-  int v23; // er8
-  hkaiDirectedGraphExplicitCost::Node *v24; // rax
-  int v25; // ebx
+  float m_nodeSize; // xmm2_4
+  int v23; // r8d
+  hkaiDirectedGraphExplicitCost::Node *m_originalNodes; // rax
+  int m_startEdgeIndex; // ebx
   int i; // edi
   __int64 v27; // rcx
   hkaiDirectedGraphExplicitCost::Node v28; // rbx
   int v29; // edi
   int v30; // ebx
-  __int64 id; // [rsp+20h] [rbp-B8h]
-  __int64 taga; // [rsp+28h] [rbp-B0h]
-  hkDebugDisplayHandler *displayHandlera; // [rsp+30h] [rbp-A8h]
-  unsigned int v34; // [rsp+40h] [rbp-98h]
-  unsigned int v35; // [rsp+44h] [rbp-94h]
-  signed __int64 v36; // [rsp+50h] [rbp-88h]
-  signed __int64 v37; // [rsp+58h] [rbp-80h]
-  hkVector4f position; // [rsp+60h] [rbp-78h]
-  __int64 v39; // [rsp+70h] [rbp-68h]
-  hkStringBuf v40; // [rsp+78h] [rbp-60h]
-  hkStringBuf label; // [rsp+108h] [rbp+30h]
+  unsigned int v31; // [rsp+40h] [rbp-98h]
+  int v32; // [rsp+44h] [rbp-94h]
+  __int64 v33; // [rsp+50h] [rbp-88h]
+  __int64 v34; // [rsp+58h] [rbp-80h]
+  hkVector4f position; // [rsp+60h] [rbp-78h] BYREF
+  __int64 v36; // [rsp+70h] [rbp-68h]
+  hkStringBuf v37; // [rsp+78h] [rbp-60h] BYREF
+  hkStringBuf label; // [rsp+108h] [rbp+30h] BYREF
   hkaiStreamingCollection *collectiona; // [rsp+1D0h] [rbp+F8h]
 
-  v4 = displayHandler;
-  v5 = collection->m_instances.m_size;
+  m_size = collection->m_instances.m_size;
   v6 = 0;
-  v7 = tag;
   v8 = collection;
-  v9 = settings;
-  v36 = v5;
-  v35 = 0;
-  if ( v5 > 0 )
+  v33 = m_size;
+  v32 = 0;
+  if ( m_size > 0 )
   {
-    v10 = 0i64;
+    m_data = 0i64;
     v11 = collection->m_instances.m_size;
-    v40.m_string.m_data = 0i64;
+    v37.m_string.m_data = 0i64;
     do
     {
-      if ( (v6 & 0x80000000) == 0 )
+      if ( v6 >= 0 )
       {
         v12 = *(hkaiDirectedGraphInstance **)((char *)&v8->m_instances.m_data->m_clusterGraphInstance
-                                            + (unsigned __int64)v10);
+                                            + (unsigned __int64)m_data);
         if ( v12 )
         {
           v13 = 0;
           v14 = 0i64;
-          v34 = 0;
-          v37 = 0i64;
+          v31 = 0;
+          v34 = 0i64;
           position.m_quad.m128_u64[0] = v12->m_numOriginalNodes;
-          if ( (signed __int64)position.m_quad.m128_u64[0] > 0 )
+          if ( position.m_quad.m128_i64[0] > 0 )
           {
             v15 = 0i64;
-            v39 = 0i64;
+            v36 = 0i64;
             do
             {
               v16 = *(__m128 *)((char *)&v12->m_originalPositions->m_quad + v15);
-              v17 = v12->m_nodeDataStriding;
+              m_nodeDataStriding = v12->m_nodeDataStriding;
               v18 = _mm_add_ps(
                       _mm_add_ps(
                         _mm_add_ps(
                           _mm_mul_ps(_mm_shuffle_ps(v16, v16, 0), v12->m_transform.m_rotation.m_col0.m_quad),
-                          _mm_mul_ps(
-                            _mm_shuffle_ps(*(__m128 *)((char *)&v12->m_originalPositions->m_quad + v15), v16, 85),
-                            v12->m_transform.m_rotation.m_col1.m_quad)),
+                          _mm_mul_ps(_mm_shuffle_ps(v16, v16, 85), v12->m_transform.m_rotation.m_col1.m_quad)),
                         _mm_mul_ps(_mm_shuffle_ps(v16, v16, 170), v12->m_transform.m_rotation.m_col2.m_quad)),
                       v12->m_transform.m_translation.m_quad);
               position.m_quad = _mm_add_ps(
                                   _mm_add_ps(
                                     _mm_add_ps(
-                                      _mm_mul_ps(_mm_shuffle_ps(v18, v18, 0), v9->m_displayTransform.m_col0.m_quad),
-                                      v9->m_displayTransform.m_col3.m_quad),
-                                    _mm_mul_ps(_mm_shuffle_ps(v18, v18, 85), v9->m_displayTransform.m_col1.m_quad)),
-                                  _mm_mul_ps(_mm_shuffle_ps(v18, v18, 170), v9->m_displayTransform.m_col2.m_quad));
-              if ( v17 )
-                v19 = &v12->m_originalNodeData[v13 * v17];
+                                      _mm_mul_ps(
+                                        _mm_shuffle_ps(v18, v18, 0),
+                                        settings->m_displayTransform.m_col0.m_quad),
+                                      settings->m_displayTransform.m_col3.m_quad),
+                                    _mm_mul_ps(_mm_shuffle_ps(v18, v18, 85), settings->m_displayTransform.m_col1.m_quad)),
+                                  _mm_mul_ps(_mm_shuffle_ps(v18, v18, 170), settings->m_displayTransform.m_col2.m_quad));
+              if ( m_nodeDataStriding )
+                v19 = &v12->m_originalNodeData[v13 * m_nodeDataStriding];
               else
                 v19 = 0i64;
-              if ( v9->m_showNodes.m_bool )
+              if ( settings->m_showNodes.m_bool )
               {
-                v20 = v9->m_nodeColor;
+                m_nodeColor = settings->m_nodeColor;
                 if ( v19 )
                 {
-                  if ( v9->m_colorNodesByUserData.m_bool )
+                  if ( settings->m_colorNodesByUserData.m_bool )
                   {
-                    v21 = v9->m_materialColors.m_size;
+                    v21 = settings->m_materialColors.m_size;
                     if ( v21 )
-                      v20 = v9->m_materialColors.m_data[*v19 % v21];
+                      m_nodeColor = settings->m_materialColors.m_data[*v19 % v21];
                   }
                 }
-                v22 = v9->m_nodeSize;
-                if ( v4 )
-                  hkDebugDisplayHandler::displayStar(v4, &position, v22, v20, 0, v7);
+                m_nodeSize = settings->m_nodeSize;
+                if ( displayHandler )
+                  hkDebugDisplayHandler::displayStar(displayHandler, &position, m_nodeSize, m_nodeColor, 0, tag);
                 else
                   hkDebugDisplay::displayStar(
                     hkSingleton<hkDebugDisplay>::s_instance,
                     &position,
-                    v22,
-                    v20,
+                    m_nodeSize,
+                    m_nodeColor,
                     0,
                     (int)hkDebugDisplayProcess::m_tag);
-                v5 = v36;
-                v13 = v34;
+                m_size = v33;
+                v13 = v31;
               }
-              if ( v9->m_labelNodes.m_bool )
+              if ( settings->m_labelNodes.m_bool )
               {
-                v40.m_string.m_capacityAndFlags = -2147483520;
-                v40.m_string.m_size = 1;
-                v40.m_string.m_storage[0] = 0;
-                v40.m_string.m_data = v40.m_string.m_storage;
-                if ( v5 <= 1 )
-                  hkStringBuf::printf(&v40, "%d", v13, v11);
+                v37.m_string.m_capacityAndFlags = -2147483520;
+                v37.m_string.m_size = 1;
+                v37.m_string.m_storage[0] = 0;
+                v37.m_string.m_data = v37.m_string.m_storage;
+                if ( m_size <= 1 )
+                  hkStringBuf::printf(&v37, "%d", v13);
                 else
-                  hkStringBuf::printf(&v40, "%d:%d", v6, v13);
-                if ( v9->m_showNodeData.m_bool )
+                  hkStringBuf::printf(&v37, "%d:%d", (unsigned int)v6, v13);
+                if ( settings->m_showNodeData.m_bool )
                 {
                   if ( v19 )
                   {
@@ -321,92 +331,93 @@ void __fastcall hkaiGraphDebugUtils::showGraphCollection(hkaiGraphDebugUtils::De
                     label.m_string.m_size = 1;
                     label.m_string.m_storage[0] = 0;
                     formatUserData_unsigned_int_(&label, v19, v23);
-                    hkStringBuf::operator+=(&v40, label.m_string.m_data);
+                    hkStringBuf::operator+=(&v37, label.m_string.m_data);
                     label.m_string.m_size = 0;
                     if ( label.m_string.m_capacityAndFlags >= 0 )
                       hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-                        (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
+                        &hkContainerTempAllocator::s_alloc,
                         label.m_string.m_data,
                         label.m_string.m_capacityAndFlags & 0x3FFFFFFF);
                   }
                 }
-                if ( v4 )
-                {
-                  LODWORD(displayHandlera) = v7;
-                  LODWORD(taga) = 0;
-                  LODWORD(id) = v9->m_nodeLabelColor;
-                  v4->vfptr->display3dText(
-                    v4,
+                if ( displayHandler )
+                  displayHandler->vfptr->display3dText(
+                    displayHandler,
                     (hkResult *)&position.m_quad.m128_u16[4],
-                    v40.m_string.m_data,
+                    v37.m_string.m_data,
                     &position,
-                    id,
-                    taga,
-                    (int)displayHandlera);
-                }
+                    settings->m_nodeLabelColor,
+                    0,
+                    tag);
                 else
-                {
                   hkDebugDisplay::display3dText(
                     hkSingleton<hkDebugDisplay>::s_instance,
-                    v40.m_string.m_data,
+                    v37.m_string.m_data,
                     &position,
-                    v9->m_nodeLabelColor,
+                    settings->m_nodeLabelColor,
                     0,
                     (int)hkDebugDisplayProcess::m_tag);
-                }
-                v40.m_string.m_size = 0;
-                if ( v40.m_string.m_capacityAndFlags >= 0 )
+                v37.m_string.m_size = 0;
+                if ( v37.m_string.m_capacityAndFlags >= 0 )
                   hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-                    (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-                    v40.m_string.m_data,
-                    v40.m_string.m_capacityAndFlags & 0x3FFFFFFF);
+                    &hkContainerTempAllocator::s_alloc,
+                    v37.m_string.m_data,
+                    v37.m_string.m_capacityAndFlags & 0x3FFFFFFF);
               }
-              if ( v9->m_showEdges.m_bool )
+              if ( settings->m_showEdges.m_bool )
               {
-                v24 = v12->m_originalNodes;
-                v25 = v24[v14].m_startEdgeIndex;
-                for ( i = v25 + v24[v14].m_numEdges; v25 < i; ++v25 )
-                  drawDirectedGraphEdge(v12, v25, collectiona, v9, &position, v19, v4, v7);
-                if ( v12->m_nodeMap.m_size && (v27 = v12->m_nodeMap.m_data[v37], (_DWORD)v27 != -1) )
-                {
-                  v28 = v12->m_instancedNodes.m_data[v27];
-                  v29 = (int)v12->m_instancedNodes.m_data[v27];
-                }
-                else
+                m_originalNodes = v12->m_originalNodes;
+                m_startEdgeIndex = m_originalNodes[v14].m_startEdgeIndex;
+                for ( i = m_startEdgeIndex + m_originalNodes[v14].m_numEdges; m_startEdgeIndex < i; ++m_startEdgeIndex )
+                  drawDirectedGraphEdge(
+                    v12,
+                    m_startEdgeIndex,
+                    collectiona,
+                    settings,
+                    &position,
+                    v19,
+                    displayHandler,
+                    tag);
+                if ( !v12->m_nodeMap.m_size || (v27 = v12->m_nodeMap.m_data[v34], (_DWORD)v27 == -1) )
                 {
                   v29 = -1;
                   v28.m_numEdges = 0;
+                }
+                else
+                {
+                  v28 = v12->m_instancedNodes.m_data[v27];
+                  v29 = v28.m_startEdgeIndex;
                 }
                 v28.m_startEdgeIndex = v29 + v28.m_numEdges;
                 if ( v29 < v29 + v28.m_numEdges )
                 {
                   do
-                    drawDirectedGraphEdge(v12, v29++, collectiona, v9, &position, v19, v4, v7);
+                    drawDirectedGraphEdge(v12, v29++, collectiona, settings, &position, v19, displayHandler, tag);
                   while ( v29 < v30 );
                 }
-                v6 = v35;
-                v14 = v37;
+                v6 = v32;
+                v14 = v34;
               }
-              v5 = v36;
+              m_size = v33;
               ++v14;
-              v13 = v34 + 1;
-              v15 = v39 + 16;
-              ++v34;
-              v39 += 16i64;
-              v37 = v14;
+              v13 = v31 + 1;
+              v15 = v36 + 16;
+              ++v31;
+              v36 += 16i64;
+              v34 = v14;
             }
-            while ( v14 < (signed __int64)position.m_quad.m128_u64[0] );
-            v10 = v40.m_string.m_data;
+            while ( v14 < position.m_quad.m128_i64[0] );
+            m_data = v37.m_string.m_data;
             v11 = v14;
           }
         }
         v8 = collectiona;
       }
       ++v6;
-      v10 += 48;
+      m_data += 48;
       --v11;
-      v35 = v6;
-      v40.m_string.m_data = v10;
+      v32 = v6;
+      v37.m_string.m_data = m_data;
     }
     while ( v11 );
   }
@@ -414,66 +425,51 @@ void __fastcall hkaiGraphDebugUtils::showGraphCollection(hkaiGraphDebugUtils::De
 
 // File Line: 205
 // RVA: 0xC4F460
-void __fastcall hkaiGraphDebugUtils::showGraph(hkaiGraphDebugUtils::DebugInfo *settings, hkaiDirectedGraphExplicitCost *clusterGraph, hkDebugDisplayHandler *displayHandler, int tag)
+void __fastcall hkaiGraphDebugUtils::showGraph(
+        hkaiGraphDebugUtils::DebugInfo *settings,
+        hkaiDirectedGraphExplicitCost *clusterGraph,
+        hkDebugDisplayHandler *displayHandler,
+        int tag)
 {
-  hkaiGraphDebugUtils::DebugInfo *v4; // rbp
-  int v5; // edi
-  hkDebugDisplayHandler *v6; // rsi
-  hkaiDirectedGraphExplicitCost *v7; // rbx
-  int v8; // er9
-  hkaiStreamingCollection::InstanceInfo *v9; // r8
-  __int64 v10; // rdx
-  hkaiDirectedGraphInstance **v11; // rax
-  hkResult result; // [rsp+30h] [rbp-158h]
-  hkaiStreamingCollection array; // [rsp+38h] [rbp-150h]
-  hkaiDirectedGraphInstance v14; // [rsp+70h] [rbp-118h]
+  hkaiStreamingCollection::InstanceInfo *m_data; // r8
+  __int64 v9; // rdx
+  hkaiDirectedGraphInstance **p_m_clusterGraphInstance; // rax
+  hkResult result; // [rsp+30h] [rbp-158h] BYREF
+  hkaiStreamingCollection array; // [rsp+38h] [rbp-150h] BYREF
+  hkaiDirectedGraphInstance v13; // [rsp+70h] [rbp-118h] BYREF
 
-  v4 = settings;
-  v5 = tag;
-  v6 = displayHandler;
-  v7 = clusterGraph;
-  hkaiDirectedGraphInstance::hkaiDirectedGraphInstance(&v14);
-  hkaiDirectedGraphInstance::tempInit(&v14, v7);
+  hkaiDirectedGraphInstance::hkaiDirectedGraphInstance(&v13);
+  hkaiDirectedGraphInstance::tempInit(&v13, clusterGraph);
   hkaiStreamingCollection::hkaiStreamingCollection(&array);
   array.m_isTemporary.m_bool = 1;
-  if ( (array.m_instances.m_capacityAndFlags & 0x3FFFFFFF) < 1 )
-  {
-    v8 = 1;
-    if ( 2 * (array.m_instances.m_capacityAndFlags & 0x3FFFFFFF) > 1 )
-      v8 = 2 * (array.m_instances.m_capacityAndFlags & 0x3FFFFFFF);
-    hkArrayUtil::_reserve(
-      &result,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &array.m_instances,
-      v8,
-      48);
-  }
-  v9 = array.m_instances.m_data;
-  v10 = 1 - array.m_instances.m_size;
+  if ( (array.m_instances.m_capacityAndFlags & 0x3FFFFFFF) == 0 )
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, &array.m_instances, 1, 48);
+  m_data = array.m_instances.m_data;
+  v9 = 1 - array.m_instances.m_size;
   if ( 1 - array.m_instances.m_size > 0 )
   {
-    v11 = &array.m_instances.m_data[array.m_instances.m_size].m_clusterGraphInstance;
+    p_m_clusterGraphInstance = &array.m_instances.m_data[array.m_instances.m_size].m_clusterGraphInstance;
     do
     {
-      if ( v11 != (hkaiDirectedGraphInstance **)16 )
+      if ( p_m_clusterGraphInstance != (hkaiDirectedGraphInstance **)16 )
       {
-        *(v11 - 2) = 0i64;
-        *(v11 - 1) = 0i64;
-        *v11 = 0i64;
-        v11[1] = 0i64;
-        v11[2] = 0i64;
-        *((_DWORD *)v11 + 6) = -1;
+        *(p_m_clusterGraphInstance - 2) = 0i64;
+        *(p_m_clusterGraphInstance - 1) = 0i64;
+        *p_m_clusterGraphInstance = 0i64;
+        p_m_clusterGraphInstance[1] = 0i64;
+        p_m_clusterGraphInstance[2] = 0i64;
+        *((_DWORD *)p_m_clusterGraphInstance + 6) = -1;
       }
-      v11 += 6;
-      --v10;
+      p_m_clusterGraphInstance += 6;
+      --v9;
     }
-    while ( v10 );
-    v9 = array.m_instances.m_data;
+    while ( v9 );
+    m_data = array.m_instances.m_data;
   }
   array.m_instances.m_size = 1;
-  v9->m_clusterGraphInstance = &v14;
-  hkaiGraphDebugUtils::showGraphCollection(v4, &array, v6, v5);
+  m_data->m_clusterGraphInstance = &v13;
+  hkaiGraphDebugUtils::showGraphCollection(settings, &array, displayHandler, tag);
   hkaiStreamingCollection::~hkaiStreamingCollection(&array);
-  hkaiDirectedGraphInstance::~hkaiDirectedGraphInstance(&v14);
+  hkaiDirectedGraphInstance::~hkaiDirectedGraphInstance(&v13);
 }
 

@@ -9,8 +9,8 @@ const char *__fastcall UFG::HintComponentBase::GetTypeName(UFG::HintComponentBas
 // RVA: 0x1470BD0
 __int64 dynamic_initializer_for__UFG::HintComponentBase::mspDefaultFont__()
 {
-  UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&UFG::HintComponentBase::mspDefaultFont.mPrev);
-  return atexit(dynamic_atexit_destructor_for__UFG::HintComponentBase::mspDefaultFont__);
+  UFG::qResourceHandle::qResourceHandle(&UFG::HintComponentBase::mspDefaultFont);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::HintComponentBase::mspDefaultFont__);
 }
 
 // File Line: 62
@@ -18,17 +18,17 @@ __int64 dynamic_initializer_for__UFG::HintComponentBase::mspDefaultFont__()
 void UFG::HintComponentBase::Init(void)
 {
   unsigned int v0; // ebx
-  UFG::qResourceInventory *v1; // rax
+  UFG::qResourceInventory *Inventory; // rax
   UFG::qResourceWarehouse *v2; // rax
 
   v0 = UFG::qStringHash32("LucidaConsole", 0xFFFFFFFF);
-  v1 = `UFG::qGetResourceInventory<Render::Font>::`2::result;
+  Inventory = `UFG::qGetResourceInventory<Render::Font>::`2::result;
   if ( !`UFG::qGetResourceInventory<Render::Font>::`2::result )
   {
     v2 = UFG::qResourceWarehouse::Instance();
-    v1 = UFG::qResourceWarehouse::GetInventory(v2, 0x69FCCB4Cu);
-    `UFG::qGetResourceInventory<Render::Font>::`2::result = v1;
+    Inventory = UFG::qResourceWarehouse::GetInventory(v2, 0x69FCCB4Cu);
+    `UFG::qGetResourceInventory<Render::Font>::`2::result = Inventory;
   }
-  UFG::qResourceHandle::Init((UFG::qResourceHandle *)&UFG::HintComponentBase::mspDefaultFont.mPrev, 0x69FCCB4Cu, v0, v1);
+  UFG::qResourceHandle::Init(&UFG::HintComponentBase::mspDefaultFont, 0x69FCCB4Cu, v0, Inventory);
 }
 

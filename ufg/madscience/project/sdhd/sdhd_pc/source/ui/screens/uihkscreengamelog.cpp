@@ -4,7 +4,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_E_COMBAT_TRAIN_TITLE__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("E_COMBAT_TRAIN_TITLE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("E_COMBAT_TRAIN_TITLE", -1);
   UI_HASH_E_COMBAT_TRAIN_TITLE = result;
   return result;
 }
@@ -15,7 +15,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_COMMON_TRC_PS3_PSN_SIGNED_OUT__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("COMMON_TRC_PS3_PSN_SIGNED_OUT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("COMMON_TRC_PS3_PSN_SIGNED_OUT", -1);
   UI_HASH_COMMON_TRC_PS3_PSN_SIGNED_OUT = result;
   return result;
 }
@@ -26,7 +26,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_COMMON_TRC_PS3_ETHERNET_CABLE_UNP
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("COMMON_TRC_PS3_ETHERNET_CABLE_UNPLUGGED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("COMMON_TRC_PS3_ETHERNET_CABLE_UNPLUGGED", -1);
   UI_HASH_COMMON_TRC_PS3_ETHERNET_CABLE_UNPLUGGED = result;
   return result;
 }
@@ -35,7 +35,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_COMMON_TRC_PS3_ETHERNET_CABLE_UNP
 // RVA: 0x6207E0
 UFG::GameLogManager *__fastcall UFG::GameLogManager::getInstance()
 {
-  if ( !(_S15_5 & 1) )
+  if ( (_S15_5 & 1) == 0 )
   {
     _S15_5 |= 1u;
     glManager.vfptr = (UFG::GameLogManagerVtbl *)&UFG::GameLogManager::`vftable;
@@ -49,17 +49,17 @@ UFG::GameLogManager *__fastcall UFG::GameLogManager::getInstance()
 UFG::GameLogManager::cGameLogCircularArray *__fastcall UFG::GameLogManager::GetDataArray(UFG::GameLogManager *this)
 {
   UFG::GameStatTracker *v1; // rax
-  UFG::PersistentData::Binary *v2; // rax
+  UFG::PersistentData::Binary *Stat; // rax
   UFG::allocator::free_link *v4; // rax
   void *v5; // rax
   void *v6; // rbx
   UFG::GameStatTracker *v7; // rax
-  UFG::PersistentData::Binary binary; // [rsp+28h] [rbp-20h]
+  UFG::PersistentData::Binary binary; // [rsp+28h] [rbp-20h] BYREF
 
   v1 = UFG::GameStatTracker::Instance();
-  v2 = UFG::GameStatTracker::GetStat(v1, GameLog);
-  if ( v2->mSize )
-    return (UFG::GameLogManager::cGameLogCircularArray *)v2->mpBuffer;
+  Stat = UFG::GameStatTracker::GetStat(v1, GameLog);
+  if ( Stat->mSize )
+    return (UFG::GameLogManager::cGameLogCircularArray *)Stat->mpBuffer;
   v4 = UFG::qMalloc(0x32Cui64, UFG::gGlobalNewName, 0i64);
   if ( v4 )
   {
@@ -79,29 +79,28 @@ UFG::GameLogManager::cGameLogCircularArray *__fastcall UFG::GameLogManager::GetD
 
 // File Line: 75
 // RVA: 0x5F1D10
-void __fastcall UFG::GameLogManager::LogItem(UFG::GameLogManager *this, __int64 log_type, unsigned int string_hash)
+void __fastcall UFG::GameLogManager::LogItem(
+        UFG::GameLogManager *this,
+        unsigned int *log_type,
+        unsigned int string_hash)
 {
-  unsigned int v3; // ebx
-  unsigned int *v4; // rsi
-  UFG::GameLogManager::cGameLogCircularArray *v5; // rax
+  UFG::GameLogManager::cGameLogCircularArray *DataArray; // rax
   UFG::GameLogManager::cGameLogCircularArray *v6; // rdi
   unsigned int v7; // ecx
-  UFG::GameLogManager::sGameLogEntry obj; // [rsp+48h] [rbp+20h]
+  UFG::GameLogManager::sGameLogEntry obj; // [rsp+48h] [rbp+20h] BYREF
 
-  v3 = string_hash;
-  v4 = (unsigned int *)log_type;
   if ( string_hash != UI_HASH_E_COMBAT_TRAIN_TITLE
     && string_hash != UI_HASH_COMMON_TRC_PS3_PSN_SIGNED_OUT
     && string_hash != UI_HASH_COMMON_TRC_PS3_ETHERNET_CABLE_UNPLUGGED )
   {
-    v5 = UFG::GameLogManager::GetDataArray(this);
-    v6 = v5;
-    if ( v5 )
+    DataArray = UFG::GameLogManager::GetDataArray(this);
+    v6 = DataArray;
+    if ( DataArray )
     {
-      if ( (unsigned int)UFG::GameLogManager::cGameLogCircularArray::Count(v5) >= 0x64 )
+      if ( (unsigned int)UFG::GameLogManager::cGameLogCircularArray::Count(DataArray) >= 0x64 )
         UFG::GameLogManager::cGameLogCircularArray::RemoveHead(v6);
-      v7 = *v4;
-      obj.string_hash = v3;
+      v7 = *log_type;
+      obj.string_hash = string_hash;
       obj.type.mUID = v7;
       UFG::GameLogManager::cGameLogCircularArray::AddTail(v6, &obj);
     }
@@ -110,36 +109,32 @@ void __fastcall UFG::GameLogManager::LogItem(UFG::GameLogManager *this, __int64 
 
 // File Line: 103
 // RVA: 0x5F1D90
-void __fastcall UFG::GameLogManager::LogItem(UFG::GameLogManager *this, __int64 log_type, const char *text)
+void __fastcall UFG::GameLogManager::LogItem(UFG::GameLogManager *this, unsigned int *log_type, const char *text)
 {
   const char *v3; // rbx
-  unsigned int *v4; // rdi
-  UFG::GameLogManager *v5; // rsi
   unsigned int v6; // eax
-  UFG::UIGfxTranslator *v7; // rcx
-  unsigned int v8; // er8
-  UFG::qSymbol log_typea; // [rsp+50h] [rbp+18h]
-  UFG::qSymbol *v10; // [rsp+58h] [rbp+20h]
+  UFG::UIGfxTranslator *m_translator; // rcx
+  unsigned int v8; // r8d
+  UFG::qSymbol log_typea; // [rsp+50h] [rbp+18h] BYREF
+  UFG::qSymbol *p_log_typea; // [rsp+58h] [rbp+20h]
 
   if ( text )
   {
     v3 = text;
-    v4 = (unsigned int *)log_type;
-    v5 = this;
-    if ( (signed int)UFG::qStringLength(text) >= 1 )
+    if ( (int)UFG::qStringLength(text) >= 1 )
     {
       if ( *v3 == 36 )
         ++v3;
-      v6 = UFG::qStringHashUpper32(v3, 0xFFFFFFFF);
-      v7 = UFG::UIScreenManager::s_instance->m_translator;
-      if ( v7 )
+      v6 = UFG::qStringHashUpper32(v3, -1);
+      m_translator = UFG::UIScreenManager::s_instance->m_translator;
+      if ( m_translator )
       {
-        if ( v7->vfptr[5].__vecDelDtor((Scaleform::RefCountImplCore *)&v7->vfptr, v6) )
+        if ( m_translator->vfptr[5].__vecDelDtor(m_translator, v6) )
         {
-          v10 = &log_typea;
-          log_typea.mUID = *v4;
-          v8 = UFG::qStringHashUpper32(v3, 0xFFFFFFFF);
-          UFG::GameLogManager::LogItem(v5, (__int64)&log_typea, v8);
+          p_log_typea = &log_typea;
+          log_typea.mUID = *log_type;
+          v8 = UFG::qStringHashUpper32(v3, -1);
+          UFG::GameLogManager::LogItem(this, &log_typea.mUID, v8);
         }
       }
     }
@@ -150,135 +145,134 @@ void __fastcall UFG::GameLogManager::LogItem(UFG::GameLogManager *this, __int64 
 // RVA: 0x5D4FC0
 void __fastcall UFG::GameLogManager::Clear(UFG::GameLogManager *this)
 {
-  UFG::GameLogManager::cGameLogCircularArray *v1; // rax
+  UFG::GameLogManager::cGameLogCircularArray *DataArray; // rax
 
-  v1 = UFG::GameLogManager::GetDataArray(this);
-  if ( v1 )
-    *(_QWORD *)&v1->mHeadIndex = -1i64;
+  DataArray = UFG::GameLogManager::GetDataArray(this);
+  if ( DataArray )
+    *(_QWORD *)&DataArray->mHeadIndex = -1i64;
 }
 
 // File Line: 144
 // RVA: 0x5E8230
-void __fastcall UFG::GameLogManager::GetLogEntries(UFG::GameLogManager *this, UFG::qCircularArray<UFG::GameLogManager::sGameLogEntry const *> *list, __int64 log_type)
+void __fastcall UFG::GameLogManager::GetLogEntries(
+        UFG::GameLogManager *this,
+        UFG::qCircularArray<UFG::GameLogManager::sGameLogEntry const *> *list,
+        _DWORD *log_type)
 {
-  _DWORD *v3; // r14
-  UFG::qCircularArray<UFG::GameLogManager::sGameLogEntry const *> *v4; // rbx
-  UFG::GameLogManager::cGameLogCircularArray *v5; // rax
+  UFG::GameLogManager::cGameLogCircularArray *DataArray; // rax
   UFG::GameLogManager::cGameLogCircularArray *v6; // rsi
   int v7; // edi
-  UFG::GameLogManager::sGameLogEntry *v8; // rax
-  unsigned int v9; // edx
+  UFG::GameLogManager::cGameLogCircularArray *v8; // rax
+  unsigned int mHeadIndex; // edx
   int v10; // ecx
-  unsigned int v11; // ecx
-  int v12; // er8
+  unsigned int mTailIndex; // ecx
+  int mCapacity; // r8d
 
-  v3 = (_DWORD *)log_type;
-  v4 = list;
   *(_QWORD *)&list->mHeadIndex = -1i64;
-  v5 = UFG::GameLogManager::GetDataArray(this);
-  v6 = v5;
-  if ( v5 )
+  DataArray = UFG::GameLogManager::GetDataArray(this);
+  v6 = DataArray;
+  if ( DataArray )
   {
     v7 = 0;
-    if ( (signed int)UFG::GameLogManager::cGameLogCircularArray::Count(v5) > 0 )
+    if ( (int)UFG::GameLogManager::cGameLogCircularArray::Count(DataArray) > 0 )
     {
       do
       {
-        if ( UFG::GameLogManager::cGameLogCircularArray::operator[](v6, v7)->type.mUID == *v3 )
+        if ( UFG::GameLogManager::cGameLogCircularArray::operator[](v6, v7)->mData[0].type.mUID == *log_type )
         {
           v8 = UFG::GameLogManager::cGameLogCircularArray::operator[](v6, v7);
-          v9 = v4->mHeadIndex;
-          if ( v9 == -1 )
+          mHeadIndex = list->mHeadIndex;
+          if ( mHeadIndex == -1 )
           {
             v10 = 0;
           }
           else
           {
-            v11 = v4->mTailIndex;
-            v10 = v9 <= v11 ? v11 - v9 + 1 : v4->mCapacity - v9 + v11 + 1;
+            mTailIndex = list->mTailIndex;
+            v10 = mHeadIndex <= mTailIndex ? mTailIndex - mHeadIndex + 1 : list->mCapacity - mHeadIndex + mTailIndex + 1;
           }
-          v12 = v4->mCapacity;
-          if ( v10 < v12 )
+          mCapacity = list->mCapacity;
+          if ( v10 < mCapacity )
           {
             if ( v10 )
             {
-              if ( v9 )
-                v4->mHeadIndex = (v9 - 1) % v12;
+              if ( mHeadIndex )
+                list->mHeadIndex = (mHeadIndex - 1) % mCapacity;
               else
-                v4->mHeadIndex = v12 - 1;
+                list->mHeadIndex = mCapacity - 1;
             }
             else
             {
-              *(_QWORD *)&v4->mHeadIndex = 0i64;
+              *(_QWORD *)&list->mHeadIndex = 0i64;
             }
-            v4->mData[v4->mHeadIndex] = v8;
+            list->mData[list->mHeadIndex] = (UFG::GameLogManager::sGameLogEntry *)v8;
           }
         }
         ++v7;
       }
-      while ( v7 < (signed int)UFG::GameLogManager::cGameLogCircularArray::Count(v6) );
+      while ( v7 < (int)UFG::GameLogManager::cGameLogCircularArray::Count(v6) );
     }
   }
 }
 
 // File Line: 162
 // RVA: 0x5E6A50
-void __fastcall UFG::GameLogManager::GetAllLogEntries(UFG::GameLogManager *this, UFG::qCircularArray<UFG::GameLogManager::sGameLogEntry const *> *list)
+void __fastcall UFG::GameLogManager::GetAllLogEntries(
+        UFG::GameLogManager *this,
+        UFG::qCircularArray<UFG::GameLogManager::sGameLogEntry const *> *list)
 {
-  UFG::qCircularArray<UFG::GameLogManager::sGameLogEntry const *> *v2; // rbx
-  UFG::GameLogManager::cGameLogCircularArray *v3; // rax
+  UFG::GameLogManager::cGameLogCircularArray *DataArray; // rax
   UFG::GameLogManager::cGameLogCircularArray *v4; // rsi
   int v5; // edi
-  UFG::GameLogManager::sGameLogEntry *v6; // rax
-  unsigned int v7; // edx
+  UFG::GameLogManager::cGameLogCircularArray *v6; // rax
+  unsigned int mHeadIndex; // edx
   int v8; // ecx
-  unsigned int v9; // ecx
-  int v10; // er8
+  unsigned int mTailIndex; // ecx
+  int mCapacity; // r8d
 
-  v2 = list;
   *(_QWORD *)&list->mHeadIndex = -1i64;
-  v3 = UFG::GameLogManager::GetDataArray(this);
-  v4 = v3;
-  if ( v3 )
+  DataArray = UFG::GameLogManager::GetDataArray(this);
+  v4 = DataArray;
+  if ( DataArray )
   {
     v5 = 0;
-    if ( (signed int)UFG::GameLogManager::cGameLogCircularArray::Count(v3) > 0 )
+    if ( (int)UFG::GameLogManager::cGameLogCircularArray::Count(DataArray) > 0 )
     {
       do
       {
         v6 = UFG::GameLogManager::cGameLogCircularArray::operator[](v4, v5);
-        v7 = v2->mHeadIndex;
-        if ( v7 == -1 )
+        mHeadIndex = list->mHeadIndex;
+        if ( mHeadIndex == -1 )
         {
           v8 = 0;
         }
         else
         {
-          v9 = v2->mTailIndex;
-          if ( v7 <= v9 )
-            v8 = v9 - v7 + 1;
+          mTailIndex = list->mTailIndex;
+          if ( mHeadIndex <= mTailIndex )
+            v8 = mTailIndex - mHeadIndex + 1;
           else
-            v8 = v2->mCapacity - v7 + v9 + 1;
+            v8 = list->mCapacity - mHeadIndex + mTailIndex + 1;
         }
-        v10 = v2->mCapacity;
-        if ( v8 < v10 )
+        mCapacity = list->mCapacity;
+        if ( v8 < mCapacity )
         {
           if ( v8 )
           {
-            if ( v7 )
-              v2->mHeadIndex = (v7 - 1) % v10;
+            if ( mHeadIndex )
+              list->mHeadIndex = (mHeadIndex - 1) % mCapacity;
             else
-              v2->mHeadIndex = v10 - 1;
+              list->mHeadIndex = mCapacity - 1;
           }
           else
           {
-            *(_QWORD *)&v2->mHeadIndex = 0i64;
+            *(_QWORD *)&list->mHeadIndex = 0i64;
           }
-          v2->mData[v2->mHeadIndex] = v6;
+          list->mData[list->mHeadIndex] = (UFG::GameLogManager::sGameLogEntry *)v6;
         }
         ++v5;
       }
-      while ( v5 < (signed int)UFG::GameLogManager::cGameLogCircularArray::Count(v4) );
+      while ( v5 < (int)UFG::GameLogManager::cGameLogCircularArray::Count(v4) );
     }
   }
 }
@@ -287,14 +281,10 @@ void __fastcall UFG::GameLogManager::GetAllLogEntries(UFG::GameLogManager *this,
 // RVA: 0x5C52E0
 void __fastcall UFG::UIHKScreenGameLog::UIHKScreenGameLog(UFG::UIHKScreenGameLog *this)
 {
-  UFG::UIHKScreenGameLog *v1; // rbx
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> *v2; // rax
-  unsigned __int64 v3; // rax
+  unsigned __int64 v2; // rax
 
-  v1 = this;
-  v2 = (UFG::qNode<UFG::UIScreen,UFG::UIScreen> *)&this->mPrev;
-  v2->mPrev = v2;
-  v2->mNext = v2;
+  this->mPrev = &this->UFG::qNode<UFG::UIScreen,UFG::UIScreen>;
+  this->mNext = &this->UFG::qNode<UFG::UIScreen,UFG::UIScreen>;
   this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIScreen::`vftable;
   this->m_screenNameHash = 0;
   this->mRenderable = 0i64;
@@ -302,7 +292,7 @@ void __fastcall UFG::UIHKScreenGameLog::UIHKScreenGameLog(UFG::UIHKScreenGameLog
   this->mScreenUID = -1;
   *(_QWORD *)&this->mControllerMask = 15i64;
   *(_QWORD *)&this->mPriority = 0i64;
-  this->mDimToApplyType = 0;
+  this->mDimToApplyType = eDIM_INVALID;
   *(_QWORD *)&this->mCurDimValue = 1120403456i64;
   this->m_screenName[0] = 0;
   --this->mInputEnabled;
@@ -311,73 +301,69 @@ void __fastcall UFG::UIHKScreenGameLog::UIHKScreenGameLog(UFG::UIHKScreenGameLog
   this->mCurrentTab = 0;
   this->m_aCurrentTabItems.mCapacity = 100;
   this->m_aCurrentTabItems.mpMemoryPool = 0i64;
-  v3 = 800i64;
+  v2 = 800i64;
   if ( !is_mul_ok(0x64ui64, 8ui64) )
-    v3 = -1i64;
+    v2 = -1i64;
   this->m_aCurrentTabItems.mData = (UFG::GameLogManager::sGameLogEntry **)UFG::qMalloc(
-                                                                            v3,
+                                                                            v2,
                                                                             "qCircularArray::mData",
                                                                             0i64);
-  *(_QWORD *)&v1->m_aCurrentTabItems.mHeadIndex = -1i64;
+  *(_QWORD *)&this->m_aCurrentTabItems.mHeadIndex = -1i64;
 }
 
 // File Line: 193
 // RVA: 0x5CAB80
 void __fastcall UFG::UIHKScreenGameLog::~UIHKScreenGameLog(UFG::UIHKScreenGameLog *this)
 {
-  UFG::UIHKScreenGameLog *v1; // rbx
   UFG::UIScreenTextureManager *v2; // rax
   UFG::UIHKScreenGlobalOverlay *v3; // rax
-  UFG::UIHKHelpBarWidget *v4; // rdi
+  UFG::UIHKHelpBarWidget *p_HelpBar; // rdi
   unsigned int v5; // eax
-  UFG::qMemoryPool *v6; // rcx
+  UFG::qMemoryPool *mpMemoryPool; // rcx
 
-  v1 = this;
   this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenGameLog::`vftable;
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v2, "GameLog");
   v3 = UFG::UIHKScreenGlobalOverlay::mThis;
   if ( !UFG::UIHKScreenGlobalOverlay::mThis )
     v3 = &gGlobalOverlaySentinel;
-  v4 = &v3->HelpBar;
+  p_HelpBar = &v3->HelpBar;
   v5 = UFG::qStringHash32("gamelog", 0xFFFFFFFF);
-  UFG::UIHKHelpBarWidget::Hide(v4, v5);
-  *(_QWORD *)&v1->m_aCurrentTabItems.mHeadIndex = -1i64;
-  v6 = v1->m_aCurrentTabItems.mpMemoryPool;
-  if ( v6 )
-    UFG::qMemoryPool::Free(v6, v1->m_aCurrentTabItems.mData);
+  UFG::UIHKHelpBarWidget::Hide(p_HelpBar, v5);
+  *(_QWORD *)&this->m_aCurrentTabItems.mHeadIndex = -1i64;
+  mpMemoryPool = this->m_aCurrentTabItems.mpMemoryPool;
+  if ( mpMemoryPool )
+    UFG::qMemoryPool::Free(mpMemoryPool, (char *)this->m_aCurrentTabItems.mData);
   else
-    operator delete[](v1->m_aCurrentTabItems.mData);
-  UFG::UIScreen::~UIScreen((UFG::UIScreen *)&v1->vfptr);
+    operator delete[](this->m_aCurrentTabItems.mData);
+  UFG::UIScreen::~UIScreen(this);
 }
 
 // File Line: 201
 // RVA: 0x6318A0
 void __fastcall UFG::UIHKScreenGameLog::init(UFG::UIHKScreenGameLog *this, UFG::UICommandData *data)
 {
-  UFG::UIHKScreenGameLog *v2; // rsi
-  unsigned int v3; // er14
+  unsigned int v3; // r14d
   int v4; // ecx
   __int64 v5; // rax
   __int64 v6; // rdi
   __int64 v7; // rbx
-  unsigned int v8; // er14
+  unsigned int v8; // r14d
   int v9; // ecx
   __int64 v10; // rax
   __int64 v11; // rdi
   __int64 v12; // rbx
   UFG::UIHKScreenGlobalOverlay *v13; // rax
-  Scaleform::GFx::Value pargs; // [rsp+30h] [rbp-B8h]
+  Scaleform::GFx::Value pargs; // [rsp+30h] [rbp-B8h] BYREF
   __int64 v15; // [rsp+60h] [rbp-88h]
   int v16[2]; // [rsp+68h] [rbp-80h]
-  UFG::UIHKHelpBarData dataa; // [rsp+70h] [rbp-78h]
+  UFG::UIHKHelpBarData dataa; // [rsp+70h] [rbp-78h] BYREF
 
   v15 = -2i64;
-  v2 = this;
-  UFG::UIScreen::init((UFG::UIScreen *)&this->vfptr, data);
+  UFG::UIScreen::init(this, data);
   UFG::UIHKHelpBarData::UIHKHelpBarData(&dataa);
   dataa.id = UFG::qStringHash32("gamelog", 0xFFFFFFFF);
-  dataa.alignment = 0;
+  dataa.alignment = ALIGN_LEFT;
   v3 = UI_HASH_BUTTON_R1_PRESSED_30;
   v4 = 0;
   v5 = 0i64;
@@ -391,8 +377,8 @@ void __fastcall UFG::UIHKScreenGameLog::init(UFG::UIHKScreenGameLog *this, UFG::
   v16[v4] = 13;
   v7 = v4;
   UFG::qString::Set((UFG::qString *)&dataa.Buttons[10 * v4], "$HELPBAR_CHANGE_SECTION_UC");
-  UFG::qString::Set((UFG::qString *)((char *)&dataa.Captions[v7 + 5] + 16), &customWorldMapCaption);
-  *(&dataa.Icons[5].mMagic + v6) = v3;
+  UFG::qString::Set((UFG::qString *)&dataa.Captions[v7 + 5].mMagic, &customCaption);
+  dataa.MessageIds[v6 - 6] = v3;
 LABEL_6:
   v8 = UI_HASH_BUTTON_BACK_PRESSED_30;
   v9 = 0;
@@ -407,30 +393,29 @@ LABEL_6:
   v16[v9] = 2;
   v12 = v9;
   UFG::qString::Set((UFG::qString *)&dataa.Buttons[10 * v9], "$COMMON_BACK_UPPERCASE");
-  UFG::qString::Set((UFG::qString *)((char *)&dataa.Captions[v12 + 5] + 16), &customWorldMapCaption);
-  *(&dataa.Icons[5].mMagic + v11) = v8;
+  UFG::qString::Set((UFG::qString *)&dataa.Captions[v12 + 5].mMagic, &customCaption);
+  dataa.MessageIds[v11 - 6] = v8;
 LABEL_11:
   v13 = UFG::UIHKScreenGlobalOverlay::mThis;
   if ( !UFG::UIHKScreenGlobalOverlay::mThis )
     v13 = &gGlobalOverlaySentinel;
   UFG::UIHKHelpBarWidget::Show(&v13->HelpBar, &dataa);
-  v2->m_Movie = v2->mRenderable->m_movie.pObject;
+  this->m_Movie = this->mRenderable->m_movie.pObject;
   pargs.pObjectInterface = 0i64;
-  pargs.Type = 0;
-  pargs.Type = 5;
+  pargs.Type = VT_Number;
   pargs.mValue.NValue = DOUBLE_100_0;
-  Scaleform::GFx::Movie::Invoke(v2->m_Movie, "SetNumSlots", 0i64, &pargs, 1u);
-  UFG::UIHKScreenGameLog::UpdateList(v2);
-  v2->m_bShouldRefesh = 1;
-  if ( ((unsigned int)pargs.Type >> 6) & 1 )
+  Scaleform::GFx::Movie::Invoke(this->m_Movie, "SetNumSlots", 0i64, &pargs, 1u);
+  UFG::UIHKScreenGameLog::UpdateList(this);
+  this->m_bShouldRefesh = 1;
+  if ( (pargs.Type & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
+    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&pargs.pObjectInterface->vfptr->gap8[8])(
       pargs.pObjectInterface,
       &pargs,
-      *(_QWORD *)&pargs.mValue.NValue);
+      pargs.mValue);
     pargs.pObjectInterface = 0i64;
   }
-  pargs.Type = 0;
+  pargs.Type = VT_Undefined;
   UFG::qString::~qString((UFG::qString *)dataa.MessageIds);
   `eh vector destructor iterator(
     &dataa.Captions[5].mMagic,
@@ -444,44 +429,30 @@ LABEL_11:
 // RVA: 0x63CD40
 void __fastcall UFG::UIHKScreenGameLog::update(UFG::UIHKScreenGameLog *this, float elapsed)
 {
-  UFG::UIHKScreenGameLog *v2; // rbx
-
-  v2 = this;
-  UFG::UIScreen::update((UFG::UIScreen *)&this->vfptr, elapsed);
-  if ( v2->m_bShouldRefesh )
+  UFG::UIScreen::update(this, elapsed);
+  if ( this->m_bShouldRefesh )
   {
-    v2->m_bShouldRefesh = 0;
-    UFG::UIHKScreenGameLog::Refresh(v2);
+    this->m_bShouldRefesh = 0;
+    UFG::UIHKScreenGameLog::Refresh(this);
   }
 }
 
 // File Line: 236
 // RVA: 0x623060
-bool __fastcall UFG::UIHKScreenGameLog::handleMessage(UFG::UIHKScreenGameLog *this, unsigned int msgId, UFG::UIMessage *msg)
+bool __fastcall UFG::UIHKScreenGameLog::handleMessage(
+        UFG::UIHKScreenGameLog *this,
+        unsigned int msgId,
+        UFG::UIMessage *msg)
 {
-  UFG::UIMessage *v3; // rsi
-  unsigned int v4; // ebx
-  UFG::UIHKScreenUpgrades *v5; // rdi
-  UFG::UIScreen *v6; // rax
+  UFG::UIScreen *Overlay; // rax
   UFG::UIHKScreenGlobalOverlay *v7; // rcx
-  bool result; // al
 
-  v3 = msg;
-  v4 = msgId;
-  v5 = (UFG::UIHKScreenUpgrades *)this;
   if ( msgId == UI_HASH_BUTTON_START_PRESSED_30 || msgId == UI_HASH_BUTTON_BACK_PRESSED_30 )
   {
-    UFG::UIScreenManagerBase::queuePopScreen(
-      (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-      0xFFFFFFFF);
+    UFG::UIScreenManagerBase::queuePopScreen(UFG::UIScreenManager::s_instance, 0xFFFFFFFF);
     if ( UFG::HudAudio::m_instance )
-      UFG::AudioEntity::CreateAndPlayEvent(
-        (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-        0xA4E5BFBD,
-        0i64,
-        0,
-        0i64);
-    result = 1;
+      UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0xA4E5BFBD, 0i64, 0, 0i64);
+    return 1;
   }
   else
   {
@@ -506,96 +477,73 @@ bool __fastcall UFG::UIHKScreenGameLog::handleMessage(UFG::UIHKScreenGameLog *th
       else
         UFG::UIHKScreenGameLog::ScrollUp(this);
 LABEL_12:
-      v6 = UFG::UIScreenManagerBase::getOverlay(
-             (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-             "GlobalOverlay");
-      if ( v6 )
+      Overlay = UFG::UIScreenManagerBase::getOverlay(UFG::UIScreenManager::s_instance, "GlobalOverlay");
+      if ( Overlay )
       {
         v7 = UFG::UIHKScreenGlobalOverlay::mThis;
         if ( !UFG::UIHKScreenGlobalOverlay::mThis )
           v7 = &gGlobalOverlaySentinel;
-        UFG::UIHKHelpBarWidget::HandleMessage(&v7->HelpBar, v6, v4, v3);
-        result = UFG::UIScreen::handleMessage((UFG::UIScreen *)&v5->vfptr, v4, v3);
+        UFG::UIHKHelpBarWidget::HandleMessage(&v7->HelpBar, Overlay, msgId, msg);
+        return UFG::UIScreen::handleMessage(this, msgId, msg);
       }
-      else if ( v4 == UI_HASH_MOUSE_BUTTON_LEFT_PRESSED_30 )
+      else if ( msgId == UI_HASH_MOUSE_BUTTON_LEFT_PRESSED_30 )
       {
-        UFG::UIHKScreenSaveLoad::Flash_HandleMouseClick(v5, (float)SLODWORD(v3[1].vfptr), (float)SHIDWORD(v3[1].vfptr));
-        result = UFG::UIScreen::handleMessage((UFG::UIScreen *)&v5->vfptr, v4, v3);
+        UFG::UIHKScreenSaveLoad::Flash_HandleMouseClick(
+          (UFG::UIHKScreenUpgrades *)this,
+          (float)SLODWORD(msg[1].vfptr),
+          (float)SHIDWORD(msg[1].vfptr));
+        return UFG::UIScreen::handleMessage(this, msgId, msg);
       }
       else
       {
-        if ( v4 == UI_HASH_MOUSE_SELECT_SLOT_20 )
+        if ( msgId == UI_HASH_MOUSE_SELECT_SLOT_20 )
         {
           if ( UFG::HudAudio::m_instance )
-            UFG::AudioEntity::CreateAndPlayEvent(
-              (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-              0xC415B16F,
-              0i64,
-              0,
-              0i64);
-          v5->mCursorYPos[3] = UFG::UI::GetFlashArgsInt(v3);
-          UFG::UIHKScreenGameLog::UpdateList((UFG::UIHKScreenGameLog *)v5);
-          UFG::UIHKScreenGameLog::Refresh((UFG::UIHKScreenGameLog *)v5);
+            UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0xC415B16F, 0i64, 0, 0i64);
+          this->mCurrentTab = UFG::UI::GetFlashArgsInt(msg);
+          UFG::UIHKScreenGameLog::UpdateList(this);
+          UFG::UIHKScreenGameLog::Refresh(this);
         }
-        result = UFG::UIScreen::handleMessage((UFG::UIScreen *)&v5->vfptr, v4, v3);
+        return UFG::UIScreen::handleMessage(this, msgId, msg);
       }
-      return result;
     }
     if ( msgId == UI_HASH_BUTTON_L1_PRESSED_30 )
     {
       if ( UFG::HudAudio::m_instance )
-        UFG::AudioEntity::CreateAndPlayEvent(
-          (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-          0xC415B16F,
-          0i64,
-          0,
-          0i64);
-      UFG::UIHKScreenGameLog::ScrollPrevTab((UFG::UIHKScreenGameLog *)v5);
-      result = 1;
+        UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0xC415B16F, 0i64, 0, 0i64);
+      UFG::UIHKScreenGameLog::ScrollPrevTab(this);
+      return 1;
     }
     else
     {
       if ( msgId != UI_HASH_BUTTON_R1_PRESSED_30 )
         goto LABEL_12;
       if ( UFG::HudAudio::m_instance )
-        UFG::AudioEntity::CreateAndPlayEvent(
-          (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-          0xC415B16F,
-          0i64,
-          0,
-          0i64);
-      UFG::UIHKScreenGameLog::ScrollNextTab((UFG::UIHKScreenGameLog *)v5);
-      result = 1;
+        UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0xC415B16F, 0i64, 0, 0i64);
+      UFG::UIHKScreenGameLog::ScrollNextTab(this);
+      return 1;
     }
   }
-  return result;
 }
 
 // File Line: 303
 // RVA: 0x604430
 void __fastcall UFG::UIHKScreenGameLog::ScrollUp(UFG::UIHKScreenGameLog *this)
 {
-  unsigned int v1; // er8
-  UFG::UIHKScreenGameLog *v2; // rbx
-  unsigned int v3; // edx
-  int v4; // edx
+  unsigned int mHeadIndex; // r8d
+  unsigned int mTailIndex; // edx
 
-  v1 = this->m_aCurrentTabItems.mHeadIndex;
-  v2 = this;
-  if ( v1 != -1 )
+  mHeadIndex = this->m_aCurrentTabItems.mHeadIndex;
+  if ( mHeadIndex != -1 )
   {
-    v3 = this->m_aCurrentTabItems.mTailIndex;
-    v4 = v1 <= v3 ? v3 - v1 + 1 : this->m_aCurrentTabItems.mCapacity - v1 + v3 + 1;
-    if ( v4 )
+    mTailIndex = this->m_aCurrentTabItems.mTailIndex;
+    if ( mHeadIndex <= mTailIndex
+       ? mTailIndex - mHeadIndex + 1
+       : this->m_aCurrentTabItems.mCapacity - mHeadIndex + mTailIndex + 1 )
     {
       if ( UFG::HudAudio::m_instance )
-        UFG::AudioEntity::CreateAndPlayEvent(
-          (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-          0x593B70ABu,
-          0i64,
-          0,
-          0i64);
-      Scaleform::GFx::Movie::Invoke(v2->m_Movie, "ScrollUp", 0i64, 0i64, 0);
+        UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0x593B70ABu, 0i64, 0, 0i64);
+      Scaleform::GFx::Movie::Invoke(this->m_Movie, "ScrollUp", 0i64, 0i64, 0);
     }
   }
 }
@@ -604,28 +552,23 @@ void __fastcall UFG::UIHKScreenGameLog::ScrollUp(UFG::UIHKScreenGameLog *this)
 // RVA: 0x603EA0
 void __fastcall UFG::UIHKScreenGameLog::ScrollDown(UFG::UIHKScreenGameLog *this)
 {
-  unsigned int v1; // er8
-  unsigned int v2; // edx
+  unsigned int mHeadIndex; // r8d
+  unsigned int mTailIndex; // edx
   int v3; // edx
 
-  v1 = this->m_aCurrentTabItems.mHeadIndex;
-  if ( v1 != -1 )
+  mHeadIndex = this->m_aCurrentTabItems.mHeadIndex;
+  if ( mHeadIndex != -1 )
   {
-    v2 = this->m_aCurrentTabItems.mTailIndex;
-    if ( v1 <= v2 )
-      v3 = v2 - v1 + 1;
+    mTailIndex = this->m_aCurrentTabItems.mTailIndex;
+    if ( mHeadIndex <= mTailIndex )
+      v3 = mTailIndex - mHeadIndex + 1;
     else
-      v3 = this->m_aCurrentTabItems.mCapacity - v1 + v2 + 1;
+      v3 = this->m_aCurrentTabItems.mCapacity - mHeadIndex + mTailIndex + 1;
     if ( v3 )
     {
       Scaleform::GFx::Movie::Invoke(this->m_Movie, "ScrollDown", 0i64, 0i64, 0);
       if ( UFG::HudAudio::m_instance )
-        UFG::AudioEntity::CreateAndPlayEvent(
-          (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-          0xB78DCE8u,
-          0i64,
-          0,
-          0i64);
+        UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0xB78DCE8u, 0i64, 0, 0i64);
     }
   }
 }
@@ -634,179 +577,171 @@ void __fastcall UFG::UIHKScreenGameLog::ScrollDown(UFG::UIHKScreenGameLog *this)
 // RVA: 0x61B000
 void __fastcall UFG::UIHKScreenGameLog::UpdateList(UFG::UIHKScreenGameLog *this)
 {
-  UFG::UIHKScreenGameLog *v1; // rbx
-  UFG::qCircularArray<UFG::GameLogManager::sGameLogEntry const *> *v2; // rdx
-  UFG::qSymbol *v3; // r8
-  unsigned int v4; // [rsp+40h] [rbp+8h]
-  unsigned int v5; // [rsp+48h] [rbp+10h]
-  UFG::qSymbol log_type; // [rsp+50h] [rbp+18h]
-  UFG::qSymbol *v7; // [rsp+58h] [rbp+20h]
+  UFG::qCircularArray<UFG::GameLogManager::sGameLogEntry const *> *p_m_aCurrentTabItems; // rdx
+  UFG::qSymbol *p_mUID; // r8
+  unsigned int v4; // [rsp+40h] [rbp+8h] BYREF
+  unsigned int mUID; // [rsp+48h] [rbp+10h] BYREF
+  UFG::qSymbol log_type; // [rsp+50h] [rbp+18h] BYREF
+  UFG::qSymbol *p_log_type; // [rsp+58h] [rbp+20h]
 
-  v1 = this;
-  if ( !(_S15_5 & 1) )
+  if ( (_S15_5 & 1) == 0 )
   {
     _S15_5 |= 1u;
     glManager.vfptr = (UFG::GameLogManagerVtbl *)&UFG::GameLogManager::`vftable;
     atexit(UFG::GameLogManager::getInstance_::_2_::_dynamic_atexit_destructor_for__glManager__);
   }
-  switch ( v1->mCurrentTab )
+  switch ( this->mCurrentTab )
   {
     case 1:
-      v7 = &log_type;
+      p_log_type = &log_type;
       log_type.mUID = qSymbol_GameLogType_Hint_20.mUID;
-      v2 = &v1->m_aCurrentTabItems;
-      v3 = &log_type;
+      p_m_aCurrentTabItems = &this->m_aCurrentTabItems;
+      p_mUID = &log_type;
       break;
     case 2:
-      v7 = (UFG::qSymbol *)&v5;
-      v5 = qSymbol_GameLogType_Objective_20.mUID;
-      v2 = &v1->m_aCurrentTabItems;
-      v3 = (UFG::qSymbol *)&v5;
+      p_log_type = (UFG::qSymbol *)&mUID;
+      mUID = qSymbol_GameLogType_Objective_20.mUID;
+      p_m_aCurrentTabItems = &this->m_aCurrentTabItems;
+      p_mUID = (UFG::qSymbol *)&mUID;
       break;
     case 3:
-      v7 = (UFG::qSymbol *)&v4;
+      p_log_type = (UFG::qSymbol *)&v4;
       v4 = qSymbol_GameLogType_RewardsUpgrades_20.mUID;
-      v2 = &v1->m_aCurrentTabItems;
-      v3 = (UFG::qSymbol *)&v4;
+      p_m_aCurrentTabItems = &this->m_aCurrentTabItems;
+      p_mUID = (UFG::qSymbol *)&v4;
       break;
     default:
-      UFG::GameLogManager::GetAllLogEntries(&glManager, &v1->m_aCurrentTabItems);
+      UFG::GameLogManager::GetAllLogEntries(&glManager, &this->m_aCurrentTabItems);
       return;
   }
-  UFG::GameLogManager::GetLogEntries(&glManager, v2, (__int64)v3);
+  UFG::GameLogManager::GetLogEntries(&glManager, p_m_aCurrentTabItems, p_mUID);
 }
 
 // File Line: 353
 // RVA: 0x5FFC90
 void __fastcall UFG::UIHKScreenGameLog::Refresh(UFG::UIHKScreenGameLog *this)
 {
-  UFG::UIHKScreenGameLog *v1; // rbx
-  signed int i; // esi
-  unsigned int v3; // edx
+  int i; // esi
+  unsigned int mHeadIndex; // edx
   int v4; // ecx
-  unsigned int v5; // ecx
-  unsigned int v6; // er8
+  unsigned int mTailIndex; // ecx
+  unsigned int v6; // r8d
   int v7; // ecx
   unsigned int v8; // ecx
   int v9; // edx
-  unsigned int v10; // er8
-  signed int v11; // edx
-  __int64 v12; // rdx
-  UFG::UIGfxTranslator *v13; // rcx
+  unsigned int v10; // r8d
+  unsigned int v11; // edx
+  __int64 string_hash; // rdx
+  UFG::UIGfxTranslator *m_translator; // rcx
   const char *v14; // rdi
-  char ptr; // [rsp+28h] [rbp-19h]
-  __int64 v16; // [rsp+38h] [rbp-9h]
-  unsigned int v17; // [rsp+40h] [rbp-1h]
-  double v18; // [rsp+48h] [rbp+7h]
-  char v19; // [rsp+58h] [rbp+17h]
-  __int64 v20; // [rsp+68h] [rbp+27h]
-  unsigned int v21; // [rsp+70h] [rbp+2Fh]
-  const char *v22; // [rsp+78h] [rbp+37h]
+  Scaleform::GFx::Value ptr; // [rsp+28h] [rbp-19h] BYREF
+  char v16[16]; // [rsp+58h] [rbp+17h] BYREF
+  __int64 v17; // [rsp+68h] [rbp+27h]
+  int v18; // [rsp+70h] [rbp+2Fh]
+  const char *v19; // [rsp+78h] [rbp+37h]
 
-  v1 = this;
   Scaleform::GFx::Movie::Invoke(this->m_Movie, "GameLogList.Clear", 0i64, 0i64, 0);
   for ( i = 0; ; ++i )
   {
-    v3 = v1->m_aCurrentTabItems.mHeadIndex;
-    if ( v3 == -1 )
+    mHeadIndex = this->m_aCurrentTabItems.mHeadIndex;
+    if ( mHeadIndex == -1 )
     {
       v4 = 0;
     }
     else
     {
-      v5 = v1->m_aCurrentTabItems.mTailIndex;
-      v4 = v3 <= v5 ? v5 - v3 + 1 : v1->m_aCurrentTabItems.mCapacity - v3 + v5 + 1;
+      mTailIndex = this->m_aCurrentTabItems.mTailIndex;
+      v4 = mHeadIndex <= mTailIndex
+         ? mTailIndex - mHeadIndex + 1
+         : this->m_aCurrentTabItems.mCapacity - mHeadIndex + mTailIndex + 1;
     }
     if ( i >= v4 )
       break;
     `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-    if ( (v17 >> 6) & 1 )
+    if ( (ptr.Type & 0x40) != 0 )
     {
-      (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v16 + 16i64))(
-        v16,
+      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&ptr.pObjectInterface->vfptr->gap8[8])(
+        ptr.pObjectInterface,
         &ptr,
-        COERCE_DOUBLE(*(_QWORD *)&v18));
-      v16 = 0i64;
+        ptr.mValue);
+      ptr.pObjectInterface = 0i64;
     }
-    v17 = 5;
-    v18 = (double)i;
-    v6 = v1->m_aCurrentTabItems.mHeadIndex;
+    ptr.Type = VT_Number;
+    ptr.mValue.NValue = (double)i;
+    v6 = this->m_aCurrentTabItems.mHeadIndex;
     if ( v6 == -1 )
     {
       v7 = 0;
     }
     else
     {
-      v8 = v1->m_aCurrentTabItems.mTailIndex;
+      v8 = this->m_aCurrentTabItems.mTailIndex;
       if ( v6 <= v8 )
         v7 = v8 - v6 + 1;
       else
-        v7 = v1->m_aCurrentTabItems.mCapacity - v6 + v8 + 1;
+        v7 = this->m_aCurrentTabItems.mCapacity - v6 + v8 + 1;
     }
     v9 = i % v7;
     if ( i % v7 >= 0 )
     {
-      v11 = (v9 + v6) % v1->m_aCurrentTabItems.mCapacity;
+      v11 = (v9 + v6) % this->m_aCurrentTabItems.mCapacity;
     }
     else
     {
-      v10 = v1->m_aCurrentTabItems.mTailIndex;
+      v10 = this->m_aCurrentTabItems.mTailIndex;
       if ( -v9 <= v10 + 1 )
         v11 = v10 + v9 + 1;
       else
-        v11 = v9 + v1->m_aCurrentTabItems.mCapacity + v10 + 1;
+        v11 = v9 + this->m_aCurrentTabItems.mCapacity + v10 + 1;
     }
-    v12 = v1->m_aCurrentTabItems.mData[v11]->string_hash;
-    v13 = UFG::UIScreenManager::s_instance->m_translator;
-    if ( v13
-      && (v14 = (const char *)v13->vfptr[5].__vecDelDtor((Scaleform::RefCountImplCore *)&v13->vfptr, v12)) != 0i64 )
+    string_hash = this->m_aCurrentTabItems.mData[v11]->string_hash;
+    m_translator = UFG::UIScreenManager::s_instance->m_translator;
+    if ( m_translator && (v14 = (const char *)m_translator->vfptr[5].__vecDelDtor(m_translator, string_hash)) != 0i64 )
     {
-      if ( (v21 >> 6) & 1 )
+      if ( (v18 & 0x40) != 0 )
       {
-        (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v20 + 16i64))(v20, &v19, v22);
-        v20 = 0i64;
+        (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v17 + 16i64))(v17, v16, v19);
+        v17 = 0i64;
       }
-      v22 = v14;
+      v19 = v14;
     }
     else
     {
-      if ( (v21 >> 6) & 1 )
+      if ( (v18 & 0x40) != 0 )
       {
-        (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v20 + 16i64))(v20, &v19, v22);
-        v20 = 0i64;
+        (*(void (__fastcall **)(__int64, char *, const char *))(*(_QWORD *)v17 + 16i64))(v17, v16, v19);
+        v17 = 0i64;
       }
-      v22 = "ERROR: Bad String Hash!";
+      v19 = "ERROR: Bad String Hash!";
     }
-    v21 = 6;
-    Scaleform::GFx::Movie::Invoke(v1->m_Movie, "AddSlot", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
+    v18 = 6;
+    Scaleform::GFx::Movie::Invoke(this->m_Movie, "AddSlot", 0i64, &ptr, 2u);
     `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
-  Scaleform::GFx::Movie::Invoke(v1->m_Movie, "GameLog_Refresh", 0i64, 0i64, 0);
-  UFG::UIHKScreenGameLog::Flash_SetSelectedTab(v1, v1->mCurrentTab);
+  Scaleform::GFx::Movie::Invoke(this->m_Movie, "GameLog_Refresh", 0i64, 0i64, 0);
+  UFG::UIHKScreenGameLog::Flash_SetSelectedTab(this, this->mCurrentTab);
 }
 
 // File Line: 379
 // RVA: 0x5E0A90
 void __fastcall UFG::UIHKScreenGameLog::Flash_SetSelectedTab(UFG::UIHKScreenGameLog *this, int index)
 {
-  int v2; // ebx
-  Scaleform::GFx::Movie *v3; // rdi
-  Scaleform::GFx::Value pargs; // [rsp+38h] [rbp-40h]
+  Scaleform::GFx::Movie *pObject; // rdi
+  Scaleform::GFx::Value pargs; // [rsp+38h] [rbp-40h] BYREF
 
-  v2 = index;
-  v3 = this->mRenderable->m_movie.pObject;
+  pObject = this->mRenderable->m_movie.pObject;
   `eh vector constructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-  if ( ((unsigned int)pargs.Type >> 6) & 1 )
+  if ( (pargs.Type & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
+    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&pargs.pObjectInterface->vfptr->gap8[8])(
       pargs.pObjectInterface,
       &pargs,
-      *(_QWORD *)&pargs.mValue.NValue);
+      pargs.mValue);
     pargs.pObjectInterface = 0i64;
   }
-  pargs.Type = 5;
-  pargs.mValue.NValue = (double)v2;
-  Scaleform::GFx::Movie::Invoke(v3, "TabMenuWidgetList_JumpToItemIndex", 0i64, &pargs, 1u);
+  pargs.Type = VT_Number;
+  pargs.mValue.NValue = (double)index;
+  Scaleform::GFx::Movie::Invoke(pObject, "TabMenuWidgetList_JumpToItemIndex", 0i64, &pargs, 1u);
   `eh vector destructor iterator(&pargs, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
 }
 
@@ -815,64 +750,62 @@ void __fastcall UFG::UIHKScreenGameLog::Flash_SetSelectedTab(UFG::UIHKScreenGame
 void __fastcall UFG::UIHKScreenGameLog::ScrollNextTab(UFG::UIHKScreenGameLog *this)
 {
   int v1; // eax
-  UFG::UIHKScreenGameLog *v2; // rbx
 
   v1 = ++this->mCurrentTab;
-  v2 = this;
   if ( v1 >= 4 )
     v1 = 0;
   this->mCurrentTab = v1;
   UFG::UIHKScreenGameLog::UpdateList(this);
-  UFG::UIHKScreenGameLog::Refresh(v2);
+  UFG::UIHKScreenGameLog::Refresh(this);
 }
 
 // File Line: 403
 // RVA: 0x604380
 void __fastcall UFG::UIHKScreenGameLog::ScrollPrevTab(UFG::UIHKScreenGameLog *this)
 {
-  UFG::UIHKScreenGameLog *v1; // rbx
-
-  v1 = this;
   if ( this->mCurrentTab <= 0 )
     this->mCurrentTab = 4;
   --this->mCurrentTab;
   UFG::UIHKScreenGameLog::UpdateList(this);
-  UFG::UIHKScreenGameLog::Refresh(v1);
+  UFG::UIHKScreenGameLog::Refresh(this);
 }
 
 // File Line: 418
 // RVA: 0x5DAFD0
-void __fastcall UFG::UIHKScreenSaveLoad::Flash_HandleMouseClick(UFG::UIHKScreenUpgrades *this, float mouseX, float mouseY)
+void __fastcall UFG::UIHKScreenSaveLoad::Flash_HandleMouseClick(
+        UFG::UIHKScreenUpgrades *this,
+        float mouseX,
+        float mouseY)
 {
-  Scaleform::GFx::Movie *v3; // rbx
-  char ptr; // [rsp+40h] [rbp-88h]
-  __int64 v5; // [rsp+50h] [rbp-78h]
-  unsigned int v6; // [rsp+58h] [rbp-70h]
-  double v7; // [rsp+60h] [rbp-68h]
-  char v8; // [rsp+70h] [rbp-58h]
-  __int64 v9; // [rsp+80h] [rbp-48h]
-  unsigned int v10; // [rsp+88h] [rbp-40h]
-  double v11; // [rsp+90h] [rbp-38h]
+  Scaleform::GFx::Movie *pObject; // rbx
+  Scaleform::GFx::Value ptr; // [rsp+40h] [rbp-88h] BYREF
+  char v5[16]; // [rsp+70h] [rbp-58h] BYREF
+  __int64 v6; // [rsp+80h] [rbp-48h]
+  int v7; // [rsp+88h] [rbp-40h]
+  double v8; // [rsp+90h] [rbp-38h]
 
-  v3 = this->mRenderable->m_movie.pObject;
-  if ( v3 )
+  pObject = this->mRenderable->m_movie.pObject;
+  if ( pObject )
   {
     `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-    if ( (v6 >> 6) & 1 )
+    if ( (ptr.Type & 0x40) != 0 )
     {
-      (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v5 + 16i64))(v5, &ptr, COERCE_DOUBLE(*(_QWORD *)&v7));
-      v5 = 0i64;
+      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&ptr.pObjectInterface->vfptr->gap8[8])(
+        ptr.pObjectInterface,
+        &ptr,
+        ptr.mValue);
+      ptr.pObjectInterface = 0i64;
     }
-    v6 = 5;
-    v7 = mouseX;
-    if ( (v10 >> 6) & 1 )
+    ptr.Type = VT_Number;
+    ptr.mValue.NValue = mouseX;
+    if ( (v7 & 0x40) != 0 )
     {
-      (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v9 + 16i64))(v9, &v8, COERCE_DOUBLE(*(_QWORD *)&v11));
-      v9 = 0i64;
+      (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v6 + 16i64))(v6, v5, COERCE_DOUBLE(*(_QWORD *)&v8));
+      v6 = 0i64;
     }
-    v10 = 5;
-    v11 = mouseY;
-    Scaleform::GFx::Movie::Invoke(v3, "HandleMouseClick", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
+    v7 = 5;
+    v8 = mouseY;
+    Scaleform::GFx::Movie::Invoke(pObject, "HandleMouseClick", 0i64, &ptr, 2u);
     `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }

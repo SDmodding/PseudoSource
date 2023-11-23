@@ -2,15 +2,10 @@
 // RVA: 0xCECE80
 void __fastcall hkpShapeBase::hkpShapeBase(hkpShapeBase *this, hkFinishLoadedObjectFlag flag)
 {
-  hkpShapeBase *v2; // rbx
-  int v3; // [rsp+38h] [rbp+10h]
-
-  v3 = flag.m_finishing;
-  v2 = this;
-  hkcdShape::hkcdShape((hkcdShape *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpShapeBase::`vftable;
-  if ( v3 )
-    v2->m_type.m_storage = 34;
+  hkcdShape::hkcdShape(this, flag);
+  this->vfptr = (hkBaseObjectVtbl *)&hkpShapeBase::`vftable;
+  if ( flag.m_finishing )
+    this->m_type.m_storage = 34;
 }
 
 // File Line: 35
@@ -22,7 +17,11 @@ void __fastcall hkpShapeBase::getAabb(hkpShapeBase *this, hkTransformf *localToW
 
 // File Line: 40
 // RVA: 0xCECED0
-hkBool *__fastcall hkpShapeBase::castRay(hkpShapeBase *this, hkBool *result, hkpShapeRayCastInput *input, hkpShapeRayCastOutput *output)
+hkBool *__fastcall hkpShapeBase::castRay(
+        hkpShapeBase *this,
+        hkBool *result,
+        hkpShapeRayCastInput *input,
+        hkpShapeRayCastOutput *output)
 {
   result->m_bool = 0;
   return result;
@@ -30,14 +29,22 @@ hkBool *__fastcall hkpShapeBase::castRay(hkpShapeBase *this, hkBool *result, hkp
 
 // File Line: 46
 // RVA: 0xCECEE0
-void __fastcall hkpShapeBase::castRayWithCollector(hkpShapeBase *this, hkpShapeRayCastInput *input, hkpCdBody *cdBody, hkpRayHitCollector *collector)
+void __fastcall hkpShapeBase::castRayWithCollector(
+        hkpShapeBase *this,
+        hkpShapeRayCastInput *input,
+        hkpCdBody *cdBody,
+        hkpRayHitCollector *collector)
 {
   ;
 }
 
 // File Line: 51
 // RVA: 0xCECEF0
-hkVector4fComparison *__fastcall hkpShapeBase::castRayBundle(hkpShapeBase *this, hkVector4fComparison *result, hkpShapeRayBundleCastInput *input, hkpShapeRayBundleCastOutput *output)
+hkVector4fComparison *__fastcall hkpShapeBase::castRayBundle(
+        hkpShapeBase *this,
+        hkVector4fComparison *result,
+        hkpShapeRayBundleCastInput *input,
+        hkpShapeRayBundleCastOutput *output)
 {
   hkVector4fComparison *v4; // rax
 
@@ -48,14 +55,21 @@ hkVector4fComparison *__fastcall hkpShapeBase::castRayBundle(hkpShapeBase *this,
 
 // File Line: 59
 // RVA: 0xCECF00
-void __fastcall hkpShapeBase::getSupportingVertex(hkpShapeBase *this, hkVector4f *direction, hkcdVertex *supportingVertexOut)
+void __fastcall hkpShapeBase::getSupportingVertex(
+        hkpShapeBase *this,
+        hkVector4f *direction,
+        hkcdVertex *supportingVertexOut)
 {
   ;
 }
 
 // File Line: 64
 // RVA: 0xCECF10
-void __fastcall hkpShapeBase::convertVertexIdsToVertices(hkpShapeBase *this, const unsigned __int16 *ids, int numIds, hkcdVertex *vertexArrayOut)
+void __fastcall hkpShapeBase::convertVertexIdsToVertices(
+        hkpShapeBase *this,
+        const unsigned __int16 *ids,
+        int numIds,
+        hkcdVertex *vertexArrayOut)
 {
   ;
 }
@@ -83,7 +97,11 @@ hkSphere *__fastcall hkpShapeBase::getCollisionSpheres(hkpShapeBase *this, hkSph
 
 // File Line: 102
 // RVA: 0xCECF50
-__int64 __fastcall hkpShapeBase::weldContactPoint(hkpShapeBase *this, unsigned __int16 *featurePoints, char *numFeaturePoints, hkVector4f *contactPointWs)
+__int64 __fastcall hkpShapeBase::weldContactPoint(
+        hkpShapeBase *this,
+        unsigned __int16 *featurePoints,
+        char *numFeaturePoints,
+        hkVector4f *contactPointWs)
 {
   return 0i64;
 }

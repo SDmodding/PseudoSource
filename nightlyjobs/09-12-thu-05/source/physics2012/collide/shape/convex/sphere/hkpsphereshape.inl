@@ -1,13 +1,20 @@
 // File Line: 12
 // RVA: 0xCF2B50
-void __fastcall hkpSphereShape::getSupportingVertex(hkpSphereShape *this, hkVector4f *direction, hkcdVertex *supportingVertexOut)
+void __fastcall hkpSphereShape::getSupportingVertex(
+        hkpSphereShape *this,
+        hkVector4f *direction,
+        hkcdVertex *supportingVertexOut)
 {
   *supportingVertexOut = 0i64;
 }
 
 // File Line: 17
 // RVA: 0xCF2AB0
-void __fastcall hkpSphereShape::convertVertexIdsToVertices(hkpSphereShape *this, const unsigned __int16 *ids, int numIds, hkcdVertex *verticesOut)
+void __fastcall hkpSphereShape::convertVertexIdsToVertices(
+        hkpSphereShape *this,
+        const unsigned __int16 *ids,
+        int numIds,
+        hkcdVertex *verticesOut)
 {
   __int64 v4; // rcx
   hkcdVertex *v5; // rax
@@ -19,8 +26,7 @@ void __fastcall hkpSphereShape::convertVertexIdsToVertices(hkpSphereShape *this,
     do
     {
       --v4;
-      *v5 = 0i64;
-      --v5;
+      *v5-- = 0i64;
     }
     while ( v4 >= 0 );
   }

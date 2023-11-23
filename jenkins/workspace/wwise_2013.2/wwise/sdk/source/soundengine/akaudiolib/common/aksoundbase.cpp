@@ -2,11 +2,8 @@
 // RVA: 0xA8ECA0
 void __fastcall CAkSoundBase::CAkSoundBase(CAkSoundBase *this, unsigned int in_ulID)
 {
-  CAkSoundBase *v2; // rbx
-
-  v2 = this;
-  CAkParameterNode::CAkParameterNode((CAkParameterNode *)&this->vfptr, in_ulID);
-  v2->vfptr = (CAkIndexableVtbl *)&CAkSoundBase::`vftable;
+  CAkParameterNode::CAkParameterNode(this, in_ulID);
+  this->vfptr = (CAkIndexableVtbl *)&CAkSoundBase::`vftable;
 }
 
 // File Line: 34
@@ -14,29 +11,32 @@ void __fastcall CAkSoundBase::CAkSoundBase(CAkSoundBase *this, unsigned int in_u
 void __fastcall CAkSoundBase::~CAkSoundBase(CAkSoundBase *this)
 {
   this->vfptr = (CAkIndexableVtbl *)&CAkSoundBase::`vftable;
-  CAkParameterNode::~CAkParameterNode((CAkParameterNode *)&this->vfptr);
+  CAkParameterNode::~CAkParameterNode(this);
 }
 
 // File Line: 38
 // RVA: 0xA8F0C0
-signed __int64 __fastcall CAkSoundBase::PlayToEnd(CAkSoundBase *this, CAkRegisteredObj *in_pGameObj, CAkParameterNodeBase *in_pNodePtr, unsigned int in_PlayingID)
+__int64 __fastcall CAkSoundBase::PlayToEnd(
+        CAkSoundBase *this,
+        CAkRegisteredObj *in_pGameObj,
+        CAkParameterNodeBase *in_pNodePtr,
+        unsigned int in_PlayingID)
 {
-  AkActivityChunk *v4; // rbx
-  unsigned int v5; // edi
-  CAkParameterNodeBase *v6; // rbp
-  CAkRegisteredObj *v7; // rsi
+  AkActivityChunk *m_pActivityChunk; // rbx
   CAkPBI *i; // rbx
 
-  v4 = this->m_pActivityChunk;
-  v5 = in_PlayingID;
-  v6 = in_pNodePtr;
-  v7 = in_pGameObj;
-  if ( v4 )
+  m_pActivityChunk = this->m_pActivityChunk;
+  if ( m_pActivityChunk )
   {
-    for ( i = v4->m_listPBI.m_pFirst; i; i = i->pNextLightItem )
+    for ( i = m_pActivityChunk->m_listPBI.m_pFirst; i; i = i->pNextLightItem )
     {
-      if ( (!v7 || i->m_pGameObj == v7) && (!v5 || v5 == i->m_UserParams.m_PlayingID) )
-        ((void (__fastcall *)(CAkPBI *, CAkParameterNodeBase *))i->vfptr[3].~CAkTransportAware)(i, v6);
+      if ( (!in_pGameObj || i->m_pGameObj == in_pGameObj)
+        && (!in_PlayingID || in_PlayingID == i->m_UserParams.m_PlayingID) )
+      {
+        ((void (__fastcall *)(CAkPBI *, CAkParameterNodeBase *))i->CAkTransportAware::vfptr[3].~CAkTransportAware)(
+          i,
+          in_pNodePtr);
+      }
     }
   }
   return 1i64;
@@ -46,48 +46,45 @@ signed __int64 __fastcall CAkSoundBase::PlayToEnd(CAkSoundBase *this, CAkRegiste
 // RVA: 0xA8F030
 void __fastcall CAkSoundBase::ParamNotification(CAkSoundBase *this, NotifParams *in_rParams)
 {
-  AkActivityChunk *v2; // rbx
-  NotifParams *v3; // rdi
+  AkActivityChunk *m_pActivityChunk; // rbx
   CAkPBI *i; // rbx
-  CAkRegisteredObj ***v5; // rcx
-  CAkRegisteredObj *v6; // rax
+  unsigned int *pExceptObjects; // rcx
+  CAkRegisteredObj *pGameObj; // rax
   CAkRegisteredObj **v7; // rax
-  signed __int64 v8; // rdx
+  __int64 v8; // rdx
 
-  v2 = this->m_pActivityChunk;
-  v3 = in_rParams;
-  if ( v2 )
+  m_pActivityChunk = this->m_pActivityChunk;
+  if ( m_pActivityChunk )
   {
-    for ( i = v2->m_listPBI.m_pFirst; i; i = i->pNextLightItem )
+    for ( i = m_pActivityChunk->m_listPBI.m_pFirst; i; i = i->pNextLightItem )
     {
-      v5 = (CAkRegisteredObj ***)v3->pExceptObjects;
-      v6 = v3->pGameObj;
-      if ( v5 )
+      pExceptObjects = (unsigned int *)in_rParams->pExceptObjects;
+      pGameObj = in_rParams->pGameObj;
+      if ( pExceptObjects )
       {
-        if ( !v6 )
+        if ( !pGameObj )
         {
-          v7 = *v5;
-          v8 = (signed __int64)&(*v5)[*((unsigned int *)v5 + 2)];
-          if ( *v5 != (CAkRegisteredObj **)v8 )
+          v7 = *(CAkRegisteredObj ***)pExceptObjects;
+          v8 = *(_QWORD *)pExceptObjects + 8i64 * pExceptObjects[2];
+          if ( *(_QWORD *)pExceptObjects != v8 )
           {
             while ( *v7 != i->m_pGameObj )
             {
-              ++v7;
-              if ( v7 == (CAkRegisteredObj **)v8 )
+              if ( ++v7 == (CAkRegisteredObj **)v8 )
                 goto LABEL_11;
             }
             continue;
           }
 LABEL_11:
-          CAkPBI::ParamNotification(i, v3);
+          CAkPBI::ParamNotification(i, in_rParams);
           continue;
         }
       }
-      else if ( !v6 )
+      else if ( !pGameObj )
       {
         goto LABEL_11;
       }
-      if ( i->m_pGameObj == v6 )
+      if ( i->m_pGameObj == pGameObj )
         goto LABEL_11;
     }
   }
@@ -95,113 +92,114 @@ LABEL_11:
 
 // File Line: 98
 // RVA: 0xA8EE90
-void __fastcall CAkSoundBase::MuteNotification(CAkSoundBase *this, float in_fMuteRatio, AkMutedMapItem *in_rMutedItem, bool __formal)
+void __fastcall CAkSoundBase::MuteNotification(
+        CAkSoundBase *this,
+        float in_fMuteRatio,
+        AkMutedMapItem *in_rMutedItem,
+        bool __formal)
 {
-  AkActivityChunk *v4; // rbx
-  AkMutedMapItem *v5; // rdi
+  AkActivityChunk *m_pActivityChunk; // rbx
   CAkPBI *i; // rbx
 
-  v4 = this->m_pActivityChunk;
-  v5 = in_rMutedItem;
-  if ( v4 )
+  m_pActivityChunk = this->m_pActivityChunk;
+  if ( m_pActivityChunk )
   {
-    for ( i = v4->m_listPBI.m_pFirst; i; i = i->pNextLightItem )
-      CAkPBI::MuteNotification(i, in_fMuteRatio, v5, 0);
+    for ( i = m_pActivityChunk->m_listPBI.m_pFirst; i; i = i->pNextLightItem )
+      CAkPBI::MuteNotification(i, in_fMuteRatio, in_rMutedItem, 0);
   }
 }
 
 // File Line: 110
 // RVA: 0xA8EEF0
-void __fastcall CAkSoundBase::MuteNotification(CAkSoundBase *this, float in_fMuteRatio, CAkRegisteredObj *in_pGameObj, AkMutedMapItem *in_rMutedItem, bool in_bPrioritizeGameObjectSpecificItems)
+void __fastcall CAkSoundBase::MuteNotification(
+        CAkSoundBase *this,
+        float in_fMuteRatio,
+        CAkRegisteredObj *in_pGameObj,
+        AkMutedMapItem *in_rMutedItem,
+        bool in_bPrioritizeGameObjectSpecificItems)
 {
-  AkActivityChunk *v5; // rbx
+  AkActivityChunk *m_pActivityChunk; // rbx
   bool v6; // si
-  AkMutedMapItem *v7; // r14
-  CAkRegisteredObj *v8; // rdi
   CAkPBI *i; // rbx
 
-  v5 = this->m_pActivityChunk;
+  m_pActivityChunk = this->m_pActivityChunk;
   v6 = in_pGameObj == 0i64;
-  v7 = in_rMutedItem;
-  v8 = in_pGameObj;
-  if ( v5 )
+  if ( m_pActivityChunk )
   {
-    for ( i = v5->m_listPBI.m_pFirst; i; i = i->pNextLightItem )
+    for ( i = m_pActivityChunk->m_listPBI.m_pFirst; i; i = i->pNextLightItem )
     {
-      if ( v6 || i->m_pGameObj == v8 )
-        CAkPBI::MuteNotification(i, in_fMuteRatio, v7, in_bPrioritizeGameObjectSpecificItems);
+      if ( v6 || i->m_pGameObj == in_pGameObj )
+        CAkPBI::MuteNotification(i, in_fMuteRatio, in_rMutedItem, in_bPrioritizeGameObjectSpecificItems);
     }
   }
 }
 
 // File Line: 133
 // RVA: 0xA8ED20
-void __fastcall CAkSoundBase::ForAllPBI(CAkSoundBase *this, void (__fastcall *in_funcForAll)(CAkPBI *, CAkRegisteredObj *, void *), CAkRegisteredObj *in_pGameObj, void *in_pCookie)
+void __fastcall CAkSoundBase::ForAllPBI(
+        CAkSoundBase *this,
+        void (__fastcall *in_funcForAll)(CAkPBI *, CAkRegisteredObj *, void *),
+        CAkRegisteredObj *in_pGameObj,
+        void *in_pCookie)
 {
-  AkActivityChunk *v4; // rbx
-  void *v5; // rsi
-  CAkRegisteredObj *v6; // rdi
-  void (__fastcall *v7)(CAkPBI *, CAkRegisteredObj *, void *); // rbp
+  AkActivityChunk *m_pActivityChunk; // rbx
   CAkPBI *i; // rbx
 
-  v4 = this->m_pActivityChunk;
-  v5 = in_pCookie;
-  v6 = in_pGameObj;
-  v7 = in_funcForAll;
-  if ( v4 )
+  m_pActivityChunk = this->m_pActivityChunk;
+  if ( m_pActivityChunk )
   {
-    for ( i = v4->m_listPBI.m_pFirst; i; i = i->pNextLightItem )
+    for ( i = m_pActivityChunk->m_listPBI.m_pFirst; i; i = i->pNextLightItem )
     {
-      if ( !v6 || v6 == i->m_pGameObj )
-        v7(i, v6, v5);
+      if ( !in_pGameObj || in_pGameObj == i->m_pGameObj )
+        in_funcForAll(i, in_pGameObj, in_pCookie);
     }
   }
 }
 
 // File Line: 147
 // RVA: 0xA8F140
-void __fastcall CAkSoundBase::PropagatePositioningNotification(CAkSoundBase *this, float in_RTPCValue, AkRTPC_ParameterID in_ParameterID, CAkRegisteredObj *in_pGameObj, void *in_pExceptArray)
+void __fastcall CAkSoundBase::PropagatePositioningNotification(
+        CAkSoundBase *this,
+        float in_RTPCValue,
+        AkRTPC_ParameterID in_ParameterID,
+        CAkRegisteredObj *in_pGameObj,
+        unsigned int *in_pExceptArray)
 {
-  AkActivityChunk *v5; // rbx
-  CAkRegisteredObj *v6; // rdi
-  AkRTPC_ParameterID v7; // ebp
+  AkActivityChunk *m_pActivityChunk; // rbx
   CAkPBI *i; // rbx
   CAkRegisteredObj **v9; // rax
-  signed __int64 v10; // rdx
+  __int64 v10; // rdx
 
-  v5 = this->m_pActivityChunk;
-  v6 = in_pGameObj;
-  v7 = in_ParameterID;
-  if ( v5 )
+  m_pActivityChunk = this->m_pActivityChunk;
+  if ( m_pActivityChunk )
   {
-    for ( i = v5->m_listPBI.m_pFirst; i; i = i->pNextLightItem )
+    for ( i = m_pActivityChunk->m_listPBI.m_pFirst; i; i = i->pNextLightItem )
     {
       if ( in_pExceptArray )
       {
-        if ( !v6 )
+        if ( !in_pGameObj )
         {
           v9 = *(CAkRegisteredObj ***)in_pExceptArray;
-          v10 = *(_QWORD *)in_pExceptArray + 8i64 * *((unsigned int *)in_pExceptArray + 2);
+          v10 = *(_QWORD *)in_pExceptArray + 8i64 * in_pExceptArray[2];
           if ( *(_QWORD *)in_pExceptArray != v10 )
           {
             while ( *v9 != i->m_pGameObj )
             {
-              ++v9;
-              if ( v9 == (CAkRegisteredObj **)v10 )
+              if ( ++v9 == (CAkRegisteredObj **)v10 )
                 goto LABEL_11;
             }
             continue;
           }
 LABEL_11:
-          CAkPBI::PositioningChangeNotification(i, in_RTPCValue, v7);
+          CAkPBI::PositioningChangeNotification(i, in_RTPCValue, in_ParameterID);
           continue;
         }
       }
-      else if ( !v6 )
+      else if ( !in_pGameObj )
       {
         goto LABEL_11;
       }
-      if ( i->m_pGameObj == v6 )
+      if ( i->m_pGameObj == in_pGameObj )
         goto LABEL_11;
     }
   }
@@ -211,63 +209,61 @@ LABEL_11:
 // RVA: 0xA8F1F0
 void __fastcall CAkSoundBase::RecalcNotification(CAkSoundBase *this)
 {
-  AkActivityChunk *v1; // rbx
+  AkActivityChunk *m_pActivityChunk; // rbx
   CAkPBI *i; // rbx
 
-  v1 = this->m_pActivityChunk;
-  if ( v1 )
+  m_pActivityChunk = this->m_pActivityChunk;
+  if ( m_pActivityChunk )
   {
-    for ( i = v1->m_listPBI.m_pFirst; i; i = i->pNextLightItem )
+    for ( i = m_pActivityChunk->m_listPBI.m_pFirst; i; i = i->pNextLightItem )
       CAkPBI::RecalcNotification(i);
   }
 }
 
 // File Line: 202
 // RVA: 0xA8EF80
-void __fastcall CAkSoundBase::NotifyBypass(CAkSoundBase *this, unsigned int in_bitsFXBypass, unsigned int in_uTargetMask, CAkRegisteredObj *in_pGameObj, void *in_pExceptArray)
+void __fastcall CAkSoundBase::NotifyBypass(
+        CAkSoundBase *this,
+        char in_bitsFXBypass,
+        unsigned int in_uTargetMask,
+        CAkRegisteredObj *in_pGameObj,
+        unsigned int *in_pExceptArray)
 {
-  AkActivityChunk *v5; // rbx
-  CAkRegisteredObj *v6; // rdi
-  unsigned int v7; // ebp
-  unsigned int v8; // er14
+  AkActivityChunk *m_pActivityChunk; // rbx
   CAkPBI *i; // rbx
   CAkRegisteredObj **v10; // rax
-  signed __int64 v11; // rdx
+  __int64 v11; // rdx
 
-  v5 = this->m_pActivityChunk;
-  v6 = in_pGameObj;
-  v7 = in_uTargetMask;
-  v8 = in_bitsFXBypass;
-  if ( v5 )
+  m_pActivityChunk = this->m_pActivityChunk;
+  if ( m_pActivityChunk )
   {
-    for ( i = v5->m_listPBI.m_pFirst; i; i = i->pNextLightItem )
+    for ( i = m_pActivityChunk->m_listPBI.m_pFirst; i; i = i->pNextLightItem )
     {
       if ( in_pExceptArray )
       {
-        if ( !v6 )
+        if ( !in_pGameObj )
         {
           v10 = *(CAkRegisteredObj ***)in_pExceptArray;
-          v11 = *(_QWORD *)in_pExceptArray + 8i64 * *((unsigned int *)in_pExceptArray + 2);
+          v11 = *(_QWORD *)in_pExceptArray + 8i64 * in_pExceptArray[2];
           if ( *(_QWORD *)in_pExceptArray != v11 )
           {
             while ( *v10 != i->m_pGameObj )
             {
-              ++v10;
-              if ( v10 == (CAkRegisteredObj **)v11 )
+              if ( ++v10 == (CAkRegisteredObj **)v11 )
                 goto LABEL_11;
             }
             continue;
           }
 LABEL_11:
-          CAkPBI::NotifyBypass(i, v8, v7);
+          CAkPBI::NotifyBypass(i, in_bitsFXBypass, in_uTargetMask);
           continue;
         }
       }
-      else if ( !v6 )
+      else if ( !in_pGameObj )
       {
         goto LABEL_11;
       }
-      if ( i->m_pGameObj == v6 )
+      if ( i->m_pGameObj == in_pGameObj )
         goto LABEL_11;
     }
   }
@@ -277,16 +273,14 @@ LABEL_11:
 // RVA: 0xA8F220
 void __fastcall CAkSoundBase::UpdateFx(CAkSoundBase *this, unsigned int in_uFXIndex)
 {
-  AkActivityChunk *v2; // rbx
-  unsigned int v3; // edi
+  AkActivityChunk *m_pActivityChunk; // rbx
   CAkPBI *i; // rbx
 
-  v2 = this->m_pActivityChunk;
-  v3 = in_uFXIndex;
-  if ( v2 )
+  m_pActivityChunk = this->m_pActivityChunk;
+  if ( m_pActivityChunk )
   {
-    for ( i = v2->m_listPBI.m_pFirst; i; i = i->pNextLightItem )
-      CAkPBI::UpdateFx(i, v3);
+    for ( i = m_pActivityChunk->m_listPBI.m_pFirst; i; i = i->pNextLightItem )
+      CAkPBI::UpdateFx(i, in_uFXIndex);
   }
 }
 
@@ -294,48 +288,46 @@ void __fastcall CAkSoundBase::UpdateFx(CAkSoundBase *this, unsigned int in_uFXIn
 // RVA: 0xA8ED90
 __int64 __fastcall CAkSoundBase::Loop(CAkSoundBase *this)
 {
-  char *v1; // r8
-  signed int v2; // er10
-  CAkSoundBase *v3; // r11
-  unsigned int v4; // er9
+  char *m_pProps; // r8
+  int v2; // r10d
+  unsigned int v4; // r9d
   int v5; // edx
   __int64 v6; // rcx
-  signed __int64 v7; // rdx
+  __int64 v7; // rdx
   char *v8; // r9
   int *v9; // rax
   int v10; // ebx
   unsigned int v11; // eax
-  int v12; // edx
+  int i; // edx
   __int64 v13; // r8
-  unsigned __int8 *v15; // rdi
+  char *v15; // rdi
   int v16; // esi
-  int v17; // [rsp+30h] [rbp+8h]
+  int v17; // [rsp+30h] [rbp+8h] BYREF
 
-  v1 = this->m_props.m_pProps;
+  m_pProps = this->m_props.m_pProps;
   v2 = 0;
-  v3 = this;
   v17 = 1;
-  if ( v1 )
+  if ( m_pProps )
   {
-    v4 = (unsigned __int8)*v1;
+    v4 = (unsigned __int8)*m_pProps;
     v5 = 0;
     while ( 1 )
     {
       v6 = (unsigned int)(v5 + 1);
-      if ( v1[v6] == 7 )
+      if ( m_pProps[v6] == 7 )
         break;
       ++v5;
       if ( (unsigned int)v6 >= v4 )
         goto LABEL_5;
     }
-    v7 = (signed __int64)&v1[4 * v5 + ((v4 + 4) & 0xFFFFFFFC)];
+    v7 = (__int64)&m_pProps[4 * v5 + ((v4 + 4) & 0xFFFFFFFC)];
   }
   else
   {
 LABEL_5:
     v7 = 0i64;
   }
-  v8 = v3->m_ranges.m_pProps;
+  v8 = this->m_ranges.m_pProps;
   v9 = &v17;
   if ( v7 )
     v9 = (int *)v7;
@@ -343,24 +335,20 @@ LABEL_5:
   if ( !v8 )
     return (unsigned __int16)v10;
   v11 = (unsigned __int8)*v8;
-  v12 = 0;
-  while ( 1 )
+  for ( i = 0; ; ++i )
   {
-    v13 = (unsigned int)(v12 + 1);
+    v13 = (unsigned int)(i + 1);
     if ( v8[v13] == 7 )
       break;
-    ++v12;
     if ( (unsigned int)v13 >= v11 )
       return (unsigned __int16)v10;
   }
-  v15 = (unsigned __int8 *)&v8[8 * v12 + ((v11 + 4) & 0xFFFFFFFC)];
+  v15 = &v8[8 * i + ((v11 + 4) & 0xFFFFFFFC)];
   if ( !v15 )
     return (unsigned __int16)v10;
-  if ( *((_DWORD *)v15 + 1) != *(_DWORD *)v15 )
-  {
-    v16 = *((_DWORD *)v15 + 1) - *(_DWORD *)v15;
-    v2 = (signed int)((double)rand() * 0.00003051850947599719 * (double)v16 + 0.5);
-  }
+  v16 = *((_DWORD *)v15 + 1) - *(_DWORD *)v15;
+  if ( v16 )
+    v2 = (int)((double)rand() * 0.00003051850947599719 * (double)v16 + 0.5);
   return (unsigned int)(v10 + v2 + *(_DWORD *)v15);
 }
 

@@ -28,17 +28,17 @@ hkClass *__fastcall hkpVehicleSteeringAckerman::staticClass()
 
 // File Line: 69
 // RVA: 0xE25EF0
-void __fastcall finishLoadedObjecthkpVehicleSteeringAckerman(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpVehicleSteeringAckerman(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleSteeringAckerman::`vftable;
+    *p = &hkpVehicleSteeringAckerman::`vftable;
 }
 
 // File Line: 75
 // RVA: 0xE25F10
-void __fastcall cleanupLoadedObjecthkpVehicleSteeringAckerman(void *p)
+void __fastcall cleanupLoadedObjecthkpVehicleSteeringAckerman(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 79
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkpVehicleSteeringAckermanTypeInfo__()
   hkpVehicleSteeringAckermanTypeInfo.m_typeName = "hkpVehicleSteeringAckerman";
   hkpVehicleSteeringAckermanTypeInfo.m_vtable = result;
   hkpVehicleSteeringAckermanTypeInfo.m_scopedName = "!hkpVehicleSteeringAckerman";
-  hkpVehicleSteeringAckermanTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpVehicleSteeringAckerman;
-  hkpVehicleSteeringAckermanTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpVehicleSteeringAckerman;
+  hkpVehicleSteeringAckermanTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpVehicleSteeringAckerman;
+  hkpVehicleSteeringAckermanTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpVehicleSteeringAckerman;
   return result;
 }
 

@@ -4,20 +4,20 @@ UFG::ComponentIDDesc *__fastcall UFG::VehicleSubjectComponent::AccessComponentDe
 {
   UFG::ComponentIDDesc *v0; // rax
   int v1; // edx
-  _DWORD v3[6]; // [rsp+20h] [rbp-18h]
+  int v3; // [rsp+20h] [rbp-18h]
 
   if ( !UFG::VehicleSubjectComponent::_DescInit )
   {
     v0 = UFG::CameraSubject::AccessComponentDesc();
     ++UFG::CameraSubject::_TypeIDesc.mChildren;
     v1 = v0->mChildBitMask | (1 << SLOBYTE(UFG::CameraSubject::_TypeIDesc.mChildren));
-    LOWORD(v3[0]) = v0->mBaseTypeIndex;
-    *(_DWORD *)&UFG::VehicleSubjectComponent::_TypeIDesc.mBaseTypeIndex = v3[0];
+    LOWORD(v3) = v0->mBaseTypeIndex;
+    *(_DWORD *)&UFG::VehicleSubjectComponent::_TypeIDesc.mBaseTypeIndex = v3;
     UFG::VehicleSubjectComponent::_TypeIDesc.mChildBitMask = v1;
     UFG::VehicleSubjectComponent::_TypeIDesc.mChildren = 0;
     UFG::VehicleSubjectComponent::_DescInit = 1;
-    UFG::VehicleSubjectComponent::_TypeUID = v1 | (LOWORD(v3[0]) << 25);
-    UFG::VehicleSubjectComponent::_VehicleSubjectComponentTypeUID = v1 | (LOWORD(v3[0]) << 25);
+    UFG::VehicleSubjectComponent::_TypeUID = v1 | ((unsigned __int16)v3 << 25);
+    UFG::VehicleSubjectComponent::_VehicleSubjectComponentTypeUID = v1 | ((unsigned __int16)v3 << 25);
   }
   return &UFG::VehicleSubjectComponent::_TypeIDesc;
 }
@@ -54,15 +54,13 @@ UFG::qMatrix44 *__fastcall UFG::VehicleSubjectComponent::GetWorldLocal(UFG::Vehi
 // RVA: 0x67F360
 char __fastcall UFG::VehicleSubjectComponent::IsParked(UFG::VehicleSubjectComponent *this)
 {
-  UFG::VehicleSubjectComponent *v1; // rbx
   char result; // al
 
-  v1 = this;
-  if ( ((unsigned __int8 (*)(void))this->vfptr[34].__vecDelDtor)()
-    || (result = ((__int64 (__fastcall *)(UFG::VehicleSubjectComponent *))v1->vfptr[35].__vecDelDtor)(v1)) != 0 )
-  {
-    result = 1;
-  }
+  if ( ((unsigned __int8 (__fastcall *)(UFG::VehicleSubjectComponent *))this->vfptr[34].__vecDelDtor)(this) )
+    return 1;
+  result = ((__int64 (__fastcall *)(UFG::VehicleSubjectComponent *))this->vfptr[35].__vecDelDtor)(this);
+  if ( result )
+    return 1;
   return result;
 }
 

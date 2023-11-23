@@ -28,17 +28,17 @@ hkClass *__fastcall hkpConvexVerticesConnectivity::staticClass()
 
 // File Line: 63
 // RVA: 0xCEB7B0
-void __fastcall finishLoadedObjecthkpConvexVerticesConnectivity(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpConvexVerticesConnectivity(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpConvexVerticesConnectivity::`vftable;
+    *p = &hkpConvexVerticesConnectivity::`vftable;
 }
 
 // File Line: 69
 // RVA: 0xCEB7D0
-void __fastcall cleanupLoadedObjecthkpConvexVerticesConnectivity(void *p)
+void __fastcall cleanupLoadedObjecthkpConvexVerticesConnectivity(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 73
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkpConvexVerticesConnectivityTypeInfo__()
   hkpConvexVerticesConnectivityTypeInfo.m_typeName = "hkpConvexVerticesConnectivity";
   hkpConvexVerticesConnectivityTypeInfo.m_vtable = result;
   hkpConvexVerticesConnectivityTypeInfo.m_scopedName = "!hkpConvexVerticesConnectivity";
-  hkpConvexVerticesConnectivityTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpConvexVerticesConnectivity;
-  hkpConvexVerticesConnectivityTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpConvexVerticesConnectivity;
+  hkpConvexVerticesConnectivityTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpConvexVerticesConnectivity;
+  hkpConvexVerticesConnectivityTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpConvexVerticesConnectivity;
   return result;
 }
 

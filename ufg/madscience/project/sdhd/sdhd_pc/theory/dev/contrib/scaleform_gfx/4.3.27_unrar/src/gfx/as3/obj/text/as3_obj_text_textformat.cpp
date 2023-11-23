@@ -414,7 +414,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_142440128 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_text::TextFormat,29,Scaleform::GFx::AS3::Value const,Scaleform::GFx::AS3::Instances::fl::Array *>::Method = Scaleform::GFx::AS3::Instances::fl_text::TextFormat::tabStopsSet;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_text::TextFormat,29,Scaleform::GFx::AS3::Value const,Scaleform::GFx::AS3::Instances::fl::Array *>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *, Scaleform::GFx::AS3::Value *, Scaleform::GFx::AS3::Instances::fl::Array *))Scaleform::GFx::AS3::Instances::fl_text::TextFormat::tabStopsSet;
   return result;
 }
 
@@ -504,1451 +504,1558 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
 
 // File Line: 113
 // RVA: 0x89E860
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::TextFormat(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::InstanceTraits::Traits *t)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::TextFormat(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::InstanceTraits::Traits *t)
 {
-  Scaleform::GFx::AS3::Instances::fl_text::TextFormat *v2; // rbx
-  Scaleform::GFx::AS3::Instances::fl::Array *v3; // rcx
-  unsigned int v4; // eax
-  Scaleform::GFx::ASStringNode *v5; // rcx
-  bool v6; // zf
-  Scaleform::GFx::AS3::Value other; // [rsp+28h] [rbp-48h]
-  Scaleform::GFx::AS3::Value v8; // [rsp+48h] [rbp-28h]
-  Scaleform::GFx::ASString v; // [rsp+C0h] [rbp+50h]
+  Scaleform::GFx::ASStringManager *pStringManager; // rcx
+  Scaleform::GFx::AS3::Instances::fl::Array *pObject; // rcx
+  unsigned int RefCount; // eax
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  Scaleform::GFx::AS3::Value other; // [rsp+28h] [rbp-48h] BYREF
+  Scaleform::GFx::AS3::Value v9; // [rsp+48h] [rbp-28h] BYREF
+  Scaleform::GFx::ASString v; // [rsp+C0h] [rbp+50h] BYREF
 
-  v2 = this;
-  Scaleform::GFx::AS3::Instances::fl::Object::Object((Scaleform::GFx::AS3::Instances::fl::Object *)&this->vfptr, t);
-  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_text::TextFormat::`vftable;
-  v2->mAlign.Flags = 0;
-  v2->mAlign.Bonus.pWeakProxy = 0i64;
-  v2->mBlockIndent.Flags = 0;
-  v2->mBlockIndent.Bonus.pWeakProxy = 0i64;
-  v2->mBullet.Flags = 0;
-  v2->mBullet.Bonus.pWeakProxy = 0i64;
-  v2->mBold.Flags = 0;
-  v2->mBold.Bonus.pWeakProxy = 0i64;
-  v2->mColor.Flags = 0;
-  v2->mColor.Bonus.pWeakProxy = 0i64;
-  v2->mFont.Flags = 0;
-  v2->mFont.Bonus.pWeakProxy = 0i64;
-  v2->mItalic.Flags = 0;
-  v2->mItalic.Bonus.pWeakProxy = 0i64;
-  v2->mIndent.Flags = 0;
-  v2->mIndent.Bonus.pWeakProxy = 0i64;
-  v2->mKerning.Flags = 0;
-  v2->mKerning.Bonus.pWeakProxy = 0i64;
-  v2->mLeading.Flags = 0;
-  v2->mLeading.Bonus.pWeakProxy = 0i64;
-  v2->mLeftMargin.Flags = 0;
-  v2->mLeftMargin.Bonus.pWeakProxy = 0i64;
-  v2->mRightMargin.Flags = 0;
-  v2->mRightMargin.Bonus.pWeakProxy = 0i64;
-  v2->mLetterSpacing.Flags = 0;
-  v2->mLetterSpacing.Bonus.pWeakProxy = 0i64;
-  v2->mSize.Flags = 0;
-  v2->mSize.Bonus.pWeakProxy = 0i64;
-  v2->mTabStops.pObject = 0i64;
-  v2->mTarget.Flags = 0;
-  v2->mTarget.Bonus.pWeakProxy = 0i64;
-  v2->mUnderline.Flags = 0;
-  v2->mUnderline.Bonus.pWeakProxy = 0i64;
-  v2->mUrl.Flags = 0;
-  v2->mUrl.Bonus.pWeakProxy = 0i64;
-  v.pNode = &v2->pTraits.pObject->pVM->StringManagerRef->pStringManager->NullStringNode;
-  ++v.pNode->RefCount;
-  v8.Flags = 0;
-  v8.Bonus.pWeakProxy = 0i64;
-  other.Bonus.pWeakProxy = 0i64;
+  Scaleform::GFx::AS3::Instances::fl::Object::Object(this, t);
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl_text::TextFormat::`vftable;
+  this->mAlign.Flags = 0;
+  this->mAlign.Bonus.pWeakProxy = 0i64;
+  this->mBlockIndent.Flags = 0;
+  this->mBlockIndent.Bonus.pWeakProxy = 0i64;
+  this->mBullet.Flags = 0;
+  this->mBullet.Bonus.pWeakProxy = 0i64;
+  this->mBold.Flags = 0;
+  this->mBold.Bonus.pWeakProxy = 0i64;
+  this->mColor.Flags = 0;
+  this->mColor.Bonus.pWeakProxy = 0i64;
+  this->mFont.Flags = 0;
+  this->mFont.Bonus.pWeakProxy = 0i64;
+  this->mItalic.Flags = 0;
+  this->mItalic.Bonus.pWeakProxy = 0i64;
+  this->mIndent.Flags = 0;
+  this->mIndent.Bonus.pWeakProxy = 0i64;
+  this->mKerning.Flags = 0;
+  this->mKerning.Bonus.pWeakProxy = 0i64;
+  this->mLeading.Flags = 0;
+  this->mLeading.Bonus.pWeakProxy = 0i64;
+  this->mLeftMargin.Flags = 0;
+  this->mLeftMargin.Bonus.pWeakProxy = 0i64;
+  this->mRightMargin.Flags = 0;
+  this->mRightMargin.Bonus.pWeakProxy = 0i64;
+  this->mLetterSpacing.Flags = 0;
+  this->mLetterSpacing.Bonus.pWeakProxy = 0i64;
+  this->mSize.Flags = 0;
+  this->mSize.Bonus.pWeakProxy = 0i64;
+  this->mTabStops.pObject = 0i64;
+  this->mTarget.Flags = 0;
+  this->mTarget.Bonus.pWeakProxy = 0i64;
+  this->mUnderline.Flags = 0;
+  this->mUnderline.Bonus.pWeakProxy = 0i64;
+  this->mUrl.Flags = 0;
+  this->mUrl.Bonus.pWeakProxy = 0i64;
+  pStringManager = this->pTraits.pObject->pVM->StringManagerRef->pStringManager;
+  v.pNode = &pStringManager->NullStringNode;
+  ++pStringManager->NullStringNode.RefCount;
+  v9.Flags = 0;
+  v9.Bonus.pWeakProxy = 0i64;
+  memset(&other.Bonus, 0, 24);
   other.Flags = 12;
-  other.value = 0ui64;
-  Scaleform::GFx::AS3::Value::Assign(&v2->mAlign, &v);
-  Scaleform::GFx::AS3::Value::Assign(&v2->mBlockIndent, &other);
-  Scaleform::GFx::AS3::Value::Assign(&v2->mBold, &other);
-  Scaleform::GFx::AS3::Value::Assign(&v2->mBullet, &other);
-  Scaleform::GFx::AS3::Value::Assign(&v2->mColor, &other);
-  Scaleform::GFx::AS3::Value::Assign(&v2->mFont, &v);
-  Scaleform::GFx::AS3::Value::Assign(&v2->mIndent, &other);
-  Scaleform::GFx::AS3::Value::Assign(&v2->mItalic, &other);
-  Scaleform::GFx::AS3::Value::Assign(&v2->mKerning, &other);
-  Scaleform::GFx::AS3::Value::Assign(&v2->mLeading, &other);
-  Scaleform::GFx::AS3::Value::Assign(&v2->mLeftMargin, &other);
-  Scaleform::GFx::AS3::Value::Assign(&v2->mLetterSpacing, &other);
-  Scaleform::GFx::AS3::Value::Assign(&v2->mRightMargin, &other);
-  Scaleform::GFx::AS3::Value::Assign(&v2->mSize, &other);
-  v3 = v2->mTabStops.pObject;
-  if ( v3 )
+  Scaleform::GFx::AS3::Value::Assign(&this->mAlign, &v);
+  Scaleform::GFx::AS3::Value::Assign(&this->mBlockIndent, &other);
+  Scaleform::GFx::AS3::Value::Assign(&this->mBold, &other);
+  Scaleform::GFx::AS3::Value::Assign(&this->mBullet, &other);
+  Scaleform::GFx::AS3::Value::Assign(&this->mColor, &other);
+  Scaleform::GFx::AS3::Value::Assign(&this->mFont, &v);
+  Scaleform::GFx::AS3::Value::Assign(&this->mIndent, &other);
+  Scaleform::GFx::AS3::Value::Assign(&this->mItalic, &other);
+  Scaleform::GFx::AS3::Value::Assign(&this->mKerning, &other);
+  Scaleform::GFx::AS3::Value::Assign(&this->mLeading, &other);
+  Scaleform::GFx::AS3::Value::Assign(&this->mLeftMargin, &other);
+  Scaleform::GFx::AS3::Value::Assign(&this->mLetterSpacing, &other);
+  Scaleform::GFx::AS3::Value::Assign(&this->mRightMargin, &other);
+  Scaleform::GFx::AS3::Value::Assign(&this->mSize, &other);
+  pObject = this->mTabStops.pObject;
+  if ( pObject )
   {
-    if ( (unsigned __int8)v3 & 1 )
+    if ( ((unsigned __int8)pObject & 1) != 0 )
     {
-      v2->mTabStops.pObject = (Scaleform::GFx::AS3::Instances::fl::Array *)((char *)v3 - 1);
+      this->mTabStops.pObject = (Scaleform::GFx::AS3::Instances::fl::Array *)((char *)pObject - 1);
     }
     else
     {
-      v4 = v3->RefCount;
-      if ( v4 & 0x3FFFFF )
+      RefCount = pObject->RefCount;
+      if ( (RefCount & 0x3FFFFF) != 0 )
       {
-        v3->RefCount = v4 - 1;
-        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v3->vfptr);
+        pObject->RefCount = RefCount - 1;
+        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(pObject);
       }
     }
-    v2->mTabStops.pObject = 0i64;
+    this->mTabStops.pObject = 0i64;
   }
-  Scaleform::GFx::AS3::Value::Assign(&v2->mTarget, &v);
-  Scaleform::GFx::AS3::Value::Assign(&v2->mUnderline, &other);
-  Scaleform::GFx::AS3::Value::Assign(&v2->mUrl, &v);
+  Scaleform::GFx::AS3::Value::Assign(&this->mTarget, &v);
+  Scaleform::GFx::AS3::Value::Assign(&this->mUnderline, &other);
+  Scaleform::GFx::AS3::Value::Assign(&this->mUrl, &v);
   if ( (other.Flags & 0x1F) > 9 )
   {
-    if ( (other.Flags >> 9) & 1 )
+    if ( (other.Flags & 0x200) != 0 )
       Scaleform::GFx::AS3::Value::ReleaseWeakRef(&other);
     else
       Scaleform::GFx::AS3::Value::ReleaseInternal(&other);
   }
-  if ( (v8.Flags & 0x1F) > 9 )
+  if ( (v9.Flags & 0x1F) > 9 )
   {
-    if ( (v8.Flags >> 9) & 1 )
-      Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v8);
+    if ( (v9.Flags & 0x200) != 0 )
+      Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v9);
     else
-      Scaleform::GFx::AS3::Value::ReleaseInternal(&v8);
+      Scaleform::GFx::AS3::Value::ReleaseInternal(&v9);
   }
-  v5 = v.pNode;
-  v6 = v.pNode->RefCount == 1;
-  --v5->RefCount;
-  if ( v6 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v5);
+  pNode = v.pNode;
+  if ( v.pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
 }
 
 // File Line: 142
 // RVA: 0x91D7B0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::alignGet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::ASString *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::alignGet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::ASString *result)
 {
-  Scaleform::GFx::ASString *v2; // rbx
   unsigned int v3; // edx
-  long double v4; // rdi
-  Scaleform::GFx::ASStringNode *v5; // rcx
-  bool v6; // zf
+  Scaleform::GFx::ASStringNode *VStr; // rdi
+  Scaleform::GFx::ASStringNode *pNode; // rcx
 
-  v2 = result;
   v3 = this->mAlign.Flags & 0x1F;
-  if ( v3 - 12 > 3 && v3 != 10 || *(_QWORD *)&this->mAlign.value.VNumber )
-    v4 = this->mAlign.value.VNumber;
+  if ( v3 - 12 > 3 && v3 != 10 || this->mAlign.value.VS._1.VStr )
+    VStr = this->mAlign.value.VS._1.VStr;
   else
-    *(_QWORD *)&v4 = (char *)v2->pNode->pManager + 104;
-  ++*(_DWORD *)(*(_QWORD *)&v4 + 24i64);
-  v5 = v2->pNode;
-  v6 = v2->pNode->RefCount == 1;
-  --v5->RefCount;
-  if ( v6 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v5);
-  *(long double *)&v2->pNode = v4;
+    VStr = &result->pNode->pManager->NullStringNode;
+  ++VStr->RefCount;
+  pNode = result->pNode;
+  if ( result->pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
+  result->pNode = VStr;
 }
 
 // File Line: 149
 // RVA: 0x91D810
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::alignSet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::ASString *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::alignSet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::ASString *value)
 {
   Scaleform::GFx::AS3::Value::Assign(&this->mAlign, value);
 }
 
 // File Line: 156
 // RVA: 0x91DEF0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::blockIndentGet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::blockIndentGet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result)
 {
   Scaleform::GFx::AS3::Value::Assign(result, &this->mBlockIndent);
 }
 
 // File Line: 163
 // RVA: 0x91DF00
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::blockIndentSet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Value *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::blockIndentSet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Value *value)
 {
   Scaleform::GFx::AS3::Value::Assign(&this->mBlockIndent, value);
 }
 
 // File Line: 170
 // RVA: 0x91DF10
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::boldGet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::boldGet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result)
 {
   Scaleform::GFx::AS3::Value::Assign(result, &this->mBold);
 }
 
 // File Line: 177
 // RVA: 0x91DF30
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::boldSet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Value *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::boldSet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Value *value)
 {
   Scaleform::GFx::AS3::Value::Assign(&this->mBold, value);
 }
 
 // File Line: 184
 // RVA: 0x91E0F0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::bulletGet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::bulletGet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result)
 {
   Scaleform::GFx::AS3::Value::Assign(result, &this->mBullet);
 }
 
 // File Line: 191
 // RVA: 0x91E100
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::bulletSet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Value *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::bulletSet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Value *value)
 {
   Scaleform::GFx::AS3::Value::Assign(&this->mBullet, value);
 }
 
 // File Line: 198
 // RVA: 0x91E280
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::colorGet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::colorGet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result)
 {
   Scaleform::GFx::AS3::Value::Assign(result, &this->mColor);
 }
 
 // File Line: 205
 // RVA: 0x91E2A0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::colorSet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Value *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::colorSet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Value *value)
 {
   Scaleform::GFx::AS3::Value::Assign(&this->mColor, value);
 }
 
 // File Line: 212
 // RVA: 0x91FA70
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::fontGet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::ASString *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::fontGet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::ASString *result)
 {
-  Scaleform::GFx::ASString *v2; // rbx
   unsigned int v3; // edx
-  long double v4; // rdi
-  Scaleform::GFx::ASStringNode *v5; // rcx
-  bool v6; // zf
+  Scaleform::GFx::ASStringNode *VStr; // rdi
+  Scaleform::GFx::ASStringNode *pNode; // rcx
 
-  v2 = result;
   v3 = this->mFont.Flags & 0x1F;
-  if ( v3 - 12 > 3 && v3 != 10 || *(_QWORD *)&this->mFont.value.VNumber )
-    v4 = this->mFont.value.VNumber;
+  if ( v3 - 12 > 3 && v3 != 10 || this->mFont.value.VS._1.VStr )
+    VStr = this->mFont.value.VS._1.VStr;
   else
-    *(_QWORD *)&v4 = (char *)v2->pNode->pManager + 104;
-  ++*(_DWORD *)(*(_QWORD *)&v4 + 24i64);
-  v5 = v2->pNode;
-  v6 = v2->pNode->RefCount == 1;
-  --v5->RefCount;
-  if ( v6 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v5);
-  *(long double *)&v2->pNode = v4;
+    VStr = &result->pNode->pManager->NullStringNode;
+  ++VStr->RefCount;
+  pNode = result->pNode;
+  if ( result->pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
+  result->pNode = VStr;
 }
 
 // File Line: 219
 // RVA: 0x91FBD0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::fontSet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::ASString *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::fontSet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::ASString *value)
 {
   Scaleform::GFx::AS3::Value::Assign(&this->mFont, value);
 }
 
 // File Line: 226
 // RVA: 0x920F40
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::indentGet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::indentGet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result)
 {
   Scaleform::GFx::AS3::Value::Assign(result, &this->mIndent);
 }
 
 // File Line: 233
 // RVA: 0x920F60
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::indentSet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Value *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::indentSet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Value *value)
 {
   Scaleform::GFx::AS3::Value::Assign(&this->mIndent, value);
 }
 
 // File Line: 240
 // RVA: 0x9212B0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::italicGet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::italicGet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result)
 {
   Scaleform::GFx::AS3::Value::Assign(result, &this->mItalic);
 }
 
 // File Line: 247
 // RVA: 0x9212D0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::italicSet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Value *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::italicSet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Value *value)
 {
   Scaleform::GFx::AS3::Value::Assign(&this->mItalic, value);
 }
 
 // File Line: 254
 // RVA: 0x9212E0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::kerningGet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::kerningGet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result)
 {
   Scaleform::GFx::AS3::Value::Assign(result, &this->mKerning);
 }
 
 // File Line: 261
 // RVA: 0x921300
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::kerningSet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Value *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::kerningSet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Value *value)
 {
   Scaleform::GFx::AS3::Value::Assign(&this->mKerning, value);
 }
 
 // File Line: 268
 // RVA: 0x921340
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::leadingGet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::leadingGet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result)
 {
   Scaleform::GFx::AS3::Value::Assign(result, &this->mLeading);
 }
 
 // File Line: 275
 // RVA: 0x921360
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::leadingSet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Value *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::leadingSet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Value *value)
 {
   Scaleform::GFx::AS3::Value::Assign(&this->mLeading, value);
 }
 
 // File Line: 282
 // RVA: 0x921370
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::leftMarginGet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::leftMarginGet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result)
 {
   Scaleform::GFx::AS3::Value::Assign(result, &this->mLeftMargin);
 }
 
 // File Line: 289
 // RVA: 0x921390
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::leftMarginSet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Value *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::leftMarginSet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Value *value)
 {
   Scaleform::GFx::AS3::Value::Assign(&this->mLeftMargin, value);
 }
 
 // File Line: 296
 // RVA: 0x921480
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::letterSpacingGet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::letterSpacingGet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result)
 {
   Scaleform::GFx::AS3::Value::Assign(result, &this->mLetterSpacing);
 }
 
 // File Line: 303
 // RVA: 0x9214A0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::letterSpacingSet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Value *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::letterSpacingSet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Value *value)
 {
   Scaleform::GFx::AS3::Value::Assign(&this->mLetterSpacing, value);
 }
 
 // File Line: 310
 // RVA: 0x923440
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::rightMarginGet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::rightMarginGet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result)
 {
   Scaleform::GFx::AS3::Value::Assign(result, &this->mRightMargin);
 }
 
 // File Line: 317
 // RVA: 0x923460
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::rightMarginSet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Value *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::rightMarginSet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Value *value)
 {
   Scaleform::GFx::AS3::Value::Assign(&this->mRightMargin, value);
 }
 
 // File Line: 324
 // RVA: 0x926A60
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::sizeGet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::sizeGet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result)
 {
   Scaleform::GFx::AS3::Value::Assign(result, &this->mSize);
 }
 
 // File Line: 331
 // RVA: 0x926A80
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::sizeSet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Value *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::sizeSet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Value *value)
 {
   Scaleform::GFx::AS3::Value::Assign(&this->mSize, value);
 }
 
 // File Line: 338
 // RVA: 0x926F60
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::tabStopsGet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array> *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::tabStopsGet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array> *result)
 {
-  Scaleform::GFx::AS3::Instances::fl::Array **v2; // rdi
-  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array> *v3; // rbx
-  Scaleform::GFx::AS3::Instances::fl::Array *v4; // rcx
-  unsigned int v5; // eax
+  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Array> *p_mTabStops; // rdi
+  Scaleform::GFx::AS3::Instances::fl::Array *pObject; // rcx
+  unsigned int RefCount; // eax
 
-  v2 = &this->mTabStops.pObject;
-  v3 = result;
+  p_mTabStops = &this->mTabStops;
   if ( &this->mTabStops != result )
   {
-    if ( *v2 )
-      (*v2)->RefCount = ((*v2)->RefCount + 1) & 0x8FBFFFFF;
-    v4 = result->pObject;
+    if ( p_mTabStops->pObject )
+      p_mTabStops->pObject->RefCount = (p_mTabStops->pObject->RefCount + 1) & 0x8FBFFFFF;
+    pObject = result->pObject;
     if ( result->pObject )
     {
-      if ( (unsigned __int8)v4 & 1 )
+      if ( ((unsigned __int8)pObject & 1) != 0 )
       {
-        result->pObject = (Scaleform::GFx::AS3::Instances::fl::Array *)((char *)v4 - 1);
-        result->pObject = *v2;
+        result->pObject = (Scaleform::GFx::AS3::Instances::fl::Array *)((char *)pObject - 1);
+        result->pObject = p_mTabStops->pObject;
         return;
       }
-      v5 = v4->RefCount;
-      if ( v5 & 0x3FFFFF )
+      RefCount = pObject->RefCount;
+      if ( (RefCount & 0x3FFFFF) != 0 )
       {
-        v4->RefCount = v5 - 1;
-        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v4->vfptr);
+        pObject->RefCount = RefCount - 1;
+        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(pObject);
       }
     }
-    v3->pObject = *v2;
+    result->pObject = p_mTabStops->pObject;
   }
 }
 
 // File Line: 345
 // RVA: 0x926FE0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::tabStopsSet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Instances::fl::Array *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::tabStopsSet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Instances::fl::XMLList *value)
 {
   Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(
     (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&this->mTabStops,
-    (Scaleform::GFx::AS3::Instances::fl::XMLList *)value);
+    value);
 }
 
 // File Line: 352
 // RVA: 0x926FF0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::targetGet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::ASString *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::targetGet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::ASString *result)
 {
-  Scaleform::GFx::ASString *v2; // rbx
   unsigned int v3; // edx
-  long double v4; // rdi
-  Scaleform::GFx::ASStringNode *v5; // rcx
-  bool v6; // zf
+  Scaleform::GFx::ASStringNode *VStr; // rdi
+  Scaleform::GFx::ASStringNode *pNode; // rcx
 
-  v2 = result;
   v3 = this->mTarget.Flags & 0x1F;
-  if ( v3 - 12 > 3 && v3 != 10 || *(_QWORD *)&this->mTarget.value.VNumber )
-    v4 = this->mTarget.value.VNumber;
+  if ( v3 - 12 > 3 && v3 != 10 || this->mTarget.value.VS._1.VStr )
+    VStr = this->mTarget.value.VS._1.VStr;
   else
-    *(_QWORD *)&v4 = (char *)v2->pNode->pManager + 104;
-  ++*(_DWORD *)(*(_QWORD *)&v4 + 24i64);
-  v5 = v2->pNode;
-  v6 = v2->pNode->RefCount == 1;
-  --v5->RefCount;
-  if ( v6 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v5);
-  *(long double *)&v2->pNode = v4;
+    VStr = &result->pNode->pManager->NullStringNode;
+  ++VStr->RefCount;
+  pNode = result->pNode;
+  if ( result->pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
+  result->pNode = VStr;
 }
 
 // File Line: 359
 // RVA: 0x927050
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::targetSet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::ASString *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::targetSet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::ASString *value)
 {
   Scaleform::GFx::AS3::Value::Assign(&this->mTarget, value);
 }
 
 // File Line: 366
 // RVA: 0x927740
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::underlineGet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::underlineGet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result)
 {
   Scaleform::GFx::AS3::Value::Assign(result, &this->mUnderline);
 }
 
 // File Line: 373
 // RVA: 0x927760
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::underlineSet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Value *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::underlineSet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Value *value)
 {
   Scaleform::GFx::AS3::Value::Assign(&this->mUnderline, value);
 }
 
 // File Line: 380
 // RVA: 0x927950
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::urlGet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::ASString *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::urlGet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::ASString *result)
 {
-  Scaleform::GFx::ASString *v2; // rbx
   unsigned int v3; // edx
-  long double v4; // rdi
-  Scaleform::GFx::ASStringNode *v5; // rcx
-  bool v6; // zf
+  Scaleform::GFx::ASStringNode *VStr; // rdi
+  Scaleform::GFx::ASStringNode *pNode; // rcx
 
-  v2 = result;
   v3 = this->mUrl.Flags & 0x1F;
-  if ( v3 - 12 > 3 && v3 != 10 || *(_QWORD *)&this->mUrl.value.VNumber )
-    v4 = this->mUrl.value.VNumber;
+  if ( v3 - 12 > 3 && v3 != 10 || this->mUrl.value.VS._1.VStr )
+    VStr = this->mUrl.value.VS._1.VStr;
   else
-    *(_QWORD *)&v4 = (char *)v2->pNode->pManager + 104;
-  ++*(_DWORD *)(*(_QWORD *)&v4 + 24i64);
-  v5 = v2->pNode;
-  v6 = v2->pNode->RefCount == 1;
-  --v5->RefCount;
-  if ( v6 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v5);
-  *(long double *)&v2->pNode = v4;
+    VStr = &result->pNode->pManager->NullStringNode;
+  ++VStr->RefCount;
+  pNode = result->pNode;
+  if ( result->pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
+  result->pNode = VStr;
 }
 
 // File Line: 387
 // RVA: 0x9279B0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::urlSet(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::ASString *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::urlSet(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::ASString *value)
 {
   Scaleform::GFx::AS3::Value::Assign(&this->mUrl, value);
 }
 
 // File Line: 402
 // RVA: 0x8CE0D0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::ForEachChild_GC(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::GFx::AS3::RefCountCollector<328> *prcc, void (__fastcall *op)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::RefCountBaseGC<328> **))
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::ForEachChild_GC(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::RefCountCollector<328> *prcc,
+        void (__fastcall *op)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::RefCountBaseGC<328> **))
 {
-  void (__fastcall *v3)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::RefCountBaseGC<328> **); // rdi
-  Scaleform::GFx::AS3::RefCountCollector<328> *v4; // rsi
-  Scaleform::GFx::AS3::Instances::fl_text::TextFormat *v5; // rbx
-
-  v3 = op;
-  v4 = prcc;
-  v5 = this;
-  Scaleform::GFx::AS3::Object::ForEachChild_GC((Scaleform::GFx::AS3::Object *)&this->vfptr, prcc, op);
-  if ( (v5->mAlign.Flags & 0x1F) > 10 && !((v5->mAlign.Flags >> 9) & 1) )
-    Scaleform::GFx::AS3::ForEachChild_GC_Internal(v4, &v5->mAlign, v3);
-  if ( (v5->mBlockIndent.Flags & 0x1F) > 10 && !((v5->mBlockIndent.Flags >> 9) & 1) )
-    Scaleform::GFx::AS3::ForEachChild_GC_Internal(v4, &v5->mBlockIndent, v3);
-  if ( (v5->mBullet.Flags & 0x1F) > 10 && !((v5->mBullet.Flags >> 9) & 1) )
-    Scaleform::GFx::AS3::ForEachChild_GC_Internal(v4, &v5->mBullet, v3);
-  if ( (v5->mBold.Flags & 0x1F) > 10 && !((v5->mBold.Flags >> 9) & 1) )
-    Scaleform::GFx::AS3::ForEachChild_GC_Internal(v4, &v5->mBold, v3);
-  if ( (v5->mColor.Flags & 0x1F) > 10 && !((v5->mColor.Flags >> 9) & 1) )
-    Scaleform::GFx::AS3::ForEachChild_GC_Internal(v4, &v5->mColor, v3);
-  if ( (v5->mFont.Flags & 0x1F) > 10 && !((v5->mFont.Flags >> 9) & 1) )
-    Scaleform::GFx::AS3::ForEachChild_GC_Internal(v4, &v5->mFont, v3);
-  if ( (v5->mItalic.Flags & 0x1F) > 10 && !((v5->mItalic.Flags >> 9) & 1) )
-    Scaleform::GFx::AS3::ForEachChild_GC_Internal(v4, &v5->mItalic, v3);
-  if ( (v5->mIndent.Flags & 0x1F) > 10 && !((v5->mIndent.Flags >> 9) & 1) )
-    Scaleform::GFx::AS3::ForEachChild_GC_Internal(v4, &v5->mIndent, v3);
-  if ( (v5->mKerning.Flags & 0x1F) > 10 && !((v5->mKerning.Flags >> 9) & 1) )
-    Scaleform::GFx::AS3::ForEachChild_GC_Internal(v4, &v5->mKerning, v3);
-  if ( (v5->mLeading.Flags & 0x1F) > 10 && !((v5->mLeading.Flags >> 9) & 1) )
-    Scaleform::GFx::AS3::ForEachChild_GC_Internal(v4, &v5->mLeading, v3);
-  if ( (v5->mLeftMargin.Flags & 0x1F) > 10 && !((v5->mLeftMargin.Flags >> 9) & 1) )
-    Scaleform::GFx::AS3::ForEachChild_GC_Internal(v4, &v5->mLeftMargin, v3);
-  if ( (v5->mRightMargin.Flags & 0x1F) > 10 && !((v5->mRightMargin.Flags >> 9) & 1) )
-    Scaleform::GFx::AS3::ForEachChild_GC_Internal(v4, &v5->mRightMargin, v3);
-  if ( (v5->mLetterSpacing.Flags & 0x1F) > 10 && !((v5->mLetterSpacing.Flags >> 9) & 1) )
-    Scaleform::GFx::AS3::ForEachChild_GC_Internal(v4, &v5->mLetterSpacing, v3);
-  if ( (v5->mSize.Flags & 0x1F) > 10 && !((v5->mSize.Flags >> 9) & 1) )
-    Scaleform::GFx::AS3::ForEachChild_GC_Internal(v4, &v5->mSize, v3);
-  if ( v5->mTabStops.pObject )
-    ((void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *))v3)(v4);
-  if ( (v5->mTarget.Flags & 0x1F) > 10 && !((v5->mTarget.Flags >> 9) & 1) )
-    Scaleform::GFx::AS3::ForEachChild_GC_Internal(v4, &v5->mTarget, v3);
-  if ( (v5->mUnderline.Flags & 0x1F) > 10 && !((v5->mUnderline.Flags >> 9) & 1) )
-    Scaleform::GFx::AS3::ForEachChild_GC_Internal(v4, &v5->mUnderline, v3);
-  if ( (v5->mUrl.Flags & 0x1F) > 10 && !((v5->mUrl.Flags >> 9) & 1) )
-    Scaleform::GFx::AS3::ForEachChild_GC_Internal(v4, &v5->mUrl, v3);
+  Scaleform::GFx::AS3::Object::ForEachChild_GC(this, prcc, op);
+  if ( (this->mAlign.Flags & 0x1F) > 0xA && (this->mAlign.Flags & 0x200) == 0 )
+    Scaleform::GFx::AS3::ForEachChild_GC_Internal(
+      prcc,
+      &this->mAlign,
+      (void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::Value::V2U *, void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::RefCountBaseGC<328> **), Scaleform::GFx::AS3::RefCountCollector<328> *))op);
+  if ( (this->mBlockIndent.Flags & 0x1F) > 0xA && (this->mBlockIndent.Flags & 0x200) == 0 )
+    Scaleform::GFx::AS3::ForEachChild_GC_Internal(
+      prcc,
+      &this->mBlockIndent,
+      (void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::Value::V2U *, void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::RefCountBaseGC<328> **), Scaleform::GFx::AS3::RefCountCollector<328> *))op);
+  if ( (this->mBullet.Flags & 0x1F) > 0xA && (this->mBullet.Flags & 0x200) == 0 )
+    Scaleform::GFx::AS3::ForEachChild_GC_Internal(
+      prcc,
+      &this->mBullet,
+      (void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::Value::V2U *, void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::RefCountBaseGC<328> **), Scaleform::GFx::AS3::RefCountCollector<328> *))op);
+  if ( (this->mBold.Flags & 0x1F) > 0xA && (this->mBold.Flags & 0x200) == 0 )
+    Scaleform::GFx::AS3::ForEachChild_GC_Internal(
+      prcc,
+      &this->mBold,
+      (void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::Value::V2U *, void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::RefCountBaseGC<328> **), Scaleform::GFx::AS3::RefCountCollector<328> *))op);
+  if ( (this->mColor.Flags & 0x1F) > 0xA && (this->mColor.Flags & 0x200) == 0 )
+    Scaleform::GFx::AS3::ForEachChild_GC_Internal(
+      prcc,
+      &this->mColor,
+      (void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::Value::V2U *, void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::RefCountBaseGC<328> **), Scaleform::GFx::AS3::RefCountCollector<328> *))op);
+  if ( (this->mFont.Flags & 0x1F) > 0xA && (this->mFont.Flags & 0x200) == 0 )
+    Scaleform::GFx::AS3::ForEachChild_GC_Internal(
+      prcc,
+      &this->mFont,
+      (void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::Value::V2U *, void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::RefCountBaseGC<328> **), Scaleform::GFx::AS3::RefCountCollector<328> *))op);
+  if ( (this->mItalic.Flags & 0x1F) > 0xA && (this->mItalic.Flags & 0x200) == 0 )
+    Scaleform::GFx::AS3::ForEachChild_GC_Internal(
+      prcc,
+      &this->mItalic,
+      (void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::Value::V2U *, void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::RefCountBaseGC<328> **), Scaleform::GFx::AS3::RefCountCollector<328> *))op);
+  if ( (this->mIndent.Flags & 0x1F) > 0xA && (this->mIndent.Flags & 0x200) == 0 )
+    Scaleform::GFx::AS3::ForEachChild_GC_Internal(
+      prcc,
+      &this->mIndent,
+      (void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::Value::V2U *, void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::RefCountBaseGC<328> **), Scaleform::GFx::AS3::RefCountCollector<328> *))op);
+  if ( (this->mKerning.Flags & 0x1F) > 0xA && (this->mKerning.Flags & 0x200) == 0 )
+    Scaleform::GFx::AS3::ForEachChild_GC_Internal(
+      prcc,
+      &this->mKerning,
+      (void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::Value::V2U *, void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::RefCountBaseGC<328> **), Scaleform::GFx::AS3::RefCountCollector<328> *))op);
+  if ( (this->mLeading.Flags & 0x1F) > 0xA && (this->mLeading.Flags & 0x200) == 0 )
+    Scaleform::GFx::AS3::ForEachChild_GC_Internal(
+      prcc,
+      &this->mLeading,
+      (void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::Value::V2U *, void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::RefCountBaseGC<328> **), Scaleform::GFx::AS3::RefCountCollector<328> *))op);
+  if ( (this->mLeftMargin.Flags & 0x1F) > 0xA && (this->mLeftMargin.Flags & 0x200) == 0 )
+    Scaleform::GFx::AS3::ForEachChild_GC_Internal(
+      prcc,
+      &this->mLeftMargin,
+      (void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::Value::V2U *, void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::RefCountBaseGC<328> **), Scaleform::GFx::AS3::RefCountCollector<328> *))op);
+  if ( (this->mRightMargin.Flags & 0x1F) > 0xA && (this->mRightMargin.Flags & 0x200) == 0 )
+    Scaleform::GFx::AS3::ForEachChild_GC_Internal(
+      prcc,
+      &this->mRightMargin,
+      (void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::Value::V2U *, void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::RefCountBaseGC<328> **), Scaleform::GFx::AS3::RefCountCollector<328> *))op);
+  if ( (this->mLetterSpacing.Flags & 0x1F) > 0xA && (this->mLetterSpacing.Flags & 0x200) == 0 )
+    Scaleform::GFx::AS3::ForEachChild_GC_Internal(
+      prcc,
+      &this->mLetterSpacing,
+      (void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::Value::V2U *, void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::RefCountBaseGC<328> **), Scaleform::GFx::AS3::RefCountCollector<328> *))op);
+  if ( (this->mSize.Flags & 0x1F) > 0xA && (this->mSize.Flags & 0x200) == 0 )
+    Scaleform::GFx::AS3::ForEachChild_GC_Internal(
+      prcc,
+      &this->mSize,
+      (void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::Value::V2U *, void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::RefCountBaseGC<328> **), Scaleform::GFx::AS3::RefCountCollector<328> *))op);
+  if ( this->mTabStops.pObject )
+    ((void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *))op)(prcc);
+  if ( (this->mTarget.Flags & 0x1F) > 0xA && (this->mTarget.Flags & 0x200) == 0 )
+    Scaleform::GFx::AS3::ForEachChild_GC_Internal(
+      prcc,
+      &this->mTarget,
+      (void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::Value::V2U *, void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::RefCountBaseGC<328> **), Scaleform::GFx::AS3::RefCountCollector<328> *))op);
+  if ( (this->mUnderline.Flags & 0x1F) > 0xA && (this->mUnderline.Flags & 0x200) == 0 )
+    Scaleform::GFx::AS3::ForEachChild_GC_Internal(
+      prcc,
+      &this->mUnderline,
+      (void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::Value::V2U *, void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::RefCountBaseGC<328> **), Scaleform::GFx::AS3::RefCountCollector<328> *))op);
+  if ( (this->mUrl.Flags & 0x1F) > 0xA && (this->mUrl.Flags & 0x200) == 0 )
+    Scaleform::GFx::AS3::ForEachChild_GC_Internal(
+      prcc,
+      &this->mUrl,
+      (void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::Value::V2U *, void (__fastcall *)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::RefCountBaseGC<328> **), Scaleform::GFx::AS3::RefCountCollector<328> *))op);
+}m::GFx::AS3::RefCountCollector<328> *))op);
 }
 
 // File Line: 426
 // RVA: 0x90CC60
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::SetTextFormat(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::Render::Text::ParagraphFormat *parafmt, Scaleform::Render::Text::TextFormat *fmt)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::SetTextFormat(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::Render::Text::ParagraphFormat *parafmt,
+        Scaleform::Render::Text::TextFormat *fmt)
 {
-  Scaleform::Render::Text::TextFormat *v3; // rdi
-  Scaleform::Render::Text::ParagraphFormat *v4; // rsi
-  Scaleform::GFx::AS3::Instances::fl_text::TextFormat *v5; // r15
-  Scaleform::GFx::AS3::StringManager *v6; // r14
-  Scaleform::GFx::AS3::Value *v7; // rax
-  const char *v8; // r8
-  Scaleform::GFx::ASString *v9; // rax
-  Scaleform::GFx::ASStringNode *v10; // rcx
-  bool v11; // zf
-  int v12; // eax
-  Scaleform::GFx::AS3::Value *v13; // rdx
-  signed int v14; // ebx
-  bool v15; // al
-  Scaleform::GFx::AS3::Value *v16; // rdx
-  int v17; // ebx
-  bool v18; // al
-  Scaleform::GFx::AS3::Value *v19; // rdx
-  int v20; // ebx
-  bool v21; // al
-  Scaleform::GFx::AS3::Value *v22; // rdx
-  int v23; // ebx
-  unsigned __int16 v24; // cx
-  Scaleform::GFx::AS3::Value *v25; // rdx
-  int v26; // ebx
-  unsigned int v27; // eax
-  Scaleform::GFx::AS3::Value *v28; // rdx
-  int v29; // ebx
-  Scaleform::StringDH *v30; // rax
-  Scaleform::GFx::ASString *v31; // rax
-  int v32; // ebx
-  Scaleform::GFx::ASStringNode *v33; // rcx
+  Scaleform::GFx::AS3::StringManager *StringManagerRef; // r14
+  Scaleform::GFx::ASStringManager *pStringManager; // rax
+  Scaleform::GFx::AS3::Value *Null; // rax
+  const char *v9; // r8
+  Scaleform::GFx::ASString *v10; // rax
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  bool v12; // zf
+  int BlockIndent; // eax
+  Scaleform::GFx::AS3::Value *p_other; // rdx
+  int v15; // ebx
+  bool v16; // al
+  Scaleform::GFx::AS3::Value *v17; // rdx
+  int v18; // ebx
+  bool v19; // al
+  Scaleform::GFx::AS3::Value *v20; // rdx
+  int v21; // ebx
+  bool v22; // al
+  Scaleform::GFx::AS3::Value *v23; // rdx
+  int v24; // ebx
+  unsigned __int16 PresentMask; // cx
+  Scaleform::GFx::AS3::Value *v26; // rdx
+  int v27; // ebx
+  unsigned int ColorV; // eax
+  Scaleform::GFx::AS3::Value *v29; // rdx
+  int v30; // ebx
+  Scaleform::StringDH *FontList; // rax
+  Scaleform::GFx::ASString *p_result; // rax
+  int v33; // ebx
   Scaleform::GFx::ASStringNode *v34; // rcx
-  signed int v35; // eax
-  Scaleform::GFx::AS3::Value *v36; // rdx
-  int v37; // ebx
-  bool v38; // al
-  Scaleform::GFx::AS3::Value *v39; // rdx
-  int v40; // ebx
-  signed int v41; // eax
-  Scaleform::GFx::AS3::Value *v42; // rdx
-  int v43; // ebx
-  signed int v44; // eax
-  Scaleform::GFx::AS3::Value *v45; // rdx
-  int v46; // ebx
-  float v47; // xmm0_4
-  Scaleform::GFx::AS3::Value *v48; // rdx
-  int v49; // ebx
-  signed int v50; // eax
-  Scaleform::GFx::AS3::Value *v51; // rdx
-  int v52; // ebx
-  float v53; // xmm0_4
-  Scaleform::GFx::AS3::Value *v54; // rdx
-  int v55; // ebx
-  Scaleform::GFx::ASString *v56; // rax
-  int v57; // ebx
-  Scaleform::GFx::ASStringNode *v58; // rcx
+  Scaleform::GFx::ASStringNode *v35; // rcx
+  int Indent; // eax
+  Scaleform::GFx::AS3::Value *v37; // rdx
+  int v38; // ebx
+  bool v39; // al
+  Scaleform::GFx::AS3::Value *v40; // rdx
+  int v41; // ebx
+  int Leading; // eax
+  Scaleform::GFx::AS3::Value *v43; // rdx
+  int v44; // ebx
+  int LeftMargin; // eax
+  Scaleform::GFx::AS3::Value *v46; // rdx
+  int v47; // ebx
+  float LetterSpacing; // xmm0_4
+  Scaleform::GFx::AS3::Value *v49; // rdx
+  int v50; // ebx
+  int RightMargin; // eax
+  Scaleform::GFx::AS3::Value *v52; // rdx
+  int v53; // ebx
+  float FontSize; // xmm0_4
+  Scaleform::GFx::AS3::Value *v55; // rdx
+  int v56; // ebx
+  Scaleform::GFx::ASString *v57; // rax
+  int v58; // ebx
   Scaleform::GFx::ASStringNode *v59; // rcx
-  const unsigned int *v60; // r14
-  Scaleform::GFx::ASStringNode *v61; // rdi
+  Scaleform::GFx::ASStringNode *v60; // rcx
+  const unsigned int *TabStops; // r14
+  Scaleform::GFx::ASStringNode *pV; // rdi
   unsigned int i; // ebx
-  signed int v63; // eax
-  Scaleform::GFx::AS3::Instances::fl::Array *v64; // rcx
-  unsigned int v65; // eax
-  unsigned int v66; // eax
-  Scaleform::GFx::AS3::Instances::fl::Array *v67; // rcx
-  unsigned int v68; // eax
-  Scaleform::GFx::ASStringNode *v69; // rcx
-  Scaleform::GFx::AS3::Value other; // [rsp+28h] [rbp-71h]
-  Scaleform::GFx::AS3::Value v71; // [rsp+48h] [rbp-51h]
-  Scaleform::GFx::AS3::Value v72; // [rsp+68h] [rbp-31h]
-  Scaleform::GFx::AS3::Value v73; // [rsp+88h] [rbp-11h]
-  __int64 v74; // [rsp+A8h] [rbp+Fh]
-  Scaleform::GFx::ASString result; // [rsp+100h] [rbp+67h]
-  Scaleform::GFx::ASString v; // [rsp+108h] [rbp+6Fh]
-  Scaleform::GFx::ASString v77; // [rsp+110h] [rbp+77h]
-  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl::Array> v78; // [rsp+118h] [rbp+7Fh]
+  long double v64; // xmm0_8
+  Scaleform::GFx::AS3::Instances::fl::Array *pObject; // rcx
+  unsigned int RefCount; // eax
+  unsigned int Size; // eax
+  Scaleform::GFx::AS3::Instances::fl::Array *v68; // rcx
+  unsigned int v69; // eax
+  Scaleform::GFx::ASStringNode *v70; // rcx
+  Scaleform::GFx::AS3::Value other; // [rsp+28h] [rbp-71h] BYREF
+  Scaleform::GFx::AS3::Value v72; // [rsp+48h] [rbp-51h] BYREF
+  Scaleform::GFx::AS3::Value v73; // [rsp+68h] [rbp-31h] BYREF
+  Scaleform::GFx::AS3::Value v74; // [rsp+88h] [rbp-11h] BYREF
+  __int64 v75; // [rsp+A8h] [rbp+Fh]
+  Scaleform::GFx::ASString result; // [rsp+100h] [rbp+67h] BYREF
+  Scaleform::GFx::ASString v; // [rsp+108h] [rbp+6Fh] BYREF
+  Scaleform::GFx::ASString v78; // [rsp+110h] [rbp+77h] BYREF
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl::Array> v79; // [rsp+118h] [rbp+7Fh] BYREF
 
-  v74 = -2i64;
-  v3 = fmt;
-  v4 = parafmt;
-  v5 = this;
-  v6 = this->pTraits.pObject->pVM->StringManagerRef;
-  v.pNode = &v6->pStringManager->NullStringNode;
-  ++v.pNode->RefCount;
-  v7 = Scaleform::GFx::AS3::Value::GetNull();
-  v72.Flags = v7->Flags;
-  v72.Bonus.pWeakProxy = v7->Bonus.pWeakProxy;
-  v72.value = v7->value;
-  if ( (v7->Flags & 0x1F) > 9 )
+  v75 = -2i64;
+  StringManagerRef = this->pTraits.pObject->pVM->StringManagerRef;
+  pStringManager = StringManagerRef->pStringManager;
+  v.pNode = &pStringManager->NullStringNode;
+  ++pStringManager->NullStringNode.RefCount;
+  Null = Scaleform::GFx::AS3::Value::GetNull();
+  v73.Flags = Null->Flags;
+  v73.Bonus.pWeakProxy = Null->Bonus.pWeakProxy;
+  v73.value = Null->value;
+  if ( (Null->Flags & 0x1F) > 9 )
   {
-    if ( (v7->Flags >> 9) & 1 )
-      Scaleform::GFx::AS3::Value::AddRefWeakRef(v7);
+    if ( (Null->Flags & 0x200) != 0 )
+      Scaleform::GFx::AS3::Value::AddRefWeakRef(Null);
     else
-      Scaleform::GFx::AS3::Value::AddRefInternal(v7);
+      Scaleform::GFx::AS3::Value::AddRefInternal(Null);
   }
-  v73.Flags = 0;
-  v73.Bonus.pWeakProxy = 0i64;
-  if ( v4->PresentMask & 1 )
+  v74.Flags = 0;
+  v74.Bonus.pWeakProxy = 0i64;
+  if ( (parafmt->PresentMask & 1) != 0 )
   {
-    v8 = "left";
-    switch ( ((unsigned int)v4->PresentMask >> 9) & 3 )
+    v9 = "left";
+    switch ( (parafmt->PresentMask >> 9) & 3 )
     {
-      case 1u:
-        v8 = "right";
+      case 1:
+        v9 = "right";
         break;
-      case 2u:
-        v8 = "justify";
+      case 2:
+        v9 = "justify";
         break;
-      case 3u:
-        v8 = "center";
+      case 3:
+        v9 = "center";
         break;
     }
-    v9 = Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateString(
-           (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v6->Builtins,
-           &result,
-           v8);
-    Scaleform::GFx::AS3::Value::Assign(&v5->mAlign, v9);
-    v10 = result.pNode;
-    v11 = result.pNode->RefCount == 1;
-    --v10->RefCount;
-    if ( v11 )
-      Scaleform::GFx::ASStringNode::ReleaseNode(v10);
+    v10 = Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateString(
+            StringManagerRef,
+            &result,
+            v9);
+    Scaleform::GFx::AS3::Value::Assign(&this->mAlign, v10);
+    pNode = result.pNode;
+    v12 = result.pNode->RefCount-- == 1;
+    if ( v12 )
+      Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
   }
   else
   {
-    Scaleform::GFx::AS3::Value::Assign(&v5->mAlign, &v);
+    Scaleform::GFx::AS3::Value::Assign(&this->mAlign, &v);
   }
-  if ( (LOBYTE(v4->PresentMask) >> 1) & 1 )
+  if ( (parafmt->PresentMask & 2) != 0 )
   {
-    v12 = v4->BlockIndent;
-    v71.Flags = 3;
-    v71.Bonus.pWeakProxy = 0i64;
-    v71.value.VS._1.VInt = v12;
-    v13 = &v71;
-    v14 = 1;
+    BlockIndent = parafmt->BlockIndent;
+    v72.Flags = 3;
+    v72.Bonus.pWeakProxy = 0i64;
+    v72.value.VS._1.VInt = BlockIndent;
+    p_other = &v72;
+    v15 = 1;
   }
   else
   {
-    other.Flags = v72.Flags;
-    other.Bonus.pWeakProxy = v72.Bonus.pWeakProxy;
-    other.value = v72.value;
-    if ( (v72.Flags & 0x1F) > 9 )
+    other.Flags = v73.Flags;
+    other.Bonus.pWeakProxy = v73.Bonus.pWeakProxy;
+    other.value = v73.value;
+    if ( (v73.Flags & 0x1F) > 9 )
     {
-      if ( (v72.Flags >> 9) & 1 )
-        Scaleform::GFx::AS3::Value::AddRefWeakRef(&v72);
+      if ( (v73.Flags & 0x200) != 0 )
+        Scaleform::GFx::AS3::Value::AddRefWeakRef(&v73);
       else
-        Scaleform::GFx::AS3::Value::AddRefInternal(&v72);
+        Scaleform::GFx::AS3::Value::AddRefInternal(&v73);
     }
-    v13 = &other;
-    v14 = 2;
+    p_other = &other;
+    v15 = 2;
   }
-  Scaleform::GFx::AS3::Value::Assign(&v5->mBlockIndent, v13);
-  if ( v14 & 2 )
+  Scaleform::GFx::AS3::Value::Assign(&this->mBlockIndent, p_other);
+  if ( (v15 & 2) != 0 )
   {
-    v14 &= 0xFFFFFFFD;
+    v15 &= ~2u;
     if ( (other.Flags & 0x1F) > 9 )
     {
-      if ( (other.Flags >> 9) & 1 )
+      if ( (other.Flags & 0x200) != 0 )
         Scaleform::GFx::AS3::Value::ReleaseWeakRef(&other);
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&other);
     }
   }
-  if ( v14 & 1 )
+  if ( (v15 & 1) != 0 )
   {
-    v14 &= 0xFFFFFFFE;
-    if ( (v71.Flags & 0x1F) > 9 )
+    v15 &= ~1u;
+    if ( (v72.Flags & 0x1F) > 9 )
     {
-      if ( (v71.Flags >> 9) & 1 )
-        Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v71);
+      if ( (v72.Flags & 0x200) != 0 )
+        Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v72);
       else
-        Scaleform::GFx::AS3::Value::ReleaseInternal(&v71);
+        Scaleform::GFx::AS3::Value::ReleaseInternal(&v72);
     }
   }
-  if ( (LOBYTE(v3->PresentMask) >> 4) & 1 )
+  if ( (fmt->PresentMask & 0x10) != 0 )
   {
-    v15 = v3->FormatFlags & 1;
-    v71.Flags = 1;
-    v71.Bonus.pWeakProxy = 0i64;
-    v71.value.VS._1.VBool = v15;
-    v16 = &v71;
-    v17 = v14 | 4;
+    v16 = fmt->FormatFlags & 1;
+    v72.Flags = 1;
+    v72.Bonus.pWeakProxy = 0i64;
+    v72.value.VS._1.VBool = v16;
+    v17 = &v72;
+    v18 = v15 | 4;
   }
   else
   {
-    other.Flags = v72.Flags;
-    other.Bonus.pWeakProxy = v72.Bonus.pWeakProxy;
-    other.value = v72.value;
-    if ( (v72.Flags & 0x1F) > 9 )
+    other.Flags = v73.Flags;
+    other.Bonus.pWeakProxy = v73.Bonus.pWeakProxy;
+    other.value = v73.value;
+    if ( (v73.Flags & 0x1F) > 9 )
     {
-      if ( (v72.Flags >> 9) & 1 )
-        Scaleform::GFx::AS3::Value::AddRefWeakRef(&v72);
+      if ( (v73.Flags & 0x200) != 0 )
+        Scaleform::GFx::AS3::Value::AddRefWeakRef(&v73);
       else
-        Scaleform::GFx::AS3::Value::AddRefInternal(&v72);
+        Scaleform::GFx::AS3::Value::AddRefInternal(&v73);
     }
-    v16 = &other;
-    v17 = v14 | 8;
+    v17 = &other;
+    v18 = v15 | 8;
   }
-  Scaleform::GFx::AS3::Value::Assign(&v5->mBold, v16);
-  if ( v17 & 8 )
+  Scaleform::GFx::AS3::Value::Assign(&this->mBold, v17);
+  if ( (v18 & 8) != 0 )
   {
-    v17 &= 0xFFFFFFF7;
+    v18 &= ~8u;
     if ( (other.Flags & 0x1F) > 9 )
     {
-      if ( (other.Flags >> 9) & 1 )
+      if ( (other.Flags & 0x200) != 0 )
         Scaleform::GFx::AS3::Value::ReleaseWeakRef(&other);
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&other);
     }
   }
-  if ( v17 & 4 )
+  if ( (v18 & 4) != 0 )
   {
-    v17 &= 0xFFFFFFFB;
-    if ( (v71.Flags & 0x1F) > 9 )
+    v18 &= ~4u;
+    if ( (v72.Flags & 0x1F) > 9 )
     {
-      if ( (v71.Flags >> 9) & 1 )
-        Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v71);
+      if ( (v72.Flags & 0x200) != 0 )
+        Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v72);
       else
-        Scaleform::GFx::AS3::Value::ReleaseInternal(&v71);
+        Scaleform::GFx::AS3::Value::ReleaseInternal(&v72);
     }
   }
-  if ( (LOBYTE(v3->PresentMask) >> 5) & 1 )
+  if ( (fmt->PresentMask & 0x20) != 0 )
   {
-    v18 = ((unsigned __int8)v3->FormatFlags >> 1) & 1;
-    v71.Flags = 1;
-    v71.Bonus.pWeakProxy = 0i64;
-    v71.value.VS._1.VBool = v18;
-    v19 = &v71;
-    v20 = v17 | 0x10;
+    v19 = (fmt->FormatFlags & 2) != 0;
+    v72.Flags = 1;
+    v72.Bonus.pWeakProxy = 0i64;
+    v72.value.VS._1.VBool = v19;
+    v20 = &v72;
+    v21 = v18 | 0x10;
   }
   else
   {
-    other.Flags = v72.Flags;
-    other.Bonus.pWeakProxy = v72.Bonus.pWeakProxy;
-    other.value = v72.value;
-    if ( (v72.Flags & 0x1F) > 9 )
+    other.Flags = v73.Flags;
+    other.Bonus.pWeakProxy = v73.Bonus.pWeakProxy;
+    other.value = v73.value;
+    if ( (v73.Flags & 0x1F) > 9 )
     {
-      if ( (v72.Flags >> 9) & 1 )
-        Scaleform::GFx::AS3::Value::AddRefWeakRef(&v72);
+      if ( (v73.Flags & 0x200) != 0 )
+        Scaleform::GFx::AS3::Value::AddRefWeakRef(&v73);
       else
-        Scaleform::GFx::AS3::Value::AddRefInternal(&v72);
+        Scaleform::GFx::AS3::Value::AddRefInternal(&v73);
     }
-    v19 = &other;
-    v20 = v17 | 0x20;
+    v20 = &other;
+    v21 = v18 | 0x20;
   }
-  Scaleform::GFx::AS3::Value::Assign(&v5->mItalic, v19);
-  if ( v20 & 0x20 )
+  Scaleform::GFx::AS3::Value::Assign(&this->mItalic, v20);
+  if ( (v21 & 0x20) != 0 )
   {
-    v20 &= 0xFFFFFFDF;
+    v21 &= ~0x20u;
     if ( (other.Flags & 0x1F) > 9 )
     {
-      if ( (other.Flags >> 9) & 1 )
+      if ( (other.Flags & 0x200) != 0 )
         Scaleform::GFx::AS3::Value::ReleaseWeakRef(&other);
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&other);
     }
   }
-  if ( v20 & 0x10 )
+  if ( (v21 & 0x10) != 0 )
   {
-    v20 &= 0xFFFFFFEF;
-    if ( (v71.Flags & 0x1F) > 9 )
+    v21 &= ~0x10u;
+    if ( (v72.Flags & 0x1F) > 9 )
     {
-      if ( (v71.Flags >> 9) & 1 )
-        Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v71);
+      if ( (v72.Flags & 0x200) != 0 )
+        Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v72);
       else
-        Scaleform::GFx::AS3::Value::ReleaseInternal(&v71);
+        Scaleform::GFx::AS3::Value::ReleaseInternal(&v72);
     }
   }
-  if ( (LOBYTE(v3->PresentMask) >> 6) & 1 )
+  if ( (fmt->PresentMask & 0x40) != 0 )
   {
-    v21 = ((unsigned __int8)v3->FormatFlags >> 2) & 1;
-    v71.Flags = 1;
-    v71.Bonus.pWeakProxy = 0i64;
-    v71.value.VS._1.VBool = v21;
-    v22 = &v71;
-    v23 = v20 | 0x40;
+    v22 = (fmt->FormatFlags & 4) != 0;
+    v72.Flags = 1;
+    v72.Bonus.pWeakProxy = 0i64;
+    v72.value.VS._1.VBool = v22;
+    v23 = &v72;
+    v24 = v21 | 0x40;
   }
   else
   {
-    other.Flags = v72.Flags;
-    other.Bonus.pWeakProxy = v72.Bonus.pWeakProxy;
-    other.value = v72.value;
-    if ( (v72.Flags & 0x1F) > 9 )
+    other.Flags = v73.Flags;
+    other.Bonus.pWeakProxy = v73.Bonus.pWeakProxy;
+    other.value = v73.value;
+    if ( (v73.Flags & 0x1F) > 9 )
     {
-      if ( (v72.Flags >> 9) & 1 )
-        Scaleform::GFx::AS3::Value::AddRefWeakRef(&v72);
+      if ( (v73.Flags & 0x200) != 0 )
+        Scaleform::GFx::AS3::Value::AddRefWeakRef(&v73);
       else
-        Scaleform::GFx::AS3::Value::AddRefInternal(&v72);
+        Scaleform::GFx::AS3::Value::AddRefInternal(&v73);
     }
-    v22 = &other;
-    v23 = v20 | 0x80;
+    v23 = &other;
+    v24 = v21 | 0x80;
   }
-  Scaleform::GFx::AS3::Value::Assign(&v5->mUnderline, v22);
-  if ( (v23 & 0x80u) != 0 )
+  Scaleform::GFx::AS3::Value::Assign(&this->mUnderline, v23);
+  if ( (v24 & 0x80u) != 0 )
   {
-    v23 &= 0xFFFFFF7F;
+    v24 &= ~0x80u;
     if ( (other.Flags & 0x1F) > 9 )
     {
-      if ( (other.Flags >> 9) & 1 )
+      if ( (other.Flags & 0x200) != 0 )
         Scaleform::GFx::AS3::Value::ReleaseWeakRef(&other);
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&other);
     }
   }
-  if ( v23 & 0x40 )
+  if ( (v24 & 0x40) != 0 )
   {
-    v23 &= 0xFFFFFFBF;
-    if ( (v71.Flags & 0x1F) > 9 )
-    {
-      if ( (v71.Flags >> 9) & 1 )
-        Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v71);
-      else
-        Scaleform::GFx::AS3::Value::ReleaseInternal(&v71);
-    }
-  }
-  v24 = v4->PresentMask;
-  if ( (v24 & 0x80u) == 0 )
-  {
-    other.Flags = v72.Flags;
-    other.Bonus.pWeakProxy = v72.Bonus.pWeakProxy;
-    other.value = v72.value;
+    v24 &= ~0x40u;
     if ( (v72.Flags & 0x1F) > 9 )
     {
-      if ( (v72.Flags >> 9) & 1 )
-        Scaleform::GFx::AS3::Value::AddRefWeakRef(&v72);
+      if ( (v72.Flags & 0x200) != 0 )
+        Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v72);
       else
-        Scaleform::GFx::AS3::Value::AddRefInternal(&v72);
+        Scaleform::GFx::AS3::Value::ReleaseInternal(&v72);
     }
-    v25 = &other;
-    v26 = v23 | 0x200;
+  }
+  PresentMask = parafmt->PresentMask;
+  if ( (PresentMask & 0x80u) == 0 )
+  {
+    other.Flags = v73.Flags;
+    other.Bonus.pWeakProxy = v73.Bonus.pWeakProxy;
+    other.value = v73.value;
+    if ( (v73.Flags & 0x1F) > 9 )
+    {
+      if ( (v73.Flags & 0x200) != 0 )
+        Scaleform::GFx::AS3::Value::AddRefWeakRef(&v73);
+      else
+        Scaleform::GFx::AS3::Value::AddRefInternal(&v73);
+    }
+    v26 = &other;
+    v27 = v24 | 0x200;
   }
   else
   {
-    v71.Flags = 1;
-    v71.Bonus.pWeakProxy = 0i64;
-    v71.value.VS._1.VBool = (unsigned int)v24 >> 15;
-    v25 = &v71;
-    v26 = v23 | 0x100;
+    v72.Flags = 1;
+    v72.Bonus.pWeakProxy = 0i64;
+    v72.value.VS._1.VBool = PresentMask >> 15;
+    v26 = &v72;
+    v27 = v24 | 0x100;
   }
-  Scaleform::GFx::AS3::Value::Assign(&v5->mBullet, v25);
-  if ( _bittest(&v26, 9u) )
+  Scaleform::GFx::AS3::Value::Assign(&this->mBullet, v26);
+  if ( (v27 & 0x200) != 0 )
   {
-    v26 &= 0xFFFFFDFF;
+    v27 &= ~0x200u;
     if ( (other.Flags & 0x1F) > 9 )
     {
-      if ( (other.Flags >> 9) & 1 )
+      if ( (other.Flags & 0x200) != 0 )
         Scaleform::GFx::AS3::Value::ReleaseWeakRef(&other);
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&other);
     }
   }
-  if ( v26 & 0x100 )
+  if ( (v27 & 0x100) != 0 )
   {
-    v26 &= 0xFFFFFEFF;
-    if ( (v71.Flags & 0x1F) > 9 )
+    v27 &= ~0x100u;
+    if ( (v72.Flags & 0x1F) > 9 )
     {
-      if ( (v71.Flags >> 9) & 1 )
-        Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v71);
+      if ( (v72.Flags & 0x200) != 0 )
+        Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v72);
       else
-        Scaleform::GFx::AS3::Value::ReleaseInternal(&v71);
+        Scaleform::GFx::AS3::Value::ReleaseInternal(&v72);
     }
   }
-  if ( v3->PresentMask & 1 )
+  if ( (fmt->PresentMask & 1) != 0 )
   {
-    v27 = v3->ColorV;
-    v71.Flags = 4;
-    v71.Bonus.pWeakProxy = 0i64;
-    v71.value.VNumber = (double)(v27 & 0xFFFFFF);
-    v28 = &v71;
-    v29 = v26 | 0x400;
+    ColorV = fmt->ColorV;
+    v72.Flags = 4;
+    v72.Bonus.pWeakProxy = 0i64;
+    v72.value.VNumber = (double)(ColorV & 0xFFFFFF);
+    v29 = &v72;
+    v30 = v27 | 0x400;
   }
   else
   {
-    other.Flags = v72.Flags;
-    other.Bonus.pWeakProxy = v72.Bonus.pWeakProxy;
-    other.value = v72.value;
-    if ( (v72.Flags & 0x1F) > 9 )
+    other.Flags = v73.Flags;
+    other.Bonus.pWeakProxy = v73.Bonus.pWeakProxy;
+    other.value = v73.value;
+    if ( (v73.Flags & 0x1F) > 9 )
     {
-      if ( (v72.Flags >> 9) & 1 )
-        Scaleform::GFx::AS3::Value::AddRefWeakRef(&v72);
+      if ( (v73.Flags & 0x200) != 0 )
+        Scaleform::GFx::AS3::Value::AddRefWeakRef(&v73);
       else
-        Scaleform::GFx::AS3::Value::AddRefInternal(&v72);
+        Scaleform::GFx::AS3::Value::AddRefInternal(&v73);
     }
-    v28 = &other;
-    v29 = v26 | 0x800;
+    v29 = &other;
+    v30 = v27 | 0x800;
   }
-  Scaleform::GFx::AS3::Value::Assign(&v5->mColor, v28);
-  if ( _bittest(&v29, 0xBu) )
+  Scaleform::GFx::AS3::Value::Assign(&this->mColor, v29);
+  if ( (v30 & 0x800) != 0 )
   {
-    v29 &= 0xFFFFF7FF;
+    v30 &= ~0x800u;
     if ( (other.Flags & 0x1F) > 9 )
     {
-      if ( (other.Flags >> 9) & 1 )
+      if ( (other.Flags & 0x200) != 0 )
         Scaleform::GFx::AS3::Value::ReleaseWeakRef(&other);
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&other);
     }
   }
-  if ( _bittest(&v29, 0xAu) )
+  if ( (v30 & 0x400) != 0 )
   {
-    v29 &= 0xFFFFFBFF;
-    if ( (v71.Flags & 0x1F) > 9 )
+    v30 &= ~0x400u;
+    if ( (v72.Flags & 0x1F) > 9 )
     {
-      if ( (v71.Flags >> 9) & 1 )
-        Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v71);
+      if ( (v72.Flags & 0x200) != 0 )
+        Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v72);
       else
-        Scaleform::GFx::AS3::Value::ReleaseInternal(&v71);
+        Scaleform::GFx::AS3::Value::ReleaseInternal(&v72);
     }
   }
-  if ( (LOBYTE(v3->PresentMask) >> 2) & 1 )
+  if ( (fmt->PresentMask & 4) != 0 )
   {
-    v30 = Scaleform::Render::Text::TextFormat::GetFontList(v3);
-    v31 = Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateString(
-            (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v6->Builtins,
-            &v77,
-            (Scaleform::String *)&v30->0);
-    v32 = v29 | 0x1000;
+    FontList = Scaleform::Render::Text::TextFormat::GetFontList(fmt);
+    p_result = Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateString(
+                 StringManagerRef,
+                 &v78,
+                 FontList);
+    v33 = v30 | 0x1000;
   }
   else
   {
     result.pNode = v.pNode;
-    ++result.pNode->RefCount;
-    v31 = &result;
-    v32 = v29 | 0x2000;
+    ++v.pNode->RefCount;
+    p_result = &result;
+    v33 = v30 | 0x2000;
   }
-  Scaleform::GFx::AS3::Value::Assign(&v5->mFont, v31);
-  if ( _bittest(&v32, 0xDu) )
+  Scaleform::GFx::AS3::Value::Assign(&this->mFont, p_result);
+  if ( (v33 & 0x2000) != 0 )
   {
-    v32 &= 0xFFFFDFFF;
-    v33 = result.pNode;
-    v11 = result.pNode->RefCount == 1;
-    --v33->RefCount;
-    if ( v11 )
-      Scaleform::GFx::ASStringNode::ReleaseNode(v33);
-  }
-  if ( _bittest(&v32, 0xCu) )
-  {
-    v32 &= 0xFFFFEFFF;
-    v34 = v77.pNode;
-    v11 = v77.pNode->RefCount == 1;
-    --v34->RefCount;
-    if ( v11 )
+    v33 &= ~0x2000u;
+    v34 = result.pNode;
+    v12 = result.pNode->RefCount-- == 1;
+    if ( v12 )
       Scaleform::GFx::ASStringNode::ReleaseNode(v34);
   }
-  if ( (LOBYTE(v4->PresentMask) >> 2) & 1 )
+  if ( (v33 & 0x1000) != 0 )
   {
-    v35 = v4->Indent;
-    v71.Flags = 4;
-    v71.Bonus.pWeakProxy = 0i64;
-    v71.value.VNumber = (double)v35;
-    v36 = &v71;
-    v37 = v32 | 0x4000;
+    v33 &= ~0x1000u;
+    v35 = v78.pNode;
+    v12 = v78.pNode->RefCount-- == 1;
+    if ( v12 )
+      Scaleform::GFx::ASStringNode::ReleaseNode(v35);
+  }
+  if ( (parafmt->PresentMask & 4) != 0 )
+  {
+    Indent = parafmt->Indent;
+    v72.Flags = 4;
+    v72.Bonus.pWeakProxy = 0i64;
+    v72.value.VNumber = (double)Indent;
+    v37 = &v72;
+    v38 = v33 | 0x4000;
   }
   else
   {
-    other.Flags = v72.Flags;
-    other.Bonus.pWeakProxy = v72.Bonus.pWeakProxy;
-    other.value = v72.value;
-    if ( (v72.Flags & 0x1F) > 9 )
+    other.Flags = v73.Flags;
+    other.Bonus.pWeakProxy = v73.Bonus.pWeakProxy;
+    other.value = v73.value;
+    if ( (v73.Flags & 0x1F) > 9 )
     {
-      if ( (v72.Flags >> 9) & 1 )
-        Scaleform::GFx::AS3::Value::AddRefWeakRef(&v72);
+      if ( (v73.Flags & 0x200) != 0 )
+        Scaleform::GFx::AS3::Value::AddRefWeakRef(&v73);
       else
-        Scaleform::GFx::AS3::Value::AddRefInternal(&v72);
+        Scaleform::GFx::AS3::Value::AddRefInternal(&v73);
     }
-    v36 = &other;
-    v37 = v32 | 0x8000;
+    v37 = &other;
+    v38 = v33 | 0x8000;
   }
-  Scaleform::GFx::AS3::Value::Assign(&v5->mIndent, v36);
-  if ( _bittest(&v37, 0xFu) )
+  Scaleform::GFx::AS3::Value::Assign(&this->mIndent, v37);
+  if ( (v38 & 0x8000) != 0 )
   {
-    v37 &= 0xFFFF7FFF;
+    v38 &= ~0x8000u;
     if ( (other.Flags & 0x1F) > 9 )
     {
-      if ( (other.Flags >> 9) & 1 )
+      if ( (other.Flags & 0x200) != 0 )
         Scaleform::GFx::AS3::Value::ReleaseWeakRef(&other);
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&other);
     }
   }
-  if ( _bittest(&v37, 0xEu) )
+  if ( (v38 & 0x4000) != 0 )
   {
-    v37 &= 0xFFFFBFFF;
-    if ( (v71.Flags & 0x1F) > 9 )
-    {
-      if ( (v71.Flags >> 9) & 1 )
-        Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v71);
-      else
-        Scaleform::GFx::AS3::Value::ReleaseInternal(&v71);
-    }
-  }
-  if ( SLOBYTE(v3->PresentMask) >= 0 )
-  {
-    other.Flags = v72.Flags;
-    other.Bonus.pWeakProxy = v72.Bonus.pWeakProxy;
-    other.value = v72.value;
+    v38 &= ~0x4000u;
     if ( (v72.Flags & 0x1F) > 9 )
     {
-      if ( (v72.Flags >> 9) & 1 )
-        Scaleform::GFx::AS3::Value::AddRefWeakRef(&v72);
+      if ( (v72.Flags & 0x200) != 0 )
+        Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v72);
       else
-        Scaleform::GFx::AS3::Value::AddRefInternal(&v72);
+        Scaleform::GFx::AS3::Value::ReleaseInternal(&v72);
     }
-    v39 = &other;
-    v40 = v37 | 0x20000;
+  }
+  if ( SLOBYTE(fmt->PresentMask) >= 0 )
+  {
+    other.Flags = v73.Flags;
+    other.Bonus.pWeakProxy = v73.Bonus.pWeakProxy;
+    other.value = v73.value;
+    if ( (v73.Flags & 0x1F) > 9 )
+    {
+      if ( (v73.Flags & 0x200) != 0 )
+        Scaleform::GFx::AS3::Value::AddRefWeakRef(&v73);
+      else
+        Scaleform::GFx::AS3::Value::AddRefInternal(&v73);
+    }
+    v40 = &other;
+    v41 = v38 | 0x20000;
   }
   else
   {
-    v38 = ((unsigned __int8)v3->FormatFlags >> 3) & 1;
-    v71.Flags = 1;
-    v71.Bonus.pWeakProxy = 0i64;
-    v71.value.VS._1.VBool = v38;
-    v39 = &v71;
-    v40 = v37 | 0x10000;
+    v39 = (fmt->FormatFlags & 8) != 0;
+    v72.Flags = 1;
+    v72.Bonus.pWeakProxy = 0i64;
+    v72.value.VS._1.VBool = v39;
+    v40 = &v72;
+    v41 = v38 | 0x10000;
   }
-  Scaleform::GFx::AS3::Value::Assign(&v5->mKerning, v39);
-  if ( _bittest(&v40, 0x11u) )
+  Scaleform::GFx::AS3::Value::Assign(&this->mKerning, v40);
+  if ( (v41 & 0x20000) != 0 )
   {
-    v40 &= 0xFFFDFFFF;
+    v41 &= ~0x20000u;
     if ( (other.Flags & 0x1F) > 9 )
     {
-      if ( (other.Flags >> 9) & 1 )
+      if ( (other.Flags & 0x200) != 0 )
         Scaleform::GFx::AS3::Value::ReleaseWeakRef(&other);
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&other);
     }
   }
-  if ( _bittest(&v40, 0x10u) )
+  if ( (v41 & 0x10000) != 0 )
   {
-    v40 &= 0xFFFEFFFF;
-    if ( (v71.Flags & 0x1F) > 9 )
+    v41 &= ~0x10000u;
+    if ( (v72.Flags & 0x1F) > 9 )
     {
-      if ( (v71.Flags >> 9) & 1 )
-        Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v71);
+      if ( (v72.Flags & 0x200) != 0 )
+        Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v72);
       else
-        Scaleform::GFx::AS3::Value::ReleaseInternal(&v71);
+        Scaleform::GFx::AS3::Value::ReleaseInternal(&v72);
     }
   }
-  if ( (LOBYTE(v4->PresentMask) >> 3) & 1 )
+  if ( (parafmt->PresentMask & 8) != 0 )
   {
-    v41 = v4->Leading;
-    v71.Flags = 4;
-    v71.Bonus.pWeakProxy = 0i64;
-    v71.value.VNumber = (double)v41;
-    v42 = &v71;
-    v43 = v40 | 0x40000;
+    Leading = parafmt->Leading;
+    v72.Flags = 4;
+    v72.Bonus.pWeakProxy = 0i64;
+    v72.value.VNumber = (double)Leading;
+    v43 = &v72;
+    v44 = v41 | 0x40000;
   }
   else
   {
-    other.Flags = v72.Flags;
-    other.Bonus.pWeakProxy = v72.Bonus.pWeakProxy;
-    other.value = v72.value;
-    if ( (v72.Flags & 0x1F) > 9 )
+    other.Flags = v73.Flags;
+    other.Bonus.pWeakProxy = v73.Bonus.pWeakProxy;
+    other.value = v73.value;
+    if ( (v73.Flags & 0x1F) > 9 )
     {
-      if ( (v72.Flags >> 9) & 1 )
-        Scaleform::GFx::AS3::Value::AddRefWeakRef(&v72);
+      if ( (v73.Flags & 0x200) != 0 )
+        Scaleform::GFx::AS3::Value::AddRefWeakRef(&v73);
       else
-        Scaleform::GFx::AS3::Value::AddRefInternal(&v72);
+        Scaleform::GFx::AS3::Value::AddRefInternal(&v73);
     }
-    v42 = &other;
-    v43 = v40 | 0x80000;
+    v43 = &other;
+    v44 = v41 | 0x80000;
   }
-  Scaleform::GFx::AS3::Value::Assign(&v5->mLeading, v42);
-  if ( _bittest(&v43, 0x13u) )
+  Scaleform::GFx::AS3::Value::Assign(&this->mLeading, v43);
+  if ( (v44 & 0x80000) != 0 )
   {
-    v43 &= 0xFFF7FFFF;
+    v44 &= ~0x80000u;
     if ( (other.Flags & 0x1F) > 9 )
     {
-      if ( (other.Flags >> 9) & 1 )
+      if ( (other.Flags & 0x200) != 0 )
         Scaleform::GFx::AS3::Value::ReleaseWeakRef(&other);
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&other);
     }
   }
-  if ( _bittest(&v43, 0x12u) )
+  if ( (v44 & 0x40000) != 0 )
   {
-    v43 &= 0xFFFBFFFF;
-    if ( (v71.Flags & 0x1F) > 9 )
+    v44 &= ~0x40000u;
+    if ( (v72.Flags & 0x1F) > 9 )
     {
-      if ( (v71.Flags >> 9) & 1 )
-        Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v71);
+      if ( (v72.Flags & 0x200) != 0 )
+        Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v72);
       else
-        Scaleform::GFx::AS3::Value::ReleaseInternal(&v71);
+        Scaleform::GFx::AS3::Value::ReleaseInternal(&v72);
     }
   }
-  if ( (LOBYTE(v4->PresentMask) >> 4) & 1 )
+  if ( (parafmt->PresentMask & 0x10) != 0 )
   {
-    v44 = v4->LeftMargin;
-    v71.Flags = 4;
-    v71.Bonus.pWeakProxy = 0i64;
-    v71.value.VNumber = (double)v44;
-    v45 = &v71;
-    v46 = v43 | 0x100000;
+    LeftMargin = parafmt->LeftMargin;
+    v72.Flags = 4;
+    v72.Bonus.pWeakProxy = 0i64;
+    v72.value.VNumber = (double)LeftMargin;
+    v46 = &v72;
+    v47 = v44 | 0x100000;
   }
   else
   {
-    other.Flags = v72.Flags;
-    other.Bonus.pWeakProxy = v72.Bonus.pWeakProxy;
-    other.value = v72.value;
-    if ( (v72.Flags & 0x1F) > 9 )
+    other.Flags = v73.Flags;
+    other.Bonus.pWeakProxy = v73.Bonus.pWeakProxy;
+    other.value = v73.value;
+    if ( (v73.Flags & 0x1F) > 9 )
     {
-      if ( (v72.Flags >> 9) & 1 )
-        Scaleform::GFx::AS3::Value::AddRefWeakRef(&v72);
+      if ( (v73.Flags & 0x200) != 0 )
+        Scaleform::GFx::AS3::Value::AddRefWeakRef(&v73);
       else
-        Scaleform::GFx::AS3::Value::AddRefInternal(&v72);
+        Scaleform::GFx::AS3::Value::AddRefInternal(&v73);
     }
-    v45 = &other;
-    v46 = v43 | 0x200000;
+    v46 = &other;
+    v47 = v44 | 0x200000;
   }
-  Scaleform::GFx::AS3::Value::Assign(&v5->mLeftMargin, v45);
-  if ( _bittest(&v46, 0x15u) )
+  Scaleform::GFx::AS3::Value::Assign(&this->mLeftMargin, v46);
+  if ( (v47 & 0x200000) != 0 )
   {
-    v46 &= 0xFFDFFFFF;
+    v47 &= ~0x200000u;
     if ( (other.Flags & 0x1F) > 9 )
     {
-      if ( (other.Flags >> 9) & 1 )
+      if ( (other.Flags & 0x200) != 0 )
         Scaleform::GFx::AS3::Value::ReleaseWeakRef(&other);
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&other);
     }
   }
-  if ( _bittest(&v46, 0x14u) )
+  if ( (v47 & 0x100000) != 0 )
   {
-    v46 &= 0xFFEFFFFF;
-    if ( (v71.Flags & 0x1F) > 9 )
+    v47 &= ~0x100000u;
+    if ( (v72.Flags & 0x1F) > 9 )
     {
-      if ( (v71.Flags >> 9) & 1 )
-        Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v71);
+      if ( (v72.Flags & 0x200) != 0 )
+        Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v72);
       else
-        Scaleform::GFx::AS3::Value::ReleaseInternal(&v71);
+        Scaleform::GFx::AS3::Value::ReleaseInternal(&v72);
     }
   }
-  if ( (LOBYTE(v3->PresentMask) >> 1) & 1 )
+  if ( (fmt->PresentMask & 2) != 0 )
   {
-    v47 = v3->LetterSpacing;
-    v71.Flags = 4;
-    v71.Bonus.pWeakProxy = 0i64;
-    v71.value.VNumber = (float)(v47 * 0.050000001);
-    v48 = &v71;
-    v49 = v46 | 0x400000;
+    LetterSpacing = fmt->LetterSpacing;
+    v72.Flags = 4;
+    v72.Bonus.pWeakProxy = 0i64;
+    v72.value.VNumber = (float)(LetterSpacing * 0.050000001);
+    v49 = &v72;
+    v50 = v47 | 0x400000;
   }
   else
   {
-    other.Flags = v72.Flags;
-    other.Bonus.pWeakProxy = v72.Bonus.pWeakProxy;
-    other.value = v72.value;
-    if ( (v72.Flags & 0x1F) > 9 )
+    other.Flags = v73.Flags;
+    other.Bonus.pWeakProxy = v73.Bonus.pWeakProxy;
+    other.value = v73.value;
+    if ( (v73.Flags & 0x1F) > 9 )
     {
-      if ( (v72.Flags >> 9) & 1 )
-        Scaleform::GFx::AS3::Value::AddRefWeakRef(&v72);
+      if ( (v73.Flags & 0x200) != 0 )
+        Scaleform::GFx::AS3::Value::AddRefWeakRef(&v73);
       else
-        Scaleform::GFx::AS3::Value::AddRefInternal(&v72);
+        Scaleform::GFx::AS3::Value::AddRefInternal(&v73);
     }
-    v48 = &other;
-    v49 = v46 | 0x800000;
+    v49 = &other;
+    v50 = v47 | 0x800000;
   }
-  Scaleform::GFx::AS3::Value::Assign(&v5->mLetterSpacing, v48);
-  if ( _bittest(&v49, 0x17u) )
+  Scaleform::GFx::AS3::Value::Assign(&this->mLetterSpacing, v49);
+  if ( (v50 & 0x800000) != 0 )
   {
-    v49 &= 0xFF7FFFFF;
+    v50 &= ~0x800000u;
     if ( (other.Flags & 0x1F) > 9 )
     {
-      if ( (other.Flags >> 9) & 1 )
+      if ( (other.Flags & 0x200) != 0 )
         Scaleform::GFx::AS3::Value::ReleaseWeakRef(&other);
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&other);
     }
   }
-  if ( _bittest(&v49, 0x16u) )
+  if ( (v50 & 0x400000) != 0 )
   {
-    v49 &= 0xFFBFFFFF;
-    if ( (v71.Flags & 0x1F) > 9 )
+    v50 &= ~0x400000u;
+    if ( (v72.Flags & 0x1F) > 9 )
     {
-      if ( (v71.Flags >> 9) & 1 )
-        Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v71);
+      if ( (v72.Flags & 0x200) != 0 )
+        Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v72);
       else
-        Scaleform::GFx::AS3::Value::ReleaseInternal(&v71);
+        Scaleform::GFx::AS3::Value::ReleaseInternal(&v72);
     }
   }
-  if ( (LOBYTE(v4->PresentMask) >> 5) & 1 )
+  if ( (parafmt->PresentMask & 0x20) != 0 )
   {
-    v50 = v4->RightMargin;
-    v71.Flags = 4;
-    v71.Bonus.pWeakProxy = 0i64;
-    v71.value.VNumber = (double)v50;
-    v51 = &v71;
-    v52 = v49 | 0x1000000;
+    RightMargin = parafmt->RightMargin;
+    v72.Flags = 4;
+    v72.Bonus.pWeakProxy = 0i64;
+    v72.value.VNumber = (double)RightMargin;
+    v52 = &v72;
+    v53 = v50 | 0x1000000;
   }
   else
   {
-    other.Flags = v72.Flags;
-    other.Bonus.pWeakProxy = v72.Bonus.pWeakProxy;
-    other.value = v72.value;
-    if ( (v72.Flags & 0x1F) > 9 )
+    other.Flags = v73.Flags;
+    other.Bonus.pWeakProxy = v73.Bonus.pWeakProxy;
+    other.value = v73.value;
+    if ( (v73.Flags & 0x1F) > 9 )
     {
-      if ( (v72.Flags >> 9) & 1 )
-        Scaleform::GFx::AS3::Value::AddRefWeakRef(&v72);
+      if ( (v73.Flags & 0x200) != 0 )
+        Scaleform::GFx::AS3::Value::AddRefWeakRef(&v73);
       else
-        Scaleform::GFx::AS3::Value::AddRefInternal(&v72);
+        Scaleform::GFx::AS3::Value::AddRefInternal(&v73);
     }
-    v51 = &other;
-    v52 = v49 | 0x2000000;
+    v52 = &other;
+    v53 = v50 | 0x2000000;
   }
-  Scaleform::GFx::AS3::Value::Assign(&v5->mRightMargin, v51);
-  if ( _bittest(&v52, 0x19u) )
+  Scaleform::GFx::AS3::Value::Assign(&this->mRightMargin, v52);
+  if ( (v53 & 0x2000000) != 0 )
   {
-    v52 &= 0xFDFFFFFF;
+    v53 &= ~0x2000000u;
     if ( (other.Flags & 0x1F) > 9 )
     {
-      if ( (other.Flags >> 9) & 1 )
+      if ( (other.Flags & 0x200) != 0 )
         Scaleform::GFx::AS3::Value::ReleaseWeakRef(&other);
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&other);
     }
   }
-  if ( _bittest(&v52, 0x18u) )
+  if ( (v53 & 0x1000000) != 0 )
   {
-    v52 &= 0xFEFFFFFF;
-    if ( (v71.Flags & 0x1F) > 9 )
+    v53 &= ~0x1000000u;
+    if ( (v72.Flags & 0x1F) > 9 )
     {
-      if ( (v71.Flags >> 9) & 1 )
-        Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v71);
+      if ( (v72.Flags & 0x200) != 0 )
+        Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v72);
       else
-        Scaleform::GFx::AS3::Value::ReleaseInternal(&v71);
+        Scaleform::GFx::AS3::Value::ReleaseInternal(&v72);
     }
   }
-  if ( (LOBYTE(v3->PresentMask) >> 3) & 1 )
+  if ( (fmt->PresentMask & 8) != 0 )
   {
-    v53 = (float)v3->FontSize;
-    v71.Flags = 4;
-    v71.Bonus.pWeakProxy = 0i64;
-    v71.value.VNumber = (float)(v53 * 0.050000001);
-    v54 = &v71;
-    v55 = v52 | 0x4000000;
+    FontSize = (float)fmt->FontSize;
+    v72.Flags = 4;
+    v72.Bonus.pWeakProxy = 0i64;
+    v72.value.VNumber = (float)(FontSize * 0.050000001);
+    v55 = &v72;
+    v56 = v53 | 0x4000000;
   }
   else
   {
-    other.Flags = v72.Flags;
-    other.Bonus.pWeakProxy = v72.Bonus.pWeakProxy;
-    other.value = v72.value;
-    if ( (v72.Flags & 0x1F) > 9 )
+    other.Flags = v73.Flags;
+    other.Bonus.pWeakProxy = v73.Bonus.pWeakProxy;
+    other.value = v73.value;
+    if ( (v73.Flags & 0x1F) > 9 )
     {
-      if ( (v72.Flags >> 9) & 1 )
-        Scaleform::GFx::AS3::Value::AddRefWeakRef(&v72);
+      if ( (v73.Flags & 0x200) != 0 )
+        Scaleform::GFx::AS3::Value::AddRefWeakRef(&v73);
       else
-        Scaleform::GFx::AS3::Value::AddRefInternal(&v72);
+        Scaleform::GFx::AS3::Value::AddRefInternal(&v73);
     }
-    v54 = &other;
-    v55 = v52 | 0x8000000;
+    v55 = &other;
+    v56 = v53 | 0x8000000;
   }
-  Scaleform::GFx::AS3::Value::Assign(&v5->mSize, v54);
-  if ( _bittest(&v55, 0x1Bu) )
+  Scaleform::GFx::AS3::Value::Assign(&this->mSize, v55);
+  if ( (v56 & 0x8000000) != 0 )
   {
-    v55 &= 0xF7FFFFFF;
+    v56 &= ~0x8000000u;
     if ( (other.Flags & 0x1F) > 9 )
     {
-      if ( (other.Flags >> 9) & 1 )
+      if ( (other.Flags & 0x200) != 0 )
         Scaleform::GFx::AS3::Value::ReleaseWeakRef(&other);
       else
         Scaleform::GFx::AS3::Value::ReleaseInternal(&other);
     }
   }
-  if ( _bittest(&v55, 0x1Au) )
+  if ( (v56 & 0x4000000) != 0 )
   {
-    v55 &= 0xFBFFFFFF;
-    if ( (v71.Flags & 0x1F) > 9 )
+    v56 &= ~0x4000000u;
+    if ( (v72.Flags & 0x1F) > 9 )
     {
-      if ( (v71.Flags >> 9) & 1 )
-        Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v71);
+      if ( (v72.Flags & 0x200) != 0 )
+        Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v72);
       else
-        Scaleform::GFx::AS3::Value::ReleaseInternal(&v71);
+        Scaleform::GFx::AS3::Value::ReleaseInternal(&v72);
     }
   }
-  Scaleform::GFx::AS3::Value::Assign(&v5->mTarget, &v);
-  if ( v3->PresentMask & 0x100 && Scaleform::String::GetLength((Scaleform::String *)&v3->Url.0) )
+  Scaleform::GFx::AS3::Value::Assign(&this->mTarget, &v);
+  if ( (fmt->PresentMask & 0x100) != 0 && Scaleform::String::GetLength(&fmt->Url) )
   {
-    v56 = Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateString(
-            (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v6->Builtins,
-            &v77,
-            (Scaleform::String *)&v3->Url.0);
-    v57 = v55 | 0x10000000;
+    v57 = Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateString(
+            StringManagerRef,
+            &v78,
+            &fmt->Url);
+    v58 = v56 | 0x10000000;
   }
   else
   {
     result.pNode = v.pNode;
-    ++result.pNode->RefCount;
-    v56 = &result;
-    v57 = v55 | 0x20000000;
+    ++v.pNode->RefCount;
+    v57 = &result;
+    v58 = v56 | 0x20000000;
   }
-  Scaleform::GFx::AS3::Value::Assign(&v5->mUrl, v56);
-  if ( _bittest(&v57, 0x1Du) )
+  Scaleform::GFx::AS3::Value::Assign(&this->mUrl, v57);
+  if ( (v58 & 0x20000000) != 0 )
   {
-    v57 &= 0xDFFFFFFF;
-    v58 = result.pNode;
-    v11 = result.pNode->RefCount == 1;
-    --v58->RefCount;
-    if ( v11 )
-      Scaleform::GFx::ASStringNode::ReleaseNode(v58);
-  }
-  if ( _bittest(&v57, 0x1Cu) )
-  {
-    v59 = v77.pNode;
-    v11 = v77.pNode->RefCount == 1;
-    --v59->RefCount;
-    if ( v11 )
+    v58 &= ~0x20000000u;
+    v59 = result.pNode;
+    v12 = result.pNode->RefCount-- == 1;
+    if ( v12 )
       Scaleform::GFx::ASStringNode::ReleaseNode(v59);
   }
-  if ( (LOBYTE(v4->PresentMask) >> 6) & 1 )
+  if ( (v58 & 0x10000000) != 0 )
+  {
+    v60 = v78.pNode;
+    v12 = v78.pNode->RefCount-- == 1;
+    if ( v12 )
+      Scaleform::GFx::ASStringNode::ReleaseNode(v60);
+  }
+  if ( (parafmt->PresentMask & 0x40) != 0 )
   {
     LODWORD(result.pNode) = 0;
-    v60 = Scaleform::Render::Text::ParagraphFormat::GetTabStops(v4, (unsigned int *)&result);
-    v77.pNode = (Scaleform::GFx::ASStringNode *)Scaleform::GFx::AS3::VM::MakeArray(v5->pTraits.pObject->pVM, &v78)->pV;
-    v61 = v77.pNode;
+    TabStops = Scaleform::Render::Text::ParagraphFormat::GetTabStops(parafmt, (unsigned int *)&result);
+    pV = (Scaleform::GFx::ASStringNode *)Scaleform::GFx::AS3::VM::MakeArray(this->pTraits.pObject->pVM, &v79)->pV;
+    v78.pNode = pV;
     Scaleform::GFx::AS3::Impl::SparseArray::Resize(
-      (Scaleform::GFx::AS3::Impl::SparseArray *)&v77.pNode[1].16,
+      (Scaleform::GFx::AS3::Impl::SparseArray *)&pV[1].16,
       SLODWORD(result.pNode));
     for ( i = 0; i < LODWORD(result.pNode); ++i )
     {
-      v63 = v60[i];
-      v71.Flags = 4;
-      v71.Bonus.pWeakProxy = 0i64;
-      v71.value.VNumber = (double)v63;
-      Scaleform::GFx::AS3::Impl::SparseArray::Set((Scaleform::GFx::AS3::Impl::SparseArray *)&v61[1].16, i, &v71);
-      if ( (v71.Flags & 0x1F) > 9 )
+      v64 = (double)(int)TabStops[i];
+      v72.Flags = 4;
+      v72.Bonus.pWeakProxy = 0i64;
+      v72.value.VNumber = v64;
+      Scaleform::GFx::AS3::Impl::SparseArray::Set((Scaleform::GFx::AS3::Impl::SparseArray *)&pV[1].16, i, &v72);
+      if ( (v72.Flags & 0x1F) > 9 )
       {
-        if ( (v71.Flags >> 9) & 1 )
-          Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v71);
+        if ( (v72.Flags & 0x200) != 0 )
+          Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v72);
         else
-          Scaleform::GFx::AS3::Value::ReleaseInternal(&v71);
+          Scaleform::GFx::AS3::Value::ReleaseInternal(&v72);
       }
     }
-    if ( v61 != (Scaleform::GFx::ASStringNode *)v5->mTabStops.pObject )
+    if ( pV != (Scaleform::GFx::ASStringNode *)this->mTabStops.pObject )
     {
-      if ( v61 )
-        v61->Size = (v61->Size + 1) & 0x8FBFFFFF;
-      v64 = v5->mTabStops.pObject;
-      if ( v64 )
+      if ( pV )
+        pV->Size = (pV->Size + 1) & 0x8FBFFFFF;
+      pObject = this->mTabStops.pObject;
+      if ( pObject )
       {
-        if ( (unsigned __int8)v64 & 1 )
+        if ( ((unsigned __int8)pObject & 1) != 0 )
         {
-          v5->mTabStops.pObject = (Scaleform::GFx::AS3::Instances::fl::Array *)((char *)v64 - 1);
+          this->mTabStops.pObject = (Scaleform::GFx::AS3::Instances::fl::Array *)((char *)pObject - 1);
         }
         else
         {
-          v65 = v64->RefCount;
-          if ( v65 & 0x3FFFFF )
+          RefCount = pObject->RefCount;
+          if ( (RefCount & 0x3FFFFF) != 0 )
           {
-            v64->RefCount = v65 - 1;
-            Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v64->vfptr);
+            pObject->RefCount = RefCount - 1;
+            Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(pObject);
           }
         }
       }
-      v5->mTabStops.pObject = (Scaleform::GFx::AS3::Instances::fl::Array *)v61;
+      this->mTabStops.pObject = (Scaleform::GFx::AS3::Instances::fl::Array *)pV;
     }
-    if ( v61 )
+    if ( pV )
     {
-      if ( (unsigned __int8)v61 & 1 )
+      if ( ((unsigned __int8)pV & 1) != 0 )
       {
-        v77.pNode = (Scaleform::GFx::ASStringNode *)((char *)v61 - 1);
+        v78.pNode = (Scaleform::GFx::ASStringNode *)((char *)pV - 1);
       }
       else
       {
-        v66 = v61->Size;
-        if ( v66 & 0x3FFFFF )
+        Size = pV->Size;
+        if ( (Size & 0x3FFFFF) != 0 )
         {
-          v61->Size = v66 - 1;
-          Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)v61);
+          pV->Size = Size - 1;
+          Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)pV);
         }
       }
     }
   }
   else
   {
-    v67 = v5->mTabStops.pObject;
-    if ( v67 )
+    v68 = this->mTabStops.pObject;
+    if ( v68 )
     {
-      if ( (unsigned __int8)v67 & 1 )
+      if ( ((unsigned __int8)v68 & 1) != 0 )
       {
-        v5->mTabStops.pObject = (Scaleform::GFx::AS3::Instances::fl::Array *)((char *)v67 - 1);
+        this->mTabStops.pObject = (Scaleform::GFx::AS3::Instances::fl::Array *)((char *)v68 - 1);
       }
       else
       {
-        v68 = v67->RefCount;
-        if ( v68 & 0x3FFFFF )
+        v69 = v68->RefCount;
+        if ( (v69 & 0x3FFFFF) != 0 )
         {
-          v67->RefCount = v68 - 1;
-          Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v67->vfptr);
+          v68->RefCount = v69 - 1;
+          Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(v68);
         }
       }
-      v5->mTabStops.pObject = 0i64;
+      this->mTabStops.pObject = 0i64;
     }
+  }
+  if ( (v74.Flags & 0x1F) > 9 )
+  {
+    if ( (v74.Flags & 0x200) != 0 )
+      Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v74);
+    else
+      Scaleform::GFx::AS3::Value::ReleaseInternal(&v74);
   }
   if ( (v73.Flags & 0x1F) > 9 )
   {
-    if ( (v73.Flags >> 9) & 1 )
+    if ( (v73.Flags & 0x200) != 0 )
       Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v73);
     else
       Scaleform::GFx::AS3::Value::ReleaseInternal(&v73);
   }
-  if ( (v72.Flags & 0x1F) > 9 )
-  {
-    if ( (v72.Flags >> 9) & 1 )
-      Scaleform::GFx::AS3::Value::ReleaseWeakRef(&v72);
-    else
-      Scaleform::GFx::AS3::Value::ReleaseInternal(&v72);
-  }
-  v69 = v.pNode;
-  v11 = v.pNode->RefCount == 1;
-  --v69->RefCount;
-  if ( v11 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v69);
+  v70 = v.pNode;
+  v12 = v.pNode->RefCount-- == 1;
+  if ( v12 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(v70);
 }
 
 // File Line: 482
 // RVA: 0x8DEA00
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::GetTextFormat(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, Scaleform::Render::Text::ParagraphFormat *parafmt, Scaleform::Render::Text::TextFormat *fmt)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::GetTextFormat(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        Scaleform::Render::Text::ParagraphFormat *parafmt,
+        Scaleform::Render::Text::TextFormat *fmt)
 {
-  Scaleform::Render::Text::TextFormat *v3; // rdi
-  Scaleform::Render::Text::ParagraphFormat *v4; // rbx
-  Scaleform::GFx::AS3::Instances::fl_text::TextFormat *v5; // r14
-  Scaleform::GFx::AS3::VM *v6; // r9
-  Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *v7; // r12
+  Scaleform::GFx::AS3::VM *pVM; // r9
+  Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *StringManagerRef; // r12
   unsigned __int64 v8; // rsi
   unsigned int v9; // ecx
-  const char *v10; // rdx
+  const char *pData; // rdx
   __int64 v11; // rcx
   char v12; // al
   __int64 v13; // rcx
@@ -1957,121 +2064,117 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::GetTextForm
   char v16; // al
   __int64 v17; // rcx
   char v18; // al
-  Scaleform::GFx::ASStringNode *v19; // rcx
+  Scaleform::GFx::ASStringNode *pNode; // rcx
   bool v20; // zf
-  int v21; // edx
-  signed __int16 v22; // ax
-  int v23; // edx
+  unsigned int v21; // edx
+  unsigned __int16 v22; // ax
+  unsigned int v23; // edx
   char v24; // al
-  int v25; // edx
+  unsigned int v25; // edx
   char v26; // al
-  int v27; // edx
+  unsigned int v27; // edx
   char v28; // al
-  int v29; // edx
-  int v30; // edx
-  int v31; // ecx
+  unsigned int v29; // edx
+  unsigned int v30; // edx
+  unsigned int v31; // ecx
   Scaleform::GFx::ASStringNode *v32; // rcx
-  signed __int16 v33; // r15
-  int v34; // edx
-  signed __int16 v35; // ax
-  int v36; // edx
-  int v37; // edx
-  signed __int16 v38; // ax
-  int v39; // edx
-  signed __int16 v40; // ax
-  int v41; // edx
-  signed int v42; // eax
-  int v43; // edx
+  __int16 v33; // r15
+  unsigned int v34; // edx
+  __int16 v35; // ax
+  unsigned int v36; // edx
+  unsigned int v37; // edx
+  unsigned __int16 v38; // ax
+  unsigned int v39; // edx
+  unsigned __int16 v40; // ax
+  unsigned int v41; // edx
+  int v42; // eax
+  unsigned int v43; // edx
   Scaleform::GFx::ASStringNode *v44; // rcx
-  int v45; // edx
+  unsigned int v45; // edx
   Scaleform::GFx::ASStringNode *v46; // xmm0_8
   double v47; // xmm1_8
-  int v48; // edx
+  unsigned int v48; // edx
   char v49; // al
-  Scaleform::GFx::AS3::Instances::fl::Array *v50; // rdi
-  unsigned __int64 v51; // rdi
+  Scaleform::GFx::AS3::Instances::fl::Array *pObject; // rdi
+  unsigned __int64 Length; // rdi
   Scaleform::GFx::AS3::Value *v52; // rax
-  Scaleform::GFx::AS3::CheckResult v53; // [rsp+70h] [rbp+40h]
-  Scaleform::GFx::ASString result; // [rsp+88h] [rbp+58h]
+  Scaleform::GFx::AS3::CheckResult v53; // [rsp+70h] [rbp+40h] BYREF
+  Scaleform::GFx::ASString result; // [rsp+88h] [rbp+58h] BYREF
 
-  v3 = fmt;
-  v4 = parafmt;
-  v5 = this;
-  v6 = this->pTraits.pObject->pVM;
-  v7 = (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v6->StringManagerRef->Builtins;
+  pVM = this->pTraits.pObject->pVM;
+  StringManagerRef = pVM->StringManagerRef;
   v8 = 0i64;
   v9 = this->mAlign.Flags & 0x1F;
-  if ( v9 && (v9 - 12 > 3 && v9 != 10 || *(_QWORD *)&v5->mAlign.value.VNumber) )
+  if ( v9 && (v9 - 12 > 3 && v9 != 10 || this->mAlign.value.VS._1.VStr) )
   {
-    Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(
-      (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v6->StringManagerRef->Builtins,
+    Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(
+      pVM->StringManagerRef,
       &result);
-    Scaleform::GFx::AS3::Value::Convert2String(&v5->mAlign, &v53, &result);
-    v10 = result.pNode->pData;
+    Scaleform::GFx::AS3::Value::Convert2String(&this->mAlign, &v53, &result);
+    pData = result.pNode->pData;
     v11 = 0i64;
     while ( 1 )
     {
-      v12 = v10[v11++];
+      v12 = pData[v11++];
       if ( v12 != aLeft_0[v11 - 1] )
         break;
       if ( v11 == 5 )
       {
-        v4->PresentMask &= 0xF9FFu;
-        v4->PresentMask |= 1u;
+        parafmt->PresentMask &= 0xF9FFu;
+        parafmt->PresentMask |= 1u;
         goto LABEL_22;
       }
     }
     v13 = 0i64;
     while ( 1 )
     {
-      v14 = v10[v13++];
+      v14 = pData[v13++];
       if ( v14 != aRight_0[v13 - 1] )
         break;
       if ( v13 == 6 )
       {
-        v4->PresentMask &= 0xFBFFu;
-        v4->PresentMask |= 0x201u;
+        parafmt->PresentMask &= ~0x400u;
+        parafmt->PresentMask |= 0x201u;
         goto LABEL_22;
       }
     }
     v15 = 0i64;
     while ( 1 )
     {
-      v16 = v10[v15++];
+      v16 = pData[v15++];
       if ( v16 != aCenter_0[v15 - 1] )
         break;
       if ( v15 == 7 )
       {
-        v4->PresentMask |= 0x601u;
+        parafmt->PresentMask |= 0x601u;
         goto LABEL_22;
       }
     }
     v17 = 0i64;
     while ( 1 )
     {
-      v18 = v10[v17++];
+      v18 = pData[v17++];
       if ( v18 != aJustify[v17 - 1] )
         break;
       if ( v17 == 8 )
       {
-        v4->PresentMask &= 0xFDFFu;
-        v4->PresentMask |= 0x401u;
+        parafmt->PresentMask &= ~0x200u;
+        parafmt->PresentMask |= 0x401u;
         goto LABEL_22;
       }
     }
-    v4->PresentMask &= 0xF9FEu;
+    parafmt->PresentMask &= 0xF9FEu;
 LABEL_22:
-    v19 = result.pNode;
-    v20 = result.pNode->RefCount == 1;
-    --v19->RefCount;
+    pNode = result.pNode;
+    v20 = result.pNode->RefCount-- == 1;
     if ( v20 )
-      Scaleform::GFx::ASStringNode::ReleaseNode(v19);
+      Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
   }
-  v21 = v5->mBlockIndent.Flags & 0x1F;
-  if ( v21 && ((unsigned int)(v21 - 12) > 3 && v21 != 10 || *(_QWORD *)&v5->mBlockIndent.value.VNumber) )
+  v21 = this->mBlockIndent.Flags & 0x1F;
+  if ( v21 && (v21 - 12 > 3 && v21 != 10 || this->mBlockIndent.value.VS._1.VStr) )
   {
-    Scaleform::GFx::AS3::Value::Convert2Int32(&v5->mBlockIndent, &v53, (int *)&result, (__int64)v4, (__int64)v3, 0i64);
-    v22 = (signed __int16)result.pNode;
+    Scaleform::GFx::AS3::Value::Convert2Int32(&this->mBlockIndent, &v53, (int *)&result);
+    v22 = (unsigned __int16)result.pNode;
     if ( SLODWORD(result.pNode) >= 0 )
     {
       if ( SLODWORD(result.pNode) > 720 )
@@ -2081,95 +2184,96 @@ LABEL_22:
     {
       v22 = 0;
     }
-    v4->BlockIndent = v22;
-    v4->PresentMask |= 2u;
+    parafmt->BlockIndent = v22;
+    parafmt->PresentMask |= 2u;
   }
   else
   {
-    v4->BlockIndent = 0;
-    v4->PresentMask &= 0xFFFDu;
+    parafmt->BlockIndent = 0;
+    parafmt->PresentMask &= ~2u;
   }
-  v23 = v5->mBold.Flags & 0x1F;
-  if ( v23 && ((unsigned int)(v23 - 12) > 3 && v23 != 10 || *(_QWORD *)&v5->mBold.value.VNumber) )
+  v23 = this->mBold.Flags & 0x1F;
+  if ( v23 && (v23 - 12 > 3 && v23 != 10 || this->mBold.value.VS._1.VStr) )
   {
-    v24 = Scaleform::GFx::AS3::Value::Convert2Boolean(&v5->mBold);
-    Scaleform::Render::Text::TextFormat::SetBold(v3, v24);
-  }
-  else
-  {
-    v3->FormatFlags &= 0xFEu;
-    v3->PresentMask &= 0xFFEFu;
-  }
-  v25 = v5->mItalic.Flags & 0x1F;
-  if ( v25 && ((unsigned int)(v25 - 12) > 3 && v25 != 10 || *(_QWORD *)&v5->mItalic.value.VNumber) )
-  {
-    v26 = Scaleform::GFx::AS3::Value::Convert2Boolean(&v5->mItalic);
-    Scaleform::Render::Text::TextFormat::SetItalic(v3, v26);
+    v24 = Scaleform::GFx::AS3::Value::Convert2Boolean(&this->mBold);
+    Scaleform::Render::Text::TextFormat::SetBold(fmt, v24);
   }
   else
   {
-    v3->FormatFlags &= 0xFDu;
-    v3->PresentMask &= 0xFFDFu;
+    fmt->FormatFlags &= ~1u;
+    fmt->PresentMask &= ~0x10u;
   }
-  v27 = v5->mUnderline.Flags & 0x1F;
-  if ( v27 && ((unsigned int)(v27 - 12) > 3 && v27 != 10 || *(_QWORD *)&v5->mUnderline.value.VNumber) )
+  v25 = this->mItalic.Flags & 0x1F;
+  if ( v25 && (v25 - 12 > 3 && v25 != 10 || this->mItalic.value.VS._1.VStr) )
   {
-    v28 = Scaleform::GFx::AS3::Value::Convert2Boolean(&v5->mUnderline);
-    Scaleform::Render::Text::TextFormat::SetUnderline(v3, v28);
+    v26 = Scaleform::GFx::AS3::Value::Convert2Boolean(&this->mItalic);
+    Scaleform::Render::Text::TextFormat::SetItalic(fmt, v26);
   }
   else
   {
-    v3->FormatFlags &= 0xFBu;
-    v3->PresentMask &= 0xFFBFu;
+    fmt->FormatFlags &= ~2u;
+    fmt->PresentMask &= ~0x20u;
   }
-  v29 = v5->mBullet.Flags & 0x1F;
-  if ( v29 && ((unsigned int)(v29 - 12) > 3 && v29 != 10 || *(_QWORD *)&v5->mBullet.value.VNumber) )
+  v27 = this->mUnderline.Flags & 0x1F;
+  if ( v27 && (v27 - 12 > 3 && v27 != 10 || this->mUnderline.value.VS._1.VStr) )
   {
-    if ( (unsigned __int8)Scaleform::GFx::AS3::Value::Convert2Boolean(&v5->mBullet) )
-      v4->PresentMask |= 0x8000u;
+    v28 = Scaleform::GFx::AS3::Value::Convert2Boolean(&this->mUnderline);
+    Scaleform::Render::Text::TextFormat::SetUnderline(fmt, v28);
+  }
+  else
+  {
+    fmt->FormatFlags &= ~4u;
+    fmt->PresentMask &= ~0x40u;
+  }
+  v29 = this->mBullet.Flags & 0x1F;
+  if ( v29 && (v29 - 12 > 3 && v29 != 10 || this->mBullet.value.VS._1.VStr) )
+  {
+    if ( (unsigned __int8)Scaleform::GFx::AS3::Value::Convert2Boolean(&this->mBullet) )
+      parafmt->PresentMask |= 0x8000u;
     else
-      v4->PresentMask &= 0x7FFFu;
-    v4->PresentMask |= 0x80u;
+      parafmt->PresentMask &= ~0x8000u;
+    parafmt->PresentMask |= 0x80u;
   }
   else
   {
-    v4->PresentMask &= 0x7F7Fu;
+    parafmt->PresentMask &= 0x7F7Fu;
   }
-  v30 = v5->mColor.Flags & 0x1F;
-  if ( v30 && ((unsigned int)(v30 - 12) > 3 && v30 != 10 || *(_QWORD *)&v5->mColor.value.VNumber) )
+  v30 = this->mColor.Flags & 0x1F;
+  if ( v30 && (v30 - 12 > 3 && v30 != 10 || this->mColor.value.VS._1.VStr) )
   {
-    Scaleform::GFx::AS3::Value::Convert2UInt32(&v5->mColor, &v53, (unsigned int *)&result);
-    v3->ColorV &= 0xFF000000;
-    v3->ColorV |= (_QWORD)result.pNode & 0xFFFFFF;
-    v3->PresentMask |= 1u;
+    Scaleform::GFx::AS3::Value::Convert2UInt32(&this->mColor, &v53, (unsigned int *)&result);
+    fmt->ColorV &= 0xFF000000;
+    fmt->ColorV |= (__int64)result.pNode & 0xFFFFFF;
+    fmt->PresentMask |= 1u;
   }
   else
   {
-    v3->ColorV = -16777216;
-    v3->PresentMask &= 0xFFFEu;
+    fmt->ColorV = -16777216;
+    fmt->PresentMask &= ~1u;
   }
-  v31 = v5->mFont.Flags & 0x1F;
-  if ( v31 && ((unsigned int)(v31 - 12) > 3 && v31 != 10 || *(_QWORD *)&v5->mFont.value.VNumber) )
+  v31 = this->mFont.Flags & 0x1F;
+  if ( v31 && (v31 - 12 > 3 && v31 != 10 || this->mFont.value.VS._1.VStr) )
   {
-    Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(v7, &result);
-    Scaleform::GFx::AS3::Value::Convert2String(&v5->mFont, &v53, &result);
-    Scaleform::Render::Text::TextFormat::SetFontList(v3, result.pNode->pData, 0xFFFFFFFFFFFFFFFFui64);
+    Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(
+      StringManagerRef,
+      &result);
+    Scaleform::GFx::AS3::Value::Convert2String(&this->mFont, &v53, &result);
+    Scaleform::Render::Text::TextFormat::SetFontList(fmt, result.pNode->pData, 0xFFFFFFFFFFFFFFFFui64);
     v32 = result.pNode;
-    v20 = result.pNode->RefCount == 1;
-    --v32->RefCount;
+    v20 = result.pNode->RefCount-- == 1;
     if ( v20 )
       Scaleform::GFx::ASStringNode::ReleaseNode(v32);
   }
   else
   {
-    v3->PresentMask &= 0xEFFBu;
+    fmt->PresentMask &= 0xEFFBu;
   }
   v33 = -720;
-  v34 = v5->mIndent.Flags & 0x1F;
-  if ( v34 && ((unsigned int)(v34 - 12) > 3 && v34 != 10 || *(_QWORD *)&v5->mIndent.value.VNumber) )
+  v34 = this->mIndent.Flags & 0x1F;
+  if ( v34 && (v34 - 12 > 3 && v34 != 10 || this->mIndent.value.VS._1.VStr) )
   {
-    Scaleform::GFx::AS3::Value::Convert2Int32(&v5->mIndent, &v53, (int *)&result, (__int64)v4, (__int64)v3, 0i64);
-    v35 = (signed __int16)result.pNode;
+    Scaleform::GFx::AS3::Value::Convert2Int32(&this->mIndent, &v53, (int *)&result);
+    v35 = (__int16)result.pNode;
     if ( SLODWORD(result.pNode) >= -720 )
     {
       if ( SLODWORD(result.pNode) > 720 )
@@ -2179,37 +2283,37 @@ LABEL_22:
     {
       v35 = -720;
     }
-    v4->Indent = v35;
-    v4->PresentMask |= 4u;
+    parafmt->Indent = v35;
+    parafmt->PresentMask |= 4u;
   }
   else
   {
-    v4->Indent = 0;
-    v4->PresentMask &= 0xFFFBu;
+    parafmt->Indent = 0;
+    parafmt->PresentMask &= ~4u;
   }
-  v36 = v5->mLeading.Flags & 0x1F;
-  if ( v36 && ((unsigned int)(v36 - 12) > 3 && v36 != 10 || *(_QWORD *)&v5->mLeading.value.VNumber) )
+  v36 = this->mLeading.Flags & 0x1F;
+  if ( v36 && (v36 - 12 > 3 && v36 != 10 || this->mLeading.value.VS._1.VStr) )
   {
-    Scaleform::GFx::AS3::Value::Convert2Int32(&v5->mLeading, &v53, (int *)&result, (__int64)v4, (__int64)v3, 0i64);
+    Scaleform::GFx::AS3::Value::Convert2Int32(&this->mLeading, &v53, (int *)&result);
     if ( SLODWORD(result.pNode) >= -720 )
     {
-      v33 = (signed __int16)result.pNode;
+      v33 = (__int16)result.pNode;
       if ( SLODWORD(result.pNode) > 720 )
         v33 = 720;
     }
-    v4->Leading = v33;
-    v4->PresentMask |= 8u;
+    parafmt->Leading = v33;
+    parafmt->PresentMask |= 8u;
   }
   else
   {
-    v4->Leading = 0;
-    v4->PresentMask &= 0xFFF7u;
+    parafmt->Leading = 0;
+    parafmt->PresentMask &= ~8u;
   }
-  v37 = v5->mLeftMargin.Flags & 0x1F;
-  if ( v37 && ((unsigned int)(v37 - 12) > 3 && v37 != 10 || *(_QWORD *)&v5->mLeftMargin.value.VNumber) )
+  v37 = this->mLeftMargin.Flags & 0x1F;
+  if ( v37 && (v37 - 12 > 3 && v37 != 10 || this->mLeftMargin.value.VS._1.VStr) )
   {
-    Scaleform::GFx::AS3::Value::Convert2Int32(&v5->mLeftMargin, &v53, (int *)&result, (__int64)v4, (__int64)v3, 0i64);
-    v38 = (signed __int16)result.pNode;
+    Scaleform::GFx::AS3::Value::Convert2Int32(&this->mLeftMargin, &v53, (int *)&result);
+    v38 = (unsigned __int16)result.pNode;
     if ( SLODWORD(result.pNode) >= 0 )
     {
       if ( SLODWORD(result.pNode) > 720 )
@@ -2219,19 +2323,19 @@ LABEL_22:
     {
       v38 = 0;
     }
-    v4->LeftMargin = v38;
-    v4->PresentMask |= 0x10u;
+    parafmt->LeftMargin = v38;
+    parafmt->PresentMask |= 0x10u;
   }
   else
   {
-    v4->LeftMargin = 0;
-    v4->PresentMask &= 0xFFEFu;
+    parafmt->LeftMargin = 0;
+    parafmt->PresentMask &= ~0x10u;
   }
-  v39 = v5->mRightMargin.Flags & 0x1F;
-  if ( v39 && ((unsigned int)(v39 - 12) > 3 && v39 != 10 || *(_QWORD *)&v5->mRightMargin.value.VNumber) )
+  v39 = this->mRightMargin.Flags & 0x1F;
+  if ( v39 && (v39 - 12 > 3 && v39 != 10 || this->mRightMargin.value.VS._1.VStr) )
   {
-    Scaleform::GFx::AS3::Value::Convert2Int32(&v5->mRightMargin, &v53, (int *)&result, (__int64)v4, (__int64)v3, 0i64);
-    v40 = (signed __int16)result.pNode;
+    Scaleform::GFx::AS3::Value::Convert2Int32(&this->mRightMargin, &v53, (int *)&result);
+    v40 = (unsigned __int16)result.pNode;
     if ( SLODWORD(result.pNode) >= 0 )
     {
       if ( SLODWORD(result.pNode) > 720 )
@@ -2241,200 +2345,191 @@ LABEL_22:
     {
       v40 = 0;
     }
-    v4->RightMargin = v40;
-    v4->PresentMask |= 0x20u;
+    parafmt->RightMargin = v40;
+    parafmt->PresentMask |= 0x20u;
   }
   else
   {
-    v4->RightMargin = 0;
-    v4->PresentMask &= 0xFFDFu;
+    parafmt->RightMargin = 0;
+    parafmt->PresentMask &= ~0x20u;
   }
-  v41 = v5->mSize.Flags & 0x1F;
-  if ( v41 && ((unsigned int)(v41 - 12) > 3 && v41 != 10 || *(_QWORD *)&v5->mSize.value.VNumber) )
+  v41 = this->mSize.Flags & 0x1F;
+  if ( v41 && (v41 - 12 > 3 && v41 != 10 || this->mSize.value.VS._1.VStr) )
   {
-    Scaleform::GFx::AS3::Value::Convert2Int32(&v5->mSize, &v53, (int *)&result, (__int64)v4, (__int64)v3, 0i64);
+    Scaleform::GFx::AS3::Value::Convert2Int32(&this->mSize, &v53, (int *)&result);
     if ( SLODWORD(result.pNode) >= 0 )
     {
       if ( SLODWORD(result.pNode) >= 128 )
       {
-        v3->FontSize = 2540;
-        v3->PresentMask |= 8u;
+        fmt->FontSize = 2540;
+        fmt->PresentMask |= 8u;
       }
       else
       {
         if ( (float)SLODWORD(result.pNode) >= 3276.8 )
           LOWORD(v42) = -1;
         else
-          v42 = (signed int)(float)((float)SLODWORD(result.pNode) * 20.0);
-        v3->FontSize = v42;
-        v3->PresentMask |= 8u;
+          v42 = (int)(float)((float)SLODWORD(result.pNode) * 20.0);
+        fmt->FontSize = v42;
+        fmt->PresentMask |= 8u;
       }
     }
   }
   else
   {
-    v3->FontSize = 0;
-    v3->PresentMask &= 0xFFF7u;
+    fmt->FontSize = 0;
+    fmt->PresentMask &= ~8u;
   }
-  v43 = v5->mUrl.Flags & 0x1F;
-  if ( v43 && ((unsigned int)(v43 - 12) > 3 && v43 != 10 || *(_QWORD *)&v5->mUrl.value.VNumber) )
+  v43 = this->mUrl.Flags & 0x1F;
+  if ( v43 && (v43 - 12 > 3 && v43 != 10 || this->mUrl.value.VS._1.VStr) )
   {
-    Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(v7, &result);
-    Scaleform::GFx::AS3::Value::Convert2String(&v5->mUrl, &v53, &result);
-    Scaleform::Render::Text::TextFormat::SetUrl(v3, result.pNode->pData, 0xFFFFFFFFFFFFFFFFui64);
+    Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(
+      StringManagerRef,
+      &result);
+    Scaleform::GFx::AS3::Value::Convert2String(&this->mUrl, &v53, &result);
+    Scaleform::Render::Text::TextFormat::SetUrl(fmt, result.pNode->pData, 0xFFFFFFFFFFFFFFFFui64);
     v44 = result.pNode;
-    v20 = result.pNode->RefCount == 1;
-    --v44->RefCount;
+    v20 = result.pNode->RefCount-- == 1;
     if ( v20 )
       Scaleform::GFx::ASStringNode::ReleaseNode(v44);
   }
   else
   {
-    Scaleform::String::Clear((Scaleform::String *)&v3->Url.0);
-    v3->PresentMask &= 0xFEFFu;
+    Scaleform::String::Clear(&fmt->Url);
+    fmt->PresentMask &= ~0x100u;
   }
-  v45 = v5->mLetterSpacing.Flags & 0x1F;
-  if ( v45 && ((unsigned int)(v45 - 12) > 3 && v45 != 10 || *(_QWORD *)&v5->mLetterSpacing.value.VNumber) )
+  v45 = this->mLetterSpacing.Flags & 0x1F;
+  if ( v45 && (v45 - 12 > 3 && v45 != 10 || this->mLetterSpacing.value.VS._1.VStr) )
   {
-    Scaleform::GFx::AS3::Value::Convert2Number(&v5->mLetterSpacing, &v53, (long double *)&result);
+    Scaleform::GFx::AS3::Value::Convert2Number(&this->mLetterSpacing, &v53, (long double *)&result);
     v46 = result.pNode;
     v47 = DOUBLE_N720_0;
     if ( *(double *)&result.pNode < -720.0 || (v47 = DOUBLE_720_0, *(double *)&result.pNode > 720.0) )
       *(double *)&v46 = v47;
-    v3->PresentMask |= 2u;
-    v3->LetterSpacing = (float)*(double *)&v46 * 20.0;
+    fmt->PresentMask |= 2u;
+    fmt->LetterSpacing = (float)*(double *)&v46 * 20.0;
   }
   else
   {
-    v3->LetterSpacing = 0.0;
-    v3->PresentMask &= 0xFFFDu;
+    fmt->LetterSpacing = 0.0;
+    fmt->PresentMask &= ~2u;
   }
-  v48 = v5->mKerning.Flags & 0x1F;
-  if ( v48 && ((unsigned int)(v48 - 12) > 3 && v48 != 10 || *(_QWORD *)&v5->mKerning.value.VNumber) )
+  v48 = this->mKerning.Flags & 0x1F;
+  if ( v48 && (v48 - 12 > 3 && v48 != 10 || this->mKerning.value.VS._1.VStr) )
   {
-    v49 = Scaleform::GFx::AS3::Value::Convert2Boolean(&v5->mKerning);
-    Scaleform::Render::Text::TextFormat::SetKerning(v3, v49);
+    v49 = Scaleform::GFx::AS3::Value::Convert2Boolean(&this->mKerning);
+    Scaleform::Render::Text::TextFormat::SetKerning(fmt, v49);
   }
   else
   {
-    v3->FormatFlags &= 0xF7u;
-    v3->PresentMask &= 0xFF7Fu;
+    fmt->FormatFlags &= ~8u;
+    fmt->PresentMask &= ~0x80u;
   }
-  v50 = v5->mTabStops.pObject;
-  if ( v50 )
+  pObject = this->mTabStops.pObject;
+  if ( pObject )
   {
-    v51 = v50->SA.Length;
-    Scaleform::Render::Text::ParagraphFormat::AllocTabStops(v4, v51);
-    v4->PresentMask |= 0x40u;
-    if ( v51 )
+    Length = pObject->SA.Length;
+    Scaleform::Render::Text::ParagraphFormat::AllocTabStops(parafmt, Length);
+    parafmt->PresentMask |= 0x40u;
+    if ( Length )
     {
       do
       {
-        v52 = Scaleform::GFx::AS3::Impl::SparseArray::At(&v5->mTabStops.pObject->SA, v8);
+        v52 = Scaleform::GFx::AS3::Impl::SparseArray::At(&this->mTabStops.pObject->SA, v8);
         Scaleform::GFx::AS3::Value::Convert2Number(v52, &v53, (long double *)&result);
-        Scaleform::Render::Text::ParagraphFormat::SetTabStopsElement(v4, v8++, (signed int)*(double *)&result.pNode);
+        Scaleform::Render::Text::ParagraphFormat::SetTabStopsElement(parafmt, v8++, (int)*(double *)&result.pNode);
       }
-      while ( v8 < v51 );
+      while ( v8 < Length );
     }
   }
   else
   {
-    Scaleform::Render::Text::ParagraphFormat::FreeTabStops(v4);
-    v4->PresentMask &= 0xFFBFu;
+    Scaleform::Render::Text::ParagraphFormat::FreeTabStops(parafmt);
+    parafmt->PresentMask &= ~0x40u;
   }
-}->mTabStops.pObject->SA, v8);
-        Scaleform::GFx::AS3::Value::Convert2Number(v52, &v53, (long double *)&result);
-        Scaleform::Render::Text::ParagraphFormat::SetTabStopsElement(v4, v8++, (signed int)*(double *)&result.pNode);
-      }
+}
 
 // File Line: 675
 // RVA: 0x8AEA90
-void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::AS3Constructor(Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this, unsigned int argc, Scaleform::GFx::AS3::Value *argv)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_text::TextFormat::AS3Constructor(
+        Scaleform::GFx::AS3::Instances::fl_text::TextFormat *this,
+        unsigned int argc,
+        Scaleform::GFx::AS3::Value *argv)
 {
-  Scaleform::GFx::AS3::Value *v3; // rdi
-  unsigned int v4; // ebx
-  Scaleform::GFx::AS3::Instances::fl_text::TextFormat *v5; // rsi
-
-  v3 = argv;
-  v4 = argc;
-  v5 = this;
   _((AMD_HD3D *)this);
-  if ( v4 >= 1 )
-    Scaleform::GFx::AS3::Value::Assign(&v5->mFont, v3);
-  if ( v4 >= 2 )
-    Scaleform::GFx::AS3::Value::Assign(&v5->mSize, v3 + 1);
-  if ( v4 >= 3 )
-    Scaleform::GFx::AS3::Value::Assign(&v5->mColor, v3 + 2);
-  if ( v4 >= 4 )
-    Scaleform::GFx::AS3::Value::Assign(&v5->mBold, v3 + 3);
-  if ( v4 >= 5 )
-    Scaleform::GFx::AS3::Value::Assign(&v5->mItalic, v3 + 4);
-  if ( v4 >= 6 )
-    Scaleform::GFx::AS3::Value::Assign(&v5->mUnderline, v3 + 5);
-  if ( v4 >= 7 )
-    Scaleform::GFx::AS3::Value::Assign(&v5->mUrl, v3 + 6);
-  if ( v4 >= 8 )
-    Scaleform::GFx::AS3::Value::Assign(&v5->mTarget, v3 + 7);
-  if ( v4 >= 9 )
-    Scaleform::GFx::AS3::Value::Assign(&v5->mAlign, v3 + 8);
-  if ( v4 >= 0xA )
-    Scaleform::GFx::AS3::Value::Assign(&v5->mLeftMargin, v3 + 9);
-  if ( v4 >= 0xB )
-    Scaleform::GFx::AS3::Value::Assign(&v5->mRightMargin, v3 + 10);
-  if ( v4 >= 0xC )
-    Scaleform::GFx::AS3::Value::Assign(&v5->mIndent, v3 + 11);
-  if ( v4 >= 0xD )
-    Scaleform::GFx::AS3::Value::Assign(&v5->mLeading, v3 + 12);
+  if ( argc )
+    Scaleform::GFx::AS3::Value::Assign(&this->mFont, argv);
+  if ( argc >= 2 )
+    Scaleform::GFx::AS3::Value::Assign(&this->mSize, argv + 1);
+  if ( argc >= 3 )
+    Scaleform::GFx::AS3::Value::Assign(&this->mColor, argv + 2);
+  if ( argc >= 4 )
+    Scaleform::GFx::AS3::Value::Assign(&this->mBold, argv + 3);
+  if ( argc >= 5 )
+    Scaleform::GFx::AS3::Value::Assign(&this->mItalic, argv + 4);
+  if ( argc >= 6 )
+    Scaleform::GFx::AS3::Value::Assign(&this->mUnderline, argv + 5);
+  if ( argc >= 7 )
+    Scaleform::GFx::AS3::Value::Assign(&this->mUrl, argv + 6);
+  if ( argc >= 8 )
+    Scaleform::GFx::AS3::Value::Assign(&this->mTarget, argv + 7);
+  if ( argc >= 9 )
+    Scaleform::GFx::AS3::Value::Assign(&this->mAlign, argv + 8);
+  if ( argc >= 0xA )
+    Scaleform::GFx::AS3::Value::Assign(&this->mLeftMargin, argv + 9);
+  if ( argc >= 0xB )
+    Scaleform::GFx::AS3::Value::Assign(&this->mRightMargin, argv + 10);
+  if ( argc >= 0xC )
+    Scaleform::GFx::AS3::Value::Assign(&this->mIndent, argv + 11);
+  if ( argc >= 0xD )
+    Scaleform::GFx::AS3::Value::Assign(&this->mLeading, argv + 12);
 }
 
 // File Line: 800
 // RVA: 0x8EB030
-void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl_text::TextFormat::MakeObject(Scaleform::GFx::AS3::InstanceTraits::fl_text::TextFormat *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::InstanceTraits::Traits *t)
+void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl_text::TextFormat::MakeObject(
+        Scaleform::GFx::AS3::InstanceTraits::fl_text::TextFormat *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::InstanceTraits::fl_text::TextFormat *t)
 {
-  Scaleform::GFx::AS3::Value *v3; // rbx
-  Scaleform::GFx::AS3::Object **v4; // rax
-  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_text::TextFormat> resulta; // [rsp+48h] [rbp+20h]
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_text::TextFormat> *Instance; // rax
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_text::TextFormat> resulta; // [rsp+48h] [rbp+20h] BYREF
 
-  v3 = result;
-  v4 = (Scaleform::GFx::AS3::Object **)Scaleform::GFx::AS3::InstanceTraits::fl_text::TextFormat::MakeInstance(
-                                         &resulta,
-                                         (Scaleform::GFx::AS3::InstanceTraits::fl_text::TextFormat *)t);
-  Scaleform::GFx::AS3::Value::Pick(v3, *v4);
+  Instance = Scaleform::GFx::AS3::InstanceTraits::fl_text::TextFormat::MakeInstance(&resulta, t);
+  Scaleform::GFx::AS3::Value::Pick(result, Instance->pV);
 }
 
 // File Line: 822
 // RVA: 0x877B20
-Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl_text::TextFormat::MakeClassTraits(Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result, Scaleform::GFx::AS3::VM *vm)
+Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl_text::TextFormat::MakeClassTraits(
+        Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result,
+        Scaleform::GFx::AS3::VM *vm)
 {
-  Scaleform::GFx::AS3::VM *v2; // rbp
-  Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *v3; // rbx
-  Scaleform::MemoryHeap *v4; // rsi
+  Scaleform::MemoryHeap *MHeap; // rsi
   Scaleform::GFx::AS3::ClassTraits::fl::Object *v5; // rax
-  Scaleform::GFx::AS3::ClassTraits::fl::Object *v6; // rdi
+  Scaleform::GFx::AS3::ClassTraits::Traits *v6; // rdi
   Scaleform::GFx::AS3::InstanceTraits::fl::Object *v7; // rax
   Scaleform::GFx::AS3::InstanceTraits::fl::Object *v8; // rdi
   Scaleform::GFx::AS3::Class *v9; // rax
 
-  v2 = vm;
-  v3 = result;
-  v4 = vm->MHeap;
-  v5 = (Scaleform::GFx::AS3::ClassTraits::fl::Object *)v4->vfptr->Alloc(v4, 208ui64, 0i64);
+  MHeap = vm->MHeap;
+  v5 = (Scaleform::GFx::AS3::ClassTraits::fl::Object *)MHeap->vfptr->Alloc(MHeap, 208ui64, 0i64);
   v6 = v5;
   if ( v5 )
   {
-    Scaleform::GFx::AS3::ClassTraits::fl::Object::Object(v5, v2, &Scaleform::GFx::AS3::fl_text::TextFormatCI);
+    Scaleform::GFx::AS3::ClassTraits::fl::Object::Object(v5, vm, &Scaleform::GFx::AS3::fl_text::TextFormatCI);
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_text::TextFormat::`vftable;
   }
   else
   {
     v6 = 0i64;
   }
-  v3->pV = (Scaleform::GFx::AS3::ClassTraits::Traits *)&v6->vfptr;
-  v7 = (Scaleform::GFx::AS3::InstanceTraits::fl::Object *)v4->vfptr->Alloc(v4, 240ui64, 0i64);
+  result->pV = v6;
+  v7 = (Scaleform::GFx::AS3::InstanceTraits::fl::Object *)MHeap->vfptr->Alloc(MHeap, 240ui64, 0i64);
   v8 = v7;
   if ( v7 )
   {
-    Scaleform::GFx::AS3::InstanceTraits::fl::Object::Object(v7, v2, &Scaleform::GFx::AS3::fl_text::TextFormatCI);
+    Scaleform::GFx::AS3::InstanceTraits::fl::Object::Object(v7, vm, &Scaleform::GFx::AS3::fl_text::TextFormatCI);
     v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_text::TextFormat::`vftable;
   }
   else
@@ -2442,13 +2537,13 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
     v8 = 0i64;
   }
   Scaleform::GFx::AS3::ClassTraits::Traits::SetInstanceTraits(
-    v3->pV,
+    result->pV,
     (Scaleform::Pickable<Scaleform::GFx::AS3::InstanceTraits::Traits>)v8);
-  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))v4->vfptr->Alloc)(
-                                       v4,
+  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))MHeap->vfptr->Alloc)(
+                                       MHeap,
                                        72i64);
   if ( v9 )
-    Scaleform::GFx::AS3::Class::Class(v9, v3->pV);
-  return v3;
+    Scaleform::GFx::AS3::Class::Class(v9, result->pV);
+  return result;
 }
 

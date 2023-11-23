@@ -3,27 +3,25 @@
 __int64 UFG::_dynamic_initializer_for__gCollisionLayerInfo__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::gCollisionLayerInfo.mTree);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gCollisionLayerInfo__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gCollisionLayerInfo__);
 }
 
 // File Line: 39
 // RVA: 0xA98B0
 char *__fastcall UFG::GetCollisionLayerName(unsigned int layerNumber)
 {
-  unsigned int v1; // ebx
-  UFG::qBaseTreeRB *v2; // rax
+  UFG::qBaseTreeRB *Head; // rax
 
-  v1 = layerNumber;
-  v2 = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::gCollisionLayerInfo);
-  if ( !v2 )
+  Head = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::gCollisionLayerInfo);
+  if ( !Head )
     return 0i64;
-  while ( HIDWORD(v2->mNULL.mParent) != v1 )
+  while ( HIDWORD(Head->mNULL.mParent) != layerNumber )
   {
-    v2 = UFG::qBaseTreeRB::GetNext(&UFG::gCollisionLayerInfo.mTree, &v2->mRoot);
-    if ( !v2 )
+    Head = UFG::qBaseTreeRB::GetNext(&UFG::gCollisionLayerInfo.mTree, &Head->mRoot);
+    if ( !Head )
       return 0i64;
   }
-  return UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2->mNULL);
+  return UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&Head->mNULL);
 }
 
 // File Line: 55

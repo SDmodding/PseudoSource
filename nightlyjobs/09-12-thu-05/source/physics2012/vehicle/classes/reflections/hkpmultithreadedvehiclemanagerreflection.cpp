@@ -28,17 +28,17 @@ hkClass *__fastcall hkpMultithreadedVehicleManager::staticClass()
 
 // File Line: 62
 // RVA: 0xE24E30
-void __fastcall finishLoadedObjecthkpMultithreadedVehicleManager(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpMultithreadedVehicleManager(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpMultithreadedVehicleManager::`vftable;
+    *p = &hkpMultithreadedVehicleManager::`vftable;
 }
 
 // File Line: 68
 // RVA: 0xE24E50
-void __fastcall cleanupLoadedObjecthkpMultithreadedVehicleManager(void *p)
+void __fastcall cleanupLoadedObjecthkpMultithreadedVehicleManager(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 72
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkpMultithreadedVehicleManagerTypeInfo__()
   hkpMultithreadedVehicleManagerTypeInfo.m_typeName = "hkpMultithreadedVehicleManager";
   hkpMultithreadedVehicleManagerTypeInfo.m_vtable = result;
   hkpMultithreadedVehicleManagerTypeInfo.m_scopedName = "!hkpMultithreadedVehicleManager";
-  hkpMultithreadedVehicleManagerTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpMultithreadedVehicleManager;
-  hkpMultithreadedVehicleManagerTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpMultithreadedVehicleManager;
+  hkpMultithreadedVehicleManagerTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpMultithreadedVehicleManager;
+  hkpMultithreadedVehicleManagerTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpMultithreadedVehicleManager;
   return result;
 }
 

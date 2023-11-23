@@ -1,6 +1,6 @@
 // File Line: 50
 // RVA: 0xE778B0
-signed __int64 __fastcall hkServerProcessHandler::getProcessId(hkServerProcessHandler *this, const char *name)
+__int64 __fastcall hkServerProcessHandler::getProcessId(hkServerProcessHandler *this, const char *name)
 {
   return hkProcessFactory::getProcessId(hkSingleton<hkProcessFactory>::s_instance, name);
 }

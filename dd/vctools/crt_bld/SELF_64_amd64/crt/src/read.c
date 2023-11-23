@@ -1,15 +1,11 @@
 // File Line: 79
 // RVA: 0x12BF3B8
-signed __int64 __fastcall read(int fh, void *buf, unsigned int cnt)
+__int64 __fastcall read(int fh, void *buf, unsigned int cnt)
 {
-  unsigned int v3; // er14
-  void *v4; // r12
   __int64 v5; // rdi
   __int64 v6; // rsi
-  unsigned int v7; // ebx
+  unsigned int nolock; // ebx
 
-  v3 = cnt;
-  v4 = buf;
   v5 = fh;
   if ( fh == -2 )
   {
@@ -17,15 +13,15 @@ signed __int64 __fastcall read(int fh, void *buf, unsigned int cnt)
     *errno() = 9;
     return 0xFFFFFFFFi64;
   }
-  if ( (signed int)ioinit() < 0 )
+  if ( (int)ioinit() < 0 )
     return 0xFFFFFFFFi64;
-  if ( (signed int)v5 < 0 || (unsigned int)v5 >= nhandle || (v6 = v5 & 0x1F, !(_pioinfo[v5 >> 5][v6].osfile & 1)) )
+  if ( (int)v5 < 0 || (unsigned int)v5 >= nhandle || (v6 = v5 & 0x1F, (_pioinfo[v5 >> 5][v6].osfile & 1) == 0) )
   {
     *_doserrno() = 0;
     *errno() = 9;
     goto LABEL_14;
   }
-  if ( v3 > 0x7FFFFFFF )
+  if ( cnt > 0x7FFFFFFF )
   {
     *_doserrno() = 0;
     *errno() = 22;
@@ -34,42 +30,42 @@ LABEL_14:
     return 0xFFFFFFFFi64;
   }
   _lock_fhandle(v5);
-  if ( _pioinfo[v5 >> 5][v6].osfile & 1 )
+  if ( (_pioinfo[v5 >> 5][v6].osfile & 1) != 0 )
   {
-    v7 = read_nolock(v5, v4, v3);
+    nolock = read_nolock(v5, buf, cnt);
   }
   else
   {
     *errno() = 9;
     *_doserrno() = 0;
-    v7 = -1;
+    nolock = -1;
   }
   unlock_fhandle(v5);
-  return v7;
+  return nolock;
 }
 
 // File Line: 114
 // RVA: 0x12BF4E0
-signed __int64 __fastcall read_nolock(int fh, void *inputbuf, unsigned int cnt)
+__int64 __fastcall read_nolock(int fh, wchar_t *inputbuf, DWORD cnt)
 {
   int v3; // edi
   __int64 v4; // r12
-  unsigned int v5; // ebx
+  DWORD v5; // ebx
   char *v6; // r15
   __int64 v7; // r13
   ioinfo *v8; // rcx
   __int64 v9; // rsi
-  char v10; // al
-  int v11; // er14
+  char osfile; // al
+  int v11; // r14d
   char v12; // dl
   __int64 v13; // rax
   ioinfo *v14; // rax
   char *v15; // r12
-  char v16; // cl
+  char pipech; // cl
   char v17; // cl
   char v18; // cl
   ioinfo *v19; // rcx
-  unsigned int v20; // eax
+  unsigned int LastError; // eax
   unsigned int v21; // ebx
   unsigned int v22; // edx
   ioinfo *v23; // rcx
@@ -81,19 +77,19 @@ signed __int64 __fastcall read_nolock(int fh, void *inputbuf, unsigned int cnt)
   ioinfo *v29; // rcx
   char v30; // al
   char *v31; // rbx
-  signed int i; // edx
-  char v33; // cl
+  int i; // edx
+  __int64 v33; // rcx
   ioinfo *v34; // rax
   char v35; // al
   char v36; // al
-  char *v37; // r12
+  wchar_t *v37; // r12
   int v38; // ebx
   int v39; // eax
   unsigned int v40; // eax
   bool v41; // zf
   char *v42; // r8
   char *v43; // r9
-  unsigned __int64 v44; // rdx
+  char *v44; // rdx
   __int16 v45; // ax
   char v47; // al
   char *v48; // rbx
@@ -101,18 +97,14 @@ signed __int64 __fastcall read_nolock(int fh, void *inputbuf, unsigned int cnt)
   __int16 v50; // ax
   ioinfo *v51; // rcx
   char v52; // al
-  __int16 v53; // [rsp+30h] [rbp-28h]
-  unsigned int NumberOfCharsRead; // [rsp+34h] [rbp-24h]
+  __int16 v53; // [rsp+30h] [rbp-28h] BYREF
+  unsigned int NumberOfCharsRead; // [rsp+34h] [rbp-24h] BYREF
   unsigned int v55; // [rsp+38h] [rbp-20h]
-  unsigned int Mode[2]; // [rsp+40h] [rbp-18h]
+  unsigned int Mode[2]; // [rsp+40h] [rbp-18h] BYREF
   unsigned int v57; // [rsp+48h] [rbp-10h]
-  int fha; // [rsp+A0h] [rbp+48h]
-  wchar_t *lpWideCharStr; // [rsp+A8h] [rbp+50h]
-  char Buffer; // [rsp+B0h] [rbp+58h]
+  char Buffer; // [rsp+B0h] [rbp+58h] BYREF
   unsigned __int64 v61; // [rsp+B8h] [rbp+60h]
 
-  lpWideCharStr = (wchar_t *)inputbuf;
-  fha = fh;
   v3 = 0;
   v4 = fh;
   v5 = cnt;
@@ -126,11 +118,11 @@ signed __int64 __fastcall read_nolock(int fh, void *inputbuf, unsigned int cnt)
     *errno() = 9;
     return 0xFFFFFFFFi64;
   }
-  if ( (signed int)ioinit() < 0 )
+  if ( (int)ioinit() < 0 )
     return 0xFFFFFFFFi64;
-  if ( (signed int)v4 < 0
+  if ( (int)v4 < 0
     || (unsigned int)v4 >= nhandle
-    || (v7 = v4 >> 5, v8 = _pioinfo[v4 >> 5], v9 = v4 & 0x1F, v10 = v8[v9].osfile, !(v10 & 1)) )
+    || (v7 = v4 >> 5, v8 = _pioinfo[v4 >> 5], v9 = v4 & 0x1F, osfile = v8[v9].osfile, (osfile & 1) == 0) )
   {
     *_doserrno() = 0;
     *errno() = 9;
@@ -139,7 +131,7 @@ signed __int64 __fastcall read_nolock(int fh, void *inputbuf, unsigned int cnt)
   if ( v5 > 0x7FFFFFFF )
     goto LABEL_8;
   v11 = 0;
-  if ( !v5 || v10 & 2 )
+  if ( !v5 || (osfile & 2) != 0 )
     return 0i64;
   if ( !v6 )
     goto LABEL_8;
@@ -147,7 +139,7 @@ signed __int64 __fastcall read_nolock(int fh, void *inputbuf, unsigned int cnt)
   LOBYTE(v61) = v12;
   if ( v12 == 1 )
   {
-    if ( ~(_BYTE)v5 & 1 )
+    if ( (v5 & 1) == 0 )
     {
       v5 >>= 1;
       if ( v5 < 4 )
@@ -173,9 +165,9 @@ LABEL_155:
   }
   if ( v12 == 2 )
   {
-    if ( ~(_BYTE)v5 & 1 )
+    if ( (v5 & 1) == 0 )
     {
-      v5 &= 0xFFFFFFFE;
+      v5 &= ~1u;
       goto LABEL_22;
     }
     goto LABEL_8;
@@ -183,14 +175,14 @@ LABEL_155:
 LABEL_22:
   v14 = _pioinfo[v7];
   v15 = v6;
-  if ( v14[v9].osfile & 0x48 )
+  if ( (v14[v9].osfile & 0x48) != 0 )
   {
-    v16 = v14[v9].pipech;
-    if ( v16 != 10 )
+    pipech = v14[v9].pipech;
+    if ( pipech != 10 )
     {
       if ( v5 )
       {
-        *v6 = v16;
+        *v6 = pipech;
         --v5;
         v15 = v6 + 1;
         v11 = 1;
@@ -228,23 +220,23 @@ LABEL_22:
       }
     }
   }
-  if ( !(unsigned int)isatty(fha)
+  if ( !(unsigned int)isatty(fh)
     || (v19 = _pioinfo[v7], v19[v9].osfile >= 0)
     || (Mode[0] = GetConsoleMode((HANDLE)v19[v9].osfhnd, Mode)) == 0
     || (_BYTE)v61 != 2 )
   {
     if ( !ReadFile((HANDLE)_pioinfo[v7][v9].osfhnd, v15, v5, &NumberOfCharsRead, 0i64)
       || (v22 = NumberOfCharsRead, (NumberOfCharsRead & 0x80000000) != 0)
-      || (signed int)NumberOfCharsRead > (unsigned __int64)v5 )
+      || (int)NumberOfCharsRead > (unsigned __int64)v5 )
     {
-      v20 = GetLastError();
-      if ( v20 == 5 )
+      LastError = GetLastError();
+      if ( LastError == 5 )
       {
         *errno() = 9;
         *_doserrno() = 5;
         goto LABEL_39;
       }
-      if ( v20 == 109 )
+      if ( LastError == 109 )
       {
         v21 = 0;
         goto LABEL_113;
@@ -282,7 +274,7 @@ LABEL_44:
           {
             v29 = _pioinfo[v7];
             v30 = v29[v9].osfile;
-            if ( v30 & 0x40 )
+            if ( (v30 & 0x40) != 0 )
               *v26++ = *v27;
             else
               v29[v9].osfile = v30 | 2;
@@ -310,7 +302,7 @@ LABEL_69:
             {
               goto LABEL_68;
             }
-            if ( _pioinfo[v7][v9].osfile & 0x48 )
+            if ( (_pioinfo[v7][v9].osfile & 0x48) != 0 )
             {
               if ( Buffer != 10 )
               {
@@ -324,7 +316,7 @@ LABEL_66:
             }
             if ( v26 == v6 && Buffer == 10 )
               goto LABEL_66;
-            lseeki64_nolock(fha, -1i64, 1);
+            lseeki64_nolock(fh, -1i64, 1);
             if ( Buffer != 10 )
               goto LABEL_68;
           }
@@ -337,27 +329,27 @@ LABEL_66:
         while ( (unsigned __int64)v27 < *(_QWORD *)Mode );
       }
       v11 = (_DWORD)v26 - (_DWORD)v6;
-      if ( (_BYTE)v61 == 1 && (_DWORD)v26 != (_DWORD)v6 )
+      if ( (_BYTE)v61 == 1 && v11 )
       {
         v31 = v26 - 1;
         if ( *v31 < 0 )
         {
           for ( i = 1; !lookuptrailbytes[(unsigned __int8)*v31] && i <= 4 && v31 >= v6; ++i )
             --v31;
-          v33 = *v31;
-          if ( !lookuptrailbytes[(unsigned __int8)*v31] )
+          v33 = (unsigned __int8)*v31;
+          if ( !lookuptrailbytes[v33] )
           {
             *errno() = 42;
             goto LABEL_39;
           }
-          if ( lookuptrailbytes[(unsigned __int8)*v31] + 1 == i )
+          if ( lookuptrailbytes[v33] + 1 == i )
           {
             LODWORD(v31) = i + (_DWORD)v31;
           }
           else
           {
             v34 = _pioinfo[v7];
-            if ( v34[v9].osfile & 0x48 )
+            if ( (v34[v9].osfile & 0x48) != 0 )
             {
               ++v31;
               v34[v9].pipech = v33;
@@ -376,7 +368,7 @@ LABEL_66:
             }
             else
             {
-              lseeki64_nolock(fha, -i, 1);
+              lseeki64_nolock(fh, -i, 1);
             }
           }
         }
@@ -384,9 +376,9 @@ LABEL_66:
         {
           LODWORD(v31) = (_DWORD)v31 + 1;
         }
-        v37 = (char *)lpWideCharStr;
+        v37 = inputbuf;
         v38 = (_DWORD)v31 - (_DWORD)v6;
-        v39 = MultiByteToWideChar(0xFDE9u, 0, v6, v38, lpWideCharStr, v57 >> 1);
+        v39 = MultiByteToWideChar(0xFDE9u, 0, v6, v38, inputbuf, v57 >> 1);
         v11 = v39;
         if ( v39 )
         {
@@ -412,8 +404,8 @@ LABEL_112:
     {
       v42 = v6;
       v43 = v6;
-      v44 = (unsigned __int64)&v6[2 * (v11 / 2)];
-      if ( (unsigned __int64)v6 < v44 )
+      v44 = &v6[2 * (v11 / 2)];
+      if ( v6 < v44 )
       {
         while ( 1 )
         {
@@ -422,7 +414,7 @@ LABEL_112:
             break;
           if ( v45 == 13 )
           {
-            if ( (unsigned __int64)v43 < v44 - 2 )
+            if ( v43 < v44 - 2 )
             {
               v43 += 2;
               if ( *(_WORD *)v43 == 10 )
@@ -438,13 +430,13 @@ LABEL_112:
             v42 += 2;
             v43 += 2;
           }
-          if ( (unsigned __int64)v43 >= v44 )
+          if ( v43 >= v44 )
             goto LABEL_111;
         }
         _pioinfo[v7][v9].osfile |= 2u;
       }
 LABEL_111:
-      v11 = 2 * (unsigned __int64)((v42 - v6) >> 1);
+      v11 = 2 * ((v42 - v6) >> 1);
       goto LABEL_112;
     }
     if ( v22 && *(_WORD *)v6 == 10 )
@@ -468,7 +460,7 @@ LABEL_148:
       {
         v51 = _pioinfo[v7];
         v52 = v51[v9].osfile;
-        if ( v52 & 0x40 )
+        if ( (v52 & 0x40) != 0 )
         {
           *(_WORD *)v48 = *(_WORD *)v49;
           LODWORD(v48) = (_DWORD)v48 + 2;
@@ -501,7 +493,7 @@ LABEL_142:
         {
           goto LABEL_141;
         }
-        if ( _pioinfo[v7][v9].osfile & 0x48 )
+        if ( (_pioinfo[v7][v9].osfile & 0x48) != 0 )
         {
           if ( v53 != 10 )
           {
@@ -517,7 +509,7 @@ LABEL_139:
         }
         if ( v48 == v6 && v53 == 10 )
           goto LABEL_139;
-        lseeki64_nolock(fha, -2i64, 1);
+        lseeki64_nolock(fh, -2i64, 1);
         if ( v53 != 10 )
           goto LABEL_141;
       }
@@ -532,28 +524,18 @@ LABEL_143:
         goto LABEL_148;
     }
   }
-  v20 = GetLastError();
+  LastError = GetLastError();
 LABEL_38:
-  dosmaperr(v20);
+  dosmaperr(LastError);
 LABEL_39:
   v21 = -1;
 LABEL_113:
-  v37 = (char *)lpWideCharStr;
+  v37 = inputbuf;
 $error_return_0:
-  if ( v6 != v37 )
+  if ( v6 != (char *)v37 )
     free(v6);
   if ( v21 == -2 )
-    v21 = v11;
+    return (unsigned int)v11;
   return v21;
-}L_39:
-  v21 = -1;
-LABEL_113:
-  v37 = (char *)lpWideCharStr;
-$error_return_0:
-  if ( v6 != v37 )
-    free(v6);
-  if ( v21 == -2 )
-    v21 = v11;
-  return v21;
 }
 

@@ -4,36 +4,36 @@ const char *__fastcall UFG::InvokeBehaviourResult::ResultEnumToString(int r)
 {
   const char *result; // rax
 
-  switch ( r + 5 )
+  switch ( r )
   {
-    case 0:
+    case -5:
       result = "FAIL_DUPLICATE";
       break;
-    case 1:
+    case -4:
       result = "FAIL_PRIORITY";
       break;
-    case 2:
+    case -3:
       result = "FAIL_NOTFOUND";
       break;
-    case 3:
+    case -2:
       result = "FAIL_WAIT";
       break;
-    case 4:
+    case -1:
       result = "FAIL_SUSPEND";
       break;
-    case 5:
+    case 0:
       result = "FAIL";
       break;
-    case 6:
+    case 1:
       result = "SUCCESS";
       break;
-    case 7:
+    case 2:
       result = "SUCCESS_WAITING";
       break;
-    case 8:
+    case 3:
       result = "SUCCESS_SUSPEND";
       break;
-    case 9:
+    case 4:
       result = "SUCCESS_KILLED";
       break;
     default:

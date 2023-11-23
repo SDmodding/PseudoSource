@@ -2,70 +2,41 @@
 // RVA: 0x310830
 void __fastcall AnimationBankReferenceTask::Begin(AnimationBankReferenceTask *this, ActionContext *pActionContext)
 {
-  ITrack *v2; // rax
-  ActionContext *v3; // rsi
-  AnimationBankReferenceTask *v4; // rdi
-  UFG::eAnimationPriorityEnum v5; // ebp
-  signed __int64 v6; // r8
+  ITrack *m_Track; // rax
+  UFG::eAnimationPriorityEnum mResourceOwner_low; // ebp
+  ITrack *v6; // r8
   unsigned __int64 v7; // rax
   const char *v8; // rdx
   UFG::qSymbolUC *v9; // rax
-  UFG::SimObjectGame *v10; // rcx
-  unsigned __int16 v11; // dx
-  UFG::PowerManagementComponent *v12; // rax
-  UFG::qSymbolUC result; // [rsp+30h] [rbp+8h]
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::PowerManagementComponent *ComponentOfTypeHK; // rax
+  UFG::qSymbolUC result; // [rsp+30h] [rbp+8h] BYREF
 
-  v2 = this->m_Track;
-  v3 = pActionContext;
-  v4 = this;
-  v5 = LOBYTE(v2[1].mResourceOwner);
-  v6 = (signed __int64)&v2[1];
-  v7 = (_QWORD)v2[1].vfptr & 0xFFFFFFFFFFFFFFFEui64;
-  v8 = (const char *)(v7 + v6);
+  m_Track = this->m_Track;
+  mResourceOwner_low = LOBYTE(m_Track[1].mResourceOwner);
+  v6 = m_Track + 1;
+  v7 = (unsigned __int64)m_Track[1].vfptr & 0xFFFFFFFFFFFFFFFEui64;
+  v8 = (char *)v6 + v7;
   if ( !v7 )
     v8 = BinString::sEmptyString;
   v9 = UFG::qSymbolUC::create_from_string(&result, v8);
-  AnimationGroupHandle::Init(&v4->mAnimationGroupHandle, v9, v5);
-  AnimationGroupHandle::Bind(&v4->mAnimationGroupHandle);
-  v10 = (UFG::SimObjectGame *)v3->mSimObject.m_pPointer;
-  if ( v10 )
+  AnimationGroupHandle::Init(&this->mAnimationGroupHandle, v9, mResourceOwner_low);
+  AnimationGroupHandle::Bind(&this->mAnimationGroupHandle);
+  m_pPointer = (UFG::SimObjectGame *)pActionContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v11 = v10->m_Flags;
-    if ( (v11 >> 14) & 1 )
-    {
-      v12 = (UFG::PowerManagementComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                               v10,
-                                               UFG::PowerManagementComponent::_TypeUID);
-    }
-    else if ( (v11 & 0x8000u) == 0 )
-    {
-      if ( (v11 >> 13) & 1 )
-      {
-        v12 = (UFG::PowerManagementComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                 v10,
-                                                 UFG::PowerManagementComponent::_TypeUID);
-      }
-      else if ( (v11 >> 12) & 1 )
-      {
-        v12 = (UFG::PowerManagementComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                 v10,
-                                                 UFG::PowerManagementComponent::_TypeUID);
-      }
-      else
-      {
-        v12 = (UFG::PowerManagementComponent *)UFG::SimObject::GetComponentOfType(
-                                                 (UFG::SimObject *)&v10->vfptr,
-                                                 UFG::PowerManagementComponent::_TypeUID);
-      }
-    }
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+      ComponentOfTypeHK = (UFG::PowerManagementComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                             m_pPointer,
+                                                             UFG::PowerManagementComponent::_TypeUID);
     else
-    {
-      v12 = (UFG::PowerManagementComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                               v10,
-                                               UFG::PowerManagementComponent::_TypeUID);
-    }
-    if ( v12 )
-      UFG::PowerManagementComponent::AddPowerManagedResource(v12, (UFG::PowerManagedResource *)&v4->vfptr);
+      ComponentOfTypeHK = (UFG::PowerManagementComponent *)UFG::SimObject::GetComponentOfType(
+                                                             m_pPointer,
+                                                             UFG::PowerManagementComponent::_TypeUID);
+    if ( ComponentOfTypeHK )
+      UFG::PowerManagementComponent::AddPowerManagedResource(ComponentOfTypeHK, &this->UFG::PowerManagedResource);
   }
 }
 
@@ -74,18 +45,18 @@ void __fastcall AnimationBankReferenceTask::Begin(AnimationBankReferenceTask *th
 void __fastcall AnimationBankReferenceTask::End(AnimationBankReferenceTask *this)
 {
   AnimationBankReferenceTask *v1; // rbx
-  UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList> *v2; // rcx
-  UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList> *v3; // rax
+  UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList> *mPrev; // rcx
+  UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList> *mNext; // rax
 
   v1 = this;
   AnimationGroupHandle::Unbind(&this->mAnimationGroupHandle);
-  v2 = v1->mPrev;
-  v3 = v1->mNext;
+  mPrev = v1->UFG::PowerManagedResource::UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList>::mPrev;
+  mNext = v1->UFG::PowerManagedResource::UFG::qNode<UFG::PowerManagedResource,UFG::PowerManagedResourceList>::mNext;
   v1 = (AnimationBankReferenceTask *)((char *)v1 + 48);
-  v2->mNext = v3;
-  v3->mPrev = v2;
-  v1->vfptr = (ITaskVtbl *)v1;
-  v1->mPrev = (UFG::qNode<ITask,ITask> *)v1;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  v1->Task<AnimationBankReferenceTrack>::ITask::vfptr = (ITaskVtbl *)v1;
+  v1->Task<AnimationBankReferenceTrack>::ITask::UFG::qNode<ITask,ITask>::mPrev = (UFG::qNode<ITask,ITask> *)v1;
 }
 
 // File Line: 95
@@ -106,59 +77,59 @@ void __fastcall AnimationBankReferenceTask::RebindResources(AnimationBankReferen
 // RVA: 0x310750
 bool __fastcall AnimationBankReferenceTask::AreResourcesAvailable(AnimationBankReferenceTask *this)
 {
-  AnimationGroup *v1; // rcx
+  AnimationGroup *mPrev; // rcx
 
-  v1 = (AnimationGroup *)this->mAnimationGroupHandle.mPrev;
-  return v1 && AnimationGroup::IsStreamedIn(v1);
+  mPrev = (AnimationGroup *)this->mAnimationGroupHandle.mPrev;
+  return mPrev && AnimationGroup::IsStreamedIn(mPrev);
 }
 
 // File Line: 126
 // RVA: 0x310780
 void __fastcall AnimationBankPriorityTask::Begin(AnimationBankPriorityTask *this, ActionContext *pActionContext)
 {
-  ITrack *v2; // rax
-  UFG::SimObjectGame *v3; // rcx
+  ITrack *m_Track; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
   UFG::eAnimationPriorityEnum v4; // edi
   UFG::qSymbolUC *v5; // rbx
-  unsigned __int16 v6; // dx
-  UFG::BaseAnimationComponent *v7; // rax
+  __int16 m_Flags; // dx
+  UFG::BaseAnimationComponent *m_pComponent; // rax
 
-  v2 = this->m_Track;
-  v3 = (UFG::SimObjectGame *)pActionContext->mSimObject.m_pPointer;
-  v4 = BYTE4(v2[1].vfptr);
-  v5 = (UFG::qSymbolUC *)&v2[1];
-  if ( v3 )
+  m_Track = this->m_Track;
+  m_pPointer = (UFG::SimObjectGame *)pActionContext->mSimObject.m_pPointer;
+  v4 = BYTE4(m_Track[1].vfptr);
+  v5 = (UFG::qSymbolUC *)&m_Track[1];
+  if ( m_pPointer )
   {
-    v6 = v3->m_Flags;
-    if ( (v6 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v7 = (UFG::BaseAnimationComponent *)v3->m_Components.p[9].m_pComponent;
+      m_pComponent = (UFG::BaseAnimationComponent *)m_pPointer->m_Components.p[9].m_pComponent;
     }
-    else if ( (v6 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v6 >> 13) & 1 )
+      if ( (m_Flags & 0x2000) != 0 )
       {
-        v7 = (UFG::BaseAnimationComponent *)v3->m_Components.p[8].m_pComponent;
+        m_pComponent = (UFG::BaseAnimationComponent *)m_pPointer->m_Components.p[8].m_pComponent;
       }
-      else if ( (v6 >> 12) & 1 )
+      else if ( (m_Flags & 0x1000) != 0 )
       {
-        v7 = (UFG::BaseAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                              v3,
-                                              UFG::BaseAnimationComponent::_TypeUID);
+        m_pComponent = (UFG::BaseAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                        m_pPointer,
+                                                        UFG::BaseAnimationComponent::_TypeUID);
       }
       else
       {
-        v7 = (UFG::BaseAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                              (UFG::SimObject *)&v3->vfptr,
-                                              UFG::BaseAnimationComponent::_TypeUID);
+        m_pComponent = (UFG::BaseAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                        m_pPointer,
+                                                        UFG::BaseAnimationComponent::_TypeUID);
       }
     }
     else
     {
-      v7 = (UFG::BaseAnimationComponent *)v3->m_Components.p[9].m_pComponent;
+      m_pComponent = (UFG::BaseAnimationComponent *)m_pPointer->m_Components.p[9].m_pComponent;
     }
-    if ( v7 )
-      UFG::BaseAnimationComponent::SetAnimationBankPriority(v7, v5, v4);
+    if ( m_pComponent )
+      UFG::BaseAnimationComponent::SetAnimationBankPriority(m_pComponent, v5, v4);
   }
 }
 
@@ -166,23 +137,16 @@ void __fastcall AnimationBankPriorityTask::Begin(AnimationBankPriorityTask *this
 // RVA: 0x30F220
 void __fastcall AnimationTask::AnimationTask(AnimationTask *this)
 {
-  UFG::qNode<ITask,ITask> *v1; // rax
-  UFG::qSafePointer<AnimationNode,AnimationNode> *v2; // [rsp+28h] [rbp+10h]
-  UFG::qSafePointer<PoseNode,PoseNode> *v3; // [rsp+28h] [rbp+10h]
-
-  v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
-  v1->mPrev = v1;
-  v1->mNext = v1;
+  this->mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->mNext = &this->UFG::qNode<ITask,ITask>;
   this->vfptr = (ITaskVtbl *)&ITask::`vftable;
   this->vfptr = (ITaskVtbl *)&Task<AnimationTrack>::`vftable;
   this->vfptr = (ITaskVtbl *)&AnimationTask::`vftable;
-  v2 = &this->mController;
-  v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v2->mNext = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
+  this->mController.mPrev = &this->mController;
+  this->mController.mNext = &this->mController;
   this->mController.m_pPointer = 0i64;
-  v3 = &this->mSplitBodyBlend;
-  v3->mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v3->mPrev;
-  v3->mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v3->mPrev;
+  this->mSplitBodyBlend.mPrev = &this->mSplitBodyBlend;
+  this->mSplitBodyBlend.mNext = &this->mSplitBodyBlend;
   this->mSplitBodyBlend.m_pPointer = 0i64;
   this->mFinished = 1;
 }
@@ -191,39 +155,37 @@ void __fastcall AnimationTask::AnimationTask(AnimationTask *this)
 // RVA: 0x310B30
 void __fastcall AnimationTask::Begin(AnimationTask *this, ActionContext *context)
 {
-  ActionContext *v2; // rsi
-  AnimationTask *v3; // rdi
-  UFG::SimObject *v4; // rbx
+  UFG::SimObject *m_pPointer; // rbx
   UFG::TransformNodeComponent *v5; // rbx
-  float v6; // xmm3_4
-  __int128 v7; // xmm4
-  float v8; // xmm5_4
+  float x; // xmm3_4
+  __int128 y_low; // xmm4
+  float z; // xmm5_4
   __m128 v9; // xmm2
   float v10; // xmm2_4
   UFG::qSymbolUC *v11; // r12
   UFG::SimObjectCVBase *v12; // rcx
-  unsigned __int16 v13; // dx
+  __int16 m_Flags; // dx
   UFG::CharacterAnimationComponent *v14; // rax
-  Creature *v15; // r14
+  Creature *mCreature; // r14
   float v16; // xmm6_4
   float v17; // xmm6_4
-  ITrack *v18; // rdx
+  ITrack *m_Track; // rdx
   char *v19; // rax
   BlendNode *v20; // rax
   BlendNode *v21; // r15
   PoseNode *v22; // rbx
-  AnimationPlayMode v23; // ebx
+  AnimationPlayMode value_low; // ebx
   char *v24; // rax
   AnimationNode *v25; // rax
   ITrack *v26; // rax
-  int v27; // er9
+  int mOffset_high; // r9d
   PoseNodeParent *v28; // r8
-  Weightset *v29; // rax
+  Weightset *WeightSet; // rax
   UFG::qNode<PoseNode,PoseNode> *v30; // rbx
   ITrack *v31; // rcx
-  AnimationPlayMode v32; // er8
-  bool v33; // al
-  float v34; // xmm1_4
+  AnimationPlayMode v32; // r8d
+  bool phaseIn; // al
+  float blendInTime; // xmm1_4
   float v35; // xmm0_4
   AnimationNode *v36; // rax
   __int64 v37; // rdx
@@ -236,74 +198,69 @@ void __fastcall AnimationTask::Begin(AnimationTask *this, ActionContext *context
   ITrack *v44; // rcx
   bool v45; // al
   AnimationNode *v46; // r14
-  Expression::IMemberMapVtbl *v47; // rbx
-  __int128 v48; // xmm1
-  ITrack *v49; // rbx
-  ActionNode *v50; // rdi
-  const char *v51; // rdx
-  ActionPath pathToPopulate; // [rsp+10h] [rbp-31h]
-  unsigned int check_null; // [rsp+20h] [rbp-21h]
-  float blendInTime; // [rsp+28h] [rbp-19h]
-  float phaseIn[2]; // [rsp+30h] [rbp-11h]
-  int *returnCode; // [rsp+38h] [rbp-9h]
-  int v57; // [rsp+A8h] [rbp+67h]
-  char *v58; // [rsp+B0h] [rbp+6Fh]
+  Expression::IMemberMapVtbl *vfptr; // rbx
+  ITrack *v48; // rbx
+  ActionNodePlayable *m_currentNode; // rdi
+  const char *v50; // rdx
+  ActionPath pathToPopulate; // [rsp+10h] [rbp-31h] BYREF
+  UFG::qString check_null[3]; // [rsp+20h] [rbp-21h] BYREF
+  int returnCode; // [rsp+A8h] [rbp+67h] BYREF
+  char *v54; // [rsp+B0h] [rbp+6Fh]
 
-  v2 = context;
-  v3 = this;
   this->mContext = context;
-  if ( context && context->mSimObject.m_pPointer && (context->mSimObject.m_pPointer->m_Flags >> 10) & 1 )
+  if ( context && context->mSimObject.m_pPointer && (context->mSimObject.m_pPointer->m_Flags & 0x400) != 0 )
     return;
-  v4 = context->mSimObject.m_pPointer;
-  v5 = v4 ? v4->m_pTransformNodeComponent : 0i64;
+  m_pPointer = context->mSimObject.m_pPointer;
+  v5 = m_pPointer ? m_pPointer->m_pTransformNodeComponent : 0i64;
   UFG::TransformNodeComponent::UpdateWorldTransform(v5);
-  v6 = v5->mWorldTransform.v0.x;
-  v7 = LODWORD(v5->mWorldTransform.v0.y);
-  v8 = v5->mWorldTransform.v0.z;
-  v3->mStartFacingVector.x = v6;
-  LODWORD(v3->mStartFacingVector.y) = v7;
-  v3->mStartFacingVector.z = v8;
-  v9 = (__m128)v7;
-  v9.m128_f32[0] = (float)((float)(*(float *)&v7 * *(float *)&v7) + (float)(v6 * v6)) + (float)(v8 * v8);
-  v10 = v9.m128_f32[0] == 0.0 ? 0.0 : 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v9));
-  v3->mStartFacingVector.x = v10 * v6;
-  v3->mStartFacingVector.y = v10 * *(float *)&v7;
-  v3->mStartFacingVector.z = v10 * v8;
-  v11 = (UFG::qSymbolUC *)((char *)&v3->m_Track[1].mMasterRate.expression.mOffset + 4);
-  v12 = (UFG::SimObjectCVBase *)v3->mContext->mSimObject.m_pPointer;
+  x = v5->mWorldTransform.v0.x;
+  y_low = LODWORD(v5->mWorldTransform.v0.y);
+  z = v5->mWorldTransform.v0.z;
+  this->mStartFacingVector.x = x;
+  LODWORD(this->mStartFacingVector.y) = y_low;
+  this->mStartFacingVector.z = z;
+  v9 = (__m128)y_low;
+  v9.m128_f32[0] = (float)((float)(*(float *)&y_low * *(float *)&y_low) + (float)(x * x)) + (float)(z * z);
+  v10 = v9.m128_f32[0] == 0.0 ? 0.0 : 1.0 / _mm_sqrt_ps(v9).m128_f32[0];
+  this->mStartFacingVector.x = v10 * x;
+  this->mStartFacingVector.y = v10 * *(float *)&y_low;
+  this->mStartFacingVector.z = v10 * z;
+  v11 = (UFG::qSymbolUC *)&this->m_Track[1].mMasterRate.expression.mOffset + 1;
+  v12 = (UFG::SimObjectCVBase *)this->mContext->mSimObject.m_pPointer;
   if ( !v12 )
     return;
-  v13 = v12->m_Flags;
-  if ( (v13 >> 14) & 1 )
+  m_Flags = v12->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
   {
     v14 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v12);
   }
-  else if ( (v13 & 0x8000u) == 0 )
+  else if ( (m_Flags & 0x2000) != 0 )
   {
-    if ( (v13 >> 13) & 1 )
-      v14 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v12);
-    else
-      v14 = (UFG::CharacterAnimationComponent *)((v13 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                     (UFG::SimObjectGame *)&v12->vfptr,
-                                                                     UFG::CharacterAnimationComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v12->vfptr, UFG::CharacterAnimationComponent::_TypeUID));
+    v14 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v12);
   }
   else
   {
-    v14 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v12);
+    v14 = (UFG::CharacterAnimationComponent *)((m_Flags & 0x1000) != 0
+                                             ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                 v12,
+                                                 UFG::CharacterAnimationComponent::_TypeUID)
+                                             : UFG::SimObject::GetComponentOfType(
+                                                 v12,
+                                                 UFG::CharacterAnimationComponent::_TypeUID));
   }
   if ( !v14 )
     return;
-  v15 = v14->mCreature;
-  if ( !v15 )
+  mCreature = v14->mCreature;
+  if ( !mCreature )
     return;
-  v57 = 0;
-  v16 = *(float *)&v3->m_Track[1].m_TrackClassNameUID;
-  v17 = v16 / ActionContext::GetRunningMasterRate(v2);
-  v18 = v3->m_Track;
-  if ( BYTE1(v18[1].mMasterRate.value) == 1 )
+  returnCode = 0;
+  v16 = *(float *)&this->m_Track[1].m_TrackClassNameUID;
+  v17 = v16 / ActionContext::GetRunningMasterRate(context);
+  m_Track = this->m_Track;
+  if ( BYTE1(m_Track[1].mMasterRate.value) == 1 )
   {
     v19 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0xB0ui64, "BlendAddNode", 0i64, 1u);
-    v58 = v19;
+    v54 = v19;
     if ( v19 )
     {
       BlendAddNode::BlendAddNode((BlendAddNode *)v19, v17);
@@ -313,66 +270,73 @@ void __fastcall AnimationTask::Begin(AnimationTask *this, ActionContext *context
     {
       v21 = 0i64;
     }
-    UFG::qSafePointer<PoseNode,PoseNode>::operator=((UFG::qSafePointer<PoseNode,BlendNode> *)&v3->mSplitBodyBlend, v21);
-    v22 = v3->mSplitBodyBlend.m_pPointer;
+    UFG::qSafePointer<PoseNode,PoseNode>::operator=(
+      (UFG::qSafePointer<PoseNode,BlendNode> *)&this->mSplitBodyBlend,
+      v21);
+    v22 = this->mSplitBodyBlend.m_pPointer;
     v22[1].mPrev = (UFG::qNode<PoseNode,PoseNode> *)Creature::GetWeightSet(
-                                                      v15,
-                                                      (UFG::qSymbolUC *)&v3->m_Track[1].mMasterRate.expression);
-    v23 = LOBYTE(v3->m_Track[1].mMasterRate.value);
+                                                      mCreature,
+                                                      (UFG::qSymbolUC *)&this->m_Track[1].mMasterRate.expression);
+    value_low = LOBYTE(this->m_Track[1].mMasterRate.value);
     v24 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0x170ui64, "AnimationTask.AnimationNode", 0i64, 1u);
-    v58 = v24;
+    v54 = v24;
     if ( v24 )
       AnimationNode::AnimationNode(
         (AnimationNode *)v24,
         v11,
-        v23,
-        *(float *)&v3->m_Track[1].mResourceOwner,
-        *((float *)&v3->m_Track[1].mResourceOwner + 1));
+        value_low,
+        *(float *)&this->m_Track[1].mResourceOwner,
+        *((float *)&this->m_Track[1].mResourceOwner + 1));
     else
       v25 = 0i64;
-    UFG::qSafePointer<AnimationNode,AnimationNode>::operator=(&v3->mController, v25);
-    v26 = v3->m_Track;
-    returnCode = &v57;
-    phaseIn[0] = FLOAT_N1_0;
-    blendInTime = 0.0;
-    LOBYTE(check_null) = 0;
-    v27 = HIDWORD(v26[1].mMasterRate.text.mOffset);
-    v28 = (PoseNodeParent *)&v21->vfptr;
+    UFG::qSafePointer<AnimationNode,AnimationNode>::operator=(&this->mController, v25);
+    v26 = this->m_Track;
+    check_null[0].mData = (char *)&returnCode;
+    *(float *)&check_null[0].mMagic = FLOAT_N1_0;
+    LODWORD(check_null[0].mNext) = 0;
+    LOBYTE(check_null[0].mPrev) = 0;
+    mOffset_high = HIDWORD(v26[1].mMasterRate.text.mOffset);
+    v28 = v21;
   }
   else
   {
-    v29 = Creature::GetWeightSet(v15, (UFG::qSymbolUC *)&v18[1].mMasterRate.expression);
-    v30 = (UFG::qNode<PoseNode,PoseNode> *)v29;
-    v31 = v3->m_Track;
-    if ( SHIDWORD(v31[1].mMasterRate.text.mOffset) <= 0 && !v29 )
+    WeightSet = Creature::GetWeightSet(mCreature, (UFG::qSymbolUC *)&m_Track[1].mMasterRate.expression);
+    v30 = (UFG::qNode<PoseNode,PoseNode> *)WeightSet;
+    v31 = this->m_Track;
+    if ( SHIDWORD(v31[1].mMasterRate.text.mOffset) <= 0 && !WeightSet )
     {
       v32 = LOBYTE(v31[1].mMasterRate.value);
-      v33 = *((_BYTE *)&v31[1].mMasterRate.value + 4) != 0;
-      v34 = *(float *)&v31[1].m_TrackClassNameUID;
+      phaseIn = *((_BYTE *)&v31[1].mMasterRate.value + 4) != 0;
+      blendInTime = *(float *)&v31[1].m_TrackClassNameUID;
       v35 = *((float *)&v31[1].mResourceOwner + 1);
-      returnCode = &v57;
-      LOBYTE(phaseIn[0]) = v33;
-      blendInTime = v34;
-      check_null = LODWORD(v35);
+      check_null[0].mData = (char *)&returnCode;
+      LOBYTE(check_null[0].mMagic) = phaseIn;
+      *(float *)&check_null[0].mNext = blendInTime;
+      *(float *)&check_null[0].mPrev = v35;
       v36 = (AnimationNode *)Creature::PlayAnimation(
-                               v15,
+                               mCreature,
                                v11,
                                v32,
                                *(float *)&v31[1].mResourceOwner,
                                v35,
-                               v34,
-                               v33,
-                               &v57);
-      UFG::qSafePointer<AnimationNode,AnimationNode>::operator=(&v3->mController, v36);
-      LOBYTE(v37) = *((_BYTE *)&v3->m_Track[1].mMasterRate.value + 5) != 0;
-      v3->mController.m_pPointer->vfptr[3].__vecDelDtor((Expression::IMemberMap *)v3->mController.m_pPointer, v37);
-      goto LABEL_46;
+                               blendInTime,
+                               phaseIn,
+                               &returnCode);
+      UFG::qSafePointer<AnimationNode,AnimationNode>::operator=(&this->mController, v36);
+      LOBYTE(v37) = *((_BYTE *)&this->m_Track[1].mMasterRate.value + 5) != 0;
+      this->mController.m_pPointer->vfptr[3].__vecDelDtor(this->mController.m_pPointer, v37);
+      goto LABEL_44;
     }
-    check_null = 1;
+    LODWORD(check_null[0].mPrev) = 1;
     if ( *((_BYTE *)&v31[1].mMasterRate.value + 4) )
     {
-      v38 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0xB8ui64, "BlendPhaseNode", 0i64, check_null);
-      v58 = v38;
+      v38 = UFG::qMemoryPool2::Allocate(
+              &gActionTreeMemoryPool,
+              0xB8ui64,
+              "BlendPhaseNode",
+              0i64,
+              (unsigned int)check_null[0].mPrev);
+      v54 = v38;
       if ( v38 )
         BlendPhaseNode::BlendPhaseNode((BlendPhaseNode *)v38, v17);
       else
@@ -380,85 +344,91 @@ void __fastcall AnimationTask::Begin(AnimationTask *this, ActionContext *context
     }
     else
     {
-      v40 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0xB0ui64, "BlendNode", 0i64, check_null);
-      v58 = v40;
+      v40 = UFG::qMemoryPool2::Allocate(
+              &gActionTreeMemoryPool,
+              0xB0ui64,
+              "BlendNode",
+              0i64,
+              (unsigned int)check_null[0].mPrev);
+      v54 = v40;
       if ( v40 )
         BlendNode::BlendNode((BlendNode *)v40, v17);
       else
         v39 = 0i64;
     }
-    UFG::qSafePointer<PoseNode,PoseNode>::operator=((UFG::qSafePointer<PoseNode,BlendNode> *)&v3->mSplitBodyBlend, v39);
-    v3->mSplitBodyBlend.m_pPointer[1].mPrev = v30;
-    BYTE3(v3->mSplitBodyBlend.m_pPointer[1].mParent.mOffset) = 1;
-    v41 = LOBYTE(v3->m_Track[1].mMasterRate.value);
+    UFG::qSafePointer<PoseNode,PoseNode>::operator=(
+      (UFG::qSafePointer<PoseNode,BlendNode> *)&this->mSplitBodyBlend,
+      v39);
+    this->mSplitBodyBlend.m_pPointer[1].mPrev = v30;
+    BYTE3(this->mSplitBodyBlend.m_pPointer[1].mParent.mOffset) = 1;
+    v41 = LOBYTE(this->m_Track[1].mMasterRate.value);
     v42 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0x170ui64, "AnimationTask.AnimationNode", 0i64, 1u);
-    v58 = v42;
+    v54 = v42;
     if ( v42 )
       AnimationNode::AnimationNode(
         (AnimationNode *)v42,
         v11,
         v41,
-        *(float *)&v3->m_Track[1].mResourceOwner,
-        *((float *)&v3->m_Track[1].mResourceOwner + 1));
+        *(float *)&this->m_Track[1].mResourceOwner,
+        *((float *)&this->m_Track[1].mResourceOwner + 1));
     else
       v43 = 0i64;
-    UFG::qSafePointer<AnimationNode,AnimationNode>::operator=(&v3->mController, v43);
-    v44 = v3->m_Track;
+    UFG::qSafePointer<AnimationNode,AnimationNode>::operator=(&this->mController, v43);
+    v44 = this->m_Track;
     v45 = *((_BYTE *)&v44[1].mMasterRate.value + 4) != 0;
-    returnCode = &v57;
-    phaseIn[0] = *((float *)&v44[1].mResourceOwner + 1);
-    blendInTime = *(float *)&v44[1].mResourceOwner;
-    LOBYTE(check_null) = v45;
-    v27 = HIDWORD(v44[1].mMasterRate.text.mOffset);
-    v28 = (PoseNodeParent *)v3->mSplitBodyBlend.m_pPointer;
+    check_null[0].mData = (char *)&returnCode;
+    check_null[0].mMagic = HIDWORD(v44[1].mResourceOwner);
+    LODWORD(check_null[0].mNext) = v44[1].mResourceOwner;
+    LOBYTE(check_null[0].mPrev) = v45;
+    mOffset_high = HIDWORD(v44[1].mMasterRate.text.mOffset);
+    v28 = (PoseNodeParent *)this->mSplitBodyBlend.m_pPointer;
   }
   Creature::PlayBlendTree(
-    v15,
-    (PoseNode *)&v3->mController.m_pPointer->vfptr,
+    mCreature,
+    this->mController.m_pPointer,
     v28,
-    v27,
-    check_null,
-    blendInTime,
-    phaseIn[0],
-    returnCode);
-LABEL_46:
-  v46 = v3->mController.m_pPointer;
+    mOffset_high,
+    (bool)check_null[0].mPrev,
+    *(float *)&check_null[0].mNext,
+    *(float *)&check_null[0].mMagic,
+    (int *)check_null[0].mData);
+LABEL_44:
+  v46 = this->mController.m_pPointer;
   if ( v46 )
   {
-    v47 = v46->vfptr;
-    ActionContext::GetRunningMasterRate(v3->mContext);
-    v47[3].ResolveReferences((Expression::IMemberMap *)&v46->vfptr);
-    ((void (__fastcall *)(AnimationNode *, ActionContext *))v3->mController.m_pPointer->vfptr[2].GetResourceOwner)(
-      v3->mController.m_pPointer,
-      v3->mContext);
-    if ( BYTE2(v3->m_Track[1].mMasterRate.value) )
+    vfptr = v46->PoseNode::Expression::IMemberMap::vfptr;
+    ActionContext::GetRunningMasterRate(this->mContext);
+    vfptr[3].ResolveReferences(v46);
+    ((void (__fastcall *)(AnimationNode *, ActionContext *))this->mController.m_pPointer->vfptr[2].GetResourceOwner)(
+      this->mController.m_pPointer,
+      this->mContext);
+    if ( BYTE2(this->m_Track[1].mMasterRate.value) )
     {
-      v3->mController.m_pPointer->mPlayStartTime = 0.0;
-      v48 = LODWORD(v3->m_Track[1].mResourceOwner);
-      ((void (*)(void))v3->mController.m_pPointer->vfptr[3].GetResourcePath)();
+      this->mController.m_pPointer->mPlayStartTime = 0.0;
+      ((void (__fastcall *)(AnimationNode *))this->mController.m_pPointer->vfptr[3].GetResourcePath)(this->mController.m_pPointer);
     }
   }
-  if ( v57 )
+  if ( returnCode )
   {
-    v49 = v3->m_Track;
-    v50 = (ActionNode *)&v2->mActionController->m_currentNode->vfptr;
-    ActionNode::GetNameFullPath(v50, &pathToPopulate);
+    v48 = this->m_Track;
+    m_currentNode = context->mActionController->m_currentNode;
+    ActionNode::GetNameFullPath(m_currentNode, &pathToPopulate);
     ActionPath::GetString_DBG(&pathToPopulate);
-    v49->vfptr->GetClassname((Expression::IMemberMap *)&v49->vfptr);
-    v50->vfptr[3].GetClassNameUID((Expression::IMemberMap *)&v50->vfptr);
-    UFG::qString::qString((UFG::qString *)&check_null);
-    if ( v57 == 2 )
+    v48->vfptr->GetClassname(v48);
+    m_currentNode->vfptr[3].GetClassNameUID(m_currentNode);
+    UFG::qString::qString(check_null);
+    if ( returnCode == 2 )
     {
-      v51 = "BlendTree stack has blown Tree will be pruned could have some animation pops: inform FRSD of this ERROR message";
+      v50 = "BlendTree stack has blown Tree will be pruned could have some animation pops: inform FRSD of this ERROR message";
     }
     else
     {
-      v51 = "Failed Active BlendTree Branch skipping and restarting: inform: FRSD of this ERROR message";
-      if ( v57 != 1 )
-        v51 = "no special error";
+      v50 = "Failed Active BlendTree Branch skipping and restarting: inform: FRSD of this ERROR message";
+      if ( returnCode != 1 )
+        v50 = "no special error";
     }
-    UFG::qString::Set((UFG::qString *)&check_null, v51);
-    UFG::qString::~qString((UFG::qString *)&check_null);
+    UFG::qString::Set(check_null, v50);
+    UFG::qString::~qString(check_null);
     if ( pathToPopulate.mPath.mCount >= 0 && pathToPopulate.mPath.mData.mOffset )
     {
       if ( (UFG::qOffset64<ActionID *> *)((char *)&pathToPopulate.mPath.mData + pathToPopulate.mPath.mData.mOffset) )
@@ -471,119 +441,115 @@ LABEL_46:
 // RVA: 0x312D50
 bool __fastcall AnimationTask::Update(AnimationTask *this, float timeDelta)
 {
-  ActionContext *v2; // rax
-  AnimationTask *v3; // rdi
-  float v4; // xmm6_4
-  UFG::SimObject *v5; // rax
+  ActionContext *mContext; // rax
+  UFG::SimObject *m_pPointer; // rax
   AnimationNode *v7; // rcx
   UFG::SimObjectCVBase *v8; // rcx
-  unsigned __int16 v9; // dx
+  __int16 m_Flags; // dx
   UFG::CharacterAnimationComponent *v10; // rax
   AnimationNode *v11; // rsi
-  ITrack *v12; // rax
-  Expression::IMemberMapVtbl *v13; // rbx
-  int v14; // ebp
-  FloatInputSignal v15; // er14
-  int v16; // xmm1_4
-  UFG::SimObject *v17; // rcx
-  int v18; // xmm0_4
+  ITrack *m_Track; // rax
+  Expression::IMemberMapVtbl *vfptr; // rbx
+  int value_low; // ebp
+  FloatInputSignal v15; // r14d
+  float v16; // xmm1_4
+  UFG::SimObjectCVBase *v17; // rcx
+  float v18; // xmm0_4
   Expression::IMemberMapVtbl *v19; // rax
-  int v20; // xmm1_4
-  UFG::SimObject *v21; // rcx
-  int v22; // xmm0_4
-  float v23; // [rsp+30h] [rbp-28h]
-  int v24; // [rsp+34h] [rbp-24h]
-  int v25; // [rsp+38h] [rbp-20h]
+  float y; // xmm1_4
+  UFG::SimObjectCVBase *v21; // rcx
+  float z; // xmm0_4
+  UFG::qVector3 v23; // [rsp+30h] [rbp-28h] BYREF
 
-  v2 = this->mContext;
-  v3 = this;
-  v4 = timeDelta;
-  if ( v2 )
+  mContext = this->mContext;
+  if ( mContext )
   {
-    v5 = v2->mSimObject.m_pPointer;
-    if ( v5 )
+    m_pPointer = mContext->mSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      if ( (v5->m_Flags >> 10) & 1 )
+      if ( (m_pPointer->m_Flags & 0x400) != 0 )
         return 1;
     }
   }
   v7 = this->mController.m_pPointer;
   if ( v7 )
     AnimationNode::verifyBindAnimation(v7);
-  v8 = (UFG::SimObjectCVBase *)v3->mContext->mSimObject.m_pPointer;
+  v8 = (UFG::SimObjectCVBase *)this->mContext->mSimObject.m_pPointer;
   if ( !v8 )
     return 0;
-  v9 = v8->m_Flags;
-  if ( (v9 >> 14) & 1 )
+  m_Flags = v8->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
   {
     v10 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v8);
   }
-  else if ( (v9 & 0x8000u) == 0 )
+  else if ( (m_Flags & 0x2000) != 0 )
   {
-    if ( (v9 >> 13) & 1 )
-      v10 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v8);
-    else
-      v10 = (UFG::CharacterAnimationComponent *)((v9 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                    (UFG::SimObjectGame *)&v8->vfptr,
-                                                                    UFG::CharacterAnimationComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v8->vfptr, UFG::CharacterAnimationComponent::_TypeUID));
+    v10 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v8);
   }
   else
   {
-    v10 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v8);
+    v10 = (UFG::CharacterAnimationComponent *)((m_Flags & 0x1000) != 0
+                                             ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                 v8,
+                                                 UFG::CharacterAnimationComponent::_TypeUID)
+                                             : UFG::SimObject::GetComponentOfType(
+                                                 v8,
+                                                 UFG::CharacterAnimationComponent::_TypeUID));
   }
   if ( !v10 )
     return 0;
-  v11 = v3->mController.m_pPointer;
+  v11 = this->mController.m_pPointer;
   if ( !v11 || !v11->mSkeletalAnimationHandle.m_SkeletalAnimation.m_pPointer )
     return 0;
-  v12 = v3->m_Track;
-  v13 = v11->vfptr;
-  v14 = LOBYTE(v12[1].mMasterRate.value);
-  v15 = BYTE2(v12[1].mMasterRate.value);
-  ActionContext::GetRunningMasterRate(v3->mContext);
-  v13[3].ResolveReferences((Expression::IMemberMap *)&v11->vfptr);
-  if ( v14 == 1 )
+  m_Track = this->m_Track;
+  vfptr = v11->PoseNode::Expression::IMemberMap::vfptr;
+  value_low = LOBYTE(m_Track[1].mMasterRate.value);
+  v15 = BYTE2(m_Track[1].mMasterRate.value);
+  ActionContext::GetRunningMasterRate(this->mContext);
+  vfptr[3].ResolveReferences(v11);
+  if ( value_low == 1 )
   {
     if ( v15 )
     {
-      v20 = LODWORD(v3->mStartFacingVector.y);
-      v21 = v3->mContext->mSimObject.m_pPointer;
-      v23 = v3->mStartFacingVector.x;
-      v22 = LODWORD(v3->mStartFacingVector.z);
-      v24 = v20;
-      v25 = v22;
-      getSignalValue(v21, v15, v4, 6.2831855, (__int64)v3, (UFG::qVector3 *)&v23);
-      ((void (*)(void))v3->mController.m_pPointer->vfptr[3].ResolveReferences)();
+      y = this->mStartFacingVector.y;
+      v21 = (UFG::SimObjectCVBase *)this->mContext->mSimObject.m_pPointer;
+      v23.x = this->mStartFacingVector.x;
+      z = this->mStartFacingVector.z;
+      v23.y = y;
+      v23.z = z;
+      getSignalValue(v21, v15, timeDelta, 6.2831855, &v23);
+      this->mController.m_pPointer->vfptr[3].ResolveReferences(this->mController.m_pPointer);
     }
   }
   else if ( v15 )
   {
-    v16 = LODWORD(v3->mStartFacingVector.y);
-    v17 = v3->mContext->mSimObject.m_pPointer;
-    v23 = v3->mStartFacingVector.x;
-    v18 = LODWORD(v3->mStartFacingVector.z);
-    v24 = v16;
-    v25 = v18;
-    getSignalValue(v17, v15, v4, 6.2831855, (__int64)v3, (UFG::qVector3 *)&v23);
-    v19 = v3->mController.m_pPointer->vfptr;
-    if ( v14 == 3 )
+    v16 = this->mStartFacingVector.y;
+    v17 = (UFG::SimObjectCVBase *)this->mContext->mSimObject.m_pPointer;
+    v23.x = this->mStartFacingVector.x;
+    v18 = this->mStartFacingVector.z;
+    v23.y = v16;
+    v23.z = v18;
+    getSignalValue(v17, v15, timeDelta, 6.2831855, &v23);
+    v19 = this->mController.m_pPointer->vfptr;
+    if ( value_low == 3 )
     {
       ((void (*)(void))v19[3].GetClassNameUID)();
       return 1;
     }
     ((void (*)(void))v19[3].ResolveReferences)();
-    if ( v14 == 5 && ((unsigned __int8 (*)(void))v3->mController.m_pPointer->vfptr[1].SetResourceOwner)() )
+    if ( value_low == 5
+      && ((unsigned __int8 (__fastcall *)(AnimationNode *))this->mController.m_pPointer->vfptr[1].SetResourceOwner)(this->mController.m_pPointer) )
     {
-      ((void (*)(void))v3->mController.m_pPointer->vfptr[1].GetResourceOwner)();
-      v3->mFinished = 1;
+      this->mController.m_pPointer->vfptr[1].GetResourceOwner(this->mController.m_pPointer);
+      this->mFinished = 1;
       return 0;
     }
   }
-  else if ( ((unsigned __int8 (*)(void))v3->mController.m_pPointer->vfptr[1].SetResourceOwner)() )
+  else if ( ((unsigned __int8 (__fastcall *)(AnimationNode *))this->mController.m_pPointer->vfptr[1].SetResourceOwner)(this->mController.m_pPointer) )
   {
-    ((void (*)(void))v3->mController.m_pPointer->vfptr[1].GetResourceOwner)();
-    v3->mFinished = 1;
-    return v14 == 2;
+    this->mController.m_pPointer->vfptr[1].GetResourceOwner(this->mController.m_pPointer);
+    this->mFinished = 1;
+    return value_low == 2;
   }
   return 1;
 }
@@ -592,102 +558,87 @@ bool __fastcall AnimationTask::Update(AnimationTask *this, float timeDelta)
 // RVA: 0x312210
 void __fastcall AnimationTask::End(AnimationTask *this)
 {
-  UFG::TransformNodeComponent *v1; // rsi
-  AnimationTask *v2; // rdi
-  ITrack *v3; // rax
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rsi
+  ITrack *m_Track; // rax
   float v4; // xmm6_4
-  float v5; // xmm0_4
-  PoseNode *v6; // rax
+  float RunningMasterRate; // xmm0_4
+  PoseNode *m_pPointer; // rax
   float v7; // xmm6_4
   UFG::SimObjectCVBase *v8; // rcx
   UFG::AICharacterControllerBaseComponent *v9; // rbx
-  unsigned __int16 v10; // dx
-  UFG::AICharacterControllerBaseComponent *v11; // rax
+  __int16 m_Flags; // dx
+  UFG::AICharacterControllerBaseComponent *ComponentOfTypeHK; // rax
   UFG::SimObject *v12; // rcx
-  float v13; // xmm0_4
-  float v14; // xmm1_4
+  float y; // xmm0_4
+  float z; // xmm1_4
 
-  v1 = 0i64;
-  v2 = this;
+  m_pTransformNodeComponent = 0i64;
   if ( this->mController.m_pPointer )
   {
     if ( this->mSplitBodyBlend.m_pPointer )
     {
-      v3 = this->m_Track;
-      if ( SHIDWORD(v3[1].mMasterRate.text.mOffset) > 0 || BYTE1(v3[1].mMasterRate.value) == 1 )
+      m_Track = this->m_Track;
+      if ( SHIDWORD(m_Track[1].mMasterRate.text.mOffset) > 0 || BYTE1(m_Track[1].mMasterRate.value) == 1 )
       {
-        v4 = *(float *)&v3[1].mBreakPoint;
-        v5 = ActionContext::GetRunningMasterRate(this->mContext);
-        v6 = v2->mSplitBodyBlend.m_pPointer;
-        v7 = v4 / v5;
+        v4 = *(float *)&m_Track[1].mBreakPoint;
+        RunningMasterRate = ActionContext::GetRunningMasterRate(this->mContext);
+        m_pPointer = this->mSplitBodyBlend.m_pPointer;
+        v7 = v4 / RunningMasterRate;
         if ( v7 == 0.0 )
         {
-          HIDWORD(v6[1].mParent.mOffset) = -1082130432;
-          v6[1].mPriority = 0;
+          HIDWORD(m_pPointer[1].mParent.mOffset) = -1082130432;
+          m_pPointer[1].mPriority = 0;
         }
         else
         {
           if ( v7 <= 0.0 )
             goto LABEL_10;
-          *((float *)&v6[1].mParent.mOffset + 1) = -1.0 / v7;
+          *((float *)&m_pPointer[1].mParent.mOffset + 1) = -1.0 / v7;
         }
-        BYTE3(v6[1].mParent.mOffset) = 0;
+        BYTE3(m_pPointer[1].mParent.mOffset) = 0;
       }
     }
   }
 LABEL_10:
-  if ( *((_BYTE *)&v2->m_Track[1].mMasterRate.value + 6) )
+  if ( *((_BYTE *)&this->m_Track[1].mMasterRate.value + 6) )
   {
-    v8 = (UFG::SimObjectCVBase *)v2->mContext->mSimObject.m_pPointer;
+    v8 = (UFG::SimObjectCVBase *)this->mContext->mSimObject.m_pPointer;
     if ( v8 )
     {
-      v10 = v8->m_Flags;
-      if ( (v10 >> 14) & 1 )
+      m_Flags = v8->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
       {
-        v11 = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerBaseComponent>(v8);
+        ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerBaseComponent>(v8);
       }
-      else if ( (v10 & 0x8000u) == 0 )
+      else if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
       {
-        if ( (v10 >> 13) & 1 )
-        {
-          v11 = (UFG::AICharacterControllerBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                             (UFG::SimObjectGame *)&v8->vfptr,
-                                                             UFG::AICharacterControllerBaseComponent::_TypeUID);
-        }
-        else if ( (v10 >> 12) & 1 )
-        {
-          v11 = (UFG::AICharacterControllerBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                             (UFG::SimObjectGame *)&v8->vfptr,
-                                                             UFG::AICharacterControllerBaseComponent::_TypeUID);
-        }
-        else
-        {
-          v11 = (UFG::AICharacterControllerBaseComponent *)UFG::SimObject::GetComponentOfType(
-                                                             (UFG::SimObject *)&v8->vfptr,
-                                                             UFG::AICharacterControllerBaseComponent::_TypeUID);
-        }
+        ComponentOfTypeHK = (UFG::AICharacterControllerBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                         v8,
+                                                                         UFG::AICharacterControllerBaseComponent::_TypeUID);
       }
       else
       {
-        v11 = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerBaseComponent>(v8);
+        ComponentOfTypeHK = (UFG::AICharacterControllerBaseComponent *)UFG::SimObject::GetComponentOfType(
+                                                                         v8,
+                                                                         UFG::AICharacterControllerBaseComponent::_TypeUID);
       }
-      v9 = v11;
+      v9 = ComponentOfTypeHK;
     }
     else
     {
       v9 = 0i64;
     }
-    v12 = v2->mContext->mSimObject.m_pPointer;
+    v12 = this->mContext->mSimObject.m_pPointer;
     if ( v12 )
-      v1 = v12->m_pTransformNodeComponent;
-    if ( v9 && v1 && v9->m_Intention.mMotionIntentionSpeed <= 0.0 )
+      m_pTransformNodeComponent = v12->m_pTransformNodeComponent;
+    if ( v9 && m_pTransformNodeComponent && v9->m_Intention.mMotionIntentionSpeed <= 0.0 )
     {
-      UFG::TransformNodeComponent::UpdateWorldTransform(v1);
-      v13 = v1->mWorldTransform.v0.y;
-      v14 = v1->mWorldTransform.v0.z;
-      v9->m_Intention.mMotionIntentionDirection.x = v1->mWorldTransform.v0.x;
-      v9->m_Intention.mMotionIntentionDirection.y = v13;
-      v9->m_Intention.mMotionIntentionDirection.z = v14;
+      UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+      y = m_pTransformNodeComponent->mWorldTransform.v0.y;
+      z = m_pTransformNodeComponent->mWorldTransform.v0.z;
+      v9->m_Intention.mMotionIntentionDirection.x = m_pTransformNodeComponent->mWorldTransform.v0.x;
+      v9->m_Intention.mMotionIntentionDirection.y = y;
+      v9->m_Intention.mMotionIntentionDirection.z = z;
       v9->m_IntentionUpdated = 1;
     }
   }
@@ -697,101 +648,92 @@ LABEL_10:
 // RVA: 0x30F110
 void __fastcall AnimationRefPoseTask::AnimationRefPoseTask(AnimationRefPoseTask *this)
 {
-  UFG::qNode<ITask,ITask> *v1; // rax
-  UFG::qSafePointer<AnimationNode,AnimationNode> *v2; // [rsp+28h] [rbp+10h]
-  UFG::qSafePointer<PoseNode,PoseNode> *v3; // [rsp+28h] [rbp+10h]
-
-  v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
-  v1->mPrev = v1;
-  v1->mNext = v1;
+  this->mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->mNext = &this->UFG::qNode<ITask,ITask>;
   this->vfptr = (ITaskVtbl *)&ITask::`vftable;
   this->vfptr = (ITaskVtbl *)&Task<AnimationRefPoseTrack>::`vftable;
   this->vfptr = (ITaskVtbl *)&AnimationRefPoseTask::`vftable;
-  v2 = &this->mController;
-  v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v2->mNext = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
+  this->mController.mPrev = &this->mController;
+  this->mController.mNext = &this->mController;
   this->mController.m_pPointer = 0i64;
-  v3 = &this->mSplitBodyBlend;
-  v3->mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v3->mPrev;
-  v3->mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v3->mPrev;
+  this->mSplitBodyBlend.mPrev = &this->mSplitBodyBlend;
+  this->mSplitBodyBlend.mNext = &this->mSplitBodyBlend;
   this->mSplitBodyBlend.m_pPointer = 0i64;
   this->mFinished = 1;
 }
 
 // File Line: 467
 // RVA: 0x310410
-void __fastcall AnimationRefPoseTask::AddTheAnim(AnimationRefPoseTask *this, UFG::CharacterAnimationComponent *characterAnimationComponent)
+void __fastcall AnimationRefPoseTask::AddTheAnim(
+        AnimationRefPoseTask *this,
+        UFG::CharacterAnimationComponent *characterAnimationComponent)
 {
-  AnimationRefPoseTask *v2; // rdi
-  Creature *v3; // rbp
+  Creature *mCreature; // rbp
   AnimationNode *v4; // rsi
-  ITrack *v5; // rax
+  ITrack *m_Track; // rax
   char *v6; // rax
   PoseNode *v7; // rax
   PoseNode *v8; // r8
-  UFG::qSafePointer<PoseNode,PoseNode> *v9; // rdx
+  UFG::qSafePointer<PoseNode,PoseNode> *p_mSplitBodyBlend; // rdx
   UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *v10; // rcx
   UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *v11; // rax
   UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *v12; // rax
-  PoseNode *v13; // rbx
+  PoseNode *m_pPointer; // rbx
   char *v14; // rax
   AnimationNode *v15; // rax
   UFG::qSafePointer<AnimationNode,AnimationNode> *v16; // rdx
   UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *v17; // rcx
   UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *v18; // rax
   UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *v19; // rax
-  PoseNode *v20; // rax
-  UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *v21; // rdx
-  UFG::qSafePointer<AnimationNode,AnimationNode> *v22; // r8
-  UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *v23; // rcx
-  Expression::IMemberMap **v24; // rcx
-  Expression::IMemberMap *v25; // rax
+  AnimationNode *v20; // rax
+  UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *mPrev; // rdx
+  UFG::qSafePointer<AnimationNode,AnimationNode> *p_mController; // r8
+  UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *mNext; // rcx
+  UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *p_mNode; // rcx
+  UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *v25; // rax
   AnimationNode *v26; // rdx
-  int returnCode; // [rsp+78h] [rbp+10h]
+  int returnCode; // [rsp+78h] [rbp+10h] BYREF
   char *v28; // [rsp+80h] [rbp+18h]
 
-  v2 = this;
-  v3 = characterAnimationComponent->mCreature;
-  if ( v3 )
+  mCreature = characterAnimationComponent->mCreature;
+  if ( mCreature )
   {
     v4 = 0i64;
     returnCode = 0;
-    v5 = this->m_Track;
-    if ( (signed int)v5[1].m_TrackClassNameUID <= 0 )
+    m_Track = this->m_Track;
+    if ( (int)m_Track[1].m_TrackClassNameUID <= 0 )
     {
-      v20 = Creature::PlayAnimation(
-              v3,
-              &UFG::gNullQSymbolUC,
-              0,
-              *(float *)&v5[1].vfptr,
-              *((float *)&v5[1].vfptr + 1),
-              *(float *)&v5[1].mResourceOwner,
-              0,
-              &returnCode);
-      v22 = &v2->mController;
-      if ( v2->mController.m_pPointer )
+      v20 = (AnimationNode *)Creature::PlayAnimation(
+                               mCreature,
+                               &UFG::gNullQSymbolUC,
+                               APM_NORMAL,
+                               *(float *)&m_Track[1].vfptr,
+                               *((float *)&m_Track[1].vfptr + 1),
+                               *(float *)&m_Track[1].mResourceOwner,
+                               0,
+                               &returnCode);
+      p_mController = &this->mController;
+      if ( this->mController.m_pPointer )
       {
-        v21 = v22->mPrev;
-        v23 = v2->mController.mNext;
-        v21->mNext = v23;
-        v23->mPrev = v21;
-        v22->mPrev = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v22->mPrev;
-        v2->mController.mNext = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v2->mController.mPrev;
+        mPrev = p_mController->mPrev;
+        mNext = this->mController.mNext;
+        mPrev->mNext = mNext;
+        mNext->mPrev = mPrev;
+        p_mController->mPrev = p_mController;
+        this->mController.mNext = &this->mController;
       }
-      v2->mController.m_pPointer = (AnimationNode *)v20;
+      this->mController.m_pPointer = v20;
       if ( v20 )
       {
-        v24 = &v20[1].mResourceOwner;
-        v25 = v20[1].mResourceOwner;
-        v25->mResourceOwner = (Expression::IMemberMap *)v22;
-        v22->mPrev = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)v25;
-        v2->mController.mNext = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)v24;
-        *v24 = (Expression::IMemberMap *)v22;
+        p_mNode = &v20->UFG::qSafePointerNode<AnimationNode>::m_SafePointerList.mNode;
+        v25 = v20->UFG::qSafePointerNode<AnimationNode>::m_SafePointerList.mNode.UFG::qSafePointerNode<AnimationNode>::mPrev;
+        v25->mNext = p_mController;
+        p_mController->mPrev = v25;
+        this->mController.mNext = p_mNode;
+        p_mNode->mPrev = p_mController;
       }
-      LOBYTE(v21) = LOBYTE(v2->m_Track[1].mMasterRate.text.mOffset) != 0;
-      v2->mController.m_pPointer->vfptr[3].__vecDelDtor(
-        (Expression::IMemberMap *)v2->mController.m_pPointer,
-        (unsigned int)v21);
+      LOBYTE(mPrev) = LOBYTE(this->m_Track[1].mMasterRate.text.mOffset) != 0;
+      this->mController.m_pPointer->vfptr[3].__vecDelDtor(this->mController.m_pPointer, (unsigned int)mPrev);
     }
     else
     {
@@ -799,37 +741,37 @@ void __fastcall AnimationRefPoseTask::AddTheAnim(AnimationRefPoseTask *this, UFG
       v28 = v6;
       if ( v6 )
       {
-        BlendNode::BlendNode((BlendNode *)v6, *(float *)&v2->m_Track[1].mResourceOwner);
+        BlendNode::BlendNode((BlendNode *)v6, *(float *)&this->m_Track[1].mResourceOwner);
         v8 = v7;
       }
       else
       {
         v8 = 0i64;
       }
-      v9 = &v2->mSplitBodyBlend;
-      if ( v2->mSplitBodyBlend.m_pPointer )
+      p_mSplitBodyBlend = &this->mSplitBodyBlend;
+      if ( this->mSplitBodyBlend.m_pPointer )
       {
-        v10 = v9->mPrev;
-        v11 = v2->mSplitBodyBlend.mNext;
+        v10 = p_mSplitBodyBlend->mPrev;
+        v11 = this->mSplitBodyBlend.mNext;
         v10->mNext = v11;
         v11->mPrev = v10;
-        v9->mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v9->mPrev;
-        v2->mSplitBodyBlend.mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mSplitBodyBlend.mPrev;
+        p_mSplitBodyBlend->mPrev = p_mSplitBodyBlend;
+        this->mSplitBodyBlend.mNext = &this->mSplitBodyBlend;
       }
-      v2->mSplitBodyBlend.m_pPointer = v8;
+      this->mSplitBodyBlend.m_pPointer = v8;
       if ( v8 )
       {
-        v12 = v8->m_SafePointerList.mNode.mPrev;
-        v12->mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v9->mPrev;
-        v9->mPrev = v12;
-        v2->mSplitBodyBlend.mNext = &v8->m_SafePointerList.mNode;
-        v8->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v9->mPrev;
+        v12 = v8->m_SafePointerList.mNode.UFG::qSafePointerNode<PoseNode>::mPrev;
+        v12->mNext = p_mSplitBodyBlend;
+        p_mSplitBodyBlend->mPrev = v12;
+        this->mSplitBodyBlend.mNext = &v8->m_SafePointerList.mNode;
+        v8->m_SafePointerList.mNode.UFG::qSafePointerNode<PoseNode>::mPrev = p_mSplitBodyBlend;
       }
-      v13 = v2->mSplitBodyBlend.m_pPointer;
-      v13[1].mPrev = (UFG::qNode<PoseNode,PoseNode> *)Creature::GetWeightSet(
-                                                        v3,
-                                                        (UFG::qSymbolUC *)&v2->m_Track[1].mBreakPoint);
-      BYTE3(v2->mSplitBodyBlend.m_pPointer[1].mParent.mOffset) = 1;
+      m_pPointer = this->mSplitBodyBlend.m_pPointer;
+      m_pPointer[1].mPrev = (UFG::qNode<PoseNode,PoseNode> *)Creature::GetWeightSet(
+                                                               mCreature,
+                                                               (UFG::qSymbolUC *)&this->m_Track[1].mBreakPoint);
+      BYTE3(this->mSplitBodyBlend.m_pPointer[1].mParent.mOffset) = 1;
       v14 = UFG::qMemoryPool2::Allocate(
               &gActionTreeMemoryPool,
               0x170ui64,
@@ -842,47 +784,47 @@ void __fastcall AnimationRefPoseTask::AddTheAnim(AnimationRefPoseTask *this, UFG
         AnimationNode::AnimationNode(
           (AnimationNode *)v14,
           &UFG::gNullQSymbolUC,
-          0,
-          *(float *)&v2->m_Track[1].vfptr,
+          APM_NORMAL,
+          *(float *)&this->m_Track[1].vfptr,
           -1.0);
         v4 = v15;
       }
-      v16 = &v2->mController;
-      if ( v2->mController.m_pPointer )
+      v16 = &this->mController;
+      if ( this->mController.m_pPointer )
       {
         v17 = v16->mPrev;
-        v18 = v2->mController.mNext;
+        v18 = this->mController.mNext;
         v17->mNext = v18;
         v18->mPrev = v17;
-        v16->mPrev = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v16->mPrev;
-        v2->mController.mNext = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v2->mController.mPrev;
+        v16->mPrev = v16;
+        this->mController.mNext = &this->mController;
       }
-      v2->mController.m_pPointer = v4;
+      this->mController.m_pPointer = v4;
       if ( v4 )
       {
-        v19 = v4->m_SafePointerList.mNode.mPrev;
-        v19->mNext = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v16->mPrev;
+        v19 = v4->UFG::qSafePointerNode<AnimationNode>::m_SafePointerList.mNode.UFG::qSafePointerNode<AnimationNode>::mPrev;
+        v19->mNext = v16;
         v16->mPrev = v19;
-        v2->mController.mNext = &v4->m_SafePointerList.mNode;
-        v4->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v16->mPrev;
+        this->mController.mNext = &v4->UFG::qSafePointerNode<AnimationNode>::m_SafePointerList.mNode;
+        v4->UFG::qSafePointerNode<AnimationNode>::m_SafePointerList.mNode.UFG::qSafePointerNode<AnimationNode>::mPrev = v16;
       }
       Creature::PlayBlendTree(
-        v3,
-        (PoseNode *)&v2->mController.m_pPointer->vfptr,
-        (PoseNodeParent *)v2->mSplitBodyBlend.m_pPointer,
-        v2->m_Track[1].m_TrackClassNameUID,
+        mCreature,
+        this->mController.m_pPointer,
+        (PoseNodeParent *)this->mSplitBodyBlend.m_pPointer,
+        this->m_Track[1].m_TrackClassNameUID,
         0,
-        *(float *)&v2->m_Track[1].vfptr,
-        *((float *)&v2->m_Track[1].vfptr + 1),
+        *(float *)&this->m_Track[1].vfptr,
+        *((float *)&this->m_Track[1].vfptr + 1),
         &returnCode);
     }
-    v26 = v2->mController.m_pPointer;
+    v26 = this->mController.m_pPointer;
     if ( v26 )
     {
-      v26->mPlayEndTime = *((float *)&v2->m_Track[1].vfptr + 1);
-      ((void (__fastcall *)(AnimationNode *, ActionContext *))v2->mController.m_pPointer->vfptr[2].GetResourceOwner)(
-        v2->mController.m_pPointer,
-        v2->mContext);
+      v26->mPlayEndTime = *((float *)&this->m_Track[1].vfptr + 1);
+      ((void (__fastcall *)(AnimationNode *, ActionContext *))this->mController.m_pPointer->vfptr[2].GetResourceOwner)(
+        this->mController.m_pPointer,
+        this->mContext);
     }
   }
 }
@@ -891,75 +833,66 @@ void __fastcall AnimationRefPoseTask::AddTheAnim(AnimationRefPoseTask *this, UFG
 // RVA: 0x3109D0
 void __fastcall AnimationRefPoseTask::Begin(AnimationRefPoseTask *this, ActionContext *context)
 {
-  AnimationRefPoseTask *v2; // rbx
-  UFG::SimObject *v3; // rax
-  UFG::TransformNodeComponent *v4; // rdi
-  float v5; // xmm5_4
-  float v6; // xmm6_4
+  UFG::SimObject *m_pPointer; // rax
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rdi
+  float y; // xmm5_4
+  float z; // xmm6_4
   float v7; // xmm2_4
-  __m128 v8; // xmm4
+  __m128 x_low; // xmm4
   __m128 v9; // xmm3
   UFG::SimObjectCVBase *v10; // rcx
-  unsigned __int16 v11; // dx
-  UFG::CharacterAnimationComponent *v12; // rax
+  __int16 m_Flags; // dx
+  UFG::CharacterAnimationComponent *ComponentOfTypeHK; // rax
 
-  v2 = this;
   this->mContext = context;
-  if ( !context || !context->mSimObject.m_pPointer || !((context->mSimObject.m_pPointer->m_Flags >> 10) & 1) )
+  if ( !context || !context->mSimObject.m_pPointer || (context->mSimObject.m_pPointer->m_Flags & 0x400) == 0 )
   {
-    v3 = context->mSimObject.m_pPointer;
-    if ( v3 )
-      v4 = v3->m_pTransformNodeComponent;
+    m_pPointer = context->mSimObject.m_pPointer;
+    if ( m_pPointer )
+      m_pTransformNodeComponent = m_pPointer->m_pTransformNodeComponent;
     else
-      v4 = 0i64;
-    UFG::TransformNodeComponent::UpdateWorldTransform(v4);
-    v5 = v4->mWorldTransform.v0.y;
-    v6 = v4->mWorldTransform.v0.z;
+      m_pTransformNodeComponent = 0i64;
+    UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+    y = m_pTransformNodeComponent->mWorldTransform.v0.y;
+    z = m_pTransformNodeComponent->mWorldTransform.v0.z;
     v7 = 0.0;
-    v2->mStartFacingVector.x = v4->mWorldTransform.v0.x;
-    v2->mStartFacingVector.y = v5;
-    v8 = (__m128)LODWORD(v2->mStartFacingVector.x);
-    v2->mStartFacingVector.z = v6;
-    v9 = v8;
-    v9.m128_f32[0] = (float)((float)(v8.m128_f32[0] * v8.m128_f32[0]) + (float)(v5 * v5)) + (float)(v6 * v6);
+    this->mStartFacingVector.x = m_pTransformNodeComponent->mWorldTransform.v0.x;
+    this->mStartFacingVector.y = y;
+    x_low = (__m128)LODWORD(this->mStartFacingVector.x);
+    this->mStartFacingVector.z = z;
+    v9 = x_low;
+    v9.m128_f32[0] = (float)((float)(x_low.m128_f32[0] * x_low.m128_f32[0]) + (float)(y * y)) + (float)(z * z);
     if ( v9.m128_f32[0] != 0.0 )
-      v7 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v9));
-    v2->mStartFacingVector.x = v8.m128_f32[0] * v7;
-    v2->mStartFacingVector.z = v7 * v6;
-    v2->mStartFacingVector.y = v7 * v5;
-    v10 = (UFG::SimObjectCVBase *)v2->mContext->mSimObject.m_pPointer;
+      v7 = 1.0 / _mm_sqrt_ps(v9).m128_f32[0];
+    this->mStartFacingVector.x = x_low.m128_f32[0] * v7;
+    this->mStartFacingVector.z = v7 * z;
+    this->mStartFacingVector.y = v7 * y;
+    v10 = (UFG::SimObjectCVBase *)this->mContext->mSimObject.m_pPointer;
     if ( v10 )
     {
-      v11 = v10->m_Flags;
-      if ( (v11 >> 14) & 1 )
+      m_Flags = v10->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
       {
-        v12 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v10);
+        ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v10);
       }
-      else if ( (v11 & 0x8000u) == 0 )
+      else if ( (m_Flags & 0x2000) != 0 )
       {
-        if ( (v11 >> 13) & 1 )
-        {
-          v12 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v10);
-        }
-        else if ( (v11 >> 12) & 1 )
-        {
-          v12 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                      (UFG::SimObjectGame *)&v10->vfptr,
-                                                      UFG::CharacterAnimationComponent::_TypeUID);
-        }
-        else
-        {
-          v12 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                      (UFG::SimObject *)&v10->vfptr,
-                                                      UFG::CharacterAnimationComponent::_TypeUID);
-        }
+        ComponentOfTypeHK = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v10);
+      }
+      else if ( (m_Flags & 0x1000) != 0 )
+      {
+        ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                  v10,
+                                                                  UFG::CharacterAnimationComponent::_TypeUID);
       }
       else
       {
-        v12 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v10);
+        ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                  v10,
+                                                                  UFG::CharacterAnimationComponent::_TypeUID);
       }
-      if ( v12 )
-        AnimationRefPoseTask::AddTheAnim(v2, v12);
+      if ( ComponentOfTypeHK )
+        AnimationRefPoseTask::AddTheAnim(this, ComponentOfTypeHK);
     }
   }
 }
@@ -968,53 +901,42 @@ void __fastcall AnimationRefPoseTask::Begin(AnimationRefPoseTask *this, ActionCo
 // RVA: 0x312CA0
 char __fastcall AnimationRefPoseTask::Update(AnimationRefPoseTask *this, float timeDelta)
 {
-  AnimationRefPoseTask *v2; // rbx
-  ActionContext *v3; // rcx
+  ActionContext *mContext; // rcx
   UFG::SimObject *v4; // rax
-  UFG::SimObjectCVBase *v5; // rcx
-  unsigned __int16 v6; // dx
-  UFG::CharacterAnimationComponent *v7; // rax
+  UFG::SimObjectCVBase *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::CharacterAnimationComponent *ComponentOfTypeHK; // rax
 
-  v2 = this;
-  v3 = this->mContext;
-  if ( !v3 || (v4 = v3->mSimObject.m_pPointer) == 0i64 || !((v4->m_Flags >> 10) & 1) )
+  mContext = this->mContext;
+  if ( (!mContext || (v4 = mContext->mSimObject.m_pPointer) == 0i64 || (v4->m_Flags & 0x400) == 0)
+    && !this->mController.m_pPointer )
   {
-    if ( !v2->mController.m_pPointer )
+    m_pPointer = (UFG::SimObjectCVBase *)mContext->mSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      v5 = (UFG::SimObjectCVBase *)v3->mSimObject.m_pPointer;
-      if ( v5 )
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
       {
-        v6 = v5->m_Flags;
-        if ( (v6 >> 14) & 1 )
-        {
-          v7 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v5);
-        }
-        else if ( (v6 & 0x8000u) == 0 )
-        {
-          if ( (v6 >> 13) & 1 )
-          {
-            v7 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v5);
-          }
-          else if ( (v6 >> 12) & 1 )
-          {
-            v7 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                       (UFG::SimObjectGame *)&v5->vfptr,
-                                                       UFG::CharacterAnimationComponent::_TypeUID);
-          }
-          else
-          {
-            v7 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                       (UFG::SimObject *)&v5->vfptr,
-                                                       UFG::CharacterAnimationComponent::_TypeUID);
-          }
-        }
-        else
-        {
-          v7 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v5);
-        }
-        if ( v7 )
-          AnimationRefPoseTask::AddTheAnim(v2, v7);
+        ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(m_pPointer);
       }
+      else if ( (m_Flags & 0x2000) != 0 )
+      {
+        ComponentOfTypeHK = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)m_pPointer);
+      }
+      else if ( (m_Flags & 0x1000) != 0 )
+      {
+        ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                  m_pPointer,
+                                                                  UFG::CharacterAnimationComponent::_TypeUID);
+      }
+      else
+      {
+        ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                  m_pPointer,
+                                                                  UFG::CharacterAnimationComponent::_TypeUID);
+      }
+      if ( ComponentOfTypeHK )
+        AnimationRefPoseTask::AddTheAnim(this, ComponentOfTypeHK);
     }
   }
   return 1;
@@ -1024,38 +946,36 @@ char __fastcall AnimationRefPoseTask::Update(AnimationRefPoseTask *this, float t
 // RVA: 0x3120B0
 void __fastcall AnimationRefPoseTask::End(AnimationRefPoseTask *this)
 {
-  UFG::TransformNodeComponent *v1; // rdi
-  AnimationRefPoseTask *v2; // rsi
-  PoseNode *v3; // rdx
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rdi
+  PoseNode *m_pPointer; // rdx
   float v4; // xmm1_4
   UFG::SimObjectCVBase *v5; // rcx
   UFG::AICharacterControllerBaseComponent *v6; // rbx
-  unsigned __int16 v7; // dx
-  UFG::AICharacterControllerBaseComponent *v8; // rax
+  __int16 m_Flags; // dx
+  UFG::AICharacterControllerBaseComponent *ComponentOfTypeHK; // rax
   UFG::SimObject *v9; // rcx
-  float v10; // xmm0_4
-  float v11; // xmm1_4
+  float y; // xmm0_4
+  float z; // xmm1_4
 
-  v1 = 0i64;
-  v2 = this;
+  m_pTransformNodeComponent = 0i64;
   if ( this->mController.m_pPointer )
   {
-    v3 = this->mSplitBodyBlend.m_pPointer;
-    if ( v3 )
+    m_pPointer = this->mSplitBodyBlend.m_pPointer;
+    if ( m_pPointer )
     {
       v4 = *((float *)&this->m_Track[1].mResourceOwner + 1);
       if ( v4 == 0.0 )
       {
-        HIDWORD(v3[1].mParent.mOffset) = -1082130432;
-        v3[1].mPriority = 0;
+        HIDWORD(m_pPointer[1].mParent.mOffset) = -1082130432;
+        m_pPointer[1].mPriority = 0;
       }
       else
       {
         if ( v4 <= 0.0 )
           goto LABEL_8;
-        *((float *)&v3[1].mParent.mOffset + 1) = -1.0 / v4;
+        *((float *)&m_pPointer[1].mParent.mOffset + 1) = -1.0 / v4;
       }
-      BYTE3(v3[1].mParent.mOffset) = 0;
+      BYTE3(m_pPointer[1].mParent.mOffset) = 0;
     }
   }
 LABEL_8:
@@ -1064,53 +984,40 @@ LABEL_8:
     v5 = (UFG::SimObjectCVBase *)this->mContext->mSimObject.m_pPointer;
     if ( v5 )
     {
-      v7 = v5->m_Flags;
-      if ( (v7 >> 14) & 1 )
+      m_Flags = v5->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
       {
-        v8 = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerBaseComponent>(v5);
+        ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerBaseComponent>(v5);
       }
-      else if ( (v7 & 0x8000u) == 0 )
+      else if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
       {
-        if ( (v7 >> 13) & 1 )
-        {
-          v8 = (UFG::AICharacterControllerBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                            (UFG::SimObjectGame *)&v5->vfptr,
-                                                            UFG::AICharacterControllerBaseComponent::_TypeUID);
-        }
-        else if ( (v7 >> 12) & 1 )
-        {
-          v8 = (UFG::AICharacterControllerBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                            (UFG::SimObjectGame *)&v5->vfptr,
-                                                            UFG::AICharacterControllerBaseComponent::_TypeUID);
-        }
-        else
-        {
-          v8 = (UFG::AICharacterControllerBaseComponent *)UFG::SimObject::GetComponentOfType(
-                                                            (UFG::SimObject *)&v5->vfptr,
-                                                            UFG::AICharacterControllerBaseComponent::_TypeUID);
-        }
+        ComponentOfTypeHK = (UFG::AICharacterControllerBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                         v5,
+                                                                         UFG::AICharacterControllerBaseComponent::_TypeUID);
       }
       else
       {
-        v8 = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerBaseComponent>(v5);
+        ComponentOfTypeHK = (UFG::AICharacterControllerBaseComponent *)UFG::SimObject::GetComponentOfType(
+                                                                         v5,
+                                                                         UFG::AICharacterControllerBaseComponent::_TypeUID);
       }
-      v6 = v8;
+      v6 = ComponentOfTypeHK;
     }
     else
     {
       v6 = 0i64;
     }
-    v9 = v2->mContext->mSimObject.m_pPointer;
+    v9 = this->mContext->mSimObject.m_pPointer;
     if ( v9 )
-      v1 = v9->m_pTransformNodeComponent;
-    if ( v6 && v1 && v6->m_Intention.mMotionIntentionSpeed <= 0.0 )
+      m_pTransformNodeComponent = v9->m_pTransformNodeComponent;
+    if ( v6 && m_pTransformNodeComponent && v6->m_Intention.mMotionIntentionSpeed <= 0.0 )
     {
-      UFG::TransformNodeComponent::UpdateWorldTransform(v1);
-      v10 = v1->mWorldTransform.v0.y;
-      v11 = v1->mWorldTransform.v0.z;
-      v6->m_Intention.mMotionIntentionDirection.x = v1->mWorldTransform.v0.x;
-      v6->m_Intention.mMotionIntentionDirection.y = v10;
-      v6->m_Intention.mMotionIntentionDirection.z = v11;
+      UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+      y = m_pTransformNodeComponent->mWorldTransform.v0.y;
+      z = m_pTransformNodeComponent->mWorldTransform.v0.z;
+      v6->m_Intention.mMotionIntentionDirection.x = m_pTransformNodeComponent->mWorldTransform.v0.x;
+      v6->m_Intention.mMotionIntentionDirection.y = y;
+      v6->m_Intention.mMotionIntentionDirection.z = z;
       v6->m_IntentionUpdated = 1;
     }
   }
@@ -1120,17 +1027,12 @@ LABEL_8:
 // RVA: 0x30F080
 void __fastcall AnimationLockHighLODTask::AnimationLockHighLODTask(AnimationLockHighLODTask *this)
 {
-  UFG::qNode<ITask,ITask> *v1; // rax
-  UFG::qNode<AnimationLockHighLODTask,AnimationLockHighLODList> *v2; // rax
-
-  v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
-  v1->mPrev = v1;
-  v1->mNext = v1;
+  this->Task<AnimationLockHighLODTrack>::ITask::UFG::qNode<ITask,ITask>::mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->Task<AnimationLockHighLODTrack>::ITask::UFG::qNode<ITask,ITask>::mNext = &this->UFG::qNode<ITask,ITask>;
   this->vfptr = (ITaskVtbl *)&ITask::`vftable;
   this->vfptr = (ITaskVtbl *)&Task<AnimationLockHighLODTrack>::`vftable;
-  v2 = (UFG::qNode<AnimationLockHighLODTask,AnimationLockHighLODList> *)&this->mPrev;
-  v2->mPrev = v2;
-  v2->mNext = v2;
+  this->UFG::qNode<AnimationLockHighLODTask,AnimationLockHighLODList>::mPrev = &this->UFG::qNode<AnimationLockHighLODTask,AnimationLockHighLODList>;
+  this->UFG::qNode<AnimationLockHighLODTask,AnimationLockHighLODList>::mNext = &this->UFG::qNode<AnimationLockHighLODTask,AnimationLockHighLODList>;
   this->vfptr = (ITaskVtbl *)&AnimationLockHighLODTask::`vftable;
 }
 
@@ -1138,84 +1040,72 @@ void __fastcall AnimationLockHighLODTask::AnimationLockHighLODTask(AnimationLock
 // RVA: 0x310930
 void __fastcall AnimationLockHighLODTask::Begin(AnimationLockHighLODTask *this, ActionContext *pActionContext)
 {
-  AnimationLockHighLODTask *v2; // rbx
-  UFG::SimObjectGame *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::AnimationLODComponent *v5; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::AnimationLODComponent *m_pComponent; // rax
 
-  v2 = this;
   this->m_pActionContext = pActionContext;
-  v3 = (UFG::SimObjectGame *)pActionContext->mSimObject.m_pPointer;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectGame *)pActionContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v4 = v3->m_Flags;
-    if ( (v4 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v5 = (UFG::AnimationLODComponent *)v3->m_Components.p[13].m_pComponent;
+      m_pComponent = (UFG::AnimationLODComponent *)m_pPointer->m_Components.p[13].m_pComponent;
     }
-    else if ( (v4 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v4 >> 13) & 1 )
-      {
-        v5 = (UFG::AnimationLODComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                             v3,
-                                             UFG::AnimationLODComponent::_TypeUID);
-      }
-      else if ( (v4 >> 12) & 1 )
-      {
-        v5 = (UFG::AnimationLODComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                             v3,
-                                             UFG::AnimationLODComponent::_TypeUID);
-      }
+      if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        m_pComponent = (UFG::AnimationLODComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                       m_pPointer,
+                                                       UFG::AnimationLODComponent::_TypeUID);
       else
-      {
-        v5 = (UFG::AnimationLODComponent *)UFG::SimObject::GetComponentOfType(
-                                             (UFG::SimObject *)&v3->vfptr,
-                                             UFG::AnimationLODComponent::_TypeUID);
-      }
+        m_pComponent = (UFG::AnimationLODComponent *)UFG::SimObject::GetComponentOfType(
+                                                       m_pPointer,
+                                                       UFG::AnimationLODComponent::_TypeUID);
     }
     else
     {
-      v5 = (UFG::AnimationLODComponent *)v3->m_Components.p[13].m_pComponent;
+      m_pComponent = (UFG::AnimationLODComponent *)m_pPointer->m_Components.p[13].m_pComponent;
     }
-    if ( v5 )
-      UFG::AnimationLODComponent::AddAnimationLockHighLODTask(v5, v2);
+    if ( m_pComponent )
+      UFG::AnimationLODComponent::AddAnimationLockHighLODTask(m_pComponent, this);
   }
 }
 
 // File Line: 605
 // RVA: 0x311900
-void __fastcall BlendTreeControllerBaseTask<BlendTreeControllerTargetDistancTrack>::Bind(BlendTreeControllerBaseTask<BlendTreeControllerTrack> *this, PoseNode *poseNode)
+void __fastcall BlendTreeControllerBaseTask<BlendTreeControllerTargetDistancTrack>::Bind(
+        BlendTreeControllerBaseTask<BlendTreeControllerTrack> *this,
+        PoseNode *poseNode)
 {
-  BlendTreeControllerBaseTask<BlendTreeControllerTrack> *v2; // rbx
   Expression::IMemberMap *v3; // rax
-  UFG::qSafePointer<PoseNode,PoseNode> *v4; // rbx
-  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *v5; // rdx
-  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *v6; // rcx
-  Expression::IMemberMap **v7; // rcx
-  Expression::IMemberMap *v8; // rax
+  UFG::qSafePointer<PoseNode,PoseNode> *p_mPlayingTree; // rbx
+  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *mPrev; // rdx
+  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *mNext; // rcx
+  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *p_mResourceOwner; // rcx
+  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *mResourceOwner; // rax
 
-  v2 = this;
-  v3 = poseNode->vfptr[4].FindWithOldPath((Expression::IMemberMap *)poseNode, (const char *)&this->m_Track[1]);
-  v4 = &v2->mPlayingTree;
-  if ( v4->m_pPointer )
+  v3 = poseNode->Expression::IMemberMap::vfptr[4].FindWithOldPath(poseNode, &this->m_Track[1]);
+  p_mPlayingTree = &this->mPlayingTree;
+  if ( p_mPlayingTree->m_pPointer )
   {
-    v5 = v4->mPrev;
-    v6 = v4->mNext;
-    v5->mNext = v6;
-    v6->mPrev = v5;
-    v4->mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v4->mPrev;
-    v4->mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v4->mPrev;
+    mPrev = p_mPlayingTree->mPrev;
+    mNext = p_mPlayingTree->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mPlayingTree->mPrev = p_mPlayingTree;
+    p_mPlayingTree->mNext = p_mPlayingTree;
   }
-  v4->m_pPointer = (PoseNode *)v3;
+  p_mPlayingTree->m_pPointer = (PoseNode *)v3;
   if ( v3 )
   {
-    v7 = &v3[1].mResourceOwner;
-    v8 = v3[1].mResourceOwner;
-    v8->mResourceOwner = (Expression::IMemberMap *)v4;
-    v4->mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)v8;
-    v4->mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)v7;
-    *v7 = (Expression::IMemberMap *)v4;
+    p_mResourceOwner = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v3[1].mResourceOwner;
+    mResourceOwner = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)v3[1].mResourceOwner;
+    mResourceOwner->mNext = p_mPlayingTree;
+    p_mPlayingTree->mPrev = mResourceOwner;
+    p_mPlayingTree->mNext = p_mResourceOwner;
+    p_mResourceOwner->mPrev = p_mPlayingTree;
   }
 }
 
@@ -1223,74 +1113,68 @@ void __fastcall BlendTreeControllerBaseTask<BlendTreeControllerTargetDistancTrac
 // RVA: 0x30F640
 void __fastcall BlendTreeTask::BlendTreeTask(BlendTreeTask *this)
 {
-  UFG::qNode<ITask,ITask> *v1; // rax
-  UFG::qSafePointer<PoseNode,PoseNode> *v2; // rdx
-  UFG::qSafePointer<PoseNode,BlendNode> *v3; // r8
-  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *v4; // rcx
-  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *v5; // rax
-  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *v6; // rcx
-  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *v7; // rax
-  UFG::qList<IBlendTreeControllerTask,IBlendTreeControllerTask,0,0> *v8; // [rsp+28h] [rbp+10h]
+  UFG::qSafePointer<PoseNode,PoseNode> *p_mPlayingTree; // rdx
+  UFG::qSafePointer<PoseNode,BlendNode> *p_mSplitBodyBlend; // r8
+  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *mNext; // rax
+  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *v5; // rcx
+  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *v6; // rax
 
-  v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
-  v1->mPrev = v1;
-  v1->mNext = v1;
+  this->mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->mNext = &this->UFG::qNode<ITask,ITask>;
   this->vfptr = (ITaskVtbl *)&ITask::`vftable;
   this->vfptr = (ITaskVtbl *)&Task<BlendTreeTrack>::`vftable;
   this->vfptr = (ITaskVtbl *)&BlendTreeTask::`vftable;
-  v2 = &this->mPlayingTree;
-  v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v2->mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
+  p_mPlayingTree = &this->mPlayingTree;
+  this->mPlayingTree.mPrev = &this->mPlayingTree;
+  this->mPlayingTree.mNext = &this->mPlayingTree;
   this->mPlayingTree.m_pPointer = 0i64;
-  v3 = &this->mSplitBodyBlend;
-  v3->mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v3->mPrev;
-  v3->mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v3->mPrev;
+  p_mSplitBodyBlend = &this->mSplitBodyBlend;
+  this->mSplitBodyBlend.mPrev = &this->mSplitBodyBlend;
+  this->mSplitBodyBlend.mNext = &this->mSplitBodyBlend;
   this->mSplitBodyBlend.m_pPointer = 0i64;
-  v8 = &this->mActiveControllers;
-  v8->mNode.mPrev = &v8->mNode;
-  v8->mNode.mNext = &v8->mNode;
+  this->mActiveControllers.mNode.mPrev = &this->mActiveControllers.mNode;
+  this->mActiveControllers.mNode.mNext = &this->mActiveControllers.mNode;
   if ( this->mSplitBodyBlend.m_pPointer )
   {
-    v4 = v3->mPrev;
-    v5 = v3->mNext;
-    v4->mNext = v5;
-    v5->mPrev = v4;
-    v3->mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v3->mPrev;
-    v3->mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v3->mPrev;
+    mPrev = p_mSplitBodyBlend->mPrev;
+    mNext = p_mSplitBodyBlend->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mSplitBodyBlend->mPrev = p_mSplitBodyBlend;
+    p_mSplitBodyBlend->mNext = p_mSplitBodyBlend;
   }
-  v3->m_pPointer = 0i64;
-  if ( v2->m_pPointer )
+  p_mSplitBodyBlend->m_pPointer = 0i64;
+  if ( p_mPlayingTree->m_pPointer )
   {
-    v6 = v2->mPrev;
-    v7 = v2->mNext;
-    v6->mNext = v7;
-    v7->mPrev = v6;
-    v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-    v2->mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
+    v5 = p_mPlayingTree->mPrev;
+    v6 = p_mPlayingTree->mNext;
+    v5->mNext = v6;
+    v6->mPrev = v5;
+    p_mPlayingTree->mPrev = p_mPlayingTree;
+    p_mPlayingTree->mNext = p_mPlayingTree;
   }
-  v2->m_pPointer = 0i64;
+  p_mPlayingTree->m_pPointer = 0i64;
 }
 
 // File Line: 619
 // RVA: 0x311300
 void __fastcall BlendTreeTask::Begin(BlendTreeTask *this, ActionContext *context)
 {
-  ActionContext *v2; // r15
-  BlendTreeTask *v3; // rsi
   UFG::SimObject *v4; // rax
-  UFG::SimObjectCVBase *v5; // rcx
-  unsigned int v6; // er14
-  unsigned __int16 v7; // dx
+  UFG::SimObjectCVBase *m_pPointer; // rcx
+  unsigned int v6; // r14d
+  __int16 m_Flags; // dx
   UFG::CharacterAnimationComponent *v8; // rax
-  Creature *v9; // rdi
+  Creature *mCreature; // rdi
   float v10; // xmm6_4
   float v11; // xmm6_4
-  ITrack *v12; // rcx
+  ITrack *m_Track; // rcx
   UFG::qSymbolUC *v13; // r13
-  BlendTreeDataBase *v14; // rax
-  PoseNode *v15; // rax
+  BlendTreeDataBase *Instance; // rax
+  PoseNode *BlendTree; // rax
   ITrack *v16; // rcx
-  int v17; // er12
+  int mOffset_low; // r12d
   float v18; // xmm7_4
   float v19; // xmm8_4
   BlendNode *v20; // rax
@@ -1305,109 +1189,107 @@ void __fastcall BlendTreeTask::Begin(BlendTreeTask *this, ActionContext *context
   PoseNode *v29; // rbx
   BlendNode *v30; // rax
   ITrack *v31; // rbx
-  ActionNode *v32; // rdi
+  ActionNodePlayable *m_currentNode; // rdi
   const char *v33; // rdx
-  int v34; // edx
+  int mCount; // edx
   PoseNode *v35; // rcx
   __int64 v36; // r15
   PoseNode *v37; // rbx
-  Expression::IMemberMapVtbl *v38; // rdi
-  signed __int64 v39; // r12
-  UFG::qList<IBlendTreeControllerTask,IBlendTreeControllerTask,0,0> *v40; // rdi
-  signed __int64 v41; // rcx
-  __int64 v42; // rbx
-  UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> **v43; // rcx
-  UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> *v44; // rax
-  ITrack *v45; // rdi
-  ActionNode *v46; // rbx
-  __int64 v47; // rax
-  __int64 v48; // r10
-  unsigned int v49; // er11
-  unsigned int v50; // edx
-  __int64 v51; // r9
-  __int64 v52; // rcx
-  signed __int64 v53; // rax
-  signed __int64 v54; // r8
-  __int64 v55; // rax
-  ITrack *v56; // rax
-  int v57; // edx
-  ActionPath pathToPopulate; // [rsp+8h] [rbp-51h]
-  UFG::qString v59; // [rsp+18h] [rbp-41h]
-  int v60; // [rsp+C0h] [rbp+67h]
-  UFG::qSymbolUC animUID; // [rsp+C8h] [rbp+6Fh]
+  Expression::IMemberMapVtbl *vfptr; // rdi
+  __int64 v39; // r12
+  UFG::qList<IBlendTreeControllerTask,IBlendTreeControllerTask,0,0> *p_mActiveControllers; // rdi
+  __int64 v41; // rcx
+  _QWORD *v42; // rbx
+  UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> *mPrev; // rax
+  ITrack *v44; // rdi
+  ActionNodePlayable *v45; // rbx
+  __int64 v46; // rax
+  __int64 v47; // r10
+  unsigned int v48; // r11d
+  unsigned int v49; // edx
+  __int64 v50; // r9
+  __int64 v51; // rcx
+  __int64 v52; // rax
+  __int64 v53; // r8
+  __int64 v54; // rax
+  ITrack *v55; // rax
+  int v56; // edx
+  ActionPath pathToPopulate; // [rsp+8h] [rbp-51h] BYREF
+  UFG::qString v58; // [rsp+18h] [rbp-41h] BYREF
+  int v59; // [rsp+C0h] [rbp+67h] BYREF
+  UFG::qSymbolUC animUID; // [rsp+C8h] [rbp+6Fh] BYREF
   int priority[2]; // [rsp+D0h] [rbp+77h]
-  char *v63; // [rsp+D8h] [rbp+7Fh]
+  char *v62; // [rsp+D8h] [rbp+7Fh]
 
-  v2 = context;
-  v3 = this;
   this->mContext = context;
   animUID.mUID = (unsigned int)this->m_Track[1].mResourceOwner;
-  if ( !context || (v4 = context->mSimObject.m_pPointer) == 0i64 || !((v4->m_Flags >> 10) & 1) )
+  if ( !context || (v4 = context->mSimObject.m_pPointer) == 0i64 || (v4->m_Flags & 0x400) == 0 )
   {
-    v5 = (UFG::SimObjectCVBase *)context->mSimObject.m_pPointer;
+    m_pPointer = (UFG::SimObjectCVBase *)context->mSimObject.m_pPointer;
     v6 = 0;
-    if ( v5 )
+    if ( m_pPointer )
     {
-      v7 = v5->m_Flags;
-      if ( (v7 >> 14) & 1 )
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
       {
-        v8 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v5);
+        v8 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(m_pPointer);
       }
-      else if ( (v7 & 0x8000u) == 0 )
+      else if ( (m_Flags & 0x2000) != 0 )
       {
-        if ( (v7 >> 13) & 1 )
-          v8 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v5);
-        else
-          v8 = (UFG::CharacterAnimationComponent *)((v7 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                       (UFG::SimObjectGame *)&v5->vfptr,
-                                                                       UFG::CharacterAnimationComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v5->vfptr, UFG::CharacterAnimationComponent::_TypeUID));
+        v8 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)m_pPointer);
       }
       else
       {
-        v8 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v5);
+        v8 = (UFG::CharacterAnimationComponent *)((m_Flags & 0x1000) != 0
+                                                ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                    m_pPointer,
+                                                    UFG::CharacterAnimationComponent::_TypeUID)
+                                                : UFG::SimObject::GetComponentOfType(
+                                                    m_pPointer,
+                                                    UFG::CharacterAnimationComponent::_TypeUID));
       }
       if ( v8 )
       {
-        v9 = v8->mCreature;
-        if ( v9 )
+        mCreature = v8->mCreature;
+        if ( mCreature )
         {
-          v60 = 0;
-          v10 = *(float *)&v3->m_Track[1].m_TrackClassNameUID;
-          v11 = v10 / ActionContext::GetRunningMasterRate(v2);
-          v12 = v3->m_Track;
-          v13 = (UFG::qSymbolUC *)((char *)&v12[1].mResourceOwner + 4);
-          if ( HIDWORD(v12[1].mResourceOwner) == symNone.mUID )
+          v59 = 0;
+          v10 = *(float *)&this->m_Track[1].m_TrackClassNameUID;
+          v11 = v10 / ActionContext::GetRunningMasterRate(context);
+          m_Track = this->m_Track;
+          v13 = (UFG::qSymbolUC *)&m_Track[1].mResourceOwner + 1;
+          if ( HIDWORD(m_Track[1].mResourceOwner) == symNone.mUID )
           {
             v30 = (BlendNode *)Creature::PlayBlendTree(
-                                 v9,
+                                 mCreature,
                                  &animUID,
-                                 SLOBYTE(v12[1].mMasterRate.expression.mOffset),
+                                 SLOBYTE(m_Track[1].mMasterRate.expression.mOffset),
                                  v11,
-                                 BYTE1(v12[1].mMasterRate.expression.mOffset) != 0,
-                                 *(float *)&v12[1].mMasterRate.text.mOffset,
-                                 *((float *)&v12[1].mMasterRate.text.mOffset + 1),
-                                 &v60);
+                                 BYTE1(m_Track[1].mMasterRate.expression.mOffset) != 0,
+                                 *(float *)&m_Track[1].mMasterRate.text.mOffset,
+                                 *((float *)&m_Track[1].mMasterRate.text.mOffset + 1),
+                                 &v59);
             UFG::qSafePointer<PoseNode,PoseNode>::operator=(
-              (UFG::qSafePointer<PoseNode,BlendNode> *)&v3->mPlayingTree,
+              (UFG::qSafePointer<PoseNode,BlendNode> *)&this->mPlayingTree,
               v30);
           }
           else
           {
-            v14 = BlendTreeDataBase::GetInstance();
-            v15 = BlendTreeDataBase::FindBlendTree(v14, &animUID);
-            if ( v15 )
+            Instance = BlendTreeDataBase::GetInstance();
+            BlendTree = BlendTreeDataBase::FindBlendTree(Instance, &animUID);
+            if ( BlendTree )
             {
-              v16 = v3->m_Track;
-              v17 = SLOBYTE(v16[1].mMasterRate.expression.mOffset);
-              priority[0] = SLOBYTE(v16[1].mMasterRate.expression.mOffset);
+              v16 = this->m_Track;
+              mOffset_low = SLOBYTE(v16[1].mMasterRate.expression.mOffset);
+              priority[0] = mOffset_low;
               v18 = *(float *)&v16[1].mMasterRate.text.mOffset;
               v19 = *((float *)&v16[1].mMasterRate.text.mOffset + 1);
-              v20 = (BlendNode *)((__int64 (__fastcall *)(PoseNode *))v15->vfptr[1].Serialize)(v15);
+              v20 = (BlendNode *)((__int64 (__fastcall *)(PoseNode *))BlendTree->Expression::IMemberMap::vfptr[1].Serialize)(BlendTree);
               UFG::qSafePointer<PoseNode,PoseNode>::operator=(
-                (UFG::qSafePointer<PoseNode,BlendNode> *)&v3->mPlayingTree,
+                (UFG::qSafePointer<PoseNode,BlendNode> *)&this->mPlayingTree,
                 v20);
-              v21 = v3->m_Track;
-              LODWORD(v59.mNext) = 1;
+              v21 = this->m_Track;
+              LODWORD(v58.mNext) = 1;
               if ( BYTE3(v21[1].mMasterRate.expression.mOffset) == 1 )
               {
                 v22 = UFG::qMemoryPool2::Allocate(
@@ -1415,8 +1297,8 @@ void __fastcall BlendTreeTask::Begin(BlendTreeTask *this, ActionContext *context
                         0xB0ui64,
                         "BlendAddNode",
                         0i64,
-                        (unsigned int)v59.mNext);
-                v63 = v22;
+                        (unsigned int)v58.mNext);
+                v62 = v22;
                 if ( v22 )
                 {
                   BlendAddNode::BlendAddNode((BlendAddNode *)v22, v11);
@@ -1426,23 +1308,15 @@ void __fastcall BlendTreeTask::Begin(BlendTreeTask *this, ActionContext *context
                 {
                   v24 = 0i64;
                 }
-                UFG::qSafePointer<PoseNode,PoseNode>::operator=(&v3->mSplitBodyBlend, v24);
-                v25 = v3->mSplitBodyBlend.m_pPointer;
-                v25[1].mPrev = (UFG::qNode<PoseNode,PoseNode> *)Creature::GetWeightSet(v9, v13);
-                Creature::PlayBlendTree(
-                  v9,
-                  v3->mPlayingTree.m_pPointer,
-                  (PoseNodeParent *)&v24->vfptr,
-                  priority[0],
-                  0,
-                  v18,
-                  v19,
-                  &v60);
-                if ( BYTE2(v3->m_Track[1].mMasterRate.expression.mOffset) == 2 )
+                UFG::qSafePointer<PoseNode,PoseNode>::operator=(&this->mSplitBodyBlend, v24);
+                v25 = this->mSplitBodyBlend.m_pPointer;
+                v25[1].mPrev = (UFG::qNode<PoseNode,PoseNode> *)Creature::GetWeightSet(mCreature, v13);
+                Creature::PlayBlendTree(mCreature, this->mPlayingTree.m_pPointer, v24, priority[0], 0, v18, v19, &v59);
+                if ( BYTE2(this->m_Track[1].mMasterRate.expression.mOffset) == 2 )
                 {
-                  ((void (*)(void))v3->mPlayingTree.m_pPointer->vfptr[2].SetResourceOwner)();
-                  ((void (*)(void))v3->mPlayingTree.m_pPointer->vfptr[3].GetResourcePath)();
-                  ((void (*)(void))v3->mPlayingTree.m_pPointer->vfptr[1].GetResourceOwner)();
+                  ((void (__fastcall *)(PoseNode *))this->mPlayingTree.m_pPointer->vfptr[2].SetResourceOwner)(this->mPlayingTree.m_pPointer);
+                  ((void (__fastcall *)(PoseNode *))this->mPlayingTree.m_pPointer->vfptr[3].GetResourcePath)(this->mPlayingTree.m_pPointer);
+                  this->mPlayingTree.m_pPointer->vfptr[1].GetResourceOwner(this->mPlayingTree.m_pPointer);
                 }
               }
               else
@@ -1454,7 +1328,7 @@ void __fastcall BlendTreeTask::Begin(BlendTreeTask *this, ActionContext *context
                           0xB8ui64,
                           "BlendPhaseNode",
                           0i64,
-                          (unsigned int)v59.mNext);
+                          (unsigned int)v58.mNext);
                   *(_QWORD *)priority = v26;
                   if ( v26 )
                     BlendPhaseNode::BlendPhaseNode((BlendPhaseNode *)v26, v11);
@@ -1468,51 +1342,51 @@ void __fastcall BlendTreeTask::Begin(BlendTreeTask *this, ActionContext *context
                           0xB0ui64,
                           "BlendNode",
                           0i64,
-                          (unsigned int)v59.mNext);
+                          (unsigned int)v58.mNext);
                   *(_QWORD *)priority = v28;
                   if ( v28 )
                     BlendNode::BlendNode((BlendNode *)v28, v11);
                   else
                     v27 = 0i64;
                 }
-                UFG::qSafePointer<PoseNode,PoseNode>::operator=(&v3->mSplitBodyBlend, v27);
-                BYTE3(v3->mSplitBodyBlend.m_pPointer[1].mParent.mOffset) = 1;
-                v29 = v3->mSplitBodyBlend.m_pPointer;
-                v29[1].mPrev = (UFG::qNode<PoseNode,PoseNode> *)Creature::GetWeightSet(v9, v13);
+                UFG::qSafePointer<PoseNode,PoseNode>::operator=(&this->mSplitBodyBlend, v27);
+                BYTE3(this->mSplitBodyBlend.m_pPointer[1].mParent.mOffset) = 1;
+                v29 = this->mSplitBodyBlend.m_pPointer;
+                v29[1].mPrev = (UFG::qNode<PoseNode,PoseNode> *)Creature::GetWeightSet(mCreature, v13);
                 Creature::PlayBlendTree(
-                  v9,
-                  v3->mPlayingTree.m_pPointer,
-                  (PoseNodeParent *)v3->mSplitBodyBlend.m_pPointer,
-                  v17,
+                  mCreature,
+                  this->mPlayingTree.m_pPointer,
+                  (PoseNodeParent *)this->mSplitBodyBlend.m_pPointer,
+                  mOffset_low,
                   0,
                   v18,
                   v19,
-                  &v60);
+                  &v59);
               }
             }
           }
-          if ( v60 )
+          if ( v59 )
           {
-            v31 = v3->m_Track;
-            v32 = (ActionNode *)&v2->mActionController->m_currentNode->vfptr;
-            ActionNode::GetNameFullPath(v32, &pathToPopulate);
+            v31 = this->m_Track;
+            m_currentNode = context->mActionController->m_currentNode;
+            ActionNode::GetNameFullPath(m_currentNode, &pathToPopulate);
             ActionPath::GetString_DBG(&pathToPopulate);
-            v31->vfptr->GetClassname((Expression::IMemberMap *)&v31->vfptr);
-            v32->vfptr[3].GetClassNameUID((Expression::IMemberMap *)&v32->vfptr);
-            UFG::qString::qString(&v59);
-            if ( v60 == 2 )
+            v31->vfptr->GetClassname(v31);
+            m_currentNode->vfptr[3].GetClassNameUID(m_currentNode);
+            UFG::qString::qString(&v58);
+            if ( v59 == 2 )
             {
               v33 = "BlendTree stack has blown Tree will be pruned could have some animation pops: inform FRSD of this ERROR message";
             }
             else
             {
               v33 = "Failed Active BlendTree Branch skipping and restarting: inform: FRSD of this ERROR message";
-              if ( v60 != 1 )
+              if ( v59 != 1 )
                 v33 = "no special error";
             }
-            UFG::qString::Set(&v59, v33);
-            UFG::qString::~qString(&v59);
-            v34 = pathToPopulate.mPath.mCount;
+            UFG::qString::Set(&v58, v33);
+            UFG::qString::~qString(&v58);
+            mCount = pathToPopulate.mPath.mCount;
             if ( pathToPopulate.mPath.mCount >= 0 )
             {
               if ( pathToPopulate.mPath.mData.mOffset
@@ -1520,98 +1394,99 @@ void __fastcall BlendTreeTask::Begin(BlendTreeTask *this, ActionContext *context
                                                 + pathToPopulate.mPath.mData.mOffset) )
               {
                 operator delete[]((char *)&pathToPopulate.mPath.mData + pathToPopulate.mPath.mData.mOffset);
-                v34 = pathToPopulate.mPath.mCount;
+                mCount = pathToPopulate.mPath.mCount;
               }
               pathToPopulate.mPath.mData.mOffset = 0i64;
-              pathToPopulate.mPath.mCount = v34 & 0x80000000;
+              pathToPopulate.mPath.mCount = mCount & 0x80000000;
             }
           }
         }
       }
     }
-    v35 = v3->mPlayingTree.m_pPointer;
+    v35 = this->mPlayingTree.m_pPointer;
     if ( v35 )
     {
-      ((void (__fastcall *)(PoseNode *, ActionContext *))v35->vfptr[2].GetResourceOwner)(v35, v3->mContext);
-      v36 = ((__int64 (*)(void))v3->m_Track->vfptr[1].GetResourcePath)();
-      v37 = v3->mPlayingTree.m_pPointer;
-      v38 = v37->vfptr;
-      ActionContext::GetRunningMasterRate(v3->mContext);
-      v38[3].ResolveReferences((Expression::IMemberMap *)&v37->vfptr);
+      ((void (__fastcall *)(PoseNode *, ActionContext *))v35->Expression::IMemberMap::vfptr[2].GetResourceOwner)(
+        v35,
+        this->mContext);
+      v36 = ((__int64 (__fastcall *)(ITrack *))this->m_Track->Task<BlendTreeTrack>::ITask::vfptr[1].GetResourcePath)(this->m_Track);
+      v37 = this->mPlayingTree.m_pPointer;
+      vfptr = v37->Expression::IMemberMap::vfptr;
+      ActionContext::GetRunningMasterRate(this->mContext);
+      vfptr[3].ResolveReferences(v37);
       v39 = v36 + *(_QWORD *)(v36 + 24) + 24i64;
-      if ( *(_DWORD *)(v36 + 16) & 0x7FFFFFFF )
+      if ( (*(_DWORD *)(v36 + 16) & 0x7FFFFFFF) != 0 )
       {
-        v40 = &v3->mActiveControllers;
+        p_mActiveControllers = &this->mActiveControllers;
         do
         {
           v41 = *(_QWORD *)(v39 + 8i64 * v6) + v39 + 8i64 * v6;
-          v42 = (*(__int64 (__fastcall **)(signed __int64, const char *))(*(_QWORD *)v41 + 80i64))(
-                  v41,
-                  "BlendTreeTask::Begin()");
-          (*(void (__fastcall **)(__int64, PoseNode *))(*(_QWORD *)v42 + 8i64))(v42, v3->mPlayingTree.m_pPointer);
-          (*(void (__fastcall **)(__int64, ActionContext *))(*(_QWORD *)v42 + 16i64))(v42, v3->mContext);
-          v43 = (UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> **)(v42 + 8);
-          v44 = v40->mNode.mPrev;
-          v44->mNext = (UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> *)(v42 + 8);
-          *v43 = v44;
-          v43[1] = &v40->mNode;
-          v40->mNode.mPrev = (UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> *)(v42 + 8);
+          v42 = (_QWORD *)(*(__int64 (__fastcall **)(__int64, const char *))(*(_QWORD *)v41 + 80i64))(
+                            v41,
+                            "BlendTreeTask::Begin()");
+          (*(void (__fastcall **)(_QWORD *, PoseNode *))(*v42 + 8i64))(v42, this->mPlayingTree.m_pPointer);
+          (*(void (__fastcall **)(_QWORD *, ActionContext *))(*v42 + 16i64))(v42, this->mContext);
+          mPrev = p_mActiveControllers->mNode.mPrev;
+          mPrev->mNext = (UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> *)(v42 + 1);
+          v42[1] = mPrev;
+          v42[2] = p_mActiveControllers;
+          p_mActiveControllers->mNode.mPrev = (UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> *)(v42 + 1);
           ++v6;
         }
         while ( v6 < (*(_DWORD *)(v36 + 16) & 0x7FFFFFFFu) );
       }
-      v3->mPlayingTree.m_pPointer->vfptr[2].FindWithOldPath(
-        (Expression::IMemberMap *)v3->mPlayingTree.m_pPointer,
-        (const char *)BYTE2(v3->m_Track[1].mMasterRate.expression.mOffset));
+      this->mPlayingTree.m_pPointer->vfptr[2].FindWithOldPath(
+        this->mPlayingTree.m_pPointer,
+        (const char *)BYTE2(this->m_Track[1].mMasterRate.expression.mOffset));
     }
     else
     {
-      v45 = v3->m_Track;
-      v46 = (ActionNode *)&v2->mActionController->m_currentNode->vfptr;
-      ActionNode::GetNameFullPath(v46, &pathToPopulate);
+      v44 = this->m_Track;
+      v45 = context->mActionController->m_currentNode;
+      ActionNode::GetNameFullPath(v45, &pathToPopulate);
       ActionPath::GetString_DBG(&pathToPopulate);
-      v45->vfptr->GetClassname((Expression::IMemberMap *)&v45->vfptr);
-      v47 = v46->vfptr[3].GetClassNameUID((Expression::IMemberMap *)&v46->vfptr);
-      v48 = v47;
-      v49 = *(_DWORD *)(v47 + 16) & 0x7FFFFFFF;
-      v50 = 0;
-      if ( v49 )
+      v44->vfptr->GetClassname(v44);
+      v46 = ((__int64 (__fastcall *)(ActionNodePlayable *))v45->vfptr[3].GetClassNameUID)(v45);
+      v47 = v46;
+      v48 = *(_DWORD *)(v46 + 16) & 0x7FFFFFFF;
+      v49 = 0;
+      if ( v48 )
       {
-        v51 = *(_QWORD *)(v47 + 24);
-        v52 = 0i64;
+        v50 = *(_QWORD *)(v46 + 24);
+        v51 = 0i64;
         do
         {
-          if ( v51 )
-            v53 = v51 + v48 + 24;
+          if ( v50 )
+            v52 = v50 + v47 + 24;
           else
-            v53 = 0i64;
-          v54 = v52 + v53;
-          v55 = *(_QWORD *)(v52 + v53);
-          if ( v55 )
-            v56 = (ITrack *)(v54 + v55);
+            v52 = 0i64;
+          v53 = v51 + v52;
+          v54 = *(_QWORD *)(v51 + v52);
+          if ( v54 )
+            v55 = (ITrack *)(v53 + v54);
           else
-            v56 = 0i64;
-          if ( v45 == v56 )
+            v55 = 0i64;
+          if ( v44 == v55 )
             break;
-          ++v50;
-          v52 += 8i64;
+          ++v49;
+          v51 += 8i64;
         }
-        while ( v50 < v49 );
+        while ( v49 < v48 );
       }
-      v57 = pathToPopulate.mPath.mCount;
+      v56 = pathToPopulate.mPath.mCount;
       if ( pathToPopulate.mPath.mCount >= 0 )
       {
         if ( pathToPopulate.mPath.mData.mOffset
           && (UFG::qOffset64<ActionID *> *)((char *)&pathToPopulate.mPath.mData + pathToPopulate.mPath.mData.mOffset) )
         {
           operator delete[]((char *)&pathToPopulate.mPath.mData + pathToPopulate.mPath.mData.mOffset);
-          v57 = pathToPopulate.mPath.mCount;
+          v56 = pathToPopulate.mPath.mCount;
         }
         pathToPopulate.mPath.mData.mOffset = 0i64;
-        pathToPopulate.mPath.mCount = v57 & 0x80000000;
+        pathToPopulate.mPath.mCount = v56 & 0x80000000;
       }
     }
-    ((void (__fastcall *)(BlendTreeTask *))v3->vfptr->Update)(v3);
+    ((void (__fastcall *)(BlendTreeTask *))this->vfptr->Update)(this);
   }
 }
 
@@ -1619,83 +1494,86 @@ void __fastcall BlendTreeTask::Begin(BlendTreeTask *this, ActionContext *context
 // RVA: 0x3134B0
 bool __fastcall BlendTreeTask::Update(BlendTreeTask *this, float timeDelta)
 {
-  BlendTreeTask *v2; // rdi
-  ActionContext *v3; // rcx
-  UFG::SimObject *v4; // rax
+  ActionContext *mContext; // rcx
+  UFG::SimObject *m_pPointer; // rax
   PoseNode *v6; // rsi
-  Expression::IMemberMapVtbl *v7; // rbx
-  PoseNode **v8; // rsi
-  PoseNode **v9; // rbx
+  Expression::IMemberMapVtbl *vfptr; // rbx
+  PoseNode **p_m_pPointer; // rsi
+  PoseNode **p_mNext; // rbx
   bool v10; // al
   UFG::SimObjectCVBase *v11; // rcx
-  unsigned __int16 v12; // dx
+  __int16 m_Flags; // dx
   UFG::CharacterAnimationComponent *v13; // rax
   PoseNode *v14; // rcx
   int v15; // ebx
 
-  v2 = this;
-  v3 = this->mContext;
-  if ( v3 )
+  mContext = this->mContext;
+  if ( mContext )
   {
-    v4 = v3->mSimObject.m_pPointer;
-    if ( v4 )
+    m_pPointer = mContext->mSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      if ( (v4->m_Flags >> 10) & 1 )
+      if ( (m_pPointer->m_Flags & 0x400) != 0 )
         return 1;
     }
   }
-  v6 = v2->mPlayingTree.m_pPointer;
+  v6 = this->mPlayingTree.m_pPointer;
   if ( v6 )
   {
-    v7 = v6->vfptr;
-    ActionContext::GetRunningMasterRate(v3);
-    v7[3].ResolveReferences((Expression::IMemberMap *)&v6->vfptr);
+    vfptr = v6->Expression::IMemberMap::vfptr;
+    ActionContext::GetRunningMasterRate(mContext);
+    vfptr[3].ResolveReferences(v6);
   }
-  v8 = &v2->mSplitBodyBlend.m_pPointer;
-  v9 = (PoseNode **)&v2->mActiveControllers.mNode.mNext[-1].mNext;
-  v10 = v9 == &v2->mSplitBodyBlend.m_pPointer;
-  if ( v2->mActiveControllers.mNode.mNext != (UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> *)8 )
+  p_m_pPointer = &this->mSplitBodyBlend.m_pPointer;
+  p_mNext = (PoseNode **)&this->mActiveControllers.mNode.mNext[-1].mNext;
+  v10 = p_mNext == &this->mSplitBodyBlend.m_pPointer;
+  if ( this->mActiveControllers.mNode.mNext != (UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> *)8 )
   {
     do
     {
       if ( v10 )
         break;
-      ((void (__fastcall *)(PoseNode **))(*v9)->m_SafePointerList.mNode.mPrev)(v9);
-      v9 = (PoseNode **)&v9[2][-1].mDebugPoseColour.b;
-      v10 = v9 == v8;
+      ((void (__fastcall *)(PoseNode **))(*p_mNext)->m_SafePointerList.mNode.UFG::qSafePointerNode<PoseNode>::mPrev)(p_mNext);
+      p_mNext = (PoseNode **)&p_mNext[2][-1].mDebugPoseColour.b;
+      v10 = p_mNext == p_m_pPointer;
     }
-    while ( v9 );
+    while ( p_mNext );
   }
-  v11 = (UFG::SimObjectCVBase *)v2->mContext->mSimObject.m_pPointer;
+  v11 = (UFG::SimObjectCVBase *)this->mContext->mSimObject.m_pPointer;
   if ( !v11 )
     return 0;
-  v12 = v11->m_Flags;
-  if ( (v12 >> 14) & 1 )
+  m_Flags = v11->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
   {
     v13 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v11);
   }
-  else if ( (v12 & 0x8000u) == 0 )
+  else if ( (m_Flags & 0x2000) != 0 )
   {
-    if ( (v12 >> 13) & 1 )
-      v13 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v11);
-    else
-      v13 = (UFG::CharacterAnimationComponent *)((v12 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                     (UFG::SimObjectGame *)&v11->vfptr,
-                                                                     UFG::CharacterAnimationComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v11->vfptr, UFG::CharacterAnimationComponent::_TypeUID));
+    v13 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v11);
   }
   else
   {
-    v13 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v11);
+    v13 = (UFG::CharacterAnimationComponent *)((m_Flags & 0x1000) != 0
+                                             ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                 v11,
+                                                 UFG::CharacterAnimationComponent::_TypeUID)
+                                             : UFG::SimObject::GetComponentOfType(
+                                                 v11,
+                                                 UFG::CharacterAnimationComponent::_TypeUID));
   }
   if ( !v13 )
     return 0;
-  v14 = v2->mPlayingTree.m_pPointer;
+  v14 = this->mPlayingTree.m_pPointer;
   if ( !v14 )
-    return *v8 != 0i64;
-  v15 = BYTE2(v2->m_Track[1].mMasterRate.expression.mOffset);
-  if ( v15 == 1 || v15 == 6 || !((unsigned __int8 (*)(void))v14->vfptr[1].SetResourceOwner)() )
+    return *p_m_pPointer != 0i64;
+  v15 = BYTE2(this->m_Track[1].mMasterRate.expression.mOffset);
+  if ( v15 == 1
+    || v15 == 6
+    || !((unsigned __int8 (__fastcall *)(PoseNode *))v14->Expression::IMemberMap::vfptr[1].SetResourceOwner)(v14) )
+  {
     return 1;
-  ((void (*)(void))v2->mPlayingTree.m_pPointer->vfptr[1].GetResourceOwner)();
+  }
+  this->mPlayingTree.m_pPointer->vfptr[1].GetResourceOwner(this->mPlayingTree.m_pPointer);
   return v15 == 2;
 }
 
@@ -1703,51 +1581,45 @@ bool __fastcall BlendTreeTask::Update(BlendTreeTask *this, float timeDelta)
 // RVA: 0x312390
 void __fastcall BlendTreeTask::End(BlendTreeTask *this)
 {
-  PoseNode **v1; // rsi
-  BlendTreeTask *v2; // rdi
-  UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> *v3; // rbx
-  UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> *v4; // rdx
+  PoseNode **p_m_pPointer; // rsi
+  UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> *mNext; // rbx
+  UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> *mPrev; // rdx
   UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> *v5; // rax
-  PoseNode *v6; // rcx
+  PoseNode *m_pPointer; // rcx
   int v7; // edx
   float v8; // xmm6_4
-  float v9; // xmm0_4
+  float RunningMasterRate; // xmm0_4
   PoseNode *v10; // rax
   float v11; // xmm6_4
 
-  v1 = &this->mSplitBodyBlend.m_pPointer;
-  v2 = this;
-  if ( (PoseNode **)&this->mActiveControllers.mNode.mNext[-1].mNext != &this->mSplitBodyBlend.m_pPointer )
+  p_m_pPointer = &this->mSplitBodyBlend.m_pPointer;
+  while ( (PoseNode **)&this->mActiveControllers.mNode.mNext[-1].mNext != p_m_pPointer )
   {
-    do
-    {
-      v3 = v2->mActiveControllers.mNode.mNext;
-      ((void (__fastcall *)(UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> **))v3[-1].mNext[2].mPrev)(&v3[-1].mNext);
-      v4 = v3->mPrev;
-      v5 = v3->mNext;
-      v4->mNext = v5;
-      v5->mPrev = v4;
-      v3->mPrev = v3;
-      v3->mNext = v3;
-      ((void (__fastcall *)(UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> **, signed __int64))v3[-1].mNext->mPrev)(
-        &v3[-1].mNext,
-        1i64);
-    }
-    while ( (PoseNode **)&v2->mActiveControllers.mNode.mNext[-1].mNext != v1 );
+    mNext = this->mActiveControllers.mNode.mNext;
+    ((void (__fastcall *)(UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> **))mNext[-1].mNext[2].mPrev)(&mNext[-1].mNext);
+    mPrev = mNext->mPrev;
+    v5 = mNext->mNext;
+    mPrev->mNext = v5;
+    v5->mPrev = mPrev;
+    mNext->mPrev = mNext;
+    mNext->mNext = mNext;
+    ((void (__fastcall *)(UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> **, __int64))mNext[-1].mNext->mPrev)(
+      &mNext[-1].mNext,
+      1i64);
   }
-  v6 = v2->mPlayingTree.m_pPointer;
-  if ( v6 )
+  m_pPointer = this->mPlayingTree.m_pPointer;
+  if ( m_pPointer )
   {
-    v7 = BYTE2(v2->m_Track[1].mMasterRate.expression.mOffset);
+    v7 = BYTE2(this->m_Track[1].mMasterRate.expression.mOffset);
     if ( v7 != 1 && v7 != 6 )
-      ((void (*)(void))v6->vfptr[2].__vecDelDtor)();
+      ((void (__fastcall *)(PoseNode *))m_pPointer->Expression::IMemberMap::vfptr[2].__vecDelDtor)(m_pPointer);
   }
-  if ( v2->mSplitBodyBlend.m_pPointer )
+  if ( this->mSplitBodyBlend.m_pPointer )
   {
-    v8 = *(float *)&v2->m_Track[1].mBreakPoint;
-    v9 = ActionContext::GetRunningMasterRate(v2->mContext);
-    v10 = v2->mSplitBodyBlend.m_pPointer;
-    v11 = v8 / v9;
+    v8 = *(float *)&this->m_Track[1].mBreakPoint;
+    RunningMasterRate = ActionContext::GetRunningMasterRate(this->mContext);
+    v10 = this->mSplitBodyBlend.m_pPointer;
+    v11 = v8 / RunningMasterRate;
     if ( v11 == 0.0 )
     {
       HIDWORD(v10[1].mParent.mOffset) = -1082130432;
@@ -1766,367 +1638,354 @@ void __fastcall BlendTreeTask::End(BlendTreeTask *this)
 // RVA: 0x30F5C0
 void __fastcall BlendTreeControllerTask::BlendTreeControllerTask(BlendTreeControllerTask *this)
 {
-  UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> *v1; // rax
-  UFG::qSafePointer<PoseNode,PoseNode> *v2; // rdx
-  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *v3; // rcx
-  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *v4; // rax
+  UFG::qSafePointer<PoseNode,PoseNode> *p_mPlayingTree; // rdx
+  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *mNext; // rax
 
-  v1 = (UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> *)&this->mPrev;
-  v1->mPrev = v1;
-  v1->mNext = v1;
+  this->mPrev = &this->UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask>;
+  this->mNext = &this->UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask>;
   this->vfptr = (IBlendTreeControllerTaskVtbl *)&IBlendTreeControllerTask::`vftable;
   this->vfptr = (IBlendTreeControllerTaskVtbl *)&BlendTreeControllerBaseTask<BlendTreeControllerTrack>::`vftable;
-  v2 = &this->mPlayingTree;
-  v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v2->mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
+  p_mPlayingTree = &this->mPlayingTree;
+  this->mPlayingTree.BlendTreeControllerBaseTask<BlendTreeControllerTrack>::mPrev = &this->mPlayingTree;
+  this->mPlayingTree.mNext = &this->mPlayingTree;
   this->mPlayingTree.m_pPointer = 0i64;
   this->vfptr = (IBlendTreeControllerTaskVtbl *)&BlendTreeControllerTask::`vftable;
   if ( this->mPlayingTree.m_pPointer )
   {
-    v3 = v2->mPrev;
-    v4 = v2->mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-    v2->mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
+    mPrev = p_mPlayingTree->mPrev;
+    mNext = p_mPlayingTree->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mPlayingTree->mPrev = p_mPlayingTree;
+    p_mPlayingTree->mNext = p_mPlayingTree;
   }
-  v2->m_pPointer = 0i64;
+  p_mPlayingTree->m_pPointer = 0i64;
 }
 
 // File Line: 894
 // RVA: 0x311150
 void __fastcall BlendTreeControllerTask::Begin(BlendTreeControllerTask *this, ActionContext *context)
 {
-  char v2; // si
-  UFG::SimObject *v3; // rax
-  BlendTreeControllerTask *v4; // rbx
-  UFG::TransformNodeComponent *v5; // rdi
-  float v6; // eax
-  int v7; // xmm2_4
-  int v8; // xmm1_4
-  ActionContext *v9; // rax
-  int v10; // xmm0_4
-  UFG::SimObject *v11; // rcx
-  IBlendTreeControllerTrack *v12; // rax
+  bool v2; // si
+  UFG::SimObject *m_pPointer; // rax
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rdi
+  float x; // eax
+  float z; // xmm2_4
+  float y; // xmm1_4
+  ActionContext *mContext; // rax
+  float v10; // xmm0_4
+  UFG::SimObjectCVBase *v11; // rcx
+  IBlendTreeControllerTrack *m_Track; // rax
   unsigned __int64 v13; // rdi
-  signed __int64 v14; // rcx
+  __int64 v14; // rcx
   UFG::SimObjectCVBase *v15; // rcx
-  unsigned __int16 v16; // dx
-  UFG::CharacterAnimationComponent *v17; // rax
-  Creature *v18; // rcx
+  __int16 m_Flags; // dx
+  UFG::CharacterAnimationComponent *ComponentOfTypeHK; // rax
+  Creature *mCreature; // rcx
   float v19; // xmm2_4
   float v20; // xmm0_4
-  int v21; // [rsp+30h] [rbp-58h]
-  int v22; // [rsp+34h] [rbp-54h]
-  int v23; // [rsp+38h] [rbp-50h]
-  UFG::qMatrix44 transform; // [rsp+40h] [rbp-48h]
+  UFG::qVector3 v21; // [rsp+30h] [rbp-58h] BYREF
+  UFG::qMatrix44 transform; // [rsp+40h] [rbp-48h] BYREF
 
   v2 = 0;
   this->mContext = context;
-  v3 = context->mSimObject.m_pPointer;
-  v4 = this;
-  v5 = 0i64;
-  if ( v3 )
-    v5 = v3->m_pTransformNodeComponent;
-  UFG::TransformNodeComponent::UpdateWorldTransform(v5);
-  v6 = v5->mWorldTransform.v0.x;
-  v7 = LODWORD(v5->mWorldTransform.v0.z);
-  v8 = LODWORD(v5->mWorldTransform.v0.y);
-  LODWORD(v4->mStartFacingVector.z) = v7;
-  LODWORD(v4->mStartFacingVector.y) = v8;
-  v23 = v7;
-  v4->mStartFacingVector.x = v6;
-  v9 = v4->mContext;
-  v10 = LODWORD(v4->mStartFacingVector.x);
-  v22 = v8;
-  v11 = v9->mSimObject.m_pPointer;
-  v12 = v4->m_Track;
-  v21 = v10;
-  v13 = BYTE4(v12[1].mResourceOwner);
-  v4->mSignalValue = getSignalValue(
-                       v11,
-                       (FloatInputSignal)BYTE4(v12[1].mResourceOwner),
-                       0.0,
-                       *(float *)&v12[1].mResourceOwner,
-                       v13,
-                       (UFG::qVector3 *)&v21);
-  v4->mHoldFirstSignal = (_DWORD)v13 == 2 || (_DWORD)v13 == 39;
+  m_pPointer = context->mSimObject.m_pPointer;
+  m_pTransformNodeComponent = 0i64;
+  if ( m_pPointer )
+    m_pTransformNodeComponent = m_pPointer->m_pTransformNodeComponent;
+  UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+  x = m_pTransformNodeComponent->mWorldTransform.v0.x;
+  z = m_pTransformNodeComponent->mWorldTransform.v0.z;
+  y = m_pTransformNodeComponent->mWorldTransform.v0.y;
+  this->mStartFacingVector.z = z;
+  this->mStartFacingVector.y = y;
+  v21.z = z;
+  this->mStartFacingVector.x = x;
+  mContext = this->mContext;
+  v10 = this->mStartFacingVector.x;
+  v21.y = y;
+  v11 = (UFG::SimObjectCVBase *)mContext->mSimObject.m_pPointer;
+  m_Track = this->m_Track;
+  v21.x = v10;
+  v13 = BYTE4(m_Track[1].mResourceOwner);
+  this->mSignalValue = getSignalValue(
+                         v11,
+                         (FloatInputSignal)BYTE4(m_Track[1].mResourceOwner),
+                         0.0,
+                         *(float *)&m_Track[1].mResourceOwner,
+                         &v21);
+  this->mHoldFirstSignal = (_DWORD)v13 == 2 || (_DWORD)v13 == 39;
   if ( (unsigned int)v13 <= 0x27 )
   {
-    v14 = 549755848948i64;
+    v14 = 0x80000088F4i64;
     if ( _bittest64(&v14, v13) )
       v2 = 1;
   }
-  v4->mForceInput = v2;
+  this->mForceInput = v2;
   if ( (_DWORD)v13 == 11 )
   {
-    v15 = (UFG::SimObjectCVBase *)v4->mContext->mSimObject.m_pPointer;
+    v15 = (UFG::SimObjectCVBase *)this->mContext->mSimObject.m_pPointer;
     if ( v15 )
     {
-      v16 = v15->m_Flags;
-      if ( (v16 >> 14) & 1 )
+      m_Flags = v15->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
       {
-        v17 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v15);
+        ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v15);
       }
-      else if ( (v16 & 0x8000u) == 0 )
+      else if ( (m_Flags & 0x2000) != 0 )
       {
-        if ( (v16 >> 13) & 1 )
-          v17 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v15);
-        else
-          v17 = (UFG::CharacterAnimationComponent *)((v16 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                         (UFG::SimObjectGame *)&v15->vfptr,
-                                                                         UFG::CharacterAnimationComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v15->vfptr, UFG::CharacterAnimationComponent::_TypeUID));
+        ComponentOfTypeHK = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v15);
+      }
+      else if ( (m_Flags & 0x1000) != 0 )
+      {
+        ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                  v15,
+                                                                  UFG::CharacterAnimationComponent::_TypeUID);
       }
       else
       {
-        v17 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v15);
+        ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                  v15,
+                                                                  UFG::CharacterAnimationComponent::_TypeUID);
       }
-      if ( v17 )
+      if ( ComponentOfTypeHK )
       {
-        v18 = v17->mCreature;
-        if ( v18 )
+        mCreature = ComponentOfTypeHK->mCreature;
+        if ( mCreature )
         {
-          Creature::GetTransform(v18, 3, &transform);
+          Creature::GetTransform(mCreature, 3, &transform);
           v19 = transform.v0.y;
-          v4->mStartFacingVector.x = transform.v0.x;
+          this->mStartFacingVector.x = transform.v0.x;
           v20 = transform.v0.z;
-          v4->mStartFacingVector.y = v19;
-          v4->mStartFacingVector.z = v20;
+          this->mStartFacingVector.y = v19;
+          this->mStartFacingVector.z = v20;
         }
       }
     }
   }
-  ((void (__fastcall *)(BlendTreeControllerTask *))v4->vfptr->Update)(v4);
+  ((void (__fastcall *)(BlendTreeControllerTask *))this->vfptr->Update)(this);
   if ( (_DWORD)v13 == 4 )
-    v4->mForceInput = 0;
+    this->mForceInput = 0;
 }
 
 // File Line: 975
 // RVA: 0x313390
-char __usercall BlendTreeControllerTask::Update@<al>(BlendTreeControllerTask *this@<rcx>, float timeDelta@<xmm1>, __int64 a3@<rdi>, __int64 a4@<r8>)
+char __fastcall BlendTreeControllerTask::Update(BlendTreeControllerTask *this, float timeDelta)
 {
-  BlendTreeControllerTask *v4; // rbx
-  float v5; // xmm6_4
-  bool v6; // zf
-  IBlendTreeControllerTrack *v7; // rcx
-  __int64 v8; // rdi
-  ActionContext *v9; // rax
-  int v10; // xmm1_4
-  int v11; // xmm0_4
-  float v12; // xmm2_4
-  IBlendTreeControllerTrack *v13; // rcx
-  ActionContext *v14; // rax
-  int v15; // xmm1_4
-  int v16; // xmm0_4
-  float v18; // [rsp+30h] [rbp-28h]
-  int v19; // [rsp+34h] [rbp-24h]
-  int v20; // [rsp+38h] [rbp-20h]
-  __int64 v21; // [rsp+60h] [rbp+8h]
+  bool v4; // zf
+  IBlendTreeControllerTrack *m_Track; // rcx
+  FloatInputSignal v6; // edi
+  ActionContext *mContext; // rax
+  float y; // xmm1_4
+  float z; // xmm0_4
+  float mSignalValue; // xmm2_4
+  IBlendTreeControllerTrack *v11; // rcx
+  ActionContext *v12; // rax
+  float v13; // xmm1_4
+  float v14; // xmm0_4
+  UFG::qVector3 v16; // [rsp+30h] [rbp-28h] BYREF
 
-  v4 = this;
-  v5 = timeDelta;
   if ( this->mPlayingTree.m_pPointer )
   {
-    v6 = this->mHoldFirstSignal == 0;
-    v7 = this->m_Track;
-    v21 = a3;
-    v8 = BYTE4(v7[1].mResourceOwner);
-    if ( v6 )
+    v4 = !this->mHoldFirstSignal;
+    m_Track = this->m_Track;
+    v6 = BYTE4(m_Track[1].mResourceOwner);
+    if ( v4 )
     {
-      v9 = v4->mContext;
-      v10 = LODWORD(v4->mStartFacingVector.y);
-      v18 = v4->mStartFacingVector.x;
-      v11 = LODWORD(v4->mStartFacingVector.z);
-      v19 = v10;
-      v20 = v11;
-      v4->mSignalValue = getSignalValue(
-                           v9->mSimObject.m_pPointer,
-                           (FloatInputSignal)v8,
-                           v5,
-                           *(float *)&v7[1].mResourceOwner,
-                           v8,
-                           (UFG::qVector3 *)&v18);
+      mContext = this->mContext;
+      y = this->mStartFacingVector.y;
+      v16.x = this->mStartFacingVector.x;
+      z = this->mStartFacingVector.z;
+      v16.y = y;
+      v16.z = z;
+      this->mSignalValue = getSignalValue(
+                             (UFG::SimObjectCVBase *)mContext->mSimObject.m_pPointer,
+                             v6,
+                             timeDelta,
+                             *(float *)&m_Track[1].mResourceOwner,
+                             &v16);
     }
-    v12 = v4->mSignalValue;
-    if ( (_DWORD)v8 == 39 )
+    mSignalValue = this->mSignalValue;
+    if ( v6 == FIS_AIM_INTENTION_DIRECTION_XY_RELATIVE_TO_START )
     {
-      v13 = v4->m_Track;
-      if ( BYTE4(v13[1].vfptr) == 4 )
+      v11 = this->m_Track;
+      if ( BYTE4(v11[1].vfptr) == 4 )
       {
-        v14 = v4->mContext;
-        v15 = LODWORD(v4->mStartFacingVector.y);
-        v18 = v4->mStartFacingVector.x;
-        v16 = LODWORD(v4->mStartFacingVector.z);
-        v19 = v15;
-        v20 = v16;
-        v12 = (float)((float)(COERCE_FLOAT(COERCE_UNSIGNED_INT(
-                                             v4->mSignalValue
-                                           - getSignalValue(
-                                               v14->mSimObject.m_pPointer,
-                                               FIS_AIM_INTENTION_DIRECTION_XY_RELATIVE_TO_START,
-                                               v5,
-                                               *(float *)&v13[1].mResourceOwner,
-                                               v21,
-                                               (UFG::qVector3 *)&v18)) & _xmm)
-                            * 0.31830987)
-                    * sRateGain_0)
-            + 1.0;
+        v12 = this->mContext;
+        v13 = this->mStartFacingVector.y;
+        v16.x = this->mStartFacingVector.x;
+        v14 = this->mStartFacingVector.z;
+        v16.y = v13;
+        v16.z = v14;
+        mSignalValue = (float)((float)(COERCE_FLOAT(COERCE_UNSIGNED_INT(
+                                                      this->mSignalValue
+                                                    - getSignalValue(
+                                                        (UFG::SimObjectCVBase *)v12->mSimObject.m_pPointer,
+                                                        FIS_AIM_INTENTION_DIRECTION_XY_RELATIVE_TO_START,
+                                                        timeDelta,
+                                                        *(float *)&v11[1].mResourceOwner,
+                                                        &v16)) & _xmm)
+                                     * 0.31830987)
+                             * sRateGain_0)
+                     + 1.0;
       }
     }
     BlendTreeControllerTrackBase<BlendTreeControllerTask>::ApplySignal(
-      (BlendTreeControllerTrackBase<BlendTreeControllerTask> *)v4->m_Track,
-      v4->mPlayingTree.m_pPointer,
-      v12,
-      v4->mForceInput,
-      a4);
+      (BlendTreeControllerTrackBase<BlendTreeControllerTask> *)this->m_Track,
+      this->mPlayingTree.m_pPointer,
+      mSignalValue,
+      this->mForceInput);
   }
   return 1;
 }
 
 // File Line: 1038
 // RVA: 0x30F540
-void __fastcall BlendTreeControllerTargetPositionTask::BlendTreeControllerTargetPositionTask(BlendTreeControllerTargetPositionTask *this)
+void __fastcall BlendTreeControllerTargetPositionTask::BlendTreeControllerTargetPositionTask(
+        BlendTreeControllerTargetPositionTask *this)
 {
-  UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> *v1; // rax
-  UFG::qSafePointer<PoseNode,PoseNode> *v2; // rdx
-  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *v3; // rcx
-  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *v4; // rax
+  UFG::qSafePointer<PoseNode,PoseNode> *p_mPlayingTree; // rdx
+  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *mNext; // rax
 
-  v1 = (UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> *)&this->mPrev;
-  v1->mPrev = v1;
-  v1->mNext = v1;
+  this->mPrev = &this->UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask>;
+  this->mNext = &this->UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask>;
   this->vfptr = (IBlendTreeControllerTaskVtbl *)&IBlendTreeControllerTask::`vftable;
   this->vfptr = (IBlendTreeControllerTaskVtbl *)&BlendTreeControllerBaseTask<BlendTreeControllerTargetPositionTrack>::`vftable;
-  v2 = &this->mPlayingTree;
-  v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v2->mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
+  p_mPlayingTree = &this->mPlayingTree;
+  this->mPlayingTree.BlendTreeControllerBaseTask<BlendTreeControllerTargetPositionTrack>::mPrev = &this->mPlayingTree;
+  this->mPlayingTree.mNext = &this->mPlayingTree;
   this->mPlayingTree.m_pPointer = 0i64;
   this->vfptr = (IBlendTreeControllerTaskVtbl *)&BlendTreeControllerTargetPositionTask::`vftable;
   if ( this->mPlayingTree.m_pPointer )
   {
-    v3 = v2->mPrev;
-    v4 = v2->mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-    v2->mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
+    mPrev = p_mPlayingTree->mPrev;
+    mNext = p_mPlayingTree->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mPlayingTree->mPrev = p_mPlayingTree;
+    p_mPlayingTree->mNext = p_mPlayingTree;
   }
-  v2->m_pPointer = 0i64;
+  p_mPlayingTree->m_pPointer = 0i64;
 }
 
 // File Line: 1043
 // RVA: 0x3110F0
-void __fastcall BlendTreeControllerTargetPositionTask::Begin(BlendTreeControllerTargetPositionTask *this, ActionContext *context)
+void __fastcall BlendTreeControllerTargetPositionTask::Begin(
+        BlendTreeControllerTargetPositionTask *this,
+        ActionContext *context)
 {
-  UFG::SimObject *v2; // rbx
-  BlendTreeControllerTargetPositionTask *v3; // rdi
+  UFG::SimObject *m_pPointer; // rbx
   float v4; // xmm1_4
   float v5; // xmm0_4
-  IBlendTreeControllerTaskVtbl *v6; // rax
+  IBlendTreeControllerTaskVtbl *vfptr; // rax
 
   this->mContext = context;
-  v2 = context->mSimObject.m_pPointer;
-  v3 = this;
-  if ( v2 )
-    v2 = (UFG::SimObject *)v2->m_pTransformNodeComponent;
-  UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v2);
-  v4 = *(float *)&v2[1].m_SafePointerList.mNode.mPrev;
-  v5 = *((float *)&v2[1].vfptr + 1);
-  v3->mStartFacingVector.x = *(float *)&v2[1].vfptr;
-  v6 = v3->vfptr;
-  v3->mStartFacingVector.z = v4;
-  v3->mStartFacingVector.y = v5;
-  ((void (__fastcall *)(BlendTreeControllerTargetPositionTask *))v6->Update)(v3);
+  m_pPointer = context->mSimObject.m_pPointer;
+  if ( m_pPointer )
+    m_pPointer = (UFG::SimObject *)m_pPointer->m_pTransformNodeComponent;
+  UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)m_pPointer);
+  v4 = *(float *)&m_pPointer[1].m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+  v5 = *((float *)&m_pPointer[1].vfptr + 1);
+  this->mStartFacingVector.x = *(float *)&m_pPointer[1].vfptr;
+  vfptr = this->vfptr;
+  this->mStartFacingVector.z = v4;
+  this->mStartFacingVector.y = v5;
+  ((void (__fastcall *)(BlendTreeControllerTargetPositionTask *))vfptr->Update)(this);
 }
 
 // File Line: 1062
 // RVA: 0x313190
-char __fastcall BlendTreeControllerTargetPositionTask::Update(BlendTreeControllerTargetPositionTask *this, float timeDelta, __int64 a3)
+char __fastcall BlendTreeControllerTargetPositionTask::Update(
+        BlendTreeControllerTargetPositionTask *this,
+        float timeDelta)
 {
-  BlendTreeControllerTargetPositionTask *v3; // rbx
-  ActionContext *v4; // rax
-  UFG::SimObjectGame *v5; // rcx
-  unsigned __int16 v6; // dx
-  UFG::SimComponent *v7; // rax
+  ActionContext *mContext; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // r8
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   __int64 v8; // rsi
   __int64 v9; // rsi
   UFG::SimObject *v10; // rcx
-  float *v11; // rdi
+  float *m_pTransformNodeComponent; // rdi
   float v12; // xmm2_4
   float v13; // xmm4_4
   __m128 v14; // xmm5
   float v15; // xmm6_4
   __m128 v16; // xmm3
-  float v17; // xmm1_4
-  UFG::qVector3 currentFacing; // [rsp+20h] [rbp-38h]
-  UFG::qVector3 desiredDirection; // [rsp+30h] [rbp-28h]
+  float y; // xmm1_4
+  UFG::qVector3 currentFacing; // [rsp+20h] [rbp-38h] BYREF
+  UFG::qVector3 desiredDirection; // [rsp+30h] [rbp-28h] BYREF
 
-  v3 = this;
   if ( this->mPlayingTree.m_pPointer )
   {
-    v4 = this->mContext;
+    mContext = this->mContext;
     this->mSignalValue = 0.0;
-    v5 = (UFG::SimObjectGame *)v4->mSimObject.m_pPointer;
-    if ( v5 )
+    m_pPointer = (UFG::SimObjectGame *)mContext->mSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      v6 = v5->m_Flags;
-      if ( (v6 >> 14) & 1 )
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
       {
-        a3 = (__int64)v5->m_Components.p[20].m_pComponent;
+        m_pComponent = m_pPointer->m_Components.p[20].m_pComponent;
       }
-      else if ( (v6 & 0x8000u) == 0 )
+      else if ( m_Flags >= 0 )
       {
-        if ( (v6 >> 13) & 1 )
-          v7 = UFG::SimObjectGame::GetComponentOfTypeHK(v5, UFG::TargetingSystemBaseComponent::_TypeUID);
+        if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+          ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                m_pPointer,
+                                UFG::TargetingSystemBaseComponent::_TypeUID);
         else
-          v7 = (v6 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                  v5,
-                                  UFG::TargetingSystemBaseComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(
-                                                                                   (UFG::SimObject *)&v5->vfptr,
-                                                                                   UFG::TargetingSystemBaseComponent::_TypeUID);
-        a3 = (__int64)v7;
+          ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(
+                                m_pPointer,
+                                UFG::TargetingSystemBaseComponent::_TypeUID);
+        m_pComponent = ComponentOfTypeHK;
       }
       else
       {
-        a3 = (__int64)v5->m_Components.p[20].m_pComponent;
+        m_pComponent = m_pPointer->m_Components.p[20].m_pComponent;
       }
-      if ( a3 )
+      if ( m_pComponent )
       {
         v8 = *(_QWORD *)(56i64
-                       * *(unsigned __int8 *)(LODWORD(v3->m_Track[1].mResourceOwner) + *(_QWORD *)(a3 + 96) + 8i64)
-                       + *(_QWORD *)(a3 + 88)
+                       * *(unsigned __int8 *)(LODWORD(this->m_Track[1].mResourceOwner)
+                                            + *(_QWORD *)&m_pComponent[1].m_Flags
+                                            + 8i64)
+                       + *(_QWORD *)&m_pComponent[1].m_TypeUID
                        + 40);
         if ( v8 )
         {
           v9 = *(_QWORD *)(v8 + 88);
           if ( v9 )
           {
-            v10 = v3->mContext->mSimObject.m_pPointer;
+            v10 = this->mContext->mSimObject.m_pPointer;
             if ( v10 )
             {
-              v11 = (float *)v10->m_pTransformNodeComponent;
-              if ( v11 )
+              m_pTransformNodeComponent = (float *)v10->m_pTransformNodeComponent;
+              if ( m_pTransformNodeComponent )
               {
                 UFG::TransformNodeComponent::UpdateWorldTransform(v10->m_pTransformNodeComponent);
                 UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v9);
                 v14 = (__m128)*(unsigned int *)(v9 + 180);
                 v12 = 0.0;
-                v13 = *(float *)(v9 + 176) - v11[44];
-                v14.m128_f32[0] = v14.m128_f32[0] - v11[45];
-                v15 = *(float *)(v9 + 184) - v11[46];
+                v13 = *(float *)(v9 + 176) - m_pTransformNodeComponent[44];
+                v14.m128_f32[0] = v14.m128_f32[0] - m_pTransformNodeComponent[45];
+                v15 = *(float *)(v9 + 184) - m_pTransformNodeComponent[46];
                 v16 = v14;
                 v16.m128_f32[0] = (float)((float)(v14.m128_f32[0] * v14.m128_f32[0]) + (float)(v13 * v13))
                                 + (float)(v15 * v15);
                 if ( v16.m128_f32[0] != 0.0 )
-                  v12 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v16));
-                v17 = v3->mStartFacingVector.y;
-                currentFacing.x = v3->mStartFacingVector.x;
-                currentFacing.z = v3->mStartFacingVector.z;
+                  v12 = 1.0 / _mm_sqrt_ps(v16).m128_f32[0];
+                y = this->mStartFacingVector.y;
+                currentFacing.x = this->mStartFacingVector.x;
+                currentFacing.z = this->mStartFacingVector.z;
                 desiredDirection.x = v13 * v12;
                 desiredDirection.y = v14.m128_f32[0] * v12;
                 desiredDirection.z = v15 * v12;
-                currentFacing.y = v17;
-                v3->mSignalValue = getSignalFromDirection(&desiredDirection, &currentFacing, 6.2831855);
+                currentFacing.y = y;
+                this->mSignalValue = getSignalFromDirection(&desiredDirection, &currentFacing, 6.2831855);
               }
             }
           }
@@ -2134,71 +1993,76 @@ char __fastcall BlendTreeControllerTargetPositionTask::Update(BlendTreeControlle
       }
     }
     BlendTreeControllerTrackBase<BlendTreeControllerTask>::ApplySignal(
-      (BlendTreeControllerTrackBase<BlendTreeControllerTask> *)v3->m_Track,
-      v3->mPlayingTree.m_pPointer,
-      v3->mSignalValue,
-      0i64,
-      a3);
+      (BlendTreeControllerTrackBase<BlendTreeControllerTask> *)this->m_Track,
+      this->mPlayingTree.m_pPointer,
+      this->mSignalValue,
+      0i64);
   }
   return 1;
-}
+}k,
+      this->mPlayingTree.m_pPointer,
+      this->mSignalValue,
+   
 
 // File Line: 1116
 // RVA: 0x30F4C0
-void __fastcall BlendTreeControllerTargetDistancTask::BlendTreeControllerTargetDistancTask(BlendTreeControllerTargetDistancTask *this)
+void __fastcall BlendTreeControllerTargetDistancTask::BlendTreeControllerTargetDistancTask(
+        BlendTreeControllerTargetDistancTask *this)
 {
-  UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> *v1; // rax
-  UFG::qSafePointer<PoseNode,PoseNode> *v2; // rdx
-  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *v3; // rcx
-  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *v4; // rax
+  UFG::qSafePointer<PoseNode,PoseNode> *p_mPlayingTree; // rdx
+  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *mNext; // rax
 
-  v1 = (UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask> *)&this->mPrev;
-  v1->mPrev = v1;
-  v1->mNext = v1;
+  this->mPrev = &this->UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask>;
+  this->mNext = &this->UFG::qNode<IBlendTreeControllerTask,IBlendTreeControllerTask>;
   this->vfptr = (IBlendTreeControllerTaskVtbl *)&IBlendTreeControllerTask::`vftable;
   this->vfptr = (IBlendTreeControllerTaskVtbl *)&BlendTreeControllerBaseTask<BlendTreeControllerTargetDistancTrack>::`vftable;
-  v2 = &this->mPlayingTree;
-  v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v2->mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
+  p_mPlayingTree = &this->mPlayingTree;
+  this->mPlayingTree.BlendTreeControllerBaseTask<BlendTreeControllerTargetDistancTrack>::mPrev = &this->mPlayingTree;
+  this->mPlayingTree.mNext = &this->mPlayingTree;
   this->mPlayingTree.m_pPointer = 0i64;
   this->vfptr = (IBlendTreeControllerTaskVtbl *)&BlendTreeControllerTargetDistancTask::`vftable;
   if ( this->mPlayingTree.m_pPointer )
   {
-    v3 = v2->mPrev;
-    v4 = v2->mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-    v2->mNext = (UFG::qNode<UFG::qSafePointerBase<PoseNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
+    mPrev = p_mPlayingTree->mPrev;
+    mNext = p_mPlayingTree->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mPlayingTree->mPrev = p_mPlayingTree;
+    p_mPlayingTree->mNext = p_mPlayingTree;
   }
-  v2->m_pPointer = 0i64;
+  p_mPlayingTree->m_pPointer = 0i64;
 }
 
 // File Line: 1121
 // RVA: 0x3110E0
-void __fastcall BlendTreeControllerTargetDistancTask::Begin(BlendTreeControllerTargetDistancTask *this, ActionContext *context)
+void __fastcall BlendTreeControllerTargetDistancTask::Begin(
+        BlendTreeControllerTargetDistancTask *this,
+        ActionContext *context)
 {
-  IBlendTreeControllerTaskVtbl *v2; // rax
+  IBlendTreeControllerTaskVtbl *vfptr; // rax
 
-  v2 = this->vfptr;
+  vfptr = this->vfptr;
   this->mContext = context;
-  ((void (*)(void))v2->Update)();
+  ((void (*)(void))vfptr->Update)();
 }
 
 // File Line: 1138
 // RVA: 0x312FD0
-char __fastcall BlendTreeControllerTargetDistancTask::Update(BlendTreeControllerTargetDistancTask *this, float timeDelta, __int64 a3)
+char __fastcall BlendTreeControllerTargetDistancTask::Update(
+        BlendTreeControllerTargetDistancTask *this,
+        float timeDelta)
 {
-  BlendTreeControllerTargetDistancTask *v3; // rbx
-  ActionContext *v4; // rax
-  UFG::SimObjectGame *v5; // rcx
-  unsigned __int16 v6; // dx
-  UFG::SimComponent *v7; // rax
+  ActionContext *mContext; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // r8
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   __int64 v8; // rsi
   __int64 v9; // rsi
   UFG::SimObject *v10; // rcx
-  float *v11; // rdi
-  IBlendTreeControllerTrack *v12; // rax
+  float *m_pTransformNodeComponent; // rdi
+  IBlendTreeControllerTrack *m_Track; // rax
   __m128 v13; // xmm2
   float v14; // xmm1_4
   float v15; // xmm0_4
@@ -2206,80 +2070,76 @@ char __fastcall BlendTreeControllerTargetDistancTask::Update(BlendTreeController
   float v17; // xmm0_4
   float v18; // xmm1_4
 
-  v3 = this;
   if ( this->mPlayingTree.m_pPointer )
   {
-    v4 = this->mContext;
+    mContext = this->mContext;
     this->mSignalValue = 0.0;
-    v5 = (UFG::SimObjectGame *)v4->mSimObject.m_pPointer;
-    if ( v5 )
+    m_pPointer = (UFG::SimObjectGame *)mContext->mSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      v6 = v5->m_Flags;
-      if ( (v6 >> 14) & 1 )
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
       {
-        a3 = (__int64)v5->m_Components.p[20].m_pComponent;
+        m_pComponent = m_pPointer->m_Components.p[20].m_pComponent;
       }
-      else if ( (v6 & 0x8000u) == 0 )
+      else if ( m_Flags >= 0 )
       {
-        if ( (v6 >> 13) & 1 )
-        {
-          v7 = UFG::SimObjectGame::GetComponentOfTypeHK(v5, UFG::TargetingSystemBaseComponent::_TypeUID);
-        }
-        else if ( (v6 >> 12) & 1 )
-        {
-          v7 = UFG::SimObjectGame::GetComponentOfTypeHK(v5, UFG::TargetingSystemBaseComponent::_TypeUID);
-        }
+        if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+          ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                m_pPointer,
+                                UFG::TargetingSystemBaseComponent::_TypeUID);
         else
-        {
-          v7 = UFG::SimObject::GetComponentOfType(
-                 (UFG::SimObject *)&v5->vfptr,
-                 UFG::TargetingSystemBaseComponent::_TypeUID);
-        }
-        a3 = (__int64)v7;
+          ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(
+                                m_pPointer,
+                                UFG::TargetingSystemBaseComponent::_TypeUID);
+        m_pComponent = ComponentOfTypeHK;
       }
       else
       {
-        a3 = (__int64)v5->m_Components.p[20].m_pComponent;
+        m_pComponent = m_pPointer->m_Components.p[20].m_pComponent;
       }
-      if ( a3 )
+      if ( m_pComponent )
       {
         v8 = *(_QWORD *)(56i64
-                       * *(unsigned __int8 *)(LODWORD(v3->m_Track[1].mResourceOwner) + *(_QWORD *)(a3 + 96) + 8i64)
-                       + *(_QWORD *)(a3 + 88)
+                       * *(unsigned __int8 *)(LODWORD(this->m_Track[1].mResourceOwner)
+                                            + *(_QWORD *)&m_pComponent[1].m_Flags
+                                            + 8i64)
+                       + *(_QWORD *)&m_pComponent[1].m_TypeUID
                        + 40);
         if ( v8 )
         {
           v9 = *(_QWORD *)(v8 + 88);
           if ( v9 )
           {
-            v10 = v3->mContext->mSimObject.m_pPointer;
+            v10 = this->mContext->mSimObject.m_pPointer;
             if ( v10 )
             {
-              v11 = (float *)v10->m_pTransformNodeComponent;
-              if ( v11 )
+              m_pTransformNodeComponent = (float *)v10->m_pTransformNodeComponent;
+              if ( m_pTransformNodeComponent )
               {
                 UFG::TransformNodeComponent::UpdateWorldTransform(v10->m_pTransformNodeComponent);
                 UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v9);
-                v12 = v3->m_Track;
+                m_Track = this->m_Track;
                 v13 = (__m128)*(unsigned int *)(v9 + 180);
-                v14 = *(float *)(v9 + 176) - v11[44];
-                v15 = *(float *)(v9 + 184) - v11[46];
-                v16 = *((float *)&v12[1].mResourceOwner + 1);
-                v13.m128_f32[0] = (float)((float)((float)(v13.m128_f32[0] - v11[45]) * (float)(v13.m128_f32[0] - v11[45]))
+                v14 = *(float *)(v9 + 176) - m_pTransformNodeComponent[44];
+                v15 = *(float *)(v9 + 184) - m_pTransformNodeComponent[46];
+                v16 = *((float *)&m_Track[1].mResourceOwner + 1);
+                v13.m128_f32[0] = (float)((float)((float)(v13.m128_f32[0] - m_pTransformNodeComponent[45])
+                                                * (float)(v13.m128_f32[0] - m_pTransformNodeComponent[45]))
                                         + (float)(v14 * v14))
                                 + (float)(v15 * v15);
-                v17 = *(float *)&v12[2].vfptr;
-                LODWORD(v18) = (unsigned __int128)_mm_sqrt_ps(v13);
+                v17 = *(float *)&m_Track[2].vfptr;
+                v18 = _mm_sqrt_ps(v13).m128_f32[0];
                 if ( v18 < v17 )
                 {
                   if ( v18 > v16 )
-                    v3->mSignalValue = (float)(v18 - v16) / (float)(v17 - v16);
+                    this->mSignalValue = (float)(v18 - v16) / (float)(v17 - v16);
                   else
-                    v3->mSignalValue = 0.0;
+                    this->mSignalValue = 0.0;
                 }
                 else
                 {
-                  v3->mSignalValue = 1.0;
+                  this->mSignalValue = 1.0;
                 }
               }
             }
@@ -2288,11 +2148,10 @@ char __fastcall BlendTreeControllerTargetDistancTask::Update(BlendTreeController
       }
     }
     BlendTreeControllerTrackBase<BlendTreeControllerTask>::ApplySignal(
-      (BlendTreeControllerTrackBase<BlendTreeControllerTask> *)v3->m_Track,
-      v3->mPlayingTree.m_pPointer,
-      v3->mSignalValue,
-      0i64,
-      a3);
+      (BlendTreeControllerTrackBase<BlendTreeControllerTask> *)this->m_Track,
+      this->mPlayingTree.m_pPointer,
+      this->mSignalValue,
+      0i64);
   }
   return 1;
 }
@@ -2301,20 +2160,20 @@ char __fastcall BlendTreeControllerTargetDistancTask::Update(BlendTreeController
 // RVA: 0x3118C0
 void __fastcall PoseDriverDisableTask::Begin(PoseDriverDisableTask *this, ActionContext *context)
 {
-  UFG::SimObject *v2; // rcx
-  UFG::SimComponent *v3; // rax
+  UFG::SimObject *m_pPointer; // rcx
+  UFG::SimComponent *ComponentOfType; // rax
 
   this->mContext = context;
   if ( context )
   {
-    v2 = context->mSimObject.m_pPointer;
-    if ( v2 )
+    m_pPointer = context->mSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      v3 = UFG::SimObject::GetComponentOfType(v2, UFG::CharacterAnimationComponent::_TypeUID);
-      if ( v3 )
-        v3 = *(UFG::SimComponent **)&v3[2].m_TypeUID;
-      if ( v3 )
-        BYTE4(v3[14].m_SafePointerList.mNode.mNext) = 1;
+      ComponentOfType = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::CharacterAnimationComponent::_TypeUID);
+      if ( ComponentOfType )
+        ComponentOfType = *(UFG::SimComponent **)&ComponentOfType[2].m_TypeUID;
+      if ( ComponentOfType )
+        BYTE4(ComponentOfType[14].m_SafePointerList.mNode.mNext) = 1;
     }
   }
 }
@@ -2323,21 +2182,21 @@ void __fastcall PoseDriverDisableTask::Begin(PoseDriverDisableTask *this, Action
 // RVA: 0x3124B0
 void __fastcall PoseDriverDisableTask::End(PoseDriverDisableTask *this)
 {
-  ActionContext *v1; // rax
-  UFG::SimObject *v2; // rcx
-  UFG::SimComponent *v3; // rax
+  ActionContext *mContext; // rax
+  UFG::SimObject *m_pPointer; // rcx
+  UFG::SimComponent *ComponentOfType; // rax
 
-  v1 = this->mContext;
-  if ( v1 )
+  mContext = this->mContext;
+  if ( mContext )
   {
-    v2 = v1->mSimObject.m_pPointer;
-    if ( v2 )
+    m_pPointer = mContext->mSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      v3 = UFG::SimObject::GetComponentOfType(v2, UFG::CharacterAnimationComponent::_TypeUID);
-      if ( v3 )
-        v3 = *(UFG::SimComponent **)&v3[2].m_TypeUID;
-      if ( v3 )
-        BYTE4(v3[14].m_SafePointerList.mNode.mNext) = 0;
+      ComponentOfType = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::CharacterAnimationComponent::_TypeUID);
+      if ( ComponentOfType )
+        ComponentOfType = *(UFG::SimComponent **)&ComponentOfType[2].m_TypeUID;
+      if ( ComponentOfType )
+        BYTE4(ComponentOfType[14].m_SafePointerList.mNode.mNext) = 0;
     }
   }
 }

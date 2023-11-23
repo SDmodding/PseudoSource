@@ -75,17 +75,17 @@ hkClass *__fastcall hkxSpline::staticClass()
 
 // File Line: 131
 // RVA: 0xE33250
-void __fastcall finishLoadedObjecthkxSpline(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxSpline(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxSpline::`vftable;
+    *p = &hkxSpline::`vftable;
 }
 
 // File Line: 137
 // RVA: 0xE33270
-void __fastcall cleanupLoadedObjecthkxSpline(void *p)
+void __fastcall cleanupLoadedObjecthkxSpline(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 141
@@ -106,8 +106,8 @@ void **dynamic_initializer_for__hkxSplineTypeInfo__()
   hkxSplineTypeInfo.m_typeName = "hkxSpline";
   hkxSplineTypeInfo.m_vtable = result;
   hkxSplineTypeInfo.m_scopedName = "!hkxSpline";
-  hkxSplineTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxSpline;
-  hkxSplineTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxSpline;
+  hkxSplineTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxSpline;
+  hkxSplineTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxSpline;
   return result;
 }
 

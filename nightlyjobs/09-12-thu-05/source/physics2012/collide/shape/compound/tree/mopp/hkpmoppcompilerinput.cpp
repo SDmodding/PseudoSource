@@ -27,25 +27,31 @@ float __fastcall hkpMoppCompilerInput::getAbsoluteFitToleranceOfTriangles(hkpMop
 
 // File Line: 36
 // RVA: 0xD34EC0
-void __fastcall hkpMoppCompilerInput::setAbsoluteFitToleranceOfAxisAlignedTriangles(hkpMoppCompilerInput *this, hkVector4f *inTight)
+void __fastcall hkpMoppCompilerInput::setAbsoluteFitToleranceOfAxisAlignedTriangles(
+        hkpMoppCompilerInput *this,
+        hkVector4f *inTight)
 {
   this->m_absoluteFitToleranceOfAxisAlignedTriangles = (hkVector4f)inTight->m_quad;
 }
 
 // File Line: 41
 // RVA: 0xD34ED0
-hkVector4f *__fastcall hkpMoppCompilerInput::getAbsoluteFitToleranceOfAxisAlignedTriangles(hkpMoppCompilerInput *this, hkVector4f *result)
+hkVector4f *__fastcall hkpMoppCompilerInput::getAbsoluteFitToleranceOfAxisAlignedTriangles(
+        hkpMoppCompilerInput *this,
+        hkVector4f *result)
 {
   hkVector4f *v2; // rax
 
   v2 = result;
-  _mm_store_si128((__m128i *)result, (__m128i)this->m_absoluteFitToleranceOfAxisAlignedTriangles.m_quad);
+  *result = this->m_absoluteFitToleranceOfAxisAlignedTriangles;
   return v2;
 }
 
 // File Line: 46
 // RVA: 0xD34EF0
-void __fastcall hkpMoppCompilerInput::setRelativeFitToleranceOfInternalNodes(hkpMoppCompilerInput *this, float inUnused)
+void __fastcall hkpMoppCompilerInput::setRelativeFitToleranceOfInternalNodes(
+        hkpMoppCompilerInput *this,
+        float inUnused)
 {
   this->m_relativeFitToleranceOfInternalNodes = inUnused;
 }

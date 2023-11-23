@@ -7,16 +7,14 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::StateMachineDefini
 
   v0 = UFG::qStringHash64("UFG::StateMachineDefinition", 0xFFFFFFFFFFFFFFFFui64);
   UFG::qReflectInventoryBase::qReflectInventoryBase(
-    (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::StateMachineDefinition,UFG::qReflectObject>::sInventory.vfptr,
+    &UFG::qReflectObjectType<UFG::StateMachineDefinition,UFG::qReflectObject>::sInventory,
     "UFG::StateMachineDefinition",
     v0);
   UFG::qReflectObjectType<UFG::StateMachineDefinition,UFG::qReflectObject>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::StateMachineDefinition>::`vftable;
   UFG::qReflectInventory<UFG::StateMachineDefinition>::OnAddToWarehouse(&UFG::qReflectObjectType<UFG::StateMachineDefinition,UFG::qReflectObject>::sInventory);
   v1 = UFG::qReflectWarehouse::Instance();
-  UFG::qReflectWarehouse::Add(
-    v1,
-    (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::StateMachineDefinition,UFG::qReflectObject>::sInventory.vfptr);
-  return atexit(dynamic_atexit_destructor_for__UFG::qReflectObjectType_UFG::StateMachineDefinition_UFG::qReflectObject_::sInventory__);
+  UFG::qReflectWarehouse::Add(v1, &UFG::qReflectObjectType<UFG::StateMachineDefinition,UFG::qReflectObject>::sInventory);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::qReflectObjectType_UFG::StateMachineDefinition_UFG::qReflectObject_::sInventory__);
 }
 
 // File Line: 27
@@ -24,7 +22,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::StateMachineDefini
 __int64 dynamic_initializer_for__UFG::StateMachineDefinition::mGuidTranslation__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::StateMachineDefinition::mGuidTranslation.mTree);
-  return atexit(dynamic_atexit_destructor_for__UFG::StateMachineDefinition::mGuidTranslation__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::StateMachineDefinition::mGuidTranslation__);
 }
 
 // File Line: 32
@@ -33,45 +31,43 @@ void UFG::StateMachineDefinition::LoadDefinitionsFromInventory(void)
 {
   unsigned __int64 v0; // rbx
   UFG::qReflectWarehouse *v1; // rax
-  UFG::qReflectInventoryBase *v2; // rax
-  UFG::qTree64Base *v3; // rdi
-  UFG::qTree64Base *v4; // rax
-  signed __int64 v5; // rbx
-  UFG::qBaseNodeRB *v6; // rax
-  UFG::qTree64Base *v7; // rax
+  UFG::qTree64<UFG::qReflectObject,UFG::qReflectObject,0> *p_mItems; // rdi
+  UFG::qTree64Base *Head; // rax
+  __int64 *p_mCount; // rbx
+  UFG::qBaseNodeRB *v5; // rax
+  UFG::qTree64Base *Next; // rax
 
   v0 = UFG::qStringHash64("UFG::StateMachineDefinition", 0xFFFFFFFFFFFFFFFFui64);
   v1 = UFG::qReflectWarehouse::Instance();
-  v2 = UFG::qReflectWarehouse::GetInventory(v1, v0);
-  v3 = &v2->mItems.mTree;
-  v4 = UFG::qTree64Base::GetHead(&v2->mItems.mTree);
-  if ( v4 )
+  p_mItems = &UFG::qReflectWarehouse::GetInventory(v1, v0)->mItems;
+  Head = UFG::qTree64Base::GetHead(&p_mItems->mTree);
+  if ( Head )
   {
-    v5 = (signed __int64)&v4[-1].mCount;
-    if ( v4 != (UFG::qTree64Base *)8 )
+    p_mCount = &Head[-1].mCount;
+    if ( Head != (UFG::qTree64Base *)8 )
     {
       do
       {
-        v6 = (UFG::qBaseNodeRB *)UFG::qMalloc(0x28ui64, "StateMachineDefinition::LookupNode", 0i64);
-        if ( v6 )
+        v5 = (UFG::qBaseNodeRB *)UFG::qMalloc(0x28ui64, "StateMachineDefinition::LookupNode", 0i64);
+        if ( v5 )
         {
-          v6->mParent = 0i64;
-          v6->mChild[0] = 0i64;
-          v6->mChild[1] = 0i64;
+          v5->mParent = 0i64;
+          v5->mChild[0] = 0i64;
+          v5->mChild[1] = 0i64;
         }
         else
         {
-          v6 = 0i64;
+          v5 = 0i64;
         }
-        v6->mUID = *(_DWORD *)(v5 + 96);
-        v6[1].mParent = *(UFG::qBaseNodeRB **)(v5 + 8);
-        UFG::qBaseTreeRB::Add(&UFG::StateMachineDefinition::mGuidTranslation.mTree, v6);
-        v7 = UFG::qTree64Base::GetNext(v3, (UFG::qTree64Base::BaseNode *)(v5 + 8));
-        if ( !v7 )
+        v5->mUID = *((_DWORD *)p_mCount + 24);
+        v5[1].mParent = (UFG::qBaseNodeRB *)p_mCount[1];
+        UFG::qBaseTreeRB::Add(&UFG::StateMachineDefinition::mGuidTranslation.mTree, v5);
+        Next = UFG::qTree64Base::GetNext(&p_mItems->mTree, (UFG::qTree64Base::BaseNode *)(p_mCount + 1));
+        if ( !Next )
           break;
-        v5 = (signed __int64)&v7[-1].mCount;
+        p_mCount = &Next[-1].mCount;
       }
-      while ( v7 != (UFG::qTree64Base *)8 );
+      while ( Next != (UFG::qTree64Base *)8 );
     }
   }
 }
@@ -89,7 +85,7 @@ __int64 UFG::_dynamic_initializer_for__gStateMachineDefinitionNotifier__()
     (void (__fastcall *)(char *, UFG::qReflectField *, UFG::qReflectType *, char *, void *))_,
     (void (__fastcall *)(char *, void *))_,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gStateMachineDefinitionNotifier__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gStateMachineDefinitionNotifier__);
 }
 
 // File Line: 120
@@ -97,39 +93,33 @@ __int64 UFG::_dynamic_initializer_for__gStateMachineDefinitionNotifier__()
 UFG::qBaseNodeRB *__fastcall UFG::StateMachineDefinition::GetDnaUid(unsigned int nameGuid)
 {
   UFG::qBaseTreeRB *v1; // rax
-  UFG::qBaseNodeRB *result; // rax
 
   if ( nameGuid && (v1 = UFG::qBaseTreeRB::Get(&UFG::StateMachineDefinition::mGuidTranslation.mTree, nameGuid)) != 0i64 )
-    result = v1->mNULL.mParent;
+    return v1->mNULL.mParent;
   else
-    result = 0i64;
-  return result;
+    return 0i64;
 }
 
 // File Line: 133
 // RVA: 0x4647B0
-signed __int64 __fastcall UFG::StateMachineDefinition::FindNamedNode(UFG::StateMachineDefinition *this, UFG::qSymbol *name)
+__int64 __fastcall UFG::StateMachineDefinition::FindNamedNode(UFG::StateMachineDefinition *this, UFG::qSymbol *name)
 {
   unsigned int v2; // ebx
-  UFG::qSymbol *v3; // rsi
-  UFG::StateMachineDefinition *v4; // rdi
-  signed __int64 v5; // rax
+  UFG::StateMachineNode *v5; // rax
   const char *v6; // rdx
-  UFG::qSymbol result; // [rsp+30h] [rbp+8h]
+  UFG::qSymbol result; // [rsp+30h] [rbp+8h] BYREF
 
   v2 = 0;
-  v3 = name;
-  v4 = this;
   if ( !this->mStateNodes.mData.mNumItems )
     return 0xFFFFFFFFi64;
   while ( 1 )
   {
-    v5 = (signed __int64)&v4->mStateNodes.mData.mItems[v2];
-    v6 = (const char *)(*(_DWORD *)(v5 + 8) ? *(_QWORD *)v5 : &customWorldMapCaption);
+    v5 = &this->mStateNodes.mData.mItems[v2];
+    v6 = v5->mName.mText.mData.mNumItems ? v5->mName.mText.mData.mItems : &customCaption;
     UFG::qSymbol::create_from_string(&result, v6);
-    if ( result.mUID == v3->mUID )
+    if ( result.mUID == name->mUID )
       break;
-    if ( ++v2 >= v4->mStateNodes.mData.mNumItems )
+    if ( ++v2 >= this->mStateNodes.mData.mNumItems )
       return 0xFFFFFFFFi64;
   }
   return v2;

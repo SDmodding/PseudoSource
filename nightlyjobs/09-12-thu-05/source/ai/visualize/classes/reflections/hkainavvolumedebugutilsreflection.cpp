@@ -28,27 +28,25 @@ hkClass *__fastcall hkaiNavVolumeDebugUtils::DebugInfo::staticClass()
 
 // File Line: 88
 // RVA: 0xC3E2A0
-void __fastcall cleanupLoadedObjecthkaiNavVolumeDebugUtilsDebugInfo(void *p)
+void __fastcall cleanupLoadedObjecthkaiNavVolumeDebugUtilsDebugInfo(_DWORD *p)
 {
-  int v1; // er8
-  _QWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 27);
-  v2 = p;
-  *((_DWORD *)p + 26) = 0;
+  v1 = p[27];
+  p[26] = 0;
   if ( v1 < 0 )
   {
     *((_QWORD *)p + 12) = 0i64;
-    *((_DWORD *)p + 27) = 2147483648;
+    p[27] = 0x80000000;
   }
   else
   {
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       (void *)*((_QWORD *)p + 12),
       4 * v1);
-    v2[12] = 0i64;
-    *((_DWORD *)v2 + 27) = 2147483648;
+    *((_QWORD *)p + 12) = 0i64;
+    p[27] = 0x80000000;
   }
 }
 
@@ -82,16 +80,14 @@ hkClass *__fastcall hkaiNavVolumeDebugUtils::GeomteryBuildSettings::staticClass(
 
 // File Line: 135
 // RVA: 0xC3E310
-void __fastcall cleanupLoadedObjecthkaiNavVolumeDebugUtilsGeomteryBuildSettings(void *p)
+void __fastcall cleanupLoadedObjecthkaiNavVolumeDebugUtilsGeomteryBuildSettings(_QWORD *p)
 {
-  _QWORD *v1; // rbx
   hkReferencedObject *v2; // rcx
 
-  v1 = p;
-  v2 = (hkReferencedObject *)*((_QWORD *)p + 1);
+  v2 = (hkReferencedObject *)p[1];
   if ( v2 )
     hkReferencedObject::removeReference(v2);
-  v1[1] = 0i64;
+  p[1] = 0i64;
 }
 
 // File Line: 177

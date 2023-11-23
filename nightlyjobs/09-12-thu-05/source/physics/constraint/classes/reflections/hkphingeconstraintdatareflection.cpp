@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkpHingeConstraintDataAtomsClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 75
@@ -70,30 +70,27 @@ hkClass *__fastcall hkpHingeConstraintData::staticClass()
 
 // File Line: 136
 // RVA: 0xD43980
-void __fastcall finishLoadedObjecthkpHingeConstraintData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpHingeConstraintData(hkpConstraintData *p, hkFinishLoadedObjectFlag finishing)
 {
-  _QWORD *v2; // rbx
-
   if ( p )
   {
-    v2 = p;
-    hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpHingeConstraintData::`vftable;
+    hkpConstraintData::hkpConstraintData(p, finishing);
+    p->vfptr = (hkBaseObjectVtbl *)&hkpHingeConstraintData::`vftable;
   }
 }
 
 // File Line: 142
 // RVA: 0xD439B0
-void __fastcall cleanupLoadedObjecthkpHingeConstraintData(void *p)
+void __fastcall cleanupLoadedObjecthkpHingeConstraintData(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 146
 // RVA: 0xD439C0
 void **__fastcall getVtablehkpHingeConstraintData()
 {
-  hkpConstraintData v1; // [rsp+20h] [rbp-E8h]
+  hkpConstraintData v1; // [rsp+20h] [rbp-E8h] BYREF
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
   return &hkpHingeConstraintData::`vftable;
@@ -110,8 +107,8 @@ void **dynamic_initializer_for__hkpHingeConstraintDataTypeInfo__()
   hkpHingeConstraintDataTypeInfo.m_typeName = "hkpHingeConstraintData";
   hkpHingeConstraintDataTypeInfo.m_vtable = result;
   hkpHingeConstraintDataTypeInfo.m_scopedName = "!hkpHingeConstraintData";
-  hkpHingeConstraintDataTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpHingeConstraintData;
-  hkpHingeConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpHingeConstraintData;
+  hkpHingeConstraintDataTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpHingeConstraintData;
+  hkpHingeConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpHingeConstraintData;
   return result;
 }
 

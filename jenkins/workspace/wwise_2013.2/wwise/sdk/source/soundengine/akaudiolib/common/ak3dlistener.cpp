@@ -3,18 +3,15 @@
 hkSeekableStreamReader *dynamic_initializer_for__CAkListener::m_listeners__()
 {
   hkSeekableStreamReader *v0; // rbx
-  signed int v1; // edi
+  int i; // edi
   hkSeekableStreamReader *result; // rax
 
   v0 = &CAkListener::m_listeners;
-  v1 = 7;
-  do
+  for ( i = 7; i >= 0; --i )
   {
     result = Assembly::GetRCX(v0);
     v0 += 9;
-    --v1;
   }
-  while ( v1 >= 0 );
   return result;
 }
 
@@ -26,8 +23,8 @@ void CAkListener::Init(void)
   char *v1; // rbx
   __m128 v2; // xmm6
   AkVector *v3; // rax
-  float v4; // ST28_4
-  AkVector result; // [rsp+30h] [rbp-28h]
+  float Z; // [rsp+28h] [rbp-30h]
+  AkVector result; // [rsp+30h] [rbp-28h] BYREF
 
   v0 = 0;
   v1 = (char *)&unk_14249EFFC;
@@ -40,29 +37,21 @@ void CAkListener::Init(void)
     *((_DWORD *)v1 - 18) = 1065353216;
     *(_QWORD *)(v1 + 12) = 0i64;
     v1[20] = 1;
-    if ( v0 < 8 )
-    {
-      *((_DWORD *)v1 - 27) = LODWORD(g_DefaultListenerPosition.OrientationFront.X);
-      *((_DWORD *)v1 - 26) = unk_1420F711C;
-      *((_DWORD *)v1 - 25) = unk_1420F7120;
-      *((_DWORD *)v1 - 24) = LODWORD(Vector1.X);
-      *((_DWORD *)v1 - 23) = LODWORD(Vector1.Y);
-      *((_DWORD *)v1 - 22) = LODWORD(Vector1.Z);
-      *((_DWORD *)v1 - 21) = unk_1420F7130;
-      *((_DWORD *)v1 - 20) = unk_1420F7134;
-      *((_DWORD *)v1 - 19) = unk_1420F7138;
-      v3 = AkMath::CrossProduct(&result, &Vector1, &g_DefaultListenerPosition.OrientationFront);
-      v4 = v3->Z;
-      *(_QWORD *)(v1 - 28) = *(_QWORD *)&v3->X;
-      *((float *)v1 - 5) = v4;
-      *((_DWORD *)v1 - 4) = *((_DWORD *)v1 - 24);
-      *((_DWORD *)v1 - 3) = *((_DWORD *)v1 - 23);
-      *((_DWORD *)v1 - 2) = *((_DWORD *)v1 - 22);
-      *((_DWORD *)v1 - 1) = *((_DWORD *)v1 - 27);
-      *(_DWORD *)v1 = *((_DWORD *)v1 - 26);
-      *((_DWORD *)v1 + 1) = *((_DWORD *)v1 - 25);
-      v1[20] = 1;
-    }
+    *((AkListenerPosition *)v1 - 3) = g_DefaultListenerPosition;
+    v3 = AkMath::CrossProduct(
+           &result,
+           &g_DefaultListenerPosition.OrientationTop,
+           &g_DefaultListenerPosition.OrientationFront);
+    Z = v3->Z;
+    *(_QWORD *)(v1 - 28) = *(_QWORD *)&v3->X;
+    *((float *)v1 - 5) = Z;
+    *((_DWORD *)v1 - 4) = *((_DWORD *)v1 - 24);
+    *((_DWORD *)v1 - 3) = *((_DWORD *)v1 - 23);
+    *((_DWORD *)v1 - 2) = *((_DWORD *)v1 - 22);
+    *((_DWORD *)v1 - 1) = *((_DWORD *)v1 - 27);
+    *(_DWORD *)v1 = *((_DWORD *)v1 - 26);
+    *((_DWORD *)v1 + 1) = *((_DWORD *)v1 - 25);
+    v1[20] = 1;
     ++v0;
     v1 += 144;
   }
@@ -79,7 +68,7 @@ void __fastcall CAkListener::RouteListenersToDevice(unsigned int in_uListenerMas
 
   for ( i = 0i64; in_uListenerMask; in_uListenerMask >>= 1 )
   {
-    if ( in_uListenerMask & 1 )
+    if ( (in_uListenerMask & 1) != 0 )
       *((_QWORD *)&unk_14249F008 + 18 * i) = in_uDeviceID;
     i = (unsigned int)(i + 1);
   }
@@ -89,11 +78,9 @@ void __fastcall CAkListener::RouteListenersToDevice(unsigned int in_uListenerMas
 // RVA: 0xA69D10
 void CAkListener::OnBeginFrame(void)
 {
-  unsigned int v0; // edx
+  int v0; // edx
 
-  v0 = 0;
-  if ( unk_14249F010 )
-    v0 = 1;
+  v0 = unk_14249F010 != 0;
   if ( unk_14249F0A0 )
     v0 |= 2u;
   if ( unk_14249F130 )
@@ -127,8 +114,8 @@ void CAkListener::ResetListenerData(void)
   unsigned int v0; // esi
   AkVector *v1; // r14
   AkVector *v2; // rax
-  float v3; // ST28_4
-  AkVector result; // [rsp+30h] [rbp-18h]
+  float Z; // [rsp+28h] [rbp-20h]
+  AkVector result; // [rsp+30h] [rbp-18h] BYREF
 
   v0 = 0;
   v1 = (AkVector *)&unk_14249EFFC;
@@ -144,9 +131,9 @@ void CAkListener::ResetListenerData(void)
     v1[-7].Y = v1[-7].Y;
     v1[-7].Z = v1[-7].Z;
     v2 = AkMath::CrossProduct(&result, v1 - 8, v1 - 9);
-    v3 = v2->Z;
+    Z = v2->Z;
     *(_QWORD *)&v1[-3].Z = *(_QWORD *)&v2->X;
-    v1[-2].Y = v3;
+    v1[-2].Y = Z;
     v1[-2].Z = v1[-8].X;
     v1[-1].X = v1[-8].Y;
     v1[-1].Y = v1[-8].Z;
@@ -162,33 +149,23 @@ void CAkListener::ResetListenerData(void)
 
 // File Line: 125
 // RVA: 0xA69F60
-signed __int64 __fastcall CAkListener::SetListenerPosition(unsigned int in_uListener, AkListenerPosition *in_Position)
+__int64 __fastcall CAkListener::SetListenerPosition(unsigned int in_uListener, AkListenerPosition *in_Position)
 {
-  AkListenerPosition *v2; // r8
-  AkVector *v4; // rdx
+  AkVector *p_OrientationTop; // rdx
   hkSeekableStreamReader *v5; // rbx
   AkVector *v6; // rax
-  float v7; // ST28_4
-  AkVector result; // [rsp+30h] [rbp-18h]
+  float Z; // [rsp+28h] [rbp-20h]
+  AkVector result; // [rsp+30h] [rbp-18h] BYREF
 
-  v2 = in_Position;
   if ( in_uListener >= 8 )
     return 31i64;
-  v4 = &in_Position->OrientationTop;
+  p_OrientationTop = &in_Position->OrientationTop;
   v5 = &CAkListener::m_listeners + 9 * in_uListener;
-  *(float *)&v5->vfptr = v4[-1].X;
-  HIDWORD(v5->vfptr) = LODWORD(v4[-1].Y);
-  *(float *)&v5->m_memSizeAndFlags = v4[-1].Z;
-  *(float *)(&v5->m_referenceCount + 1) = v4->X;
-  *(float *)&v5[1].vfptr = v4->Y;
-  HIDWORD(v5[1].vfptr) = LODWORD(v4->Z);
-  *(float *)&v5[1].m_memSizeAndFlags = v4[1].X;
-  *(float *)(&v5[1].m_referenceCount + 1) = v4[1].Y;
-  *(float *)&v5[2].vfptr = v4[1].Z;
-  v6 = AkMath::CrossProduct(&result, v4, &v2->OrientationFront);
-  v7 = v6->Z;
+  *(AkListenerPosition *)&v5->vfptr = *(AkListenerPosition *)&p_OrientationTop[-1].X;
+  v6 = AkMath::CrossProduct(&result, p_OrientationTop, &in_Position->OrientationFront);
+  Z = v6->Z;
   v5[5].vfptr = *(hkBaseObjectVtbl **)&v6->X;
-  *(float *)&v5[5].m_memSizeAndFlags = v7;
+  *(float *)&v5[5].m_memSizeAndFlags = Z;
   *(_DWORD *)(&v5[5].m_referenceCount + 1) = *(_DWORD *)(&v5->m_referenceCount + 1);
   LODWORD(v5[6].vfptr) = v5[1].vfptr;
   HIDWORD(v5[6].vfptr) = HIDWORD(v5[1].vfptr);
@@ -203,7 +180,7 @@ signed __int64 __fastcall CAkListener::SetListenerPosition(unsigned int in_uList
 // RVA: 0xA6A5C0
 void __fastcall CAkListener::SetScalingFactor(unsigned int in_uListener, float in_fScalingFactor)
 {
-  signed __int64 v2; // rcx
+  __int64 v2; // rcx
 
   v2 = 18i64 * in_uListener;
   *((float *)&CAkListener::m_listeners + 2 * v2 + 9) = in_fScalingFactor;
@@ -212,9 +189,12 @@ void __fastcall CAkListener::SetScalingFactor(unsigned int in_uListener, float i
 
 // File Line: 167
 // RVA: 0xA6A040
-signed __int64 __fastcall CAkListener::SetListenerSpatialization(unsigned int in_uListener, bool in_bSpatialized, AkSpeakerVolumes *in_pVolumeOffsets)
+__int64 __fastcall CAkListener::SetListenerSpatialization(
+        unsigned int in_uListener,
+        bool in_bSpatialized,
+        AkSpeakerVolumes *in_pVolumeOffsets)
 {
-  signed __int64 result; // rax
+  __int64 result; // rax
   int v4; // edx
   float v5; // xmm2_4
   float v6; // xmm3_4
@@ -248,19 +228,12 @@ signed __int64 __fastcall CAkListener::SetListenerSpatialization(unsigned int in
   if ( in_pVolumeOffsets )
   {
     v4 = `AkMath::FastPow10::`4::`local static guard;
-    *((_DWORD *)&CAkListener::m_listeners + 36 * in_uListener + 12) = LODWORD(in_pVolumeOffsets->fFrontLeft);
+    *(AkSpeakerVolumes *)(&CAkListener::m_listeners + 9 * in_uListener + 3) = *in_pVolumeOffsets;
     v5 = 0.0;
-    *((_DWORD *)&CAkListener::m_listeners + 36 * in_uListener + 13) = LODWORD(in_pVolumeOffsets->fFrontRight);
-    *((_DWORD *)&CAkListener::m_listeners + 36 * in_uListener + 14) = LODWORD(in_pVolumeOffsets->fCenter);
-    *((_DWORD *)&CAkListener::m_listeners + 36 * in_uListener + 15) = LODWORD(in_pVolumeOffsets->fRearLeft);
-    *((_DWORD *)&CAkListener::m_listeners + 36 * in_uListener + 16) = LODWORD(in_pVolumeOffsets->fRearRight);
-    *((_DWORD *)&CAkListener::m_listeners + 36 * in_uListener + 17) = LODWORD(in_pVolumeOffsets->fSideLeft);
-    *((_DWORD *)&CAkListener::m_listeners + 36 * in_uListener + 18) = LODWORD(in_pVolumeOffsets->fSideRight);
-    *((_DWORD *)&CAkListener::m_listeners + 36 * in_uListener + 19) = LODWORD(in_pVolumeOffsets->fLfe);
     v6 = *((float *)&CAkListener::m_listeners + 36 * in_uListener + 12) * 0.050000001;
     if ( v6 >= -37.0 )
     {
-      if ( v4 & 1 )
+      if ( (v4 & 1) != 0 )
       {
         v7 = *(float *)&`AkMath::FastPow10::`4::SCALE;
       }
@@ -271,14 +244,12 @@ signed __int64 __fastcall CAkListener::SetListenerSpatialization(unsigned int in
         `AkMath::FastPow10::`4::`local static guard = v4;
         `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
       }
-      v8 = (float)((float)((float)((float)(COERCE_FLOAT(
-                                             ((signed int)(float)((float)(v7 * v6) + 1065353200.0) & 0x7FFFFF)
-                                           + 1065353216)
+      v8 = (float)((float)((float)((float)(COERCE_FLOAT(((int)(float)((float)(v7 * v6) + 1065353200.0) & 0x7FFFFF) + 1065353216)
                                          * 0.32518977)
                                  + 0.020805772)
-                         * COERCE_FLOAT(((signed int)(float)((float)(v7 * v6) + 1065353200.0) & 0x7FFFFF) + 1065353216))
+                         * COERCE_FLOAT(((int)(float)((float)(v7 * v6) + 1065353200.0) & 0x7FFFFF) + 1065353216))
                  + 0.65304345)
-         * COERCE_FLOAT((signed int)(float)((float)(v7 * v6) + 1065353200.0) & 0xFF800000);
+         * COERCE_FLOAT((int)(float)((float)(v7 * v6) + 1065353200.0) & 0xFF800000);
     }
     else
     {
@@ -290,21 +261,19 @@ signed __int64 __fastcall CAkListener::SetListenerSpatialization(unsigned int in
     v10 = v9 * 0.050000001;
     if ( v10 >= -37.0 )
     {
-      if ( !(v4 & 1) )
+      if ( (v4 & 1) == 0 )
       {
         v7 = FLOAT_2_7866352e7;
         v4 |= 1u;
         `AkMath::FastPow10::`4::`local static guard = v4;
         `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
       }
-      v11 = (float)((float)((float)((float)(COERCE_FLOAT(
-                                              ((signed int)(float)((float)(v7 * v10) + 1065353200.0) & 0x7FFFFF)
-                                            + 1065353216)
+      v11 = (float)((float)((float)((float)(COERCE_FLOAT(((int)(float)((float)(v7 * v10) + 1065353200.0) & 0x7FFFFF) + 1065353216)
                                           * 0.32518977)
                                   + 0.020805772)
-                          * COERCE_FLOAT(((signed int)(float)((float)(v7 * v10) + 1065353200.0) & 0x7FFFFF) + 1065353216))
+                          * COERCE_FLOAT(((int)(float)((float)(v7 * v10) + 1065353200.0) & 0x7FFFFF) + 1065353216))
                   + 0.65304345)
-          * COERCE_FLOAT((signed int)(float)((float)(v7 * v10) + 1065353200.0) & 0xFF800000);
+          * COERCE_FLOAT((int)(float)((float)(v7 * v10) + 1065353200.0) & 0xFF800000);
     }
     else
     {
@@ -315,21 +284,19 @@ signed __int64 __fastcall CAkListener::SetListenerSpatialization(unsigned int in
     v13 = v12 * 0.050000001;
     if ( v13 >= -37.0 )
     {
-      if ( !(v4 & 1) )
+      if ( (v4 & 1) == 0 )
       {
         v7 = FLOAT_2_7866352e7;
         v4 |= 1u;
         `AkMath::FastPow10::`4::`local static guard = v4;
         `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
       }
-      v14 = (float)((float)((float)((float)(COERCE_FLOAT(
-                                              ((signed int)(float)((float)(v7 * v13) + 1065353200.0) & 0x7FFFFF)
-                                            + 1065353216)
+      v14 = (float)((float)((float)((float)(COERCE_FLOAT(((int)(float)((float)(v7 * v13) + 1065353200.0) & 0x7FFFFF) + 1065353216)
                                           * 0.32518977)
                                   + 0.020805772)
-                          * COERCE_FLOAT(((signed int)(float)((float)(v7 * v13) + 1065353200.0) & 0x7FFFFF) + 1065353216))
+                          * COERCE_FLOAT(((int)(float)((float)(v7 * v13) + 1065353200.0) & 0x7FFFFF) + 1065353216))
                   + 0.65304345)
-          * COERCE_FLOAT((signed int)(float)((float)(v7 * v13) + 1065353200.0) & 0xFF800000);
+          * COERCE_FLOAT((int)(float)((float)(v7 * v13) + 1065353200.0) & 0xFF800000);
     }
     else
     {
@@ -340,21 +307,19 @@ signed __int64 __fastcall CAkListener::SetListenerSpatialization(unsigned int in
     v16 = v15 * 0.050000001;
     if ( v16 >= -37.0 )
     {
-      if ( !(v4 & 1) )
+      if ( (v4 & 1) == 0 )
       {
         v7 = FLOAT_2_7866352e7;
         v4 |= 1u;
         `AkMath::FastPow10::`4::`local static guard = v4;
         `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
       }
-      v17 = (float)((float)((float)((float)(COERCE_FLOAT(
-                                              ((signed int)(float)((float)(v16 * v7) + 1065353200.0) & 0x7FFFFF)
-                                            + 1065353216)
+      v17 = (float)((float)((float)((float)(COERCE_FLOAT(((int)(float)((float)(v16 * v7) + 1065353200.0) & 0x7FFFFF) + 1065353216)
                                           * 0.32518977)
                                   + 0.020805772)
-                          * COERCE_FLOAT(((signed int)(float)((float)(v16 * v7) + 1065353200.0) & 0x7FFFFF) + 1065353216))
+                          * COERCE_FLOAT(((int)(float)((float)(v16 * v7) + 1065353200.0) & 0x7FFFFF) + 1065353216))
                   + 0.65304345)
-          * COERCE_FLOAT((signed int)(float)((float)(v16 * v7) + 1065353200.0) & 0xFF800000);
+          * COERCE_FLOAT((int)(float)((float)(v16 * v7) + 1065353200.0) & 0xFF800000);
     }
     else
     {
@@ -365,21 +330,19 @@ signed __int64 __fastcall CAkListener::SetListenerSpatialization(unsigned int in
     v19 = v18 * 0.050000001;
     if ( v19 >= -37.0 )
     {
-      if ( !(v4 & 1) )
+      if ( (v4 & 1) == 0 )
       {
         v7 = FLOAT_2_7866352e7;
         v4 |= 1u;
         `AkMath::FastPow10::`4::`local static guard = v4;
         `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
       }
-      v20 = (float)((float)((float)((float)(COERCE_FLOAT(
-                                              ((signed int)(float)((float)(v19 * v7) + 1065353200.0) & 0x7FFFFF)
-                                            + 1065353216)
+      v20 = (float)((float)((float)((float)(COERCE_FLOAT(((int)(float)((float)(v19 * v7) + 1065353200.0) & 0x7FFFFF) + 1065353216)
                                           * 0.32518977)
                                   + 0.020805772)
-                          * COERCE_FLOAT(((signed int)(float)((float)(v19 * v7) + 1065353200.0) & 0x7FFFFF) + 1065353216))
+                          * COERCE_FLOAT(((int)(float)((float)(v19 * v7) + 1065353200.0) & 0x7FFFFF) + 1065353216))
                   + 0.65304345)
-          * COERCE_FLOAT((signed int)(float)((float)(v19 * v7) + 1065353200.0) & 0xFF800000);
+          * COERCE_FLOAT((int)(float)((float)(v19 * v7) + 1065353200.0) & 0xFF800000);
     }
     else
     {
@@ -390,21 +353,19 @@ signed __int64 __fastcall CAkListener::SetListenerSpatialization(unsigned int in
     v22 = v21 * 0.050000001;
     if ( v22 >= -37.0 )
     {
-      if ( !(v4 & 1) )
+      if ( (v4 & 1) == 0 )
       {
         v7 = FLOAT_2_7866352e7;
         v4 |= 1u;
         `AkMath::FastPow10::`4::`local static guard = v4;
         `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
       }
-      v23 = (float)((float)((float)((float)(COERCE_FLOAT(
-                                              ((signed int)(float)((float)(v22 * v7) + 1065353200.0) & 0x7FFFFF)
-                                            + 1065353216)
+      v23 = (float)((float)((float)((float)(COERCE_FLOAT(((int)(float)((float)(v22 * v7) + 1065353200.0) & 0x7FFFFF) + 1065353216)
                                           * 0.32518977)
                                   + 0.020805772)
-                          * COERCE_FLOAT(((signed int)(float)((float)(v22 * v7) + 1065353200.0) & 0x7FFFFF) + 1065353216))
+                          * COERCE_FLOAT(((int)(float)((float)(v22 * v7) + 1065353200.0) & 0x7FFFFF) + 1065353216))
                   + 0.65304345)
-          * COERCE_FLOAT((signed int)(float)((float)(v22 * v7) + 1065353200.0) & 0xFF800000);
+          * COERCE_FLOAT((int)(float)((float)(v22 * v7) + 1065353200.0) & 0xFF800000);
     }
     else
     {
@@ -415,21 +376,19 @@ signed __int64 __fastcall CAkListener::SetListenerSpatialization(unsigned int in
     v25 = v24 * 0.050000001;
     if ( v25 >= -37.0 )
     {
-      if ( !(v4 & 1) )
+      if ( (v4 & 1) == 0 )
       {
         v7 = FLOAT_2_7866352e7;
         v4 |= 1u;
         `AkMath::FastPow10::`4::`local static guard = v4;
         `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
       }
-      v26 = (float)((float)((float)((float)(COERCE_FLOAT(
-                                              ((signed int)(float)((float)(v25 * v7) + 1065353200.0) & 0x7FFFFF)
-                                            + 1065353216)
+      v26 = (float)((float)((float)((float)(COERCE_FLOAT(((int)(float)((float)(v25 * v7) + 1065353200.0) & 0x7FFFFF) + 1065353216)
                                           * 0.32518977)
                                   + 0.020805772)
-                          * COERCE_FLOAT(((signed int)(float)((float)(v25 * v7) + 1065353200.0) & 0x7FFFFF) + 1065353216))
+                          * COERCE_FLOAT(((int)(float)((float)(v25 * v7) + 1065353200.0) & 0x7FFFFF) + 1065353216))
                   + 0.65304345)
-          * COERCE_FLOAT((signed int)(float)((float)(v25 * v7) + 1065353200.0) & 0xFF800000);
+          * COERCE_FLOAT((int)(float)((float)(v25 * v7) + 1065353200.0) & 0xFF800000);
     }
     else
     {
@@ -440,23 +399,21 @@ signed __int64 __fastcall CAkListener::SetListenerSpatialization(unsigned int in
     v28 = v27 * 0.050000001;
     if ( v28 >= -37.0 )
     {
-      if ( !(v4 & 1) )
+      if ( (v4 & 1) == 0 )
       {
         v7 = FLOAT_2_7866352e7;
         `AkMath::FastPow10::`4::`local static guard = v4 | 1;
         `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
       }
-      v5 = (float)((float)((float)((float)(COERCE_FLOAT(
-                                             ((signed int)(float)((float)(v28 * v7) + 1065353200.0) & 0x7FFFFF)
-                                           + 1065353216)
+      v5 = (float)((float)((float)((float)(COERCE_FLOAT(((int)(float)((float)(v28 * v7) + 1065353200.0) & 0x7FFFFF) + 1065353216)
                                          * 0.32518977)
                                  + 0.020805772)
-                         * COERCE_FLOAT(((signed int)(float)((float)(v28 * v7) + 1065353200.0) & 0x7FFFFF) + 1065353216))
+                         * COERCE_FLOAT(((int)(float)((float)(v28 * v7) + 1065353200.0) & 0x7FFFFF) + 1065353216))
                  + 0.65304345)
-         * COERCE_FLOAT((signed int)(float)((float)(v28 * v7) + 1065353200.0) & 0xFF800000);
+         * COERCE_FLOAT((int)(float)((float)(v28 * v7) + 1065353200.0) & 0xFF800000);
     }
     *((float *)&CAkListener::m_listeners + 36 * in_uListener + 18) = v5;
-    result = 1i64;
+    return 1i64;
   }
   else
   {
@@ -470,9 +427,9 @@ signed __int64 __fastcall CAkListener::SetListenerSpatialization(unsigned int in
 
 // File Line: 206
 // RVA: 0xA69F10
-void __fastcall CAkListener::SetListenerPipeline(unsigned int in_uListener, bool in_bAudio, bool in_bFeedback)
+void __fastcall CAkListener::SetListenerPipeline(char in_uListener, bool in_bAudio, bool in_bFeedback)
 {
-  signed int v3; // er9
+  int v3; // r9d
   int v4; // ecx
   unsigned int v5; // eax
   unsigned int v6; // eax
@@ -491,45 +448,44 @@ void __fastcall CAkListener::SetListenerPipeline(unsigned int in_uListener, bool
 
 // File Line: 224
 // RVA: 0xA69630
-void __usercall CAkListener::Get3DVolumes(AkPositionSourceType in_ePosType@<ecx>, bool in_bIsAuxRoutable@<dl>, CAkPBI *in_pContext@<r8>, AkArray<AkRayVolumeData,AkRayVolumeData const &,ArrayPoolDefault,1,AkArrayAllocatorDefault> *io_arVolumeData@<r9>, __int128 a5@<xmm0>)
+void __fastcall CAkListener::Get3DVolumes(
+        AkPositionSourceType in_ePosType,
+        bool in_bIsAuxRoutable,
+        CAkPBI *in_pContext,
+        AkArray<AkRayVolumeData,AkRayVolumeData const &,ArrayPoolDefault,1,AkArrayAllocatorDefault> *io_arVolumeData)
 {
-  AkArray<AkRayVolumeData,AkRayVolumeData const &,ArrayPoolDefault,1,AkArrayAllocatorDefault> *v5; // rsi
-  CAkPBI *v6; // r14
-  AkPositionSourceType v7; // edi
-  float v8; // xmm8_4
+  __int128 v4; // xmm0
+  float m_fDryLevelValue; // xmm8_4
   float v9; // xmm0_4
   float v10; // xmm7_4
   float v11; // xmm1_4
-  signed int v12; // ecx
-  CAkGen3DParams *v13; // rbx
-  float v14; // xmm12_4
-  CAkAttenuation *v15; // r15
-  AkRayVolumeData *v16; // rbx
-  unsigned __int8 v17; // al
+  int v12; // eax
+  CAkGen3DParams *m_p3DSound; // rbx
+  float m_fConeOutsideVolume; // xmm12_4
+  CAkAttenuation *m_pAttenuation; // r15
+  AkRayVolumeData *m_pItems; // rbx
+  unsigned __int8 m_uListenerMask; // al
   unsigned __int8 i; // cl
   __int64 v19; // rdi
   __int64 v20; // rbp
-  signed int v21; // ecx
+  int m_ByteValue; // ecx
   CAkEnvironmentsMgr *v22; // rdi
   __int128 v23; // xmm6
   float v24; // xmm0_4
   float v25; // xmm0_4
-  unsigned int out_index; // [rsp+40h] [rbp-A8h]
-  float out_fListenerVolumeGameDefAux; // [rsp+F0h] [rbp+8h]
-  float out_fListenerVolumeDry; // [rsp+F8h] [rbp+10h]
-  float out_fListenerVolumeUserDefAux; // [rsp+100h] [rbp+18h]
+  unsigned int out_index[4]; // [rsp+40h] [rbp-A8h] BYREF
+  float out_fListenerVolumeGameDefAux; // [rsp+F0h] [rbp+8h] BYREF
+  float out_fListenerVolumeDry; // [rsp+F8h] [rbp+10h] BYREF
+  float out_fListenerVolumeUserDefAux; // [rsp+100h] [rbp+18h] BYREF
 
-  v5 = io_arVolumeData;
-  v6 = in_pContext;
-  v7 = in_ePosType;
   if ( in_bIsAuxRoutable )
-    v8 = in_pContext->m_pGameObj->m_fDryLevelValue;
+    m_fDryLevelValue = in_pContext->m_pGameObj->m_fDryLevelValue;
   else
-    v8 = *(float *)&FLOAT_1_0;
+    m_fDryLevelValue = *(float *)&FLOAT_1_0;
   v9 = CAkPBI::GetOutputBusVolumeValuedB(in_pContext) * 0.050000001;
   if ( v9 >= -37.0 )
   {
-    if ( `AkMath::FastPow10::`4::`local static guard & 1 )
+    if ( (`AkMath::FastPow10::`4::`local static guard & 1) != 0 )
     {
       v11 = *(float *)&`AkMath::FastPow10::`4::SCALE;
     }
@@ -539,10 +495,10 @@ void __usercall CAkListener::Get3DVolumes(AkPositionSourceType in_ePosType@<ecx>
       `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
       `AkMath::FastPow10::`4::`local static guard |= 1u;
     }
-    v12 = (signed int)(float)((float)(v9 * v11) + 1065353200.0);
+    v12 = (int)(float)((float)(v9 * v11) + 1065353200.0);
     LODWORD(out_fListenerVolumeDry) = (v12 & 0x7FFFFF) + 1065353216;
     LODWORD(out_fListenerVolumeGameDefAux) = v12 & 0xFF800000;
-    a5 = LODWORD(out_fListenerVolumeDry);
+    v4 = LODWORD(out_fListenerVolumeDry);
     v10 = (float)((float)((float)((float)(out_fListenerVolumeDry * 0.32518977) + 0.020805772) * out_fListenerVolumeDry)
                 + 0.65304345)
         * COERCE_FLOAT(v12 & 0xFF800000);
@@ -551,41 +507,41 @@ void __usercall CAkListener::Get3DVolumes(AkPositionSourceType in_ePosType@<ecx>
   {
     v10 = 0.0;
   }
-  v13 = v6->m_p3DSound;
-  v14 = v13->m_Params.m_fConeOutsideVolume;
-  if ( !v13->m_Params.m_pAttenuation )
-    v13->m_Params.m_pAttenuation = (CAkAttenuation *)CAkIndexItem<CAkFxShareSet *>::GetPtrAndAddRef(
-                                                       (CAkIndexItem<CAkFxShareSet *> *)&g_pIndex->m_idxAttenuations,
-                                                       v13->m_Params.m_uAttenuationID);
-  v15 = v13->m_Params.m_pAttenuation;
-  v16 = v5->m_pItems;
-  if ( v7 == 1 )
+  m_p3DSound = in_pContext->m_p3DSound;
+  m_fConeOutsideVolume = m_p3DSound->m_Params.m_fConeOutsideVolume;
+  if ( !m_p3DSound->m_Params.m_pAttenuation )
+    m_p3DSound->m_Params.m_pAttenuation = (CAkAttenuation *)CAkIndexItem<CAkFxShareSet *>::GetPtrAndAddRef(
+                                                              (CAkIndexItem<CAkFxShareSet *> *)&g_pIndex->m_idxAttenuations,
+                                                              m_p3DSound->m_Params.m_uAttenuationID);
+  m_pAttenuation = m_p3DSound->m_Params.m_pAttenuation;
+  m_pItems = io_arVolumeData->m_pItems;
+  if ( in_ePosType == AkGameDef )
   {
     do
     {
-      v17 = v16->m_uListenerMask;
-      for ( i = 0; !(v17 & 1); ++i )
-        v17 >>= 1;
+      m_uListenerMask = m_pItems->m_uListenerMask;
+      for ( i = 0; (m_uListenerMask & 1) == 0; ++i )
+        m_uListenerMask >>= 1;
       v19 = i;
       CAkListener::GetListenerVolume(
-        v15,
-        (AkEmitterListenerPair *)&v16->0,
-        v14,
-        &v16->fConeInterp,
+        m_pAttenuation,
+        m_pItems,
+        m_fConeOutsideVolume,
+        &m_pItems->fConeInterp,
         &out_fListenerVolumeDry,
         &out_fListenerVolumeGameDefAux,
         &out_fListenerVolumeUserDefAux);
       v20 = (unsigned int)v19;
-      v21 = (unsigned __int8)v6->m_pGameObj->m_fOcclusionValue[v19].m_ByteValue;
+      m_ByteValue = (unsigned __int8)in_pContext->m_pGameObj->m_fOcclusionValue[v19].m_ByteValue;
       v22 = g_pEnvironmentMgr;
       if ( g_pEnvironmentMgr->m_bCurveEnabled[1][0] && g_pEnvironmentMgr->ConversionTable[1][0].m_pArrayGraphPoints )
       {
-        *(float *)&a5 = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::ConvertInternal(
+        *(float *)&v4 = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::ConvertInternal(
                           g_pEnvironmentMgr->ConversionTable[1],
-                          (float)((float)v21 * 0.0039215689) * 100.0,
+                          (float)((float)m_ByteValue * 0.0039215689) * 100.0,
                           0,
-                          &out_index);
-        v23 = a5;
+                          out_index);
+        v23 = v4;
       }
       else
       {
@@ -593,92 +549,98 @@ void __usercall CAkListener::Get3DVolumes(AkPositionSourceType in_ePosType@<ecx>
       }
       if ( v22->m_bCurveEnabled[0][0] && v22->ConversionTable[0][0].m_pArrayGraphPoints )
         v24 = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::ConvertInternal(
-                (CAkConversionTable<AkRTPCGraphPointBase<float>,float> *)v22->ConversionTable,
-                (float)((float)(unsigned __int8)v6->m_pGameObj->m_fObstructionValue[v20].m_ByteValue * 0.0039215689)
+                v22->ConversionTable[0],
+                (float)((float)(unsigned __int8)in_pContext->m_pGameObj->m_fObstructionValue[v20].m_ByteValue
+                      * 0.0039215689)
               * 100.0,
                 0,
-                &out_index)
+                out_index)
             * *(float *)&v23;
       else
         v24 = *(float *)&v23;
-      ++v16;
-      v16[-1].fDryMixGain = (float)((float)(v24 * out_fListenerVolumeDry) * v8) * v10;
-      a5 = v23;
-      *(float *)&a5 = *(float *)&v23 * out_fListenerVolumeGameDefAux;
-      v16[-1].fUserDefAuxMixGain = *(float *)&v23 * out_fListenerVolumeUserDefAux;
-      LODWORD(v16[-1].fGameDefAuxMixGain) = a5;
+      ++m_pItems;
+      m_pItems[-1].fDryMixGain = (float)((float)(v24 * out_fListenerVolumeDry) * m_fDryLevelValue) * v10;
+      v4 = v23;
+      *(float *)&v4 = *(float *)&v23 * out_fListenerVolumeGameDefAux;
+      m_pItems[-1].fUserDefAuxMixGain = *(float *)&v23 * out_fListenerVolumeUserDefAux;
+      LODWORD(m_pItems[-1].fGameDefAuxMixGain) = v4;
     }
-    while ( v16 != &v5->m_pItems[v5->m_uLength] );
+    while ( m_pItems != &io_arVolumeData->m_pItems[io_arVolumeData->m_uLength] );
   }
   else
   {
     do
     {
       CAkListener::GetListenerVolume(
-        v15,
-        (AkEmitterListenerPair *)&v16->0,
-        v14,
-        &v16->fConeInterp,
+        m_pAttenuation,
+        m_pItems,
+        m_fConeOutsideVolume,
+        &m_pItems->fConeInterp,
         &out_fListenerVolumeDry,
         &out_fListenerVolumeGameDefAux,
         &out_fListenerVolumeUserDefAux);
-      ++v16;
+      ++m_pItems;
       v25 = out_fListenerVolumeDry;
-      v16[-1].fUserDefAuxMixGain = out_fListenerVolumeUserDefAux;
-      v16[-1].fDryMixGain = (float)(v25 * v8) * v10;
-      v16[-1].fGameDefAuxMixGain = out_fListenerVolumeGameDefAux;
+      m_pItems[-1].fUserDefAuxMixGain = out_fListenerVolumeUserDefAux;
+      m_pItems[-1].fDryMixGain = (float)(v25 * m_fDryLevelValue) * v10;
+      m_pItems[-1].fGameDefAuxMixGain = out_fListenerVolumeGameDefAux;
     }
-    while ( v16 != &v5->m_pItems[v5->m_uLength] );
+    while ( m_pItems != &io_arVolumeData->m_pItems[io_arVolumeData->m_uLength] );
   }
 }
 
 // File Line: 300
 // RVA: 0xA68140
-void __fastcall CAkListener::ComputeSpeakerMatrix(bool in_bIsAuxRoutable, CAkPBI *in_pContext, AkArray<AkRayVolumeData,AkRayVolumeData const &,ArrayPoolDefault,1,AkArrayAllocatorDefault> *in_arVolumeData, unsigned int in_uInputConfig, float in_fBehavioralVolume, CAkOutputDevices *in_deviceVolumes)
+void __fastcall CAkListener::ComputeSpeakerMatrix(
+        bool in_bIsAuxRoutable,
+        CAkPBI *in_pContext,
+        AkArray<AkRayVolumeData,AkRayVolumeData const &,ArrayPoolDefault,1,AkArrayAllocatorDefault> *in_arVolumeData,
+        unsigned int in_uInputConfig,
+        float in_fBehavioralVolume,
+        CAkOutputDevices *in_deviceVolumes)
 {
   unsigned int v6; // esi
-  AkArray<AkRayVolumeData,AkRayVolumeData const &,ArrayPoolDefault,1,AkArrayAllocatorDefault> *v7; // r15
-  unsigned int v8; // er10
-  int v9; // er8
-  __int64 v10; // rbx
+  unsigned int v8; // r10d
+  int v9; // r8d
+  __int64 m_uLength; // rbx
   unsigned int v11; // eax
   float v12; // xmm10_4
   size_t v13; // r8
-  signed __int64 v14; // rax
+  __int64 v14; // rax
   void *v15; // rsp
-  bool *v16; // r14
+  char *v16; // r14
   unsigned __int64 v17; // rcx
   unsigned __int64 v18; // rax
   void *v19; // rsp
-  signed __int64 v20; // rax
+  __int64 v20; // rax
   void *v21; // rsp
-  signed __int64 v22; // rax
+  __int64 v22; // rax
   signed __int64 v23; // rax
   void *v24; // rsp
   CAkPBI *v25; // r10
   void *v26; // rsp
-  bool *v27; // r13
-  signed __int64 v28; // rbx
-  CAkIndexable *v29; // rax
-  __int64 v30; // rdx
+  char *v27; // r13
+  Gen3DParams *p_m_Params; // rbx
+  CAkIndexable *PtrAndAddRef; // rax
+  __int64 m_pAttenuation; // rdx
   unsigned __int8 v31; // al
   unsigned __int8 v32; // al
   unsigned int v33; // ebx
   int v34; // ebx
   bool v35; // zf
-  AkFeedbackParams *v36; // rdi
-  float v37; // xmm9_4
-  AkRayVolumeData *v38; // rbx
-  unsigned int v39; // er8
+  AkFeedbackParams *m_pFeedbackInfo; // rdi
+  float fConeInterp; // xmm9_4
+  AkRayVolumeData *m_pItems; // rbx
+  unsigned int v39; // r8d
   __int64 v40; // r12
   unsigned __int8 v41; // cl
-  unsigned __int8 v42; // al
-  float j; // xmm7_4
+  unsigned __int8 m_uListenerMask; // al
+  float m; // xmm7_4
   __int64 v44; // r15
-  CAkRegisteredObj *v45; // rcx
-  signed __int64 v46; // rsi
+  CAkRegisteredObj *m_pGameObj; // rcx
+  char *v46; // rsi
   __m128 *v47; // r13
-  signed int v48; // eax
+  int m_ByteValue; // eax
   unsigned int v49; // ecx
   unsigned __int64 *v50; // rax
   AkDevice *v51; // r14
@@ -686,91 +648,91 @@ void __fastcall CAkListener::ComputeSpeakerMatrix(bool in_bIsAuxRoutable, CAkPBI
   float v53; // xmm0_4
   float v54; // xmm6_4
   unsigned int in_uOutputConfig; // eax
-  AkDevice *in_pDevice; // ST30_8
-  unsigned int v57; // er14
-  unsigned int v58; // eax
-  float v59; // xmm0_4
-  __int64 v60; // rdi
-  unsigned __int8 v61; // r8
-  char v62; // cl
-  unsigned __int8 v63; // al
-  float v64; // xmm0_4
-  int v65; // er8
-  bool *v66; // r15
-  unsigned int v67; // edx
-  __int64 v68; // rcx
-  unsigned int v69; // eax
-  __m128 v70; // xmm0
-  __m128 v71; // xmm3
+  unsigned int v56; // r14d
+  unsigned int v57; // eax
+  float v58; // xmm0_4
+  __int64 v59; // rdi
+  unsigned __int8 v60; // r8
+  char v61; // cl
+  unsigned __int8 n; // al
+  float v63; // xmm0_4
+  int v64; // r8d
+  __m128 *v65; // r15
+  unsigned int ii; // edx
+  __int64 v67; // rcx
+  __int16 v68; // ax
+  __m128 v69; // xmm0
+  __m128 v70; // xmm3
+  __m128 v71; // xmm0
   __m128 v72; // xmm3
   __m128 v73; // xmm0
-  signed __int64 v74; // rcx
-  __int128 *v75; // rdx
+  char *v74; // rcx
+  char *v75; // rdx
   __int64 v76; // r8
   __int128 v77; // xmm0
-  unsigned int v78; // er9
-  signed __int64 v79; // rcx
+  unsigned int v78; // r9d
+  __int64 v79; // rcx
   __int64 v80; // rax
-  unsigned int *v81; // r14
-  signed __int64 v82; // rcx
+  AkArray<AkRayVolumeData,AkRayVolumeData const &,ArrayPoolDefault,1,AkArrayAllocatorDefault> *v81; // r14
+  __int64 v82; // rcx
   AkRayVolumeData *v83; // rax
-  int v84; // er12
+  int v84; // r12d
   __int64 v85; // r13
   unsigned __int8 v86; // cl
   unsigned __int8 i; // al
   __int64 v88; // r15
-  AkDeviceInfo *v89; // rdi
+  AkDeviceInfo *m_pFirst; // rdi
   __int64 v90; // rdx
   unsigned int v91; // ecx
-  unsigned __int64 *v92; // rax
+  unsigned __int64 *p_uDeviceID; // rax
   AkDevice *v93; // rsi
   AkSIMDSpeakerVolumes *v94; // r14
   float v95; // xmm0_4
   float v96; // xmm7_4
   float v97; // xmm0_4
-  float v98; // xmm6_4
-  unsigned int v99; // eax
+  float theta; // xmm6_4
+  unsigned int OutputConfig; // eax
   unsigned int v100; // eax
   __int64 v101; // rax
-  signed __int64 v102; // rcx
+  __int64 v102; // rcx
   __int64 v103; // rdi
   unsigned __int8 v104; // r8
   char v105; // cl
-  unsigned __int8 v106; // al
-  float v107; // xmm0_4
-  unsigned int v108; // er14
-  unsigned int v109; // edx
+  unsigned __int8 j; // al
+  float fDryMixGain; // xmm0_4
+  unsigned int v108; // r14d
+  unsigned int k; // edx
   __int64 v110; // rcx
   int v111; // esi
-  signed __int64 v112; // rcx
-  float v113; // xmm15_4
+  __int64 v112; // rcx
+  float m_fConeLoPass; // xmm15_4
   float *v114; // rdx
   unsigned __int8 v115; // cl
-  unsigned __int8 k; // al
+  unsigned __int8 jj; // al
   AkDeviceInfo *v117; // rbx
-  signed __int64 v118; // rax
+  AkAudioMix *mxDirect; // rax
   __int64 v119; // rcx
-  __int128 v120; // xmm0
+  __m128 v120; // xmm0
   float v121; // xmm1_4
-  float v122; // xmm6_4
+  float LPF; // xmm6_4
   float v123; // xmm0_4
   CAkEnvironmentsMgr *v124; // rdi
   float v125; // xmm0_4
   CAkOutputDevices *v126; // rdi
-  unsigned int v127; // er13
-  AkDeviceInfo *v128; // rax
+  unsigned int v127; // r13d
+  AkDeviceInfo *kk; // rax
   unsigned int v129; // edx
   __int64 v130; // rcx
   float v131; // xmm11_4
-  float v132; // xmm12_4
-  float v133; // xmm13_4
-  float *v134; // rdi
+  float fUserDefAuxMixGain; // xmm12_4
+  float fGameDefAuxMixGain; // xmm13_4
+  AkRayVolumeData *v134; // rdi
   __m128 v135; // xmm10
   AkArray<AkRayVolumeData,AkRayVolumeData const &,ArrayPoolDefault,1,AkArrayAllocatorDefault> *v136; // r11
-  float *v137; // rbx
+  AkRayVolumeData *v137; // rbx
   __int64 v138; // r15
   unsigned __int8 v139; // al
-  unsigned __int8 l; // r14
+  unsigned __int8 mm; // r14
   __int64 v141; // rsi
   __int64 v142; // rcx
   AkDeviceInfo *v143; // rax
@@ -780,9 +742,9 @@ void __fastcall CAkListener::ComputeSpeakerMatrix(bool in_bIsAuxRoutable, CAkPBI
   __int64 v147; // r12
   __int64 v148; // rsi
   __int64 v149; // r11
-  int v150; // er9
-  signed __int64 v151; // r10
-  unsigned int v152; // er8
+  int v150; // r9d
+  AkRayVolumeData *v151; // r10
+  unsigned int v152; // r8d
   __m128 v153; // xmm3
   __m128 *v154; // rdx
   __m128 v155; // xmm3
@@ -790,7 +752,7 @@ void __fastcall CAkListener::ComputeSpeakerMatrix(bool in_bIsAuxRoutable, CAkPBI
   __int64 v157; // rcx
   __m128 v158; // xmm1
   unsigned __int8 v159; // al
-  char m; // cl
+  char nn; // cl
   __int64 v161; // r12
   char *v162; // rcx
   __m128 *v163; // rax
@@ -803,22 +765,22 @@ void __fastcall CAkListener::ComputeSpeakerMatrix(bool in_bIsAuxRoutable, CAkPBI
   float v170; // xmm0_4
   float v171; // xmm0_4
   unsigned __int8 v172; // al
-  char n; // cl
-  float *v174; // r8
+  char i1; // cl
+  AkRayVolumeData *v174; // r8
   __m128 v175; // xmm4
   __int64 v176; // r12
-  float *v177; // rax
+  AkRayVolumeData *v177; // rax
   __int64 v178; // rbx
   unsigned __int8 v179; // cl
-  unsigned __int8 ii; // si
+  unsigned __int8 i2; // si
   AkDeviceInfo *v181; // r11
   AkDeviceInfo *v182; // rcx
   int v183; // edi
-  unsigned int v184; // er9
-  __m128 *v185; // r8
+  unsigned int v184; // r9d
+  __m128 *vector; // r8
   __m128 v186; // xmm0
   __m128 v187; // xmm1
-  signed __int64 v188; // rdx
+  __int64 v188; // rdx
   __m128 v189; // xmm1
   __m128 v190; // xmm0
   __m128 v191; // xmm1
@@ -829,73 +791,58 @@ void __fastcall CAkListener::ComputeSpeakerMatrix(bool in_bIsAuxRoutable, CAkPBI
   float v196; // xmm0_4
   float v197; // xmm2_4
   float v198; // xmm1_4
-  signed __int64 v199; // rdx
-  float *v200; // rcx
+  __int64 v199; // rdx
+  AkRayVolumeData *v200; // rcx
   unsigned __int8 v201; // cl
-  char jj; // dl
+  char i3; // dl
   __int64 v203; // r12
-  AkDeviceInfo *v204; // rbx
+  AkDeviceInfo *i5; // rbx
   __int64 v205; // rax
   unsigned __int64 *v206; // rcx
-  unsigned int v207; // edx
+  unsigned int uListeners; // edx
   float v208; // xmm4_4
-  signed __int64 v209; // r8
+  AkRayVolumeData *v209; // r8
   unsigned __int8 v210; // cl
-  char kk; // dl
-  unsigned int v212; // er15
+  char i4; // dl
+  unsigned int v212; // r15d
   float v213; // xmm7_4
-  unsigned int v214; // er14
+  unsigned int v214; // r14d
   CAkEnvironmentsMgr *v215; // rdi
   float v216; // xmm6_4
   float v217; // xmm0_4
   float v218; // xmm0_4
-  bool Dst; // [rsp+40h] [rbp+0h]
+  AkDevice *in_pDevice; // [rsp+30h] [rbp-10h]
+  char Dst[4]; // [rsp+40h] [rbp+0h] BYREF
   unsigned int in_uNumFullBandChannels; // [rsp+44h] [rbp+4h]
-  int v221; // [rsp+48h] [rbp+8h]
-  bool *v222; // [rsp+50h] [rbp+10h]
-  int v223; // [rsp+58h] [rbp+18h]
-  int v224; // [rsp+5Ch] [rbp+1Ch]
-  float *v225; // [rsp+60h] [rbp+20h]
-  unsigned int out_index; // [rsp+68h] [rbp+28h]
-  CAkConversionTable<AkRTPCGraphPointBase<float>,float> *v227; // [rsp+70h] [rbp+30h]
-  float *v228; // [rsp+78h] [rbp+38h]
-  float *v229; // [rsp+80h] [rbp+40h]
-  __m128 *v230; // [rsp+88h] [rbp+48h]
-  int v231; // [rsp+90h] [rbp+50h]
-  CAkConversionTable<AkRTPCGraphPointBase<float>,float> *v232; // [rsp+98h] [rbp+58h]
-  __int64 v233; // [rsp+A0h] [rbp+60h]
-  __int64 v234; // [rsp+A8h] [rbp+68h]
+  int v222; // [rsp+48h] [rbp+8h]
+  char *v223; // [rsp+50h] [rbp+10h]
+  int v224; // [rsp+58h] [rbp+18h]
+  int v225; // [rsp+5Ch] [rbp+1Ch]
+  float *v226; // [rsp+60h] [rbp+20h]
+  unsigned int out_index; // [rsp+68h] [rbp+28h] BYREF
+  CAkConversionTable<AkRTPCGraphPointBase<float>,float> *v228; // [rsp+70h] [rbp+30h]
+  float *v229; // [rsp+78h] [rbp+38h]
+  float *v230; // [rsp+80h] [rbp+40h]
+  __m128 *v231; // [rsp+88h] [rbp+48h]
+  int v232; // [rsp+90h] [rbp+50h]
+  CAkConversionTable<AkRTPCGraphPointBase<float>,float> *v233; // [rsp+98h] [rbp+58h]
+  __int64 v234; // [rsp+A0h] [rbp+60h]
+  Gen3DParams *v235; // [rsp+A8h] [rbp+68h]
   float in_fX[2]; // [rsp+B0h] [rbp+70h]
-  __int64 v236; // [rsp+B8h] [rbp+78h]
-  __int64 v237; // [rsp+C0h] [rbp+80h]
-  __int64 v238; // [rsp+C8h] [rbp+88h]
-  __int64 v239; // [rsp+D0h] [rbp+90h]
-  __int64 v240; // [rsp+D8h] [rbp+98h]
-  __int64 v241; // [rsp+E0h] [rbp+A0h]
-  __int64 v242; // [rsp+E8h] [rbp+A8h]
-  __int64 v243; // [rsp+F0h] [rbp+B0h]
-  __int64 v244; // [rsp+F8h] [rbp+B8h]
-  __int64 v245; // [rsp+100h] [rbp+C0h]
-  __int64 v246; // [rsp+108h] [rbp+C8h]
-  __int64 v247; // [rsp+110h] [rbp+D0h]
-  __int64 v248; // [rsp+118h] [rbp+D8h]
-  __int64 v249; // [rsp+120h] [rbp+E0h]
-  __int64 v250; // [rsp+128h] [rbp+E8h]
-  char v251; // [rsp+130h] [rbp+F0h]
-  bool v252; // [rsp+320h] [rbp+2E0h]
-  CAkPBI *v253; // [rsp+328h] [rbp+2E8h]
-  AkArray<AkRayVolumeData,AkRayVolumeData const &,ArrayPoolDefault,1,AkArrayAllocatorDefault> *v254; // [rsp+330h] [rbp+2F0h]
-  unsigned int in_uInputConfiga; // [rsp+338h] [rbp+2F8h]
+  __int64 v237; // [rsp+B8h] [rbp+78h]
+  __int64 v238; // [rsp+C0h] [rbp+80h]
+  __int64 v239; // [rsp+C8h] [rbp+88h]
+  __int64 v240[4]; // [rsp+D0h] [rbp+90h]
+  __int64 v241[4]; // [rsp+F0h] [rbp+B0h]
+  __int64 v242[4]; // [rsp+110h] [rbp+D0h]
+  char v243[256]; // [rsp+130h] [rbp+F0h] BYREF
+  unsigned int in_uInputConfiga; // [rsp+338h] [rbp+2F8h] BYREF
 
   in_uInputConfiga = in_uInputConfig;
-  v254 = in_arVolumeData;
-  v253 = in_pContext;
-  v252 = in_bIsAuxRoutable;
   v6 = 0;
-  v7 = in_arVolumeData;
   v8 = in_uInputConfig;
   v9 = 0;
-  v221 = 0;
+  v222 = 0;
   if ( in_uInputConfig )
   {
     do
@@ -904,95 +851,95 @@ void __fastcall CAkListener::ComputeSpeakerMatrix(bool in_bIsAuxRoutable, CAkPBI
       v8 &= v8 - 1;
     }
     while ( v8 );
-    v221 = v9;
+    v222 = v9;
   }
-  v10 = v7->m_uLength;
+  m_uLength = in_arVolumeData->m_uLength;
   v11 = v9;
   v12 = in_pContext->m_BasePosParams.m_fCenterPCT * 0.0099999998;
-  Dst = (in_uInputConfig & 8) != 0;
-  if ( in_uInputConfig & 8 )
+  Dst[0] = (in_uInputConfig & 8) != 0;
+  if ( (in_uInputConfig & 8) != 0 )
     v11 = v9 - 1;
-  v13 = 32i64 * (unsigned int)(8 * v10);
+  v13 = 32i64 * (unsigned int)(8 * m_uLength);
   in_uNumFullBandChannels = v11;
   v14 = v13 + 15;
   if ( v13 + 15 <= v13 )
-    v14 = 1152921504606846960i64;
-  v15 = alloca(v14);
-  v16 = &Dst;
-  v222 = &Dst;
-  memset(&Dst, 0, v13);
-  v17 = 4 * v10;
-  v18 = 4 * v10 + 15;
-  if ( v18 <= 4 * v10 )
-    v18 = 1152921504606846960i64;
-  v19 = alloca(v18);
-  v228 = (float *)&Dst;
+    v14 = 0xFFFFFFFFFFFFFF0i64;
+  v15 = alloca(v14 & 0xFFFFFFFFFFFFFFF0ui64);
+  v16 = Dst;
+  v223 = Dst;
+  memset(Dst, 0, v13);
+  v17 = 4 * m_uLength;
+  v18 = 4 * m_uLength + 15;
+  if ( v18 <= 4 * m_uLength )
+    v18 = 0xFFFFFFFFFFFFFF0i64;
+  v19 = alloca(v18 & 0xFFFFFFFFFFFFFFF0ui64);
+  v229 = (float *)Dst;
   v20 = v17 + 15;
   if ( v17 + 15 <= v17 )
-    v20 = 1152921504606846960i64;
-  v21 = alloca(v20);
-  v229 = (float *)&Dst;
+    v20 = 0xFFFFFFFFFFFFFF0i64;
+  v21 = alloca(v20 & 0xFFFFFFFFFFFFFFF0ui64);
+  v230 = (float *)Dst;
   v22 = v17 + 15;
   if ( v17 + 15 <= v17 )
-    v22 = 1152921504606846960i64;
+    v22 = 0xFFFFFFFFFFFFFF0i64;
   v23 = v22 & 0xFFFFFFFFFFFFFFF0ui64;
   v24 = alloca(v23);
-  v25 = v253;
+  v25 = in_pContext;
   v26 = alloca(v23);
-  v27 = &Dst;
-  v28 = (signed __int64)&v253->m_p3DSound->m_Params;
-  v225 = (float *)&Dst;
-  v234 = v28;
-  if ( !*(_QWORD *)(v28 + 72) )
+  v27 = Dst;
+  p_m_Params = &in_pContext->m_p3DSound->m_Params;
+  v226 = (float *)Dst;
+  v235 = p_m_Params;
+  if ( !p_m_Params->m_pAttenuation )
   {
-    v29 = CAkIndexItem<CAkFxShareSet *>::GetPtrAndAddRef(
-            (CAkIndexItem<CAkFxShareSet *> *)&g_pIndex->m_idxAttenuations,
-            *(_DWORD *)(v28 + 4));
-    v25 = v253;
-    *(_QWORD *)(v28 + 72) = v29;
+    PtrAndAddRef = CAkIndexItem<CAkFxShareSet *>::GetPtrAndAddRef(
+                     (CAkIndexItem<CAkFxShareSet *> *)&g_pIndex->m_idxAttenuations,
+                     p_m_Params->m_uAttenuationID);
+    v25 = in_pContext;
+    p_m_Params->m_pAttenuation = (CAkAttenuation *)PtrAndAddRef;
   }
-  v30 = *(_QWORD *)(v28 + 72);
-  v227 = 0i64;
-  v233 = v30;
-  v232 = 0i64;
-  if ( v30 )
+  m_pAttenuation = (__int64)p_m_Params->m_pAttenuation;
+  v228 = 0i64;
+  v234 = m_pAttenuation;
+  v233 = 0i64;
+  if ( m_pAttenuation )
   {
-    v31 = *(_BYTE *)(v30 + 124);
-    if ( v31 == -1
-      || (v227 = (CAkConversionTable<AkRTPCGraphPointBase<float>,float> *)(16i64 * v31 + v30 + 40),
-          !v227->m_pArrayGraphPoints) )
+    v31 = *(_BYTE *)(m_pAttenuation + 124);
+    if ( v31 == 0xFF
+      || (v228 = (CAkConversionTable<AkRTPCGraphPointBase<float>,float> *)(16i64 * v31 + m_pAttenuation + 40),
+          !v228->m_pArrayGraphPoints) )
     {
-      v227 = 0i64;
+      v228 = 0i64;
     }
-    v32 = *(_BYTE *)(v30 + 123);
-    if ( v32 == -1
-      || (v232 = (CAkConversionTable<AkRTPCGraphPointBase<float>,float> *)(v30 + 16i64 * v32 + 40),
-          !v232->m_pArrayGraphPoints) )
+    v32 = *(_BYTE *)(m_pAttenuation + 123);
+    if ( v32 == 0xFF
+      || (v233 = (CAkConversionTable<AkRTPCGraphPointBase<float>,float> *)(m_pAttenuation + 16i64 * v32 + 40),
+          !v233->m_pArrayGraphPoints) )
     {
-      v232 = 0i64;
+      v233 = 0i64;
     }
   }
   v33 = *((unsigned __int8 *)v25 + 371);
-  v224 = 0;
+  v225 = 0;
   v34 = (v33 >> 2) & 3;
   v35 = (*((_BYTE *)v25 + 374) & 0x40) == 0;
-  v231 = v34;
+  v232 = v34;
   if ( v35 )
   {
     CAkPBI::ValidateFeedbackParameters(v25);
-    v25 = v253;
+    v25 = in_pContext;
   }
-  v36 = v25->m_pFeedbackInfo;
-  v230 = (__m128 *)v36;
-  if ( v36 )
+  m_pFeedbackInfo = v25->m_pFeedbackInfo;
+  v231 = (__m128 *)m_pFeedbackInfo;
+  if ( m_pFeedbackInfo )
   {
-    AkFeedbackParams::ZeroNewVolumes(v36);
-    AkFeedbackParams::ZeroNewAttenuations(v36);
-    v25 = v253;
+    AkFeedbackParams::ZeroNewVolumes(m_pFeedbackInfo);
+    AkFeedbackParams::ZeroNewAttenuations(m_pFeedbackInfo);
+    v25 = in_pContext;
   }
-  v37 = *(float *)&FLOAT_1_0;
+  fConeInterp = *(float *)&FLOAT_1_0;
   v35 = v34 == 1;
-  v38 = v7->m_pItems;
+  m_pItems = in_arVolumeData->m_pItems;
   if ( !v35 )
   {
     v84 = 0;
@@ -1000,34 +947,34 @@ void __fastcall CAkListener::ComputeSpeakerMatrix(bool in_bIsAuxRoutable, CAkPBI
     {
       v85 = v6;
       v86 = 0;
-      v225[v6] = 0.0;
-      for ( i = v38->m_uListenerMask; !(i & 1); ++v86 )
+      v226[v6] = 0.0;
+      for ( i = m_pItems->m_uListenerMask; (i & 1) == 0; ++v86 )
         i >>= 1;
       v88 = v86;
-      v89 = in_deviceVolumes->m_listDeviceVolumes.m_pFirst;
+      m_pFirst = in_deviceVolumes->m_listDeviceVolumes.m_pFirst;
       v90 = *((_QWORD *)&CAkListener::m_listeners + 18 * v86 + 15);
       if ( in_deviceVolumes->m_listDeviceVolumes.m_pFirst )
       {
-        while ( v89->uDeviceID != v90 )
+        while ( m_pFirst->uDeviceID != v90 )
         {
-          v89 = v89->pNextLightItem;
-          if ( !v89 )
+          m_pFirst = m_pFirst->pNextLightItem;
+          if ( !m_pFirst )
             goto LABEL_100;
         }
       }
       else
       {
 LABEL_100:
-        v89 = 0i64;
+        m_pFirst = 0i64;
       }
       v91 = 0;
       if ( CAkOutputMgr::m_Devices.m_uLength )
       {
-        v92 = &CAkOutputMgr::m_Devices.m_pItems->uDeviceID;
-        while ( *v92 != v90 )
+        p_uDeviceID = &CAkOutputMgr::m_Devices.m_pItems->uDeviceID;
+        while ( *p_uDeviceID != v90 )
         {
           ++v91;
-          v92 += 10;
+          p_uDeviceID += 10;
           if ( v91 >= CAkOutputMgr::m_Devices.m_uLength )
             goto LABEL_105;
         }
@@ -1038,125 +985,120 @@ LABEL_100:
 LABEL_105:
         v93 = 0i64;
       }
-      v94 = (AkSIMDSpeakerVolumes *)&v222[32 * v84];
-      if ( v93 && v89 )
+      v94 = (AkSIMDSpeakerVolumes *)&v223[32 * v84];
+      if ( v93 && m_pFirst )
       {
-        if ( *(_BYTE *)(v234 + 68) & 1 )
+        if ( (*((_BYTE *)v235 + 68) & 1) != 0 )
         {
-          if ( v232 )
+          if ( v233 )
           {
-            v95 = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::ConvertInternal(v232, v38->r, 0, &out_index);
-            v225[v85] = v95;
+            v95 = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::ConvertInternal(
+                    v233,
+                    m_pItems->r,
+                    0,
+                    &out_index);
+            v226[v85] = v95;
           }
           if ( in_uNumFullBandChannels )
           {
             v96 = 0.0;
-            if ( v227 )
+            if ( v228 )
             {
-              v97 = cosf(v38->phi);
+              v97 = cosf(m_pItems->phi);
               v96 = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::ConvertInternal(
-                      v227,
-                      v97 * v38->r,
+                      v228,
+                      v97 * m_pItems->r,
                       0,
                       &out_index);
             }
-            v98 = v38->theta;
-            v99 = AkDeviceInfo::GetOutputConfig(v89);
-            CAkSpeakerPan::GetSpeakerVolumesPlane(v98, v12, v96, v94, 0i64, in_uNumFullBandChannels, v99, v93);
+            theta = m_pItems->theta;
+            OutputConfig = AkDeviceInfo::GetOutputConfig(m_pFirst);
+            CAkSpeakerPan::GetSpeakerVolumesPlane(theta, v12, v96, v94, in_uNumFullBandChannels, OutputConfig, v93);
           }
         }
         else
         {
-          v100 = AkDeviceInfo::GetOutputConfig(v89);
+          v100 = AkDeviceInfo::GetOutputConfig(m_pFirst);
           CAkSpeakerPan::GetSpeakerVolumes2DPan(0.5, 0.5, v12, 1, in_uInputConfiga, v100, v94);
         }
-        if ( Dst )
+        if ( Dst[0] )
         {
-          v101 = (__int64)v222;
-          v102 = 32i64 * (unsigned int)(v84 + v221 - 1);
-          *(_OWORD *)&v222[v102] = 0i64;
+          v101 = (__int64)v223;
+          v102 = 32i64 * (unsigned int)(v84 + v222 - 1);
+          *(_OWORD *)&v223[v102] = 0i64;
           *(_OWORD *)(v102 + v101 + 16) = 0i64;
           *(_DWORD *)(v102 + v101 + 28) = 1065353216;
         }
       }
-      v103 = (__int64)v230;
-      if ( !v230 || !((1 << v88) & CAkListener::m_uFeedbackMask) )
-        goto LABEL_295;
+      v103 = (__int64)v231;
+      if ( !v231 || ((1 << v88) & CAkListener::m_uFeedbackMask) == 0 )
+        goto LABEL_133;
       v104 = CAkFeedbackDeviceMgr::s_pSingleton->m_uPlayerMask & CAkFeedbackDeviceMgr::s_pSingleton->m_aListenerToPlayer[v88];
       if ( v104 )
       {
         v105 = 1;
-        v106 = 0;
-        do
+        for ( j = 0; j < 4u; ++j )
         {
-          if ( (unsigned __int8)v105 & v104 )
+          if ( ((unsigned __int8)v105 & v104) != 0 )
           {
-            v107 = v38->fDryMixGain;
-            if ( v107 <= *(float *)(v103 + 4i64 * v106 + 32) )
-              v107 = *(float *)(v103 + 4i64 * v106 + 32);
-            *(float *)(v103 + 4i64 * v106 + 32) = v107;
+            fDryMixGain = m_pItems->fDryMixGain;
+            if ( fDryMixGain <= *(float *)(v103 + 4i64 * j + 32) )
+              fDryMixGain = *(float *)(v103 + 4i64 * j + 32);
+            *(float *)(v103 + 4i64 * j + 32) = fDryMixGain;
           }
-          ++v106;
           v105 *= 2;
         }
-        while ( v106 < 4u );
       }
-      if ( !((1 << v88) & CAkListener::m_uAudioMask) || *((_BYTE *)v253 + 374) < 0 )
+      if ( ((1 << v88) & CAkListener::m_uAudioMask) == 0 || *((char *)in_pContext + 374) < 0 )
       {
         v108 = in_uNumFullBandChannels;
-        v66 = v222;
-        v109 = 0;
-        if ( in_uNumFullBandChannels )
+        v65 = (__m128 *)v223;
+        for ( k = 0; k < v108; *(__m128 *)((char *)&v65[1] + v110) = 0i64 )
         {
-          do
-          {
-            v110 = v84 + v109++;
-            v110 *= 32i64;
-            *(_OWORD *)&v66[v110] = 0i64;
-            *(_OWORD *)&v66[v110 + 16] = 0i64;
-          }
-          while ( v109 < v108 );
+          v110 = v84 + k++;
+          v110 *= 32i64;
+          *(__m128 *)((char *)v65 + v110) = 0i64;
         }
       }
       else
       {
-LABEL_295:
-        v66 = v222;
+LABEL_133:
+        v65 = (__m128 *)v223;
       }
-      v81 = (unsigned int *)v254;
-      v111 = v224;
-      v228[v85] = 0.0;
-      v6 = v111 + 1;
+      v81 = in_arVolumeData;
+      v111 = v225;
       v229[v85] = 0.0;
-      ++v38;
+      v6 = v111 + 1;
+      v230[v85] = 0.0;
+      ++m_pItems;
       v84 += 8;
-      v112 = *(_QWORD *)v81 + 36i64 * v81[2];
-      v224 = v6;
-      if ( v38 == (AkRayVolumeData *)v112 )
+      v112 = (__int64)&v81->m_pItems[v81->m_uLength];
+      v225 = v6;
+      if ( m_pItems == (AkRayVolumeData *)v112 )
       {
-        v78 = v221;
+        v78 = v222;
         goto LABEL_136;
       }
     }
   }
   v39 = 0;
-  v223 = 0;
+  v224 = 0;
   while ( 1 )
   {
     v40 = v6;
     v41 = 0;
     *(_DWORD *)&v27[4 * v6] = 0;
-    v42 = v38->m_uListenerMask;
-    for ( j = 0.0; !(v42 & 1); ++v41 )
-      v42 >>= 1;
+    m_uListenerMask = m_pItems->m_uListenerMask;
+    for ( m = 0.0; (m_uListenerMask & 1) == 0; ++v41 )
+      m_uListenerMask >>= 1;
     v44 = v41;
-    v45 = v25->m_pGameObj;
-    v46 = (signed __int64)&v16[32 * v39];
+    m_pGameObj = v25->m_pGameObj;
+    v46 = &v16[32 * v39];
     v47 = (__m128 *)(&CAkListener::m_listeners + 9 * v44);
-    v228[v40] = (float)(unsigned __int8)v25->m_pGameObj->m_fOcclusionValue[v44].m_ByteValue * 0.0039215689;
-    v48 = (unsigned __int8)v45->m_fObstructionValue[v44].m_ByteValue;
+    v229[v40] = (float)(unsigned __int8)m_pGameObj->m_fOcclusionValue[v44].m_ByteValue * 0.0039215689;
+    m_ByteValue = (unsigned __int8)m_pGameObj->m_fObstructionValue[v44].m_ByteValue;
     v49 = 0;
-    v229[v40] = (float)v48 * 0.0039215689;
+    v230[v40] = (float)m_ByteValue * 0.0039215689;
     if ( CAkOutputMgr::m_Devices.m_uLength )
     {
       v50 = &CAkOutputMgr::m_Devices.m_pItems->uDeviceID;
@@ -1193,29 +1135,32 @@ LABEL_40:
       goto LABEL_51;
     if ( v47[2].m128_i8[8] )
     {
-      if ( !(*(_BYTE *)(v234 + 68) & 1) )
+      if ( (*((_BYTE *)v235 + 68) & 1) == 0 )
       {
-        v58 = AkDeviceInfo::GetOutputConfig(v52);
-        CAkSpeakerPan::GetSpeakerVolumes2DPan(0.5, 0.5, v12, 1, in_uInputConfiga, v58, (AkSIMDSpeakerVolumes *)v46);
+        v57 = AkDeviceInfo::GetOutputConfig(v52);
+        CAkSpeakerPan::GetSpeakerVolumes2DPan(0.5, 0.5, v12, 1, in_uInputConfiga, v57, (AkSIMDSpeakerVolumes *)v46);
 LABEL_51:
-        v57 = in_uNumFullBandChannels;
+        v56 = in_uNumFullBandChannels;
         goto LABEL_52;
       }
-      if ( v227 )
+      if ( v228 )
       {
-        v53 = cosf(v38->phi);
-        j = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::ConvertInternal(v227, v53 * v38->r, 0, &out_index);
+        v53 = cosf(m_pItems->phi);
+        m = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::ConvertInternal(
+              v228,
+              v53 * m_pItems->r,
+              0,
+              &out_index);
       }
-      v54 = v38->theta;
+      v54 = m_pItems->theta;
       in_uOutputConfig = AkDeviceInfo::GetOutputConfig(v52);
       in_pDevice = v51;
-      v57 = in_uNumFullBandChannels;
+      v56 = in_uNumFullBandChannels;
       CAkSpeakerPan::GetSpeakerVolumesPlane(
         v54,
         v12,
-        j,
+        m,
         (AkSIMDSpeakerVolumes *)v46,
-        0i64,
         in_uNumFullBandChannels,
         in_uOutputConfig,
         in_pDevice);
@@ -1223,145 +1168,137 @@ LABEL_51:
     else
     {
       *(_OWORD *)v46 = 0i64;
-      *(_OWORD *)(v46 + 16) = 0i64;
-      v69 = AkDeviceInfo::GetOutputConfig(v52);
-      if ( v69 & 1 )
+      *((_OWORD *)v46 + 1) = 0i64;
+      v68 = AkDeviceInfo::GetOutputConfig(v52);
+      if ( (v68 & 1) != 0 )
         *(_DWORD *)v46 = 1065353216;
-      if ( v69 & 2 )
-        *(_DWORD *)(v46 + 4) = 1065353216;
-      if ( v69 & 4 )
-        *(_DWORD *)(v46 + 8) = 1065353216;
-      if ( v69 & 0x10 )
-        *(_DWORD *)(v46 + 12) = 1065353216;
-      if ( v69 & 0x20 )
-        *(_DWORD *)(v46 + 16) = 1065353216;
-      if ( _bittest((const signed int *)&v69, 9u) )
-        *(_DWORD *)(v46 + 20) = 1065353216;
-      if ( _bittest((const signed int *)&v69, 0xAu) )
-        *(_DWORD *)(v46 + 24) = 1065353216;
-      v57 = in_uNumFullBandChannels;
-      v70 = 0i64;
-      v71 = (__m128)(unsigned int)FLOAT_1_0;
-      v70.m128_f32[0] = (float)(signed int)in_uNumFullBandChannels;
-      v71.m128_f32[0] = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v70));
-      v72 = _mm_shuffle_ps(v71, v71, 0);
-      v73 = _mm_mul_ps(v72, *(__m128 *)v46);
-      *(__m128 *)(v46 + 16) = _mm_mul_ps(v72, *(__m128 *)(v46 + 16));
+      if ( (v68 & 2) != 0 )
+        *((_DWORD *)v46 + 1) = 1065353216;
+      if ( (v68 & 4) != 0 )
+        *((_DWORD *)v46 + 2) = 1065353216;
+      if ( (v68 & 0x10) != 0 )
+        *((_DWORD *)v46 + 3) = 1065353216;
+      if ( (v68 & 0x20) != 0 )
+        *((_DWORD *)v46 + 4) = 1065353216;
+      if ( (v68 & 0x200) != 0 )
+        *((_DWORD *)v46 + 5) = 1065353216;
+      if ( (v68 & 0x400) != 0 )
+        *((_DWORD *)v46 + 6) = 1065353216;
+      v56 = in_uNumFullBandChannels;
+      v69 = 0i64;
+      v70 = (__m128)(unsigned int)FLOAT_1_0;
+      v69.m128_f32[0] = (float)(int)in_uNumFullBandChannels;
+      v70.m128_f32[0] = 1.0 / _mm_sqrt_ps(v69).m128_f32[0];
+      v71 = _mm_shuffle_ps(v70, v70, 0);
+      v72 = _mm_mul_ps(v71, *((__m128 *)v46 + 1));
+      v73 = _mm_mul_ps(v71, *(__m128 *)v46);
+      *((__m128 *)v46 + 1) = v72;
       *(__m128 *)v46 = v73;
-      if ( v57 > 1 )
+      if ( v56 > 1 )
       {
         v74 = v46 + 32;
-        v75 = (__int128 *)v46;
-        v76 = v57 - 1;
+        v75 = v46;
+        v76 = v56 - 1;
         do
         {
-          v77 = *v75;
-          v74 += 32i64;
-          v75 += 2;
-          *(_OWORD *)(v74 - 32) = v77;
-          *(_OWORD *)(v74 - 16) = *(v75 - 1);
+          v77 = *(_OWORD *)v75;
+          v74 += 32;
+          v75 += 32;
+          *((_OWORD *)v74 - 2) = v77;
+          *((_OWORD *)v74 - 1) = *((_OWORD *)v75 - 1);
           --v76;
         }
         while ( v76 );
       }
     }
 LABEL_52:
-    if ( v232 )
+    if ( v233 )
     {
-      v59 = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::ConvertInternal(v232, v38->r, 0, &out_index);
-      v225[v40] = v59;
+      v58 = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::ConvertInternal(v233, m_pItems->r, 0, &out_index);
+      v226[v40] = v58;
     }
-    v60 = (__int64)v230;
-    if ( !v230 || !((1 << v44) & CAkListener::m_uFeedbackMask) )
-      goto LABEL_296;
-    v61 = CAkFeedbackDeviceMgr::s_pSingleton->m_uPlayerMask & CAkFeedbackDeviceMgr::s_pSingleton->m_aListenerToPlayer[v44];
-    if ( v61 )
+    v59 = (__int64)v231;
+    if ( !v231 || ((1 << v44) & CAkListener::m_uFeedbackMask) == 0 )
+      goto LABEL_86;
+    v60 = CAkFeedbackDeviceMgr::s_pSingleton->m_uPlayerMask & CAkFeedbackDeviceMgr::s_pSingleton->m_aListenerToPlayer[v44];
+    if ( v60 )
     {
-      v62 = 1;
-      v63 = 0;
-      do
+      v61 = 1;
+      for ( n = 0; n < 4u; ++n )
       {
-        if ( (unsigned __int8)v62 & v61 )
+        if ( ((unsigned __int8)v61 & v60) != 0 )
         {
-          v64 = v38->fDryMixGain;
-          if ( v64 <= *(float *)(v60 + 4i64 * v63 + 32) )
-            v64 = *(float *)(v60 + 4i64 * v63 + 32);
-          *(float *)(v60 + 4i64 * v63 + 32) = v64;
+          v63 = m_pItems->fDryMixGain;
+          if ( v63 <= *(float *)(v59 + 4i64 * n + 32) )
+            v63 = *(float *)(v59 + 4i64 * n + 32);
+          *(float *)(v59 + 4i64 * n + 32) = v63;
         }
-        ++v63;
-        v62 *= 2;
+        v61 *= 2;
       }
-      while ( v63 < 4u );
     }
-    if ( !((1 << v44) & CAkListener::m_uAudioMask) || *((_BYTE *)v253 + 374) < 0 )
+    if ( ((1 << v44) & CAkListener::m_uAudioMask) == 0 || *((char *)in_pContext + 374) < 0 )
     {
-      v65 = v223;
-      v66 = v222;
-      v67 = 0;
-      if ( v57 )
+      v64 = v224;
+      v65 = (__m128 *)v223;
+      for ( ii = 0; ii < v56; *(__m128 *)((char *)&v65[1] + v67) = 0i64 )
       {
-        do
-        {
-          v68 = v65 + v67++;
-          v68 *= 32i64;
-          *(_OWORD *)&v66[v68] = 0i64;
-          *(_OWORD *)&v66[v68 + 16] = 0i64;
-        }
-        while ( v67 < v57 );
+        v67 = v64 + ii++;
+        v67 *= 32i64;
+        *(__m128 *)((char *)v65 + v67) = 0i64;
       }
     }
     else
     {
-LABEL_296:
-      v65 = v223;
-      v66 = v222;
+LABEL_86:
+      v64 = v224;
+      v65 = (__m128 *)v223;
     }
-    v78 = v221;
-    if ( Dst )
+    v78 = v222;
+    if ( Dst[0] )
     {
-      v79 = 32i64 * (unsigned int)(v65 + v221 - 1);
-      *(_OWORD *)&v66[v79] = 0i64;
-      *(_OWORD *)&v66[v79 + 16] = 0i64;
-      *(_DWORD *)&v66[v79 + 28] = 1065353216;
+      v79 = 2i64 * (unsigned int)(v64 + v222 - 1);
+      v65[v79] = 0i64;
+      v65[v79 + 1] = 0i64;
+      v65[v79 + 1].m128_i32[3] = 1065353216;
     }
     if ( v78 )
     {
       v80 = v78;
       do
       {
-        v46 += 32i64;
-        *(__m128 *)(v46 - 32) = _mm_mul_ps(v47[3], *(__m128 *)(v46 - 32));
-        *(__m128 *)(v46 - 16) = _mm_mul_ps(v47[4], *(__m128 *)(v46 - 16));
+        v46 += 32;
+        *((__m128 *)v46 - 2) = _mm_mul_ps(v47[3], *((__m128 *)v46 - 2));
+        *((__m128 *)v46 - 1) = _mm_mul_ps(v47[4], *((__m128 *)v46 - 1));
         --v80;
       }
       while ( v80 );
     }
-    v81 = (unsigned int *)v254;
-    v39 = v65 + 8;
-    v6 = v224 + 1;
-    ++v38;
-    v82 = v254->m_uLength;
-    v83 = v254->m_pItems;
-    ++v224;
-    v223 = v39;
-    if ( v38 == &v83[v82] )
+    v81 = in_arVolumeData;
+    v39 = v64 + 8;
+    v6 = v225 + 1;
+    ++m_pItems;
+    v82 = in_arVolumeData->m_uLength;
+    v83 = in_arVolumeData->m_pItems;
+    ++v225;
+    v224 = v39;
+    if ( m_pItems == &v83[v82] )
       break;
-    v16 = v222;
-    v27 = (bool *)v225;
-    v25 = v253;
+    v16 = v223;
+    v27 = (char *)v226;
+    v25 = in_pContext;
   }
-  v37 = *(float *)&FLOAT_1_0;
+  fConeInterp = *(float *)&FLOAT_1_0;
 LABEL_136:
-  if ( v233 && *(_BYTE *)(v233 + 125) & 1 )
-    v113 = *(float *)(v234 + 12);
+  if ( v234 && (*(_BYTE *)(v234 + 125) & 1) != 0 )
+    m_fConeLoPass = v235->m_fConeLoPass;
   else
-    v113 = 0.0;
-  if ( v81[2] == 1 )
+    m_fConeLoPass = 0.0;
+  if ( v81->m_uLength == 1 )
   {
-    v114 = *(float **)v81;
+    v114 = (float *)&v81->m_pItems->AkPolarCoord;
     v115 = 0;
-    for ( k = *(_BYTE *)(*(_QWORD *)v81 + 17i64); !(k & 1); ++v115 )
-      k >>= 1;
+    for ( jj = v81->m_pItems->m_uListenerMask; (jj & 1) == 0; ++v115 )
+      jj >>= 1;
     v117 = in_deviceVolumes->m_listDeviceVolumes.m_pFirst;
     if ( in_deviceVolumes->m_listDeviceVolumes.m_pFirst )
     {
@@ -1373,22 +1310,22 @@ LABEL_136:
       }
       if ( v78 )
       {
-        v118 = (signed __int64)v117->mxDirect;
+        mxDirect = v117->mxDirect;
         v119 = v78;
         do
         {
-          v120 = *(_OWORD *)v66;
-          v118 += 64i64;
-          v66 += 32;
-          *(_OWORD *)(v118 - 64) = v120;
-          *(_OWORD *)(v118 - 48) = *((_OWORD *)v66 - 1);
+          v120 = *v65;
+          ++mxDirect;
+          v65 += 2;
+          mxDirect[-1].Next.vector[0] = v120;
+          mxDirect[-1].Next.vector[1] = v65[-1];
           --v119;
         }
         while ( v119 );
       }
       v121 = in_fBehavioralVolume;
       v117->mxAttenuations.dry.fNext = in_fBehavioralVolume * v114[5];
-      if ( v252 )
+      if ( in_bIsAuxRoutable )
       {
         v117->mxAttenuations.gameDef.fNext = v121 * v114[6];
         v117->mxAttenuations.userDef.fNext = v121 * v114[7];
@@ -1398,16 +1335,16 @@ LABEL_136:
         v117->mxAttenuations.gameDef.fNext = 0.0;
         v117->mxAttenuations.userDef.fNext = 0.0;
       }
-      v122 = v253->m_EffectiveParams.LPF;
-      if ( v122 <= *v225 )
-        v122 = *v225;
-      if ( v113 > 0.0 )
+      LPF = in_pContext->m_EffectiveParams.LPF;
+      if ( LPF <= *v226 )
+        LPF = *v226;
+      if ( m_fConeLoPass > 0.0 )
       {
-        v123 = AkMath::Interpolate(0.0, 0.0, v37, v113, v114[8]);
-        if ( v122 <= v123 )
-          v122 = v123;
+        v123 = AkMath::Interpolate(0.0, 0.0, fConeInterp, m_fConeLoPass, v114[8]);
+        if ( LPF <= v123 )
+          LPF = v123;
       }
-      if ( v231 == 1 )
+      if ( v232 == 1 )
       {
         v124 = g_pEnvironmentMgr;
         if ( g_pEnvironmentMgr->m_bCurveEnabled[1][1] )
@@ -1416,11 +1353,11 @@ LABEL_136:
           {
             v125 = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::ConvertInternal(
                      &g_pEnvironmentMgr->ConversionTable[1][1],
-                     *v228 * 100.0,
+                     *v229 * 100.0,
                      0,
                      &in_uInputConfiga);
-            if ( v122 <= v125 )
-              v122 = v125;
+            if ( LPF <= v125 )
+              LPF = v125;
           }
         }
         if ( v124->m_bCurveEnabled[0][1] )
@@ -1428,74 +1365,68 @@ LABEL_136:
           if ( v124->ConversionTable[0][1].m_pArrayGraphPoints )
             v117->fObsLPF = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::ConvertInternal(
                               &v124->ConversionTable[0][1],
-                              *v229 * 100.0,
+                              *v230 * 100.0,
                               0,
                               &in_uInputConfiga);
         }
       }
-      v117->fLPF = v122;
+      v117->fLPF = LPF;
     }
   }
   else
   {
     v126 = in_deviceVolumes;
-    v127 = v221;
-    v128 = in_deviceVolumes->m_listDeviceVolumes.m_pFirst;
-    if ( in_deviceVolumes->m_listDeviceVolumes.m_pFirst )
+    v127 = v222;
+    for ( kk = in_deviceVolumes->m_listDeviceVolumes.m_pFirst; kk; kk = kk->pNextLightItem )
     {
+      v129 = 0;
       do
       {
-        v129 = 0;
-        do
-        {
-          v130 = v129++;
-          v130 <<= 6;
-          *(__m128 *)((char *)v128->mxDirect[0].Next.vector + v130) = 0i64;
-          *(_OWORD *)((char *)&v128->mxDirect[0].Next.aVolumes[4] + v130) = 0i64;
-        }
-        while ( v129 < v127 );
-        v128->mxAttenuations.dry.fNext = 0.0;
-        v128->mxAttenuations.userDef.fNext = 0.0;
-        v128->mxAttenuations.gameDef.fNext = 0.0;
-        v128 = v128->pNextLightItem;
+        v130 = v129++;
+        v130 <<= 6;
+        *(__m128 *)((char *)kk->mxDirect[0].Next.vector + v130) = 0i64;
+        *(_OWORD *)((char *)&kk->mxDirect[0].Next.aVolumes[4] + v130) = 0i64;
       }
-      while ( v128 );
+      while ( v129 < v127 );
+      kk->mxAttenuations.dry.fNext = 0.0;
+      kk->mxAttenuations.userDef.fNext = 0.0;
+      kk->mxAttenuations.gameDef.fNext = 0.0;
     }
     v131 = 0.0;
-    *(_QWORD *)in_fX = 4575657222473777152i64;
-    v236 = 4575657222473777152i64;
-    v237 = 4575657222473777152i64;
-    v132 = 0.0;
-    v133 = 0.0;
-    v238 = 4575657222473777152i64;
-    v243 = 4575657222473777152i64;
-    v244 = 4575657222473777152i64;
-    v245 = 4575657222473777152i64;
-    v246 = 4575657222473777152i64;
-    v239 = 4575657222473777152i64;
-    v240 = 4575657222473777152i64;
-    v241 = 4575657222473777152i64;
-    v242 = 4575657222473777152i64;
-    v247 = 4812096202965778432i64;
-    v248 = 4812096202965778432i64;
-    v249 = 4812096202965778432i64;
-    v250 = 4812096202965778432i64;
-    if ( CAkPBI::IsMultiPositionTypeMultiSources(v253) )
+    *(_QWORD *)in_fX = 0x3F8000003F800000i64;
+    v237 = 0x3F8000003F800000i64;
+    v238 = 0x3F8000003F800000i64;
+    fUserDefAuxMixGain = 0.0;
+    fGameDefAuxMixGain = 0.0;
+    v239 = 0x3F8000003F800000i64;
+    v241[0] = 0x3F8000003F800000i64;
+    v241[1] = 0x3F8000003F800000i64;
+    v241[2] = 0x3F8000003F800000i64;
+    v241[3] = 0x3F8000003F800000i64;
+    v240[0] = 0x3F8000003F800000i64;
+    v240[1] = 0x3F8000003F800000i64;
+    v240[2] = 0x3F8000003F800000i64;
+    v240[3] = 0x3F8000003F800000i64;
+    v242[0] = 0x42C8000042C80000i64;
+    v242[1] = 0x42C8000042C80000i64;
+    v242[2] = 0x42C8000042C80000i64;
+    v242[3] = 0x42C8000042C80000i64;
+    if ( CAkPBI::IsMultiPositionTypeMultiSources(in_pContext) )
     {
-      v134 = *(float **)v81;
+      v134 = v81->m_pItems;
       v135 = (__m128)LODWORD(in_fBehavioralVolume);
-      v136 = v254;
-      v137 = *(float **)v81;
+      v136 = in_arVolumeData;
+      v137 = v81->m_pItems;
       v138 = 0i64;
       do
       {
-        v139 = *((_BYTE *)v137 + 17);
-        for ( l = 0; !(v139 & 1); ++l )
+        v139 = v137->m_uListenerMask;
+        for ( mm = 0; (v139 & 1) == 0; ++mm )
           v139 >>= 1;
         v141 = 0i64;
-        v233 = l;
-        v230 = 0i64;
-        v142 = *((_QWORD *)&CAkListener::m_listeners + 18 * l + 15);
+        v234 = mm;
+        v231 = 0i64;
+        v142 = *((_QWORD *)&CAkListener::m_listeners + 18 * mm + 15);
         v143 = in_deviceVolumes->m_listDeviceVolumes.m_pFirst;
         if ( in_deviceVolumes->m_listDeviceVolumes.m_pFirst )
         {
@@ -1504,7 +1435,7 @@ LABEL_136:
             if ( v143->uDeviceID == v142 )
               v141 = (__int64)v143;
             v143 = v143->pNextLightItem;
-            v230 = (__m128 *)v141;
+            v231 = (__m128 *)v141;
             if ( !v143 )
             {
               if ( !v141 )
@@ -1513,22 +1444,22 @@ LABEL_136:
             }
           }
           v144 = FLOAT_100_0;
-          v145 = v37;
-          v146 = v37;
-          memset(&v251, 0, 0x100ui64);
-          v147 = (__int64)v222;
-          v148 = (__int64)v229;
-          v149 = (__int64)v225;
+          v145 = fConeInterp;
+          v146 = fConeInterp;
+          memset(v243, 0, sizeof(v243));
+          v147 = (__int64)v223;
+          v148 = (__int64)v230;
+          v149 = (__int64)v226;
           v150 = 8 * v138;
-          v151 = (signed __int64)&v134[9 * v254->m_uLength];
+          v151 = &v134[in_arVolumeData->m_uLength];
           do
           {
             v152 = 0;
             if ( v127 )
             {
               v153 = v135;
-              v154 = (__m128 *)&v251;
-              v153.m128_f32[0] = v135.m128_f32[0] * v137[5];
+              v154 = (__m128 *)v243;
+              v153.m128_f32[0] = v135.m128_f32[0] * v137->fDryMixGain;
               v155 = _mm_shuffle_ps(v153, v153, 0);
               do
               {
@@ -1542,39 +1473,39 @@ LABEL_136:
               }
               while ( v152 < v127 );
             }
-            if ( v137[5] > v131 )
-              v131 = v137[5];
-            if ( v252 )
+            if ( v137->fDryMixGain > v131 )
+              v131 = v137->fDryMixGain;
+            if ( in_bIsAuxRoutable )
             {
-              if ( v137[7] > v132 )
-                v132 = v137[7];
-              if ( v137[6] > v133 )
-                v133 = v137[6];
+              if ( v137->fUserDefAuxMixGain > fUserDefAuxMixGain )
+                fUserDefAuxMixGain = v137->fUserDefAuxMixGain;
+              if ( v137->fGameDefAuxMixGain > fGameDefAuxMixGain )
+                fGameDefAuxMixGain = v137->fGameDefAuxMixGain;
             }
             if ( v144 >= *(float *)(v149 + 4 * v138) )
               v144 = *(float *)(v149 + 4 * v138);
-            if ( v145 >= v228[v138] )
-              v145 = v228[v138];
+            if ( v145 >= v229[v138] )
+              v145 = v229[v138];
             if ( v146 >= *(float *)(v148 + 4 * v138) )
               v146 = *(float *)(v148 + 4 * v138);
-            if ( v37 >= v137[8] )
-              v37 = v137[8];
-            v137 += 9;
+            if ( fConeInterp >= v137->fConeInterp )
+              fConeInterp = v137->fConeInterp;
+            ++v137;
             v138 = (unsigned int)(v138 + 1);
             v150 += 8;
-            if ( v137 == (float *)v151 )
+            if ( v137 == v151 )
               break;
-            v159 = *((_BYTE *)v137 + 17);
-            for ( m = 0; !(v159 & 1); ++m )
+            v159 = v137->m_uListenerMask;
+            for ( nn = 0; (v159 & 1) == 0; ++nn )
               v159 >>= 1;
           }
-          while ( m == l );
-          v161 = v233;
-          v136 = v254;
+          while ( nn == mm );
+          v161 = v234;
+          v136 = in_arVolumeData;
           if ( v127 )
           {
-            v162 = &v251;
-            v163 = v230 + 1;
+            v162 = v243;
+            v163 = v231 + 1;
             v164 = v127;
             do
             {
@@ -1589,21 +1520,21 @@ LABEL_136:
             }
             while ( v164 );
           }
-          v168 = *((float *)&v247 + v161);
+          v168 = *((float *)v242 + v161);
           if ( v168 >= v144 )
             v168 = v144;
-          *((float *)&v247 + v161) = v168;
-          v169 = *((float *)&v239 + v161);
+          *((float *)v242 + v161) = v168;
+          v169 = *((float *)v240 + v161);
           if ( v169 >= v145 )
             v169 = v145;
-          *((float *)&v239 + v161) = v169;
-          v170 = *((float *)&v243 + v161);
+          *((float *)v240 + v161) = v169;
+          v170 = *((float *)v241 + v161);
           if ( v170 >= v146 )
             v170 = v146;
-          *((float *)&v243 + v161) = v170;
+          *((float *)v241 + v161) = v170;
           v171 = in_fX[v161];
-          if ( v171 >= v37 )
-            v171 = v37;
+          if ( v171 >= fConeInterp )
+            v171 = fConeInterp;
           in_fX[v161] = v171;
         }
         else
@@ -1611,32 +1542,32 @@ LABEL_136:
           do
           {
 LABEL_216:
-            v137 += 9;
+            ++v137;
             v138 = (unsigned int)(v138 + 1);
-            if ( v137 == &v134[9 * v136->m_uLength] )
+            if ( v137 == &v134[v136->m_uLength] )
               break;
-            v172 = *((_BYTE *)v137 + 17);
-            for ( n = 0; !(v172 & 1); ++n )
+            v172 = v137->m_uListenerMask;
+            for ( i1 = 0; (v172 & 1) == 0; ++i1 )
               v172 >>= 1;
           }
-          while ( n == l );
+          while ( i1 == mm );
         }
-        v134 = (float *)&v136->m_pItems->0;
-        v37 = *(float *)&FLOAT_1_0;
+        v134 = v136->m_pItems;
+        fConeInterp = *(float *)&FLOAT_1_0;
       }
-      while ( v137 != (float *)&v136->m_pItems[v136->m_uLength].0 );
+      while ( v137 != &v136->m_pItems[v136->m_uLength] );
     }
     else
     {
-      v174 = *(float **)v81;
+      v174 = v81->m_pItems;
       v175 = (__m128)LODWORD(in_fBehavioralVolume);
-      v176 = (__int64)v225;
-      v177 = *(float **)v81;
+      v176 = (__int64)v226;
+      v177 = v81->m_pItems;
       v178 = 0i64;
       do
       {
-        v179 = *((_BYTE *)v177 + 17);
-        for ( ii = 0; !(v179 & 1); ++ii )
+        v179 = v177->m_uListenerMask;
+        for ( i2 = 0; (v179 & 1) == 0; ++i2 )
           v179 >>= 1;
         v181 = 0i64;
         v182 = v126->m_listDeviceVolumes.m_pFirst;
@@ -1644,7 +1575,7 @@ LABEL_216:
         {
           while ( !v181 )
           {
-            if ( v182->uDeviceID == *((_QWORD *)&CAkListener::m_listeners + 18 * ii + 15) )
+            if ( v182->uDeviceID == *((_QWORD *)&CAkListener::m_listeners + 18 * i2 + 15) )
               v181 = v182;
             v182 = v182->pNextLightItem;
             if ( !v182 )
@@ -1660,210 +1591,207 @@ LABEL_216:
             v184 = 0;
             if ( v127 )
             {
-              v185 = (__m128 *)v181->mxDirect;
+              vector = v181->mxDirect[0].Next.vector;
               do
               {
-                v186 = *v185;
+                v186 = *vector;
                 v187 = v175;
-                v188 = 32i64 * (v184++ + v183);
-                v185 += 4;
-                v187.m128_f32[0] = v175.m128_f32[0] * v177[5];
+                v188 = 2i64 * (v184 + v183);
+                ++v184;
+                vector += 4;
+                v187.m128_f32[0] = v175.m128_f32[0] * v177->fDryMixGain;
                 v189 = _mm_shuffle_ps(v187, v187, 0);
-                v190 = _mm_max_ps(v186, _mm_mul_ps(*(__m128 *)&v66[v188], v189));
-                v191 = _mm_max_ps(v185[-3], _mm_mul_ps(*(__m128 *)&v66[v188 + 16], v189));
-                v185[-4] = v190;
-                v185[-3] = v191;
+                v190 = _mm_max_ps(v186, _mm_mul_ps(v65[v188], v189));
+                v191 = _mm_max_ps(vector[-3], _mm_mul_ps(v65[v188 + 1], v189));
+                vector[-4] = v190;
+                vector[-3] = v191;
               }
               while ( v184 < v127 );
             }
-            if ( v177[5] > v131 )
-              v131 = v177[5];
-            if ( v252 )
+            if ( v177->fDryMixGain > v131 )
+              v131 = v177->fDryMixGain;
+            if ( in_bIsAuxRoutable )
             {
-              if ( v177[7] > v132 )
-                v132 = v177[7];
-              if ( v177[6] > v133 )
-                v133 = v177[6];
+              if ( v177->fUserDefAuxMixGain > fUserDefAuxMixGain )
+                fUserDefAuxMixGain = v177->fUserDefAuxMixGain;
+              if ( v177->fGameDefAuxMixGain > fGameDefAuxMixGain )
+                fGameDefAuxMixGain = v177->fGameDefAuxMixGain;
             }
-            v192 = *((float *)&v247 + ii);
+            v192 = *((float *)v242 + i2);
             if ( v192 >= *(float *)(v176 + 4 * v178) )
               v192 = *(float *)(v176 + 4 * v178);
-            v193 = (__int64)v228;
-            v194 = *((float *)&v239 + ii);
-            *((float *)&v247 + ii) = v192;
+            v193 = (__int64)v229;
+            v194 = *((float *)v240 + i2);
+            *((float *)v242 + i2) = v192;
             if ( v194 >= *(float *)(v193 + 4 * v178) )
               v194 = *(float *)(v193 + 4 * v178);
-            v195 = (__int64)v229;
-            v196 = *((float *)&v243 + ii);
-            *((float *)&v239 + ii) = v194;
+            v195 = (__int64)v230;
+            v196 = *((float *)v241 + i2);
+            *((float *)v240 + i2) = v194;
             if ( v196 >= *(float *)(v195 + 4 * v178) )
               v196 = *(float *)(v195 + 4 * v178);
-            v197 = v177[8];
-            v198 = in_fX[ii];
-            *((float *)&v243 + ii) = v196;
+            v197 = v177->fConeInterp;
+            v198 = in_fX[i2];
+            *((float *)v241 + i2) = v196;
             if ( v198 >= v197 )
               v198 = v197;
-            v177 += 9;
+            ++v177;
             v178 = (unsigned int)(v178 + 1);
-            v199 = 9i64 * v81[2];
-            v200 = *(float **)v81;
+            v199 = v81->m_uLength;
+            v200 = v81->m_pItems;
             v183 += 8;
-            in_fX[ii] = v198;
+            in_fX[i2] = v198;
             if ( v177 == &v200[v199] )
               break;
-            v201 = *((_BYTE *)v177 + 17);
-            for ( jj = 0; !(v201 & 1); ++jj )
+            v201 = v177->m_uListenerMask;
+            for ( i3 = 0; (v201 & 1) == 0; ++i3 )
               v201 >>= 1;
           }
-          while ( jj == ii );
+          while ( i3 == i2 );
           v126 = in_deviceVolumes;
         }
         else
         {
 LABEL_265:
-          v209 = (signed __int64)&v174[9 * v81[2]];
+          v209 = &v174[v81->m_uLength];
           do
           {
-            v177 += 9;
+            ++v177;
             v178 = (unsigned int)(v178 + 1);
-            if ( v177 == (float *)v209 )
+            if ( v177 == v209 )
               break;
-            v210 = *((_BYTE *)v177 + 17);
-            for ( kk = 0; !(v210 & 1); ++kk )
+            v210 = v177->m_uListenerMask;
+            for ( i4 = 0; (v210 & 1) == 0; ++i4 )
               v210 >>= 1;
           }
-          while ( kk == ii );
+          while ( i4 == i2 );
         }
-        v174 = *(float **)v81;
+        v174 = v81->m_pItems;
       }
-      while ( v177 != (float *)(*(_QWORD *)v81 + 36i64 * v81[2]) );
+      while ( v177 != &v81->m_pItems[v81->m_uLength] );
     }
-    v203 = v231;
-    v204 = in_deviceVolumes->m_listDeviceVolumes.m_pFirst;
-    if ( in_deviceVolumes->m_listDeviceVolumes.m_pFirst )
+    v203 = v232;
+    for ( i5 = in_deviceVolumes->m_listDeviceVolumes.m_pFirst; i5; i5 = i5->pNextLightItem )
     {
-      do
+      v205 = 0i64;
+      if ( CAkOutputMgr::m_Devices.m_uLength )
       {
-        v205 = 0i64;
-        if ( CAkOutputMgr::m_Devices.m_uLength )
+        v206 = &CAkOutputMgr::m_Devices.m_pItems->uDeviceID;
+        while ( *v206 != i5->uDeviceID )
         {
-          v206 = &CAkOutputMgr::m_Devices.m_pItems->uDeviceID;
-          while ( *v206 != v204->uDeviceID )
-          {
-            v205 = (unsigned int)(v205 + 1);
-            v206 += 10;
-            if ( (unsigned int)v205 >= CAkOutputMgr::m_Devices.m_uLength )
-              goto LABEL_261;
-          }
-          v207 = CAkOutputMgr::m_Devices.m_pItems[v205].uListeners;
+          v205 = (unsigned int)(v205 + 1);
+          v206 += 10;
+          if ( (unsigned int)v205 >= CAkOutputMgr::m_Devices.m_uLength )
+            goto LABEL_261;
         }
-        else
-        {
-LABEL_261:
-          LOBYTE(v207) = 0;
-        }
-        v204->mxAttenuations.dry.fNext = 1.0;
-        if ( v252 && v131 > 0.0 )
-        {
-          v208 = *(float *)&FLOAT_1_0;
-          v204->mxAttenuations.gameDef.fNext = v133 * (float)(1.0 / v131);
-          v204->mxAttenuations.userDef.fNext = v132 * (float)(1.0 / v131);
-        }
-        else
-        {
-          v208 = *(float *)&FLOAT_1_0;
-          v204->mxAttenuations.gameDef.fNext = 0.0;
-          v204->mxAttenuations.userDef.fNext = 0.0;
-        }
-        v212 = 0;
-        v213 = FLOAT_100_0;
-        v214 = v207 & v253->m_pGameObj->m_PosKeep.m_uListenerMask;
-        if ( (unsigned __int8)v207 & v253->m_pGameObj->m_PosKeep.m_uListenerMask )
-        {
-          v215 = g_pEnvironmentMgr;
-          do
-          {
-            if ( v214 & 1 )
-            {
-              v216 = *((float *)&v247 + v212);
-              if ( v113 > 0.0 )
-              {
-                v217 = AkMath::Interpolate(0.0, 0.0, v208, v113, in_fX[v212]);
-                v215 = g_pEnvironmentMgr;
-                if ( v216 <= v217 )
-                  v216 = v217;
-              }
-              if ( v203 == 1 )
-              {
-                if ( v215->m_bCurveEnabled[1][1] )
-                {
-                  if ( v215->ConversionTable[1][1].m_pArrayGraphPoints )
-                  {
-                    v218 = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::ConvertInternal(
-                             &v215->ConversionTable[1][1],
-                             *((float *)&v239 + v212) * 100.0,
-                             0,
-                             &in_uInputConfiga);
-                    if ( v216 <= v218 )
-                      v216 = v218;
-                  }
-                }
-                if ( v215->m_bCurveEnabled[0][1] && v215->ConversionTable[0][1].m_pArrayGraphPoints )
-                {
-                  v204->fObsLPF = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::ConvertInternal(
-                                    &v215->ConversionTable[0][1],
-                                    *((float *)&v243 + v212) * 100.0,
-                                    0,
-                                    &in_uInputConfiga);
-                  v215 = g_pEnvironmentMgr;
-                }
-              }
-              if ( v213 >= v216 )
-                v213 = v216;
-            }
-            v208 = *(float *)&FLOAT_1_0;
-            ++v212;
-            v214 >>= 1;
-          }
-          while ( v214 );
-        }
-        if ( v213 <= v253->m_EffectiveParams.LPF )
-          v213 = v253->m_EffectiveParams.LPF;
-        v204->fLPF = v213;
-        v204 = v204->pNextLightItem;
+        uListeners = CAkOutputMgr::m_Devices.m_pItems[v205].uListeners;
       }
-      while ( v204 );
+      else
+      {
+LABEL_261:
+        LOBYTE(uListeners) = 0;
+      }
+      i5->mxAttenuations.dry.fNext = 1.0;
+      if ( in_bIsAuxRoutable && v131 > 0.0 )
+      {
+        v208 = *(float *)&FLOAT_1_0;
+        i5->mxAttenuations.gameDef.fNext = fGameDefAuxMixGain * (float)(1.0 / v131);
+        i5->mxAttenuations.userDef.fNext = fUserDefAuxMixGain * (float)(1.0 / v131);
+      }
+      else
+      {
+        v208 = *(float *)&FLOAT_1_0;
+        i5->mxAttenuations.gameDef.fNext = 0.0;
+        i5->mxAttenuations.userDef.fNext = 0.0;
+      }
+      v212 = 0;
+      v213 = FLOAT_100_0;
+      v214 = uListeners & in_pContext->m_pGameObj->m_PosKeep.m_uListenerMask;
+      if ( ((unsigned __int8)uListeners & in_pContext->m_pGameObj->m_PosKeep.m_uListenerMask) != 0 )
+      {
+        v215 = g_pEnvironmentMgr;
+        do
+        {
+          if ( (v214 & 1) != 0 )
+          {
+            v216 = *((float *)v242 + v212);
+            if ( m_fConeLoPass > 0.0 )
+            {
+              v217 = AkMath::Interpolate(0.0, 0.0, v208, m_fConeLoPass, in_fX[v212]);
+              v215 = g_pEnvironmentMgr;
+              if ( v216 <= v217 )
+                v216 = v217;
+            }
+            if ( v203 == 1 )
+            {
+              if ( v215->m_bCurveEnabled[1][1] )
+              {
+                if ( v215->ConversionTable[1][1].m_pArrayGraphPoints )
+                {
+                  v218 = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::ConvertInternal(
+                           &v215->ConversionTable[1][1],
+                           *((float *)v240 + v212) * 100.0,
+                           0,
+                           &in_uInputConfiga);
+                  if ( v216 <= v218 )
+                    v216 = v218;
+                }
+              }
+              if ( v215->m_bCurveEnabled[0][1] && v215->ConversionTable[0][1].m_pArrayGraphPoints )
+              {
+                i5->fObsLPF = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::ConvertInternal(
+                                &v215->ConversionTable[0][1],
+                                *((float *)v241 + v212) * 100.0,
+                                0,
+                                &in_uInputConfiga);
+                v215 = g_pEnvironmentMgr;
+              }
+            }
+            if ( v213 >= v216 )
+              v213 = v216;
+          }
+          v208 = *(float *)&FLOAT_1_0;
+          ++v212;
+          v214 >>= 1;
+        }
+        while ( v214 );
+      }
+      if ( v213 <= in_pContext->m_EffectiveParams.LPF )
+        v213 = in_pContext->m_EffectiveParams.LPF;
+      i5->fLPF = v213;
     }
   }
-}v213;
-        v204 = v204->pNextLightItem;
-      }
-      while ( v204 );
+}Params.LPF )
+        v213 = in_pContext->m_EffectiveParams.LPF;
+      i5->fLPF = v213;
     }
   }
 }
 
 // File Line: 904
 // RVA: 0xA69570
-void __fastcall CAkListener::DoSpeakerVolumeMatrixCallback(unsigned int in_playingID, __int64 in_uNumChannels, unsigned int in_uInputConfig, unsigned int in_uOutputConfig, AkDeviceInfo *io_rDeviceVolume)
+void __fastcall CAkListener::DoSpeakerVolumeMatrixCallback(
+        unsigned int in_playingID,
+        __int64 in_uNumChannels,
+        unsigned int in_uInputConfig,
+        unsigned int in_uOutputConfig,
+        AkDeviceInfo *io_rDeviceVolume)
 {
   __int64 v5; // r10
-  AkSpeakerVolumes **v6; // rax
-  AkAudioMix *v7; // rdi
-  AkSpeakerVolumeMatrixCallbackInfo in_pInfo; // [rsp+20h] [rbp-88h]
+  AkSpeakerVolumes **pVolumes; // rax
+  AkAudioMix *mxDirect; // rdi
+  AkSpeakerVolumeMatrixCallbackInfo in_pInfo; // [rsp+20h] [rbp-88h] BYREF
 
   v5 = 0i64;
   if ( (_DWORD)in_uNumChannels )
   {
     v5 = (unsigned int)in_uNumChannels;
-    v6 = in_pInfo.pVolumes;
-    v7 = io_rDeviceVolume->mxDirect;
+    pVolumes = in_pInfo.pVolumes;
+    mxDirect = io_rDeviceVolume->mxDirect;
     in_uNumChannels = (unsigned int)in_uNumChannels;
     do
     {
-      *v6 = (AkSpeakerVolumes *)v7;
-      ++v7;
-      ++v6;
+      *pVolumes++ = (AkSpeakerVolumes *)mxDirect++;
       --in_uNumChannels;
     }
     while ( in_uNumChannels );
@@ -1880,13 +1808,17 @@ void __fastcall CAkListener::DoSpeakerVolumeMatrixCallback(unsigned int in_playi
 
 // File Line: 934
 // RVA: 0xA699C0
-void __fastcall CAkListener::GetListenerVolume(CAkAttenuation *in_pAttenuation, AkEmitterListenerPair *in_ray, float in_fConeOutsideVolume, float *out_fMinCone, float *out_fListenerVolumeDry, float *out_fListenerVolumeGameDefAux, float *out_fListenerVolumeUserDefAux)
+void __fastcall CAkListener::GetListenerVolume(
+        CAkAttenuation *in_pAttenuation,
+        AkEmitterListenerPair *in_ray,
+        float in_fConeOutsideVolume,
+        float *out_fMinCone,
+        float *out_fListenerVolumeDry,
+        float *out_fListenerVolumeGameDefAux,
+        float *out_fListenerVolumeUserDefAux)
 {
-  float *out_fCone; // rsi
-  AkEmitterListenerPair *v8; // r14
-  CAkAttenuation *v9; // rbx
   unsigned __int8 v10; // al
-  float v11; // xmm7_4
+  float r; // xmm7_4
   __int64 v12; // rax
   CAkConversionTable<AkRTPCGraphPointBase<float>,float> *v13; // rdi
   float v14; // xmm6_4
@@ -1898,11 +1830,8 @@ void __fastcall CAkListener::GetListenerVolume(CAkAttenuation *in_pAttenuation, 
   CAkConversionTable<AkRTPCGraphPointBase<float>,float> *v20; // rcx
   float v21; // xmm0_4
   float *v22; // rax
-  unsigned int out_index; // [rsp+80h] [rbp+8h]
+  unsigned int out_index; // [rsp+80h] [rbp+8h] BYREF
 
-  out_fCone = out_fMinCone;
-  v8 = in_ray;
-  v9 = in_pAttenuation;
   if ( !in_pAttenuation )
   {
     v22 = out_fListenerVolumeDry;
@@ -1913,29 +1842,26 @@ void __fastcall CAkListener::GetListenerVolume(CAkAttenuation *in_pAttenuation, 
     return;
   }
   v10 = in_pAttenuation->m_curveToUse[0];
-  v11 = in_ray->r;
-  if ( v10 != -1 && (v12 = v10, v13 = &in_pAttenuation->m_curves[v12], v13->m_pArrayGraphPoints) )
-  {
-    if ( v13 )
-    {
-      v14 = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::ConvertInternal(
-              &in_pAttenuation->m_curves[v12],
-              in_ray->r,
-              0,
-              &out_index);
-      goto LABEL_8;
-    }
-  }
-  else
+  r = in_ray->r;
+  if ( v10 == 0xFF || (v12 = v10, v13 = &in_pAttenuation->m_curves[v12], !v13->m_pArrayGraphPoints) )
   {
     v13 = 0i64;
+  }
+  else if ( v13 )
+  {
+    v14 = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::ConvertInternal(
+            &in_pAttenuation->m_curves[v12],
+            in_ray->r,
+            0,
+            &out_index);
+    goto LABEL_8;
   }
   v14 = *(float *)&FLOAT_1_0;
 LABEL_8:
   v15 = out_fListenerVolumeDry;
   *out_fListenerVolumeDry = v14;
-  v16 = v9->m_curveToUse[1];
-  if ( v16 == -1 || (v17 = &v9->m_curves[v16], !v17->m_pArrayGraphPoints) )
+  v16 = in_pAttenuation->m_curveToUse[1];
+  if ( v16 == 0xFF || (v17 = &in_pAttenuation->m_curves[v16], !v17->m_pArrayGraphPoints) )
     v17 = 0i64;
   if ( v17 == v13 )
   {
@@ -1943,15 +1869,15 @@ LABEL_8:
   }
   else if ( v17 )
   {
-    v18 = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::ConvertInternal(v17, v11, 0, &out_index);
+    v18 = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::ConvertInternal(v17, r, 0, &out_index);
     *out_fListenerVolumeGameDefAux = v18;
   }
   else
   {
     *out_fListenerVolumeGameDefAux = 1.0;
   }
-  v19 = v9->m_curveToUse[2];
-  if ( v19 == -1 || (v20 = &v9->m_curves[v19], !v20->m_pArrayGraphPoints) )
+  v19 = in_pAttenuation->m_curveToUse[2];
+  if ( v19 == 0xFF || (v20 = &in_pAttenuation->m_curves[v19], !v20->m_pArrayGraphPoints) )
     v20 = 0i64;
   if ( v20 == v13 )
   {
@@ -1959,22 +1885,22 @@ LABEL_8:
   }
   else if ( v20 )
   {
-    v21 = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::ConvertInternal(v20, v11, 0, &out_index);
+    v21 = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::ConvertInternal(v20, r, 0, &out_index);
     *out_fListenerVolumeUserDefAux = v21;
   }
   else
   {
     *out_fListenerVolumeUserDefAux = 1.0;
   }
-  if ( *((_BYTE *)v9 + 125) & 1 )
+  if ( (*((_BYTE *)in_pAttenuation + 125) & 1) != 0 )
     *v15 = CAkListener::ComputeConeAttenuation(
-             v9->m_ConeParams.fInsideAngle,
-             v9->m_ConeParams.fOutsideAngle,
+             in_pAttenuation->m_ConeParams.fInsideAngle,
+             in_pAttenuation->m_ConeParams.fOutsideAngle,
              in_fConeOutsideVolume,
-             v8->fEmitterAngle,
-             out_fCone)
+             in_ray->fEmitterAngle,
+             out_fMinCone)
          * *v15;
   else
-    *out_fCone = 1.0;
+    *out_fMinCone = 1.0;
 }
 

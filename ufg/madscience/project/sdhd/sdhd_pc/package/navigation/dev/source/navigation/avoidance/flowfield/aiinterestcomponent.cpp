@@ -2,12 +2,12 @@
 // RVA: 0x1461380
 __int64 dynamic_initializer_for__UFG::AIInterestComponent::s_AIInterestComponentList__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::AIInterestComponent::s_AIInterestComponentList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::AIInterestComponent::s_AIInterestComponentList__);
 }
 
 // File Line: 38
 // RVA: 0xFFEC0
-signed __int64 __fastcall UFG::AIInterestComponent::GetTypeSize(UFG::AIInterestComponent *this)
+__int64 __fastcall UFG::AIInterestComponent::GetTypeSize(UFG::AIInterestComponent *this)
 {
   return 432i64;
 }
@@ -16,139 +16,125 @@ signed __int64 __fastcall UFG::AIInterestComponent::GetTypeSize(UFG::AIInterestC
 // RVA: 0xFA520
 void __fastcall UFG::AIInterestComponent::AIInterestComponent(UFG::AIInterestComponent *this, unsigned int name_uid)
 {
-  UFG::AIInterestComponent *v2; // rdi
-  UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent> *v3; // rbx
-  _QWORD *v4; // rcx
+  float y; // xmm1_4
+  float z; // xmm2_4
   float v5; // xmm1_4
   float v6; // xmm2_4
   float v7; // xmm1_4
   float v8; // xmm2_4
-  float v9; // xmm1_4
-  float v10; // xmm2_4
-  UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent> *v11; // rax
-  __m128 v12; // xmm3
+  UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent> *mPrev; // rax
+  UFG::qVector4 v10; // xmm3
+  float v11; // xmm1_4
+  float v12; // xmm2_4
   float v13; // xmm1_4
   float v14; // xmm2_4
-  float v15; // xmm1_4
-  float v16; // xmm2_4
-  UFG::qSafePointer<UFG::SimComponent,UFG::TransformNodeComponent> *v17; // [rsp+60h] [rbp+18h]
-  UFG::qSafePointer<UFG::SimComponent,UFG::FFieldPrintComponent> *v18; // [rsp+60h] [rbp+18h]
 
-  v2 = this;
-  UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable{for `UFG::SimComponent};
-  v2->vfptr = (UFG::StateInterfaceVtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable{for `UFG::StateInterface};
-  v2->mAutoActivate = 1;
-  v2->mAge = 0.0;
-  v3 = (UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent> *)&v2->mPrev;
-  v3->mPrev = v3;
-  v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIInterestComponent::`vftable{for `UFG::SimComponent};
-  v2->vfptr = (UFG::StateInterfaceVtbl *)&UFG::AIInterestComponent::`vftable{for `UFG::StateInterface};
-  v2->mGridRequestCount = 0;
-  v2->mFlags = 144;
-  v17 = &v2->mpTransform;
-  v17->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v17->mPrev;
-  v17->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v17->mPrev;
-  v2->mpTransform.m_pPointer = 0i64;
-  v18 = &v2->mpFieldPrint;
-  v18->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v18->mPrev;
-  v18->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v18->mPrev;
-  v2->mpFieldPrint.m_pPointer = 0i64;
-  v2->msParamTableName = "AvoidableParams";
-  v4 = (_QWORD *)&v2->mBoundingBox.mMin.x;
-  *v4 = 0i64;
-  v4[1] = 0i64;
-  v4[2] = 0i64;
-  v2->mBoundingBox.vfptr = (UFG::BoundingVolumeVtbl *)&UFG::SphereVolume::`vftable;
-  UFG::qBox::SetRadius((UFG::qBox *)&v2->mBoundingBox.mMin, 1.0);
+  UFG::SimComponent::SimComponent(this, name_uid);
+  this->UFG::StateComponentI<UFG::SimComponent>::UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable{for `UFG::SimComponent};
+  this->UFG::StateComponentI<UFG::SimComponent>::UFG::StateInterface::vfptr = (UFG::StateInterfaceVtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable{for `UFG::StateInterface};
+  this->mAutoActivate = 1;
+  this->mAge = 0.0;
+  this->mPrev = &this->UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent>;
+  this->mNext = &this->UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent>;
+  this->UFG::StateComponentI<UFG::SimComponent>::UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIInterestComponent::`vftable{for `UFG::SimComponent};
+  this->UFG::StateComponentI<UFG::SimComponent>::UFG::StateInterface::vfptr = (UFG::StateInterfaceVtbl *)&UFG::AIInterestComponent::`vftable{for `UFG::StateInterface};
+  this->mGridRequestCount = 0;
+  this->mFlags = 144;
+  this->mpTransform.mPrev = &this->mpTransform;
+  this->mpTransform.mNext = &this->mpTransform;
+  this->mpTransform.m_pPointer = 0i64;
+  this->mpFieldPrint.mPrev = &this->mpFieldPrint;
+  this->mpFieldPrint.mNext = &this->mpFieldPrint;
+  this->mpFieldPrint.m_pPointer = 0i64;
+  this->msParamTableName = "AvoidableParams";
+  *(_QWORD *)&this->mBoundingBox.mMin.x = 0i64;
+  *(_QWORD *)&this->mBoundingBox.mMin.z = 0i64;
+  *(_QWORD *)&this->mBoundingBox.mMax.y = 0i64;
+  this->mBoundingBox.vfptr = (UFG::BoundingVolumeVtbl *)&UFG::SphereVolume::`vftable;
+  UFG::qBox::SetRadius(&this->mBoundingBox.UFG::qBox, 1.0);
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
+  this->mPivotOffset.x = UFG::qVector3::msZero.x;
+  this->mPivotOffset.y = y;
+  this->mPivotOffset.z = z;
   v5 = UFG::qVector3::msZero.y;
   v6 = UFG::qVector3::msZero.z;
-  v2->mPivotOffset.x = UFG::qVector3::msZero.x;
-  v2->mPivotOffset.y = v5;
-  v2->mPivotOffset.z = v6;
+  this->mvAverageVel.x = UFG::qVector3::msZero.x;
+  this->mvAverageVel.y = v5;
+  this->mvAverageVel.z = v6;
   v7 = UFG::qVector3::msZero.y;
   v8 = UFG::qVector3::msZero.z;
-  v2->mvAverageVel.x = UFG::qVector3::msZero.x;
-  v2->mvAverageVel.y = v7;
-  v2->mvAverageVel.z = v8;
-  v9 = UFG::qVector3::msZero.y;
-  v10 = UFG::qVector3::msZero.z;
-  v2->mRotatedPoint.x = UFG::qVector3::msZero.x;
-  v2->mRotatedPoint.y = v9;
-  v2->mRotatedPoint.z = v10;
-  v2->mAttractorParams.Priority = 3.0;
-  v2->mAttractorParams.SidestepMaxDP = -1.0;
-  v2->mAttractorParams.FlashlightScoreMax = 0.89999998;
-  v2->mAttractorParams.FLMaxAngle = 0.35017776;
-  v2->mAttractorParams.FLMinAngle = 0.0099999998;
-  v2->mAttractorParams.FLMaxDist = 40.0;
-  v2->mAttractorParams.Method = 3.0;
-  v2->mAttractorParams.SidestepMinDP = 0.25;
-  v2->mAttractorParams.Strength = 4.0;
-  *(_QWORD *)&v2->mAttractorParams.FLMinDist = 1092616192i64;
-  *(_QWORD *)&v2->mAttractorParams.Offset.y = 0i64;
-  v2->mAttractorParams.MinDistToTrackEdge = 3.0;
-  v2->mAttractorParams.RadiusAdditive = 0.40000001;
-  v2->mAvoidableParams.Priority = 3.0;
-  v2->mAvoidableParams.SidestepMaxDP = -1.0;
-  v2->mAvoidableParams.FlashlightScoreMax = 0.89999998;
-  v2->mAvoidableParams.FLMaxAngle = 0.35017776;
-  v2->mAvoidableParams.FLMinAngle = 0.0099999998;
-  v2->mAvoidableParams.FLMaxDist = 40.0;
-  v2->mAvoidableParams.Method = 3.0;
-  v2->mAvoidableParams.SidestepMinDP = 0.25;
-  v2->mAvoidableParams.Strength = 4.0;
-  *(_QWORD *)&v2->mAvoidableParams.FLMinDist = 1092616192i64;
-  *(_QWORD *)&v2->mAvoidableParams.Offset.y = 0i64;
-  v2->mAvoidableParams.MinDistToTrackEdge = 3.0;
-  v2->mAvoidableParams.RadiusAdditive = 0.40000001;
-  v2->mVelocityWindow = 0i64;
-  v2->mAABBGridIDs[0] = -1;
-  UFG::SimComponent::AddType(
-    (UFG::SimComponent *)&v2->vfptr,
-    UFG::AIInterestComponent::_AIInterestComponentTypeUID,
-    "AIInterestComponent");
-  v11 = UFG::AIInterestComponent::s_AIInterestComponentList.mNode.mPrev;
-  UFG::AIInterestComponent::s_AIInterestComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent> *)&v2->mPrev;
-  v3->mPrev = v11;
-  v2->mNext = (UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent> *)&UFG::AIInterestComponent::s_AIInterestComponentList;
-  UFG::AIInterestComponent::s_AIInterestComponentList.mNode.mPrev = (UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent> *)&v2->mPrev;
-  v12 = 0i64;
-  v12.m128_f32[0] = (float)1;
-  v2->mCachedWorld.v0 = (UFG::qVector4)v12;
-  v2->mCachedWorld.v1 = (UFG::qVector4)_mm_shuffle_ps(v12, v12, 81);
-  v2->mCachedWorld.v2 = (UFG::qVector4)_mm_shuffle_ps(v12, v12, 69);
-  v2->mCachedWorld.v3 = (UFG::qVector4)_mm_shuffle_ps(v12, v12, 21);
-  v2->msParamTableName = "AvoidableParams";
+  this->mRotatedPoint.x = UFG::qVector3::msZero.x;
+  this->mRotatedPoint.y = v7;
+  this->mRotatedPoint.z = v8;
+  this->mAttractorParams.Priority = 3.0;
+  this->mAttractorParams.SidestepMaxDP = -1.0;
+  this->mAttractorParams.FlashlightScoreMax = 0.89999998;
+  this->mAttractorParams.FLMaxAngle = 0.35017776;
+  this->mAttractorParams.FLMinAngle = 0.0099999998;
+  this->mAttractorParams.FLMaxDist = 40.0;
+  this->mAttractorParams.Method = 3.0;
+  this->mAttractorParams.SidestepMinDP = 0.25;
+  this->mAttractorParams.Strength = 4.0;
+  *(_QWORD *)&this->mAttractorParams.FLMinDist = 1092616192i64;
+  *(_QWORD *)&this->mAttractorParams.Offset.y = 0i64;
+  this->mAttractorParams.MinDistToTrackEdge = 3.0;
+  this->mAttractorParams.RadiusAdditive = 0.40000001;
+  this->mAvoidableParams.Priority = 3.0;
+  this->mAvoidableParams.SidestepMaxDP = -1.0;
+  this->mAvoidableParams.FlashlightScoreMax = 0.89999998;
+  this->mAvoidableParams.FLMaxAngle = 0.35017776;
+  this->mAvoidableParams.FLMinAngle = 0.0099999998;
+  this->mAvoidableParams.FLMaxDist = 40.0;
+  this->mAvoidableParams.Method = 3.0;
+  this->mAvoidableParams.SidestepMinDP = 0.25;
+  this->mAvoidableParams.Strength = 4.0;
+  *(_QWORD *)&this->mAvoidableParams.FLMinDist = 1092616192i64;
+  *(_QWORD *)&this->mAvoidableParams.Offset.y = 0i64;
+  this->mAvoidableParams.MinDistToTrackEdge = 3.0;
+  this->mAvoidableParams.RadiusAdditive = 0.40000001;
+  this->mVelocityWindow = 0i64;
+  this->mAABBGridIDs[0] = -1;
+  UFG::SimComponent::AddType(this, UFG::AIInterestComponent::_AIInterestComponentTypeUID, "AIInterestComponent");
+  mPrev = UFG::AIInterestComponent::s_AIInterestComponentList.mNode.mPrev;
+  UFG::AIInterestComponent::s_AIInterestComponentList.mNode.mPrev->mNext = &this->UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent>;
+  this->mPrev = mPrev;
+  this->mNext = (UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent> *)&UFG::AIInterestComponent::s_AIInterestComponentList;
+  UFG::AIInterestComponent::s_AIInterestComponentList.mNode.mPrev = &this->UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent>;
+  v10 = 0i64;
+  v10.x = (float)1;
+  this->mCachedWorld.v0 = v10;
+  this->mCachedWorld.v1 = (UFG::qVector4)_mm_shuffle_ps((__m128)v10, (__m128)v10, 81);
+  this->mCachedWorld.v2 = (UFG::qVector4)_mm_shuffle_ps((__m128)v10, (__m128)v10, 69);
+  this->mCachedWorld.v3 = (UFG::qVector4)_mm_shuffle_ps((__m128)v10, (__m128)v10, 21);
+  this->msParamTableName = "AvoidableParams";
+  v11 = UFG::qVector3::msZero.y;
+  v12 = UFG::qVector3::msZero.z;
+  this->mPivotOffset.x = UFG::qVector3::msZero.x;
+  this->mPivotOffset.y = v11;
+  this->mPivotOffset.z = v12;
   v13 = UFG::qVector3::msZero.y;
   v14 = UFG::qVector3::msZero.z;
-  v2->mPivotOffset.x = UFG::qVector3::msZero.x;
-  v2->mPivotOffset.y = v13;
-  v2->mPivotOffset.z = v14;
-  v15 = UFG::qVector3::msZero.y;
-  v16 = UFG::qVector3::msZero.z;
-  v2->mRotatedPoint.x = UFG::qVector3::msZero.x;
-  v2->mRotatedPoint.y = v15;
-  v2->mRotatedPoint.z = v16;
-  v2->mFlags |= 1u;
+  this->mRotatedPoint.x = UFG::qVector3::msZero.x;
+  this->mRotatedPoint.y = v13;
+  this->mRotatedPoint.z = v14;
+  this->mFlags |= 1u;
 }
 
 // File Line: 66
 // RVA: 0xFB8D0
 void __fastcall UFG::AIInterestComponent::~AIInterestComponent(UFG::AIInterestComponent *this)
 {
-  UFG::AIInterestComponent *v1; // rbx
-  UFG::qAverageWindow<UFG::qVector3> *v2; // rdi
+  UFG::qAverageWindow<UFG::qVector3> *mVelocityWindow; // rdi
   UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent> *v3; // r8
-  UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent> *v4; // rcx
-  UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent> *v5; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::FFieldPrintComponent> *v6; // rdx
+  UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent> *mPrev; // rcx
+  UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent> *mNext; // rax
+  UFG::qSafePointer<UFG::SimComponent,UFG::FFieldPrintComponent> *p_mpFieldPrint; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v7; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v8; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v9; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v10; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::TransformNodeComponent> *v11; // rdx
+  UFG::qSafePointer<UFG::SimComponent,UFG::TransformNodeComponent> *p_mpTransform; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v12; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v13; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v14; // rcx
@@ -156,127 +142,122 @@ void __fastcall UFG::AIInterestComponent::~AIInterestComponent(UFG::AIInterestCo
   UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent> *v16; // rcx
   UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent> *v17; // rax
 
-  v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIInterestComponent::`vftable{for `UFG::SimComponent};
-  this->vfptr = (UFG::StateInterfaceVtbl *)&UFG::AIInterestComponent::`vftable{for `UFG::StateInterface};
-  v2 = this->mVelocityWindow;
-  if ( v2 )
+  this->UFG::StateComponentI<UFG::SimComponent>::UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIInterestComponent::`vftable{for `UFG::SimComponent};
+  this->UFG::StateComponentI<UFG::SimComponent>::UFG::StateInterface::vfptr = (UFG::StateInterfaceVtbl *)&UFG::AIInterestComponent::`vftable{for `UFG::StateInterface};
+  mVelocityWindow = this->mVelocityWindow;
+  if ( mVelocityWindow )
   {
-    if ( v2->m_pMemoryPool )
-      UFG::qMemoryPool::Free(v2->m_pMemoryPool, v2->m_pBuffer);
-    operator delete[](v2);
-    v1->mVelocityWindow = 0i64;
+    if ( mVelocityWindow->m_pMemoryPool )
+      UFG::qMemoryPool::Free(mVelocityWindow->m_pMemoryPool, mVelocityWindow->m_pBuffer);
+    operator delete[](mVelocityWindow);
+    this->mVelocityWindow = 0i64;
   }
-  if ( v1 == UFG::AIInterestComponent::s_AIInterestComponentpCurrentIterator )
-    UFG::AIInterestComponent::s_AIInterestComponentpCurrentIterator = (UFG::AIInterestComponent *)&v1->mPrev[-5];
-  v3 = (UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent> *)&v1->mPrev;
-  v4 = v1->mPrev;
-  v5 = v1->mNext;
-  v4->mNext = v5;
-  v5->mPrev = v4;
-  v3->mPrev = v3;
-  v3->mNext = v3;
-  v6 = &v1->mpFieldPrint;
-  if ( v1->mpFieldPrint.m_pPointer )
+  if ( this == UFG::AIInterestComponent::s_AIInterestComponentpCurrentIterator )
+    UFG::AIInterestComponent::s_AIInterestComponentpCurrentIterator = (UFG::AIInterestComponent *)&this->mPrev[-5];
+  v3 = &this->UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent>;
+  mPrev = this->mPrev;
+  mNext = this->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->mPrev = &this->UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent>;
+  this->mNext = &this->UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent>;
+  p_mpFieldPrint = &this->mpFieldPrint;
+  if ( this->mpFieldPrint.m_pPointer )
   {
-    v7 = v6->mPrev;
-    v8 = v1->mpFieldPrint.mNext;
+    v7 = p_mpFieldPrint->mPrev;
+    v8 = this->mpFieldPrint.mNext;
     v7->mNext = v8;
     v8->mPrev = v7;
-    v6->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v6->mPrev;
-    v1->mpFieldPrint.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->mpFieldPrint.mPrev;
+    p_mpFieldPrint->mPrev = p_mpFieldPrint;
+    this->mpFieldPrint.mNext = &this->mpFieldPrint;
   }
-  v1->mpFieldPrint.m_pPointer = 0i64;
-  v9 = v6->mPrev;
-  v10 = v1->mpFieldPrint.mNext;
+  this->mpFieldPrint.m_pPointer = 0i64;
+  v9 = p_mpFieldPrint->mPrev;
+  v10 = this->mpFieldPrint.mNext;
   v9->mNext = v10;
   v10->mPrev = v9;
-  v6->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v6->mPrev;
-  v1->mpFieldPrint.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->mpFieldPrint.mPrev;
-  v11 = &v1->mpTransform;
-  if ( v1->mpTransform.m_pPointer )
+  p_mpFieldPrint->mPrev = p_mpFieldPrint;
+  this->mpFieldPrint.mNext = &this->mpFieldPrint;
+  p_mpTransform = &this->mpTransform;
+  if ( this->mpTransform.m_pPointer )
   {
-    v12 = v11->mPrev;
-    v13 = v1->mpTransform.mNext;
+    v12 = p_mpTransform->mPrev;
+    v13 = this->mpTransform.mNext;
     v12->mNext = v13;
     v13->mPrev = v12;
-    v11->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v11->mPrev;
-    v1->mpTransform.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->mpTransform.mPrev;
+    p_mpTransform->mPrev = p_mpTransform;
+    this->mpTransform.mNext = &this->mpTransform;
   }
-  v1->mpTransform.m_pPointer = 0i64;
-  v14 = v11->mPrev;
-  v15 = v1->mpTransform.mNext;
+  this->mpTransform.m_pPointer = 0i64;
+  v14 = p_mpTransform->mPrev;
+  v15 = this->mpTransform.mNext;
   v14->mNext = v15;
   v15->mPrev = v14;
-  v11->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v11->mPrev;
-  v1->mpTransform.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->mpTransform.mPrev;
+  p_mpTransform->mPrev = p_mpTransform;
+  this->mpTransform.mNext = &this->mpTransform;
   v16 = v3->mPrev;
-  v17 = v1->mNext;
+  v17 = this->mNext;
   v16->mNext = v17;
   v17->mPrev = v16;
   v3->mPrev = v3;
-  v1->mNext = (UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent> *)&v1->mPrev;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable{for `UFG::SimComponent};
-  v1->vfptr = (UFG::StateInterfaceVtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable{for `UFG::StateInterface};
-  if ( (LOBYTE(v1->m_Flags) >> 2) & 1 )
+  this->mNext = &this->UFG::qNode<UFG::AIInterestComponent,UFG::AIInterestComponent>;
+  this->UFG::StateComponentI<UFG::SimComponent>::UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable{for `UFG::SimComponent};
+  this->UFG::StateComponentI<UFG::SimComponent>::UFG::StateInterface::vfptr = (UFG::StateInterfaceVtbl *)&UFG::StateComponentI<UFG::SimComponent>::`vftable{for `UFG::StateInterface};
+  if ( (this->m_Flags & 4) != 0 )
   {
-    v1->m_Flags |= 2u;
-    ((void (__fastcall *)(UFG::AIInterestComponent *))v1->vfptr[16].__vecDelDtor)(v1);
-    v1->m_Flags &= 0xFFFBu;
+    this->m_Flags |= 2u;
+    ((void (__fastcall *)(UFG::AIInterestComponent *))this->UFG::StateComponentI<UFG::SimComponent>::UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr[16].__vecDelDtor)(this);
+    this->m_Flags &= ~4u;
   }
-  UFG::SimComponent::~SimComponent((UFG::SimComponent *)&v1->vfptr);
+  UFG::SimComponent::~SimComponent(this);
 }
 
 // File Line: 153
 // RVA: 0xFFF10
-void __fastcall UFG::AIInterestComponent::Init(UFG::AIInterestComponent *this, UFG::TransformNodeComponent *pNode, UFG::qVector3 *vOffset, float fRadius, const char *sParamsName)
+void __fastcall UFG::AIInterestComponent::Init(
+        UFG::AIInterestComponent *this,
+        UFG::TransformNodeComponent *pNode,
+        UFG::qVector3 *vOffset,
+        float fRadius,
+        const char *sParamsName)
 {
   __m128 v5; // xmm2
-  UFG::TransformNodeComponent *v6; // rsi
-  UFG::qSafePointer<UFG::SimComponent,UFG::TransformNodeComponent> *v7; // rdx
-  UFG::qVector3 *v8; // rbp
-  float v9; // xmm7_4
-  UFG::AIInterestComponent *v10; // rdi
-  float v11; // xmm1_4
+  UFG::qSafePointer<UFG::SimComponent,UFG::TransformNodeComponent> *p_mpTransform; // rdx
+  float y; // xmm1_4
   float v12; // xmm1_4
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v13; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v14; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v15; // rax
-  float *v16; // rbx
+  UFG::TransformNodeComponent *m_pPointer; // rbx
   float v17; // xmm2_4
   float v18; // xmm6_4
   float v19; // xmm1_4
   float v20; // xmm4_4
-  UFG::qBox *v21; // rcx
-  float v22; // xmm4_4
-  float v23; // xmm6_4
-  float v24; // xmm5_4
-  float v25; // xmm0_4
-  float v26; // xmm2_4
-  float v27; // xmm1_4
-  float v28; // xmm0_4
-  float v29; // xmm3_4
-  float v30; // xmm1_4
-  float v31; // xmm3_4
-  float v32; // xmm1_4
-  float v33; // xmm0_4
+  float v21; // xmm4_4
+  float v22; // xmm6_4
+  float v23; // xmm5_4
+  float v24; // xmm0_4
+  float v25; // xmm2_4
+  float z; // xmm1_4
+  float x; // xmm0_4
+  float v28; // xmm3_4
+  float v29; // xmm1_4
+  float v30; // xmm3_4
+  float v31; // xmm1_4
+  float v32; // xmm0_4
 
   v5 = 0i64;
-  v6 = pNode;
-  v7 = &this->mpTransform;
+  p_mpTransform = &this->mpTransform;
   v5.m128_f32[0] = (float)1;
-  v8 = vOffset;
-  v9 = fRadius;
-  v10 = this;
   this->mCachedWorld.v0 = (UFG::qVector4)v5;
   this->mCachedWorld.v1 = (UFG::qVector4)_mm_shuffle_ps(v5, v5, 81);
   this->mCachedWorld.v2 = (UFG::qVector4)_mm_shuffle_ps(v5, v5, 69);
   this->mCachedWorld.v3 = (UFG::qVector4)_mm_shuffle_ps(v5, v5, 21);
   this->msParamTableName = sParamsName;
-  v11 = UFG::qVector3::msZero.y;
+  y = UFG::qVector3::msZero.y;
   v5.m128_i32[0] = LODWORD(UFG::qVector3::msZero.z);
   this->mPivotOffset.x = UFG::qVector3::msZero.x;
-  this->mPivotOffset.y = v11;
+  this->mPivotOffset.y = y;
   LODWORD(this->mPivotOffset.z) = v5.m128_i32[0];
   v12 = UFG::qVector3::msZero.y;
   v5.m128_i32[0] = LODWORD(UFG::qVector3::msZero.z);
@@ -286,134 +267,134 @@ void __fastcall UFG::AIInterestComponent::Init(UFG::AIInterestComponent *this, U
   this->mFlags |= 1u;
   if ( this->mpTransform.m_pPointer )
   {
-    v13 = v7->mPrev;
-    v14 = v7->mNext;
-    v13->mNext = v14;
-    v14->mPrev = v13;
-    v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v7->mPrev;
-    v7->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v7->mPrev;
+    mPrev = p_mpTransform->mPrev;
+    mNext = p_mpTransform->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mpTransform->mPrev = p_mpTransform;
+    p_mpTransform->mNext = p_mpTransform;
   }
-  v7->m_pPointer = (UFG::SimComponent *)&v6->vfptr;
-  if ( v6 )
+  p_mpTransform->m_pPointer = pNode;
+  if ( pNode )
   {
-    v15 = v6->m_SafePointerList.mNode.mPrev;
-    v15->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v7->mPrev;
-    v7->mPrev = v15;
-    v7->mNext = &v6->m_SafePointerList.mNode;
-    v6->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v7->mPrev;
+    v15 = pNode->m_SafePointerList.mNode.UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mPrev;
+    v15->mNext = p_mpTransform;
+    p_mpTransform->mPrev = v15;
+    p_mpTransform->mNext = &pNode->m_SafePointerList.mNode;
+    pNode->m_SafePointerList.mNode.UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mPrev = p_mpTransform;
   }
-  v16 = (float *)v10->mpTransform.m_pPointer;
-  UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v10->mpTransform.m_pPointer);
-  v17 = (float)(v8->x * v16[33]) + (float)(v8->y * v16[37]);
-  v18 = (float)(v8->x * v16[34]) + (float)(v8->y * v16[38]);
-  v19 = v8->z * v16[41];
-  v20 = v8->z * v16[42];
-  v10->mPivotOffset.x = (float)((float)(v8->y * v16[36]) + (float)(v8->x * v16[32])) + (float)(v8->z * v16[40]);
-  v10->mPivotOffset.y = v17 + v19;
-  v10->mPivotOffset.z = v18 + v20;
-  UFG::TransformNodeComponent::UpdateWorldTransform(v6);
-  v21 = (UFG::qBox *)&v10->mBoundingBox.mMin;
-  v22 = (float)((float)(v6->mWorldTransform.v1.y + v6->mWorldTransform.v0.y) + v6->mWorldTransform.v2.y) * fRadius;
-  v23 = (float)((float)(v6->mWorldTransform.v1.z + v6->mWorldTransform.v0.z) + v6->mWorldTransform.v2.z) * fRadius;
-  v24 = (float)((float)(v6->mWorldTransform.v1.x + v6->mWorldTransform.v0.x) + v6->mWorldTransform.v2.x) * fRadius;
-  v25 = v10->mBoundingBox.mMax.x - v10->mBoundingBox.mMin.x;
-  v26 = (float)(v10->mBoundingBox.mMax.z - v10->mBoundingBox.mMin.z) * 0.5;
-  v21->mMax.y = (float)(v10->mBoundingBox.mMax.y - v10->mBoundingBox.mMin.y) * 0.5;
-  v21->mMax.z = v26;
-  v21->mMax.x = v25 * 0.5;
-  v27 = UFG::qVector3::msZero.z;
-  v28 = UFG::qVector3::msZero.x;
-  v29 = UFG::qVector3::msZero.y;
-  v21->mMin.x = UFG::qVector3::msZero.x;
-  v21->mMin.z = v27;
-  v21->mMin.y = v29;
-  v30 = v27 - v10->mBoundingBox.mMax.z;
-  v31 = v29 - v10->mBoundingBox.mMax.y;
-  v21->mMin.x = v28 - v10->mBoundingBox.mMax.x;
-  v21->mMin.z = v30;
-  v21->mMin.y = v31;
-  v32 = UFG::qVector3::msZero.z + v10->mBoundingBox.mMax.z;
-  v33 = UFG::qVector3::msZero.x + v10->mBoundingBox.mMax.x;
-  v21->mMax.y = UFG::qVector3::msZero.y + v10->mBoundingBox.mMax.y;
-  v21->mMax.z = v32;
-  v21->mMax.x = v33;
-  if ( v22 <= v23 )
-    v22 = v23;
-  if ( v24 <= v22 )
-    v24 = v22;
-  UFG::qBox::SetRadius(v21, v24);
-  v10->mRotatedPoint.x = v9;
-  v10->mRotatedPoint.y = v9;
-  v10->mRotatedPoint.z = v9;
+  m_pPointer = (UFG::TransformNodeComponent *)this->mpTransform.m_pPointer;
+  UFG::TransformNodeComponent::UpdateWorldTransform(m_pPointer);
+  v17 = (float)(vOffset->x * m_pPointer->mWorldTransform.v0.y) + (float)(vOffset->y * m_pPointer->mWorldTransform.v1.y);
+  v18 = (float)(vOffset->x * m_pPointer->mWorldTransform.v0.z) + (float)(vOffset->y * m_pPointer->mWorldTransform.v1.z);
+  v19 = vOffset->z * m_pPointer->mWorldTransform.v2.y;
+  v20 = vOffset->z * m_pPointer->mWorldTransform.v2.z;
+  this->mPivotOffset.x = (float)((float)(vOffset->y * m_pPointer->mWorldTransform.v1.x)
+                               + (float)(vOffset->x * m_pPointer->mWorldTransform.v0.x))
+                       + (float)(vOffset->z * m_pPointer->mWorldTransform.v2.x);
+  this->mPivotOffset.y = v17 + v19;
+  this->mPivotOffset.z = v18 + v20;
+  UFG::TransformNodeComponent::UpdateWorldTransform(pNode);
+  v21 = (float)((float)(pNode->mWorldTransform.v1.y + pNode->mWorldTransform.v0.y) + pNode->mWorldTransform.v2.y)
+      * fRadius;
+  v22 = (float)((float)(pNode->mWorldTransform.v1.z + pNode->mWorldTransform.v0.z) + pNode->mWorldTransform.v2.z)
+      * fRadius;
+  v23 = (float)((float)(pNode->mWorldTransform.v1.x + pNode->mWorldTransform.v0.x) + pNode->mWorldTransform.v2.x)
+      * fRadius;
+  v24 = this->mBoundingBox.mMax.x - this->mBoundingBox.mMin.x;
+  v25 = (float)(this->mBoundingBox.mMax.z - this->mBoundingBox.mMin.z) * 0.5;
+  this->mBoundingBox.mMax.y = (float)(this->mBoundingBox.mMax.y - this->mBoundingBox.mMin.y) * 0.5;
+  this->mBoundingBox.mMax.z = v25;
+  this->mBoundingBox.mMax.x = v24 * 0.5;
+  z = UFG::qVector3::msZero.z;
+  x = UFG::qVector3::msZero.x;
+  v28 = UFG::qVector3::msZero.y;
+  this->mBoundingBox.mMin.x = UFG::qVector3::msZero.x;
+  this->mBoundingBox.mMin.z = z;
+  this->mBoundingBox.mMin.y = v28;
+  v29 = z - this->mBoundingBox.mMax.z;
+  v30 = v28 - this->mBoundingBox.mMax.y;
+  this->mBoundingBox.mMin.x = x - this->mBoundingBox.mMax.x;
+  this->mBoundingBox.mMin.z = v29;
+  this->mBoundingBox.mMin.y = v30;
+  v31 = UFG::qVector3::msZero.z + this->mBoundingBox.mMax.z;
+  v32 = UFG::qVector3::msZero.x + this->mBoundingBox.mMax.x;
+  this->mBoundingBox.mMax.y = UFG::qVector3::msZero.y + this->mBoundingBox.mMax.y;
+  this->mBoundingBox.mMax.z = v31;
+  this->mBoundingBox.mMax.x = v32;
+  if ( v21 <= v22 )
+    v21 = v22;
+  if ( v23 <= v21 )
+    v23 = v21;
+  UFG::qBox::SetRadius(&this->mBoundingBox.UFG::qBox, v23);
+  this->mRotatedPoint.x = fRadius;
+  this->mRotatedPoint.y = fRadius;
+  this->mRotatedPoint.z = fRadius;
 }
 
 // File Line: 175
 // RVA: 0x100880
 void __fastcall UFG::AIInterestComponent::OnAttach(UFG::AIInterestComponent *this, UFG::SimObject *object)
 {
-  UFG::TransformNodeComponent *v2; // rbx
-  UFG::SimObject *v3; // rdi
-  UFG::AIInterestComponent *v4; // rsi
-  UFG::SimComponent *v5; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::FFieldPrintComponent> *v6; // r8
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v7; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v8; // rcx
-  UFG::qList<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList,1,0> *v9; // rcx
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rbx
+  UFG::SimComponent *ComponentOfType; // rax
+  UFG::qSafePointer<UFG::SimComponent,UFG::FFieldPrintComponent> *p_mpFieldPrint; // r8
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *p_mNode; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v10; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::TransformNodeComponent> *v11; // rdx
+  UFG::qSafePointer<UFG::SimComponent,UFG::TransformNodeComponent> *p_mpTransform; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v12; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v13; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v14; // rax
 
-  v2 = 0i64;
-  v3 = object;
-  v4 = this;
+  m_pTransformNodeComponent = 0i64;
   if ( object )
-    v5 = UFG::SimObject::GetComponentOfType(object, UFG::FFieldPrintComponent::_TypeUID);
+    ComponentOfType = UFG::SimObject::GetComponentOfType(object, UFG::FFieldPrintComponent::_TypeUID);
   else
-    v5 = 0i64;
-  v6 = &v4->mpFieldPrint;
-  if ( v4->mpFieldPrint.m_pPointer )
+    ComponentOfType = 0i64;
+  p_mpFieldPrint = &this->mpFieldPrint;
+  if ( this->mpFieldPrint.m_pPointer )
   {
-    v7 = v6->mPrev;
-    v8 = v4->mpFieldPrint.mNext;
-    v7->mNext = v8;
-    v8->mPrev = v7;
-    v6->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v6->mPrev;
-    v4->mpFieldPrint.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v4->mpFieldPrint.mPrev;
+    mPrev = p_mpFieldPrint->mPrev;
+    mNext = this->mpFieldPrint.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mpFieldPrint->mPrev = p_mpFieldPrint;
+    this->mpFieldPrint.mNext = &this->mpFieldPrint;
   }
-  v4->mpFieldPrint.m_pPointer = v5;
-  if ( v5 )
+  this->mpFieldPrint.m_pPointer = ComponentOfType;
+  if ( ComponentOfType )
   {
-    v9 = &v5->m_SafePointerList;
-    v10 = v5->m_SafePointerList.mNode.mPrev;
-    v10->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v6->mPrev;
-    v6->mPrev = v10;
-    v4->mpFieldPrint.mNext = &v9->mNode;
-    v9->mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v6->mPrev;
+    p_mNode = &ComponentOfType->m_SafePointerList.mNode;
+    v10 = ComponentOfType->m_SafePointerList.mNode.mPrev;
+    v10->mNext = p_mpFieldPrint;
+    p_mpFieldPrint->mPrev = v10;
+    this->mpFieldPrint.mNext = p_mNode;
+    p_mNode->mPrev = p_mpFieldPrint;
   }
-  if ( !v4->mpTransform.m_pPointer )
+  if ( !this->mpTransform.m_pPointer )
   {
-    if ( v3 )
-      v2 = v3->m_pTransformNodeComponent;
-    v11 = &v4->mpTransform;
-    if ( v4->mpTransform.m_pPointer )
+    if ( object )
+      m_pTransformNodeComponent = object->m_pTransformNodeComponent;
+    p_mpTransform = &this->mpTransform;
+    if ( this->mpTransform.m_pPointer )
     {
-      v12 = v11->mPrev;
-      v13 = v4->mpTransform.mNext;
+      v12 = p_mpTransform->mPrev;
+      v13 = this->mpTransform.mNext;
       v12->mNext = v13;
       v13->mPrev = v12;
-      v11->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v11->mPrev;
-      v4->mpTransform.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v4->mpTransform.mPrev;
+      p_mpTransform->mPrev = p_mpTransform;
+      this->mpTransform.mNext = &this->mpTransform;
     }
-    v4->mpTransform.m_pPointer = (UFG::SimComponent *)&v2->vfptr;
-    if ( v2 )
+    this->mpTransform.m_pPointer = m_pTransformNodeComponent;
+    if ( m_pTransformNodeComponent )
     {
-      v14 = v2->m_SafePointerList.mNode.mPrev;
-      v14->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v11->mPrev;
-      v11->mPrev = v14;
-      v4->mpTransform.mNext = &v2->m_SafePointerList.mNode;
-      v2->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v11->mPrev;
+      v14 = m_pTransformNodeComponent->m_SafePointerList.mNode.UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mPrev;
+      v14->mNext = p_mpTransform;
+      p_mpTransform->mPrev = v14;
+      this->mpTransform.mNext = &m_pTransformNodeComponent->m_SafePointerList.mNode;
+      m_pTransformNodeComponent->m_SafePointerList.mNode.UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mPrev = p_mpTransform;
     }
   }
 }
@@ -422,35 +403,35 @@ void __fastcall UFG::AIInterestComponent::OnAttach(UFG::AIInterestComponent *thi
 // RVA: 0x1011B0
 void __fastcall UFG::AIInterestComponent::OnDetach(UFG::AIInterestComponent *this)
 {
-  UFG::qSafePointer<UFG::SimComponent,UFG::TransformNodeComponent> *v1; // r8
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v2; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v3; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::FFieldPrintComponent> *v4; // rdx
+  UFG::qSafePointer<UFG::SimComponent,UFG::TransformNodeComponent> *p_mpTransform; // r8
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rax
+  UFG::qSafePointer<UFG::SimComponent,UFG::FFieldPrintComponent> *p_mpFieldPrint; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v5; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v6; // rax
 
-  v1 = &this->mpTransform;
+  p_mpTransform = &this->mpTransform;
   if ( this->mpTransform.m_pPointer )
   {
-    v2 = v1->mPrev;
-    v3 = this->mpTransform.mNext;
-    v2->mNext = v3;
-    v3->mPrev = v2;
-    v1->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->mPrev;
-    this->mpTransform.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&this->mpTransform.mPrev;
+    mPrev = p_mpTransform->mPrev;
+    mNext = this->mpTransform.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mpTransform->mPrev = p_mpTransform;
+    this->mpTransform.mNext = &this->mpTransform;
   }
-  v4 = &this->mpFieldPrint;
+  p_mpFieldPrint = &this->mpFieldPrint;
   this->mpTransform.m_pPointer = 0i64;
   if ( this->mpFieldPrint.m_pPointer )
   {
-    v5 = v4->mPrev;
-    v6 = v4->mNext;
+    v5 = p_mpFieldPrint->mPrev;
+    v6 = p_mpFieldPrint->mNext;
     v5->mNext = v6;
     v6->mPrev = v5;
-    v4->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v4->mPrev;
-    v4->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v4->mPrev;
+    p_mpFieldPrint->mPrev = p_mpFieldPrint;
+    p_mpFieldPrint->mNext = p_mpFieldPrint;
   }
-  v4->m_pPointer = 0i64;
+  p_mpFieldPrint->m_pPointer = 0i64;
 }
 
 // File Line: 248
@@ -458,7 +439,7 @@ void __fastcall UFG::AIInterestComponent::OnDetach(UFG::AIInterestComponent *thi
 void __fastcall UFG::AIInterestComponent::OnReset(UFG::AIInterestComponent *this)
 {
   __m128 v1; // xmm2
-  float v2; // xmm1_4
+  float y; // xmm1_4
 
   v1 = 0i64;
   this->mFlags &= 0xFFF5u;
@@ -467,10 +448,10 @@ void __fastcall UFG::AIInterestComponent::OnReset(UFG::AIInterestComponent *this
   this->mCachedWorld.v1 = (UFG::qVector4)_mm_shuffle_ps(v1, v1, 81);
   this->mCachedWorld.v2 = (UFG::qVector4)_mm_shuffle_ps(v1, v1, 69);
   this->mCachedWorld.v3 = (UFG::qVector4)_mm_shuffle_ps(v1, v1, 21);
-  v2 = UFG::qVector3::msZero.y;
+  y = UFG::qVector3::msZero.y;
   v1.m128_i32[0] = LODWORD(UFG::qVector3::msZero.z);
   this->mRotatedPoint.x = UFG::qVector3::msZero.x;
-  this->mRotatedPoint.y = v2;
+  this->mRotatedPoint.y = y;
   LODWORD(this->mRotatedPoint.z) = v1.m128_i32[0];
 }
 
@@ -478,19 +459,17 @@ void __fastcall UFG::AIInterestComponent::OnReset(UFG::AIInterestComponent *this
 // RVA: 0x101450
 void __fastcall UFG::AIInterestComponent::OnUpdate(UFG::AIInterestComponent *this, float fDeltaT)
 {
-  UFG::AIInterestComponent *v2; // rdi
-  unsigned __int16 v3; // cx
-  float v4; // xmm11_4
+  unsigned __int16 mFlags; // cx
   UFG::SimComponent *v5; // rbx
   UFG::qVector4 v6; // xmm2
   float v7; // xmm6_4
   UFG::qVector4 v8; // xmm1
-  UFG::qVector4 v9; // xmm3
+  UFG::qVector4 m_BoundComponentHandles; // xmm3
   float *v10; // rax
-  __m128 v11; // xmm0
-  float v12; // xmm7_4
-  float v13; // xmm8_4
-  float v14; // xmm9_4
+  __m128 y_low; // xmm0
+  float x; // xmm7_4
+  float y; // xmm8_4
+  float z; // xmm9_4
   float v15; // xmm12_4
   float v16; // xmm13_4
   float v17; // xmm14_4
@@ -501,146 +480,145 @@ void __fastcall UFG::AIInterestComponent::OnUpdate(UFG::AIInterestComponent *thi
   float v22; // xmm1_4
   float v23; // xmm8_4
   float v24; // xmm9_4
-  float *v25; // rbx
-  UFG::TransformNodeComponent *v26; // rcx
-  float v27; // xmm1_4
-  UFG::qAverageWindow<UFG::qVector3> *v28; // rcx
-  float v29; // xmm0_4
-  UFG::qAverageWindow<UFG::qVector3> *v30; // rcx
-  float v31; // xmm2_4
-  float v32; // xmm1_4
+  UFG::SimComponent *m_pPointer; // rbx
+  float v26; // xmm1_4
+  UFG::qAverageWindow<UFG::qVector3> *mVelocityWindow; // rcx
+  float v28; // xmm0_4
+  UFG::qAverageWindow<UFG::qVector3> *v29; // rcx
+  float m_RunningSumTime; // xmm2_4
+  float v31; // xmm1_4
+  float v32; // xmm0_4
   float v33; // xmm0_4
-  float v34; // xmm0_4
-  float v35; // xmm1_4
-  UFG::qVector3 result; // [rsp+20h] [rbp-B8h]
-  char v37; // [rsp+30h] [rbp-A8h]
+  float v34; // xmm1_4
+  UFG::qVector3 result; // [rsp+20h] [rbp-B8h] BYREF
+  char v36[16]; // [rsp+30h] [rbp-A8h] BYREF
 
-  v2 = this;
-  v3 = this->mFlags;
-  v4 = fDeltaT;
-  if ( (((unsigned __int8)v3 >> 2) & 1 || ~((unsigned __int8)v3 >> 1) & 1)
-    && (v5 = v2->mpTransform.m_pPointer) != 0i64
-    && v2 != (UFG::AIInterestComponent *)-168i64 )
+  mFlags = this->mFlags;
+  if ( (mFlags & 4) == 0 && (mFlags & 2) != 0
+    || (v5 = this->mpTransform.m_pPointer) == 0i64
+    || this == (UFG::AIInterestComponent *)-168i64 )
+  {
+    this->mFlags = mFlags & 0xFFF7;
+  }
+  else
   {
     UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v5);
     v6 = *(UFG::qVector4 *)&v5[2].m_Flags;
     v7 = 0.0;
     v8 = *(UFG::qVector4 *)&v5[2].m_SafePointerList.mNode.mNext;
-    v9 = (UFG::qVector4)v5[2].m_BoundComponentHandles;
-    v2->mCachedWorld.v0 = *(UFG::qVector4 *)&v5[2].vfptr;
-    v2->mCachedWorld.v1 = v8;
-    v2->mCachedWorld.v2 = v6;
-    v2->mCachedWorld.v3 = v9;
-    UFG::AIInterestComponent::GetCenter(v2, &result, 0.0);
-    v10 = (float *)((__int64 (__fastcall *)(UFG::SphereVolume *, char *))v2->mBoundingBox.vfptr->GetCenter)(
-                     &v2->mBoundingBox,
-                     &v37);
-    v11 = (__m128)LODWORD(v2->mBoundingBox.mMax.y);
-    v8.x = v2->mBoundingBox.mMax.x - v2->mBoundingBox.mMin.x;
-    v12 = result.x;
-    v13 = result.y;
-    v14 = result.z;
-    v11.m128_f32[0] = (float)((float)(v11.m128_f32[0] - v2->mBoundingBox.mMin.y)
-                            * (float)(v11.m128_f32[0] - v2->mBoundingBox.mMin.y))
-                    + (float)(v8.x * v8.x);
-    v6.x = COERCE_FLOAT(_mm_sqrt_ps(v11)) * 0.5;
-    v15 = (float)((float)((float)(v2->mCachedWorld.v1.x + v2->mCachedWorld.v0.x) + v2->mCachedWorld.v2.x) * v6.x)
-        + (float)(v2->mCachedWorld.v3.x * 0.0);
-    v16 = (float)((float)((float)(v2->mCachedWorld.v1.y + v2->mCachedWorld.v0.y) + v2->mCachedWorld.v2.y) * v6.x)
-        + (float)(v2->mCachedWorld.v3.y * 0.0);
-    v17 = (float)((float)((float)(v2->mCachedWorld.v1.z + v2->mCachedWorld.v0.z) + v2->mCachedWorld.v2.z) * v6.x)
-        + (float)(v2->mCachedWorld.v3.z * 0.0);
+    m_BoundComponentHandles = (UFG::qVector4)v5[2].m_BoundComponentHandles;
+    this->mCachedWorld.v0 = *(UFG::qVector4 *)&v5[2].vfptr;
+    this->mCachedWorld.v1 = v8;
+    this->mCachedWorld.v2 = v6;
+    this->mCachedWorld.v3 = m_BoundComponentHandles;
+    UFG::AIInterestComponent::GetCenter(this, &result, 0.0);
+    v10 = (float *)((__int64 (__fastcall *)(UFG::SphereVolume *, char *))this->mBoundingBox.vfptr->GetCenter)(
+                     &this->mBoundingBox,
+                     v36);
+    y_low = (__m128)LODWORD(this->mBoundingBox.mMax.y);
+    v8.x = this->mBoundingBox.mMax.x - this->mBoundingBox.mMin.x;
+    x = result.x;
+    y = result.y;
+    z = result.z;
+    y_low.m128_f32[0] = (float)((float)(y_low.m128_f32[0] - this->mBoundingBox.mMin.y)
+                              * (float)(y_low.m128_f32[0] - this->mBoundingBox.mMin.y))
+                      + (float)(v8.x * v8.x);
+    v6.x = _mm_sqrt_ps(y_low).m128_f32[0] * 0.5;
+    v15 = (float)((float)((float)(this->mCachedWorld.v1.x + this->mCachedWorld.v0.x) + this->mCachedWorld.v2.x) * v6.x)
+        + (float)(this->mCachedWorld.v3.x * 0.0);
+    v16 = (float)((float)((float)(this->mCachedWorld.v1.y + this->mCachedWorld.v0.y) + this->mCachedWorld.v2.y) * v6.x)
+        + (float)(this->mCachedWorld.v3.y * 0.0);
+    v17 = (float)((float)((float)(this->mCachedWorld.v1.z + this->mCachedWorld.v0.z) + this->mCachedWorld.v2.z) * v6.x)
+        + (float)(this->mCachedWorld.v3.z * 0.0);
     if ( (float)((float)((float)((float)(result.x - *v10) * (float)(result.x - *v10))
                        + (float)((float)(result.y - v10[1]) * (float)(result.y - v10[1])))
                + (float)((float)(result.z - v10[2]) * (float)(result.z - v10[2]))) < 0.5
-      && (float)((float)((float)((float)(v16 - v2->mRotatedPoint.y) * (float)(v16 - v2->mRotatedPoint.y))
-                       + (float)((float)(v15 - v2->mRotatedPoint.x) * (float)(v15 - v2->mRotatedPoint.x)))
-               + (float)((float)(v17 - v2->mRotatedPoint.z) * (float)(v17 - v2->mRotatedPoint.z))) < 0.5
-      && (v18 = v2->mFlags, ((unsigned __int8)v18 >> 1) & 1) )
+      && (float)((float)((float)((float)(v16 - this->mRotatedPoint.y) * (float)(v16 - this->mRotatedPoint.y))
+                       + (float)((float)(v15 - this->mRotatedPoint.x) * (float)(v15 - this->mRotatedPoint.x)))
+               + (float)((float)(v17 - this->mRotatedPoint.z) * (float)(v17 - this->mRotatedPoint.z))) < 0.5
+      && (v18 = this->mFlags, (v18 & 2) != 0) )
     {
-      v2->mFlags = v18 & 0xFFF7;
+      this->mFlags = v18 & 0xFFF7;
     }
     else
     {
-      v2->mRotatedPoint.x = v15;
-      v2->mRotatedPoint.y = v16;
-      v2->mRotatedPoint.z = v17;
-      v2->mFlags |= 8u;
-      v19 = (float)(v2->mBoundingBox.mMax.y - v2->mBoundingBox.mMin.y) * 0.5;
-      v20 = (float)(v2->mBoundingBox.mMax.z - v2->mBoundingBox.mMin.z) * 0.5;
-      v2->mBoundingBox.mMax.x = (float)(v2->mBoundingBox.mMax.x - v2->mBoundingBox.mMin.x) * 0.5;
-      v2->mBoundingBox.mMax.y = v19;
-      v2->mBoundingBox.mMax.z = v20;
-      v2->mBoundingBox.mMin.x = v12;
-      v2->mBoundingBox.mMin.y = v13;
-      v2->mBoundingBox.mMin.z = v14;
-      v21 = v13 - v2->mBoundingBox.mMax.y;
-      v22 = v14 - v2->mBoundingBox.mMax.z;
-      v2->mBoundingBox.mMin.x = v12 - v2->mBoundingBox.mMax.x;
-      v2->mBoundingBox.mMin.y = v21;
-      v2->mBoundingBox.mMin.z = v22;
-      v23 = v13 + v2->mBoundingBox.mMax.y;
-      v24 = v14 + v2->mBoundingBox.mMax.z;
-      v2->mBoundingBox.mMax.x = v12 + v2->mBoundingBox.mMax.x;
-      v2->mBoundingBox.mMax.y = v23;
-      v2->mBoundingBox.mMax.z = v24;
+      this->mRotatedPoint.x = v15;
+      this->mRotatedPoint.y = v16;
+      this->mRotatedPoint.z = v17;
+      this->mFlags |= 8u;
+      v19 = (float)(this->mBoundingBox.mMax.y - this->mBoundingBox.mMin.y) * 0.5;
+      v20 = (float)(this->mBoundingBox.mMax.z - this->mBoundingBox.mMin.z) * 0.5;
+      this->mBoundingBox.mMax.x = (float)(this->mBoundingBox.mMax.x - this->mBoundingBox.mMin.x) * 0.5;
+      this->mBoundingBox.mMax.y = v19;
+      this->mBoundingBox.mMax.z = v20;
+      this->mBoundingBox.mMin.x = x;
+      this->mBoundingBox.mMin.y = y;
+      this->mBoundingBox.mMin.z = z;
+      v21 = y - this->mBoundingBox.mMax.y;
+      v22 = z - this->mBoundingBox.mMax.z;
+      this->mBoundingBox.mMin.x = x - this->mBoundingBox.mMax.x;
+      this->mBoundingBox.mMin.y = v21;
+      this->mBoundingBox.mMin.z = v22;
+      v23 = y + this->mBoundingBox.mMax.y;
+      v24 = z + this->mBoundingBox.mMax.z;
+      this->mBoundingBox.mMax.x = x + this->mBoundingBox.mMax.x;
+      this->mBoundingBox.mMax.y = v23;
+      this->mBoundingBox.mMax.z = v24;
     }
-    v25 = (float *)v2->mpTransform.m_pPointer;
-    v26 = (UFG::TransformNodeComponent *)v2->mpTransform.m_pPointer;
-    if ( v2->mVelocityWindow )
+    m_pPointer = this->mpTransform.m_pPointer;
+    if ( this->mVelocityWindow )
     {
-      UFG::TransformNodeComponent::UpdateWorldTransform(v26);
-      v27 = v25[65];
-      v28 = v2->mVelocityWindow;
-      result.x = v25[64];
-      v29 = v25[66];
-      result.y = v27;
-      result.z = v29;
-      UFG::qAverageWindow<UFG::qVector3>::AddValue(v28, &result, v4);
-      v30 = v2->mVelocityWindow;
-      if ( v30->m_StartIndex != v30->m_EndIndex )
+      UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)m_pPointer);
+      v26 = *((float *)&m_pPointer[4].vfptr + 1);
+      mVelocityWindow = this->mVelocityWindow;
+      result.x = *(float *)&m_pPointer[4].vfptr;
+      v28 = *(float *)&m_pPointer[4].m_SafePointerList.mNode.mPrev;
+      result.y = v26;
+      result.z = v28;
+      UFG::qAverageWindow<UFG::qVector3>::AddValue(mVelocityWindow, &result, fDeltaT);
+      v29 = this->mVelocityWindow;
+      if ( v29->m_StartIndex != v29->m_EndIndex )
       {
-        v31 = v30->m_RunningSumTime;
-        if ( v31 > 0.0 )
+        m_RunningSumTime = v29->m_RunningSumTime;
+        if ( m_RunningSumTime > 0.0 )
         {
-          v33 = (float)(1.0 / v31) * v30->m_RunningSum.z;
-          v7 = (float)(1.0 / v31) * v30->m_RunningSum.x;
-          v32 = (float)(1.0 / v31) * v30->m_RunningSum.y;
+          v32 = (float)(1.0 / m_RunningSumTime) * v29->m_RunningSum.z;
+          v7 = (float)(1.0 / m_RunningSumTime) * v29->m_RunningSum.x;
+          v31 = (float)(1.0 / m_RunningSumTime) * v29->m_RunningSum.y;
           goto LABEL_16;
         }
         v7 = FLOAT_3_4028235e38;
       }
+      v31 = v7;
       v32 = v7;
-      v33 = v7;
 LABEL_16:
-      v2->mvAverageVel.x = v7;
-      v2->mvAverageVel.y = v32;
-      v2->mvAverageVel.z = v33;
-      v2->mFlags |= 2u;
+      this->mvAverageVel.x = v7;
+      this->mvAverageVel.y = v31;
+      this->mvAverageVel.z = v32;
+      this->mFlags |= 2u;
       return;
     }
-    UFG::TransformNodeComponent::UpdateWorldTransform(v26);
-    v34 = v25[65];
-    v35 = v25[66];
-    v2->mvAverageVel.x = v25[64];
-    v2->mvAverageVel.y = v34;
-    v2->mvAverageVel.z = v35;
-    v2->mFlags |= 2u;
-  }
-  else
-  {
-    v2->mFlags = v3 & 0xFFF7;
+    UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)m_pPointer);
+    v33 = *((float *)&m_pPointer[4].vfptr + 1);
+    v34 = *(float *)&m_pPointer[4].m_SafePointerList.mNode.mPrev;
+    this->mvAverageVel.x = *(float *)&m_pPointer[4].vfptr;
+    this->mvAverageVel.y = v33;
+    this->mvAverageVel.z = v34;
+    this->mFlags |= 2u;
   }
 }
 
 // File Line: 405
 // RVA: 0xFD5E0
-UFG::qVector3 *__fastcall UFG::AIInterestComponent::GetCenter(UFG::AIInterestComponent *this, UFG::qVector3 *result, float t)
+UFG::qVector3 *__fastcall UFG::AIInterestComponent::GetCenter(
+        UFG::AIInterestComponent *this,
+        UFG::qVector3 *result,
+        float t)
 {
-  float v3; // xmm7_4
-  float v4; // xmm0_4
+  float x; // xmm7_4
+  float y; // xmm0_4
   float v5; // xmm6_4
-  float v6; // xmm1_4
+  float z; // xmm1_4
   float v7; // xmm5_4
   UFG::qVector3 *v8; // rax
   float v9; // xmm7_4
@@ -649,29 +627,27 @@ UFG::qVector3 *__fastcall UFG::AIInterestComponent::GetCenter(UFG::AIInterestCom
   float v12; // xmm5_4
   float v13; // xmm7_4
 
-  if ( this->mFlags & 0x100 )
+  if ( (this->mFlags & 0x100) != 0 )
   {
-    v3 = this->mAttractorParams.Offset.x;
-    v4 = this->mAttractorParams.Offset.y;
-    v5 = (float)((float)(this->mAttractorParams.Offset.y * this->mCachedWorld.v1.x)
-               + (float)(this->mAttractorParams.Offset.x * this->mCachedWorld.v0.x))
+    x = this->mAttractorParams.Offset.x;
+    y = this->mAttractorParams.Offset.y;
+    v5 = (float)((float)(y * this->mCachedWorld.v1.x) + (float)(x * this->mCachedWorld.v0.x))
        + (float)(this->mAttractorParams.Offset.z * this->mCachedWorld.v2.x);
-    v6 = this->mAttractorParams.Offset.z;
+    z = this->mAttractorParams.Offset.z;
   }
   else
   {
-    v3 = this->mAvoidableParams.Offset.x;
-    v4 = this->mAvoidableParams.Offset.y;
-    v5 = (float)((float)(this->mAvoidableParams.Offset.y * this->mCachedWorld.v1.x)
-               + (float)(this->mAvoidableParams.Offset.x * this->mCachedWorld.v0.x))
+    x = this->mAvoidableParams.Offset.x;
+    y = this->mAvoidableParams.Offset.y;
+    v5 = (float)((float)(y * this->mCachedWorld.v1.x) + (float)(x * this->mCachedWorld.v0.x))
        + (float)(this->mAvoidableParams.Offset.z * this->mCachedWorld.v2.x);
-    v6 = this->mAvoidableParams.Offset.z;
+    z = this->mAvoidableParams.Offset.z;
   }
-  v7 = (float)((float)(v3 * this->mCachedWorld.v0.z) + (float)(v4 * this->mCachedWorld.v1.z))
-     + (float)(v6 * this->mCachedWorld.v2.z);
+  v7 = (float)((float)(x * this->mCachedWorld.v0.z) + (float)(y * this->mCachedWorld.v1.z))
+     + (float)(z * this->mCachedWorld.v2.z);
   v8 = result;
-  v9 = (float)((float)(v3 * this->mCachedWorld.v0.y) + (float)(v4 * this->mCachedWorld.v1.y))
-     + (float)(v6 * this->mCachedWorld.v2.y);
+  v9 = (float)((float)(x * this->mCachedWorld.v0.y) + (float)(y * this->mCachedWorld.v1.y))
+     + (float)(z * this->mCachedWorld.v2.y);
   v10 = t * this->mvAverageVel.y;
   v11 = v9 + this->mPivotOffset.y;
   v12 = (float)((float)(v7 + this->mPivotOffset.z) + this->mCachedWorld.v3.z) + (float)(t * this->mvAverageVel.z);
@@ -687,46 +663,44 @@ UFG::qVector3 *__fastcall UFG::AIInterestComponent::GetCenter(UFG::AIInterestCom
 void __fastcall UFG::AIInterestComponent::DebugDraw(UFG::AIInterestComponent *this, float fDeltaT, Render::View *pView)
 {
   bool v3; // zf
-  UFG::AIInterestComponent *v4; // rbx
-  float v5; // eax
-  Render::DebugDrawContext *v6; // rax
-  UFG::qColour colour; // [rsp+30h] [rbp-18h]
+  float a; // eax
+  Render::DebugDrawContext *Context; // rax
+  UFG::qColour colour; // [rsp+30h] [rbp-18h] BYREF
 
   v3 = (this->mFlags & 0x100) == 0;
-  v4 = this;
   colour = UFG::qColour::Red;
   if ( !v3 )
   {
-    if ( this->mFlags & 1 )
+    if ( (this->mFlags & 1) != 0 )
     {
       colour.r = UFG::qColour::Green.r;
       colour.g = UFG::qColour::Green.g;
       colour.b = UFG::qColour::Green.b;
-      v5 = UFG::qColour::Green.a;
+      a = UFG::qColour::Green.a;
     }
     else
     {
       colour.r = UFG::qColour::ForestGreen.r;
       colour.g = UFG::qColour::ForestGreen.g;
       colour.b = UFG::qColour::ForestGreen.b;
-      v5 = UFG::qColour::ForestGreen.a;
+      a = UFG::qColour::ForestGreen.a;
     }
     goto LABEL_7;
   }
-  if ( !(this->mFlags & 1) )
+  if ( (this->mFlags & 1) == 0 )
   {
     colour.r = UFG::qColour::Maroon.r;
     colour.g = UFG::qColour::Maroon.g;
     colour.b = UFG::qColour::Maroon.b;
-    v5 = UFG::qColour::Maroon.a;
+    a = UFG::qColour::Maroon.a;
 LABEL_7:
-    colour.a = v5;
+    colour.a = a;
   }
-  v6 = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 2u);
+  Context = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 2u);
   Render::DebugDrawContext::DrawAABB(
-    v6,
-    &v4->mBoundingBox.mMin,
-    &v4->mBoundingBox.mMax,
+    Context,
+    &this->mBoundingBox.mMin,
+    &this->mBoundingBox.mMax,
     &colour,
     &UFG::qMatrix44::msIdentity,
     0i64);

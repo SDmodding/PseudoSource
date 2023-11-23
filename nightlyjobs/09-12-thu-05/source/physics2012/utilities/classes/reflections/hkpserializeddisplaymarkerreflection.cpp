@@ -28,17 +28,17 @@ hkClass *__fastcall hkpSerializedDisplayMarker::staticClass()
 
 // File Line: 62
 // RVA: 0xE0B940
-void __fastcall finishLoadedObjecthkpSerializedDisplayMarker(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpSerializedDisplayMarker(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpSerializedDisplayMarker::`vftable;
+    *p = &hkpSerializedDisplayMarker::`vftable;
 }
 
 // File Line: 68
 // RVA: 0xE0B960
-void __fastcall cleanupLoadedObjecthkpSerializedDisplayMarker(void *p)
+void __fastcall cleanupLoadedObjecthkpSerializedDisplayMarker(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 72
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkpSerializedDisplayMarkerTypeInfo__()
   hkpSerializedDisplayMarkerTypeInfo.m_typeName = "hkpSerializedDisplayMarker";
   hkpSerializedDisplayMarkerTypeInfo.m_vtable = result;
   hkpSerializedDisplayMarkerTypeInfo.m_scopedName = "!hkpSerializedDisplayMarker";
-  hkpSerializedDisplayMarkerTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpSerializedDisplayMarker;
-  hkpSerializedDisplayMarkerTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpSerializedDisplayMarker;
+  hkpSerializedDisplayMarkerTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpSerializedDisplayMarker;
+  hkpSerializedDisplayMarkerTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpSerializedDisplayMarker;
   return result;
 }
 

@@ -1,50 +1,48 @@
 // File Line: 23
 // RVA: 0xEE22CC
-void __fastcall OSuite::ZHttpParser::ParseCacheControl(OSuite::TOrderedMap<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString> > *pDest, OSuite::ZString *sHeader)
+void __fastcall OSuite::ZHttpParser::ParseCacheControl(
+        OSuite::TOrderedMap<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString> > *pDest,
+        OSuite::ZString *sHeader)
 {
-  OSuite::TOrderedMap<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString> > *v2; // r12
-  OSuite::ZString *v3; // rdi
   unsigned __int64 v4; // rbx
   unsigned __int8 v5; // al
   bool v6; // r14
   unsigned __int64 i; // rsi
   int v8; // eax
-  int v9; // er14
+  int v9; // r14d
   unsigned __int64 v10; // rbx
   unsigned __int8 v11; // al
-  int v12; // er15
+  int v12; // r15d
   int j; // ebx
   unsigned __int8 v14; // al
   OSuite::ZString *v15; // rax
   OSuite::ZString *v16; // rax
-  OSuite::ZString v17; // [rsp+20h] [rbp-50h]
-  OSuite::ZString result; // [rsp+38h] [rbp-38h]
-  OSuite::ZString value; // [rsp+50h] [rbp-20h]
+  OSuite::ZString v17; // [rsp+20h] [rbp-50h] BYREF
+  OSuite::ZString result; // [rsp+38h] [rbp-38h] BYREF
+  OSuite::ZString value; // [rsp+50h] [rbp-20h] BYREF
 
-  v2 = pDest;
-  v3 = sHeader;
   v4 = 0i64;
   if ( OSuite::ZString::Count(sHeader) )
   {
     do
     {
-      while ( v4 < OSuite::ZString::Count(v3) )
+      while ( v4 < OSuite::ZString::Count(sHeader) )
       {
-        v5 = OSuite::ZString::CharAt(v3, v4);
+        v5 = OSuite::ZString::CharAt(sHeader, v4);
         if ( !isspace(v5) )
           break;
         ++v4;
       }
       v6 = 0;
-      for ( i = v4; i < OSuite::ZString::Count(v3); ++i )
+      for ( i = v4; i < OSuite::ZString::Count(sHeader); ++i )
       {
-        if ( OSuite::ZString::CharAt(v3, i) == 44 && !v6 )
+        if ( OSuite::ZString::CharAt(sHeader, i) == 44 && !v6 )
           break;
-        if ( OSuite::ZString::CharAt(v3, i) == 34 )
-          v6 = v6 == 0;
+        if ( OSuite::ZString::CharAt(sHeader, i) == 34 )
+          v6 = !v6;
       }
       result.m_pString = 0i64;
-      OSuite::ZString::Slice(v3, &result, v4, i - v4);
+      OSuite::ZString::Slice(sHeader, &result, v4, i - v4);
       value.m_pString = 0i64;
       OSuite::ZString::ZString(&value);
       v8 = OSuite::ZString::IndexOf(&result, 61, 0i64);
@@ -86,28 +84,29 @@ void __fastcall OSuite::ZHttpParser::ParseCacheControl(OSuite::TOrderedMap<OSuit
         OSuite::ZString::~ZString(&v17);
       }
       OSuite::TOrderedMap<OSuite::ZString,OSuite::ZString,OSuite::TOperatorComparer<OSuite::ZString>>::Insert(
-        v2,
+        pDest,
         &result,
         &value);
       v4 = i + 1;
       OSuite::ZString::~ZString(&value);
       OSuite::ZString::~ZString(&result);
     }
-    while ( i + 1 < OSuite::ZString::Count(v3) );
+    while ( i + 1 < OSuite::ZString::Count(sHeader) );
   }
 }
 
 // File Line: 82
 // RVA: 0xEE2514
-void __fastcall OSuite::ZHttpParser::ParseContentType(OSuite::ZString *sContentType, bool *bContentIsText, OSuite::ZTextDecoder **pDecoder)
+void __fastcall OSuite::ZHttpParser::ParseContentType(
+        OSuite::ZString *sContentType,
+        bool *bContentIsText,
+        OSuite::ZTextDecoder **pDecoder)
 {
-  int v3; // er14
-  OSuite::ZTextDecoder **v4; // r12
-  bool *v5; // r15
+  int v3; // r14d
   OSuite::ZHttpParser *v6; // rdi
-  int v7; // er8
+  int v7; // r8d
   int v8; // ebx
-  int v9; // er8
+  int v9; // r8d
   int v10; // ebp
   __int64 v11; // rsi
   char v12; // al
@@ -118,12 +117,10 @@ void __fastcall OSuite::ZHttpParser::ParseContentType(OSuite::ZString *sContentT
   char v17; // al
   OSuite::ZTextDecoder *v18; // rax
   OSuite::ZTextDecoder *v19; // rsi
-  OSuite::ZString sEncoding; // [rsp+28h] [rbp-160h]
-  char pszString[256]; // [rsp+40h] [rbp-148h]
+  OSuite::ZString sEncoding; // [rsp+28h] [rbp-160h] BYREF
+  char pszString[256]; // [rsp+40h] [rbp-148h] BYREF
 
   v3 = 0;
-  v4 = pDecoder;
-  v5 = bContentIsText;
   v6 = (OSuite::ZHttpParser *)OSuite::ZString::c_str(sContentType);
   v8 = OSuite::ZHttpParser::skipwhitespace<char>(v6, 0i64, v7);
   if ( !strncmp((const char *)v6 + v8, "application/", 0xCui64) )
@@ -134,7 +131,7 @@ void __fastcall OSuite::ZHttpParser::ParseContentType(OSuite::ZString *sContentT
     {
       if ( !strncmp((const char *)v6 + v10, "xml", 3ui64) )
       {
-        *v5 = 1;
+        *bContentIsText = 1;
         break;
       }
       do
@@ -152,9 +149,9 @@ void __fastcall OSuite::ZHttpParser::ParseContentType(OSuite::ZString *sContentT
   }
   else
   {
-    *v5 = strncmp((const char *)v6 + v8, "text/", 5ui64) == 0;
+    *bContentIsText = strncmp((const char *)v6 + v8, "text/", 5ui64) == 0;
   }
-  if ( *v5 )
+  if ( *bContentIsText )
   {
     while ( 1 )
     {
@@ -191,7 +188,7 @@ void __fastcall OSuite::ZHttpParser::ParseContentType(OSuite::ZString *sContentT
           if ( v14 >= 0x100 )
           {
             _report_rangecheckfailure(v14);
-            JUMPOUT(*(_QWORD *)&byte_140EE2714);
+            JUMPOUT(0x140EE2714i64);
           }
         }
         pszString[v14] = 0;
@@ -205,10 +202,10 @@ void __fastcall OSuite::ZHttpParser::ParseContentType(OSuite::ZString *sContentT
           v3 |= 1u;
           OSuite::ZTextDecoder::ZTextDecoder(v19, &sEncoding);
         }
-        *v4 = v18;
-        if ( v3 & 1 )
+        *pDecoder = v18;
+        if ( (v3 & 1) != 0 )
         {
-          v3 &= 0xFFFFFFFE;
+          v3 &= ~1u;
           OSuite::ZString::~ZString(&sEncoding);
         }
       }

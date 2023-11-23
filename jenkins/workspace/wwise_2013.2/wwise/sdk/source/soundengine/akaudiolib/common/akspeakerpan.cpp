@@ -2,67 +2,62 @@
 // RVA: 0xA4F0E0
 void CAkSpeakerPan::Init(void)
 {
-  __m128i v0; // xmm6
-  signed int v1; // ebx
-  double *v2; // rdi
+  int v0; // ebx
+  double *v1; // rdi
+  double v2; // xmm0_8
   double v3; // xmm0_8
-  double v4; // xmm0_8
-  float *v5; // rdi
-  double v6; // xmm0_8
+  float *v4; // rdi
+  double v5; // xmm0_8
 
-  v0 = _mm_load_si128((const __m128i *)&_xmm);
-  v1 = 0;
-  v2 = (double *)CAkSpeakerPan::m_fSin2;
+  v0 = 0;
+  v1 = (double *)CAkSpeakerPan::m_fSin2;
   do
   {
-    v3 = COERCE_DOUBLE(_mm_cvtepi32_pd(_mm_add_epi32(_mm_shuffle_epi32(_mm_cvtsi32_si128(v1), 0), v0)))
-       * *(double *)&_xmm;
-    _vdecl_sin2();
-    *v2 = v3 * v3;
-    v4 = COERCE_DOUBLE(_mm_cvtepi32_pd(_mm_add_epi32(_mm_shuffle_epi32(_mm_cvtsi32_si128(v1 + 2), 0), v0)))
-       * *(double *)&_xmm;
-    _vdecl_sin2();
-    v1 += 4;
-    v2 += 2;
-    *(v2 - 1) = v4 * v4;
+    v2 = _vdecl_sin2();
+    *v1 = v2 * v2;
+    v3 = _vdecl_sin2();
+    v0 += 4;
+    v1 += 2;
+    *(v1 - 1) = v3 * v3;
   }
-  while ( v1 < 128 );
-  if ( v1 < 129 )
+  while ( v0 < 128 );
+  if ( v0 < 129 )
   {
-    v5 = &CAkSpeakerPan::m_fSin2[v1];
+    v4 = &CAkSpeakerPan::m_fSin2[v0];
     do
     {
-      v6 = sin((double)v1++ * 0.01227184664458036);
-      ++v5;
-      *(float *)&v6 = v6 * v6;
-      *(v5 - 1) = *(float *)&v6;
+      v5 = sin((double)v0++ * 0.01227184664458036);
+      ++v4;
+      *(float *)&v5 = v5 * v5;
+      *(v4 - 1) = *(float *)&v5;
     }
-    while ( v1 < 129 );
+    while ( v0 < 129 );
   }
 }
 
 // File Line: 53
 // RVA: 0xA4DEE0
-void __fastcall CAkSpeakerPan::CreatePanCache(unsigned int in_uOutputConfig, unsigned int *in_uSpeakerAngles, CAkSpeakerPan::PanPair *io_pPanPairs)
+void __fastcall CAkSpeakerPan::CreatePanCache(
+        unsigned int in_uOutputConfig,
+        unsigned int *in_uSpeakerAngles,
+        CAkSpeakerPan::PanPair *io_pPanPairs)
 {
-  CAkSpeakerPan::PanPair *v3; // rsi
-  unsigned int *v4; // r15
   unsigned int v5; // ebp
-  unsigned int i; // er8
-  signed int v7; // er12
+  unsigned int v6; // r8d
+  int v7; // r12d
   bool v8; // al
-  unsigned int v9; // er14
-  signed __int64 v10; // rbx
+  unsigned int v9; // r14d
+  __int64 v10; // rbx
   unsigned int v11; // ebp
   float v12; // xmm0_4
   float v13; // xmm8_4
-  unsigned int *v14; // r13
+  signed int *v14; // r13
   float v15; // xmm9_4
   float v16; // xmm10_4
   float v17; // xmm13_4
   signed int v18; // edi
   __m128i v19; // xmm8
-  signed int v20; // edx
+  int v20; // edx
   signed int v21; // eax
   float v22; // xmm14_4
   float v23; // xmm15_4
@@ -80,41 +75,47 @@ void __fastcall CAkSpeakerPan::CreatePanCache(unsigned int in_uOutputConfig, uns
   __int128 v35; // xmm3
   float v36; // xmm2_4
   float v37; // xmm2_4
-  signed __int64 v38; // r8
-  signed __int64 v39; // rdx
-  _DWORD *v40; // r9
+  __int64 v38; // r8
+  CAkSpeakerPan::PanPair *v39; // rdx
+  float *p_fGain_i; // r9
   unsigned __int64 v41; // rcx
   CAkSpeakerPan::PanPair *v42; // r10
-  signed __int64 v43; // rdx
+  CAkSpeakerPan::PanPair *v43; // rdx
   float *v44; // rcx
   float v45; // [rsp+F0h] [rbp+8h]
 
-  v3 = io_pPanPairs;
-  v4 = in_uSpeakerAngles;
   v5 = 0;
-  for ( i = in_uOutputConfig & 0xFFFFFFF3; i; i &= i - 1 )
-    ++v5;
+  v6 = in_uOutputConfig & 0xFFFFFFF3;
+  if ( (in_uOutputConfig & 0xFFFFFFF3) != 0 )
+  {
+    do
+    {
+      ++v5;
+      v6 &= v6 - 1;
+    }
+    while ( v6 );
+  }
   v7 = 0;
   v8 = (in_uOutputConfig & 4) != 0;
   v9 = 0;
   v10 = 0i64;
-  LOBYTE(v45) = (in_uOutputConfig & 4) != 0;
+  LOBYTE(v45) = v8;
   v11 = (v5 >> 1) + 1;
   if ( v11 )
   {
     v12 = FLOAT_0_5;
     v13 = v45;
-    v14 = in_uSpeakerAngles;
+    v14 = (signed int *)in_uSpeakerAngles;
     v15 = v45;
     v16 = FLOAT_6_2831855;
     v17 = FLOAT_0_012271847;
     while ( !v9 )
     {
-      v18 = *v4;
+      v18 = *in_uSpeakerAngles;
       if ( v8 )
       {
         v13 = (float)((float)((float)v18 * v16) * 0.001953125) * v12;
-        v15 = (float)((float)((float)v18 * v16) * 0.001953125) * v12;
+        v15 = v13;
         goto LABEL_15;
       }
       if ( (unsigned int)v18 < 0x80 )
@@ -122,7 +123,7 @@ void __fastcall CAkSpeakerPan::CreatePanCache(unsigned int in_uOutputConfig, uns
         v19 = _mm_cvtsi32_si128(v18);
         v15 = 0.0;
 LABEL_14:
-        v13 = (float)(COERCE_FLOAT(_mm_cvtepi32_ps(v19)) * v16) * 0.001953125;
+        v13 = (float)(_mm_cvtepi32_ps(v19).m128_f32[0] * v16) * 0.001953125;
       }
 LABEL_15:
       v22 = sinf(v13);
@@ -159,8 +160,8 @@ LABEL_15:
         *(float *)&v35 = (float)(*(float *)&v35 + *(float *)&v34) * (float)(*(float *)&v35 + *(float *)&v34);
         v37 = v36 * v36;
         *(float *)&v34 = 1.0 / (float)(*(float *)&v35 + v37);
-        *((float *)&v3[v10] - 1) = *(float *)&v34 * *(float *)&v35;
-        v3[v10 - 1].fGain_i_minus_1 = *(float *)&v34 * v37;
+        io_pPanPairs[v10 - 1].fGain_i = *(float *)&v34 * *(float *)&v35;
+        io_pPanPairs[v10 - 1].fGain_i_minus_1 = *(float *)&v34 * v37;
       }
       while ( v10 <= v18 );
       v16 = FLOAT_6_2831855;
@@ -172,11 +173,11 @@ LABEL_15:
       if ( v9 >= v11 )
         return;
     }
-    v20 = v4[v9 - 1];
+    v20 = in_uSpeakerAngles[v9 - 1];
     if ( v9 < v11 - 1 )
     {
       v18 = *v14;
-      v13 = (float)((float)((float)(signed int)(*v14 - v20) * v16) * 0.001953125) * v12;
+      v13 = (float)((float)((float)(*v14 - v20) * v16) * 0.001953125) * v12;
       v15 = v13 + (float)((float)((float)v20 * v16) * 0.001953125);
       goto LABEL_15;
     }
@@ -187,7 +188,7 @@ LABEL_15:
       {
         v7 += v21 - v10;
         do
-          v3[v10++] = (CAkSpeakerPan::PanPair)1065353216i64;
+          io_pPanPairs[v10++] = (CAkSpeakerPan::PanPair)1065353216i64;
         while ( v10 < v21 );
       }
       v38 = v7;
@@ -195,39 +196,39 @@ LABEL_15:
       {
         if ( 257i64 - v7 >= 4 )
         {
-          v39 = (signed __int64)&v3[v7 + 1];
-          v40 = (_DWORD *)&v3[-v7 + 255].fGain_i;
+          v39 = &io_pPanPairs[v7 + 1];
+          p_fGain_i = &io_pPanPairs[-v7 + 255].fGain_i;
           v41 = ((unsigned __int64)(253i64 - v7) >> 2) + 1;
-          v42 = &v3[255i64 - v7];
+          v42 = &io_pPanPairs[255i64 - v7];
           v38 = v7 + 4 * v41;
           do
           {
-            v39 += 32i64;
+            v39 += 4;
             v42 -= 4;
-            *(_DWORD *)(v39 - 40) = v40[2];
-            v40 -= 8;
-            *(float *)(v39 - 36) = v42[5].fGain_i_minus_1;
-            *(_DWORD *)(v39 - 32) = v40[8];
-            *(float *)(v39 - 28) = v42[4].fGain_i_minus_1;
-            *(_DWORD *)(v39 - 24) = v40[6];
-            *(float *)(v39 - 20) = v42[3].fGain_i_minus_1;
-            *(_DWORD *)(v39 - 16) = v40[4];
-            *(float *)(v39 - 12) = v42[2].fGain_i_minus_1;
+            v39[-5].fGain_i_minus_1 = p_fGain_i[2];
+            p_fGain_i -= 8;
+            v39[-5].fGain_i = v42[5].fGain_i_minus_1;
+            v39[-4].fGain_i_minus_1 = p_fGain_i[8];
+            v39[-4].fGain_i = v42[4].fGain_i_minus_1;
+            v39[-3].fGain_i_minus_1 = p_fGain_i[6];
+            v39[-3].fGain_i = v42[3].fGain_i_minus_1;
+            v39[-2].fGain_i_minus_1 = p_fGain_i[4];
+            v39[-2].fGain_i = v42[2].fGain_i_minus_1;
             --v41;
           }
           while ( v41 );
         }
         if ( v38 <= 256 )
         {
-          v43 = (signed __int64)&v3[256 - v38];
-          v44 = &v3[-v38 + 256].fGain_i;
+          v43 = &io_pPanPairs[256 - v38];
+          v44 = &io_pPanPairs[-v38 + 256].fGain_i;
           do
           {
             ++v38;
-            v43 -= 8i64;
-            v3[v38 - 1].fGain_i_minus_1 = *v44;
+            --v43;
+            io_pPanPairs[v38 - 1].fGain_i_minus_1 = *v44;
             v44 -= 2;
-            *((_DWORD *)&v3[v38] - 1) = *(_DWORD *)(v43 + 8);
+            io_pPanPairs[v38 - 1].fGain_i = v43[1].fGain_i_minus_1;
           }
           while ( v38 <= 256 );
         }
@@ -243,37 +244,41 @@ LABEL_15:
 
 // File Line: 235
 // RVA: 0xA4EDB0
-void __usercall CAkSpeakerPan::GetSpeakerVolumesPlane(float in_fAngle@<xmm0>, float in_fDivergenceCenter@<xmm1>, float in_fSpread@<xmm2>, AkSIMDSpeakerVolumes *out_pVolumes@<r9>, __m128 a5@<xmm11>, unsigned int in_uNumFullBandChannels, unsigned int in_uOutputConfig, AkDevice *in_pDevice)
+void __fastcall CAkSpeakerPan::GetSpeakerVolumesPlane(
+        float in_fAngle,
+        float in_fDivergenceCenter,
+        float in_fSpread,
+        AkSIMDSpeakerVolumes *out_pVolumes,
+        unsigned int in_uNumFullBandChannels,
+        unsigned int in_uOutputConfig,
+        AkDevice *in_pDevice)
 {
-  AkSIMDSpeakerVolumes *v8; // rbp
-  unsigned int v9; // er14
-  float v10; // xmm8_4
+  __m128 v7; // xmm11
+  unsigned int v9; // r14d
   unsigned int v11; // esi
   __int64 v12; // rax
-  MapStruct<unsigned long,CAkSpeakerPan::PanPair *> *v13; // rax
-  signed __int64 i; // rcx
+  MapStruct<unsigned long,CAkSpeakerPan::PanPair *> *m_pItems; // rax
+  MapStruct<unsigned long,CAkSpeakerPan::PanPair *> *i; // rcx
   float v15; // xmm2_4
-  CAkSpeakerPan::PanPair *v16; // r13
+  CAkSpeakerPan::PanPair *item; // r13
   float v17; // xmm13_4
   float v18; // xmm10_4
   float v19; // xmm13_4
   float v20; // xmm10_4
-  unsigned int v21; // er12
+  unsigned int v21; // r12d
   float v22; // xmm7_4
   float v23; // xmm7_4
   float v24; // xmm13_4
   unsigned int v25; // ecx
-  signed __int64 v26; // rdx
+  __int64 v26; // rdx
   __m128 v27; // xmm11
   unsigned int v28; // edi
   float v29; // xmm6_4
-  signed __int64 v30; // rbx
+  AkSIMDSpeakerVolumes *v30; // rbx
   __m128 v31; // xmm1
   unsigned int in_uOutputConfiga; // [rsp+128h] [rbp+30h]
 
-  v8 = out_pVolumes;
   v9 = in_uOutputConfig & 0xFFFFFFF7;
-  v10 = in_fDivergenceCenter;
   if ( (in_uOutputConfig & 0xFFFFFFF7) == 4 )
   {
     v11 = 0;
@@ -283,63 +288,61 @@ void __usercall CAkSpeakerPan::GetSpeakerVolumesPlane(float in_fAngle@<xmm0>, fl
       v12 *= 32i64;
       *(__m128 *)((char *)out_pVolumes->vector + v12) = 0i64;
       *(_OWORD *)((char *)&out_pVolumes->aVolumes[4] + v12) = 0i64;
-      *(float *)((char *)&out_pVolumes->volumes.fCenter + v12) = 1.0;
+      *(int *)((char *)&out_pVolumes->vector[0].m128_i32[2] + v12) = 1065353216;
     }
     while ( v11 < in_uNumFullBandChannels );
   }
   else
   {
-    v13 = in_pDevice->m_mapConfig2PanPlane.m_pItems;
-    for ( i = (signed __int64)&v13[in_pDevice->m_mapConfig2PanPlane.m_uLength];
-          v13 != (MapStruct<unsigned long,CAkSpeakerPan::PanPair *> *)i;
-          ++v13 )
+    m_pItems = in_pDevice->m_mapConfig2PanPlane.m_pItems;
+    for ( i = &m_pItems[in_pDevice->m_mapConfig2PanPlane.m_uLength]; m_pItems != i; ++m_pItems )
     {
-      if ( v13->key == (in_uOutputConfig & 0xFFFFFFF3) )
+      if ( m_pItems->key == (in_uOutputConfig & 0xFFFFFFF3) )
         break;
     }
     v15 = in_fSpread * 2.5599999;
-    v16 = v13->item;
-    v17 = 1.0 / (float)(signed int)in_uNumFullBandChannels;
+    item = m_pItems->item;
+    v17 = 1.0 / (float)(int)in_uNumFullBandChannels;
     v18 = 1.0 - v17;
     v19 = v17 * v15;
     v20 = (float)(v18 * v15) - (float)((float)(in_fAngle * 0.15915494) * 512.0);
-    v21 = (signed int)(float)((float)(v19 * in_pDevice->fOneOverMinAngleBetweenSpeakers) + 1.0) + 1;
-    v22 = v19 / (float)(signed int)v21;
-    if ( !(((unsigned __int8)(signed int)(float)((float)(v19 * in_pDevice->fOneOverMinAngleBetweenSpeakers) + 1.0) + 1) & 1) )
+    v21 = (int)(float)((float)(v19 * in_pDevice->fOneOverMinAngleBetweenSpeakers) + 1.0) + 1;
+    v22 = v19 / (float)(int)v21;
+    if ( (((unsigned __int8)(int)(float)((float)(v19 * in_pDevice->fOneOverMinAngleBetweenSpeakers) + 1.0) + 1) & 1) == 0 )
       v20 = v20 - v22;
     v23 = v22 * 2.0;
     v24 = v19 * 2.0;
-    a5.m128_f32[0] = 1.0 / (float)(signed int)(in_uNumFullBandChannels * v21);
+    v7.m128_f32[0] = 1.0 / (float)(int)(in_uNumFullBandChannels * v21);
     v25 = 0;
-    v26 = 7i64 * (in_uNumFullBandChannels - 1);
+    v26 = in_uNumFullBandChannels - 1;
     in_uOutputConfiga = 0;
-    v27 = _mm_shuffle_ps(a5, a5, 0);
+    v27 = _mm_shuffle_ps(v7, v7, 0);
     do
     {
       v28 = 0;
       v29 = (float)((float)((float)(v21 >> 1) * v23) + 512.0) + v20;
-      v30 = (signed __int64)&v8[ChannelIndicesForSpread[0][v26 + v25]];
-      *(_OWORD *)v30 = 0i64;
-      *(_OWORD *)(v30 + 16) = 0i64;
+      v30 = &out_pVolumes[ChannelIndicesForSpread[v26][v25]];
+      v30->vector[0] = 0i64;
+      *(_OWORD *)&v30->aVolumes[4] = 0i64;
       do
       {
         CAkSpeakerPan::AddSpeakerVolumesPower(
-          (signed int)(float)(v29 + 0.5),
-          v10,
+          (int)(float)(v29 + 0.5),
+          in_fDivergenceCenter,
           v9,
-          v16,
+          item,
           in_pDevice,
           (AkSpeakerVolumes *)v30);
         ++v28;
         v29 = v29 - v23;
       }
       while ( v28 < v21 );
-      v26 = 7i64 * (in_uNumFullBandChannels - 1);
+      v26 = in_uNumFullBandChannels - 1;
       v20 = v20 - v24;
       v25 = ++in_uOutputConfiga;
-      v31 = _mm_mul_ps(*(__m128 *)(v30 + 16), v27);
-      *(__m128 *)v30 = _mm_sqrt_ps(_mm_mul_ps(*(__m128 *)v30, v27));
-      *(__m128 *)(v30 + 16) = _mm_sqrt_ps(v31);
+      v31 = _mm_mul_ps(v30->vector[1], v27);
+      v30->vector[0] = _mm_sqrt_ps(_mm_mul_ps(v30->vector[0], v27));
+      v30->vector[1] = _mm_sqrt_ps(v31);
     }
     while ( in_uOutputConfiga < in_uNumFullBandChannels );
   }
@@ -347,41 +350,40 @@ void __usercall CAkSpeakerPan::GetSpeakerVolumesPlane(float in_fAngle@<xmm0>, fl
 
 // File Line: 321
 // RVA: 0xA4DCA0
-void __fastcall CAkSpeakerPan::AddSpeakerVolumesPower(int in_iAngle, float in_fDivergenceCenter, unsigned int in_uOutputConfig, CAkSpeakerPan::PanPair *in_pPanTableNoCenter, AkDevice *in_pDevice, AkSpeakerVolumes *out_pVolumes)
+void __fastcall CAkSpeakerPan::AddSpeakerVolumesPower(
+        __int16 in_iAngle,
+        float in_fDivergenceCenter,
+        unsigned int in_uOutputConfig,
+        CAkSpeakerPan::PanPair *in_pPanTableNoCenter,
+        AkDevice *in_pDevice,
+        AkSpeakerVolumes *out_pVolumes)
 {
-  CAkSpeakerPan::PanPair *v6; // rsi
-  unsigned int v7; // ebx
-  float v8; // xmm3_4
-  int v9; // er10
+  int v9; // r10d
   float v10; // xmm0_4
-  unsigned int v11; // er10
+  unsigned int v11; // r10d
   char v12; // al
-  unsigned int *v13; // r11
+  unsigned int *puSpeakerAngles; // r11
   AkSpeakerVolumes *v14; // rdx
-  float *v15; // r8
-  AkSpeakerVolumes *v16; // r9
-  MapStruct<unsigned long,CAkSpeakerPan::PanPair *> *v17; // rax
-  signed __int64 i; // rcx
-  CAkSpeakerPan::PanPair *v19; // rcx
+  float *p_fFrontRight; // r8
+  AkSpeakerVolumes *p_fRearRight; // r9
+  MapStruct<unsigned long,CAkSpeakerPan::PanPair *> *m_pItems; // rax
+  MapStruct<unsigned long,CAkSpeakerPan::PanPair *> *i; // rcx
+  CAkSpeakerPan::PanPair *item; // rcx
   float v20; // xmm2_4
   float v21; // xmm1_4
 
-  v6 = in_pPanTableNoCenter;
-  v7 = in_uOutputConfig;
-  v8 = in_fDivergenceCenter;
-  if ( !(in_uOutputConfig & 0xFFFFFFFC) && in_pDevice->ePanningRule == 1 )
+  if ( (in_uOutputConfig & 0xFFFFFFFC) == 0 && in_pDevice->ePanningRule == AkPanningRule_Headphones )
   {
-    v9 = ((_WORD)in_iAngle + 128) & 0x1FF;
-    if ( v9 >= 256 )
+    v9 = (in_iAngle + 128) & 0x1FF;
+    if ( (unsigned int)v9 >= 0x100 )
       v9 = 512 - v9;
-    v10 = CAkSpeakerPan::m_fSin2[(signed __int64)v9 >> 1] + out_pVolumes->fFrontLeft;
-    out_pVolumes->fFrontRight = (float)(1.0 - CAkSpeakerPan::m_fSin2[(signed __int64)v9 >> 1])
-                              + out_pVolumes->fFrontRight;
+    v10 = CAkSpeakerPan::m_fSin2[(__int64)v9 >> 1] + out_pVolumes->fFrontLeft;
+    out_pVolumes->fFrontRight = (float)(1.0 - CAkSpeakerPan::m_fSin2[(__int64)v9 >> 1]) + out_pVolumes->fFrontRight;
     out_pVolumes->fFrontLeft = v10;
     return;
   }
   v11 = in_iAngle & 0x1FF;
-  if ( (signed int)v11 > 256 )
+  if ( v11 > 0x100 )
   {
     v11 = 512 - v11;
     v12 = 0;
@@ -390,23 +392,23 @@ void __fastcall CAkSpeakerPan::AddSpeakerVolumesPower(int in_iAngle, float in_fD
   {
     v12 = 1;
   }
-  v13 = in_pDevice->puSpeakerAngles;
+  puSpeakerAngles = in_pDevice->puSpeakerAngles;
   if ( (in_uOutputConfig & 0xFFFFFFFB) != 1587 )
   {
     if ( (in_uOutputConfig & 0xFFFFFFFB) != 51 )
       goto LABEL_28;
-    if ( v11 <= v13[1] )
+    if ( v11 <= puSpeakerAngles[1] )
     {
-      if ( v11 > *v13 )
+      if ( v11 > *puSpeakerAngles )
       {
         v14 = out_pVolumes;
         if ( !v12 )
         {
-          v15 = &out_pVolumes->fFrontRight;
-          v16 = (AkSpeakerVolumes *)((char *)out_pVolumes + 16);
+          p_fFrontRight = &out_pVolumes->fFrontRight;
+          p_fRearRight = (AkSpeakerVolumes *)&out_pVolumes->fRearRight;
           goto LABEL_32;
         }
-        v16 = (AkSpeakerVolumes *)((char *)out_pVolumes + 12);
+        p_fRearRight = (AkSpeakerVolumes *)&out_pVolumes->fRearLeft;
         goto LABEL_31;
       }
       goto LABEL_28;
@@ -415,81 +417,79 @@ LABEL_21:
     v14 = out_pVolumes;
     if ( v12 )
     {
-      v15 = &out_pVolumes->fRearLeft;
-      v16 = (AkSpeakerVolumes *)((char *)out_pVolumes + 16);
+      p_fFrontRight = &out_pVolumes->fRearLeft;
+      p_fRearRight = (AkSpeakerVolumes *)&out_pVolumes->fRearRight;
     }
     else
     {
-      v15 = &out_pVolumes->fRearRight;
-      v16 = (AkSpeakerVolumes *)((char *)out_pVolumes + 12);
+      p_fFrontRight = &out_pVolumes->fRearRight;
+      p_fRearRight = (AkSpeakerVolumes *)&out_pVolumes->fRearLeft;
     }
     goto LABEL_32;
   }
-  if ( v11 > v13[2] )
+  if ( v11 > puSpeakerAngles[2] )
     goto LABEL_21;
-  if ( v11 > v13[1] )
+  if ( v11 > puSpeakerAngles[1] )
   {
     v14 = out_pVolumes;
     if ( v12 )
     {
-      v15 = &out_pVolumes->fSideLeft;
-      v16 = (AkSpeakerVolumes *)((char *)out_pVolumes + 12);
+      p_fFrontRight = &out_pVolumes->fSideLeft;
+      p_fRearRight = (AkSpeakerVolumes *)&out_pVolumes->fRearLeft;
     }
     else
     {
-      v15 = &out_pVolumes->fSideRight;
-      v16 = (AkSpeakerVolumes *)((char *)out_pVolumes + 16);
+      p_fFrontRight = &out_pVolumes->fSideRight;
+      p_fRearRight = (AkSpeakerVolumes *)&out_pVolumes->fRearRight;
     }
     goto LABEL_32;
   }
-  if ( v11 > *v13 )
+  if ( v11 > *puSpeakerAngles )
   {
     v14 = out_pVolumes;
     if ( !v12 )
     {
-      v15 = &out_pVolumes->fFrontRight;
-      v16 = (AkSpeakerVolumes *)((char *)out_pVolumes + 24);
+      p_fFrontRight = &out_pVolumes->fFrontRight;
+      p_fRearRight = (AkSpeakerVolumes *)&out_pVolumes->fSideRight;
       goto LABEL_32;
     }
-    v16 = (AkSpeakerVolumes *)((char *)out_pVolumes + 20);
+    p_fRearRight = (AkSpeakerVolumes *)&out_pVolumes->fSideLeft;
     goto LABEL_31;
   }
 LABEL_28:
   v14 = out_pVolumes;
-  if ( v12 != v11 > *v13 )
+  if ( v12 != v11 > *puSpeakerAngles )
   {
-    v15 = &out_pVolumes->fFrontRight;
-    v16 = out_pVolumes;
+    p_fFrontRight = &out_pVolumes->fFrontRight;
+    p_fRearRight = out_pVolumes;
     goto LABEL_32;
   }
-  v16 = (AkSpeakerVolumes *)((char *)out_pVolumes + 4);
+  p_fRearRight = (AkSpeakerVolumes *)&out_pVolumes->fFrontRight;
 LABEL_31:
-  v15 = &v14->fFrontLeft;
+  p_fFrontRight = &v14->fFrontLeft;
 LABEL_32:
-  if ( v7 & 4 && v11 < *v13 && in_fDivergenceCenter > 0.0 )
+  if ( (in_uOutputConfig & 4) != 0 && v11 < *puSpeakerAngles && in_fDivergenceCenter > 0.0 )
   {
-    v17 = in_pDevice->m_mapConfig2PanPlane.m_pItems;
-    for ( i = (signed __int64)&v17[in_pDevice->m_mapConfig2PanPlane.m_uLength];
-          v17 != (MapStruct<unsigned long,CAkSpeakerPan::PanPair *> *)i;
-          ++v17 )
+    m_pItems = in_pDevice->m_mapConfig2PanPlane.m_pItems;
+    for ( i = &m_pItems[in_pDevice->m_mapConfig2PanPlane.m_uLength]; m_pItems != i; ++m_pItems )
     {
-      if ( v17->key == v7 )
+      if ( m_pItems->key == in_uOutputConfig )
         break;
     }
-    v19 = v17->item;
-    v20 = (float)((float)(1.0 - in_fDivergenceCenter) * v6[v11].fGain_i_minus_1) + *v15;
-    v21 = (float)((float)((float)(1.0 - in_fDivergenceCenter) * v6[v11].fGain_i)
-                + (float)(in_fDivergenceCenter * v19[v11].fGain_i))
-        + v16->fFrontLeft;
-    v14->fCenter = (float)(v8 * v19[v11].fGain_i_minus_1) + v14->fCenter;
-    *v15 = v20;
+    item = m_pItems->item;
+    v20 = (float)((float)(1.0 - in_fDivergenceCenter) * in_pPanTableNoCenter[v11].fGain_i_minus_1) + *p_fFrontRight;
+    v21 = (float)((float)((float)(1.0 - in_fDivergenceCenter) * in_pPanTableNoCenter[v11].fGain_i)
+                + (float)(in_fDivergenceCenter * item[v11].fGain_i))
+        + p_fRearRight->fFrontLeft;
+    v14->fCenter = (float)(in_fDivergenceCenter * item[v11].fGain_i_minus_1) + v14->fCenter;
+    *p_fFrontRight = v20;
   }
   else
   {
-    v21 = v6[v11].fGain_i + v16->fFrontLeft;
-    *v15 = *v15 + v6[v11].fGain_i_minus_1;
+    v21 = in_pPanTableNoCenter[v11].fGain_i + p_fRearRight->fFrontLeft;
+    *p_fFrontRight = *p_fFrontRight + in_pPanTableNoCenter[v11].fGain_i_minus_1;
   }
-  v16->fFrontLeft = v21;
+  p_fRearRight->fFrontLeft = v21;
 }
 
 // File Line: 564
@@ -516,25 +516,25 @@ void __fastcall _GetSpeakerVolumes2DPan1RouteToCenter(float in_fX, float in_fCen
   *(_QWORD *)&out_pVolumes->fRearLeft = 0i64;
   out_pVolumes->fSideLeft = 0.0;
   out_pVolumes->fFrontRight = fsqrt(v5);
-  LODWORD(out_pVolumes->fFrontLeft) = (unsigned __int128)_mm_sqrt_ps(v3);
+  LODWORD(out_pVolumes->fFrontLeft) = _mm_sqrt_ps(v3).m128_u32[0];
   out_pVolumes->fCenter = fsqrt(v4);
 }
 
 // File Line: 673
 // RVA: 0xA4F480
-void __fastcall _GetSpeakerVolumes2DPan2RouteToCenter(float in_fX, float in_fY, float in_fCenterPct, AkSpeakerVolumes *out_pVolumes)
+void __fastcall _GetSpeakerVolumes2DPan2RouteToCenter(
+        float in_fX,
+        float in_fY,
+        float in_fCenterPct,
+        AkSpeakerVolumes *out_pVolumes)
 {
   __m128 v4; // xmm6
-  float v5; // xmm5_4
-  float v6; // xmm7_4
   float v7; // xmm4_4
   float v8; // xmm3_4
   __m128 v9; // xmm0
   __m128 v10; // xmm1
 
   v4 = (__m128)(unsigned int)FLOAT_1_0;
-  v5 = in_fX;
-  v6 = in_fY;
   if ( in_fX > 0.5 )
   {
     v7 = (float)(1.0 - in_fX) * (float)(in_fCenterPct * 2.0);
@@ -549,14 +549,14 @@ void __fastcall _GetSpeakerVolumes2DPan2RouteToCenter(float in_fX, float in_fY, 
   v10 = (__m128)(unsigned int)FLOAT_1_0;
   *(_QWORD *)&out_pVolumes->fSideRight = 0i64;
   out_pVolumes->fSideLeft = 0.0;
-  v4.m128_f32[0] = (float)(1.0 - v5) * (float)(1.0 - v6);
-  v10.m128_f32[0] = (float)(1.0 - v6) * v5;
-  v9.m128_f32[0] = (float)((float)(1.0 - v8) - v7) * v6;
-  LODWORD(out_pVolumes->fFrontLeft) = (unsigned __int128)_mm_sqrt_ps(v9);
-  out_pVolumes->fFrontRight = fsqrt(v8 * v6);
-  out_pVolumes->fCenter = fsqrt(v7 * v6);
-  LODWORD(out_pVolumes->fRearLeft) = (unsigned __int128)_mm_sqrt_ps(v4);
-  LODWORD(out_pVolumes->fRearRight) = (unsigned __int128)_mm_sqrt_ps(v10);
+  v4.m128_f32[0] = (float)(1.0 - in_fX) * (float)(1.0 - in_fY);
+  v10.m128_f32[0] = (float)(1.0 - in_fY) * in_fX;
+  v9.m128_f32[0] = (float)((float)(1.0 - v8) - v7) * in_fY;
+  LODWORD(out_pVolumes->fFrontLeft) = _mm_sqrt_ps(v9).m128_u32[0];
+  out_pVolumes->fFrontRight = fsqrt(v8 * in_fY);
+  out_pVolumes->fCenter = fsqrt(v7 * in_fY);
+  LODWORD(out_pVolumes->fRearLeft) = _mm_sqrt_ps(v4).m128_u32[0];
+  LODWORD(out_pVolumes->fRearRight) = _mm_sqrt_ps(v10).m128_u32[0];
 }
 
 // File Line: 712
@@ -564,7 +564,6 @@ void __fastcall _GetSpeakerVolumes2DPan2RouteToCenter(float in_fX, float in_fY, 
 void __fastcall _GetSpeakerVolumes2DPan2HasCenter(float in_fX, float in_fY, AkSpeakerVolumes *out_pVolumes)
 {
   __m128 v3; // xmm3
-  float v4; // xmm6_4
   float v5; // xmm8_4
   float v6; // xmm5_4
   float v7; // xmm4_4
@@ -574,7 +573,6 @@ void __fastcall _GetSpeakerVolumes2DPan2HasCenter(float in_fX, float in_fY, AkSp
   __m128 v11; // xmm1
 
   v3 = (__m128)(unsigned int)FLOAT_1_0;
-  v4 = in_fX;
   v5 = 1.0 - in_fX;
   v6 = (float)(in_fX * 2.0) * 0.33333334;
   v7 = (float)(2.0 - (float)(in_fX * 2.0)) * 0.33333334;
@@ -596,15 +594,15 @@ void __fastcall _GetSpeakerVolumes2DPan2HasCenter(float in_fX, float in_fY, AkSp
   v3.m128_f32[0] = (float)(1.0 - v8.m128_f32[0]) * 0.33333334;
   v9.m128_f32[0] = v9.m128_f32[0] * v7;
   v10.m128_f32[0] = v10.m128_f32[0] * v6;
-  LODWORD(out_pVolumes->fFrontLeft) = (unsigned __int128)_mm_sqrt_ps(v9);
-  v9.m128_i32[0] = (unsigned __int128)_mm_sqrt_ps(v10);
+  LODWORD(out_pVolumes->fFrontLeft) = _mm_sqrt_ps(v9).m128_u32[0];
+  v9.m128_i32[0] = _mm_sqrt_ps(v10).m128_u32[0];
   v11 = v8;
   v11.m128_f32[0] = v8.m128_f32[0] * v5;
-  v8.m128_f32[0] = v8.m128_f32[0] * v4;
+  v8.m128_f32[0] = v8.m128_f32[0] * in_fX;
   LODWORD(out_pVolumes->fFrontRight) = v9.m128_i32[0];
-  LODWORD(out_pVolumes->fCenter) = (unsigned __int128)_mm_sqrt_ps(v3);
-  LODWORD(out_pVolumes->fRearLeft) = (unsigned __int128)_mm_sqrt_ps(v11);
-  LODWORD(out_pVolumes->fRearRight) = (unsigned __int128)_mm_sqrt_ps(v8);
+  LODWORD(out_pVolumes->fCenter) = _mm_sqrt_ps(v3).m128_u32[0];
+  LODWORD(out_pVolumes->fRearLeft) = _mm_sqrt_ps(v11).m128_u32[0];
+  LODWORD(out_pVolumes->fRearRight) = _mm_sqrt_ps(v8).m128_u32[0];
 }
 
 // File Line: 770
@@ -613,7 +611,6 @@ void __fastcall _GetSpeakerVolumes2DPan3(float in_fX, float in_fY, AkSpeakerVolu
 {
   __m128 v3; // xmm4
   float v4; // xmm3_4
-  float v5; // xmm7_4
   float v6; // xmm5_4
   float v7; // xmm2_4
   __m128 v8; // xmm1
@@ -622,7 +619,6 @@ void __fastcall _GetSpeakerVolumes2DPan3(float in_fX, float in_fY, AkSpeakerVolu
 
   v3 = (__m128)(unsigned int)FLOAT_1_0;
   v4 = in_fY * 4.0;
-  v5 = in_fX;
   v6 = 1.0 - in_fX;
   v7 = (float)((float)(in_fY * 4.0) - 1.0) * 0.33333334;
   if ( v7 < 0.0 )
@@ -637,24 +633,27 @@ void __fastcall _GetSpeakerVolumes2DPan3(float in_fX, float in_fY, AkSpeakerVolu
   out_pVolumes->fFrontLeft = fsqrt(v7 * v6);
   out_pVolumes->fFrontRight = fsqrt(v7 * in_fX);
   v9 = v8;
-  v8.m128_f32[0] = v8.m128_f32[0] * v5;
+  v8.m128_f32[0] = v8.m128_f32[0] * in_fX;
   v9.m128_f32[0] = v9.m128_f32[0] * v6;
-  LODWORD(out_pVolumes->fRearLeft) = (unsigned __int128)_mm_sqrt_ps(v9);
-  v9.m128_i32[0] = (unsigned __int128)_mm_sqrt_ps(v8);
+  LODWORD(out_pVolumes->fRearLeft) = _mm_sqrt_ps(v9).m128_u32[0];
+  v9.m128_i32[0] = _mm_sqrt_ps(v8).m128_u32[0];
   v10 = v3;
   v10.m128_f32[0] = v3.m128_f32[0] * v6;
-  v3.m128_f32[0] = v3.m128_f32[0] * v5;
+  v3.m128_f32[0] = v3.m128_f32[0] * in_fX;
   LODWORD(out_pVolumes->fRearRight) = v9.m128_i32[0];
-  LODWORD(out_pVolumes->fSideLeft) = (unsigned __int128)_mm_sqrt_ps(v10);
-  LODWORD(out_pVolumes->fSideRight) = (unsigned __int128)_mm_sqrt_ps(v3);
+  LODWORD(out_pVolumes->fSideLeft) = _mm_sqrt_ps(v10).m128_u32[0];
+  LODWORD(out_pVolumes->fSideRight) = _mm_sqrt_ps(v3).m128_u32[0];
 }
 
 // File Line: 807
 // RVA: 0xA4F780
-void __fastcall _GetSpeakerVolumes2DPan3RouteToCenter(float in_fX, float in_fY, float in_fCenterPct, AkSpeakerVolumes *out_pVolumes)
+void __fastcall _GetSpeakerVolumes2DPan3RouteToCenter(
+        float in_fX,
+        float in_fY,
+        float in_fCenterPct,
+        AkSpeakerVolumes *out_pVolumes)
 {
   __m128 v4; // xmm6
-  float v5; // xmm5_4
   float v6; // xmm4_4
   float v7; // xmm3_4
   float v8; // xmm1_4
@@ -666,7 +665,6 @@ void __fastcall _GetSpeakerVolumes2DPan3RouteToCenter(float in_fX, float in_fY, 
   __m128 v14; // xmm1
 
   v4 = (__m128)(unsigned int)FLOAT_1_0;
-  v5 = in_fX;
   if ( in_fX > 0.5 )
   {
     v6 = (float)(1.0 - in_fX) * (float)(in_fCenterPct * 2.0);
@@ -694,14 +692,14 @@ void __fastcall _GetSpeakerVolumes2DPan3RouteToCenter(float in_fX, float in_fY, 
   v11.m128_f32[0] = v11.m128_f32[0] * in_fX;
   out_pVolumes->fFrontRight = fsqrt(v10 * v7);
   out_pVolumes->fCenter = fsqrt(v10 * v6);
-  LODWORD(v13) = (unsigned __int128)_mm_sqrt_ps(v12);
+  LODWORD(v13) = _mm_sqrt_ps(v12).m128_u32[0];
   v14 = v4;
   v14.m128_f32[0] = v4.m128_f32[0] * v9;
-  v4.m128_f32[0] = v4.m128_f32[0] * v5;
+  v4.m128_f32[0] = v4.m128_f32[0] * in_fX;
   out_pVolumes->fRearLeft = v13;
-  LODWORD(out_pVolumes->fRearRight) = (unsigned __int128)_mm_sqrt_ps(v11);
-  LODWORD(out_pVolumes->fSideLeft) = (unsigned __int128)_mm_sqrt_ps(v14);
-  LODWORD(out_pVolumes->fSideRight) = (unsigned __int128)_mm_sqrt_ps(v4);
+  LODWORD(out_pVolumes->fRearRight) = _mm_sqrt_ps(v11).m128_u32[0];
+  LODWORD(out_pVolumes->fSideLeft) = _mm_sqrt_ps(v14).m128_u32[0];
+  LODWORD(out_pVolumes->fSideRight) = _mm_sqrt_ps(v4).m128_u32[0];
 }
 
 // File Line: 854
@@ -709,7 +707,6 @@ void __fastcall _GetSpeakerVolumes2DPan3RouteToCenter(float in_fX, float in_fY, 
 void __fastcall _GetSpeakerVolumes2DPan3HasCenter(float in_fX, float in_fY, AkSpeakerVolumes *out_pVolumes)
 {
   __m128 v3; // xmm4
-  float v4; // xmm7_4
   float v5; // xmm8_4
   float v6; // xmm5_4
   float v7; // xmm3_4
@@ -719,7 +716,6 @@ void __fastcall _GetSpeakerVolumes2DPan3HasCenter(float in_fX, float in_fY, AkSp
   __m128 v11; // xmm1
 
   v3 = (__m128)(unsigned int)FLOAT_1_0;
-  v4 = in_fX;
   v5 = 1.0 - in_fX;
   v6 = (float)(2.0 - (float)(in_fX * 2.0)) * 0.33333334;
   v7 = (float)((float)(in_fY * 8.0) - 1.0) * 0.14285715;
@@ -737,26 +733,31 @@ void __fastcall _GetSpeakerVolumes2DPan3HasCenter(float in_fX, float in_fY, AkSp
   v8.m128_f32[0] = v8.m128_f32[0] * in_fX;
   out_pVolumes->fFrontRight = fsqrt(v7 * (float)(1.0 - (float)(v6 + 0.33333334)));
   out_pVolumes->fCenter = fsqrt(v7 * 0.33333334);
-  LODWORD(v10) = (unsigned __int128)_mm_sqrt_ps(v9);
+  LODWORD(v10) = _mm_sqrt_ps(v9).m128_u32[0];
   v11 = v3;
   v11.m128_f32[0] = v3.m128_f32[0] * v5;
-  v3.m128_f32[0] = v3.m128_f32[0] * v4;
+  v3.m128_f32[0] = v3.m128_f32[0] * in_fX;
   out_pVolumes->fRearLeft = v10;
-  LODWORD(out_pVolumes->fRearRight) = (unsigned __int128)_mm_sqrt_ps(v8);
-  LODWORD(out_pVolumes->fSideLeft) = (unsigned __int128)_mm_sqrt_ps(v11);
-  LODWORD(out_pVolumes->fSideRight) = (unsigned __int128)_mm_sqrt_ps(v3);
+  LODWORD(out_pVolumes->fRearRight) = _mm_sqrt_ps(v8).m128_u32[0];
+  LODWORD(out_pVolumes->fSideLeft) = _mm_sqrt_ps(v11).m128_u32[0];
+  LODWORD(out_pVolumes->fSideRight) = _mm_sqrt_ps(v3).m128_u32[0];
 }
 
 // File Line: 901
 // RVA: 0xA4E470
-void __fastcall CAkSpeakerPan::GetSpeakerVolumes2DPan(float in_fX, float in_fY, float in_fCenterPct, bool in_bIsPannerEnabled, unsigned int in_uInputConfig, unsigned int in_uOutputConfig, AkSIMDSpeakerVolumes *out_pVolumes)
+void __fastcall CAkSpeakerPan::GetSpeakerVolumes2DPan(
+        float in_fX,
+        float in_fY,
+        float in_fCenterPct,
+        bool in_bIsPannerEnabled,
+        unsigned int in_uInputConfig,
+        unsigned int in_uOutputConfig,
+        AkSIMDSpeakerVolumes *out_pVolumes)
 {
   unsigned int v7; // eax
   unsigned int v8; // edi
-  float v9; // xmm6_4
-  bool v10; // si
-  int v11; // eax
-  int v12; // eax
+  unsigned int v11; // eax
+  unsigned int v12; // eax
   __m128 v13; // xmm0
   float v14; // xmm6_4
   __m128 v15; // xmm3
@@ -785,8 +786,8 @@ void __fastcall CAkSpeakerPan::GetSpeakerVolumes2DPan(float in_fX, float in_fY, 
   __m128 v38; // xmm0
   __m128 v39; // xmm1
   __m128 v40; // xmm2
-  int v41; // eax
-  int v42; // eax
+  unsigned int v41; // eax
+  unsigned int v42; // eax
   __m128 v43; // xmm3
   __m128 v44; // xmm2
   __m128 v45; // xmm1
@@ -811,12 +812,10 @@ void __fastcall CAkSpeakerPan::GetSpeakerVolumes2DPan(float in_fX, float in_fY, 
   __m128 v64; // xmm1
   __m128 v65; // xmm1
   __m128 v66; // xmm2
-  AkSpeakerVolumes v67; // [rsp+20h] [rbp-40h]
+  AkSpeakerVolumes v67; // [rsp+20h] [rbp-40h] BYREF
 
   v7 = in_uInputConfig & 0xFFFFFFF7;
   v8 = in_uOutputConfig & 0xFFFFFFF7;
-  v9 = in_fX;
-  v10 = in_bIsPannerEnabled;
   if ( (in_uInputConfig & 0xFFFFFFF7) > 0x33 )
   {
     v41 = v7 - 55;
@@ -828,14 +827,14 @@ void __fastcall CAkSpeakerPan::GetSpeakerVolumes2DPan(float in_fX, float in_fY, 
         if ( v42 == 4 )
         {
           memset(out_pVolumes, 0, 0xE0ui64);
-          out_pVolumes->volumes.fFrontLeft = 1.0;
-          out_pVolumes[1].volumes.fFrontRight = 1.0;
-          out_pVolumes[2].volumes.fCenter = 1.0;
-          out_pVolumes[3].volumes.fRearLeft = 1.0;
-          out_pVolumes[4].volumes.fRearRight = 1.0;
-          out_pVolumes[5].volumes.fSideLeft = 1.0;
-          out_pVolumes[6].volumes.fSideRight = 1.0;
-          if ( v10 )
+          out_pVolumes->vector[0].m128_i32[0] = 1065353216;
+          out_pVolumes[1].vector[0].m128_i32[1] = 1065353216;
+          out_pVolumes[2].vector[0].m128_i32[2] = 1065353216;
+          out_pVolumes[3].vector[0].m128_i32[3] = 1065353216;
+          out_pVolumes[4].vector[1].m128_i32[0] = 1065353216;
+          out_pVolumes[5].vector[1].m128_i32[1] = 1065353216;
+          out_pVolumes[6].vector[1].m128_i32[2] = 1065353216;
+          if ( in_bIsPannerEnabled )
           {
             _GetSpeakerVolumes2DPan3HasCenter(in_fX, in_fY, &v67);
             v43 = *(__m128 *)&v67.fFrontLeft;
@@ -867,13 +866,13 @@ void __fastcall CAkSpeakerPan::GetSpeakerVolumes2DPan(float in_fX, float in_fY, 
       else
       {
         memset(out_pVolumes, 0, 0xC0ui64);
-        out_pVolumes->volumes.fFrontLeft = 1.0;
-        out_pVolumes[1].volumes.fFrontRight = 1.0;
-        out_pVolumes[2].volumes.fRearLeft = 1.0;
-        out_pVolumes[3].volumes.fRearRight = 1.0;
-        out_pVolumes[4].volumes.fSideLeft = 1.0;
-        out_pVolumes[5].volumes.fSideRight = 1.0;
-        if ( v10 )
+        out_pVolumes->vector[0].m128_i32[0] = 1065353216;
+        out_pVolumes[1].vector[0].m128_i32[1] = 1065353216;
+        out_pVolumes[2].vector[0].m128_i32[3] = 1065353216;
+        out_pVolumes[3].vector[1].m128_i32[0] = 1065353216;
+        out_pVolumes[4].vector[1].m128_i32[1] = 1065353216;
+        out_pVolumes[5].vector[1].m128_i32[2] = 1065353216;
+        if ( in_bIsPannerEnabled )
         {
           _GetSpeakerVolumes2DPan3(in_fX, in_fY, &v67);
           v52 = *(__m128 *)&v67.fFrontLeft;
@@ -902,29 +901,29 @@ void __fastcall CAkSpeakerPan::GetSpeakerVolumes2DPan(float in_fX, float in_fY, 
     else
     {
       memset(out_pVolumes, 0, 0xA0ui64);
-      out_pVolumes->volumes.fFrontLeft = 1.0;
-      out_pVolumes[1].volumes.fFrontRight = 1.0;
-      out_pVolumes[2].volumes.fCenter = 1.0;
-      if ( (v8 - 1587) & 0xFFFFFFFB )
+      out_pVolumes->vector[0].m128_i32[0] = 1065353216;
+      out_pVolumes[1].vector[0].m128_i32[1] = 1065353216;
+      out_pVolumes[2].vector[0].m128_i32[2] = 1065353216;
+      if ( ((v8 - 1587) & 0xFFFFFFFB) != 0 )
       {
-        out_pVolumes[3].volumes.fRearLeft = 1.0;
-        out_pVolumes[4].volumes.fRearRight = 1.0;
+        out_pVolumes[3].vector[0].m128_i32[3] = 1065353216;
+        out_pVolumes[4].vector[1].m128_i32[0] = 1065353216;
       }
       else
       {
-        out_pVolumes[3].volumes.fSideLeft = 1.0;
-        out_pVolumes[4].volumes.fSideRight = 1.0;
+        out_pVolumes[3].vector[1].m128_i32[1] = 1065353216;
+        out_pVolumes[4].vector[1].m128_i32[2] = 1065353216;
       }
-      if ( v10 )
+      if ( in_bIsPannerEnabled )
       {
-        if ( (v8 - 1587) & 0xFFFFFFFB )
+        if ( ((v8 - 1587) & 0xFFFFFFFB) != 0 )
         {
           _GetSpeakerVolumes2DPan2HasCenter(in_fX, in_fY, &v67);
         }
         else
         {
-          out_pVolumes[3].volumes.fRearLeft = 1.0;
-          out_pVolumes[4].volumes.fRearRight = 1.0;
+          out_pVolumes[3].vector[0].m128_i32[3] = 1065353216;
+          out_pVolumes[4].vector[1].m128_i32[0] = 1065353216;
           _GetSpeakerVolumes2DPan3HasCenter(in_fX, in_fY, &v67);
         }
         v60 = *(__m128 *)&v67.fFrontLeft;
@@ -950,21 +949,21 @@ void __fastcall CAkSpeakerPan::GetSpeakerVolumes2DPan(float in_fX, float in_fY, 
   else if ( v7 == 51 )
   {
     memset(out_pVolumes, 0, 0x80ui64);
-    out_pVolumes->volumes.fFrontLeft = 1.0;
-    out_pVolumes[1].volumes.fFrontRight = 1.0;
-    if ( (v8 - 1587) & 0xFFFFFFFB )
+    out_pVolumes->vector[0].m128_i32[0] = 1065353216;
+    out_pVolumes[1].vector[0].m128_i32[1] = 1065353216;
+    if ( ((v8 - 1587) & 0xFFFFFFFB) != 0 )
     {
-      out_pVolumes[2].volumes.fRearLeft = 1.0;
-      out_pVolumes[3].volumes.fRearRight = 1.0;
+      out_pVolumes[2].vector[0].m128_i32[3] = 1065353216;
+      out_pVolumes[3].vector[1].m128_i32[0] = 1065353216;
     }
     else
     {
-      out_pVolumes[2].volumes.fSideLeft = 1.0;
-      out_pVolumes[3].volumes.fSideRight = 1.0;
+      out_pVolumes[2].vector[1].m128_i32[1] = 1065353216;
+      out_pVolumes[3].vector[1].m128_i32[2] = 1065353216;
     }
-    if ( v10 )
+    if ( in_bIsPannerEnabled )
     {
-      if ( (v8 - 1587) & 0xFFFFFFFB )
+      if ( ((v8 - 1587) & 0xFFFFFFFB) != 0 )
       {
         v32 = (__m128)(unsigned int)FLOAT_1_0;
         v67.fCenter = 0.0;
@@ -973,18 +972,18 @@ void __fastcall CAkSpeakerPan::GetSpeakerVolumes2DPan(float in_fX, float in_fY, 
         v33 = (__m128)(unsigned int)FLOAT_1_0;
         v33.m128_f32[0] = 1.0 - in_fX;
         v34 = v33;
-        v33.m128_f32[0] = (float)(1.0 - v9) * (float)(1.0 - in_fY);
-        v32.m128_f32[0] = (float)(1.0 - in_fY) * v9;
+        v33.m128_f32[0] = (float)(1.0 - in_fX) * (float)(1.0 - in_fY);
+        v32.m128_f32[0] = (float)(1.0 - in_fY) * in_fX;
         v34.m128_f32[0] = v34.m128_f32[0] * in_fY;
-        LODWORD(v67.fFrontLeft) = (unsigned __int128)_mm_sqrt_ps(v34);
-        v67.fFrontRight = fsqrt(v9 * in_fY);
-        LODWORD(v67.fRearLeft) = (unsigned __int128)_mm_sqrt_ps(v33);
-        LODWORD(v67.fRearRight) = (unsigned __int128)_mm_sqrt_ps(v32);
+        LODWORD(v67.fFrontLeft) = _mm_sqrt_ps(v34).m128_u32[0];
+        v67.fFrontRight = fsqrt(in_fX * in_fY);
+        LODWORD(v67.fRearLeft) = _mm_sqrt_ps(v33).m128_u32[0];
+        LODWORD(v67.fRearRight) = _mm_sqrt_ps(v32).m128_u32[0];
       }
       else
       {
-        out_pVolumes[2].volumes.fRearLeft = 1.0;
-        out_pVolumes[3].volumes.fRearRight = 1.0;
+        out_pVolumes[2].vector[0].m128_i32[3] = 1065353216;
+        out_pVolumes[3].vector[1].m128_i32[0] = 1065353216;
         _GetSpeakerVolumes2DPan3(in_fX, in_fY, &v67);
       }
       v35 = *(__m128 *)&v67.fFrontLeft;
@@ -1014,44 +1013,44 @@ void __fastcall CAkSpeakerPan::GetSpeakerVolumes2DPan(float in_fX, float in_fY, 
         if ( v12 == 3 )
         {
           memset(out_pVolumes, 0, 0x60ui64);
-          out_pVolumes->volumes.fFrontLeft = 1.0;
-          out_pVolumes[1].volumes.fFrontRight = 1.0;
-          out_pVolumes[2].volumes.fCenter = 1.0;
-          if ( v10 )
+          out_pVolumes->vector[0].m128_i32[0] = 1065353216;
+          out_pVolumes[1].vector[0].m128_i32[1] = 1065353216;
+          out_pVolumes[2].vector[0].m128_i32[2] = 1065353216;
+          if ( in_bIsPannerEnabled )
           {
-            if ( (v8 - 1587) & 0xFFFFFFFB )
+            if ( ((v8 - 1587) & 0xFFFFFFFB) != 0 )
             {
-              if ( (v8 - 51) & 0xFFFFFFFB )
+              if ( ((v8 - 51) & 0xFFFFFFFB) != 0 )
               {
                 v13 = (__m128)LODWORD(FLOAT_2_0);
                 *(_QWORD *)&v67.fSideRight = 0i64;
-                *(_QWORD *)&v67.fRearLeft = 0i64;
+                v67.fRearRight = 0.0;
                 v67.fSideLeft = 0.0;
-                v14 = v9 * 2.0;
+                v14 = in_fX * 2.0;
                 v13.m128_f32[0] = (float)(2.0 - v14) * 0.33333334;
-                *(_QWORD *)&v67.fCenter = (unsigned int)*(_OWORD *)&_mm_sqrt_ps((__m128)LODWORD(FLOAT_0_33333334));
-                LODWORD(v67.fFrontLeft) = (unsigned __int128)_mm_sqrt_ps(v13);
+                *(_QWORD *)&v67.fCenter = _mm_sqrt_ps((__m128)LODWORD(FLOAT_0_33333334)).m128_u32[0];
+                LODWORD(v67.fFrontLeft) = _mm_sqrt_ps(v13).m128_u32[0];
                 v67.fFrontRight = fsqrt(v14 * 0.33333334);
               }
               else
               {
-                out_pVolumes->volumes.fRearLeft = 1.0;
-                out_pVolumes[1].volumes.fRearRight = 1.0;
-                out_pVolumes[2].volumes.fRearLeft = 0.5;
-                out_pVolumes[2].volumes.fRearRight = 0.5;
+                out_pVolumes->vector[0].m128_i32[3] = 1065353216;
+                out_pVolumes[1].vector[1].m128_i32[0] = 1065353216;
+                out_pVolumes[2].vector[0].m128_i32[3] = 1056964608;
+                out_pVolumes[2].vector[1].m128_i32[0] = 1056964608;
                 _GetSpeakerVolumes2DPan2HasCenter(in_fX, in_fY, &v67);
               }
             }
             else
             {
-              out_pVolumes->volumes.fRearLeft = 1.0;
-              out_pVolumes->volumes.fSideLeft = 1.0;
-              out_pVolumes[1].volumes.fRearRight = 1.0;
-              out_pVolumes[1].volumes.fSideRight = 1.0;
-              out_pVolumes[2].volumes.fRearLeft = 0.5;
-              out_pVolumes[2].volumes.fSideLeft = 0.5;
-              out_pVolumes[2].volumes.fRearRight = 0.5;
-              out_pVolumes[2].volumes.fSideRight = 0.5;
+              out_pVolumes->vector[0].m128_i32[3] = 1065353216;
+              out_pVolumes->vector[1].m128_i32[1] = 1065353216;
+              out_pVolumes[1].vector[1].m128_i32[0] = 1065353216;
+              out_pVolumes[1].vector[1].m128_i32[2] = 1065353216;
+              out_pVolumes[2].vector[0].m128_i32[3] = 1056964608;
+              out_pVolumes[2].vector[1].m128_i32[1] = 1056964608;
+              out_pVolumes[2].vector[1].m128_i32[0] = 1056964608;
+              out_pVolumes[2].vector[1].m128_i32[2] = 1056964608;
               _GetSpeakerVolumes2DPan3HasCenter(in_fX, in_fY, &v67);
             }
             v15 = *(__m128 *)&v67.fFrontLeft;
@@ -1083,54 +1082,54 @@ void __fastcall CAkSpeakerPan::GetSpeakerVolumes2DPan(float in_fX, float in_fY, 
             break;
           case 0x33u:
             v22 = (__m128)(unsigned int)FLOAT_1_0;
-            out_pVolumes->volumes.fCenter = 0.0;
-            *(_QWORD *)&out_pVolumes->aVolumes[6] = 0i64;
-            out_pVolumes->volumes.fSideLeft = 0.0;
+            out_pVolumes->vector[0].m128_i32[2] = 0;
+            out_pVolumes->vector[1].m128_u64[1] = 0i64;
+            out_pVolumes->vector[1].m128_i32[1] = 0;
             v23 = (__m128)(unsigned int)FLOAT_1_0;
             v23.m128_f32[0] = 1.0 - in_fX;
             v24 = v23;
-            v23.m128_f32[0] = (float)(1.0 - v9) * (float)(1.0 - in_fY);
-            v22.m128_f32[0] = (float)(1.0 - in_fY) * v9;
+            v23.m128_f32[0] = (float)(1.0 - in_fX) * (float)(1.0 - in_fY);
+            v22.m128_f32[0] = (float)(1.0 - in_fY) * in_fX;
             v24.m128_f32[0] = v24.m128_f32[0] * in_fY;
-            LODWORD(out_pVolumes->volumes.fFrontLeft) = (unsigned __int128)_mm_sqrt_ps(v24);
-            out_pVolumes->volumes.fFrontRight = fsqrt(v9 * in_fY);
-            LODWORD(out_pVolumes->volumes.fRearLeft) = (unsigned __int128)_mm_sqrt_ps(v23);
-            LODWORD(out_pVolumes->volumes.fRearRight) = (unsigned __int128)_mm_sqrt_ps(v22);
+            out_pVolumes->vector[0].m128_i32[0] = _mm_sqrt_ps(v24).m128_u32[0];
+            out_pVolumes->vector[0].m128_f32[1] = fsqrt(in_fX * in_fY);
+            out_pVolumes->vector[0].m128_i32[3] = _mm_sqrt_ps(v23).m128_u32[0];
+            out_pVolumes->vector[1].m128_i32[0] = _mm_sqrt_ps(v22).m128_u32[0];
             break;
           case 7u:
             _GetSpeakerVolumes2DPan1RouteToCenter(in_fX, in_fCenterPct, (AkSpeakerVolumes *)out_pVolumes);
             break;
           default:
             v25 = (__m128)(unsigned int)FLOAT_1_0;
-            v25.m128_f32[0] = 1.0 - v9;
-            *(_QWORD *)&out_pVolumes->aVolumes[2] = 0i64;
+            v25.m128_f32[0] = 1.0 - in_fX;
+            out_pVolumes->vector[0].m128_u64[1] = 0i64;
             *(_OWORD *)&out_pVolumes->aVolumes[4] = 0ui64;
-            LODWORD(out_pVolumes->volumes.fFrontLeft) = (unsigned __int128)_mm_sqrt_ps(v25);
-            out_pVolumes->volumes.fFrontRight = fsqrt(v9);
+            out_pVolumes->vector[0].m128_i32[0] = _mm_sqrt_ps(v25).m128_u32[0];
+            out_pVolumes->vector[0].m128_f32[1] = fsqrt(in_fX);
             break;
         }
       }
       else
       {
-        if ( in_uOutputConfig & 4 && in_uOutputConfig & 0xFFFFFFF3 )
+        if ( (in_uOutputConfig & 4) != 0 && (in_uOutputConfig & 0xFFFFFFF3) != 0 )
         {
           v20 = (__m128)(unsigned int)FLOAT_1_0;
           v21 = out_pVolumes;
           v20.m128_f32[0] = (float)(1.0 - in_fCenterPct) * 0.5;
-          v20.m128_i32[0] = (unsigned __int128)_mm_sqrt_ps(v20);
-          LODWORD(out_pVolumes->volumes.fFrontLeft) = v20.m128_i32[0];
-          LODWORD(out_pVolumes->volumes.fFrontRight) = v20.m128_i32[0];
-          out_pVolumes->volumes.fCenter = fsqrt(in_fCenterPct);
+          v20.m128_i32[0] = _mm_sqrt_ps(v20).m128_u32[0];
+          out_pVolumes->vector[0].m128_i32[0] = v20.m128_i32[0];
+          out_pVolumes->vector[0].m128_i32[1] = v20.m128_i32[0];
+          out_pVolumes->vector[0].m128_f32[2] = fsqrt(in_fCenterPct);
         }
         else
         {
           v21 = out_pVolumes;
-          out_pVolumes->volumes.fFrontLeft = 0.70710677;
-          *(_QWORD *)&out_pVolumes->aVolumes[1] = 1060439283i64;
+          out_pVolumes->vector[0].m128_i32[0] = 1060439283;
+          *(unsigned __int64 *)((char *)out_pVolumes->vector[0].m128_u64 + 4) = 1060439283i64;
         }
-        v21->volumes.fLfe = 0.0;
-        *(_QWORD *)&v21->aVolumes[3] = 0i64;
-        *(_QWORD *)&v21->aVolumes[5] = 0i64;
+        v21->vector[1].m128_i32[3] = 0;
+        *(unsigned __int64 *)((char *)&v21->vector[0].m128_u64[1] + 4) = 0i64;
+        *(unsigned __int64 *)((char *)v21->vector[1].m128_u64 + 4) = 0i64;
       }
     }
     else
@@ -1138,50 +1137,50 @@ void __fastcall CAkSpeakerPan::GetSpeakerVolumes2DPan(float in_fX, float in_fY, 
       out_pVolumes->vector[0] = 0ui64;
       *(_OWORD *)&out_pVolumes->aVolumes[4] = 0ui64;
       out_pVolumes[1].vector[0].m128_u64[0] = 0i64;
-      *(_QWORD *)&out_pVolumes[1].aVolumes[2] = 0i64;
-      *(_QWORD *)&out_pVolumes[1].aVolumes[4] = 0i64;
-      *(_QWORD *)&out_pVolumes[1].aVolumes[6] = 0i64;
-      out_pVolumes->volumes.fFrontLeft = 1.0;
-      out_pVolumes[1].volumes.fFrontRight = 1.0;
+      out_pVolumes[1].vector[0].m128_u64[1] = 0i64;
+      out_pVolumes[1].vector[1].m128_u64[0] = 0i64;
+      out_pVolumes[1].vector[1].m128_u64[1] = 0i64;
+      out_pVolumes->vector[0].m128_i32[0] = 1065353216;
+      out_pVolumes[1].vector[0].m128_i32[1] = 1065353216;
       if ( in_bIsPannerEnabled )
       {
-        if ( (v8 - 1587) & 0xFFFFFFFB )
+        if ( ((v8 - 1587) & 0xFFFFFFFB) != 0 )
         {
           *(_QWORD *)&v67.fSideRight = 0i64;
-          if ( (v8 - 51) & 0xFFFFFFFB )
+          if ( ((v8 - 51) & 0xFFFFFFFB) != 0 )
           {
             v26 = (__m128)(unsigned int)FLOAT_1_0;
             *(_QWORD *)&v67.fCenter = 0i64;
-            v26.m128_f32[0] = 1.0 - v9;
+            v26.m128_f32[0] = 1.0 - in_fX;
             *(_QWORD *)&v67.fRearRight = 0i64;
-            v67.fFrontRight = fsqrt(v9);
-            LODWORD(v67.fFrontLeft) = (unsigned __int128)_mm_sqrt_ps(v26);
+            v67.fFrontRight = fsqrt(in_fX);
+            LODWORD(v67.fFrontLeft) = _mm_sqrt_ps(v26).m128_u32[0];
           }
           else
           {
             v27 = (__m128)(unsigned int)FLOAT_1_0;
-            out_pVolumes->volumes.fRearLeft = 1.0;
-            out_pVolumes[1].volumes.fRearRight = 1.0;
+            out_pVolumes->vector[0].m128_i32[3] = 1065353216;
+            out_pVolumes[1].vector[1].m128_i32[0] = 1065353216;
             v67.fCenter = 0.0;
             v67.fSideLeft = 0.0;
             v28 = (__m128)(unsigned int)FLOAT_1_0;
             v28.m128_f32[0] = 1.0 - in_fX;
             v29 = v28;
-            v28.m128_f32[0] = (float)(1.0 - v9) * (float)(1.0 - in_fY);
-            v27.m128_f32[0] = (float)(1.0 - in_fY) * v9;
+            v28.m128_f32[0] = (float)(1.0 - in_fX) * (float)(1.0 - in_fY);
+            v27.m128_f32[0] = (float)(1.0 - in_fY) * in_fX;
             v29.m128_f32[0] = v29.m128_f32[0] * in_fY;
-            LODWORD(v67.fFrontLeft) = (unsigned __int128)_mm_sqrt_ps(v29);
-            v67.fFrontRight = fsqrt(v9 * in_fY);
-            LODWORD(v67.fRearLeft) = (unsigned __int128)_mm_sqrt_ps(v28);
-            LODWORD(v67.fRearRight) = (unsigned __int128)_mm_sqrt_ps(v27);
+            LODWORD(v67.fFrontLeft) = _mm_sqrt_ps(v29).m128_u32[0];
+            v67.fFrontRight = fsqrt(in_fX * in_fY);
+            LODWORD(v67.fRearLeft) = _mm_sqrt_ps(v28).m128_u32[0];
+            LODWORD(v67.fRearRight) = _mm_sqrt_ps(v27).m128_u32[0];
           }
         }
         else
         {
-          out_pVolumes->volumes.fRearLeft = 1.0;
-          out_pVolumes->volumes.fSideLeft = 1.0;
-          out_pVolumes[1].volumes.fRearRight = 1.0;
-          out_pVolumes[1].volumes.fSideRight = 1.0;
+          out_pVolumes->vector[0].m128_i32[3] = 1065353216;
+          out_pVolumes->vector[1].m128_i32[1] = 1065353216;
+          out_pVolumes[1].vector[1].m128_i32[0] = 1065353216;
+          out_pVolumes[1].vector[1].m128_i32[2] = 1065353216;
           _GetSpeakerVolumes2DPan3(in_fX, in_fY, &v67);
         }
         v30 = *(__m128 *)&v67.fFrontLeft;
@@ -1202,45 +1201,43 @@ void __fastcall CAkSpeakerPan::GetDefaultSpeakerAngles(unsigned int in_channelMa
   *out_angles = 30.0;
   out_angles[1] = 110.0;
   out_angles[2] = 142.5;
-  if ( in_channelMask & 0x600 )
+  if ( (in_channelMask & 0x600) != 0 )
     out_angles[1] = 100.0;
-  if ( !(in_channelMask & 0xFFFFFFF8) )
+  if ( (in_channelMask & 0xFFFFFFF8) == 0 )
     *out_angles = 45.0;
 }
 
 // File Line: 1282
 // RVA: 0xA4F1F0
-signed __int64 __fastcall CAkSpeakerPan::SetSpeakerAngles(const float *in_pfSpeakerAngles, unsigned int in_uNumAngles, unsigned int *out_uSpeakerAngles, unsigned int *out_uMinAngleBetweenSpeakers)
+__int64 __fastcall CAkSpeakerPan::SetSpeakerAngles(
+        const float *in_pfSpeakerAngles,
+        unsigned int in_uNumAngles,
+        char *out_uSpeakerAngles,
+        unsigned int *out_uMinAngleBetweenSpeakers)
 {
-  unsigned int v4; // er11
-  unsigned int *v5; // r14
-  unsigned int *v6; // rdi
-  unsigned int v7; // ebx
-  unsigned int *v8; // r10
+  unsigned int v4; // r11d
+  char *v8; // r10
   signed __int64 v9; // rcx
   float v10; // xmm0_4
   unsigned int v11; // edx
-  unsigned int v12; // er9
+  unsigned int v12; // r9d
   unsigned int *v13; // r10
   unsigned int v14; // eax
-  unsigned int v15; // er8
+  unsigned int v15; // r8d
 
   v4 = 0;
-  v5 = out_uMinAngleBetweenSpeakers;
-  v6 = out_uSpeakerAngles;
-  v7 = in_uNumAngles;
   if ( in_uNumAngles )
   {
     v8 = out_uSpeakerAngles;
-    v9 = (char *)in_pfSpeakerAngles - (char *)out_uSpeakerAngles;
+    v9 = (char *)in_pfSpeakerAngles - out_uSpeakerAngles;
     while ( 1 )
     {
-      v10 = (float)((float)(*(float *)((char *)v8 + v9) * 512.0) * 0.0027777778) + 0.5;
-      *v8 = (signed int)v10;
-      if ( (unsigned int)(signed int)v10 >= 0x100 )
+      v10 = (float)((float)(*(float *)&v8[v9] * 512.0) * 0.0027777778) + 0.5;
+      *(_DWORD *)v8 = (int)v10;
+      if ( (unsigned int)(int)v10 >= 0x100 )
         break;
       ++v4;
-      ++v8;
+      v8 += 4;
       if ( v4 >= in_uNumAngles )
         goto LABEL_5;
     }
@@ -1248,20 +1245,20 @@ signed __int64 __fastcall CAkSpeakerPan::SetSpeakerAngles(const float *in_pfSpea
   else
   {
 LABEL_5:
-    v11 = *out_uSpeakerAngles;
-    if ( *out_uSpeakerAngles < 0x80 )
+    v11 = *(_DWORD *)out_uSpeakerAngles;
+    if ( *(_DWORD *)out_uSpeakerAngles < 0x80u )
     {
       v12 = 1;
-      if ( v7 <= 1 )
+      if ( in_uNumAngles <= 1 )
       {
 LABEL_16:
-        *v5 = v11;
+        *out_uMinAngleBetweenSpeakers = v11;
         return 1i64;
       }
-      v13 = out_uSpeakerAngles + 1;
+      v13 = (unsigned int *)(out_uSpeakerAngles + 4);
       while ( 1 )
       {
-        v14 = v6[v12 - 1];
+        v14 = *(_DWORD *)&out_uSpeakerAngles[4 * v12 - 4];
         if ( *v13 < v14 )
           break;
         v15 = *v13 - v14;
@@ -1271,10 +1268,10 @@ LABEL_16:
           v11 = *v13 - v14;
         ++v12;
         ++v13;
-        if ( v12 >= v7 )
+        if ( v12 >= in_uNumAngles )
         {
-          if ( v12 > 1 && 2 * (256 - v6[v12 - 1]) < v11 )
-            v11 = 2 * (256 - v6[v12 - 1]);
+          if ( v12 > 1 && 2 * (256 - *(_DWORD *)&out_uSpeakerAngles[4 * v12 - 4]) < v11 )
+            v11 = 2 * (256 - *(_DWORD *)&out_uSpeakerAngles[4 * v12 - 4]);
           goto LABEL_16;
         }
       }

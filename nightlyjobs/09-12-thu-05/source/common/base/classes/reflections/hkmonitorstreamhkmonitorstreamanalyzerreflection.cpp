@@ -28,16 +28,19 @@ hkClass *__fastcall hkMonitorStreamStringMap::StringMap::staticClass()
 
 // File Line: 69
 // RVA: 0xC55BA0
-void __fastcall finishLoadedObjecthkMonitorStreamStringMapStringMap(void *p, int finishing)
+void __fastcall finishLoadedObjecthkMonitorStreamStringMapStringMap(
+        hkMonitorStreamStringMap::StringMap *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkMonitorStreamStringMap::StringMap::StringMap);
+  if ( p )
+    hkMonitorStreamStringMap::StringMap::StringMap(p, finishing);
 }
 
 // File Line: 75
 // RVA: 0xC55BC0
-void __fastcall cleanupLoadedObjecthkMonitorStreamStringMapStringMap(void *p)
+void __fastcall cleanupLoadedObjecthkMonitorStreamStringMapStringMap(hkStringPtr *p)
 {
-  hkStringPtr::~hkStringPtr((hkStringPtr *)p + 1);
+  hkStringPtr::~hkStringPtr(p + 1);
 }
 
 // File Line: 112
@@ -70,16 +73,20 @@ hkClass *__fastcall hkMonitorStreamStringMap::staticClass()
 
 // File Line: 122
 // RVA: 0xC55BD0
-void __fastcall finishLoadedObjecthkMonitorStreamStringMap(void *p, int finishing)
+void __fastcall finishLoadedObjecthkMonitorStreamStringMap(
+        hkMonitorStreamStringMap *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkMonitorStreamStringMap::hkMonitorStreamStringMap);
+  if ( p )
+    hkMonitorStreamStringMap::hkMonitorStreamStringMap(p, finishing);
 }
 
 // File Line: 128
 // RVA: 0xC55BF0
-void __fastcall cleanupLoadedObjecthkMonitorStreamStringMap(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkMonitorStreamStringMap(hkMonitorStreamStringMap *p)
 {
-  hkMonitorStreamStringMap::~hkMonitorStreamStringMap((hkMonitorStreamStringMap *)p);
+  hkMonitorStreamStringMap::~hkMonitorStreamStringMap(p);
 }
 
 // File Line: 165
@@ -123,16 +130,18 @@ hkClass *__fastcall hkMonitorStreamFrameInfo::staticClass()
 
 // File Line: 196
 // RVA: 0xC55C00
-void __fastcall finishLoadedObjecthkMonitorStreamFrameInfo(void *p, int finishing)
+void __fastcall finishLoadedObjecthkMonitorStreamFrameInfo(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkStringPtr::hkStringPtr);
+  if ( p )
+    hkStringPtr::hkStringPtr(p, finishing);
 }
 
 // File Line: 202
 // RVA: 0xC55C20
-void __fastcall cleanupLoadedObjecthkMonitorStreamFrameInfo(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkMonitorStreamFrameInfo(hkStringPtr *p)
 {
-  hkStringPtr::~hkStringPtr((hkStringPtr *)p);
+  hkStringPtr::~hkStringPtr(p);
 }
 
 // File Line: 238
@@ -165,16 +174,20 @@ hkClass *__fastcall hkMonitorStreamColorTable::ColorPair::staticClass()
 
 // File Line: 248
 // RVA: 0xC55C30
-void __fastcall finishLoadedObjecthkMonitorStreamColorTableColorPair(void *p, int finishing)
+void __fastcall finishLoadedObjecthkMonitorStreamColorTableColorPair(
+        hkStringPtr *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkStringPtr::hkStringPtr);
+  if ( p )
+    hkStringPtr::hkStringPtr(p, finishing);
 }
 
 // File Line: 254
 // RVA: 0xC55C50
-void __fastcall cleanupLoadedObjecthkMonitorStreamColorTableColorPair(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkMonitorStreamColorTableColorPair(hkStringPtr *p)
 {
-  hkStringPtr::~hkStringPtr((hkStringPtr *)p);
+  hkStringPtr::~hkStringPtr(p);
 }
 
 // File Line: 293
@@ -207,17 +220,17 @@ hkClass *__fastcall hkMonitorStreamColorTable::staticClass()
 
 // File Line: 303
 // RVA: 0xC55C60
-void __fastcall finishLoadedObjecthkMonitorStreamColorTable(void *p, int finishing)
+void __fastcall finishLoadedObjecthkMonitorStreamColorTable(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkMonitorStreamColorTable::`vftable;
+    *p = &hkMonitorStreamColorTable::`vftable;
 }
 
 // File Line: 309
 // RVA: 0xC55C80
-void __fastcall cleanupLoadedObjecthkMonitorStreamColorTable(void *p)
+void __fastcall cleanupLoadedObjecthkMonitorStreamColorTable(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 313
@@ -238,8 +251,8 @@ void **dynamic_initializer_for__hkMonitorStreamColorTableTypeInfo__()
   hkMonitorStreamColorTableTypeInfo.m_typeName = "hkMonitorStreamColorTable";
   hkMonitorStreamColorTableTypeInfo.m_vtable = result;
   hkMonitorStreamColorTableTypeInfo.m_scopedName = "!hkMonitorStreamColorTable";
-  hkMonitorStreamColorTableTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkMonitorStreamColorTable;
-  hkMonitorStreamColorTableTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkMonitorStreamColorTable;
+  hkMonitorStreamColorTableTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkMonitorStreamColorTable;
+  hkMonitorStreamColorTableTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkMonitorStreamColorTable;
   return result;
 }
 

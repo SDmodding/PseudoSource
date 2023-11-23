@@ -2,7 +2,7 @@
 // RVA: 0x532A60
 UFG::ComponentTypeTable *__fastcall UFG::GetTypeTableProp()
 {
-  if ( !(_S8_15 & 1) )
+  if ( (_S8_15 & 1) == 0 )
   {
     _S8_15 |= 1u;
     entries_Prop[0].uid = UFG::UELComponent::_UELComponentTypeUID;
@@ -27,7 +27,7 @@ UFG::ComponentTypeTable *__fastcall UFG::GetTypeTableProp()
 // RVA: 0x532A00
 UFG::ComponentTypeTable *__fastcall UFG::GetTypeTableInterestPoint()
 {
-  if ( !(_S9_15 & 1) )
+  if ( (_S9_15 & 1) == 0 )
   {
     _S9_15 |= 1u;
     entries_InterestPoint[0].uid = UFG::SceneObjectProperties::_SceneObjectPropertiesTypeUID;
@@ -42,7 +42,7 @@ UFG::ComponentTypeTable *__fastcall UFG::GetTypeTableInterestPoint()
 // RVA: 0x532780
 UFG::ComponentTypeTable *__fastcall UFG::GetTypeTableCharacter()
 {
-  if ( !(_S10_10 & 1) )
+  if ( (_S10_10 & 1) == 0 )
   {
     _S10_10 |= 1u;
     entries_Character[0].uid = UFG::UELComponent::_UELComponentTypeUID;
@@ -102,7 +102,7 @@ UFG::ComponentTypeTable *__fastcall UFG::GetTypeTableCharacter()
 // RVA: 0x532B40
 UFG::ComponentTypeTable *__fastcall UFG::GetTypeTableVehicle()
 {
-  if ( !(_S11_7 & 1) )
+  if ( (_S11_7 & 1) == 0 )
   {
     _S11_7 |= 1u;
     entries_Vehicle[0].uid = UFG::UELComponent::_UELComponentTypeUID;
@@ -147,201 +147,208 @@ UFG::ComponentTypeTable *__fastcall UFG::GetTypeTableVehicle()
 
 // File Line: 208
 // RVA: 0x513DB0
-UFG::CharacterAnimationComponent *__fastcall UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>(UFG::SimObjectProp *this)
+UFG::CharacterAnimationComponent *__fastcall UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>(
+        UFG::SimObjectProp *this)
 {
   UFG::CharacterAnimationComponent *result; // rax
-  unsigned int v2; // edx
+  unsigned int m_TypeUID; // edx
 
   result = (UFG::CharacterAnimationComponent *)this->m_Components.p[8].m_pComponent;
-  if ( !result
-    || (v2 = result->m_TypeUID, (v2 ^ UFG::CharacterAnimationComponent::_TypeUID) & 0xFE000000)
-    || UFG::CharacterAnimationComponent::_TypeUID & ~v2 & 0x1FFFFFF )
+  if ( !result )
+    return 0i64;
+  m_TypeUID = result->m_TypeUID;
+  if ( ((m_TypeUID ^ UFG::CharacterAnimationComponent::_TypeUID) & 0xFE000000) != 0
+    || (UFG::CharacterAnimationComponent::_TypeUID & ~m_TypeUID & 0x1FFFFFF) != 0 )
   {
-    result = 0i64;
+    return 0i64;
   }
   return result;
 }
 
 // File Line: 210
 // RVA: 0x513B30
-UFG::ActorAudioComponent *__fastcall UFG::SimObjectCharacter::GetComponent<UFG::ActorAudioComponent>(UFG::SimObjectCharacter *this)
+UFG::ActorAudioComponent *__fastcall UFG::SimObjectCharacter::GetComponent<UFG::ActorAudioComponent>(
+        UFG::SimObjectCharacter *this)
 {
   UFG::ActorAudioComponent *result; // rax
-  unsigned int v2; // edx
+  unsigned int m_TypeUID; // edx
 
   result = (UFG::ActorAudioComponent *)this->m_Components.p[40].m_pComponent;
-  if ( !result
-    || (v2 = result->m_TypeUID, (v2 ^ UFG::ActorAudioComponent::_TypeUID) & 0xFE000000)
-    || UFG::ActorAudioComponent::_TypeUID & ~v2 & 0x1FFFFFF )
+  if ( !result )
+    return 0i64;
+  m_TypeUID = result->m_TypeUID;
+  if ( ((m_TypeUID ^ UFG::ActorAudioComponent::_TypeUID) & 0xFE000000) != 0
+    || (UFG::ActorAudioComponent::_TypeUID & ~m_TypeUID & 0x1FFFFFF) != 0 )
   {
-    result = 0i64;
+    return 0i64;
   }
   return result;
 }
 
 // File Line: 211
 // RVA: 0x513CF0
-UFG::CarHumanDriverComponent *__fastcall UFG::SimObjectCVBase::GetComponent<UFG::CarHumanDriverComponent>(UFG::SimObjectCVBase *this)
+UFG::CarHumanDriverComponent *__fastcall UFG::SimObjectCVBase::GetComponent<UFG::CarHumanDriverComponent>(
+        UFG::SimObjectCVBase *this)
 {
   UFG::CarHumanDriverComponent *result; // rax
-  unsigned int v2; // edx
+  unsigned int m_TypeUID; // edx
 
   result = (UFG::CarHumanDriverComponent *)this->m_Components.p[23].m_pComponent;
-  if ( !result
-    || (v2 = result->m_TypeUID, (v2 ^ UFG::CarHumanDriverComponent::_TypeUID) & 0xFE000000)
-    || UFG::CarHumanDriverComponent::_TypeUID & ~v2 & 0x1FFFFFF )
+  if ( !result )
+    return 0i64;
+  m_TypeUID = result->m_TypeUID;
+  if ( ((m_TypeUID ^ UFG::CarHumanDriverComponent::_TypeUID) & 0xFE000000) != 0
+    || (UFG::CarHumanDriverComponent::_TypeUID & ~m_TypeUID & 0x1FFFFFF) != 0 )
   {
-    result = 0i64;
+    return 0i64;
   }
   return result;
 }
 
 // File Line: 212
 // RVA: 0x5140F0
-UFG::VehicleSubjectComponent *__fastcall UFG::SimObjectVehicle::GetComponent<UFG::VehicleSubjectComponent>(UFG::SimObjectVehicle *this)
+UFG::VehicleSubjectComponent *__fastcall UFG::SimObjectVehicle::GetComponent<UFG::VehicleSubjectComponent>(
+        UFG::SimObjectVehicle *this)
 {
   UFG::VehicleSubjectComponent *result; // rax
-  unsigned int v2; // edx
+  unsigned int m_TypeUID; // edx
 
   result = (UFG::VehicleSubjectComponent *)this->m_Components.p[31].m_pComponent;
-  if ( !result
-    || (v2 = result->m_TypeUID, (v2 ^ UFG::VehicleSubjectComponent::_TypeUID) & 0xFE000000)
-    || UFG::VehicleSubjectComponent::_TypeUID & ~v2 & 0x1FFFFFF )
+  if ( !result )
+    return 0i64;
+  m_TypeUID = result->m_TypeUID;
+  if ( ((m_TypeUID ^ UFG::VehicleSubjectComponent::_TypeUID) & 0xFE000000) != 0
+    || (UFG::VehicleSubjectComponent::_TypeUID & ~m_TypeUID & 0x1FFFFFF) != 0 )
   {
-    result = 0i64;
+    return 0i64;
   }
   return result;
 }
 
 // File Line: 222
 // RVA: 0x518980
-void __fastcall UFG::SimObjectGame::SimObjectGame(UFG::SimObjectGame *this, UFG::ComponentTypeTable *type_table, UFG::qSymbol *name)
+void __fastcall UFG::SimObjectGame::SimObjectGame(
+        UFG::SimObjectGame *this,
+        UFG::ComponentTypeTable *type_table,
+        UFG::qSymbol *name)
 {
-  UFG::ComponentTypeTable *v3; // rbx
-  UFG::SimObjectGame *v4; // rdi
-  int v5; // eax
-  unsigned int v6; // ecx
+  int mComponentTableEntryCount_low; // eax
+  unsigned int size; // ecx
   int v7; // eax
   unsigned int v8; // ebx
-  unsigned int v9; // edx
+  unsigned int capacity; // edx
   unsigned int v10; // edx
   unsigned int v11; // eax
-  unsigned int v12; // ecx
-  signed __int64 v13; // rax
+  unsigned int i; // ecx
+  UFG::SimComponentHolder *v13; // rax
 
-  v3 = type_table;
-  v4 = this;
-  UFG::SimObject::SimObject((UFG::SimObject *)&this->vfptr, name);
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimObject>Vtbl *)&UFG::SimObjectGame::`vftable;
-  v4->mComponentTableEntryCount = v3->mEntryCount;
-  v4->mComponentTableEntries = v3->mEntries;
-  v5 = LOBYTE(v4->mComponentTableEntryCount);
-  v4->m_ReservedComponentSlots = v5;
-  v6 = v4->m_Components.size;
-  v7 = v5 - v6;
+  UFG::SimObject::SimObject(this, name);
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimObject>Vtbl *)&UFG::SimObjectGame::`vftable;
+  this->mComponentTableEntryCount = type_table->mEntryCount;
+  this->mComponentTableEntries = type_table->mEntries;
+  mComponentTableEntryCount_low = LOBYTE(this->mComponentTableEntryCount);
+  this->m_ReservedComponentSlots = mComponentTableEntryCount_low;
+  size = this->m_Components.size;
+  v7 = mComponentTableEntryCount_low - size;
   if ( v7 <= 0 )
   {
     v11 = -v7;
     if ( v11 )
     {
-      if ( v11 < v6 )
-        v4->m_Components.size = v6 - v11;
+      if ( v11 < size )
+        this->m_Components.size = size - v11;
       else
-        v4->m_Components.size = 0;
+        this->m_Components.size = 0;
     }
   }
   else
   {
-    v8 = v6 + v7;
-    v9 = v4->m_Components.capacity;
-    if ( v6 + v7 > v9 )
+    v8 = size + v7;
+    capacity = this->m_Components.capacity;
+    if ( size + v7 > capacity )
     {
-      if ( v9 )
-        v10 = 2 * v9;
+      if ( capacity )
+        v10 = 2 * capacity;
       else
         v10 = 1;
       for ( ; v10 < v8; v10 *= 2 )
         ;
       if ( v10 - v8 > 0x10000 )
         v10 = v8 + 0x10000;
-      UFG::qArray<UFG::SimComponentHolder,0>::Reallocate(&v4->m_Components, v10, "SimObjectGame");
+      UFG::qArray<UFG::SimComponentHolder,0>::Reallocate(&this->m_Components, v10, "SimObjectGame");
     }
-    v4->m_Components.size = v8;
+    this->m_Components.size = v8;
   }
-  v12 = 0;
-  if ( v4->m_ReservedComponentSlots > 0u )
+  for ( i = 0; i < (unsigned __int8)this->m_ReservedComponentSlots; ++i )
   {
-    do
-    {
-      v13 = (signed __int64)&v4->m_Components.p[v12];
-      *(_QWORD *)v13 = 0i64;
-      *(_DWORD *)(v13 + 8) = -1;
-      ++v12;
-    }
-    while ( v12 < (unsigned __int8)v4->m_ReservedComponentSlots );
+    v13 = &this->m_Components.p[i];
+    v13->m_pComponent = 0i64;
+    v13->m_TypeUID = -1;
   }
 }
 
 // File Line: 237
 // RVA: 0x522350
-void __fastcall UFG::SimObjectGame::Attach(UFG::SimObjectGame *this, UFG::SimComponent *component, unsigned int index)
+void __fastcall UFG::SimObjectGame::Attach(
+        UFG::SimObjectGame *this,
+        UFG::TransformNodeComponent *component,
+        unsigned int index)
 {
-  UFG::SimObjectGame *v3; // rbx
-  unsigned int v4; // er10
-  unsigned int v5; // er9
-  unsigned int v6; // edi
-  UFG::ComponentTypeEntry *v7; // rcx
+  unsigned int mComponentTableEntryCount; // r10d
+  unsigned int v5; // r9d
+  unsigned int m_TypeUID; // edi
+  UFG::ComponentTypeEntry *mComponentTableEntries; // rcx
 
-  v3 = this;
   if ( index == -1 )
   {
-    v4 = this->mComponentTableEntryCount;
+    mComponentTableEntryCount = this->mComponentTableEntryCount;
     v5 = 0;
-    v6 = component->m_TypeUID;
-    if ( v4 )
+    m_TypeUID = component->m_TypeUID;
+    if ( mComponentTableEntryCount )
     {
-      v7 = this->mComponentTableEntries;
-      while ( (v6 & 0xFE000000) != (v7->uid & 0xFE000000) || v7->uid & ~v6 & 0x1FFFFFF )
+      mComponentTableEntries = this->mComponentTableEntries;
+      while ( (m_TypeUID & 0xFE000000) != (mComponentTableEntries->uid & 0xFE000000)
+           || (mComponentTableEntries->uid & ~m_TypeUID & 0x1FFFFFF) != 0 )
       {
         ++v5;
-        ++v7;
-        if ( v5 >= v4 )
+        ++mComponentTableEntries;
+        if ( v5 >= mComponentTableEntryCount )
           goto LABEL_9;
       }
       index = v5;
     }
   }
 LABEL_9:
-  UFG::SimObject::Attach((UFG::SimObject *)&v3->vfptr, component, index);
+  UFG::SimObject::Attach(this, component, index);
 }
 
 // File Line: 258
 // RVA: 0x5255C0
-void __fastcall UFG::SimObjectGame::Detach(UFG::SimObjectGame *this, UFG::SimComponent *component)
+// attributes: thunk
+void __fastcall UFG::SimObjectGame::Detach(UFG::SimObjectGame *this, UFG::TransformNodeComponent *component)
 {
-  UFG::SimObject::Detach((UFG::SimObject *)&this->vfptr, component);
+  UFG::SimObject::Detach(this, component);
 }
 
 // File Line: 266
 // RVA: 0x52BBC0
 UFG::SimComponent *__fastcall UFG::SimObjectGame::GetComponentOfTypeHK(UFG::SimObjectGame *this, unsigned int type_uid)
 {
-  unsigned int v2; // er9
-  unsigned int v3; // er10
-  UFG::SimComponentHolder *v4; // r8
+  unsigned int mComponentTableEntryCount; // r9d
+  unsigned int size; // r10d
+  UFG::SimComponentHolder *i; // r8
 
-  v2 = this->mComponentTableEntryCount;
-  v3 = this->m_Components.size;
-  if ( v2 >= v3 )
+  mComponentTableEntryCount = this->mComponentTableEntryCount;
+  size = this->m_Components.size;
+  if ( mComponentTableEntryCount >= size )
     return 0i64;
-  v4 = &this->m_Components.p[v2];
-  while ( (v4->m_TypeUID & 0xFE000000) != (type_uid & 0xFE000000) || type_uid & ~v4->m_TypeUID & 0x1FFFFFF )
+  for ( i = &this->m_Components.p[mComponentTableEntryCount];
+        (i->m_TypeUID & 0xFE000000) != (type_uid & 0xFE000000) || (type_uid & ~i->m_TypeUID & 0x1FFFFFF) != 0;
+        ++i )
   {
-    ++v2;
-    ++v4;
-    if ( v2 >= v3 )
+    if ( ++mComponentTableEntryCount >= size )
       return 0i64;
   }
-  return v4->m_pComponent;
+  return i->m_pComponent;
 }
 

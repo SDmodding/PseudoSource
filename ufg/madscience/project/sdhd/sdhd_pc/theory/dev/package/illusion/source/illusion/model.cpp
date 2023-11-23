@@ -2,20 +2,16 @@
 // RVA: 0x93450
 void __fastcall Illusion::Buffer::OnLoad(Illusion::Buffer *this)
 {
-  Illusion::Buffer *v1; // rbx
-  __int64 v2; // rax
-  AMD_HD3D *v3; // rcx
+  __int64 mOffset; // rax
 
-  v1 = this;
   if ( this )
-    UFG::qResourceData::qResourceData((UFG::qResourceData *)&this->mNode);
-  Illusion::IBufferPlat::OnLoad((Illusion::IBufferPlat *)v1);
-  v2 = v1->mBufferUser.mOffset;
-  if ( v2 )
-    v3 = (AMD_HD3D *)((char *)&v1->mBufferUser + v2);
+    UFG::qResourceData::qResourceData(&this->UFG::qResourceData);
+  Illusion::IBufferPlat::OnLoad(this);
+  mOffset = this->mBufferUser.mOffset;
+  if ( mOffset )
+    _((AMD_HD3D *)((char *)&this->mBufferUser + mOffset));
   else
-    v3 = 0i64;
-  _(v3);
+    _(0i64);
 }
 
 // File Line: 75
@@ -23,7 +19,7 @@ void __fastcall Illusion::Buffer::OnLoad(Illusion::Buffer *this)
 __int64 Illusion::_dynamic_initializer_for__gBufferInventory__()
 {
   UFG::qResourceInventory::qResourceInventory(
-    (UFG::qResourceInventory *)&Illusion::gBufferInventory.vfptr,
+    &Illusion::gBufferInventory,
     "BufferInventory",
     0x92CDEC8F,
     0x7A971479u,
@@ -31,55 +27,47 @@ __int64 Illusion::_dynamic_initializer_for__gBufferInventory__()
     0x40u);
   Illusion::gBufferInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::BufferInventory::`vftable;
   UFG::qMemSet(Illusion::gBufferInventory.mNumBytes, 0, 0xCu);
-  return atexit(Illusion::_dynamic_atexit_destructor_for__gBufferInventory__);
+  return atexit((int (__fastcall *)())Illusion::_dynamic_atexit_destructor_for__gBufferInventory__);
 }
 
 // File Line: 85
 // RVA: 0x8DC70
 void __fastcall Illusion::BufferInventory::Add(Illusion::BufferInventory *this, UFG::qResourceData *resource_data)
 {
-  UFG::qResourceData *v2; // rbx
-  Illusion::BufferInventory *v3; // rdi
   __int64 v4; // rax
   AMD_HD3D *v5; // rcx
-  signed __int64 v6; // rcx
+  char *v6; // rcx
 
-  v2 = resource_data;
-  v3 = this;
   if ( resource_data )
     UFG::qResourceData::qResourceData(resource_data);
-  Illusion::IBufferPlat::OnLoad((Illusion::IBufferPlat *)v2);
-  v4 = *(_QWORD *)&v2[1].mNode.mUID;
+  Illusion::IBufferPlat::OnLoad((Illusion::IBufferPlat *)resource_data);
+  v4 = *(_QWORD *)&resource_data[1].mNode.mUID;
   if ( v4 )
-    v5 = (AMD_HD3D *)((char *)&v2[1].mNode.mUID + v4);
+    v5 = (AMD_HD3D *)((char *)&resource_data[1].mNode.mChild[2] + v4);
   else
     v5 = 0i64;
   _(v5);
-  v6 = (signed __int64)v3 + 4 * LOBYTE(v2[1].mNode.mParent);
-  *(_DWORD *)(v6 + 288) += HIDWORD(v2[1].mNode.mParent);
-  if ( LOBYTE(v2[1].mNode.mParent) == 1 && LODWORD(v2[1].mNode.mChild[1]) == 4 )
-    UFG::qPrintf("[Buffer] 32-Bit Index Buffer - %s\n", v2->mDebugName);
-  UFG::qResourceInventory::Add((UFG::qResourceInventory *)&v3->vfptr, v2);
+  v6 = (char *)this + 4 * LOBYTE(resource_data[1].mNode.mParent);
+  *((_DWORD *)v6 + 72) += HIDWORD(resource_data[1].mNode.mParent);
+  if ( LOBYTE(resource_data[1].mNode.mParent) == 1 && LODWORD(resource_data[1].mNode.mChild[1]) == 4 )
+    UFG::qPrintf("[Buffer] 32-Bit Index Buffer - %s\n", resource_data->mDebugName);
+  UFG::qResourceInventory::Add(this, resource_data);
 }
 
 // File Line: 105
 // RVA: 0x94810
 void __fastcall Illusion::BufferInventory::Remove(Illusion::BufferInventory *this, UFG::qResourceData *resource_data)
 {
-  UFG::qResourceData *v2; // rdi
-  Illusion::BufferInventory *v3; // rbx
-  signed __int64 v4; // rcx
+  char *v4; // rcx
   __int64 v5; // rax
 
-  v2 = resource_data;
-  v3 = this;
-  UFG::qResourceInventory::Remove((UFG::qResourceInventory *)&this->vfptr, resource_data);
-  v4 = (signed __int64)v3 + 4 * LOBYTE(v2[1].mNode.mParent);
-  *(_DWORD *)(v4 + 288) -= HIDWORD(v2[1].mNode.mParent);
-  Illusion::IBufferPlat::OnUnload((Illusion::IBufferPlat *)v2);
-  v5 = *(_QWORD *)&v2[1].mNode.mUID;
+  UFG::qResourceInventory::Remove(this, resource_data);
+  v4 = (char *)this + 4 * LOBYTE(resource_data[1].mNode.mParent);
+  *((_DWORD *)v4 + 72) -= HIDWORD(resource_data[1].mNode.mParent);
+  Illusion::IBufferPlat::OnUnload((Illusion::IBufferPlat *)resource_data);
+  v5 = *(_QWORD *)&resource_data[1].mNode.mUID;
   if ( v5 )
-    _((AMD_HD3D *)((char *)&v2[1].mNode.mUID + v5));
+    _((AMD_HD3D *)((char *)&resource_data[1].mNode.mChild[2] + v5));
   else
     _(0i64);
 }
@@ -89,49 +77,48 @@ void __fastcall Illusion::BufferInventory::Remove(Illusion::BufferInventory *thi
 __int64 Illusion::_dynamic_initializer_for__gBonePaletteInventory__()
 {
   UFG::qResourceInventory::qResourceInventory(
-    (UFG::qResourceInventory *)&Illusion::gBonePaletteInventory.vfptr,
+    &Illusion::gBonePaletteInventory,
     "BonePaletteInventory",
     0x50A819E3u,
     0x982456DB,
     0,
     0x10u);
   Illusion::gBonePaletteInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::BonePaletteInventory::`vftable;
-  return atexit(Illusion::_dynamic_atexit_destructor_for__gBonePaletteInventory__);
+  return atexit((int (__fastcall *)())Illusion::_dynamic_atexit_destructor_for__gBonePaletteInventory__);
 }
 
 // File Line: 173
 // RVA: 0x94800
+// attributes: thunk
 void __fastcall Illusion::LocatorsInventory::Remove(Render::FontInventory *this, UFG::qResourceData *resource_data)
 {
-  UFG::qResourceInventory::Remove((UFG::qResourceInventory *)&this->vfptr, resource_data);
+  UFG::qResourceInventory::Remove(this, resource_data);
 }
 
 // File Line: 191
 // RVA: 0x93970
 void __fastcall Illusion::MorphTargets::OnLoad(Illusion::MorphTargets *this)
 {
-  Illusion::MorphTargets *v1; // rbx
-  UFG::qResourceInventory *v2; // rax
+  UFG::qResourceInventory *Inventory; // rax
   UFG::qResourceWarehouse *v3; // rax
 
-  v1 = this;
   if ( this )
   {
-    UFG::qResourceData::qResourceData((UFG::qResourceData *)&this->mNode);
-    UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)&v1->mMorphVertexBufferHandle.mPrev);
+    UFG::qResourceData::qResourceData(this);
+    UFG::qResourceHandle::qResourceHandle(&this->mMorphVertexBufferHandle);
   }
-  v2 = `UFG::qGetResourceInventory<Illusion::Buffer>::`2::result;
+  Inventory = `UFG::qGetResourceInventory<Illusion::Buffer>::`2::result;
   if ( !`UFG::qGetResourceInventory<Illusion::Buffer>::`2::result )
   {
     v3 = UFG::qResourceWarehouse::Instance();
-    v2 = UFG::qResourceWarehouse::GetInventory(v3, 0x92CDEC8F);
-    `UFG::qGetResourceInventory<Illusion::Buffer>::`2::result = v2;
+    Inventory = UFG::qResourceWarehouse::GetInventory(v3, 0x92CDEC8F);
+    `UFG::qGetResourceInventory<Illusion::Buffer>::`2::result = Inventory;
   }
   UFG::qResourceHandle::Init(
-    (UFG::qResourceHandle *)&v1->mMorphVertexBufferHandle.mPrev,
+    &this->mMorphVertexBufferHandle,
     0x92CDEC8F,
-    v1->mMorphVertexBufferHandle.mNameUID,
-    v2);
+    this->mMorphVertexBufferHandle.mNameUID,
+    Inventory);
 }
 
 // File Line: 219
@@ -139,80 +126,71 @@ void __fastcall Illusion::MorphTargets::OnLoad(Illusion::MorphTargets *this)
 __int64 Illusion::_dynamic_initializer_for__gMorphTargetsInventory__()
 {
   UFG::qResourceInventory::qResourceInventory(
-    (UFG::qResourceInventory *)&Illusion::gMorphTargetsInventory.vfptr,
+    &Illusion::gMorphTargetsInventory,
     "MorphTargetsInventory",
     0xC62C2822,
     0x2CD0C47u,
     0,
     0);
   Illusion::gMorphTargetsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::MorphTargetsInventory::`vftable;
-  return atexit(Illusion::_dynamic_atexit_destructor_for__gMorphTargetsInventory__);
+  return atexit((int (__fastcall *)())Illusion::_dynamic_atexit_destructor_for__gMorphTargetsInventory__);
 }
 
 // File Line: 228
 // RVA: 0x8DDA0
-void __fastcall Illusion::MorphTargetsInventory::Add(Illusion::MorphTargetsInventory *this, UFG::qResourceData *resource_data)
+void __fastcall Illusion::MorphTargetsInventory::Add(
+        Illusion::MorphTargetsInventory *this,
+        Illusion::MorphTargets *resource_data)
 {
-  Illusion::MorphTargetsInventory *v2; // rdi
-  UFG::qResourceData *v3; // rbx
-
-  v2 = this;
-  v3 = resource_data;
-  Illusion::MorphTargets::OnLoad((Illusion::MorphTargets *)resource_data);
-  UFG::qResourceInventory::Add((UFG::qResourceInventory *)&v2->vfptr, v3);
+  Illusion::MorphTargets::OnLoad(resource_data);
+  UFG::qResourceInventory::Add(this, resource_data);
 }
 
 // File Line: 239
 // RVA: 0x948E0
-void __fastcall Illusion::MorphTargetsInventory::Remove(Illusion::MorphTargetsInventory *this, UFG::qResourceData *resource_data)
+void __fastcall Illusion::MorphTargetsInventory::Remove(
+        Illusion::MorphTargetsInventory *this,
+        UFG::qResourceData *resource_data)
 {
-  UFG::qResourceData *v2; // rbx
-  UFG::qResourceInventory *v3; // rax
+  UFG::qResourceInventory *Inventory; // rax
   UFG::qResourceWarehouse *v4; // rax
 
-  v2 = resource_data;
-  UFG::qResourceInventory::Remove((UFG::qResourceInventory *)&this->vfptr, resource_data);
-  v3 = `UFG::qGetResourceInventory<Illusion::Buffer>::`2::result;
+  UFG::qResourceInventory::Remove(this, resource_data);
+  Inventory = `UFG::qGetResourceInventory<Illusion::Buffer>::`2::result;
   if ( !`UFG::qGetResourceInventory<Illusion::Buffer>::`2::result )
   {
     v4 = UFG::qResourceWarehouse::Instance();
-    v3 = UFG::qResourceWarehouse::GetInventory(v4, 0x92CDEC8F);
-    `UFG::qGetResourceInventory<Illusion::Buffer>::`2::result = v3;
+    Inventory = UFG::qResourceWarehouse::GetInventory(v4, 0x92CDEC8F);
+    `UFG::qGetResourceInventory<Illusion::Buffer>::`2::result = Inventory;
   }
-  UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v2[1], v3);
+  UFG::qResourceHandle::Close((UFG::qResourceHandle *)&resource_data[1], Inventory);
 }
 
 // File Line: 259
 // RVA: 0x93650
 void __fastcall Illusion::Mesh::OnLoad(Illusion::Mesh *this)
 {
-  Illusion::Mesh *v1; // rdi
-  UFG::qResourceInventory *v2; // rax
+  UFG::qResourceInventory *Inventory; // rax
   UFG::qResourceWarehouse *v3; // rax
   UFG::qResourceInventory *v4; // rax
   UFG::qResourceWarehouse *v5; // rax
   UFG::qResourceInventory *v6; // rax
   UFG::qResourceWarehouse *v7; // rax
-  UFG::qResourceHandle *v8; // rbx
-  signed __int64 v9; // rsi
+  Illusion::BufferHandle *mVertexBufferHandles; // rbx
+  __int64 v9; // rsi
   UFG::qResourceInventory *v10; // rax
   UFG::qResourceWarehouse *v11; // rax
 
-  v1 = this;
   if ( this )
     Illusion::Mesh::Mesh(this);
-  v2 = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
+  Inventory = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
   if ( !`UFG::qGetResourceInventory<Illusion::Material>::`2::result )
   {
     v3 = UFG::qResourceWarehouse::Instance();
-    v2 = UFG::qResourceWarehouse::GetInventory(v3, 0xB4C26312);
-    `UFG::qGetResourceInventory<Illusion::Material>::`2::result = v2;
+    Inventory = UFG::qResourceWarehouse::GetInventory(v3, 0xB4C26312);
+    `UFG::qGetResourceInventory<Illusion::Material>::`2::result = Inventory;
   }
-  UFG::qResourceHandle::Init(
-    (UFG::qResourceHandle *)&v1->mMaterialHandle.mPrev,
-    0xB4C26312,
-    v1->mMaterialHandle.mNameUID,
-    v2);
+  UFG::qResourceHandle::Init(&this->mMaterialHandle, 0xB4C26312, this->mMaterialHandle.mNameUID, Inventory);
   v4 = `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result;
   if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result )
   {
@@ -220,11 +198,7 @@ void __fastcall Illusion::Mesh::OnLoad(Illusion::Mesh *this)
     v4 = UFG::qResourceWarehouse::GetInventory(v5, 0x3E5FDA3Eu);
     `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result = v4;
   }
-  UFG::qResourceHandle::Init(
-    (UFG::qResourceHandle *)&v1->mVertexDeclHandle.mPrev,
-    0x3E5FDA3Eu,
-    v1->mVertexDeclHandle.mNameUID,
-    v4);
+  UFG::qResourceHandle::Init(&this->mVertexDeclHandle, 0x3E5FDA3Eu, this->mVertexDeclHandle.mNameUID, v4);
   v6 = `UFG::qGetResourceInventory<Illusion::Buffer>::`2::result;
   if ( !`UFG::qGetResourceInventory<Illusion::Buffer>::`2::result )
   {
@@ -232,12 +206,8 @@ void __fastcall Illusion::Mesh::OnLoad(Illusion::Mesh *this)
     v6 = UFG::qResourceWarehouse::GetInventory(v7, 0x92CDEC8F);
     `UFG::qGetResourceInventory<Illusion::Buffer>::`2::result = v6;
   }
-  UFG::qResourceHandle::Init(
-    (UFG::qResourceHandle *)&v1->mIndexBufferHandle.mPrev,
-    0x92CDEC8F,
-    v1->mIndexBufferHandle.mNameUID,
-    v6);
-  v8 = (UFG::qResourceHandle *)v1->mVertexBufferHandles;
+  UFG::qResourceHandle::Init(&this->mIndexBufferHandle, 0x92CDEC8F, this->mIndexBufferHandle.mNameUID, v6);
+  mVertexBufferHandles = this->mVertexBufferHandles;
   v9 = 4i64;
   do
   {
@@ -248,40 +218,38 @@ void __fastcall Illusion::Mesh::OnLoad(Illusion::Mesh *this)
       v10 = UFG::qResourceWarehouse::GetInventory(v11, 0x92CDEC8F);
       `UFG::qGetResourceInventory<Illusion::Buffer>::`2::result = v10;
     }
-    UFG::qResourceHandle::Init(v8, 0x92CDEC8F, v8->mNameUID, v10);
-    ++v8;
+    UFG::qResourceHandle::Init(mVertexBufferHandles, 0x92CDEC8F, mVertexBufferHandles->mNameUID, v10);
+    ++mVertexBufferHandles;
     --v9;
   }
   while ( v9 );
-  _((AMD_HD3D *)v1);
+  _((AMD_HD3D *)this);
 }
 
 // File Line: 278
 // RVA: 0x942D0
 void __fastcall Illusion::Mesh::OnUnload(Illusion::Mesh *this)
 {
-  Illusion::Mesh *v1; // rbx
-  UFG::qResourceInventory *v2; // rax
+  UFG::qResourceInventory *Inventory; // rax
   UFG::qResourceWarehouse *v3; // rax
   UFG::qResourceInventory *v4; // rax
   UFG::qResourceWarehouse *v5; // rax
   UFG::qResourceInventory *v6; // rax
   UFG::qResourceWarehouse *v7; // rax
-  UFG::qResourceHandle *v8; // rbx
-  signed __int64 v9; // rdi
+  Illusion::BufferHandle *mVertexBufferHandles; // rbx
+  __int64 v9; // rdi
   UFG::qResourceInventory *v10; // rax
   UFG::qResourceWarehouse *v11; // rax
 
-  v1 = this;
   _((AMD_HD3D *)this);
-  v2 = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
+  Inventory = `UFG::qGetResourceInventory<Illusion::Material>::`2::result;
   if ( !`UFG::qGetResourceInventory<Illusion::Material>::`2::result )
   {
     v3 = UFG::qResourceWarehouse::Instance();
-    v2 = UFG::qResourceWarehouse::GetInventory(v3, 0xB4C26312);
-    `UFG::qGetResourceInventory<Illusion::Material>::`2::result = v2;
+    Inventory = UFG::qResourceWarehouse::GetInventory(v3, 0xB4C26312);
+    `UFG::qGetResourceInventory<Illusion::Material>::`2::result = Inventory;
   }
-  UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mMaterialHandle.mPrev, v2);
+  UFG::qResourceHandle::Close(&this->mMaterialHandle, Inventory);
   v4 = `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result;
   if ( !`UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result )
   {
@@ -289,7 +257,7 @@ void __fastcall Illusion::Mesh::OnUnload(Illusion::Mesh *this)
     v4 = UFG::qResourceWarehouse::GetInventory(v5, 0x3E5FDA3Eu);
     `UFG::qGetResourceInventory<Illusion::VertexDecl>::`2::result = v4;
   }
-  UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mVertexDeclHandle.mPrev, v4);
+  UFG::qResourceHandle::Close(&this->mVertexDeclHandle, v4);
   v6 = `UFG::qGetResourceInventory<Illusion::Buffer>::`2::result;
   if ( !`UFG::qGetResourceInventory<Illusion::Buffer>::`2::result )
   {
@@ -297,8 +265,8 @@ void __fastcall Illusion::Mesh::OnUnload(Illusion::Mesh *this)
     v6 = UFG::qResourceWarehouse::GetInventory(v7, 0x92CDEC8F);
     `UFG::qGetResourceInventory<Illusion::Buffer>::`2::result = v6;
   }
-  UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mIndexBufferHandle.mPrev, v6);
-  v8 = (UFG::qResourceHandle *)v1->mVertexBufferHandles;
+  UFG::qResourceHandle::Close(&this->mIndexBufferHandle, v6);
+  mVertexBufferHandles = this->mVertexBufferHandles;
   v9 = 4i64;
   do
   {
@@ -309,8 +277,7 @@ void __fastcall Illusion::Mesh::OnUnload(Illusion::Mesh *this)
       v10 = UFG::qResourceWarehouse::GetInventory(v11, 0x92CDEC8F);
       `UFG::qGetResourceInventory<Illusion::Buffer>::`2::result = v10;
     }
-    UFG::qResourceHandle::Close(v8, v10);
-    ++v8;
+    UFG::qResourceHandle::Close(mVertexBufferHandles++, v10);
     --v9;
   }
   while ( v9 );
@@ -321,22 +288,21 @@ void __fastcall Illusion::Mesh::OnUnload(Illusion::Mesh *this)
 __int64 Illusion::_dynamic_initializer_for__gLocatorsInventory__()
 {
   UFG::qResourceInventory::qResourceInventory(
-    (UFG::qResourceInventory *)&Illusion::gLocatorsInventory.vfptr,
+    &Illusion::gLocatorsInventory,
     "LocatorsInventory",
     0x3EDDEFF0u,
     0x15506061u,
     0,
     0);
   Illusion::gLocatorsInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::LocatorsInventory::`vftable;
-  return atexit(Illusion::_dynamic_atexit_destructor_for__gLocatorsInventory__);
+  return atexit((int (__fastcall *)())Illusion::_dynamic_atexit_destructor_for__gLocatorsInventory__);
 }
 
 // File Line: 367
 // RVA: 0x937A0
 void __fastcall Illusion::Model::OnLoad(Illusion::Model *this)
 {
-  Illusion::Model *v1; // rbx
-  UFG::qResourceInventory *v2; // rax
+  UFG::qResourceInventory *Inventory; // rax
   UFG::qResourceWarehouse *v3; // rax
   UFG::qResourceInventory *v4; // rax
   UFG::qResourceWarehouse *v5; // rax
@@ -344,11 +310,11 @@ void __fastcall Illusion::Model::OnLoad(Illusion::Model *this)
   UFG::qResourceWarehouse *v7; // rax
   UFG::qResourceInventory *v8; // rax
   UFG::qResourceWarehouse *v9; // rax
-  __int64 v10; // rax
+  __int64 mOffset; // rax
   AMD_HD3D *v11; // rcx
-  unsigned int v12; // eax
-  UFG::qOffset64<UFG::qOffset64<Illusion::Mesh *> *> *v13; // rsi
-  signed __int64 v14; // r14
+  unsigned int mNumMeshes; // eax
+  UFG::qOffset64<UFG::qOffset64<Illusion::Mesh *> *> *p_mMeshOffsetTable; // rsi
+  char *mDebugName; // r14
   __int64 v15; // rdi
   __int64 v16; // rbp
   char *v17; // rcx
@@ -356,21 +322,16 @@ void __fastcall Illusion::Model::OnLoad(Illusion::Model *this)
   __int64 v19; // rcx
   Illusion::Mesh *v20; // rbx
 
-  v1 = this;
   if ( this )
     Illusion::Model::Model(this);
-  v2 = `UFG::qGetResourceInventory<Illusion::MaterialTable>::`2::result;
+  Inventory = `UFG::qGetResourceInventory<Illusion::MaterialTable>::`2::result;
   if ( !`UFG::qGetResourceInventory<Illusion::MaterialTable>::`2::result )
   {
     v3 = UFG::qResourceWarehouse::Instance();
-    v2 = UFG::qResourceWarehouse::GetInventory(v3, 0x80D1F139);
-    `UFG::qGetResourceInventory<Illusion::MaterialTable>::`2::result = v2;
+    Inventory = UFG::qResourceWarehouse::GetInventory(v3, 0x80D1F139);
+    `UFG::qGetResourceInventory<Illusion::MaterialTable>::`2::result = Inventory;
   }
-  UFG::qResourceHandle::Init(
-    (UFG::qResourceHandle *)&v1->mMaterialTableHandle.mPrev,
-    0x80D1F139,
-    v1->mMaterialTableHandle.mNameUID,
-    v2);
+  UFG::qResourceHandle::Init(&this->mMaterialTableHandle, 0x80D1F139, this->mMaterialTableHandle.mNameUID, Inventory);
   v4 = `UFG::qGetResourceInventory<Illusion::BonePalette>::`2::result;
   if ( !`UFG::qGetResourceInventory<Illusion::BonePalette>::`2::result )
   {
@@ -378,11 +339,7 @@ void __fastcall Illusion::Model::OnLoad(Illusion::Model *this)
     v4 = UFG::qResourceWarehouse::GetInventory(v5, 0x50A819E3u);
     `UFG::qGetResourceInventory<Illusion::BonePalette>::`2::result = v4;
   }
-  UFG::qResourceHandle::Init(
-    (UFG::qResourceHandle *)&v1->mBonePaletteHandle.mPrev,
-    0x50A819E3u,
-    v1->mBonePaletteHandle.mNameUID,
-    v4);
+  UFG::qResourceHandle::Init(&this->mBonePaletteHandle, 0x50A819E3u, this->mBonePaletteHandle.mNameUID, v4);
   v6 = `UFG::qGetResourceInventory<Illusion::MorphTargets>::`2::result;
   if ( !`UFG::qGetResourceInventory<Illusion::MorphTargets>::`2::result )
   {
@@ -390,11 +347,7 @@ void __fastcall Illusion::Model::OnLoad(Illusion::Model *this)
     v6 = UFG::qResourceWarehouse::GetInventory(v7, 0xC62C2822);
     `UFG::qGetResourceInventory<Illusion::MorphTargets>::`2::result = v6;
   }
-  UFG::qResourceHandle::Init(
-    (UFG::qResourceHandle *)&v1->mMorphTargetsHandle.mPrev,
-    0xC62C2822,
-    v1->mMorphTargetsHandle.mNameUID,
-    v6);
+  UFG::qResourceHandle::Init(&this->mMorphTargetsHandle, 0xC62C2822, this->mMorphTargetsHandle.mNameUID, v6);
   v8 = `UFG::qGetResourceInventory<Illusion::Locators>::`2::result;
   if ( !`UFG::qGetResourceInventory<Illusion::Locators>::`2::result )
   {
@@ -402,30 +355,26 @@ void __fastcall Illusion::Model::OnLoad(Illusion::Model *this)
     v8 = UFG::qResourceWarehouse::GetInventory(v9, 0x3EDDEFF0u);
     `UFG::qGetResourceInventory<Illusion::Locators>::`2::result = v8;
   }
-  UFG::qResourceHandle::Init(
-    (UFG::qResourceHandle *)&v1->mLocatorsHandle.mPrev,
-    0x3EDDEFF0u,
-    v1->mLocatorsHandle.mNameUID,
-    v8);
-  v1->mLastUsedFrameNum = 0;
-  Illusion::IModelPlat::OnLoad(v1);
-  v10 = v1->mModelUser.mOffset;
-  if ( v10 )
-    v11 = (AMD_HD3D *)((char *)&v1->mModelUser + v10);
+  UFG::qResourceHandle::Init(&this->mLocatorsHandle, 0x3EDDEFF0u, this->mLocatorsHandle.mNameUID, v8);
+  this->mLastUsedFrameNum = 0;
+  Illusion::IModelPlat::OnLoad(this);
+  mOffset = this->mModelUser.mOffset;
+  if ( mOffset )
+    v11 = (AMD_HD3D *)((char *)&this->mModelUser + mOffset);
   else
     v11 = 0i64;
   _(v11);
-  v12 = v1->mNumMeshes;
-  if ( v12 )
+  mNumMeshes = this->mNumMeshes;
+  if ( mNumMeshes )
   {
-    v13 = &v1->mMeshOffsetTable;
-    v14 = (signed __int64)v1->mDebugName;
+    p_mMeshOffsetTable = &this->mMeshOffsetTable;
+    mDebugName = this->mDebugName;
     v15 = 0i64;
-    v16 = v12;
+    v16 = mNumMeshes;
     do
     {
-      if ( v13->mOffset )
-        v17 = (char *)v13 + v13->mOffset;
+      if ( p_mMeshOffsetTable->mOffset )
+        v17 = (char *)p_mMeshOffsetTable + p_mMeshOffsetTable->mOffset;
       else
         v17 = 0i64;
       v18 = &v17[v15];
@@ -435,7 +384,7 @@ void __fastcall Illusion::Model::OnLoad(Illusion::Model *this)
       else
         v20 = 0i64;
       Illusion::Mesh::OnLoad(v20);
-      v20->mDescription = (const char *)v14;
+      v20->mDescription = mDebugName;
       v15 += 8i64;
       --v16;
     }
@@ -447,10 +396,9 @@ void __fastcall Illusion::Model::OnLoad(Illusion::Model *this)
 // RVA: 0x943D0
 void __fastcall Illusion::Model::OnUnload(Illusion::Model *this)
 {
-  Illusion::Model *v1; // rbx
-  __int64 v2; // rax
+  __int64 mOffset; // rax
   AMD_HD3D *v3; // rcx
-  UFG::qResourceInventory *v4; // rax
+  UFG::qResourceInventory *Inventory; // rax
   UFG::qResourceWarehouse *v5; // rax
   UFG::qResourceInventory *v6; // rax
   UFG::qResourceWarehouse *v7; // rax
@@ -458,30 +406,29 @@ void __fastcall Illusion::Model::OnUnload(Illusion::Model *this)
   UFG::qResourceWarehouse *v9; // rax
   UFG::qResourceInventory *v10; // rax
   UFG::qResourceWarehouse *v11; // rax
-  unsigned int v12; // eax
-  UFG::qOffset64<UFG::qOffset64<Illusion::Mesh *> *> *v13; // rdi
+  unsigned int mNumMeshes; // eax
+  UFG::qOffset64<UFG::qOffset64<Illusion::Mesh *> *> *p_mMeshOffsetTable; // rdi
   __int64 v14; // rbx
   __int64 v15; // rsi
   char *v16; // rcx
   char *v17; // rax
   Illusion::Mesh *v18; // rcx
 
-  v1 = this;
-  Illusion::IModelPlat::OnUnload((Illusion::IModelPlat *)this);
-  v2 = v1->mModelUser.mOffset;
-  if ( v2 )
-    v3 = (AMD_HD3D *)((char *)&v1->mModelUser + v2);
+  Illusion::IModelPlat::OnUnload(this);
+  mOffset = this->mModelUser.mOffset;
+  if ( mOffset )
+    v3 = (AMD_HD3D *)((char *)&this->mModelUser + mOffset);
   else
     v3 = 0i64;
   _(v3);
-  v4 = `UFG::qGetResourceInventory<Illusion::MaterialTable>::`2::result;
+  Inventory = `UFG::qGetResourceInventory<Illusion::MaterialTable>::`2::result;
   if ( !`UFG::qGetResourceInventory<Illusion::MaterialTable>::`2::result )
   {
     v5 = UFG::qResourceWarehouse::Instance();
-    v4 = UFG::qResourceWarehouse::GetInventory(v5, 0x80D1F139);
-    `UFG::qGetResourceInventory<Illusion::MaterialTable>::`2::result = v4;
+    Inventory = UFG::qResourceWarehouse::GetInventory(v5, 0x80D1F139);
+    `UFG::qGetResourceInventory<Illusion::MaterialTable>::`2::result = Inventory;
   }
-  UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mMaterialTableHandle.mPrev, v4);
+  UFG::qResourceHandle::Close(&this->mMaterialTableHandle, Inventory);
   v6 = `UFG::qGetResourceInventory<Illusion::BonePalette>::`2::result;
   if ( !`UFG::qGetResourceInventory<Illusion::BonePalette>::`2::result )
   {
@@ -489,7 +436,7 @@ void __fastcall Illusion::Model::OnUnload(Illusion::Model *this)
     v6 = UFG::qResourceWarehouse::GetInventory(v7, 0x50A819E3u);
     `UFG::qGetResourceInventory<Illusion::BonePalette>::`2::result = v6;
   }
-  UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mBonePaletteHandle.mPrev, v6);
+  UFG::qResourceHandle::Close(&this->mBonePaletteHandle, v6);
   v8 = `UFG::qGetResourceInventory<Illusion::MorphTargets>::`2::result;
   if ( !`UFG::qGetResourceInventory<Illusion::MorphTargets>::`2::result )
   {
@@ -497,7 +444,7 @@ void __fastcall Illusion::Model::OnUnload(Illusion::Model *this)
     v8 = UFG::qResourceWarehouse::GetInventory(v9, 0xC62C2822);
     `UFG::qGetResourceInventory<Illusion::MorphTargets>::`2::result = v8;
   }
-  UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mMorphTargetsHandle.mPrev, v8);
+  UFG::qResourceHandle::Close(&this->mMorphTargetsHandle, v8);
   v10 = `UFG::qGetResourceInventory<Illusion::Locators>::`2::result;
   if ( !`UFG::qGetResourceInventory<Illusion::Locators>::`2::result )
   {
@@ -505,17 +452,17 @@ void __fastcall Illusion::Model::OnUnload(Illusion::Model *this)
     v10 = UFG::qResourceWarehouse::GetInventory(v11, 0x3EDDEFF0u);
     `UFG::qGetResourceInventory<Illusion::Locators>::`2::result = v10;
   }
-  UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v1->mLocatorsHandle.mPrev, v10);
-  v12 = v1->mNumMeshes;
-  if ( v12 )
+  UFG::qResourceHandle::Close(&this->mLocatorsHandle, v10);
+  mNumMeshes = this->mNumMeshes;
+  if ( mNumMeshes )
   {
-    v13 = &v1->mMeshOffsetTable;
+    p_mMeshOffsetTable = &this->mMeshOffsetTable;
     v14 = 0i64;
-    v15 = v12;
+    v15 = mNumMeshes;
     do
     {
-      if ( v13->mOffset )
-        v16 = (char *)v13 + v13->mOffset;
+      if ( p_mMeshOffsetTable->mOffset )
+        v16 = (char *)p_mMeshOffsetTable + p_mMeshOffsetTable->mOffset;
       else
         v16 = 0i64;
       v17 = &v16[v14];
@@ -535,37 +482,31 @@ void __fastcall Illusion::Model::OnUnload(Illusion::Model *this)
 __int64 Illusion::_dynamic_initializer_for__gModelDataInventory__()
 {
   UFG::qResourceInventory::qResourceInventory(
-    (UFG::qResourceInventory *)&Illusion::gModelDataInventory.vfptr,
+    &Illusion::gModelDataInventory,
     "ModelDataInventory",
     0xA2ADCD77,
     0x6DF963B3u,
     0,
     0x100u);
   Illusion::gModelDataInventory.vfptr = (UFG::qResourceInventoryVtbl *)&Illusion::ModelDataInventory::`vftable;
-  return atexit(Illusion::_dynamic_atexit_destructor_for__gModelDataInventory__);
+  return atexit((int (__fastcall *)())Illusion::_dynamic_atexit_destructor_for__gModelDataInventory__);
 }
 
 // File Line: 704
 // RVA: 0x8DD70
-void __fastcall Illusion::ModelDataInventory::Add(Illusion::ModelDataInventory *this, UFG::qResourceData *resource_data)
+void __fastcall Illusion::ModelDataInventory::Add(Illusion::ModelDataInventory *this, Illusion::Model *resource_data)
 {
-  Illusion::ModelDataInventory *v2; // rdi
-  UFG::qResourceData *v3; // rbx
-
-  v2 = this;
-  v3 = resource_data;
-  Illusion::Model::OnLoad((Illusion::Model *)resource_data);
-  UFG::qResourceInventory::Add((UFG::qResourceInventory *)&v2->vfptr, v3);
+  Illusion::Model::OnLoad(resource_data);
+  UFG::qResourceInventory::Add(this, &resource_data->UFG::qResourceData);
 }
 
 // File Line: 718
 // RVA: 0x948C0
-void __fastcall Illusion::ModelDataInventory::Remove(Illusion::ModelDataInventory *this, UFG::qResourceData *resource_data)
+void __fastcall Illusion::ModelDataInventory::Remove(
+        Illusion::ModelDataInventory *this,
+        Illusion::Model *resource_data)
 {
-  Illusion::Model *v2; // rbx
-
-  v2 = (Illusion::Model *)resource_data;
-  UFG::qResourceInventory::Remove((UFG::qResourceInventory *)&this->vfptr, resource_data);
-  Illusion::Model::OnUnload(v2);
+  UFG::qResourceInventory::Remove(this, &resource_data->UFG::qResourceData);
+  Illusion::Model::OnUnload(resource_data);
 }
 

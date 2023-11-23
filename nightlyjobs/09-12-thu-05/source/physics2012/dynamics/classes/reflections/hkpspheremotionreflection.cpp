@@ -28,22 +28,22 @@ hkClass *__fastcall hkpSphereMotion::staticClass()
 
 // File Line: 58
 // RVA: 0xD511C0
-void __fastcall finishLoadedObjecthkpSphereMotion(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpSphereMotion(_WORD *p, int finishing)
 {
   if ( p )
   {
     *(_QWORD *)p = &hkpMotion::`vftable;
     if ( finishing )
-      *((_WORD *)p + 153) = 16256;
+      p[153] = 16256;
     *(_QWORD *)p = &hkpSphereMotion::`vftable;
   }
 }
 
 // File Line: 64
 // RVA: 0xD51200
-void __fastcall cleanupLoadedObjecthkpSphereMotion(void *p)
+void __fastcall cleanupLoadedObjecthkpSphereMotion(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 68
@@ -64,8 +64,8 @@ void **dynamic_initializer_for__hkpSphereMotionTypeInfo__()
   hkpSphereMotionTypeInfo.m_typeName = "hkpSphereMotion";
   hkpSphereMotionTypeInfo.m_vtable = result;
   hkpSphereMotionTypeInfo.m_scopedName = "!hkpSphereMotion";
-  hkpSphereMotionTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpSphereMotion;
-  hkpSphereMotionTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpSphereMotion;
+  hkpSphereMotionTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpSphereMotion;
+  hkpSphereMotionTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpSphereMotion;
   return result;
 }
 

@@ -8,7 +8,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243B6B0 = v1;
-  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_display::Bitmap,0,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::BitmapData>>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_display::Bitmap *, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::BitmapData> *))Scaleform::GFx::AS3::Instances::fl_display::Bitmap::bitmapDataGet;
+  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_display::Bitmap,0,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::BitmapData>>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_display::Bitmap *, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::BitmapData> *))Scaleform::GFx::AS3::Instances::fl_display::Bitmap::bitmapDataGet;
   return result;
 }
 
@@ -22,7 +22,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243B6C0 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_display::Bitmap,1,Scaleform::GFx::AS3::Value const,Scaleform::GFx::AS3::Instances::fl_display::BitmapData *>::Method = Scaleform::GFx::AS3::Instances::fl_display::Bitmap::bitmapDataSet;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_display::Bitmap,1,Scaleform::GFx::AS3::Value const,Scaleform::GFx::AS3::Instances::fl_display::BitmapData *>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_display::Bitmap *, Scaleform::GFx::AS3::Value *, Scaleform::GFx::AS3::Instances::fl_display::BitmapData *))Scaleform::GFx::AS3::Instances::fl_display::Bitmap::bitmapDataSet;
   return result;
 }
 
@@ -84,93 +84,96 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
 
 // File Line: 60
 // RVA: 0x832330
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Bitmap::bitmapDataGet(Scaleform::GFx::AS3::Instances::fl_display::InteractiveObject *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Object> *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Bitmap::bitmapDataGet(
+        Scaleform::GFx::AS3::Instances::fl_display::InteractiveObject *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Object> *result)
 {
-  Scaleform::GFx::AS3::Instances::fl::Object **v2; // rdi
-  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Object> *v3; // rbx
-  Scaleform::GFx::AS3::Instances::fl::Object *v4; // rcx
-  unsigned int v5; // eax
+  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Object> *p_pContextMenu; // rdi
+  Scaleform::GFx::AS3::Instances::fl::Object *pObject; // rcx
+  unsigned int RefCount; // eax
 
-  v2 = &this->pContextMenu.pObject;
-  v3 = result;
+  p_pContextMenu = &this->pContextMenu;
   if ( &this->pContextMenu != result )
   {
-    if ( *v2 )
-      (*v2)->RefCount = ((*v2)->RefCount + 1) & 0x8FBFFFFF;
-    v4 = result->pObject;
+    if ( p_pContextMenu->pObject )
+      p_pContextMenu->pObject->RefCount = (p_pContextMenu->pObject->RefCount + 1) & 0x8FBFFFFF;
+    pObject = result->pObject;
     if ( result->pObject )
     {
-      if ( (unsigned __int8)v4 & 1 )
+      if ( ((unsigned __int8)pObject & 1) != 0 )
       {
-        result->pObject = (Scaleform::GFx::AS3::Instances::fl::Object *)((char *)v4 - 1);
-        result->pObject = *v2;
+        result->pObject = (Scaleform::GFx::AS3::Instances::fl::Object *)((char *)pObject - 1);
+        result->pObject = p_pContextMenu->pObject;
         return;
       }
-      v5 = v4->RefCount;
-      if ( v5 & 0x3FFFFF )
+      RefCount = pObject->RefCount;
+      if ( (RefCount & 0x3FFFFF) != 0 )
       {
-        v4->RefCount = v5 - 1;
-        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v4->vfptr);
+        pObject->RefCount = RefCount - 1;
+        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(pObject);
       }
     }
-    v3->pObject = *v2;
+    result->pObject = p_pContextMenu->pObject;
   }
 }
 
 // File Line: 67
 // RVA: 0x82DCB0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Bitmap::bitmapDataSet(Scaleform::GFx::AS3::Instances::fl_display::Bitmap *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Instances::fl_display::BitmapData *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Bitmap::bitmapDataSet(
+        Scaleform::GFx::AS3::Instances::fl_display::Bitmap *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Instances::fl::XMLList *value)
 {
-  Scaleform::GFx::AS3::Instances::fl_display::Bitmap *v3; // rsi
-  Scaleform::GFx::DisplayObject *v4; // rbx
+  Scaleform::GFx::DisplayObject *pObject; // rbx
   Scaleform::GFx::AS3::Instances::fl_display::BitmapData *v5; // rdi
   Scaleform::GFx::Resource *v6; // rdi
-  Scaleform::GFx::Resource *v7; // rcx
+  Scaleform::GFx::Resource *pParent; // rcx
   Scaleform::GFx::Resource *v8; // rcx
   Scaleform::GFx::AS3::AvmBitmap *v9; // rcx
 
-  v3 = this;
   Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(
     (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&this->pBitmapData,
-    (Scaleform::GFx::AS3::Instances::fl::XMLList *)value);
-  v4 = v3->pDispObj.pObject;
-  if ( v4 )
+    value);
+  pObject = this->pDispObj.pObject;
+  if ( pObject )
   {
-    v5 = v3->pBitmapData.pObject;
+    v5 = this->pBitmapData.pObject;
     if ( v5 )
     {
-      v6 = (Scaleform::GFx::Resource *)&v5->pDefImpl.pObject->vfptr;
+      v6 = v5->pDefImpl.pObject;
       if ( v6 )
         Scaleform::Render::RenderBuffer::AddRef(v6);
-      v7 = (Scaleform::GFx::Resource *)v4[1].pParent;
-      if ( v7 )
-        Scaleform::GFx::Resource::Release(v7);
-      v4[1].pParent = (Scaleform::GFx::InteractiveObject *)v6;
+      pParent = (Scaleform::GFx::Resource *)pObject[1].pParent;
+      if ( pParent )
+        Scaleform::GFx::Resource::Release(pParent);
+      pObject[1].pParent = (Scaleform::GFx::InteractiveObject *)v6;
     }
     else
     {
-      v8 = (Scaleform::GFx::Resource *)v4[1].pParent;
+      v8 = (Scaleform::GFx::Resource *)pObject[1].pParent;
       if ( v8 )
         Scaleform::GFx::Resource::Release(v8);
-      v4[1].pParent = 0i64;
+      pObject[1].pParent = 0i64;
     }
   }
-  v9 = (Scaleform::GFx::AS3::AvmBitmap *)v3->pDispObj.pObject;
+  v9 = (Scaleform::GFx::AS3::AvmBitmap *)this->pDispObj.pObject;
   if ( v9 )
     Scaleform::GFx::AS3::AvmBitmap::RecreateRenderNode(v9);
 }
 
 // File Line: 83
 // RVA: 0x8574B0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Bitmap::pixelSnappingGet(Scaleform::GFx::AS3::Instances::fl_display::Bitmap *this, Scaleform::GFx::ASString *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Bitmap::pixelSnappingGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Bitmap *this,
+        Scaleform::GFx::ASString *result)
 {
-  Scaleform::GFx::AS3::Instances::fl_display::Bitmap::PixelSnappingType v2; // er8
-  int v3; // er8
+  Scaleform::GFx::AS3::Instances::fl_display::Bitmap::PixelSnappingType PixelSnapping; // r8d
+  __int32 v3; // r8d
 
-  v2 = this->PixelSnapping;
-  if ( v2 )
+  PixelSnapping = this->PixelSnapping;
+  if ( PixelSnapping )
   {
-    v3 = v2 - 1;
+    v3 = PixelSnapping - 1;
     if ( v3 )
     {
       if ( v3 == 1 )
@@ -189,78 +192,78 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Bitmap::pixelSnappin
 
 // File Line: 96
 // RVA: 0x857500
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Bitmap::pixelSnappingSet(Scaleform::GFx::AS3::Instances::fl_display::Bitmap *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::ASString *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Bitmap::pixelSnappingSet(
+        Scaleform::GFx::AS3::Instances::fl_display::Bitmap *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::ASString *value)
 {
-  Scaleform::GFx::AS3::Instances::fl_display::Bitmap *v3; // rbx
   Scaleform::GFx::AS3::Instances::fl_display::Bitmap::PixelSnappingType v4; // eax
-  Scaleform::GFx::AS3::AvmBitmap *v5; // rcx
+  Scaleform::GFx::AS3::AvmBitmap *pObject; // rcx
 
-  v3 = this;
   v4 = (unsigned int)Scaleform::GFx::AS3::Instances::fl_display::Bitmap::String2PixelSnapping(this, value->pNode->pData);
-  v5 = (Scaleform::GFx::AS3::AvmBitmap *)v3->pDispObj.pObject;
-  v3->PixelSnapping = v4;
-  if ( v5 )
-    Scaleform::GFx::AS3::AvmBitmap::RecreateRenderNode(v5);
+  pObject = (Scaleform::GFx::AS3::AvmBitmap *)this->pDispObj.pObject;
+  this->PixelSnapping = v4;
+  if ( pObject )
+    Scaleform::GFx::AS3::AvmBitmap::RecreateRenderNode(pObject);
 }
 
 // File Line: 104
 // RVA: 0x85F6B0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Bitmap::smoothingGet(Scaleform::GFx::AS3::Instances::fl_display::Bitmap *this, bool *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Bitmap::smoothingGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Bitmap *this,
+        bool *result)
 {
   *result = this->Smoothing;
 }
 
 // File Line: 111
 // RVA: 0x85F6C0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Bitmap::smoothingSet(Scaleform::GFx::AS3::Instances::fl_display::Bitmap *this, Scaleform::GFx::AS3::Value *result, bool value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Bitmap::smoothingSet(
+        Scaleform::GFx::AS3::Instances::fl_display::Bitmap *this,
+        Scaleform::GFx::AS3::Value *result,
+        bool value)
 {
+  Scaleform::GFx::AS3::AvmBitmap *pObject; // rcx
+
   this->Smoothing = value;
-  JUMPOUT(this->pDispObj.pObject, 0i64, Scaleform::GFx::AS3::AvmBitmap::RecreateRenderNode);
+  pObject = (Scaleform::GFx::AS3::AvmBitmap *)this->pDispObj.pObject;
+  if ( pObject )
+    Scaleform::GFx::AS3::AvmBitmap::RecreateRenderNode(pObject);
 }
 
 // File Line: 142
 // RVA: 0x7D53C0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::InteractiveObject::ForEachChild_GC(Scaleform::GFx::AS3::Instances::fl_display::Shape *this, Scaleform::GFx::AS3::RefCountCollector<328> *prcc, void (__fastcall *op)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::RefCountBaseGC<328> **))
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::InteractiveObject::ForEachChild_GC(
+        Scaleform::GFx::AS3::Instances::fl_display::Shape *this,
+        Scaleform::GFx::AS3::RefCountCollector<328> *prcc,
+        void (__fastcall *op)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::RefCountBaseGC<328> **))
 {
-  void (__fastcall *v3)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::RefCountBaseGC<328> **); // rbx
-  Scaleform::GFx::AS3::RefCountCollector<328> *v4; // rdi
-  Scaleform::GFx::AS3::Instances::fl_display::Shape *v5; // rsi
-
-  v3 = op;
-  v4 = prcc;
-  v5 = this;
-  Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::ForEachChild_GC(
-    (Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher *)&this->vfptr,
-    prcc,
-    op);
-  if ( v5->pLoaderInfo.pObject )
-    v3(v4, (Scaleform::GFx::AS3::RefCountBaseGC<328> **)&v5->pLoaderInfo);
-  if ( v5->pGraphics.pObject )
-    v3(v4, (Scaleform::GFx::AS3::RefCountBaseGC<328> **)&v5->pGraphics);
+  Scaleform::GFx::AS3::Instances::fl_events::EventDispatcher::ForEachChild_GC(this, prcc, op);
+  if ( this->pLoaderInfo.pObject )
+    op(prcc, &this->pLoaderInfo.pObject);
+  if ( this->pGraphics.pObject )
+    op(prcc, &this->pGraphics.pObject);
 }
 
 // File Line: 148
 // RVA: 0x795360
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Bitmap::AS3Constructor(Scaleform::GFx::AS3::Instances::fl_display::Bitmap *this, unsigned int argc, Scaleform::GFx::AS3::Value *argv)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Bitmap::AS3Constructor(
+        Scaleform::GFx::AS3::Instances::fl_display::Bitmap *this,
+        unsigned int argc,
+        Scaleform::GFx::AS3::Value *argv)
 {
-  Scaleform::GFx::AS3::Value *v3; // rbp
-  unsigned int v4; // esi
-  Scaleform::GFx::AS3::Instances::fl_display::Bitmap *v5; // rdi
-  Scaleform::GFx::DisplayObject *v6; // rbx
+  Scaleform::GFx::DisplayObject *pObject; // rbx
   Scaleform::GFx::AS3::Instances::fl_display::BitmapData *v7; // rdx
-  Scaleform::GFx::Resource *v8; // rcx
-  Scaleform::GFx::ASStringNode *v9; // rcx
+  Scaleform::GFx::Resource *pParent; // rcx
+  Scaleform::GFx::ASStringNode *pNode; // rcx
   bool v10; // zf
   Scaleform::GFx::ASStringNode *v11; // rcx
   Scaleform::GFx::AS3::AvmBitmap *v12; // rcx
-  Scaleform::GFx::AS3::CheckResult v13; // [rsp+58h] [rbp+10h]
-  Scaleform::GFx::ASString result; // [rsp+68h] [rbp+20h]
+  Scaleform::GFx::AS3::CheckResult v13; // [rsp+58h] [rbp+10h] BYREF
+  Scaleform::GFx::ASString result; // [rsp+68h] [rbp+20h] BYREF
 
-  if ( argc >= 1 )
+  if ( argc )
   {
-    v3 = argv;
-    v4 = argc;
-    v5 = this;
     if ( Scaleform::GFx::AS3::VM::IsOfType(
            this->pTraits.pObject->pVM,
            argv,
@@ -268,53 +271,51 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Bitmap::AS3Construct
            this->pTraits.pObject->pVM->CurrentDomain.pObject) )
     {
       Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(
-        (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&v5->pBitmapData,
-        (Scaleform::GFx::AS3::Instances::fl::XMLList *)v3->value.VS._1.VStr);
-      v6 = v5->pDispObj.pObject;
-      if ( v6 )
+        (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&this->pBitmapData,
+        (Scaleform::GFx::AS3::Instances::fl::XMLList *)argv->value.VS._1.VStr);
+      pObject = this->pDispObj.pObject;
+      if ( pObject )
       {
-        v7 = v5->pBitmapData.pObject;
+        v7 = this->pBitmapData.pObject;
         if ( v7 )
         {
           Scaleform::GFx::AS3::AvmBitmap::SetResourceMovieDef(
-            (Scaleform::GFx::AS3::AvmBitmap *)v5->pDispObj.pObject,
+            (Scaleform::GFx::AS3::AvmBitmap *)this->pDispObj.pObject,
             v7->pDefImpl.pObject);
         }
         else
         {
-          v8 = (Scaleform::GFx::Resource *)v6[1].pParent;
-          if ( v8 )
-            Scaleform::GFx::Resource::Release(v8);
-          v6[1].pParent = 0i64;
+          pParent = (Scaleform::GFx::Resource *)pObject[1].pParent;
+          if ( pParent )
+            Scaleform::GFx::Resource::Release(pParent);
+          pObject[1].pParent = 0i64;
         }
       }
     }
-    if ( v4 >= 2 )
+    if ( argc >= 2 )
     {
-      Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(
-        (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v5->pTraits.pObject->pVM->StringManagerRef->Builtins,
+      Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(
+        this->pTraits.pObject->pVM->StringManagerRef,
         &result);
-      if ( !Scaleform::GFx::AS3::Value::Convert2String(v3 + 1, &v13, &result)->Result )
+      if ( !Scaleform::GFx::AS3::Value::Convert2String(argv + 1, &v13, &result)->Result )
       {
-        v9 = result.pNode;
-        v10 = result.pNode->RefCount == 1;
-        --v9->RefCount;
+        pNode = result.pNode;
+        v10 = result.pNode->RefCount-- == 1;
         if ( v10 )
-          Scaleform::GFx::ASStringNode::ReleaseNode(v9);
+          Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
         return;
       }
-      v5->PixelSnapping = Scaleform::GFx::AS3::Instances::fl_display::Bitmap::String2PixelSnapping(
-                            v5,
-                            result.pNode->pData);
-      if ( v4 >= 3 )
-        v5->Smoothing = Scaleform::GFx::AS3::Value::Convert2Boolean(v3 + 2);
+      this->PixelSnapping = Scaleform::GFx::AS3::Instances::fl_display::Bitmap::String2PixelSnapping(
+                              this,
+                              result.pNode->pData);
+      if ( argc >= 3 )
+        this->Smoothing = Scaleform::GFx::AS3::Value::Convert2Boolean(argv + 2);
       v11 = result.pNode;
-      v10 = result.pNode->RefCount == 1;
-      --v11->RefCount;
+      v10 = result.pNode->RefCount-- == 1;
       if ( v10 )
         Scaleform::GFx::ASStringNode::ReleaseNode(v11);
     }
-    v12 = (Scaleform::GFx::AS3::AvmBitmap *)v5->pDispObj.pObject;
+    v12 = (Scaleform::GFx::AS3::AvmBitmap *)this->pDispObj.pObject;
     if ( v12 )
       Scaleform::GFx::AS3::AvmBitmap::RecreateRenderNode(v12);
   }
@@ -322,132 +323,128 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Bitmap::AS3Construct
 
 // File Line: 183
 // RVA: 0x7F2D00
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Bitmap::InitInstance(Scaleform::GFx::AS3::Instances::fl_display::Bitmap *this, bool extCall)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Bitmap::InitInstance(
+        Scaleform::GFx::AS3::Instances::fl_display::Bitmap *this,
+        bool extCall)
 {
-  JUMPOUT(extCall, 0, Scaleform::GFx::AS3::Instances::fl_display::Bitmap::CreateStageObject);
+  if ( !extCall )
+    Scaleform::GFx::AS3::Instances::fl_display::Bitmap::CreateStageObject(this);
 }
 
 // File Line: 193
 // RVA: 0x7BEB20
-Scaleform::GFx::DisplayObject *__fastcall Scaleform::GFx::AS3::Instances::fl_display::Bitmap::CreateStageObject(Scaleform::GFx::AS3::Instances::fl_display::Bitmap *this)
+Scaleform::GFx::DisplayObject *__fastcall Scaleform::GFx::AS3::Instances::fl_display::Bitmap::CreateStageObject(
+        Scaleform::GFx::AS3::Instances::fl_display::Bitmap *this)
 {
-  Scaleform::GFx::AS3::Instances::fl_display::Bitmap *v1; // rdi
-  Scaleform::GFx::AS3::ASVM *v2; // r14
-  Scaleform::GFx::AS3::MovieRoot *v3; // rsi
-  Scaleform::GFx::MovieDefImpl *v4; // rax
+  Scaleform::GFx::AS3::ASVM *pVM; // r14
+  Scaleform::GFx::AS3::MovieRoot *pMovieRoot; // rsi
+  Scaleform::GFx::MovieDefImpl *ResourceMovieDef; // rax
   Scaleform::GFx::MovieDefRootNode *i; // rbx
-  signed __int64 v6; // rax
-  Scaleform::GFx::ASSupport *v7; // rcx
-  __int64 v8; // rbx
-  Scaleform::RefCountNTSImpl *v9; // rcx
+  __int64 v6; // rax
+  Scaleform::GFx::ASSupport *pObject; // rcx
+  Scaleform::GFx::DisplayObject *v8; // rbx
+  Scaleform::GFx::DisplayObject *v9; // rcx
   _QWORD *v10; // rbx
   Scaleform::GFx::AS3::RefCountBaseGC<328> *v11; // rcx
-  unsigned int v12; // eax
+  unsigned int RefCount; // eax
   Scaleform::GFx::AS3::Traits *v13; // rsi
   __int64 v14; // rax
   Scaleform::GFx::AS3::VMAppDomain *v15; // rax
   Scaleform::GFx::AS3::CheckResult *v16; // rax
   Scaleform::GFx::AS3::Instances::fl_vec::Vector_uint *v17; // rbx
   unsigned int v18; // eax
-  Scaleform::GFx::CharacterCreateInfo pccinfo; // [rsp+38h] [rbp-21h]
-  Scaleform::GFx::AS3::Value ptr; // [rsp+50h] [rbp-9h]
+  Scaleform::GFx::CharacterCreateInfo pccinfo; // [rsp+38h] [rbp-21h] BYREF
+  Scaleform::GFx::AS3::Value ptr; // [rsp+50h] [rbp-9h] BYREF
   int v22; // [rsp+70h] [rbp+17h]
   __int64 v23; // [rsp+78h] [rbp+1Fh]
   __int64 v24; // [rsp+80h] [rbp+27h]
-  int result; // [rsp+C0h] [rbp+67h]
-  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_vec::Vector_uint> pobj; // [rsp+C8h] [rbp+6Fh]
+  int result; // [rsp+C0h] [rbp+67h] BYREF
+  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_vec::Vector_uint> pobj; // [rsp+C8h] [rbp+6Fh] BYREF
 
-  v1 = this;
   if ( this->pDispObj.pObject )
     return this->pDispObj.pObject;
-  v2 = (Scaleform::GFx::AS3::ASVM *)this->pTraits.pObject->pVM;
-  v3 = v2->pMovieRoot;
-  v4 = Scaleform::GFx::AS3::ASVM::GetResourceMovieDef(v2, (Scaleform::GFx::AS3::Instances::fl::Object *)&this->vfptr);
-  if ( v4 )
+  pVM = (Scaleform::GFx::AS3::ASVM *)this->pTraits.pObject->pVM;
+  pMovieRoot = pVM->pMovieRoot;
+  ResourceMovieDef = Scaleform::GFx::AS3::ASVM::GetResourceMovieDef(pVM, this);
+  if ( ResourceMovieDef )
   {
-    pccinfo.pBindDefImpl = 0i64;
-    pccinfo.pResource = 0i64;
-    pccinfo.pCharDef = 0i64;
-    if ( !Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::FindLibarySymbol(
-            (Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *)&v1->vfptr,
-            &pccinfo,
-            v4) )
+    memset(&pccinfo, 0, sizeof(pccinfo));
+    if ( !Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::FindLibarySymbol(this, &pccinfo, ResourceMovieDef) )
     {
-      for ( i = v3->pMovieImpl->RootMovieDefNodes.Root.pNext; ; i = i->pNext )
+      for ( i = pMovieRoot->pMovieImpl->RootMovieDefNodes.Root.pNext; ; i = i->pNext )
       {
-        v6 = (signed __int64)(v3->pMovieImpl == (Scaleform::GFx::MovieImpl *)-112i64 ? 0i64 : &v3->pMovieImpl->MovieLevels.Data.Policy);
+        v6 = pMovieRoot->pMovieImpl == (Scaleform::GFx::MovieImpl *)-112i64
+           ? 0i64
+           : (__int64)&pMovieRoot->pMovieImpl->MovieLevels.Data.Policy;
         if ( i == (Scaleform::GFx::MovieDefRootNode *)v6 )
           break;
-        if ( Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::FindLibarySymbol(
-               (Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *)&v1->vfptr,
-               &pccinfo,
-               i->pDefImpl) )
-        {
+        if ( Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::FindLibarySymbol(this, &pccinfo, i->pDefImpl) )
           goto LABEL_12;
-        }
       }
       pccinfo.pCharDef = 0i64;
       pccinfo.pResource = 0i64;
     }
 LABEL_12:
-    v7 = v3->pASSupport.pObject;
+    pObject = pMovieRoot->pASSupport.pObject;
     result = 0x40000;
-    v8 = ((__int64 (__fastcall *)(Scaleform::GFx::ASSupport *, Scaleform::GFx::MovieImpl *, Scaleform::GFx::CharacterCreateInfo *, _QWORD, int *, signed int, signed __int64))v7->vfptr[4].__vecDelDtor)(
-           v7,
-           v3->pMovieImpl,
-           &pccinfo,
-           0i64,
-           &result,
-           8,
-           -2i64);
-    v9 = (Scaleform::RefCountNTSImpl *)&v1->pDispObj.pObject->vfptr;
+    v8 = (Scaleform::GFx::DisplayObject *)((__int64 (__fastcall *)(Scaleform::GFx::ASSupport *, Scaleform::GFx::MovieImpl *, Scaleform::GFx::CharacterCreateInfo *, _QWORD, int *, int, __int64))pObject->vfptr[4].__vecDelDtor)(
+                                            pObject,
+                                            pMovieRoot->pMovieImpl,
+                                            &pccinfo,
+                                            0i64,
+                                            &result,
+                                            8,
+                                            -2i64);
+    v9 = this->pDispObj.pObject;
     if ( v9 )
       Scaleform::RefCountNTSImpl::Release(v9);
-    v1->pDispObj.pObject = (Scaleform::GFx::DisplayObject *)v8;
+    this->pDispObj.pObject = v8;
     if ( v8 )
-      v10 = (_QWORD *)(v8 + 4i64 * *(unsigned __int8 *)(v8 + 109));
+      v10 = (Scaleform::RefCountNTSImplCoreVtbl **)((char *)&v8->Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr
+                                                  + 4 * (unsigned __int8)v8->AvmObjOffset);
     else
       v10 = 0i64;
-    v10[2] = v1;
+    v10[2] = this;
     v11 = (Scaleform::GFx::AS3::RefCountBaseGC<328> *)v10[1];
     if ( v11 )
     {
-      if ( (unsigned __int8)v11 & 1 )
+      if ( ((unsigned __int8)v11 & 1) != 0 )
       {
         v10[1] = (char *)v11 - 1;
       }
       else
       {
-        v12 = v11->RefCount;
-        if ( v12 & 0x3FFFFF )
+        RefCount = v11->RefCount;
+        if ( (RefCount & 0x3FFFFF) != 0 )
         {
-          v11->RefCount = v12 - 1;
+          v11->RefCount = RefCount - 1;
           Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(v11);
         }
       }
       v10[1] = 0i64;
     }
-    v13 = v1->pTraits.pObject;
-    v14 = ((__int64 (__fastcall *)(Scaleform::GFx::AS3::Traits *))v13->vfptr[2].~RefCountBaseGC<328>)(v1->pTraits.pObject);
+    v13 = this->pTraits.pObject;
+    v14 = ((__int64 (__fastcall *)(Scaleform::GFx::AS3::Traits *))v13->vfptr[2].~RefCountBaseGC<328>)(v13);
     if ( v14 )
       v15 = *(Scaleform::GFx::AS3::VMAppDomain **)(v14 + 48);
     else
       v15 = v13->pVM->SystemDomain.pObject;
     if ( Scaleform::GFx::AS3::VMAppDomain::Enabled )
       v10[5] = v15;
-    if ( pccinfo.pResource && (((__int64 (*)(void))pccinfo.pResource->vfptr->GetResourceTypeCode)() & 0xFF00) == 256 )
+    if ( pccinfo.pResource
+      && (((__int64 (__fastcall *)(Scaleform::GFx::Resource *))pccinfo.pResource->vfptr->GetResourceTypeCode)(pccinfo.pResource) & 0xFF00) == 256 )
     {
       ptr.Flags = 4;
       ptr.Bonus.pWeakProxy = 0i64;
-      ptr.value.VNumber = 0.0;
+      ptr.value.VS._1.VStr = 0i64;
       v22 = 4;
       v23 = 0i64;
       v24 = 0i64;
       pobj.pObject = 0i64;
       v16 = Scaleform::GFx::AS3::VM::ConstructBuiltinObject<Scaleform::GFx::AS3::Instances::fl_geom::Rectangle>(
-              (Scaleform::GFx::AS3::VM *)&v2->vfptr,
+              pVM,
               (Scaleform::GFx::AS3::CheckResult *)&result,
-              &pobj,
+              (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Object> *)&pobj,
               "flash.display.BitmapData",
               2u,
               &ptr);
@@ -459,22 +456,22 @@ LABEL_12:
              pccinfo.pBindDefImpl) )
       {
         Scaleform::GFx::AS3::Instances::fl_display::Bitmap::SetBitmapData(
-          v1,
+          this,
           (Scaleform::GFx::AS3::Instances::fl_display::BitmapData *)v17);
       }
       if ( v17 )
       {
-        if ( (unsigned __int8)v17 & 1 )
+        if ( ((unsigned __int8)v17 & 1) != 0 )
         {
           pobj.pObject = (Scaleform::GFx::AS3::Instances::fl_vec::Vector_uint *)((char *)v17 - 1);
         }
         else
         {
           v18 = v17->RefCount;
-          if ( v18 & 0x3FFFFF )
+          if ( (v18 & 0x3FFFFF) != 0 )
           {
             v17->RefCount = v18 - 1;
-            Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v17->vfptr);
+            Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(v17);
           }
         }
       }
@@ -485,28 +482,25 @@ LABEL_12:
         (void (__fastcall *)(void *))Scaleform::GFx::AS3::Value::~Value);
     }
   }
-  return v1->pDispObj.pObject;
+  return this->pDispObj.pObject;
 }
 
 // File Line: 254
 // RVA: 0x822890
-signed __int64 __fastcall Scaleform::GFx::AS3::Instances::fl_display::Bitmap::String2PixelSnapping(Scaleform::GFx::AS3::Instances::fl_display::Bitmap *this, const char *str)
+__int64 __fastcall Scaleform::GFx::AS3::Instances::fl_display::Bitmap::String2PixelSnapping(
+        Scaleform::GFx::AS3::Instances::fl_display::Bitmap *this,
+        const char *str)
 {
-  const char *v2; // r10
-  Scaleform::GFx::AS3::Instances::fl_display::Bitmap *v3; // rbx
-  signed __int64 result; // rax
+  __int64 result; // rax
   __int64 v5; // r9
   char v6; // r8
   __int64 v7; // rdx
   char v8; // cl
   char v9; // cl
   Scaleform::GFx::AS3::VM::Error *v10; // rax
-  Scaleform::GFx::ASStringNode *v11; // rcx
-  bool v12; // zf
-  Scaleform::GFx::AS3::VM::Error v13; // [rsp+28h] [rbp-20h]
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  Scaleform::GFx::AS3::VM::Error v13; // [rsp+28h] [rbp-20h] BYREF
 
-  v2 = str;
-  v3 = this;
   result = 0i64;
   v5 = 0i64;
   while ( 1 )
@@ -520,7 +514,7 @@ signed __int64 __fastcall Scaleform::GFx::AS3::Instances::fl_display::Bitmap::St
   v7 = 0i64;
   while ( 1 )
   {
-    v8 = v2[v7++];
+    v8 = str[v7++];
     if ( v8 != aAlways[v7 - 1] )
       break;
     if ( v7 == 7 )
@@ -528,92 +522,90 @@ signed __int64 __fastcall Scaleform::GFx::AS3::Instances::fl_display::Bitmap::St
   }
   while ( 1 )
   {
-    v9 = v2[result++];
+    v9 = str[result++];
     if ( v9 != aAuto[result - 1] )
       break;
     if ( result == 5 )
       return 2i64;
   }
-  Scaleform::GFx::AS3::VM::Error::Error(&v13, eInvalidEnumError, v3->pTraits.pObject->pVM);
-  Scaleform::GFx::AS3::VM::ThrowErrorInternal(v3->pTraits.pObject->pVM, v10, &Scaleform::GFx::AS3::fl::ArgumentErrorTI);
-  v11 = v13.Message.pNode;
-  v12 = v13.Message.pNode->RefCount == 1;
-  --v11->RefCount;
-  if ( v12 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v11);
+  Scaleform::GFx::AS3::VM::Error::Error(&v13, 2008, this->pTraits.pObject->pVM);
+  Scaleform::GFx::AS3::VM::ThrowErrorInternal(
+    this->pTraits.pObject->pVM,
+    v10,
+    &Scaleform::GFx::AS3::fl::ArgumentErrorTI);
+  pNode = v13.Message.pNode;
+  if ( v13.Message.pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
   return 0i64;
 }
 
 // File Line: 303
 // RVA: 0x7FF1F0
-void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl_display::Bitmap::MakeObject(Scaleform::GFx::AS3::InstanceTraits::fl_display::Bitmap *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::InstanceTraits::Traits *t)
+void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl_display::Bitmap::MakeObject(
+        Scaleform::GFx::AS3::InstanceTraits::fl_display::Bitmap *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::InstanceTraits::fl_display::Bitmap *t)
 {
-  Scaleform::GFx::AS3::Value *v3; // rbx
-  Scaleform::GFx::AS3::Object **v4; // rax
-  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_display::Bitmap> resulta; // [rsp+48h] [rbp+20h]
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_display::Bitmap> *Instance; // rax
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_display::Bitmap> resulta; // [rsp+48h] [rbp+20h] BYREF
 
-  v3 = result;
-  v4 = (Scaleform::GFx::AS3::Object **)Scaleform::GFx::AS3::InstanceTraits::fl_display::Bitmap::MakeInstance(
-                                         &resulta,
-                                         (Scaleform::GFx::AS3::InstanceTraits::fl_display::Bitmap *)t);
-  Scaleform::GFx::AS3::Value::Pick(v3, *v4);
+  Instance = Scaleform::GFx::AS3::InstanceTraits::fl_display::Bitmap::MakeInstance(&resulta, t);
+  Scaleform::GFx::AS3::Value::Pick(result, Instance->pV);
 }
 
 // File Line: 326
 // RVA: 0x7559A0
-Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl_display::Bitmap::MakeClassTraits(Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result, Scaleform::GFx::AS3::VM *vm)
+Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl_display::Bitmap::MakeClassTraits(
+        Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result,
+        Scaleform::GFx::AS3::VM *vm)
 {
-  Scaleform::GFx::AS3::VM *v2; // rbp
-  Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *v3; // rdi
-  Scaleform::MemoryHeap *v4; // rsi
+  Scaleform::MemoryHeap *MHeap; // rsi
   Scaleform::GFx::AS3::ClassTraits::Traits *v5; // rax
   Scaleform::GFx::AS3::ClassTraits::Traits *v6; // rbx
   Scaleform::GFx::AS3::InstanceTraits::CTraits *v7; // rax
   Scaleform::Pickable<Scaleform::GFx::AS3::InstanceTraits::Traits> v8; // rbx
   Scaleform::GFx::AS3::Class *v9; // rax
 
-  v2 = vm;
-  v3 = result;
-  v4 = vm->MHeap;
-  v5 = (Scaleform::GFx::AS3::ClassTraits::Traits *)v4->vfptr->Alloc(v4, 208ui64, 0i64);
+  MHeap = vm->MHeap;
+  v5 = (Scaleform::GFx::AS3::ClassTraits::Traits *)MHeap->vfptr->Alloc(MHeap, 208ui64, 0i64);
   v6 = v5;
   if ( v5 )
   {
-    Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl_display::BitmapCI);
+    Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, vm, &Scaleform::GFx::AS3::fl_display::BitmapCI);
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_events::EventDispatcher::`vftable;
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_display::DisplayObject::`vftable;
-    v6->TraitsType = 22;
+    v6->TraitsType = Traits_DisplayObject_Begin;
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_display::Bitmap::`vftable;
-    v6->TraitsType = 27;
+    v6->TraitsType = Traits_Bitmap;
   }
   else
   {
     v6 = 0i64;
   }
-  v3->pV = v6;
-  v7 = (Scaleform::GFx::AS3::InstanceTraits::CTraits *)v4->vfptr->Alloc(v4, 240ui64, 0i64);
-  v8.pV = (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v7->vfptr;
+  result->pV = v6;
+  v7 = (Scaleform::GFx::AS3::InstanceTraits::CTraits *)MHeap->vfptr->Alloc(MHeap, 240ui64, 0i64);
+  v8.pV = v7;
   if ( v7 )
   {
-    Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, v2, &Scaleform::GFx::AS3::fl_display::BitmapCI);
+    Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, vm, &Scaleform::GFx::AS3::fl_display::BitmapCI);
     v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
     v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_events::EventDispatcher::`vftable;
     v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_display::DisplayObject::`vftable;
-    v8.pV->TraitsType = 22;
+    v8.pV->TraitsType = Traits_DisplayObject_Begin;
     v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_display::Bitmap::`vftable;
-    v8.pV->TraitsType = 27;
+    v8.pV->TraitsType = Traits_Bitmap;
   }
   else
   {
     v8.pV = 0i64;
   }
-  Scaleform::GFx::AS3::ClassTraits::Traits::SetInstanceTraits(v3->pV, v8);
-  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))v4->vfptr->Alloc)(
-                                       v4,
+  Scaleform::GFx::AS3::ClassTraits::Traits::SetInstanceTraits(result->pV, v8);
+  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))MHeap->vfptr->Alloc)(
+                                       MHeap,
                                        72i64);
   if ( v9 )
-    Scaleform::GFx::AS3::Class::Class(v9, v3->pV);
-  return v3;
+    Scaleform::GFx::AS3::Class::Class(v9, result->pV);
+  return result;
 }
 

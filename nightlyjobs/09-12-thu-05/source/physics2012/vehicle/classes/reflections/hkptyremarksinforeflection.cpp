@@ -70,17 +70,17 @@ hkClass *__fastcall hkpTyremarksWheel::staticClass()
 
 // File Line: 119
 // RVA: 0xE25060
-void __fastcall finishLoadedObjecthkpTyremarksWheel(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpTyremarksWheel(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpTyremarksWheel::`vftable;
+    *p = &hkpTyremarksWheel::`vftable;
 }
 
 // File Line: 125
 // RVA: 0xE25080
-void __fastcall cleanupLoadedObjecthkpTyremarksWheel(void *p)
+void __fastcall cleanupLoadedObjecthkpTyremarksWheel(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 129
@@ -101,8 +101,8 @@ void **dynamic_initializer_for__hkpTyremarksWheelTypeInfo__()
   hkpTyremarksWheelTypeInfo.m_typeName = "hkpTyremarksWheel";
   hkpTyremarksWheelTypeInfo.m_vtable = result;
   hkpTyremarksWheelTypeInfo.m_scopedName = "!hkpTyremarksWheel";
-  hkpTyremarksWheelTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpTyremarksWheel;
-  hkpTyremarksWheelTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpTyremarksWheel;
+  hkpTyremarksWheelTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpTyremarksWheel;
+  hkpTyremarksWheelTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpTyremarksWheel;
   return result;
 }
 
@@ -136,17 +136,17 @@ hkClass *__fastcall hkpTyremarksInfo::staticClass()
 
 // File Line: 189
 // RVA: 0xE250A0
-void __fastcall finishLoadedObjecthkpTyremarksInfo(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpTyremarksInfo(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpTyremarksInfo::`vftable;
+    *p = &hkpTyremarksInfo::`vftable;
 }
 
 // File Line: 195
 // RVA: 0xE250C0
-void __fastcall cleanupLoadedObjecthkpTyremarksInfo(void *p)
+void __fastcall cleanupLoadedObjecthkpTyremarksInfo(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 199
@@ -167,8 +167,8 @@ void **dynamic_initializer_for__hkpTyremarksInfoTypeInfo__()
   hkpTyremarksInfoTypeInfo.m_typeName = "hkpTyremarksInfo";
   hkpTyremarksInfoTypeInfo.m_vtable = result;
   hkpTyremarksInfoTypeInfo.m_scopedName = "!hkpTyremarksInfo";
-  hkpTyremarksInfoTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpTyremarksInfo;
-  hkpTyremarksInfoTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpTyremarksInfo;
+  hkpTyremarksInfoTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpTyremarksInfo;
+  hkpTyremarksInfoTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpTyremarksInfo;
   return result;
 }
 

@@ -1,18 +1,18 @@
 // File Line: 32
 // RVA: 0x146A9B0
-char *UFG::_dynamic_initializer_for__testController__()
+float *UFG::_dynamic_initializer_for__testController__()
 {
-  signed int v0; // ecx
-  char *result; // rax
+  int v0; // ecx
+  float *result; // rax
 
   v0 = 21;
-  result = (char *)&UFG::testController.testInput[0].fDataY;
+  result = &UFG::testController.testInput[0].fDataY;
   do
   {
     --v0;
-    *(result - 12) = 0;
-    *(_QWORD *)(result - 4) = 0i64;
-    result += 16;
+    *((_BYTE *)result - 12) = 0;
+    *(_QWORD *)(result - 1) = 0i64;
+    result += 4;
   }
   while ( v0 >= 0 );
   return result;
@@ -29,603 +29,328 @@ __int64 UFG::_dynamic_initializer_for__gMoveThatMatchedRefMove__()
   *(_QWORD *)&UFG::gMoveThatMatchedRefMove.mEndTrim = 0i64;
   UFG::gMoveThatMatchedRefMove.mLocked = 0;
   UFG::gMoveThatMatchedRefMove.mOctantIndex = 0;
-  return atexit(UFG::_dynamic_atexit_destructor_for__gMoveThatMatchedRefMove__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gMoveThatMatchedRefMove__);
 }
 
 // File Line: 100
 // RVA: 0x1B7D90
-const char *__fastcall UFG::MapInputVKeyToString(int key)
+const char *__fastcall UFG::MapInputVKeyToString(unsigned __int8 key)
 {
-  const char *v2; // [rsp+0h] [rbp-100h]
-  const char *v3; // [rsp+8h] [rbp-F8h]
-  const char *v4; // [rsp+10h] [rbp-F0h]
-  const char *v5; // [rsp+18h] [rbp-E8h]
-  const char *v6; // [rsp+20h] [rbp-E0h]
-  const char *v7; // [rsp+28h] [rbp-D8h]
-  const char *v8; // [rsp+30h] [rbp-D0h]
-  const char *v9; // [rsp+38h] [rbp-C8h]
-  const char *v10; // [rsp+40h] [rbp-C0h]
-  const char *v11; // [rsp+48h] [rbp-B8h]
-  const char *v12; // [rsp+50h] [rbp-B0h]
-  const char *v13; // [rsp+58h] [rbp-A8h]
-  const char *v14; // [rsp+60h] [rbp-A0h]
-  const char *v15; // [rsp+68h] [rbp-98h]
-  const char *v16; // [rsp+70h] [rbp-90h]
-  const char *v17; // [rsp+78h] [rbp-88h]
-  const char *v18; // [rsp+80h] [rbp-80h]
-  const char *v19; // [rsp+88h] [rbp-78h]
-  const char *v20; // [rsp+90h] [rbp-70h]
-  const char *v21; // [rsp+98h] [rbp-68h]
-  const char *v22; // [rsp+A0h] [rbp-60h]
-  const char *v23; // [rsp+A8h] [rbp-58h]
-  const char *v24; // [rsp+B0h] [rbp-50h]
-  const char *v25; // [rsp+B8h] [rbp-48h]
-  const char *v26; // [rsp+C0h] [rbp-40h]
-  const char *v27; // [rsp+C8h] [rbp-38h]
-  const char *v28; // [rsp+D0h] [rbp-30h]
-  const char *v29; // [rsp+D8h] [rbp-28h]
-  const char *v30; // [rsp+E0h] [rbp-20h]
-  const char *v31; // [rsp+E8h] [rbp-18h]
-  const char *v32; // [rsp+F0h] [rbp-10h]
-  const char *v33; // [rsp+F8h] [rbp-8h]
-  const char *v34; // [rsp+100h] [rbp+0h]
-  const char *v35; // [rsp+108h] [rbp+8h]
-  const char *v36; // [rsp+110h] [rbp+10h]
-  const char *v37; // [rsp+118h] [rbp+18h]
-  const char *v38; // [rsp+120h] [rbp+20h]
-  const char *v39; // [rsp+128h] [rbp+28h]
-  const char *v40; // [rsp+130h] [rbp+30h]
-  const char *v41; // [rsp+138h] [rbp+38h]
-  const char *v42; // [rsp+140h] [rbp+40h]
-  const char *v43; // [rsp+148h] [rbp+48h]
-  const char *v44; // [rsp+150h] [rbp+50h]
-  const char *v45; // [rsp+158h] [rbp+58h]
-  const char *v46; // [rsp+160h] [rbp+60h]
-  const char *v47; // [rsp+168h] [rbp+68h]
-  const char *v48; // [rsp+170h] [rbp+70h]
-  const char *v49; // [rsp+178h] [rbp+78h]
-  const char *v50; // [rsp+180h] [rbp+80h]
-  const char *v51; // [rsp+188h] [rbp+88h]
-  const char *v52; // [rsp+190h] [rbp+90h]
-  const char *v53; // [rsp+198h] [rbp+98h]
-  const char *v54; // [rsp+1A0h] [rbp+A0h]
-  const char *v55; // [rsp+1A8h] [rbp+A8h]
-  const char *v56; // [rsp+1B0h] [rbp+B0h]
-  const char *v57; // [rsp+1B8h] [rbp+B8h]
-  const char *v58; // [rsp+1C0h] [rbp+C0h]
-  const char *v59; // [rsp+1C8h] [rbp+C8h]
-  const char *v60; // [rsp+1D0h] [rbp+D0h]
-  const char *v61; // [rsp+1D8h] [rbp+D8h]
-  const char *v62; // [rsp+1E0h] [rbp+E0h]
-  const char *v63; // [rsp+1E8h] [rbp+E8h]
-  const char *v64; // [rsp+1F0h] [rbp+F0h]
-  const char *v65; // [rsp+1F8h] [rbp+F8h]
-  const char *v66; // [rsp+200h] [rbp+100h]
-  const char *v67; // [rsp+208h] [rbp+108h]
-  const char *v68; // [rsp+210h] [rbp+110h]
-  const char *v69; // [rsp+218h] [rbp+118h]
-  const char *v70; // [rsp+220h] [rbp+120h]
-  const char *v71; // [rsp+228h] [rbp+128h]
-  const char *v72; // [rsp+230h] [rbp+130h]
-  const char *v73; // [rsp+238h] [rbp+138h]
-  const char *v74; // [rsp+240h] [rbp+140h]
-  const char *v75; // [rsp+248h] [rbp+148h]
-  const char *v76; // [rsp+250h] [rbp+150h]
-  const char *v77; // [rsp+258h] [rbp+158h]
-  const char *v78; // [rsp+260h] [rbp+160h]
-  const char *v79; // [rsp+268h] [rbp+168h]
-  const char *v80; // [rsp+270h] [rbp+170h]
-  const char *v81; // [rsp+278h] [rbp+178h]
-  const char *v82; // [rsp+280h] [rbp+180h]
-  const char *v83; // [rsp+288h] [rbp+188h]
-  const char *v84; // [rsp+290h] [rbp+190h]
-  const char *v85; // [rsp+298h] [rbp+198h]
-  const char *v86; // [rsp+2A0h] [rbp+1A0h]
-  const char *v87; // [rsp+2A8h] [rbp+1A8h]
-  const char *v88; // [rsp+2B0h] [rbp+1B0h]
-  const char *v89; // [rsp+2B8h] [rbp+1B8h]
-  const char *v90; // [rsp+2C0h] [rbp+1C0h]
-  const char *v91; // [rsp+2C8h] [rbp+1C8h]
-  const char *v92; // [rsp+2D0h] [rbp+1D0h]
-  const char *v93; // [rsp+2D8h] [rbp+1D8h]
-  const char *v94; // [rsp+2E0h] [rbp+1E0h]
-  const char *v95; // [rsp+2E8h] [rbp+1E8h]
-  const char *v96; // [rsp+2F0h] [rbp+1F0h]
-  const char *v97; // [rsp+2F8h] [rbp+1F8h]
-  const char *v98; // [rsp+300h] [rbp+200h]
-  const char *v99; // [rsp+308h] [rbp+208h]
-  const char *v100; // [rsp+310h] [rbp+210h]
-  const char *v101; // [rsp+318h] [rbp+218h]
-  const char *v102; // [rsp+320h] [rbp+220h]
-  const char *v103; // [rsp+328h] [rbp+228h]
-  const char *v104; // [rsp+330h] [rbp+230h]
-  const char *v105; // [rsp+338h] [rbp+238h]
-  const char *v106; // [rsp+340h] [rbp+240h]
-  const char *v107; // [rsp+348h] [rbp+248h]
-  const char *v108; // [rsp+350h] [rbp+250h]
-  const char *v109; // [rsp+358h] [rbp+258h]
-  const char *v110; // [rsp+360h] [rbp+260h]
-  const char *v111; // [rsp+368h] [rbp+268h]
-  const char *v112; // [rsp+370h] [rbp+270h]
-  const char *v113; // [rsp+378h] [rbp+278h]
-  const char *v114; // [rsp+380h] [rbp+280h]
-  const char *v115; // [rsp+388h] [rbp+288h]
-  const char *v116; // [rsp+390h] [rbp+290h]
-  const char *v117; // [rsp+398h] [rbp+298h]
-  const char *v118; // [rsp+3A0h] [rbp+2A0h]
-  const char *v119; // [rsp+3A8h] [rbp+2A8h]
-  const char *v120; // [rsp+3B0h] [rbp+2B0h]
-  const char *v121; // [rsp+3B8h] [rbp+2B8h]
-  const char *v122; // [rsp+3C0h] [rbp+2C0h]
-  const char *v123; // [rsp+3C8h] [rbp+2C8h]
-  const char *v124; // [rsp+3D0h] [rbp+2D0h]
-  const char *v125; // [rsp+3D8h] [rbp+2D8h]
-  const char *v126; // [rsp+3E0h] [rbp+2E0h]
-  const char *v127; // [rsp+3E8h] [rbp+2E8h]
-  const char *v128; // [rsp+3F0h] [rbp+2F0h]
-  const char *v129; // [rsp+3F8h] [rbp+2F8h]
-  const char *v130; // [rsp+400h] [rbp+300h]
-  const char *v131; // [rsp+408h] [rbp+308h]
-  const char *v132; // [rsp+410h] [rbp+310h]
-  const char *v133; // [rsp+418h] [rbp+318h]
-  const char *v134; // [rsp+420h] [rbp+320h]
-  const char *v135; // [rsp+428h] [rbp+328h]
-  const char *v136; // [rsp+430h] [rbp+330h]
-  const char *v137; // [rsp+438h] [rbp+338h]
-  const char *v138; // [rsp+440h] [rbp+340h]
-  const char *v139; // [rsp+448h] [rbp+348h]
-  const char *v140; // [rsp+450h] [rbp+350h]
-  const char *v141; // [rsp+458h] [rbp+358h]
-  const char *v142; // [rsp+460h] [rbp+360h]
-  const char *v143; // [rsp+468h] [rbp+368h]
-  const char *v144; // [rsp+470h] [rbp+370h]
-  const char *v145; // [rsp+478h] [rbp+378h]
-  const char *v146; // [rsp+480h] [rbp+380h]
-  const char *v147; // [rsp+488h] [rbp+388h]
-  const char *v148; // [rsp+490h] [rbp+390h]
-  const char *v149; // [rsp+498h] [rbp+398h]
-  const char *v150; // [rsp+4A0h] [rbp+3A0h]
-  const char *v151; // [rsp+4A8h] [rbp+3A8h]
-  const char *v152; // [rsp+4B0h] [rbp+3B0h]
-  const char *v153; // [rsp+4B8h] [rbp+3B8h]
-  const char *v154; // [rsp+4C0h] [rbp+3C0h]
-  const char *v155; // [rsp+4C8h] [rbp+3C8h]
-  const char *v156; // [rsp+4D0h] [rbp+3D0h]
-  const char *v157; // [rsp+4D8h] [rbp+3D8h]
-  const char *v158; // [rsp+4E0h] [rbp+3E0h]
-  const char *v159; // [rsp+4E8h] [rbp+3E8h]
-  const char *v160; // [rsp+4F0h] [rbp+3F0h]
-  const char *v161; // [rsp+4F8h] [rbp+3F8h]
-  const char *v162; // [rsp+500h] [rbp+400h]
-  const char *v163; // [rsp+508h] [rbp+408h]
-  const char *v164; // [rsp+510h] [rbp+410h]
-  const char *v165; // [rsp+518h] [rbp+418h]
-  const char *v166; // [rsp+520h] [rbp+420h]
-  const char *v167; // [rsp+528h] [rbp+428h]
-  const char *v168; // [rsp+530h] [rbp+430h]
-  const char *v169; // [rsp+538h] [rbp+438h]
-  const char *v170; // [rsp+540h] [rbp+440h]
-  const char *v171; // [rsp+548h] [rbp+448h]
-  const char *v172; // [rsp+550h] [rbp+450h]
-  const char *v173; // [rsp+558h] [rbp+458h]
-  const char *v174; // [rsp+560h] [rbp+460h]
-  const char *v175; // [rsp+568h] [rbp+468h]
-  const char *v176; // [rsp+570h] [rbp+470h]
-  const char *v177; // [rsp+578h] [rbp+478h]
-  const char *v178; // [rsp+580h] [rbp+480h]
-  const char *v179; // [rsp+588h] [rbp+488h]
-  const char *v180; // [rsp+590h] [rbp+490h]
-  const char *v181; // [rsp+598h] [rbp+498h]
-  const char *v182; // [rsp+5A0h] [rbp+4A0h]
-  const char *v183; // [rsp+5A8h] [rbp+4A8h]
-  const char *v184; // [rsp+5B0h] [rbp+4B0h]
-  const char *v185; // [rsp+5B8h] [rbp+4B8h]
-  const char *v186; // [rsp+5C0h] [rbp+4C0h]
-  const char *v187; // [rsp+5C8h] [rbp+4C8h]
-  const char *v188; // [rsp+5D0h] [rbp+4D0h]
-  const char *v189; // [rsp+5D8h] [rbp+4D8h]
-  const char *v190; // [rsp+5E0h] [rbp+4E0h]
-  const char *v191; // [rsp+5E8h] [rbp+4E8h]
-  const char *v192; // [rsp+5F0h] [rbp+4F0h]
-  const char *v193; // [rsp+5F8h] [rbp+4F8h]
-  const char *v194; // [rsp+600h] [rbp+500h]
-  const char *v195; // [rsp+608h] [rbp+508h]
-  const char *v196; // [rsp+610h] [rbp+510h]
-  const char *v197; // [rsp+618h] [rbp+518h]
-  const char *v198; // [rsp+620h] [rbp+520h]
-  const char *v199; // [rsp+628h] [rbp+528h]
-  const char *v200; // [rsp+630h] [rbp+530h]
-  const char *v201; // [rsp+638h] [rbp+538h]
-  const char *v202; // [rsp+640h] [rbp+540h]
-  const char *v203; // [rsp+648h] [rbp+548h]
-  const char *v204; // [rsp+650h] [rbp+550h]
-  const char *v205; // [rsp+658h] [rbp+558h]
-  const char *v206; // [rsp+660h] [rbp+560h]
-  const char *v207; // [rsp+668h] [rbp+568h]
-  const char *v208; // [rsp+670h] [rbp+570h]
-  const char *v209; // [rsp+678h] [rbp+578h]
-  const char *v210; // [rsp+680h] [rbp+580h]
-  const char *v211; // [rsp+688h] [rbp+588h]
-  const char *v212; // [rsp+690h] [rbp+590h]
-  const char *v213; // [rsp+698h] [rbp+598h]
-  const char *v214; // [rsp+6A0h] [rbp+5A0h]
-  const char *v215; // [rsp+6A8h] [rbp+5A8h]
-  const char *v216; // [rsp+6B0h] [rbp+5B0h]
-  const char *v217; // [rsp+6B8h] [rbp+5B8h]
-  const char *v218; // [rsp+6C0h] [rbp+5C0h]
-  const char *v219; // [rsp+6C8h] [rbp+5C8h]
-  const char *v220; // [rsp+6D0h] [rbp+5D0h]
-  const char *v221; // [rsp+6D8h] [rbp+5D8h]
-  const char *v222; // [rsp+6E0h] [rbp+5E0h]
-  const char *v223; // [rsp+6E8h] [rbp+5E8h]
-  const char *v224; // [rsp+6F0h] [rbp+5F0h]
-  const char *v225; // [rsp+6F8h] [rbp+5F8h]
-  const char *v226; // [rsp+700h] [rbp+600h]
-  const char *v227; // [rsp+708h] [rbp+608h]
-  const char *v228; // [rsp+710h] [rbp+610h]
-  const char *v229; // [rsp+718h] [rbp+618h]
-  const char *v230; // [rsp+720h] [rbp+620h]
-  const char *v231; // [rsp+728h] [rbp+628h]
-  const char *v232; // [rsp+730h] [rbp+630h]
-  const char *v233; // [rsp+738h] [rbp+638h]
-  const char *v234; // [rsp+740h] [rbp+640h]
-  const char *v235; // [rsp+748h] [rbp+648h]
-  const char *v236; // [rsp+750h] [rbp+650h]
-  const char *v237; // [rsp+758h] [rbp+658h]
-  const char *v238; // [rsp+760h] [rbp+660h]
-  const char *v239; // [rsp+768h] [rbp+668h]
-  const char *v240; // [rsp+770h] [rbp+670h]
-  const char *v241; // [rsp+778h] [rbp+678h]
-  const char *v242; // [rsp+780h] [rbp+680h]
-  const char *v243; // [rsp+788h] [rbp+688h]
-  const char *v244; // [rsp+790h] [rbp+690h]
-  const char *v245; // [rsp+798h] [rbp+698h]
-  const char *v246; // [rsp+7A0h] [rbp+6A0h]
-  const char *v247; // [rsp+7A8h] [rbp+6A8h]
-  const char *v248; // [rsp+7B0h] [rbp+6B0h]
-  const char *v249; // [rsp+7B8h] [rbp+6B8h]
-  const char *v250; // [rsp+7C0h] [rbp+6C0h]
-  const char *v251; // [rsp+7C8h] [rbp+6C8h]
-  const char *v252; // [rsp+7D0h] [rbp+6D0h]
-  const char *v253; // [rsp+7D8h] [rbp+6D8h]
-  const char *v254; // [rsp+7E0h] [rbp+6E0h]
-  const char *v255; // [rsp+7E8h] [rbp+6E8h]
-  const char *v256; // [rsp+7F0h] [rbp+6F0h]
-  const char *v257; // [rsp+7F8h] [rbp+6F8h]
+  __int64 v2[256]; // [rsp+0h] [rbp-100h]
 
-  v2 = "0x00";
-  v3 = "LBUTTON";
-  v4 = "RBUTTON";
-  v5 = "CANCEL";
-  v6 = "MBUTTON";
-  v7 = "XBUTTON1";
-  v8 = "XBUTTON2";
-  v9 = "0x07";
-  v10 = "BACK";
-  v11 = "TAB";
-  v12 = "0x0a";
-  v13 = "0x0b";
-  v14 = "CLEAR";
-  v15 = "RETURN";
-  v16 = "0x0e";
-  v17 = "0x0f";
-  v18 = "SHIFT";
-  v19 = "CTRL";
-  v20 = "ALT";
-  v21 = "PAUSE";
-  v22 = "CAPITAL";
-  v23 = "KANA";
-  v24 = "0x16";
-  v25 = "JUNJA";
-  v26 = "FINAL";
-  v27 = "KANJI";
-  v28 = "0x1a";
-  v29 = "ESCAPE";
-  v30 = "CONVERT";
-  v31 = "NONCONVERT";
-  v32 = "ACCEPT";
-  v33 = "MODECHANGE";
-  v34 = "SPACE";
-  v35 = "PAGE UP";
-  v36 = "PAGE DOWN";
-  v37 = "END";
-  v38 = "HOME";
-  v39 = "LEFT";
-  v40 = "UP";
-  v41 = "RIGHT";
-  v42 = "DOWN";
-  v43 = "SELECT";
-  v44 = "PRINT";
-  v45 = "EXECUTE";
-  v46 = "SNAPSHOT";
-  v47 = "INSERT";
-  v48 = "DELETE";
-  v49 = "HELP";
-  v50 = "0";
-  v51 = "1";
-  v52 = "2";
-  v53 = "3";
-  v54 = "4";
-  v55 = "5";
-  v56 = "6";
-  v57 = "7";
-  v58 = "8";
-  v59 = "9";
-  v60 = "0x3a";
-  v61 = "0x3b";
-  v62 = "0x3c";
-  v63 = "0x3d";
-  v64 = "0x3e";
-  v65 = "0x3f";
-  v66 = "0x40";
-  v67 = "A";
-  v68 = "B";
-  v69 = "C";
-  v70 = "D";
-  v71 = "E";
-  v72 = "F";
-  v73 = "G";
-  v74 = "H";
-  v75 = "I";
-  v76 = "J";
-  v77 = "K";
-  v78 = "L";
-  v79 = "M";
-  v80 = "N";
-  v81 = "O";
-  v82 = "P";
-  v83 = "Q";
-  v84 = "R";
-  v85 = "S";
-  v86 = "T";
-  v87 = "U";
-  v88 = "V";
-  v89 = "W";
-  v90 = "X";
-  v91 = "Y";
-  v92 = "Z";
-  v93 = "LWIN";
-  v94 = "RWIN";
-  v95 = "APPS";
-  v96 = "0x5e";
-  v97 = "SLEEP";
-  v98 = "NUMPAD0";
-  v99 = "NUMPAD1";
-  v100 = "NUMPAD2";
-  v101 = "NUMPAD3";
-  v102 = "NUMPAD4";
-  v103 = "NUMPAD5";
-  v104 = "NUMPAD6";
-  v105 = "NUMPAD7";
-  v106 = "NUMPAD8";
-  v107 = "NUMPAD9";
-  v108 = "MULTIPLY";
-  v109 = "ADD";
-  v110 = "SEPARATOR";
-  v111 = "SUBTRACT";
-  v112 = "DECIMAL";
-  v113 = "DIVIDE";
-  v114 = "F1";
-  v115 = "F2";
-  v116 = "F3";
-  v117 = "F4";
-  v118 = "F5";
-  v119 = "F6";
-  v120 = "F7";
-  v121 = "F8";
-  v122 = "F9";
-  v123 = "F10";
-  v124 = "F11";
-  v125 = "F12";
-  v126 = "F13";
-  v127 = "F14";
-  v128 = "F15";
-  v129 = "F16";
-  v130 = "F17";
-  v131 = "F18";
-  v132 = "F19";
-  v133 = "F20";
-  v134 = "F21";
-  v135 = "F22";
-  v136 = "F23";
-  v137 = "F24";
-  v138 = "0x88";
-  v139 = "0x89";
-  v140 = "0x8a";
-  v141 = "0x8b";
-  v142 = "0x8c";
-  v143 = "0x8d";
-  v144 = "0x8e";
-  v145 = "0x8f";
-  v146 = "NUMLOCK";
-  v147 = "SCROLL";
-  v148 = "OEM_NEC_EQUAL";
-  v149 = "OEM_FJ_MASSHOU";
-  v150 = "OEM_FJ_TOUROKU";
-  v151 = "OEM_FJ_LOYA";
-  v152 = "OEM_FJ_ROYA";
-  v153 = "0x97";
-  v154 = "0x98";
-  v155 = "0x99";
-  v156 = "0x9a";
-  v157 = "0x9b";
-  v158 = "0x9c";
-  v159 = "0x9d";
-  v160 = "0x9e";
-  v161 = "0x9f";
-  v162 = "LSHIFT";
-  v163 = "RSHIFT";
-  v164 = "LCONTROL";
-  v165 = "RCONTROL";
-  v166 = "LMENU";
-  v167 = "RMENU";
-  v168 = "BROWSER_BACK";
-  v169 = "BROWSER_FORWARD";
-  v170 = "BROWSER_REFRESH";
-  v171 = "BROWSER_STOP";
-  v172 = "BROWSER_SEARCH";
-  v173 = "BROWSER_FAVORITES";
-  v174 = "BROWSER_HOME";
-  v175 = "VOLUME_MUTE";
-  v176 = "VOLUME_DOWN";
-  v177 = "VOLUME_UP";
-  v178 = "MEDIA_NEXT_TRACK";
-  v179 = "MEDIA_PREV_TRACK";
-  v180 = "MEDIA_STOP";
-  v181 = "MEDIA_PLAY_PAUSE";
-  v182 = "LAUNCH_MAIL";
-  v183 = "LAUNCH_MEDIA_SELECT";
-  v184 = "LAUNCH_APP1";
-  v185 = "LAUNCH_APP2";
-  v186 = "0xb8";
-  v187 = "0xb9";
-  v188 = "SEMI_COLON";
-  v189 = "PLUS";
-  v190 = "COMMA";
-  v191 = "MINUS";
-  v192 = "PERIOD";
-  v193 = "QUESTION_MARK";
-  v194 = "TILDE";
-  v195 = "0xc1";
-  v196 = "0xc2";
-  v197 = "0xc3";
-  v198 = "0xc4";
-  v199 = "0xc5";
-  v200 = "0xc6";
-  v201 = "0xc7";
-  v202 = "0xc8";
-  v203 = "0xc9";
-  v204 = "0xca";
-  v205 = "0xcb";
-  v206 = "0xcc";
-  v207 = "0xcd";
-  v208 = "0xce";
-  v209 = "0xcf";
-  v210 = "0xd0";
-  v211 = "0xd1";
-  v212 = "0xd2";
-  v213 = "0xd3";
-  v214 = "0xd4";
-  v215 = "0xd5";
-  v216 = "0xd6";
-  v217 = "0xd7";
-  v218 = "0xd8";
-  v219 = "0xd9";
-  v220 = "0xda";
-  v221 = "OEM_4";
-  v222 = "OEM_5";
-  v223 = "OEM_6";
-  v224 = "OEM_7";
-  v225 = "OEM_8";
-  v226 = "0xe0";
-  v227 = "OEM_AX";
-  v228 = "OEM_102";
-  v229 = "ICO_HELP";
-  v230 = "ICO_00";
-  v231 = "PROCESSKEY";
-  v232 = "ICO_CLEAR";
-  v233 = "0xe7";
-  v234 = "0xe8";
-  v235 = "OEM_RESET";
-  v236 = "OEM_JUMP";
-  v237 = "OEM_PA1";
-  v238 = "OEM_PA2";
-  v239 = "OEM_PA3";
-  v240 = "OEM_WSCTRL";
-  v241 = "OEM_CUSEL";
-  v242 = "OEM_ATTN";
-  v243 = "OEM_FINISH";
-  v244 = "OEM_COPY";
-  v245 = "OEM_AUTO";
-  v246 = "OEM_ENLW";
-  v247 = "OEM_BACKTAB";
-  v248 = "ATTN";
-  v249 = "CRSEL";
-  v250 = "EXSEL";
-  v251 = "EREOF";
-  v252 = "PLAY";
-  v253 = "ZOOM";
-  v254 = "NONAME";
-  v255 = "PA1";
-  v256 = "OEM_CLEAR";
-  v257 = "0xff";
-  return (&v2)[(unsigned __int8)key];
-}5 = "OEM_RESET";
-  v236 = "OEM_JUMP";
-  v237 = "OEM_PA1";
-  v238 = "OEM_PA2";
-  v239 = "OEM_PA3";
-  v240 = "OEM_WSCTRL";
-  v241 = "OEM_CUSEL";
-  v242 = "OEM_ATTN";
-  v243 = "OEM_FINISH";
-  v244 = "OEM_COPY";
-  v245 = "OEM_AUTO";
-  v246 = "OEM_ENLW";
-  v247 = "OEM_BACKTAB";
-  v248 = "ATTN";
-  v249 = "CRSEL";
-  v250 = "EXSEL";
-  v251 = "EREOF";
-  v252 = "PLAY";
-  v253 = "ZOOM";
-  v254 = 
+  v2[0] = (__int64)"0x00";
+  v2[1] = (__int64)"LBUTTON";
+  v2[2] = (__int64)"RBUTTON";
+  v2[3] = (__int64)"CANCEL";
+  v2[4] = (__int64)"MBUTTON";
+  v2[5] = (__int64)"XBUTTON1";
+  v2[6] = (__int64)"XBUTTON2";
+  v2[7] = (__int64)"0x07";
+  v2[8] = (__int64)"BACK";
+  v2[9] = (__int64)"TAB";
+  v2[10] = (__int64)"0x0a";
+  v2[11] = (__int64)"0x0b";
+  v2[12] = (__int64)"CLEAR";
+  v2[13] = (__int64)"RETURN";
+  v2[14] = (__int64)"0x0e";
+  v2[15] = (__int64)"0x0f";
+  v2[16] = (__int64)"SHIFT";
+  v2[17] = (__int64)"CTRL";
+  v2[18] = (__int64)"ALT";
+  v2[19] = (__int64)"PAUSE";
+  v2[20] = (__int64)"CAPITAL";
+  v2[21] = (__int64)"KANA";
+  v2[22] = (__int64)"0x16";
+  v2[23] = (__int64)"JUNJA";
+  v2[24] = (__int64)"FINAL";
+  v2[25] = (__int64)"KANJI";
+  v2[26] = (__int64)"0x1a";
+  v2[27] = (__int64)"ESCAPE";
+  v2[28] = (__int64)"CONVERT";
+  v2[29] = (__int64)"NONCONVERT";
+  v2[30] = (__int64)"ACCEPT";
+  v2[31] = (__int64)"MODECHANGE";
+  v2[32] = (__int64)"SPACE";
+  v2[33] = (__int64)"PAGE UP";
+  v2[34] = (__int64)"PAGE DOWN";
+  v2[35] = (__int64)"END";
+  v2[36] = (__int64)"HOME";
+  v2[37] = (__int64)"LEFT";
+  v2[38] = (__int64)"UP";
+  v2[39] = (__int64)"RIGHT";
+  v2[40] = (__int64)"DOWN";
+  v2[41] = (__int64)"SELECT";
+  v2[42] = (__int64)"PRINT";
+  v2[43] = (__int64)"EXECUTE";
+  v2[44] = (__int64)"SNAPSHOT";
+  v2[45] = (__int64)"INSERT";
+  v2[46] = (__int64)"DELETE";
+  v2[47] = (__int64)"HELP";
+  v2[48] = (__int64)"0";
+  v2[49] = (__int64)"1";
+  v2[50] = (__int64)"2";
+  v2[51] = (__int64)"3";
+  v2[52] = (__int64)"4";
+  v2[53] = (__int64)"5";
+  v2[54] = (__int64)"6";
+  v2[55] = (__int64)"7";
+  v2[56] = (__int64)"8";
+  v2[57] = (__int64)"9";
+  v2[58] = (__int64)"0x3a";
+  v2[59] = (__int64)"0x3b";
+  v2[60] = (__int64)"0x3c";
+  v2[61] = (__int64)"0x3d";
+  v2[62] = (__int64)"0x3e";
+  v2[63] = (__int64)"0x3f";
+  v2[64] = (__int64)"0x40";
+  v2[65] = (__int64)"A";
+  v2[66] = (__int64)"B";
+  v2[67] = (__int64)"C";
+  v2[68] = (__int64)"D";
+  v2[69] = (__int64)"E";
+  v2[70] = (__int64)"F";
+  v2[71] = (__int64)"G";
+  v2[72] = (__int64)"H";
+  v2[73] = (__int64)"I";
+  v2[74] = (__int64)"J";
+  v2[75] = (__int64)"K";
+  v2[76] = (__int64)"L";
+  v2[77] = (__int64)"M";
+  v2[78] = (__int64)"N";
+  v2[79] = (__int64)"O";
+  v2[80] = (__int64)"P";
+  v2[81] = (__int64)"Q";
+  v2[82] = (__int64)"R";
+  v2[83] = (__int64)"S";
+  v2[84] = (__int64)"T";
+  v2[85] = (__int64)"U";
+  v2[86] = (__int64)"V";
+  v2[87] = (__int64)"W";
+  v2[88] = (__int64)"X";
+  v2[89] = (__int64)"Y";
+  v2[90] = (__int64)"Z";
+  v2[91] = (__int64)"LWIN";
+  v2[92] = (__int64)"RWIN";
+  v2[93] = (__int64)"APPS";
+  v2[94] = (__int64)"0x5e";
+  v2[95] = (__int64)"SLEEP";
+  v2[96] = (__int64)"NUMPAD0";
+  v2[97] = (__int64)"NUMPAD1";
+  v2[98] = (__int64)"NUMPAD2";
+  v2[99] = (__int64)"NUMPAD3";
+  v2[100] = (__int64)"NUMPAD4";
+  v2[101] = (__int64)"NUMPAD5";
+  v2[102] = (__int64)"NUMPAD6";
+  v2[103] = (__int64)"NUMPAD7";
+  v2[104] = (__int64)"NUMPAD8";
+  v2[105] = (__int64)"NUMPAD9";
+  v2[106] = (__int64)"MULTIPLY";
+  v2[107] = (__int64)"ADD";
+  v2[108] = (__int64)"SEPARATOR";
+  v2[109] = (__int64)"SUBTRACT";
+  v2[110] = (__int64)"DECIMAL";
+  v2[111] = (__int64)"DIVIDE";
+  v2[112] = (__int64)"F1";
+  v2[113] = (__int64)"F2";
+  v2[114] = (__int64)"F3";
+  v2[115] = (__int64)"F4";
+  v2[116] = (__int64)"F5";
+  v2[117] = (__int64)"F6";
+  v2[118] = (__int64)"F7";
+  v2[119] = (__int64)"F8";
+  v2[120] = (__int64)"F9";
+  v2[121] = (__int64)"F10";
+  v2[122] = (__int64)"F11";
+  v2[123] = (__int64)"F12";
+  v2[124] = (__int64)"F13";
+  v2[125] = (__int64)"F14";
+  v2[126] = (__int64)"F15";
+  v2[127] = (__int64)"F16";
+  v2[128] = (__int64)"F17";
+  v2[129] = (__int64)"F18";
+  v2[130] = (__int64)"F19";
+  v2[131] = (__int64)"F20";
+  v2[132] = (__int64)"F21";
+  v2[133] = (__int64)"F22";
+  v2[134] = (__int64)"F23";
+  v2[135] = (__int64)"F24";
+  v2[136] = (__int64)"0x88";
+  v2[137] = (__int64)"0x89";
+  v2[138] = (__int64)"0x8a";
+  v2[139] = (__int64)"0x8b";
+  v2[140] = (__int64)"0x8c";
+  v2[141] = (__int64)"0x8d";
+  v2[142] = (__int64)"0x8e";
+  v2[143] = (__int64)"0x8f";
+  v2[144] = (__int64)"NUMLOCK";
+  v2[145] = (__int64)"SCROLL";
+  v2[146] = (__int64)"OEM_NEC_EQUAL";
+  v2[147] = (__int64)"OEM_FJ_MASSHOU";
+  v2[148] = (__int64)"OEM_FJ_TOUROKU";
+  v2[149] = (__int64)"OEM_FJ_LOYA";
+  v2[150] = (__int64)"OEM_FJ_ROYA";
+  v2[151] = (__int64)"0x97";
+  v2[152] = (__int64)"0x98";
+  v2[153] = (__int64)"0x99";
+  v2[154] = (__int64)"0x9a";
+  v2[155] = (__int64)"0x9b";
+  v2[156] = (__int64)"0x9c";
+  v2[157] = (__int64)"0x9d";
+  v2[158] = (__int64)"0x9e";
+  v2[159] = (__int64)"0x9f";
+  v2[160] = (__int64)"LSHIFT";
+  v2[161] = (__int64)"RSHIFT";
+  v2[162] = (__int64)"LCONTROL";
+  v2[163] = (__int64)"RCONTROL";
+  v2[164] = (__int64)"LMENU";
+  v2[165] = (__int64)"RMENU";
+  v2[166] = (__int64)"BROWSER_BACK";
+  v2[167] = (__int64)"BROWSER_FORWARD";
+  v2[168] = (__int64)"BROWSER_REFRESH";
+  v2[169] = (__int64)"BROWSER_STOP";
+  v2[170] = (__int64)"BROWSER_SEARCH";
+  v2[171] = (__int64)"BROWSER_FAVORITES";
+  v2[172] = (__int64)"BROWSER_HOME";
+  v2[173] = (__int64)"VOLUME_MUTE";
+  v2[174] = (__int64)"VOLUME_DOWN";
+  v2[175] = (__int64)"VOLUME_UP";
+  v2[176] = (__int64)"MEDIA_NEXT_TRACK";
+  v2[177] = (__int64)"MEDIA_PREV_TRACK";
+  v2[178] = (__int64)"MEDIA_STOP";
+  v2[179] = (__int64)"MEDIA_PLAY_PAUSE";
+  v2[180] = (__int64)"LAUNCH_MAIL";
+  v2[181] = (__int64)"LAUNCH_MEDIA_SELECT";
+  v2[182] = (__int64)"LAUNCH_APP1";
+  v2[183] = (__int64)"LAUNCH_APP2";
+  v2[184] = (__int64)"0xb8";
+  v2[185] = (__int64)"0xb9";
+  v2[186] = (__int64)"SEMI_COLON";
+  v2[187] = (__int64)"PLUS";
+  v2[188] = (__int64)"COMMA";
+  v2[189] = (__int64)"MINUS";
+  v2[190] = (__int64)"PERIOD";
+  v2[191] = (__int64)"QUESTION_MARK";
+  v2[192] = (__int64)"TILDE";
+  v2[193] = (__int64)"0xc1";
+  v2[194] = (__int64)"0xc2";
+  v2[195] = (__int64)"0xc3";
+  v2[196] = (__int64)"0xc4";
+  v2[197] = (__int64)"0xc5";
+  v2[198] = (__int64)"0xc6";
+  v2[199] = (__int64)"0xc7";
+  v2[200] = (__int64)"0xc8";
+  v2[201] = (__int64)"0xc9";
+  v2[202] = (__int64)"0xca";
+  v2[203] = (__int64)"0xcb";
+  v2[204] = (__int64)"0xcc";
+  v2[205] = (__int64)"0xcd";
+  v2[206] = (__int64)"0xce";
+  v2[207] = (__int64)"0xcf";
+  v2[208] = (__int64)"0xd0";
+  v2[209] = (__int64)"0xd1";
+  v2[210] = (__int64)"0xd2";
+  v2[211] = (__int64)"0xd3";
+  v2[212] = (__int64)"0xd4";
+  v2[213] = (__int64)"0xd5";
+  v2[214] = (__int64)"0xd6";
+  v2[215] = (__int64)"0xd7";
+  v2[216] = (__int64)"0xd8";
+  v2[217] = (__int64)"0xd9";
+  v2[218] = (__int64)"0xda";
+  v2[219] = (__int64)"OEM_4";
+  v2[220] = (__int64)"OEM_5";
+  v2[221] = (__int64)"OEM_6";
+  v2[222] = (__int64)"OEM_7";
+  v2[223] = (__int64)"OEM_8";
+  v2[224] = (__int64)"0xe0";
+  v2[225] = (__int64)"OEM_AX";
+  v2[226] = (__int64)"OEM_102";
+  v2[227] = (__int64)"ICO_HELP";
+  v2[228] = (__int64)"ICO_00";
+  v2[229] = (__int64)"PROCESSKEY";
+  v2[230] = (__int64)"ICO_CLEAR";
+  v2[231] = (__int64)"0xe7";
+  v2[232] = (__int64)"0xe8";
+  v2[233] = (__int64)"OEM_RESET";
+  v2[234] = (__int64)"OEM_JUMP";
+  v2[235] = (__int64)"OEM_PA1";
+  v2[236] = (__int64)"OEM_PA2";
+  v2[237] = (__int64)"OEM_PA3";
+  v2[238] = (__int64)"OEM_WSCTRL";
+  v2[239] = (__int64)"OEM_CUSEL";
+  v2[240] = (__int64)"OEM_ATTN";
+  v2[241] = (__int64)"OEM_FINISH";
+  v2[242] = (__int64)"OEM_COPY";
+  v2[243] = (__int64)"OEM_AUTO";
+  v2[244] = (__int64)"OEM_ENLW";
+  v2[245] = (__int64)"OEM_BACKTAB";
+  v2[246] = (__int64)"ATTN";
+  v2[247] = (__int64)"CRSEL";
+  v2[248] = (__int64)"EXSEL";
+  v2[249] = (__int64)"EREOF";
+  v2[250] = (__int64)"PLAY";
+  v2[251] = (__int64)"ZOOM";
+  v2[252] = (__int64)"NONAME";
+  v2[253] = (__int64)"PA1";
+  v2[254] = (__int64)"OEM_CLEAR";
+  v2[255] = (__int64)"0xff";
+  return (const char *)v2[key];
+}
 
 // File Line: 650
 // RVA: 0x1B7420
 void __fastcall UFG::InputState::Clear(UFG::InputState *this)
 {
-  char *v1; // rcx
+  char *mKeyState; // rcx
 
-  v1 = this->mKeyState;
-  *(_QWORD *)(v1 - 20) = 0i64;
-  *((_WORD *)v1 - 6) = -1;
-  *((_WORD *)v1 - 5) = -1;
-  *((_WORD *)v1 - 4) = 0;
-  *((_WORD *)v1 - 3) = -1;
-  *((_WORD *)v1 - 2) = -1;
-  *((_WORD *)v1 - 1) = 0;
-  UFG::qMemSet(v1, 0, 256u);
+  mKeyState = this->mKeyState;
+  *(_QWORD *)(mKeyState - 20) = 0i64;
+  *((_WORD *)mKeyState - 6) = -1;
+  *((_WORD *)mKeyState - 5) = -1;
+  *((_WORD *)mKeyState - 4) = 0;
+  *((_WORD *)mKeyState - 3) = -1;
+  *((_WORD *)mKeyState - 2) = -1;
+  *((_WORD *)mKeyState - 1) = 0;
+  UFG::qMemSet(mKeyState, 0, 256u);
 }
 
 // File Line: 665
 // RVA: 0x1B79F0
 __int64 __fastcall UFG::InputState::GetModiferKeys(UFG::InputState *this)
 {
-  UFG::InputState *v1; // rbx
-  signed int v2; // esi
-  signed int v3; // edi
+  int v2; // esi
+  int v3; // edi
   bool v4; // zf
-  signed int v5; // eax
+  int v5; // eax
   int v6; // edi
   int v7; // edi
 
-  v1 = this;
   v2 = 0;
-  if ( UFG::InputState::IsPressed(this, 160) || (v3 = 0, UFG::InputState::IsPressed(v1, 161)) )
+  if ( UFG::InputState::IsPressed(this, 160) || (v3 = 0, UFG::InputState::IsPressed(this, 161)) )
     v3 = 1;
-  if ( UFG::InputState::IsPressed(v1, 162) || (v4 = UFG::InputState::IsPressed(v1, 163) == 0, v5 = 0, !v4) )
+  if ( UFG::InputState::IsPressed(this, 162) || (v4 = !UFG::InputState::IsPressed(this, 163), v5 = 0, !v4) )
     v5 = 2;
   v6 = v5 | v3;
-  if ( UFG::InputState::IsPressed(v1, 164) || UFG::InputState::IsPressed(v1, 165) )
+  if ( UFG::InputState::IsPressed(this, 164) || UFG::InputState::IsPressed(this, 165) )
     v2 = 4;
-  v7 = v2 | (UFG::InputState::IsPressed(v1, 91) != 0 ? 8 : 0) | v6;
-  return v7 | (UFG::InputState::IsPressed(v1, 93) != 0 ? 0x10 : 0);
+  v7 = v2 | (UFG::InputState::IsPressed(this, 91) ? 8 : 0) | v6;
+  return v7 | (UFG::InputState::IsPressed(this, 93) ? 0x10 : 0);
 }
 
 // File Line: 678
 // RVA: 0x1B7AC0
 __int64 __fastcall UFG::InputState::GetMouseButtons(UFG::InputState *this)
 {
-  UFG::InputState *v1; // rbx
-  _BOOL8 v2; // rdi
+  BOOL IsPressed; // edi
+  int v3; // edi
+  int v4; // edi
+  int v5; // edi
 
-  v1 = this;
-  v2 = UFG::InputState::IsPressed(this, 1) != 0;
-  LODWORD(v2) = (UFG::InputState::IsPressed(v1, 2) != 0 ? 2 : 0) | v2;
-  LODWORD(v2) = (UFG::InputState::IsPressed(v1, 4) != 0 ? 4 : 0) | v2;
-  LODWORD(v2) = (UFG::InputState::IsPressed(v1, 8) != 0 ? 8 : 0) | v2;
-  return (unsigned int)v2 | (UFG::InputState::IsPressed(v1, 16) != 0 ? 0x10 : 0);
+  IsPressed = UFG::InputState::IsPressed(this, 1);
+  v3 = (UFG::InputState::IsPressed(this, 2) ? 2 : 0) | IsPressed;
+  v4 = (UFG::InputState::IsPressed(this, 4) ? 4 : 0) | v3;
+  v5 = (UFG::InputState::IsPressed(this, 8) ? 8 : 0) | v4;
+  return v5 | (UFG::InputState::IsPressed(this, 16) ? 0x10 : 0);
 }
 
 // File Line: 700
@@ -681,42 +406,38 @@ float __fastcall UFG::InputState::GetMouseWheelDelta(UFG::InputState *this)
 // RVA: 0x1B8BC0
 void __fastcall UFG::InputState::ProcessMessage(UFG::InputState *this, UFG::InputMessage *msg)
 {
-  UFG::InputMessage *v2; // rsi
-  UFG::InputState *v3; // rbx
-  __int64 v4; // rdi
-  int v5; // ebp
-  __int16 v6; // r14
-  __int16 v7; // dx
+  __int64 mVKey; // rdi
+  int mMouseX; // ebp
+  __int16 mMouseY; // r14
+  __int16 mMouseWheelDelta; // dx
   int v8; // ecx
-  _FILETIME v9; // rax
-  __int16 v10; // ax
+  _FILETIME SystemTime; // rax
+  __int16 mMouseWheel; // ax
   unsigned __int8 v11; // cl
   unsigned __int8 v12; // cl
   unsigned __int8 v13; // cl
 
   if ( !msg )
     return;
-  v2 = msg;
-  v3 = this;
   if ( !this->mLastMouseXYTime )
     this->mLastMouseXYTime = (unsigned __int64)UFG::qGetSystemTime();
-  v4 = (unsigned __int8)v2->mVKey;
-  v5 = v2->mMouseX;
-  v6 = v2->mMouseY;
-  v7 = v2->mMouseWheelDelta;
-  switch ( v2->mMessageID )
+  mVKey = (unsigned __int8)msg->mVKey;
+  mMouseX = msg->mMouseX;
+  mMouseY = msg->mMouseY;
+  mMouseWheelDelta = msg->mMouseWheelDelta;
+  switch ( msg->mMessageID )
   {
     case 0:
     case 1:
-      UFG::InputState::Clear(v3);
+      UFG::InputState::Clear(this);
       goto LABEL_23;
     case 2:
-      if ( UFG::InputState::IsPressed(v3, (unsigned __int8)v2->mVKey) )
+      if ( UFG::InputState::IsPressed(this, (unsigned __int8)msg->mVKey) )
       {
-        v8 = ((v3->mKeyState[(signed int)v4] & 0x7F) + 1) % 127;
+        v8 = ((this->mKeyState[(int)mVKey] & 0x7F) + 1) % 127;
         if ( v8 <= 1 )
         {
-          v3->mKeyState[(signed int)v4] = -127;
+          this->mKeyState[(int)mVKey] = -127;
           goto LABEL_23;
         }
       }
@@ -724,65 +445,65 @@ void __fastcall UFG::InputState::ProcessMessage(UFG::InputState *this, UFG::Inpu
       {
         LOBYTE(v8) = 0;
       }
-      v3->mKeyState[(signed int)v4] = v8 | 0x80;
+      this->mKeyState[(int)mVKey] = v8 | 0x80;
 LABEL_23:
-      v11 = v3->mKeyState[161];
-      if ( v3->mKeyState[160] > v11 )
-        v11 = v3->mKeyState[160];
-      v3->mKeyState[16] = v11;
-      v12 = v3->mKeyState[163];
-      if ( v3->mKeyState[162] > v12 )
-        v12 = v3->mKeyState[162];
-      v3->mKeyState[17] = v12;
-      v13 = v3->mKeyState[165];
-      if ( v3->mKeyState[164] > v13 )
-        v13 = v3->mKeyState[164];
-      v3->mKeyState[18] = v13;
+      v11 = this->mKeyState[161];
+      if ( (unsigned int)this->mKeyState[160] > v11 )
+        v11 = this->mKeyState[160];
+      this->mKeyState[16] = v11;
+      v12 = this->mKeyState[163];
+      if ( (unsigned int)this->mKeyState[162] > v12 )
+        v12 = this->mKeyState[162];
+      this->mKeyState[17] = v12;
+      v13 = this->mKeyState[165];
+      if ( (unsigned int)this->mKeyState[164] > v13 )
+        v13 = this->mKeyState[164];
+      this->mKeyState[18] = v13;
       return;
     case 3:
     case 8:
-      v3->mKeyState[(unsigned __int8)v2->mVKey] = 0;
+      this->mKeyState[(unsigned __int8)msg->mVKey] = 0;
       goto LABEL_23;
     case 4:
-      if ( v5 >= 0 || UFG::InputSystem::msCursorCurrentlyRestricted )
+      if ( mMouseX >= 0 || UFG::InputSystem::msCursorCurrentlyRestricted )
       {
-        v9 = UFG::qGetSystemTime();
-        if ( UFG::qGetSystemTimeDifference(v3->mLastMouseXYTime, *(_QWORD *)&v9) >= 0.5 )
+        SystemTime = UFG::qGetSystemTime();
+        if ( UFG::qGetSystemTimeDifference(this->mLastMouseXYTime, *(_QWORD *)&SystemTime) >= 0.5 )
         {
-          v3->mPrevMouseX = v5;
-          v3->mPrevMouseY = v6;
+          this->mPrevMouseX = mMouseX;
+          this->mPrevMouseY = mMouseY;
         }
         else
         {
-          v3->mPrevMouseX = v3->mMouseX;
-          v3->mPrevMouseY = v3->mMouseY;
+          this->mPrevMouseX = this->mMouseX;
+          this->mPrevMouseY = this->mMouseY;
         }
-        v3->mMouseX = v5;
-        v3->mMouseY = v6;
-        v3->mLastMouseXYTime = (unsigned __int64)UFG::qGetSystemTime();
+        this->mMouseX = mMouseX;
+        this->mMouseY = mMouseY;
+        this->mLastMouseXYTime = (unsigned __int64)UFG::qGetSystemTime();
       }
       else
       {
-        v3->mPrevMouseX = v3->mMouseX;
-        v3->mPrevMouseY = v3->mMouseY;
+        this->mPrevMouseX = this->mMouseX;
+        this->mPrevMouseY = this->mMouseY;
       }
       goto LABEL_23;
     case 5:
-      v3->mMouseX += v2->mMouseX;
-      v3->mMouseY += v6;
-      *(_DWORD *)&v3->mPrevMouseX = 0;
-      v3->mLastMouseXYTime = (unsigned __int64)UFG::qGetSystemTime();
+      this->mMouseX += msg->mMouseX;
+      this->mMouseY += mMouseY;
+      *(_DWORD *)&this->mPrevMouseX = 0;
+      this->mLastMouseXYTime = (unsigned __int64)UFG::qGetSystemTime();
       goto LABEL_23;
     case 7:
-      v3->mKeyState[(unsigned __int8)v2->mVKey] = -128;
+      this->mKeyState[(unsigned __int8)msg->mVKey] = 0x80;
       goto LABEL_23;
     case 9:
-      v3->mKeyState[v4] = -128;
+      this->mKeyState[mVKey] = 0x80;
       goto LABEL_23;
-    case 10:
-      v10 = v3->mMouseWheel;
-      v3->mPrevMouseWheel = v10;
-      v3->mMouseWheel = v7 + v10;
+    case 0xA:
+      mMouseWheel = this->mMouseWheel;
+      this->mPrevMouseWheel = mMouseWheel;
+      this->mMouseWheel = mMouseWheelDelta + mMouseWheel;
       goto LABEL_23;
     default:
       goto LABEL_23;
@@ -807,10 +528,8 @@ float __fastcall UFG::InputActionData::GetAxisVelY(UFG::InputActionData *this)
 // RVA: 0x1B6A90
 void __fastcall UFG::InputSystem::InputSystem(UFG::InputSystem *this)
 {
-  UFG::InputSystem *v1; // rbx
   UFG::JoyMoveWatcher *v2; // rax
 
-  v1 = this;
   this->vfptr = (UFG::InputSystemVtbl *)&UFG::InputSystem::`vftable;
   *(_WORD *)&this->mbSentDisconnectMsg = 0;
   this->mKeyboardIndex = -1;
@@ -821,10 +540,10 @@ void __fastcall UFG::InputSystem::InputSystem(UFG::InputSystem *this)
     v2->mListOfMoves.mNode.mNext = &v2->mListOfMoves.mNode;
   }
   UFG::gJoyMoveWatcher = v2;
-  UFG::qMemSet(v1->mControllers, 0, 0x28u);
-  UFG::gInputSystem = v1;
-  *(_DWORD *)v1->mIsAssigned = 0;
-  v1->mIsAssigned[4] = 0;
+  UFG::qMemSet(this->mControllers, 0, 0x28u);
+  UFG::gInputSystem = this;
+  *(_DWORD *)this->mIsAssigned = 0;
+  this->mIsAssigned[4] = 0;
 }
 
 // File Line: 983
@@ -836,12 +555,16 @@ void __fastcall UFG::InputSystem::~InputSystem(UFG::InputSystem *this)
   this->vfptr = (UFG::InputSystemVtbl *)&UFG::InputSystem::`vftable;
   v1 = this->mControllers[0];
   if ( v1 )
-    ((void (__fastcall *)(UFG::Controller *, signed __int64))v1->vfptr->~Controller)(v1, 1i64);
+    ((void (__fastcall *)(UFG::Controller *, __int64))v1->vfptr->~Controller)(v1, 1i64);
 }
 
 // File Line: 988
 // RVA: 0x1B9050
-void __fastcall UFG::InputSystem::SetShouldRestrictCursor(bool b_gamepad_window, bool b_keyboard_window, bool b_gamepad_fullscreen, bool b_keyboard_fullscreen)
+void __fastcall UFG::InputSystem::SetShouldRestrictCursor(
+        bool b_gamepad_window,
+        bool b_keyboard_window,
+        char b_gamepad_fullscreen,
+        char b_keyboard_fullscreen)
 {
   UFG::InputSystem::msShouldRestrictCursorGamepad[0] = b_gamepad_window;
   byte_14235FB85 = b_gamepad_fullscreen;
@@ -851,7 +574,11 @@ void __fastcall UFG::InputSystem::SetShouldRestrictCursor(bool b_gamepad_window,
 
 // File Line: 997
 // RVA: 0x1B9030
-void __fastcall UFG::InputSystem::SetShouldHideCursor(bool b_gamepad_window, bool b_keyboard_window, bool b_gamepad_fullscreen, bool b_keyboard_fullscreen)
+void __fastcall UFG::InputSystem::SetShouldHideCursor(
+        bool b_gamepad_window,
+        bool b_keyboard_window,
+        char b_gamepad_fullscreen,
+        char b_keyboard_fullscreen)
 {
   UFG::InputSystem::msShouldHideCursorGamepad[0] = b_gamepad_window;
   byte_14235FB8D = b_gamepad_fullscreen;
@@ -863,30 +590,24 @@ void __fastcall UFG::InputSystem::SetShouldHideCursor(bool b_gamepad_window, boo
 // RVA: 0x1B8DD0
 void UFG::InputSystem::PushRestrictAndHideSettings(void)
 {
-  __int64 v0; // rdx
+  int v0; // edx
   __int64 v1; // rcx
   __int64 v2; // rcx
   __int64 v3; // rcx
 
   v0 = UFG::InputSystem::msSavedRestrictAndHideStackIndex;
-  UFG::InputSystem::msSavedRestrictAndHideSettings[v0] = UFG::InputSystem::msShouldRestrictCursorGamepad[0];
-  LODWORD(v0) = v0 + 1;
-  v1 = (signed int)v0;
-  LODWORD(v0) = v0 + 1;
+  UFG::InputSystem::msSavedRestrictAndHideSettings[UFG::InputSystem::msSavedRestrictAndHideStackIndex] = UFG::InputSystem::msShouldRestrictCursorGamepad[0];
+  v1 = ++v0;
+  ++v0;
   UFG::InputSystem::msSavedRestrictAndHideSettings[v1] = byte_14235FB85;
-  UFG::InputSystem::msSavedRestrictAndHideSettings[(signed int)v0] = UFG::InputSystem::msShouldRestrictCursorKeyboard[0];
-  LODWORD(v0) = v0 + 1;
-  v2 = (signed int)v0;
-  LODWORD(v0) = v0 + 1;
+  UFG::InputSystem::msSavedRestrictAndHideSettings[v0++] = UFG::InputSystem::msShouldRestrictCursorKeyboard[0];
+  v2 = v0++;
   UFG::InputSystem::msSavedRestrictAndHideSettings[v2] = byte_14235FB89;
-  UFG::InputSystem::msSavedRestrictAndHideSettings[(signed int)v0] = UFG::InputSystem::msShouldHideCursorGamepad[0];
-  LODWORD(v0) = v0 + 1;
-  v3 = (signed int)v0;
-  LODWORD(v0) = v0 + 1;
+  UFG::InputSystem::msSavedRestrictAndHideSettings[v0++] = UFG::InputSystem::msShouldHideCursorGamepad[0];
+  v3 = v0++;
   UFG::InputSystem::msSavedRestrictAndHideSettings[v3] = byte_14235FB8D;
-  UFG::InputSystem::msSavedRestrictAndHideSettings[(signed int)v0] = UFG::InputSystem::msShouldHideCursorKeyboard[0];
-  LODWORD(v0) = v0 + 1;
-  UFG::InputSystem::msSavedRestrictAndHideSettings[(signed int)v0] = byte_14235FB91;
+  UFG::InputSystem::msSavedRestrictAndHideSettings[v0++] = UFG::InputSystem::msShouldHideCursorKeyboard[0];
+  UFG::InputSystem::msSavedRestrictAndHideSettings[v0] = byte_14235FB91;
   UFG::InputSystem::msSavedRestrictAndHideStackIndex = v0 + 1;
 }
 
@@ -913,87 +634,81 @@ void UFG::InputSystem::PopRestrictAndHideSettings(void)
 
 // File Line: 1036
 // RVA: 0x1B7BC0
-void __fastcall UFG::InputSystem::InternalUpdate(UFG::InputSystem *this, const float elapsedTime, const float simTime)
+void __fastcall UFG::InputSystem::InternalUpdate(UFG::InputSystem *this, float elapsedTime, float simTime)
 {
-  UFG::Controller **v3; // r12
-  signed __int64 v4; // r13
+  UFG::Controller **mControllers; // r12
+  __int64 v4; // r13
   UFG::Controller *v5; // rbx
   UFG::Controller *v6; // rbp
-  signed __int64 v7; // r14
-  UFG::InputActionMap **v8; // r15
+  __int64 v7; // r14
+  UFG::InputActionMap **mInputActionMaps; // r15
   UFG::InputActionMap *v9; // rsi
-  __int64 v10; // rbx
+  __int64 i; // rbx
   UFG::InputActionData *v11; // rdi
-  void (__fastcall *v12)(UFG::Controller *, UFG::InputActionData *, float); // rax
-  signed __int64 v13; // rsi
-  UFG::MultiInputMap **v14; // r14
+  void (__fastcall *mInputFunc)(UFG::Controller *, UFG::InputActionData *, float); // rax
+  __int64 v13; // rsi
+  UFG::MultiInputMap **mMultiInputMaps; // r14
   UFG::MultiInputMap *v15; // rdi
-  int i; // ebx
+  int j; // ebx
 
   ++UFG::InputSystem::mServiceTickCounter;
-  v3 = this->mControllers;
+  mControllers = this->mControllers;
   v4 = 5i64;
   do
   {
-    v5 = *v3;
-    if ( *v3 && (v5->vfptr->IsConnected(*v3) || v5->mIsInitialized) )
+    v5 = *mControllers;
+    if ( *mControllers && (v5->vfptr->IsConnected(*mControllers) || v5->mIsInitialized) )
     {
-      v6 = *v3;
+      v6 = *mControllers;
       v7 = 0i64;
-      v8 = (*v3)->mInputActionMaps;
+      mInputActionMaps = (*mControllers)->mInputActionMaps;
       do
       {
-        v9 = *v8;
-        if ( *v8 && (simTime > 0.0 || v9->mUpdateWhenSimPaused) && v6->mInputActionMapEnable[v7] == 1 )
+        v9 = *mInputActionMaps;
+        if ( *mInputActionMaps && (simTime > 0.0 || v9->mUpdateWhenSimPaused) && v6->mInputActionMapEnable[v7] )
         {
-          v10 = 0i64;
-          if ( v9->mNumEntries )
+          for ( i = 0i64; (unsigned int)i < v9->mNumEntries; i = (unsigned int)(i + 1) )
           {
-            do
+            v11 = v9->mActionMapInfoArray[i].pActionDef->mDataPerController[v6->mControllerIndex];
+            if ( v11 )
             {
-              v11 = v9->mActionMapInfoArray[v10].pActionDef->mDataPerController[v6->mControllerIndex];
-              if ( v11 )
+              if ( v11->mServicedFlag != UFG::InputSystem::mServiceTickCounter )
               {
-                if ( v11->mServicedFlag != UFG::InputSystem::mServiceTickCounter )
+                mInputFunc = v11->mInputFunc;
+                if ( v9->mActionMapInfoArray[i].mInputFunc == mInputFunc )
                 {
-                  v12 = v11->mInputFunc;
-                  if ( v9->mActionMapInfoArray[v10].mInputFunc == v12 )
-                  {
-                    ((void (__fastcall *)(UFG::Controller *, UFG::InputActionData *))v12)(v6, v11);
-                    v11->mServicedFlag = UFG::InputSystem::mServiceTickCounter;
-                  }
+                  ((void (__fastcall *)(UFG::Controller *, UFG::InputActionData *))mInputFunc)(v6, v11);
+                  v11->mServicedFlag = UFG::InputSystem::mServiceTickCounter;
                 }
               }
-              v10 = (unsigned int)(v10 + 1);
             }
-            while ( (unsigned int)v10 < v9->mNumEntries );
           }
         }
         ++v7;
-        ++v8;
+        ++mInputActionMaps;
       }
       while ( v7 < 32 );
       v13 = 0i64;
-      v14 = v6->mMultiInputMaps;
+      mMultiInputMaps = v6->mMultiInputMaps;
       do
       {
-        v15 = *v14;
-        if ( *v14 )
+        v15 = *mMultiInputMaps;
+        if ( *mMultiInputMaps )
         {
-          if ( v6->mMultiInputMapEnable[v13] == 1 )
+          if ( v6->mMultiInputMapEnable[v13] )
           {
-            for ( i = 0; i < v15->mNumEntries; ++i )
-              UFG::Controller::UpdateCompoundAction(v6, &v15->mCompoundDefinitions[i], elapsedTime);
+            for ( j = 0; j < v15->mNumEntries; ++j )
+              UFG::Controller::UpdateCompoundAction(v6, &v15->mCompoundDefinitions[j], elapsedTime);
           }
         }
         ++v13;
-        ++v14;
+        ++mMultiInputMaps;
       }
       while ( v13 < 32 );
       v6->m_fTimeSinceLastInput = elapsedTime + v6->m_fTimeSinceLastInput;
       v6->mInputState.mPrevMouseWheel = v6->mInputState.mMouseWheel;
     }
-    ++v3;
+    ++mControllers;
     --v4;
   }
   while ( v4 );
@@ -1003,56 +718,53 @@ void __fastcall UFG::InputSystem::InternalUpdate(UFG::InputSystem *this, const f
 // RVA: 0x1B6EB0
 UFG::Controller *__fastcall UFG::InputSystem::AcquireController(UFG::InputSystem *this, int index)
 {
-  int v2; // er8
-  UFG::Controller **v3; // rdx
-  signed __int64 v4; // rax
-  UFG::Controller *result; // rax
+  int v2; // r8d
+  UFG::Controller **mControllers; // rdx
+  __int64 v4; // rax
 
   if ( index == -1 )
   {
     v2 = 0;
-    v3 = this->mControllers;
+    mControllers = this->mControllers;
     v4 = 0i64;
-    while ( !*v3 || this->mIsAssigned[v4] )
+    while ( !*mControllers || this->mIsAssigned[v4] )
     {
       ++v4;
       ++v2;
-      ++v3;
+      ++mControllers;
       if ( v4 >= 5 )
-        goto LABEL_6;
+        return 0i64;
     }
     this->mIsAssigned[v2] = 1;
-    result = this->mControllers[v2];
+    return this->mControllers[v2];
   }
   else if ( index < 5 && this->mControllers[index] )
   {
     this->mIsAssigned[index] = 1;
-    result = this->mControllers[index];
+    return this->mControllers[index];
   }
   else
   {
-LABEL_6:
-    result = 0i64;
+    return 0i64;
   }
-  return result;
 }
 
 // File Line: 1101
 // RVA: 0x1B8E70
 void __fastcall UFG::InputSystem::ReleaseController(UFG::InputSystem *this, UFG::Controller *c)
 {
-  int v2; // er9
-  UFG::Controller **v3; // rax
-  signed __int64 v4; // r8
+  int v2; // r9d
+  UFG::Controller **mControllers; // rax
+  __int64 v4; // r8
 
   v2 = 0;
-  v3 = this->mControllers;
+  mControllers = this->mControllers;
   v4 = 0i64;
-  while ( c != *v3 )
+  while ( c != *mControllers )
   {
     ++v4;
     ++v2;
-    ++v3;
+    ++mControllers;
     if ( v4 >= 5 )
       return;
   }
@@ -1061,26 +773,20 @@ void __fastcall UFG::InputSystem::ReleaseController(UFG::InputSystem *this, UFG:
 
 // File Line: 1131
 // RVA: 0x1B6930
-void __fastcall UFG::Controller::Controller(UFG::Controller *this, int index)
+void __fastcall UFG::Controller::Controller(UFG::Controller *this, unsigned int index)
 {
-  UFG::Controller *v2; // rbx
   char v3; // cl
-  bool *v4; // rax
-  UFG::MultiInputMap **v5; // rcx
-  signed __int64 v6; // rdx
-  UFG::qList<UFG::InputMessage,UFG::InputMessage,1,0> *v7; // [rsp+50h] [rbp+18h]
-  UFG::qList<UFG::ActionRemapInfo,UFG::ActionRemapInfo,1,0> *v8; // [rsp+50h] [rbp+18h]
+  bool *mMultiInputMapEnable; // rax
+  UFG::MultiInputMap **mMultiInputMaps; // rcx
+  __int64 v6; // rdx
 
-  v2 = this;
   this->vfptr = (UFG::ControllerVtbl *)&UFG::Controller::`vftable;
   *(_WORD *)&this->mIsInitialized = 0;
   this->mControllerIndex = index;
-  v7 = &this->mInputMessages;
-  v7->mNode.mPrev = &v7->mNode;
-  v7->mNode.mNext = &v7->mNode;
-  v8 = &this->mRemappableActions;
-  v8->mNode.mPrev = &v8->mNode;
-  v8->mNode.mNext = &v8->mNode;
+  this->mInputMessages.mNode.mPrev = &this->mInputMessages.mNode;
+  this->mInputMessages.mNode.mNext = &this->mInputMessages.mNode;
+  this->mRemappableActions.mNode.mPrev = &this->mRemappableActions.mNode;
+  this->mRemappableActions.mNode.mNext = &this->mRemappableActions.mNode;
   this->mInputState.mLastMouseXYTime = 0i64;
   this->mInputState.mMouseX = -1;
   this->mInputState.mMouseY = -1;
@@ -1089,35 +795,35 @@ void __fastcall UFG::Controller::Controller(UFG::Controller *this, int index)
   this->mInputState.mPrevMouseY = -1;
   this->mInputState.mPrevMouseWheel = 0;
   UFG::qMemSet(this->mInputState.mKeyState, 0, 0x100u);
-  v2->mPreviousInputState.mLastMouseXYTime = 0i64;
-  v2->mPreviousInputState.mMouseX = -1;
-  v2->mPreviousInputState.mMouseY = -1;
-  v2->mPreviousInputState.mMouseWheel = 0;
-  v2->mPreviousInputState.mPrevMouseX = -1;
-  v2->mPreviousInputState.mPrevMouseY = -1;
-  v2->mPreviousInputState.mPrevMouseWheel = 0;
-  UFG::qMemSet(v2->mPreviousInputState.mKeyState, 0, 0x100u);
-  UFG::JoyInputHistory::JoyInputHistory(&v2->mJoyInputHistory);
-  v2->mRightThumbServiceTick = 0;
-  v2->m_fTimeSinceLastInput = 0.0;
-  v2->m_pRemapArray = 0i64;
-  *(_QWORD *)&v2->m_ActiveMapSet = 0i64;
-  *(_WORD *)&v2->m_IsKeyboardController = 0;
+  this->mPreviousInputState.mLastMouseXYTime = 0i64;
+  this->mPreviousInputState.mMouseX = -1;
+  this->mPreviousInputState.mMouseY = -1;
+  this->mPreviousInputState.mMouseWheel = 0;
+  this->mPreviousInputState.mPrevMouseX = -1;
+  this->mPreviousInputState.mPrevMouseY = -1;
+  this->mPreviousInputState.mPrevMouseWheel = 0;
+  UFG::qMemSet(this->mPreviousInputState.mKeyState, 0, 0x100u);
+  UFG::JoyInputHistory::JoyInputHistory(&this->mJoyInputHistory);
+  this->mRightThumbServiceTick = 0;
+  this->m_fTimeSinceLastInput = 0.0;
+  this->m_pRemapArray = 0i64;
+  *(_QWORD *)&this->m_ActiveMapSet = 0i64;
+  *(_WORD *)&this->m_IsKeyboardController = 0;
   v3 = regTweaks;
   if ( !regTweaks )
     v3 = 1;
   regTweaks = v3;
-  v4 = v2->mMultiInputMapEnable;
-  v5 = v2->mMultiInputMaps;
+  mMultiInputMapEnable = this->mMultiInputMapEnable;
+  mMultiInputMaps = this->mMultiInputMaps;
   v6 = 32i64;
   do
   {
-    *(v5 - 32) = 0i64;
-    *v5 = 0i64;
-    *(v4 - 32) = 0;
-    *v4 = 0;
-    ++v5;
-    ++v4;
+    *(mMultiInputMaps - 32) = 0i64;
+    *mMultiInputMaps = 0i64;
+    *(mMultiInputMapEnable - 32) = 0;
+    *mMultiInputMapEnable = 0;
+    ++mMultiInputMaps;
+    ++mMultiInputMapEnable;
     --v6;
   }
   while ( v6 );
@@ -1127,87 +833,78 @@ void __fastcall UFG::Controller::Controller(UFG::Controller *this, int index)
 // RVA: 0x1B6BA0
 void __fastcall UFG::Controller::~Controller(UFG::Controller *this)
 {
-  UFG::Controller *v1; // r14
-  bool *v2; // r12
-  UFG::InputActionMap **v3; // rbp
-  signed __int64 v4; // r13
+  bool *mMultiInputMapEnable; // r12
+  UFG::InputActionMap **mInputActionMaps; // rbp
+  __int64 v4; // r13
   UFG::InputActionMap *v5; // rdi
-  unsigned int v6; // ebx
-  UFG::InputActionDef *v7; // rsi
+  unsigned int i; // ebx
+  UFG::InputActionDef *pActionDef; // rsi
   UFG::InputActionData *v8; // rcx
   UFG::InputActionMap *v9; // rsi
   signed int v10; // ebx
   __int64 v11; // rdi
   __int64 v12; // r15
   void *v13; // rcx
-  UFG::qList<UFG::ActionRemapInfo,UFG::ActionRemapInfo,1,0> *v14; // rbx
-  UFG::qList<UFG::ActionRemapInfo,UFG::ActionRemapInfo,1,0> *v15; // rcx
-  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *v16; // rdx
-  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *v17; // rax
-  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *v18; // rdx
-  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *v19; // rax
-  UFG::JoyInputHistory *v20; // rdx
-  UFG::qNode<UFG::JoyInputHistory,UFG::JoyInputHistory> *v21; // rcx
-  UFG::qNode<UFG::JoyInputHistory,UFG::JoyInputHistory> *v22; // rax
-  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *i; // rcx
-  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *v24; // rdx
-  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *v25; // rax
-  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *v26; // rdx
-  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *v27; // rax
-  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *v28; // rcx
-  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *v29; // rax
-  UFG::qList<UFG::InputMessage,UFG::InputMessage,1,0> *v30; // r14
-  UFG::qList<UFG::InputMessage,UFG::InputMessage,1,0> *j; // rcx
-  UFG::qNode<UFG::InputMessage,UFG::InputMessage> *v32; // rdx
-  UFG::qNode<UFG::InputMessage,UFG::InputMessage> *v33; // rax
-  UFG::qNode<UFG::InputMessage,UFG::InputMessage> *v34; // rdx
-  UFG::qNode<UFG::InputMessage,UFG::InputMessage> *v35; // rax
-  UFG::qNode<UFG::InputMessage,UFG::InputMessage> *v36; // rcx
-  UFG::qNode<UFG::InputMessage,UFG::InputMessage> *v37; // rax
+  UFG::qList<UFG::ActionRemapInfo,UFG::ActionRemapInfo,1,0> *p_mRemappableActions; // rbx
+  UFG::Controller *mNext; // rcx
+  UFG::ControllerVtbl *vfptr; // rdx
+  UFG::ControllerVtbl **v17; // rax
+  UFG::ControllerVtbl *v18; // rdx
+  UFG::ControllerVtbl **v19; // rax
+  UFG::qNode<UFG::JoyInputHistory,UFG::JoyInputHistory> *mPrev; // rcx
+  UFG::qNode<UFG::JoyInputHistory,UFG::JoyInputHistory> *v21; // rax
+  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *j; // rcx
+  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *v23; // rdx
+  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *v24; // rax
+  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *v25; // rdx
+  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *v26; // rax
+  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *v27; // rcx
+  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *v28; // rax
+  UFG::qList<UFG::InputMessage,UFG::InputMessage,1,0> *p_mInputMessages; // r14
+  UFG::qList<UFG::InputMessage,UFG::InputMessage,1,0> *k; // rcx
+  UFG::qNode<UFG::InputMessage,UFG::InputMessage> *v31; // rdx
+  UFG::qNode<UFG::InputMessage,UFG::InputMessage> *v32; // rax
+  UFG::qNode<UFG::InputMessage,UFG::InputMessage> *v33; // rdx
+  UFG::qNode<UFG::InputMessage,UFG::InputMessage> *v34; // rax
+  UFG::qNode<UFG::InputMessage,UFG::InputMessage> *v35; // rcx
+  UFG::qNode<UFG::InputMessage,UFG::InputMessage> *v36; // rax
 
-  v1 = this;
   this->vfptr = (UFG::ControllerVtbl *)&UFG::Controller::`vftable;
-  v2 = this->mMultiInputMapEnable;
-  v3 = this->mInputActionMaps;
+  mMultiInputMapEnable = this->mMultiInputMapEnable;
+  mInputActionMaps = this->mInputActionMaps;
   v4 = 32i64;
   do
   {
-    v5 = *v3;
-    if ( *v3 )
+    v5 = *mInputActionMaps;
+    if ( *mInputActionMaps )
     {
-      v6 = 0;
-      if ( v5->mNumEntries )
+      for ( i = 0; i < v5->mNumEntries; ++i )
       {
-        do
+        pActionDef = v5->mActionMapInfoArray[i].pActionDef;
+        v8 = pActionDef->mDataPerController[this->mControllerIndex];
+        if ( v8 )
         {
-          v7 = v5->mActionMapInfoArray[v6].pActionDef;
-          v8 = v7->mDataPerController[v1->mControllerIndex];
-          if ( v8 )
-          {
-            operator delete[](v8);
-            v7->mDataPerController[v1->mControllerIndex] = 0i64;
-          }
-          ++v6;
+          operator delete[](v8);
+          pActionDef->mDataPerController[this->mControllerIndex] = 0i64;
         }
-        while ( v6 < v5->mNumEntries );
       }
-      *v3 = 0i64;
+      *mInputActionMaps = 0i64;
     }
-    v9 = v3[32];
+    v9 = mInputActionMaps[32];
     if ( v9 )
     {
       v10 = 0;
-      if ( (signed int)v9->mNumEntries > 0 )
+      if ( (int)v9->mNumEntries > 0 )
       {
         v11 = 0i64;
         do
         {
           v12 = *(__int64 *)((char *)&v9->mActionMapInfoArray->pActionDef + v11);
-          v13 = *(void **)(v12 + 8i64 * v1->mControllerIndex);
+          v13 = *(void **)(v12 + 8i64 * this->mControllerIndex);
           if ( v13 )
           {
             operator delete[](v13);
-            *(_QWORD *)(v12 + 8i64 * v1->mControllerIndex) = 0i64;
+            *(_QWORD *)(v12 + 8i64 * this->mControllerIndex) = 0i64;
           }
           ++v10;
           v11 += 304i64;
@@ -1215,101 +912,99 @@ void __fastcall UFG::Controller::~Controller(UFG::Controller *this)
         while ( v10 < (signed int)v9->mNumEntries );
       }
     }
-    *(v2 - 32) = 0;
-    *v2 = 0;
-    ++v3;
-    ++v2;
+    *(mMultiInputMapEnable - 32) = 0;
+    *mMultiInputMapEnable = 0;
+    ++mInputActionMaps;
+    ++mMultiInputMapEnable;
     --v4;
   }
   while ( v4 );
-  v14 = &v1->mRemappableActions;
-  v15 = (UFG::qList<UFG::ActionRemapInfo,UFG::ActionRemapInfo,1,0> *)v1->mRemappableActions.mNode.mNext;
-  if ( v15 != &v1->mRemappableActions )
+  p_mRemappableActions = &this->mRemappableActions;
+  mNext = (UFG::Controller *)this->mRemappableActions.mNode.mNext;
+  if ( mNext != (UFG::Controller *)&this->mRemappableActions )
   {
     do
     {
-      v16 = v15->mNode.mPrev;
-      v17 = v15->mNode.mNext;
-      v16->mNext = v17;
-      v17->mPrev = v16;
-      v15->mNode.mPrev = &v15->mNode;
-      v15->mNode.mNext = &v15->mNode;
-      v18 = v15->mNode.mPrev;
-      v19 = v15->mNode.mNext;
-      v18->mNext = v19;
-      v19->mPrev = v18;
-      v15->mNode.mPrev = &v15->mNode;
-      v15->mNode.mNext = &v15->mNode;
-      operator delete[](v15);
-      v15 = (UFG::qList<UFG::ActionRemapInfo,UFG::ActionRemapInfo,1,0> *)v1->mRemappableActions.mNode.mNext;
+      vfptr = mNext->vfptr;
+      v17 = *(UFG::ControllerVtbl ***)&mNext->mIsInitialized;
+      vfptr->ReadRawPadData = (void *(__fastcall *)(UFG::Controller *))v17;
+      *v17 = vfptr;
+      mNext->vfptr = (UFG::ControllerVtbl *)mNext;
+      *(_QWORD *)&mNext->mIsInitialized = mNext;
+      v18 = mNext->vfptr;
+      v19 = *(UFG::ControllerVtbl ***)&mNext->mIsInitialized;
+      v18->ReadRawPadData = (void *(__fastcall *)(UFG::Controller *))v19;
+      *v19 = v18;
+      mNext->vfptr = (UFG::ControllerVtbl *)mNext;
+      *(_QWORD *)&mNext->mIsInitialized = mNext;
+      operator delete[](mNext);
+      mNext = (UFG::Controller *)this->mRemappableActions.mNode.mNext;
     }
-    while ( v15 != v14 );
+    while ( mNext != (UFG::Controller *)p_mRemappableActions );
   }
-  v20 = &v1->mJoyInputHistory;
-  v21 = v1->mJoyInputHistory.mPrev;
-  v22 = v1->mJoyInputHistory.mNext;
-  v21->mNext = v22;
-  v22->mPrev = v21;
-  v20->mPrev = (UFG::qNode<UFG::JoyInputHistory,UFG::JoyInputHistory> *)&v20->mPrev;
-  v20->mNext = (UFG::qNode<UFG::JoyInputHistory,UFG::JoyInputHistory> *)&v20->mPrev;
-  for ( i = v1->mRemappableActions.mNode.mNext;
-        i != (UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *)v14;
-        i = v1->mRemappableActions.mNode.mNext )
+  mPrev = this->mJoyInputHistory.mPrev;
+  v21 = this->mJoyInputHistory.mNext;
+  mPrev->mNext = v21;
+  v21->mPrev = mPrev;
+  this->mJoyInputHistory.mPrev = &this->mJoyInputHistory;
+  this->mJoyInputHistory.mNext = &this->mJoyInputHistory;
+  for ( j = this->mRemappableActions.mNode.mNext;
+        j != (UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *)p_mRemappableActions;
+        j = this->mRemappableActions.mNode.mNext )
   {
-    v24 = i->mPrev;
-    v25 = i->mNext;
-    v24->mNext = v25;
-    v25->mPrev = v24;
-    i->mPrev = i;
-    i->mNext = i;
-    v26 = i->mPrev;
-    v27 = i->mNext;
-    v26->mNext = v27;
-    v27->mPrev = v26;
-    i->mPrev = i;
-    i->mNext = i;
-    operator delete[](i);
-  }
-  v28 = v14->mNode.mPrev;
-  v29 = v1->mRemappableActions.mNode.mNext;
-  v28->mNext = v29;
-  v29->mPrev = v28;
-  v14->mNode.mPrev = &v14->mNode;
-  v1->mRemappableActions.mNode.mNext = &v1->mRemappableActions.mNode;
-  v30 = &v1->mInputMessages;
-  for ( j = (UFG::qList<UFG::InputMessage,UFG::InputMessage,1,0> *)v30->mNode.mNext;
-        j != v30;
-        j = (UFG::qList<UFG::InputMessage,UFG::InputMessage,1,0> *)v30->mNode.mNext )
-  {
-    v32 = j->mNode.mPrev;
-    v33 = j->mNode.mNext;
-    v32->mNext = v33;
-    v33->mPrev = v32;
-    j->mNode.mPrev = &j->mNode;
-    j->mNode.mNext = &j->mNode;
-    v34 = j->mNode.mPrev;
-    v35 = j->mNode.mNext;
-    v34->mNext = v35;
-    v35->mPrev = v34;
-    j->mNode.mPrev = &j->mNode;
-    j->mNode.mNext = &j->mNode;
+    v23 = j->mPrev;
+    v24 = j->mNext;
+    v23->mNext = v24;
+    v24->mPrev = v23;
+    j->mPrev = j;
+    j->mNext = j;
+    v25 = j->mPrev;
+    v26 = j->mNext;
+    v25->mNext = v26;
+    v26->mPrev = v25;
+    j->mPrev = j;
+    j->mNext = j;
     operator delete[](j);
   }
-  v36 = v30->mNode.mPrev;
-  v37 = v30->mNode.mNext;
-  v36->mNext = v37;
-  v37->mPrev = v36;
-  v30->mNode.mPrev = &v30->mNode;
-  v30->mNode.mNext = &v30->mNode;
+  v27 = p_mRemappableActions->mNode.mPrev;
+  v28 = this->mRemappableActions.mNode.mNext;
+  v27->mNext = v28;
+  v28->mPrev = v27;
+  p_mRemappableActions->mNode.mPrev = &p_mRemappableActions->mNode;
+  this->mRemappableActions.mNode.mNext = &this->mRemappableActions.mNode;
+  p_mInputMessages = &this->mInputMessages;
+  for ( k = (UFG::qList<UFG::InputMessage,UFG::InputMessage,1,0> *)p_mInputMessages->mNode.mNext;
+        k != p_mInputMessages;
+        k = (UFG::qList<UFG::InputMessage,UFG::InputMessage,1,0> *)p_mInputMessages->mNode.mNext )
+  {
+    v31 = k->mNode.mPrev;
+    v32 = k->mNode.mNext;
+    v31->mNext = v32;
+    v32->mPrev = v31;
+    k->mNode.mPrev = &k->mNode;
+    k->mNode.mNext = &k->mNode;
+    v33 = k->mNode.mPrev;
+    v34 = k->mNode.mNext;
+    v33->mNext = v34;
+    v34->mPrev = v33;
+    k->mNode.mPrev = &k->mNode;
+    k->mNode.mNext = &k->mNode;
+    operator delete[](k);
+  }
+  v35 = p_mInputMessages->mNode.mPrev;
+  v36 = p_mInputMessages->mNode.mNext;
+  v35->mNext = v36;
+  v36->mPrev = v35;
+  p_mInputMessages->mNode.mPrev = &p_mInputMessages->mNode;
+  p_mInputMessages->mNode.mNext = &p_mInputMessages->mNode;
 }
 
 // File Line: 1218
 // RVA: 0x1B76C0
 void __fastcall UFG::Controller::DeleteMapDataStructures(UFG::Controller *this)
 {
-  UFG::Controller *v1; // rbp
-  UFG::MultiInputMap **v2; // r15
-  signed __int64 v3; // r12
+  UFG::MultiInputMap **mMultiInputMaps; // r15
+  __int64 v3; // r12
   __int64 v4; // rdi
   unsigned int i; // ebx
   __int64 v6; // rsi
@@ -1317,30 +1012,29 @@ void __fastcall UFG::Controller::DeleteMapDataStructures(UFG::Controller *this)
   UFG::MultiInputMap *v8; // rsi
   int v9; // ebx
   __int64 v10; // rdi
-  UFG::InputActionDef *v11; // r14
+  UFG::InputActionDef *mActionDefName; // r14
   UFG::InputActionData *v12; // rcx
 
-  v1 = this;
-  v2 = this->mMultiInputMaps;
+  mMultiInputMaps = this->mMultiInputMaps;
   v3 = 32i64;
   do
   {
-    v4 = (__int64)*(v2 - 32);
+    v4 = (__int64)*(mMultiInputMaps - 32);
     if ( v4 )
     {
       for ( i = 0; i < *(_DWORD *)(v4 + 8); ++i )
       {
         v6 = *(_QWORD *)(*(_QWORD *)v4 + 24i64 * i);
-        v7 = *(void **)(v6 + 8i64 * v1->mControllerIndex);
+        v7 = *(void **)(v6 + 8i64 * this->mControllerIndex);
         if ( v7 )
         {
           operator delete[](v7);
-          *(_QWORD *)(v6 + 8i64 * v1->mControllerIndex) = 0i64;
+          *(_QWORD *)(v6 + 8i64 * this->mControllerIndex) = 0i64;
         }
       }
     }
-    v8 = *v2;
-    if ( *v2 )
+    v8 = *mMultiInputMaps;
+    if ( *mMultiInputMaps )
     {
       v9 = 0;
       if ( v8->mNumEntries > 0 )
@@ -1348,12 +1042,12 @@ void __fastcall UFG::Controller::DeleteMapDataStructures(UFG::Controller *this)
         v10 = 0i64;
         do
         {
-          v11 = v8->mCompoundDefinitions[v10].mActionDefName;
-          v12 = v11->mDataPerController[v1->mControllerIndex];
+          mActionDefName = v8->mCompoundDefinitions[v10].mActionDefName;
+          v12 = mActionDefName->mDataPerController[this->mControllerIndex];
           if ( v12 )
           {
             operator delete[](v12);
-            v11->mDataPerController[v1->mControllerIndex] = 0i64;
+            mActionDefName->mDataPerController[this->mControllerIndex] = 0i64;
           }
           ++v9;
           ++v10;
@@ -1361,7 +1055,7 @@ void __fastcall UFG::Controller::DeleteMapDataStructures(UFG::Controller *this)
         while ( v9 < v8->mNumEntries );
       }
     }
-    ++v2;
+    ++mMultiInputMaps;
     --v3;
   }
   while ( v3 );
@@ -1369,27 +1063,24 @@ void __fastcall UFG::Controller::DeleteMapDataStructures(UFG::Controller *this)
 
 // File Line: 1300
 // RVA: 0x1B6F10
-void __fastcall UFG::Controller::AddActionToRemappableList(UFG::Controller *this, UFG::InputActionDef *actionDef, unsigned int id, UFG::InputActionDef *actionDef_2, UFG::InputActionDef *actionDef_3)
+void __fastcall UFG::Controller::AddActionToRemappableList(
+        UFG::Controller *this,
+        UFG::allocator::free_link *actionDef,
+        unsigned int id,
+        UFG::allocator::free_link *actionDef_2,
+        UFG::allocator::free_link *actionDef_3)
 {
-  UFG::InputActionDef *v5; // rbp
-  unsigned int v6; // er14
-  UFG::InputActionDef *v7; // rdi
-  UFG::Controller *v8; // rsi
-  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *v9; // rax
-  UFG::qList<UFG::ActionRemapInfo,UFG::ActionRemapInfo,1,0> *v10; // rbx
+  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *mNext; // rax
+  UFG::qList<UFG::ActionRemapInfo,UFG::ActionRemapInfo,1,0> *p_mRemappableActions; // rbx
   UFG::allocator::free_link *v11; // rax
   UFG::allocator::free_link *v12; // rdx
   UFG::InputActionData *v13; // rcx
-  unsigned int v14; // eax
-  UFG::allocator::free_link *v15; // rax
+  unsigned int mButton; // eax
+  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *v15; // rax
 
-  v5 = actionDef_2;
-  v6 = id;
-  v7 = actionDef;
-  v8 = this;
-  v9 = this->mRemappableActions.mNode.mNext;
-  v10 = &this->mRemappableActions;
-  if ( v9 == (UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *)&this->mRemappableActions )
+  mNext = this->mRemappableActions.mNode.mNext;
+  p_mRemappableActions = &this->mRemappableActions;
+  if ( mNext == (UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *)&this->mRemappableActions )
   {
 LABEL_4:
     v11 = UFG::qMalloc(0x38ui64, "ActionRemapInfo", 0i64);
@@ -1398,32 +1089,32 @@ LABEL_4:
     {
       v11->mNext = v11;
       v11[1].mNext = v11;
-      v11[2].mNext = (UFG::allocator::free_link *)v7;
-      v11[3].mNext = (UFG::allocator::free_link *)v5;
-      v11[4].mNext = (UFG::allocator::free_link *)actionDef_3;
-      LODWORD(v11[5].mNext) = v6;
+      v11[2].mNext = actionDef;
+      v11[3].mNext = actionDef_2;
+      v11[4].mNext = actionDef_3;
+      LODWORD(v11[5].mNext) = id;
       *(UFG::allocator::free_link **)((char *)&v11[5].mNext + 4) = (UFG::allocator::free_link *)-1i64;
     }
     else
     {
       v12 = 0i64;
     }
-    v13 = v7->mDataPerController[v8->mControllerIndex];
-    v14 = v13->mButton;
+    v13 = (UFG::InputActionData *)actionDef[this->mControllerIndex].mNext;
+    mButton = v13->mButton;
     LODWORD(v12[6].mNext) = v13->mButton;
-    HIDWORD(v12[5].mNext) = v14;
-    v15 = (UFG::allocator::free_link *)v10->mNode.mNext;
-    v10->mNode.mNext = (UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *)v12;
-    v12->mNext = (UFG::allocator::free_link *)v10;
-    v12[1].mNext = v15;
-    v15->mNext = v12;
+    HIDWORD(v12[5].mNext) = mButton;
+    v15 = p_mRemappableActions->mNode.mNext;
+    p_mRemappableActions->mNode.mNext = (UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *)v12;
+    v12->mNext = (UFG::allocator::free_link *)p_mRemappableActions;
+    v12[1].mNext = (UFG::allocator::free_link *)v15;
+    v15->mPrev = (UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *)v12;
   }
   else
   {
-    while ( (UFG::InputActionDef *)v9[1].mPrev != actionDef )
+    while ( (UFG::allocator::free_link *)mNext[1].mPrev != actionDef )
     {
-      v9 = v9->mNext;
-      if ( v9 == (UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *)v10 )
+      mNext = mNext->mNext;
+      if ( mNext == (UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *)p_mRemappableActions )
         goto LABEL_4;
     }
   }
@@ -1434,20 +1125,20 @@ LABEL_4:
 void __fastcall UFG::Controller::ApplyRemapList(UFG::Controller *this)
 {
   UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *i; // rax
-  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *v2; // r8
-  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *v3; // rdx
+  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *mPrev; // r8
+  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *mNext; // rdx
   UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *v4; // rdx
 
   for ( i = this->mRemappableActions.mNode.mNext;
         i != (UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *)&this->mRemappableActions;
         i = i->mNext )
   {
-    v2 = i[1].mPrev;
-    if ( v2 )
-      **((_DWORD **)&v2->mPrev + this->mControllerIndex) = i[3].mPrev;
-    v3 = i[1].mNext;
-    if ( v3 )
-      **((_DWORD **)&v3->mPrev + this->mControllerIndex) = i[3].mPrev;
+    mPrev = i[1].mPrev;
+    if ( mPrev )
+      **((_DWORD **)&mPrev->mPrev + this->mControllerIndex) = i[3].mPrev;
+    mNext = i[1].mNext;
+    if ( mNext )
+      **((_DWORD **)&mNext->mPrev + this->mControllerIndex) = i[3].mPrev;
     v4 = i[2].mPrev;
     if ( v4 )
       **((_DWORD **)&v4->mPrev + this->mControllerIndex) = i[3].mPrev;
@@ -1459,20 +1150,20 @@ void __fastcall UFG::Controller::ApplyRemapList(UFG::Controller *this)
 void __fastcall UFG::Controller::ResetRemapList(UFG::Controller *this)
 {
   UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *i; // rax
-  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *v2; // r8
-  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *v3; // rdx
+  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *mPrev; // r8
+  UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *mNext; // rdx
   UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *v4; // rdx
 
   for ( i = this->mRemappableActions.mNode.mNext;
         i != (UFG::qNode<UFG::ActionRemapInfo,UFG::ActionRemapInfo> *)&this->mRemappableActions;
         i = i->mNext )
   {
-    v2 = i[1].mPrev;
-    if ( v2 )
-      **((_DWORD **)&v2->mPrev + this->mControllerIndex) = HIDWORD(i[2].mNext);
-    v3 = i[1].mNext;
-    if ( v3 )
-      **((_DWORD **)&v3->mPrev + this->mControllerIndex) = HIDWORD(i[2].mNext);
+    mPrev = i[1].mPrev;
+    if ( mPrev )
+      **((_DWORD **)&mPrev->mPrev + this->mControllerIndex) = HIDWORD(i[2].mNext);
+    mNext = i[1].mNext;
+    if ( mNext )
+      **((_DWORD **)&mNext->mPrev + this->mControllerIndex) = HIDWORD(i[2].mNext);
     v4 = i[2].mPrev;
     if ( v4 )
       **((_DWORD **)&v4->mPrev + this->mControllerIndex) = HIDWORD(i[2].mNext);
@@ -1484,62 +1175,54 @@ void __fastcall UFG::Controller::ResetRemapList(UFG::Controller *this)
 // RVA: 0x1B74B0
 void __fastcall UFG::Controller::CreateSingleMapStructure(UFG::Controller *this, int index)
 {
-  UFG::Controller *v2; // rbp
   UFG::InputActionMap *v3; // r15
-  unsigned int v4; // ebx
-  UFG::InputActionMapInfo *v5; // rsi
-  UFG::InputActionDef *v6; // r14
+  unsigned int i; // ebx
+  UFG::InputActionMapInfo *mActionMapInfoArray; // rsi
+  UFG::InputActionDef *pActionDef; // r14
   UFG::allocator::free_link *v7; // rax
   UFG::allocator::free_link *v8; // rcx
-  __int64 v9; // rax
-  const unsigned int *v10; // rdx
+  __int64 mButtonDef; // rax
+  const unsigned int *m_pRemapArray; // rdx
 
-  v2 = this;
   v3 = this->mInputActionMaps[index];
-  v4 = 0;
-  if ( v3->mNumEntries )
+  for ( i = 0; i < v3->mNumEntries; ++i )
   {
-    do
+    mActionMapInfoArray = v3->mActionMapInfoArray;
+    pActionDef = v3->mActionMapInfoArray[i].pActionDef;
+    if ( !pActionDef->mDataPerController[this->mControllerIndex] )
     {
-      v5 = v3->mActionMapInfoArray;
-      v6 = v3->mActionMapInfoArray[v4].pActionDef;
-      if ( !v6->mDataPerController[v2->mControllerIndex] )
+      v7 = UFG::qMalloc(0x50ui64, "InputActionData", 0i64);
+      v8 = v7;
+      if ( v7 )
       {
-        v7 = UFG::qMalloc(0x50ui64, "InputActionData", 0i64);
-        v8 = v7;
-        if ( v7 )
-        {
-          v7[2].mNext = 0i64;
-          *(UFG::allocator::free_link **)((char *)&v7[8].mNext + 4) = 0i64;
-          BYTE4(v7[9].mNext) = 0;
-          v7[3].mNext = 0i64;
-          v7[4].mNext = 0i64;
-          *(UFG::allocator::free_link **)((char *)&v7[5].mNext + 4) = 0i64;
-          LODWORD(v7[5].mNext) = 0;
-          v7[7].mNext = 0i64;
-          HIDWORD(v7[6].mNext) = 0;
-          LODWORD(v7[8].mNext) = 0;
-        }
-        else
-        {
-          v8 = 0i64;
-        }
-        v6->mDataPerController[v2->mControllerIndex] = (UFG::InputActionData *)v8;
-        v9 = v5[v4].mButtonDef;
-        v10 = v2->m_pRemapArray;
-        if ( v10
-          && (unsigned int)v9 < 0x12
-          && (void (__fastcall *)(UFG::Controller *, UFG::InputActionData *, const float))v5[v4].mInputFunc != UFG::Keyboard_IAD_Func )
-        {
-          LODWORD(v9) = v10[v9];
-        }
-        LODWORD(v8->mNext) = v9;
-        v8[1].mNext = (UFG::allocator::free_link *)v5[v4].mInputFunc;
-        HIDWORD(v8->mNext) = v5[v4].mSignalType;
+        v7[2].mNext = 0i64;
+        *(UFG::allocator::free_link **)((char *)&v7[8].mNext + 4) = 0i64;
+        BYTE4(v7[9].mNext) = 0;
+        v7[3].mNext = 0i64;
+        v7[4].mNext = 0i64;
+        *(UFG::allocator::free_link **)((char *)&v7[5].mNext + 4) = 0i64;
+        LODWORD(v7[5].mNext) = 0;
+        v7[7].mNext = 0i64;
+        HIDWORD(v7[6].mNext) = 0;
+        LODWORD(v7[8].mNext) = 0;
       }
-      ++v4;
+      else
+      {
+        v8 = 0i64;
+      }
+      pActionDef->mDataPerController[this->mControllerIndex] = (UFG::InputActionData *)v8;
+      mButtonDef = mActionMapInfoArray[i].mButtonDef;
+      m_pRemapArray = this->m_pRemapArray;
+      if ( m_pRemapArray
+        && (unsigned int)mButtonDef < 0x12
+        && (void (__fastcall *)(UFG::Controller *, UFG::InputActionData *, const float))mActionMapInfoArray[i].mInputFunc != UFG::Keyboard_IAD_Func )
+      {
+        LODWORD(mButtonDef) = m_pRemapArray[mButtonDef];
+      }
+      LODWORD(v8->mNext) = mButtonDef;
+      v8[1].mNext = (UFG::allocator::free_link *)mActionMapInfoArray[i].mInputFunc;
+      HIDWORD(v8->mNext) = mActionMapInfoArray[i].mSignalType;
     }
-    while ( v4 < v3->mNumEntries );
   }
 }
 
@@ -1547,65 +1230,60 @@ void __fastcall UFG::Controller::CreateSingleMapStructure(UFG::Controller *this,
 // RVA: 0x1B7450
 void __fastcall UFG::Controller::CreateMapDataStructures(UFG::Controller *this)
 {
-  UFG::Controller *v1; // rsi
   int v2; // ebx
-  UFG::MultiInputMap **v3; // rdi
+  UFG::MultiInputMap **mMultiInputMaps; // rdi
 
-  v1 = this;
   v2 = 0;
-  v3 = this->mMultiInputMaps;
+  mMultiInputMaps = this->mMultiInputMaps;
   do
   {
-    if ( *(v3 - 32) )
-      UFG::Controller::CreateSingleMapStructure(v1, v2);
-    if ( *v3 )
-      UFG::Controller::CreateSingleMultiMapStruct(v1, v2);
+    if ( *(mMultiInputMaps - 32) )
+      UFG::Controller::CreateSingleMapStructure(this, v2);
+    if ( *mMultiInputMaps )
+      UFG::Controller::CreateSingleMultiMapStruct(this, v2);
     ++v2;
-    ++v3;
+    ++mMultiInputMaps;
   }
   while ( v2 < 32 );
 }
 
 // File Line: 1444
 // RVA: 0x1B7110
-void __fastcall UFG::Controller::AddInputActionMap(UFG::Controller *this, UFG::InputActionMap *actionMap, const unsigned int *pRemapArray)
+void __fastcall UFG::Controller::AddInputActionMap(
+        UFG::Controller *this,
+        UFG::InputActionMap *actionMap,
+        const unsigned int *pRemapArray)
 {
-  UFG::Controller *v3; // rbp
-  __int64 v4; // rax
-  signed int v5; // er8
-  UFG::InputActionMap **v6; // r9
+  int v4; // eax
+  int v5; // r8d
+  UFG::InputActionMap **i; // r9
   UFG::InputActionMap *v7; // r15
-  unsigned int i; // ebx
-  UFG::InputActionMapInfo *v9; // rsi
-  UFG::InputActionDef *v10; // r14
+  unsigned int j; // ebx
+  UFG::InputActionMapInfo *mActionMapInfoArray; // rsi
+  UFG::InputActionDef *pActionDef; // r14
   UFG::allocator::free_link *v11; // rax
   UFG::allocator::free_link *v12; // rcx
-  __int64 v13; // rax
-  const unsigned int *v14; // rdx
+  __int64 mButtonDef; // rax
+  const unsigned int *m_pRemapArray; // rdx
 
-  v3 = this;
   if ( !this->m_pRemapArray )
     this->m_pRemapArray = pRemapArray;
-  LODWORD(v4) = -1;
+  v4 = -1;
   v5 = 0;
-  v6 = this->mInputActionMaps;
-  while ( actionMap != *v6 )
+  for ( i = this->mInputActionMaps; actionMap != *i; ++i )
   {
-    if ( !*v6 && (_DWORD)v4 == -1 )
-      LODWORD(v4) = v5;
-    ++v5;
-    ++v6;
-    if ( v5 >= 32 )
+    if ( !*i && v4 == -1 )
+      v4 = v5;
+    if ( ++v5 >= 32 )
     {
-      v4 = (signed int)v4;
       this->mInputActionMaps[v4] = actionMap;
       this->mInputActionMapEnable[v4] = 1;
-      v7 = this->mInputActionMaps[(signed int)v4];
-      for ( i = 0; i < v7->mNumEntries; ++i )
+      v7 = this->mInputActionMaps[v4];
+      for ( j = 0; j < v7->mNumEntries; ++j )
       {
-        v9 = v7->mActionMapInfoArray;
-        v10 = v7->mActionMapInfoArray[i].pActionDef;
-        if ( !v10->mDataPerController[v3->mControllerIndex] )
+        mActionMapInfoArray = v7->mActionMapInfoArray;
+        pActionDef = v7->mActionMapInfoArray[j].pActionDef;
+        if ( !pActionDef->mDataPerController[this->mControllerIndex] )
         {
           v11 = UFG::qMalloc(0x50ui64, "InputActionData", 0i64);
           v12 = v11;
@@ -1626,18 +1304,18 @@ void __fastcall UFG::Controller::AddInputActionMap(UFG::Controller *this, UFG::I
           {
             v12 = 0i64;
           }
-          v10->mDataPerController[v3->mControllerIndex] = (UFG::InputActionData *)v12;
-          v13 = v9[i].mButtonDef;
-          v14 = v3->m_pRemapArray;
-          if ( v14
-            && (unsigned int)v13 < 0x12
-            && (void (__fastcall *)(UFG::Controller *, UFG::InputActionData *, const float))v9[i].mInputFunc != UFG::Keyboard_IAD_Func )
+          pActionDef->mDataPerController[this->mControllerIndex] = (UFG::InputActionData *)v12;
+          mButtonDef = mActionMapInfoArray[j].mButtonDef;
+          m_pRemapArray = this->m_pRemapArray;
+          if ( m_pRemapArray
+            && (unsigned int)mButtonDef < 0x12
+            && (void (__fastcall *)(UFG::Controller *, UFG::InputActionData *, const float))mActionMapInfoArray[j].mInputFunc != UFG::Keyboard_IAD_Func )
           {
-            LODWORD(v13) = v14[v13];
+            LODWORD(mButtonDef) = m_pRemapArray[mButtonDef];
           }
-          LODWORD(v12->mNext) = v13;
-          v12[1].mNext = (UFG::allocator::free_link *)v9[i].mInputFunc;
-          HIDWORD(v12->mNext) = v9[i].mSignalType;
+          LODWORD(v12->mNext) = mButtonDef;
+          v12[1].mNext = (UFG::allocator::free_link *)mActionMapInfoArray[j].mInputFunc;
+          HIDWORD(v12->mNext) = mActionMapInfoArray[j].mSignalType;
         }
       }
       return;
@@ -1649,18 +1327,18 @@ void __fastcall UFG::Controller::AddInputActionMap(UFG::Controller *this, UFG::I
 // RVA: 0x1B7990
 signed __int64 __fastcall UFG::Controller::EnableInputActionMap(UFG::Controller *this, UFG::InputActionMap *actionMap)
 {
-  int v2; // er9
-  UFG::InputActionMap **v3; // rax
-  signed __int64 v4; // r8
+  int v2; // r9d
+  UFG::InputActionMap **mInputActionMaps; // rax
+  __int64 v4; // r8
 
   v2 = 0;
-  v3 = this->mInputActionMaps;
+  mInputActionMaps = this->mInputActionMaps;
   v4 = 0i64;
-  while ( actionMap != *v3 )
+  while ( actionMap != *mInputActionMaps )
   {
     ++v4;
     ++v2;
-    ++v3;
+    ++mInputActionMaps;
     if ( v4 >= 32 )
       return 1i64;
   }
@@ -1672,31 +1350,27 @@ signed __int64 __fastcall UFG::Controller::EnableInputActionMap(UFG::Controller 
 // RVA: 0x1B78F0
 signed __int64 __fastcall UFG::Controller::DisableInputActionMap(UFG::Controller *this, UFG::InputActionMap *actionMap)
 {
-  UFG::InputActionMap *v2; // r9
-  int v3; // er8
-  signed __int64 v4; // rdx
-  UFG::InputActionMap **v5; // rax
+  int v3; // r8d
+  __int64 v4; // rdx
+  UFG::InputActionMap **i; // rax
   __int64 v7; // rax
-  unsigned int v8; // er8
+  unsigned int v8; // r8d
   UFG::InputActionData *v9; // rdx
 
-  v2 = actionMap;
   v3 = 0;
   v4 = 0i64;
-  v5 = this->mInputActionMaps;
-  while ( v2 != *v5 || !v2 )
+  for ( i = this->mInputActionMaps; actionMap != *i || !actionMap; ++i )
   {
     ++v4;
     ++v3;
-    ++v5;
     if ( v4 >= 32 )
       return 1i64;
   }
   v7 = v3;
   v8 = 0;
-  for ( this->mInputActionMapEnable[v7] = 0; v8 < v2->mNumEntries; ++v8 )
+  for ( this->mInputActionMapEnable[v7] = 0; v8 < actionMap->mNumEntries; ++v8 )
   {
-    v9 = v2->mActionMapInfoArray[v8].pActionDef->mDataPerController[this->mControllerIndex];
+    v9 = actionMap->mActionMapInfoArray[v8].pActionDef->mDataPerController[this->mControllerIndex];
     if ( v9 )
     {
       v9->mActionTrue = 0;
@@ -1716,41 +1390,38 @@ signed __int64 __fastcall UFG::Controller::DisableInputActionMap(UFG::Controller
 // RVA: 0x1B77B0
 void __fastcall UFG::Controller::DisableAllMaps(UFG::Controller *this)
 {
-  UFG::Controller *v1; // r11
-  UFG::InputActionMap **v2; // rbx
-  signed __int64 v3; // r10
+  UFG::InputActionMap **mInputActionMaps; // rbx
+  __int64 i; // r10
   UFG::InputActionMap *v4; // r9
   signed int v5; // edx
   __int64 v6; // r8
-  UFG::InputActionDef *v7; // rcx
+  UFG::InputActionDef *pActionDef; // rcx
   UFG::InputActionData *v8; // rcx
-  signed __int64 v9; // r10
-  UFG::MultiInputMap **v10; // rbx
+  __int64 v9; // r10
+  UFG::MultiInputMap **mMultiInputMaps; // rbx
   UFG::MultiInputMap *v11; // r9
   int v12; // edx
   __int64 v13; // r8
-  UFG::InputActionDef *v14; // rcx
+  UFG::InputActionDef *mActionDefName; // rcx
   UFG::InputActionData *v15; // rcx
 
-  v1 = this;
-  v2 = this->mInputActionMaps;
-  v3 = 0i64;
-  do
+  mInputActionMaps = this->mInputActionMaps;
+  for ( i = 0i64; i < 32; ++i )
   {
-    v4 = *v2;
-    v1->mInputActionMapEnable[v3] = 0;
+    v4 = *mInputActionMaps;
+    this->mInputActionMapEnable[i] = 0;
     if ( v4 )
     {
       v5 = 0;
-      if ( (signed int)v4->mNumEntries > 0 )
+      if ( (int)v4->mNumEntries > 0 )
       {
         v6 = 0i64;
         do
         {
-          v7 = v4->mActionMapInfoArray[v6].pActionDef;
-          if ( v7 )
+          pActionDef = v4->mActionMapInfoArray[v6].pActionDef;
+          if ( pActionDef )
           {
-            v8 = v7->mDataPerController[v1->mControllerIndex];
+            v8 = pActionDef->mDataPerController[this->mControllerIndex];
             if ( v8 )
             {
               v8->mActionTrue = 0;
@@ -1769,16 +1440,14 @@ void __fastcall UFG::Controller::DisableAllMaps(UFG::Controller *this)
         while ( v5 < (signed int)v4->mNumEntries );
       }
     }
-    ++v3;
-    ++v2;
+    ++mInputActionMaps;
   }
-  while ( v3 < 32 );
   v9 = 0i64;
-  v10 = v1->mMultiInputMaps;
+  mMultiInputMaps = this->mMultiInputMaps;
   do
   {
-    v11 = *v10;
-    v1->mMultiInputMapEnable[v9] = 0;
+    v11 = *mMultiInputMaps;
+    this->mMultiInputMapEnable[v9] = 0;
     if ( v11 )
     {
       v12 = 0;
@@ -1787,10 +1456,10 @@ void __fastcall UFG::Controller::DisableAllMaps(UFG::Controller *this)
         v13 = 0i64;
         do
         {
-          v14 = v11->mCompoundDefinitions[v13].mActionDefName;
-          if ( v14 )
+          mActionDefName = v11->mCompoundDefinitions[v13].mActionDefName;
+          if ( mActionDefName )
           {
-            v15 = v14->mDataPerController[v1->mControllerIndex];
+            v15 = mActionDefName->mDataPerController[this->mControllerIndex];
             if ( v15 )
             {
               v15->mActionTrue = 0;
@@ -1813,7 +1482,7 @@ void __fastcall UFG::Controller::DisableAllMaps(UFG::Controller *this)
       }
     }
     ++v9;
-    ++v10;
+    ++mMultiInputMaps;
   }
   while ( v9 < 32 );
 }
@@ -1822,15 +1491,13 @@ void __fastcall UFG::Controller::DisableAllMaps(UFG::Controller *this)
 // RVA: 0x1B75D0
 void __fastcall UFG::Controller::CreateSingleMultiMapStruct(UFG::Controller *this, int index)
 {
-  UFG::Controller *v2; // rbp
   UFG::MultiInputMap *v3; // rsi
   int v4; // ebx
   __int64 v5; // rdi
-  UFG::InputActionDef *v6; // r14
+  UFG::InputActionDef *mActionDefName; // r14
   UFG::allocator::free_link *v7; // rax
   UFG::allocator::free_link *v8; // rcx
 
-  v2 = this;
   v3 = this->mMultiInputMaps[index];
   v4 = 0;
   if ( v3->mNumEntries > 0 )
@@ -1838,8 +1505,8 @@ void __fastcall UFG::Controller::CreateSingleMultiMapStruct(UFG::Controller *thi
     v5 = 0i64;
     do
     {
-      v6 = v3->mCompoundDefinitions[v5].mActionDefName;
-      if ( !v6->mDataPerController[v2->mControllerIndex] )
+      mActionDefName = v3->mCompoundDefinitions[v5].mActionDefName;
+      if ( !mActionDefName->mDataPerController[this->mControllerIndex] )
       {
         v7 = UFG::qMalloc(0x60ui64, "MultiInputActionData", 0i64);
         v8 = v7;
@@ -1863,7 +1530,7 @@ void __fastcall UFG::Controller::CreateSingleMultiMapStruct(UFG::Controller *thi
         {
           v8 = 0i64;
         }
-        v6->mDataPerController[v2->mControllerIndex] = (UFG::InputActionData *)v8;
+        mActionDefName->mDataPerController[this->mControllerIndex] = (UFG::InputActionData *)v8;
       }
       ++v4;
       ++v5;
@@ -1876,41 +1543,35 @@ void __fastcall UFG::Controller::CreateSingleMultiMapStruct(UFG::Controller *thi
 // RVA: 0x1B7290
 void __fastcall UFG::Controller::AddMultiInputMap(UFG::Controller *this, UFG::MultiInputMap *multiMap)
 {
-  UFG::Controller *v2; // rsi
-  __int64 v3; // rax
-  signed int v4; // er8
-  UFG::MultiInputMap **v5; // r9
+  int v3; // eax
+  int v4; // r8d
+  UFG::MultiInputMap **i; // r9
   UFG::MultiInputMap *v6; // r14
   int v7; // ebx
   __int64 v8; // rdi
-  UFG::InputActionDef *v9; // r15
+  UFG::InputActionDef *mActionDefName; // r15
   UFG::allocator::free_link *v10; // rax
   UFG::allocator::free_link *v11; // rcx
 
-  v2 = this;
-  LODWORD(v3) = -1;
+  v3 = -1;
   v4 = 0;
-  v5 = this->mMultiInputMaps;
-  while ( multiMap != *v5 )
+  for ( i = this->mMultiInputMaps; multiMap != *i; ++i )
   {
-    if ( !*v5 && (_DWORD)v3 == -1 )
-      LODWORD(v3) = v4;
-    ++v4;
-    ++v5;
-    if ( v4 >= 32 )
+    if ( !*i && v3 == -1 )
+      v3 = v4;
+    if ( ++v4 >= 32 )
     {
-      v3 = (signed int)v3;
       this->mMultiInputMaps[v3] = multiMap;
       this->mMultiInputMapEnable[v3] = 1;
-      v6 = this->mMultiInputMaps[(signed int)v3];
+      v6 = this->mMultiInputMaps[v3];
       v7 = 0;
       if ( v6->mNumEntries > 0 )
       {
         v8 = 0i64;
         do
         {
-          v9 = v6->mCompoundDefinitions[v8].mActionDefName;
-          if ( !v9->mDataPerController[v2->mControllerIndex] )
+          mActionDefName = v6->mCompoundDefinitions[v8].mActionDefName;
+          if ( !mActionDefName->mDataPerController[this->mControllerIndex] )
           {
             v10 = UFG::qMalloc(0x60ui64, "MultiInputActionData", 0i64);
             v11 = v10;
@@ -1934,7 +1595,7 @@ void __fastcall UFG::Controller::AddMultiInputMap(UFG::Controller *this, UFG::Mu
             {
               v11 = 0i64;
             }
-            v9->mDataPerController[v2->mControllerIndex] = (UFG::InputActionData *)v11;
+            mActionDefName->mDataPerController[this->mControllerIndex] = (UFG::InputActionData *)v11;
           }
           ++v7;
           ++v8;
@@ -1948,16 +1609,19 @@ void __fastcall UFG::Controller::AddMultiInputMap(UFG::Controller *this, UFG::Mu
 
 // File Line: 1758
 // RVA: 0x1B9070
-void __fastcall UFG::Controller::UpdateCompoundAction(UFG::Controller *this, UFG::CompoundAction *ca, float elapsedTime)
+void __fastcall UFG::Controller::UpdateCompoundAction(
+        UFG::Controller *this,
+        UFG::CompoundAction *ca,
+        float elapsedTime)
 {
   UFG::InputActionData *v3; // r9
   float v4; // xmm3_4
-  __int64 v5; // rbp
+  __int64 mButton; // rbp
   float v6; // xmm3_4
-  float v7; // xmm0_4
+  float mEndTime; // xmm0_4
   UFG::InputActionDef *v8; // r11
-  float v9; // xmm2_4
-  int v10; // er10
+  float mOnSeconds; // xmm2_4
+  int v10; // r10d
   UFG::InputActionData *v11; // rax
   UFG::InputActionDef *v12; // r11
   UFG::InputActionData *v13; // rax
@@ -1966,23 +1630,23 @@ void __fastcall UFG::Controller::UpdateCompoundAction(UFG::Controller *this, UFG
   UFG::InputActionData *v16; // rax
   float v17; // xmm0_4
   float v18; // xmm0_4
-  float v19; // xmm0_4
+  float mMaxHoldTime; // xmm0_4
 
   v3 = ca->mActionDefName->mDataPerController[this->mControllerIndex];
   v4 = 0.0;
-  v5 = (signed int)v3[1].mButton;
-  if ( v3->mActionTrue == 1 )
+  mButton = (int)v3[1].mButton;
+  if ( v3->mActionTrue )
     v3->mActionTrue = 0;
-  if ( (_DWORD)v5 )
+  if ( (_DWORD)mButton )
   {
     v6 = elapsedTime + *(float *)&v3[1].mInputFunc;
     *(float *)&v3[1].mInputFunc = v6;
     v4 = v6 - *((float *)&v3[1].mInputFunc + 1);
-    v7 = ca->mActionNodes[v5].mEndTime;
-    if ( v4 > v7 && v7 >= 0.0 )
+    mEndTime = ca->mActionNodes[mButton].mEndTime;
+    if ( v4 > mEndTime && mEndTime >= 0.0 )
     {
       v3->mActionTrue = 0;
-LABEL_59:
+LABEL_55:
       *(_QWORD *)&v3->mData0i = 0i64;
       *(_QWORD *)&v3->mData2i = 0i64;
       *(_QWORD *)&v3->mAxisPositionY = 0i64;
@@ -1996,96 +1660,95 @@ LABEL_59:
       return;
     }
   }
-  v8 = ca->mActionNodes[v5].mActions[0];
-  v9 = FLOAT_999_0;
+  v8 = ca->mActionNodes[mButton].mActions[0];
+  mOnSeconds = FLOAT_999_0;
   v10 = 0;
   if ( v8 )
   {
     v11 = v8->mDataPerController[this->mControllerIndex];
-    if ( !v11 )
-      goto LABEL_62;
-    if ( v11->mActionTrue )
-      v10 = 1;
-    if ( !v11 )
-      goto LABEL_62;
-    if ( v11->mOnSeconds >= 999.0 )
-      goto LABEL_16;
     if ( v11 )
-      v9 = v11->mOnSeconds;
+    {
+      if ( v11->mActionTrue )
+        v10 = 1;
+      if ( v11->mOnSeconds < 999.0 )
+        mOnSeconds = v11->mOnSeconds;
+    }
     else
-LABEL_62:
-      v9 = 0.0;
+    {
+      mOnSeconds = 0.0;
+    }
   }
-LABEL_16:
-  v12 = ca->mActionNodes[v5].mActions[1];
+  v12 = ca->mActionNodes[mButton].mActions[1];
   if ( v12 )
   {
     v13 = v12->mDataPerController[this->mControllerIndex];
-    if ( !v13 )
-      goto LABEL_63;
-    if ( v13->mActionTrue )
-      ++v10;
     if ( v13 )
+    {
+      if ( v13->mActionTrue )
+        ++v10;
       v14 = v13->mOnSeconds;
+    }
     else
-LABEL_63:
+    {
       v14 = 0.0;
-    if ( v14 < v9 )
+    }
+    if ( v14 < mOnSeconds )
     {
       if ( v13 )
-        v9 = v13->mOnSeconds;
+        mOnSeconds = v13->mOnSeconds;
       else
-        v9 = 0.0;
+        mOnSeconds = 0.0;
     }
   }
-  v15 = ca->mActionNodes[v5].mActions[2];
+  v15 = ca->mActionNodes[mButton].mActions[2];
   if ( v15 )
   {
     v16 = v15->mDataPerController[this->mControllerIndex];
-    if ( !v16 )
-      goto LABEL_64;
-    if ( v16->mActionTrue )
-      ++v10;
     if ( v16 )
+    {
+      if ( v16->mActionTrue )
+        ++v10;
       v17 = v16->mOnSeconds;
+    }
     else
-LABEL_64:
+    {
       v17 = 0.0;
-    if ( v17 < v9 )
+    }
+    if ( v17 < mOnSeconds )
     {
       if ( v16 )
-        v9 = v16->mOnSeconds;
+        mOnSeconds = v16->mOnSeconds;
       else
-        v9 = 0.0;
+        mOnSeconds = 0.0;
     }
   }
-  if ( v3->mDebouncer && ca->mShouldDebounce || v10 < ca->mActionNodes[v5].mNumActionsCombined )
+  if ( v3->mDebouncer && ca->mShouldDebounce || v10 < ca->mActionNodes[mButton].mNumActionsCombined )
   {
     if ( v10 )
       return;
-    if ( !(_DWORD)v5 )
+    if ( !(_DWORD)mButton )
     {
       v3->mDebouncer = 0;
       return;
     }
-    if ( ca->mActionNodes[v5].mMinHoldTime < 0.0 && ca->mActionNodes[v5].mMaxHoldTime < 0.0 )
+    if ( ca->mActionNodes[mButton].mMinHoldTime < 0.0 && ca->mActionNodes[mButton].mMaxHoldTime < 0.0 )
     {
       v3->mActionTrue = 0;
-      goto LABEL_59;
+      goto LABEL_55;
     }
   }
-  else if ( v4 >= ca->mActionNodes[v5].mStartTime )
+  else if ( v4 >= ca->mActionNodes[mButton].mStartTime )
   {
-    v18 = ca->mActionNodes[v5].mEndTime;
-    if ( (v4 <= v18 || v18 < 0.0) && v9 >= ca->mActionNodes[v5].mMinHoldTime )
+    v18 = ca->mActionNodes[mButton].mEndTime;
+    if ( (v4 <= v18 || v18 < 0.0) && mOnSeconds >= ca->mActionNodes[mButton].mMinHoldTime )
     {
-      v19 = ca->mActionNodes[v5].mMaxHoldTime;
-      if ( v19 >= v9 || v19 < 0.0 )
+      mMaxHoldTime = ca->mActionNodes[mButton].mMaxHoldTime;
+      if ( mMaxHoldTime >= mOnSeconds || mMaxHoldTime < 0.0 )
       {
-        v3[1].mButton = v5 + 1;
-        if ( (_DWORD)v5 + 1 == ca->mNumNodes )
+        v3[1].mButton = mButton + 1;
+        if ( (_DWORD)mButton + 1 == ca->mNumNodes )
         {
-          if ( ca->mActionNodes[v5].mMinHoldTime >= 0.0 || ca->mActionNodes[v5].mMaxHoldTime >= 0.0 )
+          if ( ca->mActionNodes[mButton].mMinHoldTime >= 0.0 || ca->mActionNodes[mButton].mMaxHoldTime >= 0.0 )
           {
             v3->mActionTrue = 0;
             *(_QWORD *)&v3->mData0i = 0i64;
@@ -2103,7 +1766,7 @@ LABEL_64:
           else
           {
             v3->mActionTrue = 1;
-            v3[1].mButton = v5;
+            v3[1].mButton = mButton;
           }
         }
         else
@@ -2130,68 +1793,63 @@ void __fastcall UFG::Controller::UpdateRightThumbHistory(UFG::Controller *this, 
 // RVA: 0x1B8F10
 char __fastcall UFG::Controller::RightStick_HoldThenFlickAcross(UFG::Controller *this)
 {
-  UFG::Controller *v1; // r8
   char v2; // dl
-  __int64 v4; // rcx
-  int v5; // er9
-  signed int v6; // eax
-  signed int v7; // ecx
-  signed __int64 v8; // rdx
+  __int64 mOctantIndex; // rcx
+  int mOctant; // r9d
+  int v6; // eax
+  int v7; // ecx
+  __int64 v8; // rdx
   float v9; // xmm0_4
-  int v10; // er11
-  signed int v11; // er9
+  int v10; // r11d
+  int i; // r9d
   int v12; // eax
   int v13; // ecx
 
-  v1 = this;
   v2 = tweaksAdded;
   if ( !tweaksAdded )
     v2 = 1;
   tweaksAdded = v2;
   if ( this->mRightThumbServiceTick != UFG::InputSystem::mServiceTickCounter )
     return 0;
-  v4 = this->mJoyInputHistory.mOctantIndex;
-  v5 = v1->mJoyInputHistory.mOctantHistory[v4].mOctant;
-  if ( UFG::gFlickDuration >= v1->mJoyInputHistory.mOctantHistory[v4].mDuration )
+  mOctantIndex = this->mJoyInputHistory.mOctantIndex;
+  mOctant = this->mJoyInputHistory.mOctantHistory[mOctantIndex].mOctant;
+  if ( UFG::gFlickDuration >= this->mJoyInputHistory.mOctantHistory[mOctantIndex].mDuration )
   {
-    v6 = v4 - 1;
+    v6 = mOctantIndex - 1;
     v7 = 7;
     if ( v6 >= 0 )
       v7 = v6;
     v8 = v7;
-    if ( v1->mJoyInputHistory.mOctantHistory[v7].mOctant == -1
-      && UFG::gFlickDuration > v1->mJoyInputHistory.mOctantHistory[v7].mDuration )
+    if ( this->mJoyInputHistory.mOctantHistory[v7].mOctant == -1
+      && UFG::gFlickDuration > this->mJoyInputHistory.mOctantHistory[v7].mDuration )
     {
       ++count;
       v9 = 0.0;
-      v10 = ((_BYTE)v5 - 8) & 0xF;
-      v11 = 0;
-      do
+      v10 = ((_BYTE)mOctant - 8) & 0xF;
+      for ( i = 0; i < 4; ++i )
       {
         if ( --v8 < 0 )
           v8 = 7i64;
-        v12 = v10 - v1->mJoyInputHistory.mOctantHistory[v8].mOctant;
+        v12 = v10 - this->mJoyInputHistory.mOctantHistory[v8].mOctant;
         v13 = v12;
         if ( v12 < 0 )
-          v13 = v1->mJoyInputHistory.mOctantHistory[v8].mOctant - v10;
+          v13 = this->mJoyInputHistory.mOctantHistory[v8].mOctant - v10;
         if ( v13 > 8 )
         {
           if ( v12 < 0 )
-            v12 = v1->mJoyInputHistory.mOctantHistory[v8].mOctant - v10;
+            v12 = this->mJoyInputHistory.mOctantHistory[v8].mOctant - v10;
           v12 = 16 - v12;
         }
         else if ( v12 < 0 )
         {
-          v12 = v1->mJoyInputHistory.mOctantHistory[v8].mOctant - v10;
+          v12 = this->mJoyInputHistory.mOctantHistory[v8].mOctant - v10;
         }
         if ( v12 > UFG::gAllowedSectionDelt )
           break;
-        v9 = v9 + v1->mJoyInputHistory.mOctantHistory[v8].mDuration;
+        v9 = v9 + this->mJoyInputHistory.mOctantHistory[v8].mDuration;
         if ( v9 >= UFG::gHoldDuration )
           return 1;
-        ++v11;
       }
-      while ( v11 < 4 );
     }
   }
   return 0;
@@ -2201,16 +1859,14 @@ char __fastcall UFG::Controller::RightStick_HoldThenFlickAcross(UFG::Controller 
 // RVA: 0x1B6FD0
 void __fastcall UFG::JoyInputHistory::AddAxisInfo(UFG::JoyInputHistory *this, float x, float y, float elapsedTime)
 {
-  UFG::JoyInputHistory *v4; // rbx
   float v5; // xmm0_4
   float v6; // xmm1_4
-  signed int v7; // eax
-  signed int v8; // eax
+  int mIndex; // eax
+  int mValidHistorySize; // eax
   int v9; // ecx
-  __int64 v10; // rdx
+  __int64 mOctantIndex; // rdx
   int v11; // eax
 
-  v4 = this;
   if ( !this->mLocked )
   {
     v5 = atan2f(y, x);
@@ -2218,35 +1874,35 @@ void __fastcall UFG::JoyInputHistory::AddAxisInfo(UFG::JoyInputHistory *this, fl
       v6 = 0.0;
     else
       v6 = *(float *)&FLOAT_1_0;
-    v4->mTheta[v4->mIndex] = v5;
-    v4->mR[v4->mIndex++] = v6;
-    v7 = v4->mIndex;
-    if ( v7 >= 64 )
-      v7 = 0;
-    v4->mIndex = v7;
-    v8 = v4->mValidHistorySize;
-    if ( v8 < 64 )
-      v4->mValidHistorySize = v8 + 1;
+    this->mTheta[this->mIndex] = v5;
+    this->mR[this->mIndex++] = v6;
+    mIndex = this->mIndex;
+    if ( mIndex >= 64 )
+      mIndex = 0;
+    this->mIndex = mIndex;
+    mValidHistorySize = this->mValidHistorySize;
+    if ( mValidHistorySize < 64 )
+      this->mValidHistorySize = mValidHistorySize + 1;
     v9 = -1;
     if ( v6 != 0.0 )
     {
       if ( v5 < 0.0 )
         v5 = v5 + 6.2831855;
-      v9 = (signed int)(float)((float)(v5 + 0.19634955) * 2.546479) & 0xF;
+      v9 = (int)(float)((float)(v5 + 0.19634955) * 2.546479) & 0xF;
     }
-    v10 = v4->mOctantIndex;
-    if ( v9 == v4->mOctantHistory[v10].mOctant )
+    mOctantIndex = this->mOctantIndex;
+    if ( v9 == this->mOctantHistory[mOctantIndex].mOctant )
     {
-      v4->mOctantHistory[v10].mDuration = elapsedTime + v4->mOctantHistory[v10].mDuration;
+      this->mOctantHistory[mOctantIndex].mDuration = elapsedTime + this->mOctantHistory[mOctantIndex].mDuration;
     }
     else
     {
-      v11 = v10 + 1;
-      if ( (_DWORD)v10 == 7 )
+      v11 = mOctantIndex + 1;
+      if ( (_DWORD)mOctantIndex == 7 )
         v11 = 0;
-      v4->mOctantIndex = v11;
-      v4->mOctantHistory[v11].mDuration = elapsedTime;
-      v4->mOctantHistory[v4->mOctantIndex].mOctant = v9;
+      this->mOctantIndex = v11;
+      this->mOctantHistory[v11].mDuration = elapsedTime;
+      this->mOctantHistory[this->mOctantIndex].mOctant = v9;
     }
   }
 }

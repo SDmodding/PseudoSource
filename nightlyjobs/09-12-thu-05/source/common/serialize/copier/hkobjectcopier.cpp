@@ -7,16 +7,20 @@ bool __fastcall `anonymous namespace::inRange(int num, int lo, int hi)
 
 // File Line: 35
 // RVA: 0xE6B2F0
-__int64 __fastcall `anonymous namespace::min2<int>(int a, int b)
+__int64 __fastcall `anonymous namespace::min2<int>(unsigned int a, unsigned int b)
 {
-  if ( a < b )
-    b = a;
-  return (unsigned int)b;
+  if ( (int)a < (int)b )
+    return a;
+  return b;
 }
 
 // File Line: 43
 // RVA: 0xE68B60
-void __fastcall hkObjectCopier::hkObjectCopier(hkObjectCopier *this, hkStructureLayout *layoutIn, hkStructureLayout *layoutOut, hkFlags<enum hkObjectCopier::ObjectCopierFlagBits,unsigned int> flags)
+void __fastcall hkObjectCopier::hkObjectCopier(
+        hkObjectCopier *this,
+        hkStructureLayout *layoutIn,
+        hkStructureLayout *layoutOut,
+        hkFlags<enum hkObjectCopier::ObjectCopierFlagBits,unsigned int> flags)
 {
   hkStructureLayout v4; // eax
 
@@ -40,189 +44,160 @@ void __fastcall hkObjectCopier::~hkObjectCopier(hkObjectCopier *this)
 // RVA: 0xE6AC90
 void __fastcall objectCopierPadUp(hkStreamWriter *w, int pad)
 {
-  int v2; // ebx
-  hkStreamWriter *v3; // rsi
   int v4; // eax
   int v5; // edx
   int v6; // ebp
-  hkLifoAllocator *v7; // rax
-  char *v8; // rcx
+  hkLifoAllocator *Value; // rax
+  char *m_cur; // rcx
   int v9; // edx
   char *v10; // rdi
-  char *v11; // rax
-  signed int v12; // eax
+  __int64 v11; // rax
+  int v12; // r9d
   int v13; // eax
-  int v14; // er9
-  int v15; // eax
-  char *v16; // rdi
-  unsigned __int64 v17; // rdx
-  char *v18; // rsi
-  signed int v19; // edi
-  hkLifoAllocator *v20; // rax
-  int v21; // er8
-  char *array; // [rsp+30h] [rbp-38h]
-  int v23; // [rsp+38h] [rbp-30h]
-  int v24; // [rsp+3Ch] [rbp-2Ch]
+  char *v14; // rdi
+  unsigned __int64 v15; // rdx
+  char *v16; // rsi
+  signed int v17; // edi
+  hkLifoAllocator *v18; // rax
+  int v19; // r8d
+  char *array; // [rsp+30h] [rbp-38h] BYREF
+  int v21; // [rsp+38h] [rbp-30h]
+  int v22; // [rsp+3Ch] [rbp-2Ch]
   void *p; // [rsp+40h] [rbp-28h]
-  int v26; // [rsp+48h] [rbp-20h]
-  hkResult result; // [rsp+78h] [rbp+10h]
+  int v24; // [rsp+48h] [rbp-20h]
+  hkResult result; // [rsp+78h] [rbp+10h] BYREF
 
-  v2 = pad;
-  v3 = w;
-  v4 = ((__int64 (*)(void))w->vfptr[4].__vecDelDtor)();
-  v24 = 2147483648;
+  v4 = ((__int64 (__fastcall *)(hkStreamWriter *))w->vfptr[4].__vecDelDtor)(w);
+  v22 = 0x80000000;
   v5 = 0;
   array = 0i64;
-  v26 = v2;
+  v24 = pad;
   v6 = v4;
-  v23 = 0;
-  if ( v2 )
+  v21 = 0;
+  if ( pad )
   {
-    v7 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v8 = (char *)v7->m_cur;
-    v9 = (v2 + 127) & 0xFFFFFF80;
-    v10 = &v8[v9];
-    if ( v9 > v7->m_slabSize || v10 > v7->m_end )
+    Value = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    m_cur = (char *)Value->m_cur;
+    v9 = (pad + 127) & 0xFFFFFF80;
+    v10 = &m_cur[v9];
+    if ( v9 > Value->m_slabSize || v10 > Value->m_end )
     {
-      v11 = (char *)hkLifoAllocator::allocateFromNewSlab(v7, v9);
-      v5 = v23;
-      v8 = v11;
+      v11 = hkLifoAllocator::allocateFromNewSlab(Value, v9);
+      v5 = v21;
+      m_cur = (char *)v11;
     }
     else
     {
-      v7->m_cur = v10;
-      v5 = v23;
+      Value->m_cur = v10;
+      v5 = v21;
     }
   }
   else
   {
-    v8 = 0i64;
+    m_cur = 0i64;
   }
-  array = v8;
-  p = v8;
-  v24 = v2 | 0x80000000;
-  v12 = (v2 | 0x80000000) & 0x3FFFFFFF;
-  if ( v12 < v2 )
+  array = m_cur;
+  p = m_cur;
+  v22 = pad | 0x80000000;
+  if ( (pad & 0x3FFFFFFF) < pad )
   {
-    v13 = 2 * v12;
-    v14 = v2;
-    if ( v2 < v13 )
-      v14 = v13;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, v14, 1);
-    v5 = v23;
-    v8 = array;
+    v12 = pad;
+    if ( pad < 2 * (pad & 0x3FFFFFFF) )
+      v12 = 2 * (pad & 0x3FFFFFFF);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&array, v12, 1);
+    v5 = v21;
+    m_cur = array;
   }
-  v15 = v2 - v5;
-  v16 = &v8[v5];
-  v17 = v2 - v5;
-  if ( v15 > 0 )
+  v13 = pad - v5;
+  v14 = &m_cur[v5];
+  v15 = pad - v5;
+  if ( v13 > 0 )
   {
-    memset(v16, 0, v17);
-    v8 = array;
+    memset(v14, 0, v15);
+    m_cur = array;
   }
-  v23 = v2;
-  if ( v6 & (v2 - 1) )
+  v21 = pad;
+  if ( (v6 & (pad - 1)) != 0 )
   {
-    ((void (__fastcall *)(hkStreamWriter *, char *, _QWORD))v3->vfptr[2].__vecDelDtor)(
-      v3,
-      v8,
-      v2 - (v6 & (unsigned int)(v2 - 1)));
-    v2 = v23;
-    v8 = array;
+    ((void (__fastcall *)(hkStreamWriter *, char *, _QWORD))w->vfptr[2].__vecDelDtor)(
+      w,
+      m_cur,
+      pad - (v6 & (unsigned int)(pad - 1)));
+    pad = v21;
+    m_cur = array;
   }
-  v18 = (char *)p;
-  if ( p == v8 )
-    v2 = 0;
-  v19 = (v26 + 127) & 0xFFFFFF80;
-  v23 = v2;
-  v20 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v21 = (v19 + 15) & 0xFFFFFFF0;
-  if ( v19 > v20->m_slabSize || &v18[v21] != v20->m_cur || v20->m_firstNonLifoEnd == v18 )
-    hkLifoAllocator::slowBlockFree(v20, v18, v21);
+  v16 = (char *)p;
+  if ( p == m_cur )
+    pad = 0;
+  v17 = (v24 + 127) & 0xFFFFFF80;
+  v21 = pad;
+  v18 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v19 = (v17 + 15) & 0xFFFFFFF0;
+  if ( v17 > v18->m_slabSize || &v16[v19] != v18->m_cur || v18->m_firstNonLifoEnd == v16 )
+    hkLifoAllocator::slowBlockFree(v18, v16, v19);
   else
-    v20->m_cur = v18;
-  v23 = 0;
-  if ( v24 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      array,
-      v24 & 0x3FFFFFFF);
+    v18->m_cur = v16;
+  v21 = 0;
+  if ( v22 >= 0 )
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, array, v22 & 0x3FFFFFFF);
 }
 
 // File Line: 86
 // RVA: 0xE6AE50
 __int64 __fastcall objectCopier_calcCArraySize(hkClassMember *member)
 {
-  hkClassMember *v1; // rbx
-  __int64 result; // rax
-
-  v1 = member;
   if ( (unsigned int)hkClassMember::getCstyleArraySize(member) )
-    result = hkClassMember::getCstyleArraySize(v1);
+    return hkClassMember::getCstyleArraySize(member);
   else
-    result = 1i64;
-  return result;
+    return 1i64;
 }
 
 // File Line: 91
 // RVA: 0xE6AE80
 __int64 __fastcall writeZeros(hkOArchive *oa, int numZeros, hkLocalArray<char> *zeroArray)
 {
-  hkLocalArray<char> *v3; // rbx
-  unsigned int v4; // esi
   int v5; // eax
-  hkOArchive *v6; // rbp
   int v7; // eax
-  int v8; // er9
+  int v8; // r9d
   signed __int64 v9; // rcx
-  char *v10; // rdx
-  hkResult result; // [rsp+48h] [rbp+10h]
+  char *m_data; // rdx
+  hkResult result; // [rsp+48h] [rbp+10h] BYREF
 
-  v3 = zeroArray;
-  v4 = numZeros;
   v5 = zeroArray->m_capacityAndFlags & 0x3FFFFFFF;
-  v6 = oa;
   if ( v5 < numZeros )
   {
     v7 = 2 * v5;
     v8 = numZeros;
     if ( numZeros < v7 )
       v8 = v7;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, zeroArray, v8, 1);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&zeroArray->m_data, v8, 1);
   }
-  v9 = (signed int)(v4 - v3->m_size);
+  v9 = numZeros - zeroArray->m_size;
   if ( v9 > 0 )
-    memset(&v3->m_data[v3->m_size], 0, v9);
-  v10 = v3->m_data;
-  v3->m_size = v4;
-  return hkOArchive::writeRaw(v6, v10, v4);
+    memset(&zeroArray->m_data[zeroArray->m_size], 0, v9);
+  m_data = zeroArray->m_data;
+  zeroArray->m_size = numZeros;
+  return hkOArchive::writeRaw(oa, m_data, (unsigned int)numZeros);
 }
 
 // File Line: 100
 // RVA: 0xE68FC0
-void __fastcall hkObjectCopier::writeZero(hkObjectCopier *this, hkOArchive *oa, hkClassMember *memberOut, hkLocalArray<char> *zeroArray)
+void __fastcall hkObjectCopier::writeZero(
+        hkObjectCopier *this,
+        hkOArchive *oa,
+        hkClassMember *memberOut,
+        hkLocalArray<char> *zeroArray)
 {
-  hkObjectCopier *v4; // rsi
-  int v5; // ecx
-  unsigned int v6; // ebx
-  hkLocalArray<char> *v7; // r14
-  hkClassMember *v8; // rdi
-  hkOArchive *v9; // rbp
-  hkClass *v10; // rax
-  int v11; // ebx
-  char buf; // [rsp+20h] [rbp-228h]
-  __int64 v13; // [rsp+21h] [rbp-227h]
-  __int16 v14; // [rsp+29h] [rbp-21Fh]
-  char v15; // [rsp+2Bh] [rbp-21Dh]
-  char description; // [rsp+40h] [rbp-208h]
+  char m_storage; // cl
+  unsigned int SizeInBytes; // ebx
+  hkClass *StructClass; // rax
+  int ObjectSize; // ebx
+  hkOstream buf; // [rsp+20h] [rbp-228h] BYREF
+  char description[512]; // [rsp+40h] [rbp-208h] BYREF
 
-  v4 = this;
-  v5 = (unsigned __int8)memberOut->m_type.m_storage;
-  v6 = 0;
-  v7 = zeroArray;
-  v8 = memberOut;
-  v9 = oa;
-  switch ( v5 )
+  m_storage = memberOut->m_type.m_storage;
+  SizeInBytes = 0;
+  switch ( m_storage )
   {
     case 1:
     case 2:
@@ -245,111 +220,108 @@ void __fastcall hkObjectCopier::writeZero(hkObjectCopier *this, hkOArchive *oa, 
     case 24:
     case 31:
     case 32:
-      v6 = hkClassMember::getSizeInBytes(memberOut);
-      break;
+      SizeInBytes = hkClassMember::getSizeInBytes(memberOut);
+      goto LABEL_13;
     case 20:
     case 21:
     case 30:
     case 33:
-      v6 = (unsigned __int8)v4->m_layoutOut.m_rules.m_bytesInPointer * objectCopier_calcCArraySize(memberOut);
-      break;
+      SizeInBytes = (unsigned __int8)this->m_layoutOut.m_rules.m_bytesInPointer * objectCopier_calcCArraySize(memberOut);
+      goto LABEL_13;
     case 22:
     case 23:
     case 26:
     case 27:
-      if ( (_BYTE)v5 == 27 )
-        v6 = (unsigned __int8)v4->m_layoutOut.m_rules.m_bytesInPointer;
-      v6 += (unsigned __int8)v4->m_layoutOut.m_rules.m_bytesInPointer + 4;
-      if ( (_BYTE)v5 != 22 )
-        break;
-      buf = 0;
-      v13 = 0i64;
-      v14 = 0;
-      v15 = 0;
-      hkOArchive::writeRaw(oa, &buf, v6);
-      hkOArchive::write32u(v9, 0x80000000);
-      return;
+      if ( m_storage == 27 )
+        SizeInBytes = (unsigned __int8)this->m_layoutOut.m_rules.m_bytesInPointer;
+      SizeInBytes += (unsigned __int8)this->m_layoutOut.m_rules.m_bytesInPointer + 4;
+      if ( m_storage != 22 )
+        goto LABEL_13;
+      LOBYTE(buf.vfptr) = 0;
+      *(hkBaseObjectVtbl **)((char *)&buf.vfptr + 1) = 0i64;
+      *(unsigned __int16 *)((char *)&buf.m_memSizeAndFlags + 1) = 0;
+      HIBYTE(buf.m_referenceCount) = 0;
+      hkOArchive::writeRaw(oa, &buf, SizeInBytes);
+      hkOArchive::write32u(oa, 0x80000000);
+      break;
     case 25:
-      v10 = hkClassMember::getStructClass(memberOut);
-      v11 = hkClass::getObjectSize(v10);
-      v6 = objectCopier_calcCArraySize(v8) * v11;
-      break;
+      StructClass = hkClassMember::getStructClass(memberOut);
+      ObjectSize = hkClass::getObjectSize(StructClass);
+      SizeInBytes = objectCopier_calcCArraySize(memberOut) * ObjectSize;
+      goto LABEL_13;
     case 28:
-      v6 = 2 * (unsigned __int8)v4->m_layoutOut.m_rules.m_bytesInPointer * objectCopier_calcCArraySize(memberOut);
-      break;
+      SizeInBytes = 2
+                  * (unsigned __int8)this->m_layoutOut.m_rules.m_bytesInPointer
+                  * objectCopier_calcCArraySize(memberOut);
+      goto LABEL_13;
     default:
-      hkErrStream::hkErrStream((hkErrStream *)&buf, &description, 512);
-      hkOstream::operator<<((hkOstream *)&buf, "Unknown class member type found!");
-      if ( (unsigned int)hkError::messageError(1593107876, &description, "Copier\\hkObjectCopier.cpp", 178) )
+      hkErrStream::hkErrStream((hkErrStream *)&buf, description, 512);
+      hkOstream::operator<<(&buf, "Unknown class member type found!");
+      if ( (unsigned int)hkError::messageError(0x5EF4E5A4u, description, "Copier\\hkObjectCopier.cpp", 178) )
         __debugbreak();
-      hkOstream::~hkOstream((hkOstream *)&buf);
+      hkOstream::~hkOstream(&buf);
+LABEL_13:
+      writeZeros(oa, SizeInBytes, zeroArray);
       break;
   }
-  writeZeros(v9, v6, v7);
 }
 
 // File Line: 188
 // RVA: 0xE6AF20
-void __fastcall writeUlongArray(hkOArchive *oa, int elemsize, int nelem, const void *startAddress)
+void __fastcall writeUlongArray(hkOArchive *oa, int elemsize, int nelem, char *startAddress)
 {
-  _DWORD *v4; // rdi
   __int64 v5; // rsi
-  int v6; // er15
-  hkOArchive *v7; // r14
-  hkLifoAllocator *v8; // rax
-  _DWORD *v9; // rbx
+  hkLifoAllocator *Value; // rax
+  char *m_cur; // rbx
   int v10; // ebp
   char *v11; // rcx
   __int64 v12; // rdx
   int v13; // ecx
   hkLifoAllocator *v14; // rax
-  int v15; // er8
+  int v15; // r8d
 
-  v4 = startAddress;
   v5 = nelem;
-  v6 = elemsize;
-  v7 = oa;
   if ( elemsize == 8 )
   {
-    hkOArchive::writeArrayGeneric(oa, startAddress, 8, v5);
+    hkOArchive::writeArrayGeneric(oa, startAddress, 8, nelem);
   }
   else
   {
-    v8 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v9 = v8->m_cur;
+    Value = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    m_cur = (char *)Value->m_cur;
     v10 = (4 * v5 + 127) & 0xFFFFFF80;
-    v11 = (char *)v9 + v10;
-    if ( v10 > v8->m_slabSize || v11 > v8->m_end )
-      v9 = hkLifoAllocator::allocateFromNewSlab(v8, v10);
+    v11 = &m_cur[v10];
+    if ( v10 > Value->m_slabSize || v11 > Value->m_end )
+      m_cur = (char *)hkLifoAllocator::allocateFromNewSlab(Value, v10);
     else
-      v8->m_cur = v11;
+      Value->m_cur = v11;
     v12 = 0i64;
-    if ( (signed int)v5 > 0 )
+    if ( (int)v5 > 0 )
     {
       do
       {
-        v13 = v4[2 * v12++];
-        v9[v12 - 1] = v13;
+        v13 = *(_DWORD *)&startAddress[8 * v12++];
+        *(_DWORD *)&m_cur[4 * v12 - 4] = v13;
       }
       while ( v12 < v5 );
     }
-    hkOArchive::writeArrayGeneric(v7, v9, v6, v5);
+    hkOArchive::writeArrayGeneric(oa, m_cur, elemsize, v5);
     v14 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
     v15 = (v10 + 15) & 0xFFFFFFF0;
-    if ( v10 > v14->m_slabSize || (char *)v9 + v15 != v14->m_cur || v14->m_firstNonLifoEnd == v9 )
-      hkLifoAllocator::slowBlockFree(v14, v9, v15);
+    if ( v10 > v14->m_slabSize || &m_cur[v15] != v14->m_cur || v14->m_firstNonLifoEnd == m_cur )
+      hkLifoAllocator::slowBlockFree(v14, m_cur, v15);
     else
-      v14->m_cur = v9;
+      v14->m_cur = m_cur;
   }
 }
 
 // File Line: 214
 // RVA: 0xE6B030
-void __fastcall writePodArray(hkOArchive *oa, hkClassMember::Type mtype, int elemsize, int nelem, const void *startAddress)
+void __fastcall writePodArray(hkOArchive *oa, hkClassMember::Type mtype, int elemsize, int nelem, char *startAddress)
 {
   unsigned __int64 v5; // rax
-  hkErrStream v6; // [rsp+20h] [rbp-228h]
-  char buf; // [rsp+40h] [rbp-208h]
+  hkErrStream v6; // [rsp+20h] [rbp-228h] BYREF
+  char buf[520]; // [rsp+40h] [rbp-208h] BYREF
 
   switch ( mtype )
   {
@@ -380,89 +352,96 @@ $LN6_229:
       hkOArchive::writeArrayGeneric(oa, startAddress, elemsize, nelem);
       break;
     default:
-      hkErrStream::hkErrStream(&v6, &buf, 512);
-      hkOstream::operator<<((hkOstream *)&v6.vfptr, "Unknown class member found during write of plain data array.");
-      if ( (unsigned int)hkError::messageError(1954422275, &buf, "Copier\\hkObjectCopier.cpp", 259) )
+      hkErrStream::hkErrStream(&v6, buf, 512);
+      hkOstream::operator<<(&v6, "Unknown class member found during write of plain data array.");
+      if ( (unsigned int)hkError::messageError(0x747E1E03u, buf, "Copier\\hkObjectCopier.cpp", 259) )
         __debugbreak();
-      hkOstream::~hkOstream((hkOstream *)&v6.vfptr);
+      hkOstream::~hkOstream(&v6);
       break;
   }
 }
 
 // File Line: 265
 // RVA: 0xE6B120
-hkResult *__fastcall applyDefaultsFor(hkResult *result, hkClass *klass, hkClassMember *mem, int memberIndex, hkStreamWriter *writer)
+hkResult *__fastcall applyDefaultsFor(
+        hkResult *result,
+        hkClass *klass,
+        hkClassMember *mem,
+        int memberIndex,
+        hkStreamWriter *writer)
 {
-  hkClassMember *v5; // rbx
-  hkResult *v6; // rsi
-  hkClass *v7; // rdi
-  unsigned int v8; // eax
+  hkClass *Class; // rdi
+  int v8; // eax
   __int64 v9; // rbp
   int v10; // ebx
   hkStreamWriter *v11; // rbp
-  hkClassMember *v12; // rax
-  hkResult resulta; // [rsp+50h] [rbp+8h]
+  hkClassMember *Member; // rax
+  hkResult resulta; // [rsp+50h] [rbp+8h] BYREF
   __int64 v15; // [rsp+60h] [rbp+18h]
 
-  v5 = mem;
-  v6 = result;
   hkClass::getDefault(klass, result, memberIndex, writer);
-  if ( v5->m_type.m_storage != 25 )
-    return v6;
-  v7 = hkClassMember::getClass(v5);
-  if ( !v7 )
-    return v6;
-  v8 = objectCopier_calcCArraySize(v5);
-  if ( (signed int)v8 <= 0 )
-    return v6;
-  v9 = v8;
-  v15 = v8;
+  if ( mem->m_type.m_storage != 25 )
+    return result;
+  Class = hkClassMember::getClass(mem);
+  if ( !Class )
+    return result;
+  v8 = objectCopier_calcCArraySize(mem);
+  if ( v8 <= 0 )
+    return result;
+  v9 = (unsigned int)v8;
+  v15 = (unsigned int)v8;
   do
   {
     v10 = 0;
-    if ( (signed int)hkClass::getNumMembers(v7) > 0 )
+    if ( (int)hkClass::getNumMembers(Class) > 0 )
     {
       v11 = writer;
       do
       {
-        v12 = hkClass::getMember(v7, v10);
-        if ( applyDefaultsFor(&resulta, v7, v12, v10, v11)->m_enum == HK_SUCCESS )
-          v6->m_enum = 0;
+        Member = hkClass::getMember(Class, v10);
+        if ( applyDefaultsFor(&resulta, Class, Member, v10, v11)->m_enum == HK_SUCCESS )
+          result->m_enum = HK_SUCCESS;
         ++v10;
       }
-      while ( v10 < (signed int)hkClass::getNumMembers(v7) );
+      while ( v10 < (int)hkClass::getNumMembers(Class) );
       v9 = v15;
     }
     v15 = --v9;
   }
   while ( v9 );
-  return v6;
+  return result;
 }
 
 // File Line: 290
 // RVA: 0xE68F90
 _BOOL8 __fastcall hkObjectCopier::areMembersCompatible(hkObjectCopier *this, hkClassMember *src, hkClassMember *dst)
 {
-  char v3; // cl
+  char m_storage; // cl
 
-  v3 = src->m_type.m_storage;
-  return v3 == dst->m_type.m_storage && (src->m_subtype.m_storage == dst->m_subtype.m_storage || v3 == 24);
+  m_storage = src->m_type.m_storage;
+  return m_storage == dst->m_type.m_storage && (src->m_subtype.m_storage == dst->m_subtype.m_storage || m_storage == 24);
 }
 
 // File Line: 313
 // RVA: 0xE69190
-void __fastcall hkObjectCopier::saveBody(hkObjectCopier *this, const void *dataIn, hkClass *klassIn, hkOArchive *dataOut, hkClass *klassOut, hkLocalArray<char> *zeroArray)
+void __fastcall hkObjectCopier::saveBody(
+        hkObjectCopier *this,
+        char *dataIn,
+        hkClass *klassIn,
+        hkOArchive *dataOut,
+        hkClass *klassOut,
+        hkLocalArray<char> *zeroArray)
 {
   hkOArchive *v6; // rsi
-  hkStreamWriter *v7; // rax
+  hkStreamWriter *StreamWriter; // rax
   int v8; // eax
   hkClass *v9; // rbx
   int v10; // edi
   hkClassMember *v11; // rdi
   hkStreamWriter *v12; // rax
-  int v13; // ebx
+  int m_offset; // ebx
   int v14; // eax
-  unsigned int v15; // eax
+  unsigned int m_storage; // eax
   hkStreamWriter *v16; // rax
   int v17; // eax
   int v18; // ebx
@@ -478,19 +457,19 @@ void __fastcall hkObjectCopier::saveBody(hkObjectCopier *this, const void *dataI
   hkStreamWriter *v28; // rax
   unsigned __int16 v29; // ax
   unsigned __int8 v30; // dl
-  signed __int64 v31; // r8
+  __int64 v31; // r8
   hkClass *v32; // rdi
   hkClassMember *v33; // rax
-  signed int i; // ebx
+  int v34; // ebx
   int v35; // eax
   hkStreamWriter *v36; // rax
-  hkClassMember *v37; // rax
+  hkClassMember *MemberByName; // rax
   int v38; // edx
-  char *v39; // rbx
+  int *v39; // rbx
   int v40; // edi
   int v41; // esi
-  int v42; // ebx
-  int v43; // er9
+  int SizeInBytes; // ebx
+  int v43; // r9d
   int v44; // eax
   int v45; // ebx
   int v46; // eax
@@ -500,136 +479,126 @@ void __fastcall hkObjectCopier::saveBody(hkObjectCopier *this, const void *dataI
   __int64 v50; // rdi
   __int64 v51; // rbx
   char *v52; // rax
-  int v53; // eax
+  int EnumValue; // eax
   int v54; // eax
   __int64 v55; // rbx
-  int v56; // er8
+  int m_bytesInPointer; // r8d
   int v57; // ebx
-  const char *v58; // rdi
+  const char *m_name; // rdi
   const char *v59; // rbx
   hkOstream *v60; // rax
   hkOstream *v61; // rax
   hkOstream *v62; // rax
   hkOstream *v63; // rax
-  int v64; // er8
+  int v64; // r8d
   hkStreamWriter *v65; // rax
   int v66; // eax
   __int64 v67; // rbx
   hkClassMember *v68; // rbx
   int v69; // edx
   hkClassMember **v70; // r8
-  hkStreamWriter *v71; // rax
+  hkStreamWriter *m_pntr; // rax
   __int64 v72; // rax
-  hkClassMember *v73; // rax
-  hkClassMember *v74; // rbx
-  hkClassEnum *v75; // rax
-  int v76; // ebx
+  hkClassMember *Class; // rbx
+  hkClassEnum *v74; // rax
+  int v75; // ebx
+  int v76; // eax
   int v77; // eax
-  int v78; // eax
-  int v79; // ebx
-  hkClass *v80; // rdi
-  int v81; // eax
-  int v82; // ebx
+  int v78; // ebx
+  hkClass *v79; // rdi
+  int ObjectSize; // eax
+  int v81; // ebx
+  int v82; // eax
   int v83; // eax
-  int v84; // eax
-  __int64 v85; // rbx
-  int v86; // ebx
-  int v87; // eax
-  hkClassEnum *v88; // rax
-  hkClassMember *v89; // rdi
-  int v90; // eax
-  hkClassMember *v91; // rcx
-  char *v92; // rbx
-  int v93; // eax
-  int v94; // edi
-  int v95; // esi
-  __int64 v96; // rbx
-  int v97; // edx
-  __int16 v98; // dx
-  char v99; // dl
-  bool v100; // zf
-  hkStreamWriter *v101; // rax
-  hkClassMember::Type v102; // edi
-  int v103; // ebx
-  int v104; // eax
-  int v105; // [rsp+30h] [rbp-D0h]
-  int val; // [rsp+34h] [rbp-CCh]
+  __int64 v84; // rbx
+  int v85; // ebx
+  int v86; // eax
+  hkClassEnum *v87; // rax
+  hkClassMember *v88; // rdi
+  int v89; // eax
+  hkClassMember *v90; // rcx
+  char *v91; // rbx
+  int v92; // eax
+  int v93; // edi
+  int v94; // esi
+  __int64 v95; // rbx
+  int v96; // edx
+  __int16 v97; // dx
+  char v98; // dl
+  bool v99; // zf
+  hkStreamWriter *v100; // rax
+  hkClassMember::Type v101; // edi
+  int v102; // ebx
+  int ArrayMemberSize; // eax
+  int v104; // [rsp+30h] [rbp-D0h] BYREF
+  int val; // [rsp+34h] [rbp-CCh] BYREF
   void *startAddress; // [rsp+38h] [rbp-C8h]
   hkClassMember *member; // [rsp+40h] [rbp-C0h]
-  hkClassMember *ptr; // [rsp+48h] [rbp-B8h]
+  hkClassMember *ptr; // [rsp+48h] [rbp-B8h] BYREF
   int memberIndex; // [rsp+50h] [rbp-B0h]
-  int v111; // [rsp+54h] [rbp-ACh]
-  int bitsOver; // [rsp+58h] [rbp-A8h]
-  hkClassEnum *v113; // [rsp+60h] [rbp-A0h]
-  char *array; // [rsp+68h] [rbp-98h]
-  int v115; // [rsp+70h] [rbp-90h]
-  int v116; // [rsp+74h] [rbp-8Ch]
-  hkArray<char const *,hkContainerHeapAllocator> bitsOut; // [rsp+78h] [rbp-88h]
-  hkClassMember *v118; // [rsp+88h] [rbp-78h]
-  hkClassMember *v119; // [rsp+90h] [rbp-70h]
-  int v120; // [rsp+98h] [rbp-68h]
-  hkResult v121; // [rsp+9Ch] [rbp-64h]
-  int v122; // [rsp+A0h] [rbp-60h]
-  hkResult v123; // [rsp+A4h] [rbp-5Ch]
-  __int64 v124; // [rsp+A8h] [rbp-58h]
-  hkResult v125; // [rsp+B0h] [rbp-50h]
-  hkResult v126; // [rsp+B4h] [rbp-4Ch]
-  hkResult v127; // [rsp+B8h] [rbp-48h]
-  __int64 buf; // [rsp+C0h] [rbp-40h]
-  hkResult v129; // [rsp+C8h] [rbp-38h]
-  hkClassEnum *v130; // [rsp+D0h] [rbp-30h]
-  char *name; // [rsp+D8h] [rbp-28h]
-  hkErrStream v132; // [rsp+E0h] [rbp-20h]
-  __int64 v133; // [rsp+100h] [rbp+0h]
-  hkResult result; // [rsp+108h] [rbp+8h]
-  __int64 v135; // [rsp+110h] [rbp+10h]
-  __int64 v136; // [rsp+118h] [rbp+18h]
-  char description; // [rsp+120h] [rbp+20h]
-  hkObjectCopier *v138; // [rsp+350h] [rbp+250h]
-  char *v139; // [rsp+358h] [rbp+258h]
-  hkClass *v140; // [rsp+360h] [rbp+260h]
-  hkOArchive *oa; // [rsp+368h] [rbp+268h]
+  int v110; // [rsp+54h] [rbp-ACh]
+  int bitsOver; // [rsp+58h] [rbp-A8h] BYREF
+  hkClassEnum *EnumClass; // [rsp+60h] [rbp-A0h]
+  char *array; // [rsp+68h] [rbp-98h] BYREF
+  int v114; // [rsp+70h] [rbp-90h]
+  int v115; // [rsp+74h] [rbp-8Ch]
+  hkArray<char const *,hkContainerHeapAllocator> bitsOut; // [rsp+78h] [rbp-88h] BYREF
+  hkClassMember *v117; // [rsp+88h] [rbp-78h]
+  hkClassMember *v118; // [rsp+90h] [rbp-70h]
+  int v119; // [rsp+98h] [rbp-68h] BYREF
+  hkResult v120; // [rsp+9Ch] [rbp-64h] BYREF
+  int NumMembers; // [rsp+A0h] [rbp-60h]
+  hkResult v122; // [rsp+A4h] [rbp-5Ch] BYREF
+  __int64 v123; // [rsp+A8h] [rbp-58h] BYREF
+  hkResult v124; // [rsp+B0h] [rbp-50h] BYREF
+  hkResult v125; // [rsp+B4h] [rbp-4Ch] BYREF
+  hkResult v126; // [rsp+B8h] [rbp-48h] BYREF
+  __int64 buf; // [rsp+C0h] [rbp-40h] BYREF
+  hkResult v128; // [rsp+C8h] [rbp-38h] BYREF
+  hkClassEnum *v129; // [rsp+D0h] [rbp-30h]
+  char *name; // [rsp+D8h] [rbp-28h] BYREF
+  hkErrStream v131; // [rsp+E0h] [rbp-20h] BYREF
+  __int64 v132; // [rsp+100h] [rbp+0h]
+  hkResult result; // [rsp+108h] [rbp+8h] BYREF
+  __int64 v134[2]; // [rsp+110h] [rbp+10h] BYREF
+  char description[544]; // [rsp+120h] [rbp+20h] BYREF
 
-  oa = dataOut;
-  v140 = klassIn;
-  v139 = (char *)dataIn;
-  v138 = this;
   v6 = dataOut;
-  v7 = hkOArchive::getStreamWriter(dataOut);
-  v8 = ((__int64 (__fastcall *)(hkStreamWriter *))v7->vfptr[4].__vecDelDtor)(v7);
+  StreamWriter = hkOArchive::getStreamWriter(dataOut);
+  v8 = ((__int64 (__fastcall *)(hkStreamWriter *))StreamWriter->vfptr[4].__vecDelDtor)(StreamWriter);
   v9 = klassOut;
-  v116 = 2147483648;
-  v111 = v8;
+  v115 = 0x80000000;
+  v110 = v8;
   array = 0i64;
-  v115 = 0;
+  v114 = 0;
   v10 = 0;
   memberIndex = 0;
-  v122 = hkClass::getNumMembers(klassOut);
-  if ( v122 > 0 )
+  NumMembers = hkClass::getNumMembers(klassOut);
+  if ( NumMembers > 0 )
   {
     while ( 1 )
     {
       v11 = hkClass::getMember(v9, v10);
-      v118 = v11;
+      v117 = v11;
       v12 = hkOArchive::getStreamWriter(v6);
-      v13 = v11->m_offset;
+      m_offset = v11->m_offset;
       v14 = ((__int64 (__fastcall *)(hkStreamWriter *))v12->vfptr[4].__vecDelDtor)(v12);
-      writeZeros(v6, v13 + v111 - v14, zeroArray);
-      if ( !(v11->m_flags.m_storage & 0x400) )
+      writeZeros(v6, m_offset + v110 - v14, zeroArray);
+      if ( (v11->m_flags.m_storage & 0x400) == 0 )
         goto LABEL_21;
-      v15 = v138->m_flags.m_storage;
-      if ( !(v15 & 2) )
+      m_storage = this->m_flags.m_storage;
+      if ( (m_storage & 2) == 0 )
         break;
-      hkObjectCopier::writeZero(v138, v6, v11, zeroArray);
+      hkObjectCopier::writeZero(this, v6, v11, zeroArray);
 $LN357_0:
       v9 = klassOut;
 LABEL_6:
       v10 = memberIndex + 1;
       memberIndex = v10;
-      if ( v10 >= v122 )
+      if ( v10 >= NumMembers )
         goto LABEL_7;
     }
-    if ( v15 & 1 )
+    if ( (m_storage & 1) != 0 )
     {
       v36 = hkOArchive::getStreamWriter(v6);
       v9 = klassOut;
@@ -637,25 +606,25 @@ LABEL_6:
       goto LABEL_6;
     }
 LABEL_21:
-    if ( v140 == klassOut )
-      v37 = v11;
+    if ( klassIn == klassOut )
+      MemberByName = v11;
     else
-      v37 = hkClass::getMemberByName(v140, v11->m_name);
-    member = v37;
-    if ( !v37
-      || !((unsigned int (__fastcall *)(hkObjectCopier *, hkClassMember *, hkClassMember *))v138->vfptr[2].__vecDelDtor)(
-            v138,
-            v37,
+      MemberByName = hkClass::getMemberByName(klassIn, v11->m_name);
+    member = MemberByName;
+    if ( !MemberByName
+      || !((unsigned int (__fastcall *)(hkObjectCopier *, hkClassMember *, hkClassMember *))this->vfptr[2].__vecDelDtor)(
+            this,
+            MemberByName,
             v11) )
     {
-      v101 = hkOArchive::getStreamWriter(v6);
+      v100 = hkOArchive::getStreamWriter(v6);
       v9 = klassOut;
-      applyDefaultsFor(&v121, klassOut, v11, memberIndex, v101);
+      applyDefaultsFor(&v120, klassOut, v11, memberIndex, v100);
       goto LABEL_6;
     }
     v38 = (unsigned __int8)v11->m_type.m_storage;
-    v39 = &v139[member->m_offset];
-    startAddress = &v139[member->m_offset];
+    v39 = (int *)&dataIn[member->m_offset];
+    startAddress = v39;
     switch ( v38 )
     {
       case 1:
@@ -678,12 +647,12 @@ LABEL_21:
       case 18:
       case 32:
         v40 = objectCopier_calcCArraySize(member);
-        v41 = objectCopier_calcCArraySize(v118);
-        v42 = hkClassMember::getSizeInBytes(v118);
+        v41 = objectCopier_calcCArraySize(v117);
+        SizeInBytes = hkClassMember::getSizeInBytes(v117);
         v43 = `anonymous namespace::min2<int>(v40, v41);
-        v44 = v42 / v41;
-        v6 = oa;
-        writePodArray(oa, (hkClassMember::Type)(unsigned __int8)v118->m_type.m_storage, v44, v43, startAddress);
+        v44 = SizeInBytes / v41;
+        v6 = dataOut;
+        writePodArray(dataOut, (hkClassMember::Type)(unsigned __int8)v117->m_type.m_storage, v44, v43, startAddress);
         break;
       case 19:
         goto $LN357_0;
@@ -698,7 +667,7 @@ LABEL_21:
           v55 = (unsigned int)v54;
           do
           {
-            hkOArchive::writeRaw(v6, &buf, (unsigned __int8)v138->m_layoutOut.m_rules.m_bytesInPointer);
+            hkOArchive::writeRaw(v6, &buf, (unsigned __int8)this->m_layoutOut.m_rules.m_bytesInPointer);
             --v55;
           }
           while ( v55 );
@@ -709,40 +678,40 @@ LABEL_21:
       case 27:
         if ( (_BYTE)v38 == 27 )
         {
-          v56 = (unsigned __int8)v138->m_layoutOut.m_rules.m_bytesInPointer;
+          m_bytesInPointer = (unsigned __int8)this->m_layoutOut.m_rules.m_bytesInPointer;
           ptr = 0i64;
-          hkOArchive::writeArrayGeneric(v6, &ptr, v56, 1);
+          hkOArchive::writeArrayGeneric(v6, (char *)&ptr, m_bytesInPointer, 1);
           if ( *(_QWORD *)v39 )
           {
-            v57 = *((_DWORD *)v39 + 4);
+            v57 = v39[4];
           }
           else
           {
-            hkErrStream::hkErrStream(&v132, &description, 512);
-            v58 = member->m_name;
-            v59 = hkClass::getName(v140);
-            v60 = hkOstream::operator<<((hkOstream *)&v132.vfptr, "Cant copy homogeneous array. No hkClass for ");
+            hkErrStream::hkErrStream(&v131, description, 512);
+            m_name = member->m_name;
+            v59 = hkClass::getName(klassIn);
+            v60 = hkOstream::operator<<(&v131, "Cant copy homogeneous array. No hkClass for ");
             v61 = hkOstream::operator<<(v60, v59);
             v62 = hkOstream::operator<<(v61, "::");
-            v63 = hkOstream::operator<<(v62, v58);
+            v63 = hkOstream::operator<<(v62, m_name);
             hkOstream::operator<<(v63, ".");
-            hkError::messageWarning(-1413850539, &description, "Copier\\hkObjectCopier.cpp", 462);
-            hkOstream::~hkOstream((hkOstream *)&v132.vfptr);
-            v11 = v118;
+            hkError::messageWarning(0xABBA5A55, description, "Copier\\hkObjectCopier.cpp", 462);
+            hkOstream::~hkOstream(&v131);
+            v11 = v117;
             v57 = 0;
           }
         }
         else if ( v11->m_subtype.m_storage )
         {
-          v57 = *((_DWORD *)v39 + 2);
+          v57 = v39[2];
         }
         else
         {
           v57 = 0;
         }
-        v64 = (unsigned __int8)v138->m_layoutOut.m_rules.m_bytesInPointer;
-        v124 = 0i64;
-        hkOArchive::writeArrayGeneric(v6, &v124, v64, 1);
+        v64 = (unsigned __int8)this->m_layoutOut.m_rules.m_bytesInPointer;
+        v123 = 0i64;
+        hkOArchive::writeArrayGeneric(v6, (char *)&v123, v64, 1);
         hkOArchive::write32(v6, v57);
         if ( v11->m_type.m_storage == 22 )
           hkOArchive::write32(v6, v57 | 0x80000000);
@@ -754,20 +723,20 @@ LABEL_21:
           {
             v48 = objectCopier_calcCArraySize(member);
             v49 = objectCopier_calcCArraySize(v11);
-            v105 = `anonymous namespace::min2<int>(v48, v49);
+            v104 = `anonymous namespace::min2<int>(v48, v49);
             ptr = (hkClassMember *)hkClassMember::getEnumClass(member);
-            v113 = hkClassMember::getEnumClass(v11);
-            v50 = (signed int)hkClassMember::getSizeInBytes(member) / v48;
-            if ( v105 > 0 )
+            EnumClass = hkClassMember::getEnumClass(v11);
+            v50 = (int)hkClassMember::getSizeInBytes(member) / v48;
+            if ( v104 > 0 )
             {
-              v51 = (unsigned int)v105;
+              v51 = (unsigned int)v104;
               v52 = (char *)startAddress;
               do
               {
-                v53 = hkClassMember::getEnumValue(member, v52);
+                EnumValue = hkClassMember::getEnumValue(member, v52);
                 val = 0;
-                if ( hkClassEnum::getNameOfValue((hkClassEnum *)ptr, &v127, v53, (const char **)&name)->m_enum == HK_SUCCESS )
-                  hkClassEnum::getValueOfName(v113, &v129, name, &val);
+                if ( hkClassEnum::getNameOfValue((hkClassEnum *)ptr, &v126, EnumValue, (const char **)&name)->m_enum == HK_SUCCESS )
+                  hkClassEnum::getValueOfName(EnumClass, &v128, name, &val);
                 switch ( (_DWORD)v50 )
                 {
                   case 1:
@@ -790,143 +759,153 @@ LABEL_21:
         }
         break;
       case 25:
-        v73 = (hkClassMember *)hkClassMember::getClass(member);
-        v74 = v73;
-        ptr = v73;
-        v75 = (hkClassEnum *)hkClassMember::getClass(v11);
-        v113 = v75;
-        if ( v74 )
+        Class = (hkClassMember *)hkClassMember::getClass(member);
+        ptr = Class;
+        v74 = (hkClassEnum *)hkClassMember::getClass(v11);
+        EnumClass = v74;
+        if ( Class )
         {
-          if ( v75 )
+          if ( v74 )
           {
-            v76 = objectCopier_calcCArraySize(v11);
-            v77 = objectCopier_calcCArraySize(member);
-            v78 = `anonymous namespace::min2<int>(v77, v76);
-            v79 = 0;
-            v105 = v78;
-            if ( v78 > 0 )
+            v75 = objectCopier_calcCArraySize(v11);
+            v76 = objectCopier_calcCArraySize(member);
+            v77 = `anonymous namespace::min2<int>(v76, v75);
+            v78 = 0;
+            v104 = v77;
+            if ( v77 > 0 )
             {
-              v80 = (hkClass *)ptr;
+              v79 = (hkClass *)ptr;
               do
               {
-                v81 = hkClass::getObjectSize(v80);
-                hkObjectCopier::saveBody(v138, (char *)startAddress + v79++ * v81, v80, v6, (hkClass *)v113, zeroArray);
+                ObjectSize = hkClass::getObjectSize(v79);
+                hkObjectCopier::saveBody(
+                  this,
+                  (char *)startAddress + v78 * ObjectSize,
+                  v79,
+                  v6,
+                  (hkClass *)EnumClass,
+                  zeroArray);
+                ++v78;
               }
-              while ( v79 < v105 );
+              while ( v78 < v104 );
             }
           }
         }
         break;
       case 28:
-        v135 = 0i64;
-        v136 = 0i64;
-        v82 = objectCopier_calcCArraySize(v11);
-        v83 = objectCopier_calcCArraySize(member);
-        v84 = `anonymous namespace::min2<int>(v83, v82);
-        if ( v84 > 0 )
+        v134[0] = 0i64;
+        v134[1] = 0i64;
+        v81 = objectCopier_calcCArraySize(v11);
+        v82 = objectCopier_calcCArraySize(member);
+        v83 = `anonymous namespace::min2<int>(v82, v81);
+        if ( v83 > 0 )
         {
-          v85 = (unsigned int)v84;
+          v84 = (unsigned int)v83;
           do
           {
-            hkOArchive::writeArrayGeneric(v6, &v135, (unsigned __int8)v138->m_layoutOut.m_rules.m_bytesInPointer, 2);
-            --v85;
+            hkOArchive::writeArrayGeneric(
+              v6,
+              (char *)v134,
+              (unsigned __int8)this->m_layoutOut.m_rules.m_bytesInPointer,
+              2);
+            --v84;
           }
-          while ( v85 );
+          while ( v84 );
         }
         break;
       case 30:
         v45 = objectCopier_calcCArraySize(member);
         v46 = objectCopier_calcCArraySize(v11);
         v47 = `anonymous namespace::min2<int>(v45, v46);
-        writeUlongArray(v6, (unsigned __int8)v138->m_layoutOut.m_rules.m_bytesInPointer, v47, startAddress);
+        writeUlongArray(v6, (unsigned __int8)this->m_layoutOut.m_rules.m_bytesInPointer, v47, startAddress);
         break;
       case 31:
         if ( member->m_enum )
         {
           if ( v11->m_enum )
           {
-            v86 = objectCopier_calcCArraySize(member);
-            v87 = objectCopier_calcCArraySize(v11);
-            v105 = `anonymous namespace::min2<int>(v86, v87);
-            v130 = hkClassMember::getEnumClass(member);
-            v88 = hkClassMember::getEnumClass(v11);
-            v89 = member;
-            v113 = v88;
-            v90 = hkClassMember::getSizeInBytes(member);
-            v91 = (hkClassMember *)(v90 / v86);
-            LODWORD(v118) = v90 / v86;
-            if ( v105 > 0 )
+            v85 = objectCopier_calcCArraySize(member);
+            v86 = objectCopier_calcCArraySize(v11);
+            v104 = `anonymous namespace::min2<int>(v85, v86);
+            v129 = hkClassMember::getEnumClass(member);
+            v87 = hkClassMember::getEnumClass(v11);
+            v88 = member;
+            EnumClass = v87;
+            v89 = hkClassMember::getSizeInBytes(member);
+            v90 = (hkClassMember *)(v89 / v85);
+            LODWORD(v117) = v89 / v85;
+            if ( v104 > 0 )
             {
-              v92 = (char *)startAddress;
-              v119 = v91;
-              ptr = (hkClassMember *)(unsigned int)v105;
+              v91 = (char *)startAddress;
+              v118 = v90;
+              ptr = (hkClassMember *)(unsigned int)v104;
               do
               {
-                v93 = hkClassMember::getEnumValue(v89, v92);
-                v94 = 0;
+                v92 = hkClassMember::getEnumValue(v88, v91);
+                v93 = 0;
                 bitsOut.m_data = 0i64;
                 bitsOut.m_size = 0;
-                bitsOut.m_capacityAndFlags = 2147483648;
+                bitsOut.m_capacityAndFlags = 0x80000000;
                 bitsOver = 0;
-                hkClassEnum::decomposeFlags(v130, &v126, v93, &bitsOut, &bitsOver);
-                v95 = 0;
+                hkClassEnum::decomposeFlags(v129, &v125, v92, &bitsOut, &bitsOver);
+                v94 = 0;
                 if ( bitsOut.m_size > 0 )
                 {
-                  v96 = 0i64;
+                  v95 = 0i64;
                   do
                   {
-                    if ( hkClassEnum::getValueOfName(v113, &v125, bitsOut.m_data[v96], &v120)->m_enum )
-                      bitsOver |= v120;
+                    if ( hkClassEnum::getValueOfName(EnumClass, &v124, bitsOut.m_data[v95], &v119)->m_enum )
+                      bitsOver |= v119;
                     else
-                      v95 |= v120;
-                    ++v94;
-                    ++v96;
+                      v94 |= v119;
+                    ++v93;
+                    ++v95;
                   }
-                  while ( v94 < bitsOut.m_size );
-                  v92 = (char *)startAddress;
+                  while ( v93 < bitsOut.m_size );
+                  v91 = (char *)startAddress;
                 }
                 if ( bitsOver )
                 {
-                  v105 = 0;
-                  hkClassEnum::decomposeFlags(v113, &v123, bitsOver, &bitsOut, &v105);
-                  v95 |= v105;
+                  v104 = 0;
+                  hkClassEnum::decomposeFlags(EnumClass, &v122, bitsOver, &bitsOut, &v104);
+                  v94 |= v104;
                 }
-                switch ( (_DWORD)v118 )
+                switch ( (_DWORD)v117 )
                 {
                   case 1:
-                    v99 = v95;
-                    v6 = oa;
-                    hkOArchive::write8(oa, v99);
+                    v98 = v94;
+                    v6 = dataOut;
+                    hkOArchive::write8(dataOut, v98);
                     break;
                   case 2:
-                    v98 = v95;
-                    v6 = oa;
-                    hkOArchive::write16(oa, v98);
+                    v97 = v94;
+                    v6 = dataOut;
+                    hkOArchive::write16(dataOut, v97);
                     break;
                   case 4:
-                    v97 = v95;
-                    v6 = oa;
-                    hkOArchive::write32(oa, v97);
+                    v96 = v94;
+                    v6 = dataOut;
+                    hkOArchive::write32(dataOut, v96);
                     break;
                   default:
-                    v6 = oa;
+                    v6 = dataOut;
                     break;
                 }
-                v92 = &v92[(_QWORD)v119];
+                v91 = &v91[(_QWORD)v118];
                 bitsOut.m_size = 0;
-                startAddress = v92;
+                startAddress = v91;
                 if ( bitsOut.m_capacityAndFlags >= 0 )
                   hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-                    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+                    &hkContainerHeapAllocator::s_alloc,
                     bitsOut.m_data,
                     8 * bitsOut.m_capacityAndFlags);
-                v100 = ptr == (hkClassMember *)1;
+                v99 = ptr == (hkClassMember *)1;
                 ptr = (hkClassMember *)((char *)ptr - 1);
                 bitsOut.m_data = 0i64;
-                v89 = member;
-                bitsOut.m_capacityAndFlags = 2147483648;
+                v88 = member;
+                bitsOut.m_capacityAndFlags = 0x80000000;
               }
-              while ( !v100 );
+              while ( !v99 );
             }
           }
         }
@@ -935,37 +914,37 @@ LABEL_21:
         v65 = hkOArchive::getStreamWriter(v6);
         v66 = ((__int64 (__fastcall *)(hkStreamWriter *))v65->vfptr[4].__vecDelDtor)(v65);
         v67 = *((unsigned __int16 *)v39 + 1);
-        LODWORD(v132.m_writer.m_pntr) = v66 - v111;
+        LODWORD(v131.m_writer.m_pntr) = v66 - v110;
         v68 = (hkClassMember *)((char *)startAddress + v67);
-        LOWORD(v133) = *(_WORD *)startAddress;
+        LOWORD(v132) = *(_WORD *)startAddress;
         hkOArchive::write16u(v6, 0);
         hkOArchive::write16u(v6, 0);
-        v69 = v115;
-        if ( v115 == (v116 & 0x3FFFFFFF) )
+        v69 = v114;
+        if ( v114 == (v115 & 0x3FFFFFFF) )
         {
-          hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, &array, 40);
-          v69 = v115;
+          hkArrayUtil::_reserveMore(&hkContainerTempAllocator::s_alloc, (const void **)&array, 40);
+          v69 = v114;
         }
         v70 = (hkClassMember **)&array[40 * v69];
         if ( v70 )
         {
           *v70 = member;
-          v71 = v132.m_writer.m_pntr;
+          m_pntr = v131.m_writer.m_pntr;
           v70[1] = v11;
-          v70[2] = (hkClassMember *)v71;
-          v72 = v133;
+          v70[2] = (hkClassMember *)m_pntr;
+          v72 = v132;
           v70[3] = v68;
           v70[4] = (hkClassMember *)v72;
-          v69 = v115;
+          v69 = v114;
         }
-        v115 = v69 + 1;
+        v114 = v69 + 1;
         break;
       default:
-        hkErrStream::hkErrStream(&v132, &description, 512);
-        hkOstream::operator<<((hkOstream *)&v132.vfptr, "Unknown class member found during write of data.");
-        if ( (unsigned int)hkError::messageError(1679703555, &description, "Copier\\hkObjectCopier.cpp", 585) )
+        hkErrStream::hkErrStream(&v131, description, 512);
+        hkOstream::operator<<(&v131, "Unknown class member found during write of data.");
+        if ( (unsigned int)hkError::messageError(0x641E3E03u, description, "Copier\\hkObjectCopier.cpp", 585) )
           __debugbreak();
-        hkOstream::~hkOstream((hkOstream *)&v132.vfptr);
+        hkOstream::~hkOstream(&v131);
         break;
     }
     goto $LN357_0;
@@ -973,17 +952,17 @@ LABEL_21:
 LABEL_7:
   v16 = hkOArchive::getStreamWriter(v6);
   v17 = ((__int64 (__fastcall *)(hkStreamWriter *))v16->vfptr[4].__vecDelDtor)(v16);
-  v18 = v111 - v17;
+  v18 = v110 - v17;
   v19 = hkClass::getObjectSize(klassOut);
   writeZeros(v6, v18 + v19, zeroArray);
-  v105 = 0;
-  if ( v115 > 0 )
+  v104 = 0;
+  if ( v114 > 0 )
   {
     v20 = 0i64;
-    v113 = 0i64;
+    EnumClass = 0i64;
     while ( 1 )
     {
-      v119 = *(hkClassMember **)&array[(_QWORD)v20];
+      v118 = *(hkClassMember **)&array[(_QWORD)v20];
       ptr = *(hkClassMember **)&array[(_QWORD)v20 + 8];
       v21 = *(_WORD *)&array[(_QWORD)v20 + 32];
       startAddress = *(void **)&array[(_QWORD)v20 + 24];
@@ -993,19 +972,19 @@ LABEL_7:
       v23 = *(_DWORD *)&array[(_QWORD)v20 + 16];
       v24 = hkOArchive::getStreamWriter(v6);
       v25 = ((__int64 (__fastcall *)(hkStreamWriter *))v24->vfptr[4].__vecDelDtor)(v24);
-      v26 = v25 - v111;
+      v26 = v25 - v110;
       v27 = hkOArchive::getStreamWriter(v6);
       ((void (__fastcall *)(hkStreamWriter *, hkResult *, _QWORD, _QWORD))v27->vfptr[3].__first_virtual_table_function__)(
         v27,
-        &v121,
+        &v120,
         v23,
         0i64);
       hkOArchive::write16u(v6, val);
       hkOArchive::write16u(v6, v26 - v23);
       v28 = hkOArchive::getStreamWriter(v6);
-      ((void (__fastcall *)(hkStreamWriter *, hkResult *, _QWORD, signed __int64))v28->vfptr[3].__first_virtual_table_function__)(
+      ((void (__fastcall *)(hkStreamWriter *, hkResult *, _QWORD, __int64))v28->vfptr[3].__first_virtual_table_function__)(
         v28,
-        &v123,
+        &v122,
         0i64,
         2i64);
       v29 = val;
@@ -1014,32 +993,38 @@ LABEL_7:
         v30 = ptr->m_subtype.m_storage;
         if ( v30 > 0x21u )
           goto LABEL_13;
-        v31 = 9127854081i64;
+        v31 = 0x220100001i64;
         if ( !_bittest64(&v31, v30) )
           break;
       }
 LABEL_103:
-      v20 = v113 + 1;
-      ++v105;
-      ++v113;
-      if ( v105 >= v115 )
+      v20 = EnumClass + 1;
+      ++v104;
+      ++EnumClass;
+      if ( v104 >= v114 )
         goto LABEL_104;
     }
     v29 = val;
 LABEL_13:
     if ( v30 == 25 )
     {
-      v32 = hkClassMember::getClass(v119);
+      v32 = hkClassMember::getClass(v118);
       v33 = (hkClassMember *)hkClassMember::getClass(ptr);
-      v119 = v33;
+      v118 = v33;
       if ( v32 )
       {
         if ( v33 )
         {
-          for ( i = 0; i < (unsigned __int16)val; ++i )
+          v34 = 0;
+          if ( (_WORD)val )
           {
-            v35 = hkClass::getObjectSize(v32);
-            hkObjectCopier::saveBody(v138, (char *)startAddress + i * v35, v32, v6, (hkClass *)v119, zeroArray);
+            do
+            {
+              v35 = hkClass::getObjectSize(v32);
+              hkObjectCopier::saveBody(this, (char *)startAddress + v34 * v35, v32, v6, (hkClass *)v118, zeroArray);
+              ++v34;
+            }
+            while ( v34 < (unsigned __int16)val );
           }
         }
       }
@@ -1048,185 +1033,194 @@ LABEL_13:
     {
       if ( v30 == 30 )
       {
-        writeUlongArray(v6, (unsigned __int8)v138->m_layoutOut.m_rules.m_bytesInPointer, v29, startAddress);
+        writeUlongArray(v6, (unsigned __int8)this->m_layoutOut.m_rules.m_bytesInPointer, v29, startAddress);
       }
       else
       {
-        v102 = v30;
-        v103 = v29;
-        v104 = hkClassMember::getArrayMemberSize(ptr);
-        writePodArray(v6, v102, v104, v103, startAddress);
+        v101 = v30;
+        v102 = v29;
+        ArrayMemberSize = hkClassMember::getArrayMemberSize(ptr);
+        writePodArray(v6, v101, ArrayMemberSize, v102, startAddress);
       }
     }
     goto LABEL_103;
   }
 LABEL_104:
-  v115 = 0;
-  if ( v116 >= 0 )
+  v114 = 0;
+  if ( v115 >= 0 )
     hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
+      &hkContainerTempAllocator::s_alloc,
       array,
-      40 * (v116 & 0x3FFFFFFF));
+      40 * (v115 & 0x3FFFFFFF));
+}cator::s_alloc.vfptr->bufFree(
+      &hkContainerTempAllocator::s_alloc,
+      array,
+      40 * (v115 & 0x3FFFFFFF));
 }
 
 // File Line: 674
 // RVA: 0xE6B220
-hkResult *__fastcall saveCstring(hkResult *result, const char *dataIn, int klassMemOffset, int extrasStart, hkOArchive *dataOut, hkRelocationInfo *fixups)
+hkResult *__fastcall saveCstring(
+        hkResult *result,
+        const char *dataIn,
+        int klassMemOffset,
+        int extrasStart,
+        hkOArchive *dataOut,
+        hkRelocationInfo *fixups)
 {
-  hkResult *v6; // r14
-  int v7; // edi
-  int v8; // ebx
-  const char *v9; // rsi
-  hkStreamWriter *v10; // rax
+  hkStreamWriter *StreamWriter; // rax
   hkStreamWriter *v11; // rax
   int v12; // eax
   hkRelocationInfo::Local v14; // [rsp+30h] [rbp+8h]
 
-  v6 = result;
-  v7 = extrasStart;
-  v8 = klassMemOffset;
-  v9 = dataIn;
-  v10 = hkOArchive::getStreamWriter(dataOut);
-  objectCopierPadUp(v10, 2);
+  StreamWriter = hkOArchive::getStreamWriter(dataOut);
+  objectCopierPadUp(StreamWriter, 2);
   v11 = hkOArchive::getStreamWriter(dataOut);
-  v14.m_fromOffset = v8;
-  v14.m_toOffset = v7 + (unsigned __int64)((__int64 (__fastcall *)(hkStreamWriter *))v11->vfptr[4].__vecDelDtor)(v11);
+  v14.m_fromOffset = klassMemOffset;
+  v14.m_toOffset = extrasStart + ((__int64 (__fastcall *)(hkStreamWriter *))v11->vfptr[4].__vecDelDtor)(v11);
   if ( fixups->m_local.m_size == (fixups->m_local.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, fixups, 8);
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&fixups->m_local.m_data, 8);
   fixups->m_local.m_data[fixups->m_local.m_size++] = v14;
-  v12 = hkString::strLen(v9);
-  hkOArchive::writeRaw(dataOut, v9, (unsigned int)(v12 + 1));
-  v6->m_enum = 0;
-  return v6;
+  v12 = hkString::strLen(dataIn);
+  hkOArchive::writeRaw(dataOut, dataIn, (unsigned int)(v12 + 1));
+  result->m_enum = HK_SUCCESS;
+  return result;
 }
 
 // File Line: 692
 // RVA: 0xE69D60
-void __fastcall hkObjectCopier::saveExtras(hkObjectCopier *this, const void *dataIn, hkClass *klassIn, hkOArchive *dataOut, hkClass *klassOut, int classStart, int extrasStart, hkRelocationInfo *fixups, hkLocalArray<char> *zeroArray, int level)
+void __fastcall hkObjectCopier::saveExtras(
+        hkObjectCopier *this,
+        char *dataIn,
+        hkClass *klassIn,
+        hkOArchive *dataOut,
+        hkClass *klassOut,
+        int classStart,
+        int extrasStart,
+        hkRelocationInfo *fixups,
+        hkLocalArray<char> *zeroArray,
+        int level)
 {
   int v10; // eax
   hkClass *v11; // rbx
   hkOArchive *v12; // rdi
   hkObjectCopier *v13; // rsi
   hkRelocationInfo::Finish *v14; // rcx
-  int v15; // eax
+  int i; // eax
   hkClassMember *v16; // rax
-  hkClassMember *v17; // rcx
-  hkClassMember *v18; // rax
-  char *v19; // rbx
-  int v20; // edi
-  int v21; // eax
-  hkClass *v22; // rsi
-  int v23; // edi
-  int v24; // eax
-  int v25; // er8
-  __int64 v26; // rax
-  int v27; // edi
-  char v28; // al
-  int v29; // er8
-  hkClass *v30; // rax
-  bool v31; // zf
-  char v32; // al
-  hkStreamWriter *v33; // rax
-  int v34; // edi
-  int v35; // eax
-  char *v36; // rcx
-  hkStreamWriter *v37; // rdi
-  hkClass *v38; // rsi
-  int v39; // eax
-  hkStreamWriter *v40; // rax
-  int v41; // edi
-  int v42; // eax
-  hkStreamWriter *v43; // rax
-  int v44; // eax
-  int v45; // er11
-  int v46; // er9
-  int v47; // ecx
-  hkClass *v48; // rdx
-  hkStreamWriter *v49; // rax
-  int v50; // edi
-  int v51; // eax
-  hkStreamWriter *v52; // rax
-  int v53; // eax
-  int v54; // er10
-  int v55; // er9
-  int v56; // ecx
-  signed __int64 v57; // rdx
-  const char *v58; // rdx
-  hkStreamWriter *v59; // rax
+  hkClassMember *MemberByName; // rcx
+  char *v18; // rbx
+  int v19; // edi
+  int v20; // eax
+  hkClass *v21; // rsi
+  int v22; // edi
+  int SizeInBytes; // eax
+  int v24; // r8d
+  __int64 v25; // rax
+  int v26; // edi
+  char m_storage; // al
+  int v28; // r8d
+  hkClass *Class; // rax
+  bool v30; // zf
+  char v31; // al
+  hkStreamWriter *StreamWriter; // rax
+  int m_offset; // edi
+  int v34; // eax
+  char *v35; // rcx
+  hkStreamWriter *v36; // rdi
+  hkClass *v37; // rsi
+  int v38; // eax
+  hkStreamWriter *v39; // rax
+  int v40; // edi
+  int v41; // eax
+  hkStreamWriter *v42; // rax
+  int v43; // eax
+  int v44; // r11d
+  int v45; // r9d
+  int v46; // ecx
+  hkClass *v47; // rdx
+  hkStreamWriter *v48; // rax
+  int v49; // edi
+  int v50; // eax
+  hkStreamWriter *v51; // rax
+  int v52; // eax
+  int v53; // r10d
+  int v54; // r9d
+  int v55; // ecx
+  hkClass **p_m_parent; // rdx
+  const char *v57; // rdx
+  hkStreamWriter *v58; // rax
+  hkClass *v59; // rcx
   hkClass *v60; // rax
-  hkClass *v61; // rcx
-  hkClass *v62; // rax
+  int ObjectSize; // eax
+  int v62; // edi
   int v63; // eax
-  int v64; // edi
-  int v65; // eax
-  int v66; // ST28_4
-  hkStreamWriter *v67; // rax
-  int v68; // er8
-  int v69; // eax
-  hkClassMember *v70; // rcx
-  void *v71; // r8
+  hkStreamWriter *v64; // rax
+  int m_bytesInPointer; // r8d
+  int v66; // eax
+  hkClassMember *v67; // rcx
+  void *v68; // r8
+  int v69; // edi
+  void *v70; // r8
+  hkStreamWriter *v71; // rax
   int v72; // edi
-  void *v73; // r8
-  hkStreamWriter *v74; // rax
-  int v75; // edi
+  int v73; // eax
+  unsigned __int8 v74; // cl
+  hkClassMember::Type v75; // edi
   int v76; // eax
-  unsigned __int8 v77; // cl
-  hkClassMember::Type v78; // edi
+  hkClassMember::Type v77; // edx
+  hkStreamWriter *v78; // rax
   int v79; // eax
-  hkClassMember::Type v80; // edx
-  hkStreamWriter *v81; // rax
-  int v82; // eax
+  int v80; // edi
+  int v81; // eax
+  hkClass *v82; // rax
   int v83; // edi
   int v84; // eax
-  int v85; // ST28_4
-  hkClass *v86; // rax
-  int v87; // edi
+  int v85; // eax
+  int v86; // edi
+  char *v87; // rdi
   int v88; // eax
-  int v89; // eax
-  int v90; // edi
-  char *v91; // rdi
-  int v92; // eax
-  int v93; // edi
-  int v94; // eax
-  int v95; // eax
-  int v96; // er11
-  __int64 v97; // rdx
-  signed int v98; // er9
-  signed __int64 v99; // r8
-  __int64 v100; // rcx
-  void *v101; // r10
-  signed __int64 v102; // rcx
-  hkClass *v103; // r8
-  hkStreamWriter *v104; // rax
+  int v89; // edi
+  int v90; // eax
+  int v91; // eax
+  int v92; // r11d
+  __int64 v93; // rdx
+  int v94; // r9d
+  __int64 v95; // r8
+  __int64 v96; // rcx
+  void *v97; // r10
+  hkClass *v98; // r8
+  hkStreamWriter *v99; // rax
+  int v100; // [rsp+28h] [rbp-D8h]
+  int v101; // [rsp+28h] [rbp-D8h]
+  int v102; // [rsp+50h] [rbp-B0h]
+  __int64 ArrayMemberSize; // [rsp+50h] [rbp-B0h]
+  int v104; // [rsp+50h] [rbp-B0h]
   int v105; // [rsp+50h] [rbp-B0h]
-  __int64 v106; // [rsp+50h] [rbp-B0h]
-  int v107; // [rsp+50h] [rbp-B0h]
-  int v108; // [rsp+50h] [rbp-B0h]
-  int v109; // [rsp+50h] [rbp-B0h]
-  int i; // [rsp+50h] [rbp-B0h]
-  int v111; // [rsp+50h] [rbp-B0h]
-  int l; // [rsp+50h] [rbp-B0h]
+  int v106; // [rsp+50h] [rbp-B0h]
+  int j; // [rsp+50h] [rbp-B0h]
+  unsigned int v108; // [rsp+50h] [rbp-B0h]
+  int n; // [rsp+50h] [rbp-B0h]
+  int ii; // [rsp+50h] [rbp-B0h]
   int m; // [rsp+50h] [rbp-B0h]
-  int k; // [rsp+50h] [rbp-B0h]
-  int v115; // [rsp+50h] [rbp-B0h]
-  __int64 v116; // [rsp+58h] [rbp-A8h]
+  int v112; // [rsp+50h] [rbp-B0h]
+  __int64 v113; // [rsp+58h] [rbp-A8h]
+  int v114; // [rsp+58h] [rbp-A8h]
+  int v115; // [rsp+58h] [rbp-A8h]
+  int v116; // [rsp+58h] [rbp-A8h]
   int v117; // [rsp+58h] [rbp-A8h]
   int v118; // [rsp+58h] [rbp-A8h]
-  int v119; // [rsp+58h] [rbp-A8h]
-  int v120; // [rsp+58h] [rbp-A8h]
+  unsigned int v119; // [rsp+58h] [rbp-A8h]
+  int k; // [rsp+58h] [rbp-A8h]
   int v121; // [rsp+58h] [rbp-A8h]
-  int v122; // [rsp+58h] [rbp-A8h]
-  int j; // [rsp+58h] [rbp-A8h]
+  unsigned int v122; // [rsp+58h] [rbp-A8h]
+  int v123; // [rsp+58h] [rbp-A8h]
   int v124; // [rsp+58h] [rbp-A8h]
-  int v125; // [rsp+58h] [rbp-A8h]
-  int v126; // [rsp+58h] [rbp-A8h]
-  signed int v127; // [rsp+58h] [rbp-A8h]
-  hkClassMember *v128; // [rsp+60h] [rbp-A0h]
-  hkClass *v129; // [rsp+60h] [rbp-A0h]
-  hkClassMember *v130; // [rsp+60h] [rbp-A0h]
-  char *v131; // [rsp+60h] [rbp-A0h]
-  hkClassMember *v132; // [rsp+60h] [rbp-A0h]
+  hkClassMember *v125; // [rsp+60h] [rbp-A0h]
+  hkClass *v126; // [rsp+60h] [rbp-A0h]
+  hkClassMember *v127; // [rsp+60h] [rbp-A0h]
+  char *v128; // [rsp+60h] [rbp-A0h]
+  hkClassMember *v129; // [rsp+60h] [rbp-A0h]
   hkClassMember *member; // [rsp+68h] [rbp-98h]
   hkClass *membera; // [rsp+68h] [rbp-98h]
   int memberb; // [rsp+68h] [rbp-98h]
@@ -1242,44 +1236,35 @@ void __fastcall hkObjectCopier::saveExtras(hkObjectCopier *this, const void *dat
   char *toAddra; // [rsp+78h] [rbp-88h]
   void *toAddrb; // [rsp+78h] [rbp-88h]
   hkClass *toAddrc; // [rsp+78h] [rbp-88h]
-  char *toAddrd; // [rsp+78h] [rbp-88h]
+  __int64 toAddrd; // [rsp+78h] [rbp-88h]
   int memberIndex; // [rsp+80h] [rbp-80h]
-  int v150; // [rsp+84h] [rbp-7Ch]
-  __int64 ptr; // [rsp+88h] [rbp-78h]
-  __int64 v152; // [rsp+90h] [rbp-70h]
-  hkResult v153; // [rsp+98h] [rbp-68h]
-  __int64 v154; // [rsp+A0h] [rbp-60h]
-  __int64 v155; // [rsp+A8h] [rbp-58h]
-  hkResult v156; // [rsp+B0h] [rbp-50h]
-  __int64 v157; // [rsp+B8h] [rbp-48h]
-  __int64 buf; // [rsp+C0h] [rbp-40h]
-  hkResult result; // [rsp+C8h] [rbp-38h]
-  hkResult v160; // [rsp+CCh] [rbp-34h]
-  hkErrStream v161; // [rsp+D0h] [rbp-30h]
-  hkResult v162; // [rsp+E8h] [rbp-18h]
-  char description; // [rsp+F0h] [rbp-10h]
-  hkObjectCopier *v164; // [rsp+320h] [rbp+220h]
-  char *v165; // [rsp+328h] [rbp+228h]
-  hkClass *v166; // [rsp+330h] [rbp+230h]
-  hkOArchive *oa; // [rsp+338h] [rbp+238h]
+  int NumMembers; // [rsp+84h] [rbp-7Ch]
+  __int64 ptr[2]; // [rsp+88h] [rbp-78h] BYREF
+  hkResult v149; // [rsp+98h] [rbp-68h] BYREF
+  __int64 v150; // [rsp+A0h] [rbp-60h] BYREF
+  __int64 v151; // [rsp+A8h] [rbp-58h] BYREF
+  hkResult v152; // [rsp+B0h] [rbp-50h] BYREF
+  __int64 v153; // [rsp+B8h] [rbp-48h]
+  __int64 buf; // [rsp+C0h] [rbp-40h] BYREF
+  hkResult result; // [rsp+C8h] [rbp-38h] BYREF
+  hkResult v156; // [rsp+CCh] [rbp-34h] BYREF
+  hkErrStream v157; // [rsp+D0h] [rbp-30h] BYREF
+  hkResult v158; // [rsp+E8h] [rbp-18h] BYREF
+  char description[544]; // [rsp+F0h] [rbp-10h] BYREF
   int levela; // [rsp+368h] [rbp+268h]
 
-  oa = dataOut;
-  v166 = klassIn;
-  v165 = (char *)dataIn;
-  v164 = this;
   v10 = level;
   v11 = klassOut;
   v12 = dataOut;
   v13 = this;
   if ( !level )
   {
-    LODWORD(ptr) = classStart;
+    LODWORD(ptr[0]) = classStart;
     toAddr = hkClass::getName(klassOut);
     if ( fixups->m_finish.m_size == (fixups->m_finish.m_capacityAndFlags & 0x3FFFFFFF) )
-      hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &fixups->m_finish, 16);
+      hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&fixups->m_finish.m_data, 16);
     v14 = &fixups->m_finish.m_data[fixups->m_finish.m_size];
-    *(_QWORD *)&v14->m_fromOffset = ptr;
+    *(_QWORD *)&v14->m_fromOffset = ptr[0];
     v14->m_className = toAddr;
     ++fixups->m_finish.m_size;
     v11 = klassOut;
@@ -1287,34 +1272,32 @@ void __fastcall hkObjectCopier::saveExtras(hkObjectCopier *this, const void *dat
   }
   memberIndex = 0;
   levela = v10 + 1;
-  v150 = hkClass::getNumMembers(v11);
-  if ( v150 > 0 )
+  NumMembers = hkClass::getNumMembers(v11);
+  if ( NumMembers > 0 )
   {
-    v15 = 0;
-    do
+    for ( i = 0; i < NumMembers; memberIndex = i )
     {
-      v16 = hkClass::getMember(v11, v15);
+      v16 = hkClass::getMember(v11, i);
       member = v16;
-      if ( v166 == v11 )
+      if ( klassIn == v11 )
       {
-        v17 = v16;
-        v128 = v16;
+        MemberByName = v16;
+        v125 = v16;
       }
       else
       {
-        v18 = hkClass::getMemberByName(v166, v16->m_name);
-        v17 = v18;
-        v128 = v18;
+        MemberByName = hkClass::getMemberByName(klassIn, v16->m_name);
+        v125 = MemberByName;
         v16 = member;
       }
-      if ( v17 )
+      if ( MemberByName )
       {
-        v19 = &v165[v17->m_offset];
+        v18 = &dataIn[MemberByName->m_offset];
         if ( ((unsigned int (__fastcall *)(hkObjectCopier *, hkClassMember *, hkClassMember *))v13->vfptr[2].__vecDelDtor)(
                v13,
-               v17,
+               MemberByName,
                v16)
-          && (!(v13->m_flags.m_storage & 2) || !(member->m_flags.m_storage & 0x400)) )
+          && ((v13->m_flags.m_storage & 2) == 0 || (member->m_flags.m_storage & 0x400) == 0) )
         {
           switch ( member->m_type.m_storage )
           {
@@ -1342,662 +1325,654 @@ void __fastcall hkObjectCopier::saveExtras(hkObjectCopier *this, const void *dat
             case 0x1F:
             case 0x20:
             case 0x22:
-              break;
+              goto $LN3_221;
             case 0x13:
-              hkErrStream::hkErrStream(&v161, &description, 512);
-              hkOstream::operator<<((hkOstream *)&v161.vfptr, "TYPE_ZERO should not occur.");
-              if ( (unsigned int)hkError::messageError(1679703557, &description, "Copier\\hkObjectCopier.cpp", 1047) )
+              hkErrStream::hkErrStream(&v157, description, 512);
+              hkOstream::operator<<(&v157, "TYPE_ZERO should not occur.");
+              if ( (unsigned int)hkError::messageError(0x641E3E05u, description, "Copier\\hkObjectCopier.cpp", 1047) )
                 __debugbreak();
-              hkOstream::~hkOstream((hkOstream *)&v161.vfptr);
-              break;
+              goto LABEL_106;
             case 0x14:
-              v20 = objectCopier_calcCArraySize(member);
-              v21 = objectCopier_calcCArraySize(v128);
-              v22 = (hkClass *)`anonymous namespace::min2<int>(v21, v20);
-              v23 = objectCopier_calcCArraySize(v128);
-              v24 = hkClassMember::getSizeInBytes(v128);
-              v25 = 0;
-              v105 = 0;
-              klassIna = v22;
-              v26 = v24 / v23;
-              v116 = v26;
-              if ( (signed int)v22 <= 0 )
+              v19 = objectCopier_calcCArraySize(member);
+              v20 = objectCopier_calcCArraySize(v125);
+              v21 = (hkClass *)`anonymous namespace::min2<int>(v20, v19);
+              v22 = objectCopier_calcCArraySize(v125);
+              SizeInBytes = hkClassMember::getSizeInBytes(v125);
+              v24 = 0;
+              v102 = 0;
+              klassIna = v21;
+              v25 = SizeInBytes / v22;
+              v113 = v25;
+              if ( (int)v21 <= 0 )
               {
-                v13 = v164;
+                v13 = this;
                 goto LABEL_111;
               }
               do
               {
-                v13 = v164;
-                toAddra = *(char **)v19;
-                if ( *(_QWORD *)v19 )
+                v13 = this;
+                toAddra = *(char **)v18;
+                if ( *(_QWORD *)v18 )
                 {
-                  v27 = member->m_offset + v25 * (unsigned __int8)v164->m_layoutOut.m_rules.m_bytesInPointer;
-                  v28 = member->m_subtype.m_storage;
-                  if ( v28 == 2 )
+                  v26 = member->m_offset + v24 * (unsigned __int8)this->m_layoutOut.m_rules.m_bytesInPointer;
+                  m_storage = member->m_subtype.m_storage;
+                  if ( m_storage == 2 )
                   {
-                    v29 = v27 + classStart;
-                    v12 = oa;
-                    saveCstring(&v156, *(const char **)v19, v29, extrasStart, oa, fixups);
-                    v25 = v105;
+                    v28 = v26 + classStart;
+                    v12 = dataOut;
+                    saveCstring(&v152, *(const char **)v18, v28, extrasStart, dataOut, fixups);
+                    v24 = v102;
                   }
                   else
                   {
-                    if ( v28 )
+                    if ( m_storage )
                     {
-                      v30 = hkClassMember::getClass(v128);
-                      hkRelocationInfo::addGlobal(fixups, v27 + classStart, toAddra, v30, 0);
-                      v25 = v105;
+                      Class = hkClassMember::getClass(v125);
+                      hkRelocationInfo::addGlobal(fixups, v26 + classStart, toAddra, Class, 0);
+                      v24 = v102;
                     }
-                    v12 = oa;
+                    v12 = dataOut;
                   }
-                  v26 = v116;
+                  v25 = v113;
                 }
                 else
                 {
-                  v12 = oa;
+                  v12 = dataOut;
                 }
-                ++v25;
-                v19 += v26;
-                v31 = klassIna == (hkClass *)1;
+                ++v24;
+                v18 += v25;
+                v30 = klassIna == (hkClass *)1;
                 klassIna = (hkClass *)((char *)klassIna - 1);
-                v105 = v25;
+                v102 = v24;
               }
-              while ( !v31 );
-              break;
+              while ( !v30 );
+              goto $LN3_221;
             case 0x16:
             case 0x17:
             case 0x1A:
-              if ( *((_DWORD *)v19 + 2) )
+              if ( !*((_DWORD *)v18 + 2) )
+                goto $LN3_221;
+              v31 = member->m_subtype.m_storage;
+              switch ( v31 )
               {
-                v32 = member->m_subtype.m_storage;
-                if ( v32 )
-                {
-                  switch ( v32 )
+                case 0:
+                  break;
+                case 20:
+                  StreamWriter = hkOArchive::getStreamWriter(v12);
+                  m_offset = member->m_offset;
+                  v34 = ((__int64 (__fastcall *)(hkStreamWriter *))StreamWriter->vfptr[4].__vecDelDtor)(StreamWriter);
+                  hkRelocationInfo::addLocal(fixups, m_offset + classStart, extrasStart + v34);
+                  buf = 0i64;
+                  v114 = 0;
+                  ArrayMemberSize = (int)hkClassMember::getArrayMemberSize(v125);
+                  if ( *((int *)v18 + 2) <= 0 )
+                    goto LABEL_111;
+                  v35 = 0i64;
+                  v12 = dataOut;
+                  klassInb = 0i64;
+                  do
                   {
-                    case 20:
-                      v33 = hkOArchive::getStreamWriter(v12);
-                      v34 = member->m_offset;
-                      v35 = ((__int64 (__fastcall *)(hkStreamWriter *))v33->vfptr[4].__vecDelDtor)(v33);
-                      hkRelocationInfo::addLocal(fixups, v34 + classStart, extrasStart + v35);
-                      buf = 0i64;
-                      v117 = 0;
-                      v106 = (signed int)hkClassMember::getArrayMemberSize(v128);
-                      if ( *((_DWORD *)v19 + 2) <= 0 )
-                        goto LABEL_111;
-                      v36 = 0i64;
-                      v12 = oa;
-                      klassInb = 0i64;
-                      do
-                      {
-                        toAddrb = *(void **)&v36[*(_QWORD *)v19];
-                        if ( toAddrb && member->m_subtype.m_storage )
-                        {
-                          v37 = hkOArchive::getStreamWriter(v12);
-                          v38 = hkClassMember::getClass(v128);
-                          v39 = ((__int64 (__fastcall *)(hkStreamWriter *))v37->vfptr[4].__vecDelDtor)(v37);
-                          hkRelocationInfo::addGlobal(fixups, extrasStart + v39, toAddrb, v38, 0);
-                          v13 = v164;
-                          v12 = oa;
-                        }
-                        hkOArchive::writeRaw(v12, &buf, (unsigned __int8)v13->m_layoutOut.m_rules.m_bytesInPointer);
-                        v36 = (char *)klassInb + v106;
-                        klassInb = (hkClass *)((char *)klassInb + v106);
-                        ++v117;
-                      }
-                      while ( v117 < *((_DWORD *)v19 + 2) );
-                      break;
-                    case 29:
-                      v40 = hkOArchive::getStreamWriter(v12);
-                      v41 = member->m_offset;
-                      v42 = ((__int64 (__fastcall *)(hkStreamWriter *))v40->vfptr[4].__vecDelDtor)(v40);
-                      hkRelocationInfo::addLocal(fixups, v41 + classStart, extrasStart + v42);
-                      v12 = oa;
-                      v154 = 0i64;
-                      v43 = hkOArchive::getStreamWriter(oa);
-                      v44 = ((__int64 (__fastcall *)(hkStreamWriter *))v43->vfptr[4].__vecDelDtor)(v43);
-                      v45 = extrasStart;
-                      v46 = extrasStart + v44;
-                      v118 = 0;
-                      v107 = extrasStart + v44;
-                      if ( *((_DWORD *)v19 + 2) > 0 )
-                      {
-                        do
-                        {
-                          hkOArchive::writeRaw(oa, &v154, (unsigned __int8)v13->m_layoutOut.m_rules.m_bytesInPointer);
-                          ++v118;
-                        }
-                        while ( v118 < *((_DWORD *)v19 + 2) );
-                        v46 = v107;
-                        v45 = extrasStart;
-                      }
-                      v47 = 0;
-                      v119 = 0;
-                      if ( *((_DWORD *)v19 + 2) > 0 )
-                      {
-                        v48 = 0i64;
-                        klassInc = 0i64;
-                        do
-                        {
-                          if ( *(const char **)((char *)&v48->m_name + *(_QWORD *)v19) )
-                          {
-                            saveCstring(
-                              &v160,
-                              *(const char **)((char *)&v48->m_name + *(_QWORD *)v19),
-                              v46 + v47 * (unsigned __int8)v13->m_layoutOut.m_rules.m_bytesInPointer,
-                              v45,
-                              oa,
-                              fixups);
-                            v47 = v119;
-                            v48 = klassInc;
-                          }
-                          v46 = v107;
-                          v45 = extrasStart;
-                          ++v47;
-                          v48 = (hkClass *)((char *)v48 + 8);
-                          v119 = v47;
-                          klassInc = v48;
-                        }
-                        while ( v47 < *((_DWORD *)v19 + 2) );
-                      }
-                      break;
-                    case 33:
-                      v49 = hkOArchive::getStreamWriter(v12);
-                      v50 = member->m_offset;
-                      v51 = ((__int64 (__fastcall *)(hkStreamWriter *))v49->vfptr[4].__vecDelDtor)(v49);
-                      hkRelocationInfo::addLocal(fixups, v50 + classStart, extrasStart + v51);
-                      v12 = oa;
-                      v155 = 0i64;
-                      v52 = hkOArchive::getStreamWriter(oa);
-                      v53 = ((__int64 (__fastcall *)(hkStreamWriter *))v52->vfptr[4].__vecDelDtor)(v52);
-                      v54 = extrasStart;
-                      v55 = extrasStart + v53;
-                      v120 = 0;
-                      v108 = extrasStart + v53;
-                      if ( *((_DWORD *)v19 + 2) > 0 )
-                      {
-                        do
-                        {
-                          hkOArchive::writeRaw(oa, &v155, (unsigned __int8)v13->m_layoutOut.m_rules.m_bytesInPointer);
-                          ++v120;
-                        }
-                        while ( v120 < *((_DWORD *)v19 + 2) );
-                        v55 = v108;
-                        v54 = extrasStart;
-                      }
-                      v56 = 0;
-                      v121 = 0;
-                      if ( *((_DWORD *)v19 + 2) > 0 )
-                      {
-                        v57 = 0i64;
-                        klassInd = 0i64;
-                        do
-                        {
-                          v58 = (const char *)(*(_QWORD *)(v57 + *(_QWORD *)v19) & 0xFFFFFFFFFFFFFFFEui64);
-                          if ( v58 )
-                          {
-                            saveCstring(
-                              &v153,
-                              v58,
-                              v55 + v56 * (unsigned __int8)v13->m_layoutOut.m_rules.m_bytesInPointer,
-                              v54,
-                              oa,
-                              fixups);
-                            v56 = v121;
-                          }
-                          v55 = v108;
-                          v54 = extrasStart;
-                          ++v56;
-                          v57 = (signed __int64)&klassInd->m_parent;
-                          klassInd = (hkClass *)((char *)klassInd + 8);
-                          v121 = v56;
-                        }
-                        while ( v56 < *((_DWORD *)v19 + 2) );
-                      }
-                      break;
-                    case 25:
-                      v59 = hkOArchive::getStreamWriter(v12);
-                      v122 = extrasStart
-                           + (unsigned __int64)((__int64 (__fastcall *)(hkStreamWriter *))v59->vfptr[4].__vecDelDtor)(v59);
-                      hkRelocationInfo::addLocal(fixups, classStart + member->m_offset, v122);
-                      v129 = hkClassMember::getClass(v128);
-                      v60 = hkClassMember::getClass(member);
-                      v61 = v60;
-                      membera = v60;
-                      v62 = v129;
-                      if ( v129 && v61 )
-                      {
-                        v109 = 0;
-                        klassIne = *(const char **)v19;
-                        if ( *((_DWORD *)v19 + 2) > 0 )
-                        {
-                          while ( 1 )
-                          {
-                            v63 = hkClass::getObjectSize(v62);
-                            hkObjectCopier::saveBody(v13, &klassIne[v109++ * v63], v129, v12, membera, zeroArray);
-                            if ( v109 >= *((_DWORD *)v19 + 2) )
-                              break;
-                            v62 = v129;
-                          }
-                          v61 = membera;
-                        }
-                        for ( i = 0; i < *((_DWORD *)v19 + 2); ++i )
-                        {
-                          v64 = v122 + i * (unsigned __int64)hkClass::getObjectSize(v61);
-                          v65 = hkClass::getObjectSize(v129);
-                          v66 = v64;
-                          v12 = oa;
-                          hkObjectCopier::saveExtras(
-                            v13,
-                            &klassIne[i * v65],
-                            v129,
-                            oa,
-                            membera,
-                            v66,
-                            extrasStart,
-                            fixups,
-                            zeroArray,
-                            levela);
-                          v61 = membera;
-                        }
-                      }
-                      break;
-                    case 28:
-                      v67 = hkOArchive::getStreamWriter(v12);
-                      v111 = extrasStart
-                           + (unsigned __int64)((__int64 (__fastcall *)(hkStreamWriter *))v67->vfptr[4].__vecDelDtor)(v67);
-                      hkRelocationInfo::addLocal(fixups, classStart + member->m_offset, v111);
-                      for ( j = 0; j < *((_DWORD *)v19 + 2); ++j )
-                      {
-                        v68 = (unsigned __int8)v13->m_layoutOut.m_rules.m_bytesInPointer;
-                        ptr = 0i64;
-                        v152 = 0i64;
-                        hkOArchive::writeArrayGeneric(v12, &ptr, v68, 2);
-                      }
-                      v69 = 0;
-                      v124 = 0;
-                      if ( *((_DWORD *)v19 + 2) > 0 )
-                      {
-                        v70 = 0i64;
-                        v130 = 0i64;
-                        do
-                        {
-                          v71 = *(void **)((char *)&v70->m_name + *(_QWORD *)v19);
-                          v72 = 2 * v69 * (unsigned __int8)v13->m_layoutOut.m_rules.m_bytesInPointer;
-                          if ( v71 )
-                          {
-                            hkRelocationInfo::addGlobal(
-                              fixups,
-                              v72 + v111,
-                              v71,
-                              *(hkClass **)((char *)&v70->m_class + *(_QWORD *)v19),
-                              0);
-                            v70 = v130;
-                          }
-                          v73 = *(hkClass **)((char *)&v70->m_class + *(_QWORD *)v19);
-                          if ( v73 )
-                          {
-                            hkRelocationInfo::addGlobal(
-                              fixups,
-                              v111 + v72 + (unsigned __int8)v13->m_layoutOut.m_rules.m_bytesInPointer,
-                              v73,
-                              &hkClassClass,
-                              0);
-                            v70 = v130;
-                          }
-                          v70 = (hkClassMember *)((char *)v70 + 16);
-                          v69 = v124 + 1;
-                          v130 = v70;
-                          v124 = v69;
-                        }
-                        while ( v69 < *((_DWORD *)v19 + 2) );
-                        goto LABEL_111;
-                      }
-                      break;
-                    default:
-                      v74 = hkOArchive::getStreamWriter(v12);
-                      v75 = member->m_offset;
-                      v76 = ((__int64 (__fastcall *)(hkStreamWriter *))v74->vfptr[4].__vecDelDtor)(v74);
-                      hkRelocationInfo::addLocal(fixups, v75 + classStart, extrasStart + v76);
-                      v77 = member->m_subtype.m_storage;
-                      if ( v77 == 30 )
-                      {
-                        v12 = oa;
-                        writeUlongArray(
-                          oa,
-                          (unsigned __int8)v13->m_layoutOut.m_rules.m_bytesInPointer,
-                          *((_DWORD *)v19 + 2),
-                          *(const void **)v19);
-                      }
-                      else
-                      {
-                        v78 = v77;
-                        v79 = hkClassMember::getArrayMemberSize(member);
-                        v80 = v78;
-                        v12 = oa;
-                        writePodArray(oa, v80, v79, *((_DWORD *)v19 + 2), *(const void **)v19);
-                      }
-                      break;
+                    toAddrb = *(void **)&v35[*(_QWORD *)v18];
+                    if ( toAddrb && member->m_subtype.m_storage )
+                    {
+                      v36 = hkOArchive::getStreamWriter(v12);
+                      v37 = hkClassMember::getClass(v125);
+                      v38 = ((__int64 (__fastcall *)(hkStreamWriter *))v36->vfptr[4].__vecDelDtor)(v36);
+                      hkRelocationInfo::addGlobal(fixups, extrasStart + v38, toAddrb, v37, 0);
+                      v13 = this;
+                      v12 = dataOut;
+                    }
+                    hkOArchive::writeRaw(v12, &buf, (unsigned __int8)v13->m_layoutOut.m_rules.m_bytesInPointer);
+                    v35 = (char *)klassInb + ArrayMemberSize;
+                    klassInb = (hkClass *)((char *)klassInb + ArrayMemberSize);
+                    ++v114;
                   }
-                }
+                  while ( v114 < *((_DWORD *)v18 + 2) );
+                  break;
+                case 29:
+                  v39 = hkOArchive::getStreamWriter(v12);
+                  v40 = member->m_offset;
+                  v41 = ((__int64 (__fastcall *)(hkStreamWriter *))v39->vfptr[4].__vecDelDtor)(v39);
+                  hkRelocationInfo::addLocal(fixups, v40 + classStart, extrasStart + v41);
+                  v12 = dataOut;
+                  v150 = 0i64;
+                  v42 = hkOArchive::getStreamWriter(dataOut);
+                  v43 = ((__int64 (__fastcall *)(hkStreamWriter *))v42->vfptr[4].__vecDelDtor)(v42);
+                  v44 = extrasStart;
+                  v45 = extrasStart + v43;
+                  v115 = 0;
+                  v104 = extrasStart + v43;
+                  if ( *((int *)v18 + 2) > 0 )
+                  {
+                    do
+                    {
+                      hkOArchive::writeRaw(dataOut, &v150, (unsigned __int8)v13->m_layoutOut.m_rules.m_bytesInPointer);
+                      ++v115;
+                    }
+                    while ( v115 < *((_DWORD *)v18 + 2) );
+                    v45 = v104;
+                    v44 = extrasStart;
+                  }
+                  v46 = 0;
+                  v116 = 0;
+                  if ( *((int *)v18 + 2) > 0 )
+                  {
+                    v47 = 0i64;
+                    klassInc = 0i64;
+                    do
+                    {
+                      if ( *(const char **)((char *)&v47->m_name + *(_QWORD *)v18) )
+                      {
+                        saveCstring(
+                          &v156,
+                          *(const char **)((char *)&v47->m_name + *(_QWORD *)v18),
+                          v45 + v46 * (unsigned __int8)v13->m_layoutOut.m_rules.m_bytesInPointer,
+                          v44,
+                          dataOut,
+                          fixups);
+                        v46 = v116;
+                        v47 = klassInc;
+                      }
+                      v45 = v104;
+                      v44 = extrasStart;
+                      ++v46;
+                      v47 = (hkClass *)((char *)v47 + 8);
+                      v116 = v46;
+                      klassInc = v47;
+                    }
+                    while ( v46 < *((_DWORD *)v18 + 2) );
+                  }
+                  break;
+                case 33:
+                  v48 = hkOArchive::getStreamWriter(v12);
+                  v49 = member->m_offset;
+                  v50 = ((__int64 (__fastcall *)(hkStreamWriter *))v48->vfptr[4].__vecDelDtor)(v48);
+                  hkRelocationInfo::addLocal(fixups, v49 + classStart, extrasStart + v50);
+                  v12 = dataOut;
+                  v151 = 0i64;
+                  v51 = hkOArchive::getStreamWriter(dataOut);
+                  v52 = ((__int64 (__fastcall *)(hkStreamWriter *))v51->vfptr[4].__vecDelDtor)(v51);
+                  v53 = extrasStart;
+                  v54 = extrasStart + v52;
+                  v117 = 0;
+                  v105 = extrasStart + v52;
+                  if ( *((int *)v18 + 2) > 0 )
+                  {
+                    do
+                    {
+                      hkOArchive::writeRaw(dataOut, &v151, (unsigned __int8)v13->m_layoutOut.m_rules.m_bytesInPointer);
+                      ++v117;
+                    }
+                    while ( v117 < *((_DWORD *)v18 + 2) );
+                    v54 = v105;
+                    v53 = extrasStart;
+                  }
+                  v55 = 0;
+                  v118 = 0;
+                  if ( *((int *)v18 + 2) > 0 )
+                  {
+                    p_m_parent = 0i64;
+                    klassInd = 0i64;
+                    do
+                    {
+                      v57 = (const char *)(*(unsigned __int64 *)((char *)p_m_parent + *(_QWORD *)v18) & 0xFFFFFFFFFFFFFFFEui64);
+                      if ( v57 )
+                      {
+                        saveCstring(
+                          &v149,
+                          v57,
+                          v54 + v55 * (unsigned __int8)v13->m_layoutOut.m_rules.m_bytesInPointer,
+                          v53,
+                          dataOut,
+                          fixups);
+                        v55 = v118;
+                      }
+                      v54 = v105;
+                      v53 = extrasStart;
+                      ++v55;
+                      p_m_parent = &klassInd->m_parent;
+                      klassInd = (hkClass *)((char *)klassInd + 8);
+                      v118 = v55;
+                    }
+                    while ( v55 < *((_DWORD *)v18 + 2) );
+                  }
+                  break;
+                case 25:
+                  v58 = hkOArchive::getStreamWriter(v12);
+                  v119 = extrasStart + ((__int64 (__fastcall *)(hkStreamWriter *))v58->vfptr[4].__vecDelDtor)(v58);
+                  hkRelocationInfo::addLocal(fixups, classStart + member->m_offset, v119);
+                  v126 = hkClassMember::getClass(v125);
+                  v59 = hkClassMember::getClass(member);
+                  membera = v59;
+                  v60 = v126;
+                  if ( v126 && v59 )
+                  {
+                    v106 = 0;
+                    klassIne = *(const char **)v18;
+                    if ( *((int *)v18 + 2) > 0 )
+                    {
+                      while ( 1 )
+                      {
+                        ObjectSize = hkClass::getObjectSize(v60);
+                        hkObjectCopier::saveBody(
+                          v13,
+                          (char *)&klassIne[v106 * ObjectSize],
+                          v126,
+                          v12,
+                          membera,
+                          zeroArray);
+                        if ( ++v106 >= *((_DWORD *)v18 + 2) )
+                          break;
+                        v60 = v126;
+                      }
+                      v59 = membera;
+                    }
+                    for ( j = 0; j < *((_DWORD *)v18 + 2); ++j )
+                    {
+                      v62 = v119 + j * hkClass::getObjectSize(v59);
+                      v63 = hkClass::getObjectSize(v126);
+                      v100 = v62;
+                      v12 = dataOut;
+                      hkObjectCopier::saveExtras(
+                        v13,
+                        &klassIne[j * v63],
+                        v126,
+                        dataOut,
+                        membera,
+                        v100,
+                        extrasStart,
+                        fixups,
+                        zeroArray,
+                        levela);
+                      v59 = membera;
+                    }
+                  }
+                  break;
+                case 28:
+                  v64 = hkOArchive::getStreamWriter(v12);
+                  v108 = extrasStart + ((__int64 (__fastcall *)(hkStreamWriter *))v64->vfptr[4].__vecDelDtor)(v64);
+                  hkRelocationInfo::addLocal(fixups, classStart + member->m_offset, v108);
+                  for ( k = 0; k < *((_DWORD *)v18 + 2); ++k )
+                  {
+                    m_bytesInPointer = (unsigned __int8)v13->m_layoutOut.m_rules.m_bytesInPointer;
+                    ptr[0] = 0i64;
+                    ptr[1] = 0i64;
+                    hkOArchive::writeArrayGeneric(v12, (char *)ptr, m_bytesInPointer, 2);
+                  }
+                  v66 = 0;
+                  v121 = 0;
+                  if ( *((int *)v18 + 2) > 0 )
+                  {
+                    v67 = 0i64;
+                    v127 = 0i64;
+                    do
+                    {
+                      v68 = *(void **)((char *)&v67->m_name + *(_QWORD *)v18);
+                      v69 = 2 * v66 * (unsigned __int8)v13->m_layoutOut.m_rules.m_bytesInPointer;
+                      if ( v68 )
+                      {
+                        hkRelocationInfo::addGlobal(
+                          fixups,
+                          v69 + v108,
+                          v68,
+                          *(hkClass **)((char *)&v67->m_class + *(_QWORD *)v18),
+                          0);
+                        v67 = v127;
+                      }
+                      v70 = *(hkClass **)((char *)&v67->m_class + *(_QWORD *)v18);
+                      if ( v70 )
+                      {
+                        hkRelocationInfo::addGlobal(
+                          fixups,
+                          v108 + v69 + (unsigned __int8)v13->m_layoutOut.m_rules.m_bytesInPointer,
+                          v70,
+                          &hkClassClass,
+                          0);
+                        v67 = v127;
+                      }
+                      v67 = (hkClassMember *)((char *)v67 + 16);
+                      v66 = v121 + 1;
+                      v127 = v67;
+                      v121 = v66;
+                    }
+                    while ( v66 < *((_DWORD *)v18 + 2) );
+LABEL_111:
+                    v12 = dataOut;
+                  }
+                  break;
+                default:
+                  v71 = hkOArchive::getStreamWriter(v12);
+                  v72 = member->m_offset;
+                  v73 = ((__int64 (__fastcall *)(hkStreamWriter *))v71->vfptr[4].__vecDelDtor)(v71);
+                  hkRelocationInfo::addLocal(fixups, v72 + classStart, extrasStart + v73);
+                  v74 = member->m_subtype.m_storage;
+                  if ( v74 == 30 )
+                  {
+                    v12 = dataOut;
+                    writeUlongArray(
+                      dataOut,
+                      (unsigned __int8)v13->m_layoutOut.m_rules.m_bytesInPointer,
+                      *((_DWORD *)v18 + 2),
+                      *(const void **)v18);
+                  }
+                  else
+                  {
+                    v75 = v74;
+                    v76 = hkClassMember::getArrayMemberSize(member);
+                    v77 = v75;
+                    v12 = dataOut;
+                    writePodArray(dataOut, v77, v76, *((_DWORD *)v18 + 2), *(const void **)v18);
+                  }
+                  break;
               }
+$LN3_221:
+              v99 = hkOArchive::getStreamWriter(v12);
+              objectCopierPadUp(v99, 16);
               break;
             case 0x19:
-              klassIng = hkClassMember::getClass(v128);
-              v86 = hkClassMember::getClass(member);
-              toAddrc = v86;
-              if ( klassIng && v86 )
+              klassIng = hkClassMember::getClass(v125);
+              v82 = hkClassMember::getClass(member);
+              toAddrc = v82;
+              if ( !klassIng || !v82 )
+                goto $LN3_221;
+              v123 = classStart + member->m_offset;
+              v83 = objectCopier_calcCArraySize(v125);
+              v84 = objectCopier_calcCArraySize(member);
+              v85 = `anonymous namespace::min2<int>(v83, v84);
+              v86 = 0;
+              memberb = v85;
+              for ( m = 0; v86 < memberb; m = v86 )
               {
-                v126 = classStart + member->m_offset;
-                v87 = objectCopier_calcCArraySize(v128);
-                v88 = objectCopier_calcCArraySize(member);
-                v89 = `anonymous namespace::min2<int>(v87, v88);
-                v90 = 0;
-                memberb = v89;
-                for ( k = 0; v90 < memberb; k = v90 )
-                {
-                  v91 = &v19[(signed int)(v90 * (unsigned __int64)hkClass::getObjectSize(klassIng))];
-                  v92 = hkClass::getObjectSize(toAddrc);
-                  hkObjectCopier::saveExtras(
-                    v13,
-                    v91,
-                    klassIng,
-                    oa,
-                    toAddrc,
-                    v126 + k * v92,
-                    extrasStart,
-                    fixups,
-                    zeroArray,
-                    levela);
-                  v90 = k + 1;
-                }
-                goto LABEL_111;
+                v87 = &v18[(int)(v86 * hkClass::getObjectSize(klassIng))];
+                v88 = hkClass::getObjectSize(toAddrc);
+                hkObjectCopier::saveExtras(
+                  v13,
+                  v87,
+                  klassIng,
+                  dataOut,
+                  toAddrc,
+                  v123 + m * v88,
+                  extrasStart,
+                  fixups,
+                  zeroArray,
+                  levela);
+                v86 = m + 1;
               }
-              break;
+              goto LABEL_111;
             case 0x1B:
-              v131 = *(char **)v19;
-              if ( *(_QWORD *)v19 )
+              v128 = *(char **)v18;
+              if ( *(_QWORD *)v18 )
               {
-                hkRelocationInfo::addGlobal(fixups, classStart + member->m_offset, *(void **)v19, &hkClassClass, 1u);
-                v81 = hkOArchive::getStreamWriter(v12);
-                v125 = extrasStart
-                     + (unsigned __int64)((__int64 (__fastcall *)(hkStreamWriter *))v81->vfptr[4].__vecDelDtor)(v81);
+                hkRelocationInfo::addGlobal(fixups, classStart + member->m_offset, *(void **)v18, &hkClassClass, 1u);
+                v78 = hkOArchive::getStreamWriter(v12);
+                v122 = extrasStart + ((__int64 (__fastcall *)(hkStreamWriter *))v78->vfptr[4].__vecDelDtor)(v78);
                 hkRelocationInfo::addLocal(
                   fixups,
                   classStart + (unsigned __int8)v13->m_layoutOut.m_rules.m_bytesInPointer + member->m_offset,
-                  v125);
-                klassInf = (hkClass *)*((_QWORD *)v19 + 1);
-                for ( l = 0; l < *((_DWORD *)v19 + 4); ++l )
+                  v122);
+                klassInf = (hkClass *)*((_QWORD *)v18 + 1);
+                for ( n = 0; n < *((_DWORD *)v18 + 4); ++n )
                 {
-                  v82 = hkClass::getObjectSize((hkClass *)v131);
+                  v79 = hkClass::getObjectSize((hkClass *)v128);
                   hkObjectCopier::saveBody(
                     v13,
-                    (char *)klassInf + l * v82,
-                    (hkClass *)v131,
+                    (char *)klassInf + n * v79,
+                    (hkClass *)v128,
                     v12,
-                    (hkClass *)v131,
+                    (hkClass *)v128,
                     zeroArray);
                 }
-                for ( m = 0; m < *((_DWORD *)v19 + 4); ++m )
+                for ( ii = 0; ii < *((_DWORD *)v18 + 4); ++ii )
                 {
-                  v83 = v125 + m * (unsigned __int64)hkClass::getObjectSize((hkClass *)v131);
-                  v84 = hkClass::getObjectSize((hkClass *)v131);
-                  v85 = v83;
-                  v12 = oa;
+                  v80 = v122 + ii * hkClass::getObjectSize((hkClass *)v128);
+                  v81 = hkClass::getObjectSize((hkClass *)v128);
+                  v101 = v80;
+                  v12 = dataOut;
                   hkObjectCopier::saveExtras(
                     v13,
-                    (char *)klassInf + m * v84,
-                    (hkClass *)v131,
-                    oa,
-                    (hkClass *)v131,
-                    v85,
+                    (char *)klassInf + ii * v81,
+                    (hkClass *)v128,
+                    dataOut,
+                    (hkClass *)v128,
+                    v101,
                     extrasStart,
                     fixups,
                     zeroArray,
                     levela);
                 }
               }
-              break;
+              goto $LN3_221;
             case 0x1C:
-              v93 = objectCopier_calcCArraySize(v128);
-              v94 = objectCopier_calcCArraySize(member);
-              v95 = `anonymous namespace::min2<int>(v93, v94);
-              v96 = 0;
-              v97 = 0i64;
-              v115 = 0;
+              v89 = objectCopier_calcCArraySize(v125);
+              v90 = objectCopier_calcCArraySize(member);
+              v91 = `anonymous namespace::min2<int>(v89, v90);
+              v92 = 0;
+              v93 = 0i64;
+              v112 = 0;
               klassInh = 0i64;
-              v157 = v95;
-              if ( v95 > 0i64 )
+              v153 = v91;
+              if ( v91 > 0 )
               {
-                v98 = 1;
-                v127 = 1;
-                v99 = 1i64;
-                toAddrd = (char *)1;
+                v94 = 1;
+                v124 = 1;
+                v95 = 1i64;
+                toAddrd = 1i64;
                 do
                 {
-                  v100 = (unsigned __int8)v13->m_layoutIn.m_rules.m_bytesInPointer;
-                  v101 = *(void **)&v19[2 * v100 * v97];
-                  v102 = v99 * v100;
-                  v103 = *(hkClass **)&v19[v102];
-                  v132 = *(hkClassMember **)&v19[v102];
-                  if ( v101 )
+                  v96 = (unsigned __int8)v13->m_layoutIn.m_rules.m_bytesInPointer;
+                  v97 = *(void **)&v18[2 * v96 * v93];
+                  v98 = *(hkClass **)&v18[v95 * v96];
+                  v129 = (hkClassMember *)v98;
+                  if ( v97 )
                   {
                     hkRelocationInfo::addGlobal(
                       fixups,
                       member->m_offset
                     + classStart
-                    + 2 * v96 * (unsigned __int8)v13->m_layoutOut.m_rules.m_bytesInPointer,
-                      v101,
-                      v103,
+                    + 2 * v92 * (unsigned __int8)v13->m_layoutOut.m_rules.m_bytesInPointer,
+                      v97,
+                      v98,
                       0);
-                    v97 = (__int64)klassInh;
-                    v103 = (hkClass *)v132;
-                    v98 = v127;
-                    v96 = v115;
+                    v93 = (__int64)klassInh;
+                    v98 = (hkClass *)v129;
+                    v94 = v124;
+                    v92 = v112;
                   }
-                  if ( v103 )
+                  if ( v98 )
                   {
                     hkRelocationInfo::addGlobal(
                       fixups,
-                      classStart + v98 * (unsigned __int8)v13->m_layoutOut.m_rules.m_bytesInPointer + member->m_offset,
-                      v103,
+                      classStart + v94 * (unsigned __int8)v13->m_layoutOut.m_rules.m_bytesInPointer + member->m_offset,
+                      v98,
                       &hkClassClass,
                       0);
-                    v97 = (__int64)klassInh;
-                    v98 = v127;
-                    v96 = v115;
+                    v93 = (__int64)klassInh;
+                    v94 = v124;
+                    v92 = v112;
                   }
-                  ++v97;
-                  ++v96;
-                  v99 = (signed __int64)(toAddrd + 2);
-                  v98 += 2;
-                  v115 = v96;
-                  toAddrd += 2;
-                  v127 = v98;
-                  klassInh = (hkClass *)v97;
+                  ++v93;
+                  ++v92;
+                  v95 = toAddrd + 2;
+                  v94 += 2;
+                  v112 = v92;
+                  toAddrd += 2i64;
+                  v124 = v94;
+                  klassInh = (hkClass *)v93;
                 }
-                while ( v97 < v157 );
+                while ( v93 < v153 );
               }
-LABEL_111:
-              v12 = oa;
-              break;
+              goto LABEL_111;
             case 0x1D:
-              if ( *(_QWORD *)v19 )
-                saveCstring(&result, *(const char **)v19, classStart + member->m_offset, extrasStart, v12, fixups);
-              break;
+              if ( *(_QWORD *)v18 )
+                saveCstring(&result, *(const char **)v18, classStart + member->m_offset, extrasStart, v12, fixups);
+              goto $LN3_221;
             case 0x21:
-              if ( *(_QWORD *)v19 & 0xFFFFFFFFFFFFFFFEui64 )
+              if ( (*(_QWORD *)v18 & 0xFFFFFFFFFFFFFFFEui64) != 0 )
                 saveCstring(
-                  &v162,
-                  (const char *)(*(_QWORD *)v19 & 0xFFFFFFFFFFFFFFFEui64),
+                  &v158,
+                  (const char *)(*(_QWORD *)v18 & 0xFFFFFFFFFFFFFFFEui64),
                   classStart + member->m_offset,
                   extrasStart,
                   v12,
                   fixups);
-              break;
+              goto $LN3_221;
             default:
-              hkErrStream::hkErrStream(&v161, &description, 512);
-              hkOstream::operator<<((hkOstream *)&v161.vfptr, "Unknown class member found during write of data.");
-              if ( (unsigned int)hkError::messageError(1679703557, &description, "Copier\\hkObjectCopier.cpp", 1052) )
+              hkErrStream::hkErrStream(&v157, description, 512);
+              hkOstream::operator<<(&v157, "Unknown class member found during write of data.");
+              if ( (unsigned int)hkError::messageError(0x641E3E05u, description, "Copier\\hkObjectCopier.cpp", 1052) )
                 __debugbreak();
-              hkOstream::~hkOstream((hkOstream *)&v161.vfptr);
-              break;
+LABEL_106:
+              hkOstream::~hkOstream(&v157);
+              goto $LN3_221;
           }
-          v104 = hkOArchive::getStreamWriter(v12);
-          objectCopierPadUp(v104, 16);
         }
         v11 = klassOut;
       }
-      v15 = memberIndex + 1;
-      memberIndex = v15;
+      i = memberIndex + 1;
     }
-    while ( v15 < v150 );
   }
-}     v12,
-                  fixups);
-              break;
-            default:
-              hkErrStream::hkErrStream(&v161, &description, 512);
-       
+}          }
+        }
+        v11 = klassOut;
+      }
+      i = memberIndex + 1;
+    }
+  }
+}
 
 // File Line: 1062
 // RVA: 0xE68BC0
-hkResult *__fastcall hkObjectCopier::copyObject(hkObjectCopier *this, hkResult *result, const void *dataIn, hkClass *klassIn, hkStreamWriter *dataOut, hkClass *klassOut, hkRelocationInfo *reloc)
+hkResult *__fastcall hkObjectCopier::copyObject(
+        hkObjectCopier *this,
+        hkResult *result,
+        const void *dataIn,
+        hkClass *klassIn,
+        hkStreamWriter *dataOut,
+        hkClass *klassOut,
+        hkRelocationInfo *reloc)
 {
-  hkObjectCopier *v7; // r15
-  hkClass *v8; // r12
-  const void *v9; // r13
-  hkResult *v10; // r14
-  hkLifoAllocator *v11; // rax
-  char *v12; // rdx
-  unsigned __int64 v13; // rcx
+  hkLifoAllocator *Value; // rax
+  char *m_cur; // rdx
+  char *v13; // rcx
   hkLifoAllocator *v14; // rax
   char *v15; // rcx
-  unsigned __int64 v16; // rdx
-  void **v17; // rdx
-  int v18; // er9
+  char *v16; // rdx
+  hkArrayBase<char> *p_array; // rdx
+  int v18; // r9d
   hkStreamWriter *v19; // rsi
   int v20; // eax
   hkClass *v21; // rbx
   int v22; // edi
   int extrasStart; // eax
-  __int64 v24; // rbx
+  hkArrayBase<char> *m_arr; // rbx
   _QWORD **v25; // rax
-  char *v26; // rdi
-  int v27; // eax
+  char *m_localMemory; // rdi
+  int m_size; // eax
   signed int v28; // ebx
   hkLifoAllocator *v29; // rax
-  int v30; // er8
+  int v30; // r8d
   unsigned int v31; // eax
   char *v32; // rdi
   signed int v33; // ebx
   hkLifoAllocator *v34; // rax
-  int v35; // er8
-  void *array; // [rsp+50h] [rbp-71h]
+  int v35; // r8d
+  char *array; // [rsp+50h] [rbp-71h] BYREF
   unsigned int v38; // [rsp+58h] [rbp-69h]
   int v39; // [rsp+5Ch] [rbp-65h]
   void *p; // [rsp+60h] [rbp-61h]
   int v41; // [rsp+68h] [rbp-59h]
-  hkLocalArray<char> zeroArray; // [rsp+70h] [rbp-51h]
-  hkStreamWriter sw; // [rsp+90h] [rbp-31h]
-  void **v44; // [rsp+A0h] [rbp-21h]
-  hkContainerHeapAllocator::Allocator *v45; // [rsp+A8h] [rbp-19h]
-  unsigned int v46; // [rsp+B0h] [rbp-11h]
-  int v47; // [rsp+B4h] [rbp-Dh]
-  hkOArchive v48; // [rsp+B8h] [rbp-9h]
-  hkResult resulta; // [rsp+110h] [rbp+4Fh]
+  hkLocalArray<char> zeroArray; // [rsp+70h] [rbp-51h] BYREF
+  hkArrayStreamWriter sw; // [rsp+90h] [rbp-31h] BYREF
+  hkOArchive v44; // [rsp+B8h] [rbp-9h] BYREF
+  hkResult resulta; // [rsp+110h] [rbp+4Fh] BYREF
 
-  v7 = this;
-  v8 = klassIn;
-  v9 = dataIn;
-  v10 = result;
   array = 0i64;
   v38 = 0;
-  v39 = 2147483648;
+  v39 = 0x80000000;
   v41 = 1024;
-  v11 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v12 = (char *)v11->m_cur;
-  v13 = (unsigned __int64)(v12 + 1024);
-  if ( v11->m_slabSize < 1024 || (void *)v13 > v11->m_end )
-    v12 = (char *)hkLifoAllocator::allocateFromNewSlab(v11, 1024);
+  Value = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  m_cur = (char *)Value->m_cur;
+  v13 = m_cur + 1024;
+  if ( Value->m_slabSize < 1024 || v13 > Value->m_end )
+    m_cur = (char *)hkLifoAllocator::allocateFromNewSlab(Value, 1024);
   else
-    v11->m_cur = (void *)v13;
-  array = v12;
+    Value->m_cur = v13;
+  array = m_cur;
   v39 = -2147482624;
-  p = v12;
+  p = m_cur;
   zeroArray.m_data = 0i64;
   zeroArray.m_size = 0;
-  zeroArray.m_capacityAndFlags = 2147483648;
+  zeroArray.m_capacityAndFlags = 0x80000000;
   zeroArray.m_initialCapacity = 16;
   v14 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   v15 = (char *)v14->m_cur;
-  v16 = (unsigned __int64)(v15 + 128);
-  if ( v14->m_slabSize < 128 || (void *)v16 > v14->m_end )
+  v16 = v15 + 128;
+  if ( v14->m_slabSize < 128 || v16 > v14->m_end )
     v15 = (char *)hkLifoAllocator::allocateFromNewSlab(v14, 128);
   else
-    v14->m_cur = (void *)v16;
+    v14->m_cur = v16;
   zeroArray.m_data = v15;
   zeroArray.m_localMemory = v15;
   sw.vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable;
-  v17 = &array;
+  p_array = (hkArrayBase<char> *)&array;
   v18 = v38 + 1;
-  v46 = v38;
+  sw.m_offset = v38;
   zeroArray.m_capacityAndFlags = -2147483632;
   *(_DWORD *)&sw.m_memSizeAndFlags = 0x1FFFF;
-  v44 = &array;
-  v45 = &hkContainerHeapAllocator::s_alloc;
-  v47 = 1;
-  if ( (v39 & 0x3FFFFFFF) < (signed int)(v38 + 1) )
+  sw.m_arr = (hkArrayBase<char> *)&array;
+  sw.m_allocator = &hkContainerHeapAllocator::s_alloc;
+  sw.m_ownerShip = ARRAY_BORROW;
+  if ( (v39 & 0x3FFFFFFF) < (int)(v38 + 1) )
   {
     if ( v18 < 2 * (v39 & 0x3FFFFFFF) )
       v18 = 2 * (v39 & 0x3FFFFFFF);
-    hkArrayUtil::_reserve(&resulta, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, v18, 1);
-    v17 = v44;
+    hkArrayUtil::_reserve(&resulta, &hkContainerHeapAllocator::s_alloc, (const void **)&array, v18, 1);
+    p_array = sw.m_arr;
   }
-  *((_BYTE *)*v17 + *((signed int *)v17 + 2)) = 0;
-  hkOArchive::hkOArchive(&v48, &sw, v7->m_byteSwap);
+  p_array->m_data[p_array->m_size] = 0;
+  hkOArchive::hkOArchive(&v44, &sw, this->m_byteSwap);
   v19 = dataOut;
   v20 = ((__int64 (__fastcall *)(hkStreamWriter *))dataOut->vfptr[4].__vecDelDtor)(dataOut);
   v21 = klassOut;
   v22 = v20;
-  hkObjectCopier::saveBody(v7, v9, v8, &v48, klassOut, &zeroArray);
-  ((void (__fastcall *)(hkStreamWriter *, void *, _QWORD))v19->vfptr[2].__vecDelDtor)(v19, array, v38);
+  hkObjectCopier::saveBody(this, dataIn, klassIn, &v44, klassOut, &zeroArray);
+  ((void (__fastcall *)(hkStreamWriter *, char *, _QWORD))v19->vfptr[2].__vecDelDtor)(v19, array, v38);
   objectCopierPadUp(v19, 16);
-  hkArrayStreamWriter::clear((hkArrayStreamWriter *)&sw);
+  hkArrayStreamWriter::clear(&sw);
   extrasStart = ((__int64 (__fastcall *)(hkStreamWriter *))v19->vfptr[4].__vecDelDtor)(v19);
-  hkObjectCopier::saveExtras(v7, v9, v8, &v48, v21, v22, extrasStart, reloc, &zeroArray, 0);
-  ((void (__fastcall *)(hkStreamWriter *, void *, _QWORD))v19->vfptr[2].__vecDelDtor)(v19, array, v38);
+  hkObjectCopier::saveExtras(this, dataIn, klassIn, &v44, v21, v22, extrasStart, reloc, &zeroArray, 0);
+  ((void (__fastcall *)(hkStreamWriter *, char *, _QWORD))v19->vfptr[2].__vecDelDtor)(v19, array, v38);
   objectCopierPadUp(v19, 16);
-  hkArrayStreamWriter::clear((hkArrayStreamWriter *)&sw);
-  v10->m_enum = hkOArchive::isOk(&v48, (hkBool *)&dataOut)->m_bool == 0;
-  hkOArchive::~hkOArchive(&v48);
+  hkArrayStreamWriter::clear(&sw);
+  result->m_enum = hkOArchive::isOk(&v44, (hkBool *)&dataOut)->m_bool == 0;
+  hkOArchive::~hkOArchive(&v44);
   sw.vfptr = (hkBaseObjectVtbl *)&hkArrayStreamWriter::`vftable;
-  if ( !v47 )
+  if ( sw.m_ownerShip == ARRAY_TAKE )
   {
-    v24 = (__int64)v44;
-    if ( v44 )
+    m_arr = sw.m_arr;
+    if ( sw.m_arr )
     {
       v25 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      (*(void (__fastcall **)(_QWORD *, __int64, signed __int64))(*v25[11] + 16i64))(v25[11], v24, 16i64);
+      (*(void (__fastcall **)(_QWORD *, hkArrayBase<char> *, __int64))(*v25[11] + 16i64))(v25[11], m_arr, 16i64);
     }
   }
-  v26 = zeroArray.m_localMemory;
+  m_localMemory = zeroArray.m_localMemory;
   sw.vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
-  v27 = zeroArray.m_size;
+  m_size = zeroArray.m_size;
   if ( zeroArray.m_localMemory == zeroArray.m_data )
-    v27 = 0;
+    m_size = 0;
   v28 = (zeroArray.m_initialCapacity + 127) & 0xFFFFFF80;
-  zeroArray.m_size = v27;
+  zeroArray.m_size = m_size;
   v29 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   v30 = (v28 + 15) & 0xFFFFFFF0;
-  if ( v28 > v29->m_slabSize || &v26[v30] != v29->m_cur || v29->m_firstNonLifoEnd == v26 )
-    hkLifoAllocator::slowBlockFree(v29, v26, v30);
+  if ( v28 > v29->m_slabSize || &m_localMemory[v30] != v29->m_cur || v29->m_firstNonLifoEnd == m_localMemory )
+    hkLifoAllocator::slowBlockFree(v29, m_localMemory, v30);
   else
-    v29->m_cur = v26;
+    v29->m_cur = m_localMemory;
   zeroArray.m_size = 0;
   if ( zeroArray.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       zeroArray.m_data,
       zeroArray.m_capacityAndFlags & 0x3FFFFFFF);
   v31 = v38;
@@ -2005,7 +1980,7 @@ hkResult *__fastcall hkObjectCopier::copyObject(hkObjectCopier *this, hkResult *
   zeroArray.m_data = 0i64;
   if ( p == array )
     v31 = 0;
-  zeroArray.m_capacityAndFlags = 2147483648;
+  zeroArray.m_capacityAndFlags = 0x80000000;
   v33 = (v41 + 127) & 0xFFFFFF80;
   v38 = v31;
   v34 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
@@ -2016,10 +1991,7 @@ hkResult *__fastcall hkObjectCopier::copyObject(hkObjectCopier *this, hkResult *
     v34->m_cur = v32;
   v38 = 0;
   if ( v39 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      array,
-      v39 & 0x3FFFFFFF);
-  return v10;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, array, v39 & 0x3FFFFFFF);
+  return result;
 }
 

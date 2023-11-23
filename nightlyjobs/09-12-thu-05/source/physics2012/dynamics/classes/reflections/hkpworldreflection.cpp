@@ -28,23 +28,24 @@ hkClass *__fastcall hkpWorld::staticClass()
 
 // File Line: 292
 // RVA: 0xD4F650
-void __fastcall finishLoadedObjecthkpWorld(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpWorld(hkpWorld *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpWorld::hkpWorld);
+  if ( p )
+    hkpWorld::hkpWorld(p, finishing);
 }
 
 // File Line: 298
 // RVA: 0xD4F670
-void __fastcall cleanupLoadedObjecthkpWorld(void *p)
+void __fastcall cleanupLoadedObjecthkpWorld(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 302
 // RVA: 0xD4F680
 hkBaseObjectVtbl *__fastcall getVtablehkpWorld()
 {
-  hkpWorld v1; // [rsp+20h] [rbp-448h]
+  hkpWorld v1; // [rsp+20h] [rbp-448h] BYREF
 
   hkpWorld::hkpWorld(&v1, 0);
   return v1.vfptr;
@@ -61,8 +62,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpWorldTypeInfo__()
   hkpWorldTypeInfo.m_typeName = "hkpWorld";
   hkpWorldTypeInfo.m_vtable = result;
   hkpWorldTypeInfo.m_scopedName = "!hkpWorld";
-  hkpWorldTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpWorld;
-  hkpWorldTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpWorld;
+  hkpWorldTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpWorld;
+  hkpWorldTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpWorld;
   return result;
 }
 

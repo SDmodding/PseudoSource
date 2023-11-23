@@ -35,27 +35,25 @@ void __fastcall finishLoadedObjecthkMeshBoneIndexMapping(void *p, int finishing)
 
 // File Line: 70
 // RVA: 0x13196C0
-void __fastcall cleanupLoadedObjecthkMeshBoneIndexMapping(void *p)
+void __fastcall cleanupLoadedObjecthkMeshBoneIndexMapping(_DWORD *p)
 {
-  int v1; // er8
-  _DWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       *(void **)p,
       2 * (v1 & 0x3FFFFFFF));
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 
@@ -77,7 +75,7 @@ void dynamic_initializer_for__hkIndexedTransformSetClass__()
     0i64,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 116
@@ -89,23 +87,24 @@ hkClass *__fastcall hkIndexedTransformSet::staticClass()
 
 // File Line: 123
 // RVA: 0x1319730
-void __fastcall finishLoadedObjecthkIndexedTransformSet(void *p, int finishing)
+void __fastcall finishLoadedObjecthkIndexedTransformSet(hkIndexedTransformSet *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkIndexedTransformSet::hkIndexedTransformSet);
+  if ( p )
+    hkIndexedTransformSet::hkIndexedTransformSet(p, finishing);
 }
 
 // File Line: 129
 // RVA: 0x1319750
-void __fastcall cleanupLoadedObjecthkIndexedTransformSet(void *p)
+void __fastcall cleanupLoadedObjecthkIndexedTransformSet(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 133
 // RVA: 0x1319760
 hkBaseObjectVtbl *__fastcall getVtablehkIndexedTransformSet()
 {
-  hkIndexedTransformSet v1; // [rsp+20h] [rbp-78h]
+  hkIndexedTransformSet v1; // [rsp+20h] [rbp-78h] BYREF
 
   hkIndexedTransformSet::hkIndexedTransformSet(&v1, 0);
   return v1.vfptr;
@@ -122,8 +121,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkIndexedTransformSetTypeInfo__()
   hkIndexedTransformSetTypeInfo.m_typeName = "hkIndexedTransformSet";
   hkIndexedTransformSetTypeInfo.m_vtable = result;
   hkIndexedTransformSetTypeInfo.m_scopedName = "!hkIndexedTransformSet";
-  hkIndexedTransformSetTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkIndexedTransformSet;
-  hkIndexedTransformSetTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkIndexedTransformSet;
+  hkIndexedTransformSetTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkIndexedTransformSet;
+  hkIndexedTransformSetTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkIndexedTransformSet;
   return result;
 }
 

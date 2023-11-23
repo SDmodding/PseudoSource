@@ -1,6 +1,12 @@
 // File Line: 97
 // RVA: 0x1CC450
-UFG::qVector3 *__fastcall Render::EffectEmitterSettings::GetLocalVelocity(Render::EffectEmitterSettings *this, UFG::qVector3 *result, float t0, float t1, float t2, UFG::qMatrix44 *mBasis)
+UFG::qVector3 *__fastcall Render::EffectEmitterSettings::GetLocalVelocity(
+        Render::EffectEmitterSettings *this,
+        UFG::qVector3 *result,
+        float t0,
+        float t1,
+        float t2,
+        UFG::qMatrix44 *mBasis)
 {
   float v6; // xmm9_4
   float v7; // xmm7_4

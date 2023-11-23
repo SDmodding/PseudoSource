@@ -2,336 +2,293 @@
 // RVA: 0x5C8C50
 void __fastcall UFG::UIWeaponAmmoData::UIWeaponAmmoData(UFG::UIWeaponAmmoData *this)
 {
-  UFG::qSafePointer<UFG::SimComponent,UFG::GunComponent> *v1; // [rsp+28h] [rbp+10h]
-
   *(_QWORD *)&this->ReserveAmmo = -1i64;
   *(_QWORD *)&this->ClipCapacity = -1i64;
   *(_QWORD *)&this->OldClips = -1i64;
   *(_WORD *)&this->IsCamera = 0;
-  this->InventoryItem = 0;
+  this->InventoryItem = eINVENTORY_ITEM_INVALID;
   this->IconTexture = 0i64;
   this->TexturePack = 0i64;
-  v1 = &this->mGunComponent;
-  v1->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->mPrev;
-  v1->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->mPrev;
+  this->mGunComponent.mPrev = &this->mGunComponent;
+  this->mGunComponent.mNext = &this->mGunComponent;
   this->mGunComponent.m_pPointer = 0i64;
 }
 
 // File Line: 53
 // RVA: 0x619BB0
-void __fastcall UFG::UIWeaponAmmoData::Update(UFG::UIWeaponAmmoData *this, UFG::SimObject *weapon, bool *weaponChanged, bool *ammoChanged)
+void __fastcall UFG::UIWeaponAmmoData::Update(
+        UFG::UIWeaponAmmoData *this,
+        UFG::SimObjectProp *weapon,
+        bool *weaponChanged,
+        bool *ammoChanged)
 {
-  UFG::SimObjectGame *v4; // rdi
-  bool *v5; // r14
-  bool *v6; // r12
-  UFG::UIWeaponAmmoData *v7; // rbx
   UFG::SimObjectWeaponPropertiesComponent *v8; // rbp
-  UFG::InventoryItemComponent *v9; // rsi
-  UFG::SimComponent *v10; // r15
+  UFG::InventoryItemComponent *m_pComponent; // rsi
+  UFG::SimComponent *m_pPointer; // r15
   UFG::SimComponent *v11; // rax
   UFG::SimComponent *v12; // r8
-  unsigned __int16 v13; // cx
-  UFG::SimObjectWeaponPropertiesComponent *v14; // rax
-  unsigned __int16 v15; // cx
-  UFG::InventoryItemComponent *v16; // rax
-  unsigned __int16 v17; // cx
+  signed __int16 m_Flags; // cx
+  UFG::SimObjectWeaponPropertiesComponent *ComponentOfTypeHK; // rax
+  signed __int16 v15; // cx
+  UFG::InventoryItemComponent *ComponentOfType; // rax
+  signed __int16 v17; // cx
   UFG::SimComponent *v18; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::GunComponent> *v19; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v20; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v21; // rax
+  UFG::qSafePointer<UFG::SimComponent,UFG::GunComponent> *p_mGunComponent; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v22; // rax
-  UFG::eInventoryItemEnum v23; // edi
-  char v24; // al
+  UFG::eInventoryItemEnum m_eInventoryItem; // edi
+  char WeaponImageInfo; // al
   UFG::eInventoryItemEnum v25; // ecx
-  bool v26; // cl
-  bool v27; // al
+  char UnlimitedAmmo; // cl
+  char v27; // al
   bool v28; // zf
-  int v29; // edi
+  int ClipAmmo; // edi
   UFG::GunComponent *v30; // rcx
-  int v31; // eax
+  int TotalAmmo; // eax
   UFG::GunComponent *v32; // rcx
   int v33; // eax
   UFG::GunComponent *v34; // rcx
-  int v35; // eax
+  int ClipCapacity; // eax
   UFG::GunComponent *v36; // rcx
-  int v37; // eax
+  int ClipsRemaining; // eax
   bool v38; // sf
 
-  v4 = (UFG::SimObjectGame *)weapon;
-  v5 = ammoChanged;
-  v6 = weaponChanged;
-  v7 = this;
   if ( !weapon )
   {
     v8 = 0i64;
 LABEL_3:
-    v9 = 0i64;
+    m_pComponent = 0i64;
     goto LABEL_4;
   }
-  v13 = weapon->m_Flags;
-  if ( (v13 >> 14) & 1 )
+  m_Flags = weapon->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
   {
-    v14 = (UFG::SimObjectWeaponPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                       (UFG::SimObjectGame *)weapon,
-                                                       UFG::SimObjectWeaponPropertiesComponent::_TypeUID);
+LABEL_15:
+    ComponentOfTypeHK = (UFG::SimObjectWeaponPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                     weapon,
+                                                                     UFG::SimObjectWeaponPropertiesComponent::_TypeUID);
+    goto LABEL_17;
   }
-  else if ( (v13 & 0x8000u) == 0 )
+  if ( (m_Flags & 0x2000) == 0 )
   {
-    if ( (v13 >> 13) & 1 )
+    if ( (m_Flags & 0x1000) == 0 )
     {
-      v14 = UFG::SimObjectProp::GetComponent<UFG::SimObjectWeaponPropertiesComponent>((UFG::SimObjectProp *)weapon);
+      ComponentOfTypeHK = (UFG::SimObjectWeaponPropertiesComponent *)UFG::SimObject::GetComponentOfType(
+                                                                       weapon,
+                                                                       UFG::SimObjectWeaponPropertiesComponent::_TypeUID);
+      goto LABEL_17;
     }
-    else if ( (v13 >> 12) & 1 )
-    {
-      v14 = (UFG::SimObjectWeaponPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                         (UFG::SimObjectGame *)weapon,
-                                                         UFG::SimObjectWeaponPropertiesComponent::_TypeUID);
-    }
-    else
-    {
-      v14 = (UFG::SimObjectWeaponPropertiesComponent *)UFG::SimObject::GetComponentOfType(
-                                                         weapon,
-                                                         UFG::SimObjectWeaponPropertiesComponent::_TypeUID);
-    }
+    goto LABEL_15;
   }
-  else
-  {
-    v14 = (UFG::SimObjectWeaponPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                       (UFG::SimObjectGame *)weapon,
-                                                       UFG::SimObjectWeaponPropertiesComponent::_TypeUID);
-  }
-  v15 = v4->m_Flags;
-  v8 = v14;
-  if ( (v15 >> 14) & 1 || (v15 & 0x8000u) != 0 )
+  ComponentOfTypeHK = UFG::SimObjectProp::GetComponent<UFG::SimObjectWeaponPropertiesComponent>(weapon);
+LABEL_17:
+  v15 = weapon->m_Flags;
+  v8 = ComponentOfTypeHK;
+  if ( (v15 & 0x4000) != 0 || v15 < 0 )
     goto LABEL_3;
-  if ( (v15 >> 13) & 1 )
+  if ( (v15 & 0x2000) != 0 )
   {
-    v9 = (UFG::InventoryItemComponent *)v4->m_Components.p[11].m_pComponent;
+    m_pComponent = (UFG::InventoryItemComponent *)weapon->m_Components.p[11].m_pComponent;
   }
   else
   {
-    if ( (v15 >> 12) & 1 )
-      v16 = (UFG::InventoryItemComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                             v4,
-                                             UFG::InventoryItemComponent::_TypeUID);
+    if ( (v15 & 0x1000) != 0 )
+      ComponentOfType = (UFG::InventoryItemComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                         weapon,
+                                                         UFG::InventoryItemComponent::_TypeUID);
     else
-      v16 = (UFG::InventoryItemComponent *)UFG::SimObject::GetComponentOfType(
-                                             (UFG::SimObject *)&v4->vfptr,
-                                             UFG::InventoryItemComponent::_TypeUID);
-    v9 = v16;
+      ComponentOfType = (UFG::InventoryItemComponent *)UFG::SimObject::GetComponentOfType(
+                                                         weapon,
+                                                         UFG::InventoryItemComponent::_TypeUID);
+    m_pComponent = ComponentOfType;
   }
-  if ( v9 )
+  if ( m_pComponent )
   {
-    v10 = v9->m_pOwnerInventoryComponent.m_pPointer;
+    m_pPointer = m_pComponent->m_pOwnerInventoryComponent.m_pPointer;
     goto LABEL_5;
   }
 LABEL_4:
-  v10 = 0i64;
+  m_pPointer = 0i64;
 LABEL_5:
-  *v6 = 0;
-  *v5 = 0;
-  v11 = v7->mGunComponent.m_pPointer;
-  if ( !v11 || (UFG::SimObjectGame *)v11->m_pSimObject != v4 )
+  *weaponChanged = 0;
+  *ammoChanged = 0;
+  v11 = this->mGunComponent.m_pPointer;
+  if ( !v11 || v11->m_pSimObject != weapon )
   {
-    if ( v4 )
+    if ( weapon )
     {
-      v17 = v4->m_Flags;
-      if ( (v17 >> 14) & 1 )
-      {
-        v18 = UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::GunComponent::_TypeUID);
-      }
-      else if ( (v17 & 0x8000u) == 0 )
-      {
-        if ( (v17 >> 13) & 1 )
-        {
-          v18 = UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::GunComponent::_TypeUID);
-        }
-        else if ( (v17 >> 12) & 1 )
-        {
-          v18 = UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::GunComponent::_TypeUID);
-        }
-        else
-        {
-          v18 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v4->vfptr, UFG::GunComponent::_TypeUID);
-        }
-      }
+      v17 = weapon->m_Flags;
+      if ( (v17 & 0x4000) != 0 || v17 < 0 || (v17 & 0x2000) != 0 || (v17 & 0x1000) != 0 )
+        v18 = UFG::SimObjectGame::GetComponentOfTypeHK(weapon, UFG::GunComponent::_TypeUID);
       else
-      {
-        v18 = UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::GunComponent::_TypeUID);
-      }
+        v18 = UFG::SimObject::GetComponentOfType(weapon, UFG::GunComponent::_TypeUID);
       v12 = v18;
     }
     else
     {
       v12 = 0i64;
     }
-    v19 = &v7->mGunComponent;
-    if ( v7->mGunComponent.m_pPointer )
+    p_mGunComponent = &this->mGunComponent;
+    if ( this->mGunComponent.m_pPointer )
     {
-      v20 = v19->mPrev;
-      v21 = v7->mGunComponent.mNext;
-      v20->mNext = v21;
-      v21->mPrev = v20;
-      v19->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v19->mPrev;
-      v7->mGunComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v7->mGunComponent.mPrev;
+      mPrev = p_mGunComponent->mPrev;
+      mNext = this->mGunComponent.mNext;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
+      p_mGunComponent->mPrev = p_mGunComponent;
+      this->mGunComponent.mNext = &this->mGunComponent;
     }
-    v7->mGunComponent.m_pPointer = v12;
+    this->mGunComponent.m_pPointer = v12;
     if ( v12 )
     {
       v22 = v12->m_SafePointerList.mNode.mPrev;
-      v22->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v19->mPrev;
-      v19->mPrev = v22;
-      v7->mGunComponent.mNext = &v12->m_SafePointerList.mNode;
-      v12->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v19->mPrev;
+      v22->mNext = p_mGunComponent;
+      p_mGunComponent->mPrev = v22;
+      this->mGunComponent.mNext = &v12->m_SafePointerList.mNode;
+      v12->m_SafePointerList.mNode.mPrev = p_mGunComponent;
     }
   }
-  if ( v8 && v9 )
+  if ( v8 && m_pComponent )
   {
-    v23 = v9->m_eInventoryItem;
-    if ( !v8->mIsPhoneCamera || v7->IsCamera )
+    m_eInventoryItem = m_pComponent->m_eInventoryItem;
+    if ( !v8->mIsPhoneCamera || this->IsCamera )
     {
-      if ( v7->InventoryItem != v23 )
+      if ( this->InventoryItem != m_eInventoryItem )
       {
-        *v6 = 1;
-        v7->IsCamera = 0;
-        v24 = UFG::UIHKWeaponAmmoWidget::GetWeaponImageInfo(v23, &v7->TexturePack, &v7->IconTexture);
-        v25 = 0;
-        if ( v24 )
-          v25 = v23;
-        v7->InventoryItem = v25;
+        *weaponChanged = 1;
+        this->IsCamera = 0;
+        WeaponImageInfo = UFG::UIHKWeaponAmmoWidget::GetWeaponImageInfo(
+                            m_eInventoryItem,
+                            &this->TexturePack,
+                            &this->IconTexture);
+        v25 = eINVENTORY_ITEM_INVALID;
+        if ( WeaponImageInfo )
+          v25 = m_eInventoryItem;
+        this->InventoryItem = v25;
       }
     }
     else
     {
-      *v6 = 1;
-      v7->IsCamera = 1;
-      v7->TexturePack = 0i64;
-      v7->InventoryItem = 36;
-      v7->IconTexture = "Icon_camera";
+      *weaponChanged = 1;
+      this->IsCamera = 1;
+      this->TexturePack = 0i64;
+      this->InventoryItem = eINVENTORY_ITEM_PISTOL_45CAL;
+      this->IconTexture = "Icon_camera";
     }
   }
-  v26 = v7->UnlimitedAmmo;
-  v27 = v10 && BYTE1(v10[14].m_pSimObject);
-  v7->UnlimitedAmmo = v27;
-  *v5 |= v27 != v26;
-  v28 = v7->IsCamera == 0;
-  v29 = v7->ClipAmmo;
-  v7->OldClips = v7->Clips;
-  v7->OldReserveAmmo = v7->ReserveAmmo;
+  UnlimitedAmmo = this->UnlimitedAmmo;
+  v27 = m_pPointer && BYTE1(m_pPointer[14].m_pSimObject);
+  this->UnlimitedAmmo = v27;
+  *ammoChanged |= v27 != UnlimitedAmmo;
+  v28 = !this->IsCamera;
+  ClipAmmo = this->ClipAmmo;
+  this->OldClips = this->Clips;
+  this->OldReserveAmmo = this->ReserveAmmo;
   if ( v28 )
   {
-    v30 = (UFG::GunComponent *)v7->mGunComponent.m_pPointer;
+    v30 = (UFG::GunComponent *)this->mGunComponent.m_pPointer;
     if ( v30 )
     {
-      v31 = UFG::GunComponent::GetTotalAmmo(v30);
-      v32 = (UFG::GunComponent *)v7->mGunComponent.m_pPointer;
-      v7->ReserveAmmo = v31;
+      TotalAmmo = UFG::GunComponent::GetTotalAmmo(v30);
+      v32 = (UFG::GunComponent *)this->mGunComponent.m_pPointer;
+      this->ReserveAmmo = TotalAmmo;
       v33 = UFG::GunComponent::GetClipAmmo(v32);
-      v34 = (UFG::GunComponent *)v7->mGunComponent.m_pPointer;
-      v7->ClipAmmo = v33;
-      v35 = UFG::GunComponent::GetClipCapacity(v34);
-      v36 = (UFG::GunComponent *)v7->mGunComponent.m_pPointer;
-      v7->ClipCapacity = v35;
-      v37 = UFG::GunComponent::GetClipsRemaining(v36);
-      v38 = v7->ClipAmmo < 0;
-      v7->Clips = v37;
+      v34 = (UFG::GunComponent *)this->mGunComponent.m_pPointer;
+      this->ClipAmmo = v33;
+      ClipCapacity = UFG::GunComponent::GetClipCapacity(v34);
+      v36 = (UFG::GunComponent *)this->mGunComponent.m_pPointer;
+      this->ClipCapacity = ClipCapacity;
+      ClipsRemaining = UFG::GunComponent::GetClipsRemaining(v36);
+      v38 = this->ClipAmmo < 0;
+      this->Clips = ClipsRemaining;
       if ( v38 )
-        v7->ClipAmmo = 0;
+        this->ClipAmmo = 0;
     }
     else
     {
-      *(_QWORD *)&v7->ClipAmmo = -1i64;
-      v7->Clips = -1;
+      *(_QWORD *)&this->ClipAmmo = -1i64;
+      this->Clips = -1;
     }
   }
   else
   {
-    if ( UFG::UIScreenManagerBase::getOverlay(
-           (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-           "Camera") )
+    if ( UFG::UIScreenManagerBase::getOverlay(UFG::UIScreenManager::s_instance, "Camera") )
     {
-      v7->ReserveAmmo = 0;
-      UFG::UIScreenManagerBase::getOverlay(
-        (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-        "Camera");
-      v7->ClipAmmo = 1;
-      v7->ClipCapacity = -1;
+      this->ReserveAmmo = 0;
+      UFG::UIScreenManagerBase::getOverlay(UFG::UIScreenManager::s_instance, "Camera");
+      this->ClipAmmo = 1;
+      this->ClipCapacity = -1;
     }
-    *v5 |= v7->ClipAmmo != v29;
+    *ammoChanged |= this->ClipAmmo != ClipAmmo;
   }
-  if ( v7->ClipAmmo != v29 || v7->Clips != v7->OldClips || v7->ReserveAmmo != v7->OldReserveAmmo || *v6 )
-    *v5 |= 1u;
-}
-  }
-  if ( v7->ClipAmmo != v29 || v7->Clips != v7->OldClips || v7->ReserveAmmo != v7->OldReserveAmmo || *v6 )
-    *v5 |= 1u;
+  if ( this->ClipAmmo != ClipAmmo
+    || this->Clips != this->OldClips
+    || this->ReserveAmmo != this->OldReserveAmmo
+    || *weaponChanged )
+  {
+    *ammoChanged |= 1u;
+  }
 }
 
 // File Line: 155
 // RVA: 0x5C8380
 void __fastcall UFG::UIHKWeaponAmmoWidget::UIHKWeaponAmmoWidget(UFG::UIHKWeaponAmmoWidget *this)
 {
-  UFG::UIHKWeaponAmmoWidget *v1; // rbx
-  UFG::qSafePointer<UFG::SimComponent,UFG::TargetingSystemBaseComponent> *v2; // [rsp+58h] [rbp+10h]
-
-  v1 = this;
   *(_WORD *)&this->mVisible = 1;
   `eh vector constructor iterator(
     this->mDisplayedWeapons,
     0x48ui64,
     1,
     (void (__fastcall *)(void *))UFG::UIWeaponAmmoData::UIWeaponAmmoData);
-  v1->mTextureRefeshFlag = 0;
-  UFG::qString::qString(&v1->mTexturePack);
-  v2 = &v1->mTargetingSystemBaseComponent;
-  v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->mTargetingSystemBaseComponent.m_pPointer = 0i64;
-  UFG::qString::qString(&v1->mLastIconTexture, &customWorldMapCaption);
-  v1->mLastClipAmmo = -1;
-  *(_DWORD *)&v1->mLastHasLowAmmo = 0x1000000;
-  v1->mVehicleReloadPromptActive = 0;
-  v1->mEquipErrorTimer = 0.0;
+  this->mTextureRefeshFlag = 0;
+  UFG::qString::qString(&this->mTexturePack);
+  this->mTargetingSystemBaseComponent.mPrev = &this->mTargetingSystemBaseComponent;
+  this->mTargetingSystemBaseComponent.mNext = &this->mTargetingSystemBaseComponent;
+  this->mTargetingSystemBaseComponent.m_pPointer = 0i64;
+  UFG::qString::qString(&this->mLastIconTexture, &customCaption);
+  this->mLastClipAmmo = -1;
+  *(_DWORD *)&this->mLastHasLowAmmo = 0x1000000;
+  this->mVehicleReloadPromptActive = 0;
+  this->mEquipErrorTimer = 0.0;
 }
 
 // File Line: 160
 // RVA: 0x5CDA30
 void __fastcall UFG::UIHKWeaponAmmoWidget::~UIHKWeaponAmmoWidget(UFG::UIHKWeaponAmmoWidget *this)
 {
-  UFG::UIHKWeaponAmmoWidget *v1; // rdi
-  char *v2; // rbx
+  char *mData; // rbx
   UFG::UIScreenTextureManager *v3; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::TargetingSystemBaseComponent> *v4; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v5; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v6; // rax
+  UFG::qSafePointer<UFG::SimComponent,UFG::TargetingSystemBaseComponent> *p_mTargetingSystemBaseComponent; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v7; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v8; // rax
 
-  v1 = this;
-  v2 = this->mTexturePack.mData;
+  mData = this->mTexturePack.mData;
   v3 = UFG::UIScreenTextureManager::Instance();
-  UFG::UIScreenTextureManager::ReleaseTexturePack(v3, v2);
-  UFG::qString::~qString(&v1->mLastIconTexture);
-  v4 = &v1->mTargetingSystemBaseComponent;
-  if ( v1->mTargetingSystemBaseComponent.m_pPointer )
+  UFG::UIScreenTextureManager::ReleaseTexturePack(v3, mData);
+  UFG::qString::~qString(&this->mLastIconTexture);
+  p_mTargetingSystemBaseComponent = &this->mTargetingSystemBaseComponent;
+  if ( this->mTargetingSystemBaseComponent.m_pPointer )
   {
-    v5 = v4->mPrev;
-    v6 = v1->mTargetingSystemBaseComponent.mNext;
-    v5->mNext = v6;
-    v6->mPrev = v5;
-    v4->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v4->mPrev;
-    v1->mTargetingSystemBaseComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->mTargetingSystemBaseComponent.mPrev;
+    mPrev = p_mTargetingSystemBaseComponent->mPrev;
+    mNext = this->mTargetingSystemBaseComponent.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mTargetingSystemBaseComponent->mPrev = p_mTargetingSystemBaseComponent;
+    this->mTargetingSystemBaseComponent.mNext = &this->mTargetingSystemBaseComponent;
   }
-  v1->mTargetingSystemBaseComponent.m_pPointer = 0i64;
-  v7 = v4->mPrev;
-  v8 = v1->mTargetingSystemBaseComponent.mNext;
+  this->mTargetingSystemBaseComponent.m_pPointer = 0i64;
+  v7 = p_mTargetingSystemBaseComponent->mPrev;
+  v8 = this->mTargetingSystemBaseComponent.mNext;
   v7->mNext = v8;
   v8->mPrev = v7;
-  v4->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v4->mPrev;
-  v1->mTargetingSystemBaseComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->mTargetingSystemBaseComponent.mPrev;
-  UFG::qString::~qString(&v1->mTexturePack);
+  p_mTargetingSystemBaseComponent->mPrev = p_mTargetingSystemBaseComponent;
+  this->mTargetingSystemBaseComponent.mNext = &this->mTargetingSystemBaseComponent;
+  UFG::qString::~qString(&this->mTexturePack);
   `eh vector destructor iterator(
-    v1->mDisplayedWeapons,
+    this->mDisplayedWeapons,
     0x48ui64,
     1,
     (void (__fastcall *)(void *))UFG::UIWeaponAmmoData::~UIWeaponAmmoData);
@@ -339,296 +296,299 @@ void __fastcall UFG::UIHKWeaponAmmoWidget::~UIHKWeaponAmmoWidget(UFG::UIHKWeapon
 
 // File Line: 166
 // RVA: 0x5E9F50
-char __fastcall UFG::UIHKWeaponAmmoWidget::GetWeaponImageInfo(UFG::eInventoryItemEnum iType, const char **szTexturePack, const char **szImageName)
+char __fastcall UFG::UIHKWeaponAmmoWidget::GetWeaponImageInfo(
+        UFG::eInventoryItemEnum iType,
+        const char **szTexturePack,
+        const char **szImageName)
 {
   char result; // al
 
   switch ( iType )
   {
-    case 1:
+    case eINVENTORY_ITEM_EMPTY_POP_CAN:
       *szImageName = "Icons_Weapon_EMPTY_POP_CAN";
       *szTexturePack = "Data\\UI\\Icons_Weapon_EMPTY_POP_CAN_TP.perm.bin";
       result = 1;
       break;
-    case 2:
-    case 3:
+    case eINVENTORY_ITEM_BOTTLED_SODA:
+    case eINVENTORY_ITEM_EMPTY_BEER_BOTTLE:
       *szImageName = "Icons_Weapon_BOTTLED_SODA";
       *szTexturePack = "Data\\UI\\Icons_Weapon_BOTTLED_SODA_TP.perm.bin";
       result = 1;
       break;
-    case 4:
+    case eINVENTORY_ITEM_BATON:
       *szImageName = "Icons_Weapon_BATON";
       *szTexturePack = "Data\\UI\\Icons_Weapon_BATON_TP.perm.bin";
       result = 1;
       break;
-    case 5:
+    case eINVENTORY_ITEM_POLICE_BATON:
       *szImageName = "Icons_Weapon_TelescopingBaton";
       *szTexturePack = "Data\\UI\\Icons_Weapon_TelescopingBaton_TP.perm.bin";
       result = 1;
       break;
-    case 6:
+    case eINVENTORY_ITEM_PICKET_SIGN:
       *szImageName = "Icons_Weapon_PicketFence";
       *szTexturePack = "Data\\UI\\Icons_Weapon_PicketFence_TP.perm.bin";
       result = 1;
       break;
-    case 7:
-    case 12:
+    case eINVENTORY_ITEM_BROOM_FULL:
+    case eINVENTORY_ITEM_BROOM_PUSH:
       *szImageName = "Icons_Weapon_BROOM";
       *szTexturePack = "Data\\UI\\Icons_Weapon_BROOM_TP.perm.bin";
       result = 1;
       break;
-    case 8:
+    case eINVENTORY_ITEM_CLEAVER:
       *szImageName = "Icons_Weapon_CLEAVER";
       *szTexturePack = "Data\\UI\\Icons_Weapon_CLEAVER_TP.perm.bin";
       result = 1;
       break;
-    case 9:
+    case eINVENTORY_ITEM_KNIFE:
       *szImageName = "Icons_Weapon_KNIFE";
       *szTexturePack = "Data\\UI\\Icons_Weapon_KNIFE_TP.perm.bin";
       result = 1;
       break;
-    case 10:
+    case eINVENTORY_ITEM_STORM_SWORD:
       *szImageName = "Icons_Weapon_STORMSWORD";
       *szTexturePack = "Data\\UI\\Icons_Weapon_STORMSWORD_TP.perm.bin";
       result = 1;
       break;
-    case 11:
+    case eINVENTORY_ITEM_PEACHWOOD_SWORD:
       *szImageName = "Icons_Weapon_STRAIGHTSWORD";
       *szTexturePack = "Data\\UI\\Icons_Weapon_STRAIGHTSWORD_TP.perm.bin";
       result = 1;
       break;
-    case 14:
+    case eINVENTORY_ITEM_UMBRELLA:
       *szImageName = "Icons_Weapon_UMBRELLA";
       *szTexturePack = "Data\\UI\\Icons_Weapon_UMBRELLA_TP.perm.bin";
       result = 1;
       break;
-    case 17:
+    case eINVENTORY_ITEM_SHOPPING_BAG:
       *szImageName = "Icons_Weapon_SHOPPINGBAG";
       *szTexturePack = "Data\\UI\\Icons_Weapon_SHOPPINGBAG.perm.bin";
       result = 1;
       break;
-    case 32:
+    case eINVENTORY_ITEM_PISTOL_9MM:
       *szImageName = "Icons_Weapon_9MM";
       *szTexturePack = "Data\\UI\\Icons_Weapon_9MM_TP.perm.bin";
       result = 1;
       break;
-    case 34:
+    case eINVENTORY_ITEM_PISTOL_SERVICE:
       *szImageName = "Icons_Weapon_QSZ92";
       *szTexturePack = "Data\\UI\\Icons_Weapon_QSZ92_TP.perm.bin";
       result = 1;
       break;
-    case 36:
+    case eINVENTORY_ITEM_PISTOL_45CAL:
       *szImageName = "Icons_Weapon_45CAL";
       *szTexturePack = "Data\\UI\\Icons_Weapon_45CAL_TP.perm.bin";
       result = 1;
       break;
-    case 37:
+    case eINVENTORY_ITEM_PISTOL_45CAL_TAC:
       *szImageName = "Icons_Weapon_45CAL02";
       *szTexturePack = "Data\\UI\\Icons_Weapon_45CAL02_TP.perm.bin";
       result = 1;
       break;
-    case 39:
+    case eINVENTORY_ITEM_PISTOL_HITMAN:
       *szImageName = "Icons_Weapon_SILVERBALLER_PISTOL";
       *szTexturePack = "Data\\UI\\Icons_Weapon_SILVERBALLER_PISTOL_TP.perm.bin";
       result = 1;
       break;
-    case 40:
+    case eINVENTORY_ITEM_PISTOL_JUST_CAUSE:
       *szImageName = "Icons_Weapon_RICO_PISTOL";
       *szTexturePack = "Data\\UI\\Icons_Weapon_RICO_PISTOL_TP.perm.bin";
       result = 1;
       break;
-    case 41:
-    case 43:
+    case eINVENTORY_ITEM_RIFLE_ASSAUL_TAC:
+    case eINVENTORY_ITEM_RIFLE_ASSAULT_DLC:
       *szImageName = "Icons_Weapon_ACT02";
       *szTexturePack = "Data\\UI\\Icons_Weapon_ACT02_TP.perm.bin";
       result = 1;
       break;
-    case 42:
+    case eINVENTORY_ITEM_RIFLE_ASSAULT:
       *szImageName = "Icons_Weapon_ACT";
       *szTexturePack = "Data\\UI\\Icons_Weapon_ACT_TP.perm.bin";
       result = 1;
       break;
-    case 45:
+    case eINVENTORY_ITEM_RIFLE_DEUS_EX:
       *szImageName = "Icons_Weapon_COMBAT_RIFLE";
       *szTexturePack = "Data\\UI\\Icons_Weapon_COMBAT_RIFLE_TP.perm.bin";
       result = 1;
       break;
-    case 46:
+    case eINVENTORY_ITEM_RIFLE_GRENADE:
       *szImageName = "Icons_Weapon_ARGL";
       *szTexturePack = "Data\\UI\\Icons_Weapon_ARGL_TP.perm.bin";
       result = 1;
       break;
-    case 49:
+    case eINVENTORY_ITEM_RIFLE_TEAR_GAS:
       *szImageName = "Icons_Weapon_TearGas";
       *szTexturePack = "Data\\UI\\Icons_Weapon_TearGas_TP.perm.bin";
       result = 1;
       break;
-    case 50:
+    case eINVENTORY_ITEM_SHOTGUN_PUMP:
       *szImageName = "Icons_Weapon_PUMPS";
       *szTexturePack = "Data\\UI\\Icons_Weapon_PUMPS_TP.perm.bin";
       result = 1;
       break;
-    case 52:
+    case eINVENTORY_ITEM_SHOTGUN_ANTI_TAC:
       *szImageName = "Icons_Weapon_ANTIRIOT";
       *szTexturePack = "Data\\UI\\Icons_Weapon_ANTIRIOT_TP.perm.bin";
       result = 1;
       break;
-    case 53:
+    case eINVENTORY_ITEM_SHOTGUN_ANTIRIOT:
       *szImageName = "Icons_Weapon_ANTIRIOTNOLIGHT";
       *szTexturePack = "Data\\UI\\Icons_Weapon_ANTIRIOTNOLIGHT_TP.perm.bin";
       result = 1;
       break;
-    case 55:
+    case eINVENTORY_ITEM_SMG_MACHINE_PISTOL:
       *szImageName = "Icons_Weapon_MP";
       *szTexturePack = "Data\\UI\\Icons_Weapon_MP_TP.perm.bin";
       result = 1;
       break;
-    case 57:
+    case eINVENTORY_ITEM_SMG_45CAL_TACLIG:
       *szImageName = "Icons_Weapon_SMG";
       *szTexturePack = "Data\\UI\\Icons_Weapon_SMG_TP.perm.bin";
       result = 1;
       break;
-    case 58:
-    case 59:
+    case eINVENTORY_ITEM_SMG_45CAL_GOLD:
+    case eINVENTORY_ITEM_SMG_45CAL:
       *szImageName = "Icons_Weapon_SMG02";
       *szTexturePack = "Data\\UI\\Icons_Weapon_SMG02_TP.perm.bin";
       result = 1;
       break;
-    case 62:
+    case eINVENTORY_ITEM_CAR_TURRET:
       *szImageName = "Icons_Weapon_TT";
       *szTexturePack = "Data\\UI\\Icons_Weapon_TT_TP.perm.bin";
       result = 1;
       break;
-    case 65:
+    case eINVENTORY_ITEM_CROWBAR:
       *szImageName = "Icons_Weapon_CROWBAR";
       *szTexturePack = "Data\\UI\\Icons_Weapon_CROWBAR_TP.perm.bin";
       result = 1;
       break;
-    case 66:
+    case eINVENTORY_ITEM_TIREIRON:
       *szImageName = "Icons_Weapon_TIREIRON";
       *szTexturePack = "Data\\UI\\Icons_Weapon_TIREIRON_TP.perm.bin";
       result = 1;
       break;
-    case 67:
-    case 124:
-    case 125:
-    case 139:
+    case eINVENTORY_ITEM_WOODENCLUB:
+    case eINVENTORY_ITEM_STICKTREE:
+    case eINVENTORY_ITEM_STICKBAMBOO:
+    case eINVENTORY_ITEM_BROOMWEAPON:
       *szImageName = "Icons_Weapon_STICK";
       *szTexturePack = "Data\\UI\\Icons_Weapon_STICK_TP.perm.bin";
       result = 1;
       break;
-    case 70:
+    case eINVENTORY_ITEM_GROCERYBAG:
       *szImageName = "Icons_Weapon_GROCERYBAG";
       *szTexturePack = "Data\\UI\\Icons_Weapon_GROCERYBAG.perm.bin";
       result = 1;
       break;
-    case 72:
+    case eINVENTORY_ITEM_GAMEGUITAR:
       *szImageName = "Icons_Weapon_GAMEGUITAR";
       *szTexturePack = "Data\\UI\\Icons_Weapon_GAMEGUITAR_TP.perm.bin";
       result = 1;
       break;
-    case 73:
+    case eINVENTORY_ITEM_SHOVEL:
       *szImageName = "Icons_Weapon_SHOVEL";
       *szTexturePack = "Data\\UI\\Icons_Weapon_SHOVEL_TP.perm.bin";
       result = 1;
       break;
-    case 77:
+    case eINVENTORY_ITEM_PURSE:
       *szImageName = "Icons_Weapon_PURSE";
       *szTexturePack = "Data\\UI\\Icons_Weapon_PURSE_TP.perm.bin";
       result = 1;
       break;
-    case 78:
+    case eINVENTORY_ITEM_PURSEHAND:
       *szImageName = "Icons_Weapon_HANDPURSE";
       *szTexturePack = "Data\\UI\\Icons_Weapon_HANDPURSE.perm.bin";
       result = 1;
       break;
-    case 79:
+    case eINVENTORY_ITEM_BRIEFCASE:
       *szImageName = "Icons_Weapon_BRIEFCASE";
       *szTexturePack = "Data\\UI\\Icons_Weapon_BRIEFCASE_TP.perm.bin";
       result = 1;
       break;
-    case 113:
+    case eINVENTORY_ITEM_PAINTCAN:
       *szImageName = "Icons_Weapon_PAINTCAN";
       *szTexturePack = "Data\\UI\\Icons_Weapon_PAINTCAN.perm.bin";
       result = 1;
       break;
-    case 114:
+    case eINVENTORY_ITEM_HAMMER:
       *szImageName = "Icons_Weapon_HAMMER";
       *szTexturePack = "Data\\UI\\Icons_Weapon_HAMMER_TP.perm.bin";
       result = 1;
       break;
-    case 121:
+    case eINVENTORY_ITEM_CANEWALKING:
       *szImageName = "Icons_Weapon_CANEWALKING";
       *szTexturePack = "Data\\UI\\Icons_Weapon_CANEWALKING_TP.perm.bin";
       result = 1;
       break;
-    case 122:
+    case eINVENTORY_ITEM_SCRUBBRUSH:
       *szImageName = "Icons_Weapon_SCRUBBRUSH";
       *szTexturePack = "Data\\UI\\Icons_Weapon_SCRUBBRUSH_TP.perm.bin";
       result = 1;
       break;
-    case 123:
+    case eINVENTORY_ITEM_SQUEEGEE:
       *szImageName = "Icons_Weapon_SQUEEGEE";
       *szTexturePack = "Data\\UI\\Icons_Weapon_SQUEEGEE_TP.perm.bin";
       result = 1;
       break;
-    case 133:
+    case eINVENTORY_ITEM_COOKINGPAN:
       *szImageName = "Icons_Weapon_COOKINGPAN";
       *szTexturePack = "Data\\UI\\Icons_Weapon_COOKINGPAN.perm.bin";
       result = 1;
       break;
-    case 135:
+    case eINVENTORY_ITEM_WRENCH:
       *szImageName = "Icons_Weapon_WRENCH";
       *szTexturePack = "Data\\UI\\Icons_Weapon_WRENCH_TP.perm.bin";
       result = 1;
       break;
-    case 144:
+    case eINVENTORY_ITEM_MACHETETONG:
       *szImageName = "Icons_Weapon_MACHETETONG";
       *szTexturePack = "Data\\UI\\Icons_Weapon_MACHETETONG_TP.perm.bin";
       result = 1;
       break;
-    case 145:
+    case eINVENTORY_ITEM_CELLPHONE:
       *szImageName = "Icons_Weapon_CELLPHONE";
       *szTexturePack = "Data\\UI\\Icons_Weapon_CELLPHONE.perm.bin";
       result = 1;
       break;
-    case 146:
+    case eINVENTORY_ITEM_COOKINGSPOON:
       *szImageName = "Icons_Weapon_COOKINGSPOON";
       *szTexturePack = "Data\\UI\\Icons_Weapon_COOKINGSPOON.perm.bin";
       result = 1;
       break;
-    case 147:
+    case eINVENTORY_ITEM_COOKINGWOK:
       *szImageName = "Icons_Weapon_WOK";
       *szTexturePack = "Data\\UI\\Icons_Weapon_WOK.perm.bin";
       result = 1;
       break;
-    case 148:
+    case eINVENTORY_ITEM_BULLPENIS:
       *szImageName = "Icons_Weapon_BULLPENIS";
       *szTexturePack = "Data\\UI\\Icons_Weapon_BULLPENIS_TP.perm.bin";
       result = 1;
       break;
-    case 149:
+    case eINVENTORY_ITEM_HANDGRINDER:
       *szImageName = "Icons_Weapon_HANDGRINDER";
       *szTexturePack = "Data\\UI\\Icons_Weapon_HANDGRINDER_TP.perm.bin";
       result = 1;
       break;
-    case 151:
+    case eINVENTORY_ITEM_FISHWRAPPED:
       *szImageName = "Icons_Weapon_FISHWRAPPED";
       *szTexturePack = "Data\\UI\\Icons_Weapon_FISHWRAPPED_TP.perm.bin";
       result = 1;
       break;
-    case 154:
+    case eINVENTORY_ITEM_FIREEXTINGUISHER:
       *szImageName = "Icons_Weapon_FIREEXTINGUISHER";
       *szTexturePack = "Data\\UI\\Icons_Weapon_FIREEXTINGUISHER.perm.bin";
       result = 1;
       break;
-    case 155:
-    case 156:
+    case eINVENTORY_ITEM_PISTOL_50CAL_GOL:
+    case eINVENTORY_ITEM_PISTOL_50CAL_SIL:
       *szImageName = "Icons_Weapon_GOLD50";
       *szTexturePack = "Data\\UI\\Icons_Weapon_GOLD50_TP.perm.bin";
       result = 1;
       break;
-    case 160:
+    case eINVENTORY_ITEM_DUFFLEBAG:
       *szImageName = "Icons_Weapon_DUFFLEBAG";
       *szTexturePack = "Data\\UI\\Icons_Weapon_DUFFLEBAG.perm.bin";
       result = 1;
@@ -644,187 +604,159 @@ char __fastcall UFG::UIHKWeaponAmmoWidget::GetWeaponImageInfo(UFG::eInventoryIte
 
 // File Line: 469
 // RVA: 0x618760
-void __fastcall UFG::UIHKWeaponAmmoWidget::Update(UFG::UIHKWeaponAmmoWidget *this, UFG::UIScreen *screen, float elapsed)
+void __fastcall UFG::UIHKWeaponAmmoWidget::Update(
+        UFG::UIHKWeaponAmmoWidget *this,
+        UFG::UIScreen *screen,
+        float elapsed)
 {
-  UFG::UIScreen *v3; // rbp
-  UFG::UIHKWeaponAmmoWidget *v4; // rbx
-  Scaleform::GFx::Movie *v5; // rsi
-  unsigned __int16 v6; // dx
-  UFG::SimComponent *v7; // rax
-  float v8; // xmm0_4
+  Scaleform::GFx::Movie *pObject; // rsi
+  signed __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rax
+  float mEquipErrorTimer; // xmm0_4
   float v9; // xmm0_4
   bool v10; // di
   UFG::SimObject *v11; // rsi
-  bool v12; // r14
+  bool IsPlayerInVehicle; // r14
   bool v13; // si
   bool v14; // cl
   UFG::UIHKScreenHud *v15; // rax
-  int v16; // er9
-  const char *v17; // r8
+  int ClipAmmo; // r9d
+  char *IconTexture; // r8
   UFG::SimObjectProp *v18; // rcx
-  unsigned __int16 v19; // dx
-  UFG::SimObjectWeaponPropertiesComponent *v20; // rax
-  bool v21; // si
-  UFG::SimComponent *v22; // rax
-  UFG::InputActionData *v23; // rcx
-  Scaleform::GFx::Value value; // [rsp+38h] [rbp-60h]
-  bool weaponChanged; // [rsp+A8h] [rbp+10h]
-  bool ammoChanged; // [rsp+B8h] [rbp+20h]
+  __int16 v19; // dx
+  UFG::SimComponent *ComponentOfType; // rax
+  UFG::InputActionData *v21; // rcx
+  Scaleform::GFx::Value value; // [rsp+38h] [rbp-60h] BYREF
+  bool weaponChanged; // [rsp+A8h] [rbp+10h] BYREF
+  bool ammoChanged; // [rsp+B8h] [rbp+20h] BYREF
 
   if ( !screen )
     return;
-  v3 = screen;
-  v4 = this;
-  v5 = screen->mRenderable->m_movie.pObject;
-  if ( !v5 )
+  pObject = screen->mRenderable->m_movie.pObject;
+  if ( !pObject )
     return;
   if ( !this->mTargetingSystemBaseComponent.m_pPointer )
   {
     if ( !LocalPlayer )
       return;
-    v6 = LocalPlayer->m_Flags;
-    if ( (v6 >> 14) & 1 )
+    m_Flags = LocalPlayer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v7 = LocalPlayer->m_Components.p[20].m_pComponent;
+      m_pComponent = LocalPlayer->m_Components.p[20].m_pComponent;
     }
-    else if ( (v6 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v6 >> 13) & 1 )
-        v7 = UFG::SimObjectGame::GetComponentOfTypeHK(
-               (UFG::SimObjectGame *)&LocalPlayer->vfptr,
-               UFG::TargetingSystemBaseComponent::_TypeUID);
-      else
-        v7 = (v6 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                (UFG::SimObjectGame *)&LocalPlayer->vfptr,
-                                UFG::TargetingSystemBaseComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(
-                                                                                 (UFG::SimObject *)&LocalPlayer->vfptr,
-                                                                                 UFG::TargetingSystemBaseComponent::_TypeUID);
+      m_pComponent = (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+                   ? UFG::SimObjectGame::GetComponentOfTypeHK(LocalPlayer, UFG::TargetingSystemBaseComponent::_TypeUID)
+                   : UFG::SimObject::GetComponentOfType(LocalPlayer, UFG::TargetingSystemBaseComponent::_TypeUID);
     }
     else
     {
-      v7 = LocalPlayer->m_Components.p[20].m_pComponent;
+      m_pComponent = LocalPlayer->m_Components.p[20].m_pComponent;
     }
     UFG::qSafePointer<Creature,Creature>::operator=(
-      (UFG::qSafePointer<UFG::SimComponent,UFG::SimComponent> *)&v4->mTargetingSystemBaseComponent,
-      v7);
-    if ( !v4->mTargetingSystemBaseComponent.m_pPointer )
+      (UFG::qSafePointer<UFG::SimComponent,UFG::SimComponent> *)&this->mTargetingSystemBaseComponent,
+      m_pComponent);
+    if ( !this->mTargetingSystemBaseComponent.m_pPointer )
       return;
   }
-  v8 = v4->mEquipErrorTimer;
-  if ( v8 > 0.0 )
+  mEquipErrorTimer = this->mEquipErrorTimer;
+  if ( mEquipErrorTimer > 0.0 )
   {
-    v9 = v8 - elapsed;
-    v4->mEquipErrorTimer = v9;
+    v9 = mEquipErrorTimer - elapsed;
+    this->mEquipErrorTimer = v9;
     if ( v9 <= 0.0 )
-      UFG::UIHKWeaponAmmoWidget::Flash_EquipError_SetVisible(v4, v3, 0);
+      UFG::UIHKWeaponAmmoWidget::Flash_EquipError_SetVisible(this, screen, 0);
   }
-  v10 = v4->mVisible && !UFG::UIHKScreenHud::RacePosition->mVisible;
-  if ( v4->mVisibleChanged )
+  v10 = this->mVisible && !UFG::UIHKScreenHud::RacePosition->mVisible;
+  if ( this->mVisibleChanged )
   {
-    v4->mVisibleChanged = 0;
-LABEL_26:
-    value.pObjectInterface = 0i64;
-    value.Type = 2;
-    value.mValue.BValue = v10;
-    Scaleform::GFx::Movie::SetVariable(v5, "mc_WeaponSwitcher._visible", &value, 1i64);
-    if ( ((unsigned int)value.Type >> 6) & 1 )
-    {
-      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
-        value.pObjectInterface,
-        &value,
-        *(_QWORD *)&value.mValue.NValue);
-      value.pObjectInterface = 0i64;
-    }
-    value.Type = 0;
-    goto LABEL_29;
+    this->mVisibleChanged = 0;
   }
-  if ( v10 != v4->mVisible )
-    goto LABEL_26;
-LABEL_29:
-  if ( !v4->mVisible )
+  else if ( v10 == this->mVisible )
+  {
+    goto LABEL_28;
+  }
+  value.pObjectInterface = 0i64;
+  value.Type = VT_Boolean;
+  value.mValue.BValue = v10;
+  Scaleform::GFx::Movie::SetVariable(pObject, "mc_WeaponSwitcher._visible", &value, 1i64);
+  if ( (value.Type & 0x40) != 0 )
+  {
+    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&value.pObjectInterface->vfptr->gap8[8])(
+      value.pObjectInterface,
+      &value,
+      value.mValue);
+    value.pObjectInterface = 0i64;
+  }
+  value.Type = VT_Undefined;
+LABEL_28:
+  if ( !this->mVisible )
     return;
   v11 = *(UFG::SimObject **)(56i64
-                           * *(unsigned __int8 *)(*(_QWORD *)&v4->mTargetingSystemBaseComponent.m_pPointer[1].m_Flags
+                           * *(unsigned __int8 *)(*(_QWORD *)&this->mTargetingSystemBaseComponent.m_pPointer[1].m_Flags
                                                 + 25i64)
-                           + *(_QWORD *)&v4->mTargetingSystemBaseComponent.m_pPointer[1].m_TypeUID
+                           + *(_QWORD *)&this->mTargetingSystemBaseComponent.m_pPointer[1].m_TypeUID
                            + 40);
   if ( !v11 )
   {
-    v4->mDisplayedWeapons[0].InventoryItem = 0;
+    this->mDisplayedWeapons[0].InventoryItem = eINVENTORY_ITEM_INVALID;
     v18 = *(UFG::SimObjectProp **)(56i64
-                                 * *(unsigned __int8 *)(*(_QWORD *)&v4->mTargetingSystemBaseComponent.m_pPointer[1].m_Flags
+                                 * *(unsigned __int8 *)(*(_QWORD *)&this->mTargetingSystemBaseComponent.m_pPointer[1].m_Flags
                                                       + 50i64)
-                                 + *(_QWORD *)&v4->mTargetingSystemBaseComponent.m_pPointer[1].m_TypeUID
+                                 + *(_QWORD *)&this->mTargetingSystemBaseComponent.m_pPointer[1].m_TypeUID
                                  + 40);
-    if ( v18 )
+    if ( !v18 )
     {
-      v19 = v18->m_Flags;
-      if ( (v19 >> 14) & 1 )
+LABEL_54:
+      ClipAmmo = -1;
+      IconTexture = &customCaption;
+      goto LABEL_55;
+    }
+    v19 = v18->m_Flags;
+    if ( (v19 & 0x4000) != 0 || v19 < 0 )
+      goto LABEL_46;
+    if ( (v19 & 0x2000) != 0 )
+    {
+      UFG::SimObjectProp::GetComponent<UFG::SimObjectWeaponPropertiesComponent>(v18);
+      goto LABEL_48;
+    }
+    if ( (v19 & 0x1000) != 0 )
+LABEL_46:
+      UFG::SimObjectGame::GetComponentOfTypeHK(v18, UFG::SimObjectWeaponPropertiesComponent::_TypeUID);
+    else
+      UFG::SimObject::GetComponentOfType(v18, UFG::SimObjectWeaponPropertiesComponent::_TypeUID);
+LABEL_48:
+    if ( LocalPlayer )
+    {
+      ComponentOfType = UFG::SimObject::GetComponentOfType(
+                          LocalPlayer,
+                          UFG::SimObjectCharacterPropertiesComponent::_TypeUID);
+      if ( !ComponentOfType || ((__int64)ComponentOfType[3].m_BoundComponentHandles.mNode.mPrev & 0x200i64) == 0 )
       {
-        v20 = (UFG::SimObjectWeaponPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                           (UFG::SimObjectGame *)&v18->vfptr,
-                                                           UFG::SimObjectWeaponPropertiesComponent::_TypeUID);
-      }
-      else if ( (v19 & 0x8000u) == 0 )
-      {
-        if ( (v19 >> 13) & 1 )
+        v21 = UFG::ActionDef_Inventory.mDataPerController[UFG::gActiveControllerNum];
+        if ( v21 )
         {
-          v20 = UFG::SimObjectProp::GetComponent<UFG::SimObjectWeaponPropertiesComponent>(v18);
-        }
-        else if ( (v19 >> 12) & 1 )
-        {
-          v20 = (UFG::SimObjectWeaponPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                             (UFG::SimObjectGame *)&v18->vfptr,
-                                                             UFG::SimObjectWeaponPropertiesComponent::_TypeUID);
-        }
-        else
-        {
-          v20 = (UFG::SimObjectWeaponPropertiesComponent *)UFG::SimObject::GetComponentOfType(
-                                                             (UFG::SimObject *)&v18->vfptr,
-                                                             UFG::SimObjectWeaponPropertiesComponent::_TypeUID);
-        }
-      }
-      else
-      {
-        v20 = (UFG::SimObjectWeaponPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                           (UFG::SimObjectGame *)&v18->vfptr,
-                                                           UFG::SimObjectWeaponPropertiesComponent::_TypeUID);
-      }
-      if ( v20 )
-        v21 = v20->mWeaponTypeInfo->mFireModes[v20->mFireMode]->mProjectileSpawnBoneName.mUID == UFG::gNullQSymbolUC.mUID;
-      if ( LocalPlayer )
-      {
-        v22 = UFG::SimObject::GetComponentOfType(
-                (UFG::SimObject *)&LocalPlayer->vfptr,
-                UFG::SimObjectCharacterPropertiesComponent::_TypeUID);
-        if ( !v22 || !(((unsigned __int64)LODWORD(v22[3].m_BoundComponentHandles.mNode.mPrev) >> 9) & 1) )
-        {
-          v23 = UFG::ActionDef_Inventory.mDataPerController[UFG::gActiveControllerNum];
-          if ( v23 )
+          if ( v21->mActionTrue )
           {
-            if ( v23->mActionTrue )
-            {
-              v4->mEquipErrorTimer = 2.0;
-              UFG::UIHKWeaponAmmoWidget::Flash_EquipError_SetVisible(v4, v3, 1);
-            }
+            this->mEquipErrorTimer = 2.0;
+            UFG::UIHKWeaponAmmoWidget::Flash_EquipError_SetVisible(this, screen, 1);
           }
         }
       }
     }
-    v16 = -1;
-    v17 = &customWorldMapCaption;
-    goto LABEL_59;
+    goto LABEL_54;
   }
   weaponChanged = 0;
   ammoChanged = 0;
-  v12 = UFG::UI::IsPlayerInVehicle();
-  UFG::UIWeaponAmmoData::Update(v4->mDisplayedWeapons, v11, &weaponChanged, &ammoChanged);
-  v13 = v12 != v4->mVehicleReloadPromptActive || ammoChanged;
+  IsPlayerInVehicle = UFG::UI::IsPlayerInVehicle();
+  UFG::UIWeaponAmmoData::Update(this->mDisplayedWeapons, v11, &weaponChanged, &ammoChanged);
+  v13 = IsPlayerInVehicle != this->mVehicleReloadPromptActive || ammoChanged;
   if ( weaponChanged )
-    UFG::UIHKWeaponAmmoWidget::LoadWeaponTexture(v4, v4->mDisplayedWeapons[0].TexturePack);
+    UFG::UIHKWeaponAmmoWidget::LoadWeaponTexture(this, this->mDisplayedWeapons[0].TexturePack);
   if ( v13 )
   {
-    v14 = v4->mDisplayedWeapons[0].ClipAmmo > 0;
+    v14 = this->mDisplayedWeapons[0].ClipAmmo > 0;
     v15 = UFG::UIHKScreenHud::mInstance;
     if ( UFG::UIHKScreenHud::mInstance )
     {
@@ -834,15 +766,15 @@ LABEL_29:
         *(_WORD *)&v15->Reticle.mChanged = 257;
       }
     }
-    UFG::UIHKWeaponAmmoWidget::Flash_SetAmmo(v4, v3, v4->mDisplayedWeapons, weaponChanged);
+    UFG::UIHKWeaponAmmoWidget::Flash_SetAmmo(this, screen, this->mDisplayedWeapons, weaponChanged);
   }
-  if ( v4->mTextureRefeshFlag )
+  if ( this->mTextureRefeshFlag )
   {
-    v4->mTextureRefeshFlag = 0;
-    v16 = v4->mDisplayedWeapons[0].ClipAmmo;
-    v17 = v4->mDisplayedWeapons[0].IconTexture;
-LABEL_59:
-    UFG::UIHKWeaponAmmoWidget::Flash_SetWeapon(v4, v3, v17, v16);
+    this->mTextureRefeshFlag = 0;
+    ClipAmmo = this->mDisplayedWeapons[0].ClipAmmo;
+    IconTexture = (char *)this->mDisplayedWeapons[0].IconTexture;
+LABEL_55:
+    UFG::UIHKWeaponAmmoWidget::Flash_SetWeapon(this, screen, IconTexture, ClipAmmo);
   }
 }
 
@@ -858,123 +790,117 @@ void __fastcall UFG::UIHKWeaponAmmoWidget::TextureLoadedCallback(UFG::DataStream
 // RVA: 0x5F1B80
 void __fastcall UFG::UIHKWeaponAmmoWidget::LoadWeaponTexture(UFG::UIHKWeaponAmmoWidget *this, const char *texturePack)
 {
-  char *v2; // rbx
-  const char *v3; // rsi
-  UFG::UIHKWeaponAmmoWidget *v4; // rdi
+  char *mData; // rbx
   UFG::UIScreenTextureManager *v5; // rax
-  const char *v6; // rbx
+  char *v6; // rbx
   UFG::UIScreenTextureManager *v7; // rax
 
-  v2 = this->mTexturePack.mData;
-  v3 = texturePack;
-  v4 = this;
+  mData = this->mTexturePack.mData;
   v5 = UFG::UIScreenTextureManager::Instance();
-  UFG::UIScreenTextureManager::ReleaseTexturePack(v5, v2);
-  if ( v3 )
+  UFG::UIScreenTextureManager::ReleaseTexturePack(v5, mData);
+  if ( texturePack )
   {
-    UFG::qString::Set(&v4->mTexturePack, v3);
-    v6 = v4->mTexturePack.mData;
+    UFG::qString::Set(&this->mTexturePack, texturePack);
+    v6 = this->mTexturePack.mData;
     v7 = UFG::UIScreenTextureManager::Instance();
     UFG::UIScreenTextureManager::QueueTexturePackLoad(
       v7,
       v6,
       DEFAULT_PRIORITY,
-      UFG::UIHKWeaponAmmoWidget::TextureLoadedCallback,
+      (UFG::qReflectInventoryBase *)UFG::UIHKWeaponAmmoWidget::TextureLoadedCallback,
       0i64);
   }
 }
 
 // File Line: 607
 // RVA: 0x5DF200
-void __fastcall UFG::UIHKWeaponAmmoWidget::Flash_SetAmmo(UFG::UIHKWeaponAmmoWidget *this, UFG::UIScreen *screen, UFG::UIWeaponAmmoData *data, bool weaponChanged)
+void __fastcall UFG::UIHKWeaponAmmoWidget::Flash_SetAmmo(
+        UFG::UIHKWeaponAmmoWidget *this,
+        UFG::UIScreen *screen,
+        UFG::UIWeaponAmmoData *data,
+        char weaponChanged)
 {
-  char v4; // r13
-  UFG::UIWeaponAmmoData *v5; // rdi
-  UFG::UIHKWeaponAmmoWidget *v6; // r14
-  Scaleform::GFx::Movie *v7; // rsi
-  bool v8; // bl
+  Scaleform::GFx::Movie *pObject; // rsi
+  bool UnlimitedAmmo; // bl
   bool v9; // r15
   bool v10; // r12
   bool v11; // bl
   char *v12; // rbx
   unsigned int v13; // eax
-  UFG::UIGfxTranslator *v14; // rcx
+  UFG::UIGfxTranslator *m_translator; // rcx
   const char *v15; // rbx
   const char *v16; // r13
-  double v17; // xmm6_8
-  double v18; // xmm6_8
+  Scaleform::GFx::Value::ValueUnion v17; // xmm6_8
+  Scaleform::GFx::Value::ValueUnion v18; // xmm6_8
   char v19; // cl
-  int v20; // ebx
-  int v21; // eax
-  int v22; // ebx
-  double v23; // xmm6_8
-  Scaleform::GFx::Value value; // [rsp+30h] [rbp-A8h]
-  char ptr; // [rsp+60h] [rbp-78h]
-  __int64 v26; // [rsp+68h] [rbp-70h]
-  __int64 v27; // [rsp+70h] [rbp-68h]
-  char dest[4]; // [rsp+78h] [rbp-60h]
+  int ClipAmmo; // ebx
+  int mLastClipAmmo; // ebx
+  double v22; // xmm6_8
+  Scaleform::GFx::Value value; // [rsp+30h] [rbp-A8h] BYREF
+  Scaleform::GFx::Value ptr[4]; // [rsp+60h] [rbp-78h] BYREF
   char vars0; // [rsp+1D0h] [rbp+F8h]
   void *retaddr; // [rsp+1D8h] [rbp+100h]
 
-  v26 = -2i64;
-  v4 = weaponChanged;
-  v5 = data;
-  v6 = this;
-  v7 = screen->mRenderable->m_movie.pObject;
+  ptr[0].pNext = (Scaleform::GFx::Value *)-2i64;
+  pObject = screen->mRenderable->m_movie.pObject;
   value.pObjectInterface = 0i64;
-  value.Type = 0;
-  v8 = data->UnlimitedAmmo;
-  value.Type = 2;
-  value.mValue.BValue = v8;
-  Scaleform::GFx::Movie::SetVariable(v7, "mc_WeaponSwitcher.mc_equipped.mc_ammo.mc_infinity._visible", &value, 1i64);
-  v9 = !v5->UnlimitedAmmo && (float)((float)v5->ClipAmmo / (float)v5->ClipCapacity) <= 0.2;
-  v10 = v5->Clips > 0;
-  if ( v5->ClipAmmo != v6->mLastClipAmmo
-    || v9 != v6->mLastHasLowAmmo
-    || v10 != v6->mLastHasReserve
-    || v5->ReserveAmmo != v5->OldReserveAmmo )
+  value.Type = VT_Undefined;
+  UnlimitedAmmo = data->UnlimitedAmmo;
+  value.Type = VT_Boolean;
+  value.mValue.BValue = UnlimitedAmmo;
+  Scaleform::GFx::Movie::SetVariable(
+    pObject,
+    "mc_WeaponSwitcher.mc_equipped.mc_ammo.mc_infinity._visible",
+    &value,
+    1i64);
+  v9 = !data->UnlimitedAmmo && (float)((float)data->ClipAmmo / (float)data->ClipCapacity) <= 0.2;
+  v10 = data->Clips > 0;
+  if ( data->ClipAmmo != this->mLastClipAmmo
+    || v9 != this->mLastHasLowAmmo
+    || v10 != this->mLastHasReserve
+    || data->ReserveAmmo != data->OldReserveAmmo )
   {
-    v11 = v9 && v10;
-    if ( ((unsigned int)value.Type >> 6) & 1 )
+    v11 = v9 && data->Clips > 0;
+    if ( (value.Type & 0x40) != 0 )
     {
-      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
+      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&value.pObjectInterface->vfptr->gap8[8])(
         value.pObjectInterface,
         &value,
-        *(_QWORD *)&value.mValue.NValue);
+        value.mValue);
       value.pObjectInterface = 0i64;
     }
-    value.Type = 2;
+    value.Type = VT_Boolean;
     value.mValue.BValue = v11;
-    Scaleform::GFx::Movie::SetVariable(v7, "mc_WeaponSwitcher.mc_equipped.mc_reload._visible", &value, 1i64);
-    if ( v11 && (_BYTE)retaddr != v6->mVehicleReloadPromptActive )
+    Scaleform::GFx::Movie::SetVariable(pObject, "mc_WeaponSwitcher.mc_equipped.mc_reload._visible", &value, 1i64);
+    if ( v11 && (_BYTE)retaddr != this->mVehicleReloadPromptActive )
     {
-      v6->mVehicleReloadPromptActive = (char)retaddr;
+      this->mVehicleReloadPromptActive = (char)retaddr;
       if ( (_BYTE)retaddr )
       {
         if ( UFG::UI::IsPlayerVehiclePassenger() )
           v12 = (char *)UFG::UI::LocalizeText("$HUD_HELP_COMBAT_RELOAD_ALT");
         else
-          v12 = &customWorldMapCaption;
+          v12 = &customCaption;
       }
       else
       {
-        v13 = UFG::qStringHashUpper32("HUD_HELP_COMBAT_RELOAD", 0xFFFFFFFF);
-        v14 = UFG::UIScreenManager::s_instance->m_translator;
-        if ( !v14 || (v12 = (char *)v14->vfptr[5].__vecDelDtor((Scaleform::RefCountImplCore *)&v14->vfptr, v13)) == 0i64 )
+        v13 = UFG::qStringHashUpper32("HUD_HELP_COMBAT_RELOAD", -1);
+        m_translator = UFG::UIScreenManager::s_instance->m_translator;
+        if ( !m_translator || (v12 = (char *)m_translator->vfptr[5].__vecDelDtor(m_translator, v13)) == 0i64 )
           v12 = "HUD_HELP_COMBAT_RELOAD";
       }
-      if ( ((unsigned int)value.Type >> 6) & 1 )
+      if ( (value.Type & 0x40) != 0 )
       {
-        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
+        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&value.pObjectInterface->vfptr->gap8[8])(
           value.pObjectInterface,
           &value,
-          *(_QWORD *)&value.mValue.NValue);
+          value.mValue);
         value.pObjectInterface = 0i64;
       }
-      value.Type = 6;
-      *(_QWORD *)&value.mValue.NValue = v12;
+      value.Type = VT_String;
+      value.mValue.pString = v12;
       Scaleform::GFx::Movie::SetVariable(
-        v7,
+        pObject,
         "mc_WeaponSwitcher.mc_equipped.mc_reload.mcClip.tf_text.htmlText",
         &value,
         1i64);
@@ -985,273 +911,270 @@ void __fastcall UFG::UIHKWeaponAmmoWidget::Flash_SetAmmo(UFG::UIHKWeaponAmmoWidg
       v16 = "0xCC4C40";
     if ( v10 )
       v15 = "0x959595";
-    v17 = (double)v5->ClipAmmo;
-    if ( ((unsigned int)value.Type >> 6) & 1 )
+    v17.NValue = (double)data->ClipAmmo;
+    if ( (value.Type & 0x40) != 0 )
     {
-      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
+      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&value.pObjectInterface->vfptr->gap8[8])(
         value.pObjectInterface,
         &value,
-        *(_QWORD *)&value.mValue.NValue);
+        value.mValue);
       value.pObjectInterface = 0i64;
     }
-    value.Type = 5;
-    value.mValue.NValue = v17;
+    value.Type = VT_Number;
+    value.mValue = v17;
     Scaleform::GFx::Movie::SetVariable(
-      v7,
+      pObject,
       "mc_WeaponSwitcher.mc_equipped.mc_ammo.tf_currentAmmo.htmlText",
       &value,
       1i64);
-    v18 = (double)v5->ReserveAmmo;
-    if ( ((unsigned int)value.Type >> 6) & 1 )
+    v18.NValue = (double)data->ReserveAmmo;
+    if ( (value.Type & 0x40) != 0 )
     {
-      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
+      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&value.pObjectInterface->vfptr->gap8[8])(
         value.pObjectInterface,
         &value,
-        *(_QWORD *)&value.mValue.NValue);
+        value.mValue);
       value.pObjectInterface = 0i64;
     }
-    value.Type = 5;
-    value.mValue.NValue = v18;
+    value.Type = VT_Number;
+    value.mValue = v18;
     Scaleform::GFx::Movie::SetVariable(
-      v7,
+      pObject,
       "mc_WeaponSwitcher.mc_equipped.mc_ammo.tf_reserveAmmo.htmlText",
       &value,
       1i64);
-    if ( ((unsigned int)value.Type >> 6) & 1 )
+    if ( (value.Type & 0x40) != 0 )
     {
-      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
+      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&value.pObjectInterface->vfptr->gap8[8])(
         value.pObjectInterface,
         &value,
-        *(_QWORD *)&value.mValue.NValue);
+        value.mValue);
       value.pObjectInterface = 0i64;
     }
-    value.Type = 6;
-    *(_QWORD *)&value.mValue.NValue = v16;
+    value.Type = VT_String;
+    value.mValue.pString = v16;
     Scaleform::GFx::Movie::SetVariable(
-      v7,
+      pObject,
       "mc_WeaponSwitcher.mc_equipped.mc_ammo.tf_currentAmmo.textColor",
       &value,
       1i64);
-    if ( ((unsigned int)value.Type >> 6) & 1 )
+    if ( (value.Type & 0x40) != 0 )
     {
-      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
+      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&value.pObjectInterface->vfptr->gap8[8])(
         value.pObjectInterface,
         &value,
-        *(_QWORD *)&value.mValue.NValue);
+        value.mValue);
       value.pObjectInterface = 0i64;
     }
-    value.Type = 6;
-    *(_QWORD *)&value.mValue.NValue = v15;
+    value.Type = VT_String;
+    value.mValue.pString = v15;
     Scaleform::GFx::Movie::SetVariable(
-      v7,
+      pObject,
       "mc_WeaponSwitcher.mc_equipped.mc_ammo.tf_reserveAmmo.textColor",
       &value,
       1i64);
-    v6->mLastHasLowAmmo = v9;
-    v6->mLastHasReserve = v10;
-    v4 = vars0;
+    this->mLastHasLowAmmo = v9;
+    this->mLastHasReserve = v10;
+    weaponChanged = vars0;
   }
   v19 = 0;
-  v20 = v5->ClipAmmo;
-  if ( v20 < v6->mLastClipAmmo )
+  ClipAmmo = data->ClipAmmo;
+  if ( ClipAmmo < this->mLastClipAmmo )
   {
     do
     {
       UFG::qSPrintf(
-        dest,
+        (char *)&ptr[0].Type,
         "mc_WeaponSwitcher.mc_equipped.mc_ammo.mc_ammoBullet.mc_bullet_%d._visible",
-        (unsigned int)++v20);
-      if ( ((unsigned int)value.Type >> 6) & 1 )
+        (unsigned int)++ClipAmmo);
+      if ( (value.Type & 0x40) != 0 )
       {
-        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
+        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&value.pObjectInterface->vfptr->gap8[8])(
           value.pObjectInterface,
           &value,
-          *(_QWORD *)&value.mValue.NValue);
+          value.mValue);
         value.pObjectInterface = 0i64;
       }
-      value.Type = 2;
+      value.Type = VT_Boolean;
       value.mValue.BValue = 0;
-      Scaleform::GFx::Movie::SetVariable(v7, dest, &value, 1i64);
+      Scaleform::GFx::Movie::SetVariable(pObject, (const char *)&ptr[0].Type, &value, 1i64);
     }
-    while ( v20 < v6->mLastClipAmmo );
+    while ( ClipAmmo < this->mLastClipAmmo );
     v19 = 1;
   }
-  v21 = v5->ClipAmmo;
-  v22 = v6->mLastClipAmmo;
-  if ( v21 > v22 )
+  mLastClipAmmo = this->mLastClipAmmo;
+  if ( data->ClipAmmo > mLastClipAmmo )
   {
-    if ( v22 < v21 )
+    do
     {
-      do
+      UFG::qSPrintf(
+        (char *)&ptr[0].Type,
+        "mc_WeaponSwitcher.mc_equipped.mc_ammo.mc_ammoBullet.mc_bullet_%d._visible",
+        (unsigned int)++mLastClipAmmo);
+      if ( (value.Type & 0x40) != 0 )
       {
-        UFG::qSPrintf(
-          dest,
-          "mc_WeaponSwitcher.mc_equipped.mc_ammo.mc_ammoBullet.mc_bullet_%d._visible",
-          (unsigned int)++v22);
-        if ( ((unsigned int)value.Type >> 6) & 1 )
-        {
-          (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
-            value.pObjectInterface,
-            &value,
-            *(_QWORD *)&value.mValue.NValue);
-          value.pObjectInterface = 0i64;
-        }
-        value.Type = 2;
-        value.mValue.BValue = 1;
-        Scaleform::GFx::Movie::SetVariable(v7, dest, &value, 1i64);
+        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&value.pObjectInterface->vfptr->gap8[8])(
+          value.pObjectInterface,
+          &value,
+          value.mValue);
+        value.pObjectInterface = 0i64;
       }
-      while ( v22 < v5->ClipAmmo );
+      value.Type = VT_Boolean;
+      value.mValue.BValue = 1;
+      Scaleform::GFx::Movie::SetVariable(pObject, (const char *)&ptr[0].Type, &value, 1i64);
     }
+    while ( mLastClipAmmo < data->ClipAmmo );
     v19 = 1;
   }
-  v6->mLastClipAmmo = v5->ClipAmmo;
+  this->mLastClipAmmo = data->ClipAmmo;
   if ( v19 )
   {
-    `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-    v23 = (double)(v5->ClipAmmo - 1);
-    if ( (*(_DWORD *)dest >> 6) & 1 )
+    `eh vector constructor iterator(ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+    v22 = (double)(data->ClipAmmo - 1);
+    if ( (ptr[0].Type & 0x40) != 0 )
     {
-      (*(void (__fastcall **)(__int64, char *, unsigned __int64))(*(_QWORD *)v27 + 16i64))(v27, &ptr, value.DataAux);
-      v27 = 0i64;
+      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, unsigned __int64))&ptr[0].pObjectInterface->vfptr->gap8[8])(
+        ptr[0].pObjectInterface,
+        ptr,
+        value.DataAux);
+      ptr[0].pObjectInterface = 0i64;
     }
-    *(_DWORD *)dest = 5;
-    *(double *)&value.DataAux = v23;
-    Scaleform::GFx::Movie::Invoke(v7, "WeaponSwitcher_HighlightCurrentBullet", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
-    `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+    ptr[0].Type = VT_Number;
+    *(double *)&value.DataAux = v22;
+    Scaleform::GFx::Movie::Invoke(pObject, "WeaponSwitcher_HighlightCurrentBullet", 0i64, ptr, 1u);
+    `eh vector destructor iterator(ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
-  if ( !v4 && v5->ReserveAmmo > v5->OldReserveAmmo )
-    Scaleform::GFx::Movie::Invoke(v7, "WeaponSwitcher_OnAmmoPickUp", 0i64);
-  if ( ((unsigned int)value.Type >> 6) & 1 )
+  if ( !weaponChanged && data->ReserveAmmo > data->OldReserveAmmo )
+    Scaleform::GFx::Movie::Invoke(pObject, "WeaponSwitcher_OnAmmoPickUp", 0i64);
+  if ( (value.Type & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
+    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&value.pObjectInterface->vfptr->gap8[8])(
       value.pObjectInterface,
       &value,
-      *(_QWORD *)&value.mValue.NValue);
+      value.mValue);
     value.pObjectInterface = 0i64;
   }
-  value.Type = 0;
+  value.Type = VT_Undefined;
 }
 
 // File Line: 713
 // RVA: 0x5E1F90
-void __fastcall UFG::UIHKWeaponAmmoWidget::Flash_SetWeapon(UFG::UIHKWeaponAmmoWidget *this, UFG::UIScreen *screen, const char *iconTexture, int clipAmmo)
+void __fastcall UFG::UIHKWeaponAmmoWidget::Flash_SetWeapon(
+        UFG::UIHKWeaponAmmoWidget *this,
+        UFG::UIScreen *screen,
+        const char *iconTexture,
+        int clipAmmo)
 {
-  int v4; // er14
-  const char *v5; // r15
-  UFG::UIScreen *v6; // rdi
-  UFG::UIHKWeaponAmmoWidget *v7; // rbx
-  Scaleform::GFx::Movie *v8; // r13
+  Scaleform::GFx::Movie *pObject; // r13
   int v9; // edi
   int v10; // esi
-  Scaleform::GFx::Value value; // [rsp+30h] [rbp-A8h]
-  char ptr; // [rsp+60h] [rbp-78h]
-  char v13; // [rsp+68h] [rbp-70h]
-  __int64 v14; // [rsp+70h] [rbp-68h]
-  __int64 v15; // [rsp+78h] [rbp-60h]
-  unsigned int v16; // [rsp+80h] [rbp-58h]
-  double v17; // [rsp+88h] [rbp-50h]
-  char v18; // [rsp+98h] [rbp-40h]
-  __int64 v19; // [rsp+A8h] [rbp-30h]
-  unsigned int v20; // [rsp+B0h] [rbp-28h]
-  __int64 v21; // [rsp+B8h] [rbp-20h]
-  __int64 v22; // [rsp+C8h] [rbp-10h]
-  char dest; // [rsp+D8h] [rbp+0h]
+  Scaleform::GFx::Value value; // [rsp+30h] [rbp-A8h] BYREF
+  Scaleform::GFx::Value ptr; // [rsp+60h] [rbp-78h] BYREF
+  char v13[16]; // [rsp+98h] [rbp-40h] BYREF
+  __int64 v14; // [rsp+A8h] [rbp-30h]
+  int v15; // [rsp+B0h] [rbp-28h]
+  __int64 v16; // [rsp+B8h] [rbp-20h]
+  __int64 v17; // [rsp+C8h] [rbp-10h]
+  char dest[296]; // [rsp+D8h] [rbp+0h] BYREF
   void *retaddr; // [rsp+228h] [rbp+150h]
 
-  v22 = -2i64;
-  v4 = clipAmmo;
-  v5 = iconTexture;
-  v6 = screen;
-  v7 = this;
+  v17 = -2i64;
   if ( this->mForceUpdate
     || this->mLastClipAmmo != clipAmmo
     || this->mLastHasStowedWeapon != (_BYTE)retaddr
     || (unsigned int)UFG::qStringCompareInsensitive(iconTexture, this->mLastIconTexture.mData, -1) )
   {
-    v8 = v6->mRenderable->m_movie.pObject;
+    pObject = screen->mRenderable->m_movie.pObject;
     `eh vector constructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
     v9 = 0;
-    if ( ((unsigned int)v15 >> 6) & 1 )
+    if ( (ptr.Type & 0x40) != 0 )
     {
-      (*(void (__fastcall **)(__int64, char *, unsigned __int64))(*(_QWORD *)v14 + 16i64))(v14, &ptr, value.DataAux);
+      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, unsigned __int64))&ptr.pObjectInterface->vfptr->gap8[8])(
+        ptr.pObjectInterface,
+        &ptr,
+        value.DataAux);
+      ptr.pObjectInterface = 0i64;
+    }
+    ptr.Type = VT_String;
+    value.DataAux = (unsigned __int64)iconTexture;
+    if ( (ptr.mValue.BValue & 0x40) != 0 )
+    {
+      (*(void (__fastcall **)(_QWORD, $41EDDC8CC4664C9FE26D4D23F9ACAEE4 *, unsigned __int64))(**(_QWORD **)&ptr.Type
+                                                                                            + 16i64))(
+        *(_QWORD *)&ptr.Type,
+        &ptr.8,
+        ptr.DataAux);
+      *(_QWORD *)&ptr.Type = 0i64;
+    }
+    ptr.mValue.IValue = 5;
+    *(double *)&ptr.DataAux = (double)clipAmmo;
+    if ( (v15 & 0x40) != 0 )
+    {
+      (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v14 + 16i64))(v14, v13, v16);
       v14 = 0i64;
     }
-    LODWORD(v15) = 6;
-    value.DataAux = (unsigned __int64)v5;
-    if ( (v16 >> 6) & 1 )
-    {
-      (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v15 + 16i64))(
-        v15,
-        &v13,
-        COERCE_DOUBLE(*(_QWORD *)&v17));
-      v15 = 0i64;
-    }
-    v16 = 5;
-    v17 = (double)v4;
-    if ( (v20 >> 6) & 1 )
-    {
-      (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v19 + 16i64))(v19, &v18, v21);
-      v19 = 0i64;
-    }
-    v20 = 2;
-    LOBYTE(v21) = (_BYTE)retaddr;
-    Scaleform::GFx::Movie::Invoke(v8, "WeaponSwitcher_SetIcon", 0i64, (Scaleform::GFx::Value *)&ptr, 3u);
+    v15 = 2;
+    LOBYTE(v16) = (_BYTE)retaddr;
+    Scaleform::GFx::Movie::Invoke(pObject, "WeaponSwitcher_SetIcon", 0i64, &ptr, 3u);
     value.pObjectInterface = 0i64;
-    value.Type = 0;
+    value.Type = VT_Undefined;
     do
     {
       v10 = v9 + 1;
       UFG::qSPrintf(
-        &dest,
+        dest,
         "mc_WeaponSwitcher.mc_equipped.mc_ammo.mc_ammoBullet.mc_bullet_%d._visible",
         (unsigned int)(v9 + 1));
-      if ( ((unsigned int)value.Type >> 6) & 1 )
+      if ( (value.Type & 0x40) != 0 )
       {
-        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
+        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&value.pObjectInterface->vfptr->gap8[8])(
           value.pObjectInterface,
           &value,
-          *(_QWORD *)&value.mValue.NValue);
+          value.mValue);
         value.pObjectInterface = 0i64;
       }
-      value.Type = 2;
-      value.mValue.BValue = v9 < v4;
-      Scaleform::GFx::Movie::SetVariable(v8, &dest, &value, 1i64);
+      value.Type = VT_Boolean;
+      value.mValue.BValue = v9 < clipAmmo;
+      Scaleform::GFx::Movie::SetVariable(pObject, dest, &value, 1i64);
       ++v9;
     }
     while ( v10 < 40 );
-    v7->mForceUpdate = 0;
-    v7->mLastClipAmmo = v4;
-    UFG::qString::Set(&v7->mLastIconTexture, v5);
-    v7->mLastHasStowedWeapon = (char)retaddr;
-    if ( ((unsigned int)value.Type >> 6) & 1 )
+    this->mForceUpdate = 0;
+    this->mLastClipAmmo = clipAmmo;
+    UFG::qString::Set(&this->mLastIconTexture, iconTexture);
+    this->mLastHasStowedWeapon = (char)retaddr;
+    if ( (value.Type & 0x40) != 0 )
     {
-      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
+      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&value.pObjectInterface->vfptr->gap8[8])(
         value.pObjectInterface,
         &value,
-        *(_QWORD *)&value.mValue.NValue);
+        value.mValue);
       value.pObjectInterface = 0i64;
     }
-    value.Type = 0;
+    value.Type = VT_Undefined;
     `eh vector destructor iterator(&ptr, 0x30ui64, 3, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   }
 }
 
 // File Line: 748
 // RVA: 0x5DA8A0
-void __fastcall UFG::UIHKWeaponAmmoWidget::Flash_EquipError_SetVisible(UFG::UIHKWeaponAmmoWidget *this, UFG::UIScreen *screen, bool visible)
+void __fastcall UFG::UIHKWeaponAmmoWidget::Flash_EquipError_SetVisible(
+        UFG::UIHKWeaponAmmoWidget *this,
+        UFG::UIScreen *screen,
+        bool visible)
 {
-  Scaleform::GFx::Movie *v3; // rdi
-  Scaleform::GFx::Value value; // [rsp+28h] [rbp-40h]
+  Scaleform::GFx::Movie *pObject; // rdi
+  Scaleform::GFx::Value value; // [rsp+28h] [rbp-40h] BYREF
 
-  v3 = screen->mRenderable->m_movie.pObject;
+  pObject = screen->mRenderable->m_movie.pObject;
   value.pObjectInterface = 0i64;
-  value.Type = 2;
+  value.Type = VT_Boolean;
   value.mValue.BValue = visible;
-  Scaleform::GFx::Movie::SetVariable(v3, "mc_WeaponSwitcher.mc_error._visible", &value, 1i64);
-  if ( ((unsigned int)value.Type >> 6) & 1 )
-    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
+  Scaleform::GFx::Movie::SetVariable(pObject, "mc_WeaponSwitcher.mc_error._visible", &value, 1i64);
+  if ( (value.Type & 0x40) != 0 )
+    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&value.pObjectInterface->vfptr->gap8[8])(
       value.pObjectInterface,
       &value,
-      *(_QWORD *)&value.mValue.NValue);
+      value.mValue);
 }
 

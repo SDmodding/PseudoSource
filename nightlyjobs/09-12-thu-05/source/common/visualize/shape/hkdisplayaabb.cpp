@@ -4,7 +4,7 @@ void __fastcall hkDisplayAABB::hkDisplayAABB(hkDisplayAABB *this, hkVector4f *mi
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_geometry = 0i64;
-  this->m_type = 3;
+  this->m_type = HK_DISPLAY_AABB;
   this->vfptr = (hkBaseObjectVtbl *)&hkDisplayGeometry::`vftable;
   this->m_transform.m_rotation.m_col0 = (hkVector4f)transform.m_quad;
   this->m_transform.m_rotation.m_col1 = (hkVector4f)direction.m_quad;
@@ -21,7 +21,7 @@ void __fastcall hkDisplayAABB::hkDisplayAABB(hkDisplayAABB *this)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_geometry = 0i64;
-  this->m_type = 3;
+  this->m_type = HK_DISPLAY_AABB;
   this->vfptr = (hkBaseObjectVtbl *)&hkDisplayGeometry::`vftable;
   this->m_transform.m_rotation.m_col0 = (hkVector4f)transform.m_quad;
   this->m_transform.m_rotation.m_col1 = (hkVector4f)direction.m_quad;
@@ -44,495 +44,507 @@ void __fastcall hkDisplayAABB::setExtents(hkDisplayAABB *this, hkVector4f *min, 
 // RVA: 0xE712B0
 void __fastcall hkDisplayAABB::buildGeometry(hkDisplayAABB *this)
 {
-  hkDisplayAABB *v1; // rbx
-  _QWORD **v2; // rax
+  _QWORD **Value; // rax
   __int64 v3; // rax
-  _DWORD *v4; // rsi
+  __int64 v4; // rsi
   __int64 v5; // rbp
-  int v6; // er9
+  int v6; // r9d
   int v7; // eax
   int v8; // eax
-  signed int *v9; // rsi
-  __int64 v10; // rbp
-  int v11; // er9
+  hkGeometry *m_geometry; // rsi
+  __int64 m_size; // rbp
+  int v11; // r9d
   int v12; // eax
   int v13; // eax
-  signed int *v14; // rsi
+  hkGeometry *v14; // rsi
   __int64 v15; // rbp
-  int v16; // er9
+  int v16; // r9d
   int v17; // eax
   int v18; // eax
-  signed int *v19; // rsi
+  hkGeometry *v19; // rsi
   __int64 v20; // rbp
-  int v21; // er9
+  int v21; // r9d
   int v22; // eax
   int v23; // eax
-  signed int *v24; // rsi
+  hkGeometry *v24; // rsi
   __int64 v25; // rbp
-  int v26; // er9
+  int v26; // r9d
   int v27; // eax
   int v28; // eax
-  signed int *v29; // rsi
+  hkGeometry *v29; // rsi
   __int64 v30; // rbp
-  int v31; // er9
+  int v31; // r9d
   int v32; // eax
   int v33; // eax
-  signed int *v34; // rsi
+  hkGeometry *v34; // rsi
   __int64 v35; // rbp
-  int v36; // er9
+  int v36; // r9d
   int v37; // eax
   int v38; // eax
-  signed int *v39; // rsi
+  hkGeometry *v39; // rsi
   __int64 v40; // rbp
-  int v41; // er9
+  int v41; // r9d
   int v42; // eax
   int v43; // eax
-  signed int *v44; // rsi
+  hkGeometry *v44; // rsi
   __int64 v45; // rbp
-  int v46; // er9
+  int v46; // r9d
   int v47; // eax
   int v48; // eax
-  _DWORD *v49; // rax
-  signed int *v50; // rsi
+  hkGeometry::Triangle *v49; // rax
+  hkGeometry *v50; // rsi
   __int64 v51; // rbp
-  int v52; // er9
+  int v52; // r9d
   int v53; // eax
   int v54; // eax
-  _DWORD *v55; // rax
-  signed int *v56; // rsi
+  hkGeometry::Triangle *v55; // rax
+  hkGeometry *v56; // rsi
   __int64 v57; // rbp
-  int v58; // er9
+  int v58; // r9d
   int v59; // eax
   int v60; // eax
-  _DWORD *v61; // rax
-  signed int *v62; // rsi
+  hkGeometry::Triangle *v61; // rax
+  hkGeometry *v62; // rsi
   __int64 v63; // rbp
-  int v64; // er9
+  int v64; // r9d
   int v65; // eax
   int v66; // eax
-  _DWORD *v67; // rax
-  signed int *v68; // rsi
+  hkGeometry::Triangle *v67; // rax
+  hkGeometry *v68; // rsi
   __int64 v69; // rbp
-  int v70; // er9
+  int v70; // r9d
   int v71; // eax
   int v72; // eax
-  _DWORD *v73; // rax
-  signed int *v74; // rsi
+  hkGeometry::Triangle *v73; // rax
+  hkGeometry *v74; // rsi
   __int64 v75; // rbp
-  int v76; // er9
+  int v76; // r9d
   int v77; // eax
   int v78; // eax
-  _DWORD *v79; // rax
-  signed int *v80; // rsi
+  hkGeometry::Triangle *v79; // rax
+  hkGeometry *v80; // rsi
   __int64 v81; // rbp
-  int v82; // er9
+  int v82; // r9d
   int v83; // eax
   int v84; // eax
-  signed __int64 v85; // rax
-  signed int *v86; // rsi
+  __int64 v85; // rax
+  hkGeometry *v86; // rsi
   __int64 v87; // rbp
-  int v88; // er9
+  int v88; // r9d
   int v89; // eax
   int v90; // eax
-  _DWORD *v91; // rax
-  signed int *v92; // rsi
+  hkGeometry::Triangle *v91; // rax
+  hkGeometry *v92; // rsi
   __int64 v93; // rbp
-  int v94; // er9
+  int v94; // r9d
   int v95; // eax
   int v96; // eax
-  _DWORD *v97; // rax
-  signed int *v98; // rdi
+  hkGeometry::Triangle *v97; // rax
+  hkGeometry *v98; // rdi
   __int64 v99; // rsi
-  int v100; // er9
+  int v100; // r9d
   int v101; // eax
   int v102; // eax
-  _DWORD *v103; // rax
-  signed int *v104; // rdi
+  hkGeometry::Triangle *v103; // rax
+  hkGeometry *v104; // rdi
   __int64 v105; // rsi
-  int v106; // er9
+  int v106; // r9d
   int v107; // eax
   int v108; // eax
-  _DWORD *v109; // rax
-  signed int *v110; // rbx
+  hkGeometry::Triangle *v109; // rax
+  hkGeometry *v110; // rbx
   __int64 v111; // rdi
-  int v112; // er9
+  int v112; // r9d
   int v113; // eax
   int v114; // eax
-  _DWORD *v115; // rax
-  hkResult result; // [rsp+50h] [rbp+8h]
+  hkGeometry::Triangle *v115; // rax
+  hkResult result; // [rsp+50h] [rbp+8h] BYREF
 
-  v1 = this;
-  v2 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v3 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v2[11] + 8i64))(v2[11], 48i64);
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v3 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 48i64);
   if ( v3 )
   {
     *(_DWORD *)(v3 + 8) = 0x1FFFF;
     *(_QWORD *)v3 = &hkGeometry::`vftable;
     *(_QWORD *)(v3 + 16) = 0i64;
     *(_DWORD *)(v3 + 24) = 0;
-    *(_DWORD *)(v3 + 28) = 2147483648;
+    *(_DWORD *)(v3 + 28) = 0x80000000;
     *(_QWORD *)(v3 + 32) = 0i64;
     *(_DWORD *)(v3 + 40) = 0;
-    *(_DWORD *)(v3 + 44) = 2147483648;
+    *(_DWORD *)(v3 + 44) = 0x80000000;
   }
   else
   {
     v3 = 0i64;
   }
-  v4 = (_DWORD *)(v3 + 16);
-  v1->m_geometry = (hkGeometry *)v3;
-  v5 = *(signed int *)(v3 + 24);
+  v4 = v3 + 16;
+  this->m_geometry = (hkGeometry *)v3;
+  v5 = *(int *)(v3 + 24);
   v6 = v5 + 1;
   v7 = *(_DWORD *)(v3 + 28) & 0x3FFFFFFF;
-  if ( v7 < (signed int)v5 + 1 )
+  if ( v7 < (int)v5 + 1 )
   {
     v8 = 2 * v7;
     if ( v6 < v8 )
       v6 = v8;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v4, v6, 16);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)v4, v6, 16);
   }
-  ++v4[2];
+  ++*(_DWORD *)(v4 + 8);
   *(__m128 *)(*(_QWORD *)v4 + 16 * v5) = _mm_unpacklo_ps(
                                            _mm_unpacklo_ps(
-                                             (__m128)v1->m_minExtent.m_quad.m128_u32[0],
-                                             (__m128)v1->m_minExtent.m_quad.m128_u32[2]),
-                                           _mm_unpacklo_ps((__m128)v1->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
-  v9 = (signed int *)v1->m_geometry;
-  v10 = v9[6];
-  v11 = v10 + 1;
-  v12 = v9[7] & 0x3FFFFFFF;
-  if ( v12 < (signed int)v10 + 1 )
+                                             (__m128)this->m_minExtent.m_quad.m128_u32[0],
+                                             (__m128)this->m_minExtent.m_quad.m128_u32[2]),
+                                           _mm_unpacklo_ps((__m128)this->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
+  m_geometry = this->m_geometry;
+  m_size = m_geometry->m_vertices.m_size;
+  v11 = m_size + 1;
+  v12 = m_geometry->m_vertices.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v12 < (int)m_size + 1 )
   {
     v13 = 2 * v12;
     if ( v11 < v13 )
       v11 = v13;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v9 + 4, v11, 16);
+    hkArrayUtil::_reserve(
+      &result,
+      &hkContainerHeapAllocator::s_alloc,
+      (const void **)&m_geometry->m_vertices.m_data,
+      v11,
+      16);
   }
-  ++v9[6];
-  *(__m128 *)(*((_QWORD *)v9 + 2) + 16 * v10) = _mm_unpacklo_ps(
-                                                  _mm_unpacklo_ps(
-                                                    (__m128)v1->m_minExtent.m_quad.m128_u32[0],
-                                                    (__m128)v1->m_maxExtent.m_quad.m128_u32[2]),
-                                                  _mm_unpacklo_ps(
-                                                    (__m128)v1->m_minExtent.m_quad.m128_u32[1],
-                                                    (__m128)0i64));
-  v14 = (signed int *)v1->m_geometry;
-  v15 = v14[6];
+  ++m_geometry->m_vertices.m_size;
+  m_geometry->m_vertices.m_data[m_size].m_quad = _mm_unpacklo_ps(
+                                                   _mm_unpacklo_ps(
+                                                     (__m128)this->m_minExtent.m_quad.m128_u32[0],
+                                                     (__m128)this->m_maxExtent.m_quad.m128_u32[2]),
+                                                   _mm_unpacklo_ps(
+                                                     (__m128)this->m_minExtent.m_quad.m128_u32[1],
+                                                     (__m128)0i64));
+  v14 = this->m_geometry;
+  v15 = v14->m_vertices.m_size;
   v16 = v15 + 1;
-  v17 = v14[7] & 0x3FFFFFFF;
-  if ( v17 < (signed int)v15 + 1 )
+  v17 = v14->m_vertices.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v17 < (int)v15 + 1 )
   {
     v18 = 2 * v17;
     if ( v16 < v18 )
       v16 = v18;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v14 + 4, v16, 16);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&v14->m_vertices.m_data, v16, 16);
   }
-  ++v14[6];
-  *(__m128 *)(*((_QWORD *)v14 + 2) + 16 * v15) = _mm_unpacklo_ps(
-                                                   _mm_unpacklo_ps(
-                                                     (__m128)v1->m_maxExtent.m_quad.m128_u32[0],
-                                                     (__m128)v1->m_maxExtent.m_quad.m128_u32[2]),
-                                                   _mm_unpacklo_ps(
-                                                     (__m128)v1->m_minExtent.m_quad.m128_u32[1],
-                                                     (__m128)0i64));
-  v19 = (signed int *)v1->m_geometry;
-  v20 = v19[6];
+  ++v14->m_vertices.m_size;
+  v14->m_vertices.m_data[v15].m_quad = _mm_unpacklo_ps(
+                                         _mm_unpacklo_ps(
+                                           (__m128)this->m_maxExtent.m_quad.m128_u32[0],
+                                           (__m128)this->m_maxExtent.m_quad.m128_u32[2]),
+                                         _mm_unpacklo_ps((__m128)this->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
+  v19 = this->m_geometry;
+  v20 = v19->m_vertices.m_size;
   v21 = v20 + 1;
-  v22 = v19[7] & 0x3FFFFFFF;
-  if ( v22 < (signed int)v20 + 1 )
+  v22 = v19->m_vertices.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v22 < (int)v20 + 1 )
   {
     v23 = 2 * v22;
     if ( v21 < v23 )
       v21 = v23;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v19 + 4, v21, 16);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&v19->m_vertices.m_data, v21, 16);
   }
-  ++v19[6];
-  *(__m128 *)(*((_QWORD *)v19 + 2) + 16 * v20) = _mm_unpacklo_ps(
-                                                   _mm_unpacklo_ps(
-                                                     (__m128)v1->m_maxExtent.m_quad.m128_u32[0],
-                                                     (__m128)v1->m_minExtent.m_quad.m128_u32[2]),
-                                                   _mm_unpacklo_ps(
-                                                     (__m128)v1->m_minExtent.m_quad.m128_u32[1],
-                                                     (__m128)0i64));
-  v24 = (signed int *)v1->m_geometry;
-  v25 = v24[6];
+  ++v19->m_vertices.m_size;
+  v19->m_vertices.m_data[v20].m_quad = _mm_unpacklo_ps(
+                                         _mm_unpacklo_ps(
+                                           (__m128)this->m_maxExtent.m_quad.m128_u32[0],
+                                           (__m128)this->m_minExtent.m_quad.m128_u32[2]),
+                                         _mm_unpacklo_ps((__m128)this->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
+  v24 = this->m_geometry;
+  v25 = v24->m_vertices.m_size;
   v26 = v25 + 1;
-  v27 = v24[7] & 0x3FFFFFFF;
-  if ( v27 < (signed int)v25 + 1 )
+  v27 = v24->m_vertices.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v27 < (int)v25 + 1 )
   {
     v28 = 2 * v27;
     if ( v26 < v28 )
       v26 = v28;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v24 + 4, v26, 16);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&v24->m_vertices.m_data, v26, 16);
   }
-  ++v24[6];
-  *(__m128 *)(*((_QWORD *)v24 + 2) + 16 * v25) = _mm_unpacklo_ps(
-                                                   _mm_unpacklo_ps(
-                                                     (__m128)v1->m_minExtent.m_quad.m128_u32[0],
-                                                     (__m128)v1->m_minExtent.m_quad.m128_u32[2]),
-                                                   _mm_unpacklo_ps(
-                                                     (__m128)v1->m_maxExtent.m_quad.m128_u32[1],
-                                                     (__m128)0i64));
-  v29 = (signed int *)v1->m_geometry;
-  v30 = v29[6];
+  ++v24->m_vertices.m_size;
+  v24->m_vertices.m_data[v25].m_quad = _mm_unpacklo_ps(
+                                         _mm_unpacklo_ps(
+                                           (__m128)this->m_minExtent.m_quad.m128_u32[0],
+                                           (__m128)this->m_minExtent.m_quad.m128_u32[2]),
+                                         _mm_unpacklo_ps((__m128)this->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
+  v29 = this->m_geometry;
+  v30 = v29->m_vertices.m_size;
   v31 = v30 + 1;
-  v32 = v29[7] & 0x3FFFFFFF;
-  if ( v32 < (signed int)v30 + 1 )
+  v32 = v29->m_vertices.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v32 < (int)v30 + 1 )
   {
     v33 = 2 * v32;
     if ( v31 < v33 )
       v31 = v33;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v29 + 4, v31, 16);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&v29->m_vertices.m_data, v31, 16);
   }
-  ++v29[6];
-  *(__m128 *)(*((_QWORD *)v29 + 2) + 16 * v30) = _mm_unpacklo_ps(
-                                                   _mm_unpacklo_ps(
-                                                     (__m128)v1->m_minExtent.m_quad.m128_u32[0],
-                                                     (__m128)v1->m_maxExtent.m_quad.m128_u32[2]),
-                                                   _mm_unpacklo_ps(
-                                                     (__m128)v1->m_maxExtent.m_quad.m128_u32[1],
-                                                     (__m128)0i64));
-  v34 = (signed int *)v1->m_geometry;
-  v35 = v34[6];
+  ++v29->m_vertices.m_size;
+  v29->m_vertices.m_data[v30].m_quad = _mm_unpacklo_ps(
+                                         _mm_unpacklo_ps(
+                                           (__m128)this->m_minExtent.m_quad.m128_u32[0],
+                                           (__m128)this->m_maxExtent.m_quad.m128_u32[2]),
+                                         _mm_unpacklo_ps((__m128)this->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
+  v34 = this->m_geometry;
+  v35 = v34->m_vertices.m_size;
   v36 = v35 + 1;
-  v37 = v34[7] & 0x3FFFFFFF;
-  if ( v37 < (signed int)v35 + 1 )
+  v37 = v34->m_vertices.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v37 < (int)v35 + 1 )
   {
     v38 = 2 * v37;
     if ( v36 < v38 )
       v36 = v38;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v34 + 4, v36, 16);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&v34->m_vertices.m_data, v36, 16);
   }
-  ++v34[6];
-  *(__m128 *)(*((_QWORD *)v34 + 2) + 16 * v35) = _mm_unpacklo_ps(
-                                                   _mm_unpacklo_ps(
-                                                     (__m128)v1->m_maxExtent.m_quad.m128_u32[0],
-                                                     (__m128)v1->m_maxExtent.m_quad.m128_u32[2]),
-                                                   _mm_unpacklo_ps(
-                                                     (__m128)v1->m_maxExtent.m_quad.m128_u32[1],
-                                                     (__m128)0i64));
-  v39 = (signed int *)v1->m_geometry;
-  v40 = v39[6];
+  ++v34->m_vertices.m_size;
+  v34->m_vertices.m_data[v35].m_quad = _mm_unpacklo_ps(
+                                         _mm_unpacklo_ps(
+                                           (__m128)this->m_maxExtent.m_quad.m128_u32[0],
+                                           (__m128)this->m_maxExtent.m_quad.m128_u32[2]),
+                                         _mm_unpacklo_ps((__m128)this->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
+  v39 = this->m_geometry;
+  v40 = v39->m_vertices.m_size;
   v41 = v40 + 1;
-  v42 = v39[7] & 0x3FFFFFFF;
-  if ( v42 < (signed int)v40 + 1 )
+  v42 = v39->m_vertices.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v42 < (int)v40 + 1 )
   {
     v43 = 2 * v42;
     if ( v41 < v43 )
       v41 = v43;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v39 + 4, v41, 16);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&v39->m_vertices.m_data, v41, 16);
   }
-  ++v39[6];
-  *(__m128 *)(*((_QWORD *)v39 + 2) + 16 * v40) = _mm_unpacklo_ps(
-                                                   _mm_unpacklo_ps(
-                                                     (__m128)v1->m_maxExtent.m_quad.m128_u32[0],
-                                                     (__m128)v1->m_minExtent.m_quad.m128_u32[2]),
-                                                   _mm_unpacklo_ps(
-                                                     (__m128)v1->m_maxExtent.m_quad.m128_u32[1],
-                                                     (__m128)0i64));
-  v44 = (signed int *)v1->m_geometry;
-  v45 = v44[10];
+  ++v39->m_vertices.m_size;
+  v39->m_vertices.m_data[v40].m_quad = _mm_unpacklo_ps(
+                                         _mm_unpacklo_ps(
+                                           (__m128)this->m_maxExtent.m_quad.m128_u32[0],
+                                           (__m128)this->m_minExtent.m_quad.m128_u32[2]),
+                                         _mm_unpacklo_ps((__m128)this->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
+  v44 = this->m_geometry;
+  v45 = v44->m_triangles.m_size;
   v46 = v45 + 1;
-  v47 = v44[11] & 0x3FFFFFFF;
-  if ( v47 < (signed int)v45 + 1 )
+  v47 = v44->m_triangles.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v47 < (int)v45 + 1 )
   {
     v48 = 2 * v47;
     if ( v46 < v48 )
       v46 = v48;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v44 + 8, v46, 16);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&v44->m_triangles.m_data, v46, 16);
   }
-  ++v44[10];
-  v49 = (_DWORD *)(*((_QWORD *)v44 + 4) + 16 * v45);
-  *v49 = 0;
-  v49[1] = 3;
-  v49[2] = 1;
-  v49[3] = -1;
-  v50 = (signed int *)v1->m_geometry;
-  v51 = v50[10];
+  ++v44->m_triangles.m_size;
+  v49 = &v44->m_triangles.m_data[v45];
+  v49->m_a = 0;
+  v49->m_b = 3;
+  v49->m_c = 1;
+  v49->m_material = -1;
+  v50 = this->m_geometry;
+  v51 = v50->m_triangles.m_size;
   v52 = v51 + 1;
-  v53 = v50[11] & 0x3FFFFFFF;
-  if ( v53 < (signed int)v51 + 1 )
+  v53 = v50->m_triangles.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v53 < (int)v51 + 1 )
   {
     v54 = 2 * v53;
     if ( v52 < v54 )
       v52 = v54;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v50 + 8, v52, 16);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&v50->m_triangles.m_data, v52, 16);
   }
-  ++v50[10];
-  v55 = (_DWORD *)(*((_QWORD *)v50 + 4) + 16 * v51);
-  *v55 = 1;
-  v55[1] = 3;
-  v55[2] = 2;
-  v55[3] = -1;
-  v56 = (signed int *)v1->m_geometry;
-  v57 = v56[10];
+  ++v50->m_triangles.m_size;
+  v55 = &v50->m_triangles.m_data[v51];
+  v55->m_a = 1;
+  v55->m_b = 3;
+  v55->m_c = 2;
+  v55->m_material = -1;
+  v56 = this->m_geometry;
+  v57 = v56->m_triangles.m_size;
   v58 = v57 + 1;
-  v59 = v56[11] & 0x3FFFFFFF;
-  if ( v59 < (signed int)v57 + 1 )
+  v59 = v56->m_triangles.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v59 < (int)v57 + 1 )
   {
     v60 = 2 * v59;
     if ( v58 < v60 )
       v58 = v60;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v56 + 8, v58, 16);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&v56->m_triangles.m_data, v58, 16);
   }
-  ++v56[10];
-  v61 = (_DWORD *)(*((_QWORD *)v56 + 4) + 16 * v57);
-  *v61 = 2;
-  v61[1] = 6;
-  v61[2] = 5;
-  v61[3] = -1;
-  v62 = (signed int *)v1->m_geometry;
-  v63 = v62[10];
+  ++v56->m_triangles.m_size;
+  v61 = &v56->m_triangles.m_data[v57];
+  v61->m_a = 2;
+  v61->m_b = 6;
+  v61->m_c = 5;
+  v61->m_material = -1;
+  v62 = this->m_geometry;
+  v63 = v62->m_triangles.m_size;
   v64 = v63 + 1;
-  v65 = v62[11] & 0x3FFFFFFF;
-  if ( v65 < (signed int)v63 + 1 )
+  v65 = v62->m_triangles.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v65 < (int)v63 + 1 )
   {
     v66 = 2 * v65;
     if ( v64 < v66 )
       v64 = v66;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v62 + 8, v64, 16);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&v62->m_triangles.m_data, v64, 16);
   }
-  ++v62[10];
-  v67 = (_DWORD *)(*((_QWORD *)v62 + 4) + 16 * v63);
-  *v67 = 5;
-  v67[1] = 1;
-  v67[2] = 2;
-  v67[3] = -1;
-  v68 = (signed int *)v1->m_geometry;
-  v69 = v68[10];
+  ++v62->m_triangles.m_size;
+  v67 = &v62->m_triangles.m_data[v63];
+  v67->m_a = 5;
+  v67->m_b = 1;
+  v67->m_c = 2;
+  v67->m_material = -1;
+  v68 = this->m_geometry;
+  v69 = v68->m_triangles.m_size;
   v70 = v69 + 1;
-  v71 = v68[11] & 0x3FFFFFFF;
-  if ( v71 < (signed int)v69 + 1 )
+  v71 = v68->m_triangles.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v71 < (int)v69 + 1 )
   {
     v72 = 2 * v71;
     if ( v70 < v72 )
       v70 = v72;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v68 + 8, v70, 16);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&v68->m_triangles.m_data, v70, 16);
   }
-  ++v68[10];
-  v73 = (_DWORD *)(*((_QWORD *)v68 + 4) + 16 * v69);
-  *v73 = 5;
-  v73[1] = 6;
-  v73[2] = 4;
-  v73[3] = -1;
-  v74 = (signed int *)v1->m_geometry;
-  v75 = v74[10];
+  ++v68->m_triangles.m_size;
+  v73 = &v68->m_triangles.m_data[v69];
+  v73->m_a = 5;
+  v73->m_b = 6;
+  v73->m_c = 4;
+  v73->m_material = -1;
+  v74 = this->m_geometry;
+  v75 = v74->m_triangles.m_size;
   v76 = v75 + 1;
-  v77 = v74[11] & 0x3FFFFFFF;
-  if ( v77 < (signed int)v75 + 1 )
+  v77 = v74->m_triangles.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v77 < (int)v75 + 1 )
   {
     v78 = 2 * v77;
     if ( v76 < v78 )
       v76 = v78;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v74 + 8, v76, 16);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&v74->m_triangles.m_data, v76, 16);
   }
-  ++v74[10];
-  v79 = (_DWORD *)(*((_QWORD *)v74 + 4) + 16 * v75);
-  *v79 = 4;
-  v79[1] = 6;
-  v79[2] = 7;
-  v79[3] = -1;
-  v80 = (signed int *)v1->m_geometry;
-  v81 = v80[10];
+  ++v74->m_triangles.m_size;
+  v79 = &v74->m_triangles.m_data[v75];
+  v79->m_a = 4;
+  v79->m_b = 6;
+  v79->m_c = 7;
+  v79->m_material = -1;
+  v80 = this->m_geometry;
+  v81 = v80->m_triangles.m_size;
   v82 = v81 + 1;
-  v83 = v80[11] & 0x3FFFFFFF;
-  if ( v83 < (signed int)v81 + 1 )
+  v83 = v80->m_triangles.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v83 < (int)v81 + 1 )
   {
     v84 = 2 * v83;
     if ( v82 < v84 )
       v82 = v84;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v80 + 8, v82, 16);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&v80->m_triangles.m_data, v82, 16);
   }
-  ++v80[10];
-  v85 = *((_QWORD *)v80 + 4) + 16 * v81;
+  ++v80->m_triangles.m_size;
+  v85 = (__int64)&v80->m_triangles.m_data[v81];
   *(_DWORD *)v85 = 7;
   *(_QWORD *)(v85 + 4) = 3i64;
   *(_DWORD *)(v85 + 12) = -1;
-  v86 = (signed int *)v1->m_geometry;
-  v87 = v86[10];
+  v86 = this->m_geometry;
+  v87 = v86->m_triangles.m_size;
   v88 = v87 + 1;
-  v89 = v86[11] & 0x3FFFFFFF;
-  if ( v89 < (signed int)v87 + 1 )
+  v89 = v86->m_triangles.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v89 < (int)v87 + 1 )
   {
     v90 = 2 * v89;
     if ( v88 < v90 )
       v88 = v90;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v86 + 8, v88, 16);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&v86->m_triangles.m_data, v88, 16);
   }
-  ++v86[10];
-  v91 = (_DWORD *)(*((_QWORD *)v86 + 4) + 16 * v87);
-  *v91 = 0;
-  v91[1] = 4;
-  v91[2] = 7;
-  v91[3] = -1;
-  v92 = (signed int *)v1->m_geometry;
-  v93 = v92[10];
+  ++v86->m_triangles.m_size;
+  v91 = &v86->m_triangles.m_data[v87];
+  v91->m_a = 0;
+  v91->m_b = 4;
+  v91->m_c = 7;
+  v91->m_material = -1;
+  v92 = this->m_geometry;
+  v93 = v92->m_triangles.m_size;
   v94 = v93 + 1;
-  v95 = v92[11] & 0x3FFFFFFF;
-  if ( v95 < (signed int)v93 + 1 )
+  v95 = v92->m_triangles.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v95 < (int)v93 + 1 )
   {
     v96 = 2 * v95;
     if ( v94 < v96 )
       v94 = v96;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v92 + 8, v94, 16);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&v92->m_triangles.m_data, v94, 16);
   }
-  ++v92[10];
-  v97 = (_DWORD *)(*((_QWORD *)v92 + 4) + 16 * v93);
-  *v97 = 0;
-  v97[1] = 1;
-  v97[2] = 4;
-  v97[3] = -1;
-  v98 = (signed int *)v1->m_geometry;
-  v99 = v98[10];
+  ++v92->m_triangles.m_size;
+  v97 = &v92->m_triangles.m_data[v93];
+  v97->m_a = 0;
+  v97->m_b = 1;
+  v97->m_c = 4;
+  v97->m_material = -1;
+  v98 = this->m_geometry;
+  v99 = v98->m_triangles.m_size;
   v100 = v99 + 1;
-  v101 = v98[11] & 0x3FFFFFFF;
-  if ( v101 < (signed int)v99 + 1 )
+  v101 = v98->m_triangles.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v101 < (int)v99 + 1 )
   {
     v102 = 2 * v101;
     if ( v100 < v102 )
       v100 = v102;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v98 + 8, v100, 16);
+    hkArrayUtil::_reserve(
+      &result,
+      &hkContainerHeapAllocator::s_alloc,
+      (const void **)&v98->m_triangles.m_data,
+      v100,
+      16);
   }
-  ++v98[10];
-  v103 = (_DWORD *)(*((_QWORD *)v98 + 4) + 16 * v99);
-  *v103 = 4;
-  v103[1] = 1;
-  v103[2] = 5;
-  v103[3] = -1;
-  v104 = (signed int *)v1->m_geometry;
-  v105 = v104[10];
+  ++v98->m_triangles.m_size;
+  v103 = &v98->m_triangles.m_data[v99];
+  v103->m_a = 4;
+  v103->m_b = 1;
+  v103->m_c = 5;
+  v103->m_material = -1;
+  v104 = this->m_geometry;
+  v105 = v104->m_triangles.m_size;
   v106 = v105 + 1;
-  v107 = v104[11] & 0x3FFFFFFF;
-  if ( v107 < (signed int)v105 + 1 )
+  v107 = v104->m_triangles.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v107 < (int)v105 + 1 )
   {
     v108 = 2 * v107;
     if ( v106 < v108 )
       v106 = v108;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v104 + 8, v106, 16);
+    hkArrayUtil::_reserve(
+      &result,
+      &hkContainerHeapAllocator::s_alloc,
+      (const void **)&v104->m_triangles.m_data,
+      v106,
+      16);
   }
-  ++v104[10];
-  v109 = (_DWORD *)(*((_QWORD *)v104 + 4) + 16 * v105);
-  *v109 = 2;
-  v109[1] = 3;
-  v109[2] = 6;
-  v109[3] = -1;
-  v110 = (signed int *)v1->m_geometry;
-  v111 = v110[10];
+  ++v104->m_triangles.m_size;
+  v109 = &v104->m_triangles.m_data[v105];
+  v109->m_a = 2;
+  v109->m_b = 3;
+  v109->m_c = 6;
+  v109->m_material = -1;
+  v110 = this->m_geometry;
+  v111 = v110->m_triangles.m_size;
   v112 = v111 + 1;
-  v113 = v110[11] & 0x3FFFFFFF;
-  if ( v113 < (signed int)v111 + 1 )
+  v113 = v110->m_triangles.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v113 < (int)v111 + 1 )
   {
     v114 = 2 * v113;
     if ( v112 < v114 )
       v112 = v114;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v110 + 8, v112, 16);
+    hkArrayUtil::_reserve(
+      &result,
+      &hkContainerHeapAllocator::s_alloc,
+      (const void **)&v110->m_triangles.m_data,
+      v112,
+      16);
   }
-  ++v110[10];
-  v115 = (_DWORD *)(*((_QWORD *)v110 + 4) + 16 * v111);
-  *v115 = 6;
-  v115[1] = 3;
-  v115[2] = 7;
-  v115[3] = -1;
+  ++v110->m_triangles.m_size;
+  v115 = &v110->m_triangles.m_data[v111];
+  v115->m_a = 6;
+  v115->m_b = 3;
+  v115->m_c = 7;
+  v115->m_material = -1;
+}iangles.m_size;
+  v115 = &v110->m_triangles.m_data[v111];
+  v115->m_a = 6;
+  v115->m_b = 3;
+  v115->m_c = 7;
+  v115->m_material = -1;
 }
 
 // File Line: 66
@@ -551,100 +563,143 @@ hkVector4f *__fastcall hkDisplayAABB::getMaxExtent(hkDisplayAABB *this)
 
 // File Line: 77
 // RVA: 0xE71B80
-void __fastcall hkDisplayAABB::getWireframeGeometry(hkDisplayAABB *this, hkArrayBase<hkVector4f> *lines, hkMemoryAllocator *a)
+void __fastcall hkDisplayAABB::getWireframeGeometry(
+        hkDisplayAABB *this,
+        hkArrayBase<hkVector4f> *lines,
+        hkMemoryAllocator *a)
 {
-  __m128 **v3; // rbx
-  int v4; // eax
-  hkDisplayAABB *v5; // rdi
-  int v6; // eax
-  int v7; // er9
-  __m128 *v8; // rax
-  hkResult result; // [rsp+40h] [rbp+8h]
+  int v5; // r9d
+  hkVector4f *m_data; // rax
+  hkResult result; // [rsp+40h] [rbp+8h] BYREF
 
-  v3 = (__m128 **)lines;
-  v4 = lines->m_capacityAndFlags & 0x3FFFFFFF;
-  v5 = this;
-  if ( v4 < 24 )
+  if ( (lines->m_capacityAndFlags & 0x3FFFFFFFu) < 0x18 )
   {
-    v6 = 2 * v4;
-    v7 = 24;
-    if ( v6 > 24 )
-      v7 = v6;
-    hkArrayUtil::_reserve(&result, a, lines, v7, 16);
+    v5 = 24;
+    if ( 2 * (lines->m_capacityAndFlags & 0x3FFFFFFF) > 24 )
+      v5 = 2 * (lines->m_capacityAndFlags & 0x3FFFFFFF);
+    hkArrayUtil::_reserve(&result, a, (const void **)&lines->m_data, v5, 16);
   }
-  v8 = *v3;
-  *((_DWORD *)v3 + 2) = 24;
-  *v8 = _mm_unpacklo_ps(
-          _mm_unpacklo_ps((__m128)v5->m_minExtent.m_quad.m128_u32[0], (__m128)v5->m_minExtent.m_quad.m128_u32[2]),
-          _mm_unpacklo_ps((__m128)v5->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
-  (*v3)[1] = _mm_unpacklo_ps(
-               _mm_unpacklo_ps((__m128)v5->m_minExtent.m_quad.m128_u32[0], (__m128)v5->m_minExtent.m_quad.m128_u32[2]),
-               _mm_unpacklo_ps((__m128)v5->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
-  (*v3)[2] = _mm_unpacklo_ps(
-               _mm_unpacklo_ps((__m128)v5->m_minExtent.m_quad.m128_u32[0], (__m128)v5->m_minExtent.m_quad.m128_u32[2]),
-               _mm_unpacklo_ps((__m128)v5->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
-  (*v3)[3] = _mm_unpacklo_ps(
-               _mm_unpacklo_ps((__m128)v5->m_minExtent.m_quad.m128_u32[0], (__m128)v5->m_maxExtent.m_quad.m128_u32[2]),
-               _mm_unpacklo_ps((__m128)v5->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
-  (*v3)[4] = _mm_unpacklo_ps(
-               _mm_unpacklo_ps((__m128)v5->m_minExtent.m_quad.m128_u32[0], (__m128)v5->m_minExtent.m_quad.m128_u32[2]),
-               _mm_unpacklo_ps((__m128)v5->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
-  (*v3)[5] = _mm_unpacklo_ps(
-               _mm_unpacklo_ps((__m128)v5->m_maxExtent.m_quad.m128_u32[0], (__m128)v5->m_minExtent.m_quad.m128_u32[2]),
-               _mm_unpacklo_ps((__m128)v5->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
-  (*v3)[6] = _mm_unpacklo_ps(
-               _mm_unpacklo_ps((__m128)v5->m_maxExtent.m_quad.m128_u32[0], (__m128)v5->m_maxExtent.m_quad.m128_u32[2]),
-               _mm_unpacklo_ps((__m128)v5->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
-  (*v3)[7] = _mm_unpacklo_ps(
-               _mm_unpacklo_ps((__m128)v5->m_maxExtent.m_quad.m128_u32[0], (__m128)v5->m_minExtent.m_quad.m128_u32[2]),
-               _mm_unpacklo_ps((__m128)v5->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
-  (*v3)[8] = _mm_unpacklo_ps(
-               _mm_unpacklo_ps((__m128)v5->m_maxExtent.m_quad.m128_u32[0], (__m128)v5->m_maxExtent.m_quad.m128_u32[2]),
-               _mm_unpacklo_ps((__m128)v5->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
-  (*v3)[9] = _mm_unpacklo_ps(
-               _mm_unpacklo_ps((__m128)v5->m_minExtent.m_quad.m128_u32[0], (__m128)v5->m_maxExtent.m_quad.m128_u32[2]),
-               _mm_unpacklo_ps((__m128)v5->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
-  (*v3)[10] = _mm_unpacklo_ps(
-                _mm_unpacklo_ps((__m128)v5->m_maxExtent.m_quad.m128_u32[0], (__m128)v5->m_maxExtent.m_quad.m128_u32[2]),
-                _mm_unpacklo_ps((__m128)v5->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
-  (*v3)[11] = _mm_unpacklo_ps(
-                _mm_unpacklo_ps((__m128)v5->m_maxExtent.m_quad.m128_u32[0], (__m128)v5->m_maxExtent.m_quad.m128_u32[2]),
-                _mm_unpacklo_ps((__m128)v5->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
-  (*v3)[12] = _mm_unpacklo_ps(
-                _mm_unpacklo_ps((__m128)v5->m_minExtent.m_quad.m128_u32[0], (__m128)v5->m_minExtent.m_quad.m128_u32[2]),
-                _mm_unpacklo_ps((__m128)v5->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
-  (*v3)[13] = _mm_unpacklo_ps(
-                _mm_unpacklo_ps((__m128)v5->m_maxExtent.m_quad.m128_u32[0], (__m128)v5->m_minExtent.m_quad.m128_u32[2]),
-                _mm_unpacklo_ps((__m128)v5->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
-  (*v3)[14] = _mm_unpacklo_ps(
-                _mm_unpacklo_ps((__m128)v5->m_minExtent.m_quad.m128_u32[0], (__m128)v5->m_minExtent.m_quad.m128_u32[2]),
-                _mm_unpacklo_ps((__m128)v5->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
-  (*v3)[15] = _mm_unpacklo_ps(
-                _mm_unpacklo_ps((__m128)v5->m_minExtent.m_quad.m128_u32[0], (__m128)v5->m_maxExtent.m_quad.m128_u32[2]),
-                _mm_unpacklo_ps((__m128)v5->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
-  (*v3)[16] = _mm_unpacklo_ps(
-                _mm_unpacklo_ps((__m128)v5->m_maxExtent.m_quad.m128_u32[0], (__m128)v5->m_minExtent.m_quad.m128_u32[2]),
-                _mm_unpacklo_ps((__m128)v5->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
-  (*v3)[17] = _mm_unpacklo_ps(
-                _mm_unpacklo_ps((__m128)v5->m_maxExtent.m_quad.m128_u32[0], (__m128)v5->m_minExtent.m_quad.m128_u32[2]),
-                _mm_unpacklo_ps((__m128)v5->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
-  (*v3)[18] = _mm_unpacklo_ps(
-                _mm_unpacklo_ps((__m128)v5->m_minExtent.m_quad.m128_u32[0], (__m128)v5->m_maxExtent.m_quad.m128_u32[2]),
-                _mm_unpacklo_ps((__m128)v5->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
-  (*v3)[19] = _mm_unpacklo_ps(
-                _mm_unpacklo_ps((__m128)v5->m_minExtent.m_quad.m128_u32[0], (__m128)v5->m_maxExtent.m_quad.m128_u32[2]),
-                _mm_unpacklo_ps((__m128)v5->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
-  (*v3)[20] = _mm_unpacklo_ps(
-                _mm_unpacklo_ps((__m128)v5->m_minExtent.m_quad.m128_u32[0], (__m128)v5->m_maxExtent.m_quad.m128_u32[2]),
-                _mm_unpacklo_ps((__m128)v5->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
-  (*v3)[21] = _mm_unpacklo_ps(
-                _mm_unpacklo_ps((__m128)v5->m_maxExtent.m_quad.m128_u32[0], (__m128)v5->m_maxExtent.m_quad.m128_u32[2]),
-                _mm_unpacklo_ps((__m128)v5->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
-  (*v3)[22] = _mm_unpacklo_ps(
-                _mm_unpacklo_ps((__m128)v5->m_maxExtent.m_quad.m128_u32[0], (__m128)v5->m_maxExtent.m_quad.m128_u32[2]),
-                _mm_unpacklo_ps((__m128)v5->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
-  (*v3)[23] = _mm_unpacklo_ps(
-                _mm_unpacklo_ps((__m128)v5->m_maxExtent.m_quad.m128_u32[0], (__m128)v5->m_minExtent.m_quad.m128_u32[2]),
-                _mm_unpacklo_ps((__m128)v5->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
+  m_data = lines->m_data;
+  lines->m_size = 24;
+  m_data->m_quad = _mm_unpacklo_ps(
+                     _mm_unpacklo_ps(
+                       (__m128)this->m_minExtent.m_quad.m128_u32[0],
+                       (__m128)this->m_minExtent.m_quad.m128_u32[2]),
+                     _mm_unpacklo_ps((__m128)this->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
+  lines->m_data[1].m_quad = _mm_unpacklo_ps(
+                              _mm_unpacklo_ps(
+                                (__m128)this->m_minExtent.m_quad.m128_u32[0],
+                                (__m128)this->m_minExtent.m_quad.m128_u32[2]),
+                              _mm_unpacklo_ps((__m128)this->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
+  lines->m_data[2].m_quad = _mm_unpacklo_ps(
+                              _mm_unpacklo_ps(
+                                (__m128)this->m_minExtent.m_quad.m128_u32[0],
+                                (__m128)this->m_minExtent.m_quad.m128_u32[2]),
+                              _mm_unpacklo_ps((__m128)this->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
+  lines->m_data[3].m_quad = _mm_unpacklo_ps(
+                              _mm_unpacklo_ps(
+                                (__m128)this->m_minExtent.m_quad.m128_u32[0],
+                                (__m128)this->m_maxExtent.m_quad.m128_u32[2]),
+                              _mm_unpacklo_ps((__m128)this->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
+  lines->m_data[4].m_quad = _mm_unpacklo_ps(
+                              _mm_unpacklo_ps(
+                                (__m128)this->m_minExtent.m_quad.m128_u32[0],
+                                (__m128)this->m_minExtent.m_quad.m128_u32[2]),
+                              _mm_unpacklo_ps((__m128)this->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
+  lines->m_data[5].m_quad = _mm_unpacklo_ps(
+                              _mm_unpacklo_ps(
+                                (__m128)this->m_maxExtent.m_quad.m128_u32[0],
+                                (__m128)this->m_minExtent.m_quad.m128_u32[2]),
+                              _mm_unpacklo_ps((__m128)this->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
+  lines->m_data[6].m_quad = _mm_unpacklo_ps(
+                              _mm_unpacklo_ps(
+                                (__m128)this->m_maxExtent.m_quad.m128_u32[0],
+                                (__m128)this->m_maxExtent.m_quad.m128_u32[2]),
+                              _mm_unpacklo_ps((__m128)this->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
+  lines->m_data[7].m_quad = _mm_unpacklo_ps(
+                              _mm_unpacklo_ps(
+                                (__m128)this->m_maxExtent.m_quad.m128_u32[0],
+                                (__m128)this->m_minExtent.m_quad.m128_u32[2]),
+                              _mm_unpacklo_ps((__m128)this->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
+  lines->m_data[8].m_quad = _mm_unpacklo_ps(
+                              _mm_unpacklo_ps(
+                                (__m128)this->m_maxExtent.m_quad.m128_u32[0],
+                                (__m128)this->m_maxExtent.m_quad.m128_u32[2]),
+                              _mm_unpacklo_ps((__m128)this->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
+  lines->m_data[9].m_quad = _mm_unpacklo_ps(
+                              _mm_unpacklo_ps(
+                                (__m128)this->m_minExtent.m_quad.m128_u32[0],
+                                (__m128)this->m_maxExtent.m_quad.m128_u32[2]),
+                              _mm_unpacklo_ps((__m128)this->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
+  lines->m_data[10].m_quad = _mm_unpacklo_ps(
+                               _mm_unpacklo_ps(
+                                 (__m128)this->m_maxExtent.m_quad.m128_u32[0],
+                                 (__m128)this->m_maxExtent.m_quad.m128_u32[2]),
+                               _mm_unpacklo_ps((__m128)this->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
+  lines->m_data[11].m_quad = _mm_unpacklo_ps(
+                               _mm_unpacklo_ps(
+                                 (__m128)this->m_maxExtent.m_quad.m128_u32[0],
+                                 (__m128)this->m_maxExtent.m_quad.m128_u32[2]),
+                               _mm_unpacklo_ps((__m128)this->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
+  lines->m_data[12].m_quad = _mm_unpacklo_ps(
+                               _mm_unpacklo_ps(
+                                 (__m128)this->m_minExtent.m_quad.m128_u32[0],
+                                 (__m128)this->m_minExtent.m_quad.m128_u32[2]),
+                               _mm_unpacklo_ps((__m128)this->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
+  lines->m_data[13].m_quad = _mm_unpacklo_ps(
+                               _mm_unpacklo_ps(
+                                 (__m128)this->m_maxExtent.m_quad.m128_u32[0],
+                                 (__m128)this->m_minExtent.m_quad.m128_u32[2]),
+                               _mm_unpacklo_ps((__m128)this->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
+  lines->m_data[14].m_quad = _mm_unpacklo_ps(
+                               _mm_unpacklo_ps(
+                                 (__m128)this->m_minExtent.m_quad.m128_u32[0],
+                                 (__m128)this->m_minExtent.m_quad.m128_u32[2]),
+                               _mm_unpacklo_ps((__m128)this->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
+  lines->m_data[15].m_quad = _mm_unpacklo_ps(
+                               _mm_unpacklo_ps(
+                                 (__m128)this->m_minExtent.m_quad.m128_u32[0],
+                                 (__m128)this->m_maxExtent.m_quad.m128_u32[2]),
+                               _mm_unpacklo_ps((__m128)this->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
+  lines->m_data[16].m_quad = _mm_unpacklo_ps(
+                               _mm_unpacklo_ps(
+                                 (__m128)this->m_maxExtent.m_quad.m128_u32[0],
+                                 (__m128)this->m_minExtent.m_quad.m128_u32[2]),
+                               _mm_unpacklo_ps((__m128)this->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
+  lines->m_data[17].m_quad = _mm_unpacklo_ps(
+                               _mm_unpacklo_ps(
+                                 (__m128)this->m_maxExtent.m_quad.m128_u32[0],
+                                 (__m128)this->m_minExtent.m_quad.m128_u32[2]),
+                               _mm_unpacklo_ps((__m128)this->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
+  lines->m_data[18].m_quad = _mm_unpacklo_ps(
+                               _mm_unpacklo_ps(
+                                 (__m128)this->m_minExtent.m_quad.m128_u32[0],
+                                 (__m128)this->m_maxExtent.m_quad.m128_u32[2]),
+                               _mm_unpacklo_ps((__m128)this->m_maxExtent.m_quad.m128_u32[1], (__m128)0i64));
+  lines->m_data[19].m_quad = _mm_unpacklo_ps(
+                               _mm_unpacklo_ps(
+                                 (__m128)this->m_minExtent.m_quad.m128_u32[0],
+                                 (__m128)this->m_maxExtent.m_quad.m128_u32[2]),
+                               _mm_unpacklo_ps((__m128)this->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
+  lines->m_data[20].m_quad = _mm_unpacklo_ps(
+                               _mm_unpacklo_ps(
+                                 (__m128)this->m_minExtent.m_quad.m128_u32[0],
+                                 (__m128)this->m_maxExtent.m_quad.m128_u32[2]),
+                               _mm_unpacklo_ps((__m128)this->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
+  lines->m_data[21].m_quad = _mm_unpacklo_ps(
+                               _mm_unpacklo_ps(
+                                 (__m128)this->m_maxExtent.m_quad.m128_u32[0],
+                                 (__m128)this->m_maxExtent.m_quad.m128_u32[2]),
+                               _mm_unpacklo_ps((__m128)this->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
+  lines->m_data[22].m_quad = _mm_unpacklo_ps(
+                               _mm_unpacklo_ps(
+                                 (__m128)this->m_maxExtent.m_quad.m128_u32[0],
+                                 (__m128)this->m_maxExtent.m_quad.m128_u32[2]),
+                               _mm_unpacklo_ps((__m128)this->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
+  lines->m_data[23].m_quad = _mm_unpacklo_ps(
+                               _mm_unpacklo_ps(
+                                 (__m128)this->m_maxExtent.m_quad.m128_u32[0],
+                                 (__m128)this->m_minExtent.m_quad.m128_u32[2]),
+                               _mm_unpacklo_ps((__m128)this->m_minExtent.m_quad.m128_u32[1], (__m128)0i64));
 }
 

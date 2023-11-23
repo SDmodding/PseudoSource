@@ -2,14 +2,12 @@
 // RVA: 0x8A7B00
 void __fastcall Scaleform::GFx::SpriteDef::~SpriteDef(Scaleform::GFx::SpriteDef *this)
 {
-  Scaleform::HashSetBase<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF> > *v1; // rsi
   unsigned int v2; // ebp
   __int64 v3; // rbx
-  signed __int64 v4; // rbx
+  Scaleform::GFx::TimelineDef::Frame *v4; // rbx
   unsigned int i; // edi
-  void (__fastcall ***v6)(_QWORD, _QWORD); // rcx
+  Scaleform::GFx::ExecuteTag *v6; // rcx
 
-  v1 = (Scaleform::HashSetBase<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF> > *)this;
   this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::SpriteDef::`vftable;
   v2 = 0;
   if ( this->Playlist.Data.Size )
@@ -17,33 +15,33 @@ void __fastcall Scaleform::GFx::SpriteDef::~SpriteDef(Scaleform::GFx::SpriteDef 
     v3 = 0i64;
     do
     {
-      v4 = (signed __int64)&v1[7].pTable[v3];
-      for ( i = 0; i < *(_DWORD *)(v4 + 8); ++i )
+      v4 = &this->Playlist.Data.Data[v3];
+      for ( i = 0; i < v4->TagCount; ++i )
       {
-        v6 = *(void (__fastcall ****)(_QWORD, _QWORD))(*(_QWORD *)v4 + 8i64 * i);
-        (**v6)(v6, 0i64);
+        v6 = v4->pTagPtrList[i];
+        v6->vfptr->__vecDelDtor(v6, 0i64);
       }
-      *(_QWORD *)v4 = 0i64;
-      *(_DWORD *)(v4 + 8) = 0;
+      v4->pTagPtrList = 0i64;
+      v4->TagCount = 0;
       v3 = ++v2;
     }
-    while ( (Scaleform::HashSetBase<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF> >::TableType *)v2 < v1[8].pTable );
+    while ( v2 < this->Playlist.Data.Size );
   }
-  Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1[10].pTable);
-  Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1[7].pTable);
-  Scaleform::HashSetBase<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF>>::Clear(v1 + 5);
-  v1->pTable = (Scaleform::HashSetBase<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF> >::TableType *)&Scaleform::GFx::CharacterDef::`vftable;
-  v1->pTable = (Scaleform::HashSetBase<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF> >::TableType *)&Scaleform::GFx::Resource::`vftable;
+  Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, this->pScale9Grid);
+  Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, this->Playlist.Data.Data);
+  Scaleform::HashSetBase<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF>>::Clear((Scaleform::HashSetBase<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<Scaleform::GFx::AS2::MovieClipLoader::ProgressDesc,Scaleform::String::NoCaseHashFunctor>::NodeHashF> > *)&this->NamedFrames);
+  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::CharacterDef::`vftable;
+  this->vfptr = (Scaleform::GFx::ResourceVtbl *)&Scaleform::GFx::Resource::`vftable;
 }
 
 // File Line: 62
 // RVA: 0x8B11D0
-void __fastcall Scaleform::GFx::SpriteDef::AddFrameName(Scaleform::GFx::SpriteDef *this, Scaleform::String *name, Scaleform::GFx::LogState *plog)
+void __fastcall Scaleform::GFx::SpriteDef::AddFrameName(
+        Scaleform::GFx::SpriteDef *this,
+        Scaleform::String *name,
+        Scaleform::GFx::LogState *plog)
 {
-  Scaleform::GFx::LogState *v3; // rdi
-  __int64 v4; // r8
-  Scaleform::String *v5; // rsi
-  Scaleform::GFx::SpriteDef *v6; // rbx
+  __int64 LoadingFrame; // r8
   Scaleform::HashSetBase<Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeHashF,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<unsigned int,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeHashF> >::TableType *v7; // rax
   unsigned __int64 v8; // r8
   __int64 v9; // rcx
@@ -52,45 +50,35 @@ void __fastcall Scaleform::GFx::SpriteDef::AddFrameName(Scaleform::GFx::SpriteDe
   __int64 v12; // rdx
   char v13; // al
   char v14; // al
-  _QWORD v15[2]; // [rsp+20h] [rbp-28h]
-  Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeRef key; // [rsp+30h] [rbp-18h]
-  int v17; // [rsp+50h] [rbp+8h]
+  Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeRef key; // [rsp+30h] [rbp-18h] BYREF
+  int v16; // [rsp+50h] [rbp+8h] BYREF
 
-  v3 = plog;
-  v4 = (unsigned int)this->LoadingFrame;
-  v5 = name;
-  v6 = this;
-  if ( (signed int)v4 < 0 || (signed int)v4 >= this->FrameCount )
+  LoadingFrame = (unsigned int)this->LoadingFrame;
+  if ( (int)LoadingFrame < 0 || (int)LoadingFrame >= this->FrameCount )
   {
-    if ( v3 )
-    {
-      LODWORD(v15[0]) = this->FrameCount;
+    if ( plog )
       Scaleform::GFx::LogBase<Scaleform::GFx::LogState>::LogError(
-        (Scaleform::GFx::LogBase<Scaleform::GFx::LogState> *)&v3->vfptr,
+        &plog->Scaleform::GFx::LogBase<Scaleform::GFx::LogState>,
         "AddFrameName(%d, %s) -- frame is out of range (frameCount = %d; skipping",
-        v4,
-        (name->HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12,
-        v15[0]);
-    }
+        LoadingFrame,
+        (const char *)((name->HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12),
+        this->FrameCount);
   }
   else
   {
     v7 = Scaleform::HashSetBase<Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeHashF,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<unsigned int,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeHashF>>::GetAlt<Scaleform::String>(
-           (Scaleform::HashSetBase<Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeHashF,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<unsigned int,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeHashF> > *)&this->NamedFrames.mHash.pTable,
+           &this->NamedFrames.mHash,
            name);
-    if ( v7 && v3 )
-    {
-      LODWORD(v15[0]) = v7->SizeMask;
+    if ( v7 && plog )
       Scaleform::GFx::LogBase<Scaleform::GFx::LogState>::LogError(
-        (Scaleform::GFx::LogBase<Scaleform::GFx::LogState> *)&v3->vfptr,
+        &plog->Scaleform::GFx::LogBase<Scaleform::GFx::LogState>,
         "AddFrameName(%d, %s) -- frame name already assigned to frame %d; overriding",
-        (unsigned int)v6->LoadingFrame,
-        (v5->HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12,
-        v15[0]);
-    }
-    if ( Scaleform::String::GetLength(v5) )
+        (unsigned int)this->LoadingFrame,
+        (const char *)((name->HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12),
+        LODWORD(v7->SizeMask));
+    if ( Scaleform::String::GetLength(name) )
     {
-      v8 = v5->HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64;
+      v8 = name->HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64;
       if ( *(_BYTE *)(v8 + 12) == 95 )
       {
         v9 = 0i64;
@@ -102,7 +90,7 @@ void __fastcall Scaleform::GFx::SpriteDef::AddFrameName(Scaleform::GFx::SpriteDe
             break;
           if ( v10 == 4 )
           {
-            v6->Flags |= 1u;
+            this->Flags |= 1u;
             goto LABEL_19;
           }
         }
@@ -114,7 +102,7 @@ void __fastcall Scaleform::GFx::SpriteDef::AddFrameName(Scaleform::GFx::SpriteDe
             break;
           if ( v12 == 6 )
           {
-            v6->Flags |= 2u;
+            this->Flags |= 2u;
             goto LABEL_19;
           }
         }
@@ -125,258 +113,246 @@ void __fastcall Scaleform::GFx::SpriteDef::AddFrameName(Scaleform::GFx::SpriteDe
             break;
           if ( v9 == 6 )
           {
-            v6->Flags |= 4u;
+            this->Flags |= 4u;
             break;
           }
         }
       }
     }
 LABEL_19:
-    v17 = v6->LoadingFrame;
-    key.pSecond = (const unsigned int *)&v17;
-    key.pFirst = v5;
+    v16 = this->LoadingFrame;
+    key.pSecond = (const unsigned int *)&v16;
+    key.pFirst = name;
     Scaleform::HashSetBase<Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeHashF,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<unsigned int,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeHashF>>::Set<Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeRef>(
-      (Scaleform::HashSetBase<Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeHashF,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<unsigned int,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeHashF> > *)&v6->NamedFrames.mHash.pTable,
-      &v6->NamedFrames,
+      &this->NamedFrames.mHash,
+      &this->NamedFrames,
       &key);
   }
 }
 
 // File Line: 94
 // RVA: 0x8F92B0
-void __fastcall Scaleform::GFx::SpriteDef::Read(Scaleform::GFx::SpriteDef *this, Scaleform::GFx::LoadProcess *p, __int64 charId)
+void __fastcall Scaleform::GFx::SpriteDef::Read(
+        Scaleform::GFx::SpriteDef *this,
+        Scaleform::GFx::LoadProcess *p,
+        unsigned __int16 *charId)
 {
   unsigned __int16 *v3; // rdi
   Scaleform::GFx::LoadProcess *v4; // rsi
-  Scaleform::GFx::SpriteDef *v5; // r13
-  Scaleform::GFx::Stream *v6; // rbx
+  Scaleform::GFx::SWFProcessInfo *pAltStream; // rbx
   __int64 v7; // rcx
   unsigned int v8; // ebp
-  __int64 v9; // r9
+  __int64 Pos; // r9
   unsigned __int16 v10; // r8
-  signed int v11; // eax
-  Scaleform::ArrayData<Scaleform::GFx::TimelineDef::Frame,Scaleform::AllocatorLH<Scaleform::GFx::TimelineDef::Frame,264>,Scaleform::ArrayDefaultPolicy> *v12; // r14
-  __int64 v13; // r8
-  __int64 v14; // r12
-  Scaleform::GFx::LoadStates *v15; // r15
-  Scaleform::GFx::ProgressHandler *v16; // r15
-  int v17; // er14
-  int v18; // ebp
-  int v19; // esi
-  Scaleform::GFx::TagType v20; // edi
-  __int64 v21; // r8
-  __int64 v22; // r8
-  void (__fastcall *v23)(Scaleform::GFx::LoadProcess *, Scaleform::GFx::TagInfo *); // r8
-  __int64 v24; // rax
-  int v25; // edi
-  signed int v26; // edx
-  unsigned int v27; // eax
-  int v28; // ecx
-  __int64 v29; // rdx
-  __int64 v30; // r8
-  __int64 v31[2]; // [rsp+20h] [rbp-88h]
-  Scaleform::GFx::TagInfo pTagInfo; // [rsp+38h] [rbp-70h]
-  Scaleform::String v33; // [rsp+48h] [rbp-60h]
-  Scaleform::GFx::TagType v34; // [rsp+50h] [rbp-58h]
-  int v35; // [rsp+54h] [rbp-54h]
-  int v36; // [rsp+58h] [rbp-50h]
-  int v37; // [rsp+5Ch] [rbp-4Ch]
-  unsigned int v38; // [rsp+B0h] [rbp+8h]
-  Scaleform::GFx::LoadProcess *v39; // [rsp+B8h] [rbp+10h]
-  unsigned __int16 *v40; // [rsp+C0h] [rbp+18h]
-  Scaleform::String src; // [rsp+C8h] [rbp+20h]
+  int v11; // eax
+  Scaleform::ArrayLH<Scaleform::GFx::TimelineDef::Frame,264,Scaleform::ArrayDefaultPolicy> *p_Playlist; // r14
+  __int64 v13; // r12
+  Scaleform::GFx::LoadStates *pObject; // r15
+  Scaleform::GFx::ProgressHandler *v15; // r15
+  int TagDataOffset; // r14d
+  int TagLength; // ebp
+  int TagOffset; // esi
+  Scaleform::GFx::TagType TagType; // edi
+  __int64 v20; // r8
+  void (__fastcall *v21)(Scaleform::GFx::LoadProcess *, Scaleform::GFx::TagInfo *); // r8
+  __int64 v22; // rax
+  signed int v23; // edi
+  signed int FilePos; // edx
+  unsigned int DataSize; // eax
+  __int64 LoadState; // rdx
+  __int64 v27; // [rsp+20h] [rbp-88h]
+  Scaleform::GFx::TagInfo pTagInfo; // [rsp+38h] [rbp-70h] BYREF
+  Scaleform::String v29; // [rsp+48h] [rbp-60h] BYREF
+  Scaleform::GFx::TagType v30; // [rsp+50h] [rbp-58h]
+  int v31; // [rsp+54h] [rbp-54h]
+  int v32; // [rsp+58h] [rbp-50h]
+  int v33; // [rsp+5Ch] [rbp-4Ch]
+  unsigned int v34; // [rsp+B0h] [rbp+8h]
+  Scaleform::String src; // [rsp+C8h] [rbp+20h] BYREF
 
-  v40 = (unsigned __int16 *)charId;
-  v39 = p;
-  v3 = (unsigned __int16 *)charId;
+  v3 = charId;
   v4 = p;
-  v5 = this;
-  v6 = p->pAltStream;
-  if ( !v6 )
-    v6 = &p->ProcessInfo.Stream;
-  v7 = v6->TagStackEntryCount - 1;
+  pAltStream = (Scaleform::GFx::SWFProcessInfo *)p->pAltStream;
+  if ( !pAltStream )
+    pAltStream = &p->ProcessInfo;
+  v7 = pAltStream->Stream.TagStackEntryCount - 1;
   if ( (unsigned int)v7 >= 2 )
     v8 = 0;
   else
-    v8 = v6->TagStack[v7];
-  v38 = v8;
-  p->LoadState = 1;
-  p->pTimelineDef = (Scaleform::GFx::TimelineIODef *)&v5->vfptr;
-  v6->UnusedBits = 0;
-  if ( (signed int)(v6->DataSize - v6->Pos) < 2 )
-    Scaleform::GFx::Stream::PopulateBuffer(v6, 2);
-  v9 = v6->Pos;
-  v10 = (unsigned __int8)v6->pBuffer[v9] | (unsigned __int16)((unsigned __int8)v6->pBuffer[(unsigned int)(v9 + 1)] << 8);
-  v6->Pos = v9 + 2;
+    v8 = pAltStream->Stream.TagStack[v7];
+  v34 = v8;
+  p->LoadState = LS_LoadingSprite;
+  p->pTimelineDef = this;
+  pAltStream->Stream.UnusedBits = 0;
+  if ( (signed int)(pAltStream->Stream.DataSize - pAltStream->Stream.Pos) < 2 )
+    Scaleform::GFx::Stream::PopulateBuffer(&pAltStream->Stream, 2);
+  Pos = pAltStream->Stream.Pos;
+  v10 = (unsigned __int8)pAltStream->Stream.pBuffer[Pos] | ((unsigned __int8)pAltStream->Stream.pBuffer[(unsigned int)(Pos + 1)] << 8);
+  pAltStream->Stream.Pos = Pos + 2;
   v11 = v10;
-  if ( (signed int)v10 < 1 )
+  if ( !v10 )
     v11 = 1;
-  v5->FrameCount = v11;
-  v12 = &v5->Playlist.Data;
+  this->FrameCount = v11;
+  p_Playlist = &this->Playlist;
   Scaleform::ArrayData<Scaleform::GFx::TimelineDef::Frame,Scaleform::AllocatorLH<Scaleform::GFx::TimelineDef::Frame,264>,Scaleform::ArrayDefaultPolicy>::Resize(
-    &v5->Playlist.Data,
+    &this->Playlist.Data,
     v11);
-  v13 = (unsigned int)v5->FrameCount;
-  Scaleform::GFx::LogBase<Scaleform::GFx::Stream>::LogParseShape(
-    (Scaleform::GFx::LogBase<Scaleform::GFx::Stream> *)&v6->vfptr,
-    "  frames = %d\n");
-  for ( v5->LoadingFrame = 0; v6->FilePos + v6->Pos - v6->DataSize < v8; v3 = v40 )
+  Scaleform::GFx::LogBase<Scaleform::GFx::Stream>::LogParseShape(&pAltStream->Stream, "  frames = %d\n");
+  for ( this->LoadingFrame = 0;
+        pAltStream->Stream.FilePos + pAltStream->Stream.Pos - pAltStream->Stream.DataSize < v8;
+        v3 = charId )
   {
-    v14 = (unsigned int)Scaleform::GFx::Stream::OpenTag(v6, &pTagInfo);
+    v13 = (unsigned int)Scaleform::GFx::Stream::OpenTag(&pAltStream->Stream, &pTagInfo);
     Scaleform::String::String(
       &src,
       (const char *)((v4->pLoadData.pObject->FileURL.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12));
-    v15 = v4->pLoadStates.pObject;
-    if ( v15->pProgressHandler.pObject )
+    pObject = v4->pLoadStates.pObject;
+    if ( pObject->pProgressHandler.pObject )
     {
-      v16 = v15->pProgressHandler.pObject;
-      v17 = pTagInfo.TagDataOffset;
-      v18 = pTagInfo.TagLength;
-      v19 = pTagInfo.TagOffset;
-      v20 = pTagInfo.TagType;
-      Scaleform::String::String(&v33, &src);
-      v34 = v20;
-      v35 = v19;
-      v36 = v18;
-      v37 = v17;
-      LOBYTE(v21) = 1;
-      ((void (__fastcall *)(Scaleform::GFx::ProgressHandler *, Scaleform::String *, __int64))v16->vfptr[2].__vecDelDtor)(
-        v16,
-        &v33,
-        v21);
-      if ( !_InterlockedDecrement((volatile signed __int32 *)((v33.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-        ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-      v12 = &v5->Playlist.Data;
-      v8 = v38;
-      v3 = v40;
-      v4 = v39;
+      v15 = pObject->pProgressHandler.pObject;
+      TagDataOffset = pTagInfo.TagDataOffset;
+      TagLength = pTagInfo.TagLength;
+      TagOffset = pTagInfo.TagOffset;
+      TagType = pTagInfo.TagType;
+      Scaleform::String::String(&v29, &src);
+      v30 = TagType;
+      v31 = TagOffset;
+      v32 = TagLength;
+      v33 = TagDataOffset;
+      LOBYTE(v20) = 1;
+      ((void (__fastcall *)(Scaleform::GFx::ProgressHandler *, Scaleform::String *, __int64))v15->vfptr[2].__vecDelDtor)(
+        v15,
+        &v29,
+        v20);
+      if ( !_InterlockedDecrement((volatile signed __int32 *)((v29.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
+        ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+      p_Playlist = &this->Playlist;
+      v8 = v34;
+      v3 = charId;
+      v4 = p;
     }
     if ( !_InterlockedDecrement((volatile signed __int32 *)((src.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-      ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-    if ( (_DWORD)v14 == 1 )
+      ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+    if ( (_DWORD)v13 == 1 )
     {
-      if ( v5->LoadingFrame == LODWORD(v5->Playlist.Data.Size) )
+      if ( this->LoadingFrame == LODWORD(this->Playlist.Data.Size) )
       {
         Scaleform::ArrayData<Scaleform::GFx::TimelineDef::Frame,Scaleform::AllocatorLH<Scaleform::GFx::TimelineDef::Frame,264>,Scaleform::ArrayDefaultPolicy>::Resize(
-          v12,
-          v5->Playlist.Data.Size + 1);
-        LODWORD(v31[0]) = v5->LoadingFrame + 1;
+          &p_Playlist->Data,
+          this->Playlist.Data.Size + 1);
+        LODWORD(v27) = this->LoadingFrame + 1;
         Scaleform::GFx::LogBase<Scaleform::GFx::Stream>::LogError(
-          (Scaleform::GFx::LogBase<Scaleform::GFx::Stream> *)&v6->vfptr,
+          &pAltStream->Stream,
           "An extra frame is found for sprite id = %d, framecnt = %d, actual frames = %d",
           *v3,
-          (unsigned int)v5->FrameCount,
-          v31[0]);
+          (unsigned int)this->FrameCount,
+          v27);
       }
       Scaleform::GFx::LoadProcess::CommitFrameTags(v4);
-      v22 = *v3;
       Scaleform::GFx::LogBase<Scaleform::GFx::Stream>::LogParseShape(
-        (Scaleform::GFx::LogBase<Scaleform::GFx::Stream> *)&v6->vfptr,
+        &pAltStream->Stream,
         "  ShowFrame (sprite, char id = %d)\n");
-      ++v5->LoadingFrame;
+      ++this->LoadingFrame;
       goto LABEL_28;
     }
-    if ( (unsigned int)v14 >= 0x5C )
+    if ( (unsigned int)v13 >= 0x5C )
     {
-      v24 = (unsigned int)(v14 - 1000);
-      if ( (unsigned int)v24 > 9 )
+      v22 = (unsigned int)(v13 - 1000);
+      if ( (unsigned int)v22 > 9 )
         goto LABEL_27;
-      v23 = Scaleform::GFx::GFx_GFX_TagLoaderTable[v24];
+      v21 = Scaleform::GFx::GFx_GFX_TagLoaderTable[v22];
     }
     else
     {
-      v23 = Scaleform::GFx::SWF_TagLoaderTable[v14];
+      v21 = Scaleform::GFx::SWF_TagLoaderTable[v13];
     }
-    if ( v23 )
+    if ( v21 )
     {
-      v23(v4, &pTagInfo);
+      v21(v4, &pTagInfo);
       goto LABEL_28;
     }
 LABEL_27:
     Scaleform::GFx::LogBase<Scaleform::GFx::Stream>::LogParseShape(
-      (Scaleform::GFx::LogBase<Scaleform::GFx::Stream> *)&v6->vfptr,
+      &pAltStream->Stream,
       "*** no tag loader for type %d\n");
 LABEL_28:
-    v25 = v6->TagStack[--v6->TagStackEntryCount];
-    v6->UnusedBits = 0;
-    v26 = v6->FilePos;
-    v27 = v6->DataSize;
-    v28 = v6->FilePos - v27;
-    if ( v25 < v28 || v25 >= v26 )
+    v23 = pAltStream->Stream.TagStack[--pAltStream->Stream.TagStackEntryCount];
+    pAltStream->Stream.UnusedBits = 0;
+    FilePos = pAltStream->Stream.FilePos;
+    DataSize = pAltStream->Stream.DataSize;
+    if ( v23 < (int)(FilePos - DataSize) || v23 >= FilePos )
     {
-      if ( (v6->ResyncFile || v6->Pos + v28 != v25)
-        && ((signed int (__fastcall *)(Scaleform::File *, _QWORD, _QWORD))v6->pInput.pObject->vfptr[14].__vecDelDtor)(
-             v6->pInput.pObject,
-             (unsigned int)v25,
+      if ( (pAltStream->Stream.ResyncFile || pAltStream->Stream.Pos + FilePos - DataSize != v23)
+        && ((int (__fastcall *)(Scaleform::File *, _QWORD, _QWORD))pAltStream->Stream.pInput.pObject->vfptr[14].__vecDelDtor)(
+             pAltStream->Stream.pInput.pObject,
+             (unsigned int)v23,
              0i64) >= 0 )
       {
-        v6->ResyncFile = 0;
-        *(_QWORD *)&v6->Pos = 0i64;
-        v6->FilePos = v25;
+        pAltStream->Stream.ResyncFile = 0;
+        *(_QWORD *)&pAltStream->Stream.Pos = 0i64;
+        pAltStream->Stream.FilePos = v23;
       }
     }
     else
     {
-      v6->Pos = v25 + v27 - v26;
+      pAltStream->Stream.Pos = v23 + DataSize - FilePos;
     }
-    v6->UnusedBits = 0;
+    pAltStream->Stream.UnusedBits = 0;
   }
-  v29 = v4->LoadState;
-  if ( v4->FrameTags[v29].Data.Size || !(_DWORD)v29 && v4->InitActionTags.Data.Size )
+  LoadState = v4->LoadState;
+  if ( v4->FrameTags[LoadState].Data.Size || !(_DWORD)LoadState && v4->InitActionTags.Data.Size )
   {
-    if ( v5->LoadingFrame == LODWORD(v5->Playlist.Data.Size) )
+    if ( this->LoadingFrame == LODWORD(this->Playlist.Data.Size) )
     {
       Scaleform::ArrayData<Scaleform::GFx::TimelineDef::Frame,Scaleform::AllocatorLH<Scaleform::GFx::TimelineDef::Frame,264>,Scaleform::ArrayDefaultPolicy>::Resize(
-        v12,
-        v5->Playlist.Data.Size + 1);
-      LODWORD(v31[0]) = v5->LoadingFrame + 1;
+        &p_Playlist->Data,
+        this->Playlist.Data.Size + 1);
+      LODWORD(v27) = this->LoadingFrame + 1;
       Scaleform::GFx::LogBase<Scaleform::GFx::Stream>::LogError(
-        (Scaleform::GFx::LogBase<Scaleform::GFx::Stream> *)&v6->vfptr,
+        &pAltStream->Stream,
         "An extra frame is found for sprite id = %d, framecnt = %d, actual frames = %d",
         *v3,
-        (unsigned int)v5->FrameCount,
-        v31[0]);
+        (unsigned int)this->FrameCount,
+        v27);
     }
     Scaleform::GFx::LoadProcess::CommitFrameTags(v4);
   }
-  v4->LoadState = 0;
+  v4->LoadState = LS_LoadingRoot;
   v4->pTimelineDef = 0i64;
-  v30 = *v3;
   Scaleform::GFx::LogBase<Scaleform::GFx::Stream>::LogParseShape(
-    (Scaleform::GFx::LogBase<Scaleform::GFx::Stream> *)&v6->vfptr,
+    &pAltStream->Stream,
     "  -- sprite END, char id = %d --\n");
 }
 
 // File Line: 196
 // RVA: 0x8D8FC0
-Scaleform::Array<Scaleform::String,2,Scaleform::ArrayDefaultPolicy> *__fastcall Scaleform::GFx::SpriteDef::GetFrameLabels(Scaleform::GFx::SpriteDef *this, unsigned int frameNumber, Scaleform::Array<Scaleform::String,2,Scaleform::ArrayDefaultPolicy> *destArr)
+Scaleform::Array<Scaleform::String,2,Scaleform::ArrayDefaultPolicy> *__fastcall Scaleform::GFx::SpriteDef::GetFrameLabels(
+        Scaleform::GFx::SpriteDef *this,
+        unsigned int frameNumber,
+        Scaleform::Array<Scaleform::String,2,Scaleform::ArrayDefaultPolicy> *destArr)
 {
-  Scaleform::Array<Scaleform::String,2,Scaleform::ArrayDefaultPolicy> *v3; // r15
-  unsigned int v4; // er12
-  Scaleform::StringHashLH<unsigned int,2,Scaleform::String::NoCaseHashFunctor,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>,Scaleform::HashsetCachedNodeEntry<Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeHashF> > *v5; // r10
-  Scaleform::HashSetBase<Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeHashF,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<unsigned int,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeHashF> >::TableType *v6; // r9
-  Scaleform::Array<Scaleform::String,2,Scaleform::ArrayDefaultPolicy> *v7; // r14
+  Scaleform::StringHashLH<unsigned int,2,Scaleform::String::NoCaseHashFunctor,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>,Scaleform::HashsetCachedNodeEntry<Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeHashF> > *p_NamedFrames; // r10
+  Scaleform::HashSetBase<Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeHashF,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<unsigned int,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeHashF> >::TableType *pTable; // r9
+  __int64 v7; // r14
   unsigned __int64 v8; // rax
   Scaleform::HashSetBase<Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeHashF,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<unsigned int,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeHashF> >::TableType *v9; // rcx
   int v10; // esi
-  __int64 v11; // rbx
-  __int64 v12; // rdi
-  __int64 v13; // rcx
-  Scaleform::String *v14; // rbp
-  Scaleform::String *v15; // rcx
-  unsigned __int64 v16; // rcx
-  _QWORD *v17; // rax
-  __m128i v19; // [rsp+30h] [rbp-38h]
+  signed __int64 v11; // rbx
+  Scaleform::HashSetBase<Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeHashF,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<unsigned int,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeHashF> >::TableType *v12; // rcx
+  Scaleform::String *v13; // rbp
+  Scaleform::String *v14; // rcx
+  unsigned __int64 SizeMask; // rcx
+  Scaleform::HashSetBase<Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeHashF,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<unsigned int,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeHashF> >::TableType *v16; // rax
+  Scaleform::StringHashLH<unsigned int,2,Scaleform::String::NoCaseHashFunctor,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>,Scaleform::HashsetCachedNodeEntry<Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>,Scaleform::StringLH_HashNode<unsigned int,Scaleform::String::NoCaseHashFunctor>::NodeHashF> > *v18; // [rsp+30h] [rbp-38h]
+  unsigned __int64 v19; // [rsp+38h] [rbp-30h]
 
-  v3 = destArr;
-  v4 = frameNumber;
-  v5 = &this->NamedFrames;
-  v6 = this->NamedFrames.mHash.pTable;
+  p_NamedFrames = &this->NamedFrames;
+  pTable = this->NamedFrames.mHash.pTable;
   v7 = 0i64;
-  if ( v6 )
+  if ( pTable )
   {
     v8 = 0i64;
-    v9 = v6 + 1;
+    v9 = pTable + 1;
     do
     {
       if ( v9->EntryCount != -2i64 )
@@ -384,71 +360,68 @@ Scaleform::Array<Scaleform::String,2,Scaleform::ArrayDefaultPolicy> *__fastcall 
       ++v8;
       v9 += 2;
     }
-    while ( v8 <= v6->SizeMask );
-    v19.m128i_i64[0] = (__int64)v5;
-    v19.m128i_i64[1] = v8;
+    while ( v8 <= pTable->SizeMask );
+    v18 = p_NamedFrames;
+    v19 = v8;
   }
   else
   {
-    v19 = 0ui64;
+    v18 = 0i64;
+    v19 = 0i64;
   }
-  _mm_store_si128(&v19, v19);
   v10 = 0;
-  v11 = v19.m128i_i64[1];
-  v12 = v19.m128i_i64[0];
-  while ( v12 )
+  v11 = v19;
+  while ( v18 )
   {
-    v13 = *(_QWORD *)v12;
-    if ( !*(_QWORD *)v12 || v11 > *(_QWORD *)(v13 + 8) )
+    v12 = v18->mHash.pTable;
+    if ( !v18->mHash.pTable || v11 > (signed __int64)v12->SizeMask )
       break;
-    if ( v4 == *(_DWORD *)(32 * v11 + v13 + 40) )
+    if ( frameNumber == LODWORD(v12[2 * v11 + 2].SizeMask) )
     {
-      v14 = (Scaleform::String *)(32 * v11 + v13);
+      v13 = (Scaleform::String *)&v12[2 * v11];
       Scaleform::ArrayDataBase<Scaleform::String,Scaleform::AllocatorGH<Scaleform::String,2>,Scaleform::ArrayDefaultPolicy>::ResizeNoConstruct(
-        (Scaleform::ArrayDataBase<Scaleform::String,Scaleform::AllocatorGH<Scaleform::String,2>,Scaleform::ArrayDefaultPolicy> *)&v3->Data.Data,
-        v3,
-        v3->Data.Size + 1);
-      v15 = &v3->Data.Data[v3->Data.Size - 1];
-      if ( v15 )
-        Scaleform::String::String(v15, v14 + 4);
+        &destArr->Data,
+        destArr,
+        destArr->Data.Size + 1);
+      v14 = &destArr->Data.Data[destArr->Data.Size - 1];
+      if ( v14 )
+        Scaleform::String::String(v14, v13 + 4);
       ++v10;
     }
-    v16 = *(_QWORD *)(*(_QWORD *)v12 + 8i64);
-    if ( v11 <= (signed __int64)v16 && ++v11 <= v16 )
+    SizeMask = v18->mHash.pTable->SizeMask;
+    if ( v11 <= (__int64)SizeMask && ++v11 <= SizeMask )
     {
-      v17 = (_QWORD *)(*(_QWORD *)v12 + 32 * v11 + 16);
+      v16 = &v18->mHash.pTable[2 * v11 + 1];
       do
       {
-        if ( *v17 != -2i64 )
+        if ( v16->EntryCount != -2i64 )
           break;
         ++v11;
-        v17 += 4;
+        v16 += 2;
       }
-      while ( v11 <= v16 );
+      while ( v11 <= SizeMask );
     }
   }
   if ( v10 )
-    v7 = v3;
-  return v7;
+    return destArr;
+  return (Scaleform::Array<Scaleform::String,2,Scaleform::ArrayDefaultPolicy> *)v7;
 }
 
 // File Line: 233
 // RVA: 0x8B0270
-Scaleform::GFx::TimelineSnapshot::SnapshotElement *__fastcall Scaleform::GFx::TimelineSnapshot::Add(Scaleform::GFx::TimelineSnapshot *this, int depth)
+Scaleform::GFx::TimelineSnapshot::SnapshotElement *__fastcall Scaleform::GFx::TimelineSnapshot::Add(
+        Scaleform::GFx::TimelineSnapshot *this,
+        int depth)
 {
-  int v2; // ebp
-  Scaleform::GFx::TimelineSnapshot *v3; // rsi
   Scaleform::GFx::TimelineSnapshot::SnapshotElement *result; // rax
   Scaleform::GFx::TimelineSnapshot::SnapshotElement *v5; // rbx
   unsigned __int64 v6; // rdi
-  unsigned __int64 v7; // r10
-  signed __int64 v8; // rcx
+  unsigned __int64 Size; // r10
+  __int64 v8; // rcx
   unsigned __int64 v9; // r8
   unsigned __int64 v10; // r8
 
-  v2 = depth;
-  v3 = this;
-  result = Scaleform::ListAllocBase<Scaleform::GFx::TimelineSnapshot::SnapshotElement,50,Scaleform::AllocatorDH<Scaleform::GFx::TimelineSnapshot::SnapshotElement,2>>::allocate((Scaleform::ListAllocBase<Scaleform::GFx::TimelineSnapshot::SnapshotElement,50,Scaleform::AllocatorDH<Scaleform::GFx::TimelineSnapshot::SnapshotElement,2> > *)&this->SnapshotHeap.FirstPage);
+  result = Scaleform::ListAllocBase<Scaleform::GFx::TimelineSnapshot::SnapshotElement,50,Scaleform::AllocatorDH<Scaleform::GFx::TimelineSnapshot::SnapshotElement,2>>::allocate(&this->SnapshotHeap);
   v5 = result;
   v6 = 0i64;
   if ( result )
@@ -468,17 +441,17 @@ Scaleform::GFx::TimelineSnapshot::SnapshotElement *__fastcall Scaleform::GFx::Ti
   }
   if ( result )
   {
-    result->pPrev = v3->SnapshotList.Root.pPrev;
-    result->pNext = (Scaleform::GFx::TimelineSnapshot::SnapshotElement *)&v3->SnapshotList;
-    v3->SnapshotList.Root.pPrev->pNext = result;
-    v3->SnapshotList.Root.pPrev = result;
-    result->Depth = v2;
-    v7 = v3->SnapshotSortedArray.Data.Size;
-    v8 = v7;
+    result->pPrev = this->SnapshotList.Root.pPrev;
+    result->pNext = (Scaleform::GFx::TimelineSnapshot::SnapshotElement *)&this->SnapshotList;
+    this->SnapshotList.Root.pPrev->pNext = result;
+    this->SnapshotList.Root.pPrev = result;
+    result->Depth = depth;
+    Size = this->SnapshotSortedArray.Data.Size;
+    v8 = Size;
     while ( v8 > 0 )
     {
       v9 = (v8 >> 1) + v6;
-      if ( v2 >= v3->SnapshotSortedArray.Data.Data[v9]->Depth )
+      if ( depth >= this->SnapshotSortedArray.Data.Data[v9]->Depth )
       {
         v6 = v9 + 1;
         v8 += -1 - (v8 >> 1);
@@ -489,124 +462,93 @@ Scaleform::GFx::TimelineSnapshot::SnapshotElement *__fastcall Scaleform::GFx::Ti
       }
     }
     Scaleform::ArrayDataDH<double,Scaleform::AllocatorDH<double,2>,Scaleform::ArrayDefaultPolicy>::Resize(
-      (Scaleform::ArrayDataDH<double,Scaleform::AllocatorDH<double,2>,Scaleform::ArrayDefaultPolicy> *)&v3->SnapshotSortedArray,
-      v7 + 1);
-    v10 = v3->SnapshotSortedArray.Data.Size;
+      (Scaleform::ArrayDataDH<double,Scaleform::AllocatorDH<double,2>,Scaleform::ArrayDefaultPolicy> *)&this->SnapshotSortedArray,
+      Size + 1);
+    v10 = this->SnapshotSortedArray.Data.Size;
     if ( v6 < v10 - 1 )
-      memmove(&v3->SnapshotSortedArray.Data.Data[v6 + 1], &v3->SnapshotSortedArray.Data.Data[v6], 8 * (v10 - v6) - 8);
-    v3->SnapshotSortedArray.Data.Data[v6] = v5;
-    result = v5;
+      memmove(
+        &this->SnapshotSortedArray.Data.Data[v6 + 1],
+        &this->SnapshotSortedArray.Data.Data[v6],
+        8 * (v10 - v6) - 8);
+    this->SnapshotSortedArray.Data.Data[v6] = v5;
+    return v5;
   }
   return result;
 }
 
 // File Line: 263
 // RVA: 0x8EB240
-void __fastcall Scaleform::GFx::TimelineSnapshot::MakeSnapshot(Scaleform::GFx::TimelineSnapshot *this, Scaleform::GFx::TimelineDef *pdef, unsigned int startFrame, unsigned int endFrame)
+void __fastcall Scaleform::GFx::TimelineSnapshot::MakeSnapshot(
+        Scaleform::GFx::TimelineSnapshot *this,
+        Scaleform::GFx::TimelineDef *pdef,
+        unsigned int startFrame,
+        unsigned int endFrame)
 {
-  unsigned int v4; // ebp
   unsigned int v5; // edi
-  Scaleform::GFx::TimelineDef *v6; // r14
-  Scaleform::GFx::TimelineSnapshot *v7; // rsi
-  __int64 v8; // rbx
-  __int64 v9; // [rsp+20h] [rbp-18h]
+  __int64 i; // rbx
+  __int64 v9; // [rsp+20h] [rbp-18h] BYREF
   unsigned int v10; // [rsp+28h] [rbp-10h]
 
   if ( startFrame <= endFrame )
   {
-    v4 = endFrame;
     v5 = startFrame;
-    v6 = pdef;
-    v7 = this;
     do
     {
-      ((void (__fastcall *)(Scaleform::GFx::TimelineDef *, __int64 *, _QWORD))v6->vfptr[2].GetResourceReport)(
-        v6,
+      ((void (__fastcall *)(Scaleform::GFx::TimelineDef *, __int64 *, _QWORD))pdef->vfptr[2].GetResourceReport)(
+        pdef,
         &v9,
         v5);
-      v8 = 0i64;
-      if ( v10 )
-      {
-        do
-        {
-          (*(void (__fastcall **)(_QWORD, Scaleform::GFx::TimelineSnapshot *, _QWORD))(**(_QWORD **)(v9 + 8 * v8) + 48i64))(
-            *(_QWORD *)(v9 + 8 * v8),
-            v7,
-            v5);
-          v8 = (unsigned int)(v8 + 1);
-        }
-        while ( (unsigned int)v8 < v10 );
-      }
+      for ( i = 0i64; (unsigned int)i < v10; i = (unsigned int)(i + 1) )
+        (*(void (__fastcall **)(_QWORD, Scaleform::GFx::TimelineSnapshot *, _QWORD))(**(_QWORD **)(v9 + 8 * i) + 48i64))(
+          *(_QWORD *)(v9 + 8 * i),
+          this,
+          v5);
       ++v5;
     }
-    while ( v5 <= v4 );
+    while ( v5 <= endFrame );
   }
 }
 
 // File Line: 282
 // RVA: 0x8CADA0
-void __fastcall Scaleform::GFx::TimelineSnapshot::ExecuteSnapshot(Scaleform::GFx::TimelineSnapshot *this, Scaleform::GFx::DisplayObjContainer *pdispObj)
+void __fastcall Scaleform::GFx::TimelineSnapshot::ExecuteSnapshot(
+        Scaleform::GFx::TimelineSnapshot *this,
+        Scaleform::GFx::DisplayObjContainer *pdispObj)
 {
-  Scaleform::GFx::DisplayObjContainer *v2; // rsi
   int v3; // ebx
-  Scaleform::List<Scaleform::GFx::TimelineSnapshot::SnapshotElement,Scaleform::GFx::TimelineSnapshot::SnapshotElement> *v4; // r14
+  Scaleform::List<Scaleform::GFx::TimelineSnapshot::SnapshotElement,Scaleform::GFx::TimelineSnapshot::SnapshotElement> *p_SnapshotList; // r14
   Scaleform::GFx::TimelineSnapshot::SnapshotElement *i; // rdi
-  Scaleform::GFx::ASStringManager *v6; // rax
-  Scaleform::GFx::ASString *v7; // rax
-  Scaleform::GFx::ASStringNode *v8; // rcx
-  bool v9; // zf
-  Scaleform::GFx::ASStringNode *v10; // rcx
+  Scaleform::GFx::ASMovieRootBase *v6; // rcx
+  Scaleform::GFx::ASStringManager *v7; // rax
+  Scaleform::GFx::ASString *v8; // rax
+  Scaleform::GFx::ASStringNode *v9; // rcx
+  bool v10; // zf
   Scaleform::GFx::ASStringNode *v11; // rcx
-  Scaleform::Render::RenderBuffer *v12; // rcx
-  Scaleform::GFx::ASStringManager *v13; // rax
-  Scaleform::GFx::ASString *v14; // rax
-  Scaleform::GFx::ASStringNode *v15; // rcx
-  Scaleform::GFx::ASStringNode *v16; // rcx
-  unsigned int v17; // ST28_4
+  Scaleform::GFx::ASStringNode *v12; // rcx
+  Scaleform::Render::RenderBuffer *pObject; // rcx
+  Scaleform::GFx::ASMovieRootBase *v14; // rcx
+  Scaleform::GFx::ASStringManager *v15; // rax
+  Scaleform::GFx::ASString *v16; // rax
+  Scaleform::GFx::ASStringNode *v17; // rcx
   Scaleform::GFx::ASStringNode *v18; // rcx
-  Scaleform::GFx::ASString v19; // [rsp+58h] [rbp-A8h]
-  Scaleform::GFx::ASString v20; // [rsp+60h] [rbp-A0h]
-  Scaleform::GFx::ASString v21; // [rsp+68h] [rbp-98h]
-  Scaleform::GFx::ASString result; // [rsp+70h] [rbp-90h]
-  Scaleform::Render::Cxform v23; // [rsp+80h] [rbp-80h]
-  __int128 v24; // [rsp+A0h] [rbp-60h]
-  __m128 v25; // [rsp+B0h] [rbp-50h]
-  Scaleform::Render::RenderBuffer *v26; // [rsp+C0h] [rbp-40h]
-  __int64 v27; // [rsp+C8h] [rbp-38h]
-  int v28; // [rsp+D0h] [rbp-30h]
-  __int64 v29; // [rsp+D8h] [rbp-28h]
-  int v30; // [rsp+E0h] [rbp-20h]
-  __int16 v31; // [rsp+E4h] [rbp-1Ch]
-  __int64 v32; // [rsp+F0h] [rbp-10h]
-  char *v33; // [rsp+F8h] [rbp-8h]
-  __int64 v34; // [rsp+110h] [rbp+10h]
-  Scaleform::Render::Cxform v35; // [rsp+120h] [rbp+20h]
-  __int128 v36; // [rsp+140h] [rbp+40h]
-  Scaleform::GFx::ASString v37[2]; // [rsp+150h] [rbp+50h]
-  Scaleform::GFx::ASString v38; // [rsp+160h] [rbp+60h]
-  Scaleform::GFx::ASString v39; // [rsp+168h] [rbp+68h]
-  Scaleform::GFx::ASString v40; // [rsp+170h] [rbp+70h]
-  __int64 v41; // [rsp+178h] [rbp+78h]
-  int v42; // [rsp+180h] [rbp+80h]
-  __int16 v43; // [rsp+184h] [rbp+84h]
-  char *pstr; // [rsp+198h] [rbp+98h]
-  char v45; // [rsp+1B0h] [rbp+B0h]
-  Scaleform::Render::Cxform v46; // [rsp+1C0h] [rbp+C0h]
-  __int128 v47; // [rsp+1E0h] [rbp+E0h]
-  __m128 v48; // [rsp+1F0h] [rbp+F0h]
-  __int128 v49; // [rsp+200h] [rbp+100h]
-  int v50; // [rsp+210h] [rbp+110h]
-  __int64 v51; // [rsp+218h] [rbp+118h]
-  int v52; // [rsp+220h] [rbp+120h]
-  __int16 v53; // [rsp+224h] [rbp+124h]
-  Scaleform::GFx::ResourceId id; // [rsp+290h] [rbp+190h]
-  Scaleform::GFx::ASStringNode *v55; // [rsp+2A0h] [rbp+1A0h]
-  Scaleform::GFx::ASStringNode *v56; // [rsp+2A8h] [rbp+1A8h]
+  int v19; // eax
+  Scaleform::GFx::ASStringNode *v20; // rcx
+  Scaleform::GFx::ASString v21; // [rsp+58h] [rbp-A8h] BYREF
+  Scaleform::GFx::ASString v22; // [rsp+60h] [rbp-A0h] BYREF
+  Scaleform::GFx::ASString v23; // [rsp+68h] [rbp-98h] BYREF
+  Scaleform::GFx::ASString result; // [rsp+70h] [rbp-90h] BYREF
+  Scaleform::GFx::GFxPlaceObjectBase::UnpackedData v25; // [rsp+80h] [rbp-80h] BYREF
+  __int64 v26; // [rsp+110h] [rbp+10h]
+  Scaleform::GFx::GFxPlaceObjectBase::UnpackedData v27; // [rsp+120h] [rbp+20h] BYREF
+  char v28[16]; // [rsp+1B0h] [rbp+B0h] BYREF
+  Scaleform::GFx::GFxPlaceObjectBase::UnpackedData v29; // [rsp+1C0h] [rbp+C0h] BYREF
+  Scaleform::GFx::GFxPlaceObjectBase::UnpackedData *id; // [rsp+290h] [rbp+190h] BYREF
+  Scaleform::GFx::ASStringNode *pNode; // [rsp+2A0h] [rbp+1A0h] BYREF
+  Scaleform::GFx::ASStringNode *v32; // [rsp+2A8h] [rbp+1A8h] BYREF
 
-  v34 = -2i64;
-  v2 = pdispObj;
+  v26 = -2i64;
   v3 = 0;
-  v4 = &this->SnapshotList;
+  p_SnapshotList = &this->SnapshotList;
   if ( (Scaleform::List<Scaleform::GFx::TimelineSnapshot::SnapshotElement,Scaleform::GFx::TimelineSnapshot::SnapshotElement> *)this->SnapshotList.Root.pNext != &this->SnapshotList )
   {
     for ( i = this->SnapshotList.Root.pNext; ; i = i->pNext )
@@ -615,24 +557,20 @@ void __fastcall Scaleform::GFx::TimelineSnapshot::ExecuteSnapshot(Scaleform::GFx
       {
         if ( i->PlaceType == 1 )
         {
-          *(_QWORD *)&id.Id = &v46;
-          Scaleform::Render::Cxform::Cxform(&v46);
-          v47 = _xmm;
-          v48 = _xmm;
-          v49 = 0ui64;
-          v50 = 0x40000;
-          v52 = 0;
-          v53 = 256;
-          v51 = 0i64;
-          Scaleform::GFx::TimelineSnapshot::SourceTags::Unpack(
-            &i->Tags,
-            (Scaleform::GFx::GFxPlaceObjectBase::UnpackedData *)&v46);
-          Scaleform::GFx::DisplayList::MoveDisplayObject(
-            &v2->mDisplayList,
-            (Scaleform::GFx::DisplayObjectBase *)&v2->vfptr,
-            (Scaleform::GFx::CharPosInfo *)&v46);
-          *(_QWORD *)&id.Id = &v46;
-          v12 = (Scaleform::Render::RenderBuffer *)v49;
+          id = &v29;
+          Scaleform::Render::Cxform::Cxform(&v29.Pos.ColorTransform);
+          *(_OWORD *)&v29.Pos.Matrix_1.M[0][0] = _xmm;
+          *(__m128 *)&v29.Pos.Matrix_1.M[1][0] = _xmm;
+          v29.Pos.pFilters.pObject = 0i64;
+          v29.Pos.CharacterId.Id = 0x40000;
+          *(_DWORD *)&v29.Pos.ClipDepth = 0;
+          *(_QWORD *)&v29.Pos.Ratio = 0i64;
+          *(_WORD *)&v29.Pos.BlendMode = 256;
+          v29.Pos.ClassName = 0i64;
+          Scaleform::GFx::TimelineSnapshot::SourceTags::Unpack(&i->Tags, &v29);
+          Scaleform::GFx::DisplayList::MoveDisplayObject(&pdispObj->mDisplayList, pdispObj, &v29.Pos);
+          id = &v29;
+          pObject = (Scaleform::Render::RenderBuffer *)v29.Pos.pFilters.pObject;
         }
         else
         {
@@ -640,138 +578,136 @@ void __fastcall Scaleform::GFx::TimelineSnapshot::ExecuteSnapshot(Scaleform::GFx
           {
             if ( i->PlaceType == 3 )
             {
-              id.Id = 0x40000;
+              LODWORD(id) = 0x40000;
               Scaleform::GFx::DisplayList::RemoveDisplayObject(
-                &v2->mDisplayList,
-                (Scaleform::GFx::DisplayObjectBase *)&v2->vfptr,
+                &pdispObj->mDisplayList,
+                pdispObj,
                 i->Depth,
                 (Scaleform::GFx::ResourceId)&id);
             }
-            goto LABEL_35;
+            goto LABEL_37;
           }
-          *(_QWORD *)&id.Id = &v35;
-          Scaleform::Render::Cxform::Cxform(&v35);
-          v36 = _xmm;
-          *(__m128 *)&v37[0].pNode = _xmm;
-          v38.pNode = 0i64;
-          LODWORD(v40.pNode) = 0x40000;
-          v42 = 0;
-          v39.pNode = 0i64;
-          v43 = 256;
-          v41 = 0i64;
-          Scaleform::GFx::TimelineSnapshot::SourceTags::Unpack(
-            &i->Tags,
-            (Scaleform::GFx::GFxPlaceObjectBase::UnpackedData *)&v35);
-          v6 = (Scaleform::GFx::ASStringManager *)((__int64 (*)(void))v2->pASRoot->pMovieImpl->pASMovieRoot.pObject->vfptr[59].__vecDelDtor)();
-          if ( pstr )
+          id = &v27;
+          Scaleform::Render::Cxform::Cxform(&v27.Pos.ColorTransform);
+          *(_OWORD *)&v27.Pos.Matrix_1.M[0][0] = _xmm;
+          *(__m128 *)&v27.Pos.Matrix_1.M[1][0] = _xmm;
+          v27.Pos.pFilters.pObject = 0i64;
+          v27.Pos.CharacterId.Id = 0x40000;
+          *(_DWORD *)&v27.Pos.ClipDepth = 0;
+          *(_QWORD *)&v27.Pos.Ratio = 0i64;
+          *(_WORD *)&v27.Pos.BlendMode = 256;
+          v27.Pos.ClassName = 0i64;
+          Scaleform::GFx::TimelineSnapshot::SourceTags::Unpack(&i->Tags, &v27);
+          v6 = pdispObj->pASRoot->pMovieImpl->pASMovieRoot.pObject;
+          v7 = (Scaleform::GFx::ASStringManager *)((__int64 (__fastcall *)(Scaleform::GFx::ASMovieRootBase *))v6->vfptr[59].__vecDelDtor)(v6);
+          if ( v27.Name )
           {
-            v7 = Scaleform::GFx::ASStringManager::CreateString(v6, &v21, pstr);
+            v8 = Scaleform::GFx::ASStringManager::CreateString(v7, &v23, v27.Name);
             v3 |= 8u;
           }
           else
           {
-            v7 = Scaleform::GFx::ASStringManager::CreateEmptyString(v6, &result);
+            v8 = Scaleform::GFx::ASStringManager::CreateEmptyString(v7, &result);
             v3 |= 4u;
           }
-          v55 = v7->pNode;
-          ++v55->RefCount;
-          if ( v3 & 8 )
+          pNode = v8->pNode;
+          ++pNode->RefCount;
+          if ( (v3 & 8) != 0 )
           {
-            v3 &= 0xFFFFFFF7;
-            v8 = v21.pNode;
-            v9 = v21.pNode->RefCount == 1;
-            --v8->RefCount;
-            if ( v9 )
-              Scaleform::GFx::ASStringNode::ReleaseNode(v8);
+            v3 &= ~8u;
+            v9 = v23.pNode;
+            v10 = v23.pNode->RefCount-- == 1;
+            if ( v10 )
+              Scaleform::GFx::ASStringNode::ReleaseNode(v9);
           }
-          if ( v3 & 4 )
+          if ( (v3 & 4) != 0 )
           {
-            v3 &= 0xFFFFFFFB;
-            v10 = result.pNode;
-            v9 = result.pNode->RefCount == 1;
-            --v10->RefCount;
-            if ( v9 )
-              Scaleform::GFx::ASStringNode::ReleaseNode(v10);
+            v3 &= ~4u;
+            v11 = result.pNode;
+            v10 = result.pNode->RefCount-- == 1;
+            if ( v10 )
+              Scaleform::GFx::ASStringNode::ReleaseNode(v11);
           }
-          ((void (__fastcall *)(Scaleform::GFx::DisplayObjContainer *, Scaleform::Render::Cxform *, Scaleform::GFx::ASStringNode **, char *))v2->vfptr[123].__vecDelDtor)(
-            v2,
-            &v35,
-            &v55,
-            &v45);
-          v11 = v55;
-          v9 = v55->RefCount == 1;
-          --v11->RefCount;
-          if ( v9 )
-            Scaleform::GFx::ASStringNode::ReleaseNode(v11);
-          *(_QWORD *)&id.Id = &v35;
-          v12 = (Scaleform::Render::RenderBuffer *)v38.pNode;
+          ((void (__fastcall *)(Scaleform::GFx::DisplayObjContainer *, Scaleform::GFx::GFxPlaceObjectBase::UnpackedData *, Scaleform::GFx::ASStringNode **, char *))pdispObj->Scaleform::GFx::InteractiveObject::Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[123].__vecDelDtor)(
+            pdispObj,
+            &v27,
+            &pNode,
+            v28);
+          v12 = pNode;
+          v10 = pNode->RefCount-- == 1;
+          if ( v10 )
+            Scaleform::GFx::ASStringNode::ReleaseNode(v12);
+          id = &v27;
+          pObject = (Scaleform::Render::RenderBuffer *)v27.Pos.pFilters.pObject;
         }
       }
       else
       {
-        *(_QWORD *)&id.Id = &v23;
-        Scaleform::Render::Cxform::Cxform(&v23);
-        v24 = _xmm;
-        v25 = _xmm;
-        v26 = 0i64;
-        v28 = 0x40000;
-        v30 = 0;
-        v27 = 0i64;
-        v31 = 256;
-        v29 = 0i64;
-        Scaleform::GFx::TimelineSnapshot::SourceTags::Unpack(
-          &i->Tags,
-          (Scaleform::GFx::GFxPlaceObjectBase::UnpackedData *)&v23);
-        v13 = (Scaleform::GFx::ASStringManager *)((__int64 (*)(void))v2->pASRoot->pMovieImpl->pASMovieRoot.pObject->vfptr[59].__vecDelDtor)();
-        if ( v33 )
+        id = &v25;
+        Scaleform::Render::Cxform::Cxform(&v25.Pos.ColorTransform);
+        *(_OWORD *)&v25.Pos.Matrix_1.M[0][0] = _xmm;
+        *(__m128 *)&v25.Pos.Matrix_1.M[1][0] = _xmm;
+        v25.Pos.pFilters.pObject = 0i64;
+        v25.Pos.CharacterId.Id = 0x40000;
+        *(_DWORD *)&v25.Pos.ClipDepth = 0;
+        *(_QWORD *)&v25.Pos.Ratio = 0i64;
+        *(_WORD *)&v25.Pos.BlendMode = 256;
+        v25.Pos.ClassName = 0i64;
+        Scaleform::GFx::TimelineSnapshot::SourceTags::Unpack(&i->Tags, &v25);
+        v14 = pdispObj->pASRoot->pMovieImpl->pASMovieRoot.pObject;
+        v15 = (Scaleform::GFx::ASStringManager *)((__int64 (__fastcall *)(Scaleform::GFx::ASMovieRootBase *))v14->vfptr[59].__vecDelDtor)(v14);
+        if ( v25.Name )
         {
-          v14 = Scaleform::GFx::ASStringManager::CreateString(v13, &v20, v33);
+          v16 = Scaleform::GFx::ASStringManager::CreateString(v15, &v22, v25.Name);
           v3 |= 2u;
         }
         else
         {
-          v14 = Scaleform::GFx::ASStringManager::CreateEmptyString(v13, &v19);
+          v16 = Scaleform::GFx::ASStringManager::CreateEmptyString(v15, &v21);
           v3 |= 1u;
         }
-        v56 = v14->pNode;
-        ++v56->RefCount;
-        if ( v3 & 2 )
+        v32 = v16->pNode;
+        ++v32->RefCount;
+        if ( (v3 & 2) != 0 )
         {
-          v3 &= 0xFFFFFFFD;
-          v15 = v20.pNode;
-          v9 = v20.pNode->RefCount == 1;
-          --v15->RefCount;
-          if ( v9 )
-            Scaleform::GFx::ASStringNode::ReleaseNode(v15);
+          v3 &= ~2u;
+          v17 = v22.pNode;
+          v10 = v22.pNode->RefCount-- == 1;
+          if ( v10 )
+            Scaleform::GFx::ASStringNode::ReleaseNode(v17);
         }
-        if ( v3 & 1 )
+        if ( (v3 & 1) != 0 )
         {
-          v3 &= 0xFFFFFFFE;
-          v16 = v19.pNode;
-          v9 = v19.pNode->RefCount == 1;
-          --v16->RefCount;
-          if ( v9 )
-            Scaleform::GFx::ASStringNode::ReleaseNode(v16);
+          v3 &= ~1u;
+          v18 = v21.pNode;
+          v10 = v21.pNode->RefCount-- == 1;
+          if ( v10 )
+            Scaleform::GFx::ASStringNode::ReleaseNode(v18);
         }
-        i->Flags;
-        v17 = i->CreateFrame;
-        ((void (__fastcall *)(Scaleform::GFx::DisplayObjContainer *, Scaleform::Render::Cxform *, Scaleform::GFx::ASStringNode **, __int64))v2->vfptr[118].__vecDelDtor)(
-          v2,
-          &v23,
-          &v56,
-          v32);
-        v18 = v56;
-        v9 = v56->RefCount == 1;
-        --v18->RefCount;
-        if ( v9 )
-          Scaleform::GFx::ASStringNode::ReleaseNode(v18);
-        *(_QWORD *)&id.Id = &v23;
-        v12 = v26;
+        v19 = 4;
+        if ( (i->Flags & 2) != 0 )
+          v19 = 6;
+        ((void (__fastcall *)(Scaleform::GFx::DisplayObjContainer *, Scaleform::GFx::GFxPlaceObjectBase::UnpackedData *, Scaleform::GFx::ASStringNode **, Scaleform::ArrayLH<Scaleform::GFx::SwfEvent *,260,Scaleform::ArrayDefaultPolicy> *, _QWORD, unsigned int, int, _QWORD, _QWORD))pdispObj->Scaleform::GFx::InteractiveObject::Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[118].__vecDelDtor)(
+          pdispObj,
+          &v25,
+          &v32,
+          v25.pEventHandlers,
+          0i64,
+          i->CreateFrame,
+          v19,
+          0i64,
+          0i64);
+        v20 = v32;
+        v10 = v32->RefCount-- == 1;
+        if ( v10 )
+          Scaleform::GFx::ASStringNode::ReleaseNode(v20);
+        id = &v25;
+        pObject = (Scaleform::Render::RenderBuffer *)v25.Pos.pFilters.pObject;
       }
-      if ( v12 )
-        Scaleform::RefCountImpl::Release(v12);
-LABEL_35:
-      if ( i == v4->Root.pPrev )
+      if ( pObject )
+        Scaleform::RefCountImpl::Release(pObject);
+LABEL_37:
+      if ( i == p_SnapshotList->Root.pPrev )
         return;
     }
   }
@@ -779,394 +715,376 @@ LABEL_35:
 
 // File Line: 345
 // RVA: 0x915BA0
-void __fastcall Scaleform::GFx::TimelineSnapshot::SourceTags::Unpack(Scaleform::GFx::TimelineSnapshot::SourceTags *this, Scaleform::GFx::GFxPlaceObjectBase::UnpackedData *data)
+void __fastcall Scaleform::GFx::TimelineSnapshot::SourceTags::Unpack(
+        Scaleform::GFx::TimelineSnapshot::SourceTags *this,
+        Scaleform::GFx::GFxPlaceObjectBase::UnpackedData *data)
 {
-  Scaleform::GFx::GFxPlaceObjectBase::UnpackedData *v2; // rdi
-  Scaleform::GFx::TimelineSnapshot::SourceTags *v3; // rbx
-  Scaleform::GFx::GFxPlaceObjectBase *v4; // rcx
-  Scaleform::GFx::GFxPlaceObjectBase *v5; // rcx
-  signed __int64 v6; // rsi
-  signed __int64 v7; // rax
-  Scaleform::GFx::GFxPlaceObjectBase *v8; // rcx
-  signed __int64 v9; // rax
-  Scaleform::GFx::GFxPlaceObjectBase *v10; // rcx
-  signed __int64 v11; // rax
-  Scaleform::GFx::GFxPlaceObjectBase *v12; // rcx
-  signed __int64 v13; // rax
-  signed __int64 v14; // rax
-  Scaleform::GFx::GFxPlaceObjectBase *v15; // rcx
-  signed __int64 v16; // rax
-  Scaleform::GFx::GFxPlaceObjectBase *v17; // rcx
-  signed __int64 v18; // rax
-  Scaleform::GFx::GFxPlaceObjectBase *v19; // rcx
-  signed __int64 v20; // rax
-  Scaleform::GFx::GFxPlaceObjectBase *v21; // rcx
+  Scaleform::GFx::GFxPlaceObjectBase *pDepthTag; // rcx
+  Scaleform::GFx::GFxPlaceObjectBase *pCharIdTag; // rcx
+  __int64 v6; // rsi
+  __int64 v7; // rax
+  Scaleform::GFx::GFxPlaceObjectBase *pMatrixTag; // rcx
+  __int64 v9; // rax
+  Scaleform::GFx::GFxPlaceObjectBase *pClassNameTag; // rcx
+  __int64 v11; // rax
+  Scaleform::GFx::GFxPlaceObjectBase *pCxFormTag; // rcx
+  __int64 v13; // rax
+  __int64 v14; // rax
+  Scaleform::GFx::GFxPlaceObjectBase *pBlendModeTag; // rcx
+  __int64 v16; // rax
+  Scaleform::GFx::GFxPlaceObjectBase *pClipDepthTag; // rcx
+  __int64 v18; // rax
+  Scaleform::GFx::GFxPlaceObjectBase *pRatioTag; // rcx
+  __int64 v20; // rax
+  Scaleform::GFx::GFxPlaceObjectBase *pFiltersTag; // rcx
   Scaleform::GFx::Resource *v22; // rcx
-  Scaleform::Render::RenderBuffer *v23; // rcx
-  __int128 ptr; // [rsp+40h] [rbp-518h]
-  __int128 v25; // [rsp+50h] [rbp-508h]
-  int v26; // [rsp+60h] [rbp-4F8h]
-  int v27; // [rsp+64h] [rbp-4F4h]
-  int v28; // [rsp+68h] [rbp-4F0h]
-  int v29; // [rsp+6Ch] [rbp-4ECh]
-  int v30; // [rsp+70h] [rbp-4E8h]
-  int v31; // [rsp+74h] [rbp-4E4h]
-  int v32; // [rsp+78h] [rbp-4E0h]
-  int v33; // [rsp+7Ch] [rbp-4DCh]
-  Scaleform::GFx::Resource *v34; // [rsp+80h] [rbp-4D8h]
-  int v35; // [rsp+88h] [rbp-4D0h]
-  int v36; // [rsp+8Ch] [rbp-4CCh]
-  int v37[2]; // [rsp+90h] [rbp-4C8h]
-  __int64 v38; // [rsp+98h] [rbp-4C0h]
-  __int16 v39[2]; // [rsp+A0h] [rbp-4B8h]
-  char v40[44]; // [rsp+A4h] [rbp-4B4h]
-  char v41; // [rsp+D0h] [rbp-488h]
-  char v42; // [rsp+160h] [rbp-3F8h]
-  char v43; // [rsp+1F0h] [rbp-368h]
-  char v44; // [rsp+280h] [rbp-2D8h]
-  char v45; // [rsp+310h] [rbp-248h]
-  char v46; // [rsp+3A0h] [rbp-1B8h]
-  char v47; // [rsp+430h] [rbp-128h]
-  char v48; // [rsp+4C0h] [rbp-98h]
+  Scaleform::Render::RenderBuffer *pObject; // rcx
+  __int128 ptr[4]; // [rsp+40h] [rbp-518h] BYREF
+  _DWORD v25[20]; // [rsp+80h] [rbp-4D8h]
+  char v26[144]; // [rsp+D0h] [rbp-488h] BYREF
+  char v27[144]; // [rsp+160h] [rbp-3F8h] BYREF
+  char v28[144]; // [rsp+1F0h] [rbp-368h] BYREF
+  char v29[144]; // [rsp+280h] [rbp-2D8h] BYREF
+  char v30[144]; // [rsp+310h] [rbp-248h] BYREF
+  char v31[144]; // [rsp+3A0h] [rbp-1B8h] BYREF
+  char v32[144]; // [rsp+430h] [rbp-128h] BYREF
+  char v33[144]; // [rsp+4C0h] [rbp-98h] BYREF
 
-  v2 = data;
-  v3 = this;
-  ((void (*)(void))this->pMainTag->vfptr[1].__vecDelDtor)();
+  ((void (__fastcall *)(Scaleform::GFx::GFxPlaceObjectBase *))this->pMainTag->vfptr[1].__vecDelDtor)(this->pMainTag);
   `eh vector constructor iterator(
-    &ptr,
+    ptr,
     0x90ui64,
     9,
     (void (__fastcall *)(void *))Scaleform::GFx::GFxPlaceObjectBase::UnpackedData::UnpackedData);
-  v4 = v3->pDepthTag;
-  if ( v4 != v3->pMainTag )
+  pDepthTag = this->pDepthTag;
+  if ( pDepthTag != this->pMainTag )
   {
-    v4->vfptr[1].__vecDelDtor((Scaleform::GFx::ExecuteTag *)&v4->vfptr, (unsigned int)&ptr);
-    v2->Pos.Depth = v36;
-    v2->Pos.Flags.Flags |= 1u;
+    pDepthTag->vfptr[1].__vecDelDtor(pDepthTag, (unsigned int)ptr);
+    data->Pos.Depth = v25[3];
+    data->Pos.Flags.Flags |= 1u;
   }
-  v5 = v3->pCharIdTag;
+  pCharIdTag = this->pCharIdTag;
   v6 = 0i64;
-  if ( v5 != v3->pMainTag )
+  if ( pCharIdTag != this->pMainTag )
   {
-    if ( v3->pDepthTag == v5 )
+    if ( this->pDepthTag == pCharIdTag )
     {
       v7 = 0i64;
     }
     else
     {
-      v5->vfptr[1].__vecDelDtor((Scaleform::GFx::ExecuteTag *)&v5->vfptr, (unsigned int)&v41);
+      pCharIdTag->vfptr[1].__vecDelDtor(pCharIdTag, (unsigned int)v26);
       v7 = 1i64;
     }
-    v2->Pos.CharacterId.Id = v37[36 * v7];
-    v2->Pos.Flags.Flags |= 2u;
+    data->Pos.CharacterId.Id = v25[36 * v7 + 4];
+    data->Pos.Flags.Flags |= 2u;
   }
-  v8 = v3->pMatrixTag;
-  if ( v8 != v3->pMainTag )
+  pMatrixTag = this->pMatrixTag;
+  if ( pMatrixTag != this->pMainTag )
   {
-    if ( v3->pDepthTag == v8 )
+    if ( this->pDepthTag == pMatrixTag )
     {
       v9 = 0i64;
     }
-    else if ( v3->pCharIdTag == v8 )
+    else if ( this->pCharIdTag == pMatrixTag )
     {
       v9 = 1i64;
     }
     else
     {
-      v8->vfptr[1].__vecDelDtor((Scaleform::GFx::ExecuteTag *)&v8->vfptr, (unsigned int)&v42);
+      pMatrixTag->vfptr[1].__vecDelDtor(pMatrixTag, (unsigned int)v27);
       v9 = 2i64;
     }
-    LODWORD(v2->Pos.Matrix_1.M[0][0]) = *(&v26 + 36 * v9);
-    LODWORD(v2->Pos.Matrix_1.M[0][1]) = *(&v27 + 36 * v9);
-    LODWORD(v2->Pos.Matrix_1.M[0][2]) = *(&v28 + 36 * v9);
-    LODWORD(v2->Pos.Matrix_1.M[0][3]) = *(&v29 + 36 * v9);
-    LODWORD(v2->Pos.Matrix_1.M[1][0]) = *(&v30 + 36 * v9);
-    LODWORD(v2->Pos.Matrix_1.M[1][1]) = *(&v31 + 36 * v9);
-    LODWORD(v2->Pos.Matrix_1.M[1][2]) = *(&v32 + 36 * v9);
-    LODWORD(v2->Pos.Matrix_1.M[1][3]) = *(&v33 + 36 * v9);
-    v2->Pos.Flags.Flags |= 4u;
+    data->Pos.Matrix_1.M[0][0] = *(float *)&ptr[9 * v9 + 2];
+    data->Pos.Matrix_1.M[0][1] = *((float *)&ptr[9 * v9 + 2] + 1);
+    data->Pos.Matrix_1.M[0][2] = *((float *)&ptr[9 * v9 + 2] + 2);
+    data->Pos.Matrix_1.M[0][3] = *((float *)&ptr[9 * v9 + 2] + 3);
+    data->Pos.Matrix_1.M[1][0] = *(float *)&ptr[9 * v9 + 3];
+    data->Pos.Matrix_1.M[1][1] = *((float *)&ptr[9 * v9 + 3] + 1);
+    data->Pos.Matrix_1.M[1][2] = *((float *)&ptr[9 * v9 + 3] + 2);
+    data->Pos.Matrix_1.M[1][3] = *((float *)&ptr[9 * v9 + 3] + 3);
+    data->Pos.Flags.Flags |= 4u;
   }
-  v10 = v3->pClassNameTag;
-  if ( v10 != v3->pMainTag )
+  pClassNameTag = this->pClassNameTag;
+  if ( pClassNameTag != this->pMainTag )
   {
-    if ( v3->pDepthTag == v10 )
+    if ( this->pDepthTag == pClassNameTag )
     {
       v11 = 0i64;
     }
-    else if ( v3->pCharIdTag == v10 )
+    else if ( this->pCharIdTag == pClassNameTag )
     {
       v11 = 1i64;
     }
-    else if ( v3->pMatrixTag == v10 )
+    else if ( this->pMatrixTag == pClassNameTag )
     {
       v11 = 2i64;
     }
     else
     {
-      v10->vfptr[1].__vecDelDtor((Scaleform::GFx::ExecuteTag *)&v10->vfptr, (unsigned int)&v43);
+      pClassNameTag->vfptr[1].__vecDelDtor(pClassNameTag, (unsigned int)v28);
       v11 = 3i64;
     }
-    v2->Pos.ClassName = (const char *)*(&v38 + 18 * v11);
-    v2->Pos.Flags.Flags |= 0x100u;
+    data->Pos.ClassName = *(const char **)&v25[36 * v11 + 6];
+    data->Pos.Flags.Flags |= 0x100u;
   }
-  v12 = v3->pCxFormTag;
-  if ( v12 != v3->pMainTag )
+  pCxFormTag = this->pCxFormTag;
+  if ( pCxFormTag != this->pMainTag )
   {
-    if ( v3->pDepthTag == v12 )
+    if ( this->pDepthTag == pCxFormTag )
     {
       v13 = 0i64;
     }
-    else if ( v3->pCharIdTag == v12 )
+    else if ( this->pCharIdTag == pCxFormTag )
     {
       v13 = 1i64;
     }
-    else if ( v3->pMatrixTag == v12 )
+    else if ( this->pMatrixTag == pCxFormTag )
     {
       v13 = 2i64;
     }
-    else if ( v3->pClassNameTag == v12 )
+    else if ( this->pClassNameTag == pCxFormTag )
     {
       v13 = 3i64;
     }
     else
     {
-      v12->vfptr[1].__vecDelDtor((Scaleform::GFx::ExecuteTag *)&v12->vfptr, (unsigned int)&v44);
+      pCxFormTag->vfptr[1].__vecDelDtor(pCxFormTag, (unsigned int)v29);
       v13 = 4i64;
     }
-    v14 = 18 * v13;
-    *(_OWORD *)&v2->Pos.ColorTransform.M[0][0] = *(__int128 *)((char *)&ptr + 8 * v14);
-    *(_OWORD *)&v2->Pos.ColorTransform.M[1][0] = *(__int128 *)((char *)&v25 + 8 * v14);
-    v2->Pos.Flags.Flags |= 8u;
+    v14 = 9 * v13;
+    *(_OWORD *)&data->Pos.ColorTransform.M[0][0] = ptr[v14];
+    *(_OWORD *)&data->Pos.ColorTransform.M[1][0] = ptr[v14 + 1];
+    data->Pos.Flags.Flags |= 8u;
   }
-  v15 = v3->pBlendModeTag;
-  if ( v15 != v3->pMainTag )
+  pBlendModeTag = this->pBlendModeTag;
+  if ( pBlendModeTag != this->pMainTag )
   {
-    if ( v3->pDepthTag == v15 )
+    if ( this->pDepthTag == pBlendModeTag )
     {
       v16 = 0i64;
     }
-    else if ( v3->pCharIdTag == v15 )
+    else if ( this->pCharIdTag == pBlendModeTag )
     {
       v16 = 1i64;
     }
-    else if ( v3->pMatrixTag == v15 )
+    else if ( this->pMatrixTag == pBlendModeTag )
     {
       v16 = 2i64;
     }
-    else if ( v3->pClassNameTag == v15 )
+    else if ( this->pClassNameTag == pBlendModeTag )
     {
       v16 = 3i64;
     }
-    else if ( v3->pCxFormTag == v15 )
+    else if ( this->pCxFormTag == pBlendModeTag )
     {
       v16 = 4i64;
     }
     else
     {
-      v15->vfptr[1].__vecDelDtor((Scaleform::GFx::ExecuteTag *)&v15->vfptr, (unsigned int)&v45);
+      pBlendModeTag->vfptr[1].__vecDelDtor(pBlendModeTag, (unsigned int)v30);
       v16 = 5i64;
     }
-    v2->Pos.BlendMode = v40[144 * v16];
-    v2->Pos.Flags.Flags |= 0x80u;
+    data->Pos.BlendMode = v25[36 * v16 + 9];
+    data->Pos.Flags.Flags |= 0x80u;
   }
-  v17 = v3->pClipDepthTag;
-  if ( v17 != v3->pMainTag )
+  pClipDepthTag = this->pClipDepthTag;
+  if ( pClipDepthTag != this->pMainTag )
   {
-    if ( v3->pDepthTag == v17 )
+    if ( this->pDepthTag == pClipDepthTag )
     {
       v18 = 0i64;
     }
-    else if ( v3->pCharIdTag == v17 )
+    else if ( this->pCharIdTag == pClipDepthTag )
     {
       v18 = 1i64;
     }
-    else if ( v3->pMatrixTag == v17 )
+    else if ( this->pMatrixTag == pClipDepthTag )
     {
       v18 = 2i64;
     }
-    else if ( v3->pClassNameTag == v17 )
+    else if ( this->pClassNameTag == pClipDepthTag )
     {
       v18 = 3i64;
     }
-    else if ( v3->pCxFormTag == v17 )
+    else if ( this->pCxFormTag == pClipDepthTag )
     {
       v18 = 4i64;
     }
-    else if ( v3->pBlendModeTag == v17 )
+    else if ( this->pBlendModeTag == pClipDepthTag )
     {
       v18 = 5i64;
     }
     else
     {
-      v17->vfptr[1].__vecDelDtor((Scaleform::GFx::ExecuteTag *)&v17->vfptr, (unsigned int)&v46);
+      pClipDepthTag->vfptr[1].__vecDelDtor(pClipDepthTag, (unsigned int)v31);
       v18 = 6i64;
     }
-    v2->Pos.ClipDepth = v39[72 * v18];
-    v2->Pos.Flags.Flags |= 0x40u;
+    data->Pos.ClipDepth = v25[36 * v18 + 8];
+    data->Pos.Flags.Flags |= 0x40u;
   }
-  v19 = v3->pRatioTag;
-  if ( v19 != v3->pMainTag )
+  pRatioTag = this->pRatioTag;
+  if ( pRatioTag != this->pMainTag )
   {
-    if ( v3->pDepthTag == v19 )
+    if ( this->pDepthTag == pRatioTag )
     {
       v20 = 0i64;
     }
-    else if ( v3->pCharIdTag == v19 )
+    else if ( this->pCharIdTag == pRatioTag )
     {
       v20 = 1i64;
     }
-    else if ( v3->pMatrixTag == v19 )
+    else if ( this->pMatrixTag == pRatioTag )
     {
       v20 = 2i64;
     }
-    else if ( v3->pClassNameTag == v19 )
+    else if ( this->pClassNameTag == pRatioTag )
     {
       v20 = 3i64;
     }
-    else if ( v3->pCxFormTag == v19 )
+    else if ( this->pCxFormTag == pRatioTag )
     {
       v20 = 4i64;
     }
-    else if ( v3->pBlendModeTag == v19 )
+    else if ( this->pBlendModeTag == pRatioTag )
     {
       v20 = 5i64;
     }
-    else if ( v3->pClipDepthTag == v19 )
+    else if ( this->pClipDepthTag == pRatioTag )
     {
       v20 = 6i64;
     }
     else
     {
-      v19->vfptr[1].__vecDelDtor((Scaleform::GFx::ExecuteTag *)&v19->vfptr, (unsigned int)&v47);
+      pRatioTag->vfptr[1].__vecDelDtor(pRatioTag, (unsigned int)v32);
       v20 = 7i64;
     }
-    LODWORD(v2->Pos.Ratio) = *(&v35 + 36 * v20);
-    v2->Pos.Flags.Flags |= 0x10u;
+    LODWORD(data->Pos.Ratio) = v25[36 * v20 + 2];
+    data->Pos.Flags.Flags |= 0x10u;
   }
-  v21 = v3->pFiltersTag;
-  if ( v21 != v3->pMainTag )
+  pFiltersTag = this->pFiltersTag;
+  if ( pFiltersTag != this->pMainTag )
   {
-    if ( v3->pDepthTag != v21 )
+    if ( this->pDepthTag != pFiltersTag )
     {
-      if ( v3->pCharIdTag == v21 )
+      if ( this->pCharIdTag == pFiltersTag )
       {
         v6 = 1i64;
       }
-      else if ( v3->pMatrixTag == v21 )
+      else if ( this->pMatrixTag == pFiltersTag )
       {
         v6 = 2i64;
       }
-      else if ( v3->pClassNameTag == v21 )
+      else if ( this->pClassNameTag == pFiltersTag )
       {
         v6 = 3i64;
       }
-      else if ( v3->pCxFormTag == v21 )
+      else if ( this->pCxFormTag == pFiltersTag )
       {
         v6 = 4i64;
       }
-      else if ( v3->pBlendModeTag == v21 )
+      else if ( this->pBlendModeTag == pFiltersTag )
       {
         v6 = 5i64;
       }
-      else if ( v3->pClipDepthTag == v21 )
+      else if ( this->pClipDepthTag == pFiltersTag )
       {
         v6 = 6i64;
       }
-      else if ( v3->pRatioTag == v21 )
+      else if ( this->pRatioTag == pFiltersTag )
       {
         v6 = 7i64;
       }
       else
       {
-        v21->vfptr[1].__vecDelDtor((Scaleform::GFx::ExecuteTag *)&v21->vfptr, (unsigned int)&v48);
+        pFiltersTag->vfptr[1].__vecDelDtor(pFiltersTag, (unsigned int)v33);
         v6 = 8i64;
       }
     }
-    v22 = (&v34)[18 * v6];
+    v22 = *(Scaleform::GFx::Resource **)&v25[36 * v6];
     if ( v22 )
       Scaleform::Render::RenderBuffer::AddRef(v22);
-    v23 = (Scaleform::Render::RenderBuffer *)v2->Pos.pFilters.pObject;
-    if ( v23 )
-      Scaleform::RefCountImpl::Release(v23);
-    v2->Pos.pFilters.pObject = (Scaleform::Render::FilterSet *)(&v34)[18 * v6];
-    v2->Pos.Flags.Flags |= 0x20u;
+    pObject = (Scaleform::Render::RenderBuffer *)data->Pos.pFilters.pObject;
+    if ( pObject )
+      Scaleform::RefCountImpl::Release(pObject);
+    data->Pos.pFilters.pObject = *(Scaleform::Render::FilterSet **)&v25[36 * v6];
+    data->Pos.Flags.Flags |= 0x20u;
   }
   `eh vector destructor iterator(
-    &ptr,
+    ptr,
     0x90ui64,
     9,
     (void (__fastcall *)(void *))Scaleform::GFx::GFxPlaceObjectBase::UnpackedData::~UnpackedData);
-}ountImpl::Release(v23
+}t);
+    data->Pos.pFilters.pObject = *(Scaleform::Render::FilterSet **)&v25[36 * v6];
+    data->Pos.Flags.
 
 // File Line: 447
 // RVA: 0x8B3440
-void __fastcall Scaleform::GFx::GFxPlaceObjectUnpacked::AddToTimelineSnapshot(Scaleform::GFx::GFxPlaceObjectUnpacked *this, Scaleform::GFx::TimelineSnapshot *psnapshot, unsigned int frame)
+void __fastcall Scaleform::GFx::GFxPlaceObjectUnpacked::AddToTimelineSnapshot(
+        Scaleform::GFx::GFxPlaceObjectUnpacked *this,
+        Scaleform::GFx::TimelineSnapshot *psnapshot,
+        unsigned int frame)
 {
-  Scaleform::GFx::TimelineSnapshot *v3; // rdi
-  unsigned int v4; // esi
-  Scaleform::GFx::GFxPlaceObjectUnpacked *v5; // rbx
-  signed __int64 v6; // rcx
-  int v7; // er10
-  signed __int64 v8; // r9
-  Scaleform::GFx::TimelineSnapshot::SnapshotElement **v9; // r11
-  signed __int64 v10; // r8
+  __int64 Size; // rcx
+  int Depth; // r10d
+  __int64 v8; // r9
+  Scaleform::GFx::TimelineSnapshot::SnapshotElement **Data; // r11
+  __int64 v10; // r8
   Scaleform::GFx::TimelineSnapshot::SnapshotElement *v11; // rcx
   Scaleform::GFx::TimelineSnapshot::SnapshotElement *v12; // rax
 
-  v3 = psnapshot;
-  v4 = frame;
-  v5 = this;
-  this->vfptr->Trace((Scaleform::GFx::ExecuteTag *)this, "\n");
-  v6 = v3->SnapshotSortedArray.Data.Size;
-  v7 = v5->Pos.Depth;
+  this->vfptr->Trace(this, "\n");
+  Size = psnapshot->SnapshotSortedArray.Data.Size;
+  Depth = this->Pos.Depth;
   v8 = 0i64;
-  if ( v6 <= 0 )
-    goto LABEL_15;
-  v9 = v3->SnapshotSortedArray.Data.Data;
+  if ( Size <= 0 )
+    goto LABEL_12;
+  Data = psnapshot->SnapshotSortedArray.Data.Data;
   do
   {
-    v10 = (v6 >> 1) + v8;
-    if ( v7 >= v9[v10]->Depth )
+    v10 = (Size >> 1) + v8;
+    if ( Depth >= Data[v10]->Depth )
     {
       v8 = v10 + 1;
-      v6 += -1 - (v6 >> 1);
+      Size += -1 - (Size >> 1);
     }
     else
     {
-      v6 >>= 1;
+      Size >>= 1;
     }
   }
-  while ( v6 > 0 );
-  if ( v8 && (v11 = v9[v8 - 1], v11->Depth == v7) && v11 && !(v11->Flags & 2) )
+  while ( Size > 0 );
+  if ( v8 && (v11 = Data[v8 - 1], v11->Depth == Depth) && v11 && (v11->Flags & 2) == 0 )
   {
-    v11->Tags.pClassNameTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v11->Tags.pCharIdTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v11->Tags.pRatioTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v11->Tags.pClipDepthTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v11->Tags.pDepthTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v11->Tags.pBlendModeTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v11->Tags.pFiltersTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v11->Tags.pCxFormTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v11->Tags.pMatrixTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v11->Tags.pMainTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v11->CreateFrame = v4;
+    v11->Tags.pClassNameTag = this;
+    v11->Tags.pCharIdTag = this;
+    v11->Tags.pRatioTag = this;
+    v11->Tags.pClipDepthTag = this;
+    v11->Tags.pDepthTag = this;
+    v11->Tags.pBlendModeTag = this;
+    v11->Tags.pFiltersTag = this;
+    v11->Tags.pCxFormTag = this;
+    v11->Tags.pMatrixTag = this;
+    v11->Tags.pMainTag = this;
+    v11->CreateFrame = frame;
     v11->Flags |= 1u;
   }
   else
   {
-LABEL_15:
-    v12 = Scaleform::GFx::TimelineSnapshot::Add(v3, v7);
-    v12->Tags.pClassNameTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v12->Tags.pCharIdTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v12->Tags.pRatioTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v12->Tags.pClipDepthTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v12->Tags.pDepthTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v12->Tags.pBlendModeTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v12->Tags.pFiltersTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v12->Tags.pCxFormTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v12->Tags.pMatrixTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v12->Tags.pMainTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v12->CreateFrame = v4;
+LABEL_12:
+    v12 = Scaleform::GFx::TimelineSnapshot::Add(psnapshot, Depth);
+    v12->Tags.pClassNameTag = this;
+    v12->Tags.pCharIdTag = this;
+    v12->Tags.pRatioTag = this;
+    v12->Tags.pClipDepthTag = this;
+    v12->Tags.pDepthTag = this;
+    v12->Tags.pBlendModeTag = this;
+    v12->Tags.pFiltersTag = this;
+    v12->Tags.pCxFormTag = this;
+    v12->Tags.pMatrixTag = this;
+    v12->Tags.pMainTag = this;
+    v12->CreateFrame = frame;
     v12->PlaceType = 0;
     v12->Flags |= 1u;
   }
@@ -1174,217 +1092,200 @@ LABEL_15:
 
 // File Line: 482
 // RVA: 0x8B3AC0
-void __fastcall Scaleform::GFx::PlaceObjectTag::AddToTimelineSnapshot(Scaleform::GFx::PlaceObjectTag *this, Scaleform::GFx::TimelineSnapshot *psnapshot, unsigned int frame)
+void __fastcall Scaleform::GFx::PlaceObjectTag::AddToTimelineSnapshot(
+        Scaleform::GFx::PlaceObjectTag *this,
+        Scaleform::GFx::TimelineSnapshot *psnapshot,
+        unsigned int frame)
 {
-  Scaleform::GFx::TimelineSnapshot *v3; // rdi
-  unsigned int v4; // esi
-  Scaleform::GFx::PlaceObjectTag *v5; // rbx
-  signed __int64 v6; // rdx
-  signed __int64 v7; // r9
-  int v8; // er10
-  Scaleform::GFx::TimelineSnapshot::SnapshotElement **v9; // r11
-  signed __int64 v10; // r8
+  __int64 Size; // rdx
+  __int64 v7; // r9
+  int v8; // r10d
+  Scaleform::GFx::TimelineSnapshot::SnapshotElement **Data; // r11
+  __int64 v10; // r8
   Scaleform::GFx::TimelineSnapshot::SnapshotElement *v11; // rcx
   Scaleform::GFx::TimelineSnapshot::SnapshotElement *v12; // rax
 
-  v3 = psnapshot;
-  v4 = frame;
-  v5 = this;
-  this->vfptr->Trace((Scaleform::GFx::ExecuteTag *)this, "\n");
-  v6 = v3->SnapshotSortedArray.Data.Size;
+  this->vfptr->Trace(this, "\n");
+  Size = psnapshot->SnapshotSortedArray.Data.Size;
   v7 = 0i64;
-  v8 = *(unsigned __int16 *)&v5->pData[2];
-  if ( v6 <= 0 )
-    goto LABEL_15;
-  v9 = v3->SnapshotSortedArray.Data.Data;
+  v8 = *(unsigned __int16 *)&this->pData[2];
+  if ( Size <= 0 )
+    goto LABEL_12;
+  Data = psnapshot->SnapshotSortedArray.Data.Data;
   do
   {
-    v10 = (v6 >> 1) + v7;
-    if ( v8 >= v9[v10]->Depth )
+    v10 = (Size >> 1) + v7;
+    if ( v8 >= Data[v10]->Depth )
     {
       v7 = v10 + 1;
-      v6 += -1 - (v6 >> 1);
+      Size += -1 - (Size >> 1);
     }
     else
     {
-      v6 >>= 1;
+      Size >>= 1;
     }
   }
-  while ( v6 > 0 );
-  if ( v7 && (v11 = v9[v7 - 1], v11->Depth == v8) && v11 && !(v11->Flags & 2) )
+  while ( Size > 0 );
+  if ( v7 && (v11 = Data[v7 - 1], v11->Depth == v8) && v11 && (v11->Flags & 2) == 0 )
   {
-    v11->Tags.pClassNameTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v11->Tags.pCharIdTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v11->Tags.pRatioTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v11->Tags.pClipDepthTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v11->Tags.pDepthTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v11->Tags.pBlendModeTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v11->Tags.pFiltersTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v11->Tags.pCxFormTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v11->Tags.pMatrixTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v11->Tags.pMainTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v11->CreateFrame = v4;
+    v11->Tags.pClassNameTag = this;
+    v11->Tags.pCharIdTag = this;
+    v11->Tags.pRatioTag = this;
+    v11->Tags.pClipDepthTag = this;
+    v11->Tags.pDepthTag = this;
+    v11->Tags.pBlendModeTag = this;
+    v11->Tags.pFiltersTag = this;
+    v11->Tags.pCxFormTag = this;
+    v11->Tags.pMatrixTag = this;
+    v11->Tags.pMainTag = this;
+    v11->CreateFrame = frame;
     v11->Flags |= 1u;
   }
   else
   {
-LABEL_15:
-    v12 = Scaleform::GFx::TimelineSnapshot::Add(v3, v8);
+LABEL_12:
+    v12 = Scaleform::GFx::TimelineSnapshot::Add(psnapshot, v8);
     v12->PlaceType = 0;
-    v12->Tags.pClassNameTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v12->Tags.pCharIdTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v12->Tags.pRatioTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v12->Tags.pClipDepthTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v12->Tags.pDepthTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v12->Tags.pBlendModeTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v12->Tags.pFiltersTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v12->Tags.pCxFormTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v12->Tags.pMatrixTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v12->Tags.pMainTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v12->CreateFrame = v4;
+    v12->Tags.pClassNameTag = this;
+    v12->Tags.pCharIdTag = this;
+    v12->Tags.pRatioTag = this;
+    v12->Tags.pClipDepthTag = this;
+    v12->Tags.pDepthTag = this;
+    v12->Tags.pBlendModeTag = this;
+    v12->Tags.pFiltersTag = this;
+    v12->Tags.pCxFormTag = this;
+    v12->Tags.pMatrixTag = this;
+    v12->Tags.pMainTag = this;
+    v12->CreateFrame = frame;
     v12->Flags |= 1u;
   }
 }
 
 // File Line: 527
 // RVA: 0x8C95D0
-void __fastcall Scaleform::GFx::GFxPlaceObjectUnpacked::Execute(Scaleform::GFx::GFxPlaceObjectUnpacked *this, Scaleform::GFx::DisplayObjContainer *m)
+void __fastcall Scaleform::GFx::GFxPlaceObjectUnpacked::Execute(
+        Scaleform::GFx::GFxPlaceObjectUnpacked *this,
+        Scaleform::GFx::DisplayObjContainer *m)
 {
-  Scaleform::GFx::DisplayObjContainer *v2; // rdi
-  Scaleform::GFx::GFxPlaceObjectUnpacked *v3; // rbx
-  Scaleform::GFx::ASStringManager *v4; // rax
-  signed int v5; // ST30_4
-  signed int v6; // ST28_4
-  Scaleform::GFx::ASStringNode *v7; // rcx
-  bool v8; // zf
-  Scaleform::GFx::ASString result; // [rsp+70h] [rbp+8h]
+  Scaleform::GFx::ASMovieRootBase *pObject; // rcx
+  Scaleform::GFx::ASStringManager *v5; // rax
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  Scaleform::GFx::ASString result; // [rsp+70h] [rbp+8h] BYREF
 
-  v2 = m;
-  v3 = this;
-  v4 = (Scaleform::GFx::ASStringManager *)((__int64 (*)(void))m->pASRoot->pMovieImpl->pASMovieRoot.pObject->vfptr[59].__vecDelDtor)();
-  Scaleform::GFx::ASStringManager::CreateEmptyString(v4, &result);
-  v5 = 4;
-  v6 = -1;
-  ((void (__fastcall *)(Scaleform::GFx::DisplayObjContainer *, Scaleform::GFx::CharPosInfo *, Scaleform::GFx::ASString *, _QWORD, _QWORD, signed int, signed int, _QWORD, _QWORD))v2->vfptr[118].__vecDelDtor)(
-    v2,
-    &v3->Pos,
+  pObject = m->pASRoot->pMovieImpl->pASMovieRoot.pObject;
+  v5 = (Scaleform::GFx::ASStringManager *)((__int64 (__fastcall *)(Scaleform::GFx::ASMovieRootBase *))pObject->vfptr[59].__vecDelDtor)(pObject);
+  Scaleform::GFx::ASStringManager::CreateEmptyString(v5, &result);
+  ((void (__fastcall *)(Scaleform::GFx::DisplayObjContainer *, Scaleform::GFx::CharPosInfo *, Scaleform::GFx::ASString *, _QWORD, _QWORD, int, int, _QWORD, _QWORD))m->Scaleform::GFx::InteractiveObject::Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[118].__vecDelDtor)(
+    m,
+    &this->Pos,
     &result,
     0i64,
     0i64,
-    v6,
-    v5,
+    -1,
+    4,
     0i64,
     0i64);
-  v7 = result.pNode;
-  v8 = result.pNode->RefCount == 1;
-  --v7->RefCount;
-  if ( v8 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v7);
+  pNode = result.pNode;
+  if ( result.pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
 }
 
 // File Line: 578
 // RVA: 0x8D8160
-Scaleform::GFx::CharPosInfoFlags *__fastcall Scaleform::GFx::PlaceObjectTag::GetFlags(Scaleform::GFx::PlaceObjectTag *this, Scaleform::GFx::CharPosInfoFlags *result)
+Scaleform::GFx::CharPosInfoFlags *__fastcall Scaleform::GFx::PlaceObjectTag::GetFlags(
+        Scaleform::GFx::PlaceObjectTag *this,
+        Scaleform::GFx::CharPosInfoFlags *result)
 {
-  result->Flags = (this->HasCxForm != 0 ? 8 : 0) | 7;
+  result->Flags = (this->HasCxForm ? 8 : 0) | 7;
   return result;
 }
 
 // File Line: 594
 // RVA: 0x8CA200
-void __fastcall Scaleform::GFx::PlaceObjectTag::Execute(Scaleform::GFx::PlaceObjectTag *this, Scaleform::GFx::DisplayObjContainer *m)
+void __fastcall Scaleform::GFx::PlaceObjectTag::Execute(
+        Scaleform::GFx::PlaceObjectTag *this,
+        Scaleform::GFx::DisplayObjContainer *m)
 {
-  Scaleform::GFx::DisplayObjContainer *v2; // rdi
-  Scaleform::GFx::PlaceObjectTag *v3; // rbx
-  Scaleform::GFx::ASStringManager *v4; // rax
-  Scaleform::GFx::ASString *v5; // rax
-  signed int v6; // ST30_4
-  signed int v7; // ST28_4
-  Scaleform::GFx::ASStringNode *v8; // rcx
-  bool v9; // zf
-  Scaleform::Render::Cxform v10; // [rsp+60h] [rbp-98h]
-  __int128 v11; // [rsp+80h] [rbp-78h]
-  __m128 v12; // [rsp+90h] [rbp-68h]
-  Scaleform::Render::RenderBuffer *v13; // [rsp+A0h] [rbp-58h]
-  int v14; // [rsp+A8h] [rbp-50h]
-  int v15; // [rsp+ACh] [rbp-4Ch]
-  int v16; // [rsp+B0h] [rbp-48h]
-  __int64 v17; // [rsp+B8h] [rbp-40h]
-  int v18; // [rsp+C0h] [rbp-38h]
-  __int16 v19; // [rsp+C4h] [rbp-34h]
-  Scaleform::GFx::ASString result; // [rsp+100h] [rbp+8h]
+  Scaleform::GFx::ASMovieRootBase *pObject; // rcx
+  Scaleform::GFx::ASStringManager *v5; // rax
+  Scaleform::GFx::ASString *v6; // rax
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  Scaleform::Render::Cxform v9; // [rsp+60h] [rbp-98h] BYREF
+  __int128 v10; // [rsp+80h] [rbp-78h]
+  __m128 v11; // [rsp+90h] [rbp-68h]
+  Scaleform::Render::RenderBuffer *v12; // [rsp+A0h] [rbp-58h]
+  int v13; // [rsp+A8h] [rbp-50h]
+  int v14; // [rsp+ACh] [rbp-4Ch]
+  int v15; // [rsp+B0h] [rbp-48h]
+  __int64 v16; // [rsp+B8h] [rbp-40h]
+  int v17; // [rsp+C0h] [rbp-38h]
+  __int16 v18; // [rsp+C4h] [rbp-34h]
+  Scaleform::GFx::ASString result; // [rsp+100h] [rbp+8h] BYREF
 
-  v2 = m;
-  v3 = this;
-  result.pNode = (Scaleform::GFx::ASStringNode *)&v10;
-  Scaleform::Render::Cxform::Cxform(&v10);
+  result.pNode = (Scaleform::GFx::ASStringNode *)&v9;
+  Scaleform::Render::Cxform::Cxform(&v9);
+  v10 = _xmm;
   v11 = _xmm;
-  v12 = _xmm;
-  v13 = 0i64;
-  v16 = 0x40000;
-  v18 = 0;
+  v12 = 0i64;
+  v15 = 0x40000;
+  v17 = 0;
+  v13 = 0;
   v14 = 0;
-  v15 = 0;
-  v19 = 256;
-  v17 = 0i64;
-  v3->vfptr[1].__vecDelDtor((Scaleform::GFx::ExecuteTag *)&v3->vfptr, (unsigned int)&v10);
-  v4 = (Scaleform::GFx::ASStringManager *)((__int64 (*)(void))v2->pASRoot->pMovieImpl->pASMovieRoot.pObject->vfptr[59].__vecDelDtor)();
-  v5 = Scaleform::GFx::ASStringManager::CreateEmptyString(v4, &result);
-  v6 = 4;
-  v7 = -1;
-  ((void (__fastcall *)(Scaleform::GFx::DisplayObjContainer *, Scaleform::Render::Cxform *, Scaleform::GFx::ASString *, _QWORD, _QWORD, signed int, signed int, _QWORD, _QWORD))v2->vfptr[118].__vecDelDtor)(
-    v2,
-    &v10,
-    v5,
-    0i64,
-    0i64,
-    v7,
+  v18 = 256;
+  v16 = 0i64;
+  this->vfptr[1].__vecDelDtor(this, (unsigned int)&v9);
+  pObject = m->pASRoot->pMovieImpl->pASMovieRoot.pObject;
+  v5 = (Scaleform::GFx::ASStringManager *)((__int64 (__fastcall *)(Scaleform::GFx::ASMovieRootBase *))pObject->vfptr[59].__vecDelDtor)(pObject);
+  v6 = Scaleform::GFx::ASStringManager::CreateEmptyString(v5, &result);
+  ((void (__fastcall *)(Scaleform::GFx::DisplayObjContainer *, Scaleform::Render::Cxform *, Scaleform::GFx::ASString *, _QWORD, _QWORD, int, int, _QWORD, _QWORD))m->Scaleform::GFx::InteractiveObject::Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[118].__vecDelDtor)(
+    m,
+    &v9,
     v6,
     0i64,
+    0i64,
+    -1,
+    4,
+    0i64,
     0i64);
-  v8 = result.pNode;
-  v9 = result.pNode->RefCount == 1;
-  --v8->RefCount;
-  if ( v9 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v8);
-  result.pNode = (Scaleform::GFx::ASStringNode *)&v10;
-  if ( v13 )
-    Scaleform::RefCountImpl::Release(v13);
+  pNode = result.pNode;
+  if ( result.pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
+  result.pNode = (Scaleform::GFx::ASStringNode *)&v9;
+  if ( v12 )
+    Scaleform::RefCountImpl::Release(v12);
 }
 
 // File Line: 606
 // RVA: 0x915AF0
-void __fastcall Scaleform::GFx::PlaceObjectTag::Unpack(Scaleform::GFx::PlaceObjectTag *this, Scaleform::GFx::GFxPlaceObjectBase::UnpackedData *data)
+void __fastcall Scaleform::GFx::PlaceObjectTag::Unpack(
+        Scaleform::GFx::PlaceObjectTag *this,
+        Scaleform::GFx::GFxPlaceObjectBase::UnpackedData *data)
 {
-  Scaleform::GFx::PlaceObjectTag *v2; // rbx
   __int16 v3; // ax
   __int16 v4; // r8
-  Scaleform::GFx::GFxPlaceObjectBase::UnpackedData *v5; // rdi
-  Scaleform::Render::Matrix2x4<float> *v6; // rdx
-  Scaleform::GFx::StreamContext v7; // [rsp+20h] [rbp-28h]
+  Scaleform::Render::Matrix2x4<float> *p_Matrix_1; // rdx
+  Scaleform::GFx::StreamContext v7; // [rsp+20h] [rbp-28h] BYREF
 
-  v2 = this;
   data->Name = 0i64;
   data->pEventHandlers = 0i64;
-  data->PlaceType = 0;
+  data->PlaceType = Place_Add;
   data->Pos.Flags.Flags |= 2u;
   v3 = (unsigned __int8)this->pData[0];
   v4 = (unsigned __int8)this->pData[1];
   v7.CurBitIndex = 0;
-  v5 = data;
-  v6 = &data->Pos.Matrix_1;
+  p_Matrix_1 = &data->Pos.Matrix_1;
   v7.pData = this->pData;
   v7.DataSize = -1i64;
   v7.CurByteIndex = 4i64;
-  LODWORD(v6[1].M[1][0]) = (unsigned __int16)(v3 | (v4 << 8));
-  HIWORD(v6[2].M[0][0]) |= 1u;
-  LODWORD(v6[1].M[0][3]) = *(unsigned __int16 *)&this->pData[2];
-  HIWORD(v6[2].M[0][0]) |= 4u;
-  Scaleform::GFx::StreamContext::ReadMatrix(&v7, v6);
-  if ( v2->HasCxForm )
+  LODWORD(p_Matrix_1[1].M[1][0]) = (unsigned __int16)(v3 | (v4 << 8));
+  HIWORD(p_Matrix_1[2].M[0][0]) |= 1u;
+  LODWORD(p_Matrix_1[1].M[0][3]) = *(unsigned __int16 *)&this->pData[2];
+  HIWORD(p_Matrix_1[2].M[0][0]) |= 4u;
+  Scaleform::GFx::StreamContext::ReadMatrix(&v7, p_Matrix_1);
+  if ( this->HasCxForm )
   {
-    v5->Pos.Flags.Flags |= 8u;
-    Scaleform::GFx::StreamContext::ReadCxformRgb(&v7, &v5->Pos.ColorTransform);
+    data->Pos.Flags.Flags |= 8u;
+    Scaleform::GFx::StreamContext::ReadCxformRgb(&v7, &data->Pos.ColorTransform);
   }
 }
 
@@ -1398,7 +1299,9 @@ void __fastcall Scaleform::GFx::PlaceObject2Tag::~PlaceObject2Tag(Scaleform::GFx
 
 // File Line: 747
 // RVA: 0x8D8110
-Scaleform::GFx::CharPosInfoFlags *__fastcall Scaleform::GFx::PlaceObject2Tag::GetFlags(Scaleform::GFx::PlaceObject2Tag *this, Scaleform::GFx::CharPosInfoFlags *result)
+Scaleform::GFx::CharPosInfoFlags *__fastcall Scaleform::GFx::PlaceObject2Tag::GetFlags(
+        Scaleform::GFx::PlaceObject2Tag *this,
+        Scaleform::GFx::CharPosInfoFlags *result)
 {
   result->Flags = this->pData[0] & 0x5F;
   return result;
@@ -1406,218 +1309,196 @@ Scaleform::GFx::CharPosInfoFlags *__fastcall Scaleform::GFx::PlaceObject2Tag::Ge
 
 // File Line: 777
 // RVA: 0x8CA440
-void __fastcall Scaleform::GFx::PlaceObject2Tag::ExecuteBase(Scaleform::GFx::PlaceObject2Tag *this, Scaleform::GFx::DisplayObjContainer *m, char version)
+void __fastcall Scaleform::GFx::PlaceObject2Tag::ExecuteBase(
+        Scaleform::GFx::PlaceObject2Tag *this,
+        Scaleform::GFx::DisplayObjContainer *m,
+        char version)
 {
-  char v3; // bl
-  Scaleform::GFx::DisplayObjContainer *v4; // rsi
-  Scaleform::GFx::PlaceObject2Tag *v5; // rdi
-  Scaleform::GFx::ASStringManager *v6; // rax
-  Scaleform::GFx::ASString *v7; // rax
-  char v8; // bl
-  Scaleform::GFx::ASStringNode *v9; // rcx
-  bool v10; // zf
-  Scaleform::GFx::ASStringNode *v11; // rcx
-  Scaleform::GFx::ASStringManager *v12; // rax
-  Scaleform::GFx::ASString *v13; // rax
-  char v14; // bl
-  Scaleform::GFx::ASStringNode *v15; // rcx
-  Scaleform::GFx::ASStringNode *v16; // rcx
-  Scaleform::GFx::ASStringNode *v17; // rcx
-  Scaleform::GFx::ASString v18; // [rsp+58h] [rbp-90h]
-  Scaleform::GFx::ASString result; // [rsp+60h] [rbp-88h]
-  Scaleform::Render::Cxform v20; // [rsp+68h] [rbp-80h]
-  __int128 v21; // [rsp+88h] [rbp-60h]
-  __m128 v22; // [rsp+98h] [rbp-50h]
-  Scaleform::Render::RenderBuffer *v23; // [rsp+A8h] [rbp-40h]
-  int v24; // [rsp+B0h] [rbp-38h]
-  int v25; // [rsp+B4h] [rbp-34h]
-  int v26; // [rsp+B8h] [rbp-30h]
-  __int64 v27; // [rsp+C0h] [rbp-28h]
-  int v28; // [rsp+C8h] [rbp-20h]
-  __int16 v29; // [rsp+CCh] [rbp-1Ch]
-  __int64 v30; // [rsp+D8h] [rbp-10h]
-  char *pstr; // [rsp+E0h] [rbp-8h]
-  int v32; // [rsp+E8h] [rbp+0h]
-  __int64 v33; // [rsp+F8h] [rbp+10h]
-  char v34; // [rsp+100h] [rbp+18h]
-  Scaleform::GFx::ASString v35; // [rsp+140h] [rbp+58h]
+  Scaleform::GFx::ASMovieRootBase *pObject; // rcx
+  Scaleform::GFx::ASStringManager *v7; // rax
+  Scaleform::GFx::ASString *String; // rax
+  char v9; // bl
+  Scaleform::GFx::ASStringNode *v10; // rcx
+  bool v11; // zf
+  Scaleform::GFx::ASStringNode *v12; // rcx
+  Scaleform::GFx::ASMovieRootBase *v13; // rcx
+  Scaleform::GFx::ASStringManager *v14; // rax
+  Scaleform::GFx::ASString *v15; // rax
+  char v16; // bl
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  Scaleform::GFx::ASStringNode *v18; // rcx
+  Scaleform::GFx::ASStringNode *v19; // rcx
+  Scaleform::GFx::ASString v20; // [rsp+58h] [rbp-90h] BYREF
+  Scaleform::GFx::ASString result; // [rsp+60h] [rbp-88h] BYREF
+  Scaleform::GFx::GFxPlaceObjectBase::UnpackedData v22; // [rsp+68h] [rbp-80h] BYREF
+  __int64 v23; // [rsp+F8h] [rbp+10h]
+  char v24[32]; // [rsp+100h] [rbp+18h] BYREF
+  Scaleform::GFx::ASString v25; // [rsp+140h] [rbp+58h] BYREF
 
-  v33 = -2i64;
-  v3 = version;
-  v4 = m;
-  v5 = this;
-  v35.pNode = (Scaleform::GFx::ASStringNode *)&v20.M[1][2];
-  Scaleform::Render::Cxform::Cxform(&v20);
-  v21 = _xmm;
-  v22 = _xmm;
-  v23 = 0i64;
-  v26 = 0x40000;
-  v28 = 0;
-  v24 = 0;
-  v25 = 0;
-  v29 = 256;
-  v27 = 0i64;
-  Scaleform::GFx::PlaceObject2Tag::UnpackBase(v5, (Scaleform::GFx::GFxPlaceObjectBase::UnpackedData *)&v20, v3);
-  if ( v32 )
+  v23 = -2i64;
+  v25.pNode = (Scaleform::GFx::ASStringNode *)&v22;
+  Scaleform::Render::Cxform::Cxform(&v22.Pos.ColorTransform);
+  *(_OWORD *)&v22.Pos.Matrix_1.M[0][0] = _xmm;
+  *(__m128 *)&v22.Pos.Matrix_1.M[1][0] = _xmm;
+  v22.Pos.pFilters.pObject = 0i64;
+  v22.Pos.CharacterId.Id = 0x40000;
+  *(_DWORD *)&v22.Pos.ClipDepth = 0;
+  v22.Pos.Ratio = 0.0;
+  v22.Pos.Depth = 0;
+  *(_WORD *)&v22.Pos.BlendMode = 256;
+  v22.Pos.ClassName = 0i64;
+  Scaleform::GFx::PlaceObject2Tag::UnpackBase(this, &v22, version);
+  if ( v22.PlaceType )
   {
-    if ( v32 == 1 )
+    if ( v22.PlaceType == Place_Move )
     {
-      Scaleform::GFx::DisplayList::MoveDisplayObject(
-        &v4->mDisplayList,
-        (Scaleform::GFx::DisplayObjectBase *)&v4->vfptr,
-        (Scaleform::GFx::CharPosInfo *)&v20);
+      Scaleform::GFx::DisplayList::MoveDisplayObject(&m->mDisplayList, m, &v22.Pos);
       goto LABEL_27;
     }
-    if ( v32 != 2 )
+    if ( v22.PlaceType != Place_Replace )
       goto LABEL_27;
-    v6 = (Scaleform::GFx::ASStringManager *)((__int64 (*)(void))v4->pASRoot->pMovieImpl->pASMovieRoot.pObject->vfptr[59].__vecDelDtor)();
-    if ( pstr )
+    pObject = m->pASRoot->pMovieImpl->pASMovieRoot.pObject;
+    v7 = (Scaleform::GFx::ASStringManager *)((__int64 (__fastcall *)(Scaleform::GFx::ASMovieRootBase *))pObject->vfptr[59].__vecDelDtor)(pObject);
+    if ( v22.Name )
     {
-      v7 = Scaleform::GFx::ASStringManager::CreateString(v6, (Scaleform::GFx::ASString *)&v20.M[0][2], pstr);
-      v8 = 8;
+      String = Scaleform::GFx::ASStringManager::CreateString(
+                 v7,
+                 (Scaleform::GFx::ASString *)&v22.Pos.ColorTransform.M[0][2],
+                 v22.Name);
+      v9 = 8;
     }
     else
     {
-      v7 = Scaleform::GFx::ASStringManager::CreateEmptyString(v6, (Scaleform::GFx::ASString *)&v20);
-      v8 = 4;
+      String = Scaleform::GFx::ASStringManager::CreateEmptyString(v7, (Scaleform::GFx::ASString *)&v22);
+      v9 = 4;
     }
-    v35.pNode = v7->pNode;
-    ++v35.pNode->RefCount;
-    if ( v8 & 8 )
+    v25.pNode = String->pNode;
+    ++v25.pNode->RefCount;
+    if ( (v9 & 8) != 0 )
     {
-      v8 &= 0xF7u;
-      v9 = *(Scaleform::GFx::ASStringNode **)&v20.M[0][2];
-      v10 = *(_DWORD *)(*(_QWORD *)&v20.M[0][2] + 24i64) == 1;
-      --v9->RefCount;
-      if ( v10 )
-        Scaleform::GFx::ASStringNode::ReleaseNode(v9);
+      v9 &= ~8u;
+      v10 = *(Scaleform::GFx::ASStringNode **)&v22.Pos.ColorTransform.M[0][2];
+      v11 = (*(_DWORD *)(*(_QWORD *)&v22.Pos.ColorTransform.M[0][2] + 24i64))-- == 1;
+      if ( v11 )
+        Scaleform::GFx::ASStringNode::ReleaseNode(v10);
     }
-    if ( v8 & 4 )
+    if ( (v9 & 4) != 0 )
     {
-      v11 = *(Scaleform::GFx::ASStringNode **)&v20.M[0][0];
-      v10 = *(_DWORD *)(*(_QWORD *)&v20.M[0][0] + 24i64) == 1;
-      --v11->RefCount;
-      if ( v10 )
-        Scaleform::GFx::ASStringNode::ReleaseNode(v11);
+      v12 = *(Scaleform::GFx::ASStringNode **)&v22.Pos.ColorTransform.M[0][0];
+      v11 = (*(_DWORD *)(*(_QWORD *)&v22.Pos.ColorTransform.M[0][0] + 24i64))-- == 1;
+      if ( v11 )
+        Scaleform::GFx::ASStringNode::ReleaseNode(v12);
     }
-    ((void (__fastcall *)(Scaleform::GFx::DisplayObjContainer *, Scaleform::Render::Cxform *, Scaleform::GFx::ASString *, char *))v4->vfptr[123].__vecDelDtor)(
-      v4,
-      &v20,
-      &v35,
-      &v34);
+    ((void (__fastcall *)(Scaleform::GFx::DisplayObjContainer *, Scaleform::GFx::GFxPlaceObjectBase::UnpackedData *, Scaleform::GFx::ASString *, char *))m->Scaleform::GFx::InteractiveObject::Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[123].__vecDelDtor)(
+      m,
+      &v22,
+      &v25,
+      v24);
   }
   else
   {
-    v12 = (Scaleform::GFx::ASStringManager *)((__int64 (*)(void))v4->pASRoot->pMovieImpl->pASMovieRoot.pObject->vfptr[59].__vecDelDtor)();
-    if ( pstr )
+    v13 = m->pASRoot->pMovieImpl->pASMovieRoot.pObject;
+    v14 = (Scaleform::GFx::ASStringManager *)((__int64 (__fastcall *)(Scaleform::GFx::ASMovieRootBase *))v13->vfptr[59].__vecDelDtor)(v13);
+    if ( v22.Name )
     {
-      v13 = Scaleform::GFx::ASStringManager::CreateString(v12, &v18, pstr);
-      v14 = 2;
+      v15 = Scaleform::GFx::ASStringManager::CreateString(v14, &v20, v22.Name);
+      v16 = 2;
     }
     else
     {
-      v13 = Scaleform::GFx::ASStringManager::CreateEmptyString(v12, &result);
-      v14 = 1;
+      v15 = Scaleform::GFx::ASStringManager::CreateEmptyString(v14, &result);
+      v16 = 1;
     }
-    v35.pNode = v13->pNode;
-    ++v35.pNode->RefCount;
-    if ( v14 & 2 )
+    v25.pNode = v15->pNode;
+    ++v25.pNode->RefCount;
+    if ( (v16 & 2) != 0 )
     {
-      v14 &= 0xFDu;
-      v15 = v18.pNode;
-      v10 = v18.pNode->RefCount == 1;
-      --v15->RefCount;
-      if ( v10 )
-        Scaleform::GFx::ASStringNode::ReleaseNode(v15);
+      v16 &= ~2u;
+      pNode = v20.pNode;
+      v11 = v20.pNode->RefCount-- == 1;
+      if ( v11 )
+        Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
     }
-    if ( v14 & 1 )
+    if ( (v16 & 1) != 0 )
     {
-      v16 = result.pNode;
-      v10 = result.pNode->RefCount == 1;
-      --v16->RefCount;
-      if ( v10 )
-        Scaleform::GFx::ASStringNode::ReleaseNode(v16);
+      v18 = result.pNode;
+      v11 = result.pNode->RefCount-- == 1;
+      if ( v11 )
+        Scaleform::GFx::ASStringNode::ReleaseNode(v18);
     }
-    ((void (__fastcall *)(Scaleform::GFx::DisplayObjContainer *, Scaleform::Render::Cxform *, Scaleform::GFx::ASString *, __int64, _QWORD, signed int, signed int, _QWORD, _QWORD))v4->vfptr[118].__vecDelDtor)(
-      v4,
-      &v20,
-      &v35,
-      v30,
+    ((void (__fastcall *)(Scaleform::GFx::DisplayObjContainer *, Scaleform::GFx::GFxPlaceObjectBase::UnpackedData *, Scaleform::GFx::ASString *, Scaleform::ArrayLH<Scaleform::GFx::SwfEvent *,260,Scaleform::ArrayDefaultPolicy> *, _QWORD, int, int, _QWORD, _QWORD))m->Scaleform::GFx::InteractiveObject::Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[118].__vecDelDtor)(
+      m,
+      &v22,
+      &v25,
+      v22.pEventHandlers,
       0i64,
       -1,
       4,
       0i64,
       0i64);
   }
-  v17 = v35.pNode;
-  v10 = v35.pNode->RefCount == 1;
-  --v17->RefCount;
-  if ( v10 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v17);
+  v19 = v25.pNode;
+  v11 = v25.pNode->RefCount-- == 1;
+  if ( v11 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(v19);
 LABEL_27:
-  v35.pNode = (Scaleform::GFx::ASStringNode *)&v20;
-  if ( v23 )
-    Scaleform::RefCountImpl::Release(v23);
+  v25.pNode = (Scaleform::GFx::ASStringNode *)&v22;
+  if ( v22.Pos.pFilters.pObject )
+    Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v22.Pos.pFilters.pObject);
 }
 
 // File Line: 831
 // RVA: 0x8E2E30
 __int64 __fastcall Scaleform::GFx::PlaceObject2Tag::HasEventHandlers(Scaleform::GFx::Stream *pin)
 {
-  unsigned int v1; // eax
-  Scaleform::GFx::Stream *v2; // rbx
-  __int64 v3; // rcx
-  int v4; // er8
+  unsigned int DataSize; // eax
+  __int64 Pos; // rcx
+  signed int FilePos; // r8d
   unsigned __int8 v5; // si
   unsigned int v6; // edx
   unsigned int v7; // ecx
-  unsigned int v8; // eax
-  int v9; // eax
-  int v10; // edi
+  signed int v8; // edi
 
-  v1 = pin->DataSize;
-  v2 = pin;
+  DataSize = pin->DataSize;
   pin->UnusedBits = 0;
-  if ( (signed int)(v1 - pin->Pos) < 1 )
+  if ( (int)(DataSize - pin->Pos) < 1 )
     Scaleform::GFx::Stream::PopulateBuffer(pin, 1);
-  v3 = v2->Pos;
-  v4 = v2->FilePos;
-  v5 = v2->pBuffer[v3];
-  v6 = v3 + 1;
-  v7 = v2->DataSize;
-  v8 = v2->FilePos;
-  v2->Pos = v6;
-  v2->UnusedBits = 0;
-  v9 = v8 - v7;
-  v10 = v9 + v6 - 1;
-  if ( v10 < v9 || v10 >= v4 )
+  Pos = pin->Pos;
+  FilePos = pin->FilePos;
+  v5 = pin->pBuffer[Pos];
+  v6 = Pos + 1;
+  v7 = pin->DataSize;
+  pin->Pos = v6;
+  pin->UnusedBits = 0;
+  v8 = FilePos - v7 + v6 - 1;
+  if ( v8 < (int)(FilePos - v7) || v8 >= FilePos )
   {
-    if ( (v2->ResyncFile || v9 + v6 != v10)
-      && ((signed int (__fastcall *)(Scaleform::File *, _QWORD, _QWORD))v2->pInput.pObject->vfptr[14].__vecDelDtor)(
-           v2->pInput.pObject,
-           (unsigned int)v10,
+    if ( (pin->ResyncFile || FilePos - v7 + v6 != v8)
+      && ((int (__fastcall *)(Scaleform::File *, _QWORD, _QWORD))pin->pInput.pObject->vfptr[14].__vecDelDtor)(
+           pin->pInput.pObject,
+           (unsigned int)v8,
            0i64) >= 0 )
     {
-      v2->ResyncFile = 0;
-      v2->FilePos = v10;
-      *(_QWORD *)&v2->Pos = 0i64;
+      pin->ResyncFile = 0;
+      pin->FilePos = v8;
+      *(_QWORD *)&pin->Pos = 0i64;
     }
   }
   else
   {
-    v2->Pos = v10 + v7 - v4;
+    pin->Pos = v6 - 1;
   }
-  return (unsigned int)v5 >> 7;
+  return v5 >> 7;
 }
 
 // File Line: 850
 // RVA: 0x916260
-Scaleform::ArrayLH<Scaleform::GFx::SwfEvent *,260,Scaleform::ArrayDefaultPolicy> *__fastcall Scaleform::GFx::PlaceObject3Tag::UnpackEventHandlers(Scaleform::GFx::PlaceObject3Tag *this)
+Scaleform::ArrayLH<Scaleform::GFx::SwfEvent *,260,Scaleform::ArrayDefaultPolicy> *__fastcall Scaleform::GFx::PlaceObject3Tag::UnpackEventHandlers(
+        Scaleform::GFx::PlaceObject3Tag *this)
 {
-  Scaleform::GFx::PlaceObject3Tag *v1; // rbx
   Scaleform::ArrayLH<Scaleform::GFx::SwfEvent *,260,Scaleform::ArrayDefaultPolicy> *result; // rax
-  Scaleform::ArrayLH<Scaleform::GFx::SwfEvent *,260,Scaleform::ArrayDefaultPolicy> *v3; // rbx
-  Scaleform::Render::Cxform v4; // [rsp+30h] [rbp-98h]
+  __int64 v3; // rbx
+  Scaleform::Render::Cxform v4; // [rsp+30h] [rbp-98h] BYREF
   __int128 v5; // [rsp+50h] [rbp-78h]
   __m128 v6; // [rsp+60h] [rbp-68h]
   Scaleform::Render::RenderBuffer *v7; // [rsp+70h] [rbp-58h]
@@ -1627,9 +1508,8 @@ Scaleform::ArrayLH<Scaleform::GFx::SwfEvent *,260,Scaleform::ArrayDefaultPolicy>
   __int64 v11; // [rsp+88h] [rbp-40h]
   int v12; // [rsp+90h] [rbp-38h]
   __int16 v13; // [rsp+94h] [rbp-34h]
-  Scaleform::ArrayLH<Scaleform::GFx::SwfEvent *,260,Scaleform::ArrayDefaultPolicy> *v14; // [rsp+A0h] [rbp-28h]
+  __int64 v14; // [rsp+A0h] [rbp-28h]
 
-  v1 = this;
   if ( this->pData[0] >= 0 )
     return 0i64;
   result = *(Scaleform::ArrayLH<Scaleform::GFx::SwfEvent *,260,Scaleform::ArrayDefaultPolicy> **)&this->pData[1];
@@ -1645,148 +1525,141 @@ Scaleform::ArrayLH<Scaleform::GFx::SwfEvent *,260,Scaleform::ArrayDefaultPolicy>
     v9 = 0;
     v13 = 256;
     v11 = 0i64;
-    v1->vfptr[1].__vecDelDtor((Scaleform::GFx::ExecuteTag *)&v1->vfptr, (unsigned int)&v4);
+    this->vfptr[1].__vecDelDtor(this, (unsigned int)&v4);
     v3 = v14;
     if ( v7 )
       Scaleform::RefCountImpl::Release(v7);
-    result = v3;
+    return (Scaleform::ArrayLH<Scaleform::GFx::SwfEvent *,260,Scaleform::ArrayDefaultPolicy> *)v3;
   }
   return result;
 }
 
 // File Line: 868
 // RVA: 0x916010
-void __fastcall Scaleform::GFx::PlaceObject2Tag::UnpackBase(Scaleform::GFx::PlaceObject2Tag *this, Scaleform::GFx::GFxPlaceObjectBase::UnpackedData *data, char version)
+void __fastcall Scaleform::GFx::PlaceObject2Tag::UnpackBase(
+        Scaleform::GFx::PlaceObject2Tag *this,
+        Scaleform::GFx::GFxPlaceObjectBase::UnpackedData *data,
+        char version)
 {
-  char *v3; // r15
-  Scaleform::GFx::GFxPlaceObjectBase::UnpackedData *v4; // rbx
+  char *pData; // r15
   char v5; // di
-  Scaleform::GFx::PlaceObject2Tag *v6; // rsi
   unsigned __int64 v7; // rdx
-  char v8; // r12
-  const char *v9; // r9
-  unsigned int v10; // er8
+  _BYTE *v9; // r9
+  unsigned int CurBitIndex; // r8d
   __int16 v11; // ax
   __int16 v12; // cx
-  signed __int64 v13; // rdx
+  unsigned __int64 CurByteIndex; // rdx
   unsigned __int16 v14; // cx
   unsigned __int16 v15; // cx
   char v16; // al
   unsigned __int16 v17; // cx
-  unsigned __int8 v18; // al
+  char v18; // al
   char v19; // di
-  signed int v20; // eax
-  Scaleform::GFx::StreamContext v21; // [rsp+30h] [rbp-20h]
+  Scaleform::GFx::StreamContext v20; // [rsp+30h] [rbp-20h] BYREF
 
-  v3 = this->pData;
-  v4 = data;
-  v21.CurByteIndex = 0i64;
-  v21.CurBitIndex = 0;
-  v21.DataSize = -1i64;
-  v21.pData = this->pData;
+  pData = this->pData;
+  v20.CurByteIndex = 0i64;
+  v20.CurBitIndex = 0;
+  v20.DataSize = -1i64;
+  v20.pData = this->pData;
   v5 = this->pData[0];
-  v6 = this;
-  v21.CurBitIndex = 0;
+  v20.CurBitIndex = 0;
   v7 = 1i64;
-  v8 = version;
   if ( v5 < 0 )
     v7 = 9i64;
   v9 = this->pData;
-  v10 = 0;
-  v21.CurByteIndex = v7;
-  v11 = (unsigned __int8)v3[v7];
-  v12 = (unsigned __int8)v3[v7 + 1];
-  v13 = v7 + 2;
-  v21.CurByteIndex = v13;
-  v4->Pos.Depth = (unsigned __int16)(v11 | (v12 << 8));
-  if ( v5 & 2 )
+  CurBitIndex = 0;
+  v20.CurByteIndex = v7;
+  v11 = (unsigned __int8)pData[v7];
+  v12 = (unsigned __int8)pData[v7 + 1];
+  CurByteIndex = v7 + 2;
+  v20.CurByteIndex = CurByteIndex;
+  data->Pos.Depth = (unsigned __int16)(v11 | (v12 << 8));
+  if ( (v5 & 2) != 0 )
   {
-    v4->Pos.Flags.Flags |= 2u;
-    v21.CurBitIndex = 0;
-    v14 = *(_WORD *)&v3[v13];
-    v13 += 2i64;
-    v21.CurByteIndex = v13;
-    v4->Pos.CharacterId.Id = v14;
+    data->Pos.Flags.Flags |= 2u;
+    v20.CurBitIndex = 0;
+    v14 = *(_WORD *)&pData[CurByteIndex];
+    CurByteIndex += 2i64;
+    v20.CurByteIndex = CurByteIndex;
+    data->Pos.CharacterId.Id = v14;
   }
-  if ( v5 & 4 )
+  if ( (v5 & 4) != 0 )
   {
-    v4->Pos.Flags.Flags |= 4u;
-    Scaleform::GFx::StreamContext::ReadMatrix(&v21, &v4->Pos.Matrix_1);
-    v10 = v21.CurBitIndex;
-    v13 = v21.CurByteIndex;
-    v9 = v21.pData;
+    data->Pos.Flags.Flags |= 4u;
+    Scaleform::GFx::StreamContext::ReadMatrix(&v20, &data->Pos.Matrix_1);
+    CurBitIndex = v20.CurBitIndex;
+    CurByteIndex = v20.CurByteIndex;
+    v9 = v20.pData;
   }
-  if ( v5 & 8 )
+  if ( (v5 & 8) != 0 )
   {
-    v4->Pos.Flags.Flags |= 8u;
-    Scaleform::GFx::StreamContext::ReadCxformRgba(&v21, &v4->Pos.ColorTransform);
-    v10 = v21.CurBitIndex;
-    v13 = v21.CurByteIndex;
-    v9 = v21.pData;
+    data->Pos.Flags.Flags |= 8u;
+    Scaleform::GFx::StreamContext::ReadCxformRgba(&v20, &data->Pos.ColorTransform);
+    CurBitIndex = v20.CurBitIndex;
+    CurByteIndex = v20.CurByteIndex;
+    v9 = v20.pData;
   }
-  if ( v5 & 0x10 )
+  if ( (v5 & 0x10) != 0 )
   {
-    v4->Pos.Flags.Flags |= 0x10u;
-    if ( v10 )
-      v21.CurByteIndex = ++v13;
-    v21.CurBitIndex = 0;
-    v10 = 0;
-    v15 = *(_WORD *)&v9[v13];
-    v13 += 2i64;
-    v21.CurByteIndex = v13;
-    v4->Pos.Ratio = (float)v15 * 0.000015259022;
+    data->Pos.Flags.Flags |= 0x10u;
+    if ( CurBitIndex )
+      v20.CurByteIndex = ++CurByteIndex;
+    v20.CurBitIndex = 0;
+    CurBitIndex = 0;
+    v15 = *(_WORD *)&v9[CurByteIndex];
+    CurByteIndex += 2i64;
+    v20.CurByteIndex = CurByteIndex;
+    data->Pos.Ratio = (float)v15 * 0.000015259022;
   }
-  if ( v5 & 0x20 )
+  if ( (v5 & 0x20) != 0 )
   {
-    if ( v10 )
-      v21.CurByteIndex = ++v13;
-    v10 = 0;
-    v21.CurBitIndex = 0;
-    v4->Name = &v6->pData[v13];
+    if ( CurBitIndex )
+      v20.CurByteIndex = ++CurByteIndex;
+    CurBitIndex = 0;
+    v20.CurBitIndex = 0;
+    data->Name = &this->pData[CurByteIndex];
     do
     {
-      v16 = v9[v13++];
-      v21.CurByteIndex = v13;
+      v16 = v9[CurByteIndex++];
+      v20.CurByteIndex = CurByteIndex;
     }
     while ( v16 );
   }
   else
   {
-    v4->Name = 0i64;
+    data->Name = 0i64;
   }
-  if ( v5 & 0x40 )
+  if ( (v5 & 0x40) != 0 )
   {
-    v4->Pos.Flags.Flags |= 0x40u;
-    if ( v10 )
-      v21.CurByteIndex = ++v13;
-    v21.CurBitIndex = 0;
-    v17 = *(_WORD *)&v9[v13];
-    v21.CurByteIndex = v13 + 2;
-    v4->Pos.ClipDepth = v17;
+    data->Pos.Flags.Flags |= 0x40u;
+    if ( CurBitIndex )
+      v20.CurByteIndex = ++CurByteIndex;
+    v20.CurBitIndex = 0;
+    v17 = *(_WORD *)&v9[CurByteIndex];
+    v20.CurByteIndex = CurByteIndex + 2;
+    data->Pos.ClipDepth = v17;
   }
-  if ( v5 & 0x80 )
-    ((void (__fastcall *)(Scaleform::GFx::PlaceObject2Tag *, Scaleform::GFx::GFxPlaceObjectBase::UnpackedData *, Scaleform::GFx::StreamContext *, char *, char))v6->vfptr[1].IsRemoveTag)(
-      v6,
-      v4,
-      &v21,
-      v3,
-      v8);
+  if ( (v5 & 0x80) != 0 )
+    ((void (__fastcall *)(Scaleform::GFx::PlaceObject2Tag *, Scaleform::GFx::GFxPlaceObjectBase::UnpackedData *, Scaleform::GFx::StreamContext *, char *, char))this->vfptr[1].IsRemoveTag)(
+      this,
+      data,
+      &v20,
+      pData,
+      version);
   else
-    v4->pEventHandlers = 0i64;
+    data->pEventHandlers = 0i64;
   v18 = v5;
   v19 = v5 & 1;
-  v4->PlaceType = 0;
-  if ( (v18 >> 1) & 1 )
+  data->PlaceType = Place_Add;
+  if ( (v18 & 2) != 0 )
   {
     if ( v19 )
-      v4->PlaceType = 2;
+      data->PlaceType = Place_Replace;
   }
   else
   {
-    v20 = 0;
-    if ( v19 )
-      v20 = 1;
-    v4->PlaceType = v20;
+    data->PlaceType = v19 != 0;
   }
 }
 
@@ -1800,219 +1673,200 @@ void __fastcall Scaleform::GFx::PlaceObject3Tag::~PlaceObject3Tag(Scaleform::GFx
 
 // File Line: 1075
 // RVA: 0x8D8120
-Scaleform::GFx::CharPosInfoFlags *__fastcall Scaleform::GFx::PlaceObject3Tag::GetFlags(Scaleform::GFx::PlaceObject3Tag *this, Scaleform::GFx::CharPosInfoFlags *result)
+Scaleform::GFx::CharPosInfoFlags *__fastcall Scaleform::GFx::PlaceObject3Tag::GetFlags(
+        Scaleform::GFx::PlaceObject3Tag *this,
+        Scaleform::GFx::CharPosInfoFlags *result)
 {
   char v2; // r8
-  signed __int64 v3; // rax
+  __int64 v3; // rax
 
   v2 = this->pData[0];
   v3 = 1i64;
   if ( v2 < 0 )
     v3 = 9i64;
-  result->Flags = v2 & 0x5F | (unsigned __int8)(32 * (this->pData[v3] & 1 | 2 * (this->pData[v3] & 0xFE)));
+  result->Flags = v2 & 0x5F | (unsigned __int8)(32 * (this->pData[v3] & 1 | (2 * (this->pData[v3] & 0xFE))));
   return result;
 }
 
 // File Line: 1108
 // RVA: 0x8C9FA0
-void __fastcall Scaleform::GFx::PlaceObject3Tag::Execute(Scaleform::GFx::PlaceObject3Tag *this, Scaleform::GFx::DisplayObjContainer *m)
+void __fastcall Scaleform::GFx::PlaceObject3Tag::Execute(
+        Scaleform::GFx::PlaceObject3Tag *this,
+        Scaleform::GFx::DisplayObjContainer *m)
 {
-  Scaleform::GFx::DisplayObjContainer *v2; // rdi
-  Scaleform::GFx::PlaceObject3Tag *v3; // rbx
-  Scaleform::GFx::ASStringManager *v4; // rax
-  Scaleform::GFx::ASString *v5; // rax
-  char v6; // bl
-  Scaleform::GFx::ASStringNode *v7; // rcx
-  bool v8; // zf
-  Scaleform::GFx::ASStringNode *v9; // rcx
-  Scaleform::GFx::ASStringManager *v10; // rax
-  Scaleform::GFx::ASString *v11; // rax
-  char v12; // bl
-  Scaleform::GFx::ASStringNode *v13; // rcx
-  Scaleform::GFx::ASStringNode *v14; // rcx
+  Scaleform::GFx::ASMovieRootBase *pObject; // rcx
+  Scaleform::GFx::ASStringManager *v5; // rax
+  Scaleform::GFx::ASString *v6; // rax
+  char v7; // bl
+  Scaleform::GFx::ASStringNode *v8; // rcx
+  bool v9; // zf
+  Scaleform::GFx::ASStringNode *v10; // rcx
+  Scaleform::GFx::ASMovieRootBase *v11; // rcx
+  Scaleform::GFx::ASStringManager *v12; // rax
+  Scaleform::GFx::ASString *v13; // rax
+  char v14; // bl
   Scaleform::GFx::ASStringNode *v15; // rcx
-  Scaleform::GFx::ASString v16; // [rsp+58h] [rbp-A8h]
-  Scaleform::GFx::ASString v17; // [rsp+60h] [rbp-A0h]
-  Scaleform::Render::Cxform v18; // [rsp+70h] [rbp-90h]
-  __int128 v19; // [rsp+90h] [rbp-70h]
-  __m128 v20; // [rsp+A0h] [rbp-60h]
-  Scaleform::Render::RenderBuffer *v21; // [rsp+B0h] [rbp-50h]
-  int v22; // [rsp+B8h] [rbp-48h]
-  int v23; // [rsp+BCh] [rbp-44h]
-  int v24; // [rsp+C0h] [rbp-40h]
-  __int64 v25; // [rsp+C8h] [rbp-38h]
-  int v26; // [rsp+D0h] [rbp-30h]
-  __int16 v27; // [rsp+D4h] [rbp-2Ch]
-  __int64 v28; // [rsp+E0h] [rbp-20h]
+  Scaleform::GFx::ASStringNode *v16; // rcx
+  Scaleform::GFx::ASStringNode *v17; // rcx
+  Scaleform::GFx::ASString v18; // [rsp+58h] [rbp-A8h] BYREF
+  Scaleform::GFx::ASString v19; // [rsp+60h] [rbp-A0h] BYREF
+  Scaleform::GFx::CharPosInfo v20; // [rsp+70h] [rbp-90h] BYREF
+  __int64 v21; // [rsp+E0h] [rbp-20h]
   char *pstr; // [rsp+E8h] [rbp-18h]
-  int v30; // [rsp+F0h] [rbp-10h]
-  __int64 v31; // [rsp+100h] [rbp+0h]
-  char v32; // [rsp+108h] [rbp+8h]
-  Scaleform::GFx::ASStringNode *v33; // [rsp+130h] [rbp+30h]
-  Scaleform::GFx::ASString v34; // [rsp+140h] [rbp+40h]
-  Scaleform::GFx::ASString result; // [rsp+148h] [rbp+48h]
+  int v23; // [rsp+F0h] [rbp-10h]
+  __int64 v24; // [rsp+100h] [rbp+0h]
+  char v25[24]; // [rsp+108h] [rbp+8h] BYREF
+  Scaleform::GFx::ASStringNode *pNode; // [rsp+130h] [rbp+30h] BYREF
+  Scaleform::GFx::ASString v27; // [rsp+140h] [rbp+40h] BYREF
+  Scaleform::GFx::ASString result; // [rsp+148h] [rbp+48h] BYREF
 
-  v31 = -2i64;
-  v2 = m;
-  v3 = this;
-  v33 = (Scaleform::GFx::ASStringNode *)&v18;
-  Scaleform::Render::Cxform::Cxform(&v18);
-  v19 = _xmm;
-  v20 = _xmm;
-  v21 = 0i64;
-  v24 = 0x40000;
-  v26 = 0;
-  v22 = 0;
-  v23 = 0;
-  v27 = 256;
-  v25 = 0i64;
-  v3->vfptr[1].__vecDelDtor((Scaleform::GFx::ExecuteTag *)&v3->vfptr, (unsigned int)&v18);
-  if ( v30 )
+  v24 = -2i64;
+  pNode = (Scaleform::GFx::ASStringNode *)&v20;
+  Scaleform::Render::Cxform::Cxform(&v20.ColorTransform);
+  *(_OWORD *)&v20.Matrix_1.M[0][0] = _xmm;
+  *(__m128 *)&v20.Matrix_1.M[1][0] = _xmm;
+  v20.pFilters.pObject = 0i64;
+  v20.CharacterId.Id = 0x40000;
+  *(_DWORD *)&v20.ClipDepth = 0;
+  v20.Ratio = 0.0;
+  v20.Depth = 0;
+  *(_WORD *)&v20.BlendMode = 256;
+  v20.ClassName = 0i64;
+  this->vfptr[1].__vecDelDtor(this, (unsigned int)&v20);
+  if ( v23 )
   {
-    if ( v30 == 1 )
+    if ( v23 == 1 )
     {
-      Scaleform::GFx::DisplayList::MoveDisplayObject(
-        &v2->mDisplayList,
-        (Scaleform::GFx::DisplayObjectBase *)&v2->vfptr,
-        (Scaleform::GFx::CharPosInfo *)&v18);
+      Scaleform::GFx::DisplayList::MoveDisplayObject(&m->mDisplayList, m, &v20);
       goto LABEL_27;
     }
-    if ( v30 != 2 )
+    if ( v23 != 2 )
       goto LABEL_27;
-    v4 = (Scaleform::GFx::ASStringManager *)((__int64 (*)(void))v2->pASRoot->pMovieImpl->pASMovieRoot.pObject->vfptr[59].__vecDelDtor)();
+    pObject = m->pASRoot->pMovieImpl->pASMovieRoot.pObject;
+    v5 = (Scaleform::GFx::ASStringManager *)((__int64 (__fastcall *)(Scaleform::GFx::ASMovieRootBase *))pObject->vfptr[59].__vecDelDtor)(pObject);
     if ( pstr )
     {
-      v5 = Scaleform::GFx::ASStringManager::CreateString(v4, &v34, pstr);
-      v6 = 8;
+      v6 = Scaleform::GFx::ASStringManager::CreateString(v5, &v27, pstr);
+      v7 = 8;
     }
     else
     {
-      v5 = Scaleform::GFx::ASStringManager::CreateEmptyString(v4, &result);
-      v6 = 4;
+      v6 = Scaleform::GFx::ASStringManager::CreateEmptyString(v5, &result);
+      v7 = 4;
     }
-    v33 = v5->pNode;
-    ++v33->RefCount;
-    if ( v6 & 8 )
+    pNode = v6->pNode;
+    ++pNode->RefCount;
+    if ( (v7 & 8) != 0 )
     {
-      v6 &= 0xF7u;
-      v7 = v34.pNode;
-      v8 = v34.pNode->RefCount == 1;
-      --v7->RefCount;
-      if ( v8 )
-        Scaleform::GFx::ASStringNode::ReleaseNode(v7);
+      v7 &= ~8u;
+      v8 = v27.pNode;
+      v9 = v27.pNode->RefCount-- == 1;
+      if ( v9 )
+        Scaleform::GFx::ASStringNode::ReleaseNode(v8);
     }
-    if ( v6 & 4 )
+    if ( (v7 & 4) != 0 )
     {
-      v9 = result.pNode;
-      v8 = result.pNode->RefCount == 1;
-      --v9->RefCount;
-      if ( v8 )
-        Scaleform::GFx::ASStringNode::ReleaseNode(v9);
+      v10 = result.pNode;
+      v9 = result.pNode->RefCount-- == 1;
+      if ( v9 )
+        Scaleform::GFx::ASStringNode::ReleaseNode(v10);
     }
-    ((void (__fastcall *)(Scaleform::GFx::DisplayObjContainer *, Scaleform::Render::Cxform *, Scaleform::GFx::ASStringNode **, char *))v2->vfptr[123].__vecDelDtor)(
-      v2,
-      &v18,
-      &v33,
-      &v32);
+    ((void (__fastcall *)(Scaleform::GFx::DisplayObjContainer *, Scaleform::GFx::CharPosInfo *, Scaleform::GFx::ASStringNode **, char *))m->Scaleform::GFx::InteractiveObject::Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[123].__vecDelDtor)(
+      m,
+      &v20,
+      &pNode,
+      v25);
   }
   else
   {
-    v10 = (Scaleform::GFx::ASStringManager *)((__int64 (*)(void))v2->pASRoot->pMovieImpl->pASMovieRoot.pObject->vfptr[59].__vecDelDtor)();
+    v11 = m->pASRoot->pMovieImpl->pASMovieRoot.pObject;
+    v12 = (Scaleform::GFx::ASStringManager *)((__int64 (__fastcall *)(Scaleform::GFx::ASMovieRootBase *))v11->vfptr[59].__vecDelDtor)(v11);
     if ( pstr )
     {
-      v11 = Scaleform::GFx::ASStringManager::CreateString(v10, &v17, pstr);
-      v12 = 2;
+      v13 = Scaleform::GFx::ASStringManager::CreateString(v12, &v19, pstr);
+      v14 = 2;
     }
     else
     {
-      v11 = Scaleform::GFx::ASStringManager::CreateEmptyString(v10, &v16);
-      v12 = 1;
+      v13 = Scaleform::GFx::ASStringManager::CreateEmptyString(v12, &v18);
+      v14 = 1;
     }
-    v33 = v11->pNode;
-    ++v33->RefCount;
-    if ( v12 & 2 )
+    pNode = v13->pNode;
+    ++pNode->RefCount;
+    if ( (v14 & 2) != 0 )
     {
-      v12 &= 0xFDu;
-      v13 = v17.pNode;
-      v8 = v17.pNode->RefCount == 1;
-      --v13->RefCount;
-      if ( v8 )
-        Scaleform::GFx::ASStringNode::ReleaseNode(v13);
+      v14 &= ~2u;
+      v15 = v19.pNode;
+      v9 = v19.pNode->RefCount-- == 1;
+      if ( v9 )
+        Scaleform::GFx::ASStringNode::ReleaseNode(v15);
     }
-    if ( v12 & 1 )
+    if ( (v14 & 1) != 0 )
     {
-      v14 = v16.pNode;
-      v8 = v16.pNode->RefCount == 1;
-      --v14->RefCount;
-      if ( v8 )
-        Scaleform::GFx::ASStringNode::ReleaseNode(v14);
+      v16 = v18.pNode;
+      v9 = v18.pNode->RefCount-- == 1;
+      if ( v9 )
+        Scaleform::GFx::ASStringNode::ReleaseNode(v16);
     }
-    ((void (__fastcall *)(Scaleform::GFx::DisplayObjContainer *, Scaleform::Render::Cxform *, Scaleform::GFx::ASStringNode **, __int64, _QWORD, signed int, signed int, _QWORD, _QWORD))v2->vfptr[118].__vecDelDtor)(
-      v2,
-      &v18,
-      &v33,
-      v28,
+    ((void (__fastcall *)(Scaleform::GFx::DisplayObjContainer *, Scaleform::GFx::CharPosInfo *, Scaleform::GFx::ASStringNode **, __int64, _QWORD, int, int, _QWORD, _QWORD))m->Scaleform::GFx::InteractiveObject::Scaleform::GFx::DisplayObject::Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr[118].__vecDelDtor)(
+      m,
+      &v20,
+      &pNode,
+      v21,
       0i64,
       -1,
       4,
       0i64,
       0i64);
   }
-  v15 = v33;
-  v8 = v33->RefCount == 1;
-  --v15->RefCount;
-  if ( v8 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v15);
+  v17 = pNode;
+  v9 = pNode->RefCount-- == 1;
+  if ( v9 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(v17);
 LABEL_27:
-  v33 = (Scaleform::GFx::ASStringNode *)&v18;
-  if ( v21 )
-    Scaleform::RefCountImpl::Release(v21);
+  pNode = (Scaleform::GFx::ASStringNode *)&v20;
+  if ( v20.pFilters.pObject )
+    Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v20.pFilters.pObject);
 }
 
 // File Line: 1159
 // RVA: 0x9156A0
-void __fastcall Scaleform::GFx::PlaceObject3Tag::Unpack(Scaleform::GFx::PlaceObject3Tag *this, Scaleform::GFx::GFxPlaceObjectBase::UnpackedData *data)
+void __fastcall Scaleform::GFx::PlaceObject3Tag::Unpack(
+        Scaleform::GFx::PlaceObject3Tag *this,
+        Scaleform::GFx::GFxPlaceObjectBase::UnpackedData *data)
 {
-  Scaleform::GFx::GFxPlaceObjectBase::UnpackedData *v2; // rdi
-  Scaleform::GFx::PlaceObject3Tag *v3; // r12
-  char *v4; // r14
-  const char *v5; // r10
+  char *pData; // r14
+  _BYTE *v5; // r10
   Scaleform::GFx::Resource *v6; // rbx
-  unsigned __int8 v7; // si
+  char v7; // si
   unsigned __int64 v8; // r8
   char v9; // r15
-  unsigned __int64 v10; // r8
-  __int64 v11; // r9
-  unsigned __int16 v12; // cx
-  signed __int64 v13; // r8
-  char v14; // al
+  unsigned int CurBitIndex; // r9d
+  unsigned __int16 v11; // cx
+  unsigned __int64 CurByteIndex; // r8
+  char v13; // al
+  unsigned __int16 v14; // cx
   unsigned __int16 v15; // cx
-  unsigned __int16 v16; // cx
-  char v17; // al
-  unsigned __int16 v18; // cx
-  Scaleform::Render::FilterSet *v19; // rax
-  Scaleform::GFx::Resource *v20; // rax
-  Scaleform::Render::RenderBuffer *v21; // rcx
-  char v22; // cl
-  char v23; // dl
-  char v24; // r14
-  Scaleform::GFx::Resource *v25; // rcx
-  Scaleform::GFx::Resource *v26; // rbx
+  char v16; // al
+  unsigned __int16 v17; // cx
+  Scaleform::Render::FilterSet *v18; // rax
+  Scaleform::GFx::Resource *v19; // rax
+  Scaleform::Render::RenderBuffer *pObject; // rcx
+  char v21; // cl
+  char v22; // dl
+  char v23; // r14
+  Scaleform::Render::FilterSet *v24; // rcx
+  Scaleform::Render::FilterSet *v25; // rbx
+  Scaleform::Render::FilterSet *v26; // rax
   Scaleform::Render::FilterSet *v27; // rax
-  Scaleform::GFx::Resource *v28; // rax
-  Scaleform::Render::RenderBuffer *v29; // rcx
-  bool v30; // dl
+  Scaleform::Render::RenderBuffer *v28; // rcx
+  bool v29; // dl
+  char v30; // al
   char v31; // al
-  char v32; // al
-  char v33; // si
-  signed int v34; // eax
-  signed __int64 v35; // [rsp+20h] [rbp-30h]
-  Scaleform::GFx::StreamContext ps; // [rsp+28h] [rbp-28h]
+  char v32; // si
+  Scaleform::GFx::StreamContext ps; // [rsp+28h] [rbp-28h] BYREF
 
-  v35 = -2i64;
-  v2 = data;
-  v3 = this;
-  v4 = this->pData;
+  pData = this->pData;
   v5 = this->pData;
   ps.pData = this->pData;
   ps.DataSize = -1i64;
@@ -2021,112 +1875,108 @@ void __fastcall Scaleform::GFx::PlaceObject3Tag::Unpack(Scaleform::GFx::PlaceObj
   ps.CurBitIndex = 0;
   v7 = this->pData[0];
   v8 = 1i64;
-  if ( (v7 & 0x80u) != 0 )
+  if ( v7 < 0 )
     v8 = 9i64;
   ps.CurByteIndex = v8;
   ps.CurBitIndex = 0;
-  v9 = v4[v8];
-  v10 = v8 + 1;
-  ps.CurByteIndex = v10;
-  v11 = 0i64;
+  v9 = pData[v8];
+  ps.CurByteIndex = v8 + 1;
+  CurBitIndex = 0;
   ps.CurBitIndex = 0;
-  v12 = *(_WORD *)&v4[v10];
-  v13 = v10 + 2;
-  ps.CurByteIndex = v13;
-  data->Pos.Depth = v12;
-  if ( v9 & 8 )
+  v11 = *(_WORD *)&pData[v8 + 1];
+  CurByteIndex = v8 + 3;
+  ps.CurByteIndex = CurByteIndex;
+  data->Pos.Depth = v11;
+  if ( (v9 & 8) != 0 )
   {
     data->Pos.Flags.Flags |= 0x100u;
-    data->Pos.ClassName = &v3->pData[v13];
+    data->Pos.ClassName = &this->pData[CurByteIndex];
     ps.CurBitIndex = 0;
     do
     {
-      v14 = v4[v13++];
-      ps.CurByteIndex = v13;
+      v13 = pData[CurByteIndex++];
+      ps.CurByteIndex = CurByteIndex;
     }
-    while ( v14 );
+    while ( v13 );
   }
-  if ( v7 & 2 )
+  if ( (v7 & 2) != 0 )
   {
     data->Pos.Flags.Flags |= 2u;
-    v11 = 0i64;
+    CurBitIndex = 0;
     ps.CurBitIndex = 0;
-    v15 = *(_WORD *)&v4[v13];
-    v13 += 2i64;
-    ps.CurByteIndex = v13;
-    data->Pos.CharacterId.Id = v15;
+    v14 = *(_WORD *)&pData[CurByteIndex];
+    CurByteIndex += 2i64;
+    ps.CurByteIndex = CurByteIndex;
+    data->Pos.CharacterId.Id = v14;
   }
-  if ( v7 & 4 )
+  if ( (v7 & 4) != 0 )
   {
     data->Pos.Flags.Flags |= 4u;
     Scaleform::GFx::StreamContext::ReadMatrix(&ps, &data->Pos.Matrix_1);
-    v11 = ps.CurBitIndex;
-    v13 = ps.CurByteIndex;
+    CurBitIndex = ps.CurBitIndex;
+    CurByteIndex = ps.CurByteIndex;
     v5 = ps.pData;
   }
-  if ( v7 & 8 )
+  if ( (v7 & 8) != 0 )
   {
-    v2->Pos.Flags.Flags |= 8u;
-    Scaleform::GFx::StreamContext::ReadCxformRgba(&ps, &v2->Pos.ColorTransform);
-    v11 = ps.CurBitIndex;
-    v13 = ps.CurByteIndex;
+    data->Pos.Flags.Flags |= 8u;
+    Scaleform::GFx::StreamContext::ReadCxformRgba(&ps, &data->Pos.ColorTransform);
+    CurBitIndex = ps.CurBitIndex;
+    CurByteIndex = ps.CurByteIndex;
     v5 = ps.pData;
   }
-  if ( v7 & 0x10 )
+  if ( (v7 & 0x10) != 0 )
   {
-    v2->Pos.Flags.Flags |= 0x10u;
-    if ( (_DWORD)v11 )
-      ps.CurByteIndex = ++v13;
-    v11 = 0i64;
+    data->Pos.Flags.Flags |= 0x10u;
+    if ( CurBitIndex )
+      ps.CurByteIndex = ++CurByteIndex;
+    CurBitIndex = 0;
     ps.CurBitIndex = 0;
-    v16 = *(_WORD *)&v5[v13];
-    v13 += 2i64;
-    ps.CurByteIndex = v13;
-    v2->Pos.Ratio = (float)v16 * 0.000015259022;
+    v15 = *(_WORD *)&v5[CurByteIndex];
+    CurByteIndex += 2i64;
+    ps.CurByteIndex = CurByteIndex;
+    data->Pos.Ratio = (float)v15 * 0.000015259022;
   }
-  if ( v7 & 0x20 )
+  if ( (v7 & 0x20) != 0 )
   {
-    if ( (_DWORD)v11 )
-      ps.CurByteIndex = ++v13;
-    v2->Name = &v3->pData[v13];
-    v11 = 0i64;
+    if ( CurBitIndex )
+      ps.CurByteIndex = ++CurByteIndex;
+    data->Name = &this->pData[CurByteIndex];
+    CurBitIndex = 0;
     ps.CurBitIndex = 0;
     do
     {
-      v17 = v5[v13++];
-      ps.CurByteIndex = v13;
+      v16 = v5[CurByteIndex++];
+      ps.CurByteIndex = CurByteIndex;
     }
-    while ( v17 );
+    while ( v16 );
   }
   else
   {
-    v2->Name = 0i64;
+    data->Name = 0i64;
   }
-  if ( v7 & 0x40 )
+  if ( (v7 & 0x40) != 0 )
   {
-    if ( (_DWORD)v11 )
-      ps.CurByteIndex = ++v13;
-    v11 = 0i64;
+    if ( CurBitIndex )
+      ps.CurByteIndex = ++CurByteIndex;
+    CurBitIndex = 0;
     ps.CurBitIndex = 0;
-    v18 = *(_WORD *)&v5[v13];
-    v13 += 2i64;
-    ps.CurByteIndex = v13;
-    v2->Pos.ClipDepth = v18;
-    v2->Pos.Flags.Flags |= 0x40u;
+    v17 = *(_WORD *)&v5[CurByteIndex];
+    CurByteIndex += 2i64;
+    ps.CurByteIndex = CurByteIndex;
+    data->Pos.ClipDepth = v17;
+    data->Pos.Flags.Flags |= 0x40u;
   }
-  if ( v9 & 1 )
+  if ( (v9 & 1) != 0 )
   {
-    v2->Pos.Flags.Flags |= 0x20u;
-    v19 = (Scaleform::Render::FilterSet *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64, _QWORD, __int64, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
+    data->Pos.Flags.Flags |= 0x20u;
+    v18 = (Scaleform::Render::FilterSet *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
                                             Scaleform::Memory::pGlobalHeap,
-                                            56i64,
-                                            0i64,
-                                            v11,
-                                            -2i64);
-    if ( v19 )
+                                            56i64);
+    if ( v18 )
     {
-      Scaleform::Render::FilterSet::FilterSet(v19, 0i64);
-      v6 = v20;
+      Scaleform::Render::FilterSet::FilterSet(v18, 0i64);
+      v6 = v19;
     }
     if ( (unsigned int)Scaleform::GFx::LoadFilters<Scaleform::GFx::StreamContext>(
                          &ps,
@@ -2134,160 +1984,153 @@ void __fastcall Scaleform::GFx::PlaceObject3Tag::Unpack(Scaleform::GFx::PlaceObj
     {
       if ( v6 )
         Scaleform::Render::RenderBuffer::AddRef(v6);
-      v21 = (Scaleform::Render::RenderBuffer *)v2->Pos.pFilters.pObject;
-      if ( v21 )
-        Scaleform::RefCountImpl::Release(v21);
-      v2->Pos.pFilters.pObject = (Scaleform::Render::FilterSet *)v6;
+      pObject = (Scaleform::Render::RenderBuffer *)data->Pos.pFilters.pObject;
+      if ( pObject )
+        Scaleform::RefCountImpl::Release(pObject);
+      data->Pos.pFilters.pObject = (Scaleform::Render::FilterSet *)v6;
     }
     if ( v6 )
       Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v6);
-    LODWORD(v6) = 0;
     v5 = ps.pData;
-    v13 = ps.CurByteIndex;
-    LODWORD(v11) = ps.CurBitIndex;
+    CurByteIndex = ps.CurByteIndex;
+    CurBitIndex = ps.CurBitIndex;
   }
-  if ( v9 & 2 )
+  if ( (v9 & 2) != 0 )
   {
-    v2->Pos.Flags.Flags |= 0x80u;
-    if ( (_DWORD)v11 )
-      ps.CurByteIndex = ++v13;
-    LODWORD(v11) = (_DWORD)v6;
-    ps.CurBitIndex = (unsigned int)v6;
-    v22 = v5[v13++];
-    ps.CurByteIndex = v13;
-    v23 = v22;
-    if ( (unsigned __int8)(v22 - 1) > 0xDu )
-      v23 = 1;
-    v2->Pos.BlendMode = v23;
+    data->Pos.Flags.Flags |= 0x80u;
+    if ( CurBitIndex )
+      ps.CurByteIndex = ++CurByteIndex;
+    CurBitIndex = 0;
+    ps.CurBitIndex = 0;
+    v21 = v5[CurByteIndex++];
+    ps.CurByteIndex = CurByteIndex;
+    v22 = v21;
+    if ( (unsigned __int8)(v21 - 1) > 0xDu )
+      v22 = 1;
+    data->Pos.BlendMode = v22;
   }
-  if ( v9 & 4 )
+  if ( (v9 & 4) != 0 )
   {
-    if ( (_DWORD)v11 )
-      ps.CurByteIndex = ++v13;
-    ps.CurBitIndex = (unsigned int)v6;
-    v24 = v5[v13];
-    ps.CurByteIndex = v13 + 1;
-    v25 = (Scaleform::GFx::Resource *)v2->Pos.pFilters.pObject;
-    if ( v25 )
-      Scaleform::Render::RenderBuffer::AddRef(v25);
-    v26 = (Scaleform::GFx::Resource *)v2->Pos.pFilters.pObject;
-    if ( v24 == 1 )
+    if ( CurBitIndex )
+      ps.CurByteIndex = ++CurByteIndex;
+    ps.CurBitIndex = 0;
+    v23 = v5[CurByteIndex];
+    ps.CurByteIndex = CurByteIndex + 1;
+    v24 = data->Pos.pFilters.pObject;
+    if ( v24 )
+      Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)v24);
+    v25 = data->Pos.pFilters.pObject;
+    if ( v23 == 1 )
     {
-      if ( !v26 )
+      if ( !v25 )
       {
-        v27 = (Scaleform::Render::FilterSet *)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(
+        v26 = (Scaleform::Render::FilterSet *)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(
                                                 Scaleform::Memory::pGlobalHeap,
-                                                56ui64,
+                                                56i64,
                                                 0i64);
-        if ( v27 )
+        if ( v26 )
         {
-          Scaleform::Render::FilterSet::FilterSet(v27, 0i64);
-          v26 = v28;
+          Scaleform::Render::FilterSet::FilterSet(v26, 0i64);
+          v25 = v27;
         }
         else
         {
-          v26 = 0i64;
+          v25 = 0i64;
         }
-        if ( v26 )
-          Scaleform::Render::RenderBuffer::AddRef(v26);
-        v29 = (Scaleform::Render::RenderBuffer *)v2->Pos.pFilters.pObject;
-        if ( v29 )
-          Scaleform::RefCountImpl::Release(v29);
-        v2->Pos.pFilters.pObject = (Scaleform::Render::FilterSet *)v26;
+        if ( v25 )
+          Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)v25);
+        v28 = (Scaleform::Render::RenderBuffer *)data->Pos.pFilters.pObject;
+        if ( v28 )
+          Scaleform::RefCountImpl::Release(v28);
+        data->Pos.pFilters.pObject = v25;
       }
-      v30 = 1;
+      v29 = 1;
     }
     else
     {
-      if ( !v26 )
+      if ( !v25 )
       {
 LABEL_64:
-        if ( v26 )
-          Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v26);
-        v4 = v3->pData;
+        if ( v25 )
+          Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v25);
+        pData = this->pData;
         v5 = ps.pData;
-        v13 = ps.CurByteIndex;
-        LODWORD(v11) = ps.CurBitIndex;
+        CurByteIndex = ps.CurByteIndex;
+        CurBitIndex = ps.CurBitIndex;
         goto LABEL_67;
       }
-      v30 = 0;
+      v29 = 0;
     }
-    Scaleform::Render::FilterSet::SetCacheAsBitmap((Scaleform::Render::FilterSet *)v26, v30);
+    Scaleform::Render::FilterSet::SetCacheAsBitmap(v25, v29);
     goto LABEL_64;
   }
 LABEL_67:
-  if ( v9 & 0x20 )
+  if ( (v9 & 0x20) != 0 )
   {
-    if ( (_DWORD)v11 )
-      ps.CurByteIndex = ++v13;
+    if ( CurBitIndex )
+      ps.CurByteIndex = ++CurByteIndex;
     ps.CurBitIndex = 0;
-    v31 = v5[v13];
-    ps.CurByteIndex = v13 + 1;
-    v2->Pos.Visible = v31;
-    v2->Pos.Flags.Flags |= 0x200u;
+    v30 = v5[CurByteIndex];
+    ps.CurByteIndex = CurByteIndex + 1;
+    data->Pos.Visible = v30;
+    data->Pos.Flags.Flags |= 0x200u;
   }
-  if ( v7 & 0x80 )
-    ((void (__fastcall *)(Scaleform::GFx::PlaceObject3Tag *, Scaleform::GFx::GFxPlaceObjectBase::UnpackedData *, Scaleform::GFx::StreamContext *, char *, signed __int64))v3->vfptr[1].IsRemoveTag)(
-      v3,
-      v2,
+  if ( (v7 & 0x80) != 0 )
+    ((void (__fastcall *)(Scaleform::GFx::PlaceObject3Tag *, Scaleform::GFx::GFxPlaceObjectBase::UnpackedData *, Scaleform::GFx::StreamContext *, char *, __int64))this->vfptr[1].IsRemoveTag)(
+      this,
+      data,
       &ps,
-      v4,
-      v35);
+      pData,
+      -2i64);
   else
-    v2->pEventHandlers = 0i64;
-  v32 = v7 >> 1;
-  v33 = v7 & 1;
-  v2->PlaceType = 0;
-  if ( v32 & 1 )
+    data->pEventHandlers = 0i64;
+  v31 = (unsigned __int8)v7 >> 1;
+  v32 = v7 & 1;
+  data->PlaceType = Place_Add;
+  if ( (v31 & 1) != 0 )
   {
-    if ( v33 )
-      v2->PlaceType = 2;
+    if ( v32 )
+      data->PlaceType = Place_Replace;
   }
   else
   {
-    v34 = 0;
-    if ( v33 )
-      v34 = 1;
-    v2->PlaceType = v34;
+    data->PlaceType = v32 != 0;
   }
 }
 
 // File Line: 1274
 // RVA: 0x8B3560
-void __fastcall Scaleform::GFx::PlaceObject2Tag::AddToTimelineSnapshot(Scaleform::GFx::PlaceObject2Tag *this, Scaleform::GFx::TimelineSnapshot *psnapshot, unsigned int frame)
+void __fastcall Scaleform::GFx::PlaceObject2Tag::AddToTimelineSnapshot(
+        Scaleform::GFx::PlaceObject2Tag *this,
+        Scaleform::GFx::TimelineSnapshot *psnapshot,
+        unsigned int frame)
 {
-  Scaleform::GFx::TimelineSnapshot *v3; // rbp
-  unsigned int v4; // er14
-  Scaleform::GFx::PlaceObject2Tag *v5; // rbx
   char v6; // si
-  signed __int64 v7; // rax
-  signed __int64 v8; // rdi
+  __int64 v7; // rax
+  __int64 v8; // rdi
   unsigned __int16 v9; // dx
-  unsigned __int8 v10; // al
+  char v10; // al
   char v11; // cl
-  int v12; // er9
-  signed __int64 v13; // rdx
-  Scaleform::GFx::TimelineSnapshot::SnapshotElement **v14; // r10
-  signed __int64 v15; // r8
+  int v12; // r9d
+  __int64 Size; // rdx
+  Scaleform::GFx::TimelineSnapshot::SnapshotElement **Data; // r10
+  __int64 v15; // r8
   Scaleform::GFx::TimelineSnapshot::SnapshotElement *v16; // rdi
   __int16 v17; // ax
   __int16 v18; // ax
   Scaleform::GFx::TimelineSnapshot::SnapshotElement *v19; // rax
-  __int16 v20; // [rsp+40h] [rbp+8h]
+  __int16 v20; // [rsp+40h] [rbp+8h] BYREF
 
-  v3 = psnapshot;
-  v4 = frame;
-  v5 = this;
-  this->vfptr->Trace((Scaleform::GFx::ExecuteTag *)this, "\n");
+  this->vfptr->Trace(this, "\n");
   v6 = 1;
   v7 = 1i64;
-  if ( v5->pData[0] < 0 )
+  if ( this->pData[0] < 0 )
     v7 = 9i64;
   v8 = 0i64;
-  v9 = *(_WORD *)&v5->pData[v7];
-  v10 = v5->pData[0];
+  v9 = *(_WORD *)&this->pData[v7];
+  v10 = this->pData[0];
   v11 = v10 & 1;
-  if ( !((v10 >> 1) & 1) )
+  if ( (v10 & 2) == 0 )
   {
     if ( v11 )
       goto LABEL_8;
@@ -2300,145 +2143,148 @@ LABEL_7:
   v6 = 2;
 LABEL_8:
   v12 = v9;
-  v13 = v3->SnapshotSortedArray.Data.Size;
-  if ( v13 <= 0 )
-    goto LABEL_63;
-  v14 = v3->SnapshotSortedArray.Data.Data;
+  Size = psnapshot->SnapshotSortedArray.Data.Size;
+  if ( Size <= 0 )
+    goto LABEL_60;
+  Data = psnapshot->SnapshotSortedArray.Data.Data;
   do
   {
-    v15 = (v13 >> 1) + v8;
-    if ( v12 >= v14[v15]->Depth )
+    v15 = (Size >> 1) + v8;
+    if ( v12 >= Data[v15]->Depth )
     {
       v8 = v15 + 1;
-      v13 += -1 - (v13 >> 1);
+      Size += -1 - (Size >> 1);
     }
     else
     {
-      v13 >>= 1;
+      Size >>= 1;
     }
   }
-  while ( v13 > 0 );
-  if ( v8 && (v16 = v14[v8 - 1], v16->Depth == v12) && v16 && !(v16->Flags & 2) )
+  while ( Size > 0 );
+  if ( v8 && (v16 = Data[v8 - 1], v16->Depth == v12) && v16 && (v16->Flags & 2) == 0 )
   {
     if ( v6 == 1 )
     {
-      ((void (__fastcall *)(Scaleform::GFx::PlaceObject2Tag *, __int16 *))v5->vfptr[1].ExecuteWithPriority)(v5, &v20);
+      ((void (__fastcall *)(Scaleform::GFx::PlaceObject2Tag *, __int16 *))this->vfptr[1].ExecuteWithPriority)(
+        this,
+        &v20);
       v18 = v20;
-      if ( ((unsigned __int8)v20 >> 2) & 1 )
-        v16->Tags.pMatrixTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( ((unsigned __int8)v18 >> 3) & 1 )
-        v16->Tags.pCxFormTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( ((unsigned __int8)v18 >> 5) & 1 )
-        v16->Tags.pFiltersTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
+      if ( (v20 & 4) != 0 )
+        v16->Tags.pMatrixTag = this;
+      if ( (v18 & 8) != 0 )
+        v16->Tags.pCxFormTag = this;
+      if ( (v18 & 0x20) != 0 )
+        v16->Tags.pFiltersTag = this;
       if ( (v18 & 0x80u) != 0 )
-        v16->Tags.pBlendModeTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( v18 & 1 )
-        v16->Tags.pDepthTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( ((unsigned __int8)v18 >> 6) & 1 )
-        v16->Tags.pClipDepthTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( ((unsigned __int8)v18 >> 4) & 1 )
-        v16->Tags.pRatioTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( ((unsigned __int8)v18 >> 1) & 1 )
-        v16->Tags.pCharIdTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( v18 & 0x100 )
-        v16->Tags.pClassNameTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
+        v16->Tags.pBlendModeTag = this;
+      if ( (v18 & 1) != 0 )
+        v16->Tags.pDepthTag = this;
+      if ( (v18 & 0x40) != 0 )
+        v16->Tags.pClipDepthTag = this;
+      if ( (v18 & 0x10) != 0 )
+        v16->Tags.pRatioTag = this;
+      if ( (v18 & 2) != 0 )
+        v16->Tags.pCharIdTag = this;
+      if ( (v18 & 0x100) != 0 )
+        v16->Tags.pClassNameTag = this;
     }
     else if ( v6 == 2 )
     {
       if ( v16->PlaceType )
         v16->PlaceType = 2;
-      ((void (__fastcall *)(Scaleform::GFx::PlaceObject2Tag *, __int16 *))v5->vfptr[1].ExecuteWithPriority)(v5, &v20);
+      ((void (__fastcall *)(Scaleform::GFx::PlaceObject2Tag *, __int16 *))this->vfptr[1].ExecuteWithPriority)(
+        this,
+        &v20);
       v17 = v20;
-      if ( ((unsigned __int8)v20 >> 2) & 1 )
-        v16->Tags.pMatrixTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( ((unsigned __int8)v17 >> 3) & 1 )
-        v16->Tags.pCxFormTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( ((unsigned __int8)v17 >> 5) & 1 )
-        v16->Tags.pFiltersTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
+      if ( (v20 & 4) != 0 )
+        v16->Tags.pMatrixTag = this;
+      if ( (v17 & 8) != 0 )
+        v16->Tags.pCxFormTag = this;
+      if ( (v17 & 0x20) != 0 )
+        v16->Tags.pFiltersTag = this;
       if ( (v17 & 0x80u) != 0 )
-        v16->Tags.pBlendModeTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( v17 & 1 )
-        v16->Tags.pDepthTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( ((unsigned __int8)v17 >> 6) & 1 )
-        v16->Tags.pClipDepthTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( ((unsigned __int8)v17 >> 4) & 1 )
-        v16->Tags.pRatioTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( ((unsigned __int8)v17 >> 1) & 1 )
-        v16->Tags.pCharIdTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( v17 & 0x100 )
-        v16->Tags.pClassNameTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      v16->CreateFrame = v4;
+        v16->Tags.pBlendModeTag = this;
+      if ( (v17 & 1) != 0 )
+        v16->Tags.pDepthTag = this;
+      if ( (v17 & 0x40) != 0 )
+        v16->Tags.pClipDepthTag = this;
+      if ( (v17 & 0x10) != 0 )
+        v16->Tags.pRatioTag = this;
+      if ( (v17 & 2) != 0 )
+        v16->Tags.pCharIdTag = this;
+      if ( (v17 & 0x100) != 0 )
+        v16->Tags.pClassNameTag = this;
+      v16->CreateFrame = frame;
     }
     else
     {
-      v16->Tags.pClassNameTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      v16->Tags.pCharIdTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      v16->Tags.pRatioTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      v16->Tags.pClipDepthTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      v16->Tags.pDepthTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      v16->Tags.pBlendModeTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      v16->Tags.pFiltersTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      v16->Tags.pCxFormTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      v16->Tags.pMatrixTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      v16->Tags.pMainTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      v16->CreateFrame = v4;
+      v16->Tags.pClassNameTag = this;
+      v16->Tags.pCharIdTag = this;
+      v16->Tags.pRatioTag = this;
+      v16->Tags.pClipDepthTag = this;
+      v16->Tags.pDepthTag = this;
+      v16->Tags.pBlendModeTag = this;
+      v16->Tags.pFiltersTag = this;
+      v16->Tags.pCxFormTag = this;
+      v16->Tags.pMatrixTag = this;
+      v16->Tags.pMainTag = this;
+      v16->CreateFrame = frame;
     }
   }
   else
   {
-LABEL_63:
-    v19 = Scaleform::GFx::TimelineSnapshot::Add(v3, v12);
+LABEL_60:
+    v19 = Scaleform::GFx::TimelineSnapshot::Add(psnapshot, v12);
     v19->PlaceType = v6;
-    v19->Tags.pClassNameTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v19->Tags.pCharIdTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v19->Tags.pRatioTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v19->Tags.pClipDepthTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v19->Tags.pDepthTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v19->Tags.pBlendModeTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v19->Tags.pFiltersTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v19->Tags.pCxFormTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v19->Tags.pMatrixTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v19->Tags.pMainTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v19->CreateFrame = v4;
+    v19->Tags.pClassNameTag = this;
+    v19->Tags.pCharIdTag = this;
+    v19->Tags.pRatioTag = this;
+    v19->Tags.pClipDepthTag = this;
+    v19->Tags.pDepthTag = this;
+    v19->Tags.pBlendModeTag = this;
+    v19->Tags.pFiltersTag = this;
+    v19->Tags.pCxFormTag = this;
+    v19->Tags.pMatrixTag = this;
+    v19->Tags.pMainTag = this;
+    v19->CreateFrame = frame;
   }
-}
+}g = this;
+    v19->Tags.pCxFormTag = this;
+    v1
 
 // File Line: 1348
 // RVA: 0x8B3810
-void __fastcall Scaleform::GFx::PlaceObject3Tag::AddToTimelineSnapshot(Scaleform::GFx::PlaceObject3Tag *this, Scaleform::GFx::TimelineSnapshot *psnapshot, unsigned int frame)
+void __fastcall Scaleform::GFx::PlaceObject3Tag::AddToTimelineSnapshot(
+        Scaleform::GFx::PlaceObject3Tag *this,
+        Scaleform::GFx::TimelineSnapshot *psnapshot,
+        unsigned int frame)
 {
-  Scaleform::GFx::TimelineSnapshot *v3; // rbp
-  unsigned int v4; // er14
-  Scaleform::GFx::PlaceObject3Tag *v5; // rbx
   char v6; // si
-  signed __int64 v7; // rax
-  signed __int64 v8; // rdi
+  __int64 v7; // rax
+  __int64 v8; // rdi
   unsigned __int16 v9; // dx
-  unsigned __int8 v10; // al
+  char v10; // al
   char v11; // cl
-  int v12; // er9
-  signed __int64 v13; // rdx
-  Scaleform::GFx::TimelineSnapshot::SnapshotElement **v14; // r10
-  signed __int64 v15; // r8
+  int v12; // r9d
+  __int64 Size; // rdx
+  Scaleform::GFx::TimelineSnapshot::SnapshotElement **Data; // r10
+  __int64 v15; // r8
   Scaleform::GFx::TimelineSnapshot::SnapshotElement *v16; // rdi
   __int16 v17; // ax
   __int16 v18; // ax
   Scaleform::GFx::TimelineSnapshot::SnapshotElement *v19; // rax
-  __int16 v20; // [rsp+40h] [rbp+8h]
+  __int16 v20; // [rsp+40h] [rbp+8h] BYREF
 
-  v3 = psnapshot;
-  v4 = frame;
-  v5 = this;
-  this->vfptr->Trace((Scaleform::GFx::ExecuteTag *)this, "\n");
+  this->vfptr->Trace(this, "\n");
   v6 = 1;
   v7 = 1i64;
-  if ( v5->pData[0] < 0 )
+  if ( this->pData[0] < 0 )
     v7 = 9i64;
   v8 = 0i64;
-  v9 = *(_WORD *)&v5->pData[v7 + 1];
-  v10 = v5->pData[0];
+  v9 = *(_WORD *)&this->pData[v7 + 1];
+  v10 = this->pData[0];
   v11 = v10 & 1;
-  if ( !((v10 >> 1) & 1) )
+  if ( (v10 & 2) == 0 )
   {
     if ( v11 )
       goto LABEL_8;
@@ -2451,217 +2297,218 @@ LABEL_7:
   v6 = 2;
 LABEL_8:
   v12 = v9;
-  v13 = v3->SnapshotSortedArray.Data.Size;
-  if ( v13 <= 0 )
-    goto LABEL_63;
-  v14 = v3->SnapshotSortedArray.Data.Data;
+  Size = psnapshot->SnapshotSortedArray.Data.Size;
+  if ( Size <= 0 )
+    goto LABEL_60;
+  Data = psnapshot->SnapshotSortedArray.Data.Data;
   do
   {
-    v15 = (v13 >> 1) + v8;
-    if ( v12 >= v14[v15]->Depth )
+    v15 = (Size >> 1) + v8;
+    if ( v12 >= Data[v15]->Depth )
     {
       v8 = v15 + 1;
-      v13 += -1 - (v13 >> 1);
+      Size += -1 - (Size >> 1);
     }
     else
     {
-      v13 >>= 1;
+      Size >>= 1;
     }
   }
-  while ( v13 > 0 );
-  if ( v8 && (v16 = v14[v8 - 1], v16->Depth == v12) && v16 && !(v16->Flags & 2) )
+  while ( Size > 0 );
+  if ( v8 && (v16 = Data[v8 - 1], v16->Depth == v12) && v16 && (v16->Flags & 2) == 0 )
   {
     if ( v6 == 1 )
     {
-      ((void (__fastcall *)(Scaleform::GFx::PlaceObject3Tag *, __int16 *))v5->vfptr[1].ExecuteWithPriority)(v5, &v20);
+      ((void (__fastcall *)(Scaleform::GFx::PlaceObject3Tag *, __int16 *))this->vfptr[1].ExecuteWithPriority)(
+        this,
+        &v20);
       v18 = v20;
-      if ( ((unsigned __int8)v20 >> 2) & 1 )
-        v16->Tags.pMatrixTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( ((unsigned __int8)v18 >> 3) & 1 )
-        v16->Tags.pCxFormTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( ((unsigned __int8)v18 >> 5) & 1 )
-        v16->Tags.pFiltersTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
+      if ( (v20 & 4) != 0 )
+        v16->Tags.pMatrixTag = this;
+      if ( (v18 & 8) != 0 )
+        v16->Tags.pCxFormTag = this;
+      if ( (v18 & 0x20) != 0 )
+        v16->Tags.pFiltersTag = this;
       if ( (v18 & 0x80u) != 0 )
-        v16->Tags.pBlendModeTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( v18 & 1 )
-        v16->Tags.pDepthTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( ((unsigned __int8)v18 >> 6) & 1 )
-        v16->Tags.pClipDepthTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( ((unsigned __int8)v18 >> 4) & 1 )
-        v16->Tags.pRatioTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( ((unsigned __int8)v18 >> 1) & 1 )
-        v16->Tags.pCharIdTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( v18 & 0x100 )
-        v16->Tags.pClassNameTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
+        v16->Tags.pBlendModeTag = this;
+      if ( (v18 & 1) != 0 )
+        v16->Tags.pDepthTag = this;
+      if ( (v18 & 0x40) != 0 )
+        v16->Tags.pClipDepthTag = this;
+      if ( (v18 & 0x10) != 0 )
+        v16->Tags.pRatioTag = this;
+      if ( (v18 & 2) != 0 )
+        v16->Tags.pCharIdTag = this;
+      if ( (v18 & 0x100) != 0 )
+        v16->Tags.pClassNameTag = this;
     }
     else if ( v6 == 2 )
     {
       if ( v16->PlaceType )
         v16->PlaceType = 2;
-      ((void (__fastcall *)(Scaleform::GFx::PlaceObject3Tag *, __int16 *))v5->vfptr[1].ExecuteWithPriority)(v5, &v20);
+      ((void (__fastcall *)(Scaleform::GFx::PlaceObject3Tag *, __int16 *))this->vfptr[1].ExecuteWithPriority)(
+        this,
+        &v20);
       v17 = v20;
-      if ( ((unsigned __int8)v20 >> 2) & 1 )
-        v16->Tags.pMatrixTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( ((unsigned __int8)v17 >> 3) & 1 )
-        v16->Tags.pCxFormTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( ((unsigned __int8)v17 >> 5) & 1 )
-        v16->Tags.pFiltersTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
+      if ( (v20 & 4) != 0 )
+        v16->Tags.pMatrixTag = this;
+      if ( (v17 & 8) != 0 )
+        v16->Tags.pCxFormTag = this;
+      if ( (v17 & 0x20) != 0 )
+        v16->Tags.pFiltersTag = this;
       if ( (v17 & 0x80u) != 0 )
-        v16->Tags.pBlendModeTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( v17 & 1 )
-        v16->Tags.pDepthTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( ((unsigned __int8)v17 >> 6) & 1 )
-        v16->Tags.pClipDepthTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( ((unsigned __int8)v17 >> 4) & 1 )
-        v16->Tags.pRatioTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( ((unsigned __int8)v17 >> 1) & 1 )
-        v16->Tags.pCharIdTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      if ( v17 & 0x100 )
-        v16->Tags.pClassNameTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      v16->CreateFrame = v4;
+        v16->Tags.pBlendModeTag = this;
+      if ( (v17 & 1) != 0 )
+        v16->Tags.pDepthTag = this;
+      if ( (v17 & 0x40) != 0 )
+        v16->Tags.pClipDepthTag = this;
+      if ( (v17 & 0x10) != 0 )
+        v16->Tags.pRatioTag = this;
+      if ( (v17 & 2) != 0 )
+        v16->Tags.pCharIdTag = this;
+      if ( (v17 & 0x100) != 0 )
+        v16->Tags.pClassNameTag = this;
+      v16->CreateFrame = frame;
     }
     else
     {
-      v16->Tags.pClassNameTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      v16->Tags.pCharIdTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      v16->Tags.pRatioTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      v16->Tags.pClipDepthTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      v16->Tags.pDepthTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      v16->Tags.pBlendModeTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      v16->Tags.pFiltersTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      v16->Tags.pCxFormTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      v16->Tags.pMatrixTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      v16->Tags.pMainTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-      v16->CreateFrame = v4;
+      v16->Tags.pClassNameTag = this;
+      v16->Tags.pCharIdTag = this;
+      v16->Tags.pRatioTag = this;
+      v16->Tags.pClipDepthTag = this;
+      v16->Tags.pDepthTag = this;
+      v16->Tags.pBlendModeTag = this;
+      v16->Tags.pFiltersTag = this;
+      v16->Tags.pCxFormTag = this;
+      v16->Tags.pMatrixTag = this;
+      v16->Tags.pMainTag = this;
+      v16->CreateFrame = frame;
     }
   }
   else
   {
-LABEL_63:
-    v19 = Scaleform::GFx::TimelineSnapshot::Add(v3, v12);
+LABEL_60:
+    v19 = Scaleform::GFx::TimelineSnapshot::Add(psnapshot, v12);
     v19->PlaceType = v6;
-    v19->Tags.pClassNameTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v19->Tags.pCharIdTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v19->Tags.pRatioTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v19->Tags.pClipDepthTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v19->Tags.pDepthTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v19->Tags.pBlendModeTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v19->Tags.pFiltersTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v19->Tags.pCxFormTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v19->Tags.pMatrixTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v19->Tags.pMainTag = (Scaleform::GFx::GFxPlaceObjectBase *)&v5->vfptr;
-    v19->CreateFrame = v4;
+    v19->Tags.pClassNameTag = this;
+    v19->Tags.pCharIdTag = this;
+    v19->Tags.pRatioTag = this;
+    v19->Tags.pClipDepthTag = this;
+    v19->Tags.pDepthTag = this;
+    v19->Tags.pBlendModeTag = this;
+    v19->Tags.pFiltersTag = this;
+    v19->Tags.pCxFormTag = this;
+    v19->Tags.pMatrixTag = this;
+    v19->Tags.pMainTag = this;
+    v19->CreateFrame = frame;
   }
-}
+}g = this;
+    v19->Tags.pCxFormTag = this;
+  
 
 // File Line: 1426
 // RVA: 0x8F86A0
-void __fastcall Scaleform::GFx::RemoveObjectTag::Read(Scaleform::GFx::RemoveObjectTag *this, Scaleform::GFx::LoadProcess *p)
+void __fastcall Scaleform::GFx::RemoveObjectTag::Read(
+        Scaleform::GFx::RemoveObjectTag *this,
+        Scaleform::GFx::LoadProcess *p)
 {
-  Scaleform::GFx::Stream *v2; // rbx
-  Scaleform::GFx::LoadProcess *v3; // rdi
-  Scaleform::GFx::RemoveObjectTag *v4; // rsi
-  unsigned int v5; // eax
-  __int64 v6; // r9
+  Scaleform::GFx::SWFProcessInfo *pAltStream; // rbx
+  unsigned int DataSize; // eax
+  __int64 Pos; // r9
   unsigned __int16 v7; // r8
-  Scaleform::GFx::Stream *v8; // rbx
+  Scaleform::GFx::SWFProcessInfo *p_ProcessInfo; // rbx
   unsigned int v9; // eax
   __int64 v10; // r9
   unsigned __int16 v11; // r8
 
-  v2 = p->pAltStream;
-  v3 = p;
-  v4 = this;
-  if ( !v2 )
-    v2 = &p->ProcessInfo.Stream;
-  v5 = v2->DataSize;
-  v2->UnusedBits = 0;
-  if ( (signed int)(v5 - v2->Pos) < 2 )
-    Scaleform::GFx::Stream::PopulateBuffer(v2, 2);
-  v6 = v2->Pos;
-  v7 = (unsigned __int8)v2->pBuffer[v6] | (unsigned __int16)((unsigned __int8)v2->pBuffer[(unsigned int)(v6 + 1)] << 8);
-  v2->Pos = v6 + 2;
-  v4->Id = v7;
-  v8 = v3->pAltStream;
-  if ( !v8 )
-    v8 = &v3->ProcessInfo.Stream;
-  v9 = v8->DataSize;
-  v8->UnusedBits = 0;
-  if ( (signed int)(v9 - v8->Pos) < 2 )
-    Scaleform::GFx::Stream::PopulateBuffer(v8, 2);
-  v10 = v8->Pos;
-  v11 = (unsigned __int8)v8->pBuffer[v10] | (unsigned __int16)((unsigned __int8)v8->pBuffer[(unsigned int)(v10 + 1)] << 8);
-  v8->Pos = v10 + 2;
-  v4->Depth = v11;
+  pAltStream = (Scaleform::GFx::SWFProcessInfo *)p->pAltStream;
+  if ( !pAltStream )
+    pAltStream = &p->ProcessInfo;
+  DataSize = pAltStream->Stream.DataSize;
+  pAltStream->Stream.UnusedBits = 0;
+  if ( (int)(DataSize - pAltStream->Stream.Pos) < 2 )
+    Scaleform::GFx::Stream::PopulateBuffer(&pAltStream->Stream, 2);
+  Pos = pAltStream->Stream.Pos;
+  v7 = (unsigned __int8)pAltStream->Stream.pBuffer[Pos] | ((unsigned __int8)pAltStream->Stream.pBuffer[(unsigned int)(Pos + 1)] << 8);
+  pAltStream->Stream.Pos = Pos + 2;
+  this->Id = v7;
+  p_ProcessInfo = (Scaleform::GFx::SWFProcessInfo *)p->pAltStream;
+  if ( !p_ProcessInfo )
+    p_ProcessInfo = &p->ProcessInfo;
+  v9 = p_ProcessInfo->Stream.DataSize;
+  p_ProcessInfo->Stream.UnusedBits = 0;
+  if ( (int)(v9 - p_ProcessInfo->Stream.Pos) < 2 )
+    Scaleform::GFx::Stream::PopulateBuffer(&p_ProcessInfo->Stream, 2);
+  v10 = p_ProcessInfo->Stream.Pos;
+  v11 = (unsigned __int8)p_ProcessInfo->Stream.pBuffer[v10] | ((unsigned __int8)p_ProcessInfo->Stream.pBuffer[(unsigned int)(v10 + 1)] << 8);
+  p_ProcessInfo->Stream.Pos = v10 + 2;
+  this->Depth = v11;
 }
 
 // File Line: 1432
 // RVA: 0x8CA380
-void __fastcall Scaleform::GFx::RemoveObjectTag::Execute(Scaleform::GFx::RemoveObjectTag *this, Scaleform::GFx::DisplayObjContainer *m)
+void __fastcall Scaleform::GFx::RemoveObjectTag::Execute(
+        Scaleform::GFx::RemoveObjectTag *this,
+        Scaleform::GFx::DisplayObjContainer *m)
 {
-  int v2; // er8
-  Scaleform::GFx::ResourceId id; // [rsp+30h] [rbp+8h]
+  int Depth; // r8d
+  Scaleform::GFx::ResourceId id; // [rsp+30h] [rbp+8h] BYREF
 
-  v2 = this->Depth;
+  Depth = this->Depth;
   id.Id = this->Id;
-  Scaleform::GFx::DisplayList::RemoveDisplayObject(
-    &m->mDisplayList,
-    (Scaleform::GFx::DisplayObjectBase *)&m->vfptr,
-    v2,
-    (Scaleform::GFx::ResourceId)&id);
+  Scaleform::GFx::DisplayList::RemoveDisplayObject(&m->mDisplayList, m, Depth, (Scaleform::GFx::ResourceId)&id);
 }
 
 // File Line: 1453
 // RVA: 0x8F8630
-void __fastcall Scaleform::GFx::RemoveObject2Tag::Read(Scaleform::GFx::RemoveObject2Tag *this, Scaleform::GFx::LoadProcess *p)
+void __fastcall Scaleform::GFx::RemoveObject2Tag::Read(
+        Scaleform::GFx::RemoveObject2Tag *this,
+        Scaleform::GFx::LoadProcess *p)
 {
-  Scaleform::GFx::Stream *v2; // rbx
-  Scaleform::GFx::RemoveObject2Tag *v3; // rdi
-  unsigned int v4; // eax
-  __int64 v5; // r9
+  Scaleform::GFx::SWFProcessInfo *pAltStream; // rbx
+  unsigned int DataSize; // eax
+  __int64 Pos; // r9
   unsigned __int16 v6; // r8
 
-  v2 = p->pAltStream;
-  v3 = this;
-  if ( !v2 )
-    v2 = &p->ProcessInfo.Stream;
-  v4 = v2->DataSize;
-  v2->UnusedBits = 0;
-  if ( (signed int)(v4 - v2->Pos) < 2 )
-    Scaleform::GFx::Stream::PopulateBuffer(v2, 2);
-  v5 = v2->Pos;
-  v6 = (unsigned __int8)v2->pBuffer[v5] | (unsigned __int16)((unsigned __int8)v2->pBuffer[(unsigned int)(v5 + 1)] << 8);
-  v2->Pos = v5 + 2;
-  v3->Depth = v6;
+  pAltStream = (Scaleform::GFx::SWFProcessInfo *)p->pAltStream;
+  if ( !pAltStream )
+    pAltStream = &p->ProcessInfo;
+  DataSize = pAltStream->Stream.DataSize;
+  pAltStream->Stream.UnusedBits = 0;
+  if ( (int)(DataSize - pAltStream->Stream.Pos) < 2 )
+    Scaleform::GFx::Stream::PopulateBuffer(&pAltStream->Stream, 2);
+  Pos = pAltStream->Stream.Pos;
+  v6 = (unsigned __int8)pAltStream->Stream.pBuffer[Pos] | ((unsigned __int8)pAltStream->Stream.pBuffer[(unsigned int)(Pos + 1)] << 8);
+  pAltStream->Stream.Pos = Pos + 2;
+  this->Depth = v6;
 }
 
 // File Line: 1458
 // RVA: 0x8CA350
-void __fastcall Scaleform::GFx::RemoveObject2Tag::Execute(Scaleform::GFx::RemoveObject2Tag *this, Scaleform::GFx::DisplayObjContainer *m)
+void __fastcall Scaleform::GFx::RemoveObject2Tag::Execute(
+        Scaleform::GFx::RemoveObject2Tag *this,
+        Scaleform::GFx::DisplayObjContainer *m)
 {
-  int v2; // er8
-  Scaleform::GFx::ResourceId id; // [rsp+30h] [rbp+8h]
+  int Depth; // r8d
+  Scaleform::GFx::ResourceId id; // [rsp+30h] [rbp+8h] BYREF
 
-  v2 = this->Depth;
+  Depth = this->Depth;
   id.Id = 0x40000;
-  Scaleform::GFx::DisplayList::RemoveDisplayObject(
-    &m->mDisplayList,
-    (Scaleform::GFx::DisplayObjectBase *)&m->vfptr,
-    v2,
-    (Scaleform::GFx::ResourceId)&id);
+  Scaleform::GFx::DisplayList::RemoveDisplayObject(&m->mDisplayList, m, Depth, (Scaleform::GFx::ResourceId)&id);
 }
 
 // File Line: 1463
 // RVA: 0x8B3BF0
-void __fastcall Scaleform::GFx::RemoveObject2Tag::AddToTimelineSnapshot(Scaleform::GFx::RemoveObject2Tag *this, Scaleform::GFx::TimelineSnapshot *psnapshot, __int64 __formal)
+void __fastcall Scaleform::GFx::RemoveObject2Tag::AddToTimelineSnapshot(
+        Scaleform::GFx::RemoveObject2Tag *this,
+        Scaleform::GFx::TimelineSnapshot *psnapshot,
+        __int64 __formal)
 {
-  Scaleform::GFx::TimelineSnapshot *v3; // rsi
-  Scaleform::GFx::RemoveObject2Tag *v4; // r14
-  signed __int64 v5; // r8
-  int v6; // er11
-  signed __int64 v7; // r9
-  Scaleform::GFx::TimelineSnapshot::SnapshotElement **v8; // r10
-  signed __int64 v9; // rdx
+  __int64 Size; // r8
+  int Depth; // r11d
+  __int64 v7; // r9
+  Scaleform::GFx::TimelineSnapshot::SnapshotElement **Data; // r10
+  __int64 v9; // rdx
   __int64 v10; // rax
   unsigned __int64 v11; // rdi
   Scaleform::ListAllocBase<Scaleform::GFx::TimelineSnapshot::SnapshotElement,50,Scaleform::AllocatorDH<Scaleform::GFx::TimelineSnapshot::SnapshotElement,2> >::NodeType *v12; // rbx
@@ -2671,37 +2518,35 @@ void __fastcall Scaleform::GFx::RemoveObject2Tag::AddToTimelineSnapshot(Scalefor
   bool v16; // zf
   Scaleform::GFx::TimelineSnapshot::SnapshotElement *v17; // rax
   int v18; // ecx
-  unsigned __int64 v19; // [rsp+40h] [rbp+8h]
+  unsigned __int64 v19; // [rsp+40h] [rbp+8h] BYREF
 
-  v3 = psnapshot;
-  v4 = this;
   ((void (__fastcall *)(Scaleform::GFx::RemoveObject2Tag *, const char *, __int64))this->vfptr->Trace)(
     this,
     "\n",
     __formal);
-  v5 = v3->SnapshotSortedArray.Data.Size;
-  v6 = v4->Depth;
+  Size = psnapshot->SnapshotSortedArray.Data.Size;
+  Depth = this->Depth;
   v7 = 0i64;
-  if ( v5 <= 0 )
-    goto LABEL_23;
-  v8 = v3->SnapshotSortedArray.Data.Data;
+  if ( Size <= 0 )
+    goto LABEL_9;
+  Data = psnapshot->SnapshotSortedArray.Data.Data;
   do
   {
-    v9 = (v5 >> 1) + v7;
-    if ( v6 >= v8[v9]->Depth )
+    v9 = (Size >> 1) + v7;
+    if ( Depth >= Data[v9]->Depth )
     {
       v7 = v9 + 1;
-      v5 += -1 - (v5 >> 1);
+      Size += -1 - (Size >> 1);
     }
     else
     {
-      v5 >>= 1;
+      Size >>= 1;
     }
   }
-  while ( v5 > 0 );
-  if ( !v7 || (v10 = (__int64)v8[v7 - 1], v11 = v7 - 1, *(_DWORD *)(v10 + 20) != v6) )
+  while ( Size > 0 );
+  if ( !v7 || (v10 = (__int64)Data[v7 - 1], v11 = v7 - 1, *(_DWORD *)(v10 + 20) != Depth) )
   {
-LABEL_23:
+LABEL_9:
     v11 = v19;
     v10 = 0i64;
   }
@@ -2710,20 +2555,20 @@ LABEL_23:
     goto LABEL_19;
   if ( *(_BYTE *)(v10 + 104) )
   {
-    v12 = (Scaleform::ListAllocBase<Scaleform::GFx::TimelineSnapshot::SnapshotElement,50,Scaleform::AllocatorDH<Scaleform::GFx::TimelineSnapshot::SnapshotElement,2> >::NodeType *)v3->SnapshotSortedArray.Data.Data[v11];
+    v12 = (Scaleform::ListAllocBase<Scaleform::GFx::TimelineSnapshot::SnapshotElement,50,Scaleform::AllocatorDH<Scaleform::GFx::TimelineSnapshot::SnapshotElement,2> >::NodeType *)psnapshot->SnapshotSortedArray.Data.Data[v11];
     v12->pNext[1].pNext = v12[1].pNext;
     v12[1].pNext->pNext = v12->pNext;
     Scaleform::ArrayBase<Scaleform::ArrayDataDH<double,Scaleform::AllocatorDH<double,2>,Scaleform::ArrayDefaultPolicy>>::RemoveAt(
-      (Scaleform::ArrayBase<Scaleform::ArrayDataDH<Scaleform::GFx::TimelineSnapshot::SnapshotElement *,Scaleform::AllocatorDH_POD<Scaleform::GFx::TimelineSnapshot::SnapshotElement *,2>,Scaleform::ArrayDefaultPolicy> > *)&v3->SnapshotSortedArray.Data,
+      &psnapshot->SnapshotSortedArray,
       v11);
-    v12->pNext = v3->SnapshotHeap.FirstEmptySlot;
-    v3->SnapshotHeap.FirstEmptySlot = v12;
+    v12->pNext = psnapshot->SnapshotHeap.FirstEmptySlot;
+    psnapshot->SnapshotHeap.FirstEmptySlot = v12;
     v19 = 0i64;
 LABEL_19:
-    if ( v3->Direction == Direction_Forward )
+    if ( psnapshot->Direction == Direction_Forward )
     {
-      v17 = Scaleform::GFx::TimelineSnapshot::Add(v3, v4->Depth);
-      v18 = v4->Depth;
+      v17 = Scaleform::GFx::TimelineSnapshot::Add(psnapshot, this->Depth);
+      v18 = this->Depth;
       v19 = (unsigned __int64)v17;
       v17->Depth = v18;
       *(_BYTE *)(v19 + 104) = 3;
@@ -2734,56 +2579,57 @@ LABEL_19:
   v13 = *(_QWORD *)(v10 + 24);
   if ( v13 )
   {
-    if ( v3->Direction == Direction_Forward )
+    if ( psnapshot->Direction == Direction_Forward )
     {
-      v14 = (*(__int64 (**)(void))(*(_QWORD *)v13 + 72i64))();
+      v14 = (*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v13 + 72i64))(v13);
       if ( v14 )
-        ((void (__fastcall *)(Scaleform::GFx::RemoveObject2Tag *, unsigned __int64 *, __int64))v4->vfptr[1].Execute)(
-          v4,
+        ((void (__fastcall *)(Scaleform::GFx::RemoveObject2Tag *, unsigned __int64 *, __int64))this->vfptr[1].Execute)(
+          this,
           &v19,
           v14);
     }
   }
   if ( !v19 )
     goto LABEL_19;
-  v15 = (Scaleform::ListAllocBase<Scaleform::GFx::TimelineSnapshot::SnapshotElement,50,Scaleform::AllocatorDH<Scaleform::GFx::TimelineSnapshot::SnapshotElement,2> >::NodeType *)v3->SnapshotSortedArray.Data.Data[v11];
+  v15 = (Scaleform::ListAllocBase<Scaleform::GFx::TimelineSnapshot::SnapshotElement,50,Scaleform::AllocatorDH<Scaleform::GFx::TimelineSnapshot::SnapshotElement,2> >::NodeType *)psnapshot->SnapshotSortedArray.Data.Data[v11];
   v15->pNext[1].pNext = v15[1].pNext;
   v15[1].pNext->pNext = v15->pNext;
   Scaleform::ArrayBase<Scaleform::ArrayDataDH<double,Scaleform::AllocatorDH<double,2>,Scaleform::ArrayDefaultPolicy>>::RemoveAt(
-    (Scaleform::ArrayBase<Scaleform::ArrayDataDH<Scaleform::GFx::TimelineSnapshot::SnapshotElement *,Scaleform::AllocatorDH_POD<Scaleform::GFx::TimelineSnapshot::SnapshotElement *,2>,Scaleform::ArrayDefaultPolicy> > *)&v3->SnapshotSortedArray.Data,
+    &psnapshot->SnapshotSortedArray,
     v11);
-  v15->pNext = v3->SnapshotHeap.FirstEmptySlot;
+  v15->pNext = psnapshot->SnapshotHeap.FirstEmptySlot;
   v16 = v19 == 0;
-  v3->SnapshotHeap.FirstEmptySlot = v15;
+  psnapshot->SnapshotHeap.FirstEmptySlot = v15;
   if ( v16 )
     goto LABEL_19;
-}ySlot;
-  v16 = v19 == 0
+}
 
 // File Line: 1528
 // RVA: 0x8CA3B0
-void __usercall Scaleform::GFx::SetBackgroundColorTag::Execute(Scaleform::GFx::SetBackgroundColorTag *this@<rcx>, Scaleform::GFx::DisplayObjContainer *m@<rdx>, float a3@<xmm0>)
+void __fastcall Scaleform::GFx::SetBackgroundColorTag::Execute(
+        Scaleform::GFx::SetBackgroundColorTag *this,
+        Scaleform::GFx::DisplayObjContainer *m)
 {
-  Scaleform::GFx::SetBackgroundColorTag *v3; // rdi
-  Scaleform::GFx::MovieImpl *v4; // rbx
+  Scaleform::GFx::MovieImpl *pMovieImpl; // rbx
+  float v4; // xmm0_4
   float v5; // xmm0_4
-  float v6; // xmm0_4
-  unsigned int v7; // [rsp+38h] [rbp+10h]
+  unsigned int Raw; // [rsp+38h] [rbp+10h] BYREF
 
-  v3 = this;
-  v4 = m->pASRoot->pMovieImpl;
-  if ( !((v4->Flags >> 17) & 1) )
+  pMovieImpl = m->pASRoot->pMovieImpl;
+  if ( (pMovieImpl->Flags & 0x20000) == 0 )
   {
-    ((void (__fastcall *)(Scaleform::GFx::MovieImpl *))v4->vfptr[34].__vecDelDtor)(m->pASRoot->pMovieImpl);
-    v5 = a3 * 255.0;
-    if ( v5 <= 0.0 )
-      v6 = v5 - 0.5;
+    v4 = ((float (__fastcall *)(Scaleform::GFx::MovieImpl *))pMovieImpl->Scaleform::GFx::Movie::Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr[34].__vecDelDtor)(m->pASRoot->pMovieImpl)
+       * 255.0;
+    if ( v4 <= 0.0 )
+      v5 = v4 - 0.5;
     else
-      v6 = v5 + 0.5;
-    v3->Color.Channels.Alpha = (signed int)v6;
-    v7 = v3->Color.Raw;
-    v4->vfptr[32].__vecDelDtor((Scaleform::RefCountImplCore *)&v4->vfptr, (unsigned int)&v7);
-    v4->Flags |= 0x20000u;
+      v5 = v4 + 0.5;
+    this->Color.Channels.Alpha = (int)v5;
+    Raw = this->Color.Raw;
+    pMovieImpl->Scaleform::GFx::Movie::Scaleform::RefCountBase<Scaleform::GFx::Movie,327>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,327>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr[32].__vecDelDtor(
+      pMovieImpl,
+      (unsigned int)&Raw);
+    pMovieImpl->Flags |= 0x20000u;
   }
 }
 

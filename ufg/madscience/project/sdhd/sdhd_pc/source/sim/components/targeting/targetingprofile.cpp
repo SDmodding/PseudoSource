@@ -1,12 +1,12 @@
 // File Line: 30
 // RVA: 0x5387B0
-void __fastcall UFG::TargetingProfile::InitFromPropertySet(UFG::TargetingProfile *this, UFG::qPropertySet *pTargetingProfilePropertySet)
+void __fastcall UFG::TargetingProfile::InitFromPropertySet(
+        UFG::TargetingProfile *this,
+        UFG::qPropertySet *pTargetingProfilePropertySet)
 {
-  UFG::qPropertySet *v2; // r14
-  UFG::TargetingProfile *v3; // rsi
   unsigned int v4; // eax
   const char **v5; // rdi
-  float *v6; // rbx
+  float *m_HalfHorizontalFOVs; // rbx
   float v7; // xmm6_4
   float *v8; // rbp
   float *v9; // rax
@@ -25,59 +25,56 @@ void __fastcall UFG::TargetingProfile::InitFromPropertySet(UFG::TargetingProfile
   float v22; // xmm0_4
   float v23; // xmm0_4
   float v24; // xmm0_4
-  UFG::qSymbol result; // [rsp+B8h] [rbp+10h]
-  UFG::qSymbol name; // [rsp+C0h] [rbp+18h]
-  UFG::qSymbol v27; // [rsp+C8h] [rbp+20h]
+  float *result; // [rsp+B8h] [rbp+10h] BYREF
+  UFG::qArray<unsigned long,0> name; // [rsp+C0h] [rbp+18h] BYREF
 
   if ( pTargetingProfilePropertySet )
   {
-    v2 = pTargetingProfilePropertySet;
-    v3 = this;
     this->mNode.mUID = pTargetingProfilePropertySet->mName.mUID;
     v4 = _S45;
-    if ( !(_S45 & 1) )
+    if ( (_S45 & 1) == 0 )
     {
       _S45 |= 1u;
       UFG::qSymbol::create_from_string(&symVertialFOV, "VertialFOV");
       atexit(UFG::TargetingProfile::InitFromPropertySet_::_5_::_dynamic_atexit_destructor_for__symVertialFOV__);
       v4 = _S45;
     }
-    if ( !(v4 & 2) )
+    if ( (v4 & 2) == 0 )
     {
       _S45 = v4 | 2;
       UFG::qSymbol::create_from_string(&symExtraPositivePitch, "ExtraPositivePitch");
       atexit(UFG::TargetingProfile::InitFromPropertySet_::_5_::_dynamic_atexit_destructor_for__symExtraPositivePitch__);
       v4 = _S45;
     }
-    if ( !(v4 & 4) )
+    if ( (v4 & 4) == 0 )
     {
       _S45 = v4 | 4;
       UFG::qSymbol::create_from_string(&symExtraNegativePitch, "ExtraNegativePitch");
       atexit(UFG::TargetingProfile::InitFromPropertySet_::_5_::_dynamic_atexit_destructor_for__symExtraNegativePitch__);
       v4 = _S45;
     }
-    if ( !(v4 & 8) )
+    if ( (v4 & 8) == 0 )
     {
       _S45 = v4 | 8;
       UFG::qSymbol::create_from_string(&symTargetReleaseDistancePastMaxDistance, "TargetReleaseDistancePastMaxDistance");
       atexit(UFG::TargetingProfile::InitFromPropertySet_::_5_::_dynamic_atexit_destructor_for__symTargetReleaseDistancePastMaxDistance__);
       v4 = _S45;
     }
-    if ( !(v4 & 0x10) )
+    if ( (v4 & 0x10) == 0 )
     {
       _S45 = v4 | 0x10;
       UFG::qSymbol::create_from_string(&symHalfHorizontalIntentionLimiter, "HalfHorizontalIntentionLimiter");
       atexit(UFG::TargetingProfile::InitFromPropertySet_::_5_::_dynamic_atexit_destructor_for__symHalfHorizontalIntentionLimiter__);
       v4 = _S45;
     }
-    if ( !(v4 & 0x20) )
+    if ( (v4 & 0x20) == 0 )
     {
       _S45 = v4 | 0x20;
       UFG::qSymbol::create_from_string(&symIdlePriorityConeHorizontalFOV, "IdlePriorityConeHorizontalFOV");
       atexit(UFG::TargetingProfile::InitFromPropertySet_::_5_::_dynamic_atexit_destructor_for__symIdlePriorityConeHorizontalFOV__);
       v4 = _S45;
     }
-    if ( !(v4 & 0x40) )
+    if ( (v4 & 0x40) == 0 )
     {
       _S45 = v4 | 0x40;
       UFG::qSymbol::create_from_string(&symIdlePriorityConeTime, "IdlePriorityConeTime");
@@ -91,74 +88,100 @@ void __fastcall UFG::TargetingProfile::InitFromPropertySet(UFG::TargetingProfile
       atexit(UFG::TargetingProfile::InitFromPropertySet_::_5_::_dynamic_atexit_destructor_for__symConsiderDownedTargets__);
     }
     v5 = UFG::ConeEnumNames;
-    v6 = v3->m_HalfHorizontalFOVs;
+    m_HalfHorizontalFOVs = this->m_HalfHorizontalFOVs;
     v7 = FLOAT_N1_0;
     do
     {
-      UFG::qSymbol::create_from_string(&result, *v5);
-      UFG::qSymbol::create_suffix(&name, &result, "_ConeDistance");
-      UFG::qSymbol::create_suffix(&v27, &result, "_HorizontalFOV");
-      v8 = UFG::qPropertySet::Get<float>(v2, &name, DEPTH_RECURSE);
-      v9 = UFG::qPropertySet::Get<float>(v2, &v27, DEPTH_RECURSE);
+      UFG::qSymbol::create_from_string((UFG::qSymbol *)&result, *v5);
+      UFG::qSymbol::create_suffix((UFG::qWiseSymbol *)&name, (UFG::qSymbol *)&result, "_ConeDistance");
+      UFG::qSymbol::create_suffix((UFG::qWiseSymbol *)&name.p, (UFG::qSymbol *)&result, "_HorizontalFOV");
+      v8 = UFG::qPropertySet::Get<float>(pTargetingProfilePropertySet, &name, DEPTH_RECURSE);
+      v9 = UFG::qPropertySet::Get<float>(
+             pTargetingProfilePropertySet,
+             (UFG::qArray<unsigned long,0> *)&name.p,
+             DEPTH_RECURSE);
       if ( v8 )
         v10 = *v8 * *v8;
       else
         v10 = FLOAT_N1_0;
-      *(v6 - 6) = v10;
+      *(m_HalfHorizontalFOVs - 6) = v10;
       if ( v9 )
         v11 = (float)((float)(*v9 * 0.5) * 3.1415927) * 0.0055555557;
       else
         v11 = FLOAT_N1_0;
-      *v6 = v11;
-      ++v6;
+      *m_HalfHorizontalFOVs++ = v11;
       ++v5;
     }
-    while ( (signed __int64)v5 < (signed __int64)UFG::FollowCameraTypeNames );
-    *(_QWORD *)&result.mUID = UFG::qPropertySet::Get<float>(v2, &symVertialFOV, DEPTH_RECURSE);
-    v12 = UFG::qPropertySet::Get<float>(v2, &symExtraPositivePitch, DEPTH_RECURSE);
-    v13 = UFG::qPropertySet::Get<float>(v2, &symExtraNegativePitch, DEPTH_RECURSE);
-    v14 = UFG::qPropertySet::Get<float>(v2, &symTargetReleaseDistancePastMaxDistance, DEPTH_RECURSE);
-    v15 = UFG::qPropertySet::Get<float>(v2, &symHalfHorizontalIntentionLimiter, DEPTH_RECURSE);
-    v16 = UFG::qPropertySet::Get<float>(v2, &symIdlePriorityConeHorizontalFOV, DEPTH_RECURSE);
-    v17 = UFG::qPropertySet::Get<float>(v2, &symIdlePriorityConeTime, DEPTH_RECURSE);
-    v18 = UFG::qPropertySet::Get<bool>(v2, &symConsiderDownedTargets, DEPTH_RECURSE);
-    if ( *(_QWORD *)&result.mUID )
-      v19 = (float)((float)(**(float **)&result.mUID * 0.5) * 3.1415927) * 0.0055555557;
+    while ( (__int64)v5 < (__int64)UFG::FollowCameraTypeNames );
+    result = UFG::qPropertySet::Get<float>(
+               pTargetingProfilePropertySet,
+               (UFG::qArray<unsigned long,0> *)&symVertialFOV,
+               DEPTH_RECURSE);
+    v12 = UFG::qPropertySet::Get<float>(
+            pTargetingProfilePropertySet,
+            (UFG::qArray<unsigned long,0> *)&symExtraPositivePitch,
+            DEPTH_RECURSE);
+    v13 = UFG::qPropertySet::Get<float>(
+            pTargetingProfilePropertySet,
+            (UFG::qArray<unsigned long,0> *)&symExtraNegativePitch,
+            DEPTH_RECURSE);
+    v14 = UFG::qPropertySet::Get<float>(
+            pTargetingProfilePropertySet,
+            (UFG::qArray<unsigned long,0> *)&symTargetReleaseDistancePastMaxDistance,
+            DEPTH_RECURSE);
+    v15 = UFG::qPropertySet::Get<float>(
+            pTargetingProfilePropertySet,
+            (UFG::qArray<unsigned long,0> *)&symHalfHorizontalIntentionLimiter,
+            DEPTH_RECURSE);
+    v16 = UFG::qPropertySet::Get<float>(
+            pTargetingProfilePropertySet,
+            (UFG::qArray<unsigned long,0> *)&symIdlePriorityConeHorizontalFOV,
+            DEPTH_RECURSE);
+    v17 = UFG::qPropertySet::Get<float>(
+            pTargetingProfilePropertySet,
+            (UFG::qArray<unsigned long,0> *)&symIdlePriorityConeTime,
+            DEPTH_RECURSE);
+    v18 = UFG::qPropertySet::Get<bool>(
+            pTargetingProfilePropertySet,
+            (UFG::qArray<unsigned long,0> *)&symConsiderDownedTargets,
+            DEPTH_RECURSE);
+    if ( result )
+      v19 = (float)((float)(*result * 0.5) * 3.1415927) * 0.0055555557;
     else
       v19 = FLOAT_N1_0;
-    v3->m_fHalfVerticalFOV = v19;
+    this->m_fHalfVerticalFOV = v19;
     if ( v12 )
       v20 = (float)(*v12 * 3.1415927) * 0.0055555557;
     else
       v20 = FLOAT_N1_0;
-    v3->m_fExtraPositivePitch = v20;
+    this->m_fExtraPositivePitch = v20;
     if ( v13 )
       v21 = (float)(*v13 * 3.1415927) * 0.0055555557;
     else
       v21 = FLOAT_N1_0;
-    v3->m_fExtraNegativePitch = v21;
+    this->m_fExtraNegativePitch = v21;
     if ( v14 )
       v22 = *v14;
     else
       v22 = FLOAT_N1_0;
-    v3->m_fTargetReleaseDistancePastMaxDistance = v22;
+    this->m_fTargetReleaseDistancePastMaxDistance = v22;
     if ( v15 )
       v23 = (float)(*v15 * 3.1415927) * 0.0055555557;
     else
       v23 = FLOAT_N1_0;
-    v3->m_fHalfHorizontalIntentionLimiter = v23;
+    this->m_fHalfHorizontalIntentionLimiter = v23;
     if ( v16 )
       v24 = (float)((float)(*v16 * 0.5) * 3.1415927) * 0.0055555557;
     else
       v24 = FLOAT_N1_0;
-    v3->m_fHalfIdlePriorityConeHorizontalFOV = v24;
+    this->m_fHalfIdlePriorityConeHorizontalFOV = v24;
     if ( v17 )
       v7 = *v17;
-    v3->m_fIdlePriorityConeTime = v7;
+    this->m_fIdlePriorityConeTime = v7;
     if ( v18 )
       LOBYTE(v18) = *v18;
-    v3->m_bConsiderDownedTargets = (char)v18;
-    UFG::TargetingProfile::UpdateCachedValues(v3);
+    this->m_bConsiderDownedTargets = (char)v18;
+    UFG::TargetingProfile::UpdateCachedValues(this);
   }
 }
 
@@ -210,7 +233,7 @@ void __fastcall UFG::TargetingProfile::UpdateCachedValues(UFG::TargetingProfile 
   if ( v1 <= this->m_HalfHorizontalFOVs[5] )
     v1 = this->m_HalfHorizontalFOVs[5];
   this->m_fMaximumHalfHorizontalFOVWithLimiter = v1 + this->m_fHalfHorizontalIntentionLimiter;
-  LODWORD(v3) = (unsigned __int128)_mm_sqrt_ps(v2);
+  v3 = _mm_sqrt_ps(v2).m128_f32[0];
   this->m_fTargetReleaseDistanceSquared = (float)(v3 + this->m_fTargetReleaseDistancePastMaxDistance)
                                         * (float)(v3 + this->m_fTargetReleaseDistancePastMaxDistance);
 }
@@ -220,12 +243,12 @@ void __fastcall UFG::TargetingProfile::UpdateCachedValues(UFG::TargetingProfile 
 __int64 dynamic_initializer_for__UFG::TargetingProfiles::ms_TargetingProfilePool__()
 {
   `eh vector constructor iterator(
-    UFG::TargetingProfiles::ms_TargetingProfilePool.p,
+    (char *)UFG::TargetingProfiles::ms_TargetingProfilePool.p,
     0x80ui64,
     16,
     (void (__fastcall *)(void *))hkQueue<hkJobQueue::JobQueueEntry>::hkQueue<hkJobQueue::JobQueueEntry>);
   UFG::TargetingProfiles::ms_TargetingProfilePool.size = 0;
-  return atexit(dynamic_atexit_destructor_for__UFG::TargetingProfiles::ms_TargetingProfilePool__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::TargetingProfiles::ms_TargetingProfilePool__);
 }
 
 // File Line: 141
@@ -233,77 +256,68 @@ __int64 dynamic_initializer_for__UFG::TargetingProfiles::ms_TargetingProfilePool
 __int64 dynamic_initializer_for__UFG::TargetingProfiles::ms_TargetingProfiles__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::TargetingProfiles::ms_TargetingProfiles.mTree);
-  return atexit(dynamic_atexit_destructor_for__UFG::TargetingProfiles::ms_TargetingProfiles__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::TargetingProfiles::ms_TargetingProfiles__);
 }
 
 // File Line: 144
 // RVA: 0x550560
 void UFG::TargetingProfiles::StaticInit(void)
 {
-  UFG::qPropertySet *v0; // rbx
+  UFG::qPropertySet *PropertySet; // rbx
   UFG::qPropertyList *v1; // rax
   UFG::qPropertyList *v2; // rbp
-  unsigned int v3; // esi
-  unsigned int v4; // edi
+  unsigned int mNumElements; // esi
+  unsigned int i; // edi
   UFG::qSymbol *v5; // rax
   UFG::qSymbolUC *v6; // rbx
   UFG::qPropertySet *v7; // rax
-  unsigned int v8; // ecx
-  UFG::qBaseNodeRB *v9; // rbx
+  unsigned int size; // ecx
+  UFG::TargetingProfile *v9; // rbx
   char *v10; // rax
   char *v11; // rax
   char *v12; // rax
   char *v13; // rax
-  UFG::qSymbol name; // [rsp+40h] [rbp+8h]
-  UFG::qSymbol result; // [rsp+48h] [rbp+10h]
+  UFG::qArray<unsigned long,0> name; // [rsp+40h] [rbp+8h] BYREF
 
-  UFG::qSymbol::create_from_string(&result, "Targeting-TargetingProfiles-manifest");
-  v0 = UFG::PropertySetManager::GetPropertySet(&result);
-  if ( v0 )
+  UFG::qSymbol::create_from_string((UFG::qSymbol *)&name.p, "Targeting-TargetingProfiles-manifest");
+  PropertySet = UFG::PropertySetManager::GetPropertySet((UFG::qSymbol *)&name.p);
+  if ( PropertySet )
   {
-    UFG::qSymbol::create_from_string(&name, "archetypes");
-    v1 = UFG::qPropertySet::Get<UFG::qPropertyList>(v0, &name, DEPTH_RECURSE);
+    UFG::qSymbol::create_from_string((UFG::qSymbol *)&name, "archetypes");
+    v1 = UFG::qPropertySet::Get<UFG::qPropertyList>(PropertySet, &name, DEPTH_RECURSE);
     v2 = v1;
     if ( v1 )
     {
-      v3 = v1->mNumElements;
-      v4 = 0;
-      if ( v3 )
+      mNumElements = v1->mNumElements;
+      for ( i = 0; i < mNumElements; ++i )
       {
-        do
+        v5 = UFG::qPropertyList::Get<UFG::qSymbol>(v2, i);
+        v6 = (UFG::qSymbolUC *)v5;
+        if ( v5 )
         {
-          v5 = UFG::qPropertyList::Get<UFG::qSymbol>(v2, v4);
-          v6 = (UFG::qSymbolUC *)v5;
-          if ( v5 )
+          v7 = UFG::PropertySetManager::GetPropertySet(v5);
+          if ( v7 )
           {
-            v7 = UFG::PropertySetManager::GetPropertySet(v5);
-            if ( v7 )
+            size = UFG::TargetingProfiles::ms_TargetingProfilePool.size;
+            if ( UFG::TargetingProfiles::ms_TargetingProfilePool.size >= 0x10 )
             {
-              v8 = UFG::TargetingProfiles::ms_TargetingProfilePool.size;
-              if ( UFG::TargetingProfiles::ms_TargetingProfilePool.size >= 0x10 )
-              {
-                v10 = UFG::qSymbol::as_cstr_dbg(v6);
-                UFG::qPrintf("WARNING: TargetingProfile::StaticInit: Pool is Full (%d) Not Adding (%s)\n", 16i64, v10);
-              }
-              else
-              {
-                ++UFG::TargetingProfiles::ms_TargetingProfilePool.size;
-                v9 = &UFG::TargetingProfiles::ms_TargetingProfilePool.p[(unsigned __int64)v8].mNode;
-                UFG::TargetingProfile::InitFromPropertySet(
-                  &UFG::TargetingProfiles::ms_TargetingProfilePool.p[(unsigned __int64)v8],
-                  v7);
-                UFG::qBaseTreeRB::Add(&UFG::TargetingProfiles::ms_TargetingProfiles.mTree, v9);
-              }
+              v10 = UFG::qSymbol::as_cstr_dbg(v6);
+              UFG::qPrintf("WARNING: TargetingProfile::StaticInit: Pool is Full (%d) Not Adding (%s)\n", 16i64, v10);
             }
             else
             {
-              v11 = UFG::qSymbol::as_cstr_dbg(v6);
-              UFG::qPrintf("WARNING: TargetingProfile::StaticInit: Profile Not Found: %s\n", v11);
+              ++UFG::TargetingProfiles::ms_TargetingProfilePool.size;
+              v9 = &UFG::TargetingProfiles::ms_TargetingProfilePool.p[(unsigned __int64)size];
+              UFG::TargetingProfile::InitFromPropertySet(v9, v7);
+              UFG::qBaseTreeRB::Add(&UFG::TargetingProfiles::ms_TargetingProfiles.mTree, &v9->mNode);
             }
           }
-          ++v4;
+          else
+          {
+            v11 = UFG::qSymbol::as_cstr_dbg(v6);
+            UFG::qPrintf("WARNING: TargetingProfile::StaticInit: Profile Not Found: %s\n", v11);
+          }
         }
-        while ( v4 < v3 );
       }
     }
     else
@@ -314,7 +328,7 @@ void UFG::TargetingProfiles::StaticInit(void)
   }
   else
   {
-    v13 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&result);
+    v13 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&name.p);
     UFG::qPrintf("WARNING: TargetingProfile::StaticInit: Manifest File Not Found: %s\n", v13);
   }
 }

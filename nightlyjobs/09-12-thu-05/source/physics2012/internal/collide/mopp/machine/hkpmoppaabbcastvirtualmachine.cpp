@@ -1,14 +1,14 @@
 // File Line: 121
 // RVA: 0xDC1890
-void __fastcall hkpMoppAabbCastVirtualMachine::queryRayOnTree(hkpMoppAabbCastVirtualMachine *this, hkpMoppAabbCastVirtualMachineQueryInt *query, const char *PC, hkpMoppAabbCastVirtualMachineQueryFloat *const fQuery)
+void __fastcall hkpMoppAabbCastVirtualMachine::queryRayOnTree(
+        hkpMoppAabbCastVirtualMachine *this,
+        hkpMoppAabbCastVirtualMachineQueryInt *query,
+        char *PC,
+        hkpMoppAabbCastVirtualMachineQueryFloat *const fQuery)
 {
-  hkpMoppAabbCastVirtualMachineQueryInt *v4; // rsi
-  __m128 *v5; // rdi
-  const char *v6; // rbx
-  hkpMoppAabbCastVirtualMachine *v7; // rdx
   float v8; // xmm1_4
-  int v9; // er9
-  int v10; // er11
+  int v9; // r9d
+  int v10; // r11d
   unsigned __int8 v11; // r10
   unsigned __int8 v12; // r8
   float v13; // xmm8_4
@@ -21,12 +21,12 @@ void __fastcall hkpMoppAabbCastVirtualMachine::queryRayOnTree(hkpMoppAabbCastVir
   float v20; // xmm0_4
   float v21; // xmm0_4
   float v22; // xmm0_4
-  signed __int64 v23; // rbx
-  signed int v24; // eax
+  const char *v23; // rbx
+  int v24; // eax
   int v25; // ecx
-  int v26; // er8
+  int v26; // r8d
   __int64 v27; // rcx
-  __m128 v28; // xmm2
+  __m128 m_quad; // xmm2
   hkVector4f v29; // xmm0
   float v30; // xmm10_4
   float v31; // xmm8_4
@@ -38,8 +38,8 @@ void __fastcall hkpMoppAabbCastVirtualMachine::queryRayOnTree(hkpMoppAabbCastVir
   hkpMoppAabbCastVirtualMachine::hkpAabbCastInput *v37; // rax
   __m128 v38; // xmm2
   __m128 v39; // xmm0
-  float v40; // xmm0_4
-  hkpMoppAabbCastVirtualMachine::hkpAabbCastInput *v41; // rax
+  float m_earlyOutFraction; // xmm0_4
+  hkpMoppAabbCastVirtualMachine::hkpAabbCastInput *m_input; // rax
   __m128 v42; // xmm2
   __m128 v43; // xmm0
   __int64 v44; // r11
@@ -50,7 +50,7 @@ void __fastcall hkpMoppAabbCastVirtualMachine::queryRayOnTree(hkpMoppAabbCastVir
   float v49; // xmm3_4
   float v50; // xmm4_4
   float v51; // xmm5_4
-  signed __int64 v52; // r8
+  __int64 v52; // r8
   __m128 v53; // xmm8
   __m128 v54; // xmm7
   float v55; // xmm3_4
@@ -58,62 +58,56 @@ void __fastcall hkpMoppAabbCastVirtualMachine::queryRayOnTree(hkpMoppAabbCastVir
   __m128 v57; // xmm3
   __m128 v58; // xmm2
   __m128 v59; // xmm2
-  unsigned int v60; // eax
-  int v61; // eax
-  int v62; // eax
-  int v63; // er11
-  int v64; // eax
+  unsigned int m_primitiveOffset; // eax
+  unsigned int v61; // eax
+  unsigned int v62; // eax
+  int v63; // r11d
+  unsigned int v64; // eax
   int v65; // edx
   __int64 v66; // rax
   unsigned int v67; // eax
   int v68; // ecx
-  unsigned __int64 v69; // rcx
-  signed __int64 v70; // rdi
-  hkLifoAllocator *v71; // rax
-  char *v72; // rsi
-  unsigned __int64 v73; // rcx
+  unsigned __int64 m_userData; // rcx
+  unsigned __int64 v70; // rdi
+  hkLifoAllocator *Value; // rax
+  char *m_cur; // rsi
+  char *v73; // rcx
   __int64 v74; // rax
   hkpMoppAabbCastVirtualMachine *v75; // rdi
   hkpMoppAabbCastVirtualMachine::hkpAabbCastInput *v76; // r9
   hkpMoppAabbCastVirtualMachine::hkpAabbCastInput *v77; // rcx
-  hkpCdPointCollector *v78; // r9
+  hkpCdPointCollector *m_castCollector; // r9
   unsigned __int64 v79; // rax
-  unsigned __int64 v80; // rax
-  __int64 v81; // rdx
-  __int64 v82; // rax
-  hkpCdPointCollector *v83; // rax
-  hkLifoAllocator *v84; // rax
-  unsigned __int8 *v85; // [rsp+40h] [rbp-A8h]
-  int v86; // [rsp+48h] [rbp-A0h]
-  __m128 v87; // [rsp+50h] [rbp-98h]
-  __m128 v88; // [rsp+60h] [rbp-88h]
-  float v89; // [rsp+70h] [rbp-78h]
-  int v90; // [rsp+74h] [rbp-74h]
-  unsigned __int64 v91; // [rsp+78h] [rbp-70h]
-  hkpShapeContainer *v92; // [rsp+80h] [rbp-68h]
-  hkpMoppAabbCastVirtualMachineQueryFloat fQuerya; // [rsp+88h] [rbp-60h]
-  hkpMoppAabbCastVirtualMachine *v94; // [rsp+168h] [rbp+80h]
-  int retaddr; // [rsp+178h] [rbp+90h]
-  int v96; // [rsp+188h] [rbp+A0h]
-  unsigned int v97; // [rsp+188h] [rbp+A0h]
+  __int64 v80; // rdx
+  __int64 m_castObjectType; // rax
+  hkLifoAllocator *v82; // rax
+  const char *v83; // [rsp+40h] [rbp-A8h]
+  int v84; // [rsp+48h] [rbp-A0h]
+  hkVector4f v85; // [rsp+50h] [rbp-98h] BYREF
+  hkVector4f v86; // [rsp+60h] [rbp-88h]
+  float m_extentsSum3; // [rsp+70h] [rbp-78h]
+  int m_shift; // [rsp+74h] [rbp-74h]
+  unsigned __int64 v89; // [rsp+78h] [rbp-70h]
+  hkpShapeContainer *v90; // [rsp+80h] [rbp-68h]
+  hkpMoppAabbCastVirtualMachineQueryFloat fQuerya; // [rsp+88h] [rbp-60h] BYREF
+  hkpMoppAabbCastVirtualMachine *v92; // [rsp+168h] [rbp+80h]
+  void *retaddr; // [rsp+178h] [rbp+90h] BYREF
+  int v94; // [rsp+188h] [rbp+A0h]
+  unsigned int v95; // [rsp+188h] [rbp+A0h]
 
-  v4 = query;
-  v5 = (__m128 *)fQuery;
-  v6 = PC;
-  v7 = this;
-  v92 = 0i64;
+  v90 = 0i64;
 LABEL_2:
   v8 = FLOAT_510_0;
 LABEL_3:
-  v9 = v96;
+  v9 = v94;
   while ( 2 )
   {
-    v10 = *(unsigned __int8 *)v6;
-    v11 = v6[2];
-    v12 = v6[1];
-    retaddr = 999;
-    v85 = (unsigned __int8 *)(v6 + 3);
-    switch ( v10 )
+    v10 = (unsigned __int8)*PC;
+    v11 = PC[2];
+    v12 = PC[1];
+    LODWORD(retaddr) = 999;
+    v83 = PC + 3;
+    switch ( *PC )
     {
       case 0:
         return;
@@ -122,218 +116,228 @@ LABEL_3:
       case 3:
       case 4:
         v57 = _mm_unpacklo_ps(
-                _mm_unpacklo_ps((__m128)COERCE_UNSIGNED_INT((float)v12), (__m128)COERCE_UNSIGNED_INT((float)*v85)),
+                _mm_unpacklo_ps(
+                  (__m128)COERCE_UNSIGNED_INT((float)v12),
+                  (__m128)COERCE_UNSIGNED_INT((float)*(unsigned __int8 *)v83)),
                 _mm_unpacklo_ps((__m128)COERCE_UNSIGNED_INT((float)v11), (__m128)0i64));
         v58 = 0i64;
         v58.m128_f32[0] = (float)(1 << v10);
         v59 = _mm_shuffle_ps(v58, v58, 0);
-        *v5 = _mm_sub_ps(*v5, v57);
-        v5[1] = _mm_sub_ps(v5[1], v57);
-        *v5 = _mm_mul_ps(*v5, v59);
-        v5[1] = _mm_mul_ps(v59, v5[1]);
-        v87 = _mm_mul_ps(_mm_add_ps(v4->m_FtoBoffset.m_quad, v57), v59);
-        v6 += 4;
-        v90 = v10 + v4->m_shift;
-        *(float *)&v91 = v59.m128_f32[0] * v4->m_FtoBScale;
-        v88 = _mm_mul_ps(v4->m_extents.m_quad, v59);
+        fQuery->m_rayEnds[0].m_quad = _mm_sub_ps(fQuery->m_rayEnds[0].m_quad, v57);
+        fQuery->m_rayEnds[1].m_quad = _mm_sub_ps(fQuery->m_rayEnds[1].m_quad, v57);
+        fQuery->m_rayEnds[0].m_quad = _mm_mul_ps(fQuery->m_rayEnds[0].m_quad, v59);
+        fQuery->m_rayEnds[1].m_quad = _mm_mul_ps(v59, fQuery->m_rayEnds[1].m_quad);
+        v85.m_quad = _mm_mul_ps(_mm_add_ps(query->m_FtoBoffset.m_quad, v57), v59);
+        PC += 4;
+        m_shift = v10 + query->m_shift;
+        *(float *)&v89 = v59.m128_f32[0] * query->m_FtoBScale;
+        v86.m_quad = _mm_mul_ps(query->m_extents.m_quad, v59);
         v8 = FLOAT_510_0;
-        v89 = v59.m128_f32[0] * v4->m_extentsSum3;
-        v88.m128_i32[2] = v4->m_properties[0];
-        v60 = v4->m_primitiveOffset;
-        v4 = (hkpMoppAabbCastVirtualMachineQueryInt *)&v87;
-        HIDWORD(v91) = v60;
+        m_extentsSum3 = v59.m128_f32[0] * query->m_extentsSum3;
+        v86.m_quad.m128_i32[2] = query->m_properties[0];
+        m_primitiveOffset = query->m_primitiveOffset;
+        query = (hkpMoppAabbCastVirtualMachineQueryInt *)&v85;
+        HIDWORD(v89) = m_primitiveOffset;
         continue;
       case 5:
-        v6 += v12 + 2;
+        PC += v12 + 2;
         continue;
       case 6:
-        v6 += 256 * v12 + v11 + 3;
+        PC += 256 * v12 + v11 + 3;
         continue;
       case 7:
-        v6 += 0x10000 * v12 + 256 * v11 + (unsigned int)*v85 + 4;
+        PC += 0x10000 * v12 + 256 * v11 + (unsigned int)*(unsigned __int8 *)v83 + 4;
         continue;
       case 8:
-        v6 += 0x1000000 * v12 + 256 * (*v85 + (v11 << 8)) + (unsigned int)*((unsigned __int8 *)v6 + 4) + 5;
+        PC += 0x1000000 * v12 + 256 * (*(unsigned __int8 *)v83 + (v11 << 8)) + (unsigned int)(unsigned __int8)PC[4] + 5;
         continue;
       case 9:
-        if ( v4 != (hkpMoppAabbCastVirtualMachineQueryInt *)&v87 )
+        if ( query != (hkpMoppAabbCastVirtualMachineQueryInt *)&v85 )
         {
-          v87 = v4->m_FtoBoffset.m_quad;
-          v88 = v4->m_extents.m_quad;
+          v85.m_quad = (__m128)query->m_FtoBoffset;
+          v86.m_quad = (__m128)query->m_extents;
           v8 = FLOAT_510_0;
-          v89 = v4->m_extentsSum3;
-          v90 = v4->m_shift;
-          v91 = *(_QWORD *)&v4->m_FtoBScale;
-          v61 = v4->m_properties[0];
-          v4 = (hkpMoppAabbCastVirtualMachineQueryInt *)&v87;
-          v88.m128_i32[2] = v61;
+          m_extentsSum3 = query->m_extentsSum3;
+          m_shift = query->m_shift;
+          v89 = *(_QWORD *)&query->m_FtoBScale;
+          v61 = query->m_properties[0];
+          query = (hkpMoppAabbCastVirtualMachineQueryInt *)&v85;
+          v86.m_quad.m128_i32[2] = v61;
         }
-        HIDWORD(v91) += v12;
-        v6 += 2;
+        HIDWORD(v89) += v12;
+        PC += 2;
         continue;
       case 10:
-        if ( v4 != (hkpMoppAabbCastVirtualMachineQueryInt *)&v87 )
+        if ( query != (hkpMoppAabbCastVirtualMachineQueryInt *)&v85 )
         {
-          v87 = v4->m_FtoBoffset.m_quad;
-          v88 = v4->m_extents.m_quad;
+          v85.m_quad = (__m128)query->m_FtoBoffset;
+          v86.m_quad = (__m128)query->m_extents;
           v8 = FLOAT_510_0;
-          v89 = v4->m_extentsSum3;
-          v90 = v4->m_shift;
-          v91 = *(_QWORD *)&v4->m_FtoBScale;
-          v62 = v4->m_properties[0];
-          v4 = (hkpMoppAabbCastVirtualMachineQueryInt *)&v87;
-          v88.m128_i32[2] = v62;
+          m_extentsSum3 = query->m_extentsSum3;
+          m_shift = query->m_shift;
+          v89 = *(_QWORD *)&query->m_FtoBScale;
+          v62 = query->m_properties[0];
+          query = (hkpMoppAabbCastVirtualMachineQueryInt *)&v85;
+          v86.m_quad.m128_i32[2] = v62;
         }
-        HIDWORD(v91) += v11 + (v12 << 8);
-        v6 += 3;
+        HIDWORD(v89) += v11 + (v12 << 8);
+        PC += 3;
         continue;
       case 11:
-        v63 = *((unsigned __int8 *)v6 + 4) + (v12 << 24) + (v11 << 16) + (*v85 << 8);
-        if ( v4 != (hkpMoppAabbCastVirtualMachineQueryInt *)&v87 )
+        v63 = (unsigned __int8)PC[4] + (v12 << 24) + (v11 << 16) + (*(unsigned __int8 *)v83 << 8);
+        if ( query != (hkpMoppAabbCastVirtualMachineQueryInt *)&v85 )
         {
-          v87 = v4->m_FtoBoffset.m_quad;
-          v88 = v4->m_extents.m_quad;
+          v85.m_quad = (__m128)query->m_FtoBoffset;
+          v86.m_quad = (__m128)query->m_extents;
           v8 = FLOAT_510_0;
-          v89 = v4->m_extentsSum3;
-          v90 = v4->m_shift;
-          v91 = *(_QWORD *)&v4->m_FtoBScale;
-          v64 = v4->m_properties[0];
-          v4 = (hkpMoppAabbCastVirtualMachineQueryInt *)&v87;
-          v88.m128_i32[2] = v64;
+          m_extentsSum3 = query->m_extentsSum3;
+          m_shift = query->m_shift;
+          v89 = *(_QWORD *)&query->m_FtoBScale;
+          v64 = query->m_properties[0];
+          query = (hkpMoppAabbCastVirtualMachineQueryInt *)&v85;
+          v86.m_quad.m128_i32[2] = v64;
         }
-        HIDWORD(v91) = v63;
+        HIDWORD(v89) = v63;
         goto $LN28_61;
       case 12:
         v9 = (v11 | (v12 << 8)) << 9;
-        v96 = (v11 | (v12 << 8)) << 9;
-        v6 = &v7->m_code->m_data.m_data[v9];
+        v94 = v9;
+        PC = &this->m_code->m_data.m_data[v9];
         continue;
       case 13:
 $LN28_61:
-        v6 += 5;
+        PC += 5;
         continue;
       case 16:
       case 17:
       case 18:
         v27 = v10 - 16;
-        retaddr = v10 - 16;
-        v13 = *((float *)v5->m128_u64 + v27);
-        v14 = v5[1].m128_f32[v27];
-        v17 = (float)v11 - v4->m_extents.m_quad.m128_f32[v27];
-        v16 = (float)v12 + v4->m_extents.m_quad.m128_f32[v27];
+        LODWORD(retaddr) = v10 - 16;
+        v13 = fQuery->m_rayEnds[0].m_quad.m128_f32[v27];
+        v14 = fQuery->m_rayEnds[1].m_quad.m128_f32[v27];
+        v17 = (float)v11 - query->m_extents.m_quad.m128_f32[v27];
+        v16 = (float)v12 + query->m_extents.m_quad.m128_f32[v27];
         goto $do_compareN4_1;
       case 19:
-        v13 = *(float *)&v5->m128_u64[1] + *((float *)v5->m128_u64 + 1);
-        v14 = v5[1].m128_f32[2] + v5[1].m128_f32[1];
-        v15 = (float)(v4->m_extents.m_quad.m128_f32[2] + v4->m_extents.m_quad.m128_f32[1]) * 2.0;
+        v13 = fQuery->m_rayEnds[0].m_quad.m128_f32[2] + fQuery->m_rayEnds[0].m_quad.m128_f32[1];
+        v14 = fQuery->m_rayEnds[1].m_quad.m128_f32[2] + fQuery->m_rayEnds[1].m_quad.m128_f32[1];
+        v15 = (float)(query->m_extents.m_quad.m128_f32[2] + query->m_extents.m_quad.m128_f32[1]) * 2.0;
         v16 = (float)((float)v12 * 2.0) + v15;
         v17 = (float)((float)v11 * 2.0) - v15;
         goto $do_compareN4_1;
       case 20:
-        v13 = *((float *)v5->m128_u64 + 1) - *(float *)&v5->m128_u64[1];
-        v14 = v5[1].m128_f32[1] - v5[1].m128_f32[2];
-        v18 = (float)(v4->m_extents.m_quad.m128_f32[2] + v4->m_extents.m_quad.m128_f32[1]) * 2.0;
+        v13 = fQuery->m_rayEnds[0].m_quad.m128_f32[1] - fQuery->m_rayEnds[0].m_quad.m128_f32[2];
+        v14 = fQuery->m_rayEnds[1].m_quad.m128_f32[1] - fQuery->m_rayEnds[1].m_quad.m128_f32[2];
+        v18 = (float)(query->m_extents.m_quad.m128_f32[2] + query->m_extents.m_quad.m128_f32[1]) * 2.0;
         v16 = (float)((float)((float)v12 * 2.0) - 255.0) + v18;
         v17 = (float)((float)((float)v11 * 2.0) - 255.0) - v18;
         goto $do_compareN4_1;
       case 21:
-        v13 = *(float *)&v5->m128_u64[1] + *(float *)v5->m128_u64;
-        v14 = v5[1].m128_f32[2] + v5[1].m128_f32[0];
-        v19 = (float)(v4->m_extents.m_quad.m128_f32[2] + v4->m_extents.m_quad.m128_f32[0]) * 2.0;
+        v13 = fQuery->m_rayEnds[0].m_quad.m128_f32[2] + fQuery->m_rayEnds[0].m_quad.m128_f32[0];
+        v14 = fQuery->m_rayEnds[1].m_quad.m128_f32[2] + fQuery->m_rayEnds[1].m_quad.m128_f32[0];
+        v19 = (float)(query->m_extents.m_quad.m128_f32[2] + query->m_extents.m_quad.m128_f32[0]) * 2.0;
         v16 = (float)((float)v12 * 2.0) + v19;
         v17 = (float)((float)v11 * 2.0) - v19;
         goto $do_compareN4_1;
       case 22:
-        v13 = *(float *)v5->m128_u64 - *(float *)&v5->m128_u64[1];
-        v14 = v5[1].m128_f32[0] - v5[1].m128_f32[2];
-        v20 = (float)(v4->m_extents.m_quad.m128_f32[2] + v4->m_extents.m_quad.m128_f32[0]) * 2.0;
+        v13 = fQuery->m_rayEnds[0].m_quad.m128_f32[0] - fQuery->m_rayEnds[0].m_quad.m128_f32[2];
+        v14 = fQuery->m_rayEnds[1].m_quad.m128_f32[0] - fQuery->m_rayEnds[1].m_quad.m128_f32[2];
+        v20 = (float)(query->m_extents.m_quad.m128_f32[2] + query->m_extents.m_quad.m128_f32[0]) * 2.0;
         v16 = (float)((float)((float)v12 * 2.0) - 255.0) + v20;
         v17 = (float)((float)((float)v11 * 2.0) - 255.0) - v20;
         goto $do_compareN4_1;
       case 23:
-        v13 = *((float *)v5->m128_u64 + 1) + *(float *)v5->m128_u64;
-        v14 = v5[1].m128_f32[1] + v5[1].m128_f32[0];
-        v21 = (float)(v4->m_extents.m_quad.m128_f32[1] + v4->m_extents.m_quad.m128_f32[0]) * 2.0;
+        v13 = fQuery->m_rayEnds[0].m_quad.m128_f32[1] + fQuery->m_rayEnds[0].m_quad.m128_f32[0];
+        v14 = fQuery->m_rayEnds[1].m_quad.m128_f32[1] + fQuery->m_rayEnds[1].m_quad.m128_f32[0];
+        v21 = (float)(query->m_extents.m_quad.m128_f32[1] + query->m_extents.m_quad.m128_f32[0]) * 2.0;
         v16 = (float)((float)v12 * 2.0) + v21;
         v17 = (float)((float)v11 * 2.0) - v21;
         goto $do_compareN4_1;
       case 24:
-        v13 = *(float *)v5->m128_u64 - *((float *)v5->m128_u64 + 1);
-        v14 = v5[1].m128_f32[0] - v5[1].m128_f32[1];
-        v22 = (float)(v4->m_extents.m_quad.m128_f32[1] + v4->m_extents.m_quad.m128_f32[0]) * 2.0;
+        v13 = fQuery->m_rayEnds[0].m_quad.m128_f32[0] - fQuery->m_rayEnds[0].m_quad.m128_f32[1];
+        v14 = fQuery->m_rayEnds[1].m_quad.m128_f32[0] - fQuery->m_rayEnds[1].m_quad.m128_f32[1];
+        v22 = (float)(query->m_extents.m_quad.m128_f32[1] + query->m_extents.m_quad.m128_f32[0]) * 2.0;
         v16 = (float)((float)((float)v12 * 2.0) - 255.0) + v22;
         v17 = (float)((float)((float)v11 * 2.0) - 255.0) - v22;
         goto $do_compareN4_1;
       case 25:
-        v13 = (float)(*((float *)v5->m128_u64 + 1) + *(float *)v5->m128_u64) + *(float *)&v5->m128_u64[1];
-        v14 = (float)(v5[1].m128_f32[1] + v5[1].m128_f32[0]) + v5[1].m128_f32[2];
-        v17 = (float)((float)v11 * 3.0) - v4->m_extentsSum3;
-        v16 = (float)((float)v12 * 3.0) + v4->m_extentsSum3;
+        v13 = (float)(fQuery->m_rayEnds[0].m_quad.m128_f32[1] + fQuery->m_rayEnds[0].m_quad.m128_f32[0])
+            + fQuery->m_rayEnds[0].m_quad.m128_f32[2];
+        v14 = (float)(fQuery->m_rayEnds[1].m_quad.m128_f32[1] + fQuery->m_rayEnds[1].m_quad.m128_f32[0])
+            + fQuery->m_rayEnds[1].m_quad.m128_f32[2];
+        v17 = (float)((float)v11 * 3.0) - query->m_extentsSum3;
+        v16 = (float)((float)v12 * 3.0) + query->m_extentsSum3;
         goto $do_compareN4_1;
       case 26:
-        v13 = (float)(*((float *)v5->m128_u64 + 1) + *(float *)v5->m128_u64) - *(float *)&v5->m128_u64[1];
-        v14 = (float)(v5[1].m128_f32[1] + v5[1].m128_f32[0]) - v5[1].m128_f32[2];
-        v17 = (float)((float)((float)v11 * 3.0) - 255.0) - v4->m_extentsSum3;
-        v16 = (float)((float)((float)v12 * 3.0) - 255.0) + v4->m_extentsSum3;
+        v13 = (float)(fQuery->m_rayEnds[0].m_quad.m128_f32[1] + fQuery->m_rayEnds[0].m_quad.m128_f32[0])
+            - fQuery->m_rayEnds[0].m_quad.m128_f32[2];
+        v14 = (float)(fQuery->m_rayEnds[1].m_quad.m128_f32[1] + fQuery->m_rayEnds[1].m_quad.m128_f32[0])
+            - fQuery->m_rayEnds[1].m_quad.m128_f32[2];
+        v17 = (float)((float)((float)v11 * 3.0) - 255.0) - query->m_extentsSum3;
+        v16 = (float)((float)((float)v12 * 3.0) - 255.0) + query->m_extentsSum3;
         goto $do_compareN4_1;
       case 27:
-        v13 = (float)(*(float *)v5->m128_u64 - *((float *)v5->m128_u64 + 1)) + *(float *)&v5->m128_u64[1];
-        v14 = (float)(v5[1].m128_f32[0] - v5[1].m128_f32[1]) + v5[1].m128_f32[2];
-        v17 = (float)((float)((float)v11 * 3.0) - 255.0) - v4->m_extentsSum3;
-        v16 = (float)((float)((float)v12 * 3.0) - 255.0) + v4->m_extentsSum3;
+        v13 = (float)(fQuery->m_rayEnds[0].m_quad.m128_f32[0] - fQuery->m_rayEnds[0].m_quad.m128_f32[1])
+            + fQuery->m_rayEnds[0].m_quad.m128_f32[2];
+        v14 = (float)(fQuery->m_rayEnds[1].m_quad.m128_f32[0] - fQuery->m_rayEnds[1].m_quad.m128_f32[1])
+            + fQuery->m_rayEnds[1].m_quad.m128_f32[2];
+        v17 = (float)((float)((float)v11 * 3.0) - 255.0) - query->m_extentsSum3;
+        v16 = (float)((float)((float)v12 * 3.0) - 255.0) + query->m_extentsSum3;
         goto $do_compareN4_1;
       case 28:
-        v13 = (float)(*(float *)v5->m128_u64 - *((float *)v5->m128_u64 + 1)) - *(float *)&v5->m128_u64[1];
-        v14 = (float)(v5[1].m128_f32[0] - v5[1].m128_f32[1]) - v5[1].m128_f32[2];
-        v17 = (float)((float)((float)v11 * 3.0) - v8) - v4->m_extentsSum3;
-        v16 = (float)((float)((float)v12 * 3.0) - v8) + v4->m_extentsSum3;
+        v13 = (float)(fQuery->m_rayEnds[0].m_quad.m128_f32[0] - fQuery->m_rayEnds[0].m_quad.m128_f32[1])
+            - fQuery->m_rayEnds[0].m_quad.m128_f32[2];
+        v14 = (float)(fQuery->m_rayEnds[1].m_quad.m128_f32[0] - fQuery->m_rayEnds[1].m_quad.m128_f32[1])
+            - fQuery->m_rayEnds[1].m_quad.m128_f32[2];
+        v17 = (float)((float)((float)v11 * 3.0) - v8) - query->m_extentsSum3;
+        v16 = (float)((float)((float)v12 * 3.0) - v8) + query->m_extentsSum3;
 $do_compareN4_1:
         v25 = 0;
-        v23 = (signed __int64)(v6 + 4);
-        v26 = *v85;
+        v23 = PC + 4;
+        v26 = *(unsigned __int8 *)v83;
         goto LABEL_19;
       case 32:
       case 33:
       case 34:
-        v23 = (signed __int64)(v6 + 3);
+        v23 = PC + 3;
         v24 = v12;
         v25 = 0;
         v26 = v11;
-        retaddr = v10 - 32;
-        v17 = (float)v24 - v4->m_extents.m_quad.m128_f32[v10 - 32];
-        v13 = *((float *)v5->m128_u64 + v10 - 32);
-        v14 = v5[-7].m128_f32[v10];
-        v16 = (float)((float)v24 + 1.0) + v4->m_extents.m_quad.m128_f32[v10 - 32];
+        LODWORD(retaddr) = v10 - 32;
+        v17 = (float)v24 - query[-2].m_extents.m_quad.m128_f32[v10];
+        v13 = fQuery[-4].m_rayEnds[0].m_quad.m128_f32[v10];
+        v14 = fQuery[-4].m_rayEnds[1].m_quad.m128_f32[v10];
+        v16 = (float)((float)v24 + 1.0) + query[-2].m_extents.m_quad.m128_f32[v10];
         goto LABEL_19;
       case 35:
       case 36:
       case 37:
-        retaddr = v10 - 35;
-        v13 = *((float *)v5->m128_u64 + v10 - 35);
-        v14 = *((float *)&v5[-7] + v10 - 3);
-        v17 = (float)v11 - v4->m_extents.m_quad.m128_f32[v10 - 35];
-        v16 = (float)v12 + v4->m_extents.m_quad.m128_f32[v10 - 35];
-        v25 = *((unsigned __int8 *)v6 + 4) + (*v85 << 8);
-        v26 = *((unsigned __int8 *)v6 + 6) + (*((unsigned __int8 *)v6 + 5) << 8);
-        v23 = (signed __int64)(v6 + 7);
+        LODWORD(retaddr) = v10 - 35;
+        v13 = *((float *)&fQuery[-4] + v10 - 3);
+        v14 = *((float *)&fQuery[-3] + v10 - 7);
+        v17 = (float)v11 - *((float *)&query[-1] + v10 - 15);
+        v16 = (float)v12 + *((float *)&query[-1] + v10 - 15);
+        v25 = (unsigned __int8)PC[4] + (*(unsigned __int8 *)v83 << 8);
+        v26 = (unsigned __int8)PC[6] + ((unsigned __int8)PC[5] << 8);
+        v23 = PC + 7;
 LABEL_19:
-        v86 = v25;
+        v84 = v25;
         if ( v14 < v17 && v13 < v17 )
         {
-          v6 = (const char *)(v25 + v23);
+          PC = (char *)&v23[v25];
           continue;
         }
-        v6 = (const char *)(v26 + v23);
-        v91 = v26;
+        PC = (char *)&v23[v26];
+        v89 = v26;
         if ( v13 > v16 && v14 > v16 )
           continue;
-        v28 = *v5;
-        v29.m_quad = v5[1];
+        m_quad = fQuery->m_rayEnds[0].m_quad;
+        v29.m_quad = (__m128)fQuery->m_rayEnds[1];
         v30 = v13;
         v31 = v13 - v17;
         v32 = v30 - v16;
         v33 = v14;
-        fQuerya.m_rayEnds[0].m_quad = *v5;
+        fQuerya.m_rayEnds[0] = fQuery->m_rayEnds[0];
         fQuerya.m_rayEnds[1] = (hkVector4f)v29.m_quad;
         v34 = v14 - v17;
         v35 = v33 - v16;
@@ -346,39 +350,41 @@ LABEL_19:
                                                 (__m128)COERCE_UNSIGNED_INT(v31 / (float)(v31 - v34)),
                                                 (__m128)COERCE_UNSIGNED_INT(v31 / (float)(v31 - v34)),
                                                 0),
-                                              _mm_sub_ps(v5[1], v28)),
-                                            v28);
-          hkpMoppAabbCastVirtualMachine::queryRayOnTree(v94, v4, v6, &fQuerya, v9);
+                                              _mm_sub_ps(fQuery->m_rayEnds[1].m_quad, m_quad)),
+                                            m_quad);
+          hkpMoppAabbCastVirtualMachine::queryRayOnTree(v92, query, PC, &fQuerya, v9);
           if ( (float)(v35 * v32) < 0.0 )
-            *v5 = _mm_add_ps(
-                    _mm_mul_ps(
-                      _mm_shuffle_ps(
-                        (__m128)COERCE_UNSIGNED_INT(v32 / (float)(v32 - v35)),
-                        (__m128)COERCE_UNSIGNED_INT(v32 / (float)(v32 - v35)),
-                        0),
-                      _mm_sub_ps(v5[1], *v5)),
-                    *v5);
-          v7 = v94;
-          v40 = v94->m_earlyOutFraction;
-          if ( v40 < v94->m_refEarlyOutFraction )
+            fQuery->m_rayEnds[0].m_quad = _mm_add_ps(
+                                            _mm_mul_ps(
+                                              _mm_shuffle_ps(
+                                                (__m128)COERCE_UNSIGNED_INT(v32 / (float)(v32 - v35)),
+                                                (__m128)COERCE_UNSIGNED_INT(v32 / (float)(v32 - v35)),
+                                                0),
+                                              _mm_sub_ps(fQuery->m_rayEnds[1].m_quad, fQuery->m_rayEnds[0].m_quad)),
+                                            fQuery->m_rayEnds[0].m_quad);
+          this = v92;
+          m_earlyOutFraction = v92->m_earlyOutFraction;
+          if ( m_earlyOutFraction < v92->m_refEarlyOutFraction )
           {
-            v41 = v94->m_input;
-            v94->m_refEarlyOutFraction = v40;
+            m_input = v92->m_input;
+            v92->m_refEarlyOutFraction = m_earlyOutFraction;
             v42 = _mm_sub_ps(
                     _mm_add_ps(
                       _mm_mul_ps(
-                        _mm_sub_ps(v41->m_to.m_quad, v41->m_from.m_quad),
-                        _mm_shuffle_ps((__m128)LODWORD(v40), (__m128)LODWORD(v40), 0)),
-                      v41->m_from.m_quad),
-                    v7->m_code->m_info.m_offset.m_quad);
-            v5[1] = v42;
-            v43 = _mm_mul_ps(_mm_shuffle_ps((__m128)LODWORD(v4->m_FtoBScale), (__m128)LODWORD(v4->m_FtoBScale), 0), v42);
-            v5[1] = v43;
-            v5[1] = _mm_sub_ps(v43, v4->m_FtoBoffset.m_quad);
-            if ( retaddr < 3 && v16 < v5[1].m128_f32[retaddr] )
+                        _mm_sub_ps(m_input->m_to.m_quad, m_input->m_from.m_quad),
+                        _mm_shuffle_ps((__m128)LODWORD(m_earlyOutFraction), (__m128)LODWORD(m_earlyOutFraction), 0)),
+                      m_input->m_from.m_quad),
+                    this->m_code->m_info.m_offset.m_quad);
+            fQuery->m_rayEnds[1].m_quad = v42;
+            v43 = _mm_mul_ps(
+                    _mm_shuffle_ps((__m128)LODWORD(query->m_FtoBScale), (__m128)LODWORD(query->m_FtoBScale), 0),
+                    v42);
+            fQuery->m_rayEnds[1].m_quad = v43;
+            fQuery->m_rayEnds[1].m_quad = _mm_sub_ps(v43, query->m_FtoBoffset.m_quad);
+            if ( (int)retaddr < 3 && v16 < fQuery->m_rayEnds[1].m_quad.m128_f32[(int)retaddr] )
               return;
           }
-          v6 += v86 - v91;
+          PC += v84 - v89;
           goto LABEL_2;
         }
         if ( (float)(v35 * v32) < 0.0 )
@@ -388,42 +394,44 @@ LABEL_19:
                                               (__m128)COERCE_UNSIGNED_INT(v32 / (float)(v32 - v35)),
                                               (__m128)COERCE_UNSIGNED_INT(v32 / (float)(v32 - v35)),
                                               0),
-                                            _mm_sub_ps(v5[1], v28)),
-                                          v28);
-        hkpMoppAabbCastVirtualMachine::queryRayOnTree(v94, v4, &v6[v25 - (signed __int64)v26], &fQuerya, v9);
+                                            _mm_sub_ps(fQuery->m_rayEnds[1].m_quad, m_quad)),
+                                          m_quad);
+        hkpMoppAabbCastVirtualMachine::queryRayOnTree(v92, query, &PC[v25 - (__int64)v26], &fQuerya, v9);
         if ( (float)(v34 * v31) < 0.0 )
-          *v5 = _mm_add_ps(
-                  _mm_mul_ps(
-                    _mm_shuffle_ps(
-                      (__m128)COERCE_UNSIGNED_INT(v31 / (float)(v31 - v34)),
-                      (__m128)COERCE_UNSIGNED_INT(v31 / (float)(v31 - v34)),
-                      0),
-                    _mm_sub_ps(v5[1], *v5)),
-                  *v5);
-        v7 = v94;
-        v36 = v94->m_earlyOutFraction;
-        if ( v36 >= v94->m_refEarlyOutFraction )
+          fQuery->m_rayEnds[0].m_quad = _mm_add_ps(
+                                          _mm_mul_ps(
+                                            _mm_shuffle_ps(
+                                              (__m128)COERCE_UNSIGNED_INT(v31 / (float)(v31 - v34)),
+                                              (__m128)COERCE_UNSIGNED_INT(v31 / (float)(v31 - v34)),
+                                              0),
+                                            _mm_sub_ps(fQuery->m_rayEnds[1].m_quad, fQuery->m_rayEnds[0].m_quad)),
+                                          fQuery->m_rayEnds[0].m_quad);
+        this = v92;
+        v36 = v92->m_earlyOutFraction;
+        if ( v36 >= v92->m_refEarlyOutFraction )
           goto LABEL_2;
-        v37 = v94->m_input;
-        v94->m_refEarlyOutFraction = v36;
+        v37 = v92->m_input;
+        v92->m_refEarlyOutFraction = v36;
         v38 = _mm_sub_ps(
                 _mm_add_ps(
                   _mm_mul_ps(
                     _mm_sub_ps(v37->m_to.m_quad, v37->m_from.m_quad),
                     _mm_shuffle_ps((__m128)LODWORD(v36), (__m128)LODWORD(v36), 0)),
                   v37->m_from.m_quad),
-                v7->m_code->m_info.m_offset.m_quad);
-        v5[1] = v38;
-        v39 = _mm_mul_ps(_mm_shuffle_ps((__m128)LODWORD(v4->m_FtoBScale), (__m128)LODWORD(v4->m_FtoBScale), 0), v38);
-        v5[1] = v39;
-        v5[1] = _mm_sub_ps(v39, v4->m_FtoBoffset.m_quad);
-        if ( retaddr >= 3 || v17 <= v5[1].m128_f32[retaddr] )
+                this->m_code->m_info.m_offset.m_quad);
+        fQuery->m_rayEnds[1].m_quad = v38;
+        v39 = _mm_mul_ps(
+                _mm_shuffle_ps((__m128)LODWORD(query->m_FtoBScale), (__m128)LODWORD(query->m_FtoBScale), 0),
+                v38);
+        fQuery->m_rayEnds[1].m_quad = v39;
+        fQuery->m_rayEnds[1].m_quad = _mm_sub_ps(v39, query->m_FtoBoffset.m_quad);
+        if ( (int)retaddr >= 3 || v17 <= fQuery->m_rayEnds[1].m_quad.m128_f32[(int)retaddr] )
           goto LABEL_2;
         return;
       case 38:
       case 39:
       case 40:
-        v6 += 3;
+        PC += 3;
         v44 = v10 - 38;
         v46 = (float)v12;
         v47 = (float)v11;
@@ -432,16 +440,18 @@ LABEL_19:
       case 42:
       case 43:
         v44 = v10 - 41;
-        v45 = *((unsigned __int8 *)v6 + 6) + ((*((unsigned __int8 *)v6 + 5) + (*((unsigned __int8 *)v6 + 4) << 8)) << 8);
-        v6 += 7;
-        v46 = (float)((float)((float)(*v85 + ((v11 + (v12 << 8)) << 8)) * v7->m_ItoFScale) * v4->m_FtoBScale)
-            - v4->m_FtoBoffset.m_quad.m128_f32[v44];
-        v47 = (float)((float)((float)v45 * v7->m_ItoFScale) * v4->m_FtoBScale) - v4->m_FtoBoffset.m_quad.m128_f32[v44];
+        v45 = (unsigned __int8)PC[6] + (((unsigned __int8)PC[5] + ((unsigned __int8)PC[4] << 8)) << 8);
+        PC += 7;
+        v46 = (float)((float)((float)(*(unsigned __int8 *)v83 + ((v11 + (v12 << 8)) << 8)) * this->m_ItoFScale)
+                    * query->m_FtoBScale)
+            - query->m_FtoBoffset.m_quad.m128_f32[v44];
+        v47 = (float)((float)((float)v45 * this->m_ItoFScale) * query->m_FtoBScale)
+            - query->m_FtoBoffset.m_quad.m128_f32[v44];
 LABEL_43:
-        v48 = *((float *)v5->m128_u64 + v44);
-        v49 = v5[1].m128_f32[v44];
-        v50 = v47 + v4->m_extents.m_quad.m128_f32[v44];
-        v51 = v46 - v4->m_extents.m_quad.m128_f32[v44];
+        v48 = fQuery->m_rayEnds[0].m_quad.m128_f32[v44];
+        v49 = fQuery->m_rayEnds[1].m_quad.m128_f32[v44];
+        v50 = v47 + query->m_extents.m_quad.m128_f32[v44];
+        v51 = v46 - query->m_extents.m_quad.m128_f32[v44];
         if ( v48 >= v49 )
         {
           if ( v48 < v51 || v49 > v50 )
@@ -454,32 +464,34 @@ LABEL_43:
             return;
           v52 = 0i64;
         }
-        v53 = *v5;
-        v54 = v5[1];
+        v53 = fQuery->m_rayEnds[0].m_quad;
+        v54 = fQuery->m_rayEnds[1].m_quad;
         if ( (float)((float)(v49 - v50) * (float)(v48 - v50)) < 0.0 )
-          v5[-v52 + 1] = _mm_add_ps(
-                           _mm_mul_ps(
-                             _mm_shuffle_ps(
-                               (__m128)COERCE_UNSIGNED_INT((float)(v48 - v50) / (float)((float)(v48 - v50)
-                                                                                      - (float)(v49 - v50))),
-                               (__m128)COERCE_UNSIGNED_INT((float)(v48 - v50) / (float)((float)(v48 - v50)
-                                                                                      - (float)(v49 - v50))),
-                               0),
-                             _mm_sub_ps(v54, v53)),
-                           v53);
+          fQuery->m_rayEnds[-v52 + 1].m_quad = _mm_add_ps(
+                                                 _mm_mul_ps(
+                                                   _mm_shuffle_ps(
+                                                     (__m128)COERCE_UNSIGNED_INT(
+                                                               (float)(v48 - v50)
+                                                             / (float)((float)(v48 - v50) - (float)(v49 - v50))),
+                                                     (__m128)COERCE_UNSIGNED_INT(
+                                                               (float)(v48 - v50)
+                                                             / (float)((float)(v48 - v50) - (float)(v49 - v50))),
+                                                     0),
+                                                   _mm_sub_ps(v54, v53)),
+                                                 v53);
         v8 = FLOAT_510_0;
         v55 = v49 - v51;
         v56 = v48 - v51;
         if ( (float)(v55 * v56) < 0.0 )
         {
-          v5[v52] = _mm_add_ps(
-                      _mm_mul_ps(
-                        _mm_shuffle_ps(
-                          (__m128)COERCE_UNSIGNED_INT(v56 / (float)(v56 - v55)),
-                          (__m128)COERCE_UNSIGNED_INT(v56 / (float)(v56 - v55)),
-                          0),
-                        _mm_sub_ps(v54, v53)),
-                      v53);
+          fQuery->m_rayEnds[v52].m_quad = _mm_add_ps(
+                                            _mm_mul_ps(
+                                              _mm_shuffle_ps(
+                                                (__m128)COERCE_UNSIGNED_INT(v56 / (float)(v56 - v55)),
+                                                (__m128)COERCE_UNSIGNED_INT(v56 / (float)(v56 - v55)),
+                                                0),
+                                              _mm_sub_ps(v54, v53)),
+                                            v53);
           v8 = FLOAT_510_0;
         }
         continue;
@@ -524,81 +536,79 @@ LABEL_43:
         v68 = v11 + (v12 << 8);
         goto $add_Terminal_6;
       case 82:
-        v68 = *v85 + ((v11 + (v12 << 8)) << 8);
+        v68 = *(unsigned __int8 *)v83 + ((v11 + (v12 << 8)) << 8);
         goto $add_Terminal_6;
       case 83:
-        v7 = v94;
-        v68 = ((v11 + (v12 << 8)) << 16) + *((unsigned __int8 *)v6 + 4) + (*v85 << 8);
+        this = v92;
+        v68 = ((v11 + (v12 << 8)) << 16) + (unsigned __int8)PC[4] + (*(unsigned __int8 *)v83 << 8);
 $add_Terminal_6:
-        v97 = (v68 + v4->m_primitiveOffset) | v7->m_reindexingMask & (v9 >> 9 << 8);
-        v69 = v7->m_input->m_moppBody->m_shape[2].m_userData;
-        if ( v69 )
+        v95 = (v68 + query->m_primitiveOffset) | this->m_reindexingMask & (v9 >> 9 << 8);
+        m_userData = this->m_input->m_moppBody->m_shape[2].m_userData;
+        if ( m_userData )
         {
-          v70 = v69 + 32;
-          v92 = (hkpShapeContainer *)(v69 + 32);
+          v70 = m_userData + 32;
+          v90 = (hkpShapeContainer *)(m_userData + 32);
         }
         else
         {
           v70 = 0i64;
         }
-        v71 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-        v72 = (char *)v71->m_cur;
-        v73 = (unsigned __int64)(v72 + 512);
-        if ( v71->m_slabSize < 512 || (void *)v73 > v71->m_end )
-          v72 = (char *)hkLifoAllocator::allocateFromNewSlab(v71, 512);
+        Value = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+        m_cur = (char *)Value->m_cur;
+        v73 = m_cur + 512;
+        if ( Value->m_slabSize < 512 || v73 > Value->m_end )
+          m_cur = (char *)hkLifoAllocator::allocateFromNewSlab(Value, 512);
         else
-          v71->m_cur = (void *)v73;
-        v74 = (*(__int64 (__fastcall **)(signed __int64, _QWORD, char *))(*(_QWORD *)v70 + 40i64))(v70, v97, v72);
-        v75 = v94;
-        v76 = v94->m_input;
-        v91 = v74;
-        if ( *(_BYTE *)v76->m_collisionInput->m_filter.m_storage->vfptr->isCollisionEnabled(
-                         (hkpShapeCollectionFilter *)&v76->m_collisionInput->m_filter.m_storage->vfptr,
-                         (hkBool *)&retaddr,
-                         (hkpCollisionInput *)&v76->m_collisionInput->m_dispatcher,
-                         v76->m_castBody,
-                         v76->m_moppBody,
-                         v92,
-                         v97) )
+          Value->m_cur = v73;
+        v74 = (*(__int64 (__fastcall **)(unsigned __int64, _QWORD, char *))(*(_QWORD *)v70 + 40i64))(v70, v95, m_cur);
+        v75 = v92;
+        v76 = v92->m_input;
+        v89 = v74;
+        if ( v76->m_collisionInput->m_filter.m_storage->vfptr->isCollisionEnabled(
+               &v76->m_collisionInput->m_filter.m_storage->hkpShapeCollectionFilter,
+               (hkBool *)&retaddr,
+               v76->m_collisionInput,
+               v76->m_castBody,
+               v76->m_moppBody,
+               v90,
+               v95)->m_bool )
         {
           v77 = v75->m_input;
-          v78 = v75->m_castCollector;
-          v79 = (unsigned __int64)v77->m_moppBody;
-          fQuerya.m_rayEnds[1].m_quad.m128_u64[1] = v79;
-          v80 = *(_QWORD *)(v79 + 16);
-          fQuerya.m_rayEnds[0].m_quad.m128_u64[0] = v91;
-          v81 = *(unsigned __int8 *)(v91 + 16);
-          fQuerya.m_rayEnds[1].m_quad.m128_u64[0] = v80;
-          v82 = (signed int)v75->m_castObjectType;
-          fQuerya.m_rayEnds[0].m_quad.m128_i32[2] = v97;
-          v77->m_collisionInput->m_dispatcher.m_storage->m_agent2Func[(unsigned __int8)v77->m_collisionInput->m_dispatcher.m_storage->m_agent2Types[v82][v81]].m_linearCastFunc(
+          m_castCollector = v75->m_castCollector;
+          fQuerya.m_rayEnds[1].m_quad.m128_u64[1] = (unsigned __int64)v77->m_moppBody;
+          v79 = *(_QWORD *)(fQuerya.m_rayEnds[1].m_quad.m128_u64[1] + 16);
+          fQuerya.m_rayEnds[0].m_quad.m128_u64[0] = v89;
+          v80 = *(unsigned __int8 *)(v89 + 16);
+          fQuerya.m_rayEnds[1].m_quad.m128_u64[0] = v79;
+          m_castObjectType = v75->m_castObjectType;
+          fQuerya.m_rayEnds[0].m_quad.m128_i32[2] = v95;
+          v77->m_collisionInput->m_dispatcher.m_storage->m_agent2Func[(unsigned __int8)v77->m_collisionInput->m_dispatcher.m_storage->m_agent2Types[m_castObjectType][v80]].m_linearCastFunc(
             v77->m_castBody,
             (hkpCdBody *)&fQuerya,
             v77->m_collisionInput,
-            v78,
+            m_castCollector,
             v75->m_startPointCollector);
-          v83 = v75->m_castCollector;
-          retaddr = LODWORD(v83->m_earlyOutDistance);
-          v75->m_earlyOutFraction = fminf(v75->m_earlyOutFraction, v83->m_earlyOutDistance);
+          *(float *)&retaddr = v75->m_castCollector->m_earlyOutDistance;
+          v75->m_earlyOutFraction = fminf(v75->m_earlyOutFraction, *(float *)&retaddr);
         }
-        v84 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-        if ( v84->m_slabSize < 512 || v72 + 512 != v84->m_cur || v84->m_firstNonLifoEnd == v72 )
-          hkLifoAllocator::slowBlockFree(v84, v72, 512);
+        v82 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+        if ( v82->m_slabSize < 512 || m_cur + 512 != v82->m_cur || v82->m_firstNonLifoEnd == m_cur )
+          hkLifoAllocator::slowBlockFree(v82, m_cur, 512);
         else
-          v84->m_cur = v72;
+          v82->m_cur = m_cur;
         return;
       case 96:
       case 97:
       case 98:
       case 99:
-        v6 += 2;
-        v88.m128_i32[v10 - 96 + 2] = v12;
+        PC += 2;
+        v86.m_quad.m128_i32[v10 - 96 + 2] = v12;
         goto $propertyCopy_6;
       case 100:
       case 101:
       case 102:
       case 103:
-        v6 += 3;
+        PC += 3;
         v65 = v11 + (v12 << 8);
         v66 = (unsigned int)(v10 - 100);
         goto LABEL_74;
@@ -606,29 +616,29 @@ $add_Terminal_6:
       case 105:
       case 106:
       case 107:
-        v65 = *((unsigned __int8 *)v6 + 4) + (v12 << 24) + (v11 << 16) + (*v85 << 8);
+        v65 = (unsigned __int8)PC[4] + (v12 << 24) + (v11 << 16) + (*(unsigned __int8 *)v83 << 8);
         v66 = (unsigned int)(v10 - 104);
-        v6 += 5;
+        PC += 5;
 LABEL_74:
-        v88.m128_i32[v66 + 2] = v65;
-        v7 = v94;
+        v86.m_quad.m128_i32[v66 + 2] = v65;
+        this = v92;
 $propertyCopy_6:
-        if ( v4 == (hkpMoppAabbCastVirtualMachineQueryInt *)&v87 )
+        if ( query == (hkpMoppAabbCastVirtualMachineQueryInt *)&v85 )
           goto LABEL_3;
-        v87 = v4->m_FtoBoffset.m_quad;
-        v88 = v4->m_extents.m_quad;
+        v85.m_quad = (__m128)query->m_FtoBoffset;
+        v86.m_quad = (__m128)query->m_extents;
         v8 = FLOAT_510_0;
-        v89 = v4->m_extentsSum3;
-        v90 = v4->m_shift;
-        *(float *)&v91 = v4->m_FtoBScale;
-        v67 = v4->m_primitiveOffset;
-        v4 = (hkpMoppAabbCastVirtualMachineQueryInt *)&v87;
-        HIDWORD(v91) = v67;
+        m_extentsSum3 = query->m_extentsSum3;
+        m_shift = query->m_shift;
+        *(float *)&v89 = query->m_FtoBScale;
+        v67 = query->m_primitiveOffset;
+        query = (hkpMoppAabbCastVirtualMachineQueryInt *)&v85;
+        HIDWORD(v89) = v67;
         continue;
       case 112:
-        v9 = *((unsigned __int8 *)v6 + 4) + ((*v85 + ((v11 + (v12 << 8)) << 8)) << 8);
-        v96 = v9;
-        v6 = &v7->m_code->m_data.m_data[v9];
+        v9 = (unsigned __int8)PC[4] + ((*(unsigned __int8 *)v83 + ((v11 + (v12 << 8)) << 8)) << 8);
+        v94 = v9;
+        PC = &this->m_code->m_data.m_data[v9];
         continue;
       default:
         __debugbreak();
@@ -636,71 +646,60 @@ $propertyCopy_6:
     }
   }
 }
-        continue;
-      default:
-        __debugbreak();
-        continue;
-    }
-  }
-}
 
 // File Line: 535
 // RVA: 0xDC1730
-void __fastcall hkpMoppAabbCastVirtualMachine::aabbCast(hkpMoppAabbCastVirtualMachine *this, hkpMoppAabbCastVirtualMachine::hkpAabbCastInput *input, hkpCdPointCollector *castCollector, hkpCdPointCollector *startCollector)
+void __fastcall hkpMoppAabbCastVirtualMachine::aabbCast(
+        hkpMoppAabbCastVirtualMachine *this,
+        hkpMoppAabbCastVirtualMachine::hkpAabbCastInput *input,
+        hkpCdPointCollector *castCollector,
+        hkpCdPointCollector *startCollector)
 {
-  hkpCdPointCollector *v4; // rsi
-  hkpCdPointCollector *v5; // rbp
-  hkpMoppAabbCastVirtualMachine::hkpAabbCastInput *v6; // rdi
-  hkpMoppAabbCastVirtualMachine *v7; // rbx
-  __m128 *v8; // rdx
-  hkcdShapeType::ShapeTypeEnum v9; // eax
-  const char *v10; // r8
-  __m128 v11; // xmm2
+  hkpMoppCode *v8; // rdx
+  hkcdShapeType::ShapeTypeEnum m_storage; // eax
+  const char *m_data; // r8
+  hkVector4f v11; // xmm2
   __m128 v12; // xmm3
-  __m128 v13; // xmm2
+  hkVector4f v13; // xmm2
   __m128 v14; // xmm1
   __m128 v15; // xmm2
   bool v16; // zf
-  hkpMoppAabbCastVirtualMachineQueryFloat fQuery; // [rsp+30h] [rbp-68h]
-  hkpMoppAabbCastVirtualMachineQueryInt query; // [rsp+50h] [rbp-48h]
+  hkpMoppAabbCastVirtualMachineQueryFloat fQuery; // [rsp+30h] [rbp-68h] BYREF
+  hkpMoppAabbCastVirtualMachineQueryInt query; // [rsp+50h] [rbp-48h] BYREF
 
-  v4 = startCollector;
-  v5 = castCollector;
-  v6 = input;
-  v7 = this;
   if ( HK_flyingcolors_mopp_2.m_bool
     || (hkpCheckKeycode(), hkpProcessFlyingColors(&HK_flyingcolors_mopp_2), HK_flyingcolors_mopp_2.m_bool) )
   {
-    v7->m_input = v6;
-    v8 = *(__m128 **)&v6->m_moppBody->m_shape[1].m_memSizeAndFlags;
-    v7->m_castCollector = v5;
-    v7->m_startPointCollector = v4;
-    v7->m_code = (hkpMoppCode *)v8;
-    v9 = (unsigned __int8)v6->m_castBody->m_shape->m_type.m_storage;
-    v7->m_earlyOutFraction = 1.0;
-    v7->m_refEarlyOutFraction = 1.0;
-    v7->m_castObjectType = v9;
-    v10 = (const char *)v8[2].m128_u64[0];
+    this->m_input = input;
+    v8 = *(hkpMoppCode **)&input->m_moppBody->m_shape[1].m_memSizeAndFlags;
+    this->m_castCollector = castCollector;
+    this->m_startPointCollector = startCollector;
+    this->m_code = v8;
+    m_storage = (unsigned __int8)input->m_castBody->m_shape->m_type.m_storage;
+    this->m_earlyOutFraction = 1.0;
+    this->m_refEarlyOutFraction = 1.0;
+    this->m_castObjectType = m_storage;
+    m_data = v8->m_data.m_data;
     query.m_FtoBoffset = 0i64;
-    v7->m_ItoFScale = 1.0 / v8[1].m128_f32[3];
-    v11 = v6->m_extents.m_quad;
-    query.m_FtoBScale = v8[1].m128_f32[3] * 0.000015258789;
+    this->m_ItoFScale = 1.0 / v8->m_info.m_offset.m_quad.m128_f32[3];
+    v11.m_quad = (__m128)input->m_extents;
+    query.m_FtoBScale = v8->m_info.m_offset.m_quad.m128_f32[3] * 0.000015258789;
     v12 = _mm_shuffle_ps((__m128)LODWORD(query.m_FtoBScale), (__m128)LODWORD(query.m_FtoBScale), 0);
-    query.m_extents.m_quad = _mm_mul_ps(v11, v12);
-    v13 = v6->m_from.m_quad;
-    query.m_extentsSum3 = (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(query.m_extents.m_quad, query.m_extents.m_quad, 85))
-                                        + COERCE_FLOAT(_mm_shuffle_ps(query.m_extents.m_quad, query.m_extents.m_quad, 0)))
-                                + COERCE_FLOAT(_mm_shuffle_ps(query.m_extents.m_quad, query.m_extents.m_quad, 170)))
+    query.m_extents.m_quad = _mm_mul_ps(v11.m_quad, v12);
+    v13.m_quad = (__m128)input->m_from;
+    query.m_extentsSum3 = (float)((float)(_mm_shuffle_ps(query.m_extents.m_quad, query.m_extents.m_quad, 85).m128_f32[0]
+                                        + _mm_shuffle_ps(query.m_extents.m_quad, query.m_extents.m_quad, 0).m128_f32[0])
+                                + _mm_shuffle_ps(query.m_extents.m_quad, query.m_extents.m_quad, 170).m128_f32[0])
                         * 3.0;
-    v14 = _mm_sub_ps(v6->m_to.m_quad, v8[1]);
-    v15 = _mm_mul_ps(_mm_sub_ps(v13, v8[1]), v12);
+    v14 = _mm_sub_ps(input->m_to.m_quad, v8->m_info.m_offset.m_quad);
+    v15 = _mm_mul_ps(_mm_sub_ps(v13.m_quad, v8->m_info.m_offset.m_quad), v12);
     *(_QWORD *)&query.m_primitiveOffset = 0i64;
     query.m_shift = 0;
-    v16 = *v10 == 13;
+    v16 = *m_data == 13;
     fQuery.m_rayEnds[0].m_quad = v15;
     fQuery.m_rayEnds[1].m_quad = _mm_mul_ps(v14, v12);
-    v7->m_reindexingMask = !v16 - 1;
-    hkpMoppAabbCastVirtualMachine::queryRayOnTree(v7, &query, v10, &fQuery, 0);
+    this->m_reindexingMask = !v16 - 1;
+    hkpMoppAabbCastVirtualMachine::queryRayOnTree(this, &query, m_data, &fQuery, 0);
   }
 }
 

@@ -28,7 +28,7 @@ void dynamic_initializer_for__hkaiAstarOutputParametersClass__()
     &hkaiAstarOutputParameters_Default,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 116

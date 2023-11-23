@@ -2,7 +2,7 @@
 // RVA: 0x1467250
 __int64 dynamic_initializer_for__NetSyncedSimObjectComponent::s_NetSyncedSimObjectComponentList__()
 {
-  return atexit(dynamic_atexit_destructor_for__NetSyncedSimObjectComponent::s_NetSyncedSimObjectComponentList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__NetSyncedSimObjectComponent::s_NetSyncedSimObjectComponentList__);
 }
 
 // File Line: 97

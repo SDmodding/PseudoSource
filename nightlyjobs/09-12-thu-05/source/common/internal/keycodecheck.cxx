@@ -1,9 +1,8 @@
 // File Line: 152
 // RVA: 0xBB5B20
-signed __int64 __fastcall hkaProcessFlyingColors(hkBool *flyingColors)
+__int64 __fastcall hkaProcessFlyingColors(hkBool *flyingColors)
 {
-  hkBool *v1; // r14
-  int v2; // er9
+  int v2; // r9d
   int v3; // ebx
   int v4; // eax
   const char *v5; // rcx
@@ -14,7 +13,7 @@ signed __int64 __fastcall hkaProcessFlyingColors(hkBool *flyingColors)
   char *i; // rcx
   char v11; // dl
   const char *v12; // rax
-  signed __int64 result; // rax
+  __int64 result; // rax
   _BYTE *v14; // rax
   _BYTE *v15; // r8
   __int64 v16; // rsi
@@ -23,7 +22,6 @@ signed __int64 __fastcall hkaProcessFlyingColors(hkBool *flyingColors)
   int v19; // ecx
 
   flyingColors->m_bool = 0;
-  v1 = flyingColors;
   if ( HK_ANIMATION_KEYCODE[0] != 48 )
     goto LABEL_37;
   v2 = -1;
@@ -118,8 +116,6 @@ signed __int64 __fastcall hkaProcessFlyingColors(hkBool *flyingColors)
     if ( !++v14 )
       goto LABEL_37;
   }
-  if ( !v14 )
-    goto LABEL_37;
   v15 = v14 + 1;
   if ( v3 >= 0 )
   {
@@ -128,13 +124,13 @@ signed __int64 __fastcall hkaProcessFlyingColors(hkBool *flyingColors)
     {
       do
       {
-        v19 = (char)(v15++)[1];
+        v19 = (char)*++v15;
         v18 = v19 + 23 * v18;
       }
       while ( (_BYTE)v19 );
     }
     if ( v2 == ((v18 ^ 0x2BF010C9) & 0x7FFFFFFF) )
-      goto LABEL_55;
+      goto LABEL_54;
 LABEL_37:
     hkErrorMessage(
       "Product:hka Key Code is invalid or is for a different product version.\n"
@@ -159,12 +155,12 @@ LABEL_37:
   }
   if ( (unsigned __int64)(v16 - v17 - 1) <= 0xD2D )
   {
-    v1->m_bool = 1;
+    flyingColors->m_bool = 1;
     return 3i64;
   }
-LABEL_55:
+LABEL_54:
   result = 0i64;
-  v1->m_bool = 1;
+  flyingColors->m_bool = 1;
   return result;
 }
 

@@ -1,6 +1,10 @@
 // File Line: 14
 // RVA: 0xE3BDF0
-void __fastcall hkStaticClassNameRegistry::hkStaticClassNameRegistry(hkStaticClassNameRegistry *this, hkClass *const *classes, int classVersion, const char *name)
+void __fastcall hkStaticClassNameRegistry::hkStaticClassNameRegistry(
+        hkStaticClassNameRegistry *this,
+        hkClass *const *classes,
+        int classVersion,
+        const char *name)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_classes = classes;
@@ -12,7 +16,11 @@ void __fastcall hkStaticClassNameRegistry::hkStaticClassNameRegistry(hkStaticCla
 
 // File Line: 20
 // RVA: 0xE3BE20
-void __fastcall hkStaticClassNameRegistry::hkStaticClassNameRegistry(hkStaticClassNameRegistry *this, hkClass *const *classes, int classVersion, const char *name)
+void __fastcall hkStaticClassNameRegistry::hkStaticClassNameRegistry(
+        hkStaticClassNameRegistry *this,
+        hkClass *const *classes,
+        int classVersion,
+        const char *name)
 {
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->vfptr = (hkBaseObjectVtbl *)&hkStaticClassNameRegistry::`vftable;
@@ -31,53 +39,51 @@ const char *__fastcall hkStaticClassNameRegistry::getName(hkStaticClassNameRegis
 
 // File Line: 30
 // RVA: 0xE3BF00
-void __fastcall hkStaticClassNameRegistry::getClasses(hkStaticClassNameRegistry *this, hkArray<hkClass const *,hkContainerHeapAllocator> *classes)
+void __fastcall hkStaticClassNameRegistry::getClasses(
+        hkStaticClassNameRegistry *this,
+        hkArray<hkClass const *,hkContainerHeapAllocator> *classes)
 {
-  hkArray<hkClass const *,hkContainerHeapAllocator> *v2; // r14
-  hkStaticClassNameRegistry *v3; // rsi
-  hkClass *const *v4; // rax
+  hkClass *const *m_classes; // rax
   __int64 v5; // rbx
   int i; // edi
-  __int64 v7; // r15
-  int v8; // er9
+  __int64 m_size; // r15
+  int v8; // r9d
   int v9; // eax
   int v10; // eax
-  hkClass **v11; // rax
-  signed __int64 v12; // rdx
+  hkClass **m_data; // rax
+  hkClass **v12; // rdx
   hkClass *const *v13; // rax
-  signed __int64 v14; // rcx
-  hkResult result; // [rsp+50h] [rbp+8h]
+  __int64 v14; // rcx
+  hkResult result; // [rsp+50h] [rbp+8h] BYREF
 
-  v2 = classes;
-  v3 = this;
   hkStaticClassNameRegistry::checkIfReady(this);
-  v4 = v3->m_classes;
+  m_classes = this->m_classes;
   v5 = 0i64;
-  for ( i = 0; *v4; ++i )
-    ++v4;
-  v7 = v2->m_size;
-  v8 = v7 + i;
-  v9 = v2->m_capacityAndFlags & 0x3FFFFFFF;
-  if ( v9 < (signed int)v7 + i )
+  for ( i = 0; *m_classes; ++i )
+    ++m_classes;
+  m_size = classes->m_size;
+  v8 = m_size + i;
+  v9 = classes->m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v9 < (int)m_size + i )
   {
     v10 = 2 * v9;
     if ( v8 < v10 )
       v8 = v10;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v2, v8, 8);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&classes->m_data, v8, 8);
   }
-  v11 = v2->m_data;
-  v2->m_size += i;
-  v12 = (signed __int64)&v11[v7];
-  v13 = v3->m_classes;
+  m_data = classes->m_data;
+  classes->m_size += i;
+  v12 = &m_data[m_size];
+  v13 = this->m_classes;
   if ( *v13 )
   {
     v14 = 0i64;
     do
     {
       ++v5;
-      *(hkClass **)(v14 + v12) = *v13;
-      v14 = 8 * v5;
-      v13 = &v3->m_classes[v5];
+      v12[v14] = *v13;
+      v14 = v5;
+      v13 = &this->m_classes[v5];
     }
     while ( *v13 );
   }
@@ -87,51 +93,44 @@ void __fastcall hkStaticClassNameRegistry::getClasses(hkStaticClassNameRegistry 
 // RVA: 0xE3BE70
 hkClass *__fastcall hkStaticClassNameRegistry::getClassByName(hkStaticClassNameRegistry *this, const char *className)
 {
-  const char *v2; // rbp
-  hkStaticClassNameRegistry *v3; // rsi
-  hkClass *const *v4; // rax
+  hkClass *const *m_classes; // rax
   int v5; // edi
-  signed __int64 v6; // rbx
-  signed __int64 v7; // rcx
-  const char *v8; // rax
+  __int64 v6; // rbx
+  __int64 v7; // rcx
+  const char *Name; // rax
   bool v9; // zf
 
-  v2 = className;
-  v3 = this;
   hkStaticClassNameRegistry::checkIfReady(this);
-  v4 = v3->m_classes;
+  m_classes = this->m_classes;
   v5 = 0;
   v6 = 0i64;
-  if ( !*v4 )
+  if ( !*m_classes )
     return 0i64;
   v7 = 0i64;
   while ( 1 )
   {
-    v8 = hkClass::getName(v4[v7]);
-    v9 = (unsigned int)hkString::strCmp(v2, v8) == 0;
-    v4 = v3->m_classes;
+    Name = hkClass::getName(m_classes[v7]);
+    v9 = (unsigned int)hkString::strCmp(className, Name) == 0;
+    m_classes = this->m_classes;
     if ( v9 )
       break;
     ++v6;
     ++v5;
     v7 = v6;
-    if ( !v4[v6] )
+    if ( !m_classes[v6] )
       return 0i64;
   }
-  return v4[v5];
+  return m_classes[v5];
 }
 
 // File Line: 58
 // RVA: 0xE3BFD0
 void __fastcall hkStaticClassNameRegistry::checkIfReady(hkStaticClassNameRegistry *this)
 {
-  hkStaticClassNameRegistry *v1; // rbx
-
-  v1 = this;
   if ( !this->m_ready )
   {
-    hkVersionUtil::recomputeClassMemberOffsets(this->m_classes, this->m_classVersion);
-    v1->m_ready = 1;
+    hkVersionUtil::recomputeClassMemberOffsets((hkClass **)this->m_classes, this->m_classVersion);
+    this->m_ready = 1;
   }
 }
 

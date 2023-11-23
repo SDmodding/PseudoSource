@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkpLimitedHingeConstraintDataAtomsClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 83
@@ -28,9 +28,12 @@ hkClass *__fastcall hkpLimitedHingeConstraintData::Atoms::staticClass()
 
 // File Line: 90
 // RVA: 0xD43AC0
-void __fastcall finishLoadedObjecthkpLimitedHingeConstraintDataAtoms(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpLimitedHingeConstraintDataAtoms(
+        hkpLimitedHingeConstraintData::Atoms *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpLimitedHingeConstraintData::Atoms::Atoms);
+  if ( p )
+    hkpLimitedHingeConstraintData::Atoms::Atoms(p, finishing);
 }
 
 // File Line: 96
@@ -70,36 +73,29 @@ hkClass *__fastcall hkpLimitedHingeConstraintData::staticClass()
 
 // File Line: 144
 // RVA: 0xD43AF0
-void __fastcall finishLoadedObjecthkpLimitedHingeConstraintData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpLimitedHingeConstraintData(char *p, hkFinishLoadedObjectFlag finishing)
 {
-  int v2; // edi
-  char *v3; // rbx
-
   if ( p )
   {
-    v2 = finishing;
-    v3 = (char *)p;
-    hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    *(_QWORD *)v3 = &hkpLimitedHingeConstraintData::`vftable;
-    hkpLimitedHingeConstraintData::Atoms::Atoms(
-      (hkpLimitedHingeConstraintData::Atoms *)(v3 + 32),
-      (hkFinishLoadedObjectFlag)v2);
+    hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, finishing);
+    *(_QWORD *)p = &hkpLimitedHingeConstraintData::`vftable;
+    hkpLimitedHingeConstraintData::Atoms::Atoms((hkpLimitedHingeConstraintData::Atoms *)(p + 32), finishing);
   }
 }
 
 // File Line: 150
 // RVA: 0xD43B30
-void __fastcall cleanupLoadedObjecthkpLimitedHingeConstraintData(void *p)
+void __fastcall cleanupLoadedObjecthkpLimitedHingeConstraintData(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 154
 // RVA: 0xD43B40
 hkBaseObjectVtbl *__fastcall getVtablehkpLimitedHingeConstraintData()
 {
-  hkpConstraintData v1; // [rsp+20h] [rbp-138h]
-  hkpLimitedHingeConstraintData::Atoms v2; // [rsp+40h] [rbp-118h]
+  hkpConstraintData v1; // [rsp+20h] [rbp-138h] BYREF
+  hkpLimitedHingeConstraintData::Atoms v2; // [rsp+40h] [rbp-118h] BYREF
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
   v1.vfptr = (hkBaseObjectVtbl *)&hkpLimitedHingeConstraintData::`vftable;
@@ -118,8 +114,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpLimitedHingeConstraintDataTypeInfo
   hkpLimitedHingeConstraintDataTypeInfo.m_typeName = "hkpLimitedHingeConstraintData";
   hkpLimitedHingeConstraintDataTypeInfo.m_vtable = result;
   hkpLimitedHingeConstraintDataTypeInfo.m_scopedName = "!hkpLimitedHingeConstraintData";
-  hkpLimitedHingeConstraintDataTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpLimitedHingeConstraintData;
-  hkpLimitedHingeConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpLimitedHingeConstraintData;
+  hkpLimitedHingeConstraintDataTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpLimitedHingeConstraintData;
+  hkpLimitedHingeConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpLimitedHingeConstraintData;
   return result;
 }
 

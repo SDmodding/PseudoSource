@@ -3,7 +3,7 @@
 __int64 dynamic_initializer_for__CarCombat::mAttackEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&CarCombat::mAttackEnum, CarCombat::mAttackName, 7, 0i64);
-  return atexit(dynamic_atexit_destructor_for__CarCombat::mAttackEnum__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__CarCombat::mAttackEnum__);
 }
 
 // File Line: 25
@@ -15,7 +15,7 @@ __int64 dynamic_initializer_for__CarCombat::mFormationAttackEnum__()
     CarCombat::mFormationAttackName,
     4,
     0i64);
-  return atexit(dynamic_atexit_destructor_for__CarCombat::mFormationAttackEnum__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__CarCombat::mFormationAttackEnum__);
 }
 
 // File Line: 37
@@ -23,7 +23,7 @@ __int64 dynamic_initializer_for__CarCombat::mFormationAttackEnum__()
 __int64 dynamic_initializer_for__CarCombat::mPositionEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&CarCombat::mPositionEnum, CarCombat::mPositionName, 7, 0i64);
-  return atexit(dynamic_atexit_destructor_for__CarCombat::mPositionEnum__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__CarCombat::mPositionEnum__);
 }
 
 // File Line: 48
@@ -31,7 +31,7 @@ __int64 dynamic_initializer_for__CarCombat::mPositionEnum__()
 __int64 dynamic_initializer_for__CarCombat::mSideEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&CarCombat::mSideEnum, CarCombat::mSideName, 4, 0i64);
-  return atexit(dynamic_atexit_destructor_for__CarCombat::mSideEnum__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__CarCombat::mSideEnum__);
 }
 
 // File Line: 61
@@ -39,7 +39,7 @@ __int64 dynamic_initializer_for__CarCombat::mSideEnum__()
 __int64 dynamic_initializer_for__CarAI::mModeEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&CarAI::mModeEnum, CarAI::mModeName, 8, 0i64);
-  return atexit(dynamic_atexit_destructor_for__CarAI::mModeEnum__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__CarAI::mModeEnum__);
 }
 
 // File Line: 77
@@ -47,7 +47,7 @@ __int64 dynamic_initializer_for__CarAI::mModeEnum__()
 __int64 dynamic_initializer_for__CarAI::mRoleEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&CarAI::mRoleEnum, CarAI::mRoleName, 10, 0i64);
-  return atexit(dynamic_atexit_destructor_for__CarAI::mRoleEnum__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__CarAI::mRoleEnum__);
 }
 
 // File Line: 85
@@ -55,6 +55,6 @@ __int64 dynamic_initializer_for__CarAI::mRoleEnum__()
 __int64 dynamic_initializer_for__CarAI::mEscortModeEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&CarAI::mEscortModeEnum, CarAI::mEscortModeName, 2, 0i64);
-  return atexit(dynamic_atexit_destructor_for__CarAI::mEscortModeEnum__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__CarAI::mEscortModeEnum__);
 }
 

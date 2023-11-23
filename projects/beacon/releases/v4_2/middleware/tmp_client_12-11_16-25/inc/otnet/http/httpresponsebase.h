@@ -28,8 +28,8 @@ bool __fastcall OSuite::ZHttpResponseBase::IsHandled(OSuite::ZHttpResponseBase *
 
 // File Line: 64
 // RVA: 0xEDFEF8
-OSuite::ZObjectVtbl **__fastcall OSuite::ZHttpResponseBase::GetOSErrors(OSuite::ZHttpResponseBase *this)
+OSuite::TList<OSuite::OSError> *__fastcall OSuite::ZHttpResponseBase::GetOSErrors(OSuite::ZHttpResponseBase *this)
 {
-  return &this->m_CacheControl.m_Comparer.vfptr;
+  return (OSuite::TList<OSuite::OSError> *)&this->m_CacheControl.m_Comparer.OSuite::ZObject;
 }
 

@@ -3,7 +3,7 @@
 __int64 dynamic_initializer_for__cameraChangeTypeEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&cameraChangeTypeEnum, gCameraTypeStringList, 2, 0i64);
-  return atexit(dynamic_atexit_destructor_for__cameraChangeTypeEnum__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__cameraChangeTypeEnum__);
 }
 
 // File Line: 27
@@ -92,7 +92,7 @@ __int64 dynamic_initializer_for__cameraAnimationEnum__()
     gCameraAnimationPlayModeStringList,
     3,
     0i64);
-  return atexit(dynamic_atexit_destructor_for__cameraAnimationEnum__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__cameraAnimationEnum__);
 }
 
 // File Line: 152
@@ -110,54 +110,46 @@ __int64 dynamic_initializer_for__CameraAnimationTrack::sClassNameUID__()
 // RVA: 0x2DE2D0
 void __fastcall CameraAnimationTrack::CameraAnimationTrack(CameraAnimationTrack *this)
 {
-  CameraAnimationTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, CameraAnimationTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CameraAnimationTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CameraAnimationTrack::`vftable;
-  v1->mAnimationPlayMode.mValue = 0;
-  v1->mStartFrame = 0.0;
-  v1->mEndFrame = 1.0;
-  v1->mFov = 55.0;
-  v1->mFocalDistance = 5.0;
-  v1->mInFocusRange = 100.0;
-  *(_QWORD *)&v1->mNearRange = 1084227584i64;
-  *(_QWORD *)&v1->mFarRange = 1084227584i64;
-  v1->mExitRateEyeMin = 0.5;
-  v1->mExitRateEyeMax = 0.5;
-  v1->mExitRateOrientMin = 0.5;
-  *(_QWORD *)&v1->mExitRateOrientMax = 1056964608i64;
-  v1->mExitGotoRise = 0.0;
-  v1->mAnimationName.mUID = -1;
-  *(_QWORD *)&v1->mPreserveMotion = 1i64;
-  *(_WORD *)&v1->mSmoothExitGoto = 0;
-  v1->mMaster = 1;
-  v1->mAnimationName.mUID = gStaticSymbolUC_none.mUID;
+  ITrack::ITrack(this, CameraAnimationTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<CameraAnimationTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&CameraAnimationTrack::`vftable;
+  this->mAnimationPlayMode.mValue = 0;
+  this->mStartFrame = 0.0;
+  this->mEndFrame = 1.0;
+  this->mFov = 55.0;
+  this->mFocalDistance = 5.0;
+  this->mInFocusRange = 100.0;
+  *(_QWORD *)&this->mNearRange = 1084227584i64;
+  *(_QWORD *)&this->mFarRange = 1084227584i64;
+  this->mExitRateEyeMin = 0.5;
+  this->mExitRateEyeMax = 0.5;
+  this->mExitRateOrientMin = 0.5;
+  *(_QWORD *)&this->mExitRateOrientMax = 1056964608i64;
+  this->mExitGotoRise = 0.0;
+  this->mAnimationName.mUID = -1;
+  *(_QWORD *)&this->mPreserveMotion = 1i64;
+  *(_WORD *)&this->mSmoothExitGoto = 0;
+  this->mMaster = 1;
+  this->mAnimationName.mUID = gStaticSymbolUC_none.mUID;
 }
 
 // File Line: 223
 // RVA: 0x2E3740
 void __fastcall CameraAnimationTrack::~CameraAnimationTrack(CameraAnimationTrack *this)
 {
-  CameraAnimationTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&CameraAnimationTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 303
@@ -175,17 +167,14 @@ __int64 dynamic_initializer_for__CameraDOFTrack::sClassNameUID__()
 // RVA: 0x2DE390
 void __fastcall CameraDOFTrack::CameraDOFTrack(CameraDOFTrack *this)
 {
-  CameraDOFTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, CameraDOFTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CameraDOFTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CameraDOFTrack::`vftable;
-  v1->rFocalRange = 10.0;
-  v1->rNearRange = 1.0;
-  v1->rFarRange = 10.0;
-  v1->rNearBlur = 0.2;
-  v1->rFarBlur = 0.2;
+  ITrack::ITrack(this, CameraDOFTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<CameraDOFTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&CameraDOFTrack::`vftable;
+  this->rFocalRange = 10.0;
+  this->rNearRange = 1.0;
+  this->rFarRange = 10.0;
+  this->rNearBlur = 0.2;
+  this->rFarBlur = 0.2;
 }
 
 // File Line: 337
@@ -223,36 +212,33 @@ __int64 dynamic_initializer_for__SubjectFollowOverrideChooseTrack::sClassNameUID
 
 // File Line: 404
 // RVA: 0x2E12F0
-void __fastcall SubjectFollowOverrideChooseTrack::SubjectFollowOverrideChooseTrack(SubjectFollowOverrideChooseTrack *this)
+void __fastcall SubjectFollowOverrideChooseTrack::SubjectFollowOverrideChooseTrack(
+        SubjectFollowOverrideChooseTrack *this)
 {
-  SubjectFollowOverrideChooseTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, SubjectFollowOverrideChooseTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SubjectFollowOverrideChooseTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SubjectFollowOverrideChooseTrack::`vftable;
-  v1->mFollowContextLeftOverride.mOffset = 1i64;
-  BinString::Set(&v1->mFollowContextLeftOverride, &customWorldMapCaption);
-  v1->mFollowContextRightOverride.mOffset = 1i64;
-  BinString::Set(&v1->mFollowContextRightOverride, &customWorldMapCaption);
-  v1->mOriginPrimary.mOffset = 1i64;
-  BinString::Set(&v1->mOriginPrimary, "hip");
-  v1->mOriginSecondary.mOffset = 1i64;
-  BinString::Set(&v1->mOriginSecondary, "pip");
-  v1->mFollowCameraType = 0;
-  *(_WORD *)&v1->bFollowCameraTypesAll = 256;
+  ITrack::ITrack(this, SubjectFollowOverrideChooseTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<SubjectFollowOverrideChooseTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&SubjectFollowOverrideChooseTrack::`vftable;
+  this->mFollowContextLeftOverride.mOffset = 1i64;
+  BinString::Set(&this->mFollowContextLeftOverride, &customCaption);
+  this->mFollowContextRightOverride.mOffset = 1i64;
+  BinString::Set(&this->mFollowContextRightOverride, &customCaption);
+  this->mOriginPrimary.mOffset = 1i64;
+  BinString::Set(&this->mOriginPrimary, "hip");
+  this->mOriginSecondary.mOffset = 1i64;
+  BinString::Set(&this->mOriginSecondary, "pip");
+  this->mFollowCameraType = 0;
+  *(_WORD *)&this->bFollowCameraTypesAll = 256;
 }
 
 // File Line: 413
 // RVA: 0x2E12B0
-void __fastcall SubjectFollowOverrideChooseTrack::SubjectFollowOverrideChooseTrack(SubjectFollowOverrideChooseTrack *this, MemImageLoadFlag flag)
+void __fastcall SubjectFollowOverrideChooseTrack::SubjectFollowOverrideChooseTrack(
+        SubjectFollowOverrideChooseTrack *this,
+        MemImageLoadFlag flag)
 {
-  SubjectFollowOverrideChooseTrack *v2; // rbx
-
-  v2 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, flag);
-  v2->vfptr = (Expression::IMemberMapVtbl *)&Track<SubjectFollowOverrideChooseTask>::`vftable;
-  v2->vfptr = (Expression::IMemberMapVtbl *)&SubjectFollowOverrideChooseTrack::`vftable;
+  ITrack::ITrack(this, flag);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<SubjectFollowOverrideChooseTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&SubjectFollowOverrideChooseTrack::`vftable;
 }
 
 // File Line: 432
@@ -270,23 +256,20 @@ __int64 dynamic_initializer_for__CameraFollowGotoTrack::sClassNameUID__()
 // RVA: 0x2DE400
 void __fastcall CameraFollowGotoTrack::CameraFollowGotoTrack(CameraFollowGotoTrack *this)
 {
-  CameraFollowGotoTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, CameraFollowGotoTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CameraFollowGotoTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CameraFollowGotoTrack::`vftable;
-  v1->rGotoRise = 1.0;
-  v1->rGotoRiseRate = 2.5;
-  v1->rGotoRisePatience = 1.0;
-  v1->rGotoRadius = 3.0;
-  v1->rGotoRadiusRate = 5.0;
-  *(_QWORD *)&v1->rGotoRadiusPatience = 1065353216i64;
-  v1->rGotoAngleRate = 2.0;
-  *(_QWORD *)&v1->rGotoAnglePatience = 1065353216i64;
-  *(_DWORD *)&v1->bGotoRise = 0;
-  *(_DWORD *)&v1->bGotoAngleWorldSpace = 0x10000;
-  *(_WORD *)&v1->bGotoAngleFarthest = 0;
+  ITrack::ITrack(this, CameraFollowGotoTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<CameraFollowGotoTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&CameraFollowGotoTrack::`vftable;
+  this->rGotoRise = 1.0;
+  this->rGotoRiseRate = 2.5;
+  this->rGotoRisePatience = 1.0;
+  this->rGotoRadius = 3.0;
+  this->rGotoRadiusRate = 5.0;
+  *(_QWORD *)&this->rGotoRadiusPatience = 1065353216i64;
+  this->rGotoAngleRate = 2.0;
+  *(_QWORD *)&this->rGotoAnglePatience = 1065353216i64;
+  *(_DWORD *)&this->bGotoRise = 0;
+  *(_DWORD *)&this->bGotoAngleWorldSpace = 0x10000;
+  *(_WORD *)&this->bGotoAngleFarthest = 0;
 }
 
 // File Line: 514
@@ -304,14 +287,11 @@ __int64 dynamic_initializer_for__CameraFollowTargetTrack::sClassNameUID__()
 // RVA: 0x2DE490
 void __fastcall CameraFollowTargetTrack::CameraFollowTargetTrack(CameraFollowTargetTrack *this)
 {
-  CameraFollowTargetTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, CameraFollowTargetTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CameraFollowTargetTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CameraFollowTargetTrack::`vftable;
-  v1->m_TargetType = 1;
-  v1->mFollowBoneName.mUID = -1;
+  ITrack::ITrack(this, CameraFollowTargetTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<CameraFollowTargetTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&CameraFollowTargetTrack::`vftable;
+  this->m_TargetType = 1;
+  this->mFollowBoneName.mUID = -1;
 }
 
 // File Line: 535
@@ -329,13 +309,10 @@ __int64 dynamic_initializer_for__CameraSetSniperModeTrack::sClassNameUID__()
 // RVA: 0x2DE4E0
 void __fastcall CameraSetSniperModeTrack::CameraSetSniperModeTrack(CameraSetSniperModeTrack *this)
 {
-  CameraSetSniperModeTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, CameraSetSniperModeTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<CameraSetSniperModeTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CameraSetSniperModeTrack::`vftable;
-  v1->m_Enabled = 0;
+  ITrack::ITrack(this, CameraSetSniperModeTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<CameraSetSniperModeTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&CameraSetSniperModeTrack::`vftable;
+  this->m_Enabled = 0;
 }
 
 // File Line: 557

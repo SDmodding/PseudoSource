@@ -28,17 +28,17 @@ hkClass *__fastcall hkaReferencePoseAnimation::staticClass()
 
 // File Line: 65
 // RVA: 0xB1DC40
-void __fastcall finishLoadedObjecthkaReferencePoseAnimation(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaReferencePoseAnimation(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaReferencePoseAnimation::`vftable;
+    *p = &hkaReferencePoseAnimation::`vftable;
 }
 
 // File Line: 71
 // RVA: 0xB1DC60
-void __fastcall cleanupLoadedObjecthkaReferencePoseAnimation(void *p)
+void __fastcall cleanupLoadedObjecthkaReferencePoseAnimation(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 75
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkaReferencePoseAnimationTypeInfo__()
   hkaReferencePoseAnimationTypeInfo.m_typeName = "hkaReferencePoseAnimation";
   hkaReferencePoseAnimationTypeInfo.m_vtable = result;
   hkaReferencePoseAnimationTypeInfo.m_scopedName = "!hkaReferencePoseAnimation";
-  hkaReferencePoseAnimationTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaReferencePoseAnimation;
-  hkaReferencePoseAnimationTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaReferencePoseAnimation;
+  hkaReferencePoseAnimationTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaReferencePoseAnimation;
+  hkaReferencePoseAnimationTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaReferencePoseAnimation;
   return result;
 }
 

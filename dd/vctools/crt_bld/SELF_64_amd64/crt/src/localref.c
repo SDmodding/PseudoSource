@@ -2,40 +2,40 @@
 // RVA: 0x12C8E34
 void __fastcall _addlocaleref(threadlocaleinfostruct *ptloci)
 {
-  int *v1; // rax
-  int *v2; // rax
-  int *v3; // rax
-  int *v4; // rax
-  volatile signed __int32 **v5; // rax
-  signed __int64 v6; // r8
+  int *lconv_intl_refcount; // rax
+  int *lconv_mon_refcount; // rax
+  int *lconv_num_refcount; // rax
+  int *ctype1_refcount; // rax
+  int **p_wrefcount; // rax
+  __int64 v6; // r8
   volatile signed __int32 *v7; // rdx
 
   _InterlockedIncrement(&ptloci->refcount);
-  v1 = ptloci->lconv_intl_refcount;
-  if ( v1 )
-    _InterlockedIncrement(v1);
-  v2 = ptloci->lconv_mon_refcount;
-  if ( v2 )
-    _InterlockedIncrement(v2);
-  v3 = ptloci->lconv_num_refcount;
-  if ( v3 )
-    _InterlockedIncrement(v3);
-  v4 = ptloci->ctype1_refcount;
-  if ( v4 )
-    _InterlockedIncrement(v4);
-  v5 = (volatile signed __int32 **)&ptloci->lc_category[0].wrefcount;
+  lconv_intl_refcount = ptloci->lconv_intl_refcount;
+  if ( lconv_intl_refcount )
+    _InterlockedIncrement(lconv_intl_refcount);
+  lconv_mon_refcount = ptloci->lconv_mon_refcount;
+  if ( lconv_mon_refcount )
+    _InterlockedIncrement(lconv_mon_refcount);
+  lconv_num_refcount = ptloci->lconv_num_refcount;
+  if ( lconv_num_refcount )
+    _InterlockedIncrement(lconv_num_refcount);
+  ctype1_refcount = ptloci->ctype1_refcount;
+  if ( ctype1_refcount )
+    _InterlockedIncrement(ctype1_refcount);
+  p_wrefcount = &ptloci->lc_category[0].wrefcount;
   v6 = 6i64;
   do
   {
-    if ( *(v5 - 2) != (volatile signed __int32 *)_wclocalestr && *v5 )
-      _InterlockedIncrement(*v5);
-    if ( *(v5 - 3) )
+    if ( *(p_wrefcount - 2) != (int *)_wclocalestr && *p_wrefcount )
+      _InterlockedIncrement(*p_wrefcount);
+    if ( *(p_wrefcount - 3) )
     {
-      v7 = *(v5 - 1);
+      v7 = *(p_wrefcount - 1);
       if ( v7 )
         _InterlockedIncrement(v7);
     }
-    v5 += 4;
+    p_wrefcount += 4;
     --v6;
   }
   while ( v6 );
@@ -46,42 +46,42 @@ void __fastcall _addlocaleref(threadlocaleinfostruct *ptloci)
 // RVA: 0x12C9058
 threadlocaleinfostruct *__fastcall _removelocaleref(threadlocaleinfostruct *ptloci)
 {
-  int *v1; // rax
-  int *v2; // rax
-  int *v3; // rax
-  int *v4; // rax
-  volatile signed __int32 **v5; // rax
-  signed __int64 v6; // r8
+  int *lconv_intl_refcount; // rax
+  int *lconv_mon_refcount; // rax
+  int *lconv_num_refcount; // rax
+  int *ctype1_refcount; // rax
+  int **p_wrefcount; // rax
+  __int64 v6; // r8
   volatile signed __int32 *v7; // rdx
 
   if ( ptloci )
   {
     _InterlockedAdd(&ptloci->refcount, 0xFFFFFFFF);
-    v1 = ptloci->lconv_intl_refcount;
-    if ( v1 )
-      _InterlockedAdd(v1, 0xFFFFFFFF);
-    v2 = ptloci->lconv_mon_refcount;
-    if ( v2 )
-      _InterlockedAdd(v2, 0xFFFFFFFF);
-    v3 = ptloci->lconv_num_refcount;
-    if ( v3 )
-      _InterlockedAdd(v3, 0xFFFFFFFF);
-    v4 = ptloci->ctype1_refcount;
-    if ( v4 )
-      _InterlockedAdd(v4, 0xFFFFFFFF);
-    v5 = (volatile signed __int32 **)&ptloci->lc_category[0].wrefcount;
+    lconv_intl_refcount = ptloci->lconv_intl_refcount;
+    if ( lconv_intl_refcount )
+      _InterlockedAdd(lconv_intl_refcount, 0xFFFFFFFF);
+    lconv_mon_refcount = ptloci->lconv_mon_refcount;
+    if ( lconv_mon_refcount )
+      _InterlockedAdd(lconv_mon_refcount, 0xFFFFFFFF);
+    lconv_num_refcount = ptloci->lconv_num_refcount;
+    if ( lconv_num_refcount )
+      _InterlockedAdd(lconv_num_refcount, 0xFFFFFFFF);
+    ctype1_refcount = ptloci->ctype1_refcount;
+    if ( ctype1_refcount )
+      _InterlockedAdd(ctype1_refcount, 0xFFFFFFFF);
+    p_wrefcount = &ptloci->lc_category[0].wrefcount;
     v6 = 6i64;
     do
     {
-      if ( *(v5 - 2) != (volatile signed __int32 *)_wclocalestr && *v5 )
-        _InterlockedAdd(*v5, 0xFFFFFFFF);
-      if ( *(v5 - 3) )
+      if ( *(p_wrefcount - 2) != (int *)_wclocalestr && *p_wrefcount )
+        _InterlockedAdd(*p_wrefcount, 0xFFFFFFFF);
+      if ( *(p_wrefcount - 3) )
       {
-        v7 = *(v5 - 1);
+        v7 = *(p_wrefcount - 1);
         if ( v7 )
           _InterlockedAdd(v7, 0xFFFFFFFF);
       }
-      v5 += 4;
+      p_wrefcount += 4;
       --v6;
     }
     while ( v6 );
@@ -94,104 +94,102 @@ threadlocaleinfostruct *__fastcall _removelocaleref(threadlocaleinfostruct *ptlo
 // RVA: 0x12C8EC0
 void __fastcall _freetlocinfo(threadlocaleinfostruct *ptloci)
 {
-  lconv *v1; // rax
-  threadlocaleinfostruct *v2; // rbx
-  int *v3; // rax
-  int *v4; // rcx
-  int *v5; // rcx
-  int *v6; // rax
-  __lc_time_data *v7; // rcx
-  void **v8; // rsi
-  int **v9; // rdi
-  signed __int64 v10; // rbp
+  lconv *lconv; // rax
+  int *lconv_intl_refcount; // rax
+  int *lconv_mon_refcount; // rcx
+  int *lconv_num_refcount; // rcx
+  int *ctype1_refcount; // rax
+  __lc_time_data *lc_time_curr; // rcx
+  void **locale_name; // rsi
+  int **p_wrefcount; // rdi
+  __int64 v10; // rbp
   int *v11; // rcx
   _DWORD *v12; // rcx
 
-  v1 = ptloci->lconv;
-  v2 = ptloci;
-  if ( v1 )
+  lconv = ptloci->lconv;
+  if ( lconv )
   {
-    if ( v1 != &_lconv_c )
+    if ( lconv != &_lconv_c )
     {
-      v3 = ptloci->lconv_intl_refcount;
-      if ( v3 )
+      lconv_intl_refcount = ptloci->lconv_intl_refcount;
+      if ( lconv_intl_refcount )
       {
-        if ( !*v3 )
+        if ( !*lconv_intl_refcount )
         {
-          v4 = ptloci->lconv_mon_refcount;
-          if ( v4 && !*v4 )
+          lconv_mon_refcount = ptloci->lconv_mon_refcount;
+          if ( lconv_mon_refcount && !*lconv_mon_refcount )
           {
-            free(v4);
-            _free_lconv_mon(v2->lconv);
+            free(lconv_mon_refcount);
+            _free_lconv_mon(ptloci->lconv);
           }
-          v5 = v2->lconv_num_refcount;
-          if ( v5 && !*v5 )
+          lconv_num_refcount = ptloci->lconv_num_refcount;
+          if ( lconv_num_refcount && !*lconv_num_refcount )
           {
-            free(v5);
-            _free_lconv_num(v2->lconv);
+            free(lconv_num_refcount);
+            _free_lconv_num(ptloci->lconv);
           }
-          free(v2->lconv_intl_refcount);
-          free(v2->lconv);
+          free(ptloci->lconv_intl_refcount);
+          free(ptloci->lconv);
         }
       }
     }
   }
-  v6 = v2->ctype1_refcount;
-  if ( v6 && !*v6 )
+  ctype1_refcount = ptloci->ctype1_refcount;
+  if ( ctype1_refcount && !*ctype1_refcount )
   {
-    free(v2->ctype1 - 127);
-    free((void *)(v2->pclmap - 128));
-    free((void *)(v2->pcumap - 128));
-    free(v2->ctype1_refcount);
+    free(ptloci->ctype1 - 127);
+    free((void *)(ptloci->pclmap - 128));
+    free((void *)(ptloci->pcumap - 128));
+    free(ptloci->ctype1_refcount);
   }
-  v7 = v2->lc_time_curr;
-  if ( v7 != &_lc_time_c && !v7->refcount )
+  lc_time_curr = ptloci->lc_time_curr;
+  if ( lc_time_curr != &_lc_time_c && !lc_time_curr->refcount )
   {
-    _free_lc_time(v7);
-    free(v2->lc_time_curr);
+    _free_lc_time(lc_time_curr);
+    free(ptloci->lc_time_curr);
   }
-  v8 = (void **)v2->locale_name;
-  v9 = &v2->lc_category[0].wrefcount;
+  locale_name = (void **)ptloci->locale_name;
+  p_wrefcount = &ptloci->lc_category[0].wrefcount;
   v10 = 6i64;
   do
   {
-    if ( *(v9 - 2) != (int *)_wclocalestr )
+    if ( *(p_wrefcount - 2) != (int *)_wclocalestr )
     {
-      v11 = *v9;
-      if ( *v9 )
+      v11 = *p_wrefcount;
+      if ( *p_wrefcount )
       {
         if ( !*v11 )
         {
           free(v11);
-          free(*v8);
+          free(*locale_name);
         }
       }
     }
-    if ( *(v9 - 3) )
+    if ( *(p_wrefcount - 3) )
     {
-      v12 = *(v9 - 1);
+      v12 = *(p_wrefcount - 1);
       if ( v12 )
       {
         if ( !*v12 )
           free(v12);
       }
     }
-    ++v8;
-    v9 += 4;
+    ++locale_name;
+    p_wrefcount += 4;
     --v10;
   }
   while ( v10 );
-  free(v2);
+  free(ptloci);
 }
 
 // File Line: 217
 // RVA: 0x12C9174
-threadlocaleinfostruct *__fastcall updatetlocinfoEx_nolock(threadlocaleinfostruct **pptlocid, threadlocaleinfostruct *ptlocis)
+threadlocaleinfostruct *__fastcall updatetlocinfoEx_nolock(
+        threadlocaleinfostruct **pptlocid,
+        threadlocaleinfostruct *ptlocis)
 {
-  threadlocaleinfostruct *v2; // rdi
   threadlocaleinfostruct *v3; // rbx
 
-  v2 = ptlocis;
   if ( !ptlocis || !pptlocid )
     return 0i64;
   v3 = *pptlocid;
@@ -206,7 +204,7 @@ threadlocaleinfostruct *__fastcall updatetlocinfoEx_nolock(threadlocaleinfostruc
         _freetlocinfo(v3);
     }
   }
-  return v2;
+  return ptlocis;
 }
 
 // File Line: 282
@@ -215,22 +213,22 @@ threadlocaleinfostruct *__fastcall _updatetlocinfo()
 {
   _tiddata *v0; // rax
   _tiddata *v1; // rbx
-  threadlocaleinfostruct *v2; // rbx
+  threadlocaleinfostruct *ptlocinfo; // rbx
 
   v0 = getptd();
   v1 = v0;
-  if ( _globallocalestatus & v0->_ownlocale && v0->ptlocinfo )
+  if ( (_globallocalestatus & v0->_ownlocale) != 0 && v0->ptlocinfo )
   {
-    v2 = getptd()->ptlocinfo;
+    ptlocinfo = getptd()->ptlocinfo;
   }
   else
   {
     lock(12);
-    v2 = updatetlocinfoEx_nolock(&v1->ptlocinfo, _ptlocinfo);
+    ptlocinfo = updatetlocinfoEx_nolock(&v1->ptlocinfo, _ptlocinfo);
     unlock(12);
   }
-  if ( !v2 )
+  if ( !ptlocinfo )
     amsg_exit(32);
-  return v2;
+  return ptlocinfo;
 }
 

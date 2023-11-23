@@ -1,14 +1,20 @@
 // File Line: 27
 // RVA: 0xC1D460
-__int64 __fastcall hkaiVolumePathSmoothingUtil::findSmoothedPath(hkaiStreamingCollection::InstanceInfo *sectionInfo, hkArray<unsigned int,hkContainerHeapAllocator> *visitedCells, unsigned int startCellKey, hkVector4f *startPoint, hkVector4f *endPoint, hkArray<hkaiPath::PathPoint,hkContainerHeapAllocator> *pathArrayOut, hkaiPath::PathPoint *pathPtrOut, int maxPathLength)
+__int64 __fastcall hkaiVolumePathSmoothingUtil::findSmoothedPath(
+        hkaiStreamingCollection::InstanceInfo *sectionInfo,
+        hkArray<unsigned int,hkContainerHeapAllocator> *visitedCells,
+        unsigned int startCellKey,
+        hkVector4f *startPoint,
+        hkVector4f *endPoint,
+        hkArray<hkaiPath::PathPoint,hkContainerHeapAllocator> *pathArrayOut,
+        hkaiPath::PathPoint *pathPtrOut,
+        int maxPathLength)
 {
-  unsigned int v8; // er15
+  unsigned int v8; // r15d
   int v9; // ebp
-  hkVector4f *v10; // rbx
-  int v11; // er13
-  hkArray<unsigned int,hkContainerHeapAllocator> *v12; // r14
-  hkLifoAllocator *v13; // rax
-  _OWORD *v14; // rdi
+  int v11; // r13d
+  hkLifoAllocator *Value; // rax
+  hkVector4f *m_cur; // rdi
   int v15; // edx
   char *v16; // rcx
   hkLifoAllocator *v17; // rax
@@ -20,42 +26,42 @@ __int64 __fastcall hkaiVolumePathSmoothingUtil::findSmoothedPath(hkaiStreamingCo
   int v23; // edx
   char *v24; // rcx
   unsigned int v25; // edx
-  signed int v26; // ebx
-  signed int v27; // er11
+  int v26; // ebx
+  int v27; // r11d
   int v28; // ebp
-  signed __int64 v29; // r13
-  unsigned int v30; // er9
-  __m128 *v31; // r8
-  __m128i v32; // xmm3
-  __m128 *v33; // rax
-  __m128i v34; // xmm1
-  __m128i v35; // xmm3
-  __m128i v36; // xmm1
-  __m128 *v37; // rdx
-  __m128 v38; // xmm7
-  __m128 v39; // xmm0
-  __m128 v40; // xmm6
-  __m128i v41; // xmm2
-  __m128 *v42; // rax
-  __m128 v43; // xmm7
-  __m128 v44; // xmm6
+  __int64 v29; // r13
+  unsigned int v30; // r10d
+  hkaiNavVolumeInstance *m_volumeInstancePtr; // r8
+  __m128 *m_pntr; // rax
+  __m128i v33; // xmm1
+  __m128i v34; // xmm3
+  hkaiNavVolumeInstance *v35; // rdx
+  __m128i v36; // xmm0
+  __m128 v37; // xmm7
+  __m128 v38; // xmm0
+  __m128 v39; // xmm6
+  hkaiNavVolume *v40; // rax
+  __m128 v41; // xmm7
+  __m128 v42; // xmm6
+  __m128i v43; // xmm1
+  __m128i v44; // xmm2
   __m128i v45; // xmm1
-  __m128i v46; // xmm2
-  __m128i v47; // xmm1
-  __m128 v48; // xmm4
-  __m128 v49; // xmm0
-  __m128 v50; // xmm1
+  __m128 v46; // xmm4
+  __m128 v47; // xmm0
+  __m128 v48; // xmm1
+  __m128 v49; // xmm3
+  __m128 m_quad; // xmm2
   __m128 v51; // xmm6
   __m128 v52; // xmm7
   __m128 v53; // xmm0
   __m128 v54; // xmm7
   __m128 *v55; // rcx
-  signed __int64 v56; // rax
+  __int64 v56; // rax
   __int64 v57; // rax
-  signed __int64 v58; // r8
+  __int64 v58; // r8
   __m128 *v59; // rcx
-  __m128 *v60; // rax
-  signed __int64 v61; // rdx
+  __m128 *p_m_quad; // rax
+  __int64 v61; // rdx
   __m128 v62; // xmm7
   __m128 v63; // xmm8
   __m128 v64; // xmm9
@@ -64,7 +70,7 @@ __int64 __fastcall hkaiVolumePathSmoothingUtil::findSmoothedPath(hkaiStreamingCo
   __m128 v67; // xmm0
   __m128 v68; // xmm2
   __m128 v69; // xmm3
-  __m128 v70; // xmm4
+  __m128 v70; // xmm6
   __m128 v71; // xmm6
   __m128 v72; // xmm2
   __m128 v73; // xmm6
@@ -76,55 +82,46 @@ __int64 __fastcall hkaiVolumePathSmoothingUtil::findSmoothedPath(hkaiStreamingCo
   __m128 v79; // xmm0
   __m128 v80; // xmm1
   __m128 v81; // xmm5
-  signed __int64 v82; // rbx
-  __m128i *v83; // r14
-  int v84; // er9
+  __int64 v82; // rbx
+  __m128 *v83; // r14
+  int v84; // r9d
   char v85; // al
-  signed int v86; // er13
+  signed int v86; // r13d
   hkLifoAllocator *v87; // rax
-  int v88; // er8
+  int v88; // r8d
   signed int v89; // ebx
   hkLifoAllocator *v90; // rcx
-  int v91; // er8
+  int v91; // r8d
   signed int v92; // ebp
   hkLifoAllocator *v93; // rcx
-  int v94; // er8
-  signed int v96; // [rsp+30h] [rbp-F8h]
-  int v97; // [rsp+34h] [rbp-F4h]
-  signed int v98; // [rsp+38h] [rbp-F0h]
-  int v99; // [rsp+3Ch] [rbp-ECh]
-  hkVector4f normal; // [rsp+40h] [rbp-E8h]
-  hkVector4f p; // [rsp+50h] [rbp-D8h]
-  hkaiPathWriter v102; // [rsp+60h] [rbp-C8h]
-  hkaiStreamingCollection::InstanceInfo *v103; // [rsp+130h] [rbp+8h]
-  unsigned int v104; // [rsp+138h] [rbp+10h]
-  unsigned int v105; // [rsp+140h] [rbp+18h]
+  int v94; // r8d
+  int v96; // [rsp+34h] [rbp-F4h]
+  int v97; // [rsp+3Ch] [rbp-ECh]
+  hkVector4f normal; // [rsp+40h] [rbp-E8h] BYREF
+  hkVector4f p; // [rsp+50h] [rbp-D8h] BYREF
+  hkaiPathWriter v100; // [rsp+60h] [rbp-C8h] BYREF
+  unsigned int v102; // [rsp+138h] [rbp+10h]
 
-  v103 = sectionInfo;
   v8 = 0;
   v9 = visitedCells->m_size + 1;
-  v10 = startPoint;
-  v105 = startCellKey;
   v11 = visitedCells->m_size - 1;
-  v12 = visitedCells;
-  v97 = visitedCells->m_size + 1;
-  v99 = visitedCells->m_size - 1;
+  v96 = v9;
+  v97 = v11;
   if ( visitedCells->m_size == -1 )
   {
-    v14 = 0i64;
+    m_cur = 0i64;
   }
   else
   {
-    v13 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v14 = v13->m_cur;
+    Value = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    m_cur = (hkVector4f *)Value->m_cur;
     v15 = (16 * v9 + 127) & 0xFFFFFF80;
-    v16 = (char *)v14 + v15;
-    if ( v15 > v13->m_slabSize || v16 > v13->m_end )
-      v14 = hkLifoAllocator::allocateFromNewSlab(v13, v15);
+    v16 = (char *)m_cur + v15;
+    if ( v15 > Value->m_slabSize || v16 > Value->m_end )
+      m_cur = (hkVector4f *)hkLifoAllocator::allocateFromNewSlab(Value, v15);
     else
-      v13->m_cur = v16;
+      Value->m_cur = v16;
   }
-  v96 = v9 | 0x80000000;
   if ( v9 )
   {
     v17 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
@@ -155,68 +152,61 @@ __int64 __fastcall hkaiVolumePathSmoothingUtil::findSmoothedPath(hkaiStreamingCo
   {
     v22 = 0i64;
   }
-  v25 = v105;
-  *v14 = v10->m_quad;
+  v25 = startCellKey;
+  *m_cur = (hkVector4f)startPoint->m_quad;
   v26 = 1;
   v27 = 1;
-  v98 = v11 | 0x80000000;
-  *v18 = v105 >> 22;
-  if ( v12->m_size > 1 )
+  *v18 = startCellKey >> 22;
+  if ( visitedCells->m_size > 1 )
   {
     v28 = 0;
     v29 = 1i64;
     do
     {
-      v30 = v12->m_data[v29];
-      v104 = v12->m_data[v29 - 1] >> 22;
-      v31 = (__m128 *)v103[v104].m_volumeInstancePtr;
-      v32 = _mm_loadu_si128((const __m128i *)(v31[1].m128_u64[0] + 24i64 * (v12->m_data[v29 - 1] & 0x3FFFFF)));
-      v33 = (__m128 *)v31[3].m128_u64[0];
-      v34 = v32;
-      v35 = _mm_unpackhi_epi16(v32, (__m128i)0i64);
-      v36 = _mm_unpacklo_epi16(v34, (__m128i)0i64);
-      v37 = (__m128 *)v103[v30 >> 22].m_volumeInstancePtr;
-      v38 = _mm_mul_ps(
-              v33[6],
+      v30 = visitedCells->m_data[v29];
+      v102 = visitedCells->m_data[v29 - 1] >> 22;
+      m_volumeInstancePtr = sectionInfo[v102].m_volumeInstancePtr;
+      m_pntr = (__m128 *)m_volumeInstancePtr->m_originalVolume.m_pntr;
+      v33 = _mm_loadu_si128((const __m128i *)&m_volumeInstancePtr->m_originalCells[visitedCells->m_data[v29 - 1] & 0x3FFFFF]);
+      v34 = _mm_unpackhi_epi16(v33, (__m128i)0i64);
+      v35 = sectionInfo[v30 >> 22].m_volumeInstancePtr;
+      v36 = _mm_unpacklo_epi16(v33, (__m128i)0i64);
+      v37 = _mm_mul_ps(
+              m_pntr[6],
               _mm_add_ps(
                 _mm_mul_ps(
                   _mm_cvtepi32_ps(_mm_srli_epi32(v36, 0x10u)),
                   (__m128)`hkIntVector::convertU32ToF32::`2::two16),
                 _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v36, 0x10u), 0x10u))));
-      v39 = _mm_add_ps(v33[7], v31[7]);
-      v40 = _mm_mul_ps(
-              v33[6],
+      v38 = _mm_add_ps(m_pntr[7], m_volumeInstancePtr->m_translation.m_quad);
+      v39 = _mm_mul_ps(
+              m_pntr[6],
               _mm_add_ps(
                 _mm_mul_ps(
-                  _mm_cvtepi32_ps(_mm_srli_epi32(v35, 0x10u)),
+                  _mm_cvtepi32_ps(_mm_srli_epi32(v34, 0x10u)),
                   (__m128)`hkIntVector::convertU32ToF32::`2::two16),
-                _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v35, 0x10u), 0x10u))));
-      v41 = _mm_loadu_si128((const __m128i *)(v37[1].m128_u64[0] + 24i64 * (v30 & 0x3FFFFF)));
-      v42 = (__m128 *)v37[3].m128_u64[0];
-      v43 = _mm_add_ps(v38, v39);
-      v44 = _mm_add_ps(v40, v39);
-      v45 = v41;
-      v46 = _mm_unpackhi_epi16(v41, (__m128i)0i64);
-      v47 = _mm_unpacklo_epi16(v45, (__m128i)0i64);
-      v48 = _mm_cvtepi32_ps(_mm_srli_epi32(v47, 0x10u));
-      v49 = _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v47, 0x10u), 0x10u));
-      v50 = _mm_add_ps(v42[7], v37[7]);
-      v51 = _mm_min_ps(
-              v44,
-              _mm_add_ps(
-                _mm_mul_ps(
-                  v42[6],
-                  _mm_add_ps(
-                    _mm_mul_ps(
-                      _mm_cvtepi32_ps(_mm_srli_epi32(v46, 0x10u)),
-                      (__m128)`hkIntVector::convertU32ToF32::`2::two16),
-                    _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v46, 0x10u), 0x10u)))),
-                v50));
+                _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v34, 0x10u), 0x10u))));
+      v40 = v35->m_originalVolume.m_pntr;
+      v41 = _mm_add_ps(v37, v38);
+      v42 = _mm_add_ps(v39, v38);
+      v43 = _mm_loadu_si128((const __m128i *)&v35->m_originalCells[v30 & 0x3FFFFF]);
+      v44 = _mm_unpackhi_epi16(v43, (__m128i)0i64);
+      v45 = _mm_unpacklo_epi16(v43, (__m128i)0i64);
+      v46 = _mm_cvtepi32_ps(_mm_srli_epi32(v45, 0x10u));
+      v47 = _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v45, 0x10u), 0x10u));
+      v48 = _mm_add_ps(v40->m_quantizationOffset.m_quad, v35->m_translation.m_quad);
+      v49 = _mm_add_ps(
+              _mm_mul_ps(
+                _mm_cvtepi32_ps(_mm_srli_epi32(v44, 0x10u)),
+                (__m128)`hkIntVector::convertU32ToF32::`2::two16),
+              _mm_cvtepi32_ps(_mm_srli_epi32(_mm_slli_epi32(v44, 0x10u), 0x10u)));
+      m_quad = v40->m_quantizationScale.m_quad;
+      v51 = _mm_min_ps(v42, _mm_add_ps(_mm_mul_ps(m_quad, v49), v48));
       v52 = _mm_max_ps(
-              v43,
+              v41,
               _mm_add_ps(
-                _mm_mul_ps(v42[6], _mm_add_ps(_mm_mul_ps(v48, (__m128)`hkIntVector::convertU32ToF32::`2::two16), v49)),
-                v50));
+                _mm_mul_ps(m_quad, _mm_add_ps(_mm_mul_ps(v46, (__m128)`hkIntVector::convertU32ToF32::`2::two16), v47)),
+                v48));
       v53 = _mm_min_ps(v52, v51);
       v54 = _mm_max_ps(v52, v51);
       v55 = &v22[2 * v28];
@@ -229,19 +219,19 @@ __int64 __fastcall hkaiVolumePathSmoothingUtil::findSmoothedPath(hkaiStreamingCo
       ++v28;
       ++v26;
       ++v29;
-      v14[v56] = _mm_mul_ps(_mm_add_ps(v54, v53), (__m128)xmmword_141A711B0);
+      m_cur[v56].m_quad = _mm_mul_ps(_mm_add_ps(v54, v53), (__m128)xmmword_141A711B0);
       v57 = v27++;
-      v18[v57] = v104;
+      v18[v57] = v102;
     }
-    while ( v27 < v12->m_size );
-    v9 = v97;
-    v11 = v99;
-    v25 = v105;
+    while ( v27 < visitedCells->m_size );
+    v9 = v96;
+    v11 = v97;
+    v25 = startCellKey;
     v8 = 0;
   }
-  v14[v26] = endPoint->m_quad;
-  if ( v12->m_size )
-    v25 = v12->m_data[v12->m_size - 1];
+  m_cur[v26] = (hkVector4f)endPoint->m_quad;
+  if ( visitedCells->m_size )
+    v25 = visitedCells->m_data[visitedCells->m_size - 1];
   v18[v27] = v25 >> 22;
   v58 = 3i64;
   do
@@ -249,19 +239,19 @@ __int64 __fastcall hkaiVolumePathSmoothingUtil::findSmoothedPath(hkaiStreamingCo
     if ( v26 > 1i64 )
     {
       v59 = v22;
-      v60 = (__m128 *)(v14 + 2);
+      p_m_quad = &m_cur[2].m_quad;
       v61 = v26 - 1i64;
       do
       {
         v62 = v59[1];
         v63 = *v59;
-        v64 = v60[-2];
-        v65 = _mm_sub_ps(*v60, v64);
-        v66 = (__m128)_mm_srli_epi32(_mm_slli_epi32((__m128i)_mm_sub_ps(v59[1], *v59), 1u), 1u);
+        v64 = p_m_quad[-2];
+        v65 = _mm_sub_ps(*p_m_quad, v64);
+        v66 = (__m128)_mm_srli_epi32(_mm_slli_epi32((__m128i)_mm_sub_ps(v62, *v59), 1u), 1u);
         v67 = _mm_shuffle_ps(v66, v66, 85);
         v68 = _mm_shuffle_ps(v66, v66, 0);
-        v69 = _mm_cmpltps(v67, v68);
-        v70 = _mm_cmpltps(_mm_shuffle_ps(v66, v66, 170), _mm_or_ps(_mm_and_ps(v69, v67), _mm_andnot_ps(v69, v68)));
+        v69 = _mm_cmplt_ps(v67, v68);
+        v70 = _mm_cmplt_ps(_mm_shuffle_ps(v66, v66, 170), _mm_or_ps(_mm_and_ps(v69, v67), _mm_andnot_ps(v69, v68)));
         v71 = _mm_or_ps(
                 _mm_andnot_ps(v70, _mm_or_ps(_mm_andnot_ps(v69, transform.m_quad), _mm_and_ps(v69, direction.m_quad))),
                 _mm_and_ps(v70, stru_141A71280.m_quad));
@@ -278,10 +268,10 @@ __int64 __fastcall hkaiVolumePathSmoothingUtil::findSmoothedPath(hkaiStreamingCo
                 196);
         v74 = _mm_mul_ps(v65, v73);
         if ( COERCE_FLOAT((unsigned int)(2
-                                       * COERCE_SIGNED_INT(
-                                           (float)(COERCE_FLOAT(_mm_shuffle_ps(v74, v74, 85))
-                                                 + COERCE_FLOAT(_mm_shuffle_ps(v74, v74, 0)))
-                                         + COERCE_FLOAT(_mm_shuffle_ps(v74, v74, 170)))) >> 1) < 0.00000011920929 )
+                                       * COERCE_INT(
+                                           (float)(_mm_shuffle_ps(v74, v74, 85).m128_f32[0]
+                                                 + _mm_shuffle_ps(v74, v74, 0).m128_f32[0])
+                                         + _mm_shuffle_ps(v74, v74, 170).m128_f32[0])) >> 1) < 0.00000011920929 )
         {
           v81 = _mm_mul_ps(v65, (__m128)xmmword_141A711B0);
         }
@@ -301,9 +291,9 @@ __int64 __fastcall hkaiVolumePathSmoothingUtil::findSmoothedPath(hkaiStreamingCo
                     _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v80, v77)), v80),
                     _mm_sub_ps((__m128)0i64, v79)));
         }
-        ++v60;
+        ++p_m_quad;
         v59 += 2;
-        v60[-2] = _mm_max_ps(v63, _mm_min_ps(v62, _mm_add_ps(v81, v64)));
+        p_m_quad[-2] = _mm_max_ps(v63, _mm_min_ps(v62, _mm_add_ps(v81, v64)));
         --v61;
       }
       while ( v61 );
@@ -311,26 +301,26 @@ __int64 __fastcall hkaiVolumePathSmoothingUtil::findSmoothedPath(hkaiStreamingCo
     --v58;
   }
   while ( v58 );
-  hkaiPathWriter::hkaiPathWriter(&v102);
-  hkaiPathWriter::init(&v102, pathArrayOut, pathPtrOut, maxPathLength);
+  hkaiPathWriter::hkaiPathWriter(&v100);
+  hkaiPathWriter::init(&v100, pathArrayOut, pathPtrOut, maxPathLength);
   v82 = 0i64;
   if ( v9 > 0 )
   {
-    v83 = (__m128i *)v14;
+    v83 = &m_cur->m_quad;
     do
     {
       v84 = v18[v82];
-      _mm_store_si128((__m128i *)&p, *v83);
+      p.m_quad = *v83;
       normal.m_quad = 0i64;
-      hkaiPathWriter::addPointToPath(&v102, &p, &normal, v84, 0, 0);
+      hkaiPathWriter::addPointToPath(&v100, &p, &normal, v84, 0, 0);
       ++v82;
       ++v83;
     }
     while ( v82 < v9 );
     v11 = v9 - 2;
   }
-  hkaiPathWriter::addTerminatorToPathPointer(&v102);
-  if ( v102.m_pathArrayOut || (v85 = 1, v102.m_totalNumOutput < v102.m_maxNumOutput) )
+  hkaiPathWriter::addTerminatorToPathPointer(&v100);
+  if ( v100.m_pathArrayOut || (v85 = 1, v100.m_totalNumOutput < v100.m_maxNumOutput) )
     v85 = 0;
   LOBYTE(v8) = v85 == 0;
   v86 = (32 * v11 + 127) & 0xFFFFFF80;
@@ -340,11 +330,6 @@ __int64 __fastcall hkaiVolumePathSmoothingUtil::findSmoothedPath(hkaiStreamingCo
     hkLifoAllocator::slowBlockFree(v87, v22, v88);
   else
     v87->m_cur = v22;
-  if ( v98 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v22,
-      32 * v98);
   v89 = (4 * v9 + 127) & 0xFFFFFF80;
   v90 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   v91 = (v89 + 15) & 0xFFFFFFF0;
@@ -352,29 +337,13 @@ __int64 __fastcall hkaiVolumePathSmoothingUtil::findSmoothedPath(hkaiStreamingCo
     hkLifoAllocator::slowBlockFree(v90, v18, v91);
   else
     v90->m_cur = v18;
-  if ( v96 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v18,
-      4 * v96);
   v92 = (16 * v9 + 127) & 0xFFFFFF80;
   v93 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   v94 = (v92 + 15) & 0xFFFFFFF0;
-  if ( v92 > v93->m_slabSize || (char *)v14 + v94 != v93->m_cur || v93->m_firstNonLifoEnd == v14 )
-    hkLifoAllocator::slowBlockFree(v93, v14, v94);
+  if ( v92 > v93->m_slabSize || (char *)m_cur + v94 != v93->m_cur || v93->m_firstNonLifoEnd == m_cur )
+    hkLifoAllocator::slowBlockFree(v93, m_cur, v94);
   else
-    v93->m_cur = v14;
-  if ( v96 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v14,
-      16 * v96);
+    v93->m_cur = m_cur;
   return v8;
-}0;
-  if ( v92 > v93->m_slabSize || (char *)v14 + v94 != v93->m_cur || v93->m_firstNonLifoEnd == v14 )
-    hkLifoAllocator::slowBlockFree(v93, v14, v94);
-  else
-    v93->m_cur = v14;
-  if ( v96 >= 0 )
-    hkContainerHeapAllocator::s_al
+}
 

@@ -1,6 +1,11 @@
 // File Line: 74
 // RVA: 0x104E40
-void __fastcall SSCoroutineFunc::SSCoroutineFunc(SSCoroutineFunc *this, ASymbol *name, SSClass *scope_p, SSParameters *params_p, bool (__fastcall *update_f)(SSInvokedCoroutine *))
+void __fastcall SSCoroutineFunc::SSCoroutineFunc(
+        SSCoroutineFunc *this,
+        ASymbol *name,
+        SSClass *scope_p,
+        SSParameters *params_p,
+        bool (__fastcall *update_f)(SSInvokedCoroutine *))
 {
   this->i_name = (ASymbol)name->i_uid;
   this->i_scope_p = scope_p;

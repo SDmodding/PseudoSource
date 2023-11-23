@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkpEntitySmallArraySerializeOverrideTypeClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 82
@@ -105,9 +105,10 @@ hkClass *__fastcall hkpEntity::ExtendedListeners::staticClass()
 
 // File Line: 189
 // RVA: 0xD50C70
-void __fastcall cleanupLoadedObjecthkpEntityExtendedListeners(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkpEntityExtendedListeners(hkpEntity::ExtendedListeners *p)
 {
-  hkpEntity::ExtendedListeners::~ExtendedListeners((hkpEntity::ExtendedListeners *)p);
+  hkpEntity::ExtendedListeners::~ExtendedListeners(p);
 }
 
 // File Line: 277
@@ -128,7 +129,7 @@ void dynamic_initializer_for__hkpEntityClass__()
     &hkpEntity_Default,
     0i64,
     0,
-    3u);
+    3);
 }
 
 // File Line: 280
@@ -140,23 +141,24 @@ hkClass *__fastcall hkpEntity::staticClass()
 
 // File Line: 287
 // RVA: 0xD50C80
-void __fastcall finishLoadedObjecthkpEntity(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpEntity(hkpEntity *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpEntity::hkpEntity);
+  if ( p )
+    hkpEntity::hkpEntity(p, finishing);
 }
 
 // File Line: 293
 // RVA: 0xD50CA0
-void __fastcall cleanupLoadedObjecthkpEntity(void *p)
+void __fastcall cleanupLoadedObjecthkpEntity(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 297
 // RVA: 0xD50CB0
 hkBaseObjectVtbl *__fastcall getVtablehkpEntity()
 {
-  hkpEntity v1; // [rsp+20h] [rbp-2D8h]
+  hkpEntity v1; // [rsp+20h] [rbp-2D8h] BYREF
 
   hkpEntity::hkpEntity(&v1, 0);
   return v1.vfptr;
@@ -173,8 +175,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpEntityTypeInfo__()
   hkpEntityTypeInfo.m_typeName = "hkpEntity";
   hkpEntityTypeInfo.m_vtable = result;
   hkpEntityTypeInfo.m_scopedName = "!hkpEntity";
-  hkpEntityTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpEntity;
-  hkpEntityTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpEntity;
+  hkpEntityTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpEntity;
+  hkpEntityTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpEntity;
   return result;
 }
 

@@ -41,7 +41,7 @@ void __fastcall hkpSphereMotion::setInertiaLocal(hkpSphereMotion *this, hkMatrix
          _mm_and_ps(inertia->m_col2.m_quad, (__m128)xmmword_141A9B7E0));
   v3 = _mm_max_ps(_mm_shuffle_ps(v2, v2, 170), _mm_max_ps(_mm_shuffle_ps(v2, v2, 85), _mm_shuffle_ps(v2, v2, 0)));
   v4 = _mm_rcp_ps(v3);
-  v5 = _mm_andnot_ps(_mm_cmpeqps(v3, (__m128)0i64), _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v4, v3)), v4));
+  v5 = _mm_andnot_ps(_mm_cmpeq_ps(v3, (__m128)0i64), _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v4, v3)), v4));
   this->m_inertiaAndMassInv.m_quad = _mm_shuffle_ps(v5, _mm_unpackhi_ps(v5, this->m_inertiaAndMassInv.m_quad), 196);
 }
 
@@ -138,14 +138,18 @@ void __fastcall hkpSphereMotion::applyForce(hkpSphereMotion *this, const float d
 
 // File Line: 110
 // RVA: 0xD7A8C0
-void __fastcall hkpSphereMotion::applyForce(hkpSphereMotion *this, const float deltaTime, hkVector4f *force, hkVector4f *p)
+void __fastcall hkpSphereMotion::applyForce(
+        hkpSphereMotion *this,
+        const float deltaTime,
+        hkVector4f *force,
+        hkVector4f *p)
 {
-  hkBaseObjectVtbl *v4; // rax
-  __m128 v5; // [rsp+20h] [rbp-18h]
+  hkBaseObjectVtbl *vfptr; // rax
+  __m128 v5; // [rsp+20h] [rbp-18h] BYREF
 
-  v4 = this->vfptr;
+  vfptr = this->vfptr;
   v5 = _mm_mul_ps(_mm_shuffle_ps((__m128)LODWORD(deltaTime), (__m128)LODWORD(deltaTime), 0), force->m_quad);
-  ((void (__fastcall *)(hkpSphereMotion *, __m128 *, hkVector4f *))v4[11].__first_virtual_table_function__)(
+  ((void (__fastcall *)(hkpSphereMotion *, __m128 *, hkVector4f *))vfptr[11].__first_virtual_table_function__)(
     this,
     &v5,
     p);
@@ -155,17 +159,22 @@ void __fastcall hkpSphereMotion::applyForce(hkpSphereMotion *this, const float d
 // RVA: 0xD7A900
 void __fastcall hkpSphereMotion::applyTorque(hkpSphereMotion *this, const float deltaTime, hkVector4f *torque)
 {
-  hkBaseObjectVtbl *v3; // rax
-  __m128 v4; // [rsp+20h] [rbp-18h]
+  hkBaseObjectVtbl *vfptr; // rax
+  __m128 v4; // [rsp+20h] [rbp-18h] BYREF
 
-  v3 = this->vfptr;
+  vfptr = this->vfptr;
   v4 = _mm_mul_ps(_mm_shuffle_ps((__m128)LODWORD(deltaTime), (__m128)LODWORD(deltaTime), 0), torque->m_quad);
-  v3[12].__vecDelDtor((hkBaseObject *)&this->vfptr, (unsigned int)&v4);
+  vfptr[12].__vecDelDtor(this, (unsigned int)&v4);
 }
 
 // File Line: 124
 // RVA: 0xD7A680
-void __fastcall hkpSphereMotion::getProjectedPointVelocity(hkpSphereMotion *this, hkVector4f *pos, hkVector4f *normal, float *velOut, float *invVirtMassOut)
+void __fastcall hkpSphereMotion::getProjectedPointVelocity(
+        hkpSphereMotion *this,
+        hkVector4f *pos,
+        hkVector4f *normal,
+        float *velOut,
+        float *invVirtMassOut)
 {
   __m128 v5; // xmm4
   __m128 v6; // xmm3
@@ -182,20 +191,25 @@ void __fastcall hkpSphereMotion::getProjectedPointVelocity(hkpSphereMotion *this
   v8 = _mm_shuffle_ps(v7, v7, 201);
   v9 = _mm_mul_ps(this->m_angularVelocity.m_quad, v8);
   v10 = _mm_mul_ps(v8, v8);
-  *velOut = (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v9, v9, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v9, v9, 0)))
-                  + COERCE_FLOAT(_mm_shuffle_ps(v9, v9, 170)))
-          + (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v6, v6, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v6, v6, 0)))
-                  + COERCE_FLOAT(_mm_shuffle_ps(v6, v6, 170)));
-  *invVirtMassOut = (float)((float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v10, v10, 85))
-                                          + COERCE_FLOAT(_mm_shuffle_ps(v10, v10, 0)))
-                                  + COERCE_FLOAT(_mm_shuffle_ps(v10, v10, 170)))
-                          * COERCE_FLOAT(_mm_shuffle_ps(this->m_inertiaAndMassInv.m_quad, this->m_inertiaAndMassInv.m_quad, 0)))
-                  + COERCE_FLOAT(_mm_shuffle_ps(this->m_inertiaAndMassInv.m_quad, this->m_inertiaAndMassInv.m_quad, 255));
+  *velOut = (float)((float)(_mm_shuffle_ps(v9, v9, 85).m128_f32[0] + _mm_shuffle_ps(v9, v9, 0).m128_f32[0])
+                  + _mm_shuffle_ps(v9, v9, 170).m128_f32[0])
+          + (float)((float)(_mm_shuffle_ps(v6, v6, 85).m128_f32[0] + _mm_shuffle_ps(v6, v6, 0).m128_f32[0])
+                  + _mm_shuffle_ps(v6, v6, 170).m128_f32[0]);
+  *invVirtMassOut = (float)((float)((float)(_mm_shuffle_ps(v10, v10, 85).m128_f32[0]
+                                          + _mm_shuffle_ps(v10, v10, 0).m128_f32[0])
+                                  + _mm_shuffle_ps(v10, v10, 170).m128_f32[0])
+                          * _mm_shuffle_ps(this->m_inertiaAndMassInv.m_quad, this->m_inertiaAndMassInv.m_quad, 0).m128_f32[0])
+                  + _mm_shuffle_ps(this->m_inertiaAndMassInv.m_quad, this->m_inertiaAndMassInv.m_quad, 255).m128_f32[0];
 }
 
 // File Line: 135
 // RVA: 0xD7A740
-void __fastcall hkpSphereMotion::getProjectedPointVelocitySimd(hkpSphereMotion *this, hkVector4f *pos, hkVector4f *normal, hkSimdFloat32 *velOut, hkSimdFloat32 *invVirtMassOut)
+void __fastcall hkpSphereMotion::getProjectedPointVelocitySimd(
+        hkpSphereMotion *this,
+        hkVector4f *pos,
+        hkVector4f *normal,
+        hkSimdFloat32 *velOut,
+        hkSimdFloat32 *invVirtMassOut)
 {
   __m128 v5; // xmm4
   __m128 v6; // xmm3

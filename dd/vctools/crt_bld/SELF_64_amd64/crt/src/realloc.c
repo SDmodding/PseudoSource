@@ -1,17 +1,15 @@
 // File Line: 62
 // RVA: 0x12BB3C8
-void *__fastcall realloc(void *pBlock, unsigned __int64 newsize)
+LPVOID __fastcall realloc(void *pBlock, unsigned __int64 newsize)
 {
   unsigned __int64 v2; // rbx
-  void *v3; // rdi
   LPVOID v5; // rsi
   int *v6; // rbx
   unsigned int v7; // eax
   int *v8; // rbx
-  unsigned int v9; // eax
+  unsigned int LastError; // eax
 
   v2 = newsize;
-  v3 = pBlock;
   if ( !pBlock )
     return malloc(newsize);
   if ( !newsize )
@@ -30,14 +28,14 @@ LABEL_12:
   {
     if ( !v2 )
       v2 = 1i64;
-    v5 = HeapReAlloc(crtheap, 0, v3, v2);
+    v5 = HeapReAlloc(crtheap, 0, pBlock, v2);
     if ( v5 )
       return v5;
     if ( !newmode )
     {
       v8 = errno();
-      v9 = GetLastError();
-      *v8 = get_errno_from_oserr(v9);
+      LastError = GetLastError();
+      *v8 = get_errno_from_oserr(LastError);
       return v5;
     }
     if ( !callnewh(v2) )

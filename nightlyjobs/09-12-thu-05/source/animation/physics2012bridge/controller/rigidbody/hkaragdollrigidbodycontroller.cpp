@@ -1,287 +1,255 @@
 // File Line: 14
 // RVA: 0xC52350
-void __fastcall hkaRagdollRigidBodyController::hkaRagdollRigidBodyController(hkaRagdollRigidBodyController *this, hkaRagdollInstance *ragdoll)
+void __fastcall hkaRagdollRigidBodyController::hkaRagdollRigidBodyController(
+        hkaRagdollRigidBodyController *this,
+        hkaRagdollInstance *ragdoll)
 {
   int v2; // ebx
-  hkaRagdollRigidBodyController *v3; // r15
-  hkaRagdollInstance *v4; // rbp
-  int v5; // eax
-  int v6; // eax
-  int v7; // er9
-  __int64 v8; // rcx
-  __int64 v9; // rdx
-  _DWORD *v10; // rax
-  hkaKeyFrameHierarchyUtility::ControlData *v11; // rax
-  int v12; // er14
-  int v13; // eax
-  int v14; // eax
-  int v15; // eax
-  int v16; // er9
-  __int64 v17; // rdx
-  __int16 *v18; // rdi
-  __int64 v19; // rcx
-  hkaSkeleton *v20; // rax
-  __int64 v21; // r9
-  int *v22; // rdi
-  __int64 v23; // r10
-  __int64 v24; // rcx
-  int v25; // edx
-  int v26; // eax
-  int v27; // eax
-  int v28; // er9
-  __int64 v29; // rdx
-  __int16 *v30; // rdi
-  __int64 v31; // rcx
-  hkaSkeleton *v32; // rax
-  __int64 v33; // rdx
-  __int16 v34; // ax
-  int v35; // eax
-  int v36; // eax
-  int v37; // er9
-  hkResult result; // [rsp+A0h] [rbp+8h]
+  __int64 m_size; // rcx
+  __int64 v6; // rdx
+  float *p_m_accelerationGain; // rax
+  hkaKeyFrameHierarchyUtility::ControlData *m_data; // rax
+  int v9; // r14d
+  int m_capacityAndFlags; // eax
+  int v11; // eax
+  int v12; // eax
+  int v13; // r9d
+  __int64 v14; // rdx
+  __int16 *v15; // rdi
+  __int64 v16; // rcx
+  hkaSkeleton *v17; // rax
+  __int64 v18; // r9
+  int *v19; // rdi
+  __int64 v20; // r10
+  __int64 v21; // rcx
+  int v22; // edx
+  int v23; // eax
+  int v24; // eax
+  int v25; // r9d
+  __int64 v26; // rdx
+  __int16 *v27; // rdi
+  __int64 v28; // rcx
+  hkaSkeleton *m_pntr; // rax
+  __int64 v30; // rdx
+  __int16 v31; // ax
+  int v32; // eax
+  int v33; // eax
+  int v34; // r9d
+  hkResult result; // [rsp+A0h] [rbp+8h] BYREF
 
-  this->m_controlDataPalette.m_capacityAndFlags = 2147483648;
+  this->m_controlDataPalette.m_capacityAndFlags = 0x80000000;
   v2 = 0;
   this->m_controlDataPalette.m_data = 0i64;
   this->m_controlDataPalette.m_size = 0;
   this->m_bodyIndexToPaletteIndex.m_data = 0i64;
   this->m_bodyIndexToPaletteIndex.m_size = 0;
-  this->m_bodyIndexToPaletteIndex.m_capacityAndFlags = 2147483648;
+  this->m_bodyIndexToPaletteIndex.m_capacityAndFlags = 0x80000000;
   this->m_bodyData.m_controlDataIndices = 0i64;
   this->m_bodyData.m_boneWeights = 0i64;
   this->m_internalData.m_data = 0i64;
   this->m_internalData.m_size = 0;
-  this->m_internalData.m_capacityAndFlags = 2147483648;
+  this->m_internalData.m_capacityAndFlags = 0x80000000;
   this->m_ragdollInstance = ragdoll;
-  v3 = this;
   this->m_rbParentIndices.m_data = 0i64;
   this->m_rbParentIndices.m_size = 0;
-  this->m_rbParentIndices.m_capacityAndFlags = 2147483648;
-  v4 = ragdoll;
-  hkReferencedObject::addReference((hkReferencedObject *)&ragdoll->vfptr);
-  v5 = v3->m_controlDataPalette.m_capacityAndFlags & 0x3FFFFFFF;
-  if ( v5 < 1 )
+  this->m_rbParentIndices.m_capacityAndFlags = 0x80000000;
+  hkReferencedObject::addReference(ragdoll);
+  if ( (this->m_controlDataPalette.m_capacityAndFlags & 0x3FFFFFFF) == 0 )
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, this, 1, 48);
+  m_size = this->m_controlDataPalette.m_size;
+  v6 = 1 - (int)m_size;
+  if ( 1 - (int)m_size > 0 )
   {
-    v6 = 2 * v5;
-    v7 = 1;
-    if ( v6 > 1 )
-      v7 = v6;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v3, v7, 48);
-  }
-  v8 = v3->m_controlDataPalette.m_size;
-  v9 = 1 - (signed int)v8;
-  if ( 1 - (signed int)v8 > 0 )
-  {
-    v10 = (_DWORD *)&v3->m_controlDataPalette.m_data[v8].m_accelerationGain;
+    p_m_accelerationGain = &this->m_controlDataPalette.m_data[m_size].m_accelerationGain;
     do
     {
-      if ( v10 != (_DWORD *)8 )
+      if ( p_m_accelerationGain != (float *)8 )
       {
-        *(v10 - 2) = 1043207291;
-        *(v10 - 1) = 0;
-        *v10 = 1065353216;
-        v10[1] = 1058642330;
-        v10[2] = 1028443341;
-        v10[3] = 1068708659;
-        v10[4] = 1072064102;
-        v10[5] = 1036831949;
-        v10[6] = 1050253722;
-        v10[7] = 1050253722;
-        v10[8] = 1022739087;
-        v10[9] = 1036831949;
+        *(p_m_accelerationGain - 2) = 0.17;
+        *(p_m_accelerationGain - 1) = 0.0;
+        *p_m_accelerationGain = 1.0;
+        p_m_accelerationGain[1] = 0.60000002;
+        p_m_accelerationGain[2] = 0.050000001;
+        p_m_accelerationGain[3] = 1.4;
+        p_m_accelerationGain[4] = 1.8;
+        p_m_accelerationGain[5] = 0.1;
+        p_m_accelerationGain[6] = 0.30000001;
+        p_m_accelerationGain[7] = 0.30000001;
+        p_m_accelerationGain[8] = 0.029999999;
+        p_m_accelerationGain[9] = 0.1;
       }
-      v10 += 12;
-      --v9;
+      p_m_accelerationGain += 12;
+      --v6;
     }
-    while ( v9 );
+    while ( v6 );
   }
-  v3->m_controlDataPalette.m_size = 1;
-  v11 = v3->m_controlDataPalette.m_data;
-  v11->m_hierarchyGain = FLOAT_0_17;
-  v11->m_velocityDamping = 0.0;
-  LODWORD(v11->m_accelerationGain) = (_DWORD)FLOAT_1_0;
-  v11->m_velocityGain = FLOAT_0_60000002;
-  v11->m_positionGain = FLOAT_0_050000001;
-  v11->m_positionMaxLinearVelocity = FLOAT_1_4;
-  v11->m_positionMaxAngularVelocity = FLOAT_1_8;
-  v11->m_snapGain = FLOAT_0_1;
-  v11->m_snapMaxLinearVelocity = FLOAT_0_30000001;
-  v11->m_snapMaxAngularVelocity = FLOAT_0_30000001;
-  v11->m_snapMaxLinearDistance = FLOAT_0_029999999;
-  v11->m_snapMaxAngularDistance = FLOAT_0_1;
-  v12 = v4->m_rigidBodies.m_size;
-  v13 = v3->m_rbParentIndices.m_capacityAndFlags;
-  if ( v12 == v4->m_skeleton.m_pntr->m_bones.m_size )
+  this->m_controlDataPalette.m_size = 1;
+  m_data = this->m_controlDataPalette.m_data;
+  m_data->m_hierarchyGain = FLOAT_0_17;
+  m_data->m_velocityDamping = 0.0;
+  LODWORD(m_data->m_accelerationGain) = (_DWORD)FLOAT_1_0;
+  m_data->m_velocityGain = FLOAT_0_60000002;
+  m_data->m_positionGain = FLOAT_0_050000001;
+  m_data->m_positionMaxLinearVelocity = FLOAT_1_4;
+  m_data->m_positionMaxAngularVelocity = FLOAT_1_8;
+  m_data->m_snapGain = FLOAT_0_1;
+  m_data->m_snapMaxLinearVelocity = FLOAT_0_30000001;
+  m_data->m_snapMaxAngularVelocity = FLOAT_0_30000001;
+  m_data->m_snapMaxLinearDistance = FLOAT_0_029999999;
+  m_data->m_snapMaxAngularDistance = FLOAT_0_1;
+  v9 = ragdoll->m_rigidBodies.m_size;
+  m_capacityAndFlags = this->m_rbParentIndices.m_capacityAndFlags;
+  if ( v9 == ragdoll->m_skeleton.m_pntr->m_bones.m_size )
   {
-    v26 = v13 & 0x3FFFFFFF;
-    if ( v26 < v12 )
+    v23 = m_capacityAndFlags & 0x3FFFFFFF;
+    if ( v23 < v9 )
     {
-      v27 = 2 * v26;
-      v28 = v4->m_rigidBodies.m_size;
-      if ( v12 < v27 )
-        v28 = v27;
-      hkArrayUtil::_reserve(
-        &result,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        &v3->m_rbParentIndices,
-        v28,
-        2);
+      v24 = 2 * v23;
+      v25 = ragdoll->m_rigidBodies.m_size;
+      if ( v9 < v24 )
+        v25 = v24;
+      hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, &this->m_rbParentIndices, v25, 2);
     }
-    v29 = v3->m_rbParentIndices.m_size;
-    v30 = &v3->m_rbParentIndices.m_data[v29];
-    v31 = v12 - (signed int)v29;
-    if ( v12 - (signed int)v29 > 0 )
+    v26 = this->m_rbParentIndices.m_size;
+    v27 = &this->m_rbParentIndices.m_data[v26];
+    v28 = v9 - (int)v26;
+    if ( v9 - (int)v26 > 0 )
     {
-      while ( v31 )
+      while ( v28 )
       {
-        *v30 = -1;
-        ++v30;
-        --v31;
+        *v27++ = -1;
+        --v28;
       }
     }
-    v3->m_rbParentIndices.m_size = v12;
-    v32 = v4->m_skeleton.m_pntr;
-    if ( v32->m_bones.m_size > 0 )
+    this->m_rbParentIndices.m_size = v9;
+    m_pntr = ragdoll->m_skeleton.m_pntr;
+    if ( m_pntr->m_bones.m_size > 0 )
     {
-      v33 = 0i64;
+      v30 = 0i64;
       do
       {
         ++v2;
-        v34 = v32->m_parentIndices.m_data[v33];
-        ++v33;
-        v3->m_rbParentIndices.m_data[v33 - 1] = v34;
-        v32 = v4->m_skeleton.m_pntr;
+        v31 = m_pntr->m_parentIndices.m_data[v30++];
+        this->m_rbParentIndices.m_data[v30 - 1] = v31;
+        m_pntr = ragdoll->m_skeleton.m_pntr;
       }
-      while ( v2 < v32->m_bones.m_size );
+      while ( v2 < m_pntr->m_bones.m_size );
     }
   }
   else
   {
-    v14 = v13 & 0x3FFFFFFF;
-    if ( v14 < v12 )
+    v11 = m_capacityAndFlags & 0x3FFFFFFF;
+    if ( v11 < v9 )
     {
-      v15 = 2 * v14;
-      v16 = v4->m_rigidBodies.m_size;
-      if ( v12 < v15 )
-        v16 = v15;
-      hkArrayUtil::_reserve(
-        &result,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        &v3->m_rbParentIndices,
-        v16,
-        2);
+      v12 = 2 * v11;
+      v13 = ragdoll->m_rigidBodies.m_size;
+      if ( v9 < v12 )
+        v13 = v12;
+      hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, &this->m_rbParentIndices, v13, 2);
     }
-    v17 = v3->m_rbParentIndices.m_size;
-    v18 = &v3->m_rbParentIndices.m_data[v17];
-    v19 = v12 - (signed int)v17;
-    if ( v12 - (signed int)v17 > 0 )
+    v14 = this->m_rbParentIndices.m_size;
+    v15 = &this->m_rbParentIndices.m_data[v14];
+    v16 = v9 - (int)v14;
+    if ( v9 - (int)v14 > 0 )
     {
-      while ( v19 )
+      while ( v16 )
       {
-        *v18 = -1;
-        ++v18;
-        --v19;
+        *v15++ = -1;
+        --v16;
       }
     }
-    v3->m_rbParentIndices.m_size = v12;
-    v20 = v4->m_skeleton.m_pntr;
-    if ( v20->m_bones.m_size > 0 )
+    this->m_rbParentIndices.m_size = v9;
+    v17 = ragdoll->m_skeleton.m_pntr;
+    if ( v17->m_bones.m_size > 0 )
     {
-      v21 = 0i64;
+      v18 = 0i64;
       do
       {
-        v22 = v4->m_boneToRigidBodyMap.m_data;
-        v23 = v22[v21];
-        if ( (signed int)v23 >= 0 )
+        v19 = ragdoll->m_boneToRigidBodyMap.m_data;
+        v20 = v19[v18];
+        if ( (int)v20 >= 0 )
         {
-          LODWORD(v24) = v2;
-          LOWORD(v25) = -1;
+          LODWORD(v21) = v2;
+          LOWORD(v22) = -1;
           do
           {
-            v24 = v20->m_parentIndices.m_data[(signed int)v24];
-            if ( (signed int)v24 < 0 )
+            v21 = v17->m_parentIndices.m_data[(int)v21];
+            if ( (int)v21 < 0 )
               break;
-            v25 = v22[v24];
+            v22 = v19[v21];
           }
-          while ( v25 < 0 );
-          v3->m_rbParentIndices.m_data[v23] = v25;
+          while ( v22 < 0 );
+          this->m_rbParentIndices.m_data[v20] = v22;
         }
-        v20 = v4->m_skeleton.m_pntr;
+        v17 = ragdoll->m_skeleton.m_pntr;
         ++v2;
-        ++v21;
+        ++v18;
       }
-      while ( v2 < v20->m_bones.m_size );
+      while ( v2 < v17->m_bones.m_size );
     }
   }
-  v3->m_bodyData.m_numRigidBodies = v12;
-  v3->m_bodyData.m_rigidBodies = v4->m_rigidBodies.m_data;
-  v3->m_bodyData.m_parentIndices = v3->m_rbParentIndices.m_data;
-  v35 = v3->m_internalData.m_capacityAndFlags & 0x3FFFFFFF;
-  if ( v35 < v12 )
+  this->m_bodyData.m_numRigidBodies = v9;
+  this->m_bodyData.m_rigidBodies = ragdoll->m_rigidBodies.m_data;
+  this->m_bodyData.m_parentIndices = this->m_rbParentIndices.m_data;
+  v32 = this->m_internalData.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v32 < v9 )
   {
-    v36 = 2 * v35;
-    v37 = v12;
-    if ( v12 < v36 )
-      v37 = v36;
-    hkArrayUtil::_reserve(
-      &result,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &v3->m_internalData,
-      v37,
-      64);
+    v33 = 2 * v32;
+    v34 = v9;
+    if ( v9 < v33 )
+      v34 = v33;
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, &this->m_internalData, v34, 64);
   }
-  v3->m_internalData.m_size = v12;
-  hkaKeyFrameHierarchyUtility::initialize(&v3->m_bodyData, v3->m_internalData.m_data);
+  this->m_internalData.m_size = v9;
+  hkaKeyFrameHierarchyUtility::initialize(&this->m_bodyData, this->m_internalData.m_data);
 }
 
 // File Line: 65
 // RVA: 0xC52730
 void __fastcall hkaRagdollRigidBodyController::~hkaRagdollRigidBodyController(hkaRagdollRigidBodyController *this)
 {
-  hkaRagdollRigidBodyController *v1; // rbx
-  int v2; // er8
-  int v3; // er8
-  int v4; // er8
+  int m_capacityAndFlags; // r8d
+  int v3; // r8d
+  int v4; // r8d
   int v5; // eax
 
-  v1 = this;
-  hkReferencedObject::removeReference((hkReferencedObject *)&this->m_ragdollInstance->vfptr);
-  v2 = v1->m_rbParentIndices.m_capacityAndFlags;
-  v1->m_rbParentIndices.m_size = 0;
-  if ( v2 >= 0 )
+  hkReferencedObject::removeReference(this->m_ragdollInstance);
+  m_capacityAndFlags = this->m_rbParentIndices.m_capacityAndFlags;
+  this->m_rbParentIndices.m_size = 0;
+  if ( m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_rbParentIndices.m_data,
-      2 * (v2 & 0x3FFFFFFF));
-  v1->m_rbParentIndices.m_data = 0i64;
-  v1->m_rbParentIndices.m_capacityAndFlags = 2147483648;
-  v3 = v1->m_internalData.m_capacityAndFlags;
-  v1->m_internalData.m_size = 0;
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_rbParentIndices.m_data,
+      2 * (m_capacityAndFlags & 0x3FFFFFFF));
+  this->m_rbParentIndices.m_data = 0i64;
+  this->m_rbParentIndices.m_capacityAndFlags = 0x80000000;
+  v3 = this->m_internalData.m_capacityAndFlags;
+  this->m_internalData.m_size = 0;
   if ( v3 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_internalData.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_internalData.m_data,
       v3 << 6);
-  v1->m_internalData.m_data = 0i64;
-  v1->m_internalData.m_capacityAndFlags = 2147483648;
-  v4 = v1->m_bodyIndexToPaletteIndex.m_capacityAndFlags;
-  v1->m_bodyIndexToPaletteIndex.m_size = 0;
+  this->m_internalData.m_data = 0i64;
+  this->m_internalData.m_capacityAndFlags = 0x80000000;
+  v4 = this->m_bodyIndexToPaletteIndex.m_capacityAndFlags;
+  this->m_bodyIndexToPaletteIndex.m_size = 0;
   if ( v4 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_bodyIndexToPaletteIndex.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_bodyIndexToPaletteIndex.m_data,
       4 * v4);
-  v1->m_bodyIndexToPaletteIndex.m_data = 0i64;
-  v1->m_bodyIndexToPaletteIndex.m_capacityAndFlags = 2147483648;
-  v5 = v1->m_controlDataPalette.m_capacityAndFlags;
-  v1->m_controlDataPalette.m_size = 0;
+  this->m_bodyIndexToPaletteIndex.m_data = 0i64;
+  this->m_bodyIndexToPaletteIndex.m_capacityAndFlags = 0x80000000;
+  v5 = this->m_controlDataPalette.m_capacityAndFlags;
+  this->m_controlDataPalette.m_size = 0;
   if ( v5 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_controlDataPalette.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_controlDataPalette.m_data,
       48 * (v5 & 0x3FFFFFFF));
-  v1->m_controlDataPalette.m_capacityAndFlags = 2147483648;
-  v1->m_controlDataPalette.m_data = 0i64;
+  this->m_controlDataPalette.m_capacityAndFlags = 0x80000000;
+  this->m_controlDataPalette.m_data = 0i64;
 }
 
 // File Line: 70
@@ -298,7 +266,7 @@ void __fastcall hkaRagdollRigidBodyController::reinitialize(hkaRagdollRigidBodyC
   __int64 v2; // r8
 
   v2 = this->m_ragdollInstance->m_boneToRigidBodyMap.m_data[boneIndex];
-  if ( (signed int)v2 >= 0 )
+  if ( (int)v2 >= 0 )
     hkaKeyFrameHierarchyUtility::initialize(this->m_bodyData.m_rigidBodies[v2], &this->m_internalData.m_data[v2]);
 }
 
@@ -311,115 +279,111 @@ hkaRagdollInstance *__fastcall hkaRagdollRigidBodyController::getRagdollInstance
 
 // File Line: 89
 // RVA: 0xC52840
-void __fastcall hkaRagdollRigidBodyController::driveToPose(hkaRagdollRigidBodyController *this, float deltaTime, hkQsTransformf *poseLocal, hkQsTransformf *worldFromModel, hkaKeyFrameHierarchyUtility::Output *stressOut)
+void __fastcall hkaRagdollRigidBodyController::driveToPose(
+        hkaRagdollRigidBodyController *this,
+        float deltaTime,
+        hkQsTransformf *poseLocal,
+        hkQsTransformf *worldFromModel,
+        hkaKeyFrameHierarchyUtility::Output *stressOut)
 {
-  int v5; // er15
-  hkaKeyFrameHierarchyUtility::WorkElem *v6; // rax
+  int m_numRigidBodies; // r15d
+  hkaKeyFrameHierarchyUtility::WorkElem *m_data; // rax
   hkQuaternionf v7; // xmm2
   hkVector4f v8; // xmm0
   int v9; // esi
-  hkQsTransformf *v10; // rbp
-  hkaRagdollRigidBodyController *v11; // rbx
   int *v12; // rax
-  hkaRagdollInstance *v13; // rdx
-  hkLifoAllocator *v14; // rax
-  hkQsTransformf *v15; // rdi
+  hkaRagdollInstance *m_ragdollInstance; // rdx
+  hkLifoAllocator *Value; // rax
+  hkQsTransformf *m_cur; // rdi
   int v16; // edx
   char *v17; // rcx
-  signed int v18; // er14
-  __int64 v19; // r9
-  hkVector4f *v20; // rdx
-  signed __int64 v21; // rax
-  signed __int64 v22; // rcx
-  hkaKeyFrameHierarchyUtility::ControlData *v23; // r9
-  signed int v24; // ebx
-  hkLifoAllocator *v25; // rax
-  int v26; // er8
-  hkaKeyFrameHierarchyUtility::ControlData *v27; // r9
-  hkaKeyFrameHierarchyUtility::KeyFrameData pose; // [rsp+30h] [rbp-68h]
+  __int64 v18; // r9
+  hkVector4f *p_m_scale; // rdx
+  __int64 v20; // rax
+  __int64 v21; // rcx
+  hkaKeyFrameHierarchyUtility::ControlData *v22; // r9
+  signed int v23; // ebx
+  hkLifoAllocator *v24; // rax
+  int v25; // r8d
+  hkaKeyFrameHierarchyUtility::ControlData *v26; // r9
+  hkaKeyFrameHierarchyUtility::KeyFrameData pose; // [rsp+30h] [rbp-68h] BYREF
 
-  v5 = this->m_bodyData.m_numRigidBodies;
-  v6 = this->m_internalData.m_data;
+  m_numRigidBodies = this->m_bodyData.m_numRigidBodies;
+  m_data = this->m_internalData.m_data;
   v7.m_vec.m_quad = (__m128)worldFromModel->m_rotation;
   pose.m_worldFromRoot.m_translation = worldFromModel->m_translation;
   v8.m_quad = (__m128)worldFromModel->m_scale;
   v9 = 0;
-  v10 = poseLocal;
-  v11 = this;
-  pose.m_internalReferencePose = v6;
+  pose.m_internalReferencePose = m_data;
   pose.m_worldFromRoot.m_scale = (hkVector4f)v8.m_quad;
   pose.m_worldFromRoot.m_rotation = (hkQuaternionf)v7.m_vec.m_quad;
-  if ( this->m_bodyIndexToPaletteIndex.m_size == v5 )
+  if ( this->m_bodyIndexToPaletteIndex.m_size == m_numRigidBodies )
     v12 = this->m_bodyIndexToPaletteIndex.m_data;
   else
     v12 = 0i64;
-  v13 = this->m_ragdollInstance;
+  m_ragdollInstance = this->m_ragdollInstance;
   this->m_bodyData.m_controlDataIndices = v12;
-  if ( v13->m_rigidBodies.m_size == v13->m_skeleton.m_pntr->m_bones.m_size )
+  if ( m_ragdollInstance->m_rigidBodies.m_size == m_ragdollInstance->m_skeleton.m_pntr->m_bones.m_size )
   {
-    v27 = this->m_controlDataPalette.m_data;
+    v26 = this->m_controlDataPalette.m_data;
     pose.m_desiredPoseLocalSpace = poseLocal;
-    hkaKeyFrameHierarchyUtility::applyKeyFrame(deltaTime, &pose, &this->m_bodyData, v27, stressOut);
+    hkaKeyFrameHierarchyUtility::applyKeyFrame(deltaTime, &pose, &this->m_bodyData, v26, stressOut);
   }
   else
   {
-    if ( v5 )
+    if ( m_numRigidBodies )
     {
-      v14 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v15 = (hkQsTransformf *)v14->m_cur;
-      v16 = (48 * v5 + 127) & 0xFFFFFF80;
-      v17 = (char *)v15 + v16;
-      if ( v16 > v14->m_slabSize || v17 > v14->m_end )
-        v15 = (hkQsTransformf *)hkLifoAllocator::allocateFromNewSlab(v14, v16);
+      Value = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+      m_cur = (hkQsTransformf *)Value->m_cur;
+      v16 = (48 * m_numRigidBodies + 127) & 0xFFFFFF80;
+      v17 = (char *)m_cur + v16;
+      if ( v16 > Value->m_slabSize || v17 > Value->m_end )
+        m_cur = (hkQsTransformf *)hkLifoAllocator::allocateFromNewSlab(Value, v16);
       else
-        v14->m_cur = v17;
+        Value->m_cur = v17;
     }
     else
     {
-      v15 = 0i64;
+      m_cur = 0i64;
     }
-    v18 = v5 | 0x80000000;
-    if ( v11->m_ragdollInstance->m_skeleton.m_pntr->m_bones.m_size > 0 )
+    if ( this->m_ragdollInstance->m_skeleton.m_pntr->m_bones.m_size > 0 )
     {
-      v19 = 0i64;
-      v20 = &v10->m_scale;
+      v18 = 0i64;
+      p_m_scale = &poseLocal->m_scale;
       do
       {
-        v21 = v11->m_ragdollInstance->m_boneToRigidBodyMap.m_data[v19];
-        if ( (signed int)v21 >= 0 )
+        v20 = this->m_ragdollInstance->m_boneToRigidBodyMap.m_data[v18];
+        if ( (int)v20 >= 0 )
         {
-          v22 = v21;
-          v15[v22].m_translation = (hkVector4f)v20[-2].m_quad;
-          v15[v22].m_rotation.m_vec = (hkVector4f)v20[-1].m_quad;
-          v15[v22].m_scale = (hkVector4f)v20->m_quad;
+          v21 = v20;
+          m_cur[v21].m_translation = (hkVector4f)p_m_scale[-2].m_quad;
+          m_cur[v21].m_rotation.m_vec = (hkVector4f)p_m_scale[-1].m_quad;
+          m_cur[v21].m_scale = (hkVector4f)p_m_scale->m_quad;
         }
         ++v9;
-        ++v19;
-        v20 += 3;
+        ++v18;
+        p_m_scale += 3;
       }
-      while ( v9 < v11->m_ragdollInstance->m_skeleton.m_pntr->m_bones.m_size );
+      while ( v9 < this->m_ragdollInstance->m_skeleton.m_pntr->m_bones.m_size );
     }
-    v23 = v11->m_controlDataPalette.m_data;
-    pose.m_desiredPoseLocalSpace = v15;
-    hkaKeyFrameHierarchyUtility::applyKeyFrame(deltaTime, &pose, &v11->m_bodyData, v23, stressOut);
-    v24 = (48 * v5 + 127) & 0xFFFFFF80;
-    v25 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v26 = (v24 + 15) & 0xFFFFFFF0;
-    if ( v24 > v25->m_slabSize || (char *)v15 + v26 != v25->m_cur || v25->m_firstNonLifoEnd == v15 )
-      hkLifoAllocator::slowBlockFree(v25, v15, v26);
+    v22 = this->m_controlDataPalette.m_data;
+    pose.m_desiredPoseLocalSpace = m_cur;
+    hkaKeyFrameHierarchyUtility::applyKeyFrame(deltaTime, &pose, &this->m_bodyData, v22, stressOut);
+    v23 = (48 * m_numRigidBodies + 127) & 0xFFFFFF80;
+    v24 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    v25 = (v23 + 15) & 0xFFFFFFF0;
+    if ( v23 > v24->m_slabSize || (char *)m_cur + v25 != v24->m_cur || v24->m_firstNonLifoEnd == m_cur )
+      hkLifoAllocator::slowBlockFree(v24, m_cur, v25);
     else
-      v25->m_cur = v15;
-    if ( v18 >= 0 )
-      hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-        v15,
-        48 * (v18 & 0x3FFFFFFF));
+      v24->m_cur = m_cur;
   }
 }
 
 // File Line: 123
 // RVA: 0xC52AE0
-void __fastcall hkaRagdollRigidBodyController::setBoneWeights(hkaRagdollRigidBodyController *this, const float *boneWeights)
+void __fastcall hkaRagdollRigidBodyController::setBoneWeights(
+        hkaRagdollRigidBodyController *this,
+        const float *boneWeights)
 {
   this->m_bodyData.m_boneWeights = boneWeights;
 }

@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkaiNavMeshInstanceClass__()
     &hkaiNavMeshInstance_Default,
     0i64,
     0,
-    4u);
+    4);
 }
 
 // File Line: 136
@@ -28,23 +28,24 @@ hkClass *__fastcall hkaiNavMeshInstance::staticClass()
 
 // File Line: 143
 // RVA: 0xBB6B90
-void __fastcall finishLoadedObjecthkaiNavMeshInstance(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiNavMeshInstance(hkaiNavMeshInstance *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiNavMeshInstance::hkaiNavMeshInstance);
+  if ( p )
+    hkaiNavMeshInstance::hkaiNavMeshInstance(p, finishing);
 }
 
 // File Line: 149
 // RVA: 0xBB6BB0
-void __fastcall cleanupLoadedObjecthkaiNavMeshInstance(void *p)
+void __fastcall cleanupLoadedObjecthkaiNavMeshInstance(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 153
 // RVA: 0xBB6BC0
 hkBaseObjectVtbl *__fastcall getVtablehkaiNavMeshInstance()
 {
-  hkaiNavMeshInstance v1; // [rsp+20h] [rbp-1E8h]
+  hkaiNavMeshInstance v1; // [rsp+20h] [rbp-1E8h] BYREF
 
   hkaiNavMeshInstance::hkaiNavMeshInstance(&v1, 0);
   return v1.vfptr;
@@ -61,8 +62,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiNavMeshInstanceTypeInfo__()
   hkaiNavMeshInstanceTypeInfo.m_typeName = "hkaiNavMeshInstance";
   hkaiNavMeshInstanceTypeInfo.m_vtable = result;
   hkaiNavMeshInstanceTypeInfo.m_scopedName = "!hkaiNavMeshInstance";
-  hkaiNavMeshInstanceTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiNavMeshInstance;
-  hkaiNavMeshInstanceTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiNavMeshInstance;
+  hkaiNavMeshInstanceTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiNavMeshInstance;
+  hkaiNavMeshInstanceTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiNavMeshInstance;
   return result;
 }
 

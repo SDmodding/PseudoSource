@@ -35,27 +35,22 @@ void __fastcall finishLoadedObjecthkSetUint32(void *p, int finishing)
 
 // File Line: 67
 // RVA: 0xC550C0
-void __fastcall cleanupLoadedObjecthkSetUint32(void *p)
+void __fastcall cleanupLoadedObjecthkSetUint32(_DWORD *p)
 {
-  int v1; // er8
-  _DWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      *(void **)p,
-      4 * v1);
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, *(void **)p, 4 * v1);
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 
@@ -138,27 +133,22 @@ void __fastcall finishLoadedObjecthkSetIntFloatPair(void *p, int finishing)
 
 // File Line: 169
 // RVA: 0xC55160
-void __fastcall cleanupLoadedObjecthkSetIntFloatPair(void *p)
+void __fastcall cleanupLoadedObjecthkSetIntFloatPair(_DWORD *p)
 {
-  int v1; // er8
-  _DWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      *(void **)p,
-      8 * v1);
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, *(void **)p, 8 * v1);
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 
@@ -185,34 +175,31 @@ void dynamic_initializer_for__hkSetunsignedinthkContainerHeapAllocatorhkMapOpera
 
 // File Line: 216
 // RVA: 0xC551D0
-void __fastcall finishLoadedObjecthkSetunsignedinthkContainerHeapAllocatorhkMapOperationsunsignedint(void *p, int finishing)
+void __fastcall finishLoadedObjecthkSetunsignedinthkContainerHeapAllocatorhkMapOperationsunsignedint(
+        void *p,
+        int finishing)
 {
   ;
 }
 
 // File Line: 222
 // RVA: 0xC551E0
-void __fastcall cleanupLoadedObjecthkSetunsignedinthkContainerHeapAllocatorhkMapOperationsunsignedint(void *p)
+void __fastcall cleanupLoadedObjecthkSetunsignedinthkContainerHeapAllocatorhkMapOperationsunsignedint(_DWORD *p)
 {
-  int v1; // er8
-  _DWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      *(void **)p,
-      4 * v1);
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, *(void **)p, 4 * v1);
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 
@@ -239,34 +226,31 @@ void dynamic_initializer_for__hkSethkIntRealPairhkContainerHeapAllocatorhkMapOpe
 
 // File Line: 269
 // RVA: 0xC55250
-void __fastcall finishLoadedObjecthkSethkIntRealPairhkContainerHeapAllocatorhkMapOperationshkIntRealPair(void *p, int finishing)
+void __fastcall finishLoadedObjecthkSethkIntRealPairhkContainerHeapAllocatorhkMapOperationshkIntRealPair(
+        void *p,
+        int finishing)
 {
   ;
 }
 
 // File Line: 275
 // RVA: 0xC55260
-void __fastcall cleanupLoadedObjecthkSethkIntRealPairhkContainerHeapAllocatorhkMapOperationshkIntRealPair(void *p)
+void __fastcall cleanupLoadedObjecthkSethkIntRealPairhkContainerHeapAllocatorhkMapOperationshkIntRealPair(_DWORD *p)
 {
-  int v1; // er8
-  _DWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      *(void **)p,
-      8 * v1);
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, *(void **)p, 8 * v1);
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 

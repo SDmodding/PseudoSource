@@ -28,23 +28,26 @@ hkClass *__fastcall hkpMalleableConstraintData::staticClass()
 
 // File Line: 67
 // RVA: 0xD4FB30
-void __fastcall finishLoadedObjecthkpMalleableConstraintData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpMalleableConstraintData(
+        hkpMalleableConstraintData *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpMalleableConstraintData::hkpMalleableConstraintData);
+  if ( p )
+    hkpMalleableConstraintData::hkpMalleableConstraintData(p, finishing);
 }
 
 // File Line: 73
 // RVA: 0xD4FB50
-void __fastcall cleanupLoadedObjecthkpMalleableConstraintData(void *p)
+void __fastcall cleanupLoadedObjecthkpMalleableConstraintData(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 77
 // RVA: 0xD4FB60
 hkBaseObjectVtbl *__fastcall getVtablehkpMalleableConstraintData()
 {
-  hkpMalleableConstraintData v1; // [rsp+20h] [rbp-58h]
+  hkpMalleableConstraintData v1; // [rsp+20h] [rbp-58h] BYREF
 
   hkpMalleableConstraintData::hkpMalleableConstraintData(&v1, 0);
   return v1.vfptr;
@@ -61,8 +64,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpMalleableConstraintDataTypeInfo__(
   hkpMalleableConstraintDataTypeInfo.m_typeName = "hkpMalleableConstraintData";
   hkpMalleableConstraintDataTypeInfo.m_vtable = result;
   hkpMalleableConstraintDataTypeInfo.m_scopedName = "!hkpMalleableConstraintData";
-  hkpMalleableConstraintDataTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpMalleableConstraintData;
-  hkpMalleableConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpMalleableConstraintData;
+  hkpMalleableConstraintDataTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpMalleableConstraintData;
+  hkpMalleableConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpMalleableConstraintData;
   return result;
 }
 

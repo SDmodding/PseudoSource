@@ -4,7 +4,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_ONLINE_CONNECT___1()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("ONLINE_CONNECT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("ONLINE_CONNECT", -1);
   UI_HASH_ONLINE_CONNECT_1 = result;
   return result;
 }
@@ -15,7 +15,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_ONLINE_SHOW_CONNECTING_INDICATOR_
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("ONLINE_SHOW_CONNECTING_INDICATOR", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("ONLINE_SHOW_CONNECTING_INDICATOR", -1);
   UI_HASH_ONLINE_SHOW_CONNECTING_INDICATOR_1 = result;
   return result;
 }
@@ -26,7 +26,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_ONLINE_HIDE_CONNECTING_INDICATOR_
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("ONLINE_HIDE_CONNECTING_INDICATOR", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("ONLINE_HIDE_CONNECTING_INDICATOR", -1);
   UI_HASH_ONLINE_HIDE_CONNECTING_INDICATOR_1 = result;
   return result;
 }
@@ -37,7 +37,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_ONLINE_CONNECT_FAIL_CONFIRM___1()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("ONLINE_CONNECT_FAIL_CONFIRM", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("ONLINE_CONNECT_FAIL_CONFIRM", -1);
   UI_HASH_ONLINE_CONNECT_FAIL_CONFIRM_1 = result;
   return result;
 }
@@ -48,7 +48,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MAIN_SERVER_DISCONNECT___1()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("MAIN_SERVER_DISCONNECT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("MAIN_SERVER_DISCONNECT", -1);
   UI_HASH_MAIN_SERVER_DISCONNECT_1 = result;
   return result;
 }
@@ -59,7 +59,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_HANDLE_QUEUED_DISCONNECT___1()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("HANDLE_QUEUED_DISCONNECT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("HANDLE_QUEUED_DISCONNECT", -1);
   UI_HASH_HANDLE_QUEUED_DISCONNECT_1 = result;
   return result;
 }
@@ -70,7 +70,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_HANDLE_DISCONNECT___1()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("HANDLE_DISCONNECT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("HANDLE_DISCONNECT", -1);
   UI_HASH_HANDLE_DISCONNECT_1 = result;
   return result;
 }
@@ -81,7 +81,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_PLAYERCONNECT_DISCONNECT___1()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("PLAYERCONNECT_DISCONNECT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("PLAYERCONNECT_DISCONNECT", -1);
   UI_HASH_PLAYERCONNECT_DISCONNECT_1 = result;
   return result;
 }
@@ -92,7 +92,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_CORRUPT_SAVE_SLOT___1()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("CORRUPT_SAVE_SLOT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("CORRUPT_SAVE_SLOT", -1);
   UI_HASH_CORRUPT_SAVE_SLOT_1 = result;
   return result;
 }
@@ -103,7 +103,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_CORRUPT_GAME_OPTIONS___1()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("CORRUPT_GAME_OPTIONS", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("CORRUPT_GAME_OPTIONS", -1);
   UI_HASH_CORRUPT_GAME_OPTIONS_1 = result;
   return result;
 }
@@ -114,7 +114,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_CORRUPT_PHOTO___1()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("CORRUPT_PHOTO", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("CORRUPT_PHOTO", -1);
   UI_HASH_CORRUPT_PHOTO_1 = result;
   return result;
 }
@@ -125,7 +125,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_NO_SPACE_FOR_SAVE___1()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("NO_SPACE_FOR_SAVE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("NO_SPACE_FOR_SAVE", -1);
   UI_HASH_NO_SPACE_FOR_SAVE_1 = result;
   return result;
 }
@@ -136,7 +136,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SAVE_UNAVAILABLE___1()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SAVE_UNAVAILABLE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SAVE_UNAVAILABLE", -1);
   UI_HASH_SAVE_UNAVAILABLE_1 = result;
   return result;
 }
@@ -147,7 +147,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MESSAGEOVERLAY_SKIP_SAVING___1()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("MESSAGEOVERLAY_SKIP_SAVING", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("MESSAGEOVERLAY_SKIP_SAVING", -1);
   UI_HASH_MESSAGEOVERLAY_SKIP_SAVING_1 = result;
   return result;
 }
@@ -158,7 +158,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_DIALOG_OK_CONTROLLER_DISCONNECTED
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("DIALOG_OK_CONTROLLER_DISCONNECTED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("DIALOG_OK_CONTROLLER_DISCONNECTED", -1);
   UI_HASH_DIALOG_OK_CONTROLLER_DISCONNECTED_1 = result;
   return result;
 }
@@ -169,7 +169,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SAVE_OPERATION_INVALID_DEVICE___1
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SAVE_OPERATION_INVALID_DEVICE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SAVE_OPERATION_INVALID_DEVICE", -1);
   UI_HASH_SAVE_OPERATION_INVALID_DEVICE_1 = result;
   return result;
 }
@@ -180,7 +180,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SAVE_OPERATION_SELECT_DEVICE___1(
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SAVE_OPERATION_SELECT_DEVICE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SAVE_OPERATION_SELECT_DEVICE", -1);
   UI_HASH_SAVE_OPERATION_SELECT_DEVICE_1 = result;
   return result;
 }
@@ -191,7 +191,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SAVE_OPERATION_SKIP_SAVING___1()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SAVE_OPERATION_SKIP_SAVING", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SAVE_OPERATION_SKIP_SAVING", -1);
   UI_HASH_SAVE_OPERATION_SKIP_SAVING_1 = result;
   return result;
 }
@@ -202,7 +202,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_LOAD_OPERATION_INVALID_DEVICE___1
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("LOAD_OPERATION_INVALID_DEVICE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("LOAD_OPERATION_INVALID_DEVICE", -1);
   UI_HASH_LOAD_OPERATION_INVALID_DEVICE_1 = result;
   return result;
 }
@@ -213,7 +213,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_LOAD_OPERATION_ABORT___1()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("LOAD_OPERATION_ABORT", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("LOAD_OPERATION_ABORT", -1);
   UI_HASH_LOAD_OPERATION_ABORT_1 = result;
   return result;
 }
@@ -224,7 +224,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_DIALOG_OK_ACTIVE_USER_SIGNED_OUT_
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("DIALOG_OK_ACTIVE_USER_SIGNED_OUT_X360", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("DIALOG_OK_ACTIVE_USER_SIGNED_OUT_X360", -1);
   UI_HASH_DIALOG_OK_ACTIVE_USER_SIGNED_OUT_X360_1 = result;
   return result;
 }
@@ -235,7 +235,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_MESSAGEOVERLAY_CONTENT_DOWNLOADED
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("MESSAGEOVERLAY_CONTENT_DOWNLOADED_STEAM", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("MESSAGEOVERLAY_CONTENT_DOWNLOADED_STEAM", -1);
   UI_HASH_MESSAGEOVERLAY_CONTENT_DOWNLOADED_STEAM_1 = result;
   return result;
 }

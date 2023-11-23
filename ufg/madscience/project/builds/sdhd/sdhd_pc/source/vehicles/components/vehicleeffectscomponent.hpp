@@ -2,8 +2,8 @@
 // RVA: 0x667FE0
 void __fastcall UFG::EffectStatus::EffectStatus(UFG::EffectStatus *this)
 {
-  *((_DWORD *)this + 4) &= 0xFFFFFFFE;
-  this->mState = 0;
+  *((_DWORD *)this + 4) &= ~1u;
+  this->mState = UNINITIALIZED;
   this->mInternalState = 0i64;
 }
 
@@ -11,14 +11,11 @@ void __fastcall UFG::EffectStatus::EffectStatus(UFG::EffectStatus *this)
 // RVA: 0x66F070
 UFG::ComponentIDDesc *__fastcall UFG::VehicleEffectsComponent::AccessComponentDesc()
 {
-  UFG::ComponentIDDesc *v0; // rax
-  UFG::ComponentIDDesc result; // [rsp+20h] [rbp-18h]
+  UFG::ComponentIDDesc result; // [rsp+20h] [rbp-18h] BYREF
 
   if ( !UFG::VehicleEffectsComponent::_DescInit )
   {
-    v0 = UFG::Simulation_GetNewBaseDesc(&result);
-    *(_QWORD *)&UFG::VehicleEffectsComponent::_TypeIDesc.mBaseTypeIndex = *(_QWORD *)&v0->mBaseTypeIndex;
-    UFG::VehicleEffectsComponent::_TypeIDesc.mChildren = v0->mChildren;
+    UFG::VehicleEffectsComponent::_TypeIDesc = *UFG::Simulation_GetNewBaseDesc(&result);
     UFG::VehicleEffectsComponent::_DescInit = 1;
     UFG::VehicleEffectsComponent::_TypeUID = UFG::VehicleEffectsComponent::_TypeIDesc.mChildBitMask | (UFG::VehicleEffectsComponent::_TypeIDesc.mBaseTypeIndex << 25);
     UFG::VehicleEffectsComponent::_VehicleEffectsComponentTypeUID = UFG::VehicleEffectsComponent::_TypeIDesc.mChildBitMask | (UFG::VehicleEffectsComponent::_TypeIDesc.mBaseTypeIndex << 25);

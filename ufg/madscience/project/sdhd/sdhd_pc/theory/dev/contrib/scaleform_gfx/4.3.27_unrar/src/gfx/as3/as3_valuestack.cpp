@@ -2,74 +2,68 @@
 // RVA: 0x784EB0
 void __fastcall Scaleform::GFx::AS3::ValueStack::ValueStack(Scaleform::GFx::AS3::ValueStack *this)
 {
-  Scaleform::GFx::AS3::ValueStack *v1; // rbx
   Scaleform::GFx::AS3::ValueStack::Page *v2; // rax
-  signed __int64 v3; // rax
+  Scaleform::GFx::AS3::Value *Values; // rax
 
-  v1 = this;
   this->pCurrent = (Scaleform::GFx::AS3::Value *)-32i64;
   this->pStack = 0i64;
   this->pCurrentPage = 0i64;
   this->pReserved = 0i64;
   v2 = Scaleform::GFx::AS3::ValueStack::NewPage(this, 0x40u);
-  v1->pCurrentPage = v2;
+  this->pCurrentPage = v2;
   v2->pNext = 0i64;
-  v1->pCurrentPage->pPrev = 0i64;
-  v1->pCurrentPage->pCurrent = 0i64;
-  v3 = (signed __int64)v1->pCurrentPage->Values;
-  v1->pStack = (Scaleform::GFx::AS3::Value *)v3;
-  v1->pCurrent = (Scaleform::GFx::AS3::Value *)(v3 - 32);
-  Scaleform::GFx::AS3::ValueStack::Reserve(v1, 1u);
+  this->pCurrentPage->pPrev = 0i64;
+  this->pCurrentPage->pCurrent = 0i64;
+  Values = this->pCurrentPage->Values;
+  this->pStack = Values;
+  this->pCurrent = Values - 1;
+  Scaleform::GFx::AS3::ValueStack::Reserve(this, 1u);
 }
 
 // File Line: 49
 // RVA: 0x78FC20
 void __fastcall Scaleform::GFx::AS3::ValueStack::~ValueStack(Scaleform::GFx::AS3::ValueStack *this)
 {
-  Scaleform::GFx::AS3::ValueStack *v1; // rdi
-  Scaleform::GFx::AS3::Value *v2; // rbx
-  Scaleform::GFx::AS3::WeakProxy *v3; // rdx
-  bool v4; // zf
-  Scaleform::GFx::AS3::ValueStack::Page *v5; // rcx
+  Scaleform::GFx::AS3::Value *pCurrent; // rbx
+  Scaleform::GFx::AS3::WeakProxy *pWeakProxy; // rdx
+  Scaleform::GFx::AS3::ValueStack::Page *pPrev; // rcx
 
-  v1 = this;
-  while ( v1->pReserved )
+  while ( this->pReserved )
   {
-    v1->pReserved = v1->pReserved->pNext;
-    ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
+    this->pReserved = this->pReserved->pNext;
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
   }
-  while ( v1->pCurrentPage )
+  while ( this->pCurrentPage )
   {
-    for ( ; v1->pCurrent >= v1->pCurrentPage->Values; --v1->pCurrent )
+    for ( ; this->pCurrent >= this->pCurrentPage->Values; --this->pCurrent )
     {
-      v2 = v1->pCurrent;
-      if ( (v1->pCurrent->Flags & 0x1F) > 9 )
+      pCurrent = this->pCurrent;
+      if ( (this->pCurrent->Flags & 0x1F) > 9 )
       {
-        if ( (v1->pCurrent->Flags >> 9) & 1 )
+        if ( (this->pCurrent->Flags & 0x200) != 0 )
         {
-          v3 = v2->Bonus.pWeakProxy;
-          v4 = v3->RefCount-- == 1;
-          if ( v4 )
-            ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-          v2->Flags &= 0xFFFFFDE0;
-          v2->Bonus.pWeakProxy = 0i64;
-          v2->value.VNumber = 0.0;
-          v2->value.VS._2.VObj = 0i64;
+          pWeakProxy = pCurrent->Bonus.pWeakProxy;
+          if ( pWeakProxy->RefCount-- == 1 )
+            ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+          pCurrent->Flags &= 0xFFFFFDE0;
+          pCurrent->Bonus.pWeakProxy = 0i64;
+          pCurrent->value.VS._1.VStr = 0i64;
+          pCurrent->value.VS._2.VObj = 0i64;
         }
         else
         {
-          Scaleform::GFx::AS3::Value::ReleaseInternal(v1->pCurrent);
+          Scaleform::GFx::AS3::Value::ReleaseInternal(this->pCurrent);
         }
       }
     }
-    v5 = v1->pCurrentPage->pPrev;
-    v1->pCurrentPage = v5;
-    if ( v5 )
+    pPrev = this->pCurrentPage->pPrev;
+    this->pCurrentPage = pPrev;
+    if ( pPrev )
     {
-      v1->pCurrent = v5->pCurrent;
-      v1->pStack = v5->pFirst;
+      this->pCurrent = pPrev->pCurrent;
+      this->pStack = pPrev->pFirst;
     }
-    ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
   }
 }
 
@@ -77,161 +71,157 @@ void __fastcall Scaleform::GFx::AS3::ValueStack::~ValueStack(Scaleform::GFx::AS3
 // RVA: 0x813BC0
 void __fastcall Scaleform::GFx::AS3::ValueStack::Reserve(Scaleform::GFx::AS3::ValueStack *this, unsigned __int16 n)
 {
-  Scaleform::GFx::AS3::ValueStack::Page *v2; // r8
-  Scaleform::GFx::AS3::ValueStack *v3; // rbx
-  Scaleform::GFx::AS3::Value *v4; // rcx
+  Scaleform::GFx::AS3::ValueStack::Page *pCurrentPage; // r8
+  Scaleform::GFx::AS3::Value *pCurrent; // rcx
   Scaleform::GFx::AS3::ValueStack::Page *v5; // rax
 
-  v2 = this->pCurrentPage;
-  v3 = this;
-  v4 = this->pCurrent;
-  if ( &v4[n] >= &v2->Values[v2->PageSize] )
+  pCurrentPage = this->pCurrentPage;
+  pCurrent = this->pCurrent;
+  if ( &pCurrent[n] >= &pCurrentPage->Values[pCurrentPage->PageSize] )
   {
-    v5 = Scaleform::GFx::AS3::ValueStack::NewPage(v3, n);
+    v5 = Scaleform::GFx::AS3::ValueStack::NewPage(this, n);
     v5->pNext = 0i64;
-    v5->pPrev = v3->pCurrentPage;
-    v3->pCurrentPage->pNext = v5;
-    v3->pCurrentPage->pCurrent = v3->pCurrent;
-    v3->pCurrentPage = v5;
+    v5->pPrev = this->pCurrentPage;
+    this->pCurrentPage->pNext = v5;
+    this->pCurrentPage->pCurrent = this->pCurrent;
+    this->pCurrentPage = v5;
     v5 = (Scaleform::GFx::AS3::ValueStack::Page *)((char *)v5 + 40);
-    v3->pStack = (Scaleform::GFx::AS3::Value *)v5;
-    v3->pCurrent = v5[-1].Values;
-    ++v3->pCurrentPage->ReservationNum;
+    this->pStack = (Scaleform::GFx::AS3::Value *)v5;
+    this->pCurrent = v5[-1].Values;
+    ++this->pCurrentPage->ReservationNum;
   }
   else
   {
-    v3->pStack = v4 + 1;
-    ++v2->ReservationNum;
+    this->pStack = pCurrent + 1;
+    ++pCurrentPage->ReservationNum;
   }
 }
 
 // File Line: 119
 // RVA: 0x811140
-void __fastcall Scaleform::GFx::AS3::ValueStack::ReleaseReserved(Scaleform::GFx::AS3::ValueStack *this, Scaleform::GFx::AS3::Value *first)
+void __fastcall Scaleform::GFx::AS3::ValueStack::ReleaseReserved(
+        Scaleform::GFx::AS3::ValueStack *this,
+        Scaleform::GFx::AS3::Value *first)
 {
-  Scaleform::GFx::AS3::ValueStack::Page *v2; // r9
-  Scaleform::GFx::AS3::Value *v3; // r10
-  Scaleform::GFx::AS3::ValueStack::Page *v4; // rax
+  Scaleform::GFx::AS3::ValueStack::Page *pCurrentPage; // r9
+  Scaleform::GFx::AS3::Value *pCurrent; // r10
+  Scaleform::GFx::AS3::ValueStack::Page *pPrev; // rax
   Scaleform::GFx::AS3::ValueStack::Page *v5; // rax
-  Scaleform::GFx::AS3::Value *v6; // rax
-  long double *v7; // r9
+  Scaleform::GFx::AS3::Value *Values; // rax
+  Scaleform::GFx::AS3::Value::V1U *p_value; // r9
   bool v8; // zf
   Scaleform::GFx::AS3::Value *v9; // rdx
 
   --this->pCurrentPage->ReservationNum;
-  v2 = this->pCurrentPage;
-  if ( v2->ReservationNum || !v2->pPrev )
+  pCurrentPage = this->pCurrentPage;
+  if ( pCurrentPage->ReservationNum || !pCurrentPage->pPrev )
   {
     this->pStack = first;
   }
   else
   {
-    v3 = this->pCurrent;
-    v4 = v2->pPrev;
-    this->pCurrentPage = v4;
-    v4->pNext = 0i64;
+    pCurrent = this->pCurrent;
+    pPrev = pCurrentPage->pPrev;
+    this->pCurrentPage = pPrev;
+    pPrev->pNext = 0i64;
     v5 = this->pCurrentPage;
     this->pCurrent = v5->pCurrent;
     this->pStack = v5->pFirst;
-    v2->pNext = this->pReserved;
-    this->pReserved = v2;
-    v6 = v2->Values;
-    if ( v2->Values <= v3 )
+    pCurrentPage->pNext = this->pReserved;
+    this->pReserved = pCurrentPage;
+    Values = pCurrentPage->Values;
+    if ( pCurrentPage->Values <= pCurrent )
     {
-      v7 = &v2->Values[0].value.VNumber;
+      p_value = (Scaleform::GFx::AS3::Value::V1U *)&pCurrentPage->Values[0].value;
       do
       {
-        v8 = this->pCurrent == (Scaleform::GFx::AS3::Value *)-32i64;
-        ++this->pCurrent;
+        v8 = this->pCurrent++ == (Scaleform::GFx::AS3::Value *)-32i64;
         v9 = this->pCurrent;
         if ( !v8 )
         {
-          v9->Flags = v6->Flags;
-          v9->Bonus.pWeakProxy = *(Scaleform::GFx::AS3::WeakProxy **)(v7 - 1);
-          v9->value.VNumber = *v7;
-          v9->value.VS._2.VObj = (Scaleform::GFx::AS3::Object *)v7[1];
-          v6->Flags = 0;
+          v9->Flags = Values->Flags;
+          v9->Bonus.pWeakProxy = (Scaleform::GFx::AS3::WeakProxy *)p_value[-1].VStr;
+          v9->value.VS._1 = *p_value;
+          v9->value.VS._2.VObj = p_value[1].VObj;
+          Values->Flags = 0;
         }
-        ++v6;
-        v7 += 4;
+        ++Values;
+        p_value += 4;
       }
-      while ( v6 <= v3 );
+      while ( Values <= pCurrent );
     }
   }
 }
 
 // File Line: 152
 // RVA: 0x807800
-void __fastcall Scaleform::GFx::AS3::ValueStack::PopReserved(Scaleform::GFx::AS3::ValueStack *this, Scaleform::GFx::AS3::Value *current, bool retVal)
+void __fastcall Scaleform::GFx::AS3::ValueStack::PopReserved(
+        Scaleform::GFx::AS3::ValueStack *this,
+        Scaleform::GFx::AS3::Value *current,
+        bool retVal)
 {
-  Scaleform::GFx::AS3::ValueStack *v3; // rbx
-  Scaleform::GFx::AS3::ValueStack::Page *v4; // rcx
-  bool v5; // r10
-  Scaleform::GFx::AS3::Value *v6; // r15
-  Scaleform::GFx::AS3::Value *v7; // r14
+  Scaleform::GFx::AS3::ValueStack::Page *pCurrentPage; // rcx
+  Scaleform::GFx::AS3::Value *Values; // r15
   Scaleform::GFx::AS3::Value *v8; // r11
-  unsigned int v9; // er9
+  unsigned int v9; // r9d
   Scaleform::GFx::AS3::Value::Extra v10; // rax
-  long double v11; // rdx
+  Scaleform::GFx::AS3::Value::V1U v11; // rdx
   Scaleform::GFx::AS3::Value::V2U v12; // r8
-  unsigned __int64 j; // r14
+  Scaleform::GFx::AS3::Value *j; // r14
   Scaleform::GFx::AS3::Value *v14; // rdi
   Scaleform::GFx::AS3::WeakProxy *v15; // rdx
   bool v16; // zf
-  Scaleform::GFx::AS3::Value *v17; // r11
-  long double v18; // rdx
+  Scaleform::GFx::AS3::Value *pCurrent; // r11
+  Scaleform::GFx::AS3::Value::V1U v18; // rdx
   Scaleform::GFx::AS3::Value::V2U v19; // r8
-  unsigned int v20; // er9
+  unsigned int Flags; // r9d
   Scaleform::GFx::AS3::Value::Extra v21; // rax
-  unsigned __int64 i; // r15
+  Scaleform::GFx::AS3::Value *i; // r15
   Scaleform::GFx::AS3::Value *v23; // rdi
-  Scaleform::GFx::AS3::WeakProxy *v24; // rdx
+  Scaleform::GFx::AS3::WeakProxy *pWeakProxy; // rdx
 
-  v3 = this;
-  v4 = this->pCurrentPage;
-  v5 = retVal;
-  v6 = v4->Values;
-  v7 = current;
-  if ( current < v4->Values || current >= &v4->Values[v4->PageSize] )
+  pCurrentPage = this->pCurrentPage;
+  Values = pCurrentPage->Values;
+  if ( current < pCurrentPage->Values || current >= &pCurrentPage->Values[pCurrentPage->PageSize] )
   {
     if ( retVal )
     {
-      v17 = v3->pCurrent;
-      if ( v3->pCurrent >= &v6[retVal] )
+      pCurrent = this->pCurrent;
+      if ( this->pCurrent >= &Values[retVal] )
       {
-        v18 = v4->Values[0].value.VNumber;
-        v19.VObj = (Scaleform::GFx::AS3::Object *)v4->Values[0].value.VS._2;
-        v20 = v6->Flags;
-        v21.pWeakProxy = (Scaleform::GFx::AS3::WeakProxy *)v4->Values[0].Bonus;
-        v6->Flags = v17->Flags;
-        v4->Values[0].Bonus.pWeakProxy = v17->Bonus.pWeakProxy;
-        v4->Values[0].value.VNumber = v17->value.VNumber;
-        v4->Values[0].value.VS._2.VObj = v17->value.VS._2.VObj;
-        v17->value.VNumber = v18;
-        v17->value.VS._2 = v19;
-        v17->Flags = v20;
-        v17->Bonus = v21;
+        v18 = pCurrentPage->Values[0].value.VS._1;
+        v19.VObj = (Scaleform::GFx::AS3::Object *)pCurrentPage->Values[0].value.VS._2;
+        Flags = Values->Flags;
+        v21.pWeakProxy = (Scaleform::GFx::AS3::WeakProxy *)pCurrentPage->Values[0].Bonus;
+        Values->Flags = pCurrent->Flags;
+        pCurrentPage->Values[0].Bonus.pWeakProxy = pCurrent->Bonus.pWeakProxy;
+        pCurrentPage->Values[0].value.VS._1.VStr = pCurrent->value.VS._1.VStr;
+        pCurrentPage->Values[0].value.VS._2.VObj = pCurrent->value.VS._2.VObj;
+        pCurrent->value.VS._1 = v18;
+        pCurrent->value.VS._2 = v19;
+        pCurrent->Flags = Flags;
+        pCurrent->Bonus = v21;
       }
     }
-    for ( i = (unsigned __int64)&v6[v5]; v3->pCurrent >= (Scaleform::GFx::AS3::Value *)i; --v3->pCurrent )
+    for ( i = &Values[retVal]; this->pCurrent >= i; --this->pCurrent )
     {
-      v23 = v3->pCurrent;
-      if ( (v3->pCurrent->Flags & 0x1F) > 9 )
+      v23 = this->pCurrent;
+      if ( (this->pCurrent->Flags & 0x1F) > 9 )
       {
-        if ( (v3->pCurrent->Flags >> 9) & 1 )
+        if ( (this->pCurrent->Flags & 0x200) != 0 )
         {
-          v24 = v23->Bonus.pWeakProxy;
-          v16 = v24->RefCount-- == 1;
+          pWeakProxy = v23->Bonus.pWeakProxy;
+          v16 = pWeakProxy->RefCount-- == 1;
           if ( v16 )
-            ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
+            ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
           v23->Flags &= 0xFFFFFDE0;
           v23->Bonus.pWeakProxy = 0i64;
-          v23->value.VNumber = 0.0;
+          v23->value.VS._1.VStr = 0i64;
           v23->value.VS._2.VObj = 0i64;
         }
         else
         {
-          Scaleform::GFx::AS3::Value::ReleaseInternal(v3->pCurrent);
+          Scaleform::GFx::AS3::Value::ReleaseInternal(this->pCurrent);
         }
       }
     }
@@ -240,42 +230,42 @@ void __fastcall Scaleform::GFx::AS3::ValueStack::PopReserved(Scaleform::GFx::AS3
   {
     if ( retVal )
     {
-      v8 = v3->pCurrent;
-      if ( v3->pCurrent > &current[retVal] )
+      v8 = this->pCurrent;
+      if ( this->pCurrent > &current[retVal] )
       {
         v9 = current->Flags;
         v10.pWeakProxy = (Scaleform::GFx::AS3::WeakProxy *)current->Bonus;
-        v11 = current->value.VNumber;
-        v12.VObj = (Scaleform::GFx::AS3::Object *)v7->value.VS._2;
-        v7->Flags = v8->Flags;
-        v7->Bonus.pWeakProxy = v8->Bonus.pWeakProxy;
-        v7->value.VNumber = v8->value.VNumber;
-        v7->value.VS._2.VObj = v8->value.VS._2.VObj;
-        v8->value.VNumber = v11;
+        v11 = current->value.VS._1;
+        v12.VObj = (Scaleform::GFx::AS3::Object *)current->value.VS._2;
+        current->Flags = v8->Flags;
+        current->Bonus.pWeakProxy = v8->Bonus.pWeakProxy;
+        current->value.VS._1.VStr = v8->value.VS._1.VStr;
+        current->value.VS._2.VObj = v8->value.VS._2.VObj;
+        v8->value.VS._1 = v11;
         v8->value.VS._2 = v12;
         v8->Flags = v9;
         v8->Bonus = v10;
       }
     }
-    for ( j = (unsigned __int64)&v7[v5]; v3->pCurrent > (Scaleform::GFx::AS3::Value *)j; --v3->pCurrent )
+    for ( j = &current[retVal]; this->pCurrent > j; --this->pCurrent )
     {
-      v14 = v3->pCurrent;
-      if ( (v3->pCurrent->Flags & 0x1F) > 9 )
+      v14 = this->pCurrent;
+      if ( (this->pCurrent->Flags & 0x1F) > 9 )
       {
-        if ( (v3->pCurrent->Flags >> 9) & 1 )
+        if ( (this->pCurrent->Flags & 0x200) != 0 )
         {
           v15 = v14->Bonus.pWeakProxy;
           v16 = v15->RefCount-- == 1;
           if ( v16 )
-            ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
+            ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
           v14->Flags &= 0xFFFFFDE0;
           v14->Bonus.pWeakProxy = 0i64;
-          v14->value.VNumber = 0.0;
+          v14->value.VS._1.VStr = 0i64;
           v14->value.VS._2.VObj = 0i64;
         }
         else
         {
-          Scaleform::GFx::AS3::Value::ReleaseInternal(v3->pCurrent);
+          Scaleform::GFx::AS3::Value::ReleaseInternal(this->pCurrent);
         }
       }
     }
@@ -284,11 +274,13 @@ void __fastcall Scaleform::GFx::AS3::ValueStack::PopReserved(Scaleform::GFx::AS3
 
 // File Line: 193
 // RVA: 0x8023C0
-Scaleform::GFx::AS3::ValueStack::Page *__fastcall Scaleform::GFx::AS3::ValueStack::NewPage(Scaleform::GFx::AS3::ValueStack *this, unsigned __int16 pageSize)
+Scaleform::GFx::AS3::ValueStack::Page *__fastcall Scaleform::GFx::AS3::ValueStack::NewPage(
+        Scaleform::GFx::AS3::ValueStack *this,
+        unsigned __int16 pageSize)
 {
   Scaleform::GFx::AS3::ValueStack::Page *result; // rax
   unsigned __int16 v3; // bx
-  Scaleform::GFx::AS3::ValueStack::Page *v4; // rdx
+  Scaleform::GFx::AS3::ValueStack::Page *pNext; // rdx
   Scaleform::GFx::AS3::ValueStack::Page *v5; // rdx
 
   result = this->pReserved;
@@ -302,10 +294,10 @@ Scaleform::GFx::AS3::ValueStack::Page *__fastcall Scaleform::GFx::AS3::ValueStac
     }
     if ( result == this->pReserved )
     {
-      v4 = result->pNext;
-      this->pReserved = v4;
-      if ( v4 )
-        v4->pPrev = 0i64;
+      pNext = result->pNext;
+      this->pReserved = pNext;
+      if ( pNext )
+        pNext->pPrev = 0i64;
       result->pNext = 0i64;
     }
     else
@@ -337,57 +329,55 @@ LABEL_4:
 
 // File Line: 253
 // RVA: 0x78FB40
-void __fastcall Scaleform::GFx::AS3::ValueRegisterFile::~ValueRegisterFile(Scaleform::GFx::AS3::ValueRegisterFile *this)
+void __fastcall Scaleform::GFx::AS3::ValueRegisterFile::~ValueRegisterFile(
+        Scaleform::GFx::AS3::ValueRegisterFile *this)
 {
-  Scaleform::GFx::AS3::ValueRegisterFile *v1; // rdi
   unsigned __int16 i; // si
-  signed __int64 v3; // rbx
-  _DWORD *v4; // rdx
-  bool v5; // zf
+  Scaleform::GFx::AS3::Value *v3; // rbx
+  Scaleform::GFx::AS3::WeakProxy *pWeakProxy; // rdx
 
-  v1 = this;
-  while ( v1->pReserved )
+  while ( this->pReserved )
   {
-    v1->pReserved = v1->pReserved->pNext;
-    ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
+    this->pReserved = this->pReserved->pNext;
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
   }
-  for ( i = 0; i < v1->ReservedNum; ++i )
+  for ( i = 0; i < this->ReservedNum; ++i )
   {
-    v3 = (signed __int64)&v1->pRF[i];
-    if ( (*(_BYTE *)v3 & 0x1F) > 9 )
+    v3 = &this->pRF[i];
+    if ( (v3->Flags & 0x1F) > 9 )
     {
-      if ( (*(_DWORD *)v3 >> 9) & 1 )
+      if ( (v3->Flags & 0x200) != 0 )
       {
-        v4 = *(_DWORD **)(v3 + 8);
-        v5 = (*v4)-- == 1;
-        if ( v5 )
-          ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-        *(_DWORD *)v3 &= 0xFFFFFDE0;
-        *(_QWORD *)(v3 + 8) = 0i64;
-        *(_QWORD *)(v3 + 16) = 0i64;
-        *(_QWORD *)(v3 + 24) = 0i64;
+        pWeakProxy = v3->Bonus.pWeakProxy;
+        if ( pWeakProxy->RefCount-- == 1 )
+          ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+        v3->Flags &= 0xFFFFFDE0;
+        v3->Bonus.pWeakProxy = 0i64;
+        v3->value.VS._1.VStr = 0i64;
+        v3->value.VS._2.VObj = 0i64;
       }
       else
       {
-        Scaleform::GFx::AS3::Value::ReleaseInternal(&v1->pRF[i]);
+        Scaleform::GFx::AS3::Value::ReleaseInternal(&this->pRF[i]);
       }
     }
   }
-  if ( v1->pCurrentPage )
-    ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
+  if ( this->pCurrentPage )
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
 }
 
 // File Line: 277
 // RVA: 0x813AB0
-void __fastcall Scaleform::GFx::AS3::ValueRegisterFile::Reserve(Scaleform::GFx::AS3::ValueRegisterFile *this, unsigned __int16 n)
+void __fastcall Scaleform::GFx::AS3::ValueRegisterFile::Reserve(
+        Scaleform::GFx::AS3::ValueRegisterFile *this,
+        unsigned __int16 n)
 {
   int v2; // ebp
-  Scaleform::GFx::AS3::ValueRegisterFile *v3; // rbx
-  unsigned __int16 v4; // si
-  __int64 v5; // rcx
+  __int16 v4; // si
+  __int64 ReservedNum; // rcx
   __int64 v6; // rdi
-  Scaleform::GFx::AS3::ValueRegisterFile::Page *v7; // rdx
-  signed __int64 v8; // rax
+  Scaleform::GFx::AS3::ValueRegisterFile::Page *pCurrentPage; // rdx
+  Scaleform::GFx::AS3::Value *Values; // rax
   Scaleform::GFx::AS3::ValueRegisterFile::Page *v9; // rax
   Scaleform::GFx::AS3::ValueRegisterFile::Page *v10; // rdx
   __int64 v11; // rax
@@ -395,39 +385,38 @@ void __fastcall Scaleform::GFx::AS3::ValueRegisterFile::Reserve(Scaleform::GFx::
   Scaleform::GFx::AS3::Value *v13; // rdx
 
   v2 = n;
-  v3 = this;
   v4 = 0;
-  v5 = this->ReservedNum;
+  ReservedNum = this->ReservedNum;
   v6 = n;
-  v7 = v3->pCurrentPage;
-  if ( (signed int)v5 + v2 > v7->PageSize )
+  pCurrentPage = this->pCurrentPage;
+  if ( (int)ReservedNum + v2 > pCurrentPage->PageSize )
   {
-    v9 = Scaleform::GFx::AS3::ValueRegisterFile::NewPage(v3, v2);
+    v9 = Scaleform::GFx::AS3::ValueRegisterFile::NewPage(this, v2);
     v9->pNext = 0i64;
-    v9->pPrev = v3->pCurrentPage;
-    v3->pCurrentPage->pNext = v9;
-    v3->pCurrentPage->ReservedNum = v3->ReservedNum;
-    v3->pCurrentPage->pCurrent = v3->pRF;
-    v3->pCurrentPage = v9;
-    v8 = (signed __int64)v9->Values;
-    v3->ReservedNum = v2;
+    v9->pPrev = this->pCurrentPage;
+    this->pCurrentPage->pNext = v9;
+    this->pCurrentPage->ReservedNum = this->ReservedNum;
+    this->pCurrentPage->pCurrent = this->pRF;
+    this->pCurrentPage = v9;
+    Values = v9->Values;
+    this->ReservedNum = v2;
   }
   else
   {
-    v4 = v5 - ((_QWORD)((char *)v3->pRF - (char *)v7 - 32) >> 5);
-    v8 = (signed __int64)v7 + 32 * (v5 + 1);
-    v3->ReservedNum = v2 + v5;
+    v4 = ReservedNum - (((char *)this->pRF - (char *)pCurrentPage - 32) >> 5);
+    Values = &pCurrentPage->Values[ReservedNum];
+    this->ReservedNum = v2 + ReservedNum;
   }
-  v3->pRF = (Scaleform::GFx::AS3::Value *)v8;
-  v10 = v3->pCurrentPage;
-  *(&v10->CurrPos + v10->CurrPos++ + 16 * (v10->PageSize + 1i64)) = v4;
+  this->pRF = Values;
+  v10 = this->pCurrentPage;
+  *((_WORD *)&v10->Values[v10->PageSize].Flags + v10->CurrPos++) = v4;
   if ( (_DWORD)v6 )
   {
     v11 = 0i64;
     v12 = v6;
     do
     {
-      v13 = &v3->pRF[v11];
+      v13 = &this->pRF[v11];
       if ( v13 )
       {
         v13->Flags = 0;
@@ -442,106 +431,107 @@ void __fastcall Scaleform::GFx::AS3::ValueRegisterFile::Reserve(Scaleform::GFx::
 
 // File Line: 319
 // RVA: 0x811000
-void __fastcall Scaleform::GFx::AS3::ValueRegisterFile::ReleaseReserved(Scaleform::GFx::AS3::ValueRegisterFile *this, unsigned __int16 n)
+void __fastcall Scaleform::GFx::AS3::ValueRegisterFile::ReleaseReserved(
+        Scaleform::GFx::AS3::ValueRegisterFile *this,
+        unsigned __int16 n)
 {
-  unsigned __int16 v2; // r14
-  Scaleform::GFx::AS3::ValueRegisterFile *v3; // rsi
   unsigned __int16 v4; // di
-  signed int i; // ebp
-  signed __int64 v6; // rbx
-  _DWORD *v7; // rdx
-  bool v8; // zf
-  Scaleform::GFx::AS3::ValueRegisterFile::Page *v9; // rdx
+  int v5; // ebp
+  Scaleform::GFx::AS3::Value *v6; // rbx
+  Scaleform::GFx::AS3::WeakProxy *pWeakProxy; // rdx
+  Scaleform::GFx::AS3::ValueRegisterFile::Page *pCurrentPage; // rdx
   Scaleform::GFx::AS3::ValueRegisterFile::Page *v10; // rdx
-  unsigned __int16 v11; // cx
+  unsigned __int16 MaxReservedPageSize; // cx
   Scaleform::GFx::AS3::ValueRegisterFile::Page *v12; // rax
-  Scaleform::GFx::AS3::ValueRegisterFile::Page *v13; // rdx
+  Scaleform::GFx::AS3::ValueRegisterFile::Page *pPrev; // rdx
   Scaleform::GFx::AS3::ValueRegisterFile::Page *v14; // rax
   Scaleform::GFx::AS3::ValueRegisterFile::Page *v15; // rcx
 
-  v2 = n;
-  v3 = this;
   v4 = 0;
-  for ( i = n; v4 < i; ++v4 )
+  v5 = n;
+  if ( n )
   {
-    v6 = (signed __int64)&v3->pRF[v4];
-    if ( (*(_BYTE *)v6 & 0x1F) > 9 )
+    do
     {
-      if ( (*(_DWORD *)v6 >> 9) & 1 )
+      v6 = &this->pRF[v4];
+      if ( (v6->Flags & 0x1F) > 9 )
       {
-        v7 = *(_DWORD **)(v6 + 8);
-        v8 = (*v7)-- == 1;
-        if ( v8 )
-          ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-        *(_DWORD *)v6 &= 0xFFFFFDE0;
-        *(_QWORD *)(v6 + 8) = 0i64;
-        *(_QWORD *)(v6 + 16) = 0i64;
-        *(_QWORD *)(v6 + 24) = 0i64;
+        if ( (v6->Flags & 0x200) != 0 )
+        {
+          pWeakProxy = v6->Bonus.pWeakProxy;
+          if ( pWeakProxy->RefCount-- == 1 )
+            ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+          v6->Flags &= 0xFFFFFDE0;
+          v6->Bonus.pWeakProxy = 0i64;
+          v6->value.VS._1.VStr = 0i64;
+          v6->value.VS._2.VObj = 0i64;
+        }
+        else
+        {
+          Scaleform::GFx::AS3::Value::ReleaseInternal(&this->pRF[v4]);
+        }
       }
-      else
-      {
-        Scaleform::GFx::AS3::Value::ReleaseInternal(&v3->pRF[v4]);
-      }
+      ++v4;
     }
+    while ( v4 < v5 );
   }
-  v3->ReservedNum -= v2;
-  v9 = v3->pCurrentPage;
-  v3->pRF -= *((unsigned __int16 *)&v9->Values[0].Flags + --v9->CurrPos + 16i64 * v9->PageSize);
-  if ( !v3->ReservedNum )
+  this->ReservedNum -= n;
+  pCurrentPage = this->pCurrentPage;
+  this->pRF -= *((unsigned __int16 *)&pCurrentPage->Values[pCurrentPage->PageSize].Flags + --pCurrentPage->CurrPos);
+  if ( !this->ReservedNum )
   {
-    v10 = v3->pCurrentPage;
+    v10 = this->pCurrentPage;
     if ( v10->pPrev )
     {
-      v11 = v3->MaxReservedPageSize;
-      v12 = v3->pCurrentPage;
-      if ( v11 < v10->PageSize )
-        v11 = v10->PageSize;
-      v3->MaxReservedPageSize = v11;
-      v13 = v10->pPrev;
+      MaxReservedPageSize = this->MaxReservedPageSize;
+      v12 = this->pCurrentPage;
+      if ( MaxReservedPageSize < v10->PageSize )
+        MaxReservedPageSize = v10->PageSize;
+      this->MaxReservedPageSize = MaxReservedPageSize;
+      pPrev = v10->pPrev;
       v12->pPrev = 0i64;
-      v3->pCurrentPage->pNext = v3->pReserved;
-      v14 = v3->pCurrentPage;
-      v3->pCurrentPage = v13;
-      v3->pReserved = v14;
-      v13->pNext = 0i64;
-      v15 = v3->pCurrentPage;
-      v3->ReservedNum = v15->ReservedNum;
-      v3->pRF = v15->pCurrent;
+      this->pCurrentPage->pNext = this->pReserved;
+      v14 = this->pCurrentPage;
+      this->pCurrentPage = pPrev;
+      this->pReserved = v14;
+      pPrev->pNext = 0i64;
+      v15 = this->pCurrentPage;
+      this->ReservedNum = v15->ReservedNum;
+      this->pRF = v15->pCurrent;
     }
   }
 }
 
 // File Line: 350
 // RVA: 0x7B0440
-Scaleform::GFx::AS3::ValueRegisterFile::Page *__fastcall Scaleform::GFx::AS3::ValueRegisterFile::AllocPage(Scaleform::GFx::AS3::ValueRegisterFile *this, unsigned __int16 pageSize)
+Scaleform::GFx::AS3::ValueRegisterFile::Page *__fastcall Scaleform::GFx::AS3::ValueRegisterFile::AllocPage(
+        Scaleform::GFx::AS3::ValueRegisterFile *this,
+        unsigned __int16 pageSize)
 {
-  Scaleform::GFx::AS3::ValueRegisterFile *v2; // r11
-  unsigned __int16 v3; // cx
+  unsigned __int16 MaxAllocatedPageSize; // cx
   unsigned __int16 v4; // ax
   unsigned __int16 v5; // bx
   Scaleform::GFx::AS3::ValueRegisterFile::Page *result; // rax
 
-  v2 = this;
-  v3 = this->MaxAllocatedPageSize;
-  if ( pageSize <= v3 )
+  MaxAllocatedPageSize = this->MaxAllocatedPageSize;
+  if ( pageSize <= MaxAllocatedPageSize )
   {
     v4 = 64;
-    if ( v3 > 0x40u )
-      v4 = v3;
+    if ( MaxAllocatedPageSize > 0x40u )
+      v4 = MaxAllocatedPageSize;
   }
   else
   {
     v4 = ((((pageSize + 64) >> 31) & 0x3F) + pageSize + 64) & 0xFFC0;
   }
-  v2->MaxAllocatedPageSize = v4;
+  this->MaxAllocatedPageSize = v4;
   v5 = v4;
   result = (Scaleform::GFx::AS3::ValueRegisterFile::Page *)Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap(
                                                              Scaleform::Memory::pGlobalHeap,
-                                                             v2,
+                                                             this,
                                                              2 * (v4 + 16 * (v4 - 1 + 2i64)),
                                                              0i64);
-  result->PageSize = v5;
-  result->ReservedNum = 0;
+  *(_DWORD *)&result->PageSize = v5;
   result->CurrPos = 0;
   result->pCurrent = 0i64;
   return result;
@@ -549,10 +539,12 @@ Scaleform::GFx::AS3::ValueRegisterFile::Page *__fastcall Scaleform::GFx::AS3::Va
 
 // File Line: 370
 // RVA: 0x802350
-Scaleform::GFx::AS3::ValueRegisterFile::Page *__fastcall Scaleform::GFx::AS3::ValueRegisterFile::NewPage(Scaleform::GFx::AS3::ValueRegisterFile *this, unsigned __int16 pageSize)
+Scaleform::GFx::AS3::ValueRegisterFile::Page *__fastcall Scaleform::GFx::AS3::ValueRegisterFile::NewPage(
+        Scaleform::GFx::AS3::ValueRegisterFile *this,
+        unsigned __int16 pageSize)
 {
   Scaleform::GFx::AS3::ValueRegisterFile::Page *result; // rax
-  Scaleform::GFx::AS3::ValueRegisterFile::Page *v3; // rdx
+  Scaleform::GFx::AS3::ValueRegisterFile::Page *pNext; // rdx
   Scaleform::GFx::AS3::ValueRegisterFile::Page *v4; // rdx
 
   if ( pageSize > this->MaxReservedPageSize )
@@ -568,10 +560,10 @@ Scaleform::GFx::AS3::ValueRegisterFile::Page *__fastcall Scaleform::GFx::AS3::Va
   }
   if ( result == this->pReserved )
   {
-    v3 = result->pNext;
-    this->pReserved = v3;
-    if ( v3 )
-      v3->pPrev = 0i64;
+    pNext = result->pNext;
+    this->pReserved = pNext;
+    if ( pNext )
+      pNext->pPrev = 0i64;
     result->pNext = 0i64;
   }
   else

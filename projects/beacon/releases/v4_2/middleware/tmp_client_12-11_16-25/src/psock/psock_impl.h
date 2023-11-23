@@ -7,19 +7,16 @@ bool __fastcall OSuite::psock::IsSocketValid(OSuite::psock::psock_private *socke
 
 // File Line: 135
 // RVA: 0xEED364
-void __fastcall OSuite::psock::new_psock(OSuite::psock::psock_private **r, unsigned __int64 socket, bool async, OSuite::psock::protocol_t prot, bool secure)
+void __fastcall OSuite::psock::new_psock(
+        OSuite::psock::psock_private **r,
+        unsigned __int64 socket,
+        bool async,
+        OSuite::psock::protocol_t prot,
+        bool secure)
 {
-  void **v5; // rbx
   OSuite::psock::psock_private *v6; // rcx
-  OSuite::psock::protocol_t v7; // edi
-  bool v8; // si
-  unsigned __int64 v9; // rbp
 
-  v5 = (void **)r;
   v6 = *r;
-  v7 = prot;
-  v8 = async;
-  v9 = socket;
   if ( v6 )
   {
     if ( v6->socket != -1i64 )
@@ -27,25 +24,25 @@ void __fastcall OSuite::psock::new_psock(OSuite::psock::psock_private **r, unsig
   }
   else
   {
-    *v5 = (void *)((__int64 (__fastcall *)(OSuite::IAllocator *, signed __int64))OSuite::ZObject::m_allocator->vfptr->malloc)(
-                    OSuite::ZObject::m_allocator,
-                    112i64);
+    *r = (OSuite::psock::psock_private *)((__int64 (__fastcall *)(OSuite::IAllocator *, __int64))OSuite::ZObject::m_allocator->vfptr->malloc)(
+                                           OSuite::ZObject::m_allocator,
+                                           112i64);
   }
-  memset(*v5, 0, 0x70ui64);
-  *(_QWORD *)*v5 = v9;
-  *((_BYTE *)*v5 + 12) = v8;
-  *((_DWORD *)*v5 + 2) = v7;
-  *((_DWORD *)*v5 + 4) = 1;
-  *((_DWORD *)*v5 + 5) = 0;
-  *((_DWORD *)*v5 + 6) = 30000;
-  *((_DWORD *)*v5 + 8) = 0;
-  *((_QWORD *)*v5 + 5) = 0i64;
-  *((_BYTE *)*v5 + 64) = secure;
-  *((_QWORD *)*v5 + 9) = 0i64;
-  *((_QWORD *)*v5 + 10) = 0i64;
-  *((_QWORD *)*v5 + 11) = 0i64;
-  *((_QWORD *)*v5 + 12) = 0i64;
-  *((_QWORD *)*v5 + 13) = 0i64;
+  memset(*r, 0, sizeof(OSuite::psock::psock_private));
+  (*r)->socket = socket;
+  (*r)->async = async;
+  (*r)->protocol = prot;
+  (*r)->state = STATE_CONNECTING_PHASE2;
+  (*r)->lasterror = ERR_OK;
+  (*r)->connect_timeout = 30000;
+  (*r)->proxy.state = PROXYSTATE_INITIAL;
+  (*r)->proxy.socks5 = 0i64;
+  (*r)->tls.secure = secure;
+  (*r)->tls.ssl = 0i64;
+  (*r)->tls.buffer = 0i64;
+  (*r)->tls.buffersize = 0i64;
+  (*r)->tls.bufferused = 0i64;
+  (*r)->tls.bufferindex = 0i64;
 }
 
 // File Line: 169
@@ -54,7 +51,7 @@ void __fastcall OSuite::psock::enablebroadcast(OSuite::psock::psock_private *soc
 {
   int v2; // eax
   unsigned __int64 v3; // rcx
-  char optval[4]; // [rsp+30h] [rbp-18h]
+  char optval[4]; // [rsp+30h] [rbp-18h] BYREF
 
   if ( socket )
   {
@@ -62,7 +59,7 @@ void __fastcall OSuite::psock::enablebroadcast(OSuite::psock::psock_private *soc
     if ( socket->protocol == PROT_UDP )
     {
       v3 = socket->socket;
-      LOBYTE(v2) = enable != 0;
+      LOBYTE(v2) = enable;
       *(_DWORD *)optval = v2;
       setsockopt(v3, 0xFFFF, 32, optval, 4);
     }
@@ -73,14 +70,10 @@ void __fastcall OSuite::psock::enablebroadcast(OSuite::psock::psock_private *soc
 // RVA: 0xEECD04
 char __fastcall OSuite::psock::getaddrbyname(OSuite::psock::ipv4addr_t *result, const char *hostname)
 {
-  const char *v2; // rdi
-  OSuite::psock::ipv4addr_t *v3; // rbx
   struct hostent *v4; // rax
   u_long v5; // ecx
   unsigned int v6; // eax
 
-  v2 = hostname;
-  v3 = result;
   if ( hostname && result )
   {
     v4 = gethostbyname(hostname);
@@ -88,15 +81,15 @@ char __fastcall OSuite::psock::getaddrbyname(OSuite::psock::ipv4addr_t *result, 
     {
       v5 = ntohl(**(_DWORD **)v4->h_addr_list);
 LABEL_6:
-      v3->b[3] = v5;
-      v3->xlspindex = -1;
-      v3->b[0] = HIBYTE(v5);
-      v3->b[1] = BYTE2(v5);
-      v3->type = 0;
-      v3->b[2] = BYTE1(v5);
+      result->b[3] = v5;
+      result->xlspindex = -1;
+      result->b[0] = HIBYTE(v5);
+      result->b[1] = BYTE2(v5);
+      result->type = ADDR_IPV4;
+      result->b[2] = BYTE1(v5);
       return 1;
     }
-    v6 = inet_addr(v2);
+    v6 = inet_addr(hostname);
     v5 = ntohl(v6);
     if ( v5 != -1 )
       goto LABEL_6;
@@ -159,7 +152,7 @@ void __fastcall OSuite::psock::shutdown(OSuite::psock *this)
     OSuite::ZObject::m_allocator->vfptr->free(OSuite::ZObject::m_allocator, g_pszProxyHost);
     g_pszProxyHost = 0i64;
     g_nProxyPort = 0;
-    g_eProxyType = 0;
+    g_eProxyType = PROXY_NONE;
     OSuite::psock::g_bInitialized = 0;
   }
 }
@@ -168,34 +161,30 @@ void __fastcall OSuite::psock::shutdown(OSuite::psock *this)
 // RVA: 0xEECA4C
 bool __fastcall OSuite::psock::connectedToNetwork()
 {
-  unsigned int dwFlags; // [rsp+20h] [rbp-18h]
+  unsigned int dwFlags; // [rsp+20h] [rbp-18h] BYREF
 
-  return InternetGetConnectedState(&dwFlags, 0) == 1;
+  return InternetGetConnectedState(&dwFlags, 0);
 }
 
 // File Line: 523
 // RVA: 0xEECA84
-void __fastcall OSuite::psock::create(OSuite::psock::psock_private **newSocket, OSuite::psock::protocol_t prot, bool async, bool secure)
+void __fastcall OSuite::psock::create(
+        OSuite::psock::psock_private **newSocket,
+        OSuite::psock::protocol_t prot,
+        bool async,
+        bool secure)
 {
-  OSuite::psock::psock_private **v4; // rbx
-  bool v5; // r14
-  bool v6; // bp
-  OSuite::psock::protocol_t v7; // esi
-  int v8; // er8
+  int v8; // r8d
   int v9; // edx
-  unsigned __int64 v10; // rax
+  SOCKET v10; // rax
   SOCKET v11; // rdi
 
-  v4 = newSocket;
-  v5 = secure;
-  v6 = async;
-  v7 = prot;
   if ( prot )
   {
-    if ( prot != 2 )
+    if ( prot != PROT_TCP )
     {
 LABEL_3:
-      *v4 = 0i64;
+      *newSocket = 0i64;
       return;
     }
     v8 = 0;
@@ -210,33 +199,28 @@ LABEL_3:
   v11 = v10;
   if ( v10 == -1i64 )
     goto LABEL_3;
-  if ( v6 && !OSuite::psock::platform::SetAsync(v10, 1) )
+  if ( async && !OSuite::psock::platform::SetAsync(v10, 1) )
   {
     closesocket(v11);
     goto LABEL_3;
   }
-  OSuite::psock::new_psock(v4, v11, v6, v7, v5);
-  if ( *v4 )
-    OSuite::psock::enablebroadcast(*v4, 0);
+  OSuite::psock::new_psock(newSocket, v11, async, prot, secure);
+  if ( *newSocket )
+    OSuite::psock::enablebroadcast(*newSocket, 0);
 }
 
 // File Line: 616
 // RVA: 0xEEC5A0
 void __fastcall OSuite::psock::abort(OSuite::psock::psock_private *socket, OSuite::psock::err_t err)
 {
-  OSuite::psock::psock_private *v2; // rdi
-  OSuite::psock::err_t v3; // ebx
-
   if ( socket )
   {
-    v2 = socket;
-    v3 = err;
     shutdown(socket->socket, 2);
-    if ( v3 )
+    if ( err )
     {
-      v2->lasterror = v3;
+      socket->lasterror = err;
       if ( OSuite::psock::g_ErrorCallback )
-        OSuite::psock::g_ErrorCallback(v3);
+        OSuite::psock::g_ErrorCallback(err);
     }
   }
 }
@@ -245,20 +229,18 @@ void __fastcall OSuite::psock::abort(OSuite::psock::psock_private *socket, OSuit
 // RVA: 0xEEC5E4
 bool __fastcall OSuite::psock::close(OSuite::psock::psock_private *socket)
 {
-  OSuite::psock::psock_private *v1; // rdi
-  OSuite::psock::psock_private *v2; // rcx
+  OSuite::psock::psock_private *socks5; // rcx
   bool result; // al
-  SOCKET v4; // rcx
+  unsigned __int64 v4; // rcx
 
-  v1 = socket;
-  v2 = socket->proxy.socks5;
-  if ( !v2 || (result = OSuite::psock::close(v2)) != 0 )
+  socks5 = socket->proxy.socks5;
+  if ( !socks5 || (result = OSuite::psock::close(socks5)) )
   {
-    v4 = v1->socket;
-    v1->socket = -1i64;
-    v1->state = 5;
-    v1->lasterror = 4;
-    result = closesocket(v4) == 0;
+    v4 = socket->socket;
+    socket->socket = -1i64;
+    socket->state = STATE_CLOSED|STATE_CONNECTING_PHASE2;
+    socket->lasterror = ERR_CLOSED;
+    return closesocket(v4) == 0;
   }
   return result;
 }
@@ -267,70 +249,56 @@ bool __fastcall OSuite::psock::close(OSuite::psock::psock_private *socket)
 // RVA: 0xEECCB8
 void __fastcall OSuite::psock::free(OSuite::psock::psock_private *socket)
 {
-  OSuite::psock::psock_private *v1; // rbx
-
   if ( socket )
   {
-    v1 = socket;
     if ( socket->tls.secure )
     {
       ssl_free(socket->tls.ssl);
-      OSuite::ZObject::m_allocator->vfptr->free(OSuite::ZObject::m_allocator, v1->tls.buffer);
+      OSuite::ZObject::m_allocator->vfptr->free(OSuite::ZObject::m_allocator, socket->tls.buffer);
     }
-    if ( !v1->proxy.socks5 )
-      OSuite::ZObject::m_allocator->vfptr->free(OSuite::ZObject::m_allocator, v1);
+    if ( !socket->proxy.socks5 )
+      OSuite::ZObject::m_allocator->vfptr->free(OSuite::ZObject::m_allocator, socket);
   }
 }
 
 // File Line: 673
 // RVA: 0xEED304
-void __fastcall OSuite::psock::mksockaddr(sockaddr_in *sa, OSuite::psock::ipv4addr_t *addr, int port)
+void __fastcall OSuite::psock::mksockaddr(sockaddr_in *sa, OSuite::psock::ipv4addr_t *addr, u_short port)
 {
-  OSuite::psock::ipv4addr_t *v3; // rdi
-  u_short v4; // bx
-  sockaddr_in *v5; // rsi
-
-  v3 = addr;
-  v4 = port;
-  v5 = sa;
-  memset(sa, 0, 0x10ui64);
-  v5->sin_family = 2;
-  v5->sin_port = htons(v4);
-  v5->sin_addr.S_un.S_un_b.s_b1 = v3->b[0];
-  v5->sin_addr.S_un.S_un_b.s_b2 = v3->b[1];
-  v5->sin_addr.S_un.S_un_b.s_b3 = v3->b[2];
-  v5->sin_addr.S_un.S_un_b.s_b4 = v3->b[3];
+  memset(sa, 0, sizeof(sockaddr_in));
+  sa->sin_family = 2;
+  sa->sin_port = htons(port);
+  sa->sin_addr = *(in_addr *)addr->b;
 }
 
 // File Line: 719
 // RVA: 0xEECFE8
-char __fastcall OSuite::psock::getsockname(OSuite::psock::psock_private *socket, OSuite::psock::ipv4addr_t *addr, int *port)
+char __fastcall OSuite::psock::getsockname(
+        OSuite::psock::psock_private *socket,
+        OSuite::psock::ipv4addr_t *addr,
+        int *port)
 {
   unsigned __int64 v3; // rcx
-  int *v4; // rdi
-  OSuite::psock::ipv4addr_t *v5; // rbx
   char v6; // al
-  int namelen; // [rsp+20h] [rbp-28h]
-  struct sockaddr name; // [rsp+28h] [rbp-20h]
+  int namelen; // [rsp+20h] [rbp-28h] BYREF
+  struct sockaddr name; // [rsp+28h] [rbp-20h] BYREF
 
   v3 = socket->socket;
-  v4 = port;
-  v5 = addr;
   namelen = 16;
   if ( getsockname(v3, &name, &namelen) )
     return 0;
-  if ( v5 )
+  if ( addr )
   {
     v6 = name.sa_data[2];
-    v5->type = 0;
-    v5->xlspindex = -1;
-    v5->b[0] = v6;
-    v5->b[1] = name.sa_data[3];
-    v5->b[2] = name.sa_data[4];
-    v5->b[3] = name.sa_data[5];
+    addr->type = ADDR_IPV4;
+    addr->xlspindex = -1;
+    addr->b[0] = v6;
+    addr->b[1] = name.sa_data[3];
+    addr->b[2] = name.sa_data[4];
+    addr->b[3] = name.sa_data[5];
   }
-  if ( v4 )
-    *v4 = htons(*(u_short *)name.sa_data);
+  if ( port )
+    *port = htons(*(u_short *)name.sa_data);
   return 1;
 }
 
@@ -338,92 +306,80 @@ char __fastcall OSuite::psock::getsockname(OSuite::psock::psock_private *socket,
 // RVA: 0xEED274
 void __fastcall OSuite::psock::mkpsockset(OSuite::psock::psockset_t *out, OSuite::psock::psockset_t *in, fd_set *set)
 {
-  __int64 v3; // r10
-  OSuite::psock::psockset_t *v4; // rdi
-  signed __int64 v5; // rsi
-  int v6; // er11
-  signed __int64 v7; // rdx
-  OSuite::psock::psocksetmember_t *v8; // rbx
+  __int64 i; // r10
+  __int64 count; // rsi
+  int v6; // r11d
+  __int64 v7; // rdx
+  OSuite::psock::psocksetmember_t *array; // rbx
 
   out->count = 0;
-  v3 = 0i64;
-  v4 = in;
-  if ( set->fd_count )
+  for ( i = 0i64; (unsigned int)i < set->fd_count; i = (unsigned int)(i + 1) )
   {
-    do
+    count = in->count;
+    v6 = 0;
+    v7 = 0i64;
+    if ( count > 0 )
     {
-      v5 = v4->count;
-      v6 = 0;
-      v7 = 0i64;
-      if ( v5 > 0 )
+      array = in->array;
+      do
       {
-        v8 = v4->array;
-        do
-        {
-          if ( v7 >= 32 )
-            break;
-          if ( v8->socket->socket == set->fd_array[v3] )
-            break;
-          ++v7;
-          ++v6;
-          ++v8;
-        }
-        while ( v7 < v5 );
+        if ( v7 >= 32 )
+          break;
+        if ( array->socket->socket == set->fd_array[i] )
+          break;
+        ++v7;
+        ++v6;
+        ++array;
       }
-      if ( v6 < v4->count && v7 < 32 )
-        _mm_storeu_si128((__m128i *)&out->array[out->count++], (__m128i)v4->array[v7]);
-      v3 = (unsigned int)(v3 + 1);
+      while ( v7 < count );
     }
-    while ( (unsigned int)v3 < set->fd_count );
+    if ( v6 < in->count && v7 < 32 )
+      out->array[out->count++] = in->array[v7];
   }
 }
 
 // File Line: 910
 // RVA: 0xEEDFA8
-signed __int64 __fastcall OSuite::psock::selectread(OSuite::psock::psockset_t *out, OSuite::psock::psockset_t *in, int timeout)
+__int64 __fastcall OSuite::psock::selectread(
+        OSuite::psock::psockset_t *out,
+        OSuite::psock::psockset_t *in,
+        int timeout)
 {
-  OSuite::psock::psockset_t *v3; // rbx
-  int v4; // er10
-  OSuite::psock::psockset_t *v5; // rdi
   __int64 v6; // rdx
-  __int64 v7; // r9
-  OSuite::psock::psocksetmember_t *v8; // r8
-  OSuite::psock::psock_private *v9; // rax
+  __int64 fd_count; // r9
+  OSuite::psock::psocksetmember_t *array; // r8
+  OSuite::psock::psock_private *socket; // rax
   const struct timeval *v10; // rcx
   int v11; // eax
-  int v13; // [rsp+30h] [rbp-248h]
-  int v14; // [rsp+34h] [rbp-244h]
-  fd_set readfds; // [rsp+40h] [rbp-238h]
+  int v13[4]; // [rsp+30h] [rbp-248h] BYREF
+  fd_set readfds; // [rsp+40h] [rbp-238h] BYREF
 
-  v3 = in;
-  v4 = timeout;
-  v5 = out;
   readfds.fd_count = in->count;
   v6 = 0i64;
-  v7 = (signed int)readfds.fd_count;
-  if ( (signed int)readfds.fd_count > 0 )
+  fd_count = (int)readfds.fd_count;
+  if ( (int)readfds.fd_count > 0 )
   {
-    v8 = v3->array;
+    array = in->array;
     do
     {
-      v9 = v8->socket;
+      socket = array->socket;
       ++v6;
-      ++v8;
-      *((_QWORD *)&readfds.fd_count + v6) = v9->socket;
+      ++array;
+      *((_QWORD *)&readfds.fd_count + v6) = socket->socket;
     }
-    while ( v6 < v7 );
+    while ( v6 < fd_count );
   }
-  v10 = (const struct timeval *)&v13;
-  v13 = v4 / 1000;
-  v14 = 1000 * (v4 % 1000);
-  if ( v4 == -1 )
+  v10 = (const struct timeval *)v13;
+  v13[0] = timeout / 1000;
+  v13[1] = 1000 * (timeout % 1000);
+  if ( timeout == -1 )
     v10 = 0i64;
   v11 = select(0, &readfds, 0i64, 0i64, v10);
   if ( v11 == -1 )
     return 1i64;
   if ( !v11 )
     return 3i64;
-  OSuite::psock::mkpsockset(v5, v3, &readfds);
+  OSuite::psock::mkpsockset(out, in, &readfds);
   return 0i64;
 }
 
@@ -432,30 +388,28 @@ signed __int64 __fastcall OSuite::psock::selectread(OSuite::psock::psockset_t *o
 __int64 __fastcall OSuite::psock::waitwrite(OSuite::psock::psock_private *socket, int timeout)
 {
   bool v2; // zf
-  OSuite::psock::psock_private *v3; // rdi
   unsigned __int64 v4; // rcx
   OSuite::psock::err_t v5; // ebx
-  char optval[4]; // [rsp+30h] [rbp-448h]
-  int optlen; // [rsp+34h] [rbp-444h]
-  OSuite::psock::psockset_t in; // [rsp+40h] [rbp-438h]
-  OSuite::psock::psockset_t out; // [rsp+250h] [rbp-228h]
+  char optval[4]; // [rsp+30h] [rbp-448h] BYREF
+  int optlen[3]; // [rsp+34h] [rbp-444h] BYREF
+  OSuite::psock::psockset_t in; // [rsp+40h] [rbp-438h] BYREF
+  OSuite::psock::psockset_t out; // [rsp+250h] [rbp-228h] BYREF
 
   out.count = 0;
   in.array[0].userdata = 0i64;
-  v2 = socket->async == 0;
-  v3 = socket;
+  v2 = !socket->async;
   in.array[0].socket = socket;
   in.count = 1;
   if ( v2 )
   {
     v4 = socket->socket;
     *(_DWORD *)optval = 0;
-    optlen = 4;
-    getsockopt(v4, 0xFFFF, 4101, optval, &optlen);
+    optlen[0] = 4;
+    getsockopt(v4, 0xFFFF, 4101, optval, optlen);
     timeout = *(_DWORD *)optval;
   }
   v5 = (unsigned int)OSuite::psock::selectwrite(&out, &in, timeout);
-  v3->lasterror = v5;
+  socket->lasterror = v5;
   if ( OSuite::psock::g_ErrorCallback )
     OSuite::psock::g_ErrorCallback(v5);
   return (unsigned int)v5;
@@ -463,73 +417,69 @@ __int64 __fastcall OSuite::psock::waitwrite(OSuite::psock::psock_private *socket
 
 // File Line: 974
 // RVA: 0xEEE090
-signed __int64 __fastcall OSuite::psock::selectwrite(OSuite::psock::psockset_t *out, OSuite::psock::psockset_t *in, int timeout)
+__int64 __fastcall OSuite::psock::selectwrite(
+        OSuite::psock::psockset_t *out,
+        OSuite::psock::psockset_t *in,
+        int timeout)
 {
-  OSuite::psock::psockset_t *v3; // rbx
-  int v4; // er10
-  OSuite::psock::psockset_t *v5; // rdi
   __int64 v6; // rdx
-  __int64 v7; // r9
-  OSuite::psock::psocksetmember_t *v8; // r8
-  OSuite::psock::psock_private *v9; // rax
+  __int64 fd_count; // r9
+  OSuite::psock::psocksetmember_t *array; // r8
+  OSuite::psock::psock_private *socket; // rax
   const struct timeval *v10; // rcx
   int v11; // eax
-  int v13; // [rsp+30h] [rbp-248h]
-  int v14; // [rsp+34h] [rbp-244h]
-  fd_set writefds; // [rsp+40h] [rbp-238h]
+  int v13[4]; // [rsp+30h] [rbp-248h] BYREF
+  fd_set writefds; // [rsp+40h] [rbp-238h] BYREF
 
-  v3 = in;
-  v4 = timeout;
-  v5 = out;
   writefds.fd_count = in->count;
   v6 = 0i64;
-  v7 = (signed int)writefds.fd_count;
-  if ( (signed int)writefds.fd_count > 0 )
+  fd_count = (int)writefds.fd_count;
+  if ( (int)writefds.fd_count > 0 )
   {
-    v8 = v3->array;
+    array = in->array;
     do
     {
-      v9 = v8->socket;
+      socket = array->socket;
       ++v6;
-      ++v8;
-      *((_QWORD *)&writefds.fd_count + v6) = v9->socket;
+      ++array;
+      *((_QWORD *)&writefds.fd_count + v6) = socket->socket;
     }
-    while ( v6 < v7 );
+    while ( v6 < fd_count );
   }
-  v10 = (const struct timeval *)&v13;
-  v13 = v4 / 1000;
-  if ( v4 == -1 )
+  v10 = (const struct timeval *)v13;
+  v13[0] = timeout / 1000;
+  if ( timeout == -1 )
     v10 = 0i64;
-  v14 = 1000 * (v4 % 1000);
+  v13[1] = 1000 * (timeout % 1000);
   v11 = select(0, 0i64, &writefds, 0i64, v10);
   if ( v11 == -1 )
     return 1i64;
   if ( !v11 )
     return 3i64;
-  OSuite::psock::mkpsockset(v5, v3, &writefds);
+  OSuite::psock::mkpsockset(out, in, &writefds);
   return 0i64;
 }
 
 // File Line: 1089
 // RVA: 0xEEE36C
-char __fastcall OSuite::psock::settimeout(OSuite::psock::psock_private *socket, int sendtimeout, int recvtimeout, int connecttimeout)
+char __fastcall OSuite::psock::settimeout(
+        OSuite::psock::psock_private *socket,
+        int sendtimeout,
+        int recvtimeout,
+        int connecttimeout)
 {
-  int v4; // edi
-  OSuite::psock::psock_private *v5; // rbx
   unsigned __int64 v7; // rcx
-  SOCKET v8; // rcx
-  char optval[4]; // [rsp+30h] [rbp-18h]
+  unsigned __int64 v8; // rcx
+  char optval[4]; // [rsp+30h] [rbp-18h] BYREF
 
-  v4 = sendtimeout;
-  v5 = socket;
   if ( socket->async )
     return 0;
   socket->connect_timeout = connecttimeout;
   v7 = socket->socket;
   *(_DWORD *)optval = recvtimeout;
   setsockopt(v7, 0xFFFF, 4102, optval, 4);
-  v8 = v5->socket;
-  *(_DWORD *)optval = v4;
+  v8 = socket->socket;
+  *(_DWORD *)optval = sendtimeout;
   setsockopt(v8, 0xFFFF, 4101, optval, 4);
   return 1;
 }
@@ -539,31 +489,27 @@ char __fastcall OSuite::psock::settimeout(OSuite::psock::psock_private *socket, 
 __int64 __fastcall OSuite::psock::getinterfaces(OSuite::psock::interface_t *dest, int count)
 {
   int v2; // ebx
-  OSuite::psock::interface_t *v3; // r14
-  int v4; // ebp
+  int dwNumEntries; // ebp
   _MIB_IPADDRTABLE *v5; // rax
   _MIB_IPADDRTABLE *v6; // rsi
   _IP_ADAPTER_INFO *v7; // rax
   _IP_ADAPTER_INFO *v8; // r12
-  unsigned int v9; // er15
-  OSuite::psock::address_t *v10; // r13
+  unsigned int v9; // r15d
+  OSuite::psock::address_t *p_type; // r13
   _IP_ADAPTER_INFO *v11; // rdx
-  unsigned int v12; // eax
-  signed __int64 v13; // rdi
-  signed __int64 v14; // rbx
+  unsigned int Type; // eax
+  unsigned int *v13; // rdi
+  OSuite::psock::interface_t *v14; // rbx
   __int64 v15; // rax
   OSuite::psock::address_t *v16; // r8
   OSuite::psock::address_t *v17; // r9
-  signed __int64 v18; // r10
+  __int64 v18; // r10
   char v19; // cl
   char v20; // dl
-  int v22; // [rsp+20h] [rbp-38h]
-  unsigned int v23; // [rsp+24h] [rbp-34h]
+  unsigned int v23; // [rsp+24h] [rbp-34h] BYREF
 
   v2 = count;
-  v22 = count;
-  v3 = dest;
-  v4 = 0;
+  dwNumEntries = 0;
   if ( !g_fpGetAdaptersInfo || !g_fpGetIpAddrTable )
     return 0i64;
   v23 = 0;
@@ -575,7 +521,7 @@ __int64 __fastcall OSuite::psock::getinterfaces(OSuite::psock::interface_t *dest
     {
       if ( !g_fpGetIpAddrTable(v5, &v23, 0) )
       {
-        if ( v3 )
+        if ( dest )
         {
           v23 = 0;
           if ( g_fpGetAdaptersInfo(0i64, &v23) == 111 )
@@ -590,36 +536,36 @@ __int64 __fastcall OSuite::psock::getinterfaces(OSuite::psock::interface_t *dest
               if ( !g_fpGetAdaptersInfo(v7, &v23) )
               {
                 v9 = 0;
-                if ( v6->dwNumEntries > 0 )
+                if ( v6->dwNumEntries )
                 {
-                  v10 = &v3->netmask.type;
+                  p_type = &dest->netmask.type;
                   do
                   {
-                    if ( v4 >= v2 )
+                    if ( dwNumEntries >= v2 )
                       break;
                     v11 = v8;
                     while ( 1 )
                     {
                       if ( v6->table[v9].dwIndex == v11->Index )
                       {
-                        v12 = v11->Type;
-                        if ( v12 == 6 || v12 == 71 )
+                        Type = v11->Type;
+                        if ( Type == 6 || Type == 71 )
                           break;
                       }
                       v11 = v11->Next;
                       if ( !v11 )
                         goto LABEL_21;
                     }
-                    v13 = (signed __int64)v6 + 24 * v9;
-                    v14 = (signed __int64)&v3[v4];
-                    memmove((void *)(v14 + 36), v11->Address, 6ui64);
-                    memmove((void *)v14, (const void *)(v13 + 4), 4ui64);
-                    *((_DWORD *)v10 - 3) = 0;
-                    memmove((void *)(v14 + 12), (const void *)(v13 + 12), 4ui64);
-                    v2 = v22;
-                    *v10 = 0;
-                    ++v4;
-                    v10 += 11;
+                    v13 = &v6->dwNumEntries + 6 * v9;
+                    v14 = &dest[dwNumEntries];
+                    memmove(v14->mac, v11->Address, 6ui64);
+                    memmove(v14, v13 + 1, 4ui64);
+                    *((_DWORD *)p_type - 3) = 0;
+                    memmove(&v14->netmask, v13 + 3, 4ui64);
+                    v2 = count;
+                    *p_type = ADDR_IPV4;
+                    ++dwNumEntries;
+                    p_type += 11;
 LABEL_21:
                     ++v9;
                   }
@@ -632,18 +578,18 @@ LABEL_21:
         }
         else
         {
-          v4 = v6->dwNumEntries;
+          dwNumEntries = v6->dwNumEntries;
         }
       }
       OSuite::ZObject::m_allocator->vfptr->free(OSuite::ZObject::m_allocator, v6);
     }
   }
-  if ( v3 )
+  if ( dest )
   {
-    v15 = v4;
-    if ( v4 > 0 )
+    v15 = dwNumEntries;
+    if ( dwNumEntries > 0 )
     {
-      v16 = &v3->broadcast.type;
+      v16 = &dest->broadcast.type;
       do
       {
         v17 = v16 - 4;
@@ -657,72 +603,68 @@ LABEL_21:
           --v18;
         }
         while ( v18 );
-        *v16 = 0;
+        *v16 = ADDR_IPV4;
         v16 += 11;
         --v15;
       }
       while ( v15 );
     }
   }
-  return (unsigned int)v4;
+  return (unsigned int)dwNumEntries;
 }
 
 // File Line: 1417
 // RVA: 0xEEDC78
-unsigned __int64 __fastcall OSuite::psock::platform::recv(OSuite::psock::psock_private *socket, void *buf, unsigned __int64 len)
+__int64 __fastcall OSuite::psock::platform::recv(OSuite::psock::psock_private *socket, char *buf, unsigned __int64 len)
 {
-  unsigned __int64 v3; // rdi
-  OSuite::psock::psock_private *v4; // rbx
   void (__fastcall *v5)(OSuite::psock::err_t); // rax
-  signed __int64 v6; // rcx
+  __int64 v6; // rcx
   int v7; // eax
   __int64 v8; // rsi
-  int v10; // eax
+  int Error; // eax
 
-  v3 = len;
-  v4 = socket;
-  if ( socket->state == 5 )
+  if ( socket->state == (STATE_CLOSED|STATE_CONNECTING_PHASE2) )
   {
-    socket->lasterror = 4;
+    socket->lasterror = ERR_CLOSED;
     v5 = OSuite::psock::g_ErrorCallback;
     if ( OSuite::psock::g_ErrorCallback )
     {
       v6 = 4i64;
 LABEL_24:
-      ((void (__fastcall *)(signed __int64, void *))v5)(v6, buf);
+      ((void (__fastcall *)(__int64, char *))v5)(v6, buf);
       return 0i64;
     }
     return 0i64;
   }
-  v7 = recv(socket->socket, (char *)buf, len, 0);
+  v7 = recv(socket->socket, buf, len, 0);
   v8 = v7;
   if ( v7 <= 0 )
   {
     if ( !v7 )
     {
 LABEL_12:
-      v4->lasterror = 4;
+      socket->lasterror = ERR_CLOSED;
       if ( OSuite::psock::g_ErrorCallback )
         OSuite::psock::g_ErrorCallback(ERR_CLOSED);
-      v4->state = 5;
+      socket->state = STATE_CLOSED|STATE_CONNECTING_PHASE2;
       return 0i64;
     }
-    v10 = WSAGetLastError();
-    if ( v10 != 10035 )
+    Error = WSAGetLastError();
+    if ( Error != 10035 )
     {
-      if ( v10 == 10040 )
+      if ( Error == 10040 )
       {
-        v4->lasterror = 0;
-        return v3;
+        socket->lasterror = ERR_OK;
+        return len;
       }
-      if ( v10 <= 10052 )
-        goto LABEL_28;
-      if ( v10 <= 10054 )
+      if ( Error <= 10052 )
+        goto LABEL_20;
+      if ( Error <= 10054 )
         goto LABEL_12;
-      if ( v10 != 10060 )
+      if ( Error != 10060 )
       {
-LABEL_28:
-        v4->lasterror = 1;
+LABEL_20:
+        socket->lasterror = ERR_FAILED;
         v5 = OSuite::psock::g_ErrorCallback;
         if ( OSuite::psock::g_ErrorCallback )
         {
@@ -733,7 +675,7 @@ LABEL_28:
       }
     }
     v6 = 3i64;
-    v4->lasterror = 3;
+    socket->lasterror = ERR_AGAIN;
     v5 = OSuite::psock::g_ErrorCallback;
     if ( OSuite::psock::g_ErrorCallback )
       goto LABEL_24;
@@ -741,39 +683,40 @@ LABEL_28:
   }
   if ( (unsigned int)(WSAGetLastError() - 10053) <= 1 )
   {
-    v4->lasterror = 4;
+    socket->lasterror = ERR_CLOSED;
     if ( OSuite::psock::g_ErrorCallback )
       OSuite::psock::g_ErrorCallback(ERR_CLOSED);
-    v4->lasterror = 4;
-    v4->state = 5;
+    socket->lasterror = ERR_CLOSED;
+    socket->state = STATE_CLOSED|STATE_CONNECTING_PHASE2;
   }
   else
   {
-    v4->lasterror = 0;
+    socket->lasterror = ERR_OK;
   }
   return v8;
 }
 
 // File Line: 1482
 // RVA: 0xEEE178
-unsigned __int64 __fastcall OSuite::psock::platform::send(OSuite::psock::psock_private *socket, const void *buf, unsigned __int64 len)
+unsigned __int64 __fastcall OSuite::psock::platform::send(
+        OSuite::psock::psock_private *socket,
+        const char *buf,
+        unsigned __int64 len)
 {
-  OSuite::psock::psock_private *v3; // rbx
-  signed __int64 v4; // rcx
+  __int64 v4; // rcx
   unsigned __int64 result; // rax
   int v6; // eax
   int v7; // eax
   int v8; // eax
   void (__fastcall *v9)(OSuite::psock::err_t); // rax
 
-  v3 = socket;
-  if ( socket->state == 5 )
+  if ( socket->state == (STATE_CLOSED|STATE_CONNECTING_PHASE2) )
     goto LABEL_2;
-  LODWORD(result) = send(socket->socket, (const char *)buf, len, 0);
+  LODWORD(result) = send(socket->socket, buf, len, 0);
   if ( (_DWORD)result != -1 )
   {
-    v3->lasterror = 0;
-    return (signed int)result;
+    socket->lasterror = ERR_OK;
+    return (int)result;
   }
   v6 = WSAGetLastError() - 10035;
   if ( !v6 )
@@ -796,13 +739,13 @@ LABEL_2:
 LABEL_12:
     v4 = 3i64;
 LABEL_13:
-    v3->lasterror = v4;
+    socket->lasterror = v4;
     v9 = OSuite::psock::g_ErrorCallback;
     if ( OSuite::psock::g_ErrorCallback )
       goto LABEL_14;
     return 0i64;
   }
-  v3->lasterror = 5;
+  socket->lasterror = ERR_MESSAGE_TOO_BIG;
   v9 = OSuite::psock::g_ErrorCallback;
   if ( OSuite::psock::g_ErrorCallback )
   {
@@ -815,84 +758,83 @@ LABEL_14:
 
 // File Line: 1535
 // RVA: 0xEEC924
-char __fastcall OSuite::psock::platform::connect_statemachine(OSuite::psock::psock_private *socket, OSuite::psock::ipv4addr_t *addr, __int64 port)
+char __fastcall OSuite::psock::platform::connect_statemachine(
+        OSuite::psock::psock_private *socket,
+        OSuite::psock::ipv4addr_t *addr,
+        __int64 port)
 {
-  OSuite::psock::psock_private *v3; // rbx
   __int32 v4; // ecx
-  int v5; // ecx
-  int v6; // ecx
-  int v7; // ecx
-  signed __int64 v8; // rcx
-  void (__fastcall *v9)(OSuite::psock::err_t); // rax
-  int v11; // eax
-  sockaddr_in sa; // [rsp+20h] [rbp-28h]
+  __int32 v5; // ecx
+  __int32 v6; // ecx
+  __int64 v7; // rcx
+  void (__fastcall *v8)(OSuite::psock::err_t); // rax
+  int Error; // eax
+  sockaddr_in sa; // [rsp+20h] [rbp-28h] BYREF
 
-  v3 = socket;
   v4 = socket->state - 1;
   if ( !v4 )
   {
-    if ( addr->type == 1 )
+    if ( addr->type == ADDR_LIVESECURE )
     {
-      v3->lasterror = 2;
-      v9 = OSuite::psock::g_ErrorCallback;
+      socket->lasterror = ERR_ARGUMENT;
+      v8 = OSuite::psock::g_ErrorCallback;
       if ( !OSuite::psock::g_ErrorCallback )
         return 0;
-      v8 = 2i64;
-      goto LABEL_10;
+      v7 = 2i64;
+      goto LABEL_9;
     }
-    v3->state = 2;
+    socket->state = STATE_CONNECTED;
     return 1;
   }
   v5 = v4 - 1;
   if ( !v5 )
   {
     OSuite::psock::mksockaddr(&sa, addr, port);
-    OSuite::psock::waitwrite(v3, 100);
-    if ( connect(v3->socket, (const struct sockaddr *)&sa, 16) >= 0 )
+    OSuite::psock::waitwrite(socket, 100);
+    if ( connect(socket->socket, (const struct sockaddr *)&sa, 16) >= 0 )
     {
-LABEL_13:
-      v3->state = 3;
+LABEL_12:
+      socket->state = STATE_CLOSING;
       return 1;
     }
-    if ( !v3->async )
-      goto LABEL_8;
-    v11 = WSAGetLastError();
-    if ( v11 != 10022 )
+    if ( !socket->async )
+      goto LABEL_7;
+    Error = WSAGetLastError();
+    if ( Error != 10022 )
     {
-      if ( v11 <= 10034 )
-        goto LABEL_8;
-      if ( v11 > 10037 )
+      if ( Error <= 10034 )
+        goto LABEL_7;
+      if ( Error > 10037 )
       {
-        if ( v11 == 10056 )
-          goto LABEL_13;
-        if ( v11 != 10060 )
-          goto LABEL_8;
+        if ( Error == 10056 )
+          goto LABEL_12;
+        if ( Error != 10060 )
+          goto LABEL_7;
       }
     }
-    v3->lasterror = 3;
+    socket->lasterror = ERR_AGAIN;
     return 1;
   }
   v6 = v5 - 1;
   if ( v6 )
   {
-    v7 = v6 - 1;
-    if ( v7 && v7 == 1 )
+    if ( v6 == 2 )
     {
-      v8 = 4i64;
-      v3->lasterror = 4;
-      v9 = OSuite::psock::g_ErrorCallback;
+      v7 = 4i64;
+      socket->lasterror = ERR_CLOSED;
+      v8 = OSuite::psock::g_ErrorCallback;
       if ( OSuite::psock::g_ErrorCallback )
-        goto LABEL_10;
+        goto LABEL_9;
       return 0;
     }
-LABEL_8:
-    v3->lasterror = 1;
-    v9 = OSuite::psock::g_ErrorCallback;
+LABEL_7:
+    socket->lasterror = ERR_FAILED;
+    v8 = OSuite::psock::g_ErrorCallback;
     if ( OSuite::psock::g_ErrorCallback )
     {
-      v8 = 1i64;
-LABEL_10:
-      ((void (__fastcall *)(signed __int64, OSuite::psock::ipv4addr_t *, __int64))v9)(v8, addr, port);
+      v7 = 1i64;
+LABEL_9:
+      ((void (__fastcall *)(__int64, OSuite::psock::ipv4addr_t *, __int64))v8)(v7, addr, port);
     }
     return 0;
   }
@@ -901,20 +843,17 @@ LABEL_10:
 
 // File Line: 1701
 // RVA: 0xEEC630
-char __fastcall OSuite::psock::platform::connect(OSuite::psock::psock_private *socket, OSuite::psock::ipv4addr_t *addr, int port)
+char __fastcall OSuite::psock::platform::connect(
+        OSuite::psock::psock_private *socket,
+        OSuite::psock::ipv4addr_t *addr,
+        int port)
 {
-  int v3; // edi
-  OSuite::psock::ipv4addr_t *v4; // rsi
-  OSuite::psock::psock_private *v5; // rbx
   void (*v6)(void); // rax
   int v8; // ebp
 
-  v3 = port;
-  v4 = addr;
-  v5 = socket;
-  if ( socket->state == 5 )
+  if ( socket->state == (STATE_CLOSED|STATE_CONNECTING_PHASE2) )
   {
-    socket->lasterror = 4;
+    socket->lasterror = ERR_CLOSED;
     v6 = (void (*)(void))OSuite::psock::g_ErrorCallback;
     if ( OSuite::psock::g_ErrorCallback )
 LABEL_3:
@@ -924,13 +863,13 @@ LABEL_3:
   if ( !socket->async )
   {
     v8 = clock();
-    while ( OSuite::psock::platform::connect_statemachine(v5, v4, v3) )
+    while ( OSuite::psock::platform::connect_statemachine(socket, addr, port) )
     {
-      if ( v5->state == 3 )
-        goto LABEL_9;
-      if ( v5->connect_timeout && clock() - v8 >= v5->connect_timeout )
+      if ( socket->state == STATE_CLOSING )
+        goto LABEL_8;
+      if ( socket->connect_timeout && clock() - v8 >= socket->connect_timeout )
       {
-        v5->lasterror = 1;
+        socket->lasterror = ERR_FAILED;
         v6 = (void (*)(void))OSuite::psock::g_ErrorCallback;
         if ( !OSuite::psock::g_ErrorCallback )
           return 0;
@@ -941,13 +880,13 @@ LABEL_3:
   }
   if ( !OSuite::psock::platform::connect_statemachine(socket, addr, port) )
     return 0;
-  if ( v5->state != 3 )
+  if ( socket->state != STATE_CLOSING )
   {
-    v5->lasterror = 3;
+    socket->lasterror = ERR_AGAIN;
     return 0;
   }
-LABEL_9:
-  v5->lasterror = 0;
+LABEL_8:
+  socket->lasterror = ERR_OK;
   return 1;
 }
 

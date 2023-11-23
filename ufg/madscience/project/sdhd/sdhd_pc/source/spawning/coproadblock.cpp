@@ -2,7 +2,7 @@
 // RVA: 0x155D500
 __int64 dynamic_initializer_for__UFG::CopRoadBlock::s_CopRoadBlockList__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::CopRoadBlock::s_CopRoadBlockList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::CopRoadBlock::s_CopRoadBlockList__);
 }
 
 // File Line: 29
@@ -16,67 +16,60 @@ const char *__fastcall UFG::CopRoadBlock::GetTypeName(UFG::CopRoadBlock *this)
 // RVA: 0x5B1820
 void __fastcall UFG::CopRoadBlock::CopRoadBlock(UFG::CopRoadBlock *this, UFG::qSymbol *name, UFG::SimObject *pSimObj)
 {
-  UFG::CopRoadBlock *v3; // r14
-  UFG::qNode<UFG::CopRoadBlock,UFG::CopRoadBlock> *v4; // rdi
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v5; // rbx
-  signed __int64 v6; // rsi
-  UFG::qNode<UFG::CopRoadBlock,UFG::CopRoadBlock> *v7; // rax
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v8; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v9; // rax
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v10; // [rsp+78h] [rbp+20h]
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *mObjects; // rbx
+  __int64 v5; // rsi
+  UFG::qNode<UFG::CopRoadBlock,UFG::CopRoadBlock> *mPrev; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v7; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
 
-  v3 = this;
-  UFG::MarkerBase::MarkerBase((UFG::MarkerBase *)&this->vfptr, name, pSimObj, 0x30000u);
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SpawnPointInterface::`vftable;
-  v4 = (UFG::qNode<UFG::CopRoadBlock,UFG::CopRoadBlock> *)&v3->mPrev;
-  v4->mPrev = v4;
-  v4->mNext = v4;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CopRoadBlock::`vftable;
-  v5 = v3->mObjects;
-  v6 = 6i64;
+  UFG::MarkerBase::MarkerBase(this, name, pSimObj, 0x30000u);
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::SpawnPointInterface::`vftable;
+  this->mPrev = &this->UFG::qNode<UFG::CopRoadBlock,UFG::CopRoadBlock>;
+  this->mNext = &this->UFG::qNode<UFG::CopRoadBlock,UFG::CopRoadBlock>;
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CopRoadBlock::`vftable;
+  mObjects = this->mObjects;
+  v5 = 6i64;
   `eh vector constructor iterator(
-    v3->mObjects,
+    this->mObjects,
     0x18ui64,
     6,
     (void (__fastcall *)(void *))UFG::qSafePointer<UFG::SimObject,UFG::SimObjectCharacter>::qSafePointer<UFG::SimObject,UFG::SimObjectCharacter>);
-  v10 = &v3->mPositionToDefendObject;
-  v10->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v10->mPrev;
-  v10->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v10->mPrev;
-  v3->mPositionToDefendObject.m_pPointer = 0i64;
-  *(_DWORD *)&v3->mAutoFillLanes = 1;
-  v7 = UFG::CopRoadBlock::s_CopRoadBlockList.mNode.mPrev;
-  UFG::CopRoadBlock::s_CopRoadBlockList.mNode.mPrev->mNext = (UFG::qNode<UFG::CopRoadBlock,UFG::CopRoadBlock> *)&v3->mPrev;
-  v4->mPrev = v7;
-  v3->mNext = (UFG::qNode<UFG::CopRoadBlock,UFG::CopRoadBlock> *)&UFG::CopRoadBlock::s_CopRoadBlockList;
-  UFG::CopRoadBlock::s_CopRoadBlockList.mNode.mPrev = (UFG::qNode<UFG::CopRoadBlock,UFG::CopRoadBlock> *)&v3->mPrev;
-  UFG::SimComponent::AddType((UFG::SimComponent *)&v3->vfptr, UFG::CopRoadBlock::_CopRoadBlockTypeUID, "CopRoadBlock");
+  this->mPositionToDefendObject.mPrev = &this->mPositionToDefendObject;
+  this->mPositionToDefendObject.mNext = &this->mPositionToDefendObject;
+  this->mPositionToDefendObject.m_pPointer = 0i64;
+  *(_DWORD *)&this->mAutoFillLanes = 1;
+  mPrev = UFG::CopRoadBlock::s_CopRoadBlockList.mNode.mPrev;
+  UFG::CopRoadBlock::s_CopRoadBlockList.mNode.mPrev->mNext = &this->UFG::qNode<UFG::CopRoadBlock,UFG::CopRoadBlock>;
+  this->mPrev = mPrev;
+  this->mNext = (UFG::qNode<UFG::CopRoadBlock,UFG::CopRoadBlock> *)&UFG::CopRoadBlock::s_CopRoadBlockList;
+  UFG::CopRoadBlock::s_CopRoadBlockList.mNode.mPrev = &this->UFG::qNode<UFG::CopRoadBlock,UFG::CopRoadBlock>;
+  UFG::SimComponent::AddType(this, UFG::CopRoadBlock::_CopRoadBlockTypeUID, "CopRoadBlock");
   do
   {
-    if ( v5->m_pPointer )
+    if ( mObjects->m_pPointer )
     {
-      v8 = v5->mPrev;
-      v9 = v5->mNext;
-      v8->mNext = v9;
-      v9->mPrev = v8;
-      v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v5->mPrev;
-      v5->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v5->mPrev;
+      v7 = mObjects->mPrev;
+      mNext = mObjects->mNext;
+      v7->mNext = mNext;
+      mNext->mPrev = v7;
+      mObjects->mPrev = mObjects;
+      mObjects->mNext = mObjects;
     }
-    v5->m_pPointer = 0i64;
-    ++v5;
-    --v6;
+    mObjects->m_pPointer = 0i64;
+    ++mObjects;
+    --v5;
   }
-  while ( v6 );
+  while ( v5 );
 }
 
 // File Line: 53
 // RVA: 0x5B1DB0
 void __fastcall UFG::CopRoadBlock::~CopRoadBlock(UFG::CopRoadBlock *this)
 {
-  UFG::CopRoadBlock *v1; // rbx
   UFG::qNode<UFG::CopRoadBlock,UFG::CopRoadBlock> *v2; // rdi
-  UFG::qNode<UFG::CopRoadBlock,UFG::CopRoadBlock> *v3; // rcx
-  UFG::qNode<UFG::CopRoadBlock,UFG::CopRoadBlock> *v4; // rax
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v5; // rdx
+  UFG::qNode<UFG::CopRoadBlock,UFG::CopRoadBlock> *mPrev; // rcx
+  UFG::qNode<UFG::CopRoadBlock,UFG::CopRoadBlock> *mNext; // rax
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mPositionToDefendObject; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v6; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v7; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v8; // rcx
@@ -84,36 +77,35 @@ void __fastcall UFG::CopRoadBlock::~CopRoadBlock(UFG::CopRoadBlock *this)
   UFG::qNode<UFG::CopRoadBlock,UFG::CopRoadBlock> *v10; // rcx
   UFG::qNode<UFG::CopRoadBlock,UFG::CopRoadBlock> *v11; // rax
 
-  v1 = this;
   this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CopRoadBlock::`vftable;
   if ( this == UFG::CopRoadBlock::s_CopRoadBlockpCurrentIterator )
     UFG::CopRoadBlock::s_CopRoadBlockpCurrentIterator = (UFG::CopRoadBlock *)&this->mPrev[-7];
-  v2 = (UFG::qNode<UFG::CopRoadBlock,UFG::CopRoadBlock> *)&this->mPrev;
-  v3 = this->mPrev;
-  v4 = v2->mNext;
-  v3->mNext = v4;
-  v4->mPrev = v3;
+  v2 = &this->UFG::qNode<UFG::CopRoadBlock,UFG::CopRoadBlock>;
+  mPrev = this->mPrev;
+  mNext = v2->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v5 = &v1->mPositionToDefendObject;
-  if ( v1->mPositionToDefendObject.m_pPointer )
+  p_mPositionToDefendObject = &this->mPositionToDefendObject;
+  if ( this->mPositionToDefendObject.m_pPointer )
   {
-    v6 = v5->mPrev;
-    v7 = v1->mPositionToDefendObject.mNext;
+    v6 = p_mPositionToDefendObject->mPrev;
+    v7 = this->mPositionToDefendObject.mNext;
     v6->mNext = v7;
     v7->mPrev = v6;
-    v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v5->mPrev;
-    v1->mPositionToDefendObject.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->mPositionToDefendObject.mPrev;
+    p_mPositionToDefendObject->mPrev = p_mPositionToDefendObject;
+    this->mPositionToDefendObject.mNext = &this->mPositionToDefendObject;
   }
-  v1->mPositionToDefendObject.m_pPointer = 0i64;
-  v8 = v5->mPrev;
-  v9 = v1->mPositionToDefendObject.mNext;
+  this->mPositionToDefendObject.m_pPointer = 0i64;
+  v8 = p_mPositionToDefendObject->mPrev;
+  v9 = this->mPositionToDefendObject.mNext;
   v8->mNext = v9;
   v9->mPrev = v8;
-  v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v5->mPrev;
-  v1->mPositionToDefendObject.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->mPositionToDefendObject.mPrev;
+  p_mPositionToDefendObject->mPrev = p_mPositionToDefendObject;
+  this->mPositionToDefendObject.mNext = &this->mPositionToDefendObject;
   `eh vector destructor iterator(
-    v1->mObjects,
+    this->mObjects,
     0x18ui64,
     6,
     (void (__fastcall *)(void *))UFG::qSafePointer<AnimationGroup,AnimationGroup>::~qSafePointer<AnimationGroup,AnimationGroup>);
@@ -123,46 +115,46 @@ void __fastcall UFG::CopRoadBlock::~CopRoadBlock(UFG::CopRoadBlock *this)
   v11->mPrev = v10;
   v2->mPrev = v2;
   v2->mNext = v2;
-  UFG::MarkerBase::~MarkerBase((UFG::MarkerBase *)&v1->vfptr);
+  UFG::MarkerBase::~MarkerBase(this);
 }
 
 // File Line: 59
 // RVA: 0x5B4330
 bool __fastcall UFG::CopRoadBlock::HasComponent(UFG::SceneObjectProperties *pSceneObj)
 {
-  return PropertyUtils::HasComponentPropertySet(pSceneObj, (UFG::qSymbol *)&SimSymX_propset_componentCopRoadBlock.mUID);
+  return PropertyUtils::HasComponentPropertySet(
+           pSceneObj,
+           (UFG::qArray<unsigned long,0> *)&SimSymX_propset_componentCopRoadBlock);
 }
 
 // File Line: 65
 // RVA: 0x5B5260
 UFG::CopRoadBlock *__fastcall UFG::CopRoadBlock::PropertiesOnActivate(UFG::SceneObjectProperties *pSceneObj)
 {
-  UFG::SceneObjectProperties *v1; // rsi
-  UFG::qMemoryPool *v2; // rax
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
   UFG::allocator::free_link *v3; // rbp
-  UFG::SimObject *v4; // rbx
+  UFG::SimObject *m_pSimObject; // rbx
   UFG::qSymbol *v5; // rax
   __int64 v6; // rax
   __int64 v7; // rbx
-  UFG::qSymbol result; // [rsp+68h] [rbp+10h]
+  UFG::qSymbol result; // [rsp+68h] [rbp+10h] BYREF
   UFG::allocator::free_link *v10; // [rsp+70h] [rbp+18h]
 
-  v1 = pSceneObj;
-  v2 = UFG::GetSimulationMemoryPool();
-  v3 = UFG::qMemoryPool::Allocate(v2, 0x130ui64, "CopRoadBlock", 0i64, 1u);
+  SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+  v3 = UFG::qMemoryPool::Allocate(SimulationMemoryPool, 0x130ui64, "CopRoadBlock", 0i64, 1u);
   v10 = v3;
   if ( v3 )
   {
-    v4 = v1->m_pSimObject;
-    v5 = UFG::SceneObjectProperties::operator UFG::qSymbol const(v1, &result);
-    UFG::CopRoadBlock::CopRoadBlock((UFG::CopRoadBlock *)v3, v5, v4);
+    m_pSimObject = pSceneObj->m_pSimObject;
+    v5 = (UFG::qSymbol *)UFG::SceneObjectProperties::operator UFG::qSymbol const(pSceneObj, (UFG::qWiseSymbol *)&result);
+    UFG::CopRoadBlock::CopRoadBlock((UFG::CopRoadBlock *)v3, v5, m_pSimObject);
     v7 = v6;
   }
   else
   {
     v7 = 0i64;
   }
-  *(_BYTE *)(v7 + 296) = PropertyUtils::Get<bool>(v1, (UFG::qSymbol *)&qSymbol_AutoFillLanes.mUID)->mFlags;
+  *(_BYTE *)(v7 + 296) = *PropertyUtils::Get<bool>(pSceneObj, (UFG::qArray<unsigned long,0> *)&qSymbol_AutoFillLanes);
   return (UFG::CopRoadBlock *)v7;
 }
 
@@ -170,30 +162,29 @@ UFG::CopRoadBlock *__fastcall UFG::CopRoadBlock::PropertiesOnActivate(UFG::Scene
 // RVA: 0x5B75F0
 void __fastcall UFG::CopRoadBlock::Update(UFG::CopRoadBlock *this, float deltaTime)
 {
-  bool v2; // al
-  UFG::CopRoadBlock *v3; // rdi
-  UFG::TransformNodeComponent *v4; // rbx
+  bool mDesiredStatus; // al
+  UFG::TransformNodeComponent *mpXformNode; // rbx
 
-  v2 = this->mDesiredStatus;
-  v3 = this;
-  if ( v2 != this->mActiveStatus )
+  mDesiredStatus = this->mDesiredStatus;
+  if ( mDesiredStatus != this->mActiveStatus )
   {
-    if ( v2 )
+    if ( mDesiredStatus )
     {
       UFG::CopRoadBlock::Spawn(this);
     }
     else
     {
-      v4 = this->mpXformNode;
-      UFG::TransformNodeComponent::UpdateWorldTransform(this->mpXformNode);
-      if ( !UFG::SimObjectUtility::IsPositionOnScreen((UFG::qVector3 *)&v4->mWorldTransform.v3, 2.0, 0) )
-        UFG::CopRoadBlock::Despawn(v3);
+      mpXformNode = this->mpXformNode;
+      UFG::TransformNodeComponent::UpdateWorldTransform(mpXformNode);
+      if ( !UFG::SimObjectUtility::IsPositionOnScreen((UFG::qVector3 *)&mpXformNode->mWorldTransform.v3, 2.0, 0) )
+        UFG::CopRoadBlock::Despawn(this);
     }
   }
 }
 
 // File Line: 99
 // RVA: 0x5B5110
+// attributes: thunk
 void __fastcall UFG::CopRoadBlock::OnDetach(UFG::CopRoadBlock *this)
 {
   UFG::CopRoadBlock::Despawn(this);
@@ -201,54 +192,62 @@ void __fastcall UFG::CopRoadBlock::OnDetach(UFG::CopRoadBlock *this)
 
 // File Line: 106
 // RVA: 0x5B26B0
-char __fastcall UFG::CopRoadBlock::ActivateByDistance(UFG::CopRoadBlock *this, UFG::qVector3 *origin, float minRadiusSq, float maxRadiusSq, int *pBitfields)
+char __fastcall UFG::CopRoadBlock::ActivateByDistance(
+        UFG::CopRoadBlock *this,
+        UFG::qVector3 *origin,
+        float minRadiusSq,
+        float maxRadiusSq,
+        int *pBitfields)
 {
-  UFG::TransformNodeComponent *v5; // rbx
-  UFG::CopRoadBlock *v6; // rdi
-  UFG::qVector3 *v7; // rsi
-  float v8; // xmm8_4
-  float v9; // xmm7_4
+  UFG::TransformNodeComponent *mpXformNode; // rbx
+  float x; // xmm8_4
+  float y; // xmm7_4
   float v10; // xmm1_4
   float v11; // xmm8_4
   float v12; // xmm7_4
   float v13; // xmm9_4
   float v14; // xmm0_4
   float v15; // xmm1_4
-  signed int v16; // eax
-  float *v17; // rbx
+  int v16; // eax
+  UFG::TransformNodeComponent *v17; // rbx
   float v18; // xmm7_4
   float v19; // xmm8_4
   float v20; // xmm9_4
   char result; // al
 
-  v5 = this->mpXformNode;
-  v6 = this;
-  v7 = origin;
-  UFG::TransformNodeComponent::UpdateWorldTransform(this->mpXformNode);
-  v8 = v5->mWorldTransform.v3.x;
-  v9 = v5->mWorldTransform.v3.y;
-  v10 = (float)((float)(v7->y - v9) * (float)(v7->y - v9)) + (float)((float)(v7->x - v8) * (float)(v7->x - v8));
+  mpXformNode = this->mpXformNode;
+  UFG::TransformNodeComponent::UpdateWorldTransform(mpXformNode);
+  x = mpXformNode->mWorldTransform.v3.x;
+  y = mpXformNode->mWorldTransform.v3.y;
+  v10 = (float)((float)(origin->y - y) * (float)(origin->y - y))
+      + (float)((float)(origin->x - x) * (float)(origin->x - x));
   if ( v10 < minRadiusSq
     || v10 > maxRadiusSq
-    || ((v11 = v8 - v7->x, v12 = v9 - v7->y, v13 = v5->mWorldTransform.v3.z - v7->z, v14 = atan2f(v12, v11), v14 >= 0.0) ? (v15 = 0.0) : (v15 = FLOAT_6_2831855),
-        v16 = 1 << (signed int)(float)((float)((float)(v15 + v14) * 8.0) * 0.15915494),
-        *pBitfields & v16) )
+    || ((v11 = x - origin->x,
+         v12 = y - origin->y,
+         v13 = mpXformNode->mWorldTransform.v3.z - origin->z,
+         v14 = atan2f(v12, v11),
+         v14 >= 0.0)
+      ? (v15 = 0.0)
+      : (v15 = FLOAT_6_2831855),
+        v16 = 1 << (int)(float)((float)((float)(v15 + v14) * 8.0) * 0.15915494),
+        (*pBitfields & v16) != 0) )
   {
     result = 0;
-    v6->mDesiredStatus = 0;
+    this->mDesiredStatus = 0;
   }
   else
   {
     *pBitfields |= v16;
-    v17 = (float *)v6->mpXformNode;
-    UFG::TransformNodeComponent::UpdateWorldTransform(v6->mpXformNode);
-    v18 = v12 * v17[33];
-    v19 = v11 * v17[32];
-    v20 = v13 * v17[34];
-    v6->mDesiredStatus = 1;
-    v6->mFlipped = (float)((float)(v18 + v19) + v20) > 0.0;
-    ((void (__fastcall *)(UFG::CopRoadBlock *))v6->vfptr[18].__vecDelDtor)(v6);
-    result = 1;
+    v17 = this->mpXformNode;
+    UFG::TransformNodeComponent::UpdateWorldTransform(v17);
+    v18 = v12 * v17->mWorldTransform.v0.y;
+    v19 = v11 * v17->mWorldTransform.v0.x;
+    v20 = v13 * v17->mWorldTransform.v0.z;
+    this->mDesiredStatus = 1;
+    this->mFlipped = (float)((float)(v18 + v19) + v20) > 0.0;
+    ((void (__fastcall *)(UFG::CopRoadBlock *))this->vfptr[18].__vecDelDtor)(this);
+    return 1;
   }
   return result;
 }
@@ -257,11 +256,11 @@ char __fastcall UFG::CopRoadBlock::ActivateByDistance(UFG::CopRoadBlock *this, U
 // RVA: 0x5B31D0
 void __fastcall UFG::CopRoadBlock::Deactivate(UFG::CopRoadBlock *this)
 {
-  UFG::qSafePointerNode<UFG::SimComponent>Vtbl *v1; // rax
+  UFG::qSafePointerNode<UFG::SimComponent>Vtbl *vfptr; // rax
 
-  v1 = this->vfptr;
+  vfptr = this->vfptr;
   this->mDesiredStatus = 0;
-  ((void (*)(void))v1[18].__vecDelDtor)();
+  ((void (*)(void))vfptr[18].__vecDelDtor)();
 }
 
 // File Line: 148
@@ -269,968 +268,914 @@ void __fastcall UFG::CopRoadBlock::Deactivate(UFG::CopRoadBlock *this)
 void __fastcall UFG::CopRoadBlock::Spawn(UFG::CopRoadBlock *this)
 {
   UFG::CopRoadBlock *v1; // r13
-  unsigned int v2; // er14
-  signed int v3; // er15
-  UFG::RoadNetworkSegment *v4; // rax
+  unsigned int v2; // r14d
+  int v3; // r15d
+  UFG::RoadNetworkSegment *ClosestRoadSegment; // rax
   UFG::RoadNetworkNode *v5; // r12
-  UFG::TransformNodeComponent *v6; // rbx
-  float v7; // xmm15_4
+  UFG::TransformNodeComponent *mpXformNode; // rbx
+  float x; // xmm15_4
   float v8; // xmm10_4
-  __m128 v9; // xmm6
-  float v10; // xmm9_4
-  float v11; // xmm11_4
-  float v12; // xmm13_4
+  __m128 y_low; // xmm6
+  float z; // xmm9_4
+  float w; // xmm11_4
+  float y; // xmm13_4
   float v13; // xmm14_4
   float v14; // xmm12_4
-  signed __int64 v15; // rbx
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *mObjects; // rbx
   float v16; // xmm15_4
   float v17; // xmm8_4
-  UFG::RoadNetworkLane *v18; // rdi
+  UFG::RoadNetworkLane *Lane; // rdi
   float v19; // xmm9_4
   float v20; // xmm6_4
   UFG::qSymbol *v21; // rax
-  UFG::qPropertySet *v22; // r15
+  UFG::qPropertySet *PropertySet; // r15
   UFG::SceneObjectProperties *v23; // rdi
   UFG::SimObject *v24; // rsi
   UFG::qSymbolUC *v25; // rax
   char *v26; // rax
-  __int64 v27; // rcx
-  _QWORD *v28; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v29; // rax
   float v30; // xmm3_4
   float v31; // xmm9_4
   float v32; // xmm11_4
   float v33; // xmm3_4
-  __m128 v34; // xmm5
-  __m128 v35; // xmm2
-  float v36; // xmm2_4
-  float v37; // xmm4_4
-  float v38; // xmm1_4
-  float v39; // xmm2_4
-  float v40; // xmm5_4
-  float v41; // xmm2_4
-  float v42; // xmm4_4
-  float v43; // xmm6_4
-  float v44; // xmm1_4
-  float v45; // xmm2_4
-  float v46; // xmm6_4
-  float v47; // xmm8_4
-  float v48; // xmm2_4
-  float v49; // xmm3_4
-  float v50; // xmm1_4
-  UFG::SimObjectGame *v51; // rcx
-  unsigned __int16 v52; // dx
-  UFG::VehicleEffectsComponent *v53; // rax
-  float v54; // xmm13_4
-  float v55; // xmm14_4
-  UFG::qPropertySet *v56; // rsi
-  UFG::SceneObjectProperties *v57; // rbx
-  signed __int64 v58; // r12
-  UFG::SimObject *v59; // rdi
-  UFG::qSymbolUC *v60; // rax
-  char *v61; // rax
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v62; // r8
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v63; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v64; // rax
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v65; // rax
-  UFG::qPropertySet *v66; // rsi
-  UFG::SceneObjectProperties *v67; // rbx
-  UFG::SimObject *v68; // rdi
-  UFG::qSymbolUC *v69; // rax
-  char *v70; // rax
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v71; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v72; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v73; // rax
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v74; // rax
-  UFG::qPropertySet *v75; // rsi
-  UFG::SceneObjectProperties *v76; // rbx
-  UFG::SimObject *v77; // rdi
-  UFG::qSymbolUC *v78; // rax
-  char *v79; // rax
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v80; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v81; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v82; // rax
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v83; // rax
-  __m128 v84; // xmm8
-  float v85; // xmm1_4
-  float v86; // xmm10_4
-  float v87; // xmm11_4
-  float v88; // xmm9_4
-  __m128 v89; // xmm5
+  __m128 x_low; // xmm2
+  float v35; // xmm2_4
+  float v36; // xmm4_4
+  float v37; // xmm1_4
+  float v38; // xmm2_4
+  float v39; // xmm5_4
+  float v40; // xmm2_4
+  float v41; // xmm4_4
+  float v42; // xmm6_4
+  float v43; // xmm1_4
+  float v44; // xmm6_4
+  float v45; // xmm8_4
+  float v46; // xmm2_4
+  float v47; // xmm3_4
+  float v48; // xmm1_4
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::VehicleEffectsComponent *m_pComponent; // rax
+  float v52; // xmm13_4
+  float v53; // xmm14_4
+  UFG::qPropertySet *v54; // rsi
+  UFG::SceneObjectProperties *v55; // rbx
+  __int64 v56; // r12
+  UFG::SimObject *v57; // rdi
+  UFG::qSymbolUC *v58; // rax
+  char *v59; // rax
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v60; // r8
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v61; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v62; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v63; // rax
+  UFG::qPropertySet *v64; // rsi
+  UFG::SceneObjectProperties *v65; // rbx
+  UFG::SimObject *v66; // rdi
+  UFG::qSymbolUC *v67; // rax
+  char *v68; // rax
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v69; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v70; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v71; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v72; // rax
+  UFG::qPropertySet *v73; // rsi
+  UFG::SceneObjectProperties *v74; // rbx
+  UFG::SimObject *v75; // rdi
+  UFG::qSymbolUC *v76; // rax
+  char *v77; // rax
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v78; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v79; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v80; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v81; // rax
+  __m128 v82; // xmm8
+  float v83; // xmm1_4
+  float v84; // xmm10_4
+  float v85; // xmm11_4
+  float v86; // xmm9_4
+  __m128 v87; // xmm2
+  __m128 v88; // xmm4
+  float v89; // xmm1_4
   __m128 v90; // xmm2
-  __m128 v91; // xmm4
-  float v92; // xmm1_4
-  __m128 v93; // xmm2
-  float v94; // xmm5_4
-  __m128 v95; // xmm3
-  __m128 v96; // xmm4
-  float v97; // xmm1_4
-  float v98; // xmm3_4
-  float v99; // xmm12_4
-  float v100; // xmm3_4
-  __m128 v101; // xmm4
-  float v102; // xmm4_4
-  UFG::SimObjectGame **v103; // rbx
-  UFG::SimObjectGame *v104; // rcx
-  unsigned __int16 v105; // dx
-  UFG::VehicleEffectsComponent *v106; // rax
-  float v107; // xmm3_4
-  float v108; // xmm10_4
-  float v109; // xmm11_4
-  float v110; // xmm3_4
-  __m128 v111; // xmm8
-  __m128 v112; // xmm2
-  float v113; // xmm5_4
-  float v114; // xmm1_4
-  float v115; // xmm4_4
-  float v116; // xmm5_4
-  float v117; // xmm2_4
-  float v118; // xmm8_4
-  float v119; // xmm4_4
-  float v120; // xmm5_4
-  float v121; // xmm1_4
-  float v122; // xmm2_4
-  float v123; // xmm4_4
-  float v124; // xmm5_4
-  float v125; // xmm4_4
-  float v126; // xmm2_4
-  float v127; // xmm3_4
-  float v128; // xmm3_4
-  bool v129; // al
-  float v130; // xmm0_4
-  float v131; // xmm1_4
-  float v132; // xmm2_4
-  float v133; // xmm12_4
-  float v134; // xmm13_4
-  float v135; // xmm14_4
-  float v136; // xmm10_4
-  __m128 v137; // xmm5
-  float v138; // xmm9_4
-  __m128 v139; // xmm2
-  float v140; // xmm1_4
-  float v141; // xmm9_4
-  float v142; // xmm10_4
-  float v143; // xmm5_4
-  __m128 v144; // xmm2
-  float v145; // xmm4_4
-  float v146; // xmm1_4
+  float v91; // xmm5_4
+  __m128 v92; // xmm3
+  __m128 v93; // xmm4
+  float v94; // xmm1_4
+  float v95; // xmm12_4
+  float v96; // xmm3_4
+  __m128 v97; // xmm4
+  float v98; // xmm4_4
+  UFG::SimObjectGame **p_m_pPointer; // rbx
+  UFG::SimObjectGame *v100; // rcx
+  __int16 v101; // dx
+  UFG::VehicleEffectsComponent *ComponentOfTypeHK; // rax
+  float v103; // xmm3_4
+  float v104; // xmm10_4
+  float v105; // xmm11_4
+  float v106; // xmm3_4
+  __m128 v107; // xmm2
+  float v108; // xmm5_4
+  float v109; // xmm1_4
+  float v110; // xmm4_4
+  float v111; // xmm5_4
+  float v112; // xmm2_4
+  float v113; // xmm8_4
+  float v114; // xmm4_4
+  float v115; // xmm5_4
+  float v116; // xmm1_4
+  float v117; // xmm5_4
+  float v118; // xmm4_4
+  float v119; // xmm2_4
+  float v120; // xmm3_4
+  float v121; // xmm3_4
+  bool mFlipped; // al
+  float v123; // xmm0_4
+  float v124; // xmm1_4
+  float v125; // xmm2_4
+  float v126; // xmm12_4
+  float v127; // xmm13_4
+  float v128; // xmm14_4
+  float v129; // xmm10_4
+  float v130; // xmm9_4
+  __m128 v131; // xmm2
+  float v132; // xmm1_4
+  float v133; // xmm9_4
+  float v134; // xmm10_4
+  float v135; // xmm5_4
+  __m128 v136; // xmm2
+  float v137; // xmm4_4
+  float v138; // xmm1_4
+  float v139; // xmm3_4
+  float v140; // xmm4_4
+  float v141; // xmm2_4
+  float v142; // xmm8_4
+  float v143; // xmm3_4
+  float v144; // xmm4_4
+  float v145; // xmm1_4
+  float v146; // xmm11_4
   float v147; // xmm3_4
-  float v148; // xmm4_4
-  float v149; // xmm2_4
-  float v150; // xmm8_4
-  float v151; // xmm3_4
-  float v152; // xmm4_4
-  float v153; // xmm1_4
-  float v154; // xmm2_4
-  float v155; // xmm3_4
-  float v156; // xmm11_4
-  float v157; // xmm3_4
-  float v158; // xmm2_4
-  float v159; // xmm4_4
-  float v160; // xmm6_4
-  UFG::SimObjectCVBase *v161; // rcx
-  unsigned __int16 v162; // dx
-  UFG::ActiveAIEntityComponent *v163; // rax
-  UFG::ActiveAIEntityComponent *v164; // rbx
-  UFG::SimObjectGame *v165; // rcx
-  unsigned __int16 v166; // dx
-  UFG::AIScriptInterfaceComponent *v167; // rdi
-  UFG::SimComponent *v168; // rax
-  UFG::SimObject *v169; // rdx
-  UFG::qMemoryPool *v170; // rax
-  UFG::allocator::free_link *v171; // rbx
-  UFG::qSymbol *v172; // rax
-  UFG::SimComponent *v173; // rax
-  UFG::qMemoryPool *v174; // rax
-  UFG::allocator::free_link *v175; // rbx
-  unsigned int v176; // eax
-  UFG::TransformNodeComponent *v177; // rax
-  UFG::TransformNodeComponent *v178; // rsi
-  UFG::qVector4 v179; // xmm3
-  UFG::SimObject *v180; // rdx
-  unsigned __int16 v181; // cx
-  unsigned int v182; // ebx
-  UFG::SimObject *v183; // rcx
-  unsigned __int16 v184; // dx
-  UFG::TSActorComponent *v185; // rbx
-  UFG::TSActor *v186; // rax
-  UFG::qVector3 result; // [rsp+30h] [rbp-90h]
-  UFG::qMatrix44 xform; // [rsp+40h] [rbp-80h]
-  UFG::qMatrix44 v189; // [rsp+80h] [rbp-40h]
-  UFG::qMatrix44 v190; // [rsp+C0h] [rbp+0h]
-  UFG::qMatrix44 v191; // [rsp+100h] [rbp+40h]
-  UFG::qMatrix44 m; // [rsp+140h] [rbp+80h]
-  __int64 v193; // [rsp+180h] [rbp+C0h]
-  UFG::qSymbol v194[2]; // [rsp+280h] [rbp+1C0h]
-  UFG::qSymbol objName; // [rsp+288h] [rbp+1C8h]
-  ASymbol v196[2]; // [rsp+290h] [rbp+1D0h]
-  UFG::allocator::free_link *v197; // [rsp+298h] [rbp+1D8h]
+  float v148; // xmm2_4
+  float v149; // xmm4_4
+  float v150; // xmm6_4
+  UFG::SimObjectCVBase *v151; // rcx
+  __int16 v152; // dx
+  UFG::ActiveAIEntityComponent *v153; // rax
+  UFG::ActiveAIEntityComponent *v154; // rbx
+  UFG::SimObjectGame *v155; // rcx
+  __int16 v156; // dx
+  UFG::AIScriptInterfaceComponent *v157; // rdi
+  UFG::SimComponent *v158; // rax
+  UFG::SimObject *v159; // rdx
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
+  UFG::allocator::free_link *v161; // rbx
+  UFG::qSymbol *v162; // rax
+  UFG::SimComponent *v163; // rax
+  UFG::qMemoryPool *v164; // rax
+  UFG::allocator::free_link *v165; // rbx
+  unsigned int v166; // eax
+  UFG::TransformNodeComponent *v167; // rax
+  UFG::TransformNodeComponent *v168; // rsi
+  UFG::qVector4 v169; // xmm3
+  UFG::SimObject *v170; // rdx
+  __int16 v171; // cx
+  unsigned int v172; // ebx
+  UFG::SimObject *v173; // rcx
+  __int16 v174; // dx
+  UFG::TSActorComponent *v175; // rbx
+  UFG::TSActor *Actor; // rax
+  UFG::qVector3 result; // [rsp+30h] [rbp-90h] BYREF
+  UFG::qMatrix44 xform; // [rsp+40h] [rbp-80h] BYREF
+  UFG::qMatrix44 v179; // [rsp+80h] [rbp-40h] BYREF
+  UFG::qMatrix44 v180; // [rsp+C0h] [rbp+0h] BYREF
+  UFG::qMatrix44 v181; // [rsp+100h] [rbp+40h] BYREF
+  UFG::qMatrix44 m; // [rsp+140h] [rbp+80h] BYREF
+  __int64 v183; // [rsp+180h] [rbp+C0h]
+  UFG::qSymbol v184[2]; // [rsp+280h] [rbp+1C0h] BYREF
+  UFG::qSymbol objName; // [rsp+288h] [rbp+1C8h] BYREF
+  ASymbol v186[2]; // [rsp+290h] [rbp+1D0h] BYREF
+  UFG::allocator::free_link *v187; // [rsp+298h] [rbp+1D8h] BYREF
 
-  v193 = -2i64;
+  v183 = -2i64;
   v1 = this;
   v2 = 0;
   v3 = 0;
   xform.v2.z = 0.0;
   this->mDesiredStatus = 1;
-  if ( !this->mActiveStatus )
+  if ( this->mActiveStatus )
+    return;
+  ClosestRoadSegment = UFG::CopRoadBlock::FindClosestRoadSegment(this);
+  v5 = ClosestRoadSegment;
+  if ( ClosestRoadSegment )
   {
-    v4 = UFG::CopRoadBlock::FindClosestRoadSegment(this);
-    v5 = (UFG::RoadNetworkNode *)&v4->mType;
-    if ( v4 )
+    UFG::WheeledVehicleNavigationData::AddRoadBlocksAroundSegment(
+      UFG::WheeledVehicleManager::m_Instance->m_NavigationData,
+      ClosestRoadSegment);
+    UFG::WheeledVehicleManager::DestroyCarsOnRoad(UFG::WheeledVehicleManager::m_Instance, v5);
+  }
+  v1->mActiveStatus = 1;
+  mpXformNode = v1->mpXformNode;
+  UFG::TransformNodeComponent::UpdateWorldTransform(mpXformNode);
+  x = mpXformNode->mWorldTransform.v0.x;
+  xform.v2.y = mpXformNode->mWorldTransform.v0.y;
+  xform.v1.z = mpXformNode->mWorldTransform.v0.z;
+  v8 = mpXformNode->mWorldTransform.v1.x;
+  *(float *)&v187 = v8;
+  y_low = (__m128)LODWORD(mpXformNode->mWorldTransform.v1.y);
+  v186[0] = LODWORD(mpXformNode->mWorldTransform.v1.y);
+  z = mpXformNode->mWorldTransform.v1.z;
+  xform.v2.x = z;
+  w = mpXformNode->mWorldTransform.v3.x;
+  xform.v2.w = w;
+  y = mpXformNode->mWorldTransform.v3.y;
+  xform.v0.x = y;
+  v13 = mpXformNode->mWorldTransform.v3.z;
+  xform.v1.w = v13;
+  if ( v1->mAutoFillLanes )
+  {
+    LODWORD(xform.v0.x) = (unsigned __int8)v5->mNumLanes;
+    if ( !LODWORD(xform.v0.x) )
+      goto LABEL_181;
+    v14 = (float)((float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(v8 * v8)) + (float)(z * z);
+    mObjects = v1->mObjects;
+    v16 = z;
+    while ( 1 )
     {
-      UFG::WheeledVehicleNavigationData::AddRoadBlocksAroundSegment(
-        UFG::WheeledVehicleManager::m_Instance->m_NavigationData,
-        v4);
-      UFG::WheeledVehicleManager::DestroyCarsOnRoad(UFG::WheeledVehicleManager::m_Instance, v5);
-    }
-    v1->mActiveStatus = 1;
-    v6 = v1->mpXformNode;
-    UFG::TransformNodeComponent::UpdateWorldTransform(v1->mpXformNode);
-    v7 = v6->mWorldTransform.v0.x;
-    xform.v2.y = v6->mWorldTransform.v0.y;
-    xform.v1.z = v6->mWorldTransform.v0.z;
-    v8 = v6->mWorldTransform.v1.x;
-    *(float *)&v197 = v6->mWorldTransform.v1.x;
-    v9 = (__m128)LODWORD(v6->mWorldTransform.v1.y);
-    v196[0] = LODWORD(v6->mWorldTransform.v1.y);
-    v10 = v6->mWorldTransform.v1.z;
-    xform.v2.x = v6->mWorldTransform.v1.z;
-    v11 = v6->mWorldTransform.v3.x;
-    xform.v2.w = v6->mWorldTransform.v3.x;
-    v12 = v6->mWorldTransform.v3.y;
-    xform.v0.x = v6->mWorldTransform.v3.y;
-    v13 = v6->mWorldTransform.v3.z;
-    xform.v1.w = v6->mWorldTransform.v3.z;
-    if ( v1->mAutoFillLanes )
-    {
-      LODWORD(xform.v0.x) = (unsigned __int8)v5->mNumLanes;
-      if ( LODWORD(xform.v0.x) )
+      v17 = FLOAT_3_4028235e38;
+      UFG::RoadNetworkNode::GetPos(v5, &result, v2, 0.0);
+      Lane = UFG::RoadNetworkNode::GetLane(v5, v2);
+      v19 = 1.0 / UFG::RoadNetworkLane::GetLength(Lane);
+      v20 = 0.0;
+      do
       {
-        v14 = (float)((float)(v9.m128_f32[0] * v9.m128_f32[0]) + (float)(v8 * v8)) + (float)(v10 * v10);
-        v15 = (signed __int64)v1->mObjects;
-        v16 = v10;
-        do
+        UFG::RoadNetworkNode::GetPos(v5, (UFG::qVector3 *)&xform.v0.z, v2, v20);
+        if ( (float)((float)((float)((float)(xform.v0.w - y) * (float)(xform.v0.w - y))
+                           + (float)((float)(xform.v0.z - w) * (float)(xform.v0.z - w)))
+                   + (float)((float)(xform.v1.x - v13) * (float)(xform.v1.x - v13))) < v17 )
         {
-          v17 = FLOAT_3_4028235e38;
-          UFG::RoadNetworkNode::GetPos(v5, &result, v2, 0.0);
-          v18 = UFG::RoadNetworkNode::GetLane(v5, v2);
-          v19 = 1.0 / UFG::RoadNetworkLane::GetLength(v18);
-          v20 = 0.0;
-          do
-          {
-            UFG::RoadNetworkNode::GetPos(v5, (UFG::qVector3 *)&xform.v0.z, v2, v20);
-            if ( (float)((float)((float)((float)(xform.v0.w - v12) * (float)(xform.v0.w - v12))
-                               + (float)((float)(xform.v0.z - v11) * (float)(xform.v0.z - v11)))
-                       + (float)((float)(xform.v1.x - v13) * (float)(xform.v1.x - v13))) < v17 )
-            {
-              v17 = (float)((float)((float)(xform.v0.w - v12) * (float)(xform.v0.w - v12))
-                          + (float)((float)(xform.v0.z - v11) * (float)(xform.v0.z - v11)))
-                  + (float)((float)(xform.v1.x - v13) * (float)(xform.v1.x - v13));
-              UFG::RoadNetworkLane::IsReversedInNode(v18);
-              result = *(UFG::qVector3 *)&xform.v0.z;
-            }
-            v20 = v20 + v19;
-          }
-          while ( v20 < 1.0 );
-          v21 = UFG::qSymbol::create_from_string((UFG::qSymbol *)&xform.v2.y, sRoadBlockItemPrefix);
-          UFG::SimObjectUtility::GenerateUniqueActorName(&objName, v21);
-          v22 = UFG::PropertySetManager::GetPropertySet((UFG::qSymbol *)&qSymbolX_propset_vehicle_police.mUID);
-          v23 = UFG::SceneObjectProperties::Create(&objName, 0i64, v22);
-          PropertyUtils::SetRuntime<UFG::qSymbol>(
-            v23,
-            (UFG::qSymbol *)&qSymbol_SpawnPriority.mUID,
-            (UFG::qSymbol *)&qSymbol_Critical.mUID);
-          v24 = UFG::SceneObjectProperties::Activate(v23, 3u, 0i64, 0i64);
-          if ( v24 )
-          {
-            UFG::SpawnInfoInterface::ClearSpawnLocation(v23, 0);
-            UFG::SpawnInfoInterface::ActivateObjectPost(v23, 0, 0i64, v22, 0);
-          }
-          else
-          {
-            if ( v23 )
-            {
-              v25 = (UFG::qSymbolUC *)UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&xform.v1.z, v23->m_NameUID);
-              v26 = UFG::qSymbol::as_cstr_dbg(v25);
-            }
-            else
-            {
-              v26 = "<NULL>";
-            }
-            UFG::qPrintf("Spawn Object [%s] failed to spawn object [%s]\n", "<NULL>", v26);
-          }
-          if ( *(_QWORD *)(v15 + 16) )
-          {
-            v27 = *(_QWORD *)v15;
-            v28 = *(_QWORD **)(v15 + 8);
-            *(_QWORD *)(v27 + 8) = v28;
-            *v28 = v27;
-            *(_QWORD *)v15 = v15;
-            *(_QWORD *)(v15 + 8) = v15;
-          }
-          *(_QWORD *)(v15 + 16) = v24;
-          if ( v24 )
-          {
-            v29 = v24->m_SafePointerList.mNode.mPrev;
-            v29->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)v15;
-            *(_QWORD *)v15 = v29;
-            *(_QWORD *)(v15 + 8) = (char *)v24 + 8;
-            v24->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)v15;
-          }
-          if ( v14 == 0.0 )
-            v30 = 0.0;
-          else
-            v30 = 1.0 / fsqrt(v14);
-          v31 = v30 * *(float *)&v197;
-          v32 = v30 * *(float *)&v196[0].i_uid;
-          v33 = v30 * v16;
-          xform.v0.x = v31;
-          xform.v0.y = v32;
-          xform.v0.z = v33;
-          xform.v0.w = 0.0;
-          v34 = (__m128)LODWORD(UFG::qVector3::msDirUp.x);
-          v35 = v34;
-          v35.m128_f32[0] = (float)((float)(v34.m128_f32[0] * v34.m128_f32[0])
-                                  + (float)(UFG::qVector3::msDirUp.y * UFG::qVector3::msDirUp.y))
-                          + (float)(UFG::qVector3::msDirUp.z * UFG::qVector3::msDirUp.z);
-          if ( v35.m128_f32[0] == 0.0 )
-            v36 = 0.0;
-          else
-            v36 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v35));
-          v37 = v36 * UFG::qVector3::msDirUp.x;
-          v38 = v36 * UFG::qVector3::msDirUp.y;
-          v39 = v36 * UFG::qVector3::msDirUp.z;
-          v40 = (float)(v38 * v33) - (float)(v39 * v32);
-          v41 = (float)(v39 * v31) - (float)(v37 * v33);
-          v42 = (float)(v37 * v32) - (float)(v38 * v31);
-          v43 = (float)((float)(v41 * v41) + (float)(v40 * v40)) + (float)(v42 * v42);
-          if ( v43 == 0.0 )
-            v44 = 0.0;
-          else
-            v44 = 1.0 / fsqrt(v43);
-          v45 = v41 * v44;
-          xform.v1.x = v40 * v44;
-          xform.v1.y = v45;
-          xform.v1.z = v42 * v44;
-          xform.v1.w = 0.0;
-          v46 = (float)((float)(v42 * v44) * v32) - (float)(v45 * v33);
-          v47 = (float)((float)(v40 * v44) * v33) - (float)((float)(v42 * v44) * v31);
-          v48 = (float)(v45 * v31) - (float)((float)(v40 * v44) * v32);
-          v49 = (float)((float)(v47 * v47) + (float)(v46 * v46)) + (float)(v48 * v48);
-          if ( v49 == 0.0 )
-            v50 = 0.0;
-          else
-            v50 = 1.0 / fsqrt(v49);
-          xform.v2.x = v46 * v50;
-          xform.v2.y = v47 * v50;
-          xform.v2.z = v48 * v50;
-          xform.v2.w = 0.0;
-          *(UFG::qVector3 *)&xform.v3.x = result;
-          xform.v3.w = 1.0;
-          UFG::SimObjectUtility::Teleport(*(UFG::SimObject **)(v15 + 16), &xform);
-          v51 = *(UFG::SimObjectGame **)(v15 + 16);
-          if ( v51 )
-          {
-            v52 = v51->m_Flags;
-            if ( (v52 >> 14) & 1 )
-            {
-              v53 = (UFG::VehicleEffectsComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                      v51,
-                                                      UFG::VehicleEffectsComponent::_TypeUID);
-            }
-            else if ( (v52 & 0x8000u) == 0 )
-            {
-              if ( (v52 >> 13) & 1 )
-              {
-                v53 = (UFG::VehicleEffectsComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                        v51,
-                                                        UFG::VehicleEffectsComponent::_TypeUID);
-              }
-              else if ( (v52 >> 12) & 1 )
-              {
-                v53 = (UFG::VehicleEffectsComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                        v51,
-                                                        UFG::VehicleEffectsComponent::_TypeUID);
-              }
-              else
-              {
-                v53 = (UFG::VehicleEffectsComponent *)UFG::SimObject::GetComponentOfType(
-                                                        (UFG::SimObject *)&v51->vfptr,
-                                                        UFG::VehicleEffectsComponent::_TypeUID);
-              }
-            }
-            else
-            {
-              v53 = (UFG::VehicleEffectsComponent *)v51->m_Components.p[32].m_pComponent;
-            }
-            if ( v53 )
-              UFG::VehicleEffectsComponent::TurnOnCopLights(v53);
-          }
-          ++v2;
-          v15 += 24i64;
-          v11 = xform.v2.w;
+          v17 = (float)((float)((float)(xform.v0.w - y) * (float)(xform.v0.w - y))
+                      + (float)((float)(xform.v0.z - w) * (float)(xform.v0.z - w)))
+              + (float)((float)(xform.v1.x - v13) * (float)(xform.v1.x - v13));
+          UFG::RoadNetworkLane::IsReversedInNode(Lane);
+          result = *(UFG::qVector3 *)&xform.v0.z;
         }
-        while ( v2 < LODWORD(xform.v0.x) );
-        v1 = *(UFG::CopRoadBlock **)&v194[0].mUID;
+        v20 = v20 + v19;
       }
+      while ( v20 < 1.0 );
+      v21 = UFG::qSymbol::create_from_string((UFG::qSymbol *)&xform.v2.y, sRoadBlockItemPrefix);
+      UFG::SimObjectUtility::GenerateUniqueActorName(&objName, v21);
+      PropertySet = UFG::PropertySetManager::GetPropertySet(&qSymbolX_propset_vehicle_police);
+      v23 = UFG::SceneObjectProperties::Create(&objName, 0i64, PropertySet);
+      PropertyUtils::SetRuntime<UFG::qSymbol>(
+        v23,
+        (UFG::qArray<unsigned long,0> *)&qSymbol_SpawnPriority,
+        &qSymbol_Critical);
+      v24 = UFG::SceneObjectProperties::Activate(v23, 3u, 0i64, 0i64);
+      if ( v24 )
+      {
+        UFG::SpawnInfoInterface::ClearSpawnLocation(v23, UnReferenced);
+        UFG::SpawnInfoInterface::ActivateObjectPost(v23, 0, 0i64, PropertySet, 0);
+      }
+      else
+      {
+        if ( v23 )
+        {
+          v25 = (UFG::qSymbolUC *)UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&xform.v1.z, v23->m_NameUID);
+          v26 = UFG::qSymbol::as_cstr_dbg(v25);
+        }
+        else
+        {
+          v26 = "<NULL>";
+        }
+        UFG::qPrintf("Spawn Object [%s] failed to spawn object [%s]\n", "<NULL>", v26);
+      }
+      if ( mObjects->m_pPointer )
+      {
+        mPrev = mObjects->mPrev;
+        mNext = mObjects->mNext;
+        mPrev->mNext = mNext;
+        mNext->mPrev = mPrev;
+        mObjects->mPrev = mObjects;
+        mObjects->mNext = mObjects;
+      }
+      mObjects->m_pPointer = v24;
+      if ( v24 )
+      {
+        v29 = v24->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+        v29->mNext = mObjects;
+        mObjects->mPrev = v29;
+        mObjects->mNext = &v24->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+        v24->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = mObjects;
+      }
+      if ( v14 == 0.0 )
+        v30 = 0.0;
+      else
+        v30 = 1.0 / fsqrt(v14);
+      v31 = v30 * *(float *)&v187;
+      v32 = v30 * *(float *)&v186[0].i_uid;
+      v33 = v30 * v16;
+      xform.v0.x = v31;
+      xform.v0.y = v32;
+      xform.v0.z = v33;
+      xform.v0.w = 0.0;
+      x_low = (__m128)LODWORD(UFG::qVector3::msDirUp.x);
+      x_low.m128_f32[0] = (float)((float)(x_low.m128_f32[0] * x_low.m128_f32[0])
+                                + (float)(UFG::qVector3::msDirUp.y * UFG::qVector3::msDirUp.y))
+                        + (float)(UFG::qVector3::msDirUp.z * UFG::qVector3::msDirUp.z);
+      if ( x_low.m128_f32[0] == 0.0 )
+        v35 = 0.0;
+      else
+        v35 = 1.0 / _mm_sqrt_ps(x_low).m128_f32[0];
+      v36 = v35 * UFG::qVector3::msDirUp.x;
+      v37 = v35 * UFG::qVector3::msDirUp.y;
+      v38 = v35 * UFG::qVector3::msDirUp.z;
+      v39 = (float)(v37 * v33) - (float)(v38 * v32);
+      v40 = (float)(v38 * v31) - (float)(v36 * v33);
+      v41 = (float)(v36 * v32) - (float)(v37 * v31);
+      v42 = (float)((float)(v40 * v40) + (float)(v39 * v39)) + (float)(v41 * v41);
+      if ( v42 == 0.0 )
+        v43 = 0.0;
+      else
+        v43 = 1.0 / fsqrt(v42);
+      xform.v1.x = v39 * v43;
+      xform.v1.y = v40 * v43;
+      xform.v1.z = v41 * v43;
+      xform.v1.w = 0.0;
+      v44 = (float)((float)(v41 * v43) * v32) - (float)((float)(v40 * v43) * v33);
+      v45 = (float)((float)(v39 * v43) * v33) - (float)((float)(v41 * v43) * v31);
+      v46 = (float)((float)(v40 * v43) * v31) - (float)((float)(v39 * v43) * v32);
+      v47 = (float)((float)(v45 * v45) + (float)(v44 * v44)) + (float)(v46 * v46);
+      if ( v47 == 0.0 )
+        v48 = 0.0;
+      else
+        v48 = 1.0 / fsqrt(v47);
+      xform.v2.x = v44 * v48;
+      xform.v2.y = v45 * v48;
+      xform.v2.z = v46 * v48;
+      xform.v2.w = 0.0;
+      xform.v3.x = result.x;
+      xform.v3.y = result.y;
+      xform.v3.z = result.z;
+      xform.v3.w = 1.0;
+      UFG::SimObjectUtility::Teleport(mObjects->m_pPointer, &xform);
+      m_pPointer = (UFG::SimObjectGame *)mObjects->m_pPointer;
+      if ( !m_pPointer )
+        goto LABEL_44;
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
+        goto LABEL_40;
+      if ( m_Flags < 0 )
+      {
+        m_pComponent = (UFG::VehicleEffectsComponent *)m_pPointer->m_Components.p[32].m_pComponent;
+        goto LABEL_42;
+      }
+      if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+LABEL_40:
+        m_pComponent = (UFG::VehicleEffectsComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                         m_pPointer,
+                                                         UFG::VehicleEffectsComponent::_TypeUID);
+      else
+        m_pComponent = (UFG::VehicleEffectsComponent *)UFG::SimObject::GetComponentOfType(
+                                                         m_pPointer,
+                                                         UFG::VehicleEffectsComponent::_TypeUID);
+LABEL_42:
+      if ( m_pComponent )
+        UFG::VehicleEffectsComponent::TurnOnCopLights(m_pComponent);
+LABEL_44:
+      ++v2;
+      ++mObjects;
+      w = xform.v2.w;
+      if ( v2 >= LODWORD(xform.v0.x) )
+      {
+        v1 = *(UFG::CopRoadBlock **)&v184[0].mUID;
+        goto LABEL_181;
+      }
+    }
+  }
+  v52 = (float)(z * 3.0) + v13;
+  v53 = (float)(y_low.m128_f32[0] * 3.0) + xform.v0.x;
+  xform.v3.x = (float)(v8 * 3.0) + w;
+  xform.v3.y = xform.v1.w - (float)(z * 3.0);
+  xform.v3.w = xform.v0.x - (float)(y_low.m128_f32[0] * 3.0);
+  xform.v3.z = w - (float)(v8 * 3.0);
+  UFG::qSymbol::create_from_string(&objName, sRoadBlockItemPrefix_0);
+  UFG::SimObjectUtility::GenerateUniqueActorName(v184, &objName);
+  v54 = UFG::PropertySetManager::GetPropertySet(&qSymbolX_propset_vehicle_police);
+  v55 = UFG::SceneObjectProperties::Create(v184, 0i64, v54);
+  PropertyUtils::SetRuntime<UFG::qSymbol>(
+    v55,
+    (UFG::qArray<unsigned long,0> *)&qSymbol_SpawnPriority,
+    &qSymbol_Critical);
+  v56 = 3i64;
+  v57 = UFG::SceneObjectProperties::Activate(v55, 3u, 0i64, 0i64);
+  if ( v57 )
+  {
+    UFG::SpawnInfoInterface::ClearSpawnLocation(v55, UnReferenced);
+    UFG::SpawnInfoInterface::ActivateObjectPost(v55, 0, 0i64, v54, 0);
+  }
+  else
+  {
+    if ( v55 )
+    {
+      v58 = (UFG::qSymbolUC *)UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&xform.v0.y, v55->m_NameUID);
+      v59 = UFG::qSymbol::as_cstr_dbg(v58);
     }
     else
     {
-      v54 = (float)(v10 * 3.0) + v13;
-      v55 = (float)(v9.m128_f32[0] * 3.0) + xform.v0.x;
-      xform.v3.x = (float)(v8 * 3.0) + v11;
-      xform.v3.y = xform.v1.w - (float)(v10 * 3.0);
-      xform.v3.w = xform.v0.x - (float)(v9.m128_f32[0] * 3.0);
-      xform.v3.z = v11 - (float)(v8 * 3.0);
-      UFG::qSymbol::create_from_string(&objName, sRoadBlockItemPrefix_0);
-      UFG::SimObjectUtility::GenerateUniqueActorName(v194, &objName);
-      v56 = UFG::PropertySetManager::GetPropertySet((UFG::qSymbol *)&qSymbolX_propset_vehicle_police.mUID);
-      v57 = UFG::SceneObjectProperties::Create(v194, 0i64, v56);
-      PropertyUtils::SetRuntime<UFG::qSymbol>(
-        v57,
-        (UFG::qSymbol *)&qSymbol_SpawnPriority.mUID,
-        (UFG::qSymbol *)&qSymbol_Critical.mUID);
-      v58 = 3i64;
-      v59 = UFG::SceneObjectProperties::Activate(v57, 3u, 0i64, 0i64);
-      if ( v59 )
+      v59 = "<NULL>";
+    }
+    UFG::qPrintf("Spawn Object [%s] failed to spawn object [%s]\n", "<NULL>", v59);
+  }
+  v60 = v1->mObjects;
+  if ( v1->mObjects[0].m_pPointer )
+  {
+    v61 = v60->mPrev;
+    v62 = v1->mObjects[0].mNext;
+    v61->mNext = v62;
+    v62->mPrev = v61;
+    v60->mPrev = v60;
+    v1->mObjects[0].mNext = v1->mObjects;
+  }
+  v1->mObjects[0].m_pPointer = v57;
+  if ( v57 )
+  {
+    v63 = v57->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+    v63->mNext = v60;
+    v60->mPrev = v63;
+    v1->mObjects[0].mNext = &v57->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+    v57->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = v60;
+  }
+  v184[0] = (UFG::qSymbol)UFG::SimObjectUtility::GenerateUniqueActorName((UFG::qSymbol *)&xform.v0.y, &objName)->mUID;
+  v64 = UFG::PropertySetManager::GetPropertySet(&qSymbolX_propset_vehicle_police);
+  v65 = UFG::SceneObjectProperties::Create(v184, 0i64, v64);
+  PropertyUtils::SetRuntime<UFG::qSymbol>(
+    v65,
+    (UFG::qArray<unsigned long,0> *)&qSymbol_SpawnPriority,
+    &qSymbol_Critical);
+  v66 = UFG::SceneObjectProperties::Activate(v65, 3u, 0i64, 0i64);
+  if ( v66 )
+  {
+    UFG::SpawnInfoInterface::ClearSpawnLocation(v65, UnReferenced);
+    UFG::SpawnInfoInterface::ActivateObjectPost(v65, 0, 0i64, v64, 0);
+  }
+  else
+  {
+    if ( v65 )
+    {
+      v67 = (UFG::qSymbolUC *)UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&xform.v0.y, v65->m_NameUID);
+      v68 = UFG::qSymbol::as_cstr_dbg(v67);
+    }
+    else
+    {
+      v68 = "<NULL>";
+    }
+    UFG::qPrintf("Spawn Object [%s] failed to spawn object [%s]\n", "<NULL>", v68);
+  }
+  v69 = &v1->mObjects[1];
+  if ( v1->mObjects[1].m_pPointer )
+  {
+    v70 = v69->mPrev;
+    v71 = v1->mObjects[1].mNext;
+    v70->mNext = v71;
+    v71->mPrev = v70;
+    v69->mPrev = v69;
+    v1->mObjects[1].mNext = &v1->mObjects[1];
+  }
+  v1->mObjects[1].m_pPointer = v66;
+  if ( v66 )
+  {
+    v72 = v66->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+    v72->mNext = v69;
+    v69->mPrev = v72;
+    v1->mObjects[1].mNext = &v66->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+    v66->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = v69;
+  }
+  v184[0] = (UFG::qSymbol)UFG::SimObjectUtility::GenerateUniqueActorName((UFG::qSymbol *)&xform.v0.y, &objName)->mUID;
+  v73 = UFG::PropertySetManager::GetPropertySet(&qSymbolX_propset_character_police);
+  v74 = UFG::SceneObjectProperties::Create(v184, 0i64, v73);
+  PropertyUtils::SetRuntime<UFG::qSymbol>(
+    v74,
+    (UFG::qArray<unsigned long,0> *)&qSymbol_SpawnPriority,
+    &qSymbol_Critical);
+  v75 = UFG::SceneObjectProperties::Activate(v74, 3u, 0i64, 0i64);
+  if ( v75 )
+  {
+    UFG::SpawnInfoInterface::ClearSpawnLocation(v74, UnReferenced);
+    UFG::SpawnInfoInterface::ActivateObjectPost(v74, 0, 0i64, v73, 0);
+  }
+  else
+  {
+    if ( v74 )
+    {
+      v76 = (UFG::qSymbolUC *)UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&xform.v0.y, v74->m_NameUID);
+      v77 = UFG::qSymbol::as_cstr_dbg(v76);
+    }
+    else
+    {
+      v77 = "<NULL>";
+    }
+    UFG::qPrintf("Spawn Object [%s] failed to spawn object [%s]\n", "<NULL>", v77);
+  }
+  v78 = &v1->mObjects[2];
+  if ( v1->mObjects[2].m_pPointer )
+  {
+    v79 = v78->mPrev;
+    v80 = v1->mObjects[2].mNext;
+    v79->mNext = v80;
+    v80->mPrev = v79;
+    v78->mPrev = v78;
+    v1->mObjects[2].mNext = &v1->mObjects[2];
+  }
+  v1->mObjects[2].m_pPointer = v75;
+  if ( v75 )
+  {
+    v81 = v75->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+    v81->mNext = v78;
+    v78->mPrev = v81;
+    v1->mObjects[2].mNext = &v75->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+    v75->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = v78;
+  }
+  v82 = y_low;
+  v82.m128_f32[0] = (float)((float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(v8 * v8)) + (float)(z * z);
+  if ( v82.m128_f32[0] == 0.0 )
+    v83 = 0.0;
+  else
+    v83 = 1.0 / _mm_sqrt_ps(v82).m128_f32[0];
+  v84 = z * v83;
+  v85 = *(float *)&v186[0].i_uid * v83;
+  v86 = *(float *)&v187 * v83;
+  v179.v0.x = *(float *)&v187 * v83;
+  v179.v0.y = *(float *)&v186[0].i_uid * v83;
+  v179.v0.z = v84;
+  v179.v0.w = 0.0;
+  v87 = (__m128)LODWORD(UFG::qVector3::msDirUp.x);
+  v87.m128_f32[0] = (float)((float)(v87.m128_f32[0] * v87.m128_f32[0])
+                          + (float)(UFG::qVector3::msDirUp.y * UFG::qVector3::msDirUp.y))
+                  + (float)(UFG::qVector3::msDirUp.z * UFG::qVector3::msDirUp.z);
+  if ( v87.m128_f32[0] == 0.0 )
+  {
+    v88 = 0i64;
+  }
+  else
+  {
+    v88 = (__m128)(unsigned int)FLOAT_1_0;
+    v88.m128_f32[0] = 1.0 / _mm_sqrt_ps(v87).m128_f32[0];
+  }
+  v89 = v88.m128_f32[0] * UFG::qVector3::msDirUp.z;
+  v92 = v88;
+  v92.m128_f32[0] = v88.m128_f32[0] * UFG::qVector3::msDirUp.y;
+  v88.m128_f32[0] = v88.m128_f32[0] * UFG::qVector3::msDirUp.x;
+  v90 = v88;
+  v90.m128_f32[0] = (float)(v88.m128_f32[0] * v85) - (float)(v86 * v92.m128_f32[0]);
+  v91 = (float)(v86 * v89) - (float)(v88.m128_f32[0] * v84);
+  v92.m128_f32[0] = (float)(v92.m128_f32[0] * v84) - (float)(v89 * v85);
+  v93 = v92;
+  v93.m128_f32[0] = (float)((float)(v92.m128_f32[0] * v92.m128_f32[0]) + (float)(v91 * v91))
+                  + (float)(v90.m128_f32[0] * v90.m128_f32[0]);
+  if ( v93.m128_f32[0] == 0.0 )
+    v94 = 0.0;
+  else
+    v94 = 1.0 / _mm_sqrt_ps(v93).m128_f32[0];
+  v179.v1.x = v92.m128_f32[0] * v94;
+  v179.v1.y = v91 * v94;
+  v179.v1.z = v90.m128_f32[0] * v94;
+  v179.v1.w = 0.0;
+  v95 = (float)(v86 * (float)(v91 * v94)) - (float)((float)(v92.m128_f32[0] * v94) * v85);
+  v96 = (float)((float)(v92.m128_f32[0] * v94) * v84) - (float)(v86 * (float)(v90.m128_f32[0] * v94));
+  v90.m128_f32[0] = (float)((float)(v90.m128_f32[0] * v94) * v85) - (float)((float)(v91 * v94) * v84);
+  v97 = v90;
+  v97.m128_f32[0] = (float)((float)(v90.m128_f32[0] * v90.m128_f32[0]) + (float)(v96 * v96)) + (float)(v95 * v95);
+  if ( v97.m128_f32[0] == 0.0 )
+    v98 = 0.0;
+  else
+    v98 = 1.0 / _mm_sqrt_ps(v97).m128_f32[0];
+  v179.v2.x = v90.m128_f32[0] * v98;
+  v179.v2.y = v98 * v96;
+  v179.v2.z = v98 * v95;
+  v179.v2.w = 0.0;
+  v179.v3.x = xform.v3.x;
+  v179.v3.y = v53;
+  v179.v3.z = v52;
+  v179.v3.w = 1.0;
+  p_m_pPointer = (UFG::SimObjectGame **)&v1->mObjects[0].m_pPointer;
+  UFG::SimObjectUtility::Teleport(v1->mObjects[0].m_pPointer, &v179);
+  do
+  {
+    v100 = *p_m_pPointer;
+    if ( !*p_m_pPointer )
+      goto LABEL_100;
+    v101 = v100->m_Flags;
+    if ( (v101 & 0x4000) != 0 )
+      goto LABEL_96;
+    if ( v101 < 0 )
+    {
+      ComponentOfTypeHK = (UFG::VehicleEffectsComponent *)v100->m_Components.p[32].m_pComponent;
+      goto LABEL_98;
+    }
+    if ( (v101 & 0x2000) != 0 || (v101 & 0x1000) != 0 )
+LABEL_96:
+      ComponentOfTypeHK = (UFG::VehicleEffectsComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                            v100,
+                                                            UFG::VehicleEffectsComponent::_TypeUID);
+    else
+      ComponentOfTypeHK = (UFG::VehicleEffectsComponent *)UFG::SimObject::GetComponentOfType(
+                                                            v100,
+                                                            UFG::VehicleEffectsComponent::_TypeUID);
+LABEL_98:
+    if ( ComponentOfTypeHK )
+      UFG::VehicleEffectsComponent::TurnOnCopLights(ComponentOfTypeHK);
+LABEL_100:
+    p_m_pPointer += 3;
+    --v56;
+  }
+  while ( v56 );
+  if ( v82.m128_f32[0] == 0.0 )
+    v103 = 0.0;
+  else
+    v103 = 1.0 / fsqrt(v82.m128_f32[0]);
+  v104 = xform.v2.x * v103;
+  v105 = *(float *)&v186[0].i_uid * v103;
+  v106 = v103 * *(float *)&v187;
+  v180.v0.x = v106;
+  v180.v0.y = v105;
+  v180.v0.z = v104;
+  v180.v0.w = 0.0;
+  v107 = (__m128)LODWORD(UFG::qVector3::msDirUp.x);
+  v107.m128_f32[0] = (float)((float)(v107.m128_f32[0] * v107.m128_f32[0])
+                           + (float)(UFG::qVector3::msDirUp.y * UFG::qVector3::msDirUp.y))
+                   + (float)(UFG::qVector3::msDirUp.z * UFG::qVector3::msDirUp.z);
+  if ( v107.m128_f32[0] == 0.0 )
+    v108 = 0.0;
+  else
+    v108 = 1.0 / _mm_sqrt_ps(v107).m128_f32[0];
+  v109 = v108 * UFG::qVector3::msDirUp.z;
+  v110 = v108 * UFG::qVector3::msDirUp.y;
+  v111 = v108 * UFG::qVector3::msDirUp.x;
+  v112 = (float)(v111 * v105) - (float)(v106 * v110);
+  v113 = (float)(v106 * v109) - (float)(v111 * v104);
+  v114 = (float)(v110 * v104) - (float)(v109 * v105);
+  v115 = (float)((float)(v114 * v114) + (float)(v113 * v113)) + (float)(v112 * v112);
+  if ( v115 == 0.0 )
+    v116 = 0.0;
+  else
+    v116 = 1.0 / fsqrt(v115);
+  v180.v1.x = v114 * v116;
+  v180.v1.y = v113 * v116;
+  v180.v1.z = v112 * v116;
+  v180.v1.w = 0.0;
+  v117 = (float)(v106 * (float)(v113 * v116)) - (float)((float)(v114 * v116) * v105);
+  v118 = (float)((float)(v114 * v116) * v104) - (float)(v106 * (float)(v112 * v116));
+  v119 = (float)((float)(v112 * v116) * v105) - (float)((float)(v113 * v116) * v104);
+  v120 = (float)((float)(v119 * v119) + (float)(v118 * v118)) + (float)(v117 * v117);
+  if ( v120 == 0.0 )
+    v121 = 0.0;
+  else
+    v121 = 1.0 / fsqrt(v120);
+  v180.v2.x = v119 * v121;
+  v180.v2.y = v121 * v118;
+  v180.v2.z = v121 * v117;
+  v180.v2.w = 0.0;
+  v180.v3.x = xform.v3.z;
+  v180.v3.y = xform.v3.w;
+  v180.v3.z = xform.v3.y;
+  v180.v3.w = 1.0;
+  UFG::SimObjectUtility::Teleport(v1->mObjects[1].m_pPointer, &v180);
+  mFlipped = v1->mFlipped;
+  if ( mFlipped )
+    v123 = FLOAT_N2_0;
+  else
+    v123 = FLOAT_2_0;
+  v124 = xform.v1.z;
+  v125 = xform.v2.y;
+  v126 = (float)(xform.v1.z * v123) + xform.v1.w;
+  v127 = (float)(xform.v2.y * v123) + xform.v0.x;
+  v128 = (float)(x * v123) + xform.v2.w;
+  if ( mFlipped )
+  {
+    LODWORD(v124) = LODWORD(xform.v1.z) ^ _xmm[0];
+    LODWORD(v125) = LODWORD(xform.v2.y) ^ _xmm[0];
+    LODWORD(x) ^= _xmm[0];
+  }
+  result.z = v124;
+  result.y = v125;
+  result.x = x;
+  v129 = v125;
+  v130 = v124;
+  v131 = (__m128)LODWORD(x);
+  v131.m128_f32[0] = (float)((float)(v131.m128_f32[0] * v131.m128_f32[0]) + (float)(v129 * v129)) + (float)(v130 * v130);
+  if ( v131.m128_f32[0] == 0.0 )
+    v132 = 0.0;
+  else
+    v132 = 1.0 / _mm_sqrt_ps(v131).m128_f32[0];
+  v133 = v130 * v132;
+  v134 = v129 * v132;
+  v135 = x * v132;
+  v181.v0.x = x * v132;
+  v181.v0.y = v134;
+  v181.v0.z = v133;
+  v181.v0.w = 0.0;
+  v136 = (__m128)LODWORD(UFG::qVector3::msDirUp.x);
+  v136.m128_f32[0] = (float)((float)(v136.m128_f32[0] * v136.m128_f32[0])
+                           + (float)(UFG::qVector3::msDirUp.y * UFG::qVector3::msDirUp.y))
+                   + (float)(UFG::qVector3::msDirUp.z * UFG::qVector3::msDirUp.z);
+  if ( v136.m128_f32[0] == 0.0 )
+    v137 = 0.0;
+  else
+    v137 = 1.0 / _mm_sqrt_ps(v136).m128_f32[0];
+  v138 = v137 * UFG::qVector3::msDirUp.z;
+  v139 = v137 * UFG::qVector3::msDirUp.y;
+  v140 = v137 * UFG::qVector3::msDirUp.x;
+  v141 = (float)(v140 * v134) - (float)(v135 * v139);
+  v142 = (float)(v135 * v138) - (float)(v140 * v133);
+  v143 = (float)(v139 * v133) - (float)(v138 * v134);
+  v144 = (float)((float)(v143 * v143) + (float)(v142 * v142)) + (float)(v141 * v141);
+  if ( v144 == 0.0 )
+    v145 = 0.0;
+  else
+    v145 = 1.0 / fsqrt(v144);
+  v181.v1.x = v143 * v145;
+  v181.v1.y = v142 * v145;
+  v181.v1.z = v141 * v145;
+  v181.v1.w = 0.0;
+  v146 = (float)(v135 * (float)(v142 * v145)) - (float)((float)(v143 * v145) * v134);
+  v147 = (float)((float)(v143 * v145) * v133) - (float)(v135 * (float)(v141 * v145));
+  v148 = (float)((float)(v141 * v145) * v134) - (float)((float)(v142 * v145) * v133);
+  v149 = (float)((float)(v148 * v148) + (float)(v147 * v147)) + (float)(v146 * v146);
+  if ( v149 == 0.0 )
+    v150 = 0.0;
+  else
+    v150 = 1.0 / fsqrt(v149);
+  v181.v2.x = v148 * v150;
+  v181.v2.y = v150 * v147;
+  v181.v2.z = v150 * v146;
+  v181.v2.w = 0.0;
+  v181.v3.x = v128;
+  v181.v3.y = (float)(xform.v2.y * v123) + xform.v0.x;
+  v181.v3.z = (float)(xform.v1.z * v123) + xform.v1.w;
+  v181.v3.w = 1.0;
+  UFG::SimObjectUtility::Teleport(v1->mObjects[2].m_pPointer, &v181);
+  v151 = (UFG::SimObjectCVBase *)v1->mObjects[2].m_pPointer;
+  if ( v151 )
+  {
+    v152 = v151->m_Flags;
+    if ( (v152 & 0x4000) != 0 || v152 < 0 )
+      v153 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v151);
+    else
+      v153 = (UFG::ActiveAIEntityComponent *)((v152 & 0x2000) != 0 || (v152 & 0x1000) != 0
+                                            ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                v151,
+                                                UFG::ActiveAIEntityComponent::_TypeUID)
+                                            : UFG::SimObject::GetComponentOfType(
+                                                v151,
+                                                UFG::ActiveAIEntityComponent::_TypeUID));
+    v154 = v153;
+    if ( v153 )
+    {
+      UFG::ActiveAIEntityComponent::SetCurrentObjective(v153, eAI_OBJECTIVE_PURSUIT_TARGET, "CopRoadBlock");
+      v154->m_MaxEngagementDistanceXY = 50.0;
+      v154->m_MaxEngagementDistanceZ = 50.0;
+      v155 = (UFG::SimObjectGame *)v1->mObjects[2].m_pPointer;
+      if ( v155 )
       {
-        UFG::SpawnInfoInterface::ClearSpawnLocation(v57, 0);
-        UFG::SpawnInfoInterface::ActivateObjectPost(v57, 0, 0i64, v56, 0);
-      }
-      else
-      {
-        if ( v57 )
+        v156 = v155->m_Flags;
+        if ( (v156 & 0x4000) != 0 )
         {
-          v60 = (UFG::qSymbolUC *)UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&xform.v0.y, v57->m_NameUID);
-          v61 = UFG::qSymbol::as_cstr_dbg(v60);
+          v157 = (UFG::AIScriptInterfaceComponent *)v155->m_Components.p[5].m_pComponent;
+        }
+        else if ( v156 >= 0 )
+        {
+          v158 = (v156 & 0x2000) != 0 || (v156 & 0x1000) != 0
+               ? UFG::SimObjectGame::GetComponentOfTypeHK(v155, UFG::AIScriptInterfaceComponent::_TypeUID)
+               : UFG::SimObject::GetComponentOfType(v155, UFG::AIScriptInterfaceComponent::_TypeUID);
+          v157 = (UFG::AIScriptInterfaceComponent *)v158;
         }
         else
         {
-          v61 = "<NULL>";
+          v157 = (UFG::AIScriptInterfaceComponent *)v155->m_Components.p[5].m_pComponent;
         }
-        UFG::qPrintf("Spawn Object [%s] failed to spawn object [%s]\n", "<NULL>", v61);
-      }
-      v62 = v1->mObjects;
-      if ( v1->mObjects[0].m_pPointer )
-      {
-        v63 = v62->mPrev;
-        v64 = v1->mObjects[0].mNext;
-        v63->mNext = v64;
-        v64->mPrev = v63;
-        v62->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v62->mPrev;
-        v1->mObjects[0].mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)v1->mObjects;
-      }
-      v1->mObjects[0].m_pPointer = v59;
-      if ( v59 )
-      {
-        v65 = v59->m_SafePointerList.mNode.mPrev;
-        v65->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v62->mPrev;
-        v62->mPrev = v65;
-        v1->mObjects[0].mNext = &v59->m_SafePointerList.mNode;
-        v59->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v62->mPrev;
-      }
-      v194[0] = (UFG::qSymbol)UFG::SimObjectUtility::GenerateUniqueActorName((UFG::qSymbol *)&xform.v0.y, &objName)->mUID;
-      v66 = UFG::PropertySetManager::GetPropertySet((UFG::qSymbol *)&qSymbolX_propset_vehicle_police.mUID);
-      v67 = UFG::SceneObjectProperties::Create(v194, 0i64, v66);
-      PropertyUtils::SetRuntime<UFG::qSymbol>(
-        v67,
-        (UFG::qSymbol *)&qSymbol_SpawnPriority.mUID,
-        (UFG::qSymbol *)&qSymbol_Critical.mUID);
-      v68 = UFG::SceneObjectProperties::Activate(v67, 3u, 0i64, 0i64);
-      if ( v68 )
-      {
-        UFG::SpawnInfoInterface::ClearSpawnLocation(v67, 0);
-        UFG::SpawnInfoInterface::ActivateObjectPost(v67, 0, 0i64, v66, 0);
-      }
-      else
-      {
-        if ( v67 )
+        if ( v157 )
         {
-          v69 = (UFG::qSymbolUC *)UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&xform.v0.y, v67->m_NameUID);
-          v70 = UFG::qSymbol::as_cstr_dbg(v69);
-        }
-        else
-        {
-          v70 = "<NULL>";
-        }
-        UFG::qPrintf("Spawn Object [%s] failed to spawn object [%s]\n", "<NULL>", v70);
-      }
-      v71 = &v1->mObjects[1];
-      if ( v1->mObjects[1].m_pPointer )
-      {
-        v72 = v71->mPrev;
-        v73 = v1->mObjects[1].mNext;
-        v72->mNext = v73;
-        v73->mPrev = v72;
-        v71->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v71->mPrev;
-        v1->mObjects[1].mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->mObjects[1].mPrev;
-      }
-      v1->mObjects[1].m_pPointer = v68;
-      if ( v68 )
-      {
-        v74 = v68->m_SafePointerList.mNode.mPrev;
-        v74->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v71->mPrev;
-        v71->mPrev = v74;
-        v1->mObjects[1].mNext = &v68->m_SafePointerList.mNode;
-        v68->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v71->mPrev;
-      }
-      v194[0] = (UFG::qSymbol)UFG::SimObjectUtility::GenerateUniqueActorName((UFG::qSymbol *)&xform.v0.y, &objName)->mUID;
-      v75 = UFG::PropertySetManager::GetPropertySet((UFG::qSymbol *)&qSymbolX_propset_character_police.mUID);
-      v76 = UFG::SceneObjectProperties::Create(v194, 0i64, v75);
-      PropertyUtils::SetRuntime<UFG::qSymbol>(
-        v76,
-        (UFG::qSymbol *)&qSymbol_SpawnPriority.mUID,
-        (UFG::qSymbol *)&qSymbol_Critical.mUID);
-      v77 = UFG::SceneObjectProperties::Activate(v76, 3u, 0i64, 0i64);
-      if ( v77 )
-      {
-        UFG::SpawnInfoInterface::ClearSpawnLocation(v76, 0);
-        UFG::SpawnInfoInterface::ActivateObjectPost(v76, 0, 0i64, v75, 0);
-      }
-      else
-      {
-        if ( v76 )
-        {
-          v78 = (UFG::qSymbolUC *)UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&xform.v0.y, v76->m_NameUID);
-          v79 = UFG::qSymbol::as_cstr_dbg(v78);
-        }
-        else
-        {
-          v79 = "<NULL>";
-        }
-        UFG::qPrintf("Spawn Object [%s] failed to spawn object [%s]\n", "<NULL>", v79);
-      }
-      v80 = &v1->mObjects[2];
-      if ( v1->mObjects[2].m_pPointer )
-      {
-        v81 = v80->mPrev;
-        v82 = v1->mObjects[2].mNext;
-        v81->mNext = v82;
-        v82->mPrev = v81;
-        v80->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v80->mPrev;
-        v1->mObjects[2].mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->mObjects[2].mPrev;
-      }
-      v1->mObjects[2].m_pPointer = v77;
-      if ( v77 )
-      {
-        v83 = v77->m_SafePointerList.mNode.mPrev;
-        v83->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v80->mPrev;
-        v80->mPrev = v83;
-        v1->mObjects[2].mNext = &v77->m_SafePointerList.mNode;
-        v77->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v80->mPrev;
-      }
-      v84 = v9;
-      v84.m128_f32[0] = (float)((float)(v9.m128_f32[0] * v9.m128_f32[0]) + (float)(v8 * v8)) + (float)(v10 * v10);
-      if ( v84.m128_f32[0] == 0.0 )
-        v85 = 0.0;
-      else
-        v85 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v84));
-      v86 = v10 * v85;
-      v87 = *(float *)&v196[0].i_uid * v85;
-      v88 = *(float *)&v197 * v85;
-      v189.v0.x = *(float *)&v197 * v85;
-      v189.v0.y = *(float *)&v196[0].i_uid * v85;
-      v189.v0.z = v86;
-      v189.v0.w = 0.0;
-      v89 = (__m128)LODWORD(UFG::qVector3::msDirUp.x);
-      v90 = v89;
-      v90.m128_f32[0] = (float)((float)(v89.m128_f32[0] * v89.m128_f32[0])
-                              + (float)(UFG::qVector3::msDirUp.y * UFG::qVector3::msDirUp.y))
-                      + (float)(UFG::qVector3::msDirUp.z * UFG::qVector3::msDirUp.z);
-      if ( v90.m128_f32[0] == 0.0 )
-      {
-        v91 = 0i64;
-      }
-      else
-      {
-        v91 = (__m128)(unsigned int)FLOAT_1_0;
-        v91.m128_f32[0] = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v90));
-      }
-      v92 = v91.m128_f32[0] * UFG::qVector3::msDirUp.z;
-      v95 = v91;
-      v95.m128_f32[0] = v91.m128_f32[0] * UFG::qVector3::msDirUp.y;
-      v91.m128_f32[0] = v91.m128_f32[0] * UFG::qVector3::msDirUp.x;
-      v93 = v91;
-      v93.m128_f32[0] = (float)(v91.m128_f32[0] * v87) - (float)(v88 * v95.m128_f32[0]);
-      v94 = (float)(v88 * v92) - (float)(v91.m128_f32[0] * v86);
-      v95.m128_f32[0] = (float)(v95.m128_f32[0] * v86) - (float)(v92 * v87);
-      v96 = v95;
-      v96.m128_f32[0] = (float)((float)(v95.m128_f32[0] * v95.m128_f32[0]) + (float)(v94 * v94))
-                      + (float)(v93.m128_f32[0] * v93.m128_f32[0]);
-      if ( v96.m128_f32[0] == 0.0 )
-        v97 = 0.0;
-      else
-        v97 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v96));
-      v93.m128_f32[0] = v93.m128_f32[0] * v97;
-      v98 = v95.m128_f32[0] * v97;
-      v189.v1.x = v98;
-      v189.v1.y = v94 * v97;
-      LODWORD(v189.v1.z) = v93.m128_i32[0];
-      v189.v1.w = 0.0;
-      v99 = (float)(v88 * (float)(v94 * v97)) - (float)(v98 * v87);
-      v100 = (float)(v98 * v86) - (float)(v88 * v93.m128_f32[0]);
-      v93.m128_f32[0] = (float)(v93.m128_f32[0] * v87) - (float)((float)(v94 * v97) * v86);
-      v101 = v93;
-      v101.m128_f32[0] = (float)((float)(v93.m128_f32[0] * v93.m128_f32[0]) + (float)(v100 * v100)) + (float)(v99 * v99);
-      if ( v101.m128_f32[0] == 0.0 )
-        v102 = 0.0;
-      else
-        v102 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v101));
-      v189.v2.x = v93.m128_f32[0] * v102;
-      v189.v2.y = v102 * v100;
-      v189.v2.z = v102 * v99;
-      v189.v2.w = 0.0;
-      v189.v3.x = xform.v3.x;
-      v189.v3.y = v55;
-      v189.v3.z = v54;
-      v189.v3.w = 1.0;
-      v103 = (UFG::SimObjectGame **)&v1->mObjects[0].m_pPointer;
-      UFG::SimObjectUtility::Teleport(v1->mObjects[0].m_pPointer, &v189);
-      do
-      {
-        v104 = *v103;
-        if ( *v103 )
-        {
-          v105 = v104->m_Flags;
-          if ( (v105 >> 14) & 1 )
+          v159 = v1->mPositionToDefendObject.m_pPointer;
+          if ( v159 )
+            UFG::Simulation::DestroySimObject(&UFG::gSim, v159);
+          SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+          v161 = UFG::qMemoryPool::Allocate(SimulationMemoryPool, 0x80ui64, "CopRoadBlock::Spawn()", 0i64, 1u);
+          v187 = v161;
+          if ( v161 )
           {
-            v106 = (UFG::VehicleEffectsComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                     v104,
-                                                     UFG::VehicleEffectsComponent::_TypeUID);
-          }
-          else if ( (v105 & 0x8000u) == 0 )
-          {
-            if ( (v105 >> 13) & 1 )
-              v106 = (UFG::VehicleEffectsComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                       v104,
-                                                       UFG::VehicleEffectsComponent::_TypeUID);
-            else
-              v106 = (UFG::VehicleEffectsComponent *)((v105 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                           v104,
-                                                                           UFG::VehicleEffectsComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v104->vfptr, UFG::VehicleEffectsComponent::_TypeUID));
+            v3 = 1;
+            LODWORD(xform.v2.z) = 1;
+            v162 = UFG::qSymbol::create_from_string((UFG::qSymbol *)v186, "RoadblockPositionToDefend");
+            UFG::SimObject::SimObject((UFG::SimObject *)v161, v162);
           }
           else
           {
-            v106 = (UFG::VehicleEffectsComponent *)v104->m_Components.p[32].m_pComponent;
+            v163 = 0i64;
           }
-          if ( v106 )
-            UFG::VehicleEffectsComponent::TurnOnCopLights(v106);
-        }
-        v103 += 3;
-        --v58;
-      }
-      while ( v58 );
-      if ( v84.m128_f32[0] == 0.0 )
-        v107 = 0.0;
-      else
-        v107 = 1.0 / fsqrt(v84.m128_f32[0]);
-      v108 = xform.v2.x * v107;
-      v109 = *(float *)&v196[0].i_uid * v107;
-      v110 = v107 * *(float *)&v197;
-      v190.v0.x = v110;
-      v190.v0.y = v109;
-      v190.v0.z = v108;
-      v190.v0.w = 0.0;
-      v111 = (__m128)LODWORD(UFG::qVector3::msDirUp.x);
-      v112 = v111;
-      v112.m128_f32[0] = (float)((float)(v111.m128_f32[0] * v111.m128_f32[0])
-                               + (float)(UFG::qVector3::msDirUp.y * UFG::qVector3::msDirUp.y))
-                       + (float)(UFG::qVector3::msDirUp.z * UFG::qVector3::msDirUp.z);
-      if ( v112.m128_f32[0] == 0.0 )
-        v113 = 0.0;
-      else
-        v113 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v112));
-      v114 = v113 * UFG::qVector3::msDirUp.z;
-      v115 = v113 * UFG::qVector3::msDirUp.y;
-      v116 = v113 * UFG::qVector3::msDirUp.x;
-      v117 = (float)(v116 * v109) - (float)(v110 * v115);
-      v118 = (float)(v110 * v114) - (float)(v116 * v108);
-      v119 = (float)(v115 * v108) - (float)(v114 * v109);
-      v120 = (float)((float)(v119 * v119) + (float)(v118 * v118)) + (float)(v117 * v117);
-      if ( v120 == 0.0 )
-        v121 = 0.0;
-      else
-        v121 = 1.0 / fsqrt(v120);
-      v122 = v117 * v121;
-      v123 = v119 * v121;
-      v190.v1.x = v123;
-      v190.v1.y = v118 * v121;
-      v190.v1.z = v122;
-      v190.v1.w = 0.0;
-      v124 = (float)(v110 * (float)(v118 * v121)) - (float)(v123 * v109);
-      v125 = (float)(v123 * v108) - (float)(v110 * v122);
-      v126 = (float)(v122 * v109) - (float)((float)(v118 * v121) * v108);
-      v127 = (float)((float)(v126 * v126) + (float)(v125 * v125)) + (float)(v124 * v124);
-      if ( v127 == 0.0 )
-        v128 = 0.0;
-      else
-        v128 = 1.0 / fsqrt(v127);
-      v190.v2.x = v126 * v128;
-      v190.v2.y = v128 * v125;
-      v190.v2.z = v128 * v124;
-      v190.v2.w = 0.0;
-      v190.v3.x = xform.v3.z;
-      v190.v3.y = xform.v3.w;
-      v190.v3.z = xform.v3.y;
-      v190.v3.w = 1.0;
-      UFG::SimObjectUtility::Teleport(v1->mObjects[1].m_pPointer, &v190);
-      v129 = v1->mFlipped;
-      if ( v129 )
-        v130 = FLOAT_N2_0;
-      else
-        v130 = FLOAT_2_0;
-      v131 = xform.v1.z;
-      v132 = xform.v2.y;
-      v133 = (float)(xform.v1.z * v130) + xform.v1.w;
-      v134 = (float)(xform.v2.y * v130) + xform.v0.x;
-      v135 = (float)(v7 * v130) + xform.v2.w;
-      if ( v129 )
-      {
-        LODWORD(v131) = LODWORD(xform.v1.z) ^ _xmm[0];
-        LODWORD(v132) = LODWORD(xform.v2.y) ^ _xmm[0];
-        LODWORD(v7) ^= _xmm[0];
-      }
-      result.z = v131;
-      result.y = v132;
-      result.x = v7;
-      v136 = v132;
-      v137 = (__m128)LODWORD(v7);
-      v138 = v131;
-      v139 = v137;
-      v139.m128_f32[0] = (float)((float)(v137.m128_f32[0] * v137.m128_f32[0]) + (float)(v136 * v136))
-                       + (float)(v138 * v138);
-      if ( v139.m128_f32[0] == 0.0 )
-        v140 = 0.0;
-      else
-        v140 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v139));
-      v141 = v138 * v140;
-      v142 = v136 * v140;
-      v143 = v7 * v140;
-      v191.v0.x = v7 * v140;
-      v191.v0.y = v142;
-      v191.v0.z = v141;
-      v191.v0.w = 0.0;
-      v144 = (__m128)LODWORD(UFG::qVector3::msDirUp.x);
-      v144.m128_f32[0] = (float)((float)(v144.m128_f32[0] * v144.m128_f32[0])
-                               + (float)(UFG::qVector3::msDirUp.y * UFG::qVector3::msDirUp.y))
-                       + (float)(UFG::qVector3::msDirUp.z * UFG::qVector3::msDirUp.z);
-      if ( v144.m128_f32[0] == 0.0 )
-        v145 = 0.0;
-      else
-        v145 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v144));
-      v146 = v145 * UFG::qVector3::msDirUp.z;
-      v147 = v145 * UFG::qVector3::msDirUp.y;
-      v148 = v145 * UFG::qVector3::msDirUp.x;
-      v149 = (float)(v148 * v142) - (float)(v143 * v147);
-      v150 = (float)(v143 * v146) - (float)(v148 * v141);
-      v151 = (float)(v147 * v141) - (float)(v146 * v142);
-      v152 = (float)((float)(v151 * v151) + (float)(v150 * v150)) + (float)(v149 * v149);
-      if ( v152 == 0.0 )
-        v153 = 0.0;
-      else
-        v153 = 1.0 / fsqrt(v152);
-      v154 = v149 * v153;
-      v155 = v151 * v153;
-      v191.v1.x = v155;
-      v191.v1.y = v150 * v153;
-      v191.v1.z = v154;
-      v191.v1.w = 0.0;
-      v156 = (float)(v143 * (float)(v150 * v153)) - (float)(v155 * v142);
-      v157 = (float)(v155 * v141) - (float)(v143 * v154);
-      v158 = (float)(v154 * v142) - (float)((float)(v150 * v153) * v141);
-      v159 = (float)((float)(v158 * v158) + (float)(v157 * v157)) + (float)(v156 * v156);
-      if ( v159 == 0.0 )
-        v160 = 0.0;
-      else
-        v160 = 1.0 / fsqrt(v159);
-      v191.v2.x = v158 * v160;
-      v191.v2.y = v160 * v157;
-      v191.v2.z = v160 * v156;
-      v191.v2.w = 0.0;
-      v191.v3.x = v135;
-      v191.v3.y = (float)(xform.v2.y * v130) + xform.v0.x;
-      v191.v3.z = (float)(xform.v1.z * v130) + xform.v1.w;
-      v191.v3.w = 1.0;
-      UFG::SimObjectUtility::Teleport(v1->mObjects[2].m_pPointer, &v191);
-      v161 = (UFG::SimObjectCVBase *)v1->mObjects[2].m_pPointer;
-      if ( v161 )
-      {
-        v162 = v161->m_Flags;
-        if ( (v162 >> 14) & 1 )
-        {
-          v163 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v161);
-        }
-        else if ( (v162 & 0x8000u) == 0 )
-        {
-          if ( (v162 >> 13) & 1 )
-            v163 = (UFG::ActiveAIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                     (UFG::SimObjectGame *)&v161->vfptr,
-                                                     UFG::ActiveAIEntityComponent::_TypeUID);
-          else
-            v163 = (UFG::ActiveAIEntityComponent *)((v162 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                         (UFG::SimObjectGame *)&v161->vfptr,
-                                                                         UFG::ActiveAIEntityComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v161->vfptr, UFG::ActiveAIEntityComponent::_TypeUID));
-        }
-        else
-        {
-          v163 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v161);
-        }
-        v164 = v163;
-        if ( v163 )
-        {
-          UFG::ActiveAIEntityComponent::SetCurrentObjective(v163, eAI_OBJECTIVE_PURSUIT_TARGET, "CopRoadBlock");
-          v164->m_MaxEngagementDistanceXY = 50.0;
-          v164->m_MaxEngagementDistanceZ = 50.0;
-          v165 = (UFG::SimObjectGame *)v1->mObjects[2].m_pPointer;
+          UFG::qSafePointer<Creature,Creature>::operator=(
+            (UFG::qSafePointer<UFG::SimComponent,UFG::SimComponent> *)&v1->mPositionToDefendObject,
+            v163);
+          if ( (v3 & 1) != 0 )
+            LODWORD(xform.v2.z) = v3 & 0xFFFFFFFE;
+          v164 = UFG::GetSimulationMemoryPool();
+          v165 = UFG::qMemoryPool::Allocate(v164, 0x110ui64, "CopRoadBlock::Spawn()", 0i64, 1u);
+          *(_QWORD *)&v186[0].i_uid = v165;
           if ( v165 )
           {
-            v166 = v165->m_Flags;
-            if ( (v166 >> 14) & 1 )
-            {
-              v167 = (UFG::AIScriptInterfaceComponent *)v165->m_Components.p[5].m_pComponent;
-            }
-            else if ( (v166 & 0x8000u) == 0 )
-            {
-              if ( (v166 >> 13) & 1 )
-                v168 = UFG::SimObjectGame::GetComponentOfTypeHK(v165, UFG::AIScriptInterfaceComponent::_TypeUID);
-              else
-                v168 = (v166 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                            v165,
-                                            UFG::AIScriptInterfaceComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(
-                                                                                           (UFG::SimObject *)&v165->vfptr,
-                                                                                           UFG::AIScriptInterfaceComponent::_TypeUID);
-              v167 = (UFG::AIScriptInterfaceComponent *)v168;
-            }
-            else
-            {
-              v167 = (UFG::AIScriptInterfaceComponent *)v165->m_Components.p[5].m_pComponent;
-            }
-            if ( v167 )
-            {
-              v169 = v1->mPositionToDefendObject.m_pPointer;
-              if ( v169 )
-                UFG::Simulation::DestroySimObject(&UFG::gSim, v169);
-              v170 = UFG::GetSimulationMemoryPool();
-              v171 = UFG::qMemoryPool::Allocate(v170, 0x80ui64, "CopRoadBlock::Spawn()", 0i64, 1u);
-              v197 = v171;
-              if ( v171 )
-              {
-                v3 = 1;
-                LODWORD(xform.v2.z) = 1;
-                v172 = UFG::qSymbol::create_from_string((UFG::qSymbol *)v196, "RoadblockPositionToDefend");
-                UFG::SimObject::SimObject((UFG::SimObject *)v171, v172);
-              }
-              else
-              {
-                v173 = 0i64;
-              }
-              UFG::qSafePointer<Creature,Creature>::operator=(
-                (UFG::qSafePointer<UFG::SimComponent,UFG::SimComponent> *)&v1->mPositionToDefendObject,
-                v173);
-              if ( v3 & 1 )
-                LODWORD(xform.v2.z) = v3 & 0xFFFFFFFE;
-              v174 = UFG::GetSimulationMemoryPool();
-              v175 = UFG::qMemoryPool::Allocate(v174, 0x110ui64, "CopRoadBlock::Spawn()", 0i64, 1u);
-              *(_QWORD *)&v196[0].i_uid = v175;
-              if ( v175 )
-              {
-                v176 = UFG::qStringHash32("RoadblockPositionToDefendTransformNode", 0xFFFFFFFF);
-                UFG::TransformNodeComponent::TransformNodeComponent((UFG::TransformNodeComponent *)v175, v176, 0i64, 0);
-                v178 = v177;
-              }
-              else
-              {
-                v178 = 0i64;
-              }
-              v179 = 0i64;
-              v179.x = (float)1;
-              m.v0 = v179;
-              m.v1 = (UFG::qVector4)_mm_shuffle_ps((__m128)v179, (__m128)v179, 81);
-              m.v2 = (UFG::qVector4)_mm_shuffle_ps((__m128)v179, (__m128)v179, 69);
-              m.v3.x = v135;
-              m.v3.y = v134;
-              m.v3.z = v133;
-              m.v3.w = 1.0;
-              UFG::TransformNodeComponent::SetWorldTransform(v178, &m);
-              v180 = v1->mPositionToDefendObject.m_pPointer;
-              v181 = v180->m_Flags;
-              if ( (v181 >> 14) & 1 )
-              {
-                v182 = 2;
-              }
-              else if ( (v181 & 0x8000u) == 0 )
-              {
-                if ( (v181 >> 13) & 1 )
-                {
-                  v182 = 2;
-                }
-                else
-                {
-                  v182 = -1;
-                  if ( (v181 >> 12) & 1 )
-                    v182 = 1;
-                }
-              }
-              else
-              {
-                v182 = 2;
-              }
-              UFG::SimObjectModifier::SimObjectModifier((UFG::SimObjectModifier *)&xform, v180, 1);
-              UFG::SimObjectModifier::AttachComponent(
-                (UFG::SimObjectModifier *)&xform,
-                (UFG::SimComponent *)&v178->vfptr,
-                v182);
-              UFG::SimObjectModifier::Close((UFG::SimObjectModifier *)&xform);
-              UFG::SimObjectModifier::~SimObjectModifier((UFG::SimObjectModifier *)&xform);
-              UFG::AIScriptInterfaceComponent::SetPositionToDefend(
-                v167,
-                v1->mPositionToDefendObject.m_pPointer,
-                10.0,
-                0,
-                0,
-                0);
-            }
+            v166 = UFG::qStringHash32("RoadblockPositionToDefendTransformNode", 0xFFFFFFFF);
+            UFG::TransformNodeComponent::TransformNodeComponent((UFG::TransformNodeComponent *)v165, v166, 0i64, 0);
+            v168 = v167;
           }
-          v183 = v1->mObjects[2].m_pPointer;
-          if ( v183 )
+          else
           {
-            v184 = v183->m_Flags;
-            if ( (v184 >> 14) & 1 )
+            v168 = 0i64;
+          }
+          v169 = 0i64;
+          v169.x = (float)1;
+          m.v0 = v169;
+          m.v1 = (UFG::qVector4)_mm_shuffle_ps((__m128)v169, (__m128)v169, 81);
+          m.v2 = (UFG::qVector4)_mm_shuffle_ps((__m128)v169, (__m128)v169, 69);
+          m.v3.x = v128;
+          m.v3.y = v127;
+          m.v3.z = v126;
+          m.v3.w = 1.0;
+          UFG::TransformNodeComponent::SetWorldTransform(v168, &m);
+          v170 = v1->mPositionToDefendObject.m_pPointer;
+          v171 = v170->m_Flags;
+          if ( (v171 & 0x4000) != 0 )
+          {
+            v172 = 2;
+          }
+          else if ( v171 >= 0 )
+          {
+            if ( (v171 & 0x2000) != 0 )
             {
-              v185 = (UFG::TSActorComponent *)v183->m_Components.p[4].m_pComponent;
-            }
-            else if ( (v184 & 0x8000u) == 0 )
-            {
-              if ( (v184 >> 13) & 1 )
-                v185 = (UFG::TSActorComponent *)v183->m_Components.p[3].m_pComponent;
-              else
-                v185 = (UFG::TSActorComponent *)((v184 >> 12) & 1 ? v183->m_Components.p[2].m_pComponent : UFG::SimObject::GetComponentOfType(v183, UFG::TSActorComponent::_TypeUID));
+              v172 = 2;
             }
             else
             {
-              v185 = (UFG::TSActorComponent *)v183->m_Components.p[4].m_pComponent;
-            }
-            if ( v185 )
-            {
-              ASymbol::create(v196, "equip_firearm", 0xFFFFFFFF, ATerm_long);
-              v197 = 0i64;
-              v186 = UFG::TSActorComponent::GetActor(v185);
-              ((void (__fastcall *)(UFG::TSActor *, ASymbol *, UFG::allocator::free_link **, bool, _QWORD, _QWORD, _QWORD, _QWORD))v186->vfptr[1].set_data_by_name)(
-                v186,
-                v196,
-                &v197,
-                v197 != 0i64,
-                0i64,
-                0i64,
-                *(_QWORD *)&result.x,
-                *(_QWORD *)&result.z);
+              v172 = -1;
+              if ( (v171 & 0x1000) != 0 )
+                v172 = 1;
             }
           }
+          else
+          {
+            v172 = 2;
+          }
+          UFG::SimObjectModifier::SimObjectModifier((UFG::SimObjectModifier *)&xform, v170, 1);
+          UFG::SimObjectModifier::AttachComponent((UFG::SimObjectModifier *)&xform, v168, v172);
+          UFG::SimObjectModifier::Close((UFG::SimObjectModifier *)&xform);
+          UFG::SimObjectModifier::~SimObjectModifier((UFG::SimObjectModifier *)&xform);
+          UFG::AIScriptInterfaceComponent::SetPositionToDefend(
+            v157,
+            v1->mPositionToDefendObject.m_pPointer,
+            10.0,
+            0,
+            0,
+            0);
+        }
+      }
+      v173 = v1->mObjects[2].m_pPointer;
+      if ( v173 )
+      {
+        v174 = v173->m_Flags;
+        if ( (v174 & 0x4000) != 0 )
+        {
+          v175 = (UFG::TSActorComponent *)v173->m_Components.p[4].m_pComponent;
+        }
+        else if ( v174 >= 0 )
+        {
+          if ( (v174 & 0x2000) != 0 )
+            v175 = (UFG::TSActorComponent *)v173->m_Components.p[3].m_pComponent;
+          else
+            v175 = (UFG::TSActorComponent *)((v174 & 0x1000) != 0
+                                           ? v173->m_Components.p[2].m_pComponent
+                                           : UFG::SimObject::GetComponentOfType(v173, UFG::TSActorComponent::_TypeUID));
+        }
+        else
+        {
+          v175 = (UFG::TSActorComponent *)v173->m_Components.p[4].m_pComponent;
+        }
+        if ( v175 )
+        {
+          ASymbol::create(v186, "equip_firearm", 0xFFFFFFFF, ATerm_long);
+          v187 = 0i64;
+          Actor = UFG::TSActorComponent::GetActor(v175);
+          ((void (__fastcall *)(UFG::TSActor *, ASymbol *, UFG::allocator::free_link **, bool, _QWORD, _QWORD, _QWORD, _DWORD))Actor->vfptr[1].set_data_by_name)(
+            Actor,
+            v186,
+            &v187,
+            v187 != 0i64,
+            0i64,
+            0i64,
+            *(_QWORD *)&result.x,
+            LODWORD(result.z));
         }
       }
     }
-    UFG::SimObjectUtility::AttachHudSymbol(v1->m_pSimObject, "roadblock_symbol", 0, 0.0, &customWorldMapCaption);
   }
+LABEL_181:
+  UFG::SimObjectUtility::AttachHudSymbol(v1->m_pSimObject, "roadblock_symbol", 0, 0.0, &customCaption);
 }
 
 // File Line: 305
@@ -1238,157 +1183,147 @@ void __fastcall UFG::CopRoadBlock::Spawn(UFG::CopRoadBlock *this)
 void __fastcall UFG::CopRoadBlock::Despawn(UFG::CopRoadBlock *this)
 {
   bool v1; // zf
-  UFG::CopRoadBlock *v2; // r14
-  UFG::SimObject *v3; // rdx
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v4; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v5; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v6; // rax
+  UFG::SimObject *m_pPointer; // rdx
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mPositionToDefendObject; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::WheeledVehicleManager *v7; // rsi
-  UFG::RoadNetworkResource *v8; // rax
-  UFG::TransformNodeComponent *v9; // rbx
+  UFG::RoadNetworkResource *RoadNetwork; // rax
+  UFG::TransformNodeComponent *mpXformNode; // rbx
   UFG::RoadNetworkResource *v10; // rdi
-  float v11; // xmm1_4
-  float v12; // xmm2_4
-  UFG::RoadNetworkSegment *v13; // rax
+  float y; // xmm1_4
+  float z; // xmm2_4
+  UFG::RoadNetworkSegment *ClosestSegment; // rax
   UFG::RoadNetworkNode *v14; // rbx
-  UFG::SimObject **v15; // rdi
-  signed __int64 v16; // rbp
+  UFG::SimObject **p_m_pPointer; // rdi
+  __int64 v16; // rbp
   UFG::SimObjectGame *v17; // rbx
-  unsigned __int16 v18; // cx
-  UFG::StreamedResourceComponent *v19; // rsi
+  __int16 m_Flags; // cx
+  UFG::StreamedResourceComponent *m_pComponent; // rsi
   UFG::SimObjectGame *v20; // rcx
-  UFG::SimComponent *v21; // rax
-  unsigned __int16 v22; // cx
-  UFG::SimComponent *v23; // rax
+  UFG::SimComponent *ComponentOfType; // rax
+  __int16 v22; // cx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   __int64 v24; // rcx
   _QWORD *v25; // rax
-  UFG::qVector3 pos; // [rsp+30h] [rbp-28h]
-  unsigned int p_segment_index; // [rsp+60h] [rbp+8h]
+  UFG::qVector3 pos; // [rsp+30h] [rbp-28h] BYREF
+  unsigned int p_segment_index; // [rsp+60h] [rbp+8h] BYREF
 
-  v1 = this->mActiveStatus == 0;
-  v2 = this;
+  v1 = !this->mActiveStatus;
   this->mDesiredStatus = 0;
   if ( !v1 )
   {
-    v3 = this->mPositionToDefendObject.m_pPointer;
+    m_pPointer = this->mPositionToDefendObject.m_pPointer;
     this->mActiveStatus = 0;
-    if ( v3 )
+    if ( m_pPointer )
     {
-      UFG::Simulation::DestroySimObject(&UFG::gSim, v3);
-      v4 = &v2->mPositionToDefendObject;
-      if ( v2->mPositionToDefendObject.m_pPointer )
+      UFG::Simulation::DestroySimObject(&UFG::gSim, m_pPointer);
+      p_mPositionToDefendObject = &this->mPositionToDefendObject;
+      if ( this->mPositionToDefendObject.m_pPointer )
       {
-        v5 = v4->mPrev;
-        v6 = v2->mPositionToDefendObject.mNext;
-        v5->mNext = v6;
-        v6->mPrev = v5;
-        v4->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v4->mPrev;
-        v2->mPositionToDefendObject.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPositionToDefendObject.mPrev;
+        mPrev = p_mPositionToDefendObject->mPrev;
+        mNext = this->mPositionToDefendObject.mNext;
+        mPrev->mNext = mNext;
+        mNext->mPrev = mPrev;
+        p_mPositionToDefendObject->mPrev = p_mPositionToDefendObject;
+        this->mPositionToDefendObject.mNext = &this->mPositionToDefendObject;
       }
-      v2->mPositionToDefendObject.m_pPointer = 0i64;
+      this->mPositionToDefendObject.m_pPointer = 0i64;
     }
     v7 = UFG::WheeledVehicleManager::m_Instance;
-    v8 = UFG::WheeledVehicleNavigationData::GetRoadNetwork(UFG::WheeledVehicleManager::m_Instance->m_NavigationData);
-    v9 = v2->mpXformNode;
-    v10 = v8;
-    UFG::TransformNodeComponent::UpdateWorldTransform(v2->mpXformNode);
-    v11 = v9->mWorldTransform.v3.y;
-    v12 = v9->mWorldTransform.v3.z;
-    pos.x = v9->mWorldTransform.v3.x;
-    pos.y = v11;
-    pos.z = v12;
+    RoadNetwork = UFG::WheeledVehicleNavigationData::GetRoadNetwork(UFG::WheeledVehicleManager::m_Instance->m_NavigationData);
+    mpXformNode = this->mpXformNode;
+    v10 = RoadNetwork;
+    UFG::TransformNodeComponent::UpdateWorldTransform(mpXformNode);
+    y = mpXformNode->mWorldTransform.v3.y;
+    z = mpXformNode->mWorldTransform.v3.z;
+    pos.x = mpXformNode->mWorldTransform.v3.x;
+    pos.y = y;
+    pos.z = z;
     p_segment_index = -1;
-    v13 = UFG::RoadNetworkResource::GetClosestSegment(v10, &pos, &p_segment_index, 0);
-    v14 = (UFG::RoadNetworkNode *)&v13->mType;
-    if ( v13 )
+    ClosestSegment = UFG::RoadNetworkResource::GetClosestSegment(v10, &pos, &p_segment_index, 0);
+    v14 = ClosestSegment;
+    if ( ClosestSegment )
     {
-      UFG::WheeledVehicleNavigationData::RemoveRoadBlocksAroundSegment(v7->m_NavigationData, v13);
+      UFG::WheeledVehicleNavigationData::RemoveRoadBlocksAroundSegment(v7->m_NavigationData, ClosestSegment);
       UFG::WheeledVehicleManager::DestroyCarsOnRoad(v7, v14);
     }
-    v15 = &v2->mObjects[0].m_pPointer;
+    p_m_pPointer = &this->mObjects[0].m_pPointer;
     v16 = 6i64;
-    do
+    while ( 1 )
     {
-      v17 = (UFG::SimObjectGame *)*v15;
-      if ( *v15 )
+      v17 = (UFG::SimObjectGame *)*p_m_pPointer;
+      if ( *p_m_pPointer )
+        break;
+LABEL_36:
+      p_m_pPointer += 3;
+      if ( !--v16 )
       {
-        v18 = v17->m_Flags;
-        if ( (v18 >> 14) & 1 )
-        {
-          v19 = (UFG::StreamedResourceComponent *)v17->m_Components.p[10].m_pComponent;
-        }
-        else if ( (v18 & 0x8000u) == 0 )
-        {
-          if ( (v18 >> 13) & 1 )
-          {
-            v19 = (UFG::StreamedResourceComponent *)v17->m_Components.p[7].m_pComponent;
-          }
-          else
-          {
-            v1 = ((v18 >> 12) & 1) == 0;
-            v20 = (UFG::SimObjectGame *)*v15;
-            if ( v1 )
-              v21 = UFG::SimObject::GetComponentOfType(
-                      (UFG::SimObject *)&v20->vfptr,
-                      UFG::StreamedResourceComponent::_TypeUID);
-            else
-              v21 = UFG::SimObjectGame::GetComponentOfTypeHK(v20, UFG::StreamedResourceComponent::_TypeUID);
-            v19 = (UFG::StreamedResourceComponent *)v21;
-          }
-        }
-        else
-        {
-          v19 = (UFG::StreamedResourceComponent *)v17->m_Components.p[10].m_pComponent;
-        }
-        if ( v19 )
-        {
-          UFG::StreamedResourceComponent::IncrementPriorityReferenceCount(v19, (UFG::qSymbol *)&qSymbol_Low.mUID);
-          UFG::StreamedResourceComponent::DecrementPriorityReferenceCount(v19, (UFG::qSymbol *)&qSymbol_Critical.mUID);
-        }
-        v22 = v17->m_Flags;
-        if ( (v22 >> 14) & 1 )
-        {
-          v23 = UFG::SimObjectGame::GetComponentOfTypeHK(v17, UFG::VehicleOccupantComponent::_TypeUID);
-        }
-        else if ( (v22 & 0x8000u) == 0 )
-        {
-          if ( (v22 >> 13) & 1 )
-          {
-            v23 = UFG::SimObjectGame::GetComponentOfTypeHK(v17, UFG::VehicleOccupantComponent::_TypeUID);
-          }
-          else if ( (v22 >> 12) & 1 )
-          {
-            v23 = UFG::SimObjectGame::GetComponentOfTypeHK(v17, UFG::VehicleOccupantComponent::_TypeUID);
-          }
-          else
-          {
-            v23 = UFG::SimObject::GetComponentOfType(
-                    (UFG::SimObject *)&v17->vfptr,
-                    UFG::VehicleOccupantComponent::_TypeUID);
-          }
-        }
-        else
-        {
-          v23 = v17->m_Components.p[30].m_pComponent;
-        }
-        if ( !v23 || !Scaleform::Render::RBGenericImpl::RenderTarget::GetTexture((hkSimpleLocalFrame *)v23) )
-          UFG::Simulation::QueueSimObjectToBeDestroyed(&UFG::gSim, *v15);
-        if ( *v15 )
-        {
-          v24 = (__int64)*(v15 - 2);
-          v25 = *(v15 - 1);
-          *(_QWORD *)(v24 + 8) = v25;
-          *v25 = v24;
-          *(v15 - 2) = (UFG::SimObject *)(v15 - 2);
-          *(v15 - 1) = (UFG::SimObject *)(v15 - 2);
-        }
-        *v15 = 0i64;
+        UFG::SimObjectUtility::DetachHudSymbol(this->m_pSimObject);
+        return;
       }
-      v15 += 3;
-      --v16;
     }
-    while ( v16 );
-    UFG::SimObjectUtility::DetachHudSymbol(v2->m_pSimObject);
+    m_Flags = v17->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
+    {
+      m_pComponent = (UFG::StreamedResourceComponent *)v17->m_Components.p[10].m_pComponent;
+    }
+    else if ( m_Flags >= 0 )
+    {
+      if ( (m_Flags & 0x2000) != 0 )
+      {
+        m_pComponent = (UFG::StreamedResourceComponent *)v17->m_Components.p[7].m_pComponent;
+      }
+      else
+      {
+        v1 = (m_Flags & 0x1000) == 0;
+        v20 = (UFG::SimObjectGame *)*p_m_pPointer;
+        if ( v1 )
+          ComponentOfType = UFG::SimObject::GetComponentOfType(v20, UFG::StreamedResourceComponent::_TypeUID);
+        else
+          ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(v20, UFG::StreamedResourceComponent::_TypeUID);
+        m_pComponent = (UFG::StreamedResourceComponent *)ComponentOfType;
+      }
+    }
+    else
+    {
+      m_pComponent = (UFG::StreamedResourceComponent *)v17->m_Components.p[10].m_pComponent;
+    }
+    if ( m_pComponent )
+    {
+      UFG::StreamedResourceComponent::IncrementPriorityReferenceCount(m_pComponent, &qSymbol_Low);
+      UFG::StreamedResourceComponent::DecrementPriorityReferenceCount(m_pComponent, &qSymbol_Critical);
+    }
+    v22 = v17->m_Flags;
+    if ( (v22 & 0x4000) != 0 )
+      goto LABEL_28;
+    if ( v22 < 0 )
+    {
+      ComponentOfTypeHK = v17->m_Components.p[30].m_pComponent;
+      goto LABEL_30;
+    }
+    if ( (v22 & 0x2000) != 0 || (v22 & 0x1000) != 0 )
+LABEL_28:
+      ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(v17, UFG::VehicleOccupantComponent::_TypeUID);
+    else
+      ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(v17, UFG::VehicleOccupantComponent::_TypeUID);
+LABEL_30:
+    if ( !ComponentOfTypeHK
+      || !Scaleform::Render::RBGenericImpl::RenderTarget::GetTexture((hkSimpleLocalFrame *)ComponentOfTypeHK) )
+    {
+      UFG::Simulation::QueueSimObjectToBeDestroyed(&UFG::gSim, *p_m_pPointer);
+    }
+    if ( *p_m_pPointer )
+    {
+      v24 = (__int64)*(p_m_pPointer - 2);
+      v25 = *(p_m_pPointer - 1);
+      *(_QWORD *)(v24 + 8) = v25;
+      *v25 = v24;
+      *(p_m_pPointer - 2) = (UFG::SimObject *)(p_m_pPointer - 2);
+      *(p_m_pPointer - 1) = (UFG::SimObject *)(p_m_pPointer - 2);
+    }
+    *p_m_pPointer = 0i64;
+    goto LABEL_36;
   }
 }
 
@@ -1396,25 +1331,23 @@ void __fastcall UFG::CopRoadBlock::Despawn(UFG::CopRoadBlock *this)
 // RVA: 0x5B3600
 UFG::RoadNetworkSegment *__fastcall UFG::CopRoadBlock::FindClosestRoadSegment(UFG::CopRoadBlock *this)
 {
-  UFG::CopRoadBlock *v1; // rbx
-  UFG::RoadNetworkResource *v2; // rax
-  UFG::TransformNodeComponent *v3; // rbx
+  UFG::RoadNetworkResource *RoadNetwork; // rax
+  UFG::TransformNodeComponent *mpXformNode; // rbx
   UFG::RoadNetworkResource *v4; // rdi
-  float v5; // xmm1_4
-  float v6; // xmm2_4
-  UFG::qVector3 pos; // [rsp+30h] [rbp-18h]
-  unsigned int p_segment_index; // [rsp+50h] [rbp+8h]
+  float y; // xmm1_4
+  float z; // xmm2_4
+  UFG::qVector3 pos; // [rsp+30h] [rbp-18h] BYREF
+  unsigned int p_segment_index; // [rsp+50h] [rbp+8h] BYREF
 
-  v1 = this;
-  v2 = UFG::WheeledVehicleNavigationData::GetRoadNetwork(UFG::WheeledVehicleManager::m_Instance->m_NavigationData);
-  v3 = v1->mpXformNode;
-  v4 = v2;
-  UFG::TransformNodeComponent::UpdateWorldTransform(v3);
-  v5 = v3->mWorldTransform.v3.y;
-  v6 = v3->mWorldTransform.v3.z;
-  pos.x = v3->mWorldTransform.v3.x;
-  pos.y = v5;
-  pos.z = v6;
+  RoadNetwork = UFG::WheeledVehicleNavigationData::GetRoadNetwork(UFG::WheeledVehicleManager::m_Instance->m_NavigationData);
+  mpXformNode = this->mpXformNode;
+  v4 = RoadNetwork;
+  UFG::TransformNodeComponent::UpdateWorldTransform(mpXformNode);
+  y = mpXformNode->mWorldTransform.v3.y;
+  z = mpXformNode->mWorldTransform.v3.z;
+  pos.x = mpXformNode->mWorldTransform.v3.x;
+  pos.y = y;
+  pos.z = z;
   p_segment_index = -1;
   return UFG::RoadNetworkResource::GetClosestSegment(v4, &pos, &p_segment_index, 0);
 }

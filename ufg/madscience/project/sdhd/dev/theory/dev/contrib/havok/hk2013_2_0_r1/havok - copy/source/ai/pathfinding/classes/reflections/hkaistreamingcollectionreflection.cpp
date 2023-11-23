@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkaiStreamingCollectionInstanceInfoClass__()
     0i64,
     0i64,
     0,
-    4u);
+    4);
 }
 
 // File Line: 66
@@ -51,7 +51,7 @@ void dynamic_initializer_for__hkaiStreamingCollectionClass__()
     &hkaiStreamingCollection_Default,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 136
@@ -63,23 +63,26 @@ hkClass *__fastcall hkaiStreamingCollection::staticClass()
 
 // File Line: 143
 // RVA: 0xBB77D0
-void __fastcall finishLoadedObjecthkaiStreamingCollection(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiStreamingCollection(
+        hkaiStreamingCollection *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiStreamingCollection::hkaiStreamingCollection);
+  if ( p )
+    hkaiStreamingCollection::hkaiStreamingCollection(p, finishing);
 }
 
 // File Line: 149
 // RVA: 0xBB77F0
-void __fastcall cleanupLoadedObjecthkaiStreamingCollection(void *p)
+void __fastcall cleanupLoadedObjecthkaiStreamingCollection(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 153
 // RVA: 0xBB7800
 hkBaseObjectVtbl *__fastcall getVtablehkaiStreamingCollection()
 {
-  hkaiStreamingCollection v1; // [rsp+20h] [rbp-38h]
+  hkaiStreamingCollection v1; // [rsp+20h] [rbp-38h] BYREF
 
   hkaiStreamingCollection::hkaiStreamingCollection(&v1, 0);
   return v1.vfptr;
@@ -96,8 +99,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiStreamingCollectionTypeInfo__()
   hkaiStreamingCollectionTypeInfo.m_typeName = "hkaiStreamingCollection";
   hkaiStreamingCollectionTypeInfo.m_vtable = result;
   hkaiStreamingCollectionTypeInfo.m_scopedName = "!hkaiStreamingCollection";
-  hkaiStreamingCollectionTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiStreamingCollection;
-  hkaiStreamingCollectionTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiStreamingCollection;
+  hkaiStreamingCollectionTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiStreamingCollection;
+  hkaiStreamingCollectionTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiStreamingCollection;
   return result;
 }
 

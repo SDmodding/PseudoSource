@@ -1,23 +1,28 @@
 // File Line: 509
 // RVA: 0x98ACE0
-void __fastcall Scaleform::Render::Color::GetRGBAFloat(Scaleform::Render::Color *this, float *pr, float *pg, float *pb, float *pa)
+void __fastcall Scaleform::Render::Color::GetRGBAFloat(
+        Scaleform::Render::Color *this,
+        float *pr,
+        float *pg,
+        float *pb,
+        float *pa)
 {
-  unsigned __int8 v5; // al
+  unsigned __int8 Red; // al
   float v6; // xmm0_4
-  unsigned __int8 v7; // al
+  unsigned __int8 Green; // al
   float v8; // xmm0_4
   float v9; // xmm0_4
-  unsigned __int8 v10; // al
+  unsigned __int8 Alpha; // al
 
-  v5 = this->Channels.Red;
-  if ( v5 )
-    v6 = (float)v5 * 0.0039215689;
+  Red = this->Channels.Red;
+  if ( Red )
+    v6 = (float)Red * 0.0039215689;
   else
     v6 = 0.0;
   *pr = v6;
-  v7 = this->Channels.Green;
-  if ( v7 )
-    v8 = (float)v7 * 0.0039215689;
+  Green = this->Channels.Green;
+  if ( Green )
+    v8 = (float)Green * 0.0039215689;
   else
     v8 = 0.0;
   *pg = v8;
@@ -26,9 +31,9 @@ void __fastcall Scaleform::Render::Color::GetRGBAFloat(Scaleform::Render::Color 
   else
     v9 = 0.0;
   *pb = v9;
-  v10 = this->Channels.Alpha;
-  if ( v10 )
-    *pa = (float)v10 * 0.0039215689;
+  Alpha = this->Channels.Alpha;
+  if ( Alpha )
+    *pa = (float)Alpha * 0.0039215689;
   else
     *pa = 0.0;
 }

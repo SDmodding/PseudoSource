@@ -35,27 +35,22 @@ void __fastcall finishLoadedObjecthkpSampledHeightFieldShapeCoarseMinMaxLevel(vo
 
 // File Line: 94
 // RVA: 0xCEC8E0
-void __fastcall cleanupLoadedObjecthkpSampledHeightFieldShapeCoarseMinMaxLevel(void *p)
+void __fastcall cleanupLoadedObjecthkpSampledHeightFieldShapeCoarseMinMaxLevel(_DWORD *p)
 {
-  int v1; // er8
-  _DWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      *(void **)p,
-      16 * v1);
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, *(void **)p, 16 * v1);
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 
@@ -88,7 +83,7 @@ void dynamic_initializer_for__hkpSampledHeightFieldShapeClass__()
     &hkpSampledHeightFieldShape_Default,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 169
@@ -100,23 +95,26 @@ hkClass *__fastcall hkpSampledHeightFieldShape::staticClass()
 
 // File Line: 176
 // RVA: 0xCEC950
-void __fastcall finishLoadedObjecthkpSampledHeightFieldShape(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpSampledHeightFieldShape(
+        hkpSampledHeightFieldShape *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpSampledHeightFieldShape::hkpSampledHeightFieldShape);
+  if ( p )
+    hkpSampledHeightFieldShape::hkpSampledHeightFieldShape(p, finishing);
 }
 
 // File Line: 182
 // RVA: 0xCEC970
-void __fastcall cleanupLoadedObjecthkpSampledHeightFieldShape(void *p)
+void __fastcall cleanupLoadedObjecthkpSampledHeightFieldShape(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 186
 // RVA: 0xCEC980
 hkBaseObjectVtbl *__fastcall getVtablehkpSampledHeightFieldShape()
 {
-  hkpSampledHeightFieldShape v1; // [rsp+20h] [rbp-98h]
+  hkpSampledHeightFieldShape v1; // [rsp+20h] [rbp-98h] BYREF
 
   hkpSampledHeightFieldShape::hkpSampledHeightFieldShape(&v1, 0);
   return v1.vfptr;
@@ -133,8 +131,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpSampledHeightFieldShapeTypeInfo__(
   hkpSampledHeightFieldShapeTypeInfo.m_typeName = "hkpSampledHeightFieldShape";
   hkpSampledHeightFieldShapeTypeInfo.m_vtable = result;
   hkpSampledHeightFieldShapeTypeInfo.m_scopedName = "!hkpSampledHeightFieldShape";
-  hkpSampledHeightFieldShapeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpSampledHeightFieldShape;
-  hkpSampledHeightFieldShapeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpSampledHeightFieldShape;
+  hkpSampledHeightFieldShapeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpSampledHeightFieldShape;
+  hkpSampledHeightFieldShapeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpSampledHeightFieldShape;
   return result;
 }
 

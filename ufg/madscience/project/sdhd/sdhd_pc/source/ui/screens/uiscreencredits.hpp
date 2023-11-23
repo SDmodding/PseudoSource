@@ -6,6 +6,6 @@ __int64 UFG::_dynamic_initializer_for__UICreditsSymbol_heading__()
 
   v0 = UFG::qStringHash32("heading", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UICreditsSymbol_heading, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__UICreditsSymbol_heading__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__UICreditsSymbol_heading__);
 }
 

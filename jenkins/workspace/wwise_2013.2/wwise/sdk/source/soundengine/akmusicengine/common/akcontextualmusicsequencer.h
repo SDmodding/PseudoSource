@@ -3,11 +3,9 @@
 void __fastcall AkMusicActionPlay::~AkMusicActionPlay(AkMusicActionPlay *this)
 {
   bool v1; // zf
-  AkMusicActionPlay *v2; // rbx
-  AkMusicAutomation *v3; // rdx
+  AkMusicAutomation *m_pFirst; // rdx
 
   v1 = this->m_listAutomation.m_pFirst == 0i64;
-  v2 = this;
   this->vfptr = (AkMusicActionVtbl *)&AkMusicActionPlay::`vftable;
   if ( v1 )
   {
@@ -17,63 +15,63 @@ void __fastcall AkMusicActionPlay::~AkMusicActionPlay(AkMusicActionPlay *this)
   {
     do
     {
-      v3 = v2->m_listAutomation.m_pFirst;
-      if ( v3 )
+      m_pFirst = this->m_listAutomation.m_pFirst;
+      if ( m_pFirst )
       {
-        v2->m_listAutomation.m_pFirst = v3->pNextLightItem;
-        AK::MemoryMgr::Free(g_DefaultPoolId, v3);
+        this->m_listAutomation.m_pFirst = m_pFirst->pNextLightItem;
+        AK::MemoryMgr::Free(g_DefaultPoolId, m_pFirst);
       }
     }
-    while ( v2->m_listAutomation.m_pFirst );
-    v2->vfptr = (AkMusicActionVtbl *)&AkMusicAction::`vftable;
+    while ( this->m_listAutomation.m_pFirst );
+    this->vfptr = (AkMusicActionVtbl *)&AkMusicAction::`vftable;
   }
 }
 
 // File Line: 117
 // RVA: 0xAADE30
-void __fastcall AkMusicActionPlay::AttachClipAutomation(AkMusicActionPlay *this, unsigned int in_uClipIndex, AkClipAutomationType in_eType, int in_iTimeStart)
+void __fastcall AkMusicActionPlay::AttachClipAutomation(
+        AkMusicActionPlay *this,
+        unsigned int in_uClipIndex,
+        AkClipAutomationType in_eType,
+        int in_iTimeStart)
 {
-  CAkMusicTrack *v4; // rax
-  int v5; // esi
-  AkMusicActionPlay *v6; // rdi
-  CAkClipAutomation *v7; // rbx
-  signed __int64 v8; // rax
+  CAkMusicTrack *m_pTrack; // rax
+  CAkClipAutomation *m_pItems; // rbx
+  CAkClipAutomation *v8; // rax
   AkMusicAutomation *v9; // rax
-  AkMusicAutomation *v10; // rcx
+  AkMusicAutomation *m_pFirst; // rcx
 
-  v4 = this->m_pTrack;
-  v5 = in_iTimeStart;
-  v6 = this;
-  v7 = v4->m_arClipAutomation.m_pItems;
-  v8 = (signed __int64)&v7[v4->m_arClipAutomation.m_uLength];
-  if ( v7 != (CAkClipAutomation *)v8 )
+  m_pTrack = this->m_pTrack;
+  m_pItems = m_pTrack->m_arClipAutomation.m_pItems;
+  v8 = &m_pItems[m_pTrack->m_arClipAutomation.m_uLength];
+  if ( m_pItems != v8 )
   {
     do
     {
-      if ( v7->m_uClipIndex == in_uClipIndex && v7->m_eAutoType == in_eType )
+      if ( m_pItems->m_uClipIndex == in_uClipIndex && m_pItems->m_eAutoType == in_eType )
         break;
-      ++v7;
+      ++m_pItems;
     }
-    while ( v7 != (CAkClipAutomation *)v8 );
-    if ( v7 != (CAkClipAutomation *)v8 )
+    while ( m_pItems != v8 );
+    if ( m_pItems != v8 )
     {
-      if ( v7 )
+      if ( m_pItems )
       {
         v9 = (AkMusicAutomation *)AK::MemoryMgr::Malloc(g_DefaultPoolId, 0x20ui64);
         if ( v9 )
         {
-          v9->pAutomationData = v7;
-          v9->iTimeStart = v5;
+          v9->pAutomationData = m_pItems;
+          v9->iTimeStart = in_iTimeStart;
           v9->pPBI = 0i64;
-          v10 = v6->m_listAutomation.m_pFirst;
-          if ( v10 )
+          m_pFirst = this->m_listAutomation.m_pFirst;
+          if ( m_pFirst )
           {
-            v9->pNextLightItem = v10;
-            v6->m_listAutomation.m_pFirst = v9;
+            v9->pNextLightItem = m_pFirst;
+            this->m_listAutomation.m_pFirst = v9;
           }
           else
           {
-            v6->m_listAutomation.m_pFirst = v9;
+            this->m_listAutomation.m_pFirst = v9;
             v9->pNextLightItem = 0i64;
           }
         }

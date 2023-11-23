@@ -20,7 +20,7 @@ TrackGroup *__fastcall OpportunityTrack::GetConditionGroup2(ActionNodeImplementa
 
   result = (TrackGroup *)this->mTracks.mOffset;
   if ( result )
-    result = (TrackGroup *)((char *)result + (_QWORD)this + 64);
+    return (TrackGroup *)((char *)result + (_QWORD)this + 64);
   return result;
 }
 
@@ -28,13 +28,13 @@ TrackGroup *__fastcall OpportunityTrack::GetConditionGroup2(ActionNodeImplementa
 // RVA: 0x272A40
 void __fastcall ResourceOpportunityTrack::SetConditionGroup2(ActionNodeImplementation *this, TrackGroup *tracks)
 {
-  UFG::qOffset64<TrackGroup *> *v2; // rcx
+  UFG::qOffset64<TrackGroup *> *p_mTracks; // rcx
 
-  v2 = &this->mTracks;
+  p_mTracks = &this->mTracks;
   if ( tracks )
-    v2->mOffset = (char *)tracks - (char *)v2;
+    p_mTracks->mOffset = (char *)tracks - (char *)p_mTracks;
   else
-    v2->mOffset = 0i64;
+    p_mTracks->mOffset = 0i64;
 }
 
 // File Line: 148

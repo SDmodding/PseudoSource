@@ -13,12 +13,9 @@ __int64 UFG::_dynamic_initializer_for__uidGameState_NULL__()
 // RVA: 0x13EE00
 void __fastcall UFG::GameState::~GameState(UFG::GameState *this)
 {
-  UFG::GameState *v1; // rbx
-
-  v1 = this;
   this->vfptr = (UFG::GameStateVtbl *)&UFG::GameState::`vftable;
   UFG::qString::~qString(&this->mGameStateUserDataStr);
-  UFG::qString::~qString(&v1->mGameStateName);
+  UFG::qString::~qString(&this->mGameStateName);
 }
 
 // File Line: 61

@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkSimplePropertyValueClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 55
@@ -51,7 +51,7 @@ void dynamic_initializer_for__hkSimplePropertyClass__()
     0i64,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 103

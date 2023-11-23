@@ -1,16 +1,11 @@
 // File Line: 78
 // RVA: 0x6CDB00
-void __fastcall Scaleform::GFx::AS2::XMLFileLoaderAndParserImpl::XMLFileLoaderAndParserImpl(Scaleform::GFx::AS2::XMLFileLoaderAndParserImpl *this, Scaleform::GFx::XML::SupportBase *pparser, Scaleform::GFx::XML::ObjectManager *objMgr, bool ignorews)
+void __fastcall Scaleform::GFx::AS2::XMLFileLoaderAndParserImpl::XMLFileLoaderAndParserImpl(
+        Scaleform::GFx::AS2::XMLFileLoaderAndParserImpl *this,
+        Scaleform::GFx::Resource *pparser,
+        Scaleform::GFx::XML::ObjectManager *objMgr,
+        bool ignorews)
 {
-  bool v4; // si
-  Scaleform::GFx::XML::ObjectManager *v5; // rbp
-  Scaleform::GFx::XML::SupportBase *v6; // rdi
-  Scaleform::GFx::AS2::XMLFileLoaderAndParserImpl *v7; // rbx
-
-  v4 = ignorews;
-  v5 = objMgr;
-  v6 = pparser;
-  v7 = this;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
@@ -19,140 +14,127 @@ void __fastcall Scaleform::GFx::AS2::XMLFileLoaderAndParserImpl::XMLFileLoaderAn
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS2::XMLFileLoader::`vftable;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS2::XMLFileLoaderAndParserImpl::`vftable;
   if ( pparser )
-    Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)pparser);
-  v7->pParser.pObject = v6;
-  v7->pObjectManager = v5;
-  v7->pFileData = 0i64;
-  v7->FileLength = 0;
-  v7->bIgnoreWhitespace = v4;
+    Scaleform::Render::RenderBuffer::AddRef(pparser);
+  this->pParser.pObject = (Scaleform::GFx::XML::SupportBase *)pparser;
+  this->pObjectManager = objMgr;
+  this->pFileData = 0i64;
+  this->FileLength = 0;
+  this->bIgnoreWhitespace = ignorews;
 }
 
 // File Line: 90
 // RVA: 0x701250
-void __fastcall Scaleform::GFx::AS2::XMLFileLoaderAndParserImpl::Load(Scaleform::GFx::AS2::XMLFileLoaderAndParserImpl *this, Scaleform::String *filename, Scaleform::GFx::FileOpener *pfo)
+void __fastcall Scaleform::GFx::AS2::XMLFileLoaderAndParserImpl::Load(
+        Scaleform::GFx::AS2::XMLFileLoaderAndParserImpl *this,
+        Scaleform::String *filename,
+        Scaleform::GFx::FileOpener *pfo)
 {
-  Scaleform::GFx::FileOpener *v3; // r14
-  Scaleform::String *v4; // rsi
-  Scaleform::GFx::AS2::XMLFileLoaderAndParserImpl *v5; // rdi
   Scaleform::Render::RenderBuffer *v6; // rbx
   __int64 v7; // rax
   int v8; // eax
   char *v9; // rax
-  __int64 v10; // [rsp+30h] [rbp-28h]
-  __int64 v11; // [rsp+38h] [rbp-20h]
-  __int64 v12; // [rsp+40h] [rbp-18h]
+  __int64 v10[5]; // [rsp+30h] [rbp-28h] BYREF
 
-  v3 = pfo;
-  v4 = filename;
-  v5 = this;
   v6 = 0i64;
-  v10 = 0i64;
-  v11 = 0i64;
-  v12 = 0i64;
+  memset(v10, 0, 24);
   if ( !Scaleform::GFx::URLBuilder::IsProtocol(filename) )
   {
-    v7 = ((__int64 (__fastcall *)(Scaleform::GFx::FileOpener *, unsigned __int64, signed __int64, signed __int64, signed __int64, __int64 *))v3->vfptr[1].__vecDelDtor)(
-           v3,
-           (v4->HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12,
+    v7 = ((__int64 (__fastcall *)(Scaleform::GFx::FileOpener *, unsigned __int64, __int64, __int64, __int64, __int64 *))pfo->vfptr[1].__vecDelDtor)(
+           pfo,
+           (filename->HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12,
            33i64,
            438i64,
            -2i64,
-           &v10);
+           v10);
     v6 = (Scaleform::Render::RenderBuffer *)v7;
     if ( v7 )
     {
       if ( (*(unsigned __int8 (__fastcall **)(__int64))(*(_QWORD *)v7 + 16i64))(v7) )
       {
         v8 = ((__int64 (__fastcall *)(Scaleform::Render::RenderBuffer *))v6->vfptr[6].__vecDelDtor)(v6);
-        v5->FileLength = v8;
+        this->FileLength = v8;
         if ( v8 )
         {
           v9 = (char *)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(Scaleform::Memory::pGlobalHeap, v8, 0i64);
-          v5->pFileData = v9;
+          this->pFileData = v9;
           ((void (__fastcall *)(Scaleform::Render::RenderBuffer *, char *, _QWORD))v6->vfptr[10].__vecDelDtor)(
             v6,
             v9,
-            (unsigned int)v5->FileLength);
+            (unsigned int)this->FileLength);
         }
       }
     }
   }
-  if ( v10 )
-    ((void (__cdecl *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Free)(
-      Scaleform::Memory::pGlobalHeap,
-      v10);
+  if ( v10[0] )
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
   if ( v6 )
     Scaleform::RefCountImpl::Release(v6);
 }
 
 // File Line: 123
 // RVA: 0x6FCC50
-void __fastcall Scaleform::GFx::AS2::XMLFileLoaderAndParserImpl::InitASXml(Scaleform::GFx::AS2::XMLFileLoaderAndParserImpl *this, Scaleform::GFx::AS2::Environment *penv, Scaleform::GFx::AS2::Object *pTarget)
+void __fastcall Scaleform::GFx::AS2::XMLFileLoaderAndParserImpl::InitASXml(
+        Scaleform::GFx::AS2::XMLFileLoaderAndParserImpl *this,
+        Scaleform::GFx::AS2::Environment *penv,
+        Scaleform::GFx::AS2::XmlObject *pTarget)
 {
-  Scaleform::GFx::AS2::Object *v3; // rdi
-  Scaleform::GFx::AS2::Environment *v4; // r14
-  Scaleform::GFx::AS2::XMLFileLoaderAndParserImpl *v5; // rbx
-  Scaleform::GFx::Resource *v6; // rcx
-  Scaleform::GFx::XML::SupportBase *v7; // rax
+  Scaleform::GFx::Resource *pObject; // rcx
+  Scaleform::GFx::XML::SupportBase *pObjectManager; // rax
   Scaleform::GFx::XML::Document *v8; // rdx
-  Scaleform::GFx::XML::RootNode *v9; // r15
+  Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *RootNode; // r15
   Scaleform::RefCountNTSImpl *v10; // rcx
   Scaleform::GFx::ASStringNode *v11; // rbx
-  Scaleform::GFx::AS2::RefCountBaseGC<323> *v12; // rcx
-  unsigned int v13; // eax
+  Scaleform::GFx::AS2::RefCountBaseGC<323> *pLower; // rcx
+  unsigned int RefCount; // eax
   double v14; // xmm0_8
   bool v15; // r8
   Scaleform::GFx::ASString *v16; // rax
-  Scaleform::GFx::ASStringNode *v17; // rcx
-  bool v18; // zf
-  double v19; // xmm0_8
-  double v20; // xmm1_8
-  Scaleform::GFx::AS2::Value v21; // [rsp+30h] [rbp-D0h]
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  double LoadedBytes_low; // xmm0_8
+  double TotalBytesToLoad_low; // xmm1_8
+  Scaleform::GFx::AS2::Value v21; // [rsp+30h] [rbp-D0h] BYREF
   __int64 v22; // [rsp+50h] [rbp-B0h]
-  Scaleform::GFx::XML::DOMBuilder v23; // [rsp+60h] [rbp-A0h]
-  Scaleform::Ptr<Scaleform::GFx::XML::SupportBase> pxmlParser; // [rsp+150h] [rbp+50h]
-  Scaleform::Ptr<Scaleform::GFx::XML::Document> result; // [rsp+160h] [rbp+60h]
-  Scaleform::GFx::ASString v26; // [rsp+168h] [rbp+68h]
+  Scaleform::GFx::XML::DOMBuilder v23; // [rsp+60h] [rbp-A0h] BYREF
+  Scaleform::Ptr<Scaleform::GFx::XML::SupportBase> pxmlParser; // [rsp+150h] [rbp+50h] BYREF
+  Scaleform::Ptr<Scaleform::GFx::XML::Document> result; // [rsp+160h] [rbp+60h] BYREF
+  Scaleform::GFx::ASString v26; // [rsp+168h] [rbp+68h] BYREF
 
   v22 = -2i64;
-  v3 = pTarget;
-  v4 = penv;
-  v5 = this;
   if ( this->pFileData )
   {
     v26.pNode = (Scaleform::GFx::ASStringNode *)&pxmlParser;
-    v6 = (Scaleform::GFx::Resource *)this->pParser.pObject;
-    if ( v6 )
-      Scaleform::Render::RenderBuffer::AddRef(v6);
-    pxmlParser.pObject = v5->pParser.pObject;
+    pObject = (Scaleform::GFx::Resource *)this->pParser.pObject;
+    if ( pObject )
+      Scaleform::Render::RenderBuffer::AddRef(pObject);
+    pxmlParser.pObject = this->pParser.pObject;
     Scaleform::GFx::XML::DOMBuilder::DOMBuilder(
       &v23,
       (Scaleform::Ptr<Scaleform::GFx::XML::SupportBase>)&pxmlParser,
-      v5->bIgnoreWhitespace);
+      this->bIgnoreWhitespace);
     v26.pNode = (Scaleform::GFx::ASStringNode *)&pxmlParser;
-    v7 = (Scaleform::GFx::XML::SupportBase *)v5->pObjectManager;
-    if ( v7 )
-      ++v7->RefCount;
-    pxmlParser.pObject = v7;
+    pObjectManager = (Scaleform::GFx::XML::SupportBase *)this->pObjectManager;
+    if ( pObjectManager )
+      ++pObjectManager->RefCount;
+    pxmlParser.pObject = pObjectManager;
     Scaleform::GFx::XML::DOMBuilder::ParseString(
       &v23,
       &result,
-      v5->pFileData,
-      v5->FileLength,
+      this->pFileData,
+      this->FileLength,
       (Scaleform::Ptr<Scaleform::GFx::XML::ObjectManager>)&pxmlParser);
-    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v5->pFileData);
-    v5->pFileData = 0i64;
+    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, this->pFileData);
+    this->pFileData = 0i64;
     v8 = result.pObject;
-    v3[1].pRCC = (Scaleform::GFx::AS2::RefCountCollector<323> *)result.pObject;
-    v9 = Scaleform::GFx::XML::ObjectManager::CreateRootNode(v5->pObjectManager, (Scaleform::GFx::XML::Node *)&v8->vfptr);
-    v10 = (Scaleform::RefCountNTSImpl *)v3[1].vfptr;
+    pTarget->pRealNode = result.pObject;
+    RootNode = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)Scaleform::GFx::XML::ObjectManager::CreateRootNode(
+                                                                 this->pObjectManager,
+                                                                 v8);
+    v10 = pTarget->pRootNode.pObject;
     if ( v10 )
       Scaleform::RefCountNTSImpl::Release(v10);
-    v3[1].vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)v9;
-    pxmlParser.pObject = (Scaleform::GFx::XML::SupportBase *)v5->pObjectManager->pHeap;
-    v11 = (Scaleform::GFx::ASStringNode *)pxmlParser.pObject->vfptr[10].__vecDelDtor(
-                                            (Scaleform::RefCountImplCore *)v10,
-                                            24u);
+    pTarget->pRootNode.pObject = (Scaleform::GFx::XML::RootNode *)RootNode;
+    pxmlParser.pObject = (Scaleform::GFx::XML::SupportBase *)this->pObjectManager->pHeap;
+    v11 = (Scaleform::GFx::ASStringNode *)pxmlParser.pObject->vfptr[10].__vecDelDtor(v10, 24i64);
     v26.pNode = v11;
     if ( v11 )
     {
@@ -165,47 +147,45 @@ void __fastcall Scaleform::GFx::AS2::XMLFileLoaderAndParserImpl::InitASXml(Scale
     {
       v11 = 0i64;
     }
-    v12 = (Scaleform::GFx::AS2::RefCountBaseGC<323> *)v11->pLower;
-    if ( v12 )
+    pLower = (Scaleform::GFx::AS2::RefCountBaseGC<323> *)v11->pLower;
+    if ( pLower )
     {
-      v13 = v12->RefCount;
-      if ( v13 & 0x3FFFFFF )
+      RefCount = pLower->RefCount;
+      if ( (RefCount & 0x3FFFFFF) != 0 )
       {
-        v12->RefCount = v13 - 1;
-        Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v12);
+        pLower->RefCount = RefCount - 1;
+        Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(pLower);
       }
     }
     v11->pLower = 0i64;
-    v11->pManager = (Scaleform::GFx::ASStringManager *)v3;
+    v11->pManager = (Scaleform::GFx::ASStringManager *)pTarget;
     result.pObject->pShadow = (Scaleform::GFx::XML::ShadowRefBase *)v11;
-    Scaleform::GFx::AS2::XmlObject::AssignXMLDecl((Scaleform::GFx::AS2::XmlObject *)v3, v4, result.pObject);
+    Scaleform::GFx::AS2::XmlObject::AssignXMLDecl(pTarget, penv, result.pObject);
     if ( !v23.bError || v23.TotalBytesToLoad )
     {
       LOBYTE(pxmlParser.pObject) = 2;
       v21.T.Type = 2;
       v21.V.BooleanValue = 1;
-      v16 = Scaleform::GFx::AS2::ASStringContext::CreateConstString(&v4->StringContext, &v26, "loaded");
-      v3->vfptr->SetMemberRaw(
-        (Scaleform::GFx::AS2::ObjectInterface *)&v3->vfptr,
-        &v4->StringContext,
+      v16 = Scaleform::GFx::AS2::ASStringContext::CreateConstString(&penv->StringContext, &v26, "loaded");
+      pTarget->Scaleform::GFx::AS2::XmlNodeObject::Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ObjectInterface::vfptr->SetMemberRaw(
+        &pTarget->Scaleform::GFx::AS2::ObjectInterface,
+        &penv->StringContext,
         v16,
         &v21,
         (Scaleform::GFx::AS2::PropFlags *)&pxmlParser);
-      v17 = v26.pNode;
-      v18 = v26.pNode->RefCount == 1;
-      --v17->RefCount;
-      if ( v18 )
-        Scaleform::GFx::ASStringNode::ReleaseNode(v17);
+      pNode = v26.pNode;
+      if ( v26.pNode->RefCount-- == 1 )
+        Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
       if ( v21.T.Type >= 5u )
         Scaleform::GFx::AS2::Value::DropRefs(&v21);
-      v19 = (double)SLODWORD(v23.LoadedBytes);
+      LoadedBytes_low = (double)SLODWORD(v23.LoadedBytes);
       if ( (v23.LoadedBytes & 0x8000000000000000ui64) != 0i64 )
-        v19 = v19 + 1.844674407370955e19;
-      *(double *)&v3[1].16 = v19;
-      v20 = (double)SLODWORD(v23.TotalBytesToLoad);
+        LoadedBytes_low = LoadedBytes_low + 1.844674407370955e19;
+      pTarget->BytesLoadedCurrent = LoadedBytes_low;
+      TotalBytesToLoad_low = (double)SLODWORD(v23.TotalBytesToLoad);
       if ( (v23.TotalBytesToLoad & 0x8000000000000000ui64) != 0i64 )
-        v20 = v20 + 1.844674407370955e19;
-      *(double *)&v3[1].RefCount = v20;
+        TotalBytesToLoad_low = TotalBytesToLoad_low + 1.844674407370955e19;
+      pTarget->BytesLoadedTotal = TotalBytesToLoad_low;
       v15 = 1;
     }
     else
@@ -213,193 +193,174 @@ void __fastcall Scaleform::GFx::AS2::XMLFileLoaderAndParserImpl::InitASXml(Scale
       v14 = (double)SLODWORD(v23.LoadedBytes);
       if ( (v23.LoadedBytes & 0x8000000000000000ui64) != 0i64 )
         v14 = v14 + 1.844674407370955e19;
-      *(double *)&v3[1].16 = v14;
-      *(_QWORD *)&v3[1].RefCount = -4616189618054758400i64;
+      pTarget->BytesLoadedCurrent = v14;
+      pTarget->BytesLoadedTotal = -1.0;
       v15 = 0;
     }
-    Scaleform::GFx::AS2::XmlObject::NotifyOnLoad((Scaleform::GFx::AS2::XmlObject *)v3, v4, v15);
+    Scaleform::GFx::AS2::XmlObject::NotifyOnLoad(pTarget, penv, v15);
     if ( result.pObject )
-      Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&result.pObject->vfptr);
+      Scaleform::RefCountNTSImpl::Release(result.pObject);
     Scaleform::GFx::XML::DOMBuilder::~DOMBuilder(&v23);
   }
   else
   {
-    pTarget[1].pPrev = 0i64;
-    *(_QWORD *)&pTarget[1].RefCount = -4616189618054758400i64;
-    Scaleform::GFx::AS2::XmlObject::NotifyOnLoad((Scaleform::GFx::AS2::XmlObject *)pTarget, penv, 0);
+    pTarget->BytesLoadedCurrent = 0.0;
+    pTarget->BytesLoadedTotal = -1.0;
+    Scaleform::GFx::AS2::XmlObject::NotifyOnLoad(pTarget, penv, 0);
   }
 }
 
 // File Line: 217
 // RVA: 0x701360
-void __fastcall Scaleform::GFx::AS2::XMLFileLoaderImpl::Load(Scaleform::GFx::AS2::XMLFileLoaderImpl *this, Scaleform::String *filename, Scaleform::GFx::FileOpener *pfo)
+void __fastcall Scaleform::GFx::AS2::XMLFileLoaderImpl::Load(
+        Scaleform::GFx::AS2::XMLFileLoaderImpl *this,
+        Scaleform::String *filename,
+        Scaleform::GFx::FileOpener *pfo)
 {
-  Scaleform::GFx::FileOpener *v3; // r14
-  Scaleform::String *v4; // rsi
-  Scaleform::GFx::AS2::XMLFileLoaderImpl *v5; // rdi
   Scaleform::Render::RenderBuffer *v6; // rbx
   __int64 v7; // rax
   int v8; // eax
   char *v9; // rax
-  __int64 v10; // [rsp+30h] [rbp-28h]
-  __int64 v11; // [rsp+38h] [rbp-20h]
-  __int64 v12; // [rsp+40h] [rbp-18h]
+  __int64 v10[5]; // [rsp+30h] [rbp-28h] BYREF
 
-  v3 = pfo;
-  v4 = filename;
-  v5 = this;
   v6 = 0i64;
-  v10 = 0i64;
-  v11 = 0i64;
-  v12 = 0i64;
+  memset(v10, 0, 24);
   if ( !Scaleform::GFx::URLBuilder::IsProtocol(filename) )
   {
-    v7 = ((__int64 (__fastcall *)(Scaleform::GFx::FileOpener *, unsigned __int64, signed __int64, signed __int64, signed __int64, __int64 *))v3->vfptr[1].__vecDelDtor)(
-           v3,
-           (v4->HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12,
+    v7 = ((__int64 (__fastcall *)(Scaleform::GFx::FileOpener *, unsigned __int64, __int64, __int64, __int64, __int64 *))pfo->vfptr[1].__vecDelDtor)(
+           pfo,
+           (filename->HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12,
            33i64,
            438i64,
            -2i64,
-           &v10);
+           v10);
     v6 = (Scaleform::Render::RenderBuffer *)v7;
     if ( v7 )
     {
       if ( (*(unsigned __int8 (__fastcall **)(__int64))(*(_QWORD *)v7 + 16i64))(v7) )
       {
         v8 = ((__int64 (__fastcall *)(Scaleform::Render::RenderBuffer *))v6->vfptr[6].__vecDelDtor)(v6);
-        v5->FileLength = v8;
+        this->FileLength = v8;
         if ( v8 )
         {
           v9 = (char *)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(Scaleform::Memory::pGlobalHeap, v8, 0i64);
-          v5->pFileData = v9;
+          this->pFileData = v9;
           ((void (__fastcall *)(Scaleform::Render::RenderBuffer *, char *, _QWORD))v6->vfptr[10].__vecDelDtor)(
             v6,
             v9,
-            (unsigned int)v5->FileLength);
+            (unsigned int)this->FileLength);
         }
       }
     }
   }
-  if ( v10 )
-    ((void (__cdecl *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Free)(
-      Scaleform::Memory::pGlobalHeap,
-      v10);
+  if ( v10[0] )
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
   if ( v6 )
     Scaleform::RefCountImpl::Release(v6);
 }
 
 // File Line: 250
 // RVA: 0x6FCF00
-void __fastcall Scaleform::GFx::AS2::XMLFileLoaderImpl::InitASXml(Scaleform::GFx::AS2::XMLFileLoaderImpl *this, Scaleform::GFx::AS2::Environment *penv, Scaleform::GFx::AS2::Object *pTarget)
+void __fastcall Scaleform::GFx::AS2::XMLFileLoaderImpl::InitASXml(
+        Scaleform::GFx::AS2::XMLFileLoaderImpl *this,
+        Scaleform::GFx::AS2::Environment *penv,
+        Scaleform::GFx::AS2::XmlObject *pTarget)
 {
-  Scaleform::GFx::AS2::XmlObject *v3; // rsi
-  Scaleform::GFx::AS2::Environment *v4; // rdi
-  Scaleform::GFx::AS2::XMLFileLoaderImpl *v5; // rbx
-  char *v6; // r8
-  __int64 *v7; // rax
-  Scaleform::GFx::ASStringNode *v8; // rcx
-  bool v9; // zf
-  char v10; // [rsp+28h] [rbp-30h]
-  __int64 v11; // [rsp+30h] [rbp-28h]
-  Scaleform::GFx::ASString result; // [rsp+60h] [rbp+8h]
-  char *v13; // [rsp+70h] [rbp+18h]
+  char *pFileData; // r8
+  Scaleform::GFx::ASString *v7; // rax
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  Scaleform::GFx::AS2::Value v10; // [rsp+28h] [rbp-30h] BYREF
+  Scaleform::GFx::ASString result; // [rsp+60h] [rbp+8h] BYREF
+  Scaleform::GFx::AS2::Value *v12; // [rsp+70h] [rbp+18h]
 
-  v3 = (Scaleform::GFx::AS2::XmlObject *)pTarget;
-  v4 = penv;
-  v5 = this;
-  v6 = this->pFileData;
-  if ( v6 )
+  pFileData = this->pFileData;
+  if ( pFileData )
   {
-    v13 = &v10;
-    v7 = (__int64 *)Scaleform::GFx::AS2::Environment::CreateString(penv, &result, v6, this->FileLength);
-    v10 = 5;
-    v11 = *v7;
-    ++*(_DWORD *)(v11 + 24);
-    Scaleform::GFx::AS2::XmlObject::NotifyOnData(v3, v4, (Scaleform::GFx::AS2::Value *)&v10);
-    v8 = result.pNode;
-    v9 = result.pNode->RefCount == 1;
-    --v8->RefCount;
-    if ( v9 )
-      Scaleform::GFx::ASStringNode::ReleaseNode(v8);
-    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v5->pFileData);
-    v5->pFileData = 0i64;
+    v12 = &v10;
+    v7 = Scaleform::GFx::AS2::Environment::CreateString(penv, &result, pFileData, this->FileLength);
+    v10.T.Type = 5;
+    v10.NV.8 = ($B8BD913BABC9324639AA48504BEFB2FC)v7->pNode;
+    ++v10.V.pStringNode->RefCount;
+    Scaleform::GFx::AS2::XmlObject::NotifyOnData(pTarget, penv, &v10);
+    pNode = result.pNode;
+    if ( result.pNode->RefCount-- == 1 )
+      Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
+    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, this->pFileData);
+    this->pFileData = 0i64;
   }
   else
   {
     result.pNode = (Scaleform::GFx::ASStringNode *)&v10;
-    v10 = 0;
-    Scaleform::GFx::AS2::XmlObject::NotifyOnData(v3, penv, (Scaleform::GFx::AS2::Value *)&v10);
+    v10.T.Type = 0;
+    Scaleform::GFx::AS2::XmlObject::NotifyOnData(pTarget, penv, &v10);
   }
 }
 
 // File Line: 279
 // RVA: 0x724730
-void __fastcall Scaleform::GFx::AS2::XML_LoadString(Scaleform::GFx::AS2::FnCall *fn, Scaleform::GFx::AS2::XmlObject *pnode)
+void __fastcall Scaleform::GFx::AS2::XML_LoadString(
+        Scaleform::GFx::AS2::FnCall *fn,
+        Scaleform::GFx::AS2::XmlObject *pnode)
 {
-  Scaleform::GFx::AS2::XmlObject *v2; // r13
-  Scaleform::GFx::AS2::FnCall *v3; // r15
   __int64 v4; // rcx
   Scaleform::GFx::LogState *v5; // rsi
-  Scaleform::GFx::MovieImpl *v6; // rdi
+  Scaleform::GFx::MovieImpl *pMovieImpl; // rdi
   Scaleform::GFx::ASStringNode *v7; // r14
-  Scaleform::GFx::ExternalLibPtr *v8; // rbx
+  Scaleform::GFx::ExternalLibPtr *pXMLObjectManager; // rbx
   Scaleform::GFx::ASStringNode *v9; // rax
-  signed __int64 v10; // rax
-  signed __int64 v11; // rbx
-  signed __int64 v12; // rax
-  unsigned int v13; // er9
-  Scaleform::GFx::AS2::Environment *v14; // rdx
+  __int64 v10; // rax
+  __int64 v11; // rbx
+  Scaleform::GFx::ExternalLibPtr *v12; // rax
+  unsigned int FirstArgBottomIndex; // r9d
+  Scaleform::GFx::AS2::Environment *Env; // rdx
   Scaleform::GFx::AS2::Value *v15; // r8
-  Scaleform::GFx::Resource *v16; // rdi
+  Scaleform::GFx::Resource *pObject; // rdi
   Scaleform::Ptr<Scaleform::GFx::XML::Document> *v17; // rax
-  Scaleform::GFx::XML::Document *v18; // rdi
+  Scaleform::GFx::XML::Document *Document; // rdi
   Scaleform::GFx::ASStringNode *v19; // rcx
-  bool v20; // zf
-  Scaleform::GFx::XML::DOMString *v21; // rax
-  Scaleform::GFx::XML::RootNode *v22; // rsi
-  Scaleform::RefCountNTSImpl *v23; // rcx
+  Scaleform::GFx::XML::DOMString *String; // rax
+  Scaleform::GFx::XML::RootNode *RootNode; // rsi
+  Scaleform::GFx::XML::RootNode *v23; // rcx
   Scaleform::RefCountImplCore *v24; // rcx
   Scaleform::GFx::ASStringNode *v25; // rsi
   Scaleform::GFx::ASStringNode *v26; // rax
   Scaleform::GFx::ASStringNode *v27; // rax
-  Scaleform::GFx::AS2::RefCountBaseGC<323> *v28; // rcx
-  unsigned int v29; // eax
-  Scaleform::Ptr<Scaleform::GFx::XML::SupportBase> result; // [rsp+30h] [rbp-D0h]
-  Scaleform::Ptr<Scaleform::GFx::XML::SupportBase> *v31; // [rsp+38h] [rbp-C8h]
-  Scaleform::GFx::AS2::Value v32; // [rsp+40h] [rbp-C0h]
+  Scaleform::GFx::AS2::RefCountBaseGC<323> *pLower; // rcx
+  unsigned int RefCount; // eax
+  Scaleform::Ptr<Scaleform::GFx::XML::SupportBase> result; // [rsp+30h] [rbp-D0h] BYREF
+  Scaleform::Ptr<Scaleform::GFx::XML::SupportBase> *p_pxmlParser; // [rsp+38h] [rbp-C8h]
+  Scaleform::GFx::AS2::Value v32; // [rsp+40h] [rbp-C0h] BYREF
   __int64 v33; // [rsp+60h] [rbp-A0h]
-  Scaleform::GFx::XML::DOMBuilder v34; // [rsp+70h] [rbp-90h]
-  Scaleform::Ptr<Scaleform::GFx::XML::SupportBase> pxmlParser; // [rsp+170h] [rbp+70h]
+  Scaleform::GFx::XML::DOMBuilder v34; // [rsp+70h] [rbp-90h] BYREF
+  Scaleform::Ptr<Scaleform::GFx::XML::SupportBase> pxmlParser; // [rsp+170h] [rbp+70h] BYREF
   __int64 v36; // [rsp+178h] [rbp+78h]
-  Scaleform::GFx::ASString v37; // [rsp+180h] [rbp+80h]
+  Scaleform::GFx::ASString v37; // [rsp+180h] [rbp+80h] BYREF
   Scaleform::GFx::XML::Document *v38; // [rsp+188h] [rbp+88h]
 
   v33 = -2i64;
-  v2 = pnode;
-  v3 = fn;
-  v5 = (Scaleform::GFx::LogState *)((__int64 (*)(void))fn->Env->Target->vfptr[76].__vecDelDtor)();
-  v6 = v3->Env->Target->pASRoot->pMovieImpl;
+  v5 = (Scaleform::GFx::LogState *)((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))fn->Env->Target->vfptr[76].__vecDelDtor)(fn->Env->Target);
+  pMovieImpl = fn->Env->Target->pASRoot->pMovieImpl;
   v7 = 0i64;
   v36 = 0i64;
-  v8 = v6->pXMLObjectManager;
-  if ( v8 )
+  pXMLObjectManager = pMovieImpl->pXMLObjectManager;
+  if ( pXMLObjectManager )
   {
-    v11 = (signed __int64)&v8[-1];
+    v11 = (__int64)&pXMLObjectManager[-1];
     if ( v11 )
       ++*(_DWORD *)(v11 + 8);
     v36 = v11;
   }
   else
   {
-    pxmlParser.pObject = (Scaleform::GFx::XML::SupportBase *)v3->Env->StringContext.pContext->pHeap;
-    v9 = (Scaleform::GFx::ASStringNode *)((__int64 (__fastcall *)(__int64, signed __int64, _QWORD))pxmlParser.pObject->vfptr[10].__vecDelDtor)(
+    pxmlParser.pObject = (Scaleform::GFx::XML::SupportBase *)fn->Env->StringContext.pContext->pHeap;
+    v9 = (Scaleform::GFx::ASStringNode *)((__int64 (__fastcall *)(__int64, __int64, _QWORD))pxmlParser.pObject->vfptr[10].__vecDelDtor)(
                                            v4,
                                            120i64,
                                            0i64);
     v37.pNode = v9;
     if ( v9 )
     {
-      Scaleform::GFx::XML::ObjectManager::ObjectManager((Scaleform::GFx::XML::ObjectManager *)v9, v6);
+      Scaleform::GFx::XML::ObjectManager::ObjectManager((Scaleform::GFx::XML::ObjectManager *)v9, pMovieImpl);
       v11 = v10;
     }
     else
@@ -407,28 +368,28 @@ void __fastcall Scaleform::GFx::AS2::XML_LoadString(Scaleform::GFx::AS2::FnCall 
       v11 = 0i64;
     }
     v36 = v11;
-    v12 = v11 + 16;
+    v12 = (Scaleform::GFx::ExternalLibPtr *)(v11 + 16);
     if ( !v11 )
       v12 = 0i64;
-    v6->pXMLObjectManager = (Scaleform::GFx::ExternalLibPtr *)v12;
+    pMovieImpl->pXMLObjectManager = v12;
   }
   v38 = 0i64;
   v32.T.Type = 0;
-  if ( v3->NArgs <= 0 )
+  if ( fn->NArgs <= 0 )
     goto LABEL_29;
-  v13 = v3->FirstArgBottomIndex;
-  v14 = v3->Env;
+  FirstArgBottomIndex = fn->FirstArgBottomIndex;
+  Env = fn->Env;
   v15 = 0i64;
-  if ( v13 <= 32 * ((unsigned int)v14->Stack.Pages.Data.Size - 1)
-            + (unsigned int)((_QWORD)((char *)v14->Stack.pCurrent - (char *)v14->Stack.pPageStart) >> 5) )
-    v15 = &v14->Stack.Pages.Data.Data[v13 >> 5]->Values[v13 & 0x1F];
-  Scaleform::GFx::AS2::Value::operator=(&v32, v15, (__int64)v6);
-  v16 = (Scaleform::GFx::Resource *)Scaleform::GFx::StateBag::GetXMLSupport(
-                                      (Scaleform::GFx::StateBag *)&v3->Env->Target->pASRoot->pMovieImpl->vfptr,
-                                      &result)->pObject;
+  if ( FirstArgBottomIndex <= 32 * ((unsigned int)Env->Stack.Pages.Data.Size - 1)
+                            + (unsigned int)(Env->Stack.pCurrent - Env->Stack.pPageStart) )
+    v15 = &Env->Stack.Pages.Data.Data[FirstArgBottomIndex >> 5]->Values[FirstArgBottomIndex & 0x1F];
+  Scaleform::GFx::AS2::Value::operator=(&v32, v15);
+  pObject = (Scaleform::GFx::Resource *)Scaleform::GFx::StateBag::GetXMLSupport(
+                                          &fn->Env->Target->pASRoot->pMovieImpl->Scaleform::GFx::StateBag,
+                                          &result)->pObject;
   if ( result.pObject )
     Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)result.pObject);
-  if ( !v16 )
+  if ( !pObject )
   {
     if ( v5 )
     {
@@ -437,12 +398,12 @@ void __fastcall Scaleform::GFx::AS2::XML_LoadString(Scaleform::GFx::AS2::FnCall 
     }
     goto LABEL_29;
   }
-  v31 = &pxmlParser;
-  Scaleform::Render::RenderBuffer::AddRef(v16);
-  pxmlParser.pObject = (Scaleform::GFx::XML::SupportBase *)v16;
+  p_pxmlParser = &pxmlParser;
+  Scaleform::Render::RenderBuffer::AddRef(pObject);
+  pxmlParser.pObject = (Scaleform::GFx::XML::SupportBase *)pObject;
   Scaleform::GFx::XML::DOMBuilder::DOMBuilder(&v34, (Scaleform::Ptr<Scaleform::GFx::XML::SupportBase>)&pxmlParser, 1);
-  Scaleform::GFx::AS2::Value::ToString(&v32, &v37, v3->Env, -1);
-  v31 = &pxmlParser;
+  Scaleform::GFx::AS2::Value::ToString(&v32, &v37, fn->Env, -1);
+  p_pxmlParser = &pxmlParser;
   if ( v11 )
     ++*(_DWORD *)(v11 + 8);
   pxmlParser.pObject = (Scaleform::GFx::XML::SupportBase *)v11;
@@ -454,42 +415,36 @@ void __fastcall Scaleform::GFx::AS2::XML_LoadString(Scaleform::GFx::AS2::FnCall 
           (Scaleform::Ptr<Scaleform::GFx::XML::ObjectManager>)&pxmlParser);
   if ( v17->pObject )
     ++v17->pObject->RefCount;
-  v18 = v17->pObject;
+  Document = v17->pObject;
   v38 = v17->pObject;
   if ( result.pObject )
     Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)result.pObject);
-  Scaleform::GFx::AS2::XmlObject::AssignXMLDecl(v2, v3->Env, v18);
+  Scaleform::GFx::AS2::XmlObject::AssignXMLDecl(pnode, fn->Env, Document);
   v19 = v37.pNode;
-  v20 = v37.pNode->RefCount == 1;
-  --v19->RefCount;
-  if ( v20 )
+  if ( v37.pNode->RefCount-- == 1 )
     Scaleform::GFx::ASStringNode::ReleaseNode(v19);
   Scaleform::GFx::XML::DOMBuilder::~DOMBuilder(&v34);
-  if ( !v18 )
+  if ( !Document )
   {
 LABEL_29:
-    v18 = Scaleform::GFx::XML::ObjectManager::CreateDocument((Scaleform::GFx::XML::ObjectManager *)v11);
-    v38 = v18;
+    Document = Scaleform::GFx::XML::ObjectManager::CreateDocument((Scaleform::GFx::XML::ObjectManager *)v11);
+    v38 = Document;
   }
-  v21 = Scaleform::GFx::XML::ObjectManager::CreateString(
-          (Scaleform::GFx::XML::ObjectManager *)v11,
-          (Scaleform::GFx::XML::DOMString *)&pxmlParser,
-          "null",
-          4ui64);
-  Scaleform::GFx::XML::DOMString::AssignNode(&v18->Value, v21->pNode);
+  String = Scaleform::GFx::XML::ObjectManager::CreateString(
+             (Scaleform::GFx::XML::ObjectManager *)v11,
+             (Scaleform::GFx::XML::DOMString *)&pxmlParser,
+             "null",
+             4ui64);
+  Scaleform::GFx::XML::DOMString::AssignNode(&Document->Value, String->pNode);
   Scaleform::GFx::XML::DOMString::~DOMString((Scaleform::GFx::XML::DOMString *)&pxmlParser);
-  v2->pRealNode = (Scaleform::GFx::XML::Node *)&v18->vfptr;
-  v22 = Scaleform::GFx::XML::ObjectManager::CreateRootNode(
-          (Scaleform::GFx::XML::ObjectManager *)v11,
-          (Scaleform::GFx::XML::Node *)&v18->vfptr);
-  v23 = (Scaleform::RefCountNTSImpl *)&v2->pRootNode.pObject->vfptr;
+  pnode->pRealNode = Document;
+  RootNode = Scaleform::GFx::XML::ObjectManager::CreateRootNode((Scaleform::GFx::XML::ObjectManager *)v11, Document);
+  v23 = pnode->pRootNode.pObject;
   if ( v23 )
     Scaleform::RefCountNTSImpl::Release(v23);
-  v2->pRootNode.pObject = v22;
+  pnode->pRootNode.pObject = RootNode;
   pxmlParser.pObject = *(Scaleform::GFx::XML::SupportBase **)(v11 + 112);
-  v25 = (Scaleform::GFx::ASStringNode *)pxmlParser.pObject->vfptr[10].__vecDelDtor(
-                                          (Scaleform::RefCountImplCore *)v23,
-                                          24u);
+  v25 = (Scaleform::GFx::ASStringNode *)pxmlParser.pObject->vfptr[10].__vecDelDtor(v23, 24i64);
   v37.pNode = v25;
   if ( v25 )
   {
@@ -502,301 +457,285 @@ LABEL_29:
   {
     v25 = 0i64;
   }
-  v18->pShadow = (Scaleform::GFx::XML::ShadowRefBase *)v25;
-  pxmlParser.pObject = (Scaleform::GFx::XML::SupportBase *)v3->Env->StringContext.pContext->pHeap;
-  v26 = (Scaleform::GFx::ASStringNode *)pxmlParser.pObject->vfptr[10].__vecDelDtor(v24, 112u);
+  Document->pShadow = (Scaleform::GFx::XML::ShadowRefBase *)v25;
+  pxmlParser.pObject = (Scaleform::GFx::XML::SupportBase *)fn->Env->StringContext.pContext->pHeap;
+  v26 = (Scaleform::GFx::ASStringNode *)pxmlParser.pObject->vfptr[10].__vecDelDtor(v24, 112i64);
   v37.pNode = v26;
   if ( v26 )
   {
-    Scaleform::GFx::AS2::XmlNodeObject::XmlNodeObject((Scaleform::GFx::AS2::XmlNodeObject *)v26, v3->Env);
+    Scaleform::GFx::AS2::XmlNodeObject::XmlNodeObject((Scaleform::GFx::AS2::XmlNodeObject *)v26, fn->Env);
     v7 = v27;
   }
-  v28 = (Scaleform::GFx::AS2::RefCountBaseGC<323> *)v25->pLower;
-  if ( v28 )
+  pLower = (Scaleform::GFx::AS2::RefCountBaseGC<323> *)v25->pLower;
+  if ( pLower )
   {
-    v29 = v28->RefCount;
-    if ( v29 & 0x3FFFFFF )
+    RefCount = pLower->RefCount;
+    if ( (RefCount & 0x3FFFFFF) != 0 )
     {
-      v28->RefCount = v29 - 1;
-      Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v28);
+      pLower->RefCount = RefCount - 1;
+      Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(pLower);
     }
   }
   v25->pLower = v7;
-  v25->pManager = (Scaleform::GFx::ASStringManager *)v2;
+  v25->pManager = (Scaleform::GFx::ASStringManager *)pnode;
   if ( v32.T.Type >= 5u )
     Scaleform::GFx::AS2::Value::DropRefs(&v32);
-  Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v18->vfptr);
+  Scaleform::RefCountNTSImpl::Release(Document);
   Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)v11);
 }
 
 // File Line: 334
 // RVA: 0x6CE1B0
-void __fastcall Scaleform::GFx::AS2::XmlObject::XmlObject(Scaleform::GFx::AS2::XmlObject *this, Scaleform::GFx::AS2::Environment *penv)
+void __fastcall Scaleform::GFx::AS2::XmlObject::XmlObject(
+        Scaleform::GFx::AS2::XmlObject *this,
+        Scaleform::GFx::AS2::Environment *penv)
 {
-  Scaleform::GFx::AS2::Environment *v2; // rbp
-  Scaleform::GFx::AS2::XmlObject *v3; // rsi
-  Scaleform::GFx::AS2::Object *v4; // rax
+  Scaleform::GFx::AS2::Object *Prototype; // rax
 
-  v2 = penv;
-  v3 = this;
-  Scaleform::GFx::AS2::XmlNodeObject::XmlNodeObject((Scaleform::GFx::AS2::XmlNodeObject *)&this->vfptr, penv);
-  v3->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::XmlObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
-  v3->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::XmlObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
-  v4 = Scaleform::GFx::AS2::GlobalContext::GetPrototype(v2->StringContext.pContext, ASBuiltin_XML);
-  Scaleform::GFx::AS2::Object::Set__proto__((Scaleform::GFx::AS2::Object *)&v3->vfptr, &v2->StringContext, v4);
-  v3->BytesLoadedCurrent = -1.0;
-  v3->BytesLoadedTotal = -1.0;
-  if ( v3 != (Scaleform::GFx::AS2::XmlObject *)-32i64 )
+  Scaleform::GFx::AS2::XmlNodeObject::XmlNodeObject(this, penv);
+  this->Scaleform::GFx::AS2::XmlNodeObject::Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>::Scaleform::GFx::AS2::RefCountBaseGC<323>::vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::XmlObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  this->Scaleform::GFx::AS2::XmlNodeObject::Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ObjectInterface::vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::XmlObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+  Prototype = Scaleform::GFx::AS2::GlobalContext::GetPrototype(penv->StringContext.pContext, ASBuiltin_XML);
+  Scaleform::GFx::AS2::Object::Set__proto__(
+    (Scaleform::GFx::AS2::Object *)&this->Scaleform::GFx::AS2::ObjectInterface,
+    &penv->StringContext,
+    Prototype);
+  this->BytesLoadedCurrent = -1.0;
+  this->BytesLoadedTotal = -1.0;
+  if ( this != (Scaleform::GFx::AS2::XmlObject *)-32i64 )
     Scaleform::GFx::AS2::NameFunction::AddConstMembers(
-      (Scaleform::GFx::AS2::ObjectInterface *)&v3->vfptr,
-      &v2->StringContext,
+      &this->Scaleform::GFx::AS2::ObjectInterface,
+      &penv->StringContext,
       GAS_AsBcFunctionTable,
       1);
   Scaleform::GFx::AS2::AsBroadcaster::InitializeInstance(
-    &v2->StringContext,
-    (Scaleform::GFx::AS2::ObjectInterface *)&v3->vfptr);
+    &penv->StringContext,
+    &this->Scaleform::GFx::AS2::ObjectInterface);
   Scaleform::GFx::AS2::AsBroadcaster::AddListener(
-    v2,
-    (Scaleform::GFx::AS2::ObjectInterface *)&v3->vfptr,
-    (Scaleform::GFx::AS2::ObjectInterface *)&v3->vfptr);
+    penv,
+    &this->Scaleform::GFx::AS2::ObjectInterface,
+    &this->Scaleform::GFx::AS2::ObjectInterface);
 }
 
 // File Line: 361
 // RVA: 0x6DAC00
-void __fastcall Scaleform::GFx::AS2::XmlObject::AssignXMLDecl(Scaleform::GFx::AS2::XmlObject *this, Scaleform::GFx::AS2::Environment *penv, Scaleform::GFx::XML::Document *pdoc)
+void __fastcall Scaleform::GFx::AS2::XmlObject::AssignXMLDecl(
+        Scaleform::GFx::AS2::XmlObject *this,
+        Scaleform::GFx::AS2::Environment *penv,
+        Scaleform::GFx::XML::Document *pdoc)
 {
-  Scaleform::GFx::XML::Document *v3; // rbx
-  Scaleform::GFx::AS2::Environment *v4; // rsi
-  Scaleform::GFx::AS2::XmlObject *v5; // r14
-  char *v6; // rdi
+  char *pData; // rdi
   const char *v7; // rdx
   Scaleform::GFx::ASString *v8; // rax
   Scaleform::GFx::ASString *v9; // rax
-  Scaleform::GFx::AS2::ObjectInterfaceVtbl *v10; // r10
-  Scaleform::GFx::ASStringNode *v11; // rcx
-  bool v12; // zf
-  Scaleform::GFx::ASStringNode *v13; // rcx
-  Scaleform::GFx::ASString result; // [rsp+18h] [rbp-19h]
-  char *v15; // [rsp+20h] [rbp-11h]
-  Scaleform::GFx::AS2::Value v16; // [rsp+28h] [rbp-9h]
-  Scaleform::StringBuffer v17; // [rsp+48h] [rbp+17h]
-  char retaddr; // [rsp+A8h] [rbp+77h]
-  Scaleform::GFx::ASString v19; // [rsp+B0h] [rbp+7Fh]
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  bool v11; // zf
+  Scaleform::GFx::ASStringNode *v12; // rcx
+  Scaleform::GFx::ASString result; // [rsp+18h] [rbp-19h] BYREF
+  __int64 v14; // [rsp+20h] [rbp-11h]
+  Scaleform::GFx::AS2::Value v15; // [rsp+28h] [rbp-9h] BYREF
+  Scaleform::StringBuffer v16; // [rsp+48h] [rbp+17h] BYREF
+  void *retaddr; // [rsp+A8h] [rbp+77h] BYREF
+  Scaleform::GFx::ASString v18; // [rsp+B0h] [rbp+7Fh] BYREF
 
-  v15 = (char *)-2i64;
-  v3 = pdoc;
-  v4 = penv;
-  v5 = this;
-  v6 = &customWorldMapCaption;
+  v14 = -2i64;
+  pData = &customCaption;
   Scaleform::StringBuffer::StringBuffer(
-    (Scaleform::StringBuffer *)((char *)&v17 + 24),
-    &customWorldMapCaption,
+    (Scaleform::StringBuffer *)&v16.GrowSize,
+    &customCaption,
     Scaleform::Memory::pGlobalHeap);
-  if ( v3 )
+  if ( pdoc )
   {
-    Scaleform::StringBuffer::AppendString(&v17, "<?", -1i64);
-    if ( v3->XMLVersion.pNode->Size )
+    Scaleform::StringBuffer::AppendString(&v16, "<?", -1i64);
+    if ( pdoc->XMLVersion.pNode->Size )
     {
-      Scaleform::StringBuffer::AppendString(&v17, "xml version=\"", -1i64);
-      Scaleform::StringBuffer::AppendString(&v17, v3->XMLVersion.pNode->pData, -1i64);
-      Scaleform::StringBuffer::AppendString(&v17, "\"", -1i64);
+      Scaleform::StringBuffer::AppendString(&v16, "xml version=\"", -1i64);
+      Scaleform::StringBuffer::AppendString(&v16, pdoc->XMLVersion.pNode->pData, -1i64);
+      Scaleform::StringBuffer::AppendString(&v16, "\"", -1i64);
     }
-    if ( v3->Encoding.pNode->Size )
+    if ( pdoc->Encoding.pNode->Size )
     {
-      if ( v3->XMLVersion.pNode->Size )
-        Scaleform::StringBuffer::AppendString(&v17, " ", -1i64);
-      Scaleform::StringBuffer::AppendString(&v17, "encoding=\"", -1i64);
-      Scaleform::StringBuffer::AppendString(&v17, v3->Encoding.pNode->pData, -1i64);
-      Scaleform::StringBuffer::AppendString(&v17, "\"", -1i64);
+      if ( pdoc->XMLVersion.pNode->Size )
+        Scaleform::StringBuffer::AppendString(&v16, " ", -1i64);
+      Scaleform::StringBuffer::AppendString(&v16, "encoding=\"", -1i64);
+      Scaleform::StringBuffer::AppendString(&v16, pdoc->Encoding.pNode->pData, -1i64);
+      Scaleform::StringBuffer::AppendString(&v16, "\"", -1i64);
     }
-    if ( v3->Standalone != -1 )
+    if ( pdoc->Standalone != -1 )
     {
-      if ( v3->XMLVersion.pNode->Size || v3->Encoding.pNode->Size )
-        Scaleform::StringBuffer::AppendString(&v17, " ", -1i64);
+      if ( pdoc->XMLVersion.pNode->Size || pdoc->Encoding.pNode->Size )
+        Scaleform::StringBuffer::AppendString(&v16, " ", -1i64);
       v7 = "standalone=\"yes\"";
-      if ( !v3->Standalone )
+      if ( !pdoc->Standalone )
         v7 = "standalone=\"no\"";
-      Scaleform::StringBuffer::AppendString(&v17, v7, -1i64);
+      Scaleform::StringBuffer::AppendString(&v16, v7, -1i64);
     }
-    Scaleform::StringBuffer::AppendString(&v17, "?>", -1i64);
+    Scaleform::StringBuffer::AppendString(&v16, "?>", -1i64);
   }
-  if ( v3->XMLVersion.pNode->Size || v3->Encoding.pNode->Size || v3->Standalone != -1 )
+  if ( pdoc->XMLVersion.pNode->Size || pdoc->Encoding.pNode->Size || pdoc->Standalone != -1 )
   {
-    if ( v17.pData )
-      v6 = v17.pData;
-    v8 = Scaleform::GFx::AS2::ASStringContext::CreateString(&v4->StringContext, &result, v6, v17.Size);
-    v16.T.Type = 5;
-    v16.NV.8 = ($B8BD913BABC9324639AA48504BEFB2FC)v8->pNode;
-    ++v16.V.pStringNode->RefCount;
-    v9 = Scaleform::GFx::AS2::ASStringContext::CreateConstString(&v4->StringContext, &v19, "xmlDecl");
-    retaddr = 0;
-    v10 = v5->vfptr;
-    v15 = &retaddr;
-    v10->SetMember(
-      (Scaleform::GFx::AS2::ObjectInterface *)&v5->vfptr,
-      v4,
+    if ( v16.pData )
+      pData = v16.pData;
+    v8 = Scaleform::GFx::AS2::ASStringContext::CreateString(&penv->StringContext, &result, pData, v16.Size);
+    v15.T.Type = 5;
+    v15.NV.8 = ($B8BD913BABC9324639AA48504BEFB2FC)v8->pNode;
+    ++v15.V.pStringNode->RefCount;
+    v9 = Scaleform::GFx::AS2::ASStringContext::CreateConstString(&penv->StringContext, &v18, "xmlDecl");
+    LOBYTE(retaddr) = 0;
+    this->Scaleform::GFx::AS2::XmlNodeObject::Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ObjectInterface::vfptr->SetMember(
+      &this->Scaleform::GFx::AS2::ObjectInterface,
+      penv,
       v9,
-      &v16,
+      &v15,
       (Scaleform::GFx::AS2::PropFlags *)&retaddr);
-    v11 = v19.pNode;
-    v12 = v19.pNode->RefCount == 1;
-    --v11->RefCount;
-    if ( v12 )
-      Scaleform::GFx::ASStringNode::ReleaseNode(v11);
-    if ( v16.T.Type >= 5u )
-      Scaleform::GFx::AS2::Value::DropRefs(&v16);
-    v13 = result.pNode;
-    v12 = result.pNode->RefCount == 1;
-    --v13->RefCount;
-    if ( v12 )
-      Scaleform::GFx::ASStringNode::ReleaseNode(v13);
+    pNode = v18.pNode;
+    v11 = v18.pNode->RefCount-- == 1;
+    if ( v11 )
+      Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
+    if ( v15.T.Type >= 5u )
+      Scaleform::GFx::AS2::Value::DropRefs(&v15);
+    v12 = result.pNode;
+    v11 = result.pNode->RefCount-- == 1;
+    if ( v11 )
+      Scaleform::GFx::ASStringNode::ReleaseNode(v12);
   }
-  Scaleform::ArrayDataBase<Scaleform::MsgFormat::fmt_record,Scaleform::AllocatorGH_POD<Scaleform::MsgFormat::fmt_record,2>,Scaleform::ArrayDefaultPolicy>::~ArrayDataBase<Scaleform::MsgFormat::fmt_record,Scaleform::AllocatorGH_POD<Scaleform::MsgFormat::fmt_record,2>,Scaleform::ArrayDefaultPolicy>((Scaleform::ArrayDataBase<int,Scaleform::AllocatorGH<int,2>,Scaleform::ArrayDefaultPolicy> *)&v17);
+  Scaleform::ArrayDataBase<Scaleform::MsgFormat::fmt_record,Scaleform::AllocatorGH_POD<Scaleform::MsgFormat::fmt_record,2>,Scaleform::ArrayDefaultPolicy>::~ArrayDataBase<Scaleform::MsgFormat::fmt_record,Scaleform::AllocatorGH_POD<Scaleform::MsgFormat::fmt_record,2>,Scaleform::ArrayDefaultPolicy>((Scaleform::ArrayDataBase<int,Scaleform::AllocatorGH<int,2>,Scaleform::ArrayDefaultPolicy> *)&v16);
 }
 
 // File Line: 405
 // RVA: 0x703B20
-void __fastcall Scaleform::GFx::AS2::XmlObject::NotifyOnData(Scaleform::GFx::AS2::XmlObject *this, Scaleform::GFx::AS2::Environment *penv, Scaleform::GFx::AS2::Value *val)
+void __fastcall Scaleform::GFx::AS2::XmlObject::NotifyOnData(
+        Scaleform::GFx::AS2::XmlObject *this,
+        Scaleform::GFx::AS2::Environment *penv,
+        Scaleform::GFx::AS2::Value *val)
 {
-  Scaleform::GFx::AS2::Value *v3; // rdi
-  Scaleform::GFx::AS2::Environment *v4; // rbp
-  Scaleform::GFx::AS2::ObjectInterface *v5; // rsi
-  Scaleform::GFx::ASStringNode *v6; // rcx
+  Scaleform::GFx::ASStringNode *pCurrent; // rcx
   Scaleform::GFx::ASString *v7; // rax
-  int v8; // er8
-  Scaleform::GFx::ASStringNode *v9; // rcx
-  bool v10; // zf
+  int v8; // r8d
+  Scaleform::GFx::ASStringNode *pNode; // rcx
   Scaleform::GFx::AS2::Value *v11; // rcx
-  Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback pcallback; // [rsp+28h] [rbp-40h]
+  Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback pcallback; // [rsp+28h] [rbp-40h] BYREF
   int v13; // [rsp+30h] [rbp-38h]
   int v14; // [rsp+34h] [rbp-34h]
-  Scaleform::GFx::ASString result; // [rsp+70h] [rbp+8h]
+  Scaleform::GFx::ASString result; // [rsp+70h] [rbp+8h] BYREF
   Scaleform::GFx::ASStringNode *v16; // [rsp+78h] [rbp+10h]
   Scaleform::GFx::AS2::Value *v17; // [rsp+80h] [rbp+18h]
 
   v17 = val;
-  v3 = val;
-  v4 = penv;
-  v5 = (Scaleform::GFx::AS2::ObjectInterface *)this;
-  ++penv->Stack.pCurrent;
-  if ( penv->Stack.pCurrent >= penv->Stack.pPageEnd )
+  if ( ++penv->Stack.pCurrent >= penv->Stack.pPageEnd )
     Scaleform::GFx::AS2::PagedStack<Scaleform::GFx::AS2::Value,32>::PushPage(&penv->Stack);
-  v6 = (Scaleform::GFx::ASStringNode *)v4->Stack.pCurrent;
-  result.pNode = v6;
-  v16 = v6;
-  if ( v6 )
-    Scaleform::GFx::AS2::Value::Value((Scaleform::GFx::AS2::Value *)v6, v3, (__int64)v3);
-  if ( v5 )
-    v5 += 2;
-  v7 = Scaleform::GFx::AS2::Environment::CreateConstString(v4, &result, "onData");
-  v8 = ((_QWORD)((char *)v4->Stack.pCurrent - (char *)v4->Stack.pPageStart) >> 5) + 32 * v4->Stack.Pages.Data.Size - 32;
-  if ( v5 )
+  pCurrent = (Scaleform::GFx::ASStringNode *)penv->Stack.pCurrent;
+  result.pNode = pCurrent;
+  v16 = pCurrent;
+  if ( pCurrent )
+    Scaleform::GFx::AS2::Value::Value((Scaleform::GFx::AS2::Value *)pCurrent, val);
+  if ( this )
+    this = (Scaleform::GFx::AS2::XmlObject *)((char *)this + 32);
+  v7 = Scaleform::GFx::AS2::Environment::CreateConstString(penv, &result, "onData");
+  v8 = penv->Stack.pCurrent - penv->Stack.pPageStart + 32 * penv->Stack.Pages.Data.Size - 32;
+  if ( this )
   {
     pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)`Scaleform::GFx::AS2::AsBroadcaster::BroadcastMessage::`4::LocalInvokeCallback::`vftable;
     v13 = 1;
     v14 = v8;
-    Scaleform::GFx::AS2::AsBroadcaster::BroadcastMessageWithCallback(v4, v5, v7, &pcallback);
+    Scaleform::GFx::AS2::AsBroadcaster::BroadcastMessageWithCallback(
+      penv,
+      (Scaleform::GFx::AS2::ObjectInterface *)this,
+      v7,
+      &pcallback);
     pcallback.vfptr = (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallbackVtbl *)&Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback::`vftable;
   }
-  v9 = result.pNode;
-  v10 = result.pNode->RefCount == 1;
-  --v9->RefCount;
-  if ( v10 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v9);
-  v11 = v4->Stack.pCurrent;
+  pNode = result.pNode;
+  if ( result.pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
+  v11 = penv->Stack.pCurrent;
   if ( v11->T.Type >= 5u )
     Scaleform::GFx::AS2::Value::DropRefs(v11);
-  --v4->Stack.pCurrent;
-  if ( v4->Stack.pCurrent < v4->Stack.pPageStart )
-    Scaleform::GFx::AS2::PagedStack<Scaleform::GFx::AS2::Value,32>::PopPage(&v4->Stack);
-  if ( v3->T.Type >= 5u )
-    Scaleform::GFx::AS2::Value::DropRefs(v3);
+  if ( --penv->Stack.pCurrent < penv->Stack.pPageStart )
+    Scaleform::GFx::AS2::PagedStack<Scaleform::GFx::AS2::Value,32>::PopPage(&penv->Stack);
+  if ( val->T.Type >= 5u )
+    Scaleform::GFx::AS2::Value::DropRefs(val);
 }
 
 // File Line: 452
 // RVA: 0x703DB0
-void __fastcall Scaleform::GFx::AS2::XmlObject::NotifyOnLoad(Scaleform::GFx::AS2::XmlObject *this, Scaleform::GFx::AS2::Environment *penv, bool success)
+void __fastcall Scaleform::GFx::AS2::XmlObject::NotifyOnLoad(
+        Scaleform::GFx::AS2::XmlObject *this,
+        Scaleform::GFx::AS2::Environment *penv,
+        bool success)
 {
-  bool v3; // bp
-  Scaleform::GFx::AS2::Environment *v4; // rsi
-  Scaleform::GFx::AS2::XmlObject *v5; // rdi
   Scaleform::GFx::ASString *v6; // rax
   Scaleform::GFx::AS2::ObjectInterface *v7; // rdi
-  Scaleform::GFx::ASStringNode *v8; // rcx
+  Scaleform::GFx::ASStringNode *pNode; // rcx
   bool v9; // zf
-  __int64 v10; // rax
+  Scaleform::GFx::AS2::Value *pCurrent; // rax
   Scaleform::GFx::ASString *v11; // rax
-  int v12; // er8
+  int v12; // r8d
   Scaleform::GFx::ASStringNode *v13; // rcx
   Scaleform::GFx::AS2::Value *v14; // rcx
-  Scaleform::GFx::AS2::Value v15; // [rsp+38h] [rbp-40h]
-  Scaleform::GFx::ASString result; // [rsp+80h] [rbp+8h]
-  __int64 v17; // [rsp+88h] [rbp+10h]
-  char v18; // [rsp+90h] [rbp+18h]
+  Scaleform::GFx::AS2::Value v15; // [rsp+38h] [rbp-40h] BYREF
+  Scaleform::GFx::ASString result; // [rsp+80h] [rbp+8h] BYREF
+  Scaleform::GFx::AS2::Value *v17; // [rsp+88h] [rbp+10h]
+  char v18; // [rsp+90h] [rbp+18h] BYREF
 
-  v3 = success;
-  v4 = penv;
-  v5 = this;
   v18 = 2;
   v15.T.Type = 2;
   v15.V.BooleanValue = success;
   v6 = Scaleform::GFx::AS2::ASStringContext::CreateConstString(&penv->StringContext, &result, "loaded");
-  v7 = (Scaleform::GFx::AS2::ObjectInterface *)&v5->vfptr;
-  v7->vfptr->SetMemberRaw(v7, &v4->StringContext, v6, &v15, (Scaleform::GFx::AS2::PropFlags *)&v18);
-  v8 = result.pNode;
-  v9 = result.pNode->RefCount == 1;
-  --v8->RefCount;
+  v7 = &this->Scaleform::GFx::AS2::ObjectInterface;
+  v7->vfptr->SetMemberRaw(v7, &penv->StringContext, v6, &v15, (Scaleform::GFx::AS2::PropFlags *)&v18);
+  pNode = result.pNode;
+  v9 = result.pNode->RefCount-- == 1;
   if ( v9 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v8);
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
   if ( v15.T.Type >= 5u )
     Scaleform::GFx::AS2::Value::DropRefs(&v15);
-  ++v4->Stack.pCurrent;
-  if ( v4->Stack.pCurrent >= v4->Stack.pPageEnd )
-    Scaleform::GFx::AS2::PagedStack<Scaleform::GFx::AS2::Value,32>::PushPage(&v4->Stack);
-  v10 = (__int64)v4->Stack.pCurrent;
-  result.pNode = (Scaleform::GFx::ASStringNode *)v10;
-  v17 = v10;
-  if ( v10 )
+  if ( ++penv->Stack.pCurrent >= penv->Stack.pPageEnd )
+    Scaleform::GFx::AS2::PagedStack<Scaleform::GFx::AS2::Value,32>::PushPage(&penv->Stack);
+  pCurrent = penv->Stack.pCurrent;
+  result.pNode = (Scaleform::GFx::ASStringNode *)pCurrent;
+  v17 = pCurrent;
+  if ( pCurrent )
   {
-    *(_BYTE *)v10 = 2;
-    *(_BYTE *)(v10 + 8) = v3;
+    pCurrent->T.Type = 2;
+    pCurrent->V.BooleanValue = success;
   }
-  v11 = Scaleform::GFx::AS2::Environment::CreateConstString(v4, &result, "onLoad");
-  v12 = ((_QWORD)((char *)v4->Stack.pCurrent - (char *)v4->Stack.pPageStart) >> 5) + 32 * v4->Stack.Pages.Data.Size - 32;
+  v11 = Scaleform::GFx::AS2::Environment::CreateConstString(penv, &result, "onLoad");
+  v12 = penv->Stack.pCurrent - penv->Stack.pPageStart + 32 * penv->Stack.Pages.Data.Size - 32;
   if ( v7 )
   {
     *(_QWORD *)&v15.T.Type = `Scaleform::GFx::AS2::AsBroadcaster::BroadcastMessage::`4::LocalInvokeCallback::`vftable;
     v15.NV.Int32Value = 1;
     HIDWORD(v15.NV.NumberValue) = v12;
     Scaleform::GFx::AS2::AsBroadcaster::BroadcastMessageWithCallback(
-      v4,
+      penv,
       v7,
       v11,
       (Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback *)&v15);
     *(_QWORD *)&v15.T.Type = &Scaleform::GFx::AS2::AsBroadcaster::InvokeCallback::`vftable;
   }
   v13 = result.pNode;
-  v9 = result.pNode->RefCount == 1;
-  --v13->RefCount;
+  v9 = result.pNode->RefCount-- == 1;
   if ( v9 )
     Scaleform::GFx::ASStringNode::ReleaseNode(v13);
-  v14 = v4->Stack.pCurrent;
+  v14 = penv->Stack.pCurrent;
   if ( v14->T.Type >= 5u )
     Scaleform::GFx::AS2::Value::DropRefs(v14);
-  --v4->Stack.pCurrent;
-  if ( v4->Stack.pCurrent < v4->Stack.pPageStart )
-    Scaleform::GFx::AS2::PagedStack<Scaleform::GFx::AS2::Value,32>::PopPage(&v4->Stack);
+  if ( --penv->Stack.pCurrent < penv->Stack.pPageStart )
+    Scaleform::GFx::AS2::PagedStack<Scaleform::GFx::AS2::Value,32>::PopPage(&penv->Stack);
 }
 
 // File Line: 494
 // RVA: 0x6CE280
-void __fastcall Scaleform::GFx::AS2::XmlProto::XmlProto(Scaleform::GFx::AS2::XmlProto *this, Scaleform::GFx::AS2::ASStringContext *psc, Scaleform::GFx::AS2::Object *prototype, Scaleform::GFx::AS2::FunctionRef *constructor)
+void __fastcall Scaleform::GFx::AS2::XmlProto::XmlProto(
+        Scaleform::GFx::AS2::XmlProto *this,
+        Scaleform::GFx::AS2::ASStringContext *psc,
+        Scaleform::GFx::AS2::Object *prototype,
+        Scaleform::GFx::AS2::FunctionRef *constructor)
 {
-  Scaleform::GFx::AS2::ASStringContext *v4; // rbx
-  Scaleform::GFx::AS2::XmlProto *v5; // rsi
   Scaleform::GFx::ASString *v6; // rax
   Scaleform::GFx::ASString *v7; // rax
-  Scaleform::GFx::ASStringNode *v8; // rcx
+  Scaleform::GFx::ASStringNode *pNode; // rcx
   bool v9; // zf
   Scaleform::GFx::ASStringNode *v10; // rcx
   Scaleform::GFx::ASString *v11; // rax
@@ -814,67 +753,76 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::XmlProto(Scaleform::GFx::AS2::Xml
   Scaleform::GFx::ASStringNode *v23; // rax
   Scaleform::GFx::ASString *v24; // rax
   Scaleform::GFx::ASStringNode *v25; // rcx
-  Scaleform::GFx::ASString v26; // [rsp+30h] [rbp-40h]
-  Scaleform::GFx::ASString result; // [rsp+38h] [rbp-38h]
+  Scaleform::GFx::ASString v26; // [rsp+30h] [rbp-40h] BYREF
+  Scaleform::GFx::ASString result; // [rsp+38h] [rbp-38h] BYREF
   __int64 v28; // [rsp+40h] [rbp-30h]
-  Scaleform::GFx::AS2::Value val; // [rsp+48h] [rbp-28h]
-  Scaleform::GFx::AS2::PropFlags flags; // [rsp+98h] [rbp+28h]
+  Scaleform::GFx::AS2::Value val; // [rsp+48h] [rbp-28h] BYREF
+  Scaleform::GFx::AS2::PropFlags flags; // [rsp+98h] [rbp+28h] BYREF
 
   v28 = -2i64;
-  v4 = psc;
-  v5 = this;
   Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::XmlObject,Scaleform::GFx::AS2::Environment>::Prototype<Scaleform::GFx::AS2::XmlObject,Scaleform::GFx::AS2::Environment>(
-    (Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::XmlObject,Scaleform::GFx::AS2::Environment> *)&this->vfptr,
+    this,
     psc,
     prototype,
     constructor);
-  v5->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::XmlProto::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
-  v5->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::XmlProto::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
-  v5->vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::XmlProto::`vftable;
+  this->Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::XmlObject,Scaleform::GFx::AS2::Environment>::Scaleform::GFx::AS2::XmlObject::Scaleform::GFx::AS2::XmlNodeObject::Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>::Scaleform::GFx::AS2::RefCountBaseGC<323>::vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::XmlProto::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+  this->Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::XmlObject,Scaleform::GFx::AS2::Environment>::Scaleform::GFx::AS2::XmlObject::Scaleform::GFx::AS2::XmlNodeObject::Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ObjectInterface::vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::XmlProto::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+  this->Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::XmlObject,Scaleform::GFx::AS2::Environment>::Scaleform::GFx::AS2::GASPrototypeBase::vfptr = (Scaleform::GFx::AS2::GASPrototypeBaseVtbl *)&Scaleform::GFx::AS2::XmlProto::`vftable;
   flags.Flags = 6;
   Scaleform::GFx::AS2::GASPrototypeBase::InitFunctionMembers(
-    (Scaleform::GFx::AS2::GASPrototypeBase *)&v5->vfptr,
-    (Scaleform::GFx::AS2::Object *)&v5->vfptr,
-    v4,
+    &this->Scaleform::GFx::AS2::GASPrototypeBase,
+    this,
+    psc,
     Scaleform::GFx::AS2::XmlProto::FunctionTable,
     &flags);
   flags.Flags = 2;
-  v6 = Scaleform::GFx::AS2::ASStringContext::CreateConstString(v4, &result, "application/x-www-form-urlencoded");
+  v6 = Scaleform::GFx::AS2::ASStringContext::CreateConstString(psc, &result, "application/x-www-form-urlencoded");
   val.T.Type = 5;
   val.NV.8 = ($B8BD913BABC9324639AA48504BEFB2FC)v6->pNode;
   ++val.V.pStringNode->RefCount;
-  v7 = Scaleform::GFx::AS2::ASStringContext::CreateConstString(v4, &v26, "contentType");
-  Scaleform::GFx::AS2::Object::SetMemberRaw((Scaleform::GFx::AS2::Object *)&v5->vfptr, v4, v7, &val, &flags);
-  v8 = v26.pNode;
-  v9 = v26.pNode->RefCount == 1;
-  --v8->RefCount;
+  v7 = Scaleform::GFx::AS2::ASStringContext::CreateConstString(psc, &v26, "contentType");
+  Scaleform::GFx::AS2::Object::SetMemberRaw(
+    (Scaleform::GFx::AS2::Object *)&this->Scaleform::GFx::AS2::ObjectInterface,
+    psc,
+    v7,
+    &val,
+    &flags);
+  pNode = v26.pNode;
+  v9 = v26.pNode->RefCount-- == 1;
   if ( v9 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v8);
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
   if ( val.T.Type >= 5u )
     Scaleform::GFx::AS2::Value::DropRefs(&val);
   v10 = result.pNode;
-  v9 = result.pNode->RefCount == 1;
-  --v10->RefCount;
+  v9 = result.pNode->RefCount-- == 1;
   if ( v9 )
     Scaleform::GFx::ASStringNode::ReleaseNode(v10);
   flags.Flags = 2;
   val.T.Type = 0;
-  v11 = Scaleform::GFx::AS2::ASStringContext::CreateConstString(v4, &result, "docTypeDecl");
-  Scaleform::GFx::AS2::Object::SetMemberRaw((Scaleform::GFx::AS2::Object *)&v5->vfptr, v4, v11, &val, &flags);
+  v11 = Scaleform::GFx::AS2::ASStringContext::CreateConstString(psc, &result, "docTypeDecl");
+  Scaleform::GFx::AS2::Object::SetMemberRaw(
+    (Scaleform::GFx::AS2::Object *)&this->Scaleform::GFx::AS2::ObjectInterface,
+    psc,
+    v11,
+    &val,
+    &flags);
   v12 = result.pNode;
-  v9 = result.pNode->RefCount == 1;
-  --v12->RefCount;
+  v9 = result.pNode->RefCount-- == 1;
   if ( v9 )
     Scaleform::GFx::ASStringNode::ReleaseNode(v12);
   if ( val.T.Type >= 5u )
     Scaleform::GFx::AS2::Value::DropRefs(&val);
   flags.Flags = 2;
   val.T.Type = 0;
-  v13 = Scaleform::GFx::AS2::ASStringContext::CreateConstString(v4, &result, "idMap");
-  Scaleform::GFx::AS2::Object::SetMemberRaw((Scaleform::GFx::AS2::Object *)&v5->vfptr, v4, v13, &val, &flags);
+  v13 = Scaleform::GFx::AS2::ASStringContext::CreateConstString(psc, &result, "idMap");
+  Scaleform::GFx::AS2::Object::SetMemberRaw(
+    (Scaleform::GFx::AS2::Object *)&this->Scaleform::GFx::AS2::ObjectInterface,
+    psc,
+    v13,
+    &val,
+    &flags);
   v14 = result.pNode;
-  v9 = result.pNode->RefCount == 1;
-  --v14->RefCount;
+  v9 = result.pNode->RefCount-- == 1;
   if ( v9 )
     Scaleform::GFx::ASStringNode::ReleaseNode(v14);
   if ( val.T.Type >= 5u )
@@ -882,22 +830,30 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::XmlProto(Scaleform::GFx::AS2::Xml
   flags.Flags = 2;
   val.T.Type = 2;
   val.V.BooleanValue = 0;
-  v15 = Scaleform::GFx::AS2::ASStringContext::CreateConstString(v4, &result, "ignoreWhite");
-  Scaleform::GFx::AS2::Object::SetMemberRaw((Scaleform::GFx::AS2::Object *)&v5->vfptr, v4, v15, &val, &flags);
+  v15 = Scaleform::GFx::AS2::ASStringContext::CreateConstString(psc, &result, "ignoreWhite");
+  Scaleform::GFx::AS2::Object::SetMemberRaw(
+    (Scaleform::GFx::AS2::Object *)&this->Scaleform::GFx::AS2::ObjectInterface,
+    psc,
+    v15,
+    &val,
+    &flags);
   v16 = result.pNode;
-  v9 = result.pNode->RefCount == 1;
-  --v16->RefCount;
+  v9 = result.pNode->RefCount-- == 1;
   if ( v9 )
     Scaleform::GFx::ASStringNode::ReleaseNode(v16);
   if ( val.T.Type >= 5u )
     Scaleform::GFx::AS2::Value::DropRefs(&val);
   flags.Flags = 2;
   val.T.Type = 0;
-  v17 = Scaleform::GFx::AS2::ASStringContext::CreateConstString(v4, &result, "loaded");
-  Scaleform::GFx::AS2::Object::SetMemberRaw((Scaleform::GFx::AS2::Object *)&v5->vfptr, v4, v17, &val, &flags);
+  v17 = Scaleform::GFx::AS2::ASStringContext::CreateConstString(psc, &result, "loaded");
+  Scaleform::GFx::AS2::Object::SetMemberRaw(
+    (Scaleform::GFx::AS2::Object *)&this->Scaleform::GFx::AS2::ObjectInterface,
+    psc,
+    v17,
+    &val,
+    &flags);
   v18 = result.pNode;
-  v9 = result.pNode->RefCount == 1;
-  --v18->RefCount;
+  v9 = result.pNode->RefCount-- == 1;
   if ( v9 )
     Scaleform::GFx::ASStringNode::ReleaseNode(v18);
   if ( val.T.Type >= 5u )
@@ -905,30 +861,38 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::XmlProto(Scaleform::GFx::AS2::Xml
   flags.Flags = 2;
   val.T.Type = 4;
   val.NV.Int32Value = 0;
-  v19 = Scaleform::GFx::AS2::ASStringContext::CreateConstString(v4, &result, "status");
-  Scaleform::GFx::AS2::Object::SetMemberRaw((Scaleform::GFx::AS2::Object *)&v5->vfptr, v4, v19, &val, &flags);
+  v19 = Scaleform::GFx::AS2::ASStringContext::CreateConstString(psc, &result, "status");
+  Scaleform::GFx::AS2::Object::SetMemberRaw(
+    (Scaleform::GFx::AS2::Object *)&this->Scaleform::GFx::AS2::ObjectInterface,
+    psc,
+    v19,
+    &val,
+    &flags);
   v20 = result.pNode;
-  v9 = result.pNode->RefCount == 1;
-  --v20->RefCount;
+  v9 = result.pNode->RefCount-- == 1;
   if ( v9 )
     Scaleform::GFx::ASStringNode::ReleaseNode(v20);
   if ( val.T.Type >= 5u )
     Scaleform::GFx::AS2::Value::DropRefs(&val);
   flags.Flags = 2;
   val.T.Type = 0;
-  v21 = Scaleform::GFx::AS2::ASStringContext::CreateConstString(v4, &result, "xmlDecl");
-  Scaleform::GFx::AS2::Object::SetMemberRaw((Scaleform::GFx::AS2::Object *)&v5->vfptr, v4, v21, &val, &flags);
+  v21 = Scaleform::GFx::AS2::ASStringContext::CreateConstString(psc, &result, "xmlDecl");
+  Scaleform::GFx::AS2::Object::SetMemberRaw(
+    (Scaleform::GFx::AS2::Object *)&this->Scaleform::GFx::AS2::ObjectInterface,
+    psc,
+    v21,
+    &val,
+    &flags);
   v22 = result.pNode;
-  v9 = result.pNode->RefCount == 1;
-  --v22->RefCount;
+  v9 = result.pNode->RefCount-- == 1;
   if ( v9 )
     Scaleform::GFx::ASStringNode::ReleaseNode(v22);
   if ( val.T.Type >= 5u )
     Scaleform::GFx::AS2::Value::DropRefs(&val);
   flags.Flags = 1;
   val.T.Type = 8;
-  result.pNode = (Scaleform::GFx::ASStringNode *)v4->pContext->pHeap;
-  v23 = (Scaleform::GFx::ASStringNode *)(*((__int64 (__fastcall **)(Scaleform::GFx::ASStringNode *, signed __int64))result.pNode->pData
+  result.pNode = (Scaleform::GFx::ASStringNode *)psc->pContext->pHeap;
+  v23 = (Scaleform::GFx::ASStringNode *)(*((__int64 (__fastcall **)(Scaleform::GFx::ASStringNode *, __int64))result.pNode->pData
                                          + 10))(
                                           v22,
                                           104i64);
@@ -936,55 +900,63 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::XmlProto(Scaleform::GFx::AS2::Xml
   if ( v23 )
     Scaleform::GFx::AS2::CFunctionObject::CFunctionObject(
       (Scaleform::GFx::AS2::CFunctionObject *)v23,
-      v4,
+      psc,
       Scaleform::GFx::AS2::XmlProto::DefaultOnData);
   val.V.FunctionValue.Flags = 0;
   *(_OWORD *)&val.NV.Int32Value = (unsigned __int64)v23;
-  v24 = Scaleform::GFx::AS2::ASStringContext::CreateConstString(v4, &result, "onData");
-  v5->vfptr->SetMemberRaw((Scaleform::GFx::AS2::ObjectInterface *)&v5->vfptr, v4, v24, &val, &flags);
+  v24 = Scaleform::GFx::AS2::ASStringContext::CreateConstString(psc, &result, "onData");
+  this->Scaleform::GFx::AS2::Prototype<Scaleform::GFx::AS2::XmlObject,Scaleform::GFx::AS2::Environment>::Scaleform::GFx::AS2::XmlObject::Scaleform::GFx::AS2::XmlNodeObject::Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ObjectInterface::vfptr->SetMemberRaw(
+    &this->Scaleform::GFx::AS2::ObjectInterface,
+    psc,
+    v24,
+    &val,
+    &flags);
   v25 = result.pNode;
-  v9 = result.pNode->RefCount == 1;
-  --v25->RefCount;
+  v9 = result.pNode->RefCount-- == 1;
   if ( v9 )
     Scaleform::GFx::ASStringNode::ReleaseNode(v25);
   if ( val.T.Type >= 5u )
     Scaleform::GFx::AS2::Value::DropRefs(&val);
-}
+}pNode;
+  v9 = result.pNode->RefCount-- == 1;
+  if ( v9 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(v25);
+  if ( val.T.T
 
 // File Line: 587
 // RVA: 0x6E1DB0
 void __fastcall Scaleform::GFx::AS2::XmlProto::DefaultOnData(Scaleform::GFx::AS2::FnCall *fn)
 {
-  Scaleform::GFx::AS2::FnCall *v1; // rbx
-  Scaleform::GFx::AS2::ObjectInterface *v2; // rcx
+  Scaleform::GFx::AS2::ObjectInterface *ThisPtr; // rcx
 
-  v1 = fn;
-  v2 = fn->ThisPtr;
-  if ( !v2 || (*(unsigned int (**)(void))&v2->vfptr->gap8[8])() != 28 )
+  ThisPtr = fn->ThisPtr;
+  if ( !ThisPtr
+    || (*(unsigned int (__fastcall **)(Scaleform::GFx::AS2::ObjectInterface *))&ThisPtr->vfptr->gap8[8])(ThisPtr) != 28 )
+  {
     Scaleform::GFx::AS2::Environment::LogScriptError(
-      v1->Env,
+      fn->Env,
       "Error: Null or invalid this is used for a method of %s class.\n",
       "XML");
+  }
 }
 
 // File Line: 616
 // RVA: 0x6AB430
 void __fastcall Scaleform::GFx::AS2::XmlProto::AddRequestHeader(Scaleform::GFx::AS2::FnCall *fn)
 {
-  Scaleform::GFx::AS2::FnCall *v1; // rbx
-  Scaleform::GFx::AS2::ObjectInterface *v2; // rcx
+  Scaleform::GFx::AS2::ObjectInterface *ThisPtr; // rcx
   Scaleform::GFx::AS2::ObjectInterface *v3; // rax
   Scaleform::GFx::LogState *v4; // rax
-  Scaleform::LogMessageId messageType; // [rsp+30h] [rbp+8h]
+  Scaleform::LogMessageId messageType; // [rsp+30h] [rbp+8h] BYREF
 
-  v1 = fn;
-  v2 = fn->ThisPtr;
-  if ( v2 && (*(unsigned int (**)(void))&v2->vfptr->gap8[8])() == 28 )
+  ThisPtr = fn->ThisPtr;
+  if ( ThisPtr
+    && (*(unsigned int (__fastcall **)(Scaleform::GFx::AS2::ObjectInterface *))&ThisPtr->vfptr->gap8[8])(ThisPtr) == 28 )
   {
-    v3 = v1->ThisPtr;
+    v3 = fn->ThisPtr;
     if ( v3 && v3 != (Scaleform::GFx::AS2::ObjectInterface *)32 )
     {
-      v4 = (Scaleform::GFx::LogState *)((__int64 (*)(void))v1->Env->Target->vfptr[76].__vecDelDtor)();
+      v4 = (Scaleform::GFx::LogState *)((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))fn->Env->Target->vfptr[76].__vecDelDtor)(fn->Env->Target);
       if ( v4 )
       {
         messageType.Id = 212992;
@@ -998,7 +970,7 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::AddRequestHeader(Scaleform::GFx::
   else
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
-      v1->Env,
+      fn->Env,
       "Error: Null or invalid this is used for a method of %s class.\n",
       "XML");
   }
@@ -1008,284 +980,259 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::AddRequestHeader(Scaleform::GFx::
 // RVA: 0x6AB4C0
 void __fastcall Scaleform::GFx::AS2::XmlProto::CreateElement(Scaleform::GFx::AS2::FnCall *fn)
 {
-  Scaleform::GFx::AS2::FnCall *v1; // rsi
-  Scaleform::GFx::AS2::ObjectInterface *v2; // rcx
+  Scaleform::GFx::AS2::ObjectInterface *ThisPtr; // rcx
   Scaleform::GFx::AS2::ObjectInterface *v3; // rax
-  unsigned int v4; // edx
-  Scaleform::GFx::AS2::Environment *v5; // rbx
+  unsigned int FirstArgBottomIndex; // edx
+  Scaleform::GFx::AS2::Environment *Env; // rbx
   Scaleform::GFx::AS2::Value *v6; // rdi
-  Scaleform::GFx::AS2::Value *v7; // rcx
+  Scaleform::GFx::AS2::Value *pCurrent; // rcx
   Scaleform::GFx::AS2::Environment *v8; // rbx
   __int64 v9; // rax
-  signed int v10; // edi
-  Scaleform::GFx::AS2::Object *v11; // rax
-  Scaleform::GFx::AS2::RefCountBaseGC<323> *v12; // rbp
-  Scaleform::GFx::AS2::Environment *v13; // rbx
-  Scaleform::GFx::AS2::Value *v14; // rax
+  int v10; // edi
+  Scaleform::GFx::AS2::Object *v11; // rbp
+  Scaleform::GFx::AS2::Environment *v12; // rbx
+  Scaleform::GFx::AS2::Value *v13; // rax
+  Scaleform::GFx::AS2::Value *v14; // rcx
   Scaleform::GFx::AS2::Value *v15; // rcx
-  Scaleform::GFx::AS2::Value *v16; // rcx
-  unsigned int v17; // eax
-  Scaleform::GFx::ASStringNode *v18; // rcx
-  bool v19; // zf
-  Scaleform::GFx::ASString result; // [rsp+60h] [rbp+8h]
-  __int64 v21; // [rsp+68h] [rbp+10h]
-  __int64 v22; // [rsp+70h] [rbp+18h]
+  unsigned int RefCount; // eax
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  Scaleform::GFx::ASString result; // [rsp+60h] [rbp+8h] BYREF
+  __int64 v20; // [rsp+68h] [rbp+10h]
+  __int64 v21; // [rsp+70h] [rbp+18h]
 
-  v1 = fn;
-  v2 = fn->ThisPtr;
-  if ( v2 && (*(unsigned int (**)(void))&v2->vfptr->gap8[8])() == 28 )
+  ThisPtr = fn->ThisPtr;
+  if ( ThisPtr
+    && (*(unsigned int (__fastcall **)(Scaleform::GFx::AS2::ObjectInterface *))&ThisPtr->vfptr->gap8[8])(ThisPtr) == 28 )
   {
-    v3 = v1->ThisPtr;
+    v3 = fn->ThisPtr;
     if ( v3 && v3 != (Scaleform::GFx::AS2::ObjectInterface *)32 )
     {
-      v4 = v1->FirstArgBottomIndex;
-      v5 = v1->Env;
+      FirstArgBottomIndex = fn->FirstArgBottomIndex;
+      Env = fn->Env;
       v6 = 0i64;
-      if ( v4 <= 32 * ((unsigned int)v5->Stack.Pages.Data.Size - 1)
-               + (unsigned int)((_QWORD)((char *)v5->Stack.pCurrent - (char *)v5->Stack.pPageStart) >> 5) )
-        v6 = &v5->Stack.Pages.Data.Data[v4 >> 5]->Values[v4 & 0x1F];
-      ++v5->Stack.pCurrent;
-      if ( v5->Stack.pCurrent >= v5->Stack.pPageEnd )
-        Scaleform::GFx::AS2::PagedStack<Scaleform::GFx::AS2::Value,32>::PushPage(&v5->Stack);
-      v7 = v5->Stack.pCurrent;
-      v21 = (__int64)v7;
-      v22 = (__int64)v7;
-      if ( v7 )
-        Scaleform::GFx::AS2::Value::Value(v7, v6);
-      v8 = v1->Env;
-      ++v8->Stack.pCurrent;
-      if ( v8->Stack.pCurrent >= v8->Stack.pPageEnd )
+      if ( FirstArgBottomIndex <= 32 * ((unsigned int)Env->Stack.Pages.Data.Size - 1)
+                                + (unsigned int)(Env->Stack.pCurrent - Env->Stack.pPageStart) )
+        v6 = &Env->Stack.Pages.Data.Data[FirstArgBottomIndex >> 5]->Values[FirstArgBottomIndex & 0x1F];
+      if ( ++Env->Stack.pCurrent >= Env->Stack.pPageEnd )
+        Scaleform::GFx::AS2::PagedStack<Scaleform::GFx::AS2::Value,32>::PushPage(&Env->Stack);
+      pCurrent = Env->Stack.pCurrent;
+      v20 = (__int64)pCurrent;
+      v21 = (__int64)pCurrent;
+      if ( pCurrent )
+        Scaleform::GFx::AS2::Value::Value(pCurrent, v6);
+      v8 = fn->Env;
+      if ( ++v8->Stack.pCurrent >= v8->Stack.pPageEnd )
         Scaleform::GFx::AS2::PagedStack<Scaleform::GFx::AS2::Value,32>::PushPage(&v8->Stack);
       v9 = (__int64)v8->Stack.pCurrent;
+      v20 = v9;
       v21 = v9;
-      v22 = v9;
       if ( v9 )
       {
         *(_BYTE *)v9 = 4;
         *(_DWORD *)(v9 + 8) = 1;
       }
-      Scaleform::GFx::AS2::Environment::CreateConstString(v1->Env, &result, "XMLNode");
+      Scaleform::GFx::AS2::Environment::CreateConstString(fn->Env, &result, "XMLNode");
       v10 = 2;
       v11 = Scaleform::GFx::AS2::Environment::OperatorNew(
-              v1->Env,
-              v1->Env->StringContext.pContext->pGlobal.pObject,
+              fn->Env,
+              fn->Env->StringContext.pContext->pGlobal.pObject,
               &result,
               2,
               -1);
-      v12 = (Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v11->vfptr;
-      v21 = (__int64)v11;
-      Scaleform::GFx::AS2::Value::SetAsObject(v1->Result, v11);
-      v13 = v1->Env;
-      v14 = v13->Stack.pCurrent;
-      if ( &v14[-2] >= v13->Stack.pPageStart )
+      v20 = (__int64)v11;
+      Scaleform::GFx::AS2::Value::SetAsObject(fn->Result, v11);
+      v12 = fn->Env;
+      v13 = v12->Stack.pCurrent;
+      if ( &v13[-2] >= v12->Stack.pPageStart )
       {
-        if ( v14->T.Type >= 5u )
-          Scaleform::GFx::AS2::Value::DropRefs(v13->Stack.pCurrent);
-        --v13->Stack.pCurrent;
-        v16 = v13->Stack.pCurrent;
-        if ( v16->T.Type >= 5u )
-          Scaleform::GFx::AS2::Value::DropRefs(v16);
-        --v13->Stack.pCurrent;
+        if ( v13->T.Type >= 5u )
+          Scaleform::GFx::AS2::Value::DropRefs(v12->Stack.pCurrent);
+        v15 = --v12->Stack.pCurrent;
+        if ( v15->T.Type >= 5u )
+          Scaleform::GFx::AS2::Value::DropRefs(v15);
+        --v12->Stack.pCurrent;
       }
       else
       {
         do
         {
-          v15 = v13->Stack.pCurrent;
-          if ( v15->T.Type >= 5u )
-            Scaleform::GFx::AS2::Value::DropRefs(v15);
-          --v13->Stack.pCurrent;
-          if ( v13->Stack.pCurrent < v13->Stack.pPageStart )
-            Scaleform::GFx::AS2::PagedStack<Scaleform::GFx::AS2::Value,32>::PopPage(&v13->Stack);
+          v14 = v12->Stack.pCurrent;
+          if ( v14->T.Type >= 5u )
+            Scaleform::GFx::AS2::Value::DropRefs(v14);
+          if ( --v12->Stack.pCurrent < v12->Stack.pPageStart )
+            Scaleform::GFx::AS2::PagedStack<Scaleform::GFx::AS2::Value,32>::PopPage(&v12->Stack);
           --v10;
         }
         while ( v10 );
       }
-      if ( v12 )
+      if ( v11 )
       {
-        v17 = v12->RefCount;
-        if ( v17 & 0x3FFFFFF )
+        RefCount = v11->RefCount;
+        if ( (RefCount & 0x3FFFFFF) != 0 )
         {
-          v12->RefCount = v17 - 1;
-          Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v12);
+          v11->RefCount = RefCount - 1;
+          Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v11);
         }
       }
-      v18 = result.pNode;
-      v19 = result.pNode->RefCount == 1;
-      --v18->RefCount;
-      if ( v19 )
-        Scaleform::GFx::ASStringNode::ReleaseNode(v18);
+      pNode = result.pNode;
+      if ( result.pNode->RefCount-- == 1 )
+        Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
     }
   }
   else
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
-      v1->Env,
+      fn->Env,
       "Error: Null or invalid this is used for a method of %s class.\n",
       "XML");
   }
-}or(
-      v1->Env,
-      "Error: Null or invalid this
+}
 
 // File Line: 662
 // RVA: 0x6AB6D0
 void __fastcall Scaleform::GFx::AS2::XmlProto::CreateTextNode(Scaleform::GFx::AS2::FnCall *fn)
 {
-  Scaleform::GFx::AS2::FnCall *v1; // rsi
-  Scaleform::GFx::AS2::ObjectInterface *v2; // rcx
+  Scaleform::GFx::AS2::ObjectInterface *ThisPtr; // rcx
   Scaleform::GFx::AS2::ObjectInterface *v3; // rax
-  unsigned int v4; // edx
-  Scaleform::GFx::AS2::Environment *v5; // rbx
+  unsigned int FirstArgBottomIndex; // edx
+  Scaleform::GFx::AS2::Environment *Env; // rbx
   Scaleform::GFx::AS2::Value *v6; // rdi
-  Scaleform::GFx::AS2::Value *v7; // rcx
+  Scaleform::GFx::AS2::Value *pCurrent; // rcx
   Scaleform::GFx::AS2::Environment *v8; // rbx
   __int64 v9; // rax
-  signed int v10; // edi
-  Scaleform::GFx::AS2::Object *v11; // rax
-  Scaleform::GFx::AS2::RefCountBaseGC<323> *v12; // rbp
-  Scaleform::GFx::AS2::Environment *v13; // rbx
-  Scaleform::GFx::AS2::Value *v14; // rax
+  int v10; // edi
+  Scaleform::GFx::AS2::Object *v11; // rbp
+  Scaleform::GFx::AS2::Environment *v12; // rbx
+  Scaleform::GFx::AS2::Value *v13; // rax
+  Scaleform::GFx::AS2::Value *v14; // rcx
   Scaleform::GFx::AS2::Value *v15; // rcx
-  Scaleform::GFx::AS2::Value *v16; // rcx
-  unsigned int v17; // eax
-  Scaleform::GFx::ASStringNode *v18; // rcx
-  bool v19; // zf
-  Scaleform::GFx::ASString result; // [rsp+60h] [rbp+8h]
-  __int64 v21; // [rsp+68h] [rbp+10h]
-  __int64 v22; // [rsp+70h] [rbp+18h]
+  unsigned int RefCount; // eax
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  Scaleform::GFx::ASString result; // [rsp+60h] [rbp+8h] BYREF
+  __int64 v20; // [rsp+68h] [rbp+10h]
+  __int64 v21; // [rsp+70h] [rbp+18h]
 
-  v1 = fn;
-  v2 = fn->ThisPtr;
-  if ( v2 && (*(unsigned int (**)(void))&v2->vfptr->gap8[8])() == 28 )
+  ThisPtr = fn->ThisPtr;
+  if ( ThisPtr
+    && (*(unsigned int (__fastcall **)(Scaleform::GFx::AS2::ObjectInterface *))&ThisPtr->vfptr->gap8[8])(ThisPtr) == 28 )
   {
-    v3 = v1->ThisPtr;
+    v3 = fn->ThisPtr;
     if ( v3 && v3 != (Scaleform::GFx::AS2::ObjectInterface *)32 )
     {
-      v4 = v1->FirstArgBottomIndex;
-      v5 = v1->Env;
+      FirstArgBottomIndex = fn->FirstArgBottomIndex;
+      Env = fn->Env;
       v6 = 0i64;
-      if ( v4 <= 32 * ((unsigned int)v5->Stack.Pages.Data.Size - 1)
-               + (unsigned int)((_QWORD)((char *)v5->Stack.pCurrent - (char *)v5->Stack.pPageStart) >> 5) )
-        v6 = &v5->Stack.Pages.Data.Data[v4 >> 5]->Values[v4 & 0x1F];
-      ++v5->Stack.pCurrent;
-      if ( v5->Stack.pCurrent >= v5->Stack.pPageEnd )
-        Scaleform::GFx::AS2::PagedStack<Scaleform::GFx::AS2::Value,32>::PushPage(&v5->Stack);
-      v7 = v5->Stack.pCurrent;
-      v21 = (__int64)v7;
-      v22 = (__int64)v7;
-      if ( v7 )
-        Scaleform::GFx::AS2::Value::Value(v7, v6);
-      v8 = v1->Env;
-      ++v8->Stack.pCurrent;
-      if ( v8->Stack.pCurrent >= v8->Stack.pPageEnd )
+      if ( FirstArgBottomIndex <= 32 * ((unsigned int)Env->Stack.Pages.Data.Size - 1)
+                                + (unsigned int)(Env->Stack.pCurrent - Env->Stack.pPageStart) )
+        v6 = &Env->Stack.Pages.Data.Data[FirstArgBottomIndex >> 5]->Values[FirstArgBottomIndex & 0x1F];
+      if ( ++Env->Stack.pCurrent >= Env->Stack.pPageEnd )
+        Scaleform::GFx::AS2::PagedStack<Scaleform::GFx::AS2::Value,32>::PushPage(&Env->Stack);
+      pCurrent = Env->Stack.pCurrent;
+      v20 = (__int64)pCurrent;
+      v21 = (__int64)pCurrent;
+      if ( pCurrent )
+        Scaleform::GFx::AS2::Value::Value(pCurrent, v6);
+      v8 = fn->Env;
+      if ( ++v8->Stack.pCurrent >= v8->Stack.pPageEnd )
         Scaleform::GFx::AS2::PagedStack<Scaleform::GFx::AS2::Value,32>::PushPage(&v8->Stack);
       v9 = (__int64)v8->Stack.pCurrent;
+      v20 = v9;
       v21 = v9;
-      v22 = v9;
       if ( v9 )
       {
         *(_BYTE *)v9 = 4;
         *(_DWORD *)(v9 + 8) = 3;
       }
-      Scaleform::GFx::AS2::Environment::CreateConstString(v1->Env, &result, "XMLNode");
+      Scaleform::GFx::AS2::Environment::CreateConstString(fn->Env, &result, "XMLNode");
       v10 = 2;
       v11 = Scaleform::GFx::AS2::Environment::OperatorNew(
-              v1->Env,
-              v1->Env->StringContext.pContext->pGlobal.pObject,
+              fn->Env,
+              fn->Env->StringContext.pContext->pGlobal.pObject,
               &result,
               2,
               -1);
-      v12 = (Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v11->vfptr;
-      v21 = (__int64)v11;
-      Scaleform::GFx::AS2::Value::SetAsObject(v1->Result, v11);
-      v13 = v1->Env;
-      v14 = v13->Stack.pCurrent;
-      if ( &v14[-2] >= v13->Stack.pPageStart )
+      v20 = (__int64)v11;
+      Scaleform::GFx::AS2::Value::SetAsObject(fn->Result, v11);
+      v12 = fn->Env;
+      v13 = v12->Stack.pCurrent;
+      if ( &v13[-2] >= v12->Stack.pPageStart )
       {
-        if ( v14->T.Type >= 5u )
-          Scaleform::GFx::AS2::Value::DropRefs(v13->Stack.pCurrent);
-        --v13->Stack.pCurrent;
-        v16 = v13->Stack.pCurrent;
-        if ( v16->T.Type >= 5u )
-          Scaleform::GFx::AS2::Value::DropRefs(v16);
-        --v13->Stack.pCurrent;
+        if ( v13->T.Type >= 5u )
+          Scaleform::GFx::AS2::Value::DropRefs(v12->Stack.pCurrent);
+        v15 = --v12->Stack.pCurrent;
+        if ( v15->T.Type >= 5u )
+          Scaleform::GFx::AS2::Value::DropRefs(v15);
+        --v12->Stack.pCurrent;
       }
       else
       {
         do
         {
-          v15 = v13->Stack.pCurrent;
-          if ( v15->T.Type >= 5u )
-            Scaleform::GFx::AS2::Value::DropRefs(v15);
-          --v13->Stack.pCurrent;
-          if ( v13->Stack.pCurrent < v13->Stack.pPageStart )
-            Scaleform::GFx::AS2::PagedStack<Scaleform::GFx::AS2::Value,32>::PopPage(&v13->Stack);
+          v14 = v12->Stack.pCurrent;
+          if ( v14->T.Type >= 5u )
+            Scaleform::GFx::AS2::Value::DropRefs(v14);
+          if ( --v12->Stack.pCurrent < v12->Stack.pPageStart )
+            Scaleform::GFx::AS2::PagedStack<Scaleform::GFx::AS2::Value,32>::PopPage(&v12->Stack);
           --v10;
         }
         while ( v10 );
       }
-      if ( v12 )
+      if ( v11 )
       {
-        v17 = v12->RefCount;
-        if ( v17 & 0x3FFFFFF )
+        RefCount = v11->RefCount;
+        if ( (RefCount & 0x3FFFFFF) != 0 )
         {
-          v12->RefCount = v17 - 1;
-          Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v12);
+          v11->RefCount = RefCount - 1;
+          Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v11);
         }
       }
-      v18 = result.pNode;
-      v19 = result.pNode->RefCount == 1;
-      --v18->RefCount;
-      if ( v19 )
-        Scaleform::GFx::ASStringNode::ReleaseNode(v18);
+      pNode = result.pNode;
+      if ( result.pNode->RefCount-- == 1 )
+        Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
     }
   }
   else
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
-      v1->Env,
+      fn->Env,
       "Error: Null or invalid this is used for a method of %s class.\n",
       "XML");
   }
-}or(
-      v1->Env,
-      "Error: Null or invalid thi
+}
 
 // File Line: 687
 // RVA: 0x6ABAC0
 void __fastcall Scaleform::GFx::AS2::XmlProto::GetBytesLoaded(Scaleform::GFx::AS2::FnCall *fn)
 {
-  Scaleform::GFx::AS2::FnCall *v1; // rbx
-  Scaleform::GFx::AS2::ObjectInterface *v2; // rcx
+  Scaleform::GFx::AS2::ObjectInterface *ThisPtr; // rcx
   Scaleform::GFx::AS2::ObjectInterface *v3; // rax
-  signed __int64 v4; // rax
-  Scaleform::GFx::AS2::Value *v5; // rbx
+  Scaleform::GFx::AS2::ObjectInterface *v4; // rax
+  Scaleform::GFx::AS2::Value *Result; // rbx
   double v6; // xmm6_8
 
-  v1 = fn;
-  v2 = fn->ThisPtr;
-  if ( v2 && (*(unsigned int (**)(void))&v2->vfptr->gap8[8])() == 28 )
+  ThisPtr = fn->ThisPtr;
+  if ( ThisPtr
+    && (*(unsigned int (__fastcall **)(Scaleform::GFx::AS2::ObjectInterface *))&ThisPtr->vfptr->gap8[8])(ThisPtr) == 28 )
   {
-    v3 = v1->ThisPtr;
+    v3 = fn->ThisPtr;
     if ( v3 )
     {
-      v4 = (signed __int64)&v3[-2];
+      v4 = v3 - 2;
       if ( v4 )
       {
-        v5 = v1->Result;
-        v6 = *(double *)(v4 + 112);
+        Result = fn->Result;
+        v6 = *(double *)&v4[7].vfptr;
         if ( v6 >= 0.0 )
         {
-          if ( v5->T.Type >= 5u )
-            Scaleform::GFx::AS2::Value::DropRefs(v5);
-          v5->NV.NumberValue = v6;
-          v5->T.Type = 3;
+          if ( Result->T.Type >= 5u )
+            Scaleform::GFx::AS2::Value::DropRefs(Result);
+          Result->NV.NumberValue = v6;
+          Result->T.Type = 3;
         }
         else
         {
-          Scaleform::GFx::AS2::Value::DropRefs(v5);
-          v5->T.Type = 0;
+          Scaleform::GFx::AS2::Value::DropRefs(Result);
+          Result->T.Type = 0;
         }
       }
     }
@@ -1293,7 +1240,7 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::GetBytesLoaded(Scaleform::GFx::AS
   else
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
-      v1->Env,
+      fn->Env,
       "Error: Null or invalid this is used for a method of %s class.\n",
       "XML");
   }
@@ -1303,36 +1250,35 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::GetBytesLoaded(Scaleform::GFx::AS
 // RVA: 0x6ABBB0
 void __fastcall Scaleform::GFx::AS2::XmlProto::GetBytesTotal(Scaleform::GFx::AS2::FnCall *fn)
 {
-  Scaleform::GFx::AS2::FnCall *v1; // rbx
-  Scaleform::GFx::AS2::ObjectInterface *v2; // rcx
+  Scaleform::GFx::AS2::ObjectInterface *ThisPtr; // rcx
   Scaleform::GFx::AS2::ObjectInterface *v3; // rax
-  signed __int64 v4; // rax
-  Scaleform::GFx::AS2::Value *v5; // rbx
+  Scaleform::GFx::AS2::ObjectInterface *v4; // rax
+  Scaleform::GFx::AS2::Value *Result; // rbx
   double v6; // xmm6_8
 
-  v1 = fn;
-  v2 = fn->ThisPtr;
-  if ( v2 && (*(unsigned int (**)(void))&v2->vfptr->gap8[8])() == 28 )
+  ThisPtr = fn->ThisPtr;
+  if ( ThisPtr
+    && (*(unsigned int (__fastcall **)(Scaleform::GFx::AS2::ObjectInterface *))&ThisPtr->vfptr->gap8[8])(ThisPtr) == 28 )
   {
-    v3 = v1->ThisPtr;
+    v3 = fn->ThisPtr;
     if ( v3 )
     {
-      v4 = (signed __int64)&v3[-2];
+      v4 = v3 - 2;
       if ( v4 )
       {
-        v5 = v1->Result;
-        v6 = *(double *)(v4 + 120);
+        Result = fn->Result;
+        v6 = *(double *)&v4[7].pProto.pObject;
         if ( v6 >= 0.0 )
         {
-          if ( v5->T.Type >= 5u )
-            Scaleform::GFx::AS2::Value::DropRefs(v5);
-          v5->NV.NumberValue = v6;
-          v5->T.Type = 3;
+          if ( Result->T.Type >= 5u )
+            Scaleform::GFx::AS2::Value::DropRefs(Result);
+          Result->NV.NumberValue = v6;
+          Result->T.Type = 3;
         }
         else
         {
-          Scaleform::GFx::AS2::Value::DropRefs(v5);
-          v5->T.Type = 0;
+          Scaleform::GFx::AS2::Value::DropRefs(Result);
+          Result->T.Type = 0;
         }
       }
     }
@@ -1340,7 +1286,7 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::GetBytesTotal(Scaleform::GFx::AS2
   else
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
-      v1->Env,
+      fn->Env,
       "Error: Null or invalid this is used for a method of %s class.\n",
       "XML");
   }
@@ -1350,25 +1296,24 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::GetBytesTotal(Scaleform::GFx::AS2
 // RVA: 0x6ABCB0
 void __fastcall Scaleform::GFx::AS2::XmlProto::Load(Scaleform::GFx::AS2::FnCall *fn)
 {
-  Scaleform::GFx::AS2::FnCall *v1; // rsi
-  Scaleform::GFx::AS2::ObjectInterface *v2; // rcx
+  Scaleform::GFx::AS2::ObjectInterface *ThisPtr; // rcx
   Scaleform::GFx::AS2::ObjectInterface *v3; // rax
   Scaleform::GFx::AS2::Object *v4; // r15
   Scaleform::GFx::AS2::Value *v5; // rbx
-  unsigned int v6; // er9
-  Scaleform::GFx::AS2::Environment *v7; // r8
+  unsigned int FirstArgBottomIndex; // r9d
+  Scaleform::GFx::AS2::Environment *Env; // r8
   Scaleform::GFx::AS2::Value *v8; // r10
   Scaleform::GFx::ASString *v9; // rax
-  Scaleform::GFx::ASStringNode *v10; // rcx
+  Scaleform::GFx::ASStringNode *pNode; // rcx
   bool v11; // zf
-  __int64 v12; // rcx
-  Scaleform::GFx::MovieImpl *v13; // rdi
-  Scaleform::GFx::ExternalLibPtr *v14; // rbx
+  Scaleform::MemoryHeap *v12; // rcx
+  Scaleform::GFx::MovieImpl *pMovieImpl; // rdi
+  Scaleform::GFx::ExternalLibPtr *pXMLObjectManager; // rbx
   Scaleform::GFx::ASStringNode *v15; // rax
   Scaleform::GFx::XML::ObjectManager *v16; // rax
   Scaleform::GFx::XML::ObjectManager *v17; // rbx
-  signed __int64 v18; // rax
-  Scaleform::GFx::XML::SupportBase *v19; // r14
+  Scaleform::GFx::ExternalLibPtr *v18; // rax
+  Scaleform::GFx::XML::SupportBase *pObject; // r14
   Scaleform::GFx::ASString *v20; // rax
   Scaleform::GFx::ASStringNode *v21; // rcx
   bool v22; // di
@@ -1380,75 +1325,78 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::Load(Scaleform::GFx::AS2::FnCall 
   Scaleform::GFx::AS2::Value *v28; // rbx
   Scaleform::GFx::ASString *v29; // rax
   Scaleform::GFx::ASStringNode *v30; // rcx
-  char v31; // al
-  Scaleform::GFx::AS2::FunctionObject *v32; // rcx
-  unsigned int v33; // edx
-  Scaleform::GFx::AS2::LocalFrame *v34; // rcx
+  char Flags; // al
+  Scaleform::GFx::AS2::FunctionObject *Function; // rcx
+  unsigned int RefCount; // edx
+  Scaleform::GFx::AS2::LocalFrame *pLocalFrame; // rcx
   unsigned int v35; // eax
   Scaleform::GFx::ASStringNode *v36; // rcx
-  Scaleform::GFx::AS2::FunctionRef v37; // [rsp+30h] [rbp-99h]
-  Scaleform::Ptr<Scaleform::GFx::XML::SupportBase> v38; // [rsp+48h] [rbp-81h]
-  Scaleform::GFx::ASString v39; // [rsp+50h] [rbp-79h]
-  Scaleform::GFx::ASString v40; // [rsp+58h] [rbp-71h]
-  Scaleform::GFx::AS2::Value v41; // [rsp+60h] [rbp-69h]
-  Scaleform::GFx::AS2::Value v42; // [rsp+80h] [rbp-49h]
-  Scaleform::GFx::AS2::Value v43; // [rsp+A0h] [rbp-29h]
+  Scaleform::GFx::AS2::FunctionRef v37; // [rsp+30h] [rbp-99h] BYREF
+  Scaleform::Ptr<Scaleform::GFx::XML::SupportBase> v38; // [rsp+48h] [rbp-81h] BYREF
+  Scaleform::GFx::ASString v39; // [rsp+50h] [rbp-79h] BYREF
+  Scaleform::GFx::ASString v40; // [rsp+58h] [rbp-71h] BYREF
+  Scaleform::GFx::AS2::Value v41; // [rsp+60h] [rbp-69h] BYREF
+  Scaleform::GFx::AS2::Value v42; // [rsp+80h] [rbp-49h] BYREF
+  Scaleform::GFx::AS2::Value v43; // [rsp+A0h] [rbp-29h] BYREF
   Scaleform::GFx::AS2::XMLFileLoader *v44; // [rsp+C0h] [rbp-9h]
   Scaleform::GFx::AS2::XMLFileLoader *v45; // [rsp+C8h] [rbp-1h]
   __int64 v46; // [rsp+D0h] [rbp+7h]
   Scaleform::GFx::AS2::XMLFileLoader *v47; // [rsp+D8h] [rbp+Fh]
-  void *v48; // [rsp+130h] [rbp+67h]
-  Scaleform::GFx::ASString result; // [rsp+138h] [rbp+6Fh]
+  Scaleform::MemoryHeap *pHeap; // [rsp+130h] [rbp+67h] BYREF
+  Scaleform::GFx::ASString result; // [rsp+138h] [rbp+6Fh] BYREF
   Scaleform::GFx::XML::ObjectManager *v50; // [rsp+140h] [rbp+77h]
-  Scaleform::GFx::ASString v51; // [rsp+148h] [rbp+7Fh]
+  Scaleform::GFx::ASString v51; // [rsp+148h] [rbp+7Fh] BYREF
 
   v46 = -2i64;
-  v1 = fn;
-  v2 = fn->ThisPtr;
-  if ( !v2 || (*(unsigned int (**)(void))&v2->vfptr->gap8[8])() != 28 )
+  ThisPtr = fn->ThisPtr;
+  if ( !ThisPtr
+    || (*(unsigned int (__fastcall **)(Scaleform::GFx::AS2::ObjectInterface *))&ThisPtr->vfptr->gap8[8])(ThisPtr) != 28 )
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
-      v1->Env,
+      fn->Env,
       "Error: Null or invalid this is used for a method of %s class.\n",
       "XML");
     return;
   }
-  v3 = v1->ThisPtr;
+  v3 = fn->ThisPtr;
   if ( v3 )
   {
     v4 = (Scaleform::GFx::AS2::Object *)&v3[-2];
     if ( v3 != (Scaleform::GFx::AS2::ObjectInterface *)32 )
     {
-      if ( !v1->NArgs )
+      if ( !fn->NArgs )
       {
-        v5 = v1->Result;
-        Scaleform::GFx::AS2::Value::DropRefs(v1->Result);
+        v5 = fn->Result;
+        Scaleform::GFx::AS2::Value::DropRefs(v5);
         v5->T.Type = 2;
         v5->V.BooleanValue = 0;
         return;
       }
-      v6 = v1->FirstArgBottomIndex;
-      v7 = v1->Env;
+      FirstArgBottomIndex = fn->FirstArgBottomIndex;
+      Env = fn->Env;
       v8 = 0i64;
-      if ( v6 <= 32 * ((unsigned int)v7->Stack.Pages.Data.Size - 1)
-               + (unsigned int)((_QWORD)((char *)v7->Stack.pCurrent - (char *)v7->Stack.pPageStart) >> 5) )
-        v8 = &v7->Stack.Pages.Data.Data[v6 >> 5]->Values[v6 & 0x1F];
-      Scaleform::GFx::AS2::Value::ToString(v8, &result, v7, -1);
+      if ( FirstArgBottomIndex <= 32 * ((unsigned int)Env->Stack.Pages.Data.Size - 1)
+                                + (unsigned int)(Env->Stack.pCurrent - Env->Stack.pPageStart) )
+        v8 = &Env->Stack.Pages.Data.Data[FirstArgBottomIndex >> 5]->Values[FirstArgBottomIndex & 0x1F];
+      Scaleform::GFx::AS2::Value::ToString(v8, &result, Env, -1);
       v42.T.Type = 0;
-      v9 = Scaleform::GFx::AS2::Environment::CreateConstString(v1->Env, &v51, "onData");
-      v4->vfptr->GetMember((Scaleform::GFx::AS2::ObjectInterface *)&v4->vfptr, v1->Env, v9, &v42);
-      v10 = v51.pNode;
-      v11 = v51.pNode->RefCount == 1;
-      --v10->RefCount;
+      v9 = Scaleform::GFx::AS2::Environment::CreateConstString(fn->Env, &v51, "onData");
+      v4->Scaleform::GFx::AS2::ObjectInterface::vfptr->GetMember(
+        &v4->Scaleform::GFx::AS2::ObjectInterface,
+        fn->Env,
+        v9,
+        &v42);
+      pNode = v51.pNode;
+      v11 = v51.pNode->RefCount-- == 1;
       if ( v11 )
-        Scaleform::GFx::ASStringNode::ReleaseNode(v10);
-      Scaleform::GFx::AS2::Value::ToFunction(&v42, &v37, v1->Env);
-      if ( ((unsigned __int8 (*)(void))v37.Function->vfptr[4].Finalize_GC)() )
+        Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
+      Scaleform::GFx::AS2::Value::ToFunction(&v42, &v37, fn->Env);
+      if ( ((unsigned __int8 (__fastcall *)(Scaleform::GFx::AS2::FunctionObject *))v37.Function->vfptr[4].Finalize_GC)(v37.Function) )
       {
         if ( Scaleform::GFx::AS2::XmlProto::DefaultOnData )
         {
-          if ( ((unsigned __int8 (*)(void))v37.Function->vfptr[4].Finalize_GC)()
-            && (void (__fastcall *)(Scaleform::GFx::AS2::FnCall *))v37.Function[1].vfptr == Scaleform::GFx::AS2::XmlProto::DefaultOnData )
+          if ( ((unsigned __int8 (__fastcall *)(Scaleform::GFx::AS2::FunctionObject *))v37.Function->vfptr[4].Finalize_GC)(v37.Function)
+            && (void (__fastcall *)(Scaleform::GFx::AS2::FnCall *))v37.Function[1].Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>::Scaleform::GFx::AS2::RefCountBaseGC<323>::vfptr == Scaleform::GFx::AS2::XmlProto::DefaultOnData )
           {
             goto LABEL_17;
           }
@@ -1456,27 +1404,24 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::Load(Scaleform::GFx::AS2::FnCall 
         else if ( (void (__fastcall *)(Scaleform::GFx::AS2::FnCall *))v37.Function == Scaleform::GFx::AS2::XmlProto::DefaultOnData )
         {
 LABEL_17:
-          v13 = v1->Env->Target->pASRoot->pMovieImpl;
+          pMovieImpl = fn->Env->Target->pASRoot->pMovieImpl;
           v50 = 0i64;
-          v14 = v13->pXMLObjectManager;
-          if ( v14 )
+          pXMLObjectManager = pMovieImpl->pXMLObjectManager;
+          if ( pXMLObjectManager )
           {
-            v17 = (Scaleform::GFx::XML::ObjectManager *)&v14[-1];
+            v17 = (Scaleform::GFx::XML::ObjectManager *)&pXMLObjectManager[-1];
             if ( v17 )
               ++v17->RefCount;
             v50 = v17;
           }
           else
           {
-            v48 = v1->Env->StringContext.pContext->pHeap;
-            v15 = (Scaleform::GFx::ASStringNode *)(*(__int64 (__fastcall **)(__int64, signed __int64, _QWORD))(*(_QWORD *)v48 + 80i64))(
-                                                    v12,
-                                                    120i64,
-                                                    0i64);
+            pHeap = fn->Env->StringContext.pContext->pHeap;
+            v15 = (Scaleform::GFx::ASStringNode *)pHeap->vfptr->Alloc(v12, 120ui64, 0i64);
             v51.pNode = v15;
             if ( v15 )
             {
-              Scaleform::GFx::XML::ObjectManager::ObjectManager((Scaleform::GFx::XML::ObjectManager *)v15, v13);
+              Scaleform::GFx::XML::ObjectManager::ObjectManager((Scaleform::GFx::XML::ObjectManager *)v15, pMovieImpl);
               v17 = v16;
             }
             else
@@ -1484,31 +1429,34 @@ LABEL_17:
               v17 = 0i64;
             }
             v50 = v17;
-            v18 = (signed __int64)&v17->vfptr;
+            v18 = &v17->Scaleform::GFx::ExternalLibPtr;
             if ( !v17 )
               v18 = 0i64;
-            v13->pXMLObjectManager = (Scaleform::GFx::ExternalLibPtr *)v18;
+            pMovieImpl->pXMLObjectManager = v18;
           }
-          v19 = Scaleform::GFx::StateBag::GetXMLSupport((Scaleform::GFx::StateBag *)&v13->vfptr, &v38)->pObject;
+          pObject = Scaleform::GFx::StateBag::GetXMLSupport(&pMovieImpl->Scaleform::GFx::StateBag, &v38)->pObject;
           if ( v38.pObject )
             Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v38.pObject);
           v4[1].pPrev = 0i64;
           v41.T.Type = 0;
-          v20 = Scaleform::GFx::AS2::Environment::CreateConstString(v1->Env, &v39, "ignoreWhite");
-          v4->vfptr->GetMember((Scaleform::GFx::AS2::ObjectInterface *)&v4->vfptr, v1->Env, v20, &v41);
+          v20 = Scaleform::GFx::AS2::Environment::CreateConstString(fn->Env, &v39, "ignoreWhite");
+          v4->Scaleform::GFx::AS2::ObjectInterface::vfptr->GetMember(
+            &v4->Scaleform::GFx::AS2::ObjectInterface,
+            fn->Env,
+            v20,
+            &v41);
           v21 = v39.pNode;
-          v11 = v39.pNode->RefCount == 1;
-          --v21->RefCount;
+          v11 = v39.pNode->RefCount-- == 1;
           if ( v11 )
             Scaleform::GFx::ASStringNode::ReleaseNode(v21);
-          v22 = Scaleform::GFx::AS2::Value::ToBool(&v41, v1->Env);
-          v23 = (Scaleform::GFx::AS2::XMLFileLoaderAndParserImpl *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
+          v22 = Scaleform::GFx::AS2::Value::ToBool(&v41, fn->Env);
+          v23 = (Scaleform::GFx::AS2::XMLFileLoaderAndParserImpl *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
                                                                      Scaleform::Memory::pGlobalHeap,
                                                                      48i64);
-          v48 = v23;
+          pHeap = (Scaleform::MemoryHeap *)v23;
           if ( v23 )
           {
-            Scaleform::GFx::AS2::XMLFileLoaderAndParserImpl::XMLFileLoaderAndParserImpl(v23, v19, v17, v22);
+            Scaleform::GFx::AS2::XMLFileLoaderAndParserImpl::XMLFileLoaderAndParserImpl(v23, pObject, v17, v22);
             v25 = v24;
           }
           else
@@ -1517,13 +1465,13 @@ LABEL_17:
           }
           v47 = v25;
           Scaleform::GFx::AS2::MovieRoot::AddXmlLoadQueueEntry(
-            (Scaleform::GFx::AS2::MovieRoot *)v1->Env->Target->pASRoot->pMovieImpl->pASMovieRoot.pObject,
+            (Scaleform::GFx::AS2::MovieRoot *)fn->Env->Target->pASRoot->pMovieImpl->pASMovieRoot.pObject,
             v4,
             v25,
             result.pNode->pData,
-            0);
-          v26 = v1->Result;
-          Scaleform::GFx::AS2::Value::DropRefs(v1->Result);
+            LM_None);
+          v26 = fn->Result;
+          Scaleform::GFx::AS2::Value::DropRefs(v26);
           v26->T.Type = 2;
           v26->V.BooleanValue = 1;
           if ( v25 )
@@ -1531,51 +1479,50 @@ LABEL_17:
           if ( v41.T.Type >= 5u )
             Scaleform::GFx::AS2::Value::DropRefs(&v41);
           if ( v17 )
-            Scaleform::RefCountNTSImpl::Release((Scaleform::RefCountNTSImpl *)&v17->vfptr);
+            Scaleform::RefCountNTSImpl::Release(v17);
 LABEL_45:
-          LOBYTE(v48) = 2;
+          LOBYTE(pHeap) = 2;
           v43.T.Type = 2;
           v43.V.BooleanValue = 0;
-          v29 = Scaleform::GFx::AS2::ASStringContext::CreateConstString(&v1->Env->StringContext, &v40, "loaded");
-          v4->vfptr->SetMemberRaw(
-            (Scaleform::GFx::AS2::ObjectInterface *)&v4->vfptr,
-            &v1->Env->StringContext,
+          v29 = Scaleform::GFx::AS2::ASStringContext::CreateConstString(&fn->Env->StringContext, &v40, "loaded");
+          v4->Scaleform::GFx::AS2::ObjectInterface::vfptr->SetMemberRaw(
+            &v4->Scaleform::GFx::AS2::ObjectInterface,
+            &fn->Env->StringContext,
             v29,
             &v43,
-            (Scaleform::GFx::AS2::PropFlags *)&v48);
+            (Scaleform::GFx::AS2::PropFlags *)&pHeap);
           v30 = v40.pNode;
-          v11 = v40.pNode->RefCount == 1;
-          --v30->RefCount;
+          v11 = v40.pNode->RefCount-- == 1;
           if ( v11 )
             Scaleform::GFx::ASStringNode::ReleaseNode(v30);
           if ( v43.T.Type >= 5u )
             Scaleform::GFx::AS2::Value::DropRefs(&v43);
-          v31 = v37.Flags;
-          if ( !(v37.Flags & 2) )
+          Flags = v37.Flags;
+          if ( (v37.Flags & 2) == 0 )
           {
-            v32 = v37.Function;
+            Function = v37.Function;
             if ( v37.Function )
             {
-              v33 = v37.Function->RefCount;
-              if ( v33 & 0x3FFFFFF )
+              RefCount = v37.Function->RefCount;
+              if ( (RefCount & 0x3FFFFFF) != 0 )
               {
-                v37.Function->RefCount = v33 - 1;
-                Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v32->vfptr);
-                v31 = v37.Flags;
+                v37.Function->RefCount = RefCount - 1;
+                Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(Function);
+                Flags = v37.Flags;
               }
             }
           }
           v37.Function = 0i64;
-          if ( !(v31 & 1) )
+          if ( (Flags & 1) == 0 )
           {
-            v34 = v37.pLocalFrame;
+            pLocalFrame = v37.pLocalFrame;
             if ( v37.pLocalFrame )
             {
               v35 = v37.pLocalFrame->RefCount;
-              if ( v35 & 0x3FFFFFF )
+              if ( (v35 & 0x3FFFFFF) != 0 )
               {
                 v37.pLocalFrame->RefCount = v35 - 1;
-                Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v34->vfptr);
+                Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(pLocalFrame);
               }
             }
           }
@@ -1583,14 +1530,13 @@ LABEL_45:
           if ( v42.T.Type >= 5u )
             Scaleform::GFx::AS2::Value::DropRefs(&v42);
           v36 = result.pNode;
-          v11 = result.pNode->RefCount == 1;
-          --v36->RefCount;
+          v11 = result.pNode->RefCount-- == 1;
           if ( v11 )
             Scaleform::GFx::ASStringNode::ReleaseNode(v36);
           return;
         }
       }
-      v27 = (Scaleform::GFx::AS2::XMLFileLoader *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
+      v27 = (Scaleform::GFx::AS2::XMLFileLoader *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
                                                     Scaleform::Memory::pGlobalHeap,
                                                     32i64);
       v44 = v27;
@@ -1612,13 +1558,13 @@ LABEL_45:
       }
       v45 = v27;
       Scaleform::GFx::AS2::MovieRoot::AddXmlLoadQueueEntry(
-        (Scaleform::GFx::AS2::MovieRoot *)v1->Env->Target->pASRoot->pMovieImpl->pASMovieRoot.pObject,
+        (Scaleform::GFx::AS2::MovieRoot *)fn->Env->Target->pASRoot->pMovieImpl->pASMovieRoot.pObject,
         v4,
         v27,
         result.pNode->pData,
-        0);
-      v28 = v1->Result;
-      Scaleform::GFx::AS2::Value::DropRefs(v1->Result);
+        LM_None);
+      v28 = fn->Result;
+      Scaleform::GFx::AS2::Value::DropRefs(v28);
       v28->T.Type = 2;
       v28->V.BooleanValue = 1;
       if ( v27 )
@@ -1632,11 +1578,10 @@ LABEL_45:
 // RVA: 0x6AC3A0
 void __fastcall Scaleform::GFx::AS2::XmlProto::ParseXML(Scaleform::GFx::AS2::FnCall *fn)
 {
-  Scaleform::GFx::AS2::FnCall *v1; // rbx
-  Scaleform::GFx::AS2::ObjectInterface *v2; // rcx
+  Scaleform::GFx::AS2::ObjectInterface *ThisPtr; // rcx
   Scaleform::GFx::AS2::ObjectInterface *v3; // rsi
   Scaleform::GFx::AS2::XmlObject *v4; // rsi
-  Scaleform::GFx::AS2::Environment *v5; // rbp
+  Scaleform::GFx::AS2::Environment *Env; // rbp
   __int64 v6; // rcx
   Scaleform::GFx::ASStringNode *v7; // rax
   Scaleform::GFx::AS2::Object *v8; // rax
@@ -1645,34 +1590,31 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::ParseXML(Scaleform::GFx::AS2::FnC
   Scaleform::GFx::AS2::Value *v11; // rax
   Scaleform::GFx::AS2::Value *v12; // rbx
   Scaleform::GFx::ASString *v13; // rax
-  Scaleform::GFx::ASStringNode *v14; // rcx
-  bool v15; // zf
-  unsigned int v16; // eax
-  Scaleform::GFx::AS2::Value v17; // [rsp+38h] [rbp-40h]
-  Scaleform::MemoryHeap *v18; // [rsp+80h] [rbp+8h]
-  Scaleform::GFx::ASString result; // [rsp+88h] [rbp+10h]
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  unsigned int RefCount; // eax
+  Scaleform::GFx::AS2::Value v17; // [rsp+38h] [rbp-40h] BYREF
+  Scaleform::MemoryHeap *pHeap; // [rsp+80h] [rbp+8h] BYREF
+  Scaleform::GFx::ASString result; // [rsp+88h] [rbp+10h] BYREF
   Scaleform::GFx::AS2::Object *v20; // [rsp+90h] [rbp+18h]
 
-  v1 = fn;
-  v2 = fn->ThisPtr;
-  if ( v2 && (*(unsigned int (**)(void))&v2->vfptr->gap8[8])() == 28 )
+  ThisPtr = fn->ThisPtr;
+  if ( ThisPtr
+    && (*(unsigned int (__fastcall **)(Scaleform::GFx::AS2::ObjectInterface *))&ThisPtr->vfptr->gap8[8])(ThisPtr) == 28 )
   {
-    v3 = v1->ThisPtr;
+    v3 = fn->ThisPtr;
     if ( v3 )
     {
       v4 = (Scaleform::GFx::AS2::XmlObject *)&v3[-2];
       if ( v4 )
       {
-        Scaleform::GFx::AS2::XML_LoadString(v1, v4);
-        v5 = v1->Env;
-        v18 = v5->StringContext.pContext->pHeap;
-        v7 = (Scaleform::GFx::ASStringNode *)((__int64 (__fastcall *)(__int64, signed __int64))v18->vfptr->Alloc)(
-                                               v6,
-                                               96i64);
+        Scaleform::GFx::AS2::XML_LoadString(fn, v4);
+        Env = fn->Env;
+        pHeap = Env->StringContext.pContext->pHeap;
+        v7 = (Scaleform::GFx::ASStringNode *)((__int64 (__fastcall *)(__int64, __int64))pHeap->vfptr->Alloc)(v6, 96i64);
         result.pNode = v7;
         if ( v7 )
         {
-          Scaleform::GFx::AS2::Object::Object((Scaleform::GFx::AS2::Object *)v7, v5);
+          Scaleform::GFx::AS2::Object::Object((Scaleform::GFx::AS2::Object *)v7, Env);
           v9 = v8;
         }
         else
@@ -1683,32 +1625,30 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::ParseXML(Scaleform::GFx::AS2::FnC
         for ( i = v4->pRealNode[1].Parent; i; i = (Scaleform::GFx::XML::ElementNode *)i->NextSibling.pObject )
         {
           if ( i->Type == 1 )
-            Scaleform::GFx::AS2::Xml_CreateIDMap(v5, i, v4->pRootNode.pObject, v9);
+            Scaleform::GFx::AS2::Xml_CreateIDMap(Env, i, v4->pRootNode.pObject, v9);
         }
-        LOBYTE(v18) = 2;
+        LOBYTE(pHeap) = 2;
         Scaleform::GFx::AS2::Value::Value(&v17, v9);
         v12 = v11;
-        v13 = Scaleform::GFx::AS2::Environment::CreateConstString(v5, &result, "idMap");
-        v4->vfptr->SetMember(
-          (Scaleform::GFx::AS2::ObjectInterface *)&v4->vfptr,
-          v5,
+        v13 = Scaleform::GFx::AS2::Environment::CreateConstString(Env, &result, "idMap");
+        v4->Scaleform::GFx::AS2::XmlNodeObject::Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ObjectInterface::vfptr->SetMember(
+          &v4->Scaleform::GFx::AS2::ObjectInterface,
+          Env,
           v13,
           v12,
-          (Scaleform::GFx::AS2::PropFlags *)&v18);
-        v14 = result.pNode;
-        v15 = result.pNode->RefCount == 1;
-        --v14->RefCount;
-        if ( v15 )
-          Scaleform::GFx::ASStringNode::ReleaseNode(v14);
+          (Scaleform::GFx::AS2::PropFlags *)&pHeap);
+        pNode = result.pNode;
+        if ( result.pNode->RefCount-- == 1 )
+          Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
         if ( v17.T.Type >= 5u )
           Scaleform::GFx::AS2::Value::DropRefs(&v17);
         if ( v9 )
         {
-          v16 = v9->RefCount;
-          if ( v16 & 0x3FFFFFF )
+          RefCount = v9->RefCount;
+          if ( (RefCount & 0x3FFFFFF) != 0 )
           {
-            v9->RefCount = v16 - 1;
-            Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v9->vfptr);
+            v9->RefCount = RefCount - 1;
+            Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v9);
           }
         }
       }
@@ -1717,7 +1657,7 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::ParseXML(Scaleform::GFx::AS2::FnC
   else
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
-      v1->Env,
+      fn->Env,
       "Error: Null or invalid this is used for a method of %s class.\n",
       "XML");
   }
@@ -1727,20 +1667,19 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::ParseXML(Scaleform::GFx::AS2::FnC
 // RVA: 0x6AC730
 void __fastcall Scaleform::GFx::AS2::XmlProto::Send(Scaleform::GFx::AS2::FnCall *fn)
 {
-  Scaleform::GFx::AS2::FnCall *v1; // rbx
-  Scaleform::GFx::AS2::ObjectInterface *v2; // rcx
+  Scaleform::GFx::AS2::ObjectInterface *ThisPtr; // rcx
   Scaleform::GFx::AS2::ObjectInterface *v3; // rax
   Scaleform::GFx::LogState *v4; // rax
-  Scaleform::LogMessageId messageType; // [rsp+30h] [rbp+8h]
+  Scaleform::LogMessageId messageType; // [rsp+30h] [rbp+8h] BYREF
 
-  v1 = fn;
-  v2 = fn->ThisPtr;
-  if ( v2 && (*(unsigned int (**)(void))&v2->vfptr->gap8[8])() == 28 )
+  ThisPtr = fn->ThisPtr;
+  if ( ThisPtr
+    && (*(unsigned int (__fastcall **)(Scaleform::GFx::AS2::ObjectInterface *))&ThisPtr->vfptr->gap8[8])(ThisPtr) == 28 )
   {
-    v3 = v1->ThisPtr;
+    v3 = fn->ThisPtr;
     if ( v3 && v3 != (Scaleform::GFx::AS2::ObjectInterface *)32 )
     {
-      v4 = (Scaleform::GFx::LogState *)((__int64 (*)(void))v1->Env->Target->vfptr[76].__vecDelDtor)();
+      v4 = (Scaleform::GFx::LogState *)((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))fn->Env->Target->vfptr[76].__vecDelDtor)(fn->Env->Target);
       if ( v4 )
       {
         messageType.Id = 212992;
@@ -1751,7 +1690,7 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::Send(Scaleform::GFx::AS2::FnCall 
   else
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
-      v1->Env,
+      fn->Env,
       "Error: Null or invalid this is used for a method of %s class.\n",
       "XML");
   }
@@ -1761,20 +1700,19 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::Send(Scaleform::GFx::AS2::FnCall 
 // RVA: 0x6AC990
 void __fastcall Scaleform::GFx::AS2::XmlProto::SendAndLoad(Scaleform::GFx::AS2::FnCall *fn)
 {
-  Scaleform::GFx::AS2::FnCall *v1; // rbx
-  Scaleform::GFx::AS2::ObjectInterface *v2; // rcx
+  Scaleform::GFx::AS2::ObjectInterface *ThisPtr; // rcx
   Scaleform::GFx::AS2::ObjectInterface *v3; // rax
   Scaleform::GFx::LogState *v4; // rax
-  Scaleform::LogMessageId messageType; // [rsp+30h] [rbp+8h]
+  Scaleform::LogMessageId messageType; // [rsp+30h] [rbp+8h] BYREF
 
-  v1 = fn;
-  v2 = fn->ThisPtr;
-  if ( v2 && (*(unsigned int (**)(void))&v2->vfptr->gap8[8])() == 28 )
+  ThisPtr = fn->ThisPtr;
+  if ( ThisPtr
+    && (*(unsigned int (__fastcall **)(Scaleform::GFx::AS2::ObjectInterface *))&ThisPtr->vfptr->gap8[8])(ThisPtr) == 28 )
   {
-    v3 = v1->ThisPtr;
+    v3 = fn->ThisPtr;
     if ( v3 && v3 != (Scaleform::GFx::AS2::ObjectInterface *)32 )
     {
-      v4 = (Scaleform::GFx::LogState *)((__int64 (*)(void))v1->Env->Target->vfptr[76].__vecDelDtor)();
+      v4 = (Scaleform::GFx::LogState *)((__int64 (__fastcall *)(Scaleform::GFx::InteractiveObject *))fn->Env->Target->vfptr[76].__vecDelDtor)(fn->Env->Target);
       if ( v4 )
       {
         messageType.Id = 212992;
@@ -1785,7 +1723,7 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::SendAndLoad(Scaleform::GFx::AS2::
   else
   {
     Scaleform::GFx::AS2::Environment::LogScriptError(
-      v1->Env,
+      fn->Env,
       "Error: Null or invalid this is used for a method of %s class.\n",
       "XML");
   }
@@ -1795,20 +1733,18 @@ void __fastcall Scaleform::GFx::AS2::XmlProto::SendAndLoad(Scaleform::GFx::AS2::
 // RVA: 0x6FA980
 void __fastcall Scaleform::GFx::AS2::XmlCtorFunction::GlobalCtor(Scaleform::GFx::AS2::FnCall *fn)
 {
-  Scaleform::GFx::AS2::FnCall *v1; // rdi
   Scaleform::GFx::AS2::XmlObject *v2; // rbx
-  Scaleform::GFx::AS2::ObjectInterface *v3; // rcx
+  Scaleform::MemoryHeap *ThisPtr; // rcx
   Scaleform::GFx::AS2::ObjectInterface *v4; // rax
   Scaleform::GFx::AS2::XmlObject *v5; // rax
   Scaleform::GFx::AS2::XmlObject *v6; // rax
-  unsigned int v7; // eax
+  unsigned int RefCount; // eax
 
-  v1 = fn;
   v2 = 0i64;
-  v3 = fn->ThisPtr;
-  if ( v3 && (*(unsigned int (__cdecl **)(Scaleform::GFx::AS2::ObjectInterface *))&v3->vfptr->gap8[8])(v3) == 28 )
+  ThisPtr = (Scaleform::MemoryHeap *)fn->ThisPtr;
+  if ( ThisPtr && (*(unsigned int (__fastcall **)(Scaleform::MemoryHeap *))&ThisPtr->vfptr->gap8[8])(ThisPtr) == 28 )
   {
-    v4 = v1->ThisPtr;
+    v4 = fn->ThisPtr;
     if ( v4 )
     {
       v2 = (Scaleform::GFx::AS2::XmlObject *)&v4[-2];
@@ -1818,226 +1754,214 @@ void __fastcall Scaleform::GFx::AS2::XmlCtorFunction::GlobalCtor(Scaleform::GFx:
   }
   else
   {
-    v5 = (Scaleform::GFx::AS2::XmlObject *)v1->Env->StringContext.pContext->pHeap->vfptr->Alloc(
-                                             (Scaleform::MemoryHeap *)v3,
-                                             128ui64,
-                                             0i64);
+    v5 = (Scaleform::GFx::AS2::XmlObject *)fn->Env->StringContext.pContext->pHeap->vfptr->Alloc(ThisPtr, 128i64, 0i64);
     if ( v5 )
     {
-      Scaleform::GFx::AS2::XmlObject::XmlObject(v5, v1->Env);
+      Scaleform::GFx::AS2::XmlObject::XmlObject(v5, fn->Env);
       v2 = v6;
     }
   }
-  Scaleform::GFx::AS2::XML_LoadString(v1, v2);
+  Scaleform::GFx::AS2::XML_LoadString(fn, v2);
   if ( v2 )
   {
-    v7 = v2->RefCount;
-    if ( v7 & 0x3FFFFFF )
+    RefCount = v2->RefCount;
+    if ( (RefCount & 0x3FFFFFF) != 0 )
     {
-      v2->RefCount = v7 - 1;
-      Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v2->vfptr);
+      v2->RefCount = RefCount - 1;
+      Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v2);
     }
   }
 }
 
 // File Line: 912
 // RVA: 0x6E0960
-void __fastcall Scaleform::GFx::AS2::XmlCtorFunction::CreateNewObject(Scaleform::GFx::AS2::XmlCtorFunction *this, Scaleform::GFx::AS2::Environment *penv)
+void __fastcall Scaleform::GFx::AS2::XmlCtorFunction::CreateNewObject(
+        Scaleform::GFx::AS2::XmlCtorFunction *this,
+        Scaleform::GFx::AS2::Environment *penv)
 {
-  Scaleform::GFx::AS2::Environment *v2; // rbx
   Scaleform::GFx::AS2::XmlObject *v3; // rax
 
-  v2 = penv;
-  v3 = (Scaleform::GFx::AS2::XmlObject *)penv->StringContext.pContext->pHeap->vfptr->Alloc(
-                                           (Scaleform::MemoryHeap *)this,
-                                           128ui64,
-                                           0i64);
+  v3 = (Scaleform::GFx::AS2::XmlObject *)penv->StringContext.pContext->pHeap->vfptr->Alloc(this, 128i64, 0i64);
   if ( v3 )
-    Scaleform::GFx::AS2::XmlObject::XmlObject(v3, v2);
+    Scaleform::GFx::AS2::XmlObject::XmlObject(v3, penv);
 }
 
 // File Line: 917
 // RVA: 0x70F690
-Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::XmlCtorFunction::Register(Scaleform::GFx::AS2::FunctionRef *result, Scaleform::GFx::AS2::GlobalContext *pgc)
+Scaleform::GFx::AS2::FunctionRef *__fastcall Scaleform::GFx::AS2::XmlCtorFunction::Register(
+        Scaleform::GFx::AS2::FunctionRef *result,
+        Scaleform::GFx::AS2::GlobalContext *pgc)
 {
-  Scaleform::GFx::AS2::GlobalContext *v2; // rsi
-  Scaleform::GFx::AS2::FunctionRef *v3; // rdi
-  Scaleform::GFx::AS2::RefCountBaseGC<323> *v4; // rcx
+  Scaleform::GFx::ASStringNode *pStringNode; // rcx
   char v5; // al
-  unsigned int v6; // edx
-  unsigned int v7; // eax
+  int v6; // edx
+  unsigned int RefCount; // eax
   Scaleform::GFx::AS2::Object *v8; // rax
-  Scaleform::GFx::AS2::RefCountBaseGC<323> *v9; // rcx
+  Scaleform::GFx::AS2::RefCountBaseGC<323> *pObject; // rcx
   Scaleform::GFx::AS2::FunctionObject *v10; // rbx
-  Scaleform::GFx::AS2::Object *v11; // r15
+  Scaleform::GFx::AS2::Object *Prototype; // r15
   unsigned int v12; // eax
   Scaleform::GFx::AS2::XmlProto *v13; // rbx
   Scaleform::GFx::AS2::Object *v14; // rax
   Scaleform::GFx::ASStringNode *v15; // rax
   Scaleform::GFx::ASStringNode *v16; // rbx
   Scaleform::GFx::AS2::Object *v17; // r14
-  Scaleform::GFx::AS2::LocalFrame *v18; // rax
-  Scaleform::GFx::AS2::LocalFrame *v19; // rdx
+  Scaleform::GFx::ASStringNode *Function; // rax
+  Scaleform::GFx::AS2::LocalFrame *pLocalFrame; // rdx
   unsigned int v20; // eax
-  Scaleform::GFx::AS2::ASStringContext psc; // [rsp+40h] [rbp-30h]
-  Scaleform::GFx::AS2::FunctionRef resulta; // [rsp+50h] [rbp-20h]
-  char v24; // [rsp+68h] [rbp-8h]
-  Scaleform::GFx::ASString className; // [rsp+B8h] [rbp+48h]
-  Scaleform::GFx::ASString *v26; // [rsp+C0h] [rbp+50h]
-  Scaleform::GFx::ASString *v27; // [rsp+C8h] [rbp+58h]
+  Scaleform::GFx::AS2::ASStringContext psc; // [rsp+40h] [rbp-30h] BYREF
+  Scaleform::GFx::AS2::Value resulta[2]; // [rsp+50h] [rbp-20h] BYREF
+  Scaleform::GFx::ASString className; // [rsp+B8h] [rbp+48h] BYREF
+  void *p_className; // [rsp+C0h] [rbp+50h]
+  Scaleform::GFx::ASString *v26; // [rsp+C8h] [rbp+58h]
 
-  v2 = pgc;
-  v3 = result;
-  v26 = &className;
+  p_className = &className;
   className.pNode = (Scaleform::GFx::ASStringNode *)pgc->pMovieRoot->pASMovieRoot.pObject[12].pASSupport.pObject;
   ++className.pNode->RefCount;
   if ( !Scaleform::GFx::AS2::GlobalContext::GetBuiltinClassRegistrar(pgc, (Scaleform::GFx::ASString)&className) )
   {
-    Scaleform::GFx::AS2::XmlNodeCtorFunction::Register(&resulta, v2);
-    v5 = resulta.Flags;
-    if ( !(resulta.Flags & 2) )
+    Scaleform::GFx::AS2::XmlNodeCtorFunction::Register((Scaleform::GFx::AS2::FunctionRef *)resulta, pgc);
+    v5 = *((_BYTE *)&resulta[0].NV + 16);
+    if ( (*(_BYTE *)(&resulta[0].NV + 1) & 2) == 0 )
     {
-      v4 = (Scaleform::GFx::AS2::RefCountBaseGC<323> *)&resulta.Function->vfptr;
-      if ( resulta.Function )
+      pStringNode = *(Scaleform::GFx::ASStringNode **)&resulta[0].T.Type;
+      if ( *(_QWORD *)&resulta[0].T.Type )
       {
-        v6 = resulta.Function->RefCount;
-        if ( v6 & 0x3FFFFFF )
+        v6 = *(_DWORD *)(*(_QWORD *)&resulta[0].T.Type + 24i64);
+        if ( (v6 & 0x3FFFFFF) != 0 )
         {
-          resulta.Function->RefCount = v6 - 1;
-          Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v4);
-          v5 = resulta.Flags;
+          *(_DWORD *)(*(_QWORD *)&resulta[0].T.Type + 24i64) = v6 - 1;
+          Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)pStringNode);
+          v5 = *((_BYTE *)&resulta[0].NV + 16);
         }
       }
     }
-    resulta.Function = 0i64;
-    if ( !(v5 & 1) )
+    *(_QWORD *)&resulta[0].T.Type = 0i64;
+    if ( (v5 & 1) == 0 )
     {
-      v4 = (Scaleform::GFx::AS2::RefCountBaseGC<323> *)&resulta.pLocalFrame->vfptr;
-      if ( resulta.pLocalFrame )
+      pStringNode = resulta[0].V.pStringNode;
+      if ( resulta[0].V.pStringNode )
       {
-        v7 = resulta.pLocalFrame->RefCount;
-        if ( v7 & 0x3FFFFFF )
+        RefCount = resulta[0].V.pStringNode->RefCount;
+        if ( (RefCount & 0x3FFFFFF) != 0 )
         {
-          resulta.pLocalFrame->RefCount = v7 - 1;
-          Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v4);
+          resulta[0].V.pStringNode->RefCount = RefCount - 1;
+          Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)pStringNode);
         }
       }
     }
   }
-  psc.pContext = v2;
+  psc.pContext = pgc;
   psc.SWFVersion = 8;
-  v26 = (Scaleform::GFx::ASString *)v2->pHeap;
-  v8 = (Scaleform::GFx::AS2::Object *)((__int64 (__fastcall *)(Scaleform::GFx::AS2::RefCountBaseGC<323> *, signed __int64))v26->pNode[2].pData)(
-                                        v4,
+  p_className = pgc->pHeap;
+  v8 = (Scaleform::GFx::AS2::Object *)(*(__int64 (__fastcall **)(Scaleform::GFx::ASStringNode *, __int64))(*(_QWORD *)p_className + 80i64))(
+                                        pStringNode,
                                         104i64);
   v10 = (Scaleform::GFx::AS2::FunctionObject *)v8;
-  v27 = (Scaleform::GFx::ASString *)v8;
+  v26 = (Scaleform::GFx::ASString *)v8;
   if ( v8 )
   {
     Scaleform::GFx::AS2::Object::Object(v8, &psc);
-    v10->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
-    v10->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
-    v10->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
-    v10->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
-    v10[1].vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)Scaleform::GFx::AS2::XmlCtorFunction::GlobalCtor;
-    v11 = Scaleform::GFx::AS2::GlobalContext::GetPrototype(psc.pContext, ASBuiltin_Function);
+    v10->Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>::Scaleform::GFx::AS2::RefCountBaseGC<323>::vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v10->Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ObjectInterface::vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::FunctionObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+    v10->Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>::Scaleform::GFx::AS2::RefCountBaseGC<323>::vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v10->Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ObjectInterface::vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::CFunctionObject::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+    v10[1].Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>::Scaleform::GFx::AS2::RefCountBaseGC<323>::vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)Scaleform::GFx::AS2::XmlCtorFunction::GlobalCtor;
+    Prototype = Scaleform::GFx::AS2::GlobalContext::GetPrototype(psc.pContext, ASBuiltin_Function);
     if ( !v10->pProto.pObject )
     {
       LOBYTE(className.pNode) = 3;
-      LOBYTE(resulta.Function) = 10;
-      v10->vfptr->SetMemberRaw(
-        (Scaleform::GFx::AS2::ObjectInterface *)&v10->vfptr,
+      resulta[0].T.Type = 10;
+      v10->Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ObjectInterface::vfptr->SetMemberRaw(
+        &v10->Scaleform::GFx::AS2::ObjectInterface,
         &psc,
         (Scaleform::GFx::ASString *)&psc.pContext->pMovieRoot->pASMovieRoot.pObject[23].pMovieImpl,
-        (Scaleform::GFx::AS2::Value *)&resulta,
+        resulta,
         (Scaleform::GFx::AS2::PropFlags *)&className);
-      if ( LOBYTE(resulta.Function) >= 5u )
-        Scaleform::GFx::AS2::Value::DropRefs((Scaleform::GFx::AS2::Value *)&resulta);
+      if ( resulta[0].T.Type >= 5u )
+        Scaleform::GFx::AS2::Value::DropRefs(resulta);
     }
-    if ( v11 )
-      v11->RefCount = (v11->RefCount + 1) & 0x8FFFFFFF;
-    v9 = (Scaleform::GFx::AS2::RefCountBaseGC<323> *)&v10->pProto.pObject->vfptr;
-    if ( v9 )
+    if ( Prototype )
+      Prototype->RefCount = (Prototype->RefCount + 1) & 0x8FFFFFFF;
+    pObject = v10->pProto.pObject;
+    if ( pObject )
     {
-      v12 = v9->RefCount;
-      if ( v12 & 0x3FFFFFF )
+      v12 = pObject->RefCount;
+      if ( (v12 & 0x3FFFFFF) != 0 )
       {
-        v9->RefCount = v12 - 1;
-        Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(v9);
+        pObject->RefCount = v12 - 1;
+        Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal(pObject);
       }
     }
-    v10->pProto.pObject = v11;
-    v10->vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::XmlCtorFunction::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
-    v10->vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::XmlCtorFunction::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
+    v10->pProto.pObject = Prototype;
+    v10->Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>::Scaleform::GFx::AS2::RefCountBaseGC<323>::vfptr = (Scaleform::GFx::AS2::RefCountBaseGC<323>Vtbl *)&Scaleform::GFx::AS2::XmlCtorFunction::`vftable{for `Scaleform::GFx::AS2::ASRefCountBase<Scaleform::GFx::AS2::Object>};
+    v10->Scaleform::GFx::AS2::Object::Scaleform::GFx::AS2::ObjectInterface::vfptr = (Scaleform::GFx::AS2::ObjectInterfaceVtbl *)&Scaleform::GFx::AS2::XmlCtorFunction::`vftable{for `Scaleform::GFx::AS2::ObjectInterface};
   }
   else
   {
     v10 = 0i64;
   }
-  v3->Flags = 0;
-  v3->Function = v10;
-  v3->pLocalFrame = 0i64;
-  className.pNode = (Scaleform::GFx::ASStringNode *)v2->pHeap;
-  v13 = (Scaleform::GFx::AS2::XmlProto *)(*((__int64 (__fastcall **)(Scaleform::GFx::AS2::RefCountBaseGC<323> *, signed __int64, _QWORD))className.pNode->pData
+  result->Flags = 0;
+  result->Function = v10;
+  result->pLocalFrame = 0i64;
+  className.pNode = (Scaleform::GFx::ASStringNode *)pgc->pHeap;
+  v13 = (Scaleform::GFx::AS2::XmlProto *)(*((__int64 (__fastcall **)(Scaleform::GFx::AS2::RefCountBaseGC<323> *, __int64, _QWORD))className.pNode->pData
                                           + 10))(
-                                           v9,
+                                           pObject,
                                            192i64,
                                            0i64);
-  v26 = (Scaleform::GFx::ASString *)v13;
+  p_className = v13;
   if ( v13 )
   {
-    v14 = Scaleform::GFx::AS2::GlobalContext::GetPrototype(v2, ASBuiltin_XMLNode);
-    Scaleform::GFx::AS2::XmlProto::XmlProto(v13, &psc, v14, v3);
+    v14 = Scaleform::GFx::AS2::GlobalContext::GetPrototype(pgc, ASBuiltin_XMLNode);
+    Scaleform::GFx::AS2::XmlProto::XmlProto(v13, &psc, v14, result);
     v16 = v15;
   }
   else
   {
     v16 = 0i64;
   }
-  v26 = (Scaleform::GFx::ASString *)v16;
-  v27 = &className;
+  p_className = v16;
+  v26 = &className;
   if ( v16 )
     v16->RefCount = (v16->RefCount + 1) & 0x8FFFFFFF;
   className.pNode = v16;
   Scaleform::GFx::AS2::GlobalContext::SetPrototype(
-    v2,
+    pgc,
     ASBuiltin_XML,
     (Scaleform::Ptr<Scaleform::GFx::AS2::Object>)&className);
-  v17 = v2->pGlobal.pObject;
-  LOBYTE(resulta.Function) = 8;
-  v24 = 0;
-  v18 = (Scaleform::GFx::AS2::LocalFrame *)v3->Function;
-  resulta.pLocalFrame = v18;
-  if ( v18 )
+  v17 = pgc->pGlobal.pObject;
+  resulta[0].T.Type = 8;
+  resulta[0].V.FunctionValue.Flags = 0;
+  Function = (Scaleform::GFx::ASStringNode *)result->Function;
+  resulta[0].V.pStringNode = Function;
+  if ( Function )
   {
-    ++v18->RefCount;
-    v18->RefCount &= 0x8FFFFFFF;
+    ++Function->RefCount;
+    Function->RefCount &= 0x8FFFFFFF;
   }
-  *(_QWORD *)&resulta.Flags = 0i64;
-  v19 = v3->pLocalFrame;
-  if ( v19 )
-    Scaleform::GFx::AS2::FunctionRefBase::SetLocalFrame(
-      (Scaleform::GFx::AS2::FunctionRefBase *)&resulta.pLocalFrame,
-      v19,
-      v3->Flags & 1);
+  resulta[0].V.FunctionValue.pLocalFrame = 0i64;
+  pLocalFrame = result->pLocalFrame;
+  if ( pLocalFrame )
+    Scaleform::GFx::AS2::FunctionRefBase::SetLocalFrame(&resulta[0].V.FunctionValue, pLocalFrame, result->Flags & 1);
   LOBYTE(className.pNode) = 0;
-  v17->vfptr->SetMemberRaw(
-    (Scaleform::GFx::AS2::ObjectInterface *)&v17->vfptr,
+  v17->Scaleform::GFx::AS2::ObjectInterface::vfptr->SetMemberRaw(
+    &v17->Scaleform::GFx::AS2::ObjectInterface,
     &psc,
-    (Scaleform::GFx::ASString *)&v2->pMovieRoot->pASMovieRoot.pObject[12].pMovieImpl,
-    (Scaleform::GFx::AS2::Value *)&resulta,
+    (Scaleform::GFx::ASString *)&pgc->pMovieRoot->pASMovieRoot.pObject[12].pMovieImpl,
+    resulta,
     (Scaleform::GFx::AS2::PropFlags *)&className);
-  if ( LOBYTE(resulta.Function) >= 5u )
-    Scaleform::GFx::AS2::Value::DropRefs((Scaleform::GFx::AS2::Value *)&resulta);
+  if ( resulta[0].T.Type >= 5u )
+    Scaleform::GFx::AS2::Value::DropRefs(resulta);
   if ( v16 )
   {
     v20 = v16->RefCount;
-    if ( v20 & 0x3FFFFFF )
+    if ( (v20 & 0x3FFFFFF) != 0 )
     {
       v16->RefCount = v20 - 1;
       Scaleform::GFx::AS2::RefCountBaseGC<323>::ReleaseInternal((Scaleform::GFx::AS2::RefCountBaseGC<323> *)v16);
     }
   }
-  return v3;
+  return result;
 }
 

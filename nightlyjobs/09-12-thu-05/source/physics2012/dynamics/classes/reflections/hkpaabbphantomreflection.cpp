@@ -28,23 +28,24 @@ hkClass *__fastcall hkpAabbPhantom::staticClass()
 
 // File Line: 68
 // RVA: 0xD4FA00
-void __fastcall finishLoadedObjecthkpAabbPhantom(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpAabbPhantom(hkpAabbPhantom *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpAabbPhantom::hkpAabbPhantom);
+  if ( p )
+    hkpAabbPhantom::hkpAabbPhantom(p, finishing);
 }
 
 // File Line: 74
 // RVA: 0xD4FA20
-void __fastcall cleanupLoadedObjecthkpAabbPhantom(void *p)
+void __fastcall cleanupLoadedObjecthkpAabbPhantom(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 78
 // RVA: 0xD4FA30
 hkBaseObjectVtbl *__fastcall getVtablehkpAabbPhantom()
 {
-  hkpAabbPhantom v1; // [rsp+20h] [rbp-138h]
+  hkpAabbPhantom v1; // [rsp+20h] [rbp-138h] BYREF
 
   hkpAabbPhantom::hkpAabbPhantom(&v1, 0);
   return v1.vfptr;
@@ -61,8 +62,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpAabbPhantomTypeInfo__()
   hkpAabbPhantomTypeInfo.m_typeName = "hkpAabbPhantom";
   hkpAabbPhantomTypeInfo.m_vtable = result;
   hkpAabbPhantomTypeInfo.m_scopedName = "!hkpAabbPhantom";
-  hkpAabbPhantomTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpAabbPhantom;
-  hkpAabbPhantomTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpAabbPhantom;
+  hkpAabbPhantomTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpAabbPhantom;
+  hkpAabbPhantomTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpAabbPhantom;
   return result;
 }
 

@@ -6,6 +6,6 @@ __int64 dynamic_initializer_for__CAMERA_SYMBOL_DofNearBlur__()
 
   v0 = UFG::qStringHash32("DofNearBlur", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&CAMERA_SYMBOL_DofNearBlur, v0);
-  return atexit(dynamic_atexit_destructor_for__CAMERA_SYMBOL_DofNearBlur__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__CAMERA_SYMBOL_DofNearBlur__);
 }
 

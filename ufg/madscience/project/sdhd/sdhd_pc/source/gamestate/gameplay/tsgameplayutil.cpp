@@ -3,42 +3,44 @@
 void UFG::TSGameplayUtil::BindAtomics(void)
 {
   SSClass *v0; // rbx
+  ASymbol rebind; // [rsp+20h] [rbp-18h]
+  ASymbol rebinda; // [rsp+20h] [rbp-18h]
 
+  LOBYTE(rebind.i_uid) = 0;
   v0 = SSBrain::get_class("GameplayUtil");
-  SSClass::register_method_func(v0, "allowsOperationTheme", UFG::TSGameplayUtil::MthdC_allowsOperationTheme, 1, 0);
-  SSClass::register_method_func(v0, "getStringProperty", UFG::TSGameplayUtil::MthdC_getStringProperty, 1, 0);
+  SSClass::register_method_func(v0, "allowsOperationTheme", UFG::TSGameplayUtil::MthdC_allowsOperationTheme, 1, rebind);
+  LOBYTE(rebinda.i_uid) = 0;
+  SSClass::register_method_func(v0, "getStringProperty", UFG::TSGameplayUtil::MthdC_getStringProperty, 1, rebinda);
 }
 
 // File Line: 36
 // RVA: 0x419410
 void __fastcall UFG::TSGameplayUtil::MthdC_allowsOperationTheme(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSData **v2; // r8
-  SSInstance **v3; // rbx
-  UFG::qBaseNodeRB *v4; // rax
+  SSData **i_array_p; // r8
+  UFG::qBaseNodeRB *SimObject; // rax
   UFG::qBaseNodeRB *v5; // rax
   UFG::qPropertySet *v6; // rcx
   UFG::qPropertySet *v7; // rax
   bool *v8; // rax
   bool *v9; // rcx
-  char v10; // [rsp+30h] [rbp+8h]
-  UFG::qSymbol name; // [rsp+38h] [rbp+10h]
-  UFG::qSymbol v12; // [rsp+40h] [rbp+18h]
+  char v10; // [rsp+30h] [rbp+8h] BYREF
+  UFG::qSymbol name; // [rsp+38h] [rbp+10h] BYREF
+  UFG::qArray<unsigned long,0> v12; // [rsp+40h] [rbp+18h] BYREF
 
-  v2 = pScope->i_data.i_array_p;
-  v3 = ppResult;
-  name.mUID = (*v2)->i_data_p->i_user_data;
-  v12.mUID = v2[1]->i_data_p->i_user_data;
-  v4 = UFG::Simulation::GetSimObject(&UFG::gSim, &name);
-  if ( !v4 )
-    goto LABEL_11;
-  v5 = v4[2].mChild[1];
+  i_array_p = pScope->i_data.i_array_p;
+  name.mUID = (*i_array_p)->i_data_p->i_user_data;
+  v12.size = i_array_p[1]->i_data_p->i_user_data;
+  SimObject = UFG::Simulation::GetSimObject(&UFG::gSim, &name);
+  if ( !SimObject )
+    goto LABEL_2;
+  v5 = SimObject[2].mChild[1];
   v6 = (UFG::qPropertySet *)v5[4].mChild[1];
   if ( !v6 )
     v6 = *(UFG::qPropertySet **)&v5[4].mUID;
   v7 = UFG::qPropertySet::Get<UFG::qPropertySet>(
          v6,
-         (UFG::qSymbol *)&qSymbolX_propset_gameplayOperationThemesAllowed.mUID,
+         (UFG::qArray<unsigned long,0> *)&qSymbolX_propset_gameplayOperationThemesAllowed,
          DEPTH_RECURSE);
   if ( v7 )
   {
@@ -47,12 +49,12 @@ void __fastcall UFG::TSGameplayUtil::MthdC_allowsOperationTheme(SSInvokedMethod 
     v9 = (bool *)&v10;
     if ( v8 )
       v9 = v8;
-    *v3 = (SSInstance *)SSBoolean::pool_new(*v9);
+    *ppResult = SSBoolean::pool_new(*v9);
   }
   else
   {
-LABEL_11:
-    *v3 = (SSInstance *)SSBoolean::pool_new(1);
+LABEL_2:
+    *ppResult = SSBoolean::pool_new(1);
   }
 }
 
@@ -60,34 +62,30 @@ LABEL_11:
 // RVA: 0x4194D0
 void __fastcall UFG::TSGameplayUtil::MthdC_getStringProperty(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance **v2; // rbx
-  SSData **v3; // r8
-  UFG::qBaseNodeRB *v4; // rax
+  SSData **i_array_p; // r8
+  UFG::qBaseNodeRB *SimObject; // rax
   UFG::qBaseNodeRB *v5; // rax
   UFG::qPropertySet *v6; // rcx
   char *v7; // rax
   AString *v8; // rax
-  AStringRef *v9; // rbx
-  bool v10; // zf
-  AObjReusePool<AStringRef> *v11; // rax
-  AObjBlock<AStringRef> *v12; // rcx
-  unsigned __int64 v13; // rdx
+  AStringRef *p; // rbx
+  AObjReusePool<AStringRef> *pool; // rax
+  AObjBlock<AStringRef> *i_block_p; // rcx
+  unsigned __int64 i_objects_a; // rdx
   bool v14; // cf
-  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *v15; // rcx
-  UFG::qString v16; // [rsp+28h] [rbp-30h]
-  UFG::qSymbol name; // [rsp+60h] [rbp+8h]
-  UFG::qSymbol v18; // [rsp+70h] [rbp+18h]
-  AString v19; // [rsp+78h] [rbp+20h]
+  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *p_i_exp_pool; // rcx
+  UFG::qString v16; // [rsp+28h] [rbp-30h] BYREF
+  UFG::qSymbol name; // [rsp+60h] [rbp+8h] BYREF
+  UFG::qArray<unsigned long,0> v18; // [rsp+70h] [rbp+18h] BYREF
 
-  v2 = ppResult;
-  v3 = pScope->i_data.i_array_p;
-  name.mUID = (*v3)->i_data_p->i_user_data;
-  v18.mUID = v3[1]->i_data_p->i_user_data;
+  i_array_p = pScope->i_data.i_array_p;
+  name.mUID = (*i_array_p)->i_data_p->i_user_data;
+  v18.size = i_array_p[1]->i_data_p->i_user_data;
   UFG::qString::qString(&v16);
-  v4 = UFG::Simulation::GetSimObject(&UFG::gSim, &name);
-  if ( v4 )
+  SimObject = UFG::Simulation::GetSimObject(&UFG::gSim, &name);
+  if ( SimObject )
   {
-    v5 = v4[2].mChild[1];
+    v5 = SimObject[2].mChild[1];
     v6 = (UFG::qPropertySet *)v5[4].mChild[1];
     if ( !v6 )
       v6 = *(UFG::qPropertySet **)&v5[4].mUID;
@@ -95,24 +93,22 @@ void __fastcall UFG::TSGameplayUtil::MthdC_getStringProperty(SSInvokedMethod *pS
     if ( v7 )
     {
       UFG::qString::Set(&v16, v7);
-      AString::AString(&v19, v16.mData, 0);
-      *v2 = SSString::as_instance(v8);
-      v9 = v19.i_str_ref_p;
-      v10 = v19.i_str_ref_p->i_ref_count == 1;
-      --v9->i_ref_count;
-      if ( v10 )
+      AString::AString((AString *)&v18.p, v16.mData, 0);
+      *ppResult = SSString::as_instance(v8);
+      p = (AStringRef *)v18.p;
+      if ( (*((_WORD *)v18.p + 8))-- == 1 )
       {
-        if ( v9->i_deallocate )
-          AMemory::c_free_func(v9->i_cstr_p);
-        v11 = AStringRef::get_pool();
-        v12 = v11->i_block_p;
-        v13 = (unsigned __int64)v12->i_objects_a;
-        if ( (unsigned __int64)v9 < v13
-          || (v14 = (unsigned __int64)v9 < v13 + 24i64 * v12->i_size, v15 = &v11->i_pool, !v14) )
+        if ( p->i_deallocate )
+          AMemory::c_free_func(p->i_cstr_p);
+        pool = AStringRef::get_pool();
+        i_block_p = pool->i_block_p;
+        i_objects_a = (unsigned __int64)i_block_p->i_objects_a;
+        if ( (unsigned __int64)p < i_objects_a
+          || (v14 = (unsigned __int64)p < i_objects_a + 24i64 * i_block_p->i_size, p_i_exp_pool = &pool->i_pool, !v14) )
         {
-          v15 = &v11->i_exp_pool;
+          p_i_exp_pool = &pool->i_exp_pool;
         }
-        APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(v15, v9);
+        APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(p_i_exp_pool, p);
       }
     }
   }

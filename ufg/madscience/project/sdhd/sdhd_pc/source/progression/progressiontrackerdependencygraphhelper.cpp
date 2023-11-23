@@ -2,54 +2,52 @@
 // RVA: 0x4ADF10
 bool __fastcall UFG::ProgressionTracker::LoadDependencyGraph(UFG::ProgressionTracker *this)
 {
-  UFG::ProgressionTracker *v1; // rbp
   SimpleXML::XMLDocument *v2; // rax
   SimpleXML::XMLDocument *v3; // r14
   char v4; // r15
-  SimpleXML::XMLNode *v5; // rax
+  SimpleXML::XMLNode *Node; // rax
   SimpleXML::XMLNode *v6; // rbx
-  char *v7; // rax
-  SimpleXML::XMLNode *v8; // rdi
+  char *Attribute; // rax
+  SimpleXML::XMLNode *ChildNode; // rdi
   char *v9; // rbx
   char *v10; // rsi
   UFG::GameSlice *v11; // rbx
-  UFG::qSymbol result; // [rsp+50h] [rbp+8h]
-  UFG::qSymbol v14; // [rsp+58h] [rbp+10h]
+  UFG::qSymbol result; // [rsp+50h] [rbp+8h] BYREF
+  UFG::qSymbol v14; // [rsp+58h] [rbp+10h] BYREF
 
-  v1 = this;
   v2 = SimpleXML::XMLDocument::Open(this->mDependencyGraphName.mData, 1ui64, 0i64);
   v3 = v2;
   if ( v2 )
   {
     v4 = 0;
-    v5 = SimpleXML::XMLDocument::GetNode(v2, "dependencygraph", 0i64);
-    v6 = v5;
-    if ( v5 )
+    Node = SimpleXML::XMLDocument::GetNode(v2, "dependencygraph", 0i64);
+    v6 = Node;
+    if ( Node )
     {
-      v7 = SimpleXML::XMLNode::GetAttribute(v5, "globalalternatelayer");
-      if ( v7 )
-        UFG::qString::Set(&v1->mGlobalAlternateLayer, v7);
-      v8 = SimpleXML::XMLDocument::GetChildNode(v3, "graphitem", v6);
-      if ( v8 )
+      Attribute = SimpleXML::XMLNode::GetAttribute(Node, "globalalternatelayer");
+      if ( Attribute )
+        UFG::qString::Set(&this->mGlobalAlternateLayer, Attribute);
+      ChildNode = SimpleXML::XMLDocument::GetChildNode(v3, "graphitem", v6);
+      if ( ChildNode )
       {
         while ( 1 )
         {
-          v9 = SimpleXML::XMLNode::GetAttribute(v8, "name");
-          v10 = SimpleXML::XMLNode::GetAttribute(v8, "requires");
+          v9 = SimpleXML::XMLNode::GetAttribute(ChildNode, "name");
+          v10 = SimpleXML::XMLNode::GetAttribute(ChildNode, "requires");
           UFG::qSymbol::create_from_string(&result, v9);
           if ( !result.mUID )
             break;
-          v11 = (UFG::GameSlice *)UFG::qBaseTreeRB::Get(&v1->mDisabledGameSlices.mTree, result.mUID);
+          v11 = (UFG::GameSlice *)UFG::qBaseTreeRB::Get(&this->mDisabledGameSlices.mTree, result.mUID);
           if ( !v11 )
           {
             if ( !result.mUID )
               break;
-            v11 = (UFG::GameSlice *)UFG::qBaseTreeRB::Get(&v1->mGameSlices.mTree, result.mUID);
+            v11 = (UFG::GameSlice *)UFG::qBaseTreeRB::Get(&this->mGameSlices.mTree, result.mUID);
             if ( !v11 )
             {
               if ( !result.mUID )
                 break;
-              v11 = (UFG::GameSlice *)UFG::qBaseTreeRB::Get(&v1->mContainerGameSlices.mTree, result.mUID);
+              v11 = (UFG::GameSlice *)UFG::qBaseTreeRB::Get(&this->mContainerGameSlices.mTree, result.mUID);
             }
           }
 LABEL_13:
@@ -60,7 +58,7 @@ LABEL_13:
             UFG::qSymbol::create_from_string(&v14, v10);
             if ( v11 )
             {
-              if ( (signed int)v11->mChildren.mCount > 0 )
+              if ( (int)v11->mChildren.mCount > 0 )
                 v11 = *v11->mChildren.mppArray;
               if ( v11 )
               {
@@ -73,8 +71,8 @@ LABEL_13:
           {
             v11->mRoot = 1;
           }
-          v8 = SimpleXML::XMLDocument::GetNode(v3, "graphitem", v8);
-          if ( !v8 )
+          ChildNode = SimpleXML::XMLDocument::GetNode(v3, "graphitem", ChildNode);
+          if ( !ChildNode )
             goto LABEL_23;
         }
         v11 = 0i64;

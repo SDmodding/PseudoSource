@@ -3,15 +3,15 @@
 void __fastcall UFG::RadioStationAsset::~RadioStationAsset(UFG::RadioStationAsset *this)
 {
   UFG::qNode<UFG::RadioStationAsset,UFG::RadioStationAsset> *v1; // rdx
-  UFG::qNode<UFG::RadioStationAsset,UFG::RadioStationAsset> *v2; // rcx
-  UFG::qNode<UFG::RadioStationAsset,UFG::RadioStationAsset> *v3; // rax
+  UFG::qNode<UFG::RadioStationAsset,UFG::RadioStationAsset> *mPrev; // rcx
+  UFG::qNode<UFG::RadioStationAsset,UFG::RadioStationAsset> *mNext; // rax
 
   this->vfptr = (UFG::RadioStationAssetVtbl *)&UFG::RadioStationAsset::`vftable;
-  v1 = (UFG::qNode<UFG::RadioStationAsset,UFG::RadioStationAsset> *)&this->mPrev;
-  v2 = this->mPrev;
-  v3 = v1->mNext;
-  v2->mNext = v3;
-  v3->mPrev = v2;
+  v1 = &this->UFG::qNode<UFG::RadioStationAsset,UFG::RadioStationAsset>;
+  mPrev = this->mPrev;
+  mNext = v1->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
   v1->mPrev = v1;
   v1->mNext = v1;
 }
@@ -20,64 +20,62 @@ void __fastcall UFG::RadioStationAsset::~RadioStationAsset(UFG::RadioStationAsse
 // RVA: 0x66CFE0
 void __fastcall UFG::TrackAsset::~TrackAsset(UFG::TrackAsset *this)
 {
-  UFG::TrackAsset *v1; // rbx
-  char *v2; // rcx
-  char *v3; // rcx
-  UFG::qNode<UFG::RadioStationAsset,UFG::RadioStationAsset> *v4; // rdx
-  UFG::qNode<UFG::RadioStationAsset,UFG::RadioStationAsset> *v5; // rcx
-  UFG::qNode<UFG::RadioStationAsset,UFG::RadioStationAsset> *v6; // rax
+  char *m_trackName; // rcx
+  char *m_artistName; // rcx
+  UFG::qNode<UFG::RadioStationAsset,UFG::RadioStationAsset> *mPrev; // rcx
+  UFG::qNode<UFG::RadioStationAsset,UFG::RadioStationAsset> *mNext; // rax
 
-  v1 = this;
   this->vfptr = (UFG::RadioStationAssetVtbl *)&UFG::TrackAsset::`vftable;
-  v2 = this->m_trackName;
-  if ( v2 )
+  m_trackName = this->m_trackName;
+  if ( m_trackName )
   {
-    operator delete[](v2);
-    v1->m_trackName = 0i64;
+    operator delete[](m_trackName);
+    this->m_trackName = 0i64;
   }
-  v3 = v1->m_artistName;
-  if ( v3 )
+  m_artistName = this->m_artistName;
+  if ( m_artistName )
   {
-    operator delete[](v3);
-    v1->m_artistName = 0i64;
+    operator delete[](m_artistName);
+    this->m_artistName = 0i64;
   }
-  v1->vfptr = (UFG::RadioStationAssetVtbl *)&UFG::RadioStationAsset::`vftable;
-  v4 = (UFG::qNode<UFG::RadioStationAsset,UFG::RadioStationAsset> *)&v1->mPrev;
-  v5 = v1->mPrev;
-  v6 = v1->mNext;
-  v5->mNext = v6;
-  v6->mPrev = v5;
-  v4->mPrev = v4;
-  v4->mNext = v4;
+  this->vfptr = (UFG::RadioStationAssetVtbl *)&UFG::RadioStationAsset::`vftable;
+  mPrev = this->mPrev;
+  mNext = this->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->mPrev = &this->UFG::qNode<UFG::RadioStationAsset,UFG::RadioStationAsset>;
+  this->mNext = &this->UFG::qNode<UFG::RadioStationAsset,UFG::RadioStationAsset>;
 }
 
 // File Line: 217
 // RVA: 0x68A500
-void __fastcall UFG::RadioStation::SetCurrentlyPlaying(UFG::RadioStation *this, UFG::RadioStationAsset *currentlyPlaying)
+void __fastcall UFG::RadioStation::SetCurrentlyPlaying(
+        UFG::RadioStation *this,
+        UFG::RadioStationAsset *currentlyPlaying)
 {
-  UFG::RadioStationAsset *v2; // rbx
-  UFG::RadioStation *v3; // rdi
-  UFG::qNode<UFG::RadioStationAsset,UFG::RadioStationAsset> *v4; // rcx
+  UFG::qNode<UFG::RadioStationAsset,UFG::RadioStationAsset> *mNext; // rcx
 
-  v2 = currentlyPlaying;
-  v3 = this;
   if ( !currentlyPlaying || currentlyPlaying->m_type )
   {
-    UFG::qString::Set(&this->m_currentlyPlayingAssetName, &customWorldMapCaption);
-    v3->m_currentlyPlaying = v2;
+    UFG::qString::Set(&this->m_currentlyPlayingAssetName, &customCaption);
+    this->m_currentlyPlaying = currentlyPlaying;
   }
   else
   {
-    v4 = currentlyPlaying[1].mNext;
-    if ( v4 && (unsigned int)UFG::qStringCompare((const char *)v4, "(null)", -1) )
+    mNext = currentlyPlaying[1].mNext;
+    if ( mNext && (unsigned int)UFG::qStringCompare((const char *)mNext, "(null)", -1) )
     {
-      UFG::qString::Format(&v3->m_currentlyPlayingAssetName, "%s - %s\n", v2[1].mNext, v2[1].mPrev);
-      v3->m_currentlyPlaying = v2;
+      UFG::qString::Format(
+        &this->m_currentlyPlayingAssetName,
+        "%s - %s\n",
+        (const char *)currentlyPlaying[1].mNext,
+        (const char *)currentlyPlaying[1].mPrev);
+      this->m_currentlyPlaying = currentlyPlaying;
     }
     else
     {
-      UFG::qString::Format(&v3->m_currentlyPlayingAssetName, "%s\n", v2[1].mPrev);
-      v3->m_currentlyPlaying = v2;
+      UFG::qString::Format(&this->m_currentlyPlayingAssetName, "%s\n", (const char *)currentlyPlaying[1].mPrev);
+      this->m_currentlyPlaying = currentlyPlaying;
     }
   }
 }
@@ -86,14 +84,12 @@ void __fastcall UFG::RadioStation::SetCurrentlyPlaying(UFG::RadioStation *this, 
 // RVA: 0x66CD20
 void __fastcall UFG::Radio::~Radio(UFG::Radio *this)
 {
-  UFG::Radio *v1; // rbx
-  UFG::AudioEvent *v2; // rcx
+  UFG::AudioEvent *m_pEvent; // rcx
 
-  v1 = this;
   this->vfptr = (UFG::AudioEntityVtbl *)&UFG::Radio::`vftable;
-  v2 = this->m_ecRadio.m_pEvent;
-  if ( v2 )
-    UFG::AudioEvent::OnControllerDestroy(v2);
-  UFG::AudioEntity::~AudioEntity((UFG::AudioEntity *)&v1->vfptr);
+  m_pEvent = this->m_ecRadio.m_pEvent;
+  if ( m_pEvent )
+    UFG::AudioEvent::OnControllerDestroy(m_pEvent);
+  UFG::AudioEntity::~AudioEntity(this);
 }
 

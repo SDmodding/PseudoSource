@@ -4,20 +4,20 @@ UFG::ComponentIDDesc *__fastcall UFG::ProgressionCameraComponent::AccessComponen
 {
   UFG::ComponentIDDesc *v0; // rax
   int v1; // edx
-  _DWORD v3[6]; // [rsp+20h] [rbp-18h]
+  int v3; // [rsp+20h] [rbp-18h]
 
   if ( !UFG::ProgressionCameraComponent::_DescInit )
   {
     v0 = UFG::GameCameraComponent::AccessComponentDesc();
     ++UFG::BaseCameraComponent::_TypeIDesc.mChildren;
     v1 = v0->mChildBitMask | (1 << SLOBYTE(UFG::BaseCameraComponent::_TypeIDesc.mChildren));
-    LOWORD(v3[0]) = v0->mBaseTypeIndex;
-    *(_DWORD *)&UFG::ProgressionCameraComponent::_TypeIDesc.mBaseTypeIndex = v3[0];
+    LOWORD(v3) = v0->mBaseTypeIndex;
+    *(_DWORD *)&UFG::ProgressionCameraComponent::_TypeIDesc.mBaseTypeIndex = v3;
     UFG::ProgressionCameraComponent::_TypeIDesc.mChildBitMask = v1;
     UFG::ProgressionCameraComponent::_TypeIDesc.mChildren = 0;
     UFG::ProgressionCameraComponent::_DescInit = 1;
-    UFG::ProgressionCameraComponent::_TypeUID = v1 | (LOWORD(v3[0]) << 25);
-    UFG::ProgressionCameraComponent::_ProgressionCameraComponentTypeUID = v1 | (LOWORD(v3[0]) << 25);
+    UFG::ProgressionCameraComponent::_TypeUID = v1 | ((unsigned __int16)v3 << 25);
+    UFG::ProgressionCameraComponent::_ProgressionCameraComponentTypeUID = v1 | ((unsigned __int16)v3 << 25);
   }
   return &UFG::ProgressionCameraComponent::_TypeIDesc;
 }

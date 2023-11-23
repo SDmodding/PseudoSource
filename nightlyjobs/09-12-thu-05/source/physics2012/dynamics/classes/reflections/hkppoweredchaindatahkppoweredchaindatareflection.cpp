@@ -63,23 +63,24 @@ hkClass *__fastcall hkpPoweredChainData::staticClass()
 
 // File Line: 150
 // RVA: 0xD51560
-void __fastcall finishLoadedObjecthkpPoweredChainData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpPoweredChainData(hkpPoweredChainData *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpPoweredChainData::hkpPoweredChainData);
+  if ( p )
+    hkpPoweredChainData::hkpPoweredChainData(p, finishing);
 }
 
 // File Line: 156
 // RVA: 0xD51580
-void __fastcall cleanupLoadedObjecthkpPoweredChainData(void *p)
+void __fastcall cleanupLoadedObjecthkpPoweredChainData(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 160
 // RVA: 0xD51590
 hkBaseObjectVtbl *__fastcall getVtablehkpPoweredChainData()
 {
-  hkpPoweredChainData v1; // [rsp+20h] [rbp-78h]
+  hkpPoweredChainData v1; // [rsp+20h] [rbp-78h] BYREF
 
   hkpPoweredChainData::hkpPoweredChainData(&v1, 0);
   return v1.vfptr;
@@ -96,8 +97,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpPoweredChainDataTypeInfo__()
   hkpPoweredChainDataTypeInfo.m_typeName = "hkpPoweredChainData";
   hkpPoweredChainDataTypeInfo.m_vtable = result;
   hkpPoweredChainDataTypeInfo.m_scopedName = "!hkpPoweredChainData";
-  hkpPoweredChainDataTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpPoweredChainData;
-  hkpPoweredChainDataTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpPoweredChainData;
+  hkpPoweredChainDataTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpPoweredChainData;
+  hkpPoweredChainDataTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpPoweredChainData;
   return result;
 }
 

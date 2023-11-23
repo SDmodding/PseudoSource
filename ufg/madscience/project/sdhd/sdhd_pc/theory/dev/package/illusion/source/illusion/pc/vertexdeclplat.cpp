@@ -3,7 +3,6 @@
 void __fastcall Illusion::IVertexDeclPlat::OnLoad(Illusion::IVertexDeclPlat *this)
 {
   __int64 v1; // rax
-  Illusion::IVertexDeclPlat *v2; // rbx
   AMD_HD3D *v3; // rdi
   unsigned int v4; // eax
   unsigned __int64 v5; // rax
@@ -15,8 +14,8 @@ void __fastcall Illusion::IVertexDeclPlat::OnLoad(Illusion::IVertexDeclPlat *thi
   __int64 v11; // r10
   __int64 v12; // rax
   __int64 v13; // rdx
-  signed __int64 v14; // rcx
-  signed __int64 v15; // r9
+  Illusion::IVertexDeclPlat *v14; // rcx
+  Illusion::IVertexDeclPlat *v15; // r9
   const char *v16; // rax
   unsigned int v17; // ecx
   int v18; // eax
@@ -24,7 +23,6 @@ void __fastcall Illusion::IVertexDeclPlat::OnLoad(Illusion::IVertexDeclPlat *thi
   BOOL v20; // eax
 
   v1 = *(_QWORD *)&this[144];
-  v2 = this;
   if ( v1 )
     v3 = (AMD_HD3D *)&this[v1 + 144];
   else
@@ -36,24 +34,24 @@ void __fastcall Illusion::IVertexDeclPlat::OnLoad(Illusion::IVertexDeclPlat *thi
   if ( !is_mul_ok(v6, 0x20ui64) )
     v5 = -1i64;
   v7 = UFG::qMalloc(v5, "VertexDeclPlat element desc array", 0i64);
-  v8 = 32i64 * *(unsigned int *)&v2[128];
-  *(_QWORD *)&v2[136] = v7;
+  v8 = 32i64 * *(unsigned int *)&this[128];
+  *(_QWORD *)&this[136] = v7;
   memset(v7, 0, v8);
   v9 = 0;
-  if ( *(_DWORD *)&v2[96] > 0 )
+  if ( *(int *)&this[96] > 0 )
   {
     v10 = 0i64;
     v11 = 0i64;
     do
     {
-      v12 = *(_QWORD *)&v2[88];
-      v13 = v11 + *(_QWORD *)&v2[136];
+      v12 = *(_QWORD *)&this[88];
+      v13 = v11 + *(_QWORD *)&this[136];
       if ( v12 )
-        v14 = (signed __int64)&v2[v12 + 88];
+        v14 = &this[v12 + 88];
       else
         v14 = 0i64;
-      v15 = v10 + v14;
-      switch ( *(_DWORD *)(v10 + v14) )
+      v15 = &v14[v10];
+      switch ( *(_DWORD *)&v14[v10] )
       {
         case 0:
           *(_QWORD *)v13 = "POSITION";
@@ -118,7 +116,7 @@ LABEL_29:
         default:
           break;
       }
-      switch ( *(_DWORD *)(v15 + 4) )
+      switch ( *(_DWORD *)&v15[4] )
       {
         case 0:
           *(_DWORD *)(v13 + 12) = 6;
@@ -159,8 +157,8 @@ LABEL_29:
         default:
           break;
       }
-      v17 = *(signed __int16 *)(v15 + 8);
-      v18 = *(_DWORD *)&v2[116];
+      v17 = *(__int16 *)&v15[8];
+      v18 = *(_DWORD *)&this[116];
       v19 = 0;
       if ( _bittest(&v18, v17) )
       {
@@ -176,7 +174,7 @@ LABEL_29:
       v11 += 32i64;
       v10 += 36i64;
     }
-    while ( v9 < *(_DWORD *)&v2[96] );
+    while ( v9 < *(_DWORD *)&this[96] );
   }
   _(v3);
 }
@@ -185,14 +183,12 @@ LABEL_29:
 // RVA: 0xA1F2F0
 void __fastcall Illusion::IVertexDeclPlat::OnUnload(Illusion::IVertexDeclPlat *this)
 {
-  Illusion::VertexDecl *v1; // rbx
   __int64 v2; // rax
   AMD_HD3D *v3; // rdi
   UFG::qThreadSafeHandle<Illusion::CombinedObjectCache<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout> >::TemporaryAccessor *v4; // rax
-  UFG::qBaseNodeRB *v5; // rcx
-  UFG::qThreadSafeHandle<Illusion::CombinedObjectCache<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout> >::TemporaryAccessor result; // [rsp+28h] [rbp-20h]
+  void *v5; // rcx
+  UFG::qThreadSafeHandle<Illusion::CombinedObjectCache<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout> >::TemporaryAccessor result; // [rsp+28h] [rbp-20h] BYREF
 
-  v1 = (Illusion::VertexDecl *)this;
   v2 = *(_QWORD *)&this[144];
   if ( v2 )
     v3 = (AMD_HD3D *)&this[v2 + 144];
@@ -201,14 +197,16 @@ void __fastcall Illusion::IVertexDeclPlat::OnUnload(Illusion::IVertexDeclPlat *t
   v4 = UFG::qThreadSafeHandle<Illusion::CombinedObjectCache<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout>>::operator->(
          &unk_14249AF60,
          &result);
-  Illusion::CombinedObjectCache<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout>::RemoveObject(v4->mObj, v1);
+  Illusion::CombinedObjectCache<Illusion::Shader,Illusion::VertexDecl,ID3D11InputLayout>::RemoveObject(
+    v4->mObj,
+    (Illusion::VertexDecl *)this);
   UFG::qMutex::Unlock((LPCRITICAL_SECTION)result.mLock.mMutex);
   _(v3);
-  v5 = v1[1].mNode.mChild[0];
+  v5 = *(void **)&this[136];
   if ( v5 )
   {
     operator delete[](v5);
-    v1[1].mNode.mChild[0] = 0i64;
+    *(_QWORD *)&this[136] = 0i64;
   }
 }
 

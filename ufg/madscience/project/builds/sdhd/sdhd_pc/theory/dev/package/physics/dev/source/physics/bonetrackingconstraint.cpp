@@ -3,6 +3,6 @@
 __int64 dynamic_initializer_for__BoneTrackingConstraintData::mNameID__()
 {
   UFG::qSymbol::create_from_string(&BoneTrackingConstraintData::mNameID, "BoneTrackingConstraint");
-  return atexit(dynamic_atexit_destructor_for__BoneTrackingConstraintData::mNameID__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__BoneTrackingConstraintData::mNameID__);
 }
 

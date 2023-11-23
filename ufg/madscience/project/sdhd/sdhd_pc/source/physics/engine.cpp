@@ -1,83 +1,80 @@
 // File Line: 44
 // RVA: 0x469FB0
-void __fastcall UFG::Engine::InitializeFromPropertySet(UFG::Engine *this, UFG::WheeledVehiclePhysicsDef *vehicle_data_ptr)
+void __fastcall UFG::Engine::InitializeFromPropertySet(
+        UFG::Engine *this,
+        UFG::WheeledVehiclePhysicsDef *vehicle_data_ptr)
 {
-  UFG::WheeledVehiclePhysicsDef *v2; // rdi
-  UFG::Engine *v3; // rbx
-  unsigned int v4; // esi
-  float *v5; // rcx
+  int mNumItems; // esi
+  float *p; // rcx
   unsigned int v6; // ebp
   unsigned int v7; // edx
-  signed __int64 v8; // rdx
+  __int64 v8; // rdx
   unsigned int v9; // eax
   __int64 v10; // r8
-  signed __int64 v11; // rdx
+  __int64 v11; // rdx
   __int64 v12; // r8
 
-  v2 = vehicle_data_ptr;
-  v3 = this;
   this->m_clutchSlipRPM = vehicle_data_ptr->engine_clutchSlipRPM;
-  v4 = vehicle_data_ptr->torqueTable.mData.mNumItems;
-  if ( v4 )
+  mNumItems = vehicle_data_ptr->torqueTable.mData.mNumItems;
+  if ( mNumItems )
   {
-    v5 = this->mTorqueTable.p;
-    if ( v5 )
-      operator delete[](v5);
+    p = this->mTorqueTable.p;
+    if ( p )
+      operator delete[](p);
     v6 = 0;
-    v3->mTorqueTable.p = 0i64;
-    *(_QWORD *)&v3->mTorqueTable.size = 0i64;
-    if ( (signed int)v4 <= 0 )
+    this->mTorqueTable.p = 0i64;
+    *(_QWORD *)&this->mTorqueTable.size = 0i64;
+    if ( mNumItems <= 0 )
     {
-      if ( v4 )
-        v3->mTorqueTable.size = 0;
+      this->mTorqueTable.size = 0;
     }
     else
     {
       v7 = 1;
-      if ( v4 <= 1 )
-        goto LABEL_25;
+      if ( (unsigned int)mNumItems <= 1 )
+        goto LABEL_8;
       do
         v7 *= 2;
-      while ( v7 < v4 );
+      while ( v7 < mNumItems );
       if ( v7 <= 4 )
-LABEL_25:
+LABEL_8:
         v7 = 4;
-      if ( v7 - v4 > 0x10000 )
-        v7 = v4 + 0x10000;
-      UFG::qArray<float,0>::Reallocate(&v3->mTorqueTable, v7, "mTorqueTable");
-      v3->mTorqueTable.size = v4;
+      if ( v7 - mNumItems > 0x10000 )
+        v7 = mNumItems + 0x10000;
+      UFG::qArray<float,0>::Reallocate(&this->mTorqueTable, v7, "mTorqueTable");
+      this->mTorqueTable.size = mNumItems;
     }
     v8 = 0i64;
-    if ( (signed int)v4 >= 4 )
+    if ( mNumItems >= 4 )
     {
-      v9 = ((v4 - 4) >> 2) + 1;
+      v9 = ((unsigned int)(mNumItems - 4) >> 2) + 1;
       v10 = v9;
       v6 = 4 * v9;
       do
       {
         v8 += 4i64;
-        v3->mTorqueTable.p[v8 - 4] = v2->torqueTable.mData.mItems[v8 - 4];
-        v3->mTorqueTable.p[v8 - 3] = v2->torqueTable.mData.mItems[v8 - 3];
-        v3->mTorqueTable.p[v8 - 2] = v2->torqueTable.mData.mItems[v8 - 2];
-        v3->mTorqueTable.p[v8 - 1] = v2->torqueTable.mData.mItems[v8 - 1];
+        this->mTorqueTable.p[v8 - 4] = vehicle_data_ptr->torqueTable.mData.mItems[v8 - 4];
+        this->mTorqueTable.p[v8 - 3] = vehicle_data_ptr->torqueTable.mData.mItems[v8 - 3];
+        this->mTorqueTable.p[v8 - 2] = vehicle_data_ptr->torqueTable.mData.mItems[v8 - 2];
+        this->mTorqueTable.p[v8 - 1] = vehicle_data_ptr->torqueTable.mData.mItems[v8 - 1];
         --v10;
       }
       while ( v10 );
     }
-    if ( v6 < v4 )
+    if ( v6 < mNumItems )
     {
       v11 = v8;
-      v12 = v4 - v6;
+      v12 = mNumItems - v6;
       do
       {
         ++v11;
-        v3->mTorqueTable.p[v11 - 1] = v2->torqueTable.mData.mItems[v11 - 1];
+        this->mTorqueTable.p[v11 - 1] = vehicle_data_ptr->torqueTable.mData.mItems[v11 - 1];
         --v12;
       }
       while ( v12 );
     }
-    v3->m_minRPM = 500.0;
-    v3->m_maxRPM = (float)(signed int)v4 * 500.0;
+    this->m_minRPM = 500.0;
+    this->m_maxRPM = (float)mNumItems * 500.0;
   }
   else
   {
@@ -88,105 +85,109 @@ LABEL_25:
     this->m_torqueFactorAtMinRPM = vehicle_data_ptr->engine_torqueFactorAtMinRPM;
     this->m_torqueFactorAtMaxRPM = vehicle_data_ptr->engine_torqueFactorAtMaxRPM;
   }
-  v3->mEngineResistanceMin = v2->engine_resistanceMin;
-  v3->mEngineResistanceMax = v2->engine_resistanceMax;
-  v3->mEngineResistanceMinSpeed = v2->engine_resistanceMinSpeed;
-  v3->mEngineResistanceMaxSpeed = v2->engine_resistanceMaxSpeed;
+  this->mEngineResistanceMin = vehicle_data_ptr->engine_resistanceMin;
+  this->mEngineResistanceMax = vehicle_data_ptr->engine_resistanceMax;
+  this->mEngineResistanceMinSpeed = vehicle_data_ptr->engine_resistanceMinSpeed;
+  this->mEngineResistanceMaxSpeed = vehicle_data_ptr->engine_resistanceMaxSpeed;
 }
 
 // File Line: 84
 // RVA: 0x483A60
-void __fastcall UFG::Engine::calcEngineInfo(UFG::Engine *this, const float deltaTime, hkpVehicleInstance *vehicle, hkpVehicleDriverInput::FilteredDriverInputOutput *filteredDriverInputOutput, hkpVehicleTransmission::TransmissionOutput *transmissionInfo, hkpVehicleEngine::EngineOutput *engineOutput)
+void __fastcall UFG::Engine::calcEngineInfo(
+        UFG::Engine *this,
+        const float deltaTime,
+        hkpVehicleInstance *vehicle,
+        hkpVehicleDriverInput::FilteredDriverInputOutput *filteredDriverInputOutput,
+        hkpVehicleTransmission::TransmissionOutput *transmissionInfo,
+        hkpVehicleEngine::EngineOutput *engineOutput)
 {
-  hkpVehicleInstance *v6; // r10
-  UFG::Engine *v7; // rbx
-  float v8; // xmm11_4
+  float m_acceleratorPedalInput; // xmm11_4
   float v9; // xmm1_4
-  float v10; // xmm0_4
-  float v11; // xmm2_4
+  float m_clutchSlipRPM; // xmm0_4
+  float m_rpm; // xmm2_4
   float v12; // xmm3_4
-  float v13; // xmm6_4
+  float m_maxTorque; // xmm6_4
   float v14; // xmm0_4
-  __m128 v15; // xmm1
-  signed int v16; // ecx
-  unsigned int v17; // er8
+  __m128 m_rpm_low; // xmm1
+  int v16; // ecx
+  unsigned int v17; // r8d
   float v18; // xmm2_4
   __int64 v19; // rdx
-  float v20; // xmm2_4
+  float m_minRPM; // xmm2_4
   float v21; // xmm0_4
-  float v22; // xmm3_4
+  float m_optRPM; // xmm3_4
   float v23; // xmm2_4
   float v24; // xmm6_4
-  float v25; // xmm1_4
-  float v26; // xmm0_4
+  float m_maxRPM; // xmm1_4
+  float mDamage; // xmm0_4
   float v27; // xmm9_4
-  float v28; // xmm10_4
-  float v29; // xmm1_4
-  float v30; // xmm2_4
-  float v31; // xmm0_4
-  float v32; // xmm7_4
-  float v33; // xmm5_4
-  float v34; // xmm3_4
-  float v35; // xmm6_4
-  float v36; // xmm1_4
+  double v28; // xmm0_8
+  float v29; // xmm10_4
+  float v30; // xmm1_4
+  float mEngineResistanceMax; // xmm2_4
+  float mEngineResistanceMin; // xmm0_4
+  float mEngineResistanceMinSpeed; // xmm7_4
+  float v34; // xmm5_4
+  float v35; // xmm3_4
+  float v36; // xmm6_4
   float v37; // xmm1_4
+  float v38; // xmm1_4
 
-  v6 = vehicle;
-  v7 = this;
-  v8 = filteredDriverInputOutput->m_acceleratorPedalInput;
+  m_acceleratorPedalInput = filteredDriverInputOutput->m_acceleratorPedalInput;
   LODWORD(v9) = LODWORD(transmissionInfo->m_transmissionRPM) & _xmm;
   engineOutput->m_rpm = v9;
   if ( !this->mTorqueTable.size )
   {
-    v20 = this->m_minRPM;
-    if ( v9 < v20 )
+    m_minRPM = this->m_minRPM;
+    if ( v9 < m_minRPM )
     {
-      v21 = v8 * this->m_clutchSlipRPM;
-      if ( v9 >= (float)(v20 * 0.5) )
-        engineOutput->m_rpm = (float)((float)((float)(v9 - (float)(v20 * 0.5)) * v21) / (float)(v20 - (float)(v20 * 0.5)))
-                            + v20;
+      v21 = m_acceleratorPedalInput * this->m_clutchSlipRPM;
+      if ( v9 >= (float)(m_minRPM * 0.5) )
+        engineOutput->m_rpm = (float)((float)((float)(v9 - (float)(m_minRPM * 0.5)) * v21)
+                                    / (float)(m_minRPM - (float)(m_minRPM * 0.5)))
+                            + m_minRPM;
       else
-        engineOutput->m_rpm = v20 + v21;
+        engineOutput->m_rpm = m_minRPM + v21;
     }
-    v22 = this->m_optRPM;
-    v23 = engineOutput->m_rpm - v22;
+    m_optRPM = this->m_optRPM;
+    v23 = engineOutput->m_rpm - m_optRPM;
     if ( v23 >= 0.0 )
     {
-      v25 = this->m_maxRPM;
-      if ( engineOutput->m_rpm >= v25 )
+      m_maxRPM = this->m_maxRPM;
+      if ( engineOutput->m_rpm >= m_maxRPM )
       {
-        engineOutput->m_rpm = v25;
-        v13 = this->m_maxTorque;
+        engineOutput->m_rpm = m_maxRPM;
+        m_maxTorque = this->m_maxTorque;
         goto LABEL_29;
       }
-      v24 = (float)((float)(this->m_torqueFactorAtMaxRPM - 1.0) * (float)(1.0 / (float)(v25 - v22)))
-          * (float)(1.0 / (float)(v25 - v22));
+      v24 = (float)((float)(this->m_torqueFactorAtMaxRPM - 1.0) * (float)(1.0 / (float)(m_maxRPM - m_optRPM)))
+          * (float)(1.0 / (float)(m_maxRPM - m_optRPM));
     }
     else
     {
-      v24 = (float)((float)(this->m_torqueFactorAtMinRPM - 1.0) * (float)(1.0 / (float)(this->m_minRPM - v22)))
-          * (float)(1.0 / (float)(this->m_minRPM - v22));
+      v24 = (float)((float)(this->m_torqueFactorAtMinRPM - 1.0) * (float)(1.0 / (float)(this->m_minRPM - m_optRPM)))
+          * (float)(1.0 / (float)(this->m_minRPM - m_optRPM));
     }
-    v13 = (float)((float)(v24 * (float)(v23 * v23)) + 1.0) * this->m_maxTorque;
+    m_maxTorque = (float)((float)(v24 * (float)(v23 * v23)) + 1.0) * this->m_maxTorque;
     goto LABEL_29;
   }
-  v10 = this->m_clutchSlipRPM;
-  if ( v9 < v10 && v8 > 0.0 )
-    engineOutput->m_rpm = v10;
-  v11 = engineOutput->m_rpm;
+  m_clutchSlipRPM = this->m_clutchSlipRPM;
+  if ( v9 < m_clutchSlipRPM && m_acceleratorPedalInput > 0.0 )
+    engineOutput->m_rpm = m_clutchSlipRPM;
+  m_rpm = engineOutput->m_rpm;
   v12 = this->m_minRPM;
-  if ( v11 >= v12 )
+  if ( m_rpm >= v12 )
   {
     v14 = this->m_maxRPM;
-    if ( v11 <= v14 )
+    if ( m_rpm <= v14 )
     {
-      v15 = (__m128)LODWORD(engineOutput->m_rpm);
-      v15.m128_f32[0] = (float)(v11 - v12) * 0.0020000001;
-      v16 = (signed int)v15.m128_f32[0];
-      if ( (signed int)v15.m128_f32[0] != 0x80000000 && (float)v16 != v15.m128_f32[0] )
-        v15.m128_f32[0] = (float)(v16 - (_mm_movemask_ps(_mm_unpacklo_ps(v15, v15)) & 1));
-      v17 = (signed int)v15.m128_f32[0];
-      v18 = (float)(v11 - (float)((float)((float)(signed int)v15.m128_f32[0] * 500.0) + v12)) * 0.0020000001;
+      m_rpm_low = (__m128)LODWORD(engineOutput->m_rpm);
+      m_rpm_low.m128_f32[0] = (float)(m_rpm - v12) * 0.0020000001;
+      v16 = (int)m_rpm_low.m128_f32[0];
+      if ( (int)m_rpm_low.m128_f32[0] != 0x80000000 && (float)v16 != m_rpm_low.m128_f32[0] )
+        m_rpm_low.m128_f32[0] = (float)(v16 - (_mm_movemask_ps(_mm_unpacklo_ps(m_rpm_low, m_rpm_low)) & 1));
+      v17 = (int)m_rpm_low.m128_f32[0];
+      v18 = (float)(m_rpm - (float)((float)((float)(int)m_rpm_low.m128_f32[0] * 500.0) + v12)) * 0.0020000001;
       if ( v18 <= 0.0 )
       {
         v18 = 0.0;
@@ -196,59 +197,62 @@ void __fastcall UFG::Engine::calcEngineInfo(UFG::Engine *this, const float delta
         v18 = *(float *)&FLOAT_1_0;
       }
       v19 = v17 + 1;
-      if ( (_DWORD)v19 == v7->mTorqueTable.size - 1 )
+      if ( (_DWORD)v19 == this->mTorqueTable.size - 1 )
         v19 = v17;
-      v13 = (float)((float)(v7->mTorqueTable.p[v19] - v7->mTorqueTable.p[v17]) * v18) + v7->mTorqueTable.p[v17];
+      m_maxTorque = (float)((float)(this->mTorqueTable.p[v19] - this->mTorqueTable.p[v17]) * v18)
+                  + this->mTorqueTable.p[v17];
     }
     else
     {
       engineOutput->m_rpm = v14;
-      v13 = 0.0;
+      m_maxTorque = 0.0;
     }
   }
   else
   {
-    v13 = *this->mTorqueTable.p;
+    m_maxTorque = *this->mTorqueTable.p;
     engineOutput->m_rpm = v12;
   }
 LABEL_29:
-  v26 = v7->mDamage;
+  mDamage = this->mDamage;
   v27 = *(float *)&FLOAT_1_0;
-  if ( v26 >= 0.80000001 )
-    v27 = 1.0 - v26;
-  v6->vfptr[6].__first_virtual_table_function__((hkBaseObject *)&v6->vfptr);
-  v28 = v26;
-  if ( v8 > 0.02 || (LODWORD(v29) = LODWORD(v26) & _xmm, COERCE_FLOAT(LODWORD(v26) & _xmm) <= 1.0) )
+  if ( mDamage >= 0.80000001 )
+    v27 = 1.0 - mDamage;
+  v28 = ((double (__fastcall *)(hkpVehicleInstance *))vehicle->vfptr[6].__first_virtual_table_function__)(vehicle);
+  v29 = *(float *)&v28;
+  if ( m_acceleratorPedalInput > 0.02 || (LODWORD(v30) = LODWORD(v28) & _xmm, COERCE_FLOAT(LODWORD(v28) & _xmm) <= 1.0) )
   {
-    engineOutput->m_torque = (float)((float)(v13 + v7->mTorqueBoost) * v8) * v27;
+    engineOutput->m_torque = (float)((float)(m_maxTorque + this->mTorqueBoost) * m_acceleratorPedalInput) * v27;
   }
   else
   {
-    v30 = v7->mEngineResistanceMax;
-    v31 = v7->mEngineResistanceMin;
-    v32 = v7->mEngineResistanceMinSpeed;
-    if ( v31 >= v30 )
-      v33 = v7->mEngineResistanceMax;
+    mEngineResistanceMax = this->mEngineResistanceMax;
+    mEngineResistanceMin = this->mEngineResistanceMin;
+    mEngineResistanceMinSpeed = this->mEngineResistanceMinSpeed;
+    if ( mEngineResistanceMin >= mEngineResistanceMax )
+      v34 = this->mEngineResistanceMax;
     else
-      v33 = v7->mEngineResistanceMin;
-    if ( v31 <= v30 )
-      v34 = v7->mEngineResistanceMax;
+      v34 = this->mEngineResistanceMin;
+    if ( mEngineResistanceMin <= mEngineResistanceMax )
+      v35 = this->mEngineResistanceMax;
     else
-      v34 = v7->mEngineResistanceMin;
-    v35 = FLOAT_0_000099999997;
-    if ( (float)(v7->mEngineResistanceMaxSpeed - v32) >= 0.000099999997 )
-      v35 = v7->mEngineResistanceMaxSpeed - v32;
-    v36 = (float)((float)(v29 - v32) * (float)((float)(v30 - v31) / v35)) + v31;
-    if ( v36 <= v33 )
-      v36 = v33;
-    if ( v36 >= v34 )
-      v36 = v34;
-    LODWORD(v37) = COERCE_UNSIGNED_INT(v36 * v7->m_maxTorque) ^ _xmm[0];
-    engineOutput->m_torque = v37;
+      v35 = this->mEngineResistanceMin;
+    v36 = FLOAT_0_000099999997;
+    if ( (float)(this->mEngineResistanceMaxSpeed - mEngineResistanceMinSpeed) >= 0.000099999997 )
+      v36 = this->mEngineResistanceMaxSpeed - mEngineResistanceMinSpeed;
+    v37 = (float)((float)(v30 - mEngineResistanceMinSpeed)
+                * (float)((float)(mEngineResistanceMax - mEngineResistanceMin) / v36))
+        + mEngineResistanceMin;
+    if ( v37 <= v34 )
+      v37 = v34;
+    if ( v37 >= v35 )
+      v37 = v35;
+    LODWORD(v38) = COERCE_UNSIGNED_INT(v37 * this->m_maxTorque) ^ _xmm[0];
+    engineOutput->m_torque = v38;
     if ( !transmissionInfo->m_isReversing.m_bool && transmissionInfo->m_transmissionRPM < 0.0 )
-      LODWORD(engineOutput->m_torque) = LODWORD(v37) ^ _xmm[0];
+      LODWORD(engineOutput->m_torque) = LODWORD(v38) ^ _xmm[0];
   }
-  if ( v28 > v7->mGovernorSpeedKPH && engineOutput->m_torque > 0.0 )
+  if ( v29 > this->mGovernorSpeedKPH && engineOutput->m_torque > 0.0 )
     engineOutput->m_torque = 0.0;
 }
 

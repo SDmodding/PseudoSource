@@ -1,59 +1,60 @@
 // File Line: 89
 // RVA: 0xAA0320
-char __fastcall CAkADPCMCodec::Decode(char *pbSrc, char *pbDst, unsigned int cBlocks, unsigned int nBlockAlignment, unsigned int nChannels)
+char __fastcall CAkADPCMCodec::Decode(
+        char *pbSrc,
+        char *pbDst,
+        unsigned int cBlocks,
+        unsigned int nBlockAlignment,
+        unsigned int nChannels)
 {
-  unsigned int v5; // er15
-  char *v6; // r11
-  char *v7; // rbp
-  signed __int64 v8; // rsi
+  unsigned int v5; // r15d
+  __int64 v8; // rsi
   int v9; // ecx
-  int v10; // er9
-  signed int v11; // edi
-  _BYTE *v12; // r14
+  int v10; // r9d
+  int v11; // edi
+  char *v12; // r14
   char *v13; // r11
   unsigned int v14; // eax
   unsigned int v15; // ebx
-  int v16; // er8
+  int v16; // r8d
   int v17; // eax
-  int v18; // er10
-  signed int v19; // eax
-  int v20; // er8
+  int v18; // r10d
+  int v19; // eax
+  int v20; // r8d
   __int64 v21; // rbx
   char *v22; // r11
   int v23; // eax
-  signed int v24; // eax
+  int v24; // eax
   int v25; // eax
   int v26; // ecx
-  signed __int16 v27; // ax
+  __int16 v27; // ax
   __int64 v29; // [rsp+48h] [rbp+10h]
-  int v30; // [rsp+50h] [rbp+18h]
+  unsigned int v30; // [rsp+50h] [rbp+18h]
 
   v5 = cBlocks;
-  v6 = pbDst;
-  v7 = pbSrc;
   if ( cBlocks )
   {
     v8 = 2i64 * nChannels;
     v29 = nBlockAlignment;
     do
     {
-      v9 = (unsigned __int8)v7[2];
-      v10 = *(signed __int16 *)v7;
+      v9 = (unsigned __int8)pbSrc[2];
+      v10 = *(__int16 *)pbSrc;
       v11 = 31;
       v30 = v5 - 1;
-      *(_WORD *)v6 = *(_WORD *)v7;
-      v12 = v7 + 4;
-      v13 = &v6[v8];
+      *(_WORD *)pbDst = *(_WORD *)pbSrc;
+      v12 = pbSrc + 4;
+      v13 = &pbDst[v8];
       do
       {
         v14 = (unsigned __int8)*v12++;
         v15 = v14;
         v16 = v14 & 0xF;
-        v17 = (signed int)((2 * (v14 & 7) + 1) * CAkADPCMCodec::m_asStep[v9]) / 8;
-        if ( v16 & 8 )
+        v17 = (int)((2 * (v14 & 7) + 1) * CAkADPCMCodec::m_asStep[v9]) / 8;
+        if ( (v16 & 8) != 0 )
           v17 = -v17;
         v18 = v17 + v10;
-        if ( (signed __int16)(v17 + v10) != v17 + v10 )
+        if ( (__int16)(v17 + v10) != v17 + v10 )
         {
           v19 = 0x7FFF;
           if ( v18 < -32768 )
@@ -73,11 +74,11 @@ char __fastcall CAkADPCMCodec::Decode(char *pbSrc, char *pbDst, unsigned int cBl
         v21 = v15 >> 4;
         *(_WORD *)v13 = v18;
         v22 = &v13[v8];
-        v23 = (signed int)((2 * (v21 & 7) + 1) * CAkADPCMCodec::m_asStep[v20]) / 8;
-        if ( v21 & 8 )
-          v23 = (signed int)((2 * (v21 & 7) + 1) * CAkADPCMCodec::m_asStep[v20]) / -8;
+        v23 = (int)((2 * (v21 & 7) + 1) * CAkADPCMCodec::m_asStep[v20]) / 8;
+        if ( (v21 & 8) != 0 )
+          v23 = (int)((2 * (v21 & 7) + 1) * CAkADPCMCodec::m_asStep[v20]) / -8;
         v10 = v23 + v18;
-        if ( (signed __int16)(v23 + v18) != v23 + v18 )
+        if ( (__int16)(v23 + v18) != v23 + v18 )
         {
           v24 = 0x7FFF;
           if ( v10 < -32768 )
@@ -101,19 +102,19 @@ char __fastcall CAkADPCMCodec::Decode(char *pbSrc, char *pbDst, unsigned int cBl
       while ( v11 );
       --v5;
       v25 = (2 * (*v12 & 7) + 1) * CAkADPCMCodec::m_asStep[v9] / 8;
-      if ( *v12 & 8 )
+      if ( (*v12 & 8) != 0 )
         v25 = (2 * (*v12 & 7) + 1) * CAkADPCMCodec::m_asStep[v9] / -8;
       v26 = v25 + v10;
-      if ( (signed __int16)(v25 + v10) != v25 + v10 )
+      if ( (__int16)(v25 + v10) != v25 + v10 )
       {
         v27 = 0x7FFF;
         if ( v26 < -32768 )
-          v27 = -32768;
+          v27 = 0x8000;
         LOWORD(v26) = v27;
       }
       *(_WORD *)v13 = v26;
-      v7 += v29;
-      v6 = &v13[v8];
+      pbSrc += v29;
+      pbDst = &v13[v8];
     }
     while ( v30 );
   }

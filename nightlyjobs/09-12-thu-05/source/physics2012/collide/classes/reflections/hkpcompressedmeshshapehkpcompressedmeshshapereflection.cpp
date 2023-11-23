@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkpCompressedMeshShapeChunkClass__()
     0i64,
     0i64,
     0,
-    4u);
+    4);
 }
 
 // File Line: 87
@@ -35,9 +35,10 @@ void __fastcall finishLoadedObjecthkpCompressedMeshShapeChunk(void *p, int finis
 
 // File Line: 100
 // RVA: 0xCEC220
-void __fastcall cleanupLoadedObjecthkpCompressedMeshShapeChunk(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkpCompressedMeshShapeChunk(hkpCompressedMeshShape::Chunk *p)
 {
-  hkpCompressedMeshShape::Chunk::~Chunk((hkpCompressedMeshShape::Chunk *)p);
+  hkpCompressedMeshShape::Chunk::~Chunk(p);
 }
 
 // File Line: 160
@@ -58,7 +59,7 @@ void dynamic_initializer_for__hkpCompressedMeshShapeBigTriangleClass__()
     &hkpCompressedMeshShapeBigTriangle_Default,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 163
@@ -93,7 +94,7 @@ void dynamic_initializer_for__hkpCompressedMeshShapeConvexPieceClass__()
     0i64,
     0i64,
     0,
-    4u);
+    4);
 }
 
 // File Line: 211
@@ -112,27 +113,25 @@ void __fastcall finishLoadedObjecthkpCompressedMeshShapeConvexPiece(void *p, int
 
 // File Line: 224
 // RVA: 0xCEC250
-void __fastcall cleanupLoadedObjecthkpCompressedMeshShapeConvexPiece(void *p)
+void __fastcall cleanupLoadedObjecthkpCompressedMeshShapeConvexPiece(_DWORD *p)
 {
-  int v1; // er8
-  _QWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 7);
-  v2 = p;
-  *((_DWORD *)p + 6) = 0;
+  v1 = p[7];
+  p[6] = 0;
   if ( v1 < 0 )
   {
     *((_QWORD *)p + 2) = 0i64;
-    *((_DWORD *)p + 7) = 2147483648;
+    p[7] = 0x80000000;
   }
   else
   {
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       (void *)*((_QWORD *)p + 2),
       2 * (v1 & 0x3FFFFFFF));
-    v2[2] = 0i64;
-    *((_DWORD *)v2 + 7) = 2147483648;
+    *((_QWORD *)p + 2) = 0i64;
+    p[7] = 0x80000000;
   }
 }
 
@@ -166,7 +165,7 @@ void dynamic_initializer_for__hkpCompressedMeshShapeClass__()
     &hkpCompressedMeshShape_Default,
     0i64,
     0,
-    0xBu);
+    11);
 }
 
 // File Line: 308
@@ -178,26 +177,27 @@ hkClass *__fastcall hkpCompressedMeshShape::staticClass()
 
 // File Line: 315
 // RVA: 0xCEC2C0
-void __fastcall finishLoadedObjecthkpCompressedMeshShape(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpCompressedMeshShape(hkpCompressedMeshShape *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpCompressedMeshShape::hkpCompressedMeshShape);
+  if ( p )
+    hkpCompressedMeshShape::hkpCompressedMeshShape(p, finishing);
 }
 
 // File Line: 321
 // RVA: 0xCEC2E0
-void __fastcall cleanupLoadedObjecthkpCompressedMeshShape(void *p)
+void __fastcall cleanupLoadedObjecthkpCompressedMeshShape(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 325
 // RVA: 0xCEC2F0
 hkBaseObjectVtbl *__fastcall getVtablehkpCompressedMeshShape()
 {
-  hkpCompressedMeshShape v1; // [rsp+20h] [rbp-128h]
+  hkpCompressedMeshShape v1; // [rsp+20h] [rbp-128h] BYREF
 
   hkpCompressedMeshShape::hkpCompressedMeshShape(&v1, 0);
-  return v1.vfptr;
+  return v1.hkpShapeCollection::hkpShape::hkpShapeBase::hkcdShape::hkReferencedObject::hkBaseObject::vfptr;
 }
 
 // File Line: 347
@@ -211,8 +211,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpCompressedMeshShapeTypeInfo__()
   hkpCompressedMeshShapeTypeInfo.m_typeName = "hkpCompressedMeshShape";
   hkpCompressedMeshShapeTypeInfo.m_vtable = result;
   hkpCompressedMeshShapeTypeInfo.m_scopedName = "!hkpCompressedMeshShape";
-  hkpCompressedMeshShapeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpCompressedMeshShape;
-  hkpCompressedMeshShapeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpCompressedMeshShape;
+  hkpCompressedMeshShapeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpCompressedMeshShape;
+  hkpCompressedMeshShapeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpCompressedMeshShape;
   return result;
 }
 

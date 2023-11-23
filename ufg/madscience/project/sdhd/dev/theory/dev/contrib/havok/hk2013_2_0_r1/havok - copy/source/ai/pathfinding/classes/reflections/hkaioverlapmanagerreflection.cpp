@@ -28,17 +28,17 @@ hkClass *__fastcall hkaiOverlapManagerSection::GeneratorData::staticClass()
 
 // File Line: 72
 // RVA: 0xBB6F80
-void __fastcall finishLoadedObjecthkaiOverlapManagerSectionGeneratorData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiOverlapManagerSectionGeneratorData(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiOverlapManagerSection::GeneratorData::`vftable;
+    *p = &hkaiOverlapManagerSection::GeneratorData::`vftable;
 }
 
 // File Line: 78
 // RVA: 0xBB6FA0
-void __fastcall cleanupLoadedObjecthkaiOverlapManagerSectionGeneratorData(void *p)
+void __fastcall cleanupLoadedObjecthkaiOverlapManagerSectionGeneratorData(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 82
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkaiOverlapManagerSectionGeneratorDataTypeInfo__
   hkaiOverlapManagerSectionGeneratorDataTypeInfo.m_typeName = "hkaiOverlapManagerSectionGeneratorData";
   hkaiOverlapManagerSectionGeneratorDataTypeInfo.m_vtable = result;
   hkaiOverlapManagerSectionGeneratorDataTypeInfo.m_scopedName = "!hkaiOverlapManagerSection::GeneratorData";
-  hkaiOverlapManagerSectionGeneratorDataTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiOverlapManagerSectionGeneratorData;
-  hkaiOverlapManagerSectionGeneratorDataTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiOverlapManagerSectionGeneratorData;
+  hkaiOverlapManagerSectionGeneratorDataTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiOverlapManagerSectionGeneratorData;
+  hkaiOverlapManagerSectionGeneratorDataTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiOverlapManagerSectionGeneratorData;
   return result;
 }
 
@@ -82,7 +82,7 @@ void dynamic_initializer_for__hkaiOverlapManagerSectionClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 137
@@ -94,21 +94,22 @@ hkClass *__fastcall hkaiOverlapManagerSection::staticClass()
 
 // File Line: 144
 // RVA: 0xBB6FC0
-void __fastcall finishLoadedObjecthkaiOverlapManagerSection(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiOverlapManagerSection(_DWORD *p, int finishing)
 {
   if ( p )
   {
-    *((_DWORD *)p + 11) = 2147483648;
+    p[11] = 0x80000000;
     *((_QWORD *)p + 4) = 0i64;
-    *((_DWORD *)p + 10) = 0;
+    p[10] = 0;
   }
 }
 
 // File Line: 150
 // RVA: 0xBB6FE0
-void __fastcall cleanupLoadedObjecthkaiOverlapManagerSection(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkaiOverlapManagerSection(hkaiOverlapManagerSection *p)
 {
-  hkaiOverlapManagerSection::~hkaiOverlapManagerSection((hkaiOverlapManagerSection *)p);
+  hkaiOverlapManagerSection::~hkaiOverlapManagerSection(p);
 }
 
 // File Line: 229
@@ -129,7 +130,7 @@ void dynamic_initializer_for__hkaiOverlapManagerClass__()
     &hkaiOverlapManager_Default,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 232
@@ -141,26 +142,27 @@ hkClass *__fastcall hkaiOverlapManager::staticClass()
 
 // File Line: 239
 // RVA: 0xBB6FF0
-void __fastcall finishLoadedObjecthkaiOverlapManager(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiOverlapManager(hkaiOverlapManager *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiOverlapManager::hkaiOverlapManager);
+  if ( p )
+    hkaiOverlapManager::hkaiOverlapManager(p, finishing);
 }
 
 // File Line: 245
 // RVA: 0xBB7010
-void __fastcall cleanupLoadedObjecthkaiOverlapManager(void *p)
+void __fastcall cleanupLoadedObjecthkaiOverlapManager(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 249
 // RVA: 0xBB7020
 hkBaseObjectVtbl *__fastcall getVtablehkaiOverlapManager()
 {
-  hkaiOverlapManager v1; // [rsp+20h] [rbp-88h]
+  hkaiOverlapManager v1; // [rsp+20h] [rbp-88h] BYREF
 
   hkaiOverlapManager::hkaiOverlapManager(&v1, 0);
-  return v1.vfptr;
+  return v1.hkReferencedObject::hkBaseObject::vfptr;
 }
 
 // File Line: 271
@@ -174,8 +176,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiOverlapManagerTypeInfo__()
   hkaiOverlapManagerTypeInfo.m_typeName = "hkaiOverlapManager";
   hkaiOverlapManagerTypeInfo.m_vtable = result;
   hkaiOverlapManagerTypeInfo.m_scopedName = "!hkaiOverlapManager";
-  hkaiOverlapManagerTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiOverlapManager;
-  hkaiOverlapManagerTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiOverlapManager;
+  hkaiOverlapManagerTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiOverlapManager;
+  hkaiOverlapManagerTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiOverlapManager;
   return result;
 }
 

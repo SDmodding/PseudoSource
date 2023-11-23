@@ -1,6 +1,11 @@
 // File Line: 35
 // RVA: 0xA353A0
-void __fastcall AkMP3PrepareForPlayback(const wchar_t *in_tszFilename, AkMP3BaseInfo *in_info, int in_msStartAt, void (__fastcall *in_funcCallback)(void *, int), void *in_pCallbackCookie)
+void __fastcall AkMP3PrepareForPlayback(
+        const wchar_t *in_tszFilename,
+        AkMP3BaseInfo *in_info,
+        int in_msStartAt,
+        void (__fastcall *in_funcCallback)(void *, int),
+        void *in_pCallbackCookie)
 {
   signed __int64 v5; // r10
   wchar_t v6; // ax
@@ -9,8 +14,7 @@ void __fastcall AkMP3PrepareForPlayback(const wchar_t *in_tszFilename, AkMP3Base
   v5 = (char *)&g_AkMP3Info - (char *)in_tszFilename;
   do
   {
-    v6 = *in_tszFilename;
-    ++in_tszFilename;
+    v6 = *in_tszFilename++;
     *(const wchar_t *)((char *)in_tszFilename + v5 - 2) = v6;
   }
   while ( v6 );
@@ -55,17 +59,17 @@ void __fastcall AkMP3PrepareForPlayback(const wchar_t *in_tszFilename, AkMP3Base
 // RVA: 0xA35500
 __int64 __fastcall AkMP3SeekToTime(AkMP3BaseInfo *in_info, int in_msTime)
 {
-  float v2; // xmm0_4
+  float msDuration; // xmm0_4
   float v3; // xmm1_4
-  signed int v4; // edx
+  int v4; // edx
   float v5; // xmm3_4
   float v6; // xmm2_4
 
-  v2 = (float)in_info->msDuration;
+  msDuration = (float)in_info->msDuration;
   if ( !in_info->bToc )
     return in_info->uFirstFrameOffset
-         + (signed int)(float)((float)((float)in_msTime / v2) * (float)(signed int)in_info->uMPEGStreamSize);
-  v3 = (float)((float)in_msTime / v2) * 100.0;
+         + (int)(float)((float)((float)in_msTime / msDuration) * (float)(int)in_info->uMPEGStreamSize);
+  v3 = (float)((float)in_msTime / msDuration) * 100.0;
   if ( v3 >= 0.0 )
   {
     if ( v3 > 100.0 )
@@ -75,8 +79,8 @@ __int64 __fastcall AkMP3SeekToTime(AkMP3BaseInfo *in_info, int in_msTime)
   {
     v3 = 0.0;
   }
-  v4 = (signed int)v3;
-  if ( (signed int)v3 > 99 )
+  v4 = (int)v3;
+  if ( (int)v3 > 99 )
     v4 = 99;
   if ( v4 >= 99 )
     v6 = FLOAT_256_0;
@@ -84,8 +88,8 @@ __int64 __fastcall AkMP3SeekToTime(AkMP3BaseInfo *in_info, int in_msTime)
     v6 = (float)(unsigned __int8)in_info->aToc[v4 + 1];
   v5 = (float)(unsigned __int8)in_info->aToc[v4];
   return in_info->uFirstFrameOffset
-       + (signed int)(float)((float)((float)((float)((float)(v3 - (float)v4) * (float)(v6 - v5)) + v5) * 0.00390625)
-                           * (float)(signed int)in_info->uMPEGStreamSize);
+       + (int)(float)((float)((float)((float)((float)(v3 - (float)v4) * (float)(v6 - v5)) + v5) * 0.00390625)
+                    * (float)(int)in_info->uMPEGStreamSize);
 }
 
 // File Line: 73
@@ -95,7 +99,7 @@ AK::IAkPlugin *__fastcall CreateMP3Source(AK::IAkPluginMemAlloc *in_pAllocator)
   AK::IAkPlugin *result; // rax
   AK::IAkPlugin *v2; // rbx
 
-  result = (AK::IAkPlugin *)in_pAllocator->vfptr->Malloc(in_pAllocator, 240ui64);
+  result = (AK::IAkPlugin *)in_pAllocator->vfptr->Malloc(in_pAllocator, 240i64);
   v2 = result;
   if ( result )
   {
@@ -115,75 +119,71 @@ AK::IAkPlugin *__fastcall CreateMP3Source(AK::IAkPluginMemAlloc *in_pAllocator)
     result[28].vfptr = 0i64;
     LODWORD(result[29].vfptr) = 0;
     memset(&result[5], 0, 0x7Cui64);
-    result = v2;
+    return v2;
   }
   return result;
 }
 
 // File Line: 108
 // RVA: 0xA35D30
-signed __int64 __fastcall CAkFXSrcMP3::Init(CAkFXSrcMP3 *this, AK::IAkPluginMemAlloc *in_pAllocator, AK::IAkSourcePluginContext *in_pSourceFXContext, AK::IAkPluginParam *in_pParams, AkAudioFormat *io_rFormat)
+signed __int64 __fastcall CAkFXSrcMP3::Init(
+        CAkFXSrcMP3 *this,
+        AK::IAkPluginMemAlloc *in_pAllocator,
+        AK::IAkSourcePluginContext *in_pSourceFXContext,
+        CAkFxSrcMP3Params *in_pParams,
+        AkAudioFormat *io_rFormat)
 {
-  AK::IAkSourcePluginContext *v5; // rbx
-  AK::IAkPluginMemAlloc *v6; // rsi
-  CAkFXSrcMP3 *v7; // rdi
-  AK::IAkPluginContextBaseVtbl *v8; // rax
-  __int64 *v9; // rax
-  AK::IAkAutoStream **v10; // rbx
-  __int64 v11; // r10
-  unsigned int v12; // er9
-  signed int v13; // er10
-  HACMSTREAM v14; // rcx
-  __int64 v15; // rax
+  _DWORD *v5; // r12
+  AK::IAkPluginContextBaseVtbl *vfptr; // rax
+  __int64 v10; // rax
+  AK::IAkAutoStream **p_m_pStream; // rbx
+  unsigned int uFirstFrameOffset; // r9d
+  int v13; // r10d
+  HACMSTREAM__ *m_hMP3Stream; // rcx
+  char *v15; // rax
   unsigned __int64 v16; // rdx
-  __int64 v17; // rax
-  HACMSTREAM v18; // rcx
-  __int16 *v19; // rax
-  char v20; // dl
-  signed int v21; // er8
+  char *v17; // rax
+  HACMSTREAM__ *v18; // rcx
+  __int16 *pbDst; // rax
+  char uNumChannels; // dl
+  int v21; // r8d
   signed __int64 result; // rax
-  LPWAVEFILTER pwfltr; // [rsp+20h] [rbp-51h]
-  DWORD_PTR dwCallback; // [rsp+28h] [rbp-49h]
-  DWORD_PTR dwInstance; // [rsp+30h] [rbp-41h]
-  DWORD fdwOpen; // [rsp+38h] [rbp-39h]
-  tWAVEFORMATEX pwfxSrc; // [rsp+40h] [rbp-31h]
-  __int16 v28; // [rsp+52h] [rbp-1Fh]
-  int v29; // [rsp+54h] [rbp-1Dh]
-  int v30; // [rsp+58h] [rbp-19h]
-  __int16 v31; // [rsp+5Ch] [rbp-15h]
-  float v32; // [rsp+60h] [rbp-11h]
-  __int64 v33; // [rsp+64h] [rbp-Dh]
-  __int16 v34; // [rsp+6Ch] [rbp-5h]
-  int v35; // [rsp+70h] [rbp-1h]
-  __int64 v36; // [rsp+74h] [rbp+3h]
-  __int64 v37; // [rsp+80h] [rbp+Fh]
-  __int16 v38; // [rsp+88h] [rbp+17h]
-  int v39; // [rsp+8Ch] [rbp+1Bh]
-  char v40; // [rsp+90h] [rbp+1Fh]
-  _DWORD *v41; // [rsp+F0h] [rbp+7Fh]
+  LPWAVEFILTER pwfltr; // [rsp+20h] [rbp-51h] BYREF
+  DWORD_PTR dwCallback; // [rsp+28h] [rbp-49h] BYREF
+  _BYTE dwInstance[12]; // [rsp+30h] [rbp-41h]
+  tWAVEFORMATEX pwfxSrc; // [rsp+40h] [rbp-31h] BYREF
+  __int16 v27; // [rsp+52h] [rbp-1Fh]
+  int v28; // [rsp+54h] [rbp-1Dh]
+  int v29; // [rsp+58h] [rbp-19h]
+  __int16 v30; // [rsp+5Ch] [rbp-15h]
+  float v31; // [rsp+60h] [rbp-11h] BYREF
+  __int64 v32; // [rsp+64h] [rbp-Dh]
+  __int16 v33; // [rsp+6Ch] [rbp-5h]
+  int v34; // [rsp+70h] [rbp-1h] BYREF
+  __int64 v35; // [rsp+74h] [rbp+3h]
+  __int64 v36; // [rsp+80h] [rbp+Fh]
+  __int16 v37; // [rsp+88h] [rbp+17h]
+  int v38; // [rsp+8Ch] [rbp+1Bh]
+  __int64 v39[6]; // [rsp+90h] [rbp+1Fh] BYREF
 
-  v5 = in_pSourceFXContext;
-  v6 = in_pAllocator;
-  v7 = this;
   if ( (unsigned __int16)(in_info.uNumChannels - 1) > 1u || (unsigned __int16)(in_info.uSampleRate - 8000) > 0x9C40u )
     return 2i64;
-  this->m_pSharedParams = (CAkFxSrcMP3Params *)in_pParams;
+  this->m_pSharedParams = in_pParams;
   this->m_pSourceFXContext = in_pSourceFXContext;
-  fdwOpen = 0;
+  *(_WORD *)&dwInstance[10] = 0;
   pwfxSrc.wFormatTag = 85;
   pwfxSrc.nChannels = in_info.uNumChannels;
   pwfxSrc.nSamplesPerSec = in_info.uSampleRate;
-  dwInstance = 0i64;
+  *(_QWORD *)dwInstance = 0i64;
   pwfxSrc.nAvgBytesPerSec = 125 * in_info.uBitRate;
-  dwCallback = 0i64;
-  v31 = 1393;
-  LOWORD(dwCallback) = 1;
-  *(_DWORD *)((char *)&dwInstance + 6) = 16;
+  dwCallback = 1i64;
+  v30 = 1393;
+  *(_DWORD *)&dwInstance[6] = 16;
   *(_DWORD *)&pwfxSrc.wBitsPerSample = 786432;
   pwfxSrc.nBlockAlign = 1;
-  v29 = 2;
-  v30 = 66560;
-  v28 = 1;
+  v28 = 2;
+  v29 = 66560;
+  v27 = 1;
   this->m_hMP3Stream = 0i64;
   if ( acmStreamOpen_0(
          &this->m_hMP3Stream,
@@ -192,79 +192,80 @@ signed __int64 __fastcall CAkFXSrcMP3::Init(CAkFXSrcMP3 *this, AK::IAkPluginMemA
          (LPWAVEFORMATEX)&dwCallback,
          0i64,
          dwCallback,
-         dwInstance,
-         fdwOpen) )
+         *(DWORD_PTR *)dwInstance,
+         *(DWORD *)&dwInstance[8]) )
   {
     return 2i64;
   }
+  v33 = 0;
+  v32 = 0i64;
   v34 = 0;
-  v33 = 0i64;
-  v35 = 0;
-  v8 = v5->vfptr;
-  v36 = 201i64;
-  v37 = 0i64;
-  v38 = 0;
-  v39 = -1;
-  v32 = (float)(signed int)in_info.uBitRate * 0.125;
-  v9 = (__int64 *)(*(__int64 (__fastcall **)(AK::IAkSourcePluginContext *))v8->gap8)(v5);
-  LOBYTE(dwInstance) = 1;
-  v10 = &v7->m_pStream;
-  v11 = *v9;
-  dwCallback = (DWORD_PTR)&v7->m_pStream;
-  if ( (*(unsigned int (__fastcall **)(__int64 *, $0AC968BCA798225F2B235B4CAE77E902 *, int *, float *, _QWORD, AK::IAkAutoStream **, DWORD_PTR))(v11 + 48))(
-         v9,
+  vfptr = in_pSourceFXContext->vfptr;
+  v35 = 201i64;
+  v36 = 0i64;
+  v37 = 0;
+  v38 = -1;
+  v31 = (float)(int)in_info.uBitRate * 0.125;
+  v10 = (*(__int64 (__fastcall **)(AK::IAkSourcePluginContext *))vfptr->gap8)(in_pSourceFXContext);
+  dwInstance[0] = 1;
+  p_m_pStream = &this->m_pStream;
+  if ( (*(unsigned int (__fastcall **)(__int64, $0AC968BCA798225F2B235B4CAE77E902 *, int *, float *, _QWORD, AK::IAkAutoStream **, _DWORD))(*(_QWORD *)v10 + 48i64))(
+         v10,
          &g_AkMP3Info,
-         &v35,
-         &v32,
+         &v34,
+         &v31,
          0i64,
-         &v7->m_pStream,
-         dwInstance) != 1 )
+         &this->m_pStream,
+         *(_DWORD *)dwInstance) != 1 )
     return 2i64;
   if ( unk_14249C984 )
   {
-    v12 = AkMP3SeekToTime(&in_info, unk_14249C984);
-    v7->m_uFramePos = (signed int)((double)v13 * (double)in_info.uSampleRate * 0.001);
+    uFirstFrameOffset = AkMP3SeekToTime(&in_info, unk_14249C984);
+    this->m_uFramePos = (int)((double)v13 * (double)in_info.uSampleRate * 0.001);
   }
   else
   {
-    v12 = in_info.uFirstFrameOffset;
-    v7->m_uFramePos = 0;
+    uFirstFrameOffset = in_info.uFirstFrameOffset;
+    this->m_uFramePos = 0;
   }
-  if ( v12 && (*v10)->vfptr->SetPosition(*v10, v12, 0i64, (__int64 *)&v40) != 1 )
+  if ( uFirstFrameOffset
+    && (*p_m_pStream)->vfptr->SetPosition(*p_m_pStream, uFirstFrameOffset, AK_MoveBegin, v39) != AK_Success )
+  {
     return 2i64;
-  ((void (*)(void))(*v10)->vfptr->Start)();
-  v14 = v7->m_hMP3Stream;
+  }
+  (*p_m_pStream)->vfptr->Start(*p_m_pStream);
+  m_hMP3Stream = this->m_hMP3Stream;
   LODWORD(pwfltr) = 0;
-  if ( acmStreamSize_0(v14, 0x400u, (LPDWORD)&pwfltr, 0) )
+  if ( acmStreamSize_0(m_hMP3Stream, 0x400u, (LPDWORD)&pwfltr, 0) )
     return 2i64;
   if ( !(_DWORD)pwfltr )
     return 2i64;
-  v7->m_hdrACM.cbStruct = 124;
-  v15 = (__int64)v6->vfptr->Malloc(v6, 1024ui64);
+  this->m_hdrACM.cbStruct = 124;
+  v15 = (char *)in_pAllocator->vfptr->Malloc(in_pAllocator, 1024i64);
   v16 = (unsigned int)pwfltr;
-  v7->m_hdrACM.cbSrcLength = 1024;
-  v7->m_hdrACM.pbSrc = (char *)v15;
-  v17 = (__int64)v6->vfptr->Malloc(v6, v16);
-  v18 = v7->m_hMP3Stream;
-  v7->m_hdrACM.pbDst = (char *)v17;
-  v7->m_hdrACM.cbDstLength = (unsigned int)pwfltr;
-  if ( acmStreamPrepareHeader_0(v18, &v7->m_hdrACM, 0) )
+  this->m_hdrACM.cbSrcLength = 1024;
+  this->m_hdrACM.pbSrc = v15;
+  v17 = (char *)in_pAllocator->vfptr->Malloc(in_pAllocator, v16);
+  v18 = this->m_hMP3Stream;
+  this->m_hdrACM.pbDst = v17;
+  this->m_hdrACM.cbDstLength = (unsigned int)pwfltr;
+  if ( acmStreamPrepareHeader_0(v18, &this->m_hdrACM, 0) )
     return 2i64;
-  v19 = (__int16 *)v7->m_hdrACM.pbDst;
-  v7->m_hdrACM.cbSrcLengthUsed = 1024;
-  v7->m_uDsBufSize = 0;
-  v7->m_pDstBufPos = v19;
-  v20 = in_info.uNumChannels;
+  pbDst = (__int16 *)this->m_hdrACM.pbDst;
+  this->m_hdrACM.cbSrcLengthUsed = 1024;
+  this->m_uDsBufSize = 0;
+  this->m_pDstBufPos = pbDst;
+  uNumChannels = in_info.uNumChannels;
   if ( in_info.uNumChannels == 1 || (v21 = 3, in_info.uNumChannels != 2) )
     v21 = 4;
-  *v41 = in_info.uSampleRate;
+  *v5 = in_info.uSampleRate;
   result = 1i64;
-  v41[1] = v21 & 0x3FFFF | ((2 * v20 & 0x1F) << 24) | 0x400000;
-  v7->m_uNumChannels = in_info.uNumChannels;
-  v7->m_uSampleRate = in_info.uSampleRate;
-  v7->m_msDuration = in_info.msDuration;
-  v7->m_funcCallback = (void (__fastcall *)(void *, int))unk_14249C988;
-  v7->m_pCallbackCookie = (void *)unk_14249C990;
+  v5[1] = v21 & 0x3FFFF | (((2 * uNumChannels) & 0x1F) << 24) | 0x400000;
+  this->m_uNumChannels = in_info.uNumChannels;
+  this->m_uSampleRate = in_info.uSampleRate;
+  this->m_msDuration = in_info.msDuration;
+  this->m_funcCallback = (void (__fastcall *)(void *, int))unk_14249C988;
+  this->m_pCallbackCookie = (void *)unk_14249C990;
   return result;
 }
 
@@ -272,17 +273,12 @@ signed __int64 __fastcall CAkFXSrcMP3::Init(CAkFXSrcMP3 *this, AK::IAkPluginMemA
 // RVA: 0xA36540
 signed __int64 __fastcall CAkFXSrcMP3::Term(CAkFXSrcMP3 *this, AK::IAkPluginMemAlloc *in_pAllocator)
 {
-  AK::IAkPluginMemAlloc *v2; // rbx
-  CAkFXSrcMP3 *v3; // rdi
-
-  v2 = in_pAllocator;
-  v3 = this;
   if ( this->m_hdrACM.pbSrc )
     ((void (__fastcall *)(AK::IAkPluginMemAlloc *))in_pAllocator->vfptr->Free)(in_pAllocator);
-  if ( v3->m_hdrACM.pbDst )
-    ((void (__fastcall *)(AK::IAkPluginMemAlloc *))v2->vfptr->Free)(v2);
-  v3->vfptr->__vecDelDtor((AK::IAkPlugin *)&v3->vfptr, 0);
-  v2->vfptr->Free(v2, v3);
+  if ( this->m_hdrACM.pbDst )
+    ((void (__fastcall *)(AK::IAkPluginMemAlloc *))in_pAllocator->vfptr->Free)(in_pAllocator);
+  this->vfptr->__vecDelDtor(this, 0i64);
+  in_pAllocator->vfptr->Free(in_pAllocator, this);
   return 1i64;
 }
 
@@ -290,128 +286,108 @@ signed __int64 __fastcall CAkFXSrcMP3::Term(CAkFXSrcMP3 *this, AK::IAkPluginMemA
 // RVA: 0xA35860
 void __fastcall CAkFXSrcMP3::Execute(CAkFXSrcMP3 *this, AkAudioBuffer *io_pBufferOut)
 {
-  void (__fastcall *v2)(void *, int); // r8
-  AkAudioBuffer *v3; // r12
-  CAkFXSrcMP3 *v4; // rbx
-  unsigned int v5; // ecx
-  unsigned int v6; // er13
-  char *v7; // rcx
-  unsigned int v8; // er15
-  unsigned int v9; // esi
-  AKRESULT v10; // eax
-  unsigned int v11; // ebp
-  __int16 *v12; // rdi
-  int v13; // eax
-  unsigned int v14; // er14
-  __int16 *v15; // rdx
-  unsigned int v16; // eax
-  unsigned __int64 v17; // rsi
-  int v18; // ebp
-  unsigned int v19; // er14
-  unsigned int v20; // eax
-  unsigned __int64 v21; // rsi
+  void (__fastcall *m_funcCallback)(void *, int); // r8
+  unsigned int uMaxFrames; // r13d
+  char *pData; // rcx
+  unsigned int v7; // r15d
+  unsigned int m_uStreamBufferSize; // esi
+  AKRESULT v9; // eax
+  unsigned int m_uDsBufSize; // ebp
+  __int16 *m_pDstBufPos; // rdi
+  unsigned int v12; // eax
+  unsigned int v13; // r14d
+  unsigned int v14; // eax
+  unsigned __int64 v15; // rsi
+  unsigned int v16; // ebp
+  unsigned int v17; // r14d
+  unsigned int v18; // eax
+  unsigned __int64 v19; // rsi
   char *Dst; // [rsp+50h] [rbp+8h]
 
-  v2 = this->m_funcCallback;
-  v3 = io_pBufferOut;
-  v4 = this;
-  if ( v2 )
+  m_funcCallback = this->m_funcCallback;
+  if ( m_funcCallback )
+    m_funcCallback(this->m_pCallbackCookie, 20 * this->m_uFramePos / (this->m_uSampleRate / 0x32u));
+  uMaxFrames = io_pBufferOut->uMaxFrames;
+  pData = (char *)io_pBufferOut->pData;
+  v7 = 0;
+  for ( Dst = (char *)io_pBufferOut->pData; v7 < uMaxFrames; Dst = pData )
   {
-    v5 = (signed int)(1374389535 * (unsigned __int64)this->m_uSampleRate >> 32) >> 4;
-    v2(v4->m_pCallbackCookie, 20 * v4->m_uFramePos / ((v5 >> 31) + v5));
-  }
-  v6 = v3->uMaxFrames;
-  v7 = (char *)v3->pData;
-  v8 = 0;
-  Dst = (char *)v3->pData;
-  if ( v3->uMaxFrames )
-  {
-    do
+    if ( !this->m_uDsBufSize )
     {
-      if ( !v4->m_uDsBufSize )
+      if ( this->m_hdrACM.cbSrcLengthUsed == this->m_hdrACM.cbSrcLength )
       {
-        if ( v4->m_hdrACM.cbSrcLengthUsed == v4->m_hdrACM.cbSrcLength )
+        m_uStreamBufferSize = this->m_uStreamBufferSize;
+        if ( !m_uStreamBufferSize )
         {
-          v9 = v4->m_uStreamBufferSize;
-          if ( !v9 )
+          if ( this->m_pStreamBuffer )
           {
-            if ( v4->m_pStreamBuffer )
-            {
-              ((void (__fastcall *)(AK::IAkAutoStream *, signed __int64))v4->m_pStream->vfptr->ReleaseBuffer)(
-                v4->m_pStream,
-                1024i64);
-              v4->m_pStreamBuffer = 0i64;
-            }
-            v10 = (unsigned int)v4->m_pStream->vfptr->GetBuffer(
-                                  v4->m_pStream,
-                                  &v4->m_pStreamBuffer,
-                                  &v4->m_uStreamBufferSize,
-                                  0);
-            v3->eState = v10;
-            if ( v10 == 46 || v10 == 2 )
-            {
-              v3->uValidFrames = 0;
-              return;
-            }
-            v9 = v4->m_uStreamBufferSize;
-            if ( !v9 )
-            {
-              v3->eState = 17;
-              return;
-            }
-            v4->m_pStreamBufferPos = (char *)v4->m_pStreamBuffer;
+            ((void (__fastcall *)(AK::IAkAutoStream *, __int64))this->m_pStream->vfptr->ReleaseBuffer)(
+              this->m_pStream,
+              1024i64);
+            this->m_pStreamBuffer = 0i64;
           }
-          if ( v9 > 0x400 )
-            v9 = 1024;
-          memmove(v4->m_hdrACM.pbSrc, v4->m_pStreamBufferPos, v9);
-          v4->m_uStreamBufferSize -= v9;
-          v4->m_pStreamBufferPos += v9;
-          v4->m_hdrACM.cbSrcLength = v9;
+          v9 = this->m_pStream->vfptr->GetBuffer(this->m_pStream, &this->m_pStreamBuffer, &this->m_uStreamBufferSize, 0);
+          io_pBufferOut->eState = v9;
+          if ( v9 == AK_NoDataReady || v9 == AK_Fail )
+          {
+            io_pBufferOut->uValidFrames = 0;
+            return;
+          }
+          m_uStreamBufferSize = this->m_uStreamBufferSize;
+          if ( !m_uStreamBufferSize )
+          {
+            io_pBufferOut->eState = AK_NoMoreData;
+            return;
+          }
+          this->m_pStreamBufferPos = (char *)this->m_pStreamBuffer;
         }
-        acmStreamConvert_0(v4->m_hMP3Stream, &v4->m_hdrACM, 4u);
-        if ( !v4->m_hdrACM.cbSrcLengthUsed && !v4->m_hdrACM.cbDstLengthUsed )
-          break;
-        v7 = Dst;
-        v4->m_pDstBufPos = (__int16 *)v4->m_hdrACM.pbDst;
-        v4->m_uDsBufSize = v4->m_hdrACM.cbDstLengthUsed;
+        if ( m_uStreamBufferSize > 0x400 )
+          m_uStreamBufferSize = 1024;
+        memmove(this->m_hdrACM.pbSrc, this->m_pStreamBufferPos, m_uStreamBufferSize);
+        this->m_uStreamBufferSize -= m_uStreamBufferSize;
+        this->m_pStreamBufferPos += m_uStreamBufferSize;
+        this->m_hdrACM.cbSrcLength = m_uStreamBufferSize;
       }
-      v11 = v4->m_uDsBufSize;
-      v12 = v4->m_pDstBufPos;
-      v13 = v6 - v8;
-      v14 = v4->m_uDsBufSize;
-      v15 = v4->m_pDstBufPos;
-      if ( v4->m_uNumChannels == 1 )
-      {
-        v16 = 2 * v13;
-        if ( v16 < v11 )
-          v14 = v16;
-        v17 = v14;
-        memmove(v7, v15, v14);
-        v18 = v11 - v14;
-        v19 = v14 >> 1;
-      }
-      else
-      {
-        v20 = 4 * v13;
-        if ( v20 < v11 )
-          v14 = v20;
-        v17 = v14;
-        memmove(v7, v15, v14);
-        v18 = v11 - v14;
-        v19 = v14 >> 2;
-      }
-      v4->m_uFramePos += v19;
-      v21 = v17 >> 1;
-      v8 += v19;
-      v4->m_uDsBufSize = v18;
-      v7 = &Dst[2 * v21];
-      v4->m_pDstBufPos = &v12[v21];
-      Dst += 2 * v21;
+      acmStreamConvert_0(this->m_hMP3Stream, &this->m_hdrACM, 4u);
+      if ( !this->m_hdrACM.cbSrcLengthUsed && !this->m_hdrACM.cbDstLengthUsed )
+        break;
+      pData = Dst;
+      this->m_pDstBufPos = (__int16 *)this->m_hdrACM.pbDst;
+      this->m_uDsBufSize = this->m_hdrACM.cbDstLengthUsed;
     }
-    while ( v8 < v6 );
+    m_uDsBufSize = this->m_uDsBufSize;
+    m_pDstBufPos = this->m_pDstBufPos;
+    v12 = uMaxFrames - v7;
+    v13 = m_uDsBufSize;
+    if ( this->m_uNumChannels == 1 )
+    {
+      v14 = 2 * v12;
+      if ( v14 < m_uDsBufSize )
+        v13 = v14;
+      v15 = v13;
+      memmove(pData, m_pDstBufPos, v13);
+      v16 = m_uDsBufSize - v13;
+      v17 = v13 >> 1;
+    }
+    else
+    {
+      v18 = 4 * v12;
+      if ( v18 < m_uDsBufSize )
+        v13 = v18;
+      v15 = v13;
+      memmove(pData, m_pDstBufPos, v13);
+      v16 = m_uDsBufSize - v13;
+      v17 = v13 >> 2;
+    }
+    this->m_uFramePos += v17;
+    v19 = v15 >> 1;
+    v7 += v17;
+    this->m_uDsBufSize = v16;
+    pData = &Dst[2 * v19];
+    this->m_pDstBufPos = &m_pDstBufPos[v19];
   }
-  v3->uValidFrames = v8;
-  v3->eState = 45;
+  io_pBufferOut->uValidFrames = v7;
+  io_pBufferOut->eState = AK_DataReady;
 }
 
 // File Line: 400

@@ -1,14 +1,18 @@
 // File Line: 31
 // RVA: 0xD2FB30
-signed __int64 __fastcall hkpRayCastQueryJobQueueUtils::popRayCastQueryJob(hkJobQueue *queue, hkJobQueue::DynamicData *data, hkJobQueue::JobQueueEntry *jobIn, hkJobQueue::JobQueueEntry *jobOut)
+__int64 __fastcall hkpRayCastQueryJobQueueUtils::popRayCastQueryJob(
+        hkJobQueue *queue,
+        hkJobQueue::DynamicData *data,
+        hkJobQueue::JobQueueEntry *jobIn,
+        hkJobQueue::JobQueueEntry *jobOut)
 {
-  signed int v4; // ecx
+  int v4; // ecx
   hkJobQueue::JobQueueEntry *v5; // rax
   hkJob v6; // xmm0
   int v7; // eax
   __int64 v8; // rax
-  signed __int64 v9; // rcx
-  signed __int64 result; // rax
+  __int64 v9; // rcx
+  __int64 result; // rax
   int v11; // eax
   __int64 v12; // rax
   __int64 v13; // rcx
@@ -17,7 +21,7 @@ signed __int64 __fastcall hkpRayCastQueryJobQueueUtils::popRayCastQueryJob(hkJob
   v5 = jobIn;
   do
   {
-    v6 = v5->0;
+    v6 = v5->hkJob;
     --v4;
     v5 = (hkJobQueue::JobQueueEntry *)((char *)v5 + 16);
     *(hkJob *)((char *)v5 + (char *)jobOut - (char *)jobIn - 16) = v6;
@@ -31,7 +35,7 @@ signed __int64 __fastcall hkpRayCastQueryJobQueueUtils::popRayCastQueryJob(hkJob
       if ( *(_DWORD *)&jobIn->m_data[48] > v7 )
       {
         *(_DWORD *)&jobOut->m_data[48] = v7;
-        v8 = *(signed int *)&jobIn->m_data[32];
+        v8 = *(int *)&jobIn->m_data[32];
         *(_DWORD *)&jobIn->m_data[48] -= v8;
         v9 = *(_QWORD *)&jobIn->m_data[40] + 80 * v8;
         *(_DWORD *)&jobIn->m_data[64] = 0;
@@ -46,7 +50,7 @@ signed __int64 __fastcall hkpRayCastQueryJobQueueUtils::popRayCastQueryJob(hkJob
     if ( *(_DWORD *)&jobIn->m_data[48] > v11 )
     {
       *(_DWORD *)&jobOut->m_data[48] = v11;
-      v12 = *(signed int *)&jobIn->m_data[32];
+      v12 = *(int *)&jobIn->m_data[32];
       *(_DWORD *)&jobIn->m_data[48] -= v12;
       v13 = v12;
       result = 1i64;
@@ -59,7 +63,11 @@ signed __int64 __fastcall hkpRayCastQueryJobQueueUtils::popRayCastQueryJob(hkJob
 
 // File Line: 90
 // RVA: 0xD2FBD0
-signed __int64 __fastcall hkpRayCastQueryJobQueueUtils::finishRayCastQueryJob(hkJobQueue *queue, hkJobQueue::DynamicData *data, hkJobQueue::JobQueueEntry *jobIn, hkJobQueue::JobQueueEntryInput *newJobCreated)
+__int64 __fastcall hkpRayCastQueryJobQueueUtils::finishRayCastQueryJob(
+        hkJobQueue *queue,
+        hkJobQueue::DynamicData *data,
+        hkJobQueue::JobQueueEntry *jobIn,
+        hkJobQueue::JobQueueEntryInput *newJobCreated)
 {
   _DWORD *v4; // rcx
   bool v5; // zf

@@ -2,11 +2,8 @@
 // RVA: 0xE37040
 void __fastcall hkxAttribute::hkxAttribute(hkxAttribute *this)
 {
-  hkxAttribute *v1; // rbx
-
-  v1 = this;
   hkStringPtr::hkStringPtr(&this->m_name);
-  v1->m_value.m_pntr = 0i64;
+  this->m_value.m_pntr = 0i64;
 }
 
 // File Line: 17

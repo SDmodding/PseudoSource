@@ -2,74 +2,67 @@
 // RVA: 0xA9A000
 void __fastcall CAkSrcFileADPCM::CAkSrcFileADPCM(CAkSrcFileADPCM *this, CAkPBI *in_pCtx)
 {
-  CAkSrcFileADPCM *v2; // rbx
-
-  v2 = this;
-  CAkSrcFileBase::CAkSrcFileBase((CAkSrcFileBase *)&this->vfptr, in_pCtx);
-  v2->vfptr = (CAkVPLNodeVtbl *)&CAkSrcFileADPCM::`vftable;
-  v2->m_pOutBuffer = 0i64;
-  v2->m_wExtraSize = 0;
+  CAkSrcFileBase::CAkSrcFileBase(this, in_pCtx);
+  this->vfptr = (CAkVPLNodeVtbl *)&CAkSrcFileADPCM::`vftable;
+  this->m_pOutBuffer = 0i64;
+  this->m_wExtraSize = 0;
 }
 
 // File Line: 33
 // RVA: 0xA9A0E0
 void __fastcall CAkSrcFileADPCM::GetBuffer(CAkSrcFileADPCM *this, AkVPLState *io_state)
 {
-  AkVPLState *v2; // r13
-  CAkSrcFileADPCM *v3; // rbx
-  AKRESULT v4; // eax
-  unsigned int v5; // eax
+  AKRESULT IsPrebufferingReady; // eax
+  CAkPBI *m_pCtx; // rax
   __int64 v6; // r14
   unsigned int nChannels; // edi
-  unsigned int v8; // er12
-  int v9; // ecx
+  unsigned int v8; // r12d
+  unsigned int v9; // ecx
   unsigned __int16 v10; // bp
-  char *v11; // rsi
-  unsigned __int16 v12; // dx
-  char *v13; // rbp
+  char *CachedAudioBuffer; // rsi
+  unsigned __int16 m_wExtraSize; // dx
+  char *m_ExtraBlock; // rbp
   __int64 v14; // r15
   unsigned int v15; // ecx
   unsigned int v16; // ebp
   __int64 v17; // r15
-  unsigned int v18; // er9
-  __int128 v19; // ax
-  unsigned int v20; // er8
-  __int64 v21; // rdi
-  size_t v22; // r8
-  char *v23; // rdx
-  char v24; // al
-  unsigned int *v25; // [rsp+30h] [rbp-48h]
-  unsigned int v26; // [rsp+80h] [rbp+8h]
-  int in_channelMask; // [rsp+90h] [rbp+18h]
-  char *v28; // [rsp+98h] [rbp+20h]
+  unsigned int m_uInputBlockSize; // r9d
+  __int128 v19; // rax
+  __int64 v20; // rdi
+  size_t m_ulSizeLeft_low; // r8
+  char *m_pNextAddress; // rdx
+  char v23; // al
+  unsigned int *p_m_sMediaFormat; // [rsp+30h] [rbp-48h]
+  unsigned int v25; // [rsp+80h] [rbp+8h]
+  unsigned int in_channelMask; // [rsp+90h] [rbp+18h]
+  char *v27; // [rsp+98h] [rbp+20h]
 
-  v2 = io_state;
-  v3 = this;
-  if ( *((_BYTE *)&this->0 + 32) & 2 )
+  if ( (*((_BYTE *)&this->CAkVPLSrcNode + 32) & 2) != 0 )
   {
-    v4 = (unsigned int)AK::SrcFileServices::IsPrebufferingReady(this->m_pStream, this->m_ulSizeLeft);
-    if ( v4 != 45 )
+    IsPrebufferingReady = (unsigned int)AK::SrcFileServices::IsPrebufferingReady(this->m_pStream, this->m_ulSizeLeft);
+    if ( IsPrebufferingReady != AK_DataReady )
     {
 LABEL_10:
-      v2->result = v4;
+      io_state->result = IsPrebufferingReady;
       return;
     }
-    *((_BYTE *)&v3->0 + 32) &= 0xFDu;
+    *((_BYTE *)&this->CAkVPLSrcNode + 32) &= ~2u;
   }
-  if ( !v3->m_ulSizeLeft )
+  if ( !this->m_ulSizeLeft )
   {
-    v4 = CAkSrcFileBase::FetchStreamBuffer((CAkSrcFileBase *)&v3->vfptr);
-    if ( v4 != 45 )
+    IsPrebufferingReady = CAkSrcFileBase::FetchStreamBuffer(this);
+    if ( IsPrebufferingReady != AK_DataReady )
       goto LABEL_10;
   }
-  v25 = (unsigned int *)&v3->m_pCtx->m_sMediaFormat;
-  v5 = *((_DWORD *)&v3->m_pCtx->m_sMediaFormat + 1);
+  m_pCtx = this->m_pCtx;
+  p_m_sMediaFormat = (unsigned int *)&m_pCtx->m_sMediaFormat;
+  LODWORD(m_pCtx) = *((_DWORD *)&m_pCtx->m_sMediaFormat + 1);
   v6 = 0i64;
   nChannels = 0;
-  v8 = (v5 >> 24) & 0x1F;
-  in_channelMask = v5 & 0x3FFFF;
-  v9 = v5 & 0x3FFFF;
-  if ( v5 & 0x3FFFF )
+  v8 = ((unsigned int)m_pCtx >> 24) & 0x1F;
+  in_channelMask = (unsigned int)m_pCtx & 0x3FFFF;
+  v9 = (unsigned int)m_pCtx & 0x3FFFF;
+  if ( ((unsigned int)m_pCtx & 0x3FFFF) != 0 )
   {
     do
     {
@@ -79,79 +72,78 @@ LABEL_10:
     while ( v9 );
   }
   v10 = 1024;
-  v11 = (char *)CAkLEngine::GetCachedAudioBuffer(v8 << 10);
-  v28 = v11;
-  v3->m_pOutBuffer = v11;
-  if ( v11 )
+  CachedAudioBuffer = (char *)CAkLEngine::GetCachedAudioBuffer(v8 << 10);
+  v27 = CachedAudioBuffer;
+  this->m_pOutBuffer = CachedAudioBuffer;
+  if ( CachedAudioBuffer )
   {
-    v12 = v3->m_wExtraSize;
-    v26 = v8 << 6;
-    if ( v12 )
+    m_wExtraSize = this->m_wExtraSize;
+    v25 = v8 << 6;
+    if ( m_wExtraSize )
     {
-      memmove(&v3->m_ExtraBlock[v12], v3->m_pNextAddress, v3->m_uInputBlockSize - v12);
+      memmove(&this->m_ExtraBlock[m_wExtraSize], this->m_pNextAddress, this->m_uInputBlockSize - m_wExtraSize);
       if ( nChannels )
       {
-        v13 = v3->m_ExtraBlock;
+        m_ExtraBlock = this->m_ExtraBlock;
         v14 = nChannels;
         do
         {
-          CAkADPCMCodec::Decode(v13, v11, 1u, v3->m_uInputBlockSize, nChannels);
-          v11 += 2;
-          v13 += 36;
+          CAkADPCMCodec::Decode(m_ExtraBlock, CachedAudioBuffer, 1u, this->m_uInputBlockSize, nChannels);
+          CachedAudioBuffer += 2;
+          m_ExtraBlock += 36;
           --v14;
         }
         while ( v14 );
-        v11 = v28;
+        CachedAudioBuffer = v27;
       }
       v10 = 960;
-      v15 = v3->m_uInputBlockSize - v3->m_wExtraSize;
-      v3->m_wExtraSize = 0;
-      v3->m_ulSizeLeft -= v15;
-      v3->m_pNextAddress += v15;
-      v11 += v26;
-      v28 = v11;
+      v15 = this->m_uInputBlockSize - this->m_wExtraSize;
+      this->m_wExtraSize = 0;
+      this->m_ulSizeLeft -= v15;
+      this->m_pNextAddress += v15;
+      CachedAudioBuffer += v25;
+      v27 = CachedAudioBuffer;
     }
-    v16 = (unsigned int)v10 >> 6;
-    if ( (unsigned int)(v3->m_ulSizeLeft / v3->m_uInputBlockSize) < v16 )
-      v16 = v3->m_ulSizeLeft / v3->m_uInputBlockSize;
+    v16 = v10 >> 6;
+    if ( (unsigned int)(this->m_ulSizeLeft / this->m_uInputBlockSize) < v16 )
+      v16 = this->m_ulSizeLeft / this->m_uInputBlockSize;
     if ( nChannels )
     {
       v17 = nChannels;
       do
       {
-        CAkADPCMCodec::Decode(&v3->m_pNextAddress[v6], v11, v16, v3->m_uInputBlockSize, nChannels);
-        v11 += 2;
+        CAkADPCMCodec::Decode(&this->m_pNextAddress[v6], CachedAudioBuffer, v16, this->m_uInputBlockSize, nChannels);
+        CachedAudioBuffer += 2;
         v6 += 36i64;
         --v17;
       }
       while ( v17 );
-      v11 = v28;
+      CachedAudioBuffer = v27;
     }
-    v18 = v3->m_uInputBlockSize;
-    v19 = (signed __int64)&v11[v26 * v16 - (unsigned __int64)v3->m_pOutBuffer];
-    v20 = v16 * v3->m_uInputBlockSize;
-    v3->m_ulSizeLeft -= v20;
-    v3->m_pNextAddress += v20;
-    v21 = v19 / v8;
-    if ( v3->m_ulSizeLeft < v18 )
+    m_uInputBlockSize = this->m_uInputBlockSize;
+    v19 = (__int64)&CachedAudioBuffer[v25 * v16 - (unsigned __int64)this->m_pOutBuffer];
+    this->m_ulSizeLeft -= v16 * m_uInputBlockSize;
+    this->m_pNextAddress += v16 * m_uInputBlockSize;
+    v20 = v19 / v8;
+    if ( this->m_ulSizeLeft < m_uInputBlockSize )
     {
-      v22 = LOWORD(v3->m_ulSizeLeft);
-      v23 = v3->m_pNextAddress;
-      v3->m_wExtraSize = v22;
-      memmove(v3->m_ExtraBlock, v23, v22);
-      v3->m_pNextAddress += v3->m_ulSizeLeft;
-      v24 = *((_BYTE *)&v3->0 + 126);
-      v3->m_ulSizeLeft = 0;
-      if ( v24 & 2 )
-        *((_BYTE *)&v3->0 + 126) = v24 & 0xFD;
+      m_ulSizeLeft_low = LOWORD(this->m_ulSizeLeft);
+      m_pNextAddress = this->m_pNextAddress;
+      this->m_wExtraSize = m_ulSizeLeft_low;
+      memmove(this->m_ExtraBlock, m_pNextAddress, m_ulSizeLeft_low);
+      this->m_pNextAddress += this->m_ulSizeLeft;
+      v23 = *((_BYTE *)&this->CAkSrcFileBase + 126);
+      this->m_ulSizeLeft = 0;
+      if ( (v23 & 2) != 0 )
+        *((_BYTE *)&this->CAkSrcFileBase + 126) = v23 & 0xFD;
       else
-        ((void (*)(void))v3->m_pStream->vfptr->ReleaseBuffer)();
+        this->m_pStream->CAkSrcFileBase::vfptr->ReleaseBuffer(this->m_pStream);
     }
-    CAkSrcBaseEx::SubmitBufferAndUpdate((CAkSrcBaseEx *)&v3->vfptr, v3->m_pOutBuffer, v21, *v25, in_channelMask, v2);
+    CAkSrcBaseEx::SubmitBufferAndUpdate(this, this->m_pOutBuffer, v20, *p_m_sMediaFormat, in_channelMask, io_state);
   }
   else
   {
-    v2->result = 2;
+    io_state->result = AK_Fail;
   }
 }
 
@@ -159,26 +151,21 @@ LABEL_10:
 // RVA: 0xA9A670
 void __fastcall CAkSrcFileADPCM::StopStream(CAkSrcFileADPCM *this)
 {
-  CAkSrcFileADPCM *v1; // rbx
-
-  v1 = this;
-  ((void (*)(void))this->vfptr->ReleaseBuffer)();
-  CAkSrcFileBase::StopStream((CAkSrcFileBase *)&v1->vfptr);
+  this->vfptr->ReleaseBuffer(this);
+  CAkSrcFileBase::StopStream(this);
 }
 
 // File Line: 140
 // RVA: 0xA9A630
 void __fastcall CAkSrcFileADPCM::ReleaseBuffer(CAkSrcFileADPCM *this)
 {
-  char *v1; // rdx
-  CAkSrcFileADPCM *v2; // rbx
+  char *m_pOutBuffer; // rdx
 
-  v1 = this->m_pOutBuffer;
-  v2 = this;
-  if ( v1 )
+  m_pOutBuffer = this->m_pOutBuffer;
+  if ( m_pOutBuffer )
   {
-    CAkLEngine::ReleaseCachedAudioBuffer((*((_BYTE *)&this->m_pCtx->m_sMediaFormat + 7) & 0x1F) << 10, v1);
-    v2->m_pOutBuffer = 0i64;
+    CAkLEngine::ReleaseCachedAudioBuffer((*((_BYTE *)&this->m_pCtx->m_sMediaFormat + 7) & 0x1F) << 10, m_pOutBuffer);
+    this->m_pOutBuffer = 0i64;
   }
 }
 
@@ -186,62 +173,50 @@ void __fastcall CAkSrcFileADPCM::ReleaseBuffer(CAkSrcFileADPCM *this)
 // RVA: 0xA9A690
 void __fastcall CAkSrcFileADPCM::VirtualOn(CAkSrcFileADPCM *this, AkVirtualQueueBehavior eBehavior)
 {
-  AkVirtualQueueBehavior v2; // ebx
-  CAkSrcFileADPCM *v3; // rdi
-
-  v2 = eBehavior;
-  v3 = this;
-  CAkSrcFileBase::VirtualOn((CAkSrcFileBase *)&this->vfptr, eBehavior);
-  if ( (unsigned int)v2 <= 1 )
-    v3->m_wExtraSize = 0;
+  CAkSrcFileBase::VirtualOn(this, eBehavior);
+  if ( (unsigned int)eBehavior <= AkVirtualQueueBehavior_FromElapsedTime )
+    this->m_wExtraSize = 0;
 }
 
 // File Line: 165
 // RVA: 0xA9A400
-unsigned int __fastcall CAkSrcFileADPCM::ParseHeader(CAkSrcFileADPCM *this, char *in_pBuffer)
+AKRESULT __fastcall CAkSrcFileADPCM::ParseHeader(CAkSrcFileADPCM *this, char *in_pBuffer)
 {
-  CAkSrcFileADPCM *v2; // rbx
-  char *v3; // rax
-  unsigned int v4; // edx
-  unsigned int *v5; // r15
-  unsigned int *v6; // rbp
-  unsigned int *v7; // rsi
-  unsigned int *v8; // r14
-  unsigned int result; // eax
-  __int64 v10; // rdi
-  CAkPBI *v11; // rcx
-  unsigned int v12; // er10
-  unsigned int v13; // er9
-  unsigned int v14; // er8
-  unsigned int v15; // er11
+  unsigned int m_ulSizeLeft; // edx
+  unsigned int *p_m_uDataOffset; // r15
+  unsigned int *p_m_uDataSize; // rbp
+  unsigned int *p_m_uPCMLoopEnd; // rsi
+  unsigned int *p_m_uPCMLoopStart; // r14
+  AKRESULT result; // eax
+  WaveFormatExtensible *pFormat; // rdi
+  CAkPBI *m_pCtx; // rcx
+  unsigned int nBlockAlign; // r10d
+  unsigned int v13; // r9d
+  unsigned int v14; // r8d
+  unsigned int v15; // r11d
   unsigned int v16; // edx
-  int v17; // er9
-  unsigned int v18; // er10
-  unsigned int v19; // er9
-  unsigned int v20; // eax
+  int v17; // r9d
+  unsigned int v18; // r10d
+  unsigned int v19; // r9d
+  unsigned int m_uTotalSamples; // eax
   bool v21; // zf
-  float v22; // [rsp+50h] [rbp-48h]
-  unsigned int v23; // [rsp+54h] [rbp-44h]
-  unsigned int v24; // [rsp+58h] [rbp-40h]
-  char v25; // [rsp+5Dh] [rbp-3Bh]
-  AkFileParser::AnalysisDataChunk in_analysisDataChunk; // [rsp+60h] [rbp-38h]
-  __int64 v27; // [rsp+70h] [rbp-28h]
-  __int64 v28; // [rsp+78h] [rbp-20h]
-  AkAudioFormat v29; // [rsp+A0h] [rbp+8h]
+  int v22[3]; // [rsp+50h] [rbp-48h] BYREF
+  char priority; // [rsp+5Dh] [rbp-3Bh]
+  AkFileParser::AnalysisDataChunk in_analysisDataChunk; // [rsp+60h] [rbp-38h] BYREF
+  AkFileParser::FormatInfo v25; // [rsp+70h] [rbp-28h] BYREF
+  AkAudioFormat v26; // [rsp+A0h] [rbp+8h]
 
-  v2 = this;
-  v3 = in_pBuffer;
-  v4 = this->m_ulSizeLeft;
+  m_ulSizeLeft = this->m_ulSizeLeft;
   in_analysisDataChunk.uDataSize = 0;
   in_analysisDataChunk.pData = 0i64;
-  v5 = &this->m_uDataOffset;
-  v6 = &this->m_uDataSize;
-  v7 = &this->m_uPCMLoopEnd;
-  v8 = &this->m_uPCMLoopStart;
+  p_m_uDataOffset = &this->m_uDataOffset;
+  p_m_uDataSize = &this->m_uDataSize;
+  p_m_uPCMLoopEnd = &this->m_uPCMLoopEnd;
+  p_m_uPCMLoopStart = &this->m_uPCMLoopStart;
   result = AkFileParser::Parse(
-             v3,
-             v4,
-             (AkFileParser::FormatInfo *)&v27,
+             in_pBuffer,
+             m_ulSizeLeft,
+             &v25,
              &this->m_markers,
              &this->m_uPCMLoopStart,
              &this->m_uPCMLoopEnd,
@@ -249,58 +224,61 @@ unsigned int __fastcall CAkSrcFileADPCM::ParseHeader(CAkSrcFileADPCM *this, char
              &this->m_uDataOffset,
              &in_analysisDataChunk,
              0i64);
-  if ( result == 1 )
+  if ( result == AK_Success )
   {
-    v10 = v28;
-    if ( *(_WORD *)v28 != 2 )
+    pFormat = v25.pFormat;
+    if ( v25.pFormat->wFormatTag != 2 )
       return 7;
-    v29.uSampleRate = *(_DWORD *)(v28 + 4);
-    *((_DWORD *)&v29 + 1) = *(_DWORD *)(v28 + 20) & 0x3FFFF | (*(unsigned __int16 *)(v28 + 2) << 25) & 0x1F000000 | 0x400000;
-    v11 = v2->m_pCtx;
-    v11->m_sMediaFormat = v29;
-    CAkPBI::InvalidateFeedbackParameters(v11);
+    v26.uSampleRate = v25.pFormat->nSamplesPerSec;
+    *((_DWORD *)&v26 + 1) = v25.pFormat->dwChannelMask & 0x3FFFF | (v25.pFormat->nChannels << 25) & 0x1F000000 | 0x400000;
+    m_pCtx = this->m_pCtx;
+    m_pCtx->m_sMediaFormat = v26;
+    CAkPBI::InvalidateFeedbackParameters(m_pCtx);
     if ( in_analysisDataChunk.uDataSize )
-      CAkSrcFileBase::StoreAnalysisData((CAkSrcFileBase *)&v2->vfptr, &in_analysisDataChunk);
-    v12 = *(unsigned __int16 *)(v10 + 12);
-    v13 = *v6;
-    v14 = *v5;
-    v15 = *v7;
-    v2->m_uInputBlockSize = v12;
+      CAkSrcFileBase::StoreAnalysisData(this, &in_analysisDataChunk);
+    nBlockAlign = pFormat->nBlockAlign;
+    v13 = *p_m_uDataSize;
+    v14 = *p_m_uDataOffset;
+    v15 = *p_m_uPCMLoopEnd;
+    this->m_uInputBlockSize = nBlockAlign;
     v16 = v14 + v13;
-    v2->m_uTotalSamples = (v13 << 6) / *(unsigned __int16 *)(v10 + 12);
-    if ( v15 && v2->m_uLoopCnt != 1 )
+    this->m_uTotalSamples = (v13 << 6) / pFormat->nBlockAlign;
+    if ( !v15 || this->m_uLoopCnt == 1 )
     {
-      v17 = v12 * (*v8 >> 6);
-      v18 = v14 + ((v15 + 1) >> 6) * v12;
+      this->m_ulLoopEnd = v16;
+      this->m_ulLoopStart = v14;
+      *p_m_uPCMLoopEnd = ((v13 / nBlockAlign) << 6) - 1;
+    }
+    else
+    {
+      v17 = nBlockAlign * (*p_m_uPCMLoopStart >> 6);
+      v18 = v14 + ((v15 + 1) >> 6) * nBlockAlign;
       v19 = v14 + v17;
-      v2->m_ulLoopEnd = v18;
-      v2->m_ulLoopStart = v19;
-      if ( v15 < *v8 || v19 > v16 || v18 > v16 )
+      this->m_ulLoopEnd = v18;
+      this->m_ulLoopStart = v19;
+      if ( v15 < *p_m_uPCMLoopStart || v19 > v16 || v18 > v16 )
         return 7;
     }
-    else
+    this->m_pStream->CAkSrcFileBase::vfptr->GetHeuristics(this->m_pStream, (AkAutoStmHeuristics *)v22);
+    if ( *p_m_uPCMLoopEnd <= *p_m_uPCMLoopStart )
+      return 2;
+    m_uTotalSamples = this->m_uTotalSamples;
+    if ( *p_m_uPCMLoopStart > m_uTotalSamples || *p_m_uPCMLoopEnd >= m_uTotalSamples )
     {
-      v2->m_ulLoopEnd = v16;
-      v2->m_ulLoopStart = v14;
-      *v7 = (v13 / v12 << 6) - 1;
-    }
-    v2->m_pStream->vfptr->GetHeuristics(v2->m_pStream, (AkAutoStmHeuristics *)&v22);
-    if ( *v7 <= *v8 || (v20 = v2->m_uTotalSamples, *v8 > v20) || *v7 >= v20 )
-    {
-      result = 2;
+      return 2;
     }
     else
     {
-      v21 = v2->m_uLoopCnt == 1;
-      v22 = (float)((float)*(unsigned __int16 *)(v10 + 12) * (float)*(signed int *)(v10 + 4)) * 0.000015625001;
+      v21 = this->m_uLoopCnt == 1;
+      *(float *)v22 = (float)((float)pFormat->nBlockAlign * (float)(int)pFormat->nSamplesPerSec) * 0.000015625001;
       if ( !v21 )
       {
-        v23 = v2->m_ulLoopStart;
-        v24 = v2->m_ulLoopEnd;
+        v22[1] = this->m_ulLoopStart;
+        v22[2] = this->m_ulLoopEnd;
       }
-      v25 = (signed int)v2->m_pCtx->m_PriorityInfoCurrent.currentPriority.priority;
-      v2->m_pStream->vfptr->SetHeuristics(v2->m_pStream, (AkAutoStmHeuristics *)&v22);
-      result = v2->m_pStream->vfptr->SetMinimalBufferSize(v2->m_pStream, 36 * *(unsigned __int16 *)(v10 + 2));
+      priority = (int)this->m_pCtx->m_PriorityInfoCurrent.currentPriority.priority;
+      this->m_pStream->CAkSrcFileBase::vfptr->SetHeuristics(this->m_pStream, (AkAutoStmHeuristics *)v22);
+      return this->m_pStream->CAkSrcFileBase::vfptr->SetMinimalBufferSize(this->m_pStream, 36 * pFormat->nChannels);
     }
   }
   return result;
@@ -310,7 +288,7 @@ unsigned int __fastcall CAkSrcFileADPCM::ParseHeader(CAkSrcFileADPCM *this, char
 // RVA: 0xA9A3C0
 float __fastcall CAkSrcFileADPCM::GetThroughput(CAkSrcFileADPCM *this, AkAudioFormat *in_rFormat)
 {
-  int v2; // er8
+  int v2; // r8d
   int i; // ecx
 
   v2 = 0;
@@ -321,7 +299,11 @@ float __fastcall CAkSrcFileADPCM::GetThroughput(CAkSrcFileADPCM *this, AkAudioFo
 
 // File Line: 302
 // RVA: 0xA9A0C0
-signed __int64 __fastcall CAkSrcFileADPCM::FindClosestFileOffset(CAkSrcFileADPCM *this, unsigned int in_uDesiredSample, unsigned int *out_uSeekedSample, unsigned int *out_uFileOffset)
+__int64 __fastcall CAkSrcFileADPCM::FindClosestFileOffset(
+        CAkSrcFileADPCM *this,
+        unsigned int in_uDesiredSample,
+        unsigned int *out_uSeekedSample,
+        unsigned int *out_uFileOffset)
 {
   unsigned int v4; // edx
 
@@ -336,6 +318,6 @@ signed __int64 __fastcall CAkSrcFileADPCM::FindClosestFileOffset(CAkSrcFileADPCM
 AKRESULT __fastcall CAkSrcFileADPCM::ChangeSourcePosition(CAkSrcFileADPCM *this)
 {
   this->m_wExtraSize = 0;
-  return CAkSrcFileBase::ChangeSourcePosition((CAkSrcFileBase *)&this->vfptr);
+  return CAkSrcFileBase::ChangeSourcePosition(this);
 }
 

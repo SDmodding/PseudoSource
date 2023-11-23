@@ -1,6 +1,9 @@
 // File Line: 92
 // RVA: 0x896220
-void __fastcall Scaleform::Render::JPEG::ExtraData::ExtraData(Scaleform::Render::JPEG::ExtraData *this, Scaleform::MemoryHeap *heap, unsigned __int64 sz)
+void __fastcall Scaleform::Render::JPEG::ExtraData::ExtraData(
+        Scaleform::Render::JPEG::ExtraData *this,
+        Scaleform::MemoryHeap *heap,
+        unsigned __int64 sz)
 {
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
@@ -16,11 +19,8 @@ void __fastcall Scaleform::Render::JPEG::ExtraData::ExtraData(Scaleform::Render:
 // RVA: 0x8A45B0
 void __fastcall Scaleform::Render::JPEG::ExtraData::~ExtraData(Scaleform::Render::JPEG::ExtraData *this)
 {
-  Scaleform::Render::JPEG::ExtraData *v1; // rbx
-
-  v1 = this;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::JPEG::ExtraData::`vftable;
   Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, this->Data);
-  Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&v1->vfptr);
+  Scaleform::RefCountImplCore::~RefCountImplCore(this);
 }
 

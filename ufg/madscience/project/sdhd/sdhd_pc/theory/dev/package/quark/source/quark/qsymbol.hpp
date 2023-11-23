@@ -23,11 +23,9 @@ bool __fastcall UFG::qSymbol::operator!=(UFG::qSymbol *this, UFG::qSymbol *sym)
 // RVA: 0x48E70
 void __fastcall UFG::qStaticSymbol::qStaticSymbol(UFG::qStaticSymbol *this, const char *string)
 {
-  UFG::qStaticSymbol *v2; // rdi
   unsigned int v3; // eax
 
-  v2 = this;
   v3 = UFG::qStringHash32(string, 0xFFFFFFFF);
-  UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)v2, v3);
+  UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)this, v3);
 }
 

@@ -10,6 +10,6 @@ void __fastcall Scaleform::String::InitStruct::~InitStruct(Scaleform::String::In
 void __fastcall Scaleform::String::~String(Scaleform::String *this)
 {
   if ( !_InterlockedDecrement((volatile signed __int32 *)((this->HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-    ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
 }
 

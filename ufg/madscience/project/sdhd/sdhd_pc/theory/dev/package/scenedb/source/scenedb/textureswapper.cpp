@@ -7,7 +7,7 @@ __int64 UFG::_dynamic_initializer_for__smhTextureData__()
   UFG::smhTextureData.mImpl = 0i64;
   *(_DWORD *)&UFG::smhTextureData.mFlags = 536870915;
   UFG::smhTextureData._mTargetState.mValue = 1;
-  return atexit(UFG::_dynamic_atexit_destructor_for__smhTextureData__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__smhTextureData__);
 }
 
 // File Line: 33
@@ -19,6 +19,6 @@ __int64 UFG::_dynamic_initializer_for__smhModelData__()
   UFG::smhModelData.mImpl = 0i64;
   *(_DWORD *)&UFG::smhModelData.mFlags = 536870915;
   UFG::smhModelData._mTargetState.mValue = 1;
-  return atexit(UFG::_dynamic_atexit_destructor_for__smhModelData__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__smhModelData__);
 }
 

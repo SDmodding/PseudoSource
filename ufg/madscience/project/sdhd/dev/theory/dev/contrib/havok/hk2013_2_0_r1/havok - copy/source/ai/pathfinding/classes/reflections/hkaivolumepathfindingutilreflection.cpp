@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkaiVolumePathfindingUtilFindPathInputClass__()
     0i64,
     0i64,
     0,
-    6u);
+    6);
 }
 
 // File Line: 70
@@ -28,23 +28,26 @@ hkClass *__fastcall hkaiVolumePathfindingUtil::FindPathInput::staticClass()
 
 // File Line: 77
 // RVA: 0xBB7AC0
-void __fastcall finishLoadedObjecthkaiVolumePathfindingUtilFindPathInput(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiVolumePathfindingUtilFindPathInput(
+        hkaiVolumePathfindingUtil::FindPathInput *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiVolumePathfindingUtil::FindPathInput::FindPathInput);
+  if ( p )
+    hkaiVolumePathfindingUtil::FindPathInput::FindPathInput(p, finishing);
 }
 
 // File Line: 83
 // RVA: 0xBB7AE0
-void __fastcall cleanupLoadedObjecthkaiVolumePathfindingUtilFindPathInput(void *p)
+void __fastcall cleanupLoadedObjecthkaiVolumePathfindingUtilFindPathInput(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 87
 // RVA: 0xBB7AF0
 hkBaseObjectVtbl *__fastcall getVtablehkaiVolumePathfindingUtilFindPathInput()
 {
-  hkaiVolumePathfindingUtil::FindPathInput v1; // [rsp+20h] [rbp-98h]
+  hkaiVolumePathfindingUtil::FindPathInput v1; // [rsp+20h] [rbp-98h] BYREF
 
   hkaiVolumePathfindingUtil::FindPathInput::FindPathInput(&v1, 0);
   return v1.vfptr;
@@ -61,8 +64,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiVolumePathfindingUtilFindPathInpu
   hkaiVolumePathfindingUtilFindPathInputTypeInfo.m_typeName = "hkaiVolumePathfindingUtilFindPathInput";
   hkaiVolumePathfindingUtilFindPathInputTypeInfo.m_vtable = result;
   hkaiVolumePathfindingUtilFindPathInputTypeInfo.m_scopedName = "!hkaiVolumePathfindingUtil::FindPathInput";
-  hkaiVolumePathfindingUtilFindPathInputTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiVolumePathfindingUtilFindPathInput;
-  hkaiVolumePathfindingUtilFindPathInputTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiVolumePathfindingUtilFindPathInput;
+  hkaiVolumePathfindingUtilFindPathInputTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiVolumePathfindingUtilFindPathInput;
+  hkaiVolumePathfindingUtilFindPathInputTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiVolumePathfindingUtilFindPathInput;
   return result;
 }
 
@@ -96,23 +99,26 @@ hkClass *__fastcall hkaiVolumePathfindingUtil::FindPathOutput::staticClass()
 
 // File Line: 147
 // RVA: 0xBB7B20
-void __fastcall finishLoadedObjecthkaiVolumePathfindingUtilFindPathOutput(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiVolumePathfindingUtilFindPathOutput(
+        hkaiVolumePathfindingUtil::FindPathOutput *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiVolumePathfindingUtil::FindPathOutput::FindPathOutput);
+  if ( p )
+    hkaiVolumePathfindingUtil::FindPathOutput::FindPathOutput(p, finishing);
 }
 
 // File Line: 153
 // RVA: 0xBB7B40
-void __fastcall cleanupLoadedObjecthkaiVolumePathfindingUtilFindPathOutput(void *p)
+void __fastcall cleanupLoadedObjecthkaiVolumePathfindingUtilFindPathOutput(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 157
 // RVA: 0xBB7B50
 hkBaseObjectVtbl *__fastcall getVtablehkaiVolumePathfindingUtilFindPathOutput()
 {
-  hkaiVolumePathfindingUtil::FindPathOutput v1; // [rsp+20h] [rbp-48h]
+  hkaiVolumePathfindingUtil::FindPathOutput v1; // [rsp+20h] [rbp-48h] BYREF
 
   hkaiVolumePathfindingUtil::FindPathOutput::FindPathOutput(&v1, 0);
   return v1.vfptr;
@@ -129,8 +135,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiVolumePathfindingUtilFindPathOutp
   hkaiVolumePathfindingUtilFindPathOutputTypeInfo.m_typeName = "hkaiVolumePathfindingUtilFindPathOutput";
   hkaiVolumePathfindingUtilFindPathOutputTypeInfo.m_vtable = result;
   hkaiVolumePathfindingUtilFindPathOutputTypeInfo.m_scopedName = "!hkaiVolumePathfindingUtil::FindPathOutput";
-  hkaiVolumePathfindingUtilFindPathOutputTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiVolumePathfindingUtilFindPathOutput;
-  hkaiVolumePathfindingUtilFindPathOutputTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiVolumePathfindingUtilFindPathOutput;
+  hkaiVolumePathfindingUtilFindPathOutputTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiVolumePathfindingUtilFindPathOutput;
+  hkaiVolumePathfindingUtilFindPathOutputTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiVolumePathfindingUtilFindPathOutput;
   return result;
 }
 

@@ -15,7 +15,8 @@ void __fastcall AK::StreamMgr::IAkIOHookDeferred::~IAkIOHookDeferred(AK::StreamM
 
 // File Line: 384
 // RVA: 0x1414E0
-void __fastcall AK::StreamMgr::IAkFileLocationResolver::~IAkFileLocationResolver(AK::StreamMgr::IAkFileLocationResolver *this)
+void __fastcall AK::StreamMgr::IAkFileLocationResolver::~IAkFileLocationResolver(
+        AK::StreamMgr::IAkFileLocationResolver *this)
 {
   this->vfptr = (AK::StreamMgr::IAkFileLocationResolverVtbl *)&AK::StreamMgr::IAkFileLocationResolver::`vftable;
 }

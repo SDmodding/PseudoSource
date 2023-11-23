@@ -3,7 +3,7 @@
 __int64 dynamic_initializer_for__gTaskFunctionDecl_CloudSortTask__()
 {
   UFG::qTaskFunctionDecl::qTaskFunctionDecl(&gTaskFunctionDecl_CloudSortTask, &gTaskFunctionDeclData_CloudSortTask);
-  return atexit(dynamic_atexit_destructor_for__gTaskFunctionDecl_CloudSortTask__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gTaskFunctionDecl_CloudSortTask__);
 }
 
 // File Line: 34
@@ -15,29 +15,28 @@ bool __fastcall IndexCompare(IndexBlock *a, IndexBlock *b)
 
 // File Line: 51
 // RVA: 0x7A060
-void __fastcall CloudSortTask(int workerId, UFG::qMemoryStreamer *memory_streamer, void *params_Remote, void *pad0)
+void __fastcall CloudSortTask(int workerId, UFG::qMemoryStreamer *memory_streamer, char *params_Remote, void *pad0)
 {
-  char *v4; // rsi
   __int64 v5; // rbx
-  __int64 v6; // r14
-  unsigned __int16 v7; // ax
+  Illusion::StateArgs *v6; // r14
+  unsigned __int16 Param; // ax
   unsigned __int16 v8; // ax
   void *v9; // r8
   unsigned int v10; // edx
   char v11; // cl
   Illusion::Mesh *v12; // r12
-  unsigned int i; // er15
-  signed __int64 v14; // rdi
-  __int64 v15; // rdx
+  unsigned int i; // r15d
+  __int64 v14; // rdi
+  Render::CloudWispAttribute *v15; // rdx
   float v16; // xmm5_4
   float v17; // xmm6_4
   float v18; // xmm4_4
-  unsigned int v19; // ecx
-  float *v20; // rax
+  unsigned int j; // ecx
+  float *p_x; // rax
   IndexBlock *v21; // rcx
   unsigned __int16 v22; // r9
-  signed __int16 v23; // r8
-  signed __int64 v24; // rdx
+  __int16 v23; // r8
+  __int64 v24; // rdx
   char *v25; // r13
   float v26; // xmm2_4
   float v27; // xmm6_4
@@ -45,119 +44,112 @@ void __fastcall CloudSortTask(int workerId, UFG::qMemoryStreamer *memory_streame
   float v29; // xmm6_4
   unsigned int v30; // edx
   char v31; // cl
-  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v32; // rcx
-  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v33; // rax
+  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *mPrev; // rcx
+  UFG::qNode<Illusion::StateArg,Illusion::StateArg> *mNext; // rax
   UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v34; // rcx
   UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v35; // rax
   __int64 v36; // rcx
-  UFG::qMatrix44 *v37; // rax
+  UFG::qMatrix44 *mWorldView; // rax
   UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v38; // rcx
   UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v39; // rax
   UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v40; // rcx
   UFG::qNode<Illusion::StateArg,Illusion::StateArg> *v41; // rax
   __int64 v42; // rcx
   UFG::qMatrix44 *v43; // rax
-  Render::cbExternalViewTransformState arg; // [rsp+40h] [rbp-98h]
-  UFG::qMatrix44 *v45; // [rsp+78h] [rbp-60h]
-  UFG::qMatrix44 *v46; // [rsp+80h] [rbp-58h]
+  Render::cbExternalViewTransformState arg; // [rsp+40h] [rbp-98h] BYREF
+  UFG::qMatrix44 *p_result; // [rsp+78h] [rbp-60h]
+  UFG::qMatrix44 *p_d; // [rsp+80h] [rbp-58h]
   char *v47; // [rsp+88h] [rbp-50h]
   char *v48; // [rsp+90h] [rbp-48h]
   __int64 v49; // [rsp+98h] [rbp-40h]
-  Render::cbLocalTransformState v50; // [rsp+A8h] [rbp-30h]
+  Render::cbLocalTransformState v50; // [rsp+A8h] [rbp-30h] BYREF
   __int64 v51; // [rsp+D0h] [rbp-8h]
-  UFG::qMatrix44 result; // [rsp+D8h] [rbp+0h]
-  UFG::qMatrix44 d; // [rsp+118h] [rbp+40h]
-  SimpleTaskSubmitContext dest; // [rsp+158h] [rbp+80h]
-  Illusion::StateArgs *v55; // [rsp+E18h] [rbp+D40h]
+  UFG::qMatrix44 result; // [rsp+D8h] [rbp+0h] BYREF
+  UFG::qMatrix44 d; // [rsp+118h] [rbp+40h] BYREF
+  SimpleTaskSubmitContext dest; // [rsp+158h] [rbp+80h] BYREF
+  Illusion::StateArgs *p_mStateArgs; // [rsp+E18h] [rbp+D40h]
 
   v51 = -2i64;
-  v4 = (char *)params_Remote;
   v5 = *((_QWORD *)params_Remote + 18);
   if ( *((_DWORD *)params_Remote + 35) )
   {
-    v6 = *((_QWORD *)params_Remote + 23);
-    v55 = (Illusion::StateArgs *)*((_QWORD *)params_Remote + 23);
+    v6 = (Illusion::StateArgs *)*((_QWORD *)params_Remote + 23);
+    p_mStateArgs = v6;
     SimpleTaskSubmitContext::SimpleTaskSubmitContext(&dest);
-    dest.mRenderQueueProvider = (RenderQueueLayer *)*((_QWORD *)v4 + 25);
+    dest.mRenderQueueProvider = (RenderQueueLayer *)*((_QWORD *)params_Remote + 25);
     UFG::qMemSet(dest.mStateValues.mParamValues, 0, 0x400u);
     dest.mStateValues.mSetValueMask.mFlags[1] = 0i64;
     dest.mStateValues.mSetValueMask.mFlags[0] = 0i64;
-    UFG::qInverseAffine(&d, (UFG::qMatrix44 *)v4);
-    UFG::qMatrix44::operator*((UFG::qMatrix44 *)v4, &result, (UFG::qMatrix44 *)v4 + 1);
-    *(_QWORD *)&arg.mStateParamIndex = (char *)&arg + 24;
+    UFG::qInverseAffine(&d, (UFG::qMatrix44 *)params_Remote);
+    UFG::qMatrix44::operator*((UFG::qMatrix44 *)params_Remote, &result, (UFG::qMatrix44 *)params_Remote + 1);
+    *(_QWORD *)&arg.mStateParamIndex = &arg.mStateParamIndex;
     arg.mWorldView = (UFG::qMatrix44 *)&arg.mStateParamIndex;
     arg.mProjection = 0i64;
     LOWORD(arg.mCached_Remote.m_Stream) = Render::cbViewTransformState::sStateParamIndex;
     WORD1(arg.mCached_Remote.m_Stream) = 1;
-    if ( (_WORD)Render::cbViewTransformState::sStateParamIndex == -1 )
+    if ( (_WORD)Render::cbViewTransformState::sStateParamIndex == 0xFFFF )
     {
-      v7 = Illusion::StateSystem::GetParam(&Illusion::gStateSystem, "cbViewTransform");
-      Render::cbViewTransformState::sStateParamIndex = v7;
-      LOWORD(arg.mCached_Remote.m_Stream) = v7;
+      Param = Illusion::StateSystem::GetParam(&Illusion::gStateSystem, "cbViewTransform");
+      Render::cbViewTransformState::sStateParamIndex = Param;
+      LOWORD(arg.mCached_Remote.m_Stream) = Param;
     }
-    v45 = &result;
-    v46 = &d;
-    v47 = v4 + 64;
-    v48 = v4 + 224;
+    p_result = &result;
+    p_d = &d;
+    v47 = params_Remote + 64;
+    v48 = params_Remote + 224;
     v49 = 0i64;
-    arg.mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
-    arg.mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
+    arg.mPrev = &arg;
+    arg.mNext = &arg;
     arg.mCallback = 0i64;
     arg.mStateParamIndex = Render::cbExternalViewTransformState::sStateParamIndex;
     *(_WORD *)&arg.mFlags = 1;
-    if ( (_WORD)Render::cbExternalViewTransformState::sStateParamIndex == -1 )
+    if ( (_WORD)Render::cbExternalViewTransformState::sStateParamIndex == 0xFFFF )
     {
       v8 = Illusion::StateSystem::GetParam(&Illusion::gStateSystem, "cbExternalViewTransform");
       Render::cbExternalViewTransformState::sStateParamIndex = v8;
       arg.mStateParamIndex = v8;
     }
-    arg.mWorldView = (UFG::qMatrix44 *)v4;
-    arg.mProjection = (UFG::qMatrix44 *)(v4 + 64);
+    arg.mWorldView = (UFG::qMatrix44 *)params_Remote;
+    arg.mProjection = (UFG::qMatrix44 *)(params_Remote + 64);
     arg.mCached_Remote.m_Stream = 0i64;
     Illusion::StateArgs::Set<Render::cbViewTransformState>(
       &dest.mStateArgs,
       (Render::cbViewTransformState *)&arg.mStateParamIndex);
     Illusion::StateArgs::Set<Render::cbExternalViewTransformState>(&dest.mStateArgs, &arg);
-    v9 = (void *)*((_QWORD *)v4 + 20);
-    v10 = *(signed __int16 *)(v6 + 4);
-    v11 = *(_WORD *)(v6 + 4);
+    v9 = (void *)*((_QWORD *)params_Remote + 20);
+    v10 = SWORD2(v6->mStateArgsCreateMask.mFlags[0]);
+    v11 = WORD2(v6->mStateArgsCreateMask.mFlags[0]);
     if ( v10 >= 0x40 )
       dest.mStateValues.mSetValueMask.mFlags[1] |= 1i64 << (v11 - 64);
     else
       dest.mStateValues.mSetValueMask.mFlags[0] |= 1i64 << v11;
-    dest.mStateValues.mParamValues[(signed __int16)v10] = v9;
-    v12 = (Illusion::Mesh *)*((_QWORD *)v4 + 26);
-    for ( i = 0; i < *((_DWORD *)v4 + 35); ++i )
+    dest.mStateValues.mParamValues[(__int16)v10] = v9;
+    v12 = (Illusion::Mesh *)*((_QWORD *)params_Remote + 26);
+    for ( i = 0; i < *((_DWORD *)params_Remote + 35); ++i )
     {
       v14 = v5 + 240i64 * i;
       if ( *(_BYTE *)(v14 + 225) )
       {
-        v15 = *(_QWORD *)(v14 + 192);
-        gCurrentInstanceBuffer = *(Render::CloudWispAttribute **)(v14 + 192);
-        v16 = (float)((float)((float)(*((float *)v4 + 33) * *(float *)(v14 + 80))
-                            + (float)(*((float *)v4 + 32) * *(float *)(v14 + 64)))
-                    + (float)(*((float *)v4 + 34) * *(float *)(v14 + 96)))
+        v15 = *(Render::CloudWispAttribute **)(v14 + 192);
+        gCurrentInstanceBuffer = v15;
+        v16 = (float)((float)((float)(*((float *)params_Remote + 33) * *(float *)(v14 + 80))
+                            + (float)(*((float *)params_Remote + 32) * *(float *)(v14 + 64)))
+                    + (float)(*((float *)params_Remote + 34) * *(float *)(v14 + 96)))
             + *(float *)(v14 + 112);
-        v17 = (float)((float)((float)(*((float *)v4 + 32) * *(float *)(v14 + 68))
-                            + (float)(*((float *)v4 + 33) * *(float *)(v14 + 84)))
-                    + (float)(*((float *)v4 + 34) * *(float *)(v14 + 100)))
+        v17 = (float)((float)((float)(*((float *)params_Remote + 32) * *(float *)(v14 + 68))
+                            + (float)(*((float *)params_Remote + 33) * *(float *)(v14 + 84)))
+                    + (float)(*((float *)params_Remote + 34) * *(float *)(v14 + 100)))
             + *(float *)(v14 + 116);
-        v18 = (float)((float)((float)(*((float *)v4 + 32) * *(float *)(v14 + 72))
-                            + (float)(*((float *)v4 + 33) * *(float *)(v14 + 88)))
-                    + (float)(*((float *)v4 + 34) * *(float *)(v14 + 104)))
+        v18 = (float)((float)((float)(*((float *)params_Remote + 32) * *(float *)(v14 + 72))
+                            + (float)(*((float *)params_Remote + 33) * *(float *)(v14 + 88)))
+                    + (float)(*((float *)params_Remote + 34) * *(float *)(v14 + 104)))
             + *(float *)(v14 + 120);
-        v19 = 0;
-        if ( *(_DWORD *)(v14 + 128) )
+        for ( j = 0; j < *(_DWORD *)(v14 + 128); ++j )
         {
-          do
-          {
-            v20 = (float *)(v15 + ((unsigned __int64)v19 << 6));
-            v20[3] = (float)((float)((float)(*v20 - v16) * (float)(*v20 - v16))
-                           + (float)((float)(v20[1] - v17) * (float)(v20[1] - v17)))
-                   + (float)((float)(v20[2] - v18) * (float)(v20[2] - v18));
-            ++v19;
-          }
-          while ( v19 < *(_DWORD *)(v14 + 128) );
+          p_x = &v15[(unsigned __int64)j].mPosition.x;
+          p_x[3] = (float)((float)((float)(*p_x - v16) * (float)(*p_x - v16))
+                         + (float)((float)(p_x[1] - v17) * (float)(p_x[1] - v17)))
+                 + (float)((float)(p_x[2] - v18) * (float)(p_x[2] - v18));
         }
         v21 = *(IndexBlock **)(v14 + 208);
         if ( *(_BYTE *)(v14 + 224) )
@@ -183,7 +175,7 @@ void __fastcall CloudSortTask(int workerId, UFG::qMemoryStreamer *memory_streame
         }
         UFG::qQuickSortImpl<IndexBlock,bool (*)(IndexBlock const &,IndexBlock const &)>(
           v21,
-          &v21[*(signed int *)(v14 + 128) - 1i64],
+          &v21[*(int *)(v14 + 128) - 1],
           IndexCompare);
       }
       v25 = UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x20u, 0x10u);
@@ -215,34 +207,34 @@ void __fastcall CloudSortTask(int workerId, UFG::qMemoryStreamer *memory_streame
       *((_DWORD *)v25 + 5) = *(_DWORD *)(v14 + 132);
       *((float *)v25 + 6) = v28;
       *((float *)v25 + 7) = v29 - v28;
-      v30 = SLOWORD(v55->mStateArgsCreateMask.mFlags[0]);
-      v31 = v55->mStateArgsCreateMask.mFlags[0];
+      v30 = SLOWORD(p_mStateArgs->mStateArgsCreateMask.mFlags[0]);
+      v31 = p_mStateArgs->mStateArgsCreateMask.mFlags[0];
       if ( v30 >= 0x40 )
         dest.mStateValues.mSetValueMask.mFlags[1] |= 1i64 << (v31 - 64);
       else
         dest.mStateValues.mSetValueMask.mFlags[0] |= 1i64 << v31;
-      dest.mStateValues.mParamValues[(signed __int16)v30] = v25;
+      dest.mStateValues.mParamValues[(__int16)v30] = v25;
       Render::cbLocalTransformState::cbLocalTransformState(
         &v50,
-        (UFG::qMatrix44 *)v4,
+        (UFG::qMatrix44 *)params_Remote,
         &result,
         (UFG::qMatrix44 *)(v5 + 240i64 * i));
       Illusion::StateArgs::Set<Render::cbLocalTransformState>(&dest.mStateArgs, &v50);
       Illusion::SubmitContext::DrawInstanced(
-        (Illusion::SubmitContext *)&dest.vfptr,
+        &dest,
         v12,
         *(Illusion::Buffer **)(v14 + 184),
         *(_DWORD *)(v14 + 128),
-        *((Illusion::Material **)v4 + 27),
+        *((Illusion::Material **)params_Remote + 27),
         *(Illusion::Buffer **)(v14 + 200),
-        *((void **)v4 + 26),
+        *((void **)params_Remote + 26),
         *(const char **)(v14 + 216));
-      v32 = v50.mPrev;
-      v33 = v50.mNext;
+      mPrev = v50.mPrev;
+      mNext = v50.mNext;
       v50.mPrev->mNext = v50.mNext;
-      v33->mPrev = v32;
-      v50.mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&v50;
-      v50.mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&v50;
+      mNext->mPrev = mPrev;
+      v50.mPrev = &v50;
+      v50.mNext = &v50;
       v50.mIsSet = 0;
       if ( (UFG::qList<Illusion::StateArg,Illusion::StateArg,0,0> *)dest.mStateArgs.mStateArgs[v50.mStateParamIndex].mNode.mNext == &dest.mStateArgs.mStateArgs[v50.mStateParamIndex] )
         dest.mStateArgs.mStateArgsCreateMask.mFlags[(unsigned int)v50.mStateParamIndex >> 6] &= ~(1i64 << (v50.mStateParamIndex & 0x3F));
@@ -250,24 +242,24 @@ void __fastcall CloudSortTask(int workerId, UFG::qMemoryStreamer *memory_streame
       v35 = v50.mNext;
       v50.mPrev->mNext = v50.mNext;
       v35->mPrev = v34;
-      v50.mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&v50;
-      v50.mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&v50;
+      v50.mPrev = &v50;
+      v50.mNext = &v50;
     }
     v36 = *(_QWORD *)&arg.mStateParamIndex;
-    v37 = arg.mWorldView;
+    mWorldView = arg.mWorldView;
     *(_QWORD *)(*(_QWORD *)&arg.mStateParamIndex + 8i64) = arg.mWorldView;
-    *(_QWORD *)&v37->v0.x = v36;
-    *(_QWORD *)&arg.mStateParamIndex = (char *)&arg + 24;
+    *(_QWORD *)&mWorldView->v0.x = v36;
+    *(_QWORD *)&arg.mStateParamIndex = &arg.mStateParamIndex;
     arg.mWorldView = (UFG::qMatrix44 *)&arg.mStateParamIndex;
     BYTE3(arg.mCached_Remote.m_Stream) = 0;
     if ( (UFG::qList<Illusion::StateArg,Illusion::StateArg,0,0> *)dest.mStateArgs.mStateArgs[SLOWORD(arg.mCached_Remote.m_Stream)].mNode.mNext == &dest.mStateArgs.mStateArgs[SLOWORD(arg.mCached_Remote.m_Stream)] )
-      dest.mStateArgs.mStateArgsCreateMask.mFlags[(unsigned int)SLOWORD(arg.mCached_Remote.m_Stream) >> 6] &= ~(1i64 << ((_QWORD)arg.mCached_Remote.m_Stream & 0x3F));
+      dest.mStateArgs.mStateArgsCreateMask.mFlags[(unsigned int)SLOWORD(arg.mCached_Remote.m_Stream) >> 6] &= ~(1i64 << ((__int64)arg.mCached_Remote.m_Stream & 0x3F));
     v38 = arg.mPrev;
     v39 = arg.mNext;
     arg.mPrev->mNext = arg.mNext;
     v39->mPrev = v38;
-    arg.mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
-    arg.mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
+    arg.mPrev = &arg;
+    arg.mNext = &arg;
     arg.mIsSet = 0;
     if ( (UFG::qList<Illusion::StateArg,Illusion::StateArg,0,0> *)dest.mStateArgs.mStateArgs[arg.mStateParamIndex].mNode.mNext == &dest.mStateArgs.mStateArgs[arg.mStateParamIndex] )
       dest.mStateArgs.mStateArgsCreateMask.mFlags[(unsigned int)arg.mStateParamIndex >> 6] &= ~(1i64 << (arg.mStateParamIndex & 0x3F));
@@ -275,15 +267,15 @@ void __fastcall CloudSortTask(int workerId, UFG::qMemoryStreamer *memory_streame
     v41 = arg.mNext;
     arg.mPrev->mNext = arg.mNext;
     v41->mPrev = v40;
-    arg.mPrev = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
-    arg.mNext = (UFG::qNode<Illusion::StateArg,Illusion::StateArg> *)&arg;
+    arg.mPrev = &arg;
+    arg.mNext = &arg;
     v42 = *(_QWORD *)&arg.mStateParamIndex;
     v43 = arg.mWorldView;
     *(_QWORD *)(*(_QWORD *)&arg.mStateParamIndex + 8i64) = arg.mWorldView;
     *(_QWORD *)&v43->v0.x = v42;
-    *(_QWORD *)&arg.mStateParamIndex = (char *)&arg + 24;
+    *(_QWORD *)&arg.mStateParamIndex = &arg.mStateParamIndex;
     arg.mWorldView = (UFG::qMatrix44 *)&arg.mStateParamIndex;
-    v55 = &dest.mStateArgs;
+    p_mStateArgs = &dest.mStateArgs;
     `eh vector destructor iterator(
       dest.mStateArgs.mStateArgs,
       0x10ui64,

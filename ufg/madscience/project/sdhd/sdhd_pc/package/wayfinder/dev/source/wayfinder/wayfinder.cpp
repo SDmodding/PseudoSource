@@ -1,195 +1,188 @@
 // File Line: 19
 // RVA: 0xE2010
-void __fastcall UFG::WayStarSearch::WayStarSearch(UFG::WayStarSearch *this, UFG::WayFinder *finder, UFG::WayFinderClient *client, UFG::qVector3 *goal_position, UFG::qVector3 *p_goal_direction)
+void __fastcall UFG::WayStarSearch::WayStarSearch(
+        UFG::WayStarSearch *this,
+        UFG::WayFinder *finder,
+        UFG::WayFinderClient *client,
+        UFG::qVector3 *goal_position,
+        UFG::qVector3 *p_goal_direction)
 {
-  UFG::WayFinderClient *v5; // rsi
-  UFG::WayStarSearch *v6; // rbx
-  UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *v7; // rax
-  UFG::qList<UFG::WayStarNode,UFG::WayStarNode,1,0> *v8; // r14
-  UFG::qList<UFG::WayStarNode,UFG::WayStarNode,1,0> *v9; // rax
-  float v10; // xmm1_4
-  float v11; // xmm2_4
-  UFG::WayGraph *v12; // rdi
-  UFG::WayGraphVtbl *v13; // rax
-  _BOOL8 v14; // rbp
-  unsigned __int16 *v15; // r12
-  signed __int16 v16; // ax
-  __int64 v17; // rbp
-  __int64 v18; // r12
-  unsigned __int16 v19; // ax
-  float *v20; // rax
-  __m128 v21; // xmm5
-  float v22; // xmm3_4
-  float v23; // xmm4_4
-  __m128 v24; // xmm1
-  int v25; // xmm6_4
-  int v26; // xmm7_4
-  UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v27; // rax
-  UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v28; // rcx
-  UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v29; // rax
-  __int64 v30; // rsi
-  bool v31; // zf
-  UFG::WayGraphVtbl *v32; // rax
-  unsigned __int16 v33; // ax
-  float *v34; // rax
-  float v35; // xmm4_4
-  float v36; // xmm5_4
-  __m128 v37; // xmm3
-  __m128 v38; // xmm1
-  float v39; // xmm6_4
-  float v40; // xmm7_4
-  UFG::qVector3 *v41; // rax
-  float v42; // [rsp+38h] [rbp-80h]
-  float v43; // [rsp+3Ch] [rbp-7Ch]
-  float v44; // [rsp+40h] [rbp-78h]
-  char v45; // [rsp+48h] [rbp-70h]
-  unsigned int v46; // [rsp+C8h] [rbp+10h]
-  UFG::qList<UFG::WayStarNode,UFG::WayStarNode,1,0> *v47; // [rsp+D0h] [rbp+18h]
+  UFG::qList<UFG::WayStarNode,UFG::WayStarNode,1,0> *p_m_OpenNodes; // r14
+  float y; // xmm1_4
+  float z; // xmm2_4
+  UFG::WayGraph *m_WayGraph; // rdi
+  UFG::WayGraphVtbl *vfptr; // rax
+  char v12; // bp
+  unsigned __int16 *p_m_GoalWayEdge; // r12
+  unsigned __int16 v14; // ax
+  unsigned __int16 v15; // bp
+  unsigned __int16 v16; // r12
+  unsigned __int16 v17; // ax
+  UFG::qVector3 *v18; // rax
+  __m128 x_low; // xmm5
+  float v20; // xmm3_4
+  float v21; // xmm4_4
+  __m128 v22; // xmm1
+  unsigned int v23; // xmm6_4
+  unsigned int v24; // xmm7_4
+  UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v25; // rax
+  UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v26; // rcx
+  UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *mPrev; // rax
+  unsigned __int16 v28; // si
+  bool v29; // zf
+  UFG::WayGraphVtbl *v30; // rax
+  unsigned __int16 v31; // ax
+  UFG::qVector3 *v32; // rax
+  float v33; // xmm4_4
+  float v34; // xmm5_4
+  __m128 v35; // xmm3
+  __m128 v36; // xmm1
+  unsigned int v37; // xmm6_4
+  unsigned int v38; // xmm7_4
+  UFG::WayStarNode *v39; // rax
+  float v40; // [rsp+38h] [rbp-80h] BYREF
+  float v41; // [rsp+3Ch] [rbp-7Ch]
+  float v42; // [rsp+40h] [rbp-78h]
+  char v43[24]; // [rsp+48h] [rbp-70h] BYREF
 
-  v5 = client;
-  v6 = this;
-  v7 = (UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *)&this->mPrev;
-  v7->mPrev = v7;
-  v7->mNext = v7;
+  this->mPrev = &this->UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch>;
+  this->mNext = &this->UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch>;
   this->vfptr = (UFG::WayStarSearchVtbl *)&UFG::WayStarSearch::`vftable;
-  v8 = &this->m_OpenNodes;
-  v8->mNode.mPrev = &v8->mNode;
-  v8->mNode.mNext = &v8->mNode;
-  v9 = &this->m_ClosedNodes;
-  v47 = &this->m_ClosedNodes;
-  v9->mNode.mPrev = &v9->mNode;
-  v9->mNode.mNext = &v9->mNode;
+  p_m_OpenNodes = &this->m_OpenNodes;
+  this->m_OpenNodes.mNode.mPrev = &this->m_OpenNodes.mNode;
+  this->m_OpenNodes.mNode.mNext = &this->m_OpenNodes.mNode;
+  this->m_ClosedNodes.mNode.mPrev = &this->m_ClosedNodes.mNode;
+  this->m_ClosedNodes.mNode.mNext = &this->m_ClosedNodes.mNode;
   this->m_WayFinder = finder;
   this->m_WayFinderClient = client;
-  v10 = goal_position->y;
-  v11 = goal_position->z;
+  y = goal_position->y;
+  z = goal_position->z;
   this->m_GoalPosition.x = goal_position->x;
-  this->m_GoalPosition.y = v10;
-  this->m_GoalPosition.z = v11;
+  this->m_GoalPosition.y = y;
+  this->m_GoalPosition.z = z;
   *(_QWORD *)&this->m_NumServices = 0i64;
   this->m_SolutionNode = 0i64;
   this->m_TurnAroundNode = 0i64;
   this->m_SearchTime = 0.0;
-  this->m_SearchState = 0;
-  v46 = 0;
-  v12 = finder->m_WayGraph;
-  v13 = finder->m_WayGraph->vfptr;
+  this->m_SearchState = WAYSTAR_SEARCHING;
+  m_WayGraph = finder->m_WayGraph;
+  vfptr = finder->m_WayGraph->vfptr;
   if ( p_goal_direction )
   {
-    v15 = &this->m_GoalWayEdge;
-    LOBYTE(v14) = ((__int64 (__fastcall *)(UFG::WayGraph *, UFG::WayFinderClient *, UFG::qVector3 *))v13->GetEdgeNode)(
-                    v12,
-                    client,
-                    &this->m_GoalPosition);
-    if ( (_BYTE)v14 )
-      v16 = v12->vfptr->GetEdgeNode(v12, *v15, v46);
+    p_m_GoalWayEdge = &this->m_GoalWayEdge;
+    v12 = ((__int64 (__fastcall *)(UFG::WayGraph *, UFG::WayFinderClient *, UFG::qVector3 *))vfptr->GetEdgeNode)(
+            m_WayGraph,
+            client,
+            &this->m_GoalPosition);
+    if ( v12 )
+      v14 = m_WayGraph->vfptr->GetEdgeNode(m_WayGraph, *p_m_GoalWayEdge, 0);
     else
-      v16 = -1;
-    v6->m_GoalWayNode = v16;
+      v14 = -1;
+    this->m_GoalWayNode = v14;
   }
   else
   {
-    v14 = v13->GetEdge(v12, client, &this->m_GoalPosition, &this->m_GoalWayEdge);
-    v6->m_GoalWayNode = -1;
+    v12 = vfptr->GetEdge(m_WayGraph, client, &this->m_GoalPosition, &this->m_GoalWayEdge);
+    this->m_GoalWayNode = -1;
   }
-  v5->vfptr->ResetWay(v5);
-  if ( (_BYTE)v14
-    && (v17 = v5->vfptr->GetWayEdge(v5, v12), v18 = v5->vfptr->GetWayNode(v5, v12), v12->vfptr->IsEdge(v12, v17))
-    && (_WORD)v18 != -1 )
+  client->vfptr->ResetWay(client);
+  if ( v12
+    && (v15 = client->vfptr->GetWayEdge(client, m_WayGraph),
+        v16 = client->vfptr->GetWayNode(client, m_WayGraph),
+        m_WayGraph->vfptr->IsEdge(m_WayGraph, v15))
+    && v16 != 0xFFFF )
   {
-    v5->vfptr->GetPosition(v5, (UFG::qVector3 *)&v42);
-    v19 = v12->vfptr->GetEdgeNode(v12, v17, 1);
-    v20 = (float *)v12->vfptr->GetEdgePosition(v12, (UFG::qVector3 *)&v45, v17, (_WORD)v18 == v19);
-    v21 = (__m128)*(unsigned int *)v20;
-    v22 = v20[1];
-    v23 = v20[2];
-    v24 = (__m128)LODWORD(v42);
-    v24.m128_f32[0] = (float)((float)((float)(v42 - v21.m128_f32[0]) * (float)(v42 - v21.m128_f32[0]))
-                            + (float)((float)(v43 - v22) * (float)(v43 - v22)))
-                    + (float)((float)(v44 - v23) * (float)(v44 - v23));
-    v25 = (unsigned __int128)_mm_sqrt_ps(v24);
-    v21.m128_f32[0] = (float)((float)((float)(v21.m128_f32[0] - v6->m_GoalPosition.x)
-                                    * (float)(v21.m128_f32[0] - v6->m_GoalPosition.x))
-                            + (float)((float)(v22 - v6->m_GoalPosition.y) * (float)(v22 - v6->m_GoalPosition.y)))
-                    + (float)((float)(v23 - v6->m_GoalPosition.z) * (float)(v23 - v6->m_GoalPosition.z));
-    v26 = (unsigned __int128)_mm_sqrt_ps(v21);
-    v27 = (UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *)UFG::WayStarNode::operator new(0x28ui64);
-    v28 = v27;
-    p_goal_direction = (UFG::qVector3 *)v27;
-    if ( v27 )
+    client->vfptr->GetPosition(client, (UFG::qVector3 *)&v40);
+    v17 = m_WayGraph->vfptr->GetEdgeNode(m_WayGraph, v15, 1);
+    v18 = m_WayGraph->vfptr->GetEdgePosition(m_WayGraph, (UFG::qVector3 *)v43, v15, v16 == v17);
+    x_low = (__m128)LODWORD(v18->x);
+    v20 = v18->y;
+    v21 = v18->z;
+    v22 = (__m128)LODWORD(v40);
+    v22.m128_f32[0] = (float)((float)((float)(v40 - x_low.m128_f32[0]) * (float)(v40 - x_low.m128_f32[0]))
+                            + (float)((float)(v41 - v20) * (float)(v41 - v20)))
+                    + (float)((float)(v42 - v21) * (float)(v42 - v21));
+    v23 = _mm_sqrt_ps(v22).m128_u32[0];
+    x_low.m128_f32[0] = (float)((float)((float)(x_low.m128_f32[0] - this->m_GoalPosition.x)
+                                      * (float)(x_low.m128_f32[0] - this->m_GoalPosition.x))
+                              + (float)((float)(v20 - this->m_GoalPosition.y) * (float)(v20 - this->m_GoalPosition.y)))
+                      + (float)((float)(v21 - this->m_GoalPosition.z) * (float)(v21 - this->m_GoalPosition.z));
+    v24 = _mm_sqrt_ps(x_low).m128_u32[0];
+    v25 = (UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *)UFG::WayStarNode::operator new(0x28ui64);
+    v26 = v25;
+    if ( v25 )
     {
-      v27->mPrev = v27;
-      v27->mNext = v27;
-      LOWORD(v27[1].mPrev) = v17;
-      WORD1(v27[1].mPrev) = v18;
-      v27[1].mNext = 0i64;
-      LODWORD(v27[2].mPrev) = v25;
-      HIDWORD(v27[2].mPrev) = v26;
+      v25->mPrev = v25;
+      v25->mNext = v25;
+      LOWORD(v25[1].mPrev) = v15;
+      WORD1(v25[1].mPrev) = v16;
+      v25[1].mNext = 0i64;
+      LODWORD(v25[2].mPrev) = v23;
+      HIDWORD(v25[2].mPrev) = v24;
     }
     else
     {
-      v28 = 0i64;
+      v26 = 0i64;
     }
-    v29 = v8->mNode.mPrev;
-    v29->mNext = v28;
-    v28->mPrev = v29;
-    v28->mNext = &v8->mNode;
-    v8->mNode.mPrev = v28;
-    if ( (*((unsigned __int8 (__fastcall **)(UFG::WayFinderClient *))&v5->vfptr->__vecDelDtor + 1))(v5) )
+    mPrev = p_m_OpenNodes->mNode.mPrev;
+    mPrev->mNext = v26;
+    v26->mPrev = mPrev;
+    v26->mNext = &p_m_OpenNodes->mNode;
+    p_m_OpenNodes->mNode.mPrev = v26;
+    if ( (*((unsigned __int8 (__fastcall **)(UFG::WayFinderClient *))&client->vfptr->__vecDelDtor + 1))(client) )
     {
-      LOWORD(v30) = v12->vfptr->GetEdgeNode(v12, v17, 0);
-      if ( (_WORD)v30 == (_WORD)v18 )
-        v30 = v12->vfptr->GetEdgeNode(v12, v17, 1);
-      if ( (_WORD)v30 != -1 )
+      v28 = m_WayGraph->vfptr->GetEdgeNode(m_WayGraph, v15, 0);
+      if ( v28 == v16 )
+        v28 = m_WayGraph->vfptr->GetEdgeNode(m_WayGraph, v15, 1);
+      if ( v28 != 0xFFFF )
       {
-        v31 = v12->vfptr->IsEdge(v12, v30) == 0;
-        v32 = v12->vfptr;
-        if ( v31 )
+        v29 = !m_WayGraph->vfptr->IsEdge(m_WayGraph, v28);
+        v30 = m_WayGraph->vfptr;
+        if ( v29 )
         {
-          v34 = (float *)v32->GetNodePosition(v12, (UFG::qVector3 *)&v45, v30);
+          v32 = v30->GetNodePosition(m_WayGraph, (UFG::qVector3 *)v43, v28);
         }
         else
         {
-          v33 = v32->GetEdgeNode(v12, v17, 1);
-          v34 = (float *)v12->vfptr->GetEdgePosition(v12, (UFG::qVector3 *)&v45, v17, (_WORD)v30 == v33);
+          v31 = v30->GetEdgeNode(m_WayGraph, v15, 1);
+          v32 = m_WayGraph->vfptr->GetEdgePosition(m_WayGraph, (UFG::qVector3 *)v43, v15, v28 == v31);
         }
-        v35 = v34[2];
-        v36 = v34[1];
-        v37 = (__m128)*(unsigned int *)v34;
-        v38 = (__m128)LODWORD(v42);
-        v38.m128_f32[0] = (float)((float)((float)(v42 - v37.m128_f32[0]) * (float)(v42 - v37.m128_f32[0]))
-                                + (float)((float)(v43 - v36) * (float)(v43 - v36)))
-                        + (float)((float)(v44 - v35) * (float)(v44 - v35));
-        LODWORD(v39) = (unsigned __int128)_mm_sqrt_ps(v38);
-        v37.m128_f32[0] = (float)((float)((float)(v37.m128_f32[0] - v6->m_GoalPosition.x)
-                                        * (float)(v37.m128_f32[0] - v6->m_GoalPosition.x))
-                                + (float)((float)(v36 - v6->m_GoalPosition.y) * (float)(v36 - v6->m_GoalPosition.y)))
-                        + (float)((float)(v35 - v6->m_GoalPosition.z) * (float)(v35 - v6->m_GoalPosition.z));
-        LODWORD(v40) = (unsigned __int128)_mm_sqrt_ps(v37);
-        v41 = (UFG::qVector3 *)UFG::WayStarNode::operator new(0x28ui64);
-        p_goal_direction = v41;
-        if ( v41 )
+        v33 = v32->z;
+        v34 = v32->y;
+        v35 = (__m128)LODWORD(v32->x);
+        v36 = (__m128)LODWORD(v40);
+        v36.m128_f32[0] = (float)((float)((float)(v40 - v35.m128_f32[0]) * (float)(v40 - v35.m128_f32[0]))
+                                + (float)((float)(v41 - v34) * (float)(v41 - v34)))
+                        + (float)((float)(v42 - v33) * (float)(v42 - v33));
+        v37 = _mm_sqrt_ps(v36).m128_u32[0];
+        v35.m128_f32[0] = (float)((float)((float)(v35.m128_f32[0] - this->m_GoalPosition.x)
+                                        * (float)(v35.m128_f32[0] - this->m_GoalPosition.x))
+                                + (float)((float)(v34 - this->m_GoalPosition.y) * (float)(v34 - this->m_GoalPosition.y)))
+                        + (float)((float)(v33 - this->m_GoalPosition.z) * (float)(v33 - this->m_GoalPosition.z));
+        v38 = _mm_sqrt_ps(v35).m128_u32[0];
+        v39 = (UFG::WayStarNode *)UFG::WayStarNode::operator new(0x28ui64);
+        if ( v39 )
         {
-          *(_QWORD *)&v41->x = v41;
-          *(_QWORD *)&v41->z = v41;
-          LOWORD(v41[1].y) = v17;
-          HIWORD(v41[1].y) = v30;
-          *(_QWORD *)&v41[2].x = 0i64;
-          v41[2].z = v39;
-          v41[3].x = v40;
+          v39->mPrev = v39;
+          v39->mNext = v39;
+          v39->m_WayEdge = v15;
+          v39->m_WayNode = v28;
+          v39->m_ParentNode = 0i64;
+          LODWORD(v39->m_ActualCost) = v37;
+          LODWORD(v39->m_EstimatedCost) = v38;
         }
         else
         {
-          v41 = 0i64;
+          v39 = 0i64;
         }
-        v6->m_TurnAroundNode = (UFG::WayStarNode *)v41;
-        UFG::WayStarSearch::AddOpenNode(v6, (UFG::WayStarNode *)v41);
+        this->m_TurnAroundNode = v39;
+        UFG::WayStarSearch::AddOpenNode(this, v39);
       }
     }
   }
   else
   {
-    v6->m_SearchState = 3;
+    this->m_SearchState = WAYSTAR_NO_WAY;
   }
 }
 
@@ -197,95 +190,91 @@ void __fastcall UFG::WayStarSearch::WayStarSearch(UFG::WayStarSearch *this, UFG:
 // RVA: 0xE2530
 void __fastcall UFG::WayStarSearch::~WayStarSearch(UFG::WayStarSearch *this)
 {
-  UFG::WayStarSearch *v1; // rdi
-  UFG::WayStarNode *v2; // rdx
-  UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v3; // rcx
-  UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v4; // rax
+  UFG::WayStarNode *m_SolutionNode; // rdx
+  UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *mPrev; // rcx
+  UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *mNext; // rax
   UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v5; // rcx
   UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v6; // rax
   UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v7; // rcx
   UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v8; // rax
-  UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *v9; // rdx
-  UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *v10; // rcx
-  UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *v11; // rax
+  UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *v9; // rcx
+  UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *v10; // rax
 
-  v1 = this;
   this->vfptr = (UFG::WayStarSearchVtbl *)&UFG::WayStarSearch::`vftable;
-  v2 = this->m_SolutionNode;
-  if ( v2 )
+  m_SolutionNode = this->m_SolutionNode;
+  if ( m_SolutionNode )
   {
-    v3 = v2->mPrev;
-    v4 = v2->mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v2->mPrev = (UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *)&v2->mPrev;
-    v2->mNext = (UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *)&v2->mPrev;
-    v2->mPrev = (UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *)UFG::WayFinder::s_NodePool.mFreeListHead;
-    UFG::WayFinder::s_NodePool.mFreeListHead = (char *)v2;
+    mPrev = m_SolutionNode->mPrev;
+    mNext = m_SolutionNode->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    m_SolutionNode->mPrev = m_SolutionNode;
+    m_SolutionNode->mNext = m_SolutionNode;
+    m_SolutionNode->mPrev = (UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *)UFG::WayFinder::s_NodePool.mFreeListHead;
+    UFG::WayFinder::s_NodePool.mFreeListHead = (char *)m_SolutionNode;
     --UFG::WayFinder::s_NodePool.mNumSlotsAllocated;
   }
-  UFG::qList<UFG::WayStarNode,UFG::WayStarNode,1,0>::DeleteNodes(&v1->m_ClosedNodes);
-  v5 = v1->m_ClosedNodes.mNode.mPrev;
-  v6 = v1->m_ClosedNodes.mNode.mNext;
+  UFG::qList<UFG::WayStarNode,UFG::WayStarNode,1,0>::DeleteNodes(&this->m_ClosedNodes);
+  v5 = this->m_ClosedNodes.mNode.mPrev;
+  v6 = this->m_ClosedNodes.mNode.mNext;
   v5->mNext = v6;
   v6->mPrev = v5;
-  v1->m_ClosedNodes.mNode.mPrev = &v1->m_ClosedNodes.mNode;
-  v1->m_ClosedNodes.mNode.mNext = &v1->m_ClosedNodes.mNode;
-  UFG::qList<UFG::WayStarNode,UFG::WayStarNode,1,0>::DeleteNodes(&v1->m_OpenNodes);
-  v7 = v1->m_OpenNodes.mNode.mPrev;
-  v8 = v1->m_OpenNodes.mNode.mNext;
+  this->m_ClosedNodes.mNode.mPrev = &this->m_ClosedNodes.mNode;
+  this->m_ClosedNodes.mNode.mNext = &this->m_ClosedNodes.mNode;
+  UFG::qList<UFG::WayStarNode,UFG::WayStarNode,1,0>::DeleteNodes(&this->m_OpenNodes);
+  v7 = this->m_OpenNodes.mNode.mPrev;
+  v8 = this->m_OpenNodes.mNode.mNext;
   v7->mNext = v8;
   v8->mPrev = v7;
-  v1->m_OpenNodes.mNode.mPrev = &v1->m_OpenNodes.mNode;
-  v1->m_OpenNodes.mNode.mNext = &v1->m_OpenNodes.mNode;
-  v9 = (UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *)&v1->mPrev;
-  v10 = v1->mPrev;
-  v11 = v1->mNext;
-  v10->mNext = v11;
-  v11->mPrev = v10;
-  v9->mPrev = v9;
-  v9->mNext = v9;
+  this->m_OpenNodes.mNode.mPrev = &this->m_OpenNodes.mNode;
+  this->m_OpenNodes.mNode.mNext = &this->m_OpenNodes.mNode;
+  v9 = this->mPrev;
+  v10 = this->mNext;
+  v9->mNext = v10;
+  v10->mPrev = v9;
+  this->mPrev = &this->UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch>;
+  this->mNext = &this->UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch>;
 }
 
 // File Line: 176
 // RVA: 0xE2780
 void __fastcall UFG::WayStarSearch::AddOpenNode(UFG::WayStarSearch *this, UFG::WayStarNode *to_add)
 {
-  UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v2; // r8
+  UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *mNext; // r8
   UFG::qList<UFG::WayStarNode,UFG::WayStarNode,1,0> *i; // rcx
-  UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v4; // rax
+  UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *mPrev; // rax
 
-  v2 = this->m_OpenNodes.mNode.mNext;
-  for ( i = &this->m_OpenNodes; v2 != (UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *)i; v2 = v2->mNext )
+  mNext = this->m_OpenNodes.mNode.mNext;
+  for ( i = &this->m_OpenNodes; mNext != (UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *)i; mNext = mNext->mNext )
   {
-    if ( (float)(to_add->m_EstimatedCost + to_add->m_ActualCost) >= (float)(*((float *)&v2[2].mPrev + 1)
-                                                                          + *(float *)&v2[2].mPrev) )
+    if ( (float)(to_add->m_EstimatedCost + to_add->m_ActualCost) >= (float)(*((float *)&mNext[2].mPrev + 1)
+                                                                          + *(float *)&mNext[2].mPrev) )
       break;
   }
-  v4 = v2->mPrev;
-  v4->mNext = (UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *)&to_add->mPrev;
-  to_add->mPrev = v4;
-  to_add->mNext = v2;
-  v2->mPrev = (UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *)&to_add->mPrev;
+  mPrev = mNext->mPrev;
+  mPrev->mNext = to_add;
+  to_add->mPrev = mPrev;
+  to_add->mNext = mNext;
+  mNext->mPrev = to_add;
 }
 
 // File Line: 186
 // RVA: 0xE1F90
 void __fastcall UFG::WayFinderClient::WayFinderClient(UFG::WayFinderClient *this)
 {
-  float v1; // xmm1_4
-  float v2; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
   float v3; // xmm1_4
   float v4; // xmm2_4
 
   this->vfptr = (UFG::WayFinderClientVtbl *)&UFG::WayFinderClient::`vftable;
   this->m_WayStartsWithTurnAround = 0;
   *(_DWORD *)&this->m_CurrWayEdge = 0;
-  v1 = UFG::qVector3::msZero.y;
-  v2 = UFG::qVector3::msZero.z;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
   this->m_CurrPos.x = UFG::qVector3::msZero.x;
-  this->m_CurrPos.y = v1;
-  this->m_CurrPos.z = v2;
+  this->m_CurrPos.y = y;
+  this->m_CurrPos.z = z;
   v3 = UFG::qVector3::msUnity.y;
   v4 = UFG::qVector3::msUnity.z;
   this->m_CurrDir.x = UFG::qVector3::msUnity.x;
@@ -298,95 +287,94 @@ void __fastcall UFG::WayFinderClient::WayFinderClient(UFG::WayFinderClient *this
 
 // File Line: 192
 // RVA: 0xE2A40
-void __fastcall UFG::WayFinderClient::GetEdgeLength(UFG::WayFinderClient *this, UFG::WayGraph *wayGraph, unsigned __int16 wayEdge)
+void __fastcall UFG::WayFinderClient::GetEdgeLength(
+        UFG::WayFinderClient *this,
+        UFG::WayGraph *wayGraph,
+        unsigned __int16 wayEdge)
 {
   wayGraph->vfptr->GetEdgeLength(wayGraph, wayEdge);
 }
 
 // File Line: 197
 // RVA: 0xE34E0
-void __fastcall UFG::WayFinderClient::SetPosition(UFG::WayFinderClient *this, UFG::qVector3 *position, unsigned __int16 edge, unsigned __int16 node)
+void __fastcall UFG::WayFinderClient::SetPosition(
+        UFG::WayFinderClient *this,
+        UFG::qVector3 *position,
+        unsigned __int16 edge,
+        unsigned __int16 node)
 {
-  float v4; // xmm0_4
-  float v5; // xmm1_4
+  float y; // xmm0_4
+  float z; // xmm1_4
 
-  v4 = position->y;
-  v5 = position->z;
+  y = position->y;
+  z = position->z;
   this->m_CurrPos.x = position->x;
-  this->m_CurrPos.y = v4;
-  this->m_CurrPos.z = v5;
+  this->m_CurrPos.y = y;
+  this->m_CurrPos.z = z;
   this->m_CurrWayEdge = edge;
   this->m_CurrWayNode = node;
 }
 
 // File Line: 204
 // RVA: 0xE3510
-void __fastcall UFG::WayFinderClient::SetPosition(UFG::WayFinderClient *this, UFG::WayGraph *graph, UFG::qVector3 *position, UFG::qVector3 *direction)
+void __fastcall UFG::WayFinderClient::SetPosition(
+        UFG::WayFinderClient *this,
+        UFG::WayGraph *graph,
+        UFG::qVector3 *position,
+        UFG::qVector3 *direction)
 {
-  float v4; // xmm1_4
-  UFG::WayGraphVtbl *v5; // rax
-  UFG::WayFinderClient *v6; // rbx
-  unsigned __int16 *v7; // r15
-  UFG::WayGraph *v8; // r14
-  float v9; // xmm0_4
-  UFG::qVector3 *v10; // rdi
-  UFG::qVector3 *v11; // rsi
+  float y; // xmm1_4
+  UFG::WayGraphVtbl *vfptr; // rax
+  unsigned __int16 *p_m_CurrWayEdge; // r15
+  float z; // xmm0_4
   float v12; // xmm0_4
   float v13; // xmm1_4
   float v14; // xmm0_4
   float v15; // xmm1_4
-  float v16; // [rsp+30h] [rbp-28h]
-  float v17; // [rsp+34h] [rbp-24h]
-  float v18; // [rsp+38h] [rbp-20h]
-  unsigned int v19; // [rsp+60h] [rbp+8h]
+  int v16[10]; // [rsp+30h] [rbp-28h] BYREF
 
-  v4 = position->y;
-  v5 = graph->vfptr;
-  v6 = this;
-  v7 = &this->m_CurrWayEdge;
-  v8 = graph;
-  v16 = position->x;
-  v9 = position->z;
-  v10 = position;
-  v17 = v4;
-  v18 = v9;
-  v11 = direction;
-  v19 = 0;
-  if ( ((unsigned __int8 (__fastcall *)(UFG::WayGraph *, UFG::WayFinderClient *, float *))v5->GetEdgeNode)(
+  y = position->y;
+  vfptr = graph->vfptr;
+  p_m_CurrWayEdge = &this->m_CurrWayEdge;
+  v16[0] = LODWORD(position->x);
+  z = position->z;
+  *(float *)&v16[1] = y;
+  *(float *)&v16[2] = z;
+  if ( ((unsigned __int8 (__fastcall *)(UFG::WayGraph *, UFG::WayFinderClient *, int *))vfptr->GetEdgeNode)(
          graph,
          this,
-         &v16) )
+         v16) )
   {
-    v6->m_CurrWayNode = v8->vfptr->GetEdgeNode(v8, *v7, v19);
+    this->m_CurrWayNode = graph->vfptr->GetEdgeNode(graph, *p_m_CurrWayEdge, 0);
   }
-  v12 = v11->y;
-  v13 = v11->z;
-  v6->m_CurrDir.x = v11->x;
-  v6->m_CurrDir.y = v12;
-  v6->m_CurrDir.z = v13;
-  v14 = v10->y;
-  v15 = v10->z;
-  v6->m_CurrPos.x = v10->x;
-  v6->m_CurrPos.y = v14;
-  v6->m_CurrPos.z = v15;
+  v12 = direction->y;
+  v13 = direction->z;
+  this->m_CurrDir.x = direction->x;
+  this->m_CurrDir.y = v12;
+  this->m_CurrDir.z = v13;
+  v14 = position->y;
+  v15 = position->z;
+  this->m_CurrPos.x = position->x;
+  this->m_CurrPos.y = v14;
+  this->m_CurrPos.z = v15;
 }
 
 // File Line: 215
 // RVA: 0xE2C90
 void __fastcall UFG::WayFinderClient::Reset(UFG::WayFinderClient *this)
 {
-  float v1; // xmm1_4
-  float v2; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
   float v3; // xmm1_4
   float v4; // xmm2_4
 
   *(_DWORD *)&this->m_CurrWayEdge = 0;
   this->m_WayStartsWithTurnAround = 0;
-  v1 = UFG::qVector3::msZero.y;
-  v2 = UFG::qVector3::msZero.z;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
   this->m_CurrPos.x = UFG::qVector3::msZero.x;
-  this->m_CurrPos.y = v1;
-  this->m_CurrPos.z = v2;
+  this->m_CurrPos.y = y;
+  this->m_CurrPos.z = z;
   v3 = UFG::qVector3::msUnity.y;
   v4 = UFG::qVector3::msUnity.z;
   this->m_CurrDir.x = UFG::qVector3::msUnity.x;
@@ -407,32 +395,32 @@ void __fastcall UFG::WayFinderClient::ResetWay(UFG::WayFinderClient *this)
 // RVA: 0xE28E0
 void __fastcall UFG::WayFinderClient::FindCurrentEdge(UFG::WayFinderClient *this)
 {
-  unsigned __int16 v1; // r9
-  unsigned __int16 v2; // r8
-  unsigned __int16 v3; // dx
+  unsigned __int16 m_NumWayEdges; // r9
+  unsigned __int16 m_CurrWayEdge; // r8
+  unsigned __int16 m_CurrEdgeIndex; // dx
   int v4; // edx
-  int v5; // er11
+  int v5; // r11d
 
-  v1 = this->m_NumWayEdges;
-  if ( v1 )
+  m_NumWayEdges = this->m_NumWayEdges;
+  if ( m_NumWayEdges )
   {
-    v2 = this->m_CurrWayEdge;
-    if ( v2 != -1 )
+    m_CurrWayEdge = this->m_CurrWayEdge;
+    if ( m_CurrWayEdge != 0xFFFF )
     {
-      v3 = this->m_CurrEdgeIndex;
-      if ( v3 < v1 )
+      m_CurrEdgeIndex = this->m_CurrEdgeIndex;
+      if ( m_CurrEdgeIndex < m_NumWayEdges )
       {
-        if ( v2 == this->m_WayEdges[v3] )
+        if ( m_CurrWayEdge == this->m_WayEdges[m_CurrEdgeIndex] )
           return;
-        v5 = v3;
-        v4 = v3 + 1;
-        if ( v4 >= v1 )
+        v5 = m_CurrEdgeIndex;
+        v4 = m_CurrEdgeIndex + 1;
+        if ( v4 >= m_NumWayEdges )
         {
 LABEL_12:
           v4 = v5 - 1;
           if ( v5 - 1 < 0 )
             return;
-          while ( v2 != this->m_WayEdges[v4] )
+          while ( m_CurrWayEdge != this->m_WayEdges[v4] )
           {
             if ( --v4 < 0 )
               return;
@@ -440,19 +428,19 @@ LABEL_12:
         }
         else
         {
-          while ( v2 != this->m_WayEdges[v4] )
+          while ( m_CurrWayEdge != this->m_WayEdges[v4] )
           {
-            if ( ++v4 >= v1 )
+            if ( ++v4 >= m_NumWayEdges )
               goto LABEL_12;
           }
         }
       }
       else
       {
-        v4 = v1 - 1;
+        v4 = m_NumWayEdges - 1;
         if ( v4 < 0 )
           return;
-        while ( v2 != this->m_WayEdges[v4] )
+        while ( m_CurrWayEdge != this->m_WayEdges[v4] )
         {
           if ( --v4 < 0 )
             return;
@@ -467,42 +455,36 @@ LABEL_12:
 // RVA: 0xE2B60
 bool __fastcall UFG::WayFinderClient::LostWay(UFG::WayFinderClient *this, UFG::WayGraph *graph)
 {
-  UFG::WayGraph *v2; // r14
-  UFG::WayFinderClient *v3; // rdi
   bool result; // al
-  unsigned __int16 v5; // ax
-  unsigned __int16 v6; // bx
-  __int64 v7; // rax
-  unsigned __int16 *v8; // rcx
-  char v9; // al
+  __int64 v5; // rbx
+  __int64 v6; // rax
+  unsigned __int16 *v7; // rcx
+  char v8; // al
 
-  v2 = graph;
-  v3 = this;
   if ( !this->m_NumWayEdges )
     return 0;
-  v5 = ((__int64 (*)(void))this->vfptr->GetWayEdge)();
-  v6 = v5;
-  result = v2->vfptr->IsEdge(v2, v5);
+  v5 = ((unsigned __int16 (*)(void))this->vfptr->GetWayEdge)();
+  result = graph->vfptr->IsEdge(graph, v5);
   if ( result )
   {
-    v7 = v3->m_NumWayEdges - 1;
-    if ( (signed int)v7 < 0 )
+    v6 = this->m_NumWayEdges - 1;
+    if ( (int)v6 < 0 )
     {
 LABEL_8:
-      v9 = 0;
+      v8 = 0;
     }
     else
     {
-      v8 = &v3->m_WayEdges[(signed int)v7];
-      while ( v6 != *v8 )
+      v7 = &this->m_WayEdges[(int)v6];
+      while ( (_WORD)v5 != *v7 )
       {
-        --v8;
-        if ( --v7 < 0 )
+        --v7;
+        if ( --v6 < 0 )
           goto LABEL_8;
       }
-      v9 = 1;
+      v8 = 1;
     }
-    result = v9 == 0;
+    return v8 == 0;
   }
   return result;
 }
@@ -512,275 +494,261 @@ LABEL_8:
 bool __fastcall UFG::WayFinderClient::OnWay(UFG::WayFinderClient *this, UFG::WayGraph *graph)
 {
   bool result; // al
-  UFG::WayGraph *v3; // rsi
-  UFG::WayFinderClient *v4; // rdi
   __int64 v5; // rbx
   __int64 v6; // rax
-  unsigned __int16 *v7; // rcx
+  unsigned __int16 *i; // rcx
 
   result = 0;
-  v3 = graph;
-  v4 = this;
   if ( this->m_NumWayEdges )
   {
     v5 = ((unsigned __int16 (*)(void))this->vfptr->GetWayEdge)();
-    if ( !v3->vfptr->IsEdge(v3, v5) )
+    if ( !graph->vfptr->IsEdge(graph, v5) )
       return 1;
-    v6 = v4->m_NumWayEdges - 1;
-    if ( (signed int)v6 >= 0 )
+    v6 = this->m_NumWayEdges - 1;
+    if ( (int)v6 >= 0 )
     {
-      v7 = &v4->m_WayEdges[(signed int)v6];
-      while ( (_WORD)v5 != *v7 )
+      for ( i = &this->m_WayEdges[(int)v6]; (_WORD)v5 != *i; --i )
       {
-        --v7;
         if ( --v6 < 0 )
-          goto LABEL_7;
+          return 0;
       }
       return 1;
     }
-LABEL_7:
-    result = 0;
+    return 0;
   }
   return result;
 }
 
 // File Line: 316
 // RVA: 0xE2DF0
-float __usercall UFG::WayStarSearch::Service@<xmm0>(UFG::WayStarSearch *this@<rcx>, float time_limit_ms@<xmm1>, float a3@<xmm0>)
+float __fastcall UFG::WayStarSearch::Service(UFG::WayStarSearch *this, float time_limit_ms)
 {
-  float v3; // xmm10_4
-  UFG::WayStarSearch *v4; // rsi
-  unsigned __int64 v5; // r12
-  UFG::WayGraph *v6; // r14
-  __int64 l; // rbp
-  UFG::qList<UFG::WayStarNode,UFG::WayStarNode,1,0> *v8; // r15
-  unsigned __int64 v9; // rax
-  UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v10; // r13
-  UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v11; // rcx
-  UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v12; // rax
-  unsigned __int16 v13; // r12
-  unsigned __int16 v14; // ax
+  unsigned __int64 Ticks; // r12
+  UFG::WayGraph *m_WayGraph; // r14
+  __int64 m; // rbp
+  UFG::qList<UFG::WayStarNode,UFG::WayStarNode,1,0> *p_m_OpenNodes; // r15
+  unsigned __int64 v8; // rax
+  UFG::WayStarNode *mPrev; // r13
+  UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v10; // rcx
+  UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *mNext; // rax
+  unsigned __int16 m_WayNode; // r12
+  unsigned __int16 m_GoalWayNode; // ax
+  bool v14; // al
   bool v15; // al
-  bool v16; // al
-  int v17; // ebx
-  signed int v18; // edx
-  signed int v19; // eax
-  signed int v20; // ecx
-  __int64 v21; // rdi
-  unsigned __int16 v22; // bx
-  bool v23; // bp
-  bool v24; // cl
-  float v25; // xmm6_4
-  __m128 v26; // xmm1
-  __int64 v27; // rbx
-  float v28; // xmm6_4
-  unsigned __int16 v29; // ax
-  bool v30; // al
-  bool v31; // r12
-  float v32; // xmm7_4
-  float *v33; // rax
-  __m128 v34; // xmm1
-  float v35; // xmm7_4
-  float *v36; // rax
-  float v37; // xmm0_4
-  __m128 v38; // xmm1
-  float v39; // xmm6_4
+  signed int v16; // ebx
+  int v17; // edx
+  int v18; // ecx
+  unsigned __int16 v19; // di
+  unsigned __int16 v20; // bx
+  bool v21; // bp
+  bool v22; // cl
+  float v23; // xmm6_4
+  __m128 v24; // xmm1
+  unsigned __int16 v25; // bx
+  float v26; // xmm6_4
+  unsigned __int16 v27; // ax
+  bool v28; // al
+  bool v29; // r12
+  float v30; // xmm7_4
+  float *v31; // rax
+  __m128 y_low; // xmm1
+  float v33; // xmm7_4
+  float *v34; // rax
+  float v35; // xmm0_4
+  __m128 x_low; // xmm1
+  float v37; // xmm6_4
   UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *j; // rdx
   UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *k; // r8
+  UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v40; // rcx
+  UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v41; // rax
   UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v42; // rcx
   UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v43; // rax
   UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v44; // rcx
   UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v45; // rax
   UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v46; // rcx
   UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v47; // rax
-  UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v48; // rcx
-  UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v49; // rax
-  int v50; // xmm7_4
-  float *v51; // rax
-  __m128 v52; // xmm1
-  char *v53; // rax
-  UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v54; // rcx
-  bool v55; // zf
-  bool v56; // sf
-  UFG::WayStarNode *v57; // rdi
-  UFG::WayStarNode *v58; // rax
-  UFG::WayFinderClient *v59; // r15
-  int v60; // ebx
-  unsigned __int64 v61; // rax
+  unsigned int v48; // xmm7_4
+  UFG::qVector3 *v49; // rax
+  __m128 v50; // xmm1
+  char *v51; // rax
+  UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *v52; // rcx
+  bool v53; // cc
+  UFG::WayStarNode *m_SolutionNode; // rdi
+  UFG::WayStarNode *v55; // rax
+  UFG::WayFinderClient *m_WayFinderClient; // r15
+  int v57; // ebx
+  unsigned __int64 v58; // rax
   float result; // xmm0_4
-  __int64 v63[2]; // [rsp+20h] [rbp-118h]
-  signed int i; // [rsp+30h] [rbp-108h]
-  signed int v65; // [rsp+34h] [rbp-104h]
+  int v60; // [rsp+20h] [rbp-118h]
+  int i; // [rsp+30h] [rbp-108h]
+  int v62; // [rsp+34h] [rbp-104h]
   unsigned __int64 start; // [rsp+38h] [rbp-100h]
-  BOOL v67; // [rsp+40h] [rbp-F8h]
-  float v68; // [rsp+50h] [rbp-E8h]
-  float v69; // [rsp+54h] [rbp-E4h]
-  float v70; // [rsp+58h] [rbp-E0h]
-  float v71; // [rsp+60h] [rbp-D8h]
-  float v72; // [rsp+64h] [rbp-D4h]
-  float v73; // [rsp+68h] [rbp-D0h]
-  __int64 v74; // [rsp+70h] [rbp-C8h]
-  char v75; // [rsp+78h] [rbp-C0h]
-  char v76; // [rsp+84h] [rbp-B4h]
-  char v77; // [rsp+90h] [rbp-A8h]
-  bool v78; // [rsp+140h] [rbp+8h]
-  unsigned __int16 v79; // [rsp+150h] [rbp+18h]
-  unsigned __int16 v80; // [rsp+158h] [rbp+20h]
+  BOOL v64; // [rsp+40h] [rbp-F8h]
+  float v65; // [rsp+50h] [rbp-E8h] BYREF
+  float v66; // [rsp+54h] [rbp-E4h]
+  float v67; // [rsp+58h] [rbp-E0h]
+  float v68; // [rsp+60h] [rbp-D8h] BYREF
+  float v69; // [rsp+64h] [rbp-D4h]
+  float v70; // [rsp+68h] [rbp-D0h]
+  __int64 v71; // [rsp+70h] [rbp-C8h]
+  UFG::qVector3 v72; // [rsp+78h] [rbp-C0h] BYREF
+  UFG::qVector3 v73; // [rsp+84h] [rbp-B4h] BYREF
+  char v74; // [rsp+90h] [rbp-A8h] BYREF
+  bool v75; // [rsp+140h] [rbp+8h]
+  unsigned __int16 v76; // [rsp+150h] [rbp+18h]
+  unsigned __int16 m_WayEdge; // [rsp+158h] [rbp+20h]
 
-  v74 = -2i64;
-  v3 = time_limit_ms;
-  v4 = this;
+  v71 = -2i64;
   ++this->m_NumServices;
-  v5 = UFG::qGetTicks();
-  start = v5;
-  v6 = v4->m_WayFinder->m_WayGraph;
-  LODWORD(l) = 0;
-  if ( v4->m_SearchState == WAYSTAR_SEARCHING )
+  Ticks = UFG::qGetTicks();
+  start = Ticks;
+  m_WayGraph = this->m_WayFinder->m_WayGraph;
+  LODWORD(m) = 0;
+  if ( this->m_SearchState == WAYSTAR_SEARCHING )
   {
-    v8 = &v4->m_OpenNodes;
+    p_m_OpenNodes = &this->m_OpenNodes;
     while ( 1 )
     {
-      if ( (UFG::qList<UFG::WayStarNode,UFG::WayStarNode,1,0> *)v4->m_OpenNodes.mNode.mNext == &v4->m_OpenNodes )
+      if ( (UFG::qList<UFG::WayStarNode,UFG::WayStarNode,1,0> *)this->m_OpenNodes.mNode.mNext == &this->m_OpenNodes )
         goto LABEL_69;
-      if ( v3 > 0.0 )
+      if ( time_limit_ms > 0.0 )
       {
-        v9 = UFG::qGetTicks();
-        a3 = UFG::qGetTickTime(v5, v9) * 1000.0;
-        if ( a3 > v3 )
+        v8 = UFG::qGetTicks();
+        if ( (float)(UFG::qGetTickTime(Ticks, v8) * 1000.0) > time_limit_ms )
           goto LABEL_69;
       }
-      ++v4->m_NumSteps;
-      v10 = v8->mNode.mPrev;
-      v11 = v8->mNode.mPrev->mPrev;
-      v12 = v8->mNode.mPrev->mNext;
-      v11->mNext = v12;
-      v12->mPrev = v11;
-      v10->mPrev = v10;
-      v10->mNext = v10;
-      v13 = WORD1(v10[1].mPrev);
-      v79 = WORD1(v10[1].mPrev);
-      v80 = (unsigned __int16)v10[1].mPrev;
-      v14 = v4->m_GoalWayNode;
-      v15 = -1 == v14 || v14 == v13;
-      if ( v15 && v4->m_GoalWayEdge == LOWORD(v10[1].mPrev) )
+      ++this->m_NumSteps;
+      mPrev = (UFG::WayStarNode *)p_m_OpenNodes->mNode.mPrev;
+      v10 = p_m_OpenNodes->mNode.mPrev->mPrev;
+      mNext = p_m_OpenNodes->mNode.mPrev->mNext;
+      v10->mNext = mNext;
+      mNext->mPrev = v10;
+      mPrev->mPrev = mPrev;
+      mPrev->mNext = mPrev;
+      m_WayNode = mPrev->m_WayNode;
+      v76 = m_WayNode;
+      m_WayEdge = mPrev->m_WayEdge;
+      m_GoalWayNode = this->m_GoalWayNode;
+      v14 = m_GoalWayNode == 0xFFFF || m_GoalWayNode == m_WayNode;
+      if ( v14 && this->m_GoalWayEdge == mPrev->m_WayEdge )
         break;
-      if ( -1 != v13 )
+      if ( m_WayNode != 0xFFFF )
       {
-        v16 = v6->vfptr->IsEdge(v6, v13);
-        v78 = v16;
-        v17 = 4096 - UFG::WayFinder::s_NodePool.mNumSlotsAllocated;
-        if ( v16 )
+        v15 = m_WayGraph->vfptr->IsEdge(m_WayGraph, m_WayNode);
+        v75 = v15;
+        v16 = 4096 - UFG::WayFinder::s_NodePool.mNumSlotsAllocated;
+        if ( v15 )
         {
-          v18 = 1;
-          v65 = 1;
+          v17 = 1;
+          v62 = 1;
         }
         else
         {
-          v19 = v6->vfptr->GetNumNodeEdges(v6, v13);
-          v18 = v19;
-          v65 = v19;
-          v16 = v78;
+          v17 = m_WayGraph->vfptr->GetNumNodeEdges(m_WayGraph, m_WayNode);
+          v62 = v17;
+          v15 = 0;
         }
-        if ( v17 < v18 - 1 )
+        if ( v16 < v17 - 1 )
         {
-          v4->m_SearchState = 2;
+          this->m_SearchState = WAYSTAR_PART_WAY;
           goto LABEL_68;
         }
-        v20 = 0;
-        for ( i = 0; v20 < v18; v16 = v78 )
+        v18 = 0;
+        for ( i = 0; v18 < v17; v15 = v75 )
         {
-          if ( v16 )
+          if ( v15 )
           {
-            LOWORD(v21) = v13;
+            v19 = m_WayNode;
           }
           else
           {
-            v21 = v6->vfptr->GetNodeEdge(v6, v13, v20);
-            v20 = i;
-            v18 = v65;
+            v19 = m_WayGraph->vfptr->GetNodeEdge(m_WayGraph, m_WayNode, v18);
+            v18 = i;
+            v17 = v62;
           }
-          if ( (_WORD)v21 != v80 )
+          if ( v19 != m_WayEdge )
           {
-            LOWORD(v63[0]) = v13;
-            if ( v4->m_WayFinderClient->vfptr->CanGo(v4->m_WayFinderClient, v6, v80, v21, v63[0]) )
+            LOWORD(v60) = m_WayNode;
+            if ( this->m_WayFinderClient->vfptr->CanGo(this->m_WayFinderClient, m_WayGraph, m_WayEdge, v19, v60) )
             {
-              v22 = v13;
-              if ( v78 )
-                v22 = v80;
-              v23 = v22 == v6->vfptr->GetEdgeNode(v6, v21, 0);
-              v24 = v22 == v6->vfptr->GetEdgeNode(v6, v80, 1);
-              v25 = 0.0;
-              if ( !v78 )
+              v20 = m_WayNode;
+              if ( v75 )
+                v20 = m_WayEdge;
+              v21 = v20 == m_WayGraph->vfptr->GetEdgeNode(m_WayGraph, v19, 0);
+              v22 = v20 == m_WayGraph->vfptr->GetEdgeNode(m_WayGraph, m_WayEdge, 1);
+              v23 = 0.0;
+              if ( !v75 )
               {
-                v6->vfptr->GetEdgePosition(v6, (UFG::qVector3 *)&v71, v80, v24);
-                v6->vfptr->GetEdgePosition(v6, (UFG::qVector3 *)&v68, v21, v23 == 0);
-                v26 = (__m128)LODWORD(v72);
-                a3 = (float)(v71 - v68) * (float)(v71 - v68);
-                v26.m128_f32[0] = (float)((float)((float)(v72 - v69) * (float)(v72 - v69)) + a3)
-                                + (float)((float)(v73 - v70) * (float)(v73 - v70));
-                LODWORD(v25) = (unsigned __int128)_mm_sqrt_ps(v26);
+                m_WayGraph->vfptr->GetEdgePosition(m_WayGraph, (UFG::qVector3 *)&v68, m_WayEdge, v22);
+                m_WayGraph->vfptr->GetEdgePosition(m_WayGraph, (UFG::qVector3 *)&v65, v19, !v21);
+                v24 = (__m128)LODWORD(v69);
+                v24.m128_f32[0] = (float)((float)((float)(v69 - v66) * (float)(v69 - v66))
+                                        + (float)((float)(v68 - v65) * (float)(v68 - v65)))
+                                + (float)((float)(v70 - v67) * (float)(v70 - v67));
+                LODWORD(v23) = _mm_sqrt_ps(v24).m128_u32[0];
               }
-              v67 = v23;
-              v27 = v6->vfptr->GetEdgeNode(v6, v21, v23);
-              v28 = v25 + *(float *)&v10[2].mPrev;
-              v29 = v4->m_GoalWayNode;
-              v30 = v29 == -1 || v29 == (_WORD)v27;
-              v31 = v30 && v4->m_GoalWayEdge == (_WORD)v21;
-              v32 = *(float *)&FLOAT_1_0;
-              if ( v31 )
+              v64 = v21;
+              v25 = m_WayGraph->vfptr->GetEdgeNode(m_WayGraph, v19, v21);
+              v26 = v23 + mPrev->m_ActualCost;
+              v27 = this->m_GoalWayNode;
+              v28 = v27 == 0xFFFF || v27 == v25;
+              v29 = v28 && this->m_GoalWayEdge == v19;
+              v30 = *(float *)&FLOAT_1_0;
+              if ( v29 )
               {
-                v33 = (float *)v6->vfptr->GetEdgePosition(v6, (UFG::qVector3 *)&v75, v21, v23 == 0);
-                v34 = (__m128)LODWORD(v4->m_GoalPosition.y);
-                v34.m128_f32[0] = (float)((float)((float)(v34.m128_f32[0] - v33[1]) * (float)(v34.m128_f32[0] - v33[1]))
-                                        + (float)((float)(v4->m_GoalPosition.x - *v33)
-                                                * (float)(v4->m_GoalPosition.x - *v33)))
-                                + (float)((float)(v4->m_GoalPosition.z - v33[2]) * (float)(v4->m_GoalPosition.z - v33[2]));
-                LODWORD(v35) = (unsigned __int128)_mm_sqrt_ps(v34);
-                v36 = (float *)v6->vfptr->GetEdgePosition(v6, (UFG::qVector3 *)&v76, v21, v23 != 0);
-                v37 = v4->m_GoalPosition.y - v36[1];
-                v38 = (__m128)LODWORD(v4->m_GoalPosition.x);
-                v38.m128_f32[0] = (float)((float)((float)(v38.m128_f32[0] - *v36) * (float)(v38.m128_f32[0] - *v36))
-                                        + (float)(v37 * v37))
-                                + (float)((float)(v4->m_GoalPosition.z - v36[2]) * (float)(v4->m_GoalPosition.z - v36[2]));
-                a3 = COERCE_FLOAT(_mm_sqrt_ps(v38)) + v35;
-                v32 = v35 / a3;
+                v31 = (float *)m_WayGraph->vfptr->GetEdgePosition(m_WayGraph, &v72, v19, !v21);
+                y_low = (__m128)LODWORD(this->m_GoalPosition.y);
+                y_low.m128_f32[0] = (float)((float)((float)(y_low.m128_f32[0] - v31[1])
+                                                  * (float)(y_low.m128_f32[0] - v31[1]))
+                                          + (float)((float)(this->m_GoalPosition.x - *v31)
+                                                  * (float)(this->m_GoalPosition.x - *v31)))
+                                  + (float)((float)(this->m_GoalPosition.z - v31[2])
+                                          * (float)(this->m_GoalPosition.z - v31[2]));
+                v33 = _mm_sqrt_ps(y_low).m128_f32[0];
+                v34 = (float *)m_WayGraph->vfptr->GetEdgePosition(m_WayGraph, &v73, v19, v21);
+                v35 = this->m_GoalPosition.y - v34[1];
+                x_low = (__m128)LODWORD(this->m_GoalPosition.x);
+                x_low.m128_f32[0] = (float)((float)((float)(x_low.m128_f32[0] - *v34) * (float)(x_low.m128_f32[0] - *v34))
+                                          + (float)(v35 * v35))
+                                  + (float)((float)(this->m_GoalPosition.z - v34[2])
+                                          * (float)(this->m_GoalPosition.z - v34[2]));
+                v30 = v33 / (float)(_mm_sqrt_ps(x_low).m128_f32[0] + v33);
               }
-              v4->m_WayFinderClient->vfptr->GetEdgeLength(v4->m_WayFinderClient, v6, v21);
-              a3 = a3 * v32;
-              v39 = v28 + a3;
-              for ( j = v4->m_OpenNodes.mNode.mNext; ; j = j->mNext )
+              v37 = v26
+                  + (float)(this->m_WayFinderClient->vfptr->GetEdgeLength(this->m_WayFinderClient, m_WayGraph, v19) * v30);
+              for ( j = this->m_OpenNodes.mNode.mNext; ; j = j->mNext )
               {
-                if ( j == (UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *)v8 )
+                if ( j == (UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *)p_m_OpenNodes )
                 {
-                  LODWORD(l) = 0;
+                  LODWORD(m) = 0;
                   j = 0i64;
                   goto LABEL_45;
                 }
-                if ( (_WORD)v27 == WORD1(j[1].mPrev) && (_WORD)v21 == LOWORD(j[1].mPrev) )
+                if ( v25 == WORD1(j[1].mPrev) && v19 == LOWORD(j[1].mPrev) )
                   break;
               }
-              LODWORD(l) = 0;
-              if ( v39 >= *(float *)&j[2].mPrev )
+              LODWORD(m) = 0;
+              if ( v37 >= *(float *)&j[2].mPrev )
                 goto LABEL_61;
 LABEL_45:
-              for ( k = v4->m_ClosedNodes.mNode.mNext;
-                    k != (UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *)&v4->m_ClosedNodes;
+              for ( k = this->m_ClosedNodes.mNode.mNext;
+                    k != (UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *)&this->m_ClosedNodes;
                     k = k->mNext )
               {
-                if ( (_WORD)v27 == WORD1(k[1].mPrev) && (_WORD)v21 == LOWORD(k[1].mPrev) )
+                if ( v25 == WORD1(k[1].mPrev) && v19 == LOWORD(k[1].mPrev) )
                 {
-                  if ( v39 >= *(float *)&k[2].mPrev )
+                  if ( v37 >= *(float *)&k[2].mPrev )
                     goto LABEL_61;
+                  v40 = k->mPrev;
+                  v41 = k->mNext;
+                  v40->mNext = v41;
+                  v41->mPrev = v40;
+                  k->mPrev = k;
+                  k->mNext = k;
                   v42 = k->mPrev;
                   v43 = k->mNext;
                   v42->mNext = v43;
                   v43->mPrev = v42;
-                  k->mPrev = k;
-                  k->mNext = k;
-                  v44 = k->mPrev;
-                  v45 = k->mNext;
-                  v44->mNext = v45;
-                  v45->mPrev = v44;
                   k->mPrev = k;
                   k->mNext = k;
                   k->mPrev = (UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *)UFG::WayFinder::s_NodePool.mFreeListHead;
@@ -791,129 +759,129 @@ LABEL_45:
               }
               if ( j )
               {
+                v44 = j->mPrev;
+                v45 = j->mNext;
+                v44->mNext = v45;
+                v45->mPrev = v44;
+                j->mPrev = j;
+                j->mNext = j;
                 v46 = j->mPrev;
                 v47 = j->mNext;
                 v46->mNext = v47;
                 v47->mPrev = v46;
                 j->mPrev = j;
                 j->mNext = j;
-                v48 = j->mPrev;
-                v49 = j->mNext;
-                v48->mNext = v49;
-                v49->mPrev = v48;
-                j->mPrev = j;
-                j->mNext = j;
                 j->mPrev = (UFG::qNode<UFG::WayStarNode,UFG::WayStarNode> *)UFG::WayFinder::s_NodePool.mFreeListHead;
                 UFG::WayFinder::s_NodePool.mFreeListHead = (char *)j;
                 --UFG::WayFinder::s_NodePool.mNumSlotsAllocated;
               }
-              if ( v31 )
+              if ( v29 )
               {
-                v50 = 0;
+                v48 = 0;
               }
               else
               {
-                v51 = (float *)v6->vfptr->GetEdgePosition(v6, (UFG::qVector3 *)&v77, v21, v67);
-                v52 = (__m128)*(unsigned int *)v51;
-                a3 = (float)(v51[1] - v4->m_GoalPosition.y) * (float)(v51[1] - v4->m_GoalPosition.y);
-                v52.m128_f32[0] = (float)((float)((float)(v52.m128_f32[0] - v4->m_GoalPosition.x)
-                                                * (float)(v52.m128_f32[0] - v4->m_GoalPosition.x))
-                                        + a3)
-                                + (float)((float)(v51[2] - v4->m_GoalPosition.z) * (float)(v51[2] - v4->m_GoalPosition.z));
-                v50 = (unsigned __int128)_mm_sqrt_ps(v52);
+                v49 = m_WayGraph->vfptr->GetEdgePosition(m_WayGraph, (UFG::qVector3 *)&v74, v19, v64);
+                v50 = (__m128)LODWORD(v49->x);
+                v50.m128_f32[0] = (float)((float)((float)(v50.m128_f32[0] - this->m_GoalPosition.x)
+                                                * (float)(v50.m128_f32[0] - this->m_GoalPosition.x))
+                                        + (float)((float)(v49->y - this->m_GoalPosition.y)
+                                                * (float)(v49->y - this->m_GoalPosition.y)))
+                                + (float)((float)(v49->z - this->m_GoalPosition.z)
+                                        * (float)(v49->z - this->m_GoalPosition.z));
+                v48 = _mm_sqrt_ps(v50).m128_u32[0];
               }
-              v53 = UFG::WayStarNode::operator new(0x28ui64);
-              if ( v53 )
+              v51 = UFG::WayStarNode::operator new(0x28ui64);
+              if ( v51 )
               {
-                *(_QWORD *)v53 = v53;
-                *((_QWORD *)v53 + 1) = v53;
-                *((_WORD *)v53 + 8) = v21;
-                *((_WORD *)v53 + 9) = v27;
-                *((_QWORD *)v53 + 3) = v10;
-                *((float *)v53 + 8) = v39;
-                *((_DWORD *)v53 + 9) = v50;
+                *(_QWORD *)v51 = v51;
+                *((_QWORD *)v51 + 1) = v51;
+                *((_WORD *)v51 + 8) = v19;
+                *((_WORD *)v51 + 9) = v25;
+                *((_QWORD *)v51 + 3) = mPrev;
+                *((float *)v51 + 8) = v37;
+                *((_DWORD *)v51 + 9) = v48;
               }
               else
               {
-                v53 = 0i64;
+                v51 = 0i64;
               }
-              UFG::WayStarSearch::AddOpenNode(v4, (UFG::WayStarNode *)v53);
+              UFG::WayStarSearch::AddOpenNode(this, (UFG::WayStarNode *)v51);
 LABEL_61:
-              v13 = v79;
+              m_WayNode = v76;
             }
-            v18 = v65;
-            v20 = i;
+            v17 = v62;
+            v18 = i;
           }
-          i = ++v20;
+          i = ++v18;
         }
       }
-      v54 = v4->m_ClosedNodes.mNode.mNext;
-      v4->m_ClosedNodes.mNode.mNext = v10;
-      v10->mPrev = &v4->m_ClosedNodes.mNode;
-      v10->mNext = v54;
-      v54->mPrev = v10;
-      v5 = start;
-      v55 = v4->m_SearchState == 0;
-      v56 = v4->m_SearchState < 0;
-      if ( v4->m_SearchState )
+      v52 = this->m_ClosedNodes.mNode.mNext;
+      this->m_ClosedNodes.mNode.mNext = mPrev;
+      mPrev->mPrev = &this->m_ClosedNodes.mNode;
+      mPrev->mNext = v52;
+      v52->mPrev = mPrev;
+      Ticks = start;
+      v53 = this->m_SearchState <= WAYSTAR_SEARCHING;
+      if ( this->m_SearchState )
         goto LABEL_73;
     }
-    v4->m_SearchState = 1;
+    this->m_SearchState = WAYSTAR_FULL_WAY;
 LABEL_68:
-    v5 = start;
-    v4->m_SolutionNode = (UFG::WayStarNode *)v10;
+    Ticks = start;
+    this->m_SolutionNode = mPrev;
   }
 LABEL_69:
-  v55 = v4->m_SearchState == 0;
-  v56 = v4->m_SearchState < 0;
-  if ( v4->m_SearchState == WAYSTAR_SEARCHING )
+  v53 = this->m_SearchState <= WAYSTAR_SEARCHING;
+  if ( this->m_SearchState == WAYSTAR_SEARCHING )
   {
-    if ( (UFG::qList<UFG::WayStarNode,UFG::WayStarNode,1,0> *)v4->m_OpenNodes.mNode.mNext == &v4->m_OpenNodes )
+    if ( (UFG::qList<UFG::WayStarNode,UFG::WayStarNode,1,0> *)this->m_OpenNodes.mNode.mNext == &this->m_OpenNodes )
     {
-      v4->m_WayFinderClient->m_NumWayEdges = 0;
-      v4->m_SearchState = 3;
-      v4->m_SolutionNode = 0i64;
+      this->m_WayFinderClient->m_NumWayEdges = 0;
+      this->m_SearchState = WAYSTAR_NO_WAY;
+      this->m_SolutionNode = 0i64;
     }
-    v55 = v4->m_SearchState == 0;
-    v56 = v4->m_SearchState < 0;
+    v53 = this->m_SearchState <= WAYSTAR_SEARCHING;
   }
 LABEL_73:
-  if ( !v56 && !v55 )
+  if ( !v53 )
   {
-    v57 = v4->m_SolutionNode;
-    v58 = v57;
-    if ( v57 )
+    m_SolutionNode = this->m_SolutionNode;
+    v55 = m_SolutionNode;
+    if ( m_SolutionNode )
     {
       do
       {
-        LODWORD(l) = l + 1;
-        v58 = v58->m_ParentNode;
+        LODWORD(m) = m + 1;
+        v55 = v55->m_ParentNode;
       }
-      while ( v58 );
-      for ( ; v57; v57 = v57->m_ParentNode )
+      while ( v55 );
+      do
       {
-        if ( (signed int)l <= 512 )
+        if ( (int)m <= 512 )
           break;
-        LODWORD(l) = l - 1;
+        LODWORD(m) = m - 1;
+        m_SolutionNode = m_SolutionNode->m_ParentNode;
       }
+      while ( m_SolutionNode );
     }
-    v4->m_WayFinderClient->m_NumWayEdges = l;
-    v59 = v4->m_WayFinderClient;
-    for ( l = (signed int)l; v57; v57 = v57->m_ParentNode )
+    this->m_WayFinderClient->m_NumWayEdges = m;
+    m_WayFinderClient = this->m_WayFinderClient;
+    for ( m = (int)m; m_SolutionNode; m_SolutionNode = m_SolutionNode->m_ParentNode )
     {
-      if ( l <= 0 )
+      if ( m <= 0 )
         break;
-      v60 = v57->m_WayEdge;
-      v59->m_WayEdges[--l] = v60;
-      if ( v60 == v4->m_WayFinderClient->vfptr->GetWayEdge(v4->m_WayFinderClient, v6) )
-        v4->m_WayFinderClient->vfptr->GetWayNode(v4->m_WayFinderClient, v6);
-      if ( !l )
-        v4->m_WayFinderClient->m_WayStartsWithTurnAround = v57 == v4->m_TurnAroundNode;
+      v57 = m_SolutionNode->m_WayEdge;
+      m_WayFinderClient->m_WayEdges[--m] = v57;
+      if ( v57 == this->m_WayFinderClient->vfptr->GetWayEdge(this->m_WayFinderClient, m_WayGraph) )
+        this->m_WayFinderClient->vfptr->GetWayNode(this->m_WayFinderClient, m_WayGraph);
+      if ( !m )
+        this->m_WayFinderClient->m_WayStartsWithTurnAround = m_SolutionNode == this->m_TurnAroundNode;
     }
   }
-  v61 = UFG::qGetTicks();
-  result = UFG::qGetTickTime(v5, v61) * 1000.0;
-  v4->m_SearchTime = result + v4->m_SearchTime;
+  v58 = UFG::qGetTicks();
+  result = UFG::qGetTickTime(Ticks, v58) * 1000.0;
+  this->m_SearchTime = result + this->m_SearchTime;
   return result;
 }
 
@@ -922,7 +890,7 @@ LABEL_73:
 __int64 dynamic_initializer_for__UFG::WayFinder::s_NodePool__()
 {
   UFG::qFixedAllocator::qFixedAllocator(&UFG::WayFinder::s_NodePool);
-  return atexit(dynamic_atexit_destructor_for__UFG::WayFinder::s_NodePool__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::WayFinder::s_NodePool__);
 }
 
 // File Line: 527
@@ -930,7 +898,7 @@ __int64 dynamic_initializer_for__UFG::WayFinder::s_NodePool__()
 __int64 dynamic_initializer_for__UFG::WayFinder::s_SearchPool__()
 {
   UFG::qFixedAllocator::qFixedAllocator(&UFG::WayFinder::s_SearchPool);
-  return atexit(dynamic_atexit_destructor_for__UFG::WayFinder::s_SearchPool__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::WayFinder::s_SearchPool__);
 }
 
 // File Line: 530
@@ -938,24 +906,22 @@ __int64 dynamic_initializer_for__UFG::WayFinder::s_SearchPool__()
 UFG::WayFinder *__fastcall UFG::GetWayFinder()
 {
   unsigned int v0; // eax
-  int v1; // ecx
 
   v0 = _S1_16;
-  if ( !(_S1_16 & 1) )
+  if ( (_S1_16 & 1) == 0 )
   {
     _S1_16 |= 1u;
     WayFinderDummyGraph.vfptr = (UFG::WayGraphVtbl *)&UFG::WayGraph::`vftable;
     atexit(UFG::GetWayFinder_::_2_::_dynamic_atexit_destructor_for__WayFinderDummyGraph__);
     v0 = _S1_16;
   }
-  if ( !(v0 & 2) )
+  if ( (v0 & 2) == 0 )
   {
     _S1_16 = v0 | 2;
     gWayFinder.m_WayStarSearches.mNode.mPrev = &gWayFinder.m_WayStarSearches.mNode;
     gWayFinder.m_WayStarSearches.mNode.mNext = &gWayFinder.m_WayStarSearches.mNode;
     gWayFinder.m_WayGraph = &WayFinderDummyGraph;
-    v1 = UFG::WayFinder::s_PoolReferenceCount++;
-    if ( !v1 )
+    if ( !UFG::WayFinder::s_PoolReferenceCount++ )
     {
       UFG::qFixedAllocator::Init(&UFG::WayFinder::s_NodePool, 163840, 40, "WayFinderNodes", 0i64);
       UFG::qFixedAllocator::Init(&UFG::WayFinder::s_SearchPool, 2048, 128, "WayFinderSearches", 0i64);
@@ -969,15 +935,10 @@ UFG::WayFinder *__fastcall UFG::GetWayFinder()
 // RVA: 0xE1EF0
 void __fastcall UFG::WayFinder::WayFinder(UFG::WayFinder *this, UFG::WayGraph *graph)
 {
-  int v2; // edx
-  UFG::qList<UFG::WayStarSearch,UFG::WayStarSearch,1,0> *v3; // [rsp+58h] [rbp+10h]
-
-  v3 = &this->m_WayStarSearches;
-  v3->mNode.mPrev = &v3->mNode;
-  v3->mNode.mNext = &v3->mNode;
+  this->m_WayStarSearches.mNode.mPrev = &this->m_WayStarSearches.mNode;
+  this->m_WayStarSearches.mNode.mNext = &this->m_WayStarSearches.mNode;
   this->m_WayGraph = graph;
-  v2 = UFG::WayFinder::s_PoolReferenceCount++;
-  if ( !v2 )
+  if ( !UFG::WayFinder::s_PoolReferenceCount++ )
   {
     UFG::qFixedAllocator::Init(&UFG::WayFinder::s_NodePool, 163840, 40, "WayFinderNodes", 0i64);
     UFG::qFixedAllocator::Init(&UFG::WayFinder::s_SearchPool, 2048, 128, "WayFinderSearches", 0i64);
@@ -988,28 +949,28 @@ void __fastcall UFG::WayFinder::WayFinder(UFG::WayFinder *this, UFG::WayGraph *g
 // RVA: 0xE2460
 void __fastcall UFG::WayFinder::~WayFinder(UFG::WayFinder *this)
 {
-  UFG::qList<UFG::GUIObjectBase,UFG::GUIObjectBase,1,0> *v1; // rbx
-  UFG::WayFinder *v2; // rax
-  UFG::WayFinder *i; // rdi
+  UFG::qList<UFG::GUIObjectBase,UFG::GUIObjectBase,1,0> *p_m_WayStarSearches; // rbx
+  UFG::WayFinder *i; // rax
   UFG::qList<UFG::WayStarSearch,UFG::WayStarSearch,1,0> *v4; // rdx
-  UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *v5; // rcx
-  UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *v6; // rax
+  UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *mPrev; // rcx
+  UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *mNext; // rax
   UFG::qNode<UFG::GUIObjectBase,UFG::GUIObjectBase> *v7; // rcx
   UFG::qNode<UFG::GUIObjectBase,UFG::GUIObjectBase> *v8; // rax
 
-  v1 = (UFG::qList<UFG::GUIObjectBase,UFG::GUIObjectBase,1,0> *)&this->m_WayStarSearches;
-  v2 = (UFG::WayFinder *)&this->m_WayStarSearches.mNode.mNext[-1].mNext;
-  for ( i = this; v2 != i; v2 = (UFG::WayFinder *)&v1->mNode.mNext[-1].mNext )
+  p_m_WayStarSearches = (UFG::qList<UFG::GUIObjectBase,UFG::GUIObjectBase,1,0> *)&this->m_WayStarSearches;
+  for ( i = (UFG::WayFinder *)&this->m_WayStarSearches.mNode.mNext[-1].mNext;
+        i != this;
+        i = (UFG::WayFinder *)&p_m_WayStarSearches->mNode.mNext[-1].mNext )
   {
-    v4 = &v2->m_WayStarSearches;
-    v5 = v2->m_WayStarSearches.mNode.mPrev;
-    v6 = v2->m_WayStarSearches.mNode.mNext;
-    v5->mNext = v6;
-    v6->mPrev = v5;
+    v4 = &i->m_WayStarSearches;
+    mPrev = i->m_WayStarSearches.mNode.mPrev;
+    mNext = i->m_WayStarSearches.mNode.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
     v4->mNode.mPrev = &v4->mNode;
     v4->mNode.mNext = &v4->mNode;
     if ( v4 != (UFG::qList<UFG::WayStarSearch,UFG::WayStarSearch,1,0> *)8 )
-      ((void (__fastcall *)(UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> **, signed __int64))v4[-1].mNode.mNext->mPrev)(
+      ((void (__fastcall *)(UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> **, __int64))v4[-1].mNode.mNext->mPrev)(
         &v4[-1].mNode.mNext,
         1i64);
   }
@@ -1018,50 +979,46 @@ void __fastcall UFG::WayFinder::~WayFinder(UFG::WayFinder *this)
     UFG::qFixedAllocator::Close(&UFG::WayFinder::s_SearchPool);
     UFG::qFixedAllocator::Close(&UFG::WayFinder::s_NodePool);
   }
-  UFG::qList<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption,1,0>::DeleteNodes(v1);
-  v7 = v1->mNode.mPrev;
-  v8 = v1->mNode.mNext;
+  UFG::qList<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption,1,0>::DeleteNodes(p_m_WayStarSearches);
+  v7 = p_m_WayStarSearches->mNode.mPrev;
+  v8 = p_m_WayStarSearches->mNode.mNext;
   v7->mNext = v8;
   v8->mPrev = v7;
-  v1->mNode.mPrev = &v1->mNode;
-  v1->mNode.mNext = &v1->mNode;
+  p_m_WayStarSearches->mNode.mPrev = &p_m_WayStarSearches->mNode;
+  p_m_WayStarSearches->mNode.mNext = &p_m_WayStarSearches->mNode;
 }
 
 // File Line: 566
 // RVA: 0xE2D10
 void __fastcall UFG::WayFinder::Service(UFG::WayFinder *this, float time_limit_ms)
 {
-  UFG::WayFinder *v2; // rdi
-  float v3; // xmm7_4
   float v4; // xmm6_4
   bool v5; // si
-  UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *v6; // rbx
+  UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *mNext; // rbx
   float v7; // xmm1_4
-  UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *v8; // rcx
+  UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *mPrev; // rcx
   UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *v9; // rax
 
-  v2 = this;
-  v3 = time_limit_ms;
   v4 = 0.0;
   v5 = time_limit_ms >= 0.0;
-  while ( (UFG::WayFinder *)&v2->m_WayStarSearches.mNode.mNext[-1].mNext != v2 )
+  while ( (UFG::WayFinder *)&this->m_WayStarSearches.mNode.mNext[-1].mNext != this )
   {
-    if ( !v5 && v4 >= v3 )
+    if ( !v5 && v4 >= time_limit_ms )
       break;
-    v6 = v2->m_WayStarSearches.mNode.mNext;
-    v7 = v5 ? 0.0 : v3 - v4;
-    v4 = v4 + UFG::WayStarSearch::Service((UFG::WayStarSearch *)&v6[-1].mNext, v7);
-    if ( SLODWORD(v6[1].mPrev) > 0 )
+    mNext = this->m_WayStarSearches.mNode.mNext;
+    v7 = v5 ? 0.0 : time_limit_ms - v4;
+    v4 = v4 + UFG::WayStarSearch::Service((UFG::WayStarSearch *)&mNext[-1].mNext, v7);
+    if ( SLODWORD(mNext[1].mPrev) > 0 )
     {
-      v8 = v6->mPrev;
-      v9 = v6->mNext;
-      v8->mNext = v9;
-      v9->mPrev = v8;
-      v6->mPrev = v6;
-      v6->mNext = v6;
-      if ( v6 != (UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *)8 )
-        ((void (__fastcall *)(UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> **, signed __int64))v6[-1].mNext->mPrev)(
-          &v6[-1].mNext,
+      mPrev = mNext->mPrev;
+      v9 = mNext->mNext;
+      mPrev->mNext = v9;
+      v9->mPrev = mPrev;
+      mNext->mPrev = mNext;
+      mNext->mNext = mNext;
+      if ( mNext != (UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *)8 )
+        ((void (__fastcall *)(UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> **, __int64))mNext[-1].mNext->mPrev)(
+          &mNext[-1].mNext,
           1i64);
     }
   }
@@ -1071,61 +1028,52 @@ void __fastcall UFG::WayFinder::Service(UFG::WayFinder *this, float time_limit_m
 // RVA: 0xE27D0
 void __fastcall UFG::WayFinder::Cancel(UFG::WayFinder *this, UFG::WayFinderClient *client)
 {
-  UFG::WayFinderClient *v2; // rdi
-  UFG::WayFinder *v3; // rsi
-  UFG::WayFinder *v4; // rdx
-  signed __int64 v5; // rbx
-  UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *v6; // rcx
-  UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *v7; // rax
-  UFG::qList<UFG::WayStarSearch,UFG::WayStarSearch,1,0> *v8; // rdx
+  UFG::WayFinder *p_mNext; // rdx
+  UFG::WayFinder *v5; // rbx
+  UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *mPrev; // rcx
+  UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *mNext; // rax
+  UFG::qList<UFG::WayStarSearch,UFG::WayStarSearch,1,0> *p_m_WayStarSearches; // rdx
 
-  v2 = client;
-  v3 = this;
-  v4 = (UFG::WayFinder *)&this->m_WayStarSearches.mNode.mNext[-1].mNext;
-  if ( v4 != this )
+  p_mNext = (UFG::WayFinder *)&this->m_WayStarSearches.mNode.mNext[-1].mNext;
+  if ( p_mNext != this )
   {
     do
     {
-      v5 = (signed __int64)&v4->m_WayStarSearches.mNode.mNext[-1].mNext;
-      if ( v2 == (UFG::WayFinderClient *)v4[3].m_WayGraph )
+      v5 = (UFG::WayFinder *)&p_mNext->m_WayStarSearches.mNode.mNext[-1].mNext;
+      if ( client == (UFG::WayFinderClient *)p_mNext[3].m_WayGraph )
       {
-        v6 = v4->m_WayStarSearches.mNode.mPrev;
-        v7 = v4->m_WayStarSearches.mNode.mNext;
-        v8 = &v4->m_WayStarSearches;
-        v6->mNext = v7;
-        v7->mPrev = v6;
-        v8->mNode.mPrev = &v8->mNode;
-        v8->mNode.mNext = &v8->mNode;
-        if ( v8 != (UFG::qList<UFG::WayStarSearch,UFG::WayStarSearch,1,0> *)8 )
-          ((void (__fastcall *)(UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> **, signed __int64))v8[-1].mNode.mNext->mPrev)(
-            &v8[-1].mNode.mNext,
+        mPrev = p_mNext->m_WayStarSearches.mNode.mPrev;
+        mNext = p_mNext->m_WayStarSearches.mNode.mNext;
+        p_m_WayStarSearches = &p_mNext->m_WayStarSearches;
+        mPrev->mNext = mNext;
+        mNext->mPrev = mPrev;
+        p_m_WayStarSearches->mNode.mPrev = &p_m_WayStarSearches->mNode;
+        p_m_WayStarSearches->mNode.mNext = &p_m_WayStarSearches->mNode;
+        if ( p_m_WayStarSearches != (UFG::qList<UFG::WayStarSearch,UFG::WayStarSearch,1,0> *)8 )
+          ((void (__fastcall *)(UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> **, __int64))p_m_WayStarSearches[-1].mNode.mNext->mPrev)(
+            &p_m_WayStarSearches[-1].mNode.mNext,
             1i64);
-        v2->m_CurrEdgeIndex = 0;
+        client->m_CurrEdgeIndex = 0;
       }
-      v4 = (UFG::WayFinder *)v5;
+      p_mNext = v5;
     }
-    while ( (UFG::WayFinder *)v5 != v3 );
+    while ( v5 != this );
   }
 }
 
 // File Line: 608
 // RVA: 0xE2980
-UFG::WayStarSearch *__fastcall UFG::WayFinder::FindWay(UFG::WayFinder *this, UFG::WayFinderClient *client, UFG::qVector3 *goal_position, UFG::qVector3 *p_goal_direction)
+UFG::WayStarSearch *__fastcall UFG::WayFinder::FindWay(
+        UFG::WayFinder *this,
+        UFG::WayFinderClient *client,
+        UFG::qVector3 *goal_position,
+        UFG::qVector3 *p_goal_direction)
 {
-  UFG::qVector3 *v4; // rbp
-  UFG::qVector3 *v5; // r14
-  UFG::WayFinderClient *v6; // rsi
-  UFG::WayFinder *v7; // rdi
   __int64 v8; // rbx
   char *v9; // rax
   __int64 v10; // rax
-  UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> **v11; // rdx
-  UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *v12; // rcx
+  UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *mPrev; // rcx
 
-  v4 = p_goal_direction;
-  v5 = goal_position;
-  v6 = client;
-  v7 = this;
   UFG::WayFinder::Cancel(this, client);
   v8 = 0i64;
   if ( UFG::WayFinder::s_SearchPool.mFreeListHead
@@ -1134,15 +1082,14 @@ UFG::WayStarSearch *__fastcall UFG::WayFinder::FindWay(UFG::WayFinder *this, UFG
     v9 = UFG::WayStarSearch::operator new(0x80ui64);
     if ( v9 )
     {
-      UFG::WayStarSearch::WayStarSearch((UFG::WayStarSearch *)v9, v7, v6, v5, v4);
+      UFG::WayStarSearch::WayStarSearch((UFG::WayStarSearch *)v9, this, client, goal_position, p_goal_direction);
       v8 = v10;
     }
-    v11 = (UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> **)(v8 + 8);
-    v12 = v7->m_WayStarSearches.mNode.mPrev;
-    v12->mNext = (UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *)(v8 + 8);
-    *v11 = v12;
-    v11[1] = &v7->m_WayStarSearches.mNode;
-    v7->m_WayStarSearches.mNode.mPrev = (UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *)(v8 + 8);
+    mPrev = this->m_WayStarSearches.mNode.mPrev;
+    mPrev->mNext = (UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *)(v8 + 8);
+    *(_QWORD *)(v8 + 8) = mPrev;
+    *(_QWORD *)(v8 + 16) = &this->m_WayStarSearches;
+    this->m_WayStarSearches.mNode.mPrev = (UFG::qNode<UFG::WayStarSearch,UFG::WayStarSearch> *)(v8 + 8);
   }
   return (UFG::WayStarSearch *)v8;
 }

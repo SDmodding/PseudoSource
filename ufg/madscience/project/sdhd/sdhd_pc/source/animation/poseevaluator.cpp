@@ -1,169 +1,167 @@
 // File Line: 167
 // RVA: 0x3A73A0
-void __usercall PoseEvaluator::EvaluatePoseLocalSpace(PoseEvaluator *this@<rcx>, PoseRecipe *recipe@<rdx>, hkQsTransformf *transforms@<r8>, __m128 *a4@<xmm4>)
+void __fastcall PoseEvaluator::EvaluatePoseLocalSpace(
+        PoseEvaluator *this,
+        PoseRecipe *recipe,
+        hkQsTransformf *transforms)
 {
-  __int64 v4; // rsi
-  hkQsTransformf *v5; // r13
-  signed int v6; // eax
-  PoseRecipe *v7; // r12
-  PoseEvaluator *v8; // rbp
-  __int64 v9; // r15
-  signed __int64 v10; // r14
-  PoseRecipe::PoseStackEntry *v11; // r8
-  PoseRecipe::PoseDescType v12; // edx
-  hkQsTransformf *v13; // rbx
-  hkVector4f v14; // xmm0
-  hkQuaternionf v15; // xmm1
-  hkVector4f v16; // xmm2
-  hkQsTransformf *v17; // rdx
-  __int64 v18; // rcx
-  __m128 *v19; // rax
-  hkQsTransformf **v20; // rax
-  hkQsTransformf *v21; // rbx
-  int v22; // eax
-  signed int v23; // er9
+  __int64 v3; // rsi
+  signed int v5; // eax
+  __int64 v8; // r15
+  __int64 v9; // r14
+  PoseRecipe::PoseStackEntry *mPoseStack; // r8
+  PoseRecipe::PoseDescType mType; // edx
+  hkQsTransformf *v12; // rbx
+  hkVector4f v13; // xmm0
+  hkQuaternionf v14; // xmm1
+  hkVector4f v15; // xmm2
+  hkQsTransformf *v16; // rdx
+  __int64 mBoneCount; // rcx
+  __m128 *p_m_quad; // rax
+  hkQsTransformf *v19; // rbx
+  int mBoneUpdateCount; // eax
+  signed int v21; // r9d
+  __int64 v22; // rsi
+  hkQsTransformf *v23; // rbx
   __int64 v24; // rsi
-  hkQsTransformf *v25; // rbx
-  __int64 v26; // rsi
-  hkQsTransformf *v27; // rdi
-  bool v28; // cl
+  hkQsTransformf *v25; // rdi
+  int v26; // eax
+  signed int v27; // r9d
+  __int64 v28; // rsi
   int v29; // eax
-  signed int v30; // er9
+  signed int v30; // r9d
   __int64 v31; // rsi
-  bool v32; // cl
-  int v33; // eax
-  signed int v34; // er9
-  __int64 v35; // rsi
-  __int64 v36; // rsi
-  hkQsTransformf *v37; // rbx
+  __int64 v32; // rsi
+  hkQsTransformf *v33; // rbx
   hkQsTransformf *outputLocalSpace[69]; // [rsp+30h] [rbp-228h]
 
-  v4 = 0i64;
-  v5 = transforms;
-  v6 = recipe->mStackCount - 1;
-  v7 = recipe;
-  v8 = this;
-  v9 = v6;
-  if ( v6 >= 0 )
+  v3 = 0i64;
+  v5 = recipe->mStackCount - 1;
+  v8 = v5;
+  if ( v5 >= 0 )
   {
-    v10 = v6;
+    v9 = v5;
     do
     {
-      v11 = v7->mPoseStack;
-      v12 = v11[v10].mType;
-      switch ( v12 )
+      mPoseStack = recipe->mPoseStack;
+      mType = mPoseStack[v9].mType;
+      switch ( mType )
       {
-        case 0:
-          v13 = v8->mScratchBuffers.mStack[--v8->mScratchBuffers.mStackDepth];
-          UFG::qMemCopy(
-            v8->mScratchBuffers.mStack[v8->mScratchBuffers.mStackDepth],
-            v7->mSkelDesc.mReferencePose,
-            48 * v7->mSkelDesc.mBoneCount);
-          outputLocalSpace[v4] = v13;
-          v4 = (unsigned int)(v4 + 1);
+        case PoseDescType_RestPose:
+          v12 = this->mScratchBuffers.mStack[--this->mScratchBuffers.mStackDepth];
+          UFG::qMemCopy(v12, recipe->mSkelDesc.mReferencePose, 48 * recipe->mSkelDesc.mBoneCount);
+          outputLocalSpace[v3] = v12;
+          v3 = (unsigned int)(v3 + 1);
           break;
-        case 1:
-          --v8->mScratchBuffers.mStackDepth;
-          v14.m_quad = (__m128)hkQsTransformf_identityStorage.m_translation;
-          v15.m_vec.m_quad = (__m128)hkQsTransformf_identityStorage.m_rotation;
-          v16.m_quad = (__m128)hkQsTransformf_identityStorage.m_scale;
-          v17 = v8->mScratchBuffers.mStack[v8->mScratchBuffers.mStackDepth];
-          v18 = v7->mSkelDesc.mBoneCount;
-          if ( (_DWORD)v18 )
+        case PoseDescType_IdentityPose:
+          --this->mScratchBuffers.mStackDepth;
+          v13.m_quad = (__m128)hkQsTransformf_identityStorage.m_translation;
+          v14.m_vec.m_quad = (__m128)hkQsTransformf_identityStorage.m_rotation;
+          v15.m_quad = (__m128)hkQsTransformf_identityStorage.m_scale;
+          v16 = this->mScratchBuffers.mStack[this->mScratchBuffers.mStackDepth];
+          mBoneCount = recipe->mSkelDesc.mBoneCount;
+          if ( (_DWORD)mBoneCount )
           {
-            v19 = &v17->m_scale.m_quad;
+            p_m_quad = &v16->m_scale.m_quad;
             do
             {
-              v19[-2] = v14.m_quad;
-              v19[-1] = v15.m_vec.m_quad;
-              *(hkVector4f *)v19 = (hkVector4f)v16.m_quad;
-              v19 += 3;
-              --v18;
+              p_m_quad[-2] = v13.m_quad;
+              p_m_quad[-1] = v14.m_vec.m_quad;
+              *(hkVector4f *)p_m_quad = (hkVector4f)v15.m_quad;
+              p_m_quad += 3;
+              --mBoneCount;
             }
-            while ( v18 );
+            while ( mBoneCount );
           }
-          outputLocalSpace[v4] = v17;
-          v4 = (unsigned int)(v4 + 1);
+          outputLocalSpace[v3] = v16;
+          v3 = (unsigned int)(v3 + 1);
           break;
-        case 2:
-          --v8->mScratchBuffers.mStackDepth;
-          v20 = v8->mScratchBuffers.mStack;
-          v21 = v20[v8->mScratchBuffers.mStackDepth];
-          PoseEvaluator::EvaluateAnim(
-            v8,
-            v7,
-            &v7->mAnimData[v11[v10].mAnim.mIndex],
-            v20[v8->mScratchBuffers.mStackDepth]);
-          outputLocalSpace[v4] = v21;
-          v4 = (unsigned int)(v4 + 1);
+        case PoseDescType_Anim:
+          v19 = this->mScratchBuffers.mStack[--this->mScratchBuffers.mStackDepth];
+          PoseEvaluator::EvaluateAnim(this, recipe, &recipe->mAnimData[mPoseStack[v9].mAnim.mIndex], v19);
+          outputLocalSpace[v3] = v19;
+          v3 = (unsigned int)(v3 + 1);
           break;
-        case 3:
-        case 4:
-          v22 = v7->mBoneUpdateCount;
-          v23 = v7->mSkelDesc.mBoneCount;
-          v24 = (unsigned int)(v4 - 1);
+        case PoseDescType_Blend:
+        case PoseDescType_BlendWeightSet:
+          mBoneUpdateCount = recipe->mBoneUpdateCount;
+          v21 = recipe->mSkelDesc.mBoneCount;
+          v22 = (unsigned int)(v3 - 1);
+          v23 = outputLocalSpace[v22];
+          v24 = (unsigned int)(v22 - 1);
           v25 = outputLocalSpace[v24];
-          v26 = (unsigned int)(v24 - 1);
-          v27 = outputLocalSpace[v26];
-          v28 = v12 == 4;
-          if ( v22 >= 0 && v22 < v23 )
-            v23 = v7->mBoneUpdateCount;
-          if ( (!v8->mMemoryStreamer || v28) && v28 )
-            PoseEvaluator::BlendPoseWeightSet(v8, v25, outputLocalSpace[v26], v23, a4, v11[v10].mBlend.mPerBoneWeights);
+          if ( mBoneUpdateCount >= 0 && mBoneUpdateCount < v21 )
+            v21 = recipe->mBoneUpdateCount;
+          if ( (!this->mMemoryStreamer || mType == PoseDescType_BlendWeightSet) && mType == PoseDescType_BlendWeightSet )
+            PoseEvaluator::BlendPoseWeightSet(
+              this,
+              v23,
+              outputLocalSpace[v24],
+              v21,
+              mPoseStack[v9].mBlend.mPerBoneWeights);
           else
-            PoseEvaluator::BlendPose(v8, v25, outputLocalSpace[v26], v23, *(float *)&v11[v10].mAnim.mIndex);
+            PoseEvaluator::BlendPose(this, v23, outputLocalSpace[v24], v21, mPoseStack[v9].mBlend.mWeight);
           goto LABEL_31;
-        case 5:
-        case 6:
-          v29 = v7->mBoneUpdateCount;
-          v30 = v7->mSkelDesc.mBoneCount;
-          v31 = (unsigned int)(v4 - 1);
-          v25 = outputLocalSpace[v31];
-          v26 = (unsigned int)(v31 - 1);
-          v27 = outputLocalSpace[v26];
-          v32 = v12 == 6;
+        case PoseDescType_BlendAdd:
+        case PoseDescType_BlendAddWeightSet:
+          v26 = recipe->mBoneUpdateCount;
+          v27 = recipe->mSkelDesc.mBoneCount;
+          v28 = (unsigned int)(v3 - 1);
+          v23 = outputLocalSpace[v28];
+          v24 = (unsigned int)(v28 - 1);
+          v25 = outputLocalSpace[v24];
+          if ( v26 >= 0 && v26 < v27 )
+            v27 = recipe->mBoneUpdateCount;
+          if ( (!this->mMemoryStreamer || mType == PoseDescType_BlendAddWeightSet)
+            && mType == PoseDescType_BlendAddWeightSet )
+          {
+            PoseEvaluator::BlendPoseAddWeightSet(
+              this,
+              v23,
+              outputLocalSpace[v24],
+              v27,
+              mPoseStack[v9].mBlend.mPerBoneWeights);
+          }
+          else
+          {
+            PoseEvaluator::BlendPoseAdd(this, v23, outputLocalSpace[v24], v27, mPoseStack[v9].mBlend.mWeight);
+          }
+          goto LABEL_31;
+        case PoseDescType_BlendSub:
+        case PoseDescType_BlendSubWeightSet:
+          v29 = recipe->mBoneUpdateCount;
+          v30 = recipe->mSkelDesc.mBoneCount;
+          v31 = (unsigned int)(v3 - 1);
+          v23 = outputLocalSpace[v31];
+          v24 = (unsigned int)(v31 - 1);
+          v25 = outputLocalSpace[v24];
           if ( v29 >= 0 && v29 < v30 )
-            v30 = v7->mBoneUpdateCount;
-          if ( (!v8->mMemoryStreamer || v32) && v32 )
-            PoseEvaluator::BlendPoseAddWeightSet(v8, v25, outputLocalSpace[v26], v30, v11[v10].mBlend.mPerBoneWeights);
-          else
-            PoseEvaluator::BlendPoseAdd(v8, v25, outputLocalSpace[v26], v30, *(float *)&v11[v10].mAnim.mIndex);
+            v30 = recipe->mBoneUpdateCount;
+          PoseEvaluator::BlendPoseSub(this, v23, outputLocalSpace[v24], v30, mPoseStack[v9].mBlend.mWeight);
           goto LABEL_31;
-        case 7:
-        case 8:
-          v33 = v7->mBoneUpdateCount;
-          v34 = v7->mSkelDesc.mBoneCount;
-          v35 = (unsigned int)(v4 - 1);
-          v25 = outputLocalSpace[v35];
-          v26 = (unsigned int)(v35 - 1);
-          v27 = outputLocalSpace[v26];
-          if ( v33 >= 0 && v33 < v34 )
-            v34 = v7->mBoneUpdateCount;
-          PoseEvaluator::BlendPoseSub(v8, v25, outputLocalSpace[v26], v34, *(float *)&v11[v10].mAnim.mIndex);
-          goto LABEL_31;
-        case 9:
-          v36 = (unsigned int)(v4 - 1);
-          v25 = outputLocalSpace[v36];
-          v26 = (unsigned int)(v36 - 1);
-          v27 = outputLocalSpace[v26];
-          PoseEvaluator::EvaluateBlendAccum(v8, v7, (PoseRecipe::BlendDesc *)&v11[v10].8, v25, outputLocalSpace[v26]);
+        case PoseDescType_BlendAccum:
+          v32 = (unsigned int)(v3 - 1);
+          v23 = outputLocalSpace[v32];
+          v24 = (unsigned int)(v32 - 1);
+          v25 = outputLocalSpace[v24];
+          PoseEvaluator::EvaluateBlendAccum(this, recipe, (PoseRecipe::BlendDesc *)&mPoseStack[v9].8, v23, v25);
 LABEL_31:
-          outputLocalSpace[v26] = v25;
-          v8->mScratchBuffers.mStack[v8->mScratchBuffers.mStackDepth] = v27;
-          v4 = (unsigned int)(v26 + 1);
-          ++v8->mScratchBuffers.mStackDepth;
+          outputLocalSpace[v24] = v23;
+          this->mScratchBuffers.mStack[this->mScratchBuffers.mStackDepth] = v25;
+          v3 = (unsigned int)(v24 + 1);
+          ++this->mScratchBuffers.mStackDepth;
           break;
         default:
           break;
       }
-      --v10;
       --v9;
+      --v8;
     }
-    while ( v9 >= 0 );
+    while ( v8 >= 0 );
   }
-  v37 = outputLocalSpace[(unsigned int)(v4 - 1)];
-  UFG::qMemCopy(v5, outputLocalSpace[(unsigned int)(v4 - 1)], 48 * v7->mSkelDesc.mBoneCount);
-  v8->mScratchBuffers.mStack[v8->mScratchBuffers.mStackDepth++] = v37;
+  v33 = outputLocalSpace[(unsigned int)(v3 - 1)];
+  UFG::qMemCopy(transforms, v33, 48 * recipe->mSkelDesc.mBoneCount);
+  this->mScratchBuffers.mStack[this->mScratchBuffers.mStackDepth++] = v33;
 }
 
 // File Line: 268
@@ -182,263 +180,251 @@ void dynamic_initializer_for__aabbMaxStart__()
 
 // File Line: 272
 // RVA: 0x3A76C0
-void __usercall PoseEvaluator::EvaluatePoseModelSpace(PoseEvaluator *this@<rcx>, PoseRecipe *recipe@<rdx>, hkQsTransformf *transforms@<r8>, UFG::qVector3 *aabbMin@<r9>, __m128 *a5@<xmm4>, UFG::qVector3 *aabbMax)
+void __fastcall PoseEvaluator::EvaluatePoseModelSpace(
+        PoseEvaluator *this,
+        PoseRecipe *recipe,
+        hkQsTransformf *transforms,
+        UFG::qVector3 *aabbMin,
+        UFG::qVector3 *aabbMax)
 {
-  UFG::qVector3 *v6; // rdi
-  hkQsTransformf *v7; // rsi
-  PoseRecipe *v8; // rbx
-  unsigned int v9; // ebp
-  __m128 v10; // xmm2
-  __m128 v11; // xmm3
-  __m128 *v12; // rcx
-  __int64 v13; // rdx
-  __m128 v14; // xmm1
-  __m128 v15; // xmm0
-  __m128 v16; // xmm1
-  __m128 v17; // xmm0
-  __m128 v18; // [rsp+20h] [rbp-28h]
-  hkVector4f v19; // [rsp+30h] [rbp-18h]
+  unsigned int mBoneCount; // ebp
+  __m128 m_quad; // xmm2
+  __m128 v10; // xmm3
+  hkQsTransformf *v11; // rcx
+  __int64 v12; // rdx
+  __m128 v13; // xmm1
+  __m128 v14; // xmm0
+  __m128 v15; // xmm1
+  __m128 v16; // xmm0
+  __m128 v17; // [rsp+20h] [rbp-28h]
+  __m128 v18; // [rsp+30h] [rbp-18h]
 
-  v6 = aabbMin;
-  v7 = transforms;
-  v8 = recipe;
-  PoseEvaluator::EvaluatePoseLocalSpace(this, recipe, transforms, a5);
-  v9 = v8->mSkelDesc.mBoneCount;
+  PoseEvaluator::EvaluatePoseLocalSpace(this, recipe, transforms);
+  mBoneCount = recipe->mSkelDesc.mBoneCount;
   hkaSkeletonUtils::transformLocalPoseToModelPose(
-    v8->mSkelDesc.mBoneCount,
-    (const __int16 *)v8->mSkelDesc.mParentIndices,
-    v7,
-    v7);
-  v10 = aabbMinStart.m_quad;
-  v11 = aabbMaxStart.m_quad;
-  v18 = aabbMinStart.m_quad;
-  v19.m_quad = aabbMaxStart.m_quad;
-  if ( v9 > 1 )
+    recipe->mSkelDesc.mBoneCount,
+    (const __int16 *)recipe->mSkelDesc.mParentIndices,
+    transforms,
+    transforms);
+  m_quad = aabbMinStart.m_quad;
+  v10 = aabbMaxStart.m_quad;
+  v17 = aabbMinStart.m_quad;
+  v18 = aabbMaxStart.m_quad;
+  if ( mBoneCount > 1 )
   {
-    v12 = &v7[1].m_translation.m_quad;
-    v13 = v9 - 1;
+    v11 = transforms + 1;
+    v12 = mBoneCount - 1;
     do
     {
-      v14 = *v12;
-      v12 += 3;
-      v15 = v14;
-      v16 = _mm_max_ps(v14, v11);
-      v17 = _mm_min_ps(v15, v10);
-      v11 = v16;
-      v10 = v17;
-      --v13;
+      v13 = v11->m_translation.m_quad;
+      ++v11;
+      v14 = v13;
+      v15 = _mm_max_ps(v13, v10);
+      v16 = _mm_min_ps(v14, m_quad);
+      v10 = v15;
+      m_quad = v16;
+      --v12;
     }
-    while ( v13 );
-    v18 = v17;
-    v19.m_quad = v16;
+    while ( v12 );
+    v17 = v16;
+    v18 = v15;
   }
-  *(_QWORD *)&v6->x = v18.m128_u64[0];
-  v6->z = v18.m128_f32[2];
-  *(_QWORD *)&aabbMax->x = v19.m_quad.m128_u64[0];
-  aabbMax->z = v19.m_quad.m128_f32[2];
+  *(_QWORD *)&aabbMin->x = v17.m128_u64[0];
+  LODWORD(aabbMin->z) = v17.m128_i32[2];
+  *aabbMax = *(UFG::qVector3 *)v18.m128_f32;
 }
 
 // File Line: 328
 // RVA: 0x3A6ED0
-void __fastcall PoseEvaluator::EvaluateAnim(PoseEvaluator *this, PoseRecipe *recipe, PoseRecipe::AnimData *anim, hkQsTransformf *pose)
+void __fastcall PoseEvaluator::EvaluateAnim(
+        PoseEvaluator *this,
+        PoseRecipe *recipe,
+        PoseRecipe::AnimData *anim,
+        hkQsTransformf *pose)
 {
-  PoseEvaluator *v4; // r13
-  __int64 v5; // rcx
-  hkQsTransformf *v6; // rbp
-  PoseRecipe::AnimData *v7; // rbx
-  PoseRecipe *v8; // r12
+  __int64 mBoneCount; // rcx
   hkVector4f v9; // xmm0
   hkQuaternionf v10; // xmm1
   hkVector4f v11; // xmm2
-  __m128 *v12; // rax
-  unsigned __int16 *v13; // rsi
+  hkVector4f *p_m_scale; // rax
+  unsigned __int16 *mTrackToBoneIndices; // rsi
   hkaAnimation::DataChunk *chunks; // r14
-  signed int v15; // er15
-  signed int v16; // eax
+  int MaxTrackIndex; // r15d
+  int mBoneUpdateCount; // eax
   float v17; // xmm0_4
-  hkQsTransformf **v18; // rax
   hkQsTransformf *transformTracksOut; // rdx
-  unsigned int v20; // er15
-  unsigned int v21; // edi
-  float v22; // xmm2_4
-  char v23; // r14
-  hkVector4f *v24; // rdx
-  unsigned int v25; // er8
-  char v26; // r10
-  signed __int64 v27; // rcx
-  hkVector4f v28; // xmm0
-  unsigned __int8 v29; // al
-  float v30; // xmm1_4
-  hkVector4f v31; // ST50_16
-  char v32; // al
-  signed __int64 v33; // rcx
-  hkVector4f v34; // ST50_16
-  char v35; // [rsp+A0h] [rbp+8h]
-  unsigned int v36; // [rsp+A8h] [rbp+10h]
-  hkQsTransformf *v37; // [rsp+B0h] [rbp+18h]
+  unsigned int v19; // r15d
+  unsigned int v20; // edi
+  float v21; // xmm2_4
+  char v22; // r14
+  hkVector4f *v23; // rdx
+  unsigned int v24; // r8d
+  char v25; // r10
+  __int64 v26; // rcx
+  hkVector4f v27; // xmm0
+  unsigned __int8 mRootRetargetIndex; // al
+  float v29; // xmm1_4
+  char v30; // al
+  __int64 v31; // rcx
+  hkVector4f v32; // [rsp+50h] [rbp-48h]
+  char v33; // [rsp+A0h] [rbp+8h]
+  unsigned int v34; // [rsp+A8h] [rbp+10h]
+  hkQsTransformf *v35; // [rsp+B0h] [rbp+18h]
 
-  v4 = this;
-  v5 = recipe->mSkelDesc.mBoneCount;
-  v6 = pose;
-  v7 = anim;
-  v8 = recipe;
-  v36 = recipe->mSkelDesc.mBoneCount;
+  mBoneCount = recipe->mSkelDesc.mBoneCount;
+  v34 = recipe->mSkelDesc.mBoneCount;
   if ( anim->mBlendHint == 1 )
   {
     v9.m_quad = (__m128)hkQsTransformf_identityStorage.m_translation;
     v10.m_vec.m_quad = (__m128)hkQsTransformf_identityStorage.m_rotation;
     v11.m_quad = (__m128)hkQsTransformf_identityStorage.m_scale;
-    if ( !(_DWORD)v5 )
+    if ( !(_DWORD)mBoneCount )
       goto LABEL_8;
-    v12 = &pose->m_scale.m_quad;
+    p_m_scale = &pose->m_scale;
     do
     {
-      v12[-2] = v9.m_quad;
-      v12[-1] = v10.m_vec.m_quad;
-      *(hkVector4f *)v12 = (hkVector4f)v11.m_quad;
-      v12 += 3;
-      --v5;
+      p_m_scale[-2] = (hkVector4f)v9.m_quad;
+      p_m_scale[-1] = (hkVector4f)v10.m_vec.m_quad;
+      *p_m_scale = (hkVector4f)v11.m_quad;
+      p_m_scale += 3;
+      --mBoneCount;
     }
-    while ( v5 );
+    while ( mBoneCount );
   }
   else
   {
-    UFG::qMemCopy(pose, recipe->mSkelDesc.mReferencePose, 48 * v5);
+    UFG::qMemCopy(pose, recipe->mSkelDesc.mReferencePose, 48 * mBoneCount);
   }
-  LODWORD(v5) = v36;
+  LODWORD(mBoneCount) = v34;
 LABEL_8:
-  v13 = v7->mTrackToBoneIndices;
-  v4->mMemoryStreamer;
-  chunks = v7->mDataChunks;
-  v15 = hkaSampleAndCombineUtils::getMaxTrackIndex(
-          (const __int16 *)v7->mTrackToBoneIndices,
-          0i64,
-          v5,
-          (unsigned __int8)v7->mNumTransformTracks,
-          0);
-  if ( v15 > 200 )
-    v15 = 200;
-  v16 = v8->mBoneUpdateCount;
-  if ( v16 >= 0 )
+  mTrackToBoneIndices = anim->mTrackToBoneIndices;
+  chunks = anim->mDataChunks;
+  MaxTrackIndex = hkaSampleAndCombineUtils::getMaxTrackIndex(
+                    (const __int16 *)mTrackToBoneIndices,
+                    0i64,
+                    mBoneCount,
+                    (unsigned __int8)anim->mNumTransformTracks,
+                    0);
+  if ( MaxTrackIndex > 200 )
+    MaxTrackIndex = 200;
+  mBoneUpdateCount = recipe->mBoneUpdateCount;
+  if ( mBoneUpdateCount >= 0 )
   {
-    v17 = (float)v16;
-    if ( (float)v16 >= (float)v15 )
-      v17 = (float)v15;
-    v15 = (signed int)v17;
+    v17 = (float)mBoneUpdateCount;
+    if ( (float)mBoneUpdateCount >= (float)MaxTrackIndex )
+      v17 = (float)MaxTrackIndex;
+    MaxTrackIndex = (int)v17;
   }
-  --v4->mScratchBuffers.mStackDepth;
-  v18 = v4->mScratchBuffers.mStack;
-  transformTracksOut = v18[v4->mScratchBuffers.mStackDepth];
-  v20 = v15 + 1;
-  v21 = 0;
-  v37 = v18[v4->mScratchBuffers.mStackDepth];
-  switch ( v7->mAnimType )
+  transformTracksOut = this->mScratchBuffers.mStack[--this->mScratchBuffers.mStackDepth];
+  v19 = MaxTrackIndex + 1;
+  v20 = 0;
+  v35 = transformTracksOut;
+  switch ( anim->mAnimType )
   {
     case 1:
       hkaInterleavedUncompressedAnimation::samplePartialWithDataChunks(
-        v7->mFrameIndex,
-        v7->mFrameDelta,
-        v20,
+        anim->mFrameIndex,
+        anim->mFrameDelta,
+        v19,
         transformTracksOut,
         0,
         0i64,
         chunks,
-        (unsigned __int8)v7->mNumDataChunks);
+        (unsigned __int8)anim->mNumDataChunks);
       break;
     case 3:
       hkaSplineCompressedAnimation::samplePartialWithDataChunks(
-        v7->mFrameIndex,
-        v7->mFrameDelta,
-        v20,
+        anim->mFrameIndex,
+        anim->mFrameDelta,
+        v19,
         transformTracksOut,
         0,
         0i64,
         chunks,
-        (unsigned __int8)v7->mNumDataChunks);
+        (unsigned __int8)anim->mNumDataChunks);
       break;
     case 4:
       hkaQuantizedAnimation::samplePartialWithDataChunks(
-        v7->mFrameIndex,
-        v7->mFrameDelta,
-        v20,
+        anim->mFrameIndex,
+        anim->mFrameDelta,
+        v19,
         0,
-        v8->mSkelDesc.mReferencePose,
+        recipe->mSkelDesc.mReferencePose,
         0i64,
         chunks,
-        (unsigned __int8)v7->mNumDataChunks,
+        (unsigned __int8)anim->mNumDataChunks,
         transformTracksOut,
         0i64);
       break;
     case 5:
       hkaPredictiveCompressedAnimation::samplePartialWithDataChunks(
-        v7->mFrameIndex,
-        v7->mFrameDelta,
-        v20,
+        anim->mFrameIndex,
+        anim->mFrameDelta,
+        v19,
         0,
-        v8->mSkelDesc.mReferencePose,
+        recipe->mSkelDesc.mReferencePose,
         0i64,
         chunks,
-        (unsigned __int8)v7->mNumDataChunks,
+        (unsigned __int8)anim->mNumDataChunks,
         transformTracksOut,
         0i64);
       break;
     default:
       goto LABEL_23;
   }
-  transformTracksOut = v37;
+  transformTracksOut = v35;
 LABEL_23:
-  v22 = *(float *)&FLOAT_1_0;
-  v35 = 0;
-  v23 = v8->mFlags & 1;
-  if ( v20 == -1 || !transformTracksOut || !v20 )
+  v21 = *(float *)&FLOAT_1_0;
+  v33 = 0;
+  v22 = recipe->mFlags & 1;
+  if ( v19 == -1 || !transformTracksOut || !v19 )
     goto LABEL_46;
-  v24 = &transformTracksOut->m_scale;
+  v23 = &transformTracksOut->m_scale;
   do
   {
-    if ( v7->mTrackToBoneIndices )
-      v25 = (signed __int16)*v13;
+    if ( anim->mTrackToBoneIndices )
+      v24 = (__int16)*mTrackToBoneIndices;
     else
-      v25 = v21;
-    if ( v25 < v36 )
+      v24 = v20;
+    if ( v24 < v34 )
     {
-      if ( v7->mBlendHint == 1 )
+      if ( anim->mBlendHint == 1 )
       {
-        v33 = v25;
-        v6[v33].m_translation = (hkVector4f)v24[-2].m_quad;
-        v6[v33].m_rotation.m_vec = (hkVector4f)v24[-1].m_quad;
-        v6[v33].m_scale = (hkVector4f)v24->m_quad;
+        v31 = v24;
+        pose[v31].m_translation = (hkVector4f)v23[-2].m_quad;
+        pose[v31].m_rotation.m_vec = (hkVector4f)v23[-1].m_quad;
+        pose[v31].m_scale = (hkVector4f)v23->m_quad;
       }
       else
       {
-        if ( !v8->mSkelDesc.mBones[v25].m_lockTranslation.m_bool || v23 )
+        if ( !recipe->mSkelDesc.mBones[v24].m_lockTranslation.m_bool || v22 )
         {
-          v28.m_quad = (__m128)v24[-2];
-          v26 = 0;
-          v27 = v25;
+          v27.m_quad = (__m128)v23[-2];
+          v25 = 0;
+          v26 = v24;
         }
         else
         {
-          v26 = 1;
-          v27 = v25;
-          v28.m_quad = (__m128)v8->mSkelDesc.mReferencePose[v25].m_translation;
+          v25 = 1;
+          v26 = v24;
+          v27.m_quad = (__m128)recipe->mSkelDesc.mReferencePose[v26].m_translation;
         }
-        v6[v27].m_translation = (hkVector4f)v28.m_quad;
-        v6[v27].m_rotation.m_vec = (hkVector4f)v24[-1].m_quad;
-        v6[v27].m_scale = (hkVector4f)v24->m_quad;
-        v29 = v7->mRootRetargetIndex;
-        if ( v29 != -1 )
+        pose[v26].m_translation = (hkVector4f)v27.m_quad;
+        pose[v26].m_rotation.m_vec = (hkVector4f)v23[-1].m_quad;
+        pose[v26].m_scale = (hkVector4f)v23->m_quad;
+        mRootRetargetIndex = anim->mRootRetargetIndex;
+        if ( mRootRetargetIndex != 0xFF )
         {
-          if ( v26 )
+          if ( v25 )
           {
-            if ( v25 == v29 )
+            if ( v24 == mRootRetargetIndex )
             {
-              LODWORD(v30) = v24[-2].m_quad.m128_i32[0] & _xmm;
-              if ( v30 > 0.001 )
+              LODWORD(v29) = v23[-2].m_quad.m128_i32[0] & _xmm;
+              if ( v29 > 0.001 )
               {
-                v32 = 1;
-                v35 = 1;
-                v31.m_quad = (__m128)v8->mSkelDesc.mReferencePose[v27].m_translation;
-                v22 = v30 / COERCE_FLOAT(v31.m_quad.m128_i32[0] & _xmm);
+                v30 = 1;
+                v33 = 1;
+                v21 = v29 / COERCE_FLOAT(*(_OWORD *)&recipe->mSkelDesc.mReferencePose[v26].m_translation & _xmm);
                 goto LABEL_43;
               }
             }
@@ -446,29 +432,34 @@ LABEL_23:
         }
       }
     }
-    v32 = v35;
+    v30 = v33;
 LABEL_43:
-    ++v21;
-    ++v13;
-    v24 += 3;
+    ++v20;
+    ++mTrackToBoneIndices;
+    v23 += 3;
   }
-  while ( v21 < v20 );
-  if ( v32 )
+  while ( v20 < v19 );
+  if ( v30 )
   {
-    v34.m_quad = (__m128)v6->m_translation;
-    v34.m_quad.m128_f32[2] = v6->m_translation.m_quad.m128_f32[2] / v22;
-    v6->m_translation = (hkVector4f)v34.m_quad;
+    v32.m_quad = (__m128)pose->m_translation;
+    v32.m_quad.m128_f32[2] = pose->m_translation.m_quad.m128_f32[2] / v21;
+    pose->m_translation = (hkVector4f)v32.m_quad;
   }
 LABEL_46:
-  v4->mScratchBuffers.mStack[v4->mScratchBuffers.mStackDepth++] = v37;
+  this->mScratchBuffers.mStack[this->mScratchBuffers.mStackDepth++] = v35;
 }
 
 // File Line: 581
 // RVA: 0x3A7270
-void __fastcall PoseEvaluator::EvaluateBlendAccum(PoseEvaluator *this, PoseRecipe *recipe, PoseRecipe::BlendDesc *blend, hkQsTransformf *pose1, hkQsTransformf *pose2)
+void __fastcall PoseEvaluator::EvaluateBlendAccum(
+        PoseEvaluator *this,
+        PoseRecipe *recipe,
+        PoseRecipe::BlendDesc *blend,
+        hkQsTransformf *pose1,
+        hkQsTransformf *pose2)
 {
-  hkQuaternionf *v5; // rcx
-  __int64 v6; // rdx
+  hkQuaternionf *p_m_rotation; // rcx
+  __int64 mBoneCount; // rdx
   signed __int64 v7; // rax
   __m128 v8; // xmm1
   __m128 v9; // xmm4
@@ -482,56 +473,65 @@ void __fastcall PoseEvaluator::EvaluateBlendAccum(PoseEvaluator *this, PoseRecip
 
   if ( recipe->mSkelDesc.mBoneCount )
   {
-    v5 = &pose1->m_rotation;
-    v6 = recipe->mSkelDesc.mBoneCount;
+    p_m_rotation = &pose1->m_rotation;
+    mBoneCount = recipe->mSkelDesc.mBoneCount;
     v7 = (char *)pose2 - (char *)pose1;
     do
     {
-      v8 = *(__m128 *)((char *)&v5[1].m_vec.m_quad + v7);
-      v5 += 3;
+      v8 = *(__m128 *)((char *)&p_m_rotation[1].m_vec.m_quad + v7);
+      p_m_rotation += 3;
       v9 = _mm_shuffle_ps((__m128)LODWORD(blend->mWeight), (__m128)LODWORD(blend->mWeight), 0);
-      v5[-2].m_vec.m_quad = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(v8, v5[-2].m_vec.m_quad), v9), v5[-2].m_vec.m_quad);
-      v5[-4].m_vec.m_quad = _mm_add_ps(
-                              _mm_mul_ps(
-                                _mm_sub_ps(*(__m128 *)((char *)&v5[-4].m_vec.m_quad + v7), v5[-4].m_vec.m_quad),
-                                v9),
-                              v5[-4].m_vec.m_quad);
-      v10 = _mm_mul_ps(*(__m128 *)((char *)&v5[-3].m_vec.m_quad + v7), v5[-3].m_vec.m_quad);
+      p_m_rotation[-2].m_vec.m_quad = _mm_add_ps(
+                                        _mm_mul_ps(_mm_sub_ps(v8, p_m_rotation[-2].m_vec.m_quad), v9),
+                                        p_m_rotation[-2].m_vec.m_quad);
+      p_m_rotation[-4].m_vec.m_quad = _mm_add_ps(
+                                        _mm_mul_ps(
+                                          _mm_sub_ps(
+                                            *(__m128 *)((char *)&p_m_rotation[-4].m_vec.m_quad + v7),
+                                            p_m_rotation[-4].m_vec.m_quad),
+                                          v9),
+                                        p_m_rotation[-4].m_vec.m_quad);
+      v10 = _mm_mul_ps(*(__m128 *)((char *)&p_m_rotation[-3].m_vec.m_quad + v7), p_m_rotation[-3].m_vec.m_quad);
       v11 = _mm_add_ps(_mm_shuffle_ps(v10, v10, 78), v10);
       v12 = _mm_add_ps(
               _mm_mul_ps(
                 _mm_xor_ps(
                   (__m128)_mm_slli_epi32(
                             _mm_srli_epi32(
-                              (__m128i)_mm_cmpltps(_mm_add_ps(_mm_shuffle_ps(v11, v11, 177), v11), (__m128)0i64),
+                              (__m128i)_mm_cmplt_ps(_mm_add_ps(_mm_shuffle_ps(v11, v11, 177), v11), (__m128)0i64),
                               0x1Fu),
                             0x1Fu),
                   v9),
-                *(__m128 *)((char *)&v5[-3].m_vec.m_quad + v7)),
-              _mm_mul_ps(_mm_sub_ps(query.m_quad, v9), v5[-3].m_vec.m_quad));
+                *(__m128 *)((char *)&p_m_rotation[-3].m_vec.m_quad + v7)),
+              _mm_mul_ps(_mm_sub_ps(query.m_quad, v9), p_m_rotation[-3].m_vec.m_quad));
       v13 = _mm_mul_ps(v12, v12);
       v14 = _mm_add_ps(_mm_shuffle_ps(v13, v13, 78), v13);
       v15 = _mm_add_ps(_mm_shuffle_ps(v14, v14, 177), v14);
       v16 = _mm_rsqrt_ps(v15);
-      v5[-3].m_vec.m_quad = _mm_mul_ps(
-                              v12,
-                              _mm_mul_ps(
-                                _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v16, v15), v16)),
-                                _mm_mul_ps(*(__m128 *)_xmm, v16)));
-      v5[-2] = (hkQuaternionf)_xmm;
-      --v6;
+      p_m_rotation[-3].m_vec.m_quad = _mm_mul_ps(
+                                        v12,
+                                        _mm_mul_ps(
+                                          _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v16, v15), v16)),
+                                          _mm_mul_ps(*(__m128 *)_xmm, v16)));
+      p_m_rotation[-2] = (hkQuaternionf)_xmm;
+      --mBoneCount;
     }
-    while ( v6 );
+    while ( mBoneCount );
   }
 }
 
 // File Line: 595
 // RVA: 0x3A4090
-void __fastcall PoseEvaluator::BlendPose(PoseEvaluator *this, hkQsTransformf *outputLocalSpace, hkQsTransformf *posePose, unsigned int numBones, float weight)
+void __fastcall PoseEvaluator::BlendPose(
+        PoseEvaluator *this,
+        hkQsTransformf *outputLocalSpace,
+        hkQsTransformf *posePose,
+        unsigned int numBones,
+        float weight)
 {
   signed __int64 v5; // r8
-  hkQuaternionf *v6; // rax
-  signed __int64 v7; // rcx
+  hkQuaternionf *p_m_rotation; // rax
+  __int64 v7; // rcx
   __m128 v8; // xmm5
   __m128 v9; // xmm1
   __m128 v10; // xmm0
@@ -542,45 +542,49 @@ void __fastcall PoseEvaluator::BlendPose(PoseEvaluator *this, hkQsTransformf *ou
   __m128 v15; // xmm1
   __m128 v16; // xmm2
 
-  if ( (signed int)(numBones - 1) >= 0 )
+  if ( (int)(numBones - 1) >= 0 )
   {
     v5 = (char *)posePose - (char *)outputLocalSpace;
-    v6 = &outputLocalSpace->m_rotation;
-    v7 = (signed int)(numBones - 1) + 1i64;
+    p_m_rotation = &outputLocalSpace->m_rotation;
+    v7 = (int)(numBones - 1) + 1i64;
     v8 = _mm_shuffle_ps((__m128)LODWORD(weight), (__m128)LODWORD(weight), 0);
     do
     {
-      v9 = *(__m128 *)((char *)&v6[1].m_vec.m_quad + v5);
-      v6 += 3;
-      v6[-2].m_vec.m_quad = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(v9, v6[-2].m_vec.m_quad), v8), v6[-2].m_vec.m_quad);
-      v6[-4].m_vec.m_quad = _mm_add_ps(
-                              _mm_mul_ps(
-                                _mm_sub_ps(*(__m128 *)((char *)&v6[-4].m_vec.m_quad + v5), v6[-4].m_vec.m_quad),
-                                v8),
-                              v6[-4].m_vec.m_quad);
-      v10 = _mm_mul_ps(*(__m128 *)((char *)&v6[-3].m_vec.m_quad + v5), v6[-3].m_vec.m_quad);
+      v9 = *(__m128 *)((char *)&p_m_rotation[1].m_vec.m_quad + v5);
+      p_m_rotation += 3;
+      p_m_rotation[-2].m_vec.m_quad = _mm_add_ps(
+                                        _mm_mul_ps(_mm_sub_ps(v9, p_m_rotation[-2].m_vec.m_quad), v8),
+                                        p_m_rotation[-2].m_vec.m_quad);
+      p_m_rotation[-4].m_vec.m_quad = _mm_add_ps(
+                                        _mm_mul_ps(
+                                          _mm_sub_ps(
+                                            *(__m128 *)((char *)&p_m_rotation[-4].m_vec.m_quad + v5),
+                                            p_m_rotation[-4].m_vec.m_quad),
+                                          v8),
+                                        p_m_rotation[-4].m_vec.m_quad);
+      v10 = _mm_mul_ps(*(__m128 *)((char *)&p_m_rotation[-3].m_vec.m_quad + v5), p_m_rotation[-3].m_vec.m_quad);
       v11 = _mm_add_ps(_mm_shuffle_ps(v10, v10, 78), v10);
       v12 = _mm_add_ps(
               _mm_mul_ps(
                 _mm_xor_ps(
                   (__m128)_mm_slli_epi32(
                             _mm_srli_epi32(
-                              (__m128i)_mm_cmpltps(_mm_add_ps(_mm_shuffle_ps(v11, v11, 177), v11), (__m128)0i64),
+                              (__m128i)_mm_cmplt_ps(_mm_add_ps(_mm_shuffle_ps(v11, v11, 177), v11), (__m128)0i64),
                               0x1Fu),
                             0x1Fu),
                   v8),
-                *(__m128 *)((char *)&v6[-3].m_vec.m_quad + v5)),
-              _mm_mul_ps(_mm_sub_ps(query.m_quad, v8), v6[-3].m_vec.m_quad));
+                *(__m128 *)((char *)&p_m_rotation[-3].m_vec.m_quad + v5)),
+              _mm_mul_ps(_mm_sub_ps(query.m_quad, v8), p_m_rotation[-3].m_vec.m_quad));
       v13 = _mm_mul_ps(v12, v12);
       v14 = _mm_add_ps(_mm_shuffle_ps(v13, v13, 78), v13);
       v15 = _mm_add_ps(_mm_shuffle_ps(v14, v14, 177), v14);
       v16 = _mm_rsqrt_ps(v15);
-      v6[-3].m_vec.m_quad = _mm_mul_ps(
-                              v12,
-                              _mm_mul_ps(
-                                _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v16, v15), v16)),
-                                _mm_mul_ps(*(__m128 *)_xmm, v16)));
-      v6[-2] = (hkQuaternionf)_xmm;
+      p_m_rotation[-3].m_vec.m_quad = _mm_mul_ps(
+                                        v12,
+                                        _mm_mul_ps(
+                                          _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v16, v15), v16)),
+                                          _mm_mul_ps(*(__m128 *)_xmm, v16)));
+      p_m_rotation[-2] = (hkQuaternionf)_xmm;
       --v7;
     }
     while ( v7 );
@@ -590,12 +594,17 @@ void __fastcall PoseEvaluator::BlendPose(PoseEvaluator *this, hkQsTransformf *ou
 
 // File Line: 609
 // RVA: 0x3A48B0
-void __usercall PoseEvaluator::BlendPoseWeightSet(PoseEvaluator *this@<rcx>, hkQsTransformf *outputLocalSpace@<rdx>, hkQsTransformf *posePose@<r8>, unsigned int numBones@<r9d>, __m128 a5@<xmm4>, const float *perBoneWeights)
+void __fastcall PoseEvaluator::BlendPoseWeightSet(
+        PoseEvaluator *this,
+        hkQsTransformf *outputLocalSpace,
+        hkQsTransformf *posePose,
+        unsigned int numBones,
+        const float *perBoneWeights)
 {
-  hkQsTransformf *v6; // r10
-  signed __int64 v7; // rdx
-  signed __int64 v8; // rax
-  char *v9; // r8
+  __m128 v5; // xmm4
+  __int64 v7; // rdx
+  hkQuaternionf *p_m_rotation; // rax
+  signed __int64 v9; // r8
   float v10; // xmm0_4
   __m128 v11; // xmm1
   __m128 v12; // xmm0
@@ -606,61 +615,70 @@ void __usercall PoseEvaluator::BlendPoseWeightSet(PoseEvaluator *this@<rcx>, hkQ
   __m128 v17; // xmm1
   __m128 v18; // xmm2
 
-  v6 = outputLocalSpace;
   v7 = 0i64;
-  if ( (signed int)(numBones - 1) >= 0 )
+  if ( (int)(numBones - 1) >= 0 )
   {
-    v8 = (signed __int64)&v6->m_rotation;
-    v9 = (char *)((char *)posePose - (char *)v6);
+    p_m_rotation = &outputLocalSpace->m_rotation;
+    v9 = (char *)posePose - (char *)outputLocalSpace;
     do
     {
       v10 = perBoneWeights[v7];
-      v11 = *(__m128 *)&v9[v8 + 16];
+      v11 = *(__m128 *)((char *)&p_m_rotation[1].m_vec.m_quad + v9);
       ++v7;
-      v8 += 48i64;
-      a5.m128_f32[0] = v10 * 0.0039215689;
-      a5 = _mm_shuffle_ps(a5, a5, 0);
-      *(__m128 *)(v8 - 32) = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(v11, *(__m128 *)(v8 - 32)), a5), *(__m128 *)(v8 - 32));
-      *(__m128 *)(v8 - 64) = _mm_add_ps(
-                               _mm_mul_ps(_mm_sub_ps(*(__m128 *)&v9[v8 - 64], *(__m128 *)(v8 - 64)), a5),
-                               *(__m128 *)(v8 - 64));
-      v12 = _mm_mul_ps(*(__m128 *)&v9[v8 - 48], *(__m128 *)(v8 - 48));
+      p_m_rotation += 3;
+      v5.m128_f32[0] = v10 * 0.0039215689;
+      v5 = _mm_shuffle_ps(v5, v5, 0);
+      p_m_rotation[-2].m_vec.m_quad = _mm_add_ps(
+                                        _mm_mul_ps(_mm_sub_ps(v11, p_m_rotation[-2].m_vec.m_quad), v5),
+                                        p_m_rotation[-2].m_vec.m_quad);
+      p_m_rotation[-4].m_vec.m_quad = _mm_add_ps(
+                                        _mm_mul_ps(
+                                          _mm_sub_ps(
+                                            *(__m128 *)((char *)&p_m_rotation[-4].m_vec.m_quad + v9),
+                                            p_m_rotation[-4].m_vec.m_quad),
+                                          v5),
+                                        p_m_rotation[-4].m_vec.m_quad);
+      v12 = _mm_mul_ps(*(__m128 *)((char *)&p_m_rotation[-3].m_vec.m_quad + v9), p_m_rotation[-3].m_vec.m_quad);
       v13 = _mm_add_ps(_mm_shuffle_ps(v12, v12, 78), v12);
       v14 = _mm_add_ps(
               _mm_mul_ps(
                 _mm_xor_ps(
                   (__m128)_mm_slli_epi32(
                             _mm_srli_epi32(
-                              (__m128i)_mm_cmpltps(_mm_add_ps(_mm_shuffle_ps(v13, v13, 177), v13), (__m128)0i64),
+                              (__m128i)_mm_cmplt_ps(_mm_add_ps(_mm_shuffle_ps(v13, v13, 177), v13), (__m128)0i64),
                               0x1Fu),
                             0x1Fu),
-                  a5),
-                *(__m128 *)&v9[v8 - 48]),
-              _mm_mul_ps(_mm_sub_ps(query.m_quad, a5), *(__m128 *)(v8 - 48)));
+                  v5),
+                *(__m128 *)((char *)&p_m_rotation[-3].m_vec.m_quad + v9)),
+              _mm_mul_ps(_mm_sub_ps(query.m_quad, v5), p_m_rotation[-3].m_vec.m_quad));
       v15 = _mm_mul_ps(v14, v14);
       v16 = _mm_add_ps(_mm_shuffle_ps(v15, v15, 78), v15);
       v17 = _mm_add_ps(_mm_shuffle_ps(v16, v16, 177), v16);
       v18 = _mm_rsqrt_ps(v17);
-      *(__m128 *)(v8 - 48) = _mm_mul_ps(
-                               v14,
-                               _mm_mul_ps(
-                                 _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v18, v17), v18)),
-                                 _mm_mul_ps(*(__m128 *)_xmm, v18)));
-      *(_OWORD *)(v8 - 32) = _xmm;
+      p_m_rotation[-3].m_vec.m_quad = _mm_mul_ps(
+                                        v14,
+                                        _mm_mul_ps(
+                                          _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v18, v17), v18)),
+                                          _mm_mul_ps(*(__m128 *)_xmm, v18)));
+      p_m_rotation[-2] = (hkQuaternionf)_xmm;
     }
-    while ( v7 <= (signed int)(numBones - 1) );
+    while ( v7 <= (int)(numBones - 1) );
   }
-  hkQsTransform_fasterRenormalizeBatch(v6, numBones);
+  hkQsTransform_fasterRenormalizeBatch(outputLocalSpace, numBones);
 }
 
 // File Line: 623
 // RVA: 0x3A41E0
-void __fastcall PoseEvaluator::BlendPoseAdd(PoseEvaluator *this, hkQsTransformf *outputLocalSpace, hkQsTransformf *posePose, unsigned int numBones, float weight)
+void __fastcall PoseEvaluator::BlendPoseAdd(
+        PoseEvaluator *this,
+        hkQsTransformf *outputLocalSpace,
+        hkQsTransformf *posePose,
+        unsigned int numBones,
+        float weight)
 {
-  hkQsTransformf *v5; // r10
-  __m128 *v6; // rdx
+  hkQuaternionf *p_m_rotation; // rdx
   signed __int64 v7; // rax
-  signed __int64 v8; // rcx
+  __int64 v8; // rcx
   __m128 v9; // xmm8
   __m128 v10; // xmm2
   __m128 v11; // xmm1
@@ -683,37 +701,42 @@ void __fastcall PoseEvaluator::BlendPoseAdd(PoseEvaluator *this, hkQsTransformf 
   __m128 v28; // xmm1
   __m128 v29; // xmm2
 
-  v5 = outputLocalSpace;
-  if ( (signed int)(numBones - 1) >= 0 )
+  if ( (int)(numBones - 1) >= 0 )
   {
-    v6 = &posePose->m_rotation.m_vec.m_quad;
-    v7 = (char *)v5 - (char *)posePose;
-    v8 = (signed int)(numBones - 1) + 1i64;
+    p_m_rotation = &posePose->m_rotation;
+    v7 = (char *)outputLocalSpace - (char *)posePose;
+    v8 = (int)(numBones - 1) + 1i64;
     v9 = _mm_shuffle_ps((__m128)LODWORD(weight), (__m128)LODWORD(weight), 0);
     do
     {
-      v10 = *(__m128 *)((char *)v6 + v7 - 16);
-      v11 = _mm_mul_ps(*(__m128 *)((char *)v6 + v7 - 16), *v6);
-      v12 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v10, v10, 201), *v6), _mm_mul_ps(_mm_shuffle_ps(*v6, *v6, 201), v10));
-      v13 = _mm_shuffle_ps(*v6, *v6, 255);
+      v10 = *(__m128 *)((char *)&p_m_rotation[-1].m_vec.m_quad + v7);
+      v11 = _mm_mul_ps(v10, p_m_rotation->m_vec.m_quad);
+      v12 = _mm_sub_ps(
+              _mm_mul_ps(_mm_shuffle_ps(v10, v10, 201), p_m_rotation->m_vec.m_quad),
+              _mm_mul_ps(_mm_shuffle_ps(p_m_rotation->m_vec.m_quad, p_m_rotation->m_vec.m_quad, 201), v10));
+      v13 = _mm_shuffle_ps(p_m_rotation->m_vec.m_quad, p_m_rotation->m_vec.m_quad, 255);
       v14 = _mm_mul_ps(_mm_sub_ps(_mm_mul_ps(v13, v13), (__m128)xmmword_141A711B0), v10);
-      v15 = *(__m128 *)((char *)v6 + v7);
+      v15 = *(__m128 *)((char *)&p_m_rotation->m_vec.m_quad + v7);
       v16 = _mm_add_ps(
               _mm_add_ps(
                 _mm_mul_ps(
                   _mm_add_ps(
                     _mm_add_ps(_mm_shuffle_ps(v11, v11, 85), _mm_shuffle_ps(v11, v11, 0)),
                     _mm_shuffle_ps(v11, v11, 170)),
-                  *v6),
+                  p_m_rotation->m_vec.m_quad),
                 v14),
               _mm_mul_ps(_mm_shuffle_ps(v12, v12, 201), v13));
-      v17 = _mm_add_ps(_mm_add_ps(v16, v16), v6[-1]);
-      v18 = _mm_shuffle_ps(*(__m128 *)((char *)v6 + v7), v15, 255);
-      v19 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v15, v15, 201), *v6), _mm_mul_ps(_mm_shuffle_ps(*v6, *v6, 201), v15));
-      v20 = _mm_mul_ps(v15, *v6);
+      v17 = _mm_add_ps(_mm_add_ps(v16, v16), p_m_rotation[-1].m_vec.m_quad);
+      v18 = _mm_shuffle_ps(v15, v15, 255);
+      v19 = _mm_sub_ps(
+              _mm_mul_ps(_mm_shuffle_ps(v15, v15, 201), p_m_rotation->m_vec.m_quad),
+              _mm_mul_ps(_mm_shuffle_ps(p_m_rotation->m_vec.m_quad, p_m_rotation->m_vec.m_quad, 201), v15));
+      v20 = _mm_mul_ps(v15, p_m_rotation->m_vec.m_quad);
       v21 = _mm_add_ps(
-              _mm_add_ps(_mm_shuffle_ps(v19, v19, 201), _mm_mul_ps(*(__m128 *)((char *)v6 + v7), v13)),
-              _mm_mul_ps(*v6, v18));
+              _mm_add_ps(
+                _mm_shuffle_ps(v19, v19, 201),
+                _mm_mul_ps(*(__m128 *)((char *)&p_m_rotation->m_vec.m_quad + v7), v13)),
+              _mm_mul_ps(p_m_rotation->m_vec.m_quad, v18));
       v22 = _mm_shuffle_ps(
               v21,
               _mm_unpackhi_ps(
@@ -724,53 +747,69 @@ void __fastcall PoseEvaluator::BlendPoseAdd(PoseEvaluator *this, hkQsTransformf 
                     _mm_add_ps(_mm_shuffle_ps(v20, v20, 85), _mm_shuffle_ps(v20, v20, 0)),
                     _mm_shuffle_ps(v20, v20, 170)))),
               196);
-      *(__m128 *)((char *)v6 + v7 + 16) = _mm_add_ps(
-                                            _mm_mul_ps(
-                                              _mm_sub_ps(
-                                                _mm_mul_ps(v6[1], *(__m128 *)((char *)v6 + v7 + 16)),
-                                                *(__m128 *)((char *)v6 + v7 + 16)),
-                                              v9),
-                                            *(__m128 *)((char *)v6 + v7 + 16));
-      *(__m128 *)((char *)v6 + v7 - 16) = _mm_add_ps(
-                                            _mm_mul_ps(_mm_sub_ps(v17, *(__m128 *)((char *)v6 + v7 - 16)), v9),
-                                            *(__m128 *)((char *)v6 + v7 - 16));
-      v23 = _mm_mul_ps(*(__m128 *)((char *)v6 + v7), v22);
+      *(__m128 *)((char *)&p_m_rotation[1].m_vec.m_quad + v7) = _mm_add_ps(
+                                                                  _mm_mul_ps(
+                                                                    _mm_sub_ps(
+                                                                      _mm_mul_ps(
+                                                                        p_m_rotation[1].m_vec.m_quad,
+                                                                        *(__m128 *)((char *)&p_m_rotation[1].m_vec.m_quad
+                                                                                  + v7)),
+                                                                      *(__m128 *)((char *)&p_m_rotation[1].m_vec.m_quad
+                                                                                + v7)),
+                                                                    v9),
+                                                                  *(__m128 *)((char *)&p_m_rotation[1].m_vec.m_quad + v7));
+      *(__m128 *)((char *)&p_m_rotation[-1].m_vec.m_quad + v7) = _mm_add_ps(
+                                                                   _mm_mul_ps(
+                                                                     _mm_sub_ps(
+                                                                       v17,
+                                                                       *(__m128 *)((char *)&p_m_rotation[-1].m_vec.m_quad
+                                                                                 + v7)),
+                                                                     v9),
+                                                                   *(__m128 *)((char *)&p_m_rotation[-1].m_vec.m_quad
+                                                                             + v7));
+      v23 = _mm_mul_ps(*(__m128 *)((char *)&p_m_rotation->m_vec.m_quad + v7), v22);
       v24 = _mm_add_ps(_mm_shuffle_ps(v23, v23, 78), v23);
-      v6 += 3;
+      p_m_rotation += 3;
       v25 = _mm_add_ps(
               _mm_mul_ps(
                 _mm_xor_ps(
                   (__m128)_mm_slli_epi32(
                             _mm_srli_epi32(
-                              (__m128i)_mm_cmpltps(_mm_add_ps(_mm_shuffle_ps(v24, v24, 177), v24), (__m128)0i64),
+                              (__m128i)_mm_cmplt_ps(_mm_add_ps(_mm_shuffle_ps(v24, v24, 177), v24), (__m128)0i64),
                               0x1Fu),
                             0x1Fu),
                   v9),
                 v22),
-              _mm_mul_ps(_mm_sub_ps(query.m_quad, v9), *(__m128 *)((char *)v6 + v7 - 48)));
+              _mm_mul_ps(_mm_sub_ps(query.m_quad, v9), *(__m128 *)((char *)&p_m_rotation[-3].m_vec.m_quad + v7)));
       v26 = _mm_mul_ps(v25, v25);
       v27 = _mm_add_ps(_mm_shuffle_ps(v26, v26, 78), v26);
       v28 = _mm_add_ps(_mm_shuffle_ps(v27, v27, 177), v27);
       v29 = _mm_rsqrt_ps(v28);
-      *(__m128 *)((char *)v6 + v7 - 48) = _mm_mul_ps(
-                                            v25,
-                                            _mm_mul_ps(
-                                              _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v29, v28), v29)),
-                                              _mm_mul_ps(*(__m128 *)_xmm, v29)));
+      *(__m128 *)((char *)&p_m_rotation[-3].m_vec.m_quad + v7) = _mm_mul_ps(
+                                                                   v25,
+                                                                   _mm_mul_ps(
+                                                                     _mm_sub_ps(
+                                                                       (__m128)_xmm,
+                                                                       _mm_mul_ps(_mm_mul_ps(v29, v28), v29)),
+                                                                     _mm_mul_ps(*(__m128 *)_xmm, v29)));
       --v8;
     }
     while ( v8 );
   }
-  hkQsTransform_fasterRenormalizeBatch(v5, numBones);
+  hkQsTransform_fasterRenormalizeBatch(outputLocalSpace, numBones);
 }
 
 // File Line: 635
 // RVA: 0x3A4410
-void __fastcall PoseEvaluator::BlendPoseAddWeightSet(PoseEvaluator *this, hkQsTransformf *outputLocalSpace, hkQsTransformf *posePose, unsigned int numBones, const float *perBoneWeights)
+void __fastcall PoseEvaluator::BlendPoseAddWeightSet(
+        PoseEvaluator *this,
+        hkQsTransformf *outputLocalSpace,
+        hkQsTransformf *posePose,
+        unsigned int numBones,
+        const float *perBoneWeights)
 {
-  signed __int64 v5; // r11
-  hkQsTransformf *v6; // r10
-  __m128 *v7; // rdx
+  __int64 v5; // r11
+  hkQuaternionf *p_m_rotation; // rdx
   signed __int64 v8; // rax
   __m128 v9; // xmm2
   __m128 v10; // xmm1
@@ -796,35 +835,40 @@ void __fastcall PoseEvaluator::BlendPoseAddWeightSet(PoseEvaluator *this, hkQsTr
   __m128 v30; // xmm2
 
   v5 = 0i64;
-  v6 = outputLocalSpace;
-  if ( (signed int)(numBones - 1) >= 0 )
+  if ( (int)(numBones - 1) >= 0 )
   {
-    v7 = &posePose->m_rotation.m_vec.m_quad;
-    v8 = (char *)v6 - (char *)posePose;
+    p_m_rotation = &posePose->m_rotation;
+    v8 = (char *)outputLocalSpace - (char *)posePose;
     do
     {
-      v9 = *(__m128 *)((char *)v7 + v8 - 16);
-      v10 = _mm_mul_ps(*(__m128 *)((char *)v7 + v8 - 16), *v7);
-      v11 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v9, v9, 201), *v7), _mm_mul_ps(_mm_shuffle_ps(*v7, *v7, 201), v9));
-      v12 = _mm_shuffle_ps(*v7, *v7, 255);
+      v9 = *(__m128 *)((char *)&p_m_rotation[-1].m_vec.m_quad + v8);
+      v10 = _mm_mul_ps(v9, p_m_rotation->m_vec.m_quad);
+      v11 = _mm_sub_ps(
+              _mm_mul_ps(_mm_shuffle_ps(v9, v9, 201), p_m_rotation->m_vec.m_quad),
+              _mm_mul_ps(_mm_shuffle_ps(p_m_rotation->m_vec.m_quad, p_m_rotation->m_vec.m_quad, 201), v9));
+      v12 = _mm_shuffle_ps(p_m_rotation->m_vec.m_quad, p_m_rotation->m_vec.m_quad, 255);
       v13 = _mm_mul_ps(_mm_sub_ps(_mm_mul_ps(v12, v12), (__m128)xmmword_141A711B0), v9);
-      v14 = *(__m128 *)((char *)v7 + v8);
+      v14 = *(__m128 *)((char *)&p_m_rotation->m_vec.m_quad + v8);
       v15 = _mm_add_ps(
               _mm_add_ps(
                 _mm_mul_ps(
                   _mm_add_ps(
                     _mm_add_ps(_mm_shuffle_ps(v10, v10, 85), _mm_shuffle_ps(v10, v10, 0)),
                     _mm_shuffle_ps(v10, v10, 170)),
-                  *v7),
+                  p_m_rotation->m_vec.m_quad),
                 v13),
               _mm_mul_ps(_mm_shuffle_ps(v11, v11, 201), v12));
-      v16 = _mm_add_ps(_mm_add_ps(v15, v15), v7[-1]);
-      v17 = _mm_shuffle_ps(*(__m128 *)((char *)v7 + v8), v14, 255);
-      v18 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v14, v14, 201), *v7), _mm_mul_ps(_mm_shuffle_ps(*v7, *v7, 201), v14));
-      v19 = _mm_mul_ps(v14, *v7);
+      v16 = _mm_add_ps(_mm_add_ps(v15, v15), p_m_rotation[-1].m_vec.m_quad);
+      v17 = _mm_shuffle_ps(v14, v14, 255);
+      v18 = _mm_sub_ps(
+              _mm_mul_ps(_mm_shuffle_ps(v14, v14, 201), p_m_rotation->m_vec.m_quad),
+              _mm_mul_ps(_mm_shuffle_ps(p_m_rotation->m_vec.m_quad, p_m_rotation->m_vec.m_quad, 201), v14));
+      v19 = _mm_mul_ps(v14, p_m_rotation->m_vec.m_quad);
       v20 = _mm_add_ps(
-              _mm_add_ps(_mm_shuffle_ps(v18, v18, 201), _mm_mul_ps(*(__m128 *)((char *)v7 + v8), v12)),
-              _mm_mul_ps(*v7, v17));
+              _mm_add_ps(
+                _mm_shuffle_ps(v18, v18, 201),
+                _mm_mul_ps(*(__m128 *)((char *)&p_m_rotation->m_vec.m_quad + v8), v12)),
+              _mm_mul_ps(p_m_rotation->m_vec.m_quad, v17));
       v21 = _mm_sub_ps(
               _mm_mul_ps(v17, v12),
               _mm_add_ps(
@@ -833,56 +877,71 @@ void __fastcall PoseEvaluator::BlendPoseAddWeightSet(PoseEvaluator *this, hkQsTr
       v22 = _mm_shuffle_ps(v20, _mm_unpackhi_ps(v20, v21), 196);
       v21.m128_f32[0] = perBoneWeights[v5] * 0.0039215689;
       v23 = _mm_shuffle_ps(v21, v21, 0);
-      *(__m128 *)((char *)v7 + v8 + 16) = _mm_add_ps(
-                                            _mm_mul_ps(
-                                              _mm_sub_ps(
-                                                _mm_mul_ps(v7[1], *(__m128 *)((char *)v7 + v8 + 16)),
-                                                *(__m128 *)((char *)v7 + v8 + 16)),
-                                              v23),
-                                            *(__m128 *)((char *)v7 + v8 + 16));
-      *(__m128 *)((char *)v7 + v8 - 16) = _mm_add_ps(
-                                            _mm_mul_ps(_mm_sub_ps(v16, *(__m128 *)((char *)v7 + v8 - 16)), v23),
-                                            *(__m128 *)((char *)v7 + v8 - 16));
-      v24 = _mm_mul_ps(*(__m128 *)((char *)v7 + v8), v22);
+      *(__m128 *)((char *)&p_m_rotation[1].m_vec.m_quad + v8) = _mm_add_ps(
+                                                                  _mm_mul_ps(
+                                                                    _mm_sub_ps(
+                                                                      _mm_mul_ps(
+                                                                        p_m_rotation[1].m_vec.m_quad,
+                                                                        *(__m128 *)((char *)&p_m_rotation[1].m_vec.m_quad
+                                                                                  + v8)),
+                                                                      *(__m128 *)((char *)&p_m_rotation[1].m_vec.m_quad
+                                                                                + v8)),
+                                                                    v23),
+                                                                  *(__m128 *)((char *)&p_m_rotation[1].m_vec.m_quad + v8));
+      *(__m128 *)((char *)&p_m_rotation[-1].m_vec.m_quad + v8) = _mm_add_ps(
+                                                                   _mm_mul_ps(
+                                                                     _mm_sub_ps(
+                                                                       v16,
+                                                                       *(__m128 *)((char *)&p_m_rotation[-1].m_vec.m_quad
+                                                                                 + v8)),
+                                                                     v23),
+                                                                   *(__m128 *)((char *)&p_m_rotation[-1].m_vec.m_quad
+                                                                             + v8));
+      v24 = _mm_mul_ps(*(__m128 *)((char *)&p_m_rotation->m_vec.m_quad + v8), v22);
       v25 = _mm_add_ps(_mm_shuffle_ps(v24, v24, 78), v24);
       ++v5;
-      v7 += 3;
+      p_m_rotation += 3;
       v26 = _mm_add_ps(
               _mm_mul_ps(
                 _mm_xor_ps(
                   (__m128)_mm_slli_epi32(
                             _mm_srli_epi32(
-                              (__m128i)_mm_cmpltps(_mm_add_ps(_mm_shuffle_ps(v25, v25, 177), v25), (__m128)0i64),
+                              (__m128i)_mm_cmplt_ps(_mm_add_ps(_mm_shuffle_ps(v25, v25, 177), v25), (__m128)0i64),
                               0x1Fu),
                             0x1Fu),
                   v23),
                 v22),
-              _mm_mul_ps(_mm_sub_ps(query.m_quad, v23), *(__m128 *)((char *)v7 + v8 - 48)));
+              _mm_mul_ps(_mm_sub_ps(query.m_quad, v23), *(__m128 *)((char *)&p_m_rotation[-3].m_vec.m_quad + v8)));
       v27 = _mm_mul_ps(v26, v26);
       v28 = _mm_add_ps(_mm_shuffle_ps(v27, v27, 78), v27);
       v29 = _mm_add_ps(_mm_shuffle_ps(v28, v28, 177), v28);
       v30 = _mm_rsqrt_ps(v29);
-      *(__m128 *)((char *)v7 + v8 - 48) = _mm_mul_ps(
-                                            v26,
-                                            _mm_mul_ps(
-                                              _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v30, v29), v30)),
-                                              _mm_mul_ps(*(__m128 *)_xmm, v30)));
+      *(__m128 *)((char *)&p_m_rotation[-3].m_vec.m_quad + v8) = _mm_mul_ps(
+                                                                   v26,
+                                                                   _mm_mul_ps(
+                                                                     _mm_sub_ps(
+                                                                       (__m128)_xmm,
+                                                                       _mm_mul_ps(_mm_mul_ps(v30, v29), v30)),
+                                                                     _mm_mul_ps(*(__m128 *)_xmm, v30)));
     }
-    while ( v5 <= (signed int)(numBones - 1) );
+    while ( v5 <= (int)(numBones - 1) );
   }
-  hkQsTransform_fasterRenormalizeBatch(v6, numBones);
+  hkQsTransform_fasterRenormalizeBatch(outputLocalSpace, numBones);
 }
 
 // File Line: 648
 // RVA: 0x3A4660
-void __fastcall PoseEvaluator::BlendPoseSub(PoseEvaluator *this, hkQsTransformf *outputLocalSpace, hkQsTransformf *posePose, unsigned int numBones, float weight)
+void __fastcall PoseEvaluator::BlendPoseSub(
+        PoseEvaluator *this,
+        hkQsTransformf *outputLocalSpace,
+        hkQsTransformf *posePose,
+        unsigned int numBones,
+        float weight)
 {
-  unsigned int v5; // edi
-  hkQsTransformf *v6; // rsi
-  __m128 *v7; // rbp
-  __m128i v8; // xmm0
+  hkQuaternionf *p_m_rotation; // rbp
+  __m128i inserted; // xmm0
   signed __int64 v9; // rbx
-  signed __int64 v10; // r14
+  __int64 v10; // r14
   __m128 v11; // xmm9
   __m128 v12; // xmm10
   __m128 v13; // xmm1
@@ -901,70 +960,78 @@ void __fastcall PoseEvaluator::BlendPoseSub(PoseEvaluator *this, hkQsTransformf 
   __m128 v26; // xmm0
   __m128 v27; // xmm7
   __m128 v28; // xmm5
-  hkVector4f direction; // [rsp+20h] [rbp-C8h]
-  hkQuaternionf quat; // [rsp+30h] [rbp-B8h]
+  hkVector4f direction; // [rsp+20h] [rbp-C8h] BYREF
+  hkQuaternionf quat; // [rsp+30h] [rbp-B8h] BYREF
   __m128 v31; // [rsp+40h] [rbp-A8h]
-  hkVector4f v32; // [rsp+50h] [rbp-98h]
+  hkVector4f v32; // [rsp+50h] [rbp-98h] BYREF
 
-  v5 = numBones;
-  v6 = outputLocalSpace;
-  if ( (signed int)(numBones - 1) >= 0 )
+  if ( (int)(numBones - 1) >= 0 )
   {
-    v7 = &posePose->m_rotation.m_vec.m_quad;
-    v8 = _mm_insert_epi16((__m128i)0i64, 0x8000u, 1);
+    p_m_rotation = &posePose->m_rotation;
+    inserted = _mm_insert_epi16((__m128i)0i64, 0x8000u, 1);
     v9 = (char *)outputLocalSpace - (char *)posePose;
-    v10 = (signed int)(numBones - 1) + 1i64;
-    v11 = (__m128)_mm_shuffle_epi32(v8, 0);
-    v12 = (__m128)_mm_shuffle_epi32(v8, 64);
+    v10 = (int)(numBones - 1) + 1i64;
+    v11 = (__m128)_mm_shuffle_epi32(inserted, 0);
+    v12 = (__m128)_mm_shuffle_epi32(inserted, 64);
     do
     {
-      v13 = *(__m128 *)((char *)v7 + v9);
-      direction.m_quad = *(__m128 *)((char *)&v7[-1] + v9);
-      v14 = *(__m128 *)((char *)v7 + v9 + 16);
+      v13 = *(__m128 *)((char *)&p_m_rotation->m_vec.m_quad + v9);
+      direction.m_quad = *(__m128 *)((char *)&p_m_rotation[-1] + v9);
+      v14 = *(__m128 *)((char *)&p_m_rotation[1].m_vec.m_quad + v9);
       quat.m_vec.m_quad = v13;
       v31 = v14;
       hkVector4f::setRotatedInverseDir(&v32, &quat, &direction);
       v15 = _mm_rcp_ps(v31);
       v16 = _mm_xor_ps(v11, v32.m_quad);
-      v17 = _mm_shuffle_ps(*v7, *v7, 255);
+      v17 = _mm_shuffle_ps(p_m_rotation->m_vec.m_quad, p_m_rotation->m_vec.m_quad, 255);
       v18 = _mm_xor_ps(v12, quat.m_vec.m_quad);
       v19 = (__m128)_mm_srli_si128(
                       _mm_slli_si128((__m128i)_mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v31, v15)), v15), 4),
                       4);
-      v20 = _mm_mul_ps(v16, *v7);
-      v21 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v16, v16, 201), *v7), _mm_mul_ps(_mm_shuffle_ps(*v7, *v7, 201), v16));
+      v20 = _mm_mul_ps(v16, p_m_rotation->m_vec.m_quad);
+      v21 = _mm_sub_ps(
+              _mm_mul_ps(_mm_shuffle_ps(v16, v16, 201), p_m_rotation->m_vec.m_quad),
+              _mm_mul_ps(_mm_shuffle_ps(p_m_rotation->m_vec.m_quad, p_m_rotation->m_vec.m_quad, 201), v16));
       v22 = _mm_add_ps(
               _mm_add_ps(
                 _mm_mul_ps(
                   _mm_add_ps(
                     _mm_add_ps(_mm_shuffle_ps(v20, v20, 85), _mm_shuffle_ps(v20, v20, 0)),
                     _mm_shuffle_ps(v20, v20, 170)),
-                  *v7),
+                  p_m_rotation->m_vec.m_quad),
                 _mm_mul_ps(_mm_sub_ps(_mm_mul_ps(v17, v17), (__m128)xmmword_141A711B0), v16)),
               _mm_mul_ps(_mm_shuffle_ps(v21, v21, 201), v17));
       v23 = _mm_shuffle_ps(v18, v18, 255);
-      *(__m128 *)((char *)v7 + v9 - 16) = _mm_add_ps(_mm_add_ps(v22, v22), v7[-1]);
-      v24 = _mm_shuffle_ps(*v7, *v7, 255);
-      v25 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(v18, v18, 201), *v7), _mm_mul_ps(_mm_shuffle_ps(*v7, *v7, 201), v18));
+      *(__m128 *)((char *)&p_m_rotation[-1].m_vec.m_quad + v9) = _mm_add_ps(
+                                                                   _mm_add_ps(v22, v22),
+                                                                   p_m_rotation[-1].m_vec.m_quad);
+      v24 = _mm_shuffle_ps(p_m_rotation->m_vec.m_quad, p_m_rotation->m_vec.m_quad, 255);
+      v25 = _mm_sub_ps(
+              _mm_mul_ps(_mm_shuffle_ps(v18, v18, 201), p_m_rotation->m_vec.m_quad),
+              _mm_mul_ps(_mm_shuffle_ps(p_m_rotation->m_vec.m_quad, p_m_rotation->m_vec.m_quad, 201), v18));
       v26 = v18;
-      v27 = _mm_mul_ps(v18, *v7);
-      v28 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v25, v25, 201), _mm_mul_ps(v26, v24)), _mm_mul_ps(v23, *v7));
-      v7 += 3;
-      *(__m128 *)((char *)v7 + v9 - 48) = _mm_shuffle_ps(
-                                            v28,
-                                            _mm_unpackhi_ps(
-                                              v28,
-                                              _mm_sub_ps(
-                                                _mm_mul_ps(v23, v24),
-                                                _mm_add_ps(
-                                                  _mm_add_ps(_mm_shuffle_ps(v27, v27, 85), _mm_shuffle_ps(v27, v27, 0)),
-                                                  _mm_shuffle_ps(v27, v27, 170)))),
-                                            196);
-      *(__m128 *)((char *)v7 + v9 - 32) = _mm_mul_ps(v7[-2], v19);
+      v27 = _mm_mul_ps(v18, p_m_rotation->m_vec.m_quad);
+      v28 = _mm_add_ps(
+              _mm_add_ps(_mm_shuffle_ps(v25, v25, 201), _mm_mul_ps(v26, v24)),
+              _mm_mul_ps(v23, p_m_rotation->m_vec.m_quad));
+      p_m_rotation += 3;
+      *(__m128 *)((char *)&p_m_rotation[-3].m_vec.m_quad + v9) = _mm_shuffle_ps(
+                                                                   v28,
+                                                                   _mm_unpackhi_ps(
+                                                                     v28,
+                                                                     _mm_sub_ps(
+                                                                       _mm_mul_ps(v23, v24),
+                                                                       _mm_add_ps(
+                                                                         _mm_add_ps(
+                                                                           _mm_shuffle_ps(v27, v27, 85),
+                                                                           _mm_shuffle_ps(v27, v27, 0)),
+                                                                         _mm_shuffle_ps(v27, v27, 170)))),
+                                                                   196);
+      *(__m128 *)((char *)&p_m_rotation[-2].m_vec.m_quad + v9) = _mm_mul_ps(p_m_rotation[-2].m_vec.m_quad, v19);
       --v10;
     }
     while ( v10 );
   }
-  hkQsTransform_fasterRenormalizeBatch(v6, v5);
+  hkQsTransform_fasterRenormalizeBatch(outputLocalSpace, numBones);
 }
 

@@ -63,23 +63,24 @@ hkClass *__fastcall hkpMultiRayShape::staticClass()
 
 // File Line: 112
 // RVA: 0xCEBA20
-void __fastcall finishLoadedObjecthkpMultiRayShape(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpMultiRayShape(hkpMultiRayShape *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpMultiRayShape::hkpMultiRayShape);
+  if ( p )
+    hkpMultiRayShape::hkpMultiRayShape(p, finishing);
 }
 
 // File Line: 118
 // RVA: 0xCEBA40
-void __fastcall cleanupLoadedObjecthkpMultiRayShape(void *p)
+void __fastcall cleanupLoadedObjecthkpMultiRayShape(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 122
 // RVA: 0xCEBA50
 hkBaseObjectVtbl *__fastcall getVtablehkpMultiRayShape()
 {
-  hkpMultiRayShape v1; // [rsp+20h] [rbp-48h]
+  hkpMultiRayShape v1; // [rsp+20h] [rbp-48h] BYREF
 
   hkpMultiRayShape::hkpMultiRayShape(&v1, 0);
   return v1.vfptr;
@@ -96,8 +97,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpMultiRayShapeTypeInfo__()
   hkpMultiRayShapeTypeInfo.m_typeName = "hkpMultiRayShape";
   hkpMultiRayShapeTypeInfo.m_vtable = result;
   hkpMultiRayShapeTypeInfo.m_scopedName = "!hkpMultiRayShape";
-  hkpMultiRayShapeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpMultiRayShape;
-  hkpMultiRayShapeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpMultiRayShape;
+  hkpMultiRayShapeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpMultiRayShape;
+  hkpMultiRayShapeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpMultiRayShape;
   return result;
 }
 

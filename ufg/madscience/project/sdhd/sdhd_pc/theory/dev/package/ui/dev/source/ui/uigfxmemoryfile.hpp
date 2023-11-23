@@ -43,40 +43,36 @@ bool __fastcall UFG::UIGfxMemoryFile::Close(UFG::UIGfxMemoryFile *this)
 
 // File Line: 57
 // RVA: 0xA28090
-__int64 __fastcall UFG::UIGfxMemoryFile::Read(UFG::UIGfxMemoryFile *this, char *pbufer, int numBytes)
+__int64 __fastcall UFG::UIGfxMemoryFile::Read(UFG::UIGfxMemoryFile *this, char *pbufer, unsigned int numBytes)
 {
-  UFG::UIGfxMemoryFile *v3; // rdi
-  __int64 v4; // rcx
-  int v5; // ebx
-  int v6; // er8
+  __int64 FileIndex; // rcx
+  int FileSize; // r8d
 
-  v3 = this;
-  v4 = this->FileIndex;
-  v5 = numBytes;
-  v6 = v3->FileSize;
-  if ( (signed int)v4 + v5 > v6 )
-    v5 = v6 - v4;
-  if ( v5 > 0 )
+  FileIndex = this->FileIndex;
+  FileSize = this->FileSize;
+  if ( (int)(FileIndex + numBytes) > FileSize )
+    numBytes = FileSize - FileIndex;
+  if ( (int)numBytes > 0 )
   {
-    memmove(pbufer, &v3->FileData[v4], v5);
-    v3->FileIndex += v5;
+    memmove(pbufer, &this->FileData[FileIndex], (int)numBytes);
+    this->FileIndex += numBytes;
   }
-  return (unsigned int)v5;
+  return numBytes;
 }
 
 // File Line: 74
 // RVA: 0xA28300
-__int64 __fastcall UFG::UIGfxMemoryFile::SkipBytes(UFG::UIGfxMemoryFile *this, int numBytes)
+__int64 __fastcall UFG::UIGfxMemoryFile::SkipBytes(UFG::UIGfxMemoryFile *this, unsigned int numBytes)
 {
-  int v2; // er8
-  int v3; // er9
+  int FileIndex; // r8d
+  int FileSize; // r9d
 
-  v2 = this->FileIndex;
-  v3 = this->FileSize;
-  if ( v2 + numBytes > v3 )
-    numBytes = v3 - v2;
-  this->FileIndex = v2 + numBytes;
-  return (unsigned int)numBytes;
+  FileIndex = this->FileIndex;
+  FileSize = this->FileSize;
+  if ( (int)(FileIndex + numBytes) > FileSize )
+    numBytes = FileSize - FileIndex;
+  this->FileIndex = FileIndex + numBytes;
+  return numBytes;
 }
 
 // File Line: 86
@@ -88,9 +84,9 @@ __int64 __fastcall UFG::UIGfxMemoryFile::BytesAvailable(UFG::UIGfxMemoryFile *th
 
 // File Line: 91
 // RVA: 0xA281C0
-__int64 __fastcall UFG::UIGfxMemoryFile::Seek(UFG::UIGfxMemoryFile *this, int offset, int origin)
+__int64 __fastcall UFG::UIGfxMemoryFile::Seek(UFG::UIGfxMemoryFile *this, unsigned int offset, int origin)
 {
-  int v3; // er8
+  int v3; // r8d
   __int64 result; // rax
 
   if ( origin )
@@ -100,7 +96,7 @@ __int64 __fastcall UFG::UIGfxMemoryFile::Seek(UFG::UIGfxMemoryFile *this, int of
     {
       if ( v3 == 1 )
       {
-        result = (unsigned int)(this->FileSize - offset);
+        result = this->FileSize - offset;
         this->FileIndex = result;
         return result;
       }
@@ -109,14 +105,13 @@ __int64 __fastcall UFG::UIGfxMemoryFile::Seek(UFG::UIGfxMemoryFile *this, int of
     {
       this->FileIndex += offset;
     }
-    result = (unsigned int)this->FileIndex;
+    return (unsigned int)this->FileIndex;
   }
   else
   {
     this->FileIndex = offset;
-    result = (unsigned int)offset;
+    return offset;
   }
-  return result;
 }
 
 // File Line: 108
@@ -129,18 +124,14 @@ char __fastcall UFG::UIGfxMemoryFile::ChangeSize(UFG::UIGfxMemoryFile *this, int
 
 // File Line: 115
 // RVA: 0xA23150
-void __fastcall UFG::UIGfxMemoryFile::UIGfxMemoryFile(UFG::UIGfxMemoryFile *this, const char *pFileName, const char *pBuffer, int buffSize)
+void __fastcall UFG::UIGfxMemoryFile::UIGfxMemoryFile(
+        UFG::UIGfxMemoryFile *this,
+        const char *pFileName,
+        const char *pBuffer,
+        int buffSize)
 {
-  int v4; // ebp
-  const char *v5; // r14
-  const char *v6; // rdi
-  UFG::UIGfxMemoryFile *v7; // rsi
   bool v8; // al
 
-  v4 = buffSize;
-  v5 = pBuffer;
-  v6 = pFileName;
-  v7 = this;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
@@ -149,11 +140,11 @@ void __fastcall UFG::UIGfxMemoryFile::UIGfxMemoryFile(UFG::UIGfxMemoryFile *this
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::File::`vftable;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&UFG::UIGfxMemoryFile::`vftable;
   UFG::qString::qString(&this->FilePath);
-  UFG::qString::Set(&v7->FilePath, v6);
-  v7->FileData = v5;
-  v7->FileSize = v4;
-  v7->FileIndex = 0;
-  v8 = v6 && v5 && v4 > 0;
-  v7->Valid = v8;
+  UFG::qString::Set(&this->FilePath, pFileName);
+  this->FileData = pBuffer;
+  this->FileSize = buffSize;
+  this->FileIndex = 0;
+  v8 = pFileName && pBuffer && buffSize > 0;
+  this->Valid = v8;
 }
 

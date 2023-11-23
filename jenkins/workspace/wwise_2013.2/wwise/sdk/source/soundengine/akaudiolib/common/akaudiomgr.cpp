@@ -1,20 +1,20 @@
 // File Line: 127
 // RVA: 0xA4B4C0
-signed __int64 __fastcall UEL::ArgumentUsageExpression::GetClassSize()
+__int64 __fastcall UEL::ArgumentUsageExpression::GetClassSize()
 {
   return 32i64;
 }
 
 // File Line: 128
 // RVA: 0xA4B4D0
-signed __int64 __fastcall Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_CreateTexture,Scaleform::Render::DICommand>::GetSize()
+__int64 __fastcall Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_CreateTexture,Scaleform::Render::DICommand>::GetSize()
 {
   return 16i64;
 }
 
 // File Line: 133
 // RVA: 0xA4B4B0
-signed __int64 __fastcall Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_GetColorBoundsRect,Scaleform::Render::DICommand>::GetSize()
+__int64 __fastcall Scaleform::Render::DICommandImpl<Scaleform::Render::DICommand_GetColorBoundsRect,Scaleform::Render::DICommand>::GetSize()
 {
   return 40i64;
 }
@@ -23,124 +23,117 @@ signed __int64 __fastcall Scaleform::Render::DICommandImpl<Scaleform::Render::DI
 // RVA: 0xA477B0
 void __fastcall CAkAudioMgr::CAkAudioMgr(CAkAudioMgr *this)
 {
-  CAkAudioMgr *v1; // rbx
-
-  v1 = this;
   InitializeCriticalSection(&this->m_queueLock.m_csLock);
-  v1->m_MsgQueue.blocks.m_pItems = 0i64;
-  *(_QWORD *)&v1->m_MsgQueue.blocks.m_uLength = 0i64;
-  *(_QWORD *)&v1->m_MsgQueue.m_uReadBlock = 0i64;
-  *(_QWORD *)&v1->m_MsgQueue.m_uWriteBlock = 0i64;
-  v1->m_MsgQueue.m_bBufferFull = 0;
-  v1->m_bDrainMsgQueue = 0;
-  v1->m_MsgQueueActualSize = 0;
-  *(_QWORD *)&v1->m_mmapPending.m_ulMinNumListItems = 0i64;
-  v1->m_mmapPending.m_ulNumListItems = 0;
-  *(_QWORD *)&v1->m_mmapPausedPending.m_ulMinNumListItems = 0i64;
-  v1->m_mmapPausedPending.m_ulNumListItems = 0;
-  *(_QWORD *)&v1->m_uBufferTick = 0i64;
-  v1->m_ulReaderFlag = 0;
-  CAkAudioThread::CAkAudioThread(&v1->m_audioThread);
-  v1->m_hEventMgrThreadDrainEvent.m_Event = 0i64;
-  v1->m_timeLastBuffer = 0i64;
-  v1->m_uCallsWithoutTicks = 0;
+  this->m_MsgQueue.blocks.m_pItems = 0i64;
+  *(_QWORD *)&this->m_MsgQueue.blocks.m_uLength = 0i64;
+  *(_QWORD *)&this->m_MsgQueue.m_uReadBlock = 0i64;
+  *(_QWORD *)&this->m_MsgQueue.m_uWriteBlock = 0i64;
+  this->m_MsgQueue.m_bBufferFull = 0;
+  this->m_bDrainMsgQueue = 0;
+  this->m_MsgQueueActualSize = 0;
+  *(_QWORD *)&this->m_mmapPending.m_ulMinNumListItems = 0i64;
+  this->m_mmapPending.m_ulNumListItems = 0;
+  *(_QWORD *)&this->m_mmapPausedPending.m_ulMinNumListItems = 0i64;
+  this->m_mmapPausedPending.m_ulNumListItems = 0;
+  *(_QWORD *)&this->m_uBufferTick = 0i64;
+  this->m_ulReaderFlag = 0;
+  CAkAudioThread::CAkAudioThread(&this->m_audioThread);
+  this->m_hEventMgrThreadDrainEvent.m_Event = 0i64;
+  this->m_timeLastBuffer = 0i64;
+  this->m_uCallsWithoutTicks = 0;
 }
 
 // File Line: 191
 // RVA: 0xA478C0
 void __fastcall CAkAudioMgr::~CAkAudioMgr(CAkAudioMgr *this)
 {
-  CAkAudioMgr *v1; // rbx
-  void *v2; // rcx
+  void *m_Event; // rcx
 
-  v1 = this;
-  v2 = this->m_hEventMgrThreadDrainEvent.m_Event;
-  if ( v2 )
-    CloseHandle(v2);
-  DeleteCriticalSection(&v1->m_queueLock.m_csLock);
+  m_Event = this->m_hEventMgrThreadDrainEvent.m_Event;
+  if ( m_Event )
+    CloseHandle(m_Event);
+  DeleteCriticalSection(&this->m_queueLock.m_csLock);
 }
 
 // File Line: 195
 // RVA: 0xA48140
-signed __int64 __fastcall CAkAudioMgr::Init(CAkAudioMgr *this)
+__int64 __fastcall CAkAudioMgr::Init(CAkAudioMgr *this)
 {
-  CAkAudioMgr *v1; // rdi
-  unsigned int v2; // ebx
-  unsigned int v3; // eax
-  signed __int64 result; // rax
+  unsigned int uCommandQueueSize; // ebx
+  unsigned int ChunkSize; // eax
+  __int64 result; // rax
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v5; // rax
   unsigned int v6; // ebx
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v7; // rcx
   unsigned int v8; // edx
-  signed __int64 v9; // rax
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v9; // rax
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v10; // rax
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v11; // rcx
   unsigned int v12; // edx
-  signed __int64 v13; // rax
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v13; // rax
 
-  v1 = this;
   *(_QWORD *)&this->m_ulWriterFlag = 0i64;
-  v2 = unk_14249E978;
-  v3 = AkSparseChunkRing::GetChunkSize();
-  result = AkSparseChunkRing::Init(&v1->m_MsgQueue, v2 / v3);
+  uCommandQueueSize = g_settings.uCommandQueueSize;
+  ChunkSize = AkSparseChunkRing::GetChunkSize();
+  result = AkSparseChunkRing::Init(&this->m_MsgQueue, uCommandQueueSize / ChunkSize);
   if ( (_DWORD)result == 1 )
   {
-    v1->m_mmapPending.m_ulNumListItems = 0;
-    v1->m_mmapPending.m_ulMaxNumListItems = -1;
-    v1->m_mmapPending.m_pFree = 0i64;
+    this->m_mmapPending.m_ulNumListItems = 0;
+    this->m_mmapPending.m_ulMaxNumListItems = -1;
+    this->m_mmapPending.m_pFree = 0i64;
     v5 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)AK::MemoryMgr::Malloc(g_DefaultPoolId, 0x300ui64);
     v6 = 52;
     v7 = v5;
-    v1->m_mmapPending.m_pvMemStart = v5;
+    this->m_mmapPending.m_pvMemStart = v5;
     if ( v5 )
     {
-      v1->m_mmapPending.m_ulMinNumListItems = 32;
-      v1->m_mmapPending.m_pFree = v5;
+      this->m_mmapPending.m_ulMinNumListItems = 32;
+      this->m_mmapPending.m_pFree = v5;
       v8 = 0;
       do
       {
-        v9 = (signed __int64)&v7[1];
+        v9 = v7 + 1;
         ++v8;
         v7->pNextListItem = v7 + 1;
         ++v7;
       }
-      while ( v8 < v1->m_mmapPending.m_ulMinNumListItems );
-      *(_QWORD *)(v9 - 24) = 0i64;
+      while ( v8 < this->m_mmapPending.m_ulMinNumListItems );
+      v9[-1].pNextListItem = 0i64;
       result = 1i64;
     }
     else
     {
       result = 52i64;
     }
-    v1->m_mmapPending.m_pFirst = 0i64;
-    v1->m_mmapPending.m_pLast = 0i64;
+    this->m_mmapPending.m_pFirst = 0i64;
+    this->m_mmapPending.m_pLast = 0i64;
     if ( (_DWORD)result == 1 )
     {
-      v1->m_mmapPausedPending.m_ulNumListItems = 0;
-      v1->m_mmapPausedPending.m_ulMaxNumListItems = -1;
-      v1->m_mmapPausedPending.m_pFree = 0i64;
+      this->m_mmapPausedPending.m_ulNumListItems = 0;
+      this->m_mmapPausedPending.m_ulMaxNumListItems = -1;
+      this->m_mmapPausedPending.m_pFree = 0i64;
       v10 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)AK::MemoryMgr::Malloc(g_DefaultPoolId, 0x300ui64);
       v11 = v10;
-      v1->m_mmapPausedPending.m_pvMemStart = v10;
+      this->m_mmapPausedPending.m_pvMemStart = v10;
       if ( v10 )
       {
-        v1->m_mmapPausedPending.m_ulMinNumListItems = 32;
-        v1->m_mmapPausedPending.m_pFree = v10;
+        this->m_mmapPausedPending.m_ulMinNumListItems = 32;
+        this->m_mmapPausedPending.m_pFree = v10;
         v12 = 0;
         do
         {
-          v13 = (signed __int64)&v11[1];
+          v13 = v11 + 1;
           ++v12;
           v11->pNextListItem = v11 + 1;
           ++v11;
         }
-        while ( v12 < v1->m_mmapPausedPending.m_ulMinNumListItems );
-        *(_QWORD *)(v13 - 24) = 0i64;
+        while ( v12 < this->m_mmapPausedPending.m_ulMinNumListItems );
+        v13[-1].pNextListItem = 0i64;
         v6 = 1;
       }
-      v1->m_mmapPausedPending.m_pFirst = 0i64;
-      v1->m_mmapPausedPending.m_pLast = 0i64;
-      result = v6;
+      this->m_mmapPausedPending.m_pFirst = 0i64;
+      this->m_mmapPausedPending.m_pLast = 0i64;
+      return v6;
     }
   }
   return result;
@@ -150,42 +143,36 @@ signed __int64 __fastcall CAkAudioMgr::Init(CAkAudioMgr *this)
 // RVA: 0xA4C050
 void __fastcall CAkAudioMgr::Term(CAkAudioMgr *this)
 {
-  CAkAudioMgr *v1; // rbx
-
-  v1 = this;
   CAkAudioThread::Stop(&this->m_audioThread);
-  CAkAudioMgr::RemoveAllPreallocAndReferences(v1);
-  CAkAudioMgr::RemoveAllPausedPendingAction(v1);
-  CAkAudioMgr::RemoveAllPendingAction(v1);
-  AkSparseChunkRing::Term(&v1->m_MsgQueue);
-  CAkList2<CAkRTPCMgr::AkSwitchSubscription,CAkRTPCMgr::AkSwitchSubscription const &,2,ArrayPoolDefault>::Term((CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault> *)&v1->m_mmapPending);
-  CAkList2<CAkRTPCMgr::AkSwitchSubscription,CAkRTPCMgr::AkSwitchSubscription const &,2,ArrayPoolDefault>::Term((CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault> *)&v1->m_mmapPausedPending);
+  CAkAudioMgr::RemoveAllPreallocAndReferences(this);
+  CAkAudioMgr::RemoveAllPausedPendingAction(this);
+  CAkAudioMgr::RemoveAllPendingAction(this);
+  AkSparseChunkRing::Term(&this->m_MsgQueue);
+  CAkList2<CAkRTPCMgr::AkSwitchSubscription,CAkRTPCMgr::AkSwitchSubscription const &,2,ArrayPoolDefault>::Term((CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault> *)&this->m_mmapPending);
+  CAkList2<CAkRTPCMgr::AkSwitchSubscription,CAkRTPCMgr::AkSwitchSubscription const &,2,ArrayPoolDefault>::Term((CAkList2<MapStruct<unsigned long,AkSwitchNodeParams>,MapStruct<unsigned long,AkSwitchNodeParams> const &,2,ArrayPoolDefault> *)&this->m_mmapPausedPending);
 }
 
 // File Line: 240
 // RVA: 0xA4ACB0
 signed __int64 __fastcall CAkAudioMgr::RenderAudio(CAkAudioMgr *this)
 {
-  CAkAudioMgr *v1; // rbx
   bool v2; // al
   bool v3; // di
-  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h]
+  AkQueuedMsg in_rItem; // [rsp+20h] [rbp-48h] BYREF
 
-  v1 = this;
   EnterCriticalSection(&this->m_queueLock.m_csLock);
-  v2 = v1->m_MsgQueue.m_uReadBlock == v1->m_MsgQueue.m_uWriteBlock
-    && v1->m_MsgQueue.m_uReadOffset == v1->m_MsgQueue.m_uWriteOffset
-    && !v1->m_MsgQueue.m_bBufferFull;
-  v3 = v2 == 0;
+  v2 = *(_QWORD *)&this->m_MsgQueue.m_uReadBlock == *(_QWORD *)&this->m_MsgQueue.m_uWriteBlock
+    && !this->m_MsgQueue.m_bBufferFull;
+  v3 = !v2;
   if ( !v2 )
   {
     *(_DWORD *)&in_rItem.size = 8;
-    CAkAudioMgr::LockedEnqueue(v1, &in_rItem, 8u);
-    ++v1->m_ulWriterFlag;
+    CAkAudioMgr::LockedEnqueue(this, &in_rItem, 8u);
+    ++this->m_ulWriterFlag;
   }
-  LeaveCriticalSection(&v1->m_queueLock.m_csLock);
+  LeaveCriticalSection(&this->m_queueLock.m_csLock);
   if ( v3 )
-    CAkAudioThread::WakeupEventsConsumer(&v1->m_audioThread);
+    CAkAudioThread::WakeupEventsConsumer(&this->m_audioThread);
   return 1i64;
 }
 
@@ -193,49 +180,37 @@ signed __int64 __fastcall CAkAudioMgr::RenderAudio(CAkAudioMgr *this)
 // RVA: 0xA47F70
 __int64 __fastcall CAkAudioMgr::Enqueue(CAkAudioMgr *this, AkQueuedMsg *in_rItem, unsigned int in_uSize)
 {
-  unsigned int v3; // ebx
-  AkQueuedMsg *v4; // rdi
-  CAkAudioMgr *v5; // rsi
   AKRESULT v6; // ebx
 
-  v3 = in_uSize;
-  v4 = in_rItem;
-  v5 = this;
   EnterCriticalSection(&this->m_queueLock.m_csLock);
-  v6 = CAkAudioMgr::LockedEnqueue(v5, v4, v3);
-  LeaveCriticalSection(&v5->m_queueLock.m_csLock);
+  v6 = CAkAudioMgr::LockedEnqueue(this, in_rItem, in_uSize);
+  LeaveCriticalSection(&this->m_queueLock.m_csLock);
   return (unsigned int)v6;
 }
 
 // File Line: 292
 // RVA: 0xA48530
-signed __int64 __fastcall CAkAudioMgr::LockedEnqueue(CAkAudioMgr *this, AkQueuedMsg *in_rItem, unsigned int in_uSize)
+__int64 __fastcall CAkAudioMgr::LockedEnqueue(CAkAudioMgr *this, AkQueuedMsg *in_rItem, unsigned int in_uSize)
 {
-  CAkAudioMgr *v3; // rbx
-  unsigned int v4; // edi
-  AkQueuedMsg *v5; // rsi
-  signed __int64 result; // rax
+  __int64 result; // rax
 
-  v3 = this;
-  v4 = in_uSize;
-  v5 = in_rItem;
   in_rItem->size = in_uSize;
   result = AkSparseChunkRing::Write(&this->m_MsgQueue, in_rItem, in_uSize);
   if ( (_DWORD)result == 52 )
   {
-    while ( v4 <= (unsigned int)AkSparseChunkRing::GetChunkSize() )
+    while ( in_uSize <= (unsigned int)AkSparseChunkRing::GetChunkSize() )
     {
-      ResetEvent(v3->m_hEventMgrThreadDrainEvent.m_Event);
-      v3->m_bDrainMsgQueue = 1;
-      LeaveCriticalSection(&v3->m_queueLock.m_csLock);
-      CAkAudioThread::WakeupEventsConsumer(&v3->m_audioThread);
-      WaitForSingleObject(v3->m_hEventMgrThreadDrainEvent.m_Event, 0xFFFFFFFF);
-      EnterCriticalSection(&v3->m_queueLock.m_csLock);
-      result = AkSparseChunkRing::Write(&v3->m_MsgQueue, v5, v4);
+      ResetEvent(this->m_hEventMgrThreadDrainEvent.m_Event);
+      this->m_bDrainMsgQueue = 1;
+      LeaveCriticalSection(&this->m_queueLock.m_csLock);
+      CAkAudioThread::WakeupEventsConsumer(&this->m_audioThread);
+      WaitForSingleObject(this->m_hEventMgrThreadDrainEvent.m_Event, 0xFFFFFFFF);
+      EnterCriticalSection(&this->m_queueLock.m_csLock);
+      result = AkSparseChunkRing::Write(&this->m_MsgQueue, in_rItem, in_uSize);
       if ( (_DWORD)result != 52 )
         return result;
     }
-    result = 81i64;
+    return 81i64;
   }
   return result;
 }
@@ -244,31 +219,29 @@ signed __int64 __fastcall CAkAudioMgr::LockedEnqueue(CAkAudioMgr *this, AkQueued
 // RVA: 0xA48D10
 void __fastcall CAkAudioMgr::Perform(CAkAudioMgr *this)
 {
-  CAkAudioMgr *v1; // rdi
   int i; // esi
   __int64 j; // rbx
-  unsigned int v4; // ebx
+  unsigned int m_uBufferTick; // ebx
 
-  v1 = this;
   EnterCriticalSection(&g_csMain.m_csLock);
   for ( i = CAkLEngine::GetNumBufferNeededAndSubmit(); ; --i )
   {
-    CAkAudioMgr::ProcessMsgQueue(v1);
-    CAkAudioMgr::ProcessPendingList(v1);
+    CAkAudioMgr::ProcessMsgQueue(this);
+    CAkAudioMgr::ProcessPendingList(this);
     if ( CAkLEngineCmds::m_bProcessPlayCmdsNeeded )
       CAkLEngineCmds::ProcessPlayCommands();
     if ( !i )
       break;
     for ( j = g_aBehavioralExtensions.m_uLength - 1; j >= 0; g_aBehavioralExtensions.m_pItems[j--](0) )
       ;
-    v4 = v1->m_uBufferTick;
-    CAkTransitionManager::ProcessTransitionsList(g_pTransitionManager, v4 + 1);
-    CAkPathManager::ProcessPathsList(g_pPathManager, v4 + 1);
+    m_uBufferTick = this->m_uBufferTick;
+    CAkTransitionManager::ProcessTransitionsList(g_pTransitionManager, m_uBufferTick + 1);
+    CAkPathManager::ProcessPathsList(g_pPathManager, m_uBufferTick + 1);
     CAkListener::OnBeginFrame();
     CAkURenderer::ProcessLimiters();
     CAkLEngine::Perform();
     CAkURenderer::PerformContextNotif();
-    ++v1->m_uBufferTick;
+    ++this->m_uBufferTick;
   }
   if ( CAkFeedbackDeviceMgr::s_pSingleton )
     CAkFeedbackDeviceMgr::CommandTick(CAkFeedbackDeviceMgr::s_pSingleton);
@@ -277,36 +250,35 @@ void __fastcall CAkAudioMgr::Perform(CAkAudioMgr *this)
 
 // File Line: 436
 // RVA: 0xA49040
-signed __int64 __fastcall CAkAudioMgr::ProcessMsgQueue(CAkAudioMgr *this)
+__int64 __fastcall CAkAudioMgr::ProcessMsgQueue(CAkAudioMgr *this)
 {
-  CAkAudioMgr *v1; // r13
   char v2; // di
-  AkSparseChunkRing *v3; // rcx
-  unsigned int v4; // eax
+  AkSparseChunkRing *p_m_MsgQueue; // rcx
+  unsigned int m_uWriteBlock; // eax
   unsigned int v5; // ebx
   char *v6; // rsi
   int v7; // eax
-  CAkRegisteredObj *v8; // rax
+  CAkRegisteredObj *ObjAndAddref; // rax
   __int64 v9; // rbx
   CAkRegisteredObj *v10; // r15
   AkPendingAction *v11; // rax
   AkPendingAction *v12; // rdi
   AkPendingAction *v13; // rax
   unsigned int v14; // eax
-  AkExternalSourceArray *v15; // rcx
+  AkExternalSourceArray *pExternalSrcs; // rcx
   AkExternalSourceArray *v16; // r14
   int v17; // ecx
   int v18; // ebx
   AkExternalSourceArray *v19; // rcx
   int v20; // ecx
-  unsigned int v21; // er12
+  unsigned int v21; // r12d
   int v22; // ebx
-  unsigned int v23; // er14
+  unsigned int v23; // r14d
   CAkParameterNodeBase *v24; // rax
   CAkParameterNodeBase *v25; // rbx
   CAkIndexableVtbl *v26; // r8
   CAkRegisteredObj *v27; // r15
-  CAkIndexable *v28; // rax
+  CAkIndexable *PtrAndAddRef; // rax
   CAkFxCustom *v29; // rdi
   CAkFxCustom *v30; // rax
   CAkParameterNodeBase *v31; // rax
@@ -322,7 +294,7 @@ signed __int64 __fastcall CAkAudioMgr::ProcessMsgQueue(CAkAudioMgr *this)
   int v41; // ecx
   int v42; // ecx
   __int64 v43; // rbx
-  CAkParameterNodeBase *v44; // rdi
+  CAkParameterNodeBase *NodePtrAndAddRef; // rdi
   char v45; // al
   char v46; // cl
   char v47; // cl
@@ -330,7 +302,7 @@ signed __int64 __fastcall CAkAudioMgr::ProcessMsgQueue(CAkAudioMgr *this)
   int v49; // ecx
   int v50; // ebx
   unsigned __int64 v51; // rdx
-  TransParams *v52; // rax
+  TransParams *p_in_transParams; // rax
   CAkRegisteredObj *v53; // rdi
   unsigned int v54; // edx
   float v55; // xmm2_4
@@ -345,9 +317,9 @@ signed __int64 __fastcall CAkAudioMgr::ProcessMsgQueue(CAkAudioMgr *this)
   CAkRegisteredObj *v65; // rax
   unsigned __int64 v66; // rdx
   unsigned int v67; // ecx
-  unsigned __int64 *v68; // rax
-  CAkBusVolumes **v69; // rcx
-  CAkBusVolumes *v70; // rcx
+  unsigned __int64 *p_uDeviceID; // rax
+  AkDevice *v69; // rcx
+  CAkBusVolumes *pFinalMix; // rcx
   AkSpeakerVolumes *v71; // r8
   unsigned __int64 v72; // rdx
   TransParams *v73; // r9
@@ -363,94 +335,96 @@ signed __int64 __fastcall CAkAudioMgr::ProcessMsgQueue(CAkAudioMgr *this)
   int v83; // ecx
   int v84; // ebx
   CAkActionStop *v85; // rcx
-  CAkIndexableVtbl *v86; // rax
+  CAkIndexableVtbl *vfptr; // rax
   unsigned int v87; // eax
   unsigned int v88; // eax
   unsigned int v89; // eax
-  CAkBus *v90; // rax
+  CAkBus *PrimaryMasterBusAndAddRef; // rax
   CAkBus *v91; // rbx
-  CAkBus *v92; // rax
+  CAkBus *SecondaryMasterBusAndAddRef; // rax
   CAkBus *v93; // rbx
   CAkUsageSlot *v94; // rbx
   AkSinkType v95; // ebx
   CAkFeedbackDeviceMgr *v96; // rax
   unsigned int v97; // ecx
   unsigned __int64 *v98; // rax
-  CAkFeedbackDeviceMgr *v99; // r11
-  __int64 v100; // rcx
-  __int64 v101; // r10
-  float v102; // xmm0_4
-  unsigned __int8 v103; // r8
-  float v104; // xmm0_4
+  CAkSink *pSink; // rcx
+  CAkFeedbackDeviceMgr *v100; // r11
+  __int64 v101; // rcx
+  __int64 v102; // r10
+  float v103; // xmm0_4
+  unsigned __int8 v104; // r8
   unsigned __int8 v105; // bl
-  MapStruct<unsigned long,CAkSplitterBus *> **v106; // rdi
-  CAkParameterNodeBase *v107; // rax
-  CAkParameterNodeBase *v108; // rbx
-  unsigned int v109; // eax
-  const wchar_t *v110; // rcx
-  AkPendingAction v111; // [rsp+50h] [rbp-B0h]
-  float v112; // [rsp+A0h] [rbp-60h]
-  TransParams v113; // [rsp+A8h] [rbp-58h]
-  AkOutputSettings out_settings; // [rsp+B0h] [rbp-50h]
-  TransParams v115; // [rsp+B8h] [rbp-48h]
-  char *v116; // [rsp+C0h] [rbp-40h]
-  TransParams v117; // [rsp+C8h] [rbp-38h]
-  TransParams in_transParams; // [rsp+D0h] [rbp-30h]
-  char v119; // [rsp+1D0h] [rbp+D0h]
-  unsigned int v120; // [rsp+1D8h] [rbp+D8h]
-  unsigned int v121; // [rsp+1E0h] [rbp+E0h]
-  unsigned int out_uSizeAvail; // [rsp+1E8h] [rbp+E8h]
+  CAkKeyArray<unsigned long,CAkFeedbackDeviceMgr::DeviceBus,1> *v106; // rdi
+  IAkMotionMixBus *m_pFinalBus; // rcx
+  CAkParameterNodeBase *v108; // rax
+  CAkParameterNodeBase *v109; // rbx
+  unsigned int v110; // eax
+  const wchar_t *v111; // rcx
+  AkPendingAction v112; // [rsp+50h] [rbp-B0h] BYREF
+  float v113; // [rsp+A0h] [rbp-60h]
+  TransParams v114; // [rsp+A8h] [rbp-58h] BYREF
+  AkOutputSettings out_settings; // [rsp+B0h] [rbp-50h] BYREF
+  TransParams v116; // [rsp+B8h] [rbp-48h] BYREF
+  char *v117; // [rsp+C0h] [rbp-40h]
+  TransParams v118; // [rsp+C8h] [rbp-38h] BYREF
+  TransParams in_transParams; // [rsp+D0h] [rbp-30h] BYREF
+  char v120; // [rsp+1D0h] [rbp+D0h]
+  unsigned int v121; // [rsp+1D8h] [rbp+D8h]
+  unsigned int v122; // [rsp+1E0h] [rbp+E0h]
+  unsigned int out_uSizeAvail; // [rsp+1E8h] [rbp+E8h] BYREF
 
-  v1 = this;
   if ( this->m_bDrainMsgQueue || this->m_ulWriterFlag != this->m_ulReaderFlag )
   {
     v2 = 0;
-    v119 = 0;
+    v120 = 0;
     EnterCriticalSection(&this->m_queueLock.m_csLock);
-    v3 = &v1->m_MsgQueue;
+    p_m_MsgQueue = &this->m_MsgQueue;
     while ( 1 )
     {
-      v4 = v3->m_uWriteBlock;
+      m_uWriteBlock = p_m_MsgQueue->m_uWriteBlock;
       v5 = 0;
       out_uSizeAvail = 0;
-      v120 = 0;
-      if ( v3->m_uReadBlock == v4 && v3->m_uReadOffset == v3->m_uWriteOffset && !v3->m_bBufferFull )
+      v121 = 0;
+      if ( p_m_MsgQueue->m_uReadBlock == m_uWriteBlock
+        && p_m_MsgQueue->m_uReadOffset == p_m_MsgQueue->m_uWriteOffset
+        && !p_m_MsgQueue->m_bBufferFull )
       {
 LABEL_90:
-        v1->m_bDrainMsgQueue = 0;
-        LeaveCriticalSection(&v1->m_queueLock.m_csLock);
-        SetEvent(v1->m_hEventMgrThreadDrainEvent.m_Event);
+        this->m_bDrainMsgQueue = 0;
+        LeaveCriticalSection(&this->m_queueLock.m_csLock);
+        SetEvent(this->m_hEventMgrThreadDrainEvent.m_Event);
         return 1i64;
       }
-      v6 = AkSparseChunkRing::BeginReadEx(v3, &out_uSizeAvail);
-      LeaveCriticalSection(&v1->m_queueLock.m_csLock);
+      v6 = AkSparseChunkRing::BeginReadEx(p_m_MsgQueue, &out_uSizeAvail);
+      LeaveCriticalSection(&this->m_queueLock.m_csLock);
       do
       {
         v7 = *((unsigned __int16 *)v6 + 1);
-        v116 = v6;
+        v117 = v6;
         switch ( v7 )
         {
           case 0:
-            if ( ++v1->m_ulReaderFlag != v1->m_ulWriterFlag || v1->m_bDrainMsgQueue )
+            if ( ++this->m_ulReaderFlag != this->m_ulWriterFlag || this->m_bDrainMsgQueue )
             {
               v2 = 0;
-              v119 = 0;
+              v120 = 0;
             }
             else
             {
               v2 = 1;
-              v119 = 1;
+              v120 = 1;
             }
             goto LABEL_87;
           case 1:
-            v8 = CAkRegistryMgr::GetObjAndAddref(g_pRegistryMgr, *((_QWORD *)v6 + 1));
+            ObjAndAddref = CAkRegistryMgr::GetObjAndAddref(g_pRegistryMgr, *((_QWORD *)v6 + 1));
             v9 = *(_QWORD *)(*((_QWORD *)v6 + 6) + 24i64);
-            v10 = v8;
+            v10 = ObjAndAddref;
             if ( !v9 )
               goto LABEL_28;
             while ( 1 )
             {
-              if ( *(_BYTE *)(v9 + 52) & 1 )
+              if ( (*(_BYTE *)(v9 + 52) & 1) != 0 )
               {
                 if ( v10 )
                 {
@@ -489,32 +463,30 @@ LABEL_20:
                     v14 = *((_DWORD *)v6 + 5);
                     v12->pAction = (CAkAction *)v9;
                     v12->TargetPlayingID = v14;
-                    v15 = v12->UserParam.m_CustomParam.pExternalSrcs;
+                    pExternalSrcs = v12->UserParam.m_CustomParam.pExternalSrcs;
                     v12->UserParam.m_PlayingID = *((_DWORD *)v6 + 4);
                     v12->UserParam.m_CustomParam.customParam = *((_QWORD *)v6 + 3);
                     v12->UserParam.m_CustomParam.ui32Reserved = *((_DWORD *)v6 + 8);
                     v16 = (AkExternalSourceArray *)*((_QWORD *)v6 + 5);
-                    if ( v15 )
-                      AkExternalSourceArray::Release(v15);
+                    if ( pExternalSrcs )
+                      AkExternalSourceArray::Release(pExternalSrcs);
                     if ( v16 )
                       ++v16->m_cRefCount;
                     v12->UserParam.m_CustomParam.pExternalSrcs = v16;
-                    CAkAudioMgr::EnqueueOrExecuteAction(v1, v12);
+                    CAkAudioMgr::EnqueueOrExecuteAction(this, v12);
                   }
-                  goto LABEL_26;
                 }
               }
-LABEL_26:
               v9 = *(_QWORD *)(v9 + 24);
               if ( !v9 )
               {
-                v2 = v119;
+                v2 = v120;
 LABEL_28:
                 if ( v10 )
                 {
                   v17 = *((_DWORD *)v10 + 30) ^ (*((_DWORD *)v10 + 30) ^ (*((_DWORD *)v10 + 30) - 1)) & 0x3FFFFFFF;
                   *((_DWORD *)v10 + 30) = v17;
-                  if ( !(v17 & 0x3FFFFFFF) )
+                  if ( (v17 & 0x3FFFFFFF) == 0 )
                   {
                     v18 = g_DefaultPoolId;
                     CAkRegisteredObj::~CAkRegisteredObj(v10);
@@ -522,14 +494,14 @@ LABEL_28:
                   }
                 }
                 CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, *((_DWORD *)v6 + 4));
-                (*(void (**)(void))(**((_QWORD **)v6 + 6) + 16i64))();
+                (*(void (__fastcall **)(_QWORD))(**((_QWORD **)v6 + 6) + 16i64))(*((_QWORD *)v6 + 6));
                 v19 = (AkExternalSourceArray *)*((_QWORD *)v6 + 5);
                 if ( v19 )
                 {
                   AkExternalSourceArray::Release(v19);
                   goto LABEL_86;
                 }
-                goto LABEL_196;
+                goto LABEL_197;
               }
             }
           case 2:
@@ -537,16 +509,16 @@ LABEL_28:
             if ( v51 == -1i64 )
             {
               in_transParams.TransitionTime = 0;
-              v52 = &in_transParams;
+              p_in_transParams = &in_transParams;
               goto LABEL_79;
             }
             v53 = CAkRegistryMgr::GetObjAndAddref(g_pRegistryMgr, v51);
             if ( !v53 )
-              goto LABEL_197;
+              goto LABEL_198;
             v54 = *((_DWORD *)v6 + 2);
             v55 = *((float *)v6 + 3);
-            v113.TransitionTime = 0;
-            CAkRTPCMgr::SetRTPCInternal(g_pRTPCMgr, v54, v55, v53, &v113, AkValueMeaning_Independent);
+            v114.TransitionTime = 0;
+            CAkRTPCMgr::SetRTPCInternal(g_pRTPCMgr, v54, v55, v53, &v114, AkValueMeaning_Independent);
             v56 = *((_DWORD *)v53 + 30) ^ (*((_DWORD *)v53 + 30) ^ (*((_DWORD *)v53 + 30) - 1)) & 0x3FFFFFFF;
             *((_DWORD *)v53 + 30) = v56;
             v57 = (v56 & 0x3FFFFFFF) == 0;
@@ -555,21 +527,21 @@ LABEL_28:
             v60 = *((_QWORD *)v6 + 2);
             if ( v60 == -1i64 )
             {
-              v52 = (TransParams *)(v6 + 24);
+              p_in_transParams = (TransParams *)(v6 + 24);
 LABEL_79:
               CAkRTPCMgr::SetRTPCInternal(
                 g_pRTPCMgr,
                 *((_DWORD *)v6 + 2),
                 *((float *)v6 + 3),
                 0i64,
-                v52,
+                p_in_transParams,
                 AkValueMeaning_Independent);
               goto LABEL_87;
             }
             v61 = CAkRegistryMgr::GetObjAndAddref(g_pRegistryMgr, v60);
             v53 = v61;
             if ( !v61 )
-              goto LABEL_197;
+              goto LABEL_198;
             CAkRTPCMgr::SetRTPCInternal(
               g_pRTPCMgr,
               *((_DWORD *)v6 + 2),
@@ -582,16 +554,16 @@ LABEL_79:
             v72 = *((_QWORD *)v6 + 2);
             if ( v72 == -1i64 )
             {
-              v115.TransitionTime = 0;
-              v73 = &v115;
+              v116.TransitionTime = 0;
+              v73 = &v116;
               goto LABEL_131;
             }
             v74 = CAkRegistryMgr::GetObjAndAddref(g_pRegistryMgr, v72);
             v53 = v74;
             if ( !v74 )
-              goto LABEL_197;
-            v117.TransitionTime = 0;
-            v75 = &v117;
+              goto LABEL_198;
+            v118.TransitionTime = 0;
+            v75 = &v118;
             goto LABEL_134;
           case 6:
             v76 = *((_QWORD *)v6 + 2);
@@ -605,7 +577,7 @@ LABEL_131:
             v74 = CAkRegistryMgr::GetObjAndAddref(g_pRegistryMgr, v76);
             v53 = v74;
             if ( !v74 )
-              goto LABEL_197;
+              goto LABEL_198;
             v75 = (TransParams *)(v6 + 24);
 LABEL_134:
             CAkRTPCMgr::ResetRTPCValue(g_pRTPCMgr, *((_DWORD *)v6 + 2), v74, v75);
@@ -617,7 +589,7 @@ LABEL_134:
             v63 = CAkRegistryMgr::GetObjAndAddref(g_pRegistryMgr, *((_QWORD *)v6 + 1));
             v53 = v63;
             if ( !v63 )
-              goto LABEL_197;
+              goto LABEL_198;
             CAkRTPCMgr::SetSwitchInternal(g_pRTPCMgr, *((_DWORD *)v6 + 4), *((_DWORD *)v6 + 5), v63);
             goto LABEL_96;
           case 10:
@@ -645,7 +617,7 @@ LABEL_82:
                 goto LABEL_84;
               }
             }
-            goto LABEL_197;
+            goto LABEL_198;
           case 11:
             CAkRegistryMgr::RegisterObject(g_pRegistryMgr, *((_QWORD *)v6 + 1), *((_DWORD *)v6 + 4), *((void **)v6 + 3));
             goto LABEL_87;
@@ -657,7 +629,12 @@ LABEL_82:
               CAkRegistryMgr::UnregisterObject(g_pRegistryMgr, v66);
             goto LABEL_87;
           case 13:
-            CAkRegistryMgr::SetPosition(g_pRegistryMgr, *((_QWORD *)v6 + 1), (AkSoundPosition *)(v6 + 16), 1u, 0);
+            CAkRegistryMgr::SetPosition(
+              g_pRegistryMgr,
+              *((_QWORD *)v6 + 1),
+              (AkSoundPosition *)(v6 + 16),
+              1u,
+              MultiPositionType_SingleSource);
             goto LABEL_87;
           case 14:
             CAkRegistryMgr::SetActiveListeners(g_pRegistryMgr, *((_QWORD *)v6 + 1), *((_DWORD *)v6 + 4));
@@ -693,28 +670,28 @@ LABEL_82:
             v67 = 0;
             if ( !CAkOutputMgr::m_Devices.m_uLength )
               goto LABEL_87;
-            v68 = &CAkOutputMgr::m_Devices.m_pItems->uDeviceID;
-            while ( *v68 != (*((signed int *)v6 + 2) | ((unsigned __int64)*((unsigned int *)v6 + 3) << 32)) )
+            p_uDeviceID = &CAkOutputMgr::m_Devices.m_pItems->uDeviceID;
+            while ( *p_uDeviceID != (*((int *)v6 + 2) | ((unsigned __int64)*((unsigned int *)v6 + 3) << 32)) )
             {
               ++v67;
-              v68 += 10;
+              p_uDeviceID += 10;
               if ( v67 >= CAkOutputMgr::m_Devices.m_uLength )
                 goto LABEL_87;
             }
-            v69 = (CAkBusVolumes **)&CAkOutputMgr::m_Devices.m_pItems[v67];
+            v69 = &CAkOutputMgr::m_Devices.m_pItems[v67];
             if ( v69 )
             {
-              v70 = *v69;
-              v121 = *((_DWORD *)v6 + 4);
-              LODWORD(v112) = (v121 & 0x7FFFFF) + 1065353216;
+              pFinalMix = v69->pFinalMix;
+              v122 = *((_DWORD *)v6 + 4);
+              LODWORD(v113) = (v122 & 0x7FFFFF) + 1065353216;
               CAkBusVolumes::SetNextVolume(
-                v70,
-                (float)((float)((float)((float)((float)((float)((float)((float)(v112 - 1.0) / (float)(v112 + 1.0))
-                                                              * (float)((float)(v112 - 1.0) / (float)(v112 + 1.0)))
+                pFinalMix,
+                (float)((float)((float)((float)((float)((float)((float)((float)(v113 - 1.0) / (float)(v113 + 1.0))
+                                                              * (float)((float)(v113 - 1.0) / (float)(v113 + 1.0)))
                                                       * 0.33333334)
                                               + 1.0)
-                                      * (float)((float)((float)(v112 - 1.0) / (float)(v112 + 1.0)) * 2.0))
-                              + (float)((float)((float)(unsigned __int8)(v121 >> 23) - 127.0) * 0.69314718))
+                                      * (float)((float)((float)(v113 - 1.0) / (float)(v113 + 1.0)) * 2.0))
+                              + (float)((float)((float)(unsigned __int8)(v122 >> 23) - 127.0) * 0.69314718))
                       * 0.43429449)
               * 20.0);
             }
@@ -723,7 +700,7 @@ LABEL_82:
             v77 = CAkRegistryMgr::GetObjAndAddref(g_pRegistryMgr, *((_QWORD *)v6 + 1));
             v53 = v77;
             if ( !v77 )
-              goto LABEL_197;
+              goto LABEL_198;
             CAkDynamicSequence::SetGameObject(*((CAkDynamicSequence **)v6 + 6), v77);
             goto LABEL_96;
           case 23:
@@ -734,51 +711,49 @@ LABEL_82:
                   *((CAkDynamicSequence **)v6 + 1),
                   *((_DWORD *)v6 + 5),
                   *((AkCurveInterpolation *)v6 + 6));
-                (*(void (**)(void))(**((_QWORD **)v6 + 1) + 16i64))();
+                (*(void (__fastcall **)(_QWORD))(**((_QWORD **)v6 + 1) + 16i64))(*((_QWORD *)v6 + 1));
                 break;
               case 1:
                 CAkDynamicSequence::Pause(
                   *((CAkDynamicSequence **)v6 + 1),
                   *((_DWORD *)v6 + 5),
                   *((AkCurveInterpolation *)v6 + 6));
-                (*(void (**)(void))(**((_QWORD **)v6 + 1) + 16i64))();
+                (*(void (__fastcall **)(_QWORD))(**((_QWORD **)v6 + 1) + 16i64))(*((_QWORD *)v6 + 1));
                 break;
               case 2:
                 CAkDynamicSequence::Resume(
                   *((CAkDynamicSequence **)v6 + 1),
                   *((_DWORD *)v6 + 5),
                   *((AkCurveInterpolation *)v6 + 6));
-                (*(void (**)(void))(**((_QWORD **)v6 + 1) + 16i64))();
+                (*(void (__fastcall **)(_QWORD))(**((_QWORD **)v6 + 1) + 16i64))(*((_QWORD *)v6 + 1));
                 break;
               case 3:
                 *(_BYTE *)(*((_QWORD *)v6 + 1) + 128i64) = 1;
                 CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, *(_DWORD *)(*((_QWORD *)v6 + 1) + 120i64));
-                (*(void (**)(void))(**((_QWORD **)v6 + 1) + 16i64))();
+                (*(void (__fastcall **)(_QWORD))(**((_QWORD **)v6 + 1) + 16i64))(*((_QWORD *)v6 + 1));
                 goto LABEL_149;
               case 4:
                 CAkDynamicSequence::Stop(
                   *((CAkDynamicSequence **)v6 + 1),
                   *((_DWORD *)v6 + 5),
                   *((AkCurveInterpolation *)v6 + 6));
-                (*(void (**)(void))(**((_QWORD **)v6 + 1) + 16i64))();
+                (*(void (__fastcall **)(_QWORD))(**((_QWORD **)v6 + 1) + 16i64))(*((_QWORD *)v6 + 1));
                 break;
               case 5:
                 CAkDynamicSequence::Break(*((CAkDynamicSequence **)v6 + 1));
-                (*(void (**)(void))(**((_QWORD **)v6 + 1) + 16i64))();
+                (*(void (__fastcall **)(_QWORD))(**((_QWORD **)v6 + 1) + 16i64))(*((_QWORD *)v6 + 1));
                 break;
               case 6:
                 CAkDynamicSequence::ResumeWaiting(*((CAkDynamicSequence **)v6 + 1));
-                (*(void (**)(void))(**((_QWORD **)v6 + 1) + 16i64))();
+                (*(void (__fastcall **)(_QWORD))(**((_QWORD **)v6 + 1) + 16i64))(*((_QWORD *)v6 + 1));
                 break;
               default:
-LABEL_149:
-                (*(void (**)(void))(**((_QWORD **)v6 + 1) + 16i64))();
-                break;
+                goto LABEL_149;
             }
             goto LABEL_87;
           case 24:
             v94 = (CAkUsageSlot *)*((_QWORD *)v6 + 1);
-            CAkURenderer::StopAllPBIs(*((CAkUsageSlot **)v6 + 1));
+            CAkURenderer::StopAllPBIs(v94);
             CAkUsageSlot::Release(v94, 0);
             goto LABEL_86;
           case 25:
@@ -786,21 +761,21 @@ LABEL_149:
             v79 = CAkActionStop::Create((AkActionType)((v78 != -1i64) + 260), 0);
             v80 = v79;
             if ( !v79 )
-              goto LABEL_196;
+              goto LABEL_197;
             if ( v78 == -1i64 )
             {
               v85 = v79;
-              v111.vfptr = (ITransitionableVtbl *)&AkPendingAction::`vftable;
-              v86 = v79->vfptr;
-              v111.UserParam.m_PlayingID = 0;
-              v111.UserParam.m_CustomParam.customParam = 0i64;
-              v111.UserParam.m_CustomParam.ui32Reserved = 0;
-              v111.UserParam.m_CustomParam.pExternalSrcs = 0i64;
-              v111.TargetPlayingID = 0;
-              v111.pGameObj = 0i64;
-              v86[2].__vecDelDtor((CAkIndexable *)&v85->vfptr, (unsigned int)&v111);
-              AkPendingAction::~AkPendingAction(&v111);
-              v80->vfptr->Release((CAkIndexable *)&v80->vfptr);
+              v112.vfptr = (ITransitionableVtbl *)&AkPendingAction::`vftable;
+              vfptr = v79->vfptr;
+              v112.UserParam.m_PlayingID = 0;
+              v112.UserParam.m_CustomParam.customParam = 0i64;
+              v112.UserParam.m_CustomParam.ui32Reserved = 0;
+              v112.UserParam.m_CustomParam.pExternalSrcs = 0i64;
+              v112.TargetPlayingID = 0;
+              v112.pGameObj = 0i64;
+              vfptr[2].__vecDelDtor(v85, (unsigned int)&v112);
+              AkPendingAction::~AkPendingAction(&v112);
+              v80->vfptr->Release(v80);
             }
             else
             {
@@ -808,27 +783,27 @@ LABEL_149:
               v82 = v81;
               if ( v81 )
               {
-                v111.UserParam.m_PlayingID = 0;
-                v111.UserParam.m_CustomParam.customParam = 0i64;
-                v111.UserParam.m_CustomParam.ui32Reserved = 0;
-                v111.UserParam.m_CustomParam.pExternalSrcs = 0i64;
-                v111.TargetPlayingID = 0;
-                v111.pGameObj = v81;
-                v111.vfptr = (ITransitionableVtbl *)&AkPendingAction::`vftable;
+                v112.UserParam.m_PlayingID = 0;
+                v112.UserParam.m_CustomParam.customParam = 0i64;
+                v112.UserParam.m_CustomParam.ui32Reserved = 0;
+                v112.UserParam.m_CustomParam.pExternalSrcs = 0i64;
+                v112.TargetPlayingID = 0;
+                v112.pGameObj = v81;
+                v112.vfptr = (ITransitionableVtbl *)&AkPendingAction::`vftable;
                 *((_DWORD *)v81 + 30) ^= (*((_DWORD *)v81 + 30) ^ (*((_DWORD *)v81 + 30) + 1)) & 0x3FFFFFFF;
-                v80->vfptr[2].__vecDelDtor((CAkIndexable *)&v80->vfptr, (unsigned int)&v111);
+                v80->vfptr[2].__vecDelDtor(v80, (unsigned int)&v112);
                 v83 = *((_DWORD *)v82 + 30) ^ (*((_DWORD *)v82 + 30) ^ (*((_DWORD *)v82 + 30) - 1)) & 0x3FFFFFFF;
                 *((_DWORD *)v82 + 30) = v83;
-                if ( !(v83 & 0x3FFFFFFF) )
+                if ( (v83 & 0x3FFFFFFF) == 0 )
                 {
                   v84 = g_DefaultPoolId;
                   CAkRegisteredObj::~CAkRegisteredObj(v82);
                   AK::MemoryMgr::Free(v84, v82);
                 }
-                AkPendingAction::~AkPendingAction(&v111);
+                AkPendingAction::~AkPendingAction(&v112);
               }
-              v2 = v119;
-              v80->vfptr->Release((CAkIndexable *)&v80->vfptr);
+              v2 = v120;
+              v80->vfptr->Release(v80);
             }
             goto LABEL_86;
           case 26:
@@ -856,104 +831,105 @@ LABEL_149:
                      v95,
                      *((_DWORD *)v6 + 7),
                      *((_DWORD *)v6 + 2),
-                     *((void **)v6 + 2)) != 1 )
-                goto LABEL_196;
+                     *((void **)v6 + 2)) != AK_Success )
+                goto LABEL_197;
               v97 = 0;
               if ( !CAkOutputMgr::m_Devices.m_uLength )
               {
 LABEL_174:
-                (*(void (**)(void))(*MEMORY[8] + 8i64))();
+                (*(void (__fastcall **)(_QWORD))(*MEMORY[8] + 8i64))(MEMORY[8]);
                 goto LABEL_86;
               }
               v98 = &CAkOutputMgr::m_Devices.m_pItems->uDeviceID;
-              while ( *v98 != ((signed int)v95 | ((unsigned __int64)*((unsigned int *)v6 + 7) << 32)) )
+              while ( *v98 != ((int)v95 | ((unsigned __int64)*((unsigned int *)v6 + 7) << 32)) )
               {
                 ++v97;
                 v98 += 10;
                 if ( v97 >= CAkOutputMgr::m_Devices.m_uLength )
                   goto LABEL_174;
               }
-              (*(void (**)(void))CAkOutputMgr::m_Devices.m_pItems[v97].pSink->vfptr->gap8)();
+              pSink = CAkOutputMgr::m_Devices.m_pItems[v97].pSink;
+              (*(void (__fastcall **)(CAkSink *))pSink->vfptr->gap8)(pSink);
             }
             else
             {
               CAkOutputMgr::RemoveOutputDevice(*((_QWORD *)v6 + 3));
             }
 LABEL_86:
-            v5 = v120;
+            v5 = v121;
             goto LABEL_87;
           case 28:
-            v99 = CAkFeedbackDeviceMgr::s_pSingleton;
+            v100 = CAkFeedbackDeviceMgr::s_pSingleton;
             if ( CAkFeedbackDeviceMgr::s_pSingleton )
             {
-              v100 = (unsigned __int8)v6[8];
-              v101 = (unsigned __int8)v6[9];
-              CAkFeedbackDeviceMgr::s_pSingleton->m_aListenerToPlayer[(unsigned __int8)CAkFeedbackDeviceMgr::s_pSingleton->m_aPlayerToListener[v100]] &= ~(1 << v100);
-              v99->m_aPlayerToListener[v100] = v101;
-              v99->m_aListenerToPlayer[v101] |= 1 << v100;
+              v101 = (unsigned __int8)v6[8];
+              v102 = (unsigned __int8)v6[9];
+              CAkFeedbackDeviceMgr::s_pSingleton->m_aListenerToPlayer[(unsigned __int8)CAkFeedbackDeviceMgr::s_pSingleton->m_aPlayerToListener[v101]] &= ~(1 << v101);
+              v100->m_aPlayerToListener[v101] = v102;
+              v100->m_aListenerToPlayer[v102] |= 1 << v101;
             }
             goto LABEL_87;
           case 29:
             if ( !CAkFeedbackDeviceMgr::s_pSingleton )
               goto LABEL_87;
-            v102 = *((float *)v6 + 2);
-            v103 = v6[12];
-            if ( v102 <= 0.0 )
+            v103 = *((float *)v6 + 2);
+            v104 = v6[12];
+            if ( v103 <= 0.0 )
             {
-              if ( (float)(v102 * 0.050000001) >= -37.0 && !(`AkMath::FastPow10::`4::`local static guard & 1) )
+              if ( (float)(v103 * 0.050000001) >= -37.0 && (`AkMath::FastPow10::`4::`local static guard & 1) == 0 )
               {
                 `AkMath::FastPow10::`4::`local static guard |= 1u;
                 `AkMath::FastPow10::`4::SCALE = 1272224376;
               }
             }
-            else
+            else if ( (float)(v103 * -0.050000001) >= -37.0 && (`AkMath::FastPow10::`4::`local static guard & 1) == 0 )
             {
-              v104 = v102 * -0.050000001;
-              if ( v104 >= -37.0 && !(`AkMath::FastPow10::`4::`local static guard & 1) )
-              {
-                `AkMath::FastPow10::`4::`local static guard |= 1u;
-                `AkMath::FastPow10::`4::SCALE = 1272224376;
-              }
+              `AkMath::FastPow10::`4::`local static guard |= 1u;
+              `AkMath::FastPow10::`4::SCALE = 1272224376;
             }
             v105 = 0;
-            v106 = &(&CAkFeedbackDeviceMgr::s_pSingleton->m_aBusses.m_pItems)[2 * (v103 + 1i64)];
-            if ( *((_DWORD *)v106 + 2) )
+            v106 = &CAkFeedbackDeviceMgr::s_pSingleton->m_aPlayers[v104];
+            if ( v106->m_uLength )
             {
               do
-                ((void (*)(void))(*v106)[v105++].item->m_aBusses.m_pItems[5].m_pFeedbackMixBus)();
-              while ( (unsigned int)v105 < *((_DWORD *)v106 + 2) );
+              {
+                m_pFinalBus = v106->m_pItems[v105].item.m_pFinalBus;
+                m_pFinalBus->vfptr[2].SupportMediaRelocation(m_pFinalBus);
+                ++v105;
+              }
+              while ( v105 < v106->m_uLength );
             }
             goto LABEL_85;
           case 30:
-            CAkAudioMgr::ClearPendingItems(v1, *((_DWORD *)v6 + 2));
+            CAkAudioMgr::ClearPendingItems(this, *((_DWORD *)v6 + 2));
             v87 = *((_DWORD *)v6 + 4);
-            *((_WORD *)&v111.PausedTick + 2) = 0;
-            v111.PausedTick = v87;
+            *((_WORD *)&v112.PausedTick + 2) = 0;
+            v112.PausedTick = v87;
             v88 = *((_DWORD *)v6 + 2);
-            *((_BYTE *)&v111.PausedTick + 6) = 0;
-            v111.LaunchTick = v88;
+            *((_BYTE *)&v112.PausedTick + 6) = 0;
+            v112.LaunchTick = v88;
             v89 = *((_DWORD *)v6 + 3);
-            LODWORD(v111.vfptr) = 0;
-            v111.LaunchFrameOffset = v89;
-            v111.pAction = 0i64;
-            v90 = CAkBus::GetPrimaryMasterBusAndAddRef();
-            v91 = v90;
-            if ( v90 )
+            LODWORD(v112.vfptr) = 0;
+            v112.LaunchFrameOffset = v89;
+            v112.pAction = 0i64;
+            PrimaryMasterBusAndAddRef = CAkBus::GetPrimaryMasterBusAndAddRef();
+            v91 = PrimaryMasterBusAndAddRef;
+            if ( PrimaryMasterBusAndAddRef )
             {
-              v90->vfptr[4].__vecDelDtor((CAkIndexable *)&v90->vfptr, (unsigned int)&v111);
-              v91->vfptr->Release((CAkIndexable *)&v91->vfptr);
+              PrimaryMasterBusAndAddRef->vfptr[4].__vecDelDtor(PrimaryMasterBusAndAddRef, (unsigned int)&v112);
+              v91->vfptr->Release(v91);
             }
-            v92 = CAkBus::GetSecondaryMasterBusAndAddRef();
-            v93 = v92;
-            if ( !v92 )
-              goto LABEL_196;
-            v92->vfptr[4].__vecDelDtor((CAkIndexable *)&v92->vfptr, (unsigned int)&v111);
-            v93->vfptr->Release((CAkIndexable *)&v93->vfptr);
+            SecondaryMasterBusAndAddRef = CAkBus::GetSecondaryMasterBusAndAddRef();
+            v93 = SecondaryMasterBusAndAddRef;
+            if ( !SecondaryMasterBusAndAddRef )
+              goto LABEL_197;
+            SecondaryMasterBusAndAddRef->vfptr[4].__vecDelDtor(SecondaryMasterBusAndAddRef, (unsigned int)&v112);
+            v93->vfptr->Release(v93);
             goto LABEL_86;
           case 31:
             v36 = CAkRegistryMgr::GetObjAndAddref(g_pRegistryMgr, *((_QWORD *)v6 + 2));
             if ( !v36 && *((_QWORD *)v6 + 2) != -1i64 )
-              goto LABEL_76;
+              goto LABEL_149;
             v37 = *(CAkAction **)(*((_QWORD *)v6 + 1) + 24i64);
             if ( !v37 )
               goto LABEL_72;
@@ -975,7 +951,7 @@ LABEL_86:
           case 35:
             v36 = CAkRegistryMgr::GetObjAndAddref(g_pRegistryMgr, *((_QWORD *)v6 + 2));
             if ( !v36 && *((_QWORD *)v6 + 2) != -1i64 )
-              goto LABEL_76;
+              goto LABEL_149;
             v43 = *(_QWORD *)(*((_QWORD *)v6 + 1) + 24i64);
             if ( !v43 )
               goto LABEL_72;
@@ -983,23 +959,26 @@ LABEL_86:
             {
               if ( *(_WORD *)(v43 + 52) == 1027 )
               {
-                v44 = CAkAudioLibIndex::GetNodePtrAndAddRef(g_pIndex, *(_DWORD *)(v43 + 48), 0);
-                if ( v44 )
+                NodePtrAndAddRef = CAkAudioLibIndex::GetNodePtrAndAddRef(
+                                     g_pIndex,
+                                     *(_DWORD *)(v43 + 48),
+                                     AkNodeType_Default);
+                if ( NodePtrAndAddRef )
                 {
                   v45 = v6[28] & 1;
                   v46 = v6[29] & 1;
-                  *((_WORD *)&v111.PausedTick + 2) = 0;
-                  *((_BYTE *)&v111.PausedTick + 6) = 0;
-                  v111.PausedTick = 4;
-                  v111.pAction = (CAkAction *)v36;
-                  *(_QWORD *)&v111.LaunchTick = 0i64;
-                  LODWORD(v111.vfptr) = 4;
-                  v47 = *(_BYTE *)(&v111.UserParam.m_CustomParam.ui32Reserved + 1) & 0xFC | v45 | 2 * v46;
-                  v111.UserParam.m_CustomParam.ui32Reserved = *((_DWORD *)v6 + 6);
-                  v48 = v44->vfptr;
-                  *((_BYTE *)&v111.UserParam.m_CustomParam.ui32Reserved + 4) = v47;
-                  v48[4].__vecDelDtor((CAkIndexable *)&v44->vfptr, (unsigned int)&v111);
-                  v44->vfptr->Release((CAkIndexable *)&v44->vfptr);
+                  *((_WORD *)&v112.PausedTick + 2) = 0;
+                  *((_BYTE *)&v112.PausedTick + 6) = 0;
+                  v112.PausedTick = 4;
+                  v112.pAction = (CAkAction *)v36;
+                  *(_QWORD *)&v112.LaunchTick = 0i64;
+                  LODWORD(v112.vfptr) = 4;
+                  v47 = *(_BYTE *)(&v112.UserParam.m_CustomParam.ui32Reserved + 1) & 0xFC | v45 | (2 * v46);
+                  v112.UserParam.m_CustomParam.ui32Reserved = *((_DWORD *)v6 + 6);
+                  v48 = NodePtrAndAddRef->vfptr;
+                  *((_BYTE *)&v112.UserParam.m_CustomParam.ui32Reserved + 4) = v47;
+                  v48[4].__vecDelDtor(NodePtrAndAddRef, (unsigned int)&v112);
+                  NodePtrAndAddRef->vfptr->Release(NodePtrAndAddRef);
                 }
               }
               v43 = *(_QWORD *)(v43 + 24);
@@ -1015,20 +994,20 @@ LABEL_86:
             {
               if ( v20 != 1 )
                 goto LABEL_86;
-              v24 = CAkAudioLibIndex::GetNodePtrAndAddRef(g_pIndex, v23, 0);
+              v24 = CAkAudioLibIndex::GetNodePtrAndAddRef(g_pIndex, v23, AkNodeType_Default);
               v25 = v24;
               if ( v24 )
               {
                 v26 = v24->vfptr;
-                v111.LaunchTick = *((_DWORD *)v6 + 4);
-                *((_WORD *)&v111.PausedTick + 2) = 0;
-                *((_BYTE *)&v111.PausedTick + 6) = 0;
-                v111.PausedTick = 4;
-                v111.pAction = 0i64;
-                v111.LaunchFrameOffset = 0;
-                LODWORD(v111.vfptr) = 0;
-                v26[4].__vecDelDtor((CAkIndexable *)&v24->vfptr, (unsigned int)&v111);
-                v25->vfptr->Release((CAkIndexable *)&v25->vfptr);
+                v112.LaunchTick = *((_DWORD *)v6 + 4);
+                *((_WORD *)&v112.PausedTick + 2) = 0;
+                *((_BYTE *)&v112.PausedTick + 6) = 0;
+                v112.PausedTick = 4;
+                v112.pAction = 0i64;
+                v112.LaunchFrameOffset = 0;
+                LODWORD(v112.vfptr) = 0;
+                v26[4].__vecDelDtor(v24, (unsigned int)&v112);
+                v25->vfptr->Release(v25);
                 goto LABEL_86;
               }
             }
@@ -1037,25 +1016,25 @@ LABEL_86:
               v27 = CAkRegistryMgr::GetObjAndAddref(g_pRegistryMgr, *((_QWORD *)v6 + 1));
               if ( v27 )
               {
-                v28 = CAkIndexItem<CAkFxShareSet *>::GetPtrAndAddRef(
-                        (CAkIndexItem<CAkFxShareSet *> *)&g_pIndex->m_idxFxCustom,
-                        v23);
-                v29 = (CAkFxCustom *)v28;
-                if ( v28 )
+                PtrAndAddRef = CAkIndexItem<CAkFxShareSet *>::GetPtrAndAddRef(
+                                 (CAkIndexItem<CAkFxShareSet *> *)&g_pIndex->m_idxFxCustom,
+                                 v23);
+                v29 = (CAkFxCustom *)PtrAndAddRef;
+                if ( PtrAndAddRef )
                 {
-                  v28->vfptr->Release(v28);
+                  PtrAndAddRef->vfptr->Release(PtrAndAddRef);
                 }
                 else
                 {
                   v30 = CAkFxCustom::Create(v23);
                   v29 = v30;
                   if ( v30 )
-                    CAkFxBase::SetFX((CAkFxBase *)&v30->vfptr, v22 + 2, 0i64);
+                    CAkFxBase::SetFX(v30, v22 + 2, 0i64);
                 }
-                v31 = CAkAudioLibIndex::GetNodePtrAndAddRef(g_pIndex, v23, 0);
+                v31 = CAkAudioLibIndex::GetNodePtrAndAddRef(g_pIndex, v23, AkNodeType_Default);
                 if ( v31 || !v29 )
                 {
-                  v31->vfptr->Release((CAkIndexable *)&v31->vfptr);
+                  v31->vfptr->Release(v31);
                 }
                 else
                 {
@@ -1063,14 +1042,14 @@ LABEL_86:
                   if ( v32 )
                     CAkSource::SetSource(&v32->m_Source, v29->key);
                 }
-                v111.PausedTick = v21;
-                v111.vfptr = 0i64;
-                LODWORD(v111.pAction) = 0;
-                *(_QWORD *)&v111.LaunchTick = 0i64;
-                CAkAudioMgr::PlaySourceInput(v1, v23, v27, (UserParams *)&v111);
+                v112.PausedTick = v21;
+                v112.vfptr = 0i64;
+                LODWORD(v112.pAction) = 0;
+                *(_QWORD *)&v112.LaunchTick = 0i64;
+                CAkAudioMgr::PlaySourceInput(this, v23, v27, (UserParams *)&v112);
                 v33 = *((_DWORD *)v27 + 30) ^ (*((_DWORD *)v27 + 30) ^ (*((_DWORD *)v27 + 30) - 1)) & 0x3FFFFFFF;
                 *((_DWORD *)v27 + 30) = v33;
-                if ( !(v33 & 0x3FFFFFFF) )
+                if ( (v33 & 0x3FFFFFFF) == 0 )
                 {
                   v34 = g_DefaultPoolId;
                   CAkRegisteredObj::~CAkRegisteredObj(v27);
@@ -1078,23 +1057,23 @@ LABEL_86:
 LABEL_84:
                   AK::MemoryMgr::Free(v34, v35);
 LABEL_85:
-                  v2 = v119;
+                  v2 = v120;
                   goto LABEL_86;
                 }
               }
             }
-LABEL_196:
-            v5 = v120;
 LABEL_197:
-            v2 = v119;
+            v5 = v121;
+LABEL_198:
+            v2 = v120;
             goto LABEL_87;
           case 37:
             if ( g_pAkSink )
             {
-              v110 = (const wchar_t *)*((_QWORD *)v6 + 1);
-              if ( v110 )
+              v111 = (const wchar_t *)*((_QWORD *)v6 + 1);
+              if ( v111 )
               {
-                CAkOutputMgr::StartOutputCapture(v110);
+                CAkOutputMgr::StartOutputCapture(v111);
                 if ( v6[16] && CAkFeedbackDeviceMgr::s_pSingleton )
                   CAkFeedbackDeviceMgr::StartOutputCapture(
                     CAkFeedbackDeviceMgr::s_pSingleton,
@@ -1110,17 +1089,17 @@ LABEL_197:
             }
             goto LABEL_87;
           case 38:
-            v107 = CAkAudioLibIndex::GetNodePtrAndAddRef(g_pIndex, *((_DWORD *)v6 + 2), (AkNodeType)*((_DWORD *)v6 + 5));
-            v108 = v107;
-            if ( !v107 )
-              goto LABEL_196;
-            v109 = v107->vfptr[3].Release((CAkIndexable *)&v107->vfptr);
-            if ( v109 <= 9 || v109 == 12 )
-              CAkParameterNodeBase::SetFX(v108, *((_DWORD *)v6 + 3), *((_DWORD *)v6 + 4), 1);
-            v108->vfptr->Release((CAkIndexable *)&v108->vfptr);
+            v108 = CAkAudioLibIndex::GetNodePtrAndAddRef(g_pIndex, *((_DWORD *)v6 + 2), (AkNodeType)*((_DWORD *)v6 + 5));
+            v109 = v108;
+            if ( !v108 )
+              goto LABEL_197;
+            v110 = v108->vfptr[3].Release(v108);
+            if ( v110 <= 9 || v110 == 12 )
+              CAkParameterNodeBase::SetFX(v109, *((_DWORD *)v6 + 3), *((_DWORD *)v6 + 4), 1);
+            v109->vfptr->Release(v109);
             goto LABEL_86;
           case 39:
-            CAkLEngine::SetPanningRule(*((_DWORD *)v6 + 2), *((AkSinkType *)v6 + 3), *((AkPanningRule *)v6 + 4));
+            CAkLEngine::SetPanningRule(*((_DWORD *)v6 + 2), *((_DWORD *)v6 + 3), *((AkPanningRule *)v6 + 4));
             goto LABEL_87;
           default:
             goto LABEL_87;
@@ -1134,14 +1113,14 @@ LABEL_197:
             if ( v38 )
             {
               CAkAudioMgr::ProcessCustomAction(
-                v1,
+                this,
                 v38,
                 v36,
                 *((AK::SoundEngine::AkActionOnEventType *)v6 + 6),
                 *((_DWORD *)v6 + 7),
                 *((AkCurveInterpolation *)v6 + 8),
                 *((_DWORD *)v6 + 9));
-              v39->vfptr->Release((CAkIndexable *)&v39->vfptr);
+              v39->vfptr->Release(v39);
             }
           }
           else
@@ -1173,97 +1152,113 @@ LABEL_60:
         }
         while ( v37 );
 LABEL_71:
-        v2 = v119;
+        v2 = v120;
 LABEL_72:
         if ( v36 )
         {
           v49 = *((_DWORD *)v36 + 30) ^ (*((_DWORD *)v36 + 30) ^ (*((_DWORD *)v36 + 30) - 1)) & 0x3FFFFFFF;
           *((_DWORD *)v36 + 30) = v49;
-          if ( !(v49 & 0x3FFFFFFF) )
+          if ( (v49 & 0x3FFFFFFF) == 0 )
           {
             v50 = g_DefaultPoolId;
             CAkRegisteredObj::~CAkRegisteredObj(v36);
             AK::MemoryMgr::Free(v50, v36);
           }
         }
-        v5 = v120;
-LABEL_76:
-        (*(void (**)(void))(**((_QWORD **)v6 + 1) + 16i64))();
+        v5 = v121;
+LABEL_149:
+        (*(void (__fastcall **)(_QWORD))(**((_QWORD **)v6 + 1) + 16i64))(*((_QWORD *)v6 + 1));
 LABEL_87:
         v6 += *(unsigned __int16 *)v6;
-        v58 = *(unsigned __int16 *)v116;
+        v58 = *(unsigned __int16 *)v117;
         ++CAkLEngineCmds::m_ulPlayEventID;
         v5 += v58;
-        v120 = v5;
+        v121 = v5;
       }
       while ( v5 < out_uSizeAvail && !v2 );
-      EnterCriticalSection(&v1->m_queueLock.m_csLock);
-      AkSparseChunkRing::EndRead(&v1->m_MsgQueue, v5);
-      v3 = &v1->m_MsgQueue;
+      EnterCriticalSection(&this->m_queueLock.m_csLock);
+      AkSparseChunkRing::EndRead(&this->m_MsgQueue, v5);
+      p_m_MsgQueue = &this->m_MsgQueue;
       if ( v2 )
         goto LABEL_90;
     }
   }
   return 1i64;
-}
+} *((_DWORD *)v36 + 30) ^ (*((_DWORD *)v36 + 30) ^ (*((_DWORD *)v36 + 30) - 1)) & 0x3FFFFFFF;
+          *((_DWORD *)v36 + 30) = v49;
+          if ( (v49 & 0x3FFFFFFF) == 0 )
+          {
+            v50 = g_DefaultPoolId;
+            CAkRegisteredObj::~CAkRegisteredObj(v36);
+            AK::MemoryMgr::Free(v50, v36);
+          }
+        }
+        v5 = v121;
+LABEL_149:
+        (*(void (__fastcall **)(_QWORD))(**((_QWORD **)v6 + 1) + 16i64))(*((_QWORD *)v6 + 1));
+LABEL_87:
+        v6 += *(unsigned __int16 *)v6;
+        v58 = *(unsigned __int16 *)v117;
+        ++CAkLEngineCmds::m_ulPlayEventID;
+        v5 += v58;
+        v121 = v5;
+      }
+      while ( v5 < out_uSizeAvail && !v2 );
+      EnterCriticalSection(&this->m_queueLock.m_csLock);
+      AkSparseChunkRing::EndRead(&this->m_MsgQueue, v5);
+      p_m_MsgQueue = &this->m_MsgQueue;
+      if ( v2 )
+        goto LABEL_90;
+    }
+  }
+  return 1i64;
 
 // File Line: 1391
 // RVA: 0xA4A490
 void __fastcall CAkAudioMgr::ProcessPendingList(CAkAudioMgr *this)
 {
-  CAkAudioMgr *v1; // rbx
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v2; // rcx
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v3; // rdx
-  AkPendingAction *v4; // rsi
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v5; // rax
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v6; // rax
-  CAkActionPlayAndContinue *v7; // rcx
-  int v8; // eax
-  __int64 v9; // rdx
-  int v10; // edi
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v11; // rax
-  __int128 v12; // [rsp+30h] [rbp-68h]
-  int v13; // [rsp+40h] [rbp-58h]
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rcx
+  AkPendingAction *item; // rsi
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *m_pFree; // rax
+  CAkActionPlayAndContinue *pAction; // rcx
+  int m_eActionType; // eax
+  unsigned int m_PlayingID; // edx
+  int v8; // edi
+  int v9[22]; // [rsp+40h] [rbp-58h] BYREF
 
-  v1 = this;
-  v2 = this->m_mmapPending.m_pFirst;
-  v3 = 0i64;
-  if ( v2 )
+  m_pFirst = this->m_mmapPending.m_pFirst;
+  if ( m_pFirst )
   {
-    while ( v2->Item.key <= v1->m_uBufferTick )
+    while ( m_pFirst->Item.key <= this->m_uBufferTick )
     {
-      v4 = v2->Item.item;
-      v5 = v2->pNextListItem;
-      if ( v2 == v1->m_mmapPending.m_pFirst )
-        v1->m_mmapPending.m_pFirst = v5;
+      item = m_pFirst->Item.item;
+      if ( m_pFirst == this->m_mmapPending.m_pFirst )
+        this->m_mmapPending.m_pFirst = m_pFirst->pNextListItem;
       else
-        v3->pNextListItem = v5;
-      if ( v2 == v1->m_mmapPending.m_pLast )
-        v1->m_mmapPending.m_pLast = v3;
-      v6 = v1->m_mmapPending.m_pFree;
-      v13 = 0;
-      v2->pNextListItem = v6;
-      --v1->m_mmapPending.m_ulNumListItems;
-      v1->m_mmapPending.m_pFree = v2;
-      v7 = (CAkActionPlayAndContinue *)v4->pAction;
-      v8 = v7->m_eActionType;
-      if ( v8 == 1027 || v8 == 1283 && CAkActionPlayAndContinue::NeedNotifyDelay(v7) )
-        ((void (__fastcall *)(CAkAction *, int *))v4->pAction->vfptr[2].Category)(v4->pAction, &v13);
-      v4->pAction->vfptr[2].__vecDelDtor((CAkIndexable *)&v4->pAction->vfptr, (unsigned int)v4);
-      v9 = v4->UserParam.m_PlayingID;
-      if ( (_DWORD)v9 )
-        CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, v9);
-      ((void (__cdecl *)(CAkAction *, __int64))v4->pAction->vfptr->Release)(v4->pAction, v9);
-      v10 = g_DefaultPoolId;
-      ((void (__fastcall *)(AkPendingAction *, _QWORD))v4->vfptr[1].TransUpdateValue)(v4, 0i64);
-      AK::MemoryMgr::Free(v10, v4);
+        MEMORY[0] = (size_t)m_pFirst->pNextListItem;
+      if ( m_pFirst == this->m_mmapPending.m_pLast )
+        this->m_mmapPending.m_pLast = 0i64;
+      m_pFree = this->m_mmapPending.m_pFree;
+      v9[0] = 0;
+      m_pFirst->pNextListItem = m_pFree;
+      --this->m_mmapPending.m_ulNumListItems;
+      this->m_mmapPending.m_pFree = m_pFirst;
+      pAction = (CAkActionPlayAndContinue *)item->pAction;
+      m_eActionType = pAction->m_eActionType;
+      if ( m_eActionType == 1027 || m_eActionType == 1283 && CAkActionPlayAndContinue::NeedNotifyDelay(pAction) )
+        ((void (__fastcall *)(CAkAction *, int *))item->pAction->vfptr[2].Category)(item->pAction, v9);
+      item->pAction->vfptr[2].__vecDelDtor(item->pAction, (unsigned int)item);
+      m_PlayingID = item->UserParam.m_PlayingID;
+      if ( m_PlayingID )
+        CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, m_PlayingID);
+      item->pAction->vfptr->Release(item->pAction);
+      v8 = g_DefaultPoolId;
+      ((void (__fastcall *)(AkPendingAction *, _QWORD))item->vfptr[1].TransUpdateValue)(item, 0i64);
+      AK::MemoryMgr::Free(v8, item);
       ++CAkLEngineCmds::m_ulPlayEventID;
-      v11 = v1->m_mmapPending.m_pFirst;
-      _mm_store_si128((__m128i *)&v12, (__m128i)(unsigned __int64)v1->m_mmapPending.m_pFirst);
-      if ( !v11 )
+      if ( !this->m_mmapPending.m_pFirst )
         break;
-      v3 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)*((_QWORD *)&v12 + 1);
-      v2 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v12;
+      m_pFirst = this->m_mmapPending.m_pFirst;
     }
   }
 }
@@ -1272,80 +1267,83 @@ void __fastcall CAkAudioMgr::ProcessPendingList(CAkAudioMgr *this)
 // RVA: 0xA47FC0
 void __fastcall CAkAudioMgr::EnqueueOrExecuteAction(CAkAudioMgr *this, AkPendingAction *in_pActionItem)
 {
-  AkPendingAction *v2; // rdi
-  CAkAudioMgr *v3; // rbx
-  unsigned int v4; // eax
+  unsigned int DelayTime; // eax
   __int64 v5; // r8
-  unsigned int v6; // er9
-  unsigned int v7; // edx
+  unsigned int v6; // r9d
+  unsigned int m_PlayingID; // edx
   int v8; // ebx
-  int v9; // eax
+  unsigned int uContinuousPlaybackLookAhead; // eax
   AKRESULT v10; // eax
-  CAkActionPlayAndContinue *v11; // rcx
-  int v12; // eax
+  CAkActionPlayAndContinue *pAction; // rcx
+  int m_eActionType; // eax
   int v13; // ebx
-  int v14; // [rsp+20h] [rbp-58h]
-  AkPendingAction *in_rItem; // [rsp+88h] [rbp+10h]
+  int v14[22]; // [rsp+20h] [rbp-58h] BYREF
+  AkPendingAction *in_rItem; // [rsp+88h] [rbp+10h] BYREF
 
   in_rItem = in_pActionItem;
-  v2 = in_pActionItem;
-  v3 = this;
   CAkPlayingMgr::AddItemActiveCount(g_pPlayingMgr, in_pActionItem->UserParam.m_PlayingID);
-  ((void (*)(void))v2->pAction->vfptr->AddRef)();
-  v4 = CAkAction::GetDelayTime(v2->pAction);
-  v2->LaunchTick = v3->m_uBufferTick;
-  v5 = v4 >> 10;
-  v6 = v4;
-  v2->LaunchFrameOffset = v4 - (v4 >> 10 << 10);
+  in_pActionItem->pAction->vfptr->AddRef(in_pActionItem->pAction);
+  DelayTime = CAkAction::GetDelayTime(in_pActionItem->pAction);
+  in_pActionItem->LaunchTick = this->m_uBufferTick;
+  v5 = DelayTime >> 10;
+  v6 = DelayTime;
+  in_pActionItem->LaunchFrameOffset = DelayTime - (DelayTime >> 10 << 10);
   if ( (_DWORD)v5 )
   {
-    if ( v2->pAction->m_eActionType != 1283 )
-      goto LABEL_18;
-    v9 = unk_14249E984;
-    if ( (unsigned int)v5 < unk_14249E984 )
-      v9 = v5;
-    LODWORD(v5) = v5 - v9;
-    v2->LaunchFrameOffset = v6 - ((_DWORD)v5 << 10);
+    if ( in_pActionItem->pAction->m_eActionType != 1283 )
+      goto LABEL_10;
+    uContinuousPlaybackLookAhead = g_settings.uContinuousPlaybackLookAhead;
+    if ( (unsigned int)v5 < g_settings.uContinuousPlaybackLookAhead )
+      uContinuousPlaybackLookAhead = v5;
+    LODWORD(v5) = v5 - uContinuousPlaybackLookAhead;
+    in_pActionItem->LaunchFrameOffset = v6 - ((_DWORD)v5 << 10);
     if ( (_DWORD)v5 )
     {
-LABEL_18:
-      v2->LaunchTick += v5;
-      v10 = CAkMultiKeyList<unsigned long,AkPendingAction *,2>::Insert(&v3->m_mmapPending, v2->LaunchTick, &in_rItem);
-      v11 = (CAkActionPlayAndContinue *)v2->pAction;
-      if ( v10 == 1 )
+LABEL_10:
+      in_pActionItem->LaunchTick += v5;
+      v10 = CAkMultiKeyList<unsigned long,AkPendingAction *,2>::Insert(
+              &this->m_mmapPending,
+              in_pActionItem->LaunchTick,
+              &in_rItem);
+      pAction = (CAkActionPlayAndContinue *)in_pActionItem->pAction;
+      if ( v10 == AK_Success )
       {
-        v14 = 0;
-        v12 = v11->m_eActionType;
-        if ( v12 == 1027 || v12 == 1283 && CAkActionPlayAndContinue::NeedNotifyDelay(v11) )
-          ((void (__fastcall *)(CAkAction *, int *))v2->pAction->vfptr[2].Category)(v2->pAction, &v14);
+        v14[0] = 0;
+        m_eActionType = pAction->m_eActionType;
+        if ( m_eActionType == 1027 || m_eActionType == 1283 && CAkActionPlayAndContinue::NeedNotifyDelay(pAction) )
+          ((void (__fastcall *)(CAkAction *, int *))in_pActionItem->pAction->vfptr[2].Category)(
+            in_pActionItem->pAction,
+            v14);
       }
       else
       {
-        ((void (*)(void))v11->vfptr->Release)();
+        pAction->vfptr->Release(pAction);
         v13 = g_DefaultPoolId;
-        ((void (__fastcall *)(AkPendingAction *, _QWORD))v2->vfptr[1].TransUpdateValue)(v2, 0i64);
-        AK::MemoryMgr::Free(v13, v2);
+        ((void (__fastcall *)(AkPendingAction *, _QWORD))in_pActionItem->vfptr[1].TransUpdateValue)(
+          in_pActionItem,
+          0i64);
+        AK::MemoryMgr::Free(v13, in_pActionItem);
       }
     }
     else
     {
-      CAkAudioMgr::ProcessAction(v3, v2);
+      CAkAudioMgr::ProcessAction(this, in_pActionItem);
     }
   }
   else
   {
-    ((void (__fastcall *)(CAkAction *, AkPendingAction *, __int64, _QWORD))v2->pAction->vfptr[2].__vecDelDtor)(
-      v2->pAction,
-      v2,
+    ((void (__fastcall *)(CAkAction *, AkPendingAction *, __int64, _QWORD))in_pActionItem->pAction->vfptr[2].__vecDelDtor)(
+      in_pActionItem->pAction,
+      in_pActionItem,
       v5,
-      v4);
-    v7 = v2->UserParam.m_PlayingID;
-    if ( v7 )
-      CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, v7);
-    ((void (*)(void))v2->pAction->vfptr->Release)();
+      DelayTime);
+    m_PlayingID = in_pActionItem->UserParam.m_PlayingID;
+    if ( m_PlayingID )
+      CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, m_PlayingID);
+    in_pActionItem->pAction->vfptr->Release(in_pActionItem->pAction);
     v8 = g_DefaultPoolId;
-    ((void (__fastcall *)(AkPendingAction *, _QWORD))v2->vfptr[1].TransUpdateValue)(v2, 0i64);
-    AK::MemoryMgr::Free(v8, v2);
+    ((void (__fastcall *)(AkPendingAction *, _QWORD))in_pActionItem->vfptr[1].TransUpdateValue)(in_pActionItem, 0i64);
+    AK::MemoryMgr::Free(v8, in_pActionItem);
   }
 }
 
@@ -1353,31 +1351,35 @@ LABEL_18:
 // RVA: 0xA48F00
 void __fastcall CAkAudioMgr::ProcessAction(CAkAudioMgr *this, AkPendingAction *in_pAction)
 {
-  AkPendingAction *v2; // rdi
-  unsigned int v3; // edx
+  unsigned int m_PlayingID; // edx
   int v4; // ebx
 
-  v2 = in_pAction;
-  ((void (*)(void))in_pAction->pAction->vfptr[2].__vecDelDtor)();
-  v3 = v2->UserParam.m_PlayingID;
-  if ( v3 )
-    CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, v3);
-  ((void (*)(void))v2->pAction->vfptr->Release)();
+  ((void (__fastcall *)(CAkAction *))in_pAction->pAction->vfptr[2].__vecDelDtor)(in_pAction->pAction);
+  m_PlayingID = in_pAction->UserParam.m_PlayingID;
+  if ( m_PlayingID )
+    CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, m_PlayingID);
+  in_pAction->pAction->vfptr->Release(in_pAction->pAction);
   v4 = g_DefaultPoolId;
-  ((void (__fastcall *)(AkPendingAction *, _QWORD))v2->vfptr[1].TransUpdateValue)(v2, 0i64);
-  AK::MemoryMgr::Free(v4, v2);
+  ((void (__fastcall *)(AkPendingAction *, _QWORD))in_pAction->vfptr[1].TransUpdateValue)(in_pAction, 0i64);
+  AK::MemoryMgr::Free(v4, in_pAction);
 }
 
 // File Line: 1527
 // RVA: 0xA48F60
-void __fastcall CAkAudioMgr::ProcessCustomAction(CAkAudioMgr *this, CAkParameterNodeBase *ptargetNode, CAkRegisteredObj *in_pGameObj, AK::SoundEngine::AkActionOnEventType in_ActionToExecute, int in_uTransitionDuration, AkCurveInterpolation in_eFadeCurve, unsigned int in_PlayingID)
+void __fastcall CAkAudioMgr::ProcessCustomAction(
+        CAkAudioMgr *this,
+        CAkParameterNodeBase *ptargetNode,
+        CAkRegisteredObj *in_pGameObj,
+        AK::SoundEngine::AkActionOnEventType in_ActionToExecute,
+        int in_uTransitionDuration,
+        AkCurveInterpolation in_eFadeCurve,
+        int in_PlayingID)
 {
-  CAkParameterNodeBase *v7; // rbx
-  __int32 v8; // er9
-  int v9; // er9
-  int v10; // [rsp+30h] [rbp-38h]
+  int v8; // r9d
+  int v9; // r9d
+  int v10; // [rsp+30h] [rbp-38h] BYREF
   CAkRegisteredObj *v11; // [rsp+38h] [rbp-30h]
-  unsigned int v12; // [rsp+40h] [rbp-28h]
+  int v12; // [rsp+40h] [rbp-28h]
   int v13; // [rsp+44h] [rbp-24h]
   AkCurveInterpolation v14; // [rsp+48h] [rbp-20h]
   __int16 v15; // [rsp+4Ch] [rbp-1Ch]
@@ -1386,7 +1388,6 @@ void __fastcall CAkAudioMgr::ProcessCustomAction(CAkAudioMgr *this, CAkParameter
 
   if ( ptargetNode )
   {
-    v7 = ptargetNode;
     v14 = in_eFadeCurve;
     v15 = 0;
     v16 = 0;
@@ -1424,83 +1425,83 @@ void __fastcall CAkAudioMgr::ProcessCustomAction(CAkAudioMgr *this, CAkParameter
       CAkAudioMgr::StopPendingAction(g_pAudioMgr, ptargetNode, in_pGameObj, in_PlayingID);
       v10 = 0;
     }
-    v7->vfptr[4].__vecDelDtor((CAkIndexable *)&v7->vfptr, (unsigned int)&v10);
+    ptargetNode->vfptr[4].__vecDelDtor(ptargetNode, (unsigned int)&v10);
   }
 }
 
 // File Line: 1572
 // RVA: 0xA48E00
-void __fastcall CAkAudioMgr::PlaySourceInput(CAkAudioMgr *this, unsigned int in_Target, CAkRegisteredObj *in_pGameObj, UserParams *in_userParams)
+void __fastcall CAkAudioMgr::PlaySourceInput(
+        CAkAudioMgr *this,
+        unsigned int in_Target,
+        CAkRegisteredObj *in_pGameObj,
+        UserParams *in_userParams)
 {
-  CAkRegisteredObj *v4; // rsi
-  UserParams *v5; // rdi
-  CAkParameterNodeBase *v6; // rax
+  CAkParameterNodeBase *NodePtrAndAddRef; // rax
   CAkParameterNode *v7; // rbx
-  unsigned int v8; // ecx
-  __int64 v9; // rax
-  AkExternalSourceArray *v10; // rax
+  unsigned int m_PlayingID; // ecx
+  __int64 customParam; // rax
+  AkExternalSourceArray *pExternalSrcs; // rax
   AkExternalSourceArray *v11; // rcx
-  AkPBIParams in_rPBIParams; // [rsp+20h] [rbp-49h]
-  int v13; // [rsp+E8h] [rbp+7Fh]
+  AkPBIParams in_rPBIParams; // [rsp+20h] [rbp-49h] BYREF
+  int v13; // [rsp+E8h] [rbp+7Fh] BYREF
   int v14; // [rsp+ECh] [rbp+83h]
 
-  v4 = in_pGameObj;
-  v5 = in_userParams;
-  v6 = CAkAudioLibIndex::GetNodePtrAndAddRef(g_pIndex, in_Target, 0);
-  v7 = (CAkParameterNode *)v6;
-  if ( v6 )
+  NodePtrAndAddRef = CAkAudioLibIndex::GetNodePtrAndAddRef(g_pIndex, in_Target, AkNodeType_Default);
+  v7 = (CAkParameterNode *)NodePtrAndAddRef;
+  if ( NodePtrAndAddRef )
   {
-    v8 = v5->m_PlayingID;
-    in_rPBIParams.pInstigator = (CAkPBIAware *)&v6->vfptr;
-    v9 = v5->m_CustomParam.customParam;
+    m_PlayingID = in_userParams->m_PlayingID;
+    in_rPBIParams.pInstigator = NodePtrAndAddRef;
+    customParam = in_userParams->m_CustomParam.customParam;
     v13 = 0;
     v14 = 4;
-    in_rPBIParams.userParams.m_CustomParam.customParam = v9;
-    LODWORD(v9) = v5->m_CustomParam.ui32Reserved;
+    in_rPBIParams.userParams.m_CustomParam.customParam = customParam;
+    LODWORD(customParam) = in_userParams->m_CustomParam.ui32Reserved;
     in_rPBIParams.userParams.m_CustomParam.pExternalSrcs = 0i64;
-    in_rPBIParams.userParams.m_CustomParam.ui32Reserved = v9;
-    v10 = v5->m_CustomParam.pExternalSrcs;
+    in_rPBIParams.userParams.m_CustomParam.ui32Reserved = customParam;
+    pExternalSrcs = in_userParams->m_CustomParam.pExternalSrcs;
     in_rPBIParams.playHistory.arrayIsContinuous.m_iBitArray = 0;
     in_rPBIParams.bSkipDelay = 0;
     in_rPBIParams.bTargetFeedback = 0;
     in_rPBIParams.playHistory.HistArray.uiArraySize = 0;
-    in_rPBIParams.eType = 0;
-    in_rPBIParams.userParams.m_PlayingID = v8;
-    if ( v10 )
-      ++v10->m_cRefCount;
-    in_rPBIParams.userParams.m_CustomParam.pExternalSrcs = v10;
-    *(_QWORD *)&in_rPBIParams.ePlaybackState = 0i64;
-    in_rPBIParams.pContinuousParams = 0i64;
-    in_rPBIParams.sequenceID = 0;
+    in_rPBIParams.eType = PBI;
+    in_rPBIParams.userParams.m_PlayingID = m_PlayingID;
+    if ( pExternalSrcs )
+      ++pExternalSrcs->m_cRefCount;
+    in_rPBIParams.userParams.m_CustomParam.pExternalSrcs = pExternalSrcs;
+    memset(&in_rPBIParams.ePlaybackState, 0, 20);
     in_rPBIParams.bIsFirst = 1;
-    in_rPBIParams.pGameObj = v4;
+    in_rPBIParams.pGameObj = in_pGameObj;
     in_rPBIParams.pTransitionParameters = (TransParams *)&v13;
-    if ( CAkParameterNode::HandleInitialDelay(v7, &in_rPBIParams) == 1 )
+    if ( CAkParameterNode::HandleInitialDelay(v7, &in_rPBIParams) == AK_Success )
       ((void (__fastcall *)(CAkParameterNode *, AkPBIParams *))v7->vfptr[19].Category)(v7, &in_rPBIParams);
-    v7->vfptr->Release((CAkIndexable *)&v7->vfptr);
+    v7->vfptr->Release(v7);
     if ( in_rPBIParams.userParams.m_CustomParam.pExternalSrcs )
       AkExternalSourceArray::Release(in_rPBIParams.userParams.m_CustomParam.pExternalSrcs);
   }
-  v11 = v5->m_CustomParam.pExternalSrcs;
+  v11 = in_userParams->m_CustomParam.pExternalSrcs;
   if ( v11 )
     AkExternalSourceArray::Release(v11);
 }
 
 // File Line: 1616
 // RVA: 0xA487E0
-void __fastcall CAkAudioMgr::PausePendingAction(CAkAudioMgr *this, CAkParameterNodeBase *in_pNodeToTarget, CAkRegisteredObj *in_GameObj, bool in_bIsMasterOnResume, unsigned int in_PlayingID)
+void __fastcall CAkAudioMgr::PausePendingAction(
+        CAkAudioMgr *this,
+        CAkParameterNodeBase *in_pNodeToTarget,
+        CAkRegisteredObj *in_GameObj,
+        bool in_bIsMasterOnResume,
+        unsigned int in_PlayingID)
 {
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v5; // rbx
-  bool v6; // r15
-  CAkRegisteredObj *v7; // r12
-  CAkParameterNodeBase *v8; // rdi
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rbx
   CAkAudioMgr *v9; // r13
-  AkPendingAction *v10; // rsi
-  CAkAction *v11; // rbp
+  AkPendingAction *item; // rsi
+  CAkAction *pAction; // rbp
   CAkParameterNodeBase *v12; // rax
-  CAkParameterNodeBase *v13; // rdx
-  CAkParameterNodeBase *v14; // rcx
-  unsigned __int16 v15; // cx
+  CAkParameterNodeBase *m_pParentNode; // rdx
+  CAkParameterNodeBase *m_pBusOutputNode; // rcx
+  unsigned __int16 m_eActionType; // cx
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v16; // rbx
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v17; // r14
   AkPendingAction *v18; // rbp
@@ -1510,74 +1511,65 @@ void __fastcall CAkAudioMgr::PausePendingAction(CAkAudioMgr *this, CAkParameterN
   CAkParameterNodeBase *v22; // rdx
   CAkParameterNodeBase *v23; // rcx
   unsigned __int16 v24; // cx
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v25; // rax
-  __m128i v26; // [rsp+20h] [rbp-58h]
-  __m128i v27; // [rsp+30h] [rbp-48h]
-  CAkAudioMgr *v28; // [rsp+80h] [rbp+8h]
-  bool v29; // [rsp+98h] [rbp+20h]
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *pNextListItem; // rax
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v26; // [rsp+20h] [rbp-58h]
 
-  v29 = in_bIsMasterOnResume;
-  v28 = this;
-  v5 = this->m_mmapPausedPending.m_pFirst;
-  v6 = in_bIsMasterOnResume;
-  v7 = in_GameObj;
-  v8 = in_pNodeToTarget;
+  m_pFirst = this->m_mmapPausedPending.m_pFirst;
   v9 = this;
-  if ( v5 )
+  if ( m_pFirst )
   {
     while ( 1 )
     {
-      v10 = v5->Item.item;
-      v11 = v10->pAction;
-      v12 = CAkAction::GetAndRefTarget(v10->pAction);
-      if ( !v8 )
+      item = m_pFirst->Item.item;
+      pAction = item->pAction;
+      v12 = CAkAction::GetAndRefTarget(pAction);
+      if ( !in_pNodeToTarget )
         goto LABEL_14;
       if ( v12 )
       {
-        if ( v8 == v12 )
+        if ( in_pNodeToTarget == v12 )
           goto LABEL_14;
-        v13 = v12->m_pParentNode;
-        v14 = v12->m_pBusOutputNode;
-        if ( v13 )
+        m_pParentNode = v12->m_pParentNode;
+        m_pBusOutputNode = v12->m_pBusOutputNode;
+        if ( m_pParentNode )
         {
-          while ( v8 != v13 )
+          while ( in_pNodeToTarget != m_pParentNode )
           {
-            if ( !v14 )
-              v14 = v13->m_pBusOutputNode;
-            v13 = v13->m_pParentNode;
-            if ( !v13 )
+            if ( !m_pBusOutputNode )
+              m_pBusOutputNode = m_pParentNode->m_pBusOutputNode;
+            m_pParentNode = m_pParentNode->m_pParentNode;
+            if ( !m_pParentNode )
               goto LABEL_10;
           }
           goto LABEL_14;
         }
 LABEL_10:
-        if ( v14 )
+        if ( m_pBusOutputNode )
         {
-          while ( v8 != v14 )
+          while ( in_pNodeToTarget != m_pBusOutputNode )
           {
-            v14 = v14->m_pBusOutputNode;
-            if ( !v14 )
+            m_pBusOutputNode = m_pBusOutputNode->m_pBusOutputNode;
+            if ( !m_pBusOutputNode )
               goto LABEL_22;
           }
 LABEL_14:
-          v15 = v11->m_eActionType;
-          if ( ((v15 & 0xFF00) != 768 || v6)
-            && (!v7 || v7 == v10->pGameObj)
-            && (!in_PlayingID || in_PlayingID == v10->UserParam.m_PlayingID)
-            && v15 != 6176 )
+          m_eActionType = pAction->m_eActionType;
+          if ( ((m_eActionType & 0xFF00) != 768 || in_bIsMasterOnResume)
+            && (!in_GameObj || in_GameObj == item->pGameObj)
+            && (!in_PlayingID || in_PlayingID == item->UserParam.m_PlayingID)
+            && m_eActionType != 6176 )
           {
-            ++v10->ulPauseCount;
+            ++item->ulPauseCount;
           }
-          goto LABEL_22;
         }
       }
 LABEL_22:
-      v5 = v5->pNextListItem;
+      m_pFirst = m_pFirst->pNextListItem;
       if ( v12 )
-        v12->vfptr->Release((CAkIndexable *)&v12->vfptr);
-      if ( !v5 )
+        v12->vfptr->Release(v12);
+      if ( !m_pFirst )
       {
-        v9 = v28;
+        v9 = this;
         break;
       }
     }
@@ -1588,19 +1580,19 @@ LABEL_22:
   {
     v18 = v16->Item.item;
     v19 = v18->pAction;
-    v20 = CAkAction::GetAndRefTarget(v18->pAction);
+    v20 = CAkAction::GetAndRefTarget(v19);
     v21 = v20;
-    if ( v8 )
+    if ( in_pNodeToTarget )
     {
       if ( !v20 )
         goto LABEL_38;
-      if ( v8 != v20 )
+      if ( in_pNodeToTarget != v20 )
       {
         v22 = v20->m_pParentNode;
         v23 = v20->m_pBusOutputNode;
         if ( v22 )
         {
-          while ( v8 != v22 )
+          while ( in_pNodeToTarget != v22 )
           {
             if ( !v23 )
               v23 = v22->m_pBusOutputNode;
@@ -1614,7 +1606,7 @@ LABEL_22:
 LABEL_35:
           if ( !v23 )
             goto LABEL_38;
-          while ( v8 != v23 )
+          while ( in_pNodeToTarget != v23 )
           {
             v23 = v23->m_pBusOutputNode;
             if ( !v23 )
@@ -1624,27 +1616,24 @@ LABEL_35:
       }
     }
     v24 = v19->m_eActionType;
-    if ( ((v24 & 0xFF00) != 768 || v29)
-      && (!v7 || v7 == v18->pGameObj)
+    if ( ((v24 & 0xFF00) != 768 || in_bIsMasterOnResume)
+      && (!in_GameObj || in_GameObj == v18->pGameObj)
       && (!in_PlayingID || in_PlayingID == v18->UserParam.m_PlayingID)
       && v24 != 6176 )
     {
       CAkAudioMgr::InsertAsPaused(v9, v19->m_ulElementID, v18, 0);
-      v25 = v16->pNextListItem;
-      v26.m128i_i64[1] = (__int64)v17;
-      v26.m128i_i64[0] = (__int64)v16->pNextListItem;
+      pNextListItem = v16->pNextListItem;
+      v26 = v16->pNextListItem;
       if ( v16 == v9->m_mmapPending.m_pFirst )
-        v9->m_mmapPending.m_pFirst = v25;
+        v9->m_mmapPending.m_pFirst = pNextListItem;
       else
-        v17->pNextListItem = v25;
+        v17->pNextListItem = pNextListItem;
       if ( v16 == v9->m_mmapPending.m_pLast )
         v9->m_mmapPending.m_pLast = v17;
       v16->pNextListItem = v9->m_mmapPending.m_pFree;
       --v9->m_mmapPending.m_ulNumListItems;
-      _mm_store_si128(&v27, v26);
-      v17 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v27.m128i_i64[1];
       v9->m_mmapPending.m_pFree = v16;
-      v16 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v27.m128i_i64[0];
+      v16 = v26;
       goto LABEL_39;
     }
 LABEL_38:
@@ -1652,7 +1641,7 @@ LABEL_38:
     v16 = v16->pNextListItem;
 LABEL_39:
     if ( v21 )
-      v21->vfptr->Release((CAkIndexable *)&v21->vfptr);
+      v21->vfptr->Release(v21);
   }
 }
 
@@ -1660,72 +1649,65 @@ LABEL_39:
 // RVA: 0xA48C10
 void __fastcall CAkAudioMgr::PausePendingItems(CAkAudioMgr *this, unsigned int in_PlayingID)
 {
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v2; // rax
-  unsigned int v3; // ebp
-  CAkAudioMgr *i; // rbx
-  AkPendingAction *v5; // rcx
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v6; // rdi
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v7; // rsi
-  AkPendingAction *v8; // r8
-  CAkAction *v9; // rax
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v10; // rax
-  __m128i v11; // [rsp+20h] [rbp-28h]
-  __m128i v12; // [rsp+30h] [rbp-18h]
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *i; // rax
+  AkPendingAction *item; // rcx
+  __int128 m_pFirst; // rdi
+  AkPendingAction *v7; // r8
+  CAkAction *pAction; // rax
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v9; // rax
+  __int128 v10; // [rsp+20h] [rbp-28h]
 
-  v2 = this->m_mmapPausedPending.m_pFirst;
-  v3 = in_PlayingID;
-  for ( i = this; v2; v2 = v2->pNextListItem )
+  for ( i = this->m_mmapPausedPending.m_pFirst; i; i = i->pNextListItem )
   {
-    v5 = v2->Item.item;
-    if ( v5->UserParam.m_PlayingID == in_PlayingID && MEMORY[0x34] != 6176 )
-      ++v5->ulPauseCount;
+    item = i->Item.item;
+    if ( item->UserParam.m_PlayingID == in_PlayingID && MEMORY[0x34] != 6176 )
+      ++item->ulPauseCount;
   }
-  v6 = i->m_mmapPending.m_pFirst;
-  v7 = 0i64;
-  while ( v6 )
+  m_pFirst = (unsigned __int64)this->m_mmapPending.m_pFirst;
+  while ( (_QWORD)m_pFirst )
   {
-    v8 = v6->Item.item;
-    v9 = v8->pAction;
-    if ( v8->UserParam.m_PlayingID != v3 || v9->m_eActionType == 6176 )
+    v7 = *(AkPendingAction **)(m_pFirst + 16);
+    pAction = v7->pAction;
+    if ( v7->UserParam.m_PlayingID != in_PlayingID || pAction->m_eActionType == 6176 )
     {
-      v7 = v6;
-      v6 = v6->pNextListItem;
+      *((_QWORD *)&m_pFirst + 1) = m_pFirst;
+      *(_QWORD *)&m_pFirst = *(_QWORD *)m_pFirst;
     }
     else
     {
-      CAkAudioMgr::InsertAsPaused(i, v9->m_ulElementID, v8, 0);
-      v10 = v6->pNextListItem;
-      v11.m128i_i64[1] = (__int64)v7;
-      v11.m128i_i64[0] = (__int64)v6->pNextListItem;
-      if ( v6 == i->m_mmapPending.m_pFirst )
-        i->m_mmapPending.m_pFirst = v10;
+      CAkAudioMgr::InsertAsPaused(this, pAction->m_ulElementID, v7, 0);
+      v9 = *(CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem **)m_pFirst;
+      *((_QWORD *)&v10 + 1) = *((_QWORD *)&m_pFirst + 1);
+      *(_QWORD *)&v10 = *(_QWORD *)m_pFirst;
+      if ( (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)m_pFirst == this->m_mmapPending.m_pFirst )
+        this->m_mmapPending.m_pFirst = v9;
       else
-        v7->pNextListItem = v10;
-      if ( v6 == i->m_mmapPending.m_pLast )
-        i->m_mmapPending.m_pLast = v7;
-      v6->pNextListItem = i->m_mmapPending.m_pFree;
-      --i->m_mmapPending.m_ulNumListItems;
-      _mm_store_si128(&v12, v11);
-      v7 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v12.m128i_i64[1];
-      i->m_mmapPending.m_pFree = v6;
-      v6 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v12.m128i_i64[0];
+        **((_QWORD **)&m_pFirst + 1) = v9;
+      if ( (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)m_pFirst == this->m_mmapPending.m_pLast )
+        this->m_mmapPending.m_pLast = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)*((_QWORD *)&m_pFirst + 1);
+      *(_QWORD *)m_pFirst = this->m_mmapPending.m_pFree;
+      --this->m_mmapPending.m_ulNumListItems;
+      this->m_mmapPending.m_pFree = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)m_pFirst;
+      m_pFirst = v10;
     }
   }
 }
 
 // File Line: 1721
 // RVA: 0xA48370
-void __fastcall CAkAudioMgr::InsertAsPaused(CAkAudioMgr *this, unsigned int in_ElementID, AkPendingAction *in_pPendingAction, unsigned int in_ulPauseCount)
+void __fastcall CAkAudioMgr::InsertAsPaused(
+        CAkAudioMgr *this,
+        unsigned int in_ElementID,
+        AkPendingAction *in_pPendingAction,
+        unsigned int in_ulPauseCount)
 {
-  AkPendingAction *v4; // rdi
-  CAkActionPlayAndContinue *v5; // rcx
-  int v6; // eax
+  CAkActionPlayAndContinue *pAction; // rcx
+  int m_eActionType; // eax
   int v7; // ebx
-  int v8; // [rsp+20h] [rbp-58h]
-  AkPendingAction *in_rItem; // [rsp+90h] [rbp+18h]
+  int v8[22]; // [rsp+20h] [rbp-58h] BYREF
+  AkPendingAction *in_rItem; // [rsp+90h] [rbp+18h] BYREF
 
   in_rItem = in_pPendingAction;
-  v4 = in_pPendingAction;
   in_pPendingAction->PausedTick = this->m_uBufferTick;
   in_pPendingAction->ulPauseCount = in_ulPauseCount;
   if ( (unsigned int)CAkMultiKeyList<unsigned long,AkPendingAction *,2>::Insert(
@@ -1733,24 +1715,28 @@ void __fastcall CAkAudioMgr::InsertAsPaused(CAkAudioMgr *this, unsigned int in_E
                        in_ElementID,
                        &in_rItem) != 1 )
   {
-    v5 = (CAkActionPlayAndContinue *)v4->pAction;
-    v8 = 0;
-    v6 = v5->m_eActionType;
-    if ( v6 != 1027 )
+    pAction = (CAkActionPlayAndContinue *)in_pPendingAction->pAction;
+    v8[0] = 0;
+    m_eActionType = pAction->m_eActionType;
+    if ( m_eActionType != 1027 )
     {
-      if ( v6 != 1283 )
+      if ( m_eActionType != 1283 )
       {
 LABEL_6:
-        CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, v4->UserParam.m_PlayingID);
-        ((void (__cdecl *)(CAkAction *))v4->pAction->vfptr->Release)(v4->pAction);
+        CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, in_pPendingAction->UserParam.m_PlayingID);
+        in_pPendingAction->pAction->vfptr->Release(in_pPendingAction->pAction);
         v7 = g_DefaultPoolId;
-        ((void (__fastcall *)(AkPendingAction *, _QWORD))v4->vfptr[1].TransUpdateValue)(v4, 0i64);
-        AK::MemoryMgr::Free(v7, v4);
+        ((void (__fastcall *)(AkPendingAction *, _QWORD))in_pPendingAction->vfptr[1].TransUpdateValue)(
+          in_pPendingAction,
+          0i64);
+        AK::MemoryMgr::Free(v7, in_pPendingAction);
         return;
       }
-      CAkActionPlayAndContinue::NeedNotifyDelay(v5);
+      CAkActionPlayAndContinue::NeedNotifyDelay(pAction);
     }
-    ((void (__fastcall *)(CAkAction *, int *))v4->pAction->vfptr[2].Category)(v4->pAction, &v8);
+    ((void (__fastcall *)(CAkAction *, int *))in_pPendingAction->pAction->vfptr[2].Category)(
+      in_pPendingAction->pAction,
+      v8);
     goto LABEL_6;
   }
 }
@@ -1759,62 +1745,65 @@ LABEL_6:
 // RVA: 0xA4C140
 void __fastcall CAkAudioMgr::TransferToPending(CAkAudioMgr *this, AkPendingAction *in_pPendingAction)
 {
-  AkPendingAction *v2; // rdi
-  CAkActionPlayAndContinue *v3; // rcx
-  int v4; // eax
+  CAkActionPlayAndContinue *pAction; // rcx
+  int m_eActionType; // eax
   int v5; // ebx
-  int v6; // [rsp+20h] [rbp-58h]
-  AkPendingAction *in_rItem; // [rsp+88h] [rbp+10h]
+  int v6[22]; // [rsp+20h] [rbp-58h] BYREF
+  AkPendingAction *in_rItem; // [rsp+88h] [rbp+10h] BYREF
 
   in_rItem = in_pPendingAction;
-  v2 = in_pPendingAction;
   in_pPendingAction->LaunchTick += this->m_uBufferTick - in_pPendingAction->PausedTick;
   if ( (unsigned int)CAkMultiKeyList<unsigned long,AkPendingAction *,2>::Insert(
                        &this->m_mmapPending,
                        in_pPendingAction->LaunchTick,
                        &in_rItem) != 1 )
   {
-    v3 = (CAkActionPlayAndContinue *)v2->pAction;
-    v6 = 0;
-    v4 = v3->m_eActionType;
-    if ( v4 != 1027 )
+    pAction = (CAkActionPlayAndContinue *)in_pPendingAction->pAction;
+    v6[0] = 0;
+    m_eActionType = pAction->m_eActionType;
+    if ( m_eActionType != 1027 )
     {
-      if ( v4 != 1283 )
+      if ( m_eActionType != 1283 )
       {
 LABEL_6:
-        CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, v2->UserParam.m_PlayingID);
-        ((void (__cdecl *)(CAkAction *))v2->pAction->vfptr->Release)(v2->pAction);
+        CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, in_pPendingAction->UserParam.m_PlayingID);
+        in_pPendingAction->pAction->vfptr->Release(in_pPendingAction->pAction);
         v5 = g_DefaultPoolId;
-        ((void (__fastcall *)(AkPendingAction *, _QWORD))v2->vfptr[1].TransUpdateValue)(v2, 0i64);
-        AK::MemoryMgr::Free(v5, v2);
+        ((void (__fastcall *)(AkPendingAction *, _QWORD))in_pPendingAction->vfptr[1].TransUpdateValue)(
+          in_pPendingAction,
+          0i64);
+        AK::MemoryMgr::Free(v5, in_pPendingAction);
         return;
       }
-      CAkActionPlayAndContinue::NeedNotifyDelay(v3);
+      CAkActionPlayAndContinue::NeedNotifyDelay(pAction);
     }
-    ((void (__fastcall *)(CAkAction *, int *))v2->pAction->vfptr[2].Category)(v2->pAction, &v6);
+    ((void (__fastcall *)(CAkAction *, int *))in_pPendingAction->pAction->vfptr[2].Category)(
+      in_pPendingAction->pAction,
+      v6);
     goto LABEL_6;
   }
 }
 
 // File Line: 1770
 // RVA: 0xA47920
-signed __int64 __fastcall CAkAudioMgr::BreakPendingAction(CAkAudioMgr *this, CAkParameterNodeBase *in_pNodeToTarget, CAkRegisteredObj *in_GameObj, unsigned int in_PlayingID)
+__int64 __fastcall CAkAudioMgr::BreakPendingAction(
+        CAkAudioMgr *this,
+        CAkParameterNodeBase *in_pNodeToTarget,
+        CAkRegisteredObj *in_GameObj,
+        unsigned int in_PlayingID)
 {
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v4; // rbx
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rbx
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v5; // r15
-  unsigned int v6; // er13
-  CAkParameterNodeBase *v7; // rdi
-  CAkAudioMgr *v8; // rbp
-  AkPendingAction *v9; // rsi
-  CAkAction *v10; // r12
+  AkPendingAction *item; // rsi
+  CAkAction *pAction; // r12
   CAkParameterNodeBase *v11; // rax
   CAkParameterNodeBase *v12; // r14
-  CAkParameterNodeBase *v13; // rdx
-  CAkParameterNodeBase *v14; // rcx
-  int v15; // eax
+  CAkParameterNodeBase *m_pParentNode; // rdx
+  CAkParameterNodeBase *m_pBusOutputNode; // rcx
+  int m_eActionType; // eax
   CAkActionPlayAndContinue *v16; // rcx
   int v17; // eax
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v18; // rax
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *pNextListItem; // rax
   int v19; // ebx
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v20; // rbx
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v21; // r15
@@ -1828,81 +1817,80 @@ signed __int64 __fastcall CAkAudioMgr::BreakPendingAction(CAkAudioMgr *this, CAk
   int v30; // eax
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v31; // rax
   int v32; // ebx
-  __m128i v33; // [rsp+20h] [rbp-98h]
-  __m128i v34; // [rsp+30h] [rbp-88h]
-  int v35; // [rsp+40h] [rbp-78h]
-  CAkRegisteredObj *v36; // [rsp+D0h] [rbp+18h]
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v33; // [rsp+20h] [rbp-98h]
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v34; // [rsp+30h] [rbp-88h]
+  int v35[20]; // [rsp+40h] [rbp-78h] BYREF
 
-  v36 = in_GameObj;
-  v4 = this->m_mmapPending.m_pFirst;
+  m_pFirst = this->m_mmapPending.m_pFirst;
   v5 = 0i64;
-  v6 = in_PlayingID;
-  v7 = in_pNodeToTarget;
-  v8 = this;
-  if ( v4 )
+  if ( m_pFirst )
   {
     while ( 1 )
     {
-      v9 = v4->Item.item;
-      v10 = v9->pAction;
-      v11 = CAkAction::GetAndRefTarget(v9->pAction);
+      item = m_pFirst->Item.item;
+      pAction = item->pAction;
+      v11 = CAkAction::GetAndRefTarget(pAction);
       v12 = v11;
-      if ( v7 )
+      if ( in_pNodeToTarget )
       {
         if ( !v11 )
           goto LABEL_22;
-        if ( v7 != v11 )
+        if ( in_pNodeToTarget != v11 )
         {
-          v13 = v11->m_pParentNode;
-          v14 = v11->m_pBusOutputNode;
-          if ( v13 )
+          m_pParentNode = v11->m_pParentNode;
+          m_pBusOutputNode = v11->m_pBusOutputNode;
+          if ( m_pParentNode )
           {
-            while ( v7 != v13 )
+            while ( in_pNodeToTarget != m_pParentNode )
             {
-              if ( !v14 )
-                v14 = v13->m_pBusOutputNode;
-              v13 = v13->m_pParentNode;
-              if ( !v13 )
+              if ( !m_pBusOutputNode )
+                m_pBusOutputNode = m_pParentNode->m_pBusOutputNode;
+              m_pParentNode = m_pParentNode->m_pParentNode;
+              if ( !m_pParentNode )
                 goto LABEL_10;
             }
           }
           else
           {
 LABEL_10:
-            if ( !v14 )
+            if ( !m_pBusOutputNode )
               goto LABEL_22;
-            while ( v7 != v14 )
+            while ( in_pNodeToTarget != m_pBusOutputNode )
             {
-              v14 = v14->m_pBusOutputNode;
-              if ( !v14 )
+              m_pBusOutputNode = m_pBusOutputNode->m_pBusOutputNode;
+              if ( !m_pBusOutputNode )
               {
-                v5 = v4;
-                v4 = v4->pNextListItem;
+                v5 = m_pFirst;
+                m_pFirst = m_pFirst->pNextListItem;
                 goto LABEL_33;
               }
             }
           }
         }
       }
-      if ( v36 && v36 != v9->pGameObj )
+      if ( in_GameObj && in_GameObj != item->pGameObj )
         goto LABEL_22;
-      if ( !v6 || v6 == v9->UserParam.m_PlayingID )
+      if ( !in_PlayingID || in_PlayingID == item->UserParam.m_PlayingID )
         break;
-      v5 = v4;
-      v4 = v4->pNextListItem;
+      v5 = m_pFirst;
+      m_pFirst = m_pFirst->pNextListItem;
 LABEL_33:
       if ( v12 )
-        v12->vfptr->Release((CAkIndexable *)&v12->vfptr);
-      if ( !v4 )
+        v12->vfptr->Release(v12);
+      if ( !m_pFirst )
         goto LABEL_36;
     }
-    v15 = v10->m_eActionType;
-    if ( v15 == 1027
-      || v15 == 1283
-      && CAkActionPlayAndContinue::BreakToNode((CAkActionPlayAndContinue *)v9->pAction, v7, v9->pGameObj, v9) )
+    m_eActionType = pAction->m_eActionType;
+    if ( m_eActionType == 1027
+      || m_eActionType == 1283
+      && CAkActionPlayAndContinue::BreakToNode(
+           (CAkActionPlayAndContinue *)item->pAction,
+           in_pNodeToTarget,
+           item->pGameObj,
+           item) )
     {
-      v16 = (CAkActionPlayAndContinue *)v9->pAction;
-      v35 = 0;
+      v16 = (CAkActionPlayAndContinue *)item->pAction;
+      v35[0] = 0;
       v17 = v16->m_eActionType;
       if ( v17 == 1027 )
         goto LABEL_26;
@@ -1910,55 +1898,52 @@ LABEL_33:
       {
         CAkActionPlayAndContinue::NeedNotifyDelay(v16);
 LABEL_26:
-        ((void (__fastcall *)(CAkAction *, int *))v9->pAction->vfptr[2].Category)(v9->pAction, &v35);
+        ((void (__fastcall *)(CAkAction *, int *))item->pAction->vfptr[2].Category)(item->pAction, v35);
       }
-      CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, v9->UserParam.m_PlayingID);
-      v18 = v4->pNextListItem;
-      v33.m128i_i64[1] = (__int64)v5;
-      v33.m128i_i64[0] = (__int64)v18;
-      if ( v4 == v8->m_mmapPending.m_pFirst )
-        v8->m_mmapPending.m_pFirst = v18;
+      CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, item->UserParam.m_PlayingID);
+      pNextListItem = m_pFirst->pNextListItem;
+      v33 = m_pFirst->pNextListItem;
+      if ( m_pFirst == this->m_mmapPending.m_pFirst )
+        this->m_mmapPending.m_pFirst = pNextListItem;
       else
-        v5->pNextListItem = v18;
-      if ( v4 == v8->m_mmapPending.m_pLast )
-        v8->m_mmapPending.m_pLast = v5;
-      v4->pNextListItem = v8->m_mmapPending.m_pFree;
-      --v8->m_mmapPending.m_ulNumListItems;
-      v8->m_mmapPending.m_pFree = v4;
-      ((void (*)(void))v9->pAction->vfptr->Release)();
+        v5->pNextListItem = pNextListItem;
+      if ( m_pFirst == this->m_mmapPending.m_pLast )
+        this->m_mmapPending.m_pLast = v5;
+      m_pFirst->pNextListItem = this->m_mmapPending.m_pFree;
+      --this->m_mmapPending.m_ulNumListItems;
+      this->m_mmapPending.m_pFree = m_pFirst;
+      item->pAction->vfptr->Release(item->pAction);
       v19 = g_DefaultPoolId;
-      ((void (__fastcall *)(AkPendingAction *, _QWORD))v9->vfptr[1].TransUpdateValue)(v9, 0i64);
-      AK::MemoryMgr::Free(v19, v9);
-      _mm_store_si128(&v34, v33);
-      v5 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v34.m128i_i64[1];
-      v4 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v34.m128i_i64[0];
+      ((void (__fastcall *)(AkPendingAction *, _QWORD))item->vfptr[1].TransUpdateValue)(item, 0i64);
+      AK::MemoryMgr::Free(v19, item);
+      m_pFirst = v33;
       goto LABEL_33;
     }
 LABEL_22:
-    v5 = v4;
-    v4 = v4->pNextListItem;
+    v5 = m_pFirst;
+    m_pFirst = m_pFirst->pNextListItem;
     goto LABEL_33;
   }
 LABEL_36:
-  v20 = v8->m_mmapPausedPending.m_pFirst;
+  v20 = this->m_mmapPausedPending.m_pFirst;
   v21 = 0i64;
   while ( v20 )
   {
     v22 = v20->Item.item;
     v23 = v22->pAction;
-    v24 = CAkAction::GetAndRefTarget(v22->pAction);
+    v24 = CAkAction::GetAndRefTarget(v23);
     v25 = v24;
-    if ( v7 )
+    if ( in_pNodeToTarget )
     {
       if ( !v24 )
         goto LABEL_48;
-      if ( v7 != v24 )
+      if ( in_pNodeToTarget != v24 )
       {
         v26 = v24->m_pParentNode;
         v27 = v24->m_pBusOutputNode;
         if ( v26 )
         {
-          while ( v7 != v26 )
+          while ( in_pNodeToTarget != v26 )
           {
             if ( !v27 )
               v27 = v26->m_pBusOutputNode;
@@ -1972,7 +1957,7 @@ LABEL_36:
 LABEL_45:
           if ( !v27 )
             goto LABEL_48;
-          while ( v7 != v27 )
+          while ( in_pNodeToTarget != v27 )
           {
             v27 = v27->m_pBusOutputNode;
             if ( !v27 )
@@ -1981,13 +1966,17 @@ LABEL_45:
         }
       }
     }
-    if ( (!v36 || v36 == v22->pGameObj)
-      && (!v6 || v6 == v22->UserParam.m_PlayingID)
+    if ( (!in_GameObj || in_GameObj == v22->pGameObj)
+      && (!in_PlayingID || in_PlayingID == v22->UserParam.m_PlayingID)
       && v23->m_eActionType == 1283
-      && CAkActionPlayAndContinue::BreakToNode((CAkActionPlayAndContinue *)v22->pAction, v7, v22->pGameObj, v22) )
+      && CAkActionPlayAndContinue::BreakToNode(
+           (CAkActionPlayAndContinue *)v22->pAction,
+           in_pNodeToTarget,
+           v22->pGameObj,
+           v22) )
     {
       v29 = (CAkActionPlayAndContinue *)v22->pAction;
-      v35 = 0;
+      v35[0] = 0;
       v30 = v29->m_eActionType;
       if ( v30 == 1027 )
         goto LABEL_62;
@@ -1995,28 +1984,25 @@ LABEL_45:
       {
         CAkActionPlayAndContinue::NeedNotifyDelay(v29);
 LABEL_62:
-        ((void (__fastcall *)(CAkAction *, int *))v22->pAction->vfptr[2].Category)(v22->pAction, &v35);
+        ((void (__fastcall *)(CAkAction *, int *))v22->pAction->vfptr[2].Category)(v22->pAction, v35);
       }
       CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, v22->UserParam.m_PlayingID);
       v31 = v20->pNextListItem;
-      v34.m128i_i64[1] = (__int64)v21;
-      v34.m128i_i64[0] = (__int64)v31;
-      if ( v20 == v8->m_mmapPausedPending.m_pFirst )
-        v8->m_mmapPausedPending.m_pFirst = v31;
+      v34 = v20->pNextListItem;
+      if ( v20 == this->m_mmapPausedPending.m_pFirst )
+        this->m_mmapPausedPending.m_pFirst = v31;
       else
         v21->pNextListItem = v31;
-      if ( v20 == v8->m_mmapPausedPending.m_pLast )
-        v8->m_mmapPausedPending.m_pLast = v21;
-      v20->pNextListItem = v8->m_mmapPausedPending.m_pFree;
-      --v8->m_mmapPausedPending.m_ulNumListItems;
-      v8->m_mmapPausedPending.m_pFree = v20;
-      ((void (*)(void))v22->pAction->vfptr->Release)();
+      if ( v20 == this->m_mmapPausedPending.m_pLast )
+        this->m_mmapPausedPending.m_pLast = v21;
+      v20->pNextListItem = this->m_mmapPausedPending.m_pFree;
+      --this->m_mmapPausedPending.m_ulNumListItems;
+      this->m_mmapPausedPending.m_pFree = v20;
+      v22->pAction->vfptr->Release(v22->pAction);
       v32 = g_DefaultPoolId;
       ((void (__fastcall *)(AkPendingAction *, _QWORD))v22->vfptr[1].TransUpdateValue)(v22, 0i64);
       AK::MemoryMgr::Free(v32, v22);
-      _mm_store_si128(&v33, v34);
-      v21 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v33.m128i_i64[1];
-      v20 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v33.m128i_i64[0];
+      v20 = v34;
       goto LABEL_49;
     }
 LABEL_48:
@@ -2024,32 +2010,34 @@ LABEL_48:
     v20 = v20->pNextListItem;
 LABEL_49:
     if ( v25 )
-      v25->vfptr->Release((CAkIndexable *)&v25->vfptr);
+      v25->vfptr->Release(v25);
   }
   return 1i64;
-}Item;
+}  v21 = v20;
+    v20 = v20->pNextListItem;
 LABEL_49:
     if ( v25 )
-      v25->vfptr->Release((CAkIndexable *)&v25->vfptr);
+      v25->vfptr->Release(v25);
   }
   return 1i64;
 }
 
 // File Line: 1873
 // RVA: 0xA4B960
-signed __int64 __fastcall CAkAudioMgr::StopPendingAction(CAkAudioMgr *this, CAkParameterNodeBase *in_pNodeToTarget, CAkRegisteredObj *in_GameObj, unsigned int in_PlayingID)
+__int64 __fastcall CAkAudioMgr::StopPendingAction(
+        CAkAudioMgr *this,
+        CAkParameterNodeBase *in_pNodeToTarget,
+        CAkRegisteredObj *in_GameObj,
+        unsigned int in_PlayingID)
 {
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v4; // rbx
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rbx
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v5; // r15
-  unsigned int v6; // er13
-  CAkParameterNodeBase *v7; // rdi
-  CAkAudioMgr *v8; // rbp
-  AkPendingAction *v9; // r14
-  CAkAction *v10; // r12
+  AkPendingAction *item; // r14
+  CAkAction *pAction; // r12
   CAkParameterNodeBase *v11; // rax
   CAkParameterNodeBase *v12; // rsi
-  CAkParameterNodeBase *v13; // rdx
-  CAkParameterNodeBase *v14; // rcx
+  CAkParameterNodeBase *m_pParentNode; // rdx
+  CAkParameterNodeBase *m_pBusOutputNode; // rcx
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v15; // rbx
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v16; // r15
   AkPendingAction *v17; // r14
@@ -2059,124 +2047,118 @@ signed __int64 __fastcall CAkAudioMgr::StopPendingAction(CAkAudioMgr *this, CAkP
   CAkParameterNodeBase *v21; // rdx
   CAkParameterNodeBase *v22; // rcx
   CAkActionPlayAndContinue *v24; // rcx
-  int v25; // eax
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v26; // rax
+  int m_eActionType; // eax
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *pNextListItem; // rax
   int v27; // ebx
   CAkActionPlayAndContinue *v28; // rcx
   int v29; // eax
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v30; // rax
   int v31; // ebx
-  __m128i v32; // [rsp+20h] [rbp-98h]
-  __m128i v33; // [rsp+30h] [rbp-88h]
-  int v34; // [rsp+40h] [rbp-78h]
-  CAkRegisteredObj *v35; // [rsp+D0h] [rbp+18h]
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v32; // [rsp+20h] [rbp-98h]
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v33; // [rsp+30h] [rbp-88h]
+  int v34[20]; // [rsp+40h] [rbp-78h] BYREF
 
-  v35 = in_GameObj;
-  v4 = this->m_mmapPending.m_pFirst;
+  m_pFirst = this->m_mmapPending.m_pFirst;
   v5 = 0i64;
-  v6 = in_PlayingID;
-  v7 = in_pNodeToTarget;
-  v8 = this;
-  while ( v4 )
+  while ( m_pFirst )
   {
-    v9 = v4->Item.item;
-    v10 = v9->pAction;
-    v11 = CAkAction::GetAndRefTarget(v9->pAction);
+    item = m_pFirst->Item.item;
+    pAction = item->pAction;
+    v11 = CAkAction::GetAndRefTarget(pAction);
     v12 = v11;
-    if ( v7 )
+    if ( in_pNodeToTarget )
     {
       if ( !v11 )
         goto LABEL_13;
-      if ( v7 != v11 )
+      if ( in_pNodeToTarget != v11 )
       {
-        v13 = v11->m_pParentNode;
-        v14 = v11->m_pBusOutputNode;
-        if ( v13 )
+        m_pParentNode = v11->m_pParentNode;
+        m_pBusOutputNode = v11->m_pBusOutputNode;
+        if ( m_pParentNode )
         {
-          while ( v7 != v13 )
+          while ( in_pNodeToTarget != m_pParentNode )
           {
-            if ( !v14 )
-              v14 = v13->m_pBusOutputNode;
-            v13 = v13->m_pParentNode;
-            if ( !v13 )
+            if ( !m_pBusOutputNode )
+              m_pBusOutputNode = m_pParentNode->m_pBusOutputNode;
+            m_pParentNode = m_pParentNode->m_pParentNode;
+            if ( !m_pParentNode )
               goto LABEL_10;
           }
         }
         else
         {
 LABEL_10:
-          if ( !v14 )
+          if ( !m_pBusOutputNode )
             goto LABEL_13;
-          while ( v7 != v14 )
+          while ( in_pNodeToTarget != m_pBusOutputNode )
           {
-            v14 = v14->m_pBusOutputNode;
-            if ( !v14 )
+            m_pBusOutputNode = m_pBusOutputNode->m_pBusOutputNode;
+            if ( !m_pBusOutputNode )
               goto LABEL_13;
           }
         }
       }
     }
-    if ( (!v35 || v35 == v9->pGameObj) && (!v6 || v6 == v9->UserParam.m_PlayingID) && v10->m_eActionType != 6176 )
+    if ( (!in_GameObj || in_GameObj == item->pGameObj)
+      && (!in_PlayingID || in_PlayingID == item->UserParam.m_PlayingID)
+      && pAction->m_eActionType != 6176 )
     {
-      v24 = (CAkActionPlayAndContinue *)v9->pAction;
-      v34 = 0;
-      v25 = v24->m_eActionType;
-      if ( v25 == 1027 )
+      v24 = (CAkActionPlayAndContinue *)item->pAction;
+      v34[0] = 0;
+      m_eActionType = v24->m_eActionType;
+      if ( m_eActionType == 1027 )
         goto LABEL_42;
-      if ( v25 == 1283 )
+      if ( m_eActionType == 1283 )
       {
         CAkActionPlayAndContinue::NeedNotifyDelay(v24);
 LABEL_42:
-        ((void (__fastcall *)(CAkAction *, int *))v9->pAction->vfptr[2].Category)(v9->pAction, &v34);
+        ((void (__fastcall *)(CAkAction *, int *))item->pAction->vfptr[2].Category)(item->pAction, v34);
       }
-      CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, v9->UserParam.m_PlayingID);
-      v26 = v4->pNextListItem;
-      v32.m128i_i64[1] = (__int64)v5;
-      v32.m128i_i64[0] = (__int64)v26;
-      if ( v4 == v8->m_mmapPending.m_pFirst )
-        v8->m_mmapPending.m_pFirst = v26;
+      CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, item->UserParam.m_PlayingID);
+      pNextListItem = m_pFirst->pNextListItem;
+      v32 = m_pFirst->pNextListItem;
+      if ( m_pFirst == this->m_mmapPending.m_pFirst )
+        this->m_mmapPending.m_pFirst = pNextListItem;
       else
-        v5->pNextListItem = v26;
-      if ( v4 == v8->m_mmapPending.m_pLast )
-        v8->m_mmapPending.m_pLast = v5;
-      v4->pNextListItem = v8->m_mmapPending.m_pFree;
-      --v8->m_mmapPending.m_ulNumListItems;
-      v8->m_mmapPending.m_pFree = v4;
-      ((void (*)(void))v9->pAction->vfptr->Release)();
+        v5->pNextListItem = pNextListItem;
+      if ( m_pFirst == this->m_mmapPending.m_pLast )
+        this->m_mmapPending.m_pLast = v5;
+      m_pFirst->pNextListItem = this->m_mmapPending.m_pFree;
+      --this->m_mmapPending.m_ulNumListItems;
+      this->m_mmapPending.m_pFree = m_pFirst;
+      item->pAction->vfptr->Release(item->pAction);
       v27 = g_DefaultPoolId;
-      ((void (__fastcall *)(AkPendingAction *, _QWORD))v9->vfptr[1].TransUpdateValue)(v9, 0i64);
-      AK::MemoryMgr::Free(v27, v9);
-      _mm_store_si128(&v33, v32);
-      v5 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v33.m128i_i64[1];
-      v4 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v33.m128i_i64[0];
+      ((void (__fastcall *)(AkPendingAction *, _QWORD))item->vfptr[1].TransUpdateValue)(item, 0i64);
+      AK::MemoryMgr::Free(v27, item);
+      m_pFirst = v32;
       goto LABEL_14;
     }
 LABEL_13:
-    v5 = v4;
-    v4 = v4->pNextListItem;
+    v5 = m_pFirst;
+    m_pFirst = m_pFirst->pNextListItem;
 LABEL_14:
     if ( v12 )
-      v12->vfptr->Release((CAkIndexable *)&v12->vfptr);
+      v12->vfptr->Release(v12);
   }
-  v15 = v8->m_mmapPausedPending.m_pFirst;
+  v15 = this->m_mmapPausedPending.m_pFirst;
   v16 = 0i64;
   while ( v15 )
   {
     v17 = v15->Item.item;
     v18 = v17->pAction;
-    v19 = CAkAction::GetAndRefTarget(v17->pAction);
+    v19 = CAkAction::GetAndRefTarget(v18);
     v20 = v19;
-    if ( v7 )
+    if ( in_pNodeToTarget )
     {
       if ( !v19 )
         goto LABEL_29;
-      if ( v7 != v19 )
+      if ( in_pNodeToTarget != v19 )
       {
         v21 = v19->m_pParentNode;
         v22 = v19->m_pBusOutputNode;
         if ( v21 )
         {
-          while ( v7 != v21 )
+          while ( in_pNodeToTarget != v21 )
           {
             if ( !v22 )
               v22 = v21->m_pBusOutputNode;
@@ -2190,7 +2172,7 @@ LABEL_14:
 LABEL_26:
           if ( !v22 )
             goto LABEL_29;
-          while ( v7 != v22 )
+          while ( in_pNodeToTarget != v22 )
           {
             v22 = v22->m_pBusOutputNode;
             if ( !v22 )
@@ -2199,10 +2181,12 @@ LABEL_26:
         }
       }
     }
-    if ( (!v35 || v35 == v17->pGameObj) && (!v6 || v6 == v17->UserParam.m_PlayingID) && v18->m_eActionType != 6176 )
+    if ( (!in_GameObj || in_GameObj == v17->pGameObj)
+      && (!in_PlayingID || in_PlayingID == v17->UserParam.m_PlayingID)
+      && v18->m_eActionType != 6176 )
     {
       v28 = (CAkActionPlayAndContinue *)v17->pAction;
-      v34 = 0;
+      v34[0] = 0;
       v29 = v28->m_eActionType;
       if ( v29 == 1027 )
         goto LABEL_57;
@@ -2210,28 +2194,25 @@ LABEL_26:
       {
         CAkActionPlayAndContinue::NeedNotifyDelay(v28);
 LABEL_57:
-        ((void (__fastcall *)(CAkAction *, int *))v17->pAction->vfptr[2].Category)(v17->pAction, &v34);
+        ((void (__fastcall *)(CAkAction *, int *))v17->pAction->vfptr[2].Category)(v17->pAction, v34);
       }
       CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, v17->UserParam.m_PlayingID);
       v30 = v15->pNextListItem;
-      v33.m128i_i64[1] = (__int64)v16;
-      v33.m128i_i64[0] = (__int64)v30;
-      if ( v15 == v8->m_mmapPausedPending.m_pFirst )
-        v8->m_mmapPausedPending.m_pFirst = v30;
+      v33 = v15->pNextListItem;
+      if ( v15 == this->m_mmapPausedPending.m_pFirst )
+        this->m_mmapPausedPending.m_pFirst = v30;
       else
         v16->pNextListItem = v30;
-      if ( v15 == v8->m_mmapPausedPending.m_pLast )
-        v8->m_mmapPausedPending.m_pLast = v16;
-      v15->pNextListItem = v8->m_mmapPausedPending.m_pFree;
-      --v8->m_mmapPausedPending.m_ulNumListItems;
-      v8->m_mmapPausedPending.m_pFree = v15;
-      ((void (*)(void))v17->pAction->vfptr->Release)();
+      if ( v15 == this->m_mmapPausedPending.m_pLast )
+        this->m_mmapPausedPending.m_pLast = v16;
+      v15->pNextListItem = this->m_mmapPausedPending.m_pFree;
+      --this->m_mmapPausedPending.m_ulNumListItems;
+      this->m_mmapPausedPending.m_pFree = v15;
+      v17->pAction->vfptr->Release(v17->pAction);
       v31 = g_DefaultPoolId;
       ((void (__fastcall *)(AkPendingAction *, _QWORD))v17->vfptr[1].TransUpdateValue)(v17, 0i64);
       AK::MemoryMgr::Free(v31, v17);
-      _mm_store_si128(&v32, v33);
-      v16 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v32.m128i_i64[1];
-      v15 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v32.m128i_i64[0];
+      v15 = v33;
       goto LABEL_30;
     }
 LABEL_29:
@@ -2239,186 +2220,173 @@ LABEL_29:
     v15 = v15->pNextListItem;
 LABEL_30:
     if ( v20 )
-      v20->vfptr->Release((CAkIndexable *)&v20->vfptr);
+      v20->vfptr->Release(v20);
   }
   return 1i64;
 }
 
 // File Line: 1947
 // RVA: 0xA48A40
-void __fastcall CAkAudioMgr::PausePendingActionAllExcept(CAkAudioMgr *this, CAkRegisteredObj *in_GameObj, AkArray<WwiseObjectIDext,WwiseObjectIDext const &,ArrayPoolDefault,4,AkArrayAllocatorDefault> *in_pExceptionList, bool in_bIsMasterOnResume, unsigned int in_PlayingID)
+void __fastcall CAkAudioMgr::PausePendingActionAllExcept(
+        CAkAudioMgr *this,
+        CAkRegisteredObj *in_GameObj,
+        AkArray<WwiseObjectIDext,WwiseObjectIDext const &,ArrayPoolDefault,4,AkArrayAllocatorDefault> *in_pExceptionList,
+        bool in_bIsMasterOnResume,
+        unsigned int in_PlayingID)
 {
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v5; // rbx
-  CAkRegisteredObj *v6; // r15
-  CAkAudioMgr *v7; // rsi
-  bool i; // r13
-  AkPendingAction *v9; // rdi
-  CAkAction *v10; // rbp
-  char v11; // al
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v12; // rbx
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *i; // rbx
+  AkPendingAction *item; // rdi
+  CAkAction *pAction; // rbp
+  char IsAnException; // al
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rbx
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *j; // rdi
   AkPendingAction *v14; // rbp
   CAkAction *v15; // r14
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v16; // rax
-  __m128i v17; // [rsp+20h] [rbp-48h]
-  __m128i v18; // [rsp+30h] [rbp-38h]
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *pNextListItem; // rax
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v17; // [rsp+20h] [rbp-48h]
   AkArray<WwiseObjectIDext,WwiseObjectIDext const &,ArrayPoolDefault,4,AkArrayAllocatorDefault> *in_pExceptionLista; // [rsp+80h] [rbp+18h]
 
   in_pExceptionLista = in_pExceptionList;
-  v5 = this->m_mmapPausedPending.m_pFirst;
-  v6 = in_GameObj;
-  v7 = this;
-  for ( i = in_bIsMasterOnResume; v5; v5 = v5->pNextListItem )
+  for ( i = this->m_mmapPausedPending.m_pFirst; i; i = i->pNextListItem )
   {
-    v9 = v5->Item.item;
-    v10 = v9->pAction;
-    if ( ((v10->m_eActionType & 0xFF00) != 768 || i)
-      && (!v6 || v6 == v9->pGameObj)
-      && (!in_PlayingID || in_PlayingID == v9->UserParam.m_PlayingID) )
+    item = i->Item.item;
+    pAction = item->pAction;
+    if ( ((pAction->m_eActionType & 0xFF00) != 768 || in_bIsMasterOnResume)
+      && (!in_GameObj || in_GameObj == item->pGameObj)
+      && (!in_PlayingID || in_PlayingID == item->UserParam.m_PlayingID) )
     {
-      v11 = CAkAudioMgr::IsAnException(v7, v9->pAction, in_pExceptionList);
+      IsAnException = CAkAudioMgr::IsAnException(this, item->pAction, in_pExceptionList);
       in_pExceptionList = in_pExceptionLista;
-      if ( !v11 && v10->m_eActionType != 6176 )
-        ++v9->ulPauseCount;
+      if ( !IsAnException && pAction->m_eActionType != 6176 )
+        ++item->ulPauseCount;
     }
   }
-  v12 = v7->m_mmapPending.m_pFirst;
-  for ( j = 0i64; v12; in_pExceptionList = in_pExceptionLista )
+  m_pFirst = this->m_mmapPending.m_pFirst;
+  for ( j = 0i64; m_pFirst; in_pExceptionList = in_pExceptionLista )
   {
-    v14 = v12->Item.item;
+    v14 = m_pFirst->Item.item;
     v15 = v14->pAction;
-    if ( (v15->m_eActionType & 0xFF00) == 768 && !i
-      || v6 && v6 != v14->pGameObj
+    if ( (v15->m_eActionType & 0xFF00) == 768 && !in_bIsMasterOnResume
+      || in_GameObj && in_GameObj != v14->pGameObj
       || in_PlayingID && in_PlayingID != v14->UserParam.m_PlayingID
-      || CAkAudioMgr::IsAnException(v7, v14->pAction, in_pExceptionList)
+      || CAkAudioMgr::IsAnException(this, v14->pAction, in_pExceptionList)
       || v15->m_eActionType == 6176 )
     {
-      j = v12;
-      v12 = v12->pNextListItem;
+      j = m_pFirst;
+      m_pFirst = m_pFirst->pNextListItem;
     }
     else
     {
-      CAkAudioMgr::InsertAsPaused(v7, v15->m_ulElementID, v14, 0);
-      v16 = v12->pNextListItem;
-      v17.m128i_i64[1] = (__int64)j;
-      v17.m128i_i64[0] = (__int64)v12->pNextListItem;
-      if ( v12 == v7->m_mmapPending.m_pFirst )
-        v7->m_mmapPending.m_pFirst = v16;
+      CAkAudioMgr::InsertAsPaused(this, v15->m_ulElementID, v14, 0);
+      pNextListItem = m_pFirst->pNextListItem;
+      v17 = m_pFirst->pNextListItem;
+      if ( m_pFirst == this->m_mmapPending.m_pFirst )
+        this->m_mmapPending.m_pFirst = pNextListItem;
       else
-        j->pNextListItem = v16;
-      if ( v12 == v7->m_mmapPending.m_pLast )
-        v7->m_mmapPending.m_pLast = j;
-      v12->pNextListItem = v7->m_mmapPending.m_pFree;
-      --v7->m_mmapPending.m_ulNumListItems;
-      _mm_store_si128(&v18, v17);
-      j = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v18.m128i_i64[1];
-      v7->m_mmapPending.m_pFree = v12;
-      v12 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v18.m128i_i64[0];
+        j->pNextListItem = pNextListItem;
+      if ( m_pFirst == this->m_mmapPending.m_pLast )
+        this->m_mmapPending.m_pLast = j;
+      m_pFirst->pNextListItem = this->m_mmapPending.m_pFree;
+      --this->m_mmapPending.m_ulNumListItems;
+      this->m_mmapPending.m_pFree = m_pFirst;
+      m_pFirst = v17;
     }
   }
 }
 
 // File Line: 2010
 // RVA: 0xA4BCE0
-signed __int64 __fastcall CAkAudioMgr::StopPendingActionAllExcept(CAkAudioMgr *this, CAkRegisteredObj *in_GameObj, AkArray<WwiseObjectIDext,WwiseObjectIDext const &,ArrayPoolDefault,4,AkArrayAllocatorDefault> *in_pExceptionList, unsigned int in_PlayingID)
+__int64 __fastcall CAkAudioMgr::StopPendingActionAllExcept(
+        CAkAudioMgr *this,
+        CAkRegisteredObj *in_GameObj,
+        AkArray<WwiseObjectIDext,WwiseObjectIDext const &,ArrayPoolDefault,4,AkArrayAllocatorDefault> *in_pExceptionList,
+        unsigned int in_PlayingID)
 {
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v4; // rdi
-  unsigned int v5; // ebp
-  AkArray<WwiseObjectIDext,WwiseObjectIDext const &,ArrayPoolDefault,4,AkArrayAllocatorDefault> *v6; // r12
-  CAkRegisteredObj *v7; // r15
-  CAkAudioMgr *v8; // rbx
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rdi
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v9; // r14
-  AkPendingAction *v10; // rsi
-  CAkActionPlayAndContinue *v11; // rcx
-  int v12; // eax
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v13; // rax
+  AkPendingAction *item; // rsi
+  CAkActionPlayAndContinue *pAction; // rcx
+  unsigned __int16 m_eActionType; // ax
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *pNextListItem; // rax
   int v14; // edi
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v15; // rdi
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v16; // r14
   AkPendingAction *v17; // rsi
   CAkActionPlayAndContinue *v18; // rcx
-  int v19; // eax
+  unsigned __int16 v19; // ax
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v20; // rax
   int v21; // edi
-  __m128i v23; // [rsp+20h] [rbp-98h]
-  __m128i v24; // [rsp+30h] [rbp-88h]
-  int v25; // [rsp+40h] [rbp-78h]
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v23; // [rsp+20h] [rbp-98h]
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v24; // [rsp+30h] [rbp-88h]
+  int v25[20]; // [rsp+40h] [rbp-78h] BYREF
 
-  v4 = this->m_mmapPending.m_pFirst;
-  v5 = in_PlayingID;
-  v6 = in_pExceptionList;
-  v7 = in_GameObj;
-  v8 = this;
+  m_pFirst = this->m_mmapPending.m_pFirst;
   v9 = 0i64;
-  if ( v4 )
+  if ( m_pFirst )
   {
     while ( 1 )
     {
-      v10 = v4->Item.item;
-      if ( (!v7 || v7 == v10->pGameObj)
-        && (!v5 || v5 == v10->UserParam.m_PlayingID)
-        && !CAkAudioMgr::IsAnException(v8, v10->pAction, v6) )
+      item = m_pFirst->Item.item;
+      if ( (!in_GameObj || in_GameObj == item->pGameObj)
+        && (!in_PlayingID || in_PlayingID == item->UserParam.m_PlayingID)
+        && !CAkAudioMgr::IsAnException(this, item->pAction, in_pExceptionList) )
       {
-        v11 = (CAkActionPlayAndContinue *)v10->pAction;
-        LOWORD(v12) = v11->m_eActionType;
-        if ( (_WORD)v12 != 6176 )
+        pAction = (CAkActionPlayAndContinue *)item->pAction;
+        m_eActionType = pAction->m_eActionType;
+        if ( m_eActionType != 6176 )
           break;
       }
-      v9 = v4;
-      v4 = v4->pNextListItem;
+      v9 = m_pFirst;
+      m_pFirst = m_pFirst->pNextListItem;
 LABEL_19:
-      if ( !v4 )
+      if ( !m_pFirst )
         goto LABEL_20;
     }
-    v12 = (unsigned __int16)v12;
-    v25 = 0;
-    if ( (unsigned __int16)v12 != 1027 )
+    v25[0] = 0;
+    if ( m_eActionType != 1027 )
     {
-      if ( v12 != 1283 )
+      if ( m_eActionType != 1283 )
       {
 LABEL_12:
-        CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, v10->UserParam.m_PlayingID);
-        v13 = v4->pNextListItem;
-        v23.m128i_i64[1] = (__int64)v9;
-        v23.m128i_i64[0] = (__int64)v13;
-        if ( v4 == v8->m_mmapPending.m_pFirst )
-          v8->m_mmapPending.m_pFirst = v13;
+        CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, item->UserParam.m_PlayingID);
+        pNextListItem = m_pFirst->pNextListItem;
+        v23 = m_pFirst->pNextListItem;
+        if ( m_pFirst == this->m_mmapPending.m_pFirst )
+          this->m_mmapPending.m_pFirst = pNextListItem;
         else
-          v9->pNextListItem = v13;
-        if ( v4 == v8->m_mmapPending.m_pLast )
-          v8->m_mmapPending.m_pLast = v9;
-        v4->pNextListItem = v8->m_mmapPending.m_pFree;
-        --v8->m_mmapPending.m_ulNumListItems;
-        v8->m_mmapPending.m_pFree = v4;
-        ((void (*)(void))v10->pAction->vfptr->Release)();
+          v9->pNextListItem = pNextListItem;
+        if ( m_pFirst == this->m_mmapPending.m_pLast )
+          this->m_mmapPending.m_pLast = v9;
+        m_pFirst->pNextListItem = this->m_mmapPending.m_pFree;
+        --this->m_mmapPending.m_ulNumListItems;
+        this->m_mmapPending.m_pFree = m_pFirst;
+        item->pAction->vfptr->Release(item->pAction);
         v14 = g_DefaultPoolId;
-        ((void (__fastcall *)(AkPendingAction *, _QWORD))v10->vfptr[1].TransUpdateValue)(v10, 0i64);
-        AK::MemoryMgr::Free(v14, v10);
-        _mm_store_si128(&v24, v23);
-        v9 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v24.m128i_i64[1];
-        v4 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v24.m128i_i64[0];
+        ((void (__fastcall *)(AkPendingAction *, _QWORD))item->vfptr[1].TransUpdateValue)(item, 0i64);
+        AK::MemoryMgr::Free(v14, item);
+        m_pFirst = v23;
         goto LABEL_19;
       }
-      CAkActionPlayAndContinue::NeedNotifyDelay(v11);
+      CAkActionPlayAndContinue::NeedNotifyDelay(pAction);
     }
-    ((void (__fastcall *)(CAkIndexableVtbl **, int *))v10->pAction->vfptr[2].Category)(&v10->pAction->vfptr, &v25);
+    ((void (__fastcall *)(CAkIndexableVtbl **, int *))item->pAction->vfptr[2].Category)(&item->pAction->vfptr, v25);
     goto LABEL_12;
   }
 LABEL_20:
-  v15 = v8->m_mmapPausedPending.m_pFirst;
+  v15 = this->m_mmapPausedPending.m_pFirst;
   v16 = 0i64;
   if ( v15 )
   {
     while ( 1 )
     {
       v17 = v15->Item.item;
-      if ( (!v7 || v7 == v17->pGameObj)
-        && (!v5 || v5 == v17->UserParam.m_PlayingID)
-        && !CAkAudioMgr::IsAnException(v8, v17->pAction, v6) )
+      if ( (!in_GameObj || in_GameObj == v17->pGameObj)
+        && (!in_PlayingID || in_PlayingID == v17->UserParam.m_PlayingID)
+        && !CAkAudioMgr::IsAnException(this, v17->pAction, in_pExceptionList) )
       {
         v18 = (CAkActionPlayAndContinue *)v17->pAction;
-        LOWORD(v19) = v18->m_eActionType;
-        if ( (_WORD)v19 != 6176 )
+        v19 = v18->m_eActionType;
+        if ( v19 != 6176 )
           break;
       }
       v16 = v15;
@@ -2427,38 +2395,34 @@ LABEL_38:
       if ( !v15 )
         return 1i64;
     }
-    v19 = (unsigned __int16)v19;
-    v25 = 0;
-    if ( (unsigned __int16)v19 != 1027 )
+    v25[0] = 0;
+    if ( v19 != 1027 )
     {
       if ( v19 != 1283 )
       {
 LABEL_31:
         CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, v17->UserParam.m_PlayingID);
         v20 = v15->pNextListItem;
-        v24.m128i_i64[1] = (__int64)v16;
-        v24.m128i_i64[0] = (__int64)v20;
-        if ( v15 == v8->m_mmapPausedPending.m_pFirst )
-          v8->m_mmapPausedPending.m_pFirst = v20;
+        v24 = v15->pNextListItem;
+        if ( v15 == this->m_mmapPausedPending.m_pFirst )
+          this->m_mmapPausedPending.m_pFirst = v20;
         else
           v16->pNextListItem = v20;
-        if ( v15 == v8->m_mmapPausedPending.m_pLast )
-          v8->m_mmapPausedPending.m_pLast = v16;
-        v15->pNextListItem = v8->m_mmapPausedPending.m_pFree;
-        --v8->m_mmapPausedPending.m_ulNumListItems;
-        v8->m_mmapPausedPending.m_pFree = v15;
-        ((void (*)(void))v17->pAction->vfptr->Release)();
+        if ( v15 == this->m_mmapPausedPending.m_pLast )
+          this->m_mmapPausedPending.m_pLast = v16;
+        v15->pNextListItem = this->m_mmapPausedPending.m_pFree;
+        --this->m_mmapPausedPending.m_ulNumListItems;
+        this->m_mmapPausedPending.m_pFree = v15;
+        v17->pAction->vfptr->Release(v17->pAction);
         v21 = g_DefaultPoolId;
         ((void (__fastcall *)(AkPendingAction *, _QWORD))v17->vfptr[1].TransUpdateValue)(v17, 0i64);
         AK::MemoryMgr::Free(v21, v17);
-        _mm_store_si128(&v23, v24);
-        v16 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v23.m128i_i64[1];
-        v15 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v23.m128i_i64[0];
+        v15 = v24;
         goto LABEL_38;
       }
       CAkActionPlayAndContinue::NeedNotifyDelay(v18);
     }
-    ((void (__fastcall *)(CAkIndexableVtbl **, int *))v17->pAction->vfptr[2].Category)(&v17->pAction->vfptr, &v25);
+    ((void (__fastcall *)(CAkIndexableVtbl **, int *))v17->pAction->vfptr[2].Category)(&v17->pAction->vfptr, v25);
     goto LABEL_31;
   }
   return 1i64;
@@ -2466,322 +2430,304 @@ LABEL_31:
 
 // File Line: 2073
 // RVA: 0xA4B010
-void __fastcall CAkAudioMgr::ResumePausedPendingAction(CAkAudioMgr *this, CAkParameterNodeBase *in_pNodeToTarget, CAkRegisteredObj *in_GameObj, bool in_bIsMasterOnResume, unsigned int in_PlayingID)
+void __fastcall CAkAudioMgr::ResumePausedPendingAction(
+        CAkAudioMgr *this,
+        CAkParameterNodeBase *in_pNodeToTarget,
+        CAkRegisteredObj *in_GameObj,
+        bool in_bIsMasterOnResume,
+        unsigned int in_PlayingID)
 {
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v5; // rbx
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rbx
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v6; // r15
   bool v7; // al
-  CAkRegisteredObj *v8; // r12
-  CAkParameterNodeBase *v9; // rdi
-  CAkAudioMgr *v10; // r14
-  AkPendingAction *v11; // rbp
+  AkPendingAction *item; // rbp
   CAkParameterNodeBase *v12; // rax
   CAkParameterNodeBase *v13; // rsi
-  CAkParameterNodeBase *v14; // rdx
-  CAkParameterNodeBase *v15; // rcx
-  unsigned int v16; // eax
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v17; // rax
-  __m128i v18; // [rsp+30h] [rbp-48h]
-  __m128i v19; // [rsp+40h] [rbp-38h]
-  bool v20; // [rsp+98h] [rbp+20h]
+  CAkParameterNodeBase *m_pParentNode; // rdx
+  CAkParameterNodeBase *m_pBusOutputNode; // rcx
+  unsigned int ulPauseCount; // eax
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *pNextListItem; // rax
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v18; // [rsp+30h] [rbp-48h]
 
-  v20 = in_bIsMasterOnResume;
-  v5 = this->m_mmapPausedPending.m_pFirst;
+  m_pFirst = this->m_mmapPausedPending.m_pFirst;
   v6 = 0i64;
   v7 = in_bIsMasterOnResume;
-  v8 = in_GameObj;
-  v9 = in_pNodeToTarget;
-  v10 = this;
-  if ( v5 )
+  if ( m_pFirst )
   {
     while ( 1 )
     {
-      v11 = v5->Item.item;
-      v12 = CAkAction::GetAndRefTarget(v11->pAction);
+      item = m_pFirst->Item.item;
+      v12 = CAkAction::GetAndRefTarget(item->pAction);
       v13 = v12;
-      if ( v9 )
+      if ( in_pNodeToTarget )
       {
         if ( !v12 )
           goto LABEL_18;
-        if ( v9 != v12 )
+        if ( in_pNodeToTarget != v12 )
         {
-          v14 = v12->m_pParentNode;
-          v15 = v12->m_pBusOutputNode;
-          if ( v14 )
+          m_pParentNode = v12->m_pParentNode;
+          m_pBusOutputNode = v12->m_pBusOutputNode;
+          if ( m_pParentNode )
           {
-            while ( v9 != v14 )
+            while ( in_pNodeToTarget != m_pParentNode )
             {
-              if ( !v15 )
-                v15 = v14->m_pBusOutputNode;
-              v14 = v14->m_pParentNode;
-              if ( !v14 )
+              if ( !m_pBusOutputNode )
+                m_pBusOutputNode = m_pParentNode->m_pBusOutputNode;
+              m_pParentNode = m_pParentNode->m_pParentNode;
+              if ( !m_pParentNode )
                 goto LABEL_10;
             }
           }
           else
           {
 LABEL_10:
-            if ( !v15 )
+            if ( !m_pBusOutputNode )
               goto LABEL_18;
-            while ( v9 != v15 )
+            while ( in_pNodeToTarget != m_pBusOutputNode )
             {
-              v15 = v15->m_pBusOutputNode;
-              if ( !v15 )
+              m_pBusOutputNode = m_pBusOutputNode->m_pBusOutputNode;
+              if ( !m_pBusOutputNode )
               {
-                v6 = v5;
-                v5 = v5->pNextListItem;
+                v6 = m_pFirst;
+                m_pFirst = m_pFirst->pNextListItem;
                 goto LABEL_28;
               }
             }
           }
         }
       }
-      if ( (!v8 || v8 == v11->pGameObj) && (!in_PlayingID || in_PlayingID == v11->UserParam.m_PlayingID) )
+      if ( (!in_GameObj || in_GameObj == item->pGameObj)
+        && (!in_PlayingID || in_PlayingID == item->UserParam.m_PlayingID) )
       {
-        if ( v20 || (v16 = v11->ulPauseCount) == 0 )
+        if ( in_bIsMasterOnResume || (ulPauseCount = item->ulPauseCount) == 0 )
         {
-          CAkAudioMgr::TransferToPending(v10, v11);
-          v17 = v5->pNextListItem;
-          v18.m128i_i64[1] = (__int64)v6;
-          v18.m128i_i64[0] = (__int64)v5->pNextListItem;
-          if ( v5 == v10->m_mmapPausedPending.m_pFirst )
-            v10->m_mmapPausedPending.m_pFirst = v17;
+          CAkAudioMgr::TransferToPending(this, item);
+          pNextListItem = m_pFirst->pNextListItem;
+          v18 = m_pFirst->pNextListItem;
+          if ( m_pFirst == this->m_mmapPausedPending.m_pFirst )
+            this->m_mmapPausedPending.m_pFirst = pNextListItem;
           else
-            v6->pNextListItem = v17;
-          if ( v5 == v10->m_mmapPausedPending.m_pLast )
-            v10->m_mmapPausedPending.m_pLast = v6;
-          v5->pNextListItem = v10->m_mmapPausedPending.m_pFree;
-          --v10->m_mmapPausedPending.m_ulNumListItems;
-          _mm_store_si128(&v19, v18);
-          v6 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v19.m128i_i64[1];
-          v10->m_mmapPausedPending.m_pFree = v5;
-          v5 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v19.m128i_i64[0];
+            v6->pNextListItem = pNextListItem;
+          if ( m_pFirst == this->m_mmapPausedPending.m_pLast )
+            this->m_mmapPausedPending.m_pLast = v6;
+          m_pFirst->pNextListItem = this->m_mmapPausedPending.m_pFree;
+          --this->m_mmapPausedPending.m_ulNumListItems;
+          this->m_mmapPausedPending.m_pFree = m_pFirst;
+          m_pFirst = v18;
         }
         else
         {
-          v6 = v5;
-          v11->ulPauseCount = v16 - 1;
-          v5 = v5->pNextListItem;
+          v6 = m_pFirst;
+          item->ulPauseCount = ulPauseCount - 1;
+          m_pFirst = m_pFirst->pNextListItem;
         }
         goto LABEL_28;
       }
 LABEL_18:
-      v6 = v5;
-      v5 = v5->pNextListItem;
+      v6 = m_pFirst;
+      m_pFirst = m_pFirst->pNextListItem;
 LABEL_28:
       if ( v13 )
-        v13->vfptr->Release((CAkIndexable *)&v13->vfptr);
-      if ( !v5 )
+        v13->vfptr->Release(v13);
+      if ( !m_pFirst )
       {
-        v7 = v20;
+        v7 = in_bIsMasterOnResume;
         break;
       }
     }
   }
-  CAkAudioMgr::ResumeNotPausedPendingAction(v10, v9, v8, v7, in_PlayingID);
+  CAkAudioMgr::ResumeNotPausedPendingAction(this, in_pNodeToTarget, in_GameObj, v7, in_PlayingID);
 }
 
 // File Line: 2109
 // RVA: 0xA4B310
 void __fastcall CAkAudioMgr::ResumePausedPendingItems(CAkAudioMgr *this, unsigned int in_playingID)
 {
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v2; // rdi
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v3; // rsi
-  unsigned int v4; // ebp
-  CAkAudioMgr *v5; // rbx
-  AkPendingAction *v6; // rcx
-  unsigned int v7; // eax
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v8; // rax
-  __m128i v9; // [rsp+20h] [rbp-28h]
-  __m128i v10; // [rsp+30h] [rbp-18h]
+  __int128 m_pFirst; // rdi
+  __int64 v5; // rcx
+  int v6; // eax
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v7; // rax
+  __int128 v8; // [rsp+20h] [rbp-28h]
 
-  v2 = this->m_mmapPausedPending.m_pFirst;
-  v3 = 0i64;
-  v4 = in_playingID;
-  v5 = this;
-  while ( v2 )
+  m_pFirst = (unsigned __int64)this->m_mmapPausedPending.m_pFirst;
+  while ( (_QWORD)m_pFirst )
   {
-    v6 = v2->Item.item;
-    if ( v6->UserParam.m_PlayingID == v4 )
+    v5 = *(_QWORD *)(m_pFirst + 16);
+    if ( *(_DWORD *)(v5 + 56) == in_playingID )
     {
-      v7 = v6->ulPauseCount;
-      if ( !v7 )
+      v6 = *(_DWORD *)(v5 + 64);
+      if ( !v6 )
       {
-        CAkAudioMgr::TransferToPending(v5, v2->Item.item);
-        v8 = v2->pNextListItem;
-        v9.m128i_i64[1] = (__int64)v3;
-        v9.m128i_i64[0] = (__int64)v2->pNextListItem;
-        if ( v2 == v5->m_mmapPausedPending.m_pFirst )
-          v5->m_mmapPausedPending.m_pFirst = v8;
+        CAkAudioMgr::TransferToPending(this, *(AkPendingAction **)(m_pFirst + 16));
+        v7 = *(CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem **)m_pFirst;
+        *((_QWORD *)&v8 + 1) = *((_QWORD *)&m_pFirst + 1);
+        *(_QWORD *)&v8 = *(_QWORD *)m_pFirst;
+        if ( (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)m_pFirst == this->m_mmapPausedPending.m_pFirst )
+          this->m_mmapPausedPending.m_pFirst = v7;
         else
-          v3->pNextListItem = v8;
-        if ( v2 == v5->m_mmapPausedPending.m_pLast )
-          v5->m_mmapPausedPending.m_pLast = v3;
-        v2->pNextListItem = v5->m_mmapPausedPending.m_pFree;
-        --v5->m_mmapPausedPending.m_ulNumListItems;
-        _mm_store_si128(&v10, v9);
-        v3 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v10.m128i_i64[1];
-        v5->m_mmapPausedPending.m_pFree = v2;
-        v2 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v10.m128i_i64[0];
+          **((_QWORD **)&m_pFirst + 1) = v7;
+        if ( (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)m_pFirst == this->m_mmapPausedPending.m_pLast )
+          this->m_mmapPausedPending.m_pLast = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)*((_QWORD *)&m_pFirst + 1);
+        *(_QWORD *)m_pFirst = this->m_mmapPausedPending.m_pFree;
+        --this->m_mmapPausedPending.m_ulNumListItems;
+        this->m_mmapPausedPending.m_pFree = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)m_pFirst;
+        m_pFirst = v8;
         continue;
       }
-      v6->ulPauseCount = v7 - 1;
+      *(_DWORD *)(v5 + 64) = v6 - 1;
     }
-    v3 = v2;
-    v2 = v2->pNextListItem;
+    *((_QWORD *)&m_pFirst + 1) = m_pFirst;
+    *(_QWORD *)&m_pFirst = *(_QWORD *)m_pFirst;
   }
 }
 
 // File Line: 2142
 // RVA: 0xA4AE50
-void __fastcall CAkAudioMgr::ResumeNotPausedPendingAction(CAkAudioMgr *this, CAkParameterNodeBase *in_pNodeToTarget, CAkRegisteredObj *in_GameObj, bool __formal, unsigned int in_PlayingID)
+void __fastcall CAkAudioMgr::ResumeNotPausedPendingAction(
+        CAkAudioMgr *this,
+        CAkParameterNodeBase *in_pNodeToTarget,
+        CAkRegisteredObj *in_GameObj,
+        bool __formal,
+        unsigned int in_PlayingID)
 {
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v5; // rsi
-  CAkRegisteredObj *v6; // r12
-  CAkParameterNodeBase *v7; // rbx
-  AkPendingAction *v8; // rbp
-  CAkActionPlayAndContinue *v9; // r14
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rsi
+  AkPendingAction *item; // rbp
+  CAkActionPlayAndContinue *pAction; // r14
   CAkParameterNodeBase *v10; // rax
   CAkParameterNodeBase *v11; // rdi
-  CAkParameterNodeBase *v12; // rdx
-  CAkParameterNodeBase *v13; // rcx
+  CAkParameterNodeBase *m_pParentNode; // rdx
+  CAkParameterNodeBase *m_pBusOutputNode; // rcx
 
-  v5 = this->m_mmapPending.m_pFirst;
-  v6 = in_GameObj;
-  v7 = in_pNodeToTarget;
-  while ( v5 )
+  m_pFirst = this->m_mmapPending.m_pFirst;
+  while ( m_pFirst )
   {
-    v8 = v5->Item.item;
-    v9 = (CAkActionPlayAndContinue *)v8->pAction;
-    v10 = CAkAction::GetAndRefTarget(v8->pAction);
+    item = m_pFirst->Item.item;
+    pAction = (CAkActionPlayAndContinue *)item->pAction;
+    v10 = CAkAction::GetAndRefTarget(pAction);
     v11 = v10;
-    if ( !v7 )
+    if ( !in_pNodeToTarget )
       goto LABEL_14;
     if ( v10 )
     {
-      if ( v7 == v10 )
+      if ( in_pNodeToTarget == v10 )
         goto LABEL_14;
-      v12 = v10->m_pParentNode;
-      v13 = v10->m_pBusOutputNode;
-      if ( v12 )
+      m_pParentNode = v10->m_pParentNode;
+      m_pBusOutputNode = v10->m_pBusOutputNode;
+      if ( m_pParentNode )
       {
-        while ( v7 != v12 )
+        while ( in_pNodeToTarget != m_pParentNode )
         {
-          if ( !v13 )
-            v13 = v12->m_pBusOutputNode;
-          v12 = v12->m_pParentNode;
-          if ( !v12 )
+          if ( !m_pBusOutputNode )
+            m_pBusOutputNode = m_pParentNode->m_pBusOutputNode;
+          m_pParentNode = m_pParentNode->m_pParentNode;
+          if ( !m_pParentNode )
             goto LABEL_10;
         }
         goto LABEL_14;
       }
 LABEL_10:
-      if ( v13 )
+      if ( m_pBusOutputNode )
       {
-        while ( v7 != v13 )
+        while ( in_pNodeToTarget != m_pBusOutputNode )
         {
-          v13 = v13->m_pBusOutputNode;
-          if ( !v13 )
+          m_pBusOutputNode = m_pBusOutputNode->m_pBusOutputNode;
+          if ( !m_pBusOutputNode )
             goto LABEL_20;
         }
 LABEL_14:
-        if ( (!v6 || v6 == v8->pGameObj)
-          && (!in_PlayingID || in_PlayingID == v8->UserParam.m_PlayingID)
-          && v9->m_eActionType == 1283 )
+        if ( (!in_GameObj || in_GameObj == item->pGameObj)
+          && (!in_PlayingID || in_PlayingID == item->UserParam.m_PlayingID)
+          && pAction->m_eActionType == 1283 )
         {
-          CAkActionPlayAndContinue::Resume(v9);
+          CAkActionPlayAndContinue::Resume(pAction);
         }
-        goto LABEL_20;
       }
     }
 LABEL_20:
-    v5 = v5->pNextListItem;
+    m_pFirst = m_pFirst->pNextListItem;
     if ( v11 )
-      v11->vfptr->Release((CAkIndexable *)&v11->vfptr);
+      v11->vfptr->Release(v11);
   }
 }
 
 // File Line: 2180
 // RVA: 0xA4B1D0
-void __fastcall CAkAudioMgr::ResumePausedPendingActionAllExcept(CAkAudioMgr *this, CAkRegisteredObj *in_GameObj, AkArray<WwiseObjectIDext,WwiseObjectIDext const &,ArrayPoolDefault,4,AkArrayAllocatorDefault> *in_pExceptionList, bool in_bIsMasterOnResume, unsigned int in_PlayingID)
+void __fastcall CAkAudioMgr::ResumePausedPendingActionAllExcept(
+        CAkAudioMgr *this,
+        CAkRegisteredObj *in_GameObj,
+        AkArray<WwiseObjectIDext,WwiseObjectIDext const &,ArrayPoolDefault,4,AkArrayAllocatorDefault> *in_pExceptionList,
+        bool in_bIsMasterOnResume,
+        unsigned int in_PlayingID)
 {
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v5; // rbx
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rbx
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v6; // r14
-  bool v7; // r12
-  AkArray<WwiseObjectIDext,WwiseObjectIDext const &,ArrayPoolDefault,4,AkArrayAllocatorDefault> *v8; // r13
-  CAkRegisteredObj *v9; // rbp
-  CAkAudioMgr *v10; // rdi
-  AkPendingAction *v11; // rsi
-  unsigned int v12; // eax
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v13; // rax
-  __m128i v14; // [rsp+30h] [rbp-48h]
-  __int128 v15; // [rsp+40h] [rbp-38h]
+  AkPendingAction *item; // rsi
+  unsigned int ulPauseCount; // eax
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *pNextListItem; // rax
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v14; // [rsp+30h] [rbp-48h]
 
-  v5 = this->m_mmapPausedPending.m_pFirst;
+  m_pFirst = this->m_mmapPausedPending.m_pFirst;
   v6 = 0i64;
-  v7 = in_bIsMasterOnResume;
-  v8 = in_pExceptionList;
-  v9 = in_GameObj;
-  v10 = this;
-  while ( v5 )
+  while ( m_pFirst )
   {
-    v11 = v5->Item.item;
-    if ( (!v9 || v9 == v11->pGameObj)
-      && (!in_PlayingID || in_PlayingID == v11->UserParam.m_PlayingID)
-      && !CAkAudioMgr::IsAnException(v10, v11->pAction, v8) )
+    item = m_pFirst->Item.item;
+    if ( (!in_GameObj || in_GameObj == item->pGameObj)
+      && (!in_PlayingID || in_PlayingID == item->UserParam.m_PlayingID)
+      && !CAkAudioMgr::IsAnException(this, item->pAction, in_pExceptionList) )
     {
-      if ( v7 || (v12 = v11->ulPauseCount) == 0 )
+      if ( in_bIsMasterOnResume || (ulPauseCount = item->ulPauseCount) == 0 )
       {
-        CAkAudioMgr::TransferToPending(v10, v11);
-        v13 = v5->pNextListItem;
-        v14.m128i_i64[1] = (__int64)v6;
-        v14.m128i_i64[0] = (__int64)v5->pNextListItem;
-        if ( v5 == v10->m_mmapPausedPending.m_pFirst )
-          v10->m_mmapPausedPending.m_pFirst = v13;
+        CAkAudioMgr::TransferToPending(this, item);
+        pNextListItem = m_pFirst->pNextListItem;
+        v14 = m_pFirst->pNextListItem;
+        if ( m_pFirst == this->m_mmapPausedPending.m_pFirst )
+          this->m_mmapPausedPending.m_pFirst = pNextListItem;
         else
-          v6->pNextListItem = v13;
-        if ( v5 == v10->m_mmapPausedPending.m_pLast )
-          v10->m_mmapPausedPending.m_pLast = v6;
-        v5->pNextListItem = v10->m_mmapPausedPending.m_pFree;
-        --v10->m_mmapPausedPending.m_ulNumListItems;
-        _mm_store_si128((__m128i *)&v15, v14);
-        v6 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)*((_QWORD *)&v15 + 1);
-        v10->m_mmapPausedPending.m_pFree = v5;
-        v5 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v15;
+          v6->pNextListItem = pNextListItem;
+        if ( m_pFirst == this->m_mmapPausedPending.m_pLast )
+          this->m_mmapPausedPending.m_pLast = v6;
+        m_pFirst->pNextListItem = this->m_mmapPausedPending.m_pFree;
+        --this->m_mmapPausedPending.m_ulNumListItems;
+        this->m_mmapPausedPending.m_pFree = m_pFirst;
+        m_pFirst = v14;
         continue;
       }
-      v11->ulPauseCount = v12 - 1;
+      item->ulPauseCount = ulPauseCount - 1;
     }
-    v6 = v5;
-    v5 = v5->pNextListItem;
+    v6 = m_pFirst;
+    m_pFirst = m_pFirst->pNextListItem;
   }
-  CAkAudioMgr::ResumeNotPausedPendingActionAllExcept(g_pAudioMgr, v9, v8, v7, in_PlayingID);
+  CAkAudioMgr::ResumeNotPausedPendingActionAllExcept(
+    g_pAudioMgr,
+    in_GameObj,
+    in_pExceptionList,
+    in_bIsMasterOnResume,
+    in_PlayingID);
 }
 
 // File Line: 2216
 // RVA: 0xA4AF60
-void __fastcall CAkAudioMgr::ResumeNotPausedPendingActionAllExcept(CAkAudioMgr *this, CAkRegisteredObj *in_GameObj, AkArray<WwiseObjectIDext,WwiseObjectIDext const &,ArrayPoolDefault,4,AkArrayAllocatorDefault> *in_pExceptionList, bool __formal, unsigned int in_PlayingID)
+void __fastcall CAkAudioMgr::ResumeNotPausedPendingActionAllExcept(
+        CAkAudioMgr *this,
+        CAkRegisteredObj *in_GameObj,
+        AkArray<WwiseObjectIDext,WwiseObjectIDext const &,ArrayPoolDefault,4,AkArrayAllocatorDefault> *in_pExceptionList,
+        bool __formal,
+        unsigned int in_PlayingID)
 {
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v5; // rbx
-  AkArray<WwiseObjectIDext,WwiseObjectIDext const &,ArrayPoolDefault,4,AkArrayAllocatorDefault> *v6; // r15
-  CAkRegisteredObj *v7; // rbp
-  CAkAudioMgr *i; // r14
-  AkPendingAction *v9; // rax
-  CAkActionPlayAndContinue *v10; // rdi
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *i; // rbx
+  AkPendingAction *item; // rax
+  CAkActionPlayAndContinue *pAction; // rdi
 
-  v5 = this->m_mmapPending.m_pFirst;
-  v6 = in_pExceptionList;
-  v7 = in_GameObj;
-  for ( i = this; v5; v5 = v5->pNextListItem )
+  for ( i = this->m_mmapPending.m_pFirst; i; i = i->pNextListItem )
   {
-    v9 = v5->Item.item;
-    v10 = (CAkActionPlayAndContinue *)v9->pAction;
-    if ( (!v7 || v7 == v9->pGameObj)
-      && (!in_PlayingID || in_PlayingID == v9->UserParam.m_PlayingID)
-      && !CAkAudioMgr::IsAnException(i, v9->pAction, v6)
-      && v10->m_eActionType == 1283 )
+    item = i->Item.item;
+    pAction = (CAkActionPlayAndContinue *)item->pAction;
+    if ( (!in_GameObj || in_GameObj == item->pGameObj)
+      && (!in_PlayingID || in_PlayingID == item->UserParam.m_PlayingID)
+      && !CAkAudioMgr::IsAnException(this, item->pAction, in_pExceptionList)
+      && pAction->m_eActionType == 1283 )
     {
-      CAkActionPlayAndContinue::Resume(v10);
+      CAkActionPlayAndContinue::Resume(pAction);
     }
   }
 }
@@ -2790,105 +2736,97 @@ void __fastcall CAkAudioMgr::ResumeNotPausedPendingActionAllExcept(CAkAudioMgr *
 // RVA: 0xA4AB10
 void __fastcall CAkAudioMgr::RemovePendingAction(CAkAudioMgr *this, CAkParameterNodeBase *in_pNodeToTarget)
 {
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v2; // rbx
-  CAkParameterNodeBase *v3; // rdi
-  CAkAudioMgr *v4; // rbp
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rbx
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v5; // r15
-  AkPendingAction *v6; // r14
-  CAkAction *v7; // r12
+  AkPendingAction *item; // r14
+  CAkAction *pAction; // r12
   CAkParameterNodeBase *v8; // rax
   CAkParameterNodeBase *v9; // rsi
-  CAkParameterNodeBase *v10; // rdx
-  CAkParameterNodeBase *v11; // rcx
+  CAkParameterNodeBase *m_pParentNode; // rdx
+  CAkParameterNodeBase *m_pBusOutputNode; // rcx
   CAkActionPlayAndContinue *v12; // rcx
-  int v13; // eax
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v14; // rax
+  int m_eActionType; // eax
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *pNextListItem; // rax
   int v15; // ebx
-  __m128i v16; // [rsp+20h] [rbp-98h]
-  __int128 v17; // [rsp+30h] [rbp-88h]
-  int v18; // [rsp+40h] [rbp-78h]
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v16; // [rsp+20h] [rbp-98h]
+  int v17[30]; // [rsp+40h] [rbp-78h] BYREF
 
-  v2 = this->m_mmapPending.m_pFirst;
-  v3 = in_pNodeToTarget;
-  v4 = this;
+  m_pFirst = this->m_mmapPending.m_pFirst;
   v5 = 0i64;
-  while ( v2 )
+  while ( m_pFirst )
   {
-    v6 = v2->Item.item;
-    v7 = v6->pAction;
-    v8 = CAkAction::GetAndRefTarget(v6->pAction);
+    item = m_pFirst->Item.item;
+    pAction = item->pAction;
+    v8 = CAkAction::GetAndRefTarget(pAction);
     v9 = v8;
-    if ( !v3 || !v8 )
+    if ( !in_pNodeToTarget || !v8 )
       goto LABEL_13;
-    if ( v3 != v8 )
+    if ( in_pNodeToTarget != v8 )
     {
-      v10 = v8->m_pParentNode;
-      v11 = v8->m_pBusOutputNode;
-      if ( v10 )
+      m_pParentNode = v8->m_pParentNode;
+      m_pBusOutputNode = v8->m_pBusOutputNode;
+      if ( m_pParentNode )
       {
-        while ( v3 != v10 )
+        while ( in_pNodeToTarget != m_pParentNode )
         {
-          if ( !v11 )
-            v11 = v10->m_pBusOutputNode;
-          v10 = v10->m_pParentNode;
-          if ( !v10 )
+          if ( !m_pBusOutputNode )
+            m_pBusOutputNode = m_pParentNode->m_pBusOutputNode;
+          m_pParentNode = m_pParentNode->m_pParentNode;
+          if ( !m_pParentNode )
             goto LABEL_10;
         }
       }
       else
       {
 LABEL_10:
-        if ( !v11 )
+        if ( !m_pBusOutputNode )
           goto LABEL_13;
-        while ( v3 != v11 )
+        while ( in_pNodeToTarget != m_pBusOutputNode )
         {
-          v11 = v11->m_pBusOutputNode;
-          if ( !v11 )
+          m_pBusOutputNode = m_pBusOutputNode->m_pBusOutputNode;
+          if ( !m_pBusOutputNode )
             goto LABEL_13;
         }
       }
     }
-    if ( v7->m_eActionType != 6176 )
+    if ( pAction->m_eActionType != 6176 )
     {
-      v12 = (CAkActionPlayAndContinue *)v6->pAction;
-      v18 = 0;
-      v13 = v12->m_eActionType;
-      if ( v13 == 1027 )
+      v12 = (CAkActionPlayAndContinue *)item->pAction;
+      v17[0] = 0;
+      m_eActionType = v12->m_eActionType;
+      if ( m_eActionType == 1027 )
         goto LABEL_22;
-      if ( v13 == 1283 )
+      if ( m_eActionType == 1283 )
       {
         CAkActionPlayAndContinue::NeedNotifyDelay(v12);
 LABEL_22:
-        ((void (__fastcall *)(CAkAction *, int *))v6->pAction->vfptr[2].Category)(v6->pAction, &v18);
+        ((void (__fastcall *)(CAkAction *, int *))item->pAction->vfptr[2].Category)(item->pAction, v17);
       }
-      CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, v6->UserParam.m_PlayingID);
-      v14 = v2->pNextListItem;
-      v16.m128i_i64[1] = (__int64)v5;
-      v16.m128i_i64[0] = (__int64)v2->pNextListItem;
-      if ( v2 == v4->m_mmapPending.m_pFirst )
-        v4->m_mmapPending.m_pFirst = v14;
+      CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, item->UserParam.m_PlayingID);
+      pNextListItem = m_pFirst->pNextListItem;
+      v16 = m_pFirst->pNextListItem;
+      if ( m_pFirst == this->m_mmapPending.m_pFirst )
+        this->m_mmapPending.m_pFirst = pNextListItem;
       else
-        v5->pNextListItem = v14;
-      if ( v2 == v4->m_mmapPending.m_pLast )
-        v4->m_mmapPending.m_pLast = v5;
-      v2->pNextListItem = v4->m_mmapPending.m_pFree;
-      --v4->m_mmapPending.m_ulNumListItems;
-      v4->m_mmapPending.m_pFree = v2;
-      ((void (*)(void))v6->pAction->vfptr->Release)();
+        v5->pNextListItem = pNextListItem;
+      if ( m_pFirst == this->m_mmapPending.m_pLast )
+        this->m_mmapPending.m_pLast = v5;
+      m_pFirst->pNextListItem = this->m_mmapPending.m_pFree;
+      --this->m_mmapPending.m_ulNumListItems;
+      this->m_mmapPending.m_pFree = m_pFirst;
+      item->pAction->vfptr->Release(item->pAction);
       v15 = g_DefaultPoolId;
-      ((void (__fastcall *)(AkPendingAction *, _QWORD))v6->vfptr[1].TransUpdateValue)(v6, 0i64);
-      AK::MemoryMgr::Free(v15, v6);
-      _mm_store_si128((__m128i *)&v17, v16);
-      v5 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)*((_QWORD *)&v17 + 1);
-      v2 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v17;
+      ((void (__fastcall *)(AkPendingAction *, _QWORD))item->vfptr[1].TransUpdateValue)(item, 0i64);
+      AK::MemoryMgr::Free(v15, item);
+      m_pFirst = v16;
       goto LABEL_14;
     }
 LABEL_13:
-    v5 = v2;
-    v2 = v2->pNextListItem;
+    v5 = m_pFirst;
+    m_pFirst = m_pFirst->pNextListItem;
 LABEL_14:
     if ( v9 )
-      v9->vfptr->Release((CAkIndexable *)&v9->vfptr);
+      v9->vfptr->Release(v9);
   }
 }
 
@@ -2896,102 +2834,94 @@ LABEL_14:
 // RVA: 0xA4A960
 void __fastcall CAkAudioMgr::RemovePausedPendingAction(CAkAudioMgr *this, CAkParameterNodeBase *in_pNodeToTarget)
 {
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v2; // rbx
-  CAkParameterNodeBase *v3; // rdi
-  CAkAudioMgr *v4; // rbp
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rbx
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v5; // r15
-  AkPendingAction *v6; // r14
+  AkPendingAction *item; // r14
   CAkParameterNodeBase *v7; // rax
   CAkParameterNodeBase *v8; // rsi
-  CAkParameterNodeBase *v9; // rdx
-  CAkParameterNodeBase *v10; // rcx
-  CAkActionPlayAndContinue *v11; // rcx
-  int v12; // eax
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v13; // rax
+  CAkParameterNodeBase *m_pParentNode; // rdx
+  CAkParameterNodeBase *m_pBusOutputNode; // rcx
+  CAkActionPlayAndContinue *pAction; // rcx
+  int m_eActionType; // eax
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *pNextListItem; // rax
   int v14; // ebx
-  __m128i v15; // [rsp+20h] [rbp-88h]
-  __int128 v16; // [rsp+30h] [rbp-78h]
-  int v17; // [rsp+40h] [rbp-68h]
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v15; // [rsp+20h] [rbp-88h]
+  int v16[20]; // [rsp+40h] [rbp-68h] BYREF
 
-  v2 = this->m_mmapPausedPending.m_pFirst;
-  v3 = in_pNodeToTarget;
-  v4 = this;
+  m_pFirst = this->m_mmapPausedPending.m_pFirst;
   v5 = 0i64;
-  while ( v2 )
+  while ( m_pFirst )
   {
-    v6 = v2->Item.item;
-    v7 = CAkAction::GetAndRefTarget(v6->pAction);
+    item = m_pFirst->Item.item;
+    v7 = CAkAction::GetAndRefTarget(item->pAction);
     v8 = v7;
-    if ( v3 && v7 )
+    if ( in_pNodeToTarget && v7 )
     {
-      if ( v3 == v7 )
+      if ( in_pNodeToTarget == v7 )
         goto LABEL_18;
-      v9 = v7->m_pParentNode;
-      v10 = v7->m_pBusOutputNode;
-      if ( v9 )
+      m_pParentNode = v7->m_pParentNode;
+      m_pBusOutputNode = v7->m_pBusOutputNode;
+      if ( m_pParentNode )
       {
-        while ( v3 != v9 )
+        while ( in_pNodeToTarget != m_pParentNode )
         {
-          if ( !v10 )
-            v10 = v9->m_pBusOutputNode;
-          v9 = v9->m_pParentNode;
-          if ( !v9 )
+          if ( !m_pBusOutputNode )
+            m_pBusOutputNode = m_pParentNode->m_pBusOutputNode;
+          m_pParentNode = m_pParentNode->m_pParentNode;
+          if ( !m_pParentNode )
             goto LABEL_10;
         }
 LABEL_18:
-        v11 = (CAkActionPlayAndContinue *)v6->pAction;
-        v17 = 0;
-        v12 = v11->m_eActionType;
-        if ( v12 == 1027 )
+        pAction = (CAkActionPlayAndContinue *)item->pAction;
+        v16[0] = 0;
+        m_eActionType = pAction->m_eActionType;
+        if ( m_eActionType == 1027 )
         {
 LABEL_21:
-          ((void (__fastcall *)(CAkAction *, int *))v6->pAction->vfptr[2].Category)(v6->pAction, &v17);
+          ((void (__fastcall *)(CAkAction *, int *))item->pAction->vfptr[2].Category)(item->pAction, v16);
         }
-        else if ( v12 == 1283 )
+        else if ( m_eActionType == 1283 )
         {
-          CAkActionPlayAndContinue::NeedNotifyDelay(v11);
+          CAkActionPlayAndContinue::NeedNotifyDelay(pAction);
           goto LABEL_21;
         }
-        CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, v6->UserParam.m_PlayingID);
-        v13 = v2->pNextListItem;
-        v15.m128i_i64[1] = (__int64)v5;
-        v15.m128i_i64[0] = (__int64)v2->pNextListItem;
-        if ( v2 == v4->m_mmapPausedPending.m_pFirst )
-          v4->m_mmapPausedPending.m_pFirst = v13;
+        CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, item->UserParam.m_PlayingID);
+        pNextListItem = m_pFirst->pNextListItem;
+        v15 = m_pFirst->pNextListItem;
+        if ( m_pFirst == this->m_mmapPausedPending.m_pFirst )
+          this->m_mmapPausedPending.m_pFirst = pNextListItem;
         else
-          v5->pNextListItem = v13;
-        if ( v2 == v4->m_mmapPausedPending.m_pLast )
-          v4->m_mmapPausedPending.m_pLast = v5;
-        v2->pNextListItem = v4->m_mmapPausedPending.m_pFree;
-        --v4->m_mmapPausedPending.m_ulNumListItems;
-        v4->m_mmapPausedPending.m_pFree = v2;
-        ((void (*)(void))v6->pAction->vfptr->Release)();
+          v5->pNextListItem = pNextListItem;
+        if ( m_pFirst == this->m_mmapPausedPending.m_pLast )
+          this->m_mmapPausedPending.m_pLast = v5;
+        m_pFirst->pNextListItem = this->m_mmapPausedPending.m_pFree;
+        --this->m_mmapPausedPending.m_ulNumListItems;
+        this->m_mmapPausedPending.m_pFree = m_pFirst;
+        item->pAction->vfptr->Release(item->pAction);
         v14 = g_DefaultPoolId;
-        ((void (__fastcall *)(AkPendingAction *, _QWORD))v6->vfptr[1].TransUpdateValue)(v6, 0i64);
-        AK::MemoryMgr::Free(v14, v6);
-        _mm_store_si128((__m128i *)&v16, v15);
-        v5 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)*((_QWORD *)&v16 + 1);
-        v2 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v16;
+        ((void (__fastcall *)(AkPendingAction *, _QWORD))item->vfptr[1].TransUpdateValue)(item, 0i64);
+        AK::MemoryMgr::Free(v14, item);
+        m_pFirst = v15;
         goto LABEL_14;
       }
 LABEL_10:
-      if ( v10 )
+      if ( m_pBusOutputNode )
       {
-        while ( v3 != v10 )
+        while ( in_pNodeToTarget != m_pBusOutputNode )
         {
-          v10 = v10->m_pBusOutputNode;
-          if ( !v10 )
+          m_pBusOutputNode = m_pBusOutputNode->m_pBusOutputNode;
+          if ( !m_pBusOutputNode )
             goto LABEL_13;
         }
         goto LABEL_18;
       }
     }
 LABEL_13:
-    v5 = v2;
-    v2 = v2->pNextListItem;
+    v5 = m_pFirst;
+    m_pFirst = m_pFirst->pNextListItem;
 LABEL_14:
     if ( v8 )
-      v8->vfptr->Release((CAkIndexable *)&v8->vfptr);
+      v8->vfptr->Release(v8);
   }
 }
 
@@ -2999,61 +2929,53 @@ LABEL_14:
 // RVA: 0xA4A5D0
 void __fastcall CAkAudioMgr::RemoveAllPausedPendingAction(CAkAudioMgr *this)
 {
-  CAkAudioMgr *v1; // rbx
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v2; // rdi
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v3; // r14
-  AkPendingAction *v4; // rsi
-  CAkActionPlayAndContinue *v5; // rcx
-  int v6; // eax
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v7; // rbp
-  int v8; // edi
-  __m128i v9; // [rsp+20h] [rbp-88h]
-  __int128 v10; // [rsp+30h] [rbp-78h]
-  int v11; // [rsp+40h] [rbp-68h]
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rdi
+  AkPendingAction *item; // rsi
+  CAkActionPlayAndContinue *pAction; // rcx
+  int m_eActionType; // eax
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *pNextListItem; // rbp
+  int v7; // edi
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v8; // [rsp+20h] [rbp-88h]
+  int v9[20]; // [rsp+40h] [rbp-68h] BYREF
 
-  v1 = this;
   if ( this->m_mmapPausedPending.m_ulMaxNumListItems )
   {
-    v2 = this->m_mmapPausedPending.m_pFirst;
-    v3 = 0i64;
-    if ( v2 )
+    m_pFirst = this->m_mmapPausedPending.m_pFirst;
+    if ( m_pFirst )
     {
       while ( 1 )
       {
-        v4 = v2->Item.item;
-        v11 = 0;
-        v5 = (CAkActionPlayAndContinue *)v4->pAction;
-        v6 = v5->m_eActionType;
-        if ( v6 != 1027 )
+        item = m_pFirst->Item.item;
+        v9[0] = 0;
+        pAction = (CAkActionPlayAndContinue *)item->pAction;
+        m_eActionType = pAction->m_eActionType;
+        if ( m_eActionType != 1027 )
         {
-          if ( v6 != 1283 )
+          if ( m_eActionType != 1283 )
             goto LABEL_7;
-          CAkActionPlayAndContinue::NeedNotifyDelay(v5);
+          CAkActionPlayAndContinue::NeedNotifyDelay(pAction);
         }
-        ((void (__fastcall *)(CAkAction *, int *))v4->pAction->vfptr[2].Category)(v4->pAction, &v11);
+        ((void (__fastcall *)(CAkAction *, int *))item->pAction->vfptr[2].Category)(item->pAction, v9);
 LABEL_7:
-        CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, v4->UserParam.m_PlayingID);
-        v7 = v2->pNextListItem;
-        v9.m128i_i64[1] = (__int64)v3;
-        v9.m128i_i64[0] = (__int64)v2->pNextListItem;
-        if ( v2 == v1->m_mmapPausedPending.m_pFirst )
-          v1->m_mmapPausedPending.m_pFirst = v7;
+        CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, item->UserParam.m_PlayingID);
+        pNextListItem = m_pFirst->pNextListItem;
+        v8 = m_pFirst->pNextListItem;
+        if ( m_pFirst == this->m_mmapPausedPending.m_pFirst )
+          this->m_mmapPausedPending.m_pFirst = pNextListItem;
         else
-          v3->pNextListItem = v7;
-        if ( v2 == v1->m_mmapPausedPending.m_pLast )
-          v1->m_mmapPausedPending.m_pLast = v3;
-        v2->pNextListItem = v1->m_mmapPausedPending.m_pFree;
-        --v1->m_mmapPausedPending.m_ulNumListItems;
-        v1->m_mmapPausedPending.m_pFree = v2;
-        ((void (*)(void))v4->pAction->vfptr->Release)();
-        v8 = g_DefaultPoolId;
-        ((void (__fastcall *)(AkPendingAction *, _QWORD))v4->vfptr[1].TransUpdateValue)(v4, 0i64);
-        AK::MemoryMgr::Free(v8, v4);
-        _mm_store_si128((__m128i *)&v10, v9);
-        if ( !v7 )
+          MEMORY[0] = (size_t)m_pFirst->pNextListItem;
+        if ( m_pFirst == this->m_mmapPausedPending.m_pLast )
+          this->m_mmapPausedPending.m_pLast = 0i64;
+        m_pFirst->pNextListItem = this->m_mmapPausedPending.m_pFree;
+        --this->m_mmapPausedPending.m_ulNumListItems;
+        this->m_mmapPausedPending.m_pFree = m_pFirst;
+        item->pAction->vfptr->Release(item->pAction);
+        v7 = g_DefaultPoolId;
+        ((void (__fastcall *)(AkPendingAction *, _QWORD))item->vfptr[1].TransUpdateValue)(item, 0i64);
+        AK::MemoryMgr::Free(v7, item);
+        if ( !pNextListItem )
           return;
-        v3 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)*((_QWORD *)&v10 + 1);
-        v2 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v10;
+        m_pFirst = v8;
       }
     }
   }
@@ -3063,61 +2985,53 @@ LABEL_7:
 // RVA: 0xA4A720
 void __fastcall CAkAudioMgr::RemoveAllPendingAction(CAkAudioMgr *this)
 {
-  CAkAudioMgr *v1; // rbx
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v2; // rdi
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v3; // r14
-  AkPendingAction *v4; // rsi
-  CAkActionPlayAndContinue *v5; // rcx
-  int v6; // eax
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v7; // rbp
-  int v8; // edi
-  __m128i v9; // [rsp+20h] [rbp-88h]
-  __int128 v10; // [rsp+30h] [rbp-78h]
-  int v11; // [rsp+40h] [rbp-68h]
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rdi
+  AkPendingAction *item; // rsi
+  CAkActionPlayAndContinue *pAction; // rcx
+  int m_eActionType; // eax
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *pNextListItem; // rbp
+  int v7; // edi
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v8; // [rsp+20h] [rbp-88h]
+  int v9[20]; // [rsp+40h] [rbp-68h] BYREF
 
-  v1 = this;
   if ( this->m_mmapPending.m_ulMaxNumListItems )
   {
-    v2 = this->m_mmapPending.m_pFirst;
-    v3 = 0i64;
-    if ( v2 )
+    m_pFirst = this->m_mmapPending.m_pFirst;
+    if ( m_pFirst )
     {
       while ( 1 )
       {
-        v4 = v2->Item.item;
-        v11 = 0;
-        v5 = (CAkActionPlayAndContinue *)v4->pAction;
-        v6 = v5->m_eActionType;
-        if ( v6 != 1027 )
+        item = m_pFirst->Item.item;
+        v9[0] = 0;
+        pAction = (CAkActionPlayAndContinue *)item->pAction;
+        m_eActionType = pAction->m_eActionType;
+        if ( m_eActionType != 1027 )
         {
-          if ( v6 != 1283 )
+          if ( m_eActionType != 1283 )
             goto LABEL_7;
-          CAkActionPlayAndContinue::NeedNotifyDelay(v5);
+          CAkActionPlayAndContinue::NeedNotifyDelay(pAction);
         }
-        ((void (__fastcall *)(CAkAction *, int *))v4->pAction->vfptr[2].Category)(v4->pAction, &v11);
+        ((void (__fastcall *)(CAkAction *, int *))item->pAction->vfptr[2].Category)(item->pAction, v9);
 LABEL_7:
-        CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, v4->UserParam.m_PlayingID);
-        v7 = v2->pNextListItem;
-        v9.m128i_i64[1] = (__int64)v3;
-        v9.m128i_i64[0] = (__int64)v2->pNextListItem;
-        if ( v2 == v1->m_mmapPending.m_pFirst )
-          v1->m_mmapPending.m_pFirst = v7;
+        CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, item->UserParam.m_PlayingID);
+        pNextListItem = m_pFirst->pNextListItem;
+        v8 = m_pFirst->pNextListItem;
+        if ( m_pFirst == this->m_mmapPending.m_pFirst )
+          this->m_mmapPending.m_pFirst = pNextListItem;
         else
-          v3->pNextListItem = v7;
-        if ( v2 == v1->m_mmapPending.m_pLast )
-          v1->m_mmapPending.m_pLast = v3;
-        v2->pNextListItem = v1->m_mmapPending.m_pFree;
-        --v1->m_mmapPending.m_ulNumListItems;
-        v1->m_mmapPending.m_pFree = v2;
-        ((void (*)(void))v4->pAction->vfptr->Release)();
-        v8 = g_DefaultPoolId;
-        ((void (__fastcall *)(AkPendingAction *, _QWORD))v4->vfptr[1].TransUpdateValue)(v4, 0i64);
-        AK::MemoryMgr::Free(v8, v4);
-        _mm_store_si128((__m128i *)&v10, v9);
-        if ( !v7 )
+          MEMORY[0] = (size_t)m_pFirst->pNextListItem;
+        if ( m_pFirst == this->m_mmapPending.m_pLast )
+          this->m_mmapPending.m_pLast = 0i64;
+        m_pFirst->pNextListItem = this->m_mmapPending.m_pFree;
+        --this->m_mmapPending.m_ulNumListItems;
+        this->m_mmapPending.m_pFree = m_pFirst;
+        item->pAction->vfptr->Release(item->pAction);
+        v7 = g_DefaultPoolId;
+        ((void (__fastcall *)(AkPendingAction *, _QWORD))item->vfptr[1].TransUpdateValue)(item, 0i64);
+        AK::MemoryMgr::Free(v7, item);
+        if ( !pNextListItem )
           return;
-        v3 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)*((_QWORD *)&v10 + 1);
-        v2 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v10;
+        m_pFirst = v8;
       }
     }
   }
@@ -3127,29 +3041,27 @@ LABEL_7:
 // RVA: 0xA4A850
 void __fastcall CAkAudioMgr::RemoveAllPreallocAndReferences(CAkAudioMgr *this)
 {
-  CAkAudioMgr *v1; // rsi
   char *v2; // rax
   char *v3; // rbx
   AkExternalSourceArray *v4; // rcx
 
-  v1 = this;
   EnterCriticalSection(&this->m_queueLock.m_csLock);
-  while ( v1->m_MsgQueue.m_uReadBlock != v1->m_MsgQueue.m_uWriteBlock
-       || v1->m_MsgQueue.m_uReadOffset != v1->m_MsgQueue.m_uWriteOffset
-       || v1->m_MsgQueue.m_bBufferFull )
+  while ( this->m_MsgQueue.m_uReadBlock != this->m_MsgQueue.m_uWriteBlock
+       || this->m_MsgQueue.m_uReadOffset != this->m_MsgQueue.m_uWriteOffset
+       || this->m_MsgQueue.m_bBufferFull )
   {
-    v2 = AkSparseChunkRing::BeginRead(&v1->m_MsgQueue);
+    v2 = AkSparseChunkRing::BeginRead(&this->m_MsgQueue);
     v3 = v2;
     switch ( *((_WORD *)v2 + 1) )
     {
       case 1:
         CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, *((_DWORD *)v2 + 4));
-        (*(void (**)(void))(**((_QWORD **)v3 + 6) + 16i64))();
+        (*(void (__fastcall **)(_QWORD))(**((_QWORD **)v3 + 6) + 16i64))(*((_QWORD *)v3 + 6));
         v4 = (AkExternalSourceArray *)*((_QWORD *)v3 + 5);
         if ( v4 )
           AkExternalSourceArray::Release(v4);
 LABEL_16:
-        AkSparseChunkRing::EndRead(&v1->m_MsgQueue, *(unsigned __int16 *)v3);
+        AkSparseChunkRing::EndRead(&this->m_MsgQueue, *(unsigned __int16 *)v3);
         break;
       case 0xB:
         goto LABEL_16;
@@ -3157,36 +3069,33 @@ LABEL_16:
         if ( *((_DWORD *)v2 + 4) == 3 )
         {
           CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, *(_DWORD *)(*((_QWORD *)v2 + 1) + 120i64));
-          (*(void (**)(void))(**((_QWORD **)v3 + 1) + 16i64))();
+          (*(void (__fastcall **)(_QWORD))(**((_QWORD **)v3 + 1) + 16i64))(*((_QWORD *)v3 + 1));
         }
-        (*(void (**)(void))(**((_QWORD **)v3 + 1) + 16i64))();
-        AkSparseChunkRing::EndRead(&v1->m_MsgQueue, *(unsigned __int16 *)v3);
+        (*(void (__fastcall **)(_QWORD))(**((_QWORD **)v3 + 1) + 16i64))(*((_QWORD *)v3 + 1));
+        AkSparseChunkRing::EndRead(&this->m_MsgQueue, *(unsigned __int16 *)v3);
         break;
       case 0x1F:
       case 0x23:
-        (*(void (**)(void))(**((_QWORD **)v2 + 1) + 16i64))();
-        AkSparseChunkRing::EndRead(&v1->m_MsgQueue, *(unsigned __int16 *)v3);
+        (*(void (__fastcall **)(_QWORD))(**((_QWORD **)v2 + 1) + 16i64))(*((_QWORD *)v2 + 1));
+        AkSparseChunkRing::EndRead(&this->m_MsgQueue, *(unsigned __int16 *)v3);
         break;
       default:
         goto LABEL_16;
     }
   }
-  LeaveCriticalSection(&v1->m_queueLock.m_csLock);
+  LeaveCriticalSection(&this->m_queueLock.m_csLock);
 }
 
 // File Line: 2545
 // RVA: 0xA4B540
-signed __int64 __fastcall CAkAudioMgr::StopAction(CAkAudioMgr *this, unsigned int in_ActionID, unsigned int in_PlayingID)
+__int64 __fastcall CAkAudioMgr::StopAction(CAkAudioMgr *this, unsigned int in_ActionID, unsigned int in_PlayingID)
 {
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v3; // rdi
-  unsigned int v4; // ebp
-  unsigned int v5; // er15
-  CAkAudioMgr *v6; // rbx
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rdi
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v7; // r14
-  AkPendingAction *v8; // rsi
-  CAkActionPlayAndContinue *v9; // rcx
-  int v10; // eax
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v11; // rax
+  AkPendingAction *item; // rsi
+  CAkActionPlayAndContinue *pAction; // rcx
+  int m_eActionType; // eax
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *pNextListItem; // rax
   int v12; // edi
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v13; // rdi
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v14; // r14
@@ -3195,65 +3104,59 @@ signed __int64 __fastcall CAkAudioMgr::StopAction(CAkAudioMgr *this, unsigned in
   int v17; // eax
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v18; // rax
   int v19; // edi
-  __m128i v21; // [rsp+20h] [rbp-88h]
-  __m128i v22; // [rsp+30h] [rbp-78h]
-  int v23; // [rsp+40h] [rbp-68h]
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v21; // [rsp+20h] [rbp-88h]
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v22; // [rsp+30h] [rbp-78h]
+  int v23[20]; // [rsp+40h] [rbp-68h] BYREF
 
-  v3 = this->m_mmapPending.m_pFirst;
-  v4 = in_PlayingID;
-  v5 = in_ActionID;
-  v6 = this;
+  m_pFirst = this->m_mmapPending.m_pFirst;
   v7 = 0i64;
-  if ( v3 )
+  if ( m_pFirst )
   {
     while ( 1 )
     {
-      v8 = v3->Item.item;
-      v9 = (CAkActionPlayAndContinue *)v8->pAction;
-      if ( v9->key == v5 && (!v4 || v8->UserParam.m_PlayingID == v4) )
+      item = m_pFirst->Item.item;
+      pAction = (CAkActionPlayAndContinue *)item->pAction;
+      if ( pAction->key == in_ActionID && (!in_PlayingID || item->UserParam.m_PlayingID == in_PlayingID) )
         break;
-      v7 = v3;
-      v3 = v3->pNextListItem;
+      v7 = m_pFirst;
+      m_pFirst = m_pFirst->pNextListItem;
 LABEL_16:
-      if ( !v3 )
+      if ( !m_pFirst )
         goto LABEL_17;
     }
-    v23 = 0;
-    v10 = v9->m_eActionType;
-    if ( v10 != 1027 )
+    v23[0] = 0;
+    m_eActionType = pAction->m_eActionType;
+    if ( m_eActionType != 1027 )
     {
-      if ( v10 != 1283 )
+      if ( m_eActionType != 1283 )
       {
 LABEL_9:
-        CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, v8->UserParam.m_PlayingID);
-        v11 = v3->pNextListItem;
-        v21.m128i_i64[1] = (__int64)v7;
-        v21.m128i_i64[0] = (__int64)v11;
-        if ( v3 == v6->m_mmapPending.m_pFirst )
-          v6->m_mmapPending.m_pFirst = v11;
+        CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, item->UserParam.m_PlayingID);
+        pNextListItem = m_pFirst->pNextListItem;
+        v21 = m_pFirst->pNextListItem;
+        if ( m_pFirst == this->m_mmapPending.m_pFirst )
+          this->m_mmapPending.m_pFirst = pNextListItem;
         else
-          v7->pNextListItem = v11;
-        if ( v3 == v6->m_mmapPending.m_pLast )
-          v6->m_mmapPending.m_pLast = v7;
-        v3->pNextListItem = v6->m_mmapPending.m_pFree;
-        --v6->m_mmapPending.m_ulNumListItems;
-        v6->m_mmapPending.m_pFree = v3;
-        ((void (*)(void))v8->pAction->vfptr->Release)();
+          v7->pNextListItem = pNextListItem;
+        if ( m_pFirst == this->m_mmapPending.m_pLast )
+          this->m_mmapPending.m_pLast = v7;
+        m_pFirst->pNextListItem = this->m_mmapPending.m_pFree;
+        --this->m_mmapPending.m_ulNumListItems;
+        this->m_mmapPending.m_pFree = m_pFirst;
+        item->pAction->vfptr->Release(item->pAction);
         v12 = g_DefaultPoolId;
-        ((void (__fastcall *)(AkPendingAction *, _QWORD))v8->vfptr[1].TransUpdateValue)(v8, 0i64);
-        AK::MemoryMgr::Free(v12, v8);
-        _mm_store_si128(&v22, v21);
-        v7 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v22.m128i_i64[1];
-        v3 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v22.m128i_i64[0];
+        ((void (__fastcall *)(AkPendingAction *, _QWORD))item->vfptr[1].TransUpdateValue)(item, 0i64);
+        AK::MemoryMgr::Free(v12, item);
+        m_pFirst = v21;
         goto LABEL_16;
       }
-      CAkActionPlayAndContinue::NeedNotifyDelay(v9);
+      CAkActionPlayAndContinue::NeedNotifyDelay(pAction);
     }
-    ((void (__fastcall *)(CAkIndexableVtbl **, int *))v8->pAction->vfptr[2].Category)(&v8->pAction->vfptr, &v23);
+    ((void (__fastcall *)(CAkIndexableVtbl **, int *))item->pAction->vfptr[2].Category)(&item->pAction->vfptr, v23);
     goto LABEL_9;
   }
 LABEL_17:
-  v13 = v6->m_mmapPausedPending.m_pFirst;
+  v13 = this->m_mmapPausedPending.m_pFirst;
   v14 = 0i64;
   if ( v13 )
   {
@@ -3261,7 +3164,7 @@ LABEL_17:
     {
       v15 = v13->Item.item;
       v16 = (CAkActionPlayAndContinue *)v15->pAction;
-      if ( v16->key == v5 && (!v4 || v15->UserParam.m_PlayingID == v4) )
+      if ( v16->key == in_ActionID && (!in_PlayingID || v15->UserParam.m_PlayingID == in_PlayingID) )
         break;
       v14 = v13;
       v13 = v13->pNextListItem;
@@ -3269,7 +3172,7 @@ LABEL_32:
       if ( !v13 )
         return 1i64;
     }
-    v23 = 0;
+    v23[0] = 0;
     v17 = v16->m_eActionType;
     if ( v17 != 1027 )
     {
@@ -3278,29 +3181,26 @@ LABEL_32:
 LABEL_25:
         CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, v15->UserParam.m_PlayingID);
         v18 = v13->pNextListItem;
-        v22.m128i_i64[1] = (__int64)v14;
-        v22.m128i_i64[0] = (__int64)v18;
-        if ( v13 == v6->m_mmapPausedPending.m_pFirst )
-          v6->m_mmapPausedPending.m_pFirst = v18;
+        v22 = v13->pNextListItem;
+        if ( v13 == this->m_mmapPausedPending.m_pFirst )
+          this->m_mmapPausedPending.m_pFirst = v18;
         else
           v14->pNextListItem = v18;
-        if ( v13 == v6->m_mmapPausedPending.m_pLast )
-          v6->m_mmapPausedPending.m_pLast = v14;
-        v13->pNextListItem = v6->m_mmapPausedPending.m_pFree;
-        --v6->m_mmapPausedPending.m_ulNumListItems;
-        v6->m_mmapPausedPending.m_pFree = v13;
-        ((void (*)(void))v15->pAction->vfptr->Release)();
+        if ( v13 == this->m_mmapPausedPending.m_pLast )
+          this->m_mmapPausedPending.m_pLast = v14;
+        v13->pNextListItem = this->m_mmapPausedPending.m_pFree;
+        --this->m_mmapPausedPending.m_ulNumListItems;
+        this->m_mmapPausedPending.m_pFree = v13;
+        v15->pAction->vfptr->Release(v15->pAction);
         v19 = g_DefaultPoolId;
         ((void (__fastcall *)(AkPendingAction *, _QWORD))v15->vfptr[1].TransUpdateValue)(v15, 0i64);
         AK::MemoryMgr::Free(v19, v15);
-        _mm_store_si128(&v21, v22);
-        v14 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v21.m128i_i64[1];
-        v13 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v21.m128i_i64[0];
+        v13 = v22;
         goto LABEL_32;
       }
       CAkActionPlayAndContinue::NeedNotifyDelay(v16);
     }
-    ((void (__fastcall *)(CAkIndexableVtbl **, int *))v15->pAction->vfptr[2].Category)(&v15->pAction->vfptr, &v23);
+    ((void (__fastcall *)(CAkIndexableVtbl **, int *))v15->pAction->vfptr[2].Category)(&v15->pAction->vfptr, v23);
     goto LABEL_25;
   }
   return 1i64;
@@ -3308,59 +3208,48 @@ LABEL_25:
 
 // File Line: 2588
 // RVA: 0xA485E0
-signed __int64 __fastcall CAkAudioMgr::PauseAction(CAkAudioMgr *this, unsigned int in_ActionID, unsigned int in_PlayingID)
+__int64 __fastcall CAkAudioMgr::PauseAction(CAkAudioMgr *this, unsigned int in_ActionID, unsigned int in_PlayingID)
 {
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v3; // rax
-  unsigned int v4; // ebp
-  unsigned int v5; // er14
-  CAkAudioMgr *i; // rbx
-  AkPendingAction *v7; // r9
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v8; // rdi
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v9; // rsi
-  AkPendingAction *v10; // r8
-  CAkAction *v11; // rax
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v12; // rax
-  __m128i v14; // [rsp+20h] [rbp-28h]
-  __m128i v15; // [rsp+30h] [rbp-18h]
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *i; // rax
+  AkPendingAction *item; // r9
+  __int128 m_pFirst; // rdi
+  AkPendingAction *v9; // r8
+  CAkAction *pAction; // rax
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v11; // rax
+  __int128 v13; // [rsp+20h] [rbp-28h]
 
-  v3 = this->m_mmapPausedPending.m_pFirst;
-  v4 = in_PlayingID;
-  v5 = in_ActionID;
-  for ( i = this; v3; v3 = v3->pNextListItem )
+  for ( i = this->m_mmapPausedPending.m_pFirst; i; i = i->pNextListItem )
   {
-    v7 = v3->Item.item;
-    if ( in_ActionID == v7->pAction->key && (!in_PlayingID || v7->UserParam.m_PlayingID == in_PlayingID) )
-      ++v7->ulPauseCount;
+    item = i->Item.item;
+    if ( in_ActionID == item->pAction->key && (!in_PlayingID || item->UserParam.m_PlayingID == in_PlayingID) )
+      ++item->ulPauseCount;
   }
-  v8 = this->m_mmapPending.m_pFirst;
-  v9 = 0i64;
-  while ( v8 )
+  m_pFirst = (unsigned __int64)this->m_mmapPending.m_pFirst;
+  while ( (_QWORD)m_pFirst )
   {
-    v10 = v8->Item.item;
-    v11 = v10->pAction;
-    if ( v5 != v11->key || v4 && v10->UserParam.m_PlayingID != v4 )
+    v9 = *(AkPendingAction **)(m_pFirst + 16);
+    pAction = v9->pAction;
+    if ( in_ActionID == pAction->key && (!in_PlayingID || v9->UserParam.m_PlayingID == in_PlayingID) )
     {
-      v9 = v8;
-      v8 = v8->pNextListItem;
+      CAkAudioMgr::InsertAsPaused(this, pAction->m_ulElementID, v9, 0);
+      v11 = *(CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem **)m_pFirst;
+      *((_QWORD *)&v13 + 1) = *((_QWORD *)&m_pFirst + 1);
+      *(_QWORD *)&v13 = *(_QWORD *)m_pFirst;
+      if ( (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)m_pFirst == this->m_mmapPending.m_pFirst )
+        this->m_mmapPending.m_pFirst = v11;
+      else
+        **((_QWORD **)&m_pFirst + 1) = v11;
+      if ( (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)m_pFirst == this->m_mmapPending.m_pLast )
+        this->m_mmapPending.m_pLast = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)*((_QWORD *)&m_pFirst + 1);
+      *(_QWORD *)m_pFirst = this->m_mmapPending.m_pFree;
+      --this->m_mmapPending.m_ulNumListItems;
+      this->m_mmapPending.m_pFree = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)m_pFirst;
+      m_pFirst = v13;
     }
     else
     {
-      CAkAudioMgr::InsertAsPaused(i, v11->m_ulElementID, v10, 0);
-      v12 = v8->pNextListItem;
-      v14.m128i_i64[1] = (__int64)v9;
-      v14.m128i_i64[0] = (__int64)v8->pNextListItem;
-      if ( v8 == i->m_mmapPending.m_pFirst )
-        i->m_mmapPending.m_pFirst = v12;
-      else
-        v9->pNextListItem = v12;
-      if ( v8 == i->m_mmapPending.m_pLast )
-        i->m_mmapPending.m_pLast = v9;
-      v8->pNextListItem = i->m_mmapPending.m_pFree;
-      --i->m_mmapPending.m_ulNumListItems;
-      _mm_store_si128(&v15, v14);
-      v9 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v15.m128i_i64[1];
-      i->m_mmapPending.m_pFree = v8;
-      v8 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v15.m128i_i64[0];
+      *((_QWORD *)&m_pFirst + 1) = m_pFirst;
+      *(_QWORD *)&m_pFirst = *(_QWORD *)m_pFirst;
     }
   }
   return 1i64;
@@ -3368,54 +3257,44 @@ signed __int64 __fastcall CAkAudioMgr::PauseAction(CAkAudioMgr *this, unsigned i
 
 // File Line: 2640
 // RVA: 0xA4AD40
-signed __int64 __fastcall CAkAudioMgr::ResumeAction(CAkAudioMgr *this, unsigned int in_ActionID, unsigned int in_PlayingID)
+__int64 __fastcall CAkAudioMgr::ResumeAction(CAkAudioMgr *this, unsigned int in_ActionID, unsigned int in_PlayingID)
 {
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v3; // rbx
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rbx
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v4; // rsi
-  unsigned int v5; // ebp
-  unsigned int v6; // er14
-  CAkAudioMgr *v7; // rdi
-  AkPendingAction *v8; // rcx
-  unsigned int v9; // eax
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v10; // rax
-  __m128i v12; // [rsp+20h] [rbp-28h]
-  __m128i v13; // [rsp+30h] [rbp-18h]
+  AkPendingAction *item; // rcx
+  unsigned int ulPauseCount; // eax
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *pNextListItem; // rax
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v12; // [rsp+20h] [rbp-28h]
 
-  v3 = this->m_mmapPausedPending.m_pFirst;
+  m_pFirst = this->m_mmapPausedPending.m_pFirst;
   v4 = 0i64;
-  v5 = in_PlayingID;
-  v6 = in_ActionID;
-  v7 = this;
-  while ( v3 )
+  while ( m_pFirst )
   {
-    v8 = v3->Item.item;
-    if ( v8->pAction->key == v6 && (!v5 || v8->UserParam.m_PlayingID == v5) )
+    item = m_pFirst->Item.item;
+    if ( item->pAction->key == in_ActionID && (!in_PlayingID || item->UserParam.m_PlayingID == in_PlayingID) )
     {
-      v9 = v8->ulPauseCount;
-      if ( !v9 )
+      ulPauseCount = item->ulPauseCount;
+      if ( !ulPauseCount )
       {
-        CAkAudioMgr::TransferToPending(v7, v3->Item.item);
-        v10 = v3->pNextListItem;
-        v12.m128i_i64[1] = (__int64)v4;
-        v12.m128i_i64[0] = (__int64)v3->pNextListItem;
-        if ( v3 == v7->m_mmapPausedPending.m_pFirst )
-          v7->m_mmapPausedPending.m_pFirst = v10;
+        CAkAudioMgr::TransferToPending(this, m_pFirst->Item.item);
+        pNextListItem = m_pFirst->pNextListItem;
+        v12 = m_pFirst->pNextListItem;
+        if ( m_pFirst == this->m_mmapPausedPending.m_pFirst )
+          this->m_mmapPausedPending.m_pFirst = pNextListItem;
         else
-          v4->pNextListItem = v10;
-        if ( v3 == v7->m_mmapPausedPending.m_pLast )
-          v7->m_mmapPausedPending.m_pLast = v4;
-        v3->pNextListItem = v7->m_mmapPausedPending.m_pFree;
-        --v7->m_mmapPausedPending.m_ulNumListItems;
-        _mm_store_si128(&v13, v12);
-        v4 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v13.m128i_i64[1];
-        v7->m_mmapPausedPending.m_pFree = v3;
-        v3 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v13.m128i_i64[0];
+          v4->pNextListItem = pNextListItem;
+        if ( m_pFirst == this->m_mmapPausedPending.m_pLast )
+          this->m_mmapPausedPending.m_pLast = v4;
+        m_pFirst->pNextListItem = this->m_mmapPausedPending.m_pFree;
+        --this->m_mmapPausedPending.m_ulNumListItems;
+        this->m_mmapPausedPending.m_pFree = m_pFirst;
+        m_pFirst = v12;
         continue;
       }
-      v8->ulPauseCount = v9 - 1;
+      item->ulPauseCount = ulPauseCount - 1;
     }
-    v4 = v3;
-    v3 = v3->pNextListItem;
+    v4 = m_pFirst;
+    m_pFirst = m_pFirst->pNextListItem;
   }
   return 1i64;
 }
@@ -3424,14 +3303,12 @@ signed __int64 __fastcall CAkAudioMgr::ResumeAction(CAkAudioMgr *this, unsigned 
 // RVA: 0xA47D60
 void __fastcall CAkAudioMgr::ClearPendingItems(CAkAudioMgr *this, unsigned int in_PlayingID)
 {
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v2; // rdi
-  unsigned int v3; // ebp
-  CAkAudioMgr *v4; // rbx
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rdi
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v5; // r14
-  AkPendingAction *v6; // rsi
-  CAkActionPlayAndContinue *v7; // rcx
-  int v8; // eax
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v9; // rax
+  AkPendingAction *item; // rsi
+  CAkActionPlayAndContinue *pAction; // rcx
+  int m_eActionType; // eax
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *pNextListItem; // rax
   int v10; // edi
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v11; // rdi
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v12; // r14
@@ -3440,71 +3317,66 @@ void __fastcall CAkAudioMgr::ClearPendingItems(CAkAudioMgr *this, unsigned int i
   int v15; // eax
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v16; // rax
   int v17; // edi
-  __m128i v18; // [rsp+20h] [rbp-88h]
-  __m128i v19; // [rsp+30h] [rbp-78h]
-  int v20; // [rsp+40h] [rbp-68h]
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v18; // [rsp+20h] [rbp-88h]
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v19; // [rsp+30h] [rbp-78h]
+  int v20[20]; // [rsp+40h] [rbp-68h] BYREF
 
-  v2 = this->m_mmapPending.m_pFirst;
-  v3 = in_PlayingID;
-  v4 = this;
+  m_pFirst = this->m_mmapPending.m_pFirst;
   v5 = 0i64;
-  if ( v2 )
+  if ( m_pFirst )
   {
     while ( 1 )
     {
-      v6 = v2->Item.item;
-      if ( v6->UserParam.m_PlayingID == v3 )
+      item = m_pFirst->Item.item;
+      if ( item->UserParam.m_PlayingID == in_PlayingID )
         break;
-      v5 = v2;
-      v2 = v2->pNextListItem;
+      v5 = m_pFirst;
+      m_pFirst = m_pFirst->pNextListItem;
 LABEL_14:
-      if ( !v2 )
+      if ( !m_pFirst )
         goto LABEL_15;
     }
-    v7 = (CAkActionPlayAndContinue *)v6->pAction;
-    v20 = 0;
-    v8 = v7->m_eActionType;
-    if ( v8 != 1027 )
+    pAction = (CAkActionPlayAndContinue *)item->pAction;
+    v20[0] = 0;
+    m_eActionType = pAction->m_eActionType;
+    if ( m_eActionType != 1027 )
     {
-      if ( v8 != 1283 )
+      if ( m_eActionType != 1283 )
       {
 LABEL_7:
-        CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, v6->UserParam.m_PlayingID);
-        v9 = v2->pNextListItem;
-        v18.m128i_i64[1] = (__int64)v5;
-        v18.m128i_i64[0] = (__int64)v9;
-        if ( v2 == v4->m_mmapPending.m_pFirst )
-          v4->m_mmapPending.m_pFirst = v9;
+        CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, item->UserParam.m_PlayingID);
+        pNextListItem = m_pFirst->pNextListItem;
+        v18 = m_pFirst->pNextListItem;
+        if ( m_pFirst == this->m_mmapPending.m_pFirst )
+          this->m_mmapPending.m_pFirst = pNextListItem;
         else
-          v5->pNextListItem = v9;
-        if ( v2 == v4->m_mmapPending.m_pLast )
-          v4->m_mmapPending.m_pLast = v5;
-        v2->pNextListItem = v4->m_mmapPending.m_pFree;
-        --v4->m_mmapPending.m_ulNumListItems;
-        v4->m_mmapPending.m_pFree = v2;
-        ((void (*)(void))v6->pAction->vfptr->Release)();
+          v5->pNextListItem = pNextListItem;
+        if ( m_pFirst == this->m_mmapPending.m_pLast )
+          this->m_mmapPending.m_pLast = v5;
+        m_pFirst->pNextListItem = this->m_mmapPending.m_pFree;
+        --this->m_mmapPending.m_ulNumListItems;
+        this->m_mmapPending.m_pFree = m_pFirst;
+        item->pAction->vfptr->Release(item->pAction);
         v10 = g_DefaultPoolId;
-        ((void (__fastcall *)(AkPendingAction *, _QWORD))v6->vfptr[1].TransUpdateValue)(v6, 0i64);
-        AK::MemoryMgr::Free(v10, v6);
-        _mm_store_si128(&v19, v18);
-        v5 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v19.m128i_i64[1];
-        v2 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v19.m128i_i64[0];
+        ((void (__fastcall *)(AkPendingAction *, _QWORD))item->vfptr[1].TransUpdateValue)(item, 0i64);
+        AK::MemoryMgr::Free(v10, item);
+        m_pFirst = v18;
         goto LABEL_14;
       }
-      CAkActionPlayAndContinue::NeedNotifyDelay(v7);
+      CAkActionPlayAndContinue::NeedNotifyDelay(pAction);
     }
-    ((void (__fastcall *)(CAkIndexableVtbl **, int *))v6->pAction->vfptr[2].Category)(&v6->pAction->vfptr, &v20);
+    ((void (__fastcall *)(CAkIndexableVtbl **, int *))item->pAction->vfptr[2].Category)(&item->pAction->vfptr, v20);
     goto LABEL_7;
   }
 LABEL_15:
-  v11 = v4->m_mmapPausedPending.m_pFirst;
+  v11 = this->m_mmapPausedPending.m_pFirst;
   v12 = 0i64;
   if ( v11 )
   {
     while ( 1 )
     {
       v13 = v11->Item.item;
-      if ( v13->UserParam.m_PlayingID == v3 )
+      if ( v13->UserParam.m_PlayingID == in_PlayingID )
         break;
       v12 = v11;
       v11 = v11->pNextListItem;
@@ -3513,7 +3385,7 @@ LABEL_28:
         return;
     }
     v14 = (CAkActionPlayAndContinue *)v13->pAction;
-    v20 = 0;
+    v20[0] = 0;
     v15 = v14->m_eActionType;
     if ( v15 != 1027 )
     {
@@ -3522,29 +3394,26 @@ LABEL_28:
 LABEL_21:
         CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, v13->UserParam.m_PlayingID);
         v16 = v11->pNextListItem;
-        v19.m128i_i64[1] = (__int64)v12;
-        v19.m128i_i64[0] = (__int64)v16;
-        if ( v11 == v4->m_mmapPausedPending.m_pFirst )
-          v4->m_mmapPausedPending.m_pFirst = v16;
+        v19 = v11->pNextListItem;
+        if ( v11 == this->m_mmapPausedPending.m_pFirst )
+          this->m_mmapPausedPending.m_pFirst = v16;
         else
           v12->pNextListItem = v16;
-        if ( v11 == v4->m_mmapPausedPending.m_pLast )
-          v4->m_mmapPausedPending.m_pLast = v12;
-        v11->pNextListItem = v4->m_mmapPausedPending.m_pFree;
-        --v4->m_mmapPausedPending.m_ulNumListItems;
-        v4->m_mmapPausedPending.m_pFree = v11;
-        ((void (*)(void))v13->pAction->vfptr->Release)();
+        if ( v11 == this->m_mmapPausedPending.m_pLast )
+          this->m_mmapPausedPending.m_pLast = v12;
+        v11->pNextListItem = this->m_mmapPausedPending.m_pFree;
+        --this->m_mmapPausedPending.m_ulNumListItems;
+        this->m_mmapPausedPending.m_pFree = v11;
+        v13->pAction->vfptr->Release(v13->pAction);
         v17 = g_DefaultPoolId;
         ((void (__fastcall *)(AkPendingAction *, _QWORD))v13->vfptr[1].TransUpdateValue)(v13, 0i64);
         AK::MemoryMgr::Free(v17, v13);
-        _mm_store_si128(&v18, v19);
-        v12 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v18.m128i_i64[1];
-        v11 = (CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *)v18.m128i_i64[0];
+        v11 = v19;
         goto LABEL_28;
       }
       CAkActionPlayAndContinue::NeedNotifyDelay(v14);
     }
-    ((void (__fastcall *)(CAkIndexableVtbl **, int *))v13->pAction->vfptr[2].Category)(&v13->pAction->vfptr, &v20);
+    ((void (__fastcall *)(CAkIndexableVtbl **, int *))v13->pAction->vfptr[2].Category)(&v13->pAction->vfptr, v20);
     goto LABEL_21;
   }
 }
@@ -3553,47 +3422,44 @@ LABEL_21:
 // RVA: 0xA47CC0
 void __fastcall CAkAudioMgr::ClearCrossFadeOccurence(CAkAudioMgr *this, CAkContinuousPBI *in_pPBIToCheck)
 {
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v2; // rbx
-  CAkContinuousPBI *v3; // rdi
-  CAkAudioMgr *i; // rsi
-  CAkActionPlayAndContinue *v5; // rcx
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *i; // rbx
+  CAkActionPlayAndContinue *pAction; // rcx
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *j; // rbx
   CAkActionPlayAndContinue *v7; // rcx
 
-  v2 = this->m_mmapPending.m_pFirst;
-  v3 = in_pPBIToCheck;
-  for ( i = this; v2; v2 = v2->pNextListItem )
+  for ( i = this->m_mmapPending.m_pFirst; i; i = i->pNextListItem )
   {
-    v5 = (CAkActionPlayAndContinue *)v2->Item.item->pAction;
-    if ( v5->m_eActionType == 1283 )
-      CAkActionPlayAndContinue::UnsetFadeBack(v5, v3);
+    pAction = (CAkActionPlayAndContinue *)i->Item.item->pAction;
+    if ( pAction->m_eActionType == 1283 )
+      CAkActionPlayAndContinue::UnsetFadeBack(pAction, in_pPBIToCheck);
   }
-  for ( j = i->m_mmapPausedPending.m_pFirst; j; j = j->pNextListItem )
+  for ( j = this->m_mmapPausedPending.m_pFirst; j; j = j->pNextListItem )
   {
     v7 = (CAkActionPlayAndContinue *)j->Item.item->pAction;
     if ( v7->m_eActionType == 1283 )
-      CAkActionPlayAndContinue::UnsetFadeBack(v7, v3);
+      CAkActionPlayAndContinue::UnsetFadeBack(v7, in_pPBIToCheck);
   }
 }
 
 // File Line: 2831
 // RVA: 0xA48420
-char __fastcall CAkAudioMgr::IsAnException(CAkAudioMgr *this, CAkAction *in_pAction, AkArray<WwiseObjectIDext,WwiseObjectIDext const &,ArrayPoolDefault,4,AkArrayAllocatorDefault> *in_pExceptionList)
+char __fastcall CAkAudioMgr::IsAnException(
+        CAkAudioMgr *this,
+        CAkAction *in_pAction,
+        AkArray<WwiseObjectIDext,WwiseObjectIDext const &,ArrayPoolDefault,4,AkArrayAllocatorDefault> *in_pExceptionList)
 {
-  AkArray<WwiseObjectIDext,WwiseObjectIDext const &,ArrayPoolDefault,4,AkArrayAllocatorDefault> *v3; // rsi
-  CAkParameterNodeBase *v5; // rbx
-  char v6; // di
+  CAkParameterNodeBase *m_pBusOutputNode; // rbx
+  bool v6; // di
   CAkParameterNodeBase *v7; // r8
   CAkParameterNodeBase *v8; // r11
-  WwiseObjectIDext *v9; // r10
-  signed __int64 v10; // rdx
+  WwiseObjectIDext *m_pItems; // r10
+  WwiseObjectIDext *v10; // rdx
   WwiseObjectIDext *v11; // rcx
   WwiseObjectIDext *v12; // rax
 
-  v3 = in_pExceptionList;
   if ( !in_pExceptionList )
     return 0;
-  v5 = 0i64;
+  m_pBusOutputNode = 0i64;
   v6 = 0;
   if ( !in_pAction->m_ulElementID )
     return 0;
@@ -3601,56 +3467,52 @@ char __fastcall CAkAudioMgr::IsAnException(CAkAudioMgr *this, CAkAction *in_pAct
   v8 = v7;
   if ( !v7 )
     return 0;
-  v9 = v3->m_pItems;
-  v10 = (signed __int64)&v3->m_pItems[v3->m_uLength];
+  m_pItems = in_pExceptionList->m_pItems;
+  v10 = &in_pExceptionList->m_pItems[in_pExceptionList->m_uLength];
   do
   {
-    v11 = v3->m_pItems;
-    if ( v9 != (WwiseObjectIDext *)v10 )
+    v11 = in_pExceptionList->m_pItems;
+    if ( m_pItems != v10 )
     {
-      while ( v7->key != v11->id || ((*((_BYTE *)v7 + 83) >> 1) & 1) != v11->bIsBus )
+      while ( v7->key != v11->id || ((*((_BYTE *)v7 + 83) & 2) != 0) != v11->bIsBus )
       {
-        ++v11;
-        if ( v11 == (WwiseObjectIDext *)v10 )
+        if ( ++v11 == v10 )
           goto LABEL_10;
       }
-      goto LABEL_22;
+      goto LABEL_21;
     }
 LABEL_10:
     if ( !v6 )
     {
-      v5 = v7->m_pBusOutputNode;
-      v6 = 0;
-      if ( v5 )
-        v6 = 1;
+      m_pBusOutputNode = v7->m_pBusOutputNode;
+      v6 = m_pBusOutputNode != 0i64;
     }
     v7 = v7->m_pParentNode;
   }
   while ( v7 );
-  if ( !v5 )
+  if ( !m_pBusOutputNode )
   {
-LABEL_20:
-    v8->vfptr->Release((CAkIndexable *)&v8->vfptr);
+LABEL_19:
+    v8->vfptr->Release(v8);
     return 0;
   }
   while ( 1 )
   {
-    v12 = v3->m_pItems;
-    if ( v9 != (WwiseObjectIDext *)v10 )
+    v12 = in_pExceptionList->m_pItems;
+    if ( m_pItems != v10 )
       break;
-LABEL_19:
-    v5 = v5->m_pBusOutputNode;
-    if ( !v5 )
-      goto LABEL_20;
-  }
-  while ( v5->key != v12->id || ((*((_BYTE *)v5 + 83) >> 1) & 1) != v12->bIsBus )
-  {
-    ++v12;
-    if ( v12 == (WwiseObjectIDext *)v10 )
+LABEL_18:
+    m_pBusOutputNode = m_pBusOutputNode->m_pBusOutputNode;
+    if ( !m_pBusOutputNode )
       goto LABEL_19;
   }
-LABEL_22:
-  v8->vfptr->Release((CAkIndexable *)&v8->vfptr);
+  while ( m_pBusOutputNode->key != v12->id || ((*((_BYTE *)m_pBusOutputNode + 83) & 2) != 0) != v12->bIsBus )
+  {
+    if ( ++v12 == v10 )
+      goto LABEL_18;
+  }
+LABEL_21:
+  v8->vfptr->Release(v8);
   return 1;
 }
 
@@ -3658,18 +3520,14 @@ LABEL_22:
 // RVA: 0xA4B4E0
 AKRESULT __fastcall CAkAudioMgr::Start(CAkAudioMgr *this)
 {
-  CAkAudioMgr *v1; // rbx
-  HANDLE v2; // rax
-  AKRESULT result; // eax
+  HANDLE EventW; // rax
 
-  v1 = this;
-  v2 = CreateEventW(0i64, 1, 0, 0i64);
-  v1->m_hEventMgrThreadDrainEvent.m_Event = v2;
-  if ( v2 )
-    result = CAkAudioThread::Start(&v1->m_audioThread);
+  EventW = CreateEventW(0i64, 1, 0, 0i64);
+  this->m_hEventMgrThreadDrainEvent.m_Event = EventW;
+  if ( EventW )
+    return CAkAudioThread::Start(&this->m_audioThread);
   else
-    result = 2;
-  return result;
+    return 2;
 }
 
 // File Line: 2971
@@ -3698,55 +3556,57 @@ void __fastcall AkPendingAction::AkPendingAction(AkPendingAction *this, CAkRegis
 // RVA: 0xA47830
 void __fastcall AkPendingAction::~AkPendingAction(AkPendingAction *this)
 {
-  CAkRegisteredObj *v1; // rdi
-  AkPendingAction *v2; // rsi
-  int v3; // er8
+  CAkRegisteredObj *pGameObj; // rdi
+  int v3; // r8d
   int v4; // ebx
-  AkExternalSourceArray *v5; // rcx
+  AkExternalSourceArray *pExternalSrcs; // rcx
 
-  v1 = this->pGameObj;
-  v2 = this;
+  pGameObj = this->pGameObj;
   this->vfptr = (ITransitionableVtbl *)&AkPendingAction::`vftable;
-  if ( v1 )
+  if ( pGameObj )
   {
-    v3 = *((_DWORD *)v1 + 30) ^ (*((_DWORD *)v1 + 30) ^ (*((_DWORD *)v1 + 30) - 1)) & 0x3FFFFFFF;
-    *((_DWORD *)v1 + 30) = v3;
-    if ( !(v3 & 0x3FFFFFFF) )
+    v3 = *((_DWORD *)pGameObj + 30) ^ (*((_DWORD *)pGameObj + 30) ^ (*((_DWORD *)pGameObj + 30) - 1)) & 0x3FFFFFFF;
+    *((_DWORD *)pGameObj + 30) = v3;
+    if ( (v3 & 0x3FFFFFFF) == 0 )
     {
       v4 = g_DefaultPoolId;
-      CAkRegisteredObj::~CAkRegisteredObj(v1);
-      AK::MemoryMgr::Free(v4, v1);
+      CAkRegisteredObj::~CAkRegisteredObj(pGameObj);
+      AK::MemoryMgr::Free(v4, pGameObj);
     }
   }
-  v5 = v2->UserParam.m_CustomParam.pExternalSrcs;
-  if ( v5 )
-    AkExternalSourceArray::Release(v5);
+  pExternalSrcs = this->UserParam.m_CustomParam.pExternalSrcs;
+  if ( pExternalSrcs )
+    AkExternalSourceArray::Release(pExternalSrcs);
 }
 
 // File Line: 2998
 // RVA: 0xA4C0A0
-void __fastcall AkPendingAction::TransUpdateValue(AkPendingAction *this, __int64 in_eTarget, float __formal, bool in_bIsTerminated)
+void __fastcall AkPendingAction::TransUpdateValue(
+        AkPendingAction *this,
+        __int64 in_eTarget,
+        float __formal,
+        bool in_bIsTerminated)
 {
-  CAkAction *v4; // rbx
+  CAkAction *pAction; // rbx
 
-  v4 = this->pAction;
-  if ( v4->m_eActionType == 1283 )
+  pAction = this->pAction;
+  if ( pAction->m_eActionType == 1283 )
   {
-    if ( ((_DWORD)in_eTarget - 0x1000000) & 0xFEFFFFFF )
+    if ( (((_DWORD)in_eTarget - 0x1000000) & 0xFEFFFFFF) != 0 )
     {
-      if ( !(((_DWORD)in_eTarget - 0x4000000) & 0xFBFFFFFF) && in_bIsTerminated )
+      if ( (((_DWORD)in_eTarget - 0x4000000) & 0xFBFFFFFF) == 0 && in_bIsTerminated )
       {
-        LOBYTE(v4[1].pNextLightItem) &= 0xFDu;
-        *(_QWORD *)&v4[1].key = 0i64;
+        LOBYTE(pAction[1].pNextLightItem) &= ~2u;
+        *(_QWORD *)&pAction[1].key = 0i64;
         if ( (_DWORD)in_eTarget == 0x4000000 )
           CAkAudioMgr::PausePending(g_pAudioMgr, this);
-        LODWORD(v4[4].pNextItem) = 0;
+        LODWORD(pAction[4].pNextItem) = 0;
       }
     }
     else if ( in_bIsTerminated )
     {
-      LOBYTE(v4[1].pNextLightItem) &= 0xFEu;
-      v4[1].pNextItem = 0i64;
+      LOBYTE(pAction[1].pNextLightItem) &= ~1u;
+      pAction[1].pNextItem = 0i64;
       if ( (_DWORD)in_eTarget == 0x2000000 )
         CAkAudioMgr::StopPending(g_pAudioMgr, this);
     }
@@ -3755,56 +3615,54 @@ void __fastcall AkPendingAction::TransUpdateValue(AkPendingAction *this, __int64
 
 // File Line: 3049
 // RVA: 0xA486E0
-signed __int64 __fastcall CAkAudioMgr::PausePending(CAkAudioMgr *this, AkPendingAction *in_pPA)
+__int64 __fastcall CAkAudioMgr::PausePending(CAkAudioMgr *this, AkPendingAction *in_pPA)
 {
-  CAkAudioMgr *v2; // rdi
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v3; // rbx
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rbx
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v4; // rsi
-  AkPendingAction *v5; // r8
-  CAkAction *v6; // rax
+  AkPendingAction *item; // r8
+  CAkAction *pAction; // rax
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v7; // rax
   AkPendingAction *v8; // rcx
   CAkAction *v9; // r8
-  unsigned int v10; // er9
-  int v11; // er9
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v12; // rax
+  unsigned int v10; // r9d
+  int pNextItem; // r9d
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *pNextListItem; // rax
 
-  v2 = this;
   if ( in_pPA )
   {
-    v3 = this->m_mmapPending.m_pFirst;
+    m_pFirst = this->m_mmapPending.m_pFirst;
     v4 = 0i64;
-    if ( v3 )
+    if ( m_pFirst )
     {
       while ( 1 )
       {
-        v5 = v3->Item.item;
-        v6 = v5->pAction;
-        if ( v5 == in_pPA )
+        item = m_pFirst->Item.item;
+        pAction = item->pAction;
+        if ( item == in_pPA )
           break;
-        v4 = v3;
-        v3 = v3->pNextListItem;
-        if ( !v3 )
+        v4 = m_pFirst;
+        m_pFirst = m_pFirst->pNextListItem;
+        if ( !m_pFirst )
           goto LABEL_5;
       }
       v10 = 0;
-      if ( v6->m_eActionType == 1283 )
+      if ( pAction->m_eActionType == 1283 )
       {
-        v11 = (int)v6[4].pNextItem;
-        LODWORD(v6[4].pNextItem) = 0;
-        v10 = v11 - 1;
+        pNextItem = (int)pAction[4].pNextItem;
+        LODWORD(pAction[4].pNextItem) = 0;
+        v10 = pNextItem - 1;
       }
-      CAkAudioMgr::InsertAsPaused(this, v6->m_ulElementID, v5, v10);
-      v12 = v3->pNextListItem;
-      if ( v3 == v2->m_mmapPending.m_pFirst )
-        v2->m_mmapPending.m_pFirst = v12;
+      CAkAudioMgr::InsertAsPaused(this, pAction->m_ulElementID, item, v10);
+      pNextListItem = m_pFirst->pNextListItem;
+      if ( m_pFirst == this->m_mmapPending.m_pFirst )
+        this->m_mmapPending.m_pFirst = pNextListItem;
       else
-        v4->pNextListItem = v12;
-      if ( v3 == v2->m_mmapPending.m_pLast )
-        v2->m_mmapPending.m_pLast = v4;
-      v3->pNextListItem = v2->m_mmapPending.m_pFree;
-      --v2->m_mmapPending.m_ulNumListItems;
-      v2->m_mmapPending.m_pFree = v3;
+        v4->pNextListItem = pNextListItem;
+      if ( m_pFirst == this->m_mmapPending.m_pLast )
+        this->m_mmapPending.m_pLast = v4;
+      m_pFirst->pNextListItem = this->m_mmapPending.m_pFree;
+      --this->m_mmapPending.m_ulNumListItems;
+      this->m_mmapPending.m_pFree = m_pFirst;
     }
     else
     {
@@ -3834,15 +3692,13 @@ LABEL_5:
 
 // File Line: 3103
 // RVA: 0xA4B790
-signed __int64 __fastcall CAkAudioMgr::StopPending(CAkAudioMgr *this, AkPendingAction *in_pPA)
+__int64 __fastcall CAkAudioMgr::StopPending(CAkAudioMgr *this, AkPendingAction *in_pPA)
 {
-  AkPendingAction *v2; // rdi
-  CAkAudioMgr *v3; // rsi
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v4; // rbx
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *m_pFirst; // rbx
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v5; // r14
-  CAkActionPlayAndContinue *v6; // rcx
-  int v7; // eax
-  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v8; // rax
+  CAkActionPlayAndContinue *pAction; // rcx
+  int m_eActionType; // eax
+  CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *pNextListItem; // rax
   int v9; // ebx
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v10; // rbx
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v11; // r14
@@ -3850,67 +3706,65 @@ signed __int64 __fastcall CAkAudioMgr::StopPending(CAkAudioMgr *this, AkPendingA
   int v13; // eax
   CAkList2<MapStruct<unsigned long,AkPendingAction *>,MapStruct<unsigned long,AkPendingAction *> const &,2,ArrayPoolDefault>::ListItem *v14; // rax
   int v15; // ebx
-  int v17; // [rsp+20h] [rbp-58h]
+  int v17[22]; // [rsp+20h] [rbp-58h] BYREF
 
-  v2 = in_pPA;
-  v3 = this;
   if ( !in_pPA )
     return 1i64;
-  v4 = this->m_mmapPausedPending.m_pFirst;
+  m_pFirst = this->m_mmapPausedPending.m_pFirst;
   v5 = 0i64;
-  if ( v4 )
+  if ( m_pFirst )
   {
-    while ( in_pPA != v4->Item.item )
+    while ( in_pPA != m_pFirst->Item.item )
     {
-      v5 = v4;
-      v4 = v4->pNextListItem;
-      if ( !v4 )
+      v5 = m_pFirst;
+      m_pFirst = m_pFirst->pNextListItem;
+      if ( !m_pFirst )
         goto LABEL_16;
     }
-    v6 = (CAkActionPlayAndContinue *)in_pPA->pAction;
-    v17 = 0;
-    v7 = v6->m_eActionType;
-    if ( v7 != 1027 )
+    pAction = (CAkActionPlayAndContinue *)in_pPA->pAction;
+    v17[0] = 0;
+    m_eActionType = pAction->m_eActionType;
+    if ( m_eActionType != 1027 )
     {
-      if ( v7 != 1283 )
+      if ( m_eActionType != 1283 )
       {
 LABEL_10:
-        CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, v2->UserParam.m_PlayingID);
-        v8 = v4->pNextListItem;
-        if ( v4 == v3->m_mmapPausedPending.m_pFirst )
-          v3->m_mmapPausedPending.m_pFirst = v8;
+        CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, in_pPA->UserParam.m_PlayingID);
+        pNextListItem = m_pFirst->pNextListItem;
+        if ( m_pFirst == this->m_mmapPausedPending.m_pFirst )
+          this->m_mmapPausedPending.m_pFirst = pNextListItem;
         else
-          v5->pNextListItem = v8;
-        if ( v4 == v3->m_mmapPausedPending.m_pLast )
-          v3->m_mmapPausedPending.m_pLast = v5;
-        v4->pNextListItem = v3->m_mmapPausedPending.m_pFree;
-        --v3->m_mmapPausedPending.m_ulNumListItems;
-        v3->m_mmapPausedPending.m_pFree = v4;
-        ((void (__cdecl *)(CAkAction *))v2->pAction->vfptr->Release)(v2->pAction);
+          v5->pNextListItem = pNextListItem;
+        if ( m_pFirst == this->m_mmapPausedPending.m_pLast )
+          this->m_mmapPausedPending.m_pLast = v5;
+        m_pFirst->pNextListItem = this->m_mmapPausedPending.m_pFree;
+        --this->m_mmapPausedPending.m_ulNumListItems;
+        this->m_mmapPausedPending.m_pFree = m_pFirst;
+        in_pPA->pAction->vfptr->Release(in_pPA->pAction);
         v9 = g_DefaultPoolId;
-        ((void (__fastcall *)(AkPendingAction *, _QWORD))v2->vfptr[1].TransUpdateValue)(v2, 0i64);
-        AK::MemoryMgr::Free(v9, v2);
+        ((void (__fastcall *)(AkPendingAction *, _QWORD))in_pPA->vfptr[1].TransUpdateValue)(in_pPA, 0i64);
+        AK::MemoryMgr::Free(v9, in_pPA);
         goto LABEL_16;
       }
-      CAkActionPlayAndContinue::NeedNotifyDelay(v6);
+      CAkActionPlayAndContinue::NeedNotifyDelay(pAction);
     }
-    ((void (__fastcall *)(CAkAction *, int *))v2->pAction->vfptr[2].Category)(v2->pAction, &v17);
+    ((void (__fastcall *)(CAkAction *, int *))in_pPA->pAction->vfptr[2].Category)(in_pPA->pAction, v17);
     goto LABEL_10;
   }
 LABEL_16:
-  v10 = v3->m_mmapPending.m_pFirst;
+  v10 = this->m_mmapPending.m_pFirst;
   v11 = 0i64;
   if ( !v10 )
     return 1i64;
-  while ( v2 != v10->Item.item )
+  while ( in_pPA != v10->Item.item )
   {
     v11 = v10;
     v10 = v10->pNextListItem;
     if ( !v10 )
       return 1i64;
   }
-  v12 = (CAkActionPlayAndContinue *)v2->pAction;
-  v17 = 0;
+  v12 = (CAkActionPlayAndContinue *)in_pPA->pAction;
+  v17[0] = 0;
   v13 = v12->m_eActionType;
   if ( v13 == 1027 )
     goto LABEL_23;
@@ -3918,23 +3772,23 @@ LABEL_16:
   {
     CAkActionPlayAndContinue::NeedNotifyDelay(v12);
 LABEL_23:
-    ((void (__fastcall *)(CAkAction *, int *))v2->pAction->vfptr[2].Category)(v2->pAction, &v17);
+    ((void (__fastcall *)(CAkAction *, int *))in_pPA->pAction->vfptr[2].Category)(in_pPA->pAction, v17);
   }
-  CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, v2->UserParam.m_PlayingID);
+  CAkPlayingMgr::RemoveItemActiveCount(g_pPlayingMgr, in_pPA->UserParam.m_PlayingID);
   v14 = v10->pNextListItem;
-  if ( v10 == v3->m_mmapPending.m_pFirst )
-    v3->m_mmapPending.m_pFirst = v14;
+  if ( v10 == this->m_mmapPending.m_pFirst )
+    this->m_mmapPending.m_pFirst = v14;
   else
     v11->pNextListItem = v14;
-  if ( v10 == v3->m_mmapPending.m_pLast )
-    v3->m_mmapPending.m_pLast = v11;
-  v10->pNextListItem = v3->m_mmapPending.m_pFree;
-  --v3->m_mmapPending.m_ulNumListItems;
-  v3->m_mmapPending.m_pFree = v10;
-  ((void (__cdecl *)(CAkAction *))v2->pAction->vfptr->Release)(v2->pAction);
+  if ( v10 == this->m_mmapPending.m_pLast )
+    this->m_mmapPending.m_pLast = v11;
+  v10->pNextListItem = this->m_mmapPending.m_pFree;
+  --this->m_mmapPending.m_ulNumListItems;
+  this->m_mmapPending.m_pFree = v10;
+  in_pPA->pAction->vfptr->Release(in_pPA->pAction);
   v15 = g_DefaultPoolId;
-  ((void (__fastcall *)(AkPendingAction *, _QWORD))v2->vfptr[1].TransUpdateValue)(v2, 0i64);
-  AK::MemoryMgr::Free(v15, v2);
+  ((void (__fastcall *)(AkPendingAction *, _QWORD))in_pPA->vfptr[1].TransUpdateValue)(in_pPA, 0i64);
+  AK::MemoryMgr::Free(v15, in_pPA);
   return 1i64;
 }
 

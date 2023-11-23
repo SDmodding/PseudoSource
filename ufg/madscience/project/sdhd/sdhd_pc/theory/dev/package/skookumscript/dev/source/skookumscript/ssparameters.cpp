@@ -2,7 +2,7 @@
 // RVA: 0x1461570
 __int64 dynamic_initializer_for__SSParameters::c_shared_params__()
 {
-  return atexit(dynamic_atexit_destructor_for__SSParameters::c_shared_params__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__SSParameters::c_shared_params__);
 }
 
 // File Line: 55
@@ -10,18 +10,14 @@ __int64 dynamic_initializer_for__SSParameters::c_shared_params__()
 void __fastcall SSParameters::SSParameters(SSParameters *this)
 {
   SSClass *v1; // rax
-  APCompactArrayLogical<SSParameterBase,ASymbol> *v2; // [rsp+48h] [rbp+10h]
-  APCompactArrayLogical<SSTypedName,ASymbol> *v3; // [rsp+48h] [rbp+10h]
 
   this->i_ref_count = 0;
-  v2 = &this->i_params;
-  v2->i_count = 0;
-  v2->i_array_p = 0i64;
-  v3 = &this->i_return_params;
-  v3->i_count = 0;
-  v3->i_array_p = 0i64;
+  this->i_params.i_count = 0;
+  this->i_params.i_array_p = 0i64;
+  this->i_return_params.i_count = 0;
+  this->i_return_params.i_array_p = 0i64;
   v1 = SSBrain::c_object_class_p;
-  this->i_result_type_p.i_obj_p = (SSClassDescBase *)&SSBrain::c_object_class_p->vfptr;
+  this->i_result_type_p.i_obj_p = SSBrain::c_object_class_p;
   if ( v1 )
     (*(void (__fastcall **)(SSClass *))v1->vfptr->gap8)(v1);
 }
@@ -30,39 +26,33 @@ void __fastcall SSParameters::SSParameters(SSParameters *this)
 // RVA: 0x1062F0
 void __fastcall SSParameters::SSParameters(SSParameters *this, SSParameters *params_p)
 {
-  SSParameters *v2; // rbx
-  SSParameters *v3; // rdi
-  SSParameterBase **v4; // r8
+  SSParameterBase **i_array_p; // r8
   SSTypedName **v5; // rcx
-  SSClassDescBase *v6; // rcx
+  SSClassDescBase *i_obj_p; // rcx
   SSClassDescBase *v7; // rcx
-  APCompactArrayLogical<SSParameterBase,ASymbol> *v8; // [rsp+48h] [rbp+10h]
-  APCompactArrayLogical<SSTypedName,ASymbol> *v9; // [rsp+48h] [rbp+10h]
+  APCompactArrayLogical<SSTypedName,ASymbol> *p_i_return_params; // [rsp+48h] [rbp+10h]
 
-  v2 = params_p;
-  v3 = this;
   this->i_ref_count = 0;
-  v8 = &this->i_params;
-  v4 = params_p->i_params.i_array_p;
-  v8->i_count = params_p->i_params.i_count;
-  v8->i_array_p = v4;
+  i_array_p = params_p->i_params.i_array_p;
+  this->i_params.i_count = params_p->i_params.i_count;
+  this->i_params.i_array_p = i_array_p;
   params_p->i_params.i_count = 0;
   params_p->i_params.i_array_p = 0i64;
-  v9 = &this->i_return_params;
+  p_i_return_params = &this->i_return_params;
   v5 = params_p->i_return_params.i_array_p;
-  v9->i_count = params_p->i_return_params.i_count;
-  v9->i_array_p = v5;
+  p_i_return_params->i_count = params_p->i_return_params.i_count;
+  p_i_return_params->i_array_p = v5;
   params_p->i_return_params.i_count = 0;
   params_p->i_return_params.i_array_p = 0i64;
-  v3->i_result_type_p.i_obj_p = params_p->i_result_type_p.i_obj_p;
-  v6 = params_p->i_result_type_p.i_obj_p;
-  if ( v6 )
-    (*(void (__cdecl **)(SSClassDescBase *))v6->vfptr->gap8)(v6);
-  v7 = v2->i_result_type_p.i_obj_p;
+  this->i_result_type_p.i_obj_p = params_p->i_result_type_p.i_obj_p;
+  i_obj_p = params_p->i_result_type_p.i_obj_p;
+  if ( i_obj_p )
+    (*(void (__fastcall **)(SSClassDescBase *))i_obj_p->vfptr->gap8)(i_obj_p);
+  v7 = params_p->i_result_type_p.i_obj_p;
   if ( v7 )
   {
-    (*(void (__cdecl **)(SSClassDescBase *))&v7->vfptr->gap8[8])(v7);
-    v2->i_result_type_p.i_obj_p = 0i64;
+    (*(void (__fastcall **)(SSClassDescBase *))&v7->vfptr->gap8[8])(v7);
+    params_p->i_result_type_p.i_obj_p = 0i64;
   }
 }
 
@@ -70,127 +60,117 @@ void __fastcall SSParameters::SSParameters(SSParameters *this, SSParameters *par
 // RVA: 0x107600
 void __fastcall SSParameters::~SSParameters(SSParameters *this)
 {
-  SSParameters *v1; // rbx
-  void **v2; // rsi
-  SSClassDescBase *v3; // rcx
+  APCompactArrayLogical<SSParameterBase,ASymbol> *p_i_params; // rsi
+  SSClassDescBase *i_obj_p; // rcx
 
-  v1 = this;
-  v2 = (void **)&this->i_params;
-  APCompactArrayBase<SSParameterBase>::free_all((APCompactArrayBase<SSParameterBase> *)&this->i_params.i_count);
-  APCompactArrayBase<SSTypedName>::free_all((APCompactArrayBase<SSTypedName> *)&v1->i_return_params.i_count);
-  v3 = v1->i_result_type_p.i_obj_p;
-  if ( v3 )
-    (*(void (__cdecl **)(SSClassDescBase *))&v3->vfptr->gap8[8])(v3);
-  AMemory::c_free_func(v1->i_return_params.i_array_p);
-  AMemory::c_free_func(v2[1]);
+  p_i_params = &this->i_params;
+  APCompactArrayBase<SSParameterBase>::free_all(&this->i_params);
+  APCompactArrayBase<SSTypedName>::free_all(&this->i_return_params);
+  i_obj_p = this->i_result_type_p.i_obj_p;
+  if ( i_obj_p )
+    (*(void (__fastcall **)(SSClassDescBase *))&i_obj_p->vfptr->gap8[8])(i_obj_p);
+  AMemory::c_free_func(this->i_return_params.i_array_p);
+  AMemory::c_free_func(p_i_params->i_array_p);
 }
 
 // File Line: 120
 // RVA: 0x107C10
 char __fastcall SSParameters::operator==(SSParameters *this, SSParameters *params)
 {
-  SSParameters *v2; // rbp
-  SSParameters *v3; // rsi
-  __int64 v5; // rax
+  __int64 i_count; // rax
   __int64 v6; // r15
-  SSParameterBase **v7; // rbx
+  SSParameterBase **i_array_p; // rbx
   SSParameterBase **v8; // rdi
-  unsigned __int64 v9; // r14
+  SSParameterBase **v9; // r14
   SSTypedName **v10; // rbx
   SSTypedName **v11; // rdi
-  unsigned __int64 v12; // rsi
+  SSTypedName **v12; // rsi
 
-  v2 = params;
-  v3 = this;
   if ( this == params )
     return 1;
   if ( this->i_result_type_p.i_obj_p != params->i_result_type_p.i_obj_p )
     return 0;
-  v5 = this->i_params.i_count;
-  if ( (_DWORD)v5 != params->i_params.i_count )
+  i_count = this->i_params.i_count;
+  if ( (_DWORD)i_count != params->i_params.i_count )
     return 0;
   v6 = this->i_return_params.i_count;
   if ( (_DWORD)v6 != params->i_return_params.i_count )
     return 0;
-  if ( !(_DWORD)v5 )
-    goto LABEL_14;
-  v7 = this->i_params.i_array_p;
-  v8 = params->i_params.i_array_p;
-  v9 = (unsigned __int64)&v7[v5];
-  if ( (unsigned __int64)v7 >= v9 )
-    goto LABEL_14;
-  while ( (*((unsigned __int8 (__fastcall **)(SSParameterBase *, SSParameterBase *))&(*v7)->vfptr->__vecDelDtor + 1))(
-            *v7,
-            *v8) )
+  if ( (_DWORD)i_count )
   {
-    ++v7;
-    ++v8;
-    if ( (unsigned __int64)v7 >= v9 )
-      goto LABEL_14;
-  }
-  if ( (unsigned __int64)v7 >= v9 )
-  {
-LABEL_14:
-    if ( !(_DWORD)v6 )
-      return 1;
-    v10 = v3->i_return_params.i_array_p;
-    v11 = v2->i_return_params.i_array_p;
-    v12 = (unsigned __int64)&v10[v6];
-    if ( (unsigned __int64)v10 >= v12 )
-      return 1;
-    while ( (*v10)->i_name.i_uid == (*v11)->i_name.i_uid
-         && SSClassDescBase::compare((*v10)->i_type_p.i_obj_p, (*v11)->i_type_p.i_obj_p) == AEquate_equal )
+    i_array_p = this->i_params.i_array_p;
+    v8 = params->i_params.i_array_p;
+    v9 = &i_array_p[i_count];
+    if ( i_array_p < v9 )
     {
-      ++v10;
-      ++v11;
-      if ( (unsigned __int64)v10 >= v12 )
-        return 1;
+      while ( (*((unsigned __int8 (__fastcall **)(SSParameterBase *, SSParameterBase *))&(*i_array_p)->vfptr->__vecDelDtor
+               + 1))(
+                *i_array_p,
+                *v8) )
+      {
+        ++i_array_p;
+        ++v8;
+        if ( i_array_p >= v9 )
+          goto LABEL_14;
+      }
+      if ( i_array_p < v9 )
+        return 0;
     }
-    if ( (unsigned __int64)v10 >= v12 )
-      return 1;
   }
-  return 0;
+LABEL_14:
+  if ( (_DWORD)v6 )
+  {
+    v10 = this->i_return_params.i_array_p;
+    v11 = params->i_return_params.i_array_p;
+    v12 = &v10[v6];
+    if ( v10 < v12 )
+    {
+      while ( (*v10)->i_name.i_uid == (*v11)->i_name.i_uid
+           && SSClassDescBase::compare((*v10)->i_type_p.i_obj_p, (*v11)->i_type_p.i_obj_p) == AEquate_equal )
+      {
+        ++v10;
+        ++v11;
+        if ( v10 >= v12 )
+          return 1;
+      }
+      if ( v10 < v12 )
+        return 0;
+    }
+  }
+  return 1;
 }
 
 // File Line: 191
 // RVA: 0x107D20
 bool __fastcall SSParameters::operator<(SSParameters *this, SSParameters *params)
 {
-  __int64 v2; // rdi
-  SSParameters *v3; // r15
+  __int64 i_count; // rdi
   unsigned int v4; // ecx
-  SSParameters *v5; // r14
-  bool result; // al
   unsigned int v7; // ecx
   __int64 v8; // rbp
   eAEquate v9; // ecx
   SSParameterBase **v10; // rbx
-  unsigned __int64 v11; // rsi
+  SSParameterBase **v11; // rsi
   SSParameterBase **v12; // rdi
-  SSTypedName **v13; // rbx
+  SSTypedName **i_array_p; // rbx
   SSTypedName **v14; // rdi
-  unsigned __int64 v15; // rsi
-  unsigned int v16; // eax
+  SSTypedName **v15; // rsi
+  unsigned int i_uid; // eax
   unsigned int v17; // ecx
 
-  v2 = this->i_params.i_count;
-  v3 = this;
+  i_count = this->i_params.i_count;
   v4 = params->i_params.i_count;
-  v5 = params;
-  if ( (_DWORD)v2 != v4 )
-    return (unsigned int)v2 < v4;
+  if ( (_DWORD)i_count != v4 )
+    return (unsigned int)i_count < v4;
   v7 = params->i_return_params.i_count;
-  v8 = v3->i_return_params.i_count;
+  v8 = this->i_return_params.i_count;
   if ( (_DWORD)v8 != v7 )
     return (unsigned int)v8 < v7;
-  v9 = SSClassDescBase::compare(v3->i_result_type_p.i_obj_p, params->i_result_type_p.i_obj_p);
+  v9 = SSClassDescBase::compare(this->i_result_type_p.i_obj_p, params->i_result_type_p.i_obj_p);
   if ( v9 )
-    return v9 == -1;
-  if ( (_DWORD)v2
-    && (v10 = v3->i_params.i_array_p,
-        v11 = (unsigned __int64)&v10[v2],
-        v12 = v5->i_params.i_array_p,
-        (unsigned __int64)v10 < v11) )
+    return v9 == AEquate_less;
+  if ( (_DWORD)i_count
+    && (v10 = this->i_params.i_array_p, v11 = &v10[i_count], v12 = params->i_params.i_array_p, v10 < v11) )
   {
     while ( (*((unsigned __int8 (__fastcall **)(SSParameterBase *, SSParameterBase *))&(*v10)->vfptr->__vecDelDtor + 1))(
               *v10,
@@ -198,40 +178,39 @@ bool __fastcall SSParameters::operator<(SSParameters *this, SSParameters *params
     {
       ++v10;
       ++v12;
-      if ( (unsigned __int64)v10 >= v11 )
+      if ( v10 >= v11 )
         goto LABEL_11;
     }
-    result = (*v10)->vfptr->compare_less(*v10, *v12);
+    return (*v10)->vfptr->compare_less(*v10, *v12);
   }
   else
   {
 LABEL_11:
     if ( (_DWORD)v8
-      && (v13 = v3->i_return_params.i_array_p,
-          v14 = v5->i_return_params.i_array_p,
-          v15 = (unsigned __int64)&v13[v8],
-          (unsigned __int64)v13 < v15) )
+      && (i_array_p = this->i_return_params.i_array_p,
+          v14 = params->i_return_params.i_array_p,
+          v15 = &i_array_p[v8],
+          i_array_p < v15) )
     {
-      while ( (*v13)->i_name.i_uid == (*v14)->i_name.i_uid
-           && SSClassDescBase::compare((*v13)->i_type_p.i_obj_p, (*v14)->i_type_p.i_obj_p) == AEquate_equal )
+      while ( (*i_array_p)->i_name.i_uid == (*v14)->i_name.i_uid
+           && SSClassDescBase::compare((*i_array_p)->i_type_p.i_obj_p, (*v14)->i_type_p.i_obj_p) == AEquate_equal )
       {
-        ++v13;
+        ++i_array_p;
         ++v14;
-        if ( (unsigned __int64)v13 >= v15 )
-          goto LABEL_16;
+        if ( i_array_p >= v15 )
+          return 0;
       }
-      v16 = (*v13)->i_name.i_uid;
+      i_uid = (*i_array_p)->i_name.i_uid;
       v17 = (*v14)->i_name.i_uid;
-      result = v16 < v17
-            || v16 == v17 && SSClassDescBase::compare((*v13)->i_type_p.i_obj_p, (*v14)->i_type_p.i_obj_p) == -1;
+      return i_uid < v17
+          || i_uid == v17
+          && SSClassDescBase::compare((*i_array_p)->i_type_p.i_obj_p, (*v14)->i_type_p.i_obj_p) == AEquate_less;
     }
     else
     {
-LABEL_16:
-      result = 0;
+      return 0;
     }
   }
-  return result;
 }
 
 // File Line: 261
@@ -240,40 +219,34 @@ char __fastcall SSParameters::is_valid_arg_to(SSParameters *this, SSParameters *
 {
   SSParameters *v2; // r15
   SSParameters *v3; // r14
-  __int64 v4; // rdx
-  __int64 v5; // r8
-  unsigned int v6; // er12
-  __int64 v7; // rsi
-  __int64 v8; // rbp
-  SSParameterBase **v9; // rcx
-  SSGroupParam **v10; // r13
-  SSGroupParam *v11; // rbx
-  SSGroupParam *v12; // r14
-  eSSParameter v13; // er15
-  eSSParameter v14; // eax
-  int v15; // eax
-  __int64 *v16; // rbx
-  __int64 v17; // rdi
-  __int64 v18; // rax
-  __int64 v19; // rax
-  __int64 v20; // rdi
-  __int64 v21; // rbx
-  __int64 v22; // rax
-  SSClassDescBase *v23; // rbx
-  __int64 *v24; // rbx
-  SSClassDescBase **v25; // rdi
-  SSParameterBase **v27; // rbx
-  unsigned int v28; // edi
-  SSTypedName **v29; // rax
-  signed __int64 v30; // rbx
-  char *v31; // rsi
-  SSGroupParam param; // [rsp+28h] [rbp-60h]
-  SSParameters *v33; // [rsp+90h] [rbp+8h]
-  SSParameters *v34; // [rsp+98h] [rbp+10h]
-  SSParameterBase **v35; // [rsp+A0h] [rbp+18h]
+  unsigned int i_count; // r12d
+  __int64 v5; // rsi
+  __int64 v6; // rbp
+  SSParameterBase **i_array_p; // rcx
+  SSGroupParam **v8; // r13
+  SSGroupParam *v9; // rbx
+  SSGroupParam *v10; // r14
+  eSSParameter v11; // r15d
+  eSSParameter v12; // eax
+  __int32 v13; // eax
+  SSClassDescBase *v14; // rbx
+  SSClassDescBaseVtbl *vfptr; // rdi
+  __int64 v16; // rax
+  __int64 v17; // rax
+  __int64 v18; // rdi
+  __int64 v19; // rbx
+  __int64 v20; // rax
+  SSClassDescBase *v21; // rbx
+  __int64 *v22; // rbx
+  SSClassDescBase **v23; // rdi
+  SSParameterBase **v25; // rbx
+  unsigned int v26; // edi
+  SSTypedName **v27; // rax
+  SSTypedName **v28; // rbx
+  char *v29; // rsi
+  SSGroupParam param; // [rsp+28h] [rbp-60h] BYREF
+  SSParameterBase **v33; // [rsp+A0h] [rbp+18h]
 
-  v34 = params;
-  v33 = this;
   v2 = params;
   v3 = this;
   if ( this != params )
@@ -282,64 +255,64 @@ char __fastcall SSParameters::is_valid_arg_to(SSParameters *this, SSParameters *
             this->i_result_type_p.i_obj_p,
             params->i_result_type_p.i_obj_p) )
       return 0;
-    v6 = v3->i_params.i_count;
-    v7 = 0i64;
-    v8 = 0i64;
-    v9 = v3->i_params.i_array_p;
-    v35 = v3->i_params.i_array_p;
-    v10 = (SSGroupParam **)v2->i_params.i_array_p;
-    if ( v6 )
+    i_count = v3->i_params.i_count;
+    v5 = 0i64;
+    v6 = 0i64;
+    i_array_p = v3->i_params.i_array_p;
+    v33 = i_array_p;
+    v8 = (SSGroupParam **)v2->i_params.i_array_p;
+    if ( i_count )
     {
       while ( 1 )
       {
-        if ( (unsigned int)v7 >= v6 )
+        if ( (unsigned int)v5 >= i_count )
           return 0;
-        v11 = *v10;
-        v12 = (SSGroupParam *)v9[v7];
-        v13 = (unsigned int)v12->vfptr->get_kind(v9[v7]);
-        v14 = (unsigned int)v11->vfptr->get_kind((SSParameterBase *)&v11->vfptr);
-        if ( v14 )
+        v9 = *v8;
+        v10 = (SSGroupParam *)i_array_p[v5];
+        v11 = v10->vfptr->get_kind(v10);
+        v12 = v9->vfptr->get_kind(v9);
+        if ( v12 )
         {
-          v15 = v14 - 1;
-          if ( !v15 )
+          v13 = v12 - 1;
+          if ( !v13 )
           {
-            if ( v13 != 1 )
+            if ( v11 != SSParameter_unary_default )
               return 0;
 LABEL_12:
-            v16 = (__int64 *)v11->vfptr->get_expected_type((SSParameterBase *)&v11->vfptr);
-            v17 = *v16;
-            v18 = (__int64)v12->vfptr->get_expected_type((SSParameterBase *)&v12->vfptr);
-            if ( !(*(unsigned __int8 (__fastcall **)(__int64 *, __int64))(v17 + 96))(v16, v18) )
+            v14 = v9->vfptr->get_expected_type(v9);
+            vfptr = v14->vfptr;
+            v16 = (__int64)v10->vfptr->get_expected_type(v10);
+            if ( !vfptr->is_class_type(v14, (SSClassDescBase *)v16) )
               return 0;
             goto LABEL_23;
           }
-          if ( v15 == 2 )
+          if ( v13 == 2 )
           {
-            if ( v13 != 3 )
+            if ( v11 != SSParameter_group )
               goto LABEL_12;
-            if ( !SSGroupParam::is_valid_arg_to(v12, v11) )
+            if ( !SSGroupParam::is_valid_arg_to(v10, v9) )
               return 0;
           }
         }
         else
         {
-          v19 = (__int64)v11->vfptr->get_expected_type((SSParameterBase *)&v11->vfptr);
-          v20 = v19;
-          if ( v13 == 3 )
+          v17 = (__int64)v9->vfptr->get_expected_type(v9);
+          v18 = v17;
+          if ( v11 == SSParameter_group )
           {
-            v23 = (SSClassDescBase *)(*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v19 + 112i64))(v19);
-            if ( !v23 )
+            v21 = (SSClassDescBase *)(*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v17 + 112i64))(v17);
+            if ( !v21 )
               return 0;
             param.i_name = (ASymbol)ASymbol::get_null()->i_uid;
             param.vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable;
             param.i_class_pattern.i_count = 0;
             param.i_class_pattern.i_array_p = 0i64;
             param.i_class_pattern.i_size = 0;
-            (*(void (__fastcall **)(SSClassDescBase *))v23->vfptr->gap8)(v23);
+            (*(void (__fastcall **)(SSClassDescBase *))v21->vfptr->gap8)(v21);
             APArray<SSClassDescBase,SSClassDescBase,ACompareAddress<SSClassDescBase>>::append(
               &param.i_class_pattern,
-              v23);
-            if ( !SSGroupParam::is_valid_arg_to(v12, &param) )
+              v21);
+            if ( !SSGroupParam::is_valid_arg_to(v10, &param) )
             {
               SSGroupParam::~SSGroupParam(&param);
               return 0;
@@ -347,16 +320,13 @@ LABEL_12:
             param.vfptr = (SSParameterBaseVtbl *)&SSGroupParam::`vftable;
             if ( param.i_class_pattern.i_count )
             {
-              v24 = (__int64 *)param.i_class_pattern.i_array_p;
-              v25 = &param.i_class_pattern.i_array_p[param.i_class_pattern.i_count];
-              if ( param.i_class_pattern.i_array_p < v25 )
+              v22 = (__int64 *)param.i_class_pattern.i_array_p;
+              v23 = &param.i_class_pattern.i_array_p[param.i_class_pattern.i_count];
+              if ( param.i_class_pattern.i_array_p < v23 )
               {
                 do
-                {
-                   SSClassDescBase::`vcall{16,{flat}}(*v24);
-                  ++v24;
-                }
-                while ( v24 < (__int64 *)v25 );
+                   SSClassDescBase::`vcall{16,{flat}}(*v22++);
+                while ( v22 < (__int64 *)v23 );
               }
             }
             AMemory::c_free_func(param.i_class_pattern.i_array_p);
@@ -364,58 +334,55 @@ LABEL_12:
           }
           else
           {
-            v21 = *(_QWORD *)v19;
-            v22 = (__int64)v12->vfptr->get_expected_type((SSParameterBase *)&v12->vfptr);
-            if ( !(*(unsigned __int8 (__fastcall **)(__int64, __int64))(v21 + 96))(v20, v22) )
+            v19 = *(_QWORD *)v17;
+            v20 = (__int64)v10->vfptr->get_expected_type(v10);
+            if ( !(*(unsigned __int8 (__fastcall **)(__int64, __int64))(v19 + 96))(v18, v20) )
               return 0;
           }
         }
 LABEL_23:
-        v7 = (unsigned int)(v7 + 1);
-        v8 = (unsigned int)(v8 + 1);
-        ++v10;
-        v9 = v35;
-        if ( (unsigned int)v8 >= v6 )
+        v5 = (unsigned int)(v5 + 1);
+        v6 = (unsigned int)(v6 + 1);
+        ++v8;
+        i_array_p = v33;
+        if ( (unsigned int)v6 >= i_count )
         {
-          v3 = v33;
-          v2 = v34;
+          v3 = this;
+          v2 = params;
           break;
         }
       }
     }
-    if ( (unsigned int)v7 < v6 )
+    if ( (unsigned int)v5 < i_count )
     {
-      v27 = &v9[v7];
-      while ( ((unsigned __int8 (__cdecl *)(SSParameterBase *, __int64, __int64))(*v27)->vfptr->is_defaultable)(
-                *v27,
-                v4,
-                v5) )
+      v25 = &i_array_p[v5];
+      while ( (*v25)->vfptr->is_defaultable(*v25) )
       {
-        LODWORD(v7) = v7 + 1;
-        ++v27;
-        if ( (unsigned int)v7 >= v6 )
+        LODWORD(v5) = v5 + 1;
+        ++v25;
+        if ( (unsigned int)v5 >= i_count )
           goto LABEL_31;
       }
       return 0;
     }
 LABEL_31:
-    v28 = v2->i_return_params.i_count;
-    if ( v3->i_return_params.i_count < v28 )
+    v26 = v2->i_return_params.i_count;
+    if ( v3->i_return_params.i_count < v26 )
       return 0;
-    if ( v28 )
+    if ( v26 )
     {
-      v29 = v2->i_return_params.i_array_p;
-      if ( (unsigned int)v8 < v28 )
+      v27 = v2->i_return_params.i_array_p;
+      if ( (unsigned int)v6 < v26 )
       {
-        v30 = (signed __int64)&v29[v8];
-        v31 = (char *)((char *)v3->i_return_params.i_array_p - (char *)v29);
-        while ( (*(unsigned __int8 (__fastcall **)(_QWORD, _QWORD))(**(_QWORD **)(*(_QWORD *)&v31[v30] + 8i64) + 96i64))(
-                  *(_QWORD *)(*(_QWORD *)&v31[v30] + 8i64),
-                  *(_QWORD *)(*(_QWORD *)v30 + 8i64)) )
+        v28 = &v27[v6];
+        v29 = (char *)((char *)v3->i_return_params.i_array_p - (char *)v27);
+        while ( (*(SSTypedName **)((char *)v28 + (_QWORD)v29))->i_type_p.i_obj_p->vfptr->is_class_type(
+                  (*(SSTypedName **)((char *)v28 + (_QWORD)v29))->i_type_p.i_obj_p,
+                  (*v28)->i_type_p.i_obj_p) )
         {
-          LODWORD(v8) = v8 + 1;
-          v30 += 8i64;
-          if ( (unsigned int)v8 >= v28 )
+          LODWORD(v6) = v6 + 1;
+          ++v28;
+          if ( (unsigned int)v6 >= v26 )
             return 1;
         }
         return 0;
@@ -429,20 +396,16 @@ LABEL_31:
 // RVA: 0x13C770
 void __fastcall SSParameters::set_result_type(SSParameters *this, SSClassDescBase *rclass)
 {
-  SSClassDescBase *v2; // rbx
-  SSParameters *v3; // rdi
-  SSClassDescBase *v4; // rcx
+  SSClassDescBase *i_obj_p; // rcx
 
-  v2 = rclass;
-  v3 = this;
   if ( this->i_result_type_p.i_obj_p != rclass )
   {
     if ( rclass )
       (*(void (__fastcall **)(SSClassDescBase *))rclass->vfptr->gap8)(rclass);
-    v4 = v3->i_result_type_p.i_obj_p;
-    if ( v4 )
-      (*(void (**)(void))&v4->vfptr->gap8[8])();
-    v3->i_result_type_p.i_obj_p = v2;
+    i_obj_p = this->i_result_type_p.i_obj_p;
+    if ( i_obj_p )
+      (*(void (__fastcall **)(SSClassDescBase *))&i_obj_p->vfptr->gap8[8])(i_obj_p);
+    this->i_result_type_p.i_obj_p = rclass;
   }
 }
 
@@ -450,77 +413,71 @@ void __fastcall SSParameters::set_result_type(SSParameters *this, SSClassDescBas
 // RVA: 0x1060D0
 void __fastcall SSParameters::SSParameters(SSParameters *this, const void **binary_pp)
 {
-  const void **v2; // rbx
-  SSParameters *v3; // r14
-  APCompactArrayLogical<SSParameterBase,ASymbol> *v4; // rdi
-  APCompactArrayBase<SSTypedName> *v5; // rsi
+  APCompactArrayLogical<SSParameterBase,ASymbol> *p_i_params; // rdi
+  APCompactArrayLogical<SSTypedName,ASymbol> *p_i_return_params; // rsi
   __int64 v6; // rbp
-  SSParameterBase **v7; // rcx
+  SSParameterBase **i_array_p; // rcx
   SSParameterBase **v8; // rdi
-  unsigned __int64 i; // rbp
+  SSParameterBase **i; // rbp
   __int64 v10; // rdi
   SSTypedName **v11; // rcx
   SSTypedName **v12; // rsi
-  unsigned __int64 v13; // rbp
+  SSTypedName **v13; // rbp
   SSTypedName *v14; // rdi
-  __int64 v15; // rdx
+  int v15; // ecx
   int v16; // ecx
   int v17; // ecx
   int v18; // ecx
-  int v19; // ecx
-  SSClass *v20; // rcx
-  SSClass *v21; // rax
-  ASymbol *v22; // rax
-  SSClass *v23; // rax
-  ASymbol *v24; // rax
-  eSSClassType v25; // ecx
-  SSClassDescBase *v26; // rax
-  __int64 v27; // rdx
-  SSClassDescBase *v28; // rbx
-  SSClassDescBase *v29; // rcx
-  APCompactArrayBase<SSTypedName> *result; // [rsp+78h] [rbp+10h]
-  ASymbol v31; // [rsp+80h] [rbp+18h]
-  ASymbol v32; // [rsp+88h] [rbp+20h]
+  SSClass *v19; // rcx
+  SSClass *v20; // rax
+  ASymbol *v21; // rax
+  SSClass *v22; // rax
+  ASymbol *v23; // rax
+  eSSClassType v24; // ecx
+  SSClassDescBase *v25; // rax
+  SSClassDescBase *v26; // rbx
+  SSClassDescBase *i_obj_p; // rcx
+  APCompactArrayLogical<SSTypedName,ASymbol> *result; // [rsp+78h] [rbp+10h] BYREF
+  ASymbol v29; // [rsp+80h] [rbp+18h] BYREF
+  ASymbol v30; // [rsp+88h] [rbp+20h] BYREF
 
-  v2 = binary_pp;
-  v3 = this;
   this->i_ref_count = 0;
-  v4 = &this->i_params;
-  v4->i_count = 0;
-  v4->i_array_p = 0i64;
-  v5 = (APCompactArrayBase<SSTypedName> *)&this->i_return_params.i_count;
-  result = v5;
-  v5->i_count = 0;
-  v5->i_array_p = 0i64;
+  p_i_params = &this->i_params;
+  this->i_params.i_count = 0;
+  this->i_params.i_array_p = 0i64;
+  p_i_return_params = &this->i_return_params;
+  result = &this->i_return_params;
+  this->i_return_params.i_count = 0;
+  this->i_return_params.i_array_p = 0i64;
   this->i_result_type_p.i_obj_p = 0i64;
   v6 = *(unsigned __int8 *)*binary_pp;
   *binary_pp = (char *)*binary_pp + 1;
-  APCompactArrayBase<SSParameterBase>::free_all((APCompactArrayBase<SSParameterBase> *)&this->i_params.i_count);
-  if ( v4->i_count != (_DWORD)v6 )
+  APCompactArrayBase<SSParameterBase>::free_all(&this->i_params);
+  if ( p_i_params->i_count != (_DWORD)v6 )
   {
-    v4->i_count = v6;
-    v7 = v4->i_array_p;
-    if ( v7 )
-      AMemory::c_free_func(v7);
-    v4->i_array_p = APArrayBase<SSParameterBase>::alloc_array(v6);
+    p_i_params->i_count = v6;
+    i_array_p = p_i_params->i_array_p;
+    if ( i_array_p )
+      AMemory::c_free_func(i_array_p);
+    p_i_params->i_array_p = APArrayBase<SSParameterBase>::alloc_array(v6);
   }
-  v8 = v3->i_params.i_array_p;
-  for ( i = (unsigned __int64)&v8[v6]; (unsigned __int64)v8 < i; ++v8 )
-    *v8 = SSParameterBase::from_binary_new(v2);
-  v10 = *(unsigned __int8 *)*v2;
-  *v2 = (char *)*v2 + 1;
-  APCompactArrayBase<SSTypedName>::free_all(v5);
-  if ( v5->i_count != (_DWORD)v10 )
+  v8 = this->i_params.i_array_p;
+  for ( i = &v8[v6]; v8 < i; ++v8 )
+    *v8 = SSParameterBase::from_binary_new(binary_pp);
+  v10 = *(unsigned __int8 *)*binary_pp;
+  *binary_pp = (char *)*binary_pp + 1;
+  APCompactArrayBase<SSTypedName>::free_all(p_i_return_params);
+  if ( p_i_return_params->i_count != (_DWORD)v10 )
   {
-    v5->i_count = v10;
-    v11 = v5->i_array_p;
+    p_i_return_params->i_count = v10;
+    v11 = p_i_return_params->i_array_p;
     if ( v11 )
       AMemory::c_free_func(v11);
-    v5->i_array_p = APArrayBase<SSTypedName>::alloc_array(v10);
+    p_i_return_params->i_array_p = APArrayBase<SSTypedName>::alloc_array(v10);
   }
-  v12 = v3->i_return_params.i_array_p;
-  v13 = (unsigned __int64)&v12[v10];
-  if ( (unsigned __int64)v12 < v13 )
+  v12 = this->i_return_params.i_array_p;
+  v13 = &v12[v10];
+  if ( v12 < v13 )
   {
     while ( 1 )
     {
@@ -529,74 +486,73 @@ void __fastcall SSParameters::SSParameters(SSParameters *this, const void **bina
         break;
       v14 = 0i64;
 LABEL_29:
-      *v12 = v14;
-      ++v12;
-      if ( (unsigned __int64)v12 >= v13 )
+      *v12++ = v14;
+      if ( v12 >= v13 )
         goto LABEL_30;
     }
-    v14->i_name = (ASymbol)ASymbol::create_from_binary((ASymbol *)&result, v2)->i_uid;
-    v16 = *(unsigned __int8 *)*v2;
-    *v2 = (char *)*v2 + 1;
-    if ( v16 )
+    v14->i_name = (ASymbol)ASymbol::create_from_binary((ASymbol *)&result, binary_pp)->i_uid;
+    v15 = *(unsigned __int8 *)*binary_pp;
+    *binary_pp = (char *)*binary_pp + 1;
+    if ( v15 )
     {
-      v17 = v16 - 1;
-      if ( v17 )
+      v16 = v15 - 1;
+      if ( v16 )
       {
-        v18 = v17 - 1;
-        if ( v18 )
+        v17 = v16 - 1;
+        if ( v17 )
         {
-          v19 = v18 - 1;
-          if ( v19 )
+          v18 = v17 - 1;
+          if ( v18 )
           {
-            if ( v19 != 1 )
+            if ( v18 != 1 )
             {
-              v20 = 0i64;
+              v19 = 0i64;
               goto LABEL_25;
             }
-            v21 = (SSClass *)SSClassUnion::from_binary_ref(v2);
+            v20 = (SSClass *)SSClassUnion::from_binary_ref(binary_pp);
           }
           else
           {
-            v21 = (SSClass *)SSInvokableClass::from_binary_ref(v2);
+            v20 = (SSClass *)SSInvokableClass::from_binary_ref(binary_pp);
           }
         }
         else
         {
-          v21 = (SSClass *)SSTypedClass::from_binary_ref(v2);
+          v20 = (SSClass *)SSTypedClass::from_binary_ref(binary_pp);
         }
       }
       else
       {
-        v22 = ASymbol::create_from_binary(&v31, v2);
-        v23 = SSBrain::get_class(v22);
-        v21 = (SSClass *)v23->vfptr->get_metaclass((SSClassDescBase *)&v23->vfptr);
+        v21 = ASymbol::create_from_binary(&v29, binary_pp);
+        v22 = SSBrain::get_class(v21);
+        v20 = (SSClass *)v22->vfptr->get_metaclass(v22);
       }
     }
     else
     {
-      v24 = ASymbol::create_from_binary(&v32, v2);
-      v21 = SSBrain::get_class(v24);
+      v23 = ASymbol::create_from_binary(&v30, binary_pp);
+      v20 = SSBrain::get_class(v23);
     }
-    v20 = v21;
+    v19 = v20;
 LABEL_25:
-    v14->i_type_p.i_obj_p = (SSClassDescBase *)&v20->vfptr;
-    if ( v20 )
-      (*(void (__cdecl **)(SSClass *, __int64))v20->vfptr->gap8)(v20, v15);
+    v14->i_type_p.i_obj_p = v19;
+    if ( v19 )
+      (*(void (__fastcall **)(SSClass *))v19->vfptr->gap8)(v19);
     goto LABEL_29;
   }
 LABEL_30:
-  v25 = *(unsigned __int8 *)*v2;
-  *v2 = (char *)*v2 + 1;
-  v26 = SSClassDescBase::from_binary_ref(v25, v2);
-  v28 = v26;
-  if ( v3->i_result_type_p.i_obj_p != v26 )
+  v24 = *(unsigned __int8 *)*binary_pp;
+  *binary_pp = (char *)*binary_pp + 1;
+  v25 = SSClassDescBase::from_binary_ref(v24, binary_pp);
+  v26 = v25;
+  if ( this->i_result_type_p.i_obj_p != v25 )
   {
-    if ( v26 )
-      (*(void (__fastcall **)(SSClassDescBase *))v26->vfptr->gap8)(v26);
-    v29 = v3->i_result_type_p.i_obj_p;
-    if ( v29 )
-      (*(void (__cdecl **)(SSClassDescBase *, __int64))&v29->vfptr->gap8[8])(v29, v27);
-    v3->i_result_type_p.i_obj_p = v28;
+    if ( v25 )
+      (*(void (__fastcall **)(SSClassDescBase *))v25->vfptr->gap8)(v25);
+    i_obj_p = this->i_result_type_p.i_obj_p;
+    if ( i_obj_p )
+      (*(void (__fastcall **)(SSClassDescBase *))&i_obj_p->vfptr->gap8[8])(i_obj_p);
+    this->i_result_type_p.i_obj_p = v26;
   }
 }
 
@@ -604,15 +560,15 @@ LABEL_30:
 // RVA: 0x117480
 __int64 __fastcall SSParameters::get_arg_count_min(SSParameters *this)
 {
-  SSParameterBase **v1; // rbx
+  SSParameterBase **i_array_p; // rbx
   unsigned int v2; // edi
-  unsigned __int64 i; // rsi
+  SSParameterBase **i; // rsi
 
-  v1 = this->i_params.i_array_p;
+  i_array_p = this->i_params.i_array_p;
   v2 = 0;
-  for ( i = (unsigned __int64)&v1[this->i_params.i_count]; (unsigned __int64)v1 < i; ++v1 )
+  for ( i = &i_array_p[this->i_params.i_count]; i_array_p < i; ++i_array_p )
   {
-    if ( !((unsigned int (*)(void))(*v1)->vfptr->get_kind)() )
+    if ( (*i_array_p)->vfptr->get_kind(*i_array_p) == SSParameter_unary )
       ++v2;
   }
   return v2;
@@ -622,30 +578,26 @@ __int64 __fastcall SSParameters::get_arg_count_min(SSParameters *this)
 // RVA: 0x13E7A0
 void __fastcall SSParameters::track_memory(SSParameters *this, AMemoryStats *mem_stats_p)
 {
-  unsigned int v2; // er14
-  AMemoryStats *v3; // rsi
-  SSParameters *v4; // rbp
-  SSParameterBase **v5; // rbx
-  unsigned __int64 i; // rdi
+  unsigned int i_count; // r14d
+  SSParameterBase **i_array_p; // rbx
+  SSParameterBase **i; // rdi
 
-  v2 = this->i_return_params.i_count;
-  v3 = mem_stats_p;
-  v4 = this;
-  if ( v2 )
+  i_count = this->i_return_params.i_count;
+  if ( i_count )
     AMemoryStats::track_memory(mem_stats_p, "SSTypedName", 0x10u, 0, 0, 0, this->i_return_params.i_count);
-  v5 = v4->i_params.i_array_p;
-  for ( i = (unsigned __int64)&v5[v4->i_params.i_count]; (unsigned __int64)v5 < i; ++v5 )
+  i_array_p = this->i_params.i_array_p;
+  for ( i = &i_array_p[this->i_params.i_count]; i_array_p < i; ++i_array_p )
   {
-    if ( *v5 )
-      (*v5)->vfptr->track_memory(*v5, v3);
+    if ( *i_array_p )
+      (*i_array_p)->vfptr->track_memory(*i_array_p, mem_stats_p);
   }
   AMemoryStats::track_memory(
-    v3,
+    mem_stats_p,
     "SSParameters",
     0x30u,
     0,
-    8 * (v2 + v4->i_params.i_count),
-    8 * (v2 + v4->i_params.i_count),
+    8 * (i_count + this->i_params.i_count),
+    8 * (i_count + this->i_params.i_count),
     1u);
 }
 
@@ -653,41 +605,37 @@ void __fastcall SSParameters::track_memory(SSParameters *this, AMemoryStats *mem
 // RVA: 0x11ED50
 char __fastcall SSParameters::is_generic(SSParameters *this)
 {
-  SSParameters *v1; // rsi
-  __int64 v3; // rax
+  __int64 i_count; // rax
   SSParameterBase **v4; // rbx
-  unsigned __int64 v5; // rdi
+  SSParameterBase **v5; // rdi
   __int64 v6; // rax
-  SSTypedName **v7; // rbx
-  unsigned __int64 v8; // rdi
+  SSTypedName **i_array_p; // rbx
+  SSTypedName **v8; // rdi
 
-  v1 = this;
-  if ( ((unsigned __int8 (*)(void))this->i_result_type_p.i_obj_p->vfptr->is_generic)() )
+  if ( this->i_result_type_p.i_obj_p->vfptr->is_generic(this->i_result_type_p.i_obj_p) )
     return 1;
-  v3 = v1->i_params.i_count;
-  if ( (_DWORD)v3 && (v4 = v1->i_params.i_array_p, v5 = (unsigned __int64)&v4[v3], (unsigned __int64)v4 < v5) )
+  i_count = this->i_params.i_count;
+  if ( (_DWORD)i_count && (v4 = this->i_params.i_array_p, v5 = &v4[i_count], v4 < v5) )
   {
-    while ( !((unsigned __int8 (*)(void))(*v4)->vfptr->is_generic)() )
+    while ( !(*v4)->vfptr->is_generic(*v4) )
     {
-      ++v4;
-      if ( (unsigned __int64)v4 >= v5 )
+      if ( ++v4 >= v5 )
         goto LABEL_7;
     }
   }
   else
   {
 LABEL_7:
-    v6 = v1->i_return_params.i_count;
+    v6 = this->i_return_params.i_count;
     if ( !(_DWORD)v6 )
       return 0;
-    v7 = v1->i_return_params.i_array_p;
-    v8 = (unsigned __int64)&v7[v6];
-    if ( (unsigned __int64)v7 >= v8 )
+    i_array_p = this->i_return_params.i_array_p;
+    v8 = &i_array_p[v6];
+    if ( i_array_p >= v8 )
       return 0;
-    while ( !((unsigned __int8 (*)(void))(*v7)->i_type_p.i_obj_p->vfptr->is_generic)() )
+    while ( !(*i_array_p)->i_type_p.i_obj_p->vfptr->is_generic((*i_array_p)->i_type_p.i_obj_p) )
     {
-      ++v7;
-      if ( (unsigned __int64)v7 >= v8 )
+      if ( ++i_array_p >= v8 )
         return 0;
     }
   }
@@ -698,115 +646,100 @@ LABEL_7:
 // RVA: 0x10EE30
 SSParameters *__fastcall SSParameters::as_finalized_generic(SSParameters *this, SSClassDescBase *scope_type)
 {
-  SSClassDescBase *v2; // r12
-  SSParameters *v3; // r14
-  __int64 v4; // rdx
-  __int64 v5; // rsi
-  SSParameterBase **v6; // rdi
-  SSParameterBase **v7; // rbx
-  unsigned __int64 i; // rsi
-  __int64 v9; // rbx
-  SSTypedName **v10; // rsi
-  SSTypedName **v11; // rdi
-  unsigned __int64 j; // r15
-  SSTypedName *v13; // r14
-  SSTypedName *v14; // rbx
-  __int64 v15; // rax
-  SSParameters *v16; // rbx
-  __int64 v17; // rdx
-  SSParameters params_p; // [rsp+28h] [rbp-38h]
+  __int64 i_count; // rsi
+  SSParameterBase **i_array_p; // rdi
+  SSParameterBase **v6; // rbx
+  SSParameterBase **i; // rsi
+  __int64 v8; // rbx
+  SSTypedName **v9; // rsi
+  SSTypedName **v10; // rdi
+  SSTypedName **j; // r15
+  SSTypedName *v12; // r14
+  SSTypedName *v13; // rbx
+  __int64 v14; // rax
+  SSParameters *v15; // rbx
+  SSParameters params_p; // [rsp+28h] [rbp-38h] BYREF
 
-  v2 = scope_type;
-  v3 = this;
   if ( !SSParameters::is_generic(this) )
-    return v3;
+    return this;
   params_p.i_ref_count = 0;
   params_p.i_params.i_count = 0;
   params_p.i_params.i_array_p = 0i64;
   params_p.i_return_params.i_count = 0;
   params_p.i_return_params.i_array_p = 0i64;
-  params_p.i_result_type_p.i_obj_p = (SSClassDescBase *)&SSBrain::c_object_class_p->vfptr;
+  params_p.i_result_type_p.i_obj_p = SSBrain::c_object_class_p;
   if ( SSBrain::c_object_class_p )
-    (*(void (__cdecl **)(SSClass *, __int64))SSBrain::c_object_class_p->vfptr->gap8)(SSBrain::c_object_class_p, v4);
-  params_p.i_result_type_p.i_obj_p->vfptr->as_finalized_generic(params_p.i_result_type_p.i_obj_p, v2);
-  v5 = v3->i_params.i_count;
-  if ( (_DWORD)v5 )
+    (*(void (__fastcall **)(SSClass *))SSBrain::c_object_class_p->vfptr->gap8)(SSBrain::c_object_class_p);
+  params_p.i_result_type_p.i_obj_p->vfptr->as_finalized_generic(params_p.i_result_type_p.i_obj_p, scope_type);
+  i_count = this->i_params.i_count;
+  if ( (_DWORD)i_count )
   {
-    if ( params_p.i_params.i_count == (_DWORD)v5 )
+    if ( params_p.i_params.i_count == (_DWORD)i_count )
     {
-      v6 = params_p.i_params.i_array_p;
+      i_array_p = params_p.i_params.i_array_p;
     }
     else
     {
-      params_p.i_params.i_count = v3->i_params.i_count;
-      if ( params_p.i_params.i_array_p )
-        AMemory::c_free_func(params_p.i_params.i_array_p);
-      v6 = APArrayBase<SSParameterBase>::alloc_array(v5);
-      params_p.i_params.i_array_p = v6;
+      params_p.i_params.i_count = this->i_params.i_count;
+      i_array_p = APArrayBase<SSParameterBase>::alloc_array(i_count);
+      params_p.i_params.i_array_p = i_array_p;
     }
-    v7 = v3->i_params.i_array_p;
-    for ( i = (unsigned __int64)&v7[v5]; (unsigned __int64)v7 < i; ++v7 )
-    {
-      *v6 = (*v7)->vfptr->as_finalized_generic(*v7, v2);
-      ++v6;
-    }
+    v6 = this->i_params.i_array_p;
+    for ( i = &v6[i_count]; v6 < i; ++v6 )
+      *i_array_p++ = (*v6)->vfptr->as_finalized_generic(*v6, scope_type);
   }
-  v9 = v3->i_return_params.i_count;
-  if ( (_DWORD)v9 )
+  v8 = this->i_return_params.i_count;
+  if ( (_DWORD)v8 )
   {
-    if ( params_p.i_return_params.i_count == (_DWORD)v9 )
+    if ( params_p.i_return_params.i_count == (_DWORD)v8 )
     {
-      v10 = params_p.i_return_params.i_array_p;
+      v9 = params_p.i_return_params.i_array_p;
     }
     else
     {
-      params_p.i_return_params.i_count = v3->i_return_params.i_count;
+      params_p.i_return_params.i_count = this->i_return_params.i_count;
       if ( params_p.i_return_params.i_array_p )
         AMemory::c_free_func(params_p.i_return_params.i_array_p);
-      v10 = APArrayBase<SSTypedName>::alloc_array(v9);
-      params_p.i_return_params.i_array_p = v10;
+      v9 = APArrayBase<SSTypedName>::alloc_array(v8);
+      params_p.i_return_params.i_array_p = v9;
     }
-    v11 = v3->i_return_params.i_array_p;
-    for ( j = (unsigned __int64)&v11[v9]; (unsigned __int64)v11 < j; ++v11 )
+    v10 = this->i_return_params.i_array_p;
+    for ( j = &v10[v8]; v10 < j; ++v10 )
     {
-      v13 = *v11;
-      v14 = (SSTypedName *)AMemory::c_malloc_func(0x10ui64, "SSTypedName");
-      if ( v14 )
+      v12 = *v10;
+      v13 = (SSTypedName *)AMemory::c_malloc_func(0x10ui64, "SSTypedName");
+      if ( v13 )
       {
-        v15 = (__int64)v13->i_type_p.i_obj_p->vfptr->as_finalized_generic(v13->i_type_p.i_obj_p, v2);
-        v14->i_name.i_uid = v13->i_name.i_uid;
-        v14->i_type_p.i_obj_p = (SSClassDescBase *)v15;
-        if ( v15 )
-          (*(void (__fastcall **)(__int64))(*(_QWORD *)v15 + 8i64))(v15);
+        v14 = (__int64)v12->i_type_p.i_obj_p->vfptr->as_finalized_generic(v12->i_type_p.i_obj_p, scope_type);
+        v13->i_name.i_uid = v12->i_name.i_uid;
+        v13->i_type_p.i_obj_p = (SSClassDescBase *)v14;
+        if ( v14 )
+          (*(void (__fastcall **)(__int64))(*(_QWORD *)v14 + 8i64))(v14);
       }
       else
       {
-        v14 = 0i64;
+        v13 = 0i64;
       }
-      *v10 = v14;
-      ++v10;
+      *v9++ = v13;
     }
   }
-  v16 = SSParameters::get_or_create(&params_p);
-  APCompactArrayBase<SSParameterBase>::free_all((APCompactArrayBase<SSParameterBase> *)&params_p.i_params.i_count);
-  APCompactArrayBase<SSTypedName>::free_all((APCompactArrayBase<SSTypedName> *)&params_p.i_return_params.i_count);
+  v15 = SSParameters::get_or_create(&params_p);
+  APCompactArrayBase<SSParameterBase>::free_all(&params_p.i_params);
+  APCompactArrayBase<SSTypedName>::free_all(&params_p.i_return_params);
   if ( params_p.i_result_type_p.i_obj_p )
-    (*(void (__cdecl **)(SSClassDescBase *, __int64))&params_p.i_result_type_p.i_obj_p->vfptr->gap8[8])(
-      params_p.i_result_type_p.i_obj_p,
-      v17);
+    (*(void (__fastcall **)(SSClassDescBase *))&params_p.i_result_type_p.i_obj_p->vfptr->gap8[8])(params_p.i_result_type_p.i_obj_p);
   AMemory::c_free_func(params_p.i_return_params.i_array_p);
   AMemory::c_free_func(params_p.i_params.i_array_p);
-  return v16;
+  return v15;
 }
 
 // File Line: 932
 // RVA: 0x118590
 SSParameters *__fastcall SSParameters::get_or_create(SSParameters *params_p)
 {
-  SSParameters *v1; // r14
-  __int64 v2; // rax
-  SSParameterBase **v3; // rbx
-  unsigned __int64 v4; // rdi
+  __int64 i_count; // rax
+  SSParameterBase **i_array_p; // rbx
+  SSParameterBase **v4; // rdi
   SSParameters *v5; // rax
   __int64 v6; // rax
   SSParameters *v7; // rbp
@@ -814,51 +747,46 @@ SSParameters *__fastcall SSParameters::get_or_create(SSParameters *params_p)
   SSParameters **v9; // rdi
   SSParameters **v10; // rbx
   SSParameters *v11; // r15
-  signed __int64 v12; // rcx
+  __int64 v12; // rcx
   signed __int64 v13; // rdi
   SSParameters *result; // rax
   SSParameters *v15; // rax
   SSParameters *v16; // rax
 
-  v1 = params_p;
-  v2 = params_p->i_params.i_count;
-  if ( (_DWORD)v2 )
+  i_count = params_p->i_params.i_count;
+  if ( (_DWORD)i_count )
   {
-    v3 = params_p->i_params.i_array_p;
-    v4 = (unsigned __int64)&v3[v2];
-    if ( (unsigned __int64)v3 < v4 )
+    i_array_p = params_p->i_params.i_array_p;
+    v4 = &i_array_p[i_count];
+    if ( i_array_p < v4 )
     {
-      while ( !((unsigned __int8 (__cdecl *)(SSParameterBase *))(*v3)->vfptr->is_defaultable)(*v3) )
+      while ( !(*i_array_p)->vfptr->is_defaultable(*i_array_p) )
       {
-        ++v3;
-        if ( (unsigned __int64)v3 >= v4 )
-          goto LABEL_10;
+        if ( ++i_array_p >= v4 )
+          goto LABEL_9;
       }
       ++SSParameters::c_param_count;
       v5 = (SSParameters *)AMemory::c_malloc_func(0x30ui64, "SSParameters");
       if ( !v5 )
         return 0i64;
-      SSParameters::SSParameters(v5, v1);
+      SSParameters::SSParameters(v5, params_p);
       return (SSParameters *)v6;
     }
   }
-LABEL_10:
+LABEL_9:
   v7 = 0i64;
   if ( !SSParameters::c_shared_params.i_count )
   {
     LODWORD(v13) = 0;
-LABEL_24:
+LABEL_23:
     v15 = (SSParameters *)AMemory::c_malloc_func(0x30ui64, "SSParameters");
     if ( v15 )
     {
-      SSParameters::SSParameters(v15, v1);
+      SSParameters::SSParameters(v15, params_p);
       v7 = v16;
     }
     ++v7->i_ref_count;
-    APSizedArrayBase<SSParameters>::insert(
-      (APSizedArrayBase<SSParameters> *)&SSParameters::c_shared_params.i_count,
-      v7,
-      v13);
+    APSizedArrayBase<SSParameters>::insert(&SSParameters::c_shared_params, v7, v13);
     return v7;
   }
   v8 = SSParameters::c_shared_params.i_array_p;
@@ -869,16 +797,16 @@ LABEL_24:
     {
       v10 = &v8[((char *)v9 - (char *)v8) >> 4];
       v11 = *v10;
-      if ( !SSParameters::operator<(v1, *v10) )
+      if ( !SSParameters::operator<(params_p, *v10) )
       {
-        v12 = 1i64 - (unsigned __int8)SSParameters::operator==(v1, v11);
+        v12 = 1i64 - (unsigned __int8)SSParameters::operator==(params_p, v11);
         if ( v12 >= 0 )
           break;
       }
       if ( v8 == v10 )
       {
         LODWORD(v13) = v10 - SSParameters::c_shared_params.i_array_p;
-        goto LABEL_24;
+        goto LABEL_23;
       }
       v9 = v10 - 1;
     }
@@ -887,14 +815,14 @@ LABEL_24:
     if ( v9 == v10 )
     {
       v13 = ((char *)v9 - (char *)SSParameters::c_shared_params.i_array_p + 8) >> 3;
-      goto LABEL_24;
+      goto LABEL_23;
     }
     v8 = v10 + 1;
   }
   v13 = (unsigned int)(v10 - SSParameters::c_shared_params.i_array_p);
   result = SSParameters::c_shared_params.i_array_p[v13];
   if ( !result )
-    goto LABEL_24;
+    goto LABEL_23;
   return result;
 }
 

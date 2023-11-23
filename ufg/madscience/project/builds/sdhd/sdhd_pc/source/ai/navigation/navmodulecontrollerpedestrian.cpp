@@ -2,72 +2,57 @@
 // RVA: 0x391110
 void __fastcall UFG::NavModuleControllerPedestrian::Update(UFG::NavModuleControllerPedestrian *this)
 {
-  UFG::NavModuleControllerPedestrian *v1; // rbx
-  UFG::SimObjectCVBase *v2; // rcx
+  UFG::SimObjectCVBase *m_pSimObject; // rcx
   UFG::AICharacterControllerBaseComponent *v3; // rdx
-  unsigned __int16 v4; // dx
-  UFG::AICharacterControllerBaseComponent *v5; // rax
-  Intention *v6; // rdx
-  UFG::NavModuleLocal *v7; // rcx
-  float v8; // eax
-  float v9; // xmm1_4
-  float v10; // xmm2_4
-  UFG::NavObject *v11; // rax
+  __int16 m_Flags; // dx
+  UFG::AICharacterControllerBaseComponent *ComponentOfTypeHK; // rax
+  Intention *p_m_Intention; // rdx
+  UFG::NavModuleLocal *m_pNavModuleLocal; // rcx
+  float x; // eax
+  float z; // xmm1_4
+  float m_fLocalSpeed; // xmm2_4
+  UFG::NavObject *NavObject; // rax
 
-  v1 = this;
   if ( UFG::NavComponent::HasPath(this->m_navComponent) && !UFG::NavComponent::ms_bDisableNavigation )
   {
-    v2 = (UFG::SimObjectCVBase *)v1->m_navComponent->m_pSimObject;
-    if ( v2 )
+    m_pSimObject = (UFG::SimObjectCVBase *)this->m_navComponent->m_pSimObject;
+    if ( m_pSimObject )
     {
-      v4 = v2->m_Flags;
-      if ( (v4 >> 14) & 1 )
+      m_Flags = m_pSimObject->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
       {
-        v5 = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerBaseComponent>(v2);
+        ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerBaseComponent>(m_pSimObject);
       }
-      else if ( (v4 & 0x8000u) == 0 )
+      else if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
       {
-        if ( (v4 >> 13) & 1 )
-        {
-          v5 = (UFG::AICharacterControllerBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                            (UFG::SimObjectGame *)&v2->vfptr,
-                                                            UFG::AICharacterControllerBaseComponent::_TypeUID);
-        }
-        else if ( (v4 >> 12) & 1 )
-        {
-          v5 = (UFG::AICharacterControllerBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                            (UFG::SimObjectGame *)&v2->vfptr,
-                                                            UFG::AICharacterControllerBaseComponent::_TypeUID);
-        }
-        else
-        {
-          v5 = (UFG::AICharacterControllerBaseComponent *)UFG::SimObject::GetComponentOfType(
-                                                            (UFG::SimObject *)&v2->vfptr,
-                                                            UFG::AICharacterControllerBaseComponent::_TypeUID);
-        }
+        ComponentOfTypeHK = (UFG::AICharacterControllerBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                         m_pSimObject,
+                                                                         UFG::AICharacterControllerBaseComponent::_TypeUID);
       }
       else
       {
-        v5 = UFG::SimObjectCVBase::GetComponent<UFG::AICharacterControllerBaseComponent>(v2);
+        ComponentOfTypeHK = (UFG::AICharacterControllerBaseComponent *)UFG::SimObject::GetComponentOfType(
+                                                                         m_pSimObject,
+                                                                         UFG::AICharacterControllerBaseComponent::_TypeUID);
       }
-      v3 = v5;
+      v3 = ComponentOfTypeHK;
     }
     else
     {
       v3 = 0i64;
     }
-    v6 = &v3->m_Intention;
-    v7 = v1->m_navComponent->m_pNavModuleLocal;
-    v8 = v7->m_steerData.m_vClampedDirection.x;
-    v9 = v7->m_steerData.m_vClampedDirection.z;
-    v10 = v7->m_steerData.m_fLocalSpeed;
-    v6->mMotionIntentionDirection.y = v7->m_steerData.m_vClampedDirection.y;
-    v6->mMotionIntentionDirection.z = v9;
-    v6->mMotionIntentionDirection.x = v8;
-    UFG::NavModuleControllerPedestrian::SetIntentionSpeed(v1, v6, v10);
-    v11 = UFG::NavModulePathing::GetNavObject(v1->m_navComponent->m_pNavModulePathing);
-    if ( v11 )
-      v11->vfptr->UpdateControl(v11, v1->m_navComponent);
+    p_m_Intention = &v3->m_Intention;
+    m_pNavModuleLocal = this->m_navComponent->m_pNavModuleLocal;
+    x = m_pNavModuleLocal->m_steerData.m_vClampedDirection.x;
+    z = m_pNavModuleLocal->m_steerData.m_vClampedDirection.z;
+    m_fLocalSpeed = m_pNavModuleLocal->m_steerData.m_fLocalSpeed;
+    p_m_Intention->mMotionIntentionDirection.y = m_pNavModuleLocal->m_steerData.m_vClampedDirection.y;
+    p_m_Intention->mMotionIntentionDirection.z = z;
+    p_m_Intention->mMotionIntentionDirection.x = x;
+    UFG::NavModuleControllerPedestrian::SetIntentionSpeed(this, p_m_Intention, m_fLocalSpeed);
+    NavObject = UFG::NavModulePathing::GetNavObject(this->m_navComponent->m_pNavModulePathing);
+    if ( NavObject )
+      NavObject->vfptr->UpdateControl(NavObject, this->m_navComponent);
   }
 }
 
@@ -75,14 +60,14 @@ void __fastcall UFG::NavModuleControllerPedestrian::Update(UFG::NavModuleControl
 // RVA: 0x382EB0
 void __fastcall UFG::NavModuleControllerPedestrian::Reset(UFG::NavModuleControllerPedestrian *this)
 {
-  float v1; // xmm1_4
-  float v2; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
 
-  v1 = UFG::qVector3::msZero.y;
-  v2 = UFG::qVector3::msZero.z;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
   this->m_vDirection.x = UFG::qVector3::msZero.x;
-  this->m_vDirection.y = v1;
-  this->m_vDirection.z = v2;
+  this->m_vDirection.y = y;
+  this->m_vDirection.z = z;
   this->m_fSpeed = 0.0;
   this->m_bVaulting = 0;
   this->m_fDebugPlaybackSpeed = -1.0;
@@ -90,203 +75,179 @@ void __fastcall UFG::NavModuleControllerPedestrian::Reset(UFG::NavModuleControll
 
 // File Line: 116
 // RVA: 0x386A90
-void __fastcall UFG::NavModuleControllerPedestrian::SetIntentionSpeed(UFG::NavModuleControllerPedestrian *this, Intention *intention, float fSpeed)
+void __fastcall UFG::NavModuleControllerPedestrian::SetIntentionSpeed(
+        UFG::NavModuleControllerPedestrian *this,
+        Intention *intention,
+        float fSpeed)
 {
-  Intention *v3; // rdi
-  UFG::NavModuleControllerPedestrian *v4; // r15
-  UFG::SimObjectGame *v5; // rbx
-  signed int v6; // esi
-  UFG::AIEntityComponent *v7; // r14
-  unsigned __int16 v8; // cx
-  UFG::AIEntityComponent *v9; // rax
+  UFG::SimObjectGame *m_pSimObject; // rbx
+  int v6; // esi
+  UFG::AIEntityComponent *m_pComponent; // r14
+  __int16 m_Flags; // cx
+  UFG::AIEntityComponent *ComponentOfTypeHK; // rax
   unsigned __int64 v10; // rax
-  unsigned __int8 v11; // cl
-  float v12; // xmm6_4
+  float v11; // xmm6_4
+  unsigned __int64 v12; // rax
   unsigned __int64 v13; // rax
-  unsigned __int8 v14; // cl
-  unsigned __int64 v15; // rax
-  unsigned __int8 v16; // cl
-  __int64 v17; // r9
-  char v18; // cl
-  float v19; // xmm1_4
-  UFG::CharacterAnimationComponent *v20; // rax
-  Creature *v21; // rbp
-  float v22; // xmm0_4
-  char v23; // di
-  unsigned __int16 v24; // cx
-  UFG::CharacterPhysicsComponent *v25; // rbx
-  UFG::CharacterPhysicsComponent *v26; // rax
-  UFG::qReflectObjectType<UFG::PhysicsSurfaceProperties,UFG::qReflectObject> *v27; // rcx
-  const char *v28; // rax
-  float v29; // xmm0_4
-  UFG::qReflectHandleBase v30; // [rsp+28h] [rbp-60h]
+  __int64 m_EnumValue; // r9
+  char v15; // cl
+  float v16; // xmm1_4
+  UFG::CharacterAnimationComponent *m_pSimComponent; // rax
+  Creature *mCreature; // rbp
+  float v19; // xmm0_4
+  char v20; // di
+  __int16 v21; // cx
+  UFG::CharacterPhysicsComponent *v22; // rbx
+  UFG::CharacterPhysicsComponent *v23; // rax
+  UFG::qReflectObjectType<UFG::PhysicsSurfaceProperties,UFG::qReflectObject> *v24; // rcx
+  const char *TypeName; // rax
+  float v26; // xmm0_4
+  UFG::qReflectHandleBase v27; // [rsp+28h] [rbp-60h] BYREF
 
-  v3 = intention;
-  v4 = this;
-  v5 = (UFG::SimObjectGame *)this->m_navComponent->m_pSimObject;
+  m_pSimObject = (UFG::SimObjectGame *)this->m_navComponent->m_pSimObject;
   v6 = 0;
-  if ( v5 )
+  if ( m_pSimObject )
   {
-    v8 = v5->m_Flags;
-    if ( (v8 >> 14) & 1 )
+    m_Flags = m_pSimObject->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v7 = (UFG::AIEntityComponent *)v5->m_Components.p[22].m_pComponent;
+      m_pComponent = (UFG::AIEntityComponent *)m_pSimObject->m_Components.p[22].m_pComponent;
     }
-    else if ( (v8 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v8 >> 13) & 1 )
-      {
-        v9 = (UFG::AIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v5, UFG::AIEntityComponent::_TypeUID);
-      }
-      else if ( (v8 >> 12) & 1 )
-      {
-        v9 = (UFG::AIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v5, UFG::AIEntityComponent::_TypeUID);
-      }
+      if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        ComponentOfTypeHK = (UFG::AIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                        m_pSimObject,
+                                                        UFG::AIEntityComponent::_TypeUID);
       else
-      {
-        v9 = (UFG::AIEntityComponent *)UFG::SimObject::GetComponentOfType(
-                                         (UFG::SimObject *)&v5->vfptr,
-                                         UFG::AIEntityComponent::_TypeUID);
-      }
-      v7 = v9;
+        ComponentOfTypeHK = (UFG::AIEntityComponent *)UFG::SimObject::GetComponentOfType(
+                                                        m_pSimObject,
+                                                        UFG::AIEntityComponent::_TypeUID);
+      m_pComponent = ComponentOfTypeHK;
     }
     else
     {
-      v7 = (UFG::AIEntityComponent *)v5->m_Components.p[22].m_pComponent;
+      m_pComponent = (UFG::AIEntityComponent *)m_pSimObject->m_Components.p[22].m_pComponent;
     }
   }
   else
   {
-    v7 = 0i64;
+    m_pComponent = 0i64;
   }
-  ((void (__fastcall *)(UFG::AIEntityComponent *))v7->vfptr[14].__vecDelDtor)(v7);
-  v10 = v3->mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_Walk.m_EnumValue >> 6];
-  v11 = _bittest64((const signed __int64 *)&v10, gActionRequest_Walk.m_EnumValue & 0x3F);
-  v12 = 0.0;
-  if ( v11 && (!v3->mActionRequestChargeTimes[gActionRequest_Walk.m_EnumValue] || v11) )
+  ((void (__fastcall *)(UFG::AIEntityComponent *))m_pComponent->vfptr[14].__vecDelDtor)(m_pComponent);
+  v10 = intention->mActionRequests.mBits[(__int64)(int)gActionRequest_Walk.m_EnumValue >> 6];
+  v11 = 0.0;
+  if ( _bittest64((const __int64 *)&v10, gActionRequest_Walk.m_EnumValue & 0x3F) )
   {
-LABEL_27:
+LABEL_20:
     v6 = 1;
-    v3->mMotionIntentionSpeed = 0.50999999;
-    v17 = gActionRequest_Walk.m_EnumValue;
-    v18 = gActionRequest_Walk.m_EnumValue & 0x3F;
-    v3->mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_Walk.m_EnumValue >> 6] |= 1i64 << (gActionRequest_Walk.m_EnumValue & 0x3F);
-    v19 = (float)(signed int)0.0;
-    if ( v19 >= 255.0 )
-      v19 = FLOAT_255_0;
-    v3->mActionRequestChargeTimes[v17] = (signed int)v19;
-    v3->mSignals |= 1i64 << v18;
-    goto LABEL_30;
+    intention->mMotionIntentionSpeed = 0.50999999;
+    m_EnumValue = gActionRequest_Walk.m_EnumValue;
+    v15 = gActionRequest_Walk.m_EnumValue & 0x3F;
+    intention->mActionRequests.mBits[(__int64)(int)gActionRequest_Walk.m_EnumValue >> 6] |= 1i64 << (gActionRequest_Walk.m_EnumValue & 0x3F);
+    v16 = (float)(int)0.0;
+    if ( v16 >= 255.0 )
+      v16 = FLOAT_255_0;
+    intention->mActionRequestChargeTimes[m_EnumValue] = (int)v16;
+    intention->mSignals |= 1i64 << v15;
+    goto LABEL_23;
   }
-  v13 = v3->mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_Jog.m_EnumValue >> 6];
-  v14 = _bittest64((const signed __int64 *)&v13, gActionRequest_Jog.m_EnumValue & 0x3F);
-  if ( v14 && (!v3->mActionRequestChargeTimes[gActionRequest_Jog.m_EnumValue] || v14) )
-    goto LABEL_26;
-  v15 = v3->mActionRequests.mBits[(signed __int64)(signed int)gActionRequest_Sprint.m_EnumValue >> 6];
-  v16 = _bittest64((const signed __int64 *)&v15, gActionRequest_Sprint.m_EnumValue & 0x3F);
-  if ( v16 && (!v3->mActionRequestChargeTimes[gActionRequest_Sprint.m_EnumValue] || v16) )
-    goto LABEL_25;
+  v12 = intention->mActionRequests.mBits[(__int64)(int)gActionRequest_Jog.m_EnumValue >> 6];
+  if ( _bittest64((const __int64 *)&v12, gActionRequest_Jog.m_EnumValue & 0x3F) )
+    goto LABEL_19;
+  v13 = intention->mActionRequests.mBits[(__int64)(int)gActionRequest_Sprint.m_EnumValue >> 6];
+  if ( _bittest64((const __int64 *)&v13, gActionRequest_Sprint.m_EnumValue & 0x3F) )
+  {
+LABEL_18:
+    v6 = 3;
+    intention->mMotionIntentionSpeed = 1.6;
+    Intention::Set(intention, gActionRequest_Jog.m_EnumValue, 0.0);
+    Intention::Set(intention, gActionRequest_Sprint.m_EnumValue, 123.4);
+    goto LABEL_23;
+  }
   if ( fSpeed > 0.029999999 )
   {
     if ( fSpeed >= 3.0 )
     {
       if ( fSpeed >= 4.8000002 )
-      {
-LABEL_25:
-        v6 = 3;
-        v3->mMotionIntentionSpeed = 1.6;
-        Intention::Set(v3, gActionRequest_Jog.m_EnumValue, 0.0);
-        Intention::Set(v3, gActionRequest_Sprint.m_EnumValue, 123.4);
-        goto LABEL_30;
-      }
-LABEL_26:
+        goto LABEL_18;
+LABEL_19:
       v6 = 2;
-      v3->mMotionIntentionSpeed = 1.0;
-      Intention::Set(v3, gActionRequest_Jog.m_EnumValue, 0.0);
-      goto LABEL_30;
+      intention->mMotionIntentionSpeed = 1.0;
+      Intention::Set(intention, gActionRequest_Jog.m_EnumValue, 0.0);
+      goto LABEL_23;
     }
-    goto LABEL_27;
+    goto LABEL_20;
   }
-LABEL_30:
-  v20 = (UFG::CharacterAnimationComponent *)v7->m_pCharacterAnimationComponent.m_pSimComponent;
-  if ( v20 )
+LABEL_23:
+  m_pSimComponent = (UFG::CharacterAnimationComponent *)m_pComponent->m_pCharacterAnimationComponent.m_pSimComponent;
+  if ( m_pSimComponent )
   {
-    v21 = v20->mCreature;
-    if ( v21 )
+    mCreature = m_pSimComponent->mCreature;
+    if ( mCreature )
     {
-      v22 = sNaturalMovementSpeeds[v6];
-      if ( v22 > 0.0 )
-        v12 = fSpeed / v22;
-      v23 = 0;
-      if ( !v5 )
-        goto LABEL_61;
-      v24 = v5->m_Flags;
-      if ( (v24 >> 14) & 1 )
+      v19 = sNaturalMovementSpeeds[v6];
+      if ( v19 > 0.0 )
+        v11 = fSpeed / v19;
+      v20 = 0;
+      if ( !m_pSimObject )
+        goto LABEL_45;
+      v21 = m_pSimObject->m_Flags;
+      if ( (v21 & 0x4000) != 0 )
       {
-        v25 = (UFG::CharacterPhysicsComponent *)v5->m_Components.p[27].m_pComponent;
+        v22 = (UFG::CharacterPhysicsComponent *)m_pSimObject->m_Components.p[27].m_pComponent;
       }
       else
       {
-        if ( (v24 & 0x8000u) == 0 )
-        {
-          if ( (v24 >> 13) & 1 )
-            v26 = (UFG::CharacterPhysicsComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                      v5,
-                                                      UFG::CharacterPhysicsComponent::_TypeUID);
-          else
-            v26 = (UFG::CharacterPhysicsComponent *)((v24 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                         v5,
-                                                                         UFG::CharacterPhysicsComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v5->vfptr, UFG::CharacterPhysicsComponent::_TypeUID));
-        }
-        else
-        {
-          v26 = (UFG::CharacterPhysicsComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                    v5,
-                                                    UFG::CharacterPhysicsComponent::_TypeUID);
-        }
-        v25 = v26;
+        v23 = (UFG::CharacterPhysicsComponent *)(v21 < 0 || (v21 & 0x2000) != 0 || (v21 & 0x1000) != 0
+                                               ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                   m_pSimObject,
+                                                   UFG::CharacterPhysicsComponent::_TypeUID)
+                                               : UFG::SimObject::GetComponentOfType(
+                                                   m_pSimObject,
+                                                   UFG::CharacterPhysicsComponent::_TypeUID));
+        v22 = v23;
       }
-      if ( !v25 )
-        goto LABEL_61;
-      UFG::qReflectHandleBase::qReflectHandleBase(&v30);
-      v28 = UFG::qReflectObjectType<UFG::PhysicsSurfaceProperties,UFG::qReflectObject>::GetTypeName(v27);
-      v30.mTypeUID = UFG::qStringHash64(v28, 0xFFFFFFFFFFFFFFFFui64);
-      UFG::qReflectHandleBase::Init(&v30, v30.mTypeUID, v25->mGroundProperties.groundSurfaceHandleUid);
-      if ( v30.mData )
-        v23 = BYTE4(v30.mData[1].mBaseNode.mParent);
-      UFG::qReflectHandleBase::~qReflectHandleBase(&v30);
-      if ( v23 )
+      if ( !v22 )
+        goto LABEL_45;
+      UFG::qReflectHandleBase::qReflectHandleBase(&v27);
+      TypeName = UFG::qReflectObjectType<UFG::PhysicsSurfaceProperties,UFG::qReflectObject>::GetTypeName(v24);
+      v27.mTypeUID = UFG::qStringHash64(TypeName, 0xFFFFFFFFFFFFFFFFui64);
+      UFG::qReflectHandleBase::Init(&v27, v27.mTypeUID, v22->mGroundProperties.groundSurfaceHandleUid);
+      if ( v27.mData )
+        v20 = BYTE4(v27.mData[1].mBaseNode.mParent);
+      UFG::qReflectHandleBase::~qReflectHandleBase(&v27);
+      if ( v20 )
       {
-        if ( v12 <= 0.89999998 )
+        if ( v11 <= 0.89999998 )
         {
-          v12 = FLOAT_0_89999998;
+          v11 = FLOAT_0_89999998;
         }
         else
         {
-          v29 = FLOAT_1_1;
-          if ( v12 >= 1.1 )
-            goto LABEL_58;
+          v26 = FLOAT_1_1;
+          if ( v11 >= 1.1 )
+            goto LABEL_50;
         }
       }
       else
       {
-LABEL_61:
-        if ( v12 <= 0.5 )
+LABEL_45:
+        if ( v11 <= 0.5 )
         {
-          v12 = FLOAT_0_5;
+          v11 = FLOAT_0_5;
         }
         else
         {
-          v29 = FLOAT_1_5;
-          if ( v12 >= 1.5 )
-            goto LABEL_58;
+          v26 = FLOAT_1_5;
+          if ( v11 >= 1.5 )
+            goto LABEL_50;
         }
       }
-      v29 = v12;
-LABEL_58:
-      v4->m_fDebugPlaybackSpeed = v29;
-      v21->mPlaybackSpeed = v29;
-      return;
+      v26 = v11;
+LABEL_50:
+      this->m_fDebugPlaybackSpeed = v26;
+      mCreature->mPlaybackSpeed = v26;
     }
   }
 }

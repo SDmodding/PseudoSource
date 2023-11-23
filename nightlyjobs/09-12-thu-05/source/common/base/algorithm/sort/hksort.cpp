@@ -3,14 +3,14 @@
 hkAlgorithm::ListElement *__fastcall hkAlgorithm::_sortList(hkAlgorithm::ListElement *headPtr)
 {
   hkAlgorithm::ListElement *v1; // rdx
-  signed int i; // er11
-  signed int v4; // ebx
+  int i; // r11d
+  int v4; // ebx
   __int64 *v5; // r9
   hkAlgorithm::ListElement *v6; // rax
-  signed int j; // ecx
-  signed int v8; // er8
+  int j; // ecx
+  int v8; // r8d
   __int64 *v9; // r10
-  hkAlgorithm::ListElement *v10; // [rsp+10h] [rbp+8h]
+  hkAlgorithm::ListElement *v10; // [rsp+10h] [rbp+8h] BYREF
 
   v1 = headPtr;
   if ( !headPtr )
@@ -52,16 +52,18 @@ hkAlgorithm::ListElement *__fastcall hkAlgorithm::_sortList(hkAlgorithm::ListEle
             *v5 = (__int64)v9;
             v5 = v9;
             if ( j <= 0 )
-              goto LABEL_18;
+              goto LABEL_17;
           }
-          for ( ; j > 0; v1 = v1->next )
+          do
           {
             *v5 = (__int64)v1;
             --j;
             v5 = (__int64 *)v1;
+            v1 = v1->next;
           }
+          while ( j > 0 );
         }
-LABEL_18:
+LABEL_17:
         while ( v8 > 0 )
         {
           if ( !v6 )

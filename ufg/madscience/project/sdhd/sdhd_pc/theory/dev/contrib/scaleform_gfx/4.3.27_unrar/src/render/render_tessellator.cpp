@@ -1,6 +1,9 @@
 // File Line: 86
 // RVA: 0x945A00
-void __fastcall Scaleform::Render::Tessellator::Tessellator(Scaleform::Render::Tessellator *this, Scaleform::Render::LinearHeap *heap1, Scaleform::Render::LinearHeap *heap2)
+void __fastcall Scaleform::Render::Tessellator::Tessellator(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::LinearHeap *heap1,
+        Scaleform::Render::LinearHeap *heap2)
 {
   this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::TessBase::`vftable;
   this->vfptr = (Scaleform::Render::TessBaseVtbl *)&Scaleform::Render::Tessellator::`vftable;
@@ -188,8 +191,6 @@ void __fastcall Scaleform::Render::Tessellator::Tessellator(Scaleform::Render::T
 // RVA: 0x95FB60
 void __fastcall Scaleform::Render::Tessellator::Clear(Scaleform::Render::Tessellator *this)
 {
-  Scaleform::Render::Tessellator *v1; // rbx
-
   this->LastX = -1.0e30;
   this->MinX = 1.0e30;
   this->MinY = 1.0e30;
@@ -268,7 +269,6 @@ void __fastcall Scaleform::Render::Tessellator::Clear(Scaleform::Render::Tessell
   this->MonoVertices.NumPages = 0i64;
   this->MonoVertices.Size = 0i64;
   this->MonoVertices.Pages = 0i64;
-  v1 = this;
   this->MeshVertices.MaxPages = 0i64;
   this->MeshVertices.NumPages = 0i64;
   this->MeshVertices.Size = 0i64;
@@ -325,7 +325,7 @@ void __fastcall Scaleform::Render::Tessellator::Clear(Scaleform::Render::Tessell
   this->StarVertices.Size = 0i64;
   this->StarVertices.Pages = 0i64;
   Scaleform::Render::LinearHeap::ClearAndRelease(this->pHeap1);
-  Scaleform::Render::LinearHeap::ClearAndRelease(v1->pHeap2);
+  Scaleform::Render::LinearHeap::ClearAndRelease(this->pHeap2);
 }
 
 // File Line: 147
@@ -333,7 +333,7 @@ void __fastcall Scaleform::Render::Tessellator::Clear(Scaleform::Render::Tessell
 void __fastcall Scaleform::Render::Tessellator::clearHeap1(Scaleform::Render::Tessellator *this)
 {
   unsigned __int64 v1; // rax
-  Scaleform::Render::LinearHeap *v2; // r9
+  Scaleform::Render::LinearHeap *pHeap1; // r9
   __int64 v3; // r8
 
   v1 = 0i64;
@@ -442,222 +442,225 @@ void __fastcall Scaleform::Render::Tessellator::clearHeap1(Scaleform::Render::Te
   this->StarVertices.NumPages = 0i64;
   this->StarVertices.Size = 0i64;
   this->StarVertices.Pages = 0i64;
-  v2 = this->pHeap1;
-  if ( v2->MaxPages )
+  pHeap1 = this->pHeap1;
+  if ( pHeap1->MaxPages )
   {
     v3 = 0i64;
     do
     {
       ++v1;
       ++v3;
-      *((_QWORD *)&v2->pPagePool[v3] - 1) = v2->pPagePool[v3 - 1].pStart;
+      pHeap1->pPagePool[v3 - 1].pFree = pHeap1->pPagePool[v3 - 1].pStart;
     }
-    while ( v1 < v2->MaxPages );
+    while ( v1 < pHeap1->MaxPages );
   }
-  v2->pLastPage = v2->pPagePool;
-}l[v3] - 1) = v2->pPagePool
+  pHeap1->pLastPage = pHeap1->pPagePool;
+}ap
 
 // File Line: 247
 // RVA: 0x9D6230
-bool __fastcall Scaleform::Render::Tessellator::cmpEdgeAA(Scaleform::Render::Tessellator::TmpEdgeAAType *a, Scaleform::Render::Tessellator::TmpEdgeAAType *b)
+bool __fastcall Scaleform::Render::Tessellator::cmpEdgeAA(
+        Scaleform::Render::Tessellator::TmpEdgeAAType *a,
+        Scaleform::Render::Tessellator::TmpEdgeAAType *b)
 {
-  float v2; // xmm0_4
+  float slope; // xmm0_4
   float v3; // xmm1_4
-  bool result; // al
 
-  v2 = a->slope;
+  slope = a->slope;
   v3 = b->slope;
-  if ( v2 == v3 )
-    result = a->style < b->style;
+  if ( slope == v3 )
+    return a->style < b->style;
   else
-    result = v3 > v2;
-  return result;
+    return v3 > slope;
 }
 
 // File Line: 255
 // RVA: 0x9D62C0
-bool __fastcall Scaleform::Render::Tessellator::cmpOuterEdges(Scaleform::Render::Tessellator::OuterEdgeType *a, Scaleform::Render::Tessellator::OuterEdgeType *b)
+bool __fastcall Scaleform::Render::Tessellator::cmpOuterEdges(
+        Scaleform::Render::Tessellator::OuterEdgeType *a,
+        Scaleform::Render::Tessellator::OuterEdgeType *b)
 {
-  Scaleform::Render::Tessellator::EdgeAAType *v2; // r8
+  Scaleform::Render::Tessellator::EdgeAAType *edge; // r8
   Scaleform::Render::Tessellator::EdgeAAType *v3; // r9
-  Scaleform::Render::Tessellator::MonoVertexType *v4; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *cntVer; // rcx
   Scaleform::Render::Tessellator::MonoVertexType *v5; // rdx
   bool v6; // cf
 
-  v2 = a->edge;
+  edge = a->edge;
   v3 = b->edge;
-  v4 = a->edge->cntVer;
+  cntVer = a->edge->cntVer;
   v5 = b->edge->cntVer;
-  v6 = v4 < v5;
-  if ( v4 == v5 )
-    v6 = v2->rayVer < v3->rayVer;
+  v6 = cntVer < v5;
+  if ( cntVer == v5 )
+    return edge->rayVer < v3->rayVer;
   return v6;
 }
 
 // File Line: 263
 // RVA: 0x9D6320
-_BOOL8 __fastcall Scaleform::Render::Tessellator::cmpStrokerEdges(Scaleform::Render::Tessellator::StrokerEdgeType *a, Scaleform::Render::Tessellator::StrokerEdgeType *b)
+_BOOL8 __fastcall Scaleform::Render::Tessellator::cmpStrokerEdges(
+        Scaleform::Render::Tessellator::StrokerEdgeType *a,
+        Scaleform::Render::Tessellator::StrokerEdgeType *b)
 {
-  unsigned int v2; // er8
-  unsigned int v3; // er9
-  _BOOL8 result; // rax
+  unsigned int v2; // r8d
+  unsigned int v3; // r9d
 
   v2 = a->node1 & 0xFFFFFFF;
   v3 = b->node1 & 0xFFFFFFF;
   if ( v2 == v3 )
-    result = (a->node2 & 0xFFFFFFF) < (b->node2 & 0xFFFFFFF);
+    return (a->node2 & 0xFFFFFFF) < (b->node2 & 0xFFFFFFF);
   else
-    result = v2 < v3;
-  return result;
+    return v2 < v3;
 }
 
 // File Line: 309
 // RVA: 0x9CF930
-void __fastcall Scaleform::Render::Tessellator::buildEdgeList(Scaleform::Render::Tessellator *this, unsigned int start, unsigned int numEdges, int step, unsigned int leftStyle, unsigned int rightStyle)
+void __fastcall Scaleform::Render::Tessellator::buildEdgeList(
+        Scaleform::Render::Tessellator *this,
+        unsigned int start,
+        unsigned int numEdges,
+        int step,
+        unsigned int leftStyle,
+        unsigned int rightStyle)
 {
-  unsigned __int64 v6; // r13
-  int v7; // er12
-  Scaleform::Render::Tessellator *v8; // r15
-  unsigned int v9; // er14
-  Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16> *v10; // rbx
-  __int64 v11; // rsi
-  Scaleform::Render::Tessellator::SrcVertexType **v12; // rcx
-  char v13; // r8
-  Scaleform::Render::Tessellator::SrcVertexType *v14; // rdx
-  unsigned __int64 v15; // rdi
-  Scaleform::Render::Tessellator::SrcVertexType *v16; // rcx
-  Scaleform::Render::Tessellator::EdgeType **v17; // rax
-  __int64 v18; // r10
-  Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoChainType,4,16> *v19; // r15
-  Scaleform::Render::Tessellator::EdgeType *v20; // r9
-  unsigned int v21; // er8
-  float v22; // xmm8_4
-  unsigned __int64 v23; // rbx
-  unsigned __int64 v24; // rcx
-  __int64 v25; // r8
-  __int64 v26; // rdx
-  float v27; // xmm6_4
-  float v28; // xmm7_4
-  Scaleform::Render::Tessellator::MonoChainType *v29; // rcx
-  signed __int64 v30; // rdx
-  __int64 v31; // [rsp+8h] [rbp-39h]
-  int v32; // [rsp+1Ch] [rbp-25h]
-  int v33; // [rsp+20h] [rbp-21h]
-  Scaleform::Render::VertexBasic v34; // [rsp+98h] [rbp+57h]
-  __int16 v35; // [rsp+B8h] [rbp+77h]
-  __int16 v36; // [rsp+C0h] [rbp+7Fh]
+  __int16 v6; // di
+  __int16 v7; // si
+  unsigned __int64 Size_low; // r13
+  Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16> *p_Edges; // rbx
+  __int64 v13; // rsi
+  Scaleform::Render::Tessellator::SrcVertexType **Pages; // rcx
+  char v15; // r8
+  Scaleform::Render::Tessellator::SrcVertexType *v16; // rdx
+  unsigned __int64 v17; // rdi
+  Scaleform::Render::Tessellator::SrcVertexType *v18; // rcx
+  Scaleform::Render::Tessellator::EdgeType **v19; // rax
+  __int64 v20; // r10
+  Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoChainType,4,16> *p_MonoChains; // r15
+  Scaleform::Render::Tessellator::EdgeType *v22; // r9
+  float slope; // xmm8_4
+  unsigned __int64 v24; // rbx
+  unsigned __int64 lower; // rcx
+  __int64 v26; // r8
+  __int64 v27; // rdx
+  float v28; // xmm6_4
+  float v29; // xmm7_4
+  Scaleform::Render::Tessellator::MonoChainType *v30; // rcx
+  __int64 v31; // rdx
+  __int64 v32; // [rsp+8h] [rbp-39h]
+  int v33; // [rsp+1Ch] [rbp-25h]
+  int v34; // [rsp+20h] [rbp-21h]
+  Scaleform::Render::VertexBasic v35; // [rsp+98h] [rbp+57h]
+  __int16 v36; // [rsp+B8h] [rbp+77h]
+  __int16 v37; // [rsp+C0h] [rbp+7Fh]
 
-  v6 = LODWORD(this->Edges.Size);
-  v7 = step;
-  v8 = this;
-  v9 = start;
+  Size_low = LODWORD(this->Edges.Size);
   if ( numEdges )
   {
-    v10 = (Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16> *)&this->Edges;
-    v11 = numEdges;
+    v36 = v7;
+    p_Edges = (Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16> *)&this->Edges;
+    v37 = v6;
+    v13 = numEdges;
     do
     {
-      v12 = v8->SrcVertices.Pages;
-      v13 = v9;
-      LODWORD(v34.x) = v9;
-      v14 = v12[(unsigned __int64)v9 >> 4];
-      v9 += v7;
-      v15 = v10->Size >> 4;
-      v16 = v12[(unsigned __int64)v9 >> 4];
-      v34.y = (float)(v16[v9 & 0xF].x - v14[v13 & 0xF].x) / (float)(v16[v9 & 0xF].y - v14[v13 & 0xF].y);
-      if ( v15 >= v10->NumPages )
-        Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16>::allocPage(v10, v15);
-      v10->Pages[v15][v10->Size & 0xF] = v34;
-      ++v10->Size;
-      --v11;
+      Pages = this->SrcVertices.Pages;
+      v15 = start;
+      LODWORD(v35.x) = start;
+      v16 = Pages[(unsigned __int64)start >> 4];
+      start += step;
+      v17 = p_Edges->Size >> 4;
+      v18 = Pages[(unsigned __int64)start >> 4];
+      v35.y = (float)(v18[start & 0xF].x - v16[v15 & 0xF].x) / (float)(v18[start & 0xF].y - v16[v15 & 0xF].y);
+      if ( v17 >= p_Edges->NumPages )
+        Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16>::allocPage(p_Edges, v17);
+      p_Edges->Pages[v17][p_Edges->Size & 0xF] = v35;
+      ++p_Edges->Size;
+      --v13;
     }
-    while ( v11 );
+    while ( v13 );
   }
-  v17 = v8->Edges.Pages;
-  v18 = v6 & 0xF;
-  v19 = &v8->MonoChains;
-  LODWORD(v31) = v6;
-  v20 = v17[v6 >> 4];
-  v21 = v20[v18].lower;
-  v22 = v20[v18].slope;
-  v23 = v19->Size >> 4;
-  v24 = v21;
-  v25 = v21 & 0xF;
-  v32 = (unsigned __int16)v7;
-  v26 = *(_QWORD *)(v19[-2].MaxPages + 8 * (v24 >> 4));
-  HIDWORD(v31) = LODWORD(v19[-1].Size) - 1;
-  v27 = *(float *)(v26 + 8 * v25 + 4);
-  v28 = *(float *)(v26 + 8 * v25);
-  LOWORD(v33) = v35;
-  HIWORD(v33) = v36;
-  if ( v23 >= v19->NumPages )
-    Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoChainType,4,16>::allocPage(v19, v23);
-  v29 = v19->Pages[v23];
-  v30 = v19->Size & 0xF;
-  *(_QWORD *)&v29[v30].edge = v31;
-  v29[v30].ySort = v27;
-  v29[v30].xb = v28;
-  v29[v30].xt = v22;
-  *(_DWORD *)&v29[v30].dir = v32;
-  *(_DWORD *)&v29[v30].leftStyle = v33;
-  *(_DWORD *)&v29[v30].leftBelow = 0;
-  *(_DWORD *)&v29[v30].rightBelow = 0;
-  v29[v30].posIntr = -1;
-  v29[v30].posScan = 0;
-  ++v19->Size;
+  v19 = this->Edges.Pages;
+  v20 = Size_low & 0xF;
+  p_MonoChains = &this->MonoChains;
+  LODWORD(v32) = Size_low;
+  v22 = v19[Size_low >> 4];
+  slope = v22[v20].slope;
+  v24 = p_MonoChains->Size >> 4;
+  lower = v22[v20].lower;
+  v26 = lower & 0xF;
+  v33 = (unsigned __int16)step;
+  v27 = *(_QWORD *)(p_MonoChains[-2].MaxPages + 8 * (lower >> 4));
+  HIDWORD(v32) = LODWORD(p_MonoChains[-1].Size) - 1;
+  v28 = *(float *)(v27 + 8 * v26 + 4);
+  v29 = *(float *)(v27 + 8 * v26);
+  LOWORD(v34) = v36;
+  HIWORD(v34) = v37;
+  if ( v24 >= p_MonoChains->NumPages )
+    Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoChainType,4,16>::allocPage(p_MonoChains, v24);
+  v30 = p_MonoChains->Pages[v24];
+  v31 = p_MonoChains->Size & 0xF;
+  *(_QWORD *)&v30[v31].edge = v32;
+  v30[v31].ySort = v28;
+  v30[v31].xb = v29;
+  v30[v31].xt = slope;
+  *(_DWORD *)&v30[v31].dir = v33;
+  *(_DWORD *)&v30[v31].leftStyle = v34;
+  *(_DWORD *)&v30[v31].leftBelow = 0;
+  *(_DWORD *)&v30[v31].rightBelow = 0;
+  v30[v31].posIntr = -1;
+  v30[v31].posScan = 0;
+  ++p_MonoChains->Size;
 }
 
 // File Line: 344
 // RVA: 0x9CA0B0
-void __fastcall Scaleform::Render::Tessellator::addStyle(Scaleform::Render::Tessellator *this, unsigned int style, bool complex)
+void __fastcall Scaleform::Render::Tessellator::addStyle(
+        Scaleform::Render::Tessellator *this,
+        unsigned int style,
+        bool complex)
 {
   unsigned __int64 v3; // r15
-  bool v4; // r12
-  Scaleform::Render::Tessellator *v5; // rbx
-  unsigned __int64 v6; // rsi
+  unsigned __int64 Size; // rsi
   unsigned __int64 v7; // rsi
   void *v8; // rbp
-  unsigned int *v9; // rdx
+  unsigned int *Array; // rdx
   unsigned __int64 v10; // r8
 
   if ( style )
   {
     v3 = style;
-    v4 = complex;
-    v5 = this;
     if ( 32 * this->ComplexFlags.Size <= style )
     {
       do
       {
-        v6 = v5->ComplexFlags.Size;
-        if ( v6 )
-          v7 = 2 * v6;
+        Size = this->ComplexFlags.Size;
+        if ( Size )
+          v7 = 2 * Size;
         else
           v7 = 8i64;
-        if ( v7 > v5->ComplexFlags.Size )
+        if ( v7 > this->ComplexFlags.Size )
         {
-          v8 = Scaleform::Render::LinearHeap::Alloc(v5->ComplexFlags.pHeap, 4 * v7);
+          v8 = Scaleform::Render::LinearHeap::Alloc(this->ComplexFlags.pHeap, 4 * v7);
           memset(v8, 0, 4 * v7);
-          v9 = v5->ComplexFlags.Array;
-          if ( v9 )
+          Array = this->ComplexFlags.Array;
+          if ( Array )
           {
-            v10 = v5->ComplexFlags.Size;
+            v10 = this->ComplexFlags.Size;
             if ( v10 )
-              memmove(v8, v9, 4 * v10);
+              memmove(v8, Array, 4 * v10);
           }
-          v5->ComplexFlags.Array = (unsigned int *)v8;
+          this->ComplexFlags.Array = (unsigned int *)v8;
         }
-        v5->ComplexFlags.Size = v7;
+        this->ComplexFlags.Size = v7;
       }
       while ( 32 * v7 <= v3 );
     }
-    if ( v4 )
+    if ( complex )
     {
-      v5->ComplexFlags.Array[(unsigned __int64)(unsigned int)v3 >> 5] |= 1 << (v3 & 0x1F);
-      v5->HasComplexFill = 1;
+      this->ComplexFlags.Array[(unsigned __int64)(unsigned int)v3 >> 5] |= 1 << (v3 & 0x1F);
+      this->HasComplexFill = 1;
     }
-    if ( v5->MaxStyle < (unsigned int)v3 )
-      v5->MaxStyle = v3;
+    if ( this->MaxStyle < (unsigned int)v3 )
+      this->MaxStyle = v3;
   }
 }
 
@@ -665,71 +668,72 @@ void __fastcall Scaleform::Render::Tessellator::addStyle(Scaleform::Render::Tess
 // RVA: 0x961650
 void __fastcall Scaleform::Render::Tessellator::ClosePath(Scaleform::Render::Tessellator *this)
 {
-  unsigned int v1; // er8
-  Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16> *v2; // rbx
-  unsigned __int64 v3; // rsi
-  Scaleform::Render::Tessellator::SrcVertexType **v4; // r10
-  Scaleform::Render::Tessellator::SrcVertexType **v5; // r14
-  unsigned __int64 v6; // rsi
-  __int64 v7; // rdi
-  Scaleform::Render::Tessellator::SrcVertexType *v8; // r14
+  unsigned int LastVertex; // r8d
+  Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::SrcVertexType,4,16> *p_SrcVertices; // rbx
+  unsigned __int64 Size; // rsi
+  Scaleform::Render::Tessellator::SrcVertexType **Pages; // r10
+  unsigned __int64 v5; // rsi
+  __int64 v6; // rdi
+  Scaleform::Render::Tessellator::SrcVertexType *v7; // r14
 
-  v1 = this->LastVertex;
-  if ( this->SrcVertices.Size > v1 + 2 )
+  LastVertex = this->LastVertex;
+  if ( this->SrcVertices.Size > LastVertex + 2 )
   {
-    v2 = (Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16> *)&this->SrcVertices;
-    v3 = this->SrcVertices.Size;
-    v4 = this->SrcVertices.Pages;
-    v5 = this->SrcVertices.Pages;
-    if ( v4[(v3 - 1) >> 4][((_BYTE)v3 - 1) & 0xF].x != v5[(unsigned __int64)v1 >> 4][v1 & 0xF].x
-      || v4[(v3 - 1) >> 4][((_BYTE)v3 - 1) & 0xF].y != v5[(unsigned __int64)v1 >> 4][v1 & 0xF].y )
+    p_SrcVertices = &this->SrcVertices;
+    Size = this->SrcVertices.Size;
+    Pages = this->SrcVertices.Pages;
+    if ( Pages[(Size - 1) >> 4][((_BYTE)Size - 1) & 0xF].x != Pages[(unsigned __int64)LastVertex >> 4][LastVertex & 0xF].x
+      || Pages[(Size - 1) >> 4][((_BYTE)Size - 1) & 0xF].y != Pages[(unsigned __int64)LastVertex >> 4][LastVertex & 0xF].y )
     {
-      v6 = v3 >> 4;
-      v7 = v1 & 0xF;
-      v8 = v5[(unsigned __int64)v1 >> 4];
-      if ( v6 >= this->SrcVertices.NumPages )
-        Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16>::allocPage(v2, v6);
-      v2->Pages[v6][v2->Size & 0xF] = (Scaleform::Render::VertexBasic)v8[v7];
-      ++v2->Size;
+      v5 = Size >> 4;
+      v6 = LastVertex & 0xF;
+      v7 = Pages[(unsigned __int64)LastVertex >> 4];
+      if ( v5 >= this->SrcVertices.NumPages )
+        Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16>::allocPage(
+          (Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16> *)p_SrcVertices,
+          v5);
+      p_SrcVertices->Pages[v5][p_SrcVertices->Size & 0xF] = v7[v6];
+      ++p_SrcVertices->Size;
     }
   }
 }
 
 // File Line: 381
 // RVA: 0x979250
-void __fastcall Scaleform::Render::Tessellator::FinalizePath(Scaleform::Render::Tessellator *this, unsigned int leftStyle, unsigned int rightStyle, bool leftComplex, bool rightComplex)
+void __fastcall Scaleform::Render::Tessellator::FinalizePath(
+        Scaleform::Render::Tessellator *this,
+        unsigned int leftStyle,
+        unsigned int rightStyle,
+        bool leftComplex,
+        bool rightComplex)
 {
-  unsigned int v5; // edi
-  unsigned __int64 v6; // rdx
+  unsigned __int64 LastVertex; // rdx
   unsigned int v7; // esi
-  Scaleform::Render::Tessellator *v8; // rbx
   bool v9; // bp
-  unsigned int v10; // er12
+  unsigned int v10; // r12d
   unsigned __int64 v11; // r14
-  int v12; // er15
+  int v12; // r15d
   Scaleform::Render::Tessellator::PathType *v13; // rax
-  signed __int64 v14; // rcx
+  __int64 v14; // rcx
 
-  v5 = leftStyle;
-  v6 = this->LastVertex;
+  LastVertex = this->LastVertex;
   v7 = rightStyle;
-  v8 = this;
-  if ( this->SrcVertices.Size < (unsigned int)(v6 + 2) || v5 == rightStyle )
+  if ( this->SrcVertices.Size < (unsigned int)(LastVertex + 2) || leftStyle == rightStyle )
   {
-    if ( v6 < this->SrcVertices.Size )
-      this->SrcVertices.Size = v6;
+    if ( LastVertex < this->SrcVertices.Size )
+      this->SrcVertices.Size = LastVertex;
   }
   else
   {
     if ( this->StrokerMode )
     {
-      if ( (v5 == 0) == (rightStyle == 0) )
+      if ( (leftStyle == 0) == (rightStyle == 0) )
       {
-        if ( v6 < this->SrcVertices.Size )
-          this->SrcVertices.Size = v6;
+        if ( LastVertex < this->SrcVertices.Size )
+          this->SrcVertices.Size = LastVertex;
         return;
       }
-      v5 = v5 != 0;
+      leftStyle = leftStyle != 0;
       v7 = rightStyle != 0;
       v9 = 0;
       leftComplex = 0;
@@ -738,196 +742,184 @@ void __fastcall Scaleform::Render::Tessellator::FinalizePath(Scaleform::Render::
     {
       v9 = rightComplex;
     }
-    Scaleform::Render::Tessellator::addStyle(this, v5, leftComplex);
-    Scaleform::Render::Tessellator::addStyle(v8, v7, v9);
-    v10 = v8->LastVertex;
-    v11 = v8->Paths.Size >> 4;
-    v12 = LODWORD(v8->SrcVertices.Size) - 1;
-    if ( v11 >= v8->Paths.NumPages )
+    Scaleform::Render::Tessellator::addStyle(this, leftStyle, leftComplex);
+    Scaleform::Render::Tessellator::addStyle(this, v7, v9);
+    v10 = this->LastVertex;
+    v11 = this->Paths.Size >> 4;
+    v12 = LODWORD(this->SrcVertices.Size) - 1;
+    if ( v11 >= this->Paths.NumPages )
       Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::PendingEndType,4,4>::allocPage(
-        (Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::PendingEndType,4,4> *)&v8->Paths,
-        v8->Paths.Size >> 4);
-    v13 = v8->Paths.Pages[v11];
-    v14 = v8->Paths.Size & 0xF;
+        (Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::PendingEndType,4,4> *)&this->Paths,
+        this->Paths.Size >> 4);
+    v13 = this->Paths.Pages[v11];
+    v14 = this->Paths.Size & 0xF;
     v13[v14].start = v10;
     v13[v14].end = v12;
-    v13[v14].leftStyle = v5;
+    v13[v14].leftStyle = leftStyle;
     v13[v14].rightStyle = v7;
-    ++v8->Paths.Size;
-    v8->LastVertex = v8->SrcVertices.Size;
+    ++this->Paths.Size;
+    this->LastVertex = this->SrcVertices.Size;
   }
 }
 
 // File Line: 435
 // RVA: 0x9DF530
-void __fastcall Scaleform::Render::Tessellator::decomposePath(Scaleform::Render::Tessellator *this, Scaleform::Render::Tessellator::PathType *path)
+void __fastcall Scaleform::Render::Tessellator::decomposePath(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::Tessellator::PathType *path)
 {
-  int v2; // edi
-  signed int v3; // esi
-  Scaleform::Render::Tessellator::PathType *v4; // r14
-  Scaleform::Render::Tessellator *v5; // rbp
-  Scaleform::Render::Tessellator::SrcVertexType **v6; // r11
-  float v7; // xmm0_4
-  int v8; // er9
+  signed int start; // edi
+  signed int end; // esi
+  Scaleform::Render::Tessellator::SrcVertexType **Pages; // r11
+  float y; // xmm0_4
+  signed int v8; // r9d
   unsigned int v9; // ebx
-  int i; // er10
+  int i; // r10d
   signed int v11; // edi
-  int j; // er11
+  signed int v12; // r11d
   Scaleform::Render::Tessellator::SrcVertexType **v13; // rsi
-  int v14; // er9
+  signed int v14; // r9d
   float v15; // xmm0_4
   __int64 v16; // rcx
   Scaleform::Render::Tessellator::SrcVertexType *v17; // rax
   unsigned int v18; // ebx
-  int k; // er10
+  int j; // r10d
 
-  v2 = path->start;
-  v3 = path->end;
-  v4 = path;
-  v5 = this;
-  if ( (signed int)path->start < v3 )
+  start = path->start;
+  end = path->end;
+  if ( (signed int)path->start < end )
   {
     do
     {
-      v6 = v5->SrcVertices.Pages;
-      v7 = v6[(unsigned __int64)v2 >> 4][v2 & 0xF].y;
-      if ( v2 > (signed int)v4->start )
+      Pages = this->SrcVertices.Pages;
+      y = Pages[(unsigned __int64)start >> 4][start & 0xF].y;
+      if ( start > (signed int)path->start )
       {
-        if ( v7 <= v6[(unsigned __int64)(v2 - 1) >> 4][(v2 - 1) & 0xF].y )
+        if ( y <= Pages[(unsigned __int64)(start - 1) >> 4][(start - 1) & 0xF].y )
         {
-          v8 = v2 + 1;
-          if ( v7 < v6[(unsigned __int64)(v2 + 1) >> 4][(v2 + 1) & 0xF].y )
+          v8 = start + 1;
+          if ( y < Pages[(unsigned __int64)(start + 1) >> 4][(start + 1) & 0xF].y )
           {
 LABEL_7:
             v9 = 1;
             for ( i = v8 + 1;
-                  v8 < v3 && v6[(unsigned __int64)i >> 4][i & 0xF].y > v6[(unsigned __int64)v8 >> 4][v8 & 0xF].y;
+                  v8 < end && Pages[(unsigned __int64)i >> 4][i & 0xF].y > Pages[(unsigned __int64)v8 >> 4][v8 & 0xF].y;
                   ++i )
             {
               ++v9;
               ++v8;
             }
-            Scaleform::Render::Tessellator::buildEdgeList(v5, v2, v9, 1, v4->leftStyle, v4->rightStyle);
-            v2 = v9 + v2 - 1;
-            goto LABEL_12;
+            Scaleform::Render::Tessellator::buildEdgeList(this, start, v9, 1, path->leftStyle, path->rightStyle);
+            start = v9 + start - 1;
           }
         }
       }
       else
       {
-        v8 = v2 + 1;
-        if ( v7 < v6[(unsigned __int64)(v2 + 1) >> 4][(v2 + 1) & 0xF].y )
+        v8 = start + 1;
+        if ( y < Pages[(unsigned __int64)(start + 1) >> 4][(start + 1) & 0xF].y )
           goto LABEL_7;
       }
-LABEL_12:
-      v3 = v4->end;
-      ++v2;
+      end = path->end;
+      ++start;
     }
-    while ( v2 < v3 );
+    while ( start < end );
   }
-  v11 = v4->end;
-  for ( j = v4->start; v11 > (signed int)v4->start; --v11 )
+  v11 = path->end;
+  v12 = path->start;
+  while ( v11 > (signed int)path->start )
   {
-    v13 = v5->SrcVertices.Pages;
+    v13 = this->SrcVertices.Pages;
     v14 = v11 - 1;
     v15 = v13[(unsigned __int64)v11 >> 4][v11 & 0xF].y;
     v16 = (v11 - 1) & 0xF;
     v17 = v13[(unsigned __int64)(v11 - 1) >> 4];
-    if ( v11 < (signed int)v4->end )
+    if ( v11 < (signed int)path->end )
     {
       if ( v15 < v17[v16].y && v15 <= v13[(unsigned __int64)(v11 + 1) >> 4][(v11 + 1) & 0xF].y )
       {
 LABEL_19:
         v18 = 1;
-        for ( k = v11 - 2;
-              v14 > j && v13[(unsigned __int64)k >> 4][k & 0xF].y > v13[(unsigned __int64)v14 >> 4][v14 & 0xF].y;
-              --k )
+        for ( j = v11 - 2;
+              v14 > v12 && v13[(unsigned __int64)j >> 4][j & 0xF].y > v13[(unsigned __int64)v14 >> 4][v14 & 0xF].y;
+              --j )
         {
           ++v18;
           --v14;
         }
-        Scaleform::Render::Tessellator::buildEdgeList(v5, v11, v18, -1, v4->leftStyle, v4->rightStyle);
+        Scaleform::Render::Tessellator::buildEdgeList(this, v11, v18, -1, path->leftStyle, path->rightStyle);
         v11 += 1 - v18;
-        goto LABEL_24;
       }
     }
     else if ( v15 < v17[v16].y )
     {
       goto LABEL_19;
     }
-LABEL_24:
-    j = v4->start;
+    v12 = path->start;
+    --v11;
   }
 }
 
 // File Line: 512
 // RVA: 0x9EBD70
-void __fastcall Scaleform::Render::Tessellator::perceiveStyles(Scaleform::Render::Tessellator *this, Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoChainType *,4,8> *aet)
+void __fastcall Scaleform::Render::Tessellator::perceiveStyles(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoChainType *,4,8> *aet)
 {
-  Scaleform::Render::Tessellator *v2; // rbx
-  Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoChainType *,4,8> *v3; // rdi
   unsigned __int16 v4; // r11
-  unsigned __int64 v5; // r9
+  unsigned __int64 i; // r9
   Scaleform::Render::Tessellator::MonoChainType *v6; // r8
-  __int64 v7; // r10
-  __int64 v8; // rcx
-  int *v9; // rax
-  unsigned __int64 v10; // rax
+  __int64 rightStyle; // r10
+  __int64 leftStyle; // rcx
+  int *Array; // rax
+  unsigned __int64 Size; // rax
   int *v11; // rdx
   unsigned __int16 v12; // ax
 
-  v2 = this;
-  v3 = aet;
   memset(this->StyleCounts.Array, 0, 4 * this->StyleCounts.Size);
   v4 = 0;
-  v5 = 0i64;
-  if ( v3->Size )
+  for ( i = 0i64; i < aet->Size; ++i )
   {
-    do
+    v6 = aet->Pages[i >> 4][i & 0xF];
+    v6->flags &= ~4u;
+    if ( (v6->flags & 2) == 0 )
     {
-      v6 = v3->Pages[v5 >> 4][v5 & 0xF];
-      v6->flags &= 0xFFFBu;
-      if ( !(v6->flags & 2) )
+      rightStyle = v6->rightStyle;
+      leftStyle = v6->leftStyle;
+      Array = this->StyleCounts.Array;
+      if ( this->FillRule )
       {
-        v7 = v6->rightStyle;
-        v8 = v6->leftStyle;
-        v9 = v2->StyleCounts.Array;
-        if ( v2->FillRule )
-        {
-          v9[v8] ^= 1u;
-          v2->StyleCounts.Array[v7] ^= 1u;
-        }
-        else
-        {
-          v9[v8] += v6->dir;
-          v2->StyleCounts.Array[v7] -= v6->dir;
-        }
-        v10 = v2->StyleCounts.Size;
-        if ( v10 )
-        {
-          v11 = &v2->StyleCounts.Array[v10 - 1];
-          while ( !*v11 )
-          {
-            --v11;
-            if ( !--v10 )
-              goto LABEL_10;
-          }
-          v12 = v10 - 1;
-        }
-        else
-        {
-LABEL_10:
-          v12 = 0;
-        }
-        v6->rightAbove = v12;
-        v6->leftAbove = v4;
-        if ( v4 != v12 )
-          v6->flags |= 4u;
-        v4 = v12;
+        Array[leftStyle] ^= 1u;
+        this->StyleCounts.Array[rightStyle] ^= 1u;
       }
-      ++v5;
+      else
+      {
+        Array[leftStyle] += v6->dir;
+        this->StyleCounts.Array[rightStyle] -= v6->dir;
+      }
+      Size = this->StyleCounts.Size;
+      if ( Size )
+      {
+        v11 = &this->StyleCounts.Array[Size - 1];
+        while ( !*v11 )
+        {
+          --v11;
+          if ( !--Size )
+            goto LABEL_10;
+        }
+        v12 = Size - 1;
+      }
+      else
+      {
+LABEL_10:
+        v12 = 0;
+      }
+      v6->rightAbove = v12;
+      v6->leftAbove = v4;
+      if ( v4 != v12 )
+        v6->flags |= 4u;
+      v4 = v12;
     }
-    while ( v5 < v3->Size );
   }
 }
 
@@ -936,135 +928,139 @@ LABEL_10:
 void __fastcall Scaleform::Render::Tessellator::setupIntersections(Scaleform::Render::Tessellator *this)
 {
   unsigned __int64 v1; // rdi
-  Scaleform::Render::Tessellator *v2; // r14
-  Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoVertexType *,4,8> *v3; // rbp
-  Scaleform::Render::ArrayPaged<Scaleform::Render::GlyphFitter::VertexType,4,16> *v4; // rbx
-  signed __int64 v5; // r8
-  signed __int64 v6; // rdx
+  Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoVertexType *,4,8> *p_InteriorChains; // rbp
+  Scaleform::Render::ArrayPaged<Scaleform::Render::GlyphFitter::VertexType,4,16> *p_InteriorOrder; // rbx
+  unsigned __int64 v5; // r8
+  unsigned __int64 v6; // rdx
   unsigned __int64 v7; // rsi
-  Scaleform::Render::Tessellator::MonoVertexType **v8; // r15
+  Scaleform::Render::Tessellator::MonoChainType **v8; // r15
   unsigned __int64 v9; // rsi
 
   v1 = 0i64;
-  v2 = this;
   this->InteriorChains.Size = 0i64;
   this->InteriorOrder.Size = 0i64;
   if ( this->ActiveChains.Size )
   {
-    v3 = (Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoVertexType *,4,8> *)&this->InteriorChains;
-    v4 = (Scaleform::Render::ArrayPaged<Scaleform::Render::GlyphFitter::VertexType,4,16> *)&this->InteriorOrder;
+    p_InteriorChains = (Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoVertexType *,4,8> *)&this->InteriorChains;
+    p_InteriorOrder = (Scaleform::Render::ArrayPaged<Scaleform::Render::GlyphFitter::VertexType,4,16> *)&this->InteriorOrder;
     do
     {
       v5 = v1 >> 4;
       v6 = v1 & 0xF;
-      v2->ActiveChains.Pages[v5][v6]->posIntr = v1;
-      v7 = v3->Size >> 4;
-      v8 = (Scaleform::Render::Tessellator::MonoVertexType **)&v2->ActiveChains.Pages[v5][v6];
-      if ( v7 >= v3->NumPages )
-        Scaleform::Render::ArrayPaged<Scaleform::Render::Hairliner::MonoChainType *,4,8>::allocPage(v3, v3->Size >> 4);
-      v3->Pages[v7][v3->Size & 0xF] = *v8;
-      ++v3->Size;
-      v9 = v4->Size >> 4;
-      if ( v9 >= v4->NumPages )
-        Scaleform::Render::ArrayPaged<unsigned int,4,16>::allocPage(v4, v4->Size >> 4);
-      v4->Pages[v9][v4->Size & 0xF] = (Scaleform::Render::GlyphFitter::VertexType)v1;
-      ++v4->Size;
+      this->ActiveChains.Pages[v5][v6]->posIntr = v1;
+      v7 = p_InteriorChains->Size >> 4;
+      v8 = &this->ActiveChains.Pages[v5][v6];
+      if ( v7 >= p_InteriorChains->NumPages )
+        Scaleform::Render::ArrayPaged<Scaleform::Render::Hairliner::MonoChainType *,4,8>::allocPage(
+          p_InteriorChains,
+          p_InteriorChains->Size >> 4);
+      p_InteriorChains->Pages[v7][p_InteriorChains->Size & 0xF] = (Scaleform::Render::Tessellator::MonoVertexType *)*v8;
+      ++p_InteriorChains->Size;
+      v9 = p_InteriorOrder->Size >> 4;
+      if ( v9 >= p_InteriorOrder->NumPages )
+        Scaleform::Render::ArrayPaged<unsigned int,4,16>::allocPage(p_InteriorOrder, p_InteriorOrder->Size >> 4);
+      p_InteriorOrder->Pages[v9][p_InteriorOrder->Size & 0xF] = (Scaleform::Render::GlyphFitter::VertexType)v1;
+      ++p_InteriorOrder->Size;
       ++v1;
     }
-    while ( v1 < v2->ActiveChains.Size );
+    while ( v1 < this->ActiveChains.Size );
   }
 }
 
 // File Line: 556
 // RVA: 0x9EAE70
-__int64 __fastcall Scaleform::Render::Tessellator::nextScanbeam(Scaleform::Render::Tessellator *this, float yb, float yt, unsigned int startMc, unsigned int numMc)
+__int64 __fastcall Scaleform::Render::Tessellator::nextScanbeam(
+        Scaleform::Render::Tessellator *this,
+        float yb,
+        float yt,
+        unsigned int startMc,
+        unsigned int numMc)
 {
-  float v5; // xmm7_4
-  unsigned int v6; // er13
-  Scaleform::Render::Tessellator *v7; // rdi
-  signed int v8; // ebp
-  signed __int64 v9; // r12
+  float y; // xmm7_4
+  unsigned int v6; // r13d
+  unsigned int v8; // ebp
+  __int64 v9; // r12
   unsigned __int64 v10; // r14
   Scaleform::Render::Tessellator::MonoChainType *v11; // rbx
-  unsigned int v12; // er10
-  int v13; // er15
-  Scaleform::Render::Tessellator::SrcVertexType **v14; // rsi
+  unsigned int edge; // r10d
+  int dir; // r15d
+  Scaleform::Render::Tessellator::SrcVertexType **Pages; // rsi
   __int64 v15; // r9
   Scaleform::Render::Tessellator::EdgeType *v16; // r11
-  __int64 v17; // r9
-  Scaleform::Render::Tessellator::EdgeType *v18; // r10
-  Scaleform::Render::Tessellator::SrcVertexType **v19; // rcx
-  unsigned int v20; // edx
-  Scaleform::Render::Tessellator::SrcVertexType *v21; // r11
-  __int64 v22; // r8
-  float v23; // xmm0_4
-  __int64 v24; // r8
-  Scaleform::Render::Tessellator::SrcVertexType *v25; // rdx
-  unsigned __int64 v26; // rbp
-  unsigned int *v27; // rax
-  unsigned int v28; // eax
-  __int64 v29; // rdx
-  Scaleform::Render::Tessellator::SrcVertexType *v30; // rcx
-  float v31; // xmm0_4
-  __int64 v32; // r8
-  Scaleform::Render::Tessellator::SrcVertexType *v33; // rdx
-  unsigned __int64 v34; // rsi
-  signed __int64 v35; // r14
-  __int64 v36; // rbp
-  Scaleform::Render::Tessellator::MonoChainType *v37; // r10
-  __int64 v38; // r9
-  Scaleform::Render::Tessellator::EdgeType *v39; // r11
-  Scaleform::Render::Tessellator::SrcVertexType **v40; // rcx
-  unsigned int v41; // edx
-  Scaleform::Render::Tessellator::SrcVertexType *v42; // rsi
-  __int64 v43; // r8
-  float v44; // xmm0_4
+  unsigned __int64 v17; // rax
+  __int64 v18; // r9
+  Scaleform::Render::Tessellator::EdgeType *v19; // r10
+  Scaleform::Render::Tessellator::SrcVertexType **v20; // rcx
+  unsigned int lower; // edx
+  Scaleform::Render::Tessellator::SrcVertexType *v22; // r11
+  __int64 v23; // r8
+  float x; // xmm0_4
+  __int64 v25; // r8
+  Scaleform::Render::Tessellator::SrcVertexType *v26; // rdx
+  unsigned __int64 v27; // rbp
+  unsigned int *v28; // rax
+  float xt; // eax
+  __int64 v30; // rdx
+  Scaleform::Render::Tessellator::SrcVertexType *v31; // rcx
+  float v32; // xmm0_4
+  __int64 v33; // r8
+  Scaleform::Render::Tessellator::SrcVertexType *v34; // rdx
+  unsigned __int64 v35; // rsi
+  __int64 v36; // r14
+  __int64 v37; // rbp
+  Scaleform::Render::Tessellator::MonoChainType *v38; // r10
+  unsigned __int64 v39; // rcx
+  __int64 v40; // r9
+  Scaleform::Render::Tessellator::EdgeType *v41; // r11
+  Scaleform::Render::Tessellator::SrcVertexType **v42; // rcx
+  unsigned int v43; // edx
+  Scaleform::Render::Tessellator::SrcVertexType *v44; // rsi
   __int64 v45; // r8
-  Scaleform::Render::Tessellator::SrcVertexType *v46; // rdx
-  unsigned __int64 v47; // rsi
-  unsigned __int64 v48; // r10
-  __int64 v49; // rbx
-  unsigned __int64 v50; // r11
-  int v51; // er12
-  unsigned __int64 v52; // rsi
-  Scaleform::Render::Tessellator::MonoChainType ***v53; // r9
-  Scaleform::Render::Tessellator::MonoChainType *v54; // rdx
-  float v55; // xmm1_4
-  Scaleform::Render::Tessellator::MonoChainType *v56; // r8
-  float v57; // xmm0_4
-  bool v58; // al
-  Scaleform::Render::Tessellator::MonoChainType **v59; // rcx
-  Scaleform::Render::Tessellator::MonoChainType *v60; // rax
-  unsigned int v61; // er15
-  unsigned __int64 v62; // r14
+  float v46; // xmm0_4
+  __int64 v47; // r8
+  Scaleform::Render::Tessellator::SrcVertexType *v48; // rdx
+  unsigned __int64 v49; // rsi
+  unsigned __int64 Size; // r10
+  __int64 v51; // rbx
+  unsigned __int64 v52; // r11
+  int v53; // r12d
+  unsigned __int64 v54; // rsi
+  Scaleform::Render::Tessellator::MonoChainType ***v55; // r9
+  Scaleform::Render::Tessellator::MonoChainType *v56; // rdx
+  float xb; // xmm1_4
+  Scaleform::Render::Tessellator::MonoChainType *v58; // r8
+  float v59; // xmm0_4
+  bool v60; // al
+  Scaleform::Render::Tessellator::MonoChainType **v61; // rcx
+  Scaleform::Render::Tessellator::MonoChainType *v62; // rax
+  unsigned int v63; // r15d
+  unsigned __int64 v64; // r14
   unsigned __int64 i; // rsi
-  unsigned __int64 v64; // rbp
-  unsigned __int64 v65; // r13
-  unsigned __int64 v66; // r9
-  unsigned int **v67; // rdx
-  Scaleform::Render::Tessellator::MonoChainType ***v68; // r8
-  __int64 v69; // r14
-  unsigned __int64 v70; // r12
-  unsigned __int64 v71; // r15
-  unsigned int v72; // ecx
-  Scaleform::Render::Tessellator::MonoChainType *v73; // rbx
-  unsigned int v74; // ecx
-  Scaleform::Render::Tessellator::MonoChainType *v75; // rsi
-  float v76; // xmm1_4
-  float v77; // xmm6_4
-  float v78; // xmm0_4
+  unsigned __int64 v66; // rbp
+  __int64 v67; // r13
+  unsigned __int64 v68; // r9
+  unsigned int **v69; // rdx
+  Scaleform::Render::Tessellator::MonoChainType ***v70; // r8
+  __int64 v71; // r14
+  unsigned __int64 v72; // r12
+  unsigned __int64 v73; // r15
+  unsigned __int64 v74; // rax
+  Scaleform::Render::Tessellator::MonoChainType *v75; // rbx
+  unsigned __int64 v76; // rax
+  Scaleform::Render::Tessellator::MonoChainType *v77; // rsi
+  float v78; // xmm1_4
   float v79; // xmm6_4
-  unsigned __int64 v80; // rsi
-  unsigned __int64 v81; // rdx
-  Scaleform::Render::LinearHeap *v82; // rcx
-  void *v83; // rbx
-  unsigned __int64 v84; // rax
-  signed __int64 v85; // rdx
-  Scaleform::Render::Tessellator::IntersectionType *v86; // rax
-  unsigned int **v87; // rcx
-  Scaleform::Render::Tessellator::MonoChainType ***v88; // rdx
-  unsigned int v89; // er10
-  unsigned int v90; // er9
+  float v80; // xmm0_4
+  float v81; // xmm6_4
+  unsigned __int64 v82; // rsi
+  unsigned __int64 MaxPages; // rdx
+  Scaleform::Render::LinearHeap *pHeap; // rcx
+  void *v85; // rbx
+  unsigned __int64 v86; // rax
+  __int64 v87; // rdx
+  Scaleform::Render::Tessellator::IntersectionType *v88; // rax
+  unsigned int **v89; // rcx
+  Scaleform::Render::Tessellator::MonoChainType ***v90; // rdx
   unsigned __int64 v91; // rax
   __int64 v92; // r10
   Scaleform::Render::Tessellator::MonoChainType **v93; // r8
@@ -1073,581 +1069,582 @@ __int64 __fastcall Scaleform::Render::Tessellator::nextScanbeam(Scaleform::Rende
   Scaleform::Render::Tessellator::MonoChainType **v96; // rdx
   Scaleform::Render::Tessellator::MonoChainType *v97; // rcx
   unsigned __int64 v98; // rdx
-  signed __int64 v99; // r8
+  unsigned __int64 v99; // r8
   Scaleform::Render::Tessellator::IntersectionType *v100; // rcx
   __int64 v102; // [rsp+20h] [rbp-A8h]
-  unsigned int v103; // [rsp+30h] [rbp-98h]
+  unsigned int posIntr; // [rsp+30h] [rbp-98h]
   unsigned int v104; // [rsp+34h] [rbp-94h]
-  signed __int64 v105; // [rsp+D0h] [rbp+8h]
-  signed int v106; // [rsp+D8h] [rbp+10h]
+  __int64 v105; // [rsp+D0h] [rbp+8h]
+  unsigned int v106; // [rsp+D8h] [rbp+10h]
 
-  v5 = yb;
+  y = yb;
   v6 = numMc;
-  v7 = this;
-  v8 = 0;
-  if ( numMc )
-    v8 = 1;
+  v8 = numMc != 0;
   v9 = startMc;
   this->ValidChains.Size = 0i64;
   v106 = v8;
   v10 = 0i64;
-  if ( this->ActiveChains.Size > 0 )
+  if ( this->ActiveChains.Size )
   {
     do
     {
-      v11 = v7->ActiveChains.Pages[v10 >> 4][v10 & 0xF];
-      v11->flags &= 0xFFF7u;
-      v12 = v11->edge;
-      v13 = v11->dir;
-      v14 = v7->SrcVertices.Pages;
+      v11 = this->ActiveChains.Pages[v10 >> 4][v10 & 0xF];
+      v11->flags &= ~8u;
+      edge = v11->edge;
+      dir = v11->dir;
+      Pages = this->SrcVertices.Pages;
       v15 = v11->edge & 0xF;
-      v16 = v7->Edges.Pages[(unsigned __int64)v11->edge >> 4];
-      if ( yb == v14[(unsigned __int64)(v13 + v16[v15].lower) >> 4][(v13 + v16[v15].lower) & 0xF].y )
+      v16 = this->Edges.Pages[(unsigned __int64)v11->edge >> 4];
+      v17 = dir + v16[v15].lower;
+      if ( yb == Pages[v17 >> 4][v17 & 0xF].y )
       {
-        if ( v12 >= v11->end )
+        if ( edge >= v11->end )
         {
-          v28 = LODWORD(v11->xt);
+          xt = v11->xt;
           v8 |= 2u;
           v11->flags |= 2u;
           v11->flags |= 8u;
-          LODWORD(v11->xb) = v28;
+          v11->xb = xt;
           v106 = v8;
         }
         else
         {
-          v11->edge = v12 + 1;
-          v17 = ((_BYTE)v12 + 1) & 0xF;
-          v18 = v7->Edges.Pages[(unsigned __int64)(v12 + 1) >> 4];
-          v19 = v7->SrcVertices.Pages;
-          v20 = v18[v17].lower;
-          v21 = v19[(unsigned __int64)(v20 + v13) >> 4];
-          v22 = ((_BYTE)v20 + (_BYTE)v13) & 0xF;
-          v11->xb = v19[(unsigned __int64)v18[v17].lower >> 4][v20 & 0xF].x;
-          if ( yt == v21[v22].y )
+          v11->edge = edge + 1;
+          v18 = ((_BYTE)edge + 1) & 0xF;
+          v19 = this->Edges.Pages[(unsigned __int64)(edge + 1) >> 4];
+          v20 = this->SrcVertices.Pages;
+          lower = v19[v18].lower;
+          v22 = v20[(unsigned __int64)(lower + dir) >> 4];
+          v23 = ((_BYTE)lower + (_BYTE)dir) & 0xF;
+          v11->xb = v20[(unsigned __int64)lower >> 4][lower & 0xF].x;
+          if ( yt == v22[v23].y )
           {
-            v23 = v21[v22].x;
+            x = v22[v23].x;
           }
           else
           {
-            v24 = v18[v17].lower & 0xF;
-            v25 = v7->SrcVertices.Pages[(unsigned __int64)v18[v17].lower >> 4];
-            v23 = (float)((float)(yt - v25[v24].y) * v18[v17].slope) + v25[v24].x;
+            v25 = v19[v18].lower & 0xF;
+            v26 = this->SrcVertices.Pages[(unsigned __int64)v19[v18].lower >> 4];
+            x = (float)((float)(yt - v26[v25].y) * v19[v18].slope) + v26[v25].x;
           }
-          v11->xt = v23;
-          v26 = v7->ValidChains.Size >> 4;
-          if ( v26 >= v7->ValidChains.NumPages )
+          v11->xt = x;
+          v27 = this->ValidChains.Size >> 4;
+          if ( v27 >= this->ValidChains.NumPages )
             Scaleform::Render::ArrayPaged<unsigned int,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::GlyphFitter::VertexType,4,16> *)&v7->ValidChains,
-              v7->ValidChains.Size >> 4);
-          v27 = v7->ValidChains.Pages[v26];
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::GlyphFitter::VertexType,4,16> *)&this->ValidChains,
+              this->ValidChains.Size >> 4);
+          v28 = this->ValidChains.Pages[v27];
           v8 = v106;
-          v27[v7->ValidChains.Size & 0xF] = v10;
-          ++v7->ValidChains.Size;
+          v28[this->ValidChains.Size & 0xF] = v10;
+          ++this->ValidChains.Size;
           v11->flags |= 8u;
         }
       }
       else
       {
-        v29 = (v13 + v16[v15].lower) & 0xF;
-        v30 = v14[(unsigned __int64)(v13 + v16[v15].lower) >> 4];
+        v30 = ((_BYTE)dir + LOBYTE(v16[v15].lower)) & 0xF;
+        v31 = Pages[(unsigned __int64)(unsigned int)v17 >> 4];
         v11->xb = v11->xt;
-        if ( yt == v30[v29].y )
+        if ( yt == v31[v30].y )
         {
-          v31 = v30[v29].x;
+          v32 = v31[v30].x;
         }
         else
         {
-          v32 = v16[v15].lower & 0xF;
-          v33 = v7->SrcVertices.Pages[(unsigned __int64)v16[v15].lower >> 4];
-          v31 = (float)((float)(yt - v33[v32].y) * v16[v15].slope) + v33[v32].x;
+          v33 = v16[v15].lower & 0xF;
+          v34 = this->SrcVertices.Pages[(unsigned __int64)v16[v15].lower >> 4];
+          v32 = (float)((float)(yt - v34[v33].y) * v16[v15].slope) + v34[v33].x;
         }
-        v11->xt = v31;
-        v34 = v7->ValidChains.Size >> 4;
-        if ( v34 >= v7->ValidChains.NumPages )
+        v11->xt = v32;
+        v35 = this->ValidChains.Size >> 4;
+        if ( v35 >= this->ValidChains.NumPages )
           Scaleform::Render::ArrayPaged<unsigned int,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::GlyphFitter::VertexType,4,16> *)&v7->ValidChains,
-            v7->ValidChains.Size >> 4);
-        v7->ValidChains.Pages[v34][v7->ValidChains.Size & 0xF] = v10;
-        ++v7->ValidChains.Size;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::GlyphFitter::VertexType,4,16> *)&this->ValidChains,
+            this->ValidChains.Size >> 4);
+        this->ValidChains.Pages[v35][this->ValidChains.Size & 0xF] = v10;
+        ++this->ValidChains.Size;
       }
       ++v10;
     }
-    while ( v10 < v7->ActiveChains.Size );
+    while ( v10 < this->ActiveChains.Size );
     v6 = numMc;
   }
   if ( v6 )
   {
-    v35 = v9;
-    v36 = v6;
+    v36 = v9;
+    v37 = v6;
     do
     {
-      v37 = v7->MonoChainsSorted.Array[v35];
-      v38 = v37->edge & 0xF;
-      v39 = v7->Edges.Pages[(unsigned __int64)v37->edge >> 4];
-      v40 = v7->SrcVertices.Pages;
-      v41 = v39[v38].lower;
-      v42 = v40[(unsigned __int64)(v41 + v37->dir) >> 4];
-      v43 = ((_BYTE)v41 + (unsigned __int8)v37->dir) & 0xF;
-      *(float *)&v40 = v40[(unsigned __int64)v39[v38].lower >> 4][v41 & 0xF].x;
-      v37->flags = 8;
-      LODWORD(v37->xb) = (_DWORD)v40;
-      if ( yt == v42[v43].y )
+      v38 = this->MonoChainsSorted.Array[v36];
+      v39 = v38->edge;
+      v40 = v39 & 0xF;
+      v41 = this->Edges.Pages[v39 >> 4];
+      v42 = this->SrcVertices.Pages;
+      v43 = v41[v40].lower;
+      v44 = v42[(unsigned __int64)(v43 + v38->dir) >> 4];
+      v45 = ((_BYTE)v43 + (unsigned __int8)v38->dir) & 0xF;
+      *(float *)&v42 = v42[(unsigned __int64)v43 >> 4][v43 & 0xF].x;
+      v38->flags = 8;
+      LODWORD(v38->xb) = (_DWORD)v42;
+      if ( yt == v44[v45].y )
       {
-        v44 = v42[v43].x;
+        v46 = v44[v45].x;
       }
       else
       {
-        v45 = v39[v38].lower & 0xF;
-        v46 = v7->SrcVertices.Pages[(unsigned __int64)v39[v38].lower >> 4];
-        v44 = (float)((float)(yt - v46[v45].y) * v39[v38].slope) + v46[v45].x;
+        v47 = v41[v40].lower & 0xF;
+        v48 = this->SrcVertices.Pages[(unsigned __int64)v41[v40].lower >> 4];
+        v46 = (float)((float)(yt - v48[v47].y) * v41[v40].slope) + v48[v47].x;
       }
-      v37->xt = v44;
-      v47 = v7->ActiveChains.Size >> 4;
-      if ( v47 >= v7->ActiveChains.NumPages )
+      v38->xt = v46;
+      v49 = this->ActiveChains.Size >> 4;
+      if ( v49 >= this->ActiveChains.NumPages )
         Scaleform::Render::ArrayPaged<Scaleform::Render::Hairliner::MonoChainType *,4,8>::allocPage(
-          (Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoVertexType *,4,8> *)&v7->ActiveChains,
-          v7->ActiveChains.Size >> 4);
-      ++v35;
-      v7->ActiveChains.Pages[v47][v7->ActiveChains.Size & 0xF] = 0i64;
-      ++v7->ActiveChains.Size;
-      --v36;
+          (Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoVertexType *,4,8> *)&this->ActiveChains,
+          this->ActiveChains.Size >> 4);
+      ++v36;
+      this->ActiveChains.Pages[v49][this->ActiveChains.Size & 0xF] = 0i64;
+      ++this->ActiveChains.Size;
+      --v37;
     }
-    while ( v36 );
-    v48 = v7->ActiveChains.Size;
-    LODWORD(v49) = v9 + numMc;
-    v50 = v7->ActiveChains.Size - v6;
-    v51 = -(signed int)v9;
-    v52 = v50 - 1;
+    while ( v37 );
+    Size = this->ActiveChains.Size;
+    LODWORD(v51) = v9 + numMc;
+    v52 = Size - v6;
+    v53 = -(int)v9;
+    v54 = v52 - 1;
     do
     {
-      if ( !v50
-        || ((v53 = v7->ActiveChains.Pages,
-             v54 = v7->MonoChainsSorted.Array[(unsigned int)(v49 - 1)],
-             v55 = v54->xb,
-             v56 = v53[v52 >> 4][v52 & 0xF],
-             v57 = v56->xb,
-             v57 == v55) ? (v58 = v56->xt < v54->xt) : (v58 = v55 > v57),
-            v58) )
+      if ( !v52
+        || ((v55 = this->ActiveChains.Pages,
+             v56 = this->MonoChainsSorted.Array[(unsigned int)(v51 - 1)],
+             xb = v56->xb,
+             v58 = v55[v54 >> 4][v54 & 0xF],
+             v59 = v58->xb,
+             v59 == xb)
+          ? (v60 = v58->xt < v56->xt)
+          : (v60 = xb > v59),
+            v60) )
       {
-        --v48;
-        v49 = (unsigned int)(v49 - 1);
-        v59 = v7->ActiveChains.Pages[v48 >> 4];
-        v60 = v7->MonoChainsSorted.Array[v49];
+        --Size;
+        v51 = (unsigned int)(v51 - 1);
+        v61 = this->ActiveChains.Pages[Size >> 4];
+        v62 = this->MonoChainsSorted.Array[v51];
       }
       else
       {
-        --v50;
-        --v48;
         --v52;
-        v59 = v53[v48 >> 4];
-        v60 = v53[v50 >> 4][v50 & 0xF];
+        --Size;
+        --v54;
+        v61 = v55[Size >> 4];
+        v62 = v55[v52 >> 4][v52 & 0xF];
       }
-      v59[v48 & 0xF] = v60;
+      v61[Size & 0xF] = v62;
     }
-    while ( v51 + (_DWORD)v49 );
+    while ( v53 + (_DWORD)v51 );
   }
-  v61 = v106;
-  v62 = 0i64;
-  v7->Intersections.Size = 0i64;
-  if ( v106 & 1 )
+  v63 = v106;
+  v64 = 0i64;
+  this->Intersections.Size = 0i64;
+  if ( (v106 & 1) != 0 )
   {
-    v7->ValidChains.Size = 0i64;
-    for ( i = 0i64; i < v7->ActiveChains.Size; ++i )
+    this->ValidChains.Size = 0i64;
+    for ( i = 0i64; i < this->ActiveChains.Size; ++i )
     {
-      if ( !(v7->ActiveChains.Pages[i >> 4][i & 0xF]->flags & 2) )
+      if ( (this->ActiveChains.Pages[i >> 4][i & 0xF]->flags & 2) == 0 )
       {
-        v64 = v7->ValidChains.Size >> 4;
-        if ( v64 >= v7->ValidChains.NumPages )
+        v66 = this->ValidChains.Size >> 4;
+        if ( v66 >= this->ValidChains.NumPages )
           Scaleform::Render::ArrayPaged<unsigned int,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::GlyphFitter::VertexType,4,16> *)&v7->ValidChains,
-            v7->ValidChains.Size >> 4);
-        v7->ValidChains.Pages[v64][v7->ValidChains.Size & 0xF] = i;
-        ++v7->ValidChains.Size;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::GlyphFitter::VertexType,4,16> *)&this->ValidChains,
+            this->ValidChains.Size >> 4);
+        this->ValidChains.Pages[v66][this->ValidChains.Size & 0xF] = i;
+        ++this->ValidChains.Size;
       }
     }
   }
-  if ( v7->ValidChains.Size > 1 )
+  if ( this->ValidChains.Size > 1 )
   {
-    v65 = 0i64;
+    v67 = 0i64;
     v102 = 0i64;
     do
     {
-      if ( (v65 & 0x8000000000000000ui64) == 0i64 )
+      if ( v67 >= 0 )
       {
-        v66 = v65 + 1;
-        v105 = v65 + 1;
+        v68 = v67 + 1;
+        v105 = v67 + 1;
         do
         {
-          v67 = v7->ValidChains.Pages;
-          v68 = v7->ActiveChains.Pages;
-          v69 = v65 & 0xF;
-          v70 = v66 & 0xF;
-          v71 = v66 >> 4;
-          v72 = v67[v65 >> 4][v69];
-          v73 = v68[(unsigned __int64)v72 >> 4][v72 & 0xF];
-          v74 = v67[v66 >> 4][v70];
-          v75 = v68[(unsigned __int64)v74 >> 4][v74 & 0xF];
-          if ( v75->xt >= v73->xt )
+          v69 = this->ValidChains.Pages;
+          v70 = this->ActiveChains.Pages;
+          v71 = v67 & 0xF;
+          v72 = v68 & 0xF;
+          v73 = v68 >> 4;
+          v74 = v69[(unsigned __int64)v67 >> 4][v71];
+          v75 = v70[v74 >> 4][v74 & 0xF];
+          v76 = v69[v68 >> 4][v72];
+          v77 = v70[v76 >> 4][v76 & 0xF];
+          if ( v77->xt >= v75->xt )
             break;
-          if ( !v7->Intersections.Size )
-            Scaleform::Render::Tessellator::setupIntersections(v7);
-          v76 = v75->xb;
-          v103 = v73->posIntr;
-          v77 = v73->xb;
-          v104 = v75->posIntr;
-          v78 = (float)((float)(v75->xt - v76) - v73->xt) + v77;
-          if ( v78 != 0.0 )
+          if ( !this->Intersections.Size )
+            Scaleform::Render::Tessellator::setupIntersections(this);
+          v78 = v77->xb;
+          posIntr = v75->posIntr;
+          v79 = v75->xb;
+          v104 = v77->posIntr;
+          v80 = (float)((float)(v77->xt - v78) - v75->xt) + v79;
+          if ( v80 != 0.0 )
           {
-            v79 = (float)((float)((float)(v77 - v76) * (float)(yt - v5)) / v78) + v5;
-            if ( v79 >= v5 )
+            v81 = (float)((float)((float)(v79 - v78) * (float)(yt - y)) / v80) + y;
+            if ( v81 >= y )
               continue;
           }
-          v79 = v5;
-          if ( v79 > yt )
-            v79 = yt;
-          v80 = v7->Intersections.Size >> 4;
-          if ( v80 >= v7->Intersections.NumPages )
+          v81 = y;
+          if ( v81 > yt )
+            v81 = yt;
+          v82 = this->Intersections.Size >> 4;
+          if ( v82 >= this->Intersections.NumPages )
           {
-            v81 = v7->Intersections.MaxPages;
-            if ( v80 >= v81 )
+            MaxPages = this->Intersections.MaxPages;
+            if ( v82 >= MaxPages )
             {
-              v82 = v7->Intersections.pHeap;
-              if ( v7->Intersections.Pages )
+              pHeap = this->Intersections.pHeap;
+              if ( this->Intersections.Pages )
               {
-                v83 = Scaleform::Render::LinearHeap::Alloc(v82, 16 * v81);
-                memmove(v83, v7->Intersections.Pages, 8 * v7->Intersections.NumPages);
-                v84 = v7->Intersections.MaxPages;
-                v7->Intersections.Pages = (Scaleform::Render::Tessellator::IntersectionType **)v83;
-                v7->Intersections.MaxPages = 2 * v84;
+                v85 = Scaleform::Render::LinearHeap::Alloc(pHeap, 16 * MaxPages);
+                memmove(v85, this->Intersections.Pages, 8 * this->Intersections.NumPages);
+                v86 = this->Intersections.MaxPages;
+                this->Intersections.Pages = (Scaleform::Render::Tessellator::IntersectionType **)v85;
+                this->Intersections.MaxPages = 2 * v86;
               }
               else
               {
-                v7->Intersections.MaxPages = 4i64;
-                v7->Intersections.Pages = (Scaleform::Render::Tessellator::IntersectionType **)Scaleform::Render::LinearHeap::Alloc(
-                                                                                                 v82,
-                                                                                                 0x20ui64);
+                this->Intersections.MaxPages = 4i64;
+                this->Intersections.Pages = (Scaleform::Render::Tessellator::IntersectionType **)Scaleform::Render::LinearHeap::Alloc(
+                                                                                                   pHeap,
+                                                                                                   0x20ui64);
               }
             }
-            v7->Intersections.Pages[v80] = (Scaleform::Render::Tessellator::IntersectionType *)Scaleform::Render::LinearHeap::Alloc(
-                                                                                                 v7->Intersections.pHeap,
-                                                                                                 0xC0ui64);
-            ++v7->Intersections.NumPages;
+            this->Intersections.Pages[v82] = (Scaleform::Render::Tessellator::IntersectionType *)Scaleform::Render::LinearHeap::Alloc(
+                                                                                                   this->Intersections.pHeap,
+                                                                                                   0xC0ui64);
+            ++this->Intersections.NumPages;
           }
-          v85 = v7->Intersections.Size & 0xF;
-          v86 = v7->Intersections.Pages[v80];
-          v86[v85].pos1 = v103;
-          v86[v85].pos2 = v104;
-          v86[v85].y = v79;
-          ++v7->Intersections.Size;
-          v87 = v7->ValidChains.Pages;
-          v88 = v7->ActiveChains.Pages;
-          v89 = v87[v71][v70];
-          v90 = v87[v65 >> 4][v69];
-          v91 = v89;
-          v92 = v89 & 0xF;
-          v93 = v88[v91 >> 4];
-          v94 = v90;
-          v95 = v90 & 0xF;
-          v96 = v88[v94 >> 4];
+          v87 = this->Intersections.Size & 0xF;
+          v88 = this->Intersections.Pages[v82];
+          v88[v87].pos1 = posIntr;
+          v88[v87].pos2 = v104;
+          v88[v87].y = v81;
+          ++this->Intersections.Size;
+          v89 = this->ValidChains.Pages;
+          v90 = this->ActiveChains.Pages;
+          v91 = v89[v73][v72];
+          v92 = v91 & 0xF;
+          v93 = v90[v91 >> 4];
+          v94 = v89[(unsigned __int64)v67 >> 4][v71];
+          v95 = v94 & 0xF;
+          v96 = v90[v94 >> 4];
           v97 = v96[v95];
           v96[v95] = v93[v92];
-          v66 = v105 - 1;
-          --v65;
+          v68 = v105 - 1;
+          --v67;
           v93[v92] = v97;
           --v105;
         }
-        while ( (v65 & 0x8000000000000000ui64) == 0i64 );
-        v65 = v102;
+        while ( v67 >= 0 );
+        v67 = v102;
       }
-      v102 = ++v65;
+      v102 = ++v67;
     }
-    while ( v65 + 1 < v7->ValidChains.Size );
-    v61 = v106;
-    v62 = 0i64;
+    while ( v67 + 1 < this->ValidChains.Size );
+    v63 = v106;
+    v64 = 0i64;
   }
-  if ( v7->Intersections.Size > 1 )
+  if ( this->Intersections.Size > 1 )
   {
     Scaleform::Alg::InsertionSortSliced<Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::IntersectionType,4,4>,bool (*)(Scaleform::Render::Tessellator::IntersectionType const &,Scaleform::Render::Tessellator::IntersectionType const &)>(
-      &v7->Intersections,
+      &this->Intersections,
       0i64,
-      v7->Intersections.Size,
+      this->Intersections.Size,
       (bool (__fastcall *)(Scaleform::Render::Tessellator::IntersectionType *, Scaleform::Render::Tessellator::IntersectionType *))UFG::SectionChooser::fnSectionStreamPriority);
-    if ( v7->HasEpsilon )
+    if ( this->HasEpsilon )
     {
-      if ( v7->Intersections.Size )
+      if ( this->Intersections.Size )
       {
         do
         {
-          v98 = v62 >> 4;
-          v99 = v62 & 0xF;
-          v100 = v7->Intersections.Pages[v62 >> 4];
-          if ( (float)(v100[v62 & 0xF].y - v5) < (float)(COERCE_FLOAT(LODWORD(v5) & _xmm) * v7->Epsilon) )
-            v100[v62 & 0xF].y = v5;
-          ++v62;
-          v5 = v7->Intersections.Pages[v98][v99].y;
+          v98 = v64 >> 4;
+          v99 = v64 & 0xF;
+          v100 = this->Intersections.Pages[v64 >> 4];
+          if ( (float)(v100[v64 & 0xF].y - y) < (float)(COERCE_FLOAT(LODWORD(y) & _xmm) * this->Epsilon) )
+            v100[v64 & 0xF].y = y;
+          ++v64;
+          y = this->Intersections.Pages[v98][v99].y;
         }
-        while ( v62 < v7->Intersections.Size );
+        while ( v64 < this->Intersections.Size );
       }
     }
   }
-  return v61;
+  return v63;
 }
 
 // File Line: 763
 // RVA: 0x9C6BE0
-signed __int64 __fastcall Scaleform::Render::Tessellator::addEventVertex(Scaleform::Render::Tessellator *this, Scaleform::Render::Tessellator::MonoChainType *mc, float yb, bool enforceFlag)
+__int64 __fastcall Scaleform::Render::Tessellator::addEventVertex(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::Tessellator::MonoChainType *mc,
+        float yb,
+        bool enforceFlag)
 {
-  __int64 v4; // r10
-  Scaleform::Render::Tessellator *v5; // rbx
-  Scaleform::Render::Tessellator::EdgeType *v6; // r11
-  unsigned __int16 v7; // cx
-  unsigned int v8; // edx
-  Scaleform::Render::Tessellator::SrcVertexType **v9; // r8
-  Scaleform::Render::Tessellator::SrcVertexType *v10; // rcx
-  __int64 v11; // rdx
-  float v12; // xmm6_4
-  float v13; // xmm7_4
-  signed __int64 v14; // rdi
-  unsigned __int64 v15; // rsi
-  signed __int64 v16; // rdx
-  Scaleform::Render::TessVertex *v17; // rax
-  unsigned int v19; // er8
-  Scaleform::Render::Tessellator::SrcVertexType **v20; // r9
-  unsigned __int64 v21; // rax
-  __int64 v22; // r8
-  Scaleform::Render::Tessellator::SrcVertexType *v23; // rcx
+  unsigned __int64 edge; // r8
+  __int64 v5; // r10
+  Scaleform::Render::Tessellator::EdgeType *v7; // r11
+  unsigned __int16 flags; // cx
+  unsigned int lower; // edx
+  Scaleform::Render::Tessellator::SrcVertexType **Pages; // r8
+  Scaleform::Render::Tessellator::SrcVertexType *v11; // rcx
+  __int64 v12; // rdx
+  float x; // xmm6_4
+  float y; // xmm7_4
+  Scaleform::Render::ArrayPaged<Scaleform::Render::TessVertex,4,16> *p_MeshVertices; // rdi
+  unsigned __int64 v16; // rsi
+  __int64 v17; // rdx
+  Scaleform::Render::TessVertex *v18; // rax
+  unsigned int v20; // r8d
+  Scaleform::Render::Tessellator::SrcVertexType **v21; // r9
+  unsigned __int64 v22; // rax
+  __int64 v23; // r8
   Scaleform::Render::Tessellator::SrcVertexType *v24; // rcx
-  float v25; // xmm7_4
-  unsigned __int64 v26; // rsi
+  Scaleform::Render::Tessellator::SrcVertexType *v25; // rcx
+  float v26; // xmm7_4
+  unsigned __int64 v27; // rsi
 
-  v4 = mc->edge & 0xF;
-  v5 = this;
-  v6 = this->Edges.Pages[(unsigned __int64)mc->edge >> 4];
+  edge = mc->edge;
+  v5 = edge & 0xF;
+  v7 = this->Edges.Pages[edge >> 4];
   if ( !enforceFlag )
   {
-    v7 = mc->flags;
-    if ( !(v7 & 0x10) && *(_DWORD *)&mc->leftAbove == __PAIR__(mc->rightAbove, mc->leftBelow) )
+    flags = mc->flags;
+    if ( (flags & 0x10) == 0 && mc->leftBelow == mc->leftAbove && mc->rightBelow == mc->rightAbove )
     {
-      if ( !(v7 & 8) )
+      if ( (flags & 8) == 0 )
         return 0xFFFFFFFFi64;
-      v8 = v6[v4].lower;
-      v9 = v5->SrcVertices.Pages;
-      if ( yb != v9[(unsigned __int64)v6[v4].lower >> 4][v6[v4].lower & 0xF].y )
+      lower = v7[v5].lower;
+      Pages = this->SrcVertices.Pages;
+      if ( yb != Pages[(unsigned __int64)lower >> 4][lower & 0xF].y )
         return 0xFFFFFFFFi64;
-      v10 = v9[(unsigned __int64)v8 >> 4];
-LABEL_7:
-      v11 = v8 & 0xF;
-      v12 = v10[v11].x;
-      if ( v12 > v5->LastX )
+      v11 = Pages[(unsigned __int64)lower >> 4];
+LABEL_8:
+      v12 = lower & 0xF;
+      x = v11[v12].x;
+      if ( x > this->LastX )
       {
-        v5->LastX = v12;
-        v13 = v10[v11].y;
-LABEL_9:
-        v14 = (signed __int64)&v5->MeshVertices;
-        v15 = v5->MeshVertices.Size >> 4;
-        if ( v15 >= v5->MeshVertices.NumPages )
+        this->LastX = x;
+        y = v11[v12].y;
+LABEL_10:
+        p_MeshVertices = &this->MeshVertices;
+        v16 = this->MeshVertices.Size >> 4;
+        if ( v16 >= this->MeshVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::TessVertex,4,16>::allocPage(
-            &v5->MeshVertices,
-            v5->MeshVertices.Size >> 4);
-        v16 = v5->MeshVertices.Size & 0xF;
-        v17 = v5->MeshVertices.Pages[v15];
-        v17[v16].x = v12;
-        v17[v16].y = v13;
-LABEL_23:
-        *(_QWORD *)&v17[v16].Idx = -1i64;
-        *(_DWORD *)&v17[v16].Flags = 2;
-        ++*(_QWORD *)(v14 + 8);
-        return (unsigned int)(LODWORD(v5->MeshVertices.Size) - 1);
+            &this->MeshVertices,
+            this->MeshVertices.Size >> 4);
+        v17 = this->MeshVertices.Size & 0xF;
+        v18 = this->MeshVertices.Pages[v16];
+        v18[v17].x = x;
+        v18[v17].y = y;
+LABEL_24:
+        v18[v17].Idx = -1;
+        *(_DWORD *)v18[v17].Styles = -1;
+        *(_DWORD *)&v18[v17].Flags = 2;
+        ++p_MeshVertices->Size;
+        return (unsigned int)(LODWORD(this->MeshVertices.Size) - 1);
       }
-      return (unsigned int)(LODWORD(v5->MeshVertices.Size) - 1);
+      return (unsigned int)(LODWORD(this->MeshVertices.Size) - 1);
     }
   }
-  v19 = v6[v4].lower;
-  v20 = v5->SrcVertices.Pages;
-  if ( yb != v20[(unsigned __int64)v6[v4].lower >> 4][v6[v4].lower & 0xF].y )
+  v20 = v7[v5].lower;
+  v21 = this->SrcVertices.Pages;
+  if ( yb != v21[(unsigned __int64)v20 >> 4][v20 & 0xF].y )
   {
-    if ( !(mc->flags & 2) || (v8 = v19 + mc->dir, yb != v20[(unsigned __int64)v8 >> 4][v8 & 0xF].y) )
+    if ( (mc->flags & 2) == 0 || (lower = v20 + mc->dir, yb != v21[(unsigned __int64)lower >> 4][lower & 0xF].y) )
     {
-      v24 = v20[(unsigned __int64)v6[v4].lower >> 4];
-      v25 = (float)((float)(yb - v24[v19 & 0xF].y) * v6[v4].slope) + v24[v19 & 0xF].x;
-      if ( (float)(v25 - v5->LastX) > (float)(COERCE_FLOAT(LODWORD(yb) & _xmm) * v5->Epsilon) )
+      v25 = v21[(unsigned __int64)v7[v5].lower >> 4];
+      v26 = (float)((float)(yb - v25[v20 & 0xF].y) * v7[v5].slope) + v25[v20 & 0xF].x;
+      if ( (float)(v26 - this->LastX) > (float)(COERCE_FLOAT(LODWORD(yb) & _xmm) * this->Epsilon) )
       {
-        v14 = (signed __int64)&v5->MeshVertices;
-        v5->LastX = v25;
-        v26 = v5->MeshVertices.Size >> 4;
-        if ( v26 >= v5->MeshVertices.NumPages )
-          Scaleform::Render::ArrayPaged<Scaleform::Render::TessVertex,4,16>::allocPage(&v5->MeshVertices, v26);
-        v16 = v5->MeshVertices.Size & 0xF;
-        v17 = v5->MeshVertices.Pages[v26];
-        v17[v16].x = v25;
-        v17[v16].y = yb;
-        goto LABEL_23;
+        p_MeshVertices = &this->MeshVertices;
+        this->LastX = v26;
+        v27 = this->MeshVertices.Size >> 4;
+        if ( v27 >= this->MeshVertices.NumPages )
+          Scaleform::Render::ArrayPaged<Scaleform::Render::TessVertex,4,16>::allocPage(&this->MeshVertices, v27);
+        v17 = this->MeshVertices.Size & 0xF;
+        v18 = this->MeshVertices.Pages[v27];
+        v18[v17].x = v26;
+        v18[v17].y = yb;
+        goto LABEL_24;
       }
-      return (unsigned int)(LODWORD(v5->MeshVertices.Size) - 1);
+      return (unsigned int)(LODWORD(this->MeshVertices.Size) - 1);
     }
-    v10 = v20[(unsigned __int64)v8 >> 4];
-    goto LABEL_7;
+    v11 = v21[(unsigned __int64)lower >> 4];
+    goto LABEL_8;
   }
-  v21 = v19;
-  v22 = v19 & 0xF;
-  v23 = v20[v21 >> 4];
-  v12 = v23[v22].x;
-  if ( v12 > v5->LastX )
+  v22 = v20;
+  v23 = v20 & 0xF;
+  v24 = v21[v22 >> 4];
+  x = v24[v23].x;
+  if ( x > this->LastX )
   {
-    v5->LastX = v12;
-    v13 = v23[v22].y;
-    goto LABEL_9;
+    this->LastX = x;
+    y = v24[v23].y;
+    goto LABEL_10;
   }
-  return (unsigned int)(LODWORD(v5->MeshVertices.Size) - 1);
+  return (unsigned int)(LODWORD(this->MeshVertices.Size) - 1);
 }
 
 // File Line: 893
 // RVA: 0x9F03F0
-void __fastcall Scaleform::Render::Tessellator::removeLastMonoVertex(Scaleform::Render::Tessellator *this, Scaleform::Render::Tessellator::MonotoneType *m)
+void __fastcall Scaleform::Render::Tessellator::removeLastMonoVertex(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::Tessellator::MonotoneType *m)
 {
-  Scaleform::Render::Tessellator *v2; // r8
-  unsigned int v3; // ecx
-  unsigned __int64 v4; // rax
-  unsigned __int64 v5; // rcx
-  unsigned int v6; // eax
+  unsigned int lastIdx; // ecx
+  unsigned __int64 Size; // rax
+  unsigned __int64 prevIdx1; // rcx
+  unsigned int prevIdx2; // eax
 
-  v2 = this;
-  v3 = m->d.m.lastIdx;
-  if ( v3 != -1 )
+  lastIdx = m->d.m.lastIdx;
+  if ( lastIdx != -1 )
   {
-    if ( v3 == LODWORD(v2->MonoVertices.Size) - 1 )
+    if ( lastIdx == LODWORD(this->MonoVertices.Size) - 1 )
     {
-      v4 = v2->MonoVertices.Size;
-      if ( v4 )
-        v2->MonoVertices.Size = v4 - 1;
+      Size = this->MonoVertices.Size;
+      if ( Size )
+        this->MonoVertices.Size = Size - 1;
     }
-    v5 = m->d.m.prevIdx1;
-    v6 = m->d.m.prevIdx2;
+    prevIdx1 = m->d.m.prevIdx1;
+    prevIdx2 = m->d.m.prevIdx2;
     m->d.m.prevIdx2 = -1;
-    m->d.m.lastIdx = v5;
-    m->d.m.prevIdx1 = v6;
-    if ( (_DWORD)v5 == -1 )
+    m->d.m.lastIdx = prevIdx1;
+    m->d.m.prevIdx1 = prevIdx2;
+    if ( (_DWORD)prevIdx1 == -1 )
       m->start = 0i64;
     else
-      v2->MonoVertices.Pages[v5 >> 4][v5 & 0xF].next = 0i64;
+      this->MonoVertices.Pages[prevIdx1 >> 4][prevIdx1 & 0xF].next = 0i64;
   }
 }
 
 // File Line: 952
 // RVA: 0x9F3640
-Scaleform::Render::Tessellator::MonotoneType *__fastcall Scaleform::Render::Tessellator::startMonotone(Scaleform::Render::Tessellator *this, unsigned int style)
+Scaleform::Render::Tessellator::MonotoneType *__fastcall Scaleform::Render::Tessellator::startMonotone(
+        Scaleform::Render::Tessellator *this,
+        unsigned int style)
 {
-  Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonotoneType,4,16> *v2; // rbx
+  Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonotoneType,4,16> *p_Monotones; // rbx
   unsigned __int64 v3; // rdi
   Scaleform::Render::Tessellator::MonotoneType *v4; // rdx
   __int64 v6; // [rsp+30h] [rbp-18h]
 
-  v2 = &this->Monotones;
+  p_Monotones = &this->Monotones;
   LODWORD(v6) = -1;
   HIDWORD(v6) = style;
   v3 = this->Monotones.Size >> 4;
   if ( v3 >= this->Monotones.NumPages )
     Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonotoneType,4,16>::allocPage(&this->Monotones, v3);
-  v4 = &v2->Pages[v3][v2->Size & 0xF];
+  v4 = &p_Monotones->Pages[v3][p_Monotones->Size & 0xF];
   v4->start = 0i64;
   *(_QWORD *)&v4->d.m.lastIdx = -1i64;
   *(_QWORD *)&v4->d.t.meshIdx = v6;
   v4->lowerBase = 0i64;
-  ++v2->Size;
-  return &v2->Pages[(v2->Size - 1) >> 4][((unsigned int)v2->Size - 1) & 0xF];
+  ++p_Monotones->Size;
+  return &p_Monotones->Pages[(p_Monotones->Size - 1) >> 4][((unsigned int)p_Monotones->Size - 1) & 0xF];
 }
 
 // File Line: 961
 // RVA: 0x9F36F0
-void __fastcall Scaleform::Render::Tessellator::startMonotone(Scaleform::Render::Tessellator *this, Scaleform::Render::Tessellator::ScanChainType *scan, unsigned int vertex)
+void __fastcall Scaleform::Render::Tessellator::startMonotone(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::Tessellator::ScanChainType *scan,
+        signed int vertex)
 {
-  Scaleform::Render::Tessellator::MonoChainType *v3; // rax
-  Scaleform::Render::Tessellator *v4; // rdi
-  unsigned __int16 v5; // cx
-  signed int v6; // ebx
-  Scaleform::Render::Tessellator::ScanChainType *v7; // r14
-  Scaleform::Render::Tessellator::MonotoneType *v8; // rax
+  Scaleform::Render::Tessellator::MonoChainType *chain; // rax
+  unsigned __int16 rightAbove; // cx
+  Scaleform::Render::Tessellator::MonotoneType *started; // rax
   Scaleform::Render::Tessellator::MonotoneType *v9; // rsi
-  Scaleform::Render::Tessellator::BaseLineType *v10; // r8
+  Scaleform::Render::Tessellator::BaseLineType *lowerBase; // r8
   unsigned __int64 v11; // rbp
   Scaleform::Render::Tessellator::MonoVertexType *v12; // rcx
-  signed __int64 v13; // rdx
-  signed __int64 v14; // rdx
-  signed __int64 v15; // rbp
+  __int64 v13; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v14; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v15; // rbp
   unsigned __int64 v16; // rbx
   Scaleform::Render::Tessellator::MonoVertexType *v17; // rcx
-  signed __int64 v18; // rdx
+  __int64 v18; // rdx
   __int64 v19; // [rsp+20h] [rbp-18h]
 
-  v3 = scan->chain;
-  v4 = this;
+  chain = scan->chain;
   scan->monotone = 0i64;
-  v5 = v3->rightAbove;
-  v6 = vertex;
-  v7 = scan;
-  if ( v5 )
+  rightAbove = chain->rightAbove;
+  if ( rightAbove )
   {
-    v8 = Scaleform::Render::Tessellator::startMonotone(v4, v5);
-    v9 = v8;
-    v7->monotone = v8;
-    if ( v8 )
+    started = Scaleform::Render::Tessellator::startMonotone(this, rightAbove);
+    v9 = started;
+    scan->monotone = started;
+    if ( started )
     {
-      v10 = v8->lowerBase;
-      if ( v10 )
+      lowerBase = started->lowerBase;
+      if ( lowerBase )
       {
-        if ( v4->MeshVertices.Pages[(unsigned __int64)(v6 & 0xFFFFFFF) >> 4][v6 & 0xF].y == v10->y )
+        if ( this->MeshVertices.Pages[(unsigned __int64)(vertex & 0xFFFFFFF) >> 4][vertex & 0xF].y == lowerBase->y )
         {
-          v10->vertexRight = v6 & 0xFFFFFFF;
+          lowerBase->vertexRight = vertex & 0xFFFFFFF;
         }
-        else if ( v6 >= 0 )
+        else if ( vertex >= 0 )
         {
-          Scaleform::Render::Tessellator::connectPendingToRight(v4, v7, v6);
+          Scaleform::Render::Tessellator::connectPendingToRight(this, scan, vertex);
         }
         else
         {
-          Scaleform::Render::Tessellator::connectPendingToLeft(v4, v7, v6);
+          Scaleform::Render::Tessellator::connectPendingToLeft(this, scan, vertex);
         }
       }
       else
       {
-        LODWORD(v19) = v6;
-        HIDWORD(v19) = v6;
-        if ( v8->start )
+        LODWORD(v19) = vertex;
+        HIDWORD(v19) = vertex;
+        if ( started->start )
         {
-          v15 = (signed __int64)&v4->MonoVertices.Pages[(unsigned __int64)v8->d.m.lastIdx >> 4][v8->d.m.lastIdx & 0xF];
-          if ( *(_DWORD *)v15 == v6 )
+          v15 = &this->MonoVertices.Pages[(unsigned __int64)started->d.m.lastIdx >> 4][started->d.m.lastIdx & 0xF];
+          if ( v15->srcVer == vertex )
             return;
-          v16 = v4->MonoVertices.Size >> 4;
-          if ( v16 >= v4->MonoVertices.NumPages )
+          v16 = this->MonoVertices.Size >> 4;
+          if ( v16 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-              v4->MonoVertices.Size >> 4);
-          v17 = v4->MonoVertices.Pages[v16];
-          v18 = v4->MonoVertices.Size & 0xF;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v17 = this->MonoVertices.Pages[v16];
+          v18 = this->MonoVertices.Size & 0xF;
           *(_QWORD *)&v17[v18].srcVer = v19;
           v17[v18].next = 0i64;
-          *(_QWORD *)(v15 + 8) = &v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                            - 1) & 0xF];
+          v15->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
           v9->d.m.prevIdx2 = v9->d.m.prevIdx1;
           v9->d.m.prevIdx1 = v9->d.m.lastIdx;
         }
         else
         {
-          v11 = v4->MonoVertices.Size >> 4;
-          if ( v11 >= v4->MonoVertices.NumPages )
+          v11 = this->MonoVertices.Size >> 4;
+          if ( v11 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-              v4->MonoVertices.Size >> 4);
-          v12 = v4->MonoVertices.Pages[v11];
-          v13 = v4->MonoVertices.Size & 0xF;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v12 = this->MonoVertices.Pages[v11];
+          v13 = this->MonoVertices.Size & 0xF;
           *(_QWORD *)&v12[v13].srcVer = v19;
           v12[v13].next = 0i64;
-          v14 = (signed __int64)&v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                           - 1) & 0xF];
+          v14 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
           *(_QWORD *)&v9->d.t.numTriangles = -1i64;
-          v9->start = (Scaleform::Render::Tessellator::MonoVertexType *)v14;
+          v9->start = v14;
         }
-        v9->d.m.lastIdx = LODWORD(v4->MonoVertices.Size) - 1;
+        v9->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
       }
     }
   }
@@ -1655,39 +1652,31 @@ void __fastcall Scaleform::Render::Tessellator::startMonotone(Scaleform::Render:
 
 // File Line: 994
 // RVA: 0x9F0520
-void __fastcall Scaleform::Render::Tessellator::replaceMonotone(Scaleform::Render::Tessellator *this, Scaleform::Render::Tessellator::ScanChainType *scan, unsigned int style)
+void __fastcall Scaleform::Render::Tessellator::replaceMonotone(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::Tessellator::ScanChainType *scan,
+        unsigned int style)
 {
-  Scaleform::Render::Tessellator::MonotoneType *v3; // rax
-  unsigned int v4; // ebx
-  Scaleform::Render::Tessellator::ScanChainType *v5; // rdi
-  Scaleform::Render::Tessellator::MonotoneType *v6; // rax
-  Scaleform::Render::Tessellator::MonotoneType *v7; // rdx
+  Scaleform::Render::Tessellator::MonotoneType *monotone; // rax
 
   if ( style )
   {
-    v3 = scan->monotone;
-    v4 = style;
-    v5 = scan;
-    if ( v3 )
+    monotone = scan->monotone;
+    if ( monotone )
     {
-      if ( v3->style != style )
+      if ( monotone->style != style )
       {
-        if ( v3->start )
+        if ( monotone->start )
         {
-          v6 = Scaleform::Render::Tessellator::startMonotone(this, style);
-          v7 = v5->monotone;
-          v6->start = v7->start;
-          *(_QWORD *)&v6->d.m.lastIdx = *(_QWORD *)&v7->d.m.lastIdx;
-          *(_QWORD *)&v6->d.t.meshIdx = *(_QWORD *)&v7->d.t.meshIdx;
-          v6->lowerBase = v7->lowerBase;
-          v3 = v5->monotone;
-          v3->start = 0i64;
-          *(_QWORD *)&v3->d.m.lastIdx = -1i64;
-          v3->d.m.prevIdx2 = -1;
-          v3->lowerBase = 0i64;
+          *Scaleform::Render::Tessellator::startMonotone(this, style) = *scan->monotone;
+          monotone = scan->monotone;
+          monotone->start = 0i64;
+          *(_QWORD *)&monotone->d.m.lastIdx = -1i64;
+          monotone->d.m.prevIdx2 = -1;
+          monotone->lowerBase = 0i64;
         }
       }
-      v3->style = v4;
+      monotone->style = style;
     }
     else
     {
@@ -1698,61 +1687,63 @@ void __fastcall Scaleform::Render::Tessellator::replaceMonotone(Scaleform::Rende
 
 // File Line: 1018
 // RVA: 0x9C8960
-void __fastcall Scaleform::Render::Tessellator::addPendingEnd(Scaleform::Render::Tessellator *this, Scaleform::Render::Tessellator::ScanChainType *dst, Scaleform::Render::Tessellator::ScanChainType *pending, float y)
+void __fastcall Scaleform::Render::Tessellator::addPendingEnd(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::Tessellator::ScanChainType *dst,
+        Scaleform::Render::Tessellator::ScanChainType *pending,
+        float y)
 {
-  Scaleform::Render::Tessellator::MonotoneType *v4; // rsi
-  Scaleform::Render::Tessellator::ScanChainType *v5; // rdi
-  Scaleform::Render::Tessellator *v6; // rbp
-  Scaleform::Render::Tessellator::MonoChainType *v7; // rax
-  unsigned int v8; // ecx
+  Scaleform::Render::Tessellator::MonotoneType *monotone; // rsi
+  Scaleform::Render::Tessellator::MonoChainType *chain; // rax
+  unsigned int leftBelow; // ecx
   float v9; // eax
   Scaleform::Render::Tessellator::MonotoneType *v10; // r14
-  unsigned __int64 v11; // rdi
+  unsigned __int64 Size; // rdi
   unsigned __int64 v12; // rdi
   Scaleform::Render::Tessellator::PendingEndType *v13; // rcx
-  signed __int64 v14; // rdx
-  Scaleform::Render::Tessellator::BaseLineType val; // [rsp+20h] [rbp-28h]
+  __int64 v14; // rdx
+  Scaleform::Render::Tessellator::BaseLineType val; // [rsp+20h] [rbp-28h] BYREF
 
   if ( dst )
   {
-    v4 = dst->monotone;
-    v5 = pending;
-    v6 = this;
-    if ( v4 )
+    monotone = dst->monotone;
+    if ( monotone )
     {
-      if ( v4->style )
+      if ( monotone->style )
       {
-        if ( !v4->lowerBase )
+        if ( !monotone->lowerBase )
         {
-          v7 = pending->chain;
+          chain = pending->chain;
           val.y = y;
           val.vertexRight = -1;
-          v8 = v7->leftBelow;
+          leftBelow = chain->leftBelow;
           val.vertexLeft = dst->vertex;
-          LODWORD(v7) = v6->PendingEnds.Size;
-          val.styleLeft = v8;
+          LODWORD(chain) = this->PendingEnds.Size;
+          val.styleLeft = leftBelow;
+          val.numChains = 0;
           val.leftAbove = -1;
-          *(_QWORD *)&val.firstChain = (unsigned int)v7;
+          val.firstChain = (unsigned int)chain;
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::BaseLineType,4,4>::PushBack(
-            &v6->BaseLines,
+            &this->BaseLines,
             &val);
-          v4->lowerBase = &v6->BaseLines.Pages[(v6->BaseLines.Size - 1) >> 4][(LODWORD(v6->BaseLines.Size) - 1) & 0xF];
+          monotone->lowerBase = &this->BaseLines.Pages[(this->BaseLines.Size - 1) >> 4][(LODWORD(this->BaseLines.Size)
+                                                                                       - 1) & 0xF];
         }
-        v9 = *(float *)&v5->vertex;
-        v10 = v5->monotone;
-        v11 = v6->PendingEnds.Size;
+        v9 = *(float *)&pending->vertex;
+        v10 = pending->monotone;
+        Size = this->PendingEnds.Size;
         val.y = v9;
-        v12 = v11 >> 4;
-        if ( v12 >= v6->PendingEnds.NumPages )
+        v12 = Size >> 4;
+        if ( v12 >= this->PendingEnds.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::PendingEndType,4,4>::allocPage(
-            &v6->PendingEnds,
+            &this->PendingEnds,
             v12);
-        v13 = v6->PendingEnds.Pages[v12];
-        v14 = v6->PendingEnds.Size & 0xF;
+        v13 = this->PendingEnds.Pages[v12];
+        v14 = this->PendingEnds.Size & 0xF;
         *(_QWORD *)&v13[v14].vertex = *(_QWORD *)&val.y;
         v13[v14].monotone = v10;
-        ++v6->PendingEnds.Size;
-        ++v4->lowerBase->numChains;
+        ++this->PendingEnds.Size;
+        ++monotone->lowerBase->numChains;
       }
     }
   }
@@ -1760,99 +1751,100 @@ void __fastcall Scaleform::Render::Tessellator::addPendingEnd(Scaleform::Render:
 
 // File Line: 1097
 // RVA: 0x9D7260
-void __fastcall Scaleform::Render::Tessellator::connectPendingToLeft(Scaleform::Render::Tessellator *this, Scaleform::Render::Tessellator::ScanChainType *scan, unsigned int targetVertex)
+void __fastcall Scaleform::Render::Tessellator::connectPendingToLeft(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::Tessellator::ScanChainType *scan,
+        unsigned int targetVertex)
 {
-  Scaleform::Render::Tessellator::MonotoneType *v3; // rax
-  unsigned int v4; // er11
-  Scaleform::Render::Tessellator *v5; // rbx
-  unsigned int v6; // er9
-  Scaleform::Render::Tessellator::BaseLineType *v7; // r8
-  unsigned int v8; // er13
-  int v9; // er14
-  int v10; // er15
+  Scaleform::Render::Tessellator::MonotoneType *monotone; // rax
+  unsigned int style; // r11d
+  Scaleform::Render::Tessellator::BaseLineType *lowerBase; // r8
+  unsigned int firstChain; // r13d
+  int vertexLeft; // r14d
+  int numChains; // r15d
   Scaleform::Render::Tessellator::ScanChainType *v11; // r10
-  int v12; // er12
+  int vertex; // r12d
   Scaleform::Render::Tessellator::PendingEndType *v13; // rax
   char v14; // r8
   int *v15; // rdi
   Scaleform::Render::Tessellator::MonotoneType *v16; // r14
   unsigned __int64 v17; // rsi
   Scaleform::Render::Tessellator::MonoVertexType *v18; // rdx
-  signed __int64 v19; // rcx
-  signed __int64 v20; // rdx
-  signed __int64 v21; // rdi
+  __int64 v19; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v20; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v21; // rdi
   unsigned __int64 v22; // r15
   Scaleform::Render::Tessellator::MonoVertexType *v23; // rdx
-  signed __int64 v24; // rcx
+  __int64 v24; // rcx
   Scaleform::Render::Tessellator::MonotoneType *v25; // rdi
   unsigned __int64 v26; // r14
   Scaleform::Render::Tessellator::MonoVertexType *v27; // rdx
-  signed __int64 v28; // rcx
-  signed __int64 v29; // rdx
-  signed __int64 v30; // rsi
+  __int64 v28; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v29; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v30; // rsi
   unsigned __int64 v31; // r15
   Scaleform::Render::Tessellator::MonoVertexType *v32; // rdx
-  signed __int64 v33; // rcx
+  __int64 v33; // rcx
   unsigned __int64 v34; // r14
   Scaleform::Render::Tessellator::MonoVertexType *v35; // rdx
-  signed __int64 v36; // rcx
-  signed __int64 v37; // rdx
-  signed __int64 v38; // rsi
+  __int64 v36; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v37; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v38; // rsi
   unsigned __int64 v39; // r15
   Scaleform::Render::Tessellator::MonoVertexType *v40; // rdx
-  signed __int64 v41; // rcx
-  Scaleform::Render::Tessellator::MonotoneType *v42; // rax
+  __int64 v41; // rcx
+  Scaleform::Render::Tessellator::MonotoneType *started; // rax
   Scaleform::Render::Tessellator::MonotoneType *v43; // rsi
-  unsigned int v44; // er14
+  unsigned int v44; // r14d
   unsigned __int64 v45; // r15
   Scaleform::Render::Tessellator::MonoVertexType *v46; // rdx
-  signed __int64 v47; // rcx
-  signed __int64 v48; // rdx
-  signed __int64 v49; // r15
+  __int64 v47; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v48; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v49; // r15
   unsigned __int64 v50; // r14
   Scaleform::Render::Tessellator::MonoVertexType *v51; // rdx
-  signed __int64 v52; // rcx
+  __int64 v52; // rcx
   unsigned __int64 v53; // r15
   Scaleform::Render::Tessellator::MonoVertexType *v54; // rdx
-  signed __int64 v55; // rcx
-  signed __int64 v56; // rdx
-  signed __int64 v57; // r14
+  __int64 v55; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v56; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v57; // r14
   unsigned __int64 v58; // r15
   Scaleform::Render::Tessellator::MonoVertexType *v59; // rdx
-  signed __int64 v60; // rcx
+  __int64 v60; // rcx
   __int64 v61; // rdi
   unsigned __int64 v62; // r14
   Scaleform::Render::Tessellator::MonoVertexType *v63; // rdx
-  signed __int64 v64; // rcx
-  signed __int64 v65; // rdx
-  signed __int64 v66; // rsi
+  __int64 v64; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v65; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v66; // rsi
   unsigned __int64 v67; // r15
   Scaleform::Render::Tessellator::MonoVertexType *v68; // rdx
-  signed __int64 v69; // rcx
+  __int64 v69; // rcx
   unsigned __int64 v70; // r14
   Scaleform::Render::Tessellator::MonoVertexType *v71; // rdx
-  signed __int64 v72; // rcx
-  signed __int64 v73; // rdx
-  signed __int64 v74; // rsi
+  __int64 v72; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v73; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v74; // rsi
   unsigned __int64 v75; // r15
   Scaleform::Render::Tessellator::MonoVertexType *v76; // rdx
-  signed __int64 v77; // rcx
+  __int64 v77; // rcx
   Scaleform::Render::Tessellator::MonotoneType *v78; // rsi
   unsigned __int64 v79; // r14
   Scaleform::Render::Tessellator::MonoVertexType *v80; // rdx
-  signed __int64 v81; // rcx
-  signed __int64 v82; // rdx
-  signed __int64 v83; // rdi
+  __int64 v81; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v82; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v83; // rdi
   unsigned __int64 v84; // r15
   Scaleform::Render::Tessellator::MonoVertexType *v85; // rdx
-  signed __int64 v86; // rcx
-  Scaleform::Render::Tessellator::PendingEndType **v87; // rdx
+  __int64 v86; // rcx
+  Scaleform::Render::Tessellator::PendingEndType **Pages; // rdx
   unsigned __int64 v88; // rax
   __int64 v89; // rdi
   unsigned __int64 v90; // rax
-  unsigned __int64 v91; // rax
+  unsigned __int64 Size; // rax
   unsigned int v92; // [rsp+20h] [rbp-D0h]
-  int v93; // [rsp+28h] [rbp-C8h]
+  int vertexRight; // [rsp+28h] [rbp-C8h]
   __int64 v94; // [rsp+30h] [rbp-C0h]
   __int64 v95; // [rsp+40h] [rbp-B0h]
   __int64 v96; // [rsp+50h] [rbp-A0h]
@@ -1862,270 +1854,258 @@ void __fastcall Scaleform::Render::Tessellator::connectPendingToLeft(Scaleform::
   __int64 v100; // [rsp+78h] [rbp-78h]
   __int64 v101; // [rsp+88h] [rbp-68h]
   __int64 v102; // [rsp+98h] [rbp-58h]
-  int v103; // [rsp+A8h] [rbp-48h]
+  int v103; // [rsp+A8h] [rbp-48h] BYREF
   Scaleform::Render::Tessellator::MonotoneType *v104; // [rsp+B0h] [rbp-40h]
   int vars0; // [rsp+110h] [rbp+20h]
   Scaleform::Render::Tessellator::ScanChainType *retaddr; // [rsp+118h] [rbp+28h]
   unsigned int v107; // [rsp+120h] [rbp+30h]
   unsigned int v108; // [rsp+128h] [rbp+38h]
 
-  v3 = scan->monotone;
-  v4 = v3->style;
-  v5 = this;
-  v6 = targetVertex;
-  v7 = v3->lowerBase;
-  v3->lowerBase = 0i64;
-  v8 = v7->firstChain;
-  v9 = v7->vertexLeft;
-  v10 = v7->numChains;
+  monotone = scan->monotone;
+  style = monotone->style;
+  lowerBase = monotone->lowerBase;
+  monotone->lowerBase = 0i64;
+  firstChain = lowerBase->firstChain;
+  vertexLeft = lowerBase->vertexLeft;
+  numChains = lowerBase->numChains;
   v104 = scan->monotone;
   v11 = scan;
-  v93 = v7->vertexRight;
-  v98 = v7;
-  v108 = v4;
-  v13 = this->PendingEnds.Pages[(unsigned __int64)v8 >> 4];
-  v103 = v9;
-  v92 = v8;
-  v12 = v13[v8 & 0xF].vertex;
-  LODWORD(v13) = v7->styleLeft;
-  vars0 = v10;
+  vertexRight = lowerBase->vertexRight;
+  v98 = lowerBase;
+  v108 = style;
+  v13 = this->PendingEnds.Pages[(unsigned __int64)firstChain >> 4];
+  v103 = vertexLeft;
+  v92 = firstChain;
+  vertex = v13[firstChain & 0xF].vertex;
+  LODWORD(v13) = lowerBase->styleLeft;
+  vars0 = numChains;
   v14 = 1;
   v15 = &v103;
   while ( 1 )
   {
-    if ( v9 == v12 )
+    if ( vertexLeft == vertex )
       goto LABEL_84;
     if ( v14 )
     {
       v16 = v11->monotone;
-      LODWORD(v96) = v12;
-      HIDWORD(v96) = v12;
+      LODWORD(v96) = vertex;
+      HIDWORD(v96) = vertex;
       if ( v16->start )
       {
-        v21 = (signed __int64)&v5->MonoVertices.Pages[(unsigned __int64)v16->d.m.lastIdx >> 4][v16->d.m.lastIdx & 0xF];
-        if ( *(_DWORD *)v21 == v12 )
+        v21 = &this->MonoVertices.Pages[(unsigned __int64)v16->d.m.lastIdx >> 4][v16->d.m.lastIdx & 0xF];
+        if ( v21->srcVer == vertex )
           goto LABEL_13;
-        v22 = v5->MonoVertices.Size >> 4;
-        if ( v22 >= v5->MonoVertices.NumPages )
+        v22 = this->MonoVertices.Size >> 4;
+        if ( v22 >= this->MonoVertices.NumPages )
         {
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-            v5->MonoVertices.Size >> 4);
-          v6 = v107;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+          targetVertex = v107;
           v11 = retaddr;
         }
-        v23 = v5->MonoVertices.Pages[v22];
-        v10 = vars0;
-        v24 = v5->MonoVertices.Size & 0xF;
+        v23 = this->MonoVertices.Pages[v22];
+        numChains = vars0;
+        v24 = this->MonoVertices.Size & 0xF;
         *(_QWORD *)&v23[v24].srcVer = v96;
         v23[v24].next = 0i64;
-        *(_QWORD *)(v21 + 8) = &v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                          - 1) & 0xF];
+        v21->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
         v16->d.m.prevIdx2 = v16->d.m.prevIdx1;
         v16->d.m.prevIdx1 = v16->d.m.lastIdx;
       }
       else
       {
-        v17 = v5->MonoVertices.Size >> 4;
-        if ( v17 >= v5->MonoVertices.NumPages )
+        v17 = this->MonoVertices.Size >> 4;
+        if ( v17 >= this->MonoVertices.NumPages )
         {
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-            v5->MonoVertices.Size >> 4);
-          v6 = v107;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+          targetVertex = v107;
           v11 = retaddr;
         }
-        v18 = v5->MonoVertices.Pages[v17];
-        v19 = v5->MonoVertices.Size & 0xF;
+        v18 = this->MonoVertices.Pages[v17];
+        v19 = this->MonoVertices.Size & 0xF;
         *(_QWORD *)&v18[v19].srcVer = v96;
         v18[v19].next = 0i64;
-        v20 = (signed __int64)&v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                         - 1) & 0xF];
+        v20 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
         *(_QWORD *)&v16->d.t.numTriangles = -1i64;
-        v16->start = (Scaleform::Render::Tessellator::MonoVertexType *)v20;
+        v16->start = v20;
       }
-      v16->d.m.lastIdx = LODWORD(v5->MonoVertices.Size) - 1;
+      v16->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
 LABEL_13:
       v25 = v11->monotone;
-      if ( v6 == -1 )
+      if ( targetVertex == -1 )
         goto LABEL_84;
-      LODWORD(v99) = v6 | 0x80000000;
-      HIDWORD(v99) = v6 | 0x80000000;
+      LODWORD(v99) = targetVertex | 0x80000000;
+      HIDWORD(v99) = targetVertex | 0x80000000;
       if ( v25->start )
       {
-        v30 = (signed __int64)&v5->MonoVertices.Pages[(unsigned __int64)v25->d.m.lastIdx >> 4][v25->d.m.lastIdx & 0xF];
-        if ( *(_DWORD *)v30 == (v6 | 0x80000000) )
+        v30 = &this->MonoVertices.Pages[(unsigned __int64)v25->d.m.lastIdx >> 4][v25->d.m.lastIdx & 0xF];
+        if ( v30->srcVer == (targetVertex | 0x80000000) )
           goto LABEL_23;
-        v31 = v5->MonoVertices.Size >> 4;
-        if ( v31 >= v5->MonoVertices.NumPages )
+        v31 = this->MonoVertices.Size >> 4;
+        if ( v31 >= this->MonoVertices.NumPages )
         {
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-            v5->MonoVertices.Size >> 4);
-          v6 = v107;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+          targetVertex = v107;
         }
-        v32 = v5->MonoVertices.Pages[v31];
-        v33 = v5->MonoVertices.Size & 0xF;
+        v32 = this->MonoVertices.Pages[v31];
+        v33 = this->MonoVertices.Size & 0xF;
         *(_QWORD *)&v32[v33].srcVer = v99;
         v32[v33].next = 0i64;
-        *(_QWORD *)(v30 + 8) = &v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                          - 1) & 0xF];
+        v30->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
         v25->d.m.prevIdx2 = v25->d.m.prevIdx1;
         v25->d.m.prevIdx1 = v25->d.m.lastIdx;
       }
       else
       {
-        v26 = v5->MonoVertices.Size >> 4;
-        if ( v26 >= v5->MonoVertices.NumPages )
+        v26 = this->MonoVertices.Size >> 4;
+        if ( v26 >= this->MonoVertices.NumPages )
         {
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-            v5->MonoVertices.Size >> 4);
-          v6 = v107;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+          targetVertex = v107;
         }
-        v27 = v5->MonoVertices.Pages[v26];
-        v28 = v5->MonoVertices.Size & 0xF;
+        v27 = this->MonoVertices.Pages[v26];
+        v28 = this->MonoVertices.Size & 0xF;
         *(_QWORD *)&v27[v28].srcVer = v99;
         v27[v28].next = 0i64;
-        v29 = (signed __int64)&v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                         - 1) & 0xF];
+        v29 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
         *(_QWORD *)&v25->d.t.numTriangles = -1i64;
-        v25->start = (Scaleform::Render::Tessellator::MonoVertexType *)v29;
+        v25->start = v29;
       }
-      v25->d.m.lastIdx = LODWORD(v5->MonoVertices.Size) - 1;
+      v25->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
 LABEL_23:
-      LODWORD(v94) = v6 & 0x7FFFFFFF;
-      HIDWORD(v94) = v6 & 0x7FFFFFFF;
+      LODWORD(v94) = targetVertex & 0x7FFFFFFF;
+      HIDWORD(v94) = targetVertex & 0x7FFFFFFF;
       if ( v25->start )
       {
-        v38 = (signed __int64)&v5->MonoVertices.Pages[(unsigned __int64)v25->d.m.lastIdx >> 4][v25->d.m.lastIdx & 0xF];
-        if ( *(_DWORD *)v38 != (v6 & 0x7FFFFFFF) )
+        v38 = &this->MonoVertices.Pages[(unsigned __int64)v25->d.m.lastIdx >> 4][v25->d.m.lastIdx & 0xF];
+        if ( v38->srcVer != (targetVertex & 0x7FFFFFFF) )
         {
-          v39 = v5->MonoVertices.Size >> 4;
-          if ( v39 >= v5->MonoVertices.NumPages )
+          v39 = this->MonoVertices.Size >> 4;
+          if ( v39 >= this->MonoVertices.NumPages )
           {
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-              v5->MonoVertices.Size >> 4);
-            v6 = v107;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+            targetVertex = v107;
           }
-          v40 = v5->MonoVertices.Pages[v39];
-          v41 = v5->MonoVertices.Size & 0xF;
+          v40 = this->MonoVertices.Pages[v39];
+          v41 = this->MonoVertices.Size & 0xF;
           *(_QWORD *)&v40[v41].srcVer = v94;
           v40[v41].next = 0i64;
-          *(_QWORD *)(v38 + 8) = &v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                            - 1) & 0xF];
+          v38->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
           v25->d.m.prevIdx2 = v25->d.m.prevIdx1;
           v25->d.m.prevIdx1 = v25->d.m.lastIdx;
-          v25->d.m.lastIdx = LODWORD(v5->MonoVertices.Size) - 1;
+          v25->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
         }
       }
       else
       {
-        v34 = v5->MonoVertices.Size >> 4;
-        if ( v34 >= v5->MonoVertices.NumPages )
+        v34 = this->MonoVertices.Size >> 4;
+        if ( v34 >= this->MonoVertices.NumPages )
         {
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-            v5->MonoVertices.Size >> 4);
-          v6 = v107;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+          targetVertex = v107;
         }
-        v35 = v5->MonoVertices.Pages[v34];
-        v36 = v5->MonoVertices.Size & 0xF;
+        v35 = this->MonoVertices.Pages[v34];
+        v36 = this->MonoVertices.Size & 0xF;
         *(_QWORD *)&v35[v36].srcVer = v94;
         v35[v36].next = 0i64;
-        v37 = (signed __int64)&v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                         - 1) & 0xF];
+        v37 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
         *(_QWORD *)&v25->d.t.numTriangles = -1i64;
-        v25->start = (Scaleform::Render::Tessellator::MonoVertexType *)v37;
-        v25->d.m.lastIdx = LODWORD(v5->MonoVertices.Size) - 1;
+        v25->start = v37;
+        v25->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
       }
       goto LABEL_83;
     }
-    if ( (_DWORD)v13 != v4 || !*((_QWORD *)v15 + 1) )
+    if ( (_DWORD)v13 != style || !*((_QWORD *)v15 + 1) )
     {
-      v42 = Scaleform::Render::Tessellator::startMonotone(v5, v4);
-      v43 = v42;
-      *((_QWORD *)v15 + 1) = v42;
-      if ( v9 == -1 )
+      started = Scaleform::Render::Tessellator::startMonotone(this, style);
+      v43 = started;
+      *((_QWORD *)v15 + 1) = started;
+      if ( vertexLeft == -1 )
         goto LABEL_43;
-      v44 = v9 | 0x80000000;
+      v44 = vertexLeft | 0x80000000;
       LODWORD(v102) = v44;
       HIDWORD(v102) = v44;
-      if ( v42->start )
+      if ( started->start )
       {
-        v49 = (signed __int64)&v5->MonoVertices.Pages[(unsigned __int64)v42->d.m.lastIdx >> 4][v42->d.m.lastIdx & 0xF];
-        if ( *(_DWORD *)v49 == v44 )
+        v49 = &this->MonoVertices.Pages[(unsigned __int64)started->d.m.lastIdx >> 4][started->d.m.lastIdx & 0xF];
+        if ( v49->srcVer == v44 )
           goto LABEL_43;
-        v50 = v5->MonoVertices.Size >> 4;
-        if ( v50 >= v5->MonoVertices.NumPages )
+        v50 = this->MonoVertices.Size >> 4;
+        if ( v50 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-            v5->MonoVertices.Size >> 4);
-        v51 = v5->MonoVertices.Pages[v50];
-        v52 = v5->MonoVertices.Size & 0xF;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v51 = this->MonoVertices.Pages[v50];
+        v52 = this->MonoVertices.Size & 0xF;
         *(_QWORD *)&v51[v52].srcVer = v102;
         v51[v52].next = 0i64;
-        *(_QWORD *)(v49 + 8) = &v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                          - 1) & 0xF];
+        v49->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
         v43->d.m.prevIdx2 = v43->d.m.prevIdx1;
         v43->d.m.prevIdx1 = v43->d.m.lastIdx;
       }
       else
       {
-        v45 = v5->MonoVertices.Size >> 4;
-        if ( v45 >= v5->MonoVertices.NumPages )
+        v45 = this->MonoVertices.Size >> 4;
+        if ( v45 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-            v5->MonoVertices.Size >> 4);
-        v46 = v5->MonoVertices.Pages[v45];
-        v47 = v5->MonoVertices.Size & 0xF;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v46 = this->MonoVertices.Pages[v45];
+        v47 = this->MonoVertices.Size & 0xF;
         *(_QWORD *)&v46[v47].srcVer = v102;
         v46[v47].next = 0i64;
-        v48 = (signed __int64)&v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                         - 1) & 0xF];
+        v48 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
         *(_QWORD *)&v43->d.t.numTriangles = -1i64;
-        v43->start = (Scaleform::Render::Tessellator::MonoVertexType *)v48;
+        v43->start = v48;
       }
-      v43->d.m.lastIdx = LODWORD(v5->MonoVertices.Size) - 1;
+      v43->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
 LABEL_43:
-      if ( v12 != -1 )
+      if ( vertex != -1 )
       {
-        LODWORD(v95) = v12 & 0x7FFFFFFF;
-        HIDWORD(v95) = v12 & 0x7FFFFFFF;
+        LODWORD(v95) = vertex & 0x7FFFFFFF;
+        HIDWORD(v95) = vertex & 0x7FFFFFFF;
         if ( !v43->start )
         {
-          v53 = v5->MonoVertices.Size >> 4;
-          if ( v53 >= v5->MonoVertices.NumPages )
+          v53 = this->MonoVertices.Size >> 4;
+          if ( v53 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-              v5->MonoVertices.Size >> 4);
-          v54 = v5->MonoVertices.Pages[v53];
-          v55 = v5->MonoVertices.Size & 0xF;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v54 = this->MonoVertices.Pages[v53];
+          v55 = this->MonoVertices.Size & 0xF;
           *(_QWORD *)&v54[v55].srcVer = v95;
           v54[v55].next = 0i64;
-          v56 = (signed __int64)&v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                           - 1) & 0xF];
+          v56 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
           *(_QWORD *)&v43->d.t.numTriangles = -1i64;
-          v43->start = (Scaleform::Render::Tessellator::MonoVertexType *)v56;
+          v43->start = v56;
 LABEL_52:
-          v43->d.m.lastIdx = LODWORD(v5->MonoVertices.Size) - 1;
+          v43->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
           goto LABEL_53;
         }
-        v57 = (signed __int64)&v5->MonoVertices.Pages[(unsigned __int64)v43->d.m.lastIdx >> 4][v43->d.m.lastIdx & 0xF];
-        if ( *(_DWORD *)v57 != (v12 & 0x7FFFFFFF) )
+        v57 = &this->MonoVertices.Pages[(unsigned __int64)v43->d.m.lastIdx >> 4][v43->d.m.lastIdx & 0xF];
+        if ( v57->srcVer != (vertex & 0x7FFFFFFF) )
         {
-          v58 = v5->MonoVertices.Size >> 4;
-          if ( v58 >= v5->MonoVertices.NumPages )
+          v58 = this->MonoVertices.Size >> 4;
+          if ( v58 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-              v5->MonoVertices.Size >> 4);
-          v59 = v5->MonoVertices.Pages[v58];
-          v60 = v5->MonoVertices.Size & 0xF;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v59 = this->MonoVertices.Pages[v58];
+          v60 = this->MonoVertices.Size & 0xF;
           *(_QWORD *)&v59[v60].srcVer = v95;
           v59[v60].next = 0i64;
-          *(_QWORD *)(v57 + 8) = &v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                            - 1) & 0xF];
+          v57->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
           v43->d.m.prevIdx2 = v43->d.m.prevIdx1;
           v43->d.m.prevIdx1 = v43->d.m.lastIdx;
           goto LABEL_52;
@@ -2133,3032 +2113,2912 @@ LABEL_52:
       }
 LABEL_53:
       v11 = retaddr;
-      v6 = v107;
+      targetVertex = v107;
     }
     if ( !vars0 )
     {
       v78 = (Scaleform::Render::Tessellator::MonotoneType *)*((_QWORD *)v15 + 1);
       v11->monotone = v78;
-      LODWORD(v101) = v6 | 0x80000000;
-      HIDWORD(v101) = v6 | 0x80000000;
+      LODWORD(v101) = targetVertex | 0x80000000;
+      HIDWORD(v101) = targetVertex | 0x80000000;
       if ( v78->start )
       {
-        v83 = (signed __int64)&v5->MonoVertices.Pages[(unsigned __int64)v78->d.m.lastIdx >> 4][v78->d.m.lastIdx & 0xF];
-        if ( *(_DWORD *)v83 == (v6 | 0x80000000) )
+        v83 = &this->MonoVertices.Pages[(unsigned __int64)v78->d.m.lastIdx >> 4][v78->d.m.lastIdx & 0xF];
+        if ( v83->srcVer == (targetVertex | 0x80000000) )
           goto LABEL_82;
-        v84 = v5->MonoVertices.Size >> 4;
-        if ( v84 >= v5->MonoVertices.NumPages )
+        v84 = this->MonoVertices.Size >> 4;
+        if ( v84 >= this->MonoVertices.NumPages )
         {
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-            v5->MonoVertices.Size >> 4);
-          v6 = v107;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+          targetVertex = v107;
         }
-        v85 = v5->MonoVertices.Pages[v84];
-        v86 = v5->MonoVertices.Size & 0xF;
+        v85 = this->MonoVertices.Pages[v84];
+        v86 = this->MonoVertices.Size & 0xF;
         *(_QWORD *)&v85[v86].srcVer = v101;
         v85[v86].next = 0i64;
-        *(_QWORD *)(v83 + 8) = &v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                          - 1) & 0xF];
+        v83->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
         v78->d.m.prevIdx2 = v78->d.m.prevIdx1;
         v78->d.m.prevIdx1 = v78->d.m.lastIdx;
       }
       else
       {
-        v79 = v5->MonoVertices.Size >> 4;
-        if ( v79 >= v5->MonoVertices.NumPages )
+        v79 = this->MonoVertices.Size >> 4;
+        if ( v79 >= this->MonoVertices.NumPages )
         {
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-            v5->MonoVertices.Size >> 4);
-          v6 = v107;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+          targetVertex = v107;
         }
-        v80 = v5->MonoVertices.Pages[v79];
-        v81 = v5->MonoVertices.Size & 0xF;
+        v80 = this->MonoVertices.Pages[v79];
+        v81 = this->MonoVertices.Size & 0xF;
         *(_QWORD *)&v80[v81].srcVer = v101;
         v80[v81].next = 0i64;
-        v82 = (signed __int64)&v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                         - 1) & 0xF];
+        v82 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
         *(_QWORD *)&v78->d.t.numTriangles = -1i64;
-        v78->start = (Scaleform::Render::Tessellator::MonoVertexType *)v82;
+        v78->start = v82;
       }
-      v78->d.m.lastIdx = LODWORD(v5->MonoVertices.Size) - 1;
+      v78->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
       goto LABEL_82;
     }
     v61 = *((_QWORD *)v15 + 1);
-    if ( v6 != -1 )
+    if ( targetVertex != -1 )
     {
-      LODWORD(v97) = v6 | 0x80000000;
-      HIDWORD(v97) = v6 | 0x80000000;
+      LODWORD(v97) = targetVertex | 0x80000000;
+      HIDWORD(v97) = targetVertex | 0x80000000;
       if ( *(_QWORD *)v61 )
       {
-        v66 = (signed __int64)&v5->MonoVertices.Pages[(unsigned __int64)*(unsigned int *)(v61 + 8) >> 4][*(_DWORD *)(v61 + 8) & 0xF];
-        if ( *(_DWORD *)v66 == (v6 | 0x80000000) )
+        v66 = &this->MonoVertices.Pages[(unsigned __int64)*(unsigned int *)(v61 + 8) >> 4][*(_DWORD *)(v61 + 8) & 0xF];
+        if ( v66->srcVer == (targetVertex | 0x80000000) )
           goto LABEL_65;
-        v67 = v5->MonoVertices.Size >> 4;
-        if ( v67 >= v5->MonoVertices.NumPages )
+        v67 = this->MonoVertices.Size >> 4;
+        if ( v67 >= this->MonoVertices.NumPages )
         {
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-            v5->MonoVertices.Size >> 4);
-          v6 = v107;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+          targetVertex = v107;
         }
-        v68 = v5->MonoVertices.Pages[v67];
-        v69 = v5->MonoVertices.Size & 0xF;
+        v68 = this->MonoVertices.Pages[v67];
+        v69 = this->MonoVertices.Size & 0xF;
         *(_QWORD *)&v68[v69].srcVer = v97;
         v68[v69].next = 0i64;
-        *(_QWORD *)(v66 + 8) = &v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                          - 1) & 0xF];
+        v66->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
         *(_DWORD *)(v61 + 16) = *(_DWORD *)(v61 + 12);
         *(_DWORD *)(v61 + 12) = *(_DWORD *)(v61 + 8);
       }
       else
       {
-        v62 = v5->MonoVertices.Size >> 4;
-        if ( v62 >= v5->MonoVertices.NumPages )
+        v62 = this->MonoVertices.Size >> 4;
+        if ( v62 >= this->MonoVertices.NumPages )
         {
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-            v5->MonoVertices.Size >> 4);
-          v6 = v107;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+          targetVertex = v107;
         }
-        v63 = v5->MonoVertices.Pages[v62];
-        v64 = v5->MonoVertices.Size & 0xF;
+        v63 = this->MonoVertices.Pages[v62];
+        v64 = this->MonoVertices.Size & 0xF;
         *(_QWORD *)&v63[v64].srcVer = v97;
         v63[v64].next = 0i64;
-        v65 = (signed __int64)&v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                         - 1) & 0xF];
+        v65 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
         *(_QWORD *)(v61 + 12) = -1i64;
         *(_QWORD *)v61 = v65;
       }
-      *(_DWORD *)(v61 + 8) = LODWORD(v5->MonoVertices.Size) - 1;
+      *(_DWORD *)(v61 + 8) = LODWORD(this->MonoVertices.Size) - 1;
 LABEL_65:
-      LODWORD(v100) = v6 & 0x7FFFFFFF;
-      HIDWORD(v100) = v6 & 0x7FFFFFFF;
+      LODWORD(v100) = targetVertex & 0x7FFFFFFF;
+      HIDWORD(v100) = targetVertex & 0x7FFFFFFF;
       if ( *(_QWORD *)v61 )
       {
-        v74 = (signed __int64)&v5->MonoVertices.Pages[(unsigned __int64)*(unsigned int *)(v61 + 8) >> 4][*(_DWORD *)(v61 + 8) & 0xF];
-        if ( *(_DWORD *)v74 != (v6 & 0x7FFFFFFF) )
+        v74 = &this->MonoVertices.Pages[(unsigned __int64)*(unsigned int *)(v61 + 8) >> 4][*(_DWORD *)(v61 + 8) & 0xF];
+        if ( v74->srcVer != (targetVertex & 0x7FFFFFFF) )
         {
-          v75 = v5->MonoVertices.Size >> 4;
-          if ( v75 >= v5->MonoVertices.NumPages )
+          v75 = this->MonoVertices.Size >> 4;
+          if ( v75 >= this->MonoVertices.NumPages )
           {
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-              v5->MonoVertices.Size >> 4);
-            v6 = v107;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+            targetVertex = v107;
           }
-          v76 = v5->MonoVertices.Pages[v75];
-          v77 = v5->MonoVertices.Size & 0xF;
+          v76 = this->MonoVertices.Pages[v75];
+          v77 = this->MonoVertices.Size & 0xF;
           *(_QWORD *)&v76[v77].srcVer = v100;
           v76[v77].next = 0i64;
-          *(_QWORD *)(v74 + 8) = &v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                            - 1) & 0xF];
+          v74->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
           *(_DWORD *)(v61 + 16) = *(_DWORD *)(v61 + 12);
           *(_DWORD *)(v61 + 12) = *(_DWORD *)(v61 + 8);
-          *(_DWORD *)(v61 + 8) = LODWORD(v5->MonoVertices.Size) - 1;
+          *(_DWORD *)(v61 + 8) = LODWORD(this->MonoVertices.Size) - 1;
         }
       }
       else
       {
-        v70 = v5->MonoVertices.Size >> 4;
-        if ( v70 >= v5->MonoVertices.NumPages )
+        v70 = this->MonoVertices.Size >> 4;
+        if ( v70 >= this->MonoVertices.NumPages )
         {
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-            v5->MonoVertices.Size >> 4);
-          v6 = v107;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+          targetVertex = v107;
         }
-        v71 = v5->MonoVertices.Pages[v70];
-        v72 = v5->MonoVertices.Size & 0xF;
+        v71 = this->MonoVertices.Pages[v70];
+        v72 = this->MonoVertices.Size & 0xF;
         *(_QWORD *)&v71[v72].srcVer = v100;
         v71[v72].next = 0i64;
-        v73 = (signed __int64)&v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                         - 1) & 0xF];
+        v73 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
         *(_QWORD *)(v61 + 12) = -1i64;
         *(_QWORD *)v61 = v73;
-        *(_DWORD *)(v61 + 8) = LODWORD(v5->MonoVertices.Size) - 1;
+        *(_DWORD *)(v61 + 8) = LODWORD(this->MonoVertices.Size) - 1;
       }
     }
 LABEL_82:
-    v8 = v92;
+    firstChain = v92;
 LABEL_83:
-    v10 = vars0;
+    numChains = vars0;
 LABEL_84:
     v14 = 0;
-    if ( !v10 )
+    if ( !numChains )
       break;
-    v87 = v5->PendingEnds.Pages;
-    --v10;
-    v88 = v8;
-    v89 = v8++ & 0xF;
-    vars0 = v10;
-    v15 = (int *)&v87[v88 >> 4][v89];
-    v9 = v12;
-    v92 = v8;
-    if ( v10 )
-      v12 = v87[(unsigned __int64)v8 >> 4][v8 & 0xF].vertex;
+    Pages = this->PendingEnds.Pages;
+    --numChains;
+    v88 = firstChain;
+    v89 = firstChain++ & 0xF;
+    vars0 = numChains;
+    v15 = (int *)&Pages[v88 >> 4][v89];
+    vertexLeft = vertex;
+    v92 = firstChain;
+    if ( numChains )
+      vertex = Pages[(unsigned __int64)firstChain >> 4][firstChain & 0xF].vertex;
     else
-      v12 = v93;
+      vertex = vertexRight;
     v13 = (Scaleform::Render::Tessellator::PendingEndType *)*((_QWORD *)v15 + 1);
     v11 = retaddr;
-    v4 = v108;
+    style = v108;
     if ( v13 )
       LODWORD(v13) = *(&v13[1].vertex + 1);
   }
-  if ( v98 == &v5->BaseLines.Pages[(v5->BaseLines.Size - 1) >> 4][(LODWORD(v5->BaseLines.Size) - 1) & 0xF] )
+  if ( v98 == &this->BaseLines.Pages[(this->BaseLines.Size - 1) >> 4][(LODWORD(this->BaseLines.Size) - 1) & 0xF] )
   {
     v90 = v98->firstChain;
-    if ( v90 < v5->PendingEnds.Size )
-      v5->PendingEnds.Size = v90;
-    v91 = v5->BaseLines.Size;
-    if ( v91 )
-      v5->BaseLines.Size = v91 - 1;
+    if ( v90 < this->PendingEnds.Size )
+      this->PendingEnds.Size = v90;
+    Size = this->BaseLines.Size;
+    if ( Size )
+      this->BaseLines.Size = Size - 1;
   }
-}= v90;
-    v91 = v5->BaseLines.Size;
-    if ( v91 )
-      v5->BaseLines.Size = v91 - 1;
-  }
 }
 
 // File Line: 1147
 // RVA: 0x9D7E70
-void __fastcall Scaleform::Render::Tessellator::connectPendingToRight(Scaleform::Render::Tessellator *this, Scaleform::Render::Tessellator::ScanChainType *scan, unsigned int targetVertex)
+void __fastcall Scaleform::Render::Tessellator::connectPendingToRight(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::Tessellator::ScanChainType *scan,
+        unsigned int targetVertex)
 {
-  Scaleform::Render::Tessellator::MonotoneType *v3; // rax
-  Scaleform::Render::Tessellator *v4; // rbx
-  Scaleform::Render::Tessellator::ScanChainType *v5; // r13
-  Scaleform::Render::Tessellator::BaseLineType *v6; // rdx
+  Scaleform::Render::Tessellator::MonotoneType *monotone; // rax
+  Scaleform::Render::Tessellator::BaseLineType *lowerBase; // rdx
   unsigned int v7; // ecx
   Scaleform::Render::Tessellator::MonotoneType *v8; // r14
-  unsigned int v9; // ST60_4
-  Scaleform::Render::Tessellator::PendingEndType **v10; // rax
-  unsigned int v11; // er12
-  unsigned __int64 v12; // rsi
+  unsigned int vertex; // r12d
+  unsigned __int64 v10; // rsi
+  Scaleform::Render::Tessellator::MonoVertexType *v11; // rdx
+  __int64 v12; // rcx
   Scaleform::Render::Tessellator::MonoVertexType *v13; // rdx
-  signed __int64 v14; // rcx
-  signed __int64 v15; // rdx
-  signed __int64 v16; // rdi
-  unsigned __int64 v17; // r15
-  Scaleform::Render::Tessellator::MonoVertexType *v18; // rdx
-  signed __int64 v19; // rcx
-  Scaleform::Render::Tessellator::MonotoneType *v20; // rsi
-  unsigned __int64 v21; // r14
+  Scaleform::Render::Tessellator::MonoVertexType *v14; // rdi
+  unsigned __int64 v15; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v16; // rdx
+  __int64 v17; // rcx
+  Scaleform::Render::Tessellator::MonotoneType *v18; // rsi
+  unsigned __int64 v19; // r14
+  Scaleform::Render::Tessellator::MonoVertexType *v20; // rdx
+  __int64 v21; // rcx
   Scaleform::Render::Tessellator::MonoVertexType *v22; // rdx
-  signed __int64 v23; // rcx
-  signed __int64 v24; // rdx
-  signed __int64 v25; // rdi
-  unsigned __int64 v26; // r15
-  Scaleform::Render::Tessellator::MonoVertexType *v27; // rdx
-  signed __int64 v28; // rcx
-  unsigned int v29; // er9
-  unsigned int v30; // ecx
-  Scaleform::Render::Tessellator::PendingEndType **v31; // rdx
-  unsigned __int64 v32; // rax
-  __int64 v33; // rsi
-  signed __int64 v34; // rsi
-  unsigned int v35; // er14
-  __int64 v36; // rax
-  int v37; // ecx
-  Scaleform::Render::Tessellator::MonotoneType *v38; // rax
-  Scaleform::Render::Tessellator::MonotoneType *v39; // rdi
-  unsigned int v40; // er14
-  unsigned __int64 v41; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v23; // rdi
+  unsigned __int64 v24; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v25; // rdx
+  __int64 v26; // rcx
+  unsigned int v27; // r9d
+  unsigned int v28; // ecx
+  Scaleform::Render::Tessellator::PendingEndType **Pages; // rdx
+  unsigned __int64 v30; // rax
+  __int64 v31; // rsi
+  __int64 v32; // rsi
+  unsigned int v33; // r14d
+  __int64 v34; // rax
+  int v35; // ecx
+  Scaleform::Render::Tessellator::MonotoneType *started; // rax
+  Scaleform::Render::Tessellator::MonotoneType *v37; // rdi
+  unsigned int v38; // r14d
+  unsigned __int64 v39; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v40; // rdx
+  __int64 v41; // rcx
   Scaleform::Render::Tessellator::MonoVertexType *v42; // rdx
-  signed __int64 v43; // rcx
-  signed __int64 v44; // rdx
-  signed __int64 v45; // r15
-  unsigned __int64 v46; // r14
-  Scaleform::Render::Tessellator::MonoVertexType *v47; // rdx
-  signed __int64 v48; // rcx
-  unsigned __int64 v49; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v43; // r15
+  unsigned __int64 v44; // r14
+  Scaleform::Render::Tessellator::MonoVertexType *v45; // rdx
+  __int64 v46; // rcx
+  unsigned __int64 v47; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v48; // rdx
+  __int64 v49; // rcx
   Scaleform::Render::Tessellator::MonoVertexType *v50; // rdx
-  signed __int64 v51; // rcx
-  signed __int64 v52; // rdx
-  signed __int64 v53; // r14
-  unsigned __int64 v54; // r15
-  Scaleform::Render::Tessellator::MonoVertexType *v55; // rdx
-  signed __int64 v56; // rcx
-  __int64 v57; // rdi
-  unsigned __int64 v58; // r14
+  Scaleform::Render::Tessellator::MonoVertexType *v51; // r14
+  unsigned __int64 v52; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v53; // rdx
+  __int64 v54; // rcx
+  __int64 v55; // rdi
+  unsigned __int64 v56; // r14
+  Scaleform::Render::Tessellator::MonoVertexType *v57; // rdx
+  __int64 v58; // rcx
   Scaleform::Render::Tessellator::MonoVertexType *v59; // rdx
-  signed __int64 v60; // rcx
-  signed __int64 v61; // rdx
-  signed __int64 v62; // rsi
-  unsigned __int64 v63; // r15
-  Scaleform::Render::Tessellator::MonoVertexType *v64; // rdx
-  signed __int64 v65; // rcx
-  unsigned __int64 v66; // r14
+  Scaleform::Render::Tessellator::MonoVertexType *v60; // rsi
+  unsigned __int64 v61; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v62; // rdx
+  __int64 v63; // rcx
+  unsigned __int64 v64; // r14
+  Scaleform::Render::Tessellator::MonoVertexType *v65; // rdx
+  __int64 v66; // rcx
   Scaleform::Render::Tessellator::MonoVertexType *v67; // rdx
-  signed __int64 v68; // rcx
-  signed __int64 v69; // rdx
-  signed __int64 v70; // rsi
-  unsigned __int64 v71; // r15
-  Scaleform::Render::Tessellator::MonoVertexType *v72; // rdx
-  signed __int64 v73; // rcx
-  unsigned __int64 v74; // rax
-  unsigned __int64 v75; // rax
-  unsigned int v76; // [rsp+10h] [rbp-49h]
-  Scaleform::Render::Tessellator::BaseLineType *v77; // [rsp+18h] [rbp-41h]
+  Scaleform::Render::Tessellator::MonoVertexType *v68; // rsi
+  unsigned __int64 v69; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v70; // rdx
+  __int64 v71; // rcx
+  unsigned __int64 v72; // rax
+  unsigned __int64 Size; // rax
+  unsigned int firstChain; // [rsp+10h] [rbp-49h]
+  Scaleform::Render::Tessellator::BaseLineType *v75; // [rsp+18h] [rbp-41h]
+  __int64 v76; // [rsp+20h] [rbp-39h]
+  __int64 v77; // [rsp+20h] [rbp-39h]
   __int64 v78; // [rsp+20h] [rbp-39h]
-  __int64 v79; // [rsp+20h] [rbp-39h]
-  __int64 v80; // [rsp+20h] [rbp-39h]
-  __int64 v81; // [rsp+30h] [rbp-29h]
-  __int64 v82; // [rsp+40h] [rbp-19h]
-  __int64 v83; // [rsp+50h] [rbp-9h]
-  unsigned int vars0; // [rsp+C0h] [rbp+67h]
-  unsigned int retaddr; // [rsp+C8h] [rbp+6Fh]
-  unsigned int v86; // [rsp+D0h] [rbp+77h]
+  __int64 v79; // [rsp+30h] [rbp-29h]
+  __int64 v80; // [rsp+40h] [rbp-19h]
+  __int64 v81; // [rsp+50h] [rbp-9h]
+  unsigned int numChains; // [rsp+C0h] [rbp+67h]
+  void *retaddr; // [rsp+C8h] [rbp+6Fh]
+  unsigned int v84; // [rsp+D0h] [rbp+77h]
   unsigned int style; // [rsp+D8h] [rbp+7Fh]
 
-  v3 = scan->monotone;
-  v4 = this;
-  v5 = scan;
-  v6 = v3->lowerBase;
-  v7 = v3->style;
-  v3->lowerBase = 0i64;
-  v8 = v5->monotone;
-  v9 = v6->vertexLeft;
+  monotone = scan->monotone;
+  lowerBase = monotone->lowerBase;
+  v7 = monotone->style;
+  monotone->lowerBase = 0i64;
+  v8 = scan->monotone;
   style = v7;
-  vars0 = v6->numChains;
-  retaddr = v6->vertexRight;
-  v10 = v4->PendingEnds.Pages;
-  v77 = v6;
-  v76 = v6->firstChain;
-  v11 = v10[(unsigned __int64)v76 >> 4][v76 & 0xF].vertex;
-  LODWORD(v78) = v10[(unsigned __int64)v76 >> 4][v76 & 0xF].vertex;
-  HIDWORD(v78) = v10[(unsigned __int64)v76 >> 4][v76 & 0xF].vertex;
+  numChains = lowerBase->numChains;
+  LODWORD(retaddr) = lowerBase->vertexRight;
+  v75 = lowerBase;
+  firstChain = lowerBase->firstChain;
+  vertex = this->PendingEnds.Pages[(unsigned __int64)firstChain >> 4][firstChain & 0xF].vertex;
+  LODWORD(v76) = vertex;
+  HIDWORD(v76) = vertex;
   if ( !v8->start )
   {
-    v12 = v4->MonoVertices.Size >> 4;
-    if ( v12 >= v4->MonoVertices.NumPages )
+    v10 = this->MonoVertices.Size >> 4;
+    if ( v10 >= this->MonoVertices.NumPages )
     {
       Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-        (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-        v4->MonoVertices.Size >> 4);
-      targetVertex = v86;
+        (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+        this->MonoVertices.Size >> 4);
+      targetVertex = v84;
     }
-    v13 = v4->MonoVertices.Pages[v12];
-    v14 = v4->MonoVertices.Size & 0xF;
-    *(_QWORD *)&v13[v14].srcVer = v78;
-    v13[v14].next = 0i64;
-    v15 = (signed __int64)&v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size) - 1) & 0xF];
+    v11 = this->MonoVertices.Pages[v10];
+    v12 = this->MonoVertices.Size & 0xF;
+    *(_QWORD *)&v11[v12].srcVer = v76;
+    v11[v12].next = 0i64;
+    v13 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
     *(_QWORD *)&v8->d.t.numTriangles = -1i64;
-    v8->start = (Scaleform::Render::Tessellator::MonoVertexType *)v15;
+    v8->start = v13;
 LABEL_9:
-    v8->d.m.lastIdx = LODWORD(v4->MonoVertices.Size) - 1;
+    v8->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
     goto LABEL_10;
   }
-  v16 = (signed __int64)&v4->MonoVertices.Pages[(unsigned __int64)v8->d.m.lastIdx >> 4][v8->d.m.lastIdx & 0xF];
-  if ( *(_DWORD *)v16 != v11 )
+  v14 = &this->MonoVertices.Pages[(unsigned __int64)v8->d.m.lastIdx >> 4][v8->d.m.lastIdx & 0xF];
+  if ( v14->srcVer != vertex )
   {
-    v17 = v4->MonoVertices.Size >> 4;
-    if ( v17 >= v4->MonoVertices.NumPages )
+    v15 = this->MonoVertices.Size >> 4;
+    if ( v15 >= this->MonoVertices.NumPages )
     {
       Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-        (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-        v4->MonoVertices.Size >> 4);
-      targetVertex = v86;
+        (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+        this->MonoVertices.Size >> 4);
+      targetVertex = v84;
     }
-    v18 = v4->MonoVertices.Pages[v17];
-    v19 = v4->MonoVertices.Size & 0xF;
-    *(_QWORD *)&v18[v19].srcVer = v78;
-    v18[v19].next = 0i64;
-    *(_QWORD *)(v16 + 8) = &v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                      - 1) & 0xF];
+    v16 = this->MonoVertices.Pages[v15];
+    v17 = this->MonoVertices.Size & 0xF;
+    *(_QWORD *)&v16[v17].srcVer = v76;
+    v16[v17].next = 0i64;
+    v14->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
     v8->d.m.prevIdx2 = v8->d.m.prevIdx1;
     v8->d.m.prevIdx1 = v8->d.m.lastIdx;
     goto LABEL_9;
   }
 LABEL_10:
-  v20 = v5->monotone;
-  LODWORD(v79) = targetVertex;
-  HIDWORD(v79) = targetVertex;
-  if ( v20->start )
+  v18 = scan->monotone;
+  LODWORD(v77) = targetVertex;
+  HIDWORD(v77) = targetVertex;
+  if ( v18->start )
   {
-    v25 = (signed __int64)&v4->MonoVertices.Pages[(unsigned __int64)v20->d.m.lastIdx >> 4][v20->d.m.lastIdx & 0xF];
-    if ( *(_DWORD *)v25 != targetVertex )
+    v23 = &this->MonoVertices.Pages[(unsigned __int64)v18->d.m.lastIdx >> 4][v18->d.m.lastIdx & 0xF];
+    if ( v23->srcVer != targetVertex )
     {
-      v26 = v4->MonoVertices.Size >> 4;
-      if ( v26 >= v4->MonoVertices.NumPages )
+      v24 = this->MonoVertices.Size >> 4;
+      if ( v24 >= this->MonoVertices.NumPages )
       {
         Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-          (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-          v4->MonoVertices.Size >> 4);
-        targetVertex = v86;
+          (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+          this->MonoVertices.Size >> 4);
+        targetVertex = v84;
       }
-      v27 = v4->MonoVertices.Pages[v26];
-      v28 = v4->MonoVertices.Size & 0xF;
-      *(_QWORD *)&v27[v28].srcVer = v79;
-      v27[v28].next = 0i64;
-      *(_QWORD *)(v25 + 8) = &v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                        - 1) & 0xF];
-      v20->d.m.prevIdx2 = v20->d.m.prevIdx1;
-      v20->d.m.prevIdx1 = v20->d.m.lastIdx;
-      v20->d.m.lastIdx = LODWORD(v4->MonoVertices.Size) - 1;
+      v25 = this->MonoVertices.Pages[v24];
+      v26 = this->MonoVertices.Size & 0xF;
+      *(_QWORD *)&v25[v26].srcVer = v77;
+      v25[v26].next = 0i64;
+      v23->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+      v18->d.m.prevIdx2 = v18->d.m.prevIdx1;
+      v18->d.m.prevIdx1 = v18->d.m.lastIdx;
+      v18->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
     }
   }
   else
   {
-    v21 = v4->MonoVertices.Size >> 4;
-    if ( v21 >= v4->MonoVertices.NumPages )
+    v19 = this->MonoVertices.Size >> 4;
+    if ( v19 >= this->MonoVertices.NumPages )
     {
       Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-        (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-        v4->MonoVertices.Size >> 4);
-      targetVertex = v86;
+        (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+        this->MonoVertices.Size >> 4);
+      targetVertex = v84;
     }
-    v22 = v4->MonoVertices.Pages[v21];
-    v23 = v4->MonoVertices.Size & 0xF;
-    *(_QWORD *)&v22[v23].srcVer = v79;
-    v22[v23].next = 0i64;
-    v24 = (signed __int64)&v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size) - 1) & 0xF];
-    *(_QWORD *)&v20->d.t.numTriangles = -1i64;
-    v20->start = (Scaleform::Render::Tessellator::MonoVertexType *)v24;
-    v20->d.m.lastIdx = LODWORD(v4->MonoVertices.Size) - 1;
+    v20 = this->MonoVertices.Pages[v19];
+    v21 = this->MonoVertices.Size & 0xF;
+    *(_QWORD *)&v20[v21].srcVer = v77;
+    v20[v21].next = 0i64;
+    v22 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+    *(_QWORD *)&v18->d.t.numTriangles = -1i64;
+    v18->start = v22;
+    v18->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
   }
 LABEL_18:
-  v29 = v76;
+  v27 = firstChain;
   while ( 1 )
   {
-    v30 = vars0;
-    if ( !vars0 )
+    v28 = numChains;
+    if ( !numChains )
       break;
-    v31 = v4->PendingEnds.Pages;
-    v32 = v29;
-    v33 = v29++ & 0xF;
-    --vars0;
-    v34 = (signed __int64)&v31[v32 >> 4][v33];
-    v35 = v11;
-    v76 = v29;
-    if ( v30 == 1 )
-      v11 = retaddr;
+    Pages = this->PendingEnds.Pages;
+    v30 = v27;
+    v31 = v27++ & 0xF;
+    --numChains;
+    v32 = (__int64)&Pages[v30 >> 4][v31];
+    v33 = vertex;
+    firstChain = v27;
+    if ( v28 == 1 )
+      vertex = (unsigned int)retaddr;
     else
-      v11 = v31[(unsigned __int64)v29 >> 4][v29 & 0xF].vertex;
-    v36 = *(_QWORD *)(v34 + 8);
-    if ( v36 )
-      v37 = *(_DWORD *)(v36 + 20);
+      vertex = Pages[(unsigned __int64)v27 >> 4][v27 & 0xF].vertex;
+    v34 = *(_QWORD *)(v32 + 8);
+    if ( v34 )
+      v35 = *(_DWORD *)(v34 + 20);
     else
-      v37 = 0;
-    if ( v35 != v11 )
+      v35 = 0;
+    if ( v33 != vertex )
     {
-      if ( v37 != style || !v36 )
+      if ( v35 != style || !v34 )
       {
-        v38 = Scaleform::Render::Tessellator::startMonotone(v4, style);
-        v39 = v38;
-        *(_QWORD *)(v34 + 8) = v38;
-        if ( v35 != -1 )
+        started = Scaleform::Render::Tessellator::startMonotone(this, style);
+        v37 = started;
+        *(_QWORD *)(v32 + 8) = started;
+        if ( v33 != -1 )
         {
-          v40 = v35 | 0x80000000;
-          LODWORD(v80) = v40;
-          HIDWORD(v80) = v40;
-          if ( !v38->start )
+          v38 = v33 | 0x80000000;
+          LODWORD(v78) = v38;
+          HIDWORD(v78) = v38;
+          if ( !started->start )
           {
-            v41 = v4->MonoVertices.Size >> 4;
-            if ( v41 >= v4->MonoVertices.NumPages )
+            v39 = this->MonoVertices.Size >> 4;
+            if ( v39 >= this->MonoVertices.NumPages )
               Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-                v4->MonoVertices.Size >> 4);
-            v42 = v4->MonoVertices.Pages[v41];
-            v43 = v4->MonoVertices.Size & 0xF;
-            *(_QWORD *)&v42[v43].srcVer = v80;
-            v42[v43].next = 0i64;
-            v44 = (signed __int64)&v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                             - 1) & 0xF];
-            *(_QWORD *)&v39->d.t.numTriangles = -1i64;
-            v39->start = (Scaleform::Render::Tessellator::MonoVertexType *)v44;
+                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                this->MonoVertices.Size >> 4);
+            v40 = this->MonoVertices.Pages[v39];
+            v41 = this->MonoVertices.Size & 0xF;
+            *(_QWORD *)&v40[v41].srcVer = v78;
+            v40[v41].next = 0i64;
+            v42 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+            *(_QWORD *)&v37->d.t.numTriangles = -1i64;
+            v37->start = v42;
             goto LABEL_38;
           }
-          v45 = (signed __int64)&v4->MonoVertices.Pages[(unsigned __int64)v38->d.m.lastIdx >> 4][v38->d.m.lastIdx & 0xF];
-          if ( *(_DWORD *)v45 != v40 )
+          v43 = &this->MonoVertices.Pages[(unsigned __int64)started->d.m.lastIdx >> 4][started->d.m.lastIdx & 0xF];
+          if ( v43->srcVer != v38 )
           {
-            v46 = v4->MonoVertices.Size >> 4;
-            if ( v46 >= v4->MonoVertices.NumPages )
+            v44 = this->MonoVertices.Size >> 4;
+            if ( v44 >= this->MonoVertices.NumPages )
               Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-                v4->MonoVertices.Size >> 4);
-            v47 = v4->MonoVertices.Pages[v46];
-            v48 = v4->MonoVertices.Size & 0xF;
-            *(_QWORD *)&v47[v48].srcVer = v80;
-            v47[v48].next = 0i64;
-            *(_QWORD *)(v45 + 8) = &v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                              - 1) & 0xF];
-            v39->d.m.prevIdx2 = v39->d.m.prevIdx1;
-            v39->d.m.prevIdx1 = v39->d.m.lastIdx;
+                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                this->MonoVertices.Size >> 4);
+            v45 = this->MonoVertices.Pages[v44];
+            v46 = this->MonoVertices.Size & 0xF;
+            *(_QWORD *)&v45[v46].srcVer = v78;
+            v45[v46].next = 0i64;
+            v43->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+            v37->d.m.prevIdx2 = v37->d.m.prevIdx1;
+            v37->d.m.prevIdx1 = v37->d.m.lastIdx;
 LABEL_38:
-            v39->d.m.lastIdx = LODWORD(v4->MonoVertices.Size) - 1;
+            v37->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
           }
         }
-        if ( v11 != -1 )
+        if ( vertex != -1 )
         {
-          LODWORD(v81) = v11 & 0x7FFFFFFF;
-          HIDWORD(v81) = v11 & 0x7FFFFFFF;
-          if ( v39->start )
+          LODWORD(v79) = vertex & 0x7FFFFFFF;
+          HIDWORD(v79) = vertex & 0x7FFFFFFF;
+          if ( v37->start )
           {
-            v53 = (signed __int64)&v4->MonoVertices.Pages[(unsigned __int64)v39->d.m.lastIdx >> 4][v39->d.m.lastIdx & 0xF];
-            if ( *(_DWORD *)v53 != (v11 & 0x7FFFFFFF) )
+            v51 = &this->MonoVertices.Pages[(unsigned __int64)v37->d.m.lastIdx >> 4][v37->d.m.lastIdx & 0xF];
+            if ( v51->srcVer != (vertex & 0x7FFFFFFF) )
             {
-              v54 = v4->MonoVertices.Size >> 4;
-              if ( v54 >= v4->MonoVertices.NumPages )
+              v52 = this->MonoVertices.Size >> 4;
+              if ( v52 >= this->MonoVertices.NumPages )
                 Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                  (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-                  v4->MonoVertices.Size >> 4);
-              v55 = v4->MonoVertices.Pages[v54];
-              v56 = v4->MonoVertices.Size & 0xF;
-              *(_QWORD *)&v55[v56].srcVer = v81;
-              v55[v56].next = 0i64;
-              *(_QWORD *)(v53 + 8) = &v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                                - 1) & 0xF];
-              v39->d.m.prevIdx2 = v39->d.m.prevIdx1;
-              v39->d.m.prevIdx1 = v39->d.m.lastIdx;
-              v39->d.m.lastIdx = LODWORD(v4->MonoVertices.Size) - 1;
+                  (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                  this->MonoVertices.Size >> 4);
+              v53 = this->MonoVertices.Pages[v52];
+              v54 = this->MonoVertices.Size & 0xF;
+              *(_QWORD *)&v53[v54].srcVer = v79;
+              v53[v54].next = 0i64;
+              v51->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+              v37->d.m.prevIdx2 = v37->d.m.prevIdx1;
+              v37->d.m.prevIdx1 = v37->d.m.lastIdx;
+              v37->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
             }
           }
           else
           {
-            v49 = v4->MonoVertices.Size >> 4;
-            if ( v49 >= v4->MonoVertices.NumPages )
+            v47 = this->MonoVertices.Size >> 4;
+            if ( v47 >= this->MonoVertices.NumPages )
               Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-                v4->MonoVertices.Size >> 4);
-            v50 = v4->MonoVertices.Pages[v49];
-            v51 = v4->MonoVertices.Size & 0xF;
-            *(_QWORD *)&v50[v51].srcVer = v81;
-            v50[v51].next = 0i64;
-            v52 = (signed __int64)&v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                             - 1) & 0xF];
-            *(_QWORD *)&v39->d.t.numTriangles = -1i64;
-            v39->start = (Scaleform::Render::Tessellator::MonoVertexType *)v52;
-            v39->d.m.lastIdx = LODWORD(v4->MonoVertices.Size) - 1;
+                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                this->MonoVertices.Size >> 4);
+            v48 = this->MonoVertices.Pages[v47];
+            v49 = this->MonoVertices.Size & 0xF;
+            *(_QWORD *)&v48[v49].srcVer = v79;
+            v48[v49].next = 0i64;
+            v50 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+            *(_QWORD *)&v37->d.t.numTriangles = -1i64;
+            v37->start = v50;
+            v37->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
           }
         }
-        v29 = v76;
-        targetVertex = v86;
+        v27 = firstChain;
+        targetVertex = v84;
       }
-      v57 = *(_QWORD *)(v34 + 8);
+      v55 = *(_QWORD *)(v32 + 8);
       if ( targetVertex != -1 )
       {
-        LODWORD(v82) = targetVertex | 0x80000000;
-        HIDWORD(v82) = targetVertex | 0x80000000;
-        if ( !*(_QWORD *)v57 )
+        LODWORD(v80) = targetVertex | 0x80000000;
+        HIDWORD(v80) = targetVertex | 0x80000000;
+        if ( !*(_QWORD *)v55 )
         {
-          v58 = v4->MonoVertices.Size >> 4;
-          if ( v58 >= v4->MonoVertices.NumPages )
+          v56 = this->MonoVertices.Size >> 4;
+          if ( v56 >= this->MonoVertices.NumPages )
           {
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-              v4->MonoVertices.Size >> 4);
-            targetVertex = v86;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+            targetVertex = v84;
           }
-          v59 = v4->MonoVertices.Pages[v58];
-          v60 = v4->MonoVertices.Size & 0xF;
-          *(_QWORD *)&v59[v60].srcVer = v82;
-          v59[v60].next = 0i64;
-          v61 = (signed __int64)&v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                           - 1) & 0xF];
-          *(_QWORD *)(v57 + 12) = -1i64;
-          *(_QWORD *)v57 = v61;
+          v57 = this->MonoVertices.Pages[v56];
+          v58 = this->MonoVertices.Size & 0xF;
+          *(_QWORD *)&v57[v58].srcVer = v80;
+          v57[v58].next = 0i64;
+          v59 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+          *(_QWORD *)(v55 + 12) = -1i64;
+          *(_QWORD *)v55 = v59;
 LABEL_58:
-          *(_DWORD *)(v57 + 8) = LODWORD(v4->MonoVertices.Size) - 1;
+          *(_DWORD *)(v55 + 8) = LODWORD(this->MonoVertices.Size) - 1;
           goto LABEL_59;
         }
-        v62 = (signed __int64)&v4->MonoVertices.Pages[(unsigned __int64)*(unsigned int *)(v57 + 8) >> 4][*(_DWORD *)(v57 + 8) & 0xF];
-        if ( *(_DWORD *)v62 != (targetVertex | 0x80000000) )
+        v60 = &this->MonoVertices.Pages[(unsigned __int64)*(unsigned int *)(v55 + 8) >> 4][*(_DWORD *)(v55 + 8) & 0xF];
+        if ( v60->srcVer != (targetVertex | 0x80000000) )
         {
-          v63 = v4->MonoVertices.Size >> 4;
-          if ( v63 >= v4->MonoVertices.NumPages )
+          v61 = this->MonoVertices.Size >> 4;
+          if ( v61 >= this->MonoVertices.NumPages )
           {
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-              v4->MonoVertices.Size >> 4);
-            targetVertex = v86;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+            targetVertex = v84;
           }
-          v64 = v4->MonoVertices.Pages[v63];
-          v65 = v4->MonoVertices.Size & 0xF;
-          *(_QWORD *)&v64[v65].srcVer = v82;
-          v64[v65].next = 0i64;
-          *(_QWORD *)(v62 + 8) = &v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                            - 1) & 0xF];
-          *(_DWORD *)(v57 + 16) = *(_DWORD *)(v57 + 12);
-          *(_DWORD *)(v57 + 12) = *(_DWORD *)(v57 + 8);
+          v62 = this->MonoVertices.Pages[v61];
+          v63 = this->MonoVertices.Size & 0xF;
+          *(_QWORD *)&v62[v63].srcVer = v80;
+          v62[v63].next = 0i64;
+          v60->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+          *(_DWORD *)(v55 + 16) = *(_DWORD *)(v55 + 12);
+          *(_DWORD *)(v55 + 12) = *(_DWORD *)(v55 + 8);
           goto LABEL_58;
         }
 LABEL_59:
-        LODWORD(v83) = targetVertex & 0x7FFFFFFF;
-        HIDWORD(v83) = targetVertex & 0x7FFFFFFF;
-        if ( !*(_QWORD *)v57 )
+        LODWORD(v81) = targetVertex & 0x7FFFFFFF;
+        HIDWORD(v81) = targetVertex & 0x7FFFFFFF;
+        if ( !*(_QWORD *)v55 )
         {
-          v66 = v4->MonoVertices.Size >> 4;
-          if ( v66 >= v4->MonoVertices.NumPages )
+          v64 = this->MonoVertices.Size >> 4;
+          if ( v64 >= this->MonoVertices.NumPages )
           {
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-              v4->MonoVertices.Size >> 4);
-            targetVertex = v86;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+            targetVertex = v84;
           }
-          v67 = v4->MonoVertices.Pages[v66];
-          v68 = v4->MonoVertices.Size & 0xF;
-          *(_QWORD *)&v67[v68].srcVer = v83;
-          v67[v68].next = 0i64;
-          v69 = (signed __int64)&v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                           - 1) & 0xF];
-          *(_QWORD *)(v57 + 12) = -1i64;
-          *(_QWORD *)v57 = v69;
-          *(_DWORD *)(v57 + 8) = LODWORD(v4->MonoVertices.Size) - 1;
+          v65 = this->MonoVertices.Pages[v64];
+          v66 = this->MonoVertices.Size & 0xF;
+          *(_QWORD *)&v65[v66].srcVer = v81;
+          v65[v66].next = 0i64;
+          v67 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+          *(_QWORD *)(v55 + 12) = -1i64;
+          *(_QWORD *)v55 = v67;
+          *(_DWORD *)(v55 + 8) = LODWORD(this->MonoVertices.Size) - 1;
           goto LABEL_18;
         }
-        v29 = v76;
-        v70 = (signed __int64)&v4->MonoVertices.Pages[(unsigned __int64)*(unsigned int *)(v57 + 8) >> 4][*(_DWORD *)(v57 + 8) & 0xF];
-        if ( *(_DWORD *)v70 != (targetVertex & 0x7FFFFFFF) )
+        v27 = firstChain;
+        v68 = &this->MonoVertices.Pages[(unsigned __int64)*(unsigned int *)(v55 + 8) >> 4][*(_DWORD *)(v55 + 8) & 0xF];
+        if ( v68->srcVer != (targetVertex & 0x7FFFFFFF) )
         {
-          v71 = v4->MonoVertices.Size >> 4;
-          if ( v71 >= v4->MonoVertices.NumPages )
+          v69 = this->MonoVertices.Size >> 4;
+          if ( v69 >= this->MonoVertices.NumPages )
           {
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-              v4->MonoVertices.Size >> 4);
-            targetVertex = v86;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+            targetVertex = v84;
           }
-          v72 = v4->MonoVertices.Pages[v71];
-          v73 = v4->MonoVertices.Size & 0xF;
-          *(_QWORD *)&v72[v73].srcVer = v83;
-          v72[v73].next = 0i64;
-          *(_QWORD *)(v70 + 8) = &v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                            - 1) & 0xF];
-          *(_DWORD *)(v57 + 16) = *(_DWORD *)(v57 + 12);
-          *(_DWORD *)(v57 + 12) = *(_DWORD *)(v57 + 8);
-          *(_DWORD *)(v57 + 8) = LODWORD(v4->MonoVertices.Size) - 1;
+          v70 = this->MonoVertices.Pages[v69];
+          v71 = this->MonoVertices.Size & 0xF;
+          *(_QWORD *)&v70[v71].srcVer = v81;
+          v70[v71].next = 0i64;
+          v68->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+          *(_DWORD *)(v55 + 16) = *(_DWORD *)(v55 + 12);
+          *(_DWORD *)(v55 + 12) = *(_DWORD *)(v55 + 8);
+          *(_DWORD *)(v55 + 8) = LODWORD(this->MonoVertices.Size) - 1;
           goto LABEL_18;
         }
       }
     }
   }
-  if ( v77 == &v4->BaseLines.Pages[(v4->BaseLines.Size - 1) >> 4][(LODWORD(v4->BaseLines.Size) - 1) & 0xF] )
+  if ( v75 == &this->BaseLines.Pages[(this->BaseLines.Size - 1) >> 4][(LODWORD(this->BaseLines.Size) - 1) & 0xF] )
   {
-    v74 = v77->firstChain;
-    if ( v74 < v4->PendingEnds.Size )
-      v4->PendingEnds.Size = v74;
-    v75 = v4->BaseLines.Size;
-    if ( v75 )
-      v4->BaseLines.Size = v75 - 1;
+    v72 = v75->firstChain;
+    if ( v72 < this->PendingEnds.Size )
+      this->PendingEnds.Size = v72;
+    Size = this->BaseLines.Size;
+    if ( Size )
+      this->BaseLines.Size = Size - 1;
   }
 }
 
 // File Line: 1183
 // RVA: 0x9D8A50
-void __fastcall Scaleform::Render::Tessellator::connectStartingToLeft(Scaleform::Render::Tessellator *this, Scaleform::Render::Tessellator::ScanChainType *scan, Scaleform::Render::Tessellator::BaseLineType *upperBase, unsigned int targetVertex)
+void __fastcall Scaleform::Render::Tessellator::connectStartingToLeft(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::Tessellator::ScanChainType *scan,
+        Scaleform::Render::Tessellator::BaseLineType *upperBase,
+        unsigned int targetVertex)
 {
-  unsigned __int64 v4; // rax
+  unsigned __int64 leftAbove; // rax
   unsigned int v5; // esi
   Scaleform::Render::Tessellator::ScanChainType *v6; // r14
-  Scaleform::Render::Tessellator *v7; // rbx
-  unsigned int v8; // eax
-  unsigned int v9; // edi
-  unsigned int v10; // er15
-  unsigned int v11; // er12
-  Scaleform::Render::Tessellator::MonotoneType *v12; // rax
-  Scaleform::Render::Tessellator::MonotoneType *v13; // rdx
-  Scaleform::Render::Tessellator::MonotoneType *v14; // r13
-  Scaleform::Render::Tessellator::BaseLineType *v15; // rcx
-  unsigned int v16; // edx
-  Scaleform::Render::Tessellator::MonotoneType *v17; // rcx
-  unsigned int v18; // eax
-  Scaleform::Render::Tessellator::MonotoneType *v19; // rdi
-  unsigned int v20; // edx
-  unsigned __int64 v21; // r12
-  Scaleform::Render::Tessellator::MonoVertexType *v22; // rdx
-  signed __int64 v23; // rcx
-  signed __int64 v24; // rdx
-  signed __int64 v25; // rsi
-  unsigned __int64 v26; // r12
-  Scaleform::Render::Tessellator::MonoVertexType *v27; // rdx
-  signed __int64 v28; // rcx
-  unsigned __int64 v29; // r12
-  Scaleform::Render::Tessellator::MonoVertexType *v30; // rdx
-  signed __int64 v31; // rcx
-  signed __int64 v32; // rdx
-  signed __int64 v33; // rsi
-  unsigned __int64 v34; // r12
-  Scaleform::Render::Tessellator::MonoVertexType *v35; // rdx
-  signed __int64 v36; // rcx
-  Scaleform::Render::Tessellator::MonotoneType *v37; // rdi
-  unsigned __int64 v38; // r12
-  Scaleform::Render::Tessellator::MonoVertexType *v39; // rdx
-  signed __int64 v40; // rcx
-  signed __int64 v41; // rdx
-  signed __int64 v42; // rsi
-  unsigned __int64 v43; // r12
-  Scaleform::Render::Tessellator::MonoVertexType *v44; // rdx
-  signed __int64 v45; // rcx
-  unsigned __int64 v46; // r12
-  Scaleform::Render::Tessellator::MonoVertexType *v47; // rdx
-  signed __int64 v48; // rcx
-  signed __int64 v49; // rdx
-  signed __int64 v50; // rsi
-  unsigned __int64 v51; // r12
-  Scaleform::Render::Tessellator::MonoVertexType *v52; // rdx
-  signed __int64 v53; // rcx
-  unsigned __int64 v54; // rsi
-  Scaleform::Render::Tessellator::MonoVertexType *v55; // rdx
-  signed __int64 v56; // rcx
-  signed __int64 v57; // rdx
-  signed __int64 v58; // rdi
-  unsigned __int64 v59; // r12
-  Scaleform::Render::Tessellator::MonoVertexType *v60; // rdx
-  signed __int64 v61; // rcx
-  unsigned __int64 v62; // rsi
-  Scaleform::Render::Tessellator::MonoVertexType *v63; // rdx
-  signed __int64 v64; // rcx
-  signed __int64 v65; // rdx
-  signed __int64 v66; // rdi
-  unsigned __int64 v67; // r12
-  Scaleform::Render::Tessellator::MonoVertexType *v68; // rdx
-  signed __int64 v69; // rcx
-  Scaleform::Render::Tessellator::MonotoneType *v70; // rdi
-  unsigned int v71; // er15
-  unsigned __int64 v72; // r14
-  Scaleform::Render::Tessellator::MonoVertexType *v73; // rdx
-  signed __int64 v74; // rcx
-  signed __int64 v75; // rdx
-  signed __int64 v76; // rsi
-  unsigned __int64 v77; // r15
-  Scaleform::Render::Tessellator::MonoVertexType *v78; // rdx
-  signed __int64 v79; // rcx
-  unsigned __int64 v80; // r14
-  Scaleform::Render::Tessellator::MonoVertexType *v81; // rdx
-  signed __int64 v82; // rcx
-  signed __int64 v83; // rdx
-  signed __int64 v84; // rsi
-  unsigned __int64 v85; // r15
-  Scaleform::Render::Tessellator::MonoVertexType *v86; // rdx
-  signed __int64 v87; // rcx
-  Scaleform::Render::Tessellator::ScanChainType **v88; // rdx
-  unsigned int v89; // esi
-  unsigned __int64 v90; // rax
-  signed __int64 v91; // rcx
-  unsigned int v92; // [rsp+20h] [rbp-99h]
+  unsigned int numChains; // edi
+  unsigned int vertexLeft; // r15d
+  unsigned int vertex; // r12d
+  Scaleform::Render::Tessellator::MonotoneType *started; // rax
+  Scaleform::Render::Tessellator::MonotoneType *monotone; // rdx
+  Scaleform::Render::Tessellator::MonotoneType *v13; // r13
+  Scaleform::Render::Tessellator::BaseLineType *lowerBase; // rcx
+  unsigned int v15; // edx
+  Scaleform::Render::Tessellator::MonotoneType *v16; // rcx
+  unsigned int rightAbove; // eax
+  Scaleform::Render::Tessellator::MonotoneType *v18; // rdi
+  unsigned int v19; // edx
+  unsigned __int64 v20; // r12
+  Scaleform::Render::Tessellator::MonoVertexType *v21; // rdx
+  __int64 v22; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v23; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v24; // rsi
+  unsigned __int64 v25; // r12
+  Scaleform::Render::Tessellator::MonoVertexType *v26; // rdx
+  __int64 v27; // rcx
+  unsigned __int64 v28; // r12
+  Scaleform::Render::Tessellator::MonoVertexType *v29; // rdx
+  __int64 v30; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v31; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v32; // rsi
+  unsigned __int64 v33; // r12
+  Scaleform::Render::Tessellator::MonoVertexType *v34; // rdx
+  __int64 v35; // rcx
+  Scaleform::Render::Tessellator::MonotoneType *v36; // rdi
+  unsigned __int64 v37; // r12
+  Scaleform::Render::Tessellator::MonoVertexType *v38; // rdx
+  __int64 v39; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v40; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v41; // rsi
+  unsigned __int64 v42; // r12
+  Scaleform::Render::Tessellator::MonoVertexType *v43; // rdx
+  __int64 v44; // rcx
+  unsigned __int64 v45; // r12
+  Scaleform::Render::Tessellator::MonoVertexType *v46; // rdx
+  __int64 v47; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v48; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v49; // rsi
+  unsigned __int64 v50; // r12
+  Scaleform::Render::Tessellator::MonoVertexType *v51; // rdx
+  __int64 v52; // rcx
+  unsigned __int64 v53; // rsi
+  Scaleform::Render::Tessellator::MonoVertexType *v54; // rdx
+  __int64 v55; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v56; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v57; // rdi
+  unsigned __int64 v58; // r12
+  Scaleform::Render::Tessellator::MonoVertexType *v59; // rdx
+  __int64 v60; // rcx
+  unsigned __int64 v61; // rsi
+  Scaleform::Render::Tessellator::MonoVertexType *v62; // rdx
+  __int64 v63; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v64; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v65; // rdi
+  unsigned __int64 v66; // r12
+  Scaleform::Render::Tessellator::MonoVertexType *v67; // rdx
+  __int64 v68; // rcx
+  Scaleform::Render::Tessellator::MonotoneType *v69; // rdi
+  unsigned int v70; // r15d
+  unsigned __int64 v71; // r14
+  Scaleform::Render::Tessellator::MonoVertexType *v72; // rdx
+  __int64 v73; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v74; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v75; // rsi
+  unsigned __int64 v76; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v77; // rdx
+  __int64 v78; // rcx
+  unsigned __int64 v79; // r14
+  Scaleform::Render::Tessellator::MonoVertexType *v80; // rdx
+  __int64 v81; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v82; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v83; // rsi
+  unsigned __int64 v84; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v85; // rdx
+  __int64 v86; // rcx
+  Scaleform::Render::Tessellator::ScanChainType **Pages; // rdx
+  unsigned int v88; // esi
+  unsigned __int64 v89; // rax
+  __int64 v90; // rcx
+  unsigned int v91; // [rsp+20h] [rbp-99h]
   unsigned int style; // [rsp+24h] [rbp-95h]
-  unsigned int v94; // [rsp+28h] [rbp-91h]
-  Scaleform::Render::Tessellator::MonotoneType *v95; // [rsp+30h] [rbp-89h]
-  unsigned int v96; // [rsp+38h] [rbp-81h]
+  unsigned int v93; // [rsp+28h] [rbp-91h]
+  Scaleform::Render::Tessellator::MonotoneType *v94; // [rsp+30h] [rbp-89h]
+  unsigned int vertexRight; // [rsp+38h] [rbp-81h]
   Scaleform::Render::Tessellator::ScanChainType *scana; // [rsp+40h] [rbp-79h]
-  unsigned int v98; // [rsp+48h] [rbp-71h]
-  __int64 v99; // [rsp+50h] [rbp-69h]
-  __int64 v100; // [rsp+60h] [rbp-59h]
-  __int64 v101; // [rsp+70h] [rbp-49h]
-  __int64 v102; // [rsp+80h] [rbp-39h]
-  __int64 v103; // [rsp+90h] [rbp-29h]
-  __int64 v104; // [rsp+A0h] [rbp-19h]
-  __int64 v105; // [rsp+B0h] [rbp-9h]
-  __int64 v106; // [rsp+C0h] [rbp+7h]
-  char v107; // [rsp+120h] [rbp+67h]
-  unsigned int v108; // [rsp+128h] [rbp+6Fh]
-  Scaleform::Render::Tessellator::BaseLineType *v109; // [rsp+130h] [rbp+77h]
-  unsigned int v110; // [rsp+138h] [rbp+7Fh]
+  unsigned int firstChain; // [rsp+48h] [rbp-71h]
+  __int64 v98; // [rsp+50h] [rbp-69h]
+  __int64 v99; // [rsp+60h] [rbp-59h]
+  __int64 v100; // [rsp+70h] [rbp-49h]
+  __int64 v101; // [rsp+80h] [rbp-39h]
+  __int64 v102; // [rsp+90h] [rbp-29h]
+  __int64 v103; // [rsp+A0h] [rbp-19h]
+  __int64 v104; // [rsp+B0h] [rbp-9h]
+  __int64 v105; // [rsp+C0h] [rbp+7h]
+  char v106; // [rsp+120h] [rbp+67h]
+  unsigned int styleLeft; // [rsp+128h] [rbp+6Fh]
 
-  v110 = targetVertex;
-  v109 = upperBase;
-  v4 = upperBase->leftAbove;
+  leftAbove = upperBase->leftAbove;
   v5 = targetVertex;
   v6 = scan;
-  v7 = this;
-  if ( (_DWORD)v4 == -1 )
+  if ( (_DWORD)leftAbove == -1 )
     scana = scan;
   else
-    scana = &this->ChainsAbove.Pages[v4 >> 4][v4 & 0xF];
-  v8 = upperBase->firstChain;
-  v9 = upperBase->numChains;
-  v10 = upperBase->vertexLeft;
-  v98 = v8;
-  v96 = upperBase->vertexRight;
-  v94 = upperBase->numChains;
-  v107 = 1;
-  v11 = this->ChainsAbove.Pages[(unsigned __int64)upperBase->firstChain >> 4][v8 & 0xF].vertex;
-  v108 = upperBase->styleLeft;
-  v92 = this->ChainsAbove.Pages[(unsigned __int64)upperBase->firstChain >> 4][v8 & 0xF].vertex;
+    scana = &this->ChainsAbove.Pages[leftAbove >> 4][leftAbove & 0xF];
+  numChains = upperBase->numChains;
+  vertexLeft = upperBase->vertexLeft;
+  firstChain = upperBase->firstChain;
+  vertexRight = upperBase->vertexRight;
+  v93 = numChains;
+  v106 = 1;
+  vertex = this->ChainsAbove.Pages[(unsigned __int64)firstChain >> 4][firstChain & 0xF].vertex;
+  styleLeft = upperBase->styleLeft;
+  v91 = vertex;
   style = scan->monotone->style;
-  v12 = Scaleform::Render::Tessellator::startMonotone(this, 0);
-  v13 = v6->monotone;
-  v14 = v12;
-  v95 = v12;
-  v12->start = v13->start;
-  *(_QWORD *)&v12->d.m.lastIdx = *(_QWORD *)&v13->d.m.lastIdx;
-  *(_QWORD *)&v12->d.t.meshIdx = *(_QWORD *)&v13->d.t.meshIdx;
-  v15 = v13->lowerBase;
-  v16 = style;
-  v12->lowerBase = v15;
-  v17 = v6->monotone;
-  v18 = v108;
-  v17->start = 0i64;
-  *(_QWORD *)&v17->d.m.lastIdx = -1i64;
-  v17->d.m.prevIdx2 = -1;
-  v17->style = style;
-  v17->lowerBase = 0i64;
+  started = Scaleform::Render::Tessellator::startMonotone(this, 0);
+  monotone = v6->monotone;
+  v13 = started;
+  v94 = started;
+  started->start = monotone->start;
+  *(_QWORD *)&started->d.m.lastIdx = *(_QWORD *)&monotone->d.m.lastIdx;
+  *(_QWORD *)&started->d.t.meshIdx = *(_QWORD *)&monotone->d.t.meshIdx;
+  lowerBase = monotone->lowerBase;
+  v15 = style;
+  started->lowerBase = lowerBase;
+  v16 = v6->monotone;
+  rightAbove = styleLeft;
+  v16->start = 0i64;
+  *(_QWORD *)&v16->d.m.lastIdx = -1i64;
+  v16->d.m.prevIdx2 = -1;
+  v16->style = style;
+  v16->lowerBase = 0i64;
   while ( 1 )
   {
-    if ( !v9 )
+    if ( !numChains )
     {
-      v6->monotone = v14;
-      if ( v10 == -1 )
+      v6->monotone = v13;
+      if ( vertexLeft == -1 )
         goto LABEL_56;
-      LODWORD(v100) = v10 | 0x80000000;
-      HIDWORD(v100) = v10 | 0x80000000;
-      if ( v14->start )
+      LODWORD(v99) = vertexLeft | 0x80000000;
+      HIDWORD(v99) = vertexLeft | 0x80000000;
+      if ( v13->start )
       {
-        v58 = (signed __int64)&v7->MonoVertices.Pages[(unsigned __int64)v14->d.m.lastIdx >> 4][v14->d.m.lastIdx & 0xF];
-        if ( *(_DWORD *)v58 == (v10 | 0x80000000) )
+        v57 = &this->MonoVertices.Pages[(unsigned __int64)v13->d.m.lastIdx >> 4][v13->d.m.lastIdx & 0xF];
+        if ( v57->srcVer == (vertexLeft | 0x80000000) )
           goto LABEL_56;
-        v59 = v7->MonoVertices.Size >> 4;
-        if ( v59 >= v7->MonoVertices.NumPages )
+        v58 = this->MonoVertices.Size >> 4;
+        if ( v58 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-            v7->MonoVertices.Size >> 4);
-        v60 = v7->MonoVertices.Pages[v59];
-        v11 = v92;
-        v61 = v7->MonoVertices.Size & 0xF;
-        *(_QWORD *)&v60[v61].srcVer = v100;
-        v60[v61].next = 0i64;
-        *(_QWORD *)(v58 + 8) = &v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                          - 1) & 0xF];
-        v14->d.m.prevIdx2 = v14->d.m.prevIdx1;
-        v14->d.m.prevIdx1 = v14->d.m.lastIdx;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v59 = this->MonoVertices.Pages[v58];
+        vertex = v91;
+        v60 = this->MonoVertices.Size & 0xF;
+        *(_QWORD *)&v59[v60].srcVer = v99;
+        v59[v60].next = 0i64;
+        v57->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+        v13->d.m.prevIdx2 = v13->d.m.prevIdx1;
+        v13->d.m.prevIdx1 = v13->d.m.lastIdx;
       }
       else
       {
-        v54 = v7->MonoVertices.Size >> 4;
-        if ( v54 >= v7->MonoVertices.NumPages )
+        v53 = this->MonoVertices.Size >> 4;
+        if ( v53 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-            v7->MonoVertices.Size >> 4);
-        v55 = v7->MonoVertices.Pages[v54];
-        v56 = v7->MonoVertices.Size & 0xF;
-        *(_QWORD *)&v55[v56].srcVer = v100;
-        v55[v56].next = 0i64;
-        v57 = (signed __int64)&v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                         - 1) & 0xF];
-        *(_QWORD *)&v14->d.t.numTriangles = -1i64;
-        v14->start = (Scaleform::Render::Tessellator::MonoVertexType *)v57;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v54 = this->MonoVertices.Pages[v53];
+        v55 = this->MonoVertices.Size & 0xF;
+        *(_QWORD *)&v54[v55].srcVer = v99;
+        v54[v55].next = 0i64;
+        v56 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+        *(_QWORD *)&v13->d.t.numTriangles = -1i64;
+        v13->start = v56;
       }
-      v14->d.m.lastIdx = LODWORD(v7->MonoVertices.Size) - 1;
+      v13->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
 LABEL_56:
-      if ( v11 != -1 )
+      if ( vertex != -1 )
       {
-        LODWORD(v102) = v11 & 0x7FFFFFFF;
-        HIDWORD(v102) = v11 & 0x7FFFFFFF;
-        if ( v14->start )
+        LODWORD(v101) = vertex & 0x7FFFFFFF;
+        HIDWORD(v101) = vertex & 0x7FFFFFFF;
+        if ( v13->start )
         {
-          v66 = (signed __int64)&v7->MonoVertices.Pages[(unsigned __int64)v14->d.m.lastIdx >> 4][v14->d.m.lastIdx & 0xF];
-          if ( *(_DWORD *)v66 != (v11 & 0x7FFFFFFF) )
+          v65 = &this->MonoVertices.Pages[(unsigned __int64)v13->d.m.lastIdx >> 4][v13->d.m.lastIdx & 0xF];
+          if ( v65->srcVer != (vertex & 0x7FFFFFFF) )
           {
-            v67 = v7->MonoVertices.Size >> 4;
-            if ( v67 >= v7->MonoVertices.NumPages )
+            v66 = this->MonoVertices.Size >> 4;
+            if ( v66 >= this->MonoVertices.NumPages )
               Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-                v7->MonoVertices.Size >> 4);
-            v68 = v7->MonoVertices.Pages[v67];
-            v11 = v92;
-            v69 = v7->MonoVertices.Size & 0xF;
-            *(_QWORD *)&v68[v69].srcVer = v102;
-            v68[v69].next = 0i64;
-            *(_QWORD *)(v66 + 8) = &v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                              - 1) & 0xF];
-            v14->d.m.prevIdx2 = v14->d.m.prevIdx1;
-            v14->d.m.prevIdx1 = v14->d.m.lastIdx;
-            v14->d.m.lastIdx = LODWORD(v7->MonoVertices.Size) - 1;
+                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                this->MonoVertices.Size >> 4);
+            v67 = this->MonoVertices.Pages[v66];
+            vertex = v91;
+            v68 = this->MonoVertices.Size & 0xF;
+            *(_QWORD *)&v67[v68].srcVer = v101;
+            v67[v68].next = 0i64;
+            v65->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+            v13->d.m.prevIdx2 = v13->d.m.prevIdx1;
+            v13->d.m.prevIdx1 = v13->d.m.lastIdx;
+            v13->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
           }
         }
         else
         {
-          v62 = v7->MonoVertices.Size >> 4;
-          if ( v62 >= v7->MonoVertices.NumPages )
+          v61 = this->MonoVertices.Size >> 4;
+          if ( v61 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-              v7->MonoVertices.Size >> 4);
-          v63 = v7->MonoVertices.Pages[v62];
-          v64 = v7->MonoVertices.Size & 0xF;
-          *(_QWORD *)&v63[v64].srcVer = v102;
-          v63[v64].next = 0i64;
-          v65 = (signed __int64)&v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                           - 1) & 0xF];
-          *(_QWORD *)&v14->d.t.numTriangles = -1i64;
-          v14->start = (Scaleform::Render::Tessellator::MonoVertexType *)v65;
-          v14->d.m.lastIdx = LODWORD(v7->MonoVertices.Size) - 1;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v62 = this->MonoVertices.Pages[v61];
+          v63 = this->MonoVertices.Size & 0xF;
+          *(_QWORD *)&v62[v63].srcVer = v101;
+          v62[v63].next = 0i64;
+          v64 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+          *(_QWORD *)&v13->d.t.numTriangles = -1i64;
+          v13->start = v64;
+          v13->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
         }
       }
       goto LABEL_66;
     }
-    if ( v10 != v11 )
+    if ( vertexLeft != vertex )
     {
-      Scaleform::Render::Tessellator::replaceMonotone(v7, v6, v16);
-      v19 = v6->monotone;
+      Scaleform::Render::Tessellator::replaceMonotone(this, v6, v15);
+      v18 = v6->monotone;
       if ( v5 == -1 )
         goto LABEL_26;
-      v20 = v5 | 0x80000000;
-      LODWORD(v99) = v5 | 0x80000000;
-      HIDWORD(v99) = v5 | 0x80000000;
-      if ( v19->start )
+      v19 = v5 | 0x80000000;
+      LODWORD(v98) = v5 | 0x80000000;
+      HIDWORD(v98) = v5 | 0x80000000;
+      if ( v18->start )
       {
-        v25 = (signed __int64)&v7->MonoVertices.Pages[(unsigned __int64)v19->d.m.lastIdx >> 4][v19->d.m.lastIdx & 0xF];
-        if ( *(_DWORD *)v25 == v20 )
+        v24 = &this->MonoVertices.Pages[(unsigned __int64)v18->d.m.lastIdx >> 4][v18->d.m.lastIdx & 0xF];
+        if ( v24->srcVer == v19 )
           goto LABEL_17;
-        v26 = v7->MonoVertices.Size >> 4;
-        if ( v26 >= v7->MonoVertices.NumPages )
+        v25 = this->MonoVertices.Size >> 4;
+        if ( v25 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-            v7->MonoVertices.Size >> 4);
-        v27 = v7->MonoVertices.Pages[v26];
-        v28 = v7->MonoVertices.Size & 0xF;
-        *(_QWORD *)&v27[v28].srcVer = v99;
-        v27[v28].next = 0i64;
-        *(_QWORD *)(v25 + 8) = &v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                          - 1) & 0xF];
-        v19->d.m.prevIdx2 = v19->d.m.prevIdx1;
-        v19->d.m.prevIdx1 = v19->d.m.lastIdx;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v26 = this->MonoVertices.Pages[v25];
+        v27 = this->MonoVertices.Size & 0xF;
+        *(_QWORD *)&v26[v27].srcVer = v98;
+        v26[v27].next = 0i64;
+        v24->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+        v18->d.m.prevIdx2 = v18->d.m.prevIdx1;
+        v18->d.m.prevIdx1 = v18->d.m.lastIdx;
       }
       else
       {
-        v21 = v7->MonoVertices.Size >> 4;
-        if ( v21 >= v7->MonoVertices.NumPages )
+        v20 = this->MonoVertices.Size >> 4;
+        if ( v20 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-            v7->MonoVertices.Size >> 4);
-        v22 = v7->MonoVertices.Pages[v21];
-        v23 = v7->MonoVertices.Size & 0xF;
-        *(_QWORD *)&v22[v23].srcVer = v99;
-        v22[v23].next = 0i64;
-        v24 = (signed __int64)&v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                         - 1) & 0xF];
-        *(_QWORD *)&v19->d.t.numTriangles = -1i64;
-        v19->start = (Scaleform::Render::Tessellator::MonoVertexType *)v24;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v21 = this->MonoVertices.Pages[v20];
+        v22 = this->MonoVertices.Size & 0xF;
+        *(_QWORD *)&v21[v22].srcVer = v98;
+        v21[v22].next = 0i64;
+        v23 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+        *(_QWORD *)&v18->d.t.numTriangles = -1i64;
+        v18->start = v23;
       }
-      v19->d.m.lastIdx = LODWORD(v7->MonoVertices.Size) - 1;
+      v18->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
 LABEL_17:
-      LODWORD(v101) = v110 & 0x7FFFFFFF;
-      HIDWORD(v101) = v110 & 0x7FFFFFFF;
-      if ( v19->start )
+      LODWORD(v100) = targetVertex & 0x7FFFFFFF;
+      HIDWORD(v100) = targetVertex & 0x7FFFFFFF;
+      if ( v18->start )
       {
-        v33 = (signed __int64)&v7->MonoVertices.Pages[(unsigned __int64)v19->d.m.lastIdx >> 4][v19->d.m.lastIdx & 0xF];
-        if ( *(_DWORD *)v33 == (v110 & 0x7FFFFFFF) )
+        v32 = &this->MonoVertices.Pages[(unsigned __int64)v18->d.m.lastIdx >> 4][v18->d.m.lastIdx & 0xF];
+        if ( v32->srcVer == (targetVertex & 0x7FFFFFFF) )
           goto LABEL_26;
-        v34 = v7->MonoVertices.Size >> 4;
-        if ( v34 >= v7->MonoVertices.NumPages )
+        v33 = this->MonoVertices.Size >> 4;
+        if ( v33 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-            v7->MonoVertices.Size >> 4);
-        v35 = v7->MonoVertices.Pages[v34];
-        v36 = v7->MonoVertices.Size & 0xF;
-        *(_QWORD *)&v35[v36].srcVer = v101;
-        v35[v36].next = 0i64;
-        *(_QWORD *)(v33 + 8) = &v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                          - 1) & 0xF];
-        v19->d.m.prevIdx2 = v19->d.m.prevIdx1;
-        v19->d.m.prevIdx1 = v19->d.m.lastIdx;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v34 = this->MonoVertices.Pages[v33];
+        v35 = this->MonoVertices.Size & 0xF;
+        *(_QWORD *)&v34[v35].srcVer = v100;
+        v34[v35].next = 0i64;
+        v32->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+        v18->d.m.prevIdx2 = v18->d.m.prevIdx1;
+        v18->d.m.prevIdx1 = v18->d.m.lastIdx;
       }
       else
       {
-        v29 = v7->MonoVertices.Size >> 4;
-        if ( v29 >= v7->MonoVertices.NumPages )
+        v28 = this->MonoVertices.Size >> 4;
+        if ( v28 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-            v7->MonoVertices.Size >> 4);
-        v30 = v7->MonoVertices.Pages[v29];
-        v31 = v7->MonoVertices.Size & 0xF;
-        *(_QWORD *)&v30[v31].srcVer = v101;
-        v30[v31].next = 0i64;
-        v32 = (signed __int64)&v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                         - 1) & 0xF];
-        *(_QWORD *)&v19->d.t.numTriangles = -1i64;
-        v19->start = (Scaleform::Render::Tessellator::MonoVertexType *)v32;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v29 = this->MonoVertices.Pages[v28];
+        v30 = this->MonoVertices.Size & 0xF;
+        *(_QWORD *)&v29[v30].srcVer = v100;
+        v29[v30].next = 0i64;
+        v31 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+        *(_QWORD *)&v18->d.t.numTriangles = -1i64;
+        v18->start = v31;
       }
-      v19->d.m.lastIdx = LODWORD(v7->MonoVertices.Size) - 1;
+      v18->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
 LABEL_26:
-      v37 = v6->monotone;
-      if ( v10 == -1 )
+      v36 = v6->monotone;
+      if ( vertexLeft == -1 )
         goto LABEL_36;
-      LODWORD(v105) = v10 | 0x80000000;
-      HIDWORD(v105) = v10 | 0x80000000;
-      if ( v37->start )
+      LODWORD(v104) = vertexLeft | 0x80000000;
+      HIDWORD(v104) = vertexLeft | 0x80000000;
+      if ( v36->start )
       {
-        v42 = (signed __int64)&v7->MonoVertices.Pages[(unsigned __int64)v37->d.m.lastIdx >> 4][v37->d.m.lastIdx & 0xF];
-        if ( *(_DWORD *)v42 == (v10 | 0x80000000) )
+        v41 = &this->MonoVertices.Pages[(unsigned __int64)v36->d.m.lastIdx >> 4][v36->d.m.lastIdx & 0xF];
+        if ( v41->srcVer == (vertexLeft | 0x80000000) )
           goto LABEL_36;
-        v43 = v7->MonoVertices.Size >> 4;
-        if ( v43 >= v7->MonoVertices.NumPages )
+        v42 = this->MonoVertices.Size >> 4;
+        if ( v42 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-            v7->MonoVertices.Size >> 4);
-        v44 = v7->MonoVertices.Pages[v43];
-        v45 = v7->MonoVertices.Size & 0xF;
-        *(_QWORD *)&v44[v45].srcVer = v105;
-        v44[v45].next = 0i64;
-        *(_QWORD *)(v42 + 8) = &v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                          - 1) & 0xF];
-        v37->d.m.prevIdx2 = v37->d.m.prevIdx1;
-        v37->d.m.prevIdx1 = v37->d.m.lastIdx;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v43 = this->MonoVertices.Pages[v42];
+        v44 = this->MonoVertices.Size & 0xF;
+        *(_QWORD *)&v43[v44].srcVer = v104;
+        v43[v44].next = 0i64;
+        v41->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+        v36->d.m.prevIdx2 = v36->d.m.prevIdx1;
+        v36->d.m.prevIdx1 = v36->d.m.lastIdx;
       }
       else
       {
-        v38 = v7->MonoVertices.Size >> 4;
-        if ( v38 >= v7->MonoVertices.NumPages )
+        v37 = this->MonoVertices.Size >> 4;
+        if ( v37 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-            v7->MonoVertices.Size >> 4);
-        v39 = v7->MonoVertices.Pages[v38];
-        v40 = v7->MonoVertices.Size & 0xF;
-        *(_QWORD *)&v39[v40].srcVer = v105;
-        v39[v40].next = 0i64;
-        v41 = (signed __int64)&v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                         - 1) & 0xF];
-        *(_QWORD *)&v37->d.t.numTriangles = -1i64;
-        v37->start = (Scaleform::Render::Tessellator::MonoVertexType *)v41;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v38 = this->MonoVertices.Pages[v37];
+        v39 = this->MonoVertices.Size & 0xF;
+        *(_QWORD *)&v38[v39].srcVer = v104;
+        v38[v39].next = 0i64;
+        v40 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+        *(_QWORD *)&v36->d.t.numTriangles = -1i64;
+        v36->start = v40;
       }
-      v37->d.m.lastIdx = LODWORD(v7->MonoVertices.Size) - 1;
+      v36->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
 LABEL_36:
-      v11 = v92;
-      if ( v92 != -1 )
+      vertex = v91;
+      if ( v91 != -1 )
       {
-        LODWORD(v103) = v92 & 0x7FFFFFFF;
-        HIDWORD(v103) = v92 & 0x7FFFFFFF;
-        if ( !v37->start )
+        LODWORD(v102) = v91 & 0x7FFFFFFF;
+        HIDWORD(v102) = v91 & 0x7FFFFFFF;
+        if ( !v36->start )
         {
-          v46 = v7->MonoVertices.Size >> 4;
-          if ( v46 >= v7->MonoVertices.NumPages )
+          v45 = this->MonoVertices.Size >> 4;
+          if ( v45 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-              v7->MonoVertices.Size >> 4);
-          v47 = v7->MonoVertices.Pages[v46];
-          v48 = v7->MonoVertices.Size & 0xF;
-          *(_QWORD *)&v47[v48].srcVer = v103;
-          v47[v48].next = 0i64;
-          v49 = (signed __int64)&v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                           - 1) & 0xF];
-          *(_QWORD *)&v37->d.t.numTriangles = -1i64;
-          v37->start = (Scaleform::Render::Tessellator::MonoVertexType *)v49;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v46 = this->MonoVertices.Pages[v45];
+          v47 = this->MonoVertices.Size & 0xF;
+          *(_QWORD *)&v46[v47].srcVer = v102;
+          v46[v47].next = 0i64;
+          v48 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+          *(_QWORD *)&v36->d.t.numTriangles = -1i64;
+          v36->start = v48;
 LABEL_41:
-          v14 = v95;
-          v11 = v92;
-          v37->d.m.lastIdx = LODWORD(v7->MonoVertices.Size) - 1;
+          v13 = v94;
+          vertex = v91;
+          v36->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
 LABEL_66:
-          v18 = v108;
+          rightAbove = styleLeft;
           goto LABEL_67;
         }
-        v50 = (signed __int64)&v7->MonoVertices.Pages[(unsigned __int64)v37->d.m.lastIdx >> 4][v37->d.m.lastIdx & 0xF];
-        if ( *(_DWORD *)v50 != (v92 & 0x7FFFFFFF) )
+        v49 = &this->MonoVertices.Pages[(unsigned __int64)v36->d.m.lastIdx >> 4][v36->d.m.lastIdx & 0xF];
+        if ( v49->srcVer != (v91 & 0x7FFFFFFF) )
         {
-          v51 = v7->MonoVertices.Size >> 4;
-          if ( v51 >= v7->MonoVertices.NumPages )
+          v50 = this->MonoVertices.Size >> 4;
+          if ( v50 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-              v7->MonoVertices.Size >> 4);
-          v52 = v7->MonoVertices.Pages[v51];
-          v53 = v7->MonoVertices.Size & 0xF;
-          *(_QWORD *)&v52[v53].srcVer = v103;
-          v52[v53].next = 0i64;
-          *(_QWORD *)(v50 + 8) = &v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                            - 1) & 0xF];
-          v37->d.m.prevIdx2 = v37->d.m.prevIdx1;
-          v37->d.m.prevIdx1 = v37->d.m.lastIdx;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v51 = this->MonoVertices.Pages[v50];
+          v52 = this->MonoVertices.Size & 0xF;
+          *(_QWORD *)&v51[v52].srcVer = v102;
+          v51[v52].next = 0i64;
+          v49->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+          v36->d.m.prevIdx2 = v36->d.m.prevIdx1;
+          v36->d.m.prevIdx1 = v36->d.m.lastIdx;
           goto LABEL_41;
         }
       }
-      v14 = v95;
+      v13 = v94;
       goto LABEL_66;
     }
 LABEL_67:
-    if ( v18 == style && v6->monotone )
+    if ( rightAbove == style && v6->monotone )
       goto LABEL_93;
-    if ( !v18 )
+    if ( !rightAbove )
     {
       v6->monotone = 0i64;
       goto LABEL_93;
     }
-    if ( v107 )
+    if ( v106 )
       v6 = scana;
-    Scaleform::Render::Tessellator::replaceMonotone(v7, v6, v18);
-    v70 = v6->monotone;
-    if ( v10 != -1 )
+    Scaleform::Render::Tessellator::replaceMonotone(this, v6, rightAbove);
+    v69 = v6->monotone;
+    if ( vertexLeft != -1 )
     {
-      v71 = v10 | 0x80000000;
-      LODWORD(v104) = v71;
-      HIDWORD(v104) = v71;
-      if ( !v70->start )
+      v70 = vertexLeft | 0x80000000;
+      LODWORD(v103) = v70;
+      HIDWORD(v103) = v70;
+      if ( !v69->start )
       {
-        v72 = v7->MonoVertices.Size >> 4;
-        if ( v72 >= v7->MonoVertices.NumPages )
+        v71 = this->MonoVertices.Size >> 4;
+        if ( v71 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-            v7->MonoVertices.Size >> 4);
-        v73 = v7->MonoVertices.Pages[v72];
-        v74 = v7->MonoVertices.Size & 0xF;
-        *(_QWORD *)&v73[v74].srcVer = v104;
-        v73[v74].next = 0i64;
-        v75 = (signed __int64)&v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                         - 1) & 0xF];
-        *(_QWORD *)&v70->d.t.numTriangles = -1i64;
-        v70->start = (Scaleform::Render::Tessellator::MonoVertexType *)v75;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v72 = this->MonoVertices.Pages[v71];
+        v73 = this->MonoVertices.Size & 0xF;
+        *(_QWORD *)&v72[v73].srcVer = v103;
+        v72[v73].next = 0i64;
+        v74 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+        *(_QWORD *)&v69->d.t.numTriangles = -1i64;
+        v69->start = v74;
 LABEL_82:
-        v70->d.m.lastIdx = LODWORD(v7->MonoVertices.Size) - 1;
+        v69->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
         goto LABEL_83;
       }
-      v76 = (signed __int64)&v7->MonoVertices.Pages[(unsigned __int64)v70->d.m.lastIdx >> 4][v70->d.m.lastIdx & 0xF];
-      if ( *(_DWORD *)v76 != v71 )
+      v75 = &this->MonoVertices.Pages[(unsigned __int64)v69->d.m.lastIdx >> 4][v69->d.m.lastIdx & 0xF];
+      if ( v75->srcVer != v70 )
       {
-        v77 = v7->MonoVertices.Size >> 4;
-        if ( v77 >= v7->MonoVertices.NumPages )
+        v76 = this->MonoVertices.Size >> 4;
+        if ( v76 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-            v7->MonoVertices.Size >> 4);
-        v78 = v7->MonoVertices.Pages[v77];
-        v79 = v7->MonoVertices.Size & 0xF;
-        *(_QWORD *)&v78[v79].srcVer = v104;
-        v78[v79].next = 0i64;
-        *(_QWORD *)(v76 + 8) = &v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                          - 1) & 0xF];
-        v70->d.m.prevIdx2 = v70->d.m.prevIdx1;
-        v70->d.m.prevIdx1 = v70->d.m.lastIdx;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v77 = this->MonoVertices.Pages[v76];
+        v78 = this->MonoVertices.Size & 0xF;
+        *(_QWORD *)&v77[v78].srcVer = v103;
+        v77[v78].next = 0i64;
+        v75->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+        v69->d.m.prevIdx2 = v69->d.m.prevIdx1;
+        v69->d.m.prevIdx1 = v69->d.m.lastIdx;
         goto LABEL_82;
       }
     }
 LABEL_83:
-    if ( v11 == -1 )
+    if ( vertex == -1 )
       goto LABEL_93;
-    LODWORD(v106) = v11 & 0x7FFFFFFF;
-    HIDWORD(v106) = v11 & 0x7FFFFFFF;
-    if ( v70->start )
+    LODWORD(v105) = vertex & 0x7FFFFFFF;
+    HIDWORD(v105) = vertex & 0x7FFFFFFF;
+    if ( v69->start )
     {
-      v84 = (signed __int64)&v7->MonoVertices.Pages[(unsigned __int64)v70->d.m.lastIdx >> 4][v70->d.m.lastIdx & 0xF];
-      if ( *(_DWORD *)v84 == (v11 & 0x7FFFFFFF) )
+      v83 = &this->MonoVertices.Pages[(unsigned __int64)v69->d.m.lastIdx >> 4][v69->d.m.lastIdx & 0xF];
+      if ( v83->srcVer == (vertex & 0x7FFFFFFF) )
         goto LABEL_93;
-      v85 = v7->MonoVertices.Size >> 4;
-      if ( v85 >= v7->MonoVertices.NumPages )
+      v84 = this->MonoVertices.Size >> 4;
+      if ( v84 >= this->MonoVertices.NumPages )
         Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-          (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-          v7->MonoVertices.Size >> 4);
-      v86 = v7->MonoVertices.Pages[v85];
-      v87 = v7->MonoVertices.Size & 0xF;
-      *(_QWORD *)&v86[v87].srcVer = v106;
-      v86[v87].next = 0i64;
-      *(_QWORD *)(v84 + 8) = &v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                        - 1) & 0xF];
-      v70->d.m.prevIdx2 = v70->d.m.prevIdx1;
-      v70->d.m.prevIdx1 = v70->d.m.lastIdx;
+          (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+          this->MonoVertices.Size >> 4);
+      v85 = this->MonoVertices.Pages[v84];
+      v86 = this->MonoVertices.Size & 0xF;
+      *(_QWORD *)&v85[v86].srcVer = v105;
+      v85[v86].next = 0i64;
+      v83->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+      v69->d.m.prevIdx2 = v69->d.m.prevIdx1;
+      v69->d.m.prevIdx1 = v69->d.m.lastIdx;
     }
     else
     {
-      v80 = v7->MonoVertices.Size >> 4;
-      if ( v80 >= v7->MonoVertices.NumPages )
+      v79 = this->MonoVertices.Size >> 4;
+      if ( v79 >= this->MonoVertices.NumPages )
         Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-          (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-          v7->MonoVertices.Size >> 4);
-      v81 = v7->MonoVertices.Pages[v80];
-      v82 = v7->MonoVertices.Size & 0xF;
-      *(_QWORD *)&v81[v82].srcVer = v106;
-      v81[v82].next = 0i64;
-      v83 = (signed __int64)&v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                       - 1) & 0xF];
-      *(_QWORD *)&v70->d.t.numTriangles = -1i64;
-      v70->start = (Scaleform::Render::Tessellator::MonoVertexType *)v83;
+          (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+          this->MonoVertices.Size >> 4);
+      v80 = this->MonoVertices.Pages[v79];
+      v81 = this->MonoVertices.Size & 0xF;
+      *(_QWORD *)&v80[v81].srcVer = v105;
+      v80[v81].next = 0i64;
+      v82 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+      *(_QWORD *)&v69->d.t.numTriangles = -1i64;
+      v69->start = v82;
     }
-    v70->d.m.lastIdx = LODWORD(v7->MonoVertices.Size) - 1;
+    v69->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
 LABEL_93:
-    v107 = 0;
-    if ( !v94 )
+    v106 = 0;
+    if ( !v93 )
       break;
-    v88 = v7->ChainsAbove.Pages;
-    v9 = v94 - 1;
-    v89 = v98 + 1;
-    v94 = v9;
-    v10 = v11;
-    v90 = (unsigned __int64)v98 >> 4;
-    v91 = v98++ & 0xF;
-    v6 = &v88[v90][v91];
-    if ( v9 )
-      v11 = v88[(unsigned __int64)v89 >> 4][v89 & 0xF].vertex;
+    Pages = this->ChainsAbove.Pages;
+    numChains = v93 - 1;
+    v88 = firstChain + 1;
+    v93 = numChains;
+    vertexLeft = vertex;
+    v89 = (unsigned __int64)firstChain >> 4;
+    v90 = firstChain++ & 0xF;
+    v6 = &Pages[v89][v90];
+    if ( numChains )
+      vertex = Pages[(unsigned __int64)v88 >> 4][v88 & 0xF].vertex;
     else
-      v11 = v96;
-    v5 = v110;
-    v16 = style;
-    v18 = v6->chain->rightAbove;
-    v92 = v11;
-    v108 = v6->chain->rightAbove;
+      vertex = vertexRight;
+    v5 = targetVertex;
+    v15 = style;
+    rightAbove = v6->chain->rightAbove;
+    v91 = vertex;
+    styleLeft = rightAbove;
   }
-  v109->numChains = 0;
-}D(v7->MonoVertices.Size) - 1;
-LABEL_93:
-    v107 = 0;
-    if ( !v94 )
-      break;
-    v88 = v7->ChainsAbove.Pages;
-    v9 = v94 - 1;
-    v89 = v98 + 1;
-    v94 = v9;
-    v10 = v11;
-    v90 = (unsigned __int64)v98 >> 4;
-    v91 = v98++ & 0xF;
-    v6 = &v88[v90][v91];
-    if ( v9 )
-      v11 = v88[(unsigned __int64)v89 >> 4][v89 & 0xF].vertex;
-    else
-      v11 = v96;
-    v5 = v110
+  upperBase->numChains = 0;
+}
 
 // File Line: 1235
 // RVA: 0x9DAF10
-void __fastcall Scaleform::Render::Tessellator::connectStartingToRight(Scaleform::Render::Tessellator *this, Scaleform::Render::Tessellator::ScanChainType *scan, Scaleform::Render::Tessellator::BaseLineType *upperBase, unsigned int targetVertex)
+void __fastcall Scaleform::Render::Tessellator::connectStartingToRight(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::Tessellator::ScanChainType *scan,
+        Scaleform::Render::Tessellator::BaseLineType *upperBase,
+        unsigned int targetVertex)
 {
-  unsigned __int64 v4; // rax
+  unsigned __int64 leftAbove; // rax
   unsigned int v5; // esi
   Scaleform::Render::Tessellator::ScanChainType *v6; // r14
-  Scaleform::Render::Tessellator *v7; // rbx
-  unsigned int v8; // eax
-  unsigned int v9; // er15
-  char v10; // di
-  unsigned int v11; // er13
-  unsigned int v12; // ecx
-  unsigned int v13; // eax
-  Scaleform::Render::Tessellator::MonotoneType *v14; // rdi
-  unsigned __int64 v15; // r12
-  Scaleform::Render::Tessellator::MonoVertexType *v16; // rdx
-  signed __int64 v17; // rcx
-  signed __int64 v18; // rdx
-  signed __int64 v19; // rsi
-  unsigned __int64 v20; // r12
-  Scaleform::Render::Tessellator::MonoVertexType *v21; // rdx
-  signed __int64 v22; // rcx
-  unsigned __int64 v23; // r12
-  Scaleform::Render::Tessellator::MonoVertexType *v24; // rdx
-  signed __int64 v25; // rcx
-  signed __int64 v26; // rdx
-  signed __int64 v27; // rsi
-  signed __int64 v28; // r13
-  unsigned __int64 v29; // r12
-  Scaleform::Render::Tessellator::MonoVertexType *v30; // rdx
-  __int64 v31; // rax
-  Scaleform::Render::Tessellator::MonotoneType *v32; // rdi
-  unsigned int v33; // edx
-  unsigned __int64 v34; // r12
-  Scaleform::Render::Tessellator::MonoVertexType *v35; // rdx
-  signed __int64 v36; // rcx
-  signed __int64 v37; // rdx
-  signed __int64 v38; // rsi
-  unsigned __int64 v39; // r12
-  Scaleform::Render::Tessellator::MonoVertexType *v40; // rdx
-  signed __int64 v41; // rcx
-  unsigned __int64 v42; // r12
-  Scaleform::Render::Tessellator::MonoVertexType *v43; // rdx
-  signed __int64 v44; // rcx
-  signed __int64 v45; // rdx
-  signed __int64 v46; // rsi
-  unsigned __int64 v47; // r12
-  Scaleform::Render::Tessellator::MonoVertexType *v48; // rdx
-  signed __int64 v49; // rcx
-  unsigned __int64 v50; // r12
-  Scaleform::Render::Tessellator::MonoVertexType *v51; // rdx
-  signed __int64 v52; // rcx
-  signed __int64 v53; // rdx
-  signed __int64 v54; // rsi
-  unsigned __int64 v55; // r12
-  Scaleform::Render::Tessellator::MonoVertexType *v56; // rdx
-  signed __int64 v57; // rcx
-  unsigned __int64 v58; // r12
-  Scaleform::Render::Tessellator::MonoVertexType *v59; // rdx
-  signed __int64 v60; // rcx
-  signed __int64 v61; // rdx
-  unsigned __int64 v62; // r12
-  signed __int64 v63; // rcx
-  __int64 v64; // rax
-  __int64 v65; // rdx
-  Scaleform::Render::Tessellator::MonotoneType *v66; // rdi
-  unsigned int v67; // er15
-  unsigned __int64 v68; // r14
-  Scaleform::Render::Tessellator::MonoVertexType *v69; // rdx
-  signed __int64 v70; // rcx
-  signed __int64 v71; // rdx
-  signed __int64 v72; // rsi
-  unsigned __int64 v73; // r15
-  Scaleform::Render::Tessellator::MonoVertexType *v74; // rdx
-  signed __int64 v75; // rcx
-  unsigned __int64 v76; // r14
-  Scaleform::Render::Tessellator::MonoVertexType *v77; // rdx
-  signed __int64 v78; // rcx
-  signed __int64 v79; // rdx
-  signed __int64 v80; // rsi
-  unsigned __int64 v81; // r15
-  Scaleform::Render::Tessellator::MonoVertexType *v82; // rdx
-  signed __int64 v83; // rcx
-  unsigned int v84; // er10
-  Scaleform::Render::Tessellator::ScanChainType **v85; // rdx
-  unsigned int v86; // er9
-  unsigned __int64 v87; // rax
-  signed __int64 v88; // rcx
-  unsigned int v89; // [rsp+20h] [rbp-89h]
-  unsigned int v90; // [rsp+24h] [rbp-85h]
-  unsigned int v91; // [rsp+28h] [rbp-81h]
-  unsigned int v92; // [rsp+2Ch] [rbp-7Dh]
+  unsigned int vertexLeft; // r15d
+  char v9; // di
+  unsigned int vertex; // r13d
+  unsigned int v11; // ecx
+  unsigned int rightAbove; // eax
+  Scaleform::Render::Tessellator::MonotoneType *monotone; // rdi
+  unsigned __int64 v14; // r12
+  Scaleform::Render::Tessellator::MonoVertexType *v15; // rdx
+  __int64 v16; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v17; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v18; // rsi
+  unsigned __int64 v19; // r12
+  Scaleform::Render::Tessellator::MonoVertexType *v20; // rdx
+  __int64 v21; // rcx
+  unsigned __int64 v22; // r12
+  Scaleform::Render::Tessellator::MonoVertexType *v23; // rdx
+  __int64 v24; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v25; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v26; // rsi
+  Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoVertexType,4,16> *p_MonoVertices; // r13
+  unsigned __int64 v28; // r12
+  Scaleform::Render::Tessellator::MonoVertexType *v29; // rdx
+  __int64 v30; // rax
+  Scaleform::Render::Tessellator::MonotoneType *v31; // rdi
+  unsigned int v32; // edx
+  unsigned __int64 v33; // r12
+  Scaleform::Render::Tessellator::MonoVertexType *v34; // rdx
+  __int64 v35; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v36; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v37; // rsi
+  unsigned __int64 v38; // r12
+  Scaleform::Render::Tessellator::MonoVertexType *v39; // rdx
+  __int64 v40; // rcx
+  unsigned __int64 v41; // r12
+  Scaleform::Render::Tessellator::MonoVertexType *v42; // rdx
+  __int64 v43; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v44; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v45; // rsi
+  unsigned __int64 v46; // r12
+  Scaleform::Render::Tessellator::MonoVertexType *v47; // rdx
+  __int64 v48; // rcx
+  unsigned __int64 v49; // r12
+  Scaleform::Render::Tessellator::MonoVertexType *v50; // rdx
+  __int64 v51; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v52; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v53; // rsi
+  unsigned __int64 v54; // r12
+  Scaleform::Render::Tessellator::MonoVertexType *v55; // rdx
+  __int64 v56; // rcx
+  unsigned __int64 v57; // r12
+  Scaleform::Render::Tessellator::MonoVertexType *v58; // rdx
+  __int64 v59; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v60; // rdx
+  unsigned __int64 v61; // r12
+  __int64 v62; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType **Pages; // rax
+  unsigned __int64 Size; // rdx
+  Scaleform::Render::Tessellator::MonotoneType *v65; // rdi
+  unsigned int v66; // r15d
+  unsigned __int64 v67; // r14
+  Scaleform::Render::Tessellator::MonoVertexType *v68; // rdx
+  __int64 v69; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v70; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v71; // rsi
+  unsigned __int64 v72; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v73; // rdx
+  __int64 v74; // rcx
+  unsigned __int64 v75; // r14
+  Scaleform::Render::Tessellator::MonoVertexType *v76; // rdx
+  __int64 v77; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v78; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v79; // rsi
+  unsigned __int64 v80; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v81; // rdx
+  __int64 v82; // rcx
+  unsigned int v83; // r10d
+  Scaleform::Render::Tessellator::ScanChainType **v84; // rdx
+  unsigned int v85; // r9d
+  unsigned __int64 v86; // rax
+  __int64 v87; // rcx
+  unsigned int v88; // [rsp+20h] [rbp-89h]
+  unsigned int v89; // [rsp+24h] [rbp-85h]
+  unsigned int numChains; // [rsp+28h] [rbp-81h]
+  unsigned int vertexRight; // [rsp+2Ch] [rbp-7Dh]
   Scaleform::Render::Tessellator::ScanChainType *scana; // [rsp+30h] [rbp-79h]
-  unsigned int v94; // [rsp+38h] [rbp-71h]
-  __int64 v95; // [rsp+40h] [rbp-69h]
-  __int64 v96; // [rsp+50h] [rbp-59h]
-  __int64 v97; // [rsp+60h] [rbp-49h]
-  __int64 v98; // [rsp+70h] [rbp-39h]
-  __int64 v99; // [rsp+80h] [rbp-29h]
-  __int64 v100; // [rsp+90h] [rbp-19h]
-  __int64 v101; // [rsp+A0h] [rbp-9h]
-  __int64 v102; // [rsp+B0h] [rbp+7h]
-  char v103; // [rsp+110h] [rbp+67h]
+  unsigned int firstChain; // [rsp+38h] [rbp-71h]
+  __int64 v94; // [rsp+40h] [rbp-69h]
+  __int64 v95; // [rsp+50h] [rbp-59h]
+  __int64 v96; // [rsp+60h] [rbp-49h]
+  __int64 v97; // [rsp+70h] [rbp-39h]
+  __int64 v98; // [rsp+80h] [rbp-29h]
+  __int64 v99; // [rsp+90h] [rbp-19h]
+  __int64 v100; // [rsp+A0h] [rbp-9h]
+  __int64 v101; // [rsp+B0h] [rbp+7h]
+  char v102; // [rsp+110h] [rbp+67h]
   unsigned int style; // [rsp+118h] [rbp+6Fh]
-  Scaleform::Render::Tessellator::BaseLineType *v105; // [rsp+120h] [rbp+77h]
-  unsigned int v106; // [rsp+128h] [rbp+7Fh]
 
-  v106 = targetVertex;
-  v105 = upperBase;
-  v4 = upperBase->leftAbove;
+  leftAbove = upperBase->leftAbove;
   v5 = targetVertex;
   v6 = scan;
-  v7 = this;
-  if ( (_DWORD)v4 == -1 )
+  if ( (_DWORD)leftAbove == -1 )
     scana = scan;
   else
-    scana = &this->ChainsAbove.Pages[v4 >> 4][v4 & 0xF];
-  v8 = upperBase->firstChain;
-  v9 = upperBase->vertexLeft;
-  v94 = v8;
-  v91 = upperBase->numChains;
-  v92 = upperBase->vertexRight;
-  v10 = 1;
-  v11 = this->ChainsAbove.Pages[(unsigned __int64)v8 >> 4][v8 & 0xF].vertex;
-  v103 = 1;
+    scana = &this->ChainsAbove.Pages[leftAbove >> 4][leftAbove & 0xF];
+  vertexLeft = upperBase->vertexLeft;
+  firstChain = upperBase->firstChain;
+  numChains = upperBase->numChains;
+  vertexRight = upperBase->vertexRight;
+  v9 = 1;
+  vertex = this->ChainsAbove.Pages[(unsigned __int64)firstChain >> 4][firstChain & 0xF].vertex;
+  v102 = 1;
   style = upperBase->styleLeft;
-  v12 = scan->monotone->style;
-  v13 = upperBase->styleLeft;
-  v90 = scan->monotone->style;
+  v11 = scan->monotone->style;
+  rightAbove = style;
+  v89 = v11;
   while ( 1 )
   {
-    v89 = v11;
-    if ( v10 )
+    v88 = vertex;
+    if ( v9 )
     {
-      v14 = v6->monotone;
-      if ( v9 != -1 )
+      monotone = v6->monotone;
+      if ( vertexLeft != -1 )
       {
-        LODWORD(v95) = v9 | 0x80000000;
-        HIDWORD(v95) = v9 | 0x80000000;
-        if ( !v14->start )
+        LODWORD(v94) = vertexLeft | 0x80000000;
+        HIDWORD(v94) = vertexLeft | 0x80000000;
+        if ( !monotone->start )
         {
-          v15 = v7->MonoVertices.Size >> 4;
-          if ( v15 >= v7->MonoVertices.NumPages )
+          v14 = this->MonoVertices.Size >> 4;
+          if ( v14 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-              v7->MonoVertices.Size >> 4);
-          v16 = v7->MonoVertices.Pages[v15];
-          v17 = v7->MonoVertices.Size & 0xF;
-          *(_QWORD *)&v16[v17].srcVer = v95;
-          v16[v17].next = 0i64;
-          v18 = (signed __int64)&v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                           - 1) & 0xF];
-          *(_QWORD *)&v14->d.t.numTriangles = -1i64;
-          v14->start = (Scaleform::Render::Tessellator::MonoVertexType *)v18;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v15 = this->MonoVertices.Pages[v14];
+          v16 = this->MonoVertices.Size & 0xF;
+          *(_QWORD *)&v15[v16].srcVer = v94;
+          v15[v16].next = 0i64;
+          v17 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+          *(_QWORD *)&monotone->d.t.numTriangles = -1i64;
+          monotone->start = v17;
 LABEL_15:
-          v14->d.m.lastIdx = LODWORD(v7->MonoVertices.Size) - 1;
+          monotone->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
           goto LABEL_16;
         }
-        v19 = (signed __int64)&v7->MonoVertices.Pages[(unsigned __int64)v14->d.m.lastIdx >> 4][v14->d.m.lastIdx & 0xF];
-        if ( *(_DWORD *)v19 != (v9 | 0x80000000) )
+        v18 = &this->MonoVertices.Pages[(unsigned __int64)monotone->d.m.lastIdx >> 4][monotone->d.m.lastIdx & 0xF];
+        if ( v18->srcVer != (vertexLeft | 0x80000000) )
         {
-          v20 = v7->MonoVertices.Size >> 4;
-          if ( v20 >= v7->MonoVertices.NumPages )
+          v19 = this->MonoVertices.Size >> 4;
+          if ( v19 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-              v7->MonoVertices.Size >> 4);
-          v21 = v7->MonoVertices.Pages[v20];
-          v22 = v7->MonoVertices.Size & 0xF;
-          *(_QWORD *)&v21[v22].srcVer = v95;
-          v21[v22].next = 0i64;
-          *(_QWORD *)(v19 + 8) = &v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                            - 1) & 0xF];
-          v14->d.m.prevIdx2 = v14->d.m.prevIdx1;
-          v14->d.m.prevIdx1 = v14->d.m.lastIdx;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v20 = this->MonoVertices.Pages[v19];
+          v21 = this->MonoVertices.Size & 0xF;
+          *(_QWORD *)&v20[v21].srcVer = v94;
+          v20[v21].next = 0i64;
+          ++this->MonoVertices.Size;
+          v18->next = &this->MonoVertices.Pages[(this->MonoVertices.Size - 1) >> 4][((unsigned int)this->MonoVertices.Size
+                                                                                   - 1) & 0xF];
+          monotone->d.m.prevIdx2 = monotone->d.m.prevIdx1;
+          monotone->d.m.prevIdx1 = monotone->d.m.lastIdx;
           goto LABEL_15;
         }
       }
 LABEL_16:
-      if ( v11 != -1 )
+      if ( vertex != -1 )
       {
-        LODWORD(v97) = v11 & 0x7FFFFFFF;
-        HIDWORD(v97) = v11 & 0x7FFFFFFF;
-        if ( !v14->start )
+        LODWORD(v96) = vertex & 0x7FFFFFFF;
+        HIDWORD(v96) = vertex & 0x7FFFFFFF;
+        if ( !monotone->start )
         {
-          v23 = v7->MonoVertices.Size >> 4;
-          if ( v23 >= v7->MonoVertices.NumPages )
+          v22 = this->MonoVertices.Size >> 4;
+          if ( v22 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-              v7->MonoVertices.Size >> 4);
-          v24 = v7->MonoVertices.Pages[v23];
-          v25 = v7->MonoVertices.Size & 0xF;
-          *(_QWORD *)&v24[v25].srcVer = v97;
-          v24[v25].next = 0i64;
-          v26 = (signed __int64)&v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                           - 1) & 0xF];
-          *(_QWORD *)&v14->d.t.numTriangles = -1i64;
-          v14->start = (Scaleform::Render::Tessellator::MonoVertexType *)v26;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v23 = this->MonoVertices.Pages[v22];
+          v24 = this->MonoVertices.Size & 0xF;
+          *(_QWORD *)&v23[v24].srcVer = v96;
+          v23[v24].next = 0i64;
+          v25 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+          *(_QWORD *)&monotone->d.t.numTriangles = -1i64;
+          monotone->start = v25;
           goto LABEL_64;
         }
-        v27 = (signed __int64)&v7->MonoVertices.Pages[(unsigned __int64)v14->d.m.lastIdx >> 4][v14->d.m.lastIdx & 0xF];
-        if ( *(_DWORD *)v27 != (v11 & 0x7FFFFFFF) )
+        v26 = &this->MonoVertices.Pages[(unsigned __int64)monotone->d.m.lastIdx >> 4][monotone->d.m.lastIdx & 0xF];
+        if ( v26->srcVer != (vertex & 0x7FFFFFFF) )
         {
-          v28 = (signed __int64)&v7->MonoVertices;
-          v29 = v7->MonoVertices.Size >> 4;
-          if ( v29 >= v7->MonoVertices.NumPages )
+          p_MonoVertices = &this->MonoVertices;
+          v28 = this->MonoVertices.Size >> 4;
+          if ( v28 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-              v7->MonoVertices.Size >> 4);
-          v30 = v7->MonoVertices.Pages[v29];
-          v31 = v97;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v29 = this->MonoVertices.Pages[v28];
+          v30 = v96;
 LABEL_63:
-          v63 = *(_DWORD *)(v28 + 8) & 0xF;
-          *(_QWORD *)&v30[v63].srcVer = v31;
-          v30[v63].next = 0i64;
-          ++*(_QWORD *)(v28 + 8);
-          v64 = *(_QWORD *)(v28 + 32);
-          v65 = *(_QWORD *)(v28 + 8);
-          v11 = v89;
-          *(_QWORD *)(v27 + 8) = *(_QWORD *)(v64 + 8 * ((unsigned __int64)(v65 - 1) >> 4))
-                               + 16i64 * (((_DWORD)v65 - 1) & 0xF);
-          v14->d.m.prevIdx2 = v14->d.m.prevIdx1;
-          v14->d.m.prevIdx1 = v14->d.m.lastIdx;
+          v62 = p_MonoVertices->Size & 0xF;
+          *(_QWORD *)&v29[v62].srcVer = v30;
+          v29[v62].next = 0i64;
+          ++p_MonoVertices->Size;
+          Pages = p_MonoVertices->Pages;
+          Size = p_MonoVertices->Size;
+          vertex = v88;
+          v26->next = &Pages[(Size - 1) >> 4][((_DWORD)Size - 1) & 0xF];
+          monotone->d.m.prevIdx2 = monotone->d.m.prevIdx1;
+          monotone->d.m.prevIdx1 = monotone->d.m.lastIdx;
 LABEL_64:
-          v14->d.m.lastIdx = LODWORD(v7->MonoVertices.Size) - 1;
+          monotone->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
           goto LABEL_65;
         }
       }
       goto LABEL_65;
     }
-    if ( v9 != v11 )
+    if ( vertexLeft != vertex )
     {
-      Scaleform::Render::Tessellator::replaceMonotone(v7, v6, v12);
-      v32 = v6->monotone;
+      Scaleform::Render::Tessellator::replaceMonotone(this, v6, v11);
+      v31 = v6->monotone;
       if ( v5 == -1 )
         goto LABEL_45;
-      v33 = v5 | 0x80000000;
-      LODWORD(v101) = v5 | 0x80000000;
-      HIDWORD(v101) = v5 | 0x80000000;
-      if ( v32->start )
+      v32 = v5 | 0x80000000;
+      LODWORD(v100) = v5 | 0x80000000;
+      HIDWORD(v100) = v5 | 0x80000000;
+      if ( v31->start )
       {
-        v38 = (signed __int64)&v7->MonoVertices.Pages[(unsigned __int64)v32->d.m.lastIdx >> 4][v32->d.m.lastIdx & 0xF];
-        if ( *(_DWORD *)v38 == v33 )
+        v37 = &this->MonoVertices.Pages[(unsigned __int64)v31->d.m.lastIdx >> 4][v31->d.m.lastIdx & 0xF];
+        if ( v37->srcVer == v32 )
           goto LABEL_36;
-        v39 = v7->MonoVertices.Size >> 4;
-        if ( v39 >= v7->MonoVertices.NumPages )
+        v38 = this->MonoVertices.Size >> 4;
+        if ( v38 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-            v7->MonoVertices.Size >> 4);
-        v40 = v7->MonoVertices.Pages[v39];
-        v41 = v7->MonoVertices.Size & 0xF;
-        *(_QWORD *)&v40[v41].srcVer = v101;
-        v40[v41].next = 0i64;
-        *(_QWORD *)(v38 + 8) = &v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                          - 1) & 0xF];
-        v32->d.m.prevIdx2 = v32->d.m.prevIdx1;
-        v32->d.m.prevIdx1 = v32->d.m.lastIdx;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v39 = this->MonoVertices.Pages[v38];
+        v40 = this->MonoVertices.Size & 0xF;
+        *(_QWORD *)&v39[v40].srcVer = v100;
+        v39[v40].next = 0i64;
+        v37->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+        v31->d.m.prevIdx2 = v31->d.m.prevIdx1;
+        v31->d.m.prevIdx1 = v31->d.m.lastIdx;
       }
       else
       {
-        v34 = v7->MonoVertices.Size >> 4;
-        if ( v34 >= v7->MonoVertices.NumPages )
+        v33 = this->MonoVertices.Size >> 4;
+        if ( v33 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-            v7->MonoVertices.Size >> 4);
-        v35 = v7->MonoVertices.Pages[v34];
-        v36 = v7->MonoVertices.Size & 0xF;
-        *(_QWORD *)&v35[v36].srcVer = v101;
-        v35[v36].next = 0i64;
-        v37 = (signed __int64)&v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                         - 1) & 0xF];
-        *(_QWORD *)&v32->d.t.numTriangles = -1i64;
-        v32->start = (Scaleform::Render::Tessellator::MonoVertexType *)v37;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v34 = this->MonoVertices.Pages[v33];
+        v35 = this->MonoVertices.Size & 0xF;
+        *(_QWORD *)&v34[v35].srcVer = v100;
+        v34[v35].next = 0i64;
+        v36 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+        *(_QWORD *)&v31->d.t.numTriangles = -1i64;
+        v31->start = v36;
       }
-      v32->d.m.lastIdx = LODWORD(v7->MonoVertices.Size) - 1;
+      v31->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
 LABEL_36:
-      LODWORD(v99) = v106 & 0x7FFFFFFF;
-      HIDWORD(v99) = v106 & 0x7FFFFFFF;
-      if ( v32->start )
+      LODWORD(v98) = targetVertex & 0x7FFFFFFF;
+      HIDWORD(v98) = targetVertex & 0x7FFFFFFF;
+      if ( v31->start )
       {
-        v46 = (signed __int64)&v7->MonoVertices.Pages[(unsigned __int64)v32->d.m.lastIdx >> 4][v32->d.m.lastIdx & 0xF];
-        if ( *(_DWORD *)v46 == (v106 & 0x7FFFFFFF) )
+        v45 = &this->MonoVertices.Pages[(unsigned __int64)v31->d.m.lastIdx >> 4][v31->d.m.lastIdx & 0xF];
+        if ( v45->srcVer == (targetVertex & 0x7FFFFFFF) )
           goto LABEL_45;
-        v47 = v7->MonoVertices.Size >> 4;
-        if ( v47 >= v7->MonoVertices.NumPages )
+        v46 = this->MonoVertices.Size >> 4;
+        if ( v46 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-            v7->MonoVertices.Size >> 4);
-        v48 = v7->MonoVertices.Pages[v47];
-        v49 = v7->MonoVertices.Size & 0xF;
-        *(_QWORD *)&v48[v49].srcVer = v99;
-        v48[v49].next = 0i64;
-        *(_QWORD *)(v46 + 8) = &v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                          - 1) & 0xF];
-        v32->d.m.prevIdx2 = v32->d.m.prevIdx1;
-        v32->d.m.prevIdx1 = v32->d.m.lastIdx;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v47 = this->MonoVertices.Pages[v46];
+        v48 = this->MonoVertices.Size & 0xF;
+        *(_QWORD *)&v47[v48].srcVer = v98;
+        v47[v48].next = 0i64;
+        v45->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+        v31->d.m.prevIdx2 = v31->d.m.prevIdx1;
+        v31->d.m.prevIdx1 = v31->d.m.lastIdx;
       }
       else
       {
-        v42 = v7->MonoVertices.Size >> 4;
-        if ( v42 >= v7->MonoVertices.NumPages )
+        v41 = this->MonoVertices.Size >> 4;
+        if ( v41 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-            v7->MonoVertices.Size >> 4);
-        v43 = v7->MonoVertices.Pages[v42];
-        v44 = v7->MonoVertices.Size & 0xF;
-        *(_QWORD *)&v43[v44].srcVer = v99;
-        v43[v44].next = 0i64;
-        v45 = (signed __int64)&v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                         - 1) & 0xF];
-        *(_QWORD *)&v32->d.t.numTriangles = -1i64;
-        v32->start = (Scaleform::Render::Tessellator::MonoVertexType *)v45;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v42 = this->MonoVertices.Pages[v41];
+        v43 = this->MonoVertices.Size & 0xF;
+        *(_QWORD *)&v42[v43].srcVer = v98;
+        v42[v43].next = 0i64;
+        v44 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+        *(_QWORD *)&v31->d.t.numTriangles = -1i64;
+        v31->start = v44;
       }
-      v32->d.m.lastIdx = LODWORD(v7->MonoVertices.Size) - 1;
+      v31->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
 LABEL_45:
-      v14 = v6->monotone;
-      if ( v9 != -1 )
+      monotone = v6->monotone;
+      if ( vertexLeft != -1 )
       {
-        LODWORD(v96) = v9 | 0x80000000;
-        HIDWORD(v96) = v9 | 0x80000000;
-        if ( v14->start )
+        LODWORD(v95) = vertexLeft | 0x80000000;
+        HIDWORD(v95) = vertexLeft | 0x80000000;
+        if ( monotone->start )
         {
-          v54 = (signed __int64)&v7->MonoVertices.Pages[(unsigned __int64)v14->d.m.lastIdx >> 4][v14->d.m.lastIdx & 0xF];
-          if ( *(_DWORD *)v54 != (v9 | 0x80000000) )
+          v53 = &this->MonoVertices.Pages[(unsigned __int64)monotone->d.m.lastIdx >> 4][monotone->d.m.lastIdx & 0xF];
+          if ( v53->srcVer != (vertexLeft | 0x80000000) )
           {
-            v55 = v7->MonoVertices.Size >> 4;
-            if ( v55 >= v7->MonoVertices.NumPages )
+            v54 = this->MonoVertices.Size >> 4;
+            if ( v54 >= this->MonoVertices.NumPages )
               Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-                v7->MonoVertices.Size >> 4);
-            v56 = v7->MonoVertices.Pages[v55];
-            v57 = v7->MonoVertices.Size & 0xF;
-            *(_QWORD *)&v56[v57].srcVer = v96;
-            v56[v57].next = 0i64;
-            *(_QWORD *)(v54 + 8) = &v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                              - 1) & 0xF];
-            v14->d.m.prevIdx2 = v14->d.m.prevIdx1;
-            v14->d.m.prevIdx1 = v14->d.m.lastIdx;
-            v14->d.m.lastIdx = LODWORD(v7->MonoVertices.Size) - 1;
+                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                this->MonoVertices.Size >> 4);
+            v55 = this->MonoVertices.Pages[v54];
+            v56 = this->MonoVertices.Size & 0xF;
+            *(_QWORD *)&v55[v56].srcVer = v95;
+            v55[v56].next = 0i64;
+            v53->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+            monotone->d.m.prevIdx2 = monotone->d.m.prevIdx1;
+            monotone->d.m.prevIdx1 = monotone->d.m.lastIdx;
+            monotone->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
           }
         }
         else
         {
-          v50 = v7->MonoVertices.Size >> 4;
-          if ( v50 >= v7->MonoVertices.NumPages )
+          v49 = this->MonoVertices.Size >> 4;
+          if ( v49 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-              v7->MonoVertices.Size >> 4);
-          v51 = v7->MonoVertices.Pages[v50];
-          v52 = v7->MonoVertices.Size & 0xF;
-          *(_QWORD *)&v51[v52].srcVer = v96;
-          v51[v52].next = 0i64;
-          v53 = (signed __int64)&v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                           - 1) & 0xF];
-          *(_QWORD *)&v14->d.t.numTriangles = -1i64;
-          v14->start = (Scaleform::Render::Tessellator::MonoVertexType *)v53;
-          v14->d.m.lastIdx = LODWORD(v7->MonoVertices.Size) - 1;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v50 = this->MonoVertices.Pages[v49];
+          v51 = this->MonoVertices.Size & 0xF;
+          *(_QWORD *)&v50[v51].srcVer = v95;
+          v50[v51].next = 0i64;
+          v52 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+          *(_QWORD *)&monotone->d.t.numTriangles = -1i64;
+          monotone->start = v52;
+          monotone->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
         }
       }
-      if ( v11 == -1 )
+      if ( vertex == -1 )
         goto LABEL_65;
-      LODWORD(v98) = v11 & 0x7FFFFFFF;
-      HIDWORD(v98) = v11 & 0x7FFFFFFF;
-      if ( !v14->start )
+      LODWORD(v97) = vertex & 0x7FFFFFFF;
+      HIDWORD(v97) = vertex & 0x7FFFFFFF;
+      if ( !monotone->start )
       {
-        v58 = v7->MonoVertices.Size >> 4;
-        if ( v58 >= v7->MonoVertices.NumPages )
+        v57 = this->MonoVertices.Size >> 4;
+        if ( v57 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-            v7->MonoVertices.Size >> 4);
-        v59 = v7->MonoVertices.Pages[v58];
-        v60 = v7->MonoVertices.Size & 0xF;
-        *(_QWORD *)&v59[v60].srcVer = v98;
-        v59[v60].next = 0i64;
-        v61 = (signed __int64)&v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                         - 1) & 0xF];
-        *(_QWORD *)&v14->d.t.numTriangles = -1i64;
-        v14->start = (Scaleform::Render::Tessellator::MonoVertexType *)v61;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v58 = this->MonoVertices.Pages[v57];
+        v59 = this->MonoVertices.Size & 0xF;
+        *(_QWORD *)&v58[v59].srcVer = v97;
+        v58[v59].next = 0i64;
+        v60 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+        *(_QWORD *)&monotone->d.t.numTriangles = -1i64;
+        monotone->start = v60;
         goto LABEL_64;
       }
-      v27 = (signed __int64)&v7->MonoVertices.Pages[(unsigned __int64)v14->d.m.lastIdx >> 4][v14->d.m.lastIdx & 0xF];
-      if ( *(_DWORD *)v27 != (v11 & 0x7FFFFFFF) )
+      v26 = &this->MonoVertices.Pages[(unsigned __int64)monotone->d.m.lastIdx >> 4][monotone->d.m.lastIdx & 0xF];
+      if ( v26->srcVer != (vertex & 0x7FFFFFFF) )
       {
-        v28 = (signed __int64)&v7->MonoVertices;
-        v62 = v7->MonoVertices.Size >> 4;
-        if ( v62 >= v7->MonoVertices.NumPages )
+        p_MonoVertices = &this->MonoVertices;
+        v61 = this->MonoVertices.Size >> 4;
+        if ( v61 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-            v7->MonoVertices.Size >> 4);
-        v30 = v7->MonoVertices.Pages[v62];
-        v31 = v98;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v29 = this->MonoVertices.Pages[v61];
+        v30 = v97;
         goto LABEL_63;
       }
 LABEL_65:
-      v10 = v103;
-      v13 = style;
+      v9 = v102;
+      rightAbove = style;
     }
-    if ( v13 == v90 && v6->monotone )
+    if ( rightAbove == v89 && v6->monotone )
       goto LABEL_92;
-    if ( !v13 )
+    if ( !rightAbove )
     {
       v6->monotone = 0i64;
       goto LABEL_92;
     }
-    if ( v10 )
+    if ( v9 )
       v6 = scana;
-    Scaleform::Render::Tessellator::replaceMonotone(v7, v6, v13);
-    v66 = v6->monotone;
-    if ( v9 != -1 )
+    Scaleform::Render::Tessellator::replaceMonotone(this, v6, rightAbove);
+    v65 = v6->monotone;
+    if ( vertexLeft != -1 )
     {
-      v67 = v9 | 0x80000000;
-      LODWORD(v100) = v67;
-      HIDWORD(v100) = v67;
-      if ( !v66->start )
+      v66 = vertexLeft | 0x80000000;
+      LODWORD(v99) = v66;
+      HIDWORD(v99) = v66;
+      if ( !v65->start )
       {
-        v68 = v7->MonoVertices.Size >> 4;
-        if ( v68 >= v7->MonoVertices.NumPages )
+        v67 = this->MonoVertices.Size >> 4;
+        if ( v67 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-            v7->MonoVertices.Size >> 4);
-        v69 = v7->MonoVertices.Pages[v68];
-        v70 = v7->MonoVertices.Size & 0xF;
-        *(_QWORD *)&v69[v70].srcVer = v100;
-        v69[v70].next = 0i64;
-        v71 = (signed __int64)&v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                         - 1) & 0xF];
-        *(_QWORD *)&v66->d.t.numTriangles = -1i64;
-        v66->start = (Scaleform::Render::Tessellator::MonoVertexType *)v71;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v68 = this->MonoVertices.Pages[v67];
+        v69 = this->MonoVertices.Size & 0xF;
+        *(_QWORD *)&v68[v69].srcVer = v99;
+        v68[v69].next = 0i64;
+        v70 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+        *(_QWORD *)&v65->d.t.numTriangles = -1i64;
+        v65->start = v70;
 LABEL_81:
-        v66->d.m.lastIdx = LODWORD(v7->MonoVertices.Size) - 1;
+        v65->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
         goto LABEL_82;
       }
-      v72 = (signed __int64)&v7->MonoVertices.Pages[(unsigned __int64)v66->d.m.lastIdx >> 4][v66->d.m.lastIdx & 0xF];
-      if ( *(_DWORD *)v72 != v67 )
+      v71 = &this->MonoVertices.Pages[(unsigned __int64)v65->d.m.lastIdx >> 4][v65->d.m.lastIdx & 0xF];
+      if ( v71->srcVer != v66 )
       {
-        v73 = v7->MonoVertices.Size >> 4;
-        if ( v73 >= v7->MonoVertices.NumPages )
+        v72 = this->MonoVertices.Size >> 4;
+        if ( v72 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-            v7->MonoVertices.Size >> 4);
-        v74 = v7->MonoVertices.Pages[v73];
-        v75 = v7->MonoVertices.Size & 0xF;
-        *(_QWORD *)&v74[v75].srcVer = v100;
-        v74[v75].next = 0i64;
-        *(_QWORD *)(v72 + 8) = &v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                          - 1) & 0xF];
-        v66->d.m.prevIdx2 = v66->d.m.prevIdx1;
-        v66->d.m.prevIdx1 = v66->d.m.lastIdx;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v73 = this->MonoVertices.Pages[v72];
+        v74 = this->MonoVertices.Size & 0xF;
+        *(_QWORD *)&v73[v74].srcVer = v99;
+        v73[v74].next = 0i64;
+        v71->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+        v65->d.m.prevIdx2 = v65->d.m.prevIdx1;
+        v65->d.m.prevIdx1 = v65->d.m.lastIdx;
         goto LABEL_81;
       }
     }
 LABEL_82:
-    if ( v11 == -1 )
+    if ( vertex == -1 )
       goto LABEL_92;
-    LODWORD(v102) = v11 & 0x7FFFFFFF;
-    HIDWORD(v102) = v11 & 0x7FFFFFFF;
-    if ( v66->start )
+    LODWORD(v101) = vertex & 0x7FFFFFFF;
+    HIDWORD(v101) = vertex & 0x7FFFFFFF;
+    if ( v65->start )
     {
-      v80 = (signed __int64)&v7->MonoVertices.Pages[(unsigned __int64)v66->d.m.lastIdx >> 4][v66->d.m.lastIdx & 0xF];
-      if ( *(_DWORD *)v80 == (v11 & 0x7FFFFFFF) )
+      v79 = &this->MonoVertices.Pages[(unsigned __int64)v65->d.m.lastIdx >> 4][v65->d.m.lastIdx & 0xF];
+      if ( v79->srcVer == (vertex & 0x7FFFFFFF) )
         goto LABEL_92;
-      v81 = v7->MonoVertices.Size >> 4;
-      if ( v81 >= v7->MonoVertices.NumPages )
+      v80 = this->MonoVertices.Size >> 4;
+      if ( v80 >= this->MonoVertices.NumPages )
         Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-          (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-          v7->MonoVertices.Size >> 4);
-      v82 = v7->MonoVertices.Pages[v81];
-      v83 = v7->MonoVertices.Size & 0xF;
-      *(_QWORD *)&v82[v83].srcVer = v102;
-      v82[v83].next = 0i64;
-      *(_QWORD *)(v80 + 8) = &v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                        - 1) & 0xF];
-      v66->d.m.prevIdx2 = v66->d.m.prevIdx1;
-      v66->d.m.prevIdx1 = v66->d.m.lastIdx;
+          (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+          this->MonoVertices.Size >> 4);
+      v81 = this->MonoVertices.Pages[v80];
+      v82 = this->MonoVertices.Size & 0xF;
+      *(_QWORD *)&v81[v82].srcVer = v101;
+      v81[v82].next = 0i64;
+      v79->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+      v65->d.m.prevIdx2 = v65->d.m.prevIdx1;
+      v65->d.m.prevIdx1 = v65->d.m.lastIdx;
     }
     else
     {
-      v76 = v7->MonoVertices.Size >> 4;
-      if ( v76 >= v7->MonoVertices.NumPages )
+      v75 = this->MonoVertices.Size >> 4;
+      if ( v75 >= this->MonoVertices.NumPages )
         Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-          (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v7->MonoVertices,
-          v7->MonoVertices.Size >> 4);
-      v77 = v7->MonoVertices.Pages[v76];
-      v78 = v7->MonoVertices.Size & 0xF;
-      *(_QWORD *)&v77[v78].srcVer = v102;
-      v77[v78].next = 0i64;
-      v79 = (signed __int64)&v7->MonoVertices.Pages[(++v7->MonoVertices.Size - 1) >> 4][(LODWORD(v7->MonoVertices.Size)
-                                                                                       - 1) & 0xF];
-      *(_QWORD *)&v66->d.t.numTriangles = -1i64;
-      v66->start = (Scaleform::Render::Tessellator::MonoVertexType *)v79;
+          (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+          this->MonoVertices.Size >> 4);
+      v76 = this->MonoVertices.Pages[v75];
+      v77 = this->MonoVertices.Size & 0xF;
+      *(_QWORD *)&v76[v77].srcVer = v101;
+      v76[v77].next = 0i64;
+      v78 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+      *(_QWORD *)&v65->d.t.numTriangles = -1i64;
+      v65->start = v78;
     }
-    v66->d.m.lastIdx = LODWORD(v7->MonoVertices.Size) - 1;
+    v65->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
 LABEL_92:
-    v84 = v91;
-    v10 = 0;
-    v103 = 0;
-    if ( !v91 )
+    v83 = numChains;
+    v9 = 0;
+    v102 = 0;
+    if ( !numChains )
       break;
-    v85 = v7->ChainsAbove.Pages;
-    v86 = v94 + 1;
-    --v91;
-    v9 = v11;
-    v87 = (unsigned __int64)v94 >> 4;
-    v88 = v94++ & 0xF;
-    v6 = &v85[v87][v88];
-    if ( v84 == 1 )
-      v11 = v92;
+    v84 = this->ChainsAbove.Pages;
+    v85 = firstChain + 1;
+    --numChains;
+    vertexLeft = vertex;
+    v86 = (unsigned __int64)firstChain >> 4;
+    v87 = firstChain++ & 0xF;
+    v6 = &v84[v86][v87];
+    if ( v83 == 1 )
+      vertex = vertexRight;
     else
-      v11 = v85[(unsigned __int64)v86 >> 4][v86 & 0xF].vertex;
-    v5 = v106;
-    v12 = v90;
-    v13 = v6->chain->rightAbove;
-    style = v6->chain->rightAbove;
+      vertex = v84[(unsigned __int64)v85 >> 4][v85 & 0xF].vertex;
+    v5 = targetVertex;
+    v11 = v89;
+    rightAbove = v6->chain->rightAbove;
+    style = rightAbove;
   }
-  v105->numChains = 0;
+  upperBase->numChains = 0;
 }
 
 // File Line: 1282
 // RVA: 0x9D9630
-void __fastcall Scaleform::Render::Tessellator::connectStartingToPending(Scaleform::Render::Tessellator *this, Scaleform::Render::Tessellator::ScanChainType *scan, Scaleform::Render::Tessellator::BaseLineType *upperBase)
+void __fastcall Scaleform::Render::Tessellator::connectStartingToPending(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::Tessellator::ScanChainType *scan,
+        Scaleform::Render::Tessellator::BaseLineType *upperBase)
 {
-  Scaleform::Render::Tessellator::MonotoneType *v3; // rax
-  Scaleform::Render::Tessellator *v4; // rbx
-  Scaleform::Render::Tessellator::BaseLineType *v5; // r10
+  Scaleform::Render::Tessellator::MonotoneType *monotone; // rax
+  Scaleform::Render::Tessellator::BaseLineType *lowerBase; // r10
   unsigned int v6; // ecx
-  unsigned int v7; // esi
-  unsigned int v8; // er9
-  unsigned int v9; // er15
-  unsigned int v10; // er12
-  unsigned int v11; // ecx
-  Scaleform::Render::Tessellator::PendingEndType **v12; // rax
-  Scaleform::Render::Tessellator::ScanChainType *v13; // rdi
-  Scaleform::Render::Tessellator::PendingEndType *v14; // rax
-  Scaleform::Render::Tessellator::ScanChainType **v15; // rdx
-  unsigned int v16; // er10
-  unsigned int v17; // er11
-  Scaleform::Render::Tessellator::ScanChainType *v18; // r13
-  unsigned int v19; // er14
-  unsigned int v20; // eax
-  BOOL v21; // ecx
-  Scaleform::Render::Tessellator::MonotoneType *v22; // rdi
-  unsigned __int64 v23; // r14
-  Scaleform::Render::Tessellator::MonoVertexType *v24; // rdx
-  signed __int64 v25; // rcx
-  signed __int64 v26; // rdx
-  signed __int64 v27; // rsi
-  unsigned __int64 v28; // r15
-  Scaleform::Render::Tessellator::MonoVertexType *v29; // rdx
-  signed __int64 v30; // rcx
-  unsigned __int64 v31; // r14
-  Scaleform::Render::Tessellator::MonoVertexType *v32; // rdx
-  signed __int64 v33; // rcx
-  signed __int64 v34; // rdx
-  signed __int64 v35; // rsi
-  unsigned __int64 v36; // r15
-  Scaleform::Render::Tessellator::MonoVertexType *v37; // rdx
-  signed __int64 v38; // rcx
-  Scaleform::Render::Tessellator::MonotoneType *v39; // rdi
-  unsigned __int64 v40; // r14
-  Scaleform::Render::Tessellator::MonoVertexType *v41; // rdx
-  signed __int64 v42; // rcx
-  signed __int64 v43; // rdx
-  signed __int64 v44; // rsi
-  unsigned __int64 v45; // r15
-  Scaleform::Render::Tessellator::MonoVertexType *v46; // rdx
-  signed __int64 v47; // rcx
-  unsigned __int64 v48; // r14
-  Scaleform::Render::Tessellator::MonoVertexType *v49; // rdx
-  signed __int64 v50; // rcx
-  signed __int64 v51; // rdx
-  signed __int64 v52; // rsi
-  unsigned __int64 v53; // r15
-  Scaleform::Render::Tessellator::MonoVertexType *v54; // rdx
-  signed __int64 v55; // rcx
-  Scaleform::Render::Tessellator::MonotoneType *v56; // rdi
-  unsigned __int64 v57; // r14
-  Scaleform::Render::Tessellator::MonoVertexType *v58; // rdx
-  signed __int64 v59; // rcx
-  signed __int64 v60; // rdx
-  signed __int64 v61; // rsi
-  unsigned __int64 v62; // r15
-  Scaleform::Render::Tessellator::MonoVertexType *v63; // rdx
-  signed __int64 v64; // rcx
-  unsigned __int64 v65; // r14
-  Scaleform::Render::Tessellator::MonoVertexType *v66; // rdx
-  signed __int64 v67; // rcx
-  signed __int64 v68; // rdx
-  signed __int64 v69; // rsi
-  unsigned __int64 v70; // r15
-  Scaleform::Render::Tessellator::MonoVertexType *v71; // rdx
-  signed __int64 v72; // rcx
-  Scaleform::Render::Tessellator::PendingEndType **v73; // rdx
-  unsigned int v74; // er10
-  unsigned int v75; // eax
-  Scaleform::Render::Tessellator::MonotoneType *v76; // rax
-  unsigned int v77; // esi
-  Scaleform::Render::Tessellator::ScanChainType **v78; // rdx
-  unsigned int v79; // er8
-  unsigned __int64 v80; // rax
-  signed __int64 v81; // rcx
-  Scaleform::Render::Tessellator::ScanChainType *v82; // rax
-  unsigned int v83; // er15
-  unsigned int v84; // esi
-  Scaleform::Render::Tessellator::MonotoneType *v85; // r8
-  Scaleform::Render::Tessellator::PendingEndType **v86; // rdx
-  unsigned int v87; // eax
-  Scaleform::Render::Tessellator::ScanChainType **v88; // rdx
-  int v89; // er10
-  unsigned int v90; // er9
-  unsigned __int64 v91; // rax
-  __int64 v92; // rcx
-  Scaleform::Render::Tessellator::ScanChainType *v93; // r12
-  unsigned int v94; // edx
-  unsigned int v95; // edi
-  Scaleform::Render::Tessellator::MonotoneType *v96; // rax
-  Scaleform::Render::Tessellator::MonotoneType *v97; // rax
-  Scaleform::Render::Tessellator::MonotoneType *v98; // rdx
-  Scaleform::Render::Tessellator::MonotoneType *v99; // rcx
-  unsigned int v100; // eax
-  Scaleform::Render::Tessellator::MonotoneType *v101; // rax
-  Scaleform::Render::Tessellator::MonotoneType *v102; // rdi
-  unsigned __int64 v103; // r14
-  Scaleform::Render::Tessellator::MonoVertexType *v104; // rdx
-  signed __int64 v105; // rcx
-  signed __int64 v106; // rdx
-  signed __int64 v107; // rsi
-  unsigned __int64 v108; // r15
+  unsigned int numChains; // esi
+  unsigned int v8; // r9d
+  unsigned int vertexLeft; // r15d
+  unsigned int v10; // r12d
+  Scaleform::Render::Tessellator::PendingEndType **Pages; // rax
+  Scaleform::Render::Tessellator::ScanChainType *v12; // rdi
+  Scaleform::Render::Tessellator::PendingEndType *v13; // rax
+  Scaleform::Render::Tessellator::ScanChainType **v14; // rdx
+  unsigned int styleLeft; // r10d
+  unsigned int vertex; // r11d
+  Scaleform::Render::Tessellator::ScanChainType *p_scana; // r13
+  unsigned int v18; // r14d
+  unsigned int rightAbove; // eax
+  unsigned int v20; // ecx
+  Scaleform::Render::Tessellator::MonotoneType *v21; // rdi
+  unsigned __int64 v22; // r14
+  Scaleform::Render::Tessellator::MonoVertexType *v23; // rdx
+  __int64 v24; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v25; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v26; // rsi
+  unsigned __int64 v27; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v28; // rdx
+  __int64 v29; // rcx
+  unsigned __int64 v30; // r14
+  Scaleform::Render::Tessellator::MonoVertexType *v31; // rdx
+  __int64 v32; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v33; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v34; // rsi
+  unsigned __int64 v35; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v36; // rdx
+  __int64 v37; // rcx
+  Scaleform::Render::Tessellator::MonotoneType *v38; // rdi
+  unsigned __int64 v39; // r14
+  Scaleform::Render::Tessellator::MonoVertexType *v40; // rdx
+  __int64 v41; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v42; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v43; // rsi
+  unsigned __int64 v44; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v45; // rdx
+  __int64 v46; // rcx
+  unsigned __int64 v47; // r14
+  Scaleform::Render::Tessellator::MonoVertexType *v48; // rdx
+  __int64 v49; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v50; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v51; // rsi
+  unsigned __int64 v52; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v53; // rdx
+  __int64 v54; // rcx
+  Scaleform::Render::Tessellator::MonotoneType *v55; // rdi
+  unsigned __int64 v56; // r14
+  Scaleform::Render::Tessellator::MonoVertexType *v57; // rdx
+  __int64 v58; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v59; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v60; // rsi
+  unsigned __int64 v61; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v62; // rdx
+  __int64 v63; // rcx
+  unsigned __int64 v64; // r14
+  Scaleform::Render::Tessellator::MonoVertexType *v65; // rdx
+  __int64 v66; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v67; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v68; // rsi
+  unsigned __int64 v69; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v70; // rdx
+  __int64 v71; // rcx
+  Scaleform::Render::Tessellator::PendingEndType **v72; // rdx
+  unsigned int v73; // r10d
+  unsigned int v74; // eax
+  Scaleform::Render::Tessellator::MonotoneType *v75; // rax
+  unsigned int v76; // esi
+  Scaleform::Render::Tessellator::ScanChainType **v77; // rdx
+  unsigned int v78; // r8d
+  unsigned __int64 v79; // rax
+  __int64 v80; // rcx
+  unsigned int v81; // r15d
+  unsigned int v82; // esi
+  Scaleform::Render::Tessellator::MonotoneType *v83; // r8
+  Scaleform::Render::Tessellator::PendingEndType **v84; // rdx
+  unsigned int v85; // eax
+  Scaleform::Render::Tessellator::ScanChainType **v86; // rdx
+  unsigned int v87; // r10d
+  unsigned int v88; // r9d
+  unsigned __int64 v89; // rax
+  __int64 v90; // rcx
+  Scaleform::Render::Tessellator::ScanChainType *v91; // r12
+  unsigned int v92; // edx
+  unsigned int v93; // edi
+  Scaleform::Render::Tessellator::MonotoneType *v94; // rax
+  Scaleform::Render::Tessellator::MonotoneType *started; // rax
+  Scaleform::Render::Tessellator::MonotoneType *v96; // rcx
+  unsigned int v97; // eax
+  Scaleform::Render::Tessellator::MonotoneType *v98; // rax
+  Scaleform::Render::Tessellator::MonotoneType *v99; // rdi
+  unsigned __int64 v100; // r14
+  Scaleform::Render::Tessellator::MonoVertexType *v101; // rdx
+  __int64 v102; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v103; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v104; // rsi
+  unsigned __int64 v105; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v106; // rdx
+  __int64 v107; // rcx
+  unsigned __int64 v108; // r14
   Scaleform::Render::Tessellator::MonoVertexType *v109; // rdx
-  signed __int64 v110; // rcx
-  unsigned __int64 v111; // r14
-  Scaleform::Render::Tessellator::MonoVertexType *v112; // rdx
-  signed __int64 v113; // rcx
-  signed __int64 v114; // rdx
-  Scaleform::Render::Tessellator::MonotoneType *v115; // rdi
-  unsigned __int64 v116; // r14
-  Scaleform::Render::Tessellator::MonoVertexType *v117; // rdx
-  signed __int64 v118; // rcx
-  signed __int64 v119; // rdx
-  signed __int64 v120; // rsi
-  unsigned __int64 v121; // r15
-  Scaleform::Render::Tessellator::MonoVertexType *v122; // rdx
-  signed __int64 v123; // rcx
-  signed __int64 v124; // rsi
-  unsigned __int64 v125; // r15
-  Scaleform::Render::Tessellator::MonoVertexType *v126; // rdx
-  signed __int64 v127; // rcx
-  unsigned int v128; // er13
-  signed __int64 v129; // rsi
-  unsigned __int64 v130; // r14
-  Scaleform::Render::Tessellator::MonoVertexType *v131; // rdx
-  __int64 v132; // rax
-  signed __int64 v133; // rsi
-  unsigned __int64 v134; // r15
-  Scaleform::Render::Tessellator::MonoVertexType *v135; // rdx
-  signed __int64 v136; // rcx
-  Scaleform::Render::Tessellator::MonotoneType *v137; // rdi
-  unsigned int v138; // edx
-  unsigned __int64 v139; // r14
-  Scaleform::Render::Tessellator::MonoVertexType *v140; // rdx
-  signed __int64 v141; // rcx
-  signed __int64 v142; // rdx
-  signed __int64 v143; // rsi
-  unsigned __int64 v144; // r15
+  __int64 v110; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v111; // rdx
+  Scaleform::Render::Tessellator::MonotoneType *v112; // rdi
+  unsigned __int64 v113; // r14
+  Scaleform::Render::Tessellator::MonoVertexType *v114; // rdx
+  __int64 v115; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v116; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v117; // rsi
+  unsigned __int64 v118; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v119; // rdx
+  __int64 v120; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v121; // rsi
+  unsigned __int64 v122; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v123; // rdx
+  __int64 v124; // rcx
+  unsigned int v125; // r13d
+  Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoVertexType,4,16> *p_MonoVertices; // rsi
+  unsigned __int64 v127; // r14
+  Scaleform::Render::Tessellator::MonoVertexType *v128; // rdx
+  __int64 v129; // rax
+  Scaleform::Render::Tessellator::MonoVertexType *v130; // rsi
+  unsigned __int64 v131; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v132; // rdx
+  __int64 v133; // rcx
+  Scaleform::Render::Tessellator::MonotoneType *v134; // rdi
+  unsigned int v135; // edx
+  unsigned __int64 v136; // r14
+  Scaleform::Render::Tessellator::MonoVertexType *v137; // rdx
+  __int64 v138; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v139; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v140; // rsi
+  unsigned __int64 v141; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v142; // rdx
+  __int64 v143; // rcx
+  unsigned __int64 v144; // r14
   Scaleform::Render::Tessellator::MonoVertexType *v145; // rdx
-  signed __int64 v146; // rcx
-  unsigned __int64 v147; // r14
-  Scaleform::Render::Tessellator::MonoVertexType *v148; // rdx
-  signed __int64 v149; // rcx
-  signed __int64 v150; // rdx
-  signed __int64 v151; // rsi
-  unsigned __int64 v152; // r15
+  __int64 v146; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v147; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v148; // rsi
+  unsigned __int64 v149; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v150; // rdx
+  __int64 v151; // rcx
+  unsigned __int64 v152; // r14
   Scaleform::Render::Tessellator::MonoVertexType *v153; // rdx
-  signed __int64 v154; // rcx
-  unsigned __int64 v155; // r14
-  Scaleform::Render::Tessellator::MonoVertexType *v156; // rdx
-  signed __int64 v157; // rcx
-  signed __int64 v158; // rdx
-  signed __int64 v159; // rsi
-  unsigned __int64 v160; // r15
-  Scaleform::Render::Tessellator::MonoVertexType *v161; // rdx
-  signed __int64 v162; // rcx
-  bool v163; // zf
-  unsigned __int64 v164; // r14
-  signed __int64 v165; // rcx
-  signed __int64 v166; // rsi
-  unsigned __int64 v167; // r15
-  Scaleform::Render::Tessellator::MonoVertexType *v168; // rdx
-  signed __int64 v169; // rcx
-  Scaleform::Render::Tessellator::MonotoneType *v170; // rdi
-  unsigned int v171; // er14
-  unsigned __int64 v172; // r14
-  Scaleform::Render::Tessellator::MonoVertexType *v173; // rdx
-  signed __int64 v174; // rcx
-  signed __int64 v175; // rdx
-  signed __int64 v176; // rsi
-  unsigned __int64 v177; // r15
+  __int64 v154; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v155; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v156; // rsi
+  unsigned __int64 v157; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v158; // rdx
+  __int64 v159; // rcx
+  bool v160; // zf
+  unsigned __int64 v161; // r14
+  __int64 v162; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v163; // rsi
+  unsigned __int64 v164; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v165; // rdx
+  __int64 v166; // rcx
+  Scaleform::Render::Tessellator::MonotoneType *v167; // rdi
+  unsigned int v168; // r14d
+  unsigned __int64 v169; // r14
+  Scaleform::Render::Tessellator::MonoVertexType *v170; // rdx
+  __int64 v171; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v172; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v173; // rsi
+  unsigned __int64 v174; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v175; // rdx
+  __int64 v176; // rcx
+  unsigned __int64 v177; // r14
   Scaleform::Render::Tessellator::MonoVertexType *v178; // rdx
-  signed __int64 v179; // rcx
-  unsigned __int64 v180; // r14
-  Scaleform::Render::Tessellator::MonoVertexType *v181; // rdx
-  signed __int64 v182; // rcx
-  signed __int64 v183; // rdx
-  signed __int64 v184; // rsi
-  unsigned __int64 v185; // r15
-  Scaleform::Render::Tessellator::MonoVertexType *v186; // rdx
-  signed __int64 v187; // rcx
-  Scaleform::Render::Tessellator::ScanChainType **v188; // rdx
-  unsigned int v189; // er9
-  signed __int64 v190; // rcx
-  Scaleform::Render::Tessellator::ScanChainType *v191; // rax
-  unsigned int v192; // edx
-  unsigned __int64 v193; // rax
-  unsigned __int64 v194; // rax
-  BOOL v195; // [rsp+20h] [rbp-E0h]
-  unsigned int v196; // [rsp+20h] [rbp-E0h]
-  unsigned int v197; // [rsp+24h] [rbp-DCh]
-  unsigned int v198; // [rsp+24h] [rbp-DCh]
-  unsigned int v199; // [rsp+28h] [rbp-D8h]
-  unsigned int v200; // [rsp+2Ch] [rbp-D4h]
-  unsigned int v201; // [rsp+2Ch] [rbp-D4h]
-  unsigned int v202; // [rsp+30h] [rbp-D0h]
-  Scaleform::Render::Tessellator::ScanChainType *v203; // [rsp+38h] [rbp-C8h]
-  Scaleform::Render::Tessellator::MonotoneType *v204; // [rsp+38h] [rbp-C8h]
-  unsigned int v205; // [rsp+40h] [rbp-C0h]
-  unsigned int v206; // [rsp+44h] [rbp-BCh]
-  unsigned int v207; // [rsp+48h] [rbp-B8h]
-  unsigned int v208; // [rsp+48h] [rbp-B8h]
-  unsigned int v209; // [rsp+50h] [rbp-B0h]
-  unsigned int v210; // [rsp+58h] [rbp-A8h]
-  __int64 v211; // [rsp+58h] [rbp-A8h]
-  __int64 v212; // [rsp+68h] [rbp-98h]
-  __int64 v213; // [rsp+68h] [rbp-98h]
-  __int64 v214; // [rsp+78h] [rbp-88h]
-  __int64 v215; // [rsp+78h] [rbp-88h]
-  __int64 v216; // [rsp+88h] [rbp-78h]
-  __int64 v217; // [rsp+88h] [rbp-78h]
-  __int64 v218; // [rsp+98h] [rbp-68h]
-  __int64 v219; // [rsp+98h] [rbp-68h]
-  __int64 v220; // [rsp+A8h] [rbp-58h]
-  __int64 v221; // [rsp+A8h] [rbp-58h]
-  __int64 v222; // [rsp+B8h] [rbp-48h]
-  __int64 v223; // [rsp+B8h] [rbp-48h]
-  Scaleform::Render::Tessellator::ScanChainType scana; // [rsp+C8h] [rbp-38h]
-  __int64 v225; // [rsp+E8h] [rbp-18h]
-  Scaleform::Render::Tessellator::BaseLineType *v226; // [rsp+F8h] [rbp-8h]
-  unsigned int v227; // [rsp+150h] [rbp+50h]
-  unsigned int v228; // [rsp+158h] [rbp+58h]
-  int v229; // [rsp+158h] [rbp+58h]
-  Scaleform::Render::Tessellator::BaseLineType *v230; // [rsp+160h] [rbp+60h]
+  __int64 v179; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType *v180; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v181; // rsi
+  unsigned __int64 v182; // r15
+  Scaleform::Render::Tessellator::MonoVertexType *v183; // rdx
+  __int64 v184; // rcx
+  Scaleform::Render::Tessellator::ScanChainType **v185; // rdx
+  unsigned int v186; // r9d
+  __int64 v187; // rcx
+  Scaleform::Render::Tessellator::ScanChainType *v188; // rax
+  unsigned int v189; // edx
+  unsigned __int64 v190; // rax
+  unsigned __int64 Size; // rax
+  unsigned int v192; // [rsp+20h] [rbp-E0h]
+  unsigned int v193; // [rsp+20h] [rbp-E0h]
+  unsigned int v194; // [rsp+24h] [rbp-DCh]
+  unsigned int v195; // [rsp+24h] [rbp-DCh]
+  unsigned int v196; // [rsp+28h] [rbp-D8h]
+  unsigned int v197; // [rsp+2Ch] [rbp-D4h]
+  unsigned int v198; // [rsp+2Ch] [rbp-D4h]
+  unsigned int v199; // [rsp+30h] [rbp-D0h]
+  Scaleform::Render::Tessellator::ScanChainType *v200; // [rsp+38h] [rbp-C8h]
+  Scaleform::Render::Tessellator::MonotoneType *v201; // [rsp+38h] [rbp-C8h]
+  unsigned int v202; // [rsp+40h] [rbp-C0h]
+  unsigned int v203; // [rsp+44h] [rbp-BCh]
+  unsigned int v204; // [rsp+48h] [rbp-B8h]
+  unsigned int v205; // [rsp+48h] [rbp-B8h]
+  unsigned int vertexRight; // [rsp+50h] [rbp-B0h]
+  unsigned int firstChain; // [rsp+58h] [rbp-A8h]
+  __int64 v208; // [rsp+58h] [rbp-A8h]
+  __int64 v209; // [rsp+68h] [rbp-98h]
+  __int64 v210; // [rsp+68h] [rbp-98h]
+  __int64 v211; // [rsp+78h] [rbp-88h]
+  __int64 v212; // [rsp+78h] [rbp-88h]
+  __int64 v213; // [rsp+88h] [rbp-78h]
+  __int64 v214; // [rsp+88h] [rbp-78h]
+  __int64 v215; // [rsp+98h] [rbp-68h]
+  __int64 v216; // [rsp+98h] [rbp-68h]
+  __int64 v217; // [rsp+A8h] [rbp-58h]
+  __int64 v218; // [rsp+A8h] [rbp-58h]
+  __int64 v219; // [rsp+B8h] [rbp-48h]
+  __int64 v220; // [rsp+B8h] [rbp-48h]
+  Scaleform::Render::Tessellator::ScanChainType scana; // [rsp+C8h] [rbp-38h] BYREF
+  __int64 v222; // [rsp+E8h] [rbp-18h]
+  Scaleform::Render::Tessellator::BaseLineType *v223; // [rsp+F8h] [rbp-8h]
+  unsigned int v224; // [rsp+150h] [rbp+50h]
+  unsigned int v225; // [rsp+158h] [rbp+58h]
+  unsigned int v226; // [rsp+158h] [rbp+58h]
   unsigned int style; // [rsp+168h] [rbp+68h]
 
-  v230 = upperBase;
-  v3 = scan->monotone;
-  v4 = this;
-  v5 = v3->lowerBase;
-  v6 = v3->style;
-  v3->lowerBase = 0i64;
-  v7 = upperBase->numChains;
-  v8 = v5->numChains;
-  v9 = v5->vertexLeft;
+  monotone = scan->monotone;
+  lowerBase = monotone->lowerBase;
+  v6 = monotone->style;
+  monotone->lowerBase = 0i64;
+  numChains = upperBase->numChains;
+  v8 = lowerBase->numChains;
+  vertexLeft = lowerBase->vertexLeft;
   v10 = upperBase->vertexLeft;
   scana.monotone = scan->monotone;
   style = v6;
-  v11 = v5->firstChain;
-  v209 = v5->vertexRight;
-  v12 = v4->PendingEnds.Pages;
-  v210 = v11;
-  v13 = scan;
-  v203 = scan;
-  v226 = v5;
-  v14 = v12[(unsigned __int64)v11 >> 4];
-  v15 = v4->ChainsAbove.Pages;
-  v16 = v5->styleLeft;
-  v202 = v9;
-  LODWORD(scana.chain) = v9;
-  v17 = v14[v11 & 0xF].vertex;
-  LODWORD(v14) = upperBase->firstChain;
-  v207 = (unsigned int)v14;
-  v206 = upperBase->vertexRight;
-  v197 = v8;
-  v18 = &scana;
-  v19 = v15[(unsigned __int64)upperBase->firstChain >> 4][(unsigned __int8)v14 & 0xF].vertex;
-  v20 = upperBase->styleLeft;
-  v199 = v17;
-  v21 = v8 < v7;
-  v205 = v16;
-  v228 = v7;
-  v195 = v8 < v7;
+  vertexRight = lowerBase->vertexRight;
+  Pages = this->PendingEnds.Pages;
+  firstChain = lowerBase->firstChain;
+  v12 = scan;
+  v200 = scan;
+  v223 = lowerBase;
+  v13 = Pages[(unsigned __int64)firstChain >> 4];
+  v14 = this->ChainsAbove.Pages;
+  styleLeft = lowerBase->styleLeft;
+  v199 = vertexLeft;
+  LODWORD(scana.chain) = vertexLeft;
+  vertex = v13[firstChain & 0xF].vertex;
+  v204 = upperBase->firstChain;
+  v203 = upperBase->vertexRight;
+  v194 = v8;
+  p_scana = &scana;
+  v18 = v14[(unsigned __int64)v204 >> 4][v204 & 0xF].vertex;
+  rightAbove = upperBase->styleLeft;
+  v196 = vertex;
+  v20 = v8 < numChains;
+  v202 = styleLeft;
+  v225 = numChains;
+  v192 = v20;
 LABEL_2:
-  v200 = v20;
-  v227 = v19;
+  v197 = rightAbove;
+  v224 = v18;
   while ( 1 )
   {
-    if ( (v9 != v17 || v10 != -1 && v19 != -1) && (v10 != v19 || v9 != -1 && v17 != -1) && (v9 != v17 || v10 != v19) )
+    if ( (vertexLeft != vertex || v10 != -1 && v18 != -1)
+      && (v10 != v18 || vertexLeft != -1 && vertex != -1)
+      && (vertexLeft != vertex || v10 != v18) )
     {
-      if ( v16 == style )
+      if ( styleLeft == style )
         goto LABEL_32;
-      Scaleform::Render::Tessellator::replaceMonotone(v4, v18, style);
-      v22 = v18->monotone;
-      if ( v9 != -1 )
+      Scaleform::Render::Tessellator::replaceMonotone(this, p_scana, style);
+      v21 = p_scana->monotone;
+      if ( vertexLeft != -1 )
       {
-        LODWORD(v216) = v9 | 0x80000000;
-        HIDWORD(v216) = v9 | 0x80000000;
-        if ( v22->start )
+        LODWORD(v213) = vertexLeft | 0x80000000;
+        HIDWORD(v213) = vertexLeft | 0x80000000;
+        if ( v21->start )
         {
-          v27 = (signed __int64)&v4->MonoVertices.Pages[(unsigned __int64)v22->d.m.lastIdx >> 4][v22->d.m.lastIdx & 0xF];
-          if ( *(_DWORD *)v27 == (v9 | 0x80000000) )
+          v26 = &this->MonoVertices.Pages[(unsigned __int64)v21->d.m.lastIdx >> 4][v21->d.m.lastIdx & 0xF];
+          if ( v26->srcVer == (vertexLeft | 0x80000000) )
             goto LABEL_22;
-          v28 = v4->MonoVertices.Size >> 4;
-          if ( v28 >= v4->MonoVertices.NumPages )
+          v27 = this->MonoVertices.Size >> 4;
+          if ( v27 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-              v4->MonoVertices.Size >> 4);
-          v29 = v4->MonoVertices.Pages[v28];
-          v30 = v4->MonoVertices.Size & 0xF;
-          *(_QWORD *)&v29[v30].srcVer = v216;
-          v29[v30].next = 0i64;
-          *(_QWORD *)(v27 + 8) = &v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                            - 1) & 0xF];
-          v22->d.m.prevIdx2 = v22->d.m.prevIdx1;
-          v22->d.m.prevIdx1 = v22->d.m.lastIdx;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v28 = this->MonoVertices.Pages[v27];
+          v29 = this->MonoVertices.Size & 0xF;
+          *(_QWORD *)&v28[v29].srcVer = v213;
+          v28[v29].next = 0i64;
+          v26->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+          v21->d.m.prevIdx2 = v21->d.m.prevIdx1;
+          v21->d.m.prevIdx1 = v21->d.m.lastIdx;
         }
         else
         {
-          v23 = v4->MonoVertices.Size >> 4;
-          if ( v23 >= v4->MonoVertices.NumPages )
+          v22 = this->MonoVertices.Size >> 4;
+          if ( v22 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-              v4->MonoVertices.Size >> 4);
-          v24 = v4->MonoVertices.Pages[v23];
-          v25 = v4->MonoVertices.Size & 0xF;
-          *(_QWORD *)&v24[v25].srcVer = v216;
-          v24[v25].next = 0i64;
-          v26 = (signed __int64)&v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                           - 1) & 0xF];
-          *(_QWORD *)&v22->d.t.numTriangles = -1i64;
-          v22->start = (Scaleform::Render::Tessellator::MonoVertexType *)v26;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v23 = this->MonoVertices.Pages[v22];
+          v24 = this->MonoVertices.Size & 0xF;
+          *(_QWORD *)&v23[v24].srcVer = v213;
+          v23[v24].next = 0i64;
+          v25 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+          *(_QWORD *)&v21->d.t.numTriangles = -1i64;
+          v21->start = v25;
         }
-        v22->d.m.lastIdx = LODWORD(v4->MonoVertices.Size) - 1;
+        v21->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
       }
 LABEL_22:
-      if ( v199 == -1 )
+      if ( v196 == -1 )
         goto LABEL_32;
-      LODWORD(v222) = v199 & 0x7FFFFFFF;
-      HIDWORD(v222) = v199 & 0x7FFFFFFF;
-      if ( v22->start )
+      LODWORD(v219) = v196 & 0x7FFFFFFF;
+      HIDWORD(v219) = v196 & 0x7FFFFFFF;
+      if ( v21->start )
       {
-        v35 = (signed __int64)&v4->MonoVertices.Pages[(unsigned __int64)v22->d.m.lastIdx >> 4][v22->d.m.lastIdx & 0xF];
-        if ( *(_DWORD *)v35 == (v199 & 0x7FFFFFFF) )
+        v34 = &this->MonoVertices.Pages[(unsigned __int64)v21->d.m.lastIdx >> 4][v21->d.m.lastIdx & 0xF];
+        if ( v34->srcVer == (v196 & 0x7FFFFFFF) )
           goto LABEL_32;
-        v36 = v4->MonoVertices.Size >> 4;
-        if ( v36 >= v4->MonoVertices.NumPages )
+        v35 = this->MonoVertices.Size >> 4;
+        if ( v35 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-            v4->MonoVertices.Size >> 4);
-        v37 = v4->MonoVertices.Pages[v36];
-        v38 = v4->MonoVertices.Size & 0xF;
-        *(_QWORD *)&v37[v38].srcVer = v222;
-        v37[v38].next = 0i64;
-        *(_QWORD *)(v35 + 8) = &v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                          - 1) & 0xF];
-        v22->d.m.prevIdx2 = v22->d.m.prevIdx1;
-        v22->d.m.prevIdx1 = v22->d.m.lastIdx;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v36 = this->MonoVertices.Pages[v35];
+        v37 = this->MonoVertices.Size & 0xF;
+        *(_QWORD *)&v36[v37].srcVer = v219;
+        v36[v37].next = 0i64;
+        v34->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+        v21->d.m.prevIdx2 = v21->d.m.prevIdx1;
+        v21->d.m.prevIdx1 = v21->d.m.lastIdx;
       }
       else
       {
-        v31 = v4->MonoVertices.Size >> 4;
-        if ( v31 >= v4->MonoVertices.NumPages )
+        v30 = this->MonoVertices.Size >> 4;
+        if ( v30 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-            v4->MonoVertices.Size >> 4);
-        v32 = v4->MonoVertices.Pages[v31];
-        v33 = v4->MonoVertices.Size & 0xF;
-        *(_QWORD *)&v32[v33].srcVer = v222;
-        v32[v33].next = 0i64;
-        v34 = (signed __int64)&v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                         - 1) & 0xF];
-        *(_QWORD *)&v22->d.t.numTriangles = -1i64;
-        v22->start = (Scaleform::Render::Tessellator::MonoVertexType *)v34;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v31 = this->MonoVertices.Pages[v30];
+        v32 = this->MonoVertices.Size & 0xF;
+        *(_QWORD *)&v31[v32].srcVer = v219;
+        v31[v32].next = 0i64;
+        v33 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+        *(_QWORD *)&v21->d.t.numTriangles = -1i64;
+        v21->start = v33;
       }
-      v22->d.m.lastIdx = LODWORD(v4->MonoVertices.Size) - 1;
+      v21->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
 LABEL_32:
-      v39 = v18->monotone;
+      v38 = p_scana->monotone;
       if ( v10 == -1 )
         goto LABEL_42;
-      LODWORD(v220) = v10 | 0x80000000;
-      HIDWORD(v220) = v10 | 0x80000000;
-      if ( v39->start )
+      LODWORD(v217) = v10 | 0x80000000;
+      HIDWORD(v217) = v10 | 0x80000000;
+      if ( v38->start )
       {
-        v44 = (signed __int64)&v4->MonoVertices.Pages[(unsigned __int64)v39->d.m.lastIdx >> 4][v39->d.m.lastIdx & 0xF];
-        if ( *(_DWORD *)v44 == (v10 | 0x80000000) )
+        v43 = &this->MonoVertices.Pages[(unsigned __int64)v38->d.m.lastIdx >> 4][v38->d.m.lastIdx & 0xF];
+        if ( v43->srcVer == (v10 | 0x80000000) )
           goto LABEL_42;
-        v45 = v4->MonoVertices.Size >> 4;
-        if ( v45 >= v4->MonoVertices.NumPages )
+        v44 = this->MonoVertices.Size >> 4;
+        if ( v44 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-            v4->MonoVertices.Size >> 4);
-        v46 = v4->MonoVertices.Pages[v45];
-        v47 = v4->MonoVertices.Size & 0xF;
-        *(_QWORD *)&v46[v47].srcVer = v220;
-        v46[v47].next = 0i64;
-        *(_QWORD *)(v44 + 8) = &v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                          - 1) & 0xF];
-        v39->d.m.prevIdx2 = v39->d.m.prevIdx1;
-        v39->d.m.prevIdx1 = v39->d.m.lastIdx;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v45 = this->MonoVertices.Pages[v44];
+        v46 = this->MonoVertices.Size & 0xF;
+        *(_QWORD *)&v45[v46].srcVer = v217;
+        v45[v46].next = 0i64;
+        v43->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+        v38->d.m.prevIdx2 = v38->d.m.prevIdx1;
+        v38->d.m.prevIdx1 = v38->d.m.lastIdx;
       }
       else
       {
-        v40 = v4->MonoVertices.Size >> 4;
-        if ( v40 >= v4->MonoVertices.NumPages )
+        v39 = this->MonoVertices.Size >> 4;
+        if ( v39 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-            v4->MonoVertices.Size >> 4);
-        v41 = v4->MonoVertices.Pages[v40];
-        v42 = v4->MonoVertices.Size & 0xF;
-        *(_QWORD *)&v41[v42].srcVer = v220;
-        v41[v42].next = 0i64;
-        v43 = (signed __int64)&v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                         - 1) & 0xF];
-        *(_QWORD *)&v39->d.t.numTriangles = -1i64;
-        v39->start = (Scaleform::Render::Tessellator::MonoVertexType *)v43;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v40 = this->MonoVertices.Pages[v39];
+        v41 = this->MonoVertices.Size & 0xF;
+        *(_QWORD *)&v40[v41].srcVer = v217;
+        v40[v41].next = 0i64;
+        v42 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+        *(_QWORD *)&v38->d.t.numTriangles = -1i64;
+        v38->start = v42;
       }
-      v39->d.m.lastIdx = LODWORD(v4->MonoVertices.Size) - 1;
+      v38->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
 LABEL_42:
-      v19 = v227;
-      if ( v227 != -1 )
+      v18 = v224;
+      if ( v224 != -1 )
       {
-        LODWORD(v212) = v227 & 0x7FFFFFFF;
-        HIDWORD(v212) = v227 & 0x7FFFFFFF;
-        if ( !v39->start )
+        LODWORD(v209) = v224 & 0x7FFFFFFF;
+        HIDWORD(v209) = v224 & 0x7FFFFFFF;
+        if ( !v38->start )
         {
-          v48 = v4->MonoVertices.Size >> 4;
-          if ( v48 >= v4->MonoVertices.NumPages )
+          v47 = this->MonoVertices.Size >> 4;
+          if ( v47 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-              v4->MonoVertices.Size >> 4);
-          v49 = v4->MonoVertices.Pages[v48];
-          v50 = v4->MonoVertices.Size & 0xF;
-          *(_QWORD *)&v49[v50].srcVer = v212;
-          v49[v50].next = 0i64;
-          v51 = (signed __int64)&v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                           - 1) & 0xF];
-          *(_QWORD *)&v39->d.t.numTriangles = -1i64;
-          v39->start = (Scaleform::Render::Tessellator::MonoVertexType *)v51;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v48 = this->MonoVertices.Pages[v47];
+          v49 = this->MonoVertices.Size & 0xF;
+          *(_QWORD *)&v48[v49].srcVer = v209;
+          v48[v49].next = 0i64;
+          v50 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+          *(_QWORD *)&v38->d.t.numTriangles = -1i64;
+          v38->start = v50;
 LABEL_51:
-          v19 = v227;
-          v39->d.m.lastIdx = LODWORD(v4->MonoVertices.Size) - 1;
+          v18 = v224;
+          v38->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
           goto LABEL_52;
         }
-        v52 = (signed __int64)&v4->MonoVertices.Pages[(unsigned __int64)v39->d.m.lastIdx >> 4][v39->d.m.lastIdx & 0xF];
-        if ( *(_DWORD *)v52 != (v227 & 0x7FFFFFFF) )
+        v51 = &this->MonoVertices.Pages[(unsigned __int64)v38->d.m.lastIdx >> 4][v38->d.m.lastIdx & 0xF];
+        if ( v51->srcVer != (v224 & 0x7FFFFFFF) )
         {
-          v53 = v4->MonoVertices.Size >> 4;
-          if ( v53 >= v4->MonoVertices.NumPages )
+          v52 = this->MonoVertices.Size >> 4;
+          if ( v52 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-              v4->MonoVertices.Size >> 4);
-          v54 = v4->MonoVertices.Pages[v53];
-          v55 = v4->MonoVertices.Size & 0xF;
-          *(_QWORD *)&v54[v55].srcVer = v212;
-          v54[v55].next = 0i64;
-          *(_QWORD *)(v52 + 8) = &v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                            - 1) & 0xF];
-          v39->d.m.prevIdx2 = v39->d.m.prevIdx1;
-          v39->d.m.prevIdx1 = v39->d.m.lastIdx;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v53 = this->MonoVertices.Pages[v52];
+          v54 = this->MonoVertices.Size & 0xF;
+          *(_QWORD *)&v53[v54].srcVer = v209;
+          v53[v54].next = 0i64;
+          v51->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+          v38->d.m.prevIdx2 = v38->d.m.prevIdx1;
+          v38->d.m.prevIdx1 = v38->d.m.lastIdx;
           goto LABEL_51;
         }
       }
 LABEL_52:
-      v13 = v203;
-      v8 = v197;
-      v21 = v195;
-      v203->monotone = v18->monotone;
-      v20 = v200;
+      v12 = v200;
+      v8 = v194;
+      v20 = v192;
+      v200->monotone = p_scana->monotone;
+      rightAbove = v197;
     }
-    if ( v20 != style || !v13->monotone )
+    if ( rightAbove != style || !v12->monotone )
     {
-      if ( !v20 )
+      if ( !rightAbove )
       {
-        v13->monotone = 0i64;
+        v12->monotone = 0i64;
         goto LABEL_78;
       }
-      Scaleform::Render::Tessellator::replaceMonotone(v4, v13, v20);
-      v56 = v13->monotone;
+      Scaleform::Render::Tessellator::replaceMonotone(this, v12, rightAbove);
+      v55 = v12->monotone;
       if ( v10 != -1 )
       {
-        LODWORD(v214) = v10 | 0x80000000;
-        HIDWORD(v214) = v10 | 0x80000000;
-        if ( !v56->start )
+        LODWORD(v211) = v10 | 0x80000000;
+        HIDWORD(v211) = v10 | 0x80000000;
+        if ( !v55->start )
         {
-          v57 = v4->MonoVertices.Size >> 4;
-          if ( v57 >= v4->MonoVertices.NumPages )
+          v56 = this->MonoVertices.Size >> 4;
+          if ( v56 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-              v4->MonoVertices.Size >> 4);
-          v58 = v4->MonoVertices.Pages[v57];
-          v59 = v4->MonoVertices.Size & 0xF;
-          *(_QWORD *)&v58[v59].srcVer = v214;
-          v58[v59].next = 0i64;
-          v60 = (signed __int64)&v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                           - 1) & 0xF];
-          *(_QWORD *)&v56->d.t.numTriangles = -1i64;
-          v56->start = (Scaleform::Render::Tessellator::MonoVertexType *)v60;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v57 = this->MonoVertices.Pages[v56];
+          v58 = this->MonoVertices.Size & 0xF;
+          *(_QWORD *)&v57[v58].srcVer = v211;
+          v57[v58].next = 0i64;
+          v59 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+          *(_QWORD *)&v55->d.t.numTriangles = -1i64;
+          v55->start = v59;
           goto LABEL_66;
         }
-        v61 = (signed __int64)&v4->MonoVertices.Pages[(unsigned __int64)v56->d.m.lastIdx >> 4][v56->d.m.lastIdx & 0xF];
-        if ( *(_DWORD *)v61 != (v10 | 0x80000000) )
+        v60 = &this->MonoVertices.Pages[(unsigned __int64)v55->d.m.lastIdx >> 4][v55->d.m.lastIdx & 0xF];
+        if ( v60->srcVer != (v10 | 0x80000000) )
         {
-          v62 = v4->MonoVertices.Size >> 4;
-          if ( v62 >= v4->MonoVertices.NumPages )
+          v61 = this->MonoVertices.Size >> 4;
+          if ( v61 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-              v4->MonoVertices.Size >> 4);
-          v63 = v4->MonoVertices.Pages[v62];
-          v64 = v4->MonoVertices.Size & 0xF;
-          *(_QWORD *)&v63[v64].srcVer = v214;
-          v63[v64].next = 0i64;
-          *(_QWORD *)(v61 + 8) = &v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                            - 1) & 0xF];
-          v56->d.m.prevIdx2 = v56->d.m.prevIdx1;
-          v56->d.m.prevIdx1 = v56->d.m.lastIdx;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v62 = this->MonoVertices.Pages[v61];
+          v63 = this->MonoVertices.Size & 0xF;
+          *(_QWORD *)&v62[v63].srcVer = v211;
+          v62[v63].next = 0i64;
+          v60->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+          v55->d.m.prevIdx2 = v55->d.m.prevIdx1;
+          v55->d.m.prevIdx1 = v55->d.m.lastIdx;
 LABEL_66:
-          v19 = v227;
-          v56->d.m.lastIdx = LODWORD(v4->MonoVertices.Size) - 1;
+          v18 = v224;
+          v55->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
         }
       }
-      if ( v19 != -1 )
+      if ( v18 != -1 )
       {
-        LODWORD(v218) = v19 & 0x7FFFFFFF;
-        HIDWORD(v218) = v19 & 0x7FFFFFFF;
-        if ( !v56->start )
+        LODWORD(v215) = v18 & 0x7FFFFFFF;
+        HIDWORD(v215) = v18 & 0x7FFFFFFF;
+        if ( !v55->start )
         {
-          v65 = v4->MonoVertices.Size >> 4;
-          if ( v65 >= v4->MonoVertices.NumPages )
+          v64 = this->MonoVertices.Size >> 4;
+          if ( v64 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-              v4->MonoVertices.Size >> 4);
-          v66 = v4->MonoVertices.Pages[v65];
-          v67 = v4->MonoVertices.Size & 0xF;
-          *(_QWORD *)&v66[v67].srcVer = v218;
-          v66[v67].next = 0i64;
-          v68 = (signed __int64)&v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                           - 1) & 0xF];
-          *(_QWORD *)&v56->d.t.numTriangles = -1i64;
-          v56->start = (Scaleform::Render::Tessellator::MonoVertexType *)v68;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v65 = this->MonoVertices.Pages[v64];
+          v66 = this->MonoVertices.Size & 0xF;
+          *(_QWORD *)&v65[v66].srcVer = v215;
+          v65[v66].next = 0i64;
+          v67 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+          *(_QWORD *)&v55->d.t.numTriangles = -1i64;
+          v55->start = v67;
           goto LABEL_76;
         }
-        v69 = (signed __int64)&v4->MonoVertices.Pages[(unsigned __int64)v56->d.m.lastIdx >> 4][v56->d.m.lastIdx & 0xF];
-        if ( *(_DWORD *)v69 != (v19 & 0x7FFFFFFF) )
+        v68 = &this->MonoVertices.Pages[(unsigned __int64)v55->d.m.lastIdx >> 4][v55->d.m.lastIdx & 0xF];
+        if ( v68->srcVer != (v18 & 0x7FFFFFFF) )
         {
-          v70 = v4->MonoVertices.Size >> 4;
-          if ( v70 >= v4->MonoVertices.NumPages )
+          v69 = this->MonoVertices.Size >> 4;
+          if ( v69 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-              v4->MonoVertices.Size >> 4);
-          v71 = v4->MonoVertices.Pages[v70];
-          v72 = v4->MonoVertices.Size & 0xF;
-          *(_QWORD *)&v71[v72].srcVer = v218;
-          v71[v72].next = 0i64;
-          *(_QWORD *)(v69 + 8) = &v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                            - 1) & 0xF];
-          v56->d.m.prevIdx2 = v56->d.m.prevIdx1;
-          v56->d.m.prevIdx1 = v56->d.m.lastIdx;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v70 = this->MonoVertices.Pages[v69];
+          v71 = this->MonoVertices.Size & 0xF;
+          *(_QWORD *)&v70[v71].srcVer = v215;
+          v70[v71].next = 0i64;
+          v68->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+          v55->d.m.prevIdx2 = v55->d.m.prevIdx1;
+          v55->d.m.prevIdx1 = v55->d.m.lastIdx;
 LABEL_76:
-          v19 = v227;
-          v56->d.m.lastIdx = LODWORD(v4->MonoVertices.Size) - 1;
+          v18 = v224;
+          v55->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
         }
       }
-      v21 = v195;
-      v8 = v197;
-      v13 = v203;
+      v20 = v192;
+      v8 = v194;
+      v12 = v200;
     }
 LABEL_78:
-    if ( v8 == v21 )
+    if ( v8 == v20 )
       break;
     if ( v8 )
     {
-      v73 = v4->PendingEnds.Pages;
-      v9 = v199;
-      v202 = v199;
+      v72 = this->PendingEnds.Pages;
+      vertexLeft = v196;
+      v199 = v196;
       --v8;
-      v74 = v210 + 1;
-      v18 = (Scaleform::Render::Tessellator::ScanChainType *)&v73[(unsigned __int64)v210 >> 4][v210 & 0xF];
-      v197 = v8;
-      ++v210;
+      v73 = firstChain + 1;
+      p_scana = (Scaleform::Render::Tessellator::ScanChainType *)&v72[(unsigned __int64)firstChain >> 4][firstChain & 0xF];
+      v194 = v8;
+      ++firstChain;
       if ( v8 )
       {
-        v75 = v73[(unsigned __int64)v74 >> 4][v74 & 0xF].vertex;
-        v21 = v195;
+        v74 = v72[(unsigned __int64)v73 >> 4][v73 & 0xF].vertex;
+        v20 = v192;
       }
       else
       {
-        v75 = v209;
+        v74 = vertexRight;
       }
-      v199 = v75;
-      v76 = v18->monotone;
-      if ( v76 )
+      v196 = v74;
+      v75 = p_scana->monotone;
+      if ( v75 )
       {
-        v16 = v76->style;
-        v205 = v76->style;
+        styleLeft = v75->style;
+        v202 = styleLeft;
       }
       else
       {
-        v16 = 0;
-        v205 = 0;
+        styleLeft = 0;
+        v202 = 0;
       }
     }
     else
     {
-      v16 = v205;
-      v9 = v202;
+      styleLeft = v202;
+      vertexLeft = v199;
     }
-    v77 = v228;
-    v20 = v200;
-    v17 = v199;
-    if ( v228 )
+    v76 = v225;
+    rightAbove = v197;
+    vertex = v196;
+    if ( v225 )
     {
-      v78 = v4->ChainsAbove.Pages;
-      v79 = v207 + 1;
-      --v228;
-      v10 = v19;
-      v80 = (unsigned __int64)v207 >> 4;
-      v81 = v207++ & 0xF;
-      v82 = v78[v80];
-      v13 = &v82[v81];
-      v203 = &v82[v81];
-      if ( v77 == 1 )
-        v19 = v206;
+      v77 = this->ChainsAbove.Pages;
+      v78 = v204 + 1;
+      --v225;
+      v10 = v18;
+      v79 = (unsigned __int64)v204 >> 4;
+      v80 = v204++ & 0xF;
+      v12 = &v77[v79][v80];
+      v200 = v12;
+      if ( v76 == 1 )
+        v18 = v203;
       else
-        v19 = v78[(unsigned __int64)v79 >> 4][v79 & 0xF].vertex;
-      v21 = v195;
-      v20 = v13->chain->rightAbove;
+        v18 = v77[(unsigned __int64)v78 >> 4][v78 & 0xF].vertex;
+      v20 = v192;
+      rightAbove = v12->chain->rightAbove;
       goto LABEL_2;
     }
   }
-  v83 = v202;
-  v84 = v202;
-  if ( v199 != -1 )
-    v84 = v199;
-  v201 = v84;
-  if ( v228 && v84 != -1 )
+  v81 = v199;
+  v82 = v199;
+  if ( v196 != -1 )
+    v82 = v196;
+  v198 = v82;
+  if ( v225 && v82 != -1 )
   {
-    v85 = 0i64;
-    v204 = 0i64;
+    v83 = 0i64;
+    v201 = 0i64;
     if ( v8 )
     {
-      v86 = v4->PendingEnds.Pages;
-      v83 = v199;
-      v202 = v199;
-      v18 = (Scaleform::Render::Tessellator::ScanChainType *)&v86[(unsigned __int64)v210 >> 4][v210 & 0xF];
+      v84 = this->PendingEnds.Pages;
+      v81 = v196;
+      v199 = v196;
+      p_scana = (Scaleform::Render::Tessellator::ScanChainType *)&v84[(unsigned __int64)firstChain >> 4][firstChain & 0xF];
       if ( v8 == 1 )
-        v87 = v209;
+        v85 = vertexRight;
       else
-        v87 = v86[(unsigned __int64)(v210 + 1) >> 4][(v210 + 1) & 0xF].vertex;
-      v199 = v87;
+        v85 = v84[(unsigned __int64)(firstChain + 1) >> 4][(firstChain + 1) & 0xF].vertex;
+      v196 = v85;
     }
-    v88 = v4->ChainsAbove.Pages;
-    v89 = v228 - 1;
-    v90 = v207 + 1;
-    v229 = v89;
-    v91 = v207;
-    v92 = v207 & 0xF;
-    v208 = v207 + 1;
-    v93 = &v88[v91 >> 4][v92];
-    if ( v89 )
-      v94 = v88[(unsigned __int64)v90 >> 4][v90 & 0xF].vertex;
+    v86 = this->ChainsAbove.Pages;
+    v87 = v225 - 1;
+    v88 = v204 + 1;
+    v226 = v87;
+    v89 = v204;
+    v90 = v204 & 0xF;
+    v205 = v204 + 1;
+    v91 = &v86[v89 >> 4][v90];
+    if ( v87 )
+      v92 = v86[(unsigned __int64)v88 >> 4][v88 & 0xF].vertex;
     else
-      v94 = v206;
-    v95 = style;
-    v198 = v94;
-    v96 = v18->monotone;
-    v196 = v93->chain->rightAbove;
-    if ( v96 && v96->style == style )
+      v92 = v203;
+    v93 = style;
+    v195 = v92;
+    v94 = p_scana->monotone;
+    v193 = v91->chain->rightAbove;
+    if ( v94 && v94->style == style )
     {
-      v97 = Scaleform::Render::Tessellator::startMonotone(v4, style);
-      v98 = v18->monotone;
-      v89 = v229;
-      v85 = v97;
-      v97->start = v98->start;
-      v204 = v97;
-      *(_QWORD *)&v97->d.m.lastIdx = *(_QWORD *)&v98->d.m.lastIdx;
-      *(_QWORD *)&v97->d.t.meshIdx = *(_QWORD *)&v98->d.t.meshIdx;
-      v97->lowerBase = v98->lowerBase;
-      v99 = v18->monotone;
-      v99->start = 0i64;
-      *(_QWORD *)&v99->d.m.lastIdx = -1i64;
-      v99->d.m.prevIdx2 = -1;
-      v99->style = style;
-      v99->lowerBase = 0i64;
+      started = Scaleform::Render::Tessellator::startMonotone(this, style);
+      v87 = v226;
+      v83 = started;
+      *started = *p_scana->monotone;
+      v201 = started;
+      v96 = p_scana->monotone;
+      v96->start = 0i64;
+      *(_QWORD *)&v96->d.m.lastIdx = -1i64;
+      v96->d.m.prevIdx2 = -1;
+      v96->style = style;
+      v96->lowerBase = 0i64;
     }
-    v100 = v196;
-    while ( v89 )
+    v97 = v193;
+    while ( v87 )
     {
-      v128 = v198;
-      if ( v19 != v198 )
+      v125 = v195;
+      if ( v18 != v195 )
       {
-        Scaleform::Render::Tessellator::replaceMonotone(v4, v93, v95);
-        v137 = v93->monotone;
-        v138 = v84 | 0x80000000;
-        LODWORD(v223) = v84 | 0x80000000;
-        HIDWORD(v223) = v84 | 0x80000000;
-        if ( v137->start )
+        Scaleform::Render::Tessellator::replaceMonotone(this, v91, v93);
+        v134 = v91->monotone;
+        v135 = v82 | 0x80000000;
+        LODWORD(v220) = v82 | 0x80000000;
+        HIDWORD(v220) = v82 | 0x80000000;
+        if ( v134->start )
         {
-          v143 = (signed __int64)&v4->MonoVertices.Pages[(unsigned __int64)v137->d.m.lastIdx >> 4][v137->d.m.lastIdx & 0xF];
-          if ( *(_DWORD *)v143 != v138 )
+          v140 = &this->MonoVertices.Pages[(unsigned __int64)v134->d.m.lastIdx >> 4][v134->d.m.lastIdx & 0xF];
+          if ( v140->srcVer != v135 )
           {
-            v144 = v4->MonoVertices.Size >> 4;
-            if ( v144 >= v4->MonoVertices.NumPages )
+            v141 = this->MonoVertices.Size >> 4;
+            if ( v141 >= this->MonoVertices.NumPages )
               Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-                v4->MonoVertices.Size >> 4);
-            v145 = v4->MonoVertices.Pages[v144];
-            v146 = v4->MonoVertices.Size & 0xF;
-            *(_QWORD *)&v145[v146].srcVer = v223;
-            v145[v146].next = 0i64;
-            ++v4->MonoVertices.Size;
-            v19 = v227;
-            *(_QWORD *)(v143 + 8) = &v4->MonoVertices.Pages[(v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                             - 1) & 0xF];
-            v137->d.m.prevIdx2 = v137->d.m.prevIdx1;
-            v137->d.m.prevIdx1 = v137->d.m.lastIdx;
-            v137->d.m.lastIdx = LODWORD(v4->MonoVertices.Size) - 1;
+                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                this->MonoVertices.Size >> 4);
+            v142 = this->MonoVertices.Pages[v141];
+            v143 = this->MonoVertices.Size & 0xF;
+            *(_QWORD *)&v142[v143].srcVer = v220;
+            v142[v143].next = 0i64;
+            ++this->MonoVertices.Size;
+            v18 = v224;
+            v140->next = &this->MonoVertices.Pages[(this->MonoVertices.Size - 1) >> 4][((unsigned int)this->MonoVertices.Size
+                                                                                      - 1) & 0xF];
+            v134->d.m.prevIdx2 = v134->d.m.prevIdx1;
+            v134->d.m.prevIdx1 = v134->d.m.lastIdx;
+            v134->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
           }
         }
         else
         {
-          v139 = v4->MonoVertices.Size >> 4;
-          if ( v139 >= v4->MonoVertices.NumPages )
+          v136 = this->MonoVertices.Size >> 4;
+          if ( v136 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-              v4->MonoVertices.Size >> 4);
-          v140 = v4->MonoVertices.Pages[v139];
-          v19 = v227;
-          v141 = v4->MonoVertices.Size & 0xF;
-          *(_QWORD *)&v140[v141].srcVer = v223;
-          v140[v141].next = 0i64;
-          v142 = (signed __int64)&v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                            - 1) & 0xF];
-          *(_QWORD *)&v137->d.t.numTriangles = -1i64;
-          v137->start = (Scaleform::Render::Tessellator::MonoVertexType *)v142;
-          v137->d.m.lastIdx = LODWORD(v4->MonoVertices.Size) - 1;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v137 = this->MonoVertices.Pages[v136];
+          v18 = v224;
+          v138 = this->MonoVertices.Size & 0xF;
+          *(_QWORD *)&v137[v138].srcVer = v220;
+          v137[v138].next = 0i64;
+          v139 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+          *(_QWORD *)&v134->d.t.numTriangles = -1i64;
+          v134->start = v139;
+          v134->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
         }
-        LODWORD(v217) = v201 & 0x7FFFFFFF;
-        HIDWORD(v217) = v201 & 0x7FFFFFFF;
-        if ( !v137->start )
+        LODWORD(v214) = v198 & 0x7FFFFFFF;
+        HIDWORD(v214) = v198 & 0x7FFFFFFF;
+        if ( !v134->start )
         {
-          v147 = v4->MonoVertices.Size >> 4;
-          if ( v147 >= v4->MonoVertices.NumPages )
+          v144 = this->MonoVertices.Size >> 4;
+          if ( v144 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-              v4->MonoVertices.Size >> 4);
-          v148 = v4->MonoVertices.Pages[v147];
-          v149 = v4->MonoVertices.Size & 0xF;
-          *(_QWORD *)&v148[v149].srcVer = v217;
-          v148[v149].next = 0i64;
-          v150 = (signed __int64)&v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                            - 1) & 0xF];
-          *(_QWORD *)&v137->d.t.numTriangles = -1i64;
-          v137->start = (Scaleform::Render::Tessellator::MonoVertexType *)v150;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v145 = this->MonoVertices.Pages[v144];
+          v146 = this->MonoVertices.Size & 0xF;
+          *(_QWORD *)&v145[v146].srcVer = v214;
+          v145[v146].next = 0i64;
+          v147 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+          *(_QWORD *)&v134->d.t.numTriangles = -1i64;
+          v134->start = v147;
           goto LABEL_166;
         }
-        v151 = (signed __int64)&v4->MonoVertices.Pages[(unsigned __int64)v137->d.m.lastIdx >> 4][v137->d.m.lastIdx & 0xF];
-        if ( *(_DWORD *)v151 != (v201 & 0x7FFFFFFF) )
+        v148 = &this->MonoVertices.Pages[(unsigned __int64)v134->d.m.lastIdx >> 4][v134->d.m.lastIdx & 0xF];
+        if ( v148->srcVer != (v198 & 0x7FFFFFFF) )
         {
-          v152 = v4->MonoVertices.Size >> 4;
-          if ( v152 >= v4->MonoVertices.NumPages )
+          v149 = this->MonoVertices.Size >> 4;
+          if ( v149 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-              v4->MonoVertices.Size >> 4);
-          v153 = v4->MonoVertices.Pages[v152];
-          v154 = v4->MonoVertices.Size & 0xF;
-          *(_QWORD *)&v153[v154].srcVer = v217;
-          v153[v154].next = 0i64;
-          *(_QWORD *)(v151 + 8) = &v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                             - 1) & 0xF];
-          v137->d.m.prevIdx2 = v137->d.m.prevIdx1;
-          v137->d.m.prevIdx1 = v137->d.m.lastIdx;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v150 = this->MonoVertices.Pages[v149];
+          v151 = this->MonoVertices.Size & 0xF;
+          *(_QWORD *)&v150[v151].srcVer = v214;
+          v150[v151].next = 0i64;
+          v148->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+          v134->d.m.prevIdx2 = v134->d.m.prevIdx1;
+          v134->d.m.prevIdx1 = v134->d.m.lastIdx;
 LABEL_166:
-          v19 = v227;
-          v137->d.m.lastIdx = LODWORD(v4->MonoVertices.Size) - 1;
+          v18 = v224;
+          v134->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
         }
-        v115 = v93->monotone;
-        if ( v19 != -1 )
+        v112 = v91->monotone;
+        if ( v18 != -1 )
         {
-          LODWORD(v211) = v19 | 0x80000000;
-          HIDWORD(v211) = v19 | 0x80000000;
-          if ( !v115->start )
+          LODWORD(v208) = v18 | 0x80000000;
+          HIDWORD(v208) = v18 | 0x80000000;
+          if ( !v112->start )
           {
-            v155 = v4->MonoVertices.Size >> 4;
-            if ( v155 >= v4->MonoVertices.NumPages )
+            v152 = this->MonoVertices.Size >> 4;
+            if ( v152 >= this->MonoVertices.NumPages )
               Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-                v4->MonoVertices.Size >> 4);
-            v156 = v4->MonoVertices.Pages[v155];
-            v157 = v4->MonoVertices.Size & 0xF;
-            *(_QWORD *)&v156[v157].srcVer = v211;
-            v156[v157].next = 0i64;
-            v158 = (signed __int64)&v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                              - 1) & 0xF];
-            *(_QWORD *)&v115->d.t.numTriangles = -1i64;
-            v115->start = (Scaleform::Render::Tessellator::MonoVertexType *)v158;
+                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                this->MonoVertices.Size >> 4);
+            v153 = this->MonoVertices.Pages[v152];
+            v154 = this->MonoVertices.Size & 0xF;
+            *(_QWORD *)&v153[v154].srcVer = v208;
+            v153[v154].next = 0i64;
+            v155 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+            *(_QWORD *)&v112->d.t.numTriangles = -1i64;
+            v112->start = v155;
             goto LABEL_176;
           }
-          v159 = (signed __int64)&v4->MonoVertices.Pages[(unsigned __int64)v115->d.m.lastIdx >> 4][v115->d.m.lastIdx & 0xF];
-          if ( *(_DWORD *)v159 != (v19 | 0x80000000) )
+          v156 = &this->MonoVertices.Pages[(unsigned __int64)v112->d.m.lastIdx >> 4][v112->d.m.lastIdx & 0xF];
+          if ( v156->srcVer != (v18 | 0x80000000) )
           {
-            v160 = v4->MonoVertices.Size >> 4;
-            if ( v160 >= v4->MonoVertices.NumPages )
+            v157 = this->MonoVertices.Size >> 4;
+            if ( v157 >= this->MonoVertices.NumPages )
               Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-                v4->MonoVertices.Size >> 4);
-            v161 = v4->MonoVertices.Pages[v160];
-            v162 = v4->MonoVertices.Size & 0xF;
-            *(_QWORD *)&v161[v162].srcVer = v211;
-            v161[v162].next = 0i64;
-            *(_QWORD *)(v159 + 8) = &v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                               - 1) & 0xF];
-            v115->d.m.prevIdx2 = v115->d.m.prevIdx1;
-            v115->d.m.prevIdx1 = v115->d.m.lastIdx;
+                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                this->MonoVertices.Size >> 4);
+            v158 = this->MonoVertices.Pages[v157];
+            v159 = this->MonoVertices.Size & 0xF;
+            *(_QWORD *)&v158[v159].srcVer = v208;
+            v158[v159].next = 0i64;
+            v156->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+            v112->d.m.prevIdx2 = v112->d.m.prevIdx1;
+            v112->d.m.prevIdx1 = v112->d.m.lastIdx;
 LABEL_176:
-            v19 = v227;
-            v115->d.m.lastIdx = LODWORD(v4->MonoVertices.Size) - 1;
+            v18 = v224;
+            v112->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
           }
         }
-        if ( v198 != -1 )
+        if ( v195 != -1 )
         {
-          v163 = v115->start == 0i64;
-          scana.vertex = v198 & 0x7FFFFFFF;
-          *(&scana.vertex + 1) = v198 & 0x7FFFFFFF;
-          if ( v163 )
+          v160 = v112->start == 0i64;
+          scana.vertex = v195 & 0x7FFFFFFF;
+          *(&scana.vertex + 1) = v195 & 0x7FFFFFFF;
+          if ( v160 )
           {
-            v129 = (signed __int64)&v4->MonoVertices;
-            v164 = v4->MonoVertices.Size >> 4;
-            if ( v164 >= v4->MonoVertices.NumPages )
+            p_MonoVertices = &this->MonoVertices;
+            v161 = this->MonoVertices.Size >> 4;
+            if ( v161 >= this->MonoVertices.NumPages )
               Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-                v4->MonoVertices.Size >> 4);
-            v131 = v4->MonoVertices.Pages[v164];
-            v132 = *(_QWORD *)&scana.vertex;
+                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                this->MonoVertices.Size >> 4);
+            v128 = this->MonoVertices.Pages[v161];
+            v129 = *(_QWORD *)&scana.vertex;
 LABEL_182:
-            v165 = *(_DWORD *)(v129 + 8) & 0xF;
-            *(_QWORD *)&v131[v165].srcVer = v132;
-            v131[v165].next = 0i64;
-            v115->start = (Scaleform::Render::Tessellator::MonoVertexType *)(*(_QWORD *)(*(_QWORD *)(v129 + 32)
-                                                                                       + 8
-                                                                                       * ((unsigned __int64)(++*(_QWORD *)(v129 + 8) - 1i64) >> 4))
-                                                                           + 16i64 * ((*(_DWORD *)(v129 + 8) - 1) & 0xF));
-            *(_QWORD *)&v115->d.t.numTriangles = -1i64;
+            v162 = p_MonoVertices->Size & 0xF;
+            *(_QWORD *)&v128[v162].srcVer = v129;
+            v128[v162].next = 0i64;
+            v112->start = &p_MonoVertices->Pages[p_MonoVertices->Size++ >> 4][(LODWORD(p_MonoVertices->Size) - 1) & 0xF];
+            *(_QWORD *)&v112->d.t.numTriangles = -1i64;
 LABEL_183:
-            v19 = v227;
-            v115->d.m.lastIdx = LODWORD(v4->MonoVertices.Size) - 1;
+            v18 = v224;
+            v112->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
           }
           else
           {
-            v166 = (signed __int64)&v4->MonoVertices.Pages[(unsigned __int64)v115->d.m.lastIdx >> 4][v115->d.m.lastIdx & 0xF];
-            if ( *(_DWORD *)v166 != (v198 & 0x7FFFFFFF) )
+            v163 = &this->MonoVertices.Pages[(unsigned __int64)v112->d.m.lastIdx >> 4][v112->d.m.lastIdx & 0xF];
+            if ( v163->srcVer != (v195 & 0x7FFFFFFF) )
             {
-              v167 = v4->MonoVertices.Size >> 4;
-              if ( v167 >= v4->MonoVertices.NumPages )
+              v164 = this->MonoVertices.Size >> 4;
+              if ( v164 >= this->MonoVertices.NumPages )
                 Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                  (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-                  v4->MonoVertices.Size >> 4);
-              v168 = v4->MonoVertices.Pages[v167];
-              v169 = v4->MonoVertices.Size & 0xF;
-              *(_QWORD *)&v168[v169].srcVer = *(_QWORD *)&scana.vertex;
-              v168[v169].next = 0i64;
-              *(_QWORD *)(v166 + 8) = &v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                                 - 1) & 0xF];
-              v115->d.m.prevIdx2 = v115->d.m.prevIdx1;
-              v115->d.m.prevIdx1 = v115->d.m.lastIdx;
+                  (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                  this->MonoVertices.Size >> 4);
+              v165 = this->MonoVertices.Pages[v164];
+              v166 = this->MonoVertices.Size & 0xF;
+              *(_QWORD *)&v165[v166].srcVer = *(_QWORD *)&scana.vertex;
+              v165[v166].next = 0i64;
+              v163->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size)
+                                                                                    - 1) & 0xF];
+              v112->d.m.prevIdx2 = v112->d.m.prevIdx1;
+              v112->d.m.prevIdx1 = v112->d.m.lastIdx;
               goto LABEL_183;
             }
           }
         }
 LABEL_184:
-        v100 = v196;
-        v89 = v229;
-        v95 = style;
+        v97 = v193;
+        v87 = v226;
+        v93 = style;
       }
-      if ( v100 != v95 || !v93->monotone )
+      if ( v97 != v93 || !v91->monotone )
       {
-        if ( !v100 )
+        if ( !v97 )
         {
-          v93->monotone = 0i64;
+          v91->monotone = 0i64;
           goto LABEL_214;
         }
-        Scaleform::Render::Tessellator::replaceMonotone(v4, v93, v100);
-        v170 = v93->monotone;
-        if ( v19 != -1 )
+        Scaleform::Render::Tessellator::replaceMonotone(this, v91, v97);
+        v167 = v91->monotone;
+        if ( v18 != -1 )
         {
-          v171 = v19 | 0x80000000;
-          v163 = v170->start == 0i64;
-          LODWORD(v225) = v171;
-          HIDWORD(v225) = v171;
-          if ( v163 )
+          v168 = v18 | 0x80000000;
+          v160 = v167->start == 0i64;
+          LODWORD(v222) = v168;
+          HIDWORD(v222) = v168;
+          if ( v160 )
           {
-            v172 = v4->MonoVertices.Size >> 4;
-            if ( v172 >= v4->MonoVertices.NumPages )
+            v169 = this->MonoVertices.Size >> 4;
+            if ( v169 >= this->MonoVertices.NumPages )
               Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-                v4->MonoVertices.Size >> 4);
-            v173 = v4->MonoVertices.Pages[v172];
-            v174 = v4->MonoVertices.Size & 0xF;
-            *(_QWORD *)&v173[v174].srcVer = v225;
-            v173[v174].next = 0i64;
-            v175 = (signed __int64)&v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                              - 1) & 0xF];
-            *(_QWORD *)&v170->d.t.numTriangles = -1i64;
-            v170->start = (Scaleform::Render::Tessellator::MonoVertexType *)v175;
+                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                this->MonoVertices.Size >> 4);
+            v170 = this->MonoVertices.Pages[v169];
+            v171 = this->MonoVertices.Size & 0xF;
+            *(_QWORD *)&v170[v171].srcVer = v222;
+            v170[v171].next = 0i64;
+            v172 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+            *(_QWORD *)&v167->d.t.numTriangles = -1i64;
+            v167->start = v172;
             goto LABEL_202;
           }
-          v176 = (signed __int64)&v4->MonoVertices.Pages[(unsigned __int64)v170->d.m.lastIdx >> 4][v170->d.m.lastIdx & 0xF];
-          if ( *(_DWORD *)v176 != v171 )
+          v173 = &this->MonoVertices.Pages[(unsigned __int64)v167->d.m.lastIdx >> 4][v167->d.m.lastIdx & 0xF];
+          if ( v173->srcVer != v168 )
           {
-            v177 = v4->MonoVertices.Size >> 4;
-            if ( v177 >= v4->MonoVertices.NumPages )
+            v174 = this->MonoVertices.Size >> 4;
+            if ( v174 >= this->MonoVertices.NumPages )
               Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-                v4->MonoVertices.Size >> 4);
-            v178 = v4->MonoVertices.Pages[v177];
-            v179 = v4->MonoVertices.Size & 0xF;
-            *(_QWORD *)&v178[v179].srcVer = v225;
-            v178[v179].next = 0i64;
-            *(_QWORD *)(v176 + 8) = &v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                               - 1) & 0xF];
-            v170->d.m.prevIdx2 = v170->d.m.prevIdx1;
-            v170->d.m.prevIdx1 = v170->d.m.lastIdx;
+                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                this->MonoVertices.Size >> 4);
+            v175 = this->MonoVertices.Pages[v174];
+            v176 = this->MonoVertices.Size & 0xF;
+            *(_QWORD *)&v175[v176].srcVer = v222;
+            v175[v176].next = 0i64;
+            v173->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+            v167->d.m.prevIdx2 = v167->d.m.prevIdx1;
+            v167->d.m.prevIdx1 = v167->d.m.lastIdx;
 LABEL_202:
-            v170->d.m.lastIdx = LODWORD(v4->MonoVertices.Size) - 1;
+            v167->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
           }
         }
-        if ( v128 != -1 )
+        if ( v125 != -1 )
         {
-          v163 = v170->start == 0i64;
-          LODWORD(scana.chain) = v128 & 0x7FFFFFFF;
-          HIDWORD(scana.chain) = v128 & 0x7FFFFFFF;
-          if ( v163 )
+          v160 = v167->start == 0i64;
+          LODWORD(scana.chain) = v125 & 0x7FFFFFFF;
+          HIDWORD(scana.chain) = v125 & 0x7FFFFFFF;
+          if ( v160 )
           {
-            v180 = v4->MonoVertices.Size >> 4;
-            if ( v180 >= v4->MonoVertices.NumPages )
+            v177 = this->MonoVertices.Size >> 4;
+            if ( v177 >= this->MonoVertices.NumPages )
               Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-                v4->MonoVertices.Size >> 4);
-            v181 = v4->MonoVertices.Pages[v180];
-            v182 = v4->MonoVertices.Size & 0xF;
-            *(_QWORD *)&v181[v182].srcVer = scana.chain;
-            v181[v182].next = 0i64;
-            v183 = (signed __int64)&v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                              - 1) & 0xF];
-            *(_QWORD *)&v170->d.t.numTriangles = -1i64;
-            v170->start = (Scaleform::Render::Tessellator::MonoVertexType *)v183;
+                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                this->MonoVertices.Size >> 4);
+            v178 = this->MonoVertices.Pages[v177];
+            v179 = this->MonoVertices.Size & 0xF;
+            *(_QWORD *)&v178[v179].srcVer = scana.chain;
+            v178[v179].next = 0i64;
+            v180 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+            *(_QWORD *)&v167->d.t.numTriangles = -1i64;
+            v167->start = v180;
             goto LABEL_212;
           }
-          v184 = (signed __int64)&v4->MonoVertices.Pages[(unsigned __int64)v170->d.m.lastIdx >> 4][v170->d.m.lastIdx & 0xF];
-          if ( *(_DWORD *)v184 != (v128 & 0x7FFFFFFF) )
+          v181 = &this->MonoVertices.Pages[(unsigned __int64)v167->d.m.lastIdx >> 4][v167->d.m.lastIdx & 0xF];
+          if ( v181->srcVer != (v125 & 0x7FFFFFFF) )
           {
-            v185 = v4->MonoVertices.Size >> 4;
-            if ( v185 >= v4->MonoVertices.NumPages )
+            v182 = this->MonoVertices.Size >> 4;
+            if ( v182 >= this->MonoVertices.NumPages )
               Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-                v4->MonoVertices.Size >> 4);
-            v186 = v4->MonoVertices.Pages[v185];
-            v187 = v4->MonoVertices.Size & 0xF;
-            *(_QWORD *)&v186[v187].srcVer = scana.chain;
-            v186[v187].next = 0i64;
-            *(_QWORD *)(v184 + 8) = &v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                               - 1) & 0xF];
-            v170->d.m.prevIdx2 = v170->d.m.prevIdx1;
-            v170->d.m.prevIdx1 = v170->d.m.lastIdx;
+                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                this->MonoVertices.Size >> 4);
+            v183 = this->MonoVertices.Pages[v182];
+            v184 = this->MonoVertices.Size & 0xF;
+            *(_QWORD *)&v183[v184].srcVer = scana.chain;
+            v183[v184].next = 0i64;
+            v181->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+            v167->d.m.prevIdx2 = v167->d.m.prevIdx1;
+            v167->d.m.prevIdx1 = v167->d.m.lastIdx;
 LABEL_212:
-            v170->d.m.lastIdx = LODWORD(v4->MonoVertices.Size) - 1;
+            v167->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
           }
         }
-        v95 = style;
-        v89 = v229;
+        v93 = style;
+        v87 = v226;
       }
 LABEL_214:
-      if ( !v89 )
+      if ( !v87 )
         goto LABEL_219;
-      v188 = v4->ChainsAbove.Pages;
-      --v89;
-      v189 = v208 + 1;
-      v229 = v89;
-      v19 = v128;
-      v190 = v208 & 0xF;
-      v227 = v128;
-      v191 = v188[(unsigned __int64)v208++ >> 4];
-      v93 = &v191[v190];
-      if ( v89 )
-        v192 = v188[(unsigned __int64)v189 >> 4][v189 & 0xF].vertex;
+      v185 = this->ChainsAbove.Pages;
+      --v87;
+      v186 = v205 + 1;
+      v226 = v87;
+      v18 = v125;
+      v187 = v205 & 0xF;
+      v224 = v125;
+      v188 = v185[(unsigned __int64)v205++ >> 4];
+      v91 = &v188[v187];
+      if ( v87 )
+        v189 = v185[(unsigned __int64)v186 >> 4][v186 & 0xF].vertex;
       else
-        v192 = v206;
-      v85 = v204;
-      v84 = v201;
-      v100 = v93->chain->rightAbove;
-      v83 = v202;
-      v198 = v192;
-      v196 = v93->chain->rightAbove;
+        v189 = v203;
+      v83 = v201;
+      v82 = v198;
+      v97 = v91->chain->rightAbove;
+      v81 = v199;
+      v195 = v189;
+      v193 = v97;
     }
-    v93->monotone = v85;
-    if ( !v85 )
+    v91->monotone = v83;
+    if ( !v83 )
     {
-      v101 = Scaleform::Render::Tessellator::startMonotone(v4, v95);
-      v102 = v101;
-      v93->monotone = v101;
-      if ( v83 != -1 )
+      v98 = Scaleform::Render::Tessellator::startMonotone(this, v93);
+      v99 = v98;
+      v91->monotone = v98;
+      if ( v81 != -1 )
       {
-        LODWORD(v219) = v83 | 0x80000000;
-        HIDWORD(v219) = v83 | 0x80000000;
-        if ( !v101->start )
+        LODWORD(v216) = v81 | 0x80000000;
+        HIDWORD(v216) = v81 | 0x80000000;
+        if ( !v98->start )
         {
-          v103 = v4->MonoVertices.Size >> 4;
-          if ( v103 >= v4->MonoVertices.NumPages )
+          v100 = this->MonoVertices.Size >> 4;
+          if ( v100 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-              v4->MonoVertices.Size >> 4);
-          v104 = v4->MonoVertices.Pages[v103];
-          v105 = v4->MonoVertices.Size & 0xF;
-          *(_QWORD *)&v104[v105].srcVer = v219;
-          v104[v105].next = 0i64;
-          v106 = (signed __int64)&v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                            - 1) & 0xF];
-          *(_QWORD *)&v102->d.t.numTriangles = -1i64;
-          v102->start = (Scaleform::Render::Tessellator::MonoVertexType *)v106;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v101 = this->MonoVertices.Pages[v100];
+          v102 = this->MonoVertices.Size & 0xF;
+          *(_QWORD *)&v101[v102].srcVer = v216;
+          v101[v102].next = 0i64;
+          v103 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+          *(_QWORD *)&v99->d.t.numTriangles = -1i64;
+          v99->start = v103;
           goto LABEL_119;
         }
-        v107 = (signed __int64)&v4->MonoVertices.Pages[(unsigned __int64)v101->d.m.lastIdx >> 4][v101->d.m.lastIdx & 0xF];
-        if ( *(_DWORD *)v107 != (v83 | 0x80000000) )
+        v104 = &this->MonoVertices.Pages[(unsigned __int64)v98->d.m.lastIdx >> 4][v98->d.m.lastIdx & 0xF];
+        if ( v104->srcVer != (v81 | 0x80000000) )
         {
-          v108 = v4->MonoVertices.Size >> 4;
-          if ( v108 >= v4->MonoVertices.NumPages )
+          v105 = this->MonoVertices.Size >> 4;
+          if ( v105 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-              v4->MonoVertices.Size >> 4);
-          v109 = v4->MonoVertices.Pages[v108];
-          v110 = v4->MonoVertices.Size & 0xF;
-          *(_QWORD *)&v109[v110].srcVer = v219;
-          v109[v110].next = 0i64;
-          *(_QWORD *)(v107 + 8) = &v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                             - 1) & 0xF];
-          v102->d.m.prevIdx2 = v102->d.m.prevIdx1;
-          v102->d.m.prevIdx1 = v102->d.m.lastIdx;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v106 = this->MonoVertices.Pages[v105];
+          v107 = this->MonoVertices.Size & 0xF;
+          *(_QWORD *)&v106[v107].srcVer = v216;
+          v106[v107].next = 0i64;
+          v104->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+          v99->d.m.prevIdx2 = v99->d.m.prevIdx1;
+          v99->d.m.prevIdx1 = v99->d.m.lastIdx;
 LABEL_119:
-          v102->d.m.lastIdx = LODWORD(v4->MonoVertices.Size) - 1;
+          v99->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
         }
       }
-      if ( v199 == -1 )
+      if ( v196 == -1 )
       {
 LABEL_125:
-        v19 = v227;
+        v18 = v224;
       }
       else
       {
-        LODWORD(v215) = v199 & 0x7FFFFFFF;
-        HIDWORD(v215) = v199 & 0x7FFFFFFF;
-        if ( !v102->start )
+        LODWORD(v212) = v196 & 0x7FFFFFFF;
+        HIDWORD(v212) = v196 & 0x7FFFFFFF;
+        if ( !v99->start )
         {
-          v111 = v4->MonoVertices.Size >> 4;
-          if ( v111 >= v4->MonoVertices.NumPages )
+          v108 = this->MonoVertices.Size >> 4;
+          if ( v108 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-              v4->MonoVertices.Size >> 4);
-          v112 = v4->MonoVertices.Pages[v111];
-          v113 = v4->MonoVertices.Size & 0xF;
-          *(_QWORD *)&v112[v113].srcVer = v215;
-          v112[v113].next = 0i64;
-          v114 = (signed __int64)&v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                            - 1) & 0xF];
-          *(_QWORD *)&v102->d.t.numTriangles = -1i64;
-          v102->start = (Scaleform::Render::Tessellator::MonoVertexType *)v114;
-          v102->d.m.lastIdx = LODWORD(v4->MonoVertices.Size) - 1;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v109 = this->MonoVertices.Pages[v108];
+          v110 = this->MonoVertices.Size & 0xF;
+          *(_QWORD *)&v109[v110].srcVer = v212;
+          v109[v110].next = 0i64;
+          v111 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+          *(_QWORD *)&v99->d.t.numTriangles = -1i64;
+          v99->start = v111;
+          v99->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
           goto LABEL_125;
         }
-        v120 = (signed __int64)&v4->MonoVertices.Pages[(unsigned __int64)v102->d.m.lastIdx >> 4][v102->d.m.lastIdx & 0xF];
-        if ( *(_DWORD *)v120 == (v199 & 0x7FFFFFFF) )
+        v117 = &this->MonoVertices.Pages[(unsigned __int64)v99->d.m.lastIdx >> 4][v99->d.m.lastIdx & 0xF];
+        if ( v117->srcVer == (v196 & 0x7FFFFFFF) )
           goto LABEL_125;
-        v121 = v4->MonoVertices.Size >> 4;
-        if ( v121 >= v4->MonoVertices.NumPages )
+        v118 = this->MonoVertices.Size >> 4;
+        if ( v118 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-            v4->MonoVertices.Size >> 4);
-        v122 = v4->MonoVertices.Pages[v121];
-        v123 = v4->MonoVertices.Size & 0xF;
-        *(_QWORD *)&v122[v123].srcVer = v215;
-        v122[v123].next = 0i64;
-        ++v4->MonoVertices.Size;
-        v19 = v227;
-        *(_QWORD *)(v120 + 8) = &v4->MonoVertices.Pages[(v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                         - 1) & 0xF];
-        v102->d.m.prevIdx2 = v102->d.m.prevIdx1;
-        v102->d.m.prevIdx1 = v102->d.m.lastIdx;
-        v102->d.m.lastIdx = LODWORD(v4->MonoVertices.Size) - 1;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v119 = this->MonoVertices.Pages[v118];
+        v120 = this->MonoVertices.Size & 0xF;
+        *(_QWORD *)&v119[v120].srcVer = v212;
+        v119[v120].next = 0i64;
+        ++this->MonoVertices.Size;
+        v18 = v224;
+        v117->next = &this->MonoVertices.Pages[(this->MonoVertices.Size - 1) >> 4][((unsigned int)this->MonoVertices.Size
+                                                                                  - 1) & 0xF];
+        v99->d.m.prevIdx2 = v99->d.m.prevIdx1;
+        v99->d.m.prevIdx1 = v99->d.m.lastIdx;
+        v99->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
       }
     }
-    v115 = v93->monotone;
-    if ( v19 != -1 )
+    v112 = v91->monotone;
+    if ( v18 != -1 )
     {
-      LODWORD(v213) = v19 | 0x80000000;
-      HIDWORD(v213) = v19 | 0x80000000;
-      if ( !v115->start )
+      LODWORD(v210) = v18 | 0x80000000;
+      HIDWORD(v210) = v18 | 0x80000000;
+      if ( !v112->start )
       {
-        v116 = v4->MonoVertices.Size >> 4;
-        if ( v116 >= v4->MonoVertices.NumPages )
+        v113 = this->MonoVertices.Size >> 4;
+        if ( v113 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-            v4->MonoVertices.Size >> 4);
-        v117 = v4->MonoVertices.Pages[v116];
-        v118 = v4->MonoVertices.Size & 0xF;
-        *(_QWORD *)&v117[v118].srcVer = v213;
-        v117[v118].next = 0i64;
-        v119 = (signed __int64)&v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                          - 1) & 0xF];
-        *(_QWORD *)&v115->d.t.numTriangles = -1i64;
-        v115->start = (Scaleform::Render::Tessellator::MonoVertexType *)v119;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v114 = this->MonoVertices.Pages[v113];
+        v115 = this->MonoVertices.Size & 0xF;
+        *(_QWORD *)&v114[v115].srcVer = v210;
+        v114[v115].next = 0i64;
+        v116 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+        *(_QWORD *)&v112->d.t.numTriangles = -1i64;
+        v112->start = v116;
         goto LABEL_139;
       }
-      v124 = (signed __int64)&v4->MonoVertices.Pages[(unsigned __int64)v115->d.m.lastIdx >> 4][v115->d.m.lastIdx & 0xF];
-      if ( *(_DWORD *)v124 != (v19 | 0x80000000) )
+      v121 = &this->MonoVertices.Pages[(unsigned __int64)v112->d.m.lastIdx >> 4][v112->d.m.lastIdx & 0xF];
+      if ( v121->srcVer != (v18 | 0x80000000) )
       {
-        v125 = v4->MonoVertices.Size >> 4;
-        if ( v125 >= v4->MonoVertices.NumPages )
+        v122 = this->MonoVertices.Size >> 4;
+        if ( v122 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-            v4->MonoVertices.Size >> 4);
-        v126 = v4->MonoVertices.Pages[v125];
-        v127 = v4->MonoVertices.Size & 0xF;
-        *(_QWORD *)&v126[v127].srcVer = v213;
-        v126[v127].next = 0i64;
-        *(_QWORD *)(v124 + 8) = &v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                           - 1) & 0xF];
-        v115->d.m.prevIdx2 = v115->d.m.prevIdx1;
-        v115->d.m.prevIdx1 = v115->d.m.lastIdx;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v123 = this->MonoVertices.Pages[v122];
+        v124 = this->MonoVertices.Size & 0xF;
+        *(_QWORD *)&v123[v124].srcVer = v210;
+        v123[v124].next = 0i64;
+        v121->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+        v112->d.m.prevIdx2 = v112->d.m.prevIdx1;
+        v112->d.m.prevIdx1 = v112->d.m.lastIdx;
 LABEL_139:
-        v19 = v227;
-        v115->d.m.lastIdx = LODWORD(v4->MonoVertices.Size) - 1;
+        v18 = v224;
+        v112->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
       }
     }
-    v128 = v198;
-    if ( v198 != -1 )
+    v125 = v195;
+    if ( v195 != -1 )
     {
-      LODWORD(v221) = v198 & 0x7FFFFFFF;
-      HIDWORD(v221) = v198 & 0x7FFFFFFF;
-      if ( !v115->start )
+      LODWORD(v218) = v195 & 0x7FFFFFFF;
+      HIDWORD(v218) = v195 & 0x7FFFFFFF;
+      if ( !v112->start )
       {
-        v129 = (signed __int64)&v4->MonoVertices;
-        v130 = v4->MonoVertices.Size >> 4;
-        if ( v130 >= v4->MonoVertices.NumPages )
+        p_MonoVertices = &this->MonoVertices;
+        v127 = this->MonoVertices.Size >> 4;
+        if ( v127 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-            v4->MonoVertices.Size >> 4);
-        v131 = v4->MonoVertices.Pages[v130];
-        v132 = v221;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v128 = this->MonoVertices.Pages[v127];
+        v129 = v218;
         goto LABEL_182;
       }
-      v133 = (signed __int64)&v4->MonoVertices.Pages[(unsigned __int64)v115->d.m.lastIdx >> 4][v115->d.m.lastIdx & 0xF];
-      if ( *(_DWORD *)v133 != (v198 & 0x7FFFFFFF) )
+      v130 = &this->MonoVertices.Pages[(unsigned __int64)v112->d.m.lastIdx >> 4][v112->d.m.lastIdx & 0xF];
+      if ( v130->srcVer != (v195 & 0x7FFFFFFF) )
       {
-        v134 = v4->MonoVertices.Size >> 4;
-        if ( v134 >= v4->MonoVertices.NumPages )
+        v131 = this->MonoVertices.Size >> 4;
+        if ( v131 >= this->MonoVertices.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v4->MonoVertices,
-            v4->MonoVertices.Size >> 4);
-        v135 = v4->MonoVertices.Pages[v134];
-        v136 = v4->MonoVertices.Size & 0xF;
-        *(_QWORD *)&v135[v136].srcVer = v221;
-        v135[v136].next = 0i64;
-        *(_QWORD *)(v133 + 8) = &v4->MonoVertices.Pages[(++v4->MonoVertices.Size - 1) >> 4][(LODWORD(v4->MonoVertices.Size)
-                                                                                           - 1) & 0xF];
-        v115->d.m.prevIdx2 = v115->d.m.prevIdx1;
-        v115->d.m.prevIdx1 = v115->d.m.lastIdx;
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v132 = this->MonoVertices.Pages[v131];
+        v133 = this->MonoVertices.Size & 0xF;
+        *(_QWORD *)&v132[v133].srcVer = v218;
+        v132[v133].next = 0i64;
+        v130->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+        v112->d.m.prevIdx2 = v112->d.m.prevIdx1;
+        v112->d.m.prevIdx1 = v112->d.m.lastIdx;
         goto LABEL_183;
       }
     }
     goto LABEL_184;
   }
 LABEL_219:
-  if ( v226 == &v4->BaseLines.Pages[(v4->BaseLines.Size - 1) >> 4][(LODWORD(v4->BaseLines.Size) - 1) & 0xF] )
+  if ( v223 == &this->BaseLines.Pages[(this->BaseLines.Size - 1) >> 4][(LODWORD(this->BaseLines.Size) - 1) & 0xF] )
   {
-    v193 = v226->firstChain;
-    if ( v193 < v4->PendingEnds.Size )
-      v4->PendingEnds.Size = v193;
-    v194 = v4->BaseLines.Size;
-    if ( v194 )
-      v4->BaseLines.Size = v194 - 1;
+    v190 = v223->firstChain;
+    if ( v190 < this->PendingEnds.Size )
+      this->PendingEnds.Size = v190;
+    Size = this->BaseLines.Size;
+    if ( Size )
+      this->BaseLines.Size = Size - 1;
   }
-  v230->numChains = 0;
-}f ( v194 )
-      v4->BaseLines.Size = v194 - 1;
-  }
-  v230->numChains = 0;
-}
+  upperBase->numChains = 0;
+}onoVertices.NumPages )
+          Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
+            (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+            this->MonoVertices.Size >> 4);
+        v132 = this->MonoVertices.Pages[v131]
 
 // File Line: 1418
 // RVA: 0x9D8770
-void __fastcall Scaleform::Render::Tessellator::connectStarting(Scaleform::Render::Tessellator *this, Scaleform::Render::Tessellator::ScanChainType *scan, Scaleform::Render::Tessellator::BaseLineType *upperBase)
+void __fastcall Scaleform::Render::Tessellator::connectStarting(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::Tessellator::ScanChainType *scan,
+        Scaleform::Render::Tessellator::BaseLineType *upperBase)
 {
-  Scaleform::Render::Tessellator::BaseLineType *v3; // rdi
-  Scaleform::Render::Tessellator::ScanChainType *v4; // rbp
-  Scaleform::Render::Tessellator *v5; // rsi
-  Scaleform::Render::Tessellator::MonotoneType *v6; // rax
-  unsigned __int64 v7; // rcx
-  signed int v8; // ebx
-  unsigned int v9; // er14
+  Scaleform::Render::Tessellator::MonotoneType *monotone; // rax
+  unsigned __int64 lastIdx; // rcx
+  signed int srcVer; // ebx
+  unsigned int i; // r14d
   Scaleform::Render::Tessellator::MonotoneType *v10; // rax
   unsigned __int64 v11; // rcx
-  signed int v12; // eax
+  unsigned int vertexRight; // eax
   Scaleform::Render::Tessellator::MonotoneType *v13; // r12
   unsigned __int64 v14; // r15
   Scaleform::Render::Tessellator::MonoVertexType *v15; // rcx
-  signed __int64 v16; // rdx
-  signed __int64 v17; // r14
+  __int64 v16; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v17; // r14
   unsigned __int64 v18; // r15
   Scaleform::Render::Tessellator::MonoVertexType *v19; // rcx
-  signed __int64 v20; // rdx
+  __int64 v20; // rdx
   __int64 v21; // [rsp+20h] [rbp-38h]
 
-  v3 = upperBase;
-  v4 = scan;
-  v5 = this;
   if ( !scan )
     goto LABEL_35;
-  v6 = scan->monotone;
-  if ( !v6 )
+  monotone = scan->monotone;
+  if ( !monotone )
     goto LABEL_35;
-  v7 = v6->d.m.lastIdx;
-  if ( (_DWORD)v7 == -1 )
-    v8 = -1;
+  lastIdx = monotone->d.m.lastIdx;
+  if ( (_DWORD)lastIdx == -1 )
+    srcVer = -1;
   else
-    v8 = v5->MonoVertices.Pages[v7 >> 4][v6->d.m.lastIdx & 0xF].srcVer;
+    srcVer = this->MonoVertices.Pages[lastIdx >> 4][monotone->d.m.lastIdx & 0xF].srcVer;
   *(_QWORD *)&upperBase->vertexLeft = -1i64;
-  v9 = 0;
-  do
+  for ( i = 0; i < 2; ++i )
   {
-    if ( v8 == -1 || v3->y > v5->MeshVertices.Pages[(unsigned __int64)(v8 & 0xFFFFFFF) >> 4][v8 & 0xF].y )
+    if ( srcVer == -1
+      || upperBase->y > this->MeshVertices.Pages[(unsigned __int64)(srcVer & 0xFFFFFFF) >> 4][srcVer & 0xF].y )
+    {
       break;
-    if ( v8 >= 0 )
-      v3->vertexRight = v8;
+    }
+    if ( srcVer >= 0 )
+      upperBase->vertexRight = srcVer;
     else
-      v3->vertexLeft = v8 & 0xFFFFFFF;
-    Scaleform::Render::Tessellator::removeLastMonoVertex(v5, v4->monotone);
-    v10 = v4->monotone;
+      upperBase->vertexLeft = srcVer & 0xFFFFFFF;
+    Scaleform::Render::Tessellator::removeLastMonoVertex(this, scan->monotone);
+    v10 = scan->monotone;
     v11 = v10->d.m.lastIdx;
-    v8 = (_DWORD)v11 == -1 ? -1 : v5->MonoVertices.Pages[v11 >> 4][v10->d.m.lastIdx & 0xF].srcVer;
-    ++v9;
+    srcVer = (_DWORD)v11 == -1 ? -1 : this->MonoVertices.Pages[v11 >> 4][v10->d.m.lastIdx & 0xF].srcVer;
   }
-  while ( v9 < 2 );
-  if ( v4->monotone->lowerBase )
+  if ( scan->monotone->lowerBase )
   {
-    Scaleform::Render::Tessellator::connectStartingToPending(v5, v4, v3);
+    Scaleform::Render::Tessellator::connectStartingToPending(this, scan, upperBase);
     return;
   }
-  if ( v8 == -1 )
+  if ( srcVer == -1 )
   {
-    v12 = v3->vertexRight;
-    if ( v12 == -1 )
+    vertexRight = upperBase->vertexRight;
+    if ( vertexRight == -1 )
     {
-      v12 = v3->vertexLeft;
-      if ( v12 == -1 )
+      vertexRight = upperBase->vertexLeft;
+      if ( vertexRight == -1 )
         goto LABEL_32;
-      v3->vertexLeft = -1;
+      upperBase->vertexLeft = -1;
     }
     else
     {
-      v3->vertexRight = -1;
+      upperBase->vertexRight = -1;
     }
-    v13 = v4->monotone;
-    v8 = v12;
-    LODWORD(v21) = v12;
-    HIDWORD(v21) = v12;
+    v13 = scan->monotone;
+    srcVer = vertexRight;
+    LODWORD(v21) = vertexRight;
+    HIDWORD(v21) = vertexRight;
     if ( v13->start )
     {
-      v17 = (signed __int64)&v5->MonoVertices.Pages[(unsigned __int64)v13->d.m.lastIdx >> 4][v13->d.m.lastIdx & 0xF];
-      if ( *(_DWORD *)v17 == v12 )
+      v17 = &this->MonoVertices.Pages[(unsigned __int64)v13->d.m.lastIdx >> 4][v13->d.m.lastIdx & 0xF];
+      if ( v17->srcVer == vertexRight )
         goto LABEL_32;
-      v18 = v5->MonoVertices.Size >> 4;
-      if ( v18 >= v5->MonoVertices.NumPages )
+      v18 = this->MonoVertices.Size >> 4;
+      if ( v18 >= this->MonoVertices.NumPages )
         Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-          (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-          v5->MonoVertices.Size >> 4);
-      v19 = v5->MonoVertices.Pages[v18];
-      v20 = v5->MonoVertices.Size & 0xF;
+          (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+          this->MonoVertices.Size >> 4);
+      v19 = this->MonoVertices.Pages[v18];
+      v20 = this->MonoVertices.Size & 0xF;
       *(_QWORD *)&v19[v20].srcVer = v21;
       v19[v20].next = 0i64;
-      *(_QWORD *)(v17 + 8) = &v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                        - 1) & 0xF];
+      v17->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
       v13->d.m.prevIdx2 = v13->d.m.prevIdx1;
       v13->d.m.prevIdx1 = v13->d.m.lastIdx;
     }
     else
     {
-      v14 = v5->MonoVertices.Size >> 4;
-      if ( v14 >= v5->MonoVertices.NumPages )
+      v14 = this->MonoVertices.Size >> 4;
+      if ( v14 >= this->MonoVertices.NumPages )
         Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-          (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-          v5->MonoVertices.Size >> 4);
-      v15 = v5->MonoVertices.Pages[v14];
-      v16 = v5->MonoVertices.Size & 0xF;
+          (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+          this->MonoVertices.Size >> 4);
+      v15 = this->MonoVertices.Pages[v14];
+      v16 = this->MonoVertices.Size & 0xF;
       *(_QWORD *)&v15[v16].srcVer = v21;
       v15[v16].next = 0i64;
-      v13->start = &v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size) - 1) & 0xF];
+      v13->start = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
       *(_QWORD *)&v13->d.t.numTriangles = -1i64;
     }
-    v13->d.m.lastIdx = LODWORD(v5->MonoVertices.Size) - 1;
+    v13->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
   }
 LABEL_32:
-  if ( v8 >= 0 )
-    Scaleform::Render::Tessellator::connectStartingToRight(v5, v4, v3, v8);
+  if ( srcVer >= 0 )
+    Scaleform::Render::Tessellator::connectStartingToRight(this, scan, upperBase, srcVer);
   else
-    Scaleform::Render::Tessellator::connectStartingToLeft(v5, v4, v3, v8 & 0xFFFFFFF);
+    Scaleform::Render::Tessellator::connectStartingToLeft(this, scan, upperBase, srcVer & 0xFFFFFFF);
 LABEL_35:
-  v3->numChains = 0;
+  upperBase->numChains = 0;
 }
 
 // File Line: 1524
 // RVA: 0x9F40D0
-void __usercall Scaleform::Render::Tessellator::sweepScanbeam(Scaleform::Render::Tessellator *this@<rcx>, Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoChainType *,4,8> *aet@<rdx>, float yb@<xmm2>, signed __int64 a4@<r8>)
+void __fastcall Scaleform::Render::Tessellator::sweepScanbeam(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoChainType *,4,8> *aet,
+        float yb)
 {
+  __int64 v3; // r8
   Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoChainType *,4,8> *v4; // r11
-  Scaleform::Render::Tessellator *v5; // rsi
-  unsigned __int64 v6; // rdi
+  unsigned __int64 i; // rdi
   Scaleform::Render::Tessellator::MonoChainType *v7; // r15
   bool v8; // zf
   unsigned __int64 v9; // r14
   Scaleform::Render::Tessellator::ScanChainType *v10; // rdx
   __int64 v11; // rax
-  unsigned int v12; // er12
-  unsigned int v13; // er14
+  unsigned int v12; // r12d
+  unsigned int v13; // r14d
   Scaleform::Render::Tessellator::ScanChainType *v14; // r15
-  unsigned __int64 v15; // rax
-  signed __int64 v16; // rbx
+  unsigned __int64 Size; // rax
+  __int64 v16; // rbx
   Scaleform::Render::Tessellator::ScanChainType *v17; // rdi
-  signed __int64 v18; // r13
-  Scaleform::Render::Tessellator::MonoChainType *v19; // r8
-  unsigned int v20; // ecx
+  __int64 v18; // r13
+  Scaleform::Render::Tessellator::MonoChainType *chain; // r8
+  unsigned int posScan; // ecx
   Scaleform::Render::Tessellator::MonoChainType *v21; // rdx
   unsigned int v22; // eax
   unsigned int v23; // eax
   Scaleform::Render::Tessellator::ScanChainType *v24; // rbx
-  signed __int64 v25; // rdi
+  __int64 v25; // rdi
   Scaleform::Render::Tessellator::ScanChainType *v26; // rbx
   unsigned int v27; // eax
-  unsigned int v28; // er9
+  unsigned int v28; // r9d
   unsigned __int64 v29; // r12
   unsigned int v30; // eax
-  unsigned int v31; // er10
+  unsigned int v31; // r10d
   Scaleform::Render::Tessellator::ScanChainType *v32; // r13
   unsigned __int64 v33; // rcx
   unsigned __int64 v34; // rax
   unsigned __int64 v35; // rdx
-  signed __int64 v36; // rcx
+  __int64 v36; // rcx
   Scaleform::Render::Tessellator::ScanChainType *v37; // rax
-  signed int v38; // ebx
+  signed int vertex; // ebx
   Scaleform::Render::Tessellator::ScanChainType *v39; // r14
   Scaleform::Render::Tessellator::ScanChainType *v40; // rax
-  signed int v41; // er8
-  signed __int64 v42; // rcx
+  signed int v41; // r8d
+  Scaleform::Render::Tessellator::ScanChainType *v42; // rcx
   int v43; // eax
   int v44; // eax
   int v45; // eax
@@ -5166,172 +5026,172 @@ void __usercall Scaleform::Render::Tessellator::sweepScanbeam(Scaleform::Render:
   Scaleform::Render::Tessellator::BaseLineType *v47; // r8
   unsigned __int64 v48; // r14
   Scaleform::Render::Tessellator::MonoVertexType *v49; // rcx
-  signed __int64 v50; // rdx
-  signed __int64 v51; // rdx
-  signed __int64 v52; // r14
+  __int64 v50; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v51; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v52; // r14
   unsigned __int64 v53; // r12
   Scaleform::Render::Tessellator::MonoVertexType *v54; // rcx
-  signed __int64 v55; // rdx
+  __int64 v55; // rdx
   Scaleform::Render::Tessellator::MonotoneType *v56; // rbx
-  signed int v57; // er8
+  unsigned int v57; // r8d
   Scaleform::Render::Tessellator::BaseLineType *v58; // r9
   unsigned __int64 v59; // r14
   Scaleform::Render::Tessellator::MonoVertexType *v60; // rcx
-  signed __int64 v61; // rdx
-  signed __int64 v62; // rdx
-  signed __int64 v63; // rdi
+  __int64 v61; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v62; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v63; // rdi
   unsigned __int64 v64; // r12
   Scaleform::Render::Tessellator::MonoVertexType *v65; // rcx
-  signed __int64 v66; // rdx
+  __int64 v66; // rdx
   Scaleform::Render::Tessellator::MonotoneType *v67; // rax
-  __int64 v68; // rax
-  unsigned int v69; // ecx
+  Scaleform::Render::Tessellator::MonoChainType *v68; // rax
+  unsigned int leftAbove; // ecx
   Scaleform::Render::Tessellator::MonotoneType *v70; // rax
   Scaleform::Render::Tessellator::BaseLineType *v71; // rax
   Scaleform::Render::Tessellator::MonotoneType *v72; // rbx
   Scaleform::Render::Tessellator::BaseLineType *v73; // r9
   unsigned __int64 v74; // r14
   Scaleform::Render::Tessellator::MonoVertexType *v75; // rcx
-  signed __int64 v76; // rdx
-  signed __int64 v77; // rdx
-  signed __int64 v78; // rdi
+  __int64 v76; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v77; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v78; // rdi
   unsigned __int64 v79; // r12
   Scaleform::Render::Tessellator::MonoVertexType *v80; // rcx
-  signed __int64 v81; // rdx
-  Scaleform::Render::Tessellator::MonotoneType *v82; // rdi
-  Scaleform::Render::Tessellator::BaseLineType *v83; // r8
+  __int64 v81; // rdx
+  Scaleform::Render::Tessellator::MonotoneType *monotone; // rdi
+  Scaleform::Render::Tessellator::BaseLineType *lowerBase; // r8
   unsigned __int64 v84; // r12
   Scaleform::Render::Tessellator::MonoVertexType *v85; // rcx
-  signed __int64 v86; // rdx
-  signed __int64 v87; // rdx
-  signed __int64 v88; // r14
+  __int64 v86; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v87; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v88; // r14
   unsigned __int64 v89; // r12
   Scaleform::Render::Tessellator::MonoVertexType *v90; // rcx
-  signed __int64 v91; // rdx
+  __int64 v91; // rdx
   Scaleform::Render::Tessellator::MonotoneType *v92; // rdi
   Scaleform::Render::Tessellator::BaseLineType *v93; // r8
   unsigned __int64 v94; // r12
   Scaleform::Render::Tessellator::MonoVertexType *v95; // rcx
-  signed __int64 v96; // rdx
-  signed __int64 v97; // rdx
-  signed __int64 v98; // r14
+  __int64 v96; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v97; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v98; // r14
   unsigned __int64 v99; // r12
   Scaleform::Render::Tessellator::MonoVertexType *v100; // rcx
-  signed __int64 v101; // rdx
-  unsigned int v102; // er14
+  __int64 v101; // rdx
+  unsigned int v102; // r14d
   unsigned int v103; // edi
-  unsigned int v104; // er10
-  unsigned int v105; // er11
+  unsigned int v104; // r10d
+  unsigned int v105; // r11d
   Scaleform::Render::Tessellator::ScanChainType *v106; // r13
-  signed __int64 v107; // r9
-  signed __int64 v108; // r8
+  Scaleform::Render::Tessellator::ScanChainType *v107; // r9
+  Scaleform::Render::Tessellator::ScanChainType *v108; // r8
   Scaleform::Render::Tessellator::ScanChainType *v109; // r13
   Scaleform::Render::Tessellator::ScanChainType *v110; // rdx
   Scaleform::Render::Tessellator::MonotoneType *v111; // rdi
   Scaleform::Render::Tessellator::BaseLineType *v112; // r8
   unsigned __int64 v113; // r15
   Scaleform::Render::Tessellator::MonoVertexType *v114; // rcx
-  signed __int64 v115; // rdx
-  signed __int64 v116; // rdx
-  signed __int64 v117; // r14
-  signed __int64 v118; // r15
+  __int64 v115; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v116; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v117; // r14
+  Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoVertexType,4,16> *p_MonoVertices; // r15
   unsigned __int64 v119; // r12
   Scaleform::Render::Tessellator::MonoVertexType *v120; // rcx
   __int64 v121; // rax
   Scaleform::Render::Tessellator::ScanChainType *v122; // r15
-  signed int v123; // er8
+  unsigned int v123; // r8d
   Scaleform::Render::Tessellator::MonotoneType *v124; // rdi
   Scaleform::Render::Tessellator::BaseLineType *v125; // r9
   unsigned __int64 v126; // r12
   Scaleform::Render::Tessellator::MonoVertexType *v127; // rcx
-  signed __int64 v128; // rdx
-  signed __int64 v129; // rdx
-  signed __int64 v130; // r14
+  __int64 v128; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v129; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v130; // r14
   unsigned __int64 v131; // r12
   Scaleform::Render::Tessellator::MonoVertexType *v132; // rcx
-  signed __int64 v133; // rdx
+  __int64 v133; // rdx
   Scaleform::Render::Tessellator::BaseLineType *v134; // r8
   unsigned __int64 v135; // r15
   Scaleform::Render::Tessellator::MonoVertexType *v136; // rcx
-  signed __int64 v137; // rdx
-  signed __int64 v138; // rdx
+  __int64 v137; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v138; // rdx
   unsigned __int64 v139; // r12
-  signed __int64 v140; // rdx
-  signed int v141; // edi
+  __int64 v140; // rdx
+  unsigned int v141; // edi
   Scaleform::Render::Tessellator::MonotoneType *v142; // r14
   Scaleform::Render::Tessellator::BaseLineType *v143; // r8
   unsigned __int64 v144; // r12
   Scaleform::Render::Tessellator::MonoVertexType *v145; // rcx
-  signed __int64 v146; // rdx
-  signed __int64 v147; // rdx
-  signed __int64 v148; // r15
+  __int64 v146; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v147; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v148; // r15
   unsigned __int64 v149; // r12
   Scaleform::Render::Tessellator::MonoVertexType *v150; // rcx
-  signed __int64 v151; // rdx
+  __int64 v151; // rdx
   Scaleform::Render::Tessellator::MonotoneType *v152; // rdi
   Scaleform::Render::Tessellator::BaseLineType *v153; // r8
   unsigned __int64 v154; // r14
   Scaleform::Render::Tessellator::MonoVertexType *v155; // rcx
-  signed __int64 v156; // rdx
-  signed __int64 v157; // rdx
-  signed __int64 v158; // r14
+  __int64 v156; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v157; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v158; // r14
   unsigned __int64 v159; // r15
   Scaleform::Render::Tessellator::MonoVertexType *v160; // rcx
-  signed __int64 v161; // rdx
+  __int64 v161; // rdx
   Scaleform::Render::Tessellator::ScanChainType *v162; // rcx
   Scaleform::Render::Tessellator::ScanChainType *v163; // rax
-  signed int v164; // er8
+  signed int v164; // r8d
   Scaleform::Render::Tessellator::MonotoneType *v165; // rbx
   Scaleform::Render::Tessellator::BaseLineType *v166; // r9
   unsigned __int64 v167; // r14
   Scaleform::Render::Tessellator::MonoVertexType *v168; // rcx
-  signed __int64 v169; // rdx
-  signed __int64 v170; // rdx
-  signed __int64 v171; // rdi
+  __int64 v169; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v170; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v171; // rdi
   unsigned __int64 v172; // r12
   Scaleform::Render::Tessellator::MonoVertexType *v173; // rcx
-  signed __int64 v174; // rdx
+  __int64 v174; // rdx
   unsigned __int64 v175; // rdx
-  signed __int64 v176; // rcx
+  __int64 v176; // rcx
   Scaleform::Render::Tessellator::ScanChainType *v177; // rax
-  signed int v178; // er8
+  signed int v178; // r8d
   Scaleform::Render::Tessellator::ScanChainType *v179; // r13
   Scaleform::Render::Tessellator::MonotoneType *v180; // rbx
   Scaleform::Render::Tessellator::BaseLineType *v181; // r9
   unsigned __int64 v182; // r14
   Scaleform::Render::Tessellator::MonoVertexType *v183; // rcx
-  signed __int64 v184; // rdx
-  signed __int64 v185; // rdx
-  signed __int64 v186; // rdi
+  __int64 v184; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v185; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v186; // rdi
   unsigned __int64 v187; // r12
   Scaleform::Render::Tessellator::MonoVertexType *v188; // rcx
-  signed __int64 v189; // rdx
+  __int64 v189; // rdx
   Scaleform::Render::Tessellator::MonotoneType *v190; // rbx
-  signed int v191; // er8
+  unsigned int v191; // r8d
   Scaleform::Render::Tessellator::BaseLineType *v192; // r9
   unsigned __int64 v193; // r14
   Scaleform::Render::Tessellator::MonoVertexType *v194; // rcx
-  signed __int64 v195; // rdx
-  signed __int64 v196; // rdx
-  signed __int64 v197; // rdi
+  __int64 v195; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v196; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v197; // rdi
   unsigned __int64 v198; // r12
   Scaleform::Render::Tessellator::MonoVertexType *v199; // rcx
-  signed __int64 v200; // rdx
+  __int64 v200; // rdx
   unsigned __int64 v201; // r14
   unsigned __int64 v202; // rdi
-  signed __int64 v203; // r15
+  __int64 v203; // r15
   Scaleform::Render::Tessellator::ScanChainType *v204; // r12
   Scaleform::Render::Tessellator::ScanChainType *v205; // rdx
-  signed __int64 v206; // r8
+  __int64 v206; // r8
   unsigned __int64 v207; // rdx
   unsigned __int64 v208; // rcx
   Scaleform::Render::Tessellator::MonoChainType *v209; // rdx
   unsigned __int16 v210; // ax
-  int v211; // [rsp+20h] [rbp-E0h]
+  unsigned int v211; // [rsp+20h] [rbp-E0h]
   Scaleform::Render::Tessellator::ScanChainType *v212; // [rsp+28h] [rbp-D8h]
   Scaleform::Render::Tessellator::ScanChainType *dst; // [rsp+30h] [rbp-D0h]
   Scaleform::Render::Tessellator::ScanChainType *scan; // [rsp+38h] [rbp-C8h]
-  Scaleform::Render::Tessellator::BaseLineType upperBase; // [rsp+40h] [rbp-C0h]
+  Scaleform::Render::Tessellator::BaseLineType upperBase; // [rsp+40h] [rbp-C0h] BYREF
   __int64 v216; // [rsp+60h] [rbp-A0h]
   __int64 v217; // [rsp+70h] [rbp-90h]
   __int64 v218; // [rsp+80h] [rbp-80h]
@@ -5348,46 +5208,37 @@ void __usercall Scaleform::Render::Tessellator::sweepScanbeam(Scaleform::Render:
   __int64 v229; // [rsp+128h] [rbp+28h]
   Scaleform::Render::Tessellator::ScanChainType *v230; // [rsp+1A0h] [rbp+A0h]
   unsigned int v231; // [rsp+1A0h] [rbp+A0h]
-  Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoChainType *,4,8> *v232; // [rsp+1A8h] [rbp+A8h]
   unsigned int v233; // [rsp+1B0h] [rbp+B0h]
-  signed int v234; // [rsp+1B8h] [rbp+B8h]
-  int v235; // [rsp+1B8h] [rbp+B8h]
+  int v234; // [rsp+1B8h] [rbp+B8h]
+  unsigned int v235; // [rsp+1B8h] [rbp+B8h]
 
-  v232 = aet;
   this->LastX = -1.0e30;
   this->ChainsAbove.Size = 0i64;
   v4 = aet;
-  v5 = this;
-  v6 = 0i64;
-  if ( aet->Size )
+  for ( i = 0i64; i < v4->Size; ++i )
   {
-    do
+    v7 = v4->Pages[i >> 4][i & 0xF];
+    v8 = (v7->flags & 4) == 0;
+    v7->posScan = i;
+    if ( !v8 )
     {
-      v7 = v4->Pages[v6 >> 4][v6 & 0xF];
-      v8 = (v7->flags & 4) == 0;
-      v7->posScan = v6;
-      if ( !v8 )
+      LODWORD(v227) = -1;
+      v9 = this->ChainsAbove.Size >> 4;
+      if ( v9 >= this->ChainsAbove.NumPages )
       {
-        LODWORD(v227) = -1;
-        v9 = v5->ChainsAbove.Size >> 4;
-        if ( v9 >= v5->ChainsAbove.NumPages )
-        {
-          Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::ScanChainType,4,8>::allocPage(
-            &v5->ChainsAbove,
-            v5->ChainsAbove.Size >> 4);
-          v4 = v232;
-        }
-        v10 = v5->ChainsAbove.Pages[v9];
-        a4 = 3i64 * (v5->ChainsAbove.Size & 0xF);
-        v11 = v227;
-        *((_QWORD *)&v10->chain + a4) = v7;
-        *((_QWORD *)&v10->monotone + a4) = 0i64;
-        *((_QWORD *)&v10->vertex + a4) = v11;
-        ++v5->ChainsAbove.Size;
+        Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::ScanChainType,4,8>::allocPage(
+          &this->ChainsAbove,
+          this->ChainsAbove.Size >> 4);
+        v4 = aet;
       }
-      ++v6;
+      v10 = this->ChainsAbove.Pages[v9];
+      v3 = 3i64 * (this->ChainsAbove.Size & 0xF);
+      v11 = v227;
+      *((_QWORD *)&v10->chain + v3) = v7;
+      *((_QWORD *)&v10->monotone + v3) = 0i64;
+      *((_QWORD *)&v10->vertex + v3) = v11;
+      ++this->ChainsAbove.Size;
     }
-    while ( v6 < v4->Size );
   }
   upperBase.y = yb;
   v12 = 0;
@@ -5402,47 +5253,47 @@ void __usercall Scaleform::Render::Tessellator::sweepScanbeam(Scaleform::Render:
     {
       while ( 1 )
       {
-        v15 = v5->ChainsBelow.Size;
-        if ( v12 >= v15 || v13 >= v5->ChainsAbove.Size )
+        Size = this->ChainsBelow.Size;
+        if ( v12 >= Size || v13 >= this->ChainsAbove.Size )
           break;
         v16 = v12 & 0xF;
-        v17 = v5->ChainsBelow.Pages[(unsigned __int64)v12 >> 4];
+        v17 = this->ChainsBelow.Pages[(unsigned __int64)v12 >> 4];
         v18 = v13 & 0xF;
-        v19 = v17[v12 & 0xF].chain;
-        v20 = v19->posScan;
-        v21 = v5->ChainsAbove.Pages[(unsigned __int64)v13 >> 4][v13 & 0xF].chain;
-        v230 = v5->ChainsAbove.Pages[(unsigned __int64)v13 >> 4];
+        chain = v17[v12 & 0xF].chain;
+        posScan = chain->posScan;
+        v21 = this->ChainsAbove.Pages[(unsigned __int64)v13 >> 4][v13 & 0xF].chain;
+        v230 = this->ChainsAbove.Pages[(unsigned __int64)v13 >> 4];
         v22 = v21->posScan;
-        if ( v22 == v20 )
+        if ( v22 == posScan )
         {
-          v23 = Scaleform::Render::Tessellator::addEventVertex(v5, v21, yb, 0);
+          v23 = Scaleform::Render::Tessellator::addEventVertex(this, v21, yb, 0);
           ++v12;
           v230[v13 & 0xF].vertex = v23;
           v17[v16].vertex = v23;
           ++v13;
         }
-        else if ( v22 >= v20 )
+        else if ( v22 >= posScan )
         {
           ++v12;
-          v17[v16].vertex = Scaleform::Render::Tessellator::addEventVertex(v5, v19, yb, 1);
+          v17[v16].vertex = Scaleform::Render::Tessellator::addEventVertex(this, chain, yb, 1);
         }
         else
         {
           ++v13;
-          v230[v18].vertex = Scaleform::Render::Tessellator::addEventVertex(v5, v21, yb, 1);
+          v230[v18].vertex = Scaleform::Render::Tessellator::addEventVertex(this, v21, yb, 1);
         }
       }
-      LODWORD(a4) = v13;
-      if ( v13 >= v5->ChainsAbove.Size )
+      LODWORD(v3) = v13;
+      if ( v13 >= this->ChainsAbove.Size )
         break;
-      v24 = v5->ChainsAbove.Pages[(unsigned __int64)v13++ >> 4];
-      v24[a4].vertex = Scaleform::Render::Tessellator::addEventVertex(v5, v24[a4 & 0xF].chain, yb, 1);
+      v24 = this->ChainsAbove.Pages[(unsigned __int64)v13++ >> 4];
+      v24[v3].vertex = Scaleform::Render::Tessellator::addEventVertex(this, v24[v3 & 0xF].chain, yb, 1);
     }
-    if ( v12 >= v15 )
+    if ( v12 >= Size )
       break;
     v25 = v12 & 0xF;
-    v26 = v5->ChainsBelow.Pages[(unsigned __int64)v12 >> 4];
-    v27 = Scaleform::Render::Tessellator::addEventVertex(v5, v26[v12++ & 0xF].chain, yb, 1);
+    v26 = this->ChainsBelow.Pages[(unsigned __int64)v12 >> 4];
+    v27 = Scaleform::Render::Tessellator::addEventVertex(this, v26[v12++ & 0xF].chain, yb, 1);
     v26[v25].vertex = v27;
   }
   v28 = -1;
@@ -5460,105 +5311,105 @@ LABEL_20:
       while ( 1 )
       {
         v33 = v30;
-        v34 = v5->ChainsBelow.Size;
-        if ( v33 >= v34 || v31 >= v5->ChainsAbove.Size )
+        v34 = this->ChainsBelow.Size;
+        if ( v33 >= v34 || v31 >= this->ChainsAbove.Size )
           break;
         v35 = (unsigned int)v33;
         v36 = v33 & 0xF;
-        v37 = v5->ChainsBelow.Pages[v35 >> 4];
-        v38 = v37[v36].vertex;
+        v37 = this->ChainsBelow.Pages[v35 >> 4];
+        vertex = v37[v36].vertex;
         v39 = &v37[v36];
-        v212 = &v37[v36];
-        v40 = v5->ChainsAbove.Pages[(unsigned __int64)v31 >> 4];
+        v212 = v39;
+        v40 = this->ChainsAbove.Pages[(unsigned __int64)v31 >> 4];
         v41 = v40[v31 & 0xF].vertex;
-        v42 = (signed __int64)&v40[v31 & 0xF];
+        v42 = &v40[v31 & 0xF];
         v43 = 1;
-        scan = (Scaleform::Render::Tessellator::ScanChainType *)v42;
-        if ( v38 != v41 )
-          v43 = 3 - (*(_DWORD *)(*(_QWORD *)v42 + 40i64) < v39->chain->posScan);
+        scan = v42;
+        if ( vertex != v41 )
+          v43 = 3 - (v42->chain->posScan < v39->chain->posScan);
         v44 = v43 - 1;
         if ( !v44 )
         {
-          if ( v38 == -1 )
+          if ( vertex == -1 )
           {
             if ( upperBase.numChains )
             {
-              Scaleform::Render::Tessellator::connectStarting(v5, v14, &upperBase);
+              Scaleform::Render::Tessellator::connectStarting(this, v14, &upperBase);
               v31 = v233;
             }
             v106 = v39;
-LABEL_241:
+LABEL_235:
             v162 = scan;
             scan->monotone = v106->monotone;
-            goto LABEL_242;
+            goto LABEL_236;
           }
           if ( v14 )
           {
-            v82 = v14->monotone;
-            if ( v82 )
+            monotone = v14->monotone;
+            if ( monotone )
             {
-              v83 = v82->lowerBase;
-              if ( !v83 )
+              lowerBase = monotone->lowerBase;
+              if ( !lowerBase )
               {
-                v8 = v82->start == 0i64;
-                LODWORD(v219) = v38;
-                HIDWORD(v219) = v38;
+                v8 = monotone->start == 0i64;
+                LODWORD(v219) = vertex;
+                HIDWORD(v219) = vertex;
                 if ( v8 )
                 {
-                  v84 = v5->MonoVertices.Size >> 4;
-                  if ( v84 >= v5->MonoVertices.NumPages )
+                  v84 = this->MonoVertices.Size >> 4;
+                  if ( v84 >= this->MonoVertices.NumPages )
                     Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                      (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-                      v5->MonoVertices.Size >> 4);
-                  v85 = v5->MonoVertices.Pages[v84];
-                  v86 = v5->MonoVertices.Size & 0xF;
+                      (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                      this->MonoVertices.Size >> 4);
+                  v85 = this->MonoVertices.Pages[v84];
+                  v86 = this->MonoVertices.Size & 0xF;
                   v29 = 0i64;
                   *(_QWORD *)&v85[v86].srcVer = v219;
                   v85[v86].next = 0i64;
-                  v87 = (signed __int64)&v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size) - 1) & 0xF];
-                  *(_QWORD *)&v82->d.t.numTriangles = -1i64;
-                  v82->start = (Scaleform::Render::Tessellator::MonoVertexType *)v87;
+                  v87 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
+                  *(_QWORD *)&monotone->d.t.numTriangles = -1i64;
+                  monotone->start = v87;
                 }
                 else
                 {
-                  v88 = (signed __int64)&v5->MonoVertices.Pages[(unsigned __int64)v82->d.m.lastIdx >> 4][v82->d.m.lastIdx & 0xF];
-                  if ( *(_DWORD *)v88 == v38 )
-                    goto LABEL_113;
-                  v89 = v5->MonoVertices.Size >> 4;
-                  if ( v89 >= v5->MonoVertices.NumPages )
+                  v88 = &this->MonoVertices.Pages[(unsigned __int64)monotone->d.m.lastIdx >> 4][monotone->d.m.lastIdx & 0xF];
+                  if ( v88->srcVer == vertex )
+                    goto LABEL_111;
+                  v89 = this->MonoVertices.Size >> 4;
+                  if ( v89 >= this->MonoVertices.NumPages )
                     Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                      (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-                      v5->MonoVertices.Size >> 4);
-                  v90 = v5->MonoVertices.Pages[v89];
-                  v91 = v5->MonoVertices.Size & 0xF;
+                      (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                      this->MonoVertices.Size >> 4);
+                  v90 = this->MonoVertices.Pages[v89];
+                  v91 = this->MonoVertices.Size & 0xF;
                   v29 = 0i64;
                   *(_QWORD *)&v90[v91].srcVer = v219;
                   v90[v91].next = 0i64;
-                  ++v5->MonoVertices.Size;
+                  ++this->MonoVertices.Size;
                   v32 = dst;
-                  *(_QWORD *)(v88 + 8) = &v5->MonoVertices.Pages[(v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                                  - 1) & 0xF];
-                  v82->d.m.prevIdx2 = v82->d.m.prevIdx1;
-                  v82->d.m.prevIdx1 = v82->d.m.lastIdx;
+                  v88->next = &this->MonoVertices.Pages[(this->MonoVertices.Size - 1) >> 4][((unsigned int)this->MonoVertices.Size
+                                                                                           - 1) & 0xF];
+                  monotone->d.m.prevIdx2 = monotone->d.m.prevIdx1;
+                  monotone->d.m.prevIdx1 = monotone->d.m.lastIdx;
                 }
-                v82->d.m.lastIdx = LODWORD(v5->MonoVertices.Size) - 1;
-                goto LABEL_113;
+                monotone->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
+                goto LABEL_111;
               }
-              if ( v5->MeshVertices.Pages[(unsigned __int64)(v38 & 0xFFFFFFF) >> 4][v38 & 0xF].y == v83->y )
+              if ( this->MeshVertices.Pages[(unsigned __int64)(vertex & 0xFFFFFFF) >> 4][vertex & 0xF].y == lowerBase->y )
               {
-                v83->vertexRight = v38 & 0xFFFFFFF;
+                lowerBase->vertexRight = vertex & 0xFFFFFFF;
               }
-              else if ( v38 >= 0 )
+              else if ( vertex >= 0 )
               {
-                Scaleform::Render::Tessellator::connectPendingToRight(v5, v14, v38);
+                Scaleform::Render::Tessellator::connectPendingToRight(this, v14, vertex);
               }
               else
               {
-                Scaleform::Render::Tessellator::connectPendingToLeft(v5, v14, v38);
+                Scaleform::Render::Tessellator::connectPendingToLeft(this, v14, vertex);
               }
             }
           }
-LABEL_113:
+LABEL_111:
           if ( v32 )
           {
             v92 = v32->monotone;
@@ -5567,66 +5418,65 @@ LABEL_113:
               v93 = v92->lowerBase;
               if ( v93 )
               {
-                if ( v5->MeshVertices.Pages[(unsigned __int64)(v38 & 0xFFFFFFF) >> 4][v38 & 0xF].y == v93->y )
+                if ( this->MeshVertices.Pages[(unsigned __int64)(vertex & 0xFFFFFFF) >> 4][vertex & 0xF].y == v93->y )
                 {
-                  v93->vertexRight = v38 & 0xFFFFFFF;
+                  v93->vertexRight = vertex & 0xFFFFFFF;
                 }
-                else if ( v38 >= 0 )
+                else if ( vertex >= 0 )
                 {
-                  Scaleform::Render::Tessellator::connectPendingToRight(v5, v32, v38);
+                  Scaleform::Render::Tessellator::connectPendingToRight(this, v32, vertex);
                 }
                 else
                 {
-                  Scaleform::Render::Tessellator::connectPendingToLeft(v5, v32, v38);
+                  Scaleform::Render::Tessellator::connectPendingToLeft(this, v32, vertex);
                 }
-                goto LABEL_130;
+                goto LABEL_128;
               }
               v8 = v92->start == 0i64;
-              LODWORD(v216) = v38;
-              HIDWORD(v216) = v38;
+              LODWORD(v216) = vertex;
+              HIDWORD(v216) = vertex;
               if ( v8 )
               {
-                v94 = v5->MonoVertices.Size >> 4;
-                if ( v94 >= v5->MonoVertices.NumPages )
+                v94 = this->MonoVertices.Size >> 4;
+                if ( v94 >= this->MonoVertices.NumPages )
                   Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                    (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-                    v5->MonoVertices.Size >> 4);
-                v95 = v5->MonoVertices.Pages[v94];
-                v96 = v5->MonoVertices.Size & 0xF;
+                    (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                    this->MonoVertices.Size >> 4);
+                v95 = this->MonoVertices.Pages[v94];
+                v96 = this->MonoVertices.Size & 0xF;
                 v29 = 0i64;
                 *(_QWORD *)&v95[v96].srcVer = v216;
                 v95[v96].next = 0i64;
-                v97 = (signed __int64)&v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                                 - 1) & 0xF];
+                v97 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
                 *(_QWORD *)&v92->d.t.numTriangles = -1i64;
-                v92->start = (Scaleform::Render::Tessellator::MonoVertexType *)v97;
-                goto LABEL_129;
+                v92->start = v97;
+                goto LABEL_127;
               }
-              v98 = (signed __int64)&v5->MonoVertices.Pages[(unsigned __int64)v92->d.m.lastIdx >> 4][v92->d.m.lastIdx & 0xF];
-              if ( *(_DWORD *)v98 != v38 )
+              v98 = &this->MonoVertices.Pages[(unsigned __int64)v92->d.m.lastIdx >> 4][v92->d.m.lastIdx & 0xF];
+              if ( v98->srcVer != vertex )
               {
-                v99 = v5->MonoVertices.Size >> 4;
-                if ( v99 >= v5->MonoVertices.NumPages )
+                v99 = this->MonoVertices.Size >> 4;
+                if ( v99 >= this->MonoVertices.NumPages )
                   Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                    (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-                    v5->MonoVertices.Size >> 4);
-                v100 = v5->MonoVertices.Pages[v99];
-                v101 = v5->MonoVertices.Size & 0xF;
+                    (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                    this->MonoVertices.Size >> 4);
+                v100 = this->MonoVertices.Pages[v99];
+                v101 = this->MonoVertices.Size & 0xF;
                 v29 = 0i64;
                 *(_QWORD *)&v100[v101].srcVer = v216;
                 v100[v101].next = 0i64;
-                *(_QWORD *)(v98 + 8) = &v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                                  - 1) & 0xF];
+                v98->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size)
+                                                                                     - 1) & 0xF];
                 v92->d.m.prevIdx2 = v92->d.m.prevIdx1;
                 v92->d.m.prevIdx1 = v92->d.m.lastIdx;
-LABEL_129:
-                v92->d.m.lastIdx = LODWORD(v5->MonoVertices.Size) - 1;
+LABEL_127:
+                v92->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
               }
             }
           }
-LABEL_130:
+LABEL_128:
           if ( upperBase.numChains )
-            Scaleform::Render::Tessellator::connectStarting(v5, v14, &upperBase);
+            Scaleform::Render::Tessellator::connectStarting(this, v14, &upperBase);
           v102 = v231;
           v103 = v233;
           v104 = v231 + 1;
@@ -5636,26 +5486,26 @@ LABEL_130:
           while ( 2 )
           {
             v106 = v212;
-LABEL_137:
+LABEL_135:
             v107 = 0i64;
             v108 = 0i64;
-            if ( v104 < v5->ChainsBelow.Size )
-              v107 = (signed __int64)&v5->ChainsBelow.Pages[(unsigned __int64)v104 >> 4][v104 & 0xF];
-            if ( v105 < v5->ChainsAbove.Size )
-              v108 = (signed __int64)&v5->ChainsAbove.Pages[(unsigned __int64)v105 >> 4][v105 & 0xF];
+            if ( v104 < this->ChainsBelow.Size )
+              v107 = &this->ChainsBelow.Pages[(unsigned __int64)v104 >> 4][v104 & 0xF];
+            if ( v105 < this->ChainsAbove.Size )
+              v108 = &this->ChainsAbove.Pages[(unsigned __int64)v105 >> 4][v105 & 0xF];
             if ( v107 )
             {
               if ( v108 )
               {
-                if ( *(_DWORD *)(v107 + 16) == *(_DWORD *)(v108 + 16) )
-                  goto LABEL_201;
-                goto LABEL_144;
+                if ( v107->vertex == v108->vertex )
+                  goto LABEL_197;
+                goto LABEL_142;
               }
             }
             else
             {
-LABEL_144:
-              if ( v108 && *(_DWORD *)(v108 + 16) == v38 )
+LABEL_142:
+              if ( v108 && v108->vertex == vertex )
               {
                 ++v103;
                 v109 = scan;
@@ -5663,8 +5513,8 @@ LABEL_144:
                 v233 = v103;
                 v211 = v105 + 1;
                 v110 = scan;
-                scan = &v5->ChainsAbove.Pages[(unsigned __int64)v103 >> 4][v103 & 0xF];
-                Scaleform::Render::Tessellator::startMonotone(v5, v110, v38 | 0x80000000);
+                scan = &this->ChainsAbove.Pages[(unsigned __int64)v103 >> 4][v103 & 0xF];
+                Scaleform::Render::Tessellator::startMonotone(this, v110, vertex | 0x80000000);
                 v104 = v235;
                 v105 = v211;
                 if ( !v109 )
@@ -5675,91 +5525,90 @@ LABEL_144:
                   v112 = v111->lowerBase;
                   if ( v112 )
                   {
-                    if ( v5->MeshVertices.Pages[(unsigned __int64)(v38 & 0xFFFFFFF) >> 4][v38 & 0xF].y == v112->y )
+                    if ( this->MeshVertices.Pages[(unsigned __int64)(vertex & 0xFFFFFFF) >> 4][vertex & 0xF].y == v112->y )
                     {
                       v106 = v212;
-                      v112->vertexRight = v38 & 0xFFFFFFF;
+                      v112->vertexRight = vertex & 0xFFFFFFF;
                     }
                     else
                     {
-                      if ( v38 >= 0 )
-                        Scaleform::Render::Tessellator::connectPendingToRight(v5, v109, v38);
+                      if ( vertex >= 0 )
+                        Scaleform::Render::Tessellator::connectPendingToRight(this, v109, vertex);
                       else
-                        Scaleform::Render::Tessellator::connectPendingToLeft(v5, v109, v38);
+                        Scaleform::Render::Tessellator::connectPendingToLeft(this, v109, vertex);
                       v106 = v212;
                       v104 = v235;
                       v105 = v211;
                     }
-                    goto LABEL_136;
+                    goto LABEL_134;
                   }
                   v8 = v111->start == 0i64;
-                  LODWORD(v221) = v38;
-                  HIDWORD(v221) = v38;
+                  LODWORD(v221) = vertex;
+                  HIDWORD(v221) = vertex;
                   if ( v8 )
                   {
-                    v113 = v5->MonoVertices.Size >> 4;
-                    if ( v113 >= v5->MonoVertices.NumPages )
+                    v113 = this->MonoVertices.Size >> 4;
+                    if ( v113 >= this->MonoVertices.NumPages )
                       Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                        (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-                        v5->MonoVertices.Size >> 4);
+                        (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                        this->MonoVertices.Size >> 4);
                     v106 = v212;
-                    v114 = v5->MonoVertices.Pages[v113];
-                    v115 = v5->MonoVertices.Size & 0xF;
+                    v114 = this->MonoVertices.Pages[v113];
+                    v115 = this->MonoVertices.Size & 0xF;
                     *(_QWORD *)&v114[v115].srcVer = v221;
                     v114[v115].next = 0i64;
-                    v116 = (signed __int64)&v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size) - 1) & 0xF];
+                    v116 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size)
+                                                                                    - 1) & 0xF];
                     *(_QWORD *)&v111->d.t.numTriangles = -1i64;
-                    v111->start = (Scaleform::Render::Tessellator::MonoVertexType *)v116;
-                    goto LABEL_200;
+                    v111->start = v116;
+                    goto LABEL_196;
                   }
                   v106 = v212;
-                  v117 = (signed __int64)&v5->MonoVertices.Pages[(unsigned __int64)v111->d.m.lastIdx >> 4][v111->d.m.lastIdx & 0xF];
-                  if ( *(_DWORD *)v117 != v38 )
+                  v117 = &this->MonoVertices.Pages[(unsigned __int64)v111->d.m.lastIdx >> 4][v111->d.m.lastIdx & 0xF];
+                  if ( v117->srcVer != vertex )
                   {
-                    v118 = (signed __int64)&v5->MonoVertices;
-                    v119 = v5->MonoVertices.Size >> 4;
-                    if ( v119 >= v5->MonoVertices.NumPages )
+                    p_MonoVertices = &this->MonoVertices;
+                    v119 = this->MonoVertices.Size >> 4;
+                    if ( v119 >= this->MonoVertices.NumPages )
                       Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                        (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-                        v5->MonoVertices.Size >> 4);
-                    v120 = v5->MonoVertices.Pages[v119];
+                        (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                        this->MonoVertices.Size >> 4);
+                    v120 = this->MonoVertices.Pages[v119];
                     v121 = v221;
-LABEL_199:
+LABEL_195:
                     v29 = 0i64;
-                    v140 = *(_DWORD *)(v118 + 8) & 0xF;
+                    v140 = p_MonoVertices->Size & 0xF;
                     *(_QWORD *)&v120[v140].srcVer = v121;
                     v120[v140].next = 0i64;
-                    *(_QWORD *)(v117 + 8) = *(_QWORD *)(*(_QWORD *)(v118 + 32)
-                                                      + 8 * ((unsigned __int64)(++*(_QWORD *)(v118 + 8) - 1i64) >> 4))
-                                          + 16i64 * ((*(_DWORD *)(v118 + 8) - 1) & 0xF);
+                    v117->next = &p_MonoVertices->Pages[p_MonoVertices->Size++ >> 4][(LODWORD(p_MonoVertices->Size) - 1) & 0xF];
                     v111->d.m.prevIdx2 = v111->d.m.prevIdx1;
                     v111->d.m.prevIdx1 = v111->d.m.lastIdx;
-                    goto LABEL_200;
+                    goto LABEL_196;
                   }
-                  goto LABEL_135;
+                  goto LABEL_133;
                 }
                 v106 = v212;
-                goto LABEL_136;
+                goto LABEL_134;
               }
             }
             break;
           }
-          if ( v107 && *(_DWORD *)(v107 + 16) == v38 )
+          if ( v107 && v107->vertex == vertex )
           {
             ++v102;
             v122 = v106;
             ++v104;
             v231 = v102;
             v235 = v104;
-            v106 = &v5->ChainsBelow.Pages[(unsigned __int64)v102 >> 4][v102 & 0xF];
-            v212 = &v5->ChainsBelow.Pages[(unsigned __int64)v102 >> 4][v102 & 0xF];
-            v123 = v38 | 0x80000000;
+            v106 = &this->ChainsBelow.Pages[(unsigned __int64)v102 >> 4][v102 & 0xF];
+            v212 = v106;
+            v123 = vertex | 0x80000000;
             if ( !v122 )
-              goto LABEL_137;
+              goto LABEL_135;
             v124 = v122->monotone;
             if ( !v124 )
             {
-LABEL_183:
+LABEL_179:
               v111 = v122->monotone;
               v104 = v235;
               v105 = v211;
@@ -5768,131 +5617,121 @@ LABEL_183:
                 v134 = v111->lowerBase;
                 if ( v134 )
                 {
-                  if ( v5->MeshVertices.Pages[(unsigned __int64)(v38 & 0xFFFFFFF) >> 4][v38 & 0xF].y == v134->y )
+                  if ( this->MeshVertices.Pages[(unsigned __int64)(vertex & 0xFFFFFFF) >> 4][vertex & 0xF].y == v134->y )
                   {
-                    v134->vertexRight = v38 & 0xFFFFFFF;
+                    v134->vertexRight = vertex & 0xFFFFFFF;
                   }
                   else
                   {
-                    if ( v38 >= 0 )
-                      Scaleform::Render::Tessellator::connectPendingToRight(v5, v122, v38);
+                    if ( vertex >= 0 )
+                      Scaleform::Render::Tessellator::connectPendingToRight(this, v122, vertex);
                     else
-                      Scaleform::Render::Tessellator::connectPendingToLeft(v5, v122, v38);
+                      Scaleform::Render::Tessellator::connectPendingToLeft(this, v122, vertex);
                     v104 = v235;
                     v105 = v211;
                   }
-                  goto LABEL_136;
+                  goto LABEL_134;
                 }
                 v8 = v111->start == 0i64;
-                LODWORD(v217) = v38;
-                HIDWORD(v217) = v38;
+                LODWORD(v217) = vertex;
+                HIDWORD(v217) = vertex;
                 if ( v8 )
                 {
-                  v135 = v5->MonoVertices.Size >> 4;
-                  if ( v135 >= v5->MonoVertices.NumPages )
+                  v135 = this->MonoVertices.Size >> 4;
+                  if ( v135 >= this->MonoVertices.NumPages )
                     Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                      (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-                      v5->MonoVertices.Size >> 4);
-                  v136 = v5->MonoVertices.Pages[v135];
-                  v137 = v5->MonoVertices.Size & 0xF;
+                      (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                      this->MonoVertices.Size >> 4);
+                  v136 = this->MonoVertices.Pages[v135];
+                  v137 = this->MonoVertices.Size & 0xF;
                   *(_QWORD *)&v136[v137].srcVer = v217;
                   v136[v137].next = 0i64;
-                  v138 = (signed __int64)&v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size) - 1) & 0xF];
+                  v138 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
                   *(_QWORD *)&v111->d.t.numTriangles = -1i64;
-                  v111->start = (Scaleform::Render::Tessellator::MonoVertexType *)v138;
-LABEL_200:
+                  v111->start = v138;
+LABEL_196:
                   v104 = v235;
                   v105 = v211;
-                  v111->d.m.lastIdx = LODWORD(v5->MonoVertices.Size) - 1;
+                  v111->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
                 }
                 else
                 {
-                  v117 = (signed __int64)&v5->MonoVertices.Pages[(unsigned __int64)v111->d.m.lastIdx >> 4][v111->d.m.lastIdx & 0xF];
-                  if ( *(_DWORD *)v117 != v38 )
+                  v117 = &this->MonoVertices.Pages[(unsigned __int64)v111->d.m.lastIdx >> 4][v111->d.m.lastIdx & 0xF];
+                  if ( v117->srcVer != vertex )
                   {
-                    v118 = (signed __int64)&v5->MonoVertices;
-                    v139 = v5->MonoVertices.Size >> 4;
-                    if ( v139 >= v5->MonoVertices.NumPages )
+                    p_MonoVertices = &this->MonoVertices;
+                    v139 = this->MonoVertices.Size >> 4;
+                    if ( v139 >= this->MonoVertices.NumPages )
                       Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                        (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-                        v5->MonoVertices.Size >> 4);
-                    v120 = v5->MonoVertices.Pages[v139];
+                        (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                        this->MonoVertices.Size >> 4);
+                    v120 = this->MonoVertices.Pages[v139];
                     v121 = v217;
-                    goto LABEL_199;
+                    goto LABEL_195;
                   }
                 }
-LABEL_135:
+LABEL_133:
                 v102 = v231;
               }
-LABEL_136:
+LABEL_134:
               v103 = v233;
-              goto LABEL_137;
+              goto LABEL_135;
             }
             v125 = v124->lowerBase;
             if ( v125 )
             {
-              if ( v5->MeshVertices.Pages[(unsigned __int64)((v38 | 0x80000000) & 0xFFFFFFF) >> 4][v38 & 0xF].y == v125->y )
-              {
-                v125->vertexRight = v123 & 0xFFFFFFF;
-              }
-              else if ( v123 >= 0 )
-              {
-                Scaleform::Render::Tessellator::connectPendingToRight(v5, v122, v123);
-              }
+              if ( this->MeshVertices.Pages[(unsigned __int64)(vertex & 0xFFFFFFF) >> 4][vertex & 0xF].y == v125->y )
+                v125->vertexRight = vertex & 0xFFFFFFF;
               else
-              {
-                Scaleform::Render::Tessellator::connectPendingToLeft(v5, v122, v123);
-              }
-              goto LABEL_183;
+                Scaleform::Render::Tessellator::connectPendingToLeft(this, v122, v123);
+              goto LABEL_179;
             }
             v8 = v124->start == 0i64;
-            LODWORD(v225) = v38 | 0x80000000;
-            HIDWORD(v225) = v38 | 0x80000000;
+            LODWORD(v225) = vertex | 0x80000000;
+            HIDWORD(v225) = vertex | 0x80000000;
             if ( v8 )
             {
-              v126 = v5->MonoVertices.Size >> 4;
-              if ( v126 >= v5->MonoVertices.NumPages )
+              v126 = this->MonoVertices.Size >> 4;
+              if ( v126 >= this->MonoVertices.NumPages )
                 Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                  (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-                  v5->MonoVertices.Size >> 4);
-              v127 = v5->MonoVertices.Pages[v126];
-              v128 = v5->MonoVertices.Size & 0xF;
+                  (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                  this->MonoVertices.Size >> 4);
+              v127 = this->MonoVertices.Pages[v126];
+              v128 = this->MonoVertices.Size & 0xF;
               v29 = 0i64;
               *(_QWORD *)&v127[v128].srcVer = v225;
               v127[v128].next = 0i64;
-              v129 = (signed __int64)&v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                                - 1) & 0xF];
+              v129 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
               *(_QWORD *)&v124->d.t.numTriangles = -1i64;
-              v124->start = (Scaleform::Render::Tessellator::MonoVertexType *)v129;
-              goto LABEL_181;
+              v124->start = v129;
+              goto LABEL_177;
             }
-            v130 = (signed __int64)&v5->MonoVertices.Pages[(unsigned __int64)v124->d.m.lastIdx >> 4][v124->d.m.lastIdx & 0xF];
-            if ( *(_DWORD *)v130 != v123 )
+            v130 = &this->MonoVertices.Pages[(unsigned __int64)v124->d.m.lastIdx >> 4][v124->d.m.lastIdx & 0xF];
+            if ( v130->srcVer != v123 )
             {
-              v131 = v5->MonoVertices.Size >> 4;
-              if ( v131 >= v5->MonoVertices.NumPages )
+              v131 = this->MonoVertices.Size >> 4;
+              if ( v131 >= this->MonoVertices.NumPages )
                 Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                  (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-                  v5->MonoVertices.Size >> 4);
-              v132 = v5->MonoVertices.Pages[v131];
-              v133 = v5->MonoVertices.Size & 0xF;
+                  (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                  this->MonoVertices.Size >> 4);
+              v132 = this->MonoVertices.Pages[v131];
+              v133 = this->MonoVertices.Size & 0xF;
               v29 = 0i64;
               *(_QWORD *)&v132[v133].srcVer = v225;
               v132[v133].next = 0i64;
-              ++v5->MonoVertices.Size;
-              v106 = v212;
-              *(_QWORD *)(v130 + 8) = &v5->MonoVertices.Pages[(v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                               - 1) & 0xF];
+              ++this->MonoVertices.Size;
+              v130->next = &this->MonoVertices.Pages[(this->MonoVertices.Size - 1) >> 4][((unsigned int)this->MonoVertices.Size
+                                                                                        - 1) & 0xF];
               v124->d.m.prevIdx2 = v124->d.m.prevIdx1;
               v124->d.m.prevIdx1 = v124->d.m.lastIdx;
-LABEL_181:
-              v124->d.m.lastIdx = LODWORD(v5->MonoVertices.Size) - 1;
+LABEL_177:
+              v124->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
             }
             v102 = v231;
-            goto LABEL_183;
+            goto LABEL_179;
           }
-LABEL_201:
-          v141 = v38 | 0x80000000;
+LABEL_197:
+          v141 = vertex | 0x80000000;
           if ( v106 )
           {
             v142 = v106->monotone;
@@ -5901,66 +5740,59 @@ LABEL_201:
               v143 = v142->lowerBase;
               if ( v143 )
               {
-                if ( v5->MeshVertices.Pages[(unsigned __int64)((v38 | 0x80000000) & 0xFFFFFFF) >> 4][v38 & 0xF].y == v143->y )
-                {
-                  v143->vertexRight = v141 & 0xFFFFFFF;
-                }
-                else if ( v141 >= 0 )
-                {
-                  Scaleform::Render::Tessellator::connectPendingToRight(v5, v106, v141);
-                }
+                if ( this->MeshVertices.Pages[(unsigned __int64)(vertex & 0xFFFFFFF) >> 4][vertex & 0xF].y == v143->y )
+                  v143->vertexRight = vertex & 0xFFFFFFF;
                 else
-                {
-                  Scaleform::Render::Tessellator::connectPendingToLeft(v5, v106, v141);
-                }
+                  Scaleform::Render::Tessellator::connectPendingToLeft(this, v106, v141);
               }
               else
               {
                 v8 = v142->start == 0i64;
-                LODWORD(v218) = v38 | 0x80000000;
-                HIDWORD(v218) = v38 | 0x80000000;
+                LODWORD(v218) = vertex | 0x80000000;
+                HIDWORD(v218) = vertex | 0x80000000;
                 if ( v8 )
                 {
-                  v144 = v5->MonoVertices.Size >> 4;
-                  if ( v144 >= v5->MonoVertices.NumPages )
+                  v144 = this->MonoVertices.Size >> 4;
+                  if ( v144 >= this->MonoVertices.NumPages )
                     Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                      (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-                      v5->MonoVertices.Size >> 4);
-                  v145 = v5->MonoVertices.Pages[v144];
-                  v146 = v5->MonoVertices.Size & 0xF;
+                      (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                      this->MonoVertices.Size >> 4);
+                  v145 = this->MonoVertices.Pages[v144];
+                  v146 = this->MonoVertices.Size & 0xF;
                   v29 = 0i64;
                   *(_QWORD *)&v145[v146].srcVer = v218;
                   v145[v146].next = 0i64;
-                  v147 = (signed __int64)&v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size) - 1) & 0xF];
+                  v147 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
                   *(_QWORD *)&v142->d.t.numTriangles = -1i64;
-                  v142->start = (Scaleform::Render::Tessellator::MonoVertexType *)v147;
+                  v142->start = v147;
                 }
                 else
                 {
-                  v148 = (signed __int64)&v5->MonoVertices.Pages[(unsigned __int64)v142->d.m.lastIdx >> 4][v142->d.m.lastIdx & 0xF];
-                  if ( *(_DWORD *)v148 == v141 )
-                    goto LABEL_218;
-                  v149 = v5->MonoVertices.Size >> 4;
-                  if ( v149 >= v5->MonoVertices.NumPages )
+                  v148 = &this->MonoVertices.Pages[(unsigned __int64)v142->d.m.lastIdx >> 4][v142->d.m.lastIdx & 0xF];
+                  if ( v148->srcVer == v141 )
+                    goto LABEL_212;
+                  v149 = this->MonoVertices.Size >> 4;
+                  if ( v149 >= this->MonoVertices.NumPages )
                     Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                      (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-                      v5->MonoVertices.Size >> 4);
-                  v150 = v5->MonoVertices.Pages[v149];
-                  v151 = v5->MonoVertices.Size & 0xF;
+                      (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                      this->MonoVertices.Size >> 4);
+                  v150 = this->MonoVertices.Pages[v149];
+                  v151 = this->MonoVertices.Size & 0xF;
                   v29 = 0i64;
                   *(_QWORD *)&v150[v151].srcVer = v218;
                   v150[v151].next = 0i64;
-                  ++v5->MonoVertices.Size;
+                  ++this->MonoVertices.Size;
                   v106 = v212;
-                  *(_QWORD *)(v148 + 8) = &v5->MonoVertices.Pages[(v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size) - 1) & 0xF];
+                  v148->next = &this->MonoVertices.Pages[(this->MonoVertices.Size - 1) >> 4][((unsigned int)this->MonoVertices.Size
+                                                                                            - 1) & 0xF];
                   v142->d.m.prevIdx2 = v142->d.m.prevIdx1;
                   v142->d.m.prevIdx1 = v142->d.m.lastIdx;
                 }
-                v142->d.m.lastIdx = LODWORD(v5->MonoVertices.Size) - 1;
+                v142->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
               }
             }
           }
-LABEL_218:
+LABEL_212:
           if ( v106->chain->rightBelow == scan->chain->rightAbove )
           {
             if ( dst )
@@ -5971,68 +5803,69 @@ LABEL_218:
                 v153 = v152->lowerBase;
                 if ( v153 )
                 {
-                  if ( v5->MeshVertices.Pages[(unsigned __int64)(v38 & 0xFFFFFFF) >> 4][v38 & 0xF].y == v153->y )
+                  if ( this->MeshVertices.Pages[(unsigned __int64)(vertex & 0xFFFFFFF) >> 4][vertex & 0xF].y == v153->y )
                   {
                     v31 = v233;
-                    v153->vertexRight = v38 & 0xFFFFFFF;
+                    v153->vertexRight = vertex & 0xFFFFFFF;
                   }
                   else
                   {
-                    if ( v38 >= 0 )
-                      Scaleform::Render::Tessellator::connectPendingToRight(v5, dst, v38);
+                    if ( vertex >= 0 )
+                      Scaleform::Render::Tessellator::connectPendingToRight(this, dst, vertex);
                     else
-                      Scaleform::Render::Tessellator::connectPendingToLeft(v5, dst, v38);
+                      Scaleform::Render::Tessellator::connectPendingToLeft(this, dst, vertex);
                     v31 = v233;
                   }
-                  goto LABEL_241;
+                  goto LABEL_235;
                 }
                 v8 = v152->start == 0i64;
-                LODWORD(v220) = v38;
-                HIDWORD(v220) = v38;
+                LODWORD(v220) = vertex;
+                HIDWORD(v220) = vertex;
                 if ( v8 )
                 {
-                  v154 = v5->MonoVertices.Size >> 4;
-                  if ( v154 >= v5->MonoVertices.NumPages )
+                  v154 = this->MonoVertices.Size >> 4;
+                  if ( v154 >= this->MonoVertices.NumPages )
                     Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                      (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-                      v5->MonoVertices.Size >> 4);
+                      (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                      this->MonoVertices.Size >> 4);
                   v31 = v233;
-                  v155 = v5->MonoVertices.Pages[v154];
-                  v156 = v5->MonoVertices.Size & 0xF;
+                  v155 = this->MonoVertices.Pages[v154];
+                  v156 = this->MonoVertices.Size & 0xF;
                   *(_QWORD *)&v155[v156].srcVer = v220;
                   v155[v156].next = 0i64;
-                  v157 = (signed __int64)&v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size) - 1) & 0xF];
+                  v157 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
                   *(_QWORD *)&v152->d.t.numTriangles = -1i64;
-                  v152->start = (Scaleform::Render::Tessellator::MonoVertexType *)v157;
-                  v152->d.m.lastIdx = LODWORD(v5->MonoVertices.Size) - 1;
-                  goto LABEL_241;
+                  v152->start = v157;
+                  v152->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
+                  goto LABEL_235;
                 }
-                v158 = (signed __int64)&v5->MonoVertices.Pages[(unsigned __int64)v152->d.m.lastIdx >> 4][v152->d.m.lastIdx & 0xF];
-                if ( *(_DWORD *)v158 != v38 )
+                v158 = &this->MonoVertices.Pages[(unsigned __int64)v152->d.m.lastIdx >> 4][v152->d.m.lastIdx & 0xF];
+                if ( v158->srcVer != vertex )
                 {
-                  v159 = v5->MonoVertices.Size >> 4;
-                  if ( v159 >= v5->MonoVertices.NumPages )
+                  v159 = this->MonoVertices.Size >> 4;
+                  if ( v159 >= this->MonoVertices.NumPages )
                     Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                      (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-                      v5->MonoVertices.Size >> 4);
-                  v160 = v5->MonoVertices.Pages[v159];
-                  v161 = v5->MonoVertices.Size & 0xF;
+                      (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                      this->MonoVertices.Size >> 4);
+                  v160 = this->MonoVertices.Pages[v159];
+                  v161 = this->MonoVertices.Size & 0xF;
                   *(_QWORD *)&v160[v161].srcVer = v220;
                   v160[v161].next = 0i64;
-                  *(_QWORD *)(v158 + 8) = &v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size) - 1) & 0xF];
+                  v158->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size)
+                                                                                        - 1) & 0xF];
                   v152->d.m.prevIdx2 = v152->d.m.prevIdx1;
                   v152->d.m.prevIdx1 = v152->d.m.lastIdx;
-                  v152->d.m.lastIdx = LODWORD(v5->MonoVertices.Size) - 1;
+                  v152->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
                 }
               }
             }
             v31 = v233;
-            goto LABEL_241;
+            goto LABEL_235;
           }
-          Scaleform::Render::Tessellator::startMonotone(v5, scan, v141);
+          Scaleform::Render::Tessellator::startMonotone(this, scan, v141);
           v162 = scan;
           v31 = v233;
-LABEL_242:
+LABEL_236:
           v28 = v31;
           v234 = v31;
           v30 = v231 + 1;
@@ -6060,65 +5893,58 @@ LABEL_46:
                 v58 = v56->lowerBase;
                 if ( v58 )
                 {
-                  if ( v5->MeshVertices.Pages[(unsigned __int64)((v39->vertex | 0x80000000) & 0xFFFFFFF) >> 4][v39->vertex & 0xF].y == v58->y )
-                  {
-                    v58->vertexRight = v57 & 0xFFFFFFF;
-                  }
-                  else if ( v57 >= 0 )
-                  {
-                    Scaleform::Render::Tessellator::connectPendingToRight(v5, v39, v57);
-                  }
+                  if ( this->MeshVertices.Pages[(unsigned __int64)(v39->vertex & 0xFFFFFFF) >> 4][v39->vertex & 0xF].y == v58->y )
+                    v58->vertexRight = v39->vertex & 0xFFFFFFF;
                   else
-                  {
-                    Scaleform::Render::Tessellator::connectPendingToLeft(v5, v39, v57);
-                  }
-                  goto LABEL_62;
+                    Scaleform::Render::Tessellator::connectPendingToLeft(this, v39, v57);
+                  goto LABEL_60;
                 }
                 v8 = v56->start == 0i64;
                 LODWORD(v229) = v39->vertex | 0x80000000;
                 HIDWORD(v229) = v57;
                 if ( v8 )
                 {
-                  v59 = v5->MonoVertices.Size >> 4;
-                  if ( v59 >= v5->MonoVertices.NumPages )
+                  v59 = this->MonoVertices.Size >> 4;
+                  if ( v59 >= this->MonoVertices.NumPages )
                     Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                      (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-                      v5->MonoVertices.Size >> 4);
-                  v60 = v5->MonoVertices.Pages[v59];
-                  v61 = v5->MonoVertices.Size & 0xF;
+                      (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                      this->MonoVertices.Size >> 4);
+                  v60 = this->MonoVertices.Pages[v59];
+                  v61 = this->MonoVertices.Size & 0xF;
                   *(_QWORD *)&v60[v61].srcVer = v229;
                   v60[v61].next = 0i64;
-                  v62 = (signed __int64)&v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size) - 1) & 0xF];
+                  v62 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
                   *(_QWORD *)&v56->d.t.numTriangles = -1i64;
-                  v56->start = (Scaleform::Render::Tessellator::MonoVertexType *)v62;
-LABEL_61:
+                  v56->start = v62;
+LABEL_59:
                   v39 = v212;
-                  v56->d.m.lastIdx = LODWORD(v5->MonoVertices.Size) - 1;
-                  goto LABEL_62;
+                  v56->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
+                  goto LABEL_60;
                 }
-                v63 = (signed __int64)&v5->MonoVertices.Pages[(unsigned __int64)v56->d.m.lastIdx >> 4][v56->d.m.lastIdx & 0xF];
-                if ( *(_DWORD *)v63 != v57 )
+                v63 = &this->MonoVertices.Pages[(unsigned __int64)v56->d.m.lastIdx >> 4][v56->d.m.lastIdx & 0xF];
+                if ( v63->srcVer != v57 )
                 {
-                  v64 = v5->MonoVertices.Size >> 4;
-                  if ( v64 >= v5->MonoVertices.NumPages )
+                  v64 = this->MonoVertices.Size >> 4;
+                  if ( v64 >= this->MonoVertices.NumPages )
                     Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                      (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-                      v5->MonoVertices.Size >> 4);
-                  v65 = v5->MonoVertices.Pages[v64];
-                  v66 = v5->MonoVertices.Size & 0xF;
+                      (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                      this->MonoVertices.Size >> 4);
+                  v65 = this->MonoVertices.Pages[v64];
+                  v66 = this->MonoVertices.Size & 0xF;
                   v29 = 0i64;
                   *(_QWORD *)&v65[v66].srcVer = v229;
                   v65[v66].next = 0i64;
-                  *(_QWORD *)(v63 + 8) = &v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size) - 1) & 0xF];
+                  v63->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size)
+                                                                                       - 1) & 0xF];
                   v56->d.m.prevIdx2 = v56->d.m.prevIdx1;
                   v56->d.m.prevIdx1 = v56->d.m.lastIdx;
-                  goto LABEL_61;
+                  goto LABEL_59;
                 }
               }
-LABEL_62:
+LABEL_60:
               if ( upperBase.numChains )
-                Scaleform::Render::Tessellator::connectStarting(v5, v14, &upperBase);
-              Scaleform::Render::Tessellator::addPendingEnd(v5, v32, v39, yb);
+                Scaleform::Render::Tessellator::connectStarting(this, v14, &upperBase);
+              Scaleform::Render::Tessellator::addPendingEnd(this, v32, v39, yb);
               v31 = v233;
               v28 = -1;
               v14 = v39;
@@ -6129,64 +5955,62 @@ LABEL_62:
             v47 = v46->lowerBase;
             if ( v47 )
             {
-              if ( v5->MeshVertices.Pages[(unsigned __int64)(v38 & 0xFFFFFFF) >> 4][v38 & 0xF].y == v47->y )
+              if ( this->MeshVertices.Pages[(unsigned __int64)(vertex & 0xFFFFFFF) >> 4][vertex & 0xF].y == v47->y )
               {
-                v47->vertexRight = v38 & 0xFFFFFFF;
+                v47->vertexRight = vertex & 0xFFFFFFF;
               }
-              else if ( v38 >= 0 )
+              else if ( vertex >= 0 )
               {
-                Scaleform::Render::Tessellator::connectPendingToRight(v5, v14, v38);
+                Scaleform::Render::Tessellator::connectPendingToRight(this, v14, vertex);
               }
               else
               {
-                Scaleform::Render::Tessellator::connectPendingToLeft(v5, v14, v38);
+                Scaleform::Render::Tessellator::connectPendingToLeft(this, v14, vertex);
               }
               goto LABEL_46;
             }
             v8 = v46->start == 0i64;
-            LODWORD(v228) = v38;
-            HIDWORD(v228) = v38;
+            LODWORD(v228) = vertex;
+            HIDWORD(v228) = vertex;
             if ( v8 )
             {
-              v48 = v5->MonoVertices.Size >> 4;
-              if ( v48 >= v5->MonoVertices.NumPages )
+              v48 = this->MonoVertices.Size >> 4;
+              if ( v48 >= this->MonoVertices.NumPages )
                 Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                  (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-                  v5->MonoVertices.Size >> 4);
-              v49 = v5->MonoVertices.Pages[v48];
-              v50 = v5->MonoVertices.Size & 0xF;
+                  (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                  this->MonoVertices.Size >> 4);
+              v49 = this->MonoVertices.Pages[v48];
+              v50 = this->MonoVertices.Size & 0xF;
               *(_QWORD *)&v49[v50].srcVer = v228;
               v49[v50].next = 0i64;
-              v51 = (signed __int64)&v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                               - 1) & 0xF];
+              v51 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
               *(_QWORD *)&v46->d.t.numTriangles = -1i64;
-              v46->start = (Scaleform::Render::Tessellator::MonoVertexType *)v51;
+              v46->start = v51;
             }
             else
             {
-              v52 = (signed __int64)&v5->MonoVertices.Pages[(unsigned __int64)v46->d.m.lastIdx >> 4][v46->d.m.lastIdx & 0xF];
-              if ( *(_DWORD *)v52 == v38 )
+              v52 = &this->MonoVertices.Pages[(unsigned __int64)v46->d.m.lastIdx >> 4][v46->d.m.lastIdx & 0xF];
+              if ( v52->srcVer == vertex )
               {
 LABEL_45:
                 v39 = v212;
                 goto LABEL_46;
               }
-              v53 = v5->MonoVertices.Size >> 4;
-              if ( v53 >= v5->MonoVertices.NumPages )
+              v53 = this->MonoVertices.Size >> 4;
+              if ( v53 >= this->MonoVertices.NumPages )
                 Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                  (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-                  v5->MonoVertices.Size >> 4);
-              v54 = v5->MonoVertices.Pages[v53];
-              v55 = v5->MonoVertices.Size & 0xF;
+                  (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                  this->MonoVertices.Size >> 4);
+              v54 = this->MonoVertices.Pages[v53];
+              v55 = this->MonoVertices.Size & 0xF;
               v29 = 0i64;
               *(_QWORD *)&v54[v55].srcVer = v228;
               v54[v55].next = 0i64;
-              *(_QWORD *)(v52 + 8) = &v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                                - 1) & 0xF];
+              v52->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
               v46->d.m.prevIdx2 = v46->d.m.prevIdx1;
               v46->d.m.prevIdx1 = v46->d.m.lastIdx;
             }
-            v46->d.m.lastIdx = LODWORD(v5->MonoVertices.Size) - 1;
+            v46->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
             goto LABEL_45;
           }
         }
@@ -6195,72 +6019,70 @@ LABEL_45:
           if ( !v14 || (v67 = v14->monotone) == 0i64 || !v67->style )
           {
             if ( !v32 )
-              goto LABEL_93;
+              goto LABEL_91;
             v72 = v32->monotone;
             if ( !v72 )
-              goto LABEL_93;
+              goto LABEL_91;
             v73 = v72->lowerBase;
             if ( v73 )
             {
-              if ( v5->MeshVertices.Pages[(unsigned __int64)(v41 & 0xFFFFFFF) >> 4][v41 & 0xF].y == v73->y )
+              if ( this->MeshVertices.Pages[(unsigned __int64)(v41 & 0xFFFFFFF) >> 4][v41 & 0xF].y == v73->y )
               {
                 v73->vertexRight = v41 & 0xFFFFFFF;
               }
               else if ( v41 >= 0 )
               {
-                Scaleform::Render::Tessellator::connectPendingToRight(v5, v32, v41);
+                Scaleform::Render::Tessellator::connectPendingToRight(this, v32, v41);
               }
               else
               {
-                Scaleform::Render::Tessellator::connectPendingToLeft(v5, v32, v41);
+                Scaleform::Render::Tessellator::connectPendingToLeft(this, v32, v41);
               }
-              goto LABEL_93;
+              goto LABEL_91;
             }
             v8 = v72->start == 0i64;
             LODWORD(v223) = v41;
             HIDWORD(v223) = v41;
             if ( v8 )
             {
-              v74 = v5->MonoVertices.Size >> 4;
-              if ( v74 >= v5->MonoVertices.NumPages )
+              v74 = this->MonoVertices.Size >> 4;
+              if ( v74 >= this->MonoVertices.NumPages )
                 Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                  (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-                  v5->MonoVertices.Size >> 4);
-              v75 = v5->MonoVertices.Pages[v74];
-              v76 = v5->MonoVertices.Size & 0xF;
+                  (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                  this->MonoVertices.Size >> 4);
+              v75 = this->MonoVertices.Pages[v74];
+              v76 = this->MonoVertices.Size & 0xF;
               *(_QWORD *)&v75[v76].srcVer = v223;
               v75[v76].next = 0i64;
-              v77 = (signed __int64)&v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                               - 1) & 0xF];
+              v77 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
               *(_QWORD *)&v72->d.t.numTriangles = -1i64;
-              v72->start = (Scaleform::Render::Tessellator::MonoVertexType *)v77;
-              goto LABEL_92;
+              v72->start = v77;
+              goto LABEL_90;
             }
-            v78 = (signed __int64)&v5->MonoVertices.Pages[(unsigned __int64)v72->d.m.lastIdx >> 4][v72->d.m.lastIdx & 0xF];
-            if ( *(_DWORD *)v78 != v41 )
+            v78 = &this->MonoVertices.Pages[(unsigned __int64)v72->d.m.lastIdx >> 4][v72->d.m.lastIdx & 0xF];
+            if ( v78->srcVer != v41 )
             {
-              v79 = v5->MonoVertices.Size >> 4;
-              if ( v79 >= v5->MonoVertices.NumPages )
+              v79 = this->MonoVertices.Size >> 4;
+              if ( v79 >= this->MonoVertices.NumPages )
                 Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                  (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-                  v5->MonoVertices.Size >> 4);
-              v80 = v5->MonoVertices.Pages[v79];
-              v81 = v5->MonoVertices.Size & 0xF;
+                  (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                  this->MonoVertices.Size >> 4);
+              v80 = this->MonoVertices.Pages[v79];
+              v81 = this->MonoVertices.Size & 0xF;
               v29 = 0i64;
               *(_QWORD *)&v80[v81].srcVer = v223;
               v80[v81].next = 0i64;
-              *(_QWORD *)(v78 + 8) = &v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                                - 1) & 0xF];
+              v78->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
               v72->d.m.prevIdx2 = v72->d.m.prevIdx1;
               v72->d.m.prevIdx1 = v72->d.m.lastIdx;
-LABEL_92:
-              v72->d.m.lastIdx = LODWORD(v5->MonoVertices.Size) - 1;
+LABEL_90:
+              v72->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
             }
-LABEL_93:
-            Scaleform::Render::Tessellator::startMonotone(v5, scan, scan->vertex | 0x80000000);
+LABEL_91:
+            Scaleform::Render::Tessellator::startMonotone(this, scan, scan->vertex | 0x80000000);
             v28 = v234;
             v31 = v233;
-            goto LABEL_94;
+            goto LABEL_92;
           }
           if ( upperBase.numChains )
           {
@@ -6268,12 +6090,12 @@ LABEL_93:
           }
           else
           {
-            v68 = *(_QWORD *)v42;
+            v68 = v42->chain;
             upperBase.firstChain = v31;
             upperBase.numChains = 1;
-            v69 = *(unsigned __int16 *)(v68 + 30);
+            leftAbove = v68->leftAbove;
             upperBase.leftAbove = v28;
-            upperBase.styleLeft = v69;
+            upperBase.styleLeft = leftAbove;
           }
           if ( v32 )
           {
@@ -6288,7 +6110,7 @@ LABEL_93:
               }
             }
           }
-LABEL_94:
+LABEL_92:
           v30 = v231;
           ++v31;
           v32 = scan;
@@ -6296,9 +6118,9 @@ LABEL_94:
           v233 = v31;
         }
       }
-      if ( v31 >= v5->ChainsAbove.Size )
+      if ( v31 >= this->ChainsAbove.Size )
         break;
-      v163 = v5->ChainsAbove.Pages[(unsigned __int64)v31 >> 4];
+      v163 = this->ChainsAbove.Pages[(unsigned __int64)v31 >> 4];
       v164 = v163[v31 & 0xF].vertex;
       v32 = &v163[v31 & 0xF];
       if ( dst )
@@ -6309,17 +6131,17 @@ LABEL_94:
           v166 = v165->lowerBase;
           if ( v166 )
           {
-            if ( v5->MeshVertices.Pages[(unsigned __int64)(v164 & 0xFFFFFFF) >> 4][v164 & 0xF].y == v166->y )
+            if ( this->MeshVertices.Pages[(unsigned __int64)(v164 & 0xFFFFFFF) >> 4][v164 & 0xF].y == v166->y )
             {
               v166->vertexRight = v164 & 0xFFFFFFF;
             }
             else if ( v164 >= 0 )
             {
-              Scaleform::Render::Tessellator::connectPendingToRight(v5, dst, v164);
+              Scaleform::Render::Tessellator::connectPendingToRight(this, dst, v164);
             }
             else
             {
-              Scaleform::Render::Tessellator::connectPendingToLeft(v5, dst, v164);
+              Scaleform::Render::Tessellator::connectPendingToLeft(this, dst, v164);
             }
           }
           else
@@ -6329,46 +6151,45 @@ LABEL_94:
             HIDWORD(v222) = v164;
             if ( v8 )
             {
-              v167 = v5->MonoVertices.Size >> 4;
-              if ( v167 >= v5->MonoVertices.NumPages )
+              v167 = this->MonoVertices.Size >> 4;
+              if ( v167 >= this->MonoVertices.NumPages )
                 Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                  (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-                  v5->MonoVertices.Size >> 4);
-              v168 = v5->MonoVertices.Pages[v167];
-              v169 = v5->MonoVertices.Size & 0xF;
+                  (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                  this->MonoVertices.Size >> 4);
+              v168 = this->MonoVertices.Pages[v167];
+              v169 = this->MonoVertices.Size & 0xF;
               *(_QWORD *)&v168[v169].srcVer = v222;
               v168[v169].next = 0i64;
-              v170 = (signed __int64)&v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                                - 1) & 0xF];
+              v170 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
               *(_QWORD *)&v165->d.t.numTriangles = -1i64;
-              v165->start = (Scaleform::Render::Tessellator::MonoVertexType *)v170;
+              v165->start = v170;
             }
             else
             {
-              v171 = (signed __int64)&v5->MonoVertices.Pages[(unsigned __int64)v165->d.m.lastIdx >> 4][v165->d.m.lastIdx & 0xF];
-              if ( *(_DWORD *)v171 == v164 )
-                goto LABEL_261;
-              v172 = v5->MonoVertices.Size >> 4;
-              if ( v172 >= v5->MonoVertices.NumPages )
+              v171 = &this->MonoVertices.Pages[(unsigned __int64)v165->d.m.lastIdx >> 4][v165->d.m.lastIdx & 0xF];
+              if ( v171->srcVer == v164 )
+                goto LABEL_255;
+              v172 = this->MonoVertices.Size >> 4;
+              if ( v172 >= this->MonoVertices.NumPages )
                 Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                  (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-                  v5->MonoVertices.Size >> 4);
-              v173 = v5->MonoVertices.Pages[v172];
-              v174 = v5->MonoVertices.Size & 0xF;
+                  (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                  this->MonoVertices.Size >> 4);
+              v173 = this->MonoVertices.Pages[v172];
+              v174 = this->MonoVertices.Size & 0xF;
               v29 = 0i64;
               *(_QWORD *)&v173[v174].srcVer = v222;
               v173[v174].next = 0i64;
-              *(_QWORD *)(v171 + 8) = &v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                                 - 1) & 0xF];
+              v171->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size)
+                                                                                    - 1) & 0xF];
               v165->d.m.prevIdx2 = v165->d.m.prevIdx1;
               v165->d.m.prevIdx1 = v165->d.m.lastIdx;
             }
-            v165->d.m.lastIdx = LODWORD(v5->MonoVertices.Size) - 1;
+            v165->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
           }
         }
       }
-LABEL_261:
-      Scaleform::Render::Tessellator::startMonotone(v5, v32, v32->vertex | 0x80000000);
+LABEL_255:
+      Scaleform::Render::Tessellator::startMonotone(this, v32, v32->vertex | 0x80000000);
       v28 = v234;
       v30 = v231;
       v31 = v233 + 1;
@@ -6379,7 +6200,7 @@ LABEL_261:
     {
       v175 = v33 >> 4;
       v176 = v33 & 0xF;
-      v177 = v5->ChainsBelow.Pages[v175];
+      v177 = this->ChainsBelow.Pages[v175];
       v178 = v177[v176].vertex;
       v179 = &v177[v176];
       if ( v14 )
@@ -6390,17 +6211,17 @@ LABEL_261:
           v181 = v180->lowerBase;
           if ( v181 )
           {
-            if ( v5->MeshVertices.Pages[(unsigned __int64)(v178 & 0xFFFFFFF) >> 4][v178 & 0xF].y == v181->y )
+            if ( this->MeshVertices.Pages[(unsigned __int64)(v178 & 0xFFFFFFF) >> 4][v178 & 0xF].y == v181->y )
             {
               v181->vertexRight = v178 & 0xFFFFFFF;
             }
             else if ( v178 >= 0 )
             {
-              Scaleform::Render::Tessellator::connectPendingToRight(v5, v14, v178);
+              Scaleform::Render::Tessellator::connectPendingToRight(this, v14, v178);
             }
             else
             {
-              Scaleform::Render::Tessellator::connectPendingToLeft(v5, v14, v178);
+              Scaleform::Render::Tessellator::connectPendingToLeft(this, v14, v178);
             }
           }
           else
@@ -6410,45 +6231,44 @@ LABEL_261:
             HIDWORD(v224) = v178;
             if ( v8 )
             {
-              v182 = v5->MonoVertices.Size >> 4;
-              if ( v182 >= v5->MonoVertices.NumPages )
+              v182 = this->MonoVertices.Size >> 4;
+              if ( v182 >= this->MonoVertices.NumPages )
                 Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                  (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-                  v5->MonoVertices.Size >> 4);
-              v183 = v5->MonoVertices.Pages[v182];
-              v184 = v5->MonoVertices.Size & 0xF;
+                  (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                  this->MonoVertices.Size >> 4);
+              v183 = this->MonoVertices.Pages[v182];
+              v184 = this->MonoVertices.Size & 0xF;
               *(_QWORD *)&v183[v184].srcVer = v224;
               v183[v184].next = 0i64;
-              v185 = (signed __int64)&v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                                - 1) & 0xF];
+              v185 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
               *(_QWORD *)&v180->d.t.numTriangles = -1i64;
-              v180->start = (Scaleform::Render::Tessellator::MonoVertexType *)v185;
+              v180->start = v185;
             }
             else
             {
-              v186 = (signed __int64)&v5->MonoVertices.Pages[(unsigned __int64)v180->d.m.lastIdx >> 4][v180->d.m.lastIdx & 0xF];
-              if ( *(_DWORD *)v186 == v178 )
-                goto LABEL_280;
-              v187 = v5->MonoVertices.Size >> 4;
-              if ( v187 >= v5->MonoVertices.NumPages )
+              v186 = &this->MonoVertices.Pages[(unsigned __int64)v180->d.m.lastIdx >> 4][v180->d.m.lastIdx & 0xF];
+              if ( v186->srcVer == v178 )
+                goto LABEL_274;
+              v187 = this->MonoVertices.Size >> 4;
+              if ( v187 >= this->MonoVertices.NumPages )
                 Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                  (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-                  v5->MonoVertices.Size >> 4);
-              v188 = v5->MonoVertices.Pages[v187];
-              v189 = v5->MonoVertices.Size & 0xF;
+                  (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+                  this->MonoVertices.Size >> 4);
+              v188 = this->MonoVertices.Pages[v187];
+              v189 = this->MonoVertices.Size & 0xF;
               v29 = 0i64;
               *(_QWORD *)&v188[v189].srcVer = v224;
               v188[v189].next = 0i64;
-              *(_QWORD *)(v186 + 8) = &v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                                 - 1) & 0xF];
+              v186->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size)
+                                                                                    - 1) & 0xF];
               v180->d.m.prevIdx2 = v180->d.m.prevIdx1;
               v180->d.m.prevIdx1 = v180->d.m.lastIdx;
             }
-            v180->d.m.lastIdx = LODWORD(v5->MonoVertices.Size) - 1;
+            v180->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
           }
         }
       }
-LABEL_280:
+LABEL_274:
       v190 = v179->monotone;
       v191 = v179->vertex | 0x80000000;
       if ( v190 )
@@ -6456,65 +6276,55 @@ LABEL_280:
         v192 = v190->lowerBase;
         if ( v192 )
         {
-          if ( v5->MeshVertices.Pages[(unsigned __int64)((v179->vertex | 0x80000000) & 0xFFFFFFF) >> 4][v179->vertex & 0xF].y == v192->y )
-          {
-            v192->vertexRight = v191 & 0xFFFFFFF;
-          }
-          else if ( v191 >= 0 )
-          {
-            Scaleform::Render::Tessellator::connectPendingToRight(v5, v179, v191);
-          }
+          if ( this->MeshVertices.Pages[(unsigned __int64)(v179->vertex & 0xFFFFFFF) >> 4][v179->vertex & 0xF].y == v192->y )
+            v192->vertexRight = v179->vertex & 0xFFFFFFF;
           else
-          {
-            Scaleform::Render::Tessellator::connectPendingToLeft(v5, v179, v191);
-          }
-          goto LABEL_296;
+            Scaleform::Render::Tessellator::connectPendingToLeft(this, v179, v191);
+          goto LABEL_288;
         }
         v8 = v190->start == 0i64;
         LODWORD(v226) = v179->vertex | 0x80000000;
         HIDWORD(v226) = v191;
         if ( v8 )
         {
-          v193 = v5->MonoVertices.Size >> 4;
-          if ( v193 >= v5->MonoVertices.NumPages )
+          v193 = this->MonoVertices.Size >> 4;
+          if ( v193 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-              v5->MonoVertices.Size >> 4);
-          v194 = v5->MonoVertices.Pages[v193];
-          v195 = v5->MonoVertices.Size & 0xF;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v194 = this->MonoVertices.Pages[v193];
+          v195 = this->MonoVertices.Size & 0xF;
           *(_QWORD *)&v194[v195].srcVer = v226;
           v194[v195].next = 0i64;
-          v196 = (signed __int64)&v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                            - 1) & 0xF];
+          v196 = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
           *(_QWORD *)&v190->d.t.numTriangles = -1i64;
-          v190->start = (Scaleform::Render::Tessellator::MonoVertexType *)v196;
-          goto LABEL_295;
+          v190->start = v196;
+          goto LABEL_287;
         }
-        v197 = (signed __int64)&v5->MonoVertices.Pages[(unsigned __int64)v190->d.m.lastIdx >> 4][v190->d.m.lastIdx & 0xF];
-        if ( *(_DWORD *)v197 != v191 )
+        v197 = &this->MonoVertices.Pages[(unsigned __int64)v190->d.m.lastIdx >> 4][v190->d.m.lastIdx & 0xF];
+        if ( v197->srcVer != v191 )
         {
-          v198 = v5->MonoVertices.Size >> 4;
-          if ( v198 >= v5->MonoVertices.NumPages )
+          v198 = this->MonoVertices.Size >> 4;
+          if ( v198 >= this->MonoVertices.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->MonoVertices,
-              v5->MonoVertices.Size >> 4);
-          v199 = v5->MonoVertices.Pages[v198];
-          v200 = v5->MonoVertices.Size & 0xF;
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->MonoVertices,
+              this->MonoVertices.Size >> 4);
+          v199 = this->MonoVertices.Pages[v198];
+          v200 = this->MonoVertices.Size & 0xF;
           v29 = 0i64;
           *(_QWORD *)&v199[v200].srcVer = v226;
           v199[v200].next = 0i64;
-          *(_QWORD *)(v197 + 8) = &v5->MonoVertices.Pages[(++v5->MonoVertices.Size - 1) >> 4][(LODWORD(v5->MonoVertices.Size)
-                                                                                             - 1) & 0xF];
+          v197->next = &this->MonoVertices.Pages[this->MonoVertices.Size++ >> 4][(LODWORD(this->MonoVertices.Size) - 1) & 0xF];
           v190->d.m.prevIdx2 = v190->d.m.prevIdx1;
           v190->d.m.prevIdx1 = v190->d.m.lastIdx;
-LABEL_295:
-          v190->d.m.lastIdx = LODWORD(v5->MonoVertices.Size) - 1;
+LABEL_287:
+          v190->d.m.lastIdx = LODWORD(this->MonoVertices.Size) - 1;
         }
       }
-LABEL_296:
+LABEL_288:
       if ( upperBase.numChains )
-        Scaleform::Render::Tessellator::connectStarting(v5, v14, &upperBase);
-      Scaleform::Render::Tessellator::addPendingEnd(v5, dst, v179, yb);
+        Scaleform::Render::Tessellator::connectStarting(this, v14, &upperBase);
+      Scaleform::Render::Tessellator::addPendingEnd(this, dst, v179, yb);
       v31 = v233;
       v28 = -1;
       v14 = v179;
@@ -6525,65 +6335,72 @@ LABEL_296:
     }
     break;
   }
-  v8 = v5->ChainsAbove.Size == 0;
-  v5->ChainsBelow.Size = 0i64;
+  v8 = this->ChainsAbove.Size == 0;
+  this->ChainsBelow.Size = 0i64;
   v201 = 0i64;
   if ( !v8 )
   {
     do
     {
-      v202 = v5->ChainsBelow.Size >> 4;
+      v202 = this->ChainsBelow.Size >> 4;
       v203 = v201 & 0xF;
-      v204 = v5->ChainsAbove.Pages[v201 >> 4];
-      if ( v202 >= v5->ChainsBelow.NumPages )
+      v204 = this->ChainsAbove.Pages[v201 >> 4];
+      if ( v202 >= this->ChainsBelow.NumPages )
         Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::ScanChainType,4,8>::allocPage(
-          &v5->ChainsBelow,
-          v5->ChainsBelow.Size >> 4);
+          &this->ChainsBelow,
+          this->ChainsBelow.Size >> 4);
       ++v201;
-      v205 = v5->ChainsBelow.Pages[v202];
-      v206 = v5->ChainsBelow.Size & 0xF;
+      v205 = this->ChainsBelow.Pages[v202];
+      v206 = this->ChainsBelow.Size & 0xF;
       v205[v206].chain = v204[v203].chain;
       v205[v206].monotone = v204[v203].monotone;
       *(_QWORD *)&v205[v206].vertex = *(_QWORD *)&v204[v203].vertex;
-      ++v5->ChainsBelow.Size;
+      ++this->ChainsBelow.Size;
     }
-    while ( v201 < v5->ChainsAbove.Size );
+    while ( v201 < this->ChainsAbove.Size );
     v29 = 0i64;
   }
-  if ( v232->Size )
+  if ( aet->Size )
   {
     do
     {
       v207 = v29 >> 4;
       v208 = v29++ & 0xF;
-      v209 = v232->Pages[v207][v208];
+      v209 = aet->Pages[v207][v208];
       v210 = v209->leftAbove;
-      v209->flags &= 0xFFEFu;
+      v209->flags &= ~0x10u;
       v209->leftBelow = v210;
       v209->rightBelow = v209->rightAbove;
     }
-    while ( v29 < v232->Size );
+    while ( v29 < aet->Size );
   }
+}= v210;
+      v209->rightBelow = v209->rightAbove;
+    }
+    while ( v29 < aet->Size );
+  }
 }
 
 // File Line: 1809
 // RVA: 0x9F3BA0
-void __fastcall Scaleform::Render::Tessellator::swapChains(Scaleform::Render::Tessellator *this, unsigned int startIn, unsigned int endIn)
+void __fastcall Scaleform::Render::Tessellator::swapChains(
+        Scaleform::Render::Tessellator *this,
+        unsigned int startIn,
+        unsigned int endIn)
 {
-  Scaleform::Render::Tessellator *v3; // rbx
   __int64 v4; // rsi
   unsigned __int64 v5; // rdi
-  signed __int64 v6; // rax
+  __int64 v6; // rax
   unsigned __int64 v7; // r8
-  signed __int64 v8; // rcx
+  __int64 v8; // rcx
   Scaleform::Render::Tessellator::IntersectionType *v9; // rax
-  unsigned int **v10; // r8
+  unsigned int **Pages; // r8
   Scaleform::Render::Tessellator::IntersectionType *v11; // r11
   unsigned int v12; // edx
   unsigned __int64 v13; // r10
-  signed __int64 v14; // r9
+  unsigned __int64 v14; // r9
   Scaleform::Render::Tessellator::MonoChainType *v15; // rax
-  signed __int64 v16; // rdx
+  __int64 v16; // rdx
   unsigned __int64 v17; // r8
   Scaleform::Render::Tessellator::MonoChainType *v18; // rax
   Scaleform::Render::Tessellator::MonoChainType ***v19; // rcx
@@ -6593,10 +6410,10 @@ void __fastcall Scaleform::Render::Tessellator::swapChains(Scaleform::Render::Te
   Scaleform::Render::Tessellator::MonoChainType *v23; // rdx
   unsigned int **v24; // rdx
   unsigned int *v25; // r8
-  __int64 v26; // r9
-  unsigned int *v27; // rax
+  unsigned __int64 pos1; // rax
+  __int64 v27; // r9
+  unsigned int *v28; // rax
 
-  v3 = this;
   if ( startIn < endIn )
   {
     v4 = endIn - startIn;
@@ -6606,32 +6423,33 @@ void __fastcall Scaleform::Render::Tessellator::swapChains(Scaleform::Render::Te
       v6 = v5 & 0xF;
       v7 = v5++ >> 4;
       v8 = v6;
-      v9 = v3->Intersections.Pages[v7];
-      v10 = v3->InteriorOrder.Pages;
+      v9 = this->Intersections.Pages[v7];
+      Pages = this->InteriorOrder.Pages;
       v11 = &v9[v8];
-      v12 = v10[(unsigned __int64)v9[v8].pos1 >> 4][v9[v8].pos1 & 0xF];
-      LODWORD(v10) = v10[(unsigned __int64)v11->pos2 >> 4][v11->pos2 & 0xF];
+      v12 = Pages[(unsigned __int64)v11->pos1 >> 4][v11->pos1 & 0xF];
+      LODWORD(Pages) = Pages[(unsigned __int64)v11->pos2 >> 4][v11->pos2 & 0xF];
       v13 = (unsigned __int64)v12 >> 4;
       v14 = v12 & 0xF;
-      v15 = v3->InteriorChains.Pages[v13][v14];
+      v15 = this->InteriorChains.Pages[v13][v14];
       v15->flags |= 0x10u;
-      v16 = (unsigned __int8)v10 & 0xF;
-      v17 = (unsigned __int64)(unsigned int)v10 >> 4;
-      v18 = v3->InteriorChains.Pages[v17][v16];
+      v16 = (unsigned __int8)Pages & 0xF;
+      v17 = (unsigned __int64)(unsigned int)Pages >> 4;
+      v18 = this->InteriorChains.Pages[v17][v16];
       v18->flags |= 0x10u;
-      v19 = v3->InteriorChains.Pages;
+      v19 = this->InteriorChains.Pages;
       v20 = v19[v17];
       v21 = v19[v13];
       v22 = &v20[v16];
       v23 = v21[v14];
       v21[v14] = *v22;
       *v22 = v23;
-      v24 = v3->InteriorOrder.Pages;
+      v24 = this->InteriorOrder.Pages;
       v25 = &v24[(unsigned __int64)v11->pos2 >> 4][v11->pos2 & 0xF];
-      v26 = v11->pos1 & 0xF;
-      v27 = v24[(unsigned __int64)v11->pos1 >> 4];
-      LODWORD(v24) = v27[v26];
-      v27[v26] = *v25;
+      pos1 = v11->pos1;
+      v27 = pos1 & 0xF;
+      v28 = v24[pos1 >> 4];
+      LODWORD(v24) = v28[v27];
+      v28[v27] = *v25;
       *v25 = (unsigned int)v24;
       --v4;
     }
@@ -6641,274 +6459,238 @@ void __fastcall Scaleform::Render::Tessellator::swapChains(Scaleform::Render::Te
 
 // File Line: 1825
 // RVA: 0x9ED640
-int Scaleform::Render::Tessellator::processInterior(...)
+// local variable allocation has failed, the output may be wrong!
+void __fastcall Scaleform::Render::Tessellator::processInterior(
+        Scaleform::Render::Tessellator *this,
+        double yb,
+        float yTop,
+        unsigned int perceiveFlag)
 {
-  unsigned __int64 v4; // r8
+  unsigned __int64 Size; // r8
   unsigned int v5; // ebx
-  unsigned int v6; // esi
-  Scaleform::Render::Tessellator *v7; // rdi
   float v8; // xmm8_4
-  __int128 v9; // xmm7
+  __int128 y_low; // xmm7
   unsigned __int64 v10; // rdx
   unsigned __int64 v11; // r8
   unsigned __int64 i; // rcx
   __int128 v13; // xmm6
   unsigned int v14; // esi
 
-  v4 = this->Intersections.Size;
+  Size = this->Intersections.Size;
   v5 = 0;
-  v6 = perceiveFlag;
-  v7 = this;
   v8 = *(float *)&yb;
-  v9 = yb;
-  if ( v4 )
+  y_low = *(_OWORD *)&yb;
+  if ( Size )
   {
     v10 = 0i64;
     do
     {
-      v9 = LODWORD(this->Intersections.Pages[v10 >> 4][v10 & 0xF].y);
-      if ( *(float *)&v9 > *(float *)&yb )
+      y_low = LODWORD(this->Intersections.Pages[v10 >> 4][v10 & 0xF].y);
+      if ( *(float *)&y_low > *(float *)&yb )
         break;
       ++v5;
-      v6 = 1;
+      perceiveFlag = 1;
       v10 = v5;
     }
-    while ( v5 < v4 );
+    while ( v5 < Size );
   }
   Scaleform::Render::Tessellator::swapChains(this, 0, v5);
-  if ( v6 )
-    Scaleform::Render::Tessellator::perceiveStyles(v7, &v7->InteriorChains);
-  v11 = v7->Intersections.Size;
-  for ( i = v5; v5 < v11; v9 = v13 )
+  if ( perceiveFlag )
+    Scaleform::Render::Tessellator::perceiveStyles(this, &this->InteriorChains);
+  v11 = this->Intersections.Size;
+  for ( i = v5; v5 < v11; y_low = v13 )
   {
-    v13 = v9;
+    v13 = y_low;
     v14 = v5;
     if ( i < v11 )
     {
       do
       {
-        v13 = LODWORD(v7->Intersections.Pages[i >> 4][i & 0xF].y);
-        if ( *(float *)&v13 > *(float *)&v9 )
+        v13 = LODWORD(this->Intersections.Pages[i >> 4][i & 0xF].y);
+        if ( *(float *)&v13 > *(float *)&y_low )
           break;
         i = ++v5;
       }
       while ( v5 < v11 );
     }
-    Scaleform::Render::Tessellator::perceiveStyles(v7, &v7->InteriorChains);
-    Scaleform::Render::Tessellator::sweepScanbeam(v7, &v7->InteriorChains, v8);
-    Scaleform::Render::Tessellator::swapChains(v7, v14, v5);
-    v11 = v7->Intersections.Size;
+    Scaleform::Render::Tessellator::perceiveStyles(this, &this->InteriorChains);
+    Scaleform::Render::Tessellator::sweepScanbeam(this, &this->InteriorChains, v8);
+    Scaleform::Render::Tessellator::swapChains(this, v14, v5);
+    v11 = this->Intersections.Size;
     i = v5;
-    v8 = *(float *)&v9;
+    v8 = *(float *)&y_low;
   }
-  Scaleform::Render::Tessellator::perceiveStyles(v7, &v7->ActiveChains);
-  if ( *(float *)&v9 < yTop )
-    Scaleform::Render::Tessellator::sweepScanbeam(v7, &v7->ActiveChains, *(float *)&v9);
+  Scaleform::Render::Tessellator::perceiveStyles(this, &this->ActiveChains);
+  if ( *(float *)&y_low < yTop )
+    Scaleform::Render::Tessellator::sweepScanbeam(this, &this->ActiveChains, *(float *)&y_low);
 }
 
 // File Line: 1878
 // RVA: 0x9E9CA0
 void __fastcall Scaleform::Render::Tessellator::monotonize(Scaleform::Render::Tessellator *this)
 {
-  Scaleform::Render::Tessellator *v1; // rdi
-  unsigned __int64 v2; // rbp
+  unsigned __int64 i; // rbp
   unsigned __int64 v3; // rsi
   unsigned __int64 v4; // rdx
   unsigned __int64 v5; // r8
-  float v6; // xmm2_4
-  unsigned int **v7; // rbx
+  float j; // xmm2_4
+  unsigned int **Pages; // rbx
   __int64 v8; // r9
   Scaleform::Render::Tessellator::SrcVertexType *v9; // r10
   unsigned __int64 v10; // rax
   unsigned __int64 v11; // rcx
-  unsigned __int64 v12; // rbx
-  unsigned __int64 v13; // rbp
+  unsigned __int64 k; // rbx
+  unsigned __int64 Size; // rbp
   void *v14; // r14
-  Scaleform::Render::Tessellator::MonoChainType **v15; // rdx
+  Scaleform::Render::Tessellator::MonoChainType **Array; // rdx
   unsigned __int64 v16; // r8
   unsigned __int64 v17; // r9
   unsigned __int64 v18; // rdx
   unsigned __int64 v19; // r8
-  unsigned int v20; // er15
+  unsigned int v20; // r15d
   unsigned int v21; // ebx
-  unsigned int v22; // edx
-  unsigned __int64 v23; // rcx
-  __int64 v24; // rdx
-  float v25; // xmm7_4
-  unsigned __int64 v26; // rax
-  float v27; // xmm6_4
-  unsigned __int64 v28; // rsi
-  unsigned __int64 v29; // rcx
-  unsigned int v30; // er9
-  unsigned int v31; // eax
-  char v32; // bp
-  unsigned __int64 v33; // rdx
-  unsigned __int64 v34; // r8
-  Scaleform::Render::Tessellator::MonoChainType ***v35; // r9
-  Scaleform::Render::Tessellator::MonoChainType *v36; // r10
-  unsigned __int64 v37; // rax
-  unsigned __int64 v38; // rcx
+  unsigned __int64 v22; // rcx
+  float y; // xmm7_4
+  unsigned __int64 v24; // rax
+  float v25; // xmm6_4
+  unsigned __int64 v26; // rsi
+  unsigned __int64 v27; // rcx
+  unsigned int v28; // r9d
+  unsigned int Scanbeam; // eax
+  char v30; // bp
+  unsigned __int64 v31; // rdx
+  unsigned __int64 m; // r8
+  Scaleform::Render::Tessellator::MonoChainType ***v33; // r9
+  Scaleform::Render::Tessellator::MonoChainType *v34; // r10
+  unsigned __int64 v35; // rax
+  unsigned __int64 v36; // rcx
 
-  v1 = this;
   if ( this->SrcVertices.Size )
   {
     Scaleform::Render::ArrayUnsafe<int>::Resize(&this->StyleCounts, this->MaxStyle + 1);
-    v2 = 0i64;
-    if ( v1->SrcVertices.Size )
+    for ( i = 0i64; i < this->SrcVertices.Size; ++i )
     {
-      do
-      {
-        v3 = v1->Scanbeams.Size >> 4;
-        if ( v3 >= v1->Scanbeams.NumPages )
-          Scaleform::Render::ArrayPaged<unsigned int,4,16>::allocPage(
-            (Scaleform::Render::ArrayPaged<Scaleform::Render::GlyphFitter::VertexType,4,16> *)&v1->Scanbeams,
-            v1->Scanbeams.Size >> 4);
-        v1->Scanbeams.Pages[v3][v1->Scanbeams.Size & 0xF] = v2;
-        ++v1->Scanbeams.Size;
-        ++v2;
-      }
-      while ( v2 < v1->SrcVertices.Size );
+      v3 = this->Scanbeams.Size >> 4;
+      if ( v3 >= this->Scanbeams.NumPages )
+        Scaleform::Render::ArrayPaged<unsigned int,4,16>::allocPage(
+          (Scaleform::Render::ArrayPaged<Scaleform::Render::GlyphFitter::VertexType,4,16> *)&this->Scanbeams,
+          this->Scanbeams.Size >> 4);
+      this->Scanbeams.Pages[v3][this->Scanbeams.Size & 0xF] = i;
+      ++this->Scanbeams.Size;
     }
     Scaleform::Alg::QuickSortSliced<Scaleform::Render::ArrayPaged<unsigned int,4,16>,Scaleform::Render::Tessellator::CmpScanbeams>(
-      &v1->Scanbeams,
+      &this->Scanbeams,
       0i64,
-      v1->Scanbeams.Size,
-      (Scaleform::Render::Tessellator::CmpScanbeams)&v1->SrcVertices);
+      this->Scanbeams.Size,
+      (Scaleform::Render::Tessellator::CmpScanbeams)&this->SrcVertices);
     v4 = 0i64;
     v5 = 0i64;
-    v6 = FLOAT_N1_0e30;
-    if ( v1->Scanbeams.Size )
+    for ( j = FLOAT_N1_0e30; v4 < this->Scanbeams.Size; ++v4 )
     {
-      do
+      Pages = this->Scanbeams.Pages;
+      v8 = Pages[v4 >> 4][v4 & 0xF] & 0xF;
+      v9 = this->SrcVertices.Pages[(unsigned __int64)Pages[v4 >> 4][v4 & 0xF] >> 4];
+      if ( (float)(v9[v8].y - j) <= (float)(COERCE_FLOAT(LODWORD(v9[v8].y) & _xmm) * this->Epsilon) )
       {
-        v7 = v1->Scanbeams.Pages;
-        v8 = v7[v4 >> 4][v4 & 0xF] & 0xF;
-        v9 = v1->SrcVertices.Pages[(unsigned __int64)v7[v4 >> 4][v4 & 0xF] >> 4];
-        if ( (float)(v9[v8].y - v6) <= (float)(COERCE_FLOAT(LODWORD(v9[v8].y) & _xmm) * v1->Epsilon) )
-        {
-          v9[v8].y = v6;
-        }
-        else
-        {
-          v10 = v5 >> 4;
-          v11 = v5++ & 0xF;
-          v7[v10][v11] = v7[v4 >> 4][v4 & 0xF];
-          v6 = v9[v8].y;
-        }
-        ++v4;
+        v9[v8].y = j;
       }
-      while ( v4 < v1->Scanbeams.Size );
-    }
-    if ( v5 < v1->Scanbeams.Size )
-      v1->Scanbeams.Size = v5;
-    v12 = 0i64;
-    if ( v1->Paths.Size )
-    {
-      do
+      else
       {
-        Scaleform::Render::Tessellator::decomposePath(v1, &v1->Paths.Pages[v12 >> 4][v12 & 0xF]);
-        ++v12;
+        v10 = v5 >> 4;
+        v11 = v5++ & 0xF;
+        Pages[v10][v11] = Pages[v4 >> 4][v4 & 0xF];
+        j = v9[v8].y;
       }
-      while ( v12 < v1->Paths.Size );
     }
-    v13 = v1->MonoChains.Size;
-    if ( v13 > v1->MonoChainsSorted.Size )
+    if ( v5 < this->Scanbeams.Size )
+      this->Scanbeams.Size = v5;
+    for ( k = 0i64; k < this->Paths.Size; ++k )
+      Scaleform::Render::Tessellator::decomposePath(this, &this->Paths.Pages[k >> 4][k & 0xF]);
+    Size = this->MonoChains.Size;
+    if ( Size > this->MonoChainsSorted.Size )
     {
-      v14 = Scaleform::Render::LinearHeap::Alloc(v1->MonoChainsSorted.pHeap, 8 * v13);
-      memset(v14, 0, 8 * v13);
-      v15 = v1->MonoChainsSorted.Array;
-      if ( v15 )
+      v14 = Scaleform::Render::LinearHeap::Alloc(this->MonoChainsSorted.pHeap, 8 * Size);
+      memset(v14, 0, 8 * Size);
+      Array = this->MonoChainsSorted.Array;
+      if ( Array )
       {
-        v16 = v1->MonoChainsSorted.Size;
+        v16 = this->MonoChainsSorted.Size;
         if ( v16 )
-          memmove(v14, v15, 8 * v16);
+          memmove(v14, Array, 8 * v16);
       }
-      v1->MonoChainsSorted.Array = (Scaleform::Render::Tessellator::MonoChainType **)v14;
+      this->MonoChainsSorted.Array = (Scaleform::Render::Tessellator::MonoChainType **)v14;
     }
     v17 = 0i64;
-    v1->MonoChainsSorted.Size = v13;
-    if ( v1->MonoChains.Size )
+    for ( this->MonoChainsSorted.Size = Size;
+          v17 < this->MonoChains.Size;
+          this->MonoChainsSorted.Array[v17 - 1] = &this->MonoChains.Pages[v19][v18] )
     {
-      do
-      {
-        v18 = v17 & 0xF;
-        v19 = v17++ >> 4;
-        v1->MonoChainsSorted.Array[v17 - 1] = &v1->MonoChains.Pages[v19][v18];
-      }
-      while ( v17 < v1->MonoChains.Size );
+      v18 = v17 & 0xF;
+      v19 = v17++ >> 4;
     }
     Scaleform::Alg::QuickSortSliced<Scaleform::Render::ArrayUnsafe<Scaleform::Render::Tessellator::MonoChainType *>,bool (*)(Scaleform::Render::Tessellator::MonoChainType const *,Scaleform::Render::Tessellator::MonoChainType const *)>(
-      &v1->MonoChainsSorted,
+      &this->MonoChainsSorted,
       0i64,
-      v1->MonoChainsSorted.Size,
+      this->MonoChainsSorted.Size,
       Scaleform::Render::Hairliner::cmpMonoChains);
     v20 = 0;
     v21 = 0;
-    v22 = **v1->Scanbeams.Pages;
-    v23 = v22;
-    v24 = v22 & 0xF;
-    v23 >>= 4;
-    v25 = v1->SrcVertices.Pages[v23][v24].y;
-    v26 = v1->Scanbeams.Size;
-    v27 = v1->SrcVertices.Pages[v23][v24].y;
-    if ( v26 )
+    v22 = **this->Scanbeams.Pages;
+    y = this->SrcVertices.Pages[v22 >> 4][v22 & 0xF].y;
+    v24 = this->Scanbeams.Size;
+    v25 = y;
+    if ( v24 )
     {
-      v28 = 0i64;
+      v26 = 0i64;
       do
       {
-        if ( ++v20 < v26 )
-          v25 = v1->SrcVertices.Pages[(unsigned __int64)v1->Scanbeams.Pages[(unsigned __int64)v20 >> 4][v20 & 0xF] >> 4][v1->Scanbeams.Pages[(unsigned __int64)v20 >> 4][v20 & 0xF] & 0xF].y;
-        v29 = v1->MonoChainsSorted.Size;
-        v30 = v21;
-        if ( v28 < v29 )
+        if ( ++v20 < v24 )
+          y = this->SrcVertices.Pages[(unsigned __int64)this->Scanbeams.Pages[(unsigned __int64)v20 >> 4][v20 & 0xF] >> 4][this->Scanbeams.Pages[(unsigned __int64)v20 >> 4][v20 & 0xF] & 0xF].y;
+        v27 = this->MonoChainsSorted.Size;
+        v28 = v21;
+        if ( v26 < v27 )
         {
           do
           {
-            if ( v27 < v1->MonoChainsSorted.Array[v28]->ySort )
+            if ( v25 < this->MonoChainsSorted.Array[v26]->ySort )
               break;
-            v28 = ++v21;
+            v26 = ++v21;
           }
-          while ( v21 < v29 );
+          while ( v21 < v27 );
         }
-        v31 = Scaleform::Render::Tessellator::nextScanbeam(v1, v27, v25, v30, v21 - v30);
-        v32 = v31;
-        if ( v1->Intersections.Size )
+        Scanbeam = Scaleform::Render::Tessellator::nextScanbeam(this, v25, y, v28, v21 - v28);
+        v30 = Scanbeam;
+        if ( this->Intersections.Size )
         {
-          Scaleform::Render::Tessellator::processInterior(v1, v27, v25, v31);
+          Scaleform::Render::Tessellator::processInterior(this, v25, y, Scanbeam);
         }
         else
         {
-          if ( v31 )
-            Scaleform::Render::Tessellator::perceiveStyles(v1, &v1->ActiveChains);
-          Scaleform::Render::Tessellator::sweepScanbeam(v1, &v1->ActiveChains, v27);
+          if ( Scanbeam )
+            Scaleform::Render::Tessellator::perceiveStyles(this, &this->ActiveChains);
+          Scaleform::Render::Tessellator::sweepScanbeam(this, &this->ActiveChains, v25);
         }
-        if ( v32 & 2 )
+        if ( (v30 & 2) != 0 )
         {
-          v33 = 0i64;
-          v34 = 0i64;
-          if ( v1->ActiveChains.Size )
+          v31 = 0i64;
+          for ( m = 0i64; v31 < this->ActiveChains.Size; ++v31 )
           {
-            do
+            v33 = this->ActiveChains.Pages;
+            v34 = v33[v31 >> 4][v31 & 0xF];
+            if ( (v34->flags & 2) == 0 )
             {
-              v35 = v1->ActiveChains.Pages;
-              v36 = v35[v33 >> 4][v33 & 0xF];
-              if ( !(v36->flags & 2) )
-              {
-                v37 = v34 >> 4;
-                v38 = v34++ & 0xF;
-                v35[v37][v38] = v36;
-              }
-              ++v33;
+              v35 = m >> 4;
+              v36 = m++ & 0xF;
+              v33[v35][v36] = v34;
             }
-            while ( v33 < v1->ActiveChains.Size );
           }
-          if ( v34 < v1->ActiveChains.Size )
-            v1->ActiveChains.Size = v34;
+          if ( m < this->ActiveChains.Size )
+            this->ActiveChains.Size = m;
         }
-        v26 = v1->Scanbeams.Size;
-        v27 = v25;
+        v24 = this->Scanbeams.Size;
+        v25 = y;
       }
-      while ( v20 < v26 );
+      while ( v20 < v24 );
     }
   }
 }
@@ -6918,55 +6700,55 @@ void __fastcall Scaleform::Render::Tessellator::monotonize(Scaleform::Render::Te
 __int64 __fastcall Scaleform::Render::Tessellator::setMesh(Scaleform::Render::Tessellator *this, unsigned int style)
 {
   __int64 v2; // rsi
-  Scaleform::Render::Tessellator *v3; // rbx
   unsigned __int16 *v5; // r10
-  unsigned int v6; // er12
+  unsigned int Size; // r12d
   unsigned __int64 v7; // r15
   Scaleform::Render::TessMesh *v8; // rax
-  signed __int64 v9; // rcx
+  __int64 v9; // rcx
 
   v2 = style;
-  v3 = this;
   if ( !this->HasComplexFill )
     return 0i64;
   v5 = &this->StyleMatrix.Array[style * (this->StyleMatrix.Size + 1)];
-  if ( *v5 == -1 )
+  if ( *v5 == 0xFFFF )
   {
-    if ( (1 << (style & 0x1F)) & this->ComplexFlags.Array[(unsigned __int64)style >> 5] )
+    if ( ((1 << (style & 0x1F)) & this->ComplexFlags.Array[(unsigned __int64)style >> 5]) != 0 )
     {
       *v5 = this->Meshes.Size;
-      v6 = this->Meshes.Size;
+      Size = this->Meshes.Size;
       v7 = this->Meshes.Size >> 4;
       if ( v7 >= this->Meshes.NumPages )
         Scaleform::Render::ArrayPaged<Scaleform::Render::TessMesh,4,4>::allocPage(&this->Meshes, this->Meshes.Size >> 4);
-      v8 = v3->Meshes.Pages[v7];
-      v9 = v3->Meshes.Size & 0xF;
-      v8[v9].MeshIdx = v6;
+      v8 = this->Meshes.Pages[v7];
+      v9 = this->Meshes.Size & 0xF;
+      v8[v9].MeshIdx = Size;
       v8[v9].Style1 = v2;
       v8[v9].Style2 = v2;
       v8[v9].Flags1 = 0x8000;
       *(_QWORD *)&v8[v9].Flags2 = 0x8000i64;
       v8[v9].VertexCount = 0;
-      ++v3->Meshes.Size;
-      Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::AddArray(&v3->MeshTriangles);
+      ++this->Meshes.Size;
+      Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::AddArray(&this->MeshTriangles);
     }
     else
     {
       *v5 = 0;
     }
   }
-  return v3->StyleMatrix.Array[v2 * (v3->StyleMatrix.Size + 1)];
+  return this->StyleMatrix.Array[v2 * (this->StyleMatrix.Size + 1)];
 }
 
 // File Line: 2019
 // RVA: 0x9F0BE0
-__int64 __fastcall Scaleform::Render::Tessellator::setMesh(Scaleform::Render::Tessellator *this, unsigned int style1, __int64 style2)
+__int64 __fastcall Scaleform::Render::Tessellator::setMesh(
+        Scaleform::Render::Tessellator *this,
+        unsigned int style1,
+        __int64 style2)
 {
-  unsigned int v3; // er12
+  unsigned int v3; // r12d
   unsigned __int64 v4; // r13
-  Scaleform::Render::Tessellator *v5; // rbx
-  unsigned __int64 v7; // r9
-  unsigned __int16 *v8; // r10
+  unsigned __int64 Size; // r9
+  unsigned __int16 *Array; // r10
   __int64 v9; // rdi
   unsigned int *v10; // rdx
   int v11; // ebp
@@ -6974,29 +6756,28 @@ __int64 __fastcall Scaleform::Render::Tessellator::setMesh(Scaleform::Render::Te
   unsigned int v13; // eax
   unsigned __int16 v14; // r14
   unsigned __int16 v15; // r8
-  Scaleform::Render::ArrayPaged<Scaleform::Render::TessMesh,4,4> *v16; // r8
+  Scaleform::Render::ArrayPaged<Scaleform::Render::TessMesh,4,4> *p_Meshes; // r8
   unsigned int v17; // eax
   unsigned __int64 v18; // rax
   Scaleform::Render::TessMesh *v19; // rax
-  signed __int64 v20; // rcx
+  __int64 v20; // rcx
   unsigned __int16 *v21; // rax
-  signed __int64 v22; // rcx
+  unsigned __int64 v22; // rcx
   unsigned __int16 *v23; // rax
-  signed __int64 v24; // rcx
+  unsigned __int64 v24; // rcx
   unsigned __int64 v25; // [rsp+20h] [rbp-48h]
   unsigned int v26; // [rsp+70h] [rbp+8h]
   unsigned int v27; // [rsp+88h] [rbp+20h]
 
   v3 = style2;
   v4 = style1;
-  v5 = this;
   if ( !this->HasComplexFill )
     return 0i64;
-  v7 = this->StyleMatrix.Size;
-  v8 = this->StyleMatrix.Array;
+  Size = this->StyleMatrix.Size;
+  Array = this->StyleMatrix.Array;
   v9 = style1;
   style2 = (unsigned int)style2;
-  if ( v8[(unsigned int)style2 + style1 * this->StyleMatrix.Size] == -1 )
+  if ( Array[(unsigned int)style2 + style1 * Size] == 0xFFFF )
   {
     v10 = this->ComplexFlags.Array;
     v11 = v10[v4 >> 5] & (1 << (v4 & 0x1F));
@@ -7017,10 +6798,10 @@ __int64 __fastcall Scaleform::Render::Tessellator::setMesh(Scaleform::Render::Te
       }
       v14 = this->Meshes.Size;
       v9 = (unsigned int)v4;
-      v15 = v8[(unsigned int)v4 * (v7 + 1)];
-      if ( v12 || v15 == -1 || this->Meshes.Pages[(unsigned __int64)v15 >> 4][v15 & 0xF].Flags2 & 0x8000 )
+      v15 = Array[(unsigned int)v4 * (Size + 1)];
+      if ( v12 || v15 == 0xFFFF || (this->Meshes.Pages[(unsigned __int64)v15 >> 4][v15 & 0xF].Flags2 & 0x8000) != 0 )
       {
-        v16 = &this->Meshes;
+        p_Meshes = &this->Meshes;
         v26 = this->Meshes.Size;
         v17 = 0;
         if ( v12 )
@@ -7031,239 +6812,219 @@ __int64 __fastcall Scaleform::Render::Tessellator::setMesh(Scaleform::Render::Te
         if ( v18 >= this->Meshes.NumPages )
         {
           Scaleform::Render::ArrayPaged<Scaleform::Render::TessMesh,4,4>::allocPage(&this->Meshes, v18);
-          v16 = &v5->Meshes;
+          p_Meshes = &this->Meshes;
         }
-        v19 = v16->Pages[v25];
-        v20 = v16->Size & 0xF;
+        v19 = p_Meshes->Pages[v25];
+        v20 = p_Meshes->Size & 0xF;
         v19[v20].MeshIdx = v26;
         v19[v20].Style1 = v4;
         v19[v20].Style2 = v27;
         v19[v20].Flags1 = v11;
         v19[v20].Flags2 = v12;
         *(_QWORD *)&v19[v20].StartVertex = 0i64;
-        ++v16->Size;
-        Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::AddArray(&v5->MeshTriangles);
+        ++p_Meshes->Size;
+        Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::AddArray(&this->MeshTriangles);
       }
       else
       {
-        v14 = v8[(unsigned int)v4 * (v7 + 1)];
+        v14 = Array[(unsigned int)v4 * (Size + 1)];
       }
       style2 = v3;
-      v5->StyleMatrix.Array[v3 + v5->StyleMatrix.Size * (unsigned int)v4] = v14;
-      v5->StyleMatrix.Array[(unsigned int)v4 + v5->StyleMatrix.Size * v3] = v14;
-      v21 = v5->StyleMatrix.Array;
-      v22 = (unsigned int)v4 * (v5->StyleMatrix.Size + 1);
-      if ( v5->InvasiveMerge )
+      this->StyleMatrix.Array[v3 + this->StyleMatrix.Size * (unsigned int)v4] = v14;
+      this->StyleMatrix.Array[(unsigned int)v4 + this->StyleMatrix.Size * v3] = v14;
+      v21 = this->StyleMatrix.Array;
+      v22 = (unsigned int)v4 * (this->StyleMatrix.Size + 1);
+      if ( this->InvasiveMerge )
       {
-        if ( v21[v22] == -1 )
+        if ( v21[v22] == 0xFFFF )
           v21[v22] = v14;
-        v23 = v5->StyleMatrix.Array;
-        v24 = v3 * (v5->StyleMatrix.Size + 1);
-        if ( v23[v24] == -1 )
+        v23 = this->StyleMatrix.Array;
+        v24 = v3 * (this->StyleMatrix.Size + 1);
+        if ( v23[v24] == 0xFFFF )
           v23[v24] = v14;
       }
-      else if ( v21[v22] == -1 && v11 && !v12 )
+      else if ( v21[v22] == 0xFFFF && v11 && !v12 )
       {
         v21[v22] = v14;
       }
     }
     else
     {
-      v8[v4 * (v7 + 1)] = 0;
+      Array[v4 * (Size + 1)] = 0;
       this->StyleMatrix.Array[(unsigned int)style2 * (this->StyleMatrix.Size + 1)] = 0;
       this->StyleMatrix.Array[(unsigned int)style2 + this->StyleMatrix.Size * v4] = 0;
       this->StyleMatrix.Array[v4 + this->StyleMatrix.Size * (unsigned int)style2] = 0;
     }
   }
-  return v5->StyleMatrix.Array[style2 + v5->StyleMatrix.Size * v9];
+  return this->StyleMatrix.Array[style2 + this->StyleMatrix.Size * v9];
 }
 
 // File Line: 2099
 // RVA: 0x989240
-void __fastcall Scaleform::Render::Tessellator::GetMesh(Scaleform::Render::Tessellator *this, unsigned int meshIdx, Scaleform::Render::TessMesh *mesh)
+void __fastcall Scaleform::Render::Tessellator::GetMesh(
+        Scaleform::Render::Tessellator *this,
+        unsigned int meshIdx,
+        Scaleform::Render::TessMesh *mesh)
 {
-  Scaleform::Render::TessMesh *v3; // rcx
-
-  v3 = &this->Meshes.Pages[(unsigned __int64)meshIdx >> 4][meshIdx & 0xF];
-  mesh->MeshIdx = v3->MeshIdx;
-  mesh->Style1 = v3->Style1;
-  mesh->Style2 = v3->Style2;
-  mesh->Flags1 = v3->Flags1;
-  mesh->Flags2 = v3->Flags2;
-  mesh->StartVertex = v3->StartVertex;
-  mesh->VertexCount = v3->VertexCount;
+  *mesh = this->Meshes.Pages[(unsigned __int64)meshIdx >> 4][meshIdx & 0xF];
   mesh->StartVertex = 0;
 }
 
 // File Line: 2106
 // RVA: 0x98F260
-__int64 __fastcall Scaleform::Render::Tessellator::GetVertices(Scaleform::Render::Tessellator *this, Scaleform::Render::TessMesh *mesh, Scaleform::Render::TessVertex *vertices, unsigned int num)
+__int64 __fastcall Scaleform::Render::Tessellator::GetVertices(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::TessMesh *mesh,
+        Scaleform::Render::TessVertex *vertices,
+        unsigned int num)
 {
-  __int64 v4; // r11
-  unsigned int v5; // edi
-  Scaleform::Render::TessMesh *v6; // r10
-  Scaleform::Render::Tessellator *v7; // rbx
-  unsigned __int64 v8; // rax
-  Scaleform::Render::TessVertex **v9; // r9
+  __int64 i; // r11
+  unsigned __int64 StartVertex; // rax
+  Scaleform::Render::TessVertex **Pages; // r9
   __int64 v10; // rcx
   Scaleform::Render::TessVertex *v11; // rdx
   Scaleform::Render::TessVertex *v12; // r9
 
-  v4 = 0i64;
-  v5 = num;
-  v6 = mesh;
-  v7 = this;
-  if ( num )
+  for ( i = 0i64; (unsigned int)i < num; ++mesh->StartVertex )
   {
-    do
+    StartVertex = mesh->StartVertex;
+    if ( StartVertex >= this->MeshVertices.Size )
+      break;
+    Pages = this->MeshVertices.Pages;
+    if ( Pages[(unsigned __int64)(unsigned int)StartVertex >> 4][StartVertex & 0xF].Mesh == mesh->MeshIdx )
     {
-      v8 = v6->StartVertex;
-      if ( v8 >= v7->MeshVertices.Size )
-        break;
-      v9 = v7->MeshVertices.Pages;
-      if ( v9[(unsigned __int64)(unsigned int)v8 >> 4][v8 & 0xF].Mesh == v6->MeshIdx )
-      {
-        v10 = v4;
-        v4 = (unsigned int)(v4 + 1);
-        v11 = v9[(unsigned __int64)(unsigned int)v8 >> 4];
-        v12 = &vertices[v10];
-        v12->x = v11[v8 & 0xF].x;
-        v12->y = v11[v8 & 0xF].y;
-        v12->Idx = v11[v8 & 0xF].Idx;
-        *(_DWORD *)v12->Styles = *(_DWORD *)v11[v8 & 0xF].Styles;
-        *(_DWORD *)&v12->Flags = *(_DWORD *)&v11[v8 & 0xF].Flags;
-      }
-      ++v6->StartVertex;
+      v10 = i;
+      i = (unsigned int)(i + 1);
+      v11 = Pages[(unsigned __int64)(unsigned int)StartVertex >> 4];
+      v12 = &vertices[v10];
+      v12->x = v11[StartVertex & 0xF].x;
+      v12->y = v11[StartVertex & 0xF].y;
+      v12->Idx = v11[StartVertex & 0xF].Idx;
+      *(_DWORD *)v12->Styles = *(_DWORD *)v11[StartVertex & 0xF].Styles;
+      *(_DWORD *)&v12->Flags = *(_DWORD *)&v11[StartVertex & 0xF].Flags;
     }
-    while ( (unsigned int)v4 < v5 );
   }
-  return (unsigned int)v4;
+  return (unsigned int)i;
 }
 
 // File Line: 2122
 // RVA: 0x98E090
-void __fastcall Scaleform::Render::Tessellator::GetTrianglesI16(Scaleform::Render::Tessellator *this, unsigned int meshIdx, unsigned __int16 *idx, unsigned int start, unsigned int num)
+void __fastcall Scaleform::Render::Tessellator::GetTrianglesI16(
+        Scaleform::Render::Tessellator *this,
+        unsigned int meshIdx,
+        unsigned __int16 *idx,
+        unsigned int start,
+        unsigned int num)
 {
-  unsigned int v5; // ebx
-  unsigned int v6; // esi
+  unsigned int i; // ebx
   unsigned int v7; // eax
   Scaleform::Render::Tessellator::TriangleType *v8; // r9
 
-  v5 = 0;
-  v6 = start;
-  if ( num )
+  for ( i = 0; i < num; *(idx - 1) = this->MeshVertices.Pages[(unsigned __int64)v8->d.t.v3 >> 4][v8->d.t.v3 & 0xF].Idx )
   {
-    do
-    {
-      v7 = v5++ + v6;
-      idx += 3;
-      v8 = &this->MeshTriangles.Arrays[meshIdx].Pages[(unsigned __int64)v7 >> 4][v7 & 0xF];
-      *(idx - 3) = this->MeshVertices.Pages[(unsigned __int64)v8->d.t.v1 >> 4][v8->d.t.v1 & 0xF].Idx;
-      *(idx - 2) = this->MeshVertices.Pages[(unsigned __int64)v8->d.t.v2 >> 4][v8->d.t.v2 & 0xF].Idx;
-      *(idx - 1) = this->MeshVertices.Pages[(unsigned __int64)v8->d.t.v3 >> 4][v8->d.t.v3 & 0xF].Idx;
-    }
-    while ( v5 < num );
+    v7 = i + start;
+    ++i;
+    idx += 3;
+    v8 = &this->MeshTriangles.Arrays[meshIdx].Pages[(unsigned __int64)v7 >> 4][v7 & 0xF];
+    *(idx - 3) = this->MeshVertices.Pages[(unsigned __int64)v8->d.t.v1 >> 4][v8->d.t.v1 & 0xF].Idx;
+    *(idx - 2) = this->MeshVertices.Pages[(unsigned __int64)v8->d.t.v2 >> 4][v8->d.t.v2 & 0xF].Idx;
   }
 }
 
 // File Line: 2135
 // RVA: 0x9E16E0
-__int64 __fastcall Scaleform::Render::Tessellator::emitVertex(Scaleform::Render::Tessellator *this, unsigned int meshIdx, unsigned int ver, unsigned int style, unsigned int flags)
+__int64 __fastcall Scaleform::Render::Tessellator::emitVertex(
+        Scaleform::Render::Tessellator *this,
+        unsigned int meshIdx,
+        unsigned int ver,
+        unsigned int style,
+        __int16 flags)
 {
-  Scaleform::Render::TessVertex **v5; // rbx
-  unsigned int v6; // er8
-  unsigned int v7; // er11
-  Scaleform::Render::Tessellator *v8; // rdi
-  Scaleform::Render::TessVertex *v9; // rax
-  unsigned int v10; // edx
-  signed __int64 v11; // rax
+  Scaleform::Render::TessVertex **Pages; // rbx
+  unsigned int v6; // r8d
+  Scaleform::Render::TessVertex *v8; // rax
+  unsigned int Idx; // edx
+  __int64 v10; // rax
   __int64 result; // rax
-  unsigned int v13; // edx
-  Scaleform::Render::ArrayPaged<Scaleform::Render::TessVertex,4,16> *v14; // rbx
-  unsigned __int64 v15; // rsi
-  int v16; // ebp
-  int v17; // er14
-  int v18; // ST2C_4
-  __int64 v19; // rcx
-  unsigned __int64 v20; // rdi
-  _DWORD *v21; // r8
-  int v22; // [rsp+2Ch] [rbp-1Ch]
-  int v23; // [rsp+30h] [rbp-18h]
+  unsigned int v12; // edx
+  Scaleform::Render::ArrayPaged<Scaleform::Render::TessVertex,4,16> *p_MeshVertices; // rbx
+  unsigned __int64 Size; // rsi
+  int v15; // ebp
+  int v16; // r14d
+  unsigned __int64 v17; // rdi
+  _DWORD *p_x; // r8
+  int v19; // [rsp+2Ch] [rbp-1Ch]
+  int v20; // [rsp+30h] [rbp-18h]
 
-  v5 = this->MeshVertices.Pages;
+  Pages = this->MeshVertices.Pages;
   v6 = ver & 0xFFFFFFF;
-  v7 = meshIdx;
-  v8 = this;
-  v9 = v5[(unsigned __int64)v6 >> 4];
-  v10 = v9[v6 & 0xF].Idx;
-  v11 = (signed __int64)&v9[v6 & 0xF];
-  if ( v10 == -1 )
+  v8 = Pages[(unsigned __int64)v6 >> 4];
+  Idx = v8[v6 & 0xF].Idx;
+  v10 = (__int64)&v8[v6 & 0xF];
+  if ( Idx == -1 )
   {
-    *(_DWORD *)(v11 + 8) = v6;
-    *(_WORD *)(v11 + 14) = style;
-    *(_WORD *)(v11 + 12) = style;
-    *(_WORD *)(v11 + 16) = flags;
-    *(_WORD *)(v11 + 18) = v7;
+    *(_DWORD *)(v10 + 8) = v6;
+    *(_WORD *)(v10 + 14) = style;
+    *(_WORD *)(v10 + 12) = style;
+    *(_WORD *)(v10 + 16) = flags;
+    *(_WORD *)(v10 + 18) = meshIdx;
     return v6;
   }
-  if ( *(unsigned __int16 *)(v11 + 18) == v7 && *(unsigned __int16 *)(v11 + 12) == style )
+  if ( *(unsigned __int16 *)(v10 + 18) == meshIdx && *(unsigned __int16 *)(v10 + 12) == style )
     return v6;
-  if ( v10 == v6 )
+  if ( Idx == v6 )
   {
 LABEL_10:
-    v14 = &this->MeshVertices;
-    v15 = this->MeshVertices.Size;
-    *(_DWORD *)(v11 + 8) = v15;
-    v16 = *(_DWORD *)v11;
-    v17 = *(_DWORD *)(v11 + 4);
-    v18 = *(_DWORD *)(v11 + 12);
-    v19 = *(unsigned int *)(v11 + 16);
-    v20 = v8->MeshVertices.Size >> 4;
-    HIWORD(v22) = style;
-    LOWORD(v23) = flags;
-    HIWORD(v23) = v7;
-    LOWORD(v22) = style;
-    if ( v20 >= v14->NumPages )
-      Scaleform::Render::ArrayPaged<Scaleform::Render::TessVertex,4,16>::allocPage(v14, v20);
-    result = (unsigned int)v15;
-    v21 = (_DWORD *)&v14->Pages[v20][v14->Size & 0xF].x;
-    *v21 = v16;
-    v21[1] = v17;
-    v21[2] = v15;
-    v21[3] = v22;
-    v21[4] = v23;
-    ++v14->Size;
+    p_MeshVertices = &this->MeshVertices;
+    Size = this->MeshVertices.Size;
+    *(_DWORD *)(v10 + 8) = Size;
+    v15 = *(_DWORD *)v10;
+    v16 = *(_DWORD *)(v10 + 4);
+    v17 = this->MeshVertices.Size >> 4;
+    HIWORD(v19) = style;
+    LOWORD(v20) = flags;
+    HIWORD(v20) = meshIdx;
+    LOWORD(v19) = style;
+    if ( v17 >= this->MeshVertices.NumPages )
+      Scaleform::Render::ArrayPaged<Scaleform::Render::TessVertex,4,16>::allocPage(p_MeshVertices, v17);
+    result = (unsigned int)Size;
+    p_x = (_DWORD *)&p_MeshVertices->Pages[v17][p_MeshVertices->Size & 0xF].x;
+    *p_x = v15;
+    p_x[1] = v16;
+    p_x[2] = Size;
+    p_x[3] = v19;
+    p_x[4] = v20;
+    ++p_MeshVertices->Size;
   }
   else
   {
     while ( 1 )
     {
-      v13 = *(_DWORD *)(v11 + 8);
-      v11 = (signed __int64)&v5[(unsigned __int64)*(unsigned int *)(v11 + 8) >> 4][*(_DWORD *)(v11 + 8) & 0xF];
-      if ( *(unsigned __int16 *)(v11 + 18) == v7 && *(unsigned __int16 *)(v11 + 12) == style )
-        break;
-      if ( *(_DWORD *)(v11 + 8) == v13 )
+      v12 = *(_DWORD *)(v10 + 8);
+      v10 = (__int64)&Pages[(unsigned __int64)v12 >> 4][v12 & 0xF];
+      if ( *(unsigned __int16 *)(v10 + 18) == meshIdx && *(unsigned __int16 *)(v10 + 12) == style )
+        return v12;
+      if ( *(_DWORD *)(v10 + 8) == v12 )
         goto LABEL_10;
     }
-    result = v13;
   }
   return result;
 }
 
 // File Line: 2189
 // RVA: 0x9F2AF0
-void __fastcall Scaleform::Render::Tessellator::splitMesh(Scaleform::Render::Tessellator *this, Scaleform::Render::TessMesh *mesh)
+void __fastcall Scaleform::Render::Tessellator::splitMesh(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::TessMesh *mesh)
 {
-  Scaleform::Render::Tessellator *v2; // r13
-  Scaleform::Render::TessMesh *v3; // rdi
-  unsigned int v4; // esi
-  Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16> *v5; // r14
-  signed __int64 v6; // rbp
-  Scaleform::Render::ArrayPaged<Scaleform::Render::TessVertex,4,16> *v7; // rbx
+  unsigned int MeshIdx; // esi
+  Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16> *p_MeshTriangles; // r14
+  __int64 v6; // rbp
+  Scaleform::Render::ArrayPaged<Scaleform::Render::TessVertex,4,16> *p_MeshVertices; // rbx
   Scaleform::Render::ArrayPaged<Scaleform::Render::TessVertex,4,16> *v8; // r9
   unsigned __int64 v9; // r15
-  unsigned int v10; // eax
-  Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::ArrayType *v11; // rcx
+  unsigned int Size; // eax
+  Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::ArrayType *Arrays; // rcx
   unsigned __int64 v12; // r8
   unsigned __int64 v13; // r12
   unsigned __int64 v14; // r9
@@ -7274,29 +7035,29 @@ void __fastcall Scaleform::Render::Tessellator::splitMesh(Scaleform::Render::Tes
   unsigned __int64 v19; // rbp
   unsigned __int64 v20; // rbx
   unsigned __int64 v21; // r15
-  signed __int64 v22; // rdi
+  unsigned __int64 v22; // rdi
   unsigned __int64 v23; // rdx
-  unsigned int v24; // er14
+  unsigned int v24; // r14d
   Scaleform::Render::TessMesh *v25; // rcx
-  unsigned int v26; // er12
+  unsigned int Style1; // r12d
   unsigned __int64 v27; // rsi
   Scaleform::Render::TessMesh *v28; // rax
-  signed __int64 v29; // rcx
+  __int64 v29; // rcx
   unsigned __int64 v30; // rbp
   __int64 v31; // r9
   unsigned __int64 v32; // rcx
-  Scaleform::Render::TessVertex **v33; // r8
+  Scaleform::Render::TessVertex **Pages; // r8
   Scaleform::Render::Tessellator::TriangleType *v34; // r9
-  signed __int64 v35; // r12
-  signed __int64 v36; // r14
-  signed __int64 v37; // r15
+  __int64 v35; // r12
+  __int64 v36; // r14
+  __int64 v37; // r15
   unsigned __int64 v38; // rsi
-  unsigned __int64 v39; // rdx
-  Scaleform::Render::LinearHeap *v40; // rcx
+  unsigned __int64 MaxPages; // rdx
+  Scaleform::Render::LinearHeap *pHeap; // rcx
   void *v41; // rdi
   unsigned __int64 v42; // rax
   Scaleform::Render::TessVertex *v43; // rax
-  _DWORD *v44; // rdx
+  _DWORD *p_x; // rdx
   unsigned __int64 v45; // rsi
   unsigned __int64 v46; // rdx
   Scaleform::Render::LinearHeap *v47; // rcx
@@ -7310,31 +7071,29 @@ void __fastcall Scaleform::Render::Tessellator::splitMesh(Scaleform::Render::Tes
   void *v55; // rdi
   unsigned __int64 v56; // rax
   _DWORD *v57; // rdx
-  unsigned int v58; // [rsp+20h] [rbp-78h]
-  Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::ArrayAdaptor arr; // [rsp+28h] [rbp-70h]
-  unsigned int v60; // [rsp+A0h] [rbp+8h]
+  unsigned int VertexCount; // [rsp+20h] [rbp-78h]
+  Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::ArrayAdaptor arr; // [rsp+28h] [rbp-70h] BYREF
+  unsigned int Style2; // [rsp+A0h] [rbp+8h]
   __int64 v61; // [rsp+A0h] [rbp+8h]
-  unsigned int v62; // [rsp+A8h] [rbp+10h]
+  unsigned int Flags1; // [rsp+A8h] [rbp+10h]
   Scaleform::Render::Tessellator::TriangleType *v63; // [rsp+A8h] [rbp+10h]
-  unsigned int v64; // [rsp+B0h] [rbp+18h]
+  unsigned int Flags2; // [rsp+B0h] [rbp+18h]
   unsigned __int64 v65; // [rsp+B0h] [rbp+18h]
-  unsigned int v66; // [rsp+B8h] [rbp+20h]
+  unsigned int StartVertex; // [rsp+B8h] [rbp+20h]
   unsigned __int64 v67; // [rsp+B8h] [rbp+20h]
 
-  v2 = this;
-  v3 = mesh;
-  v4 = mesh->MeshIdx;
-  v5 = &this->MeshTriangles;
+  MeshIdx = mesh->MeshIdx;
+  p_MeshTriangles = &this->MeshTriangles;
   v6 = mesh->MeshIdx;
-  v7 = &this->MeshVertices;
+  p_MeshVertices = &this->MeshVertices;
   v8 = &this->MeshVertices;
   v9 = (this->VertexLimit - (this->VertexLimit >> 2) + mesh->VertexCount - 1)
      / (this->VertexLimit - (this->VertexLimit >> 2));
-  v10 = this->MeshTriangles.Arrays[mesh->MeshIdx].Size;
-  v11 = this->MeshTriangles.Arrays;
-  v12 = v11[v6].Size;
-  arr.Pages = v11[v6].Pages;
-  v13 = v10 / (unsigned int)v9;
+  Size = this->MeshTriangles.Arrays[v6].Size;
+  Arrays = this->MeshTriangles.Arrays;
+  v12 = Arrays[v6].Size;
+  arr.Pages = Arrays[v6].Pages;
+  v13 = Size / (unsigned int)v9;
   arr.Size = v12;
   Scaleform::Alg::QuickSortSliced<Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::ArrayAdaptor,Scaleform::Render::Tessellator::CmpVer1>(
     &arr,
@@ -7342,17 +7101,17 @@ void __fastcall Scaleform::Render::Tessellator::splitMesh(Scaleform::Render::Tes
     v12,
     (Scaleform::Render::Tessellator::CmpVer1)v8);
   v14 = 0i64;
-  v15 = v2->MeshTriangles.Arrays[v3->MeshIdx].Size;
+  v15 = this->MeshTriangles.Arrays[mesh->MeshIdx].Size;
   if ( v15 )
   {
     do
     {
       v16 = v14 >> 4;
       v17 = v14++ & 0xF;
-      v18 = &v2->MeshTriangles.Arrays[v6].Pages[v16][v17];
-      v2->MeshVertices.Pages[(unsigned __int64)v18->d.t.v1 >> 4][v18->d.t.v1 & 0xF].Mesh = -1;
-      v2->MeshVertices.Pages[(unsigned __int64)v18->d.t.v2 >> 4][v18->d.t.v2 & 0xF].Mesh = -1;
-      v2->MeshVertices.Pages[(unsigned __int64)v18->d.t.v3 >> 4][v18->d.t.v3 & 0xF].Mesh = -1;
+      v18 = &this->MeshTriangles.Arrays[v6].Pages[v16][v17];
+      this->MeshVertices.Pages[(unsigned __int64)v18->d.t.v1 >> 4][v18->d.t.v1 & 0xF].Mesh = -1;
+      this->MeshVertices.Pages[(unsigned __int64)v18->d.t.v2 >> 4][v18->d.t.v2 & 0xF].Mesh = -1;
+      this->MeshVertices.Pages[(unsigned __int64)v18->d.t.v3 >> 4][v18->d.t.v3 & 0xF].Mesh = -1;
     }
     while ( v14 < v15 );
   }
@@ -7363,178 +7122,191 @@ void __fastcall Scaleform::Render::Tessellator::splitMesh(Scaleform::Render::Tes
     v21 = v13;
     do
     {
-      if ( !Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::Split(v5, v4, v21) )
+      if ( !Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::Split(
+              p_MeshTriangles,
+              MeshIdx,
+              v21) )
         break;
-      v22 = v4 & 0xF;
-      v23 = (unsigned __int64)v4 >> 4;
-      v2->Meshes.Pages[v23][v22].VertexCount = -1;
-      v24 = v2->Meshes.Size;
-      v25 = v2->Meshes.Pages[v23];
-      v26 = v25[v22].Style1;
+      v22 = MeshIdx & 0xF;
+      v23 = (unsigned __int64)MeshIdx >> 4;
+      this->Meshes.Pages[v23][v22].VertexCount = -1;
+      v24 = this->Meshes.Size;
+      v25 = this->Meshes.Pages[v23];
+      Style1 = v25[v22].Style1;
       LODWORD(arr.Size) = v25[v22].MeshIdx;
-      v60 = v25[v22].Style2;
-      v62 = v25[v22].Flags1;
-      v64 = v25[v22].Flags2;
-      v66 = v25[v22].StartVertex;
-      v58 = v25[v22].VertexCount;
-      v27 = v2->Meshes.Size >> 4;
-      if ( v27 >= v2->Meshes.NumPages )
-        Scaleform::Render::ArrayPaged<Scaleform::Render::TessMesh,4,4>::allocPage(&v2->Meshes, v27);
-      v28 = v2->Meshes.Pages[v27];
+      Style2 = v25[v22].Style2;
+      Flags1 = v25[v22].Flags1;
+      Flags2 = v25[v22].Flags2;
+      StartVertex = v25[v22].StartVertex;
+      VertexCount = v25[v22].VertexCount;
+      v27 = this->Meshes.Size >> 4;
+      if ( v27 >= this->Meshes.NumPages )
+        Scaleform::Render::ArrayPaged<Scaleform::Render::TessMesh,4,4>::allocPage(&this->Meshes, v27);
+      v28 = this->Meshes.Pages[v27];
       ++v19;
-      v4 = v24;
-      v29 = v2->Meshes.Size & 0xF;
+      MeshIdx = v24;
+      v29 = this->Meshes.Size & 0xF;
       v28[v29].MeshIdx = v24;
-      v28[v29].Style1 = v26;
-      v28[v29].Style2 = v60;
-      v5 = &v2->MeshTriangles;
-      v28[v29].Flags1 = v62;
-      v28[v29].Flags2 = v64;
-      v28[v29].StartVertex = v66;
-      v28[v29].VertexCount = v58;
-      ++v2->Meshes.Size;
+      v28[v29].Style1 = Style1;
+      v28[v29].Style2 = Style2;
+      p_MeshTriangles = &this->MeshTriangles;
+      v28[v29].Flags1 = Flags1;
+      v28[v29].Flags2 = Flags2;
+      v28[v29].StartVertex = StartVertex;
+      v28[v29].VertexCount = VertexCount;
+      ++this->Meshes.Size;
     }
     while ( v19 < v20 );
-    v7 = &v2->MeshVertices;
+    p_MeshVertices = &this->MeshVertices;
   }
   v30 = 0i64;
-  if ( v2->Meshes.Size )
+  if ( this->Meshes.Size )
   {
     v31 = 0i64;
     v61 = 0i64;
     do
     {
-      if ( v2->Meshes.Pages[v30 >> 4][v30 & 0xF].VertexCount == -1 )
+      if ( this->Meshes.Pages[v30 >> 4][v30 & 0xF].VertexCount == -1 )
       {
         v32 = 0i64;
         v65 = 0i64;
-        v67 = *(unsigned __int64 *)((char *)&v2->MeshTriangles.Arrays->Size + v31);
+        v67 = *(unsigned __int64 *)((char *)&this->MeshTriangles.Arrays->Size + v31);
         if ( v67 )
         {
           do
           {
-            v33 = v2->MeshVertices.Pages;
-            v34 = &(*(Scaleform::Render::Tessellator::TriangleType ***)((char *)&v2->MeshTriangles.Arrays->Pages + v31))[v32 >> 4][v32 & 0xF];
+            Pages = this->MeshVertices.Pages;
+            v34 = &(*(Scaleform::Render::Tessellator::TriangleType ***)((char *)&this->MeshTriangles.Arrays->Pages + v31))[v32 >> 4][v32 & 0xF];
             v63 = v34;
-            v35 = (signed __int64)&v33[(unsigned __int64)v34->d.t.v1 >> 4][v34->d.t.v1 & 0xF];
-            v36 = (signed __int64)&v33[(unsigned __int64)v34->d.t.v2 >> 4][v34->d.t.v2 & 0xF];
-            v37 = (signed __int64)&v33[(unsigned __int64)v34->d.t.v3 >> 4][v34->d.t.v3 & 0xF];
-            if ( *(_WORD *)(v35 + 18) == -1 )
+            v35 = (__int64)&Pages[(unsigned __int64)v34->d.t.v1 >> 4][v34->d.t.v1 & 0xF];
+            v36 = (__int64)&Pages[(unsigned __int64)v34->d.t.v2 >> 4][v34->d.t.v2 & 0xF];
+            v37 = (__int64)&Pages[(unsigned __int64)v34->d.t.v3 >> 4][v34->d.t.v3 & 0xF];
+            if ( *(_WORD *)(v35 + 18) == 0xFFFF )
               *(_WORD *)(v35 + 18) = v30;
-            if ( *(_WORD *)(v36 + 18) == -1 )
+            if ( *(_WORD *)(v36 + 18) == 0xFFFF )
               *(_WORD *)(v36 + 18) = v30;
-            if ( *(_WORD *)(v37 + 18) == -1 )
+            if ( *(_WORD *)(v37 + 18) == 0xFFFF )
               *(_WORD *)(v37 + 18) = v30;
             if ( *(unsigned __int16 *)(v35 + 18) != v30 )
             {
-              v34->d.t.v1 = v2->MeshVertices.Size;
-              v38 = v7->Size >> 4;
-              if ( v38 >= v7->NumPages )
+              v34->d.t.v1 = this->MeshVertices.Size;
+              v38 = p_MeshVertices->Size >> 4;
+              if ( v38 >= p_MeshVertices->NumPages )
               {
-                v39 = v7->MaxPages;
-                if ( v38 >= v39 )
+                MaxPages = p_MeshVertices->MaxPages;
+                if ( v38 >= MaxPages )
                 {
-                  v40 = v7->pHeap;
-                  if ( v7->Pages )
+                  pHeap = p_MeshVertices->pHeap;
+                  if ( p_MeshVertices->Pages )
                   {
-                    v41 = Scaleform::Render::LinearHeap::Alloc(v40, 16 * v39);
-                    memmove(v41, v7->Pages, 8 * v7->NumPages);
-                    v42 = v7->MaxPages;
-                    v7->Pages = (Scaleform::Render::TessVertex **)v41;
-                    v7->MaxPages = 2 * v42;
+                    v41 = Scaleform::Render::LinearHeap::Alloc(pHeap, 16 * MaxPages);
+                    memmove(v41, p_MeshVertices->Pages, 8 * p_MeshVertices->NumPages);
+                    v42 = p_MeshVertices->MaxPages;
+                    p_MeshVertices->Pages = (Scaleform::Render::TessVertex **)v41;
+                    p_MeshVertices->MaxPages = 2 * v42;
                   }
                   else
                   {
-                    v7->MaxPages = 16i64;
-                    v7->Pages = (Scaleform::Render::TessVertex **)Scaleform::Render::LinearHeap::Alloc(v40, 0x80ui64);
+                    p_MeshVertices->MaxPages = 16i64;
+                    p_MeshVertices->Pages = (Scaleform::Render::TessVertex **)Scaleform::Render::LinearHeap::Alloc(
+                                                                                pHeap,
+                                                                                0x80ui64);
                   }
                 }
-                v43 = (Scaleform::Render::TessVertex *)Scaleform::Render::LinearHeap::Alloc(v7->pHeap, 0x140ui64);
+                v43 = (Scaleform::Render::TessVertex *)Scaleform::Render::LinearHeap::Alloc(
+                                                         p_MeshVertices->pHeap,
+                                                         0x140ui64);
                 v34 = v63;
-                v7->Pages[v38] = v43;
-                ++v7->NumPages;
+                p_MeshVertices->Pages[v38] = v43;
+                ++p_MeshVertices->NumPages;
               }
-              v44 = (_DWORD *)&v7->Pages[v38][v7->Size & 0xF].x;
-              *v44 = *(_DWORD *)v35;
-              v44[1] = *(_DWORD *)(v35 + 4);
-              v44[2] = *(_DWORD *)(v35 + 8);
-              v44[3] = *(_DWORD *)(v35 + 12);
-              v44[4] = *(_DWORD *)(v35 + 16);
-              v7->Pages[(++v7->Size - 1) >> 4][(LODWORD(v7->Size) - 1) & 0xF].Mesh = v30;
+              p_x = (_DWORD *)&p_MeshVertices->Pages[v38][p_MeshVertices->Size & 0xF].x;
+              *p_x = *(_DWORD *)v35;
+              p_x[1] = *(_DWORD *)(v35 + 4);
+              p_x[2] = *(_DWORD *)(v35 + 8);
+              p_x[3] = *(_DWORD *)(v35 + 12);
+              p_x[4] = *(_DWORD *)(v35 + 16);
+              p_MeshVertices->Pages[p_MeshVertices->Size++ >> 4][(LODWORD(p_MeshVertices->Size) - 1) & 0xF].Mesh = v30;
             }
             if ( *(unsigned __int16 *)(v36 + 18) != v30 )
             {
-              v34->d.t.v2 = v2->MeshVertices.Size;
-              v45 = v7->Size >> 4;
-              if ( v45 >= v7->NumPages )
+              v34->d.t.v2 = this->MeshVertices.Size;
+              v45 = p_MeshVertices->Size >> 4;
+              if ( v45 >= p_MeshVertices->NumPages )
               {
-                v46 = v7->MaxPages;
+                v46 = p_MeshVertices->MaxPages;
                 if ( v45 >= v46 )
                 {
-                  v47 = v7->pHeap;
-                  if ( v7->Pages )
+                  v47 = p_MeshVertices->pHeap;
+                  if ( p_MeshVertices->Pages )
                   {
                     v48 = Scaleform::Render::LinearHeap::Alloc(v47, 16 * v46);
-                    memmove(v48, v7->Pages, 8 * v7->NumPages);
-                    v49 = v7->MaxPages;
-                    v7->Pages = (Scaleform::Render::TessVertex **)v48;
-                    v7->MaxPages = 2 * v49;
+                    memmove(v48, p_MeshVertices->Pages, 8 * p_MeshVertices->NumPages);
+                    v49 = p_MeshVertices->MaxPages;
+                    p_MeshVertices->Pages = (Scaleform::Render::TessVertex **)v48;
+                    p_MeshVertices->MaxPages = 2 * v49;
                   }
                   else
                   {
-                    v7->MaxPages = 16i64;
-                    v7->Pages = (Scaleform::Render::TessVertex **)Scaleform::Render::LinearHeap::Alloc(v47, 0x80ui64);
+                    p_MeshVertices->MaxPages = 16i64;
+                    p_MeshVertices->Pages = (Scaleform::Render::TessVertex **)Scaleform::Render::LinearHeap::Alloc(
+                                                                                v47,
+                                                                                0x80ui64);
                   }
                 }
-                v50 = (Scaleform::Render::TessVertex *)Scaleform::Render::LinearHeap::Alloc(v7->pHeap, 0x140ui64);
+                v50 = (Scaleform::Render::TessVertex *)Scaleform::Render::LinearHeap::Alloc(
+                                                         p_MeshVertices->pHeap,
+                                                         0x140ui64);
                 v34 = v63;
-                v7->Pages[v45] = v50;
-                ++v7->NumPages;
+                p_MeshVertices->Pages[v45] = v50;
+                ++p_MeshVertices->NumPages;
               }
-              v51 = (_DWORD *)&v7->Pages[v45][v7->Size & 0xF].x;
+              v51 = (_DWORD *)&p_MeshVertices->Pages[v45][p_MeshVertices->Size & 0xF].x;
               *v51 = *(_DWORD *)v36;
               v51[1] = *(_DWORD *)(v36 + 4);
               v51[2] = *(_DWORD *)(v36 + 8);
               v51[3] = *(_DWORD *)(v36 + 12);
               v51[4] = *(_DWORD *)(v36 + 16);
-              v7->Pages[(++v7->Size - 1) >> 4][(LODWORD(v7->Size) - 1) & 0xF].Mesh = v30;
+              p_MeshVertices->Pages[p_MeshVertices->Size++ >> 4][(LODWORD(p_MeshVertices->Size) - 1) & 0xF].Mesh = v30;
             }
             if ( *(unsigned __int16 *)(v37 + 18) != v30 )
             {
-              v34->d.t.v3 = v2->MeshVertices.Size;
-              v52 = v7->Size >> 4;
-              if ( v52 >= v7->NumPages )
+              v34->d.t.v3 = this->MeshVertices.Size;
+              v52 = p_MeshVertices->Size >> 4;
+              if ( v52 >= p_MeshVertices->NumPages )
               {
-                v53 = v7->MaxPages;
+                v53 = p_MeshVertices->MaxPages;
                 if ( v52 >= v53 )
                 {
-                  v54 = v7->pHeap;
-                  if ( v7->Pages )
+                  v54 = p_MeshVertices->pHeap;
+                  if ( p_MeshVertices->Pages )
                   {
                     v55 = Scaleform::Render::LinearHeap::Alloc(v54, 16 * v53);
-                    memmove(v55, v7->Pages, 8 * v7->NumPages);
-                    v56 = v7->MaxPages;
-                    v7->Pages = (Scaleform::Render::TessVertex **)v55;
-                    v7->MaxPages = 2 * v56;
+                    memmove(v55, p_MeshVertices->Pages, 8 * p_MeshVertices->NumPages);
+                    v56 = p_MeshVertices->MaxPages;
+                    p_MeshVertices->Pages = (Scaleform::Render::TessVertex **)v55;
+                    p_MeshVertices->MaxPages = 2 * v56;
                   }
                   else
                   {
-                    v7->MaxPages = 16i64;
-                    v7->Pages = (Scaleform::Render::TessVertex **)Scaleform::Render::LinearHeap::Alloc(v54, 0x80ui64);
+                    p_MeshVertices->MaxPages = 16i64;
+                    p_MeshVertices->Pages = (Scaleform::Render::TessVertex **)Scaleform::Render::LinearHeap::Alloc(
+                                                                                v54,
+                                                                                0x80ui64);
                   }
                 }
-                v7->Pages[v52] = (Scaleform::Render::TessVertex *)Scaleform::Render::LinearHeap::Alloc(
-                                                                    v7->pHeap,
-                                                                    0x140ui64);
-                ++v7->NumPages;
+                p_MeshVertices->Pages[v52] = (Scaleform::Render::TessVertex *)Scaleform::Render::LinearHeap::Alloc(
+                                                                                p_MeshVertices->pHeap,
+                                                                                0x140ui64);
+                ++p_MeshVertices->NumPages;
               }
-              v57 = (_DWORD *)&v7->Pages[v52][v7->Size & 0xF].x;
+              v57 = (_DWORD *)&p_MeshVertices->Pages[v52][p_MeshVertices->Size & 0xF].x;
               *v57 = *(_DWORD *)v37;
               v57[1] = *(_DWORD *)(v37 + 4);
               v57[2] = *(_DWORD *)(v37 + 8);
               v57[3] = *(_DWORD *)(v37 + 12);
               v57[4] = *(_DWORD *)(v37 + 16);
-              v7->Pages[(++v7->Size - 1) >> 4][(LODWORD(v7->Size) - 1) & 0xF].Mesh = v30;
+              p_MeshVertices->Pages[p_MeshVertices->Size++ >> 4][(LODWORD(p_MeshVertices->Size) - 1) & 0xF].Mesh = v30;
             }
             v31 = v61;
             v32 = v65 + 1;
@@ -7547,7 +7319,7 @@ void __fastcall Scaleform::Render::Tessellator::splitMesh(Scaleform::Render::Tes
       ++v30;
       v61 = v31;
     }
-    while ( v30 < v2->Meshes.Size );
+    while ( v30 < this->Meshes.Size );
   }
 }
 
@@ -7555,8 +7327,7 @@ void __fastcall Scaleform::Render::Tessellator::splitMesh(Scaleform::Render::Tes
 // RVA: 0x9B76F0
 void __fastcall Scaleform::Render::Tessellator::SplitMeshes(Scaleform::Render::Tessellator *this)
 {
-  Scaleform::Render::Tessellator *v1; // rbx
-  unsigned __int64 v2; // rsi
+  unsigned __int64 Size; // rsi
   char v3; // r8
   unsigned __int64 v4; // rdi
   Scaleform::Render::TessMesh *v5; // rdx
@@ -7564,48 +7335,45 @@ void __fastcall Scaleform::Render::Tessellator::SplitMeshes(Scaleform::Render::T
   unsigned __int64 v7; // rdx
   unsigned __int64 v8; // rcx
   unsigned __int64 j; // r9
-  Scaleform::Render::TessVertex *v10; // rax
-  signed __int64 v11; // r8
-  unsigned __int16 v12; // ax
-  signed __int64 v13; // rdx
-  Scaleform::Render::TessMesh *v14; // rcx
+  Scaleform::Render::TessVertex *v10; // r8
+  unsigned __int16 Mesh; // ax
+  __int64 v12; // rdx
+  Scaleform::Render::TessMesh *v13; // rcx
 
-  v1 = this;
   while ( 1 )
   {
-    v2 = v1->Meshes.Size;
+    Size = this->Meshes.Size;
     v3 = 1;
     v4 = 0i64;
-    if ( !v2 )
+    if ( !Size )
       break;
     do
     {
-      v5 = &v1->Meshes.Pages[v4 >> 4][v4 & 0xF];
-      if ( v5->VertexCount > v1->VertexLimit )
+      v5 = &this->Meshes.Pages[v4 >> 4][v4 & 0xF];
+      if ( v5->VertexCount > this->VertexLimit )
       {
-        Scaleform::Render::Tessellator::splitMesh(v1, v5);
+        Scaleform::Render::Tessellator::splitMesh(this, v5);
         v3 = 0;
       }
       ++v4;
     }
-    while ( v4 < v2 );
+    while ( v4 < Size );
     if ( v3 )
       break;
-    for ( i = 0i64; i < v1->Meshes.Size; v1->Meshes.Pages[v7][v8].VertexCount = 0 )
+    for ( i = 0i64; i < this->Meshes.Size; this->Meshes.Pages[v7][v8].VertexCount = 0 )
     {
       v7 = i >> 4;
       v8 = i++ & 0xF;
     }
-    for ( j = 0i64; j < v1->MeshVertices.Size; ++j )
+    for ( j = 0i64; j < this->MeshVertices.Size; ++j )
     {
-      v10 = v1->MeshVertices.Pages[j >> 4];
-      v11 = (signed __int64)&v10[j & 0xF];
-      v12 = v10[j & 0xF].Mesh;
-      if ( v12 != -1 )
+      v10 = &this->MeshVertices.Pages[j >> 4][j & 0xF];
+      Mesh = v10->Mesh;
+      if ( Mesh != 0xFFFF )
       {
-        v13 = v12 & 0xF;
-        v14 = v1->Meshes.Pages[(unsigned __int64)v12 >> 4];
-        *(_DWORD *)(v11 + 8) = v14[v13].VertexCount++;
+        v12 = Mesh & 0xF;
+        v13 = this->Meshes.Pages[(unsigned __int64)Mesh >> 4];
+        v10->Idx = v13[v12].VertexCount++;
       }
     }
   }
@@ -7613,222 +7381,208 @@ void __fastcall Scaleform::Render::Tessellator::SplitMeshes(Scaleform::Render::T
 
 // File Line: 2294
 // RVA: 0x9E1870
-__int64 __fastcall Scaleform::Render::Tessellator::emitVertex(Scaleform::Render::Tessellator *this, unsigned int meshIdx, unsigned int ver, unsigned int style1, unsigned int style2, unsigned int flags, bool strictStyle)
+__int64 __fastcall Scaleform::Render::Tessellator::emitVertex(
+        Scaleform::Render::Tessellator *this,
+        unsigned int meshIdx,
+        unsigned int ver,
+        unsigned int style1,
+        unsigned int style2,
+        unsigned int flags,
+        bool strictStyle)
 {
-  Scaleform::Render::TessVertex **v7; // rsi
-  unsigned int v8; // er8
-  unsigned int v9; // edi
-  Scaleform::Render::Tessellator *v10; // r15
+  Scaleform::Render::TessVertex **Pages; // rsi
+  unsigned int v8; // r8d
   Scaleform::Render::TessVertex *v11; // rax
-  unsigned int v12; // edx
-  signed __int64 v13; // rax
+  unsigned int Idx; // edx
+  __int64 v13; // rax
   __int64 result; // rax
   unsigned int v15; // edx
-  unsigned __int64 v16; // rsi
-  int v17; // ebp
-  int v18; // er14
-  int v19; // ST2C_4
-  __int64 v20; // rcx
-  unsigned __int64 v21; // rdi
-  _DWORD *v22; // r8
-  int v23; // [rsp+2Ch] [rbp-2Ch]
-  int v24; // [rsp+30h] [rbp-28h]
+  unsigned __int64 Size; // rsi
+  float v17; // ebp
+  float v18; // r14d
+  unsigned __int64 v19; // rdi
+  Scaleform::Render::TessVertex *v20; // r8
+  int v21; // [rsp+2Ch] [rbp-2Ch]
+  int v22; // [rsp+30h] [rbp-28h]
 
-  v7 = this->MeshVertices.Pages;
+  Pages = this->MeshVertices.Pages;
   v8 = ver & 0xFFFFFFF;
-  v9 = meshIdx;
-  v10 = this;
-  v11 = v7[(unsigned __int64)v8 >> 4];
-  v12 = v11[v8 & 0xF].Idx;
-  v13 = (signed __int64)&v11[v8 & 0xF];
-  if ( v12 == -1 )
+  v11 = Pages[(unsigned __int64)v8 >> 4];
+  Idx = v11[v8 & 0xF].Idx;
+  v13 = (__int64)&v11[v8 & 0xF];
+  if ( Idx == -1 )
   {
     *(_DWORD *)(v13 + 8) = v8;
     *(_WORD *)(v13 + 12) = style1;
     *(_WORD *)(v13 + 14) = style2;
-    *(_WORD *)(v13 + 18) = v9;
+    *(_WORD *)(v13 + 18) = meshIdx;
     *(_WORD *)(v13 + 16) = flags;
-    result = v8;
+    return v8;
   }
-  else if ( *(unsigned __int16 *)(v13 + 18) != v9
-         || *(unsigned __int16 *)(v13 + 12) != style1
-         || *(unsigned __int16 *)(v13 + 14) != style2
-         || strictStyle && *(unsigned __int16 *)(v13 + 16) != flags )
+  else if ( *(unsigned __int16 *)(v13 + 18) == meshIdx
+         && *(unsigned __int16 *)(v13 + 12) == style1
+         && *(unsigned __int16 *)(v13 + 14) == style2
+         && (!strictStyle || *(unsigned __int16 *)(v13 + 16) == flags) )
   {
-    if ( v12 == v8 )
-    {
+    return v8;
+  }
+  else if ( Idx == v8 )
+  {
 LABEL_16:
-      v16 = this->MeshVertices.Size;
-      *(_DWORD *)(v13 + 8) = v16;
-      v17 = *(_DWORD *)v13;
-      v18 = *(_DWORD *)(v13 + 4);
-      v19 = *(_DWORD *)(v13 + 12);
-      v20 = *(unsigned int *)(v13 + 16);
-      HIWORD(v24) = v9;
-      HIWORD(v23) = style2;
-      LOWORD(v23) = style1;
-      LOWORD(v24) = flags;
-      v21 = v10->MeshVertices.Size >> 4;
-      if ( v21 >= v10->MeshVertices.NumPages )
-        Scaleform::Render::ArrayPaged<Scaleform::Render::TessVertex,4,16>::allocPage(&v10->MeshVertices, v21);
-      result = (unsigned int)v16;
-      v22 = (_DWORD *)&v10->MeshVertices.Pages[v21][v10->MeshVertices.Size & 0xF].x;
-      *v22 = v17;
-      v22[1] = v18;
-      v22[2] = v16;
-      v22[3] = v23;
-      v22[4] = v24;
-      ++v10->MeshVertices.Size;
-    }
-    else
-    {
-      while ( 1 )
-      {
-        v15 = *(_DWORD *)(v13 + 8);
-        v13 = (signed __int64)&v7[(unsigned __int64)*(unsigned int *)(v13 + 8) >> 4][*(_DWORD *)(v13 + 8) & 0xF];
-        if ( *(unsigned __int16 *)(v13 + 18) == v9
-          && *(unsigned __int16 *)(v13 + 12) == style1
-          && *(unsigned __int16 *)(v13 + 14) == style2
-          && (!strictStyle || *(unsigned __int16 *)(v13 + 16) == flags) )
-        {
-          break;
-        }
-        if ( *(_DWORD *)(v13 + 8) == v15 )
-          goto LABEL_16;
-      }
-      result = v15;
-    }
+    Size = this->MeshVertices.Size;
+    *(_DWORD *)(v13 + 8) = Size;
+    v17 = *(float *)v13;
+    v18 = *(float *)(v13 + 4);
+    HIWORD(v22) = meshIdx;
+    HIWORD(v21) = style2;
+    LOWORD(v21) = style1;
+    LOWORD(v22) = flags;
+    v19 = this->MeshVertices.Size >> 4;
+    if ( v19 >= this->MeshVertices.NumPages )
+      Scaleform::Render::ArrayPaged<Scaleform::Render::TessVertex,4,16>::allocPage(&this->MeshVertices, v19);
+    result = (unsigned int)Size;
+    v20 = &this->MeshVertices.Pages[v19][this->MeshVertices.Size & 0xF];
+    v20->x = v17;
+    v20->y = v18;
+    v20->Idx = Size;
+    *(_DWORD *)v20->Styles = v21;
+    *(_DWORD *)&v20->Flags = v22;
+    ++this->MeshVertices.Size;
   }
   else
   {
-    result = v8;
+    while ( 1 )
+    {
+      v15 = *(_DWORD *)(v13 + 8);
+      v13 = (__int64)&Pages[(unsigned __int64)v15 >> 4][v15 & 0xF];
+      if ( *(unsigned __int16 *)(v13 + 18) == meshIdx
+        && *(unsigned __int16 *)(v13 + 12) == style1
+        && *(unsigned __int16 *)(v13 + 14) == style2
+        && (!strictStyle || *(unsigned __int16 *)(v13 + 16) == flags) )
+      {
+        return v15;
+      }
+      if ( *(_DWORD *)(v13 + 8) == v15 )
+        goto LABEL_16;
+    }
   }
   return result;
 }
 
 // File Line: 2346
 // RVA: 0x9D6360
-void __fastcall Scaleform::Render::Tessellator::collectFanEdges(Scaleform::Render::Tessellator *this, Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoVertexType *,4,8> *chain, Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoVertexType *,4,8> *oppos, unsigned int style)
+void __fastcall Scaleform::Render::Tessellator::collectFanEdges(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoVertexType *,4,8> *chain,
+        Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoVertexType *,4,8> *oppos,
+        unsigned __int16 style)
 {
-  __int16 v4; // r14
-  Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoVertexType *,4,8> *v5; // rbx
-  Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoVertexType *,4,8> *v6; // r11
-  Scaleform::Render::Tessellator *v7; // r15
-  Scaleform::Render::Tessellator::MonoVertexType *v8; // rbp
-  unsigned __int64 v9; // rdx
-  Scaleform::Render::Tessellator::MonoVertexType *v10; // rdi
-  __int16 v11; // si
-  unsigned __int64 v12; // rax
-  Scaleform::Render::Tessellator::MonoVertexType *v13; // r10
-  unsigned __int64 v14; // r8
-  Scaleform::Render::TessVertex *v15; // rcx
-  signed __int64 v16; // r9
-  signed __int64 v17; // r8
+  Scaleform::Render::Tessellator::MonoVertexType *v7; // rbp
+  unsigned __int64 Size; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *v9; // rdi
+  unsigned __int16 v10; // si
+  unsigned __int64 v11; // rax
+  Scaleform::Render::Tessellator::MonoVertexType *v12; // r10
+  unsigned __int64 v13; // r8
+  Scaleform::Render::TessVertex *v14; // r9
+  Scaleform::Render::Tessellator::EdgeAAType *v15; // r8
 
-  v4 = style;
-  v5 = oppos;
-  v6 = chain;
-  v7 = this;
   if ( oppos->Size )
-    v8 = **oppos->Pages;
+    v7 = **oppos->Pages;
   else
-    v8 = chain->Pages[(chain->Size - 1) >> 4][(LODWORD(chain->Size) - 1) & 0xF];
-  v9 = chain->Size;
-  v10 = **v6->Pages;
-  if ( v9 )
+    v7 = chain->Pages[(chain->Size - 1) >> 4][(LODWORD(chain->Size) - 1) & 0xF];
+  Size = chain->Size;
+  v9 = **chain->Pages;
+  if ( Size )
   {
-    v11 = style ^ 0x8000;
-    v12 = 1i64;
+    v10 = style ^ 0x8000;
+    v11 = 1i64;
     do
     {
-      if ( v12 >= v9 )
+      if ( v11 >= Size )
       {
-        v14 = v5->Size;
-        if ( v14 )
-          v13 = v5->Pages[(v14 - 1) >> 4][((_DWORD)v14 - 1) & 0xF];
+        v13 = oppos->Size;
+        if ( v13 )
+          v12 = oppos->Pages[(v13 - 1) >> 4][((_DWORD)v13 - 1) & 0xF];
         else
-          v13 = **v6->Pages;
+          v12 = **chain->Pages;
       }
       else
       {
-        v13 = v6->Pages[v12 >> 4][v12 & 0xF];
+        v12 = chain->Pages[v11 >> 4][v11 & 0xF];
       }
-      ++v12;
-      v15 = v7->MeshVertices.Pages[(unsigned __int64)(v10->srcVer & 0xFFFFFFF) >> 4];
-      v16 = (signed __int64)&v15[v10->srcVer & 0xF];
-      v17 = (signed __int64)&v7->EdgeFans.Array[(unsigned int)v15[v10->srcVer & 0xF].Mesh + *(_DWORD *)(v16 + 8)];
-      *(_QWORD *)v17 = v10;
-      *(_QWORD *)(v17 + 8) = v8;
-      *(_WORD *)(v17 + 18) = 0;
-      *(_WORD *)(v17 + 16) = v4;
-      *(_QWORD *)(v17 + 24) = v10;
-      *(_QWORD *)(v17 + 32) = v13;
-      *(_WORD *)(v17 + 42) = 0;
-      *(_WORD *)(v17 + 40) = v11;
-      *(_WORD *)(v16 + 18) += 2;
-      v9 = v6->Size;
-      v8 = v10;
-      v10 = v13;
+      ++v11;
+      v14 = &this->MeshVertices.Pages[(unsigned __int64)(v9->srcVer & 0xFFFFFFF) >> 4][v9->srcVer & 0xF];
+      v15 = &this->EdgeFans.Array[v14->Mesh + v14->Idx];
+      v15->cntVer = v9;
+      v15->rayVer = v7;
+      v15->slope = 0;
+      v15->style = style;
+      v15[1].cntVer = v9;
+      v15[1].rayVer = v12;
+      v15[1].slope = 0;
+      v15[1].style = v10;
+      v14->Mesh += 2;
+      Size = chain->Size;
+      v7 = v9;
+      v9 = v12;
     }
-    while ( v12 - 1 < v9 );
+    while ( v11 - 1 < Size );
   }
 }
 
 // File Line: 2381
 // RVA: 0x9DCC50
-__int64 __fastcall Scaleform::Render::Tessellator::countFanEdges(Scaleform::Render::Tessellator *this, Scaleform::Render::Tessellator::MonotoneType *m)
+__int64 __fastcall Scaleform::Render::Tessellator::countFanEdges(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::Tessellator::MonotoneType *m)
 {
-  Scaleform::Render::Tessellator::MonoVertexType *v2; // r10
+  Scaleform::Render::Tessellator::MonoVertexType *start; // r10
   unsigned int v3; // edi
-  Scaleform::Render::Tessellator::MonotoneType *v4; // r11
-  Scaleform::Render::Tessellator *v5; // rsi
   Scaleform::Render::Tessellator::MonoVertexType *v6; // r8
-  Scaleform::Render::Tessellator::MonoVertexType *v7; // rax
-  int v8; // er9
+  Scaleform::Render::Tessellator::MonoVertexType *next; // rax
+  int v8; // r9d
   int v9; // edx
   int v10; // ecx
-  __int64 result; // rax
   Scaleform::Render::Tessellator::MonoVertexType *v12; // rbx
   Scaleform::Render::Tessellator::MonoVertexType *v13; // r8
   Scaleform::Render::TessVertex *v14; // rax
   Scaleform::Render::Tessellator::MonoVertexType *v15; // rax
   Scaleform::Render::Tessellator::MonoVertexType *v16; // rax
   __int64 v17; // rcx
-  Scaleform::Render::Tessellator::BaseLineType *v18; // rcx
-  Scaleform::Render::Tessellator::MonotoneType val; // [rsp+20h] [rbp-28h]
+  Scaleform::Render::Tessellator::BaseLineType *lowerBase; // rcx
+  Scaleform::Render::Tessellator::MonotoneType val; // [rsp+20h] [rbp-28h] BYREF
 
-  v2 = m->start;
+  start = m->start;
   v3 = 0;
-  v4 = m;
-  v5 = this;
-  if ( m->start && (v6 = v2->next) != 0i64 )
+  if ( m->start && (v6 = start->next) != 0i64 )
   {
-    v7 = v6->next;
-    if ( v7 )
+    next = v6->next;
+    if ( next )
     {
       while ( 1 )
       {
-        v8 = v2->srcVer & 0xFFFFFFF;
+        v8 = start->srcVer & 0xFFFFFFF;
         v9 = v6->srcVer & 0xFFFFFFF;
-        v10 = v7->srcVer & 0xFFFFFFF;
+        v10 = next->srcVer & 0xFFFFFFF;
         if ( v8 != v9 && v9 != v10 && v10 != v8 )
           break;
-        v2 = v6;
-        v6 = v7;
-        v7 = v7->next;
-        if ( !v7 )
+        start = v6;
+        v6 = next;
+        next = next->next;
+        if ( !next )
           goto LABEL_8;
       }
       v12 = 0i64;
-      v4->start = v2;
-      v13 = v2;
-      if ( v2 )
+      m->start = start;
+      v13 = start;
+      if ( start )
       {
-        while ( !v12 || (v12->srcVer ^ v13->srcVer) & 0xFFFFFFF )
+        while ( !v12 || ((v12->srcVer ^ v13->srcVer) & 0xFFFFFFF) != 0 )
         {
           v12 = v13;
           v3 += 2;
-          v14 = v5->MeshVertices.Pages[(unsigned __int64)(v13->srcVer & 0xFFFFFFF) >> 4];
+          v14 = this->MeshVertices.Pages[(unsigned __int64)(v13->srcVer & 0xFFFFFFF) >> 4];
           v14[v13->srcVer & 0xF].Mesh += 2;
           v13 = v13->next;
           if ( !v13 )
@@ -7839,85 +7593,80 @@ __int64 __fastcall Scaleform::Render::Tessellator::countFanEdges(Scaleform::Rend
         {
           if ( v15->next )
           {
-            v16 = v4->start;
-            *(_QWORD *)&val.d.m.lastIdx = *(_QWORD *)&v4->d.m.lastIdx;
-            v17 = *(_QWORD *)&v4->d.t.meshIdx;
+            v16 = m->start;
+            *(_QWORD *)&val.d.m.lastIdx = *(_QWORD *)&m->d.m.lastIdx;
+            v17 = *(_QWORD *)&m->d.t.meshIdx;
             val.start = v16;
             *(_QWORD *)&val.d.t.meshIdx = v17;
-            v18 = v4->lowerBase;
+            lowerBase = m->lowerBase;
             val.start = v13;
-            val.lowerBase = v18;
+            val.lowerBase = lowerBase;
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonotoneType,4,16>::PushBack(
-              &v5->Monotones,
+              &this->Monotones,
               &val);
           }
         }
         v12->next = 0i64;
       }
-      result = v3;
+      return v3;
     }
     else
     {
 LABEL_8:
-      v4->start = 0i64;
-      result = 0i64;
+      m->start = 0i64;
+      return 0i64;
     }
   }
   else
   {
     m->start = 0i64;
-    result = 0i64;
+    return 0i64;
   }
-  return result;
 }
 
 // File Line: 2449
 // RVA: 0x9D64D0
-void __fastcall Scaleform::Render::Tessellator::collectFanEdges(Scaleform::Render::Tessellator *this, Scaleform::Render::Tessellator::MonotoneType *m)
+void __fastcall Scaleform::Render::Tessellator::collectFanEdges(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::Tessellator::MonotoneType *m)
 {
-  Scaleform::Render::Tessellator::MonotoneType *v2; // r14
-  Scaleform::Render::Tessellator::MonoVertexType *v3; // rbx
-  Scaleform::Render::Tessellator *v4; // rbp
-  Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoVertexType *,4,8> *v5; // rdi
+  Scaleform::Render::Tessellator::MonoVertexType *i; // rbx
+  Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoVertexType *,4,8> *p_LeftChain; // rdi
   unsigned __int64 v6; // rsi
 
-  v2 = m;
   this->LeftChain.Size = 0i64;
   this->RightChain.Size = 0i64;
-  v3 = m->start;
-  v4 = this;
-  if ( m->start )
+  for ( i = m->start; i; i = i->next )
   {
-    do
-    {
-      v5 = &v4->LeftChain;
-      if ( (v3->srcVer & 0x80000000) == 0 )
-        v5 = &v4->RightChain;
-      v6 = v5->Size >> 4;
-      if ( v6 >= v5->NumPages )
-        Scaleform::Render::ArrayPaged<Scaleform::Render::Hairliner::MonoChainType *,4,8>::allocPage(v5, v5->Size >> 4);
-      v5->Pages[v6][v5->Size & 0xF] = v3;
-      ++v5->Size;
-      v3 = v3->next;
-    }
-    while ( v3 );
+    p_LeftChain = &this->LeftChain;
+    if ( (i->srcVer & 0x80000000) == 0 )
+      p_LeftChain = &this->RightChain;
+    v6 = p_LeftChain->Size >> 4;
+    if ( v6 >= p_LeftChain->NumPages )
+      Scaleform::Render::ArrayPaged<Scaleform::Render::Hairliner::MonoChainType *,4,8>::allocPage(
+        p_LeftChain,
+        p_LeftChain->Size >> 4);
+    p_LeftChain->Pages[v6][p_LeftChain->Size & 0xF] = i;
+    ++p_LeftChain->Size;
   }
-  if ( v4->LeftChain.Size )
-    Scaleform::Render::Tessellator::collectFanEdges(v4, &v4->LeftChain, &v4->RightChain, v2->style | 0x8000);
-  if ( v4->RightChain.Size )
-    Scaleform::Render::Tessellator::collectFanEdges(v4, &v4->RightChain, &v4->LeftChain, v2->style);
+  if ( this->LeftChain.Size )
+    Scaleform::Render::Tessellator::collectFanEdges(this, &this->LeftChain, &this->RightChain, m->style | 0x8000);
+  if ( this->RightChain.Size )
+    Scaleform::Render::Tessellator::collectFanEdges(this, &this->RightChain, &this->LeftChain, m->style);
 }
 
 // File Line: 2485
 // RVA: 0x9D6E80
-__int64 __fastcall Scaleform::Render::Tessellator::computeMiter(Scaleform::Render::Tessellator *this, Scaleform::Render::TessVertex *v1, Scaleform::Render::TessVertex *v2, Scaleform::Render::TessVertex *v3, Scaleform::Render::TessVertex *newVer1, Scaleform::Render::TessVertex *newVer2)
+__int64 __fastcall Scaleform::Render::Tessellator::computeMiter(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::TessVertex *v1,
+        Scaleform::Render::TessVertex *v2,
+        Scaleform::Render::TessVertex *v3,
+        Scaleform::Render::TessVertex *newVer1,
+        Scaleform::Render::TessVertex *newVer2)
 {
-  float v6; // xmm7_4
-  Scaleform::Render::TessVertex *v7; // rbp
-  Scaleform::Render::TessVertex *v8; // rdi
-  Scaleform::Render::Tessellator *v9; // rsi
-  Scaleform::Render::TessVertex *v10; // rbx
-  __int128 v11; // xmm8
+  float x; // xmm7_4
+  __m128 y_low; // xmm8
   __m128 v12; // xmm12
   __m128 v13; // xmm6
   float v14; // xmm13_4
@@ -7925,158 +7674,159 @@ __int64 __fastcall Scaleform::Render::Tessellator::computeMiter(Scaleform::Rende
   float v16; // xmm10_4
   __m128 v17; // xmm0
   float len2; // xmm11_4
-  float v19; // xmm4_4
+  float EdgeAAWidth; // xmm4_4
   float v20; // xmm9_4
-  bool v21; // cl
-  unsigned __int8 v22; // dl
-  float v23; // xmm12_4
-  float v24; // xmm15_4
-  float v25; // xmm14_4
-  float v26; // xmm5_4
-  __int128 v27; // xmm2
-  float v28; // xmm3_4
+  float v21; // xmm15_4
+  bool v22; // cl
+  unsigned __int8 v23; // dl
+  float v24; // xmm6_4
+  float v25; // xmm12_4
+  float v26; // xmm15_4
+  float v27; // xmm14_4
+  float v28; // xmm5_4
+  __m128 v29; // xmm2
+  float v30; // xmm3_4
   __int64 result; // rax
-  float v30; // xmm6_4
-  float v31; // xmm1_4
-  __int128 v32; // xmm0
-  float v33; // xmm13_4
-  float v34; // xmm3_4
-  float v35; // xmm6_4
-  float v36; // xmm1_4
-  float v37; // xmm6_4
-  __m128 v38; // xmm13
-  __m128 v39; // xmm1
-  float v40; // xmm0_4
-  float v41; // xmm4_4
+  float v32; // xmm1_4
+  __m128 v33; // xmm0
+  float v34; // xmm13_4
+  float v35; // xmm3_4
+  float v36; // xmm6_4
+  float v37; // xmm1_4
+  float v38; // xmm6_4
+  __m128 v39; // xmm13
+  __m128 v40; // xmm1
+  float v41; // xmm0_4
   float v42; // xmm4_4
   float v43; // xmm4_4
-  float v44; // [rsp+30h] [rbp-E8h]
-  float v45; // [rsp+38h] [rbp-E0h]
-  float v46; // [rsp+120h] [rbp+8h]
-  float v47; // [rsp+128h] [rbp+10h]
+  float v44; // xmm4_4
+  float v45; // [rsp+30h] [rbp-E8h]
+  float v46; // [rsp+38h] [rbp-E0h]
+  float v47; // [rsp+120h] [rbp+8h]
+  float v48; // [rsp+128h] [rbp+10h]
 
-  v6 = v2->x;
-  v7 = v2;
-  v8 = v1;
-  v9 = this;
-  v10 = v3;
-  v11 = LODWORD(v2->y);
+  x = v2->x;
+  y_low = (__m128)LODWORD(v2->y);
   v12 = (__m128)LODWORD(v3->y);
-  v12.m128_f32[0] = v12.m128_f32[0] - *(float *)&v11;
-  v13 = (__m128)LODWORD(v2->y);
-  v13.m128_f32[0] = *(float *)&v11 - v1->y;
+  v12.m128_f32[0] = v12.m128_f32[0] - y_low.m128_f32[0];
+  v13 = y_low;
+  v13.m128_f32[0] = y_low.m128_f32[0] - v1->y;
   v14 = v3->x;
   v15 = v13;
-  v15.m128_f32[0] = (float)(v13.m128_f32[0] * v13.m128_f32[0]) + (float)((float)(v6 - v1->x) * (float)(v6 - v1->x));
-  LODWORD(v16) = (unsigned __int128)_mm_sqrt_ps(v15);
+  v15.m128_f32[0] = (float)(v13.m128_f32[0] * v13.m128_f32[0]) + (float)((float)(x - v1->x) * (float)(x - v1->x));
+  v16 = _mm_sqrt_ps(v15).m128_f32[0];
   v17 = v12;
-  v17.m128_f32[0] = (float)(v12.m128_f32[0] * v12.m128_f32[0]) + (float)((float)(v3->x - v6) * (float)(v3->x - v6));
-  LODWORD(len2) = (unsigned __int128)_mm_sqrt_ps(v17);
+  v17.m128_f32[0] = (float)(v12.m128_f32[0] * v12.m128_f32[0]) + (float)((float)(v3->x - x) * (float)(v3->x - x));
+  len2 = _mm_sqrt_ps(v17).m128_f32[0];
   v17.m128_f32[0] = Scaleform::Render::Math2D::TurnRatio<Scaleform::Render::Hairliner::OutVertexType,Scaleform::Render::Hairliner::OutVertexType,Scaleform::Render::Hairliner::OutVertexType>(
                       v1,
                       v2,
                       v3,
                       v16,
                       len2);
-  v19 = v9->EdgeAAWidth;
+  EdgeAAWidth = this->EdgeAAWidth;
   v20 = 0.0;
-  v21 = v17.m128_f32[0] < 0.0;
-  v22 = 0;
-  LODWORD(v45) = v17.m128_i32[0] & _xmm;
-  v23 = (float)(v12.m128_f32[0] * v19) * (float)(1.0 / len2);
-  v24 = (float)(v9->EdgeAAWidth * v13.m128_f32[0]) * (float)(1.0 / v16);
-  v25 = (float)((float)(v8->x - v6) * v19) * (float)(1.0 / v16);
-  v26 = (float)((float)(v6 - v14) * v19) * (float)(1.0 / len2);
+  v21 = EdgeAAWidth * v13.m128_f32[0];
+  v22 = v17.m128_f32[0] < 0.0;
+  v23 = 0;
+  v24 = v1->x;
+  LODWORD(v46) = v17.m128_i32[0] & _xmm;
+  v25 = (float)(v12.m128_f32[0] * EdgeAAWidth) * (float)(1.0 / len2);
+  v26 = v21 * (float)(1.0 / v16);
+  v27 = (float)((float)(v1->x - x) * EdgeAAWidth) * (float)(1.0 / v16);
+  v28 = (float)((float)(x - v14) * EdgeAAWidth) * (float)(1.0 / len2);
   if ( COERCE_FLOAT(v17.m128_i32[0] & _xmm) < 0.125 )
   {
     if ( v16 <= len2 )
     {
-      v28 = v6 + v23;
-      *(float *)&v27 = *(float *)&v11 + v26;
+      v30 = x + v25;
+      v29.m128_f32[0] = y_low.m128_f32[0] + v28;
       goto LABEL_5;
     }
-    v6 = v6 + v24;
-    *(float *)&v11 = *(float *)&v11 + v25;
+    x = x + v26;
+    y_low.m128_f32[0] = y_low.m128_f32[0] + v27;
     goto LABEL_4;
   }
-  v30 = v8->x + v24;
-  v44 = v30;
-  v31 = (float)(v10->y + v26) - (float)(*(float *)&v11 + v26);
-  v47 = v6 + v23;
-  v32 = v11;
-  v33 = (float)(v14 + v23) - (float)(v6 + v23);
-  *(float *)&v32 = *(float *)&v11 + v25;
-  v27 = v32;
-  v34 = (float)(v6 + v24) - v30;
-  *(float *)&v27 = (float)(*(float *)&v11 + v25) - (float)(v8->y + v25);
-  v46 = v8->y + v25;
-  v35 = (float)(v31 * v34) - (float)(v33 * *(float *)&v27);
-  if ( COERCE_FLOAT(LODWORD(v35) & _xmm) < (float)((float)(len2 + v16) * v9->IntersectionEpsilon) )
+  v45 = v24 + v26;
+  v32 = (float)(v3->y + v28) - (float)(y_low.m128_f32[0] + v28);
+  v48 = x + v25;
+  v33 = y_low;
+  v34 = (float)(v14 + v25) - (float)(x + v25);
+  v33.m128_f32[0] = y_low.m128_f32[0] + v27;
+  v29 = v33;
+  v35 = (float)(x + v26) - (float)(v24 + v26);
+  v29.m128_f32[0] = (float)(y_low.m128_f32[0] + v27) - (float)(v1->y + v27);
+  v47 = v1->y + v27;
+  v36 = (float)(v32 * v35) - (float)(v34 * v29.m128_f32[0]);
+  if ( COERCE_FLOAT(LODWORD(v36) & _xmm) < (float)((float)(len2 + v16) * this->IntersectionEpsilon) )
   {
 LABEL_4:
-    LODWORD(v27) = v11;
-    v28 = v6;
+    v29.m128_i32[0] = y_low.m128_i32[0];
+    v30 = x;
     goto LABEL_5;
   }
-  v36 = (float)((float)((float)(v46 - (float)(*(float *)&v11 + v26)) * v33) - (float)((float)(v44 - v47) * v31)) / v35;
-  *(float *)&v27 = (float)(*(float *)&v27 * v36) + v46;
-  v28 = (float)(v34 * v36) + v44;
-  v38 = (__m128)v27;
-  v37 = v28 - v6;
-  v38.m128_f32[0] = *(float *)&v27 - *(float *)&v11;
-  v39 = v38;
-  v39.m128_f32[0] = (float)(v38.m128_f32[0] * v38.m128_f32[0]) + (float)(v37 * v37);
-  LODWORD(v40) = (unsigned __int128)_mm_sqrt_ps(v39);
-  if ( v21 )
+  v37 = (float)((float)((float)(v47 - (float)(y_low.m128_f32[0] + v28)) * v34) - (float)((float)(v45 - v48) * v32))
+      / v36;
+  v29.m128_f32[0] = (float)(v29.m128_f32[0] * v37) + v47;
+  v30 = (float)(v35 * v37) + v45;
+  v39 = v29;
+  v38 = v30 - x;
+  v39.m128_f32[0] = v29.m128_f32[0] - y_low.m128_f32[0];
+  v40 = v39;
+  v40.m128_f32[0] = (float)(v39.m128_f32[0] * v39.m128_f32[0]) + (float)(v38 * v38);
+  LODWORD(v41) = _mm_sqrt_ps(v40).m128_u32[0];
+  if ( v22 )
   {
-    v41 = v19 * 4.0;
+    v42 = EdgeAAWidth * 4.0;
   }
   else
   {
     if ( v16 >= len2 )
-      v42 = len2;
+      v43 = len2;
     else
-      v42 = v16;
-    v41 = v42 / v45;
+      v43 = v16;
+    v42 = v43 / v46;
   }
-  if ( v40 > v41 )
+  if ( v41 > v42 )
   {
     if ( newVer2 )
     {
-      if ( v21 )
+      if ( v22 )
         v20 = FLOAT_2_0;
-      v22 = 1;
-      *(float *)&v27 = (float)(v20 * v24) + (float)(*(float *)&v11 + v25);
-      v28 = (float)(v6 + v24) - (float)(v20 * v25);
-      newVer2->x = (float)(v20 * v26) + v47;
-      newVer2->y = (float)(v26 + v7->y) - (float)(v20 * v23);
+      v23 = 1;
+      v29.m128_f32[0] = (float)(v20 * v26) + (float)(y_low.m128_f32[0] + v27);
+      v30 = (float)(x + v26) - (float)(v20 * v27);
+      newVer2->x = (float)(v20 * v28) + v48;
+      newVer2->y = (float)(v28 + v2->y) - (float)(v20 * v25);
     }
     else
     {
-      v43 = v41 / v40;
-      v28 = (float)(v37 * v43) + v6;
-      *(float *)&v27 = (float)(v38.m128_f32[0] * v43) + *(float *)&v11;
+      v44 = v42 / v41;
+      v30 = (float)(v38 * v44) + x;
+      v29.m128_f32[0] = (float)(v39.m128_f32[0] * v44) + y_low.m128_f32[0];
     }
   }
 LABEL_5:
-  result = v22;
-  newVer1->x = v28;
-  LODWORD(newVer1->y) = v27;
+  result = v23;
+  newVer1->x = v30;
+  LODWORD(newVer1->y) = v29.m128_i32[0];
   return result;
 }
 
 // File Line: 2579
 // RVA: 0x9EC880
-void __fastcall Scaleform::Render::Tessellator::processFan(Scaleform::Render::Tessellator *this, unsigned int start, unsigned int end)
+void __fastcall Scaleform::Render::Tessellator::processFan(
+        Scaleform::Render::Tessellator *this,
+        unsigned int start,
+        unsigned int end)
 {
   unsigned int v3; // esi
-  unsigned int v4; // er14
-  Scaleform::Render::Tessellator *v5; // rbx
-  unsigned int v6; // er12
+  unsigned int v4; // r14d
+  unsigned int v6; // r12d
   unsigned __int64 v7; // r13
-  unsigned int v8; // er13
-  signed __int64 v9; // r14
-  Scaleform::Render::Tessellator::EdgeAAType *v10; // r8
+  unsigned int v8; // r13d
+  __int64 v9; // r14
+  Scaleform::Render::Tessellator::EdgeAAType *Array; // r8
   bool v11; // zf
   unsigned __int64 v12; // r15
   unsigned __int64 v13; // r15
@@ -8084,114 +7834,109 @@ void __fastcall Scaleform::Render::Tessellator::processFan(Scaleform::Render::Te
   Scaleform::Render::TessVertex *v15; // rax
   float v16; // xmm6_4
   float v17; // xmm7_4
-  signed __int64 v18; // rdx
+  unsigned __int64 v18; // rdx
   unsigned __int64 v19; // r8
-  Scaleform::Render::ArrayPaged<Scaleform::Render::TessVertex,4,16> *v20; // rbx
+  Scaleform::Render::ArrayPaged<Scaleform::Render::TessVertex,4,16> *p_MeshVertices; // rbx
   unsigned __int64 v21; // rdi
   unsigned int v22; // xmm0_4
   int v23; // xmm1_4
-  signed __int64 v24; // rdx
+  __int64 v24; // rdx
   Scaleform::Render::TessVertex *v25; // rax
   int v26; // xmm0_4
   unsigned int *v27; // r14
   unsigned __int64 v28; // rsi
   unsigned __int64 v29; // r8
   Scaleform::Render::Tessellator::EdgeAAType *v30; // rax
-  unsigned int v31; // edx
-  Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16> *v32; // rsi
+  unsigned int Size; // edx
+  Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16> *p_StarVertices; // rsi
   unsigned __int64 v33; // rdx
   unsigned __int64 v34; // r13
   unsigned __int64 v35; // r8
-  unsigned int **v36; // rax
+  unsigned int **Pages; // rax
   __int64 v37; // rdi
   unsigned __int64 v38; // rcx
   unsigned int *v39; // rax
   Scaleform::Render::Tessellator::EdgeAAType *v40; // r8
   __int64 v41; // r15
   Scaleform::Render::Tessellator::EdgeAAType *v42; // r12
-  unsigned int v43; // er11
-  Scaleform::Render::Tessellator::MonoVertexType *v44; // rax
-  unsigned int v45; // er10
+  unsigned int srcVer; // r11d
+  Scaleform::Render::Tessellator::MonoVertexType *cntVer; // rax
+  unsigned int v45; // r10d
   unsigned int v46; // ecx
-  float v47; // xmm6_4
-  float v48; // xmm7_4
+  float y; // xmm6_4
+  float x; // xmm7_4
   Scaleform::Render::TessVertex **v49; // r8
-  unsigned int v50; // er10
-  unsigned __int64 v51; // rax
-  unsigned int v52; // er10
-  Scaleform::Render::TessVertex *v53; // rax
-  unsigned int v54; // er8
-  unsigned int v55; // esi
-  int v56; // edx
-  __int64 v57; // rax
-  unsigned __int16 v58; // ax
-  unsigned __int64 v59; // rdi
-  unsigned int v60; // xmm0_4
-  int v61; // xmm1_4
-  signed __int64 v62; // rdx
-  Scaleform::Render::TessVertex *v63; // rax
-  int v64; // xmm0_4
-  unsigned __int64 v65; // rdi
-  Scaleform::Render::Tessellator::EdgeAAType *v66; // rax
-  Scaleform::Render::Tessellator::MonoVertexType *v67; // r8
-  signed __int64 v68; // r13
-  unsigned int v69; // er11
-  unsigned int v70; // er9
-  unsigned __int64 v71; // r15
-  Scaleform::Render::Tessellator::InnerQuadType *v72; // rcx
-  signed __int64 v73; // rdx
-  char v74; // r15
-  unsigned int v75; // er10
-  char v76; // al
-  float v77; // xmm6_4
-  float v78; // xmm7_4
-  Scaleform::Render::TessVertex **v79; // r8
-  unsigned int v80; // er10
-  unsigned __int64 v81; // rax
-  unsigned int v82; // er10
-  Scaleform::Render::TessVertex *v83; // rax
-  unsigned int v84; // er12
-  unsigned __int16 v85; // ax
-  unsigned __int16 v86; // cx
+  unsigned int v50; // r10d
+  unsigned int v51; // r8d
+  unsigned int v52; // esi
+  int v53; // edx
+  __int64 v54; // rax
+  unsigned __int16 v55; // ax
+  unsigned __int64 v56; // rdi
+  unsigned int Idx; // xmm0_4
+  int v58; // xmm1_4
+  __int64 v59; // rdx
+  Scaleform::Render::TessVertex *v60; // rax
+  int v61; // xmm0_4
+  unsigned __int64 v62; // rdi
+  Scaleform::Render::Tessellator::EdgeAAType *v63; // rax
+  Scaleform::Render::Tessellator::MonoVertexType *rayVer; // r8
+  __int64 v65; // r13
+  unsigned int v66; // r11d
+  unsigned int v67; // r9d
+  unsigned __int64 v68; // r15
+  Scaleform::Render::Tessellator::InnerQuadType *v69; // rcx
+  __int64 v70; // rdx
+  char v71; // r15
+  unsigned int v72; // r10d
+  char v73; // al
+  float v74; // xmm6_4
+  float v75; // xmm7_4
+  Scaleform::Render::TessVertex **v76; // r8
+  unsigned int v77; // r10d
+  unsigned int v78; // r12d
+  unsigned __int16 v79; // ax
+  unsigned __int16 v80; // cx
+  unsigned __int64 v81; // rdi
+  unsigned int v82; // xmm0_4
+  int v83; // xmm1_4
+  __int64 v84; // rdx
+  Scaleform::Render::TessVertex *v85; // rax
+  int v86; // xmm0_4
   unsigned __int64 v87; // rdi
-  unsigned int v88; // xmm0_4
-  int v89; // xmm1_4
-  signed __int64 v90; // rdx
-  Scaleform::Render::TessVertex *v91; // rax
-  int v92; // xmm0_4
+  Scaleform::Render::TessVertex *v88; // rdx
+  __int64 v89; // r8
+  int v90; // eax
+  unsigned __int64 v91; // rdi
+  unsigned __int64 v92; // r15
   unsigned __int64 v93; // rdi
-  Scaleform::Render::TessVertex *v94; // rdx
-  signed __int64 v95; // r8
-  int v96; // eax
+  unsigned __int64 v94; // rcx
+  unsigned __int64 v95; // r15
+  Scaleform::Render::VertexBasic *v96; // r13
   unsigned __int64 v97; // rdi
-  signed __int64 v98; // r15
+  unsigned __int64 v98; // r15
   unsigned __int64 v99; // rdi
   unsigned __int64 v100; // rcx
-  signed __int64 v101; // r15
+  unsigned __int64 v101; // r15
   Scaleform::Render::VertexBasic *v102; // r13
-  unsigned __int64 v103; // rdi
-  signed __int64 v104; // r15
-  unsigned __int64 v105; // rdi
-  unsigned __int64 v106; // rcx
-  signed __int64 v107; // r15
-  Scaleform::Render::VertexBasic *v108; // r13
-  int v109; // ecx
-  unsigned __int64 v110; // r15
-  Scaleform::Render::Tessellator::OuterEdgeType *v111; // rcx
-  signed __int64 v112; // rdx
-  __int64 v113; // rax
-  unsigned __int64 v114; // r15
-  Scaleform::Render::Tessellator::OuterEdgeType *v115; // rcx
-  signed __int64 v116; // rdx
-  Scaleform::Render::TessVertex newVer1; // [rsp+10h] [rbp-69h]
-  Scaleform::Render::TessVertex *newVer2; // [rsp+28h] [rbp-51h]
-  Scaleform::Render::TessVertex v119; // [rsp+30h] [rbp-49h]
-  Scaleform::Render::VertexBasic v120; // [rsp+48h] [rbp-31h]
-  Scaleform::Render::Tessellator::EdgeAAType *v121; // [rsp+50h] [rbp-29h]
-  Scaleform::Render::Tessellator::EdgeAAType *v122; // [rsp+58h] [rbp-21h]
-  unsigned __int64 v123; // [rsp+60h] [rbp-19h]
-  __int64 v124; // [rsp+70h] [rbp-9h]
-  char v125; // [rsp+E8h] [rbp+6Fh]
+  int v103; // ecx
+  unsigned __int64 v104; // r15
+  Scaleform::Render::Tessellator::OuterEdgeType *v105; // rcx
+  __int64 v106; // rdx
+  __int64 v107; // rax
+  unsigned __int64 v108; // r15
+  Scaleform::Render::Tessellator::OuterEdgeType *v109; // rcx
+  __int64 v110; // rdx
+  Scaleform::Render::TessVertex newVer1; // [rsp+10h] [rbp-69h] BYREF
+  int newVer2; // [rsp+28h] [rbp-51h]
+  unsigned int newVer2_4; // [rsp+2Ch] [rbp-4Dh]
+  Scaleform::Render::TessVertex v114; // [rsp+30h] [rbp-49h] BYREF
+  Scaleform::Render::VertexBasic v115; // [rsp+48h] [rbp-31h]
+  Scaleform::Render::Tessellator::EdgeAAType *v116; // [rsp+50h] [rbp-29h]
+  Scaleform::Render::Tessellator::EdgeAAType *v117; // [rsp+58h] [rbp-21h]
+  unsigned __int64 v118; // [rsp+60h] [rbp-19h]
+  __int64 v119; // [rsp+70h] [rbp-9h]
+  char v120; // [rsp+E8h] [rbp+6Fh]
   unsigned int vars0; // [rsp+F0h] [rbp+77h]
   unsigned __int64 retaddr; // [rsp+F8h] [rbp+7Fh]
 
@@ -8199,42 +7944,41 @@ void __fastcall Scaleform::Render::Tessellator::processFan(Scaleform::Render::Te
   {
     v3 = start;
     v4 = end;
-    v5 = this;
     v6 = end - 1;
     this->StartFan.Size = 0i64;
     this->EndFan.Size = 0i64;
     v7 = start;
     retaddr = start;
-    LODWORD(newVer2) = end - start;
+    newVer2 = end - start;
     if ( start < end )
     {
       v8 = vars0;
       v9 = start;
       while ( 1 )
       {
-        v10 = v5->EdgeFans.Array;
-        if ( !((v10[v6].rayVer->srcVer ^ v10[v9].rayVer->srcVer) & 0xFFFFFFF) )
+        Array = this->EdgeFans.Array;
+        if ( ((Array[v6].rayVer->srcVer ^ Array[v9].rayVer->srcVer) & 0xFFFFFFF) == 0 )
           break;
-        if ( v10[v6].slope != v10[v9].slope && !(v10[v6].style & 0x8000) )
+        if ( Array[v6].slope != Array[v9].slope && (Array[v6].style & 0x8000) == 0 )
         {
-          v11 = (v10[v9].style & 0x8000u) == 0;
+          v11 = (Array[v9].style & 0x8000u) == 0;
 LABEL_9:
           if ( !v11 )
           {
-            v12 = v5->StartFan.Size >> 3;
-            if ( v12 >= v5->StartFan.NumPages )
+            v12 = this->StartFan.Size >> 3;
+            if ( v12 >= this->StartFan.NumPages )
               Scaleform::Render::ArrayPaged<Scaleform::Render::PathBasic,2,4>::allocPage(
-                (Scaleform::Render::ArrayPaged<Scaleform::Render::PathBasic,2,4> *)&v5->StartFan,
-                v5->StartFan.Size >> 3);
-            v5->StartFan.Pages[v12][v5->StartFan.Size & 7] = v3;
-            ++v5->StartFan.Size;
-            v13 = v5->EndFan.Size >> 3;
-            if ( v13 >= v5->EndFan.NumPages )
+                (Scaleform::Render::ArrayPaged<Scaleform::Render::PathBasic,2,4> *)&this->StartFan,
+                this->StartFan.Size >> 3);
+            this->StartFan.Pages[v12][this->StartFan.Size & 7] = v3;
+            ++this->StartFan.Size;
+            v13 = this->EndFan.Size >> 3;
+            if ( v13 >= this->EndFan.NumPages )
               Scaleform::Render::ArrayPaged<Scaleform::Render::PathBasic,2,4>::allocPage(
-                (Scaleform::Render::ArrayPaged<Scaleform::Render::PathBasic,2,4> *)&v5->EndFan,
-                v5->EndFan.Size >> 3);
-            v5->EndFan.Pages[v13][v5->EndFan.Size & 7] = v6;
-            ++v5->EndFan.Size;
+                (Scaleform::Render::ArrayPaged<Scaleform::Render::PathBasic,2,4> *)&this->EndFan,
+                this->EndFan.Size >> 3);
+            this->EndFan.Pages[v13][this->EndFan.Size & 7] = v6;
+            ++this->EndFan.Size;
           }
         }
         v6 = v3++;
@@ -8246,283 +7990,279 @@ LABEL_9:
           goto LABEL_17;
         }
       }
-      v11 = ((v10[v6].style ^ v10[v9].style) & 0x7FFF) == 0;
+      v11 = ((Array[v6].style ^ Array[v9].style) & 0x7FFF) == 0;
       goto LABEL_9;
     }
 LABEL_17:
-    if ( v5->StartFan.Size )
+    if ( this->StartFan.Size )
     {
-      v27 = *v5->EndFan.Pages;
-      v28 = v5->EndFan.Size >> 3;
-      if ( v28 >= v5->EndFan.NumPages )
+      v27 = *this->EndFan.Pages;
+      v28 = this->EndFan.Size >> 3;
+      if ( v28 >= this->EndFan.NumPages )
         Scaleform::Render::ArrayPaged<Scaleform::Render::PathBasic,2,4>::allocPage(
-          (Scaleform::Render::ArrayPaged<Scaleform::Render::PathBasic,2,4> *)&v5->EndFan,
-          v5->EndFan.Size >> 3);
+          (Scaleform::Render::ArrayPaged<Scaleform::Render::PathBasic,2,4> *)&this->EndFan,
+          this->EndFan.Size >> 3);
       v29 = 0i64;
-      v5->EndFan.Pages[v28][v5->EndFan.Size & 7] = *v27;
-      ++v5->EndFan.Size;
-      v30 = v5->EdgeFans.Array;
-      v31 = v5->StarVertices.Size;
-      HIDWORD(newVer2) = v5->StarVertices.Size;
-      v11 = v5->StartFan.Size == 0;
-      LODWORD(v120.x) = v30[v7].cntVer->srcVer & 0xFFFFFFF;
+      this->EndFan.Pages[v28][this->EndFan.Size & 7] = *v27;
+      ++this->EndFan.Size;
+      v30 = this->EdgeFans.Array;
+      Size = this->StarVertices.Size;
+      newVer2_4 = Size;
+      v11 = this->StartFan.Size == 0;
+      LODWORD(v115.x) = v30[v7].cntVer->srcVer & 0xFFFFFFF;
       if ( !v11 )
       {
-        v32 = (Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16> *)&v5->StarVertices;
+        p_StarVertices = (Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16> *)&this->StarVertices;
         do
         {
           v33 = v29 & 7;
           v34 = v29 >> 3;
           v35 = v29 + 1;
-          v36 = v5->EndFan.Pages;
+          Pages = this->EndFan.Pages;
           retaddr = v33;
-          v37 = v5->StartFan.Pages[v34][v33];
+          v37 = this->StartFan.Pages[v34][v33];
           v38 = v35 & 7;
-          v123 = v35;
-          v39 = v36[v35 >> 3];
-          v40 = v5->EdgeFans.Array;
+          v118 = v35;
+          v39 = Pages[v35 >> 3];
+          v40 = this->EdgeFans.Array;
           v41 = v39[v38];
           v42 = &v40[v37];
-          v43 = v40[v37].rayVer->srcVer;
-          v44 = v42->cntVer;
-          v121 = &v40[v37];
-          v45 = v44->srcVer;
-          if ( (v43 & 0xFFFFFFF) == (v44->srcVer & 0xFFFFFFF)
-            || (v46 = v40[v41].rayVer->srcVer, (v46 & 0xFFFFFFF) == (v44->srcVer & 0xFFFFFFF)) )
+          srcVer = v42->rayVer->srcVer;
+          cntVer = v42->cntVer;
+          v116 = v42;
+          v45 = cntVer->srcVer;
+          if ( (srcVer & 0xFFFFFFF) == (cntVer->srcVer & 0xFFFFFFF)
+            || (v46 = v40[v41].rayVer->srcVer, (v46 & 0xFFFFFFF) == (cntVer->srcVer & 0xFFFFFFF)) )
           {
-            v49 = v5->MeshVertices.Pages;
+            v49 = this->MeshVertices.Pages;
             v50 = v45 & 0xFFFFFFF;
-            v48 = v49[(unsigned __int64)v50 >> 4][v50 & 0xF].x;
-            v51 = (unsigned __int64)v50 >> 4;
-            v52 = v50 & 0xF;
-            newVer1.x = v48;
-            v53 = v49[v51];
-            v47 = v53[v52].y;
-            newVer1.y = v53[v52].y;
+            x = v49[(unsigned __int64)v50 >> 4][v50 & 0xF].x;
+            newVer1.x = x;
+            y = v49[(unsigned __int64)v50 >> 4][v50 & 0xF].y;
+            newVer1.y = y;
           }
           else
           {
             Scaleform::Render::Tessellator::computeMiter(
-              v5,
-              &v5->MeshVertices.Pages[(unsigned __int64)(v43 & 0xFFFFFFF) >> 4][v43 & 0xF],
-              &v5->MeshVertices.Pages[(unsigned __int64)(v45 & 0xFFFFFFF) >> 4][v45 & 0xF],
-              &v5->MeshVertices.Pages[(unsigned __int64)(v46 & 0xFFFFFFF) >> 4][v46 & 0xF],
+              this,
+              &this->MeshVertices.Pages[(unsigned __int64)(srcVer & 0xFFFFFFF) >> 4][srcVer & 0xF],
+              &this->MeshVertices.Pages[(unsigned __int64)(v45 & 0xFFFFFFF) >> 4][v45 & 0xF],
+              &this->MeshVertices.Pages[(unsigned __int64)(v46 & 0xFFFFFFF) >> 4][v46 & 0xF],
               &newVer1,
               0i64);
-            v47 = newVer1.y;
-            v48 = newVer1.x;
+            y = newVer1.y;
+            x = newVer1.x;
           }
-          v54 = v5->MeshVertices.Size;
+          v51 = this->MeshVertices.Size;
           if ( (unsigned int)v41 >= (unsigned int)v37
-            || (LODWORD(v41) = (_DWORD)newVer2 + v41, (unsigned int)v37 <= (unsigned int)v41) )
+            || (LODWORD(v41) = newVer2 + v41, (unsigned int)v37 <= (unsigned int)v41) )
           {
-            v55 = vars0;
-            v56 = -(signed int)newVer2;
+            v52 = vars0;
+            v53 = -newVer2;
             do
             {
-              if ( (unsigned int)v37 >= v55 )
-                v57 = (unsigned int)(v56 + v37);
+              if ( (unsigned int)v37 >= v52 )
+                v54 = (unsigned int)(v53 + v37);
               else
-                v57 = (unsigned int)v37;
+                v54 = (unsigned int)v37;
               LODWORD(v37) = v37 + 1;
-              v5->EdgeFans.Array[v57].cntVer->aaVer = v54;
+              this->EdgeFans.Array[v54].cntVer->aaVer = v51;
             }
             while ( (unsigned int)v37 <= (unsigned int)v41 );
-            v32 = (Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16> *)&v5->StarVertices;
+            p_StarVertices = (Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16> *)&this->StarVertices;
           }
-          v58 = v42->style & 0x7FFF;
-          v59 = v5->MeshVertices.Size >> 4;
+          v55 = v42->style & 0x7FFF;
+          v56 = this->MeshVertices.Size >> 4;
           newVer1.Idx = -1;
           *(_DWORD *)&newVer1.Flags = -65534;
-          LODWORD(v120.y) = v54;
-          newVer1.Styles[1] = v58;
-          newVer1.Styles[0] = v58;
-          if ( v59 >= v5->MeshVertices.NumPages )
-            Scaleform::Render::ArrayPaged<Scaleform::Render::TessVertex,4,16>::allocPage(&v5->MeshVertices, v59);
-          v60 = newVer1.Idx;
-          v61 = *(_DWORD *)newVer1.Styles;
-          v62 = v5->MeshVertices.Size & 0xF;
-          v63 = v5->MeshVertices.Pages[v59];
-          v63[v62].x = v48;
-          v63[v62].y = v47;
-          v63[v62].Idx = v60;
-          v64 = *(_DWORD *)&newVer1.Flags;
-          *(_DWORD *)v63[v62].Styles = v61;
-          *(_DWORD *)&v63[v62].Flags = v64;
-          ++v5->MeshVertices.Size;
-          v65 = v32->Size >> 4;
-          if ( v65 >= v32->NumPages )
-            Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16>::allocPage(v32, v32->Size >> 4);
-          v32->Pages[v65][v32->Size & 0xF] = v120;
-          ++v32->Size;
-          v66 = v5->EdgeFans.Array;
-          v67 = v66[v5->EndFan.Pages[v34][retaddr]].rayVer;
-          v68 = (signed __int64)&v66[v5->EndFan.Pages[v34][retaddr]];
-          v69 = v67->srcVer;
-          v70 = v42->rayVer->srcVer;
-          v122 = (Scaleform::Render::Tessellator::EdgeAAType *)v68;
-          if ( (v70 & 0xFFFFFFF) == (v69 & 0xFFFFFFF) )
+          LODWORD(v115.y) = v51;
+          newVer1.Styles[1] = v55;
+          newVer1.Styles[0] = v55;
+          if ( v56 >= this->MeshVertices.NumPages )
+            Scaleform::Render::ArrayPaged<Scaleform::Render::TessVertex,4,16>::allocPage(&this->MeshVertices, v56);
+          Idx = newVer1.Idx;
+          v58 = *(_DWORD *)newVer1.Styles;
+          v59 = this->MeshVertices.Size & 0xF;
+          v60 = this->MeshVertices.Pages[v56];
+          v60[v59].x = x;
+          v60[v59].y = y;
+          v60[v59].Idx = Idx;
+          v61 = *(_DWORD *)&newVer1.Flags;
+          *(_DWORD *)v60[v59].Styles = v58;
+          *(_DWORD *)&v60[v59].Flags = v61;
+          ++this->MeshVertices.Size;
+          v62 = p_StarVertices->Size >> 4;
+          if ( v62 >= p_StarVertices->NumPages )
+            Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16>::allocPage(
+              p_StarVertices,
+              p_StarVertices->Size >> 4);
+          p_StarVertices->Pages[v62][p_StarVertices->Size & 0xF] = v115;
+          ++p_StarVertices->Size;
+          v63 = this->EdgeFans.Array;
+          rayVer = v63[this->EndFan.Pages[v34][retaddr]].rayVer;
+          v65 = (__int64)&v63[this->EndFan.Pages[v34][retaddr]];
+          v66 = rayVer->srcVer;
+          v67 = v42->rayVer->srcVer;
+          v117 = (Scaleform::Render::Tessellator::EdgeAAType *)v65;
+          if ( (v67 & 0xFFFFFFF) == (v66 & 0xFFFFFFF) )
           {
-            if ( !(v67->aaVer & 0x40000000) )
+            if ( (rayVer->aaVer & 0x40000000) == 0 )
             {
-              v71 = v5->InnerQuads.Size >> 4;
-              if ( v71 >= v5->InnerQuads.NumPages )
+              v68 = this->InnerQuads.Size >> 4;
+              if ( v68 >= this->InnerQuads.NumPages )
                 Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                  (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->InnerQuads,
-                  v5->InnerQuads.Size >> 4);
-              v72 = v5->InnerQuads.Pages[v71];
-              v73 = v5->InnerQuads.Size & 0xF;
-              v72[v73].e1 = v42;
-              v72[v73].e2 = (Scaleform::Render::Tessellator::EdgeAAType *)v68;
-              ++v5->InnerQuads.Size;
+                  (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->InnerQuads,
+                  this->InnerQuads.Size >> 4);
+              v69 = this->InnerQuads.Pages[v68];
+              v70 = this->InnerQuads.Size & 0xF;
+              v69[v70].e1 = v42;
+              v69[v70].e2 = (Scaleform::Render::Tessellator::EdgeAAType *)v65;
+              ++this->InnerQuads.Size;
               v42->cntVer->aaVer |= 0x40000000u;
             }
           }
           else
           {
-            v74 = 0;
-            v75 = v42->cntVer->srcVer;
-            v125 = 0;
-            if ( (v70 & 0xFFFFFFF) == (v75 & 0xFFFFFFF) || (v69 & 0xFFFFFFF) == (v75 & 0xFFFFFFF) )
+            v71 = 0;
+            v72 = v42->cntVer->srcVer;
+            v120 = 0;
+            if ( (v67 & 0xFFFFFFF) == (v72 & 0xFFFFFFF) || (v66 & 0xFFFFFFF) == (v72 & 0xFFFFFFF) )
             {
-              v79 = v5->MeshVertices.Pages;
-              v80 = v75 & 0xFFFFFFF;
-              v78 = v79[(unsigned __int64)v80 >> 4][v80 & 0xF].x;
-              v81 = (unsigned __int64)v80 >> 4;
-              v82 = v80 & 0xF;
-              newVer1.x = v78;
-              v83 = v79[v81];
-              v77 = v83[v82].y;
-              newVer1.y = v83[v82].y;
+              v76 = this->MeshVertices.Pages;
+              v77 = v72 & 0xFFFFFFF;
+              v75 = v76[(unsigned __int64)v77 >> 4][v77 & 0xF].x;
+              newVer1.x = v75;
+              v74 = v76[(unsigned __int64)v77 >> 4][v77 & 0xF].y;
+              newVer1.y = v74;
             }
             else
             {
-              v76 = Scaleform::Render::Tessellator::computeMiter(
-                      v5,
-                      &v5->MeshVertices.Pages[(unsigned __int64)(v69 & 0xFFFFFFF) >> 4][v69 & 0xF],
-                      &v5->MeshVertices.Pages[(unsigned __int64)(v75 & 0xFFFFFFF) >> 4][v75 & 0xF],
-                      &v5->MeshVertices.Pages[(unsigned __int64)(v70 & 0xFFFFFFF) >> 4][v70 & 0xF],
+              v73 = Scaleform::Render::Tessellator::computeMiter(
+                      this,
+                      &this->MeshVertices.Pages[(unsigned __int64)(v66 & 0xFFFFFFF) >> 4][v66 & 0xF],
+                      &this->MeshVertices.Pages[(unsigned __int64)(v72 & 0xFFFFFFF) >> 4][v72 & 0xF],
+                      &this->MeshVertices.Pages[(unsigned __int64)(v67 & 0xFFFFFFF) >> 4][v67 & 0xF],
                       &newVer1,
-                      &v119);
-              v77 = newVer1.y;
-              v78 = newVer1.x;
-              v74 = v76;
-              v125 = v76;
+                      &v114);
+              v74 = newVer1.y;
+              v75 = newVer1.x;
+              v71 = v73;
+              v120 = v73;
             }
-            v84 = v5->MeshVertices.Size;
-            LODWORD(retaddr) = v5->MeshVertices.Size;
-            v85 = *(_WORD *)(v68 + 16) & 0x7FFF;
-            v86 = v121->style & 0x7FFF;
+            v78 = this->MeshVertices.Size;
+            LODWORD(retaddr) = v78;
+            v79 = *(_WORD *)(v65 + 16) & 0x7FFF;
+            v80 = v116->style & 0x7FFF;
             newVer1.Idx = -1;
-            *(_DWORD *)&v119.Flags = -65536;
+            *(_DWORD *)&v114.Flags = -65536;
             *(_DWORD *)&newVer1.Flags = -65536;
-            newVer1.Styles[1] = v85;
-            newVer1.Styles[0] = v85;
-            v119.Styles[1] = v86;
-            v119.Styles[0] = v86;
-            if ( v85 != v86 )
-              Scaleform::Render::Tessellator::setMesh(v5, v85, v86);
-            v87 = v5->MeshVertices.Size >> 4;
-            if ( v87 >= v5->MeshVertices.NumPages )
+            newVer1.Styles[1] = v79;
+            newVer1.Styles[0] = v79;
+            v114.Styles[1] = v80;
+            v114.Styles[0] = v80;
+            if ( v79 != v80 )
+              Scaleform::Render::Tessellator::setMesh(this, v79, v80);
+            v81 = this->MeshVertices.Size >> 4;
+            if ( v81 >= this->MeshVertices.NumPages )
               Scaleform::Render::ArrayPaged<Scaleform::Render::TessVertex,4,16>::allocPage(
-                &v5->MeshVertices,
-                v5->MeshVertices.Size >> 4);
-            v88 = newVer1.Idx;
-            v89 = *(_DWORD *)newVer1.Styles;
-            v90 = v5->MeshVertices.Size & 0xF;
-            v91 = v5->MeshVertices.Pages[v87];
-            v91[v90].x = v78;
-            v91[v90].y = v77;
-            v91[v90].Idx = v88;
-            v92 = *(_DWORD *)&newVer1.Flags;
-            *(_DWORD *)v91[v90].Styles = v89;
-            *(_DWORD *)&v91[v90].Flags = v92;
-            ++v5->MeshVertices.Size;
-            if ( v74 )
+                &this->MeshVertices,
+                this->MeshVertices.Size >> 4);
+            v82 = newVer1.Idx;
+            v83 = *(_DWORD *)newVer1.Styles;
+            v84 = this->MeshVertices.Size & 0xF;
+            v85 = this->MeshVertices.Pages[v81];
+            v85[v84].x = v75;
+            v85[v84].y = v74;
+            v85[v84].Idx = v82;
+            v86 = *(_DWORD *)&newVer1.Flags;
+            *(_DWORD *)v85[v84].Styles = v83;
+            *(_DWORD *)&v85[v84].Flags = v86;
+            ++this->MeshVertices.Size;
+            if ( v71 )
             {
-              v93 = v5->MeshVertices.Size >> 4;
-              LODWORD(retaddr) = v5->MeshVertices.Size;
-              if ( v93 >= v5->MeshVertices.NumPages )
+              v87 = this->MeshVertices.Size >> 4;
+              LODWORD(retaddr) = this->MeshVertices.Size;
+              if ( v87 >= this->MeshVertices.NumPages )
                 Scaleform::Render::ArrayPaged<Scaleform::Render::TessVertex,4,16>::allocPage(
-                  &v5->MeshVertices,
-                  v5->MeshVertices.Size >> 4);
-              v94 = v5->MeshVertices.Pages[v93];
-              v95 = v5->MeshVertices.Size & 0xF;
-              v94[v95].x = v119.x;
-              v94[v95].y = v119.y;
-              v96 = *(_DWORD *)v119.Styles;
-              v94[v95].Idx = -1;
-              *(_DWORD *)v94[v95].Styles = v96;
-              *(_DWORD *)&v94[v95].Flags = *(_DWORD *)&v119.Flags;
-              ++v5->MeshVertices.Size;
+                  &this->MeshVertices,
+                  this->MeshVertices.Size >> 4);
+              v88 = this->MeshVertices.Pages[v87];
+              v89 = this->MeshVertices.Size & 0xF;
+              v88[v89].x = v114.x;
+              v88[v89].y = v114.y;
+              v90 = *(_DWORD *)v114.Styles;
+              v88[v89].Idx = -1;
+              *(_DWORD *)v88[v89].Styles = v90;
+              *(_DWORD *)&v88[v89].Flags = *(_DWORD *)&v114.Flags;
+              ++this->MeshVertices.Size;
             }
-            v97 = v32->Size;
-            v98 = v97 - 1;
-            v99 = v97 >> 4;
-            v100 = v98;
-            v101 = v98 & 0xF;
-            v102 = v32->Pages[v100 >> 4];
-            if ( v99 >= v32->NumPages )
-              Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16>::allocPage(v32, v99);
-            v32->Pages[v99][v32->Size & 0xF] = v102[v101];
-            v103 = ++v32->Size;
-            if ( v125 )
+            v91 = p_StarVertices->Size;
+            v92 = v91 - 1;
+            v93 = v91 >> 4;
+            v94 = v92;
+            v95 = v92 & 0xF;
+            v96 = p_StarVertices->Pages[v94 >> 4];
+            if ( v93 >= p_StarVertices->NumPages )
+              Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16>::allocPage(p_StarVertices, v93);
+            p_StarVertices->Pages[v93][p_StarVertices->Size & 0xF] = v96[v95];
+            v97 = ++p_StarVertices->Size;
+            if ( v120 )
             {
-              v104 = v103 - 1;
-              v105 = v103 >> 4;
-              v106 = v104;
-              v107 = v104 & 0xF;
-              v108 = v32->Pages[v106 >> 4];
-              if ( v105 >= v32->NumPages )
-                Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16>::allocPage(v32, v105);
-              v32->Pages[v105][v32->Size & 0xF] = v108[v107];
-              ++v32->Size;
-              v5->StarVertices.Pages[(v5->StarVertices.Size - 3) >> 4][(LODWORD(v5->StarVertices.Size) - 3) & 0xF].starVer = v84;
-              v109 = retaddr;
-              v5->StarVertices.Pages[(v5->StarVertices.Size - 2) >> 4][(LODWORD(v5->StarVertices.Size) - 2) & 0xF].starVer = retaddr;
+              v98 = v97 - 1;
+              v99 = v97 >> 4;
+              v100 = v98;
+              v101 = v98 & 0xF;
+              v102 = p_StarVertices->Pages[v100 >> 4];
+              if ( v99 >= p_StarVertices->NumPages )
+                Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16>::allocPage(p_StarVertices, v99);
+              p_StarVertices->Pages[v99][p_StarVertices->Size & 0xF] = v102[v101];
+              ++p_StarVertices->Size;
+              this->StarVertices.Pages[(this->StarVertices.Size - 3) >> 4][(LODWORD(this->StarVertices.Size) - 3) & 0xF].starVer = v78;
+              v103 = retaddr;
+              this->StarVertices.Pages[(this->StarVertices.Size - 2) >> 4][(LODWORD(this->StarVertices.Size) - 2) & 0xF].starVer = retaddr;
             }
             else
             {
-              v109 = retaddr;
-              v5->StarVertices.Pages[(v5->StarVertices.Size - 2) >> 4][(LODWORD(v5->StarVertices.Size) - 2) & 0xF].starVer = v84;
+              v103 = retaddr;
+              this->StarVertices.Pages[(this->StarVertices.Size - 2) >> 4][(LODWORD(this->StarVertices.Size) - 2) & 0xF].starVer = v78;
             }
-            LODWORD(v124) = v109;
-            v110 = v5->OuterEdges.Size >> 4;
-            if ( v110 >= v5->OuterEdges.NumPages )
+            LODWORD(v119) = v103;
+            v104 = this->OuterEdges.Size >> 4;
+            if ( v104 >= this->OuterEdges.NumPages )
               Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->OuterEdges,
-                v5->OuterEdges.Size >> 4);
-            v111 = v5->OuterEdges.Pages[v110];
-            v112 = v5->OuterEdges.Size & 0xF;
-            v111[v112].edge = v121;
-            v113 = v124;
-            LODWORD(v124) = v84 | 0x40000000;
-            *(_QWORD *)&v111[v112].outVer = v113;
-            v114 = ++v5->OuterEdges.Size >> 4;
-            if ( v114 >= v5->OuterEdges.NumPages )
+                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->OuterEdges,
+                this->OuterEdges.Size >> 4);
+            v105 = this->OuterEdges.Pages[v104];
+            v106 = this->OuterEdges.Size & 0xF;
+            v105[v106].edge = v116;
+            v107 = v119;
+            LODWORD(v119) = v78 | 0x40000000;
+            *(_QWORD *)&v105[v106].outVer = v107;
+            v108 = ++this->OuterEdges.Size >> 4;
+            if ( v108 >= this->OuterEdges.NumPages )
               Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::InnerQuadType,4,16>::allocPage(
-                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&v5->OuterEdges,
-                v5->OuterEdges.Size >> 4);
-            v115 = v5->OuterEdges.Pages[v114];
-            v116 = v5->OuterEdges.Size & 0xF;
-            v115[v116].edge = v122;
-            *(_QWORD *)&v115[v116].outVer = v124;
-            ++v5->OuterEdges.Size;
+                (Scaleform::Render::ArrayPaged<Scaleform::Render::StrokeSorter::VertexType,4,16> *)&this->OuterEdges,
+                this->OuterEdges.Size >> 4);
+            v109 = this->OuterEdges.Pages[v108];
+            v110 = this->OuterEdges.Size & 0xF;
+            v109[v110].edge = v117;
+            *(_QWORD *)&v109[v110].outVer = v119;
+            ++this->OuterEdges.Size;
           }
-          v29 = v123;
+          v29 = v118;
         }
-        while ( v123 < v5->StartFan.Size );
-        v31 = HIDWORD(newVer2);
+        while ( v118 < this->StartFan.Size );
+        Size = newVer2_4;
       }
-      if ( v31 + 3 > v5->StarVertices.Size && v31 < v5->StarVertices.Size )
-        v5->StarVertices.Size = v31;
+      if ( Size + 3 > this->StarVertices.Size && Size < this->StarVertices.Size )
+        this->StarVertices.Size = Size;
     }
     else
     {
-      v14 = v5->EdgeFans.Array;
+      v14 = this->EdgeFans.Array;
       newVer1.Idx = -1;
       *(_DWORD *)&newVer1.Flags = -65534;
-      v15 = v5->MeshVertices.Pages[(unsigned __int64)(v14[v7].cntVer->srcVer & 0xFFFFFFF) >> 4];
+      v15 = this->MeshVertices.Pages[(unsigned __int64)(v14[v7].cntVer->srcVer & 0xFFFFFFF) >> 4];
       v16 = v15[v14[v7].cntVer->srcVer & 0xF].x;
       v17 = v15[v14[v7].cntVer->srcVer & 0xF].y;
       newVer1.Styles[1] = v14[v7].style & 0x7FFF;
@@ -8533,27 +8273,28 @@ LABEL_17:
         v19 = v4 - v7;
         do
         {
-          ++v18;
-          v5->EdgeFans.Array[v18 - 1].cntVer->aaVer = v5->MeshVertices.Size;
+          this->EdgeFans.Array[v18++].cntVer->aaVer = this->MeshVertices.Size;
           --v19;
         }
         while ( v19 );
       }
-      v20 = &v5->MeshVertices;
-      v21 = v20->Size >> 4;
-      if ( v21 >= v20->NumPages )
-        Scaleform::Render::ArrayPaged<Scaleform::Render::TessVertex,4,16>::allocPage(v20, v20->Size >> 4);
+      p_MeshVertices = &this->MeshVertices;
+      v21 = p_MeshVertices->Size >> 4;
+      if ( v21 >= p_MeshVertices->NumPages )
+        Scaleform::Render::ArrayPaged<Scaleform::Render::TessVertex,4,16>::allocPage(
+          p_MeshVertices,
+          p_MeshVertices->Size >> 4);
       v22 = newVer1.Idx;
       v23 = *(_DWORD *)newVer1.Styles;
-      v24 = v20->Size & 0xF;
-      v25 = v20->Pages[v21];
+      v24 = p_MeshVertices->Size & 0xF;
+      v25 = p_MeshVertices->Pages[v21];
       v25[v24].x = v16;
       v25[v24].y = v17;
       v25[v24].Idx = v22;
       v26 = *(_DWORD *)&newVer1.Flags;
       *(_DWORD *)v25[v24].Styles = v23;
       *(_DWORD *)&v25[v24].Flags = v26;
-      ++v20->Size;
+      ++p_MeshVertices->Size;
     }
   }
 }
@@ -8562,169 +8303,155 @@ LABEL_17:
 // RVA: 0x9E0940
 void __fastcall Scaleform::Render::Tessellator::emitTriangles(Scaleform::Render::Tessellator *this)
 {
-  unsigned int v1; // er8
-  Scaleform::Render::Tessellator *v2; // r13
+  unsigned int v1; // r8d
   unsigned __int64 v3; // rdi
   Scaleform::Render::Tessellator::MonotoneType *v4; // rdi
-  unsigned int v5; // er9
-  unsigned int v6; // er12
-  signed int v7; // esi
-  unsigned int v8; // er14
+  unsigned int prevIdx2; // r12d
+  int v6; // esi
+  unsigned int v7; // r14d
   int flags; // esi
-  signed __int64 v10; // r15
-  signed __int64 v11; // rbx
-  __int64 v12; // rax
-  int v13; // ecx
-  __int64 v14; // rax
-  unsigned __int64 v15; // rdx
-  unsigned __int64 v16; // rcx
-  signed __int64 v17; // rdx
-  Scaleform::Render::Tessellator::InnerQuadType *v18; // rax
-  Scaleform::Render::Tessellator::EdgeAAType *v19; // r14
-  Scaleform::Render::Tessellator::EdgeAAType *v20; // r15
-  int v21; // ebx
-  int v22; // edi
-  unsigned int v23; // er10
-  signed __int64 v24; // rsi
-  Scaleform::Render::TessMesh *v25; // r8
-  unsigned int v26; // ecx
-  Scaleform::Render::Tessellator::EdgeAAType *v27; // rax
-  Scaleform::Render::Tessellator::MonoVertexType *v28; // rdx
-  signed int v29; // er14
-  int v30; // eax
-  unsigned int v31; // er15
-  int v32; // er14
-  signed __int64 v33; // rsi
-  Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::ArrayType *v34; // rbx
-  unsigned __int64 v35; // rdi
-  signed __int64 v36; // rdx
-  Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::ArrayType *v37; // rbx
-  unsigned __int64 v38; // rdi
-  signed __int64 v39; // rdx
-  signed __int64 v40; // rsi
-  unsigned __int64 v41; // r14
-  unsigned int v42; // edx
-  unsigned __int64 v43; // rbx
-  Scaleform::Render::Tessellator::OuterEdgeType **v44; // r12
-  unsigned int *v45; // rbx
-  __int64 v46; // r8
-  __int64 v47; // r10
-  unsigned __int64 v48; // r11
-  __int64 v49; // rsi
-  unsigned __int64 *v50; // rax
-  bool v51; // cf
-  int v52; // er12
-  unsigned int v53; // er14
-  unsigned int v54; // er15
-  __int64 v55; // rdi
-  unsigned int v56; // esi
-  unsigned int v57; // eax
-  unsigned int *v58; // rdi
-  unsigned int v59; // eax
-  signed __int64 v60; // r14
-  int v61; // er12
-  Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::ArrayType *v62; // rbx
-  unsigned __int64 v63; // rdi
-  Scaleform::Render::Tessellator::TriangleType *v64; // rdx
-  Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::ArrayType *v65; // rbx
-  unsigned __int64 v66; // rdi
-  Scaleform::Render::Tessellator::TriangleType *v67; // rdx
-  unsigned __int64 v68; // rdx
-  unsigned int v69; // er12
-  Scaleform::Render::Tessellator::StarVertexType **v70; // r8
-  unsigned __int64 v71; // r9
-  unsigned __int64 v72; // rax
-  unsigned int v73; // er14
-  Scaleform::Render::Tessellator::StarVertexType *v74; // r11
-  signed __int64 v75; // rcx
-  signed __int64 v76; // rax
-  unsigned int *v77; // r11
-  Scaleform::Render::TessVertex **v78; // r10
-  unsigned int v79; // edx
-  unsigned int v80; // er8
-  unsigned int v81; // ecx
-  unsigned __int64 v82; // rax
-  signed __int64 v83; // rcx
-  Scaleform::Render::TessVertex *v84; // rax
-  unsigned __int64 v85; // rdi
-  signed __int64 v86; // r9
-  Scaleform::Render::TessVertex *v87; // rax
-  unsigned __int64 v88; // r15
-  unsigned int v89; // edx
-  Scaleform::Render::TessVertex *v90; // rax
-  unsigned int v91; // esi
-  unsigned int v92; // ebx
-  unsigned int v93; // ecx
-  unsigned __int64 v94; // rcx
-  Scaleform::Render::Tessellator::StarVertexType **v95; // rdx
-  unsigned int v96; // ecx
-  Scaleform::Render::TessVertex **v97; // r8
-  unsigned __int64 v98; // rax
-  signed __int64 v99; // rcx
-  Scaleform::Render::TessVertex *v100; // rax
-  unsigned int v101; // edi
-  int v102; // er12
-  Scaleform::Render::TessVertex *v103; // rax
-  unsigned int v104; // er15
-  int v105; // esi
-  unsigned int v106; // eax
-  unsigned int v107; // er10
-  Scaleform::Render::TessMesh *v108; // rbx
-  unsigned int v109; // eax
-  unsigned int v110; // edx
-  unsigned int v111; // eax
-  Scaleform::Render::Tessellator::StarVertexType **v112; // rcx
-  unsigned int v113; // er10
-  unsigned int v114; // er11
-  Scaleform::Render::TessMesh *v115; // rcx
-  unsigned int *v116; // rdx
-  unsigned int v117; // er8
-  int v118; // er12
-  int v119; // edi
-  int v120; // er15
-  unsigned int v121; // eax
-  unsigned int v122; // eax
-  bool v123; // zf
-  unsigned int v124; // ecx
-  unsigned int v125; // ecx
-  unsigned int v126; // er12
-  signed __int64 v127; // rsi
-  Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::ArrayType *v128; // rdi
-  unsigned __int64 v129; // rbx
-  signed __int64 v130; // rdx
-  unsigned int v131; // er12
-  int v132; // eax
-  int v133; // ecx
-  int v134; // ecx
-  int v135; // eax
-  unsigned int v136; // eax
-  Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::ArrayType *v137; // rbx
-  unsigned __int64 v138; // rdi
-  signed __int64 v139; // rdx
+  __int64 v9; // r15
+  Scaleform::Render::Tessellator::TriangleType *v10; // rbx
+  Scaleform::Render::Tessellator::MonoVertexType *v11; // rax
+  unsigned int aaVer; // ecx
+  Scaleform::Render::Tessellator::MonoVertexType *v13; // rax
+  unsigned __int64 v14; // rdx
+  unsigned __int64 v15; // rcx
+  __int64 v16; // rdx
+  Scaleform::Render::Tessellator::InnerQuadType *v17; // rax
+  Scaleform::Render::Tessellator::EdgeAAType *e1; // r14
+  Scaleform::Render::Tessellator::EdgeAAType *e2; // r15
+  int v20; // ebx
+  int v21; // edi
+  unsigned int v22; // r10d
+  __int64 v23; // rsi
+  Scaleform::Render::TessMesh *v24; // r8
+  unsigned int v25; // ecx
+  Scaleform::Render::Tessellator::EdgeAAType *v26; // rax
+  Scaleform::Render::Tessellator::MonoVertexType *cntVer; // rdx
+  int v28; // r14d
+  unsigned int v29; // r15d
+  int v30; // r14d
+  __int64 v31; // rsi
+  Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::ArrayType *v32; // rbx
+  unsigned __int64 v33; // rdi
+  __int64 v34; // rdx
+  Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::ArrayType *v35; // rbx
+  unsigned __int64 v36; // rdi
+  __int64 v37; // rdx
+  Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::OuterEdgeType,4,16> *p_OuterEdges; // rsi
+  unsigned __int64 Size; // r14
+  unsigned int v40; // edx
+  unsigned __int64 v41; // rbx
+  Scaleform::Render::Tessellator::OuterEdgeType **Pages; // r12
+  unsigned int *v43; // rbx
+  __int64 v44; // r8
+  __int64 v45; // r10
+  Scaleform::Render::Tessellator::MonoVertexType *v46; // r11
+  Scaleform::Render::Tessellator::OuterEdgeType **v47; // rsi
+  Scaleform::Render::Tessellator::EdgeAAType *edge; // rax
+  bool v49; // cf
+  int v50; // r12d
+  unsigned int v51; // r14d
+  unsigned int v52; // r15d
+  __int64 v53; // rdi
+  unsigned int v54; // esi
+  unsigned int v55; // eax
+  __int64 v56; // r14
+  int v57; // r12d
+  Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::ArrayType *v58; // rbx
+  unsigned __int64 v59; // rdi
+  Scaleform::Render::Tessellator::TriangleType *v60; // rdx
+  Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::ArrayType *v61; // rbx
+  unsigned __int64 v62; // rdi
+  Scaleform::Render::Tessellator::TriangleType *v63; // rdx
+  unsigned __int64 v64; // rdx
+  unsigned int v65; // r12d
+  Scaleform::Render::Tessellator::StarVertexType **v66; // r8
+  unsigned __int64 v67; // r9
+  unsigned __int64 v68; // rax
+  unsigned int v69; // r14d
+  Scaleform::Render::Tessellator::StarVertexType *v70; // r11
+  __int64 v71; // rcx
+  __int64 v72; // rax
+  unsigned int *v73; // r11
+  Scaleform::Render::TessVertex **v74; // r10
+  unsigned int starVer; // edx
+  unsigned int v76; // r8d
+  unsigned __int64 v77; // rax
+  __int64 v78; // rcx
+  Scaleform::Render::TessVertex *v79; // rax
+  unsigned __int64 v80; // rdi
+  Scaleform::Render::TessVertex *v81; // r9
+  Scaleform::Render::TessVertex *v82; // rax
+  unsigned __int64 v83; // r15
+  unsigned int v84; // edx
+  Scaleform::Render::TessVertex *v85; // rax
+  unsigned int v86; // esi
+  unsigned int v87; // ebx
+  unsigned int v88; // ecx
+  unsigned __int64 v89; // rcx
+  Scaleform::Render::Tessellator::StarVertexType **v90; // rdx
+  Scaleform::Render::TessVertex **v91; // r8
+  Scaleform::Render::TessVertex *v92; // rax
+  unsigned int v93; // edi
+  int v94; // r12d
+  Scaleform::Render::TessVertex *v95; // rax
+  unsigned int v96; // r15d
+  int v97; // esi
+  unsigned int v98; // r10d
+  Scaleform::Render::TessMesh *v99; // rbx
+  unsigned int v100; // eax
+  unsigned int v101; // edx
+  unsigned int v102; // eax
+  Scaleform::Render::Tessellator::StarVertexType **v103; // rcx
+  unsigned int v104; // r10d
+  unsigned int v105; // r11d
+  Scaleform::Render::TessMesh *v106; // rax
+  unsigned int *Array; // rdx
+  unsigned int v108; // r8d
+  int v109; // r12d
+  int v110; // edi
+  int v111; // r15d
+  unsigned int v112; // eax
+  unsigned int v113; // eax
+  bool v114; // zf
+  unsigned int v115; // ecx
+  unsigned int v116; // ecx
+  unsigned int v117; // r12d
+  __int64 v118; // rsi
+  Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::ArrayType *v119; // rdi
+  unsigned __int64 v120; // rbx
+  __int64 v121; // rdx
+  unsigned int v122; // r12d
+  int v123; // ecx
+  int v124; // eax
+  unsigned int v125; // eax
+  Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::ArrayType *v126; // rbx
+  unsigned __int64 v127; // rdi
+  __int64 v128; // rdx
   unsigned int ver; // [rsp+40h] [rbp-59h]
   unsigned int vera; // [rsp+40h] [rbp-59h]
   unsigned int verb; // [rsp+40h] [rbp-59h]
-  __int128 v143; // [rsp+48h] [rbp-51h]
-  Scaleform::Render::Tessellator::MonoVertexType *v144; // [rsp+58h] [rbp-41h]
-  Scaleform::Render::Tessellator::MonoVertexType *v145; // [rsp+60h] [rbp-39h]
-  __int64 v146; // [rsp+60h] [rbp-39h]
-  Scaleform::Render::Tessellator::MonoVertexType *v147; // [rsp+68h] [rbp-31h]
-  unsigned int v148; // [rsp+68h] [rbp-31h]
-  unsigned int v149; // [rsp+68h] [rbp-31h]
-  unsigned int v150; // [rsp+70h] [rbp-29h]
-  unsigned int v151; // [rsp+74h] [rbp-25h]
-  unsigned int v152; // [rsp+78h] [rbp-21h]
-  __int64 v153; // [rsp+80h] [rbp-19h]
-  signed __int64 v154; // [rsp+88h] [rbp-11h]
-  unsigned __int64 v155; // [rsp+90h] [rbp-9h]
-  signed __int64 v156; // [rsp+98h] [rbp-1h]
-  signed __int64 v157; // [rsp+A0h] [rbp+7h]
-  unsigned __int64 v158; // [rsp+A8h] [rbp+Fh]
+  __int128 v132; // [rsp+48h] [rbp-51h]
+  Scaleform::Render::Tessellator::MonoVertexType *v133; // [rsp+58h] [rbp-41h]
+  Scaleform::Render::Tessellator::MonoVertexType *rayVer; // [rsp+60h] [rbp-39h]
+  __int64 v135; // [rsp+60h] [rbp-39h]
+  Scaleform::Render::Tessellator::MonoVertexType *v136; // [rsp+68h] [rbp-31h]
+  unsigned int v137; // [rsp+68h] [rbp-31h]
+  unsigned int v138; // [rsp+68h] [rbp-31h]
+  unsigned int v139; // [rsp+70h] [rbp-29h]
+  unsigned int v140; // [rsp+74h] [rbp-25h]
+  unsigned int v141; // [rsp+78h] [rbp-21h]
+  __int64 v142; // [rsp+80h] [rbp-19h]
+  __int64 v143; // [rsp+88h] [rbp-11h]
+  unsigned __int64 v144; // [rsp+90h] [rbp-9h]
+  __int64 v145; // [rsp+98h] [rbp-1h]
+  unsigned __int64 v146; // [rsp+A8h] [rbp+Fh]
   unsigned int style2; // [rsp+100h] [rbp+67h]
   unsigned int style2a; // [rsp+100h] [rbp+67h]
   unsigned int style2b; // [rsp+100h] [rbp+67h]
   unsigned int style2c; // [rsp+100h] [rbp+67h]
-  unsigned int style2d; // [rsp+100h] [rbp+67h]
   unsigned int meshIdx; // [rsp+108h] [rbp+6Fh]
   unsigned int meshIdxa; // [rsp+108h] [rbp+6Fh]
   unsigned int meshIdxb; // [rsp+108h] [rbp+6Fh]
@@ -8734,503 +8461,483 @@ void __fastcall Scaleform::Render::Tessellator::emitTriangles(Scaleform::Render:
   int style1b; // [rsp+110h] [rbp+77h]
   unsigned int style1c; // [rsp+110h] [rbp+77h]
   unsigned int style1d; // [rsp+110h] [rbp+77h]
-  Scaleform::Render::Tessellator::MonoVertexType *v173; // [rsp+118h] [rbp+7Fh]
-  signed __int64 v174; // [rsp+118h] [rbp+7Fh]
-  unsigned int v175; // [rsp+118h] [rbp+7Fh]
-  unsigned int v176; // [rsp+118h] [rbp+7Fh]
+  Scaleform::Render::Tessellator::MonoVertexType *v160; // [rsp+118h] [rbp+7Fh]
+  __int64 v161; // [rsp+118h] [rbp+7Fh]
+  unsigned int v162; // [rsp+118h] [rbp+7Fh]
+  unsigned int v163; // [rsp+118h] [rbp+7Fh]
 
   v1 = 0;
-  v2 = this;
   style2 = 0;
   if ( this->Monotones.Size )
   {
     v3 = 0i64;
     do
     {
-      v4 = &v2->Monotones.Pages[v3 >> 4][v3 & 0xF];
-      v5 = v4->d.m.prevIdx1;
-      if ( v5 )
+      v4 = &this->Monotones.Pages[v3 >> 4][v3 & 0xF];
+      if ( v4->d.m.prevIdx1 )
       {
-        v6 = v4->d.m.prevIdx2;
+        prevIdx2 = v4->d.m.prevIdx2;
+        v6 = 0;
+        if ( v4->style == this->Meshes.Pages[(unsigned __int64)prevIdx2 >> 4][prevIdx2 & 0xF].Style1 )
+          v6 = 8;
         v7 = 0;
-        if ( v4->style == v2->Meshes.Pages[(unsigned __int64)v6 >> 4][v4->d.m.prevIdx2 & 0xF].Style1 )
-          v7 = 8;
-        v8 = 0;
-        flags = v7 | 2;
-        if ( v5 )
+        flags = v6 | 2;
+        v9 = v4->d.m.prevIdx2;
+        do
         {
-          v10 = v4->d.m.prevIdx2;
-          do
-          {
-            v11 = (signed __int64)&v2->MeshTriangles.Arrays[v10].Pages[(unsigned __int64)(v8 + v4->d.m.lastIdx) >> 4][((_BYTE)v8 + LOBYTE(v4->d.m.lastIdx)) & 0xF];
-            *(_DWORD *)(*(_QWORD *)v11 + 4i64) = Scaleform::Render::Tessellator::emitVertex(
-                                                   v2,
-                                                   v6,
-                                                   *(_DWORD *)(*(_QWORD *)v11 + 4i64),
-                                                   v4->style,
-                                                   flags);
-            *(_DWORD *)(*(_QWORD *)(v11 + 8) + 4i64) = Scaleform::Render::Tessellator::emitVertex(
-                                                         v2,
-                                                         v6,
-                                                         *(_DWORD *)(*(_QWORD *)(v11 + 8) + 4i64),
-                                                         v4->style,
-                                                         flags);
-            ++v8;
-            *(_DWORD *)(*(_QWORD *)(v11 + 16) + 4i64) = Scaleform::Render::Tessellator::emitVertex(
-                                                          v2,
-                                                          v6,
-                                                          *(_DWORD *)(*(_QWORD *)(v11 + 16) + 4i64),
-                                                          v4->style,
-                                                          flags);
-            v12 = *(_QWORD *)(v11 + 8);
-            *(_DWORD *)v11 = *(_DWORD *)(*(_QWORD *)v11 + 4i64) & 0xFFFFFFF;
-            v13 = *(_DWORD *)(v12 + 4);
-            v14 = *(_QWORD *)(v11 + 16);
-            *(_DWORD *)(v11 + 4) = v13 & 0xFFFFFFF;
-            *(_DWORD *)(v11 + 8) = *(_DWORD *)(v14 + 4) & 0xFFFFFFF;
-          }
-          while ( v8 < v4->d.m.prevIdx1 );
-          v1 = style2;
+          v10 = &this->MeshTriangles.Arrays[v9].Pages[(unsigned __int64)(v7 + v4->d.m.lastIdx) >> 4][((_BYTE)v7 + LOBYTE(v4->d.m.lastIdx)) & 0xF];
+          v10->d.m.v1->aaVer = Scaleform::Render::Tessellator::emitVertex(
+                                 this,
+                                 prevIdx2,
+                                 v10->d.m.v1->aaVer,
+                                 v4->style,
+                                 flags);
+          v10->d.m.v2->aaVer = Scaleform::Render::Tessellator::emitVertex(
+                                 this,
+                                 prevIdx2,
+                                 v10->d.m.v2->aaVer,
+                                 v4->style,
+                                 flags);
+          ++v7;
+          v10->d.m.v3->aaVer = Scaleform::Render::Tessellator::emitVertex(
+                                 this,
+                                 prevIdx2,
+                                 v10->d.m.v3->aaVer,
+                                 v4->style,
+                                 flags);
+          v11 = v10->d.m.v2;
+          v10->d.t.v1 = v10->d.m.v1->aaVer & 0xFFFFFFF;
+          aaVer = v11->aaVer;
+          v13 = v10->d.m.v3;
+          v10->d.t.v2 = aaVer & 0xFFFFFFF;
+          v10->d.t.v3 = v13->aaVer & 0xFFFFFFF;
         }
+        while ( v7 < v4->d.m.prevIdx1 );
+        v1 = style2;
       }
       v3 = ++v1;
       style2 = v1;
     }
-    while ( v1 < v2->Monotones.Size );
+    while ( v1 < this->Monotones.Size );
   }
   style2a = 0;
-  if ( v2->InnerQuads.Size )
+  if ( this->InnerQuads.Size )
   {
-    v15 = 0i64;
+    v14 = 0i64;
     do
     {
-      v16 = v15;
-      v17 = v15 & 0xF;
-      v18 = v2->InnerQuads.Pages[v16 >> 4];
-      v19 = v18[v17].e1;
-      v20 = v18[v17].e2;
-      v21 = v19->style & 0x7FFF;
-      v22 = v20->style & 0x7FFF;
-      v23 = Scaleform::Render::Tessellator::setMesh(v2, v21, v22);
-      meshIdx = v23;
-      v24 = v23;
-      v25 = &v2->Meshes.Pages[(unsigned __int64)v23 >> 4][v23 & 0xF];
-      v26 = v25->Style1;
-      if ( v26 && v21 != v26 )
+      v15 = v14;
+      v16 = v14 & 0xF;
+      v17 = this->InnerQuads.Pages[v15 >> 4];
+      e1 = v17[v16].e1;
+      e2 = v17[v16].e2;
+      v20 = e1->style & 0x7FFF;
+      v21 = e2->style & 0x7FFF;
+      v22 = Scaleform::Render::Tessellator::setMesh(this, v20, v21);
+      meshIdx = v22;
+      v23 = v22;
+      v24 = &this->Meshes.Pages[(unsigned __int64)v22 >> 4][v22 & 0xF];
+      v25 = v24->Style1;
+      if ( v25 && v20 != v25 )
       {
-        v27 = v19;
-        v19 = v20;
-        v20 = v27;
-        LODWORD(v27) = v21;
-        v21 = v22;
-        v22 = (signed int)v27;
+        v26 = e1;
+        e1 = e2;
+        e2 = v26;
+        LODWORD(v26) = v20;
+        v20 = v21;
+        v21 = (int)v26;
       }
-      v28 = v19->cntVer;
-      v145 = v19->rayVer;
-      v29 = 0;
-      v173 = v20->rayVer;
-      style1 = v28;
-      v30 = v25->Flags1 ^ v25->Flags2;
-      v147 = v20->cntVer;
-      v31 = v21;
-      if ( _bittest(&v30, 0xFu) )
+      cntVer = e1->cntVer;
+      rayVer = e1->rayVer;
+      v28 = 0;
+      v160 = e2->rayVer;
+      style1 = cntVer;
+      v136 = e2->cntVer;
+      v29 = v20;
+      if ( ((v24->Flags1 ^ v24->Flags2) & 0x8000) != 0 )
       {
-        v31 = v22;
-        v29 = 32;
+        v29 = v21;
+        v28 = 32;
       }
-      v32 = v29 | 0xA;
-      v28->aaVer = Scaleform::Render::Tessellator::emitVertex(v2, v23, v28->aaVer, v21, v31, v32, 0);
-      v145->aaVer = Scaleform::Render::Tessellator::emitVertex(v2, meshIdx, v145->aaVer, v21, v31, v32, 0);
-      v147->aaVer = Scaleform::Render::Tessellator::emitVertex(v2, meshIdx, v147->aaVer, v22, 2u);
-      v33 = v24;
-      v173->aaVer = Scaleform::Render::Tessellator::emitVertex(v2, meshIdx, v173->aaVer, v22, 2u);
-      v34 = &v2->MeshTriangles.Arrays[v33];
-      LODWORD(v143) = style1->aaVer & 0xFFFFFFF;
-      v35 = v34->Size >> 4;
-      DWORD1(v143) = v145->aaVer & 0xFFFFFFF;
-      DWORD2(v143) = v147->aaVer & 0xFFFFFFF;
-      if ( v35 >= v34->NumPages )
+      v30 = v28 | 0xA;
+      cntVer->aaVer = Scaleform::Render::Tessellator::emitVertex(this, v22, cntVer->aaVer, v20, v29, v30, 0);
+      rayVer->aaVer = Scaleform::Render::Tessellator::emitVertex(this, meshIdx, rayVer->aaVer, v20, v29, v30, 0);
+      v136->aaVer = Scaleform::Render::Tessellator::emitVertex(this, meshIdx, v136->aaVer, v21, 2u);
+      v31 = v23;
+      v160->aaVer = Scaleform::Render::Tessellator::emitVertex(this, meshIdx, v160->aaVer, v21, 2u);
+      v32 = &this->MeshTriangles.Arrays[v31];
+      LODWORD(v132) = style1->aaVer & 0xFFFFFFF;
+      v33 = v32->Size >> 4;
+      DWORD1(v132) = rayVer->aaVer & 0xFFFFFFF;
+      DWORD2(v132) = v136->aaVer & 0xFFFFFFF;
+      if ( v33 >= v32->NumPages )
         Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::allocPage(
-          &v2->MeshTriangles,
-          v34,
-          v35);
-      v36 = (signed __int64)&v34->Pages[v35][v34->Size & 0xF];
-      *(_OWORD *)v36 = v143;
-      *(_QWORD *)(v36 + 16) = v144;
-      ++v2->MeshTriangles.Arrays[v33].Size;
-      v37 = &v2->MeshTriangles.Arrays[v33];
-      LODWORD(v143) = v173->aaVer & 0xFFFFFFF;
-      v38 = v37->Size >> 4;
-      DWORD1(v143) = v147->aaVer & 0xFFFFFFF;
-      DWORD2(v143) = v145->aaVer & 0xFFFFFFF;
-      if ( v38 >= v37->NumPages )
+          &this->MeshTriangles,
+          v32,
+          v33);
+      v34 = (__int64)&v32->Pages[v33][v32->Size & 0xF];
+      *(_OWORD *)v34 = v132;
+      *(_QWORD *)(v34 + 16) = v133;
+      ++this->MeshTriangles.Arrays[v31].Size;
+      v35 = &this->MeshTriangles.Arrays[v31];
+      LODWORD(v132) = v160->aaVer & 0xFFFFFFF;
+      v36 = v35->Size >> 4;
+      DWORD1(v132) = v136->aaVer & 0xFFFFFFF;
+      DWORD2(v132) = rayVer->aaVer & 0xFFFFFFF;
+      if ( v36 >= v35->NumPages )
         Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::allocPage(
-          &v2->MeshTriangles,
-          v37,
-          v38);
-      v39 = (signed __int64)&v37->Pages[v38][v37->Size & 0xF];
-      *(_OWORD *)v39 = v143;
-      *(_QWORD *)(v39 + 16) = v144;
-      ++v2->MeshTriangles.Arrays[v33].Size;
-      v15 = ++style2a;
+          &this->MeshTriangles,
+          v35,
+          v36);
+      v37 = (__int64)&v35->Pages[v36][v35->Size & 0xF];
+      *(_OWORD *)v37 = v132;
+      *(_QWORD *)(v37 + 16) = v133;
+      ++this->MeshTriangles.Arrays[v31].Size;
+      v14 = ++style2a;
     }
-    while ( style2a < v2->InnerQuads.Size );
+    while ( style2a < this->InnerQuads.Size );
   }
-  v40 = (signed __int64)&v2->OuterEdges;
+  p_OuterEdges = &this->OuterEdges;
   Scaleform::Alg::QuickSortSliced<Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::OuterEdgeType,4,16>,bool (*)(Scaleform::Render::Tessellator::OuterEdgeType const &,Scaleform::Render::Tessellator::OuterEdgeType const &)>(
-    &v2->OuterEdges,
+    &this->OuterEdges,
     0i64,
-    v2->OuterEdges.Size,
+    this->OuterEdges.Size,
     Scaleform::Render::Tessellator::cmpOuterEdges);
-  v41 = v2->OuterEdges.Size;
-  v42 = 0;
+  Size = this->OuterEdges.Size;
+  v40 = 0;
   style2b = 0;
-  if ( v41 )
+  if ( Size )
   {
-    v43 = 0i64;
+    v41 = 0i64;
     do
     {
-      v44 = v2->OuterEdges.Pages;
-      v45 = (unsigned int *)&v44[v43 >> 4][v43 & 0xF];
-      style1a = v45;
-      if ( !(v45[2] & 0x40000000) )
+      Pages = this->OuterEdges.Pages;
+      v43 = (unsigned int *)&Pages[v41 >> 4][v41 & 0xF];
+      style1a = v43;
+      if ( (v43[2] & 0x40000000) == 0 )
       {
-        v46 = *(_QWORD *)(v40 + 8);
-        v47 = 0i64;
-        v48 = *(_QWORD *)(*(_QWORD *)v45 + 8i64);
-        if ( v46 > 0 )
+        v44 = p_OuterEdges->Size;
+        v45 = 0i64;
+        v46 = *(Scaleform::Render::Tessellator::MonoVertexType **)(*(_QWORD *)v43 + 8i64);
+        if ( v44 > 0 )
         {
-          v49 = *(_QWORD *)(v40 + 32);
+          v47 = p_OuterEdges->Pages;
           do
           {
-            v50 = *(unsigned __int64 **)(*(_QWORD *)(v49 + 8 * ((unsigned __int64)((v46 >> 1) + v47) >> 4))
-                                       + 16i64 * (((unsigned __int8)(v46 >> 1) + (_BYTE)v47) & 0xF));
-            v51 = *v50 < v48;
-            if ( *v50 == v48 )
-              v51 = v50[1] < **(_QWORD **)v45;
-            if ( v51 )
+            edge = v47[(unsigned __int64)((v44 >> 1) + v45) >> 4][((unsigned __int8)(v44 >> 1) + (_BYTE)v45) & 0xF].edge;
+            v49 = edge->cntVer < v46;
+            if ( edge->cntVer == v46 )
+              v49 = edge->rayVer < (Scaleform::Render::Tessellator::MonoVertexType *)**(_QWORD **)v43;
+            if ( v49 )
             {
-              v47 += (v46 >> 1) + 1;
-              v46 += -1 - (v46 >> 1);
+              v45 += (v44 >> 1) + 1;
+              v44 += -1 - (v44 >> 1);
             }
             else
             {
-              v46 >>= 1;
+              v44 >>= 1;
             }
           }
-          while ( v46 > 0 );
-          v42 = style2b;
+          while ( v44 > 0 );
+          v40 = style2b;
         }
-        if ( (unsigned int)v47 < v41 )
+        if ( (unsigned int)v45 < Size )
         {
-          v174 = (signed __int64)&v44[(unsigned __int64)(unsigned int)v47 >> 4][v47 & 0xF];
-          if ( **(_QWORD **)v174 == v48 )
+          v161 = (__int64)&Pages[(unsigned __int64)(unsigned int)v45 >> 4][v45 & 0xF];
+          if ( **(Scaleform::Render::Tessellator::MonoVertexType ***)v161 == v46 )
           {
-            v52 = *(_WORD *)(*(_QWORD *)v45 + 16i64) & 0x7FFF;
-            v53 = 0;
-            v54 = Scaleform::Render::Tessellator::setMesh(v2, v52);
-            if ( v52 == v2->Meshes.Pages[(unsigned __int64)v54 >> 4][v54 & 0xF].Style1 )
-              v53 = 8;
-            v55 = *(_QWORD *)(*(_QWORD *)v45 + 8i64);
-            v56 = Scaleform::Render::Tessellator::emitVertex(
-                    v2,
-                    v54,
-                    *(_DWORD *)(**(_QWORD **)v45 + 4i64),
+            v50 = *(_WORD *)(*(_QWORD *)v43 + 16i64) & 0x7FFF;
+            v51 = 0;
+            v52 = Scaleform::Render::Tessellator::setMesh(this, v50);
+            if ( v50 == this->Meshes.Pages[(unsigned __int64)v52 >> 4][v52 & 0xF].Style1 )
+              v51 = 8;
+            v53 = *(_QWORD *)(*(_QWORD *)v43 + 8i64);
+            v54 = Scaleform::Render::Tessellator::emitVertex(
+                    this,
                     v52,
-                    v53 | 2);
-            v57 = Scaleform::Render::Tessellator::emitVertex(v2, v54, *(_DWORD *)(v55 + 4), v52, v53 | 2);
-            v58 = v45;
-            meshIdxa = v57;
-            v45[2] = Scaleform::Render::Tessellator::emitVertex(v2, v54, v45[2], v52, v53) | 0x40000000;
-            v59 = Scaleform::Render::Tessellator::emitVertex(v2, v54, *(_DWORD *)(v174 + 8), v52, v53);
-            *(_DWORD *)(v174 + 8) = v59 | 0x40000000;
-            v60 = v54;
-            v61 = (v59 | 0x40000000) & 0xFFFFFFF;
-            v62 = &v2->MeshTriangles.Arrays[v60];
+                    *(_DWORD *)(**(_QWORD **)v43 + 4i64),
+                    v50,
+                    v51 | 2);
+            meshIdxa = Scaleform::Render::Tessellator::emitVertex(this, v52, *(_DWORD *)(v53 + 4), v50, v51 | 2);
+            v43[2] = Scaleform::Render::Tessellator::emitVertex(this, v52, v43[2], v50, v51) | 0x40000000;
+            v55 = Scaleform::Render::Tessellator::emitVertex(this, v52, *(_DWORD *)(v161 + 8), v50, v51);
+            *(_DWORD *)(v161 + 8) = v55 | 0x40000000;
+            v56 = v52;
+            v57 = v55 & 0xFFFFFFF;
+            v58 = &this->MeshTriangles.Arrays[v56];
             style1b = style1a[2] & 0xFFFFFFF;
-            DWORD2(v143) = v58[2] & 0xFFFFFFF;
-            v63 = v62->Size >> 4;
-            if ( v63 >= v62->NumPages )
+            DWORD2(v132) = style1b;
+            v59 = v58->Size >> 4;
+            if ( v59 >= v58->NumPages )
               Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::allocPage(
-                &v2->MeshTriangles,
-                v62,
-                v62->Size >> 4);
-            v64 = &v62->Pages[v63][v62->Size & 0xF];
-            v64->d.m.v1 = (Scaleform::Render::Tessellator::MonoVertexType *)__PAIR__(meshIdxa, v56);
-            v64->d.m.v2 = (Scaleform::Render::Tessellator::MonoVertexType *)*((_QWORD *)&v143 + 1);
-            v64->d.m.v3 = v144;
-            ++v2->MeshTriangles.Arrays[v60].Size;
-            v65 = &v2->MeshTriangles.Arrays[v60];
-            DWORD2(v143) = meshIdxa;
-            v66 = v65->Size >> 4;
-            if ( v66 >= v65->NumPages )
+                &this->MeshTriangles,
+                v58,
+                v58->Size >> 4);
+            v60 = &v58->Pages[v59][v58->Size & 0xF];
+            v60->d.m.v1 = (Scaleform::Render::Tessellator::MonoVertexType *)__PAIR64__(meshIdxa, v54);
+            v60->d.m.v2 = (Scaleform::Render::Tessellator::MonoVertexType *)*((_QWORD *)&v132 + 1);
+            v60->d.m.v3 = v133;
+            ++this->MeshTriangles.Arrays[v52].Size;
+            v61 = &this->MeshTriangles.Arrays[v56];
+            DWORD2(v132) = meshIdxa;
+            v62 = v61->Size >> 4;
+            if ( v62 >= v61->NumPages )
               Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::allocPage(
-                &v2->MeshTriangles,
-                v65,
-                v66);
-            v67 = &v65->Pages[v66][v65->Size & 0xF];
-            v67->d.m.v1 = (Scaleform::Render::Tessellator::MonoVertexType *)__PAIR__(style1b, v61);
-            v67->d.m.v2 = (Scaleform::Render::Tessellator::MonoVertexType *)*((_QWORD *)&v143 + 1);
-            v67->d.m.v3 = v144;
-            ++v2->MeshTriangles.Arrays[v60].Size;
-            v42 = style2b;
+                &this->MeshTriangles,
+                v61,
+                v62);
+            v63 = &v61->Pages[v62][v61->Size & 0xF];
+            v63->d.m.v1 = (Scaleform::Render::Tessellator::MonoVertexType *)__PAIR64__(style1b, v57);
+            v63->d.m.v2 = (Scaleform::Render::Tessellator::MonoVertexType *)*((_QWORD *)&v132 + 1);
+            v63->d.m.v3 = v133;
+            ++this->MeshTriangles.Arrays[v52].Size;
+            v40 = style2b;
           }
         }
       }
-      v41 = v2->OuterEdges.Size;
-      ++v42;
-      v40 = (signed __int64)&v2->OuterEdges;
-      v43 = v42;
-      style2b = v42;
+      Size = this->OuterEdges.Size;
+      ++v40;
+      p_OuterEdges = &this->OuterEdges;
+      v41 = v40;
+      style2b = v40;
     }
-    while ( v42 < v41 );
+    while ( v40 < Size );
   }
-  v68 = v2->StarVertices.Size;
-  v69 = 0;
-  v175 = 0;
-  if ( v68 )
+  v64 = this->StarVertices.Size;
+  v65 = 0;
+  v162 = 0;
+  if ( v64 )
   {
     while ( 1 )
     {
-      v70 = v2->StarVertices.Pages;
-      v71 = v69;
-      v72 = (unsigned __int64)v69 >> 4;
-      v146 = v69;
-      v73 = v69;
-      v74 = v70[v72];
-      v75 = 8 * v72;
-      v76 = v69 & 0xF;
-      v154 = v75;
-      v77 = (unsigned int *)&v74[v76];
-      v156 = v76;
-      v148 = *v77;
+      v66 = this->StarVertices.Pages;
+      v67 = v65;
+      v68 = (unsigned __int64)v65 >> 4;
+      v135 = v65;
+      v69 = v65;
+      v70 = v66[v68];
+      v71 = 8 * v68;
+      v72 = v65 & 0xF;
+      v143 = v71;
+      v73 = (unsigned int *)&v70[v72];
+      v145 = v72;
+      v137 = *v73;
       do
-        ++v73;
-      while ( v73 < v68 && *v77 == v70[(unsigned __int64)v73 >> 4][v73 & 0xF].cntVer );
-      if ( v69 + 3 == v73 )
+        ++v69;
+      while ( v69 < v64 && *v73 == v66[(unsigned __int64)v69 >> 4][v69 & 0xF].cntVer );
+      if ( v65 + 3 == v69 )
         break;
 LABEL_54:
-      v94 = v73 - 1;
-      if ( v69 < v73 )
+      v89 = v69 - 1;
+      if ( v65 < v69 )
       {
         do
         {
-          v95 = v2->StarVertices.Pages;
-          style2d = v95[v94 >> 4][v94 & 0xF].starVer;
-          v96 = v95[v94 >> 4][v94 & 0xF].starVer;
-          v97 = v2->MeshVertices.Pages;
-          v98 = v96;
-          meshIdxc = v95[v71 >> 4][v71 & 0xF].starVer;
-          v99 = v96 & 0xF;
-          v100 = v97[v98 >> 4];
-          v101 = v100[v99].Styles[0];
-          v102 = v100[v99].Flags & 2;
-          v103 = v97[(unsigned __int64)meshIdxc >> 4];
-          v104 = v103[meshIdxc & 0xF].Styles[0];
-          style1d = v102;
-          v105 = v103[meshIdxc & 0xF].Flags & 2;
-          v106 = Scaleform::Render::Tessellator::setMesh(v2, v101, v104);
-          v107 = v106;
-          v153 = v106;
-          vera = v106;
-          v108 = &v2->Meshes.Pages[(unsigned __int64)v106 >> 4][v106 & 0xF];
-          v109 = v108->Style1;
-          if ( v109 && v101 != v109 )
+          v90 = this->StarVertices.Pages;
+          style2c = v90[v89 >> 4][v89 & 0xF].starVer;
+          v91 = this->MeshVertices.Pages;
+          meshIdxc = v90[v67 >> 4][v67 & 0xF].starVer;
+          v92 = v91[(unsigned __int64)style2c >> 4];
+          v93 = v92[style2c & 0xF].Styles[0];
+          v94 = v92[style2c & 0xF].Flags & 2;
+          v95 = v91[(unsigned __int64)meshIdxc >> 4];
+          v96 = v95[meshIdxc & 0xF].Styles[0];
+          style1d = v94;
+          v97 = v95[meshIdxc & 0xF].Flags & 2;
+          v98 = Scaleform::Render::Tessellator::setMesh(this, v93, v96);
+          v142 = v98;
+          vera = v98;
+          v99 = &this->Meshes.Pages[(unsigned __int64)v98 >> 4][v98 & 0xF];
+          v100 = v99->Style1;
+          if ( !v100 || v93 == v100 )
           {
-            v110 = meshIdxc;
-            style1d = v105;
-            meshIdxc = style2d;
-            v111 = v101;
-            v101 = v104;
-            v104 = v111;
-            v105 = v102;
+            v101 = style2c;
           }
           else
           {
-            v110 = style2d;
+            v101 = meshIdxc;
+            style1d = v97;
+            meshIdxc = style2c;
+            v102 = v93;
+            v93 = v96;
+            v96 = v102;
+            v97 = v94;
           }
-          v131 = v101;
-          v132 = v108->Flags2 ^ v108->Flags1;
-          v133 = style1d | 8;
-          if ( _bittest(&v132, 0xFu) )
+          v122 = v93;
+          v123 = style1d | 8;
+          if ( ((v99->Flags2 ^ v99->Flags1) & 0x8000) != 0 )
           {
-            v131 = v104;
-            v133 = style1d | 0x28;
+            v122 = v96;
+            v123 = style1d | 0x28;
           }
-          LODWORD(v143) = Scaleform::Render::Tessellator::emitVertex(v2, v107, v110, v101, v131, v133, 0);
-          DWORD1(v143) = Scaleform::Render::Tessellator::emitVertex(v2, vera, meshIdxc, v104, v105);
-          v134 = v108->Flags2 | v108->Flags1;
-          v135 = (((unsigned __int8)style1d & (unsigned __int8)v105 & 2) != 0) + 1;
-          if ( _bittest(&v134, 0xFu) )
+          LODWORD(v132) = Scaleform::Render::Tessellator::emitVertex(this, v98, v101, v93, v122, v123, 0);
+          DWORD1(v132) = Scaleform::Render::Tessellator::emitVertex(this, vera, meshIdxc, v96, v97);
+          v124 = (((unsigned __int8)style1d & (unsigned __int8)v97 & 2) != 0) + 1;
+          if ( ((v99->Flags2 | v99->Flags1) & 0x8000) != 0 )
           {
-            v136 = v135 & 0xFFFFFFF7 | 0x24;
+            v125 = v124 & 0xFFFFFFD3 | 0x24;
           }
           else
           {
-            v131 = v104;
-            v136 = v135 | 0x10;
+            v122 = v96;
+            v125 = v124 | 0x10;
           }
-          DWORD2(v143) = Scaleform::Render::Tessellator::emitVertex(v2, vera, v148, v101, v131, v136, 1);
-          v137 = &v2->MeshTriangles.Arrays[v153];
-          v138 = v137->Size >> 4;
-          if ( v138 >= v137->NumPages )
+          DWORD2(v132) = Scaleform::Render::Tessellator::emitVertex(this, vera, v137, v93, v122, v125, 1);
+          v126 = &this->MeshTriangles.Arrays[v142];
+          v127 = v126->Size >> 4;
+          if ( v127 >= v126->NumPages )
             Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::allocPage(
-              &v2->MeshTriangles,
-              v137,
-              v137->Size >> 4);
-          v71 = v146 + 1;
-          v139 = (signed __int64)&v137->Pages[v138][v137->Size & 0xF];
-          v94 = v175;
-          *(_OWORD *)v139 = v143;
-          ++v175;
-          *(_QWORD *)(v139 + 16) = v144;
-          ++v146;
-          ++v2->MeshTriangles.Arrays[v153].Size;
+              &this->MeshTriangles,
+              v126,
+              v126->Size >> 4);
+          v67 = v135 + 1;
+          v128 = (__int64)&v126->Pages[v127][v126->Size & 0xF];
+          v89 = v162;
+          *(_OWORD *)v128 = v132;
+          ++v162;
+          *(_QWORD *)(v128 + 16) = v133;
+          ++v135;
+          ++this->MeshTriangles.Arrays[v142].Size;
         }
-        while ( v175 < v73 );
+        while ( v162 < v69 );
       }
 LABEL_94:
-      v68 = v2->StarVertices.Size;
-      v69 = v73;
-      v175 = v73;
-      if ( v73 >= v68 )
+      v64 = this->StarVertices.Size;
+      v65 = v69;
+      v162 = v69;
+      if ( v69 >= v64 )
         return;
     }
-    v78 = v2->MeshVertices.Pages;
-    v158 = (unsigned __int64)(v69 + 1) >> 4;
-    v79 = v70[v158][((_BYTE)v69 + 1) & 0xF].starVer;
-    v157 = ((_BYTE)v69 + 1) & 0xF;
-    v155 = (unsigned __int64)(v69 + 2) >> 4;
-    v80 = v70[v155][((_BYTE)v69 + 2) & 0xF].starVer;
-    v81 = v77[1];
-    v82 = v81;
-    v83 = v81 & 0xF;
-    v84 = v78[v82 >> 4];
-    v85 = v84[v83].Styles[0];
-    v86 = (signed __int64)&v84[v83];
-    style1c = v85;
-    v87 = v78[(unsigned __int64)v79 >> 4];
-    v88 = v87[v79 & 0xF].Styles[0];
-    v89 = v87[v79 & 0xF].Flags;
-    v151 = *(unsigned __int16 *)(v86 + 16);
-    v90 = v78[(unsigned __int64)v80 >> 4];
-    v152 = v89;
-    v91 = v90[v80 & 0xF].Styles[0];
-    meshIdxb = v88;
-    v150 = v90[v80 & 0xF].Flags;
-    style2c = v90[v80 & 0xF].Styles[0];
-    ver = Scaleform::Render::Tessellator::setMesh(v2, v85, v88);
-    v92 = Scaleform::Render::Tessellator::setMesh(v2, v88, v91);
-    v93 = Scaleform::Render::Tessellator::setMesh(v2, v91, v85);
-    if ( ver == v92 || ver == v93 )
+    v74 = this->MeshVertices.Pages;
+    v146 = (unsigned __int64)(v65 + 1) >> 4;
+    starVer = v66[v146][((_BYTE)v65 + 1) & 0xF].starVer;
+    v144 = (unsigned __int64)(v65 + 2) >> 4;
+    v76 = v66[v144][((_BYTE)v65 + 2) & 0xF].starVer;
+    v77 = v73[1];
+    v78 = v77 & 0xF;
+    v79 = v74[v77 >> 4];
+    v80 = v79[v78].Styles[0];
+    v81 = &v79[v78];
+    style1c = v80;
+    v82 = v74[(unsigned __int64)starVer >> 4];
+    v83 = v82[starVer & 0xF].Styles[0];
+    v84 = v82[starVer & 0xF].Flags;
+    v140 = v81->Flags;
+    v85 = v74[(unsigned __int64)v76 >> 4];
+    v141 = v84;
+    v86 = v85[v76 & 0xF].Styles[0];
+    meshIdxb = v83;
+    v139 = v85[v76 & 0xF].Flags;
+    ver = Scaleform::Render::Tessellator::setMesh(this, v80, v83);
+    v87 = Scaleform::Render::Tessellator::setMesh(this, v83, v86);
+    v88 = Scaleform::Render::Tessellator::setMesh(this, v86, v80);
+    if ( ver == v87 || ver == v88 )
     {
-      v92 = ver;
+      v87 = ver;
     }
-    else if ( v92 != v93 )
+    else if ( v87 != v88 )
     {
 LABEL_53:
-      v71 = v69;
+      v67 = v65;
       goto LABEL_54;
     }
-    if ( v92 != -1 )
+    if ( v87 != -1 )
     {
-      v112 = v2->StarVertices.Pages;
-      v113 = (*(Scaleform::Render::Tessellator::StarVertexType **)((char *)v112 + v154))[v156].starVer;
-      v114 = v112[v158][v157].starVer;
-      v149 = (*(Scaleform::Render::Tessellator::StarVertexType **)((char *)v112 + v154))[v156].starVer;
-      v176 = v112[v158][v157].starVer;
-      verb = v112[v155][((_BYTE)v69 + 2) & 0xF].starVer;
-      *(_QWORD *)((char *)&v143 + 4) = -1i64;
-      v115 = v2->Meshes.Pages[(unsigned __int64)v92 >> 4];
-      LODWORD(v143) = -1;
-      LODWORD(v115) = v115[v92 & 0xF].Flags1 ^ v115[v92 & 0xF].Flags2;
-      if ( _bittest((const signed int *)&v115, 0xFu) )
+      v103 = this->StarVertices.Pages;
+      v104 = (*(Scaleform::Render::Tessellator::StarVertexType **)((char *)v103 + v143))[v145].starVer;
+      v105 = v103[v146][((_BYTE)v65 + 1) & 0xF].starVer;
+      v138 = v104;
+      v163 = v105;
+      verb = v103[v144][((_BYTE)v65 + 2) & 0xF].starVer;
+      *(_QWORD *)((char *)&v132 + 4) = -1i64;
+      LODWORD(v132) = -1;
+      v106 = this->Meshes.Pages[(unsigned __int64)v87 >> 4];
+      if ( ((v106[v87 & 0xF].Flags1 ^ v106[v87 & 0xF].Flags2) & 0x8000) != 0 )
       {
-        v116 = v2->ComplexFlags.Array;
-        v117 = style2c;
-        v118 = v116[v85 >> 5] & (1 << (v85 & 0x1F));
-        v119 = v116[v88 >> 5] & (1 << (v88 & 0x1F));
-        v120 = v116[(unsigned __int64)style2c >> 5] & (1 << (style2c & 0x1F));
-        if ( v118 )
+        Array = this->ComplexFlags.Array;
+        v108 = v86;
+        v109 = Array[v80 >> 5] & (1 << (v80 & 0x1F));
+        v110 = Array[v83 >> 5] & (1 << (v83 & 0x1F));
+        v111 = Array[(unsigned __int64)v86 >> 5] & (1 << (v86 & 0x1F));
+        if ( v109 )
         {
-          v121 = meshIdxb;
-          if ( v119 )
-            v121 = style2c;
-          v122 = Scaleform::Render::Tessellator::emitVertex(v2, v92, v113, style1c, v121, v151 | 0x20, 0);
-          v117 = style2c;
-          v114 = v176;
-          LODWORD(v143) = v122;
+          v112 = meshIdxb;
+          if ( v110 )
+            v112 = v86;
+          v113 = Scaleform::Render::Tessellator::emitVertex(this, v87, v104, style1c, v112, v140 | 0x20, 0);
+          v108 = v86;
+          v105 = v163;
+          LODWORD(v132) = v113;
         }
-        v123 = v119 == 0;
-        LODWORD(v85) = style1c;
-        if ( !v123 )
+        v114 = v110 == 0;
+        LODWORD(v80) = style1c;
+        if ( !v114 )
         {
-          v124 = v117;
-          if ( v120 )
-            v124 = style1c;
-          DWORD1(v143) = Scaleform::Render::Tessellator::emitVertex(v2, v92, v114, meshIdxb, v124, v152 | 0x20, 0);
+          v115 = v108;
+          if ( v111 )
+            v115 = style1c;
+          DWORD1(v132) = Scaleform::Render::Tessellator::emitVertex(this, v87, v105, meshIdxb, v115, v141 | 0x20, 0);
         }
-        v123 = v120 == 0;
-        LODWORD(v88) = meshIdxb;
-        if ( v123 )
+        v114 = v111 == 0;
+        LODWORD(v83) = meshIdxb;
+        if ( v114 )
         {
-          v126 = style2c;
+          v117 = v86;
         }
         else
         {
-          v125 = style1c;
-          v123 = v118 == 0;
-          v126 = style2c;
-          if ( !v123 )
-            v125 = meshIdxb;
-          DWORD2(v143) = Scaleform::Render::Tessellator::emitVertex(v2, v92, verb, style2c, v125, v150 | 0x20, 0);
+          v116 = style1c;
+          v114 = v109 == 0;
+          v117 = v86;
+          if ( !v114 )
+            v116 = meshIdxb;
+          DWORD2(v132) = Scaleform::Render::Tessellator::emitVertex(this, v87, verb, v86, v116, v139 | 0x20, 0);
         }
-        if ( (_DWORD)v143 == -1 )
+        if ( (_DWORD)v132 == -1 )
         {
-          v113 = v149;
+          v104 = v138;
           goto LABEL_76;
         }
       }
       else
       {
-        v126 = style2c;
+        v117 = v86;
 LABEL_76:
-        LODWORD(v143) = Scaleform::Render::Tessellator::emitVertex(v2, v92, v113, v85, v151);
+        LODWORD(v132) = Scaleform::Render::Tessellator::emitVertex(this, v87, v104, v80, v140);
       }
-      if ( DWORD1(v143) == -1 )
-        DWORD1(v143) = Scaleform::Render::Tessellator::emitVertex(v2, v92, v176, v88, v152);
-      if ( DWORD2(v143) == -1 )
-        DWORD2(v143) = Scaleform::Render::Tessellator::emitVertex(v2, v92, verb, v126, v150);
-      v127 = v92;
-      v128 = &v2->MeshTriangles.Arrays[v127];
-      v129 = v128->Size >> 4;
-      if ( v129 >= v128->NumPages )
+      if ( DWORD1(v132) == -1 )
+        DWORD1(v132) = Scaleform::Render::Tessellator::emitVertex(this, v87, v163, v83, v141);
+      if ( DWORD2(v132) == -1 )
+        DWORD2(v132) = Scaleform::Render::Tessellator::emitVertex(this, v87, verb, v117, v139);
+      v118 = v87;
+      v119 = &this->MeshTriangles.Arrays[v118];
+      v120 = v119->Size >> 4;
+      if ( v120 >= v119->NumPages )
         Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::allocPage(
-          &v2->MeshTriangles,
-          &v2->MeshTriangles.Arrays[v127],
-          v128->Size >> 4);
-      v130 = (signed __int64)&v128->Pages[v129][v128->Size & 0xF];
-      *(_OWORD *)v130 = v143;
-      *(_QWORD *)(v130 + 16) = v144;
-      ++v2->MeshTriangles.Arrays[v127].Size;
+          &this->MeshTriangles,
+          &this->MeshTriangles.Arrays[v118],
+          v119->Size >> 4);
+      v121 = (__int64)&v119->Pages[v120][v119->Size & 0xF];
+      *(_OWORD *)v121 = v132;
+      *(_QWORD *)(v121 + 16) = v133;
+      ++this->MeshTriangles.Arrays[v118].Size;
       goto LABEL_94;
     }
     goto LABEL_53;
   }
-}16) = v144;
-      ++v2->MeshTriangles.Arrays[v127].Size;
-      goto LABEL_94;
-    }
-    goto LABEL_53;
-  }
 }
 
 // File Line: 3058
 // RVA: 0x9EA0C0
-void __fastcall Scaleform::Render::Tessellator::moveVertexAA(Scaleform::Render::Tessellator *this, Scaleform::Render::TessVertex *refVer, Scaleform::Render::TessVertex *aaVer, Scaleform::Render::TessVertex *v2, Scaleform::Render::TessVertex *v3)
+void __fastcall Scaleform::Render::Tessellator::moveVertexAA(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::TessVertex *refVer,
+        Scaleform::Render::TessVertex *aaVer,
+        Scaleform::Render::TessVertex *v2,
+        Scaleform::Render::TessVertex *v3)
 {
-  float v5; // xmm8_4
-  float v6; // xmm11_4
+  float x; // xmm8_4
+  float y; // xmm11_4
   float v7; // xmm10_4
   float v8; // xmm15_4
   float v9; // xmm9_4
@@ -9239,633 +8946,618 @@ void __fastcall Scaleform::Render::Tessellator::moveVertexAA(Scaleform::Render::
   float v12; // xmm12_4
   float v13; // xmm1_4
 
-  v5 = refVer->x;
-  v6 = refVer->y;
-  v7 = aaVer->y - v6;
+  x = refVer->x;
+  y = refVer->y;
+  v7 = aaVer->y - y;
   v8 = v2->y;
   v9 = aaVer->x - refVer->x;
   v10 = v3->x - v2->x;
   v11 = v3->y - v8;
   v12 = (float)(v9 * v11) - (float)(v10 * v7);
-  if ( COERCE_FLOAT(LODWORD(v12) & _xmm) < (float)((float)((float)((float)(COERCE_FLOAT(COERCE_UNSIGNED_INT(refVer->y - aaVer->y) & _xmm)
+  if ( COERCE_FLOAT(LODWORD(v12) & _xmm) < (float)((float)((float)((float)(COERCE_FLOAT(COERCE_UNSIGNED_INT(y - aaVer->y) & _xmm)
                                                                          + COERCE_FLOAT(COERCE_UNSIGNED_INT(refVer->x - aaVer->x) & _xmm))
                                                                  + COERCE_FLOAT(COERCE_UNSIGNED_INT(v2->x - v3->x) & _xmm))
-                                                         + COERCE_FLOAT(COERCE_UNSIGNED_INT(v2->y - v3->y) & _xmm))
+                                                         + COERCE_FLOAT(COERCE_UNSIGNED_INT(v8 - v3->y) & _xmm))
                                                  * this->IntersectionEpsilon)
-    || (v13 = (float)((float)((float)(v6 - v8) * v10) - (float)((float)(v5 - v2->x) * v11)) / v12, v13 <= 0.0)
+    || (v13 = (float)((float)((float)(y - v8) * v10) - (float)((float)(x - v2->x) * v11)) / v12, v13 <= 0.0)
     || v13 >= 1.0 )
   {
-    aaVer->x = v5;
+    aaVer->x = x;
     aaVer->y = refVer->y;
   }
   else
   {
-    aaVer->x = (float)((float)(v5 - (float)((float)(v9 * v13) + v5)) * 0.125) + (float)((float)(v9 * v13) + v5);
-    aaVer->y = (float)((float)(refVer->y - (float)((float)(v7 * v13) + v6)) * 0.125) + (float)((float)(v7 * v13) + v6);
+    aaVer->x = (float)((float)(x - (float)((float)(v9 * v13) + x)) * 0.125) + (float)((float)(v9 * v13) + x);
+    aaVer->y = (float)((float)(refVer->y - (float)((float)(v7 * v13) + y)) * 0.125) + (float)((float)(v7 * v13) + y);
   }
 }
 
 // File Line: 3082
 // RVA: 0x9CAF40
-void __fastcall Scaleform::Render::Tessellator::addTriangleAA(Scaleform::Render::Tessellator *this, Scaleform::Render::Tessellator::MonoVertexType *v1, Scaleform::Render::Tessellator::MonoVertexType *v2, Scaleform::Render::Tessellator::MonoVertexType *v3, float cp)
+void __fastcall Scaleform::Render::Tessellator::addTriangleAA(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::Tessellator::MonoVertexType *v1,
+        Scaleform::Render::Tessellator::MonoVertexType *v2,
+        Scaleform::Render::Tessellator::MonoVertexType *v3,
+        float cp)
 {
   Scaleform::Render::Tessellator::MonoVertexType *v5; // r12
-  Scaleform::Render::Tessellator::MonoVertexType *v6; // r15
   Scaleform::Render::Tessellator::MonoVertexType *v7; // r14
-  Scaleform::Render::Tessellator *v8; // rbx
-  Scaleform::Render::TessVertex **v9; // r8
+  Scaleform::Render::TessVertex **Pages; // r8
   Scaleform::Render::TessVertex *v10; // rdi
   Scaleform::Render::TessVertex *v11; // rsi
   Scaleform::Render::TessVertex *v12; // rax
-  float v13; // xmm3_4
+  float x; // xmm3_4
   Scaleform::Render::TessVertex *v14; // rbp
-  float v15; // xmm0_4
-  Scaleform::Render::TessVertex *v16; // rax
-  Scaleform::Render::TessVertex *v17; // rdx
-  Scaleform::Render::TessVertex *v18; // r13
-  Scaleform::Render::Tessellator::MonoVertexType *v19; // ST30_8
-  unsigned int v20; // eax
-  Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16> *v21; // rbp
-  signed __int64 v22; // rsi
-  Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::ArrayType *v23; // rdi
-  unsigned __int64 v24; // rbx
-  signed __int64 v25; // rdx
-  Scaleform::Render::Tessellator::TriangleType *v26; // rax
-  Scaleform::Render::Tessellator::MonoVertexType *v27; // [rsp+38h] [rbp-50h]
-  Scaleform::Render::Tessellator::MonoVertexType *v28; // [rsp+40h] [rbp-48h]
-  signed __int64 v29; // [rsp+90h] [rbp+8h]
+  Scaleform::Render::TessVertex *v15; // rax
+  Scaleform::Render::TessVertex *v16; // rdx
+  Scaleform::Render::TessVertex *v17; // r13
+  unsigned int v18; // eax
+  Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16> *p_MeshTriangles; // rbp
+  __int64 MeshIdx; // rsi
+  Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::ArrayType *v21; // rdi
+  unsigned __int64 v22; // rbx
+  __int64 v23; // rdx
+  Scaleform::Render::Tessellator::TriangleType *v24; // rax
+  Scaleform::Render::Tessellator::MonoVertexType *v25; // [rsp+30h] [rbp-58h]
+  Scaleform::Render::Tessellator::MonoVertexType *v26; // [rsp+38h] [rbp-50h]
+  Scaleform::Render::Tessellator::MonoVertexType *v27; // [rsp+40h] [rbp-48h]
+  Scaleform::Render::TessVertex *v28; // [rsp+90h] [rbp+8h]
 
   v5 = v3;
-  v6 = v2;
   v7 = v1;
-  v8 = this;
   if ( this->EdgeAAFlag )
   {
-    v9 = this->MeshVertices.Pages;
-    v10 = &v9[(unsigned __int64)(v1->srcVer & 0xFFFFFFF) >> 4][v1->srcVer & 0xF];
-    v11 = &v9[(unsigned __int64)(v6->srcVer & 0xFFFFFFF) >> 4][v6->srcVer & 0xF];
-    v12 = v9[(unsigned __int64)(v3->srcVer & 0xFFFFFFF) >> 4];
-    v13 = v12[v3->srcVer & 0xF].x;
+    Pages = this->MeshVertices.Pages;
+    v10 = &Pages[(unsigned __int64)(v1->srcVer & 0xFFFFFFF) >> 4][v1->srcVer & 0xF];
+    v11 = &Pages[(unsigned __int64)(v2->srcVer & 0xFFFFFFF) >> 4][v2->srcVer & 0xF];
+    v12 = Pages[(unsigned __int64)(v3->srcVer & 0xFFFFFFF) >> 4];
+    x = v12[v3->srcVer & 0xF].x;
     v14 = &v12[v3->srcVer & 0xF];
-    v15 = v12[v3->srcVer & 0xF].y;
-    v16 = v9[(unsigned __int64)(v1->aaVer & 0xFFFFFFF) >> 4];
-    v17 = &v9[(unsigned __int64)(v6->aaVer & 0xFFFFFFF) >> 4][v6->aaVer & 0xF];
-    v29 = (signed __int64)&v9[(unsigned __int64)(v6->aaVer & 0xFFFFFFF) >> 4][v6->aaVer & 0xF];
-    v18 = &v9[(unsigned __int64)(v3->aaVer & 0xFFFFFFF) >> 4][v3->aaVer & 0xF];
-    if ( (float)((float)((float)(v16[v7->aaVer & 0xF].x - v13) * (float)(v15 - v11->y))
-               - (float)((float)(v16[v7->aaVer & 0xF].y - v15) * (float)(v13 - v11->x))) >= 0.0 )
+    v15 = Pages[(unsigned __int64)(v1->aaVer & 0xFFFFFFF) >> 4];
+    v16 = &Pages[(unsigned __int64)(v2->aaVer & 0xFFFFFFF) >> 4][v2->aaVer & 0xF];
+    v28 = v16;
+    v17 = &Pages[(unsigned __int64)(v3->aaVer & 0xFFFFFFF) >> 4][v3->aaVer & 0xF];
+    if ( (float)((float)((float)(v15[v7->aaVer & 0xF].x - x) * (float)(v14->y - v11->y))
+               - (float)((float)(v15[v7->aaVer & 0xF].y - v14->y) * (float)(x - v11->x))) >= 0.0 )
     {
-      Scaleform::Render::Tessellator::moveVertexAA(this, v10, &v16[v7->aaVer & 0xF], v11, v14);
-      v17 = (Scaleform::Render::TessVertex *)v29;
+      Scaleform::Render::Tessellator::moveVertexAA(this, v10, &v15[v7->aaVer & 0xF], v11, v14);
+      v16 = v28;
     }
-    if ( (float)((float)((float)(v10->y - v14->y) * (float)(v17->x - v10->x))
-               - (float)((float)(v17->y - v10->y) * (float)(v10->x - v14->x))) >= 0.0 )
-      Scaleform::Render::Tessellator::moveVertexAA(v8, v11, v17, v14, v10);
-    if ( (float)((float)((float)(v18->x - v11->x) * (float)(v11->y - v10->y))
-               - (float)((float)(v18->y - v11->y) * (float)(v11->x - v10->x))) >= 0.0 )
-      Scaleform::Render::Tessellator::moveVertexAA(v8, v14, v18, v10, v11);
+    if ( (float)((float)((float)(v10->y - v14->y) * (float)(v16->x - v10->x))
+               - (float)((float)(v16->y - v10->y) * (float)(v10->x - v14->x))) >= 0.0 )
+      Scaleform::Render::Tessellator::moveVertexAA(this, v11, v16, v14, v10);
+    if ( (float)((float)((float)(v17->x - v11->x) * (float)(v11->y - v10->y))
+               - (float)((float)(v17->y - v11->y) * (float)(v11->x - v10->x))) >= 0.0 )
+      Scaleform::Render::Tessellator::moveVertexAA(this, v14, v17, v10, v11);
   }
   else
   {
-    LODWORD(v19) = Scaleform::Render::Tessellator::emitVertex(
+    LODWORD(v25) = Scaleform::Render::Tessellator::emitVertex(
                      this,
                      this->MeshIdx,
                      v1->srcVer & 0xFFFFFFF,
                      this->MonoStyle,
                      this->FactorOneFlag);
-    HIDWORD(v19) = Scaleform::Render::Tessellator::emitVertex(
-                     v8,
-                     v8->MeshIdx,
-                     v6->srcVer & 0xFFFFFFF,
-                     v8->MonoStyle,
-                     v8->FactorOneFlag);
-    v20 = Scaleform::Render::Tessellator::emitVertex(
-            v8,
-            v8->MeshIdx,
+    HIDWORD(v25) = Scaleform::Render::Tessellator::emitVertex(
+                     this,
+                     this->MeshIdx,
+                     v2->srcVer & 0xFFFFFFF,
+                     this->MonoStyle,
+                     this->FactorOneFlag);
+    v18 = Scaleform::Render::Tessellator::emitVertex(
+            this,
+            this->MeshIdx,
             v5->srcVer & 0xFFFFFFF,
-            v8->MonoStyle,
-            v8->FactorOneFlag);
-    v5 = v28;
-    v7 = v19;
-    LODWORD(v27) = v20;
-    v6 = v27;
+            this->MonoStyle,
+            this->FactorOneFlag);
+    v5 = v27;
+    v7 = v25;
+    LODWORD(v26) = v18;
+    v2 = v26;
   }
-  v21 = &v8->MeshTriangles;
-  v22 = v8->MeshIdx;
-  v23 = &v8->MeshTriangles.Arrays[v22];
-  v24 = v23->Size >> 4;
-  if ( v24 >= v23->NumPages )
+  p_MeshTriangles = &this->MeshTriangles;
+  MeshIdx = this->MeshIdx;
+  v21 = &this->MeshTriangles.Arrays[MeshIdx];
+  v22 = v21->Size >> 4;
+  if ( v22 >= v21->NumPages )
     Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::allocPage(
+      p_MeshTriangles,
       v21,
-      v23,
-      v23->Size >> 4);
-  v25 = v23->Size & 0xF;
-  v26 = v23->Pages[v24];
-  v26[v25].d.m.v1 = v7;
-  v26[v25].d.m.v2 = v6;
-  v26[v25].d.m.v3 = v5;
-  ++v21->Arrays[v22].Size;
+      v21->Size >> 4);
+  v23 = v21->Size & 0xF;
+  v24 = v21->Pages[v22];
+  v24[v23].d.m.v1 = v7;
+  v24[v23].d.m.v2 = v2;
+  v24[v23].d.m.v3 = v5;
+  ++p_MeshTriangles->Arrays[MeshIdx].Size;
 }
 
 // File Line: 3152
 // RVA: 0x9F77C0
 void __fastcall Scaleform::Render::Tessellator::triangulateMountainAA(Scaleform::Render::Tessellator *this)
 {
-  unsigned __int64 v1; // r9
+  unsigned __int64 Size; // r9
   Scaleform::Render::Tessellator *v2; // rbp
-  Scaleform::Render::Tessellator::MonoVertexType ***v3; // r11
+  Scaleform::Render::Tessellator::MonoVertexType ***Pages; // r11
   Scaleform::Render::TessVertex **v4; // r10
-  unsigned int v5; // er13
+  unsigned int v5; // r13d
   float v6; // xmm2_4
-  signed __int64 v7; // r8
+  __int64 v7; // r8
   Scaleform::Render::TessVertex *v8; // rdi
   Scaleform::Render::TessVertex *v9; // rdx
-  float v10; // xmm5_4
-  float v11; // xmm6_4
-  float v12; // xmm3_4
-  float v13; // xmm4_4
-  char v14; // cl
-  unsigned __int64 v15; // rax
-  unsigned int v16; // edx
-  signed int v17; // edi
-  unsigned int v18; // ecx
-  unsigned int v19; // er15
-  Scaleform::Render::Tessellator::MonoVertexType ***v20; // r14
-  Scaleform::Render::TessVertex **v21; // r12
-  unsigned int v22; // edi
-  unsigned __int64 v23; // rsi
-  Scaleform::Render::TessVertex *v24; // r10
-  Scaleform::Render::TessVertex *v25; // r8
-  unsigned int v26; // ebx
-  Scaleform::Render::TessVertex *v27; // rax
-  float v28; // xmm8_4
-  Scaleform::Render::TessVertex *v29; // rcx
-  float v30; // xmm6_4
-  unsigned int v31; // edi
-  __int64 v32; // rdx
-  unsigned int v33; // ebx
-  Scaleform::Render::TessVertex *v34; // r10
-  Scaleform::Render::TessVertex *v35; // r8
-  Scaleform::Render::TessVertex *v36; // rcx
-  signed __int64 v37; // rdx
-  float v38; // xmm9_4
-  Scaleform::Render::TessVertex *v39; // r10
-  Scaleform::Render::TessVertex *v40; // r8
-  Scaleform::Render::TessVertex *v41; // rcx
-  float v42; // xmm0_4
-  unsigned int v43; // ebx
-  float v44; // xmm2_4
-  int v45; // xmm1_4
-  float v46; // xmm0_4
-  unsigned __int64 v47; // r8
-  __int64 v48; // r9
-  Scaleform::Render::Tessellator::MonoVertexType ***v49; // rax
-  unsigned int v50; // eax
-  Scaleform::Render::Tessellator::MonoVertexType **v51; // rdx
-  Scaleform::Render::Tessellator::MonoVertexType **v52; // rcx
-  Scaleform::Render::Tessellator::MonoVertexType ***v53; // rax
-  unsigned __int64 v54; // rdi
-  float v55; // xmm6_4
-  Scaleform::Render::TessVertex *v56; // r10
-  Scaleform::Render::TessVertex *v57; // r8
-  Scaleform::Render::TessVertex *v58; // rcx
-  float v59; // xmm0_4
-  unsigned __int64 v60; // r10
-  unsigned __int64 v61; // r11
-  Scaleform::Render::Tessellator::MonoVertexType ***v62; // r9
-  unsigned __int64 v63; // r8
-  unsigned __int64 v64; // rdx
-  Scaleform::Render::Tessellator::MonoVertexType **v65; // rax
-  Scaleform::Render::Tessellator::MonoVertexType **v66; // rcx
-  Scaleform::Render::Tessellator::MonoVertexType ***v67; // rdx
-  signed int v68; // [rsp+30h] [rbp-118h]
-  signed int v69; // [rsp+40h] [rbp-108h]
-  __int64 v70; // [rsp+48h] [rbp-100h]
-  unsigned __int64 v71; // [rsp+50h] [rbp-F8h]
-  __int64 v72; // [rsp+58h] [rbp-F0h]
-  unsigned __int64 v73; // [rsp+60h] [rbp-E8h]
-  __int64 v74; // [rsp+68h] [rbp-E0h]
-  unsigned __int64 v75; // [rsp+70h] [rbp-D8h]
-  unsigned __int64 v76; // [rsp+78h] [rbp-D0h]
-  __int64 v77; // [rsp+80h] [rbp-C8h]
-  __int64 v78; // [rsp+88h] [rbp-C0h]
-  unsigned __int64 v79; // [rsp+90h] [rbp-B8h]
-  unsigned __int64 v80; // [rsp+98h] [rbp-B0h]
-  __int64 v81; // [rsp+A0h] [rbp-A8h]
-  __int64 v82; // [rsp+A8h] [rbp-A0h]
-  Scaleform::Render::Tessellator *v83; // [rsp+150h] [rbp+8h]
-  unsigned int v84; // [rsp+158h] [rbp+10h]
-  unsigned int v85; // [rsp+160h] [rbp+18h]
-  unsigned int v86; // [rsp+168h] [rbp+20h]
+  char v10; // cl
+  unsigned __int64 v11; // rax
+  unsigned __int64 v12; // rax
+  int v13; // edi
+  unsigned int v14; // ecx
+  unsigned int v15; // r15d
+  Scaleform::Render::Tessellator::MonoVertexType ***v16; // r14
+  Scaleform::Render::TessVertex **v17; // r12
+  unsigned int v18; // edi
+  unsigned __int64 v19; // rsi
+  Scaleform::Render::TessVertex *v20; // r10
+  Scaleform::Render::TessVertex *v21; // r8
+  unsigned int v22; // ebx
+  Scaleform::Render::TessVertex *v23; // rax
+  float v24; // xmm8_4
+  Scaleform::Render::TessVertex *v25; // rcx
+  float v26; // xmm6_4
+  unsigned int v27; // edi
+  unsigned int v28; // ebx
+  Scaleform::Render::TessVertex *v29; // r10
+  Scaleform::Render::TessVertex *v30; // r8
+  Scaleform::Render::TessVertex *v31; // rcx
+  float v32; // xmm9_4
+  Scaleform::Render::TessVertex *v33; // r10
+  Scaleform::Render::TessVertex *v34; // r8
+  Scaleform::Render::TessVertex *v35; // rcx
+  float v36; // xmm0_4
+  unsigned int v37; // ebx
+  float v38; // xmm2_4
+  int v39; // xmm1_4
+  float EdgeAAWidth; // xmm0_4
+  unsigned __int64 v41; // r8
+  __int64 v42; // r9
+  Scaleform::Render::Tessellator::MonoVertexType ***v43; // rax
+  unsigned int v44; // eax
+  Scaleform::Render::Tessellator::MonoVertexType **v45; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType **v46; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType ***v47; // rax
+  unsigned __int64 v48; // rdi
+  float v49; // xmm6_4
+  Scaleform::Render::TessVertex *v50; // r10
+  Scaleform::Render::TessVertex *v51; // r8
+  Scaleform::Render::TessVertex *v52; // rcx
+  float v53; // xmm0_4
+  unsigned __int64 v54; // r10
+  unsigned __int64 v55; // r11
+  Scaleform::Render::Tessellator::MonoVertexType ***v56; // r9
+  unsigned __int64 v57; // r8
+  unsigned __int64 v58; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType **v59; // rax
+  Scaleform::Render::Tessellator::MonoVertexType **v60; // rcx
+  Scaleform::Render::Tessellator::MonoVertexType ***v61; // rdx
+  int v62; // [rsp+30h] [rbp-118h]
+  int v63; // [rsp+40h] [rbp-108h]
+  __int64 v64; // [rsp+48h] [rbp-100h]
+  unsigned __int64 v65; // [rsp+50h] [rbp-F8h]
+  __int64 v66; // [rsp+58h] [rbp-F0h]
+  unsigned __int64 v67; // [rsp+60h] [rbp-E8h]
+  __int64 v68; // [rsp+68h] [rbp-E0h]
+  unsigned __int64 v69; // [rsp+70h] [rbp-D8h]
+  unsigned __int64 v70; // [rsp+78h] [rbp-D0h]
+  __int64 v71; // [rsp+80h] [rbp-C8h]
+  __int64 v72; // [rsp+88h] [rbp-C0h]
+  unsigned __int64 v73; // [rsp+90h] [rbp-B8h]
+  unsigned __int64 v74; // [rsp+98h] [rbp-B0h]
+  __int64 v75; // [rsp+A0h] [rbp-A8h]
+  __int64 v76; // [rsp+A8h] [rbp-A0h]
+  unsigned int v78; // [rsp+158h] [rbp+10h]
+  unsigned int v79; // [rsp+160h] [rbp+18h]
+  unsigned int v80; // [rsp+168h] [rbp+20h]
 
-  v83 = this;
-  v1 = this->MonoStack.Size;
+  Size = this->MonoStack.Size;
   v2 = this;
-  if ( v1 <= 2 )
+  if ( Size <= 2 )
     return;
-  v3 = this->MonoStack.Pages;
+  Pages = this->MonoStack.Pages;
   v4 = this->MeshVertices.Pages;
   v5 = 1;
   v6 = 0.0;
   v7 = 1i64;
-  v8 = v4[(unsigned __int64)((**v3)->srcVer & 0xFFFFFFF) >> 4];
-  v9 = v4[(unsigned __int64)(v3[(v1 - 1) >> 4][((_DWORD)v1 - 1) & 0xF]->srcVer & 0xFFFFFFF) >> 4];
-  if ( v1 > 2 )
+  do
   {
-    v10 = v9[v3[(v1 - 1) >> 4][((_DWORD)v1 - 1) & 0xF]->srcVer & 0xF].y;
-    v11 = v9[v3[(v1 - 1) >> 4][((_DWORD)v1 - 1) & 0xF]->srcVer & 0xF].x;
-    v12 = v9[v3[(v1 - 1) >> 4][((_DWORD)v1 - 1) & 0xF]->srcVer & 0xF].y - v8[(**v3)->srcVer & 0xF].y;
-    v13 = v9[v3[(v1 - 1) >> 4][((_DWORD)v1 - 1) & 0xF]->srcVer & 0xF].x - v8[(**v3)->srcVer & 0xF].x;
-    do
-    {
-      v14 = v7;
-      v15 = v7++;
-      v16 = v3[v15 >> 4][v14 & 0xF]->srcVer & 0xFFFFFFF;
-      v6 = v6
-         + (float)((float)((float)(v4[(unsigned __int64)v16 >> 4][v16 & 0xF].x - v11) * v12)
-                 - (float)((float)(v4[(unsigned __int64)v16 >> 4][v16 & 0xF].y - v10) * v13));
-    }
-    while ( v7 + 1 < v1 );
+    v10 = v7;
+    v11 = v7++;
+    v12 = Pages[v11 >> 4][v10 & 0xF]->srcVer & 0xFFFFFFF;
+    v9 = v4[(unsigned __int64)(Pages[(Size - 1) >> 4][((_DWORD)Size - 1) & 0xF]->srcVer & 0xFFFFFFF) >> 4];
+    v8 = v4[(unsigned __int64)((**Pages)->srcVer & 0xFFFFFFF) >> 4];
+    v6 = v6
+       + (float)((float)((float)(v4[v12 >> 4][v12 & 0xF].x
+                               - v9[Pages[(Size - 1) >> 4][((_DWORD)Size - 1) & 0xF]->srcVer & 0xF].x)
+                       * (float)(v9[Pages[(Size - 1) >> 4][((_DWORD)Size - 1) & 0xF]->srcVer & 0xF].y
+                               - v8[(**Pages)->srcVer & 0xF].y))
+               - (float)((float)(v4[v12 >> 4][v12 & 0xF].y
+                               - v9[Pages[(Size - 1) >> 4][((_DWORD)Size - 1) & 0xF]->srcVer & 0xF].y)
+                       * (float)(v9[Pages[(Size - 1) >> 4][((_DWORD)Size - 1) & 0xF]->srcVer & 0xF].x
+                               - v8[(**Pages)->srcVer & 0xF].x)));
   }
-  v17 = -1;
-  v84 = v1;
+  while ( v7 + 1 < Size );
+  v13 = -1;
+  v78 = Size;
   if ( v6 > 0.0 )
-    v17 = 1;
-  v18 = 0;
-  v69 = v17;
-  v85 = 0;
-  v74 = v17;
-  if ( (unsigned int)v1 <= 3 )
+    v13 = 1;
+  v14 = 0;
+  v63 = v13;
+  v79 = 0;
+  v68 = v13;
+  if ( (unsigned int)Size <= 3 )
   {
-LABEL_58:
-    v67 = v2->MonoStack.Pages;
+LABEL_57:
+    v61 = v2->MonoStack.Pages;
     Scaleform::Render::Tessellator::addTriangleAA(
       v2,
-      v67[(unsigned __int64)(v18 - v17 + 1) >> 4][(v18 - v17 + 1) & 0xF],
-      v67[(unsigned __int64)(v18 + 1) >> 4][(v18 + 1) & 0xF],
-      v67[(unsigned __int64)(v18 + v17 + 1) >> 4][((_BYTE)v18 + (_BYTE)v17 + 1) & 0xF],
+      v61[(unsigned __int64)(v14 - v13 + 1) >> 4][(v14 - v13 + 1) & 0xF],
+      v61[(unsigned __int64)(v14 + 1) >> 4][(v14 + 1) & 0xF],
+      v61[(unsigned __int64)(v14 + v13 + 1) >> 4][((_BYTE)v14 + (_BYTE)v13 + 1) & 0xF],
       0.0);
     return;
   }
-  v19 = 2;
-  v86 = 3;
-  v68 = 2;
+  v15 = 2;
+  v80 = 3;
+  v62 = 2;
   while ( 1 )
   {
-    v20 = v2->MonoStack.Pages;
-    v21 = v2->MeshVertices.Pages;
-    v76 = (unsigned __int64)v5 >> 4;
-    v77 = v5 & 0xF;
-    v70 = v18 & 0xF;
-    v73 = (unsigned __int64)v18 >> 4;
-    v22 = v20[v76][v77]->srcVer & 0xFFFFFFF;
-    v81 = v19 & 0xF;
-    v23 = v5;
-    v79 = (unsigned __int64)v19 >> 4;
-    v24 = v21[(unsigned __int64)v22 >> 4];
-    v25 = v21[(unsigned __int64)(v20[v73][v70]->srcVer & 0xFFFFFFF) >> 4];
-    v26 = v20[v79][v81]->srcVer & 0xFFFFFFF;
-    v27 = v21[(unsigned __int64)v26 >> 4];
-    v28 = Scaleform::Render::Math2D::LinePointDistance(
-            v27[v20[v79][v81]->srcVer & 0xF].x,
-            v27[v20[v79][v81]->srcVer & 0xF].y,
-            v25[v20[v73][v70]->srcVer & 0xF].x,
-            v25[v20[v73][v70]->srcVer & 0xF].y,
-            v24[v20[v76][v77]->srcVer & 0xF].x,
-            v24[v20[v76][v77]->srcVer & 0xF].y);
-    v29 = v21[(unsigned __int64)(v20[(unsigned __int64)v86 >> 4][v86 & 0xF]->srcVer & 0xFFFFFFF) >> 4];
-    v30 = Scaleform::Render::Math2D::LinePointDistance(
-            v29[v20[(unsigned __int64)v86 >> 4][v86 & 0xF]->srcVer & 0xF].x,
-            v29[v20[(unsigned __int64)v86 >> 4][v86 & 0xF]->srcVer & 0xF].y,
-            v21[(unsigned __int64)v22 >> 4][v22 & 0xF].x,
-            v21[(unsigned __int64)v22 >> 4][v22 & 0xF].y,
-            v21[(unsigned __int64)v26 >> 4][v26 & 0xF].x,
-            v21[(unsigned __int64)v26 >> 4][v26 & 0xF].y);
-    v75 = (unsigned __int64)(v84 - 2) >> 4;
-    v78 = (v84 - 2) & 0xF;
-    v82 = (v84 - 3) & 0xF;
-    v80 = (unsigned __int64)(v84 - 3) >> 4;
-    v31 = v20[v75][v78]->srcVer & 0xFFFFFFF;
-    v32 = (v84 - 1) & 0xF;
-    v72 = v32;
-    v71 = (unsigned __int64)(v84 - 1) >> 4;
-    v33 = v20[v80][v82]->srcVer & 0xFFFFFFF;
-    LODWORD(v32) = v20[v71][v32]->srcVer & 0xFFFFFFF;
-    v34 = v21[(unsigned __int64)v31 >> 4];
-    v35 = v21[(unsigned __int64)v33 >> 4];
-    v36 = v21[(unsigned __int64)(unsigned int)v32 >> 4];
-    v37 = v32 & 0xF;
-    v38 = Scaleform::Render::Math2D::LinePointDistance(
-            v36[v37].x,
-            v36[v37].y,
-            v35[v20[v80][v82]->srcVer & 0xF].x,
-            v35[v20[v80][v82]->srcVer & 0xF].y,
-            v34[v20[v75][v78]->srcVer & 0xF].x,
-            v34[v20[v75][v78]->srcVer & 0xF].y);
-    v39 = v21[(unsigned __int64)v33 >> 4];
-    v40 = v21[(unsigned __int64)(v20[(unsigned __int64)(v84 - 4) >> 4][((_BYTE)v84 - 4) & 0xF]->srcVer & 0xFFFFFFF) >> 4];
-    v41 = v21[(unsigned __int64)v31 >> 4];
-    v42 = Scaleform::Render::Math2D::LinePointDistance(
-            v41[v31 & 0xF].x,
-            v41[v31 & 0xF].y,
-            v40[v20[(unsigned __int64)(v84 - 4) >> 4][((_BYTE)v84 - 4) & 0xF]->srcVer & 0xF].x,
-            v40[v20[(unsigned __int64)(v84 - 4) >> 4][((_BYTE)v84 - 4) & 0xF]->srcVer & 0xF].y,
-            v39[v33 & 0xF].x,
-            v39[v33 & 0xF].y);
-    v43 = -1;
-    v44 = v42;
-    if ( v74 <= 0 )
+    v16 = v2->MonoStack.Pages;
+    v17 = v2->MeshVertices.Pages;
+    v70 = (unsigned __int64)v5 >> 4;
+    v71 = v5 & 0xF;
+    v64 = v14 & 0xF;
+    v67 = (unsigned __int64)v14 >> 4;
+    v18 = v16[v70][v71]->srcVer & 0xFFFFFFF;
+    v75 = v15 & 0xF;
+    v19 = v5;
+    v73 = (unsigned __int64)v15 >> 4;
+    v20 = v17[(unsigned __int64)v18 >> 4];
+    v21 = v17[(unsigned __int64)(v16[v67][v64]->srcVer & 0xFFFFFFF) >> 4];
+    v22 = v16[v73][v75]->srcVer & 0xFFFFFFF;
+    v23 = v17[(unsigned __int64)v22 >> 4];
+    v24 = Scaleform::Render::Math2D::LinePointDistance(
+            v23[v16[v73][v75]->srcVer & 0xF].x,
+            v23[v16[v73][v75]->srcVer & 0xF].y,
+            v21[v16[v67][v64]->srcVer & 0xF].x,
+            v21[v16[v67][v64]->srcVer & 0xF].y,
+            v20[v16[v70][v71]->srcVer & 0xF].x,
+            v20[v16[v70][v71]->srcVer & 0xF].y);
+    v25 = v17[(unsigned __int64)(v16[(unsigned __int64)v80 >> 4][v80 & 0xF]->srcVer & 0xFFFFFFF) >> 4];
+    v26 = Scaleform::Render::Math2D::LinePointDistance(
+            v25[v16[(unsigned __int64)v80 >> 4][v80 & 0xF]->srcVer & 0xF].x,
+            v25[v16[(unsigned __int64)v80 >> 4][v80 & 0xF]->srcVer & 0xF].y,
+            v17[(unsigned __int64)v18 >> 4][v18 & 0xF].x,
+            v17[(unsigned __int64)v18 >> 4][v18 & 0xF].y,
+            v17[(unsigned __int64)v22 >> 4][v22 & 0xF].x,
+            v17[(unsigned __int64)v22 >> 4][v22 & 0xF].y);
+    v69 = (unsigned __int64)(v78 - 2) >> 4;
+    v72 = (v78 - 2) & 0xF;
+    v76 = (v78 - 3) & 0xF;
+    v74 = (unsigned __int64)(v78 - 3) >> 4;
+    v27 = v16[v69][v72]->srcVer & 0xFFFFFFF;
+    v66 = ((_BYTE)v78 - 1) & 0xF;
+    v65 = (unsigned __int64)(v78 - 1) >> 4;
+    v28 = v16[v74][v76]->srcVer & 0xFFFFFFF;
+    v29 = v17[(unsigned __int64)v27 >> 4];
+    v30 = v17[(unsigned __int64)v28 >> 4];
+    v31 = v17[(unsigned __int64)(v16[v65][v66]->srcVer & 0xFFFFFFF) >> 4];
+    v32 = Scaleform::Render::Math2D::LinePointDistance(
+            v31[v16[v65][v66]->srcVer & 0xF].x,
+            v31[v16[v65][v66]->srcVer & 0xF].y,
+            v30[v16[v74][v76]->srcVer & 0xF].x,
+            v30[v16[v74][v76]->srcVer & 0xF].y,
+            v29[v16[v69][v72]->srcVer & 0xF].x,
+            v29[v16[v69][v72]->srcVer & 0xF].y);
+    v33 = v17[(unsigned __int64)v28 >> 4];
+    v34 = v17[(unsigned __int64)(v16[(unsigned __int64)(v78 - 4) >> 4][((_BYTE)v78 - 4) & 0xF]->srcVer & 0xFFFFFFF) >> 4];
+    v35 = v17[(unsigned __int64)v27 >> 4];
+    v36 = Scaleform::Render::Math2D::LinePointDistance(
+            v35[v27 & 0xF].x,
+            v35[v27 & 0xF].y,
+            v34[v16[(unsigned __int64)(v78 - 4) >> 4][((_BYTE)v78 - 4) & 0xF]->srcVer & 0xF].x,
+            v34[v16[(unsigned __int64)(v78 - 4) >> 4][((_BYTE)v78 - 4) & 0xF]->srcVer & 0xF].y,
+            v33[v28 & 0xF].x,
+            v33[v28 & 0xF].y);
+    v37 = -1;
+    v38 = v36;
+    if ( v68 <= 0 )
     {
-      v46 = v2->EdgeAAWidth;
-      if ( v28 > 0.0 && v30 > 0.0 )
+      EdgeAAWidth = v2->EdgeAAWidth;
+      if ( v24 > 0.0 && v26 > 0.0 )
       {
-        if ( v28 > v46 )
+        if ( v24 > EdgeAAWidth )
         {
-          v46 = v28;
-          v43 = v5;
+          EdgeAAWidth = v24;
+          v37 = v5;
         }
-        if ( v30 > v46 )
+        if ( v26 > EdgeAAWidth )
         {
-          v46 = v30;
-          v43 = v19;
+          EdgeAAWidth = v26;
+          v37 = v15;
         }
       }
-      if ( v38 > 0.0 && v44 > 0.0 )
+      if ( v32 > 0.0 && v38 > 0.0 )
       {
-        if ( v38 > v46 )
+        if ( v32 > EdgeAAWidth )
         {
-          v43 = v84 - 2;
-          v46 = v38;
+          v37 = v78 - 2;
+          EdgeAAWidth = v32;
         }
-        if ( v44 > v46 )
-          v43 = v84 - 3;
+        if ( v38 > EdgeAAWidth )
+          v37 = v78 - 3;
       }
     }
     else
     {
-      v45 = LODWORD(v2->EdgeAAWidth) ^ _xmm[0];
-      if ( v28 < 0.0 )
+      v39 = LODWORD(v2->EdgeAAWidth) ^ _xmm[0];
+      if ( v24 < 0.0 )
       {
-        if ( v30 >= 0.0 )
+        if ( v26 >= 0.0 )
           break;
-        if ( v28 < *(float *)&v45 )
+        if ( v24 < *(float *)&v39 )
         {
-          *(float *)&v45 = v28;
-          v43 = v5;
+          *(float *)&v39 = v24;
+          v37 = v5;
         }
-        if ( v30 < *(float *)&v45 )
+        if ( v26 < *(float *)&v39 )
         {
-          *(float *)&v45 = v30;
-          v43 = v19;
+          *(float *)&v39 = v26;
+          v37 = v15;
         }
       }
-      if ( v30 < 0.0 && v42 < 0.0 )
+      if ( v26 < 0.0 && v36 < 0.0 )
       {
-        if ( v38 < *(float *)&v45 )
+        if ( v32 < *(float *)&v39 )
         {
-          v43 = v84 - 2;
-          *(float *)&v45 = v38;
+          v37 = v78 - 2;
+          *(float *)&v39 = v32;
         }
-        if ( v42 < *(float *)&v45 )
-          v43 = v84 - 3;
+        if ( v36 < *(float *)&v39 )
+          v37 = v78 - 3;
       }
     }
-    if ( v43 == -1 )
+    if ( v37 == -1 )
       break;
-    v17 = v69;
+    v13 = v63;
     Scaleform::Render::Tessellator::addTriangleAA(
       v2,
-      v20[(unsigned __int64)(v43 - v69) >> 4][(v43 - v69) & 0xF],
-      v20[(unsigned __int64)v43 >> 4][v43 & 0xF],
-      v20[(unsigned __int64)(v69 + v43) >> 4][((_BYTE)v69 + (_BYTE)v43) & 0xF],
+      v16[(unsigned __int64)(v37 - v63) >> 4][(v37 - v63) & 0xF],
+      v16[(unsigned __int64)v37 >> 4][v37 & 0xF],
+      v16[(unsigned __int64)(v63 + v37) >> 4][((_BYTE)v63 + (_BYTE)v37) & 0xF],
       0.0);
-    if ( v43 == v5 )
+    if ( v37 == v5 )
     {
-      v47 = (unsigned __int64)v5 >> 4;
-      v48 = v5 & 0xF;
+      v41 = (unsigned __int64)v5 >> 4;
+      v42 = v5 & 0xF;
     }
     else
     {
-      v49 = v2->MonoStack.Pages;
-      if ( v43 != v19 )
+      v43 = v2->MonoStack.Pages;
+      if ( v37 != v15 )
       {
-        if ( v43 == v84 - 2 )
+        if ( v37 == v78 - 2 )
         {
-          v51 = v49[v75];
-          v52 = v49[v71];
+          v45 = v43[v69];
+          v46 = v43[v65];
         }
         else
         {
-          v49[v80][v82] = v49[v75][v78];
-          v53 = v2->MonoStack.Pages;
-          v52 = v53[v71];
-          v51 = v53[v75];
+          v43[v74][v76] = v43[v69][v72];
+          v47 = v2->MonoStack.Pages;
+          v46 = v47[v65];
+          v45 = v47[v69];
         }
-        v51[v78] = v52[v72];
-        v50 = v84-- - 1;
-        goto LABEL_56;
+        v45[v72] = v46[v66];
+        v44 = --v78;
+        goto LABEL_55;
       }
-      v47 = (unsigned __int64)v5 >> 4;
-      v48 = v5 & 0xF;
-      v49[v79][v81] = v49[v76][v77];
+      v41 = (unsigned __int64)v5 >> 4;
+      v42 = v5 & 0xF;
+      v43[v73][v75] = v43[v70][v71];
     }
-    ++v19;
+    ++v15;
     ++v5;
-    v18 = v85 + 1;
-    ++v86;
-    v2->MonoStack.Pages[v47][v48] = v2->MonoStack.Pages[v73][v70];
-    v50 = v84;
-    ++v85;
-    v68 = v19;
-LABEL_57:
-    if ( v50 <= v86 )
-      goto LABEL_58;
+    v14 = v79 + 1;
+    ++v80;
+    v2->MonoStack.Pages[v41][v42] = v2->MonoStack.Pages[v67][v64];
+    v44 = v78;
+    ++v79;
+    v62 = v15;
+LABEL_56:
+    if ( v44 <= v80 )
+      goto LABEL_57;
   }
-  v54 = v5 + 1i64;
-  v55 = 0.0;
-  if ( v54 >= v84 )
+  v48 = v5 + 1i64;
+  v49 = 0.0;
+  if ( v48 >= v78 )
     return;
   do
   {
-    v56 = v21[(unsigned __int64)(v20[v23 >> 4][v23 & 0xF]->srcVer & 0xFFFFFFF) >> 4];
-    v57 = v21[(unsigned __int64)(v20[(v54 - 2) >> 4][((_DWORD)v54 - 2) & 0xF]->srcVer & 0xFFFFFFF) >> 4];
-    v58 = v21[(unsigned __int64)(v20[v54 >> 4][v54 & 0xF]->srcVer & 0xFFFFFFF) >> 4];
-    v59 = Scaleform::Render::Math2D::LinePointDistance(
-            v58[v20[v54 >> 4][v54 & 0xF]->srcVer & 0xF].x,
-            v58[v20[v54 >> 4][v54 & 0xF]->srcVer & 0xF].y,
-            v57[v20[(v54 - 2) >> 4][((_DWORD)v54 - 2) & 0xF]->srcVer & 0xF].x,
-            v57[v20[(v54 - 2) >> 4][((_DWORD)v54 - 2) & 0xF]->srcVer & 0xF].y,
-            v56[v20[v23 >> 4][v23 & 0xF]->srcVer & 0xF].x,
-            v56[v20[v23 >> 4][v23 & 0xF]->srcVer & 0xF].y);
-    if ( v74 <= 0 )
+    v50 = v17[(unsigned __int64)(v16[v19 >> 4][v19 & 0xF]->srcVer & 0xFFFFFFF) >> 4];
+    v51 = v17[(unsigned __int64)(v16[(v48 - 2) >> 4][((_DWORD)v48 - 2) & 0xF]->srcVer & 0xFFFFFFF) >> 4];
+    v52 = v17[(unsigned __int64)(v16[v48 >> 4][v48 & 0xF]->srcVer & 0xFFFFFFF) >> 4];
+    v53 = Scaleform::Render::Math2D::LinePointDistance(
+            v52[v16[v48 >> 4][v48 & 0xF]->srcVer & 0xF].x,
+            v52[v16[v48 >> 4][v48 & 0xF]->srcVer & 0xF].y,
+            v51[v16[(v48 - 2) >> 4][((_DWORD)v48 - 2) & 0xF]->srcVer & 0xF].x,
+            v51[v16[(v48 - 2) >> 4][((_DWORD)v48 - 2) & 0xF]->srcVer & 0xF].y,
+            v50[v16[v19 >> 4][v19 & 0xF]->srcVer & 0xF].x,
+            v50[v16[v19 >> 4][v19 & 0xF]->srcVer & 0xF].y);
+    if ( v68 <= 0 )
     {
-      if ( v59 <= v55 )
-        goto LABEL_50;
+      if ( v53 <= v49 )
+        goto LABEL_49;
     }
-    else if ( v59 >= v55 )
+    else if ( v53 >= v49 )
     {
-      goto LABEL_50;
+      goto LABEL_49;
     }
-    v43 = v23;
-    v55 = v59;
-LABEL_50:
-    ++v54;
-    ++v23;
+    v37 = v19;
+    v49 = v53;
+LABEL_49:
+    ++v48;
+    ++v19;
   }
-  while ( v54 < v84 );
-  v2 = v83;
-  if ( v43 != -1 )
+  while ( v48 < v78 );
+  v2 = this;
+  if ( v37 != -1 )
   {
-    v17 = v69;
+    v13 = v63;
     Scaleform::Render::Tessellator::addTriangleAA(
-      v83,
-      v20[(unsigned __int64)(v43 - v69) >> 4][(v43 - v69) & 0xF],
-      v20[(unsigned __int64)v43 >> 4][v43 & 0xF],
-      v20[(unsigned __int64)(v69 + v43) >> 4][((_BYTE)v69 + (_BYTE)v43) & 0xF],
+      this,
+      v16[(unsigned __int64)(v37 - v63) >> 4][(v37 - v63) & 0xF],
+      v16[(unsigned __int64)v37 >> 4][v37 & 0xF],
+      v16[(unsigned __int64)(v63 + v37) >> 4][((_BYTE)v63 + (_BYTE)v37) & 0xF],
       0.0);
-    v60 = v43 + 1;
-    if ( v60 < v84 )
+    v54 = v37 + 1;
+    if ( v54 < v78 )
     {
-      v61 = v43 + 1 - 1i64;
+      v55 = v37 + 1 - 1i64;
       do
       {
-        v62 = v83->MonoStack.Pages;
-        v63 = v60 & 0xF;
-        v64 = v61 & 0xF;
-        v65 = v62[v60 >> 4];
-        v66 = v62[v61 >> 4];
-        ++v60;
-        ++v61;
-        v66[v64] = v65[v63];
+        v56 = this->MonoStack.Pages;
+        v57 = v54 & 0xF;
+        v58 = v55 & 0xF;
+        v59 = v56[v54 >> 4];
+        v60 = v56[v55 >> 4];
+        ++v54;
+        ++v55;
+        v60[v58] = v59[v57];
       }
-      while ( v60 < v84 );
+      while ( v54 < v78 );
     }
-    v50 = v84 - 1;
-    v19 = v68;
-    --v84;
-LABEL_56:
-    v18 = v85;
-    goto LABEL_57;
+    v44 = v78 - 1;
+    v15 = v62;
+    --v78;
+LABEL_55:
+    v14 = v79;
+    goto LABEL_56;
   }
-}6[v64] = v65[v63];
+}] = v59[v57];
       }
-      while ( v60 < v84 );
+      while ( v54 < v78 );
     }
-    v50 = v84 - 1;
-    v19 = v68;
-    --v84;
-LABEL_56:
-    v18 = v85;
-    goto LABEL_57;
+    v44 = v78 - 1;
+    v15 = v62;
+    --v78;
+LABEL_55:
+    v14 = v79;
+    goto LABEL_56;
   }
 }
 
 // File Line: 3287
 // RVA: 0x9F7540
-void __fastcall Scaleform::Render::Tessellator::triangulateMonotoneAA(Scaleform::Render::Tessellator *this, Scaleform::Render::Tessellator::MonotoneType *m)
+void __fastcall Scaleform::Render::Tessellator::triangulateMonotoneAA(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::Tessellator::MonotoneType *m)
 {
-  Scaleform::Render::Tessellator::MonoVertexType *v2; // rsi
-  Scaleform::Render::Tessellator::MonotoneType *v3; // r15
-  unsigned int v4; // edx
-  Scaleform::Render::Tessellator *v5; // rbp
-  unsigned int v6; // er9
-  Scaleform::Render::TessMesh **v7; // rax
+  Scaleform::Render::Tessellator::MonoVertexType *start; // rsi
+  unsigned int style; // edx
+  unsigned int v6; // r9d
+  Scaleform::Render::TessMesh **Pages; // rax
   Scaleform::Render::TessMesh **v8; // rdx
-  signed int v9; // ecx
-  signed __int64 v10; // r9
+  int v9; // ecx
+  __int64 v10; // r9
   int v11; // ecx
-  Scaleform::Render::Tessellator::MonoVertexType *v12; // rax
+  Scaleform::Render::Tessellator::MonoVertexType *next; // rax
   unsigned __int64 v13; // rdi
   Scaleform::Render::Tessellator::MonoVertexType *v14; // rsi
   unsigned __int64 v15; // rdi
   Scaleform::Render::Tessellator::MonoVertexType *i; // rdi
-  unsigned __int64 v17; // rsi
+  unsigned __int64 Size; // rsi
   unsigned __int64 v18; // rdx
   unsigned __int64 v19; // rsi
   Scaleform::Render::Tessellator::MonoVertexType *v20; // r14
   unsigned __int64 v21; // rsi
   unsigned __int64 v22; // rsi
 
-  v2 = m->start;
-  v3 = m;
-  v4 = m->style;
-  this->MonoStyle = v4;
-  v5 = this;
-  v6 = Scaleform::Render::Tessellator::setMesh(this, v4);
-  v7 = v5->Meshes.Pages;
-  v5->MeshIdx = v6;
-  v8 = &v7[(unsigned __int64)v6 >> 4];
+  start = m->start;
+  style = m->style;
+  this->MonoStyle = style;
+  v6 = Scaleform::Render::Tessellator::setMesh(this, style);
+  Pages = this->Meshes.Pages;
+  this->MeshIdx = v6;
+  v8 = &Pages[(unsigned __int64)v6 >> 4];
   v9 = 0;
   v10 = v6 & 0xF;
-  if ( v5->MonoStyle == (*v8)[v10].Style1 )
+  if ( this->MonoStyle == (*v8)[v10].Style1 )
     v9 = 8;
   v11 = v9 | 2;
-  v5->FactorOneFlag = v11;
+  this->FactorOneFlag = v11;
   (*v8)[v10].Flags1 |= v11 & 8;
-  v3->d.m.lastIdx = -1;
-  v3->d.m.prevIdx1 = 0;
-  v3->d.m.prevIdx2 = v5->MeshIdx;
-  if ( v2 )
+  m->d.m.lastIdx = -1;
+  m->d.m.prevIdx1 = 0;
+  m->d.m.prevIdx2 = this->MeshIdx;
+  if ( start )
   {
-    v12 = v2->next;
-    if ( v12 )
+    next = start->next;
+    if ( next )
     {
-      if ( v12->next )
+      if ( next->next )
       {
-        v3->d.m.lastIdx = v5->MeshTriangles.Arrays[v5->MeshIdx].Size;
-        v5->MonoStack.Size = 0i64;
-        v13 = v5->MonoStack.Size >> 4;
-        if ( v13 >= v5->MonoStack.NumPages )
+        m->d.m.lastIdx = this->MeshTriangles.Arrays[this->MeshIdx].Size;
+        this->MonoStack.Size = 0i64;
+        v13 = this->MonoStack.Size >> 4;
+        if ( v13 >= this->MonoStack.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoVertexType *,4,2>::allocPage(
-            &v5->MonoStack,
-            v5->MonoStack.Size >> 4);
-        v5->MonoStack.Pages[v13][v5->MonoStack.Size & 0xF] = v2;
-        ++v5->MonoStack.Size;
-        v14 = v2->next;
-        v15 = v5->MonoStack.Size >> 4;
-        if ( v15 >= v5->MonoStack.NumPages )
+            &this->MonoStack,
+            this->MonoStack.Size >> 4);
+        this->MonoStack.Pages[v13][this->MonoStack.Size & 0xF] = start;
+        ++this->MonoStack.Size;
+        v14 = start->next;
+        v15 = this->MonoStack.Size >> 4;
+        if ( v15 >= this->MonoStack.NumPages )
           Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoVertexType *,4,2>::allocPage(
-            &v5->MonoStack,
-            v5->MonoStack.Size >> 4);
-        v5->MonoStack.Pages[v15][v5->MonoStack.Size & 0xF] = v14;
-        ++v5->MonoStack.Size;
+            &this->MonoStack,
+            this->MonoStack.Size >> 4);
+        this->MonoStack.Pages[v15][this->MonoStack.Size & 0xF] = v14;
+        ++this->MonoStack.Size;
         for ( i = v14->next; i; i = i->next )
         {
-          v17 = v5->MonoStack.Size;
-          v18 = v17 - 1;
-          v19 = v17 >> 4;
-          v20 = v5->MonoStack.Pages[v18 >> 4][v18 & 0xF];
-          if ( v19 >= v5->MonoStack.NumPages )
+          Size = this->MonoStack.Size;
+          v18 = Size - 1;
+          v19 = Size >> 4;
+          v20 = this->MonoStack.Pages[v18 >> 4][v18 & 0xF];
+          if ( v19 >= this->MonoStack.NumPages )
             Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoVertexType *,4,2>::allocPage(
-              &v5->MonoStack,
+              &this->MonoStack,
               v19);
-          v5->MonoStack.Pages[v19][v5->MonoStack.Size & 0xF] = i;
-          ++v5->MonoStack.Size;
-          if ( (((i->srcVer & 0x80000000) != 0) ^ ((v20->srcVer & 0x80000000) != 0)) & 1 )
+          this->MonoStack.Pages[v19][this->MonoStack.Size & 0xF] = i;
+          ++this->MonoStack.Size;
+          if ( ((i->srcVer & 0x80000000) != 0) != ((v20->srcVer & 0x80000000) != 0) )
           {
-            Scaleform::Render::Tessellator::triangulateMountainAA(v5);
-            v5->MonoStack.Size = 0i64;
-            v21 = v5->MonoStack.Size >> 4;
-            if ( v21 >= v5->MonoStack.NumPages )
+            Scaleform::Render::Tessellator::triangulateMountainAA(this);
+            this->MonoStack.Size = 0i64;
+            v21 = this->MonoStack.Size >> 4;
+            if ( v21 >= this->MonoStack.NumPages )
               Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoVertexType *,4,2>::allocPage(
-                &v5->MonoStack,
-                v5->MonoStack.Size >> 4);
-            v5->MonoStack.Pages[v21][v5->MonoStack.Size & 0xF] = v20;
-            v22 = ++v5->MonoStack.Size >> 4;
-            if ( v22 >= v5->MonoStack.NumPages )
+                &this->MonoStack,
+                this->MonoStack.Size >> 4);
+            this->MonoStack.Pages[v21][this->MonoStack.Size & 0xF] = v20;
+            v22 = ++this->MonoStack.Size >> 4;
+            if ( v22 >= this->MonoStack.NumPages )
               Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::MonoVertexType *,4,2>::allocPage(
-                &v5->MonoStack,
-                v5->MonoStack.Size >> 4);
-            v5->MonoStack.Pages[v22][v5->MonoStack.Size & 0xF] = i;
-            ++v5->MonoStack.Size;
+                &this->MonoStack,
+                this->MonoStack.Size >> 4);
+            this->MonoStack.Pages[v22][this->MonoStack.Size & 0xF] = i;
+            ++this->MonoStack.Size;
           }
         }
-        Scaleform::Render::Tessellator::triangulateMountainAA(v5);
-        v3->d.m.prevIdx1 = LODWORD(v5->MeshTriangles.Arrays[v5->MeshIdx].Size) - v3->d.m.lastIdx;
+        Scaleform::Render::Tessellator::triangulateMountainAA(this);
+        m->d.m.prevIdx1 = LODWORD(this->MeshTriangles.Arrays[this->MeshIdx].Size) - m->d.m.lastIdx;
       }
     }
   }
-}evIdx1 = LODWORD(v5->MeshTriangles.Arrays[v5->MeshIdx].Size) - v3->
+}1 = LODWORD(this->MeshTriangles.Arrays[this->MeshIdx].Size) -
 
 // File Line: 3382
 // RVA: 0x9F8230
@@ -9877,235 +9569,224 @@ void __fastcall Scaleform::Render::Tessellator::unflipTriangles(Scaleform::Rende
   char v4; // cl
   __int64 v5; // r8
   unsigned __int64 v6; // r13
-  Scaleform::Render::TessVertex **v7; // rbx
+  Scaleform::Render::TessVertex **Pages; // rbx
   Scaleform::Render::Tessellator::TriangleType *v8; // r8
   Scaleform::Render::Tessellator::MonoVertexType *v9; // r11
   Scaleform::Render::Tessellator::MonoVertexType *v10; // r10
   Scaleform::Render::Tessellator::MonoVertexType *v11; // rdx
-  signed __int64 v12; // rdi
+  __int64 v12; // rdi
   Scaleform::Render::TessVertex *v13; // rsi
-  signed __int64 v14; // rbp
+  __int64 v14; // rbp
   Scaleform::Render::TessVertex *v15; // r14
-  signed __int64 v16; // r15
+  __int64 v16; // r15
   Scaleform::Render::TessVertex *v17; // r12
-  signed __int64 v18; // r8
+  __int64 v18; // r8
   Scaleform::Render::TessVertex *v19; // r9
   unsigned __int64 v20; // rax
-  signed __int64 v21; // r10
-  float v22; // xmm9_4
-  float v23; // xmm8_4
+  __int64 v21; // r10
+  float x; // xmm9_4
+  float y; // xmm8_4
   Scaleform::Render::TessVertex *v24; // r11
-  signed __int64 v25; // rcx
+  __int64 v25; // rcx
   unsigned __int64 v26; // rax
-  signed __int64 v27; // rdx
+  __int64 v27; // rdx
   float v28; // xmm14_4
   float v29; // xmm13_4
   Scaleform::Render::TessVertex *v30; // rbx
-  float v31; // xmm2_4
-  float v32; // xmm15_4
-  float v33; // xmm10_4
-  float v34; // xmm11_4
-  float v35; // xmm5_4
-  __m128 v36; // xmm6
-  float v37; // xmm7_4
-  float v38; // xmm6_4
-  float v39; // xmm4_4
-  __m128 v40; // xmm3
-  __m128 v41; // xmm1
-  float v42; // xmm2_4
-  float v43; // xmm1_4
+  float v31; // xmm15_4
+  float v32; // xmm10_4
+  float v33; // xmm11_4
+  __m128 v34; // xmm6
+  float v35; // xmm7_4
+  float v36; // xmm6_4
+  float v37; // xmm4_4
+  __m128 v38; // xmm3
+  __m128 v39; // xmm1
+  float v40; // xmm2_4
+  float v41; // xmm1_4
+  int v42; // ecx
+  int v43; // ecx
   int v44; // ecx
-  int v45; // ecx
-  int v46; // ecx
-  float v47; // xmm2_4
-  float v48; // xmm4_4
-  float v49; // xmm3_4
+  float v45; // xmm2_4
+  float v46; // xmm4_4
+  float v47; // xmm5_4
+  float v48; // xmm1_4
+  float v49; // xmm2_4
   float v50; // xmm5_4
-  float v51; // xmm1_4
-  float v52; // xmm2_4
-  float v53; // xmm4_4
+  float v51; // xmm3_4
+  float v52; // xmm1_4
+  float v53; // xmm2_4
   float v54; // xmm5_4
   float v55; // xmm3_4
-  float v56; // xmm1_4
-  float v57; // xmm2_4
-  float v58; // xmm4_4
-  float v59; // xmm5_4
-  float v60; // xmm3_4
-  float v61; // xmm0_4
-  float v62; // xmm1_4
-  float v63; // [rsp+0h] [rbp-108h]
-  float v64; // [rsp+4h] [rbp-104h]
-  __int64 v65; // [rsp+8h] [rbp-100h]
-  unsigned __int64 v66; // [rsp+10h] [rbp-F8h]
-  unsigned __int64 v67; // [rsp+18h] [rbp-F0h]
-  Scaleform::Render::Tessellator *v68; // [rsp+110h] [rbp+8h]
-  char v69; // [rsp+118h] [rbp+10h]
-  unsigned int v70; // [rsp+120h] [rbp+18h]
-  float v71; // [rsp+128h] [rbp+20h]
+  float v56; // xmm0_4
+  float v57; // xmm1_4
+  float v58; // [rsp+0h] [rbp-108h]
+  float v59; // [rsp+4h] [rbp-104h]
+  __int64 v60; // [rsp+8h] [rbp-100h]
+  unsigned __int64 v61; // [rsp+10h] [rbp-F8h]
+  unsigned __int64 v62; // [rsp+18h] [rbp-F0h]
+  char v64; // [rsp+118h] [rbp+10h]
+  unsigned int v65; // [rsp+120h] [rbp+18h]
+  float v66; // [rsp+128h] [rbp+20h]
 
-  v68 = this;
   v1 = this;
   v2 = 0;
-  v70 = 0;
+  v65 = 0;
   do
   {
     if ( v2 >= 8 )
       break;
     v3 = 0i64;
     v4 = 0;
-    v69 = 0;
-    v66 = 0i64;
+    v64 = 0;
+    v61 = 0i64;
     if ( v1->MeshTriangles.NumArrays )
     {
       v5 = 0i64;
-      v65 = 0i64;
+      v60 = 0i64;
       do
       {
         v6 = 0i64;
-        v67 = *(unsigned __int64 *)((char *)&v1->MeshTriangles.Arrays->Size + v5);
-        if ( v67 )
+        v62 = *(unsigned __int64 *)((char *)&v1->MeshTriangles.Arrays->Size + v5);
+        if ( v62 )
         {
           do
           {
-            v7 = v1->MeshVertices.Pages;
+            Pages = v1->MeshVertices.Pages;
             v8 = (*(Scaleform::Render::Tessellator::TriangleType ***)((char *)&v1->MeshTriangles.Arrays->Pages + v5))[v6 >> 4];
             v9 = v8[v6 & 0xF].d.m.v1;
             v10 = v8[v6 & 0xF].d.m.v2;
             v11 = v8[v6 & 0xF].d.m.v3;
             v12 = v9->srcVer & 0xF;
-            v13 = v7[(unsigned __int64)(v9->srcVer & 0xFFFFFFF) >> 4];
+            v13 = Pages[(unsigned __int64)(v9->srcVer & 0xFFFFFFF) >> 4];
             v14 = v10->srcVer & 0xF;
-            v15 = v7[(unsigned __int64)(v10->srcVer & 0xFFFFFFF) >> 4];
+            v15 = Pages[(unsigned __int64)(v10->srcVer & 0xFFFFFFF) >> 4];
             v16 = v11->srcVer & 0xF;
-            v17 = v7[(unsigned __int64)(v11->srcVer & 0xFFFFFFF) >> 4];
+            v17 = Pages[(unsigned __int64)(v11->srcVer & 0xFFFFFFF) >> 4];
             v18 = v9->aaVer & 0xF;
-            v19 = v7[(unsigned __int64)(v9->aaVer & 0xFFFFFFF) >> 4];
+            v19 = Pages[(unsigned __int64)(v9->aaVer & 0xFFFFFFF) >> 4];
             v20 = v10->aaVer & 0xFFFFFFF;
             v21 = v10->aaVer & 0xF;
-            v22 = v19[v9->aaVer & 0xF].x;
-            v23 = v19[v9->aaVer & 0xF].y;
-            v24 = v7[v20 >> 4];
+            x = v19[v9->aaVer & 0xF].x;
+            y = v19[v9->aaVer & 0xF].y;
+            v24 = Pages[v20 >> 4];
             v25 = v11->aaVer & 0xF;
             v26 = (unsigned __int64)(v11->aaVer & 0xFFFFFFF) >> 4;
             v27 = v25;
             v28 = v24[v21].x;
             v29 = v24[v21].y;
-            v30 = v7[v26];
-            v31 = v24[v21].y - v23;
-            v32 = v24[v21].x - v22;
-            v64 = v31;
-            v33 = v30[v25].x;
-            v34 = v30[v25].y;
-            v35 = v30[v25].x - v28;
-            v36 = (__m128)LODWORD(v30[v25].y);
-            v36.m128_f32[0] = v36.m128_f32[0] - v29;
-            v63 = v35;
-            v71 = v36.m128_f32[0];
-            if ( (float)((float)(v35 * v31) - (float)(v32 * v36.m128_f32[0])) < 0.0 )
+            v30 = Pages[v26];
+            v31 = v28 - x;
+            v59 = v29 - y;
+            v32 = v30[v25].x;
+            v33 = v30[v25].y;
+            v34 = (__m128)LODWORD(v33);
+            v34.m128_f32[0] = v33 - v29;
+            v58 = v32 - v28;
+            v66 = v33 - v29;
+            if ( (float)((float)((float)(v32 - v28) * (float)(v29 - y)) - (float)((float)(v28 - x) * (float)(v33 - v29))) < 0.0 )
             {
-              v4 = v69;
+              v4 = v64;
             }
             else
             {
-              v40 = v36;
-              v40.m128_f32[0] = v36.m128_f32[0] * v36.m128_f32[0];
-              v37 = v23 - v34;
-              v38 = v22 - v33;
-              v39 = (float)(v31 * v31) + (float)(v32 * v32);
-              v40.m128_f32[0] = v40.m128_f32[0] + (float)(v35 * v35);
-              v41 = v40;
-              v42 = (float)(v37 * v37) + (float)(v38 * v38);
-              v41.m128_f32[0] = (float)(v40.m128_f32[0] + v39) + v42;
-              v43 = COERCE_FLOAT(_mm_sqrt_ps(v41)) * v68->IntersectionEpsilon;
-              if ( v39 <= v40.m128_f32[0] )
+              v38 = v34;
+              v38.m128_f32[0] = v34.m128_f32[0] * v34.m128_f32[0];
+              v35 = y - v33;
+              v36 = x - v32;
+              v37 = (float)((float)(v29 - y) * (float)(v29 - y)) + (float)(v31 * v31);
+              v38.m128_f32[0] = v38.m128_f32[0] + (float)((float)(v32 - v28) * (float)(v32 - v28));
+              v39 = v38;
+              v40 = (float)(v35 * v35) + (float)(v36 * v36);
+              v39.m128_f32[0] = (float)(v38.m128_f32[0] + v37) + v40;
+              v41 = _mm_sqrt_ps(v39).m128_f32[0] * this->IntersectionEpsilon;
+              if ( v37 <= v38.m128_f32[0] )
               {
-                v44 = (v40.m128_f32[0] <= v42) + 2;
+                v42 = (v38.m128_f32[0] <= v40) + 2;
               }
               else
               {
-                v44 = 3;
-                if ( v39 > v42 )
-                  v44 = 1;
+                v42 = 3;
+                if ( v37 > v40 )
+                  v42 = 1;
               }
-              v45 = v44 - 1;
-              if ( v45 )
+              v43 = v42 - 1;
+              if ( v43 )
               {
-                v46 = v45 - 1;
-                if ( v46 )
+                v44 = v43 - 1;
+                if ( v44 )
                 {
-                  if ( v46 == 1 )
+                  if ( v44 == 1 )
                   {
-                    v47 = v15[v14].x;
-                    v48 = v15[v14].y - v29;
-                    v49 = v15[v14].x - v28;
-                    v50 = (float)(v49 * v37) - (float)(v48 * v38);
-                    if ( COERCE_FLOAT(LODWORD(v50) & _xmm) < v43
-                      || (v51 = (float)((float)((float)(v29 - v34) * v38) - (float)((float)(v28 - v33) * v37)) / v50,
-                          v51 <= 0.0)
-                      || v51 >= 1.0 )
+                    v45 = v15[v14].x;
+                    v46 = v15[v14].y - v29;
+                    v47 = (float)((float)(v45 - v28) * v35) - (float)(v46 * v36);
+                    if ( COERCE_FLOAT(LODWORD(v47) & _xmm) < v41
+                      || (v48 = (float)((float)((float)(v29 - v33) * v36) - (float)((float)(v28 - v32) * v35)) / v47,
+                          v48 <= 0.0)
+                      || v48 >= 1.0 )
                     {
-                      v24[v21].x = v47;
+                      v24[v21].x = v45;
                       v24[v21].y = v15[v14].y;
                     }
                     else
                     {
-                      v24[v21].x = (float)((float)(v47 - (float)((float)(v49 * v51) + v28)) * 0.125)
-                                 + (float)((float)(v49 * v51) + v28);
-                      v24[v21].y = (float)((float)(v15[v14].y - (float)((float)(v48 * v51) + v29)) * 0.125)
-                                 + (float)((float)(v48 * v51) + v29);
+                      v24[v21].x = (float)((float)(v45 - (float)((float)((float)(v45 - v28) * v48) + v28)) * 0.125)
+                                 + (float)((float)((float)(v45 - v28) * v48) + v28);
+                      v24[v21].y = (float)((float)(v15[v14].y - (float)((float)(v46 * v48) + v29)) * 0.125)
+                                 + (float)((float)(v46 * v48) + v29);
                     }
                   }
                 }
                 else
                 {
-                  v52 = v13[v12].x;
-                  v53 = v13[v12].x - v22;
-                  v54 = v13[v12].y - v23;
-                  v55 = (float)(v71 * v53) - (float)(v63 * v54);
-                  if ( COERCE_FLOAT(LODWORD(v55) & _xmm) < v43
-                    || (v56 = (float)((float)((float)(v23 - v29) * v63) - (float)((float)(v22 - v28) * v71)) / v55,
-                        v56 <= 0.0)
-                    || v56 >= 1.0 )
+                  v49 = v13[v12].x;
+                  v50 = v13[v12].y - y;
+                  v51 = (float)(v66 * (float)(v49 - x)) - (float)(v58 * v50);
+                  if ( COERCE_FLOAT(LODWORD(v51) & _xmm) < v41
+                    || (v52 = (float)((float)((float)(y - v29) * v58) - (float)((float)(x - v28) * v66)) / v51,
+                        v52 <= 0.0)
+                    || v52 >= 1.0 )
                   {
-                    v19[v18].x = v52;
+                    v19[v18].x = v49;
                     v19[v18].y = v13[v12].y;
                   }
                   else
                   {
-                    v19[v18].x = (float)((float)(v52 - (float)((float)(v56 * v53) + v22)) * 0.125)
-                               + (float)((float)(v56 * v53) + v22);
-                    v19[v18].y = (float)((float)(v13[v12].y - (float)((float)(v56 * v54) + v23)) * 0.125)
-                               + (float)((float)(v56 * v54) + v23);
+                    v19[v18].x = (float)((float)(v49 - (float)((float)(v52 * (float)(v49 - x)) + x)) * 0.125)
+                               + (float)((float)(v52 * (float)(v49 - x)) + x);
+                    v19[v18].y = (float)((float)(v13[v12].y - (float)((float)(v52 * v50) + y)) * 0.125)
+                               + (float)((float)(v52 * v50) + y);
                   }
                 }
               }
               else
               {
-                v57 = v17[v16].x;
-                v58 = v17[v16].x - v33;
-                v59 = v17[v16].y - v34;
-                v60 = (float)(v64 * v58) - (float)(v32 * v59);
-                if ( COERCE_FLOAT(LODWORD(v60) & _xmm) < v43
-                  || (v61 = (float)(v33 - v22) * v64,
-                      v62 = (float)((float)((float)(v34 - v23) * v32) - v61) / v60,
-                      v62 <= 0.0)
-                  || v62 >= 1.0 )
+                v53 = v17[v16].x;
+                v54 = v17[v16].y - v33;
+                v55 = (float)(v59 * (float)(v53 - v32)) - (float)(v31 * v54);
+                if ( COERCE_FLOAT(LODWORD(v55) & _xmm) < v41
+                  || (v56 = (float)(v32 - x) * v59,
+                      v57 = (float)((float)((float)(v33 - y) * v31) - v56) / v55,
+                      v57 <= 0.0)
+                  || v57 >= 1.0 )
                 {
-                  v30[v27].x = v57;
+                  v30[v27].x = v53;
                   v30[v27].y = v17[v16].y;
                 }
                 else
                 {
-                  v30[v27].x = (float)((float)(v57
-                                             - (float)((float)((float)((float)((float)((float)(v34 - v23) * v32) - v61)
-                                                                     / v60)
-                                                             * v58)
-                                                     + v33))
+                  v30[v27].x = (float)((float)(v53
+                                             - (float)((float)((float)((float)((float)((float)(v33 - y) * v31) - v56)
+                                                                     / v55)
+                                                             * (float)(v53 - v32))
+                                                     + v32))
                                      * 0.125)
-                             + (float)((float)((float)((float)((float)((float)(v34 - v23) * v32) - v61) / v60) * v58)
-                                     + v33);
-                  v30[v27].y = (float)((float)(v17[v16].y - (float)((float)(v62 * v59) + v34)) * 0.125)
-                             + (float)((float)(v62 * v59) + v34);
+                             + (float)((float)((float)((float)((float)((float)(v33 - y) * v31) - v56) / v55)
+                                             * (float)(v53 - v32))
+                                     + v32);
+                  v30[v27].y = (float)((float)(v17[v16].y - (float)((float)(v57 * v54) + v33)) * 0.125)
+                             + (float)((float)(v57 * v54) + v33);
                 }
               }
               if ( (float)((float)((float)(v24[v21].y - v19[v18].y) * (float)(v30[v27].x - v24[v21].x))
@@ -10119,36 +9800,38 @@ void __fastcall Scaleform::Render::Tessellator::unflipTriangles(Scaleform::Rende
                 v30[v27].y = v17[v16].y;
               }
               v4 = 1;
-              v69 = 1;
+              v64 = 1;
             }
-            v1 = v68;
-            v5 = v65;
+            v1 = this;
+            v5 = v60;
             ++v6;
           }
-          while ( v6 < v67 );
-          v3 = v66;
+          while ( v6 < v62 );
+          v3 = v61;
         }
         ++v3;
         v5 += 32i64;
-        v66 = v3;
-        v65 = v5;
+        v61 = v3;
+        v60 = v5;
       }
       while ( v3 < v1->MeshTriangles.NumArrays );
-      v2 = v70;
+      v2 = v65;
     }
-    v70 = ++v2;
+    v65 = ++v2;
   }
   while ( v4 );
 }
 
 // File Line: 3504
 // RVA: 0x9E06F0
-void __fastcall Scaleform::Render::Tessellator::emitStrokerTrapezoid(Scaleform::Render::Tessellator *this, Scaleform::Render::Tessellator::StrokerEdgeType *edge, unsigned int v1, unsigned int v2)
+void __fastcall Scaleform::Render::Tessellator::emitStrokerTrapezoid(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::Tessellator::StrokerEdgeType *edge,
+        unsigned int v1,
+        unsigned int v2)
 {
-  Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16> *v4; // rbx
-  unsigned int v5; // ebp
-  Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::ArrayType *v6; // rsi
-  Scaleform::Render::Tessellator::StrokerEdgeType *v7; // r14
+  Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16> *p_MeshTriangles; // rbx
+  Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::ArrayType *Arrays; // rsi
   unsigned __int64 v8; // rdi
   Scaleform::Render::Tessellator::TriangleType *v9; // rdx
   Scaleform::Render::Tessellator::MonoVertexType *v10; // rax
@@ -10160,85 +9843,91 @@ void __fastcall Scaleform::Render::Tessellator::emitStrokerTrapezoid(Scaleform::
   Scaleform::Render::Tessellator::MonoVertexType *v16; // [rsp+28h] [rbp-30h]
   Scaleform::Render::Tessellator::MonoVertexType *v17; // [rsp+30h] [rbp-28h]
 
-  v4 = &this->MeshTriangles;
-  v5 = v2;
-  v6 = this->MeshTriangles.Arrays;
-  v7 = edge;
+  p_MeshTriangles = &this->MeshTriangles;
+  Arrays = this->MeshTriangles.Arrays;
   HIDWORD(v14) = v1;
   LODWORD(v16) = v2;
-  v8 = v6->Size >> 4;
+  v8 = Arrays->Size >> 4;
   LODWORD(v14) = edge->node1 & 0xFFFFFFF;
-  if ( v8 >= v6->NumPages )
+  if ( v8 >= Arrays->NumPages )
     Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::allocPage(
       &this->MeshTriangles,
-      v6,
+      Arrays,
       v8);
-  v9 = &v6->Pages[v8][v6->Size & 0xF];
+  v9 = &Arrays->Pages[v8][Arrays->Size & 0xF];
   v9->d.m.v1 = v14;
   v10 = v16;
-  LODWORD(v16) = v5;
+  LODWORD(v16) = v2;
   v9->d.m.v2 = v10;
   v9->d.m.v3 = v17;
-  ++v4->Arrays->Size;
-  v11 = v4->Arrays;
-  LODWORD(v15) = v7->node2 & 0xFFFFFFF;
+  ++p_MeshTriangles->Arrays->Size;
+  v11 = p_MeshTriangles->Arrays;
+  LODWORD(v15) = edge->node2 & 0xFFFFFFF;
   v12 = v11->Size >> 4;
-  HIDWORD(v15) = v7->node1 & 0xFFFFFFF;
+  HIDWORD(v15) = edge->node1 & 0xFFFFFFF;
   if ( v12 >= v11->NumPages )
-    Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::allocPage(v4, v11, v12);
+    Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::allocPage(
+      p_MeshTriangles,
+      v11,
+      v12);
   v13 = &v11->Pages[v12][v11->Size & 0xF];
   v13->d.m.v1 = v15;
   v13->d.m.v2 = v16;
   v13->d.m.v3 = v17;
-  ++v4->Arrays->Size;
+  ++p_MeshTriangles->Arrays->Size;
 }
 
 // File Line: 3519
 // RVA: 0x9E0810
-void __fastcall Scaleform::Render::Tessellator::emitStrokerVertex(Scaleform::Render::Tessellator *this, float x, float y)
+void __fastcall Scaleform::Render::Tessellator::emitStrokerVertex(
+        Scaleform::Render::Tessellator *this,
+        float x,
+        float y)
 {
-  Scaleform::Render::ArrayPaged<Scaleform::Render::TessVertex,4,16> *v3; // rbx
+  Scaleform::Render::ArrayPaged<Scaleform::Render::TessVertex,4,16> *p_MeshVertices; // rbx
   unsigned __int64 v4; // rdi
-  signed __int64 v5; // rdx
+  __int64 v5; // rdx
   Scaleform::Render::TessVertex *v6; // rax
 
-  v3 = &this->MeshVertices;
+  p_MeshVertices = &this->MeshVertices;
   v4 = this->MeshVertices.Size >> 4;
   if ( v4 >= this->MeshVertices.NumPages )
     Scaleform::Render::ArrayPaged<Scaleform::Render::TessVertex,4,16>::allocPage(
       &this->MeshVertices,
       this->MeshVertices.Size >> 4);
-  v5 = v3->Size & 0xF;
-  v6 = v3->Pages[v4];
+  v5 = p_MeshVertices->Size & 0xF;
+  v6 = p_MeshVertices->Pages[v4];
   v6[v5].x = x;
   v6[v5].y = y;
   v6[v5].Idx = -1;
   *(_QWORD *)v6[v5].Styles = 65537i64;
-  ++v3->Size;
+  ++p_MeshVertices->Size;
 }
 
 // File Line: 3532
 // RVA: 0x9C9C50
-signed __int64 __fastcall Scaleform::Render::Tessellator::addStrokerJoin(Scaleform::Render::Tessellator *this, Scaleform::Render::Tessellator::StrokerEdgeType *e1, Scaleform::Render::Tessellator::StrokerEdgeType *e2)
+__int64 __fastcall Scaleform::Render::Tessellator::addStrokerJoin(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::Tessellator::StrokerEdgeType *e1,
+        Scaleform::Render::Tessellator::StrokerEdgeType *e2)
 {
-  unsigned int v3; // er9
-  unsigned int v4; // ebp
-  Scaleform::Render::TessVertex **v5; // rdx
-  Scaleform::Render::Tessellator *v6; // rdi
+  unsigned int node1; // r9d
+  unsigned int node2; // ebp
+  Scaleform::Render::TessVertex **Pages; // rdx
   unsigned int v7; // ebp
   unsigned __int64 v8; // rax
   __int64 v9; // r9
   Scaleform::Render::TessVertex *v10; // rax
   float v11; // xmm12_4
-  float v12; // xmm7_4
+  float y; // xmm7_4
   Scaleform::Render::TessVertex *v13; // rbx
-  signed __int64 v14; // rsi
+  __int64 v14; // rsi
   float v15; // xmm9_4
   __m128 v16; // xmm6
   __m128 v17; // xmm1
   float v18; // xmm11_4
   Scaleform::Render::TessVertex *v19; // r8
-  float v20; // xmm15_4
+  float x; // xmm15_4
   float v21; // xmm14_4
   float v22; // xmm10_4
   __m128 v23; // xmm1
@@ -10264,42 +9953,40 @@ signed __int64 __fastcall Scaleform::Render::Tessellator::addStrokerJoin(Scalefo
   __m128 v44; // xmm0
   float v45; // xmm1_4
   Scaleform::Render::Tessellator *v46; // rcx
-  int v47; // ecx
+  int Size; // ecx
   float v48; // [rsp+34h] [rbp-F4h]
   float v49; // [rsp+38h] [rbp-F0h]
   float v50; // [rsp+3Ch] [rbp-ECh]
-  Scaleform::Render::Tessellator::TriangleType val; // [rsp+40h] [rbp-E8h]
+  Scaleform::Render::Tessellator::TriangleType val; // [rsp+40h] [rbp-E8h] BYREF
   float v52; // [rsp+130h] [rbp+8h]
   float v53; // [rsp+140h] [rbp+18h]
 
-  v3 = e1->node1;
-  v4 = e1->node2;
-  v5 = this->MeshVertices.Pages;
-  v6 = this;
-  v3 &= 0xFFFFFFFu;
-  v7 = v4 & 0xFFFFFFF;
-  v8 = v3;
-  v9 = v3 & 0xF;
-  v10 = v5[v8 >> 4];
+  node1 = e1->node1;
+  node2 = e1->node2;
+  Pages = this->MeshVertices.Pages;
+  v7 = node2 & 0xFFFFFFF;
+  v8 = node1 & 0xFFFFFFF;
+  v9 = node1 & 0xF;
+  v10 = Pages[v8 >> 4];
   v11 = this->EdgeAAWidth * -2.0;
-  v50 = this->EdgeAAWidth * -2.0;
-  v12 = v10[v9].y;
+  v50 = v11;
+  y = v10[v9].y;
   v13 = &v10[v9];
-  v14 = (signed __int64)&v5[(unsigned __int64)v7 >> 4][v7 & 0xF];
+  v14 = (__int64)&Pages[(unsigned __int64)v7 >> 4][v7 & 0xF];
   v15 = *(float *)v14;
   v16 = (__m128)*(unsigned int *)(v14 + 4);
-  v17 = (__m128)*(unsigned int *)(v14 + 4);
+  v17 = v16;
   v18 = *(float *)v14 - v13->x;
-  v19 = &v5[(unsigned __int64)(e2->node2 & 0xFFFFFFF) >> 4][e2->node2 & 0xF];
-  v20 = v19->x;
+  v19 = &Pages[(unsigned __int64)(e2->node2 & 0xFFFFFFF) >> 4][e2->node2 & 0xF];
+  x = v19->x;
   v21 = v19->y;
-  v17.m128_f32[0] = (float)((float)(v17.m128_f32[0] - v12) * (float)(v17.m128_f32[0] - v12)) + (float)(v18 * v18);
-  LODWORD(v22) = (unsigned __int128)_mm_sqrt_ps(v17);
-  v23 = (__m128)LODWORD(v19->y);
+  v17.m128_f32[0] = (float)((float)(v17.m128_f32[0] - y) * (float)(v17.m128_f32[0] - y)) + (float)(v18 * v18);
+  v22 = _mm_sqrt_ps(v17).m128_f32[0];
+  v23 = (__m128)LODWORD(v21);
   v24 = v19->x - *(float *)v14;
   v23.m128_f32[0] = (float)((float)(v23.m128_f32[0] - v16.m128_f32[0]) * (float)(v23.m128_f32[0] - v16.m128_f32[0]))
                   + (float)(v24 * v24);
-  LODWORD(len2) = (unsigned __int128)_mm_sqrt_ps(v23);
+  len2 = _mm_sqrt_ps(v23).m128_f32[0];
   v49 = len2;
   v26 = Scaleform::Render::Math2D::TurnRatio<Scaleform::Render::Hairliner::OutVertexType,Scaleform::Render::Hairliner::OutVertexType,Scaleform::Render::Hairliner::OutVertexType>(
           v13,
@@ -10307,9 +9994,9 @@ signed __int64 __fastcall Scaleform::Render::Tessellator::addStrokerJoin(Scalefo
           v19,
           v22,
           len2);
-  v52 = (float)(len2 + v22) * v6->IntersectionEpsilon;
+  v52 = (float)(len2 + v22) * this->IntersectionEpsilon;
   v48 = v26;
-  v27 = (float)((float)(v12 - v16.m128_f32[0]) * v11) * (float)(1.0 / v22);
+  v27 = (float)((float)(y - v16.m128_f32[0]) * v11) * (float)(1.0 / v22);
   v28 = (float)((float)(v16.m128_f32[0] - v21) * v11) * (float)(1.0 / len2);
   v29 = (float)(v24 * v11) * (float)(1.0 / len2);
   v30 = (float)(v18 * v11) * (float)(1.0 / v22);
@@ -10319,7 +10006,7 @@ signed __int64 __fastcall Scaleform::Render::Tessellator::addStrokerJoin(Scalefo
     v53 = v13->x + v27;
     v34 = (float)(v21 + v29) - (float)(v16.m128_f32[0] + v29);
     v35 = v13->y + v30;
-    v36 = (float)(v20 + v28) - (float)(v15 + v28);
+    v36 = (float)(x + v28) - (float)(v15 + v28);
     v37.m128_f32[0] = v16.m128_f32[0] + v30;
     v39 = v37;
     v38 = v15 + v27;
@@ -10328,7 +10015,7 @@ signed __int64 __fastcall Scaleform::Render::Tessellator::addStrokerJoin(Scalefo
     v41 = (float)(v34 * v40) - (float)(v36 * v39.m128_f32[0]);
     if ( COERCE_FLOAT(LODWORD(v41) & _xmm) < v52 )
     {
-      v46 = v6;
+      v46 = this;
     }
     else
     {
@@ -10340,10 +10027,10 @@ signed __int64 __fastcall Scaleform::Render::Tessellator::addStrokerJoin(Scalefo
       v44 = v39;
       v44.m128_f32[0] = (float)((float)(v39.m128_f32[0] - v16.m128_f32[0]) * (float)(v39.m128_f32[0] - v16.m128_f32[0]))
                       + (float)((float)(v43 - v15) * (float)(v43 - v15));
-      LODWORD(v45) = (unsigned __int128)_mm_sqrt_ps(v44);
+      LODWORD(v45) = _mm_sqrt_ps(v44).m128_u32[0];
       if ( v48 <= 0.0 )
       {
-        v46 = v6;
+        v46 = this;
         if ( v45 <= (float)(v50 * -4.0) )
         {
 LABEL_11:
@@ -10351,31 +10038,31 @@ LABEL_11:
           return 1i64;
         }
         Scaleform::Render::Tessellator::emitStrokerVertex(
-          v6,
+          this,
           v38 - (float)(v30 * 2.0),
           (float)(v27 * 2.0) + v37.m128_f32[0]);
         Scaleform::Render::Tessellator::emitStrokerVertex(
-          v6,
+          this,
           (float)(v28 + *(float *)v14) + (float)(v29 * 2.0),
           (float)(v29 + *(float *)(v14 + 4)) - (float)(v28 * 2.0));
-        v47 = v6->MeshVertices.Size;
+        Size = this->MeshVertices.Size;
         val.d.t.v1 = v7;
-        val.d.t.v2 = v47 - 2;
-        val.d.t.v3 = v47 - 1;
+        val.d.t.v2 = Size - 2;
+        val.d.t.v3 = Size - 1;
         Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::PushBack(
-          &v6->MeshTriangles,
+          &this->MeshTriangles,
           0i64,
           &val);
         return 2i64;
       }
       if ( v22 >= v49 )
         v22 = v49;
-      v46 = v6;
+      v46 = this;
       if ( v45 <= (float)(v22 / v48) )
         goto LABEL_11;
     }
     Scaleform::Render::Tessellator::emitStrokerVertex(v46, v38, v37.m128_f32[0]);
-    Scaleform::Render::Tessellator::emitStrokerVertex(v6, v28 + *(float *)v14, v29 + *(float *)(v14 + 4));
+    Scaleform::Render::Tessellator::emitStrokerVertex(this, v28 + *(float *)v14, v29 + *(float *)(v14 + 4));
     return 2i64;
   }
   if ( v22 <= len2 )
@@ -10388,7 +10075,7 @@ LABEL_11:
     v31 = v16.m128_f32[0] + v30;
     v32 = v15 + v27;
   }
-  Scaleform::Render::Tessellator::emitStrokerVertex(v6, v32, v31);
+  Scaleform::Render::Tessellator::emitStrokerVertex(this, v32, v31);
   return 1i64;
 }
 
@@ -10396,28 +10083,27 @@ LABEL_11:
 // RVA: 0x9ED7D0
 void __fastcall Scaleform::Render::Tessellator::processStrokerEdges(Scaleform::Render::Tessellator *this)
 {
-  unsigned __int64 v1; // r12
-  Scaleform::Render::Tessellator *v2; // r15
-  Scaleform::Render::Tessellator::MonoVertexType *v3; // rdx
-  Scaleform::Render::Tessellator::MonoVertexType *v4; // rsi
-  unsigned int v5; // ebp
-  unsigned int v6; // er14
+  unsigned __int64 i; // r12
+  Scaleform::Render::Tessellator::MonoVertexType *start; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *next; // rsi
+  unsigned int srcVer; // ebp
+  unsigned int v6; // r14d
   unsigned __int64 v7; // rdi
-  Scaleform::Render::Tessellator::MonoVertexType *i; // rdi
+  Scaleform::Render::Tessellator::MonoVertexType *j; // rdi
   int v9; // ecx
   unsigned __int64 v10; // rsi
   unsigned __int64 v11; // rsi
   unsigned __int64 v12; // rdi
-  signed __int64 v13; // rbx
-  unsigned __int64 v14; // rbp
+  Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::StrokerEdgeType,4,16> *p_StrokerEdges; // rbx
+  unsigned __int64 Size; // rbp
   unsigned __int64 v15; // rsi
-  Scaleform::Render::Tessellator::StrokerEdgeType **v16; // r8
+  Scaleform::Render::Tessellator::StrokerEdgeType **Pages; // r8
   unsigned __int64 v17; // rcx
   Scaleform::Render::Tessellator::StrokerEdgeType *v18; // rax
-  unsigned int v19; // ebx
+  unsigned int node1; // ebx
   int *v20; // r14
-  signed __int64 v21; // rdx
-  int v22; // er13
+  __int64 v21; // rdx
+  int v22; // r13d
   unsigned __int64 v23; // r9
   unsigned int v24; // edi
   Scaleform::Render::Tessellator::StrokerEdgeType *v25; // r10
@@ -10426,126 +10112,119 @@ void __fastcall Scaleform::Render::Tessellator::processStrokerEdges(Scaleform::R
   unsigned __int64 v28; // rax
   unsigned __int64 v29; // r9
   Scaleform::Render::Tessellator::StrokerEdgeType *v30; // rax
-  unsigned __int64 v31; // r12
+  unsigned __int64 k; // r12
   unsigned __int64 v32; // rcx
   Scaleform::Render::Tessellator::StrokerEdgeType *v33; // rax
   Scaleform::Render::Tessellator::StrokerEdgeType *v34; // r14
   unsigned int v35; // ebp
   Scaleform::Render::Tessellator::StrokerEdgeType *v36; // rdi
-  unsigned int j; // esi
+  unsigned int m; // esi
   __int64 v38; // r8
   unsigned __int64 v39; // rax
-  __int64 v40; // rbx
+  Scaleform::Render::Tessellator::StrokerEdgeType **v40; // rbx
   unsigned __int64 v41; // r8
   Scaleform::Render::Tessellator::StrokerEdgeType *v42; // rbx
-  unsigned int v43; // edx
-  int v44; // eax
-  Scaleform::Render::Tessellator::StrokerEdgeType v45; // [rsp+70h] [rbp+8h]
-  unsigned __int64 v46; // [rsp+78h] [rbp+10h]
-  Scaleform::Render::Tessellator::StrokerEdgeType v47; // [rsp+80h] [rbp+18h]
-  Scaleform::Render::Tessellator::StrokerEdgeType v48; // [rsp+88h] [rbp+20h]
+  int v43; // eax
+  Scaleform::Render::Tessellator::StrokerEdgeType v44; // [rsp+70h] [rbp+8h]
+  Scaleform::Render::Tessellator::StrokerEdgeType v45; // [rsp+78h] [rbp+10h]
+  Scaleform::Render::Tessellator::StrokerEdgeType v46; // [rsp+80h] [rbp+18h]
+  Scaleform::Render::Tessellator::StrokerEdgeType v47; // [rsp+88h] [rbp+20h]
 
-  v1 = 0i64;
-  v2 = this;
-  if ( this->Monotones.Size )
+  for ( i = 0i64; i < this->Monotones.Size; ++i )
   {
-    do
+    start = this->Monotones.Pages[i >> 4][i & 0xF].start;
+    if ( start )
     {
-      v3 = v2->Monotones.Pages[v1 >> 4][v1 & 0xF].start;
-      if ( v3 )
+      next = start->next;
+      srcVer = start->srcVer;
+      if ( next )
       {
-        v4 = v3->next;
-        v5 = v3->srcVer;
-        if ( v4 )
+        v6 = next->srcVer;
+        v44.node1 = srcVer & 0xFFFFFFF;
+        v44.node2 = next->srcVer & 0xFFFFFFF;
+        if ( (srcVer & 0xFFFFFFF) != v44.node2 )
         {
-          v6 = v4->srcVer;
-          v45.node2 = v4->srcVer & 0xFFFFFFF;
-          if ( (v5 & 0xFFFFFFF) != v45.node2 )
+          v7 = this->StrokerEdges.Size >> 4;
+          if ( v7 >= this->StrokerEdges.NumPages )
+            Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16>::allocPage(
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16> *)&this->StrokerEdges,
+              this->StrokerEdges.Size >> 4);
+          this->StrokerEdges.Pages[v7][this->StrokerEdges.Size & 0xF] = v44;
+          ++this->StrokerEdges.Size;
+        }
+        for ( j = next->next; j; j = j->next )
+        {
+          v9 = j->srcVer & 0xFFFFFFF;
+          if ( (j->srcVer & 0x80000000) == 0 )
           {
-            v7 = v2->StrokerEdges.Size >> 4;
-            if ( v7 >= v2->StrokerEdges.NumPages )
-              Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16>::allocPage(
-                (Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16> *)&v2->StrokerEdges,
-                v2->StrokerEdges.Size >> 4);
-            v45.node1 = v5 & 0xFFFFFFF;
-            v2->StrokerEdges.Pages[v7][v2->StrokerEdges.Size & 0xF] = v45;
-            ++v2->StrokerEdges.Size;
-          }
-          for ( i = v4->next; i; i = i->next )
-          {
-            v9 = i->srcVer & 0xFFFFFFF;
-            if ( (i->srcVer & 0x80000000) == 0 )
+            v46.node2 = j->srcVer & 0xFFFFFFF;
+            if ( (v6 & 0xFFFFFFF) != v9 )
             {
-              v47.node2 = i->srcVer & 0xFFFFFFF;
-              if ( (v6 & 0xFFFFFFF) != v9 )
-              {
-                v11 = v2->StrokerEdges.Size >> 4;
-                if ( v11 >= v2->StrokerEdges.NumPages )
-                  Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16>::allocPage(
-                    (Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16> *)&v2->StrokerEdges,
-                    v2->StrokerEdges.Size >> 4);
-                v47.node1 = v6 & 0xFFFFFFF;
-                v2->StrokerEdges.Pages[v11][v2->StrokerEdges.Size & 0xF] = v47;
-                ++v2->StrokerEdges.Size;
-              }
-              v6 = i->srcVer;
+              v11 = this->StrokerEdges.Size >> 4;
+              if ( v11 >= this->StrokerEdges.NumPages )
+                Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16>::allocPage(
+                  (Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16> *)&this->StrokerEdges,
+                  this->StrokerEdges.Size >> 4);
+              v46.node1 = v6 & 0xFFFFFFF;
+              this->StrokerEdges.Pages[v11][this->StrokerEdges.Size & 0xF] = v46;
+              ++this->StrokerEdges.Size;
             }
-            else
-            {
-              v46 = __PAIR__(v5, v9) & 0xFFFFFFFFFFFFFFFi64;
-              if ( v9 != (v5 & 0xFFFFFFF) )
-              {
-                v10 = v2->StrokerEdges.Size >> 4;
-                if ( v10 >= v2->StrokerEdges.NumPages )
-                  Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16>::allocPage(
-                    (Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16> *)&v2->StrokerEdges,
-                    v2->StrokerEdges.Size >> 4);
-                v2->StrokerEdges.Pages[v10][v2->StrokerEdges.Size & 0xF] = (Scaleform::Render::Tessellator::StrokerEdgeType)v46;
-                ++v2->StrokerEdges.Size;
-              }
-              v5 = i->srcVer;
-            }
+            v6 = j->srcVer;
           }
-          if ( (v6 & 0xFFFFFFF) != (v5 & 0xFFFFFFF) )
+          else
           {
-            v12 = v2->StrokerEdges.Size >> 4;
-            if ( v12 >= v2->StrokerEdges.NumPages )
-              Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16>::allocPage(
-                (Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16> *)&v2->StrokerEdges,
-                v2->StrokerEdges.Size >> 4);
-            v48.node1 = v6 & 0xFFFFFFF;
-            v48.node2 = v5 & 0xFFFFFFF;
-            v2->StrokerEdges.Pages[v12][v2->StrokerEdges.Size & 0xF] = v48;
-            ++v2->StrokerEdges.Size;
+            v45.node1 = j->srcVer & 0xFFFFFFF;
+            if ( v9 != (srcVer & 0xFFFFFFF) )
+            {
+              v10 = this->StrokerEdges.Size >> 4;
+              if ( v10 >= this->StrokerEdges.NumPages )
+                Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16>::allocPage(
+                  (Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16> *)&this->StrokerEdges,
+                  this->StrokerEdges.Size >> 4);
+              v45.node2 = srcVer & 0xFFFFFFF;
+              this->StrokerEdges.Pages[v10][this->StrokerEdges.Size & 0xF] = v45;
+              ++this->StrokerEdges.Size;
+            }
+            srcVer = j->srcVer;
           }
         }
+        if ( (v6 & 0xFFFFFFF) != (srcVer & 0xFFFFFFF) )
+        {
+          v12 = this->StrokerEdges.Size >> 4;
+          if ( v12 >= this->StrokerEdges.NumPages )
+            Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16>::allocPage(
+              (Scaleform::Render::ArrayPaged<Scaleform::Render::VertexBasic,4,16> *)&this->StrokerEdges,
+              this->StrokerEdges.Size >> 4);
+          v47.node2 = srcVer & 0xFFFFFFF;
+          v47.node1 = v6 & 0xFFFFFFF;
+          this->StrokerEdges.Pages[v12][this->StrokerEdges.Size & 0xF] = v47;
+          ++this->StrokerEdges.Size;
+        }
       }
-      ++v1;
     }
-    while ( v1 < v2->Monotones.Size );
   }
-  if ( v2->StrokerEdges.Size >= 2 )
+  if ( this->StrokerEdges.Size >= 2 )
   {
-    v13 = (signed __int64)&v2->StrokerEdges;
+    p_StrokerEdges = &this->StrokerEdges;
     Scaleform::Alg::QuickSortSliced<Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::StrokerEdgeType,4,16>,bool (*)(Scaleform::Render::Tessellator::StrokerEdgeType const &,Scaleform::Render::Tessellator::StrokerEdgeType const &)>(
-      &v2->StrokerEdges,
+      &this->StrokerEdges,
       0i64,
-      v2->StrokerEdges.Size,
+      this->StrokerEdges.Size,
       (bool (__fastcall *)(Scaleform::Render::Tessellator::StrokerEdgeType *, Scaleform::Render::Tessellator::StrokerEdgeType *))Scaleform::Render::Tessellator::cmpStrokerEdges);
-    v14 = v2->StrokerEdges.Size;
+    Size = this->StrokerEdges.Size;
     v15 = 0i64;
-    if ( v14 )
+    if ( Size )
     {
       do
       {
-        v16 = v2->StrokerEdges.Pages;
+        Pages = this->StrokerEdges.Pages;
         v17 = v15 & 0xF;
-        v18 = v16[v15 >> 4];
-        v19 = v18[v17].node1;
+        v18 = Pages[v15 >> 4];
+        node1 = v18[v17].node1;
         v20 = (int *)&v18[v17];
-        if ( !_bittest((const signed int *)&v19, 0x1Eu) )
+        if ( (node1 & 0x40000000) == 0 )
         {
-          v21 = v2->StrokerEdges.Size;
+          v21 = this->StrokerEdges.Size;
           v22 = v20[1];
           v23 = 0i64;
           if ( v21 > 0 )
@@ -10553,11 +10232,11 @@ void __fastcall Scaleform::Render::Tessellator::processStrokerEdges(Scaleform::R
             v24 = v22 & 0xFFFFFFF;
             do
             {
-              v25 = &v2->StrokerEdges.Pages[((v21 >> 1) + v23) >> 4][((unsigned __int8)(v21 >> 1) + (_BYTE)v23) & 0xF];
+              v25 = &this->StrokerEdges.Pages[((v21 >> 1) + v23) >> 4][((unsigned __int8)(v21 >> 1) + (_BYTE)v23) & 0xF];
               v26 = v25->node1 & 0xFFFFFFF;
               v27 = v26 < v24;
               if ( v26 == v24 )
-                v27 = (v25->node2 & 0xFFFFFFF) < (v19 & 0xFFFFFFF);
+                v27 = (v25->node2 & 0xFFFFFFF) < (node1 & 0xFFFFFFF);
               if ( v27 )
               {
                 v23 += (v21 >> 1) + 1;
@@ -10569,97 +10248,89 @@ void __fastcall Scaleform::Render::Tessellator::processStrokerEdges(Scaleform::R
               }
             }
             while ( v21 > 0 );
-            v16 = v2->StrokerEdges.Pages;
+            Pages = this->StrokerEdges.Pages;
           }
-          if ( v23 < v14 )
+          if ( v23 < Size )
           {
             v28 = v23;
             v29 = v23 & 0xF;
-            v30 = v16[v28 >> 4];
-            if ( v19 == v30[v29].node2 && v22 == v30[v29].node1 )
+            v30 = Pages[v28 >> 4];
+            if ( node1 == v30[v29].node2 && v22 == v30[v29].node1 )
             {
-              *v20 = v19 | 0x40000000;
+              *v20 = node1 | 0x40000000;
               v30[v29].node1 |= 0x40000000u;
             }
           }
         }
-        v14 = v2->StrokerEdges.Size;
+        Size = this->StrokerEdges.Size;
         ++v15;
       }
-      while ( v15 < v14 );
-      v13 = (signed __int64)&v2->StrokerEdges;
+      while ( v15 < Size );
+      p_StrokerEdges = &this->StrokerEdges;
     }
-    v31 = 0i64;
-    if ( v2->StrokerEdges.Size )
+    for ( k = 0i64; k < this->StrokerEdges.Size; p_StrokerEdges = &this->StrokerEdges )
     {
-      do
+      v32 = k & 0xF;
+      v33 = this->StrokerEdges.Pages[k >> 4];
+      v34 = &v33[v32];
+      if ( (v34->node1 & 0x40000000) == 0 )
       {
-        v32 = v31 & 0xF;
-        v33 = v2->StrokerEdges.Pages[v31 >> 4];
-        v34 = &v33[v32];
-        if ( !(v33[v32].node1 & 0x40000000) )
+        v35 = -1;
+        v36 = &v33[v32];
+        for ( m = -1; ; m = LODWORD(this->MeshVertices.Size) - 1 )
         {
-          v35 = -1;
-          v36 = &v33[v32];
-          for ( j = -1; ; j = LODWORD(v2->MeshVertices.Size) - 1 )
+          v38 = p_StrokerEdges->Size;
+          v39 = 0i64;
+          if ( v38 > 0 )
           {
-            v38 = *(_QWORD *)(v13 + 8);
-            v39 = 0i64;
-            if ( v38 > 0 )
+            v40 = p_StrokerEdges->Pages;
+            do
             {
-              v40 = *(_QWORD *)(v13 + 32);
-              do
+              if ( (v40[((v38 >> 1) + v39) >> 4][((unsigned __int8)(v38 >> 1) + (_BYTE)v39) & 0xF].node1 & 0xFFFFFFF) >= (v36->node2 & 0xFFFFFFF) )
               {
-                if ( (*(_DWORD *)(*(_QWORD *)(v40 + 8 * (((v38 >> 1) + v39) >> 4))
-                                + 8i64 * (((unsigned __int8)(v38 >> 1) + (_BYTE)v39) & 0xF)) & 0xFFFFFFFu) >= (v36->node2 & 0xFFFFFFF) )
-                {
-                  v38 >>= 1;
-                }
-                else
-                {
-                  v39 += (v38 >> 1) + 1;
-                  v38 += -1 - (v38 >> 1);
-                }
+                v38 >>= 1;
               }
-              while ( v38 > 0 );
+              else
+              {
+                v39 += (v38 >> 1) + 1;
+                v38 += -1 - (v38 >> 1);
+              }
             }
-            v41 = v2->StrokerEdges.Size;
-            if ( v39 >= v41 )
-              break;
-            while ( 1 )
-            {
-              v42 = &v2->StrokerEdges.Pages[v39 >> 4][v39 & 0xF];
-              v43 = v42->node1;
-              if ( !_bittest((const signed int *)&v43, 0x1Eu) && !((v43 ^ v36->node2) & 0xFFFFFFF) )
-                break;
-              if ( ++v39 >= v41 )
-                goto LABEL_64;
-            }
-            v44 = Scaleform::Render::Tessellator::addStrokerJoin(v2, v36, v42);
-            if ( j == -1 )
-            {
-              v35 = LODWORD(v2->MeshVertices.Size) - v44;
-            }
-            else
-            {
-              Scaleform::Render::Tessellator::emitStrokerTrapezoid(v2, v36, j, LODWORD(v2->MeshVertices.Size) - v44);
-              v36->node1 |= 0x40000000u;
-            }
-            if ( v42 == v34 )
-            {
-              Scaleform::Render::Tessellator::emitStrokerTrapezoid(v2, v34, LODWORD(v2->MeshVertices.Size) - 1, v35);
-              v34->node1 |= 0x40000000u;
-              break;
-            }
-            v36 = v42;
-            v13 = (signed __int64)&v2->StrokerEdges;
+            while ( v38 > 0 );
           }
+          v41 = this->StrokerEdges.Size;
+          if ( v39 >= v41 )
+            break;
+          while ( 1 )
+          {
+            v42 = &this->StrokerEdges.Pages[v39 >> 4][v39 & 0xF];
+            if ( (v42->node1 & 0x40000000) == 0 && ((v42->node1 ^ v36->node2) & 0xFFFFFFF) == 0 )
+              break;
+            if ( ++v39 >= v41 )
+              goto LABEL_64;
+          }
+          v43 = Scaleform::Render::Tessellator::addStrokerJoin(this, v36, v42);
+          if ( m == -1 )
+          {
+            v35 = LODWORD(this->MeshVertices.Size) - v43;
+          }
+          else
+          {
+            Scaleform::Render::Tessellator::emitStrokerTrapezoid(this, v36, m, LODWORD(this->MeshVertices.Size) - v43);
+            v36->node1 |= 0x40000000u;
+          }
+          if ( v42 == v34 )
+          {
+            Scaleform::Render::Tessellator::emitStrokerTrapezoid(this, v34, LODWORD(this->MeshVertices.Size) - 1, v35);
+            v34->node1 |= 0x40000000u;
+            break;
+          }
+          v36 = v42;
+          p_StrokerEdges = &this->StrokerEdges;
         }
-LABEL_64:
-        ++v31;
-        v13 = (signed __int64)&v2->StrokerEdges;
       }
-      while ( v31 < v2->StrokerEdges.Size );
+LABEL_64:
+      ++k;
     }
   }
 }
@@ -10670,357 +10341,359 @@ void __fastcall Scaleform::Render::Tessellator::processEdgeAA(Scaleform::Render:
 {
   unsigned __int64 v1; // r14
   unsigned __int64 v2; // rbx
-  Scaleform::Render::Tessellator *v3; // rsi
   unsigned __int64 i; // rdi
   int v5; // eax
   Scaleform::Render::Tessellator::EdgeAAType *v6; // rbp
-  Scaleform::Render::Tessellator::EdgeAAType *v7; // rdx
-  unsigned __int64 v8; // rcx
-  unsigned int v9; // er11
+  Scaleform::Render::Tessellator::EdgeAAType *Array; // rdx
+  unsigned __int64 Size; // rcx
+  unsigned int v9; // r11d
   unsigned __int64 j; // r10
-  signed __int64 v11; // rax
+  __int64 v11; // rax
   unsigned __int64 v12; // rdx
   Scaleform::Render::TessVertex *v13; // r8
-  signed __int64 v14; // r9
+  __int64 v14; // r9
   unsigned __int64 k; // rbx
   unsigned __int64 v16; // rax
-  Scaleform::Render::LinearHeap **v17; // rdi
+  Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::TmpEdgeAAType,3,4> *p_TmpEdgeFan; // rdi
   unsigned __int64 v18; // rdx
-  unsigned __int64 v19; // rax
-  signed __int64 v20; // r15
+  __int64 v19; // rax
+  __int64 v20; // r15
   unsigned __int64 v21; // r13
   Scaleform::Render::TessVertex *v22; // r12
-  Scaleform::Render::TessVertex **v23; // r10
+  Scaleform::Render::TessVertex **Pages; // r10
   Scaleform::Render::Tessellator::EdgeAAType *v24; // rax
-  Scaleform::Render::Tessellator::MonoVertexType *v25; // rbx
-  Scaleform::Render::TessVertex *v26; // r8
-  Scaleform::Render::TessVertex *v27; // rcx
-  float v28; // xmm2_4
-  float v29; // xmm3_4
-  float v30; // xmm0_4
-  float v31; // xmm1_4
+  Scaleform::Render::Tessellator::MonoVertexType *rayVer; // rdx
+  Scaleform::Render::Tessellator::MonoVertexType *cntVer; // rbx
+  Scaleform::Render::TessVertex *v27; // r8
+  Scaleform::Render::TessVertex *v28; // rcx
+  float v29; // xmm2_4
+  float v30; // xmm3_4
+  float v31; // xmm0_4
   float v32; // xmm1_4
-  unsigned __int64 v33; // rbp
-  unsigned __int64 v34; // rdx
-  Scaleform::Render::LinearHeap *v35; // rcx
-  void *v36; // rbx
-  unsigned __int64 v37; // rax
-  Scaleform::Render::Tessellator::TmpEdgeAAType *v38; // rdx
-  signed __int64 v39; // r8
-  unsigned __int64 v40; // rbx
-  unsigned __int16 v41; // bp
-  float l; // xmm1_4
-  Scaleform::Render::Tessellator::EdgeAAType *v43; // r10
-  unsigned __int64 v44; // r11
-  Scaleform::Render::Tessellator::TmpEdgeAAType *v45; // r8
-  unsigned __int16 v46; // ax
-  __int64 v47; // [rsp+30h] [rbp-A8h]
-  unsigned __int64 v48; // [rsp+E0h] [rbp+8h]
-  Scaleform::Render::Tessellator::MonoVertexType *v49; // [rsp+E8h] [rbp+10h]
-  Scaleform::Render::Tessellator::MonoVertexType *v50; // [rsp+F0h] [rbp+18h]
-  unsigned __int64 v51; // [rsp+F8h] [rbp+20h]
+  float v33; // xmm1_4
+  unsigned __int64 v34; // rbp
+  unsigned __int64 MaxPages; // rdx
+  Scaleform::Render::LinearHeap *pHeap; // rcx
+  void *v37; // rbx
+  unsigned __int64 v38; // rax
+  Scaleform::Render::Tessellator::TmpEdgeAAType *v39; // rdx
+  __int64 v40; // r8
+  unsigned __int64 v41; // rbx
+  unsigned __int16 v42; // bp
+  float m; // xmm1_4
+  Scaleform::Render::Tessellator::EdgeAAType *v44; // r10
+  unsigned __int64 v45; // r11
+  Scaleform::Render::Tessellator::TmpEdgeAAType *v46; // r8
+  unsigned __int16 style; // ax
+  __int64 v48; // [rsp+30h] [rbp-A8h]
+  unsigned __int64 v49; // [rsp+E0h] [rbp+8h]
+  Scaleform::Render::Tessellator::MonoVertexType *v50; // [rsp+E8h] [rbp+10h]
+  Scaleform::Render::Tessellator::MonoVertexType *v51; // [rsp+F0h] [rbp+18h]
+  unsigned __int64 v52; // [rsp+F8h] [rbp+20h]
 
   v1 = 0i64;
   v2 = 0i64;
-  v3 = this;
-  for ( i = 0i64; v2 < v3->Monotones.Size; i = (unsigned int)(v5 + i) )
+  for ( i = 0i64; v2 < this->Monotones.Size; i = (unsigned int)(v5 + i) )
   {
-    v5 = Scaleform::Render::Tessellator::countFanEdges(v3, &v3->Monotones.Pages[v2 >> 4][v2 & 0xF]);
+    v5 = Scaleform::Render::Tessellator::countFanEdges(this, &this->Monotones.Pages[v2 >> 4][v2 & 0xF]);
     ++v2;
   }
-  if ( i > v3->EdgeFans.Size )
+  if ( i > this->EdgeFans.Size )
   {
-    v6 = (Scaleform::Render::Tessellator::EdgeAAType *)Scaleform::Render::LinearHeap::Alloc(v3->EdgeFans.pHeap, 24 * i);
+    v6 = (Scaleform::Render::Tessellator::EdgeAAType *)Scaleform::Render::LinearHeap::Alloc(
+                                                         this->EdgeFans.pHeap,
+                                                         24 * i);
     memset(v6, 0, 24 * i);
-    v7 = v3->EdgeFans.Array;
-    if ( v7 )
+    Array = this->EdgeFans.Array;
+    if ( Array )
     {
-      v8 = v3->EdgeFans.Size;
-      if ( v8 )
-        memmove(v6, v7, 24 * v8);
+      Size = this->EdgeFans.Size;
+      if ( Size )
+        memmove(v6, Array, 24 * Size);
     }
-    v3->EdgeFans.Array = v6;
+    this->EdgeFans.Array = v6;
   }
-  v3->EdgeFans.Size = i;
+  this->EdgeFans.Size = i;
   v9 = 0;
-  for ( j = 0i64; j < v3->MeshVertices.Size; v9 += v11 )
+  for ( j = 0i64; j < this->MeshVertices.Size; v9 += v11 )
   {
     v11 = j & 0xF;
     v12 = j++ >> 4;
-    v13 = v3->MeshVertices.Pages[v12];
+    v13 = this->MeshVertices.Pages[v12];
     v14 = v11;
     LODWORD(v11) = v13[v11].Mesh;
     v13[v14].Idx = v9;
     v13[v14].Mesh = 0;
   }
-  for ( k = 0i64; k < v3->Monotones.Size; ++k )
-    Scaleform::Render::Tessellator::collectFanEdges(v3, &v3->Monotones.Pages[k >> 4][k & 0xF]);
+  for ( k = 0i64; k < this->Monotones.Size; ++k )
+    Scaleform::Render::Tessellator::collectFanEdges(this, &this->Monotones.Pages[k >> 4][k & 0xF]);
   v16 = 0i64;
-  v51 = v3->MeshVertices.Size;
-  v48 = 0i64;
-  if ( v51 )
+  v52 = this->MeshVertices.Size;
+  v49 = 0i64;
+  if ( v52 )
   {
-    v17 = &v3->TmpEdgeFan.pHeap;
+    p_TmpEdgeFan = &this->TmpEdgeFan;
     do
     {
       v18 = v16;
       v19 = v16 & 0xF;
       v20 = v19;
       v21 = 0i64;
-      v22 = v3->MeshVertices.Pages[v18 >> 4];
-      v3->TmpEdgeFan.Size = 0i64;
-      if ( v22[v19].Mesh > 0u )
+      v22 = this->MeshVertices.Pages[v18 >> 4];
+      this->TmpEdgeFan.Size = 0i64;
+      if ( v22[v19].Mesh )
       {
         do
         {
-          v23 = v3->MeshVertices.Pages;
-          v24 = v3->EdgeFans.Array;
-          v25 = v24[v21 + v22[v20].Idx].cntVer;
-          v50 = v24[v21 + v22[v20].Idx].rayVer;
-          HIDWORD(v47) = v24[v21 + v22[v20].Idx].style;
-          v49 = v24[v21 + v22[v20].Idx].cntVer;
-          v26 = v23[(unsigned __int64)(v24[v21 + v22[v20].Idx].rayVer->srcVer & 0xFFFFFFF) >> 4];
-          v27 = v23[(unsigned __int64)(v25->srcVer & 0xFFFFFFF) >> 4];
-          v28 = v26[v24[v21 + v22[v20].Idx].rayVer->srcVer & 0xF].x - v27[v25->srcVer & 0xF].x;
-          v29 = v26[v24[v21 + v22[v20].Idx].rayVer->srcVer & 0xF].y - v27[v25->srcVer & 0xF].y;
-          v30 = (float)((float)(v29 * v29) + (float)(v28 * v28)) * 2.0;
-          if ( v30 == 0.0 )
+          Pages = this->MeshVertices.Pages;
+          v24 = this->EdgeFans.Array;
+          rayVer = v24[v21 + v22[v20].Idx].rayVer;
+          cntVer = v24[v21 + v22[v20].Idx].cntVer;
+          v51 = rayVer;
+          HIDWORD(v48) = v24[v21 + v22[v20].Idx].style;
+          v50 = cntVer;
+          v27 = Pages[(unsigned __int64)(rayVer->srcVer & 0xFFFFFFF) >> 4];
+          v28 = Pages[(unsigned __int64)(cntVer->srcVer & 0xFFFFFFF) >> 4];
+          v29 = v27[rayVer->srcVer & 0xF].x - v28[cntVer->srcVer & 0xF].x;
+          v30 = v27[rayVer->srcVer & 0xF].y - v28[cntVer->srcVer & 0xF].y;
+          v31 = (float)((float)(v30 * v30) + (float)(v29 * v29)) * 2.0;
+          if ( v31 == 0.0 )
           {
-            v31 = 0.0;
+            v32 = 0.0;
           }
           else
           {
-            v32 = (float)(v28 * v28) / v30;
-            if ( v28 < 0.0 )
-              LODWORD(v32) ^= _xmm[0];
-            if ( v29 > 0.0 )
-              v32 = 1.0 - v32;
-            v31 = v32 - 0.5;
+            v33 = (float)(v29 * v29) / v31;
+            if ( v29 < 0.0 )
+              LODWORD(v33) ^= _xmm[0];
+            if ( v30 > 0.0 )
+              v33 = 1.0 - v33;
+            v32 = v33 - 0.5;
           }
-          *(float *)&v47 = v31;
-          v33 = v3->TmpEdgeFan.Size >> 3;
-          if ( v33 >= v3->TmpEdgeFan.NumPages )
+          *(float *)&v48 = v32;
+          v34 = this->TmpEdgeFan.Size >> 3;
+          if ( v34 >= this->TmpEdgeFan.NumPages )
           {
-            v34 = v3->TmpEdgeFan.MaxPages;
-            if ( v33 >= v34 )
+            MaxPages = this->TmpEdgeFan.MaxPages;
+            if ( v34 >= MaxPages )
             {
-              v35 = *v17;
-              if ( v3->TmpEdgeFan.Pages )
+              pHeap = p_TmpEdgeFan->pHeap;
+              if ( this->TmpEdgeFan.Pages )
               {
-                v36 = Scaleform::Render::LinearHeap::Alloc(v35, 16 * v34);
-                memmove(v36, v3->TmpEdgeFan.Pages, 8 * v3->TmpEdgeFan.NumPages);
-                v37 = v3->TmpEdgeFan.MaxPages;
-                v3->TmpEdgeFan.Pages = (Scaleform::Render::Tessellator::TmpEdgeAAType **)v36;
-                v25 = v49;
-                v3->TmpEdgeFan.MaxPages = 2 * v37;
+                v37 = Scaleform::Render::LinearHeap::Alloc(pHeap, 16 * MaxPages);
+                memmove(v37, this->TmpEdgeFan.Pages, 8 * this->TmpEdgeFan.NumPages);
+                v38 = this->TmpEdgeFan.MaxPages;
+                this->TmpEdgeFan.Pages = (Scaleform::Render::Tessellator::TmpEdgeAAType **)v37;
+                cntVer = v50;
+                this->TmpEdgeFan.MaxPages = 2 * v38;
               }
               else
               {
-                v3->TmpEdgeFan.MaxPages = 4i64;
-                v3->TmpEdgeFan.Pages = (Scaleform::Render::Tessellator::TmpEdgeAAType **)Scaleform::Render::LinearHeap::Alloc(
-                                                                                           v35,
-                                                                                           0x20ui64);
+                this->TmpEdgeFan.MaxPages = 4i64;
+                this->TmpEdgeFan.Pages = (Scaleform::Render::Tessellator::TmpEdgeAAType **)Scaleform::Render::LinearHeap::Alloc(
+                                                                                             pHeap,
+                                                                                             0x20ui64);
               }
             }
-            v3->TmpEdgeFan.Pages[v33] = (Scaleform::Render::Tessellator::TmpEdgeAAType *)Scaleform::Render::LinearHeap::Alloc(
-                                                                                           *v17,
-                                                                                           0xC0ui64);
-            ++v3->TmpEdgeFan.NumPages;
+            this->TmpEdgeFan.Pages[v34] = (Scaleform::Render::Tessellator::TmpEdgeAAType *)Scaleform::Render::LinearHeap::Alloc(
+                                                                                             p_TmpEdgeFan->pHeap,
+                                                                                             0xC0ui64);
+            ++this->TmpEdgeFan.NumPages;
           }
           ++v21;
-          v38 = v3->TmpEdgeFan.Pages[v33];
-          v39 = v3->TmpEdgeFan.Size & 7;
-          v38[v39].cntVer = v25;
-          v38[v39].rayVer = v50;
-          *(_QWORD *)&v38[v39].slope = v47;
-          ++v3->TmpEdgeFan.Size;
+          v39 = this->TmpEdgeFan.Pages[v34];
+          v40 = this->TmpEdgeFan.Size & 7;
+          v39[v40].cntVer = cntVer;
+          v39[v40].rayVer = v51;
+          *(_QWORD *)&v39[v40].slope = v48;
+          ++this->TmpEdgeFan.Size;
         }
         while ( v21 < v22[v20].Mesh );
       }
       Scaleform::Alg::QuickSortSliced<Scaleform::Render::ArrayPaged<Scaleform::Render::Tessellator::TmpEdgeAAType,3,4>,bool (*)(Scaleform::Render::Tessellator::TmpEdgeAAType const &,Scaleform::Render::Tessellator::TmpEdgeAAType const &)>(
-        &v3->TmpEdgeFan,
+        &this->TmpEdgeFan,
         0i64,
-        v3->TmpEdgeFan.Size,
+        this->TmpEdgeFan.Size,
         Scaleform::Render::Tessellator::cmpEdgeAA);
-      v40 = 0i64;
-      v41 = 0;
-      for ( l = FLOAT_N1_0e30; v40 < v3->TmpEdgeFan.Size; ++v40 )
+      v41 = 0i64;
+      v42 = 0;
+      for ( m = FLOAT_N1_0e30; v41 < this->TmpEdgeFan.Size; ++v41 )
       {
-        v43 = v3->EdgeFans.Array;
-        v44 = v40 + v22[v20].Idx;
-        v45 = v3->TmpEdgeFan.Pages[v40 >> 3];
-        v43[v44].cntVer = v45[v40 & 7].cntVer;
-        v43[v44].rayVer = v45[v40 & 7].rayVer;
-        v46 = v45[v40 & 7].style;
-        v43[v44].slope = v41;
-        v43[v44].style = v46;
-        if ( v45[v40 & 7].slope != l )
+        v44 = this->EdgeFans.Array;
+        v45 = v41 + v22[v20].Idx;
+        v46 = this->TmpEdgeFan.Pages[v41 >> 3];
+        v44[v45].cntVer = v46[v41 & 7].cntVer;
+        v44[v45].rayVer = v46[v41 & 7].rayVer;
+        style = v46[v41 & 7].style;
+        v44[v45].slope = v42;
+        v44[v45].style = style;
+        if ( v46[v41 & 7].slope != m )
         {
-          ++v41;
-          l = v45[v40 & 7].slope;
+          ++v42;
+          m = v46[v41 & 7].slope;
         }
       }
-      Scaleform::Render::Tessellator::processFan(v3, v22[v20].Idx, v22[v20].Idx + v22[v20].Mesh);
+      Scaleform::Render::Tessellator::processFan(this, v22[v20].Idx, v22[v20].Idx + v22[v20].Mesh);
       v22[v20].Idx = -1;
       v22[v20].Mesh = -1;
-      v16 = v48 + 1;
-      v48 = v16;
+      v16 = v49 + 1;
+      v49 = v16;
     }
-    while ( v16 < v51 );
+    while ( v16 < v52 );
   }
-  if ( v3->Monotones.Size > 0 )
+  if ( this->Monotones.Size )
   {
     do
     {
-      Scaleform::Render::Tessellator::triangulateMonotoneAA(v3, &v3->Monotones.Pages[v1 >> 4][v1 & 0xF]);
+      Scaleform::Render::Tessellator::triangulateMonotoneAA(this, &this->Monotones.Pages[v1 >> 4][v1 & 0xF]);
       ++v1;
     }
-    while ( v1 < v3->Monotones.Size );
+    while ( v1 < this->Monotones.Size );
   }
-  Scaleform::Render::Tessellator::unflipTriangles(v3);
-  Scaleform::Render::Tessellator::emitTriangles(v3);
+  Scaleform::Render::Tessellator::unflipTriangles(this);
+  Scaleform::Render::Tessellator::emitTriangles(this);
+}der::Tessellator::unflipTriangles(this);
+  Scaleform::Render::Tessellator::emitTriangles(this);
 }
 
 // File Line: 3832
 // RVA: 0x9B8C50
 void __fastcall Scaleform::Render::Tessellator::Tessellate(Scaleform::Render::Tessellator *this, bool autoSplitMeshes)
 {
-  bool v2; // r14
-  Scaleform::Render::Tessellator *v3; // rdi
   unsigned __int64 v4; // rsi
   unsigned __int64 v5; // rbp
   Scaleform::Render::TessMesh *v6; // rcx
-  signed __int64 v7; // rdx
-  Scaleform::Render::LinearHeap *v8; // rcx
+  __int64 v7; // rdx
+  Scaleform::Render::LinearHeap *pHeap; // rcx
   unsigned __int64 v9; // rbx
   unsigned __int64 v10; // rbx
   unsigned __int16 *v11; // rax
   unsigned __int64 i; // rbx
-  signed __int64 v13; // r8
-  unsigned int v14; // edx
-  unsigned int v15; // er8
+  Scaleform::Render::Tessellator::PathType *v13; // r8
+  unsigned int leftStyle; // edx
+  unsigned int rightStyle; // r8d
   unsigned __int64 j; // rbp
-  signed __int64 v17; // rbx
+  Scaleform::Render::Tessellator::PathType *v17; // rbx
   unsigned int v18; // edx
   unsigned int v19; // edx
   unsigned __int64 k; // rbx
   unsigned __int64 v21; // rbx
-  unsigned __int64 l; // rbx
+  unsigned __int64 m; // rbx
   Scaleform::Render::TessVertex *v23; // r9
-  unsigned __int16 v24; // ax
-  signed __int64 v25; // rdx
+  unsigned __int16 Mesh; // ax
+  __int64 v25; // rdx
   Scaleform::Render::TessMesh *v26; // rcx
-  unsigned __int64 v27; // rax
+  unsigned __int64 VertexLimit; // rax
 
-  v2 = autoSplitMeshes;
-  v3 = this;
   this->MinX = 1.0e30;
   this->MinY = 1.0e30;
   this->MaxX = -1.0e30;
   this->MaxY = -1.0e30;
   Scaleform::Render::Tessellator::monotonize(this);
   v4 = 0i64;
-  v5 = v3->Meshes.Size >> 4;
-  if ( v5 >= v3->Meshes.NumPages )
-    Scaleform::Render::ArrayPaged<Scaleform::Render::TessMesh,4,4>::allocPage(&v3->Meshes, v3->Meshes.Size >> 4);
-  v6 = v3->Meshes.Pages[v5];
-  v7 = v3->Meshes.Size & 0xF;
+  v5 = this->Meshes.Size >> 4;
+  if ( v5 >= this->Meshes.NumPages )
+    Scaleform::Render::ArrayPaged<Scaleform::Render::TessMesh,4,4>::allocPage(&this->Meshes, this->Meshes.Size >> 4);
+  v6 = this->Meshes.Pages[v5];
+  v7 = this->Meshes.Size & 0xF;
   *(_QWORD *)&v6[v7].MeshIdx = 0i64;
   *(_QWORD *)&v6[v7].Style2 = 0i64;
   *(_QWORD *)&v6[v7].Flags2 = 0i64;
   v6[v7].VertexCount = 0;
-  ++v3->Meshes.Size;
-  if ( v3->HasComplexFill )
+  ++this->Meshes.Size;
+  if ( this->HasComplexFill )
   {
-    v8 = v3->StyleMatrix.pHeap;
-    v9 = v3->MaxStyle + 1;
-    v3->StyleMatrix.Size = v9;
+    pHeap = this->StyleMatrix.pHeap;
+    v9 = this->MaxStyle + 1;
+    this->StyleMatrix.Size = v9;
     v10 = 2 * v9 * v9;
-    v11 = (unsigned __int16 *)Scaleform::Render::LinearHeap::Alloc(v8, v10);
-    v3->StyleMatrix.Array = v11;
+    v11 = (unsigned __int16 *)Scaleform::Render::LinearHeap::Alloc(pHeap, v10);
+    this->StyleMatrix.Array = v11;
     memset(v11, 255, v10);
-    for ( i = 0i64; i < v3->Paths.Size; ++i )
+    for ( i = 0i64; i < this->Paths.Size; ++i )
     {
-      v13 = (signed __int64)&v3->Paths.Pages[i >> 4][i & 0xF];
-      v14 = *(_DWORD *)(v13 + 8);
-      if ( v14 )
+      v13 = &this->Paths.Pages[i >> 4][i & 0xF];
+      leftStyle = v13->leftStyle;
+      if ( leftStyle )
       {
-        v15 = *(_DWORD *)(v13 + 12);
-        if ( v15 )
-          Scaleform::Render::Tessellator::setMesh(v3, v14, v15);
+        rightStyle = v13->rightStyle;
+        if ( rightStyle )
+          Scaleform::Render::Tessellator::setMesh(this, leftStyle, rightStyle);
       }
     }
-    for ( j = 0i64; j < v3->Paths.Size; ++j )
+    for ( j = 0i64; j < this->Paths.Size; ++j )
     {
-      v17 = (signed __int64)&v3->Paths.Pages[j >> 4][j & 0xF];
-      v18 = *(_DWORD *)(v17 + 8);
+      v17 = &this->Paths.Pages[j >> 4][j & 0xF];
+      v18 = v17->leftStyle;
       if ( v18 )
-        Scaleform::Render::Tessellator::setMesh(v3, v18);
-      v19 = *(_DWORD *)(v17 + 12);
+        Scaleform::Render::Tessellator::setMesh(this, v18);
+      v19 = v17->rightStyle;
       if ( v19 )
-        Scaleform::Render::Tessellator::setMesh(v3, v19);
+        Scaleform::Render::Tessellator::setMesh(this, v19);
     }
   }
-  Scaleform::Render::Tessellator::clearHeap1(v3);
-  for ( k = 0i64; k < v3->Meshes.Size; ++k )
-    Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::AddArray(&v3->MeshTriangles);
-  if ( v3->EdgeAAFlag )
+  Scaleform::Render::Tessellator::clearHeap1(this);
+  for ( k = 0i64; k < this->Meshes.Size; ++k )
+    Scaleform::Render::ArrayJagged<Scaleform::Render::Tessellator::TriangleType,4,16>::AddArray(&this->MeshTriangles);
+  if ( this->EdgeAAFlag )
   {
-    if ( v3->StrokerMode )
+    if ( this->StrokerMode )
     {
-      Scaleform::Render::Tessellator::setMesh(v3, 1u);
+      Scaleform::Render::Tessellator::setMesh(this, 1u);
       v21 = 0i64;
-      for ( v3->EdgeAAFlag = 0; v21 < v3->Monotones.Size; ++v21 )
-        Scaleform::Render::Tessellator::triangulateMonotoneAA(v3, &v3->Monotones.Pages[v21 >> 4][v21 & 0xF]);
-      v3->EdgeAAFlag = 1;
-      Scaleform::Render::Tessellator::processStrokerEdges(v3);
+      for ( this->EdgeAAFlag = 0; v21 < this->Monotones.Size; ++v21 )
+        Scaleform::Render::Tessellator::triangulateMonotoneAA(this, &this->Monotones.Pages[v21 >> 4][v21 & 0xF]);
+      this->EdgeAAFlag = 1;
+      Scaleform::Render::Tessellator::processStrokerEdges(this);
     }
     else
     {
-      Scaleform::Render::Tessellator::processEdgeAA(v3);
+      Scaleform::Render::Tessellator::processEdgeAA(this);
     }
   }
   else
   {
-    for ( l = 0i64; l < v3->Monotones.Size; ++l )
-      Scaleform::Render::Tessellator::triangulateMonotoneAA(v3, &v3->Monotones.Pages[l >> 4][l & 0xF]);
+    for ( m = 0i64; m < this->Monotones.Size; ++m )
+      Scaleform::Render::Tessellator::triangulateMonotoneAA(this, &this->Monotones.Pages[m >> 4][m & 0xF]);
   }
-  if ( v3->MeshVertices.Size > 0 )
+  if ( this->MeshVertices.Size )
   {
     do
     {
-      v23 = v3->MeshVertices.Pages[v4 >> 4];
-      v24 = v23[v4 & 0xF].Mesh;
-      if ( v24 != -1 )
+      v23 = this->MeshVertices.Pages[v4 >> 4];
+      Mesh = v23[v4 & 0xF].Mesh;
+      if ( Mesh != 0xFFFF )
       {
-        v25 = v24 & 0xF;
-        v26 = v3->Meshes.Pages[(unsigned __int64)v24 >> 4];
+        v25 = Mesh & 0xF;
+        v26 = this->Meshes.Pages[(unsigned __int64)Mesh >> 4];
         v23[v4 & 0xF].Idx = v26[v25].VertexCount++;
       }
       ++v4;
     }
-    while ( v4 < v3->MeshVertices.Size );
+    while ( v4 < this->MeshVertices.Size );
   }
-  if ( v2 )
+  if ( autoSplitMeshes )
   {
-    v27 = v3->VertexLimit;
-    if ( (_DWORD)v27 )
+    VertexLimit = this->VertexLimit;
+    if ( (_DWORD)VertexLimit )
     {
-      if ( v3->MeshVertices.Size > v27 )
-        Scaleform::Render::Tessellator::SplitMeshes(v3);
+      if ( this->MeshVertices.Size > VertexLimit )
+        Scaleform::Render::Tessellator::SplitMeshes(this);
     }
   }
 }
 
 // File Line: 4085
 // RVA: 0x9BA8A0
-void __fastcall Scaleform::Render::Tessellator::Transform(Scaleform::Render::Tessellator *this, Scaleform::Render::Matrix2x4<float> *m)
+void __fastcall Scaleform::Render::Tessellator::Transform(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::Matrix2x4<float> *m)
 {
   unsigned __int64 v2; // r10
-  signed __int64 v3; // r9
+  __int64 v3; // r9
   Scaleform::Render::TessVertex *v4; // rax
-  float v5; // xmm2_4
-  float v6; // xmm3_4
+  float x; // xmm2_4
+  float y; // xmm3_4
   float v7; // xmm0_4
   float v8; // xmm0_4
   float v9; // xmm0_4
@@ -11030,87 +10703,70 @@ void __fastcall Scaleform::Render::Tessellator::Transform(Scaleform::Render::Tes
   this->MinX = 1.0e30;
   this->MinY = 1.0e30;
   this->MaxX = -1.0e30;
-  this->MaxY = -1.0e30;
-  if ( this->MeshVertices.Size )
+  for ( this->MaxY = -1.0e30; v2 < this->MeshVertices.Size; ++v2 )
   {
-    do
-    {
-      v3 = v2 & 0xF;
-      v4 = this->MeshVertices.Pages[v2 >> 4];
-      v5 = v4[v2 & 0xF].x;
-      v6 = v4[v2 & 0xF].y;
-      v4[v3].x = (float)((float)(v4[v2 & 0xF].x * m->M[0][0]) + (float)(v4[v2 & 0xF].y * m->M[0][1])) + m->M[0][3];
-      v4[v3].y = (float)((float)(v6 * m->M[1][1]) + (float)(v5 * m->M[1][0])) + m->M[1][3];
-      v7 = v4[v2 & 0xF].x;
-      if ( v7 < this->MinX )
-        this->MinX = v7;
-      v8 = v4[v2 & 0xF].y;
-      if ( v8 < this->MinY )
-        this->MinY = v8;
-      v9 = v4[v2 & 0xF].x;
-      if ( v9 > this->MaxX )
-        this->MaxX = v9;
-      v10 = v4[v2 & 0xF].y;
-      if ( v10 > this->MaxY )
-        this->MaxY = v10;
-      ++v2;
-    }
-    while ( v2 < this->MeshVertices.Size );
+    v3 = v2 & 0xF;
+    v4 = this->MeshVertices.Pages[v2 >> 4];
+    x = v4[v2 & 0xF].x;
+    y = v4[v2 & 0xF].y;
+    v4[v3].x = (float)((float)(x * m->M[0][0]) + (float)(y * m->M[0][1])) + m->M[0][3];
+    v4[v3].y = (float)((float)(y * m->M[1][1]) + (float)(x * m->M[1][0])) + m->M[1][3];
+    v7 = v4[v2 & 0xF].x;
+    if ( v7 < this->MinX )
+      this->MinX = v7;
+    v8 = v4[v2 & 0xF].y;
+    if ( v8 < this->MinY )
+      this->MinY = v8;
+    v9 = v4[v2 & 0xF].x;
+    if ( v9 > this->MaxX )
+      this->MaxX = v9;
+    v10 = v4[v2 & 0xF].y;
+    if ( v10 > this->MaxY )
+      this->MaxY = v10;
   }
 }
 
 // File Line: 4105
 // RVA: 0x9B8220
-Scaleform::Render::Matrix2x4<float> *__fastcall Scaleform::Render::Tessellator::StretchTo(Scaleform::Render::Tessellator *this, Scaleform::Render::Matrix2x4<float> *result, float x1, float y1, float x2, float y2)
+Scaleform::Render::Matrix2x4<float> *__fastcall Scaleform::Render::Tessellator::StretchTo(
+        Scaleform::Render::Tessellator *this,
+        Scaleform::Render::Matrix2x4<float> *result,
+        float x1,
+        float y1,
+        float x2,
+        float y2)
 {
   unsigned __int64 v6; // rsi
-  int v7; // xmm8_4
-  float v8; // xmm9_4
-  Scaleform::Render::Matrix2x4<float> *v9; // rbx
-  Scaleform::Render::Tessellator *v10; // rdi
-  unsigned __int64 v11; // r9
+  unsigned __int64 Size; // r9
   unsigned __int64 v12; // r8
   float v13; // xmm4_4
-  Scaleform::Render::TessVertex **v14; // r10
+  Scaleform::Render::TessVertex **Pages; // r10
   float v15; // xmm7_4
   float v16; // xmm5_4
   float v17; // xmm6_4
   Scaleform::Render::TessVertex *v18; // rax
-  float v19; // xmm3_4
-  int v20; // xmm1_4
-  float v21; // xmm2_4
+  float x; // xmm3_4
+  float v20; // xmm1_4
+  float y; // xmm2_4
   float v22; // xmm0_4
-  float v23; // xmm3_4
-  int v24; // xmm1_4
-  float v25; // xmm0_4
-  float v26; // xmm2_4
-  signed __int64 v27; // rax
+  float MinX; // xmm3_4
+  float MaxX; // xmm1_4
+  float MinY; // xmm0_4
+  float MaxY; // xmm2_4
+  __int64 v27; // rax
   unsigned __int64 v28; // rdx
-  signed __int64 v29; // r8
+  __int64 v29; // r8
   Scaleform::Render::TessVertex *v30; // rax
   float v31; // xmm3_4
   float v32; // xmm2_4
   float v33; // xmm1_4
-  int v34; // xmm0_4
-  int v35; // xmm1_4
-  int v36; // xmm0_4
-  int v37; // xmm1_4
-  int v38; // xmm0_4
-  int v39; // xmm1_4
-  float dst; // [rsp+20h] [rbp-39h]
-  int v42; // [rsp+24h] [rbp-35h]
-  float v43; // [rsp+28h] [rbp-31h]
-  int v44; // [rsp+2Ch] [rbp-2Dh]
-  float v45; // [rsp+30h] [rbp-29h]
-  float v46; // [rsp+34h] [rbp-25h]
-  float src; // [rsp+40h] [rbp-19h]
-  float v48; // [rsp+44h] [rbp-15h]
-  int v49; // [rsp+48h] [rbp-11h]
-  float v50; // [rsp+4Ch] [rbp-Dh]
-  int v51; // [rsp+50h] [rbp-9h]
-  float v52; // [rsp+54h] [rbp-5h]
-  int v53; // [rsp+58h] [rbp-1h]
-  int v54; // [rsp+5Ch] [rbp+3h]
+  float v34; // xmm0_4
+  float dst[2]; // [rsp+20h] [rbp-39h] BYREF
+  float v37; // [rsp+28h] [rbp-31h]
+  float v38; // [rsp+2Ch] [rbp-2Dh]
+  float v39; // [rsp+30h] [rbp-29h]
+  float v40; // [rsp+34h] [rbp-25h]
+  Scaleform::Render::Matrix2x4<float> src; // [rsp+40h] [rbp-19h] BYREF
 
   v6 = 0i64;
   *(_QWORD *)&result->M[0][0] = 1065353216i64;
@@ -11118,114 +10774,101 @@ Scaleform::Render::Matrix2x4<float> *__fastcall Scaleform::Render::Tessellator::
   *(_QWORD *)&result->M[0][2] = 0i64;
   result->M[1][0] = 0.0;
   result->M[1][3] = 0.0;
-  v7 = LODWORD(y1);
-  v8 = x1;
-  v9 = result;
-  v10 = this;
   if ( this->MaxX <= this->MinX || this->MaxY <= this->MinY )
   {
-    v11 = this->MeshVertices.Size;
+    Size = this->MeshVertices.Size;
     this->MinX = 1.0e30;
     this->MinY = 1.0e30;
     this->MaxX = -1.0e30;
     this->MaxY = -1.0e30;
     v12 = 0i64;
-    if ( v11 )
+    if ( Size )
     {
       v13 = FLOAT_N1_0e30;
-      v14 = this->MeshVertices.Pages;
+      Pages = this->MeshVertices.Pages;
       v15 = FLOAT_1_0e30;
       v16 = FLOAT_N1_0e30;
       v17 = FLOAT_1_0e30;
       do
       {
-        v18 = v14[v12 >> 4];
-        v19 = v18[v12 & 0xF].x;
-        v20 = *(_DWORD *)v18[v12 & 0xF].Styles;
-        v21 = v18[v12 & 0xF].y;
-        v43 = *(float *)&v18[v12 & 0xF].Idx;
+        v18 = Pages[v12 >> 4];
+        x = v18[v12 & 0xF].x;
+        v20 = *(float *)v18[v12 & 0xF].Styles;
+        y = v18[v12 & 0xF].y;
+        v37 = *(float *)&v18[v12 & 0xF].Idx;
         v22 = *(float *)&v18[v12 & 0xF].Flags;
-        v44 = v20;
-        v45 = v22;
-        if ( v19 < v15 )
+        v38 = v20;
+        v39 = v22;
+        if ( x < v15 )
         {
-          this->MinX = v19;
-          v15 = v19;
+          this->MinX = x;
+          v15 = x;
         }
-        if ( v21 < v17 )
+        if ( y < v17 )
         {
-          this->MinY = v21;
-          v17 = v21;
+          this->MinY = y;
+          v17 = y;
         }
-        if ( v19 > v13 )
+        if ( x > v13 )
         {
-          this->MaxX = v19;
-          v13 = v19;
+          this->MaxX = x;
+          v13 = x;
         }
-        if ( v21 > v16 )
+        if ( y > v16 )
         {
-          this->MaxY = v21;
-          v16 = v21;
+          this->MaxY = y;
+          v16 = y;
         }
         ++v12;
       }
-      while ( v12 < v11 );
+      while ( v12 < Size );
     }
   }
-  v23 = this->MinX;
-  v24 = SLODWORD(this->MaxX);
-  if ( v23 < *(float *)&v24 )
+  MinX = this->MinX;
+  MaxX = this->MaxX;
+  if ( MinX < MaxX )
   {
-    v25 = this->MinY;
-    v26 = this->MaxY;
-    if ( v25 < v26 )
+    MinY = this->MinY;
+    MaxY = this->MaxY;
+    if ( MinY < MaxY )
     {
-      v48 = this->MinY;
-      v50 = v25;
-      v43 = x2;
-      v45 = x2;
-      v46 = y2;
-      src = v23;
-      v49 = v24;
-      v51 = v24;
-      v52 = v26;
-      dst = v8;
-      v42 = v7;
-      v44 = v7;
-      Scaleform::Render::Matrix2x4<float>::SetParlToParl(result, &src, &dst);
-      if ( v10->MeshVertices.Size > 0 )
+      src.M[0][1] = this->MinY;
+      v37 = x2;
+      v39 = x2;
+      v40 = y2;
+      src.M[0][0] = MinX;
+      *(_QWORD *)&src.M[0][2] = __PAIR64__(LODWORD(MinY), LODWORD(MaxX));
+      *(_QWORD *)&src.M[1][0] = __PAIR64__(LODWORD(MaxY), LODWORD(MaxX));
+      dst[0] = x1;
+      dst[1] = y1;
+      v38 = y1;
+      Scaleform::Render::Matrix2x4<float>::SetParlToParl(result, (float *)&src, dst);
+      if ( this->MeshVertices.Size )
       {
         do
         {
           v27 = v6 & 0xF;
           v28 = v6++ >> 4;
           v29 = v27;
-          v30 = v10->MeshVertices.Pages[v28];
+          v30 = this->MeshVertices.Pages[v28];
           v31 = v30[v29].x;
           v32 = v30[v29].y;
-          v30[v29].x = (float)((float)(v30[v29].x * v9->M[0][0]) + (float)(v30[v29].y * v9->M[0][1])) + v9->M[0][3];
-          v30[v29].y = (float)((float)(v31 * v9->M[1][0]) + (float)(v32 * v9->M[1][1])) + v9->M[1][3];
+          v30[v29].x = (float)((float)(v31 * result->M[0][0]) + (float)(v32 * result->M[0][1])) + result->M[0][3];
+          v30[v29].y = (float)((float)(v31 * result->M[1][0]) + (float)(v32 * result->M[1][1])) + result->M[1][3];
         }
-        while ( v6 < v10->MeshVertices.Size );
+        while ( v6 < this->MeshVertices.Size );
       }
-      v33 = v9->M[0][1];
-      src = v9->M[0][0];
-      v34 = LODWORD(v9->M[0][2]);
-      v48 = v33;
-      v35 = LODWORD(v9->M[0][3]);
-      v49 = v34;
-      v36 = LODWORD(v9->M[1][0]);
-      v50 = *(float *)&v35;
-      v37 = LODWORD(v9->M[1][1]);
-      v51 = v36;
-      v38 = LODWORD(v9->M[1][2]);
-      v52 = *(float *)&v37;
-      v39 = LODWORD(v9->M[1][3]);
-      v53 = v38;
-      v54 = v39;
-      Scaleform::Render::Matrix2x4<float>::SetInverse(v9, (Scaleform::Render::Matrix2x4<float> *)&src);
+      v33 = result->M[0][1];
+      src.M[0][0] = result->M[0][0];
+      *(_QWORD *)&src.M[0][1] = __PAIR64__(LODWORD(result->M[0][2]), LODWORD(v33));
+      v34 = result->M[1][0];
+      src.M[0][3] = result->M[0][3];
+      *(_QWORD *)&src.M[1][0] = __PAIR64__(LODWORD(result->M[1][1]), LODWORD(v34));
+      *(_QWORD *)&src.M[1][2] = *(_QWORD *)&result->M[1][2];
+      Scaleform::Render::Matrix2x4<float>::SetInverse(result, &src);
     }
   }
-  return v9;
-}
+  return result;
+}M[1][2] = *(_QWORD *)&result->M[1][2];
+      Scaleform::Render::Matrix2x4<float>::Se
 

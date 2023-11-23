@@ -2,69 +2,64 @@
 // RVA: 0xE185C0
 void __fastcall hkpPhysicsSystemWithContacts::~hkpPhysicsSystemWithContacts(hkpPhysicsSystemWithContacts *this)
 {
-  __int64 v1; // rsi
+  __int64 m_size; // rsi
   __int64 v2; // rbx
-  hkpPhysicsSystemWithContacts *v3; // rdi
-  int v4; // er8
+  int m_capacityAndFlags; // r8d
 
-  v1 = this->m_contacts.m_size;
+  m_size = this->m_contacts.m_size;
   v2 = 0i64;
-  v3 = this;
-  for ( this->vfptr = (hkBaseObjectVtbl *)&hkpPhysicsSystemWithContacts::`vftable; v2 < v1; ++v2 )
-    hkReferencedObject::removeReference((hkReferencedObject *)&v3->m_contacts.m_data[v2]->vfptr);
-  v4 = v3->m_contacts.m_capacityAndFlags;
-  v3->m_contacts.m_size = 0;
-  if ( v4 >= 0 )
+  for ( this->vfptr = (hkBaseObjectVtbl *)&hkpPhysicsSystemWithContacts::`vftable; v2 < m_size; ++v2 )
+    hkReferencedObject::removeReference(this->m_contacts.m_data[v2]);
+  m_capacityAndFlags = this->m_contacts.m_capacityAndFlags;
+  this->m_contacts.m_size = 0;
+  if ( m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v3->m_contacts.m_data,
-      8 * v4);
-  v3->m_contacts.m_data = 0i64;
-  v3->m_contacts.m_capacityAndFlags = 2147483648;
-  hkpPhysicsSystem::~hkpPhysicsSystem((hkpPhysicsSystem *)&v3->vfptr);
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_contacts.m_data,
+      8 * m_capacityAndFlags);
+  this->m_contacts.m_data = 0i64;
+  this->m_contacts.m_capacityAndFlags = 0x80000000;
+  hkpPhysicsSystem::~hkpPhysicsSystem(this);
 }
 
 // File Line: 28
 // RVA: 0xE18680
-void __fastcall hkpPhysicsSystemWithContacts::copy(hkpPhysicsSystemWithContacts *this, hkpPhysicsSystemWithContacts *toCopy)
+void __fastcall hkpPhysicsSystemWithContacts::copy(
+        hkpPhysicsSystemWithContacts *this,
+        hkpPhysicsSystemWithContacts *toCopy)
 {
-  hkpPhysicsSystemWithContacts *v2; // rdi
-  hkpPhysicsSystemWithContacts *v3; // rbx
-  __int64 v4; // rcx
-  hkpSerializedAgentNnEntry **v5; // rax
+  __int64 m_size; // rcx
+  hkpSerializedAgentNnEntry **m_data; // rax
   __int64 v6; // rdx
   char *v7; // r8
   hkpSerializedAgentNnEntry *v8; // rcx
-  int v9; // [rsp+30h] [rbp+8h]
+  int v9; // [rsp+30h] [rbp+8h] BYREF
 
-  v2 = toCopy;
-  v3 = this;
-  hkpPhysicsSystem::copy((hkpPhysicsSystem *)&this->vfptr, (hkpPhysicsSystem *)&toCopy->vfptr);
-  if ( (v3->m_contacts.m_capacityAndFlags & 0x3FFFFFFF) < v2->m_contacts.m_size )
+  hkpPhysicsSystem::copy(this, toCopy);
+  if ( (this->m_contacts.m_capacityAndFlags & 0x3FFFFFFF) < toCopy->m_contacts.m_size )
   {
-    if ( v3->m_contacts.m_capacityAndFlags >= 0 )
+    if ( this->m_contacts.m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-        v3->m_contacts.m_data,
-        8 * v3->m_contacts.m_capacityAndFlags);
-    v9 = 8 * v2->m_contacts.m_size;
-    v3->m_contacts.m_data = (hkpSerializedAgentNnEntry **)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
-                                                            (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-                                                            &v9);
-    v3->m_contacts.m_capacityAndFlags = v9 / 8;
+        &hkContainerHeapAllocator::s_alloc,
+        this->m_contacts.m_data,
+        8 * this->m_contacts.m_capacityAndFlags);
+    v9 = 8 * toCopy->m_contacts.m_size;
+    this->m_contacts.m_data = (hkpSerializedAgentNnEntry **)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
+                                                              &hkContainerHeapAllocator::s_alloc,
+                                                              &v9);
+    this->m_contacts.m_capacityAndFlags = v9 / 8;
   }
-  v4 = v2->m_contacts.m_size;
-  v5 = v3->m_contacts.m_data;
-  v3->m_contacts.m_size = v4;
-  v6 = v4;
-  if ( (signed int)v4 > 0 )
+  m_size = toCopy->m_contacts.m_size;
+  m_data = this->m_contacts.m_data;
+  this->m_contacts.m_size = m_size;
+  v6 = m_size;
+  if ( (int)m_size > 0 )
   {
-    v7 = (char *)((char *)v2->m_contacts.m_data - (char *)v5);
+    v7 = (char *)((char *)toCopy->m_contacts.m_data - (char *)m_data);
     do
     {
-      v8 = *(hkpSerializedAgentNnEntry **)((char *)v5 + (_QWORD)v7);
-      ++v5;
-      *(v5 - 1) = v8;
+      v8 = *(hkpSerializedAgentNnEntry **)((char *)m_data++ + (_QWORD)v7);
+      *(m_data - 1) = v8;
       --v6;
     }
     while ( v6 );
@@ -73,26 +68,25 @@ void __fastcall hkpPhysicsSystemWithContacts::copy(hkpPhysicsSystemWithContacts 
 
 // File Line: 35
 // RVA: 0xE18670
-hkpPhysicsSystem *__fastcall hkpPhysicsSystemWithContacts::clone(hkpPhysicsSystemWithContacts *this, hkpPhysicsSystem::CloneConstraintMode cloneMode)
+hkpPhysicsSystem *__fastcall hkpPhysicsSystemWithContacts::clone(
+        hkpPhysicsSystemWithContacts *this,
+        hkpPhysicsSystem::CloneConstraintMode cloneMode)
 {
   return 0i64;
 }
 
 // File Line: 42
 // RVA: 0xE18750
-void __fastcall hkpPhysicsSystemWithContacts::addContact(hkpPhysicsSystemWithContacts *this, hkpSerializedAgentNnEntry *c)
+void __fastcall hkpPhysicsSystemWithContacts::addContact(
+        hkpPhysicsSystemWithContacts *this,
+        hkpSerializedAgentNnEntry *c)
 {
-  hkpPhysicsSystemWithContacts *v2; // rbx
-  hkpSerializedAgentNnEntry *v3; // rdi
-
   if ( c )
   {
-    v2 = this;
-    v3 = c;
-    hkReferencedObject::addReference((hkReferencedObject *)&c->vfptr);
-    if ( v2->m_contacts.m_size == (v2->m_contacts.m_capacityAndFlags & 0x3FFFFFFF) )
-      hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v2->m_contacts, 8);
-    v2->m_contacts.m_data[v2->m_contacts.m_size++] = v3;
+    hkReferencedObject::addReference(c);
+    if ( this->m_contacts.m_size == (this->m_contacts.m_capacityAndFlags & 0x3FFFFFFF) )
+      hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&this->m_contacts.m_data, 8);
+    this->m_contacts.m_data[this->m_contacts.m_size++] = c;
   }
 }
 
@@ -100,17 +94,13 @@ void __fastcall hkpPhysicsSystemWithContacts::addContact(hkpPhysicsSystemWithCon
 // RVA: 0xE187C0
 void __fastcall hkpPhysicsSystemWithContacts::removeContact(hkpPhysicsSystemWithContacts *this, int i)
 {
-  hkpPhysicsSystemWithContacts *v2; // rdi
-  int v3; // ebx
-  signed __int64 v4; // rsi
+  __int64 v4; // rsi
   __int64 v5; // rax
 
-  v2 = this;
-  v3 = i;
   v4 = i;
-  hkReferencedObject::removeReference((hkReferencedObject *)&this->m_contacts.m_data[i]->vfptr);
-  v5 = --v2->m_contacts.m_size;
-  if ( (_DWORD)v5 != v3 )
-    v2->m_contacts.m_data[v4] = v2->m_contacts.m_data[v5];
+  hkReferencedObject::removeReference(this->m_contacts.m_data[v4]);
+  v5 = --this->m_contacts.m_size;
+  if ( (_DWORD)v5 != i )
+    this->m_contacts.m_data[v4] = this->m_contacts.m_data[v5];
 }
 

@@ -1,6 +1,10 @@
 // File Line: 28
 // RVA: 0xA564C0
-float __fastcall AkInterpolation::InterpolateNoCheck(float in_fTimeRatio, float in_fInitialVal, float in_fTargetVal, AkCurveInterpolation in_eFadeCurve)
+float __fastcall AkInterpolation::InterpolateNoCheck(
+        float in_fTimeRatio,
+        float in_fInitialVal,
+        float in_fTargetVal,
+        AkCurveInterpolation in_eFadeCurve)
 {
   float result; // xmm0_4
   float v5; // xmm4_4
@@ -10,13 +14,13 @@ float __fastcall AkInterpolation::InterpolateNoCheck(float in_fTimeRatio, float 
 
   switch ( in_eFadeCurve )
   {
-    case 0:
+    case AkCurveInterpolation_Log3:
       result = (float)((float)((float)((float)(1.0 - in_fTimeRatio) * (float)(1.0 - in_fTimeRatio))
                              * (float)(1.0 - in_fTimeRatio))
                      * (float)(in_fInitialVal - in_fTargetVal))
              + in_fTargetVal;
       break;
-    case 1:
+    case AkCurveInterpolation_Sine:
       v5 = in_fTimeRatio * 1.5707964;
       result = (float)((float)((float)((float)((float)((float)((float)(0.0083063254
                                                                      - (float)((float)(v5 * v5) * 0.00018363654))
@@ -28,12 +32,12 @@ float __fastcall AkInterpolation::InterpolateNoCheck(float in_fTimeRatio, float 
                      * (float)(in_fTargetVal - in_fInitialVal))
              + in_fInitialVal;
       break;
-    case 2:
+    case AkCurveInterpolation_Log1:
       result = (float)((float)((float)((float)(in_fTimeRatio - 3.0) * in_fTimeRatio) * 0.5)
                      * (float)(in_fInitialVal - in_fTargetVal))
              + in_fInitialVal;
       break;
-    case 3:
+    case AkCurveInterpolation_InvSCurve:
       v6 = in_fTargetVal - in_fInitialVal;
       if ( in_fTimeRatio > 0.5 )
       {
@@ -63,10 +67,10 @@ float __fastcall AkInterpolation::InterpolateNoCheck(float in_fTimeRatio, float 
                + in_fInitialVal;
       }
       break;
-    case 4:
+    case AkCurveInterpolation_Linear:
       result = (float)((float)(in_fTargetVal - in_fInitialVal) * in_fTimeRatio) + in_fInitialVal;
       break;
-    case 5:
+    case AkCurveInterpolation_SCurve:
       result = (float)((float)((float)((float)((float)((float)((float)((float)((float)(in_fTimeRatio * 3.1415927)
                                                                              * (float)(in_fTimeRatio * 3.1415927))
                                                                      * 0.00048483399)
@@ -79,12 +83,12 @@ float __fastcall AkInterpolation::InterpolateNoCheck(float in_fTimeRatio, float 
                      * (float)(in_fTargetVal - in_fInitialVal))
              + in_fInitialVal;
       break;
-    case 6:
+    case AkCurveInterpolation_Exp1:
       result = (float)((float)((float)((float)(in_fTimeRatio + 1.0) * in_fTimeRatio) * 0.5)
                      * (float)(in_fTargetVal - in_fInitialVal))
              + in_fInitialVal;
       break;
-    case 7:
+    case AkCurveInterpolation_SineRecip:
       result = (float)((float)((float)((float)((float)((float)(0.04148775
                                                              - (float)((float)((float)(in_fTimeRatio * 1.5707964)
                                                                              * (float)(in_fTimeRatio * 1.5707964))
@@ -97,7 +101,7 @@ float __fastcall AkInterpolation::InterpolateNoCheck(float in_fTimeRatio, float 
                      * (float)(in_fInitialVal - in_fTargetVal))
              + in_fTargetVal;
       break;
-    case 8:
+    case AkCurveInterpolation_Exp3:
       result = (float)((float)((float)(in_fTimeRatio * in_fTimeRatio) * in_fTimeRatio)
                      * (float)(in_fTargetVal - in_fInitialVal))
              + in_fInitialVal;

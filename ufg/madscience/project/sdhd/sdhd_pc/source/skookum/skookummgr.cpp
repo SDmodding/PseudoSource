@@ -4,7 +4,7 @@ SkookumVals *__fastcall Skookum::get_lib_vals()
 {
   SkookumVals *result; // rax
 
-  if ( !(_S5_11 & 1) )
+  if ( (_S5_11 & 1) == 0 )
   {
     _S5_11 |= 1u;
     SkookumVals::SkookumVals(&sValues);
@@ -52,7 +52,7 @@ UFG::allocator::free_link *__fastcall UFG::SkookumMgr_Malloc(unsigned __int64 si
 
 // File Line: 464
 // RVA: 0x510350
-void __fastcall UFG::SkookumMgr_Free(void *pMemory)
+void __fastcall UFG::SkookumMgr_Free(char *pMemory)
 {
   if ( pMemory
     && (!`anonymous namespace::gpSkookumMgrMemoryLinear
@@ -79,14 +79,12 @@ __int64 __fastcall UFG::SkookumMgr_SizeReq2Actual(unsigned int sizeRequested)
 // RVA: 0x510390
 void __fastcall UFG::SkookumMgr_LinearAllocCallback(unsigned int bytesNeeded)
 {
-  unsigned int v1; // ebx
   UFG::allocator::free_link *v2; // rax
 
-  v1 = bytesNeeded;
   if ( bytesNeeded )
   {
     v2 = UFG::qMemoryPool::Allocate(&gSkookumMemoryPool, bytesNeeded, "Skookum.static_code", 0i64, 1u);
-    `anonymous namespace::gSkookumMgrMemoryLinearBytes = v1;
+    `anonymous namespace::gSkookumMgrMemoryLinearBytes = bytesNeeded;
     `anonymous namespace::gSkookumMgrMemoryLinearUsed = 0;
     `anonymous namespace::gpSkookumMgrMemoryLinear = v2;
     `anonymous namespace::gSkookumMgrMemoryModeLinear = 1;
@@ -107,22 +105,14 @@ void UFG::SkookumMgr::MemoryInit(void)
 
 // File Line: 642
 // RVA: 0x4E2180
-void __fastcall UFG::SkookumMgr::InvokeWorldCoroutine(UFG::qSymbol *coroutineName, SSInstance *pArg)
+void __fastcall UFG::SkookumMgr::InvokeWorldCoroutine(ASymbol *coroutineName, SSInstance *pArg)
 {
-  SSInstance *args_pp; // [rsp+60h] [rbp+18h]
+  SSInstance *args_pp; // [rsp+60h] [rbp+18h] BYREF
 
   if ( SkookumScript::c_world_p )
   {
     args_pp = pArg;
-    SSInstance::coroutine_call(
-      (SSInstance *)&SkookumScript::c_world_p->vfptr,
-      (ASymbol *)coroutineName,
-      &args_pp,
-      pArg != 0i64,
-      1,
-      0.0,
-      0i64,
-      0i64);
+    SSInstance::coroutine_call(SkookumScript::c_world_p, coroutineName, &args_pp, pArg != 0i64, 1, 0.0, 0i64, 0i64);
   }
 }
 
@@ -130,52 +120,47 @@ void __fastcall UFG::SkookumMgr::InvokeWorldCoroutine(UFG::qSymbol *coroutineNam
 // RVA: 0x4E22D0
 char __fastcall UFG::SkookumMgr::IsReferencedByScripts(UFG::SimObject *pSimObject)
 {
-  unsigned __int16 v1; // dx
-  UFG::TSActorComponent *v2; // rax
+  signed __int16 m_Flags; // dx
+  UFG::TSActorComponent *m_pComponent; // rax
   char v3; // dl
-  UFG::TSActor *v4; // rcx
-  unsigned int v5; // er8
+  UFG::TSActor *i_obj_p; // rcx
 
   if ( !pSimObject )
     return 0;
-  v1 = pSimObject->m_Flags;
-  if ( (v1 >> 14) & 1 )
+  m_Flags = pSimObject->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 )
   {
-    v2 = (UFG::TSActorComponent *)pSimObject->m_Components.p[4].m_pComponent;
+    m_pComponent = (UFG::TSActorComponent *)pSimObject->m_Components.p[4].m_pComponent;
   }
-  else if ( (v1 & 0x8000u) == 0 )
+  else if ( m_Flags >= 0 )
   {
-    if ( (v1 >> 13) & 1 )
+    if ( (m_Flags & 0x2000) != 0 )
     {
-      v2 = (UFG::TSActorComponent *)pSimObject->m_Components.p[3].m_pComponent;
+      m_pComponent = (UFG::TSActorComponent *)pSimObject->m_Components.p[3].m_pComponent;
     }
-    else if ( (v1 >> 12) & 1 )
+    else if ( (m_Flags & 0x1000) != 0 )
     {
-      v2 = (UFG::TSActorComponent *)pSimObject->m_Components.p[2].m_pComponent;
+      m_pComponent = (UFG::TSActorComponent *)pSimObject->m_Components.p[2].m_pComponent;
     }
     else
     {
-      v2 = (UFG::TSActorComponent *)UFG::SimObject::GetComponentOfType(pSimObject, UFG::TSActorComponent::_TypeUID);
+      m_pComponent = (UFG::TSActorComponent *)UFG::SimObject::GetComponentOfType(
+                                                pSimObject,
+                                                UFG::TSActorComponent::_TypeUID);
     }
   }
   else
   {
-    v2 = (UFG::TSActorComponent *)pSimObject->m_Components.p[4].m_pComponent;
+    m_pComponent = (UFG::TSActorComponent *)pSimObject->m_Components.p[4].m_pComponent;
   }
   v3 = 0;
-  if ( v2 )
+  if ( m_pComponent )
   {
-    v4 = v2->mpActor.i_obj_p;
-    if ( v4 )
+    i_obj_p = m_pComponent->mpActor.i_obj_p;
+    if ( i_obj_p )
     {
-      v5 = v2->mpActor.i_ptr_id;
-      if ( v5 == v4->i_ptr_id )
-      {
-        if ( !v4 || v5 != v4->i_ptr_id )
-          v4 = 0i64;
-        if ( (v4->i_ref_count & 0x7FFFFFFF) > 1 )
-          v3 = 1;
-      }
+      if ( m_pComponent->mpActor.i_ptr_id == i_obj_p->i_ptr_id && (i_obj_p->i_ref_count & 0x7FFFFFFF) > 1 )
+        return 1;
     }
   }
   return v3;
@@ -198,23 +183,22 @@ void UFG::SkookumMgr::Init(void)
 // RVA: 0x4E2730
 void UFG::SkookumMgr::LoadCompiledBinary(void)
 {
-  UFG::allocator::free_link *v0; // rax
-  UFG::allocator::free_link *v1; // rbx
-  ADatum::Reference *v2; // rbx
-  bool v3; // zf
-  ADatum datum; // [rsp+50h] [rbp+8h]
-  __int64 loaded_size; // [rsp+58h] [rbp+10h]
+  unsigned int *v0; // rax
+  char *v1; // rbx
+  ADatum::Reference *i_dref_p; // rbx
+  ADatum datum; // [rsp+50h] [rbp+8h] BYREF
+  __int64 loaded_size; // [rsp+58h] [rbp+10h] BYREF
 
   if ( UFG::StreamFileWrapper::FileExists("Data\\Scripts\\Classes.skoo-bin") )
   {
     loaded_size = 0i64;
-    v0 = UFG::StreamFileWrapper::ReadEntireFile(
-           "Data\\Scripts\\Classes.skoo-bin",
-           &loaded_size,
-           0i64,
-           0,
-           "StreamFileWrapper::ReadEntireFile");
-    v1 = v0;
+    v0 = (unsigned int *)UFG::StreamFileWrapper::ReadEntireFile(
+                           "Data\\Scripts\\Classes.skoo-bin",
+                           &loaded_size,
+                           0i64,
+                           0,
+                           "StreamFileWrapper::ReadEntireFile");
+    v1 = (char *)v0;
     if ( v0 )
     {
       ADatum::ADatum(&datum, v0, 0xFFFFFFFF, loaded_size, 0);
@@ -229,16 +213,14 @@ void UFG::SkookumMgr::LoadCompiledBinary(void)
         UFG::qFreeEntireFile(v1, 0i64);
         SkookumScript::initialize_post_load();
         SkookumScript::initialize_session(1);
-        SkookumScript::enable_flag(Flag_hook_expression, 1);
+        SkookumScript::enable_flag(1, 1);
       }
-      v2 = datum.i_dref_p;
-      v3 = datum.i_dref_p->i_references == 1;
-      --v2->i_references;
-      if ( v3 )
+      i_dref_p = datum.i_dref_p;
+      if ( datum.i_dref_p->i_references-- == 1 )
       {
-        if ( v2->i_deallocate )
-          operator delete[](v2->i_buffer_p);
-        operator delete[](v2);
+        if ( i_dref_p->i_deallocate )
+          operator delete[](i_dref_p->i_buffer_p);
+        operator delete[](i_dref_p);
       }
     }
   }
@@ -259,36 +241,51 @@ void __fastcall UFG::SkookumMgr::BindAtomics()
   SSClass *v8; // rax
   UFG::Editor::TSDAGPath *v9; // rcx
   UFG::Editor::TSEditor *v10; // rcx
+  ASymbol rebind; // [rsp+20h] [rbp-18h]
+  ASymbol rebinda; // [rsp+20h] [rbp-18h]
+  ASymbol rebindb; // [rsp+20h] [rbp-18h]
+  ASymbol rebindc; // [rsp+20h] [rbp-18h]
+  ASymbol rebindd; // [rsp+20h] [rbp-18h]
+  ASymbol rebinde; // [rsp+20h] [rbp-18h]
+  ASymbol rebindf; // [rsp+20h] [rbp-18h]
+  ASymbol rebindg; // [rsp+20h] [rbp-18h]
+  ASymbol rebindh; // [rsp+20h] [rbp-18h]
 
   UFG::TSVector3::BindAtomics();
   UFG::TSMatrix44::BindAtomics(v0);
   UFG::TSTransform::BindAtomics();
   UFG::TSActor::BindAtomics();
+  LOBYTE(rebind.i_uid) = 0;
   v1 = SSBrain::get_class("Debug");
   SSClass::register_method_func(
     v1,
     "progression_recompile",
     (void (__fastcall *)(SSInvokedMethod *, SSInstance **))_,
     1,
-    0);
+    rebind);
+  LOBYTE(rebinda.i_uid) = 0;
   SSClass::register_method_func(
     v1,
     "tweaker_section_remove",
     (void (__fastcall *)(SSInvokedMethod *, SSInstance **))_,
     1,
-    0);
+    rebinda);
   UFG::TSAIPathMarker::mspClass = SSBrain::get_class("AIPathMarker");
   SSClass::register_method_func(
     UFG::TSAIPathMarker::mspClass,
     "get_arrival_tolerance",
     UFG::TSAIPathMarker::Mthd_get_arrival_tolerance,
-    0);
-  SSClass::register_method_func(UFG::TSAIPathMarker::mspClass, "get_speed", UFG::TSAIPathMarker::Mthd_get_speed, 0);
+    SSBindFlag_instance_no_rebind);
+  SSClass::register_method_func(
+    UFG::TSAIPathMarker::mspClass,
+    "get_speed",
+    UFG::TSAIPathMarker::Mthd_get_speed,
+    SSBindFlag_instance_no_rebind);
   UFG::TSDoor::BindAtomics();
   UFG::TSDynamicEncounter::BindAtomics();
   v2 = SSBrain::get_class("Prop");
-  SSClass::register_method_func(v2, "get_damage", UFG::TSProp::Mthd_get_damage, 0);
-  SSClass::register_method_func(v2, "is_collected", UFG::TSProp::Mthd_is_collected, 0);
+  SSClass::register_method_func(v2, "get_damage", UFG::TSProp::Mthd_get_damage, SSBindFlag_instance_no_rebind);
+  SSClass::register_method_func(v2, "is_collected", UFG::TSProp::Mthd_is_collected, SSBindFlag_instance_no_rebind);
   UFG::TSEffect::BindAtomics();
   UFG::TSPropertySet::BindAtomics();
   UFG::TSMarker::BindAtomics();
@@ -298,8 +295,16 @@ void __fastcall UFG::SkookumMgr::BindAtomics()
   UFG::TSTriggerRegion::BindAtomics();
   UFG::TSCombatRegion::BindAtomics();
   v3 = SSBrain::get_class("NISScriptSystem");
-  SSClass::register_method_func(v3, "get_nis_path", UFG::TSNISScriptSystem::Mthd_get_nis_path, 0);
-  SSClass::register_method_func(v3, "get_active_gameslices", UFG::TSNISScriptSystem::Mthd_get_active_gameslices, 0);
+  SSClass::register_method_func(
+    v3,
+    "get_nis_path",
+    UFG::TSNISScriptSystem::Mthd_get_nis_path,
+    SSBindFlag_instance_no_rebind);
+  SSClass::register_method_func(
+    v3,
+    "get_active_gameslices",
+    UFG::TSNISScriptSystem::Mthd_get_active_gameslices,
+    SSBindFlag_instance_no_rebind);
   UFG::TSMeleeScriptSystem::BindAtomics();
   UFG::TSTimer::BindAtomics();
   UFG::TSWorld::BindAtomics();
@@ -317,7 +322,13 @@ void __fastcall UFG::SkookumMgr::BindAtomics()
   UFG::TSPlayer::BindAtomics();
   UFG::TSOnline::BindAtomics();
   v4 = SSBrain::get_class("Telemetry");
-  SSClass::register_method_func(v4, "send_new_game_telemetry", UFG::TSTelemetry::MthdC_send_new_game_telemetry, 1, 0);
+  LOBYTE(rebindb.i_uid) = 0;
+  SSClass::register_method_func(
+    v4,
+    "send_new_game_telemetry",
+    UFG::TSTelemetry::MthdC_send_new_game_telemetry,
+    1,
+    rebindb);
   UFG::TSGameSlice::BindAtomics();
   UFG::TSAudioEmitter::BindAtomics();
   UFG::TSSnapshotData::BindAtomics();
@@ -329,17 +340,19 @@ void __fastcall UFG::SkookumMgr::BindAtomics()
   UFG::TSDialog::BindAtomics();
   UFG::SkookumMgr::mspObjectiveHintClass = (SSActorClass *)SSBrain::get_class("ObjectiveHint");
   SSClass::register_method_func(
-    (SSClass *)&UFG::SkookumMgr::mspObjectiveHintClass->vfptr,
+    UFG::SkookumMgr::mspObjectiveHintClass,
     "get_caption",
     UFG::TSObjectiveHint::Mthd_get_caption,
-    0);
+    SSBindFlag_instance_no_rebind);
   UFG::TSUI_ListMenu::BindAtomics();
   UFG::TSUI_Garage::BindAtomics();
   UFG::TSUI_Helpbar::BindAtomics();
   UFG::TSUI_MissionComplete::BindAtomics();
+  LOBYTE(rebindc.i_uid) = 0;
   v5 = SSBrain::get_class("GameLog");
-  SSClass::register_method_func(v5, "add", UFG::TSUI_GameLog::MthdC_add, 1, 0);
-  SSClass::register_method_func(v5, "clear", UFG::TSUI_GameLog::MthdC_clear, 1, 0);
+  SSClass::register_method_func(v5, "add", UFG::TSUI_GameLog::MthdC_add, 1, rebindc);
+  LOBYTE(rebindd.i_uid) = 0;
+  SSClass::register_method_func(v5, "clear", UFG::TSUI_GameLog::MthdC_clear, 1, rebindd);
   UFG::TSUI_FightClubUI::BindAtomics();
   UFG::TSUI_FightTutorial::BindAtomics();
   UFG::TSUI_MartialArts::BindAtomics();
@@ -347,15 +360,19 @@ void __fastcall UFG::SkookumMgr::BindAtomics()
   UFG::TSBugplanting::BindAtomics();
   UFG::TSCockfighting::BindAtomics();
   v6 = SSBrain::get_class("Hacking");
-  SSClass::register_method_func(v6, "is_successful", UFG::TSHacking::MthdC_is_successful, 1, 0);
+  LOBYTE(rebinde.i_uid) = 0;
+  SSClass::register_method_func(v6, "is_successful", UFG::TSHacking::MthdC_is_successful, 1, rebinde);
   UFG::TSKaraoke::BindAtomics();
+  LOBYTE(rebindf.i_uid) = 0;
   v7 = SSBrain::get_class("Lockpicking");
-  SSClass::register_method_func(v7, "set_difficulty", UFG::TSLockpicking::MthdC_set_difficulty, 1, 0);
-  SSClass::register_method_func(v7, "is_successful", UFG::TSLockpicking::MthdC_is_successful, 1, 0);
+  SSClass::register_method_func(v7, "set_difficulty", UFG::TSLockpicking::MthdC_set_difficulty, 1, rebindf);
+  LOBYTE(rebindg.i_uid) = 0;
+  SSClass::register_method_func(v7, "is_successful", UFG::TSLockpicking::MthdC_is_successful, 1, rebindg);
   UFG::TSPhonetrace::BindAtomics();
   UFG::TSPokerDice::BindAtomics();
   v8 = SSBrain::get_class("SafeCracking");
-  SSClass::register_method_func(v8, "is_successful", UFG::TSSafeCracking::MthdC_is_successful, 1, 0);
+  LOBYTE(rebindh.i_uid) = 0;
+  SSClass::register_method_func(v8, "is_successful", UFG::TSSafeCracking::MthdC_is_successful, 1, rebindh);
   UFG::TSSpyPC::BindAtomics();
   UFG::TSHUD::BindAtomics();
   UFG::TSUI_HUD_ActionButton::BindAtomics();
@@ -378,13 +395,13 @@ void __fastcall UFG::SkookumMgr::BindAtomics()
 // RVA: 0x4E2120
 void UFG::SkookumMgr::InvokeOnProjectInit(void)
 {
-  SSInstance *args_pp; // [rsp+50h] [rbp+8h]
+  SSInstance *args_pp; // [rsp+50h] [rbp+8h] BYREF
 
   if ( SkookumScript::c_world_p )
   {
     args_pp = 0i64;
     SSInstance::coroutine_call(
-      (SSInstance *)&SkookumScript::c_world_p->vfptr,
+      SkookumScript::c_world_p,
       (ASymbol *)&qSymbol__on_init_project,
       &args_pp,
       0,
@@ -399,13 +416,13 @@ void UFG::SkookumMgr::InvokeOnProjectInit(void)
 // RVA: 0x4E20D0
 void UFG::SkookumMgr::InvokeOnLocationChange(void)
 {
-  SSInstance *args_pp; // [rsp+50h] [rbp+8h]
+  SSInstance *args_pp; // [rsp+50h] [rbp+8h] BYREF
 
   if ( SkookumScript::c_world_p )
   {
     args_pp = 0i64;
     SSInstance::coroutine_call(
-      (SSInstance *)&SkookumScript::c_world_p->vfptr,
+      SkookumScript::c_world_p,
       (ASymbol *)&qSymbol__on_change_location,
       &args_pp,
       0,
@@ -418,6 +435,7 @@ void UFG::SkookumMgr::InvokeOnLocationChange(void)
 
 // File Line: 1214
 // RVA: 0x5117A0
+// attributes: thunk
 void __fastcall UFG::SkookumMgr::Update(float simDelta)
 {
   SkookumScript::update_delta(simDelta);
@@ -427,13 +445,13 @@ void __fastcall UFG::SkookumMgr::Update(float simDelta)
 // RVA: 0x4E08A0
 void UFG::SkookumMgr::EndScene(void)
 {
-  SSInstance *args_pp; // [rsp+50h] [rbp+8h]
+  SSInstance *args_pp; // [rsp+50h] [rbp+8h] BYREF
 
   if ( SkookumScript::c_world_p )
   {
     args_pp = 0i64;
     SSInstance::coroutine_call(
-      (SSInstance *)&SkookumScript::c_world_p->vfptr,
+      SkookumScript::c_world_p,
       (ASymbol *)&qSymbol__on_end_scene,
       &args_pp,
       0,
@@ -449,7 +467,7 @@ void UFG::SkookumMgr::EndScene(void)
 // RVA: 0x510530
 void __fastcall UFG::SkookumMgr::StartScene(bool initialPass)
 {
-  if ( !SkookumScript::c_world_p || !(SkookumScript::c_world_p->i_actor_flags & 1) )
+  if ( !SkookumScript::c_world_p || (SkookumScript::c_world_p->i_actor_flags & 1) == 0 )
     SkookumScript::enable_behavior(1);
 }
 
@@ -463,47 +481,48 @@ void UFG::SkookumMgr::Deinit(void)
 
 // File Line: 1290
 // RVA: 0x4D9930
-void __fastcall UFG::SkookumMgr::ConstructCodeBlockFromScript(AString *destText, const char *scriptText)
+void __fastcall UFG::SkookumMgr::ConstructCodeBlockFromScript(AString *destText, char *scriptText)
 {
-  const char *v2; // rsi
-  AString *v3; // rdi
-  signed __int64 v4; // rbx
+  __int64 v4; // rbx
   unsigned int v5; // eax
   bool v6; // bp
   unsigned int v7; // edx
   __int64 v8; // rbx
-  unsigned int v9; // er8
+  unsigned int v9; // r8d
   const char *v10; // rdx
-  AStringRef *v11; // rbx
-  bool v12; // zf
-  AObjReusePool<AStringRef> *v13; // rax
-  AObjBlock<AStringRef> *v14; // rcx
-  unsigned __int64 v15; // rdx
+  AStringRef *i_str_ref_p; // rbx
+  AObjReusePool<AStringRef> *pool; // rax
+  AObjBlock<AStringRef> *i_block_p; // rcx
+  unsigned __int64 i_objects_a; // rdx
   bool v16; // cf
-  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *v17; // rcx
-  AString v18; // [rsp+50h] [rbp+8h]
+  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *p_i_exp_pool; // rcx
+  AString v18; // [rsp+50h] [rbp+8h] BYREF
 
-  v2 = scriptText;
-  v3 = destText;
   v4 = -1i64;
   do
     ++v4;
   while ( scriptText[v4] );
   v5 = AMemory::c_req_byte_size_func(v4 + 1);
-  v18.i_str_ref_p = AStringRef::pool_new(v2, v4, v5, 1u, 0, 1);
+  v18.i_str_ref_p = AStringRef::pool_new(scriptText, v4, v5, 1u, 0, 1);
   v6 = AString::find_reverse(&v18, 41, 1u, 0i64, 0, 0xFFFFFFFF) == 0;
   v7 = v18.i_str_ref_p->i_length + 3 + 2 * v6;
-  if ( v7 >= v3->i_str_ref_p->i_size || v3->i_str_ref_p->i_ref_count + v3->i_str_ref_p->i_read_only != 1 )
-    AString::set_size_buffer(v3, v7);
-  v3->i_str_ref_p->i_length = 0;
-  *v3->i_str_ref_p->i_cstr_p = 0;
-  v8 = v3->i_str_ref_p->i_length + 1;
-  if ( (unsigned int)v8 >= v3->i_str_ref_p->i_size || v3->i_str_ref_p->i_ref_count + v3->i_str_ref_p->i_read_only != 1 )
-    AString::set_size(v3, v8);
-  v3->i_str_ref_p->i_cstr_p[(unsigned int)(v8 - 1)] = 91;
-  v3->i_str_ref_p->i_cstr_p[v8] = 0;
-  v3->i_str_ref_p->i_length = v8;
-  AString::append(v3, v2, 0xFFFFFFFF);
+  if ( v7 >= destText->i_str_ref_p->i_size
+    || destText->i_str_ref_p->i_ref_count + destText->i_str_ref_p->i_read_only != 1 )
+  {
+    AString::set_size_buffer(destText, v7);
+  }
+  destText->i_str_ref_p->i_length = 0;
+  *destText->i_str_ref_p->i_cstr_p = 0;
+  v8 = destText->i_str_ref_p->i_length + 1;
+  if ( (unsigned int)v8 >= destText->i_str_ref_p->i_size
+    || destText->i_str_ref_p->i_ref_count + destText->i_str_ref_p->i_read_only != 1 )
+  {
+    AString::set_size(destText, v8);
+  }
+  destText->i_str_ref_p->i_cstr_p[(unsigned int)(v8 - 1)] = 91;
+  destText->i_str_ref_p->i_cstr_p[v8] = 0;
+  destText->i_str_ref_p->i_length = v8;
+  AString::append(destText, scriptText, 0xFFFFFFFF);
   if ( v6 )
   {
     v9 = 4;
@@ -514,62 +533,58 @@ void __fastcall UFG::SkookumMgr::ConstructCodeBlockFromScript(AString *destText,
     v9 = 2;
     v10 = "\n]";
   }
-  AString::append(v3, v10, v9);
-  v11 = v18.i_str_ref_p;
-  v12 = v18.i_str_ref_p->i_ref_count == 1;
-  --v11->i_ref_count;
-  if ( v12 )
+  AString::append(destText, v10, v9);
+  i_str_ref_p = v18.i_str_ref_p;
+  if ( v18.i_str_ref_p->i_ref_count-- == 1 )
   {
-    if ( v11->i_deallocate )
-      AMemory::c_free_func(v11->i_cstr_p);
-    v13 = AStringRef::get_pool();
-    v14 = v13->i_block_p;
-    v15 = (unsigned __int64)v14->i_objects_a;
-    if ( (unsigned __int64)v11 < v15
-      || (v16 = (unsigned __int64)v11 < v15 + 24i64 * v14->i_size, v17 = &v13->i_pool, !v16) )
+    if ( i_str_ref_p->i_deallocate )
+      AMemory::c_free_func(i_str_ref_p->i_cstr_p);
+    pool = AStringRef::get_pool();
+    i_block_p = pool->i_block_p;
+    i_objects_a = (unsigned __int64)i_block_p->i_objects_a;
+    if ( (unsigned __int64)i_str_ref_p < i_objects_a
+      || (v16 = (unsigned __int64)i_str_ref_p < i_objects_a + 24i64 * i_block_p->i_size,
+          p_i_exp_pool = &pool->i_pool,
+          !v16) )
     {
-      v17 = &v13->i_exp_pool;
+      p_i_exp_pool = &pool->i_exp_pool;
     }
-    APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(v17, v11);
+    APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(p_i_exp_pool, i_str_ref_p);
   }
 }
 
 // File Line: 1356
 // RVA: 0x50F670
-SSInvokedDeferrableMethod *__fastcall UFG::SkookumMgr::RunExternalCodeBlock(SSCode *pCode, SSClass *pClass, SSInstance *pScope, bool *pFinished, SSInstance **ppResult)
+SSInvokedDeferrableMethod *__fastcall UFG::SkookumMgr::RunExternalCodeBlock(
+        SSCode *pCode,
+        SSClass *pClass,
+        SSInstance *pScope,
+        SSObjectBaseVtbl *pFinished,
+        SSInstance **ppResult)
 {
-  bool *v5; // rsi
-  SSInstance *v6; // r14
-  SSClass *v7; // rbp
-  SSCode *v8; // rbx
   UFG::qStaticSymbol *v9; // rdi
   SSParameters *v10; // rax
   SSInvokedDeferrableMethod *v11; // rax
   SSInvokedDeferrableMethod *v12; // rbx
   SSInvokedBase *v13; // rax
   bool v14; // zf
-  AListNode<SSInvokedBase,SSInvokedBase> *v15; // rdx
-  AListNode<SSInvokedBase,SSInvokedBase> *v16; // rcx
-  SSParameters params_p; // [rsp+28h] [rbp-50h]
+  AListNode<SSInvokedBase,SSInvokedBase> *i_prev_p; // rcx
+  SSParameters params_p; // [rsp+28h] [rbp-50h] BYREF
 
-  v5 = pFinished;
-  v6 = pScope;
-  v7 = pClass;
-  v8 = pCode;
   SSParameters::SSParameters(&params_p);
   v9 = (UFG::qStaticSymbol *)AMemory::c_malloc_func(0x28ui64, "SSMethod");
   if ( v9 )
   {
     v10 = SSParameters::get_or_create(&params_p);
     v9[2].mUID = qSymbol_External_Method_Call.mUID;
-    *(_QWORD *)&v9[4].mUID = v7;
+    *(_QWORD *)&v9[4].mUID = pClass;
     *(_QWORD *)&v9->mUID = &SSInvokableBase::`vftable;
     *(_QWORD *)&v9[6].mUID = v10;
     if ( v10 )
       ++v10->i_ref_count;
     *(_QWORD *)&v9->mUID = &SSMethodBase::`vftable;
     *(_QWORD *)&v9->mUID = &SSMethod::`vftable;
-    *(_QWORD *)&v9[8].mUID = v8;
+    *(_QWORD *)&v9[8].mUID = pCode;
   }
   else
   {
@@ -579,7 +594,7 @@ SSInvokedDeferrableMethod *__fastcall UFG::SkookumMgr::RunExternalCodeBlock(SSCo
   v12 = v11;
   if ( v11 )
   {
-    SSInvokedDeferrableMethod::SSInvokedDeferrableMethod(v11, (SSObjectBase *)&v6->vfptr, (SSMethodBase *)v9);
+    SSInvokedDeferrableMethod::SSInvokedDeferrableMethod(v11, pScope, (SSMethodBase *)v9);
     v12->vfptr = (SSObjectBaseVtbl *)&SSIExternalMethodCallWrapper::`vftable;
     v12[1].vfptr = 0i64;
   }
@@ -587,34 +602,29 @@ SSInvokedDeferrableMethod *__fastcall UFG::SkookumMgr::RunExternalCodeBlock(SSCo
   {
     v12 = 0i64;
   }
-  v12[1].vfptr = (SSObjectBaseVtbl *)v5;
-  v13 = SSMethod::invoke_deferred(
-          (SSMethod *)v12->i_method_p,
-          (SSInvokedMethod *)&v12->vfptr,
-          (SSInvokedBase *)&v12->vfptr,
-          ppResult);
+  v12[1].vfptr = pFinished;
+  v13 = SSMethod::invoke_deferred((SSMethod *)v12->i_method_p, v12, v12, ppResult);
   v14 = v13 == 0i64;
   if ( v13 )
   {
-    v15 = (AListNode<SSInvokedBase,SSInvokedBase> *)&v13->i_next_p;
-    v16 = v12->i_calls.i_sentinel.i_prev_p;
-    v12->i_calls.i_sentinel.i_prev_p = (AListNode<SSInvokedBase,SSInvokedBase> *)&v13->i_next_p;
-    v16->i_next_p = (AListNode<SSInvokedBase,SSInvokedBase> *)&v13->i_next_p;
-    v15->i_prev_p = v16;
-    v15->i_next_p = &v12->i_calls.i_sentinel;
+    i_prev_p = v12->i_calls.i_sentinel.i_prev_p;
+    v12->i_calls.i_sentinel.i_prev_p = &v13->AListNode<SSInvokedBase,SSInvokedBase>;
+    i_prev_p->i_next_p = &v13->AListNode<SSInvokedBase,SSInvokedBase>;
+    v13->i_prev_p = i_prev_p;
+    v13->i_next_p = &v12->i_calls.i_sentinel;
     ++v12->i_pending_count;
     v14 = v13 == 0i64;
   }
   if ( v14 )
   {
-    if ( v5 )
-      *v5 = 1;
-    v12->vfptr->__vecDelDtor((SSObjectBase *)&v12->vfptr, 1u);
+    if ( pFinished )
+      LOBYTE(pFinished->__vecDelDtor) = 1;
+    v12->vfptr->__vecDelDtor(v12, 1u);
     v12 = 0i64;
   }
-  else if ( v5 )
+  else if ( pFinished )
   {
-    *v5 = 0;
+    LOBYTE(pFinished->__vecDelDtor) = 0;
   }
   SSParameters::~SSParameters(&params_p);
   return v12;

@@ -37,7 +37,8 @@ __int64 __fastcall AICopAcquireArrestRightCondition::GetClassNameUID(AICopAcquir
 
 // File Line: 144
 // RVA: 0x2C04E0
-const char *__fastcall AICopPlayerInsideUnlockedSafehouseCondition::GetClassname(AICopPlayerInsideUnlockedSafehouseCondition *this)
+const char *__fastcall AICopPlayerInsideUnlockedSafehouseCondition::GetClassname(
+        AICopPlayerInsideUnlockedSafehouseCondition *this)
 {
   return AICopPlayerInsideUnlockedSafehouseCondition::sClassName;
 }
@@ -134,14 +135,16 @@ const char *__fastcall AIEncounterUnitGotStuckCondition::GetClassname(AIEncounte
 
 // File Line: 261
 // RVA: 0x2BDE60
-__int64 __fastcall CanBeginSinglePersonConversationCondition::GetClassNameUID(CanBeginSinglePersonConversationCondition *this)
+__int64 __fastcall CanBeginSinglePersonConversationCondition::GetClassNameUID(
+        CanBeginSinglePersonConversationCondition *this)
 {
   return CanBeginSinglePersonConversationCondition::sClassNameUID;
 }
 
 // File Line: 277
 // RVA: 0x2BE850
-__int64 __fastcall HasRangedWeaponEquippedWithAmmoCondition::GetClassNameUID(HasRangedWeaponEquippedWithAmmoCondition *this)
+__int64 __fastcall HasRangedWeaponEquippedWithAmmoCondition::GetClassNameUID(
+        HasRangedWeaponEquippedWithAmmoCondition *this)
 {
   return HasRangedWeaponEquippedWithAmmoCondition::sClassNameUID;
 }
@@ -164,7 +167,8 @@ void __fastcall CollisionAvoidanceIsActiveCondition::Create()
 
 // File Line: 303
 // RVA: 0x2C14B0
-const char *__fastcall HasAnyDangerousEntitiesOrPointsCondition::GetClassname(HasAnyDangerousEntitiesOrPointsCondition *this)
+const char *__fastcall HasAnyDangerousEntitiesOrPointsCondition::GetClassname(
+        HasAnyDangerousEntitiesOrPointsCondition *this)
 {
   return HasAnyDangerousEntitiesOrPointsCondition::sClassName;
 }
@@ -559,16 +563,13 @@ const char *__fastcall CanAttackConditionGroup::GetClassname(CanAttackConditionG
 // RVA: 0x2985C0
 void __fastcall CanAttackConditionGroup::CanAttackConditionGroup(CanAttackConditionGroup *this, MemImageLoadFlag flag)
 {
-  CanAttackConditionGroup *v2; // rdi
-
-  v2 = this;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->ConditionGroup::Condition::Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  this->vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
-  this->vfptr = (Expression::IMemberMapVtbl *)&ConditionGroup::`vftable;
-  UFG::qSafePointerNode<CanAttackConditionGroup>::qSafePointerNode<CanAttackConditionGroup>((UFG::qSafePointerNode<CanAttackConditionGroup> *)&this->vfptr);
-  v2->vfptr = (Expression::IMemberMapVtbl *)&CanAttackConditionGroup::`vftable{for `ConditionGroup};
-  v2->vfptr = (UFG::qSafePointerNode<CanAttackConditionGroup>Vtbl *)&CanAttackConditionGroup::`vftable{for `UFG::qSafePointerNode<CanAttackConditionGroup>};
+  this->ConditionGroup::Condition::Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&Condition::`vftable;
+  this->ConditionGroup::Condition::Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&ConditionGroup::`vftable;
+  UFG::qSafePointerNode<CanAttackConditionGroup>::qSafePointerNode<CanAttackConditionGroup>(&this->UFG::qSafePointerNode<CanAttackConditionGroup>);
+  this->ConditionGroup::Condition::Expression::IMemberMap::vfptr = (Expression::IMemberMapVtbl *)&CanAttackConditionGroup::`vftable{for `ConditionGroup};
+  this->UFG::qSafePointerNode<CanAttackConditionGroup>::vfptr = (UFG::qSafePointerNode<CanAttackConditionGroup>Vtbl *)&CanAttackConditionGroup::`vftable{for `UFG::qSafePointerNode<CanAttackConditionGroup>};
 }
 
 // File Line: 1103
@@ -894,7 +895,8 @@ void __fastcall DriverFlagRespectSpeedLimitCondition::Create()
 
 // File Line: 2009
 // RVA: 0x2C26E0
-const char *__fastcall TargetDistanceRelativeDesiredRangeCondition::GetClassname(TargetDistanceRelativeDesiredRangeCondition *this)
+const char *__fastcall TargetDistanceRelativeDesiredRangeCondition::GetClassname(
+        TargetDistanceRelativeDesiredRangeCondition *this)
 {
   return TargetDistanceRelativeDesiredRangeCondition::sClassName;
 }

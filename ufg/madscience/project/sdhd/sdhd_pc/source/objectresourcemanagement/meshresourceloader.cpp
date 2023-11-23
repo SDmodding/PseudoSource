@@ -2,8 +2,8 @@
 // RVA: 0x436780
 void __fastcall UFG::MeshResourceLoader::MeshResourceLoader(UFG::MeshResourceLoader *this)
 {
-  signed int v1; // edx
-  UFG::qColour **v2; // rax
+  int v1; // edx
+  UFG::qColour **p_mColourTint; // rax
 
   *(_WORD *)&this->mHighDefinition = 0;
   this->mResourceCount = 0;
@@ -12,13 +12,13 @@ void __fastcall UFG::MeshResourceLoader::MeshResourceLoader(UFG::MeshResourceLoa
   v1 = 15;
   this->mActivePriority = UFG::gNullQSymbol;
   this->mPropertySet = 0i64;
-  v2 = &this->mTrueCrowdInstance.mPart[0].mColourTint;
+  p_mColourTint = &this->mTrueCrowdInstance.mPart[0].mColourTint;
   do
   {
     --v1;
-    *(v2 - 1) = 0i64;
-    *v2 = 0i64;
-    v2 += 2;
+    *(p_mColourTint - 1) = 0i64;
+    *p_mColourTint = 0i64;
+    p_mColourTint += 2;
   }
   while ( v1 >= 0 );
   this->mTrueCrowdInstance.mSet = 0i64;
@@ -30,6 +30,7 @@ void __fastcall UFG::MeshResourceLoader::MeshResourceLoader(UFG::MeshResourceLoa
 
 // File Line: 35
 // RVA: 0x437C10
+// attributes: thunk
 void __fastcall UFG::MeshResourceLoader::~MeshResourceLoader(UFG::MeshResourceLoader *this)
 {
   UFG::MeshResourceLoader::Unload(this);
@@ -37,10 +38,14 @@ void __fastcall UFG::MeshResourceLoader::~MeshResourceLoader(UFG::MeshResourceLo
 
 // File Line: 40
 // RVA: 0x43DFD0
-void __fastcall UFG::MeshResourceLoader::Init(UFG::MeshResourceLoader *this, UFG::qPropertySet *propertySet, __int64 priority, bool highDef)
+void __fastcall UFG::MeshResourceLoader::Init(
+        UFG::MeshResourceLoader *this,
+        UFG::qPropertySet *propertySet,
+        unsigned int *priority,
+        bool highDef)
 {
   this->mPropertySet = propertySet;
-  this->mActivePriority.mUID = *(_DWORD *)priority;
+  this->mActivePriority.mUID = *priority;
   this->mHighDefinition = highDef;
   this->mTrueCrowdInstance.mSet = 0i64;
   this->mTrueCrowdInstance.mNumParts = 0;
@@ -50,130 +55,123 @@ void __fastcall UFG::MeshResourceLoader::Init(UFG::MeshResourceLoader *this, UFG
 // RVA: 0x43F240
 char __fastcall UFG::MeshResourceLoader::IsLoaded(UFG::MeshResourceLoader *this)
 {
-  UFG::MeshResourceLoader *v1; // rdx
-  unsigned int v2; // er8
-  unsigned int v4; // ecx
-  signed __int64 v5; // rdx
+  unsigned int mResourceCount; // r8d
+  int v4; // ecx
+  UFG::ResourceRequest **i; // rdx
 
-  v1 = this;
-  if ( this->mPropertySet )
+  if ( !this->mPropertySet )
+    return 1;
+  mResourceCount = this->mResourceCount;
+  if ( mResourceCount )
   {
-    v2 = this->mResourceCount;
-    if ( !v2 )
-      return 0;
     v4 = 0;
-    if ( v2 )
+    for ( i = this->mResourceRequests; (*i)->mLoadStatus == Loaded; ++i )
     {
-      v5 = (signed __int64)v1->mResourceRequests;
-      while ( *(_DWORD *)(*(_QWORD *)v5 + 20i64) == 3 )
-      {
-        ++v4;
-        v5 += 8i64;
-        if ( v4 >= v2 )
-          return 1;
-      }
-      return 0;
+      if ( ++v4 >= mResourceCount )
+        return 1;
     }
   }
-  return 1;
+  return 0;
 }
 
 // File Line: 87
 // RVA: 0x43FBB0
-void __fastcall UFG::MeshResourceLoader::PopulateTrueCrowdInstanceFromPropertySet(UFG::MeshResourceLoader *this, bool forceSelection)
+void __fastcall UFG::MeshResourceLoader::PopulateTrueCrowdInstanceFromPropertySet(
+        UFG::MeshResourceLoader *this,
+        bool forceSelection)
 {
-  JUMPOUT(forceSelection != 0, UFG::TrueCrowdDataBase::QueryInstance);
-  UFG::TrueCrowdDataBase::QueryPreloadedInstance(
-    UFG::TrueCrowdDataBase::sTrueCrowdDataBase,
-    this->mPropertySet,
-    &this->mTrueCrowdInstance);
+  bool v2; // zf
+  UFG::qPropertySet *mPropertySet; // rdx
+  UFG::TrueCrowdSet::Instance *p_mTrueCrowdInstance; // r8
+
+  v2 = !forceSelection;
+  mPropertySet = this->mPropertySet;
+  p_mTrueCrowdInstance = &this->mTrueCrowdInstance;
+  if ( v2 )
+    UFG::TrueCrowdDataBase::QueryPreloadedInstance(
+      UFG::TrueCrowdDataBase::sTrueCrowdDataBase,
+      mPropertySet,
+      p_mTrueCrowdInstance);
+  else
+    UFG::TrueCrowdDataBase::QueryInstance(
+      UFG::TrueCrowdDataBase::sTrueCrowdDataBase,
+      mPropertySet,
+      p_mTrueCrowdInstance);
 }
 
 // File Line: 100
 // RVA: 0x440EE0
 void __fastcall UFG::MeshResourceLoader::QueueLoad(UFG::MeshResourceLoader *this)
 {
-  UFG::MeshResourceLoader *v1; // rbx
-  __int64 v2; // rsi
-  __int64 v3; // rcx
-  UFG::TrueCrowdResource *v4; // rdx
-  __int64 v5; // rax
-  signed __int64 v6; // rax
+  __int64 i; // rsi
+  __int64 mModelIndex; // rcx
+  UFG::TrueCrowdModel *v4; // rdx
+  __int64 mOffset; // rax
+  UFG::TrueCrowdModel *v6; // rax
   __int64 v7; // rcx
   UFG::TrueCrowdModel *v8; // rdx
   __int64 v9; // rax
-  signed __int64 v10; // rcx
-  __int64 v11; // rax
-  signed __int64 v12; // rdx
+  char *v10; // rcx
+  char *v11; // rdx
+  UFG::TrueCrowdResource *v12; // rdx
   __int64 v13; // rax
-  UFG::TrueCrowdResource *v14; // rdx
-  __int64 v15; // rax
-  signed __int64 v16; // rax
-  UFG::TrueCrowdSet *v17; // rax
+  UFG::TrueCrowdResource *v14; // rax
+  UFG::TrueCrowdSet *mSet; // rax
 
-  v1 = this;
   if ( this->mTrueCrowdInstance.mSet )
   {
-    v2 = 0i64;
-    if ( this->mTrueCrowdInstance.mNumParts )
+    for ( i = 0i64; (unsigned int)i < this->mTrueCrowdInstance.mNumParts; i = (unsigned int)(i + 1) )
     {
-      do
+      mModelIndex = this->mTrueCrowdInstance.mPart[i].mModelIndex;
+      if ( (_DWORD)mModelIndex != -1 )
       {
-        v3 = *((unsigned int *)&v1->mHighDefinition + 4 * (v2 + 13));
-        if ( (_DWORD)v3 != -1 )
+        v4 = this->mTrueCrowdInstance.mSet->mFiles[(unsigned int)i].p[mModelIndex];
+        if ( this->mHighDefinition )
         {
-          v4 = (UFG::TrueCrowdResource *)&v1->mTrueCrowdInstance.mSet->mFiles[(unsigned int)v2].p[v3]->mName;
-          if ( v1->mHighDefinition )
+          mOffset = v4->mHighResolutionResource.mOffset;
+          if ( mOffset )
           {
-            v5 = v4->mHighResolutionResource.mOffset;
-            if ( v5 )
-            {
-              v6 = (signed __int64)&v4->mHighResolutionResource + v5;
-              if ( v6 )
-                v4 = (UFG::TrueCrowdResource *)v6;
-            }
-          }
-          UFG::MeshResourceLoader::AddResource(v1, v4, 0);
-          v7 = *((unsigned int *)&v1->mHighDefinition + 4 * (v2 + 13));
-          if ( (_DWORD)v7 != -1 )
-          {
-            v8 = v1->mTrueCrowdInstance.mSet->mFiles[(unsigned int)v2].p[v7];
-            if ( v8->mNumTextureSets )
-            {
-              v9 = v8->mTextureSets.mOffset;
-              if ( v9 )
-                v10 = (signed __int64)&v8->mTextureSets + v9;
-              else
-                v10 = 0i64;
-              v11 = v1->mTrueCrowdInstance.mPart[(unsigned int)v2].mTextureSetIndex;
-              v12 = v10 + 8 * v11;
-              v13 = *(_QWORD *)(v10 + 8 * v11);
-              if ( v13 )
-                v14 = (UFG::TrueCrowdResource *)(v13 + v12);
-              else
-                v14 = 0i64;
-              if ( v1->mHighDefinition )
-              {
-                v15 = v14->mHighResolutionResource.mOffset;
-                if ( v15 )
-                {
-                  v16 = (signed __int64)&v14->mHighResolutionResource + v15;
-                  if ( v16 )
-                    v14 = (UFG::TrueCrowdResource *)v16;
-                }
-              }
-              if ( v14 )
-                UFG::MeshResourceLoader::AddResource(v1, v14, 1);
-            }
+            v6 = (UFG::TrueCrowdModel *)((char *)&v4->mHighResolutionResource + mOffset);
+            if ( v6 )
+              v4 = v6;
           }
         }
-        v2 = (unsigned int)(v2 + 1);
+        UFG::MeshResourceLoader::AddResource(this, v4, 0);
+        v7 = this->mTrueCrowdInstance.mPart[i].mModelIndex;
+        if ( (_DWORD)v7 != -1 )
+        {
+          v8 = this->mTrueCrowdInstance.mSet->mFiles[(unsigned int)i].p[v7];
+          if ( v8->mNumTextureSets )
+          {
+            v9 = v8->mTextureSets.mOffset;
+            if ( v9 )
+              v10 = (char *)&v8->mTextureSets + v9;
+            else
+              v10 = 0i64;
+            v11 = &v10[8 * this->mTrueCrowdInstance.mPart[(unsigned int)i].mTextureSetIndex];
+            if ( *(_QWORD *)v11 )
+              v12 = (UFG::TrueCrowdResource *)&v11[*(_QWORD *)v11];
+            else
+              v12 = 0i64;
+            if ( this->mHighDefinition )
+            {
+              v13 = v12->mHighResolutionResource.mOffset;
+              if ( v13 )
+              {
+                v14 = (UFG::TrueCrowdResource *)((char *)&v12->mHighResolutionResource + v13);
+                if ( v14 )
+                  v12 = v14;
+              }
+            }
+            if ( v12 )
+              UFG::MeshResourceLoader::AddResource(this, v12, 1);
+          }
+        }
       }
-      while ( (unsigned int)v2 < v1->mTrueCrowdInstance.mNumParts );
     }
-    v17 = v1->mTrueCrowdInstance.mSet;
-    if ( v17 )
-      ++v17->mCurrentInstances;
+    mSet = this->mTrueCrowdInstance.mSet;
+    if ( mSet )
+      ++mSet->mCurrentInstances;
   }
 }
 
@@ -181,89 +179,82 @@ void __fastcall UFG::MeshResourceLoader::QueueLoad(UFG::MeshResourceLoader *this
 // RVA: 0x4444D0
 void __fastcall UFG::MeshResourceLoader::Unload(UFG::MeshResourceLoader *this)
 {
-  UFG::MeshResourceLoader *v1; // rbx
-  unsigned int v2; // eax
-  unsigned int v3; // esi
-  UFG::ResourceRequest *v4; // rdi
-  void (__fastcall *v5)(void *, UFG::ResourceRequest *, bool); // rax
-  UFG::TrueCrowdResource *v6; // rdx
-  UFG::ObjectResourceManager *v7; // rdi
-  UFG::ResourceRequest *v8; // r9
-  UFG::ObjectResourceManager *v9; // rax
-  unsigned int v10; // edx
-  UFG::PriorityBucket::Type v11; // edx
-  UFG::TrueCrowdSet *v12; // rax
-  UFG::ResourceUser dependency; // [rsp+28h] [rbp-40h]
-  unsigned int v14; // [rsp+70h] [rbp+8h]
-  unsigned int v15; // [rsp+78h] [rbp+10h]
-  int *v16; // [rsp+80h] [rbp+18h]
-  int *v17; // [rsp+88h] [rbp+20h]
+  unsigned int v2; // esi
+  UFG::ResourceRequest *v3; // rdi
+  void (__fastcall *mOnLoadEventCallback)(void *, UFG::ResourceRequest *, bool); // rax
+  UFG::TrueCrowdResource *mResource; // rdx
+  UFG::ObjectResourceManager *v6; // rdi
+  UFG::ResourceRequest *v7; // r9
+  UFG::ObjectResourceManager *mNext; // rax
+  unsigned int v9; // edx
+  UFG::PriorityBucket::Type v10; // edx
+  UFG::TrueCrowdSet *mSet; // rax
+  UFG::ResourceUser dependency; // [rsp+28h] [rbp-40h] BYREF
+  unsigned int mUID; // [rsp+70h] [rbp+8h] BYREF
+  unsigned int v14; // [rsp+78h] [rbp+10h] BYREF
+  unsigned int *v15; // [rsp+80h] [rbp+18h]
+  int *v16; // [rsp+88h] [rbp+20h]
 
-  v1 = this;
-  v2 = this->mResourceCount;
-  if ( v2 )
+  if ( this->mResourceCount )
   {
-    v3 = 0;
-    if ( v2 )
+    v2 = 0;
+    v15 = &mUID;
+    v16 = (int *)&v14;
+    do
     {
-      v16 = (int *)&v14;
-      v17 = (int *)&v15;
-      do
+      v3 = this->mResourceRequests[v2];
+      mOnLoadEventCallback = this->mOnLoadEventCallback;
+      if ( mOnLoadEventCallback )
+        mOnLoadEventCallback(this->mUserContext, this->mResourceRequests[v2], 0);
+      mUID = this->mActivePriority.mUID;
+      dependency.mMeshLoader = this;
+      dependency.mType = MeshLoader;
+      mResource = v3->mResource;
+      v6 = UFG::ObjectResourceManager::sInstance;
+      v14 = mUID;
+      v7 = 0i64;
+      mNext = (UFG::ObjectResourceManager *)UFG::ObjectResourceManager::sInstance->mPool.mRequestList.mNode.mNext;
+      if ( mNext != (UFG::ObjectResourceManager *)&UFG::ObjectResourceManager::sInstance->mPool.mRequestList )
       {
-        v4 = v1->mResourceRequests[v3];
-        v5 = v1->mOnLoadEventCallback;
-        if ( v5 )
-          v5(v1->mUserContext, v1->mResourceRequests[v3], 0);
-        v14 = v1->mActivePriority.mUID;
-        dependency.mMeshLoader = v1;
-        dependency.mType = 0;
-        v6 = v4->mResource;
-        v7 = UFG::ObjectResourceManager::sInstance;
-        v15 = v14;
-        v8 = 0i64;
-        v9 = (UFG::ObjectResourceManager *)UFG::ObjectResourceManager::sInstance->mPool.mRequestList.mNode.mNext;
-        if ( v9 != (UFG::ObjectResourceManager *)&UFG::ObjectResourceManager::sInstance->mPool.mRequestList )
+        v9 = mResource->mPathSymbol.mUID;
+        while ( mNext->mPool.mLoading.size != v9 )
         {
-          v10 = v6->mPathSymbol.mUID;
-          while ( v9->mPool.mLoading.size != v10 )
-          {
-            v9 = (UFG::ObjectResourceManager *)v9->mPool.mQueued.p;
-            if ( v9 == (UFG::ObjectResourceManager *)&UFG::ObjectResourceManager::sInstance->mPool.mRequestList )
-              goto LABEL_12;
-          }
-          v8 = (UFG::ResourceRequest *)v9;
+          mNext = (UFG::ObjectResourceManager *)mNext->mPool.mQueued.p;
+          if ( mNext == (UFG::ObjectResourceManager *)&UFG::ObjectResourceManager::sInstance->mPool.mRequestList )
+            goto LABEL_12;
         }
-LABEL_12:
-        if ( v15 == qSymbol_Critical.mUID )
-        {
-          v11 = 2;
-        }
-        else if ( v15 == qSymbol_High.mUID )
-        {
-          v11 = 3;
-        }
-        else if ( v15 == qSymbol_Medium.mUID || v15 == qSymbol_Low.mUID )
-        {
-          v11 = 4;
-        }
-        else
-        {
-          v11 = 4;
-          if ( v15 == qSymbol_Reserved.mUID )
-            v11 = 1;
-        }
-        UFG::ResourceRequest::RemoveDependency(v8, v11, &dependency);
-        v7->mPool.mDirty = 1;
-        ++v3;
+        v7 = (UFG::ResourceRequest *)mNext;
       }
-      while ( v3 < v1->mResourceCount );
+LABEL_12:
+      if ( v14 == qSymbol_Critical.mUID )
+      {
+        v10 = Critical;
+      }
+      else if ( v14 == qSymbol_High.mUID )
+      {
+        v10 = High;
+      }
+      else if ( v14 == qSymbol_Medium.mUID || v14 == qSymbol_Low.mUID )
+      {
+        v10 = Low;
+      }
+      else
+      {
+        v10 = Low;
+        if ( v14 == qSymbol_Reserved.mUID )
+          v10 = Reserved;
+      }
+      UFG::ResourceRequest::RemoveDependency(v7, v10, &dependency);
+      v6->mPool.mDirty = 1;
+      ++v2;
     }
-    v1->mRequestsLoadedFlags.mBits[0] = 0i64;
-    v1->mRequestsDispatchEventFlags.mBits[0] = 0i64;
-    v1->mResourceCount = 0;
-    v12 = v1->mTrueCrowdInstance.mSet;
-    if ( v12 )
-      --v12->mCurrentInstances;
+    while ( v2 < this->mResourceCount );
+    this->mRequestsLoadedFlags.mBits[0] = 0i64;
+    this->mRequestsDispatchEventFlags.mBits[0] = 0i64;
+    this->mResourceCount = 0;
+    mSet = this->mTrueCrowdInstance.mSet;
+    if ( mSet )
+      --mSet->mCurrentInstances;
   }
 }
 
@@ -271,159 +262,147 @@ LABEL_12:
 // RVA: 0x43FE10
 void __fastcall UFG::MeshResourceLoader::PropagateResourceEvents(UFG::MeshResourceLoader *this, __int64 a2, _BOOL8 a3)
 {
-  UFG::MeshResourceLoader *v3; // rbx
-  __int64 v4; // rdi
-  signed __int64 v5; // rax
-  signed __int64 v6; // rdx
-  void (__fastcall *v7)(void *, UFG::ResourceRequest *, bool); // r9
+  __int64 i; // rdi
+  __int64 v5; // rax
+  __int64 v6; // rdx
+  void (__fastcall *mOnLoadEventCallback)(void *, UFG::ResourceRequest *, bool); // r9
 
-  v3 = this;
   if ( this->mResourcesDirty )
   {
-    v4 = 0i64;
-    if ( this->mResourceCount )
+    for ( i = 0i64; (unsigned int)i < this->mResourceCount; i = (unsigned int)(i + 1) )
     {
-      do
+      v5 = (__int64)(int)i >> 6;
+      v6 = 1i64 << (i & 0x3F);
+      if ( (v6 & this->mRequestsDispatchEventFlags.mBits[v5]) != 0 )
       {
-        v5 = (signed __int64)(signed int)v4 >> 6;
-        v6 = 1i64 << (v4 & 0x3F);
-        if ( v6 & v3->mRequestsDispatchEventFlags.mBits[v5] )
+        mOnLoadEventCallback = this->mOnLoadEventCallback;
+        if ( mOnLoadEventCallback )
         {
-          v7 = v3->mOnLoadEventCallback;
-          if ( v7 )
-          {
-            LOBYTE(a3) = (v6 & v3->mRequestsLoadedFlags.mBits[v5]) != 0;
-            v7(v3->mUserContext, v3->mResourceRequests[v4], a3);
-          }
+          LOBYTE(a3) = (v6 & this->mRequestsLoadedFlags.mBits[v5]) != 0;
+          mOnLoadEventCallback(this->mUserContext, this->mResourceRequests[i], a3);
         }
-        v4 = (unsigned int)(v4 + 1);
       }
-      while ( (unsigned int)v4 < v3->mResourceCount );
     }
-    v3->mRequestsDispatchEventFlags.mBits[0] = 0i64;
-    v3->mResourcesDirty = 0;
+    this->mRequestsDispatchEventFlags.mBits[0] = 0i64;
+    this->mResourcesDirty = 0;
   }
 }
 
 // File Line: 187
 // RVA: 0x4387B0
-void __fastcall UFG::MeshResourceLoader::AddResource(UFG::MeshResourceLoader *this, UFG::TrueCrowdResource *resource, bool isTexture)
+void __fastcall UFG::MeshResourceLoader::AddResource(
+        UFG::MeshResourceLoader *this,
+        UFG::TrueCrowdResource *resource,
+        bool isTexture)
 {
-  UFG::MeshResourceLoader *v3; // rdi
   __int64 v4; // rbx
   UFG::ResourceRequest *v5; // rax
   UFG::ResourceRequest *v6; // rdx
-  __int64 v7; // rax
-  signed __int64 v8; // r8
-  signed __int64 v9; // rax
-  signed __int64 v10; // rdx
+  __int64 mResourceCount; // rax
+  __int64 v8; // r8
+  __int64 v9; // rax
+  bool *v10; // rdx
   __int64 v11; // rcx
-  int v12; // [rsp+40h] [rbp-18h]
-  UFG::MeshResourceLoader *v13; // [rsp+48h] [rbp-10h]
-  unsigned int v14; // [rsp+60h] [rbp+8h]
-  unsigned int *v15; // [rsp+78h] [rbp+20h]
+  UFG::ResourceUser v12; // [rsp+40h] [rbp-18h] BYREF
+  unsigned int mUID; // [rsp+60h] [rbp+8h] BYREF
+  unsigned int *v14; // [rsp+78h] [rbp+20h] BYREF
 
-  v3 = this;
-  v15 = &v14;
-  v14 = this->mActivePriority.mUID;
-  v13 = this;
+  v14 = &mUID;
+  mUID = this->mActivePriority.mUID;
+  v12.mMeshLoader = this;
   v4 = 0i64;
-  v12 = 0;
-  LODWORD(v15) = v14;
+  v12.mType = MeshLoader;
+  LODWORD(v14) = mUID;
   v5 = UFG::ResourcePool::RequestLoadResource(
          &UFG::ObjectResourceManager::sInstance->mPool,
          resource,
          isTexture,
-         (__int64)&v15,
-         (UFG::ResourceUser *)&v12);
+         (__int64)&v14,
+         &v12);
   v6 = v5;
-  if ( v5->mLoadStatus == 3 )
+  if ( v5->mLoadStatus == Loaded )
   {
-    v7 = v3->mResourceCount;
-    if ( (_DWORD)v7 )
+    mResourceCount = this->mResourceCount;
+    if ( (_DWORD)mResourceCount )
     {
-      while ( v3->mResourceRequests[v4] != v6 )
+      while ( this->mResourceRequests[v4] != v6 )
       {
         v4 = (unsigned int)(v4 + 1);
-        if ( (unsigned int)v4 >= (unsigned int)v7 )
+        if ( (unsigned int)v4 >= (unsigned int)mResourceCount )
           goto LABEL_7;
       }
       v8 = 1i64 << (v4 & 0x3F);
-      v9 = (signed __int64)(signed int)v4 >> 6;
-      v3->mRequestsLoadedFlags.mBits[v9] |= v8;
-      v3->mRequestsDispatchEventFlags.mBits[v9] |= v8;
-      v3->mResourcesDirty = 1;
+      v9 = (__int64)(int)v4 >> 6;
+      this->mRequestsLoadedFlags.mBits[v9] |= v8;
+      this->mRequestsDispatchEventFlags.mBits[v9] |= v8;
+      this->mResourcesDirty = 1;
       return;
     }
 LABEL_7:
-    v3->mResourceRequests[v7] = v6;
-    v10 = (signed __int64)v3 + 8 * ((signed __int64)(signed int)v3->mResourceCount >> 6);
-    *(_QWORD *)(v10 + 152) |= 1i64 << (v3->mResourceCount & 0x3F);
-    v3->mRequestsDispatchEventFlags.mBits[(signed __int64)(signed int)v3->mResourceCount >> 6] |= 1i64 << (v3->mResourceCount & 0x3F);
-    v3->mResourcesDirty = 1;
+    this->mResourceRequests[mResourceCount] = v6;
+    v10 = &this->mHighDefinition + 8 * ((__int64)(int)this->mResourceCount >> 6);
+    *((_QWORD *)v10 + 19) |= 1i64 << (this->mResourceCount & 0x3F);
+    this->mRequestsDispatchEventFlags.mBits[(__int64)(int)this->mResourceCount >> 6] |= 1i64 << (this->mResourceCount & 0x3F);
+    this->mResourcesDirty = 1;
 LABEL_14:
-    ++v3->mResourceCount;
+    ++this->mResourceCount;
     return;
   }
-  v11 = v3->mResourceCount;
+  v11 = this->mResourceCount;
   if ( !(_DWORD)v11 )
   {
 LABEL_13:
-    v3->mResourceRequests[v11] = v5;
-    v3->mRequestsLoadedFlags.mBits[(signed __int64)(signed int)v3->mResourceCount >> 6] &= ~(1i64 << (v3->mResourceCount & 0x3F));
+    this->mResourceRequests[v11] = v5;
+    this->mRequestsLoadedFlags.mBits[(__int64)(int)this->mResourceCount >> 6] &= ~(1i64 << (this->mResourceCount & 0x3F));
     goto LABEL_14;
   }
-  while ( v3->mResourceRequests[v4] != v5 )
+  while ( this->mResourceRequests[v4] != v5 )
   {
     v4 = (unsigned int)(v4 + 1);
     if ( (unsigned int)v4 >= (unsigned int)v11 )
       goto LABEL_13;
   }
-  v3->mRequestsLoadedFlags.mBits[(signed __int64)(signed int)v4 >> 6] &= ~(1i64 << (v4 & 0x3F));
+  this->mRequestsLoadedFlags.mBits[(__int64)(int)v4 >> 6] &= ~(1i64 << (v4 & 0x3F));
 }
 
 // File Line: 299
 // RVA: 0x43DEE0
-UFG::TrueCrowdTextureSet *__fastcall UFG::MeshResourceLoader::GetTexture(UFG::MeshResourceLoader *this, unsigned int partIndex)
+UFG::TrueCrowdTextureSet *__fastcall UFG::MeshResourceLoader::GetTexture(
+        UFG::MeshResourceLoader *this,
+        unsigned int partIndex)
 {
-  UFG::MeshResourceLoader *v2; // r8
-  __int64 v3; // rcx
-  signed __int64 v5; // r9
-  signed __int64 v6; // rdx
+  __int64 mModelIndex; // rcx
+  __int64 v5; // r9
+  char *v6; // rdx
   UFG::TrueCrowdModel *v7; // r10
-  __int64 v8; // rax
-  signed __int64 v9; // rcx
-  __int64 v10; // rax
-  signed __int64 v11; // r9
-  __int64 v12; // rax
-  __int64 v13; // rax
+  __int64 mOffset; // rax
+  char *v9; // rcx
+  char *v10; // r9
+  __int64 v11; // rax
 
-  v2 = this;
-  v3 = *((unsigned int *)&this->mHighDefinition + 4 * (partIndex + 13i64));
-  if ( (_DWORD)v3 == -1 )
+  mModelIndex = this->mTrueCrowdInstance.mPart[partIndex].mModelIndex;
+  if ( (_DWORD)mModelIndex == -1 )
     return 0i64;
   v5 = partIndex;
   v6 = 0i64;
-  v7 = v2->mTrueCrowdInstance.mSet->mFiles[v5].p[v3];
+  v7 = this->mTrueCrowdInstance.mSet->mFiles[v5].p[mModelIndex];
   if ( v7->mNumTextureSets )
   {
-    v8 = v7->mTextureSets.mOffset;
-    if ( v8 )
-      v9 = (signed __int64)&v7->mTextureSets + v8;
+    mOffset = v7->mTextureSets.mOffset;
+    if ( mOffset )
+      v9 = (char *)&v7->mTextureSets + mOffset;
     else
       v9 = 0i64;
-    v10 = v2->mTrueCrowdInstance.mPart[v5].mTextureSetIndex;
-    v11 = v9 + 8 * v10;
-    v12 = *(_QWORD *)(v9 + 8 * v10);
-    if ( v12 )
-      v6 = v12 + v11;
-    if ( v2->mHighDefinition )
+    v10 = &v9[8 * this->mTrueCrowdInstance.mPart[v5].mTextureSetIndex];
+    if ( *(_QWORD *)v10 )
+      v6 = &v10[*(_QWORD *)v10];
+    if ( this->mHighDefinition )
     {
-      v13 = *(_QWORD *)(v6 + 48);
-      if ( v13 )
+      v11 = *((_QWORD *)v6 + 6);
+      if ( v11 )
       {
-        if ( v13 + v6 + 48 )
-          v6 += v13 + 48;
+        if ( &v6[v11 + 48] )
+          v6 += v11 + 48;
       }
     }
   }

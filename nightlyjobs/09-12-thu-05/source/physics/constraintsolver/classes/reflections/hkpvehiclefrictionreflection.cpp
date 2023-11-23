@@ -51,7 +51,7 @@ void dynamic_initializer_for__hkpVehicleFrictionDescriptionClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 115
@@ -63,17 +63,17 @@ hkClass *__fastcall hkpVehicleFrictionDescription::staticClass()
 
 // File Line: 122
 // RVA: 0xD4E240
-void __fastcall finishLoadedObjecthkpVehicleFrictionDescription(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpVehicleFrictionDescription(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleFrictionDescription::`vftable;
+    *p = &hkpVehicleFrictionDescription::`vftable;
 }
 
 // File Line: 128
 // RVA: 0xD4E260
-void __fastcall cleanupLoadedObjecthkpVehicleFrictionDescription(void *p)
+void __fastcall cleanupLoadedObjecthkpVehicleFrictionDescription(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 132
@@ -94,8 +94,8 @@ void **dynamic_initializer_for__hkpVehicleFrictionDescriptionTypeInfo__()
   hkpVehicleFrictionDescriptionTypeInfo.m_typeName = "hkpVehicleFrictionDescription";
   hkpVehicleFrictionDescriptionTypeInfo.m_vtable = result;
   hkpVehicleFrictionDescriptionTypeInfo.m_scopedName = "!hkpVehicleFrictionDescription";
-  hkpVehicleFrictionDescriptionTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpVehicleFrictionDescription;
-  hkpVehicleFrictionDescriptionTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpVehicleFrictionDescription;
+  hkpVehicleFrictionDescriptionTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpVehicleFrictionDescription;
+  hkpVehicleFrictionDescriptionTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpVehicleFrictionDescription;
   return result;
 }
 

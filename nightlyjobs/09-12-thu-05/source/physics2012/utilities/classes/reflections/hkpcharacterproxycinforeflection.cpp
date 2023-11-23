@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkpCharacterProxyCinfoClass__()
     &hkpCharacterProxyCinfo_Default,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 315
@@ -28,17 +28,17 @@ hkClass *__fastcall hkpCharacterProxyCinfo::staticClass()
 
 // File Line: 322
 // RVA: 0xE0A5B0
-void __fastcall finishLoadedObjecthkpCharacterProxyCinfo(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpCharacterProxyCinfo(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpCharacterProxyCinfo::`vftable;
+    *p = &hkpCharacterProxyCinfo::`vftable;
 }
 
 // File Line: 328
 // RVA: 0xE0A5D0
-void __fastcall cleanupLoadedObjecthkpCharacterProxyCinfo(void *p)
+void __fastcall cleanupLoadedObjecthkpCharacterProxyCinfo(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 332
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkpCharacterProxyCinfoTypeInfo__()
   hkpCharacterProxyCinfoTypeInfo.m_typeName = "hkpCharacterProxyCinfo";
   hkpCharacterProxyCinfoTypeInfo.m_vtable = result;
   hkpCharacterProxyCinfoTypeInfo.m_scopedName = "!hkpCharacterProxyCinfo";
-  hkpCharacterProxyCinfoTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpCharacterProxyCinfo;
-  hkpCharacterProxyCinfoTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpCharacterProxyCinfo;
+  hkpCharacterProxyCinfoTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpCharacterProxyCinfo;
+  hkpCharacterProxyCinfoTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpCharacterProxyCinfo;
   return result;
 }
 

@@ -2,171 +2,177 @@
 // RVA: 0x78DB10
 void __fastcall Scaleform::GFx::ResourceHandle::~ResourceHandle(Scaleform::GFx::ResourceHandle *this)
 {
+  Scaleform::GFx::Resource *pResource; // rcx
+
   if ( this->HType == RH_Pointer )
-    JUMPOUT(this->pResource, 0i64, Scaleform::GFx::Resource::Release);
+  {
+    pResource = this->pResource;
+    if ( pResource )
+      Scaleform::GFx::Resource::Release(pResource);
+  }
 }
 
 // File Line: 105
 // RVA: 0x8A9000
-Scaleform::GFx::ResourceHandle *__fastcall Scaleform::GFx::ResourceHandle::operator=(Scaleform::GFx::ResourceHandle *this, Scaleform::GFx::ResourceHandle *src)
+Scaleform::GFx::ResourceHandle *__fastcall Scaleform::GFx::ResourceHandle::operator=(
+        Scaleform::GFx::ResourceHandle *this,
+        Scaleform::GFx::ResourceHandle *src)
 {
-  Scaleform::GFx::ResourceHandle *v2; // rsi
-  Scaleform::GFx::ResourceHandle *v3; // rdi
-  Scaleform::GFx::Resource *v4; // rcx
+  Scaleform::GFx::Resource *pResource; // rcx
   Scaleform::GFx::Resource *v5; // rbx
-  Scaleform::GFx::ResourceLibBase *v6; // rcx
+  Scaleform::GFx::ResourceLibBase *pLib; // rcx
 
-  v2 = src;
-  v3 = this;
   if ( src->HType == RH_Pointer )
   {
-    v4 = src->pResource;
-    if ( v4 )
-      _InterlockedExchangeAdd(&v4->RefCount.Value, 1u);
+    pResource = src->pResource;
+    if ( pResource )
+      _InterlockedExchangeAdd(&pResource->RefCount.Value, 1u);
   }
-  if ( v3->HType == RH_Pointer )
+  if ( this->HType == RH_Pointer )
   {
-    v5 = v3->pResource;
+    v5 = this->pResource;
     if ( v5 )
     {
       if ( !_InterlockedDecrement(&v5->RefCount.Value) )
       {
-        v6 = v5->pLib;
-        if ( v6 )
+        pLib = v5->pLib;
+        if ( pLib )
         {
-          v6->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v6->vfptr, (unsigned int)v5);
+          pLib->vfptr[1].__vecDelDtor(pLib, (unsigned int)v5);
           v5->pLib = 0i64;
         }
         v5->vfptr->__vecDelDtor(v5, 1u);
       }
     }
   }
-  v3->HType = v2->HType;
-  v3->pResource = v2->pResource;
-  return v3;
+  this->HType = src->HType;
+  this->pResource = src->pResource;
+  return this;
 }
 
 // File Line: 205
 // RVA: 0x790970
-Scaleform::GFx::ResourceBindData *__fastcall Scaleform::GFx::ResourceBindData::operator=(Scaleform::GFx::ResourceBindData *this, Scaleform::GFx::ResourceBindData *src)
+Scaleform::GFx::ResourceBindData *__fastcall Scaleform::GFx::ResourceBindData::operator=(
+        Scaleform::GFx::ResourceBindData *this,
+        Scaleform::GFx::ResourceBindData *src)
 {
-  Scaleform::GFx::ResourceBindData *v2; // rbx
-  Scaleform::GFx::ResourceBindData *v3; // rdi
-
-  v2 = this;
-  v3 = src;
   if ( src->pResource.pObject )
     Scaleform::Render::RenderBuffer::AddRef(src->pResource.pObject);
-  if ( v2->pResource.pObject )
-    Scaleform::GFx::Resource::Release(v2->pResource.pObject);
-  v2->pResource.pObject = v3->pResource.pObject;
-  v2->pBinding = v3->pBinding;
-  return v2;
+  if ( this->pResource.pObject )
+    Scaleform::GFx::Resource::Release(this->pResource.pObject);
+  this->pResource.pObject = src->pResource.pObject;
+  this->pBinding = src->pBinding;
+  return this;
 }
 
 // File Line: 297
 // RVA: 0x8DD940
-Scaleform::GFx::ResourceBindData *__fastcall Scaleform::GFx::ResourceBinding::GetResourceData(Scaleform::GFx::ResourceBinding *this, Scaleform::GFx::ResourceBindData *result, Scaleform::GFx::ResourceHandle *h)
+Scaleform::GFx::ResourceBindData *__fastcall Scaleform::GFx::ResourceBinding::GetResourceData(
+        Scaleform::GFx::ResourceBinding *this,
+        Scaleform::GFx::ResourceBindData *result,
+        Scaleform::GFx::ResourceHandle *h)
 {
-  Scaleform::GFx::ResourceBindData *v3; // rbx
-  volatile unsigned int v4; // er8
-  Scaleform::GFx::Resource *v5; // rsi
-  Scaleform::GFx::Resource *v6; // rdi
-  Scaleform::GFx::ResourceLibBase *v7; // rcx
+  volatile unsigned int BindIndex; // r8d
+  Scaleform::GFx::Resource *pResource; // rsi
+  Scaleform::GFx::Resource *pObject; // rdi
+  Scaleform::GFx::ResourceLibBase *pLib; // rcx
 
-  v3 = result;
   result->pResource.pObject = 0i64;
   result->pBinding = 0i64;
-  if ( h->HType == 1 )
+  if ( h->HType == RH_Index )
   {
-    v4 = h->BindIndex;
-    if ( this->Frozen && v4 < this->ResourceCount )
-      Scaleform::GFx::ResourceBindData::operator=(result, &this->pResources[v4]);
+    BindIndex = h->BindIndex;
+    if ( this->Frozen && BindIndex < this->ResourceCount )
+      Scaleform::GFx::ResourceBindData::operator=(result, &this->pResources[BindIndex]);
     else
-      Scaleform::GFx::ResourceBinding::GetResourceData_Locked(this, result, v4);
+      Scaleform::GFx::ResourceBinding::GetResourceData_Locked(this, result, BindIndex);
   }
   else
   {
     result->pBinding = this;
     if ( h->HType )
     {
-      v5 = 0i64;
+      pResource = 0i64;
     }
     else
     {
-      v5 = h->pResource;
-      if ( v5 )
-        _InterlockedExchangeAdd(&v5->RefCount.Value, 1u);
+      pResource = h->pResource;
+      if ( pResource )
+        _InterlockedExchangeAdd(&pResource->RefCount.Value, 1u);
     }
-    v6 = result->pResource.pObject;
-    if ( result->pResource.pObject && !_InterlockedDecrement(&v6->RefCount.Value) )
+    pObject = result->pResource.pObject;
+    if ( result->pResource.pObject && !_InterlockedDecrement(&pObject->RefCount.Value) )
     {
-      v7 = v6->pLib;
-      if ( v7 )
+      pLib = pObject->pLib;
+      if ( pLib )
       {
-        v7->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v7->vfptr, (unsigned int)v6);
-        v6->pLib = 0i64;
+        pLib->vfptr[1].__vecDelDtor(pLib, (unsigned int)pObject);
+        pObject->pLib = 0i64;
       }
-      v6->vfptr->__vecDelDtor(v6, 1u);
+      pObject->vfptr->__vecDelDtor(pObject, 1u);
     }
-    v3->pResource.pObject = v5;
+    result->pResource.pObject = pResource;
   }
-  return v3;
+  return result;
 }
 
 // File Line: 325
 // RVA: 0x7EED30
-Scaleform::GFx::Resource *__fastcall Scaleform::GFx::ResourceHandle::GetResource(Scaleform::GFx::ResourceHandle *this, Scaleform::GFx::ResourceBinding *pbinding)
+Scaleform::GFx::Resource *__fastcall Scaleform::GFx::ResourceHandle::GetResource(
+        Scaleform::GFx::ResourceHandle *this,
+        Scaleform::GFx::ResourceBinding *pbinding)
 {
-  volatile unsigned int v3; // er8
+  volatile unsigned int BindIndex; // r8d
   Scaleform::GFx::ResourceBindData *v4; // rdi
-  Scaleform::GFx::Resource *v5; // rbx
-  Scaleform::GFx::ResourceBindData pdata; // [rsp+28h] [rbp-20h]
+  Scaleform::GFx::Resource *pObject; // rbx
+  Scaleform::GFx::ResourceBindData pdata; // [rsp+28h] [rbp-20h] BYREF
 
   if ( this->HType == RH_Pointer )
     return this->pResource;
   pdata.pResource.pObject = 0i64;
   pdata.pBinding = 0i64;
-  v3 = this->BindIndex;
-  if ( pbinding->Frozen && v3 < pbinding->ResourceCount )
+  BindIndex = this->BindIndex;
+  if ( pbinding->Frozen && BindIndex < pbinding->ResourceCount )
   {
-    v4 = &pbinding->pResources[v3];
+    v4 = &pbinding->pResources[BindIndex];
     if ( v4->pResource.pObject )
       Scaleform::Render::RenderBuffer::AddRef(v4->pResource.pObject);
-    if ( pdata.pResource.pObject )
-      Scaleform::GFx::Resource::Release(pdata.pResource.pObject);
-    v5 = v4->pResource.pObject;
-    pdata.pResource.pObject = v4->pResource.pObject;
-    pdata.pBinding = v4->pBinding;
+    pObject = v4->pResource.pObject;
+    pdata = *v4;
   }
   else
   {
-    Scaleform::GFx::ResourceBinding::GetResourceData_Locked(pbinding, &pdata, v3);
-    v5 = pdata.pResource.pObject;
+    Scaleform::GFx::ResourceBinding::GetResourceData_Locked(pbinding, &pdata, BindIndex);
+    pObject = pdata.pResource.pObject;
   }
   if ( pdata.pResource.pObject )
     Scaleform::GFx::Resource::Release(pdata.pResource.pObject);
-  return v5;
+  return pObject;
 }
 
 // File Line: 372
 // RVA: 0x8A3A20
-void __fastcall Scaleform::GFx::ResourceData::DataInterface::~DataInterface(Scaleform::GFx::ResourceData::DataInterface *this)
+void __fastcall Scaleform::GFx::ResourceData::DataInterface::~DataInterface(
+        Scaleform::GFx::ResourceData::DataInterface *this)
 {
   this->vfptr = (Scaleform::GFx::ResourceData::DataInterfaceVtbl *)&Scaleform::GFx::ResourceData::DataInterface::`vftable;
 }
 
 // File Line: 378
 // RVA: 0x8B1E70
-void __fastcall Scaleform::GFx::ImageFileKeyInterface::AddRef(Scaleform::GFx::ImageFileKeyInterface *this, void *hdata)
+void __fastcall Scaleform::GFx::ImageFileKeyInterface::AddRef(
+        Scaleform::GFx::ImageFileKeyInterface *this,
+        Scaleform::GFx::Resource *hdata)
 {
-  Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)hdata);
+  Scaleform::Render::RenderBuffer::AddRef(hdata);
 }
 
 // File Line: 380
 // RVA: 0x8FE620
-void __fastcall Scaleform::GFx::GFxSystemFontResourceKeyInterface::Release(Scaleform::GFx::ImageFileKeyInterface *this, void *hdata)
+void __fastcall Scaleform::GFx::GFxSystemFontResourceKeyInterface::Release(
+        Scaleform::GFx::ImageFileKeyInterface *this,
+        Scaleform::Render::RenderBuffer *hdata)
 {
-  Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)hdata);
+  Scaleform::RefCountImpl::Release(hdata);
 }
 

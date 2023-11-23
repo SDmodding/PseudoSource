@@ -4,14 +4,14 @@ __int64 __fastcall hkCpuShapeRayCastJob(hkJobQueue *jobQueue, hkJobQueue::JobQue
 {
   hkJobQueue *v2; // rbx
   hkJobQueue::JobQueueEntry *v3; // rsi
-  _QWORD *v4; // r8
+  _QWORD *Value; // r8
   _QWORD *v5; // rcx
   unsigned __int64 v6; // rax
-  signed __int64 v7; // rcx
+  _QWORD *v7; // rcx
   int v8; // ecx
   __int64 v9; // rbx
   __int64 v10; // rdi
-  int v11; // er12
+  int v11; // r12d
   int v12; // eax
   __int64 v13; // r14
   __m128 v14; // xmm1
@@ -38,16 +38,16 @@ __int64 __fastcall hkCpuShapeRayCastJob(hkJobQueue *jobQueue, hkJobQueue::JobQue
   __m128 v35; // xmm5
   __m128 v36; // xmm2
   __int64 v37; // rax
-  signed int v38; // eax
+  int v38; // eax
   __m128 *v39; // rcx
-  signed __int64 v40; // rdx
+  __m128 *v40; // rdx
   __int64 v41; // r8
   int v42; // eax
   _QWORD *v43; // r8
   _QWORD *v44; // rcx
   unsigned __int64 v45; // rax
-  signed __int64 v46; // rcx
-  __m128 v48; // [rsp+20h] [rbp-E0h]
+  _QWORD *v46; // rcx
+  __m128 v48; // [rsp+20h] [rbp-E0h] BYREF
   float v49; // [rsp+30h] [rbp-D0h]
   int v50; // [rsp+34h] [rbp-CCh]
   int v51; // [rsp+38h] [rbp-C8h]
@@ -62,39 +62,35 @@ __int64 __fastcall hkCpuShapeRayCastJob(hkJobQueue *jobQueue, hkJobQueue::JobQue
   int v60; // [rsp+5Ch] [rbp-A4h]
   int v61; // [rsp+60h] [rbp-A0h]
   __int64 v62; // [rsp+70h] [rbp-90h]
-  void **v63; // [rsp+80h] [rbp-80h]
+  void **v63; // [rsp+80h] [rbp-80h] BYREF
   int v64; // [rsp+88h] [rbp-78h]
   __int64 v65; // [rsp+90h] [rbp-70h]
   __int64 v66; // [rsp+98h] [rbp-68h]
   int v67; // [rsp+A0h] [rbp-60h]
   int v68; // [rsp+A4h] [rbp-5Ch]
   __int64 v69; // [rsp+A8h] [rbp-58h]
-  __m128 v70; // [rsp+B0h] [rbp-50h]
+  __m128 v70; // [rsp+B0h] [rbp-50h] BYREF
   __m128 v71; // [rsp+C0h] [rbp-40h]
   __int128 v72; // [rsp+D0h] [rbp-30h]
   __int128 v73; // [rsp+E0h] [rbp-20h]
-  hkJobQueue *v74; // [rsp+150h] [rbp+50h]
-  hkJobQueue::JobQueueEntry *v75; // [rsp+158h] [rbp+58h]
-  char v76; // [rsp+160h] [rbp+60h]
+  char v76; // [rsp+160h] [rbp+60h] BYREF
   int v77; // [rsp+168h] [rbp+68h]
 
-  v75 = nextJobOut;
-  v74 = jobQueue;
   v2 = jobQueue;
   v3 = nextJobOut;
-  v4 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v5 = (_QWORD *)v4[1];
-  if ( (unsigned __int64)v5 < v4[3] )
+  Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v5 = (_QWORD *)Value[1];
+  if ( (unsigned __int64)v5 < Value[3] )
   {
     *v5 = "TtCollQueryShapeRayCast";
     v6 = __rdtsc();
-    v7 = (signed __int64)(v5 + 2);
-    *(_DWORD *)(v7 - 8) = v6;
-    v4[1] = v7;
+    v7 = v5 + 2;
+    *((_DWORD *)v7 - 2) = v6;
+    Value[1] = v7;
   }
   v8 = 0;
   v77 = 0;
-  if ( *(_DWORD *)&v3->m_data[48] > 0 )
+  if ( *(int *)&v3->m_data[48] > 0 )
   {
     v9 = 0i64;
     while ( 1 )
@@ -124,7 +120,7 @@ __int64 __fastcall hkCpuShapeRayCastJob(hkJobQueue *jobQueue, hkJobQueue::JobQue
       v66 = v13;
       v68 = 0;
       v69 = 0i64;
-      if ( *(_DWORD *)(v9 + v10 + 80) <= 0 )
+      if ( *(int *)(v9 + v10 + 80) <= 0 )
         goto LABEL_23;
       v18 = 0i64;
       do
@@ -203,15 +199,15 @@ LABEL_18:
           }
           goto LABEL_21;
         }
-        v40 = (signed __int64)&v39[6];
+        v40 = v39 + 6;
         if ( v38 > 1 )
         {
           v41 = (unsigned int)(v38 - 1);
           do
           {
-            if ( v39[1].m128_f32[0] < *(float *)(v40 + 16) )
-              v39 = (__m128 *)v40;
-            v40 += 96i64;
+            if ( v39[1].m128_f32[0] < v40[1].m128_f32[0] )
+              v39 = v40;
+            v40 += 6;
             --v41;
           }
           while ( v41 );
@@ -225,7 +221,7 @@ LABEL_21:
       while ( v11 < *(_DWORD *)(v9 + v10 + 80) );
       v16 = v68;
       v8 = v77;
-      v3 = v75;
+      v3 = nextJobOut;
 LABEL_23:
       if ( *(_BYTE *)(v9 + v10 + 104) )
         *(_DWORD *)(v9 + v10 + 100) = v16;
@@ -234,7 +230,7 @@ LABEL_23:
       v77 = v8;
       if ( v8 >= *(_DWORD *)&v3->m_data[48] )
       {
-        v2 = v74;
+        v2 = jobQueue;
         break;
       }
     }
@@ -245,10 +241,10 @@ LABEL_23:
   {
     *v44 = "Et";
     v45 = __rdtsc();
-    v46 = (signed __int64)(v44 + 2);
-    *(_DWORD *)(v46 - 8) = v45;
+    v46 = v44 + 2;
+    *((_DWORD *)v46 - 2) = v45;
     v43[1] = v46;
   }
-  return hkJobQueue::finishJobAndGetNextJob(v2, v3, v3, 0);
+  return hkJobQueue::finishJobAndGetNextJob(v2, v3, v3, WAIT_FOR_NEXT_JOB);
 }
 

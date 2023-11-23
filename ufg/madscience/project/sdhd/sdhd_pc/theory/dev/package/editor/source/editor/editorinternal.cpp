@@ -3,7 +3,7 @@
 __int64 UFG::Editor::_dynamic_initializer_for__gUndoChannel__()
 {
   UFG::ChannelObj::ChannelObj(&UFG::Editor::gUndoChannel, 0x23DF27A9u, 0i64, 0i64);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gUndoChannel__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gUndoChannel__);
 }
 
 // File Line: 16
@@ -11,7 +11,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gUndoChannel__()
 __int64 UFG::Editor::_dynamic_initializer_for__gRedoChannel__()
 {
   UFG::ChannelObj::ChannelObj(&UFG::Editor::gRedoChannel, 0x23C51C72u, 0i64, 0i64);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gRedoChannel__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gRedoChannel__);
 }
 
 // File Line: 18
@@ -22,7 +22,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymXformLocal__()
 
   v0 = UFG::qStringHash32("XformLocal", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymXformLocal, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymXformLocal__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymXformLocal__);
 }
 
 // File Line: 19
@@ -33,7 +33,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymXformParent__()
 
   v0 = UFG::qStringHash32("XformParent", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymXformParent, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymXformParent__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymXformParent__);
 }
 
 // File Line: 20
@@ -44,7 +44,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymNameRoot__()
 
   v0 = UFG::qStringHash32("NameRoot", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymNameRoot, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymNameRoot__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymNameRoot__);
 }
 
 // File Line: 21
@@ -55,7 +55,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymObjectType__()
 
   v0 = UFG::qStringHash32("ObjectType", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymObjectType, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymObjectType__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymObjectType__);
 }
 
 // File Line: 22
@@ -66,7 +66,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymSimObjChildren__()
 
   v0 = UFG::qStringHash32("SimObjChildren", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymSimObjChildren, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymSimObjChildren__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymSimObjChildren__);
 }
 
 // File Line: 23
@@ -77,7 +77,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymLinks__()
 
   v0 = UFG::qStringHash32("Links", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymLinks, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymLinks__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymLinks__);
 }
 
 // File Line: 24
@@ -88,7 +88,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymLinkParam__()
 
   v0 = UFG::qStringHash32("LinkParam", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymLinkParam, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymLinkParam__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymLinkParam__);
 }
 
 // File Line: 25
@@ -99,7 +99,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymLinkEntity__()
 
   v0 = UFG::qStringHash32("LinkEntity", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymLinkEntity, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymLinkEntity__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymLinkEntity__);
 }
 
 // File Line: 26
@@ -110,7 +110,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymLinkObjective__()
 
   v0 = UFG::qStringHash32("LinkObjective", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymLinkObjective, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymLinkObjective__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymLinkObjective__);
 }
 
 // File Line: 27
@@ -121,7 +121,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymDefaultComponentRegion__()
 
   v0 = UFG::qStringHash32("default-component-Region", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymDefaultComponentRegion, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymDefaultComponentRegion__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymDefaultComponentRegion__);
 }
 
 // File Line: 28
@@ -132,7 +132,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymDefaultComponentCameraMarker_
 
   v0 = UFG::qStringHash32("default-component-CameraMarker", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymDefaultComponentCameraMarker, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymDefaultComponentCameraMarker__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymDefaultComponentCameraMarker__);
 }
 
 // File Line: 29
@@ -143,7 +143,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymDefaultComponentIrrVol__()
 
   v0 = UFG::qStringHash32("component_IrradianceVolume", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymDefaultComponentIrrVol, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymDefaultComponentIrrVol__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymDefaultComponentIrrVol__);
 }
 
 // File Line: 30
@@ -154,7 +154,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymFXSimComponent__()
 
   v0 = UFG::qStringHash32("FXSimComponent", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymFXSimComponent, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymFXSimComponent__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymFXSimComponent__);
 }
 
 // File Line: 31
@@ -165,7 +165,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymType__()
 
   v0 = UFG::qStringHash32("Type", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymType, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymType__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymType__);
 }
 
 // File Line: 32
@@ -176,7 +176,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymMin__()
 
   v0 = UFG::qStringHash32("Min", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymMin, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymMin__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymMin__);
 }
 
 // File Line: 33
@@ -187,7 +187,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymMax__()
 
   v0 = UFG::qStringHash32("Max", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymMax, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymMax__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymMax__);
 }
 
 // File Line: 34
@@ -198,7 +198,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymRadius__()
 
   v0 = UFG::qStringHash32("Radius", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymRadius, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymRadius__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymRadius__);
 }
 
 // File Line: 35
@@ -209,7 +209,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymBoxMin__()
 
   v0 = UFG::qStringHash32("Min", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymBoxMin, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymBoxMin__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymBoxMin__);
 }
 
 // File Line: 36
@@ -220,7 +220,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymBoxMax__()
 
   v0 = UFG::qStringHash32("Max", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymBoxMax, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymBoxMax__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymBoxMax__);
 }
 
 // File Line: 37
@@ -231,7 +231,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymExtentAbove__()
 
   v0 = UFG::qStringHash32("ExtentAbove", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymExtentAbove, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymExtentAbove__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymExtentAbove__);
 }
 
 // File Line: 38
@@ -242,7 +242,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymExtentBelow__()
 
   v0 = UFG::qStringHash32("ExtentBelow", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymExtentBelow, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymExtentBelow__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymExtentBelow__);
 }
 
 // File Line: 39
@@ -253,7 +253,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymVertexes__()
 
   v0 = UFG::qStringHash32("Vertexes", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymVertexes, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymVertexes__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymVertexes__);
 }
 
 // File Line: 40
@@ -264,7 +264,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymPlaneNear__()
 
   v0 = UFG::qStringHash32("PlaneNear", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymPlaneNear, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymPlaneNear__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymPlaneNear__);
 }
 
 // File Line: 41
@@ -275,7 +275,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymPlaneFar__()
 
   v0 = UFG::qStringHash32("PlaneFar", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymPlaneFar, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymPlaneFar__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymPlaneFar__);
 }
 
 // File Line: 42
@@ -286,7 +286,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymFovH__()
 
   v0 = UFG::qStringHash32("FovH", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymFovH, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymFovH__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymFovH__);
 }
 
 // File Line: 43
@@ -297,7 +297,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymDofFocalDist__()
 
   v0 = UFG::qStringHash32("DofFocalDist", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymDofFocalDist, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymDofFocalDist__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymDofFocalDist__);
 }
 
 // File Line: 44
@@ -308,7 +308,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymDofInFocusRange__()
 
   v0 = UFG::qStringHash32("DofInFocusRange", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymDofInFocusRange, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymDofInFocusRange__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymDofInFocusRange__);
 }
 
 // File Line: 45
@@ -319,7 +319,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymDofNearRange__()
 
   v0 = UFG::qStringHash32("DofNearRange", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymDofNearRange, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymDofNearRange__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymDofNearRange__);
 }
 
 // File Line: 46
@@ -330,7 +330,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymDofNearBlurRadius__()
 
   v0 = UFG::qStringHash32("DofNearBlurRadius", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymDofNearBlurRadius, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymDofNearBlurRadius__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymDofNearBlurRadius__);
 }
 
 // File Line: 47
@@ -341,7 +341,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymDofFarRange__()
 
   v0 = UFG::qStringHash32("DofFarRange", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymDofFarRange, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymDofFarRange__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymDofFarRange__);
 }
 
 // File Line: 48
@@ -352,7 +352,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymDofFarBlurRadius__()
 
   v0 = UFG::qStringHash32("DofFarBlurRadius", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymDofFarBlurRadius, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymDofFarBlurRadius__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymDofFarBlurRadius__);
 }
 
 // File Line: 49
@@ -363,7 +363,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymCreateObjectFlags__()
 
   v0 = UFG::qStringHash32("CreateObjectFlags", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymCreateObjectFlags, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymCreateObjectFlags__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymCreateObjectFlags__);
 }
 
 // File Line: 50
@@ -374,7 +374,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymSkookum_c_sel_guy__()
 
   v0 = UFG::qStringHash32("c_sel_guy", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymSkookum_c_sel_guy, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymSkookum_c_sel_guy__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymSkookum_c_sel_guy__);
 }
 
 // File Line: 51
@@ -385,7 +385,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymSkookum_c_sel_guy_prev__()
 
   v0 = UFG::qStringHash32("c_sel_guy_prev", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymSkookum_c_sel_guy_prev, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymSkookum_c_sel_guy_prev__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymSkookum_c_sel_guy_prev__);
 }
 
 // File Line: 52
@@ -396,7 +396,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymSkookum_c_selected__()
 
   v0 = UFG::qStringHash32("c_selected", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymSkookum_c_selected, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymSkookum_c_selected__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymSkookum_c_selected__);
 }
 
 // File Line: 53
@@ -407,7 +407,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymSkookum_c_selected_prev__()
 
   v0 = UFG::qStringHash32("c_selected_prev", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymSkookum_c_selected_prev, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymSkookum_c_selected_prev__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymSkookum_c_selected_prev__);
 }
 
 // File Line: 54
@@ -418,7 +418,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymPrefabId__()
 
   v0 = UFG::qStringHash32("PrefabId", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymPrefabId, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymPrefabId__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymPrefabId__);
 }
 
 // File Line: 55
@@ -429,7 +429,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymPrefab_SceneObjects__()
 
   v0 = UFG::qStringHash32("Prefab_SceneObjects", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymPrefab_SceneObjects, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymPrefab_SceneObjects__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymPrefab_SceneObjects__);
 }
 
 // File Line: 56
@@ -440,7 +440,7 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymIrrVolMin__()
 
   v0 = UFG::qStringHash32("IrrVol_Min", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymIrrVolMin, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymIrrVolMin__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymIrrVolMin__);
 }
 
 // File Line: 57
@@ -451,6 +451,6 @@ __int64 UFG::Editor::_dynamic_initializer_for__gsymIrrVolMax__()
 
   v0 = UFG::qStringHash32("IrrVol_Max", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::Editor::gsymIrrVolMax, v0);
-  return atexit(UFG::Editor::_dynamic_atexit_destructor_for__gsymIrrVolMax__);
+  return atexit((int (__fastcall *)())UFG::Editor::_dynamic_atexit_destructor_for__gsymIrrVolMax__);
 }
 

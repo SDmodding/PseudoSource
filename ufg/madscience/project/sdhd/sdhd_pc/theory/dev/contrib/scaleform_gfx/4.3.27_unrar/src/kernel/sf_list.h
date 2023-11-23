@@ -1,6 +1,7 @@
 // File Line: 149
 // RVA: 0x9976B0
-bool __fastcall Scaleform::List<Scaleform::Render::MeshKeySet,Scaleform::Render::MeshKeySet>::IsEmpty(Scaleform::List<Scaleform::Render::MeshKeySet,Scaleform::Render::MeshKeySet> *this)
+bool __fastcall Scaleform::List<Scaleform::Render::MeshKeySet,Scaleform::Render::MeshKeySet>::IsEmpty(
+        Scaleform::List<Scaleform::Render::MeshKeySet,Scaleform::Render::MeshKeySet> *this)
 {
   Scaleform::Render::MeshKeySet *v1; // rdx
 

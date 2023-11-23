@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkaiNavMeshEdgeMatchingParametersClass__()
     &hkaiNavMeshEdgeMatchingParameters_Default,
     0i64,
     0,
-    9u);
+    9);
 }
 
 // File Line: 273

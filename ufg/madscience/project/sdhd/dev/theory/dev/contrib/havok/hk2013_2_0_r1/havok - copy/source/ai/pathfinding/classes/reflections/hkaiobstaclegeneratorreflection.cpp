@@ -28,23 +28,24 @@ hkClass *__fastcall hkaiObstacleGenerator::staticClass()
 
 // File Line: 72
 // RVA: 0xBB6F00
-void __fastcall finishLoadedObjecthkaiObstacleGenerator(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiObstacleGenerator(hkaiObstacleGenerator *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiObstacleGenerator::hkaiObstacleGenerator);
+  if ( p )
+    hkaiObstacleGenerator::hkaiObstacleGenerator(p, finishing);
 }
 
 // File Line: 78
 // RVA: 0xBB6F20
-void __fastcall cleanupLoadedObjecthkaiObstacleGenerator(void *p)
+void __fastcall cleanupLoadedObjecthkaiObstacleGenerator(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 82
 // RVA: 0xBB6F30
 hkBaseObjectVtbl *__fastcall getVtablehkaiObstacleGenerator()
 {
-  hkaiObstacleGenerator v1; // [rsp+20h] [rbp-98h]
+  hkaiObstacleGenerator v1; // [rsp+20h] [rbp-98h] BYREF
 
   hkaiObstacleGenerator::hkaiObstacleGenerator(&v1, 0);
   return v1.vfptr;
@@ -61,8 +62,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiObstacleGeneratorTypeInfo__()
   hkaiObstacleGeneratorTypeInfo.m_typeName = "hkaiObstacleGenerator";
   hkaiObstacleGeneratorTypeInfo.m_vtable = result;
   hkaiObstacleGeneratorTypeInfo.m_scopedName = "!hkaiObstacleGenerator";
-  hkaiObstacleGeneratorTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiObstacleGenerator;
-  hkaiObstacleGeneratorTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiObstacleGenerator;
+  hkaiObstacleGeneratorTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiObstacleGenerator;
+  hkaiObstacleGeneratorTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiObstacleGenerator;
   return result;
 }
 

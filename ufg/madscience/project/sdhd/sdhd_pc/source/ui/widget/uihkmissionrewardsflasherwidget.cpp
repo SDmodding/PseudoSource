@@ -321,7 +321,7 @@ __int64 UFG::_dynamic_initializer_for__gRewardIcon_Car__()
 // RVA: 0x1567350
 __int64 dynamic_initializer_for__UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue__);
 }
 
 // File Line: 57
@@ -329,31 +329,32 @@ __int64 dynamic_initializer_for__UFG::UIHKMissionRewardsFlasherWidget::mRewardQu
 __int64 dynamic_initializer_for__UFG::UIHKMissionRewardsFlasherWidget::gTexturePackFilename__()
 {
   `eh vector constructor iterator(
-    UFG::UIHKMissionRewardsFlasherWidget::gTexturePackFilename,
+    (char *)UFG::UIHKMissionRewardsFlasherWidget::gTexturePackFilename,
     0x28ui64,
     4,
     (void (__fastcall *)(void *))UFG::qString::qString);
-  return atexit(dynamic_atexit_destructor_for__UFG::UIHKMissionRewardsFlasherWidget::gTexturePackFilename__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::UIHKMissionRewardsFlasherWidget::gTexturePackFilename__);
 }
 
 // File Line: 72
 // RVA: 0x5C98B0
-void __fastcall UFG::UIHKMissionRewardsFlasherWidget::~UIHKMissionRewardsFlasherWidget(UFG::UIHKMissionRewardsFlasherWidget *this)
+void __fastcall UFG::UIHKMissionRewardsFlasherWidget::~UIHKMissionRewardsFlasherWidget(
+        UFG::UIHKMissionRewardsFlasherWidget *this)
 {
-  const char **v1; // rbx
-  signed __int64 v2; // rsi
+  char **p_mData; // rbx
+  __int64 v2; // rsi
   const char *v3; // rdi
   UFG::UIScreenTextureManager *v4; // rax
 
-  v1 = (const char **)&UFG::UIHKMissionRewardsFlasherWidget::gTexturePackFilename[0].mData;
+  p_mData = &UFG::UIHKMissionRewardsFlasherWidget::gTexturePackFilename[0].mData;
   v2 = 4i64;
   this->vfptr = (UFG::UIHKMissionRewardsFlasherWidgetVtbl *)&UFG::UIHKMissionRewardsFlasherWidget::`vftable;
   do
   {
-    v3 = *v1;
+    v3 = *p_mData;
     v4 = UFG::UIScreenTextureManager::Instance();
     UFG::UIScreenTextureManager::ReleaseTexturePack(v4, v3);
-    v1 += 5;
+    p_mData += 5;
     --v2;
   }
   while ( v2 );
@@ -361,34 +362,36 @@ void __fastcall UFG::UIHKMissionRewardsFlasherWidget::~UIHKMissionRewardsFlasher
 
 // File Line: 78
 // RVA: 0x5EBE10
-void __fastcall UFG::UIHKMissionRewardsFlasherWidget::HandleScreenInit(UFG::UIHKMissionRewardsFlasherWidget *this, UFG::UIScreen *screen)
+void __fastcall UFG::UIHKMissionRewardsFlasherWidget::HandleScreenInit(
+        UFG::UIHKMissionRewardsFlasherWidget *this,
+        UFG::UIScreen *screen)
 {
-  UFG::UIHKMissionRewardsFlasherWidget::eState v2; // eax
+  UFG::UIHKMissionRewardsFlasherWidget::eState mState; // eax
 
-  v2 = this->mState;
-  if ( (signed int)v2 >= 3 && ((signed int)v2 <= 4 || (signed int)v2 <= 6) )
-    this->mState = 0;
+  mState = this->mState;
+  if ( mState >= STATE_EXECUTING && mState <= (STATE_DONE|STATE_WAITING) )
+    this->mState = STATE_NONE;
 }
 
 // File Line: 115
 // RVA: 0x614E60
-void __fastcall UFG::UIHKMissionRewardsFlasherWidget::Update(UFG::UIHKMissionRewardsFlasherWidget *this, UFG::UIScreen *screen, float elapsed)
+void __fastcall UFG::UIHKMissionRewardsFlasherWidget::Update(
+        UFG::UIHKMissionRewardsFlasherWidget *this,
+        UFG::UIScreen *screen,
+        float elapsed)
 {
-  UFG::UIHKMissionRewardsFlasherWidget *v3; // rbx
   __int32 v4; // ecx
-  int v5; // ecx
-  int v6; // ecx
-  int v7; // ecx
-  Scaleform::GFx::Movie *v8; // rcx
+  __int32 v5; // ecx
+  __int32 v6; // ecx
+  __int32 v7; // ecx
+  Scaleform::GFx::Movie *pObject; // rcx
   float v9; // xmm2_4
   float v10; // xmm2_4
-  bool v11; // cf
-  bool v12; // zf
+  bool v11; // cc
+  Scaleform::GFx::Movie *v12; // rcx
   Scaleform::GFx::Movie *v13; // rcx
-  Scaleform::GFx::Movie *v14; // rcx
-  float v15; // xmm1_4
+  float v14; // xmm1_4
 
-  v3 = this;
   v4 = this->mState - 1;
   if ( v4 )
   {
@@ -403,90 +406,90 @@ void __fastcall UFG::UIHKMissionRewardsFlasherWidget::Update(UFG::UIHKMissionRew
         {
           if ( v7 == 1 )
           {
-            v8 = screen->mRenderable->m_movie.pObject;
-            if ( v8 )
-              Scaleform::GFx::Movie::Invoke(v8, "MissionRewards_Unload", 0i64, 0i64, 0);
-            v3->mState = 0;
+            pObject = screen->mRenderable->m_movie.pObject;
+            if ( pObject )
+              Scaleform::GFx::Movie::Invoke(pObject, "MissionRewards_Unload", 0i64, 0i64, 0);
+            this->mState = STATE_NONE;
           }
         }
         else
         {
-          v9 = elapsed + v3->mTimer;
-          v3->mTimer = v9;
+          v9 = elapsed + this->mTimer;
+          this->mTimer = v9;
           if ( v9 > 20.0 )
-            v3->mState = 6;
+            this->mState = STATE_DONE|STATE_WAITING;
         }
       }
       else
       {
-        v10 = elapsed + v3->mTimer;
-        v11 = v10 < v3->Duration;
-        v12 = v10 == v3->Duration;
-        v3->mTimer = v10;
-        if ( !v11 && !v12 )
+        v10 = elapsed + this->mTimer;
+        v11 = v10 <= this->Duration;
+        this->mTimer = v10;
+        if ( !v11 )
         {
-          v13 = screen->mRenderable->m_movie.pObject;
-          if ( v13 )
-            Scaleform::GFx::Movie::Invoke(v13, "Rewards_Hide", 0i64, 0i64, 0);
-          v3->mState = 5;
+          v12 = screen->mRenderable->m_movie.pObject;
+          if ( v12 )
+            Scaleform::GFx::Movie::Invoke(v12, "Rewards_Hide", 0i64, 0i64, 0);
+          this->mState = STATE_SYNCED;
         }
       }
     }
     else
     {
-      v14 = screen->mRenderable->m_movie.pObject;
-      if ( v14 )
-        Scaleform::GFx::Movie::Invoke(v14, "MissionRewards_LoadRewardFlasher", 0i64, 0i64, 0);
-      v3->mState = 3;
+      v13 = screen->mRenderable->m_movie.pObject;
+      if ( v13 )
+        Scaleform::GFx::Movie::Invoke(v13, "MissionRewards_LoadRewardFlasher", 0i64, 0i64, 0);
+      this->mState = STATE_EXECUTING;
     }
   }
   else
   {
-    v15 = v3->mTexturePackTimeout - elapsed;
-    v3->mTexturePackTimeout = v15;
-    if ( v15 <= 0.0 )
-      v3->mState = 6;
+    v14 = this->mTexturePackTimeout - elapsed;
+    this->mTexturePackTimeout = v14;
+    if ( v14 <= 0.0 )
+      this->mState = STATE_DONE|STATE_WAITING;
   }
 }
 
 // File Line: 179
 // RVA: 0x5EAB80
-void __fastcall UFG::UIHKMissionRewardsFlasherWidget::HandleMessage(UFG::UIHKMissionRewardsFlasherWidget *this, UFG::UIScreen *screen, unsigned int msgId, UFG::UIMessage *msg)
+void __fastcall UFG::UIHKMissionRewardsFlasherWidget::HandleMessage(
+        UFG::UIHKMissionRewardsFlasherWidget *this,
+        UFG::UIScreen *screen,
+        unsigned int msgId,
+        UFG::UIMessage *msg)
 {
-  UFG::UIHKMissionRewardsFlasherWidget::eState v4; // eax
-  UFG::UIHKMissionRewardsFlasherWidget *v5; // rbx
+  UFG::UIHKMissionRewardsFlasherWidget::eState mState; // eax
 
-  v4 = this->mState;
-  v5 = this;
-  if ( v4 == 3 )
+  mState = this->mState;
+  if ( mState == STATE_EXECUTING )
   {
     if ( msgId == UI_HASH_WIDGET_LOADED_20 )
     {
       UFG::UIHKMissionRewardsFlasherWidget::Flash_Show(this, screen);
-      v5->mState = 4;
+      this->mState = STATE_DONE;
     }
   }
-  else if ( v4 == 5 && msgId == UI_HASH_REWARDS_REWARDS_OUTRO_DONE_20 )
+  else if ( mState == STATE_SYNCED && msgId == UI_HASH_REWARDS_REWARDS_OUTRO_DONE_20 )
   {
-    this->mState = 6;
+    this->mState = STATE_DONE|STATE_WAITING;
     UFG::UIHKMissionRewardsFlasherWidget::FreeTextures(this);
   }
 }
 
 // File Line: 206
 // RVA: 0x611D20
-void __fastcall UFG::UIHKMissionRewardsFlasherWidget::Start(UFG::UIHKMissionRewardsFlasherWidget *this, UFG::UIScreen *screen)
+void __fastcall UFG::UIHKMissionRewardsFlasherWidget::Start(
+        UFG::UIHKMissionRewardsFlasherWidget *this,
+        UFG::UIScreen *screen)
 {
-  UFG::UIHKMissionRewardsFlasherWidget *v2; // rbx
-
-  v2 = this;
   if ( this->mState == STATE_NONE )
   {
     if ( UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue.size )
     {
-      this->mState = 1;
+      this->mState = STATE_QUEUED;
       UFG::UIHKMissionRewardsFlasherWidget::LoadTextures(this);
-      v2->mTimer = 0.0;
+      this->mTimer = 0.0;
     }
   }
 }
@@ -496,39 +499,33 @@ void __fastcall UFG::UIHKMissionRewardsFlasherWidget::Start(UFG::UIHKMissionRewa
 void __fastcall UFG::UIHKMissionRewardsFlasherWidget::Clear(UFG::UIHKMissionRewardsFlasherWidget *this)
 {
   __int64 v1; // rbx
-  unsigned int v2; // edx
-  UFG::UIHKMissionReward **v3; // rcx
+  unsigned int size; // edx
+  UFG::UIHKMissionReward **i; // rcx
   UFG::UIHKMissionReward *v4; // rdi
-  UFG::qNode<UFG::UIHKMissionReward,UFG::UIHKMissionReward> *v5; // rcx
-  UFG::qNode<UFG::UIHKMissionReward,UFG::UIHKMissionReward> *v6; // rax
+  UFG::qNode<UFG::UIHKMissionReward,UFG::UIHKMissionReward> *mPrev; // rcx
+  UFG::qNode<UFG::UIHKMissionReward,UFG::UIHKMissionReward> *mNext; // rax
 
   v1 = 0i64;
-  v2 = UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue.size;
-  v3 = UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue.p;
-  if ( UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue.size )
+  size = UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue.size;
+  for ( i = UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue.p; (unsigned int)v1 < size; v1 = (unsigned int)(v1 + 1) )
   {
-    do
+    v4 = i[v1];
+    if ( v4 )
     {
-      v4 = v3[v1];
-      if ( v4 )
-      {
-        UFG::qString::~qString(&v4->mText);
-        v5 = v4->mPrev;
-        v6 = v4->mNext;
-        v5->mNext = v6;
-        v6->mPrev = v5;
-        v4->mPrev = (UFG::qNode<UFG::UIHKMissionReward,UFG::UIHKMissionReward> *)&v4->mPrev;
-        v4->mNext = (UFG::qNode<UFG::UIHKMissionReward,UFG::UIHKMissionReward> *)&v4->mPrev;
-        operator delete[](v4);
-        v3 = UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue.p;
-        v2 = UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue.size;
-      }
-      v1 = (unsigned int)(v1 + 1);
+      UFG::qString::~qString(&v4->mText);
+      mPrev = v4->mPrev;
+      mNext = v4->mNext;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
+      v4->mPrev = v4;
+      v4->mNext = v4;
+      operator delete[](v4);
+      i = UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue.p;
+      size = UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue.size;
     }
-    while ( (unsigned int)v1 < v2 );
   }
-  if ( v3 )
-    operator delete[](v3);
+  if ( i )
+    operator delete[](i);
   UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue.p = 0i64;
   *(_QWORD *)&UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue.size = 0i64;
 }
@@ -537,48 +534,46 @@ void __fastcall UFG::UIHKMissionRewardsFlasherWidget::Clear(UFG::UIHKMissionRewa
 // RVA: 0x5F16D0
 void __fastcall UFG::UIHKMissionRewardsFlasherWidget::LoadTextures(UFG::UIHKMissionRewardsFlasherWidget *this)
 {
-  UFG::UIHKMissionRewardsFlasherWidget *v1; // rbp
-  const char **v2; // rdi
-  signed __int64 v3; // rsi
+  char **p_mData; // rdi
+  __int64 v3; // rsi
   const char *v4; // rbx
   UFG::UIScreenTextureManager *v5; // rax
-  signed int i; // edi
-  float v7; // xmm1_4
+  int i; // edi
+  float size; // xmm1_4
   UFG::UIHKMissionReward *v8; // rsi
-  const char *v9; // rax
+  const char *IconTextureName; // rax
   UFG::qString *v10; // rax
-  char *v11; // rbx
+  char *mData; // rbx
   UFG::UIScreenTextureManager *v12; // rax
-  UFG::qString v13; // [rsp+38h] [rbp-80h]
-  UFG::qString result; // [rsp+60h] [rbp-58h]
+  UFG::qString v13; // [rsp+38h] [rbp-80h] BYREF
+  UFG::qString result; // [rsp+60h] [rbp-58h] BYREF
 
-  v1 = this;
-  v2 = (const char **)&UFG::UIHKMissionRewardsFlasherWidget::gTexturePackFilename[0].mData;
+  p_mData = &UFG::UIHKMissionRewardsFlasherWidget::gTexturePackFilename[0].mData;
   v3 = 4i64;
   do
   {
-    v4 = *v2;
+    v4 = *p_mData;
     v5 = UFG::UIScreenTextureManager::Instance();
     UFG::UIScreenTextureManager::ReleaseTexturePack(v5, v4);
-    v2 += 5;
+    p_mData += 5;
     --v3;
   }
   while ( v3 );
   UFG::UIHKMissionRewardsFlasherWidget::gNumTexturesLoading = 0;
-  v1->mTexturePackTimeout = 5.0;
+  this->mTexturePackTimeout = 5.0;
   for ( i = 0; ; ++i )
   {
-    v7 = (float)(signed int)UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue.size;
-    if ( (float)(signed int)UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue.size >= 4.0 )
-      v7 = FLOAT_4_0;
-    if ( (float)i >= v7 )
+    size = (float)(int)UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue.size;
+    if ( (float)(int)UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue.size >= 4.0 )
+      size = FLOAT_4_0;
+    if ( (float)i >= size )
       break;
     v8 = UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue.p[i];
     if ( v8 )
     {
       UFG::qString::qString(&v13);
-      v9 = UFG::UIHKMissionRewardsFlasherWidget::GetIconTextureName(v1, v8->mIcon);
-      UFG::qString::Format(&v13, "Data\\UI\\%s_TP.perm.bin", v9);
+      IconTextureName = UFG::UIHKMissionRewardsFlasherWidget::GetIconTextureName(this, v8->mIcon);
+      UFG::qString::Format(&v13, "Data\\UI\\%s_TP.perm.bin", IconTextureName);
       v10 = UFG::qString::ToLower(&v13, &result);
       UFG::qString::Set(
         &UFG::UIHKMissionRewardsFlasherWidget::gTexturePackFilename[i],
@@ -588,19 +583,19 @@ void __fastcall UFG::UIHKMissionRewardsFlasherWidget::LoadTextures(UFG::UIHKMiss
         0);
       UFG::qString::~qString(&result);
       ++UFG::UIHKMissionRewardsFlasherWidget::gNumTexturesLoading;
-      v11 = UFG::UIHKMissionRewardsFlasherWidget::gTexturePackFilename[i].mData;
+      mData = UFG::UIHKMissionRewardsFlasherWidget::gTexturePackFilename[i].mData;
       v12 = UFG::UIScreenTextureManager::Instance();
       UFG::UIScreenTextureManager::QueueTexturePackLoad(
         v12,
-        v11,
+        mData,
         DEFAULT_PRIORITY,
-        UFG::UIHKMissionRewardsFlasherWidget::TextureLoadedCallback,
+        (UFG::qReflectInventoryBase *)UFG::UIHKMissionRewardsFlasherWidget::TextureLoadedCallback,
         0i64);
       UFG::qString::~qString(&v13);
     }
     else
     {
-      UFG::qString::Set(&UFG::UIHKMissionRewardsFlasherWidget::gTexturePackFilename[i], &customWorldMapCaption);
+      UFG::qString::Set(&UFG::UIHKMissionRewardsFlasherWidget::gTexturePackFilename[i], &customCaption);
     }
   }
 }
@@ -609,19 +604,19 @@ void __fastcall UFG::UIHKMissionRewardsFlasherWidget::LoadTextures(UFG::UIHKMiss
 // RVA: 0x5EB8B0
 void __fastcall UFG::UIHKMissionRewardsFlasherWidget::FreeTextures(UFG::UIHKMissionRewardsFlasherWidget *this)
 {
-  const char **v1; // rbx
-  signed __int64 v2; // rsi
+  char **p_mData; // rbx
+  __int64 v2; // rsi
   const char *v3; // rdi
   UFG::UIScreenTextureManager *v4; // rax
 
-  v1 = (const char **)&UFG::UIHKMissionRewardsFlasherWidget::gTexturePackFilename[0].mData;
+  p_mData = &UFG::UIHKMissionRewardsFlasherWidget::gTexturePackFilename[0].mData;
   v2 = 4i64;
   do
   {
-    v3 = *v1;
+    v3 = *p_mData;
     v4 = UFG::UIScreenTextureManager::Instance();
     UFG::UIScreenTextureManager::ReleaseTexturePack(v4, v3);
-    v1 += 5;
+    p_mData += 5;
     --v2;
   }
   while ( v2 );
@@ -629,15 +624,19 @@ void __fastcall UFG::UIHKMissionRewardsFlasherWidget::FreeTextures(UFG::UIHKMiss
 
 // File Line: 290
 // RVA: 0x612820
-void __fastcall UFG::UIHKMissionRewardsFlasherWidget::TextureLoadedCallback(UFG::DataStreamer::Handle *handle, void *param)
+void __fastcall UFG::UIHKMissionRewardsFlasherWidget::TextureLoadedCallback(
+        UFG::DataStreamer::Handle *handle,
+        void *param)
 {
   if ( --UFG::UIHKMissionRewardsFlasherWidget::gNumTexturesLoading <= 0 )
-    UFG::UIHKScreenHud::MissionRewards->Rewards.mState = 2;
+    UFG::UIHKScreenHud::MissionRewards->Rewards.mState = STATE_WAITING;
 }
 
 // File Line: 306
 // RVA: 0x5E7D20
-const char *__fastcall UFG::UIHKMissionRewardsFlasherWidget::GetIconTextureName(UFG::UIHKMissionRewardsFlasherWidget *this, unsigned int icon)
+const char *__fastcall UFG::UIHKMissionRewardsFlasherWidget::GetIconTextureName(
+        UFG::UIHKMissionRewardsFlasherWidget *this,
+        unsigned int icon)
 {
   const char *result; // rax
 
@@ -701,71 +700,65 @@ const char *__fastcall UFG::UIHKMissionRewardsFlasherWidget::GetIconTextureName(
 
 // File Line: 363
 // RVA: 0x5E2F70
-void __fastcall UFG::UIHKMissionRewardsFlasherWidget::Flash_Show(UFG::UIHKMissionRewardsFlasherWidget *this, UFG::UIScreen *screen)
+void __fastcall UFG::UIHKMissionRewardsFlasherWidget::Flash_Show(
+        UFG::UIHKMissionRewardsFlasherWidget *this,
+        UFG::UIScreen *screen)
 {
-  UFG::UIHKMissionRewardsFlasherWidget *v2; // rbp
-  Scaleform::GFx::Movie *v3; // rsi
+  Scaleform::GFx::Movie *pObject; // rsi
   unsigned int v4; // ebx
-  unsigned int v5; // edx
+  unsigned int i; // edx
   UFG::UIHKMissionReward *v6; // rdi
-  const char *v7; // rax
-  __int64 v8; // rdi
+  const char *IconTextureName; // rax
+  Scaleform::GFx::Value::ValueUnion mData; // rdi
   char *v9; // rdi
-  char ptr; // [rsp+30h] [rbp-A8h]
-  __int64 v11; // [rsp+40h] [rbp-98h]
-  unsigned int v12; // [rsp+48h] [rbp-90h]
-  __int64 v13; // [rsp+50h] [rbp-88h]
-  char v14; // [rsp+60h] [rbp-78h]
-  __int64 v15; // [rsp+70h] [rbp-68h]
-  unsigned int v16; // [rsp+78h] [rbp-60h]
-  char *v17; // [rsp+80h] [rbp-58h]
-  __int64 v18; // [rsp+90h] [rbp-48h]
-  UFG::qString v19; // [rsp+98h] [rbp-40h]
+  Scaleform::GFx::Value ptr; // [rsp+30h] [rbp-A8h] BYREF
+  char v11[16]; // [rsp+60h] [rbp-78h] BYREF
+  __int64 v12; // [rsp+70h] [rbp-68h]
+  int v13; // [rsp+78h] [rbp-60h]
+  char *v14; // [rsp+80h] [rbp-58h]
+  __int64 v15; // [rsp+90h] [rbp-48h]
+  UFG::qString v16; // [rsp+98h] [rbp-40h] BYREF
 
-  v18 = -2i64;
-  v2 = this;
-  v3 = screen->mRenderable->m_movie.pObject;
-  if ( v3 )
+  v15 = -2i64;
+  pObject = screen->mRenderable->m_movie.pObject;
+  if ( pObject )
   {
-    Scaleform::GFx::Movie::Invoke(v3, "Rewards_Init", 0i64, 0i64, 0);
+    Scaleform::GFx::Movie::Invoke(pObject, "Rewards_Init", 0i64, 0i64, 0);
     v4 = 0;
-    v5 = UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue.size;
-    if ( UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue.size )
+    for ( i = UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue.size; v4 < i; ++v4 )
     {
-      do
+      v6 = UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue.p[v4];
+      if ( v6 )
       {
-        v6 = UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue.p[v4];
-        if ( v6 )
+        IconTextureName = UFG::UIHKMissionRewardsFlasherWidget::GetIconTextureName(this, v6->mIcon);
+        UFG::qString::qString(&v16, "img://%s", IconTextureName);
+        `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
+        mData = (Scaleform::GFx::Value::ValueUnion)v6->mText.mData;
+        if ( (ptr.Type & 0x40) != 0 )
         {
-          v7 = UFG::UIHKMissionRewardsFlasherWidget::GetIconTextureName(v2, v6->mIcon);
-          UFG::qString::qString(&v19, "img://%s", v7);
-          `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-          v8 = (__int64)v6->mText.mData;
-          if ( (v12 >> 6) & 1 )
-          {
-            (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v11 + 16i64))(v11, &ptr, v13);
-            v11 = 0i64;
-          }
-          v12 = 6;
-          v13 = v8;
-          v9 = v19.mData;
-          if ( (v16 >> 6) & 1 )
-          {
-            (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v15 + 16i64))(v15, &v14, v17);
-            v15 = 0i64;
-          }
-          v16 = 6;
-          v17 = v9;
-          Scaleform::GFx::Movie::Invoke(v3, "Rewards_Add", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
-          `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
-          UFG::qString::~qString(&v19);
-          v5 = UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue.size;
+          (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&ptr.pObjectInterface->vfptr->gap8[8])(
+            ptr.pObjectInterface,
+            &ptr,
+            ptr.mValue);
+          ptr.pObjectInterface = 0i64;
         }
-        ++v4;
+        ptr.Type = VT_String;
+        ptr.mValue = mData;
+        v9 = v16.mData;
+        if ( (v13 & 0x40) != 0 )
+        {
+          (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v12 + 16i64))(v12, v11, v14);
+          v12 = 0i64;
+        }
+        v13 = 6;
+        v14 = v9;
+        Scaleform::GFx::Movie::Invoke(pObject, "Rewards_Add", 0i64, &ptr, 2u);
+        `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
+        UFG::qString::~qString(&v16);
+        i = UFG::UIHKMissionRewardsFlasherWidget::mRewardQueue.size;
       }
-      while ( v4 < v5 );
     }
-    Scaleform::GFx::Movie::Invoke(v3, "Rewards_Show", 0i64, 0i64, 0);
+    Scaleform::GFx::Movie::Invoke(pObject, "Rewards_Show", 0i64, 0i64, 0);
   }
 }
 

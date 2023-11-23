@@ -28,15 +28,15 @@ hkClass *__fastcall hkpGroupFilter::staticClass()
 
 // File Line: 64
 // RVA: 0xCEB6A0
-void __fastcall finishLoadedObjecthkpGroupFilter(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpGroupFilter(_QWORD *p, int finishing)
 {
   if ( p )
   {
-    *(_QWORD *)p = &hkpGroupFilter::`vftable{for `hkReferencedObject};
-    *((_QWORD *)p + 2) = &hkpGroupFilter::`vftable{for `hkpCollidableCollidableFilter};
-    *((_QWORD *)p + 3) = &hkpGroupFilter::`vftable{for `hkpShapeCollectionFilter};
-    *((_QWORD *)p + 4) = &hkpGroupFilter::`vftable{for `hkpRayShapeCollectionFilter};
-    *((_QWORD *)p + 5) = &hkpGroupFilter::`vftable{for `hkpRayCollidableFilter};
+    *p = &hkpGroupFilter::`vftable{for `hkReferencedObject};
+    p[2] = &hkpGroupFilter::`vftable{for `hkpCollidableCollidableFilter};
+    p[3] = &hkpGroupFilter::`vftable{for `hkpShapeCollectionFilter};
+    p[4] = &hkpGroupFilter::`vftable{for `hkpRayShapeCollectionFilter};
+    p[5] = &hkpGroupFilter::`vftable{for `hkpRayCollidableFilter};
     if ( finishing )
       *((_DWORD *)p + 14) = 2;
   }
@@ -44,9 +44,9 @@ void __fastcall finishLoadedObjecthkpGroupFilter(void *p, int finishing)
 
 // File Line: 70
 // RVA: 0xCEB6F0
-void __fastcall cleanupLoadedObjecthkpGroupFilter(void *p)
+void __fastcall cleanupLoadedObjecthkpGroupFilter(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 74
@@ -67,8 +67,8 @@ void **dynamic_initializer_for__hkpGroupFilterTypeInfo__()
   hkpGroupFilterTypeInfo.m_typeName = "hkpGroupFilter";
   hkpGroupFilterTypeInfo.m_vtable = result;
   hkpGroupFilterTypeInfo.m_scopedName = "!hkpGroupFilter";
-  hkpGroupFilterTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpGroupFilter;
-  hkpGroupFilterTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpGroupFilter;
+  hkpGroupFilterTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpGroupFilter;
+  hkpGroupFilterTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpGroupFilter;
   return result;
 }
 

@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkaiDefaultAstarCostModifierClass__()
     &hkaiDefaultAstarCostModifier_Default,
     0i64,
     0,
-    3u);
+    3);
 }
 
 // File Line: 77
@@ -28,17 +28,17 @@ hkClass *__fastcall hkaiDefaultAstarCostModifier::staticClass()
 
 // File Line: 84
 // RVA: 0xBB64B0
-void __fastcall finishLoadedObjecthkaiDefaultAstarCostModifier(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiDefaultAstarCostModifier(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiDefaultAstarCostModifier::`vftable;
+    *p = &hkaiDefaultAstarCostModifier::`vftable;
 }
 
 // File Line: 90
 // RVA: 0xBB64D0
-void __fastcall cleanupLoadedObjecthkaiDefaultAstarCostModifier(void *p)
+void __fastcall cleanupLoadedObjecthkaiDefaultAstarCostModifier(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 94
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkaiDefaultAstarCostModifierTypeInfo__()
   hkaiDefaultAstarCostModifierTypeInfo.m_typeName = "hkaiDefaultAstarCostModifier";
   hkaiDefaultAstarCostModifierTypeInfo.m_vtable = result;
   hkaiDefaultAstarCostModifierTypeInfo.m_scopedName = "!hkaiDefaultAstarCostModifier";
-  hkaiDefaultAstarCostModifierTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiDefaultAstarCostModifier;
-  hkaiDefaultAstarCostModifierTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiDefaultAstarCostModifier;
+  hkaiDefaultAstarCostModifierTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiDefaultAstarCostModifier;
+  hkaiDefaultAstarCostModifierTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiDefaultAstarCostModifier;
   return result;
 }
 

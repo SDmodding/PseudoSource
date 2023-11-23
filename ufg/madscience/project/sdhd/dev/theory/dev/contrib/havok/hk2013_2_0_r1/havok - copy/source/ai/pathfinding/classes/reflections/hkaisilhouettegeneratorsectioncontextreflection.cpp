@@ -35,16 +35,14 @@ void __fastcall finishLoadedObjecthkaiSilhouetteGeneratorSectionContext(void *p,
 
 // File Line: 74
 // RVA: 0xBB8050
-void __fastcall cleanupLoadedObjecthkaiSilhouetteGeneratorSectionContext(void *p)
+void __fastcall cleanupLoadedObjecthkaiSilhouetteGeneratorSectionContext(_QWORD *p)
 {
-  _DWORD *v1; // rbx
   hkReferencedObject *v2; // rcx
 
-  v1 = p;
-  v2 = (hkReferencedObject *)*((_QWORD *)p + 4);
+  v2 = (hkReferencedObject *)p[4];
   if ( v2 )
     hkReferencedObject::removeReference(v2);
-  v1[10] = 0;
-  *((_QWORD *)v1 + 4) = 0i64;
+  *((_DWORD *)p + 10) = 0;
+  p[4] = 0i64;
 }
 

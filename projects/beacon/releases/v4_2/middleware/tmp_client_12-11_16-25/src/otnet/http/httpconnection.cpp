@@ -2,28 +2,24 @@
 // RVA: 0xEDE9FC
 void __fastcall OSuite::ZHttpConnection::ZHttpConnection(OSuite::ZHttpConnection *this)
 {
-  OSuite::ZHttpConnection *v1; // rbx
-
-  v1 = this;
   this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZHttpConnection::`vftable;
   OSuite::ZUrl::ZUrl(&this->m_url);
-  v1->m_socket = 0i64;
-  *(_WORD *)&v1->m_bAborted = 0;
+  this->m_socket = 0i64;
+  *(_WORD *)&this->m_bAborted = 0;
 }
 
 // File Line: 74
 // RVA: 0xEDEAB8
-void __fastcall OSuite::ZHttpConnection::BindWithSocket(OSuite::ZHttpConnection *this, OSuite::ZSocket *socket, OSuite::ZUrl *url, bool bPersitent)
+void __fastcall OSuite::ZHttpConnection::BindWithSocket(
+        OSuite::ZHttpConnection *this,
+        OSuite::ZSocket *socket,
+        OSuite::ZUrl *url,
+        bool bPersitent)
 {
-  OSuite::ZSocket *v4; // rdi
-  OSuite::ZHttpConnection *v5; // rbx
-
-  v4 = socket;
-  v5 = this;
   this->m_bAborted = 0;
   this->m_bPersistent = bPersitent;
   OSuite::ZUrl::operator=(&this->m_url, url);
-  v5->m_socket = v4;
+  this->m_socket = socket;
 }
 
 // File Line: 86
@@ -37,13 +33,13 @@ OSuite::ZSocket *__fastcall OSuite::ZHttpConnection::Socket(OSuite::ZHttpConnect
 // RVA: 0xEDEB90
 char __fastcall OSuite::ZHttpConnection::IsConnected(OSuite::ZHttpConnection *this)
 {
-  OSuite::ZSocket *v1; // rax
+  OSuite::ZSocket *m_socket; // rax
   char v2; // cl
 
-  v1 = this->m_socket;
+  m_socket = this->m_socket;
   v2 = 0;
-  if ( v1 && (v1->m_state & 5) == 5 )
-    v2 = 1;
+  if ( m_socket && (m_socket->m_state & 5) == 5 )
+    return 1;
   return v2;
 }
 
@@ -51,13 +47,13 @@ char __fastcall OSuite::ZHttpConnection::IsConnected(OSuite::ZHttpConnection *th
 // RVA: 0xEDEBB0
 char __fastcall OSuite::ZHttpConnection::IsConnecting(OSuite::ZHttpConnection *this)
 {
-  OSuite::ZSocket *v1; // rax
+  OSuite::ZSocket *m_socket; // rax
   char v2; // cl
 
-  v1 = this->m_socket;
+  m_socket = this->m_socket;
   v2 = 0;
-  if ( v1 && (v1->m_state & 3) == 3 )
-    v2 = 1;
+  if ( m_socket && (m_socket->m_state & 3) == 3 )
+    return 1;
   return v2;
 }
 
@@ -79,53 +75,53 @@ void __fastcall OSuite::ZHttpConnection::SetPersistent(OSuite::ZHttpConnection *
 // RVA: 0xEDEA7C
 void __fastcall OSuite::ZHttpConnection::Abort(OSuite::ZHttpConnection *this)
 {
-  OSuite::ZHttpConnection *v1; // rbx
-  OSuite::ZSocket *v2; // rcx
+  OSuite::ZSocket *m_socket; // rcx
 
-  v1 = this;
   if ( !this->m_bAborted )
   {
-    v2 = this->m_socket;
-    if ( v2 )
+    m_socket = this->m_socket;
+    if ( m_socket )
     {
-      if ( (v2->m_state & 5) == 5 )
-        OSuite::ZSocket::Abort(v2, 0);
+      if ( (m_socket->m_state & 5) == 5 )
+        OSuite::ZSocket::Abort(m_socket, ERR_OK);
     }
   }
-  v1->m_bAborted = 1;
+  this->m_bAborted = 1;
 }
 
 // File Line: 149
 // RVA: 0xEDEB7C
-char __fastcall OSuite::ZHttpConnection::HasFatalError(OSuite::ZHttpConnection *this)
+bool __fastcall OSuite::ZHttpConnection::HasFatalError(OSuite::ZHttpConnection *this)
 {
-  JUMPOUT(this->m_socket, 0i64, OSuite::ZSocket::HasFatalError);
-  return 1;
+  OSuite::ZSocket *m_socket; // rcx
+
+  m_socket = this->m_socket;
+  return !m_socket || OSuite::ZSocket::HasFatalError(m_socket);
 }
 
 // File Line: 156
 // RVA: 0xEDEAF4
-signed __int64 __fastcall OSuite::ZHttpConnection::GetLastError(OSuite::ZHttpConnection *this)
+__int64 __fastcall OSuite::ZHttpConnection::GetLastError(OSuite::ZHttpConnection *this)
 {
-  OSuite::ZSocket *v1; // rcx
+  OSuite::ZSocket *m_socket; // rcx
   unsigned int v2; // ebx
-  OSuite::ZError::EError v3; // ecx
-  int v4; // ecx
-  int v5; // ecx
-  int v6; // ecx
+  OSuite::ZError::EError LastError; // ecx
+  __int32 v4; // ecx
+  __int32 v5; // ecx
+  __int32 v6; // ecx
   int v7; // ecx
   int v8; // ecx
   int v9; // ecx
   int v10; // ecx
 
-  v1 = this->m_socket;
+  m_socket = this->m_socket;
   v2 = 0;
-  if ( v1 )
+  if ( m_socket )
   {
-    v3 = OSuite::ZSocket::GetLastError(v1);
-    if ( v3 )
+    LastError = OSuite::ZSocket::GetLastError(m_socket);
+    if ( LastError )
     {
-      v4 = v3 - 4;
+      v4 = LastError - 4;
       if ( !v4 )
         return 13;
       v5 = v4 - 4;
@@ -148,7 +144,7 @@ signed __int64 __fastcall OSuite::ZHttpConnection::GetLastError(OSuite::ZHttpCon
         return 12;
       if ( v10 == 1 )
         return 13;
-      v2 = 17;
+      return 17;
     }
     return v2;
   }

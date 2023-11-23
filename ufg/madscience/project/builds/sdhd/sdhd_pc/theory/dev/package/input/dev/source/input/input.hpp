@@ -4,7 +4,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_ACTIVE_CONTROLLER_DISCONNECTED___
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("ACTIVE_CONTROLLER_DISCONNECTED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("ACTIVE_CONTROLLER_DISCONNECTED", -1);
   UI_HASH_ACTIVE_CONTROLLER_DISCONNECTED_5 = result;
   return result;
 }
@@ -15,7 +15,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_ACTIVE_CONTROLLER_RECONNECTED___5
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("ACTIVE_CONTROLLER_RECONNECTED", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("ACTIVE_CONTROLLER_RECONNECTED", -1);
   UI_HASH_ACTIVE_CONTROLLER_RECONNECTED_5 = result;
   return result;
 }

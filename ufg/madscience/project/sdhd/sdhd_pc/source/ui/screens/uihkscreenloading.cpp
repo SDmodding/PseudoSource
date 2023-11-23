@@ -3,88 +3,83 @@
 __int64 dynamic_initializer_for__UFG::UIHKScreenLoading::gTexturePackFilename__()
 {
   UFG::qString::qString(&UFG::UIHKScreenLoading::gTexturePackFilename);
-  return atexit(dynamic_atexit_destructor_for__UFG::UIHKScreenLoading::gTexturePackFilename__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::UIHKScreenLoading::gTexturePackFilename__);
 }
 
 // File Line: 25
 // RVA: 0x5CB3B0
 void __fastcall UFG::UIHKScreenLoading::~UIHKScreenLoading(UFG::UIHKScreenLoading *this)
 {
-  UFG::UIHKScreenLoading *v1; // rbx
   UFG::UIScreenTextureManager *v2; // rax
 
-  v1 = this;
   this->vfptr = (UFG::UIScreenVtbl *)&UFG::UIHKScreenLoading::`vftable;
   v2 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::ReleaseScreen(v2, "Loading");
-  UFG::UIScreen::~UIScreen((UFG::UIScreen *)&v1->vfptr);
+  UFG::UIScreen::~UIScreen(this);
 }
 
 // File Line: 40
 // RVA: 0x6325E0
 void __fastcall UFG::UIHKScreenLoading::init(UFG::UIHKScreenLoading *this, UFG::UICommandData *data)
 {
-  Scaleform::GFx::Movie *v2; // rdi
+  Scaleform::GFx::Movie *pObject; // rdi
   UFG::GameStatTracker *v3; // rax
-  UFG::qString *v4; // rax
-  int v5; // er8
+  UFG::PersistentData::String *Stat; // rax
+  int mLength; // r8d
   UFG::GameStatTracker *v6; // rax
-  UFG::qString *v7; // rax
-  int v8; // er8
+  UFG::PersistentData::String *v7; // rax
+  int v8; // r8d
   UFG::GameStatTracker *v9; // rax
-  UFG::qString *v10; // rax
-  int v11; // er8
+  UFG::PersistentData::String *v10; // rax
+  int v11; // r8d
   UFG::GameStatTracker *v12; // rax
   UFG::GameStatTracker *v13; // rax
   UFG::GameStatTracker *v14; // rax
   UFG::GameStatTracker *v15; // rax
-  UFG::qArray<unsigned long,0> *v16; // rbx
-  unsigned __int64 v17; // rsi
+  UFG::qArray<unsigned long,0> *MapInt; // rbx
+  unsigned __int64 Ticks; // rsi
   unsigned int v18; // eax
-  unsigned int v19; // eax
-  char *v20; // rbx
-  UFG::qString v21; // [rsp+28h] [rbp-39h]
-  UFG::qString string; // [rsp+50h] [rbp-11h]
-  char ptr; // [rsp+78h] [rbp+17h]
-  __int64 v24; // [rsp+88h] [rbp+27h]
-  unsigned int v25; // [rsp+90h] [rbp+2Fh]
-  char *v26; // [rsp+98h] [rbp+37h]
-  __int64 v27; // [rsp+A8h] [rbp+47h]
+  unsigned int Int; // eax
+  char *mData; // rbx
+  UFG::qString v21; // [rsp+28h] [rbp-39h] BYREF
+  UFG::qString string; // [rsp+50h] [rbp-11h] BYREF
+  Scaleform::GFx::Value ptr; // [rsp+78h] [rbp+17h] BYREF
+  __int64 v24; // [rsp+A8h] [rbp+47h]
 
-  v27 = -2i64;
-  v2 = this->mRenderable->m_movie.pObject;
-  if ( !v2 )
+  v24 = -2i64;
+  pObject = this->mRenderable->m_movie.pObject;
+  if ( !pObject )
     return;
   UFG::qString::qString(&v21);
   v3 = UFG::GameStatTracker::Instance();
-  v4 = UFG::GameStatTracker::GetStat(v3, 0);
-  v5 = v4->mLength;
-  if ( v5 )
+  Stat = UFG::GameStatTracker::GetStat(v3, LoadingHintPriority0);
+  mLength = Stat->mValue.mLength;
+  if ( mLength )
   {
-    UFG::qString::Set(&v21, v4->mData, v5, 0i64, 0);
-    UFG::qString::qString(&string, &customWorldMapCaption);
+    UFG::qString::Set(&v21, Stat->mValue.mData, mLength, 0i64, 0);
+    UFG::qString::qString(&string, &customCaption);
     v14 = UFG::GameStatTracker::Instance();
-    UFG::GameStatTracker::SetStat(v14, 0, &string);
+    UFG::GameStatTracker::SetStat(v14, LoadingHintPriority0, &string);
     goto LABEL_8;
   }
   v6 = UFG::GameStatTracker::Instance();
   v7 = UFG::GameStatTracker::GetStat(v6, LoadingHintPriority1);
-  v8 = v7->mLength;
+  v8 = v7->mValue.mLength;
   if ( v8 )
   {
-    UFG::qString::Set(&v21, v7->mData, v8, 0i64, 0);
-    UFG::qString::qString(&string, &customWorldMapCaption);
+    UFG::qString::Set(&v21, v7->mValue.mData, v8, 0i64, 0);
+    UFG::qString::qString(&string, &customCaption);
     v13 = UFG::GameStatTracker::Instance();
     UFG::GameStatTracker::SetStat(v13, LoadingHintPriority1, &string);
     goto LABEL_8;
   }
   v9 = UFG::GameStatTracker::Instance();
   v10 = UFG::GameStatTracker::GetStat(v9, LoadingHintPriority2);
-  v11 = v10->mLength;
+  v11 = v10->mValue.mLength;
   if ( v11 )
   {
-    UFG::qString::Set(&v21, v10->mData, v11, 0i64, 0);
-    UFG::qString::qString(&string, &customWorldMapCaption);
+    UFG::qString::Set(&v21, v10->mValue.mData, v11, 0i64, 0);
+    UFG::qString::qString(&string, &customCaption);
     v12 = UFG::GameStatTracker::Instance();
     UFG::GameStatTracker::SetStat(v12, LoadingHintPriority2, &string);
 LABEL_8:
@@ -93,18 +88,16 @@ LABEL_8:
   if ( !v21.mLength )
   {
     v15 = UFG::GameStatTracker::Instance();
-    v16 = (UFG::qArray<unsigned long,0> *)UFG::GameStatTracker::GetMapInt(v15, UnlockedLoadingHints);
-    v17 = UFG::qGetTicks();
-    v18 = UFG::qSymbolUC::as_uint32(v16);
+    MapInt = (UFG::qArray<unsigned long,0> *)UFG::GameStatTracker::GetMapInt(v15, UnlockedLoadingHints);
+    Ticks = UFG::qGetTicks();
+    v18 = UFG::qSymbolUC::as_uint32(MapInt);
     if ( v18 )
     {
-      v19 = UFG::PersistentData::MapInt::GetInt(
-              (UFG::PersistentData::MapInt *)v16,
-              ((unsigned __int64)(v17 * (unsigned __int128)0x346DC5D63886594Bui64 >> 64) >> 11) % v18);
-      if ( v19 == 3 )
+      Int = UFG::PersistentData::MapInt::GetInt((UFG::PersistentData::MapInt *)MapInt, Ticks / 0x2710 % v18);
+      if ( Int == 3 )
         UFG::qString::Set(&v21, "$UNLOCKABLE_LOADING_HINT_003_PC");
       else
-        UFG::qString::Format(&v21, "$UNLOCKABLE_LOADING_HINT_%03d", v19);
+        UFG::qString::Format(&v21, "$UNLOCKABLE_LOADING_HINT_%03d", Int);
     }
     else
     {
@@ -112,15 +105,18 @@ LABEL_8:
     }
   }
   `eh vector constructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-  v20 = v21.mData;
-  if ( (v25 >> 6) & 1 )
+  mData = v21.mData;
+  if ( (ptr.Type & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(__int64, char *, char *))(*(_QWORD *)v24 + 16i64))(v24, &ptr, v26);
-    v24 = 0i64;
+    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&ptr.pObjectInterface->vfptr->gap8[8])(
+      ptr.pObjectInterface,
+      &ptr,
+      ptr.mValue);
+    ptr.pObjectInterface = 0i64;
   }
-  v25 = 6;
-  v26 = v20;
-  Scaleform::GFx::Movie::Invoke(v2, "Set_Text", 0i64, (Scaleform::GFx::Value *)&ptr, 1u);
+  ptr.Type = VT_String;
+  ptr.mValue.pString = mData;
+  Scaleform::GFx::Movie::Invoke(pObject, "Set_Text", 0i64, &ptr, 1u);
   `eh vector destructor iterator(&ptr, 0x30ui64, 1, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
   UFG::qString::~qString(&v21);
 }

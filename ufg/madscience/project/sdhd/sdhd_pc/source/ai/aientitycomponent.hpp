@@ -2,29 +2,29 @@
 // RVA: 0x4166A0
 void __fastcall UFG::AIEntityComponent::SetGroupComponent(UFG::AIEntityComponent *this, UFG::GroupComponent *value)
 {
-  UFG::qNode<UFG::qSafePointerBase<UFG::GroupComponent>,UFG::qSafePointerNodeList> *v2; // r8
-  UFG::qNode<UFG::qSafePointerBase<UFG::GroupComponent>,UFG::qSafePointerNodeList> *v3; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::GroupComponent>,UFG::qSafePointerNodeList> *v4; // rax
+  UFG::qSafePointer<UFG::GroupComponent,UFG::GroupComponent> *p_m_pGroupComponent; // r8
+  UFG::qNode<UFG::qSafePointerBase<UFG::GroupComponent>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::GroupComponent>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::GroupComponent>,UFG::qSafePointerNodeList> *v5; // rax
 
-  v2 = (UFG::qNode<UFG::qSafePointerBase<UFG::GroupComponent>,UFG::qSafePointerNodeList> *)&this->m_pGroupComponent.mPrev;
+  p_m_pGroupComponent = &this->m_pGroupComponent;
   if ( this->m_pGroupComponent.m_pPointer )
   {
-    v3 = v2->mPrev;
-    v4 = v2->mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v2->mPrev = v2;
-    v2->mNext = v2;
+    mPrev = p_m_pGroupComponent->mPrev;
+    mNext = p_m_pGroupComponent->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_m_pGroupComponent->mPrev = p_m_pGroupComponent;
+    p_m_pGroupComponent->mNext = p_m_pGroupComponent;
   }
-  v2[1].mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::GroupComponent>,UFG::qSafePointerNodeList> *)value;
+  p_m_pGroupComponent->m_pPointer = value;
   if ( value )
   {
-    v5 = value->m_SafePointerList.mNode.mPrev;
-    v5->mNext = v2;
-    v2->mPrev = v5;
-    v2->mNext = &value->m_SafePointerList.mNode;
-    value->m_SafePointerList.mNode.mPrev = v2;
+    v5 = value->UFG::qSafePointerNode<UFG::GroupComponent>::m_SafePointerList.mNode.UFG::qSafePointerNode<UFG::GroupComponent>::mPrev;
+    v5->mNext = p_m_pGroupComponent;
+    p_m_pGroupComponent->mPrev = v5;
+    p_m_pGroupComponent->mNext = &value->UFG::qSafePointerNode<UFG::GroupComponent>::m_SafePointerList.mNode;
+    value->UFG::qSafePointerNode<UFG::GroupComponent>::m_SafePointerList.mNode.UFG::qSafePointerNode<UFG::GroupComponent>::mPrev = p_m_pGroupComponent;
   }
 }
 

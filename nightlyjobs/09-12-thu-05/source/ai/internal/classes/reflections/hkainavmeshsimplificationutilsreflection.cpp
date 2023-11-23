@@ -27,7 +27,7 @@ void dynamic_initializer_for__hkaiNavMeshSimplificationUtilsExtraVertexSettingsC
     &hkaiNavMeshSimplificationUtilsExtraVertexSettings_Default,
     0i64,
     0,
-    4u);
+    4);
 }
 
 // File Line: 133
@@ -46,27 +46,25 @@ void __fastcall finishLoadedObjecthkaiNavMeshSimplificationUtilsExtraVertexSetti
 
 // File Line: 146
 // RVA: 0xB47AD0
-void __fastcall cleanupLoadedObjecthkaiNavMeshSimplificationUtilsExtraVertexSettings(void *p)
+void __fastcall cleanupLoadedObjecthkaiNavMeshSimplificationUtilsExtraVertexSettings(_DWORD *p)
 {
-  int v1; // er8
-  _QWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 13);
-  v2 = p;
-  *((_DWORD *)p + 12) = 0;
+  v1 = p[13];
+  p[12] = 0;
   if ( v1 < 0 )
   {
     *((_QWORD *)p + 5) = 0i64;
-    *((_DWORD *)p + 13) = 2147483648;
+    p[13] = 0x80000000;
   }
   else
   {
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       (void *)*((_QWORD *)p + 5),
       16 * v1);
-    v2[5] = 0i64;
-    *((_DWORD *)v2 + 13) = 2147483648;
+    *((_QWORD *)p + 5) = 0i64;
+    p[13] = 0x80000000;
   }
 }
 
@@ -88,7 +86,7 @@ void dynamic_initializer_for__hkaiNavMeshSimplificationUtilsSettingsClass__()
     &hkaiNavMeshSimplificationUtilsSettings_Default,
     0i64,
     0,
-    0xDu);
+    13);
 }
 
 // File Line: 326
@@ -100,15 +98,19 @@ hkClass *__fastcall hkaiNavMeshSimplificationUtils::Settings::staticClass()
 
 // File Line: 333
 // RVA: 0xB47B40
-void __fastcall finishLoadedObjecthkaiNavMeshSimplificationUtilsSettings(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiNavMeshSimplificationUtilsSettings(
+        hkaiNavMeshSimplificationUtils::Settings *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiNavMeshSimplificationUtils::Settings::Settings);
+  if ( p )
+    hkaiNavMeshSimplificationUtils::Settings::Settings(p, finishing);
 }
 
 // File Line: 339
 // RVA: 0xB47B60
-void __fastcall cleanupLoadedObjecthkaiNavMeshSimplificationUtilsSettings(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkaiNavMeshSimplificationUtilsSettings(hkaiNavMeshSimplificationUtils::Settings *p)
 {
-  hkaiNavMeshSimplificationUtils::Settings::~Settings((hkaiNavMeshSimplificationUtils::Settings *)p);
+  hkaiNavMeshSimplificationUtils::Settings::~Settings(p);
 }
 

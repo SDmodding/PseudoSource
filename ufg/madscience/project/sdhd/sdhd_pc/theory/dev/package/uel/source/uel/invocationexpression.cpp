@@ -11,21 +11,21 @@ __int64 dynamic_initializer_for__UEL::InvocationExpression::sClassNameUID__()
 
 // File Line: 13
 // RVA: 0x24E320
-void __fastcall UEL::InvocationExpression::InvocationExpression(UEL::InvocationExpression *this, const char *identifier, UEL::Expression **expressions, int numExpressions)
+void __fastcall UEL::InvocationExpression::InvocationExpression(
+        UEL::InvocationExpression *this,
+        const char *identifier,
+        UEL::Expression **expressions,
+        unsigned int numExpressions)
 {
-  signed __int64 v4; // rbx
-  UEL::Expression **v5; // rdi
-  UEL::InvocationExpression *v6; // rsi
-  signed __int64 v7; // rdx
-  UFG::qOffset64<UEL::Expression *> *v8; // rax
+  __int64 v4; // rbx
+  __int64 v7; // rdx
+  UFG::qOffset64<UEL::Expression *> *mExpressions; // rax
   signed __int64 v9; // rdi
   __int64 v10; // rcx
   __int64 v11; // rcx
-  UFG::qSymbol result; // [rsp+68h] [rbp+20h]
+  UFG::qSymbol result; // [rsp+68h] [rbp+20h] BYREF
 
-  v4 = numExpressions;
-  v5 = expressions;
-  v6 = this;
+  v4 = (int)numExpressions;
   this->vfptr = (UEL::ExpressionVtbl *)&UEL::Expression::`vftable;
   this->mType.mValue = 3;
   this->mValueType.mBaseType.mValue = 0;
@@ -37,153 +37,143 @@ void __fastcall UEL::InvocationExpression::InvocationExpression(UEL::InvocationE
   this->mFunctionTableIndex = -1;
   this->mIdentifier = (UFG::qSymbol)UFG::qSymbol::create_from_string(&result, identifier)->mUID;
   v7 = 0i64;
-  v8 = v6->mExpressions;
-  v9 = (char *)v5 - (char *)v6;
+  mExpressions = this->mExpressions;
+  v9 = (char *)expressions - (char *)this;
   do
   {
     if ( v7 >= v4 )
     {
-      v8->mOffset = 0i64;
+      mExpressions->mOffset = 0i64;
     }
     else
     {
-      v10 = *(__int64 *)((char *)&v8[-4].mOffset + v9);
+      v10 = *(__int64 *)((char *)&mExpressions[-4].mOffset + v9);
       if ( v10 )
-        v11 = v10 - (_QWORD)v8;
+        v11 = v10 - (_QWORD)mExpressions;
       else
         v11 = 0i64;
-      v8->mOffset = v11;
+      mExpressions->mOffset = v11;
     }
     ++v7;
-    ++v8;
+    ++mExpressions;
   }
   while ( v7 < 8 );
 }
 
 // File Line: 34
 // RVA: 0x252CE0
-char __fastcall UEL::InvocationExpression::Resolve(UEL::InvocationExpression *this, UEL::Runtime *instance)
+bool __fastcall UEL::InvocationExpression::Resolve(UEL::InvocationExpression *this, UEL::Runtime *instance)
 {
-  UEL::Runtime *v2; // rsi
-  UEL::InvocationExpression *v3; // rbx
-  unsigned int v4; // edi
-  signed __int64 v5; // rax
-  signed __int64 v6; // rcx
-  __int64 v7; // rax
-  signed __int64 v8; // rcx
-  unsigned int v9; // edx
-  UFG::qBaseTreeRB *v10; // r15
-  char v11; // al
-  unsigned int v12; // eax
-  int v13; // esi
-  unsigned int v14; // ebp
-  __int64 v15; // rax
-  UFG::qOffset64<UEL::Expression *> *v16; // rdi
+  int v4; // edi
+  UFG::qOffset64<UEL::Expression *> *v5; // rcx
+  char *v6; // rcx
+  unsigned int mUID; // edx
+  UFG::qBaseTreeRB *v8; // r15
+  bool v9; // al
+  unsigned int v10; // eax
+  int v11; // esi
+  unsigned int v12; // ebp
+  __int64 mOffset; // rax
+  UFG::qOffset64<UEL::Expression *> *v14; // rdi
+  UEL::Expression *v15; // rcx
+  UEL::Value::Type *ValueType; // rax
   UEL::Expression *v17; // rcx
-  UEL::Value::Type *v18; // rax
-  UEL::Expression *v19; // rcx
-  UEL::Expression *v20; // rcx
-  UEL::Value::Type *v21; // rax
-  UEL::Value::Type result; // [rsp+60h] [rbp+8h]
-  UEL::Value::Type v23; // [rsp+70h] [rbp+18h]
-  UEL::Value::Type v24; // [rsp+78h] [rbp+20h]
+  UEL::Expression *v18; // rcx
+  UEL::Value::Type *v19; // rax
+  UEL::Value::Type result; // [rsp+60h] [rbp+8h] BYREF
+  UEL::Value::Type v21; // [rsp+70h] [rbp+18h] BYREF
+  UEL::Value::Type v22; // [rsp+78h] [rbp+20h] BYREF
 
-  v2 = instance;
-  v3 = this;
   v4 = 0;
   if ( this->mNumExpressions )
   {
     while ( 1 )
     {
-      v5 = v4 + 4i64;
-      v6 = (signed __int64)v3 + 8 * v5;
-      v7 = *((_QWORD *)&v3->vfptr + v5);
-      v8 = v7 ? v7 + v6 : 0i64;
-      if ( !(*(unsigned __int8 (__fastcall **)(signed __int64, UEL::Runtime *))(*(_QWORD *)v8 + 16i64))(v8, v2) )
-        break;
-      if ( ++v4 >= v3->mNumExpressions )
+      v5 = &this->mExpressions[v4];
+      v6 = v5->mOffset ? (char *)v5 + v5->mOffset : 0i64;
+      if ( !(*(unsigned __int8 (__fastcall **)(char *, UEL::Runtime *))(*(_QWORD *)v6 + 16i64))(v6, instance) )
+        return 0;
+      if ( ++v4 >= this->mNumExpressions )
         goto LABEL_7;
     }
-    v11 = 0;
   }
   else
   {
 LABEL_7:
-    v9 = v3->mIdentifier.mUID;
-    if ( v9 )
-      v10 = UFG::qBaseTreeRB::Get(&v2->mInvocableBindings->mTree, v9);
+    mUID = this->mIdentifier.mUID;
+    if ( mUID )
+      v8 = UFG::qBaseTreeRB::Get(&instance->mInvocableBindings->mTree, mUID);
     else
-      v10 = 0i64;
-    UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v3->mIdentifier);
-    if ( v10
-      && v3->mNumExpressions == BYTE4(v10->mNULL.mParent)
-      && ((v3->mValueType.mBaseType.mValue = WORD2(v10[1].mNULL.mParent),
-           v12 = (unsigned int)v10[1].mNULL.mChild[0],
-           v3->mValueType.mDetailedType.mUID = v12,
-           0 != v3->mValueType.mBaseType.mValue)
-       || UFG::gNullQSymbol.mUID != v12) )
+      v8 = 0i64;
+    UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&this->mIdentifier);
+    if ( v8
+      && this->mNumExpressions == BYTE4(v8->mNULL.mParent)
+      && ((this->mValueType.mBaseType.mValue = WORD2(v8[1].mNULL.mParent),
+           v10 = (unsigned int)v8[1].mNULL.mChild[0],
+           this->mValueType.mDetailedType.mUID = v10,
+           this->mValueType.mBaseType.mValue)
+       || UFG::gNullQSymbol.mUID != v10) )
     {
-      v13 = 0;
-      v3->mFunctionTableIndex = (unsigned int)v10[1].mNULL.mParent;
-      if ( v3->mNumExpressions <= 0 )
-      {
-LABEL_28:
-        v11 = 1;
-        v3->mResolved = 1;
-      }
-      else
+      v11 = 0;
+      this->mFunctionTableIndex = (unsigned int)v8[1].mNULL.mParent;
+      if ( this->mNumExpressions )
       {
         while ( 1 )
         {
-          v14 = UFG::gNullQSymbol.mUID;
-          v15 = v3->mExpressions[v13].mOffset;
-          v16 = &v3->mExpressions[v13];
-          v17 = (UEL::Expression *)((char *)v16 + v15);
-          if ( !v15 )
+          v12 = UFG::gNullQSymbol.mUID;
+          mOffset = this->mExpressions[v11].mOffset;
+          v14 = &this->mExpressions[v11];
+          v15 = (UEL::Expression *)((char *)v14 + mOffset);
+          if ( !mOffset )
+            v15 = 0i64;
+          ValueType = UEL::Expression::GetValueType(v15, &result);
+          if ( !ValueType->mBaseType.mValue && v12 == ValueType->mDetailedType.mUID )
+          {
+            v9 = 1;
+            this->mNeedsRuntimeResolve = 1;
+            return v9;
+          }
+          v17 = (UEL::Expression *)((char *)v14 + v14->mOffset);
+          if ( !v14->mOffset )
             v17 = 0i64;
-          v18 = UEL::Expression::GetValueType(v17, &result);
-          if ( 0 == v18->mBaseType.mValue && v14 == v18->mDetailedType.mUID )
+          UEL::Expression::GetValueType(v17, &v21);
+          UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&this->mIdentifier);
+          v18 = (UEL::Expression *)((char *)v14 + v14->mOffset);
+          if ( !v14->mOffset )
+            v18 = 0i64;
+          v19 = UEL::Expression::GetValueType(v18, &v22);
+          if ( LOWORD(v8->mNULL.mChild[v11]) != v19->mBaseType.mValue
+            || HIDWORD(v8->mNULL.mChild[v11]) != v19->mDetailedType.mUID )
           {
-            v11 = 1;
-            v3->mNeedsRuntimeResolve = 1;
-            return v11;
+            return 0;
           }
-          v19 = (UEL::Expression *)((char *)v16 + v16->mOffset);
-          if ( !v16->mOffset )
-            v19 = 0i64;
-          UEL::Expression::GetValueType(v19, &v23);
-          UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v3->mIdentifier);
-          v20 = (UEL::Expression *)((char *)v16 + v16->mOffset);
-          if ( !v16->mOffset )
-            v20 = 0i64;
-          v21 = UEL::Expression::GetValueType(v20, &v24);
-          if ( LOWORD(v10->mNULL.mChild[v13]) != v21->mBaseType.mValue
-            || HIDWORD(v10->mNULL.mChild[v13]) != v21->mDetailedType.mUID )
-          {
-            break;
-          }
-          if ( ++v13 >= v3->mNumExpressions )
+          if ( ++v11 >= this->mNumExpressions )
             goto LABEL_28;
         }
-        v11 = 0;
+      }
+      else
+      {
+LABEL_28:
+        v9 = 1;
+        this->mResolved = 1;
       }
     }
     else
     {
-      v11 = 0;
+      return 0;
     }
   }
-  return v11;
+  return v9;
 }
 
 // File Line: 77
 // RVA: 0x251030
-UEL::Value *__fastcall UEL::InvocationExpression::Eval(UEL::InvocationExpression *this, UEL::Value *result, UEL::ParametersBase *parameters, UFG::qArray<UEL::Value,0> *args)
+UEL::Value *__fastcall UEL::InvocationExpression::Eval(
+        UEL::InvocationExpression *this,
+        UEL::Value *result,
+        UEL::ParametersBase *parameters,
+        UFG::qArray<UEL::Value,0> *args)
 {
-  UFG::qArray<UEL::Value,0> *v4; // r15
-  UEL::ParametersBase *v5; // r12
-  UEL::Value *v6; // r13
-  UEL::InvocationExpression *v7; // rsi
   char *v8; // rax
   unsigned int v9; // edi
   UFG::qOffset64<UEL::Expression *> *v10; // rax
@@ -191,18 +181,14 @@ UEL::Value *__fastcall UEL::InvocationExpression::Eval(UEL::InvocationExpression
   UEL::Value *v12; // rax
   UEL::Value *v13; // rax
   UFG::qString *v14; // rax
-  UEL::Value v16; // [rsp+30h] [rbp-A8h]
-  UFG::qString resulta; // [rsp+50h] [rbp-88h]
+  UEL::Value v16; // [rsp+30h] [rbp-A8h] BYREF
+  UFG::qString resulta; // [rsp+50h] [rbp-88h] BYREF
   __int64 v18; // [rsp+78h] [rbp-60h]
-  char ptr[256]; // [rsp+88h] [rbp-50h]
+  _OWORD ptr[16]; // [rsp+88h] [rbp-50h] BYREF
   UEL::Value *v20; // [rsp+1C0h] [rbp+E8h]
   void *retaddr; // [rsp+1D8h] [rbp+100h]
 
   v18 = -2i64;
-  v4 = args;
-  v5 = parameters;
-  v6 = result;
-  v7 = this;
   v8 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&this->mIdentifier);
   UFG::qString::FormatEx(&resulta, "(%s", v8);
   UFG::qString::~qString(&resulta);
@@ -210,11 +196,11 @@ UEL::Value *__fastcall UEL::InvocationExpression::Eval(UEL::InvocationExpression
   v16.type.mDetailedType = UFG::gNullQSymbol;
   `eh vector constructor iterator(ptr, 0x20ui64, 8, (void (__fastcall *)(void *))UEL::Value::Value);
   v9 = 0;
-  if ( v7->mNumExpressions > 0 )
+  if ( this->mNumExpressions )
   {
     do
     {
-      v10 = &v7->mExpressions[v9];
+      v10 = &this->mExpressions[v9];
       if ( v10->mOffset )
         v11 = (char *)v10 + v10->mOffset;
       else
@@ -222,15 +208,15 @@ UEL::Value *__fastcall UEL::InvocationExpression::Eval(UEL::InvocationExpression
       v12 = (UEL::Value *)(*(__int64 (__fastcall **)(char *, UFG::qString *, UEL::ParametersBase *, UFG::qArray<UEL::Value,0> *, void *))(*(_QWORD *)v11 + 24i64))(
                             v11,
                             &resulta,
-                            v5,
-                            v4,
+                            parameters,
+                            args,
                             retaddr);
-      UEL::Value::operator=((UEL::Value *)&ptr[32 * v9++], v12);
+      UEL::Value::operator=((UEL::Value *)&ptr[2 * v9++], v12);
     }
-    while ( v9 < v7->mNumExpressions );
-    v6 = v20;
+    while ( v9 < this->mNumExpressions );
+    result = v20;
   }
-  v13 = UEL::ParametersBase::FunctionTable[v7->mFunctionTableIndex]((UEL::Value *)&resulta, (UEL::Value *)ptr);
+  v13 = UEL::ParametersBase::FunctionTable[this->mFunctionTableIndex]((UEL::Value *)&resulta, (UEL::Value *)ptr);
   v16.type.mBaseType.mValue = v13->type.mBaseType.mValue;
   v16.type.mDetailedType.mUID = v13->type.mDetailedType.mUID;
   switch ( v13->type.mBaseType.mValue )
@@ -261,18 +247,18 @@ UEL::Value *__fastcall UEL::InvocationExpression::Eval(UEL::InvocationExpression
     default:
       break;
   }
-  v14 = UEL::Value::ToString(&v16, (UFG::qString *)((char *)&resulta + 8));
+  v14 = UEL::Value::ToString(&v16, (UFG::qString *)&resulta.mNext);
   UFG::qString::FormatEx(&resulta, " [%s])", v14->mData);
   UFG::qString::~qString(&resulta);
-  UFG::qString::~qString((UFG::qString *)((char *)&resulta + 8));
-  v6->integer = v16.integer;
-  v6->qSymbol_mUID = v16.qSymbol_mUID;
-  v6->qVector_y = v16.qVector_y;
-  v6->qVector_z = v16.qVector_z;
-  v6->qVector_w = v16.qVector_w;
-  v6->type.mBaseType.mValue = v16.type.mBaseType.mValue;
-  v6->type.mDetailedType.mUID = v16.type.mDetailedType.mUID;
+  UFG::qString::~qString((UFG::qString *)&resulta.mNext);
+  result->integer = v16.integer;
+  result->qSymbol_mUID = v16.qSymbol_mUID;
+  result->qVector_y = v16.qVector_y;
+  result->qVector_z = v16.qVector_z;
+  result->qVector_w = v16.qVector_w;
+  result->type.mBaseType.mValue = v16.type.mBaseType.mValue;
+  result->type.mDetailedType.mUID = v16.type.mDetailedType.mUID;
   `eh vector destructor iterator(ptr, 0x20ui64, 8, (void (__fastcall *)(void *))_);
-  return v6;
+  return result;
 }
 

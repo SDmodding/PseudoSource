@@ -2,60 +2,57 @@
 // RVA: 0x614250
 void __fastcall UFG::UIHKHeatLevelWidget::Update(UFG::UIHKHeatLevelWidget *this, UFG::UIScreen *screen)
 {
-  UFG::UIHKHeatLevelWidget *v2; // rbx
-  Scaleform::GFx::Movie *v3; // r15
-  bool v4; // di
-  char v5; // si
-  char v6; // r14
-  bool v7; // r12
+  Scaleform::GFx::Movie *pObject; // r15
+  bool mVisibleChanged; // di
+  bool v5; // si
+  bool v6; // r14
+  bool mVisible; // r12
   int v8; // eax
   UFG::CopSystem *v9; // rax
-  int v10; // edx
+  int mHeatLevel; // edx
   bool v11; // di
-  bool v12; // sf
-  unsigned __int8 v13; // of
-  char v14; // al
-  UFG::CopSystem *v15; // rax
-  bool v16; // di
-  double v17; // xmm6_8
-  bool v18; // bl
-  UFG::HudAudio *v19; // rcx
-  Scaleform::GFx::Value value; // [rsp+18h] [rbp-39h]
-  char v21; // [rsp+48h] [rbp-9h]
-  __int64 v22; // [rsp+58h] [rbp+7h]
-  unsigned int v23; // [rsp+60h] [rbp+Fh]
-  __int64 v24; // [rsp+68h] [rbp+17h]
+  bool v12; // cc
+  char v13; // al
+  UFG::CopSystem *v14; // rax
+  bool v15; // di
+  Scaleform::GFx::Value::ValueUnion v16; // xmm6_8
+  bool mCopCooldown; // bl
+  UFG::HudAudio *v18; // rcx
+  Scaleform::GFx::Value value; // [rsp+18h] [rbp-39h] BYREF
+  char v20[16]; // [rsp+48h] [rbp-9h] BYREF
+  __int64 v21; // [rsp+58h] [rbp+7h]
+  int v22; // [rsp+60h] [rbp+Fh]
+  __int64 v23; // [rsp+68h] [rbp+17h]
 
   if ( screen )
   {
-    v2 = this;
-    v3 = screen->mRenderable->m_movie.pObject;
-    if ( v3 )
+    pObject = screen->mRenderable->m_movie.pObject;
+    if ( pObject )
     {
-      v4 = this->mVisibleChanged;
+      mVisibleChanged = this->mVisibleChanged;
       v5 = 0;
       v6 = 0;
-      if ( v4 )
+      if ( mVisibleChanged )
       {
         this->mVisibleChanged = 0;
         value.pObjectInterface = 0i64;
-        value.Type = 0;
-        v7 = this->mVisible;
-        value.Type = 2;
-        value.mValue.BValue = v7;
-        Scaleform::GFx::Movie::SetVariable(v3, "mcHeatMeter._visible", &value, 1i64);
-        Scaleform::GFx::Movie::SetVariable(v3, "mc_MinimapPulse._visible", &value, 1i64);
-        if ( ((unsigned int)value.Type >> 6) & 1 )
+        value.Type = VT_Undefined;
+        mVisible = this->mVisible;
+        value.Type = VT_Boolean;
+        value.mValue.BValue = mVisible;
+        Scaleform::GFx::Movie::SetVariable(pObject, "mcHeatMeter._visible", &value, 1i64);
+        Scaleform::GFx::Movie::SetVariable(pObject, "mc_MinimapPulse._visible", &value, 1i64);
+        if ( (value.Type & 0x40) != 0 )
         {
-          (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
+          (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&value.pObjectInterface->vfptr->gap8[8])(
             value.pObjectInterface,
             &value,
-            *(_QWORD *)&value.mValue.NValue);
+            value.mValue);
           value.pObjectInterface = 0i64;
         }
-        value.Type = 0;
+        value.Type = VT_Undefined;
       }
-      if ( v2->mVisible )
+      if ( this->mVisible )
       {
         if ( UFG::gUITweakUseFakeCopHeatLevel )
         {
@@ -66,43 +63,30 @@ void __fastcall UFG::UIHKHeatLevelWidget::Update(UFG::UIHKHeatLevelWidget *this,
           v9 = UFG::CopSystem::Instance();
           v8 = ((__int64 (__fastcall *)(UFG::CopSystem *))v9->vfptr[89].__vecDelDtor)(v9);
         }
-        v10 = v2->mHeatLevel;
-        v11 = v2->mHeatLevel != v8 || v4;
-        v13 = __OFSUB__(v8, v2->mHeatLevel);
-        v12 = v8 - v2->mHeatLevel < 0;
-        if ( v8 > v2->mHeatLevel )
+        mHeatLevel = this->mHeatLevel;
+        v11 = this->mHeatLevel != v8 || mVisibleChanged;
+        v12 = v8 < this->mHeatLevel;
+        if ( v8 > this->mHeatLevel )
         {
           if ( v8 >= 0 )
-          {
-            v5 = 0;
-            if ( v10 >= 0 )
-              v5 = 1;
-          }
-          v13 = __OFSUB__(v8, v10);
-          v12 = v8 - v10 < 0;
+            v5 = mHeatLevel >= 0;
+          v12 = v8 < mHeatLevel;
         }
-        if ( v12 ^ v13 )
-        {
-          if ( v8 >= 0 )
-          {
-            v6 = 0;
-            if ( v10 >= 0 )
-              v6 = 1;
-          }
-        }
-        v2->mHeatLevel = v8;
+        if ( v12 && v8 >= 0 )
+          v6 = mHeatLevel >= 0;
+        this->mHeatLevel = v8;
         if ( UFG::gUITweakUseFakeCopCooldown )
         {
-          v14 = UFG::gUITweakFakeCopCooldownValue;
+          v13 = UFG::gUITweakFakeCopCooldownValue;
         }
         else
         {
-          v15 = UFG::CopSystem::Instance();
-          v14 = ((__int64 (__fastcall *)(UFG::CopSystem *))v15->vfptr[8].__vecDelDtor)(v15);
+          v14 = UFG::CopSystem::Instance();
+          v13 = ((__int64 (__fastcall *)(UFG::CopSystem *))v14->vfptr[8].__vecDelDtor)(v14);
         }
-        v16 = v2->mCopCooldown != v14 || v11;
-        v2->mCopCooldown = v14;
-        if ( v16 )
+        v15 = this->mCopCooldown != v13 || v11;
+        this->mCopCooldown = v13;
+        if ( v15 )
         {
           value.pNext = (Scaleform::GFx::Value *)Scaleform::GFx::Value::~Value;
           `eh vector constructor iterator(
@@ -110,47 +94,42 @@ void __fastcall UFG::UIHKHeatLevelWidget::Update(UFG::UIHKHeatLevelWidget *this,
             0x30ui64,
             2,
             (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-          v17 = (double)v2->mHeatLevel;
-          if ( ((unsigned int)value.Type >> 6) & 1 )
+          v16.NValue = (double)this->mHeatLevel;
+          if ( (value.Type & 0x40) != 0 )
           {
-            (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
+            (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&value.pObjectInterface->vfptr->gap8[8])(
               value.pObjectInterface,
               &value,
-              *(_QWORD *)&value.mValue.NValue);
+              value.mValue);
             value.pObjectInterface = 0i64;
           }
-          value.Type = 5;
-          value.mValue.NValue = v17;
-          v18 = v2->mCopCooldown;
-          if ( (v23 >> 6) & 1 )
+          value.Type = VT_Number;
+          value.mValue = v16;
+          mCopCooldown = this->mCopCooldown;
+          if ( (v22 & 0x40) != 0 )
           {
-            (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v22 + 16i64))(v22, &v21, v24);
-            v22 = 0i64;
+            (*(void (__fastcall **)(__int64, char *, __int64))(*(_QWORD *)v21 + 16i64))(v21, v20, v23);
+            v21 = 0i64;
           }
-          v23 = 2;
-          LOBYTE(v24) = v18;
-          Scaleform::GFx::Movie::Invoke(v3, "Cops_SetHeatLevel", 0i64, &value, 2u);
+          v22 = 2;
+          LOBYTE(v23) = mCopCooldown;
+          Scaleform::GFx::Movie::Invoke(pObject, "Cops_SetHeatLevel", 0i64, &value, 2u);
           `eh vector destructor iterator(
             &value,
             0x30ui64,
             2,
             (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
         }
-        v19 = UFG::HudAudio::m_instance;
+        v18 = UFG::HudAudio::m_instance;
         if ( v5 && UFG::HudAudio::m_instance )
         {
-          UFG::AudioEntity::CreateAndPlayEvent(
-            (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-            0x2AF52CB4u,
-            0i64,
-            0,
-            0i64);
-          v19 = UFG::HudAudio::m_instance;
+          UFG::AudioEntity::CreateAndPlayEvent(UFG::HudAudio::m_instance, 0x2AF52CB4u, 0i64, 0, 0i64);
+          v18 = UFG::HudAudio::m_instance;
         }
         if ( v6 )
         {
-          if ( v19 )
-            UFG::AudioEntity::CreateAndPlayEvent((UFG::AudioEntity *)&v19->vfptr, 0x2AF52CB4u, 0i64, 0, 0i64);
+          if ( v18 )
+            UFG::AudioEntity::CreateAndPlayEvent(v18, 0x2AF52CB4u, 0i64, 0, 0i64);
         }
       }
     }

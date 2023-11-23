@@ -30,9 +30,9 @@ bool __fastcall Scaleform::Render::Cxform::IsIdentity(Scaleform::Render::Cxform 
       && 1.0 == this->M[0][2]
       && 1.0 == this->M[0][3]
       && this->M[1][0] == 0.0
-      && 0.0 == this->M[1][1]
-      && 0.0 == this->M[1][2]
-      && 0.0 == this->M[1][3];
+      && this->M[1][1] == 0.0
+      && this->M[1][2] == 0.0
+      && this->M[1][3] == 0.0;
 }
 
 // File Line: 136

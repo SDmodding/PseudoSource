@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkaiNavMeshGenerationSnapshotClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 58
@@ -28,26 +28,20 @@ hkClass *__fastcall hkaiNavMeshGenerationSnapshot::staticClass()
 
 // File Line: 65
 // RVA: 0xBB7E00
-void __fastcall finishLoadedObjecthkaiNavMeshGenerationSnapshot(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiNavMeshGenerationSnapshot(char *p, hkFinishLoadedObjectFlag finishing)
 {
-  int v2; // edi
-  char *v3; // rbx
-
   if ( p )
   {
-    v2 = finishing;
-    v3 = (char *)p;
-    hkGeometry::hkGeometry((hkGeometry *)p, (hkFinishLoadedObjectFlag)finishing);
-    hkaiNavMeshGenerationSettings::hkaiNavMeshGenerationSettings(
-      (hkaiNavMeshGenerationSettings *)(v3 + 48),
-      (hkFinishLoadedObjectFlag)v2);
+    hkGeometry::hkGeometry((hkGeometry *)p, finishing);
+    hkaiNavMeshGenerationSettings::hkaiNavMeshGenerationSettings((hkaiNavMeshGenerationSettings *)(p + 48), finishing);
   }
 }
 
 // File Line: 71
 // RVA: 0xBB7E40
-void __fastcall cleanupLoadedObjecthkaiNavMeshGenerationSnapshot(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkaiNavMeshGenerationSnapshot(hkaiNavMeshGenerationSnapshot *p)
 {
-  hkaiNavMeshGenerationSnapshot::~hkaiNavMeshGenerationSnapshot((hkaiNavMeshGenerationSnapshot *)p);
+  hkaiNavMeshGenerationSnapshot::~hkaiNavMeshGenerationSnapshot(p);
 }
 

@@ -4,7 +4,7 @@ AK::IAkPluginParam *__fastcall CreateSoundSeedWindParams(AK::IAkPluginMemAlloc *
 {
   AK::IAkPluginParam *result; // rax
 
-  result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 240ui64);
+  result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 240i64);
   if ( result )
   {
     result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkSoundSeedWindParams::`vftable;
@@ -57,53 +57,50 @@ void __fastcall CAkSoundSeedWindParams::CAkSoundSeedWindParams(CAkSoundSeedWindP
 // RVA: 0xAD4720
 void __fastcall CAkSoundSeedWindParams::~CAkSoundSeedWindParams(CAkSoundSeedWindParams *this)
 {
-  AkWindDeflectorParams *v1; // rdx
-  CAkSoundSeedWindParams *v2; // rsi
-  signed __int64 v3; // rbx
-  signed __int64 v4; // rdi
+  AkWindDeflectorParams *m_pDeflectors; // rdx
+  CAkConversionTable<AkRTPCGraphPointBase<float>,float> *m_Curves; // rbx
+  __int64 v4; // rdi
 
-  v1 = this->m_pDeflectors;
-  v2 = this;
+  m_pDeflectors = this->m_pDeflectors;
   this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkSoundSeedWindParams::`vftable;
-  if ( v1 )
-    ((void (*)(void))this->m_pAllocator->vfptr->Free)();
-  v3 = (signed __int64)v2->m_Curves;
+  if ( m_pDeflectors )
+    ((void (__fastcall *)(AK::IAkPluginMemAlloc *))this->m_pAllocator->vfptr->Free)(this->m_pAllocator);
+  m_Curves = this->m_Curves;
   v4 = 7i64;
   do
   {
-    if ( *(_QWORD *)v3 )
+    if ( m_Curves->m_pArrayGraphPoints )
     {
-      AK::MemoryMgr::Free(g_DefaultPoolId, *(void **)v3);
-      *(_QWORD *)v3 = 0i64;
+      AK::MemoryMgr::Free(g_DefaultPoolId, m_Curves->m_pArrayGraphPoints);
+      m_Curves->m_pArrayGraphPoints = 0i64;
     }
-    *(_QWORD *)(v3 + 8) = 0i64;
-    v3 += 16i64;
+    *(_QWORD *)&m_Curves->m_ulArraySize = 0i64;
+    ++m_Curves;
     --v4;
   }
   while ( v4 );
-  v2->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable;
+  this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&AK::IAkRTPCSubscriber::`vftable;
 }
 
 // File Line: 46
 // RVA: 0xAD4470
-void __fastcall CAkSoundSeedWindParams::CAkSoundSeedWindParams(CAkSoundSeedWindParams *this, CAkSoundSeedWindParams *in_rCopy, AKRESULT *out_eResult)
+void __fastcall CAkSoundSeedWindParams::CAkSoundSeedWindParams(
+        CAkSoundSeedWindParams *this,
+        CAkSoundSeedWindParams *in_rCopy,
+        AKRESULT *out_eResult)
 {
-  CAkSoundSeedWindParams *v3; // rdi
-  unsigned int v4; // ebx
-  AK::IAkPluginMemAlloc *v5; // rcx
-  AKRESULT *v6; // r14
-  CAkSoundSeedWindParams *v7; // rsi
+  int v4; // ebx
+  AK::IAkPluginMemAlloc *m_pAllocator; // rcx
   int v8; // eax
-  unsigned int v9; // eax
-  __int64 v10; // rax
+  unsigned int m_cDeflectors; // eax
+  AkWindDeflectorParams *v10; // rax
   unsigned int v11; // eax
-  unsigned int v12; // er9
+  unsigned int v12; // r9d
   __int64 v13; // rax
-  AkWindDeflectorParams *v14; // rcx
-  _DWORD *v15; // r8
-  signed __int64 v16; // rsi
+  AkWindDeflectorParams *m_pDeflectors; // rcx
+  AkWindDeflectorParams *v15; // r8
+  CAkConversionTable<AkRTPCGraphPointBase<float>,float> *i; // rsi
 
-  v3 = this;
   v4 = 0;
   this->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkSoundSeedWindParams::`vftable;
   this->m_Curves[0].m_pArrayGraphPoints = 0i64;
@@ -120,113 +117,104 @@ void __fastcall CAkSoundSeedWindParams::CAkSoundSeedWindParams(CAkSoundSeedWindP
   *(_QWORD *)&this->m_Curves[5].m_ulArraySize = 0i64;
   this->m_Curves[6].m_pArrayGraphPoints = 0i64;
   *(_QWORD *)&this->m_Curves[6].m_ulArraySize = 0i64;
-  *out_eResult = 1;
-  v5 = in_rCopy->m_pAllocator;
-  v6 = out_eResult;
-  v3->m_pAllocator = v5;
-  v7 = in_rCopy;
-  v3->m_Params.fDuration = in_rCopy->m_Params.fDuration;
-  v3->m_Params.fDurationRdm = in_rCopy->m_Params.fDurationRdm;
-  v3->m_Params.uChannelMask = in_rCopy->m_Params.uChannelMask;
-  v3->m_Params.fMinDistance = in_rCopy->m_Params.fMinDistance;
-  v3->m_Params.fAttenuationRolloff = in_rCopy->m_Params.fAttenuationRolloff;
-  v3->m_Params.fMaxDistance = in_rCopy->m_Params.fMaxDistance;
-  v3->m_Params.fDynamicRange = in_rCopy->m_Params.fDynamicRange;
-  v3->m_Params.fPlaybackRate = in_rCopy->m_Params.fPlaybackRate;
-  v3->m_Params.fBaseValue[0] = in_rCopy->m_Params.fBaseValue[0];
-  v3->m_Params.fBaseValue[1] = in_rCopy->m_Params.fBaseValue[1];
-  v3->m_Params.fBaseValue[2] = in_rCopy->m_Params.fBaseValue[2];
-  v3->m_Params.fBaseValue[3] = in_rCopy->m_Params.fBaseValue[3];
-  v3->m_Params.fBaseValue[4] = in_rCopy->m_Params.fBaseValue[4];
-  v3->m_Params.fBaseValue[5] = in_rCopy->m_Params.fBaseValue[5];
-  v3->m_Params.fBaseValue[6] = in_rCopy->m_Params.fBaseValue[6];
-  v3->m_Params.fRandomValue[0] = in_rCopy->m_Params.fRandomValue[0];
-  v3->m_Params.fRandomValue[1] = in_rCopy->m_Params.fRandomValue[1];
-  v3->m_Params.fRandomValue[2] = in_rCopy->m_Params.fRandomValue[2];
-  v3->m_Params.fRandomValue[3] = in_rCopy->m_Params.fRandomValue[3];
-  v3->m_Params.fRandomValue[4] = in_rCopy->m_Params.fRandomValue[4];
-  v3->m_Params.fRandomValue[5] = in_rCopy->m_Params.fRandomValue[5];
-  v3->m_Params.fRandomValue[6] = in_rCopy->m_Params.fRandomValue[6];
-  *(_DWORD *)v3->m_Params.bAutomation = *(_DWORD *)in_rCopy->m_Params.bAutomation;
+  *out_eResult = AK_Success;
+  m_pAllocator = in_rCopy->m_pAllocator;
+  this->m_pAllocator = m_pAllocator;
+  this->m_Params.fDuration = in_rCopy->m_Params.fDuration;
+  this->m_Params.fDurationRdm = in_rCopy->m_Params.fDurationRdm;
+  this->m_Params.uChannelMask = in_rCopy->m_Params.uChannelMask;
+  this->m_Params.fMinDistance = in_rCopy->m_Params.fMinDistance;
+  this->m_Params.fAttenuationRolloff = in_rCopy->m_Params.fAttenuationRolloff;
+  this->m_Params.fMaxDistance = in_rCopy->m_Params.fMaxDistance;
+  this->m_Params.fDynamicRange = in_rCopy->m_Params.fDynamicRange;
+  this->m_Params.fPlaybackRate = in_rCopy->m_Params.fPlaybackRate;
+  this->m_Params.fBaseValue[0] = in_rCopy->m_Params.fBaseValue[0];
+  this->m_Params.fBaseValue[1] = in_rCopy->m_Params.fBaseValue[1];
+  this->m_Params.fBaseValue[2] = in_rCopy->m_Params.fBaseValue[2];
+  this->m_Params.fBaseValue[3] = in_rCopy->m_Params.fBaseValue[3];
+  this->m_Params.fBaseValue[4] = in_rCopy->m_Params.fBaseValue[4];
+  this->m_Params.fBaseValue[5] = in_rCopy->m_Params.fBaseValue[5];
+  this->m_Params.fBaseValue[6] = in_rCopy->m_Params.fBaseValue[6];
+  this->m_Params.fRandomValue[0] = in_rCopy->m_Params.fRandomValue[0];
+  this->m_Params.fRandomValue[1] = in_rCopy->m_Params.fRandomValue[1];
+  this->m_Params.fRandomValue[2] = in_rCopy->m_Params.fRandomValue[2];
+  this->m_Params.fRandomValue[3] = in_rCopy->m_Params.fRandomValue[3];
+  this->m_Params.fRandomValue[4] = in_rCopy->m_Params.fRandomValue[4];
+  this->m_Params.fRandomValue[5] = in_rCopy->m_Params.fRandomValue[5];
+  this->m_Params.fRandomValue[6] = in_rCopy->m_Params.fRandomValue[6];
+  *(_DWORD *)this->m_Params.bAutomation = *(_DWORD *)in_rCopy->m_Params.bAutomation;
   v8 = *(_DWORD *)&in_rCopy->m_Params.bAutomation[4];
-  *(_QWORD *)&v3->m_uChangeMask = 63i64;
-  *(_DWORD *)&v3->m_Params.bAutomation[4] = v8;
-  v3->m_pDeflectors = 0i64;
+  *(_QWORD *)&this->m_uChangeMask = 63i64;
+  *(_DWORD *)&this->m_Params.bAutomation[4] = v8;
+  this->m_pDeflectors = 0i64;
   if ( in_rCopy->m_pDeflectors )
   {
-    v9 = in_rCopy->m_cDeflectors;
-    if ( v9 )
+    m_cDeflectors = in_rCopy->m_cDeflectors;
+    if ( m_cDeflectors )
     {
-      v10 = (__int64)v5->vfptr->Malloc(v5, 20 * v9);
-      v3->m_pDeflectors = (AkWindDeflectorParams *)v10;
+      v10 = (AkWindDeflectorParams *)m_pAllocator->vfptr->Malloc(m_pAllocator, 20 * m_cDeflectors);
+      this->m_pDeflectors = v10;
       if ( !v10 )
         goto LABEL_10;
-      v11 = v7->m_cDeflectors;
+      v11 = in_rCopy->m_cDeflectors;
       v12 = 0;
-      v3->m_cDeflectors = v11;
-      if ( v11 )
+      for ( this->m_cDeflectors = v11; v12 < this->m_cDeflectors; v15->fGain = m_pDeflectors[v13].fGain )
       {
-        do
-        {
-          v13 = v12++;
-          v14 = v7->m_pDeflectors;
-          v15 = (_DWORD *)&v3->m_pDeflectors[v13].fDistance;
-          *v15 = LODWORD(v14[v13].fDistance);
-          v15[1] = LODWORD(v14[v13].fAngle);
-          v15[2] = LODWORD(v14[v13].fFrequency);
-          v15[3] = LODWORD(v14[v13].fQFactor);
-          v15[4] = LODWORD(v14[v13].fGain);
-        }
-        while ( v12 < v3->m_cDeflectors );
+        v13 = v12++;
+        m_pDeflectors = in_rCopy->m_pDeflectors;
+        v15 = &this->m_pDeflectors[v13];
+        v15->fDistance = m_pDeflectors[v13].fDistance;
+        v15->fAngle = m_pDeflectors[v13].fAngle;
+        v15->fFrequency = m_pDeflectors[v13].fFrequency;
+        v15->fQFactor = m_pDeflectors[v13].fQFactor;
       }
     }
   }
-  v16 = (signed __int64)v7->m_Curves;
-  while ( (unsigned int)CAkConversionTable<AkRTPCGraphPointBase<float>,float>::Set(
-                          &v3->m_Curves[v4],
-                          *(AkRTPCGraphPointBase<float> **)v16,
-                          *(_DWORD *)(v16 + 8),
-                          0) != 52 )
+  for ( i = in_rCopy->m_Curves;
+        (unsigned int)CAkConversionTable<AkRTPCGraphPointBase<float>,float>::Set(
+                        &this->m_Curves[v4],
+                        i->m_pArrayGraphPoints,
+                        i->m_ulArraySize,
+                        AkCurveScaling_None) != 52;
+        ++i )
   {
-    ++v4;
-    v16 += 16i64;
-    if ( v4 >= 7 )
+    if ( (unsigned int)++v4 >= 7 )
       return;
   }
 LABEL_10:
-  *v6 = 52;
+  *out_eResult = AK_InsufficientMemory;
 }
 
 // File Line: 88
 // RVA: 0xAD47B0
 void __fastcall CAkSoundSeedWindParams::Clone(CAkSoundSeedWindParams *this, AK::IAkPluginMemAlloc *in_pAllocator)
 {
-  AK::IAkPluginMemAllocVtbl *v2; // rax
-  AK::IAkPluginMemAlloc *v3; // rbx
-  CAkSoundSeedWindParams *v4; // rdi
+  AK::IAkPluginMemAllocVtbl *vfptr; // rax
   CAkSoundSeedWindParams *v5; // rax
   __int64 v6; // rax
-  AKRESULT out_eResult; // [rsp+38h] [rbp+10h]
+  AKRESULT out_eResult; // [rsp+38h] [rbp+10h] BYREF
 
-  v2 = in_pAllocator->vfptr;
-  v3 = in_pAllocator;
-  v4 = this;
-  out_eResult = 1;
-  v5 = (CAkSoundSeedWindParams *)v2->Malloc(in_pAllocator, 240ui64);
+  vfptr = in_pAllocator->vfptr;
+  out_eResult = AK_Success;
+  v5 = (CAkSoundSeedWindParams *)vfptr->Malloc(in_pAllocator, 240ui64);
   if ( v5 )
   {
-    CAkSoundSeedWindParams::CAkSoundSeedWindParams(v5, v4, &out_eResult);
+    CAkSoundSeedWindParams::CAkSoundSeedWindParams(v5, this, &out_eResult);
     if ( v6 )
     {
-      if ( out_eResult != 1 )
-        (*(void (__fastcall **)(__int64, AK::IAkPluginMemAlloc *))(*(_QWORD *)v6 + 32i64))(v6, v3);
+      if ( out_eResult != AK_Success )
+        (*(void (__fastcall **)(__int64, AK::IAkPluginMemAlloc *))(*(_QWORD *)v6 + 32i64))(v6, in_pAllocator);
     }
   }
 }
 
 // File Line: 104
 // RVA: 0xAD4820
-__int64 __fastcall CAkSoundSeedWindParams::Init(CAkSoundSeedWindParams *this, AK::IAkPluginMemAlloc *in_pAllocator, const void *in_pParamsBlock, unsigned int in_ulBlockSize)
+__int64 __fastcall CAkSoundSeedWindParams::Init(
+        CAkSoundSeedWindParams *this,
+        AK::IAkPluginMemAlloc *in_pAllocator,
+        const void *in_pParamsBlock,
+        unsigned int in_ulBlockSize)
 {
   __int128 v4; // xmm0
   __int128 v5; // xmm1
@@ -257,221 +245,209 @@ __int64 __fastcall CAkSoundSeedWindParams::Init(CAkSoundSeedWindParams *this, AK
 
 // File Line: 120
 // RVA: 0xAD48B0
-signed __int64 __fastcall CAkSoundSeedWindParams::Term(CAkSoundSeedWindParams *this, AK::IAkPluginMemAlloc *in_pAllocator)
+__int64 __fastcall CAkSoundSeedWindParams::Term(CAkSoundSeedWindParams *this, AK::IAkPluginMemAlloc *in_pAllocator)
 {
-  AK::IAkPluginMemAlloc *v2; // rdi
-  CAkSoundSeedWindParams *v3; // rbx
-
-  v2 = in_pAllocator;
-  v3 = this;
   if ( this )
   {
-    this->vfptr->__vecDelDtor((AK::IAkRTPCSubscriber *)this, 0);
-    v2->vfptr->Free(v2, v3);
+    this->vfptr->__vecDelDtor(this, 0i64);
+    in_pAllocator->vfptr->Free(in_pAllocator, this);
   }
   return 1i64;
 }
 
 // File Line: 129
 // RVA: 0xAD48F0
-AKRESULT __fastcall CAkSoundSeedWindParams::SetParamsBlock(CAkSoundSeedWindParams *this, const void *in_pParamsBlock, unsigned int in_ulBlockSize)
+int __fastcall CAkSoundSeedWindParams::SetParamsBlock(
+        CAkSoundSeedWindParams *this,
+        unsigned __int16 *in_pParamsBlock,
+        unsigned int in_ulBlockSize)
 {
-  CAkSoundSeedWindParams *v3; // rbx
   unsigned int v4; // eax
-  int v5; // ecx
-  signed int v6; // eax
+  unsigned int v5; // ecx
+  unsigned int v6; // eax
   float v7; // xmm0_4
   char *v8; // rdx
   float v9; // xmm1_4
-  AKRESULT result; // eax
-  AKRESULT v11; // eax
-  AKRESULT v12; // ecx
-  void *io_ppData; // [rsp+30h] [rbp+8h]
+  int result; // eax
+  AKRESULT AllCurves; // eax
+  int v12; // ecx
+  void *io_ppData; // [rsp+30h] [rbp+8h] BYREF
 
-  v3 = this;
   this->m_Params.fDuration = *(float *)in_pParamsBlock;
   this->m_Params.fDurationRdm = *((float *)in_pParamsBlock + 1);
-  v4 = *((unsigned __int16 *)in_pParamsBlock + 4);
-  v5 = *((unsigned __int16 *)in_pParamsBlock + 4);
-  v3->m_Params.uChannelMask = v4;
+  v4 = in_pParamsBlock[4];
+  v5 = v4;
+  this->m_Params.uChannelMask = v4;
   if ( v4 )
   {
     v6 = 51;
     if ( v5 != 2 )
       v6 = 3;
-    v3->m_Params.uChannelMask = v6;
+    this->m_Params.uChannelMask = v6;
   }
   else
   {
-    v3->m_Params.uChannelMask = 4;
+    this->m_Params.uChannelMask = 4;
   }
-  v7 = *(float *)((char *)in_pParamsBlock + 10);
+  v7 = *(float *)(in_pParamsBlock + 5);
   v8 = (char *)in_pParamsBlock + 89;
-  v3->m_Params.fMinDistance = v7;
+  this->m_Params.fMinDistance = v7;
   v9 = *(float *)(v8 - 75);
   io_ppData = v8;
-  v3->m_Params.fAttenuationRolloff = v9;
-  v3->m_Params.fDynamicRange = *(float *)(v8 - 71);
-  v3->m_Params.fPlaybackRate = *(float *)(v8 - 67);
-  v3->m_Params.fBaseValue[0] = *(float *)(v8 - 63);
-  v3->m_Params.fRandomValue[0] = *(float *)(v8 - 59);
-  v3->m_Params.bAutomation[0] = *(v8 - 55);
-  v3->m_Params.fBaseValue[1] = *(float *)(v8 - 54);
-  v3->m_Params.fRandomValue[1] = *(float *)(v8 - 50);
-  v3->m_Params.bAutomation[1] = *(v8 - 46);
-  v3->m_Params.fBaseValue[2] = *(float *)(v8 - 45);
-  v3->m_Params.fRandomValue[2] = *(float *)(v8 - 41);
-  v3->m_Params.bAutomation[2] = *(v8 - 37);
-  v3->m_Params.fBaseValue[3] = *((float *)v8 - 9);
-  v3->m_Params.fRandomValue[3] = *((float *)v8 - 8);
-  v3->m_Params.bAutomation[3] = *(v8 - 28);
-  v3->m_Params.fBaseValue[4] = *(float *)(v8 - 27);
-  v3->m_Params.fRandomValue[4] = *(float *)(v8 - 23);
-  v3->m_Params.bAutomation[4] = *(v8 - 19);
-  v3->m_Params.fBaseValue[5] = *(float *)(v8 - 18);
-  v3->m_Params.fRandomValue[5] = *(float *)(v8 - 14);
-  v3->m_Params.bAutomation[5] = *(v8 - 10);
-  v3->m_Params.fBaseValue[6] = *(float *)(v8 - 9);
-  v3->m_Params.fRandomValue[6] = *(float *)(v8 - 5);
-  v3->m_Params.bAutomation[6] = *(v8 - 1);
-  v3->m_Params.fBaseValue[6] = powf(10.0, v3->m_Params.fBaseValue[6] * 0.050000001);
-  v3->m_uChangeMask = 63;
-  result = CAkSoundSeedWindParams::ReadDeflectors(v3, (const void **)&io_ppData);
+  this->m_Params.fAttenuationRolloff = v9;
+  this->m_Params.fDynamicRange = *(float *)(v8 - 71);
+  this->m_Params.fPlaybackRate = *(float *)(v8 - 67);
+  this->m_Params.fBaseValue[0] = *(float *)(v8 - 63);
+  this->m_Params.fRandomValue[0] = *(float *)(v8 - 59);
+  this->m_Params.bAutomation[0] = *(v8 - 55);
+  this->m_Params.fBaseValue[1] = *(float *)(v8 - 54);
+  this->m_Params.fRandomValue[1] = *(float *)(v8 - 50);
+  this->m_Params.bAutomation[1] = *(v8 - 46);
+  this->m_Params.fBaseValue[2] = *(float *)(v8 - 45);
+  this->m_Params.fRandomValue[2] = *(float *)(v8 - 41);
+  this->m_Params.bAutomation[2] = *(v8 - 37);
+  this->m_Params.fBaseValue[3] = *((float *)v8 - 9);
+  this->m_Params.fRandomValue[3] = *((float *)v8 - 8);
+  this->m_Params.bAutomation[3] = *(v8 - 28);
+  this->m_Params.fBaseValue[4] = *(float *)(v8 - 27);
+  this->m_Params.fRandomValue[4] = *(float *)(v8 - 23);
+  this->m_Params.bAutomation[4] = *(v8 - 19);
+  this->m_Params.fBaseValue[5] = *(float *)(v8 - 18);
+  this->m_Params.fRandomValue[5] = *(float *)(v8 - 14);
+  this->m_Params.bAutomation[5] = *(v8 - 10);
+  this->m_Params.fBaseValue[6] = *(float *)(v8 - 9);
+  this->m_Params.fRandomValue[6] = *(float *)(v8 - 5);
+  this->m_Params.bAutomation[6] = *(v8 - 1);
+  this->m_Params.fBaseValue[6] = powf(10.0, this->m_Params.fBaseValue[6] * 0.050000001);
+  this->m_uChangeMask = 63;
+  result = CAkSoundSeedWindParams::ReadDeflectors(this, (const void **)&io_ppData);
   if ( result == 1 )
   {
-    v11 = CAkSoundSeedWindParams::ReadAllCurves(v3, (const void **)&io_ppData);
+    AllCurves = CAkSoundSeedWindParams::ReadAllCurves(this, (const void **)&io_ppData);
     v12 = 1;
-    if ( v11 != 1 )
-      v12 = v11;
-    result = v12;
+    if ( AllCurves != AK_Success )
+      return AllCurves;
+    return v12;
   }
   return result;
 }
 
 // File Line: 164
 // RVA: 0xAD4F10
-signed __int64 __fastcall CAkSoundSeedWindParams::ReadDeflectors(CAkSoundSeedWindParams *this, const void **io_ppData)
+__int64 __fastcall CAkSoundSeedWindParams::ReadDeflectors(CAkSoundSeedWindParams *this, float **io_ppData)
 {
-  unsigned __int16 *v2; // rdi
-  const void **v3; // r14
-  AkWindDeflectorParams *v4; // rdx
+  float *v2; // rdi
+  AkWindDeflectorParams *m_pDeflectors; // rdx
   unsigned int v5; // eax
   unsigned int v6; // ebp
   float *v7; // rdi
-  CAkSoundSeedWindParams *v8; // rsi
   unsigned int v9; // ebx
-  __int64 v10; // rax
+  AkWindDeflectorParams *v10; // rax
   float v12; // xmm0_4
-  signed __int64 v13; // rbx
+  __int64 v13; // rbx
 
-  v2 = (unsigned __int16 *)*io_ppData;
-  v3 = io_ppData;
-  v4 = this->m_pDeflectors;
-  v5 = *v2;
+  v2 = *io_ppData;
+  m_pDeflectors = this->m_pDeflectors;
+  v5 = *(unsigned __int16 *)v2;
   v6 = 0;
-  v7 = (float *)(v2 + 3);
+  v7 = (float *)((char *)v2 + 6);
   this->m_Params.fMaxDistance = *(v7 - 1);
-  v8 = this;
   v9 = v5;
-  if ( v4 && this->m_cDeflectors != v5 )
+  if ( m_pDeflectors && this->m_cDeflectors != v5 )
   {
-    ((void (*)(void))this->m_pAllocator->vfptr->Free)();
-    v8->m_pDeflectors = 0i64;
-    v8->m_cDeflectors = 0;
+    ((void (__fastcall *)(AK::IAkPluginMemAlloc *))this->m_pAllocator->vfptr->Free)(this->m_pAllocator);
+    this->m_pDeflectors = 0i64;
+    this->m_cDeflectors = 0;
   }
   if ( v9 )
   {
-    v8->m_cDeflectors = v9;
-    if ( !v8->m_pDeflectors )
+    this->m_cDeflectors = v9;
+    if ( !this->m_pDeflectors )
     {
-      v10 = (__int64)v8->m_pAllocator->vfptr->Malloc(v8->m_pAllocator, 20 * v9);
-      v8->m_pDeflectors = (AkWindDeflectorParams *)v10;
+      v10 = (AkWindDeflectorParams *)this->m_pAllocator->vfptr->Malloc(this->m_pAllocator, 20 * v9);
+      this->m_pDeflectors = v10;
       if ( !v10 )
       {
-        v8->m_cDeflectors = 0;
+        this->m_cDeflectors = 0;
         return 52i64;
       }
     }
-    if ( v8->m_cDeflectors > 0 )
+    if ( this->m_cDeflectors )
     {
       do
       {
         v12 = *v7;
         v7 += 5;
         v13 = v6;
-        v8->m_pDeflectors[v13].fDistance = v12;
-        v8->m_pDeflectors[v13].fAngle = *(v7 - 4);
-        v8->m_pDeflectors[v13].fFrequency = *(v7 - 3);
-        v8->m_pDeflectors[v13].fQFactor = *(v7 - 2);
+        this->m_pDeflectors[v13].fDistance = v12;
+        this->m_pDeflectors[v13].fAngle = *(v7 - 4);
+        this->m_pDeflectors[v13].fFrequency = *(v7 - 3);
+        this->m_pDeflectors[v13].fQFactor = *(v7 - 2);
         ++v6;
-        v8->m_pDeflectors[v13].fGain = powf(10.0, *(v7 - 1) * 0.050000001);
+        this->m_pDeflectors[v13].fGain = powf(10.0, *(v7 - 1) * 0.050000001);
       }
-      while ( v6 < v8->m_cDeflectors );
+      while ( v6 < this->m_cDeflectors );
     }
   }
-  *v3 = v7;
+  *io_ppData = v7;
   return 1i64;
 }
 
 // File Line: 208
 // RVA: 0xAD50A0
-signed __int64 __fastcall CAkSoundSeedWindParams::ReadAllCurves(CAkSoundSeedWindParams *this, const void **io_ppData)
+__int64 __fastcall CAkSoundSeedWindParams::ReadAllCurves(CAkSoundSeedWindParams *this, unsigned int **io_ppData)
 {
-  const void **v2; // r12
-  CAkSoundSeedWindParams *v3; // r15
-  CAkConversionTable<AkRTPCGraphPointBase<float>,float> *v4; // rbx
-  signed __int64 v5; // rdi
+  CAkConversionTable<AkRTPCGraphPointBase<float>,float> *m_Curves; // rbx
+  __int64 v5; // rdi
   __int16 v6; // si
-  signed __int64 v7; // rbx
-  signed int v8; // er14
+  unsigned int *v7; // rbx
+  int v8; // r14d
   unsigned __int16 v9; // bp
   unsigned int v10; // edx
   unsigned int v11; // eax
 
-  v2 = io_ppData;
-  v3 = this;
-  v4 = this->m_Curves;
+  m_Curves = this->m_Curves;
   v5 = 7i64;
   v6 = 0;
   do
   {
-    if ( v4->m_pArrayGraphPoints )
+    if ( m_Curves->m_pArrayGraphPoints )
     {
-      AK::MemoryMgr::Free(g_DefaultPoolId, v4->m_pArrayGraphPoints);
-      v4->m_pArrayGraphPoints = 0i64;
+      AK::MemoryMgr::Free(g_DefaultPoolId, m_Curves->m_pArrayGraphPoints);
+      m_Curves->m_pArrayGraphPoints = 0i64;
     }
-    *(_QWORD *)&v4->m_ulArraySize = 0i64;
-    ++v4;
+    *(_QWORD *)&m_Curves->m_ulArraySize = 0i64;
+    ++m_Curves;
     --v5;
   }
   while ( v5 );
-  v7 = (signed __int64)*v2 + 2;
-  v8 = *(unsigned __int16 *)*v2;
-  if ( v8 <= 0 )
+  v7 = (unsigned int *)((char *)*io_ppData + 2);
+  v8 = *(unsigned __int16 *)*io_ppData;
+  if ( !*(_WORD *)*io_ppData )
   {
 LABEL_10:
-    *v2 = (const void *)v7;
+    *io_ppData = v7;
     return 1i64;
   }
   while ( 1 )
   {
-    v9 = *(_WORD *)(v7 + 4);
-    v10 = *(_DWORD *)v7;
-    v7 += 6i64;
+    v9 = *((_WORD *)v7 + 2);
+    v10 = *v7;
+    v7 = (unsigned int *)((char *)v7 + 6);
     if ( v9 )
       break;
 LABEL_9:
     if ( (unsigned __int16)++v6 >= v8 )
       goto LABEL_10;
   }
-  v11 = CAkSoundSeedWindParams::CurveIDToIndex(v3, v10);
+  v11 = CAkSoundSeedWindParams::CurveIDToIndex(this, v10);
   if ( (unsigned int)CAkConversionTable<AkRTPCGraphPointBase<float>,float>::Set(
-                       &v3->m_Curves[v11],
+                       &this->m_Curves[v11],
                        (AkRTPCGraphPointBase<float> *)v7,
                        v9,
-                       0) != 52 )
+                       AkCurveScaling_None) != 52 )
   {
-    v7 += 12i64 * v9;
+    v7 += 3 * v9;
     goto LABEL_9;
   }
   return 52i64;
@@ -479,61 +455,61 @@ LABEL_9:
 
 // File Line: 230
 // RVA: 0xAD51A0
-signed __int64 __fastcall CAkSoundSeedWindParams::ReadCurve(CAkSoundSeedWindParams *this, const void **io_ppData)
+__int64 __fastcall CAkSoundSeedWindParams::ReadCurve(CAkSoundSeedWindParams *this, unsigned int **io_ppData)
 {
-  char *v2; // rdi
-  const void **v3; // r14
-  CAkSoundSeedWindParams *v4; // rbp
+  unsigned int *v2; // rdi
   unsigned __int16 v5; // si
   unsigned int v6; // edx
   AkRTPCGraphPointBase<float> *v7; // rdi
   unsigned int v8; // eax
-  signed __int64 result; // rax
+  __int64 result; // rax
 
-  v2 = (char *)*io_ppData;
-  v3 = io_ppData;
-  v4 = this;
+  v2 = *io_ppData;
   v5 = *((_WORD *)*io_ppData + 2);
-  v6 = *(_DWORD *)*io_ppData;
-  v7 = (AkRTPCGraphPointBase<float> *)(v2 + 6);
+  v6 = **io_ppData;
+  v7 = (AkRTPCGraphPointBase<float> *)((char *)v2 + 6);
   if ( v5 )
   {
     v8 = CAkSoundSeedWindParams::CurveIDToIndex(this, v6);
-    result = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::Set(&v4->m_Curves[v8], v7, v5, 0);
+    result = CAkConversionTable<AkRTPCGraphPointBase<float>,float>::Set(
+               &this->m_Curves[v8],
+               v7,
+               v5,
+               AkCurveScaling_None);
     if ( (_DWORD)result == 52 )
       return result;
     v7 += v5;
   }
-  *v3 = v7;
+  *io_ppData = (unsigned int *)v7;
   return 1i64;
 }
 
 // File Line: 257
 // RVA: 0xAD5260
-signed __int64 __fastcall CAkSoundSeedWindParams::CurveIDToIndex(CAkSoundSeedWindParams *this, unsigned int in_uCurveID)
+__int64 __fastcall CAkSoundSeedWindParams::CurveIDToIndex(CAkSoundSeedWindParams *this, unsigned int in_uCurveID)
 {
-  unsigned int v2; // er8
-  signed __int64 result; // rax
+  unsigned int v2; // r8d
+  __int64 result; // rax
 
   v2 = 0;
-  switch ( 0x40000000 )
+  switch ( in_uCurveID )
   {
-    case 3:
+    case 3u:
       result = 1i64;
       break;
-    case 6:
+    case 6u:
       result = 2i64;
       break;
-    case 9:
+    case 9u:
       result = 3i64;
       break;
-    case 20:
+    case 0x14u:
       result = 4i64;
       break;
-    case 23:
+    case 0x17u:
       result = 5i64;
       break;
-    case 26:
+    case 0x1Au:
       v2 = 6;
       goto $LN1_50;
     default:
@@ -546,137 +522,167 @@ $LN1_50:
 
 // File Line: 294
 // RVA: 0xAD4AE0
-AKRESULT __fastcall CAkSoundSeedWindParams::SetParam(CAkSoundSeedWindParams *this, __int16 in_ParamID, const void *in_pValue, unsigned int in_ulParamSize)
+AKRESULT __fastcall CAkSoundSeedWindParams::SetParam(
+        CAkSoundSeedWindParams *this,
+        __int16 in_ParamID,
+        float *in_pValue,
+        unsigned int in_ulParamSize)
 {
-  CAkSoundSeedWindParams *v4; // rbx
   AKRESULT result; // eax
-  AKRESULT v6; // edi
+  AKRESULT Deflectors; // edi
   unsigned int v7; // eax
   float v8; // xmm0_4
-  void *io_ppData; // [rsp+40h] [rbp+18h]
+  void *io_ppData; // [rsp+40h] [rbp+18h] BYREF
 
-  io_ppData = (void *)in_pValue;
-  v4 = this;
+  io_ppData = in_pValue;
   if ( !in_pValue )
     return 31;
-  v6 = 1;
-  if ( in_ParamID > 0x7FFF )
-    return 31;
-  if ( in_ParamID != 0x7FFF )
+  Deflectors = AK_Success;
+  if ( in_ParamID == 0x7FFF )
   {
-    switch ( in_ParamID + 1 )
+    this->m_uChangeMask |= 0x17u;
+    Deflectors = CAkSoundSeedWindParams::ReadDeflectors(this, (const void **)&io_ppData);
+    if ( Deflectors == AK_Success )
+      return CAkSoundSeedWindParams::ReadAllCurves(this, (const void **)&io_ppData);
+    else
+      return Deflectors;
+  }
+  else
+  {
+    switch ( in_ParamID )
     {
+      case -1:
+        return Deflectors;
       case 0:
-        return v6;
+        this->m_Params.fBaseValue[0] = *in_pValue;
+        result = AK_Success;
+        break;
       case 1:
-        this->m_Params.fBaseValue[0] = *(float *)in_pValue;
-        return 1;
+        this->m_Params.fRandomValue[0] = *in_pValue;
+        result = AK_Success;
+        break;
       case 2:
-        this->m_Params.fRandomValue[0] = *(float *)in_pValue;
-        return 1;
-      case 3:
         this->m_Params.bAutomation[0] = *(_BYTE *)in_pValue;
-        return 1;
-      case 4:
+        result = AK_Success;
+        break;
+      case 3:
         this->m_uChangeMask |= 0x10u;
-        this->m_Params.fBaseValue[1] = *(float *)in_pValue;
-        return 1;
+        this->m_Params.fBaseValue[1] = *in_pValue;
+        result = AK_Success;
+        break;
+      case 4:
+        this->m_Params.fRandomValue[1] = *in_pValue;
+        result = AK_Success;
+        break;
       case 5:
-        this->m_Params.fRandomValue[1] = *(float *)in_pValue;
-        return 1;
-      case 6:
         this->m_Params.bAutomation[1] = *(_BYTE *)in_pValue;
-        return 1;
+        result = AK_Success;
+        break;
+      case 6:
+        this->m_Params.fBaseValue[2] = *in_pValue;
+        result = AK_Success;
+        break;
       case 7:
-        this->m_Params.fBaseValue[2] = *(float *)in_pValue;
-        return 1;
+        this->m_Params.fRandomValue[2] = *in_pValue;
+        result = AK_Success;
+        break;
       case 8:
-        this->m_Params.fRandomValue[2] = *(float *)in_pValue;
-        return 1;
-      case 9:
         this->m_Params.bAutomation[2] = *(_BYTE *)in_pValue;
-        return 1;
+        result = AK_Success;
+        break;
+      case 9:
+        this->m_Params.fBaseValue[3] = *in_pValue;
+        result = AK_Success;
+        break;
       case 10:
-        this->m_Params.fBaseValue[3] = *(float *)in_pValue;
-        return 1;
+        this->m_Params.fRandomValue[3] = *in_pValue;
+        result = AK_Success;
+        break;
       case 11:
-        this->m_Params.fRandomValue[3] = *(float *)in_pValue;
-        return 1;
-      case 12:
         this->m_Params.bAutomation[3] = *(_BYTE *)in_pValue;
-        return 1;
+        result = AK_Success;
+        break;
+      case 20:
+        this->m_Params.fBaseValue[4] = *in_pValue;
+        result = AK_Success;
+        break;
       case 21:
-        this->m_Params.fBaseValue[4] = *(float *)in_pValue;
-        return 1;
+        this->m_Params.fRandomValue[4] = *in_pValue;
+        result = AK_Success;
+        break;
       case 22:
-        this->m_Params.fRandomValue[4] = *(float *)in_pValue;
-        return 1;
-      case 23:
         this->m_Params.bAutomation[4] = *(_BYTE *)in_pValue;
-        return 1;
+        result = AK_Success;
+        break;
+      case 23:
+        this->m_Params.fBaseValue[5] = *in_pValue;
+        result = AK_Success;
+        break;
       case 24:
-        this->m_Params.fBaseValue[5] = *(float *)in_pValue;
-        return 1;
+        this->m_Params.fRandomValue[5] = *in_pValue;
+        result = AK_Success;
+        break;
       case 25:
-        this->m_Params.fRandomValue[5] = *(float *)in_pValue;
-        return 1;
-      case 26:
         this->m_Params.bAutomation[5] = *(_BYTE *)in_pValue;
-        return 1;
+        result = AK_Success;
+        break;
+      case 26:
+        v8 = powf(10.0, *in_pValue * 0.050000001);
+        result = AK_Success;
+        this->m_Params.fBaseValue[6] = v8;
+        break;
       case 27:
-        v8 = powf(10.0, *(float *)in_pValue * 0.050000001);
-        result = 1;
-        v4->m_Params.fBaseValue[6] = v8;
-        return result;
+        this->m_Params.fRandomValue[6] = *in_pValue;
+        result = AK_Success;
+        break;
       case 28:
-        this->m_Params.fRandomValue[6] = *(float *)in_pValue;
-        return 1;
-      case 29:
         this->m_Params.bAutomation[6] = *(_BYTE *)in_pValue;
-        return 1;
-      case 41:
+        result = AK_Success;
+        break;
+      case 40:
         if ( *(_WORD *)in_pValue )
         {
           v7 = 51;
           if ( *(_WORD *)in_pValue != 2 )
             v7 = 3;
           this->m_Params.uChannelMask = v7;
-          result = 1;
+          result = AK_Success;
         }
         else
         {
           this->m_Params.uChannelMask = 4;
-          result = 1;
+          result = AK_Success;
         }
-        return result;
+        break;
+      case 42:
+        this->m_Params.fDuration = *in_pValue;
+        result = AK_Success;
+        break;
       case 43:
-        this->m_Params.fDuration = *(float *)in_pValue;
-        return 1;
+        this->m_Params.fDurationRdm = *in_pValue;
+        result = AK_Success;
+        break;
       case 44:
-        this->m_Params.fDurationRdm = *(float *)in_pValue;
-        return 1;
+        this->m_Params.fMinDistance = *in_pValue;
+        result = AK_Success;
+        break;
       case 45:
-        this->m_Params.fMinDistance = *(float *)in_pValue;
-        return 1;
+        this->m_Params.fAttenuationRolloff = *in_pValue;
+        result = AK_Success;
+        break;
       case 46:
-        this->m_Params.fAttenuationRolloff = *(float *)in_pValue;
-        return 1;
-      case 47:
-        this->m_Params.fDynamicRange = *(float *)in_pValue;
-        return 1;
-      case 49:
-        this->m_Params.fPlaybackRate = *(float *)in_pValue;
-        return 1;
+        this->m_Params.fDynamicRange = *in_pValue;
+        result = AK_Success;
+        break;
+      case 48:
+        this->m_Params.fPlaybackRate = *in_pValue;
+        result = AK_Success;
+        break;
       default:
         return 31;
     }
-    return 31;
   }
-  this->m_uChangeMask |= 0x17u;
-  v6 = CAkSoundSeedWindParams::ReadDeflectors(this, (const void **)&io_ppData);
-  if ( v6 == 1 )
-    return CAkSoundSeedWindParams::ReadAllCurves(v4, (const void **)&io_ppData);
-  return v6;
+  return result;
 }
 
 // File Line: 455

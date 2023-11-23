@@ -1,27 +1,27 @@
 // File Line: 582
 // RVA: 0xA3F630
-signed __int64 __fastcall UFG::HK_DetermineKeyboardLayout()
+__int64 __fastcall UFG::HK_DetermineKeyboardLayout()
 {
-  signed __int64 result; // rax
-  unsigned __int16 v1; // ax
+  __int64 result; // rax
+  unsigned __int16 KeyboardLayout; // ax
   bool v2; // zf
 
   result = (unsigned int)gHK_KeyboardLayout;
   if ( gHK_KeyboardLayout == HKKeyboardLayout_Invalid )
   {
-    v1 = (unsigned __int64)GetKeyboardLayout(0);
-    if ( (_BYTE)v1 == 12 )
+    KeyboardLayout = (unsigned __int16)GetKeyboardLayout(0);
+    if ( (_BYTE)KeyboardLayout == 12 )
     {
-      v2 = (((v1 >> 10) - 1) & 0xFA) == 0;
+      v2 = (((KeyboardLayout >> 10) - 1) & 0xFA) == 0;
       result = (unsigned int)gHK_KeyboardLayout;
       if ( v2 )
         result = 3i64;
-      gHK_KeyboardLayout = (signed int)result;
+      gHK_KeyboardLayout = (int)result;
     }
     else
     {
-      result = (unsigned int)((_BYTE)v1 == 21) + 1;
-      gHK_KeyboardLayout = (signed int)result;
+      result = (unsigned int)((_BYTE)KeyboardLayout == 21) + 1;
+      gHK_KeyboardLayout = (int)result;
     }
   }
   return result;
@@ -32,7 +32,7 @@ signed __int64 __fastcall UFG::HK_DetermineKeyboardLayout()
 void __fastcall UFG::HK_InitInput(UFG *this)
 {
   int v1; // eax
-  unsigned __int16 v2; // ax
+  unsigned __int16 KeyboardLayout; // ax
   __int16 v3; // cx
   unsigned __int16 v4; // ax
   UFG::InputActionMap *v5; // rcx
@@ -41,17 +41,17 @@ void __fastcall UFG::HK_InitInput(UFG *this)
   v1 = gHK_KeyboardLayout;
   if ( gHK_KeyboardLayout == HKKeyboardLayout_Invalid )
   {
-    v2 = (unsigned __int64)GetKeyboardLayout(0);
-    if ( (_BYTE)v2 == 12 )
+    KeyboardLayout = (unsigned __int16)GetKeyboardLayout(0);
+    if ( (_BYTE)KeyboardLayout == 12 )
     {
-      v3 = v2 >> 10;
+      v3 = KeyboardLayout >> 10;
       v1 = gHK_KeyboardLayout;
-      if ( !(((_BYTE)v3 - 1) & 0xFA) )
+      if ( (((_BYTE)v3 - 1) & 0xFA) == 0 )
         v1 = 3;
     }
     else
     {
-      v1 = ((_BYTE)v2 == 21) + 1;
+      v1 = ((_BYTE)KeyboardLayout == 21) + 1;
     }
     gHK_KeyboardLayout = v1;
   }
@@ -78,7 +78,7 @@ void __fastcall UFG::HK_InitInput(UFG *this)
   qword_14235F978 = (__int64)&UFG::gHK_Camera_MouseActionMap;
   if ( !v1 )
   {
-    v4 = (unsigned __int64)GetKeyboardLayout(0);
+    v4 = (unsigned __int16)GetKeyboardLayout(0);
     if ( (_BYTE)v4 != 12 )
     {
       v1 = ((_BYTE)v4 == 21) + 1;
@@ -94,10 +94,10 @@ LABEL_10:
       v5 = &UFG::gHK_Sniper_KeyboardAndMouseActionMap_QWERTY_QWERTZ;
       goto LABEL_11;
     }
-    if ( !(((v4 >> 10) - 1) & 0xFA) )
+    if ( (((v4 >> 10) - 1) & 0xFA) == 0 )
     {
       v1 = 3;
-      gHK_KeyboardLayout = 3;
+      gHK_KeyboardLayout = HKKeyboardLayout_AZERTY;
       goto LABEL_17;
     }
     v1 = gHK_KeyboardLayout;
@@ -141,7 +141,7 @@ void __fastcall UFG::HK_PostInputInit(UFG *this)
   __int64 v2; // rbp
   UFG::Controller *v3; // rbx
   int v4; // eax
-  unsigned __int16 v5; // ax
+  unsigned __int16 KeyboardLayout; // ax
   char v6; // cl
   __int16 v7; // cx
   unsigned __int8 v8; // al
@@ -168,16 +168,16 @@ void __fastcall UFG::HK_PostInputInit(UFG *this)
       v4 = gHK_KeyboardLayout;
       if ( gHK_KeyboardLayout == HKKeyboardLayout_Invalid )
       {
-        v5 = (unsigned __int64)GetKeyboardLayout(0);
-        v6 = v5;
-        if ( (_BYTE)v5 == 12 )
+        KeyboardLayout = (unsigned __int16)GetKeyboardLayout(0);
+        v6 = KeyboardLayout;
+        if ( (_BYTE)KeyboardLayout == 12 )
         {
-          v7 = v5 >> 10;
-          v8 = v5 >> 10;
+          v7 = KeyboardLayout >> 10;
+          v8 = KeyboardLayout >> 10;
           if ( (_BYTE)v7 && (v8 <= 2u || (unsigned __int8)(v8 - 5) <= 1u) )
           {
             v4 = 3;
-            gHK_KeyboardLayout = 3;
+            gHK_KeyboardLayout = HKKeyboardLayout_AZERTY;
           }
           else
           {
@@ -186,7 +186,7 @@ void __fastcall UFG::HK_PostInputInit(UFG *this)
         }
         else
         {
-          v4 = ((_BYTE)v5 == 21) + 1;
+          v4 = ((_BYTE)KeyboardLayout == 21) + 1;
           gHK_KeyboardLayout = (v6 == 21) + 1;
         }
       }
@@ -222,86 +222,156 @@ void __fastcall UFG::HK_PostInputInit(UFG *this)
       UFG::SetInputMode(IM_ON_FOOT, v1);
       if ( v3->m_IsKeyboardController )
       {
-        UFG::Controller::AddActionToRemappableList(v3, &UFG::ActionDef_Attack, REMAP_ID_ATTACK_3, 0i64, 0i64);
-        UFG::Controller::AddActionToRemappableList(v3, &UFG::ActionDef_MeleeAttack, REMAP_ID_MELEE_ATTACK_3, 0i64, 0i64);
         UFG::Controller::AddActionToRemappableList(
           v3,
-          &UFG::ActionDef_Fire,
+          (UFG::allocator::free_link *)&UFG::ActionDef_Attack,
+          REMAP_ID_ATTACK_3,
+          0i64,
+          0i64);
+        UFG::Controller::AddActionToRemappableList(
+          v3,
+          (UFG::allocator::free_link *)&UFG::ActionDef_MeleeAttack,
+          REMAP_ID_MELEE_ATTACK_3,
+          0i64,
+          0i64);
+        UFG::Controller::AddActionToRemappableList(
+          v3,
+          (UFG::allocator::free_link *)&UFG::ActionDef_Fire,
           REMAP_ID_FIRE_3,
-          &UFG::ActionDef_FireFull,
-          &UFG::ActionDef_FireFullReleased);
-        UFG::Controller::AddActionToRemappableList(v3, &UFG::ActionDef_MoveFwdBack, REMAP_ID_MOVE_3, 0i64, 0i64);
+          (UFG::allocator::free_link *)&UFG::ActionDef_FireFull,
+          (UFG::allocator::free_link *)&UFG::ActionDef_FireFullReleased);
         UFG::Controller::AddActionToRemappableList(
           v3,
-          &UFG::ActionDef_Steer,
+          (UFG::allocator::free_link *)&UFG::ActionDef_MoveFwdBack,
+          REMAP_ID_MOVE_3,
+          0i64,
+          0i64);
+        UFG::Controller::AddActionToRemappableList(
+          v3,
+          (UFG::allocator::free_link *)&UFG::ActionDef_Steer,
           REMAP_ID_STEER_3,
-          &UFG::ActionDef_NoSteer,
+          (UFG::allocator::free_link *)&UFG::ActionDef_NoSteer,
           0i64);
         UFG::Controller::AddActionToRemappableList(
           v3,
-          &UFG::ActionDef_ForwardKey,
+          (UFG::allocator::free_link *)&UFG::ActionDef_ForwardKey,
           REMAP_ID_FORWARD_KEY_3,
-          &UFG::ActionDef_ForwardKeyReleased,
+          (UFG::allocator::free_link *)&UFG::ActionDef_ForwardKeyReleased,
           0i64);
-        UFG::Controller::AddActionToRemappableList(v3, &UFG::ActionDef_Grab, REMAP_ID_GRAPPLE_3, 0i64, 0i64);
-        UFG::Controller::AddActionToRemappableList(v3, &UFG::ActionDef_Weapon, REMAP_ID_RELOAD_3, 0i64, 0i64);
-        UFG::Controller::AddActionToRemappableList(v3, &UFG::ActionDef_EquipUP, REMAP_ID_PHONEUP_3, 0i64, 0i64);
         UFG::Controller::AddActionToRemappableList(
           v3,
-          &UFG::ActionDef_Accelerate,
+          (UFG::allocator::free_link *)&UFG::ActionDef_Grab,
+          REMAP_ID_GRAPPLE_3,
+          0i64,
+          0i64);
+        UFG::Controller::AddActionToRemappableList(
+          v3,
+          (UFG::allocator::free_link *)&UFG::ActionDef_Weapon,
+          REMAP_ID_RELOAD_3,
+          0i64,
+          0i64);
+        UFG::Controller::AddActionToRemappableList(
+          v3,
+          (UFG::allocator::free_link *)&UFG::ActionDef_EquipUP,
+          REMAP_ID_PHONEUP_3,
+          0i64,
+          0i64);
+        UFG::Controller::AddActionToRemappableList(
+          v3,
+          (UFG::allocator::free_link *)&UFG::ActionDef_Accelerate,
           REMAP_ID_ACCEL_3,
-          &UFG::ActionDef_AccelerateOff,
-          &UFG::ActionDef_AccelerateOn);
-        UFG::Controller::AddActionToRemappableList(v3, &UFG::ActionDef_Freerun, REMAP_ID_FREERUN_3, 0i64, 0i64);
+          (UFG::allocator::free_link *)&UFG::ActionDef_AccelerateOff,
+          (UFG::allocator::free_link *)&UFG::ActionDef_AccelerateOn);
         UFG::Controller::AddActionToRemappableList(
           v3,
-          &UFG::ActionDef_Focus,
-          REMAP_ID_AIM_3,
-          &UFG::ActionDef_Raw_Focus,
+          (UFG::allocator::free_link *)&UFG::ActionDef_Freerun,
+          REMAP_ID_FREERUN_3,
+          0i64,
           0i64);
-        UFG::Controller::AddActionToRemappableList(v3, &UFG::ActionDef_Action, REMAP_ID_ACTION_3, 0i64, 0i64);
         UFG::Controller::AddActionToRemappableList(
           v3,
-          &UFG::ActionDef_VehicleActionHijack,
+          (UFG::allocator::free_link *)&UFG::ActionDef_Focus,
+          REMAP_ID_AIM_3,
+          (UFG::allocator::free_link *)&UFG::ActionDef_Raw_Focus,
+          0i64);
+        UFG::Controller::AddActionToRemappableList(
+          v3,
+          (UFG::allocator::free_link *)&UFG::ActionDef_Action,
+          REMAP_ID_ACTION_3,
+          0i64,
+          0i64);
+        UFG::Controller::AddActionToRemappableList(
+          v3,
+          (UFG::allocator::free_link *)&UFG::ActionDef_VehicleActionHijack,
           REMAP_ID_ACTIONHIJACK_3,
           0i64,
           0i64);
-        UFG::Controller::AddActionToRemappableList(v3, &UFG::ActionDef_CoverToggle, REMAP_ID_COVERTOGGLE_3, 0i64, 0i64);
         UFG::Controller::AddActionToRemappableList(
           v3,
-          &UFG::ActionDef_Brake,
-          REMAP_ID_BRAKE_3,
-          &UFG::ActionDef_BrakeReleased,
+          (UFG::allocator::free_link *)&UFG::ActionDef_CoverToggle,
+          REMAP_ID_COVERTOGGLE_3,
+          0i64,
           0i64);
-        UFG::Controller::AddActionToRemappableList(v3, &UFG::ActionDef_HandBrake, REMAP_ID_HAND_BRAKE_3, 0i64, 0i64);
-        UFG::Controller::AddActionToRemappableList(v3, &UFG::ActionDef_VehicleFire, REMAP_ID_VEHICLE_FIRE_3, 0i64, 0i64);
         UFG::Controller::AddActionToRemappableList(
           v3,
-          &UFG::ActionDef_VehicleFocus,
+          (UFG::allocator::free_link *)&UFG::ActionDef_Brake,
+          REMAP_ID_BRAKE_3,
+          (UFG::allocator::free_link *)&UFG::ActionDef_BrakeReleased,
+          0i64);
+        UFG::Controller::AddActionToRemappableList(
+          v3,
+          (UFG::allocator::free_link *)&UFG::ActionDef_HandBrake,
+          REMAP_ID_HAND_BRAKE_3,
+          0i64,
+          0i64);
+        UFG::Controller::AddActionToRemappableList(
+          v3,
+          (UFG::allocator::free_link *)&UFG::ActionDef_VehicleFire,
+          REMAP_ID_VEHICLE_FIRE_3,
+          0i64,
+          0i64);
+        UFG::Controller::AddActionToRemappableList(
+          v3,
+          (UFG::allocator::free_link *)&UFG::ActionDef_VehicleFocus,
           REMAP_ID_VEHICLE_FOCUS_3,
           0i64,
           0i64);
         UFG::Controller::AddActionToRemappableList(
           v3,
-          &UFG::ActionDef_VehicleRamReload,
+          (UFG::allocator::free_link *)&UFG::ActionDef_VehicleRamReload,
           REMAP_ID_VEHICLE_RAMRELOAD_3,
           0i64,
           0i64);
         UFG::Controller::AddActionToRemappableList(
           v3,
-          &UFG::ActionDef_HornStart,
+          (UFG::allocator::free_link *)&UFG::ActionDef_HornStart,
           REMAP_ID_VEHICLE_HORN_3,
-          &UFG::ActionDef_HornStop,
+          (UFG::allocator::free_link *)&UFG::ActionDef_HornStop,
           0i64);
-        UFG::Controller::AddActionToRemappableList(v3, &UFG::ActionDef_LookBack, REMAP_ID_LOOK_BACK_3, 0i64, 0i64);
         UFG::Controller::AddActionToRemappableList(
           v3,
-          &UFG::ActionDef_Raw_Focus_Lock,
+          (UFG::allocator::free_link *)&UFG::ActionDef_LookBack,
+          REMAP_ID_LOOK_BACK_3,
+          0i64,
+          0i64);
+        UFG::Controller::AddActionToRemappableList(
+          v3,
+          (UFG::allocator::free_link *)&UFG::ActionDef_Raw_Focus_Lock,
           REMAP_ID_WEAPON_SPECIAL_3,
           0i64,
           0i64);
-        UFG::Controller::AddActionToRemappableList(v3, &UFG::ActionDef_LeanBack, REMAP_ID_LEAN_BACK_3, 0i64, 0i64);
-        UFG::Controller::AddActionToRemappableList(v3, &UFG::ActionDef_LeanForward, REMAP_ID_LEAN_FORWARD_3, 0i64, 0i64);
+        UFG::Controller::AddActionToRemappableList(
+          v3,
+          (UFG::allocator::free_link *)&UFG::ActionDef_LeanBack,
+          REMAP_ID_LEAN_BACK_3,
+          0i64,
+          0i64);
+        UFG::Controller::AddActionToRemappableList(
+          v3,
+          (UFG::allocator::free_link *)&UFG::ActionDef_LeanForward,
+          REMAP_ID_LEAN_FORWARD_3,
+          0i64,
+          0i64);
       }
     }
     ++v1;
@@ -314,35 +384,35 @@ void __fastcall UFG::HK_PostInputInit(UFG *this)
 // RVA: 0xA3F430
 void __fastcall UFG::CheckForPCControllerSwap(UFG *this)
 {
-  signed int v1; // er9
-  int v2; // ebx
+  int v1; // r9d
+  int mKeyboardIndex; // ebx
   UFG::Controller *v3; // rax
-  signed int v4; // er8
-  UFG::Controller **v5; // rcx
-  signed __int64 v6; // rax
+  int v4; // r8d
+  UFG::Controller **mControllers; // rcx
+  __int64 v6; // rax
   UFG::Controller *v7; // rdi
   bool v8; // al
-  UFG::eHKControllerInputMode v9; // ebp
-  unsigned int v10; // er14
-  UFG::TiDo *v11; // rax
+  UFG::eHKControllerInputMode m_ActiveMapSet; // ebp
+  unsigned int m_SubModes; // r14d
+  UFG::TiDo *Instance; // rax
   __int64 v12; // rdx
   UFG::Controller *v13; // rsi
   UFG::TiDo *v14; // rax
   unsigned int v15; // edx
 
   v1 = -1;
-  v2 = UFG::gInputSystem->mKeyboardIndex;
+  mKeyboardIndex = UFG::gInputSystem->mKeyboardIndex;
   v3 = UFG::gInputSystem->mControllers[4];
-  if ( v2 || !v3 || v3->m_IsKeyboardController )
+  if ( mKeyboardIndex || !v3 || v3->m_IsKeyboardController )
   {
     v4 = 0;
-    v5 = UFG::gInputSystem->mControllers;
+    mControllers = UFG::gInputSystem->mControllers;
     v6 = 0i64;
-    while ( !*v5 || (*v5)->m_IsKeyboardController )
+    while ( !*mControllers || (*mControllers)->m_IsKeyboardController )
     {
       ++v6;
       ++v4;
-      ++v5;
+      ++mControllers;
       if ( v6 >= 5 )
         goto LABEL_11;
     }
@@ -359,11 +429,11 @@ LABEL_11:
   {
     if ( UFG::InputSystem::msPCKeyboardSwapMode == 1 )
     {
-      if ( !v8 || v1 < 0 || v2 < 0 )
+      if ( !v8 || v1 < 0 || mKeyboardIndex < 0 )
         return;
-      v2 = v1;
+      mKeyboardIndex = v1;
     }
-    else if ( UFG::InputSystem::msPCKeyboardSwapMode != 2 || v8 || v1 < 0 || v2 < 0 )
+    else if ( UFG::InputSystem::msPCKeyboardSwapMode != 2 || v8 || v1 < 0 || mKeyboardIndex < 0 )
     {
       return;
     }
@@ -372,23 +442,23 @@ LABEL_11:
   if ( v7->m_ControllerInUse == (_BYTE)UFG::InputSystem::msPCKeyboardSwapMode )
   {
     if ( v8 )
-      v2 = v1;
-    if ( v2 >= 0 && UFG::gInputSystem->mControllers[v2]->m_ControllerInUse )
+      mKeyboardIndex = v1;
+    if ( mKeyboardIndex >= 0 && UFG::gInputSystem->mControllers[mKeyboardIndex]->m_ControllerInUse )
     {
 LABEL_31:
-      v9 = v7->m_ActiveMapSet;
-      v10 = v7->m_SubModes;
+      m_ActiveMapSet = v7->m_ActiveMapSet;
+      m_SubModes = v7->m_SubModes;
       v7->m_SubModes = 0;
-      v11 = UFG::TiDo::GetInstance();
-      UFG::TiDo::UnregisterControllerForEvents(v11, 0);
-      v12 = v2;
+      Instance = UFG::TiDo::GetInstance();
+      UFG::TiDo::UnregisterControllerForEvents(Instance, 0);
+      v12 = mKeyboardIndex;
       UFG::gInputSystem->mControllers[0] = UFG::gInputSystem->mControllers[v12];
       UFG::gInputSystem->mControllers[v12] = v7;
       v13 = UFG::gInputSystem->mControllers[0];
-      UFG::Controller::DeleteMapDataStructures(UFG::gInputSystem->mControllers[0]);
+      UFG::Controller::DeleteMapDataStructures(v13);
       UFG::Controller::DeleteMapDataStructures(v7);
       v13->mControllerIndex = 0;
-      v7->mControllerIndex = v2;
+      v7->mControllerIndex = mKeyboardIndex;
       UFG::Controller::CreateMapDataStructures(v13);
       UFG::Controller::CreateMapDataStructures(v7);
       UFG::Controller::ApplyRemapList(v13);
@@ -398,14 +468,10 @@ LABEL_31:
         v14 = UFG::TiDo::GetInstance();
         UFG::TiDo::RegisterControllerForEvents(v14, 0);
       }
-      UFG::SetInputMode(v9, 0);
+      UFG::SetInputMode(m_ActiveMapSet, 0);
       v15 = UI_HASH_INPUT_SWAPPED_38;
-      v13->m_SubModes = v10;
-      UFG::UIScreenManagerBase::queueMessage(
-        (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-        v15,
-        0xFFFFFFFF);
-      return;
+      v13->m_SubModes = m_SubModes;
+      UFG::UIScreenManagerBase::queueMessage(UFG::UIScreenManager::s_instance, v15, 0xFFFFFFFF);
     }
   }
 }

@@ -6,7 +6,7 @@ __int64 dynamic_initializer_for__gBoundEffectSpeed__()
   UFG::qString::qString(&stru_142434AE8, "Speed1");
   UFG::qString::qString(&stru_142434B10, "Speed2");
   UFG::qString::qString(&stru_142434B38, "Speed3");
-  return atexit(dynamic_atexit_destructor_for__gBoundEffectSpeed__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gBoundEffectSpeed__);
 }
 
 // File Line: 25
@@ -17,7 +17,7 @@ __int64 dynamic_initializer_for__EngineBlown_SYMBOL__()
 
   v0 = UFG::qStringHash32("EngineBlown", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngineBlown_SYMBOL, v0);
-  return atexit(dynamic_atexit_destructor_for__EngineBlown_SYMBOL__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__EngineBlown_SYMBOL__);
 }
 
 // File Line: 26
@@ -28,7 +28,7 @@ __int64 dynamic_initializer_for__Destroyed_SYMBOL__()
 
   v0 = UFG::qStringHash32("Destroyed", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&Destroyed_SYMBOL, v0);
-  return atexit(dynamic_atexit_destructor_for__Destroyed_SYMBOL__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__Destroyed_SYMBOL__);
 }
 
 // File Line: 52
@@ -54,43 +54,41 @@ void UFG::VehicleEffectManager::Create(void)
 
 // File Line: 70
 // RVA: 0x66F4F0
-void __usercall UFG::VehicleEffectManager::AddDamageTransferNode(UFG::VehicleEffectManager *this@<rcx>, SimpleXML::XMLDocument *doc@<rdx>, SimpleXML::XMLNode *node@<r8>, float a4@<xmm0>)
+void __fastcall UFG::VehicleEffectManager::AddDamageTransferNode(
+        UFG::VehicleEffectManager *this,
+        SimpleXML::XMLDocument *doc,
+        SimpleXML::XMLNode *node)
 {
-  SimpleXML::XMLNode *v4; // rbx
-  SimpleXML::XMLDocument *v5; // r13
-  char *v6; // rdi
+  char *Attribute; // rdi
+  double v6; // xmm0_8
   float v7; // xmm8_4
   UFG::allocator::free_link *v8; // rsi
   int v9; // eax
-  SimpleXML::XMLNode *v10; // r12
+  SimpleXML::XMLNode *ChildNode; // r12
   char *v11; // rbx
   float v12; // xmm6_4
-  UFG::allocator::free_link *v13; // r14
-  int v14; // eax
-  UFG::allocator::free_link *v15; // ST38_8
+  double v13; // xmm0_8
+  UFG::allocator::free_link *v14; // r14
+  int v15; // eax
   SimpleXML::XMLNode *v16; // rdi
   UFG::allocator::free_link *v17; // rsi
   char *v18; // r15
   UFG::allocator::free_link *v19; // rax
   UFG::allocator::free_link *v20; // rbx
-  UFG::allocator::free_link *v21; // rax
+  UFG::allocator::free_link *mNext; // rax
   UFG::qBaseTreeRB *v22; // [rsp+20h] [rbp-98h]
-  UFG::VehicleEffectManager *v23; // [rsp+C0h] [rbp+8h]
   UFG::qBaseNodeRB *x; // [rsp+D8h] [rbp+20h]
 
-  v23 = this;
-  v4 = node;
-  v5 = doc;
-  v6 = SimpleXML::XMLNode::GetAttribute(node, "name", &customWorldMapCaption);
-  SimpleXML::XMLNode::GetAttribute(v4, "DefaultValue", 1.0);
-  v7 = a4;
-  if ( SimpleXML::XMLNode::GetAttribute(v4, "IsDefaultInfinite", 0) )
+  Attribute = SimpleXML::XMLNode::GetAttribute(node, "name", &customCaption);
+  v6 = SimpleXML::XMLNode::GetAttribute(node, "DefaultValue", COERCE_DOUBLE((unsigned __int64)(unsigned int)FLOAT_1_0));
+  v7 = *(float *)&v6;
+  if ( SimpleXML::XMLNode::GetAttribute(node, "IsDefaultInfinite", 0) )
     v7 = FLOAT_N1_0;
   v8 = UFG::qMalloc(0x70ui64, "VehicleEffectManager", 0i64);
   x = (UFG::qBaseNodeRB *)v8;
   if ( v8 )
   {
-    v9 = UFG::qStringHashUpper32(v6, 0xFFFFFFFF);
+    v9 = UFG::qStringHashUpper32(Attribute, -1);
     v8->mNext = 0i64;
     v8[1].mNext = 0i64;
     v8[2].mNext = 0i64;
@@ -103,348 +101,346 @@ void __usercall UFG::VehicleEffectManager::AddDamageTransferNode(UFG::VehicleEff
     v8 = 0i64;
     x = 0i64;
   }
-  v10 = SimpleXML::XMLDocument::GetChildNode(v5, "DamageAffector", v4);
-  if ( v10 )
+  ChildNode = SimpleXML::XMLDocument::GetChildNode(doc, "DamageAffector", node);
+  if ( ChildNode )
   {
     v22 = (UFG::qBaseTreeRB *)&v8[4];
     do
     {
-      v11 = SimpleXML::XMLNode::GetAttribute(v10, "name", &customWorldMapCaption);
+      v11 = SimpleXML::XMLNode::GetAttribute(ChildNode, "name", &customCaption);
       v12 = v7;
-      if ( !SimpleXML::XMLNode::GetAttribute(v10, "UseDefault", 1) )
+      if ( !SimpleXML::XMLNode::GetAttribute(ChildNode, "UseDefault", 1) )
       {
-        SimpleXML::XMLNode::GetAttribute(v10, "Health", 1.0);
-        v12 = a4;
-        if ( SimpleXML::XMLNode::GetAttribute(v10, "Invincible", 0) )
+        v13 = SimpleXML::XMLNode::GetAttribute(
+                ChildNode,
+                "Health",
+                COERCE_DOUBLE((unsigned __int64)(unsigned int)FLOAT_1_0));
+        v12 = *(float *)&v13;
+        if ( SimpleXML::XMLNode::GetAttribute(ChildNode, "Invincible", 0) )
           v12 = FLOAT_N1_0;
       }
-      v13 = UFG::qMalloc(0x38ui64, "VehicleEffectManager", 0i64);
-      if ( v13 )
+      v14 = UFG::qMalloc(0x38ui64, "VehicleEffectManager", 0i64);
+      if ( v14 )
       {
-        v14 = UFG::qStringHashUpper32(v11, 0xFFFFFFFF);
-        v13->mNext = 0i64;
-        v13[1].mNext = 0i64;
-        v13[2].mNext = 0i64;
-        LODWORD(v13[3].mNext) = v14;
-        v15 = v13 + 4;
-        v15->mNext = v15;
-        v15[1].mNext = v15;
-        *(float *)&v13[6].mNext = v12;
+        v15 = UFG::qStringHashUpper32(v11, -1);
+        v14->mNext = 0i64;
+        v14[1].mNext = 0i64;
+        v14[2].mNext = 0i64;
+        LODWORD(v14[3].mNext) = v15;
+        v14[4].mNext = v14 + 4;
+        v14[5].mNext = v14 + 4;
+        *(float *)&v14[6].mNext = v12;
       }
       else
       {
-        v13 = 0i64;
+        v14 = 0i64;
       }
-      v16 = SimpleXML::XMLDocument::GetChildNode(v5, "TransferTo", v10);
+      v16 = SimpleXML::XMLDocument::GetChildNode(doc, "TransferTo", ChildNode);
       if ( v16 )
       {
-        v17 = v13 + 4;
+        v17 = v14 + 4;
         do
         {
-          v18 = SimpleXML::XMLNode::GetAttribute(v16, "name", &customWorldMapCaption);
+          v18 = SimpleXML::XMLNode::GetAttribute(v16, "name", &customCaption);
           v19 = UFG::qMalloc(0x18ui64, "VehicleEffectManager", 0i64);
           v20 = v19;
           if ( v19 )
           {
             v19->mNext = v19;
             v19[1].mNext = v19;
-            LODWORD(v19[2].mNext) = UFG::qStringHashUpper32(v18, 0xFFFFFFFF);
+            LODWORD(v19[2].mNext) = UFG::qStringHashUpper32(v18, -1);
           }
           else
           {
             v20 = 0i64;
           }
-          v21 = v17->mNext;
-          v21[1].mNext = v20;
-          v20->mNext = v21;
+          mNext = v17->mNext;
+          mNext[1].mNext = v20;
+          v20->mNext = mNext;
           v20[1].mNext = v17;
           v17->mNext = v20;
-          v16 = SimpleXML::XMLDocument::GetNode(v5, 0i64, v16);
+          v16 = SimpleXML::XMLDocument::GetNode(doc, 0i64, v16);
         }
         while ( v16 );
       }
-      UFG::qBaseTreeRB::Add(v22, (UFG::qBaseNodeRB *)v13);
-      v10 = SimpleXML::XMLDocument::GetNode(v5, 0i64, v10);
+      UFG::qBaseTreeRB::Add(v22, (UFG::qBaseNodeRB *)v14);
+      ChildNode = SimpleXML::XMLDocument::GetNode(doc, 0i64, ChildNode);
     }
-    while ( v10 );
+    while ( ChildNode );
   }
-  UFG::qBaseTreeRB::Add(&v23->mDamageTransferNodes.mTree, x);
+  UFG::qBaseTreeRB::Add(&this->mDamageTransferNodes.mTree, x);
 }
 
 // File Line: 136
 // RVA: 0x6701F0
-void __usercall UFG::VehicleEffectManager::AddVehicleEffect(UFG::VehicleEffectManager *this@<rcx>, SimpleXML::XMLDocument *doc@<rdx>, SimpleXML::XMLNode *node@<r8>, float a4@<xmm0>)
+void __fastcall UFG::VehicleEffectManager::AddVehicleEffect(
+        UFG::VehicleEffectManager *this,
+        SimpleXML::XMLDocument *doc,
+        SimpleXML::XMLNode *node)
 {
-  SimpleXML::XMLNode *v4; // rdi
-  SimpleXML::XMLDocument *v5; // r12
-  SimpleXML::XMLNode *v6; // rax
-  char *v7; // rsi
-  UFG::allocator::free_link *v8; // r14
-  char *v9; // rax
-  const char *v10; // rbx
-  int v11; // eax
-  SimpleXML::XMLNode *v12; // rdi
-  UFG::allocator::free_link *v13; // r15
-  char *v14; // rax
-  const char *v15; // rbx
-  int v16; // eax
-  SimpleXML::XMLNode *v17; // rbp
-  char *v18; // rax
-  UFG::allocator::free_link *v19; // rbx
+  SimpleXML::XMLNode *ChildNode; // rax
+  char *Attribute; // rsi
+  UFG::allocator::free_link *v7; // r14
+  char *v8; // rbx
+  int v9; // eax
+  SimpleXML::XMLNode *v10; // rdi
+  UFG::allocator::free_link *v11; // r15
+  char *v12; // rbx
+  int v13; // eax
+  SimpleXML::XMLNode *v14; // rbp
+  char *Name; // rax
+  UFG::allocator::free_link *v16; // rbx
+  char *v17; // rax
+  __int64 v18; // rax
+  __int64 v19; // r13
   char *v20; // rax
-  __int64 v21; // rax
-  __int64 v22; // r13
+  char *v21; // rax
+  char *v22; // rax
   char *v23; // rax
   char *v24; // rax
-  char *v25; // rax
-  char *v26; // rax
-  char *v27; // rax
-  char *v28; // rbx
-  int v29; // eax
-  _DWORD *v30; // rdi
-  const char **v31; // rsi
-  signed __int64 v32; // r14
-  char *v33; // rbx
-  int v34; // eax
-  UFG::qString *v35; // rcx
-  char *v36; // rax
-  int v37; // eax
-  UFG::allocator::free_link *v38; // rax
-  UFG::allocator::free_link *v39; // rbx
-  float v40; // xmm1_4
-  float v41; // xmm2_4
-  char *v42; // rax
-  UFG::qBaseTreeRB *v43; // [rsp+20h] [rbp-F8h]
-  SimpleXML::XMLNode *v44; // [rsp+28h] [rbp-F0h]
-  UFG::allocator::free_link *v45; // [rsp+38h] [rbp-E0h]
-  UFG::qSymbolUC v46; // [rsp+40h] [rbp-D8h]
-  UFG::qSymbol v47; // [rsp+44h] [rbp-D4h]
-  UFG::qSymbolUC v48; // [rsp+48h] [rbp-D0h]
-  UFG::allocator::free_link *v49; // [rsp+50h] [rbp-C8h]
-  UFG::qString v50; // [rsp+58h] [rbp-C0h]
-  __int64 v51; // [rsp+80h] [rbp-98h]
-  UFG::qString v52; // [rsp+88h] [rbp-90h]
-  UFG::VehicleEffectManager *v53; // [rsp+120h] [rbp+8h]
-  UFG::allocator::free_link *result; // [rsp+138h] [rbp+20h]
+  char *v25; // rbx
+  int v26; // eax
+  _DWORD *v27; // rdi
+  const char **v28; // rsi
+  __int64 v29; // r14
+  char *v30; // rbx
+  int v31; // eax
+  UFG::qString *v32; // rcx
+  char *v33; // rax
+  int mNext; // eax
+  UFG::allocator::free_link *v35; // rax
+  UFG::allocator::free_link *v36; // rbx
+  float y; // xmm1_4
+  float z; // xmm2_4
+  char *v39; // rax
+  double v40; // xmm0_8
+  float v41; // xmm7_4
+  double v42; // xmm0_8
+  float v43; // xmm6_4
+  double v44; // xmm0_8
+  UFG::qBaseTreeRB *v45; // [rsp+20h] [rbp-F8h]
+  SimpleXML::XMLNode *v46; // [rsp+28h] [rbp-F0h]
+  UFG::allocator::free_link *v47; // [rsp+38h] [rbp-E0h]
+  UFG::qSymbolUC v48; // [rsp+40h] [rbp-D8h] BYREF
+  UFG::qSymbol v49; // [rsp+44h] [rbp-D4h] BYREF
+  UFG::qSymbolUC v50; // [rsp+48h] [rbp-D0h] BYREF
+  UFG::allocator::free_link *v51; // [rsp+50h] [rbp-C8h]
+  UFG::qString v52; // [rsp+58h] [rbp-C0h] BYREF
+  __int64 v53; // [rsp+80h] [rbp-98h]
+  UFG::qString v54; // [rsp+88h] [rbp-90h] BYREF
+  UFG::allocator::free_link *result; // [rsp+138h] [rbp+20h] BYREF
 
-  v53 = this;
-  v51 = -2i64;
-  v4 = node;
-  v5 = doc;
-  v6 = SimpleXML::XMLDocument::GetChildNode(doc, "Overrides", node);
-  v7 = 0i64;
-  if ( v6 )
-    v7 = SimpleXML::XMLNode::GetAttribute(v6, "Name", &customWorldMapCaption);
-  v8 = UFG::qMalloc(0x70ui64, "VehicleEffectManager", 0i64);
-  v45 = v8;
-  result = v8;
-  if ( v8 )
+  v53 = -2i64;
+  ChildNode = SimpleXML::XMLDocument::GetChildNode(doc, "Overrides", node);
+  Attribute = 0i64;
+  if ( ChildNode )
+    Attribute = SimpleXML::XMLNode::GetAttribute(ChildNode, "Name", &customCaption);
+  v7 = UFG::qMalloc(0x70ui64, "VehicleEffectManager", 0i64);
+  v47 = v7;
+  result = v7;
+  if ( v7 )
   {
-    v9 = SimpleXML::XMLNode::GetAttribute(v4, "Name", &customWorldMapCaption);
-    v10 = v9;
-    v11 = UFG::qStringHashUpper32(v9, 0xFFFFFFFF);
-    v8->mNext = 0i64;
-    v8[1].mNext = 0i64;
-    v8[2].mNext = 0i64;
-    LODWORD(v8[3].mNext) = v11;
-    UFG::qSymbol::create_from_string((UFG::qSymbol *)&v8[4], v10);
-    UFG::qBaseTreeRB::qBaseTreeRB((UFG::qBaseTreeRB *)&v8[5]);
+    v8 = SimpleXML::XMLNode::GetAttribute(node, "Name", &customCaption);
+    v9 = UFG::qStringHashUpper32(v8, -1);
+    v7->mNext = 0i64;
+    v7[1].mNext = 0i64;
+    v7[2].mNext = 0i64;
+    LODWORD(v7[3].mNext) = v9;
+    UFG::qSymbol::create_from_string((UFG::qSymbol *)&v7[4], v8);
+    UFG::qBaseTreeRB::qBaseTreeRB((UFG::qBaseTreeRB *)&v7[5]);
   }
   else
   {
-    v8 = 0i64;
-    v45 = 0i64;
+    v7 = 0i64;
+    v47 = 0i64;
   }
-  HIDWORD(v8[4].mNext) = UFG::qStringHashUpper32(v7, 0xFFFFFFFF);
-  v12 = SimpleXML::XMLDocument::GetChildNode(v5, "State", v4);
-  v44 = v12;
-  if ( v12 )
+  HIDWORD(v7[4].mNext) = UFG::qStringHashUpper32(Attribute, -1);
+  v10 = SimpleXML::XMLDocument::GetChildNode(doc, "State", node);
+  v46 = v10;
+  if ( v10 )
   {
-    v43 = (UFG::qBaseTreeRB *)&v8[5];
+    v45 = (UFG::qBaseTreeRB *)&v7[5];
     do
     {
-      v13 = UFG::qMalloc(0x78ui64, "VehicleEffectManager", 0i64);
-      v49 = v13;
-      if ( v13 )
+      v11 = UFG::qMalloc(0x78ui64, "VehicleEffectManager", 0i64);
+      v51 = v11;
+      if ( v11 )
       {
-        v14 = SimpleXML::XMLNode::GetAttribute(v12, "Name", &customWorldMapCaption);
-        v15 = v14;
-        v16 = UFG::qStringHash32(v14, 0xFFFFFFFF);
-        v13->mNext = 0i64;
-        v13[1].mNext = 0i64;
-        v13[2].mNext = 0i64;
-        LODWORD(v13[3].mNext) = v16;
-        UFG::qSymbol::create_from_string((UFG::qSymbol *)&v13[4], v15);
-        UFG::qBaseTreeRB::qBaseTreeRB((UFG::qBaseTreeRB *)&v13[5]);
-        v13[14].mNext = 0i64;
+        v12 = SimpleXML::XMLNode::GetAttribute(v10, "Name", &customCaption);
+        v13 = UFG::qStringHash32(v12, 0xFFFFFFFF);
+        v11->mNext = 0i64;
+        v11[1].mNext = 0i64;
+        v11[2].mNext = 0i64;
+        LODWORD(v11[3].mNext) = v13;
+        UFG::qSymbol::create_from_string((UFG::qSymbol *)&v11[4], v12);
+        UFG::qBaseTreeRB::qBaseTreeRB((UFG::qBaseTreeRB *)&v11[5]);
+        v11[14].mNext = 0i64;
       }
       else
       {
-        v13 = 0i64;
+        v11 = 0i64;
       }
-      v17 = SimpleXML::XMLDocument::GetChildNode(v5, 0i64, v12);
-      if ( v17 )
+      v14 = SimpleXML::XMLDocument::GetChildNode(doc, 0i64, v10);
+      if ( v14 )
       {
         while ( 1 )
         {
-          v18 = SimpleXML::XMLNode::GetName(v17);
-          if ( (unsigned int)UFG::qStringCompare("Effect", v18, -1) )
+          Name = SimpleXML::XMLNode::GetName(v14);
+          if ( (unsigned int)UFG::qStringCompare("Effect", Name, -1) )
           {
-            v36 = SimpleXML::XMLNode::GetName(v17);
-            if ( (unsigned int)UFG::qStringCompare("Phantom", v36, -1) )
+            v33 = SimpleXML::XMLNode::GetName(v14);
+            if ( (unsigned int)UFG::qStringCompare("Phantom", v33, -1) )
               goto LABEL_36;
-            v37 = (int)v13[4].mNext;
-            if ( v37 != EngineBlown_SYMBOL.mUID && v37 != Destroyed_SYMBOL.mUID )
+            mNext = (int)v11[4].mNext;
+            if ( mNext != EngineBlown_SYMBOL.mUID && mNext != Destroyed_SYMBOL.mUID )
               goto LABEL_36;
-            if ( v13[14].mNext )
+            if ( v11[14].mNext )
               goto LABEL_36;
-            v38 = UFG::qMalloc(0x10ui64, "VehiclePhantom", 0i64);
-            v39 = v38;
-            if ( v38 )
+            v35 = UFG::qMalloc(0x10ui64, "VehiclePhantom", 0i64);
+            v36 = v35;
+            if ( v35 )
             {
-              LODWORD(v38->mNext) = -1;
-              v40 = UFG::qVector3::msZero.y;
-              v41 = UFG::qVector3::msZero.z;
-              a4 = UFG::qVector3::msZero.x;
-              HIDWORD(v38->mNext) = LODWORD(UFG::qVector3::msZero.x);
-              *(float *)&v38[1].mNext = v40;
-              *((float *)&v38[1].mNext + 1) = v41;
+              LODWORD(v35->mNext) = -1;
+              y = UFG::qVector3::msZero.y;
+              z = UFG::qVector3::msZero.z;
+              HIDWORD(v35->mNext) = LODWORD(UFG::qVector3::msZero.x);
+              *(float *)&v35[1].mNext = y;
+              *((float *)&v35[1].mNext + 1) = z;
             }
             else
             {
-              v39 = 0i64;
+              v36 = 0i64;
             }
-            v42 = SimpleXML::XMLNode::GetAttribute(v17, "Marker", &customWorldMapCaption);
-            UFG::qString::qString(&v52, v42);
-            LODWORD(v39->mNext) = UFG::qStringHashUpper32(v52.mData, 0xFFFFFFFF);
-            SimpleXML::XMLNode::GetAttribute(v17, "X", 0.0);
-            SimpleXML::XMLNode::GetAttribute(v17, "Y", 0.0);
-            SimpleXML::XMLNode::GetAttribute(v17, "Z", 0.0);
-            *((float *)&v39->mNext + 1) = a4 * 0.5;
-            *(float *)&v39[1].mNext = a4 * 0.5;
-            a4 = a4 * 0.5;
-            *((float *)&v39[1].mNext + 1) = a4;
-            v13[14].mNext = v39;
-            v35 = &v52;
+            v39 = SimpleXML::XMLNode::GetAttribute(v14, "Marker", &customCaption);
+            UFG::qString::qString(&v54, v39);
+            LODWORD(v36->mNext) = UFG::qStringHashUpper32(v54.mData, -1);
+            v40 = SimpleXML::XMLNode::GetAttribute(v14, "X", 0.0);
+            v41 = *(float *)&v40;
+            v42 = SimpleXML::XMLNode::GetAttribute(v14, "Y", 0.0);
+            v43 = *(float *)&v42;
+            v44 = SimpleXML::XMLNode::GetAttribute(v14, "Z", 0.0);
+            *((float *)&v36->mNext + 1) = v41 * 0.5;
+            *(float *)&v36[1].mNext = v43 * 0.5;
+            *((float *)&v36[1].mNext + 1) = *(float *)&v44 * 0.5;
+            v11[14].mNext = v36;
+            v32 = &v54;
           }
           else
           {
-            v19 = UFG::qMalloc(0x78ui64, "VehicleEffectManager", 0i64);
-            if ( v19 )
+            v16 = UFG::qMalloc(0x78ui64, "VehicleEffectManager", 0i64);
+            if ( v16 )
             {
-              v20 = SimpleXML::XMLNode::GetAttribute(v17, "Name", &customWorldMapCaption);
-              UFG::VehicleEffect::VehicleEffect((UFG::VehicleEffect *)v19, v20);
-              v22 = v21;
+              v17 = SimpleXML::XMLNode::GetAttribute(v14, "Name", &customCaption);
+              UFG::VehicleEffect::VehicleEffect((UFG::VehicleEffect *)v16, v17);
+              v19 = v18;
             }
             else
             {
-              v22 = 0i64;
+              v19 = 0i64;
             }
-            v23 = SimpleXML::XMLNode::GetAttribute(v17, "Marker", &customWorldMapCaption);
-            UFG::qString::qString(&v50, v23);
-            *(UFG::qSymbolUC *)(v22 + 44) = (UFG::qSymbolUC)UFG::qSymbolUC::create_from_string(
+            v20 = SimpleXML::XMLNode::GetAttribute(v14, "Marker", &customCaption);
+            UFG::qString::qString(&v52, v20);
+            *(UFG::qSymbolUC *)(v19 + 44) = (UFG::qSymbolUC)UFG::qSymbolUC::create_from_string(
                                                               (UFG::qSymbolUC *)&result,
-                                                              v50.mData)->mUID;
-            UFG::qString::ReplaceString(&v50, "E_", "D_", 0);
-            *(UFG::qSymbolUC *)(v22 + 92) = (UFG::qSymbolUC)UFG::qSymbolUC::create_from_string(&v46, v50.mData)->mUID;
-            v24 = SimpleXML::XMLNode::GetAttribute(v17, "ForwardBone", &customWorldMapCaption);
-            *(_DWORD *)(v22 + 72) = UFG::qStringHashUpper32(v24, 0xFFFFFFFF);
-            v25 = SimpleXML::XMLNode::GetAttribute(v17, "RearBone", &customWorldMapCaption);
-            *(_DWORD *)(v22 + 76) = UFG::qStringHashUpper32(v25, 0xFFFFFFFF);
-            v26 = SimpleXML::XMLNode::GetAttribute(v17, "DamageAffector", &customWorldMapCaption);
-            *(UFG::qSymbolUC *)(v22 + 84) = (UFG::qSymbolUC)UFG::qSymbolUC::create_from_string(&v48, v26)->mUID;
-            v27 = SimpleXML::XMLNode::GetAttribute(v17, "Transform", &customWorldMapCaption);
-            *(UFG::qSymbol *)(v22 + 36) = (UFG::qSymbol)UFG::qSymbol::create_from_string(&v47, v27)->mUID;
-            v28 = SimpleXML::XMLNode::GetAttribute(v17, "BoundEffect", &customWorldMapCaption);
-            if ( (unsigned int)UFG::qStringCompare(v28, &customWorldMapCaption, -1) )
-              v29 = UFG::qStringHashUpper32(v28, 0xFFFFFFFF);
+                                                              v52.mData)->mUID;
+            UFG::qString::ReplaceString(&v52, "E_", "D_", 0);
+            *(UFG::qSymbolUC *)(v19 + 92) = (UFG::qSymbolUC)UFG::qSymbolUC::create_from_string(&v48, v52.mData)->mUID;
+            v21 = SimpleXML::XMLNode::GetAttribute(v14, "ForwardBone", &customCaption);
+            *(_DWORD *)(v19 + 72) = UFG::qStringHashUpper32(v21, -1);
+            v22 = SimpleXML::XMLNode::GetAttribute(v14, "RearBone", &customCaption);
+            *(_DWORD *)(v19 + 76) = UFG::qStringHashUpper32(v22, -1);
+            v23 = SimpleXML::XMLNode::GetAttribute(v14, "DamageAffector", &customCaption);
+            *(UFG::qSymbolUC *)(v19 + 84) = (UFG::qSymbolUC)UFG::qSymbolUC::create_from_string(&v50, v23)->mUID;
+            v24 = SimpleXML::XMLNode::GetAttribute(v14, "Transform", &customCaption);
+            *(UFG::qSymbol *)(v19 + 36) = (UFG::qSymbol)UFG::qSymbol::create_from_string(&v49, v24)->mUID;
+            v25 = SimpleXML::XMLNode::GetAttribute(v14, "BoundEffect", &customCaption);
+            if ( (unsigned int)UFG::qStringCompare(v25, &customCaption, -1) )
+              v26 = UFG::qStringHashUpper32(v25, -1);
             else
-              v29 = 0;
-            v30 = (_DWORD *)(v22 + 48);
-            *(_DWORD *)(v22 + 48) = v29;
-            v31 = (const char **)&unk_142434AD8;
-            v32 = 4i64;
+              v26 = 0;
+            v27 = (_DWORD *)(v19 + 48);
+            *(_DWORD *)(v19 + 48) = v26;
+            v28 = (const char **)&unk_142434AD8;
+            v29 = 4i64;
             do
             {
-              v33 = SimpleXML::XMLNode::GetAttribute(v17, *v31, undefinedEffect);
-              if ( (unsigned int)UFG::qStringCompare(v33, undefinedEffect, -1) )
+              v30 = SimpleXML::XMLNode::GetAttribute(v14, *v28, undefinedEffect);
+              if ( (unsigned int)UFG::qStringCompare(v30, undefinedEffect, -1) )
               {
-                if ( (unsigned int)UFG::qStringCompare(v33, &customWorldMapCaption, -1) )
-                  v34 = UFG::qStringHashUpper32(v33, 0xFFFFFFFF);
+                if ( (unsigned int)UFG::qStringCompare(v30, &customCaption, -1) )
+                  v31 = UFG::qStringHashUpper32(v30, -1);
                 else
-                  v34 = 0;
-                *v30 = v34;
+                  v31 = 0;
+                *v27 = v31;
               }
-              ++v30;
-              v31 += 5;
-              --v32;
+              ++v27;
+              v28 += 5;
+              --v29;
             }
-            while ( v32 );
-            UFG::qBaseTreeRB::Add((UFG::qBaseTreeRB *)&v13[5], (UFG::qBaseNodeRB *)v22);
-            v35 = &v50;
+            while ( v29 );
+            UFG::qBaseTreeRB::Add((UFG::qBaseTreeRB *)&v11[5], (UFG::qBaseNodeRB *)v19);
+            v32 = &v52;
           }
-          UFG::qString::~qString(v35);
+          UFG::qString::~qString(v32);
 LABEL_36:
-          v17 = SimpleXML::XMLDocument::GetNode(v5, 0i64, v17);
-          if ( !v17 )
+          v14 = SimpleXML::XMLDocument::GetNode(doc, 0i64, v14);
+          if ( !v14 )
           {
-            v12 = v44;
+            v10 = v46;
             break;
           }
         }
       }
-      UFG::qBaseTreeRB::Add(v43, (UFG::qBaseNodeRB *)v13);
-      v12 = SimpleXML::XMLDocument::GetNode(v5, 0i64, v12);
-      v44 = v12;
+      UFG::qBaseTreeRB::Add(v45, (UFG::qBaseNodeRB *)v11);
+      v10 = SimpleXML::XMLDocument::GetNode(doc, 0i64, v10);
+      v46 = v10;
     }
-    while ( v12 );
-    v8 = v45;
+    while ( v10 );
+    v7 = v47;
   }
-  UFG::qBaseTreeRB::Add(&v53->mVehicleEffectTemplates.mTree, (UFG::qBaseNodeRB *)v8);
+  UFG::qBaseTreeRB::Add(&this->mVehicleEffectTemplates.mTree, (UFG::qBaseNodeRB *)v7);
 }
 
 // File Line: 243
 // RVA: 0x67DA70
-void __usercall UFG::VehicleEffectManager::Init(UFG::VehicleEffectManager *this@<rcx>, float a2@<xmm0>)
+void __fastcall UFG::VehicleEffectManager::Init(UFG::VehicleEffectManager *this)
 {
-  UFG::VehicleEffectManager *v2; // rsi
-  SimpleXML::XMLDocument *v3; // rax
-  SimpleXML::XMLDocument *v4; // rbx
-  SimpleXML::XMLNode *v5; // rax
+  SimpleXML::XMLDocument *v2; // rax
+  SimpleXML::XMLDocument *v3; // rbx
+  SimpleXML::XMLNode *Node; // rax
   SimpleXML::XMLNode *i; // rdi
-  SimpleXML::XMLDocument *v7; // rax
-  SimpleXML::XMLDocument *v8; // rbx
-  SimpleXML::XMLNode *v9; // rax
+  SimpleXML::XMLDocument *v6; // rax
+  SimpleXML::XMLDocument *v7; // rbx
+  SimpleXML::XMLNode *v8; // rax
   SimpleXML::XMLNode *j; // rdi
 
-  v2 = this;
-  v3 = SimpleXML::XMLDocument::Open("Data\\FX\\VehicleSFXSetup.xml", 1ui64, 0i64);
-  v4 = v3;
-  if ( v3 )
+  v2 = SimpleXML::XMLDocument::Open("Data\\FX\\VehicleSFXSetup.xml", 1ui64, 0i64);
+  v3 = v2;
+  if ( v2 )
   {
-    v5 = SimpleXML::XMLDocument::GetNode(v3, "VehicleEffectsDefinition", 0i64);
-    for ( i = SimpleXML::XMLDocument::GetChildNode(v4, "VehicleEffects", v5);
+    Node = SimpleXML::XMLDocument::GetNode(v2, "VehicleEffectsDefinition", 0i64);
+    for ( i = SimpleXML::XMLDocument::GetChildNode(v3, "VehicleEffects", Node);
           i;
-          i = SimpleXML::XMLDocument::GetNode(v4, 0i64, i) )
+          i = SimpleXML::XMLDocument::GetNode(v3, 0i64, i) )
     {
-      UFG::VehicleEffectManager::AddVehicleEffect(v2, v4, i, a2);
+      UFG::VehicleEffectManager::AddVehicleEffect(this, v3, i);
     }
-    SimpleXML::XMLDocument::~XMLDocument(v4);
-    operator delete[](v4);
+    SimpleXML::XMLDocument::~XMLDocument(v3);
+    operator delete[](v3);
   }
-  v7 = SimpleXML::XMLDocument::Open("data\\vehicles_new\\DamageTransfer.xml", 1ui64, 0i64);
-  v8 = v7;
-  if ( v7 )
+  v6 = SimpleXML::XMLDocument::Open("data\\vehicles_new\\DamageTransfer.xml", 1ui64, 0i64);
+  v7 = v6;
+  if ( v6 )
   {
-    v9 = SimpleXML::XMLDocument::GetNode(v7, "DamageTransferSystem", 0i64);
-    for ( j = SimpleXML::XMLDocument::GetChildNode(v8, "DamageTransfer", v9);
+    v8 = SimpleXML::XMLDocument::GetNode(v6, "DamageTransferSystem", 0i64);
+    for ( j = SimpleXML::XMLDocument::GetChildNode(v7, "DamageTransfer", v8);
           j;
-          j = SimpleXML::XMLDocument::GetNode(v8, 0i64, j) )
+          j = SimpleXML::XMLDocument::GetNode(v7, 0i64, j) )
     {
-      UFG::VehicleEffectManager::AddDamageTransferNode(v2, v8, j, a2);
+      UFG::VehicleEffectManager::AddDamageTransferNode(this, v7, j);
     }
-    SimpleXML::XMLDocument::~XMLDocument(v8);
-    operator delete[](v8);
+    SimpleXML::XMLDocument::~XMLDocument(v7);
+    operator delete[](v7);
   }
 }
 

@@ -2,16 +2,14 @@
 // RVA: 0xAAB390
 unsigned __int64 __fastcall CAkMatrixAwareCtx::GetAbsoluteTimeOffset(CAkMatrixAwareCtx *this)
 {
-  unsigned __int64 v1; // rbx
-  CAkMatrixAwareCtx *v2; // rcx
-  unsigned __int64 result; // rax
+  unsigned __int64 m_iLocalTime; // rbx
+  CAkMatrixAwareCtx *m_pParentCtx; // rcx
 
-  v1 = this->m_iLocalTime;
-  v2 = (CAkMatrixAwareCtx *)this->m_pParentCtx;
-  if ( v2 )
-    result = v1 + CAkMatrixAwareCtx::GetAbsoluteTimeOffset(v2);
+  m_iLocalTime = this->m_iLocalTime;
+  m_pParentCtx = (CAkMatrixAwareCtx *)this->m_pParentCtx;
+  if ( m_pParentCtx )
+    return m_iLocalTime + CAkMatrixAwareCtx::GetAbsoluteTimeOffset(m_pParentCtx);
   else
-    result = v1;
-  return result;
+    return m_iLocalTime;
 }
 

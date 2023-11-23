@@ -7,7 +7,7 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::Editor::DUICommand
 
   v0 = UFG::qStringHash64("UFG::Editor::DUICommandListWindow", 0xFFFFFFFFFFFFFFFFui64);
   UFG::qReflectInventoryBase::qReflectInventoryBase(
-    (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::Editor::DUICommandListWindow,UFG::DUIWindow>::sInventory.vfptr,
+    &UFG::qReflectObjectType<UFG::Editor::DUICommandListWindow,UFG::DUIWindow>::sInventory,
     "UFG::Editor::DUICommandListWindow",
     v0);
   UFG::qReflectObjectType<UFG::Editor::DUICommandListWindow,UFG::DUIWindow>::sInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::Editor::DUICommandListWindow>::`vftable;
@@ -15,60 +15,55 @@ __int64 dynamic_initializer_for__UFG::qReflectObjectType_UFG::Editor::DUICommand
   v1 = UFG::qReflectWarehouse::Instance();
   UFG::qReflectWarehouse::Add(
     v1,
-    (UFG::qReflectInventoryBase *)&UFG::qReflectObjectType<UFG::Editor::DUICommandListWindow,UFG::DUIWindow>::sInventory.vfptr);
-  return atexit(dynamic_atexit_destructor_for__UFG::qReflectObjectType_UFG::Editor::DUICommandListWindow_UFG::DUIWindow_::sInventory__);
+    &UFG::qReflectObjectType<UFG::Editor::DUICommandListWindow,UFG::DUIWindow>::sInventory);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::qReflectObjectType_UFG::Editor::DUICommandListWindow_UFG::DUIWindow_::sInventory__);
 }
 
 // File Line: 18
 // RVA: 0x201530
 void __fastcall UFG::Editor::DUICommandListWindow::DUICommandListWindow(UFG::Editor::DUICommandListWindow *this)
 {
-  UFG::Editor::DUICommandListWindow *v1; // rbx
-
-  v1 = this;
-  UFG::DUIWindow::DUIWindow((UFG::DUIWindow *)&this->vfptr);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::DUICommandListWindow,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::DUICommandListWindow,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
-  v1->mBaseNode.mUID = -1i64;
-  v1->mTypeUID = UFG::qStringHash64("UFG::Editor::DUICommandListWindow", 0xFFFFFFFFFFFFFFFFui64);
-  v1->vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::DUICommandListWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
-  v1->vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::DUICommandListWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
-  v1->mScrollPos = 0i64;
-  UFG::qString::Set(&v1->mTitle, "Command List");
+  UFG::DUIWindow::DUIWindow(this);
+  this->UFG::qReflectObjectType<UFG::Editor::DUICommandListWindow,UFG::DUIWindow>::UFG::DUIWindow::UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>::UFG::qReflectObject::vfptr = (UFG::qReflectObjectVtbl *)&UFG::qReflectObjectType<UFG::Editor::DUICommandListWindow,UFG::DUIWindow>::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  this->UFG::qReflectObjectType<UFG::Editor::DUICommandListWindow,UFG::DUIWindow>::UFG::DUIWindow::UFG::qSafePointerNode<UFG::DUIWindow>::vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::qReflectObjectType<UFG::Editor::DUICommandListWindow,UFG::DUIWindow>::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
+  this->mBaseNode.mUID = -1i64;
+  this->mTypeUID = UFG::qStringHash64("UFG::Editor::DUICommandListWindow", 0xFFFFFFFFFFFFFFFFui64);
+  this->UFG::qReflectObjectType<UFG::Editor::DUICommandListWindow,UFG::DUIWindow>::UFG::DUIWindow::UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>::UFG::qReflectObject::vfptr = (UFG::qReflectObjectVtbl *)&UFG::Editor::DUICommandListWindow::`vftable{for `UFG::qReflectObjectType<UFG::DUIWindow,UFG::qReflectObject>};
+  this->UFG::qReflectObjectType<UFG::Editor::DUICommandListWindow,UFG::DUIWindow>::UFG::DUIWindow::UFG::qSafePointerNode<UFG::DUIWindow>::vfptr = (UFG::qSafePointerNode<UFG::DUIWindow>Vtbl *)&UFG::Editor::DUICommandListWindow::`vftable{for `UFG::qSafePointerNode<UFG::DUIWindow>};
+  this->mScrollPos = 0i64;
+  UFG::qString::Set(&this->mTitle, "Command List");
 }
 
 // File Line: 23
 // RVA: 0x218830
-void __fastcall UFG::Editor::DUICommandListWindow::UpdateUI(UFG::Editor::DUICommandListWindow *this, UFG::DUIContext *dui)
+void __fastcall UFG::Editor::DUICommandListWindow::UpdateUI(
+        UFG::Editor::DUICommandListWindow *this,
+        UFG::DUIContext *dui)
 {
-  UFG::DUIContext *v2; // rsi
-  UFG::Editor::DUICommandListWindow *v3; // r14
-  signed int v4; // edi
+  int v4; // edi
   UFG::CommandKeyBindingMap *i; // rbx
   int v6; // edx
   UFG::qString *v7; // rax
   UFG::qNode<UFG::qString,UFG::qString> *v8; // rax
   UFG::qNode<UFG::qString,UFG::qString> *v9; // rcx
-  UFG::qNode<UFG::qString,UFG::qString> *v10; // rax
+  UFG::qNode<UFG::qString,UFG::qString> *mPrev; // rax
   int v11; // eax
   UFG::qNode<UFG::qString,UFG::qString> *j; // rdx
   UFG::Command *k; // rbx
-  Render::SkinningCacheNode *v14; // rax
-  signed __int64 v15; // rbx
-  UFG::qBaseNodeVariableRB<unsigned __int64> *v16; // rdx
-  UFG::qString *l; // rbx
+  Render::SkinningCacheNode *Head; // rax
+  Illusion::Buffer **p_mCachedBufferPtr; // rbx
+  UFG::qBaseNodeVariableRB<unsigned __int64> *p_mNode; // rdx
+  UFG::qString *m; // rbx
   UFG::qNode<UFG::qString,UFG::qString> *v18; // rdx
-  UFG::qNode<UFG::qString,UFG::qString> *v19; // rax
+  UFG::qNode<UFG::qString,UFG::qString> *mNext; // rax
   UFG::qNode<UFG::qString,UFG::qString> *v20; // rcx
   UFG::qNode<UFG::qString,UFG::qString> *v21; // rax
-  UFG::qList<UFG::qString,UFG::qString,1,0> options; // [rsp+20h] [rbp-21h]
-  UFG::CommandContext context; // [rsp+38h] [rbp-9h]
-  int current_index; // [rsp+A8h] [rbp+67h]
-  char *retaddr; // [rsp+B8h] [rbp+77h]
+  UFG::qList<UFG::qString,UFG::qString,1,0> options; // [rsp+20h] [rbp-21h] BYREF
+  UFG::CommandContext context; // [rsp+38h] [rbp-9h] BYREF
+  int current_index; // [rsp+A8h] [rbp+67h] BYREF
+  UFG::qTreeRB<UFG::ContextDataBase,UFG::ContextDataBase,1> *p_mDictionary; // [rsp+B8h] [rbp+77h]
 
-  v2 = dui;
-  v3 = this;
-  UFG::DUIContext::BeginGridLayout(dui, 1, 2, 3);
+  UFG::DUIContext::BeginGridLayout(dui, 1, 2, LayoutFlag_FillLastCell);
   current_index = 0;
   options.mNode.mPrev = (UFG::qNode<UFG::qString,UFG::qString> *)&options;
   options.mNode.mNext = (UFG::qNode<UFG::qString,UFG::qString> *)&options;
@@ -85,7 +80,7 @@ void __fastcall UFG::Editor::DUICommandListWindow::UpdateUI(UFG::Editor::DUIComm
       v6 = v4;
     current_index = v6;
     v7 = (UFG::qString *)UFG::qMalloc(0x28ui64, UFG::gGlobalNewName, 0i64);
-    retaddr = (char *)v7;
+    p_mDictionary = (UFG::qTreeRB<UFG::ContextDataBase,UFG::ContextDataBase,1> *)v7;
     if ( v7 )
     {
       UFG::qString::qString(v7, &i->mName);
@@ -95,13 +90,13 @@ void __fastcall UFG::Editor::DUICommandListWindow::UpdateUI(UFG::Editor::DUIComm
     {
       v9 = 0i64;
     }
-    v10 = options.mNode.mPrev;
+    mPrev = options.mNode.mPrev;
     options.mNode.mPrev->mNext = v9;
-    v9->mPrev = v10;
+    v9->mPrev = mPrev;
     v9->mNext = (UFG::qNode<UFG::qString,UFG::qString> *)&options;
     options.mNode.mPrev = v9;
   }
-  if ( UFG::DUIContext::ComboBox(v2, &current_index, &options, 0i64, 0xFFFFFFFF) )
+  if ( UFG::DUIContext::ComboBox(dui, &current_index, &options, 0i64, 0xFFFFFFFF) )
   {
     v11 = current_index;
     for ( j = options.mNode.mNext; v11 > 0; j = j->mNext )
@@ -113,64 +108,66 @@ void __fastcall UFG::Editor::DUICommandListWindow::UpdateUI(UFG::Editor::DUIComm
     UFG::CommandManager::SetActiveBindingMap(UFG::gCommandManager, (const char *)j[1].mNext);
   }
   context.vfptr = (UFG::CommandContextVtbl *)&UFG::CommandContext::`vftable;
-  retaddr = (char *)&context.mDictionary;
+  p_mDictionary = &context.mDictionary;
   UFG::qBaseTreeRB::qBaseTreeRB(&context.mDictionary.mTree);
-  UFG::DUIContext::BeginScrollView(v2, &v3->mScrollPos);
-  UFG::DUIContext::BeginVerticalLayout(v2);
+  UFG::DUIContext::BeginScrollView(dui, (UFG::qNode<UFG::DUILayoutState,UFG::DUILayoutState> *)&this->mScrollPos);
+  UFG::DUIContext::BeginVerticalLayout(dui);
   for ( k = (UFG::Command *)&UFG::gCommandManager->mCommandList.mNode.mNext[-1].mNext;
         k != (UFG::Command *)&UFG::gCommandManager[-1].mBindingMaps.mTree.mCount;
         k = (UFG::Command *)&k->mNext[-1].mNext )
   {
-    UFG::DUIContext::CommandButton(v2, k, &context);
+    UFG::DUIContext::CommandButton(dui, k, &context);
   }
-  UFG::DUIContext::EndLayoutHorizontal(v2);
-  UFG::DUIContext::EndScrollView(v2);
+  UFG::DUIContext::EndLayoutHorizontal(dui);
+  UFG::DUIContext::EndScrollView(dui);
   context.vfptr = (UFG::CommandContextVtbl *)&UFG::CommandContext::`vftable;
-  retaddr = (char *)&context.mDictionary;
+  p_mDictionary = &context.mDictionary;
   if ( context.mDictionary.mTree.mCount )
   {
     while ( 1 )
     {
-      v14 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&context.mDictionary);
-      if ( !v14 )
+      Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&context.mDictionary);
+      if ( !Head )
         break;
-      v15 = (signed __int64)&v14[-1].mCachedBufferPtr;
-      if ( v14 == (Render::SkinningCacheNode *)8 )
+      p_mCachedBufferPtr = &Head[-1].mCachedBufferPtr;
+      if ( Head == (Render::SkinningCacheNode *)8 )
         goto LABEL_20;
-      v16 = &v14->mNode;
+      p_mNode = &Head->mNode;
 LABEL_21:
       UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
         (UFG::qBaseTreeVariableRB<unsigned __int64> *)&context.mDictionary,
-        v16);
-      if ( v15 )
-        (*(void (__fastcall **)(signed __int64, signed __int64))(*(_QWORD *)v15 + 8i64))(v15, 1i64);
+        p_mNode);
+      if ( p_mCachedBufferPtr )
+        ((void (__fastcall *)(Illusion::Buffer **, __int64))(*p_mCachedBufferPtr)->mNode.mChild[0])(
+          p_mCachedBufferPtr,
+          1i64);
       if ( !context.mDictionary.mTree.mCount )
         goto LABEL_24;
     }
-    v15 = 0i64;
+    p_mCachedBufferPtr = 0i64;
 LABEL_20:
-    v16 = 0i64;
+    p_mNode = 0i64;
     goto LABEL_21;
   }
 LABEL_24:
   UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)&context.mDictionary);
-  for ( l = (UFG::qString *)options.mNode.mNext;
+  for ( m = (UFG::qString *)options.mNode.mNext;
         (UFG::qList<UFG::qString,UFG::qString,1,0> *)options.mNode.mNext != &options;
-        l = (UFG::qString *)options.mNode.mNext )
+        m = (UFG::qString *)options.mNode.mNext )
   {
-    v18 = l->mPrev;
-    v19 = l->mNext;
-    v18->mNext = v19;
-    v19->mPrev = v18;
-    l->mPrev = (UFG::qNode<UFG::qString,UFG::qString> *)&l->mPrev;
-    l->mNext = (UFG::qNode<UFG::qString,UFG::qString> *)&l->mPrev;
-    UFG::qString::~qString(l);
-    operator delete[](l);
+    v18 = m->mPrev;
+    mNext = m->mNext;
+    v18->mNext = mNext;
+    mNext->mPrev = v18;
+    m->mPrev = m;
+    m->mNext = m;
+    UFG::qString::~qString(m);
+    operator delete[](m);
   }
   v20 = options.mNode.mPrev;
   v21 = options.mNode.mNext;
   options.mNode.mPrev->mNext = options.mNode.mNext;
   v21->mPrev = v20;
-  UFG::DUIContext::EndLayoutHorizontal(v2);
+  UFG::DUIContext::EndLayoutHorizontal(dui);
 }
 

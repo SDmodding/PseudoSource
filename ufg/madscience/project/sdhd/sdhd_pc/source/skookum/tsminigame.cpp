@@ -3,179 +3,160 @@
 void UFG::TSMinigame::BindAtomics(void)
 {
   SSClass *v0; // rbx
+  ASymbol rebind; // [rsp+20h] [rbp-18h]
+  ASymbol rebinda; // [rsp+20h] [rbp-18h]
+  ASymbol rebindb; // [rsp+20h] [rbp-18h]
 
   v0 = SSBrain::get_class("Minigame");
   SSClass::register_coroutine_func(
     v0,
     "_wait_until_minigame_started",
     UFG::TSMinigame::Coro_wait_until_minigame_started,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_coroutine_func(
     v0,
     "_wait_until_minigame_finished",
     UFG::TSMinigame::Coro_wait_until_minigame_finished,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_coroutine_func(
     v0,
     "_wait_until_poker_round_end",
     UFG::TSMinigame::Coro_wait_until_poker_round_end,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_coroutine_func(
     v0,
     "_wait_until_poker_round_start",
     UFG::TSMinigame::Coro_wait_until_poker_round_start,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_coroutine_func(
     v0,
     "_wait_until_poker_profit_reaches",
     UFG::TSMinigame::Coro_wait_until_poker_profit_reaches,
-    0);
+    SSBindFlag_instance_no_rebind);
   SSClass::register_coroutine_func(
     v0,
     "_wait_until_phonetrace_loads",
     UFG::TSMinigame::Coro_wait_until_phonetrace_loads,
-    0);
-  SSClass::register_method_func(v0, "is_minigame_started", UFG::TSMinigame::MthdC_is_minigame_started, 1, 0);
-  SSClass::register_method_func(v0, "is_in_minigame", UFG::TSMinigame::MthdC_is_in_minigame, 1, 0);
-  SSClass::register_method_func(v0, "fail_minigame", UFG::TSMinigame::MthdC_fail_minigame, 1, 0);
+    SSBindFlag_instance_no_rebind);
+  LOBYTE(rebind.i_uid) = 0;
+  SSClass::register_method_func(v0, "is_minigame_started", UFG::TSMinigame::MthdC_is_minigame_started, 1, rebind);
+  LOBYTE(rebinda.i_uid) = 0;
+  SSClass::register_method_func(v0, "is_in_minigame", UFG::TSMinigame::MthdC_is_in_minigame, 1, rebinda);
+  LOBYTE(rebindb.i_uid) = 0;
+  SSClass::register_method_func(v0, "fail_minigame", UFG::TSMinigame::MthdC_fail_minigame, 1, rebindb);
 }
 
 // File Line: 73
 // RVA: 0x4DF130
-signed __int64 __fastcall UFG::TSMinigame::Coro_wait_until_phonetrace_loads(SSInvokedCoroutine *pScope)
+__int64 __fastcall UFG::TSMinigame::Coro_wait_until_phonetrace_loads(SSInvokedCoroutine *pScope)
 {
-  UFG::UIScreen *v1; // rax
-  signed __int64 result; // rax
+  UFG::UIScreen *Screen; // rax
 
-  v1 = UFG::UIScreenManagerBase::getScreen(
-         (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-         "PhoneTraceMinigame");
-  if ( v1 )
-    result = LOBYTE(v1[1].mNext);
+  Screen = UFG::UIScreenManagerBase::getScreen(UFG::UIScreenManager::s_instance, "PhoneTraceMinigame");
+  if ( Screen )
+    return LOBYTE(Screen[1].mNext);
   else
-    result = 1i64;
-  return result;
+    return 1i64;
 }
 
 // File Line: 92
 // RVA: 0x4DEF80
 bool __fastcall UFG::TSMinigame::Coro_wait_until_minigame_started(SSInvokedCoroutine *pScope)
 {
-  UFG::UIScreen *v1; // rax
+  UFG::UIScreen *Screen; // rax
 
-  v1 = UFG::UIScreenManagerBase::getScreen(
-         (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-         *(const char **)(*pScope->i_data.i_array_p)->i_data_p->i_user_data);
-  if ( v1 )
+  Screen = UFG::UIScreenManagerBase::getScreen(
+             UFG::UIScreenManager::s_instance,
+             *(const char **)(*pScope->i_data.i_array_p)->i_data_p->i_user_data);
+  if ( Screen )
   {
     UFG::TSMinigame::gbMinigameRunning = 1;
-    LOBYTE(v1) = 1;
+    LOBYTE(Screen) = 1;
   }
-  return (char)v1;
+  return (char)Screen;
 }
 
 // File Line: 116
 // RVA: 0x4DEF10
 bool __fastcall UFG::TSMinigame::Coro_wait_until_minigame_finished(SSInvokedCoroutine *pScope)
 {
-  unsigned __int64 v1; // rcx
+  unsigned __int64 i_user_data; // rcx
   _BYTE *v2; // rax
   unsigned __int64 v3; // r8
   char *v4; // rdx
 
-  v1 = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
-  v2 = *(_BYTE **)v1;
-  v3 = *(unsigned int *)(v1 + 8) + *(_QWORD *)v1 + 1i64;
-  if ( *(_QWORD *)v1 >= v3 )
-    return UFG::UIScreenManagerBase::getScreen(
-             (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-             "PhoneTraceMinigame") == 0i64;
+  i_user_data = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
+  v2 = *(_BYTE **)i_user_data;
+  v3 = *(unsigned int *)(i_user_data + 8) + *(_QWORD *)i_user_data + 1i64;
+  if ( *(_QWORD *)i_user_data >= v3 )
+    return UFG::UIScreenManagerBase::getScreen(UFG::UIScreenManager::s_instance, "PhoneTraceMinigame") == 0i64;
   v4 = (char *)("PhoneTraceMinigame" - v2);
   while ( *v2 == v2[(_QWORD)v4] )
   {
     if ( (unsigned __int64)++v2 >= v3 )
-      return UFG::UIScreenManagerBase::getScreen(
-               (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-               "PhoneTraceMinigame") == 0i64;
+      return UFG::UIScreenManagerBase::getScreen(UFG::UIScreenManager::s_instance, "PhoneTraceMinigame") == 0i64;
   }
-  return UFG::TSMinigame::gbMinigameRunning == 0;
+  return !UFG::TSMinigame::gbMinigameRunning;
 }
 
 // File Line: 146
 // RVA: 0x4DF1C0
-signed __int64 __fastcall UFG::TSMinigame::Coro_wait_until_poker_round_end(SSInvokedCoroutine *pScope)
+__int64 __fastcall UFG::TSMinigame::Coro_wait_until_poker_round_end(SSInvokedCoroutine *pScope)
 {
-  UFG::UIScreen *v1; // rax
-  signed __int64 result; // rax
+  UFG::UIScreen *Screen; // rax
 
-  v1 = UFG::UIScreenManagerBase::getScreen(
-         (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-         "PokerDiceMinigame");
-  if ( v1 )
-    result = (unsigned __int8)v1[1].m_screenName[4];
+  Screen = UFG::UIScreenManagerBase::getScreen(UFG::UIScreenManager::s_instance, "PokerDiceMinigame");
+  if ( Screen )
+    return (unsigned __int8)Screen[1].m_screenName[4];
   else
-    result = 1i64;
-  return result;
+    return 1i64;
 }
 
 // File Line: 165
 // RVA: 0x4DF1F0
-signed __int64 __fastcall UFG::TSMinigame::Coro_wait_until_poker_round_start(SSInvokedCoroutine *pScope)
+__int64 __fastcall UFG::TSMinigame::Coro_wait_until_poker_round_start(SSInvokedCoroutine *pScope)
 {
-  UFG::UIScreen *v1; // rax
-  signed __int64 result; // rax
+  UFG::UIScreen *Screen; // rax
 
-  v1 = UFG::UIScreenManagerBase::getScreen(
-         (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-         "PokerDiceMinigame");
-  if ( v1 )
-    result = (unsigned __int8)v1[1].m_screenName[5];
+  Screen = UFG::UIScreenManagerBase::getScreen(UFG::UIScreenManager::s_instance, "PokerDiceMinigame");
+  if ( Screen )
+    return (unsigned __int8)Screen[1].m_screenName[5];
   else
-    result = 1i64;
-  return result;
+    return 1i64;
 }
 
 // File Line: 184
 // RVA: 0x4DF160
-bool __fastcall UFG::TSMinigame::Coro_wait_until_poker_profit_reaches(SSInvokedCoroutine *pScope)
+char __fastcall UFG::TSMinigame::Coro_wait_until_poker_profit_reaches(SSInvokedCoroutine *pScope)
 {
-  SSInvokedCoroutine *v1; // rbx
-  UFG::UIScreen *v2; // rax
-  int v3; // edx
-  bool result; // al
+  UFG::UIScreen *Screen; // rax
+  int i_user_data; // edx
 
-  v1 = pScope;
-  v2 = UFG::UIScreenManagerBase::getScreen(
-         (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-         "PokerDiceMinigame");
-  if ( !v2 )
+  Screen = UFG::UIScreenManagerBase::getScreen(UFG::UIScreenManager::s_instance, "PokerDiceMinigame");
+  if ( !Screen )
     return 1;
-  v3 = (*v1->i_data.i_array_p)->i_data_p->i_user_data;
-  if ( v3 <= 0 )
-    result = *(_DWORD *)v2[1].m_screenName <= v3;
+  i_user_data = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
+  if ( i_user_data <= 0 )
+    return *(_DWORD *)Screen[1].m_screenName <= i_user_data;
   else
-    result = *(_DWORD *)v2[1].m_screenName >= v3;
-  return result;
+    return *(_DWORD *)Screen[1].m_screenName >= i_user_data;
 }
 
 // File Line: 217
 // RVA: 0x4E9610
 void __fastcall UFG::TSMinigame::MthdC_is_minigame_started(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance **v2; // rbx
-
   if ( ppResult )
   {
-    v2 = ppResult;
     if ( UFG::UIScreenManagerBase::getScreen(
-           (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
+           UFG::UIScreenManager::s_instance,
            *(const char **)(*pScope->i_data.i_array_p)->i_data_p->i_user_data) )
     {
-      *v2 = (SSInstance *)SSBoolean::pool_new(1);
+      *ppResult = SSBoolean::pool_new(1);
     }
     else
     {
-      *v2 = (SSInstance *)SSBoolean::pool_new(0);
+      *ppResult = SSBoolean::pool_new(0);
     }
   }
 }
@@ -187,9 +168,9 @@ void __fastcall UFG::TSMinigame::MthdC_is_in_minigame(SSInvokedMethod *pScope, S
   if ( ppResult )
   {
     if ( UFG::UIHKMinigameScreen::mNumMinigameScreens )
-      *ppResult = (SSInstance *)SSBoolean::pool_new(1);
+      *ppResult = SSBoolean::pool_new(1);
     else
-      *ppResult = (SSInstance *)SSBoolean::pool_new(0);
+      *ppResult = SSBoolean::pool_new(0);
   }
 }
 
@@ -197,10 +178,10 @@ void __fastcall UFG::TSMinigame::MthdC_is_in_minigame(SSInvokedMethod *pScope, S
 // RVA: 0x4E61D0
 void __fastcall UFG::TSMinigame::MthdC_fail_minigame(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **v2; // rax
+  UFG::qNode<UFG::UIScreen,UFG::UIScreen> **TopScreen; // rax
 
-  v2 = UFG::UIScreenManagerBase::getTopScreen((UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr);
-  if ( v2 )
-    *((_BYTE *)v2 + 144) = 1;
+  TopScreen = UFG::UIScreenManagerBase::getTopScreen(UFG::UIScreenManager::s_instance);
+  if ( TopScreen )
+    *((_BYTE *)TopScreen + 144) = 1;
 }
 

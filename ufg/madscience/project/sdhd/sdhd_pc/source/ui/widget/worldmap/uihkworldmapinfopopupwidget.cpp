@@ -2,22 +2,20 @@
 // RVA: 0x618F40
 void __fastcall UFG::UIHKWorldMapInfoPopupWidget::Update(UFG::UIHKWorldMapInfoPopupWidget *this, UFG::UIScreen *screen)
 {
-  UFG::UIHKWorldMapInfoPopupWidget *v2; // rbx
-  Scaleform::GFx::Movie *v3; // rdi
+  Scaleform::GFx::Movie *pObject; // rdi
   __int32 v4; // ecx
   const char *v5; // rdx
-  bool v6; // si
-  double v7; // xmm6_8
-  double v8; // xmm6_8
+  bool mVisible; // si
+  Scaleform::GFx::Value::ValueUnion v7; // xmm6_8
+  Scaleform::GFx::Value::ValueUnion v8; // xmm6_8
   const char *v9; // rsi
   const char *v10; // rbx
-  Scaleform::GFx::Value value; // [rsp+38h] [rbp-48h]
+  Scaleform::GFx::Value value; // [rsp+38h] [rbp-48h] BYREF
 
   if ( !screen )
     return;
-  v2 = this;
-  v3 = screen->mRenderable->m_movie.pObject;
-  if ( !v3 )
+  pObject = screen->mRenderable->m_movie.pObject;
+  if ( !pObject )
     return;
   if ( this->mCueAnimation )
   {
@@ -33,75 +31,75 @@ void __fastcall UFG::UIHKWorldMapInfoPopupWidget::Update(UFG::UIHKWorldMapInfoPo
     {
       v5 = "InfoPopup_FadeIn";
     }
-    Scaleform::GFx::Movie::Invoke(v3, v5, 0i64, 0i64, 0);
+    Scaleform::GFx::Movie::Invoke(pObject, v5, 0i64, 0i64, 0);
   }
 LABEL_9:
-  if ( v2->mChanged )
+  if ( this->mChanged )
   {
-    v2->mChanged = 0;
+    this->mChanged = 0;
     value.pObjectInterface = 0i64;
-    value.Type = 0;
-    v6 = v2->mVisible;
-    value.Type = 2;
-    value.mValue.BValue = v6;
-    Scaleform::GFx::Movie::SetVariable(v3, "mc_InfoPopup._visible", &value, 1i64);
-    if ( v2->mVisible )
+    value.Type = VT_Undefined;
+    mVisible = this->mVisible;
+    value.Type = VT_Boolean;
+    value.mValue.BValue = mVisible;
+    Scaleform::GFx::Movie::SetVariable(pObject, "mc_InfoPopup._visible", &value, 1i64);
+    if ( this->mVisible )
     {
-      v7 = v2->mPosX;
-      if ( ((unsigned int)value.Type >> 6) & 1 )
+      v7.NValue = this->mPosX;
+      if ( (value.Type & 0x40) != 0 )
       {
-        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
+        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&value.pObjectInterface->vfptr->gap8[8])(
           value.pObjectInterface,
           &value,
-          *(_QWORD *)&value.mValue.NValue);
+          value.mValue);
         value.pObjectInterface = 0i64;
       }
-      value.Type = 5;
-      value.mValue.NValue = v7;
-      Scaleform::GFx::Movie::SetVariable(v3, "mc_InfoPopup._x", &value, 1i64);
-      v8 = v2->mPosY;
-      if ( ((unsigned int)value.Type >> 6) & 1 )
+      value.Type = VT_Number;
+      value.mValue = v7;
+      Scaleform::GFx::Movie::SetVariable(pObject, "mc_InfoPopup._x", &value, 1i64);
+      v8.NValue = this->mPosY;
+      if ( (value.Type & 0x40) != 0 )
       {
-        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
+        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&value.pObjectInterface->vfptr->gap8[8])(
           value.pObjectInterface,
           &value,
-          *(_QWORD *)&value.mValue.NValue);
+          value.mValue);
         value.pObjectInterface = 0i64;
       }
-      value.Type = 5;
-      value.mValue.NValue = v8;
-      Scaleform::GFx::Movie::SetVariable(v3, "mc_InfoPopup._y", &value, 1i64);
-      v9 = UFG::UI::LocalizeText(v2->mTitleText.mData);
-      if ( ((unsigned int)value.Type >> 6) & 1 )
+      value.Type = VT_Number;
+      value.mValue = v8;
+      Scaleform::GFx::Movie::SetVariable(pObject, "mc_InfoPopup._y", &value, 1i64);
+      v9 = UFG::UI::LocalizeText(this->mTitleText.mData);
+      if ( (value.Type & 0x40) != 0 )
       {
-        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
+        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&value.pObjectInterface->vfptr->gap8[8])(
           value.pObjectInterface,
           &value,
-          *(_QWORD *)&value.mValue.NValue);
+          value.mValue);
         value.pObjectInterface = 0i64;
       }
-      value.Type = 6;
-      *(_QWORD *)&value.mValue.NValue = v9;
-      Scaleform::GFx::Movie::SetVariable(v3, "mc_InfoPopup.inner.title.htmlText", &value, 1i64);
-      v10 = UFG::UI::LocalizeText(v2->mBodyText.mData);
-      if ( ((unsigned int)value.Type >> 6) & 1 )
+      value.Type = VT_String;
+      value.mValue.pString = v9;
+      Scaleform::GFx::Movie::SetVariable(pObject, "mc_InfoPopup.inner.title.htmlText", &value, 1i64);
+      v10 = UFG::UI::LocalizeText(this->mBodyText.mData);
+      if ( (value.Type & 0x40) != 0 )
       {
-        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
+        (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&value.pObjectInterface->vfptr->gap8[8])(
           value.pObjectInterface,
           &value,
-          *(_QWORD *)&value.mValue.NValue);
+          value.mValue);
         value.pObjectInterface = 0i64;
       }
-      value.Type = 6;
-      *(_QWORD *)&value.mValue.NValue = v10;
-      Scaleform::GFx::Movie::SetVariable(v3, "mc_InfoPopup.inner.body.htmlText", &value, 1i64);
-      Scaleform::GFx::Movie::Invoke(v3, "InfoPopup_SetWidth", 0i64, 0i64, 0);
+      value.Type = VT_String;
+      value.mValue.pString = v10;
+      Scaleform::GFx::Movie::SetVariable(pObject, "mc_InfoPopup.inner.body.htmlText", &value, 1i64);
+      Scaleform::GFx::Movie::Invoke(pObject, "InfoPopup_SetWidth", 0i64, 0i64, 0);
     }
-    if ( ((unsigned int)value.Type >> 6) & 1 )
-      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&value.pObjectInterface->vfptr->gap8[8])(
+    if ( (value.Type & 0x40) != 0 )
+      (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&value.pObjectInterface->vfptr->gap8[8])(
         value.pObjectInterface,
         &value,
-        *(_QWORD *)&value.mValue.NValue);
+        value.mValue);
   }
 }
 

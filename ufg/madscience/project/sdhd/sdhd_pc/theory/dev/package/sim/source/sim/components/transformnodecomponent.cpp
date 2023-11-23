@@ -6,182 +6,177 @@ __int64 dynamic_initializer_for__UFG::TransformNodeComponent::sIdentityNode__()
 
   v0 = UFG::qStringHash32("TransformNodeComponent::sIdentityNode", 0xFFFFFFFF);
   UFG::TransformNodeComponent::TransformNodeComponent(&UFG::TransformNodeComponent::sIdentityNode, v0, 0i64, 0);
-  return atexit(dynamic_atexit_destructor_for__UFG::TransformNodeComponent::sIdentityNode__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::TransformNodeComponent::sIdentityNode__);
 }
 
 // File Line: 53
 // RVA: 0x18F1E0
-void __fastcall UFG::TransformNodeComponent::TransformNodeComponent(UFG::TransformNodeComponent *this, unsigned int name_uid, UFG::TransformNodeComponent *parent, bool startSuspended)
+void __fastcall UFG::TransformNodeComponent::TransformNodeComponent(
+        UFG::TransformNodeComponent *this,
+        unsigned int name_uid,
+        UFG::TransformNodeComponent *parent,
+        bool startSuspended)
 {
-  bool v4; // si
-  UFG::TransformNodeComponent *v5; // rdi
-  UFG::TransformNodeComponent *v6; // rbx
   UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v7; // r10
-  float v8; // xmm1_4
-  float v9; // xmm2_4
-  UFG::SimObject *v10; // rcx
-  __m128 v11; // xmm4
-  __m128 v12; // xmm3
-  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v13; // rcx
-  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v14; // rax
+  float y; // xmm1_4
+  float z; // xmm2_4
+  UFG::SimObject *m_pSimObject; // rcx
+  UFG::qVector4 v11; // xmm4
+  UFG::qVector4 v12; // xmm3
+  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *mPrev; // rcx
+  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *mNext; // rax
   UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v15; // rax
-  UFG::qList<UFG::TransformNodeComponent,UFG::TransformNodeComponent,1,0> *v16; // [rsp+50h] [rbp+18h]
 
-  v4 = startSuspended;
-  v5 = parent;
-  v6 = this;
-  UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v7 = (UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *)&v6->mPrev;
-  v7->mPrev = v7;
-  v7->mNext = v7;
-  v6->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TransformNodeComponent::`vftable;
-  v16 = &v6->mChildren;
-  v16->mNode.mPrev = &v16->mNode;
-  v16->mNode.mNext = &v16->mNode;
-  v6->mChangeID = 0;
-  v8 = UFG::qVector3::msZero.y;
-  v9 = UFG::qVector3::msZero.z;
-  v6->mWorldVelocity.x = UFG::qVector3::msZero.x;
-  v6->mWorldVelocity.y = v8;
-  v6->mWorldVelocity.z = v9;
-  v6->mInheritXformType = 0;
-  v6->m_TypeUID = UFG::TransformNodeComponent::_TransformNodeComponentTypeUID;
-  v10 = v6->m_pSimObject;
-  if ( v10 )
-    v10->m_Components.p[v6->m_SimObjIndex].m_TypeUID = UFG::TransformNodeComponent::_TransformNodeComponentTypeUID;
+  UFG::SimComponent::SimComponent(this, name_uid);
+  v7 = &this->UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent>;
+  this->mPrev = &this->UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent>;
+  this->mNext = &this->UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent>;
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TransformNodeComponent::`vftable;
+  this->mChildren.mNode.mPrev = &this->mChildren.mNode;
+  this->mChildren.mNode.mNext = &this->mChildren.mNode;
+  this->mChangeID = 0;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
+  this->mWorldVelocity.x = UFG::qVector3::msZero.x;
+  this->mWorldVelocity.y = y;
+  this->mWorldVelocity.z = z;
+  this->mInheritXformType = eInheritXform_Full;
+  this->m_TypeUID = UFG::TransformNodeComponent::_TransformNodeComponentTypeUID;
+  m_pSimObject = this->m_pSimObject;
+  if ( m_pSimObject )
+    m_pSimObject->m_Components.p[this->m_SimObjIndex].m_TypeUID = UFG::TransformNodeComponent::_TransformNodeComponentTypeUID;
   v11 = 0i64;
   v12 = 0i64;
-  v12.m128_f32[0] = (float)1;
-  v6->mLocalTransform.v0 = (UFG::qVector4)v12;
-  v6->mLocalTransform.v1 = (UFG::qVector4)_mm_shuffle_ps(v12, v12, 81);
-  v6->mLocalTransform.v2 = (UFG::qVector4)_mm_shuffle_ps(v12, v12, 69);
-  v6->mLocalTransform.v3 = (UFG::qVector4)_mm_shuffle_ps(v12, v12, 21);
-  v11.m128_f32[0] = (float)1;
-  v6->mWorldTransform.v0 = (UFG::qVector4)v11;
-  v6->mWorldTransform.v1 = (UFG::qVector4)_mm_shuffle_ps(v11, v11, 81);
-  v6->mWorldTransform.v2 = (UFG::qVector4)_mm_shuffle_ps(v11, v11, 69);
-  v6->mWorldTransform.v3 = (UFG::qVector4)_mm_shuffle_ps(v11, v11, 21);
-  if ( v5 )
+  v12.x = (float)1;
+  this->mLocalTransform.v0 = v12;
+  this->mLocalTransform.v1 = (UFG::qVector4)_mm_shuffle_ps((__m128)v12, (__m128)v12, 81);
+  this->mLocalTransform.v2 = (UFG::qVector4)_mm_shuffle_ps((__m128)v12, (__m128)v12, 69);
+  this->mLocalTransform.v3 = (UFG::qVector4)_mm_shuffle_ps((__m128)v12, (__m128)v12, 21);
+  v11.x = (float)1;
+  this->mWorldTransform.v0 = v11;
+  this->mWorldTransform.v1 = (UFG::qVector4)_mm_shuffle_ps((__m128)v11, (__m128)v11, 81);
+  this->mWorldTransform.v2 = (UFG::qVector4)_mm_shuffle_ps((__m128)v11, (__m128)v11, 69);
+  this->mWorldTransform.v3 = (UFG::qVector4)_mm_shuffle_ps((__m128)v11, (__m128)v11, 21);
+  if ( parent )
   {
-    v13 = v7->mPrev;
-    v14 = v6->mNext;
-    v13->mNext = v14;
-    v14->mPrev = v13;
+    mPrev = v7->mPrev;
+    mNext = this->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
     v7->mPrev = v7;
-    v6->mNext = (UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *)&v6->mPrev;
-    v15 = v5->mChildren.mNode.mPrev;
+    this->mNext = &this->UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent>;
+    v15 = parent->mChildren.mNode.mPrev;
     v15->mNext = v7;
     v7->mPrev = v15;
-    v6->mNext = &v5->mChildren.mNode;
-    v5->mChildren.mNode.mPrev = v7;
-    v6->mParent = v5;
-    v6->mChanged = -1;
-    ++v6->mChangeID;
+    this->mNext = &parent->mChildren.mNode;
+    parent->mChildren.mNode.mPrev = v7;
+    this->mParent = parent;
+    this->mChanged = -1;
+    ++this->mChangeID;
   }
   else
   {
-    v6->mParent = 0i64;
-    v6->mChanged = 0;
+    this->mParent = 0i64;
+    this->mChanged = 0;
   }
-  if ( v4 )
-    v6->m_Flags |= 2u;
+  if ( startSuspended )
+    this->m_Flags |= 2u;
 }
 
 // File Line: 77
 // RVA: 0x18FBF0
 void __fastcall UFG::TransformNodeComponent::~TransformNodeComponent(UFG::TransformNodeComponent *this)
 {
-  UFG::TransformNodeComponent *v1; // r14
-  UFG::qList<UFG::TransformNodeComponent,UFG::TransformNodeComponent,1,0> *v2; // rsi
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> **v3; // r15
-  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v4; // rdx
-  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v5; // rcx
+  UFG::qList<UFG::TransformNodeComponent,UFG::TransformNodeComponent,1,0> *p_mChildren; // rsi
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> **p_mNext; // r15
+  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *mNext; // rdx
+  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *mPrev; // rcx
   UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v6; // rax
-  signed __int64 v7; // rdi
-  __int128 v8; // xmm2
-  __int128 v9; // xmm1
-  __int128 v10; // xmm0
+  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v7; // rdi
+  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> v8; // xmm2
+  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> v9; // xmm1
+  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> v10; // xmm0
   UFG::TransformNodeComponent *i; // rbx
   UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v12; // rcx
   UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v13; // rax
-  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v14; // rdx
-  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v15; // rcx
-  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v16; // rax
+  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v14; // rcx
+  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v15; // rax
 
-  v1 = this;
   this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::TransformNodeComponent::`vftable;
-  v2 = &this->mChildren;
+  p_mChildren = &this->mChildren;
   if ( (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> **)&this->mChildren.mNode.mNext[-4] != &this->m_SafePointerList.mNode.mNext )
   {
-    v3 = &this->m_SafePointerList.mNode.mNext;
+    p_mNext = &this->m_SafePointerList.mNode.mNext;
     do
     {
-      v4 = v1->mChildren.mNode.mNext;
-      v5 = v4->mPrev;
-      v6 = v4->mNext;
-      v5->mNext = v6;
-      v6->mPrev = v5;
-      v4->mPrev = v4;
-      v4->mNext = v4;
-      v7 = (signed __int64)&v4[-4];
-      v4[2].mNext = 0i64;
-      UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)&v4[-4]);
-      v8 = *(_OWORD *)(v7 + 144);
-      v9 = *(_OWORD *)(v7 + 160);
-      v10 = *(_OWORD *)(v7 + 176);
-      *(_OWORD *)(v7 + 192) = *(_OWORD *)(v7 + 128);
-      *(_OWORD *)(v7 + 208) = v8;
-      *(_OWORD *)(v7 + 224) = v9;
-      *(_OWORD *)(v7 + 240) = v10;
-      *(_DWORD *)(v7 + 112) = -1;
-      ++*(_DWORD *)(v7 + 96);
-      for ( i = (UFG::TransformNodeComponent *)(*(_QWORD *)(v7 + 88) - 64i64);
-            i != (UFG::TransformNodeComponent *)(v7 + 16);
+      mNext = this->mChildren.mNode.mNext;
+      mPrev = mNext->mPrev;
+      v6 = mNext->mNext;
+      mPrev->mNext = v6;
+      v6->mPrev = mPrev;
+      mNext->mPrev = mNext;
+      mNext->mNext = mNext;
+      v7 = mNext - 4;
+      mNext[2].mNext = 0i64;
+      UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)&mNext[-4]);
+      v8 = v7[9];
+      v9 = v7[10];
+      v10 = v7[11];
+      v7[12] = v7[8];
+      v7[13] = v8;
+      v7[14] = v9;
+      v7[15] = v10;
+      LODWORD(v7[7].mPrev) = -1;
+      ++LODWORD(v7[6].mPrev);
+      for ( i = (UFG::TransformNodeComponent *)&v7[5].mNext[-4];
+            i != (UFG::TransformNodeComponent *)&v7[1];
             i = (UFG::TransformNodeComponent *)&i->mNext[-4] )
       {
         UFG::TransformNodeComponent::MarkForUpdateHelper((UFG::TransformNodeComponent *)v7, i);
       }
-      *(_DWORD *)(v7 + 112) = -1;
-      ++*(_DWORD *)(v7 + 96);
+      LODWORD(v7[7].mPrev) = -1;
+      ++LODWORD(v7[6].mPrev);
     }
-    while ( (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> **)&v2->mNode.mNext[-4] != v3 );
+    while ( (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> **)&p_mChildren->mNode.mNext[-4] != p_mNext );
   }
-  UFG::qList<UFG::TransformNodeComponent,UFG::TransformNodeComponent,1,0>::DeleteNodes(v2);
-  v12 = v2->mNode.mPrev;
-  v13 = v2->mNode.mNext;
+  UFG::qList<UFG::TransformNodeComponent,UFG::TransformNodeComponent,1,0>::DeleteNodes(p_mChildren);
+  v12 = p_mChildren->mNode.mPrev;
+  v13 = p_mChildren->mNode.mNext;
   v12->mNext = v13;
   v13->mPrev = v12;
-  v2->mNode.mPrev = &v2->mNode;
-  v2->mNode.mNext = &v2->mNode;
-  v14 = (UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *)&v1->mPrev;
-  v15 = v1->mPrev;
-  v16 = v1->mNext;
-  v15->mNext = v16;
-  v16->mPrev = v15;
-  v14->mPrev = v14;
-  v14->mNext = v14;
-  UFG::SimComponent::~SimComponent((UFG::SimComponent *)&v1->vfptr);
+  p_mChildren->mNode.mPrev = &p_mChildren->mNode;
+  p_mChildren->mNode.mNext = &p_mChildren->mNode;
+  v14 = this->mPrev;
+  v15 = this->mNext;
+  v14->mNext = v15;
+  v15->mPrev = v14;
+  this->mPrev = &this->UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent>;
+  this->mNext = &this->UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent>;
+  UFG::SimComponent::~SimComponent(this);
 }
 
 // File Line: 100
 // RVA: 0x191370
-void __fastcall UFG::TransformNodeComponent::SetParent(UFG::TransformNodeComponent *this, UFG::TransformNodeComponent *new_parent, UFG::TransformNodeComponent::eInheritXformType inheritXformType)
+void __fastcall UFG::TransformNodeComponent::SetParent(
+        UFG::TransformNodeComponent *this,
+        UFG::TransformNodeComponent *new_parent,
+        UFG::TransformNodeComponent::eInheritXformType inheritXformType)
 {
-  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v3; // r8
-  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v4; // rax
+  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *mPrev; // r8
+  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *mNext; // rax
   UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v5; // r10
   UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v6; // rax
 
   if ( this->mParent != new_parent )
   {
     this->mInheritXformType = inheritXformType;
-    v3 = this->mPrev;
-    v4 = this->mNext;
-    v5 = (UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *)&this->mPrev;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v5->mPrev = v5;
-    v5->mNext = v5;
+    mPrev = this->mPrev;
+    mNext = this->mNext;
+    v5 = &this->UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent>;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    this->mPrev = &this->UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent>;
+    this->mNext = &this->UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent>;
     if ( new_parent )
     {
       v6 = new_parent->mChildren.mNode.mPrev;
@@ -198,54 +193,53 @@ void __fastcall UFG::TransformNodeComponent::SetParent(UFG::TransformNodeCompone
 
 // File Line: 117
 // RVA: 0x1913D0
-void __fastcall UFG::TransformNodeComponent::SetParentKeepWorld(UFG::TransformNodeComponent *this, UFG::TransformNodeComponent *pParent, UFG::TransformNodeComponent::eInheritXformType inheritXformType)
+void __fastcall UFG::TransformNodeComponent::SetParentKeepWorld(
+        UFG::TransformNodeComponent *this,
+        UFG::TransformNodeComponent *pParent,
+        UFG::TransformNodeComponent::eInheritXformType inheritXformType)
 {
-  UFG::TransformNodeComponent *v3; // rdi
-  UFG::TransformNodeComponent *v4; // rbx
-  UFG::qMatrix44 *v5; // rdx
-  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v6; // rcx
-  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v7; // rax
+  UFG::qMatrix44 *p_mWorldTransform; // rdx
+  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *mPrev; // rcx
+  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *mNext; // rax
   UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v8; // rdx
   UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v9; // rax
-  UFG::qMatrix44 d; // [rsp+20h] [rbp-88h]
-  UFG::qMatrix44 result; // [rsp+60h] [rbp-48h]
+  UFG::qMatrix44 d; // [rsp+20h] [rbp-88h] BYREF
+  UFG::qMatrix44 result; // [rsp+60h] [rbp-48h] BYREF
 
-  v3 = pParent;
-  v4 = this;
   if ( this->mParent != pParent )
   {
     this->mInheritXformType = inheritXformType;
     if ( pParent )
     {
       UFG::TransformNodeComponent::UpdateWorldTransform(pParent);
-      UFG::qInverseAffine(&d, &v3->mWorldTransform);
-      UFG::TransformNodeComponent::UpdateWorldTransform(v4);
-      v5 = UFG::qMatrix44::operator*(&v4->mWorldTransform, &result, &d);
+      UFG::qInverseAffine(&d, &pParent->mWorldTransform);
+      UFG::TransformNodeComponent::UpdateWorldTransform(this);
+      p_mWorldTransform = UFG::qMatrix44::operator*(&this->mWorldTransform, &result, &d);
     }
     else
     {
       UFG::TransformNodeComponent::UpdateWorldTransform(this);
-      v5 = &v4->mWorldTransform;
+      p_mWorldTransform = &this->mWorldTransform;
     }
-    UFG::TransformNodeComponent::SetLocalTransform(v4, v5);
-    v6 = v4->mPrev;
-    v7 = v4->mNext;
-    v8 = (UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *)&v4->mPrev;
-    v6->mNext = v7;
-    v7->mPrev = v6;
-    v8->mPrev = v8;
-    v8->mNext = v8;
-    if ( v3 )
+    UFG::TransformNodeComponent::SetLocalTransform(this, p_mWorldTransform);
+    mPrev = this->mPrev;
+    mNext = this->mNext;
+    v8 = &this->UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent>;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    this->mPrev = &this->UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent>;
+    this->mNext = &this->UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent>;
+    if ( pParent )
     {
-      v9 = v3->mChildren.mNode.mPrev;
+      v9 = pParent->mChildren.mNode.mPrev;
       v9->mNext = v8;
       v8->mPrev = v9;
-      v4->mNext = &v3->mChildren.mNode;
-      v3->mChildren.mNode.mPrev = v8;
+      this->mNext = &pParent->mChildren.mNode;
+      pParent->mChildren.mNode.mPrev = v8;
     }
-    ++v4->mChangeID;
-    v4->mParent = v3;
-    v4->mChanged = -1;
+    ++this->mChangeID;
+    this->mParent = pParent;
+    this->mChanged = -1;
   }
 }
 
@@ -253,15 +247,14 @@ void __fastcall UFG::TransformNodeComponent::SetParentKeepWorld(UFG::TransformNo
 // RVA: 0x191D60
 void __fastcall UFG::TransformNodeComponent::UpdateWorldTransform(UFG::TransformNodeComponent *this)
 {
-  UFG::TransformNodeComponent *v1; // rdx
-  UFG::TransformNodeComponent *v2; // rdi
+  UFG::TransformNodeComponent *mParent; // rdx
   UFG::qVector4 v3; // xmm3
   UFG::qVector4 v4; // xmm2
   UFG::qVector4 v5; // xmm1
   __int64 *v6; // r10
-  int v7; // er9
-  int v8; // er8
-  int v9; // ecx
+  int v7; // r9d
+  int v8; // r8d
+  int mChanged; // ecx
   int v10; // eax
   int v11; // ecx
   __int64 v12; // rax
@@ -278,7 +271,7 @@ void __fastcall UFG::TransformNodeComponent::UpdateWorldTransform(UFG::Transform
   UFG::qVector4 v23; // xmm4
   UFG::qVector4 v24; // xmm2
   UFG::qVector4 v25; // xmm1
-  UFG::TransformNodeComponent::eInheritXformType v26; // ecx
+  UFG::TransformNodeComponent::eInheritXformType mInheritXformType; // ecx
   float v27; // xmm2_4
   float v28; // xmm1_4
   float v29; // xmm0_4
@@ -286,31 +279,29 @@ void __fastcall UFG::TransformNodeComponent::UpdateWorldTransform(UFG::Transform
   UFG::qVector4 v31; // xmm3
   UFG::qVector4 v32; // xmm2
   UFG::qVector4 v33; // xmm1
-  UFG::qMatrix44 b; // [rsp+20h] [rbp-E0h]
-  UFG::qMatrix44 result; // [rsp+60h] [rbp-A0h]
-  __int64 v36; // [rsp+A0h] [rbp-60h]
-  __int64 v37[63]; // [rsp+A8h] [rbp-58h]
+  UFG::qMatrix44 b; // [rsp+20h] [rbp-E0h] BYREF
+  UFG::qMatrix44 result; // [rsp+60h] [rbp-A0h] BYREF
+  __int64 v36[64]; // [rsp+A0h] [rbp-60h] BYREF
 
-  v1 = this->mParent;
-  v2 = this;
-  if ( v1 )
+  mParent = this->mParent;
+  if ( mParent )
   {
-    v6 = &v36;
+    v6 = v36;
     v7 = 0;
     v8 = -1;
     do
     {
-      v9 = v1->mChanged;
-      *v6 = (__int64)v1;
-      v1 = v1->mParent;
-      v10 = v9;
-      v11 = v7++ & v9;
+      mChanged = mParent->mChanged;
+      *v6 = (__int64)mParent;
+      mParent = mParent->mParent;
+      v10 = mChanged;
+      v11 = v7++ & mChanged;
       ++v6;
       v8 = v11 | ~v10 & v8;
     }
-    while ( v1 );
-    *(&v36 + v7) = 0i64;
-    v12 = v37[v8];
+    while ( mParent );
+    v36[v7] = 0i64;
+    v12 = v36[v8 + 1];
     if ( v12 )
     {
       v13 = *(UFG::qVector4 *)(v12 + 144);
@@ -323,7 +314,7 @@ void __fastcall UFG::TransformNodeComponent::UpdateWorldTransform(UFG::Transform
     }
     else
     {
-      v16 = *(&v36 + v8--);
+      v16 = v36[v8--];
       v17 = *(UFG::qVector4 *)(v16 + 208);
       v18 = *(UFG::qVector4 *)(v16 + 240);
       b.v0 = *(UFG::qVector4 *)(v16 + 192);
@@ -339,7 +330,7 @@ void __fastcall UFG::TransformNodeComponent::UpdateWorldTransform(UFG::Transform
     }
     for ( i = v8; i >= 0; *(_DWORD *)(v21 + 112) = 0 )
     {
-      v21 = *(&v36 + i);
+      v21 = v36[i];
       v22 = UFG::qMatrix44::operator*((UFG::qMatrix44 *)(v21 + 192), &result, &b);
       --i;
       v23 = v22->v1;
@@ -354,32 +345,32 @@ void __fastcall UFG::TransformNodeComponent::UpdateWorldTransform(UFG::Transform
       *(UFG::qVector4 *)(v21 + 160) = v25;
       *(UFG::qVector4 *)(v21 + 176) = v24;
     }
-    v26 = v2->mInheritXformType;
-    if ( v26 )
+    mInheritXformType = this->mInheritXformType;
+    if ( mInheritXformType )
     {
-      if ( v26 == 1 )
+      if ( mInheritXformType == eInheritXform_Translation )
       {
-        v27 = b.v3.x + v2->mLocalTransform.v3.x;
-        v28 = b.v3.y + v2->mLocalTransform.v3.y;
-        v29 = b.v3.z + v2->mLocalTransform.v3.z;
-        v2->mWorldTransform.v3.w = 1.0;
-        v2->mWorldTransform.v3.x = v27;
-        v2->mWorldTransform.v3.y = v28;
-        v2->mWorldTransform.v3.z = v29;
+        v27 = b.v3.x + this->mLocalTransform.v3.x;
+        v28 = b.v3.y + this->mLocalTransform.v3.y;
+        v29 = b.v3.z + this->mLocalTransform.v3.z;
+        this->mWorldTransform.v3.w = 1.0;
+        this->mWorldTransform.v3.x = v27;
+        this->mWorldTransform.v3.y = v28;
+        this->mWorldTransform.v3.z = v29;
       }
     }
     else
     {
-      v30 = UFG::qMatrix44::operator*(&v2->mLocalTransform, &result, &b);
+      v30 = UFG::qMatrix44::operator*(&this->mLocalTransform, &result, &b);
       v31 = v30->v1;
       v32 = v30->v2;
       v33 = v30->v3;
-      v2->mWorldTransform.v0 = v30->v0;
-      v2->mWorldTransform.v1 = v31;
-      v2->mWorldTransform.v2 = v32;
-      v2->mWorldTransform.v3 = v33;
+      this->mWorldTransform.v0 = v30->v0;
+      this->mWorldTransform.v1 = v31;
+      this->mWorldTransform.v2 = v32;
+      this->mWorldTransform.v3 = v33;
     }
-    v2->mChanged = 0;
+    this->mChanged = 0;
   }
   else if ( this->mChanged )
   {
@@ -396,27 +387,27 @@ void __fastcall UFG::TransformNodeComponent::UpdateWorldTransform(UFG::Transform
 
 // File Line: 281
 // RVA: 0x190D20
-void __fastcall UFG::TransformNodeComponent::MarkForUpdateHelper(UFG::TransformNodeComponent *this, UFG::TransformNodeComponent *node)
+void __fastcall UFG::TransformNodeComponent::MarkForUpdateHelper(
+        UFG::TransformNodeComponent *this,
+        UFG::TransformNodeComponent *node)
 {
-  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v2; // rbx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> **v3; // rdi
+  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *mNext; // rbx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> **p_mNext; // rdi
   UFG::TransformNodeComponent *v4; // rbx
-  UFG::TransformNodeComponent *v5; // rsi
 
-  v2 = node->mChildren.mNode.mNext;
+  mNext = node->mChildren.mNode.mNext;
   ++node->mChangeID;
-  v3 = &node->m_SafePointerList.mNode.mNext;
-  v4 = (UFG::TransformNodeComponent *)&v2[-4];
-  v5 = this;
+  p_mNext = &node->m_SafePointerList.mNode.mNext;
+  v4 = (UFG::TransformNodeComponent *)&mNext[-4];
   node->mChanged = -1;
   if ( v4 != (UFG::TransformNodeComponent *)&node->m_SafePointerList.mNode.mNext )
   {
     do
     {
-      UFG::TransformNodeComponent::MarkForUpdateHelper(v5, v4);
+      UFG::TransformNodeComponent::MarkForUpdateHelper(this, v4);
       v4 = (UFG::TransformNodeComponent *)&v4->mNext[-4];
     }
-    while ( v4 != (UFG::TransformNodeComponent *)v3 );
+    while ( v4 != (UFG::TransformNodeComponent *)p_mNext );
   }
 }
 
@@ -426,33 +417,31 @@ void __fastcall UFG::TransformNodeComponent::SetLocalTransform(UFG::TransformNod
 {
   UFG::qVector4 v2; // xmm3
   UFG::qVector4 v3; // xmm2
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> **v4; // rsi
-  UFG::TransformNodeComponent *v5; // rdi
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> **p_mNext; // rsi
   UFG::qVector4 v6; // xmm1
-  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v7; // rbx
+  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *mNext; // rbx
   UFG::TransformNodeComponent *v8; // rbx
 
   v2 = m->v1;
   v3 = m->v2;
-  v4 = &this->m_SafePointerList.mNode.mNext;
-  v5 = this;
+  p_mNext = &this->m_SafePointerList.mNode.mNext;
   v6 = m->v3;
   this->mLocalTransform.v0 = m->v0;
   this->mLocalTransform.v1 = v2;
   this->mLocalTransform.v2 = v3;
   this->mLocalTransform.v3 = v6;
-  v7 = this->mChildren.mNode.mNext;
+  mNext = this->mChildren.mNode.mNext;
   ++this->mChangeID;
   this->mChanged = -1;
-  v8 = (UFG::TransformNodeComponent *)&v7[-4];
+  v8 = (UFG::TransformNodeComponent *)&mNext[-4];
   if ( v8 != (UFG::TransformNodeComponent *)&this->m_SafePointerList.mNode.mNext )
   {
     do
     {
-      UFG::TransformNodeComponent::MarkForUpdateHelper(v5, v8);
+      UFG::TransformNodeComponent::MarkForUpdateHelper(this, v8);
       v8 = (UFG::TransformNodeComponent *)&v8->mNext[-4];
     }
-    while ( v8 != (UFG::TransformNodeComponent *)v4 );
+    while ( v8 != (UFG::TransformNodeComponent *)p_mNext );
   }
 }
 
@@ -460,35 +449,33 @@ void __fastcall UFG::TransformNodeComponent::SetLocalTransform(UFG::TransformNod
 // RVA: 0x1912E0
 void __fastcall UFG::TransformNodeComponent::SetLocalTranslation(UFG::TransformNodeComponent *this, UFG::qVector3 *pos)
 {
-  float v2; // eax
-  float v3; // xmm0_4
-  float v4; // xmm1_4
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> **v5; // rsi
-  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v6; // rbx
-  UFG::TransformNodeComponent *v7; // rdi
+  float x; // eax
+  float y; // xmm0_4
+  float z; // xmm1_4
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> **p_mNext; // rsi
+  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *mNext; // rbx
   UFG::TransformNodeComponent *v8; // rbx
 
-  v2 = pos->x;
-  v3 = pos->y;
-  v4 = pos->z;
+  x = pos->x;
+  y = pos->y;
+  z = pos->z;
   this->mLocalTransform.v3.w = 1.0;
-  this->mLocalTransform.v3.x = v2;
-  v5 = &this->m_SafePointerList.mNode.mNext;
-  this->mLocalTransform.v3.y = v3;
-  this->mLocalTransform.v3.z = v4;
-  v6 = this->mChildren.mNode.mNext;
+  this->mLocalTransform.v3.x = x;
+  p_mNext = &this->m_SafePointerList.mNode.mNext;
+  this->mLocalTransform.v3.y = y;
+  this->mLocalTransform.v3.z = z;
+  mNext = this->mChildren.mNode.mNext;
   ++this->mChangeID;
-  v7 = this;
-  v8 = (UFG::TransformNodeComponent *)&v6[-4];
+  v8 = (UFG::TransformNodeComponent *)&mNext[-4];
   this->mChanged = -1;
   if ( v8 != (UFG::TransformNodeComponent *)&this->m_SafePointerList.mNode.mNext )
   {
     do
     {
-      UFG::TransformNodeComponent::MarkForUpdateHelper(v7, v8);
+      UFG::TransformNodeComponent::MarkForUpdateHelper(this, v8);
       v8 = (UFG::TransformNodeComponent *)&v8->mNext[-4];
     }
-    while ( v8 != (UFG::TransformNodeComponent *)v5 );
+    while ( v8 != (UFG::TransformNodeComponent *)p_mNext );
   }
 }
 
@@ -496,20 +483,20 @@ void __fastcall UFG::TransformNodeComponent::SetLocalTranslation(UFG::TransformN
 // RVA: 0x1914B0
 void __fastcall UFG::TransformNodeComponent::SetWorldTransform(UFG::TransformNodeComponent *this, UFG::qMatrix44 *m)
 {
-  UFG::TransformNodeComponent *v2; // rdi
+  UFG::TransformNodeComponent *mParent; // rdi
   UFG::qMatrix44 *v3; // rsi
   UFG::TransformNodeComponent *v4; // rbx
   UFG::qMatrix44 *v5; // rax
-  UFG::qMatrix44 d; // [rsp+20h] [rbp-88h]
-  UFG::qMatrix44 result; // [rsp+60h] [rbp-48h]
+  UFG::qMatrix44 d; // [rsp+20h] [rbp-88h] BYREF
+  UFG::qMatrix44 result; // [rsp+60h] [rbp-48h] BYREF
 
-  v2 = this->mParent;
+  mParent = this->mParent;
   v3 = m;
   v4 = this;
-  if ( v2 )
+  if ( mParent )
   {
-    UFG::TransformNodeComponent::UpdateWorldTransform(v2);
-    UFG::qInverseAffine(&d, &v2->mWorldTransform);
+    UFG::TransformNodeComponent::UpdateWorldTransform(mParent);
+    UFG::qInverseAffine(&d, &mParent->mWorldTransform);
     v5 = UFG::qMatrix44::operator*(v3, &result, &d);
     this = v4;
     m = v5;
@@ -521,46 +508,42 @@ void __fastcall UFG::TransformNodeComponent::SetWorldTransform(UFG::TransformNod
 // RVA: 0x191520
 void __fastcall UFG::TransformNodeComponent::SetWorldTranslation(UFG::TransformNodeComponent *this, UFG::qVector3 *pos)
 {
-  UFG::TransformNodeComponent *v2; // rsi
-  UFG::qVector3 *v3; // rbx
-  UFG::TransformNodeComponent *v4; // rdi
-  float v5; // xmm4_4
+  UFG::TransformNodeComponent *mParent; // rsi
+  float y; // xmm4_4
   float v6; // xmm7_4
   float v7; // xmm3_4
   float v8; // xmm2_4
   float v9; // xmm1_4
   float v10; // xmm3_4
   float v11; // xmm2_4
-  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v12; // rbx
+  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *mNext; // rbx
   UFG::TransformNodeComponent *i; // rbx
-  UFG::qMatrix44 d; // [rsp+20h] [rbp-58h]
+  UFG::qMatrix44 d; // [rsp+20h] [rbp-58h] BYREF
 
-  v2 = this->mParent;
-  v3 = pos;
-  v4 = this;
-  if ( v2 )
+  mParent = this->mParent;
+  if ( mParent )
   {
     UFG::TransformNodeComponent::UpdateWorldTransform(this->mParent);
-    UFG::qInverseAffine(&d, &v2->mWorldTransform);
-    v5 = v3->y;
-    v6 = (float)((float)((float)(d.v1.x * v5) + (float)(d.v0.x * v3->x)) + (float)(d.v2.x * v3->z)) + d.v3.x;
-    v7 = (float)((float)(d.v1.y * v5) + (float)(d.v0.y * v3->x)) + (float)(d.v2.y * v3->z);
-    v8 = (float)(d.v1.z * v5) + (float)(d.v0.z * v3->x);
-    v9 = d.v2.z * v3->z;
-    v4->mLocalTransform.v3.w = 1.0;
+    UFG::qInverseAffine(&d, &mParent->mWorldTransform);
+    y = pos->y;
+    v6 = (float)((float)((float)(d.v1.x * y) + (float)(d.v0.x * pos->x)) + (float)(d.v2.x * pos->z)) + d.v3.x;
+    v7 = (float)((float)(d.v1.y * y) + (float)(d.v0.y * pos->x)) + (float)(d.v2.y * pos->z);
+    v8 = (float)(d.v1.z * y) + (float)(d.v0.z * pos->x);
+    v9 = d.v2.z * pos->z;
+    this->mLocalTransform.v3.w = 1.0;
     v10 = v7 + d.v3.y;
-    v4->mLocalTransform.v3.x = v6;
+    this->mLocalTransform.v3.x = v6;
     v11 = (float)(v8 + v9) + d.v3.z;
-    v4->mLocalTransform.v3.y = v10;
-    v4->mLocalTransform.v3.z = v11;
-    v12 = v4->mChildren.mNode.mNext;
-    ++v4->mChangeID;
-    v4->mChanged = -1;
-    for ( i = (UFG::TransformNodeComponent *)&v12[-4];
-          i != (UFG::TransformNodeComponent *)&v4->m_SafePointerList.mNode.mNext;
+    this->mLocalTransform.v3.y = v10;
+    this->mLocalTransform.v3.z = v11;
+    mNext = this->mChildren.mNode.mNext;
+    ++this->mChangeID;
+    this->mChanged = -1;
+    for ( i = (UFG::TransformNodeComponent *)&mNext[-4];
+          i != (UFG::TransformNodeComponent *)&this->m_SafePointerList.mNode.mNext;
           i = (UFG::TransformNodeComponent *)&i->mNext[-4] )
     {
-      UFG::TransformNodeComponent::MarkForUpdateHelper(v4, i);
+      UFG::TransformNodeComponent::MarkForUpdateHelper(this, i);
     }
   }
   else
@@ -571,24 +554,26 @@ void __fastcall UFG::TransformNodeComponent::SetWorldTranslation(UFG::TransformN
 
 // File Line: 378
 // RVA: 0x191720
-void __fastcall UFG::TransformNodeComponent::TeleportEventHandler(UFG::TransformNodeComponent *this, UFG::Event *this_event)
+void __fastcall UFG::TransformNodeComponent::TeleportEventHandler(
+        UFG::TransformNodeComponent *this,
+        UFG::Event *this_event)
 {
-  UFG::TransformNodeComponent *v2; // rdi
+  UFG::TransformNodeComponent *mParent; // rdi
   UFG::TransformNodeComponent *v3; // rbx
-  UFG::qMatrix44 *v4; // rsi
+  UFG::qMatrix44 *p_m_EventUID; // rsi
   UFG::qMatrix44 *v5; // rdx
   UFG::qMatrix44 *v6; // rax
-  UFG::qMatrix44 d; // [rsp+20h] [rbp-88h]
-  UFG::qMatrix44 result; // [rsp+60h] [rbp-48h]
+  UFG::qMatrix44 d; // [rsp+20h] [rbp-88h] BYREF
+  UFG::qMatrix44 result; // [rsp+60h] [rbp-48h] BYREF
 
-  v2 = this->mParent;
+  mParent = this->mParent;
   v3 = this;
-  v4 = (UFG::qMatrix44 *)&this_event[1].m_EventUID;
-  if ( v2 )
+  p_m_EventUID = (UFG::qMatrix44 *)&this_event[1].m_EventUID;
+  if ( mParent )
   {
-    UFG::TransformNodeComponent::UpdateWorldTransform(v2);
-    UFG::qInverseAffine(&d, &v2->mWorldTransform);
-    v6 = UFG::qMatrix44::operator*(v4, &result, &d);
+    UFG::TransformNodeComponent::UpdateWorldTransform(mParent);
+    UFG::qInverseAffine(&d, &mParent->mWorldTransform);
+    v6 = UFG::qMatrix44::operator*(p_m_EventUID, &result, &d);
     this = v3;
     v5 = v6;
   }
@@ -602,81 +587,84 @@ void __fastcall UFG::TransformNodeComponent::TeleportEventHandler(UFG::Transform
 
 // File Line: 518
 // RVA: 0x190E10
-void __fastcall UFG::TransformNodeComponent::PropertiesLoadWithMatrix(UFG::TransformNodeComponent *this, UFG::SceneObjectProperties *pSceneObj, UFG::qMatrix44 *pWorldMatrix)
+void __fastcall UFG::TransformNodeComponent::PropertiesLoadWithMatrix(
+        UFG::TransformNodeComponent *this,
+        UFG::SceneObjectProperties *pSceneObj,
+        UFG::qMatrix44 *pWorldMatrix)
 {
-  UFG::SceneObjectProperties *v3; // rsi
-  UFG::TransformNodeComponent *v4; // rbx
+  UFG::SceneObjectProperties *m_pSimObject; // rsi
   UFG::qMatrix44 *v5; // rax
   unsigned int *v6; // rax
   unsigned int v7; // edx
-  UFG::TransformNodeComponent *v8; // rdi
-  UFG::SceneObjectProperties *v9; // rax
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rdi
+  UFG::SceneObjectProperties *Ancestor; // rax
   UFG::SimObject *v10; // rax
-  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v11; // rcx
-  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v12; // rax
+  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *mPrev; // rcx
+  UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *mNext; // rax
   UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v13; // rdx
   UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *v14; // rax
 
-  v3 = pSceneObj;
-  v4 = this;
+  m_pSimObject = pSceneObj;
   if ( pWorldMatrix )
   {
     UFG::TransformNodeComponent::SetLocalTransform(this, pWorldMatrix);
   }
   else
   {
-    v5 = PropertyUtils::Get<UFG::qMatrix44>(pSceneObj, (UFG::qSymbol *)&qSymbol_XformLocal.mUID);
-    UFG::TransformNodeComponent::SetLocalTransform(v4, v5);
-    v6 = PropertyUtils::Get<unsigned long>(v3, (UFG::qSymbol *)&qSymbol_XformParent.mUID);
+    v5 = PropertyUtils::Get<UFG::qMatrix44>(pSceneObj, &qSymbol_XformLocal);
+    UFG::TransformNodeComponent::SetLocalTransform(this, v5);
+    v6 = PropertyUtils::Get<unsigned long>(m_pSimObject, &qSymbol_XformParent);
     if ( v6 )
       v7 = *v6;
     else
       v7 = 0;
-    if ( !v3 )
+    if ( !m_pSimObject )
     {
-      v3 = (UFG::SceneObjectProperties *)v4->m_pSimObject;
-      if ( v3 )
-        v3 = (UFG::SceneObjectProperties *)v3->mpOwner.mPrev;
+      m_pSimObject = (UFG::SceneObjectProperties *)this->m_pSimObject;
+      if ( m_pSimObject )
+        m_pSimObject = (UFG::SceneObjectProperties *)m_pSimObject->mpOwner.mPrev;
     }
-    v8 = 0i64;
+    m_pTransformNodeComponent = 0i64;
     if ( v7 )
     {
-      v9 = UFG::SceneObjectProperties::GetAncestor(v3, v7);
-      if ( v9 )
+      Ancestor = UFG::SceneObjectProperties::GetAncestor(m_pSimObject, v7);
+      if ( Ancestor )
       {
-        v10 = v9->m_pSimObject;
+        v10 = Ancestor->m_pSimObject;
         if ( v10 )
-          v8 = v10->m_pTransformNodeComponent;
+          m_pTransformNodeComponent = v10->m_pTransformNodeComponent;
       }
     }
-    if ( v4->mParent != v8 )
+    if ( this->mParent != m_pTransformNodeComponent )
     {
-      v4->mInheritXformType = 0;
-      v11 = v4->mPrev;
-      v12 = v4->mNext;
-      v13 = (UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent> *)&v4->mPrev;
-      v11->mNext = v12;
-      v12->mPrev = v11;
-      v13->mPrev = v13;
-      v13->mNext = v13;
-      if ( v8 )
+      this->mInheritXformType = eInheritXform_Full;
+      mPrev = this->mPrev;
+      mNext = this->mNext;
+      v13 = &this->UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent>;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
+      this->mPrev = &this->UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent>;
+      this->mNext = &this->UFG::qNode<UFG::TransformNodeComponent,UFG::TransformNodeComponent>;
+      if ( m_pTransformNodeComponent )
       {
-        v14 = v8->mChildren.mNode.mPrev;
+        v14 = m_pTransformNodeComponent->mChildren.mNode.mPrev;
         v14->mNext = v13;
         v13->mPrev = v14;
-        v4->mNext = &v8->mChildren.mNode;
-        v8->mChildren.mNode.mPrev = v13;
+        this->mNext = &m_pTransformNodeComponent->mChildren.mNode;
+        m_pTransformNodeComponent->mChildren.mNode.mPrev = v13;
       }
-      ++v4->mChangeID;
-      v4->mParent = v8;
-      v4->mChanged = -1;
+      ++this->mChangeID;
+      this->mParent = m_pTransformNodeComponent;
+      this->mChanged = -1;
     }
   }
 }
 
 // File Line: 549
 // RVA: 0x190E00
-void __fastcall UFG::TransformNodeComponent::PropertiesLoad(UFG::TransformNodeComponent *this, UFG::SceneObjectProperties *pSceneObj)
+void __fastcall UFG::TransformNodeComponent::PropertiesLoad(
+        UFG::TransformNodeComponent *this,
+        UFG::SceneObjectProperties *pSceneObj)
 {
   UFG::TransformNodeComponent::PropertiesLoadWithMatrix(this, pSceneObj, 0i64);
 }

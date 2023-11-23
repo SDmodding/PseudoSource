@@ -1,547 +1,498 @@
 // File Line: 20
 // RVA: 0xBC96C0
-hkResult *__fastcall hkaiComputeRegionUtils::computeRegions<hkaiNavMesh,float>(hkResult *result, hkaiNavMesh *mesh, bool sortRegionsByArea, hkArrayBase<int> *regionsOut, int *numRegionsOut, hkArray<float,hkContainerHeapAllocator> *areasOut)
+hkResult *__fastcall hkaiComputeRegionUtils::computeRegions<hkaiNavMesh,float>(
+        hkResult *result,
+        hkSimdFloat32 *mesh,
+        bool sortRegionsByArea,
+        hkArrayBase<int> *regionsOut,
+        int *numRegionsOut,
+        hkArray<float,hkContainerHeapAllocator> *areasOut)
 {
-  hkResult *v6; // r13
   hkArrayBase<int> *v7; // rsi
-  bool v8; // r12
-  hkSimdFloat32 *v9; // r15
-  _QWORD *v10; // rax
+  _QWORD *Value; // rax
   _QWORD *v11; // rcx
   _QWORD *v12; // r10
   unsigned __int64 v13; // rax
-  signed __int64 v14; // rcx
+  _QWORD *v14; // rcx
   __int64 v15; // rdi
   int v16; // ebx
-  int v17; // er9
-  int v18; // er8
-  _QWORD *v19; // r9
-  unsigned __int64 v20; // r8
-  unsigned __int64 v21; // rax
-  int v22; // ebx
-  hkLifoAllocator *v23; // rax
-  int *v24; // r8
-  int v25; // edx
-  char *v26; // rcx
-  int v27; // er14
-  unsigned __int64 v28; // rsi
-  int v29; // ebx
-  unsigned __int64 v30; // rax
-  int v31; // er8
-  int v32; // edx
-  int v33; // ecx
-  int v34; // er8
-  int *v35; // rdi
-  signed int v36; // ebx
-  hkLifoAllocator *v37; // rax
-  int v38; // er8
-  signed __int64 v39; // rdi
-  void **v40; // r11
-  int v41; // er10
-  signed __int64 v42; // rbx
-  __int64 v43; // r8
-  int v44; // ecx
-  __int64 v45; // r9
-  int *v46; // r14
-  signed int v47; // ebx
-  hkLifoAllocator *v48; // rax
-  int v49; // er8
-  signed __int64 v50; // rbx
-  int v51; // er9
-  signed int v52; // er8
-  __m128i v53; // xmm5
-  __m128 v54; // xmm3
-  __int64 v55; // r9
-  __m128 v56; // xmm1
-  __m128 v57; // xmm2
-  float v58; // xmm4_4
-  __int64 v59; // rdx
+  int v17; // r8d
+  _QWORD *v18; // r9
+  unsigned __int64 v19; // r8
+  unsigned __int64 v20; // rax
+  int v21; // ebx
+  hkLifoAllocator *v22; // rax
+  int *m_cur; // r8
+  int v24; // edx
+  char *v25; // rcx
+  int v26; // r14d
+  hkaiNavMesh::Face *v27; // rsi
+  int m_startEdgeIndex; // ebx
+  hkaiNavMesh::Edge *v29; // rax
+  unsigned int m_oppositeFace; // r8d
+  int m_startUserEdgeIndex; // edx
+  int v32; // ecx
+  int m_capacityAndFlags; // r8d
+  int *m_storage; // rdi
+  signed int v35; // ebx
+  hkLifoAllocator *v36; // rax
+  int v37; // r8d
+  __int64 m_size; // rdi
+  void **p_array; // r11
+  int v40; // r10d
+  __int64 v41; // rbx
+  __int64 v42; // r8
+  int v43; // ecx
+  __int64 v44; // r9
+  int *v45; // r14
+  signed int v46; // ebx
+  hkLifoAllocator *v47; // rax
+  int v48; // r8d
+  __int64 v49; // rbx
+  signed int v50; // r8d
+  __m128i si128; // xmm5
+  __int64 v52; // r9
+  __m128 v53; // xmm1
+  __m128 v54; // xmm2
+  float v55; // xmm4_4
+  __m128i v56; // xmm0
+  __m128i v57; // xmm0
+  __m128i v58; // xmm0
+  unsigned int v59; // eax
   __m128i v60; // xmm0
   __m128i v61; // xmm0
-  unsigned int v62; // eax
-  __m128i v63; // xmm0
-  __m128i v64; // xmm0
-  signed __int64 i; // rcx
-  unsigned int v66; // er14
-  __int64 v67; // rcx
-  hkArray<float,hkContainerHeapAllocator> *v68; // rbx
-  int v69; // eax
-  int v70; // eax
-  int v71; // er9
-  int v72; // er8
-  signed __int64 v73; // r8
-  int v74; // er9
-  int v75; // er8
-  int v76; // edx
-  __int64 v77; // r8
-  signed __int64 v78; // r8
-  hkArrayBase<int> *v79; // r9
-  int *v80; // rax
-  _QWORD *v81; // r9
-  unsigned __int64 v82; // r8
-  unsigned __int64 v83; // rax
-  int v85; // [rsp+30h] [rbp-69h]
-  hkgpCgoInternal::Set *pArr; // [rsp+38h] [rbp-61h]
-  int v87; // [rsp+40h] [rbp-59h]
-  int v88; // [rsp+44h] [rbp-55h]
-  signed int *array; // [rsp+48h] [rbp-51h]
-  int v90; // [rsp+50h] [rbp-49h]
-  int v91; // [rsp+54h] [rbp-45h]
-  hkArray<int,hkContainerHeapAllocator> elementsPerGroup; // [rsp+60h] [rbp-39h]
-  hkArray<int,hkContainerHeapAllocator> orderedGroups; // [rsp+70h] [rbp-29h]
-  hkFixedArray<int> parents; // [rsp+80h] [rbp-19h]
-  hkUnionFind v95; // [rsp+90h] [rbp-9h]
-  hkResult v96; // [rsp+F8h] [rbp+5Fh]
-  hkResult resulta; // [rsp+100h] [rbp+67h]
-  hkArrayBase<int> *v98; // [rsp+108h] [rbp+6Fh]
+  __m128i v62; // xmm0
+  __int64 i; // rcx
+  unsigned int v64; // r14d
+  __int64 v65; // rcx
+  hkArray<float,hkContainerHeapAllocator> *v66; // rbx
+  int v67; // eax
+  int v68; // eax
+  int v69; // r9d
+  int v70; // r8d
+  __int64 v71; // r8
+  int v72; // r8d
+  int v73; // edx
+  __int64 v74; // r8
+  __int64 v75; // r8
+  hkArrayBase<int> *v76; // r9
+  int *v77; // rax
+  _QWORD *v78; // r9
+  unsigned __int64 v79; // r8
+  unsigned __int64 v80; // rax
+  int v82; // [rsp+30h] [rbp-69h]
+  hkgpCgoInternal::Set *pArr; // [rsp+38h] [rbp-61h] BYREF
+  int v84; // [rsp+40h] [rbp-59h]
+  int v85; // [rsp+44h] [rbp-55h]
+  int *array; // [rsp+48h] [rbp-51h] BYREF
+  int v87; // [rsp+50h] [rbp-49h]
+  int v88; // [rsp+54h] [rbp-45h]
+  hkArray<int,hkContainerHeapAllocator> elementsPerGroup; // [rsp+60h] [rbp-39h] BYREF
+  hkArray<int,hkContainerHeapAllocator> orderedGroups; // [rsp+70h] [rbp-29h] BYREF
+  hkFixedArray<int> parents; // [rsp+80h] [rbp-19h] BYREF
+  hkUnionFind v92; // [rsp+90h] [rbp-9h] BYREF
+  hkResult v93; // [rsp+F8h] [rbp+5Fh] BYREF
+  hkResult resulta; // [rsp+100h] [rbp+67h] BYREF
+  hkArrayBase<int> *v95; // [rsp+108h] [rbp+6Fh]
 
-  v98 = regionsOut;
-  v6 = result;
+  v95 = regionsOut;
   v7 = regionsOut;
-  v8 = sortRegionsByArea;
-  v9 = (hkSimdFloat32 *)mesh;
-  v10 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v11 = (_QWORD *)v10[1];
-  v12 = v10;
-  if ( (unsigned __int64)v11 < v10[3] )
+  Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v11 = (_QWORD *)Value[1];
+  v12 = Value;
+  if ( (unsigned __int64)v11 < Value[3] )
   {
     *v11 = "TtcomputeRegions";
     v13 = __rdtsc();
-    v14 = (signed __int64)(v11 + 2);
-    *(_DWORD *)(v14 - 8) = v13;
+    v14 = v11 + 2;
+    *((_DWORD *)v14 - 2) = v13;
     v12[1] = v14;
   }
   v15 = 0i64;
-  v91 = 2147483648;
+  v88 = 0x80000000;
   array = 0i64;
-  v90 = 0;
-  if ( v8 )
+  v87 = 0;
+  if ( sortRegionsByArea )
   {
-    v16 = v9[1].m_real.m128_i32[2];
+    v16 = mesh[1].m_real.m128_i32[2];
     if ( v16 > 0 )
     {
-      v17 = v9[1].m_real.m128_i32[2];
-      if ( v16 < 0 )
-        v17 = 0;
-      hkArrayUtil::_reserve(&resulta, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, &array, v17, 4);
+      hkArrayUtil::_reserve(&resulta, &hkContainerTempAllocator::s_alloc, &array, mesh[1].m_real.m128_i32[2], 4);
       if ( resulta.m_enum )
       {
-        v18 = v91;
-        v6->m_enum = 1;
-        v90 = 0;
-        if ( v18 >= 0 )
-          hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-            (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-            array,
-            4 * v18);
+        v17 = v88;
+        result->m_enum = HK_FAILURE;
+        v87 = 0;
+        if ( v17 >= 0 )
+          hkContainerTempAllocator::s_alloc.vfptr->bufFree(&hkContainerTempAllocator::s_alloc, array, 4 * v17);
         array = 0i64;
-        v91 = 2147483648;
-        v19 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-        v20 = v19[1];
-        if ( v20 < v19[3] )
+        v88 = 0x80000000;
+        v18 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+        v19 = v18[1];
+        if ( v19 < v18[3] )
         {
-          *(_QWORD *)v20 = "Et";
-          v21 = __rdtsc();
-          *(_DWORD *)(v20 + 8) = v21;
-          v19[1] = v20 + 16;
+          *(_QWORD *)v19 = "Et";
+          v20 = __rdtsc();
+          *(_DWORD *)(v19 + 8) = v20;
+          v18[1] = v19 + 16;
         }
-        return v6;
+        return result;
       }
     }
-    v90 = v16;
+    v87 = v16;
   }
-  v22 = v9[1].m_real.m128_i32[2];
-  v85 = v22;
-  v23 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v24 = (int *)v23->m_cur;
-  v25 = (4 * v22 + 127) & 0xFFFFFF80;
-  v26 = (char *)v24 + v25;
-  if ( v25 > v23->m_slabSize || v26 > v23->m_end )
-    v24 = (int *)hkLifoAllocator::allocateFromNewSlab(v23, v25);
+  v21 = mesh[1].m_real.m128_i32[2];
+  v82 = v21;
+  v22 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  m_cur = (int *)v22->m_cur;
+  v24 = (4 * v21 + 127) & 0xFFFFFF80;
+  v25 = (char *)m_cur + v24;
+  if ( v24 > v22->m_slabSize || v25 > v22->m_end )
+    m_cur = (int *)hkLifoAllocator::allocateFromNewSlab(v22, v24);
   else
-    v23->m_cur = v26;
-  parents.m_data.m_storage = v24;
-  parents.m_size.m_storage = v22;
-  hkUnionFind::hkUnionFind(&v95, &parents, v22);
+    v22->m_cur = v25;
+  parents.m_data.m_storage = m_cur;
+  parents.m_size.m_storage = v21;
+  hkUnionFind::hkUnionFind(&v92, &parents, v21);
   elementsPerGroup.m_data = 0i64;
   elementsPerGroup.m_size = 0;
-  elementsPerGroup.m_capacityAndFlags = 2147483648;
+  elementsPerGroup.m_capacityAndFlags = 0x80000000;
   orderedGroups.m_data = 0i64;
   orderedGroups.m_size = 0;
-  orderedGroups.m_capacityAndFlags = 2147483648;
-  v95.m_isCollapsed = 0;
-  v27 = 0;
-  if ( v9[1].m_real.m128_i32[2] > 0 )
+  orderedGroups.m_capacityAndFlags = 0x80000000;
+  v92.m_isCollapsed = 0;
+  v26 = 0;
+  if ( mesh[1].m_real.m128_i32[2] > 0 )
   {
     do
     {
-      v28 = v9[1].m_real.m128_u64[0];
-      if ( *(_WORD *)(v15 + v28 + 10) <= 0 )
-        v29 = *(_DWORD *)(v15 + v28);
+      v27 = (hkaiNavMesh::Face *)mesh[1].m_real.m128_u64[0];
+      if ( v27[v15].m_numUserEdges <= 0 )
+        m_startEdgeIndex = v27[v15].m_startEdgeIndex;
       else
-        v29 = *(_DWORD *)(v15 + v28 + 4);
-      while ( v29 != -1 )
+        m_startEdgeIndex = v27[v15].m_startUserEdgeIndex;
+      while ( m_startEdgeIndex != -1 )
       {
-        v30 = v9[2].m_real.m128_u64[0];
-        if ( !(*(_BYTE *)(v30 + 20i64 * v29 + 16) & 0x40) )
+        v29 = (hkaiNavMesh::Edge *)mesh[2].m_real.m128_u64[0];
+        if ( (v29[m_startEdgeIndex].m_flags.m_storage & 0x40) == 0 )
         {
-          v31 = *(_DWORD *)(v30 + 20i64 * v29 + 12);
-          if ( v31 != -1 )
-            hkUnionFind::addEdge(&v95, v27, v31 & 0x3FFFFF);
+          m_oppositeFace = v29[m_startEdgeIndex].m_oppositeFace;
+          if ( m_oppositeFace != -1 )
+            hkUnionFind::addEdge(&v92, v26, m_oppositeFace & 0x3FFFFF);
         }
-        v32 = *(_DWORD *)(v15 + v28 + 4);
-        if ( v29 < v32 || v29 >= *(signed __int16 *)(v15 + v28 + 10) + v32 - 1 )
+        m_startUserEdgeIndex = v27[v15].m_startUserEdgeIndex;
+        if ( m_startEdgeIndex < m_startUserEdgeIndex
+          || m_startEdgeIndex >= v27[v15].m_numUserEdges + m_startUserEdgeIndex - 1 )
         {
-          if ( v29 == *(signed __int16 *)(v15 + v28 + 10) + v32 - 1 )
+          if ( m_startEdgeIndex == v27[v15].m_numUserEdges + m_startUserEdgeIndex - 1 )
           {
-            v29 = *(_DWORD *)(v15 + v28);
+            m_startEdgeIndex = v27[v15].m_startEdgeIndex;
           }
           else
           {
-            v33 = *(_DWORD *)(v15 + v28);
-            if ( v29 < v33 || v29 >= *(signed __int16 *)(v15 + v28 + 8) + v33 - 1 )
-              v29 = -1;
+            v32 = v27[v15].m_startEdgeIndex;
+            if ( m_startEdgeIndex < v32 || m_startEdgeIndex >= v27[v15].m_numEdges + v32 - 1 )
+              m_startEdgeIndex = -1;
             else
-              ++v29;
+              ++m_startEdgeIndex;
           }
         }
         else
         {
-          ++v29;
+          ++m_startEdgeIndex;
         }
       }
-      ++v27;
-      v15 += 16i64;
+      ++v26;
+      ++v15;
     }
-    while ( v27 < v9[1].m_real.m128_i32[2] );
-    v7 = v98;
-    LODWORD(v15) = 0;
+    while ( v26 < mesh[1].m_real.m128_i32[2] );
+    v7 = v95;
   }
-  hkUnionFind::assignGroups(&v95, &resulta, &elementsPerGroup);
-  if ( resulta.m_enum || (hkUnionFind::sortByGroupId(&v95, &v96, &elementsPerGroup, &orderedGroups), v96.m_enum) )
+  hkUnionFind::assignGroups(&v92, &resulta, &elementsPerGroup);
+  if ( resulta.m_enum || (hkUnionFind::sortByGroupId(&v92, &v93, &elementsPerGroup, &orderedGroups), v93.m_enum) )
   {
-    v34 = orderedGroups.m_capacityAndFlags;
-    orderedGroups.m_size = v15;
-    v6->m_enum = 1;
-    if ( v34 >= 0 )
+    m_capacityAndFlags = orderedGroups.m_capacityAndFlags;
+    orderedGroups.m_size = 0;
+    result->m_enum = HK_FAILURE;
+    if ( m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+        &hkContainerHeapAllocator::s_alloc,
         orderedGroups.m_data,
-        4 * v34);
+        4 * m_capacityAndFlags);
     elementsPerGroup.m_size = 0;
-    orderedGroups.m_capacityAndFlags = 2147483648;
+    orderedGroups.m_capacityAndFlags = 0x80000000;
     orderedGroups.m_data = 0i64;
     if ( elementsPerGroup.m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+        &hkContainerHeapAllocator::s_alloc,
         elementsPerGroup.m_data,
         4 * elementsPerGroup.m_capacityAndFlags);
     elementsPerGroup.m_data = 0i64;
-    v35 = parents.m_data.m_storage;
-    elementsPerGroup.m_capacityAndFlags = 2147483648;
-    v36 = (4 * parents.m_size.m_storage + 127) & 0xFFFFFF80;
-    v37 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v38 = (v36 + 15) & 0xFFFFFFF0;
-    if ( v36 > v37->m_slabSize || (char *)v35 + v38 != v37->m_cur || v37->m_firstNonLifoEnd == v35 )
-      hkLifoAllocator::slowBlockFree(v37, v35, v38);
+    m_storage = parents.m_data.m_storage;
+    elementsPerGroup.m_capacityAndFlags = 0x80000000;
+    v35 = (4 * parents.m_size.m_storage + 127) & 0xFFFFFF80;
+    v36 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    v37 = (v35 + 15) & 0xFFFFFFF0;
+    if ( v35 > v36->m_slabSize || (char *)m_storage + v37 != v36->m_cur || v36->m_firstNonLifoEnd == m_storage )
+      hkLifoAllocator::slowBlockFree(v36, m_storage, v37);
     else
-      v37->m_cur = v35;
-    goto LABEL_47;
+      v36->m_cur = m_storage;
+    goto LABEL_45;
   }
-  v39 = elementsPerGroup.m_size;
-  v40 = (void **)&array;
-  if ( !v8 )
-    v40 = (void **)&v7->m_data;
-  v41 = 0;
+  m_size = elementsPerGroup.m_size;
+  p_array = (void **)&array;
+  if ( !sortRegionsByArea )
+    p_array = (void **)&v7->m_data;
+  v40 = 0;
+  v41 = 0i64;
   v42 = 0i64;
-  v43 = 0i64;
   if ( elementsPerGroup.m_size > 0 )
   {
     do
     {
-      v44 = elementsPerGroup.m_data[v42];
-      if ( v44 > 0 )
+      v43 = elementsPerGroup.m_data[v41];
+      if ( v43 > 0 )
       {
-        v45 = (unsigned int)v44;
+        v44 = (unsigned int)v43;
         do
         {
-          *((_DWORD *)*v40 + orderedGroups.m_data[++v43 - 1]) = v41;
-          --v45;
+          *((_DWORD *)*p_array + orderedGroups.m_data[v42++]) = v40;
+          --v44;
         }
-        while ( v45 );
+        while ( v44 );
       }
-      ++v42;
       ++v41;
+      ++v40;
     }
-    while ( v42 < v39 );
+    while ( v41 < m_size );
   }
   orderedGroups.m_size = 0;
   if ( orderedGroups.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       orderedGroups.m_data,
       4 * orderedGroups.m_capacityAndFlags);
   orderedGroups.m_data = 0i64;
-  orderedGroups.m_capacityAndFlags = 2147483648;
+  orderedGroups.m_capacityAndFlags = 0x80000000;
   elementsPerGroup.m_size = 0;
   if ( elementsPerGroup.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       elementsPerGroup.m_data,
       4 * elementsPerGroup.m_capacityAndFlags);
   elementsPerGroup.m_data = 0i64;
-  v46 = parents.m_data.m_storage;
-  elementsPerGroup.m_capacityAndFlags = 2147483648;
-  v47 = (4 * parents.m_size.m_storage + 127) & 0xFFFFFF80;
-  v48 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v49 = (v47 + 15) & 0xFFFFFFF0;
-  if ( v47 > v48->m_slabSize || (char *)v46 + v49 != v48->m_cur || v48->m_firstNonLifoEnd == v46 )
-    hkLifoAllocator::slowBlockFree(v48, v46, v49);
+  v45 = parents.m_data.m_storage;
+  elementsPerGroup.m_capacityAndFlags = 0x80000000;
+  v46 = (4 * parents.m_size.m_storage + 127) & 0xFFFFFF80;
+  v47 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v48 = (v46 + 15) & 0xFFFFFFF0;
+  if ( v46 > v47->m_slabSize || (char *)v45 + v48 != v47->m_cur || v47->m_firstNonLifoEnd == v45 )
+    hkLifoAllocator::slowBlockFree(v47, v45, v48);
   else
-    v48->m_cur = v46;
-  v50 = 0i64;
-  v88 = 2147483648;
+    v47->m_cur = v45;
+  v49 = 0i64;
+  v85 = 0x80000000;
   pArr = 0i64;
-  v87 = 0;
-  if ( !v8 )
+  v84 = 0;
+  if ( !sortRegionsByArea )
   {
-LABEL_112:
-    v80 = numRegionsOut;
-    v6->m_enum = v50;
-    *v80 = v39;
-    goto LABEL_113;
+LABEL_105:
+    v77 = numRegionsOut;
+    result->m_enum = HK_SUCCESS;
+    *v77 = m_size;
+    goto LABEL_106;
   }
-  if ( (signed int)v39 <= 0 )
-    goto LABEL_123;
-  v51 = v39;
-  if ( (signed int)v39 < 0 )
-    v51 = 0;
-  hkArrayUtil::_reserve(&resulta, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, &pArr, v51, 8);
-  if ( resulta.m_enum == HK_SUCCESS )
+  if ( (int)m_size <= 0
+    || (hkArrayUtil::_reserve(&resulta, &hkContainerTempAllocator::s_alloc, &pArr, m_size, 8),
+        resulta.m_enum == HK_SUCCESS) )
   {
-LABEL_123:
-    v87 = v39;
-    v52 = 0;
-    if ( (signed int)v39 > 0 && (unsigned int)v39 >= 8 )
+    v84 = m_size;
+    v50 = 0;
+    if ( (int)m_size >= 8 )
     {
-      v53 = _mm_load_si128((const __m128i *)&_xmm);
-      v54 = 0i64;
-      v55 = 0i64;
-      v56 = _mm_shuffle_ps(v54, v54, 229);
-      v57 = _mm_unpackhi_ps(v56, v56);
-      LODWORD(v58) = (unsigned __int128)_mm_unpackhi_ps(v57, v57);
+      si128 = _mm_load_si128((const __m128i *)&_xmm);
+      v52 = 0i64;
+      v53 = _mm_shuffle_ps((__m128)0i64, (__m128)0i64, 229);
+      v54 = _mm_unpackhi_ps(v53, v53);
+      LODWORD(v55) = _mm_unpackhi_ps(v54, v54).m128_u32[0];
       do
       {
-        v59 = v52;
-        v55 += 8i64;
-        pArr[v59].m_error = 0.0;
-        v60 = _mm_add_epi32(_mm_shuffle_epi32(_mm_cvtsi32_si128(v52), 0), v53);
-        LODWORD(pArr[v59 + 1].m_error) = v56.m128_i32[0];
-        LODWORD(pArr[v59 + 2].m_error) = v57.m128_i32[0];
-        pArr[v59 + 3].m_error = v58;
-        *((_DWORD *)&pArr[v55 - 7] - 1) = _mm_cvtsi128_si32(v60);
+        v52 += 8i64;
+        pArr[v50].m_error = 0.0;
+        v56 = _mm_add_epi32(_mm_shuffle_epi32(_mm_cvtsi32_si128(v50), 0), si128);
+        LODWORD(pArr[v50 + 1].m_error) = v53.m128_i32[0];
+        LODWORD(pArr[v50 + 2].m_error) = v54.m128_i32[0];
+        pArr[v50 + 3].m_error = v55;
+        *((_DWORD *)&pArr[v52 - 7] - 1) = _mm_cvtsi128_si32(v56);
+        v57 = _mm_srli_si128(v56, 4);
+        *((_DWORD *)&pArr[v52 - 6] - 1) = _mm_cvtsi128_si32(v57);
+        v58 = _mm_srli_si128(v57, 4);
+        *((_DWORD *)&pArr[v52 - 5] - 1) = _mm_cvtsi128_si32(v58);
+        *((_DWORD *)&pArr[v52 - 4] - 1) = _mm_cvtsi128_si32(_mm_srli_si128(v58, 4));
+        pArr[v50 + 4].m_error = 0.0;
+        LODWORD(pArr[v50 + 5].m_error) = v53.m128_i32[0];
+        LODWORD(pArr[v50 + 6].m_error) = v54.m128_i32[0];
+        pArr[v50 + 7].m_error = v55;
+        v59 = v50 + 4;
+        v50 += 8;
+        v60 = _mm_add_epi32(_mm_shuffle_epi32(_mm_cvtsi32_si128(v59), 0), si128);
+        *((_DWORD *)&pArr[v52 - 3] - 1) = _mm_cvtsi128_si32(v60);
         v61 = _mm_srli_si128(v60, 4);
-        *((_DWORD *)&pArr[v55 - 6] - 1) = _mm_cvtsi128_si32(v61);
-        *((_DWORD *)&pArr[v55 - 5] - 1) = _mm_cvtsi128_si32(v61);
-        *((_DWORD *)&pArr[v55 - 4] - 1) = _mm_cvtsi128_si32(v61);
-        pArr[v59 + 4].m_error = 0.0;
-        LODWORD(pArr[v59 + 5].m_error) = v56.m128_i32[0];
-        LODWORD(pArr[v59 + 6].m_error) = v57.m128_i32[0];
-        pArr[v59 + 7].m_error = v58;
-        v62 = v52 + 4;
-        v52 += 8;
-        v63 = _mm_add_epi32(_mm_shuffle_epi32(_mm_cvtsi32_si128(v62), 0), v53);
-        *((_DWORD *)&pArr[v55 - 3] - 1) = _mm_cvtsi128_si32(v63);
-        v64 = _mm_srli_si128(v63, 4);
-        *((_DWORD *)&pArr[v55 - 2] - 1) = _mm_cvtsi128_si32(v64);
-        *((_DWORD *)&pArr[v55 - 1] - 1) = _mm_cvtsi128_si32(v64);
-        *((_DWORD *)&pArr[v55] - 1) = _mm_cvtsi128_si32(v64);
+        *((_DWORD *)&pArr[v52 - 2] - 1) = _mm_cvtsi128_si32(v61);
+        v62 = _mm_srli_si128(v61, 4);
+        *((_DWORD *)&pArr[v52 - 1] - 1) = _mm_cvtsi128_si32(v62);
+        pArr[v52 - 1].m_index = _mm_cvtsi128_si32(_mm_srli_si128(v62, 4));
       }
-      while ( v52 < (signed int)v39 - (signed int)v39 % 8 );
+      while ( v50 < (int)(m_size - (m_size & 0x80000007)) );
     }
-    for ( i = v52; i < v39; ++v52 )
-    {
-      pArr[++i - 1].m_error = 0.0;
-      *((_DWORD *)&pArr[i] - 1) = v52;
-    }
-    v66 = 0;
-    if ( v85 > 0i64 )
+    for ( i = v50; i < m_size; pArr[i - 1].m_index = v50++ )
+      pArr[i++].m_error = 0.0;
+    v64 = 0;
+    if ( v82 > 0 )
     {
       do
       {
         hkaiNavMeshUtils::calcFaceNormal<hkaiNavMesh>(
           (hkaiNavMeshUtils *)&parents,
-          v9,
-          (hkaiNavMesh *)v66,
-          (__int64)&elementsPerGroup);
-        v67 = array[++v50 - 1];
-        ++v66;
-        pArr[v67].m_error = *(float *)&parents.m_data.m_storage + pArr[v67].m_error;
+          mesh,
+          (hkaiNavMesh *)v64,
+          (__m128 *)&elementsPerGroup);
+        v65 = array[v49++];
+        ++v64;
+        pArr[v65].m_error = *(float *)&parents.m_data.m_storage + pArr[v65].m_error;
       }
-      while ( v50 < v85 );
+      while ( v49 < v82 );
     }
-    if ( v87 > 1 )
+    if ( v84 > 1 )
       hkAlgorithm::quickSortRecursive<hkgpCgoInternal::Set,hkAlgorithm::greater<hkgpCgoInternal::Set>>(
         pArr,
         0,
-        v87 - 1,
+        v84 - 1,
         0);
-    v68 = areasOut;
+    v66 = areasOut;
     if ( areasOut )
     {
-      v69 = areasOut->m_capacityAndFlags & 0x3FFFFFFF;
-      if ( v69 >= (signed int)v39 )
+      v67 = areasOut->m_capacityAndFlags & 0x3FFFFFFF;
+      if ( v67 >= (int)m_size )
       {
-        resulta.m_enum = 0;
+        resulta.m_enum = HK_SUCCESS;
       }
       else
       {
-        v70 = 2 * v69;
-        v71 = v39;
-        if ( (signed int)v39 < v70 )
-          v71 = v70;
-        hkArrayUtil::_reserve(&resulta, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, areasOut, v71, 4);
+        v68 = 2 * v67;
+        v69 = m_size;
+        if ( (int)m_size < v68 )
+          v69 = v68;
+        hkArrayUtil::_reserve(&resulta, &hkContainerHeapAllocator::s_alloc, areasOut, v69, 4);
         if ( resulta.m_enum )
         {
-          v72 = v88;
-          v6->m_enum = 1;
-          v87 = 0;
-          if ( v72 >= 0 )
-            hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-              (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-              pArr,
-              8 * v72);
+          v70 = v85;
+          result->m_enum = HK_FAILURE;
+          v84 = 0;
+          if ( v70 >= 0 )
+            hkContainerTempAllocator::s_alloc.vfptr->bufFree(&hkContainerTempAllocator::s_alloc, pArr, 8 * v70);
           pArr = 0i64;
-          v88 = 2147483648;
-LABEL_47:
-          v90 = 0;
-          if ( v91 >= 0 )
-            hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-              (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-              array,
-              4 * v91);
+          v85 = 0x80000000;
+LABEL_45:
+          v87 = 0;
+          if ( v88 >= 0 )
+            hkContainerTempAllocator::s_alloc.vfptr->bufFree(&hkContainerTempAllocator::s_alloc, array, 4 * v88);
           array = 0i64;
-          goto LABEL_118;
+          goto LABEL_111;
         }
       }
-      v68->m_size = v39;
-      v73 = 0i64;
-      if ( v39 >= 4 )
+      v66->m_size = m_size;
+      v71 = 0i64;
+      if ( m_size >= 4 )
       {
         do
         {
-          v73 += 4i64;
-          v68->m_data[v73 - 4] = pArr[v73 - 4].m_error;
-          v68->m_data[v73 - 3] = pArr[v73 - 3].m_error;
-          v68->m_data[v73 - 2] = pArr[v73 - 2].m_error;
-          v68->m_data[v73 - 1] = pArr[v73 - 1].m_error;
+          v71 += 4i64;
+          v66->m_data[v71 - 4] = pArr[v71 - 4].m_error;
+          v66->m_data[v71 - 3] = pArr[v71 - 3].m_error;
+          v66->m_data[v71 - 2] = pArr[v71 - 2].m_error;
+          v66->m_data[v71 - 1] = pArr[v71 - 1].m_error;
         }
-        while ( v73 < v39 - 3 );
+        while ( v71 < m_size - 3 );
       }
-      for ( ; v73 < v39; v68->m_data[v73 - 1] = pArr[v73 - 1].m_error )
-        ++v73;
+      for ( ; v71 < m_size; v66->m_data[v71 - 1] = pArr[v71 - 1].m_error )
+        ++v71;
     }
-    LODWORD(v50) = 0;
-    orderedGroups.m_capacityAndFlags = 2147483648;
+    orderedGroups.m_capacityAndFlags = 0x80000000;
     orderedGroups.m_data = 0i64;
     orderedGroups.m_size = 0;
-    if ( (signed int)v39 <= 0 )
+    if ( (int)m_size <= 0 )
     {
-      resulta.m_enum = 0;
+      resulta.m_enum = HK_SUCCESS;
     }
     else
     {
-      v74 = v39;
-      if ( (signed int)v39 < 0 )
-        v74 = 0;
-      hkArrayUtil::_reserve(
-        &resulta,
-        (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr,
-        &orderedGroups,
-        v74,
-        4);
+      hkArrayUtil::_reserve(&resulta, &hkContainerTempAllocator::s_alloc, &orderedGroups, m_size, 4);
       if ( resulta.m_enum )
       {
-        v75 = orderedGroups.m_capacityAndFlags;
-        v6->m_enum = 1;
+        v72 = orderedGroups.m_capacityAndFlags;
+        result->m_enum = HK_FAILURE;
         orderedGroups.m_size = 0;
-        if ( v75 >= 0 )
+        if ( v72 >= 0 )
           hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-            (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
+            &hkContainerTempAllocator::s_alloc,
             orderedGroups.m_data,
-            4 * v75);
+            4 * v72);
         orderedGroups.m_data = 0i64;
-        orderedGroups.m_capacityAndFlags = 2147483648;
-        goto LABEL_113;
+        orderedGroups.m_capacityAndFlags = 0x80000000;
+        goto LABEL_106;
       }
     }
-    orderedGroups.m_size = v39;
-    v76 = 0;
-    if ( (signed int)v39 > 0 )
+    orderedGroups.m_size = m_size;
+    v73 = 0;
+    if ( (int)m_size > 0 )
     {
-      v77 = 0i64;
+      v74 = 0i64;
       do
-      {
-        ++v77;
-        orderedGroups.m_data[*((signed int *)&pArr[v77] - 1)] = v76++;
-      }
-      while ( v76 < orderedGroups.m_size );
+        orderedGroups.m_data[pArr[v74++].m_index] = v73++;
+      while ( v73 < orderedGroups.m_size );
     }
-    v78 = 0i64;
-    if ( v85 > 0i64 )
+    v75 = 0i64;
+    if ( v82 > 0i64 )
     {
-      v79 = v98;
+      v76 = v95;
       do
       {
-        ++v78;
-        v79->m_data[v78 - 1] = orderedGroups.m_data[array[v78 - 1]];
+        ++v75;
+        v76->m_data[v75 - 1] = orderedGroups.m_data[array[v75 - 1]];
       }
-      while ( v78 < v85 );
+      while ( v75 < v82 );
     }
     orderedGroups.m_size = 0;
     if ( orderedGroups.m_capacityAndFlags >= 0 )
       hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
+        &hkContainerTempAllocator::s_alloc,
         orderedGroups.m_data,
         4 * orderedGroups.m_capacityAndFlags);
-    goto LABEL_112;
+    goto LABEL_105;
   }
-  v6->m_enum = 1;
-LABEL_113:
-  v87 = v50;
-  if ( v88 >= 0 )
-    hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-      pArr,
-      8 * v88);
+  result->m_enum = HK_FAILURE;
+LABEL_106:
+  v84 = 0;
+  if ( v85 >= 0 )
+    hkContainerTempAllocator::s_alloc.vfptr->bufFree(&hkContainerTempAllocator::s_alloc, pArr, 8 * v85);
   pArr = 0i64;
-  v88 = 2147483648;
-  v90 = 0;
-  if ( v91 >= 0 )
-    hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-      array,
-      4 * v91);
+  v85 = 0x80000000;
+  v87 = 0;
+  if ( v88 >= 0 )
+    hkContainerTempAllocator::s_alloc.vfptr->bufFree(&hkContainerTempAllocator::s_alloc, array, 4 * v88);
   array = 0i64;
-LABEL_118:
-  v91 = 2147483648;
-  v81 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v82 = v81[1];
-  if ( v82 < v81[3] )
+LABEL_111:
+  v88 = 0x80000000;
+  v78 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v79 = v78[1];
+  if ( v79 < v78[3] )
   {
-    v83 = __rdtsc();
-    *(_DWORD *)(v82 + 8) = v83;
-    *(_QWORD *)v82 = "Et";
-    v81[1] = v82 + 16;
+    v80 = __rdtsc();
+    *(_DWORD *)(v79 + 8) = v80;
+    *(_QWORD *)v79 = "Et";
+    v78[1] = v79 + 16;
   }
-  return v6;
-} < v81[3] )
-  {
-    v83 = __rdtsc();
-    *(_DWORD *)(v82 + 8) = v83;
-    *(_QWORD *)v82 = "Et";
-    v81[1] = v82 + 16;
-  }
-  return v6;
+  return result;
 }
 

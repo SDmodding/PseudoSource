@@ -2,53 +2,51 @@
 // RVA: 0xD82ED0
 void __fastcall hkpWorldMemoryUtil::watchHeapMemory(hkpWorld *world)
 {
-  hkpWorld *v1; // rdi
-  hkWorldMemoryAvailableWatchDog *v2; // rax
+  hkWorldMemoryAvailableWatchDog *MemoryWatchDog; // rax
   int v3; // ebx
-  hkMemorySystem *v4; // rax
-  _QWORD *v5; // r8
+  hkMemorySystem *Instance; // rax
+  _QWORD *Value; // r8
   _QWORD *v6; // rcx
   unsigned __int64 v7; // rax
-  signed __int64 v8; // rcx
+  _QWORD *v8; // rcx
   hkWorldMemoryAvailableWatchDog *v9; // rax
   _QWORD *v10; // r8
   _QWORD *v11; // rcx
   unsigned __int64 v12; // rax
-  signed __int64 v13; // rcx
+  _QWORD *v13; // rcx
 
-  v1 = world;
   if ( hkpWorld::getMemoryWatchDog(world) )
   {
-    v2 = hkpWorld::getMemoryWatchDog(v1);
-    v3 = ((__int64 (__fastcall *)(hkWorldMemoryAvailableWatchDog *))v2->vfptr[1].__first_virtual_table_function__)(v2);
-    v4 = hkMemorySystem::getInstance();
-    if ( !v4->vfptr->heapCanAllocTotal(v4, v3) )
+    MemoryWatchDog = hkpWorld::getMemoryWatchDog(world);
+    v3 = ((__int64 (__fastcall *)(hkWorldMemoryAvailableWatchDog *))MemoryWatchDog->vfptr[1].__first_virtual_table_function__)(MemoryWatchDog);
+    Instance = hkMemorySystem::getInstance();
+    if ( !Instance->vfptr->heapCanAllocTotal(Instance, v3) )
     {
-      v5 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-      v6 = (_QWORD *)v5[1];
-      if ( (unsigned __int64)v6 < v5[3] )
+      Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+      v6 = (_QWORD *)Value[1];
+      if ( (unsigned __int64)v6 < Value[3] )
       {
         *v6 = "TtWatchDog:FreeMem";
         v7 = __rdtsc();
-        v8 = (signed __int64)(v6 + 2);
-        *(_DWORD *)(v8 - 8) = v7;
-        v5[1] = v8;
+        v8 = v6 + 2;
+        *((_DWORD *)v8 - 2) = v7;
+        Value[1] = v8;
       }
-      v9 = hkpWorld::getMemoryWatchDog(v1);
-      v9->vfptr[2].__vecDelDtor((hkBaseObject *)&v9->vfptr, (unsigned int)v1);
+      v9 = hkpWorld::getMemoryWatchDog(world);
+      v9->vfptr[2].__vecDelDtor(v9, (unsigned int)world);
       v10 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
       v11 = (_QWORD *)v10[1];
       if ( (unsigned __int64)v11 < v10[3] )
       {
         *v11 = "Et";
         v12 = __rdtsc();
-        v13 = (signed __int64)(v11 + 2);
-        *(_DWORD *)(v13 - 8) = v12;
+        v13 = v11 + 2;
+        *((_DWORD *)v13 - 2) = v12;
         v10[1] = v13;
       }
     }
     if ( hkOutOfMemoryState )
-      hkSetOutOfMemoryState(0);
+      hkSetOutOfMemoryState(MEMORY_STATE_OK);
   }
 }
 
@@ -56,114 +54,103 @@ void __fastcall hkpWorldMemoryUtil::watchHeapMemory(hkpWorld *world)
 // RVA: 0xD82FD0
 void __fastcall hkpWorldMemoryUtil::checkMemoryForIntegration(hkpWorld *world)
 {
-  hkpWorld *v1; // rbx
-  unsigned int v2; // er14
+  unsigned int m_minDesiredIslandSize; // r14d
   unsigned int v3; // ebp
-  hkMemorySystem *v4; // rax
-  hkpSimulationIsland *v5; // rax
-  char i; // cl
-  int v7; // esi
-  hkpSimulationIsland *v8; // rdi
-  bool v9; // zf
-  hkMemorySystem *v10; // rax
-  hkpSimulationIsland *v11; // rdi
-  hkWorldMemoryAvailableWatchDog *v12; // rax
-  hkMemorySystem *v13; // rax
-  hkWorldMemoryAvailableWatchDog::MemUsageInfo infoOut; // [rsp+20h] [rbp-18h]
+  hkMemorySystem *Instance; // rax
+  hkpSimulationIsland *m_largestSimulationIsland; // rax
+  int m_maxRuntimeBlockSize; // esi
+  hkpSimulationIsland *v7; // rdi
+  bool v8; // zf
+  hkMemorySystem *v9; // rax
+  hkpSimulationIsland *v10; // rdi
+  hkWorldMemoryAvailableWatchDog *MemoryWatchDog; // rax
+  hkMemorySystem *v12; // rax
+  hkWorldMemoryAvailableWatchDog::MemUsageInfo infoOut; // [rsp+20h] [rbp-18h] BYREF
 
-  v1 = world;
   hkpWorld::lock(world);
-  v2 = v1->m_minDesiredIslandSize;
+  m_minDesiredIslandSize = world->m_minDesiredIslandSize;
   v3 = 0;
-  hkpWorld::calcRequiredSolverBufferSize(v1, &infoOut);
-  v4 = hkMemorySystem::getInstance();
-  if ( !v4->vfptr->solverCanAllocSingleBlock(v4, infoOut.m_maxRuntimeBlockSize) )
+  hkpWorld::calcRequiredSolverBufferSize(world, &infoOut);
+  Instance = hkMemorySystem::getInstance();
+  if ( !Instance->vfptr->solverCanAllocSingleBlock(Instance, infoOut.m_maxRuntimeBlockSize) )
   {
     do
     {
-      v5 = infoOut.m_largestSimulationIsland;
+      m_largestSimulationIsland = infoOut.m_largestSimulationIsland;
       ++v3;
-      for ( i = (*((_BYTE *)infoOut.m_largestSimulationIsland + 49) >> 2) & 3; i; i = (*((_BYTE *)v5 + 49) >> 2) & 3 )
+      if ( ((*((_BYTE *)infoOut.m_largestSimulationIsland + 49) >> 2) & 3) != 0 )
       {
-        v7 = infoOut.m_maxRuntimeBlockSize;
-        v8 = v5;
-        if ( i )
+        do
         {
+          m_maxRuntimeBlockSize = infoOut.m_maxRuntimeBlockSize;
+          v7 = m_largestSimulationIsland;
           while ( 1 )
           {
-            v9 = v1->m_minDesiredIslandSize == 0;
-            if ( !v1->m_minDesiredIslandSize )
+            v8 = world->m_minDesiredIslandSize == 0;
+            if ( !world->m_minDesiredIslandSize )
               break;
-            hkpWorldOperationUtil::splitSimulationIsland(v1, v8);
-            hkpWorld::calcRequiredSolverBufferSize(v1, &infoOut);
-            v5 = infoOut.m_largestSimulationIsland;
-            if ( infoOut.m_largestSimulationIsland == v8 && infoOut.m_maxRuntimeBlockSize == v7 )
+            hkpWorldOperationUtil::splitSimulationIsland((hkArray<hkpEntity *,hkContainerHeapAllocator> *)world, v7);
+            hkpWorld::calcRequiredSolverBufferSize(world, &infoOut);
+            m_largestSimulationIsland = infoOut.m_largestSimulationIsland;
+            if ( infoOut.m_largestSimulationIsland == v7 && infoOut.m_maxRuntimeBlockSize == m_maxRuntimeBlockSize )
             {
-              v1->m_minDesiredIslandSize >>= 1;
-              if ( *((_BYTE *)v5 + 49) & 0xC )
+              world->m_minDesiredIslandSize >>= 1;
+              if ( (*((_BYTE *)m_largestSimulationIsland + 49) & 0xC) != 0 )
                 continue;
             }
-            goto LABEL_8;
+            v8 = world->m_minDesiredIslandSize == 0;
+            break;
           }
         }
-        else
-        {
-LABEL_8:
-          v9 = v1->m_minDesiredIslandSize == 0;
-        }
-        if ( v9 )
-          break;
+        while ( !v8 && ((*((_BYTE *)m_largestSimulationIsland + 49) >> 2) & 3) != 0 );
       }
-      v10 = hkMemorySystem::getInstance();
-      if ( !v10->vfptr->solverCanAllocSingleBlock(v10, infoOut.m_maxRuntimeBlockSize) )
+      v9 = hkMemorySystem::getInstance();
+      if ( !v9->vfptr->solverCanAllocSingleBlock(v9, infoOut.m_maxRuntimeBlockSize) )
       {
-        v11 = infoOut.m_largestSimulationIsland;
-        if ( (unsigned __int8)hkpSimulationIsland::isFullyConnected(infoOut.m_largestSimulationIsland)
-          || !v1->m_minDesiredIslandSize )
+        v10 = infoOut.m_largestSimulationIsland;
+        if ( hkpSimulationIsland::isFullyConnected(infoOut.m_largestSimulationIsland) || !world->m_minDesiredIslandSize )
         {
-          v12 = hkpWorld::getMemoryWatchDog(v1);
-          ((void (__fastcall *)(hkWorldMemoryAvailableWatchDog *, hkWorldMemoryAvailableWatchDog::MemUsageInfo *, _QWORD))v12->vfptr[2].__first_virtual_table_function__)(
-            v12,
+          MemoryWatchDog = hkpWorld::getMemoryWatchDog(world);
+          ((void (__fastcall *)(hkWorldMemoryAvailableWatchDog *, hkWorldMemoryAvailableWatchDog::MemUsageInfo *, _QWORD))MemoryWatchDog->vfptr[2].__first_virtual_table_function__)(
+            MemoryWatchDog,
             &infoOut,
             v3);
-          hkpWorld::calcRequiredSolverBufferSize(v1, &infoOut);
+          hkpWorld::calcRequiredSolverBufferSize(world, &infoOut);
         }
         else
         {
-          *((_BYTE *)v11 + 49) &= 0xF7u;
-          *((_BYTE *)v11 + 49) |= 4u;
+          *((_BYTE *)v10 + 49) &= ~8u;
+          *((_BYTE *)v10 + 49) |= 4u;
         }
       }
-      v13 = hkMemorySystem::getInstance();
+      v12 = hkMemorySystem::getInstance();
     }
-    while ( !v13->vfptr->solverCanAllocSingleBlock(v13, infoOut.m_maxRuntimeBlockSize) );
+    while ( !v12->vfptr->solverCanAllocSingleBlock(v12, infoOut.m_maxRuntimeBlockSize) );
   }
-  v1->m_minDesiredIslandSize = v2;
-  hkpWorld::unlock(v1);
+  world->m_minDesiredIslandSize = m_minDesiredIslandSize;
+  hkpWorld::unlock(world);
 }
 
 // File Line: 108
 // RVA: 0xD83150
 void __fastcall hkpWorldMemoryUtil::tryToRecoverFromMemoryErrors(hkpWorld *world)
 {
-  hkpWorld *v1; // rdi
-  signed int v2; // ebx
-  signed int v3; // eax
-  hkWorldMemoryAvailableWatchDog *v4; // rax
+  int v2; // ebx
+  int v3; // eax
+  hkWorldMemoryAvailableWatchDog *MemoryWatchDog; // rax
 
-  v1 = world;
   if ( hkpWorld::getMemoryWatchDog(world) )
   {
     v2 = 10;
-    while ( v1->m_simulation->m_previousStepResult )
+    while ( world->m_simulation->m_previousStepResult )
     {
       v3 = v2--;
       if ( v3 <= 0 )
         break;
-      v4 = hkpWorld::getMemoryWatchDog(v1);
-      v4->vfptr[2].__vecDelDtor((hkBaseObject *)&v4->vfptr, (unsigned int)v1);
-      hkSetOutOfMemoryState(0);
-      hkpWorldMemoryUtil::repeatCollideAndToiHandling(v1);
+      MemoryWatchDog = hkpWorld::getMemoryWatchDog(world);
+      MemoryWatchDog->vfptr[2].__vecDelDtor(MemoryWatchDog, (unsigned int)world);
+      hkSetOutOfMemoryState(MEMORY_STATE_OK);
+      hkpWorldMemoryUtil::repeatCollideAndToiHandling(world);
     }
   }
 }
@@ -172,18 +159,16 @@ void __fastcall hkpWorldMemoryUtil::tryToRecoverFromMemoryErrors(hkpWorld *world
 // RVA: 0xD831C0
 void __fastcall hkpWorldMemoryUtil::repeatCollideAndToiHandling(hkpWorld *world)
 {
-  hkpWorld *v1; // rbx
-  hkpSimulation *v2; // rcx
+  hkpSimulation *m_simulation; // rcx
   hkpSimulation *v3; // rcx
-  unsigned int v4; // eax
+  unsigned int m_previousStepResult; // eax
 
-  v1 = world;
-  v2 = world->m_simulation;
-  if ( !(v2->m_previousStepResult & 0xFFFFFFFD) )
-    ((void (*)(void))v2->vfptr[2].__first_virtual_table_function__)();
-  v3 = v1->m_simulation;
-  v4 = v3->m_previousStepResult;
-  if ( !v4 || v4 == 3 )
-    ((void (*)(void))v3->vfptr[3].__vecDelDtor)();
+  m_simulation = world->m_simulation;
+  if ( (m_simulation->m_previousStepResult & 0xFFFFFFFD) == 0 )
+    m_simulation->vfptr[2].__first_virtual_table_function__(m_simulation);
+  v3 = world->m_simulation;
+  m_previousStepResult = v3->m_previousStepResult;
+  if ( !m_previousStepResult || m_previousStepResult == 3 )
+    ((void (__fastcall *)(hkpSimulation *))v3->vfptr[3].__vecDelDtor)(v3);
 }
 

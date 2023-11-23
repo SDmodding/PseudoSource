@@ -2,7 +2,7 @@
 // RVA: 0x14AEAC0
 __int64 dynamic_initializer_for__UFG::BehaviourControllerComponent::s_BehaviourControllerComponentList__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::BehaviourControllerComponent::s_BehaviourControllerComponentList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::BehaviourControllerComponent::s_BehaviourControllerComponentList__);
 }
 
 // File Line: 18
@@ -14,115 +14,107 @@ const char *__fastcall UFG::BehaviourControllerComponent::GetTypeName(UFG::Behav
 
 // File Line: 25
 // RVA: 0x37EB40
-UFG::BehaviourControllerComponent *__fastcall UFG::BehaviourControllerComponent::PropertiesOnActivateNew(UFG::SceneObjectProperties *pSceneObj, bool required)
+UFG::BehaviourControllerComponent *__fastcall UFG::BehaviourControllerComponent::PropertiesOnActivateNew(
+        UFG::SceneObjectProperties *pSceneObj,
+        bool required)
 {
-  bool v2; // si
-  UFG::SceneObjectProperties *v3; // rbx
-  UFG::qPropertySet *v4; // rcx
+  UFG::qPropertySet *mpWritableProperties; // rcx
   UFG::qPropertySet *v5; // rax
-  UFG::BehaviourControllerComponent *v6; // rdi
+  UFG::SimComponent *v6; // rdi
   UFG::BehaviourControllerComponent *result; // rax
   const char *v8; // rsi
-  UFG::qMemoryPool *v9; // rax
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
   UFG::allocator::free_link *v10; // rax
-  UFG::BehaviourControllerComponent *v11; // rax
-  UFG::SimObject *v12; // rdx
-  unsigned __int16 v13; // cx
+  UFG::SimComponent *v11; // rax
+  UFG::SimObject *m_pSimObject; // rdx
+  __int16 m_Flags; // cx
   unsigned int v14; // ebx
-  UFG::SimObjectModifier v15; // [rsp+38h] [rbp-30h]
+  UFG::SimObjectModifier v15; // [rsp+38h] [rbp-30h] BYREF
 
-  v2 = required;
-  v3 = pSceneObj;
-  v4 = pSceneObj->mpWritableProperties;
-  if ( !v4 )
-    v4 = v3->mpConstProperties;
+  mpWritableProperties = pSceneObj->mpWritableProperties;
+  if ( !mpWritableProperties )
+    mpWritableProperties = pSceneObj->mpConstProperties;
   v5 = UFG::qPropertySet::Get<UFG::qPropertySet>(
-         v4,
-         (UFG::qSymbol *)&component_AIActionTree::sPropertyName.mUID,
+         mpWritableProperties,
+         (UFG::qArray<unsigned long,0> *)&component_AIActionTree::sPropertyName,
          DEPTH_RECURSE);
   v6 = 0i64;
   if ( v5 )
     result = (UFG::BehaviourControllerComponent *)UFG::qPropertySet::GetMemImagePtr(v5);
   else
     result = 0i64;
-  if ( v2 || result )
+  if ( required || result )
   {
-    v8 = (char *)result->vfptr + (unsigned __int64)result;
-    if ( !result->vfptr )
+    v8 = (char *)result->UFG::AIActionTreeComponent::UFG::StateComponentI<UFG::SimComponent>::UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr
+       + (unsigned __int64)result;
+    if ( !result->UFG::AIActionTreeComponent::UFG::StateComponentI<UFG::SimComponent>::UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr )
       v8 = 0i64;
-    v9 = UFG::GetSimulationMemoryPool();
-    v10 = UFG::qMemoryPool::Allocate(v9, 0x6C0ui64, "BehaviourControllerComponent", 0i64, 1u);
+    SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+    v10 = UFG::qMemoryPool::Allocate(SimulationMemoryPool, 0x6C0ui64, "BehaviourControllerComponent", 0i64, 1u);
     if ( v10 )
     {
       UFG::BehaviourControllerComponent::BehaviourControllerComponent(
         (UFG::BehaviourControllerComponent *)v10,
-        v3->m_NameUID,
+        pSceneObj->m_NameUID,
         v8);
       v6 = v11;
     }
-    v12 = v3->m_pSimObject;
-    v13 = v12->m_Flags;
-    if ( (v13 >> 14) & 1 || (v13 & 0x8000u) != 0 )
+    m_pSimObject = pSceneObj->m_pSimObject;
+    m_Flags = m_pSimObject->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
       v14 = 19;
     else
       v14 = -1;
-    UFG::SimObjectModifier::SimObjectModifier(&v15, v12, 1);
-    UFG::SimObjectModifier::AttachComponent(&v15, (UFG::SimComponent *)&v6->vfptr, v14);
+    UFG::SimObjectModifier::SimObjectModifier(&v15, m_pSimObject, 1);
+    UFG::SimObjectModifier::AttachComponent(&v15, v6, v14);
     UFG::SimObjectModifier::Close(&v15);
     UFG::SimObjectModifier::~SimObjectModifier(&v15);
-    result = v6;
+    return (UFG::BehaviourControllerComponent *)v6;
   }
   return result;
 }
 
 // File Line: 49
 // RVA: 0x32CE90
-void __fastcall UFG::BehaviourControllerComponent::BehaviourControllerComponent(UFG::BehaviourControllerComponent *this, unsigned int name_uid, const char *actName)
+void __fastcall UFG::BehaviourControllerComponent::BehaviourControllerComponent(
+        UFG::BehaviourControllerComponent *this,
+        unsigned int name_uid,
+        const char *actName)
 {
-  UFG::BehaviourControllerComponent *v3; // rbx
-  UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> *v4; // rdx
-  UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> *v5; // rax
-  UFG::qList<UFG::Behaviour,UFG::Behaviour,1,0> *v6; // [rsp+58h] [rbp+20h]
-  UFG::qList<UFG::Behaviour,UFG::Behaviour,1,0> *v7; // [rsp+58h] [rbp+20h]
-  UFG::qList<UFG::Behaviour,UFG::Behaviour,1,0> *v8; // [rsp+58h] [rbp+20h]
+  UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> *mPrev; // rax
 
-  v3 = this;
-  UFG::AIActionTreeComponent::AIActionTreeComponent((UFG::AIActionTreeComponent *)&this->vfptr, name_uid, actName);
-  v4 = (UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> *)&v3->mPrev;
-  v4->mPrev = v4;
-  v4->mNext = v4;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BehaviourControllerComponent::`vftable{for `UFG::SimComponent};
-  v3->vfptr = (UFG::StateInterfaceVtbl *)&UFG::BehaviourControllerComponent::`vftable{for `UFG::StateInterface};
-  v3->vfptr = (UFG::ActionTreeComponentBaseVtbl *)&UFG::BehaviourControllerComponent::`vftable;
-  v3->mExclusiveBehaviour = 0i64;
-  v6 = &v3->mParallelBehaviours;
-  v6->mNode.mPrev = &v6->mNode;
-  v6->mNode.mNext = &v6->mNode;
-  v7 = &v3->mSuspendedStack;
-  v7->mNode.mPrev = &v7->mNode;
-  v7->mNode.mNext = &v7->mNode;
-  v8 = &v3->mWaitingBehaviours;
-  v8->mNode.mPrev = &v8->mNode;
-  v8->mNode.mNext = &v8->mNode;
-  v5 = UFG::BehaviourControllerComponent::s_BehaviourControllerComponentList.mNode.mPrev;
-  UFG::BehaviourControllerComponent::s_BehaviourControllerComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> *)&v3->mPrev;
-  v4->mPrev = v5;
-  v3->mNext = (UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> *)&UFG::BehaviourControllerComponent::s_BehaviourControllerComponentList;
-  UFG::BehaviourControllerComponent::s_BehaviourControllerComponentList.mNode.mPrev = (UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> *)&v3->mPrev;
+  UFG::AIActionTreeComponent::AIActionTreeComponent(this, name_uid, actName);
+  this->UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent>::mPrev = &this->UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent>;
+  this->UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent>::mNext = &this->UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent>;
+  this->UFG::AIActionTreeComponent::UFG::StateComponentI<UFG::SimComponent>::UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BehaviourControllerComponent::`vftable{for `UFG::SimComponent};
+  this->UFG::AIActionTreeComponent::UFG::StateComponentI<UFG::SimComponent>::UFG::StateInterface::vfptr = (UFG::StateInterfaceVtbl *)&UFG::BehaviourControllerComponent::`vftable{for `UFG::StateInterface};
+  this->UFG::AIActionTreeComponent::UFG::ActionTreeComponentBase::vfptr = (UFG::ActionTreeComponentBaseVtbl *)&UFG::BehaviourControllerComponent::`vftable;
+  this->mExclusiveBehaviour = 0i64;
+  this->mParallelBehaviours.mNode.mPrev = &this->mParallelBehaviours.mNode;
+  this->mParallelBehaviours.mNode.mNext = &this->mParallelBehaviours.mNode;
+  this->mSuspendedStack.mNode.mPrev = &this->mSuspendedStack.mNode;
+  this->mSuspendedStack.mNode.mNext = &this->mSuspendedStack.mNode;
+  this->mWaitingBehaviours.mNode.mPrev = &this->mWaitingBehaviours.mNode;
+  this->mWaitingBehaviours.mNode.mNext = &this->mWaitingBehaviours.mNode;
+  mPrev = UFG::BehaviourControllerComponent::s_BehaviourControllerComponentList.mNode.mPrev;
+  UFG::BehaviourControllerComponent::s_BehaviourControllerComponentList.mNode.mPrev->mNext = &this->UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent>;
+  this->UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent>::mPrev = mPrev;
+  this->UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent>::mNext = (UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> *)&UFG::BehaviourControllerComponent::s_BehaviourControllerComponentList;
+  UFG::BehaviourControllerComponent::s_BehaviourControllerComponentList.mNode.mPrev = &this->UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent>;
   UFG::SimComponent::AddType(
-    (UFG::SimComponent *)&v3->vfptr,
+    this,
     UFG::BehaviourControllerComponent::_BehaviourControllerComponentTypeUID,
     "BehaviourControllerComponent");
 }
 
 // File Line: 58
 // RVA: 0x335740
-void __fastcall UFG::BehaviourControllerComponent::~BehaviourControllerComponent(UFG::BehaviourControllerComponent *this)
+void __fastcall UFG::BehaviourControllerComponent::~BehaviourControllerComponent(
+        UFG::BehaviourControllerComponent *this)
 {
-  UFG::BehaviourControllerComponent *v1; // rsi
   UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> *v2; // rdi
-  UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> *v3; // rcx
-  UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> *v4; // rax
+  UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> *mPrev; // rcx
+  UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> *mNext; // rax
   UFG::qNode<UFG::Behaviour,UFG::Behaviour> *v5; // rcx
   UFG::qNode<UFG::Behaviour,UFG::Behaviour> *v6; // rax
   UFG::qNode<UFG::Behaviour,UFG::Behaviour> *v7; // rcx
@@ -132,58 +124,56 @@ void __fastcall UFG::BehaviourControllerComponent::~BehaviourControllerComponent
   UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> *v11; // rcx
   UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> *v12; // rax
 
-  v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BehaviourControllerComponent::`vftable{for `UFG::SimComponent};
-  this->vfptr = (UFG::StateInterfaceVtbl *)&UFG::BehaviourControllerComponent::`vftable{for `UFG::StateInterface};
-  this->vfptr = (UFG::ActionTreeComponentBaseVtbl *)&UFG::BehaviourControllerComponent::`vftable;
+  this->UFG::AIActionTreeComponent::UFG::StateComponentI<UFG::SimComponent>::UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::BehaviourControllerComponent::`vftable{for `UFG::SimComponent};
+  this->UFG::AIActionTreeComponent::UFG::StateComponentI<UFG::SimComponent>::UFG::StateInterface::vfptr = (UFG::StateInterfaceVtbl *)&UFG::BehaviourControllerComponent::`vftable{for `UFG::StateInterface};
+  this->UFG::AIActionTreeComponent::UFG::ActionTreeComponentBase::vfptr = (UFG::ActionTreeComponentBaseVtbl *)&UFG::BehaviourControllerComponent::`vftable;
   if ( this == UFG::BehaviourControllerComponent::s_BehaviourControllerComponentpCurrentIterator )
-    UFG::BehaviourControllerComponent::s_BehaviourControllerComponentpCurrentIterator = (UFG::BehaviourControllerComponent *)&this->mPrev[-104].mNext;
-  v2 = (UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> *)&this->mPrev;
-  v3 = this->mPrev;
-  v4 = v2->mNext;
-  v3->mNext = v4;
-  v4->mPrev = v3;
+    UFG::BehaviourControllerComponent::s_BehaviourControllerComponentpCurrentIterator = (UFG::BehaviourControllerComponent *)&this->UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent>::mPrev[-104].mNext;
+  v2 = &this->UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent>;
+  mPrev = this->UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent>::mPrev;
+  mNext = v2->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  UFG::BehaviourControllerComponent::ClearAllBehaviours(v1);
-  UFG::qList<UFG::GetInPedFormationNode,UFG::GetInPedFormationNode,1,0>::DeleteNodes((UFG::qList<UFG::HasAttackRequestNode,UFG::HasAttackRequestNode,1,0> *)&v1->mWaitingBehaviours);
-  v5 = v1->mWaitingBehaviours.mNode.mPrev;
-  v6 = v1->mWaitingBehaviours.mNode.mNext;
+  UFG::BehaviourControllerComponent::ClearAllBehaviours(this);
+  UFG::qList<UFG::GetInPedFormationNode,UFG::GetInPedFormationNode,1,0>::DeleteNodes((UFG::qList<UFG::HasAttackRequestNode,UFG::HasAttackRequestNode,1,0> *)&this->mWaitingBehaviours);
+  v5 = this->mWaitingBehaviours.mNode.mPrev;
+  v6 = this->mWaitingBehaviours.mNode.mNext;
   v5->mNext = v6;
   v6->mPrev = v5;
-  v1->mWaitingBehaviours.mNode.mPrev = &v1->mWaitingBehaviours.mNode;
-  v1->mWaitingBehaviours.mNode.mNext = &v1->mWaitingBehaviours.mNode;
-  UFG::qList<UFG::GetInPedFormationNode,UFG::GetInPedFormationNode,1,0>::DeleteNodes((UFG::qList<UFG::HasAttackRequestNode,UFG::HasAttackRequestNode,1,0> *)&v1->mSuspendedStack);
-  v7 = v1->mSuspendedStack.mNode.mPrev;
-  v8 = v1->mSuspendedStack.mNode.mNext;
+  this->mWaitingBehaviours.mNode.mPrev = &this->mWaitingBehaviours.mNode;
+  this->mWaitingBehaviours.mNode.mNext = &this->mWaitingBehaviours.mNode;
+  UFG::qList<UFG::GetInPedFormationNode,UFG::GetInPedFormationNode,1,0>::DeleteNodes((UFG::qList<UFG::HasAttackRequestNode,UFG::HasAttackRequestNode,1,0> *)&this->mSuspendedStack);
+  v7 = this->mSuspendedStack.mNode.mPrev;
+  v8 = this->mSuspendedStack.mNode.mNext;
   v7->mNext = v8;
   v8->mPrev = v7;
-  v1->mSuspendedStack.mNode.mPrev = &v1->mSuspendedStack.mNode;
-  v1->mSuspendedStack.mNode.mNext = &v1->mSuspendedStack.mNode;
-  UFG::qList<UFG::GetInPedFormationNode,UFG::GetInPedFormationNode,1,0>::DeleteNodes((UFG::qList<UFG::HasAttackRequestNode,UFG::HasAttackRequestNode,1,0> *)&v1->mParallelBehaviours);
-  v9 = v1->mParallelBehaviours.mNode.mPrev;
-  v10 = v1->mParallelBehaviours.mNode.mNext;
+  this->mSuspendedStack.mNode.mPrev = &this->mSuspendedStack.mNode;
+  this->mSuspendedStack.mNode.mNext = &this->mSuspendedStack.mNode;
+  UFG::qList<UFG::GetInPedFormationNode,UFG::GetInPedFormationNode,1,0>::DeleteNodes((UFG::qList<UFG::HasAttackRequestNode,UFG::HasAttackRequestNode,1,0> *)&this->mParallelBehaviours);
+  v9 = this->mParallelBehaviours.mNode.mPrev;
+  v10 = this->mParallelBehaviours.mNode.mNext;
   v9->mNext = v10;
   v10->mPrev = v9;
-  v1->mParallelBehaviours.mNode.mPrev = &v1->mParallelBehaviours.mNode;
-  v1->mParallelBehaviours.mNode.mNext = &v1->mParallelBehaviours.mNode;
+  this->mParallelBehaviours.mNode.mPrev = &this->mParallelBehaviours.mNode;
+  this->mParallelBehaviours.mNode.mNext = &this->mParallelBehaviours.mNode;
   v11 = v2->mPrev;
   v12 = v2->mNext;
   v11->mNext = v12;
   v12->mPrev = v11;
   v2->mPrev = v2;
   v2->mNext = v2;
-  UFG::AIActionTreeComponent::~AIActionTreeComponent((UFG::AIActionTreeComponent *)&v1->vfptr);
+  UFG::AIActionTreeComponent::~AIActionTreeComponent(this);
 }
 
 // File Line: 68
 // RVA: 0x34ED80
 void __fastcall UFG::BehaviourControllerComponent::ClearAllBehaviours(UFG::BehaviourControllerComponent *this)
 {
-  UFG::Behaviour *v1; // rdx
-  UFG::BehaviourControllerComponent *v2; // rbx
-  UFG::qNode<UFG::Behaviour,UFG::Behaviour> *v3; // rdx
-  UFG::qNode<UFG::Behaviour,UFG::Behaviour> *v4; // rcx
+  UFG::Behaviour *mExclusiveBehaviour; // rdx
+  UFG::qNode<UFG::Behaviour,UFG::Behaviour> *mNext; // rdx
+  UFG::qNode<UFG::Behaviour,UFG::Behaviour> *mPrev; // rcx
   UFG::qNode<UFG::Behaviour,UFG::Behaviour> *v5; // rax
   UFG::qNode<UFG::Behaviour,UFG::Behaviour> *v6; // rdx
   UFG::qNode<UFG::Behaviour,UFG::Behaviour> *v7; // rcx
@@ -192,35 +182,34 @@ void __fastcall UFG::BehaviourControllerComponent::ClearAllBehaviours(UFG::Behav
   UFG::qNode<UFG::Behaviour,UFG::Behaviour> *v10; // rcx
   UFG::qNode<UFG::Behaviour,UFG::Behaviour> *v11; // rax
 
-  v1 = this->mExclusiveBehaviour;
-  v2 = this;
-  if ( v1 )
-    UFG::BehaviourControllerComponent::EndBehaviour(this, v1);
-  while ( (UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> **)&v2->mParallelBehaviours.mNode.mNext[-2].mNext != &v2->mPrev )
+  mExclusiveBehaviour = this->mExclusiveBehaviour;
+  if ( mExclusiveBehaviour )
+    UFG::BehaviourControllerComponent::EndBehaviour(this, mExclusiveBehaviour);
+  while ( (UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> *)&this->mParallelBehaviours.mNode.mNext[-2].mNext != &this->UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> )
   {
-    v3 = v2->mParallelBehaviours.mNode.mNext;
-    v4 = v3->mPrev;
-    v5 = v3->mNext;
-    v4->mNext = v5;
-    v5->mPrev = v4;
-    v3->mPrev = v3;
-    v3->mNext = v3;
-    UFG::BehaviourControllerComponent::EndBehaviour(v2, (UFG::Behaviour *)&v3[-2].mNext);
+    mNext = this->mParallelBehaviours.mNode.mNext;
+    mPrev = mNext->mPrev;
+    v5 = mNext->mNext;
+    mPrev->mNext = v5;
+    v5->mPrev = mPrev;
+    mNext->mPrev = mNext;
+    mNext->mNext = mNext;
+    UFG::BehaviourControllerComponent::EndBehaviour(this, (UFG::Behaviour *)&mNext[-2].mNext);
   }
-  while ( (UFG::Behaviour **)&v2->mSuspendedStack.mNode.mNext[-2].mNext != &v2->mExclusiveBehaviour )
+  while ( (UFG::Behaviour **)&this->mSuspendedStack.mNode.mNext[-2].mNext != &this->mExclusiveBehaviour )
   {
-    v6 = v2->mSuspendedStack.mNode.mNext;
+    v6 = this->mSuspendedStack.mNode.mNext;
     v7 = v6->mPrev;
     v8 = v6->mNext;
     v7->mNext = v8;
     v8->mPrev = v7;
     v6->mPrev = v6;
     v6->mNext = v6;
-    UFG::BehaviourControllerComponent::EndBehaviour(v2, (UFG::Behaviour *)&v6[-2].mNext);
+    UFG::BehaviourControllerComponent::EndBehaviour(this, (UFG::Behaviour *)&v6[-2].mNext);
   }
-  while ( &v2->mWaitingBehaviours.mNode.mNext[-2].mNext != &v2->mParallelBehaviours.mNode.mNext )
+  while ( &this->mWaitingBehaviours.mNode.mNext[-2].mNext != &this->mParallelBehaviours.mNode.mNext )
   {
-    v9 = v2->mWaitingBehaviours.mNode.mNext;
+    v9 = this->mWaitingBehaviours.mNode.mNext;
     v10 = v9->mPrev;
     v11 = v9->mNext;
     v10->mNext = v11;
@@ -228,7 +217,7 @@ void __fastcall UFG::BehaviourControllerComponent::ClearAllBehaviours(UFG::Behav
     v9->mPrev = v9;
     v9->mNext = v9;
     if ( v9 != (UFG::qNode<UFG::Behaviour,UFG::Behaviour> *)24 )
-      ((void (__fastcall *)(UFG::qNode<UFG::Behaviour,UFG::Behaviour> **, signed __int64))v9[-2].mNext->mPrev)(
+      ((void (__fastcall *)(UFG::qNode<UFG::Behaviour,UFG::Behaviour> **, __int64))v9[-2].mNext->mPrev)(
         &v9[-2].mNext,
         1i64);
   }
@@ -238,337 +227,328 @@ void __fastcall UFG::BehaviourControllerComponent::ClearAllBehaviours(UFG::Behav
 // RVA: 0x380C30
 void __fastcall UFG::BehaviourControllerComponent::ReleaseActionTree(UFG::BehaviourControllerComponent *this)
 {
-  UFG::BehaviourControllerComponent *v1; // rbx
-
-  v1 = this;
   UFG::BehaviourControllerComponent::ClearAllBehaviours(this);
-  UFG::AIActionTreeComponent::ReleaseActionTree((UFG::AIActionTreeComponent *)&v1->vfptr);
+  UFG::AIActionTreeComponent::ReleaseActionTree(this);
 }
 
 // File Line: 103
 // RVA: 0x378A80
-void __fastcall UFG::BehaviourControllerComponent::OnAttach(UFG::BehaviourControllerComponent *this, UFG::SimObject *object)
+// attributes: thunk
+void __fastcall UFG::BehaviourControllerComponent::OnAttach(
+        UFG::BehaviourControllerComponent *this,
+        UFG::SimObjectCharacter *object)
 {
-  UFG::AIActionTreeComponent::OnAttach((UFG::AIActionTreeComponent *)&this->vfptr, object);
+  UFG::AIActionTreeComponent::OnAttach(this, object);
 }
 
 // File Line: 111
 // RVA: 0x37A4B0
+// attributes: thunk
 void __fastcall UFG::BehaviourControllerComponent::OnDetach(UFG::BehaviourControllerComponent *this)
 {
-  UFG::AIActionTreeComponent::OnDetach((UFG::AIActionTreeComponent *)&this->vfptr);
+  UFG::AIActionTreeComponent::OnDetach(this);
 }
 
 // File Line: 119
 // RVA: 0x37BDA0
 void __fastcall UFG::BehaviourControllerComponent::OnUpdate(UFG::BehaviourControllerComponent *this, float delta_sec)
 {
-  UFG::BehaviourControllerComponent *v2; // rdi
-  UFG::Behaviour *v3; // rdx
-  signed __int64 v4; // rdx
-  signed __int64 v5; // rbx
+  UFG::Behaviour *mExclusiveBehaviour; // rdx
+  UFG::Behaviour *p_mNext; // rdx
+  UFG::BehaviourControllerComponent *v5; // rbx
 
-  v2 = this;
-  if ( !((LOBYTE(this->m_Flags) >> 1) & 1) )
+  if ( (this->m_Flags & 2) == 0 )
   {
-    v3 = this->mExclusiveBehaviour;
-    if ( v3 && (!v3->mParams.mInvokeTask || v3->mParams.mControlType) )
-      UFG::BehaviourControllerComponent::UpdateBehaviour(this, v3, delta_sec);
-    v4 = (signed __int64)&v2->mParallelBehaviours.mNode.mNext[-2].mNext;
-    if ( (UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> **)v4 != &v2->mPrev )
+    mExclusiveBehaviour = this->mExclusiveBehaviour;
+    if ( mExclusiveBehaviour && (!mExclusiveBehaviour->mParams.mInvokeTask || mExclusiveBehaviour->mParams.mControlType) )
+      UFG::BehaviourControllerComponent::UpdateBehaviour(this, mExclusiveBehaviour, delta_sec);
+    p_mNext = (UFG::Behaviour *)&this->mParallelBehaviours.mNode.mNext[-2].mNext;
+    if ( p_mNext != (UFG::Behaviour *)&this->UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> )
     {
       do
       {
-        v5 = *(_QWORD *)(v4 + 32) - 24i64;
-        if ( !*(_QWORD *)(v4 + 80) || *(_DWORD *)(v4 + 64) )
-          UFG::BehaviourControllerComponent::UpdateBehaviour(v2, (UFG::Behaviour *)v4, delta_sec);
-        v4 = v5;
+        v5 = (UFG::BehaviourControllerComponent *)&p_mNext->mNext[-2].mNext;
+        if ( !p_mNext->mParams.mInvokeTask || p_mNext->mParams.mControlType )
+          UFG::BehaviourControllerComponent::UpdateBehaviour(this, p_mNext, delta_sec);
+        p_mNext = (UFG::Behaviour *)v5;
       }
-      while ( (UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> **)v5 != &v2->mPrev );
+      while ( v5 != (UFG::BehaviourControllerComponent *)&this->UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> );
     }
-    UFG::BehaviourControllerComponent::UpdatePendingBehaviours(v2, delta_sec);
-    UFG::AIActionTreeComponent::OnUpdate((UFG::AIActionTreeComponent *)&v2->vfptr, delta_sec);
+    UFG::BehaviourControllerComponent::UpdatePendingBehaviours(this, delta_sec);
+    UFG::AIActionTreeComponent::OnUpdate(this, delta_sec);
   }
 }
 
 // File Line: 154
 // RVA: 0x397D70
-void __fastcall UFG::BehaviourControllerComponent::UpdatePendingBehaviours(UFG::BehaviourControllerComponent *this, float timestep)
+void __fastcall UFG::BehaviourControllerComponent::UpdatePendingBehaviours(
+        UFG::BehaviourControllerComponent *this,
+        float timestep)
 {
-  UFG::BehaviourControllerComponent *v2; // rdi
-  float v3; // xmm7_4
-  UFG::qNode<UFG::Behaviour,UFG::Behaviour> **v4; // rsi
-  UFG::Behaviour **v5; // rbp
-  signed __int64 v6; // rdx
-  signed __int64 v7; // rbx
-  signed __int64 i; // rcx
-  __int64 v9; // rcx
-  _QWORD *v10; // rax
+  UFG::qNode<UFG::Behaviour,UFG::Behaviour> **p_mNext; // rsi
+  UFG::Behaviour **p_mExclusiveBehaviour; // rbp
+  UFG::qNode<UFG::Behaviour,UFG::Behaviour> **v6; // rdx
+  UFG::Behaviour *v7; // rbx
+  UFG::qNode<UFG::Behaviour,UFG::Behaviour> **i; // rcx
+  UFG::qNode<UFG::Behaviour,UFG::Behaviour> *mPrev; // rcx
+  UFG::qNode<UFG::Behaviour,UFG::Behaviour> *mNext; // rax
   UFG::qNode<UFG::Behaviour,UFG::Behaviour> *v11; // rdx
   UFG::qNode<UFG::Behaviour,UFG::Behaviour> *v12; // rax
-  UFG::Behaviour *v13; // rdx
+  UFG::Behaviour *mExclusiveBehaviour; // rdx
   UFG::Behaviour *v14; // rdx
-  float v15; // xmm1_4
+  float mMaxWaitTime; // xmm1_4
   float v16; // xmm0_4
-  signed __int64 v17; // rbx
+  UFG::BehaviourControllerComponent *v17; // rbx
 
-  v2 = this;
-  v3 = timestep;
   if ( !this->mExclusiveBehaviour )
   {
-    v4 = &this->mParallelBehaviours.mNode.mNext;
-    v5 = &this->mExclusiveBehaviour;
+    p_mNext = &this->mParallelBehaviours.mNode.mNext;
+    p_mExclusiveBehaviour = &this->mExclusiveBehaviour;
     do
     {
-      if ( (UFG::Behaviour **)&v2->mSuspendedStack.mNode.mNext[-2].mNext == v5 )
+      if ( (UFG::Behaviour **)&this->mSuspendedStack.mNode.mNext[-2].mNext == p_mExclusiveBehaviour )
         v6 = 0i64;
       else
-        v6 = (signed __int64)&v2->mSuspendedStack.mNode.mNext[-2].mNext;
+        v6 = &this->mSuspendedStack.mNode.mNext[-2].mNext;
       v7 = 0i64;
-      for ( i = (signed __int64)&v2->mWaitingBehaviours.mNode.mNext[-2].mNext;
-            (UFG::qNode<UFG::Behaviour,UFG::Behaviour> **)i != v4;
-            i = *(_QWORD *)(i + 32) - 24i64 )
+      for ( i = &this->mWaitingBehaviours.mNode.mNext[-2].mNext; i != p_mNext; i = &i[4][-2].mNext )
       {
-        if ( !v7 || *(_DWORD *)(v7 + 56) < *(_DWORD *)(i + 56) )
-          v7 = i;
+        if ( !v7 || v7->mParams.mPriority < *((_DWORD *)i + 14) )
+          v7 = (UFG::Behaviour *)i;
       }
       if ( v6 )
       {
         if ( v7 )
         {
-          if ( *(_DWORD *)(v6 + 56) >= *(_DWORD *)(v7 + 56) )
-            v7 = v6;
+          if ( *((_DWORD *)v6 + 14) >= v7->mParams.mPriority )
+            v7 = (UFG::Behaviour *)v6;
         }
         else
         {
-          v7 = v6;
+          v7 = (UFG::Behaviour *)v6;
         }
       }
       else if ( !v7 )
       {
         break;
       }
-      if ( v7 )
+      mPrev = v7->mPrev;
+      mNext = v7->mNext;
+      v11 = &v7->UFG::qNode<UFG::Behaviour,UFG::Behaviour>;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
+      v7->mPrev = &v7->UFG::qNode<UFG::Behaviour,UFG::Behaviour>;
+      v7->mNext = &v7->UFG::qNode<UFG::Behaviour,UFG::Behaviour>;
+      if ( v7->mState == eINVOKE_STATE_SUSPENDED )
       {
-        v9 = *(_QWORD *)(v7 + 24);
-        v10 = *(_QWORD **)(v7 + 32);
-        v11 = (UFG::qNode<UFG::Behaviour,UFG::Behaviour> *)(v7 + 24);
-        *(_QWORD *)(v9 + 8) = v10;
-        *v10 = v9;
-        v11->mPrev = v11;
-        v11->mNext = v11;
-        if ( *(_DWORD *)(v7 + 44) == 2 )
+        if ( v7->mParams.mPriorityMode == eINVOKE_PRIORITY_PARALLEL )
         {
-          if ( *(_DWORD *)(v7 + 60) == 4 )
-          {
-            v12 = v2->mParallelBehaviours.mNode.mPrev;
-            v12->mNext = v11;
-            v11->mPrev = v12;
-            *(_QWORD *)(v7 + 32) = (char *)v2 + 1680;
-            v2->mParallelBehaviours.mNode.mPrev = v11;
-            v2->mExclusiveBehaviour->mState = 1;
-            v2->mExclusiveBehaviour = (UFG::Behaviour *)v7;
-          }
-          else
-          {
-            v13 = v2->mExclusiveBehaviour;
-            if ( v13 )
-              UFG::BehaviourControllerComponent::EndBehaviour(v2, v13);
-            v2->mExclusiveBehaviour = (UFG::Behaviour *)v7;
-            *(_DWORD *)(v7 + 44) = 1;
-            v2->mExclusiveBehaviour = (UFG::Behaviour *)v7;
-          }
-        }
-        else if ( (unsigned int)UFG::BehaviourControllerComponent::BeginBehaviour(v2, (UFG::Behaviour *)v7, 0i64) == 1 )
-        {
-          v2->mExclusiveBehaviour = (UFG::Behaviour *)v7;
+          v12 = this->mParallelBehaviours.mNode.mPrev;
+          v12->mNext = v11;
+          v11->mPrev = v12;
+          v7->mNext = &this->mParallelBehaviours.mNode;
+          this->mParallelBehaviours.mNode.mPrev = v11;
+          this->mExclusiveBehaviour->mState = eINVOKE_STATE_RUNNING;
+          this->mExclusiveBehaviour = v7;
         }
         else
         {
-          UFG::BehaviourControllerComponent::EndBehaviour(v2, (UFG::Behaviour *)v7);
+          mExclusiveBehaviour = this->mExclusiveBehaviour;
+          if ( mExclusiveBehaviour )
+            UFG::BehaviourControllerComponent::EndBehaviour(this, mExclusiveBehaviour);
+          this->mExclusiveBehaviour = v7;
+          v7->mState = eINVOKE_STATE_RUNNING;
+          this->mExclusiveBehaviour = v7;
         }
       }
+      else if ( (unsigned int)UFG::BehaviourControllerComponent::BeginBehaviour(this, v7, 0i64) == 1 )
+      {
+        this->mExclusiveBehaviour = v7;
+      }
+      else
+      {
+        UFG::BehaviourControllerComponent::EndBehaviour(this, v7);
+      }
     }
-    while ( !v2->mExclusiveBehaviour );
+    while ( !this->mExclusiveBehaviour );
   }
-  v14 = (UFG::Behaviour *)&v2->mWaitingBehaviours.mNode.mNext[-2].mNext;
-  if ( v14 != (UFG::Behaviour *)&v2->mParallelBehaviours.mNode.mNext )
+  v14 = (UFG::Behaviour *)&this->mWaitingBehaviours.mNode.mNext[-2].mNext;
+  if ( v14 != (UFG::Behaviour *)&this->mParallelBehaviours.mNode.mNext )
   {
     do
     {
-      v15 = v14->mParams.mMaxWaitTime;
-      v16 = v3 + v14->mAge;
-      v17 = (signed __int64)&v14->mNext[-2].mNext;
+      mMaxWaitTime = v14->mParams.mMaxWaitTime;
+      v16 = timestep + v14->mAge;
+      v17 = (UFG::BehaviourControllerComponent *)&v14->mNext[-2].mNext;
       v14->mAge = v16;
-      if ( v15 > 0.0 && v16 > v15 )
-        UFG::BehaviourControllerComponent::EndBehaviour(v2, v14);
+      if ( mMaxWaitTime > 0.0 && v16 > mMaxWaitTime )
+        UFG::BehaviourControllerComponent::EndBehaviour(this, v14);
       v14 = (UFG::Behaviour *)v17;
     }
-    while ( (UFG::qNode<UFG::Behaviour,UFG::Behaviour> **)v17 != &v2->mParallelBehaviours.mNode.mNext );
+    while ( v17 != (UFG::BehaviourControllerComponent *)&this->mParallelBehaviours.mNode.mNext );
   }
 }
 
 // File Line: 250
 // RVA: 0x369760
-__int64 __fastcall UFG::BehaviourControllerComponent::InvokeBehaviour(UFG::BehaviourControllerComponent *this, UFG::InvokeBehaviourParams *params, UFG::InvokeBehaviourResult *optResult)
+__int64 __fastcall UFG::BehaviourControllerComponent::InvokeBehaviour(
+        UFG::BehaviourControllerComponent *this,
+        UFG::InvokeBehaviourParams *params,
+        UFG::InvokeBehaviourResult *optResult)
 {
-  JUMPOUT(params->mPriorityMode, 4, UFG::BehaviourControllerComponent::Arbitrate_StartRootParallel);
-  JUMPOUT(params->mIsRootInvoke, 0, UFG::BehaviourControllerComponent::Arbitrate_StartChild);
-  return UFG::BehaviourControllerComponent::Arbitrate_StartRootExclusive(this, params, optResult);
+  if ( params->mPriorityMode == eINVOKE_PRIORITY_PARALLEL )
+    return UFG::BehaviourControllerComponent::Arbitrate_StartRootParallel(this, params, optResult);
+  if ( params->mIsRootInvoke )
+    return UFG::BehaviourControllerComponent::Arbitrate_StartRootExclusive(this, params, optResult);
+  return UFG::BehaviourControllerComponent::Arbitrate_StartChild(this, params, optResult);
 }
 
 // File Line: 274
 // RVA: 0x341B70
-__int64 __fastcall UFG::BehaviourControllerComponent::Arbitrate_StartChild(UFG::BehaviourControllerComponent *this, UFG::InvokeBehaviourParams *params, UFG::InvokeBehaviourResult *optResult)
+__int64 __fastcall UFG::BehaviourControllerComponent::Arbitrate_StartChild(
+        UFG::BehaviourControllerComponent *this,
+        UFG::InvokeBehaviourParams *params,
+        UFG::InvokeBehaviourResult *optResult)
 {
-  unsigned int v3; // esi
-  UFG::InvokeBehaviourResult *v4; // rbx
-  UFG::InvokeBehaviourParams *v5; // rdi
-  UFG::BehaviourControllerComponent *v6; // rbp
-  UFG::Behaviour *v7; // r14
-  UFG::eInvokeBehaviourControl v8; // eax
-  signed int v9; // eax
-  UFG::Behaviour *v10; // rax
-  InvokeBehaviourTask *v11; // rax
-  UFG::Behaviour *v12; // rax
+  unsigned int started; // esi
+  UFG::Behaviour *ParentBehaviourOfTask; // r14
+  UFG::eInvokeBehaviourControl mControlType; // eax
+  UFG::eInvokeBehaviourPriorityMode mPriorityMode; // eax
+  UFG::Behaviour *mExclusiveBehaviour; // rax
+  InvokeBehaviourTask *mInvokeTask; // rax
+  UFG::Behaviour *Behaviour; // rax
   UFG::Behaviour *v13; // rdi
-  UFG::InvokeBehaviourParams paramsa; // [rsp+20h] [rbp-38h]
+  UFG::InvokeBehaviourParams paramsa; // [rsp+20h] [rbp-38h] BYREF
 
-  v3 = 0;
-  v4 = optResult;
-  v5 = params;
-  v6 = this;
+  started = 0;
   if ( optResult )
   {
     optResult->mId = 0;
     optResult->mBehaviour = 0i64;
-    optResult->mDesc = &customWorldMapCaption;
+    optResult->mDesc = &customCaption;
     if ( params )
       optResult->mInvokeParams = *params;
   }
-  v7 = UFG::BehaviourControllerComponent::FindParentBehaviourOfTask(this, params->mInvokeTask);
-  v8 = v5->mControlType;
-  if ( v8 )
+  ParentBehaviourOfTask = UFG::BehaviourControllerComponent::FindParentBehaviourOfTask(this, params->mInvokeTask);
+  mControlType = params->mControlType;
+  if ( mControlType )
   {
-    if ( v8 != 1 )
-      return v3;
-    v9 = v5->mPriorityMode;
-    if ( v9 < 0 )
-      return v3;
-    if ( v9 > 1 )
+    if ( mControlType != eINVOKE_AND_FORGET )
+      return started;
+    mPriorityMode = params->mPriorityMode;
+    if ( mPriorityMode < eINVOKE_PRIORITY_KILL )
+      return started;
+    if ( mPriorityMode > eINVOKE_PRIORITY_KILL_OR_WAIT )
     {
-      if ( v9 > 3 )
-        return v3;
-      v10 = v6->mExclusiveBehaviour;
-      if ( v7 == v10 )
+      if ( mPriorityMode > eINVOKE_PRIORITY_SUSPEND_OR_WAIT )
+        return started;
+      mExclusiveBehaviour = this->mExclusiveBehaviour;
+      if ( ParentBehaviourOfTask == mExclusiveBehaviour )
       {
-        v3 = -1;
-        if ( v4 )
+        started = -1;
+        if ( optResult )
         {
-          v4->mId = -1;
-          v4->mBehaviour = v10;
-          v4->mDesc = "Child track of exclusive behaviour cannot suspend the parent.";
-          v4->mInvokeParams.mNode = v5->mNode;
-          *(_QWORD *)&v4->mInvokeParams.mPriority = *(_QWORD *)&v5->mPriority;
-          *(_QWORD *)&v4->mInvokeParams.mControlType = *(_QWORD *)&v5->mControlType;
-          *(_QWORD *)&v4->mInvokeParams.mMaxLifeTime = *(_QWORD *)&v5->mMaxLifeTime;
-          v4->mInvokeParams.mInvokeTask = v5->mInvokeTask;
+          optResult->mId = -1;
+          optResult->mBehaviour = mExclusiveBehaviour;
+          optResult->mDesc = "Child track of exclusive behaviour cannot suspend the parent.";
+          optResult->mInvokeParams.mNode = params->mNode;
+          *(_QWORD *)&optResult->mInvokeParams.mPriority = *(_QWORD *)&params->mPriority;
+          *(_QWORD *)&optResult->mInvokeParams.mControlType = *(_QWORD *)&params->mControlType;
+          *(_QWORD *)&optResult->mInvokeParams.mMaxLifeTime = *(_QWORD *)&params->mMaxLifeTime;
+          optResult->mInvokeParams.mInvokeTask = params->mInvokeTask;
         }
-        return v3;
+        return started;
       }
     }
-    paramsa.mNode = v5->mNode;
-    *(_QWORD *)&paramsa.mPriority = *(_QWORD *)&v5->mPriority;
-    *(_QWORD *)&paramsa.mControlType = *(_QWORD *)&v5->mControlType;
-    *(_QWORD *)&paramsa.mMaxLifeTime = *(_QWORD *)&v5->mMaxLifeTime;
-    v11 = v5->mInvokeTask;
+    paramsa.mNode = params->mNode;
+    *(_QWORD *)&paramsa.mPriority = *(_QWORD *)&params->mPriority;
+    *(_QWORD *)&paramsa.mControlType = *(_QWORD *)&params->mControlType;
+    *(_QWORD *)&paramsa.mMaxLifeTime = *(_QWORD *)&params->mMaxLifeTime;
+    mInvokeTask = params->mInvokeTask;
     paramsa.mIsRootInvoke = 1;
-    paramsa.mInvokeTask = v11;
-    v3 = UFG::BehaviourControllerComponent::Arbitrate_StartRootExclusive(v6, &paramsa, v4);
-    if ( v3 != 1 )
-      return v3;
+    paramsa.mInvokeTask = mInvokeTask;
+    started = UFG::BehaviourControllerComponent::Arbitrate_StartRootExclusive(this, &paramsa, optResult);
+    if ( started != 1 )
+      return started;
   }
-  v12 = UFG::BehaviourControllerComponent::CreateBehaviour(v6, v5, v7 == 0i64, v4);
-  v13 = v12;
-  if ( v12 )
+  Behaviour = UFG::BehaviourControllerComponent::CreateBehaviour(this, params, ParentBehaviourOfTask == 0i64, optResult);
+  v13 = Behaviour;
+  if ( Behaviour )
   {
-    if ( v7 )
-      v12->mParams.mPriority = v7->mParams.mPriority;
+    if ( ParentBehaviourOfTask )
+      Behaviour->mParams.mPriority = ParentBehaviourOfTask->mParams.mPriority;
     else
-      v6->mExclusiveBehaviour = v12;
-    v3 = UFG::BehaviourControllerComponent::BeginBehaviour(v6, v12, v4);
-    if ( v3 != 1 )
-      UFG::BehaviourControllerComponent::EndBehaviour(v6, v13);
+      this->mExclusiveBehaviour = Behaviour;
+    started = UFG::BehaviourControllerComponent::BeginBehaviour(this, Behaviour, optResult);
+    if ( started != 1 )
+      UFG::BehaviourControllerComponent::EndBehaviour(this, v13);
   }
-  else if ( v4 )
+  else if ( optResult )
   {
-    v3 = v4->mId;
+    return (unsigned int)optResult->mId;
   }
   else
   {
-    v3 = 0;
+    return 0;
   }
-  return v3;
+  return started;
 }
 
 // File Line: 379
 // RVA: 0x341F50
-__int64 __fastcall UFG::BehaviourControllerComponent::Arbitrate_StartRootParallel(UFG::BehaviourControllerComponent *this, UFG::InvokeBehaviourParams *params, UFG::InvokeBehaviourResult *optResult)
+__int64 __fastcall UFG::BehaviourControllerComponent::Arbitrate_StartRootParallel(
+        UFG::BehaviourControllerComponent *this,
+        UFG::InvokeBehaviourParams *params,
+        UFG::InvokeBehaviourResult *optResult)
 {
-  UFG::InvokeBehaviourResult *v3; // rbx
-  UFG::InvokeBehaviourParams *v4; // rdi
-  UFG::BehaviourControllerComponent *v5; // rsi
-  UFG::Behaviour *v6; // rcx
+  UFG::Behaviour *mExclusiveBehaviour; // rcx
   unsigned int v7; // ebp
-  UFG::Behaviour *v8; // rdx
+  UFG::Behaviour *p_mNext; // rdx
   UFG::Behaviour *v9; // rdx
   const char *v10; // rax
-  UFG::qList<UFG::Behaviour,UFG::Behaviour,1,0> *v11; // r14
+  UFG::qList<UFG::Behaviour,UFG::Behaviour,1,0> *p_mParallelBehaviours; // r14
   UFG::Behaviour *v12; // rcx
-  UFG::Behaviour *v13; // rax
+  UFG::Behaviour *Behaviour; // rax
   UFG::qNode<UFG::Behaviour,UFG::Behaviour> *v14; // rcx
   UFG::Behaviour *v15; // rdi
-  UFG::qNode<UFG::Behaviour,UFG::Behaviour> *v16; // rax
+  UFG::qNode<UFG::Behaviour,UFG::Behaviour> *mPrev; // rax
 
-  v3 = optResult;
-  v4 = params;
-  v5 = this;
   if ( optResult )
   {
     optResult->mId = 0;
     optResult->mBehaviour = 0i64;
-    optResult->mDesc = &customWorldMapCaption;
+    optResult->mDesc = &customCaption;
     if ( params )
       optResult->mInvokeParams = *params;
   }
-  v6 = this->mExclusiveBehaviour;
-  if ( v6 && v6->mParams.mNode == params->mNode )
+  mExclusiveBehaviour = this->mExclusiveBehaviour;
+  if ( mExclusiveBehaviour && mExclusiveBehaviour->mParams.mNode == params->mNode )
   {
     v7 = -5;
     if ( optResult )
     {
       optResult->mId = -5;
-      optResult->mBehaviour = v6;
+      optResult->mBehaviour = mExclusiveBehaviour;
       optResult->mDesc = "Parallel behaviour requested is already running as EXCLUSIVE.";
       optResult->mInvokeParams = *params;
     }
     return v7;
   }
-  v8 = (UFG::Behaviour *)&v5->mSuspendedStack.mNode.mNext[-2].mNext;
-  if ( v8 == (UFG::Behaviour *)&v5->mExclusiveBehaviour )
+  p_mNext = (UFG::Behaviour *)&this->mSuspendedStack.mNode.mNext[-2].mNext;
+  if ( p_mNext == (UFG::Behaviour *)&this->mExclusiveBehaviour )
   {
 LABEL_11:
-    v9 = (UFG::Behaviour *)&v5->mWaitingBehaviours.mNode.mNext[-2].mNext;
-    if ( v9 != (UFG::Behaviour *)&v5->mParallelBehaviours.mNode.mNext )
+    v9 = (UFG::Behaviour *)&this->mWaitingBehaviours.mNode.mNext[-2].mNext;
+    if ( v9 != (UFG::Behaviour *)&this->mParallelBehaviours.mNode.mNext )
     {
-      while ( v9->mParams.mNode != v4->mNode )
+      while ( v9->mParams.mNode != params->mNode )
       {
         v9 = (UFG::Behaviour *)&v9->mNext[-2].mNext;
-        if ( v9 == (UFG::Behaviour *)&v5->mParallelBehaviours.mNode.mNext )
+        if ( v9 == (UFG::Behaviour *)&this->mParallelBehaviours.mNode.mNext )
           goto LABEL_20;
       }
-      UFG::BehaviourControllerComponent::EndBehaviour(v5, v9);
-      if ( v3 )
+      UFG::BehaviourControllerComponent::EndBehaviour(this, v9);
+      if ( optResult )
       {
         v10 = "Removed existing behaviour from waiting list.";
         goto LABEL_19;
@@ -577,287 +557,276 @@ LABEL_11:
   }
   else
   {
-    while ( v8->mParams.mNode != v4->mNode )
+    while ( p_mNext->mParams.mNode != params->mNode )
     {
-      v8 = (UFG::Behaviour *)&v8->mNext[-2].mNext;
-      if ( v8 == (UFG::Behaviour *)&v5->mExclusiveBehaviour )
+      p_mNext = (UFG::Behaviour *)&p_mNext->mNext[-2].mNext;
+      if ( p_mNext == (UFG::Behaviour *)&this->mExclusiveBehaviour )
         goto LABEL_11;
     }
-    UFG::BehaviourControllerComponent::EndBehaviour(v5, v8);
-    if ( v3 )
+    UFG::BehaviourControllerComponent::EndBehaviour(this, p_mNext);
+    if ( optResult )
     {
       v10 = "Removed existing behaviour from suspended stack.";
 LABEL_19:
-      v3->mId = 0;
-      v3->mDesc = v10;
-      v3->mBehaviour = 0i64;
-      v3->mInvokeParams.mNode = v4->mNode;
-      *(_QWORD *)&v3->mInvokeParams.mPriority = *(_QWORD *)&v4->mPriority;
-      *(_QWORD *)&v3->mInvokeParams.mControlType = *(_QWORD *)&v4->mControlType;
-      *(_QWORD *)&v3->mInvokeParams.mMaxLifeTime = *(_QWORD *)&v4->mMaxLifeTime;
-      v3->mInvokeParams.mInvokeTask = v4->mInvokeTask;
-      goto LABEL_20;
+      optResult->mId = 0;
+      optResult->mDesc = v10;
+      optResult->mBehaviour = 0i64;
+      optResult->mInvokeParams.mNode = params->mNode;
+      *(_QWORD *)&optResult->mInvokeParams.mPriority = *(_QWORD *)&params->mPriority;
+      *(_QWORD *)&optResult->mInvokeParams.mControlType = *(_QWORD *)&params->mControlType;
+      *(_QWORD *)&optResult->mInvokeParams.mMaxLifeTime = *(_QWORD *)&params->mMaxLifeTime;
+      optResult->mInvokeParams.mInvokeTask = params->mInvokeTask;
     }
   }
 LABEL_20:
-  v11 = &v5->mParallelBehaviours;
-  v12 = (UFG::Behaviour *)&v5->mParallelBehaviours.mNode.mNext[-2].mNext;
-  if ( v12 == (UFG::Behaviour *)&v5->mPrev )
+  p_mParallelBehaviours = &this->mParallelBehaviours;
+  v12 = (UFG::Behaviour *)&this->mParallelBehaviours.mNode.mNext[-2].mNext;
+  if ( v12 == (UFG::Behaviour *)&this->UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> )
     goto LABEL_23;
-  while ( v12->mParams.mNode != v4->mNode )
+  while ( v12->mParams.mNode != params->mNode )
   {
     v12 = (UFG::Behaviour *)&v12->mNext[-2].mNext;
-    if ( v12 == (UFG::Behaviour *)&v5->mPrev )
+    if ( v12 == (UFG::Behaviour *)&this->UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> )
       goto LABEL_23;
   }
-  if ( v4->mPriority > v12->mParams.mPriority )
+  if ( params->mPriority > v12->mParams.mPriority )
   {
-    UFG::BehaviourControllerComponent::EndBehaviour(v5, v12);
+    UFG::BehaviourControllerComponent::EndBehaviour(this, v12);
 LABEL_23:
-    v13 = UFG::BehaviourControllerComponent::CreateBehaviour(v5, v4, 0, 0i64);
-    v14 = (UFG::qNode<UFG::Behaviour,UFG::Behaviour> *)&v13->mPrev;
-    v15 = v13;
-    v16 = v11->mNode.mPrev;
-    v16->mNext = v14;
-    v14->mPrev = v16;
-    v14->mNext = &v11->mNode;
-    v11->mNode.mPrev = v14;
-    v7 = UFG::BehaviourControllerComponent::BeginBehaviour(v5, v15, v3);
+    Behaviour = UFG::BehaviourControllerComponent::CreateBehaviour(this, params, 0, 0i64);
+    v14 = &Behaviour->UFG::qNode<UFG::Behaviour,UFG::Behaviour>;
+    v15 = Behaviour;
+    mPrev = p_mParallelBehaviours->mNode.mPrev;
+    mPrev->mNext = v14;
+    v14->mPrev = mPrev;
+    v14->mNext = &p_mParallelBehaviours->mNode;
+    p_mParallelBehaviours->mNode.mPrev = v14;
+    v7 = UFG::BehaviourControllerComponent::BeginBehaviour(this, v15, optResult);
     if ( v7 != 1 )
-      UFG::BehaviourControllerComponent::EndBehaviour(v5, v15);
+      UFG::BehaviourControllerComponent::EndBehaviour(this, v15);
     return v7;
   }
   v7 = -5;
-  if ( v3 )
+  if ( optResult )
   {
-    v3->mId = -5;
-    v3->mBehaviour = v12;
-    v3->mDesc = "Instance of parallel behaviour already running with higher priority.";
-    v3->mInvokeParams.mNode = v4->mNode;
-    *(_QWORD *)&v3->mInvokeParams.mPriority = *(_QWORD *)&v4->mPriority;
-    *(_QWORD *)&v3->mInvokeParams.mControlType = *(_QWORD *)&v4->mControlType;
-    *(_QWORD *)&v3->mInvokeParams.mMaxLifeTime = *(_QWORD *)&v4->mMaxLifeTime;
-    v3->mInvokeParams.mInvokeTask = v4->mInvokeTask;
+    optResult->mId = -5;
+    optResult->mBehaviour = v12;
+    optResult->mDesc = "Instance of parallel behaviour already running with higher priority.";
+    optResult->mInvokeParams.mNode = params->mNode;
+    *(_QWORD *)&optResult->mInvokeParams.mPriority = *(_QWORD *)&params->mPriority;
+    *(_QWORD *)&optResult->mInvokeParams.mControlType = *(_QWORD *)&params->mControlType;
+    *(_QWORD *)&optResult->mInvokeParams.mMaxLifeTime = *(_QWORD *)&params->mMaxLifeTime;
+    optResult->mInvokeParams.mInvokeTask = params->mInvokeTask;
   }
   return v7;
 }
 
 // File Line: 446
 // RVA: 0x341D30
-__int64 __fastcall UFG::BehaviourControllerComponent::Arbitrate_StartRootExclusive(UFG::BehaviourControllerComponent *this, UFG::InvokeBehaviourParams *params, UFG::InvokeBehaviourResult *optResult)
+__int64 __fastcall UFG::BehaviourControllerComponent::Arbitrate_StartRootExclusive(
+        UFG::BehaviourControllerComponent *this,
+        UFG::InvokeBehaviourParams *params,
+        UFG::InvokeBehaviourResult *optResult)
 {
-  UFG::InvokeBehaviourResult *v3; // rbx
-  UFG::InvokeBehaviourParams *v4; // rsi
-  UFG::BehaviourControllerComponent *v5; // rbp
-  unsigned int v6; // edi
-  UFG::Behaviour *v7; // rcx
-  UFG::eInvokeBehaviourPriorityMode v8; // edx
-  UFG::Behaviour *v9; // rax
-  UFG::Behaviour *v10; // rax
+  unsigned int mId; // edi
+  UFG::Behaviour *mExclusiveBehaviour; // rcx
+  UFG::eInvokeBehaviourPriorityMode mPriorityMode; // edx
+  UFG::Behaviour *WaitingBehaviour; // rax
+  UFG::Behaviour *Behaviour; // rax
   UFG::Behaviour *v11; // rsi
 
-  v3 = optResult;
-  v4 = params;
-  v5 = this;
-  v6 = this->mExclusiveBehaviour == 0i64;
+  mId = this->mExclusiveBehaviour == 0i64;
   if ( optResult )
   {
-    optResult->mId = v6;
+    optResult->mId = mId;
     optResult->mBehaviour = 0i64;
-    optResult->mDesc = &customWorldMapCaption;
+    optResult->mDesc = &customCaption;
     if ( params )
       optResult->mInvokeParams = *params;
   }
-  v7 = this->mExclusiveBehaviour;
-  if ( !v7 || (v8 = params->mPriorityMode, (signed int)v8 < 0) )
+  mExclusiveBehaviour = this->mExclusiveBehaviour;
+  if ( !mExclusiveBehaviour || (mPriorityMode = params->mPriorityMode, mPriorityMode < eINVOKE_PRIORITY_KILL) )
   {
 LABEL_24:
-    if ( v6 != 1 )
-      return v6;
+    if ( mId != 1 )
+      return mId;
     goto LABEL_25;
   }
-  if ( (signed int)v8 <= 1 )
+  if ( mPriorityMode <= eINVOKE_PRIORITY_KILL_OR_WAIT )
   {
-    if ( v4->mPriority > v7->mParams.mPriority )
+    if ( params->mPriority > mExclusiveBehaviour->mParams.mPriority )
     {
-      UFG::BehaviourControllerComponent::EndBehaviour(v5, v7);
+      UFG::BehaviourControllerComponent::EndBehaviour(this, mExclusiveBehaviour);
 LABEL_25:
-      v10 = UFG::BehaviourControllerComponent::CreateBehaviour(v5, v4, 1, v3);
-      v11 = v10;
-      if ( v10 )
+      Behaviour = UFG::BehaviourControllerComponent::CreateBehaviour(this, params, 1, optResult);
+      v11 = Behaviour;
+      if ( Behaviour )
       {
-        v5->mExclusiveBehaviour = v10;
-        v6 = UFG::BehaviourControllerComponent::BeginBehaviour(v5, v10, v3);
-        if ( v6 != 1 )
-          UFG::BehaviourControllerComponent::EndBehaviour(v5, v11);
+        this->mExclusiveBehaviour = Behaviour;
+        mId = UFG::BehaviourControllerComponent::BeginBehaviour(this, Behaviour, optResult);
+        if ( mId != 1 )
+          UFG::BehaviourControllerComponent::EndBehaviour(this, v11);
       }
-      else if ( v3 )
+      else if ( optResult )
       {
-        v6 = v3->mId;
+        return (unsigned int)optResult->mId;
       }
       else
       {
-        v6 = 0;
+        return 0;
       }
-      return v6;
+      return mId;
     }
-    if ( v8 == 1 )
+    if ( mPriorityMode == eINVOKE_PRIORITY_KILL_OR_WAIT )
     {
-      v9 = UFG::BehaviourControllerComponent::CreateWaitingBehaviour(v5, v4, optResult);
-      if ( v9 )
+      WaitingBehaviour = UFG::BehaviourControllerComponent::CreateWaitingBehaviour(this, params, optResult);
+      if ( WaitingBehaviour )
       {
 LABEL_12:
-        v6 = 2;
-        if ( v3 )
+        mId = 2;
+        if ( optResult )
         {
-          v3->mId = 2;
-          v3->mBehaviour = v9;
-          v3->mDesc = "Waiting";
-          v3->mInvokeParams.mNode = v4->mNode;
-          *(_QWORD *)&v3->mInvokeParams.mPriority = *(_QWORD *)&v4->mPriority;
-          *(_QWORD *)&v3->mInvokeParams.mControlType = *(_QWORD *)&v4->mControlType;
-          *(_QWORD *)&v3->mInvokeParams.mMaxLifeTime = *(_QWORD *)&v4->mMaxLifeTime;
-          v3->mInvokeParams.mInvokeTask = v4->mInvokeTask;
+          optResult->mId = 2;
+          optResult->mBehaviour = WaitingBehaviour;
+          optResult->mDesc = "Waiting";
+          optResult->mInvokeParams.mNode = params->mNode;
+          *(_QWORD *)&optResult->mInvokeParams.mPriority = *(_QWORD *)&params->mPriority;
+          *(_QWORD *)&optResult->mInvokeParams.mControlType = *(_QWORD *)&params->mControlType;
+          *(_QWORD *)&optResult->mInvokeParams.mMaxLifeTime = *(_QWORD *)&params->mMaxLifeTime;
+          optResult->mInvokeParams.mInvokeTask = params->mInvokeTask;
         }
-        return v6;
+        return mId;
       }
-      if ( !v3 )
+      if ( !optResult )
         return (unsigned int)-2;
       goto LABEL_23;
     }
   }
   else
   {
-    if ( (signed int)v8 > 3 )
+    if ( mPriorityMode > eINVOKE_PRIORITY_SUSPEND_OR_WAIT )
       goto LABEL_24;
-    if ( v4->mPriority > v7->mParams.mPriority )
+    if ( params->mPriority > mExclusiveBehaviour->mParams.mPriority )
     {
-      UFG::BehaviourControllerComponent::SuspendBehaviour(v5, v7);
+      UFG::BehaviourControllerComponent::SuspendBehaviour(this, mExclusiveBehaviour);
       goto LABEL_25;
     }
-    if ( v8 == 3 )
+    if ( mPriorityMode == eINVOKE_PRIORITY_SUSPEND_OR_WAIT )
     {
-      v9 = UFG::BehaviourControllerComponent::CreateWaitingBehaviour(v5, v4, optResult);
-      if ( v9 )
+      WaitingBehaviour = UFG::BehaviourControllerComponent::CreateWaitingBehaviour(this, params, optResult);
+      if ( WaitingBehaviour )
         goto LABEL_12;
-      if ( !v3 )
+      if ( !optResult )
         return (unsigned int)-2;
 LABEL_23:
-      v6 = v3->mId;
+      mId = optResult->mId;
       goto LABEL_24;
     }
   }
-  v6 = -4;
+  mId = -4;
   if ( optResult )
   {
     optResult->mId = -4;
-    optResult->mBehaviour = v7;
+    optResult->mBehaviour = mExclusiveBehaviour;
     optResult->mDesc = "Priority is lower than currently running behaviour.";
-    optResult->mInvokeParams.mNode = v4->mNode;
-    *(_QWORD *)&optResult->mInvokeParams.mPriority = *(_QWORD *)&v4->mPriority;
-    *(_QWORD *)&optResult->mInvokeParams.mControlType = *(_QWORD *)&v4->mControlType;
-    *(_QWORD *)&optResult->mInvokeParams.mMaxLifeTime = *(_QWORD *)&v4->mMaxLifeTime;
-    optResult->mInvokeParams.mInvokeTask = v4->mInvokeTask;
+    optResult->mInvokeParams = *params;
   }
-  return v6;
+  return mId;
 }
 
 // File Line: 555
 // RVA: 0x3509C0
-UFG::Behaviour *__fastcall UFG::BehaviourControllerComponent::CreateBehaviour(UFG::BehaviourControllerComponent *this, UFG::InvokeBehaviourParams *params, bool bCheckForDuplicates, UFG::InvokeBehaviourResult *optResult)
+UFG::Behaviour *__fastcall UFG::BehaviourControllerComponent::CreateBehaviour(
+        UFG::BehaviourControllerComponent *this,
+        UFG::InvokeBehaviourParams *params,
+        bool bCheckForDuplicates,
+        UFG::InvokeBehaviourResult *optResult)
 {
-  UFG::InvokeBehaviourResult *v4; // rbx
-  UFG::InvokeBehaviourParams *v5; // rdi
-  UFG::BehaviourControllerComponent *v6; // r9
   bool v7; // si
-  UFG::Behaviour *v8; // rcx
-  UFG::Behaviour *v9; // rcx
-  ActionNode *v10; // rdx
+  UFG::Behaviour *mExclusiveBehaviour; // rcx
+  UFG::Behaviour *p_mNext; // rcx
+  ActionNode *mNode; // rdx
   const char *v11; // rax
   UFG::Behaviour *v12; // rdx
   UFG::Behaviour *v13; // rdx
   UFG::allocator::free_link *v14; // rax
-  UFG::Behaviour *v15; // rax
-  UFG::Behaviour *v16; // rbx
-  InvokeBehaviourTask *v17; // rax
-  UFG::Behaviour *result; // rax
+  _QWORD *v15; // rax
+  _QWORD *v16; // rbx
+  InvokeBehaviourTask *mInvokeTask; // rax
   UFG::allocator::free_link *v19; // rax
-  ActionContext *v20; // rax
+  __int64 v20; // rax
   char *v21; // rax
-  ActionController *v22; // rax
+  __int64 v22; // rax
 
-  v4 = optResult;
-  v5 = params;
-  v6 = this;
-  v7 = bCheckForDuplicates == 0;
+  v7 = !bCheckForDuplicates;
   if ( bCheckForDuplicates )
   {
-    v8 = this->mExclusiveBehaviour;
-    if ( v8 && v8->mParams.mNode == params->mNode && v4 )
+    mExclusiveBehaviour = this->mExclusiveBehaviour;
+    if ( mExclusiveBehaviour && mExclusiveBehaviour->mParams.mNode == params->mNode && optResult )
     {
-      v4->mId = -5;
-      v4->mDesc = "Invoked behaviour already running as exclusive, this shouldnt happen, bad logic!!";
-      v4->mBehaviour = v8;
-      v4->mInvokeParams = *params;
+      optResult->mId = -5;
+      optResult->mDesc = "Invoked behaviour already running as exclusive, this shouldnt happen, bad logic!!";
+      optResult->mBehaviour = mExclusiveBehaviour;
+      optResult->mInvokeParams = *params;
     }
-    v9 = (UFG::Behaviour *)&v6->mParallelBehaviours.mNode.mNext[-2].mNext;
-    if ( v9 != (UFG::Behaviour *)&v6->mPrev )
+    p_mNext = (UFG::Behaviour *)&this->mParallelBehaviours.mNode.mNext[-2].mNext;
+    if ( p_mNext != (UFG::Behaviour *)&this->UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> )
     {
-      v10 = params->mNode;
-      while ( v9->mParams.mNode != v10 )
+      mNode = params->mNode;
+      while ( p_mNext->mParams.mNode != mNode )
       {
-        v9 = (UFG::Behaviour *)&v9->mNext[-2].mNext;
-        if ( v9 == (UFG::Behaviour *)&v6->mPrev )
+        p_mNext = (UFG::Behaviour *)&p_mNext->mNext[-2].mNext;
+        if ( p_mNext == (UFG::Behaviour *)&this->UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> )
           goto LABEL_16;
       }
-      if ( v5->mPriority <= v9->mParams.mPriority )
+      if ( params->mPriority <= p_mNext->mParams.mPriority )
       {
-        if ( !v4 )
+        if ( !optResult )
           goto LABEL_31;
-        v4->mId = -5;
+        optResult->mId = -5;
         v11 = "Duplicate parallel behaviour with higher priority.";
-        v4->mBehaviour = v9;
+        optResult->mBehaviour = p_mNext;
         goto LABEL_29;
       }
       v7 = 1;
-      UFG::BehaviourControllerComponent::EndBehaviour(v6, v9);
-      if ( !v4 )
+      UFG::BehaviourControllerComponent::EndBehaviour(this, p_mNext);
+      if ( !optResult )
         goto LABEL_31;
       v11 = "Behaviour removed from the Parallel list.";
 LABEL_28:
-      v4->mId = 1;
-      v4->mBehaviour = 0i64;
+      optResult->mId = 1;
+      optResult->mBehaviour = 0i64;
 LABEL_29:
-      v4->mDesc = v11;
-      v4->mInvokeParams.mNode = v5->mNode;
-      *(_QWORD *)&v4->mInvokeParams.mPriority = *(_QWORD *)&v5->mPriority;
-      *(_QWORD *)&v4->mInvokeParams.mControlType = *(_QWORD *)&v5->mControlType;
-      *(_QWORD *)&v4->mInvokeParams.mMaxLifeTime = *(_QWORD *)&v5->mMaxLifeTime;
-      v4->mInvokeParams.mInvokeTask = v5->mInvokeTask;
+      optResult->mDesc = v11;
+      optResult->mInvokeParams.mNode = params->mNode;
+      *(_QWORD *)&optResult->mInvokeParams.mPriority = *(_QWORD *)&params->mPriority;
+      *(_QWORD *)&optResult->mInvokeParams.mControlType = *(_QWORD *)&params->mControlType;
+      *(_QWORD *)&optResult->mInvokeParams.mMaxLifeTime = *(_QWORD *)&params->mMaxLifeTime;
+      optResult->mInvokeParams.mInvokeTask = params->mInvokeTask;
       goto LABEL_31;
     }
 LABEL_16:
-    v12 = (UFG::Behaviour *)&v6->mSuspendedStack.mNode.mNext[-2].mNext;
-    if ( v12 == (UFG::Behaviour *)&v6->mExclusiveBehaviour )
+    v12 = (UFG::Behaviour *)&this->mSuspendedStack.mNode.mNext[-2].mNext;
+    if ( v12 == (UFG::Behaviour *)&this->mExclusiveBehaviour )
     {
 LABEL_22:
-      v13 = (UFG::Behaviour *)&v6->mWaitingBehaviours.mNode.mNext[-2].mNext;
-      if ( v13 == (UFG::Behaviour *)&v6->mParallelBehaviours.mNode.mNext )
+      v13 = (UFG::Behaviour *)&this->mWaitingBehaviours.mNode.mNext[-2].mNext;
+      if ( v13 == (UFG::Behaviour *)&this->mParallelBehaviours.mNode.mNext )
       {
 LABEL_30:
         v7 = 1;
       }
       else
       {
-        while ( v13->mParams.mNode != v5->mNode )
+        while ( v13->mParams.mNode != params->mNode )
         {
           v13 = (UFG::Behaviour *)&v13->mNext[-2].mNext;
-          if ( v13 == (UFG::Behaviour *)&v6->mParallelBehaviours.mNode.mNext )
+          if ( v13 == (UFG::Behaviour *)&this->mParallelBehaviours.mNode.mNext )
             goto LABEL_30;
         }
         v7 = 1;
-        UFG::BehaviourControllerComponent::EndBehaviour(v6, v13);
-        if ( v4 )
+        UFG::BehaviourControllerComponent::EndBehaviour(this, v13);
+        if ( optResult )
         {
           v11 = "Behaviour removed from the Waiting list.";
           goto LABEL_28;
@@ -866,15 +835,15 @@ LABEL_30:
     }
     else
     {
-      while ( v12->mParams.mNode != v5->mNode )
+      while ( v12->mParams.mNode != params->mNode )
       {
         v12 = (UFG::Behaviour *)&v12->mNext[-2].mNext;
-        if ( v12 == (UFG::Behaviour *)&v6->mExclusiveBehaviour )
+        if ( v12 == (UFG::Behaviour *)&this->mExclusiveBehaviour )
           goto LABEL_22;
       }
       v7 = 1;
-      UFG::BehaviourControllerComponent::EndBehaviour(v6, v12);
-      if ( v4 )
+      UFG::BehaviourControllerComponent::EndBehaviour(this, v12);
+      if ( optResult )
       {
         v11 = "Behaviour removed from the Suspended stack.";
         goto LABEL_28;
@@ -887,64 +856,59 @@ LABEL_31:
   v14 = UFG::qMalloc(0x68ui64, UFG::gGlobalNewName, 0i64);
   if ( v14 )
   {
-    UFG::Behaviour::Behaviour((UFG::Behaviour *)v14, v5);
+    UFG::Behaviour::Behaviour((UFG::Behaviour *)v14, params);
     v16 = v15;
   }
   else
   {
     v16 = 0i64;
   }
-  v17 = v5->mInvokeTask;
-  if ( !v17 || v5->mControlType )
+  mInvokeTask = params->mInvokeTask;
+  if ( !mInvokeTask || params->mControlType )
   {
     v19 = UFG::qMalloc(0xD8ui64, "Behaviour.ActionContext", 0i64);
     if ( v19 )
       ActionContext::ActionContext((ActionContext *)v19);
     else
       v20 = 0i64;
-    v16->mActionContext = v20;
+    v16[11] = v20;
     v21 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0x118ui64, "Behaviour.ActionController", 0i64, 1u);
     if ( v21 )
       ActionController::ActionController((ActionController *)v21);
     else
       v22 = 0i64;
-    v16->mActionController = v22;
-    v16->mParams.mInvokeTask = 0i64;
-    result = v16;
+    v16[12] = v22;
+    v16[10] = 0i64;
+    return (UFG::Behaviour *)v16;
   }
   else
   {
-    v16->mActionContext = &v17->m_ActionContext;
-    v16->mActionController = &v5->mInvokeTask->m_ActionController;
-    result = v16;
+    v16[11] = &mInvokeTask->m_ActionContext;
+    v16[12] = &params->mInvokeTask->m_ActionController;
+    return (UFG::Behaviour *)v16;
   }
-  return result;
 }
 
 // File Line: 623
 // RVA: 0x357B50
-UFG::qNode<UFG::Behaviour,UFG::Behaviour> **__fastcall UFG::BehaviourControllerComponent::FindParentBehaviourOfTask(UFG::BehaviourControllerComponent *this, InvokeBehaviourTask *task, UFG::qList<UFG::Behaviour,UFG::Behaviour,1,0> *behList)
+UFG::qNode<UFG::Behaviour,UFG::Behaviour> **__fastcall UFG::BehaviourControllerComponent::FindParentBehaviourOfTask(
+        UFG::BehaviourControllerComponent *this,
+        InvokeBehaviourTask *task,
+        UFG::qList<UFG::Behaviour,UFG::Behaviour,1,0> *behList)
 {
-  UFG::qNode<UFG::Behaviour,UFG::Behaviour> **v3; // rsi
-  InvokeBehaviourTask *v4; // rdi
+  UFG::qNode<UFG::Behaviour,UFG::Behaviour> **p_mNext; // rsi
   UFG::qNode<UFG::Behaviour,UFG::Behaviour> **v5; // rbx
-  UFG::BehaviourControllerComponent *v6; // rbp
 
-  v3 = &behList[-2].mNode.mNext;
-  v4 = task;
+  p_mNext = &behList[-2].mNode.mNext;
   v5 = &behList->mNode.mNext[-2].mNext;
-  v6 = this;
   if ( v5 == &behList[-2].mNode.mNext )
     return 0i64;
-  while ( !v4
+  while ( !task
        || !v5
-       || !UFG::BehaviourControllerComponent::IsTaskChildOfController(
-             v6,
-             (ITask *)&v4->vfptr,
-             (ActionController *)v5[12]) )
+       || !UFG::BehaviourControllerComponent::IsTaskChildOfController(this, task, (ActionController *)v5[12]) )
   {
     v5 = &v5[4][-2].mNext;
-    if ( v5 == v3 )
+    if ( v5 == p_mNext )
       return 0i64;
   }
   return v5;
@@ -952,27 +916,25 @@ UFG::qNode<UFG::Behaviour,UFG::Behaviour> **__fastcall UFG::BehaviourControllerC
 
 // File Line: 636
 // RVA: 0x357AC0
-UFG::Behaviour *__fastcall UFG::BehaviourControllerComponent::FindParentBehaviourOfTask(UFG::BehaviourControllerComponent *this, InvokeBehaviourTask *task)
+UFG::Behaviour *__fastcall UFG::BehaviourControllerComponent::FindParentBehaviourOfTask(
+        UFG::BehaviourControllerComponent *this,
+        InvokeBehaviourTask *task)
 {
-  UFG::Behaviour *v2; // r8
-  InvokeBehaviourTask *v3; // rdi
-  UFG::BehaviourControllerComponent *v4; // rbx
+  UFG::Behaviour *mExclusiveBehaviour; // r8
   UFG::Behaviour *result; // rax
 
-  v2 = this->mExclusiveBehaviour;
-  v3 = task;
-  v4 = this;
-  if ( !v2
+  mExclusiveBehaviour = this->mExclusiveBehaviour;
+  if ( !mExclusiveBehaviour
     || !task
-    || !UFG::BehaviourControllerComponent::IsTaskChildOfController(this, (ITask *)&task->vfptr, v2->mActionController)
-    || (result = v4->mExclusiveBehaviour) == 0i64 )
+    || !UFG::BehaviourControllerComponent::IsTaskChildOfController(this, task, mExclusiveBehaviour->mActionController)
+    || (result = this->mExclusiveBehaviour) == 0i64 )
   {
-    result = UFG::BehaviourControllerComponent::FindParentBehaviourOfTask(v4, v3, &v4->mParallelBehaviours);
+    result = UFG::BehaviourControllerComponent::FindParentBehaviourOfTask(this, task, &this->mParallelBehaviours);
     if ( !result )
     {
-      result = UFG::BehaviourControllerComponent::FindParentBehaviourOfTask(v4, v3, &v4->mSuspendedStack);
+      result = UFG::BehaviourControllerComponent::FindParentBehaviourOfTask(this, task, &this->mSuspendedStack);
       if ( !result )
-        result = UFG::BehaviourControllerComponent::FindParentBehaviourOfTask(v4, v3, &v4->mWaitingBehaviours);
+        return UFG::BehaviourControllerComponent::FindParentBehaviourOfTask(this, task, &this->mWaitingBehaviours);
     }
   }
   return result;
@@ -980,71 +942,72 @@ UFG::Behaviour *__fastcall UFG::BehaviourControllerComponent::FindParentBehaviou
 
 // File Line: 665
 // RVA: 0x355F00
-UFG::Behaviour *__fastcall UFG::BehaviourControllerComponent::FindBehaviourWithNode(UFG::BehaviourControllerComponent *this, const char *nodePath)
+UFG::Behaviour *__fastcall UFG::BehaviourControllerComponent::FindBehaviourWithNode(
+        UFG::BehaviourControllerComponent *this,
+        const char *nodePath)
 {
-  UFG::BehaviourControllerComponent *v2; // rdi
-  UFG::Behaviour *v3; // rbx
+  UFG::Behaviour *BehaviourWithNode; // rbx
   ActionNode *v4; // rax
-  int v5; // edx
-  ActionPath absolutePath; // [rsp+28h] [rbp-20h]
+  int mCount; // edx
+  ActionPath absolutePath; // [rsp+28h] [rbp-20h] BYREF
 
-  v2 = this;
-  v3 = 0i64;
+  BehaviourWithNode = 0i64;
   absolutePath.mPath.mCount = 0;
   absolutePath.mPath.mData.mOffset = 0i64;
   ActionPath::Append(&absolutePath, nodePath);
   v4 = ActionNode::Find(&absolutePath, 0i64);
   if ( v4 )
-    v3 = UFG::BehaviourControllerComponent::FindBehaviourWithNode(v2, v4);
-  v5 = absolutePath.mPath.mCount;
+    BehaviourWithNode = UFG::BehaviourControllerComponent::FindBehaviourWithNode(this, v4);
+  mCount = absolutePath.mPath.mCount;
   if ( absolutePath.mPath.mCount >= 0 )
   {
     if ( absolutePath.mPath.mData.mOffset
       && (UFG::qOffset64<ActionID *> *)((char *)&absolutePath.mPath.mData + absolutePath.mPath.mData.mOffset) )
     {
       operator delete[]((char *)&absolutePath.mPath.mData + absolutePath.mPath.mData.mOffset);
-      v5 = absolutePath.mPath.mCount;
+      mCount = absolutePath.mPath.mCount;
     }
     absolutePath.mPath.mData.mOffset = 0i64;
-    absolutePath.mPath.mCount = v5 & 0x80000000;
+    absolutePath.mPath.mCount = mCount & 0x80000000;
   }
-  return v3;
+  return BehaviourWithNode;
 }
 
 // File Line: 677
 // RVA: 0x355FA0
-UFG::Behaviour *__fastcall UFG::BehaviourControllerComponent::FindBehaviourWithNode(UFG::BehaviourControllerComponent *this, ActionNode *node)
+UFG::Behaviour *__fastcall UFG::BehaviourControllerComponent::FindBehaviourWithNode(
+        UFG::BehaviourControllerComponent *this,
+        ActionNode *node)
 {
   UFG::Behaviour *result; // rax
-  UFG::qNode<UFG::Behaviour,UFG::Behaviour> *v3; // rax
-  UFG::Behaviour *v4; // rcx
+  UFG::qNode<UFG::Behaviour,UFG::Behaviour> *mNext; // rax
+  UFG::qNode<UFG::Behaviour,UFG::Behaviour> **p_mNext; // rcx
 
   result = this->mExclusiveBehaviour;
   if ( !result || result->mParams.mNode != node )
   {
     result = (UFG::Behaviour *)&this->mParallelBehaviours.mNode.mNext[-2].mNext;
-    if ( result == (UFG::Behaviour *)&this->mPrev )
+    if ( result == (UFG::Behaviour *)&this->UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> )
     {
 LABEL_6:
       result = (UFG::Behaviour *)&this->mSuspendedStack.mNode.mNext[-2].mNext;
       if ( result == (UFG::Behaviour *)&this->mExclusiveBehaviour )
       {
 LABEL_9:
-        v3 = this->mWaitingBehaviours.mNode.mNext;
-        v4 = (UFG::Behaviour *)&this->mParallelBehaviours.mNode.mNext;
-        result = (UFG::Behaviour *)&v3[-2].mNext;
-        if ( result == v4 )
+        mNext = this->mWaitingBehaviours.mNode.mNext;
+        p_mNext = &this->mParallelBehaviours.mNode.mNext;
+        result = (UFG::Behaviour *)&mNext[-2].mNext;
+        if ( result == (UFG::Behaviour *)p_mNext )
         {
-LABEL_12:
-          result = 0i64;
+          return 0i64;
         }
         else
         {
           while ( result->mParams.mNode != node )
           {
             result = (UFG::Behaviour *)&result->mNext[-2].mNext;
-            if ( result == v4 )
-              goto LABEL_12;
+            if ( result == (UFG::Behaviour *)p_mNext )
+              return 0i64;
           }
         }
       }
@@ -1063,7 +1026,7 @@ LABEL_12:
       while ( result->mParams.mNode != node )
       {
         result = (UFG::Behaviour *)&result->mNext[-2].mNext;
-        if ( result == (UFG::Behaviour *)&this->mPrev )
+        if ( result == (UFG::Behaviour *)&this->UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> )
           goto LABEL_6;
       }
     }
@@ -1073,127 +1036,120 @@ LABEL_12:
 
 // File Line: 709
 // RVA: 0x351620
-UFG::Behaviour *__fastcall UFG::BehaviourControllerComponent::CreateWaitingBehaviour(UFG::BehaviourControllerComponent *this, UFG::InvokeBehaviourParams *params, UFG::InvokeBehaviourResult *optResult)
+UFG::Behaviour *__fastcall UFG::BehaviourControllerComponent::CreateWaitingBehaviour(
+        UFG::BehaviourControllerComponent *this,
+        UFG::InvokeBehaviourParams *params,
+        UFG::InvokeBehaviourResult *optResult)
 {
-  UFG::BehaviourControllerComponent *v3; // rdi
-  UFG::Behaviour *v4; // rcx
-  UFG::Behaviour *v5; // r9
-  UFG::InvokeBehaviourParams *v6; // rbx
-  UFG::qList<UFG::Behaviour,UFG::Behaviour,1,0> *v8; // rsi
-  UFG::qNode<UFG::Behaviour,UFG::Behaviour> **v9; // rcx
-  ActionNode *v10; // rdx
+  UFG::Behaviour *mExclusiveBehaviour; // rcx
+  UFG::Behaviour *Behaviour; // r9
+  UFG::qList<UFG::Behaviour,UFG::Behaviour,1,0> *p_mWaitingBehaviours; // rsi
+  UFG::Behaviour *p_mNext; // rcx
+  ActionNode *mNode; // rdx
   UFG::Behaviour *v11; // rax
   UFG::Behaviour *v12; // rcx
-  UFG::qNode<UFG::Behaviour,UFG::Behaviour> *v13; // rcx
-  UFG::qNode<UFG::Behaviour,UFG::Behaviour> *v14; // rdx
+  UFG::qNode<UFG::Behaviour,UFG::Behaviour> *mPrev; // rcx
 
-  v3 = this;
-  v4 = this->mExclusiveBehaviour;
-  v5 = 0i64;
-  v6 = params;
-  if ( v4 && v4->mParams.mNode == params->mNode )
+  mExclusiveBehaviour = this->mExclusiveBehaviour;
+  Behaviour = 0i64;
+  if ( mExclusiveBehaviour && mExclusiveBehaviour->mParams.mNode == params->mNode )
   {
     if ( optResult )
     {
       optResult->mId = -5;
-      optResult->mBehaviour = v4;
+      optResult->mBehaviour = mExclusiveBehaviour;
       optResult->mDesc = "Invoked behaviour already running as exclusive.";
       optResult->mInvokeParams = *params;
       return 0i64;
     }
-    return v5;
+    return Behaviour;
   }
-  v8 = &v3->mWaitingBehaviours;
-  v9 = &v3->mWaitingBehaviours.mNode.mNext[-2].mNext;
-  if ( v9 != &v3->mParallelBehaviours.mNode.mNext )
+  p_mWaitingBehaviours = &this->mWaitingBehaviours;
+  p_mNext = (UFG::Behaviour *)&this->mWaitingBehaviours.mNode.mNext[-2].mNext;
+  if ( p_mNext != (UFG::Behaviour *)&this->mParallelBehaviours.mNode.mNext )
   {
-    v10 = params->mNode;
-    while ( v9[6] != (UFG::qNode<UFG::Behaviour,UFG::Behaviour> *)v10 )
+    mNode = params->mNode;
+    while ( p_mNext->mParams.mNode != mNode )
     {
-      v9 = &v9[4][-2].mNext;
-      if ( v9 == &v3->mParallelBehaviours.mNode.mNext )
+      p_mNext = (UFG::Behaviour *)&p_mNext->mNext[-2].mNext;
+      if ( p_mNext == (UFG::Behaviour *)&this->mParallelBehaviours.mNode.mNext )
         goto LABEL_9;
     }
-    v5 = (UFG::Behaviour *)v9;
-    if ( v6->mPriority > *((_DWORD *)v9 + 14) )
+    Behaviour = p_mNext;
+    if ( params->mPriority > p_mNext->mParams.mPriority )
     {
-      v9[6] = (UFG::qNode<UFG::Behaviour,UFG::Behaviour> *)v10;
-      v9[7] = *(UFG::qNode<UFG::Behaviour,UFG::Behaviour> **)&v6->mPriority;
-      v9[8] = *(UFG::qNode<UFG::Behaviour,UFG::Behaviour> **)&v6->mControlType;
-      v9[9] = *(UFG::qNode<UFG::Behaviour,UFG::Behaviour> **)&v6->mMaxLifeTime;
-      v9[10] = (UFG::qNode<UFG::Behaviour,UFG::Behaviour> *)v6->mInvokeTask;
-      return (UFG::Behaviour *)v9;
+      p_mNext->mParams.mNode = mNode;
+      *(_QWORD *)&p_mNext->mParams.mPriority = *(_QWORD *)&params->mPriority;
+      *(_QWORD *)&p_mNext->mParams.mControlType = *(_QWORD *)&params->mControlType;
+      *(_QWORD *)&p_mNext->mParams.mMaxLifeTime = *(_QWORD *)&params->mMaxLifeTime;
+      p_mNext->mParams.mInvokeTask = params->mInvokeTask;
+      return p_mNext;
     }
-    return v5;
+    return Behaviour;
   }
 LABEL_9:
-  v11 = (UFG::Behaviour *)&v3->mParallelBehaviours.mNode.mNext[-2].mNext;
-  if ( v11 != (UFG::Behaviour *)&v3->mPrev )
+  v11 = (UFG::Behaviour *)&this->mParallelBehaviours.mNode.mNext[-2].mNext;
+  if ( v11 != (UFG::Behaviour *)&this->UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> )
   {
-    while ( v11->mParams.mNode != v6->mNode )
+    while ( v11->mParams.mNode != params->mNode )
     {
       v11 = (UFG::Behaviour *)&v11->mNext[-2].mNext;
-      if ( v11 == (UFG::Behaviour *)&v3->mPrev )
+      if ( v11 == (UFG::Behaviour *)&this->UFG::qNode<UFG::BehaviourControllerComponent,UFG::BehaviourControllerComponent> )
         goto LABEL_12;
     }
     if ( !optResult )
-      return v5;
+      return Behaviour;
     optResult->mBehaviour = v11;
     optResult->mDesc = "Behaviour already running as parallel.";
     goto LABEL_25;
   }
 LABEL_12:
-  v12 = (UFG::Behaviour *)&v3->mSuspendedStack.mNode.mNext[-2].mNext;
-  if ( v12 == (UFG::Behaviour *)&v3->mExclusiveBehaviour )
+  v12 = (UFG::Behaviour *)&this->mSuspendedStack.mNode.mNext[-2].mNext;
+  if ( v12 == (UFG::Behaviour *)&this->mExclusiveBehaviour )
   {
 LABEL_15:
-    v5 = UFG::BehaviourControllerComponent::CreateBehaviour(v3, v6, 0, 0i64);
-    v5->mState = 3;
-    v13 = v8->mNode.mPrev;
-    v14 = (UFG::qNode<UFG::Behaviour,UFG::Behaviour> *)&v5->mPrev;
-    v13->mNext = (UFG::qNode<UFG::Behaviour,UFG::Behaviour> *)&v5->mPrev;
-    v14->mPrev = v13;
-    v14->mNext = &v8->mNode;
-    v8->mNode.mPrev = (UFG::qNode<UFG::Behaviour,UFG::Behaviour> *)&v5->mPrev;
-    return v5;
+    Behaviour = UFG::BehaviourControllerComponent::CreateBehaviour(this, params, 0, 0i64);
+    Behaviour->mState = eINVOKE_STATE_WAITING;
+    mPrev = p_mWaitingBehaviours->mNode.mPrev;
+    mPrev->mNext = &Behaviour->UFG::qNode<UFG::Behaviour,UFG::Behaviour>;
+    Behaviour->mPrev = mPrev;
+    Behaviour->mNext = &p_mWaitingBehaviours->mNode;
+    p_mWaitingBehaviours->mNode.mPrev = &Behaviour->UFG::qNode<UFG::Behaviour,UFG::Behaviour>;
+    return Behaviour;
   }
-  while ( v12->mParams.mNode != v6->mNode )
+  while ( v12->mParams.mNode != params->mNode )
   {
     v12 = (UFG::Behaviour *)&v12->mNext[-2].mNext;
-    if ( v12 == (UFG::Behaviour *)&v3->mExclusiveBehaviour )
+    if ( v12 == (UFG::Behaviour *)&this->mExclusiveBehaviour )
       goto LABEL_15;
   }
-  if ( v6->mPriority > v12->mParams.mPriority )
+  if ( params->mPriority > v12->mParams.mPriority )
   {
-    UFG::BehaviourControllerComponent::EndBehaviour(v3, v12);
+    UFG::BehaviourControllerComponent::EndBehaviour(this, v12);
     goto LABEL_15;
   }
   if ( !optResult )
-    return v5;
+    return Behaviour;
   optResult->mBehaviour = v12;
   optResult->mDesc = "Behaviour with higher priority is in the Suspended stack.";
 LABEL_25:
   optResult->mId = -5;
-  optResult->mInvokeParams.mNode = v6->mNode;
-  *(_QWORD *)&optResult->mInvokeParams.mPriority = *(_QWORD *)&v6->mPriority;
-  *(_QWORD *)&optResult->mInvokeParams.mControlType = *(_QWORD *)&v6->mControlType;
-  *(_QWORD *)&optResult->mInvokeParams.mMaxLifeTime = *(_QWORD *)&v6->mMaxLifeTime;
-  optResult->mInvokeParams.mInvokeTask = v6->mInvokeTask;
+  optResult->mInvokeParams = *params;
   return 0i64;
 }
 
 // File Line: 764
 // RVA: 0x355780
-signed __int64 __fastcall UFG::BehaviourControllerComponent::EndBehaviour(UFG::BehaviourControllerComponent *this, const char *nodePath)
+__int64 __fastcall UFG::BehaviourControllerComponent::EndBehaviour(
+        UFG::BehaviourControllerComponent *this,
+        const char *nodePath)
 {
-  UFG::BehaviourControllerComponent *v2; // rbx
   ActionNode *v3; // rax
   unsigned int v4; // ebx
-  UFG::Behaviour *v5; // rax
-  int v6; // edx
-  ActionPath absolutePath; // [rsp+28h] [rbp-20h]
+  UFG::Behaviour *BehaviourWithNode; // rax
+  int mCount; // edx
+  ActionPath absolutePath; // [rsp+28h] [rbp-20h] BYREF
 
-  v2 = this;
   if ( !nodePath || !*nodePath )
     return UFG::BehaviourControllerComponent::EndBehaviour(this, this->mExclusiveBehaviour);
   absolutePath.mPath.mCount = 0;
@@ -1202,14 +1158,14 @@ signed __int64 __fastcall UFG::BehaviourControllerComponent::EndBehaviour(UFG::B
   v3 = ActionNode::Find(&absolutePath, 0i64);
   if ( v3 )
   {
-    v5 = UFG::BehaviourControllerComponent::FindBehaviourWithNode(v2, v3);
-    v4 = UFG::BehaviourControllerComponent::EndBehaviour(v2, v5);
+    BehaviourWithNode = UFG::BehaviourControllerComponent::FindBehaviourWithNode(this, v3);
+    v4 = UFG::BehaviourControllerComponent::EndBehaviour(this, BehaviourWithNode);
   }
   else
   {
     v4 = -3;
   }
-  v6 = absolutePath.mPath.mCount;
+  mCount = absolutePath.mPath.mCount;
   if ( absolutePath.mPath.mCount >= 0 )
   {
     if ( absolutePath.mPath.mData.mOffset )
@@ -1217,315 +1173,313 @@ signed __int64 __fastcall UFG::BehaviourControllerComponent::EndBehaviour(UFG::B
       if ( (UFG::qOffset64<ActionID *> *)((char *)&absolutePath.mPath.mData + absolutePath.mPath.mData.mOffset) )
       {
         operator delete[]((char *)&absolutePath.mPath.mData + absolutePath.mPath.mData.mOffset);
-        v6 = absolutePath.mPath.mCount;
+        mCount = absolutePath.mPath.mCount;
       }
     }
     absolutePath.mPath.mData.mOffset = 0i64;
-    absolutePath.mPath.mCount = v6 & 0x80000000;
+    absolutePath.mPath.mCount = mCount & 0x80000000;
   }
   return v4;
 }
 
 // File Line: 784
 // RVA: 0x355690
-signed __int64 __fastcall UFG::BehaviourControllerComponent::EndBehaviour(UFG::BehaviourControllerComponent *this, UFG::Behaviour *behaviour)
+__int64 __fastcall UFG::BehaviourControllerComponent::EndBehaviour(
+        UFG::BehaviourControllerComponent *this,
+        UFG::Behaviour *behaviour)
 {
-  UFG::Behaviour *v2; // rbx
-  UFG::BehaviourControllerComponent *v3; // rdi
-  UFG::SimObject *v4; // rcx
+  UFG::SimObjectGame *m_pSimObject; // rcx
   UEL::ParametersBase *v5; // rsi
-  unsigned __int16 v6; // dx
-  UEL::ParametersBase *v7; // rax
+  __int16 m_Flags; // dx
+  UEL::ParametersBase *m_pComponent; // rax
 
-  v2 = behaviour;
-  v3 = this;
   if ( behaviour )
   {
     if ( behaviour->mActionController )
     {
-      v4 = this->m_pSimObject;
+      m_pSimObject = (UFG::SimObjectGame *)this->m_pSimObject;
       v5 = UEL::gCurrentParameters;
-      if ( v4 )
+      if ( m_pSimObject )
       {
-        v6 = v4->m_Flags;
-        if ( (v6 >> 14) & 1 )
+        m_Flags = m_pSimObject->m_Flags;
+        if ( (m_Flags & 0x4000) != 0 )
         {
-          v7 = (UEL::ParametersBase *)v4->m_Components.p->m_pComponent;
+          m_pComponent = (UEL::ParametersBase *)m_pSimObject->m_Components.p->m_pComponent;
         }
-        else if ( (v6 & 0x8000u) == 0 )
+        else if ( m_Flags >= 0 )
         {
-          if ( (v6 >> 13) & 1 )
-            v7 = (UEL::ParametersBase *)v4->m_Components.p->m_pComponent;
+          if ( (m_Flags & 0x2000) != 0 )
+            m_pComponent = (UEL::ParametersBase *)m_pSimObject->m_Components.p->m_pComponent;
           else
-            v7 = (UEL::ParametersBase *)((v6 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                            (UFG::SimObjectGame *)v4,
-                                                            UFG::UELComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(
-                                                                                             v4,
-                                                                                             UFG::UELComponent::_TypeUID));
+            m_pComponent = (UEL::ParametersBase *)((m_Flags & 0x1000) != 0
+                                                 ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                     m_pSimObject,
+                                                     UFG::UELComponent::_TypeUID)
+                                                 : UFG::SimObject::GetComponentOfType(
+                                                     m_pSimObject,
+                                                     UFG::UELComponent::_TypeUID));
         }
         else
         {
-          v7 = (UEL::ParametersBase *)v4->m_Components.p->m_pComponent;
+          m_pComponent = (UEL::ParametersBase *)m_pSimObject->m_Components.p->m_pComponent;
         }
-        if ( v7 )
-          UEL::gCurrentParameters = v7 + 88;
+        if ( m_pComponent )
+          UEL::gCurrentParameters = m_pComponent + 88;
       }
-      ActionController::Stop(v2->mActionController);
+      ActionController::Stop(behaviour->mActionController);
       UEL::gCurrentParameters = v5;
     }
-    if ( v2 == v3->mExclusiveBehaviour )
-      v3->mExclusiveBehaviour = 0i64;
-    v2->vfptr->__vecDelDtor((UFG::qSafePointerNode<UFG::Behaviour> *)&v2->vfptr, 1u);
+    if ( behaviour == this->mExclusiveBehaviour )
+      this->mExclusiveBehaviour = 0i64;
+    behaviour->vfptr->__vecDelDtor(behaviour, 1i64);
   }
   return 1i64;
 }
 
 // File Line: 828
 // RVA: 0x36BC80
-bool __fastcall UFG::BehaviourControllerComponent::IsTaskChildOfController(UFG::BehaviourControllerComponent *this, ITask *task, ActionController *controller)
+bool __fastcall UFG::BehaviourControllerComponent::IsTaskChildOfController(
+        UFG::BehaviourControllerComponent *this,
+        ITask *task,
+        ActionController *controller)
 {
-  ITask *v3; // rbp
-  UFG::qNode<ITask,ITask> **v4; // rbx
-  bool v5; // di
-  UFG::qNode<ITask,ITask> *v6; // rsi
-  UFG::BehaviourControllerComponent *v8; // [rsp+40h] [rbp+8h]
-  ActionController *v9; // [rsp+50h] [rbp+18h]
+  ITask *p_mNext; // rbx
+  bool IsTaskChildOfController; // di
+  ITrack *m_Track; // rsi
 
-  v9 = controller;
-  v8 = this;
-  v3 = task;
   if ( !task )
     return 0;
-  v4 = &controller->m_RunningTasks.mNode.mNext[-1].mNext;
-  if ( v4 == (UFG::qNode<ITask,ITask> **)&controller->m_SequenceNode )
+  p_mNext = (ITask *)&controller->m_RunningTasks.mNode.mNext[-1].mNext;
+  if ( p_mNext == (ITask *)&controller->m_SequenceNode )
     return 0;
   do
   {
-    v5 = v4 == (UFG::qNode<ITask,ITask> **)v3;
-    if ( v4 == (UFG::qNode<ITask,ITask> **)v3 )
+    IsTaskChildOfController = p_mNext == task;
+    if ( p_mNext == task )
       break;
-    v6 = v4[3];
-    if ( SpawnTrack::sClassNameUID == ((unsigned int (__fastcall *)(UFG::qNode<ITask,ITask> *))v6->mPrev[2].mNext)(v6)
-      || InvokeBehaviourTrack::sClassNameUID == ((unsigned int (__fastcall *)(UFG::qNode<ITask,ITask> *))v6->mPrev[2].mNext)(v6) )
+    m_Track = p_mNext->m_Track;
+    if ( SpawnTrack::sClassNameUID == m_Track->vfptr->GetClassNameUID(m_Track)
+      || InvokeBehaviourTrack::sClassNameUID == m_Track->vfptr->GetClassNameUID(m_Track) )
     {
-      v5 = UFG::BehaviourControllerComponent::IsTaskChildOfController(v8, v3, (ActionController *)(v4 + 36));
-      if ( v5 )
+      IsTaskChildOfController = UFG::BehaviourControllerComponent::IsTaskChildOfController(
+                                  this,
+                                  task,
+                                  (ActionController *)&p_mNext[7].UFG::qNode<ITask,ITask>);
+      if ( IsTaskChildOfController )
         break;
     }
-    v4 = &v4[2][-1].mNext;
+    p_mNext = (ITask *)&p_mNext->mNext[-1].mNext;
   }
-  while ( v4 != (UFG::qNode<ITask,ITask> **)&v9->m_SequenceNode );
-  return v5;
+  while ( p_mNext != (ITask *)&controller->m_SequenceNode );
+  return IsTaskChildOfController;
 }
 
 // File Line: 864
 // RVA: 0x3491E0
-__int64 __fastcall UFG::BehaviourControllerComponent::BeginBehaviour(UFG::BehaviourControllerComponent *this, UFG::Behaviour *beh, UFG::InvokeBehaviourResult *optResult)
+__int64 __fastcall UFG::BehaviourControllerComponent::BeginBehaviour(
+        UFG::BehaviourControllerComponent *this,
+        UFG::Behaviour *beh,
+        UFG::InvokeBehaviourResult *optResult)
 {
   unsigned int v3; // esi
-  UFG::InvokeBehaviourResult *v4; // r14
-  UFG::Behaviour *v5; // rdi
-  UFG::BehaviourControllerComponent *v6; // r15
-  ActionContext *v7; // rbp
-  ActionContext *v8; // rbx
-  ActionController *v9; // r13
+  ActionContext *m_pActionContext; // rbp
+  ActionContext *mActionContext; // rbx
+  ActionController *mActionController; // r13
   __int64 v10; // rax
-  ActionNode *v11; // rcx
+  ActionNode *m_OpeningBranch; // rcx
   ActionNodeRoot *v12; // r12
   ActionNodeRoot *v13; // rax
   ActionNodeRoot *v14; // rbp
-  __int64 v15; // rdx
+  __int64 mValue; // rdx
   UFG::ActionTreeComponentBase *v16; // rcx
-  UFG::SimObject *v17; // rcx
+  UFG::SimObjectGame *m_pSimObject; // rcx
   UEL::ParametersBase *v18; // rbx
-  unsigned __int16 v19; // dx
-  UEL::ParametersBase *v20; // rax
+  __int16 m_Flags; // dx
+  UEL::ParametersBase *m_pComponent; // rax
   __int64 result; // rax
 
   v3 = 0;
-  v4 = optResult;
-  v5 = beh;
-  v6 = this;
   if ( !beh->mParams.mInvokeTask || beh->mParams.mControlType )
-    v7 = this->m_pActionContext;
+    m_pActionContext = this->m_pActionContext;
   else
-    v7 = beh->mParams.mInvokeTask->m_CallingActionContext;
-  v8 = beh->mActionContext;
-  v9 = beh->mActionController;
-  v9->mKeepAlive = 0;
-  v9->m_BankTracksEnabled = v7->mActionController->m_BankTracksEnabled != 0;
-  v9->m_OnEnterExitCallbacksEnabled = v7->mActionController->m_OnEnterExitCallbacksEnabled != 0;
-  ActionContext::operator=(v8, v7);
-  v9->m_Context = v8;
-  v8->mActionController = v9;
-  v8->mParentContext = v7;
-  v8->m_OpeningBranch = v5->mParams.mNode;
-  v10 = ((__int64 (*)(void))v7->m_OpeningBranch->vfptr[1].GetResourceOwner)();
-  v11 = v8->m_OpeningBranch;
+    m_pActionContext = beh->mParams.mInvokeTask->m_CallingActionContext;
+  mActionContext = beh->mActionContext;
+  mActionController = beh->mActionController;
+  mActionController->mKeepAlive = 0;
+  mActionController->m_BankTracksEnabled = m_pActionContext->mActionController->m_BankTracksEnabled != 0;
+  mActionController->m_OnEnterExitCallbacksEnabled = m_pActionContext->mActionController->m_OnEnterExitCallbacksEnabled != 0;
+  ActionContext::operator=(mActionContext, m_pActionContext);
+  mActionController->m_Context = mActionContext;
+  mActionContext->mActionController = mActionController;
+  mActionContext->mParentContext = m_pActionContext;
+  mActionContext->m_OpeningBranch = beh->mParams.mNode;
+  v10 = (__int64)m_pActionContext->m_OpeningBranch->vfptr[1].GetResourceOwner(m_pActionContext->m_OpeningBranch);
+  m_OpeningBranch = mActionContext->m_OpeningBranch;
   v12 = (ActionNodeRoot *)v10;
-  if ( v11 )
+  if ( m_OpeningBranch )
   {
-    v13 = (ActionNodeRoot *)((__int64 (*)(void))v11->vfptr[1].GetResourceOwner)();
+    v13 = (ActionNodeRoot *)m_OpeningBranch->vfptr[1].GetResourceOwner(m_OpeningBranch);
     v14 = v13;
     if ( v13 )
     {
-      v15 = v13->mActionTreeType.mValue;
-      if ( (v8->mActionTreeComponentBase[v15] || v8->mActionTreeComponentBase[1]) && v12 != v13 )
+      mValue = v13->mActionTreeType.mValue;
+      if ( (mActionContext->mActionTreeComponentBase[mValue] || mActionContext->mActionTreeComponentBase[1])
+        && v12 != v13 )
       {
-        v16 = v8->mActionTreeComponentBase[v15];
+        v16 = mActionContext->mActionTreeComponentBase[mValue];
         if ( !v16 )
-          v16 = v8->mActionTreeComponentBase[1];
+          v16 = mActionContext->mActionTreeComponentBase[1];
         if ( UFG::ActionTreeComponentBase::AllocateFor(v16, v13) )
-          ActionNodeRoot::Init(v14, v8);
+          ActionNodeRoot::Init(v14, mActionContext);
       }
     }
   }
-  if ( v8->m_OpeningBranch )
+  if ( mActionContext->m_OpeningBranch )
   {
-    v8->m_ActionTreeType.mValue = 2;
-    v17 = v6->m_pSimObject;
+    mActionContext->m_ActionTreeType.mValue = 2;
+    m_pSimObject = (UFG::SimObjectGame *)this->m_pSimObject;
     v18 = UEL::gCurrentParameters;
-    if ( v17 )
+    if ( m_pSimObject )
     {
-      v19 = v17->m_Flags;
-      if ( (v19 >> 14) & 1 )
+      m_Flags = m_pSimObject->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
       {
-        v20 = (UEL::ParametersBase *)v17->m_Components.p->m_pComponent;
+        m_pComponent = (UEL::ParametersBase *)m_pSimObject->m_Components.p->m_pComponent;
       }
-      else if ( (v19 & 0x8000u) == 0 )
+      else if ( m_Flags >= 0 )
       {
-        if ( (v19 >> 13) & 1 )
-          v20 = (UEL::ParametersBase *)v17->m_Components.p->m_pComponent;
+        if ( (m_Flags & 0x2000) != 0 )
+          m_pComponent = (UEL::ParametersBase *)m_pSimObject->m_Components.p->m_pComponent;
         else
-          v20 = (UEL::ParametersBase *)((v19 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                            (UFG::SimObjectGame *)v17,
-                                                            UFG::UELComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(
-                                                                                             v17,
-                                                                                             UFG::UELComponent::_TypeUID));
+          m_pComponent = (UEL::ParametersBase *)((m_Flags & 0x1000) != 0
+                                               ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                   m_pSimObject,
+                                                   UFG::UELComponent::_TypeUID)
+                                               : UFG::SimObject::GetComponentOfType(
+                                                   m_pSimObject,
+                                                   UFG::UELComponent::_TypeUID));
       }
       else
       {
-        v20 = (UEL::ParametersBase *)v17->m_Components.p->m_pComponent;
+        m_pComponent = (UEL::ParametersBase *)m_pSimObject->m_Components.p->m_pComponent;
       }
-      if ( v20 )
-        UEL::gCurrentParameters = v20 + 88;
+      if ( m_pComponent )
+        UEL::gCurrentParameters = m_pComponent + 88;
     }
-    ActionController::Play(v9);
-    ActionController::updateTasksTimeBegin(v9, 0.0, 0);
+    ActionController::Play(mActionController);
+    ActionController::updateTasksTimeBegin(mActionController, 0.0, 0);
     UEL::gCurrentParameters = v18;
     v3 = 1;
-    v5->mAge = 0.0;
-    v5->mState = 1;
+    beh->mAge = 0.0;
+    beh->mState = eINVOKE_STATE_RUNNING;
   }
   result = v3;
-  if ( v4 )
+  if ( optResult )
   {
-    v4->mId = v3;
-    v4->mBehaviour = v5;
+    optResult->mId = v3;
+    optResult->mBehaviour = beh;
   }
   return result;
-}
+}( optResult )
+
 
 // File Line: 956
 // RVA: 0x389820
-signed __int64 __fastcall UFG::BehaviourControllerComponent::SuspendBehaviour(UFG::BehaviourControllerComponent *this, UFG::Behaviour *behaviour)
+__int64 __fastcall UFG::BehaviourControllerComponent::SuspendBehaviour(
+        UFG::BehaviourControllerComponent *this,
+        UFG::Behaviour *behaviour)
 {
-  UFG::Behaviour *v2; // r8
-  UFG::BehaviourControllerComponent *v3; // r9
-  UFG::qNode<UFG::Behaviour,UFG::Behaviour> *v5; // rcx
-  UFG::qNode<UFG::Behaviour,UFG::Behaviour> *v6; // rax
+  UFG::qNode<UFG::Behaviour,UFG::Behaviour> *mPrev; // rcx
+  UFG::qNode<UFG::Behaviour,UFG::Behaviour> *mNext; // rax
   UFG::qNode<UFG::Behaviour,UFG::Behaviour> *v7; // rdx
   UFG::qNode<UFG::Behaviour,UFG::Behaviour> *v8; // rax
 
-  v2 = behaviour;
-  v3 = this;
   if ( !behaviour )
     return 0i64;
-  v5 = behaviour->mPrev;
-  v6 = behaviour->mNext;
-  v7 = (UFG::qNode<UFG::Behaviour,UFG::Behaviour> *)&behaviour->mPrev;
-  v5->mNext = v6;
-  v6->mPrev = v5;
+  mPrev = behaviour->mPrev;
+  mNext = behaviour->mNext;
+  v7 = &behaviour->UFG::qNode<UFG::Behaviour,UFG::Behaviour>;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
   v7->mPrev = v7;
   v7->mNext = v7;
-  if ( v2 == v3->mExclusiveBehaviour )
-    v3->mExclusiveBehaviour = 0i64;
-  v8 = v3->mSuspendedStack.mNode.mNext;
-  v3->mSuspendedStack.mNode.mNext = v7;
-  v7->mPrev = &v3->mSuspendedStack.mNode;
+  if ( behaviour == this->mExclusiveBehaviour )
+    this->mExclusiveBehaviour = 0i64;
+  v8 = this->mSuspendedStack.mNode.mNext;
+  this->mSuspendedStack.mNode.mNext = v7;
+  v7->mPrev = &this->mSuspendedStack.mNode;
   v7->mNext = v8;
   v8->mPrev = v7;
-  v2->mState = 2;
+  behaviour->mState = eINVOKE_STATE_SUSPENDED;
   return 3i64;
 }
 
 // File Line: 1037
 // RVA: 0x394630
-void __fastcall UFG::BehaviourControllerComponent::UpdateBehaviour(UFG::BehaviourControllerComponent *this, UFG::Behaviour *behaviour, float timestep)
+void __fastcall UFG::BehaviourControllerComponent::UpdateBehaviour(
+        UFG::BehaviourControllerComponent *this,
+        UFG::Behaviour *behaviour,
+        float timestep)
 {
   UEL::ParametersBase *v3; // rsi
-  UFG::BehaviourControllerComponent *v4; // rdi
-  UFG::SimObject *v5; // rcx
-  UFG::Behaviour *v6; // rbx
-  unsigned __int16 v7; // r8
-  UEL::ParametersBase *v8; // rax
+  UFG::SimObjectGame *m_pSimObject; // rcx
+  __int16 m_Flags; // r8
+  UEL::ParametersBase *m_pComponent; // rax
   float v9; // xmm6_4
-  float v10; // xmm1_4
+  float mMaxLifeTime; // xmm1_4
 
   v3 = UEL::gCurrentParameters;
-  v4 = this;
-  v5 = this->m_pSimObject;
-  v6 = behaviour;
-  if ( v5 )
+  m_pSimObject = (UFG::SimObjectGame *)this->m_pSimObject;
+  if ( m_pSimObject )
   {
-    v7 = v5->m_Flags;
-    if ( (v7 >> 14) & 1 )
+    m_Flags = m_pSimObject->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v8 = (UEL::ParametersBase *)v5->m_Components.p->m_pComponent;
+      m_pComponent = (UEL::ParametersBase *)m_pSimObject->m_Components.p->m_pComponent;
     }
-    else if ( (v7 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v7 >> 13) & 1 )
-        v8 = (UEL::ParametersBase *)v5->m_Components.p->m_pComponent;
+      if ( (m_Flags & 0x2000) != 0 )
+        m_pComponent = (UEL::ParametersBase *)m_pSimObject->m_Components.p->m_pComponent;
       else
-        v8 = (UEL::ParametersBase *)((v7 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                        (UFG::SimObjectGame *)v5,
-                                                        UFG::UELComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(
-                                                                                         v5,
-                                                                                         UFG::UELComponent::_TypeUID));
+        m_pComponent = (UEL::ParametersBase *)((m_Flags & 0x1000) != 0
+                                             ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                 m_pSimObject,
+                                                 UFG::UELComponent::_TypeUID)
+                                             : UFG::SimObject::GetComponentOfType(
+                                                 m_pSimObject,
+                                                 UFG::UELComponent::_TypeUID));
     }
     else
     {
-      v8 = (UEL::ParametersBase *)v5->m_Components.p->m_pComponent;
+      m_pComponent = (UEL::ParametersBase *)m_pSimObject->m_Components.p->m_pComponent;
     }
-    if ( v8 )
-      UEL::gCurrentParameters = v8 + 88;
+    if ( m_pComponent )
+      UEL::gCurrentParameters = m_pComponent + 88;
   }
-  ActionController::Update(v6->mActionController, timestep);
+  ActionController::Update(behaviour->mActionController, timestep);
   UEL::gCurrentParameters = v3;
-  v9 = timestep + v6->mAge;
-  v10 = v6->mParams.mMaxLifeTime;
-  v6->mAge = v9;
-  if ( v10 > 0.0 && v9 > v10 || !v6->mActionController->m_currentNode )
-    UFG::BehaviourControllerComponent::EndBehaviour(v4, v6);
+  v9 = timestep + behaviour->mAge;
+  mMaxLifeTime = behaviour->mParams.mMaxLifeTime;
+  behaviour->mAge = v9;
+  if ( mMaxLifeTime > 0.0 && v9 > mMaxLifeTime || !behaviour->mActionController->m_currentNode )
+    UFG::BehaviourControllerComponent::EndBehaviour(this, behaviour);
 }
 
 // File Line: 1065
 // RVA: 0x360880
 __int64 __fastcall UFG::BehaviourControllerComponent::GetInvokePriorityModeFromString(const char *priorityMode)
 {
-  const char *v1; // rsi
   unsigned int v2; // edi
   const char **v3; // rbx
 
-  v1 = priorityMode;
   v2 = 0;
   v3 = priorityModeNames;
-  while ( (unsigned int)UFG::qStringCompareInsensitive(v1, *v3, -1) )
+  while ( (unsigned int)UFG::qStringCompareInsensitive(priorityMode, *v3, -1) )
   {
     ++v3;
     ++v2;
-    if ( (signed __int64)v3 >= (signed __int64)&kfValidAngleRange )
+    if ( (__int64)v3 >= (__int64)&kfValidAngleRange )
       return 0i64;
   }
   return v2;

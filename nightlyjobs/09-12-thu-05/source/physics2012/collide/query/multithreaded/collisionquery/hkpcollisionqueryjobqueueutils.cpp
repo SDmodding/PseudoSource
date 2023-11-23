@@ -1,32 +1,36 @@
 // File Line: 29
 // RVA: 0xD2F980
-signed __int64 __fastcall hkpCollisionQueryJobQueueUtils::popCollisionJob(hkJobQueue *queue, hkJobQueue::DynamicData *data, hkJobQueue::JobQueueEntry *jobIn, hkJobQueue::JobQueueEntry *jobOut)
+__int64 __fastcall hkpCollisionQueryJobQueueUtils::popCollisionJob(
+        hkJobQueue *queue,
+        hkJobQueue::DynamicData *data,
+        hkJobQueue::JobQueueEntry *jobIn,
+        hkJobQueue::JobQueueEntry *jobOut)
 {
-  signed int v4; // ecx
+  int v4; // ecx
   hkJobQueue::JobQueueEntry *v5; // rax
   hkJob v6; // xmm0
   int v7; // eax
   __int64 v8; // rax
   __int64 v9; // rcx
-  signed __int64 result; // rax
+  __int64 result; // rax
   int v11; // eax
   __int64 v12; // rax
-  signed __int64 v13; // rcx
+  __int64 v13; // rcx
   int v14; // eax
   __int64 v15; // rax
-  signed __int64 v16; // rcx
+  __int64 v16; // rcx
   int v17; // eax
   __int64 v18; // rax
-  signed __int64 v19; // rcx
+  __int64 v19; // rcx
   int v20; // eax
   __int64 v21; // rax
-  signed __int64 v22; // rcx
+  __int64 v22; // rcx
 
   v4 = 16;
   v5 = jobIn;
   do
   {
-    v6 = v5->0;
+    v6 = v5->hkJob;
     --v4;
     v5 = (hkJobQueue::JobQueueEntry *)((char *)v5 + 16);
     *(hkJob *)((char *)v5 + (char *)jobOut - (char *)jobIn - 16) = v6;
@@ -41,7 +45,7 @@ signed __int64 __fastcall hkpCollisionQueryJobQueueUtils::popCollisionJob(hkJobQ
         if ( *(_DWORD *)&jobIn->m_data[48] > v17 )
         {
           *(_DWORD *)&jobOut->m_data[48] = v17;
-          v18 = *(signed int *)&jobIn->m_data[36];
+          v18 = *(int *)&jobIn->m_data[36];
           *(_DWORD *)&jobIn->m_data[48] -= v18;
           v19 = 3 * v18;
           result = 1i64;
@@ -54,7 +58,7 @@ signed __int64 __fastcall hkpCollisionQueryJobQueueUtils::popCollisionJob(hkJobQ
         if ( *(_DWORD *)&jobIn->m_data[56] > v14 )
         {
           *(_DWORD *)&jobOut->m_data[56] = v14;
-          v15 = *(signed int *)&jobIn->m_data[44];
+          v15 = *(int *)&jobIn->m_data[44];
           *(_DWORD *)&jobIn->m_data[56] -= v15;
           v16 = *(_QWORD *)&jobIn->m_data[48] + 24 * v15;
           result = 1i64;
@@ -67,7 +71,7 @@ signed __int64 __fastcall hkpCollisionQueryJobQueueUtils::popCollisionJob(hkJobQ
         if ( *(_DWORD *)&jobIn->m_data[64] > v11 )
         {
           *(_DWORD *)&jobOut->m_data[64] = v11;
-          v12 = *(signed int *)&jobIn->m_data[48];
+          v12 = *(int *)&jobIn->m_data[48];
           *(_DWORD *)&jobIn->m_data[64] -= v12;
           v13 = 5 * v12;
           result = 1i64;
@@ -80,7 +84,7 @@ signed __int64 __fastcall hkpCollisionQueryJobQueueUtils::popCollisionJob(hkJobQ
         if ( *(_DWORD *)&jobIn->m_data[48] > v7 )
         {
           *(_DWORD *)&jobOut->m_data[48] = v7;
-          v8 = *(signed int *)&jobIn->m_data[32];
+          v8 = *(int *)&jobIn->m_data[32];
           *(_DWORD *)&jobIn->m_data[48] -= v8;
           v9 = v8;
           result = 1i64;
@@ -96,7 +100,7 @@ signed __int64 __fastcall hkpCollisionQueryJobQueueUtils::popCollisionJob(hkJobQ
     if ( *(_DWORD *)&jobIn->m_data[72] > v20 )
     {
       *(_DWORD *)&jobOut->m_data[72] = v20;
-      v21 = *(signed int *)&jobIn->m_data[56];
+      v21 = *(int *)&jobIn->m_data[56];
       *(_DWORD *)&jobIn->m_data[72] -= v21;
       v22 = 3 * v21;
       result = 1i64;
@@ -109,7 +113,11 @@ signed __int64 __fastcall hkpCollisionQueryJobQueueUtils::popCollisionJob(hkJobQ
 
 // File Line: 110
 // RVA: 0xD2FAC0
-signed __int64 __fastcall hkpCollisionQueryJobQueueUtils::finishCollisionJob(hkJobQueue *queue, hkJobQueue::DynamicData *data, hkJobQueue::JobQueueEntry *jobIn, hkJobQueue::JobQueueEntryInput *newJobCreated)
+__int64 __fastcall hkpCollisionQueryJobQueueUtils::finishCollisionJob(
+        hkJobQueue *queue,
+        hkJobQueue::DynamicData *data,
+        hkJobQueue::JobQueueEntry *jobIn,
+        hkJobQueue::JobQueueEntryInput *newJobCreated)
 {
   _DWORD *v4; // rcx
   bool v5; // zf
@@ -126,9 +134,11 @@ signed __int64 __fastcall hkpCollisionQueryJobQueueUtils::finishCollisionJob(hkJ
     v7 = *(volatile signed __int32 **)&jobIn->m_data[24];
     if ( v7 )
       _InterlockedExchangeAdd(v7, 1u);
-    goto LABEL_12;
+    goto LABEL_11;
   }
-  if ( jobIn->m_jobSubType == 1 || jobIn->m_jobSubType == 2 || jobIn->m_jobSubType == 3 || jobIn->m_jobSubType == 4 )
+  if ( jobIn->m_jobSubType == 1
+    || jobIn->m_jobSubType == 2
+    || (unsigned int)(unsigned __int8)jobIn->m_jobSubType - 3 <= 1 )
   {
     v5 = (*v4)-- == 1;
     if ( v5 )
@@ -136,11 +146,10 @@ signed __int64 __fastcall hkpCollisionQueryJobQueueUtils::finishCollisionJob(hkJ
       v6 = *(volatile signed __int32 **)&jobIn->m_data[24];
       if ( v6 )
         _InterlockedExchangeAdd(v6, 1u);
-LABEL_12:
+LABEL_11:
       v8 = *(hkSemaphore **)jobIn->m_data;
       if ( v8 )
         hkSemaphore::release(v8, 1);
-      return 1i64;
     }
   }
   return 1i64;

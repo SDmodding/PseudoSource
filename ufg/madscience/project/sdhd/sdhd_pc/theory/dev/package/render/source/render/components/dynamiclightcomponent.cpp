@@ -2,7 +2,7 @@
 // RVA: 0x14572D0
 __int64 dynamic_initializer_for__Render::DynamicLightComponent::s_DynamicLightComponentList__()
 {
-  return atexit(dynamic_atexit_destructor_for__Render::DynamicLightComponent::s_DynamicLightComponentList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__Render::DynamicLightComponent::s_DynamicLightComponentList__);
 }
 
 // File Line: 16
@@ -14,25 +14,23 @@ const char *__fastcall Render::DynamicLightComponent::GetTypeName(Render::Dynami
 
 // File Line: 20
 // RVA: 0x72EC0
-void __fastcall Render::DynamicLightComponent::DynamicLightComponent(Render::DynamicLightComponent *this, unsigned int nameUID)
+void __fastcall Render::DynamicLightComponent::DynamicLightComponent(
+        Render::DynamicLightComponent *this,
+        unsigned int nameUID)
 {
-  Render::DynamicLightComponent *v2; // rbx
-  UFG::qNode<Render::DynamicLightComponent,Render::DynamicLightComponent> *v3; // rdx
-  UFG::qNode<Render::DynamicLightComponent,Render::DynamicLightComponent> *v4; // rax
+  UFG::qNode<Render::DynamicLightComponent,Render::DynamicLightComponent> *mPrev; // rax
 
-  v2 = this;
-  UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, nameUID);
-  v3 = (UFG::qNode<Render::DynamicLightComponent,Render::DynamicLightComponent> *)&v2->mPrev;
-  v3->mPrev = v3;
-  v3->mNext = v3;
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&Render::DynamicLightComponent::`vftable;
-  v4 = Render::DynamicLightComponent::s_DynamicLightComponentList.mNode.mPrev;
-  Render::DynamicLightComponent::s_DynamicLightComponentList.mNode.mPrev->mNext = (UFG::qNode<Render::DynamicLightComponent,Render::DynamicLightComponent> *)&v2->mPrev;
-  v3->mPrev = v4;
-  v2->mNext = (UFG::qNode<Render::DynamicLightComponent,Render::DynamicLightComponent> *)&Render::DynamicLightComponent::s_DynamicLightComponentList;
-  Render::DynamicLightComponent::s_DynamicLightComponentList.mNode.mPrev = (UFG::qNode<Render::DynamicLightComponent,Render::DynamicLightComponent> *)&v2->mPrev;
+  UFG::SimComponent::SimComponent(this, nameUID);
+  this->mPrev = &this->UFG::qNode<Render::DynamicLightComponent,Render::DynamicLightComponent>;
+  this->mNext = &this->UFG::qNode<Render::DynamicLightComponent,Render::DynamicLightComponent>;
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&Render::DynamicLightComponent::`vftable;
+  mPrev = Render::DynamicLightComponent::s_DynamicLightComponentList.mNode.mPrev;
+  Render::DynamicLightComponent::s_DynamicLightComponentList.mNode.mPrev->mNext = &this->UFG::qNode<Render::DynamicLightComponent,Render::DynamicLightComponent>;
+  this->mPrev = mPrev;
+  this->mNext = (UFG::qNode<Render::DynamicLightComponent,Render::DynamicLightComponent> *)&Render::DynamicLightComponent::s_DynamicLightComponentList;
+  Render::DynamicLightComponent::s_DynamicLightComponentList.mNode.mPrev = &this->UFG::qNode<Render::DynamicLightComponent,Render::DynamicLightComponent>;
   UFG::SimComponent::AddType(
-    (UFG::SimComponent *)&v2->vfptr,
+    this,
     Render::DynamicLightComponent::_DynamicLightComponentTypeUID,
     "DynamicLightComponent");
 }
@@ -41,22 +39,20 @@ void __fastcall Render::DynamicLightComponent::DynamicLightComponent(Render::Dyn
 // RVA: 0x72F30
 void __fastcall Render::DynamicLightComponent::~DynamicLightComponent(Render::DynamicLightComponent *this)
 {
-  Render::DynamicLightComponent *v1; // r8
   UFG::qNode<Render::DynamicLightComponent,Render::DynamicLightComponent> *v2; // rdx
-  UFG::qNode<Render::DynamicLightComponent,Render::DynamicLightComponent> *v3; // rcx
-  UFG::qNode<Render::DynamicLightComponent,Render::DynamicLightComponent> *v4; // rax
+  UFG::qNode<Render::DynamicLightComponent,Render::DynamicLightComponent> *mPrev; // rcx
+  UFG::qNode<Render::DynamicLightComponent,Render::DynamicLightComponent> *mNext; // rax
   UFG::qNode<Render::DynamicLightComponent,Render::DynamicLightComponent> *v5; // rcx
   UFG::qNode<Render::DynamicLightComponent,Render::DynamicLightComponent> *v6; // rax
 
-  v1 = this;
   this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&Render::DynamicLightComponent::`vftable;
   if ( this == Render::DynamicLightComponent::s_DynamicLightComponentpCurrentIterator )
     Render::DynamicLightComponent::s_DynamicLightComponentpCurrentIterator = (Render::DynamicLightComponent *)&this->mPrev[-4];
-  v2 = (UFG::qNode<Render::DynamicLightComponent,Render::DynamicLightComponent> *)&this->mPrev;
-  v3 = this->mPrev;
-  v4 = v2->mNext;
-  v3->mNext = v4;
-  v4->mPrev = v3;
+  v2 = &this->UFG::qNode<Render::DynamicLightComponent,Render::DynamicLightComponent>;
+  mPrev = this->mPrev;
+  mNext = v2->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
   v5 = v2->mPrev;
@@ -65,23 +61,23 @@ void __fastcall Render::DynamicLightComponent::~DynamicLightComponent(Render::Dy
   v6->mPrev = v5;
   v2->mPrev = v2;
   v2->mNext = v2;
-  UFG::SimComponent::~SimComponent((UFG::SimComponent *)&v1->vfptr);
+  UFG::SimComponent::~SimComponent(this);
 }
 
 // File Line: 31
 // RVA: 0x73080
-Render::DynamicLightComponent *__fastcall Render::DynamicLightComponent::PropertiesOnActivate(UFG::SceneObjectProperties *sceneObj)
+Render::DynamicLightComponent *__fastcall Render::DynamicLightComponent::PropertiesOnActivate(
+        UFG::SceneObjectProperties *sceneObj)
 {
-  UFG::SceneObjectProperties *v1; // rbx
-  UFG::SimObject *v2; // rbp
-  UFG::qMemoryPool *v3; // rax
+  UFG::SimObject *m_pSimObject; // rbp
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
   char *v4; // rax
   __int64 v5; // rax
   __int64 v6; // rdi
-  UFG::qPropertySet *v7; // rcx
+  UFG::qPropertySet *mpWritableProperties; // rcx
   UFG::qPropertySet *v8; // rax
-  char *v9; // rsi
-  UFG::TransformNodeComponent *v10; // rbx
+  char *MemImagePtr; // rsi
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rbx
   UFG::qVector4 v11; // xmm1
   UFG::qVector4 v12; // xmm2
   UFG::qVector4 v13; // xmm3
@@ -152,64 +148,63 @@ Render::DynamicLightComponent *__fastcall Render::DynamicLightComponent::Propert
   float v79; // [rsp+34h] [rbp-104h]
   float v80; // [rsp+38h] [rbp-100h]
   float v81; // [rsp+3Ch] [rbp-FCh]
-  UFG::SimObjectModifier v82; // [rsp+48h] [rbp-F0h]
+  UFG::SimObjectModifier v82; // [rsp+48h] [rbp-F0h] BYREF
   float v83; // [rsp+140h] [rbp+8h]
   float v84; // [rsp+148h] [rbp+10h]
   float v85; // [rsp+150h] [rbp+18h]
   float v86; // [rsp+158h] [rbp+20h]
 
-  v1 = sceneObj;
-  v2 = sceneObj->m_pSimObject;
-  v3 = UFG::GetSimulationMemoryPool();
-  v4 = UFG::qMemoryPool::Allocate(v3, 0xF0ui64, "DynamicLightComponent", 0i64, 1u);
+  m_pSimObject = sceneObj->m_pSimObject;
+  SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+  v4 = UFG::qMemoryPool::Allocate(SimulationMemoryPool, 0xF0ui64, "DynamicLightComponent", 0i64, 1u);
   if ( v4 )
   {
-    Render::DynamicLightComponent::DynamicLightComponent((Render::DynamicLightComponent *)v4, v1->m_NameUID);
+    Render::DynamicLightComponent::DynamicLightComponent((Render::DynamicLightComponent *)v4, sceneObj->m_NameUID);
     v6 = v5;
   }
   else
   {
     v6 = 0i64;
   }
-  UFG::SimObjectModifier::SimObjectModifier(&v82, v2, 1);
+  UFG::SimObjectModifier::SimObjectModifier(&v82, m_pSimObject, 1);
   UFG::SimObjectModifier::AttachComponent(&v82, (UFG::SimComponent *)v6, 0xFFFFFFFFi64);
   UFG::SimObjectModifier::Close(&v82);
   UFG::SimObjectModifier::~SimObjectModifier(&v82);
-  v7 = v1->mpWritableProperties;
-  if ( !v7 )
-    v7 = v1->mpConstProperties;
+  mpWritableProperties = sceneObj->mpWritableProperties;
+  if ( !mpWritableProperties )
+    mpWritableProperties = sceneObj->mpConstProperties;
   v8 = UFG::qPropertySet::Get<UFG::qPropertySet>(
-         v7,
-         (UFG::qSymbol *)&component_DynamicLight::sPropertyName.mUID,
+         mpWritableProperties,
+         &component_DynamicLight::sPropertyName,
          DEPTH_RECURSE);
   if ( v8 )
-    v9 = UFG::qPropertySet::GetMemImagePtr(v8);
+    MemImagePtr = UFG::qPropertySet::GetMemImagePtr(v8);
   else
-    v9 = 0i64;
-  *(_DWORD *)(v6 + 204) = v2->mNode.mUID;
-  v10 = v2->m_pTransformNodeComponent;
-  UFG::TransformNodeComponent::UpdateWorldTransform(v2->m_pTransformNodeComponent);
-  v11 = v10->mWorldTransform.v1;
-  v12 = v10->mWorldTransform.v2;
-  v13 = v10->mWorldTransform.v3;
-  *(UFG::qVector4 *)(v6 + 80) = v10->mWorldTransform.v0;
+    MemImagePtr = 0i64;
+  *(_DWORD *)(v6 + 204) = m_pSimObject->mNode.mUID;
+  m_pTransformNodeComponent = m_pSimObject->m_pTransformNodeComponent;
+  UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+  v11 = m_pTransformNodeComponent->mWorldTransform.v1;
+  v12 = m_pTransformNodeComponent->mWorldTransform.v2;
+  v13 = m_pTransformNodeComponent->mWorldTransform.v3;
+  *(UFG::qVector4 *)(v6 + 80) = m_pTransformNodeComponent->mWorldTransform.v0;
   *(UFG::qVector4 *)(v6 + 96) = v11;
   *(UFG::qVector4 *)(v6 + 112) = v12;
   *(UFG::qVector4 *)(v6 + 128) = v13;
-  v14 = *((float *)v9 + 3) * *((float *)v9 + 1);
-  v12.x = *((float *)v9 + 3) * *((float *)v9 + 2);
-  *(float *)(v6 + 144) = *((float *)v9 + 3) * *(float *)v9;
+  v14 = *((float *)MemImagePtr + 3) * *((float *)MemImagePtr + 1);
+  v12.x = *((float *)MemImagePtr + 3) * *((float *)MemImagePtr + 2);
+  *(float *)(v6 + 144) = *((float *)MemImagePtr + 3) * *(float *)MemImagePtr;
   *(float *)(v6 + 148) = v14;
   *(float *)(v6 + 152) = v12.x;
-  *(_DWORD *)(v6 + 156) = *((_DWORD *)v9 + 5);
-  *(float *)(v6 + 176) = *((float *)v9 + 13) * 3600.0;
-  *(float *)(v6 + 180) = *((float *)v9 + 14) * 3600.0;
-  *(_BYTE *)(v6 + 184) = v9[76];
-  *(_DWORD *)(v6 + 192) = *((_DWORD *)v9 + 4);
-  *(_BYTE *)(v6 + 186) = v9[72];
-  *(_DWORD *)(v6 + 168) = *((_DWORD *)v9 + 8);
-  *(_DWORD *)(v6 + 172) = *((_DWORD *)v9 + 15);
-  v15 = *((_DWORD *)v9 + 16);
+  *(_DWORD *)(v6 + 156) = *((_DWORD *)MemImagePtr + 5);
+  *(float *)(v6 + 176) = *((float *)MemImagePtr + 13) * 3600.0;
+  *(float *)(v6 + 180) = *((float *)MemImagePtr + 14) * 3600.0;
+  *(_BYTE *)(v6 + 184) = MemImagePtr[76];
+  *(_DWORD *)(v6 + 192) = *((_DWORD *)MemImagePtr + 4);
+  *(_BYTE *)(v6 + 186) = MemImagePtr[72];
+  *(_DWORD *)(v6 + 168) = *((_DWORD *)MemImagePtr + 8);
+  *(_DWORD *)(v6 + 172) = *((_DWORD *)MemImagePtr + 15);
+  v15 = *((_DWORD *)MemImagePtr + 16);
   *(_DWORD *)(v6 + 228) = v15;
   v16 = *(float *)&FLOAT_1_0;
   if ( v15 == -1 )
@@ -218,7 +213,7 @@ Render::DynamicLightComponent *__fastcall Render::DynamicLightComponent::Propert
   }
   else
   {
-    v17 = (float)(*((float *)v9 + 17) + 0.5) * 0.0078125;
+    v17 = (float)(*((float *)MemImagePtr + 17) + 0.5) * 0.0078125;
     if ( v17 <= 0.0 )
     {
       v17 = 0.0;
@@ -230,10 +225,10 @@ Render::DynamicLightComponent *__fastcall Render::DynamicLightComponent::Propert
     *(float *)(v6 + 232) = v17;
     *(_DWORD *)(v6 + 192) = 0;
   }
-  *(float *)(v6 + 160) = (float)((float)(*((float *)v9 + 6) * 0.5) * 3.1415927) * 0.0055555557;
-  *(float *)(v6 + 164) = (float)((float)(*((float *)v9 + 7) * 0.5) * 3.1415927) * 0.0055555557;
+  *(float *)(v6 + 160) = (float)((float)(*((float *)MemImagePtr + 6) * 0.5) * 3.1415927) * 0.0055555557;
+  *(float *)(v6 + 164) = (float)((float)(*((float *)MemImagePtr + 7) * 0.5) * 3.1415927) * 0.0055555557;
   *(_BYTE *)(v6 + 187) = 0;
-  *(_BYTE *)(v6 + 185) = -(v9[73] != 0);
+  *(_BYTE *)(v6 + 185) = -(MemImagePtr[73] != 0);
   if ( *(_BYTE *)(v6 + 184) != 5 )
   {
     *(_QWORD *)(v6 + 208) = 0i64;
@@ -241,19 +236,19 @@ Render::DynamicLightComponent *__fastcall Render::DynamicLightComponent::Propert
     *(_DWORD *)(v6 + 224) = 0;
     return (Render::DynamicLightComponent *)v6;
   }
-  v18 = *((float *)v9 + 9);
+  v18 = *((float *)MemImagePtr + 9);
   if ( v18 <= 0.0 )
     v18 = 0.0;
   *(float *)(v6 + 208) = v18;
-  v19 = (__m128)*((unsigned int *)v9 + 10);
+  v19 = (__m128)*((unsigned int *)MemImagePtr + 10);
   if ( v19.m128_f32[0] <= 0.0 )
     v19 = 0i64;
   *(_DWORD *)(v6 + 212) = v19.m128_i32[0];
-  v20 = *((float *)v9 + 11);
+  v20 = *((float *)MemImagePtr + 11);
   if ( v20 <= 0.0 )
     v20 = 0.0;
   *(float *)(v6 + 216) = v20;
-  v21 = *((float *)v9 + 12);
+  v21 = *((float *)MemImagePtr + 12);
   if ( v21 <= 0.0 )
     v21 = 0.0;
   *(float *)(v6 + 220) = v21;
@@ -269,7 +264,7 @@ Render::DynamicLightComponent *__fastcall Render::DynamicLightComponent::Propert
     v22 = v18 * 0.5;
     v23 = 1.0 / (float)(v20 * 0.5);
     v19.m128_f32[0] = (float)((float)(v19.m128_f32[0] * 0.5) * (float)(v19.m128_f32[0] * 0.5)) + (float)(v22 * v22);
-    *(float *)(v6 + 164) = atanf(COERCE_FLOAT(_mm_sqrt_ps(v19)) * v23);
+    *(float *)(v6 + 164) = atanf(_mm_sqrt_ps(v19).m128_f32[0] * v23);
     *(float *)(v6 + 160) = atanf(v23 * v22);
   }
   *(float *)(v6 + 156) = (float)(v20 * 0.5) + *(float *)(v6 + 156);
@@ -281,7 +276,7 @@ Render::DynamicLightComponent *__fastcall Render::DynamicLightComponent::Propert
   *(float *)(v6 + 132) = (float)(v25 * 0.5) + *(float *)(v6 + 132);
   *(float *)(v6 + 136) = (float)(v26 * 0.5) + *(float *)(v6 + 136);
   *(float *)(v6 + 140) = v27 + *(float *)(v6 + 140);
-  v81 = *((float *)v9 + 3);
+  v81 = *((float *)MemImagePtr + 3);
   v28 = *(float *)(v6 + 208) * 0.5;
   v29 = *(float *)(v6 + 212) * 0.5;
   v30 = LODWORD(v28) ^ _xmm[0];
@@ -321,7 +316,7 @@ Render::DynamicLightComponent *__fastcall Render::DynamicLightComponent::Propert
   if ( v43.m128_f32[0] == 0.0 )
     v44 = 0.0;
   else
-    v44 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v43));
+    v44 = 1.0 / _mm_sqrt_ps(v43).m128_f32[0];
   v85 = v44 * v28;
   v83 = v44 * v29;
   v84 = v32.m128_f32[0] * v44;
@@ -344,7 +339,7 @@ Render::DynamicLightComponent *__fastcall Render::DynamicLightComponent::Propert
   if ( v50.m128_f32[0] == 0.0 )
     v51 = 0.0;
   else
-    v51 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v50));
+    v51 = 1.0 / _mm_sqrt_ps(v50).m128_f32[0];
   v52 = v49 * v51;
   v53 = (float)((float)(v41 * v36) + (float)(v40.m128_f32[0] * v35)) + (float)(v42 * v37);
   if ( v53 <= -1.0 )
@@ -366,7 +361,7 @@ Render::DynamicLightComponent *__fastcall Render::DynamicLightComponent::Propert
   if ( v56.m128_f32[0] == 0.0 )
     v57 = 0.0;
   else
-    v57 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v56));
+    v57 = 1.0 / _mm_sqrt_ps(v56).m128_f32[0];
   v58 = v55 * v57;
   v59 = (float)((float)(v83 * v41) + (float)(v85 * v40.m128_f32[0])) + (float)(v84 * v86);
   if ( v59 <= -1.0 )
@@ -409,7 +404,7 @@ Render::DynamicLightComponent *__fastcall Render::DynamicLightComponent::Propert
   if ( v68.m128_f32[0] == 0.0 )
     v69 = 0.0;
   else
-    v69 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v68));
+    v69 = 1.0 / _mm_sqrt_ps(v68).m128_f32[0];
   v70 = v67 * v69;
   v71 = (float)((float)(v48 * v79) + (float)(v47 * v80)) + (float)(v32.m128_f32[0] * v78);
   if ( v71 <= -1.0 )
@@ -423,7 +418,7 @@ Render::DynamicLightComponent *__fastcall Render::DynamicLightComponent::Propert
   v72 = v66 + (float)(acosf(v71) * v70);
   v73 = *(float *)(v6 + 216) * 0.5;
   v74 = *(float *)(v6 + 192);
-  v75 = 1.0 / powf(*(float *)(v6 + 156), *(float *)(v6 + 192) + 1.0);
+  v75 = 1.0 / powf(*(float *)(v6 + 156), v74 + 1.0);
   v76 = (float)(1.0 / powf(v73, v74)) - (float)(v75 * v73);
   if ( v76 <= 0.0 )
   {
@@ -437,27 +432,15 @@ Render::DynamicLightComponent *__fastcall Render::DynamicLightComponent::Propert
 LABEL_75:
   *(float *)(v6 + 224) = v81 / (float)((float)(v72 * 0.15915491) * v16);
   return (Render::DynamicLightComponent *)v6;
-}owf(*(float *)(v6 + 156), *(float *)(v6 + 192) + 1.0);
-  v76 = (float)(1.0 / powf(v73, v74)) - (float)(v75 * v73);
-  if ( v76 <= 0.0 )
-  {
-    v76 = 0.0;
-  }
-  else if ( v76 >= 1.0 )
-  {
-    goto LABEL_75;
-  }
-  v16 = v76;
-LABEL_75:
-  *(float *)(v6 + 224) = v81 / (float)((float)(v72 * 0.15915491) * v16);
-  return (
+}
 
 // File Line: 114
 // RVA: 0x73AA0
-void __fastcall Render::DynamicLightComponent::TeleportEventHandler(Render::DynamicLightComponent *this, UFG::Event *this_event)
+void __fastcall Render::DynamicLightComponent::TeleportEventHandler(
+        Render::DynamicLightComponent *this,
+        UFG::Event *this_event)
 {
-  Render::DynamicLightComponent *v2; // rdi
-  UFG::TransformNodeComponent *v3; // rbx
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rbx
   UFG::qVector4 v4; // xmm3
   UFG::qVector4 v5; // xmm2
   UFG::qVector4 v6; // xmm1
@@ -465,29 +448,29 @@ void __fastcall Render::DynamicLightComponent::TeleportEventHandler(Render::Dyna
   float v8; // xmm3_4
   float v9; // xmm4_4
 
-  v2 = this;
-  v3 = this->m_pSimObject->m_pTransformNodeComponent;
-  UFG::TransformNodeComponent::UpdateWorldTransform(v3);
-  v4 = v3->mWorldTransform.v1;
-  v5 = v3->mWorldTransform.v2;
-  v6 = v3->mWorldTransform.v3;
-  v2->mLight.mTransform.v0 = v3->mWorldTransform.v0;
-  v2->mLight.mTransform.v1 = v4;
-  v2->mLight.mTransform.v2 = v5;
-  v2->mLight.mTransform.v3 = v6;
-  if ( v2->mLight.mType == 5 )
+  m_pTransformNodeComponent = this->m_pSimObject->m_pTransformNodeComponent;
+  UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+  v4 = m_pTransformNodeComponent->mWorldTransform.v1;
+  v5 = m_pTransformNodeComponent->mWorldTransform.v2;
+  v6 = m_pTransformNodeComponent->mWorldTransform.v3;
+  this->mLight.mTransform.v0 = m_pTransformNodeComponent->mWorldTransform.v0;
+  this->mLight.mTransform.v1 = v4;
+  this->mLight.mTransform.v2 = v5;
+  this->mLight.mTransform.v3 = v6;
+  if ( this->mLight.mType == 5 )
   {
-    v7 = (float)((float)(v2->mLight.mAreaLightNearOffset * v2->mLight.mTransform.v2.y) * 0.5)
-       + v2->mLight.mTransform.v3.y;
-    v8 = (float)((float)(v2->mLight.mAreaLightNearOffset * v2->mLight.mTransform.v2.z) * 0.5)
-       + v2->mLight.mTransform.v3.z;
-    v9 = (float)((float)(v2->mLight.mAreaLightNearOffset * v2->mLight.mTransform.v2.w) * 0.5)
-       + v2->mLight.mTransform.v3.w;
-    v2->mLight.mTransform.v3.x = (float)((float)(v2->mLight.mAreaLightNearOffset * v2->mLight.mTransform.v2.x) * 0.5)
-                               + v2->mLight.mTransform.v3.x;
-    v2->mLight.mTransform.v3.y = v7;
-    v2->mLight.mTransform.v3.z = v8;
-    v2->mLight.mTransform.v3.w = v9;
+    v7 = (float)((float)(this->mLight.mAreaLightNearOffset * this->mLight.mTransform.v2.y) * 0.5)
+       + this->mLight.mTransform.v3.y;
+    v8 = (float)((float)(this->mLight.mAreaLightNearOffset * this->mLight.mTransform.v2.z) * 0.5)
+       + this->mLight.mTransform.v3.z;
+    v9 = (float)((float)(this->mLight.mAreaLightNearOffset * this->mLight.mTransform.v2.w) * 0.5)
+       + this->mLight.mTransform.v3.w;
+    this->mLight.mTransform.v3.x = (float)((float)(this->mLight.mAreaLightNearOffset * this->mLight.mTransform.v2.x)
+                                         * 0.5)
+                                 + this->mLight.mTransform.v3.x;
+    this->mLight.mTransform.v3.y = v7;
+    this->mLight.mTransform.v3.z = v8;
+    this->mLight.mTransform.v3.w = v9;
   }
 }
 

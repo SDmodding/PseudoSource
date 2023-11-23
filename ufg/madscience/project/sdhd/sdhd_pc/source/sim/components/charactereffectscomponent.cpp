@@ -6,7 +6,7 @@ __int64 UFG::_anonymous_namespace_::_dynamic_initializer_for__IsEliteFighterSymb
 
   v0 = UFG::qStringHash32("IsEliteFighter", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&IsEliteFighterSymbol, v0);
-  return atexit(UFG::_anonymous_namespace_::_dynamic_atexit_destructor_for__IsEliteFighterSymbol__);
+  return atexit((int (__fastcall *)())UFG::_anonymous_namespace_::_dynamic_atexit_destructor_for__IsEliteFighterSymbol__);
 }
 
 // File Line: 47
@@ -17,14 +17,14 @@ __int64 UFG::_anonymous_namespace_::_dynamic_initializer_for__FootWearUnderwearS
 
   v0 = UFG::qStringHash32("FootwearUnderwear", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&FootWearUnderwearSymbol, v0);
-  return atexit(UFG::_anonymous_namespace_::_dynamic_atexit_destructor_for__FootWearUnderwearSymbol__);
+  return atexit((int (__fastcall *)())UFG::_anonymous_namespace_::_dynamic_atexit_destructor_for__FootWearUnderwearSymbol__);
 }
 
 // File Line: 69
 // RVA: 0x1543DC0
 __int64 dynamic_initializer_for__UFG::CharacterEffectsComponent::s_CharacterEffectsComponentList__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::CharacterEffectsComponent::s_CharacterEffectsComponentList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::CharacterEffectsComponent::s_CharacterEffectsComponentList__);
 }
 
 // File Line: 70
@@ -36,348 +36,340 @@ const char *__fastcall UFG::CharacterEffectsComponent::GetTypeName(UFG::Characte
 
 // File Line: 96
 // RVA: 0x516250
-void __fastcall UFG::CharacterEffectsComponent::CharacterEffectsComponent(UFG::CharacterEffectsComponent *this, unsigned int name_uid, component_CharacterEffects *data, UFG::qPropertySet *properties)
+void __fastcall UFG::CharacterEffectsComponent::CharacterEffectsComponent(
+        UFG::CharacterEffectsComponent *this,
+        unsigned int name_uid,
+        component_CharacterEffects *data,
+        UFG::qPropertySet *properties)
 {
-  UFG::qPropertySet *v4; // rsi
-  component_CharacterEffects *v5; // rdi
-  UFG::CharacterEffectsComponent *v6; // r14
-  UFG::qNode<UFG::CharacterEffectsComponent,UFG::CharacterEffectsComponent> *v7; // rbx
-  UFG::qNode<UFG::CharacterEffectsComponent,UFG::CharacterEffectsComponent> *v8; // rax
+  UFG::qNode<UFG::CharacterEffectsComponent,UFG::CharacterEffectsComponent> *mPrev; // rax
 
-  v4 = properties;
-  v5 = data;
-  v6 = this;
-  UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v7 = (UFG::qNode<UFG::CharacterEffectsComponent,UFG::CharacterEffectsComponent> *)&v6->mPrev;
-  v7->mPrev = v7;
-  v7->mNext = v7;
-  v6->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterEffectsComponent::`vftable;
-  *(_WORD *)&v6->InvulnerableToFire = 256;
-  UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent,0>::RebindingComponentHandle<UFG::CharacterAnimationComponent,0>(&v6->mCharacterAnimationComponent);
-  UFG::RebindingComponentHandle<UFG::CharacterPhysicsComponent,0>::RebindingComponentHandle<UFG::CharacterPhysicsComponent,0>(&v6->mCharacterPhysicsComponent);
-  UFG::RebindingComponentHandle<UFG::PhantomVolumeComponent,0>::RebindingComponentHandle<UFG::PhantomVolumeComponent,0>(&v6->mPhantomVolumeComponent);
-  v6->mWalkingThroughWaterEffect.mUID = -1;
-  v6->mMaxWaterDepthForWalkingThroughWaterEffect = 0.0;
-  UFG::qBaseTreeRB::qBaseTreeRB(&v6->mPhysVolumeRefs.mTree);
-  *(_QWORD *)&v6->mActiveSurfaceUID = 0i64;
-  v6->mIsOnFire = 0;
-  v6->mIsSmoldering = 0;
-  *(_QWORD *)&v6->mFireExtinguishTime = 0i64;
-  v6->mQueuedHealthDamage = 0.0;
-  v6->mPhantomRigidBody = 0i64;
-  v6->mIsAttachedToPlayer = 0;
-  v6->mUIElementIndex = -1;
-  v6->mIsEliteFighter = 0;
-  v8 = UFG::CharacterEffectsComponent::s_CharacterEffectsComponentList.mNode.mPrev;
-  UFG::CharacterEffectsComponent::s_CharacterEffectsComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::CharacterEffectsComponent,UFG::CharacterEffectsComponent> *)&v6->mPrev;
-  v7->mPrev = v8;
-  v6->mNext = (UFG::qNode<UFG::CharacterEffectsComponent,UFG::CharacterEffectsComponent> *)&UFG::CharacterEffectsComponent::s_CharacterEffectsComponentList;
-  UFG::CharacterEffectsComponent::s_CharacterEffectsComponentList.mNode.mPrev = (UFG::qNode<UFG::CharacterEffectsComponent,UFG::CharacterEffectsComponent> *)&v6->mPrev;
+  UFG::SimComponent::SimComponent(this, name_uid);
+  this->mPrev = &this->UFG::qNode<UFG::CharacterEffectsComponent,UFG::CharacterEffectsComponent>;
+  this->mNext = &this->UFG::qNode<UFG::CharacterEffectsComponent,UFG::CharacterEffectsComponent>;
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterEffectsComponent::`vftable;
+  *(_WORD *)&this->InvulnerableToFire = 256;
+  UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent,0>::RebindingComponentHandle<UFG::CharacterAnimationComponent,0>(&this->mCharacterAnimationComponent);
+  UFG::RebindingComponentHandle<UFG::CharacterPhysicsComponent,0>::RebindingComponentHandle<UFG::CharacterPhysicsComponent,0>(&this->mCharacterPhysicsComponent);
+  UFG::RebindingComponentHandle<UFG::PhantomVolumeComponent,0>::RebindingComponentHandle<UFG::PhantomVolumeComponent,0>(&this->mPhantomVolumeComponent);
+  this->mWalkingThroughWaterEffect.mUID = -1;
+  this->mMaxWaterDepthForWalkingThroughWaterEffect = 0.0;
+  UFG::qBaseTreeRB::qBaseTreeRB(&this->mPhysVolumeRefs.mTree);
+  *(_QWORD *)&this->mActiveSurfaceUID = 0i64;
+  this->mIsOnFire = 0;
+  this->mIsSmoldering = 0;
+  *(_QWORD *)&this->mFireExtinguishTime = 0i64;
+  this->mQueuedHealthDamage = 0.0;
+  this->mPhantomRigidBody = 0i64;
+  this->mIsAttachedToPlayer = 0;
+  this->mUIElementIndex = -1;
+  this->mIsEliteFighter = 0;
+  mPrev = UFG::CharacterEffectsComponent::s_CharacterEffectsComponentList.mNode.mPrev;
+  UFG::CharacterEffectsComponent::s_CharacterEffectsComponentList.mNode.mPrev->mNext = &this->UFG::qNode<UFG::CharacterEffectsComponent,UFG::CharacterEffectsComponent>;
+  this->mPrev = mPrev;
+  this->mNext = (UFG::qNode<UFG::CharacterEffectsComponent,UFG::CharacterEffectsComponent> *)&UFG::CharacterEffectsComponent::s_CharacterEffectsComponentList;
+  UFG::CharacterEffectsComponent::s_CharacterEffectsComponentList.mNode.mPrev = &this->UFG::qNode<UFG::CharacterEffectsComponent,UFG::CharacterEffectsComponent>;
   UFG::SimComponent::AddType(
-    (UFG::SimComponent *)&v6->vfptr,
+    this,
     UFG::CharacterEffectsComponent::_CharacterEffectsComponentTypeUID,
     "CharacterEffectsComponent");
-  *(_QWORD *)v6->mActiveVolumeUID = 0i64;
-  *(_QWORD *)&v6->mActiveVolumeUID[2] = 0i64;
-  v6->mActiveVolumeUID[4] = 0;
-  *(_QWORD *)v6->mFootstepOverride = -1i64;
-  v6->mWalkingThroughWaterEffect.mUID = v5->fxPlayerWalkingThroughWater.mUID;
-  v6->mWalkingThroughWaterMinSpeedForEffectSqr = v5->fxPlayerWalkingThroughWaterMinSpeed
-                                               * v5->fxPlayerWalkingThroughWaterMinSpeed;
-  v6->mMaxWaterDepthForWalkingThroughWaterEffect = v5->fxMaxWaterDepthForWalkingThroughWaterEffect;
-  v6->mIsEliteFighter = *UFG::qPropertySet::Get<bool>(v4, (UFG::qSymbol *)&IsEliteFighterSymbol.mUID, DEPTH_RECURSE);
-  UFG::CharacterEffectsComponent::CreateNodes(v6);
+  *(_QWORD *)this->mActiveVolumeUID = 0i64;
+  *(_QWORD *)&this->mActiveVolumeUID[2] = 0i64;
+  this->mActiveVolumeUID[4] = 0;
+  *(_QWORD *)this->mFootstepOverride = -1i64;
+  this->mWalkingThroughWaterEffect.mUID = data->fxPlayerWalkingThroughWater.mUID;
+  this->mWalkingThroughWaterMinSpeedForEffectSqr = data->fxPlayerWalkingThroughWaterMinSpeed
+                                                 * data->fxPlayerWalkingThroughWaterMinSpeed;
+  this->mMaxWaterDepthForWalkingThroughWaterEffect = data->fxMaxWaterDepthForWalkingThroughWaterEffect;
+  this->mIsEliteFighter = *UFG::qPropertySet::Get<bool>(
+                             properties,
+                             (UFG::qArray<unsigned long,0> *)&IsEliteFighterSymbol,
+                             DEPTH_RECURSE);
+  UFG::CharacterEffectsComponent::CreateNodes(this);
 }
 
 // File Line: 115
 // RVA: 0x51AF20
 void __fastcall UFG::CharacterEffectsComponent::~CharacterEffectsComponent(UFG::CharacterEffectsComponent *this)
 {
-  UFG::CharacterEffectsComponent *v1; // rsi
   UFG::qNode<UFG::CharacterEffectsComponent,UFG::CharacterEffectsComponent> *v2; // r14
-  UFG::qNode<UFG::CharacterEffectsComponent,UFG::CharacterEffectsComponent> *v3; // rcx
-  UFG::qNode<UFG::CharacterEffectsComponent,UFG::CharacterEffectsComponent> *v4; // rax
-  UFG::TransformNodeComponent **v5; // rbx
-  signed __int64 v6; // rdi
-  Render::SkinningCacheNode *v7; // rbx
+  UFG::qNode<UFG::CharacterEffectsComponent,UFG::CharacterEffectsComponent> *mPrev; // rcx
+  UFG::qNode<UFG::CharacterEffectsComponent,UFG::CharacterEffectsComponent> *mNext; // rax
+  UFG::TransformNodeComponent **mNodes; // rbx
+  __int64 v6; // rdi
+  Render::SkinningCacheNode *Head; // rbx
   UFG::WorldEffectsManager *v8; // rax
   Render::SkinningCacheNode *v9; // rbx
   UFG::qNode<UFG::CharacterEffectsComponent,UFG::CharacterEffectsComponent> *v10; // rcx
   UFG::qNode<UFG::CharacterEffectsComponent,UFG::CharacterEffectsComponent> *v11; // rax
 
-  v1 = this;
   this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CharacterEffectsComponent::`vftable;
   if ( this == UFG::CharacterEffectsComponent::s_CharacterEffectsComponentpCurrentIterator )
     UFG::CharacterEffectsComponent::s_CharacterEffectsComponentpCurrentIterator = (UFG::CharacterEffectsComponent *)&this->mPrev[-4];
-  v2 = (UFG::qNode<UFG::CharacterEffectsComponent,UFG::CharacterEffectsComponent> *)&this->mPrev;
-  v3 = this->mPrev;
-  v4 = v2->mNext;
-  v3->mNext = v4;
-  v4->mPrev = v3;
+  v2 = &this->UFG::qNode<UFG::CharacterEffectsComponent,UFG::CharacterEffectsComponent>;
+  mPrev = this->mPrev;
+  mNext = v2->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  v5 = v1->mNodes;
+  mNodes = this->mNodes;
   v6 = 2i64;
   do
   {
-    if ( *v5 )
-      (*v5)->vfptr->__vecDelDtor((UFG::qSafePointerNode<UFG::SimComponent> *)&(*v5)->vfptr, 1u);
-    *v5 = 0i64;
-    ++v5;
+    if ( *mNodes )
+      (*mNodes)->vfptr->__vecDelDtor(*mNodes, 1u);
+    *mNodes++ = 0i64;
     --v6;
   }
   while ( v6 );
-  while ( v1->mPhysVolumeRefs.mTree.mCount )
+  while ( this->mPhysVolumeRefs.mTree.mCount )
   {
-    v7 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v1->mPhysVolumeRefs);
+    Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&this->mPhysVolumeRefs);
     UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
-      (UFG::qBaseTreeVariableRB<unsigned __int64> *)&v1->mPhysVolumeRefs,
-      &v7->mNode);
-    operator delete[](v7);
+      (UFG::qBaseTreeVariableRB<unsigned __int64> *)&this->mPhysVolumeRefs,
+      &Head->mNode);
+    operator delete[](Head);
   }
-  if ( v1->mIsOnFire )
-    UFG::CharacterEffectsComponent::ExtinguishFire(v1);
-  if ( v1->mIsSmoldering )
-    UFG::CharacterEffectsComponent::ExtinguishSmolder(v1);
+  if ( this->mIsOnFire )
+    UFG::CharacterEffectsComponent::ExtinguishFire(this);
+  if ( this->mIsSmoldering )
+    UFG::CharacterEffectsComponent::ExtinguishSmolder(this);
   v8 = UFG::WorldEffectsManager::Get();
-  UFG::WorldEffectsManager::RemoveUIEffects(v8, v1);
-  while ( v1->mPhysVolumeRefs.mTree.mCount )
+  UFG::WorldEffectsManager::RemoveUIEffects(v8, this);
+  while ( this->mPhysVolumeRefs.mTree.mCount )
   {
-    v9 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v1->mPhysVolumeRefs);
+    v9 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&this->mPhysVolumeRefs);
     UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
-      (UFG::qBaseTreeVariableRB<unsigned __int64> *)&v1->mPhysVolumeRefs,
+      (UFG::qBaseTreeVariableRB<unsigned __int64> *)&this->mPhysVolumeRefs,
       &v9->mNode);
     operator delete[](v9);
   }
-  UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)&v1->mPhysVolumeRefs);
-  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->mPhantomVolumeComponent);
-  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->mCharacterPhysicsComponent);
-  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->mCharacterAnimationComponent);
+  UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)&this->mPhysVolumeRefs);
+  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&this->mPhantomVolumeComponent);
+  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&this->mCharacterPhysicsComponent);
+  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&this->mCharacterAnimationComponent);
   v10 = v2->mPrev;
   v11 = v2->mNext;
   v10->mNext = v11;
   v11->mPrev = v10;
   v2->mPrev = v2;
   v2->mNext = v2;
-  UFG::SimComponent::~SimComponent((UFG::SimComponent *)&v1->vfptr);
+  UFG::SimComponent::~SimComponent(this);
 }
 
 // File Line: 128
 // RVA: 0x53D4F0
-void __fastcall UFG::CharacterEffectsComponent::OnAttach(UFG::CharacterEffectsComponent *this, UFG::SimObject *object)
+void __fastcall UFG::CharacterEffectsComponent::OnAttach(
+        UFG::CharacterEffectsComponent *this,
+        UFG::SimObjectCharacter *object)
 {
-  UFG::SimObjectCharacter *v2; // rdi
-  UFG::CharacterEffectsComponent *v3; // rbx
-  UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent,0> *v4; // rcx
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v5; // rax
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v6; // rdx
+  UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent,0> *p_mCharacterAnimationComponent; // rcx
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mNext; // rax
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mPrev; // rdx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v7; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v8; // rdx
 
-  v2 = (UFG::SimObjectCharacter *)object;
-  v3 = this;
-  if ( object == (UFG::SimObject *)LocalPlayer )
+  if ( object == LocalPlayer )
     this->mIsAttachedToPlayer = 1;
-  v4 = &this->mCharacterAnimationComponent;
-  if ( v4->m_pSimComponent )
+  p_mCharacterAnimationComponent = &this->mCharacterAnimationComponent;
+  if ( p_mCharacterAnimationComponent->m_pSimComponent )
   {
-    v5 = v4->mNext;
-    v6 = v4->mPrev;
-    v6->mNext = v5;
-    v5->mPrev = v6;
-    v4->m_pSimComponent = 0i64;
+    mNext = p_mCharacterAnimationComponent->mNext;
+    mPrev = p_mCharacterAnimationComponent->mPrev;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mCharacterAnimationComponent->m_pSimComponent = 0i64;
 LABEL_9:
-    v4->m_pSimObject = 0i64;
-    v4->mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v4->mPrev;
-    v4->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v4->mPrev;
+    p_mCharacterAnimationComponent->m_pSimObject = 0i64;
+    p_mCharacterAnimationComponent->mNext = p_mCharacterAnimationComponent;
+    p_mCharacterAnimationComponent->mPrev = p_mCharacterAnimationComponent;
     goto LABEL_10;
   }
-  if ( v4->m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent,0> *)v4->mPrev != v4
-     || (UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent,0> *)v4->mNext != v4) )
+  if ( p_mCharacterAnimationComponent->m_pSimObject
+    && (p_mCharacterAnimationComponent->mPrev != p_mCharacterAnimationComponent
+     || p_mCharacterAnimationComponent->mNext != p_mCharacterAnimationComponent) )
   {
-    v7 = v4->mNext;
-    v8 = v4->mPrev;
+    v7 = p_mCharacterAnimationComponent->mNext;
+    v8 = p_mCharacterAnimationComponent->mPrev;
     v8->mNext = v7;
     v7->mPrev = v8;
     goto LABEL_9;
   }
 LABEL_10:
-  v4->m_Changed = 1;
-  v4->m_pSimObject = (UFG::SimObject *)&v2->vfptr;
-  v4->m_TypeUID = UFG::CharacterAnimationComponent::_TypeUID;
-  UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent,0>::BindInternal<UFG::SimObjectVehicle>(v4, v2);
+  p_mCharacterAnimationComponent->m_Changed = 1;
+  p_mCharacterAnimationComponent->m_pSimObject = object;
+  p_mCharacterAnimationComponent->m_TypeUID = UFG::CharacterAnimationComponent::_TypeUID;
+  UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent,0>::BindInternal<UFG::SimObjectVehicle>(
+    p_mCharacterAnimationComponent,
+    object);
   UFG::RebindingComponentHandle<UFG::CharacterPhysicsComponent,0>::Bind<UFG::SimObjectCharacter>(
-    &v3->mCharacterPhysicsComponent,
-    v2);
+    &this->mCharacterPhysicsComponent,
+    object);
   UFG::RebindingComponentHandle<UFG::PhantomVolumeComponent,0>::Bind<UFG::SimObjectCharacter>(
-    &v3->mPhantomVolumeComponent,
-    v2);
+    &this->mPhantomVolumeComponent,
+    object);
 }
 
 // File Line: 144
 // RVA: 0x53FDE0
 void __fastcall UFG::CharacterEffectsComponent::OnDetach(UFG::CharacterEffectsComponent *this)
 {
-  UFG::CharacterEffectsComponent *v1; // rbx
   UFG::WorldEffectsManager *v2; // rax
-  UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent,0> *v3; // rdx
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v4; // rcx
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v5; // rax
+  UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent,0> *p_mCharacterAnimationComponent; // rdx
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mPrev; // rcx
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mNext; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v6; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v7; // rax
-  UFG::RebindingComponentHandle<UFG::CharacterPhysicsComponent,0> *v8; // rdx
+  UFG::RebindingComponentHandle<UFG::CharacterPhysicsComponent,0> *p_mCharacterPhysicsComponent; // rdx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v9; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v10; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v11; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v12; // rax
-  UFG::RebindingComponentHandle<UFG::PhantomVolumeComponent,0> *v13; // rdx
+  UFG::RebindingComponentHandle<UFG::PhantomVolumeComponent,0> *p_mPhantomVolumeComponent; // rdx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v14; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v15; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v16; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v17; // rax
 
-  v1 = this;
   if ( this->mIsOnFire )
     UFG::CharacterEffectsComponent::ExtinguishFire(this);
-  if ( v1->mIsSmoldering )
-    UFG::CharacterEffectsComponent::ExtinguishSmolder(v1);
+  if ( this->mIsSmoldering )
+    UFG::CharacterEffectsComponent::ExtinguishSmolder(this);
   v2 = UFG::WorldEffectsManager::Get();
-  UFG::WorldEffectsManager::RemoveUIEffects(v2, v1);
-  v3 = &v1->mCharacterAnimationComponent;
-  if ( v1->mCharacterAnimationComponent.m_pSimComponent )
+  UFG::WorldEffectsManager::RemoveUIEffects(v2, this);
+  p_mCharacterAnimationComponent = &this->mCharacterAnimationComponent;
+  if ( this->mCharacterAnimationComponent.m_pSimComponent )
   {
-    v4 = v3->mPrev;
-    v5 = v1->mCharacterAnimationComponent.mNext;
-    v4->mNext = v5;
-    v5->mPrev = v4;
-    v1->mCharacterAnimationComponent.m_pSimComponent = 0i64;
+    mPrev = p_mCharacterAnimationComponent->mPrev;
+    mNext = this->mCharacterAnimationComponent.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    this->mCharacterAnimationComponent.m_pSimComponent = 0i64;
 LABEL_11:
-    v1->mCharacterAnimationComponent.m_pSimObject = 0i64;
-    v1->mCharacterAnimationComponent.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v1->mCharacterAnimationComponent.mPrev;
-    v3->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v3->mPrev;
+    this->mCharacterAnimationComponent.m_pSimObject = 0i64;
+    this->mCharacterAnimationComponent.mNext = &this->mCharacterAnimationComponent;
+    p_mCharacterAnimationComponent->mPrev = p_mCharacterAnimationComponent;
     goto LABEL_12;
   }
-  if ( v1->mCharacterAnimationComponent.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent,0> *)v3->mPrev != v3
-     || (UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent,0> *)v1->mCharacterAnimationComponent.mNext != &v1->mCharacterAnimationComponent) )
+  if ( this->mCharacterAnimationComponent.m_pSimObject
+    && (p_mCharacterAnimationComponent->mPrev != p_mCharacterAnimationComponent
+     || this->mCharacterAnimationComponent.mNext != &this->mCharacterAnimationComponent) )
   {
-    v6 = v3->mPrev;
-    v7 = v1->mCharacterAnimationComponent.mNext;
+    v6 = p_mCharacterAnimationComponent->mPrev;
+    v7 = this->mCharacterAnimationComponent.mNext;
     v6->mNext = v7;
     v7->mPrev = v6;
     goto LABEL_11;
   }
 LABEL_12:
-  v1->mCharacterAnimationComponent.m_Changed = 1;
-  v8 = &v1->mCharacterPhysicsComponent;
-  if ( v1->mCharacterPhysicsComponent.m_pSimComponent )
+  this->mCharacterAnimationComponent.m_Changed = 1;
+  p_mCharacterPhysicsComponent = &this->mCharacterPhysicsComponent;
+  if ( this->mCharacterPhysicsComponent.m_pSimComponent )
   {
-    v9 = v8->mPrev;
-    v10 = v1->mCharacterPhysicsComponent.mNext;
+    v9 = p_mCharacterPhysicsComponent->mPrev;
+    v10 = this->mCharacterPhysicsComponent.mNext;
     v9->mNext = v10;
     v10->mPrev = v9;
-    v1->mCharacterPhysicsComponent.m_pSimComponent = 0i64;
+    this->mCharacterPhysicsComponent.m_pSimComponent = 0i64;
 LABEL_18:
-    v1->mCharacterPhysicsComponent.m_pSimObject = 0i64;
-    v1->mCharacterPhysicsComponent.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v1->mCharacterPhysicsComponent.mPrev;
-    v8->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v8->mPrev;
+    this->mCharacterPhysicsComponent.m_pSimObject = 0i64;
+    this->mCharacterPhysicsComponent.mNext = &this->mCharacterPhysicsComponent;
+    p_mCharacterPhysicsComponent->mPrev = p_mCharacterPhysicsComponent;
     goto LABEL_19;
   }
-  if ( v1->mCharacterPhysicsComponent.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::CharacterPhysicsComponent,0> *)v8->mPrev != v8
-     || (UFG::RebindingComponentHandle<UFG::CharacterPhysicsComponent,0> *)v1->mCharacterPhysicsComponent.mNext != &v1->mCharacterPhysicsComponent) )
+  if ( this->mCharacterPhysicsComponent.m_pSimObject
+    && (p_mCharacterPhysicsComponent->mPrev != p_mCharacterPhysicsComponent
+     || this->mCharacterPhysicsComponent.mNext != &this->mCharacterPhysicsComponent) )
   {
-    v11 = v8->mPrev;
-    v12 = v1->mCharacterPhysicsComponent.mNext;
+    v11 = p_mCharacterPhysicsComponent->mPrev;
+    v12 = this->mCharacterPhysicsComponent.mNext;
     v11->mNext = v12;
     v12->mPrev = v11;
     goto LABEL_18;
   }
 LABEL_19:
-  v1->mCharacterPhysicsComponent.m_Changed = 1;
-  v13 = &v1->mPhantomVolumeComponent;
-  if ( v1->mPhantomVolumeComponent.m_pSimComponent )
+  this->mCharacterPhysicsComponent.m_Changed = 1;
+  p_mPhantomVolumeComponent = &this->mPhantomVolumeComponent;
+  if ( this->mPhantomVolumeComponent.m_pSimComponent )
   {
-    v14 = v13->mPrev;
-    v15 = v1->mPhantomVolumeComponent.mNext;
+    v14 = p_mPhantomVolumeComponent->mPrev;
+    v15 = this->mPhantomVolumeComponent.mNext;
     v14->mNext = v15;
     v15->mPrev = v14;
-    v1->mPhantomVolumeComponent.m_pSimComponent = 0i64;
+    this->mPhantomVolumeComponent.m_pSimComponent = 0i64;
 LABEL_25:
-    v1->mPhantomVolumeComponent.m_pSimObject = 0i64;
-    v1->mPhantomVolumeComponent.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v1->mPhantomVolumeComponent.mPrev;
-    v13->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v13->mPrev;
+    this->mPhantomVolumeComponent.m_pSimObject = 0i64;
+    this->mPhantomVolumeComponent.mNext = &this->mPhantomVolumeComponent;
+    p_mPhantomVolumeComponent->mPrev = p_mPhantomVolumeComponent;
     goto LABEL_26;
   }
-  if ( v1->mPhantomVolumeComponent.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::PhantomVolumeComponent,0> *)v13->mPrev != v13
-     || (UFG::RebindingComponentHandle<UFG::PhantomVolumeComponent,0> *)v1->mPhantomVolumeComponent.mNext != &v1->mPhantomVolumeComponent) )
+  if ( this->mPhantomVolumeComponent.m_pSimObject
+    && (p_mPhantomVolumeComponent->mPrev != p_mPhantomVolumeComponent
+     || this->mPhantomVolumeComponent.mNext != &this->mPhantomVolumeComponent) )
   {
-    v16 = v13->mPrev;
-    v17 = v1->mPhantomVolumeComponent.mNext;
+    v16 = p_mPhantomVolumeComponent->mPrev;
+    v17 = this->mPhantomVolumeComponent.mNext;
     v16->mNext = v17;
     v17->mPrev = v16;
     goto LABEL_25;
   }
 LABEL_26:
-  v1->mPhantomVolumeComponent.m_Changed = 1;
+  this->mPhantomVolumeComponent.m_Changed = 1;
 }
 
 // File Line: 168
 // RVA: 0x545FD0
-UFG::SimComponent *__fastcall UFG::CharacterEffectsComponent::PropertiesOnActivateNew(UFG::SceneObjectProperties *sceneObject, bool required)
+UFG::SimComponent *__fastcall UFG::CharacterEffectsComponent::PropertiesOnActivateNew(
+        UFG::SceneObjectProperties *sceneObject,
+        bool required)
 {
-  bool v2; // bp
-  UFG::SceneObjectProperties *v3; // rbx
-  UFG::qPropertySet *v4; // rcx
+  UFG::qPropertySet *mpWritableProperties; // rcx
   UFG::qPropertySet *v5; // rax
   UFG::SimComponent *v6; // rsi
-  char *v7; // rdi
-  UFG::qMemoryPool *v9; // rax
+  char *MemImagePtr; // rdi
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
   UFG::allocator::free_link *v10; // rax
-  UFG::qPropertySet *v11; // r9
+  UFG::qPropertySet *mpConstProperties; // r9
   UFG::SimComponent *v12; // rax
-  UFG::SimObject *v13; // rdx
+  UFG::SimObject *m_pSimObject; // rdx
   unsigned int v14; // ebx
-  UFG::SimObjectModifier v15; // [rsp+38h] [rbp-30h]
+  UFG::SimObjectModifier v15; // [rsp+38h] [rbp-30h] BYREF
 
-  v2 = required;
-  v3 = sceneObject;
-  v4 = sceneObject->mpWritableProperties;
-  if ( !v4 )
-    v4 = v3->mpConstProperties;
+  mpWritableProperties = sceneObject->mpWritableProperties;
+  if ( !mpWritableProperties )
+    mpWritableProperties = sceneObject->mpConstProperties;
   v5 = UFG::qPropertySet::Get<UFG::qPropertySet>(
-         v4,
-         (UFG::qSymbol *)&component_CharacterEffects::sPropertyName.mUID,
+         mpWritableProperties,
+         (UFG::qArray<unsigned long,0> *)&component_CharacterEffects::sPropertyName,
          DEPTH_RECURSE);
   v6 = 0i64;
   if ( v5 )
-    v7 = UFG::qPropertySet::GetMemImagePtr(v5);
+    MemImagePtr = UFG::qPropertySet::GetMemImagePtr(v5);
   else
-    v7 = 0i64;
-  if ( !v2 && !v7 )
+    MemImagePtr = 0i64;
+  if ( !required && !MemImagePtr )
     return 0i64;
-  v9 = UFG::GetSimulationMemoryPool();
-  v10 = UFG::qMemoryPool::Allocate(v9, 0x1B8ui64, "CharacterEffectsComponent", 0i64, 1u);
+  SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+  v10 = UFG::qMemoryPool::Allocate(SimulationMemoryPool, 0x1B8ui64, "CharacterEffectsComponent", 0i64, 1u);
   if ( v10 )
   {
-    v11 = v3->mpWritableProperties;
-    if ( !v11 )
-      v11 = v3->mpConstProperties;
+    mpConstProperties = sceneObject->mpWritableProperties;
+    if ( !mpConstProperties )
+      mpConstProperties = sceneObject->mpConstProperties;
     UFG::CharacterEffectsComponent::CharacterEffectsComponent(
       (UFG::CharacterEffectsComponent *)v10,
-      v3->m_NameUID,
-      (component_CharacterEffects *)v7,
-      v11);
+      sceneObject->m_NameUID,
+      (component_CharacterEffects *)MemImagePtr,
+      mpConstProperties);
     v6 = v12;
   }
-  v13 = v3->m_pSimObject;
-  if ( (v13->m_Flags >> 14) & 1 )
+  m_pSimObject = sceneObject->m_pSimObject;
+  if ( (m_pSimObject->m_Flags & 0x4000) != 0 )
     v14 = 38;
   else
     v14 = -1;
-  UFG::SimObjectModifier::SimObjectModifier(&v15, v13, 1);
+  UFG::SimObjectModifier::SimObjectModifier(&v15, m_pSimObject, 1);
   UFG::SimObjectModifier::AttachComponent(&v15, v6, v14);
   UFG::SimObjectModifier::Close(&v15);
   UFG::SimObjectModifier::~SimObjectModifier(&v15);
@@ -386,156 +378,152 @@ UFG::SimComponent *__fastcall UFG::CharacterEffectsComponent::PropertiesOnActiva
 
 // File Line: 236
 // RVA: 0x533E90
-void __fastcall UFG::CharacterEffectsComponent::HandleFootstep(UFG::CharacterEffectsComponent *this, UFG::CharacterEffectsComponent::Foot foot)
+void __fastcall UFG::CharacterEffectsComponent::HandleFootstep(
+        UFG::CharacterEffectsComponent *this,
+        UFG::CharacterEffectsComponent::Foot foot)
 {
-  UFG::SimComponent *v2; // rbx
+  UFG::SimComponent *m_pSimComponent; // rbx
   __int64 v3; // r14
-  UFG::CharacterEffectsComponent *v4; // rdi
   Creature *v5; // rbx
   unsigned int v6; // edx
   UFG::qWiseSymbol *v7; // rax
-  int v8; // eax
-  __m128 v9; // xmm1
+  int BoneID; // eax
+  __m128 w_low; // xmm1
   float v10; // xmm7_4
   UFG::CharacterPhysicsComponent *v11; // rsi
-  UFG::SimObject *v12; // rax
-  UFG::TransformNodeComponent *v13; // rbx
-  float v14; // xmm6_4
-  signed int v15; // esi
+  UFG::SimObject *m_pSimObject; // rax
+  UFG::TransformNodeComponent *m_pComponent; // rbx
+  float z; // xmm6_4
+  int v15; // esi
   UFG::qBaseTreeRB *i; // rbx
   UFG::qBaseNodeRB *v17; // rax
-  unsigned int v18; // edx
+  unsigned int mParent; // edx
   UFG::qBaseNodeRB *v19; // rax
-  unsigned int v20; // ecx
+  unsigned int mParent_high; // ecx
   unsigned int v21; // edx
-  UFG::qVector4 v22; // [rsp+28h] [rbp-79h]
-  UFG::qVector4 basis_8; // [rsp+38h] [rbp-69h]
-  UFG::qVector4 basis_16; // [rsp+40h] [rbp-61h]
-  UFG::qVector4 v25; // [rsp+78h] [rbp-29h]
-  UFG::qWiseSymbol result; // [rsp+110h] [rbp+6Fh]
+  UFG::qMatrix44 basis; // [rsp+30h] [rbp-71h] BYREF
+  __int128 v23; // [rsp+78h] [rbp-29h]
+  UFG::qWiseSymbol result; // [rsp+110h] [rbp+6Fh] BYREF
 
-  v2 = this->mCharacterAnimationComponent.m_pSimComponent;
+  m_pSimComponent = this->mCharacterAnimationComponent.m_pSimComponent;
   v3 = foot;
-  v4 = this;
-  basis_16 = UFG::qMatrix44::msIdentity.v1;
-  v22 = UFG::qMatrix44::msIdentity.v2;
-  basis_8 = UFG::qMatrix44::msIdentity.v3;
+  *(_QWORD *)&basis.v1.z = *(_QWORD *)&UFG::qMatrix44::msIdentity.v1.z;
+  *(_QWORD *)&basis.v0.x = *(_QWORD *)&UFG::qMatrix44::msIdentity.v2.z;
+  *(UFG::qVector4 *)&basis.v0.z = UFG::qMatrix44::msIdentity.v3;
   if ( foot )
   {
-    if ( !v2 )
+    if ( !m_pSimComponent )
       goto LABEL_12;
-    v5 = *(Creature **)&v2[2].m_TypeUID;
+    v5 = *(Creature **)&m_pSimComponent[2].m_TypeUID;
     if ( !v5 )
       goto LABEL_12;
-    v6 = -94440458;
+    v6 = 0xFA5EF3F6;
   }
   else
   {
-    if ( !v2 )
+    if ( !m_pSimComponent )
       goto LABEL_12;
-    v5 = *(Creature **)&v2[2].m_TypeUID;
+    v5 = *(Creature **)&m_pSimComponent[2].m_TypeUID;
     if ( !v5 )
       goto LABEL_12;
     v6 = -810582767;
   }
   v7 = UFG::qSymbol::qSymbol(&result, v6);
   if ( v5->mPose.mRigHandle.mData )
-    v8 = Skeleton::GetBoneID(v5->mPose.mRigHandle.mUFGSkeleton, v7->mUID);
+    BoneID = Skeleton::GetBoneID(v5->mPose.mRigHandle.mUFGSkeleton, v7->mUID);
   else
-    v8 = -1;
-  Creature::GetTransform(v5, v8, (UFG::qMatrix44 *)&basis_16.z);
+    BoneID = -1;
+  Creature::GetTransform(v5, BoneID, (UFG::qMatrix44 *)&basis.v1.z);
 LABEL_12:
-  v9 = (__m128)LODWORD(basis_16.w);
-  v9.m128_f32[0] = (float)(v9.m128_f32[0] * v9.m128_f32[0]) + (float)(basis_16.z * basis_16.z);
-  if ( v9.m128_f32[0] == 0.0 )
+  w_low = (__m128)LODWORD(basis.v1.w);
+  w_low.m128_f32[0] = (float)(w_low.m128_f32[0] * w_low.m128_f32[0]) + (float)(basis.v1.z * basis.v1.z);
+  if ( w_low.m128_f32[0] == 0.0 )
     v10 = 0.0;
   else
-    v10 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v9));
-  v11 = (UFG::CharacterPhysicsComponent *)v4->mCharacterPhysicsComponent.m_pSimComponent;
-  v22.z = basis_16.z * v10;
-  v22.w = basis_16.w * v10;
-  basis_8 = v25;
-  basis_16.z = (float)((float)(basis_16.w * v10) * UFG::qVector3::msAxisZ.x)
-             - (float)((float)(basis_16.z * v10) * UFG::qVector3::msAxisZ.y);
+    v10 = 1.0 / _mm_sqrt_ps(w_low).m128_f32[0];
+  v11 = (UFG::CharacterPhysicsComponent *)this->mCharacterPhysicsComponent.m_pSimComponent;
+  basis.v0.x = basis.v1.z * v10;
+  basis.v0.y = basis.v1.w * v10;
+  *(_OWORD *)&basis.v0.z = v23;
+  basis.v1.z = (float)((float)(basis.v1.w * v10) * UFG::qVector3::msAxisZ.x)
+             - (float)((float)(basis.v1.z * v10) * UFG::qVector3::msAxisZ.y);
   if ( v11 && UFG::CharacterPhysicsComponent::IsInWater(v11) )
   {
-    v12 = v4->m_pSimObject;
-    if ( v12 )
-      v13 = (UFG::TransformNodeComponent *)v12->m_Components.p[2].m_pComponent;
+    m_pSimObject = this->m_pSimObject;
+    if ( m_pSimObject )
+      m_pComponent = (UFG::TransformNodeComponent *)m_pSimObject->m_Components.p[2].m_pComponent;
     else
-      v13 = 0i64;
-    UFG::TransformNodeComponent::UpdateWorldTransform(v13);
-    v14 = v13->mWorldTransform.v3.z;
-    if ( (float)(UFG::CharacterPhysicsComponent::GetWaterElevation(v11) - v14) >= v4->mMaxWaterDepthForWalkingThroughWaterEffect )
+      m_pComponent = 0i64;
+    UFG::TransformNodeComponent::UpdateWorldTransform(m_pComponent);
+    z = m_pComponent->mWorldTransform.v3.z;
+    if ( (float)(UFG::CharacterPhysicsComponent::GetWaterElevation(v11) - z) >= this->mMaxWaterDepthForWalkingThroughWaterEffect )
     {
-      if ( v4->mIsOnFire )
-        UFG::CharacterEffectsComponent::ExtinguishFire(v4);
-      if ( v4->mIsSmoldering )
-        UFG::CharacterEffectsComponent::ExtinguishSmolder(v4);
+      if ( this->mIsOnFire )
+        UFG::CharacterEffectsComponent::ExtinguishFire(this);
+      if ( this->mIsSmoldering )
+        UFG::CharacterEffectsComponent::ExtinguishSmolder(this);
     }
     else
     {
       Render::FXManager::CreateEffect(
         &Render::gFXManager,
-        v4->mWalkingThroughWaterEffect.mUID,
-        v4->mNodes[v3],
+        this->mWalkingThroughWaterEffect.mUID,
+        this->mNodes[v3],
         0xFFFFFFFF,
         0i64);
     }
   }
   v15 = -1;
-  for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v4->mPhysVolumeRefs);
+  for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&this->mPhysVolumeRefs);
         i;
-        i = UFG::qBaseTreeRB::GetNext(&v4->mPhysVolumeRefs.mTree, &i->mRoot) )
+        i = UFG::qBaseTreeRB::GetNext(&this->mPhysVolumeRefs.mTree, &i->mRoot) )
   {
     if ( !BYTE1(i->mNULL.mParent) )
     {
       v17 = i->mNULL.mChild[1];
-      if ( *((float *)&v17[3].mChild[1] + 1) <= 0.0 || v4->mIsOnFire )
+      if ( *((float *)&v17[3].mChild[1] + 1) <= 0.0 || this->mIsOnFire )
       {
         if ( LOBYTE(i->mNULL.mParent) )
         {
-          v18 = (unsigned int)v17[3].mParent;
-          if ( v18 != -1 )
-            Render::FXManager::CreateEffect(&Render::gFXManager, v18, (UFG::qMatrix44 *)&v22.z, 0xFFFFFFFF);
+          mParent = (unsigned int)v17[3].mParent;
+          if ( mParent != -1 )
+            Render::FXManager::CreateEffect(&Render::gFXManager, mParent, &basis, 0xFFFFFFFF);
         }
         v19 = i->mNULL.mChild[1];
         if ( (_DWORD)v3 )
-          v20 = (unsigned int)v19[3].mChild[0];
+          mParent_high = (unsigned int)v19[3].mChild[0];
         else
-          v20 = HIDWORD(v19[3].mParent);
-        if ( v20 != -1 )
+          mParent_high = HIDWORD(v19[3].mParent);
+        if ( mParent_high != -1 )
         {
-          v15 = v20;
-          Render::FXManager::CreateEffect(&Render::gFXManager, v20, (UFG::qMatrix44 *)&v22.z, 0xFFFFFFFF);
+          v15 = mParent_high;
+          Render::FXManager::CreateEffect(&Render::gFXManager, mParent_high, &basis, 0xFFFFFFFF);
         }
       }
     }
   }
-  v21 = v4->mFootstepOverride[v3];
+  v21 = this->mFootstepOverride[v3];
   if ( v21 != -1 && v21 != v15 )
-    Render::FXManager::CreateEffect(&Render::gFXManager, v21, (UFG::qMatrix44 *)&v22.z, 0xFFFFFFFF);
+    Render::FXManager::CreateEffect(&Render::gFXManager, v21, &basis, 0xFFFFFFFF);
 }
 
 // File Line: 332
 // RVA: 0x559AF0
 void __fastcall UFG::CharacterEffectsComponent::Update(UFG::CharacterEffectsComponent *this, float delta_sec)
 {
-  float v2; // xmm8_4
-  UFG::CharacterEffectsComponent *v3; // rdi
-  UFG::PhantomVolumeComponent *v4; // r14
-  unsigned __int8 v5; // bl
-  UFG::PhysicsVolumeProperties *v6; // rax
+  UFG::PhantomVolumeComponent *m_pSimComponent; // r14
+  unsigned __int8 i; // bl
+  UFG::PhysicsVolumeProperties *Properties; // rax
   UFG::qBaseNodeRB *v7; // rsi
-  unsigned __int64 v8; // rax
+  unsigned __int64 mUID; // rax
   UFG::allocator::free_link *v9; // rax
   UFG::qBaseNodeRB *v10; // rdx
   UFG::SimComponent *v11; // rax
-  unsigned __int64 v12; // rsi
-  unsigned __int64 v13; // rbx
+  unsigned __int64 mPrev; // rsi
+  unsigned __int64 mNext; // rbx
   UFG::qReflectObjectType<UFG::PhysicsSurfaceProperties,UFG::qReflectObject> *v14; // rcx
-  const char *v15; // rax
-  UFG::qReflectObject *v16; // rax
+  const char *TypeName; // rax
+  UFG::qReflectObject *mData; // rax
   unsigned int v17; // ebx
   const char *v18; // rax
   UFG::qReflectObject *v19; // rax
@@ -545,22 +533,22 @@ void __fastcall UFG::CharacterEffectsComponent::Update(UFG::CharacterEffectsComp
   UFG::qReflectObject *v23; // rbx
   UFG::allocator::free_link *v24; // rax
   UFG::qBaseNodeRB *v25; // rdx
-  UFG::qBaseTreeRB *v26; // rsi
+  UFG::qBaseTreeRB *Head; // rsi
   unsigned int v27; // eax
   bool v28; // zf
   char v29; // al
   float *v30; // rdx
   char v31; // cl
-  UFG::qBaseNodeRB *v32; // rdx
-  UFG::qBaseTreeRB *v33; // rcx
+  UFG::qBaseNodeRB *p_mRoot; // rdx
+  UFG::qTreeRB<UFG::CharacterEffectsComponent::PhysVolumeRef,UFG::CharacterEffectsComponent::PhysVolumeRef,1> *p_mPhysVolumeRefs; // rcx
   float v34; // xmm1_4
-  UFG::SimObject *v35; // r8
-  UFG::HealthComponent *v36; // r15
+  UFG::SimObjectCharacter *m_pSimObject; // r8
+  UFG::HealthComponent *m_pComponent; // r15
   float v37; // xmm0_4
   float v38; // xmm1_4
   bool v39; // r12
   UFG::HitReactionComponent *v40; // rbx
-  int v41; // ecx
+  int mAttackTypeID; // ecx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v42; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v43; // rax
   UFG::HitRecord *v44; // r14
@@ -571,58 +559,54 @@ void __fastcall UFG::CharacterEffectsComponent::Update(UFG::CharacterEffectsComp
   UFG::HitRecord *v49; // rax
   float v50; // xmm0_4
   unsigned int v51; // edx
-  bool v52; // r8
+  bool mIsOnFire; // r8
   float v53; // xmm0_4
   UFG::SimObject *v54; // rax
   UFG::HitReactionComponent *v55; // rbx
-  UFG::qBaseNodeRB *v56; // rax
-  int v57; // ecx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v58; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v59; // rax
-  bool v60; // al
-  bool v61; // cl
-  UFG::allocator::free_link *v62; // rax
-  UFG::HitRecord *v63; // rax
-  UFG::HitRecord *v64; // r14
-  UFG::HitRecord *v65; // rax
-  float v66; // xmm0_4
-  UFG::qBaseTreeRB *v67; // rbx
-  float v68; // xmm0_4
-  UFG::SimComponentHolder *v69; // rcx
-  UFG::SimComponent *v70; // rbx
-  float v71; // xmm2_4
-  float v72; // xmm0_4
-  UFG::WorldEffectsManager *v73; // rax
-  UFG::qReflectHandleBase v74; // [rsp+30h] [rbp-A8h]
-  UFG::HitRecord hitrecord; // [rsp+58h] [rbp-80h]
-  UFG::HitRecord __that; // [rsp+188h] [rbp+B0h]
-  hkTransformf transform; // [rsp+2B8h] [rbp+1E0h]
-  UFG::allocator::free_link *v78; // [rsp+368h] [rbp+290h]
+  int v56; // ecx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v57; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v58; // rax
+  bool v59; // al
+  bool v60; // cl
+  UFG::allocator::free_link *v61; // rax
+  UFG::HitRecord *v62; // rax
+  UFG::HitRecord *v63; // r14
+  UFG::HitRecord *v64; // rax
+  float v65; // xmm0_4
+  UFG::qBaseTreeRB *Next; // rbx
+  float v67; // xmm0_4
+  UFG::SimComponentHolder *p; // rcx
+  UFG::SimComponent *v69; // rbx
+  float v70; // xmm2_4
+  float v71; // xmm0_4
+  UFG::WorldEffectsManager *v72; // rax
+  UFG::qReflectHandleBase v73; // [rsp+30h] [rbp-A8h] BYREF
+  UFG::HitRecord hitrecord; // [rsp+58h] [rbp-80h] BYREF
+  UFG::HitRecord __that; // [rsp+188h] [rbp+B0h] BYREF
+  hkTransformf transform; // [rsp+2B8h] [rbp+1E0h] BYREF
+  UFG::allocator::free_link *v77; // [rsp+368h] [rbp+290h]
 
   hitrecord.mAttacker.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)-2i64;
-  v2 = delta_sec;
-  v3 = this;
   *(_QWORD *)&this->mActiveSurfaceUID = 0i64;
   *(_QWORD *)this->mActiveVolumeUID = 0i64;
   *(_QWORD *)&this->mActiveVolumeUID[2] = 0i64;
   this->mActiveVolumeUID[4] = 0;
-  v4 = (UFG::PhantomVolumeComponent *)this->mPhantomVolumeComponent.m_pSimComponent;
-  if ( v4 )
+  m_pSimComponent = (UFG::PhantomVolumeComponent *)this->mPhantomVolumeComponent.m_pSimComponent;
+  if ( m_pSimComponent )
   {
-    v5 = 0;
-    do
+    for ( i = 0; i < 5u; ++i )
     {
-      v6 = UFG::PhantomVolumeComponent::GetProperties(v4, v5);
-      v7 = (UFG::qBaseNodeRB *)v6;
-      if ( !v6 )
+      Properties = UFG::PhantomVolumeComponent::GetProperties(m_pSimComponent, i);
+      v7 = (UFG::qBaseNodeRB *)Properties;
+      if ( !Properties )
         break;
-      v3->mActiveVolumeUID[v5] = v6->mBaseNode.mUID;
-      v8 = v6->mBaseNode.mUID;
-      if ( !(_DWORD)v8 || !UFG::qBaseTreeRB::Get(&v3->mPhysVolumeRefs.mTree, v8) )
+      this->mActiveVolumeUID[i] = Properties->mBaseNode.mUID;
+      mUID = Properties->mBaseNode.mUID;
+      if ( !(_DWORD)mUID || !UFG::qBaseTreeRB::Get(&this->mPhysVolumeRefs.mTree, mUID) )
       {
         v9 = UFG::qMalloc(0x40ui64, "PhysVolumeRef", 0i64);
         v10 = (UFG::qBaseNodeRB *)v9;
-        v78 = v9;
+        v77 = v9;
         if ( v9 )
         {
           v9->mNext = 0i64;
@@ -639,54 +623,52 @@ void __fastcall UFG::CharacterEffectsComponent::Update(UFG::CharacterEffectsComp
         }
         v10->mUID = (unsigned int)v7->mChild[0];
         v10[1].mChild[1] = v7;
-        UFG::qBaseTreeRB::Add(&v3->mPhysVolumeRefs.mTree, v10);
+        UFG::qBaseTreeRB::Add(&this->mPhysVolumeRefs.mTree, v10);
       }
-      ++v5;
     }
-    while ( v5 < 5u );
   }
-  v11 = v3->mCharacterPhysicsComponent.m_pSimComponent;
+  v11 = this->mCharacterPhysicsComponent.m_pSimComponent;
   if ( v11 )
   {
-    v12 = (unsigned __int64)v11[6].m_SafePointerList.mNode.mPrev;
-    v13 = (unsigned __int64)v11[6].m_SafePointerList.mNode.mNext;
-    UFG::qReflectHandleBase::qReflectHandleBase(&v74);
-    if ( v13 )
+    mPrev = (unsigned __int64)v11[6].m_SafePointerList.mNode.mPrev;
+    mNext = (unsigned __int64)v11[6].m_SafePointerList.mNode.mNext;
+    UFG::qReflectHandleBase::qReflectHandleBase(&v73);
+    if ( mNext )
     {
-      v15 = UFG::qReflectObjectType<UFG::PhysicsSurfaceProperties,UFG::qReflectObject>::GetTypeName(v14);
-      v74.mTypeUID = UFG::qStringHash64(v15, 0xFFFFFFFFFFFFFFFFui64);
-      UFG::qReflectHandleBase::Init(&v74, v74.mTypeUID, v13);
-      v16 = v74.mData;
-      if ( !v74.mData )
+      TypeName = UFG::qReflectObjectType<UFG::PhysicsSurfaceProperties,UFG::qReflectObject>::GetTypeName(v14);
+      v73.mTypeUID = UFG::qStringHash64(TypeName, 0xFFFFFFFFFFFFFFFFui64);
+      UFG::qReflectHandleBase::Init(&v73, v73.mTypeUID, mNext);
+      mData = v73.mData;
+      if ( !v73.mData )
       {
-        UFG::PhysicsPropertyManager::GetDefaultSurfaceProperties((UFG::qReflectHandle<UFG::PhysicsSurfaceProperties> *)&v74);
-        v16 = v74.mData;
+        UFG::PhysicsPropertyManager::GetDefaultSurfaceProperties((UFG::qReflectHandle<UFG::PhysicsSurfaceProperties> *)&v73);
+        mData = v73.mData;
       }
-      v17 = HIDWORD(v16[1].mBaseNode.mChildren[0]);
+      v17 = HIDWORD(mData[1].mBaseNode.mChildren[0]);
     }
     else
     {
       v18 = UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject>::GetTypeName((UFG::qReflectObjectType<UFG::PhysicsObjectProperties,UFG::qReflectObject> *)v14);
-      v74.mTypeUID = UFG::qStringHash64(v18, 0xFFFFFFFFFFFFFFFFui64);
-      UFG::qReflectHandleBase::Init(&v74, v74.mTypeUID, v12);
-      v19 = v74.mData;
-      if ( !v74.mData )
+      v73.mTypeUID = UFG::qStringHash64(v18, 0xFFFFFFFFFFFFFFFFui64);
+      UFG::qReflectHandleBase::Init(&v73, v73.mTypeUID, mPrev);
+      v19 = v73.mData;
+      if ( !v73.mData )
       {
-        UFG::PhysicsPropertyManager::GetDefaultObjectProperties((UFG::qReflectHandle<UFG::PhysicsObjectProperties> *)&v74);
-        v19 = v74.mData;
+        UFG::PhysicsPropertyManager::GetDefaultObjectProperties((UFG::qReflectHandle<UFG::PhysicsObjectProperties> *)&v73);
+        v19 = v73.mData;
       }
       v17 = *(_DWORD *)(v19[4].mBaseNode.mUID + 108);
     }
-    UFG::qReflectHandleBase::~qReflectHandleBase(&v74);
-    v3->mActiveSurfaceUID = v17;
-    if ( !v17 || !UFG::qBaseTreeRB::Get(&v3->mPhysVolumeRefs.mTree, v17) )
+    UFG::qReflectHandleBase::~qReflectHandleBase(&v73);
+    this->mActiveSurfaceUID = v17;
+    if ( !v17 || !UFG::qBaseTreeRB::Get(&this->mPhysVolumeRefs.mTree, v17) )
     {
       v20 = UFG::PhysicsVolumePropertyManager::Find(v17, 0);
       if ( v20 )
       {
         v21 = UFG::qMalloc(0x40ui64, UFG::gGlobalNewName, 0i64);
         v22 = (UFG::qBaseNodeRB *)v21;
-        v78 = v21;
+        v77 = v21;
         if ( v21 )
         {
           v21->mNext = 0i64;
@@ -703,101 +685,99 @@ void __fastcall UFG::CharacterEffectsComponent::Update(UFG::CharacterEffectsComp
         }
         v22->mUID = v20->mBaseNode.mUID;
         v22[1].mChild[1] = (UFG::qBaseNodeRB *)v20;
-        UFG::qBaseTreeRB::Add(&v3->mPhysVolumeRefs.mTree, v22);
+        UFG::qBaseTreeRB::Add(&this->mPhysVolumeRefs.mTree, v22);
       }
     }
   }
-  if ( v3->mIsAttachedToPlayer )
+  if ( this->mIsAttachedToPlayer
+    && UFG::TimeOfDayManager::GetInstance()->m_WeatherState > 1.0
+    && !UFG::TidoGame::IsInside() )
   {
-    if ( UFG::TimeOfDayManager::GetInstance()->m_WeatherState > 1.0 && !UFG::TidoGame::IsInside() )
+    this->mActiveWetSurfaceUID = 0xF18CE285;
+    if ( !UFG::qBaseTreeRB::Get(&this->mPhysVolumeRefs.mTree, 0xF18CE285) )
     {
-      v3->mActiveWetSurfaceUID = -242425211;
-      if ( !UFG::qBaseTreeRB::Get(&v3->mPhysVolumeRefs.mTree, 0xF18CE285) )
+      v23 = UFG::PhysicsVolumePropertyManager::Find(this->mActiveWetSurfaceUID, 0);
+      if ( v23 )
       {
-        v23 = UFG::PhysicsVolumePropertyManager::Find(v3->mActiveWetSurfaceUID, 0);
-        if ( v23 )
+        v24 = UFG::qMalloc(0x40ui64, UFG::gGlobalNewName, 0i64);
+        v25 = (UFG::qBaseNodeRB *)v24;
+        v77 = v24;
+        if ( v24 )
         {
-          v24 = UFG::qMalloc(0x40ui64, UFG::gGlobalNewName, 0i64);
-          v25 = (UFG::qBaseNodeRB *)v24;
-          v78 = v24;
-          if ( v24 )
-          {
-            v24->mNext = 0i64;
-            v24[1].mNext = 0i64;
-            v24[2].mNext = 0i64;
-            LOWORD(v24[4].mNext) = 0;
-            *(UFG::allocator::free_link **)((char *)&v24[4].mNext + 4) = 0i64;
-            v24[6].mNext = 0i64;
-            LOBYTE(v24[7].mNext) = 0;
-          }
-          else
-          {
-            v25 = 0i64;
-          }
-          v25->mUID = v23->mBaseNode.mUID;
-          v25[1].mChild[1] = (UFG::qBaseNodeRB *)v23;
-          UFG::qBaseTreeRB::Add(&v3->mPhysVolumeRefs.mTree, v25);
+          v24->mNext = 0i64;
+          v24[1].mNext = 0i64;
+          v24[2].mNext = 0i64;
+          LOWORD(v24[4].mNext) = 0;
+          *(UFG::allocator::free_link **)((char *)&v24[4].mNext + 4) = 0i64;
+          v24[6].mNext = 0i64;
+          LOBYTE(v24[7].mNext) = 0;
         }
+        else
+        {
+          v25 = 0i64;
+        }
+        v25->mUID = v23->mBaseNode.mUID;
+        v25[1].mChild[1] = (UFG::qBaseNodeRB *)v23;
+        UFG::qBaseTreeRB::Add(&this->mPhysVolumeRefs.mTree, v25);
       }
     }
   }
-  v26 = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&v3->mPhysVolumeRefs);
-  while ( v26 )
+  Head = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&this->mPhysVolumeRefs);
+  while ( Head )
   {
-    v27 = v26->mRoot.mUID;
-    if ( v27 == v3->mActiveVolumeUID[0]
-      || v27 == v3->mActiveVolumeUID[1]
-      || v27 == v3->mActiveVolumeUID[2]
-      || v27 == v3->mActiveVolumeUID[3]
-      || v27 == v3->mActiveVolumeUID[4]
-      || v27 == v3->mActiveSurfaceUID
-      || (v28 = v27 == v3->mActiveWetSurfaceUID, v29 = 0, v28) )
+    v27 = Head->mRoot.mUID;
+    if ( v27 == this->mActiveVolumeUID[0]
+      || v27 == this->mActiveVolumeUID[1]
+      || v27 == this->mActiveVolumeUID[2]
+      || v27 == this->mActiveVolumeUID[3]
+      || v27 == this->mActiveVolumeUID[4]
+      || v27 == this->mActiveSurfaceUID
+      || (v28 = v27 == this->mActiveWetSurfaceUID, v29 = 0, v28) )
     {
       v29 = 1;
     }
-    LOBYTE(v26->mNULL.mParent) = v29;
-    v30 = (float *)v26->mNULL.mChild[1];
-    if ( v30[29] <= 0.0 || (v31 = 1, !v3->InvulnerableToFire) )
+    LOBYTE(Head->mNULL.mParent) = v29;
+    v30 = (float *)Head->mNULL.mChild[1];
+    if ( v30[29] <= 0.0 || (v31 = 1, !this->InvulnerableToFire) )
       v31 = 0;
-    BYTE1(v26->mNULL.mParent) = v31;
+    BYTE1(Head->mNULL.mParent) = v31;
     if ( v31 )
     {
-      v32 = &v26->mRoot;
-      v33 = &v3->mPhysVolumeRefs.mTree;
+      p_mRoot = &Head->mRoot;
+      p_mPhysVolumeRefs = &this->mPhysVolumeRefs;
       if ( v29 )
-        goto LABEL_119;
+        goto LABEL_118;
     }
     else
     {
       if ( v29 )
       {
-        *((float *)&v26->mNULL.mParent + 1) = v2 + *((float *)&v26->mNULL.mParent + 1);
-        LODWORD(v26->mNULL.mChild[0]) = 0;
+        *((float *)&Head->mNULL.mParent + 1) = delta_sec + *((float *)&Head->mNULL.mParent + 1);
+        LODWORD(Head->mNULL.mChild[0]) = 0;
         v34 = v30[28];
         if ( v34 <= 0.0 )
-          goto LABEL_83;
-        v35 = v3->m_pSimObject;
-        if ( !v35 )
-          goto LABEL_83;
-        v36 = (UFG::HealthComponent *)v35->m_Components.p[6].m_pComponent;
-        if ( !v36 )
-          goto LABEL_83;
-        v37 = v3->mIsAttachedToPlayer ? FLOAT_100_0 : (float)(signed int)v36->m_fMaxHealth;
-        v38 = (float)((float)(v34 * v37) * v2) + v3->mQueuedHealthDamage;
-        v3->mQueuedHealthDamage = v38;
+          goto LABEL_82;
+        m_pSimObject = (UFG::SimObjectCharacter *)this->m_pSimObject;
+        if ( !m_pSimObject )
+          goto LABEL_82;
+        m_pComponent = (UFG::HealthComponent *)m_pSimObject->m_Components.p[6].m_pComponent;
+        if ( !m_pComponent )
+          goto LABEL_82;
+        v37 = this->mIsAttachedToPlayer ? FLOAT_100_0 : (float)(int)m_pComponent->m_fMaxHealth;
+        v38 = (float)((float)(v34 * v37) * delta_sec) + this->mQueuedHealthDamage;
+        this->mQueuedHealthDamage = v38;
         if ( v38 <= 5.0 )
-          goto LABEL_83;
-        v39 = *((float *)&v26->mNULL.mChild[1][3].mChild[1] + 1) > 0.0;
-        if ( v39 != 1
-          || !v35
-          || (v40 = (UFG::HitReactionComponent *)v35->m_Components.p[15].m_pComponent) == 0i64
+          goto LABEL_82;
+        v39 = *((float *)&Head->mNULL.mChild[1][3].mChild[1] + 1) > 0.0;
+        if ( !v39
+          || (v40 = (UFG::HitReactionComponent *)m_pSimObject->m_Components.p[15].m_pComponent) == 0i64
           || UFG::PhysicsVolumePropertyManager::FireHitRecordType == -1 )
         {
-          UFG::HealthComponent::ApplyHealthDamage(v36, 5, v35, 0i64, 0);
-          goto LABEL_77;
+          UFG::HealthComponent::ApplyHealthDamage(m_pComponent, 5, m_pSimObject, 0i64, 0);
+          goto LABEL_76;
         }
         UFG::HitRecord::HitRecord(&__that);
-        v41 = UFG::PhysicsVolumePropertyManager::FireHitRecordType;
+        mAttackTypeID = UFG::PhysicsVolumePropertyManager::FireHitRecordType;
         __that.mAttackTypeID = UFG::PhysicsVolumePropertyManager::FireHitRecordType;
         __that.mDamage = 5;
         if ( __that.mAttacker.m_pPointer )
@@ -806,23 +786,23 @@ void __fastcall UFG::CharacterEffectsComponent::Update(UFG::CharacterEffectsComp
           v43 = __that.mAttacker.mNext;
           __that.mAttacker.mPrev->mNext = __that.mAttacker.mNext;
           v43->mPrev = v42;
-          __that.mAttacker.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&__that.mAttacker.mPrev;
-          __that.mAttacker.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&__that.mAttacker.mPrev;
-          v41 = __that.mAttackTypeID;
+          __that.mAttacker.mPrev = &__that.mAttacker;
+          __that.mAttacker.mNext = &__that.mAttacker;
+          mAttackTypeID = __that.mAttackTypeID;
         }
         v44 = 0i64;
         __that.mAttacker.m_pPointer = 0i64;
         *(_QWORD *)&__that.mTimeSinceHit = 0i64;
-        if ( v40->mHitRecord.mHitRecordProcessed != 1 )
+        if ( !v40->mHitRecord.mHitRecordProcessed )
         {
-          v45 = v41 == gAttackCollisionProjectile.m_EnumValue
+          v45 = mAttackTypeID == gAttackCollisionProjectile.m_EnumValue
              && v40->mHitRecord.mAttackTypeID == gAttackCollisionProjectile.m_EnumValue;
-          v46 = v41 > v40->mHitRecord.mAttackTypeID;
+          v46 = mAttackTypeID > v40->mHitRecord.mAttackTypeID;
           if ( v45 )
           {
             ++v40->mNumHits;
             v47 = UFG::qMalloc(0x128ui64, UFG::gGlobalNewName, 0i64);
-            v78 = v47;
+            v77 = v47;
             if ( v47 )
             {
               UFG::HitRecord::HitRecord((UFG::HitRecord *)v47);
@@ -832,209 +812,203 @@ void __fastcall UFG::CharacterEffectsComponent::Update(UFG::CharacterEffectsComp
             v49 = v40->mHitRecord.mNext;
             v40->mHitRecord.mNext = v44;
             v44->mNext = v49;
-LABEL_75:
+LABEL_74:
             UFG::HitRecord::~HitRecord(&__that);
-LABEL_77:
-            v3->mQueuedHealthDamage = v3->mQueuedHealthDamage - 5.0;
-            if ( v39 && (signed int)v36->m_fHealth < 1 )
+LABEL_76:
+            this->mQueuedHealthDamage = this->mQueuedHealthDamage - 5.0;
+            if ( v39 && (int)m_pComponent->m_fHealth < 1 )
             {
-              if ( v3->mIsAttachedToPlayer )
+              if ( this->mIsAttachedToPlayer )
                 v50 = UFG::CharacterEffectsComponent::sTimeFireIsActivePlayer;
               else
                 v50 = UFG::CharacterEffectsComponent::sTimeFireIsActive;
-              v3->mFireExtinguishTime = v50;
-              UFG::CharacterEffectsComponent::IgniteFire(v3);
+              this->mFireExtinguishTime = v50;
+              UFG::CharacterEffectsComponent::IgniteFire(this);
             }
-LABEL_83:
-            if ( *((float *)&v26->mNULL.mChild[1][3].mChild[1] + 1) > 0.0 )
+LABEL_82:
+            if ( *((float *)&Head->mNULL.mChild[1][3].mChild[1] + 1) > 0.0 )
             {
-              if ( _S68 & 1 )
+              if ( (_S68 & 1) != 0 )
               {
                 v51 = physVol_OnFire;
               }
               else
               {
                 _S68 |= 1u;
-                v51 = UFG::qStringHashUpper32("PhysVol_OnFire", 0xFFFFFFFF);
+                v51 = UFG::qStringHashUpper32("PhysVol_OnFire", -1);
                 physVol_OnFire = v51;
               }
-              v52 = v3->mIsOnFire;
-              if ( !v52 || v26->mNULL.mChild[1]->mChild[0] != (UFG::qBaseNodeRB *)v51 )
+              mIsOnFire = this->mIsOnFire;
+              if ( !mIsOnFire || Head->mNULL.mChild[1]->mChild[0] != (UFG::qBaseNodeRB *)v51 )
               {
-                if ( v3->mIsAttachedToPlayer )
+                if ( this->mIsAttachedToPlayer )
                   v53 = UFG::CharacterEffectsComponent::sTimeFireIsActivePlayer;
                 else
                   v53 = UFG::CharacterEffectsComponent::sTimeFireIsActive;
-                v3->mFireExtinguishTime = v53;
+                this->mFireExtinguishTime = v53;
               }
-              v3->mSmolderExtinguishTime = UFG::CharacterEffectsComponent::sTimeSmolderIsActive;
-              if ( !v3->mIsSmoldering && !v52 )
-                UFG::CharacterEffectsComponent::IgniteSmolder(v3);
+              this->mSmolderExtinguishTime = UFG::CharacterEffectsComponent::sTimeSmolderIsActive;
+              if ( !this->mIsSmoldering && !mIsOnFire )
+                UFG::CharacterEffectsComponent::IgniteSmolder(this);
             }
-            if ( v26->mNULL.mChild[1][3].mUID == -1 )
-              goto LABEL_118;
-            if ( LOBYTE(v26->mNULL.mUID) )
-              goto LABEL_118;
-            v54 = v3->m_pSimObject;
+            if ( Head->mNULL.mChild[1][3].mUID == -1 )
+              goto LABEL_117;
+            if ( LOBYTE(Head->mNULL.mUID) )
+              goto LABEL_117;
+            v54 = this->m_pSimObject;
             if ( !v54 )
-              goto LABEL_118;
+              goto LABEL_117;
             v55 = (UFG::HitReactionComponent *)v54->m_Components.p[15].m_pComponent;
             if ( !v55 )
-              goto LABEL_118;
+              goto LABEL_117;
             UFG::HitRecord::HitRecord(&hitrecord);
-            v56 = v26->mNULL.mChild[1];
-            v57 = v56[3].mUID;
-            hitrecord.mAttackTypeID = v56[3].mUID;
+            v56 = Head->mNULL.mChild[1][3].mUID;
+            hitrecord.mAttackTypeID = v56;
             hitrecord.mDamage = 0;
             if ( hitrecord.mAttacker.m_pPointer )
             {
-              v58 = hitrecord.mAttacker.mPrev;
-              v59 = hitrecord.mAttacker.mNext;
+              v57 = hitrecord.mAttacker.mPrev;
+              v58 = hitrecord.mAttacker.mNext;
               hitrecord.mAttacker.mPrev->mNext = hitrecord.mAttacker.mNext;
-              v59->mPrev = v58;
-              hitrecord.mAttacker.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&hitrecord.mAttacker.mPrev;
-              hitrecord.mAttacker.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&hitrecord.mAttacker.mPrev;
-              v57 = hitrecord.mAttackTypeID;
+              v58->mPrev = v57;
+              hitrecord.mAttacker.mPrev = &hitrecord.mAttacker;
+              hitrecord.mAttacker.mNext = &hitrecord.mAttacker;
+              v56 = hitrecord.mAttackTypeID;
             }
             hitrecord.mAttacker.m_pPointer = 0i64;
             *(_QWORD *)&hitrecord.mTimeSinceHit = 0i64;
-            if ( v55->mHitRecord.mHitRecordProcessed != 1 )
+            if ( !v55->mHitRecord.mHitRecordProcessed )
             {
-              v60 = v57 == gAttackCollisionProjectile.m_EnumValue
+              v59 = v56 == gAttackCollisionProjectile.m_EnumValue
                  && v55->mHitRecord.mAttackTypeID == gAttackCollisionProjectile.m_EnumValue;
-              v61 = v57 > v55->mHitRecord.mAttackTypeID;
-              if ( v60 )
+              v60 = v56 > v55->mHitRecord.mAttackTypeID;
+              if ( v59 )
               {
                 ++v55->mNumHits;
-                v62 = UFG::qMalloc(0x128ui64, UFG::gGlobalNewName, 0i64);
-                v78 = v62;
-                if ( v62 )
+                v61 = UFG::qMalloc(0x128ui64, UFG::gGlobalNewName, 0i64);
+                v77 = v61;
+                if ( v61 )
                 {
-                  UFG::HitRecord::HitRecord((UFG::HitRecord *)v62);
-                  v64 = v63;
+                  UFG::HitRecord::HitRecord((UFG::HitRecord *)v61);
+                  v63 = v62;
                 }
                 else
                 {
-                  v64 = 0i64;
+                  v63 = 0i64;
                 }
-                UFG::HitRecord::operator=(v64, &hitrecord);
-                v65 = v55->mHitRecord.mNext;
-                v55->mHitRecord.mNext = v64;
-                v64->mNext = v65;
-LABEL_114:
-                LOBYTE(v26->mNULL.mUID) = 1;
+                UFG::HitRecord::operator=(v63, &hitrecord);
+                v64 = v55->mHitRecord.mNext;
+                v55->mHitRecord.mNext = v63;
+                v63->mNext = v64;
+LABEL_113:
+                LOBYTE(Head->mNULL.mUID) = 1;
                 UFG::HitRecord::~HitRecord(&hitrecord);
+LABEL_117:
+                p_mRoot = &Head->mRoot;
+                p_mPhysVolumeRefs = &this->mPhysVolumeRefs;
 LABEL_118:
-                v32 = &v26->mRoot;
-                v33 = &v3->mPhysVolumeRefs.mTree;
-LABEL_119:
-                v26 = UFG::qBaseTreeRB::GetNext(v33, v32);
+                Head = UFG::qBaseTreeRB::GetNext(&p_mPhysVolumeRefs->mTree, p_mRoot);
                 continue;
               }
-              if ( !v61 )
-                goto LABEL_114;
+              if ( !v60 )
+                goto LABEL_113;
             }
             UFG::HitReactionComponent::SetHitRecord(v55, &hitrecord);
-            goto LABEL_114;
+            goto LABEL_113;
           }
           if ( !v46 )
-            goto LABEL_75;
+            goto LABEL_74;
         }
         UFG::HitReactionComponent::SetHitRecord(v40, &__that);
-        goto LABEL_75;
+        goto LABEL_74;
       }
-      v66 = v2 + *(float *)v26->mNULL.mChild;
-      *(float *)v26->mNULL.mChild = v66;
-      if ( v66 <= v30[27] )
-        goto LABEL_118;
-      v32 = &v26->mRoot;
-      v33 = &v3->mPhysVolumeRefs.mTree;
+      v65 = delta_sec + *(float *)Head->mNULL.mChild;
+      *(float *)Head->mNULL.mChild = v65;
+      if ( v65 <= v30[27] )
+        goto LABEL_117;
+      p_mRoot = &Head->mRoot;
+      p_mPhysVolumeRefs = &this->mPhysVolumeRefs;
     }
-    v67 = UFG::qBaseTreeRB::GetNext(v33, v32);
+    Next = UFG::qBaseTreeRB::GetNext(&p_mPhysVolumeRefs->mTree, p_mRoot);
     UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
-      (UFG::qBaseTreeVariableRB<unsigned __int64> *)&v3->mPhysVolumeRefs,
-      (UFG::qBaseNodeVariableRB<unsigned __int64> *)v26);
-    operator delete[](v26);
-    v26 = v67;
+      (UFG::qBaseTreeVariableRB<unsigned __int64> *)&this->mPhysVolumeRefs,
+      (UFG::qBaseNodeVariableRB<unsigned __int64> *)Head);
+    operator delete[](Head);
+    Head = Next;
   }
-  if ( v3->mIsOnFire )
+  if ( this->mIsOnFire )
   {
-    v68 = v3->mFireExtinguishTime - v2;
-    v3->mFireExtinguishTime = v68;
-    if ( v68 < 0.0 || v3->InvulnerableToFire )
-      UFG::CharacterEffectsComponent::ExtinguishFire(v3);
-    if ( v3->mPhantomRigidBody )
+    v67 = this->mFireExtinguishTime - delta_sec;
+    this->mFireExtinguishTime = v67;
+    if ( v67 < 0.0 || this->InvulnerableToFire )
+      UFG::CharacterEffectsComponent::ExtinguishFire(this);
+    if ( this->mPhantomRigidBody )
     {
-      v69 = v3->m_pSimObject->m_Components.p;
-      v70 = v69[2].m_pComponent;
-      if ( v70 )
+      p = this->m_pSimObject->m_Components.p;
+      v69 = p[2].m_pComponent;
+      if ( v69 )
       {
-        UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v69[2].m_pComponent);
-        v74.mPrev = (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)v70[2].vfptr;
-        v74.mNext = (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)v70[2].m_SafePointerList.mNode.mPrev;
-        v74.mTypeUID = (unsigned __int64)v70[2].m_SafePointerList.mNode.mNext;
-        v74.mNameUID = *(_QWORD *)&v70[2].m_TypeUID;
-        v74.mData = *(UFG::qReflectObject **)&v70[2].m_Flags;
-        *(_DWORD *)&hitrecord.mHitRecordProcessed = v70[2].m_pSimObject;
-        hitrecord.mAttackTypeID = HIDWORD(v70[2].m_pSimObject);
-        hitrecord.mDamage = (int)v70[2].m_BoundComponentHandles.mNode.mPrev;
-        *(&hitrecord.mDamage + 1) = HIDWORD(v70[2].m_BoundComponentHandles.mNode.mPrev);
-        v71 = *(float *)&v70[2].m_BoundComponentHandles.mNode.mNext;
-        HIDWORD(hitrecord.mAttacker.mPrev) = HIDWORD(v70[2].m_BoundComponentHandles.mNode.mNext);
-        *(float *)&hitrecord.mAttacker.mPrev = v71 + 1.0;
-        hkTransformf::set4x4ColumnMajor(&transform, (const float *)&v74);
-        hkpRigidBody::setTransform(v3->mPhantomRigidBody, &transform);
+        UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)p[2].m_pComponent);
+        v73 = *(UFG::qReflectHandleBase *)&v69[2].vfptr;
+        *(_DWORD *)&hitrecord.mHitRecordProcessed = v69[2].m_pSimObject;
+        hitrecord.mAttackTypeID = HIDWORD(v69[2].m_pSimObject);
+        hitrecord.mDamage = (int)v69[2].m_BoundComponentHandles.mNode.mPrev;
+        *(&hitrecord.mDamage + 1) = HIDWORD(v69[2].m_BoundComponentHandles.mNode.mPrev);
+        v70 = *(float *)&v69[2].m_BoundComponentHandles.mNode.mNext;
+        HIDWORD(hitrecord.mAttacker.mPrev) = HIDWORD(v69[2].m_BoundComponentHandles.mNode.mNext);
+        *(float *)&hitrecord.mAttacker.mPrev = v70 + 1.0;
+        hkTransformf::set4x4ColumnMajor(&transform, (const float *)&v73);
+        hkpRigidBody::setTransform(this->mPhantomRigidBody, &transform);
       }
     }
   }
-  if ( v3->mIsSmoldering )
+  if ( this->mIsSmoldering )
   {
-    v72 = v3->mSmolderExtinguishTime - v2;
-    v3->mSmolderExtinguishTime = v72;
-    if ( v72 < 0.0 || v3->InvulnerableToFire )
-      UFG::CharacterEffectsComponent::ExtinguishSmolder(v3);
+    v71 = this->mSmolderExtinguishTime - delta_sec;
+    this->mSmolderExtinguishTime = v71;
+    if ( v71 < 0.0 || this->InvulnerableToFire )
+      UFG::CharacterEffectsComponent::ExtinguishSmolder(this);
   }
-  v73 = UFG::WorldEffectsManager::Get();
-  UFG::WorldEffectsManager::UpdateUIEffects(v73, v3);
+  v72 = UFG::WorldEffectsManager::Get();
+  UFG::WorldEffectsManager::UpdateUIEffects(v72, this);
 }
 
 // File Line: 673
 // RVA: 0x535140
-void __fastcall UFG::CharacterEffectsComponent::HandleWaterCollision(UFG::CharacterEffectsComponent *this, UFG::qMatrix44 *mat, UFG::qVector3 *characterVelocity)
+void __fastcall UFG::CharacterEffectsComponent::HandleWaterCollision(
+        UFG::CharacterEffectsComponent *this,
+        UFG::qMatrix44 *mat,
+        UFG::qVector3 *characterVelocity)
 {
-  UFG::SimComponent *v3; // rdi
+  UFG::SimComponent *m_pSimComponent; // rdi
   int v4; // esi
-  UFG::qMatrix44 *v5; // rbp
-  UFG::CharacterEffectsComponent *v6; // rbx
   Creature *v7; // rdi
   UFG::qWiseSymbol *v8; // rax
-  int v9; // eax
+  int BoneID; // eax
   UFG::SimComponent *v10; // rdi
   Creature *v11; // rdi
   UFG::qWiseSymbol *v12; // rax
   UFG::TransformNodeComponent *v13; // rcx
-  UFG::qMatrix44 transform; // [rsp+20h] [rbp-88h]
-  UFG::qMatrix44 m; // [rsp+60h] [rbp-48h]
-  UFG::qWiseSymbol result; // [rsp+B0h] [rbp+8h]
+  UFG::qMatrix44 transform; // [rsp+20h] [rbp-88h] BYREF
+  UFG::qMatrix44 m; // [rsp+60h] [rbp-48h] BYREF
+  UFG::qWiseSymbol result; // [rsp+B0h] [rbp+8h] BYREF
 
-  v3 = this->mCharacterAnimationComponent.m_pSimComponent;
+  m_pSimComponent = this->mCharacterAnimationComponent.m_pSimComponent;
   v4 = -1;
-  v5 = mat;
-  v6 = this;
-  if ( v3 )
+  if ( m_pSimComponent )
   {
-    v7 = *(Creature **)&v3[2].m_TypeUID;
+    v7 = *(Creature **)&m_pSimComponent[2].m_TypeUID;
     if ( v7 )
     {
       v8 = UFG::qSymbol::qSymbol(&result, 0x8C4CF328);
       if ( v7->mPose.mRigHandle.mData )
-        v9 = Skeleton::GetBoneID(v7->mPose.mRigHandle.mUFGSkeleton, v8->mUID);
+        BoneID = Skeleton::GetBoneID(v7->mPose.mRigHandle.mUFGSkeleton, v8->mUID);
       else
-        v9 = -1;
-      Creature::GetTransform(v7, v9, &transform);
+        BoneID = -1;
+      Creature::GetTransform(v7, BoneID, &transform);
     }
   }
-  v10 = v6->mCharacterAnimationComponent.m_pSimComponent;
+  v10 = this->mCharacterAnimationComponent.m_pSimComponent;
   if ( v10 )
   {
     v11 = *(Creature **)&v10[2].m_TypeUID;
@@ -1046,36 +1020,40 @@ void __fastcall UFG::CharacterEffectsComponent::HandleWaterCollision(UFG::Charac
       Creature::GetTransform(v11, v4, &m);
     }
   }
-  v13 = v6->mNodes[0];
-  transform.v3.z = v5->v3.z;
+  v13 = this->mNodes[0];
+  transform.v3.z = mat->v3.z;
   m.v3.z = transform.v3.z;
   UFG::TransformNodeComponent::SetLocalTransform(v13, &transform);
-  UFG::TransformNodeComponent::SetLocalTransform(v6->mNodes[1], &m);
-  if ( v6->mIsOnFire )
-    UFG::CharacterEffectsComponent::ExtinguishFire(v6);
-  if ( v6->mIsSmoldering )
-    UFG::CharacterEffectsComponent::ExtinguishSmolder(v6);
+  UFG::TransformNodeComponent::SetLocalTransform(this->mNodes[1], &m);
+  if ( this->mIsOnFire )
+    UFG::CharacterEffectsComponent::ExtinguishFire(this);
+  if ( this->mIsSmoldering )
+    UFG::CharacterEffectsComponent::ExtinguishSmolder(this);
 }
 
 // File Line: 723
 // RVA: 0x524970
 void __fastcall UFG::CharacterEffectsComponent::CreateNodes(UFG::CharacterEffectsComponent *this)
 {
-  _QWORD *v1; // rbx
-  signed __int64 v2; // rdi
-  UFG::qMemoryPool *v3; // rax
+  UFG::TransformNodeComponent **mNodes; // rbx
+  __int64 v2; // rdi
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
   UFG::allocator::free_link *v4; // rax
 
-  v1 = this->mNodes;
+  mNodes = this->mNodes;
   v2 = 2i64;
   do
   {
-    v3 = UFG::GetSimulationMemoryPool();
-    v4 = UFG::qMemoryPool::Allocate(v3, 0x110ui64, "CharacterEffectsComponent::TransformNodeComponet", 0i64, 1u);
+    SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+    v4 = UFG::qMemoryPool::Allocate(
+           SimulationMemoryPool,
+           0x110ui64,
+           "CharacterEffectsComponent::TransformNodeComponet",
+           0i64,
+           1u);
     if ( v4 )
       UFG::TransformNodeComponent::TransformNodeComponent((UFG::TransformNodeComponent *)v4, 0xDEADBEEF, 0i64, 0);
-    *v1 = v4;
-    ++v1;
+    *mNodes++ = (UFG::TransformNodeComponent *)v4;
     --v2;
   }
   while ( v2 );
@@ -1094,7 +1072,10 @@ void __fastcall UFG::CharacterEffectsComponent::ForceIgniteFire(UFG::CharacterEf
 
 // File Line: 776
 // RVA: 0x54D2A0
-void __fastcall UFG::CharacterEffectsComponent::SetFootstepOverride(UFG::CharacterEffectsComponent *this, unsigned int leftFootEffectID, unsigned int rightFootEffectID)
+void __fastcall UFG::CharacterEffectsComponent::SetFootstepOverride(
+        UFG::CharacterEffectsComponent *this,
+        unsigned int leftFootEffectID,
+        unsigned int rightFootEffectID)
 {
   this->mFootstepOverride[0] = leftFootEffectID;
   this->mFootstepOverride[1] = rightFootEffectID;
@@ -1104,16 +1085,15 @@ void __fastcall UFG::CharacterEffectsComponent::SetFootstepOverride(UFG::Charact
 // RVA: 0x535AD0
 void __fastcall UFG::CharacterEffectsComponent::IgniteFire(UFG::CharacterEffectsComponent *this)
 {
-  UFG::CharacterEffectsComponent *v1; // rbx
   bool v2; // zf
-  UFG::SimObject *v3; // rax
-  unsigned int v4; // er8
-  unsigned int v5; // er10
-  signed __int64 v6; // rdx
+  UFG::SimObject *m_pSimObject; // rax
+  unsigned int vfptr; // r8d
+  unsigned int size; // r10d
+  __int64 v6; // rdx
   Render::FXSimComponent *v7; // rdi
-  hkpRigidBody *v8; // rcx
-  UFG::SimComponentHolder *v9; // rcx
-  float *v10; // rdi
+  hkpRigidBody *mPhantomRigidBody; // rcx
+  UFG::SimComponentHolder *p; // rcx
+  float *m_pComponent; // rdi
   float v11; // xmm0_4
   float v12; // xmm1_4
   float v13; // xmm2_4
@@ -1130,94 +1110,93 @@ void __fastcall UFG::CharacterEffectsComponent::IgniteFire(UFG::CharacterEffects
   float v24; // xmm0_4
   float v25; // xmm1_4
   unsigned int v26; // eax
-  UFG::CharacterAnimationComponent *v27; // rcx
-  UFG::qVector3 halfExtents; // [rsp+30h] [rbp-58h]
-  UFG::qMatrix44 transform; // [rsp+40h] [rbp-48h]
+  UFG::CharacterAnimationComponent *m_pSimComponent; // rcx
+  UFG::qVector3 halfExtents; // [rsp+30h] [rbp-58h] BYREF
+  UFG::qMatrix44 transform; // [rsp+40h] [rbp-48h] BYREF
 
-  v1 = this;
   if ( !this->mIsOnFire )
   {
-    v2 = this->mIsSmoldering == 0;
+    v2 = !this->mIsSmoldering;
     this->mIsOnFire = 1;
     if ( !v2 )
       UFG::CharacterEffectsComponent::ExtinguishSmolder(this);
-    v3 = v1->m_pSimObject;
-    if ( v3 )
+    m_pSimObject = this->m_pSimObject;
+    if ( m_pSimObject )
     {
-      v4 = (unsigned int)v3[1].vfptr;
-      v5 = v3->m_Components.size;
-      if ( v4 < v5 )
+      vfptr = (unsigned int)m_pSimObject[1].vfptr;
+      size = m_pSimObject->m_Components.size;
+      if ( vfptr < size )
       {
-        v6 = (signed __int64)&v3->m_Components.p[v4];
+        v6 = (__int64)&m_pSimObject->m_Components.p[vfptr];
         while ( (*(_DWORD *)(v6 + 8) & 0xFE000000) != (Render::FXSimComponent::_TypeUID & 0xFE000000)
-             || Render::FXSimComponent::_TypeUID & ~*(_DWORD *)(v6 + 8) & 0x1FFFFFF )
+             || (Render::FXSimComponent::_TypeUID & ~*(_DWORD *)(v6 + 8) & 0x1FFFFFF) != 0 )
         {
-          ++v4;
+          ++vfptr;
           v6 += 16i64;
-          if ( v4 >= v5 )
+          if ( vfptr >= size )
             goto LABEL_13;
         }
         v7 = *(Render::FXSimComponent **)v6;
         if ( *(_QWORD *)v6 )
         {
-          v1->mFireEffectID[0] = Render::FXSimComponent::AttachEffect(v7, 0xA6B7A27D, 1, 0i64);
-          v1->mFireEffectID[1] = Render::FXSimComponent::AttachEffect(v7, 0x6811A3DBu, 13, 0i64);
-          v1->mFireEffectID[2] = Render::FXSimComponent::AttachEffect(v7, 0x6811A3DBu, 14, 0i64);
+          this->mFireEffectID[0] = Render::FXSimComponent::AttachEffect(v7, 0xA6B7A27D, 1, 0i64);
+          this->mFireEffectID[1] = Render::FXSimComponent::AttachEffect(v7, 0x6811A3DBu, 13, 0i64);
+          this->mFireEffectID[2] = Render::FXSimComponent::AttachEffect(v7, 0x6811A3DBu, 14, 0i64);
         }
       }
     }
 LABEL_13:
-    v8 = v1->mPhantomRigidBody;
-    if ( v8 )
+    mPhantomRigidBody = this->mPhantomRigidBody;
+    if ( mPhantomRigidBody )
     {
-      UFG::PhantomCallback::DestroyPhantom(v8);
-      v1->mPhantomRigidBody = 0i64;
+      UFG::PhantomCallback::DestroyPhantom(mPhantomRigidBody);
+      this->mPhantomRigidBody = 0i64;
     }
-    v9 = v1->m_pSimObject->m_Components.p;
-    v10 = (float *)v9[2].m_pComponent;
-    if ( v10 )
+    p = this->m_pSimObject->m_Components.p;
+    m_pComponent = (float *)p[2].m_pComponent;
+    if ( m_pComponent )
     {
-      UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v9[2].m_pComponent);
-      v11 = v10[32];
-      v12 = v10[33];
-      v13 = v10[46];
+      UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)p[2].m_pComponent);
+      v11 = m_pComponent[32];
+      v12 = m_pComponent[33];
+      v13 = m_pComponent[46];
       halfExtents.x = 0.5;
       halfExtents.y = 0.5;
       halfExtents.z = 1.0;
       transform.v0.x = v11;
-      transform.v0.z = v10[34];
-      v14 = v10[36];
+      transform.v0.z = m_pComponent[34];
+      v14 = m_pComponent[36];
       transform.v0.y = v12;
-      v15 = v10[35];
+      v15 = m_pComponent[35];
       transform.v1.x = v14;
-      v16 = v10[38];
+      v16 = m_pComponent[38];
       transform.v0.w = v15;
-      v17 = v10[37];
+      v17 = m_pComponent[37];
       transform.v1.z = v16;
-      v18 = v10[40];
+      v18 = m_pComponent[40];
       transform.v1.y = v17;
-      v19 = v10[39];
+      v19 = m_pComponent[39];
       transform.v2.x = v18;
-      v20 = v10[42];
+      v20 = m_pComponent[42];
       transform.v1.w = v19;
-      v21 = v10[41];
+      v21 = m_pComponent[41];
       transform.v2.z = v20;
-      v22 = v10[44];
+      v22 = m_pComponent[44];
       transform.v2.y = v21;
-      v23 = v10[43];
+      v23 = m_pComponent[43];
       transform.v3.x = v22;
-      v24 = v10[47];
+      v24 = m_pComponent[47];
       transform.v2.w = v23;
-      v25 = v10[45];
+      v25 = m_pComponent[45];
       transform.v3.w = v24;
       transform.v3.y = v25;
       transform.v3.z = v13 + 1.0;
-      v26 = UFG::qStringHashUpper32("PhysVol_OnFire", 0xFFFFFFFF);
-      v1->mPhantomRigidBody = (hkpRigidBody *)UFG::PhantomCallback::CreatePhantom(&halfExtents, &transform, v26);
+      v26 = UFG::qStringHashUpper32("PhysVol_OnFire", -1);
+      this->mPhantomRigidBody = (hkpRigidBody *)UFG::PhantomCallback::CreatePhantom(&halfExtents, &transform, v26);
     }
-    v27 = (UFG::CharacterAnimationComponent *)v1->mCharacterAnimationComponent.m_pSimComponent;
-    if ( v27 )
-      UFG::CharacterAnimationComponent::ApplyCharredEffect(v27, 1.0);
+    m_pSimComponent = (UFG::CharacterAnimationComponent *)this->mCharacterAnimationComponent.m_pSimComponent;
+    if ( m_pSimComponent )
+      UFG::CharacterAnimationComponent::ApplyCharredEffect(m_pSimComponent, 1.0);
   }
 }
 
@@ -1225,49 +1204,47 @@ LABEL_13:
 // RVA: 0x527A20
 void __fastcall UFG::CharacterEffectsComponent::ExtinguishFire(UFG::CharacterEffectsComponent *this)
 {
-  UFG::CharacterEffectsComponent *v1; // rbx
-  UFG::SimObject *v2; // rax
-  unsigned int v3; // er8
-  unsigned int v4; // er9
-  signed __int64 v5; // rdx
+  UFG::SimObject *m_pSimObject; // rax
+  unsigned int vfptr; // r8d
+  unsigned int size; // r9d
+  __int64 v5; // rdx
   Render::FXSimComponent *v6; // rdi
-  hkpRigidBody *v7; // rcx
+  hkpRigidBody *mPhantomRigidBody; // rcx
 
-  v1 = this;
   if ( this->mIsOnFire )
   {
-    v2 = this->m_pSimObject;
+    m_pSimObject = this->m_pSimObject;
     this->mIsOnFire = 0;
-    if ( v2 )
+    if ( m_pSimObject )
     {
-      v3 = (unsigned int)v2[1].vfptr;
-      v4 = v2->m_Components.size;
-      if ( v3 < v4 )
+      vfptr = (unsigned int)m_pSimObject[1].vfptr;
+      size = m_pSimObject->m_Components.size;
+      if ( vfptr < size )
       {
-        v5 = (signed __int64)&v2->m_Components.p[v3];
+        v5 = (__int64)&m_pSimObject->m_Components.p[vfptr];
         while ( (*(_DWORD *)(v5 + 8) & 0xFE000000) != (Render::FXSimComponent::_TypeUID & 0xFE000000)
-             || Render::FXSimComponent::_TypeUID & ~*(_DWORD *)(v5 + 8) & 0x1FFFFFF )
+             || (Render::FXSimComponent::_TypeUID & ~*(_DWORD *)(v5 + 8) & 0x1FFFFFF) != 0 )
         {
-          ++v3;
+          ++vfptr;
           v5 += 16i64;
-          if ( v3 >= v4 )
+          if ( vfptr >= size )
             goto LABEL_11;
         }
         v6 = *(Render::FXSimComponent **)v5;
         if ( *(_QWORD *)v5 )
         {
-          Render::FXSimComponent::DetachEffect(v6, this->mFireEffectID[0], 0);
-          Render::FXSimComponent::DetachEffect(v6, v1->mFireEffectID[1], 0);
-          Render::FXSimComponent::DetachEffect(v6, v1->mFireEffectID[2], 0);
+          Render::FXSimComponent::DetachEffect(v6, this->mFireEffectID[0], FXKILLOPTION_DEFAULT);
+          Render::FXSimComponent::DetachEffect(v6, this->mFireEffectID[1], FXKILLOPTION_DEFAULT);
+          Render::FXSimComponent::DetachEffect(v6, this->mFireEffectID[2], FXKILLOPTION_DEFAULT);
         }
       }
     }
 LABEL_11:
-    v7 = v1->mPhantomRigidBody;
-    if ( v7 )
+    mPhantomRigidBody = this->mPhantomRigidBody;
+    if ( mPhantomRigidBody )
     {
-      UFG::PhantomCallback::DestroyPhantom(v7);
-      v1->mPhantomRigidBody = 0i64;
+      UFG::PhantomCallback::DestroyPhantom(mPhantomRigidBody);
+      this->mPhantomRigidBody = 0i64;
     }
   }
 }
@@ -1276,74 +1253,72 @@ LABEL_11:
 // RVA: 0x535D70
 void __fastcall UFG::CharacterEffectsComponent::IgniteSmolder(UFG::CharacterEffectsComponent *this)
 {
-  UFG::CharacterEffectsComponent *v1; // rsi
-  UFG::SimObject *v2; // rbx
-  unsigned __int16 v3; // dx
-  unsigned int v4; // er8
-  unsigned int v5; // er9
-  signed __int64 v6; // rdx
-  Render::FXSimComponent *v7; // rdi
-  unsigned int v8; // er8
-  unsigned int v9; // er9
-  unsigned int v10; // er8
-  unsigned int v11; // er9
-  unsigned int v12; // er8
-  unsigned int v13; // er9
-  unsigned __int16 v14; // cx
-  UFG::ActorAudioComponent *v15; // rcx
-  unsigned int v16; // er8
-  unsigned int v17; // er9
-  signed __int64 v18; // rdx
-  unsigned int v19; // er8
-  unsigned int v20; // er9
-  unsigned int v21; // er8
-  unsigned int v22; // er9
+  UFG::SimObject *m_pSimObject; // rbx
+  __int16 m_Flags; // dx
+  unsigned int vfptr; // r8d
+  unsigned int size; // r9d
+  __int64 v6; // rdx
+  Render::FXSimComponent *ComponentOfType; // rdi
+  unsigned int v8; // r8d
+  unsigned int v9; // r9d
+  unsigned int v10; // r8d
+  unsigned int v11; // r9d
+  unsigned int v12; // r8d
+  unsigned int v13; // r9d
+  __int16 v14; // cx
+  UFG::ActorAudioComponent *m_pComponent; // rcx
+  unsigned int v16; // r8d
+  unsigned int v17; // r9d
+  __int64 v18; // rdx
+  unsigned int v19; // r8d
+  unsigned int v20; // r9d
+  unsigned int v21; // r8d
+  unsigned int v22; // r9d
 
-  v1 = this;
   if ( !this->mIsSmoldering )
   {
-    v2 = this->m_pSimObject;
+    m_pSimObject = this->m_pSimObject;
     this->mIsSmoldering = 1;
-    if ( v2 )
+    if ( m_pSimObject )
     {
-      v3 = v2->m_Flags;
-      if ( (v3 >> 14) & 1 )
+      m_Flags = m_pSimObject->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
       {
-        v4 = (unsigned int)v2[1].vfptr;
-        v5 = v2->m_Components.size;
-        if ( v4 < v5 )
+        vfptr = (unsigned int)m_pSimObject[1].vfptr;
+        size = m_pSimObject->m_Components.size;
+        if ( vfptr < size )
         {
-          v6 = (signed __int64)&v2->m_Components.p[v4];
+          v6 = (__int64)&m_pSimObject->m_Components.p[vfptr];
           while ( (*(_DWORD *)(v6 + 8) & 0xFE000000) != (Render::FXSimComponent::_TypeUID & 0xFE000000)
-               || Render::FXSimComponent::_TypeUID & ~*(_DWORD *)(v6 + 8) & 0x1FFFFFF )
+               || (Render::FXSimComponent::_TypeUID & ~*(_DWORD *)(v6 + 8) & 0x1FFFFFF) != 0 )
           {
-            ++v4;
+            ++vfptr;
             v6 += 16i64;
-            if ( v4 >= v5 )
+            if ( vfptr >= size )
               goto LABEL_9;
           }
 LABEL_10:
-          v7 = *(Render::FXSimComponent **)v6;
+          ComponentOfType = *(Render::FXSimComponent **)v6;
           goto LABEL_33;
         }
       }
-      else if ( (v3 & 0x8000u) == 0 )
+      else if ( m_Flags >= 0 )
       {
-        if ( (v3 >> 13) & 1 )
+        if ( (m_Flags & 0x2000) != 0 )
         {
-          v10 = (unsigned int)v2[1].vfptr;
-          v11 = v2->m_Components.size;
+          v10 = (unsigned int)m_pSimObject[1].vfptr;
+          v11 = m_pSimObject->m_Components.size;
           if ( v10 < v11 )
           {
-            v6 = (signed __int64)&v2->m_Components.p[v10];
+            v6 = (__int64)&m_pSimObject->m_Components.p[v10];
             while ( (*(_DWORD *)(v6 + 8) & 0xFE000000) != (Render::FXSimComponent::_TypeUID & 0xFE000000)
-                 || Render::FXSimComponent::_TypeUID & ~*(_DWORD *)(v6 + 8) & 0x1FFFFFF )
+                 || (Render::FXSimComponent::_TypeUID & ~*(_DWORD *)(v6 + 8) & 0x1FFFFFF) != 0 )
             {
               ++v10;
               v6 += 16i64;
               if ( v10 >= v11 )
               {
-                v7 = 0i64;
+                ComponentOfType = 0i64;
                 goto LABEL_33;
               }
             }
@@ -1352,45 +1327,47 @@ LABEL_10:
         }
         else
         {
-          if ( !((v3 >> 12) & 1) )
+          if ( (m_Flags & 0x1000) == 0 )
           {
-            v7 = (Render::FXSimComponent *)UFG::SimObject::GetComponentOfType(v2, Render::FXSimComponent::_TypeUID);
+            ComponentOfType = (Render::FXSimComponent *)UFG::SimObject::GetComponentOfType(
+                                                          m_pSimObject,
+                                                          Render::FXSimComponent::_TypeUID);
 LABEL_33:
-            if ( v7 )
+            if ( ComponentOfType )
             {
-              v1->mSmolderEffectID[0] = Render::FXSimComponent::AttachEffect(v7, 0x88AA83Au, 1, 0i64);
-              v1->mSmolderEffectID[1] = Render::FXSimComponent::AttachEffect(v7, 0xCF8F3EA9, 13, 0i64);
-              v1->mSmolderEffectID[2] = Render::FXSimComponent::AttachEffect(v7, 0xCF8F3EA9, 14, 0i64);
+              this->mSmolderEffectID[0] = Render::FXSimComponent::AttachEffect(ComponentOfType, 0x88AA83Au, 1, 0i64);
+              this->mSmolderEffectID[1] = Render::FXSimComponent::AttachEffect(ComponentOfType, 0xCF8F3EA9, 13, 0i64);
+              this->mSmolderEffectID[2] = Render::FXSimComponent::AttachEffect(ComponentOfType, 0xCF8F3EA9, 14, 0i64);
             }
-            v14 = v2->m_Flags;
-            if ( (v14 >> 14) & 1 )
+            v14 = m_pSimObject->m_Flags;
+            if ( (v14 & 0x4000) != 0 )
             {
-              v15 = (UFG::ActorAudioComponent *)v2->m_Components.p[40].m_pComponent;
-              if ( v15
-                && !((UFG::ActorAudioComponent::_TypeUID ^ v15->m_TypeUID) & 0xFE000000)
-                && !(UFG::ActorAudioComponent::_TypeUID & ~v15->m_TypeUID & 0x1FFFFFF) )
+              m_pComponent = (UFG::ActorAudioComponent *)m_pSimObject->m_Components.p[40].m_pComponent;
+              if ( m_pComponent
+                && ((UFG::ActorAudioComponent::_TypeUID ^ m_pComponent->m_TypeUID) & 0xFE000000) == 0
+                && (UFG::ActorAudioComponent::_TypeUID & ~m_pComponent->m_TypeUID & 0x1FFFFFF) == 0 )
               {
                 goto LABEL_63;
               }
               goto LABEL_39;
             }
-            if ( (v14 & 0x8000u) == 0 )
+            if ( v14 >= 0 )
             {
-              if ( (v14 >> 13) & 1 )
+              if ( (v14 & 0x2000) != 0 )
               {
-                v19 = (unsigned int)v2[1].vfptr;
-                v20 = v2->m_Components.size;
+                v19 = (unsigned int)m_pSimObject[1].vfptr;
+                v20 = m_pSimObject->m_Components.size;
                 if ( v19 < v20 )
                 {
-                  v18 = (signed __int64)&v2->m_Components.p[v19];
+                  v18 = (__int64)&m_pSimObject->m_Components.p[v19];
                   while ( (*(_DWORD *)(v18 + 8) & 0xFE000000) != (UFG::ActorAudioComponent::_TypeUID & 0xFE000000)
-                       || UFG::ActorAudioComponent::_TypeUID & ~*(_DWORD *)(v18 + 8) & 0x1FFFFFF )
+                       || (UFG::ActorAudioComponent::_TypeUID & ~*(_DWORD *)(v18 + 8) & 0x1FFFFFF) != 0 )
                   {
                     ++v19;
                     v18 += 16i64;
                     if ( v19 >= v20 )
                     {
-                      v15 = 0i64;
+                      m_pComponent = 0i64;
                       goto LABEL_63;
                     }
                   }
@@ -1399,29 +1376,29 @@ LABEL_33:
               }
               else
               {
-                if ( !((v14 >> 12) & 1) )
+                if ( (v14 & 0x1000) == 0 )
                 {
-                  v15 = (UFG::ActorAudioComponent *)UFG::SimObject::GetComponentOfType(
-                                                      v2,
-                                                      UFG::ActorAudioComponent::_TypeUID);
+                  m_pComponent = (UFG::ActorAudioComponent *)UFG::SimObject::GetComponentOfType(
+                                                               m_pSimObject,
+                                                               UFG::ActorAudioComponent::_TypeUID);
 LABEL_63:
-                  if ( v15 )
-                    UFG::ActorAudioComponent::PlayScreamPain(v15);
+                  if ( m_pComponent )
+                    UFG::ActorAudioComponent::PlayScreamPain(m_pComponent);
                   return;
                 }
-                v21 = (unsigned int)v2[1].vfptr;
-                v22 = v2->m_Components.size;
+                v21 = (unsigned int)m_pSimObject[1].vfptr;
+                v22 = m_pSimObject->m_Components.size;
                 if ( v21 < v22 )
                 {
-                  v18 = (signed __int64)&v2->m_Components.p[v21];
+                  v18 = (__int64)&m_pSimObject->m_Components.p[v21];
                   while ( (*(_DWORD *)(v18 + 8) & 0xFE000000) != (UFG::ActorAudioComponent::_TypeUID & 0xFE000000)
-                       || UFG::ActorAudioComponent::_TypeUID & ~*(_DWORD *)(v18 + 8) & 0x1FFFFFF )
+                       || (UFG::ActorAudioComponent::_TypeUID & ~*(_DWORD *)(v18 + 8) & 0x1FFFFFF) != 0 )
                   {
                     ++v21;
                     v18 += 16i64;
                     if ( v21 >= v22 )
                     {
-                      v15 = 0i64;
+                      m_pComponent = 0i64;
                       goto LABEL_63;
                     }
                   }
@@ -1431,44 +1408,44 @@ LABEL_63:
             }
             else
             {
-              v16 = (unsigned int)v2[1].vfptr;
-              v17 = v2->m_Components.size;
+              v16 = (unsigned int)m_pSimObject[1].vfptr;
+              v17 = m_pSimObject->m_Components.size;
               if ( v16 < v17 )
               {
-                v18 = (signed __int64)&v2->m_Components.p[v16];
+                v18 = (__int64)&m_pSimObject->m_Components.p[v16];
                 while ( (*(_DWORD *)(v18 + 8) & 0xFE000000) != (UFG::ActorAudioComponent::_TypeUID & 0xFE000000)
-                     || UFG::ActorAudioComponent::_TypeUID & ~*(_DWORD *)(v18 + 8) & 0x1FFFFFF )
+                     || (UFG::ActorAudioComponent::_TypeUID & ~*(_DWORD *)(v18 + 8) & 0x1FFFFFF) != 0 )
                 {
                   ++v16;
                   v18 += 16i64;
                   if ( v16 >= v17 )
                   {
-                    v15 = 0i64;
+                    m_pComponent = 0i64;
                     goto LABEL_63;
                   }
                 }
 LABEL_47:
-                v15 = *(UFG::ActorAudioComponent **)v18;
+                m_pComponent = *(UFG::ActorAudioComponent **)v18;
                 goto LABEL_63;
               }
             }
 LABEL_39:
-            v15 = 0i64;
+            m_pComponent = 0i64;
             goto LABEL_63;
           }
-          v12 = (unsigned int)v2[1].vfptr;
-          v13 = v2->m_Components.size;
+          v12 = (unsigned int)m_pSimObject[1].vfptr;
+          v13 = m_pSimObject->m_Components.size;
           if ( v12 < v13 )
           {
-            v6 = (signed __int64)&v2->m_Components.p[v12];
+            v6 = (__int64)&m_pSimObject->m_Components.p[v12];
             while ( (*(_DWORD *)(v6 + 8) & 0xFE000000) != (Render::FXSimComponent::_TypeUID & 0xFE000000)
-                 || Render::FXSimComponent::_TypeUID & ~*(_DWORD *)(v6 + 8) & 0x1FFFFFF )
+                 || (Render::FXSimComponent::_TypeUID & ~*(_DWORD *)(v6 + 8) & 0x1FFFFFF) != 0 )
             {
               ++v12;
               v6 += 16i64;
               if ( v12 >= v13 )
               {
-                v7 = 0i64;
+                ComponentOfType = 0i64;
                 goto LABEL_33;
               }
             }
@@ -1478,19 +1455,19 @@ LABEL_39:
       }
       else
       {
-        v8 = (unsigned int)v2[1].vfptr;
-        v9 = v2->m_Components.size;
+        v8 = (unsigned int)m_pSimObject[1].vfptr;
+        v9 = m_pSimObject->m_Components.size;
         if ( v8 < v9 )
         {
-          v6 = (signed __int64)&v2->m_Components.p[v8];
+          v6 = (__int64)&m_pSimObject->m_Components.p[v8];
           while ( (*(_DWORD *)(v6 + 8) & 0xFE000000) != (Render::FXSimComponent::_TypeUID & 0xFE000000)
-               || Render::FXSimComponent::_TypeUID & ~*(_DWORD *)(v6 + 8) & 0x1FFFFFF )
+               || (Render::FXSimComponent::_TypeUID & ~*(_DWORD *)(v6 + 8) & 0x1FFFFFF) != 0 )
           {
             ++v8;
             v6 += 16i64;
             if ( v8 >= v9 )
             {
-              v7 = 0i64;
+              ComponentOfType = 0i64;
               goto LABEL_33;
             }
           }
@@ -1498,49 +1475,47 @@ LABEL_39:
         }
       }
 LABEL_9:
-      v7 = 0i64;
+      ComponentOfType = 0i64;
       goto LABEL_33;
     }
   }
-}
+}      {
+              Com
 
 // File Line: 897
 // RVA: 0x527B20
 void __fastcall UFG::CharacterEffectsComponent::ExtinguishSmolder(UFG::CharacterEffectsComponent *this)
 {
-  UFG::CharacterEffectsComponent *v1; // rbx
-  UFG::SimObject *v2; // rax
-  unsigned int v3; // er8
-  unsigned int v4; // er9
-  signed __int64 v5; // rdx
+  UFG::SimObject *m_pSimObject; // rax
+  unsigned int vfptr; // r8d
+  unsigned int size; // r9d
+  __int64 i; // rdx
   Render::FXSimComponent *v6; // rdi
 
-  v1 = this;
   if ( this->mIsSmoldering )
   {
-    v2 = this->m_pSimObject;
+    m_pSimObject = this->m_pSimObject;
     this->mIsSmoldering = 0;
-    if ( v2 )
+    if ( m_pSimObject )
     {
-      v3 = (unsigned int)v2[1].vfptr;
-      v4 = v2->m_Components.size;
-      if ( v3 < v4 )
+      vfptr = (unsigned int)m_pSimObject[1].vfptr;
+      size = m_pSimObject->m_Components.size;
+      if ( vfptr < size )
       {
-        v5 = (signed __int64)&v2->m_Components.p[v3];
-        while ( (*(_DWORD *)(v5 + 8) & 0xFE000000) != (Render::FXSimComponent::_TypeUID & 0xFE000000)
-             || Render::FXSimComponent::_TypeUID & ~*(_DWORD *)(v5 + 8) & 0x1FFFFFF )
+        for ( i = (__int64)&m_pSimObject->m_Components.p[vfptr];
+              (*(_DWORD *)(i + 8) & 0xFE000000) != (Render::FXSimComponent::_TypeUID & 0xFE000000)
+           || (Render::FXSimComponent::_TypeUID & ~*(_DWORD *)(i + 8) & 0x1FFFFFF) != 0;
+              i += 16i64 )
         {
-          ++v3;
-          v5 += 16i64;
-          if ( v3 >= v4 )
+          if ( ++vfptr >= size )
             return;
         }
-        v6 = *(Render::FXSimComponent **)v5;
-        if ( *(_QWORD *)v5 )
+        v6 = *(Render::FXSimComponent **)i;
+        if ( *(_QWORD *)i )
         {
-          Render::FXSimComponent::DetachEffect(v6, this->mSmolderEffectID[0], 0);
-          Render::FXSimComponent::DetachEffect(v6, v1->mSmolderEffectID[1], 0);
-          Render::FXSimComponent::DetachEffect(v6, v1->mSmolderEffectID[2], 0);
+          Render::FXSimComponent::DetachEffect(v6, this->mSmolderEffectID[0], FXKILLOPTION_DEFAULT);
+          Render::FXSimComponent::DetachEffect(v6, this->mSmolderEffectID[1], FXKILLOPTION_DEFAULT);
+          Render::FXSimComponent::DetachEffect(v6, this->mSmolderEffectID[2], FXKILLOPTION_DEFAULT);
         }
       }
     }

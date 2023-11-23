@@ -263,7 +263,8 @@ __int64 __fastcall TargetVisibleInAIDataCondition::CreateClone(hkResourceHandle 
 
 // File Line: 1079
 // RVA: 0x2BD9B0
-__int64 __fastcall AIRemoveSupplementaryAttackTargetTrack::GetClassNameUID(AIRemoveSupplementaryAttackTargetTrack *this)
+__int64 __fastcall AIRemoveSupplementaryAttackTargetTrack::GetClassNameUID(
+        AIRemoveSupplementaryAttackTargetTrack *this)
 {
   return AIRemoveSupplementaryAttackTargetTrack::sClassNameUID;
 }
@@ -354,12 +355,9 @@ const char *__fastcall FireWeaponTrack::GetClassname(FireWeaponTrack *this)
 // RVA: 0x298630
 void __fastcall FireWeaponTrack::FireWeaponTrack(FireWeaponTrack *this, MemImageLoadFlag flag)
 {
-  FireWeaponTrack *v2; // rbx
-
-  v2 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, flag);
-  v2->vfptr = (Expression::IMemberMapVtbl *)&Track<FireWeaponTask>::`vftable;
-  v2->vfptr = (Expression::IMemberMapVtbl *)&FireWeaponTrack::`vftable;
+  ITrack::ITrack(this, flag);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<FireWeaponTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&FireWeaponTrack::`vftable;
 }
 
 // File Line: 1319
@@ -416,24 +414,19 @@ const char *__fastcall AICopReportInfractionTargetTrack::GetClassname(AICopRepor
 // RVA: 0x299520
 void __fastcall AICopApplyReducedRadiusTrack::~AICopApplyReducedRadiusTrack(AICopApplyReducedRadiusTrack *this)
 {
-  AICopApplyReducedRadiusTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&AICopApplyReducedRadiusTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 1525
@@ -495,24 +488,19 @@ void __fastcall LockFormationPositionToCurrentPositionTrack::Create()
 // RVA: 0x29B9D0
 void __fastcall ForceUpdateTargetingTrack::~ForceUpdateTargetingTrack(ForceUpdateTargetingTrack *this)
 {
-  ForceUpdateTargetingTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&ForceUpdateTargetingTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 1685
@@ -547,14 +535,16 @@ const char *__fastcall SetDriverFlagsTrack::GetClassname(SetDriverFlagsTrack *th
 
 // File Line: 1765
 // RVA: 0x2C0910
-const char *__fastcall AttackRightsSetTimeUntilNextAttackTrack::GetClassname(AttackRightsSetTimeUntilNextAttackTrack *this)
+const char *__fastcall AttackRightsSetTimeUntilNextAttackTrack::GetClassname(
+        AttackRightsSetTimeUntilNextAttackTrack *this)
 {
   return AttackRightsSetTimeUntilNextAttackTrack::sClassName;
 }
 
 // File Line: 1809
 // RVA: 0x2BDC30
-__int64 __fastcall AttackRightsClearPreviousBestAttackerTrack::GetClassNameUID(AttackRightsClearPreviousBestAttackerTrack *this)
+__int64 __fastcall AttackRightsClearPreviousBestAttackerTrack::GetClassNameUID(
+        AttackRightsClearPreviousBestAttackerTrack *this)
 {
   return AttackRightsClearPreviousBestAttackerTrack::sClassNameUID;
 }
@@ -568,14 +558,16 @@ const char *__fastcall AttackRightsReSortListTrack::GetClassname(AttackRightsReS
 
 // File Line: 1867
 // RVA: 0x2C08C0
-const char *__fastcall AttackRightsCancelAnyIncomingAttackTrack::GetClassname(AttackRightsCancelAnyIncomingAttackTrack *this)
+const char *__fastcall AttackRightsCancelAnyIncomingAttackTrack::GetClassname(
+        AttackRightsCancelAnyIncomingAttackTrack *this)
 {
   return AttackRightsCancelAnyIncomingAttackTrack::sClassName;
 }
 
 // File Line: 1900
 // RVA: 0x2BDC40
-__int64 __fastcall AttackRightsFormationManagerFreezeRangeSwitchesTrack::GetClassNameUID(AttackRightsFormationManagerFreezeRangeSwitchesTrack *this)
+__int64 __fastcall AttackRightsFormationManagerFreezeRangeSwitchesTrack::GetClassNameUID(
+        AttackRightsFormationManagerFreezeRangeSwitchesTrack *this)
 {
   return AttackRightsFormationManagerFreezeRangeSwitchesTrack::sClassNameUID;
 }
@@ -723,12 +715,10 @@ const char *__fastcall InvokeBehaviourTrack::GetClassname(InvokeBehaviourTrack *
 // RVA: 0x2BD340
 ITask *__fastcall InvokeBehaviourTrack::CreateTask(InvokeBehaviourTrack *this, const char *debugName)
 {
-  InvokeBehaviourTrack *v2; // rdi
   char *v3; // rax
   ITask *v4; // rax
   ITask *v5; // rbx
 
-  v2 = this;
   v3 = UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0x2C0ui64, debugName, 0i64, 1u);
   if ( v3 )
   {
@@ -739,7 +729,7 @@ ITask *__fastcall InvokeBehaviourTrack::CreateTask(InvokeBehaviourTrack *this, c
   {
     v5 = 0i64;
   }
-  ITask::SetTrack(v5, (ITrack *)&v2->vfptr);
+  ITask::SetTrack(v5, this);
   return v5;
 }
 

@@ -1,6 +1,9 @@
 // File Line: 15
 // RVA: 0xD4D3B0
-void __fastcall hkBridgeConstraintAtom_callData(hkpConstraintData *m_constraintData, hkpConstraintQueryIn *in, hkpConstraintQueryOut *out)
+void __fastcall hkBridgeConstraintAtom_callData(
+        hkpConstraintData *m_constraintData,
+        hkpConstraintQueryIn *in,
+        hkpConstraintQueryOut *out)
 {
   ((void (__fastcall *)(hkpConstraintData *, hkpConstraintQueryIn *, hkpConstraintQueryOut *))m_constraintData->vfptr[10].__vecDelDtor)(
     m_constraintData,

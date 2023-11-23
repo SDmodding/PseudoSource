@@ -9,77 +9,64 @@ UFG::ComponentIDDesc *__fastcall UFG::VehicleSpot::GetDesc(UFG::VehicleSpot *thi
 // RVA: 0x5B1B70
 void __fastcall UFG::VehicleSpot::VehicleSpot(UFG::VehicleSpot *this, UFG::qSymbol *name, UFG::SimObject *simobj)
 {
-  UFG::SimObject *v3; // rbx
-  UFG::VehicleSpot *v4; // rdi
-  UFG::qNode<UFG::VehicleSpot,UFG::VehicleSpot> *v5; // rax
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObjectVehicle> *v6; // [rsp+58h] [rbp+20h]
-
-  v3 = simobj;
-  v4 = this;
-  UFG::MarkerBase::MarkerBase((UFG::MarkerBase *)&this->vfptr, name, simobj, 0);
-  v5 = (UFG::qNode<UFG::VehicleSpot,UFG::VehicleSpot> *)&v4->mPrev;
-  v5->mPrev = v5;
-  v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleSpot::`vftable;
-  v4->mNearOrOnIntersection = 0;
-  v6 = &v4->mOccupier;
-  v6->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v6->mPrev;
-  v6->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v6->mPrev;
-  v4->mOccupier.m_pPointer = 0i64;
-  UFG::SimComponent::AddType((UFG::SimComponent *)&v4->vfptr, UFG::VehicleSpot::_VehicleSpotTypeUID, "VehicleSpot");
-  UFG::VehicleSpot::Initialize(v4, v3);
+  UFG::MarkerBase::MarkerBase(this, name, simobj, 0);
+  this->mPrev = &this->UFG::qNode<UFG::VehicleSpot,UFG::VehicleSpot>;
+  this->mNext = &this->UFG::qNode<UFG::VehicleSpot,UFG::VehicleSpot>;
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleSpot::`vftable;
+  this->mNearOrOnIntersection = 0;
+  this->mOccupier.mPrev = &this->mOccupier;
+  this->mOccupier.mNext = &this->mOccupier;
+  this->mOccupier.m_pPointer = 0i64;
+  UFG::SimComponent::AddType(this, UFG::VehicleSpot::_VehicleSpotTypeUID, "VehicleSpot");
+  UFG::VehicleSpot::Initialize(this, simobj);
 }
 
 // File Line: 61
 // RVA: 0x5B20D0
 void __fastcall UFG::VehicleSpot::~VehicleSpot(UFG::VehicleSpot *this)
 {
-  UFG::VehicleSpot *v1; // r8
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObjectVehicle> *v2; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v3; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v4; // rax
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObjectVehicle> *p_mOccupier; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v5; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v6; // rax
-  UFG::qNode<UFG::VehicleSpot,UFG::VehicleSpot> *v7; // rdx
-  UFG::qNode<UFG::VehicleSpot,UFG::VehicleSpot> *v8; // rcx
-  UFG::qNode<UFG::VehicleSpot,UFG::VehicleSpot> *v9; // rax
+  UFG::qNode<UFG::VehicleSpot,UFG::VehicleSpot> *v7; // rcx
+  UFG::qNode<UFG::VehicleSpot,UFG::VehicleSpot> *v8; // rax
 
-  v1 = this;
   this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::VehicleSpot::`vftable;
-  v2 = &this->mOccupier;
+  p_mOccupier = &this->mOccupier;
   if ( this->mOccupier.m_pPointer )
   {
-    v3 = v2->mPrev;
-    v4 = v2->mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-    v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
+    mPrev = p_mOccupier->mPrev;
+    mNext = p_mOccupier->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mOccupier->mPrev = p_mOccupier;
+    p_mOccupier->mNext = p_mOccupier;
   }
-  v2->m_pPointer = 0i64;
-  v5 = v2->mPrev;
-  v6 = v2->mNext;
+  p_mOccupier->m_pPointer = 0i64;
+  v5 = p_mOccupier->mPrev;
+  v6 = p_mOccupier->mNext;
   v5->mNext = v6;
   v6->mPrev = v5;
-  v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v7 = (UFG::qNode<UFG::VehicleSpot,UFG::VehicleSpot> *)&v1->mPrev;
-  v8 = v1->mPrev;
-  v9 = v1->mNext;
-  v8->mNext = v9;
-  v9->mPrev = v8;
-  v7->mPrev = v7;
-  v7->mNext = v7;
-  UFG::MarkerBase::~MarkerBase((UFG::MarkerBase *)&v1->vfptr);
+  p_mOccupier->mPrev = p_mOccupier;
+  p_mOccupier->mNext = p_mOccupier;
+  v7 = this->mPrev;
+  v8 = this->mNext;
+  v7->mNext = v8;
+  v8->mPrev = v7;
+  this->mPrev = &this->UFG::qNode<UFG::VehicleSpot,UFG::VehicleSpot>;
+  this->mNext = &this->UFG::qNode<UFG::VehicleSpot,UFG::VehicleSpot>;
+  UFG::MarkerBase::~MarkerBase(this);
 }
 
 // File Line: 66
 // RVA: 0x5B4D60
 void __fastcall UFG::VehicleSpot::Initialize(UFG::VehicleSpot *this, UFG::SimObject *simobj)
 {
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObjectVehicle> *v2; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v3; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v4; // rax
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObjectVehicle> *p_mOccupier; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
 
   this->mCanSpawn = 1;
   this->mRoadSegmentID = -1;
@@ -87,66 +74,64 @@ void __fastcall UFG::VehicleSpot::Initialize(UFG::VehicleSpot *this, UFG::SimObj
   this->mBoundingBoxMin.x = -2.5;
   this->mBoundingBoxMin.y = -1.0;
   this->mBoundingBoxMin.z = 0.0;
-  v2 = &this->mOccupier;
+  p_mOccupier = &this->mOccupier;
   this->mBoundingBoxMax.x = 2.5;
   this->mBoundingBoxMax.y = 1.0;
   this->mBoundingBoxMax.z = 1.5;
   if ( this->mOccupier.m_pPointer )
   {
-    v3 = v2->mPrev;
-    v4 = v2->mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-    v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
+    mPrev = p_mOccupier->mPrev;
+    mNext = p_mOccupier->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mOccupier->mPrev = p_mOccupier;
+    p_mOccupier->mNext = p_mOccupier;
   }
-  v2->m_pPointer = 0i64;
+  p_mOccupier->m_pPointer = 0i64;
 }
 
 // File Line: 107
 // RVA: 0x5B5170
 void __fastcall UFG::VehicleSpot::PropertiesLoad(UFG::VehicleSpot *this, UFG::SceneObjectProperties *pSceneObj)
 {
-  UFG::SceneObjectProperties *v2; // rdi
-  UFG::VehicleSpot *v3; // rbx
-  UFG::qPropertySet *v4; // rax
-  UFG::qPropertySet *v5; // rax
+  bool *v4; // rax
+  unsigned __int16 *v5; // rax
   UFG::qPropertySet *v6; // rax
-  signed int v7; // eax
+  unsigned int mFlags; // eax
   UFG::qPropertySet *v8; // rax
-  UFG::qPropertySet *v9; // rax
+  float *v9; // rax
   float v10; // xmm0_4
-  UFG::qPropertySet *v11; // rax
+  bool *v11; // rax
 
-  v2 = pSceneObj;
-  v3 = this;
-  v4 = PropertyUtils::Get<bool>(pSceneObj, (UFG::qSymbol *)&qSymbol_CanSpawn.mUID);
+  v4 = PropertyUtils::Get<bool>(pSceneObj, (UFG::qArray<unsigned long,0> *)&qSymbol_CanSpawn);
   if ( v4 )
-    v3->mCanSpawn = v4->mFlags;
-  v5 = PropertyUtils::Get<unsigned long>(v2, (UFG::qSymbol *)&qSymbol_RoadNetworkType.mUID);
+    this->mCanSpawn = *v4;
+  v5 = (unsigned __int16 *)PropertyUtils::Get<unsigned long>(
+                             pSceneObj,
+                             (UFG::qArray<unsigned long,0> *)&qSymbol_RoadNetworkType);
   if ( v5 )
-    v3->mRoadNetworkType = v5->mFlags;
-  v6 = PropertyUtils::Get<long>(v2, (UFG::qSymbol *)&qSymbol_RoadNetworkNodeID.mUID);
+    this->mRoadNetworkType = *v5;
+  v6 = PropertyUtils::Get<long>(pSceneObj, (UFG::qArray<unsigned long,0> *)&qSymbol_RoadNetworkNodeID);
   if ( v6 )
-    v7 = v6->mFlags;
+    mFlags = v6->mFlags;
   else
-    v7 = -1;
-  v3->mRoadSegmentID = v7;
-  v8 = PropertyUtils::Get<long>(v2, (UFG::qSymbol *)&qSymbol_RoadNetworkClosestLaneIndex.mUID);
+    mFlags = -1;
+  this->mRoadSegmentID = mFlags;
+  v8 = PropertyUtils::Get<long>(pSceneObj, (UFG::qArray<unsigned long,0> *)&qSymbol_RoadNetworkClosestLaneIndex);
   if ( v8 )
     LODWORD(v8) = v8->mFlags;
-  v3->mClosestLaneIndex = (unsigned __int16)v8;
-  v9 = PropertyUtils::Get<float>(v2, (UFG::qSymbol *)&qSymbol_RoadNetworkClosestT.mUID);
+  this->mClosestLaneIndex = (unsigned __int16)v8;
+  v9 = PropertyUtils::Get<float>(pSceneObj, (UFG::qArray<unsigned long,0> *)&qSymbol_RoadNetworkClosestT);
   if ( v9 )
-    v10 = *(float *)&v9->mFlags;
+    v10 = *v9;
   else
     v10 = 0.0;
-  v3->mClosestT = v10;
-  v11 = PropertyUtils::Get<bool>(v2, (UFG::qSymbol *)&qSymbol_RoadNetworkNearOrOnIntersection.mUID);
+  this->mClosestT = v10;
+  v11 = PropertyUtils::Get<bool>(pSceneObj, (UFG::qArray<unsigned long,0> *)&qSymbol_RoadNetworkNearOrOnIntersection);
   if ( v11 )
-    v3->mNearOrOnIntersection = LOBYTE(v11->mFlags);
+    this->mNearOrOnIntersection = *v11;
   else
-    v3->mNearOrOnIntersection = 0;
+    this->mNearOrOnIntersection = 0;
 }
 
 // File Line: 206
@@ -160,17 +145,15 @@ UFG::ComponentIDDesc *__fastcall UFG::ParkingSpot::GetDesc(UFG::ParkingSpot *thi
 // RVA: 0x5B2A40
 void __fastcall UFG::ParkingSpot::AddToCollection(UFG::ParkingSpot *this)
 {
-  UFG::ParkingSpot *v1; // rbx
-  UFG::RoadNetworkResource *v2; // rax
-  UFG::RoadNetworkSegment *v3; // rax
+  UFG::RoadNetworkResource *RoadNetwork; // rax
+  UFG::RoadNetworkSegment *Segment; // rax
 
-  v1 = this;
-  v2 = UFG::WheeledVehicleNavigationData::GetRoadNetwork(UFG::WheeledVehicleManager::m_Instance->m_NavigationData);
-  if ( v2 )
+  RoadNetwork = UFG::WheeledVehicleNavigationData::GetRoadNetwork(UFG::WheeledVehicleManager::m_Instance->m_NavigationData);
+  if ( RoadNetwork )
   {
-    v3 = UFG::RoadNetworkResource::GetSegment(v2, v1->mRoadSegmentID);
-    if ( !v1->mNearOrOnIntersection )
-      UFG::RoadNetworkSegment::AddParkingSpot(v3, v1);
+    Segment = UFG::RoadNetworkResource::GetSegment(RoadNetwork, this->mRoadSegmentID);
+    if ( !this->mNearOrOnIntersection )
+      UFG::RoadNetworkSegment::AddParkingSpot(Segment, this);
   }
 }
 
@@ -178,82 +161,79 @@ void __fastcall UFG::ParkingSpot::AddToCollection(UFG::ParkingSpot *this)
 // RVA: 0x5B4340
 bool __fastcall UFG::ParkingSpot::HasComponent(UFG::SceneObjectProperties *pSceneObj)
 {
-  return PropertyUtils::HasComponentPropertySet(pSceneObj, (UFG::qSymbol *)&qSymbolX_propset_componentParkingSpot.mUID);
+  return PropertyUtils::HasComponentPropertySet(
+           pSceneObj,
+           (UFG::qArray<unsigned long,0> *)&qSymbolX_propset_componentParkingSpot);
 }
 
 // File Line: 323
 // RVA: 0x5B5320
-UFG::VehicleSpot *__fastcall UFG::ParkingSpot::PropertiesOnActivate(UFG::SceneObjectProperties *pSceneObj)
+UFG::ParkingSpot *__fastcall UFG::ParkingSpot::PropertiesOnActivate(UFG::SceneObjectProperties *pSceneObj)
 {
-  UFG::SceneObjectProperties *v1; // rbp
-  UFG::qMemoryPool *v2; // rax
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
   UFG::VehicleSpot *v3; // rdi
-  UFG::SimObject *v4; // rbx
+  UFG::SimObject *m_pSimObject; // rbx
   UFG::qSymbol *v5; // rax
-  UFG::VehicleSpot *v6; // rax
-  UFG::qSymbol result; // [rsp+68h] [rbp+10h]
-  UFG::VehicleSpot *v9; // [rsp+70h] [rbp+18h]
+  UFG::qSymbol result; // [rsp+68h] [rbp+10h] BYREF
+  UFG::VehicleSpot *v8; // [rsp+70h] [rbp+18h]
 
-  v1 = pSceneObj;
-  v2 = UFG::GetSimulationMemoryPool();
-  v3 = (UFG::VehicleSpot *)UFG::qMemoryPool::Allocate(v2, 0xD0ui64, "ParkingSpot", 0i64, 1u);
-  v9 = v3;
+  SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+  v3 = (UFG::VehicleSpot *)UFG::qMemoryPool::Allocate(SimulationMemoryPool, 0xD0ui64, "ParkingSpot", 0i64, 1u);
+  v8 = v3;
   if ( v3 )
   {
-    v4 = v1->m_pSimObject;
-    v5 = UFG::SceneObjectProperties::operator UFG::qSymbol const(v1, &result);
-    UFG::VehicleSpot::VehicleSpot(v3, v5, v4);
-    v6 = v3 + 1;
-    v6->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)v6;
-    v6->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)v6;
+    m_pSimObject = pSceneObj->m_pSimObject;
+    v5 = (UFG::qSymbol *)UFG::SceneObjectProperties::operator UFG::qSymbol const(pSceneObj, (UFG::qWiseSymbol *)&result);
+    UFG::VehicleSpot::VehicleSpot(v3, v5, m_pSimObject);
+    v3[1].vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&v3[1];
+    v3[1].m_SafePointerList.UFG::MarkerBase::UFG::HintComponentBase::UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mNode.UFG::MarkerBase::UFG::HintComponentBase::UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v3[1];
     v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::ParkingSpot::`vftable;
-    UFG::SimComponent::AddType((UFG::SimComponent *)&v3->vfptr, UFG::ParkingSpot::_ParkingSpotTypeUID, "ParkingSpot");
+    UFG::SimComponent::AddType(v3, UFG::ParkingSpot::_ParkingSpotTypeUID, "ParkingSpot");
     v3->mRoadSegmentID = -1;
   }
   else
   {
     v3 = 0i64;
   }
-  v3->vfptr[12].__vecDelDtor((UFG::qSafePointerNode<UFG::SimComponent> *)&v3->vfptr, (unsigned int)v1);
+  v3->vfptr[12].__vecDelDtor(v3, (unsigned int)pSceneObj);
   ((void (__fastcall *)(UFG::VehicleSpot *))v3->vfptr[19].__vecDelDtor)(v3);
-  return v3;
+  return (UFG::ParkingSpot *)v3;
 }
 
 // File Line: 331
 // RVA: 0x5B5160
+// attributes: thunk
 void __fastcall UFG::ParkingSpot::PropertiesLoad(UFG::ParkingSpot *this, UFG::SceneObjectProperties *pSceneObj)
 {
-  UFG::VehicleSpot::PropertiesLoad((UFG::VehicleSpot *)&this->vfptr, pSceneObj);
+  UFG::VehicleSpot::PropertiesLoad(this, pSceneObj);
 }
 
 // File Line: 339
 // RVA: 0x5B6E50
-UFG::SimObject *__fastcall UFG::ParkingSpot::Spawn(UFG::ParkingSpot *this, UFG::qSymbol *objName, UFG::qPropertySet *parentSet, UFG::SpawnInfoInterface::SpawnPriority priority)
+UFG::SimObject *__fastcall UFG::ParkingSpot::Spawn(
+        UFG::ParkingSpot *this,
+        UFG::qSymbol *objName,
+        UFG::qPropertySet *parentSet,
+        __int32 priority)
 {
-  UFG::ParkingSpot *v4; // rbp
-  UFG::SpawnInfoInterface::SpawnPriority v5; // esi
-  UFG::qPropertySet *v6; // r14
   UFG::SceneObjectProperties *v7; // rax
   UFG::SceneObjectProperties *v8; // rbx
   UFG::qStaticSymbol *v9; // r8
   UFG::SimObject *v10; // rdi
   UFG::qSymbolUC *v11; // rax
   char *v12; // rax
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObjectVehicle> *v13; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v14; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v15; // rax
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObjectVehicle> *p_mOccupier; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v16; // rax
-  UFG::RoadNetworkGuide *v17; // rcx
-  UFG::qWiseSymbol result; // [rsp+68h] [rbp+20h]
+  UFG::RoadNetworkGuide *m_pComponent; // rcx
+  UFG::qWiseSymbol result; // [rsp+68h] [rbp+20h] BYREF
 
-  v4 = this;
-  v5 = priority;
-  v6 = parentSet;
   v7 = UFG::SceneObjectProperties::Create(objName, 0i64, parentSet);
   v8 = v7;
-  if ( v5 != 5 )
+  if ( priority != 5 )
   {
-    switch ( v5 )
+    switch ( priority )
     {
       case 1:
         v9 = &qSymbol_High;
@@ -264,20 +244,17 @@ UFG::SimObject *__fastcall UFG::ParkingSpot::Spawn(UFG::ParkingSpot *this, UFG::
       case 3:
         v9 = &qSymbol_Low;
         break;
-      case 5:
-        goto LABEL_11;
       default:
         v9 = &qSymbol_Critical;
         break;
     }
-    PropertyUtils::SetRuntime<UFG::qSymbol>(v7, (UFG::qSymbol *)&qSymbol_SpawnPriority.mUID, (UFG::qSymbol *)&v9->mUID);
+    PropertyUtils::SetRuntime<UFG::qSymbol>(v7, (UFG::qArray<unsigned long,0> *)&qSymbol_SpawnPriority, v9);
   }
-LABEL_11:
   v10 = UFG::SceneObjectProperties::Activate(v8, 3u, 0i64, 0i64);
   if ( v10 )
   {
-    UFG::SpawnInfoInterface::ClearSpawnLocation(v8, v5);
-    UFG::SpawnInfoInterface::ActivateObjectPost(v8, v5, 0i64, v6, 0);
+    UFG::SpawnInfoInterface::ClearSpawnLocation(v8, (UFG::SpawnInfoInterface::SpawnPriority)priority);
+    UFG::SpawnInfoInterface::ActivateObjectPost(v8, priority, 0i64, parentSet, 0);
   }
   else
   {
@@ -292,31 +269,31 @@ LABEL_11:
     }
     UFG::qPrintf("Spawn Object [%s] failed to spawn object [%s]\n", "<NULL>", v12);
   }
-  v13 = &v4->mOccupier;
-  if ( v4->mOccupier.m_pPointer )
+  p_mOccupier = &this->mOccupier;
+  if ( this->mOccupier.m_pPointer )
   {
-    v14 = v13->mPrev;
-    v15 = v4->mOccupier.mNext;
-    v14->mNext = v15;
-    v15->mPrev = v14;
-    v13->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v13->mPrev;
-    v4->mOccupier.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v4->mOccupier.mPrev;
+    mPrev = p_mOccupier->mPrev;
+    mNext = this->mOccupier.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mOccupier->mPrev = p_mOccupier;
+    this->mOccupier.mNext = &this->mOccupier;
   }
-  v4->mOccupier.m_pPointer = v10;
+  this->mOccupier.m_pPointer = v10;
   if ( v10 )
   {
-    v16 = v10->m_SafePointerList.mNode.mPrev;
-    v16->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v13->mPrev;
-    v13->mPrev = v16;
-    v4->mOccupier.mNext = &v10->m_SafePointerList.mNode;
-    v10->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v13->mPrev;
-    v17 = (UFG::RoadNetworkGuide *)v10->m_Components.p[30].m_pComponent;
+    v16 = v10->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+    v16->mNext = p_mOccupier;
+    p_mOccupier->mPrev = v16;
+    this->mOccupier.mNext = &v10->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+    v10->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = p_mOccupier;
+    m_pComponent = (UFG::RoadNetworkGuide *)v10->m_Components.p[30].m_pComponent;
   }
   else
   {
-    v17 = 0i64;
+    m_pComponent = 0i64;
   }
-  UFG::VehicleOccupantComponent::SetParkingSpot(v17, (UFG::RoadNetworkLane *)v4);
+  UFG::VehicleOccupantComponent::SetParkingSpot(m_pComponent, (UFG::RoadNetworkLane *)this);
   return v10;
 }
 
@@ -328,7 +305,7 @@ __int64 UFG::_dynamic_initializer_for__gsymParkingSets__()
 
   v0 = UFG::qStringHash32("default-roadnetwork-parking-parkingsets", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::gsymParkingSets, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gsymParkingSets__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gsymParkingSets__);
 }
 
 // File Line: 369

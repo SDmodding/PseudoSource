@@ -2,18 +2,15 @@
 // RVA: 0xA9F770
 void __fastcall CAkSrcFileBase::CAkSrcFileBase(CAkSrcFileBase *this, CAkPBI *in_pCtx)
 {
-  CAkSrcFileBase *v2; // rbx
-
-  v2 = this;
-  CAkSrcBaseEx::CAkSrcBaseEx((CAkSrcBaseEx *)&this->vfptr, in_pCtx);
-  v2->vfptr = (CAkVPLNodeVtbl *)&CAkSrcFileBase::`vftable;
-  *((_BYTE *)v2 + 126) &= 0xC0u;
-  v2->m_pStream = 0i64;
-  v2->m_pNextAddress = 0i64;
-  *(_QWORD *)&v2->m_ulSizeLeft = 0i64;
-  *(_QWORD *)&v2->m_uiCorrection = 0i64;
-  v2->m_ulLoopEnd = 0;
-  v2->m_uStreamLoopCntAhead = 0;
+  CAkSrcBaseEx::CAkSrcBaseEx(this, in_pCtx);
+  this->vfptr = (CAkVPLNodeVtbl *)&CAkSrcFileBase::`vftable;
+  *((_BYTE *)this + 126) &= 0xC0u;
+  this->m_pStream = 0i64;
+  this->m_pNextAddress = 0i64;
+  *(_QWORD *)&this->m_ulSizeLeft = 0i64;
+  *(_QWORD *)&this->m_uiCorrection = 0i64;
+  this->m_ulLoopEnd = 0;
+  this->m_uStreamLoopCntAhead = 0;
 }
 
 // File Line: 44
@@ -21,27 +18,25 @@ void __fastcall CAkSrcFileBase::CAkSrcFileBase(CAkSrcFileBase *this, CAkPBI *in_
 void __fastcall CAkSrcFileBase::~CAkSrcFileBase(CAkSrcFileBase *this)
 {
   bool v1; // zf
-  CAkSrcFileBase *v2; // rbx
-  AkFileParser::AnalysisData *v3; // rdx
-  AK::IAkAutoStream *v4; // rcx
+  AkFileParser::AnalysisData *m_pAnalysisData; // rdx
+  AK::IAkAutoStream *m_pStream; // rcx
 
   v1 = (*((_BYTE *)this + 126) & 0x10) == 0;
-  v2 = this;
   this->vfptr = (CAkVPLNodeVtbl *)&CAkSrcFileBase::`vftable;
   if ( !v1 )
   {
-    v3 = this->m_pAnalysisData;
-    if ( v3 )
-      AK::MemoryMgr::Free(g_LEngineDefaultPoolId, v3);
+    m_pAnalysisData = this->m_pAnalysisData;
+    if ( m_pAnalysisData )
+      AK::MemoryMgr::Free(g_LEngineDefaultPoolId, m_pAnalysisData);
   }
-  v4 = v2->m_pStream;
-  if ( v4 )
+  m_pStream = this->m_pStream;
+  if ( m_pStream )
   {
-    (*(void (**)(void))v4->vfptr->gap8)();
-    v2->m_pStream = 0i64;
-    CAkSrcBaseEx::StopStream((CAkSrcBaseEx *)&v2->vfptr);
+    (*(void (__fastcall **)(AK::IAkAutoStream *))m_pStream->vfptr->gap8)(m_pStream);
+    this->m_pStream = 0i64;
+    CAkSrcBaseEx::StopStream(this);
   }
-  CAkSrcBaseEx::~CAkSrcBaseEx((CAkSrcBaseEx *)&v2->vfptr);
+  CAkSrcBaseEx::~CAkSrcBaseEx(this);
 }
 
 // File Line: 58
@@ -49,19 +44,19 @@ void __fastcall CAkSrcFileBase::~CAkSrcFileBase(CAkSrcFileBase *this)
 unsigned int __fastcall CAkSrcFileBase::StartStream(CAkSrcFileBase *this)
 {
   CAkSrcFileBase *v1; // rbx
-  unsigned int v2; // edx
-  AK::IAkAutoStream *v3; // rcx
+  unsigned int m_ulSizeLeft; // edx
+  AK::IAkAutoStream *m_pStream; // rcx
   unsigned int result; // eax
-  AkAutoStmBufSettings in_bufSettings; // [rsp+20h] [rbp-18h]
-  bool out_bUsePrefetchedData; // [rsp+40h] [rbp+8h]
+  AkAutoStmBufSettings in_bufSettings; // [rsp+20h] [rbp-18h] BYREF
+  bool out_bUsePrefetchedData; // [rsp+40h] [rbp+8h] BYREF
 
   v1 = this;
-  if ( *((_BYTE *)this + 126) & 4 )
+  if ( (*((_BYTE *)this + 126) & 4) != 0 )
   {
-    if ( *((_BYTE *)&this->0 + 32) & 2 )
+    if ( (*((_BYTE *)&this->CAkVPLSrcNode + 32) & 2) != 0 )
     {
-      v2 = this->m_ulSizeLeft;
-      v3 = this->m_pStream;
+      m_ulSizeLeft = this->m_ulSizeLeft;
+      m_pStream = this->m_pStream;
       goto LABEL_13;
     }
     return 1;
@@ -72,16 +67,16 @@ LABEL_10:
     result = CAkSrcFileBase::ProcessFirstBuffer(this);
     if ( result != 1 )
       return result;
-    if ( *((_BYTE *)&v1->0 + 32) & 2 )
+    if ( (*((_BYTE *)&v1->CAkVPLSrcNode + 32) & 2) != 0 )
     {
-      v3 = v1->m_pStream;
-      v2 = v1->m_ulSizeLeft;
+      m_pStream = v1->m_pStream;
+      m_ulSizeLeft = v1->m_ulSizeLeft;
 LABEL_13:
-      result = AK::SrcFileServices::IsPrebufferingReady(v3, v2);
+      result = AK::SrcFileServices::IsPrebufferingReady(m_pStream, m_ulSizeLeft);
       if ( result == 46 )
         return 63;
       if ( result == 45 )
-        result = 1;
+        return 1;
       return result;
     }
     return 1;
@@ -94,7 +89,7 @@ LABEL_13:
     result = CAkSrcFileBase::HandlePrefetch(v1, &out_bUsePrefetchedData);
     if ( result == 1 )
     {
-      result = ((__int64 (*)(void))v1->m_pStream->vfptr->Start)();
+      result = v1->m_pStream->vfptr->Start(v1->m_pStream);
       if ( result == 1 && !out_bUsePrefetchedData )
       {
         this = v1;
@@ -107,12 +102,12 @@ LABEL_13:
 
 // File Line: 111
 // RVA: 0xA9FE60
-signed __int64 __fastcall CAkSrcFileBase::RelocateMedia(CAkSrcFileBase *this, char *in_pNewMedia, char *in_pOldMedia)
+__int64 __fastcall CAkSrcFileBase::RelocateMedia(CAkSrcFileBase *this, char *in_pNewMedia, char *in_pOldMedia)
 {
-  signed __int64 result; // rax
+  __int64 result; // rax
 
   result = 1i64;
-  if ( *((_BYTE *)this + 126) & 8 )
+  if ( (*((_BYTE *)this + 126) & 8) != 0 )
     this->m_pNextAddress += in_pNewMedia - in_pOldMedia;
   return result;
 }
@@ -121,88 +116,83 @@ signed __int64 __fastcall CAkSrcFileBase::RelocateMedia(CAkSrcFileBase *this, ch
 // RVA: 0xA9FBB0
 bool __fastcall CAkSrcFileBase::MustRelocateAnalysisDataOnMediaRelocation(CAkSrcFileBase *this)
 {
-  return this->m_pAnalysisData && !(*((_BYTE *)this + 126) & 0x10);
+  return this->m_pAnalysisData && (*((_BYTE *)this + 126) & 0x10) == 0;
 }
 
 // File Line: 127
 // RVA: 0xA9F8F0
-signed __int64 __fastcall CAkSrcFileBase::CreateStream(CAkSrcFileBase *this, AkAutoStmBufSettings *in_bufSettings, char in_uMinNumBuffers)
+__int64 __fastcall CAkSrcFileBase::CreateStream(
+        CAkSrcFileBase *this,
+        AkAutoStmBufSettings *in_bufSettings,
+        char in_uMinNumBuffers)
 {
-  CAkPBI *v3; // rax
-  AkAutoStmBufSettings *v4; // rdi
-  signed int v5; // er9
-  CAkSource *v6; // rdx
-  CAkSrcFileBase *v7; // r11
-  signed int v9; // er8
-  unsigned int v10; // er10
+  CAkPBI *m_pCtx; // rax
+  int uFileID; // r9d
+  CAkSource *m_pSource; // rdx
+  int v9; // r8d
+  int v10; // r10d
   char v11; // cl
-  int v12; // eax
+  int dwID_high; // eax
   unsigned int v13; // ebx
-  AK::IAkStreamMgrVtbl *v14; // r10
+  AK::IAkStreamMgrVtbl *vfptr; // r10
   unsigned int v15; // eax
-  bool v16; // [rsp+30h] [rbp-48h]
-  int v17; // [rsp+40h] [rbp-38h]
-  __int64 v18; // [rsp+44h] [rbp-34h]
-  char v19; // [rsp+4Ch] [rbp-2Ch]
-  char v20; // [rsp+4Dh] [rbp-2Bh]
-  int v21; // [rsp+50h] [rbp-28h]
-  int v22; // [rsp+54h] [rbp-24h]
-  int v23; // [rsp+58h] [rbp-20h]
-  __int64 v24; // [rsp+60h] [rbp-18h]
-  char v25; // [rsp+68h] [rbp-10h]
-  char v26; // [rsp+69h] [rbp-Fh]
-  int v27; // [rsp+6Ch] [rbp-Ch]
+  int v16; // [rsp+40h] [rbp-38h] BYREF
+  __int64 v17; // [rsp+44h] [rbp-34h]
+  char v18; // [rsp+4Ch] [rbp-2Ch]
+  char priority; // [rsp+4Dh] [rbp-2Bh]
+  int v20[4]; // [rsp+50h] [rbp-28h] BYREF
+  __int64 v21; // [rsp+60h] [rbp-18h]
+  char v22; // [rsp+68h] [rbp-10h]
+  bool v23; // [rsp+69h] [rbp-Fh]
+  int v24; // [rsp+6Ch] [rbp-Ch]
 
-  v3 = this->m_pCtx;
-  v4 = in_bufSettings;
-  v5 = -1;
-  v6 = v3->m_pSource;
-  v7 = this;
-  if ( !v6->m_sSrcTypeInfo.pInMemoryMedia && v6->m_sSrcTypeInfo.mediaInfo.uFileID == -1 )
+  m_pCtx = this->m_pCtx;
+  uFileID = -1;
+  m_pSource = m_pCtx->m_pSource;
+  if ( !m_pSource->m_sSrcTypeInfo.pInMemoryMedia && m_pSource->m_sSrcTypeInfo.mediaInfo.uFileID == -1 )
     return 2i64;
-  v19 = in_uMinNumBuffers;
+  v18 = in_uMinNumBuffers;
   v9 = 0;
-  v17 = (signed int)FLOAT_1_0;
-  v18 = 0i64;
-  v20 = (signed int)v3->m_PriorityInfoCurrent.currentPriority.priority;
-  v10 = *((_DWORD *)&v6->m_sSrcTypeInfo.mediaInfo + 4);
-  if ( !_bittest((const signed int *)&v10, 8u) )
-    v5 = v6->m_sSrcTypeInfo.mediaInfo.uFileID;
-  v11 = *((_BYTE *)&v6->m_sSrcTypeInfo.mediaInfo + 16);
-  v12 = HIWORD(v6->m_sSrcTypeInfo.dwID);
-  v21 = 0;
-  v22 = v12;
-  v23 = 0;
-  v24 = 0i64;
-  v25 = v11 & 1;
-  v27 = v5;
-  v26 = (v10 >> 9) & 1;
+  v16 = (int)FLOAT_1_0;
+  v17 = 0i64;
+  priority = (int)m_pCtx->m_PriorityInfoCurrent.currentPriority.priority;
+  v10 = *((_DWORD *)&m_pSource->m_sSrcTypeInfo.mediaInfo + 4);
+  if ( (v10 & 0x100) == 0 )
+    uFileID = m_pSource->m_sSrcTypeInfo.mediaInfo.uFileID;
+  v11 = *((_BYTE *)&m_pSource->m_sSrcTypeInfo.mediaInfo + 16);
+  dwID_high = HIWORD(m_pSource->m_sSrcTypeInfo.dwID);
+  v20[0] = 0;
+  v20[1] = dwID_high;
+  v20[2] = 0;
+  v21 = 0i64;
+  v22 = v11 & 1;
+  v24 = uFileID;
+  v23 = (v10 & 0x200) != 0;
   v13 = 1;
-  if ( *((_DWORD *)&v6->m_sSrcTypeInfo.mediaInfo + 4) & 0x100 )
+  if ( (*((_DWORD *)&m_pSource->m_sSrcTypeInfo.mediaInfo + 4) & 0x100) != 0 )
     v9 = 1;
-  v16 = 0;
-  v21 = v9;
-  v14 = AK::IAkStreamMgr::m_pStreamMgr->vfptr;
-  if ( (*((_DWORD *)&v6->m_sSrcTypeInfo.mediaInfo + 4) >> 10) & 1 )
-    v15 = v14->CreateAuto(
+  v20[0] = v9;
+  vfptr = AK::IAkStreamMgr::m_pStreamMgr->vfptr;
+  if ( (*((_DWORD *)&m_pSource->m_sSrcTypeInfo.mediaInfo + 4) & 0x400) != 0 )
+    v15 = vfptr->CreateAuto(
             AK::IAkStreamMgr::m_pStreamMgr,
-            v6->m_sSrcTypeInfo.pszFilename,
-            (AkFileSystemFlags *)&v21,
-            (AkAutoStmHeuristics *)&v17,
-            v4,
-            &v7->m_pStream,
-            v16);
+            m_pSource->m_sSrcTypeInfo.pszFilename,
+            (AkFileSystemFlags *)v20,
+            (AkAutoStmHeuristics *)&v16,
+            in_bufSettings,
+            &this->m_pStream,
+            0);
   else
-    v15 = v14->CreateAuto(
+    v15 = vfptr->CreateAuto(
             AK::IAkStreamMgr::m_pStreamMgr,
-            v6->m_sSrcTypeInfo.mediaInfo.uFileID,
-            (AkFileSystemFlags *)&v21,
-            (AkAutoStmHeuristics *)&v17,
-            v4,
-            &v7->m_pStream,
-            v16);
+            m_pSource->m_sSrcTypeInfo.mediaInfo.uFileID,
+            (AkFileSystemFlags *)v20,
+            (AkAutoStmHeuristics *)&v16,
+            in_bufSettings,
+            &this->m_pStream,
+            0);
   if ( v15 != 1 )
-    v13 = v15;
+    return v15;
   return v13;
 }
 
@@ -210,40 +200,39 @@ signed __int64 __fastcall CAkSrcFileBase::CreateStream(CAkSrcFileBase *this, AkA
 // RVA: 0xA9FAE0
 unsigned int __fastcall CAkSrcFileBase::HandlePrefetch(CAkSrcFileBase *this, bool *out_bUsePrefetchedData)
 {
-  CAkSrcFileBase *v2; // rbx
-  CAkPBI *v3; // rcx
-  char *v4; // rdi
-  unsigned int v5; // eax
+  CAkPBI *m_pCtx; // rcx
+  char *m_pDataPtr; // rdi
+  unsigned int m_uDataSize; // eax
   bool v6; // al
   unsigned int result; // eax
-  __int64 v8; // rdx
+  __int64 m_uDataOffset; // rdx
 
   *out_bUsePrefetchedData = 0;
-  v2 = this;
-  v3 = this->m_pCtx;
-  if ( !((*((_DWORD *)&v3->m_pSource->m_sSrcTypeInfo.mediaInfo + 4) >> 1) & 1) || *((_BYTE *)v3 + 375) & 2 )
+  m_pCtx = this->m_pCtx;
+  if ( (*((_DWORD *)&m_pCtx->m_pSource->m_sSrcTypeInfo.mediaInfo + 4) & 2) == 0 || (*((_BYTE *)m_pCtx + 375) & 2) != 0 )
     return 1;
-  v4 = v3->m_pDataPtr;
-  v5 = v3->m_uDataSize;
-  v2->m_ulSizeLeft = v5;
-  v6 = v4 && v5;
+  m_pDataPtr = m_pCtx->m_pDataPtr;
+  m_uDataSize = m_pCtx->m_uDataSize;
+  this->m_ulSizeLeft = m_uDataSize;
+  v6 = m_pDataPtr && m_uDataSize;
   *out_bUsePrefetchedData = v6;
-  *((_BYTE *)v2 + 126) &= 0xFDu;
-  *((_BYTE *)v2 + 126) |= 2 * v6;
+  *((_BYTE *)this + 126) &= ~2u;
+  *((_BYTE *)this + 126) |= 2 * v6;
   if ( !*out_bUsePrefetchedData )
     return 1;
-  *((_BYTE *)v2 + 126) |= 0x20u;
-  result = ((unsigned __int64 (__fastcall *)(CAkSrcFileBase *, char *))v2->vfptr[2].VirtualOff)(v2, v4);
+  *((_BYTE *)this + 126) |= 0x20u;
+  result = ((__int64 (__fastcall *)(CAkSrcFileBase *, char *))this->vfptr[2].VirtualOff)(this, m_pDataPtr);
   if ( result == 1 )
   {
-    result = CAkSrcFileBase::ProcessStreamBuffer(v2, v4, 1);
+    result = CAkSrcFileBase::ProcessStreamBuffer(this, m_pDataPtr, 1);
     if ( result == 1 )
     {
-      if ( v2->m_uStreamLoopCntAhead || (result = CAkSrcFileBase::SetStreamPosition(v2, v2->m_ulSizeLeft), result == 1) )
+      if ( this->m_uStreamLoopCntAhead
+        || (result = CAkSrcFileBase::SetStreamPosition(this, this->m_ulSizeLeft), result == 1) )
       {
-        v8 = v2->m_uDataOffset;
-        v2->m_pNextAddress += v8;
-        v2->m_ulSizeLeft -= v8;
+        m_uDataOffset = this->m_uDataOffset;
+        this->m_pNextAddress += m_uDataOffset;
+        this->m_ulSizeLeft -= m_uDataOffset;
         return 1;
       }
     }
@@ -255,36 +244,32 @@ unsigned int __fastcall CAkSrcFileBase::HandlePrefetch(CAkSrcFileBase *this, boo
 // RVA: 0xAA0160
 void __fastcall CAkSrcFileBase::StopStream(CAkSrcFileBase *this)
 {
-  CAkSrcFileBase *v1; // rbx
-  AK::IAkAutoStream *v2; // rcx
+  AK::IAkAutoStream *m_pStream; // rcx
 
-  v1 = this;
-  v2 = this->m_pStream;
-  if ( v2 )
+  m_pStream = this->m_pStream;
+  if ( m_pStream )
   {
-    (*(void (**)(void))v2->vfptr->gap8)();
-    v1->m_pStream = 0i64;
+    (*(void (__fastcall **)(AK::IAkAutoStream *))m_pStream->vfptr->gap8)(m_pStream);
+    this->m_pStream = 0i64;
   }
-  CAkSrcBaseEx::StopStream((CAkSrcBaseEx *)&v1->vfptr);
+  CAkSrcBaseEx::StopStream(this);
 }
 
 // File Line: 307
 // RVA: 0xAA0110
-signed __int64 __fastcall CAkSrcFileBase::StopLooping(CAkSrcFileBase *this)
+__int64 __fastcall CAkSrcFileBase::StopLooping(CAkSrcFileBase *this)
 {
-  CAkSrcFileBase *v1; // rbx
-  AK::IAkAutoStream *v2; // rcx
+  AK::IAkAutoStream *m_pStream; // rcx
   AK::IAkAutoStream *v3; // rcx
-  char v5; // [rsp+20h] [rbp-18h]
+  char v5; // [rsp+20h] [rbp-18h] BYREF
   int v6; // [rsp+28h] [rbp-10h]
 
-  v1 = this;
   this->m_uLoopCnt = this->m_uStreamLoopCntAhead + 1;
-  v2 = this->m_pStream;
-  if ( v2 )
+  m_pStream = this->m_pStream;
+  if ( m_pStream )
   {
-    v2->vfptr->GetHeuristics(v2, (AkAutoStmHeuristics *)&v5);
-    v3 = v1->m_pStream;
+    m_pStream->vfptr->GetHeuristics(m_pStream, (AkAutoStmHeuristics *)&v5);
+    v3 = this->m_pStream;
     v6 = 0;
     v3->vfptr->SetHeuristics(v3, (AkAutoStmHeuristics *)&v5);
   }
@@ -293,33 +278,30 @@ signed __int64 __fastcall CAkSrcFileBase::StopLooping(CAkSrcFileBase *this)
 
 // File Line: 326
 // RVA: 0xA9FA20
-unsigned int __fastcall CAkSrcFileBase::FetchStreamBuffer(CAkSrcFileBase *this)
+AKRESULT __fastcall CAkSrcFileBase::FetchStreamBuffer(CAkSrcFileBase *this)
 {
-  CAkSrcFileBase *v1; // rbx
-  AK::IAkAutoStream *v2; // rcx
-  unsigned int result; // eax
-  char v4; // [rsp+20h] [rbp-18h]
-  char v5; // [rsp+2Dh] [rbp-Bh]
-  char *in_pBuffer; // [rsp+40h] [rbp+8h]
+  AK::IAkAutoStream *m_pStream; // rcx
+  AKRESULT result; // eax
+  char v4[24]; // [rsp+20h] [rbp-18h] BYREF
+  char *in_pBuffer; // [rsp+40h] [rbp+8h] BYREF
 
   this->m_pNextAddress = 0i64;
-  v1 = this;
-  this->m_pStream->vfptr->GetHeuristics(this->m_pStream, (AkAutoStmHeuristics *)&v4);
-  v2 = v1->m_pStream;
-  v5 = (signed int)v1->m_pCtx->m_PriorityInfoCurrent.currentPriority.priority;
-  v2->vfptr->SetHeuristics(v2, (AkAutoStmHeuristics *)&v4);
-  result = v1->m_pStream->vfptr->GetBuffer(v1->m_pStream, (void **)&in_pBuffer, &v1->m_ulSizeLeft, 0);
-  if ( result == 45 || result == 17 )
+  this->m_pStream->vfptr->GetHeuristics(this->m_pStream, (AkAutoStmHeuristics *)v4);
+  m_pStream = this->m_pStream;
+  v4[13] = (int)this->m_pCtx->m_PriorityInfoCurrent.currentPriority.priority;
+  m_pStream->vfptr->SetHeuristics(m_pStream, (AkAutoStmHeuristics *)v4);
+  result = this->m_pStream->vfptr->GetBuffer(this->m_pStream, (void **)&in_pBuffer, &this->m_ulSizeLeft, 0);
+  if ( result == AK_DataReady || result == AK_NoMoreData )
   {
-    if ( v1->m_ulSizeLeft )
+    if ( this->m_ulSizeLeft )
     {
-      result = CAkSrcFileBase::ProcessStreamBuffer(v1, in_pBuffer, 0);
-      if ( result == 1 )
-        result = 45;
+      result = CAkSrcFileBase::ProcessStreamBuffer(this, in_pBuffer, 0);
+      if ( result == AK_Success )
+        return 45;
     }
     else
     {
-      result = 2;
+      return 2;
     }
   }
   return result;
@@ -327,70 +309,71 @@ unsigned int __fastcall CAkSrcFileBase::FetchStreamBuffer(CAkSrcFileBase *this)
 
 // File Line: 373
 // RVA: 0xA9FD00
-signed __int64 __fastcall CAkSrcFileBase::ProcessStreamBuffer(CAkSrcFileBase *this, char *in_pBuffer, bool in_bIsReadingPrefecth)
+__int64 __fastcall CAkSrcFileBase::ProcessStreamBuffer(
+        CAkSrcFileBase *this,
+        char *in_pBuffer,
+        bool in_bIsReadingPrefecth)
 {
-  unsigned int v3; // er10
-  __int64 v4; // r9
+  unsigned int m_ulSizeLeft; // r10d
+  __int64 m_uiCorrection; // r9
   char *v5; // rax
-  unsigned int v6; // er10
-  CAkSrcFileBase *v7; // rbx
-  unsigned __int16 v8; // r8
+  unsigned int v6; // r10d
+  unsigned __int16 m_uLoopCnt; // r8
   char v9; // dl
-  unsigned int v10; // eax
-  unsigned int v11; // ecx
-  signed __int64 result; // rax
-  unsigned int v13; // edi
+  unsigned int m_ulLoopEnd; // eax
+  unsigned int m_ulFileOffset; // ecx
+  __int64 result; // rax
+  unsigned int m_ulLoopStart; // edi
   unsigned int v14; // eax
   unsigned __int16 v15; // cx
-  AK::IAkAutoStream *v16; // rcx
-  char v17; // [rsp+20h] [rbp-18h]
+  AK::IAkAutoStream *m_pStream; // rcx
+  char v17; // [rsp+20h] [rbp-18h] BYREF
   int v18; // [rsp+28h] [rbp-10h]
-  __int64 v19; // [rsp+40h] [rbp+8h]
+  __int64 v19; // [rsp+40h] [rbp+8h] BYREF
 
-  v3 = this->m_ulSizeLeft;
-  *((_BYTE *)this + 126) &= 0xF7u;
-  v4 = this->m_uiCorrection;
-  this->m_ulFileOffset += v3;
-  v5 = &in_pBuffer[v4];
-  v6 = v3 - v4;
-  v7 = this;
+  m_ulSizeLeft = this->m_ulSizeLeft;
+  *((_BYTE *)this + 126) &= ~8u;
+  m_uiCorrection = this->m_uiCorrection;
+  this->m_ulFileOffset += m_ulSizeLeft;
+  v5 = &in_pBuffer[m_uiCorrection];
+  v6 = m_ulSizeLeft - m_uiCorrection;
   *((_BYTE *)this + 126) |= 8 * in_bIsReadingPrefecth;
-  v8 = this->m_uLoopCnt;
+  m_uLoopCnt = this->m_uLoopCnt;
   v9 = *((_BYTE *)this + 126);
   this->m_pNextAddress = v5;
   this->m_ulSizeLeft = v6;
-  if ( v8 && v8 - this->m_uStreamLoopCntAhead == 1 )
-    v10 = this->m_uDataSize + this->m_uDataOffset;
+  if ( m_uLoopCnt && m_uLoopCnt - this->m_uStreamLoopCntAhead == 1 )
+    m_ulLoopEnd = this->m_uDataSize + this->m_uDataOffset;
   else
-    v10 = this->m_ulLoopEnd;
-  v11 = this->m_ulFileOffset;
-  if ( v11 < v10 )
+    m_ulLoopEnd = this->m_ulLoopEnd;
+  m_ulFileOffset = this->m_ulFileOffset;
+  if ( m_ulFileOffset < m_ulLoopEnd )
   {
-    v7->m_uiCorrection = 0;
+    this->m_uiCorrection = 0;
   }
   else
   {
-    v7->m_ulSizeLeft = v10 + v6 - v11;
-    if ( v8 && v8 - v7->m_uStreamLoopCntAhead == 1 )
+    this->m_ulSizeLeft = m_ulLoopEnd + v6 - m_ulFileOffset;
+    if ( m_uLoopCnt && m_uLoopCnt - this->m_uStreamLoopCntAhead == 1 )
     {
       result = 1i64;
-      *((_BYTE *)v7 + 126) = v9 | 1;
+      *((_BYTE *)this + 126) = v9 | 1;
       return result;
     }
-    v13 = v7->m_ulLoopStart;
-    if ( v7->m_pStream->vfptr->SetPosition(v7->m_pStream, v7->m_ulLoopStart, 0i64, &v19) != 1 )
+    m_ulLoopStart = this->m_ulLoopStart;
+    if ( this->m_pStream->vfptr->SetPosition(this->m_pStream, m_ulLoopStart, AK_MoveBegin, &v19) != AK_Success )
       return 2i64;
     v14 = v19;
-    v15 = v7->m_uLoopCnt;
-    ++v7->m_uStreamLoopCntAhead;
-    v7->m_ulFileOffset = v14;
-    v7->m_uiCorrection = v13 - v14;
-    if ( v15 && v15 - v7->m_uStreamLoopCntAhead == 1 )
+    v15 = this->m_uLoopCnt;
+    ++this->m_uStreamLoopCntAhead;
+    this->m_ulFileOffset = v14;
+    this->m_uiCorrection = m_ulLoopStart - v14;
+    if ( v15 && v15 - this->m_uStreamLoopCntAhead == 1 )
     {
-      v7->m_pStream->vfptr->GetHeuristics(v7->m_pStream, (AkAutoStmHeuristics *)&v17);
-      v16 = v7->m_pStream;
+      this->m_pStream->vfptr->GetHeuristics(this->m_pStream, (AkAutoStmHeuristics *)&v17);
+      m_pStream = this->m_pStream;
       v18 = 0;
-      v16->vfptr->SetHeuristics(v16, (AkAutoStmHeuristics *)&v17);
+      m_pStream->vfptr->SetHeuristics(m_pStream, (AkAutoStmHeuristics *)&v17);
       return 1i64;
     }
   }
@@ -401,7 +384,6 @@ signed __int64 __fastcall CAkSrcFileBase::ProcessStreamBuffer(CAkSrcFileBase *th
 // RVA: 0xA9FBD0
 __int64 __fastcall CAkSrcFileBase::ProcessFirstBuffer(CAkSrcFileBase *this)
 {
-  CAkSrcFileBase *v1; // rdi
   AKRESULT v2; // eax
   __int64 result; // rax
   AKRESULT v4; // ebp
@@ -409,146 +391,138 @@ __int64 __fastcall CAkSrcFileBase::ProcessFirstBuffer(CAkSrcFileBase *this)
   int v6; // ebx
   AKRESULT v7; // eax
   unsigned int v8; // ecx
-  char *in_pBuffer; // [rsp+30h] [rbp+8h]
+  char *in_pBuffer; // [rsp+30h] [rbp+8h] BYREF
 
-  v1 = this;
-  *((_BYTE *)&this->0 + 32) ^= (*((_BYTE *)&this->0 + 32) ^ (*((_BYTE *)this->m_pCtx + 374) >> 4)) & 2;
-  v2 = (unsigned int)this->m_pStream->vfptr->GetBuffer(this->m_pStream, (void **)&in_pBuffer, &this->m_ulSizeLeft, 0);
-  if ( v2 == 46 )
+  *((_BYTE *)&this->CAkVPLSrcNode + 32) ^= (*((_BYTE *)&this->CAkVPLSrcNode + 32) ^ (*((_BYTE *)this->m_pCtx + 374) >> 4)) & 2;
+  v2 = this->m_pStream->vfptr->GetBuffer(this->m_pStream, (void **)&in_pBuffer, &this->m_ulSizeLeft, 0);
+  if ( v2 == AK_NoDataReady )
     return 63i64;
-  if ( v2 != 45 && v2 != 17 )
+  if ( v2 != AK_DataReady && v2 != AK_NoMoreData )
     return 2i64;
-  result = ((__int64 (__fastcall *)(CAkSrcFileBase *, char *))v1->vfptr[2].VirtualOff)(v1, in_pBuffer);
+  result = ((__int64 (__fastcall *)(CAkSrcFileBase *, char *))this->vfptr[2].VirtualOff)(this, in_pBuffer);
   if ( (_DWORD)result == 1 )
   {
-    if ( *((_BYTE *)v1->m_pCtx + 375) & 2 )
+    if ( (*((_BYTE *)this->m_pCtx + 375) & 2) != 0 )
     {
-      v4 = CAkSrcFileBase::SeekToSourceOffset(v1);
-      if ( v1->m_ulSizeLeft )
+      v4 = CAkSrcFileBase::SeekToSourceOffset(this);
+      if ( this->m_ulSizeLeft )
       {
-        v5 = *((_BYTE *)v1 + 126);
-        if ( v5 & 2 )
+        v5 = *((_BYTE *)this + 126);
+        if ( (v5 & 2) != 0 )
         {
-          v1->m_ulSizeLeft = 0;
-          *((_BYTE *)v1 + 126) = v5 & 0xFD;
+          this->m_ulSizeLeft = 0;
+          *((_BYTE *)this + 126) = v5 & 0xFD;
         }
         else
         {
-          ((void (*)(void))v1->m_pStream->vfptr->ReleaseBuffer)();
-          v1->m_ulSizeLeft = 0;
+          this->m_pStream->vfptr->ReleaseBuffer(this->m_pStream);
+          this->m_ulSizeLeft = 0;
         }
       }
     }
     else
     {
-      v6 = v1->m_uiCorrection + v1->m_pStream->vfptr->GetPosition(v1->m_pStream, 0i64);
-      v7 = CAkSrcFileBase::ProcessStreamBuffer(v1, in_pBuffer, 0);
-      v8 = v1->m_uDataOffset - v6;
+      v6 = this->m_uiCorrection + (__int64)this->m_pStream->vfptr->GetPosition(this->m_pStream, 0i64);
+      v7 = CAkSrcFileBase::ProcessStreamBuffer(this, in_pBuffer, 0);
+      v8 = this->m_uDataOffset - v6;
       v4 = v7;
-      v1->m_pNextAddress += v8;
-      v1->m_ulSizeLeft -= v8;
+      this->m_pNextAddress += v8;
+      this->m_ulSizeLeft -= v8;
     }
-    *((_BYTE *)v1 + 126) |= 4u;
-    result = (unsigned int)v4;
+    *((_BYTE *)this + 126) |= 4u;
+    return (unsigned int)v4;
   }
   return result;
 }
 
 // File Line: 503
 // RVA: 0xAA02C0
-void __fastcall CAkSrcFileBase::VirtualOn(CAkSrcFileBase *this, AkVirtualQueueBehavior eBehavior)
+void __fastcall CAkSrcFileBase::VirtualOn(CAkSrcFileBase *this, unsigned int eBehavior)
 {
-  CAkSrcFileBase *v2; // rdi
-  AkVirtualQueueBehavior v3; // ebx
   char v4; // al
 
-  v2 = this;
-  v3 = eBehavior;
-  ((void (*)(void))this->m_pStream->vfptr->Stop)();
-  if ( (unsigned int)v3 <= 1 && v2->m_ulSizeLeft )
+  this->m_pStream->vfptr->Stop(this->m_pStream);
+  if ( eBehavior <= 1 && this->m_ulSizeLeft )
   {
-    v4 = *((_BYTE *)v2 + 126);
-    if ( v4 & 2 )
-      *((_BYTE *)v2 + 126) = v4 & 0xFD;
+    v4 = *((_BYTE *)this + 126);
+    if ( (v4 & 2) != 0 )
+      *((_BYTE *)this + 126) = v4 & 0xFD;
     else
-      ((void (*)(void))v2->m_pStream->vfptr->ReleaseBuffer)();
-    v2->m_pNextAddress = 0i64;
-    v2->m_ulSizeLeft = 0;
+      this->m_pStream->vfptr->ReleaseBuffer(this->m_pStream);
+    this->m_pNextAddress = 0i64;
+    this->m_ulSizeLeft = 0;
   }
 }
 
 // File Line: 527
 // RVA: 0xAA0210
-signed __int64 __usercall CAkSrcFileBase::VirtualOff@<rax>(CAkSrcFileBase *this@<rcx>, __int64 eBehavior@<rdx>, bool in_bUseSourceOffset@<r8b>, float a4@<xmm0>)
+__int64 __fastcall CAkSrcFileBase::VirtualOff(CAkSrcFileBase *this, __int64 eBehavior, bool in_bUseSourceOffset)
 {
-  CAkSrcFileBase *v4; // rbx
-  signed __int64 result; // rax
-  CAkPBI *v6; // rax
+  __int64 result; // rax
+  CAkPBI *m_pCtx; // rax
 
-  v4 = this;
   if ( (_DWORD)eBehavior == 1 )
   {
     if ( in_bUseSourceOffset )
     {
-      result = CAkSrcFileBase::SeekToSourceOffset(this, a4);
+      result = CAkSrcFileBase::SeekToSourceOffset(this);
     }
     else
     {
       if ( (unsigned int)CAkSrcFileBase::SeekStream(this, this->m_uCurSample, &this->m_uCurSample) == 1 )
-        return ((__int64 (*)(void))v4->m_pStream->vfptr->Start)();
-      result = CAkSrcFileBase::SeekStream(v4, 0i64, &v4->m_uCurSample);
+        return ((__int64 (__fastcall *)(AK::IAkAutoStream *))this->m_pStream->vfptr->Start)(this->m_pStream);
+      result = CAkSrcFileBase::SeekStream(this, 0i64, &this->m_uCurSample);
     }
     if ( (_DWORD)result != 1 )
       return result;
-    return ((__int64 (*)(void))v4->m_pStream->vfptr->Start)();
+    return ((__int64 (__fastcall *)(AK::IAkAutoStream *))this->m_pStream->vfptr->Start)(this->m_pStream);
   }
   if ( (_DWORD)eBehavior )
   {
     if ( (_DWORD)eBehavior == 2 )
-      *((_BYTE *)&this->0 + 32) ^= (*((_BYTE *)&this->0 + 32) ^ (*((_BYTE *)this->m_pCtx + 374) >> 4)) & 2;
-    return ((__int64 (*)(void))v4->m_pStream->vfptr->Start)();
+      *((_BYTE *)&this->CAkVPLSrcNode + 32) ^= (*((_BYTE *)&this->CAkVPLSrcNode + 32) ^ (*((_BYTE *)this->m_pCtx + 374) >> 4)) & 2;
+    return ((__int64 (__fastcall *)(_QWORD))this->m_pStream->vfptr->Start)(this->m_pStream);
   }
-  v6 = this->m_pCtx;
+  m_pCtx = this->m_pCtx;
   this->m_uCurSample = 0;
-  this->m_uLoopCnt = v6->m_LoopCount;
+  this->m_uLoopCnt = m_pCtx->m_LoopCount;
   result = CAkSrcFileBase::SeekStream(this, eBehavior, &this->m_uCurSample);
   if ( (_DWORD)result == 1 )
-    return ((__int64 (*)(void))v4->m_pStream->vfptr->Start)();
+    return ((__int64 (__fastcall *)(_QWORD))this->m_pStream->vfptr->Start)(this->m_pStream);
   return result;
 }
 
 // File Line: 575
 // RVA: 0xA9FF80
-signed __int64 __usercall CAkSrcFileBase::SeekToSourceOffset@<rax>(CAkSrcFileBase *this@<rcx>, float a2@<xmm0>)
+__int64 __fastcall CAkSrcFileBase::SeekToSourceOffset(CAkSrcFileBase *this)
 {
-  CAkSrcFileBase *v2; // rdi
-  unsigned int v3; // ebx
-  CAkPBI *v5; // rax
-  int v6; // ebx
+  unsigned int SourceOffset; // ebx
+  CAkPBI *m_pCtx; // rax
+  unsigned int v5; // ebx
 
-  v2 = this;
-  v3 = CAkSrcBaseEx::GetSourceOffset((CAkSrcBaseEx *)&this->vfptr, a2);
-  if ( (unsigned int)CAkSrcFileBase::SeekStream(v2, v3, &v2->m_uCurSample) != 1 )
+  SourceOffset = CAkSrcBaseEx::GetSourceOffset(this);
+  if ( (unsigned int)CAkSrcFileBase::SeekStream(this, SourceOffset, &this->m_uCurSample) != 1 )
     return 2i64;
-  v5 = v2->m_pCtx;
-  v6 = v3 - v2->m_uCurSample;
-  *((_BYTE *)v5 + 375) &= 0xF1u;
-  v5->m_uSeekPosition = v6;
+  m_pCtx = this->m_pCtx;
+  v5 = SourceOffset - this->m_uCurSample;
+  *((_BYTE *)m_pCtx + 375) &= 0xF1u;
+  m_pCtx->m_uSeekPosition = v5;
   return 1i64;
 }
 
 // File Line: 599
 // RVA: 0xA9FEF0
-signed __int64 __fastcall CAkSrcFileBase::SeekStream(CAkSrcFileBase *this, __int64 in_uDesiredSample, unsigned int *out_uSeekedSample)
+__int64 __fastcall CAkSrcFileBase::SeekStream(
+        CAkSrcFileBase *this,
+        __int64 in_uDesiredSample,
+        unsigned int *out_uSeekedSample)
 {
-  CAkSrcFileBase *v3; // rbx
-  AK::IAkAutoStream *v5; // rcx
+  AK::IAkAutoStream *m_pStream; // rcx
   unsigned int v6; // edi
   unsigned int v7; // edi
-  __int64 v8; // [rsp+30h] [rbp+8h]
-  unsigned int v9; // [rsp+38h] [rbp+10h]
+  __int64 v8; // [rsp+30h] [rbp+8h] BYREF
+  unsigned int v9; // [rsp+38h] [rbp+10h] BYREF
 
-  v3 = this;
   if ( (unsigned int)in_uDesiredSample >= this->m_uTotalSamples
     || ((unsigned int (__fastcall *)(CAkSrcFileBase *, __int64, unsigned int *, unsigned int *))this->vfptr[2].GetPitch)(
          this,
@@ -558,36 +532,32 @@ signed __int64 __fastcall CAkSrcFileBase::SeekStream(CAkSrcFileBase *this, __int
   {
     return 2i64;
   }
-  v5 = v3->m_pStream;
+  m_pStream = this->m_pStream;
   v6 = v9;
-  v3->m_uStreamLoopCntAhead = 0;
-  if ( v5->vfptr->SetPosition(v5, v6, 0i64, &v8) != 1 )
+  this->m_uStreamLoopCntAhead = 0;
+  if ( m_pStream->vfptr->SetPosition(m_pStream, v6, AK_MoveBegin, &v8) != AK_Success )
     return 2i64;
   v7 = v6 - v8;
-  v3->m_ulFileOffset = v8;
-  v3->m_uiCorrection = v7;
-  CAkSrcFileBase::ResetStreamingAfterSeek(v3);
+  this->m_ulFileOffset = v8;
+  this->m_uiCorrection = v7;
+  CAkSrcFileBase::ResetStreamingAfterSeek(this);
   return 1i64;
 }
 
 // File Line: 645
 // RVA: 0xA9FFF0
-signed __int64 __fastcall CAkSrcFileBase::SetStreamPosition(CAkSrcFileBase *this, unsigned int in_uPosition)
+__int64 __fastcall CAkSrcFileBase::SetStreamPosition(CAkSrcFileBase *this, unsigned int in_uPosition)
 {
-  CAkSrcFileBase *v2; // rdi
-  unsigned int v3; // ebx
-  signed __int64 result; // rax
+  __int64 result; // rax
   unsigned int v5; // ebx
-  __int64 v6; // [rsp+30h] [rbp+8h]
+  __int64 v6; // [rsp+30h] [rbp+8h] BYREF
 
-  v2 = this;
-  v3 = in_uPosition;
-  if ( this->m_pStream->vfptr->SetPosition(this->m_pStream, in_uPosition, 0i64, &v6) != 1 )
+  if ( this->m_pStream->vfptr->SetPosition(this->m_pStream, in_uPosition, AK_MoveBegin, &v6) != AK_Success )
     return 2i64;
-  v5 = v3 - v6;
-  v2->m_ulFileOffset = v6;
+  v5 = in_uPosition - v6;
+  this->m_ulFileOffset = v6;
   result = 1i64;
-  v2->m_uiCorrection = v5;
+  this->m_uiCorrection = v5;
   return result;
 }
 
@@ -595,44 +565,43 @@ signed __int64 __fastcall CAkSrcFileBase::SetStreamPosition(CAkSrcFileBase *this
 // RVA: 0xA9FE80
 void __fastcall CAkSrcFileBase::ResetStreamingAfterSeek(CAkSrcFileBase *this)
 {
-  CAkSrcFileBase *v1; // rbx
-  char v2; // [rsp+20h] [rbp-18h]
+  char v2[4]; // [rsp+20h] [rbp-18h] BYREF
   __int64 v3; // [rsp+24h] [rbp-14h]
 
-  v1 = this;
-  this->m_pStream->vfptr->GetHeuristics(this->m_pStream, (AkAutoStmHeuristics *)&v2);
-  if ( v1->m_uLoopCnt == 1 )
+  this->m_pStream->vfptr->GetHeuristics(this->m_pStream, (AkAutoStmHeuristics *)v2);
+  if ( this->m_uLoopCnt == 1 )
     v3 = 0i64;
   else
-    v3 = *(_QWORD *)&v1->m_ulLoopStart;
-  v1->m_pStream->vfptr->SetHeuristics(v1->m_pStream, (AkAutoStmHeuristics *)&v2);
-  *((_BYTE *)v1 + 126) &= 0xFEu;
-  *((_BYTE *)&v1->0 + 32) ^= (*((_BYTE *)&v1->0 + 32) ^ (*((_BYTE *)v1->m_pCtx + 374) >> 4)) & 2;
+    v3 = *(_QWORD *)&this->m_ulLoopStart;
+  this->m_pStream->vfptr->SetHeuristics(this->m_pStream, (AkAutoStmHeuristics *)v2);
+  *((_BYTE *)this + 126) &= ~1u;
+  *((_BYTE *)&this->CAkVPLSrcNode + 32) ^= (*((_BYTE *)&this->CAkVPLSrcNode + 32) ^ (*((_BYTE *)this->m_pCtx + 374) >> 4)) & 2;
 }
 
 // File Line: 682
 // RVA: 0xA9F890
-signed __int64 __fastcall CAkSrcFileBase::ChangeSourcePosition(CAkSrcFileBase *this)
+__int64 __fastcall CAkSrcFileBase::ChangeSourcePosition(CAkSrcFileBase *this)
 {
-  CAkSrcFileBase *v1; // rbx
   char v2; // al
 
-  v1 = this;
-  if ( CAkSrcFileBase::SeekToSourceOffset(this) != 1 )
+  if ( CAkSrcFileBase::SeekToSourceOffset(this) != AK_Success )
     return 2i64;
-  v2 = *((_BYTE *)v1 + 126);
-  if ( v2 & 2 )
-    *((_BYTE *)v1 + 126) = v2 & 0xFD;
+  v2 = *((_BYTE *)this + 126);
+  if ( (v2 & 2) != 0 )
+    *((_BYTE *)this + 126) = v2 & 0xFD;
   else
-    ((void (*)(void))v1->m_pStream->vfptr->ReleaseBuffer)();
-  v1->m_ulSizeLeft = 0;
-  v1->m_pNextAddress = 0i64;
+    this->m_pStream->vfptr->ReleaseBuffer(this->m_pStream);
+  this->m_ulSizeLeft = 0;
+  this->m_pNextAddress = 0i64;
   return 1i64;
 }
 
 // File Line: 697
 // RVA: 0xA9FAC0
-void __fastcall CAkSrcFileBase::GetStreamLoopHeuristic(CAkSrcFileBase *this, bool in_bIsLooping, AkAutoStmHeuristics *io_heuristics)
+void __fastcall CAkSrcFileBase::GetStreamLoopHeuristic(
+        CAkSrcFileBase *this,
+        bool in_bIsLooping,
+        AkAutoStmHeuristics *io_heuristics)
 {
   if ( in_bIsLooping )
   {
@@ -647,35 +616,31 @@ void __fastcall CAkSrcFileBase::GetStreamLoopHeuristic(CAkSrcFileBase *this, boo
 
 // File Line: 713
 // RVA: 0xAA0190
-signed __int64 __fastcall CAkSrcFileBase::StoreAnalysisData(CAkSrcFileBase *this, AkFileParser::AnalysisDataChunk *in_analysisDataChunk)
+__int64 __fastcall CAkSrcFileBase::StoreAnalysisData(
+        CAkSrcFileBase *this,
+        AkFileParser::AnalysisDataChunk *in_analysisDataChunk)
 {
-  AkFileParser::AnalysisDataChunk *v2; // rdi
-  CAkSrcFileBase *v3; // rbx
   AkFileParser::AnalysisData *v4; // rax
-  signed __int64 result; // rax
 
-  v2 = in_analysisDataChunk;
-  v3 = this;
-  if ( *((_BYTE *)this + 126) & 0x20 )
+  if ( (*((_BYTE *)this + 126) & 0x20) != 0 )
   {
     this->m_pAnalysisData = in_analysisDataChunk->pData;
-    result = 1i64;
+    return 1i64;
   }
   else
   {
     v4 = (AkFileParser::AnalysisData *)AK::MemoryMgr::Malloc(g_LEngineDefaultPoolId, in_analysisDataChunk->uDataSize);
-    v3->m_pAnalysisData = v4;
+    this->m_pAnalysisData = v4;
     if ( v4 )
     {
-      memmove(v4, v2->pData, v2->uDataSize);
-      *((_BYTE *)v3 + 126) |= 0x10u;
-      result = 1i64;
+      memmove(v4, in_analysisDataChunk->pData, in_analysisDataChunk->uDataSize);
+      *((_BYTE *)this + 126) |= 0x10u;
+      return 1i64;
     }
     else
     {
-      result = 52i64;
+      return 52i64;
     }
   }
-  return result;
 }
 

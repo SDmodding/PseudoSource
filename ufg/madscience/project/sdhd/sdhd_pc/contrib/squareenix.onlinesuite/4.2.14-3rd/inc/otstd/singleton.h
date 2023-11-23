@@ -55,8 +55,8 @@ OSuite::ZError *__fastcall OSuite::TSingleton<OSuite::ZError>::Object()
     {
       v8 = 0i64;
     }
-    OSuite::ZDoublyLinkedListBase::AppendElement((OSuite::ZDoublyLinkedListBase *)&v4->vfptr, v8);
-    result = `OSuite::TSingleton<OSuite::ZError>::Object::`2::s_pObject;
+    OSuite::ZDoublyLinkedListBase::AppendElement(v4, v8);
+    return `OSuite::TSingleton<OSuite::ZError>::Object::`2::s_pObject;
   }
   return result;
 }

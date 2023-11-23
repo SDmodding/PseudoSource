@@ -28,22 +28,22 @@ hkClass *__fastcall hkpFixedRigidMotion::staticClass()
 
 // File Line: 58
 // RVA: 0xD50DE0
-void __fastcall finishLoadedObjecthkpFixedRigidMotion(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpFixedRigidMotion(_WORD *p, int finishing)
 {
   if ( p )
   {
     *(_QWORD *)p = &hkpMotion::`vftable;
     if ( finishing )
-      *((_WORD *)p + 153) = 16256;
+      p[153] = 16256;
     *(_QWORD *)p = &hkpFixedRigidMotion::`vftable;
   }
 }
 
 // File Line: 64
 // RVA: 0xD50E20
-void __fastcall cleanupLoadedObjecthkpFixedRigidMotion(void *p)
+void __fastcall cleanupLoadedObjecthkpFixedRigidMotion(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 68
@@ -64,8 +64,8 @@ void **dynamic_initializer_for__hkpFixedRigidMotionTypeInfo__()
   hkpFixedRigidMotionTypeInfo.m_typeName = "hkpFixedRigidMotion";
   hkpFixedRigidMotionTypeInfo.m_vtable = result;
   hkpFixedRigidMotionTypeInfo.m_scopedName = "!hkpFixedRigidMotion";
-  hkpFixedRigidMotionTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpFixedRigidMotion;
-  hkpFixedRigidMotionTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpFixedRigidMotion;
+  hkpFixedRigidMotionTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpFixedRigidMotion;
+  hkpFixedRigidMotionTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpFixedRigidMotion;
   return result;
 }
 

@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkxVertexSelectionChannelClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 55
@@ -28,17 +28,17 @@ hkClass *__fastcall hkxVertexSelectionChannel::staticClass()
 
 // File Line: 62
 // RVA: 0xE33B70
-void __fastcall finishLoadedObjecthkxVertexSelectionChannel(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxVertexSelectionChannel(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkxVertexSelectionChannel::`vftable;
+    *p = &hkxVertexSelectionChannel::`vftable;
 }
 
 // File Line: 68
 // RVA: 0xE33B90
-void __fastcall cleanupLoadedObjecthkxVertexSelectionChannel(void *p)
+void __fastcall cleanupLoadedObjecthkxVertexSelectionChannel(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 72
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkxVertexSelectionChannelTypeInfo__()
   hkxVertexSelectionChannelTypeInfo.m_typeName = "hkxVertexSelectionChannel";
   hkxVertexSelectionChannelTypeInfo.m_vtable = result;
   hkxVertexSelectionChannelTypeInfo.m_scopedName = "!hkxVertexSelectionChannel";
-  hkxVertexSelectionChannelTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxVertexSelectionChannel;
-  hkxVertexSelectionChannelTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxVertexSelectionChannel;
+  hkxVertexSelectionChannelTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxVertexSelectionChannel;
+  hkxVertexSelectionChannelTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxVertexSelectionChannel;
   return result;
 }
 

@@ -28,15 +28,15 @@ hkClass *__fastcall hkpCollisionFilterList::staticClass()
 
 // File Line: 64
 // RVA: 0xCEB410
-void __fastcall finishLoadedObjecthkpCollisionFilterList(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpCollisionFilterList(_QWORD *p, int finishing)
 {
   if ( p )
   {
-    *(_QWORD *)p = &hkpCollisionFilterList::`vftable{for `hkReferencedObject};
-    *((_QWORD *)p + 2) = &hkpCollisionFilterList::`vftable{for `hkpCollidableCollidableFilter};
-    *((_QWORD *)p + 3) = &hkpCollisionFilterList::`vftable{for `hkpShapeCollectionFilter};
-    *((_QWORD *)p + 4) = &hkpCollisionFilterList::`vftable{for `hkpRayShapeCollectionFilter};
-    *((_QWORD *)p + 5) = &hkpCollisionFilterList::`vftable{for `hkpRayCollidableFilter};
+    *p = &hkpCollisionFilterList::`vftable{for `hkReferencedObject};
+    p[2] = &hkpCollisionFilterList::`vftable{for `hkpCollidableCollidableFilter};
+    p[3] = &hkpCollisionFilterList::`vftable{for `hkpShapeCollectionFilter};
+    p[4] = &hkpCollisionFilterList::`vftable{for `hkpRayShapeCollectionFilter};
+    p[5] = &hkpCollisionFilterList::`vftable{for `hkpRayCollidableFilter};
     if ( finishing )
       *((_DWORD *)p + 14) = 3;
   }
@@ -44,9 +44,9 @@ void __fastcall finishLoadedObjecthkpCollisionFilterList(void *p, int finishing)
 
 // File Line: 70
 // RVA: 0xCEB460
-void __fastcall cleanupLoadedObjecthkpCollisionFilterList(void *p)
+void __fastcall cleanupLoadedObjecthkpCollisionFilterList(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 74
@@ -67,8 +67,8 @@ void **dynamic_initializer_for__hkpCollisionFilterListTypeInfo__()
   hkpCollisionFilterListTypeInfo.m_typeName = "hkpCollisionFilterList";
   hkpCollisionFilterListTypeInfo.m_vtable = result;
   hkpCollisionFilterListTypeInfo.m_scopedName = "!hkpCollisionFilterList";
-  hkpCollisionFilterListTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpCollisionFilterList;
-  hkpCollisionFilterListTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpCollisionFilterList;
+  hkpCollisionFilterListTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpCollisionFilterList;
+  hkpCollisionFilterListTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpCollisionFilterList;
   return result;
 }
 

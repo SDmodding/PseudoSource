@@ -1,49 +1,45 @@
 // File Line: 118
 // RVA: 0xD8BFC0
-hkpAgentSectorHeader *__fastcall hkpAgentSectorHeader::allocate(int numTasks, int numAgentNnEntriesPerTask)
+hkpAgentSectorHeader *__fastcall hkpAgentSectorHeader::allocate(unsigned int numTasks, int numAgentNnEntriesPerTask)
 {
   __int64 v2; // rdi
-  int v3; // esi
-  _QWORD **v4; // rax
+  _QWORD **Value; // rax
   hkpAgentSectorHeader *result; // rax
   int v6; // esi
   hkpAgentSectorHeader *v7; // r14
   hkpAgentSectorHeader *v8; // rbx
   _QWORD **v9; // rax
-  __int64 v10; // rax
-  _DWORD *v11; // rcx
+  _DWORD *v10; // rax
 
-  v2 = (unsigned int)numTasks;
-  v3 = numAgentNnEntriesPerTask;
-  v4 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  result = (hkpAgentSectorHeader *)(*(__int64 (__fastcall **)(_QWORD *, _QWORD))(*v4[11] + 8i64))(
-                                     v4[11],
-                                     (unsigned int)(8 * (signed __int16)v2 + 32));
-  v6 = 32 * v3;
+  v2 = numTasks;
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  result = (hkpAgentSectorHeader *)(*(__int64 (__fastcall **)(_QWORD *, _QWORD))(*Value[11] + 8i64))(
+                                     Value[11],
+                                     (unsigned int)(8 * (__int16)v2 + 32));
+  v6 = 32 * numAgentNnEntriesPerTask;
   v7 = result;
   result->m_openJobs = v2;
   result->m_numTotalTasks = v2;
   v8 = result + 1;
   result->m_sizeOfJobInfo = v6 + 32;
-  if ( (signed int)v2 > 0 )
+  if ( (int)v2 > 0 )
   {
     do
     {
       v9 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v10 = (*(__int64 (__fastcall **)(_QWORD *, _QWORD))(*v9[11] + 8i64))(v9[11], (unsigned int)(v6 + 32));
+      v10 = (_DWORD *)(*(__int64 (__fastcall **)(_QWORD *, _QWORD))(*v9[11] + 8i64))(v9[11], (unsigned int)(v6 + 32));
       *(_QWORD *)&v8->m_numTotalTasks = v10;
       if ( v10 )
       {
-        v11 = (_DWORD *)(v10 + 16);
-        *v11 = 16;
-        v11[1] = 0;
-        v11[2] = v6;
+        v10[4] = 16;
+        v10[5] = 0;
+        v10[6] = v6;
       }
       v8 = (hkpAgentSectorHeader *)((char *)v8 + 8);
       --v2;
     }
     while ( v2 );
-    result = v7;
+    return v7;
   }
   return result;
 }
@@ -53,45 +49,47 @@ hkpAgentSectorHeader *__fastcall hkpAgentSectorHeader::allocate(int numTasks, in
 void __fastcall hkpAgentSectorHeader::deallocate(hkpAgentSectorHeader *this)
 {
   int v1; // ebp
-  hkpAgentSectorHeader *v2; // rsi
   hkpAgentSectorHeader *i; // r14
-  unsigned int v4; // ebx
+  unsigned int m_sizeOfJobInfo; // ebx
   __int64 v5; // rdi
-  _QWORD **v6; // rax
+  _QWORD **Value; // rax
   unsigned int v7; // ebx
   _QWORD **v8; // rax
 
   v1 = 0;
-  v2 = this;
-  for ( i = this + 1; v1 < v2->m_numTotalTasks; i = (hkpAgentSectorHeader *)((char *)i + 8) )
+  for ( i = this + 1; v1 < this->m_numTotalTasks; i = (hkpAgentSectorHeader *)((char *)i + 8) )
   {
-    v4 = v2->m_sizeOfJobInfo;
+    m_sizeOfJobInfo = this->m_sizeOfJobInfo;
     v5 = *(_QWORD *)&i->m_numTotalTasks;
-    v6 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    (*(void (__fastcall **)(_QWORD *, __int64, _QWORD))(*v6[11] + 16i64))(v6[11], v5, v4);
+    Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    (*(void (__fastcall **)(_QWORD *, __int64, _QWORD))(*Value[11] + 16i64))(Value[11], v5, m_sizeOfJobInfo);
     ++v1;
   }
-  v7 = 8 * SLOWORD(v2->m_numTotalTasks) + 32;
+  v7 = 8 * SLOWORD(this->m_numTotalTasks) + 32;
   v8 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  (*(void (__fastcall **)(_QWORD *, hkpAgentSectorHeader *, _QWORD))(*v8[11] + 16i64))(v8[11], v2, v7);
+  (*(void (__fastcall **)(_QWORD *, hkpAgentSectorHeader *, _QWORD))(*v8[11] + 16i64))(v8[11], this, v7);
 }
 
 // File Line: 186
 // RVA: 0xD8C130
-hkJobQueue::JobPopFuncResult __fastcall hkpJobQueueUtils::popIntegrateJob(hkJobQueue *queue, hkJobQueue::DynamicData *data, hkJobQueue::JobQueueEntry *jobIn, hkJobQueue::JobQueueEntry *jobOut)
+hkJobQueue::JobPopFuncResult __fastcall hkpJobQueueUtils::popIntegrateJob(
+        hkJobQueue *queue,
+        hkJobQueue::DynamicData *data,
+        hkpBroadPhaseJob *jobIn,
+        hkpBroadPhaseJob *jobOut)
 {
   hkJobQueue::JobQueueEntry *v4; // r10
-  signed int v5; // ecx
-  hkJobQueue::JobQueueEntry *v6; // rax
+  int v5; // ecx
+  hkpBroadPhaseJob *v6; // rax
   hkJob v7; // xmm0
-  hkArray<hkpSimulationIsland *,hkContainerHeapAllocator> *v8; // rdx
+  hkpWorld *m_world; // rdx
   hkpSimulationIsland *v9; // rcx
-  hkArray<hkpSimulationIsland *,hkContainerHeapAllocator> *v10; // rdx
-  signed int v11; // eax
+  hkArray<hkpSimulationIsland *,hkContainerHeapAllocator> *p_m_activeSimulationIslands; // rdx
+  int v11; // eax
   hkJobQueue::JobPopFuncResult result; // eax
   unsigned __int16 v13; // cx
   _QWORD *v14; // rax
-  unsigned __int16 v15; // cx
+  unsigned __int16 m_island; // cx
   unsigned __int64 v16; // rax
   __int64 v17; // rax
   int v18; // eax
@@ -99,46 +97,46 @@ hkJobQueue::JobPopFuncResult __fastcall hkpJobQueueUtils::popIntegrateJob(hkJobQ
   __int64 v20; // rax
   __int128 v21; // xmm1
 
-  v4 = jobIn;
+  v4 = (hkJobQueue::JobQueueEntry *)jobIn;
   v5 = 16;
   v6 = jobIn;
   do
   {
-    v7 = v6->0;
+    v7 = v6->hkJob;
     --v5;
-    v6 = (hkJobQueue::JobQueueEntry *)((char *)v6 + 16);
+    v6 = (hkpBroadPhaseJob *)((char *)v6 + 16);
     *(hkJob *)((char *)v6 + (char *)jobOut - (char *)jobIn - 16) = v7;
   }
   while ( v5 > 0 );
-  v8 = **(hkArray<hkpSimulationIsland *,hkContainerHeapAllocator> ***)&jobIn->m_data[24];
-  v9 = v8[4].m_data[*(unsigned __int16 *)jobOut->m_data];
-  v10 = v8 + 4;
-  *(_QWORD *)&jobOut->m_data[8] = v9;
+  m_world = jobIn->m_mtThreadStructure->m_world;
+  v9 = m_world->m_activeSimulationIslands.m_data[jobOut->m_islandIndex];
+  p_m_activeSimulationIslands = &m_world->m_activeSimulationIslands;
+  jobOut->m_island = v9;
   switch ( jobIn->m_jobSubType )
   {
     case 0:
-      v11 = *(_DWORD *)&jobIn->m_data[32];
+      v11 = *(_DWORD *)&jobIn->m_numIslands;
       if ( v11 <= 1 )
         goto $LN1_61;
-      ++*(_WORD *)jobIn->m_data;
-      *(_DWORD *)&jobIn->m_data[32] = v11 - 1;
-      result = 1;
-      *(_DWORD *)&jobOut->m_data[32] = 1;
+      ++jobIn->m_islandIndex;
+      *(_DWORD *)&jobIn->m_numIslands = v11 - 1;
+      result = DO_NOT_POP_QUEUE_ENTRY;
+      *(_DWORD *)&jobOut->m_numIslands = 1;
       break;
     case 1:
-      v13 = *(_WORD *)&jobIn->m_data[42];
+      v13 = *(&jobIn->m_numIslands + 5);
       if ( v13 <= 0x80u )
         goto $LN1_61;
-      *(_WORD *)&jobIn->m_data[40] += 128;
-      *(_WORD *)&jobIn->m_data[42] = v13 - 128;
-      *(_WORD *)&jobOut->m_data[42] = 128;
-      result = 1;
+      *(&jobIn->m_numIslands + 4) += 128;
+      *(&jobIn->m_numIslands + 5) = v13 - 128;
+      *(&jobOut->m_numIslands + 5) = 128;
+      result = DO_NOT_POP_QUEUE_ENTRY;
       break;
     case 3:
     case 6:
     case 0xE:
       v18 = ((unsigned __int8)jobOut | (unsigned __int8)jobIn) & 0xF;
-      if ( ((unsigned __int8)jobOut | (unsigned __int8)jobIn) & 0xF )
+      if ( (((unsigned __int8)jobOut | (unsigned __int8)jobIn) & 0xF) != 0 )
       {
         memmove(jobOut, jobIn, 0x100ui64);
         goto $LN1_61;
@@ -147,69 +145,69 @@ hkJobQueue::JobPopFuncResult __fastcall hkpJobQueueUtils::popIntegrateJob(hkJobQ
       v20 = (unsigned int)(v18 + 128);
       do
       {
-        jobOut->0 = v4->0;
-        *(_OWORD *)jobOut->m_data = *(_OWORD *)v4->m_data;
-        *(_OWORD *)&jobOut->m_data[16] = *(_OWORD *)&v4->m_data[16];
-        *(_OWORD *)&jobOut->m_data[32] = *(_OWORD *)&v4->m_data[32];
-        *(_OWORD *)&jobOut->m_data[48] = *(_OWORD *)&v4->m_data[48];
-        *(_OWORD *)&jobOut->m_data[64] = *(_OWORD *)&v4->m_data[64];
-        *(_OWORD *)&jobOut->m_data[80] = *(_OWORD *)&v4->m_data[80];
+        jobOut->hkJob = v4->hkJob;
+        *(_OWORD *)&jobOut->m_islandIndex = *(_OWORD *)v4->m_data;
+        *(_OWORD *)&jobOut->m_taskHeader = *(_OWORD *)&v4->m_data[16];
+        *(_OWORD *)&jobOut->m_numIslands = *(_OWORD *)&v4->m_data[32];
+        jobOut[1].hkJob = *(hkJob *)&v4->m_data[48];
+        *(_OWORD *)&jobOut[1].m_islandIndex = *(_OWORD *)&v4->m_data[64];
+        *(_OWORD *)&jobOut[1].m_taskHeader = *(_OWORD *)&v4->m_data[80];
         v21 = *(_OWORD *)&v4->m_data[96];
-        jobOut = (hkJobQueue::JobQueueEntry *)((char *)jobOut + v20);
+        jobOut = (hkpBroadPhaseJob *)((char *)jobOut + v20);
         v4 = (hkJobQueue::JobQueueEntry *)((char *)v4 + v20);
-        *(_OWORD *)&jobOut[-1].m_data[224] = v21;
+        *(_OWORD *)&jobOut[-1].m_numIslands = v21;
         --v19;
       }
       while ( v19 );
-      result = 0;
+      result = POP_QUEUE_ENTRY;
       break;
     case 4:
     case 0xA:
-      v14 = *(_QWORD **)&jobIn->m_data[32];
+      v14 = *(_QWORD **)&jobIn->m_numIslands;
       if ( !*v14 )
         goto $LN1_61;
-      *(_QWORD *)&jobIn->m_data[32] = *v14;
-      result = 1;
+      *(_QWORD *)&jobIn->m_numIslands = *v14;
+      result = DO_NOT_POP_QUEUE_ENTRY;
       break;
     case 7:
     case 9:
-      v16 = *(_QWORD *)&jobIn->m_data[32] + 0x4000i64;
-      if ( v16 >= *(_QWORD *)&jobIn->m_data[40] )
+      v16 = *(_QWORD *)&jobIn->m_numIslands + 0x4000i64;
+      if ( v16 >= *((_QWORD *)&jobIn->m_numIslands + 1) )
         goto $LN1_61;
-      *(_QWORD *)&jobIn->m_data[32] = v16;
-      *(_QWORD *)&jobOut->m_data[40] = v16;
-      result = 1;
+      *(_QWORD *)&jobIn->m_numIslands = v16;
+      *((_QWORD *)&jobOut->m_numIslands + 1) = v16;
+      result = DO_NOT_POP_QUEUE_ENTRY;
       break;
     case 8:
-      v17 = *(_QWORD *)&jobIn->m_data[48];
+      v17 = *(_QWORD *)&jobIn[1].m_jobSubType;
       if ( *(_BYTE *)(v17 + 48) )
         goto $LN1_61;
-      *(_QWORD *)&jobIn->m_data[48] = *(_QWORD *)v17;
-      result = 1;
+      *(_QWORD *)&jobIn[1].m_jobSubType = *(_QWORD *)v17;
+      result = DO_NOT_POP_QUEUE_ENTRY;
       break;
     case 0xB:
-      v15 = *(_WORD *)&jobIn->m_data[72];
-      if ( v15 <= 0x80u )
+      m_island = (unsigned __int16)jobIn[1].m_island;
+      if ( m_island <= 0x80u )
       {
-        if ( !*(_QWORD *)&jobIn->m_data[32] )
+        if ( !*(_QWORD *)&jobIn->m_numIslands )
           goto $LN1_61;
         jobIn->m_jobSubType = 10;
-        result = 1;
+        result = DO_NOT_POP_QUEUE_ENTRY;
       }
       else
       {
-        *(_WORD *)&jobIn->m_data[74] += 128;
-        *(_WORD *)&jobIn->m_data[72] = v15 - 128;
-        *(_WORD *)&jobOut->m_data[72] = 128;
-        result = 1;
+        WORD1(jobIn[1].m_island) += 128;
+        LOWORD(jobIn[1].m_island) = m_island - 128;
+        LOWORD(jobOut[1].m_island) = 128;
+        result = DO_NOT_POP_QUEUE_ENTRY;
       }
       break;
     case 0xC:
-      result = hkpBroadPhaseJob::popJobTask((hkpBroadPhaseJob *)jobIn, v10, (hkpBroadPhaseJob *)jobOut);
+      result = hkpBroadPhaseJob::popJobTask(jobIn, p_m_activeSimulationIslands, jobOut);
       break;
     default:
 $LN1_61:
-      result = 0;
+      result = POP_QUEUE_ENTRY;
       break;
   }
   return result;
@@ -217,16 +215,20 @@ $LN1_61:
 
 // File Line: 323
 // RVA: 0xD8CA80
-signed __int64 __fastcall hkpJobQueueUtils::popCollideJob(hkJobQueue *queue, hkJobQueue::DynamicData *data, hkJobQueue::JobQueueEntry *jobIn, hkJobQueue::JobQueueEntry *jobOut)
+__int64 __fastcall hkpJobQueueUtils::popCollideJob(
+        hkJobQueue *queue,
+        hkJobQueue::DynamicData *data,
+        hkJobQueue::JobQueueEntry *jobIn,
+        hkJobQueue::JobQueueEntry *jobOut)
 {
   hkJobQueue::JobQueueEntry *v4; // r10
-  signed int v5; // ecx
+  int v5; // ecx
   hkJobQueue::JobQueueEntry *v6; // rax
   hkJob v7; // xmm0
   unsigned __int16 v8; // ax
   unsigned __int16 v9; // cx
-  signed __int64 result; // rax
-  signed __int64 v11; // rax
+  __int64 result; // rax
+  __int64 v11; // rax
   hkJob v12; // xmm0
   unsigned __int16 v13; // ax
   unsigned __int16 v14; // cx
@@ -236,7 +238,7 @@ signed __int64 __fastcall hkpJobQueueUtils::popCollideJob(hkJobQueue *queue, hkJ
   v6 = jobIn;
   do
   {
-    v7 = v6->0;
+    v7 = v6->hkJob;
     --v5;
     v6 = (hkJobQueue::JobQueueEntry *)((char *)v6 + 16);
     *(hkJob *)((char *)v6 + (char *)jobOut - (char *)jobIn - 16) = v7;
@@ -255,7 +257,7 @@ signed __int64 __fastcall hkpJobQueueUtils::popCollideJob(hkJobQueue *queue, hkJ
     *(_QWORD *)&jobIn->m_data[48] += 8i64 * v14;
     *(_WORD *)&jobOut->m_data[42] = v14;
     *(_WORD *)&jobOut->m_data[88] = 960;
-    result = 1i64;
+    return 1i64;
   }
   else
   {
@@ -277,15 +279,15 @@ signed __int64 __fastcall hkpJobQueueUtils::popCollideJob(hkJobQueue *queue, hkJ
       }
       return 0i64;
     }
-    if ( !(((unsigned __int8)jobOut | (unsigned __int8)jobIn) & 0xF) )
+    if ( (((unsigned __int8)jobOut | (unsigned __int8)jobIn) & 0xF) == 0 )
     {
       v11 = 2i64;
       do
       {
-        v12 = v4->0;
+        v12 = v4->hkJob;
         jobOut = (hkJobQueue::JobQueueEntry *)((char *)jobOut + 128);
         v4 = (hkJobQueue::JobQueueEntry *)((char *)v4 + 128);
-        *(hkJob *)&jobOut[-1].m_data[112] = v12;
+        *((hkJob *)jobOut - 8) = v12;
         *(_OWORD *)&jobOut[-1].m_data[128] = *(_OWORD *)&v4[-1].m_data[128];
         *(_OWORD *)&jobOut[-1].m_data[144] = *(_OWORD *)&v4[-1].m_data[144];
         *(_OWORD *)&jobOut[-1].m_data[160] = *(_OWORD *)&v4[-1].m_data[160];
@@ -299,59 +301,69 @@ signed __int64 __fastcall hkpJobQueueUtils::popCollideJob(hkJobQueue *queue, hkJ
       return 0i64;
     }
     memmove(jobOut, jobIn, 0x100ui64);
-    result = 0i64;
+    return 0i64;
   }
-  return result;
 }
 
 // File Line: 387
 // RVA: 0xD8CC90
-void __fastcall uploadOpenJobsVariable(hkpBuildJacobianTaskHeader *localTaskHeader, hkpBuildJacobianTaskHeader *taskHeaderInMainMemory)
+void __fastcall uploadOpenJobsVariable(
+        hkpBuildJacobianTaskHeader *localTaskHeader,
+        hkpBuildJacobianTaskHeader *taskHeaderInMainMemory)
 {
   ;
 }
 
 // File Line: 396
 // RVA: 0xD8CCA0
-void __fastcall spawnSplitSimulationIslandJob(hkpDynamicsJob *dynamicsJob, hkpBuildJacobianTaskHeader *localTaskHeader, hkJobQueue *queue, hkJobQueue::DynamicData *data)
+void __fastcall spawnSplitSimulationIslandJob(
+        hkpDynamicsJob *dynamicsJob,
+        hkpBuildJacobianTaskHeader *localTaskHeader,
+        hkJobQueue *queue,
+        hkJobQueue::DynamicData *data)
 {
-  unsigned __int16 v4; // ax
-  hkpSimulationIsland *v5; // rax
-  __int16 v6; // [rsp+20h] [rbp-38h]
+  unsigned __int16 m_islandIndex; // ax
+  hkpSimulationIsland *m_island; // rax
+  __int16 v6; // [rsp+20h] [rbp-38h] BYREF
   char v7; // [rsp+22h] [rbp-36h]
   __int16 v8; // [rsp+24h] [rbp-34h]
   __int16 v9; // [rsp+26h] [rbp-32h]
   unsigned __int16 v10; // [rsp+30h] [rbp-28h]
   hkpSimulationIsland *v11; // [rsp+38h] [rbp-20h]
-  hkpBuildJacobianTaskHeader *v12; // [rsp+40h] [rbp-18h]
-  hkpMtThreadStructure *v13; // [rsp+48h] [rbp-10h]
+  hkpBuildJacobianTaskHeader *m_taskHeader; // [rsp+40h] [rbp-18h]
+  hkpMtThreadStructure *m_mtThreadStructure; // [rsp+48h] [rbp-10h]
 
   if ( localTaskHeader->m_splitCheckRequested )
   {
     v8 = 48;
     v9 = -1;
-    v4 = dynamicsJob->m_islandIndex;
+    m_islandIndex = dynamicsJob->m_islandIndex;
     v6 = 5;
-    v10 = v4;
-    v5 = dynamicsJob->m_island;
+    v10 = m_islandIndex;
+    m_island = dynamicsJob->m_island;
     v7 = 2;
-    v11 = v5;
-    v12 = dynamicsJob->m_taskHeader;
-    v13 = dynamicsJob->m_mtThreadStructure;
-    hkJobQueue::addJobQueueLocked(queue, data, (hkJobQueue::JobQueueEntry *)&v6, 0);
+    v11 = m_island;
+    m_taskHeader = dynamicsJob->m_taskHeader;
+    m_mtThreadStructure = dynamicsJob->m_mtThreadStructure;
+    hkJobQueue::addJobQueueLocked(queue, data, (hkJobQueue::JobQueueEntry *)&v6, JOB_HIGH_PRIORITY);
   }
 }
 
 // File Line: 405
 // RVA: 0xD8CD10
-void __fastcall spawnBuildJacobiansJobs(hkpDynamicsJob *dynamicsJob, hkpBuildJacobianTaskHeader *taskHeader, hkJobQueue *queue, hkJobQueue::DynamicData *data, hkJobQueue::JobQueueEntryInput *newJobCreated)
+void __fastcall spawnBuildJacobiansJobs(
+        hkpDynamicsJob *dynamicsJob,
+        hkpBuildJacobianTaskHeader *taskHeader,
+        hkJobQueue *queue,
+        hkJobQueue::DynamicData *data,
+        hkJobQueue::JobQueueEntryInput *newJobCreated)
 {
-  hkpBuildJacobianTask *v5; // r8
-  char v6; // al
+  hkpBuildJacobianTask *m_buildJacobianTasks; // r8
+  char m_bool; // al
 
   if ( newJobCreated != (hkJobQueue::JobQueueEntryInput *)-16i64 )
   {
-    v5 = taskHeader->m_tasks.m_buildJacobianTasks;
+    m_buildJacobianTasks = taskHeader->m_tasks.m_buildJacobianTasks;
     *(_WORD *)&newJobCreated->m_job.m_jobSubType = 4;
     newJobCreated->m_job.m_jobSpuType.m_storage = 1;
     newJobCreated->m_job.m_size = 80;
@@ -361,9 +373,9 @@ void __fastcall spawnBuildJacobiansJobs(hkpDynamicsJob *dynamicsJob, hkpBuildJac
     *(_QWORD *)&newJobCreated->m_job.m_data[16] = dynamicsJob->m_taskHeader;
     *(_QWORD *)&newJobCreated->m_job.m_data[24] = dynamicsJob->m_mtThreadStructure;
     *(_QWORD *)&newJobCreated->m_job.m_data[40] = taskHeader->m_constraintQueryIn;
-    v6 = taskHeader->m_solveInSingleThread.m_bool;
-    *(_QWORD *)&newJobCreated->m_job.m_data[32] = v5;
-    newJobCreated->m_job.m_data[48] = v6;
+    m_bool = taskHeader->m_solveInSingleThread.m_bool;
+    *(_QWORD *)&newJobCreated->m_job.m_data[32] = m_buildJacobianTasks;
+    newJobCreated->m_job.m_data[48] = m_bool;
   }
   taskHeader->m_openJobs = taskHeader->m_tasks.m_numBuildJacobianTasks;
   newJobCreated->m_jobPriority.m_storage = 0;
@@ -372,34 +384,37 @@ void __fastcall spawnBuildJacobiansJobs(hkpDynamicsJob *dynamicsJob, hkpBuildJac
 
 // File Line: 448
 // RVA: 0xD8C380
-__int64 __fastcall hkpJobQueueUtils::finishIntegrateJob(hkJobQueue *queue, hkJobQueue::DynamicData *data, hkJobQueue::JobQueueEntry *jobIn, hkJobQueue::JobQueueEntryInput *newJobCreated)
+__int64 __fastcall hkpJobQueueUtils::finishIntegrateJob(
+        hkJobQueue *queue,
+        hkJobQueue::DynamicData *data,
+        hkpDynamicsJob *jobIn,
+        hkJobQueue::JobQueueEntryInput *newJobCreated)
 {
-  __int64 v4; // r10
+  hkpBuildJacobianTaskHeader *m_taskHeader; // r10
   unsigned int v5; // ebx
-  hkJobQueue::DynamicData *v6; // rsi
   unsigned int v7; // edi
   bool v8; // zf
   __int64 result; // rax
-  hkJobQueue::JobQueueEntry *v10; // rdx
-  __int64 v11; // rax
+  hkJobQueue::JobQueueEntry *p_m_job; // rdx
+  void *m_buffer; // rax
   __int64 v12; // rax
   __int64 v13; // rax
-  __int64 v14; // rax
+  hkpSolveConstraintBatchTask *m_firstSolveJacobiansTask; // rax
   __int64 v15; // rax
-  int v16; // ebx
+  int m_numIntegrateVelocitiesJobs; // ebx
   hkJobQueue::JobQueueEntry *v17; // rdx
   hkJobQueue::JobQueueEntry *v18; // rdx
   hkJobQueue::JobQueueEntry *v19; // rcx
   int v20; // eax
-  int v21; // eax
-  __int64 v22; // rax
-  int v23; // eax
-  __int64 v24; // rcx
-  __int64 v25; // rcx
-  __int64 v26; // rcx
-  __int64 v27; // rax
+  int m_firstBatchSize; // eax
+  hkpSolveConstraintBatchTask *v22; // rax
+  int m_numBuildJacobianTasks; // eax
+  hkpImpulseLimitBreachedHeader *v24; // rcx
+  hkpBuildJacobianTaskHeader *v25; // rcx
+  hkpBuildJacobianTaskHeader *v26; // rcx
+  hkpMtThreadStructure *m_mtThreadStructure; // rax
   __int64 v28; // rcx
-  __int16 v29; // [rsp+30h] [rbp-38h]
+  __int16 v29; // [rsp+30h] [rbp-38h] BYREF
   char v30; // [rsp+32h] [rbp-36h]
   __int16 v31; // [rsp+34h] [rbp-34h]
   __int16 v32; // [rsp+36h] [rbp-32h]
@@ -408,118 +423,111 @@ __int64 __fastcall hkpJobQueueUtils::finishIntegrateJob(hkJobQueue *queue, hkJob
   __int64 v35; // [rsp+50h] [rbp-18h]
   __int64 v36; // [rsp+58h] [rbp-10h]
 
-  v4 = *(_QWORD *)&jobIn->m_data[16];
+  m_taskHeader = jobIn->m_taskHeader;
   v5 = 1;
-  v6 = data;
   v7 = 1;
   switch ( jobIn->m_jobSubType )
   {
     case 1:
     case 2:
-      v8 = (*(_DWORD *)v4)-- == 1;
+      v8 = m_taskHeader->m_openJobs-- == 1;
       if ( !v8 )
         goto $noJobCreated;
-      if ( *(_DWORD *)(v4 + 176) <= 0 )
+      if ( m_taskHeader->m_tasks.m_numCallbackConstraints <= 0 )
+        goto LABEL_7;
+      if ( newJobCreated != (hkJobQueue::JobQueueEntryInput *)-16i64 )
       {
-        spawnBuildJacobiansJobs((hkpDynamicsJob *)jobIn, (hkpBuildJacobianTaskHeader *)v4, queue, data, newJobCreated);
-        result = 0i64;
+        *(_WORD *)&newJobCreated->m_job.m_jobSubType = 3;
+        newJobCreated->m_job.m_jobSpuType.m_storage = 2;
+        newJobCreated->m_job.m_size = 48;
+        newJobCreated->m_job.m_threadAffinity = -1;
+        *(_WORD *)newJobCreated->m_job.m_data = jobIn->m_islandIndex;
+        *(_QWORD *)&newJobCreated->m_job.m_data[8] = jobIn->m_island;
+        *(_QWORD *)&newJobCreated->m_job.m_data[16] = jobIn->m_taskHeader;
+        *(_QWORD *)&newJobCreated->m_job.m_data[24] = jobIn->m_mtThreadStructure;
       }
-      else
-      {
-        if ( newJobCreated != (hkJobQueue::JobQueueEntryInput *)-16i64 )
-        {
-          *(_WORD *)&newJobCreated->m_job.m_jobSubType = 3;
-          newJobCreated->m_job.m_jobSpuType.m_storage = 2;
-          newJobCreated->m_job.m_size = 48;
-          newJobCreated->m_job.m_threadAffinity = -1;
-          *(_WORD *)newJobCreated->m_job.m_data = *(_WORD *)jobIn->m_data;
-          *(_QWORD *)&newJobCreated->m_job.m_data[8] = *(_QWORD *)&jobIn->m_data[8];
-          *(_QWORD *)&newJobCreated->m_job.m_data[16] = *(_QWORD *)&jobIn->m_data[16];
-          *(_QWORD *)&newJobCreated->m_job.m_data[24] = *(_QWORD *)&jobIn->m_data[24];
-        }
-        newJobCreated->m_jobPriority.m_storage = 0;
-        result = 0i64;
-      }
-      return result;
+      newJobCreated->m_jobPriority.m_storage = 0;
+      return 0i64;
     case 3:
-      spawnBuildJacobiansJobs((hkpDynamicsJob *)jobIn, (hkpBuildJacobianTaskHeader *)v4, queue, data, newJobCreated);
+LABEL_7:
+      spawnBuildJacobiansJobs(jobIn, m_taskHeader, queue, data, newJobCreated);
       return 0i64;
     case 4:
-      v8 = (*(_DWORD *)v4)-- == 1;
+      v8 = m_taskHeader->m_openJobs-- == 1;
       if ( !v8 )
         goto $noJobCreated;
-      v10 = &newJobCreated->m_job;
-      if ( *(_BYTE *)(v4 + 132) )
+      p_m_job = &newJobCreated->m_job;
+      if ( m_taskHeader->m_solveInSingleThread.m_bool )
       {
         if ( newJobCreated == (hkJobQueue::JobQueueEntryInput *)-16i64 )
         {
-          v10 = 0i64;
+          p_m_job = 0i64;
         }
         else
         {
-          *(_WORD *)&v10->m_jobSubType = 6;
+          *(_WORD *)&p_m_job->m_jobSubType = 6;
           newJobCreated->m_job.m_jobSpuType.m_storage = 1;
           newJobCreated->m_job.m_threadAffinity = -1;
           newJobCreated->m_job.m_size = 80;
-          *(_WORD *)newJobCreated->m_job.m_data = *(_WORD *)jobIn->m_data;
-          *(_QWORD *)&newJobCreated->m_job.m_data[8] = *(_QWORD *)&jobIn->m_data[8];
-          *(_QWORD *)&newJobCreated->m_job.m_data[16] = *(_QWORD *)&jobIn->m_data[16];
-          *(_QWORD *)&newJobCreated->m_job.m_data[24] = *(_QWORD *)&jobIn->m_data[24];
-          v11 = *(_QWORD *)(v4 + 24);
-          *(_QWORD *)&newJobCreated->m_job.m_data[32] = v11;
-          *(_DWORD *)&newJobCreated->m_job.m_data[44] = *(_DWORD *)(v4 + 64) - v11;
-          *(_DWORD *)&newJobCreated->m_job.m_data[48] = *(_DWORD *)(v4 + 88) - v11;
-          *(_DWORD *)&newJobCreated->m_job.m_data[52] = *(_DWORD *)(v4 + 96) - v11;
-          *(_DWORD *)&newJobCreated->m_job.m_data[40] = *(_DWORD *)(v4 + 32);
-          *(_DWORD *)&newJobCreated->m_job.m_data[56] = *(_DWORD *)(v4 + 104);
-          *(_DWORD *)&newJobCreated->m_job.m_data[60] = *(_DWORD *)(v4 + 108);
+          *(_WORD *)newJobCreated->m_job.m_data = jobIn->m_islandIndex;
+          *(_QWORD *)&newJobCreated->m_job.m_data[8] = jobIn->m_island;
+          *(_QWORD *)&newJobCreated->m_job.m_data[16] = jobIn->m_taskHeader;
+          *(_QWORD *)&newJobCreated->m_job.m_data[24] = jobIn->m_mtThreadStructure;
+          m_buffer = m_taskHeader->m_buffer;
+          *(_QWORD *)&newJobCreated->m_job.m_data[32] = m_buffer;
+          *(_DWORD *)&newJobCreated->m_job.m_data[44] = LODWORD(m_taskHeader->m_accumulatorsBase) - (_DWORD)m_buffer;
+          *(_DWORD *)&newJobCreated->m_job.m_data[48] = LODWORD(m_taskHeader->m_schemasBase) - (_DWORD)m_buffer;
+          *(_DWORD *)&newJobCreated->m_job.m_data[52] = LODWORD(m_taskHeader->m_solverTempBase) - (_DWORD)m_buffer;
+          *(_DWORD *)&newJobCreated->m_job.m_data[40] = m_taskHeader->m_bufferSize;
+          *(_DWORD *)&newJobCreated->m_job.m_data[56] = m_taskHeader->m_numSolverResults;
+          *(_DWORD *)&newJobCreated->m_job.m_data[60] = m_taskHeader->m_numSolverElemTemps;
         }
         newJobCreated->m_jobPriority.m_storage = 0;
-        newJobCreated->m_job.m_jobSpuType.m_storage = (*(_BYTE *)(v4 + 133) != 0) + 1;
+        newJobCreated->m_job.m_jobSpuType.m_storage = (m_taskHeader->m_solveInSingleThreadOnPpuOnly.m_bool != 0) + 1;
       }
       else
       {
         if ( newJobCreated == (hkJobQueue::JobQueueEntryInput *)-16i64 )
         {
-          v10 = 0i64;
+          p_m_job = 0i64;
         }
         else
         {
-          *(_WORD *)&v10->m_jobSubType = 7;
+          *(_WORD *)&p_m_job->m_jobSubType = 7;
           newJobCreated->m_job.m_jobSpuType.m_storage = 1;
           newJobCreated->m_job.m_threadAffinity = -1;
           newJobCreated->m_job.m_size = 64;
-          *(_WORD *)newJobCreated->m_job.m_data = *(_WORD *)jobIn->m_data;
-          *(_QWORD *)&newJobCreated->m_job.m_data[8] = *(_QWORD *)&jobIn->m_data[8];
-          *(_QWORD *)&newJobCreated->m_job.m_data[16] = *(_QWORD *)&jobIn->m_data[16];
-          *(_QWORD *)&newJobCreated->m_job.m_data[24] = *(_QWORD *)&jobIn->m_data[24];
-          *(_QWORD *)&newJobCreated->m_job.m_data[32] = *(_QWORD *)(v4 + 64);
-          *(_QWORD *)&newJobCreated->m_job.m_data[40] = *(_QWORD *)(v4 + 72);
+          *(_WORD *)newJobCreated->m_job.m_data = jobIn->m_islandIndex;
+          *(_QWORD *)&newJobCreated->m_job.m_data[8] = jobIn->m_island;
+          *(_QWORD *)&newJobCreated->m_job.m_data[16] = jobIn->m_taskHeader;
+          *(_QWORD *)&newJobCreated->m_job.m_data[24] = jobIn->m_mtThreadStructure;
+          *(_QWORD *)&newJobCreated->m_job.m_data[32] = m_taskHeader->m_accumulatorsBase;
+          *(_QWORD *)&newJobCreated->m_job.m_data[40] = m_taskHeader->m_accumulatorsEnd;
         }
         newJobCreated->m_jobPriority.m_storage = 0;
         newJobCreated->m_job.m_jobSpuType.m_storage = 1;
-        *(_DWORD *)v4 = *(unsigned __int16 *)(v4 + 80);
+        m_taskHeader->m_openJobs = m_taskHeader->m_numApplyGravityJobs;
       }
-      if ( !*(_BYTE *)(v4 + 41) )
-        goto $yesJobCreated;
+      if ( !m_taskHeader->m_splitCheckRequested )
+        return 0i64;
       v31 = 48;
-      v33 = *(_WORD *)v10->m_data;
-      v12 = *(_QWORD *)&v10->m_data[8];
+      v33 = *(_WORD *)p_m_job->m_data;
+      v12 = *(_QWORD *)&p_m_job->m_data[8];
       v29 = 5;
       v34 = v12;
-      v13 = *(_QWORD *)&v10->m_data[16];
+      v13 = *(_QWORD *)&p_m_job->m_data[16];
       v30 = 2;
       v35 = v13;
-      v36 = *(_QWORD *)&v10->m_data[24];
+      v36 = *(_QWORD *)&p_m_job->m_data[24];
       v32 = -1;
-      hkJobQueue::addJobQueueLocked(queue, v6, (hkJobQueue::JobQueueEntry *)&v29, 0);
+      hkJobQueue::addJobQueueLocked(queue, data, (hkJobQueue::JobQueueEntry *)&v29, JOB_HIGH_PRIORITY);
       return 0i64;
     case 5:
       goto $commonForIntegrateMotinoAndSplitIsland;
     case 6:
       goto $LN33_31;
     case 7:
-      v8 = (*(_DWORD *)v4)-- == 1;
+      v8 = m_taskHeader->m_openJobs-- == 1;
       if ( !v8 )
         goto $noJobCreated;
       if ( newJobCreated != (hkJobQueue::JobQueueEntryInput *)-16i64 )
@@ -528,25 +536,25 @@ __int64 __fastcall hkpJobQueueUtils::finishIntegrateJob(hkJobQueue *queue, hkJob
         newJobCreated->m_job.m_jobSpuType.m_storage = 1;
         newJobCreated->m_job.m_size = 80;
         newJobCreated->m_job.m_threadAffinity = -1;
-        *(_WORD *)newJobCreated->m_job.m_data = *(_WORD *)jobIn->m_data;
-        *(_QWORD *)&newJobCreated->m_job.m_data[8] = *(_QWORD *)&jobIn->m_data[8];
-        *(_QWORD *)&newJobCreated->m_job.m_data[16] = *(_QWORD *)&jobIn->m_data[16];
-        *(_QWORD *)&newJobCreated->m_job.m_data[24] = *(_QWORD *)&jobIn->m_data[24];
-        v14 = *(_QWORD *)(v4 + 184);
+        *(_WORD *)newJobCreated->m_job.m_data = jobIn->m_islandIndex;
+        *(_QWORD *)&newJobCreated->m_job.m_data[8] = jobIn->m_island;
+        *(_QWORD *)&newJobCreated->m_job.m_data[16] = jobIn->m_taskHeader;
+        *(_QWORD *)&newJobCreated->m_job.m_data[24] = jobIn->m_mtThreadStructure;
+        m_firstSolveJacobiansTask = m_taskHeader->m_solveTasks.m_firstSolveJacobiansTask;
         *(_DWORD *)&newJobCreated->m_job.m_data[32] = 0;
-        *(_QWORD *)&newJobCreated->m_job.m_data[48] = v14;
+        *(_QWORD *)&newJobCreated->m_job.m_data[48] = m_firstSolveJacobiansTask;
         *(_DWORD *)&newJobCreated->m_job.m_data[40] = 0;
       }
       newJobCreated->m_jobPriority.m_storage = 0;
       newJobCreated->m_job.m_jobSpuType.m_storage = 1;
-      *(_DWORD *)v4 = *(unsigned __int16 *)(v4 + 192);
+      m_taskHeader->m_openJobs = m_taskHeader->m_solveTasks.m_firstBatchSize;
       return 0i64;
     case 8:
-      v8 = (*(_DWORD *)v4)-- == 1;
+      v8 = m_taskHeader->m_openJobs-- == 1;
       if ( v8 )
       {
-        v15 = *(_QWORD *)&jobIn->m_data[48];
-        v16 = *(unsigned __int16 *)(v15 + 50);
+        v15 = *(_QWORD *)&jobIn[1].m_islandIndex;
+        m_numIntegrateVelocitiesJobs = *(unsigned __int16 *)(v15 + 50);
         if ( *(_WORD *)(v15 + 50) )
         {
           v17 = &newJobCreated->m_job;
@@ -556,19 +564,19 @@ __int64 __fastcall hkpJobQueueUtils::finishIntegrateJob(hkJobQueue *queue, hkJob
             newJobCreated->m_job.m_jobSpuType.m_storage = 1;
             newJobCreated->m_job.m_size = 80;
             newJobCreated->m_job.m_threadAffinity = -1;
-            *(_WORD *)newJobCreated->m_job.m_data = *(_WORD *)jobIn->m_data;
-            *(_QWORD *)&newJobCreated->m_job.m_data[8] = *(_QWORD *)&jobIn->m_data[8];
-            *(_QWORD *)&newJobCreated->m_job.m_data[16] = *(_QWORD *)&jobIn->m_data[16];
-            *(_QWORD *)&newJobCreated->m_job.m_data[24] = *(_QWORD *)&jobIn->m_data[24];
-            v17->0 = jobIn->0;
-            *(_OWORD *)newJobCreated->m_job.m_data = *(_OWORD *)jobIn->m_data;
-            *(_OWORD *)&newJobCreated->m_job.m_data[16] = *(_OWORD *)&jobIn->m_data[16];
-            *(_OWORD *)&newJobCreated->m_job.m_data[32] = *(_OWORD *)&jobIn->m_data[32];
-            *(_OWORD *)&newJobCreated->m_job.m_data[48] = *(_OWORD *)&jobIn->m_data[48];
-            *(_QWORD *)&newJobCreated->m_job.m_data[48] = *(_QWORD *)(*(_QWORD *)&jobIn->m_data[48] + 56i64);
+            *(_WORD *)newJobCreated->m_job.m_data = jobIn->m_islandIndex;
+            *(_QWORD *)&newJobCreated->m_job.m_data[8] = jobIn->m_island;
+            *(_QWORD *)&newJobCreated->m_job.m_data[16] = jobIn->m_taskHeader;
+            *(_QWORD *)&newJobCreated->m_job.m_data[24] = jobIn->m_mtThreadStructure;
+            v17->hkJob = jobIn->hkJob;
+            *(_OWORD *)newJobCreated->m_job.m_data = *(_OWORD *)&jobIn->m_islandIndex;
+            *(_OWORD *)&newJobCreated->m_job.m_data[16] = *(_OWORD *)&jobIn->m_taskHeader;
+            *(hkJob *)&newJobCreated->m_job.m_data[32] = jobIn[1].hkJob;
+            *(_OWORD *)&newJobCreated->m_job.m_data[48] = *(_OWORD *)&jobIn[1].m_islandIndex;
+            *(_QWORD *)&newJobCreated->m_job.m_data[48] = *(_QWORD *)(*(_QWORD *)&jobIn[1].m_islandIndex + 56i64);
           }
         }
-        else if ( (unsigned int)(*(_DWORD *)&jobIn->m_data[40] + 1) >= *(_DWORD *)&jobIn->m_data[36] )
+        else if ( (unsigned int)(*(_DWORD *)(&jobIn[1].m_threadAffinity + 1) + 1) >= *(_DWORD *)&jobIn[1].m_size )
         {
           if ( newJobCreated != (hkJobQueue::JobQueueEntryInput *)-16i64 )
           {
@@ -576,16 +584,16 @@ __int64 __fastcall hkpJobQueueUtils::finishIntegrateJob(hkJobQueue *queue, hkJob
             newJobCreated->m_job.m_jobSpuType.m_storage = 1;
             newJobCreated->m_job.m_size = 80;
             newJobCreated->m_job.m_threadAffinity = -1;
-            *(_WORD *)newJobCreated->m_job.m_data = *(_WORD *)jobIn->m_data;
-            *(_QWORD *)&newJobCreated->m_job.m_data[8] = *(_QWORD *)&jobIn->m_data[8];
-            *(_QWORD *)&newJobCreated->m_job.m_data[16] = *(_QWORD *)&jobIn->m_data[16];
-            *(_QWORD *)&newJobCreated->m_job.m_data[24] = *(_QWORD *)&jobIn->m_data[24];
-            *(_QWORD *)&newJobCreated->m_job.m_data[32] = *(_QWORD *)(v4 + 64);
-            *(_QWORD *)&newJobCreated->m_job.m_data[40] = *(_QWORD *)(v4 + 72);
-            *(_DWORD *)&newJobCreated->m_job.m_data[48] = *(_DWORD *)&jobIn->m_data[32];
+            *(_WORD *)newJobCreated->m_job.m_data = jobIn->m_islandIndex;
+            *(_QWORD *)&newJobCreated->m_job.m_data[8] = jobIn->m_island;
+            *(_QWORD *)&newJobCreated->m_job.m_data[16] = jobIn->m_taskHeader;
+            *(_QWORD *)&newJobCreated->m_job.m_data[24] = jobIn->m_mtThreadStructure;
+            *(_QWORD *)&newJobCreated->m_job.m_data[32] = m_taskHeader->m_accumulatorsBase;
+            *(_QWORD *)&newJobCreated->m_job.m_data[40] = m_taskHeader->m_accumulatorsEnd;
+            *(_DWORD *)&newJobCreated->m_job.m_data[48] = *(_DWORD *)&jobIn[1].m_jobSubType;
             newJobCreated->m_job.m_data[52] = 0;
           }
-          v16 = *(unsigned __int16 *)(v4 + 82);
+          m_numIntegrateVelocitiesJobs = m_taskHeader->m_numIntegrateVelocitiesJobs;
         }
         else
         {
@@ -600,33 +608,33 @@ __int64 __fastcall hkpJobQueueUtils::finishIntegrateJob(hkJobQueue *queue, hkJob
             newJobCreated->m_job.m_jobSpuType.m_storage = 1;
             newJobCreated->m_job.m_size = 80;
             newJobCreated->m_job.m_threadAffinity = -1;
-            *(_WORD *)newJobCreated->m_job.m_data = *(_WORD *)jobIn->m_data;
-            *(_QWORD *)&newJobCreated->m_job.m_data[8] = *(_QWORD *)&jobIn->m_data[8];
-            *(_QWORD *)&newJobCreated->m_job.m_data[16] = *(_QWORD *)&jobIn->m_data[16];
-            *(_QWORD *)&newJobCreated->m_job.m_data[24] = *(_QWORD *)&jobIn->m_data[24];
-            v18->0 = jobIn->0;
-            *(_OWORD *)newJobCreated->m_job.m_data = *(_OWORD *)jobIn->m_data;
-            *(_OWORD *)&newJobCreated->m_job.m_data[16] = *(_OWORD *)&jobIn->m_data[16];
-            *(_OWORD *)&newJobCreated->m_job.m_data[32] = *(_OWORD *)&jobIn->m_data[32];
-            *(_OWORD *)&newJobCreated->m_job.m_data[48] = *(_OWORD *)&jobIn->m_data[48];
-            *(_QWORD *)&newJobCreated->m_job.m_data[48] = *(_QWORD *)(*(_QWORD *)&jobIn->m_data[48] + 56i64);
+            *(_WORD *)newJobCreated->m_job.m_data = jobIn->m_islandIndex;
+            *(_QWORD *)&newJobCreated->m_job.m_data[8] = jobIn->m_island;
+            *(_QWORD *)&newJobCreated->m_job.m_data[16] = jobIn->m_taskHeader;
+            *(_QWORD *)&newJobCreated->m_job.m_data[24] = jobIn->m_mtThreadStructure;
+            v18->hkJob = jobIn->hkJob;
+            *(_OWORD *)newJobCreated->m_job.m_data = *(_OWORD *)&jobIn->m_islandIndex;
+            *(_OWORD *)&newJobCreated->m_job.m_data[16] = *(_OWORD *)&jobIn->m_taskHeader;
+            *(hkJob *)&newJobCreated->m_job.m_data[32] = jobIn[1].hkJob;
+            *(_OWORD *)&newJobCreated->m_job.m_data[48] = *(_OWORD *)&jobIn[1].m_islandIndex;
+            *(_QWORD *)&newJobCreated->m_job.m_data[48] = *(_QWORD *)(*(_QWORD *)&jobIn[1].m_islandIndex + 56i64);
           }
           ++*(_DWORD *)&v18->m_data[40];
-          *(_QWORD *)&v18->m_data[48] = *(_QWORD *)(v4 + 184);
-          v16 = *(unsigned __int16 *)(v4 + 192);
+          *(_QWORD *)&v18->m_data[48] = m_taskHeader->m_solveTasks.m_firstSolveJacobiansTask;
+          m_numIntegrateVelocitiesJobs = m_taskHeader->m_solveTasks.m_firstBatchSize;
         }
         newJobCreated->m_jobPriority.m_storage = 0;
         newJobCreated->m_job.m_jobSpuType.m_storage = 1;
-        *(_DWORD *)v4 = v16;
+        m_taskHeader->m_openJobs = m_numIntegrateVelocitiesJobs;
         v5 = 0;
       }
       goto $noJobCreated;
     case 9:
-      v8 = (*(_DWORD *)v4)-- == 1;
+      v8 = m_taskHeader->m_openJobs-- == 1;
       if ( !v8 )
         goto $noJobCreated;
       v19 = &newJobCreated->m_job;
-      if ( jobIn->m_data[52] )
+      if ( *((_BYTE *)&jobIn[1].m_islandIndex + 4) )
       {
         if ( newJobCreated != (hkJobQueue::JobQueueEntryInput *)-16i64 )
         {
@@ -634,23 +642,22 @@ __int64 __fastcall hkpJobQueueUtils::finishIntegrateJob(hkJobQueue *queue, hkJob
           newJobCreated->m_job.m_jobSpuType.m_storage = 2;
           newJobCreated->m_job.m_size = 112;
           newJobCreated->m_job.m_threadAffinity = -1;
-          *(_WORD *)newJobCreated->m_job.m_data = *(_WORD *)jobIn->m_data;
-          *(_QWORD *)&newJobCreated->m_job.m_data[8] = *(_QWORD *)&jobIn->m_data[8];
-          *(_QWORD *)&newJobCreated->m_job.m_data[16] = *(_QWORD *)&jobIn->m_data[16];
-          *(_QWORD *)&newJobCreated->m_job.m_data[24] = *(_QWORD *)&jobIn->m_data[24];
-          v22 = *(_QWORD *)(v4 + 184);
+          *(_WORD *)newJobCreated->m_job.m_data = jobIn->m_islandIndex;
+          *(_QWORD *)&newJobCreated->m_job.m_data[8] = jobIn->m_island;
+          *(_QWORD *)&newJobCreated->m_job.m_data[16] = jobIn->m_taskHeader;
+          *(_QWORD *)&newJobCreated->m_job.m_data[24] = jobIn->m_mtThreadStructure;
+          v22 = m_taskHeader->m_solveTasks.m_firstSolveJacobiansTask;
           *(_WORD *)&newJobCreated->m_job.m_data[74] = 0;
           *(_QWORD *)&newJobCreated->m_job.m_data[32] = v22;
-          *(_WORD *)&newJobCreated->m_job.m_data[72] = *(_WORD *)(v4 + 128);
-          *(_QWORD *)&newJobCreated->m_job.m_data[64] = *(_QWORD *)(v4 + 24);
+          *(_WORD *)&newJobCreated->m_job.m_data[72] = m_taskHeader->m_numAllEntities;
+          *(_QWORD *)&newJobCreated->m_job.m_data[64] = m_taskHeader->m_buffer;
           newJobCreated->m_job.m_data[80] = 0;
         }
-        v23 = *(_DWORD *)(v4 + 160);
+        m_numBuildJacobianTasks = m_taskHeader->m_tasks.m_numBuildJacobianTasks;
         newJobCreated->m_jobPriority.m_storage = 0;
         newJobCreated->m_job.m_jobSpuType.m_storage = 1;
-        *(_DWORD *)v4 = v23;
-$yesJobCreated:
-        result = 0i64;
+        m_taskHeader->m_openJobs = m_numBuildJacobianTasks;
+        return 0i64;
       }
       else
       {
@@ -660,63 +667,63 @@ $yesJobCreated:
           newJobCreated->m_job.m_jobSpuType.m_storage = 1;
           newJobCreated->m_job.m_size = 80;
           newJobCreated->m_job.m_threadAffinity = -1;
-          *(_WORD *)newJobCreated->m_job.m_data = *(_WORD *)jobIn->m_data;
-          *(_QWORD *)&newJobCreated->m_job.m_data[8] = *(_QWORD *)&jobIn->m_data[8];
-          *(_QWORD *)&newJobCreated->m_job.m_data[16] = *(_QWORD *)&jobIn->m_data[16];
-          *(_QWORD *)&newJobCreated->m_job.m_data[24] = *(_QWORD *)&jobIn->m_data[24];
-          *(_QWORD *)&newJobCreated->m_job.m_data[48] = *(_QWORD *)(v4 + 184);
-          v20 = *(_DWORD *)&jobIn->m_data[48];
+          *(_WORD *)newJobCreated->m_job.m_data = jobIn->m_islandIndex;
+          *(_QWORD *)&newJobCreated->m_job.m_data[8] = jobIn->m_island;
+          *(_QWORD *)&newJobCreated->m_job.m_data[16] = jobIn->m_taskHeader;
+          *(_QWORD *)&newJobCreated->m_job.m_data[24] = jobIn->m_mtThreadStructure;
+          *(_QWORD *)&newJobCreated->m_job.m_data[48] = m_taskHeader->m_solveTasks.m_firstSolveJacobiansTask;
+          v20 = *(_DWORD *)&jobIn[1].m_islandIndex;
           *(_DWORD *)&newJobCreated->m_job.m_data[40] = 0;
           *(_DWORD *)&newJobCreated->m_job.m_data[32] = v20 + 1;
         }
-        v21 = *(unsigned __int16 *)(v4 + 192);
+        m_firstBatchSize = m_taskHeader->m_solveTasks.m_firstBatchSize;
         newJobCreated->m_jobPriority.m_storage = 0;
         newJobCreated->m_job.m_jobSpuType.m_storage = 1;
-        *(_DWORD *)v4 = v21;
-        result = 0i64;
+        m_taskHeader->m_openJobs = m_firstBatchSize;
+        return 0i64;
       }
-      return result;
     case 0xA:
-      --*(_DWORD *)v4;
-      v24 = *(_QWORD *)(*(_QWORD *)&jobIn->m_data[32] + 24i64);
-      if ( *(_DWORD *)v24 )
+      --m_taskHeader->m_openJobs;
+      v24 = *(hkpImpulseLimitBreachedHeader **)(*(_QWORD *)&jobIn[1].m_jobSubType + 24i64);
+      if ( v24->m_numBreached )
       {
-        *(_QWORD *)(v24 + 8) = *(_QWORD *)(v4 + 48);
-        *(_QWORD *)(v4 + 48) = v24;
+        v24->m_next = m_taskHeader->m_impulseLimitsBreached;
+        m_taskHeader->m_impulseLimitsBreached = v24;
       }
-      if ( !*(_DWORD *)v4 )
+      if ( !m_taskHeader->m_openJobs )
 $LN33_31:
-        *(_BYTE *)(v4 + 40) = 1;
+        m_taskHeader->m_exportFinished = 1;
       goto $noJobCreated;
     case 0xB:
-      if ( *(_DWORD *)&jobIn->m_data[76] <= 5 )
-        *(_DWORD *)(v4 + 8) = 0;
-      v7 = (((unsigned int)*(unsigned __int16 *)&jobIn->m_data[72] - 1) >> 7) + 1;
+      if ( SHIDWORD(jobIn[1].m_mtThreadStructure) <= 5 )
+        m_taskHeader->m_islandShouldBeDeactivated = 0;
+      v7 = (((unsigned int)LOWORD(jobIn[1].m_mtThreadStructure) - 1) >> 7) + 1;
 $commonForIntegrateMotinoAndSplitIsland:
-      v25 = *(_QWORD *)&jobIn->m_data[16];
-      v8 = *(_DWORD *)(v25 + 4) == v7;
-      *(_DWORD *)(v25 + 4) -= v7;
+      v25 = jobIn->m_taskHeader;
+      v8 = v25->m_numUnfinishedJobsForBroadphase == v7;
+      v25->m_numUnfinishedJobsForBroadphase -= v7;
       if ( !v8 )
         goto $noJobCreated;
       if ( newJobCreated != (hkJobQueue::JobQueueEntryInput *)-16i64 )
       {
-        v26 = *(_QWORD *)&jobIn->m_data[16];
+        v26 = jobIn->m_taskHeader;
         *(_WORD *)&newJobCreated->m_job.m_jobSubType = 12;
         newJobCreated->m_job.m_jobSpuType.m_storage = 2;
         newJobCreated->m_job.m_size = 64;
         newJobCreated->m_job.m_threadAffinity = -1;
-        *(_WORD *)newJobCreated->m_job.m_data = *(_WORD *)jobIn->m_data;
-        *(_QWORD *)&newJobCreated->m_job.m_data[8] = *(_QWORD *)&jobIn->m_data[8];
-        *(_QWORD *)&newJobCreated->m_job.m_data[16] = *(_QWORD *)&jobIn->m_data[16];
-        v27 = *(_QWORD *)&jobIn->m_data[24];
+        *(_WORD *)newJobCreated->m_job.m_data = jobIn->m_islandIndex;
+        *(_QWORD *)&newJobCreated->m_job.m_data[8] = jobIn->m_island;
+        *(_QWORD *)&newJobCreated->m_job.m_data[16] = jobIn->m_taskHeader;
+        m_mtThreadStructure = jobIn->m_mtThreadStructure;
         *(_QWORD *)&newJobCreated->m_job.m_data[16] = v26;
-        *(_QWORD *)&newJobCreated->m_job.m_data[24] = v27;
+        *(_QWORD *)&newJobCreated->m_job.m_data[24] = m_mtThreadStructure;
         *(_WORD *)&newJobCreated->m_job.m_data[32] = 1;
       }
       newJobCreated->m_jobPriority.m_storage = 0;
-      return 0i64;
+      result = 0i64;
+      break;
     case 0xD:
-      v28 = *(_QWORD *)&jobIn->m_data[32];
+      v28 = *(_QWORD *)&jobIn[1].m_jobSubType;
       if ( !v28 )
         goto $noJobCreated;
       v8 = (*(_DWORD *)(v28 + 4))-- == 1;
@@ -728,12 +735,12 @@ $commonForIntegrateMotinoAndSplitIsland:
         newJobCreated->m_job.m_jobSpuType.m_storage = 2;
         newJobCreated->m_job.m_size = 64;
         newJobCreated->m_job.m_threadAffinity = -1;
-        *(_WORD *)newJobCreated->m_job.m_data = *(_WORD *)jobIn->m_data;
-        *(_QWORD *)&newJobCreated->m_job.m_data[8] = *(_QWORD *)&jobIn->m_data[8];
-        *(_QWORD *)&newJobCreated->m_job.m_data[16] = *(_QWORD *)&jobIn->m_data[16];
-        *(_QWORD *)&newJobCreated->m_job.m_data[24] = *(_QWORD *)&jobIn->m_data[24];
-        *(_WORD *)newJobCreated->m_job.m_data = *(_WORD *)jobIn->m_data;
-        *(_QWORD *)&newJobCreated->m_job.m_data[32] = *(_QWORD *)&jobIn->m_data[32];
+        *(_WORD *)newJobCreated->m_job.m_data = jobIn->m_islandIndex;
+        *(_QWORD *)&newJobCreated->m_job.m_data[8] = jobIn->m_island;
+        *(_QWORD *)&newJobCreated->m_job.m_data[16] = jobIn->m_taskHeader;
+        *(_QWORD *)&newJobCreated->m_job.m_data[24] = jobIn->m_mtThreadStructure;
+        *(_WORD *)newJobCreated->m_job.m_data = jobIn->m_islandIndex;
+        *(_QWORD *)&newJobCreated->m_job.m_data[32] = *(_QWORD *)&jobIn[1].m_jobSubType;
       }
       newJobCreated->m_jobPriority.m_storage = 0;
       result = 0i64;
@@ -744,31 +751,24 @@ $noJobCreated:
       break;
   }
   return result;
-}WORD *)&jobIn->m_data[24];
-        *(_WORD *)newJobCreated->m_job.m_data = *(_WORD *)jobIn->m_data;
-        *(_QWORD *)&newJobCreated->m_job.m_data[32] = *(_QWORD *)&jobIn->m_data[32];
-      }
-      newJobCreated->m_jobPriority.m_storage = 0;
-      result = 0i64;
-      break;
-    default:
-$noJobCreated:
-      res
+}
 
 // File Line: 847
 // RVA: 0xD8CC00
-signed __int64 __fastcall hkpJobQueueUtils::finishCollideJob(hkJobQueue *queue, hkJobQueue::DynamicData *data, hkJobQueue::JobQueueEntry *jobIn, hkJobQueue::JobQueueEntryInput *newJobCreated)
+__int64 __fastcall hkpJobQueueUtils::finishCollideJob(
+        hkJobQueue *queue,
+        hkJobQueue::DynamicData *data,
+        hkJobQueue::JobQueueEntry *jobIn,
+        hkJobQueue::JobQueueEntryInput *newJobCreated)
 {
   __int64 v5; // rcx
-  bool v6; // zf
 
   if ( jobIn->m_jobSubType != 13 )
     return 1i64;
   v5 = *(_QWORD *)&jobIn->m_data[32];
   if ( !v5 )
     return 1i64;
-  v6 = (*(_DWORD *)(v5 + 4))-- == 1;
-  if ( !v6 )
+  if ( (*(_DWORD *)(v5 + 4))-- != 1 )
     return 1i64;
   if ( newJobCreated != (hkJobQueue::JobQueueEntryInput *)-16i64 )
   {

@@ -2,23 +2,21 @@
 // RVA: 0x154540
 void __fastcall UFG::PartRequest::PartRequest(UFG::PartRequest *this)
 {
-  UFG::PartRequest *v1; // rdi
-  UFG::qReflectHandle<UFG::PartDefinition> *v2; // rbx
+  UFG::qReflectHandle<UFG::PartDefinition> *p_mPartDefHandle; // rbx
 
-  v1 = this;
-  this->mPrev = (UFG::qNode<UFG::PartRequest,UFG::PartRequest> *)&this->mPrev;
-  this->mNext = (UFG::qNode<UFG::PartRequest,UFG::PartRequest> *)&this->mPrev;
+  this->mPrev = this;
+  this->mNext = this;
   this->mModelDataStreamerHandle = 0i64;
   this->mTextureDataStreamerHandle = 0i64;
   this->mLoadCount = 0;
-  v2 = &this->mPartDefHandle;
-  UFG::qReflectHandleBase::qReflectHandleBase((UFG::qReflectHandleBase *)&this->mPartDefHandle.mPrev);
-  v2->mTypeUID = UFG::qStringHash64("UFG::PartDefinition", 0xFFFFFFFFFFFFFFFFui64);
-  v1->mLoadStatus = 0;
-  v1->mLastReferencedFrame = 0;
-  v1->mInstances.p = 0i64;
-  *(_QWORD *)&v1->mInstances.size = 0i64;
-  UFG::qMemSet(v1->mPriorityRefCounts, 0, 0x14u);
+  p_mPartDefHandle = &this->mPartDefHandle;
+  UFG::qReflectHandleBase::qReflectHandleBase(&this->mPartDefHandle);
+  p_mPartDefHandle->mTypeUID = UFG::qStringHash64("UFG::PartDefinition", 0xFFFFFFFFFFFFFFFFui64);
+  this->mLoadStatus = Undefined;
+  this->mLastReferencedFrame = 0;
+  this->mInstances.p = 0i64;
+  *(_QWORD *)&this->mInstances.size = 0i64;
+  UFG::qMemSet(this->mPriorityRefCounts, 0, 0x14u);
 }
 
 // File Line: 65
@@ -26,14 +24,12 @@ void __fastcall UFG::PartRequest::PartRequest(UFG::PartRequest *this)
 __int64 __fastcall UFG::PartRequest::GetHighestBucket(UFG::PartRequest *this)
 {
   __int64 result; // rax
-  unsigned int *v2; // rcx
+  unsigned int *i; // rcx
 
   result = 0i64;
-  v2 = this->mPriorityRefCounts;
-  while ( !*v2 )
+  for ( i = this->mPriorityRefCounts; !*i; ++i )
   {
     result = (unsigned int)(result + 1);
-    ++v2;
     if ( (unsigned int)result >= 5 )
       return 0i64;
   }
@@ -44,48 +40,40 @@ __int64 __fastcall UFG::PartRequest::GetHighestBucket(UFG::PartRequest *this)
 // RVA: 0x1599D0
 void __fastcall UFG::PartRequest::OnLoaded(UFG::PartRequest *this)
 {
-  __int64 v1; // r10
-  UFG::PartRequest *v2; // r9
+  __int64 i; // r10
   UFG::PartLoader *v3; // r8
   __int64 v4; // rax
-  __int64 v5; // rdx
-  signed __int64 v6; // rdx
-  signed __int64 v7; // rcx
+  __int64 mPartRequestCount; // rdx
+  __int64 v6; // rdx
+  __int64 v7; // rcx
 
-  v1 = 0i64;
-  v2 = this;
-  if ( this->mInstances.size )
+  for ( i = 0i64; (unsigned int)i < this->mInstances.size; v3->mPartsDirty = 1 )
   {
-    do
+    v3 = this->mInstances.p[i];
+    v4 = 0i64;
+    mPartRequestCount = v3->mPartRequestCount;
+    if ( (_DWORD)mPartRequestCount )
     {
-      v3 = v2->mInstances.p[v1];
-      v4 = 0i64;
-      v5 = v3->mPartRequestCount;
-      if ( (_DWORD)v5 )
+      while ( v3->mPartRequests[v4] != this )
       {
-        while ( v3->mPartRequests[v4] != v2 )
-        {
-          v4 = (unsigned int)(v4 + 1);
-          if ( (unsigned int)v4 >= (unsigned int)v5 )
-            goto LABEL_5;
-        }
-        v6 = 1i64 << (v4 & 0x3F);
-        v7 = (signed __int64)(signed int)v4 >> 6;
-        v3->mRequestsLoadedFlags.mBits[v7] |= v6;
-        v3->mRequestsDispatchEventFlags.mBits[v7] |= v6;
+        v4 = (unsigned int)(v4 + 1);
+        if ( (unsigned int)v4 >= (unsigned int)mPartRequestCount )
+          goto LABEL_5;
       }
-      else
-      {
-LABEL_5:
-        v3->mPartRequests[v5] = v2;
-        v3->mRequestsLoadedFlags.mBits[(signed __int64)(signed int)v3->mPartRequestCount >> 6] |= 1i64 << (v3->mPartRequestCount & 0x3F);
-        v3->mRequestsDispatchEventFlags.mBits[(signed __int64)(signed int)v3->mPartRequestCount >> 6] |= 1i64 << (v3->mPartRequestCount & 0x3F);
-        ++v3->mPartRequestCount;
-      }
-      v1 = (unsigned int)(v1 + 1);
-      v3->mPartsDirty = 1;
+      v6 = 1i64 << (v4 & 0x3F);
+      v7 = (__int64)(int)v4 >> 6;
+      v3->mRequestsLoadedFlags.mBits[v7] |= v6;
+      v3->mRequestsDispatchEventFlags.mBits[v7] |= v6;
     }
-    while ( (unsigned int)v1 < v2->mInstances.size );
+    else
+    {
+LABEL_5:
+      v3->mPartRequests[mPartRequestCount] = this;
+      v3->mRequestsLoadedFlags.mBits[(__int64)(int)v3->mPartRequestCount >> 6] |= 1i64 << (v3->mPartRequestCount & 0x3F);
+      v3->mRequestsDispatchEventFlags.mBits[(__int64)(int)v3->mPartRequestCount >> 6] |= 1i64 << (v3->mPartRequestCount & 0x3F);
+      ++v3->mPartRequestCount;
+    }
+    i = (unsigned int)(i + 1);
   }
 }
 
@@ -93,23 +81,19 @@ LABEL_5:
 // RVA: 0x1561F0
 void __fastcall UFG::PartRequest::AddDependency(UFG::PartRequest *this, UFG::PartLoader *dependency)
 {
-  __int64 v2; // rbp
-  UFG::PartLoader *v3; // r14
-  unsigned int v4; // edx
+  __int64 size; // rbp
+  unsigned int capacity; // edx
   unsigned int v5; // ebx
-  UFG::PartRequest *v6; // rsi
   unsigned int v7; // edx
-  UFG::PartLoader **v8; // rax
+  UFG::PartLoader **p; // rax
 
-  v2 = this->mInstances.size;
-  v3 = dependency;
-  v4 = this->mInstances.capacity;
-  v5 = v2 + 1;
-  v6 = this;
-  if ( (signed int)v2 + 1 > v4 )
+  size = this->mInstances.size;
+  capacity = this->mInstances.capacity;
+  v5 = size + 1;
+  if ( (int)size + 1 > capacity )
   {
-    if ( v4 )
-      v7 = 2 * v4;
+    if ( capacity )
+      v7 = 2 * capacity;
     else
       v7 = 1;
     for ( ; v7 < v5; v7 *= 2 )
@@ -117,30 +101,28 @@ void __fastcall UFG::PartRequest::AddDependency(UFG::PartRequest *this, UFG::Par
     if ( v7 <= 2 )
       v7 = 2;
     if ( v7 - v5 > 0x10000 )
-      v7 = v2 + 65537;
+      v7 = size + 65537;
     UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(
       (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&this->mInstances,
       v7,
       "PartRequest::AddDependency");
   }
-  v8 = v6->mInstances.p;
-  v6->mInstances.size = v5;
-  v8[v2] = v3;
-  ++v6->mPriorityRefCounts[v3->mPriority];
-  v6->mLastReferencedFrame = Illusion::gEngine.mFrameCount;
+  p = this->mInstances.p;
+  this->mInstances.size = v5;
+  p[size] = dependency;
+  ++this->mPriorityRefCounts[dependency->mPriority];
+  this->mLastReferencedFrame = Illusion::gEngine.mFrameCount;
 }
 
 // File Line: 132
 // RVA: 0x152FD0
 void __fastcall UFG::PartPool::Bucket::Bucket(UFG::PartPool::Bucket *this)
 {
-  UFG::PartPool::Bucket *v1; // rbx
   unsigned __int64 v2; // rax
   char *v3; // rax
-  char *v4; // rdi
-  unsigned int i; // er9
+  UFG::PartRequest **v4; // rdi
+  unsigned int i; // r9d
 
-  v1 = this;
   this->mPriority = 0;
   this->mRequests.p = 0i64;
   *(_QWORD *)&this->mRequests.size = 0i64;
@@ -153,112 +135,96 @@ void __fastcall UFG::PartPool::Bucket::Bucket(UFG::PartPool::Bucket *this)
     if ( !is_mul_ok(0x10ui64, 8ui64) )
       v2 = -1i64;
     v3 = UFG::qMalloc(v2, "Bucket", 0i64);
-    v4 = v3;
-    if ( v1->mRequests.p )
+    v4 = (UFG::PartRequest **)v3;
+    if ( this->mRequests.p )
     {
-      for ( i = 0; i < v1->mRequests.size; ++i )
-        *(_QWORD *)&v3[8 * i] = v1->mRequests.p[i];
-      operator delete[](v1->mRequests.p);
+      for ( i = 0; i < this->mRequests.size; ++i )
+        *(_QWORD *)&v3[8 * i] = this->mRequests.p[i];
+      operator delete[](this->mRequests.p);
     }
-    v1->mRequests.p = (UFG::PartRequest **)v4;
-    v1->mRequests.capacity = 16;
+    this->mRequests.p = v4;
+    this->mRequests.capacity = 16;
   }
-  *(_QWORD *)&v1->mMemoryUsageModel = 0i64;
+  *(_QWORD *)&this->mMemoryUsageModel = 0i64;
 }
 
 // File Line: 138
 // RVA: 0x15B530
 void __fastcall UFG::PartPool::Bucket::UpdateSize(UFG::PartPool::Bucket *this)
 {
-  UFG::PartPool::Bucket *v1; // rbx
-  __int64 v2; // rdi
-  __int64 v3; // rsi
+  __int64 i; // rdi
+  __int64 j; // rsi
   UFG::PartRequest *v4; // rbp
-  UFG::PartDefinition *v5; // rdi
-  unsigned int v6; // eax
+  UFG::PartDefinition *mData; // rdi
+  unsigned int mModelSize; // eax
   UFG::qReflectObject *v7; // rdi
-  int v8; // eax
-  unsigned int v9; // eax
-  unsigned int v10; // edx
-  unsigned int v11; // er8
-  UFG::PartPool::Bucket **v12; // rcx
+  int mTypeUID_high; // eax
+  unsigned int size; // eax
+  unsigned int mMemoryUsageModel; // edx
+  unsigned int mMemoryUsageTexture; // r8d
+  UFG::PartPool::Bucket **p; // rcx
   __int64 v13; // r9
-  UFG::qString v14; // [rsp+28h] [rbp-80h]
-  UFG::qString v15; // [rsp+50h] [rbp-58h]
-  UFG::qString result; // [rsp+78h] [rbp-30h]
+  UFG::qString v14; // [rsp+28h] [rbp-80h] BYREF
+  UFG::qString v15; // [rsp+50h] [rbp-58h] BYREF
+  UFG::qString result; // [rsp+78h] [rbp-30h] BYREF
 
-  v1 = this;
   *(_QWORD *)&this->mMemoryUsageModel = 0i64;
-  v2 = 0i64;
-  if ( this->mChildren.size )
+  for ( i = 0i64; (unsigned int)i < this->mChildren.size; i = (unsigned int)(i + 1) )
+    UFG::PartPool::Bucket::UpdateSize(this->mChildren.p[i]);
+  for ( j = 0i64; (unsigned int)j < this->mRequests.size; j = (unsigned int)(j + 1) )
   {
-    do
+    v4 = this->mRequests.p[j];
+    mData = (UFG::PartDefinition *)v4->mPartDefHandle.mData;
+    if ( mData )
     {
-      UFG::PartPool::Bucket::UpdateSize(v1->mChildren.p[v2]);
-      v2 = (unsigned int)(v2 + 1);
+      if ( !mData->mModelSize )
+      {
+        UFG::PartDefinition::GetModelFileName((UFG::PartDefinition *)v4->mPartDefHandle.mData, &result);
+        mData->mModelSize = PartDatabase_QueryFileSize(result.mData);
+        UFG::PartDefinition::GetTextureFileName(mData, &v15);
+        mData->mModelSize += PartDatabase_QueryFileSize(v15.mData);
+        UFG::qString::~qString(&v15);
+        UFG::qString::~qString(&result);
+      }
+      mModelSize = mData->mModelSize;
     }
-    while ( (unsigned int)v2 < v1->mChildren.size );
-  }
-  v3 = 0i64;
-  if ( v1->mRequests.size )
-  {
-    do
+    else
     {
-      v4 = v1->mRequests.p[v3];
-      v5 = (UFG::PartDefinition *)v4->mPartDefHandle.mData;
-      if ( v5 )
-      {
-        if ( !v5->mModelSize )
-        {
-          UFG::PartDefinition::GetModelFileName((UFG::PartDefinition *)v4->mPartDefHandle.mData, &result);
-          v5->mModelSize = PartDatabase_QueryFileSize(result.mData);
-          UFG::PartDefinition::GetTextureFileName(v5, &v15);
-          v5->mModelSize += PartDatabase_QueryFileSize(v15.mData);
-          UFG::qString::~qString(&v15);
-          UFG::qString::~qString(&result);
-        }
-        v6 = v5->mModelSize;
-      }
-      else
-      {
-        v6 = 0;
-      }
-      v1->mMemoryUsageModel += v6;
-      v7 = v4->mPartDefHandle.mData;
-      if ( v7 )
-      {
-        if ( !HIDWORD(v7[2].mTypeUID) )
-        {
-          UFG::PartDefinition::GetTextureFileName((UFG::PartDefinition *)v4->mPartDefHandle.mData, &v14);
-          UFG::qString::ReplaceString(&v14, ".perm.bin", ".temp.bin", 0);
-          HIDWORD(v7[2].mTypeUID) = PartDatabase_QueryFileSize(v14.mData);
-          UFG::qString::~qString(&v14);
-        }
-        v8 = HIDWORD(v7[2].mTypeUID);
-      }
-      else
-      {
-        v8 = 0;
-      }
-      v1->mMemoryUsageTexture += v8;
-      v3 = (unsigned int)(v3 + 1);
+      mModelSize = 0;
     }
-    while ( (unsigned int)v3 < v1->mRequests.size );
+    this->mMemoryUsageModel += mModelSize;
+    v7 = v4->mPartDefHandle.mData;
+    if ( v7 )
+    {
+      if ( !HIDWORD(v7[2].mTypeUID) )
+      {
+        UFG::PartDefinition::GetTextureFileName((UFG::PartDefinition *)v4->mPartDefHandle.mData, &v14);
+        UFG::qString::ReplaceString(&v14, ".perm.bin", ".temp.bin", 0);
+        HIDWORD(v7[2].mTypeUID) = PartDatabase_QueryFileSize(v14.mData);
+        UFG::qString::~qString(&v14);
+      }
+      mTypeUID_high = HIDWORD(v7[2].mTypeUID);
+    }
+    else
+    {
+      mTypeUID_high = 0;
+    }
+    this->mMemoryUsageTexture += mTypeUID_high;
   }
-  v9 = v1->mChildren.size;
-  if ( v9 )
+  size = this->mChildren.size;
+  if ( size )
   {
-    v10 = v1->mMemoryUsageModel;
-    v11 = v1->mMemoryUsageTexture;
-    v12 = v1->mChildren.p;
-    v13 = v9;
+    mMemoryUsageModel = this->mMemoryUsageModel;
+    mMemoryUsageTexture = this->mMemoryUsageTexture;
+    p = this->mChildren.p;
+    v13 = size;
     do
     {
-      v10 += (*v12)->mMemoryUsageModel;
-      v1->mMemoryUsageModel = v10;
-      v11 += (*v12)->mMemoryUsageTexture;
-      v1->mMemoryUsageTexture = v11;
-      ++v12;
+      mMemoryUsageModel += (*p)->mMemoryUsageModel;
+      this->mMemoryUsageModel = mMemoryUsageModel;
+      mMemoryUsageTexture += (*p)->mMemoryUsageTexture;
+      this->mMemoryUsageTexture = mMemoryUsageTexture;
+      ++p;
       --v13;
     }
     while ( v13 );
@@ -271,21 +237,13 @@ void __fastcall UFG::PartPool::Bucket::UpdatePriority(UFG::PartPool::Bucket *thi
 {
   __int64 v2; // rbx
   unsigned int v3; // edi
-  UFG::PartPool::Bucket *v4; // rsi
 
   v2 = 0i64;
   v3 = priority;
-  v4 = this;
-  this->mPriority = priority;
-  if ( this->mChildren.size )
+  for ( this->mPriority = priority; (unsigned int)v2 < this->mChildren.size; v2 = (unsigned int)(v2 + 1) )
   {
-    do
-    {
-      v3 += v2 + 1;
-      UFG::PartPool::Bucket::UpdatePriority(v4->mChildren.p[v2], v3);
-      v2 = (unsigned int)(v2 + 1);
-    }
-    while ( (unsigned int)v2 < v4->mChildren.size );
+    v3 += v2 + 1;
+    UFG::PartPool::Bucket::UpdatePriority(this->mChildren.p[v2], v3);
   }
 }
 
@@ -300,20 +258,17 @@ bool __fastcall UFG::SortByReferenceFramePredicate(UFG::PartRequest *a, UFG::Par
 // RVA: 0x154380
 void __fastcall UFG::PartPool::PartPool(UFG::PartPool *this)
 {
-  UFG::PartPool *v1; // rbx
   unsigned int v2; // edi
   unsigned __int64 v3; // rax
   char *v4; // rsi
-  unsigned int i; // er8
+  unsigned int i; // r8d
   unsigned __int64 v6; // rax
   char *v7; // rsi
-  unsigned int j; // er8
+  unsigned int j; // r8d
   unsigned __int64 v9; // rax
   char *v10; // rax
-  char *v11; // rsi
-  UFG::qList<UFG::PartRequest,UFG::PartRequest,1,0> *v12; // [rsp+58h] [rbp+10h]
+  UFG::PartRequest **v11; // rsi
 
-  v1 = this;
   v2 = 0;
   this->mQueued.p = 0i64;
   *(_QWORD *)&this->mQueued.size = 0i64;
@@ -321,9 +276,8 @@ void __fastcall UFG::PartPool::PartPool(UFG::PartPool *this)
   *(_QWORD *)&this->mLoading.size = 0i64;
   this->mLoaded.p = 0i64;
   *(_QWORD *)&this->mLoaded.size = 0i64;
-  v12 = &this->mRequestList;
-  v12->mNode.mPrev = &v12->mNode;
-  v12->mNode.mNext = &v12->mNode;
+  this->mRequestList.mNode.mPrev = &this->mRequestList.mNode;
+  this->mRequestList.mNode.mNext = &this->mRequestList.mNode;
   *(_QWORD *)&this->mMaxModelMemory = 0i64;
   *(_QWORD *)&this->mExternalUsedModelMemory = 0i64;
   this->mFragmentationReservePercentage = 0.050000001;
@@ -334,322 +288,303 @@ void __fastcall UFG::PartPool::PartPool(UFG::PartPool *this)
     if ( !is_mul_ok(0x20ui64, 8ui64) )
       v3 = -1i64;
     v4 = UFG::qMalloc(v3, "PartPool", 0i64);
-    if ( v1->mQueued.p )
+    if ( this->mQueued.p )
     {
-      for ( i = 0; i < v1->mQueued.size; ++i )
-        *(_QWORD *)&v4[8 * i] = v1->mQueued.p[i];
-      operator delete[](v1->mQueued.p);
+      for ( i = 0; i < this->mQueued.size; ++i )
+        *(_QWORD *)&v4[8 * i] = this->mQueued.p[i];
+      operator delete[](this->mQueued.p);
     }
-    v1->mQueued.p = (UFG::PartRequest **)v4;
-    v1->mQueued.capacity = 32;
+    this->mQueued.p = (UFG::PartRequest **)v4;
+    this->mQueued.capacity = 32;
   }
-  if ( v1->mLoading.capacity < 0x20 && v1->mLoading.size != 32 )
+  if ( this->mLoading.capacity < 0x20 && this->mLoading.size != 32 )
   {
     v6 = 256i64;
     if ( !is_mul_ok(0x20ui64, 8ui64) )
       v6 = -1i64;
     v7 = UFG::qMalloc(v6, "PartPool", 0i64);
-    if ( v1->mLoading.p )
+    if ( this->mLoading.p )
     {
-      for ( j = 0; j < v1->mLoading.size; ++j )
-        *(_QWORD *)&v7[8 * j] = v1->mLoading.p[j];
-      operator delete[](v1->mLoading.p);
+      for ( j = 0; j < this->mLoading.size; ++j )
+        *(_QWORD *)&v7[8 * j] = this->mLoading.p[j];
+      operator delete[](this->mLoading.p);
     }
-    v1->mLoading.p = (UFG::PartRequest **)v7;
-    v1->mLoading.capacity = 32;
+    this->mLoading.p = (UFG::PartRequest **)v7;
+    this->mLoading.capacity = 32;
   }
-  if ( v1->mLoaded.capacity < 0x20 && v1->mLoaded.size != 32 )
+  if ( this->mLoaded.capacity < 0x20 && this->mLoaded.size != 32 )
   {
     v9 = 256i64;
     if ( !is_mul_ok(0x20ui64, 8ui64) )
       v9 = -1i64;
     v10 = UFG::qMalloc(v9, "PartPool", 0i64);
-    v11 = v10;
-    if ( v1->mLoaded.p )
+    v11 = (UFG::PartRequest **)v10;
+    if ( this->mLoaded.p )
     {
-      if ( v1->mLoaded.size )
+      if ( this->mLoaded.size )
       {
         do
         {
-          *(_QWORD *)&v10[8 * v2] = v1->mLoaded.p[v2];
+          *(_QWORD *)&v10[8 * v2] = this->mLoaded.p[v2];
           ++v2;
         }
-        while ( v2 < v1->mLoaded.size );
+        while ( v2 < this->mLoaded.size );
       }
-      operator delete[](v1->mLoaded.p);
+      operator delete[](this->mLoaded.p);
     }
-    v1->mLoaded.p = (UFG::PartRequest **)v11;
-    v1->mLoaded.capacity = 32;
+    this->mLoaded.p = v11;
+    this->mLoaded.capacity = 32;
   }
-  UFG::PartPool::InitBuckets(v1);
+  UFG::PartPool::InitBuckets(this);
 }
 
 // File Line: 204
 // RVA: 0x155370
 void __fastcall UFG::PartPool::~PartPool(UFG::PartPool *this)
 {
-  UFG::qList<UFG::PartRequest,UFG::PartRequest,1,0> *v1; // rdi
-  UFG::PartPool::Bucket *v2; // rbx
-  UFG::PartPool::Bucket **v3; // rcx
+  UFG::PartPool::Bucket *mMasterBucket; // rbx
+  UFG::PartPool::Bucket **p; // rcx
   UFG::PartRequest **v4; // rcx
-  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *v5; // rbx
-  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *v6; // rcx
-  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *v7; // rcx
-  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *v8; // rbx
-  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *v9; // rcx
-  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *v10; // rcx
-  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *v11; // rbx
-  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *v12; // rcx
-  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *v13; // rcx
-  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *v14; // rbx
-  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *v15; // rcx
-  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *v16; // rcx
-  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *v17; // rcx
-  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *v18; // rax
-  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *v19; // rcx
-  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *v20; // rcx
-  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *v21; // rcx
+  UFG::PartPool::Bucket *mReservedBucket; // rbx
+  UFG::PartPool::Bucket **v6; // rcx
+  UFG::PartRequest **v7; // rcx
+  UFG::PartPool::Bucket *mCriticalBucket; // rbx
+  UFG::PartPool::Bucket **v9; // rcx
+  UFG::PartRequest **v10; // rcx
+  UFG::PartPool::Bucket *mHighBucket; // rbx
+  UFG::PartPool::Bucket **v12; // rcx
+  UFG::PartRequest **v13; // rcx
+  UFG::PartPool::Bucket *mLowBucket; // rbx
+  UFG::PartPool::Bucket **v15; // rcx
+  UFG::PartRequest **v16; // rcx
+  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *mPrev; // rcx
+  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *mNext; // rax
+  UFG::PartRequest **v19; // rcx
+  UFG::PartRequest **v20; // rcx
+  UFG::PartRequest **v21; // rcx
 
-  v1 = (UFG::qList<UFG::PartRequest,UFG::PartRequest,1,0> *)this;
-  v2 = this->mMasterBucket;
-  if ( v2 )
+  mMasterBucket = this->mMasterBucket;
+  if ( mMasterBucket )
   {
-    v3 = v2->mChildren.p;
-    if ( v3 )
-      operator delete[](v3);
-    v2->mChildren.p = 0i64;
-    *(_QWORD *)&v2->mChildren.size = 0i64;
-    v4 = v2->mRequests.p;
+    p = mMasterBucket->mChildren.p;
+    if ( p )
+      operator delete[](p);
+    mMasterBucket->mChildren.p = 0i64;
+    *(_QWORD *)&mMasterBucket->mChildren.size = 0i64;
+    v4 = mMasterBucket->mRequests.p;
     if ( v4 )
       operator delete[](v4);
-    v2->mRequests.p = 0i64;
-    *(_QWORD *)&v2->mRequests.size = 0i64;
-    operator delete[](v2);
+    mMasterBucket->mRequests.p = 0i64;
+    *(_QWORD *)&mMasterBucket->mRequests.size = 0i64;
+    operator delete[](mMasterBucket);
   }
-  v5 = v1[4].mNode.mPrev;
-  if ( v5 )
+  mReservedBucket = this->mReservedBucket;
+  if ( mReservedBucket )
   {
-    v6 = v5[3].mPrev;
+    v6 = mReservedBucket->mChildren.p;
     if ( v6 )
       operator delete[](v6);
-    v5[3].mPrev = 0i64;
-    v5[2].mNext = 0i64;
-    v7 = v5[1].mNext;
+    mReservedBucket->mChildren.p = 0i64;
+    *(_QWORD *)&mReservedBucket->mChildren.size = 0i64;
+    v7 = mReservedBucket->mRequests.p;
     if ( v7 )
       operator delete[](v7);
-    v5[1].mNext = 0i64;
-    v5[1].mPrev = 0i64;
-    operator delete[](v5);
+    mReservedBucket->mRequests.p = 0i64;
+    *(_QWORD *)&mReservedBucket->mRequests.size = 0i64;
+    operator delete[](mReservedBucket);
   }
-  v8 = v1[4].mNode.mNext;
-  if ( v8 )
+  mCriticalBucket = this->mCriticalBucket;
+  if ( mCriticalBucket )
   {
-    v9 = v8[3].mPrev;
+    v9 = mCriticalBucket->mChildren.p;
     if ( v9 )
       operator delete[](v9);
-    v8[3].mPrev = 0i64;
-    v8[2].mNext = 0i64;
-    v10 = v8[1].mNext;
+    mCriticalBucket->mChildren.p = 0i64;
+    *(_QWORD *)&mCriticalBucket->mChildren.size = 0i64;
+    v10 = mCriticalBucket->mRequests.p;
     if ( v10 )
       operator delete[](v10);
-    v8[1].mNext = 0i64;
-    v8[1].mPrev = 0i64;
-    operator delete[](v8);
+    mCriticalBucket->mRequests.p = 0i64;
+    *(_QWORD *)&mCriticalBucket->mRequests.size = 0i64;
+    operator delete[](mCriticalBucket);
   }
-  v11 = v1[5].mNode.mPrev;
-  if ( v11 )
+  mHighBucket = this->mHighBucket;
+  if ( mHighBucket )
   {
-    v12 = v11[3].mPrev;
+    v12 = mHighBucket->mChildren.p;
     if ( v12 )
       operator delete[](v12);
-    v11[3].mPrev = 0i64;
-    v11[2].mNext = 0i64;
-    v13 = v11[1].mNext;
+    mHighBucket->mChildren.p = 0i64;
+    *(_QWORD *)&mHighBucket->mChildren.size = 0i64;
+    v13 = mHighBucket->mRequests.p;
     if ( v13 )
       operator delete[](v13);
-    v11[1].mNext = 0i64;
-    v11[1].mPrev = 0i64;
-    operator delete[](v11);
+    mHighBucket->mRequests.p = 0i64;
+    *(_QWORD *)&mHighBucket->mRequests.size = 0i64;
+    operator delete[](mHighBucket);
   }
-  v14 = v1[5].mNode.mNext;
-  if ( v14 )
+  mLowBucket = this->mLowBucket;
+  if ( mLowBucket )
   {
-    v15 = v14[3].mPrev;
+    v15 = mLowBucket->mChildren.p;
     if ( v15 )
       operator delete[](v15);
-    v14[3].mPrev = 0i64;
-    v14[2].mNext = 0i64;
-    v16 = v14[1].mNext;
+    mLowBucket->mChildren.p = 0i64;
+    *(_QWORD *)&mLowBucket->mChildren.size = 0i64;
+    v16 = mLowBucket->mRequests.p;
     if ( v16 )
       operator delete[](v16);
-    v14[1].mNext = 0i64;
-    v14[1].mPrev = 0i64;
-    operator delete[](v14);
+    mLowBucket->mRequests.p = 0i64;
+    *(_QWORD *)&mLowBucket->mRequests.size = 0i64;
+    operator delete[](mLowBucket);
   }
-  UFG::qList<UFG::PartRequest,UFG::PartRequest,1,0>::DeleteNodes(v1 + 6);
-  v17 = v1[6].mNode.mPrev;
-  v18 = v1[6].mNode.mNext;
-  v17->mNext = v18;
-  v18->mPrev = v17;
-  v1[6].mNode.mPrev = &v1[6].mNode;
-  v1[6].mNode.mNext = &v1[6].mNode;
-  v19 = v1[2].mNode.mNext;
+  UFG::qList<UFG::PartRequest,UFG::PartRequest,1,0>::DeleteNodes(&this->mRequestList);
+  mPrev = this->mRequestList.mNode.mPrev;
+  mNext = this->mRequestList.mNode.mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->mRequestList.mNode.mPrev = &this->mRequestList.mNode;
+  this->mRequestList.mNode.mNext = &this->mRequestList.mNode;
+  v19 = this->mLoaded.p;
   if ( v19 )
     operator delete[](v19);
-  v1[2].mNode.mNext = 0i64;
-  v1[2].mNode.mPrev = 0i64;
-  v20 = v1[1].mNode.mNext;
+  this->mLoaded.p = 0i64;
+  *(_QWORD *)&this->mLoaded.size = 0i64;
+  v20 = this->mLoading.p;
   if ( v20 )
     operator delete[](v20);
-  v1[1].mNode.mNext = 0i64;
-  v1[1].mNode.mPrev = 0i64;
-  v21 = v1->mNode.mNext;
+  this->mLoading.p = 0i64;
+  *(_QWORD *)&this->mLoading.size = 0i64;
+  v21 = this->mQueued.p;
   if ( v21 )
     operator delete[](v21);
-  v1->mNode.mNext = 0i64;
-  v1->mNode.mPrev = 0i64;
+  this->mQueued.p = 0i64;
+  *(_QWORD *)&this->mQueued.size = 0i64;
 }
 
 // File Line: 223
 // RVA: 0x158DB0
 __int64 __fastcall UFG::PartPool::GetQueuedBytes(UFG::PartPool *this)
 {
-  UFG::PartPool *v1; // rdi
   unsigned int v2; // ebx
-  __int64 v3; // rbp
-  UFG::PartDefinition *v4; // rcx
-  int v5; // eax
+  __int64 i; // rbp
+  UFG::PartDefinition *mData; // rcx
+  int ModelSize; // eax
   int v6; // ebx
   UFG::PartRequest *v7; // rcx
   UFG::qReflectObject *v8; // rsi
-  int v9; // eax
-  __int64 v10; // rbp
+  int mTypeUID_high; // eax
+  __int64 j; // rbp
   UFG::PartRequest *v11; // rcx
   UFG::PartDefinition *v12; // rsi
-  unsigned int v13; // eax
-  int v14; // ebx
+  unsigned int mModelSize; // eax
+  unsigned int v14; // ebx
   UFG::PartRequest *v15; // rcx
   UFG::qReflectObject *v16; // rsi
   int v17; // eax
-  UFG::qString result; // [rsp+20h] [rbp-88h]
+  UFG::qString result; // [rsp+20h] [rbp-88h] BYREF
   __int64 v20; // [rsp+48h] [rbp-60h]
-  UFG::qString v21; // [rsp+50h] [rbp-58h]
-  UFG::qString v22; // [rsp+78h] [rbp-30h]
+  UFG::qString v21; // [rsp+50h] [rbp-58h] BYREF
+  UFG::qString v22; // [rsp+78h] [rbp-30h] BYREF
 
   v20 = -2i64;
-  v1 = this;
   v2 = 0;
-  v3 = 0i64;
-  if ( this->mQueued.size )
+  for ( i = 0i64; (unsigned int)i < this->mQueued.size; i = (unsigned int)(i + 1) )
   {
-    do
+    mData = (UFG::PartDefinition *)this->mQueued.p[i]->mPartDefHandle.mData;
+    if ( mData )
+      ModelSize = UFG::PartDefinition::GetModelSize(mData);
+    else
+      ModelSize = 0;
+    v6 = ModelSize + v2;
+    v7 = this->mQueued.p[i];
+    v8 = v7->mPartDefHandle.mData;
+    if ( v8 )
     {
-      v4 = (UFG::PartDefinition *)v1->mQueued.p[v3]->mPartDefHandle.mData;
-      if ( v4 )
-        v5 = UFG::PartDefinition::GetModelSize(v4);
-      else
-        v5 = 0;
-      v6 = v5 + v2;
-      v7 = v1->mQueued.p[v3];
-      v8 = v7->mPartDefHandle.mData;
-      if ( v8 )
+      if ( !HIDWORD(v8[2].mTypeUID) )
       {
-        if ( !HIDWORD(v8[2].mTypeUID) )
-        {
-          UFG::PartDefinition::GetTextureFileName((UFG::PartDefinition *)v7->mPartDefHandle.mData, &result);
-          UFG::qString::ReplaceString(&result, ".perm.bin", ".temp.bin", 0);
-          HIDWORD(v8[2].mTypeUID) = PartDatabase_QueryFileSize(result.mData);
-          UFG::qString::~qString(&result);
-        }
-        v9 = HIDWORD(v8[2].mTypeUID);
+        UFG::PartDefinition::GetTextureFileName((UFG::PartDefinition *)v7->mPartDefHandle.mData, &result);
+        UFG::qString::ReplaceString(&result, ".perm.bin", ".temp.bin", 0);
+        HIDWORD(v8[2].mTypeUID) = PartDatabase_QueryFileSize(result.mData);
+        UFG::qString::~qString(&result);
       }
-      else
-      {
-        v9 = 0;
-      }
-      v2 = v9 + v6;
-      v3 = (unsigned int)(v3 + 1);
+      mTypeUID_high = HIDWORD(v8[2].mTypeUID);
     }
-    while ( (unsigned int)v3 < v1->mQueued.size );
+    else
+    {
+      mTypeUID_high = 0;
+    }
+    v2 = mTypeUID_high + v6;
   }
-  v10 = 0i64;
-  if ( v1->mLoading.size )
+  for ( j = 0i64; (unsigned int)j < this->mLoading.size; j = (unsigned int)(j + 1) )
   {
-    do
+    v11 = this->mLoading.p[j];
+    v12 = (UFG::PartDefinition *)v11->mPartDefHandle.mData;
+    if ( v12 )
     {
-      v11 = v1->mLoading.p[v10];
-      v12 = (UFG::PartDefinition *)v11->mPartDefHandle.mData;
-      if ( v12 )
+      if ( !v12->mModelSize )
       {
-        if ( !v12->mModelSize )
-        {
-          UFG::PartDefinition::GetModelFileName((UFG::PartDefinition *)v11->mPartDefHandle.mData, &v22);
-          v12->mModelSize = PartDatabase_QueryFileSize(v22.mData);
-          UFG::PartDefinition::GetTextureFileName(v12, &v21);
-          v12->mModelSize += PartDatabase_QueryFileSize(v21.mData);
-          UFG::qString::~qString(&v21);
-          UFG::qString::~qString(&v22);
-        }
-        v13 = v12->mModelSize;
+        UFG::PartDefinition::GetModelFileName((UFG::PartDefinition *)v11->mPartDefHandle.mData, &v22);
+        v12->mModelSize = PartDatabase_QueryFileSize(v22.mData);
+        UFG::PartDefinition::GetTextureFileName(v12, &v21);
+        v12->mModelSize += PartDatabase_QueryFileSize(v21.mData);
+        UFG::qString::~qString(&v21);
+        UFG::qString::~qString(&v22);
       }
-      else
-      {
-        v13 = 0;
-      }
-      v14 = v13 + v2;
-      v15 = v1->mLoading.p[v10];
-      v16 = v15->mPartDefHandle.mData;
-      if ( v16 )
-      {
-        if ( !HIDWORD(v16[2].mTypeUID) )
-        {
-          UFG::PartDefinition::GetTextureFileName((UFG::PartDefinition *)v15->mPartDefHandle.mData, &result);
-          UFG::qString::ReplaceString(&result, ".perm.bin", ".temp.bin", 0);
-          HIDWORD(v16[2].mTypeUID) = PartDatabase_QueryFileSize(result.mData);
-          UFG::qString::~qString(&result);
-        }
-        v17 = HIDWORD(v16[2].mTypeUID);
-      }
-      else
-      {
-        v17 = 0;
-      }
-      v2 = v17 + v14;
-      v10 = (unsigned int)(v10 + 1);
+      mModelSize = v12->mModelSize;
     }
-    while ( (unsigned int)v10 < v1->mLoading.size );
+    else
+    {
+      mModelSize = 0;
+    }
+    v14 = mModelSize + v2;
+    v15 = this->mLoading.p[j];
+    v16 = v15->mPartDefHandle.mData;
+    if ( v16 )
+    {
+      if ( !HIDWORD(v16[2].mTypeUID) )
+      {
+        UFG::PartDefinition::GetTextureFileName((UFG::PartDefinition *)v15->mPartDefHandle.mData, &result);
+        UFG::qString::ReplaceString(&result, ".perm.bin", ".temp.bin", 0);
+        HIDWORD(v16[2].mTypeUID) = PartDatabase_QueryFileSize(result.mData);
+        UFG::qString::~qString(&result);
+      }
+      v17 = HIDWORD(v16[2].mTypeUID);
+    }
+    else
+    {
+      v17 = 0;
+    }
+    v2 = v17 + v14;
   }
   return v2;
 }
 
 // File Line: 240
 // RVA: 0x15A6B0
-UFG::qNode<UFG::PartRequest,UFG::PartRequest> *__fastcall UFG::PartPool::RequestLoadPart(UFG::PartPool *this, UFG::PartDefinition *part, UFG::PartLoader *user)
+UFG::PartRequest *__fastcall UFG::PartPool::RequestLoadPart(
+        UFG::PartPool *this,
+        UFG::PartDefinition *part,
+        UFG::PartLoader *user)
 {
-  UFG::PartLoader *v3; // rbp
-  UFG::PartDefinition *v4; // r14
-  UFG::PartPool *v5; // rsi
-  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *v6; // rbx
-  UFG::qList<UFG::PartRequest,UFG::PartRequest,1,0> *v7; // rdi
+  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *mNext; // rbx
+  UFG::qList<UFG::PartRequest,UFG::PartRequest,1,0> *p_mRequestList; // rdi
   char *v8; // rax
   UFG::qNode<UFG::PartRequest,UFG::PartRequest> *v9; // rax
-  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *v10; // rax
-  UFG::qPropertySet *item; // [rsp+50h] [rbp+8h]
+  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *mPrev; // rax
+  UFG::qPropertySet *item; // [rsp+50h] [rbp+8h] BYREF
 
-  v3 = user;
-  v4 = part;
-  v5 = this;
-  v6 = this->mRequestList.mNode.mNext;
-  v7 = &this->mRequestList;
-  if ( v6 != (UFG::qNode<UFG::PartRequest,UFG::PartRequest> *)&this->mRequestList )
+  mNext = this->mRequestList.mNode.mNext;
+  p_mRequestList = &this->mRequestList;
+  if ( mNext != (UFG::qNode<UFG::PartRequest,UFG::PartRequest> *)&this->mRequestList )
   {
-    while ( v6[4].mPrev != (UFG::qNode<UFG::PartRequest,UFG::PartRequest> *)part->mBaseNode.mUID )
+    while ( mNext[4].mPrev != (UFG::qNode<UFG::PartRequest,UFG::PartRequest> *)part->mBaseNode.mUID )
     {
-      v6 = v6->mNext;
-      if ( v6 == (UFG::qNode<UFG::PartRequest,UFG::PartRequest> *)v7 )
+      mNext = mNext->mNext;
+      if ( mNext == (UFG::qNode<UFG::PartRequest,UFG::PartRequest> *)p_mRequestList )
         goto LABEL_6;
     }
-    UFG::PartRequest::AddDependency((UFG::PartRequest *)v6, user);
+    UFG::PartRequest::AddDependency((UFG::PartRequest *)mNext, user);
     goto LABEL_11;
   }
 LABEL_6:
@@ -658,77 +593,73 @@ LABEL_6:
   if ( v8 )
   {
     UFG::PartRequest::PartRequest((UFG::PartRequest *)v8);
-    v6 = v9;
+    mNext = v9;
   }
   else
   {
-    v6 = 0i64;
+    mNext = 0i64;
   }
   UFG::qReflectHandleBase::Init(
-    (UFG::qReflectHandleBase *)&v6[2].mNext,
-    (unsigned __int64)v6[3].mNext,
-    v4->mBaseNode.mUID);
-  UFG::PartRequest::AddDependency((UFG::PartRequest *)v6, v3);
-  v10 = v7->mNode.mPrev;
-  v10->mNext = v6;
-  v6->mPrev = v10;
-  v6->mNext = &v7->mNode;
-  v7->mNode.mPrev = v6;
-  item = (UFG::qPropertySet *)v6;
-  if ( LODWORD(v6[5].mPrev) != 1 )
+    (UFG::qReflectHandleBase *)&mNext[2].mNext,
+    (unsigned __int64)mNext[3].mNext,
+    part->mBaseNode.mUID);
+  UFG::PartRequest::AddDependency((UFG::PartRequest *)mNext, user);
+  mPrev = p_mRequestList->mNode.mPrev;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  mNext->mNext = &p_mRequestList->mNode;
+  p_mRequestList->mNode.mPrev = mNext;
+  item = (UFG::qPropertySet *)mNext;
+  if ( LODWORD(mNext[5].mPrev) != 1 )
   {
-    UFG::qArray<UFG::PedSpawningInfo *,0>::Add((UFG::qArray<UFG::qPropertySet *,0> *)v5, &item, "qArray.Add");
-    LODWORD(v6[5].mPrev) = 1;
+    UFG::qArray<UFG::PedSpawningInfo *,0>::Add((UFG::qArray<UFG::qPropertySet *,0> *)this, &item, "qArray.Add");
+    LODWORD(mNext[5].mPrev) = 1;
 LABEL_11:
-    v5->mDirty = 1;
+    this->mDirty = 1;
   }
-  return v6;
+  return (UFG::PartRequest *)mNext;
 }
 
 // File Line: 262
 // RVA: 0x15A7B0
 void __fastcall UFG::PartPool::RequestUnLoadPart(UFG::PartPool *this, UFG::PartDefinition *part, UFG::PartLoader *user)
 {
-  UFG::PartPool *v3; // rax
+  UFG::PartPool *mNext; // rax
   UFG::PartPool *v4; // r9
-  UFG::PartLoader *v5; // r11
-  UFG::PartPool *v6; // rbx
-  unsigned __int64 v7; // rdx
-  unsigned int v8; // edx
+  unsigned __int64 mUID; // rdx
+  unsigned int mMaxModelMemory; // edx
   __int64 v9; // rcx
   __int64 v10; // r8
   unsigned int v11; // eax
 
-  v3 = (UFG::PartPool *)this->mRequestList.mNode.mNext;
+  mNext = (UFG::PartPool *)this->mRequestList.mNode.mNext;
   v4 = 0i64;
-  v5 = user;
-  v6 = this;
-  if ( v3 != (UFG::PartPool *)&this->mRequestList )
+  if ( mNext != (UFG::PartPool *)&this->mRequestList )
   {
-    v7 = part->mBaseNode.mUID;
-    while ( v3->mReservedBucket != (UFG::PartPool::Bucket *)v7 )
+    mUID = part->mBaseNode.mUID;
+    while ( mNext->mReservedBucket != (UFG::PartPool::Bucket *)mUID )
     {
-      v3 = (UFG::PartPool *)v3->mQueued.p;
-      if ( v3 == (UFG::PartPool *)&this->mRequestList )
+      mNext = (UFG::PartPool *)mNext->mQueued.p;
+      if ( mNext == (UFG::PartPool *)&this->mRequestList )
         goto LABEL_7;
     }
-    v4 = v3;
+    v4 = mNext;
   }
 LABEL_7:
-  v8 = v4->mMaxModelMemory;
+  mMaxModelMemory = v4->mMaxModelMemory;
   v9 = 0i64;
-  if ( v8 )
+  if ( mMaxModelMemory )
   {
     v10 = *(_QWORD *)&v4->mExternalUsedModelMemory;
-    while ( v5 != *(UFG::PartLoader **)(v10 + 8 * v9) )
+    while ( user != *(UFG::PartLoader **)(v10 + 8 * v9) )
     {
       v9 = (unsigned int)(v9 + 1);
-      if ( (unsigned int)v9 >= v8 )
+      if ( (unsigned int)v9 >= mMaxModelMemory )
         goto LABEL_16;
     }
-    if ( (signed int)v9 >= 0 )
+    if ( (int)v9 >= 0 )
     {
-      *(_QWORD *)(v10 + 8 * v9) = *(_QWORD *)(v10 + 8i64 * (v8 - 1));
+      *(_QWORD *)(v10 + 8 * v9) = *(_QWORD *)(v10 + 8i64 * (mMaxModelMemory - 1));
       v11 = v4->mMaxModelMemory;
       if ( v11 > 1 )
         v4->mMaxModelMemory = v11 - 1;
@@ -737,9 +668,9 @@ LABEL_7:
     }
   }
 LABEL_16:
-  --*((_DWORD *)&v4->mHighBucket + v5->mPriority + 1);
+  --*((_DWORD *)&v4->mHighBucket + user->mPriority + 1);
   LODWORD(v4->mRequestList.mNode.mNext) = Illusion::gEngine.mFrameCount;
-  v6->mDirty = 1;
+  this->mDirty = 1;
 }
 
 // File Line: 271
@@ -754,41 +685,37 @@ void __fastcall UFG::PartPool::Init(UFG::PartPool *this, unsigned int maxModelMe
 // RVA: 0x15AE90
 bool __fastcall UFG::SortQueuedRequests(UFG::PartRequest *reqA, UFG::PartRequest *reqB)
 {
-  UFG::PartRequest *v2; // rsi
-  UFG::PartRequest *v3; // rdi
-  unsigned int v4; // er8
-  unsigned int *v5; // rax
-  unsigned int v6; // er9
-  UFG::PartDefinition *v7; // rcx
-  int v8; // er15
+  unsigned int v4; // r8d
+  unsigned int *mPriorityRefCounts; // rax
+  unsigned int v6; // r9d
+  UFG::PartDefinition *mData; // rcx
+  int ModelSize; // r15d
   UFG::PartDefinition *v9; // rdi
-  unsigned int v10; // er14
+  unsigned int mTextureSize; // r14d
   UFG::PartDefinition *v11; // rcx
   int v12; // ebp
   UFG::qReflectObject *v13; // rdi
-  int v14; // eax
-  UFG::qString result; // [rsp+28h] [rbp-70h]
-  UFG::qString v17; // [rsp+50h] [rbp-48h]
+  int mTypeUID_high; // eax
+  UFG::qString result; // [rsp+28h] [rbp-70h] BYREF
+  UFG::qString v17; // [rsp+50h] [rbp-48h] BYREF
 
-  v2 = reqB;
-  v3 = reqA;
   v4 = 0;
-  v5 = reqB->mPriorityRefCounts;
+  mPriorityRefCounts = reqB->mPriorityRefCounts;
   do
   {
-    v6 = *(unsigned int *)((char *)v5 + (char *)reqA - (char *)reqB);
-    if ( v6 != *v5 )
-      return v6 > *v5;
+    v6 = *(unsigned int *)((char *)mPriorityRefCounts + (char *)reqA - (char *)reqB);
+    if ( v6 != *mPriorityRefCounts )
+      return v6 > *mPriorityRefCounts;
     ++v4;
-    ++v5;
+    ++mPriorityRefCounts;
   }
   while ( v4 < 5 );
-  v7 = (UFG::PartDefinition *)reqA->mPartDefHandle.mData;
-  if ( v7 )
-    v8 = UFG::PartDefinition::GetModelSize(v7);
+  mData = (UFG::PartDefinition *)reqA->mPartDefHandle.mData;
+  if ( mData )
+    ModelSize = UFG::PartDefinition::GetModelSize(mData);
   else
-    v8 = 0;
-  v9 = (UFG::PartDefinition *)v3->mPartDefHandle.mData;
+    ModelSize = 0;
+  v9 = (UFG::PartDefinition *)reqA->mPartDefHandle.mData;
   if ( v9 )
   {
     if ( !v9->mTextureSize )
@@ -798,79 +725,72 @@ bool __fastcall UFG::SortQueuedRequests(UFG::PartRequest *reqA, UFG::PartRequest
       v9->mTextureSize = PartDatabase_QueryFileSize(result.mData);
       UFG::qString::~qString(&result);
     }
-    v10 = v9->mTextureSize;
+    mTextureSize = v9->mTextureSize;
   }
   else
   {
-    v10 = 0;
+    mTextureSize = 0;
   }
-  v11 = (UFG::PartDefinition *)v2->mPartDefHandle.mData;
+  v11 = (UFG::PartDefinition *)reqB->mPartDefHandle.mData;
   if ( v11 )
     v12 = UFG::PartDefinition::GetModelSize(v11);
   else
     v12 = 0;
-  v13 = v2->mPartDefHandle.mData;
+  v13 = reqB->mPartDefHandle.mData;
   if ( v13 )
   {
     if ( !HIDWORD(v13[2].mTypeUID) )
     {
-      UFG::PartDefinition::GetTextureFileName((UFG::PartDefinition *)v2->mPartDefHandle.mData, &v17);
+      UFG::PartDefinition::GetTextureFileName((UFG::PartDefinition *)reqB->mPartDefHandle.mData, &v17);
       UFG::qString::ReplaceString(&v17, ".perm.bin", ".temp.bin", 0);
       HIDWORD(v13[2].mTypeUID) = PartDatabase_QueryFileSize(v17.mData);
       UFG::qString::~qString(&v17);
     }
-    v14 = HIDWORD(v13[2].mTypeUID);
+    mTypeUID_high = HIDWORD(v13[2].mTypeUID);
   }
   else
   {
-    v14 = 0;
+    mTypeUID_high = 0;
   }
-  return v10 + v8 < v14 + v12;
+  return mTextureSize + ModelSize < mTypeUID_high + v12;
 }
 
 // File Line: 289
 // RVA: 0x15B460
 void __fastcall UFG::PartPool::UpdateRequests(UFG::PartPool *this)
 {
-  UFG::PartPool *v1; // rbx
-  unsigned int v2; // eax
-  bool v3; // al
+  unsigned int size; // eax
+  bool IsStreamingStalled; // al
   __int64 v4; // rsi
-  UFG::PartRequest **v5; // rdi
-  Render::IrradianceVolume *right; // [rsp+18h] [rbp-1010h]
-  char dest; // [rsp+20h] [rbp-1008h]
+  UFG::qPropertySet **v5; // rdi
+  Render::IrradianceVolume *dest[513]; // [rsp+20h] [rbp-1008h] BYREF
 
-  v1 = this;
   if ( this->mDirty )
     UFG::PartPool::UpdateBuckets(this);
-  v2 = v1->mLoading.size;
-  v1->mStreamerStalled = 0;
-  if ( v1->mQueued.size + v2 )
+  size = this->mLoading.size;
+  this->mStreamerStalled = 0;
+  if ( this->mQueued.size + size )
   {
-    v3 = PartDatabase_IsStreamingStalled();
-    v1->mStreamerStalled = v3;
-    if ( !v3 )
+    IsStreamingStalled = PartDatabase_IsStreamingStalled();
+    this->mStreamerStalled = IsStreamingStalled;
+    if ( !IsStreamingStalled )
     {
-      v4 = v1->mQueued.size;
+      v4 = this->mQueued.size;
       if ( (_DWORD)v4 )
       {
-        UFG::qMemCopy(&dest, v1->mQueued.p, 8 * v4);
+        UFG::qMemCopy(dest, this->mQueued.p, 8 * v4);
         UFG::qQuickSortImpl<Render::Light *,bool (*)(Render::Light const *,Render::Light const *)>(
-          (Render::IrradianceVolume **)&dest,
-          &right + (signed int)v4,
+          dest,
+          &dest[(int)v4 - 1],
           (bool (__fastcall *)(Render::IrradianceVolume *, Render::IrradianceVolume *))UFG::SortQueuedRequests);
-        if ( (_DWORD)v4 )
+        v5 = (UFG::qPropertySet **)dest;
+        do
         {
-          v5 = (UFG::PartRequest **)&dest;
-          do
-          {
-            UFG::PartPool::QueueRequest(v1, *v5);
-            ++v5;
-            --v4;
-          }
-          while ( v4 );
-          UFG::PartPool::Bucket::UpdateSize(v1->mMasterBucket);
+          UFG::PartPool::QueueRequest(this, *v5++);
+          --v4;
         }
+        while ( v4 );
+        UFG::PartPool::Bucket::UpdateSize(this->mMasterBucket);
       }
     }
   }
@@ -880,51 +800,40 @@ void __fastcall UFG::PartPool::UpdateRequests(UFG::PartPool *this)
 // RVA: 0x15A260
 void __fastcall UFG::PartPool::ReloadRequests(UFG::PartPool *this)
 {
-  UFG::PartRequest *v1; // rbx
-  UFG::PartRequest *v2; // rdi
-  UFG::PartPool *v3; // rsi
-  UFG::PartRequest *i; // rbx
+  UFG::PartRequest *mNext; // rbx
+  UFG::qList<UFG::PartRequest,UFG::PartRequest,1,0> *i; // rdi
+  UFG::PartRequest *j; // rbx
 
-  v1 = (UFG::PartRequest *)this->mRequestList.mNode.mNext;
-  v2 = (UFG::PartRequest *)&this->mRequestList;
-  v3 = this;
-  if ( v1 != (UFG::PartRequest *)&this->mRequestList )
-  {
-    do
-    {
-      PartDatabase_ReleaseStream(v1);
-      v1 = (UFG::PartRequest *)v1->mNext;
-    }
-    while ( v1 != v2 );
-  }
-  for ( i = (UFG::PartRequest *)v3->mRequestList.mNode.mNext; i != v2; i = (UFG::PartRequest *)i->mNext )
-    PartDatabase_QueueStream(i);
+  mNext = (UFG::PartRequest *)this->mRequestList.mNode.mNext;
+  for ( i = &this->mRequestList; mNext != (UFG::PartRequest *)i; mNext = (UFG::PartRequest *)mNext->mNext )
+    PartDatabase_ReleaseStream(mNext);
+  for ( j = (UFG::PartRequest *)this->mRequestList.mNode.mNext; j != (UFG::PartRequest *)i; j = (UFG::PartRequest *)j->mNext )
+    PartDatabase_QueueStream(j);
 }
 
 // File Line: 341
 // RVA: 0x158800
 void __fastcall UFG::PartPool::FlushParts(UFG::PartPool *this, bool forceFlush)
 {
-  UFG::PartPool *v2; // rdi
-  float v3; // xmm1_4
+  float mFragmentationReservePercentage; // xmm1_4
   unsigned int v4; // ebx
   unsigned int v5; // esi
-  UFG::PartPool::Bucket *v6; // rax
-  unsigned int v7; // er14
-  unsigned int v8; // er15
-  UFG::PartPool::Bucket *v9; // rcx
-  __int64 v10; // rax
-  unsigned int v11; // er13
+  UFG::PartPool::Bucket *mMasterBucket; // rax
+  unsigned int v7; // r14d
+  unsigned int v8; // r15d
+  UFG::PartPool::Bucket *mUnReferencedBucket; // rcx
+  __int64 size; // rax
+  unsigned int v11; // r13d
   unsigned int v12; // ebp
   __int64 v13; // r12
   UFG::PartRequest *v14; // rbx
-  UFG::PartDefinition *v15; // rcx
-  int v16; // eax
+  UFG::PartDefinition *mData; // rcx
+  int ModelSize; // eax
   UFG::qReflectObject *v17; // rsi
-  int v18; // eax
+  int mTypeUID_high; // eax
   __int64 v19; // rcx
   unsigned int v20; // edx
-  UFG::PartRequest **v21; // r8
+  UFG::PartRequest **p; // r8
   __int64 v22; // rcx
   unsigned int v23; // edx
   UFG::PartRequest **v24; // r8
@@ -933,53 +842,50 @@ void __fastcall UFG::PartPool::FlushParts(UFG::PartPool *this, bool forceFlush)
   unsigned int v27; // edx
   UFG::PartRequest **v28; // r8
   unsigned int v29; // eax
-  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *v30; // rcx
-  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *v31; // rax
+  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *mPrev; // rcx
+  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *mNext; // rax
   UFG::PartLoader **v32; // rcx
   UFG::qNode<UFG::PartRequest,UFG::PartRequest> *v33; // rdx
   UFG::qNode<UFG::PartRequest,UFG::PartRequest> *v34; // rax
-  UFG::qString result; // [rsp+30h] [rbp-78h]
+  UFG::qString result; // [rsp+30h] [rbp-78h] BYREF
   unsigned int v36; // [rsp+B0h] [rbp+8h]
-  bool v37; // [rsp+B8h] [rbp+10h]
   unsigned int v38; // [rsp+C0h] [rbp+18h]
 
-  v37 = forceFlush;
-  v2 = this;
-  v3 = this->mFragmentationReservePercentage;
-  v4 = this->mMaxModelMemory - (signed int)(float)((float)(signed int)this->mMaxModelMemory * v3);
-  v36 = this->mMaxModelMemory - (signed int)(float)((float)(signed int)this->mMaxModelMemory * v3);
-  v5 = this->mMaxTextureMemory - (signed int)(float)((float)(signed int)this->mMaxTextureMemory * v3);
-  v38 = this->mMaxTextureMemory - (signed int)(float)((float)(signed int)this->mMaxTextureMemory * v3);
-  v6 = this->mMasterBucket;
-  v7 = this->mExternalUsedModelMemory + v6->mMemoryUsageModel;
-  v8 = this->mExternalUsedTextureMemory + v6->mMemoryUsageTexture;
+  mFragmentationReservePercentage = this->mFragmentationReservePercentage;
+  v4 = this->mMaxModelMemory - (int)(float)((float)(int)this->mMaxModelMemory * mFragmentationReservePercentage);
+  v36 = v4;
+  v5 = this->mMaxTextureMemory - (int)(float)((float)(int)this->mMaxTextureMemory * mFragmentationReservePercentage);
+  v38 = v5;
+  mMasterBucket = this->mMasterBucket;
+  v7 = this->mExternalUsedModelMemory + mMasterBucket->mMemoryUsageModel;
+  v8 = this->mExternalUsedTextureMemory + mMasterBucket->mMemoryUsageTexture;
   if ( forceFlush || this->mStreamerStalled || v7 > v4 || v8 > v5 )
   {
     if ( this->mDirty )
       UFG::PartPool::UpdateBuckets(this);
-    v9 = v2->mUnReferencedBucket;
-    v10 = (signed int)v9->mRequests.size;
-    if ( (_DWORD)v10 )
+    mUnReferencedBucket = this->mUnReferencedBucket;
+    size = (int)mUnReferencedBucket->mRequests.size;
+    if ( (_DWORD)size )
       UFG::qQuickSortImpl<Render::Light *,bool (*)(Render::Light const *,Render::Light const *)>(
-        (Render::IrradianceVolume **)v9->mRequests.p,
-        (Render::IrradianceVolume **)&v9->mRequests.p[v10 - 1],
+        (Render::IrradianceVolume **)mUnReferencedBucket->mRequests.p,
+        (Render::IrradianceVolume **)&mUnReferencedBucket->mRequests.p[size - 1],
         (bool (__fastcall *)(Render::IrradianceVolume *, Render::IrradianceVolume *))UFG::SortByReferenceFramePredicate);
-    v11 = v2->mUnReferencedBucket->mRequests.size;
+    v11 = this->mUnReferencedBucket->mRequests.size;
     v12 = 0;
     if ( v11 )
     {
       v13 = 0i64;
       do
       {
-        if ( !v37 && !v2->mStreamerStalled && v7 <= v4 && v8 <= v5 )
+        if ( !forceFlush && !this->mStreamerStalled && v7 <= v4 && v8 <= v5 )
           break;
-        v14 = v2->mUnReferencedBucket->mRequests.p[v13];
-        v15 = (UFG::PartDefinition *)v14->mPartDefHandle.mData;
-        if ( v15 )
-          v16 = UFG::PartDefinition::GetModelSize(v15);
+        v14 = this->mUnReferencedBucket->mRequests.p[v13];
+        mData = (UFG::PartDefinition *)v14->mPartDefHandle.mData;
+        if ( mData )
+          ModelSize = UFG::PartDefinition::GetModelSize(mData);
         else
-          v16 = 0;
-        v7 -= v16;
+          ModelSize = 0;
+        v7 -= ModelSize;
         v17 = v14->mPartDefHandle.mData;
         if ( v17 )
         {
@@ -990,103 +896,102 @@ void __fastcall UFG::PartPool::FlushParts(UFG::PartPool *this, bool forceFlush)
             HIDWORD(v17[2].mTypeUID) = PartDatabase_QueryFileSize(result.mData);
             UFG::qString::~qString(&result);
           }
-          v18 = HIDWORD(v17[2].mTypeUID);
-          LODWORD(v17) = 0;
+          mTypeUID_high = HIDWORD(v17[2].mTypeUID);
         }
         else
         {
-          v18 = 0;
+          mTypeUID_high = 0;
         }
-        v8 -= v18;
-        v19 = (unsigned int)v17;
-        v20 = v2->mQueued.size;
-        if ( v2->mQueued.size )
+        v8 -= mTypeUID_high;
+        v19 = 0i64;
+        v20 = this->mQueued.size;
+        if ( this->mQueued.size )
         {
-          v21 = v2->mQueued.p;
-          while ( v14 != v21[v19] )
+          p = this->mQueued.p;
+          while ( v14 != p[v19] )
           {
             v19 = (unsigned int)(v19 + 1);
             if ( (unsigned int)v19 >= v20 )
               goto LABEL_32;
           }
-          if ( (signed int)v19 >= 0 )
+          if ( (int)v19 >= 0 )
           {
-            v21[v19] = v21[v20 - 1];
-            if ( v2->mQueued.size > 1 )
-              --v2->mQueued.size;
+            p[v19] = p[v20 - 1];
+            if ( this->mQueued.size > 1 )
+              --this->mQueued.size;
             else
-              v2->mQueued.size = (unsigned int)v17;
+              this->mQueued.size = 0;
           }
         }
 LABEL_32:
-        v22 = (unsigned int)v17;
-        v23 = v2->mLoading.size;
+        v22 = 0i64;
+        v23 = this->mLoading.size;
         if ( v23 )
         {
-          v24 = v2->mLoading.p;
+          v24 = this->mLoading.p;
           while ( v14 != v24[v22] )
           {
             v22 = (unsigned int)(v22 + 1);
             if ( (unsigned int)v22 >= v23 )
               goto LABEL_41;
           }
-          if ( (signed int)v22 >= 0 )
+          if ( (int)v22 >= 0 )
           {
             v24[v22] = v24[v23 - 1];
-            v25 = v2->mLoading.size;
+            v25 = this->mLoading.size;
             if ( v25 > 1 )
-              v2->mLoading.size = v25 - 1;
+              this->mLoading.size = v25 - 1;
             else
-              v2->mLoading.size = (unsigned int)v17;
+              this->mLoading.size = 0;
           }
         }
 LABEL_41:
-        v26 = (unsigned int)v17;
-        v27 = v2->mLoaded.size;
+        v26 = 0i64;
+        v27 = this->mLoaded.size;
         if ( v27 )
         {
-          v28 = v2->mLoaded.p;
+          v28 = this->mLoaded.p;
           while ( v14 != v28[v26] )
           {
             v26 = (unsigned int)(v26 + 1);
             if ( (unsigned int)v26 >= v27 )
               goto LABEL_50;
           }
-          if ( (signed int)v26 >= 0 )
+          if ( (int)v26 >= 0 )
           {
             v28[v26] = v28[v27 - 1];
-            v29 = v2->mLoaded.size;
+            v29 = this->mLoaded.size;
             if ( v29 > 1 )
-              v2->mLoaded.size = v29 - 1;
+              this->mLoaded.size = v29 - 1;
             else
-              v2->mLoaded.size = (unsigned int)v17;
+              this->mLoaded.size = 0;
           }
         }
 LABEL_50:
         PartDatabase_ReleaseStream(v14);
-        v30 = v14->mPrev;
-        v31 = v14->mNext;
-        v30->mNext = v31;
-        v31->mPrev = v30;
-        v14->mPrev = (UFG::qNode<UFG::PartRequest,UFG::PartRequest> *)&v14->mPrev;
-        v14->mNext = (UFG::qNode<UFG::PartRequest,UFG::PartRequest> *)&v14->mPrev;
+        mPrev = v14->mPrev;
+        mNext = v14->mNext;
+        mPrev->mNext = mNext;
+        mNext->mPrev = mPrev;
+        v14->mPrev = v14;
+        v14->mNext = v14;
         v32 = v14->mInstances.p;
         if ( v32 )
           operator delete[](v32);
         v14->mInstances.p = 0i64;
         *(_QWORD *)&v14->mInstances.size = 0i64;
-        UFG::qReflectHandleBase::~qReflectHandleBase((UFG::qReflectHandleBase *)&v14->mPartDefHandle.mPrev);
+        UFG::qReflectHandleBase::~qReflectHandleBase(&v14->mPartDefHandle);
         v33 = v14->mPrev;
         v34 = v14->mNext;
         v33->mNext = v34;
         v34->mPrev = v33;
-        v14->mPrev = (UFG::qNode<UFG::PartRequest,UFG::PartRequest> *)&v14->mPrev;
-        v14->mNext = (UFG::qNode<UFG::PartRequest,UFG::PartRequest> *)&v14->mPrev;
+        v14->mPrev = v14;
+        v14->mNext = v14;
         operator delete[](v14);
-        v2->mDirty = 1;
-        if ( v2->mStreamerStalled )
+        this->mDirty = 1;
+        if ( this->mStreamerStalled )
         {
-          if ( v12 >= 1 )
+          if ( v12 )
             break;
         }
         ++v12;
@@ -1103,7 +1008,6 @@ LABEL_50:
 // RVA: 0x1592D0
 void __fastcall UFG::PartPool::InitBuckets(UFG::PartPool *this)
 {
-  UFG::PartPool *v1; // rsi
   char *v2; // rax
   unsigned int v3; // edi
   UFG::PartPool::Bucket *v4; // rax
@@ -1117,94 +1021,89 @@ void __fastcall UFG::PartPool::InitBuckets(UFG::PartPool *this)
   UFG::PartPool::Bucket *v12; // rax
   char *v13; // rax
   UFG::PartPool::Bucket *v14; // rax
-  UFG::PartPool::Bucket *v15; // rsi
+  UFG::PartPool::Bucket *mMasterBucket; // rsi
   unsigned int i; // ebx
 
-  v1 = this;
   v2 = UFG::qMalloc(0x38ui64, "Bucket", 0i64);
   v3 = 0;
   if ( v2 )
     UFG::PartPool::Bucket::Bucket((UFG::PartPool::Bucket *)v2);
   else
     v4 = 0i64;
-  v1->mMasterBucket = v4;
+  this->mMasterBucket = v4;
   v5 = UFG::qMalloc(0x38ui64, "Bucket", 0i64);
   if ( v5 )
     UFG::PartPool::Bucket::Bucket((UFG::PartPool::Bucket *)v5);
   else
     v6 = 0i64;
-  v1->mReservedBucket = v6;
-  UFG::PartPool::Bucket::AddChild(v1->mMasterBucket, v6);
+  this->mReservedBucket = v6;
+  UFG::PartPool::Bucket::AddChild(this->mMasterBucket, v6);
   v7 = UFG::qMalloc(0x38ui64, "Bucket", 0i64);
   if ( v7 )
     UFG::PartPool::Bucket::Bucket((UFG::PartPool::Bucket *)v7);
   else
     v8 = 0i64;
-  v1->mUnReferencedBucket = v8;
-  UFG::PartPool::Bucket::AddChild(v1->mMasterBucket, v8);
+  this->mUnReferencedBucket = v8;
+  UFG::PartPool::Bucket::AddChild(this->mMasterBucket, v8);
   v9 = UFG::qMalloc(0x38ui64, "Bucket", 0i64);
   if ( v9 )
     UFG::PartPool::Bucket::Bucket((UFG::PartPool::Bucket *)v9);
   else
     v10 = 0i64;
-  v1->mCriticalBucket = v10;
-  UFG::PartPool::Bucket::AddChild(v1->mMasterBucket, v10);
+  this->mCriticalBucket = v10;
+  UFG::PartPool::Bucket::AddChild(this->mMasterBucket, v10);
   v11 = UFG::qMalloc(0x38ui64, "Bucket", 0i64);
   if ( v11 )
     UFG::PartPool::Bucket::Bucket((UFG::PartPool::Bucket *)v11);
   else
     v12 = 0i64;
-  v1->mHighBucket = v12;
-  UFG::PartPool::Bucket::AddChild(v1->mMasterBucket, v12);
+  this->mHighBucket = v12;
+  UFG::PartPool::Bucket::AddChild(this->mMasterBucket, v12);
   v13 = UFG::qMalloc(0x38ui64, "Bucket", 0i64);
   if ( v13 )
     UFG::PartPool::Bucket::Bucket((UFG::PartPool::Bucket *)v13);
   else
     v14 = 0i64;
-  v1->mLowBucket = v14;
-  UFG::PartPool::Bucket::AddChild(v1->mMasterBucket, v14);
-  UFG::PartPool::Bucket::UpdateSize(v1->mMasterBucket);
-  v15 = v1->mMasterBucket;
-  v15->mPriority = 0;
-  for ( i = 0; i < v15->mChildren.size; ++i )
+  this->mLowBucket = v14;
+  UFG::PartPool::Bucket::AddChild(this->mMasterBucket, v14);
+  UFG::PartPool::Bucket::UpdateSize(this->mMasterBucket);
+  mMasterBucket = this->mMasterBucket;
+  mMasterBucket->mPriority = 0;
+  for ( i = 0; i < mMasterBucket->mChildren.size; ++i )
   {
     v3 += i + 1;
-    UFG::PartPool::Bucket::UpdatePriority(v15->mChildren.p[i], v3);
+    UFG::PartPool::Bucket::UpdatePriority(mMasterBucket->mChildren.p[i], v3);
   }
 }
 
 // File Line: 487
 // RVA: 0x159FD0
-void __fastcall UFG::PartPool::QueueRequest(UFG::PartPool *this, UFG::PartRequest *pRequest)
+void __fastcall UFG::PartPool::QueueRequest(UFG::PartPool *this, UFG::qPropertySet *pRequest)
 {
   bool v2; // zf
-  UFG::PartRequest *v3; // rbx
-  UFG::PartPool *v4; // rdi
-  unsigned int v5; // edx
+  unsigned int size; // edx
   __int64 v6; // rax
-  UFG::PartRequest **v7; // r8
-  UFG::qPropertySet *item; // [rsp+38h] [rbp+10h]
+  UFG::PartRequest **p; // r8
+  UFG::qPropertySet *item; // [rsp+38h] [rbp+10h] BYREF
 
-  v2 = pRequest->mLoadStatus == 2;
-  v3 = pRequest;
-  v4 = this;
-  item = (UFG::qPropertySet *)pRequest;
+  v2 = pRequest->mPropertyMask == 2;
+  item = pRequest;
   if ( !v2 )
   {
-    v5 = this->mQueued.size;
+    size = this->mQueued.size;
     v6 = 0i64;
     if ( this->mQueued.size )
     {
-      v7 = this->mQueued.p;
-      while ( v3 != v7[v6] )
+      p = this->mQueued.p;
+      while ( pRequest != (UFG::qPropertySet *)p[v6] )
       {
         v6 = (unsigned int)(v6 + 1);
-        if ( (unsigned int)v6 >= v5 )
+        if ( (unsigned int)v6 >= size )
           goto LABEL_11;
       }
-      if ( (signed int)v6 >= 0 )
+      if ( (int)v6 >= 0 )
       {
-        v7[(unsigned int)v6] = v7[v5 - 1];
+        p[(unsigned int)v6] = p[size - 1];
         if ( this->mQueued.size > 1 )
           --this->mQueued.size;
         else
@@ -1216,45 +1115,41 @@ LABEL_11:
       (UFG::qArray<UFG::qPropertySet *,0> *)&this->mLoading,
       &item,
       "qArray.Add");
-    v3->mLoadStatus = 2;
-    v4->mDirty = 1;
+    pRequest->mPropertyMask = 2;
+    this->mDirty = 1;
   }
-  PartDatabase_QueueStream(v3);
+  PartDatabase_QueueStream((UFG::PartRequest *)pRequest);
 }
 
 // File Line: 494
 // RVA: 0x159AD0
-void __fastcall UFG::PartPool::PartLoadNotification(UFG::PartPool *this, UFG::PartRequest *pRequest)
+void __fastcall UFG::PartPool::PartLoadNotification(UFG::PartPool *this, UFG::qPropertySet *pRequest)
 {
   bool v2; // zf
-  UFG::PartRequest *v3; // rdi
-  UFG::PartPool *v4; // rbx
-  unsigned int v5; // edx
+  unsigned int size; // edx
   __int64 v6; // rax
-  UFG::PartRequest **v7; // r8
+  UFG::PartRequest **p; // r8
   unsigned int v8; // eax
-  UFG::qPropertySet *item; // [rsp+38h] [rbp+10h]
+  UFG::qPropertySet *item; // [rsp+38h] [rbp+10h] BYREF
 
-  v2 = pRequest->mLoadStatus == 3;
-  v3 = pRequest;
-  v4 = this;
-  item = (UFG::qPropertySet *)pRequest;
+  v2 = pRequest->mPropertyMask == 3;
+  item = pRequest;
   if ( !v2 )
   {
-    v5 = this->mLoading.size;
+    size = this->mLoading.size;
     v6 = 0i64;
-    if ( v5 )
+    if ( size )
     {
-      v7 = this->mLoading.p;
-      while ( v3 != v7[v6] )
+      p = this->mLoading.p;
+      while ( pRequest != (UFG::qPropertySet *)p[v6] )
       {
         v6 = (unsigned int)(v6 + 1);
-        if ( (unsigned int)v6 >= v5 )
+        if ( (unsigned int)v6 >= size )
           goto LABEL_11;
       }
-      if ( (signed int)v6 >= 0 )
+      if ( (int)v6 >= 0 )
       {
-        v7[(unsigned int)v6] = v7[v5 - 1];
+        p[(unsigned int)v6] = p[size - 1];
         v8 = this->mLoading.size;
         if ( v8 > 1 )
           this->mLoading.size = v8 - 1;
@@ -1267,8 +1162,8 @@ LABEL_11:
       (UFG::qArray<UFG::qPropertySet *,0> *)&this->mLoaded,
       &item,
       "qArray.Add");
-    v3->mLoadStatus = 3;
-    v4->mDirty = 1;
+    pRequest->mPropertyMask = 3;
+    this->mDirty = 1;
   }
 }
 
@@ -1277,9 +1172,9 @@ LABEL_11:
 void __fastcall UFG::PartPool::UpdateBuckets(UFG::PartPool *this)
 {
   UFG::PartPool *v1; // r13
-  UFG::PartPool *v2; // r15
-  UFG::qList<UFG::PartRequest,UFG::PartRequest,1,0> *v3; // r13
-  UFG::PartRequest **v4; // r12
+  UFG::PartPool *mNext; // r15
+  UFG::qList<UFG::PartRequest,UFG::PartRequest,1,0> *p_mRequestList; // r13
+  UFG::PartRequest **p; // r12
   unsigned int v5; // ecx
   _DWORD *v6; // rax
   __int64 v7; // rdx
@@ -1291,37 +1186,31 @@ void __fastcall UFG::PartPool::UpdateBuckets(UFG::PartPool *this)
   unsigned __int64 v13; // rax
   char *v14; // rax
   char *v15; // rbp
-  __int64 v16; // r9
-  signed __int64 v17; // r8
+  __int64 i; // r9
+  __int64 v17; // r8
   __int64 v18; // rax
-  UFG::PartPool::Bucket *v19; // [rsp+20h] [rbp-68h]
-  UFG::PartPool::Bucket *v20; // [rsp+28h] [rbp-60h]
-  UFG::PartPool::Bucket *v21; // [rsp+30h] [rbp-58h]
-  UFG::PartPool::Bucket *v22; // [rsp+38h] [rbp-50h]
-  UFG::PartPool::Bucket *v23; // [rsp+40h] [rbp-48h]
-  UFG::PartPool *v24; // [rsp+90h] [rbp+8h]
+  __int64 v19[6]; // [rsp+20h] [rbp-68h]
 
-  v24 = this;
   v1 = this;
   this->mUnReferencedBucket->mRequests.size = 0;
   this->mReservedBucket->mRequests.size = 0;
   this->mCriticalBucket->mRequests.size = 0;
   this->mHighBucket->mRequests.size = 0;
   this->mLowBucket->mRequests.size = 0;
-  v2 = (UFG::PartPool *)this->mRequestList.mNode.mNext;
-  v19 = this->mUnReferencedBucket;
-  v20 = this->mReservedBucket;
-  v21 = this->mCriticalBucket;
-  v22 = this->mHighBucket;
-  v23 = this->mLowBucket;
-  if ( v2 != (UFG::PartPool *)&this->mRequestList )
+  mNext = (UFG::PartPool *)this->mRequestList.mNode.mNext;
+  v19[0] = (__int64)this->mUnReferencedBucket;
+  v19[1] = (__int64)this->mReservedBucket;
+  v19[2] = (__int64)this->mCriticalBucket;
+  v19[3] = (__int64)this->mHighBucket;
+  v19[4] = (__int64)this->mLowBucket;
+  if ( mNext != (UFG::PartPool *)&this->mRequestList )
   {
-    v3 = &this->mRequestList;
+    p_mRequestList = &this->mRequestList;
     do
     {
-      v4 = v2->mQueued.p;
+      p = mNext->mQueued.p;
       v5 = 0;
-      v6 = (_DWORD *)((char *)&v2->mHighBucket + 4);
+      v6 = (_DWORD *)&mNext->mHighBucket + 1;
       v7 = 0i64;
       while ( !*v6 )
       {
@@ -1334,11 +1223,11 @@ void __fastcall UFG::PartPool::UpdateBuckets(UFG::PartPool *this)
           break;
         }
       }
-      v8 = (__int64)*(&v19 + v7);
+      v8 = v19[v7];
       v9 = *(unsigned int *)(v8 + 16);
       v10 = *(_DWORD *)(v8 + 20);
       v11 = v9 + 1;
-      if ( (signed int)v9 + 1 > v10 )
+      if ( (int)v9 + 1 > v10 )
       {
         if ( v10 )
           v12 = 2 * v10;
@@ -1359,16 +1248,12 @@ void __fastcall UFG::PartPool::UpdateBuckets(UFG::PartPool *this)
           v15 = v14;
           if ( *(_QWORD *)(v8 + 24) )
           {
-            v16 = 0i64;
-            if ( *(_DWORD *)(v8 + 16) )
+            for ( i = 0i64;
+                  (unsigned int)i < *(_DWORD *)(v8 + 16);
+                  *(_QWORD *)&v14[v17] = *(_QWORD *)(v17 + *(_QWORD *)(v8 + 24)) )
             {
-              do
-              {
-                v17 = 8 * v16;
-                v16 = (unsigned int)(v16 + 1);
-                *(_QWORD *)&v14[v17] = *(_QWORD *)(v17 + *(_QWORD *)(v8 + 24));
-              }
-              while ( (unsigned int)v16 < *(_DWORD *)(v8 + 16) );
+              v17 = 8 * i;
+              i = (unsigned int)(i + 1);
             }
             operator delete[](*(void **)(v8 + 24));
           }
@@ -1378,11 +1263,11 @@ void __fastcall UFG::PartPool::UpdateBuckets(UFG::PartPool *this)
       }
       v18 = *(_QWORD *)(v8 + 24);
       *(_DWORD *)(v8 + 16) = v11;
-      *(_QWORD *)(v18 + 8 * v9) = v2;
-      v2 = (UFG::PartPool *)v4;
+      *(_QWORD *)(v18 + 8 * v9) = mNext;
+      mNext = (UFG::PartPool *)p;
     }
-    while ( v4 != (UFG::PartRequest **)v3 );
-    v1 = v24;
+    while ( p != (UFG::PartRequest **)p_mRequestList );
+    v1 = this;
   }
   UFG::PartPool::Bucket::UpdateSize(v1->mMasterBucket);
 }
@@ -1439,6 +1324,7 @@ bool __fastcall UFG::ObjectResourceManager::HasQueue(UFG::PartDatabase *this)
 
 // File Line: 582
 // RVA: 0x158AF0
+// attributes: thunk
 unsigned int __fastcall UFG::PartDatabase::GetBytesRemainingToLoad(UFG::PartDatabase *this)
 {
   return UFG::PartPool::GetQueuedBytes(&this->mPool);
@@ -1448,20 +1334,18 @@ unsigned int __fastcall UFG::PartDatabase::GetBytesRemainingToLoad(UFG::PartData
 // RVA: 0x15B1E0
 void __fastcall UFG::PartDatabase::Update(UFG::PartDatabase *this, float deltaTime)
 {
-  UFG::PartDatabase *v2; // rbx
-
-  v2 = this;
   if ( this->mReloadParts )
   {
     UFG::PartPool::ReloadRequests(&this->mPool);
-    v2->mReloadParts = 0;
+    this->mReloadParts = 0;
   }
-  UFG::PartPool::UpdateRequests(&v2->mPool);
-  v2->mPool.mDirty = 0;
+  UFG::PartPool::UpdateRequests(&this->mPool);
+  this->mPool.mDirty = 0;
 }
 
 // File Line: 601
 // RVA: 0x1587F0
+// attributes: thunk
 void __fastcall UFG::PartDatabase::FlushParts(UFG::PartDatabase *this, bool forceFlush)
 {
   UFG::PartPool::FlushParts(&this->mPool, forceFlush);
@@ -1469,57 +1353,55 @@ void __fastcall UFG::PartDatabase::FlushParts(UFG::PartDatabase *this, bool forc
 
 // File Line: 606
 // RVA: 0x158D50
-UFG::qReflectObject *__fastcall UFG::PartDatabase::GetPartByName(UFG::PartDatabase *this, const char *name)
+UFG::PartDefinition *__fastcall UFG::PartDatabase::GetPartByName(UFG::PartDatabase *this, const char *name)
 {
-  const char *v2; // rdi
   unsigned __int64 v3; // rbx
   UFG::qReflectWarehouse *v4; // rax
-  UFG::qReflectInventoryBase *v5; // rax
+  UFG::qReflectInventoryBase *Inventory; // rax
 
-  v2 = name;
   v3 = UFG::qStringHash64("UFG::PartDefinition", 0xFFFFFFFFFFFFFFFFui64);
   v4 = UFG::qReflectWarehouse::Instance();
-  v5 = UFG::qReflectWarehouse::GetInventory(v4, v3);
-  return UFG::qReflectInventoryBase::FindObjectByName(v5, v2);
+  Inventory = UFG::qReflectWarehouse::GetInventory(v4, v3);
+  return (UFG::PartDefinition *)UFG::qReflectInventoryBase::FindObjectByName(Inventory, name);
 }
 
 // File Line: 617
 // RVA: 0x159AA0
 void __fastcall UFG::PartDatabase::OnStreamingComplete(UFG::PartDatabase *this, UFG::PartRequest *pRequest)
 {
-  UFG::PartDatabase *v2; // rdi
-  UFG::PartRequest *v3; // rbx
-
-  v2 = this;
-  v3 = pRequest;
   UFG::PartRequest::OnLoaded(pRequest);
-  UFG::PartPool::PartLoadNotification(&v2->mPool, v3);
+  UFG::PartPool::PartLoadNotification(&this->mPool, pRequest);
 }
 
 // File Line: 628
 // RVA: 0x159570
-void __fastcall UFG::PartDatabase::ModifyPriorityForPart(UFG::PartDatabase *this, UFG::PartDefinition *part, UFG::PartPriority::Type oldPriority, UFG::PartPriority::Type newPriority)
+void __fastcall UFG::PartDatabase::ModifyPriorityForPart(
+        UFG::PartDatabase *this,
+        UFG::PartDefinition *part,
+        int oldPriority,
+        int newPriority)
 {
-  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *v4; // rax
+  UFG::qNode<UFG::PartRequest,UFG::PartRequest> *mNext; // rax
 
-  v4 = this->mPool.mRequestList.mNode.mNext;
-  if ( v4 != (UFG::qNode<UFG::PartRequest,UFG::PartRequest> *)&this->mPool.mRequestList )
+  mNext = this->mPool.mRequestList.mNode.mNext;
+  if ( mNext != (UFG::qNode<UFG::PartRequest,UFG::PartRequest> *)&this->mPool.mRequestList )
   {
-    while ( v4[4].mPrev != (UFG::qNode<UFG::PartRequest,UFG::PartRequest> *)part->mBaseNode.mUID )
+    while ( mNext[4].mPrev != (UFG::qNode<UFG::PartRequest,UFG::PartRequest> *)part->mBaseNode.mUID )
     {
-      v4 = v4->mNext;
-      if ( v4 == (UFG::qNode<UFG::PartRequest,UFG::PartRequest> *)&this->mPool.mRequestList )
+      mNext = mNext->mNext;
+      if ( mNext == (UFG::qNode<UFG::PartRequest,UFG::PartRequest> *)&this->mPool.mRequestList )
         return;
     }
-    ++*((_DWORD *)&v4[5].mPrev + newPriority + 1);
-    LODWORD(v4[6].mNext) = Illusion::gEngine.mFrameCount;
-    --*((_DWORD *)&v4[5].mPrev + oldPriority + 1);
-    LODWORD(v4[6].mNext) = Illusion::gEngine.mFrameCount;
+    ++*((_DWORD *)&mNext[5].mPrev + newPriority + 1);
+    LODWORD(mNext[6].mNext) = Illusion::gEngine.mFrameCount;
+    --*((_DWORD *)&mNext[5].mPrev + oldPriority + 1);
+    LODWORD(mNext[6].mNext) = Illusion::gEngine.mFrameCount;
   }
 }
 
 // File Line: 638
 // RVA: 0x159560
+// attributes: thunk
 void __fastcall UFG::PartDatabase::LoadDatabase(UFG::PartDatabase *this)
 {
   PartDatabase_LoadDatabase();
@@ -1529,15 +1411,13 @@ void __fastcall UFG::PartDatabase::LoadDatabase(UFG::PartDatabase *this)
 // RVA: 0x159480
 void __fastcall UFG::PartDatabase::InitPool(UFG::PartDatabase *this)
 {
-  UFG::PartDatabase *v1; // rbx
-  unsigned int mainMemory; // [rsp+30h] [rbp+8h]
-  unsigned int textureMemory; // [rsp+38h] [rbp+10h]
+  unsigned int mainMemory; // [rsp+30h] [rbp+8h] BYREF
+  unsigned int textureMemory; // [rsp+38h] [rbp+10h] BYREF
 
-  v1 = this;
   mainMemory = 0;
   textureMemory = 0;
   PartDatabase_QueryPoolSize(&mainMemory, &textureMemory);
-  v1->mPool.mMaxModelMemory = mainMemory;
-  v1->mPool.mMaxTextureMemory = textureMemory;
+  this->mPool.mMaxModelMemory = mainMemory;
+  this->mPool.mMaxTextureMemory = textureMemory;
 }
 

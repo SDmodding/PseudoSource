@@ -1,144 +1,132 @@
 // File Line: 15
 // RVA: 0xBE52D0
-void __fastcall hkaiNavMeshSimplificationSnapshot::hkaiNavMeshSimplificationSnapshot(hkaiNavMeshSimplificationSnapshot *this)
+void __fastcall hkaiNavMeshSimplificationSnapshot::hkaiNavMeshSimplificationSnapshot(
+        hkaiNavMeshSimplificationSnapshot *this)
 {
-  hkaiNavMeshSimplificationSnapshot *v1; // rbx
-  hkaiNavMeshGenerationSettings *v2; // rcx
+  hkaiNavMeshGenerationSettings *p_m_settings; // rcx
 
-  v1 = this;
-  v2 = &this->m_settings;
-  *(_QWORD *)&v2[-1].m_carvedMaterialDeprecated = 0i64;
-  *(_QWORD *)&v2[-1].m_setBestFaceCenters.m_bool = 0i64;
-  LODWORD(v2[-1].m_snapshotFilename.m_stringAndFlag) = 0;
-  HIDWORD(v2[-1].m_snapshotFilename.m_stringAndFlag) = 2147483648;
-  v2[-1].m_overrideSettings.m_data = 0i64;
-  v2[-1].m_overrideSettings.m_size = 0;
-  v2[-1].m_overrideSettings.m_capacityAndFlags = 2147483648;
-  *((_DWORD *)&v2[-1].m_overrideSettings + 4) = 0;
-  hkaiNavMeshGenerationSettings::hkaiNavMeshGenerationSettings(v2);
-  v1->m_unsimplifiedNavMesh.m_pntr = 0i64;
+  p_m_settings = &this->m_settings;
+  *(_QWORD *)&p_m_settings[-1].m_carvedMaterialDeprecated = 0i64;
+  *(_QWORD *)&p_m_settings[-1].m_setBestFaceCenters.m_bool = 0i64;
+  LODWORD(p_m_settings[-1].m_snapshotFilename.m_stringAndFlag) = 0;
+  HIDWORD(p_m_settings[-1].m_snapshotFilename.m_stringAndFlag) = 0x80000000;
+  p_m_settings[-1].m_overrideSettings.m_data = 0i64;
+  p_m_settings[-1].m_overrideSettings.m_size = 0;
+  p_m_settings[-1].m_overrideSettings.m_capacityAndFlags = 0x80000000;
+  *((_DWORD *)&p_m_settings[-1].m_overrideSettings + 4) = 0;
+  hkaiNavMeshGenerationSettings::hkaiNavMeshGenerationSettings(p_m_settings);
+  this->m_unsimplifiedNavMesh.m_pntr = 0i64;
 }
 
 // File Line: 19
 // RVA: 0xBE5360
-void __fastcall hkaiNavMeshSimplificationSnapshot::~hkaiNavMeshSimplificationSnapshot(hkaiNavMeshSimplificationSnapshot *this)
+void __fastcall hkaiNavMeshSimplificationSnapshot::~hkaiNavMeshSimplificationSnapshot(
+        hkaiNavMeshSimplificationSnapshot *this)
 {
-  hkaiNavMeshSimplificationSnapshot *v1; // rbx
-  hkaiNavMesh *v2; // rcx
-  int v3; // er8
-  hkRefPtr<hkaiVolume const > *v4; // rsi
+  hkaiNavMesh *m_pntr; // rcx
+  int m_capacityAndFlags; // r8d
+  hkRefPtr<hkaiVolume const > *m_data; // rsi
   int v5; // eax
   __int64 i; // rdi
   hkReferencedObject *v7; // rcx
-  int v8; // er8
+  int v8; // r8d
 
-  v1 = this;
-  v2 = this->m_unsimplifiedNavMesh.m_pntr;
-  if ( v2 )
-    hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
-  v1->m_unsimplifiedNavMesh.m_pntr = 0i64;
-  hkaiNavMeshGenerationSettings::~hkaiNavMeshGenerationSettings(&v1->m_settings);
-  v3 = v1->m_cuttingTriangles.m_storage.m_words.m_capacityAndFlags;
-  v1->m_cuttingTriangles.m_storage.m_words.m_size = 0;
-  if ( v3 >= 0 )
+  m_pntr = this->m_unsimplifiedNavMesh.m_pntr;
+  if ( m_pntr )
+    hkReferencedObject::removeReference(m_pntr);
+  this->m_unsimplifiedNavMesh.m_pntr = 0i64;
+  hkaiNavMeshGenerationSettings::~hkaiNavMeshGenerationSettings(&this->m_settings);
+  m_capacityAndFlags = this->m_cuttingTriangles.m_storage.m_words.m_capacityAndFlags;
+  this->m_cuttingTriangles.m_storage.m_words.m_size = 0;
+  if ( m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_cuttingTriangles.m_storage.m_words.m_data,
-      4 * v3);
-  v1->m_cuttingTriangles.m_storage.m_words.m_data = 0i64;
-  v1->m_cuttingTriangles.m_storage.m_words.m_capacityAndFlags = 2147483648;
-  v4 = v1->m_carvers.m_data;
-  v5 = v1->m_carvers.m_size - 1;
-  for ( i = v5; i >= 0; v4[i--].m_pntr = 0i64 )
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_cuttingTriangles.m_storage.m_words.m_data,
+      4 * m_capacityAndFlags);
+  this->m_cuttingTriangles.m_storage.m_words.m_data = 0i64;
+  this->m_cuttingTriangles.m_storage.m_words.m_capacityAndFlags = 0x80000000;
+  m_data = this->m_carvers.m_data;
+  v5 = this->m_carvers.m_size - 1;
+  for ( i = v5; i >= 0; m_data[i--].m_pntr = 0i64 )
   {
-    v7 = (hkReferencedObject *)&v4[i].m_pntr->vfptr;
+    v7 = m_data[i].m_pntr;
     if ( v7 )
       hkReferencedObject::removeReference(v7);
   }
-  v8 = v1->m_carvers.m_capacityAndFlags;
-  v1->m_carvers.m_size = 0;
+  v8 = this->m_carvers.m_capacityAndFlags;
+  this->m_carvers.m_size = 0;
   if ( v8 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_carvers.m_data,
-      8 * v8);
-  v1->m_carvers.m_data = 0i64;
-  v1->m_carvers.m_capacityAndFlags = 2147483648;
-  if ( v1->m_geometry.m_pntr )
-    hkReferencedObject::removeReference((hkReferencedObject *)&v1->m_geometry.m_pntr->vfptr);
-  v1->m_geometry.m_pntr = 0i64;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, this->m_carvers.m_data, 8 * v8);
+  this->m_carvers.m_data = 0i64;
+  this->m_carvers.m_capacityAndFlags = 0x80000000;
+  if ( this->m_geometry.m_pntr )
+    hkReferencedObject::removeReference(this->m_geometry.m_pntr);
+  this->m_geometry.m_pntr = 0i64;
 }
 
 // File Line: 29
 // RVA: 0xBE5330
-void __fastcall hkaiNavMeshSimplificationSnapshot::hkaiNavMeshSimplificationSnapshot(hkaiNavMeshSimplificationSnapshot *this, hkFinishLoadedObjectFlag f)
+void __fastcall hkaiNavMeshSimplificationSnapshot::hkaiNavMeshSimplificationSnapshot(
+        hkaiNavMeshSimplificationSnapshot *this,
+        hkFinishLoadedObjectFlag f)
 {
   hkaiNavMeshGenerationSettings::hkaiNavMeshGenerationSettings(&this->m_settings, f);
 }
 
 // File Line: 33
 // RVA: 0xBE5460
-void __fastcall hkaiNavMeshSimplificationSnapshot::setRaycasterInformation(hkaiNavMeshSimplificationSnapshot *this, hkGeometry *triMesh, hkArrayBase<hkRefPtr<hkaiVolume const > > *carvers, hkBitField *cuttingTriangles)
+void __fastcall hkaiNavMeshSimplificationSnapshot::setRaycasterInformation(
+        hkaiNavMeshSimplificationSnapshot *this,
+        hkGeometry *triMesh,
+        hkArrayBase<hkRefPtr<hkaiVolume const > > *carvers,
+        hkBitField *cuttingTriangles)
 {
-  hkArrayBase<hkRefPtr<hkaiVolume const > > *v4; // r14
-  hkGeometry *v5; // rbx
-  hkaiNavMeshSimplificationSnapshot *v6; // rdi
-  __int64 v7; // r15
-  signed int v8; // ebx
-  signed __int64 v9; // r12
-  int v10; // er13
+  __int64 m_size; // r15
+  int v8; // ebx
+  hkArray<hkRefPtr<hkaiVolume const >,hkContainerHeapAllocator> *p_m_carvers; // r12
+  int v10; // r13d
   int v11; // eax
   int v12; // eax
-  int v13; // er9
-  signed __int64 v14; // rdi
+  int v13; // r9d
+  __int64 v14; // rdi
   __int64 v15; // rbx
   hkReferencedObject *v16; // rcx
-  hkReferencedObject **v17; // rbx
-  signed __int64 v18; // rsi
+  hkReferencedObject **p_m_pntr; // rbx
+  char *v18; // rsi
   __int64 v19; // rdi
   hkReferencedObject *v20; // rcx
   hkReferencedObject *v21; // rax
-  hkReferencedObject **v22; // rbx
+  hkRefPtr<hkaiVolume const > *v22; // rbx
   __int64 v23; // rsi
   signed __int64 v24; // r14
   hkBitFieldStorage<hkArray<unsigned int,hkContainerHeapAllocator> > *v25; // rdx
-  hkaiNavMeshSimplificationSnapshot *v26; // [rsp+70h] [rbp+8h]
-  hkResult result; // [rsp+78h] [rbp+10h]
+  hkResult result; // [rsp+78h] [rbp+10h] BYREF
   hkBitFieldStorage<hkArray<unsigned int,hkContainerHeapAllocator> > *__that; // [rsp+88h] [rbp+20h]
 
   __that = &cuttingTriangles->m_storage;
-  v26 = this;
-  v4 = carvers;
-  v5 = triMesh;
-  v6 = this;
   if ( triMesh )
-    hkReferencedObject::addReference((hkReferencedObject *)&triMesh->vfptr);
-  if ( v6->m_geometry.m_pntr )
-    hkReferencedObject::removeReference((hkReferencedObject *)&v6->m_geometry.m_pntr->vfptr);
-  v6->m_geometry.m_pntr = v5;
-  v7 = v4->m_size;
-  v8 = v6->m_carvers.m_size;
-  v9 = (signed __int64)&v6->m_carvers;
-  v10 = v4->m_size;
-  if ( (signed int)v7 > v8 )
-    v10 = v6->m_carvers.m_size;
-  v11 = v6->m_carvers.m_capacityAndFlags & 0x3FFFFFFF;
-  if ( v11 < (signed int)v7 )
+    hkReferencedObject::addReference(triMesh);
+  if ( this->m_geometry.m_pntr )
+    hkReferencedObject::removeReference(this->m_geometry.m_pntr);
+  this->m_geometry.m_pntr = triMesh;
+  m_size = carvers->m_size;
+  v8 = this->m_carvers.m_size;
+  p_m_carvers = &this->m_carvers;
+  v10 = carvers->m_size;
+  if ( (int)m_size > v8 )
+    v10 = this->m_carvers.m_size;
+  v11 = this->m_carvers.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v11 < (int)m_size )
   {
     v12 = 2 * v11;
-    v13 = v7;
-    if ( (signed int)v7 < v12 )
+    v13 = carvers->m_size;
+    if ( (int)m_size < v12 )
       v13 = v12;
-    hkArrayUtil::_reserve(
-      &result,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &v6->m_carvers,
-      v13,
-      8);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, &this->m_carvers, v13, 8);
   }
-  v14 = *(_QWORD *)v9 + 8 * v7;
-  v15 = v8 - (signed int)v7 - 1;
-  if ( (signed int)v15 >= 0 )
+  v14 = (__int64)&p_m_carvers->m_data[m_size];
+  v15 = v8 - (int)m_size - 1;
+  if ( (int)v15 >= 0 )
   {
     do
     {
@@ -149,37 +137,36 @@ void __fastcall hkaiNavMeshSimplificationSnapshot::setRaycasterInformation(hkaiN
     }
     while ( v15 >= 0 );
   }
-  v17 = *(hkReferencedObject ***)v9;
+  p_m_pntr = &p_m_carvers->m_data->m_pntr;
   if ( v10 > 0 )
   {
-    v18 = (char *)v4->m_data - (char *)v17;
+    v18 = (char *)((char *)carvers->m_data - (char *)p_m_pntr);
     v19 = v10;
     do
     {
-      v20 = *(hkReferencedObject **)((char *)v17 + v18);
+      v20 = *(hkReferencedObject **)((char *)p_m_pntr + (_QWORD)v18);
       if ( v20 )
         hkReferencedObject::addReference(v20);
-      if ( *v17 )
-        hkReferencedObject::removeReference(*v17);
-      v21 = *(hkReferencedObject **)((char *)v17 + v18);
-      ++v17;
-      *(v17 - 1) = v21;
+      if ( *p_m_pntr )
+        hkReferencedObject::removeReference(*p_m_pntr);
+      v21 = *(hkReferencedObject **)((char *)p_m_pntr++ + (_QWORD)v18);
+      *(p_m_pntr - 1) = v21;
       --v19;
     }
     while ( v19 );
   }
-  v22 = (hkReferencedObject **)&v4->m_data[v10];
-  v23 = (signed int)v7 - v10;
-  if ( (signed int)v7 - v10 > 0 )
+  v22 = &carvers->m_data[v10];
+  v23 = (int)m_size - v10;
+  if ( (int)m_size - v10 > 0 )
   {
-    v24 = *(_QWORD *)v9 + 8i64 * v10 - (_QWORD)v22;
+    v24 = (char *)&p_m_carvers->m_data[v10] - (char *)v22;
     do
     {
-      if ( (hkReferencedObject **)((char *)v22 + v24) )
+      if ( (hkRefPtr<hkaiVolume const > *)((char *)v22 + v24) )
       {
-        if ( *v22 )
-          hkReferencedObject::addReference(*v22);
-        *(hkReferencedObject **)((char *)v22 + v24) = *v22;
+        if ( v22->m_pntr )
+          hkReferencedObject::addReference(v22->m_pntr);
+        *(hkRefPtr<hkaiVolume const > *)((char *)v22 + v24) = (hkRefPtr<hkaiVolume const >)v22->m_pntr;
       }
       ++v22;
       --v23;
@@ -187,48 +174,43 @@ void __fastcall hkaiNavMeshSimplificationSnapshot::setRaycasterInformation(hkaiN
     while ( v23 );
   }
   v25 = __that;
-  *(_DWORD *)(v9 + 8) = v7;
-  hkBitFieldStorage<hkArray<unsigned int,hkContainerHeapAllocator>>::operator=(&v26->m_cuttingTriangles.m_storage, v25);
+  p_m_carvers->m_size = m_size;
+  hkBitFieldStorage<hkArray<unsigned int,hkContainerHeapAllocator>>::operator=(&this->m_cuttingTriangles.m_storage, v25);
 }
 
 // File Line: 40
 // RVA: 0xBE55E0
-void __fastcall hkaiNavMeshSimplificationSnapshot::setMeshAndSettings(hkaiNavMeshSimplificationSnapshot *this, hkaiNavMesh *mesh, hkaiNavMeshGenerationSettings *settings)
+void __fastcall hkaiNavMeshSimplificationSnapshot::setMeshAndSettings(
+        hkaiNavMeshSimplificationSnapshot *this,
+        hkaiNavMesh *mesh,
+        hkaiNavMeshGenerationSettings *settings)
 {
-  hkaiNavMeshGenerationSettings *v3; // rsi
-  hkaiNavMesh *v4; // rdi
-  hkaiNavMeshSimplificationSnapshot *v5; // rbx
-  hkReferencedObject *v6; // rcx
+  hkaiNavMesh *m_pntr; // rcx
 
-  v3 = settings;
-  v4 = mesh;
-  v5 = this;
   if ( mesh )
-    hkReferencedObject::addReference((hkReferencedObject *)&mesh->vfptr);
-  v6 = (hkReferencedObject *)&v5->m_unsimplifiedNavMesh.m_pntr->vfptr;
-  if ( v6 )
-    hkReferencedObject::removeReference(v6);
-  v5->m_unsimplifiedNavMesh.m_pntr = v4;
-  hkaiNavMeshGenerationSettings::operator=(&v5->m_settings, v3);
+    hkReferencedObject::addReference(mesh);
+  m_pntr = this->m_unsimplifiedNavMesh.m_pntr;
+  if ( m_pntr )
+    hkReferencedObject::removeReference(m_pntr);
+  this->m_unsimplifiedNavMesh.m_pntr = mesh;
+  hkaiNavMeshGenerationSettings::operator=(&this->m_settings, settings);
 }
 
 // File Line: 46
 // RVA: 0xBE5640
 void __fastcall hkaiNavMeshSimplificationSnapshot::save(hkaiNavMeshSimplificationSnapshot *this)
 {
-  hkaiNavMeshSimplificationSnapshot *v1; // rbx
   hkClass *v2; // rax
-  hkOstream v3; // [rsp+30h] [rbp-28h]
-  hkBool result; // [rsp+60h] [rbp+8h]
+  hkOstream v3; // [rsp+30h] [rbp-28h] BYREF
+  hkResult result; // [rsp+60h] [rbp+8h] BYREF
 
-  v1 = this;
   hkOstream::hkOstream(
     &v3,
-    (const char *)((_QWORD)this->m_settings.m_simplificationSettings.m_snapshotFilename.m_stringAndFlag & 0xFFFFFFFFFFFFFFFEui64));
-  if ( hkOstream::isOk(&v3, &result)->m_bool )
+    (const char *)((unsigned __int64)this->m_settings.m_simplificationSettings.m_snapshotFilename.m_stringAndFlag & 0xFFFFFFFFFFFFFFFEui64));
+  if ( hkOstream::isOk(&v3, (hkBool *)&result)->m_bool )
   {
     v2 = hkaiNavMeshSimplificationSnapshot::staticClass();
-    hkSerializeUtil::save((hkResult *)&result, v1, v2, v3.m_writer.m_pntr, 0);
+    hkSerializeUtil::save(&result, this, v2, v3.m_writer.m_pntr, 0);
   }
   hkOstream::~hkOstream(&v3);
 }

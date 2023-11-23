@@ -1,125 +1,110 @@
 // File Line: 25
 // RVA: 0x8DE240
-Scaleform::GFx::State *__fastcall Scaleform::GFx::FontManagerStates::GetStateAddRef(Scaleform::GFx::FontManagerStates *this, Scaleform::GFx::State::StateType state)
+Scaleform::GFx::StateBagVtbl *__fastcall Scaleform::GFx::FontManagerStates::GetStateAddRef(
+        Scaleform::GFx::FontManagerStates *this,
+        Scaleform::GFx::State::StateType state)
 {
-  Scaleform::GFx::FontManagerStates *v2; // rbx
   Scaleform::GFx::Resource *v3; // rcx
-  Scaleform::GFx::State *result; // rax
-  Scaleform::GFx::StateBagVtbl *v5; // rcx
-  Scaleform::GFx::Resource *v6; // rcx
+  Scaleform::GFx::StateBagVtbl *vfptr; // rcx
+  Scaleform::GFx::Resource *pObject; // rcx
   Scaleform::GFx::Resource *v7; // rcx
 
-  v2 = this;
   switch ( state )
   {
     case 20:
       v3 = *(Scaleform::GFx::Resource **)&this->RefCount;
       if ( v3 )
         Scaleform::Render::RenderBuffer::AddRef(v3);
-      result = *(Scaleform::GFx::State **)&v2->RefCount;
-      break;
+      return *(Scaleform::GFx::StateBagVtbl **)&this->RefCount;
     case 23:
-      v5 = this->vfptr;
-      if ( v5 )
-        Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)v5);
-      result = (Scaleform::GFx::State *)v2->vfptr;
-      break;
+      vfptr = this->Scaleform::GFx::StateBag::vfptr;
+      if ( vfptr )
+        Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)vfptr);
+      return this->Scaleform::GFx::StateBag::vfptr;
     case 22:
-      v6 = (Scaleform::GFx::Resource *)this->pFontLib.pObject;
-      if ( v6 )
-        Scaleform::Render::RenderBuffer::AddRef(v6);
-      result = (Scaleform::GFx::State *)&v2->pFontLib.pObject->vfptr;
-      break;
+      pObject = (Scaleform::GFx::Resource *)this->pFontLib.pObject;
+      if ( pObject )
+        Scaleform::Render::RenderBuffer::AddRef(pObject);
+      return (Scaleform::GFx::StateBagVtbl *)this->pFontLib.pObject;
     case 1:
       v7 = (Scaleform::GFx::Resource *)this->pFontMap.pObject;
       if ( v7 )
         Scaleform::Render::RenderBuffer::AddRef(v7);
-      result = (Scaleform::GFx::State *)&v2->pFontMap.pObject->vfptr;
-      break;
+      return (Scaleform::GFx::StateBagVtbl *)this->pFontMap.pObject;
     default:
-      result = (Scaleform::GFx::State *)((__int64 (*)(void))this->pFontProvider.pObject->vfptr[3].__vecDelDtor)();
-      break;
+      return (Scaleform::GFx::StateBagVtbl *)((__int64 (__fastcall *)(Scaleform::GFx::FontProvider *))this->pFontProvider.pObject->vfptr[3].__vecDelDtor)(this->pFontProvider.pObject);
   }
-  return result;
 }
 
 // File Line: 56
 // RVA: 0x8BB050
-__int64 __fastcall Scaleform::GFx::FontManagerStates::CheckStateChange(Scaleform::GFx::FontManagerStates *this, Scaleform::GFx::FontLib *pfontLib, Scaleform::GFx::FontMap *pfontMap, Scaleform::GFx::FontProvider *pfontProvider, Scaleform::GFx::Translator *ptranslator)
+__int64 __fastcall Scaleform::GFx::FontManagerStates::CheckStateChange(
+        Scaleform::GFx::FontManagerStates *this,
+        Scaleform::GFx::Resource *pfontLib,
+        Scaleform::GFx::Resource *pfontMap,
+        Scaleform::GFx::Resource *pfontProvider,
+        Scaleform::GFx::Translator *ptranslator)
 {
   unsigned __int8 v5; // di
-  Scaleform::GFx::Resource *v6; // rsi
-  Scaleform::GFx::Resource *v7; // rbp
-  Scaleform::GFx::FontLib *v8; // r14
-  Scaleform::GFx::FontManagerStates *v9; // rbx
-  Scaleform::Render::RenderBuffer *v10; // rcx
+  Scaleform::Render::RenderBuffer *pObject; // rcx
   Scaleform::Render::RenderBuffer *v11; // rcx
   Scaleform::Render::RenderBuffer *v12; // rcx
   Scaleform::Render::RenderBuffer *v13; // rcx
 
   v5 = 0;
-  v6 = (Scaleform::GFx::Resource *)pfontProvider;
-  v7 = (Scaleform::GFx::Resource *)pfontMap;
-  v8 = pfontLib;
-  v9 = this;
-  if ( this->pFontLib.pObject != pfontLib )
+  if ( (Scaleform::GFx::Resource *)this->pFontLib.pObject != pfontLib )
   {
     v5 = 1;
     if ( pfontLib )
-      Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)pfontLib);
-    v10 = (Scaleform::Render::RenderBuffer *)v9->pFontLib.pObject;
-    if ( v10 )
-      Scaleform::RefCountImpl::Release(v10);
-    v9->pFontLib.pObject = v8;
+      Scaleform::Render::RenderBuffer::AddRef(pfontLib);
+    pObject = (Scaleform::Render::RenderBuffer *)this->pFontLib.pObject;
+    if ( pObject )
+      Scaleform::RefCountImpl::Release(pObject);
+    this->pFontLib.pObject = (Scaleform::GFx::FontLib *)pfontLib;
   }
-  if ( (Scaleform::GFx::Resource *)v9->pFontMap.pObject != v7 )
+  if ( (Scaleform::GFx::Resource *)this->pFontMap.pObject != pfontMap )
   {
     v5 |= 2u;
-    if ( v7 )
-      Scaleform::Render::RenderBuffer::AddRef(v7);
-    v11 = (Scaleform::Render::RenderBuffer *)v9->pFontMap.pObject;
+    if ( pfontMap )
+      Scaleform::Render::RenderBuffer::AddRef(pfontMap);
+    v11 = (Scaleform::Render::RenderBuffer *)this->pFontMap.pObject;
     if ( v11 )
       Scaleform::RefCountImpl::Release(v11);
-    v9->pFontMap.pObject = (Scaleform::GFx::FontMap *)v7;
+    this->pFontMap.pObject = (Scaleform::GFx::FontMap *)pfontMap;
   }
-  if ( (Scaleform::GFx::Resource *)v9->pFontProvider.pObject != v6 )
+  if ( (Scaleform::GFx::Resource *)this->pFontProvider.pObject != pfontProvider )
   {
     v5 |= 4u;
-    if ( v6 )
-      Scaleform::Render::RenderBuffer::AddRef(v6);
-    v12 = (Scaleform::Render::RenderBuffer *)v9->pFontProvider.pObject;
+    if ( pfontProvider )
+      Scaleform::Render::RenderBuffer::AddRef(pfontProvider);
+    v12 = (Scaleform::Render::RenderBuffer *)this->pFontProvider.pObject;
     if ( v12 )
       Scaleform::RefCountImpl::Release(v12);
-    v9->pFontProvider.pObject = (Scaleform::GFx::FontProvider *)v6;
+    this->pFontProvider.pObject = (Scaleform::GFx::FontProvider *)pfontProvider;
   }
-  if ( v9->pTranslator.pObject != ptranslator )
+  if ( this->pTranslator.pObject != ptranslator )
   {
     v5 |= 8u;
     if ( ptranslator )
       Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)ptranslator);
-    v13 = (Scaleform::Render::RenderBuffer *)v9->pTranslator.pObject;
+    v13 = (Scaleform::Render::RenderBuffer *)this->pTranslator.pObject;
     if ( v13 )
       Scaleform::RefCountImpl::Release(v13);
-    v9->pTranslator.pObject = ptranslator;
+    this->pTranslator.pObject = ptranslator;
   }
   return v5;
 }
 
 // File Line: 88
 // RVA: 0x896A00
-void __fastcall Scaleform::GFx::FontManager::FontManager(Scaleform::GFx::FontManager *this, Scaleform::GFx::MovieImpl *movie, Scaleform::GFx::MovieDefImpl *pdefImpl, Scaleform::GFx::FontManagerStates *pstate)
+void __fastcall Scaleform::GFx::FontManager::FontManager(
+        Scaleform::GFx::FontManager *this,
+        Scaleform::GFx::MovieImpl *movie,
+        Scaleform::GFx::MovieDefImpl *pdefImpl,
+        Scaleform::GFx::FontManagerStates *pstate)
 {
-  Scaleform::GFx::FontManagerStates *v4; // rbp
-  Scaleform::GFx::MovieDefImpl *v5; // rsi
-  Scaleform::GFx::MovieImpl *v6; // rdi
-  Scaleform::GFx::FontManager *v7; // r14
-  Scaleform::Array<Scaleform::Ptr<Scaleform::GFx::MovieDataDef>,2,Scaleform::ArrayDefaultPolicy> *v8; // rax
-  Scaleform::GFx::FontMap::MapEntry *v9; // rbx
+  Scaleform::GFx::FontMap::MapEntry *p_FontMapEntry; // rbx
 
-  v4 = pstate;
-  v5 = pdefImpl;
-  v6 = movie;
-  v7 = this;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
@@ -128,35 +113,30 @@ void __fastcall Scaleform::GFx::FontManager::FontManager(Scaleform::GFx::FontMan
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Text::FontManagerBase::`vftable;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontManager::`vftable;
   this->CreatedFonts.pTable = 0i64;
-  v8 = &this->FontMovies;
-  v8->Data.Data = 0i64;
-  v8->Data.Size = 0i64;
-  v8->Data.Policy.Capacity = 0i64;
+  this->FontMovies.Data.Data = 0i64;
+  this->FontMovies.Data.Size = 0i64;
+  this->FontMovies.Data.Policy.Capacity = 0i64;
   this->pEmptyFont.pObject = 0i64;
-  v9 = &this->FontMapEntry;
+  p_FontMapEntry = &this->FontMapEntry;
   Scaleform::String::String(&this->FontMapEntry.Name);
-  v9->ScaleFactor = 1.0;
-  v9->Flags = 16;
-  v7->pMovie = v6;
-  v7->pDefImpl = v5;
-  v7->pWeakLib = 0i64;
-  v7->pState = v4;
-  Scaleform::GFx::FontManager::commonInit(v7);
+  p_FontMapEntry->ScaleFactor = 1.0;
+  p_FontMapEntry->Flags = MFF_Original;
+  this->pMovie = movie;
+  this->pDefImpl = pdefImpl;
+  this->pWeakLib = 0i64;
+  this->pState = pstate;
+  Scaleform::GFx::FontManager::commonInit(this);
 }
 
 // File Line: 98
 // RVA: 0x896AF0
-void __fastcall Scaleform::GFx::FontManager::FontManager(Scaleform::GFx::FontManager *this, Scaleform::GFx::ResourceWeakLib *pweakLib, Scaleform::GFx::FontManagerStates *pstate)
+void __fastcall Scaleform::GFx::FontManager::FontManager(
+        Scaleform::GFx::FontManager *this,
+        Scaleform::GFx::ResourceWeakLib *pweakLib,
+        Scaleform::GFx::FontManagerStates *pstate)
 {
-  Scaleform::GFx::FontManagerStates *v3; // rsi
-  Scaleform::GFx::ResourceWeakLib *v4; // rdi
-  Scaleform::GFx::FontManager *v5; // r14
-  Scaleform::GFx::FontMap::MapEntry *v6; // rbx
-  Scaleform::Array<Scaleform::Ptr<Scaleform::GFx::MovieDataDef>,2,Scaleform::ArrayDefaultPolicy> *v7; // [rsp+68h] [rbp+10h]
+  Scaleform::GFx::FontMap::MapEntry *p_FontMapEntry; // rbx
 
-  v3 = pstate;
-  v4 = pweakLib;
-  v5 = this;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImplCore::`vftable;
   this->RefCount = 1;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::RefCountImpl::`vftable;
@@ -165,43 +145,41 @@ void __fastcall Scaleform::GFx::FontManager::FontManager(Scaleform::GFx::FontMan
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Text::FontManagerBase::`vftable;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontManager::`vftable;
   this->CreatedFonts.pTable = 0i64;
-  v7 = &this->FontMovies;
-  *(_OWORD *)&v7->Data.Data = 0ui64;
-  v7->Data.Policy.Capacity = 0i64;
+  this->FontMovies.Data.Data = 0i64;
+  this->FontMovies.Data.Size = 0i64;
+  this->FontMovies.Data.Policy.Capacity = 0i64;
   this->pEmptyFont.pObject = 0i64;
-  v6 = &this->FontMapEntry;
+  p_FontMapEntry = &this->FontMapEntry;
   Scaleform::String::String(&this->FontMapEntry.Name);
-  v6->ScaleFactor = 1.0;
-  v6->Flags = 16;
-  v5->pMovie = 0i64;
-  v5->pDefImpl = 0i64;
-  v5->pWeakLib = v4;
-  v5->pState = v3;
-  Scaleform::GFx::FontManager::commonInit(v5);
+  p_FontMapEntry->ScaleFactor = 1.0;
+  p_FontMapEntry->Flags = MFF_Original;
+  this->pMovie = 0i64;
+  this->pDefImpl = 0i64;
+  this->pWeakLib = pweakLib;
+  this->pState = pstate;
+  Scaleform::GFx::FontManager::commonInit(this);
 }
 
 // File Line: 107
 // RVA: 0x91E2B0
 void __fastcall Scaleform::GFx::FontManager::commonInit(Scaleform::GFx::FontManager *this)
 {
-  Scaleform::GFx::FontManager *v1; // rbp
   Scaleform::GFx::FontData *v2; // rax
-  Scaleform::Render::Font *v3; // rax
-  Scaleform::Render::Font *v4; // rsi
+  Scaleform::GFx::Resource *v3; // rax
+  Scaleform::GFx::Resource *v4; // rsi
   Scaleform::GFx::FontResource *v5; // rax
   __int64 v6; // rax
   __int64 v7; // rbx
   __int64 v8; // rdi
   Scaleform::GFx::Resource *v9; // r14
-  Scaleform::Render::RenderBuffer *v10; // rcx
+  Scaleform::Render::RenderBuffer *pObject; // rcx
   __int64 v11; // rcx
-  int v12; // [rsp+78h] [rbp+10h]
-  Scaleform::GFx::FontData *v13; // [rsp+80h] [rbp+18h]
-  Scaleform::Render::Font *v14; // [rsp+88h] [rbp+20h]
+  int v12; // [rsp+78h] [rbp+10h] BYREF
+  Scaleform::GFx::FontData *v13; // [rsp+80h] [rbp+18h] BYREF
+  Scaleform::GFx::Resource *v14; // [rsp+88h] [rbp+20h]
 
-  v1 = this;
   v12 = 75;
-  v2 = (Scaleform::GFx::FontData *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, Scaleform::GFx::FontManager *, signed __int64, int *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap)(
+  v2 = (Scaleform::GFx::FontData *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, Scaleform::GFx::FontManager *, __int64, int *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap)(
                                      Scaleform::Memory::pGlobalHeap,
                                      this,
                                      136i64,
@@ -221,9 +199,9 @@ void __fastcall Scaleform::GFx::FontManager::commonInit(Scaleform::GFx::FontMana
   LODWORD(v13) = 2;
   v5 = (Scaleform::GFx::FontResource *)Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap(
                                          Scaleform::Memory::pGlobalHeap,
-                                         v1,
-                                         64ui64,
-                                         (Scaleform::AllocInfo *)&v13);
+                                         this,
+                                         64i64,
+                                         &v13);
   if ( v5 )
   {
     Scaleform::GFx::FontResource::FontResource(v5, v4, 0i64);
@@ -233,7 +211,7 @@ void __fastcall Scaleform::GFx::FontManager::commonInit(Scaleform::GFx::FontMana
   {
     v7 = 0i64;
   }
-  v8 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
+  v8 = ((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
          Scaleform::Memory::pGlobalHeap,
          64i64);
   if ( v8 )
@@ -259,10 +237,10 @@ void __fastcall Scaleform::GFx::FontManager::commonInit(Scaleform::GFx::FontMana
   {
     v8 = 0i64;
   }
-  v10 = (Scaleform::Render::RenderBuffer *)v1->pEmptyFont.pObject;
-  if ( v10 )
-    Scaleform::RefCountImpl::Release(v10);
-  v1->pEmptyFont.pObject = (Scaleform::GFx::FontHandle *)v8;
+  pObject = (Scaleform::Render::RenderBuffer *)this->pEmptyFont.pObject;
+  if ( pObject )
+    Scaleform::RefCountImpl::Release(pObject);
+  this->pEmptyFont.pObject = (Scaleform::GFx::FontHandle *)v8;
   if ( v7 && !_InterlockedDecrement((volatile signed __int32 *)(v7 + 8)) )
   {
     v11 = *(_QWORD *)(v7 + 16);
@@ -271,7 +249,7 @@ void __fastcall Scaleform::GFx::FontManager::commonInit(Scaleform::GFx::FontMana
       (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)v11 + 8i64))(v11, v7);
       *(_QWORD *)(v7 + 16) = 0i64;
     }
-    (**(void (__fastcall ***)(__int64, signed __int64))v7)(v7, 1i64);
+    (**(void (__fastcall ***)(__int64, __int64))v7)(v7, 1i64);
   }
   if ( v4 )
     Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v4);
@@ -281,25 +259,23 @@ void __fastcall Scaleform::GFx::FontManager::commonInit(Scaleform::GFx::FontMana
 // RVA: 0x8A4970
 void __fastcall Scaleform::GFx::FontManager::~FontManager(Scaleform::GFx::FontManager *this)
 {
-  Scaleform::GFx::FontManager *v1; // rdi
-  Scaleform::Render::RenderBuffer *v2; // rcx
+  Scaleform::Render::RenderBuffer *pObject; // rcx
 
-  v1 = this;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontManager::`vftable;
   if ( !_InterlockedDecrement((volatile signed __int32 *)((this->FontMapEntry.Name.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64)
                                                         + 8)) )
-    ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
-  v2 = (Scaleform::Render::RenderBuffer *)v1->pEmptyFont.pObject;
-  if ( v2 )
-    Scaleform::RefCountImpl::Release(v2);
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+  pObject = (Scaleform::Render::RenderBuffer *)this->pEmptyFont.pObject;
+  if ( pObject )
+    Scaleform::RefCountImpl::Release(pObject);
   Scaleform::ConstructorMov<Scaleform::Ptr<Scaleform::GFx::MovieDefImpl>>::DestructArray(
-    (Scaleform::Ptr<Scaleform::GFx::MovieDefImpl> *)v1->FontMovies.Data.Data,
-    v1->FontMovies.Data.Size);
-  if ( v1->FontMovies.Data.Data )
-    ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
-  Scaleform::HashSet<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp>>::~HashSet<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp>>((Scaleform::HashSet<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> > *)&v1->CreatedFonts.pTable);
-  v1->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Text::FontManagerBase::`vftable;
-  Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&v1->vfptr);
+    (Scaleform::Ptr<Scaleform::GFx::MovieDefImpl> *)this->FontMovies.Data.Data,
+    this->FontMovies.Data.Size);
+  if ( this->FontMovies.Data.Data )
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+  Scaleform::HashSet<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp>>::~HashSet<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp>>(&this->CreatedFonts);
+  this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::Render::Text::FontManagerBase::`vftable;
+  Scaleform::RefCountImplCore::~RefCountImplCore(this);
 }
 
 // File Line: 141
@@ -312,221 +288,210 @@ char *__fastcall Scaleform::GFx::FontFlagsToString(unsigned int matchFontFlags)
   if ( !matchFontFlags )
     return (char *)StrFlags[0];
   v2 = matchFontFlags & 3;
-  if ( matchFontFlags & 0x10 )
+  if ( (matchFontFlags & 0x10) != 0 )
   {
     if ( v2 == 3 )
     {
-      result = off_1420B1208;
+      return off_1420B1208;
     }
-    else if ( matchFontFlags & 2 )
+    else if ( (matchFontFlags & 2) != 0 )
     {
-      result = off_1420B11F8[0];
+      return off_1420B11F8[0];
     }
     else
     {
       result = off_1420B11F0[0];
-      if ( matchFontFlags & 1 )
-        result = off_1420B1200[0];
+      if ( (matchFontFlags & 1) != 0 )
+        return off_1420B1200[0];
     }
   }
   else if ( v2 == 3 )
   {
-    result = off_1420B11E8[0];
+    return off_1420B11E8[0];
   }
-  else if ( matchFontFlags & 2 )
+  else if ( (matchFontFlags & 2) != 0 )
   {
-    result = off_1420B11D8[0];
+    return off_1420B11D8[0];
   }
   else
   {
     result = (char *)StrFlags[0];
-    if ( matchFontFlags & 1 )
-      result = off_1420B11E0[0];
+    if ( (matchFontFlags & 1) != 0 )
+      return off_1420B11E0[0];
   }
   return result;
 }
 
 // File Line: 167
 // RVA: 0x8B2440
-void __fastcall Scaleform::GFx::AddSearchInfo_2(Scaleform::Render::Text::FontManagerBase::FontSearchPathInfo *psearchInfo, const char *line)
+void __fastcall Scaleform::GFx::AddSearchInfo_2(
+        Scaleform::Render::Text::FontManagerBase::FontSearchPathInfo *psearchInfo,
+        const char *line)
 {
-  const char *v2; // rbp
-  Scaleform::Render::Text::FontManagerBase::FontSearchPathInfo *v3; // rbx
   int i; // edi
-  Scaleform::String v5; // [rsp+50h] [rbp+8h]
+  Scaleform::String v5; // [rsp+50h] [rbp+8h] BYREF
 
   if ( psearchInfo )
   {
-    v2 = line;
-    v3 = psearchInfo;
     Scaleform::String::String(&v5, "   ");
-    for ( i = 0; i < v3->Indent; ++i )
+    for ( i = 0; i < psearchInfo->Indent; ++i )
       Scaleform::StringBuffer::AppendString(
-        &v3->Info,
+        &psearchInfo->Info,
         (const char *)((v5.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12),
         *(_QWORD *)(v5.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) & 0x7FFFFFFFFFFFFFFFi64);
-    Scaleform::StringBuffer::AppendString(&v3->Info, v2, -1i64);
-    Scaleform::StringBuffer::AppendString(&v3->Info, "\n", -1i64);
+    Scaleform::StringBuffer::AppendString(&psearchInfo->Info, line, -1i64);
+    Scaleform::StringBuffer::AppendString(&psearchInfo->Info, "\n", -1i64);
     if ( _InterlockedExchangeAdd(
            (volatile signed __int32 *)((v5.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8),
            0xFFFFFFFF) == 1 )
-      ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+      ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
   }
 }
 
 // File Line: 179
 // RVA: 0x8B2510
-void __fastcall Scaleform::GFx::AddSearchInfo_3(Scaleform::Render::Text::FontManagerBase::FontSearchPathInfo *psearchInfo, const char *pfontname, unsigned int flags, bool fontlib_installed, Scaleform::GFx::MovieDefImpl::SearchInfo *resSearchInfo)
+void __fastcall Scaleform::GFx::AddSearchInfo_3(
+        Scaleform::Render::Text::FontManagerBase::FontSearchPathInfo *psearchInfo,
+        char *pfontname,
+        unsigned int flags,
+        bool fontlib_installed,
+        Scaleform::GFx::MovieDefImpl::SearchInfo *resSearchInfo)
 {
-  bool v5; // bl
-  unsigned int v6; // er12
-  Scaleform::Render::Text::FontManagerBase::FontSearchPathInfo *v7; // r15
   Scaleform::GFx::MovieDefImpl::SearchInfo *v8; // r13
-  Scaleform::GFx::MovieDefImpl::SearchInfo::SearchStatus v9; // eax
+  Scaleform::GFx::MovieDefImpl::SearchInfo::SearchStatus Status; // eax
   Scaleform::MsgFormat *v10; // rcx
-  Scaleform::HashSet<Scaleform::String,Scaleform::String::NoCaseHashFunctor,Scaleform::String::NoCaseHashFunctor,Scaleform::AllocatorGH<Scaleform::String,2>,Scaleform::HashsetCachedEntry<Scaleform::String,Scaleform::String::NoCaseHashFunctor> > *v11; // r14
-  Scaleform::HashSetBase<Scaleform::String,Scaleform::String::NoCaseHashFunctor,Scaleform::String::NoCaseHashFunctor,Scaleform::AllocatorGH<Scaleform::String,2>,Scaleform::HashsetCachedEntry<Scaleform::String,Scaleform::String::NoCaseHashFunctor> >::TableType *v12; // rax
+  Scaleform::HashSet<Scaleform::String,Scaleform::String::NoCaseHashFunctor,Scaleform::String::NoCaseHashFunctor,Scaleform::AllocatorGH<Scaleform::String,2>,Scaleform::HashsetCachedEntry<Scaleform::String,Scaleform::String::NoCaseHashFunctor> > *p_ImportSearchUrls; // r14
+  Scaleform::HashSetBase<Scaleform::String,Scaleform::String::NoCaseHashFunctor,Scaleform::String::NoCaseHashFunctor,Scaleform::AllocatorGH<Scaleform::String,2>,Scaleform::HashsetCachedEntry<Scaleform::String,Scaleform::String::NoCaseHashFunctor> >::TableType *pTable; // rax
   Scaleform::HashSetBase<Scaleform::String,Scaleform::String::NoCaseHashFunctor,Scaleform::String::NoCaseHashFunctor,Scaleform::AllocatorGH<Scaleform::String,2>,Scaleform::HashsetCachedEntry<Scaleform::String,Scaleform::String::NoCaseHashFunctor> >::TableType *v13; // rdx
   unsigned __int64 v14; // rax
   Scaleform::HashSetBase<Scaleform::String,Scaleform::String::NoCaseHashFunctor,Scaleform::String::NoCaseHashFunctor,Scaleform::AllocatorGH<Scaleform::String,2>,Scaleform::HashsetCachedEntry<Scaleform::String,Scaleform::String::NoCaseHashFunctor> >::TableType *v15; // rcx
-  signed __int64 v16; // rbx
-  __int64 v17; // rdi
-  Scaleform::HashSetBase<Scaleform::String,Scaleform::String::NoCaseHashFunctor,Scaleform::String::NoCaseHashFunctor,Scaleform::AllocatorGH<Scaleform::String,2>,Scaleform::HashsetCachedEntry<Scaleform::String,Scaleform::String::NoCaseHashFunctor> >::TableType *v18; // rdx
-  signed __int64 v19; // rcx
-  unsigned __int64 v20; // rax
-  Scaleform::HashSetBase<Scaleform::String,Scaleform::String::NoCaseHashFunctor,Scaleform::String::NoCaseHashFunctor,Scaleform::AllocatorGH<Scaleform::String,2>,Scaleform::HashsetCachedEntry<Scaleform::String,Scaleform::String::NoCaseHashFunctor> >::TableType *v21; // rcx
+  __int128 v16; // rcx
+  Scaleform::HashSetBase<Scaleform::String,Scaleform::String::NoCaseHashFunctor,Scaleform::String::NoCaseHashFunctor,Scaleform::AllocatorGH<Scaleform::String,2>,Scaleform::HashsetCachedEntry<Scaleform::String,Scaleform::String::NoCaseHashFunctor> >::TableType *v17; // rdx
+  unsigned __int64 v18; // rax
+  Scaleform::HashSetBase<Scaleform::String,Scaleform::String::NoCaseHashFunctor,Scaleform::String::NoCaseHashFunctor,Scaleform::AllocatorGH<Scaleform::String,2>,Scaleform::HashsetCachedEntry<Scaleform::String,Scaleform::String::NoCaseHashFunctor> >::TableType *v19; // rcx
+  Scaleform::String *v20; // rax
+  Scaleform::String *v21; // rax
   Scaleform::String *v22; // rax
-  Scaleform::String *v23; // rax
-  Scaleform::String *v24; // rax
-  unsigned __int64 v25; // rdx
-  unsigned __int64 v26; // rdx
-  unsigned __int64 v27; // rdx
-  unsigned __int64 v28; // rcx
-  _QWORD *v29; // rax
-  unsigned __int64 v30; // rdx
-  char *v31; // rax
-  __int128 v32; // [rsp+20h] [rbp-E0h]
-  __m128i v33; // [rsp+30h] [rbp-D0h]
-  Scaleform::String v34; // [rsp+40h] [rbp-C0h]
-  Scaleform::String v35; // [rsp+48h] [rbp-B8h]
-  char *v36; // [rsp+50h] [rbp-B0h]
-  char *v37; // [rsp+58h] [rbp-A8h]
-  char *v38; // [rsp+60h] [rbp-A0h]
-  char *v39; // [rsp+68h] [rbp-98h]
-  Scaleform::String result; // [rsp+70h] [rbp-90h]
-  char *v41; // [rsp+78h] [rbp-88h]
-  char *v42; // [rsp+80h] [rbp-80h]
-  char *v43; // [rsp+88h] [rbp-78h]
-  char *v44; // [rsp+90h] [rbp-70h]
-  char *v45; // [rsp+98h] [rbp-68h]
-  Scaleform::MsgFormat::Sink v46; // [rsp+A0h] [rbp-60h]
-  Scaleform::MsgFormat::Sink v47; // [rsp+B8h] [rbp-48h]
-  Scaleform::MsgFormat::Sink v48; // [rsp+D0h] [rbp-30h]
-  Scaleform::MsgFormat::Sink r; // [rsp+E8h] [rbp-18h]
-  Scaleform::MsgFormat::Sink v50; // [rsp+100h] [rbp+0h]
-  Scaleform::MsgFormat::Sink v51; // [rsp+118h] [rbp+18h]
-  Scaleform::MsgFormat::Sink v52; // [rsp+130h] [rbp+30h]
-  Scaleform::MsgFormat::Sink v53; // [rsp+148h] [rbp+48h]
-  Scaleform::MsgFormat::Sink v54; // [rsp+160h] [rbp+60h]
-  Scaleform::MsgFormat::Sink v55; // [rsp+178h] [rbp+78h]
-  __int64 v56; // [rsp+190h] [rbp+90h]
-  char line; // [rsp+1A0h] [rbp+A0h]
-  Scaleform::MsgFormat v58; // [rsp+5A0h] [rbp+4A0h]
-  Scaleform::MsgFormat v59; // [rsp+9A0h] [rbp+8A0h]
-  Scaleform::MsgFormat v60; // [rsp+DA0h] [rbp+CA0h]
-  Scaleform::MsgFormat v61; // [rsp+11A0h] [rbp+10A0h]
-  Scaleform::MsgFormat v62; // [rsp+15A0h] [rbp+14A0h]
-  Scaleform::MsgFormat v63; // [rsp+19A0h] [rbp+18A0h]
-  Scaleform::MsgFormat v64; // [rsp+1DA0h] [rbp+1CA0h]
-  Scaleform::MsgFormat v65; // [rsp+21A0h] [rbp+20A0h]
-  Scaleform::MsgFormat v66; // [rsp+25A0h] [rbp+24A0h]
-  Scaleform::MsgFormat v67; // [rsp+29A0h] [rbp+28A0h]
-  Scaleform::String v68; // [rsp+2DE0h] [rbp+2CE0h]
-  char *v; // [rsp+2DE8h] [rbp+2CE8h]
+  _QWORD *v23; // rax
+  char *v24; // rax
+  __int128 v25; // [rsp+30h] [rbp-D0h]
+  Scaleform::String v26; // [rsp+40h] [rbp-C0h] BYREF
+  Scaleform::String v27; // [rsp+48h] [rbp-B8h] BYREF
+  char *v28; // [rsp+50h] [rbp-B0h] BYREF
+  char *v29; // [rsp+58h] [rbp-A8h] BYREF
+  char *v30; // [rsp+60h] [rbp-A0h] BYREF
+  char *v31; // [rsp+68h] [rbp-98h] BYREF
+  Scaleform::String result; // [rsp+70h] [rbp-90h] BYREF
+  char *v33; // [rsp+78h] [rbp-88h] BYREF
+  char *v34; // [rsp+80h] [rbp-80h] BYREF
+  char *v35; // [rsp+88h] [rbp-78h] BYREF
+  char *v36; // [rsp+90h] [rbp-70h] BYREF
+  char *v37; // [rsp+98h] [rbp-68h] BYREF
+  Scaleform::MsgFormat::Sink v38; // [rsp+A0h] [rbp-60h] BYREF
+  Scaleform::MsgFormat::Sink v39; // [rsp+B8h] [rbp-48h] BYREF
+  Scaleform::MsgFormat::Sink v40; // [rsp+D0h] [rbp-30h] BYREF
+  Scaleform::MsgFormat::Sink r; // [rsp+E8h] [rbp-18h] BYREF
+  Scaleform::MsgFormat::Sink v42; // [rsp+100h] [rbp+0h] BYREF
+  Scaleform::MsgFormat::Sink v43; // [rsp+118h] [rbp+18h] BYREF
+  Scaleform::MsgFormat::Sink v44; // [rsp+130h] [rbp+30h] BYREF
+  Scaleform::MsgFormat::Sink v45; // [rsp+148h] [rbp+48h] BYREF
+  Scaleform::MsgFormat::Sink v46; // [rsp+160h] [rbp+60h] BYREF
+  Scaleform::MsgFormat::Sink v47; // [rsp+178h] [rbp+78h] BYREF
+  __int64 v48; // [rsp+190h] [rbp+90h]
+  char line[1024]; // [rsp+1A0h] [rbp+A0h] BYREF
+  Scaleform::MsgFormat v50; // [rsp+5A0h] [rbp+4A0h] BYREF
+  Scaleform::MsgFormat v51; // [rsp+9A0h] [rbp+8A0h] BYREF
+  Scaleform::MsgFormat v52; // [rsp+DA0h] [rbp+CA0h] BYREF
+  Scaleform::MsgFormat v53; // [rsp+11A0h] [rbp+10A0h] BYREF
+  Scaleform::MsgFormat v54; // [rsp+15A0h] [rbp+14A0h] BYREF
+  Scaleform::MsgFormat v55; // [rsp+19A0h] [rbp+18A0h] BYREF
+  Scaleform::MsgFormat v56; // [rsp+1DA0h] [rbp+1CA0h] BYREF
+  Scaleform::MsgFormat v57; // [rsp+21A0h] [rbp+20A0h] BYREF
+  Scaleform::MsgFormat v58; // [rsp+25A0h] [rbp+24A0h] BYREF
+  Scaleform::MsgFormat v59; // [rsp+29A0h] [rbp+28A0h] BYREF
+  Scaleform::String v60; // [rsp+2DE0h] [rbp+2CE0h] BYREF
+  char *v; // [rsp+2DE8h] [rbp+2CE8h] BYREF
 
   if ( psearchInfo )
   {
-    v = (char *)pfontname;
-    v56 = -2i64;
-    v5 = fontlib_installed;
-    v6 = flags;
-    v7 = psearchInfo;
+    v = pfontname;
+    v48 = -2i64;
     v8 = resSearchInfo;
-    v9 = resSearchInfo->Status;
-    if ( resSearchInfo->Status == 1 )
+    Status = resSearchInfo->Status;
+    if ( resSearchInfo->Status == FoundInResources )
     {
-      v42 = (char *)Scaleform::GFx::FontFlagsToString(flags);
-      r.Type = 2;
-      r.SinkData.pStr = (Scaleform::String *)&line;
+      v34 = (char *)Scaleform::GFx::FontFlagsToString(flags);
+      r.Type = tDataPtr;
+      r.SinkData.pStr = (Scaleform::String *)line;
       r.SinkData.DataPtr.Size = 1024i64;
-      Scaleform::MsgFormat::MsgFormat(&v65, &r);
-      Scaleform::MsgFormat::Parse(&v65, "Movie resource: \"{0}\" {1} found.");
-      Scaleform::MsgFormat::FormatD1<char const *>(&v65, (const char *const *)&v);
-      Scaleform::MsgFormat::FormatD1<char const *>(&v65, (const char *const *)&v42);
-      Scaleform::MsgFormat::FinishFormatD(&v65);
-      v10 = &v65;
+      Scaleform::MsgFormat::MsgFormat(&v57, &r);
+      Scaleform::MsgFormat::Parse(&v57, "Movie resource: \"{0}\" {1} found.");
+      Scaleform::MsgFormat::FormatD1<char const *>(&v57, (const char **)&v);
+      Scaleform::MsgFormat::FormatD1<char const *>(&v57, (const char **)&v34);
+      Scaleform::MsgFormat::FinishFormatD(&v57);
+      v10 = &v57;
     }
-    else if ( v9 == 3 )
+    else if ( Status == FoundInResourcesNeedFaux )
     {
-      v43 = (char *)Scaleform::GFx::FontFlagsToString(flags);
-      v48.Type = 2;
-      v48.SinkData.pStr = (Scaleform::String *)&line;
-      v48.SinkData.DataPtr.Size = 1024i64;
-      Scaleform::MsgFormat::MsgFormat(&v60, &v48);
-      Scaleform::MsgFormat::Parse(&v60, "Movie resource: \"{0}\" {1} found, requires faux");
-      Scaleform::MsgFormat::FormatD1<char const *>(&v60, (const char *const *)&v);
-      Scaleform::MsgFormat::FormatD1<char const *>(&v60, (const char *const *)&v43);
-      Scaleform::MsgFormat::FinishFormatD(&v60);
-      v10 = &v60;
+      v35 = (char *)Scaleform::GFx::FontFlagsToString(flags);
+      v40.Type = tDataPtr;
+      v40.SinkData.pStr = (Scaleform::String *)line;
+      v40.SinkData.DataPtr.Size = 1024i64;
+      Scaleform::MsgFormat::MsgFormat(&v52, &v40);
+      Scaleform::MsgFormat::Parse(&v52, "Movie resource: \"{0}\" {1} found, requires faux");
+      Scaleform::MsgFormat::FormatD1<char const *>(&v52, (const char **)&v);
+      Scaleform::MsgFormat::FormatD1<char const *>(&v52, (const char **)&v35);
+      Scaleform::MsgFormat::FinishFormatD(&v52);
+      v10 = &v52;
     }
-    else if ( v9 == 2 )
+    else if ( Status == FoundInResourcesNoGlyphs )
     {
-      v45 = (char *)Scaleform::GFx::FontFlagsToString(flags);
-      v46.Type = 2;
-      v46.SinkData.pStr = (Scaleform::String *)&line;
-      v46.SinkData.DataPtr.Size = 1024i64;
-      Scaleform::MsgFormat::MsgFormat(&v64, &v46);
-      Scaleform::MsgFormat::Parse(&v64, "Movie resource: \"{0}\" {1} ref found, requires FontLib/Map/Provider.");
-      Scaleform::MsgFormat::FormatD1<char const *>(&v64, (const char *const *)&v);
-      Scaleform::MsgFormat::FormatD1<char const *>(&v64, (const char *const *)&v45);
-      Scaleform::MsgFormat::FinishFormatD(&v64);
-      v10 = &v64;
+      v37 = (char *)Scaleform::GFx::FontFlagsToString(flags);
+      v38.Type = tDataPtr;
+      v38.SinkData.pStr = (Scaleform::String *)line;
+      v38.SinkData.DataPtr.Size = 1024i64;
+      Scaleform::MsgFormat::MsgFormat(&v56, &v38);
+      Scaleform::MsgFormat::Parse(&v56, "Movie resource: \"{0}\" {1} ref found, requires FontLib/Map/Provider.");
+      Scaleform::MsgFormat::FormatD1<char const *>(&v56, (const char **)&v);
+      Scaleform::MsgFormat::FormatD1<char const *>(&v56, (const char **)&v37);
+      Scaleform::MsgFormat::FinishFormatD(&v56);
+      v10 = &v56;
     }
     else
     {
-      v36 = (char *)Scaleform::GFx::FontFlagsToString(flags);
-      v51.Type = 2;
-      v51.SinkData.pStr = (Scaleform::String *)&line;
-      v51.SinkData.DataPtr.Size = 1024i64;
-      Scaleform::MsgFormat::MsgFormat(&v62, &v51);
-      Scaleform::MsgFormat::Parse(&v62, "Movie resource: \"{0}\" {1} not found.");
-      Scaleform::MsgFormat::FormatD1<char const *>(&v62, (const char *const *)&v);
-      Scaleform::MsgFormat::FormatD1<char const *>(&v62, (const char *const *)&v36);
-      Scaleform::MsgFormat::FinishFormatD(&v62);
-      Scaleform::MsgFormat::~MsgFormat(&v62);
-      Scaleform::GFx::AddSearchInfo_2(v7, &line);
-      if ( v8->Status == 4 )
-        goto LABEL_54;
-      if ( v8->Status != 5 )
+      v28 = (char *)Scaleform::GFx::FontFlagsToString(flags);
+      v43.Type = tDataPtr;
+      v43.SinkData.pStr = (Scaleform::String *)line;
+      v43.SinkData.DataPtr.Size = 1024i64;
+      Scaleform::MsgFormat::MsgFormat(&v54, &v43);
+      Scaleform::MsgFormat::Parse(&v54, "Movie resource: \"{0}\" {1} not found.");
+      Scaleform::MsgFormat::FormatD1<char const *>(&v54, (const char **)&v);
+      Scaleform::MsgFormat::FormatD1<char const *>(&v54, (const char **)&v28);
+      Scaleform::MsgFormat::FinishFormatD(&v54);
+      Scaleform::MsgFormat::~MsgFormat(&v54);
+      Scaleform::GFx::AddSearchInfo_2(psearchInfo, line);
+      if ( v8->Status == FoundInImports )
+        goto LABEL_49;
+      if ( v8->Status != FoundInImportsFontLib )
       {
-        v38 = (char *)Scaleform::GFx::FontFlagsToString(v6);
-        v47.Type = 2;
-        v47.SinkData.pStr = (Scaleform::String *)&line;
-        v47.SinkData.DataPtr.Size = 1024i64;
-        Scaleform::MsgFormat::MsgFormat(&v59, &v47);
-        Scaleform::MsgFormat::Parse(&v59, "Imports       : \"{0}\" {1} not found.");
-        Scaleform::MsgFormat::FormatD1<char const *>(&v59, (const char *const *)&v);
-        Scaleform::MsgFormat::FormatD1<char const *>(&v59, (const char *const *)&v38);
-        Scaleform::MsgFormat::FinishFormatD(&v59);
-        Scaleform::MsgFormat::~MsgFormat(&v59);
-        Scaleform::GFx::AddSearchInfo_2(v7, &line);
-        v11 = &v8->ImportSearchUrls;
-        v12 = v8->ImportSearchUrls.pTable;
-        if ( v12 && v12->EntryCount )
+        v30 = (char *)Scaleform::GFx::FontFlagsToString(flags);
+        v39.Type = tDataPtr;
+        v39.SinkData.pStr = (Scaleform::String *)line;
+        v39.SinkData.DataPtr.Size = 1024i64;
+        Scaleform::MsgFormat::MsgFormat(&v51, &v39);
+        Scaleform::MsgFormat::Parse(&v51, "Imports       : \"{0}\" {1} not found.");
+        Scaleform::MsgFormat::FormatD1<char const *>(&v51, (const char **)&v);
+        Scaleform::MsgFormat::FormatD1<char const *>(&v51, (const char **)&v30);
+        Scaleform::MsgFormat::FinishFormatD(&v51);
+        Scaleform::MsgFormat::~MsgFormat(&v51);
+        Scaleform::GFx::AddSearchInfo_2(psearchInfo, line);
+        p_ImportSearchUrls = &v8->ImportSearchUrls;
+        pTable = v8->ImportSearchUrls.pTable;
+        if ( pTable && pTable->EntryCount )
         {
-          Scaleform::String::String(&v68);
-          v13 = v11->pTable;
-          if ( v11->pTable )
+          Scaleform::String::String(&v60);
+          v13 = p_ImportSearchUrls->pTable;
+          if ( p_ImportSearchUrls->pTable )
           {
             v14 = 0i64;
             v15 = v13 + 1;
@@ -538,215 +503,199 @@ void __fastcall Scaleform::GFx::AddSearchInfo_3(Scaleform::Render::Text::FontMan
               v15 = (Scaleform::HashSetBase<Scaleform::String,Scaleform::String::NoCaseHashFunctor,Scaleform::String::NoCaseHashFunctor,Scaleform::AllocatorGH<Scaleform::String,2>,Scaleform::HashsetCachedEntry<Scaleform::String,Scaleform::String::NoCaseHashFunctor> >::TableType *)((char *)v15 + 24);
             }
             while ( v14 <= v13->SizeMask );
-            v33.m128i_i64[0] = (__int64)&v8->ImportSearchUrls;
-            v33.m128i_i64[1] = v14;
+            *(_QWORD *)&v25 = &v8->ImportSearchUrls;
+            *((_QWORD *)&v25 + 1) = v14;
           }
           else
           {
-            v33 = 0ui64;
+            v25 = 0ui64;
           }
-          _mm_store_si128((__m128i *)&v32, v33);
-          v16 = *((_QWORD *)&v32 + 1);
-          v17 = v32;
-          while ( v17 && *(_QWORD *)v17 && v16 <= *(_QWORD *)(*(_QWORD *)v17 + 8i64) )
+          *((_QWORD *)&v16 + 1) = *((_QWORD *)&v25 + 1);
+          while ( (_QWORD)v25 && *(_QWORD *)v25 && *((__int64 *)&v16 + 1) <= *(_QWORD *)(*(_QWORD *)v25 + 8i64) )
           {
-            v18 = v11->pTable;
-            if ( v11->pTable )
+            v17 = p_ImportSearchUrls->pTable;
+            if ( p_ImportSearchUrls->pTable )
             {
-              v20 = 0i64;
-              v21 = v18 + 1;
+              v18 = 0i64;
+              v19 = v17 + 1;
               do
               {
-                if ( v21->EntryCount != -2i64 )
+                if ( v19->EntryCount != -2i64 )
                   break;
-                ++v20;
-                v21 = (Scaleform::HashSetBase<Scaleform::String,Scaleform::String::NoCaseHashFunctor,Scaleform::String::NoCaseHashFunctor,Scaleform::AllocatorGH<Scaleform::String,2>,Scaleform::HashsetCachedEntry<Scaleform::String,Scaleform::String::NoCaseHashFunctor> >::TableType *)((char *)v21 + 24);
+                ++v18;
+                v19 = (Scaleform::HashSetBase<Scaleform::String,Scaleform::String::NoCaseHashFunctor,Scaleform::String::NoCaseHashFunctor,Scaleform::AllocatorGH<Scaleform::String,2>,Scaleform::HashsetCachedEntry<Scaleform::String,Scaleform::String::NoCaseHashFunctor> >::TableType *)((char *)v19 + 24);
               }
-              while ( v20 <= v18->SizeMask );
-              v19 = (signed __int64)&v8->ImportSearchUrls;
+              while ( v18 <= v17->SizeMask );
+              *(_QWORD *)&v16 = &v8->ImportSearchUrls;
             }
             else
             {
-              v19 = 0i64;
-              v20 = 0i64;
+              *(_QWORD *)&v16 = 0i64;
+              v18 = 0i64;
             }
-            *((_QWORD *)&v32 + 1) = v20;
-            *(_QWORD *)&v32 = v19;
-            if ( v17 != v19 || v16 != v20 )
-              Scaleform::String::AppendString(&v68, ", ", -1i64);
-            Scaleform::String::String(&v35, "\"");
-            v23 = Scaleform::String::operator+(
-                    v22,
+            if ( v16 != __PAIR128__(v18, v25) )
+              Scaleform::String::AppendString(&v60, ", ", -1i64);
+            Scaleform::String::String(&v27, "\"");
+            v21 = Scaleform::String::operator+(
+                    v20,
                     &result,
-                    (Scaleform::String *)(*(_QWORD *)v17 + 8 * (v16 + 2 * (v16 + 2))));
-            v24 = Scaleform::String::operator+(v23, &v34, "\"");
-            Scaleform::String::operator+=(&v68, v24);
-            v25 = v34.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64;
-            if ( !_InterlockedDecrement((volatile signed __int32 *)((v34.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-              ((void (__cdecl *)(Scaleform::MemoryHeap *, unsigned __int64))Scaleform::Memory::pGlobalHeap->vfptr->Free)(
-                Scaleform::Memory::pGlobalHeap,
-                v25);
-            v26 = result.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64;
+                    (Scaleform::String *)(*(_QWORD *)v25
+                                        + 8 * (*((_QWORD *)&v16 + 1) + 2 * (*((_QWORD *)&v16 + 1) + 2i64))));
+            v22 = Scaleform::String::operator+(v21, &v26, "\"");
+            Scaleform::String::operator+=(&v60, v22);
+            if ( !_InterlockedDecrement((volatile signed __int32 *)((v26.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
+              ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
             if ( !_InterlockedDecrement((volatile signed __int32 *)((result.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-              ((void (__cdecl *)(Scaleform::MemoryHeap *, unsigned __int64))Scaleform::Memory::pGlobalHeap->vfptr->Free)(
-                Scaleform::Memory::pGlobalHeap,
-                v26);
-            v27 = v35.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64;
-            if ( !_InterlockedDecrement((volatile signed __int32 *)((v35.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-              ((void (__cdecl *)(Scaleform::MemoryHeap *, unsigned __int64))Scaleform::Memory::pGlobalHeap->vfptr->Free)(
-                Scaleform::Memory::pGlobalHeap,
-                v27);
-            v28 = *(_QWORD *)(*(_QWORD *)v17 + 8i64);
-            if ( v16 <= (signed __int64)v28 && ++v16 <= v28 )
+              ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+            if ( !_InterlockedDecrement((volatile signed __int32 *)((v27.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
+              ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+            *(_QWORD *)&v16 = *(_QWORD *)(*(_QWORD *)v25 + 8i64);
+            if ( *((__int64 *)&v16 + 1) <= (__int64)v16 && ++*((_QWORD *)&v16 + 1) <= (unsigned __int64)v16 )
             {
-              v29 = (_QWORD *)(*(_QWORD *)v17 + 8 * (v16 + 2 * (v16 + 1)));
+              v23 = (_QWORD *)(*(_QWORD *)v25 + 8 * (*((_QWORD *)&v16 + 1) + 2 * (*((_QWORD *)&v16 + 1) + 1i64)));
               do
               {
-                if ( *v29 != -2i64 )
+                if ( *v23 != -2i64 )
                   break;
-                ++v16;
-                v29 += 3;
+                ++*((_QWORD *)&v16 + 1);
+                v23 += 3;
               }
-              while ( v16 <= v28 );
+              while ( *((_QWORD *)&v16 + 1) <= (unsigned __int64)v16 );
             }
           }
-          v50.Type = 2;
-          v50.SinkData.pStr = (Scaleform::String *)&line;
-          v50.SinkData.DataPtr.Size = 1024i64;
-          Scaleform::MsgFormat::MsgFormat(&v67, &v50);
-          Scaleform::MsgFormat::Parse(&v67, "              : {0}.");
-          Scaleform::MsgFormat::FormatD1<Scaleform::String>(&v67, &v68);
-          Scaleform::MsgFormat::FinishFormatD(&v67);
-          Scaleform::MsgFormat::~MsgFormat(&v67);
-          Scaleform::GFx::AddSearchInfo_2(v7, &line);
-          v30 = v68.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64;
+          v42.Type = tDataPtr;
+          v42.SinkData.pStr = (Scaleform::String *)line;
+          v42.SinkData.DataPtr.Size = 1024i64;
+          Scaleform::MsgFormat::MsgFormat(&v59, &v42);
+          Scaleform::MsgFormat::Parse(&v59, "              : {0}.");
+          Scaleform::MsgFormat::FormatD1<Scaleform::String>(&v59, &v60);
+          Scaleform::MsgFormat::FinishFormatD(&v59);
+          Scaleform::MsgFormat::~MsgFormat(&v59);
+          Scaleform::GFx::AddSearchInfo_2(psearchInfo, line);
           if ( _InterlockedExchangeAdd(
-                 (volatile signed __int32 *)((v68.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8),
+                 (volatile signed __int32 *)((v60.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8),
                  0xFFFFFFFF) == 1 )
-            ((void (__cdecl *)(Scaleform::MemoryHeap *, unsigned __int64))Scaleform::Memory::pGlobalHeap->vfptr->Free)(
-              Scaleform::Memory::pGlobalHeap,
-              v30);
+            ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
         }
-        v31 = (char *)Scaleform::GFx::FontFlagsToString(v6);
-        if ( v8->Status == 6 )
+        v24 = (char *)Scaleform::GFx::FontFlagsToString(flags);
+        if ( v8->Status == FoundInExports )
         {
-          v37 = v31;
-          v52.Type = 2;
-          v52.SinkData.pStr = (Scaleform::String *)&line;
-          v52.SinkData.DataPtr.Size = 1024i64;
-          Scaleform::MsgFormat::MsgFormat(&v61, &v52);
-          Scaleform::MsgFormat::Parse(&v61, "Exported      : \"{0}\" {1} found.");
-          Scaleform::MsgFormat::FormatD1<char const *>(&v61, (const char *const *)&v);
-          Scaleform::MsgFormat::FormatD1<char const *>(&v61, (const char *const *)&v37);
-          Scaleform::MsgFormat::FinishFormatD(&v61);
-          v10 = &v61;
+          v29 = v24;
+          v44.Type = tDataPtr;
+          v44.SinkData.pStr = (Scaleform::String *)line;
+          v44.SinkData.DataPtr.Size = 1024i64;
+          Scaleform::MsgFormat::MsgFormat(&v53, &v44);
+          Scaleform::MsgFormat::Parse(&v53, "Exported      : \"{0}\" {1} found.");
+          Scaleform::MsgFormat::FormatD1<char const *>(&v53, (const char **)&v);
+          Scaleform::MsgFormat::FormatD1<char const *>(&v53, (const char **)&v29);
+          Scaleform::MsgFormat::FinishFormatD(&v53);
+          v10 = &v53;
         }
         else
         {
-          v39 = v31;
-          v55.Type = 2;
-          v55.SinkData.pStr = (Scaleform::String *)&line;
-          v55.SinkData.DataPtr.Size = 1024i64;
-          Scaleform::MsgFormat::MsgFormat(&v63, &v55);
-          Scaleform::MsgFormat::Parse(&v63, "Exported      : \"{0}\" {1} not found.");
-          Scaleform::MsgFormat::FormatD1<char const *>(&v63, (const char *const *)&v);
-          Scaleform::MsgFormat::FormatD1<char const *>(&v63, (const char *const *)&v39);
-          Scaleform::MsgFormat::FinishFormatD(&v63);
-          v10 = &v63;
+          v31 = v24;
+          v47.Type = tDataPtr;
+          v47.SinkData.pStr = (Scaleform::String *)line;
+          v47.SinkData.DataPtr.Size = 1024i64;
+          Scaleform::MsgFormat::MsgFormat(&v55, &v47);
+          Scaleform::MsgFormat::Parse(&v55, "Exported      : \"{0}\" {1} not found.");
+          Scaleform::MsgFormat::FormatD1<char const *>(&v55, (const char **)&v);
+          Scaleform::MsgFormat::FormatD1<char const *>(&v55, (const char **)&v31);
+          Scaleform::MsgFormat::FinishFormatD(&v55);
+          v10 = &v55;
         }
-        goto LABEL_51;
+        goto LABEL_50;
       }
-      if ( v5 )
+      if ( !fontlib_installed )
       {
-        v44 = (char *)Scaleform::GFx::FontFlagsToString(v6);
-        v53.Type = 2;
-        v53.SinkData.pStr = (Scaleform::String *)&line;
-        v53.SinkData.DataPtr.Size = 1024i64;
-        Scaleform::MsgFormat::MsgFormat(&v66, &v53);
-        Scaleform::MsgFormat::Parse(&v66, "Imports       : \"{0}\" {1} import delegates to font library.");
-        Scaleform::MsgFormat::FormatD1<char const *>(&v66, (const char *const *)&v);
-        Scaleform::MsgFormat::FormatD1<char const *>(&v66, (const char *const *)&v44);
-        Scaleform::MsgFormat::FinishFormatD(&v66);
-        v10 = &v66;
+LABEL_49:
+        v33 = (char *)Scaleform::GFx::FontFlagsToString(flags);
+        v46.Type = tDataPtr;
+        v46.SinkData.pStr = (Scaleform::String *)line;
+        v46.SinkData.DataPtr.Size = 1024i64;
+        Scaleform::MsgFormat::MsgFormat(&v50, &v46);
+        Scaleform::MsgFormat::Parse(&v50, "Imports       : \"{0}\" {1} found in \"{2}\".");
+        Scaleform::MsgFormat::FormatD1<char const *>(&v50, (const char **)&v);
+        Scaleform::MsgFormat::FormatD1<char const *>(&v50, (const char **)&v33);
+        Scaleform::MsgFormat::FormatD1<Scaleform::String>(&v50, &v8->ImportFoundUrl);
+        Scaleform::MsgFormat::FinishFormatD(&v50);
+        v10 = &v50;
       }
       else
       {
-LABEL_54:
-        v41 = (char *)Scaleform::GFx::FontFlagsToString(v6);
-        v54.Type = 2;
-        v54.SinkData.pStr = (Scaleform::String *)&line;
-        v54.SinkData.DataPtr.Size = 1024i64;
-        Scaleform::MsgFormat::MsgFormat(&v58, &v54);
-        Scaleform::MsgFormat::Parse(&v58, "Imports       : \"{0}\" {1} found in \"{2}\".");
-        Scaleform::MsgFormat::FormatD1<char const *>(&v58, (const char *const *)&v);
-        Scaleform::MsgFormat::FormatD1<char const *>(&v58, (const char *const *)&v41);
-        Scaleform::MsgFormat::FormatD1<Scaleform::String>(&v58, &v8->ImportFoundUrl);
+        v36 = (char *)Scaleform::GFx::FontFlagsToString(flags);
+        v45.Type = tDataPtr;
+        v45.SinkData.pStr = (Scaleform::String *)line;
+        v45.SinkData.DataPtr.Size = 1024i64;
+        Scaleform::MsgFormat::MsgFormat(&v58, &v45);
+        Scaleform::MsgFormat::Parse(&v58, "Imports       : \"{0}\" {1} import delegates to font library.");
+        Scaleform::MsgFormat::FormatD1<char const *>(&v58, (const char **)&v);
+        Scaleform::MsgFormat::FormatD1<char const *>(&v58, (const char **)&v36);
         Scaleform::MsgFormat::FinishFormatD(&v58);
         v10 = &v58;
       }
     }
-LABEL_51:
+LABEL_50:
     Scaleform::MsgFormat::~MsgFormat(v10);
-    Scaleform::GFx::AddSearchInfo_2(v7, &line);
+    Scaleform::GFx::AddSearchInfo_2(psearchInfo, line);
   }
 }
 
 // File Line: 260
 // RVA: 0x8B2350
-void __fastcall Scaleform::GFx::AddSearchInfo_1(Scaleform::Render::Text::FontManagerBase::FontSearchPathInfo *psearchInfo, const char *str1, const char *str2, const char *str3, unsigned int flags, const char *str4)
+void __fastcall Scaleform::GFx::AddSearchInfo_1(
+        Scaleform::Render::Text::FontManagerBase::FontSearchPathInfo *psearchInfo,
+        const char *str1,
+        const char *str2,
+        const char *str3,
+        unsigned int flags,
+        const char *str4)
 {
-  const char *v6; // rdi
-  const char *v7; // rsi
-  const char *v8; // rbp
-  Scaleform::Render::Text::FontManagerBase::FontSearchPathInfo *v9; // rbx
   const char *v10; // rax
-  char *v11; // rdx
-  Scaleform::StringBuffer v12; // [rsp+28h] [rbp-40h]
+  char *pData; // rdx
+  Scaleform::StringBuffer v12; // [rsp+28h] [rbp-40h] BYREF
 
   if ( psearchInfo )
   {
-    v6 = str3;
-    v7 = str2;
-    v8 = str1;
-    v9 = psearchInfo;
     Scaleform::StringBuffer::StringBuffer(&v12, Scaleform::Memory::pGlobalHeap);
-    Scaleform::StringBuffer::AppendString(&v12, v8, -1i64);
-    Scaleform::StringBuffer::AppendString(&v12, v7, -1i64);
-    Scaleform::StringBuffer::AppendString(&v12, v6, -1i64);
+    Scaleform::StringBuffer::AppendString(&v12, str1, -1i64);
+    Scaleform::StringBuffer::AppendString(&v12, str2, -1i64);
+    Scaleform::StringBuffer::AppendString(&v12, str3, -1i64);
     v10 = Scaleform::GFx::FontFlagsToString(flags);
     Scaleform::StringBuffer::AppendString(&v12, v10, -1i64);
     Scaleform::StringBuffer::AppendString(&v12, str4, -1i64);
-    v11 = &customWorldMapCaption;
+    pData = &customCaption;
     if ( v12.pData )
-      v11 = v12.pData;
-    Scaleform::GFx::AddSearchInfo_2(v9, v11);
+      pData = v12.pData;
+    Scaleform::GFx::AddSearchInfo_2(psearchInfo, pData);
     Scaleform::ArrayDataBase<Scaleform::MsgFormat::fmt_record,Scaleform::AllocatorGH_POD<Scaleform::MsgFormat::fmt_record,2>,Scaleform::ArrayDefaultPolicy>::~ArrayDataBase<Scaleform::MsgFormat::fmt_record,Scaleform::AllocatorGH_POD<Scaleform::MsgFormat::fmt_record,2>,Scaleform::ArrayDefaultPolicy>((Scaleform::ArrayDataBase<int,Scaleform::AllocatorGH<int,2>,Scaleform::ArrayDefaultPolicy> *)&v12);
   }
 }
 
 // File Line: 273
 // RVA: 0x8B2220
-void __fastcall Scaleform::GFx::AddSearchInfo_0(Scaleform::Render::Text::FontManagerBase::FontSearchPathInfo *psearchInfo, const char *str1, const char *str2, const char *str3, unsigned int flags1, const char *str4, const char *str5, const char *str6, unsigned int flags2)
+void __fastcall Scaleform::GFx::AddSearchInfo_0(
+        Scaleform::Render::Text::FontManagerBase::FontSearchPathInfo *psearchInfo,
+        const char *str1,
+        const char *str2,
+        const char *str3,
+        unsigned int flags1,
+        const char *str4,
+        const char *str5,
+        const char *str6,
+        unsigned int flags2)
 {
-  const char *v9; // rdi
-  const char *v10; // rsi
-  const char *v11; // rbp
-  Scaleform::Render::Text::FontManagerBase::FontSearchPathInfo *v12; // rbx
   const char *v13; // rax
   const char *v14; // rax
-  char *v15; // rdx
-  Scaleform::StringBuffer v16; // [rsp+28h] [rbp-40h]
+  char *pData; // rdx
+  Scaleform::StringBuffer v16; // [rsp+28h] [rbp-40h] BYREF
 
   if ( psearchInfo )
   {
-    v9 = str3;
-    v10 = str2;
-    v11 = str1;
-    v12 = psearchInfo;
     Scaleform::StringBuffer::StringBuffer(&v16, Scaleform::Memory::pGlobalHeap);
-    Scaleform::StringBuffer::AppendString(&v16, v11, -1i64);
-    Scaleform::StringBuffer::AppendString(&v16, v10, -1i64);
-    Scaleform::StringBuffer::AppendString(&v16, v9, -1i64);
+    Scaleform::StringBuffer::AppendString(&v16, str1, -1i64);
+    Scaleform::StringBuffer::AppendString(&v16, str2, -1i64);
+    Scaleform::StringBuffer::AppendString(&v16, str3, -1i64);
     v13 = Scaleform::GFx::FontFlagsToString(flags1);
     Scaleform::StringBuffer::AppendString(&v16, v13, -1i64);
     Scaleform::StringBuffer::AppendString(&v16, str4, -1i64);
@@ -754,93 +703,97 @@ void __fastcall Scaleform::GFx::AddSearchInfo_0(Scaleform::Render::Text::FontMan
     Scaleform::StringBuffer::AppendString(&v16, str6, -1i64);
     v14 = Scaleform::GFx::FontFlagsToString(flags2);
     Scaleform::StringBuffer::AppendString(&v16, v14, -1i64);
-    v15 = &customWorldMapCaption;
+    pData = &customCaption;
     if ( v16.pData )
-      v15 = v16.pData;
-    Scaleform::GFx::AddSearchInfo_2(v12, v15);
+      pData = v16.pData;
+    Scaleform::GFx::AddSearchInfo_2(psearchInfo, pData);
     Scaleform::ArrayDataBase<Scaleform::MsgFormat::fmt_record,Scaleform::AllocatorGH_POD<Scaleform::MsgFormat::fmt_record,2>,Scaleform::ArrayDefaultPolicy>::~ArrayDataBase<Scaleform::MsgFormat::fmt_record,Scaleform::AllocatorGH_POD<Scaleform::MsgFormat::fmt_record,2>,Scaleform::ArrayDefaultPolicy>((Scaleform::ArrayDataBase<int,Scaleform::AllocatorGH<int,2>,Scaleform::ArrayDefaultPolicy> *)&v16);
   }
 }
 
 // File Line: 290
 // RVA: 0x8B2120
-void __fastcall Scaleform::GFx::AddSearchInfo(Scaleform::Render::Text::FontManagerBase::FontSearchPathInfo *psearchInfo, const char *str1, const char *str2, const char *str3, const char *str4, const char *str5, unsigned int flags)
+void __fastcall Scaleform::GFx::AddSearchInfo(
+        Scaleform::Render::Text::FontManagerBase::FontSearchPathInfo *psearchInfo,
+        const char *str1,
+        const char *str2,
+        const char *str3,
+        const char *str4,
+        const char *str5,
+        unsigned int flags)
 {
-  const char *v7; // rdi
-  const char *v8; // rsi
-  const char *v9; // rbp
-  Scaleform::Render::Text::FontManagerBase::FontSearchPathInfo *v10; // rbx
   const char *v11; // rax
-  char *v12; // rdx
-  Scaleform::StringBuffer v13; // [rsp+28h] [rbp-40h]
+  char *pData; // rdx
+  Scaleform::StringBuffer v13; // [rsp+28h] [rbp-40h] BYREF
 
   if ( psearchInfo )
   {
-    v7 = str3;
-    v8 = str2;
-    v9 = str1;
-    v10 = psearchInfo;
     Scaleform::StringBuffer::StringBuffer(&v13, Scaleform::Memory::pGlobalHeap);
-    Scaleform::StringBuffer::AppendString(&v13, v9, -1i64);
-    Scaleform::StringBuffer::AppendString(&v13, v8, -1i64);
-    Scaleform::StringBuffer::AppendString(&v13, v7, -1i64);
+    Scaleform::StringBuffer::AppendString(&v13, str1, -1i64);
+    Scaleform::StringBuffer::AppendString(&v13, str2, -1i64);
+    Scaleform::StringBuffer::AppendString(&v13, str3, -1i64);
     Scaleform::StringBuffer::AppendString(&v13, str4, -1i64);
     Scaleform::StringBuffer::AppendString(&v13, str5, -1i64);
     v11 = Scaleform::GFx::FontFlagsToString(flags);
     Scaleform::StringBuffer::AppendString(&v13, v11, -1i64);
-    v12 = &customWorldMapCaption;
+    pData = &customCaption;
     if ( v13.pData )
-      v12 = v13.pData;
-    Scaleform::GFx::AddSearchInfo_2(v10, v12);
+      pData = v13.pData;
+    Scaleform::GFx::AddSearchInfo_2(psearchInfo, pData);
     Scaleform::ArrayDataBase<Scaleform::MsgFormat::fmt_record,Scaleform::AllocatorGH_POD<Scaleform::MsgFormat::fmt_record,2>,Scaleform::ArrayDefaultPolicy>::~ArrayDataBase<Scaleform::MsgFormat::fmt_record,Scaleform::AllocatorGH_POD<Scaleform::MsgFormat::fmt_record,2>,Scaleform::ArrayDefaultPolicy>((Scaleform::ArrayDataBase<int,Scaleform::AllocatorGH<int,2>,Scaleform::ArrayDefaultPolicy> *)&v13);
   }
 }
 
 // File Line: 307
 // RVA: 0x8CC5A0
-Scaleform::GFx::Resource *__fastcall Scaleform::GFx::FontManager::FindOrCreateHandle(Scaleform::GFx::FontManager *this, const char *pfontName, unsigned int matchFontFlags, Scaleform::GFx::FontResource **ppfoundFont, Scaleform::Render::Text::FontManagerBase::FontSearchPathInfo *searchInfo)
+Scaleform::GFx::Resource *__fastcall Scaleform::GFx::FontManager::FindOrCreateHandle(
+        Scaleform::GFx::FontManager *this,
+        char *pfontName,
+        unsigned int matchFontFlags,
+        Scaleform::GFx::FontResource **ppfoundFont,
+        Scaleform::Render::Text::FontManagerBase::FontSearchPathInfo *searchInfo)
 {
   unsigned int v5; // edi
-  const char *v6; // r12
+  char *v6; // r12
   Scaleform::GFx::FontManager *v7; // r13
   Scaleform::GFx::Resource *v8; // r14
   Scaleform::GFx::FontHandle *v9; // rbx
-  Scaleform::GFx::FontManagerStates *v10; // rax
+  Scaleform::GFx::FontManagerStates *pState; // rax
   int v11; // esi
-  Scaleform::GFx::MovieDefImpl::SearchInfo *v12; // rdx
+  Scaleform::GFx::MovieDefImpl::SearchInfo *p_resSearchInfo; // rdx
   Scaleform::Render::Text::FontManagerBase::FontSearchPathInfo *v13; // r15
   unsigned __int64 v14; // rdx
   unsigned __int64 v15; // rax
   signed __int64 v16; // rax
   Scaleform::GFx::Resource **v17; // rdi
   Scaleform::GFx::Resource *v18; // rcx
-  Scaleform::GFx::MovieDefImpl *v19; // rcx
-  Scaleform::GFx::FontResource *v20; // rsi
+  Scaleform::GFx::MovieDefImpl *pDefImpl; // rcx
+  Scaleform::GFx::FontResource *RegisteredFont; // rsi
   Scaleform::GFx::MovieDef *v21; // rdi
-  Scaleform::GFx::MovieImpl *v22; // rcx
+  Scaleform::GFx::MovieImpl *pMovie; // rcx
   Scaleform::Render::Font *v23; // rcx
   Scaleform::Render::Text::FontHandle *v24; // rax
   Scaleform::Render::Text::FontManagerBase *v25; // rdx
   _QWORD *v26; // rax
-  _BYTE *v27; // rcx
-  unsigned int v28; // er15
+  char *v27; // rcx
+  unsigned int v28; // r15d
   unsigned __int8 v29; // di
   unsigned __int64 v30; // rdx
   unsigned __int64 v31; // rax
   signed __int64 v32; // rax
-  signed __int64 v33; // rdi
+  __int64 v33; // rdi
   bool v34; // zf
   Scaleform::GFx::FontHandle **v35; // rdi
   const char *v36; // r13
-  unsigned int flags; // er12
-  float v38; // xmm6_4
-  int v39; // er15
+  unsigned int flags; // r12d
+  float ScaleFactor; // xmm6_4
+  __int32 v39; // r15d
   const char *v40; // rsi
-  Scaleform::GFx::FontMap::MapFontFlags v41; // er12
+  Scaleform::GFx::FontMap::MapFontFlags v41; // r12d
   Scaleform::GFx::FontMap::MapFontFlags v42; // eax
-  signed int v43; // er15
+  int v43; // r15d
   Scaleform::Render::Text::FontManagerBase::FontSearchPathInfo *v44; // rdi
-  Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> > *v45; // rsi
+  Scaleform::HashSetLH<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,2,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> > *p_CreatedFonts; // rsi
   unsigned __int64 v46; // rdx
   unsigned __int64 v47; // rax
   signed __int64 v48; // rax
@@ -854,33 +807,33 @@ Scaleform::GFx::Resource *__fastcall Scaleform::GFx::FontManager::FindOrCreateHa
   Scaleform::GFx::FontHandle *v56; // rax
   __int64 v57; // r11
   Scaleform::GFx::FontManagerStates *v58; // rax
-  signed __int64 v59; // rcx
+  Scaleform::GFx::StateBag *v59; // rcx
   unsigned __int64 v60; // rdx
   unsigned __int64 v61; // rax
   signed __int64 v62; // rax
   Scaleform::GFx::Resource **v63; // rbx
-  Scaleform::GFx::MovieDef *v64; // rdi
-  Scaleform::Render::Text::FontManagerBase *v65; // rdx
+  Scaleform::GFx::MovieDef *pMovieDef; // rdi
+  Scaleform::GFx::FontManager *v65; // rdx
   Scaleform::GFx::MovieDef *v66; // rdi
-  Scaleform::Render::Text::FontManagerBase *v67; // rdx
+  Scaleform::GFx::FontManager *v67; // rdx
   const char *str4; // rax
   Scaleform::Render::Text::FontManagerBase::FontSearchPathInfo *v69; // rcx
   Scaleform::GFx::MovieDef *v70; // rdi
-  Scaleform::GFx::ResourceLibBase *v71; // rcx
-  Scaleform::GFx::FontResource *v72; // rdi
+  Scaleform::GFx::ResourceLibBase *pLib; // rcx
+  Scaleform::GFx::FontResource *pFontResource; // rdi
   Scaleform::GFx::ResourceLibBase *v73; // rcx
   Scaleform::GFx::MovieDefImpl *v74; // rax
-  Scaleform::GFx::ResourceWeakLib *v75; // r9
-  Scaleform::GFx::Resource *v76; // rdi
+  Scaleform::GFx::ResourceWeakLib *pWeakLib; // r9
+  Scaleform::GFx::FontResource *FontResource; // rdi
   Scaleform::Render::Text::FontHandle *v77; // rax
-  Scaleform::Render::Text::FontManagerBase *v78; // rdx
+  Scaleform::GFx::FontManager *v78; // rdx
   Scaleform::GFx::ResourceLibBase *v79; // rcx
-  unsigned int v80; // er12
-  Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> > *v81; // rsi
+  unsigned int v80; // r12d
+  Scaleform::GFx::FontManager *v81; // rsi
   Scaleform::GFx::FontManagerStates *v82; // rax
-  signed __int64 v83; // rax
+  __int64 v83; // rax
   __int64 v84; // rdi
-  Scaleform::Render::Text::FontManagerBase *v85; // rdx
+  Scaleform::GFx::FontManager *v85; // rdx
   const char *v86; // rax
   __int64 v87; // rdi
   __int64 v88; // rcx
@@ -888,34 +841,28 @@ Scaleform::GFx::Resource *__fastcall Scaleform::GFx::FontManager::FindOrCreateHa
   __int64 v90; // rcx
   Scaleform::GFx::FontHandle **v91; // rdx
   char v93; // [rsp+40h] [rbp-C0h]
-  Scaleform::GFx::FontHandle *v94; // [rsp+48h] [rbp-B8h]
+  Scaleform::GFx::FontHandle *v94; // [rsp+48h] [rbp-B8h] BYREF
   int v95; // [rsp+50h] [rbp-B0h]
-  Scaleform::GFx::FontLib *v96; // [rsp+58h] [rbp-A8h]
+  Scaleform::GFx::FontLib *pObject; // [rsp+58h] [rbp-A8h]
   Scaleform::GFx::FontHandle *v97; // [rsp+60h] [rbp-A0h]
   Scaleform::GFx::FontHandle **v98; // [rsp+68h] [rbp-98h]
   Scaleform::GFx::MovieDefImpl::SearchInfo *v99; // [rsp+70h] [rbp-90h]
-  Scaleform::GFx::MovieDef *ppsrcMovieDef; // [rsp+78h] [rbp-88h]
-  Scaleform::GFx::FontLib::FontResult v101; // [rsp+80h] [rbp-80h]
+  Scaleform::GFx::MovieDef *ppsrcMovieDef; // [rsp+78h] [rbp-88h] BYREF
+  Scaleform::GFx::FontLib::FontResult v101; // [rsp+80h] [rbp-80h] BYREF
   Scaleform::GFx::FontProvider *pprovider; // [rsp+90h] [rbp-70h]
-  __int64 v103; // [rsp+98h] [rbp-68h]
+  __int64 v103; // [rsp+98h] [rbp-68h] BYREF
   __int64 v104; // [rsp+A0h] [rbp-60h]
-  Scaleform::GFx::MovieDefImpl::SearchInfo resSearchInfo; // [rsp+A8h] [rbp-58h]
+  Scaleform::GFx::MovieDefImpl::SearchInfo resSearchInfo; // [rsp+A8h] [rbp-58h] BYREF
   Scaleform::GFx::FontMap *v106; // [rsp+C0h] [rbp-40h]
-  Scaleform::GFx::FontManager::FontKey key; // [rsp+C8h] [rbp-38h]
-  Scaleform::GFx::FontManager::FontKey v108; // [rsp+D8h] [rbp-28h]
-  Scaleform::GFx::FontManager::FontKey v109; // [rsp+E8h] [rbp-18h]
-  Scaleform::GFx::FontManager::FontKey v110; // [rsp+F8h] [rbp-8h]
+  Scaleform::GFx::FontManager::FontKey key; // [rsp+C8h] [rbp-38h] BYREF
+  Scaleform::GFx::FontManager::FontKey v108; // [rsp+D8h] [rbp-28h] BYREF
+  Scaleform::GFx::FontManager::FontKey v109; // [rsp+E8h] [rbp-18h] BYREF
+  Scaleform::GFx::FontManager::FontKey v110; // [rsp+F8h] [rbp-8h] BYREF
   __int64 v111; // [rsp+108h] [rbp+8h]
-  Scaleform::GFx::Resource *v112; // [rsp+110h] [rbp+10h]
-  Scaleform::GFx::FontManager *pmanager; // [rsp+190h] [rbp+90h]
-  char *pfontNamea; // [rsp+198h] [rbp+98h]
+  Scaleform::GFx::FontResource *v112; // [rsp+110h] [rbp+10h]
   unsigned int matchFontFlagsa; // [rsp+1A0h] [rbp+A0h]
-  Scaleform::GFx::FontResource **v116; // [rsp+1A8h] [rbp+A8h]
 
-  v116 = ppfoundFont;
   matchFontFlagsa = matchFontFlags;
-  pfontNamea = (char *)pfontName;
-  pmanager = this;
   v111 = -2i64;
   v5 = matchFontFlags;
   v6 = pfontName;
@@ -925,17 +872,17 @@ Scaleform::GFx::Resource *__fastcall Scaleform::GFx::FontManager::FindOrCreateHa
   v8 = 0i64;
   v9 = 0i64;
   v94 = 0i64;
-  v10 = this->pState;
-  v96 = v10->pFontLib.pObject;
-  pprovider = v10->pFontProvider.pObject;
-  v106 = v10->pFontMap.pObject;
+  pState = this->pState;
+  pObject = pState->pFontLib.pObject;
+  pprovider = pState->pFontProvider.pObject;
+  v106 = pState->pFontMap.pObject;
   v11 = 0;
   v95 = 0;
   v98 = 0i64;
   ppsrcMovieDef = (Scaleform::GFx::MovieDef *)&resSearchInfo.ImportSearchUrls;
   resSearchInfo.ImportSearchUrls.pTable = 0i64;
   Scaleform::String::String(&resSearchInfo.ImportFoundUrl);
-  v12 = 0i64;
+  p_resSearchInfo = 0i64;
   v99 = 0i64;
   v93 = 0;
   v13 = searchInfo;
@@ -945,7 +892,7 @@ Scaleform::GFx::Resource *__fastcall Scaleform::GFx::FontManager::FindOrCreateHa
     {
       v95 = v11 + 1;
       ++v13->Indent;
-      v12 = &resSearchInfo;
+      p_resSearchInfo = &resSearchInfo;
       v99 = &resSearchInfo;
     }
     else if ( v7->CreatedFonts.pTable )
@@ -956,80 +903,86 @@ Scaleform::GFx::Resource *__fastcall Scaleform::GFx::FontManager::FindOrCreateHa
       while ( v6[v14] );
       v15 = Scaleform::String::BernsteinHashFunctionCIS(v6, v14, 0x1505ui64);
       v16 = Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp>>::findIndexCore<Scaleform::GFx::FontManager::FontKey>(
-              (Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> > *)&v7->CreatedFonts.pTable,
+              &v7->CreatedFonts,
               &key,
               v7->CreatedFonts.pTable->SizeMask & (v15 ^ v5 & 3));
       if ( v16 >= 0 )
       {
-        v17 = (Scaleform::GFx::Resource **)&v7->CreatedFonts.pTable[2 * (v16 + 1)];
+        v17 = (Scaleform::GFx::Resource **)&v7->CreatedFonts.pTable[2 * v16 + 2];
         if ( v17 )
         {
-          if ( matchFontFlagsa & 0x10 )
+          if ( (matchFontFlagsa & 0x10) != 0 )
             goto LABEL_189;
           v18 = *v17;
-          if ( !((BYTE4((*v17)[2].vfptr->GetResourceReport) | LOBYTE((*v17)[1].vfptr)) & 0x10) )
+          if ( ((BYTE4((*v17)[2].vfptr->GetResourceReport) | LOBYTE((*v17)[1].vfptr)) & 0x10) == 0 )
             goto LABEL_189;
           if ( *((_BYTE *)v17 + 8) )
             goto LABEL_191;
-          v98 = (Scaleform::GFx::FontHandle **)&v7->CreatedFonts.pTable[2 * (v16 + 1)];
+          v98 = (Scaleform::GFx::FontHandle **)&v7->CreatedFonts.pTable[2 * v16 + 2];
         }
         v5 = matchFontFlagsa;
       }
-      v12 = v99;
+      p_resSearchInfo = v99;
     }
-    v19 = v7->pDefImpl;
-    if ( v19 )
-      v20 = (Scaleform::GFx::FontResource *)((__int64 (__fastcall *)(Scaleform::GFx::MovieDefImpl *, const char *, _QWORD, Scaleform::GFx::MovieDefImpl::SearchInfo *))v19->vfptr[7].__vecDelDtor)(
-                                              v19,
-                                              v6,
-                                              v5,
-                                              v12);
+    pDefImpl = v7->pDefImpl;
+    if ( pDefImpl )
+      RegisteredFont = (Scaleform::GFx::FontResource *)((__int64 (__fastcall *)(Scaleform::GFx::MovieDefImpl *, char *, _QWORD, Scaleform::GFx::MovieDefImpl::SearchInfo *))pDefImpl->Scaleform::GFx::MovieDef::Scaleform::GFx::Resource::vfptr[7].__vecDelDtor)(
+                                                         pDefImpl,
+                                                         v6,
+                                                         v5,
+                                                         p_resSearchInfo);
     else
-      v20 = 0i64;
+      RegisteredFont = 0i64;
     Scaleform::GFx::AddSearchInfo_3(v13, v6, v5, v7->pState->pFontLib.pObject != 0i64, &resSearchInfo);
     v21 = 0i64;
     ppsrcMovieDef = 0i64;
-    if ( !v20 )
+    if ( !RegisteredFont )
     {
-      v22 = v7->pMovie;
-      if ( !v22 )
+      pMovie = v7->pMovie;
+      if ( !pMovie )
         goto LABEL_34;
-      v20 = Scaleform::GFx::MovieImpl::FindRegisteredFont(v22, v6, matchFontFlagsa, &ppsrcMovieDef);
-      if ( !v20 )
+      RegisteredFont = Scaleform::GFx::MovieImpl::FindRegisteredFont(pMovie, v6, matchFontFlagsa, &ppsrcMovieDef);
+      if ( !RegisteredFont )
       {
         Scaleform::GFx::AddSearchInfo_1(v13, "Registered fonts: \"", v6, "\"", matchFontFlagsa, " not found.");
         goto LABEL_34;
       }
       v21 = ppsrcMovieDef;
     }
-    v23 = v20->pFont.pObject;
-    if ( ~(unsigned __int8)(v23->Flags >> 6) & 1 )
+    v23 = RegisteredFont->pFont.pObject;
+    if ( (v23->Flags & 0x40) == 0 )
     {
-      if ( matchFontFlagsa & 3 && !((unsigned __int8 (*)(void))v23->vfptr[19].__vecDelDtor)() )
+      if ( (matchFontFlagsa & 3) != 0
+        && !((unsigned __int8 (__fastcall *)(Scaleform::Render::Font *))v23->vfptr[19].__vecDelDtor)(v23) )
       {
-        if ( v116 )
-          *v116 = v20;
+        if ( ppfoundFont )
+          *ppfoundFont = RegisteredFont;
         v91 = v98;
         if ( v98 )
         {
           (*v98)->pFontManager = 0i64;
           Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp>>::RemoveAlt<Scaleform::GFx::FontHandle *>(
-            (Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> > *)&v7->CreatedFonts.pTable,
+            &v7->CreatedFonts,
             v91);
         }
         goto LABEL_200;
       }
-      v24 = (Scaleform::Render::Text::FontHandle *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
+      v24 = (Scaleform::Render::Text::FontHandle *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
                                                      Scaleform::Memory::pGlobalHeap,
                                                      64i64);
       v9 = (Scaleform::GFx::FontHandle *)v24;
       v97 = (Scaleform::GFx::FontHandle *)v24;
       if ( v24 )
       {
-        v25 = (Scaleform::Render::Text::FontManagerBase *)&v7->vfptr;
+        v25 = v7;
         if ( v13 )
           v25 = 0i64;
-        Scaleform::Render::Text::FontHandle::FontHandle(v24, v25, v20->pFont.pObject, v6, 0);
+        Scaleform::Render::Text::FontHandle::FontHandle(
+          v24,
+          v25,
+          (Scaleform::GFx::Resource *)RegisteredFont->pFont.pObject,
+          v6,
+          0);
         v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontHandle::`vftable;
         if ( v21 )
         {
@@ -1058,12 +1011,14 @@ LABEL_189:
       }
       (*v98)->pFontManager = 0i64;
       Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp>>::RemoveAlt<Scaleform::GFx::FontHandle *>(
-        (Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> > *)&v7->CreatedFonts.pTable,
-        (Scaleform::GFx::FontHandle *const *)v17);
+        &v7->CreatedFonts,
+        (Scaleform::GFx::FontHandle **)v17);
       if ( !v7->CreatedFonts.pTable )
-        goto LABEL_205;
+        goto LABEL_45;
       v26 = (_QWORD *)(v9->FontName.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64);
-      v27 = *v26 & 0x7FFFFFFFFFFFFFFFi64 ? (_QWORD *)((char *)v26 + 12) : ((__int64 (*)(void))v9->pFont.pObject->vfptr[1].__vecDelDtor)();
+      v27 = (*v26 & 0x7FFFFFFFFFFFFFFFi64) != 0
+          ? (char *)v26 + 12
+          : (char *)((__int64 (__fastcall *)(Scaleform::Render::Font *))v9->pFont.pObject->Scaleform::Render::Text::FontHandle::vfptr[1].__vecDelDtor)(v9->pFont.pObject);
       v28 = v9->pFont.pObject->Flags;
       v29 = (v28 | v9->OverridenFontFlags) & 3;
       v30 = -1i64;
@@ -1072,7 +1027,7 @@ LABEL_189:
       while ( v27[v30] );
       v31 = Scaleform::String::BernsteinHashFunctionCIS(v27, v30, 0x1505ui64);
       v32 = Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp>>::findIndexCore<Scaleform::GFx::FontHandle *>(
-              (Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> > *)&v7->CreatedFonts.pTable,
+              &v7->CreatedFonts,
               &v94,
               v7->CreatedFonts.pTable->SizeMask & (v31 ^ ((unsigned __int8)v28 | v29) & 3));
       if ( v32 >= 0 )
@@ -1092,49 +1047,42 @@ LABEL_189:
       }
       else
       {
-LABEL_205:
+LABEL_45:
         v98 = 0i64;
       }
     }
     v36 = v6;
     flags = matchFontFlagsa;
-    v38 = *(float *)&FLOAT_1_0;
+    ScaleFactor = *(float *)&FLOAT_1_0;
     v39 = 0;
     if ( v9 )
       goto LABEL_120;
-    v40 = pfontNamea;
-    if ( !v106 || !Scaleform::GFx::FontMap::GetFontMapping(v106, &pmanager->FontMapEntry, pfontNamea) )
+    v40 = pfontName;
+    if ( !v106 || !Scaleform::GFx::FontMap::GetFontMapping(v106, &this->FontMapEntry, pfontName) )
       goto LABEL_79;
-    v36 = (const char *)((pmanager->FontMapEntry.Name.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12);
-    v41 = pmanager->FontMapEntry.Flags;
-    if ( v41 == 16 )
+    v36 = (const char *)((this->FontMapEntry.Name.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12);
+    v41 = this->FontMapEntry.Flags;
+    if ( v41 == MFF_Original )
       flags = matchFontFlagsa;
     else
       flags = matchFontFlagsa & 0xFFFFFFFC | v41 & 0xFFFFFFF3;
-    v38 = pmanager->FontMapEntry.ScaleFactor;
-    v42 = pmanager->FontMapEntry.Flags;
-    if ( v42 & 0xC )
-      v43 = (signed int)v42 >> 2;
+    ScaleFactor = this->FontMapEntry.ScaleFactor;
+    v42 = this->FontMapEntry.Flags;
+    if ( (v42 & 0xC) != 0 )
+      v43 = v42 >> 2;
     else
       LOBYTE(v43) = 0;
-    v39 = pmanager->FontMapEntry.Flags & 0x20 | v43 & 3;
+    v39 = this->FontMapEntry.Flags & 0x20 | v43 & 3;
     v44 = searchInfo;
     if ( searchInfo )
     {
-      Scaleform::GFx::AddSearchInfo(
-        searchInfo,
-        "Applying FontMap: \"",
-        pfontNamea,
-        "\"  mapped to \"",
-        v36,
-        "\"",
-        flags);
+      Scaleform::GFx::AddSearchInfo(searchInfo, "Applying FontMap: \"", pfontName, "\"  mapped to \"", v36, "\"", flags);
       goto LABEL_80;
     }
-    v108.pFontName = (const char *)((pmanager->FontMapEntry.Name.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12);
+    v108.pFontName = (const char *)((this->FontMapEntry.Name.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 12);
     v108.FontStyle = flags;
-    v45 = (Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> > *)&pmanager->CreatedFonts.pTable;
-    if ( pmanager->CreatedFonts.pTable )
+    p_CreatedFonts = &this->CreatedFonts;
+    if ( this->CreatedFonts.pTable )
     {
       v46 = -1i64;
       do
@@ -1142,18 +1090,18 @@ LABEL_205:
       while ( v36[v46] );
       v47 = Scaleform::String::BernsteinHashFunctionCIS(v36, v46, 0x1505ui64);
       v48 = Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp>>::findIndexCore<Scaleform::GFx::FontManager::FontKey>(
-              v45,
+              p_CreatedFonts,
               &v108,
-              v45->pTable->SizeMask & (v47 ^ flags & 3));
+              p_CreatedFonts->pTable->SizeMask & (v47 ^ flags & 3));
       if ( v48 >= 0 )
       {
-        v17 = (Scaleform::GFx::Resource **)&v45->pTable[2 * (v48 + 1)];
+        v17 = (Scaleform::GFx::Resource **)&p_CreatedFonts->pTable[2 * v48 + 2];
         if ( v17 )
         {
           v49 = *v17;
-          if ( v38 == *(float *)&(*v17)[1].pLib )
+          if ( ScaleFactor == *(float *)&(*v17)[1].pLib )
             goto LABEL_190;
-          v50 = (Scaleform::GFx::FontHandle *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
+          v50 = (Scaleform::GFx::FontHandle *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
                                                 Scaleform::Memory::pGlobalHeap,
                                                 64i64);
           v97 = v50;
@@ -1161,9 +1109,9 @@ LABEL_205:
           {
             Scaleform::GFx::FontHandle::FontHandle(
               v50,
-              (Scaleform::Render::Text::FontManagerBase *)&pmanager->vfptr,
+              this,
               (Scaleform::Render::Font *)(*v17)[2].vfptr,
-              pfontNamea,
+              pfontName,
               matchFontFlagsa,
               *(Scaleform::GFx::MovieDef **)&(*v17)[2].RefCount.Value);
             v9 = v51;
@@ -1173,26 +1121,26 @@ LABEL_205:
             v9 = 0i64;
           }
           v94 = v9;
-          v9->FontScaleFactor = v38;
+          v9->FontScaleFactor = ScaleFactor;
         }
       }
     }
-    v109.pFontName = pfontNamea;
+    v109.pFontName = pfontName;
     v109.FontStyle = flags;
-    if ( v45->pTable )
+    if ( p_CreatedFonts->pTable )
     {
       v52 = -1i64;
       do
         ++v52;
-      while ( pfontNamea[v52] );
-      v53 = Scaleform::String::BernsteinHashFunctionCIS(pfontNamea, v52, 0x1505ui64);
+      while ( pfontName[v52] );
+      v53 = Scaleform::String::BernsteinHashFunctionCIS(pfontName, v52, 0x1505ui64);
       v54 = Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp>>::findIndexCore<Scaleform::GFx::FontManager::FontKey>(
-              v45,
+              p_CreatedFonts,
               &v109,
-              v45->pTable->SizeMask & (v53 ^ flags & 3));
+              p_CreatedFonts->pTable->SizeMask & (v53 ^ flags & 3));
       if ( v54 >= 0 )
       {
-        v17 = (Scaleform::GFx::Resource **)&v45->pTable[2 * (v54 + 1)];
+        v17 = (Scaleform::GFx::Resource **)&p_CreatedFonts->pTable[2 * v54 + 2];
         if ( v17 )
           break;
       }
@@ -1200,33 +1148,33 @@ LABEL_205:
 LABEL_77:
     if ( v9 )
       goto LABEL_120;
-    v40 = pfontNamea;
+    v40 = pfontName;
 LABEL_79:
     v44 = searchInfo;
 LABEL_80:
-    v57 = (__int64)v96;
-    if ( v96 )
+    v57 = (__int64)pObject;
+    if ( pObject )
     {
       v101.pMovieDef = 0i64;
       v101.pFontResource = 0i64;
-      v58 = pmanager->pState;
-      v59 = (signed __int64)&v58->vfptr;
+      v58 = this->pState;
+      v59 = &v58->Scaleform::GFx::StateBag;
       if ( !v58 )
         v59 = 0i64;
-      if ( ((unsigned __int8 (__fastcall *)(Scaleform::GFx::FontLib *, Scaleform::GFx::FontLib::FontResult *, const char *, _QWORD, Scaleform::GFx::MovieDefImpl *, signed __int64, Scaleform::GFx::ResourceWeakLib *))v96->vfptr[1].__vecDelDtor)(
-             v96,
+      if ( ((unsigned __int8 (__fastcall *)(Scaleform::GFx::FontLib *, Scaleform::GFx::FontLib::FontResult *, const char *, _QWORD, Scaleform::GFx::MovieDefImpl *, Scaleform::GFx::StateBag *, Scaleform::GFx::ResourceWeakLib *))pObject->vfptr[1].__vecDelDtor)(
+             pObject,
              &v101,
              v36,
              flags,
-             pmanager->pDefImpl,
+             this->pDefImpl,
              v59,
-             pmanager->pWeakLib) )
+             this->pWeakLib) )
       {
         if ( v39 )
         {
           v110.pFontName = v40;
           v110.FontStyle = v39;
-          if ( pmanager->CreatedFonts.pTable )
+          if ( this->CreatedFonts.pTable )
           {
             v60 = -1i64;
             do
@@ -1234,12 +1182,12 @@ LABEL_80:
             while ( v40[v60] );
             v61 = Scaleform::String::BernsteinHashFunctionCIS(v40, v60, 0x1505ui64);
             v62 = Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp>>::findIndexCore<Scaleform::GFx::FontManager::FontKey>(
-                    (Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> > *)&pmanager->CreatedFonts.pTable,
+                    &this->CreatedFonts,
                     &v110,
-                    pmanager->CreatedFonts.pTable->SizeMask & (v61 ^ v39 & 3));
+                    this->CreatedFonts.pTable->SizeMask & (v61 ^ v39 & 3));
             if ( v62 >= 0 )
             {
-              v63 = (Scaleform::GFx::Resource **)&pmanager->CreatedFonts.pTable[2 * (v62 + 1)];
+              v63 = (Scaleform::GFx::Resource **)&this->CreatedFonts.pTable[2 * v62 + 2];
               if ( v63 )
               {
                 Scaleform::Render::RenderBuffer::AddRef(*v63);
@@ -1249,50 +1197,50 @@ LABEL_80:
               }
             }
           }
-          v9 = (Scaleform::GFx::FontHandle *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
+          v9 = (Scaleform::GFx::FontHandle *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
                                                Scaleform::Memory::pGlobalHeap,
                                                64i64);
           v97 = v9;
           if ( v9 )
           {
-            v64 = v101.pMovieDef;
-            v65 = (Scaleform::Render::Text::FontManagerBase *)&pmanager->vfptr;
+            pMovieDef = v101.pMovieDef;
+            v65 = this;
             if ( searchInfo )
               v65 = 0i64;
             Scaleform::Render::Text::FontHandle::FontHandle(
-              (Scaleform::Render::Text::FontHandle *)&v9->vfptr,
+              v9,
               v65,
-              v101.pFontResource->pFont.pObject,
+              (Scaleform::GFx::Resource *)v101.pFontResource->pFont.pObject,
               v40,
               v39);
             v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontHandle::`vftable;
-            if ( v64 )
-              _InterlockedExchangeAdd(&v64->RefCount.Value, 1u);
-            v9->pSourceMovieDef.pObject = v64;
+            if ( pMovieDef )
+              _InterlockedExchangeAdd(&pMovieDef->RefCount.Value, 1u);
+            v9->pSourceMovieDef.pObject = pMovieDef;
           }
           else
           {
             v9 = 0i64;
           }
           v94 = v9;
-          v9->FontScaleFactor = v38;
+          v9->FontScaleFactor = ScaleFactor;
           Scaleform::GFx::AddSearchInfo_1(searchInfo, "Searching FontLib: \"", v40, "\" ", v39, " found.");
           goto LABEL_108;
         }
-        v9 = (Scaleform::GFx::FontHandle *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
+        v9 = (Scaleform::GFx::FontHandle *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
                                              Scaleform::Memory::pGlobalHeap,
                                              64i64);
         v97 = v9;
         if ( v9 )
         {
           v66 = v101.pMovieDef;
-          v67 = (Scaleform::Render::Text::FontManagerBase *)&pmanager->vfptr;
+          v67 = this;
           if ( searchInfo )
             v67 = 0i64;
           Scaleform::Render::Text::FontHandle::FontHandle(
-            (Scaleform::Render::Text::FontHandle *)&v9->vfptr,
+            v9,
             v67,
-            v101.pFontResource->pFont.pObject,
+            (Scaleform::GFx::Resource *)v101.pFontResource->pFont.pObject,
             v40,
             0);
           v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontHandle::`vftable;
@@ -1305,7 +1253,7 @@ LABEL_80:
           v9 = 0i64;
         }
         v94 = v9;
-        v9->FontScaleFactor = v38;
+        v9->FontScaleFactor = ScaleFactor;
         str4 = " found.";
         v69 = searchInfo;
       }
@@ -1321,33 +1269,33 @@ LABEL_108:
       {
         if ( !_InterlockedDecrement(&v101.pMovieDef->RefCount.Value) )
         {
-          v71 = v70->pLib;
-          if ( v71 )
+          pLib = v70->pLib;
+          if ( pLib )
           {
-            v71->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v71->vfptr, (unsigned int)v70);
+            pLib->vfptr[1].__vecDelDtor(pLib, (unsigned int)v70);
             v70->pLib = 0i64;
           }
-          v70->vfptr->__vecDelDtor((Scaleform::GFx::Resource *)&v70->vfptr, 1u);
+          v70->Scaleform::GFx::Resource::vfptr->__vecDelDtor(v70, 1u);
         }
         v9 = v94;
       }
-      v72 = v101.pFontResource;
+      pFontResource = v101.pFontResource;
       if ( v101.pFontResource )
       {
         if ( !_InterlockedDecrement(&v101.pFontResource->RefCount.Value) )
         {
-          v73 = v72->pLib;
+          v73 = pFontResource->pLib;
           if ( v73 )
           {
-            v73->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v73->vfptr, (unsigned int)v72);
-            v72->pLib = 0i64;
+            v73->vfptr[1].__vecDelDtor(v73, (unsigned int)pFontResource);
+            pFontResource->pLib = 0i64;
           }
-          v72->vfptr->__vecDelDtor((Scaleform::GFx::Resource *)&v72->vfptr, 1u);
+          pFontResource->vfptr->__vecDelDtor(pFontResource, 1u);
         }
         v9 = v94;
       }
 LABEL_120:
-      v57 = (__int64)v96;
+      v57 = (__int64)pObject;
     }
     v13 = searchInfo;
     if ( v93 || !searchInfo )
@@ -1358,36 +1306,36 @@ LABEL_120:
     }
     if ( !v9 )
     {
-      if ( !v57 && resSearchInfo.Status == 2 )
+      if ( !v57 && resSearchInfo.Status == FoundInResourcesNoGlyphs )
         Scaleform::GFx::AddSearchInfo_2(searchInfo, "FontLib not installed.");
 LABEL_128:
       if ( pprovider )
       {
-        v74 = pmanager->pDefImpl;
+        v74 = this->pDefImpl;
         if ( v74 )
-          v75 = v74->pLoaderImpl.pObject->pWeakResourceLib.pObject;
+          pWeakLib = v74->pLoaderImpl.pObject->pWeakResourceLib.pObject;
         else
-          v75 = pmanager->pWeakLib;
-        v76 = Scaleform::GFx::FontResource::CreateFontResource(v36, flags, pprovider, v75);
-        v112 = v76;
-        if ( v76 )
+          pWeakLib = this->pWeakLib;
+        FontResource = Scaleform::GFx::FontResource::CreateFontResource(v36, flags, pprovider, pWeakLib);
+        v112 = FontResource;
+        if ( FontResource )
         {
           Scaleform::GFx::AddSearchInfo_1(searchInfo, "Searching FontProvider: \"", v36, "\" ", flags, " found.");
-          v77 = (Scaleform::Render::Text::FontHandle *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
+          v77 = (Scaleform::Render::Text::FontHandle *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
                                                          Scaleform::Memory::pGlobalHeap,
                                                          64i64);
           v9 = (Scaleform::GFx::FontHandle *)v77;
           v97 = (Scaleform::GFx::FontHandle *)v77;
           if ( v77 )
           {
-            v78 = (Scaleform::Render::Text::FontManagerBase *)&pmanager->vfptr;
+            v78 = this;
             if ( searchInfo )
               v78 = 0i64;
             Scaleform::Render::Text::FontHandle::FontHandle(
               v77,
               v78,
-              (Scaleform::Render::Font *)v76[1].vfptr,
-              pfontNamea,
+              (Scaleform::GFx::Resource *)FontResource->pFont.pObject,
+              pfontName,
               0);
             v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontHandle::`vftable;
             v9->pSourceMovieDef.pObject = 0i64;
@@ -1397,23 +1345,23 @@ LABEL_128:
             v9 = 0i64;
           }
           v94 = v9;
-          v9->FontScaleFactor = v38;
+          v9->FontScaleFactor = ScaleFactor;
         }
         else
         {
           Scaleform::GFx::AddSearchInfo_1(searchInfo, "Searching FontProvider: \"", v36, "\" ", flags, " not found.");
         }
-        if ( v76 )
+        if ( FontResource )
         {
-          if ( !_InterlockedDecrement(&v76->RefCount.Value) )
+          if ( !_InterlockedDecrement(&FontResource->RefCount.Value) )
           {
-            v79 = v76->pLib;
+            v79 = FontResource->pLib;
             if ( v79 )
             {
-              v79->vfptr[1].__vecDelDtor((Scaleform::RefCountImplCore *)&v79->vfptr, (unsigned int)v76);
-              v76->pLib = 0i64;
+              v79->vfptr[1].__vecDelDtor(v79, (unsigned int)FontResource);
+              FontResource->pLib = 0i64;
             }
-            v76->vfptr->__vecDelDtor(v76, 1u);
+            FontResource->vfptr->__vecDelDtor(FontResource, 1u);
           }
           v9 = v94;
         }
@@ -1426,7 +1374,7 @@ LABEL_146:
     {
       if ( v9 )
         goto LABEL_195;
-      if ( !pprovider && resSearchInfo.Status == 2 )
+      if ( !pprovider && resSearchInfo.Status == FoundInResourcesNoGlyphs )
         Scaleform::GFx::AddSearchInfo_2(searchInfo, "FontProvider not installed.");
       goto LABEL_153;
     }
@@ -1434,51 +1382,51 @@ LABEL_152:
     if ( v9 )
     {
 LABEL_195:
-      v81 = (Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> > *)pmanager;
+      v81 = this;
 LABEL_196:
       if ( searchInfo )
         searchInfo->Indent -= v95;
       else
         Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp>>::Add<Scaleform::GFx::FontHandle *>(
-          v81 + 2,
-          &v81[2],
+          &v81->CreatedFonts,
+          &v81->CreatedFonts,
           &v94);
       v8 = (Scaleform::GFx::Resource *)v9;
       goto LABEL_200;
     }
 LABEL_153:
-    if ( v96 && flags & 0x10 )
+    if ( pObject && (flags & 0x10) != 0 )
     {
       v80 = flags & 0xFFFFFFEF;
       v103 = 0i64;
       v104 = 0i64;
-      v81 = (Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> > *)pmanager;
-      v82 = pmanager->pState;
-      v83 = (signed __int64)(v82 ? &v82->vfptr : 0i64);
-      if ( ((unsigned __int8 (__fastcall *)(Scaleform::GFx::FontLib *, __int64 *, const char *, _QWORD, Scaleform::GFx::MovieDefImpl *, signed __int64, _QWORD))v96->vfptr[1].__vecDelDtor)(
-             v96,
+      v81 = this;
+      v82 = this->pState;
+      v83 = v82 ? (__int64)&v82->Scaleform::GFx::StateBag : 0i64;
+      if ( ((unsigned __int8 (__fastcall *)(Scaleform::GFx::FontLib *, __int64 *, const char *, _QWORD, Scaleform::GFx::MovieDefImpl *, __int64, _QWORD))pObject->vfptr[1].__vecDelDtor)(
+             pObject,
              &v103,
              v36,
              v80,
-             pmanager->pDefImpl,
+             this->pDefImpl,
              v83,
              0i64) )
       {
-        v9 = (Scaleform::GFx::FontHandle *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
+        v9 = (Scaleform::GFx::FontHandle *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
                                              Scaleform::Memory::pGlobalHeap,
                                              64i64);
         v97 = v9;
         if ( v9 )
         {
           v84 = v103;
-          v85 = (Scaleform::Render::Text::FontManagerBase *)&pmanager->vfptr;
+          v85 = this;
           if ( searchInfo )
             v85 = 0i64;
           Scaleform::Render::Text::FontHandle::FontHandle(
-            (Scaleform::Render::Text::FontHandle *)&v9->vfptr,
+            v9,
             v85,
-            *(Scaleform::Render::Font **)(v104 + 24),
-            pfontNamea,
+            *(Scaleform::GFx::Resource **)(v104 + 24),
+            pfontName,
             0x10u);
           v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontHandle::`vftable;
           if ( v84 )
@@ -1490,7 +1438,7 @@ LABEL_153:
           v9 = 0i64;
         }
         v94 = v9;
-        v9->FontScaleFactor = v38;
+        v9->FontScaleFactor = ScaleFactor;
         v86 = " found.";
       }
       else
@@ -1509,7 +1457,7 @@ LABEL_153:
             (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)v88 + 8i64))(v88, v87);
             *(_QWORD *)(v87 + 16) = 0i64;
           }
-          (**(void (__fastcall ***)(__int64, signed __int64))v87)(v87, 1i64);
+          (**(void (__fastcall ***)(__int64, __int64))v87)(v87, 1i64);
         }
         v9 = v94;
       }
@@ -1524,14 +1472,14 @@ LABEL_153:
             (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)v90 + 8i64))(v90, v89);
             *(_QWORD *)(v89 + 16) = 0i64;
           }
-          (**(void (__fastcall ***)(__int64, signed __int64))v89)(v89, 1i64);
+          (**(void (__fastcall ***)(__int64, __int64))v89)(v89, 1i64);
         }
         v9 = v94;
       }
       if ( v9 )
         goto LABEL_196;
     }
-    if ( !(matchFontFlagsa & 0x10) )
+    if ( (matchFontFlagsa & 0x10) == 0 )
     {
       if ( searchInfo )
         searchInfo->Indent -= v95;
@@ -1542,17 +1490,17 @@ LABEL_153:
     matchFontFlagsa = v5;
     key.FontStyle = v5;
     pprovider = 0i64;
-    v96 = 0i64;
+    pObject = 0i64;
     v93 = 1;
-    v6 = pfontNamea;
-    v7 = pmanager;
+    v6 = pfontName;
+    v7 = this;
     v11 = v95;
-    v12 = v99;
+    p_resSearchInfo = v99;
   }
   v49 = *v17;
-  if ( v38 != *(float *)&(*v17)[1].pLib )
+  if ( ScaleFactor != *(float *)&(*v17)[1].pLib )
   {
-    v55 = (Scaleform::GFx::FontHandle *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
+    v55 = (Scaleform::GFx::FontHandle *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
                                           Scaleform::Memory::pGlobalHeap,
                                           64i64);
     v97 = v55;
@@ -1560,9 +1508,9 @@ LABEL_153:
     {
       Scaleform::GFx::FontHandle::FontHandle(
         v55,
-        (Scaleform::Render::Text::FontManagerBase *)&pmanager->vfptr,
+        this,
         (Scaleform::Render::Font *)(*v17)[2].vfptr,
-        pfontNamea,
+        pfontName,
         matchFontFlagsa,
         *(Scaleform::GFx::MovieDef **)&(*v17)[2].RefCount.Value);
       v9 = v56;
@@ -1572,7 +1520,7 @@ LABEL_153:
       v9 = 0i64;
     }
     v94 = v9;
-    v9->FontScaleFactor = v38;
+    v9->FontScaleFactor = ScaleFactor;
     goto LABEL_77;
   }
 LABEL_190:
@@ -1583,31 +1531,32 @@ LABEL_191:
 LABEL_200:
   if ( !_InterlockedDecrement((volatile signed __int32 *)((resSearchInfo.ImportFoundUrl.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64)
                                                         + 8)) )
-    ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-  Scaleform::HashSetBase<Scaleform::String,Scaleform::String::NoCaseHashFunctor,Scaleform::String::NoCaseHashFunctor,Scaleform::AllocatorGH<Scaleform::String,2>,Scaleform::HashsetCachedEntry<Scaleform::String,Scaleform::String::NoCaseHashFunctor>>::~HashSetBase<Scaleform::String,Scaleform::String::NoCaseHashFunctor,Scaleform::String::NoCaseHashFunctor,Scaleform::AllocatorGH<Scaleform::String,2>,Scaleform::HashsetCachedEntry<Scaleform::String,Scaleform::String::NoCaseHashFunctor>>((Scaleform::HashSetBase<Scaleform::String,Scaleform::String::NoCaseHashFunctor,Scaleform::String::NoCaseHashFunctor,Scaleform::AllocatorGH<Scaleform::String,2>,Scaleform::HashsetCachedEntry<Scaleform::String,Scaleform::String::NoCaseHashFunctor> > *)&resSearchInfo.ImportSearchUrls.pTable);
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+  Scaleform::HashSetBase<Scaleform::String,Scaleform::String::NoCaseHashFunctor,Scaleform::String::NoCaseHashFunctor,Scaleform::AllocatorGH<Scaleform::String,2>,Scaleform::HashsetCachedEntry<Scaleform::String,Scaleform::String::NoCaseHashFunctor>>::~HashSetBase<Scaleform::String,Scaleform::String::NoCaseHashFunctor,Scaleform::String::NoCaseHashFunctor,Scaleform::AllocatorGH<Scaleform::String,2>,Scaleform::HashsetCachedEntry<Scaleform::String,Scaleform::String::NoCaseHashFunctor>>(&resSearchInfo.ImportSearchUrls);
   return v8;
 }
 
 // File Line: 645
 // RVA: 0x8BF6C0
-Scaleform::GFx::FontHandle *__fastcall Scaleform::GFx::FontManager::CreateFontHandle(Scaleform::GFx::FontManager *this, const char *pfontName, unsigned int matchFontFlags, bool allowListOfFonts, Scaleform::Render::Text::FontManagerBase::FontSearchPathInfo *searchInfo)
+Scaleform::GFx::FontHandle *__fastcall Scaleform::GFx::FontManager::CreateFontHandle(
+        Scaleform::GFx::FontManager *this,
+        const char *pfontName,
+        unsigned int matchFontFlags,
+        bool allowListOfFonts,
+        Scaleform::Render::Text::FontManagerBase::FontSearchPathInfo *searchInfo)
 {
-  unsigned int v5; // er14
   const char *v6; // rdi
-  Scaleform::GFx::FontManager *v7; // r15
-  Scaleform::GFx::FontHandle *v9; // rbp
+  Scaleform::GFx::FontHandle *FontHandleFromName; // rbp
   char *v10; // rax
   char *v11; // rsi
   signed __int64 v12; // rbx
   char *v13; // rdx
-  char _Dst[152]; // [rsp+20h] [rbp-98h]
+  char _Dst[152]; // [rsp+20h] [rbp-98h] BYREF
 
-  v5 = matchFontFlags;
   v6 = pfontName;
-  v7 = this;
   if ( !allowListOfFonts )
     return Scaleform::GFx::FontManager::CreateFontHandleFromName(this, pfontName, matchFontFlags, searchInfo);
-  v9 = 0i64;
+  FontHandleFromName = 0i64;
   do
   {
     v10 = strchr(v6, 44);
@@ -1626,192 +1575,198 @@ Scaleform::GFx::FontHandle *__fastcall Scaleform::GFx::FontManager::CreateFontHa
     {
       v13 = (char *)v6;
     }
-    v9 = Scaleform::GFx::FontManager::CreateFontHandleFromName(v7, v13, v5, searchInfo);
-    if ( v9 )
-      return v9;
+    FontHandleFromName = Scaleform::GFx::FontManager::CreateFontHandleFromName(this, v13, matchFontFlags, searchInfo);
+    if ( FontHandleFromName )
+      return FontHandleFromName;
   }
   while ( v11 );
-  return v9;
+  return FontHandleFromName;
 }
 
 // File Line: 683
 // RVA: 0x8BF7C0
-Scaleform::GFx::FontHandle *__fastcall Scaleform::GFx::FontManager::CreateFontHandleFromName(Scaleform::GFx::FontManager *this, const char *pfontName, unsigned int matchFontFlags, Scaleform::Render::Text::FontManagerBase::FontSearchPathInfo *searchInfo)
+Scaleform::GFx::FontHandle *__fastcall Scaleform::GFx::FontManager::CreateFontHandleFromName(
+        Scaleform::GFx::FontManager *this,
+        const char *pfontName,
+        unsigned int matchFontFlags,
+        Scaleform::Render::Text::FontManagerBase::FontSearchPathInfo *searchInfo)
 {
-  Scaleform::Render::Text::FontManagerBase::FontSearchPathInfo *v4; // rdi
-  unsigned int v5; // er14
-  const char *str5; // rsi
-  Scaleform::GFx::FontManager *v7; // r13
-  char *v8; // r15
-  Scaleform::GFx::FontHandle *v9; // rbx
-  Scaleform::GFx::Resource *v10; // rbp
+  char *pData; // r15
+  Scaleform::GFx::FontHandle *Handle; // rbx
+  Scaleform::GFx::FontResource *v10; // rbp
   Scaleform::GFx::FontHandle *v11; // rax
   Scaleform::GFx::FontHandle *v12; // rax
   Scaleform::GFx::FontResource *v13; // rbp
   Scaleform::Render::Text::FontHandle *v14; // rax
-  Scaleform::Render::Text::FontManagerBase *v15; // rdx
-  Scaleform::GFx::FontHandle *key; // [rsp+50h] [rbp-78h]
-  Scaleform::GFx::FontResource *ppfoundFont; // [rsp+58h] [rbp-70h]
-  __int64 v19; // [rsp+60h] [rbp-68h]
-  Scaleform::GFx::Resource *v20; // [rsp+68h] [rbp-60h]
-  Scaleform::StringBuffer v21; // [rsp+70h] [rbp-58h]
-  int v22; // [rsp+E8h] [rbp+20h]
+  Scaleform::GFx::FontManager *v15; // rdx
+  Scaleform::GFx::FontHandle *key; // [rsp+50h] [rbp-78h] BYREF
+  Scaleform::GFx::FontResource *ppfoundFont[3]; // [rsp+58h] [rbp-70h] BYREF
+  Scaleform::StringBuffer v19; // [rsp+70h] [rbp-58h] BYREF
+  int Indent; // [rsp+E8h] [rbp+20h]
 
-  v19 = -2i64;
-  v4 = searchInfo;
-  v5 = matchFontFlags;
-  str5 = pfontName;
-  v7 = this;
-  v22 = 0;
-  v8 = &customWorldMapCaption;
+  ppfoundFont[1] = (Scaleform::GFx::FontResource *)-2i64;
+  Indent = 0;
+  pData = &customCaption;
   if ( searchInfo )
   {
-    v22 = searchInfo->Indent;
+    Indent = searchInfo->Indent;
     Scaleform::GFx::AddSearchInfo_1(
       searchInfo,
       "Searching for font: \"",
       pfontName,
       "\" ",
       matchFontFlags,
-      &customWorldMapCaption);
+      &customCaption);
   }
-  ppfoundFont = 0i64;
-  v9 = (Scaleform::GFx::FontHandle *)Scaleform::GFx::FontManager::FindOrCreateHandle(v7, str5, v5, &ppfoundFont, v4);
-  if ( !v9 && v5 & 3 )
+  ppfoundFont[0] = 0i64;
+  Handle = (Scaleform::GFx::FontHandle *)Scaleform::GFx::FontManager::FindOrCreateHandle(
+                                           this,
+                                           pfontName,
+                                           matchFontFlags,
+                                           ppfoundFont,
+                                           searchInfo);
+  if ( !Handle && (matchFontFlags & 3) != 0 )
   {
-    if ( v4 )
+    if ( searchInfo )
     {
-      ++v4->Indent;
+      ++searchInfo->Indent;
       Scaleform::GFx::AddSearchInfo_1(
-        v4,
+        searchInfo,
         "Searching for font: \"",
-        str5,
+        pfontName,
         "\" ",
-        v5 & 0xFFFFFFFC,
-        &customWorldMapCaption);
+        matchFontFlags & 0xFFFFFFFC,
+        &customCaption);
     }
-    v10 = Scaleform::GFx::FontManager::FindOrCreateHandle(v7, str5, v5 & 0xFFFFFFFC, 0i64, v4);
-    v20 = v10;
+    v10 = (Scaleform::GFx::FontResource *)Scaleform::GFx::FontManager::FindOrCreateHandle(
+                                            this,
+                                            pfontName,
+                                            matchFontFlags & 0xFFFFFFFC,
+                                            0i64,
+                                            searchInfo);
+    ppfoundFont[2] = v10;
     if ( v10 )
     {
-      v11 = (Scaleform::GFx::FontHandle *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
+      v11 = (Scaleform::GFx::FontHandle *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
                                             Scaleform::Memory::pGlobalHeap,
                                             64i64);
       key = v11;
       if ( v11 )
       {
         Scaleform::GFx::FontHandle::FontHandle(v11, (Scaleform::GFx::FontHandle *)v10);
-        v9 = v12;
+        Handle = v12;
       }
       else
       {
-        v9 = 0i64;
+        Handle = 0i64;
       }
-      key = v9;
-      v9->OverridenFontFlags |= v5 & 3;
-      if ( v4 )
+      key = Handle;
+      Handle->OverridenFontFlags |= matchFontFlags & 3;
+      if ( searchInfo )
         Scaleform::GFx::AddSearchInfo_0(
-          v4,
+          searchInfo,
           "Font \"",
-          str5,
+          pfontName,
           "\" ",
-          v5,
+          matchFontFlags,
           " will be generated from \"",
-          str5,
+          pfontName,
           "\"",
-          v5 & 0xFFFFFFFC);
+          matchFontFlags & 0xFFFFFFFC);
       else
         Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp>>::Add<Scaleform::GFx::FontHandle *>(
-          (Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> > *)&v7->CreatedFonts.pTable,
-          &v7->CreatedFonts,
+          &this->CreatedFonts,
+          &this->CreatedFonts,
           &key);
     }
     if ( v10 )
       Scaleform::RefCountImpl::Release((Scaleform::Render::RenderBuffer *)v10);
-    v8 = &customWorldMapCaption;
+    pData = &customCaption;
   }
-  if ( v4 )
-    v4->Indent = v22;
-  if ( !v9 )
+  if ( searchInfo )
+    searchInfo->Indent = Indent;
+  if ( !Handle )
   {
-    v13 = ppfoundFont;
-    if ( !ppfoundFont )
-      goto LABEL_37;
-    if ( v4 )
+    v13 = ppfoundFont[0];
+    if ( !ppfoundFont[0] )
+      goto LABEL_33;
+    if ( searchInfo )
     {
-      Scaleform::StringBuffer::StringBuffer(&v21, Scaleform::Memory::pGlobalHeap);
-      Scaleform::StringBuffer::AppendString(&v21, "Empty font: \"", -1i64);
-      Scaleform::StringBuffer::AppendString(&v21, str5, -1i64);
-      Scaleform::StringBuffer::AppendString(&v21, "\" is created", -1i64);
-      if ( v21.pData )
-        v8 = v21.pData;
-      Scaleform::GFx::AddSearchInfo_2(v4, v8);
-      Scaleform::ArrayDataBase<Scaleform::MsgFormat::fmt_record,Scaleform::AllocatorGH_POD<Scaleform::MsgFormat::fmt_record,2>,Scaleform::ArrayDefaultPolicy>::~ArrayDataBase<Scaleform::MsgFormat::fmt_record,Scaleform::AllocatorGH_POD<Scaleform::MsgFormat::fmt_record,2>,Scaleform::ArrayDefaultPolicy>((Scaleform::ArrayDataBase<int,Scaleform::AllocatorGH<int,2>,Scaleform::ArrayDefaultPolicy> *)&v21);
+      Scaleform::StringBuffer::StringBuffer(&v19, Scaleform::Memory::pGlobalHeap);
+      Scaleform::StringBuffer::AppendString(&v19, "Empty font: \"", -1i64);
+      Scaleform::StringBuffer::AppendString(&v19, pfontName, -1i64);
+      Scaleform::StringBuffer::AppendString(&v19, "\" is created", -1i64);
+      if ( v19.pData )
+        pData = v19.pData;
+      Scaleform::GFx::AddSearchInfo_2(searchInfo, pData);
+      Scaleform::ArrayDataBase<Scaleform::MsgFormat::fmt_record,Scaleform::AllocatorGH_POD<Scaleform::MsgFormat::fmt_record,2>,Scaleform::ArrayDefaultPolicy>::~ArrayDataBase<Scaleform::MsgFormat::fmt_record,Scaleform::AllocatorGH_POD<Scaleform::MsgFormat::fmt_record,2>,Scaleform::ArrayDefaultPolicy>((Scaleform::ArrayDataBase<int,Scaleform::AllocatorGH<int,2>,Scaleform::ArrayDefaultPolicy> *)&v19);
     }
-    v14 = (Scaleform::Render::Text::FontHandle *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
+    v14 = (Scaleform::Render::Text::FontHandle *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))Scaleform::Memory::pGlobalHeap->vfptr->Alloc)(
                                                    Scaleform::Memory::pGlobalHeap,
                                                    64i64);
-    v9 = (Scaleform::GFx::FontHandle *)v14;
+    Handle = (Scaleform::GFx::FontHandle *)v14;
     if ( v14 )
     {
-      v15 = (Scaleform::Render::Text::FontManagerBase *)&v7->vfptr;
-      if ( v4 )
+      v15 = this;
+      if ( searchInfo )
         v15 = 0i64;
-      Scaleform::Render::Text::FontHandle::FontHandle(v14, v15, v13->pFont.pObject, str5, 0);
-      v9->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontHandle::`vftable;
-      v9->pSourceMovieDef.pObject = 0i64;
+      Scaleform::Render::Text::FontHandle::FontHandle(
+        v14,
+        v15,
+        (Scaleform::GFx::Resource *)v13->pFont.pObject,
+        pfontName,
+        0);
+      Handle->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::FontHandle::`vftable;
+      Handle->pSourceMovieDef.pObject = 0i64;
     }
     else
     {
-      v9 = 0i64;
+      Handle = 0i64;
     }
-    key = v9;
-    if ( !v4 )
+    key = Handle;
+    if ( !searchInfo )
       Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp>>::Add<Scaleform::GFx::FontHandle *>(
-        (Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> > *)&v7->CreatedFonts.pTable,
-        &v7->CreatedFonts,
+        &this->CreatedFonts,
+        &this->CreatedFonts,
         &key);
-    if ( !v9 )
-LABEL_37:
-      Scaleform::GFx::AddSearchInfo_2(v4, "Font not found.");
+    if ( !Handle )
+LABEL_33:
+      Scaleform::GFx::AddSearchInfo_2(searchInfo, "Font not found.");
   }
-  return v9;
+  return Handle;
 }
 
 // File Line: 767
 // RVA: 0x8D73D0
 Scaleform::GFx::FontHandle *__fastcall Scaleform::GFx::FontManager::GetEmptyFont(Scaleform::GFx::FontManager *this)
 {
-  Scaleform::GFx::FontManager *v1; // rbx
-
-  v1 = this;
   Scaleform::Render::RenderBuffer::AddRef((Scaleform::GFx::Resource *)this->pEmptyFont.pObject);
-  return v1->pEmptyFont.pObject;
+  return this->pEmptyFont.pObject;
 }
 
 // File Line: 773
 // RVA: 0x8BB220
 void __fastcall Scaleform::GFx::FontManager::CleanCache(Scaleform::GFx::FontManager *this)
 {
-  void **v1; // rbx
-  Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> >::TableType *v2; // rcx
+  Scaleform::HashSetLH<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,2,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> > *p_CreatedFonts; // rbx
+  Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> >::TableType *pTable; // rcx
   unsigned __int64 v3; // rax
-  void **v4; // r9
-  unsigned __int64 v5; // rdx
+  Scaleform::HashSetLH<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,2,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> > *v4; // r9
+  unsigned __int64 SizeMask; // rdx
   Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> >::TableType *v6; // rcx
-  _QWORD *v7; // rdx
+  Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> >::TableType *v7; // rdx
   unsigned __int64 v8; // r8
-  _QWORD *v9; // rdx
+  Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> >::TableType *v9; // rdx
   __int64 v10; // rcx
-  signed __int64 v11; // rdx
+  __int64 v11; // rdx
 
-  v1 = (void **)&this->CreatedFonts.pTable;
-  v2 = this->CreatedFonts.pTable;
+  p_CreatedFonts = &this->CreatedFonts;
+  pTable = this->CreatedFonts.pTable;
   v3 = 0i64;
-  if ( v2 )
+  if ( pTable )
   {
-    v5 = v2->SizeMask;
-    v6 = v2 + 1;
+    SizeMask = pTable->SizeMask;
+    v6 = pTable + 1;
     do
     {
       if ( v6->EntryCount != -2i64 )
@@ -1819,8 +1774,8 @@ void __fastcall Scaleform::GFx::FontManager::CleanCache(Scaleform::GFx::FontMana
       ++v3;
       v6 += 2;
     }
-    while ( v3 <= v5 );
-    v4 = v1;
+    while ( v3 <= SizeMask );
+    v4 = p_CreatedFonts;
   }
   else
   {
@@ -1828,114 +1783,114 @@ void __fastcall Scaleform::GFx::FontManager::CleanCache(Scaleform::GFx::FontMana
   }
   while ( v4 )
   {
-    v7 = *v4;
-    if ( !*v4 || (signed __int64)v3 > v7[1] )
+    v7 = v4->pTable;
+    if ( !v4->pTable || (signed __int64)v3 > (signed __int64)v7->SizeMask )
       break;
-    *(_QWORD *)(v7[4 * (v3 + 1)] + 16i64) = 0i64;
-    v8 = *((_QWORD *)*v4 + 1);
-    if ( (signed __int64)v3 <= (signed __int64)v8 && ++v3 <= v8 )
+    *(_QWORD *)(v7[2 * v3 + 2].EntryCount + 16) = 0i64;
+    v8 = v4->pTable->SizeMask;
+    if ( (__int64)v3 <= (__int64)v8 && ++v3 <= v8 )
     {
-      v9 = (char *)*v4 + 32 * v3 + 16;
+      v9 = &v4->pTable[2 * v3 + 1];
       do
       {
-        if ( *v9 != -2i64 )
+        if ( v9->EntryCount != -2i64 )
           break;
         ++v3;
-        v9 += 4;
+        v9 += 2;
       }
       while ( v3 <= v8 );
     }
   }
-  if ( *v1 )
+  if ( p_CreatedFonts->pTable )
   {
     v10 = 0i64;
-    v11 = *((_QWORD *)*v1 + 1) + 1i64;
+    v11 = p_CreatedFonts->pTable->SizeMask + 1;
     do
     {
-      if ( *(_QWORD *)((char *)*v1 + v10 + 16) != -2i64 )
-        *(_QWORD *)((char *)*v1 + v10 + 16) = -2i64;
-      v10 += 32i64;
+      if ( p_CreatedFonts->pTable[v10 + 1].EntryCount != -2i64 )
+        p_CreatedFonts->pTable[v10 + 1].EntryCount = -2i64;
+      v10 += 2i64;
       --v11;
     }
     while ( v11 );
-    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, *v1);
-    *v1 = 0i64;
+    Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, p_CreatedFonts->pTable);
+    p_CreatedFonts->pTable = 0i64;
   }
 }
 
 // File Line: 783
 // RVA: 0x8BB310
-void __fastcall Scaleform::GFx::FontManager::CleanCacheFor(Scaleform::GFx::FontManager *this, Scaleform::GFx::MovieDefImpl *pdefImpl)
+void __fastcall Scaleform::GFx::FontManager::CleanCacheFor(
+        Scaleform::GFx::FontManager *this,
+        Scaleform::GFx::MovieDefImpl *pdefImpl)
 {
-  Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> >::TableType *v2; // rax
-  Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> > *v3; // r8
-  Scaleform::GFx::MovieDefImpl *v4; // rdi
-  unsigned __int64 v5; // rcx
-  unsigned __int64 v6; // rdx
+  Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> >::TableType *pTable; // rax
+  Scaleform::HashSetLH<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,2,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> > *p_CreatedFonts; // r8
+  unsigned __int64 Index; // rcx
+  unsigned __int64 SizeMask; // rdx
   Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> >::TableType *v7; // rax
   Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> > v8; // rax
-  unsigned __int64 v9; // r9
+  unsigned __int64 EntryCount; // r9
   Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> > v10; // r9
   unsigned __int64 v11; // rdx
   Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> >::TableType *v12; // rax
-  Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> >::Iterator v13; // [rsp+20h] [rbp-18h]
+  Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> >::Iterator v13; // [rsp+20h] [rbp-18h] BYREF
 
-  v2 = this->CreatedFonts.pTable;
-  v3 = (Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> > *)&this->CreatedFonts.pTable;
-  v4 = pdefImpl;
-  if ( v2 )
+  pTable = this->CreatedFonts.pTable;
+  p_CreatedFonts = &this->CreatedFonts;
+  if ( pTable )
   {
-    v6 = v2->SizeMask;
-    v5 = 0i64;
-    v7 = v2 + 1;
+    SizeMask = pTable->SizeMask;
+    Index = 0i64;
+    v7 = pTable + 1;
     do
     {
       if ( v7->EntryCount != -2i64 )
         break;
-      ++v5;
+      ++Index;
       v7 += 2;
     }
-    while ( v5 <= v6 );
+    while ( Index <= SizeMask );
   }
   else
   {
-    v3 = 0i64;
-    v5 = 0i64;
+    p_CreatedFonts = 0i64;
+    Index = 0i64;
   }
-  v13.Index = v5;
-  v13.pHash = v3;
-  while ( v3 )
+  v13.Index = Index;
+  v13.pHash = p_CreatedFonts;
+  while ( p_CreatedFonts )
   {
-    v8.pTable = v3->pTable;
-    if ( !v3->pTable || (signed __int64)v5 > (signed __int64)v8.pTable->SizeMask )
+    v8.pTable = p_CreatedFonts->pTable;
+    if ( !p_CreatedFonts->pTable || (signed __int64)Index > (signed __int64)v8.pTable->SizeMask )
       break;
-    v9 = v8.pTable[2 * v5 + 2].EntryCount;
-    if ( *(Scaleform::GFx::MovieDefImpl **)(v9 + 56) == v4 )
+    EntryCount = v8.pTable[2 * Index + 2].EntryCount;
+    if ( *(Scaleform::GFx::MovieDefImpl **)(EntryCount + 56) == pdefImpl )
     {
-      *(_QWORD *)(v9 + 16) = 0i64;
+      *(_QWORD *)(EntryCount + 16) = 0i64;
       Scaleform::HashSetBase<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::AllocatorLH<Scaleform::GFx::FontManager::NodePtr,2>,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp>>::Iterator::RemoveAlt<Scaleform::GFx::FontManager::NodePtr>(
         &v13,
-        (Scaleform::GFx::FontManager::NodePtr *)&v3->pTable[2 * v5 + 2]);
-      v5 = v13.Index;
-      v3 = v13.pHash;
+        (Scaleform::GFx::FontManager::NodePtr *)&p_CreatedFonts->pTable[2 * Index + 2]);
+      Index = v13.Index;
+      p_CreatedFonts = (Scaleform::HashSetLH<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp,Scaleform::GFx::FontManager::NodePtrHashOp,2,Scaleform::HashsetCachedEntry<Scaleform::GFx::FontManager::NodePtr,Scaleform::GFx::FontManager::NodePtrHashOp> > *)v13.pHash;
     }
-    v10.pTable = v3->pTable;
-    v11 = v3->pTable->SizeMask;
-    if ( (signed __int64)v5 <= (signed __int64)v11 )
+    v10.pTable = p_CreatedFonts->pTable;
+    v11 = p_CreatedFonts->pTable->SizeMask;
+    if ( (__int64)Index <= (__int64)v11 )
     {
-      v13.Index = ++v5;
-      if ( v5 <= v11 )
+      v13.Index = ++Index;
+      if ( Index <= v11 )
       {
-        v12 = &v10.pTable[2 * v5 + 1];
+        v12 = &v10.pTable[2 * Index + 1];
         do
         {
           if ( v12->EntryCount != -2i64 )
             break;
-          ++v5;
+          ++Index;
           v12 += 2;
-          v13.Index = v5;
+          v13.Index = Index;
         }
-        while ( v5 <= v11 );
+        while ( Index <= v11 );
       }
     }
   }

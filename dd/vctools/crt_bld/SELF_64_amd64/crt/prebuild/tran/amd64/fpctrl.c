@@ -22,18 +22,18 @@ unsigned __int64 __fastcall ctrlfp(unsigned __int64 newctrl, unsigned __int64 _m
 {
   int v2; // ebx
   int v3; // edi
-  unsigned int v4; // esi
+  unsigned int fpsr; // esi
   __int64 v5; // rcx
 
   v2 = _mask;
   v3 = newctrl;
-  v4 = get_fpsr();
-  v5 = v2 & v3 | v4 & (~(_WORD)v2 | 0xFFFF807F);
-  if ( dazSupported && v5 & 0x40 )
+  fpsr = get_fpsr();
+  v5 = v2 & v3 | fpsr & (~(_WORD)v2 | 0xFFFF807F);
+  if ( dazSupported && (((unsigned __int8)(v2 & v3) | fpsr & ((unsigned __int8)~(_BYTE)v2 | 0x7F)) & 0x40) != 0 )
     set_fpsr(v5);
   else
     set_fpsr((unsigned int)v5 & 0xFFFFFFBF);
-  return v4;
+  return fpsr;
 }
 
 // File Line: 105
@@ -45,10 +45,10 @@ _ctrlfp$filt$0
 void __fastcall set_statfp(unsigned __int64 sw)
 {
   char v1; // bl
-  unsigned int v2; // eax
+  unsigned int fpsr; // eax
 
   v1 = sw;
-  v2 = get_fpsr();
-  set_fpsr(v1 & 0x3F | v2);
+  fpsr = get_fpsr();
+  set_fpsr(v1 & 0x3F | fpsr);
 }
 

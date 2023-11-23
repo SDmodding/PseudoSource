@@ -10,9 +10,9 @@ float __fastcall atanf(float fx)
   double v7; // xmm5_8
 
   v1 = fx;
-  v2 = *(unsigned __int64 *)&fx & 0x7FFFFFFFFFFFFFFFi64;
-  v3 = *(unsigned __int64 *)&fx & 0x8000000000000000ui64;
-  if ( *(signed __int64 *)&fx < 0 )
+  v2 = fabs(fx);
+  v3 = COERCE_UNSIGNED_INT64(fx) & 0x8000000000000000ui64;
+  if ( COERCE__INT64(fx) < 0 )
     *(_QWORD *)&v1 ^= _xmm[0];
   if ( v2 < 0x3FDC000000000000i64 )
   {

@@ -1,20 +1,20 @@
 // File Line: 54
 // RVA: 0x12DC2D0
-signed __int64 __fastcall wcsnicmp_l(const wchar_t *first, const wchar_t *last, unsigned __int64 count, localeinfo_struct *plocinfo)
+__int64 __fastcall wcsnicmp_l(wchar_t *first, wchar_t *last, unsigned __int64 count, localeinfo_struct *plocinfo)
 {
   unsigned __int64 v4; // rbp
-  unsigned __int16 *v5; // rdi
-  unsigned __int16 *v6; // rsi
-  signed __int64 result; // rax
+  wchar_t *v5; // rdi
+  wchar_t *v6; // rsi
+  __int64 result; // rax
   signed __int64 v8; // rsi
   unsigned __int16 v9; // bx
-  unsigned __int16 v10; // cx
-  unsigned __int16 v11; // ax
-  _LocaleUpdate v12; // [rsp+20h] [rbp-28h]
+  wchar_t v10; // cx
+  wchar_t v11; // ax
+  _LocaleUpdate v12; // [rsp+20h] [rbp-28h] BYREF
 
   v4 = count;
-  v5 = (unsigned __int16 *)last;
-  v6 = (unsigned __int16 *)first;
+  v5 = last;
+  v6 = first;
   result = 0i64;
   if ( count )
   {
@@ -39,7 +39,7 @@ signed __int64 __fastcall wcsnicmp_l(const wchar_t *first, const wchar_t *last, 
         v8 = (char *)v6 - (char *)v5;
         do
         {
-          v9 = *(unsigned __int16 *)((char *)v5 + v8);
+          v9 = *(wchar_t *)((char *)v5 + v8);
           if ( (unsigned __int16)(v9 - 65) <= 0x19u )
             v9 += 32;
           v10 = *v5;
@@ -52,13 +52,13 @@ signed __int64 __fastcall wcsnicmp_l(const wchar_t *first, const wchar_t *last, 
       }
       result = v9 - (unsigned int)v10;
       if ( v12.updated )
-        v12.ptd->_ownlocale &= 0xFFFFFFFD;
+        v12.ptd->_ownlocale &= ~2u;
     }
     else
     {
       *errno() = 22;
       invalid_parameter_noinfo();
-      result = 0x7FFFFFFFi64;
+      return 0x7FFFFFFFi64;
     }
   }
   return result;
@@ -68,7 +68,7 @@ signed __int64 __fastcall wcsnicmp_l(const wchar_t *first, const wchar_t *last, 
 // RVA: 0x12DC238
 int __fastcall wcsnicmp(const wchar_t *first, const wchar_t *last, unsigned __int64 count)
 {
-  int v3; // er9
+  int v3; // r9d
   unsigned __int64 v4; // r11
   signed __int64 v6; // r10
   unsigned __int16 v7; // cx
@@ -99,7 +99,7 @@ int __fastcall wcsnicmp(const wchar_t *first, const wchar_t *last, unsigned __in
       --v4;
     }
     while ( v4 && v7 && v7 == v8 );
-    v3 = v7 - v8;
+    return v7 - v8;
   }
   return v3;
 }

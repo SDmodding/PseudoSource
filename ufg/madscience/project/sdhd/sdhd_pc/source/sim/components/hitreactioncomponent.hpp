@@ -2,26 +2,26 @@
 // RVA: 0x549B10
 void __fastcall UFG::MeleeInfo::Reset(UFG::MeleeInfo *this)
 {
-  ActionPath *v1; // rbx
-  float v2; // xmm1_4
-  float v3; // xmm2_4
+  ActionPath *p_mActionPath; // rbx
+  float y; // xmm1_4
+  float z; // xmm2_4
   float v4; // xmm1_4
   float v5; // xmm2_4
   float v6; // xmm1_4
   float v7; // xmm2_4
-  __int64 v8; // rax
+  __int64 mOffset; // rax
   char *v9; // rcx
 
-  v1 = &this->mActionPath;
+  p_mActionPath = &this->mActionPath;
   *(_QWORD *)&this->mAttackLocationLateralID = 0i64;
   this->mAttackFromBehind = 0;
   *(_QWORD *)&this->mAttackMaterialUID = 0i64;
   this->mAttackIntensityUID = 0;
-  v2 = UFG::qVector3::msZero.y;
-  v3 = UFG::qVector3::msZero.z;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
   this->mHitPosition.x = UFG::qVector3::msZero.x;
-  this->mHitPosition.y = v2;
-  this->mHitPosition.z = v3;
+  this->mHitPosition.y = y;
+  this->mHitPosition.z = z;
   v4 = UFG::qVector3::msZero.y;
   v5 = UFG::qVector3::msZero.z;
   this->mHitDirection.x = UFG::qVector3::msZero.x;
@@ -34,31 +34,28 @@ void __fastcall UFG::MeleeInfo::Reset(UFG::MeleeInfo *this)
   this->mHitNormal.z = v7;
   if ( this->mActionPath.mPath.mCount >= 0 )
   {
-    v8 = this->mActionPath.mPath.mData.mOffset;
-    if ( v8 )
+    mOffset = this->mActionPath.mPath.mData.mOffset;
+    if ( mOffset )
     {
-      v9 = (char *)&this->mActionPath.mPath.mData + v8;
+      v9 = (char *)&this->mActionPath.mPath.mData + mOffset;
       if ( v9 )
         operator delete[](v9);
     }
-    v1->mPath.mData.mOffset = 0i64;
-    v1->mPath.mCount &= 0x80000000;
+    p_mActionPath->mPath.mData.mOffset = 0i64;
+    p_mActionPath->mPath.mCount &= 0x80000000;
   }
-  ActionPath::Append(v1, 0i64);
+  ActionPath::Append(p_mActionPath, 0i64);
 }
 
 // File Line: 335
 // RVA: 0x51F090
 UFG::ComponentIDDesc *__fastcall UFG::HitReactionComponent::AccessComponentDesc()
 {
-  UFG::ComponentIDDesc *v0; // rax
-  UFG::ComponentIDDesc result; // [rsp+20h] [rbp-18h]
+  UFG::ComponentIDDesc result; // [rsp+20h] [rbp-18h] BYREF
 
   if ( !UFG::HitReactionComponent::_DescInit )
   {
-    v0 = UFG::Simulation_GetNewBaseDesc(&result);
-    *(_QWORD *)&UFG::HitReactionComponent::_TypeIDesc.mBaseTypeIndex = *(_QWORD *)&v0->mBaseTypeIndex;
-    UFG::HitReactionComponent::_TypeIDesc.mChildren = v0->mChildren;
+    UFG::HitReactionComponent::_TypeIDesc = *UFG::Simulation_GetNewBaseDesc(&result);
     UFG::HitReactionComponent::_DescInit = 1;
     UFG::HitReactionComponent::_TypeUID = UFG::HitReactionComponent::_TypeIDesc.mChildBitMask | (UFG::HitReactionComponent::_TypeIDesc.mBaseTypeIndex << 25);
     UFG::HitReactionComponent::_HitReactionComponentTypeUID = UFG::HitReactionComponent::_TypeIDesc.mChildBitMask | (UFG::HitReactionComponent::_TypeIDesc.mBaseTypeIndex << 25);

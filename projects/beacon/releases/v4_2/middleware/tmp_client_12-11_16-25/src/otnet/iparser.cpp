@@ -2,36 +2,34 @@
 // RVA: 0xEE0CD0
 void __fastcall OSuite::IParser::SkipWhiteSpace(OSuite::IParser *this, OSuite::IParser::ZCharReaderBase *Stream)
 {
-  OSuite::IParser::ZCharReaderBase *v2; // rbx
   int v3; // eax
-  int element; // [rsp+20h] [rbp-18h]
+  int element; // [rsp+20h] [rbp-18h] BYREF
 
-  v2 = Stream;
   do
   {
-    if ( v2->m_Stack.m_nFree )
-      v3 = OSuite::TStack<int>::Pop(&v2->m_Stack);
+    if ( Stream->m_Stack.m_nFree )
+      v3 = OSuite::TStack<int>::Pop(&Stream->m_Stack);
     else
-      v3 = ((__int64 (__fastcall *)(OSuite::IParser::ZCharReaderBase *))v2->vfptr[1].__vecDelDtor)(v2);
+      v3 = ((__int64 (__fastcall *)(OSuite::IParser::ZCharReaderBase *))Stream->vfptr[1].__vecDelDtor)(Stream);
   }
   while ( v3 != -1 && (v3 == 10 || v3 == 13 || v3 == 9 || v3 == 32) );
   element = v3;
-  OSuite::TStack<int>::Push(&v2->m_Stack, &element);
+  OSuite::TStack<int>::Push(&Stream->m_Stack, &element);
 }
 
 // File Line: 20
 // RVA: 0xEE0AD0
-_BOOL8 __fastcall OSuite::IParser::IsWhiteSpace(OSuite::IParser *this, __int64 ch)
+_BOOL8 __fastcall OSuite::IParser::IsWhiteSpace(OSuite::IParser *this, unsigned __int64 ch)
 {
-  signed __int64 v2; // rcx
+  __int64 v2; // rcx
   _BOOL8 result; // rax
 
   result = 0;
   if ( (unsigned int)ch <= 0x20 )
   {
-    v2 = 4294977024i64;
+    v2 = 0x100002600i64;
     if ( _bittest64(&v2, ch) )
-      result = 1;
+      return 1;
   }
   return result;
 }
@@ -40,20 +38,18 @@ _BOOL8 __fastcall OSuite::IParser::IsWhiteSpace(OSuite::IParser *this, __int64 c
 // RVA: 0xEE071C
 void __fastcall OSuite::IParser::ZCharReaderBase::~ZCharReaderBase(OSuite::IParser::ZCharReaderBase *this)
 {
-  OSuite::IParser::ZCharReaderBase *v1; // rbx
-  OSuite::ZTextDecoder *v2; // rcx
-  OSuite::TList<int> *v3; // rcx
+  OSuite::ZTextDecoder *m_pDecoder; // rcx
+  OSuite::TList<int> *m_pList; // rcx
 
-  v1 = this;
-  v2 = this->m_pDecoder;
-  if ( v2 )
-    v2->vfptr->__vecDelDtor((OSuite::ZObject *)&v2->vfptr, 1u);
-  v1->m_pDecoder = 0i64;
-  v3 = v1->m_Stack.m_pList;
-  v1->m_Stack.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<int>::`vftable{for `OSuite::ZObject};
-  v1->m_Stack.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<int>::`vftable{for `OSuite::IHashable};
-  if ( v3 )
-    v3->vfptr->__vecDelDtor((OSuite::ZObject *)&v3->vfptr, 1u);
+  m_pDecoder = this->m_pDecoder;
+  if ( m_pDecoder )
+    m_pDecoder->vfptr->__vecDelDtor(m_pDecoder, 1u);
+  this->m_pDecoder = 0i64;
+  m_pList = this->m_Stack.m_pList;
+  this->m_Stack.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<int>::`vftable{for `OSuite::ZObject};
+  this->m_Stack.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<int>::`vftable{for `OSuite::IHashable};
+  if ( m_pList )
+    m_pList->OSuite::ZListBase::OSuite::ZObject::vfptr->__vecDelDtor(m_pList, 1u);
 }
 
 // File Line: 36
@@ -61,14 +57,12 @@ void __fastcall OSuite::IParser::ZCharReaderBase::~ZCharReaderBase(OSuite::IPars
 void __fastcall OSuite::IParser::ZCharReaderBase::DetermineEncoding(OSuite::IParser::ZCharReaderBase *this)
 {
   char v1; // bl
-  OSuite::IParser::ZCharReaderBase *v2; // rsi
   OSuite::ZTextDecoder *v3; // rax
   OSuite::ZTextDecoder *v4; // rdi
   OSuite::ZTextDecoder *v5; // rax
-  OSuite::ZString sEncoding; // [rsp+20h] [rbp-28h]
+  OSuite::ZString sEncoding; // [rsp+20h] [rbp-28h] BYREF
 
   v1 = 0;
-  v2 = this;
   v3 = (OSuite::ZTextDecoder *)OSuite::ZObject::operator new(0x30ui64);
   v4 = v3;
   if ( v3 )
@@ -83,8 +77,8 @@ void __fastcall OSuite::IParser::ZCharReaderBase::DetermineEncoding(OSuite::IPar
   {
     v5 = 0i64;
   }
-  v2->m_pDecoder = v5;
-  if ( v1 & 1 )
+  this->m_pDecoder = v5;
+  if ( (v1 & 1) != 0 )
     OSuite::ZString::~ZString(&sEncoding);
 }
 
@@ -92,20 +86,17 @@ void __fastcall OSuite::IParser::ZCharReaderBase::DetermineEncoding(OSuite::IPar
 // RVA: 0xEE0C60
 __int64 __fastcall OSuite::IParser::ZCharReaderBase::Read(OSuite::IParser::ZCharReaderBase *this)
 {
-  __int64 result; // rax
-
   if ( this->m_Stack.m_nFree )
-    result = OSuite::TStack<int>::Pop(&this->m_Stack);
+    return OSuite::TStack<int>::Pop(&this->m_Stack);
   else
-    result = ((__int64 (*)(void))this->vfptr[1].__vecDelDtor)();
-  return result;
+    return ((__int64 (__fastcall *)(OSuite::IParser::ZCharReaderBase *))this->vfptr[1].__vecDelDtor)(this);
 }
 
 // File Line: 156
 // RVA: 0xEE0C44
 void __fastcall OSuite::IParser::ZCharReaderBase::Push(OSuite::IParser::ZCharReaderBase *this, int iData)
 {
-  int element; // [rsp+38h] [rbp+10h]
+  int element; // [rsp+38h] [rbp+10h] BYREF
 
   element = iData;
   OSuite::TStack<int>::Push(&this->m_Stack, &element);
@@ -113,9 +104,12 @@ void __fastcall OSuite::IParser::ZCharReaderBase::Push(OSuite::IParser::ZCharRea
 
 // File Line: 166
 // RVA: 0xEE06CC
-void __fastcall OSuite::IParser::ZStreamCharReader::ZStreamCharReader(OSuite::IParser::ZStreamCharReader *this, OSuite::IReader *pStream, OSuite::IParser *pParent)
+void __fastcall OSuite::IParser::ZStreamCharReader::ZStreamCharReader(
+        OSuite::IParser::ZStreamCharReader *this,
+        OSuite::IReader *pStream,
+        OSuite::IParser *pParent)
 {
-  this->m_Stack.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<int>::`vftable{for `OSuite::ZObject};
+  this->m_Stack.OSuite::IParser::ZCharReaderBase::vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<int>::`vftable{for `OSuite::ZObject};
   this->m_Stack.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<int>::`vftable{for `OSuite::IHashable};
   this->m_Stack.m_nFree = 0i64;
   this->m_Stack.m_pList = 0i64;
@@ -123,36 +117,41 @@ void __fastcall OSuite::IParser::ZStreamCharReader::ZStreamCharReader(OSuite::IP
   this->m_pParent = pParent;
   this->m_pStream = pStream;
   this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::IParser::ZStreamCharReader::`vftable;
-  OSuite::IParser::ZCharReaderBase::DetermineEncoding((OSuite::IParser::ZCharReaderBase *)&this->vfptr);
+  OSuite::IParser::ZCharReaderBase::DetermineEncoding(this);
 }
 
 // File Line: 171
 // RVA: 0xEE0C88
 __int64 __fastcall OSuite::IParser::ZStreamCharReader::ReadByte(OSuite::IParser::ZStreamCharReader *this)
 {
-  return ((__int64 (*)(void))this->m_pStream->vfptr->ReadByte)();
+  return ((__int64 (__fastcall *)(OSuite::IReader *))this->m_pStream->vfptr->ReadByte)(this->m_pStream);
 }
 
 // File Line: 176
 // RVA: 0xEE0CC4
-__int64 __fastcall OSuite::IParser::ZStreamCharReader::SetPosition(OSuite::IParser::ZStreamCharReader *this, unsigned __int64 nPosition)
+__int64 __fastcall OSuite::IParser::ZStreamCharReader::SetPosition(
+        OSuite::IParser::ZStreamCharReader *this,
+        unsigned __int64 nPosition)
 {
-  return this->m_pStream->vfptr->SetPosition(this->m_pStream, nPosition);
+  return ((__int64 (__fastcall *)(OSuite::IReader *, unsigned __int64))this->m_pStream->vfptr->SetPosition)(
+           this->m_pStream,
+           nPosition);
 }
 
 // File Line: 186
 // RVA: 0xEE0644
-void __fastcall OSuite::IParser::ZHttpCharReader::ZHttpCharReader(OSuite::IParser::ZHttpCharReader *this, OSuite::IBufferedReader *pStream, OSuite::IParser *pParent)
+void __fastcall OSuite::IParser::ZHttpCharReader::ZHttpCharReader(
+        OSuite::IParser::ZHttpCharReader *this,
+        OSuite::IBufferedReader *pStream,
+        OSuite::IParser *pParent)
 {
-  OSuite::IParser::ZHttpCharReader *v3; // rdi
   OSuite::ZString *v4; // rax
   bool v5; // bl
-  OSuite::ZString v6; // [rsp+20h] [rbp-28h]
+  OSuite::ZString v6; // [rsp+20h] [rbp-28h] BYREF
 
   this->m_Stack.m_nFree = 0i64;
   this->m_Stack.m_pList = 0i64;
-  v3 = this;
-  this->m_Stack.vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<int>::`vftable{for `OSuite::ZObject};
+  this->m_Stack.OSuite::IParser::ZCharReaderBase::vfptr = (OSuite::ZObjectVtbl *)&OSuite::TStack<int>::`vftable{for `OSuite::ZObject};
   this->m_Stack.vfptr = (OSuite::IHashableVtbl *)&OSuite::TStack<int>::`vftable{for `OSuite::IHashable};
   this->m_pDecoder = 0i64;
   this->m_pStream = pStream;
@@ -162,16 +161,16 @@ void __fastcall OSuite::IParser::ZHttpCharReader::ZHttpCharReader(OSuite::IParse
                            + 1))(
                             pStream,
                             &v6);
-  v5 = OSuite::ZString::operator bool(v4) == 0;
+  v5 = !OSuite::ZString::operator bool(v4);
   OSuite::ZString::~ZString(&v6);
   if ( v5 )
-    OSuite::IParser::ZCharReaderBase::DetermineEncoding((OSuite::IParser::ZCharReaderBase *)&v3->vfptr);
+    OSuite::IParser::ZCharReaderBase::DetermineEncoding(this);
 }
 
 // File Line: 194
 // RVA: 0xEE0C78
 __int64 __fastcall OSuite::IParser::ZHttpCharReader::ReadByte(OSuite::IParser::ZHttpCharReader *this)
 {
-  return ((__int64 (*)(void))this->m_pStream->vfptr[1].Flush)();
+  return ((__int64 (__fastcall *)(OSuite::IBufferedReader *))this->m_pStream->vfptr[1].Flush)(this->m_pStream);
 }
 

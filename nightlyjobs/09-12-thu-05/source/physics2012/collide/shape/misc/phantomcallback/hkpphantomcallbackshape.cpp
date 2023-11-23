@@ -1,18 +1,21 @@
 // File Line: 16
 // RVA: 0xCF34E0
-void __fastcall hkpPhantomCallbackShape::hkpPhantomCallbackShape(hkpPhantomCallbackShape *this, hkFinishLoadedObjectFlag flag)
+void __fastcall hkpPhantomCallbackShape::hkpPhantomCallbackShape(
+        hkpPhantomCallbackShape *this,
+        hkFinishLoadedObjectFlag flag)
 {
-  hkpPhantomCallbackShape *v2; // rbx
-
-  v2 = this;
-  hkpShape::hkpShape((hkpShape *)&this->vfptr, flag);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkpPhantomCallbackShape::`vftable;
-  v2->m_type.m_storage = 32;
+  hkpShape::hkpShape(this, flag);
+  this->vfptr = (hkBaseObjectVtbl *)&hkpPhantomCallbackShape::`vftable;
+  this->m_type.m_storage = 32;
 }
 
 // File Line: 23
 // RVA: 0xCF3510
-void __fastcall hkpPhantomCallbackShape::getAabb(hkpPhantomCallbackShape *this, hkTransformf *localToWorld, float tolerance, hkAabb *out)
+void __fastcall hkpPhantomCallbackShape::getAabb(
+        hkpPhantomCallbackShape *this,
+        hkTransformf *localToWorld,
+        float tolerance,
+        hkAabb *out)
 {
   out->m_min = 0i64;
   out->m_max = 0i64;
@@ -20,7 +23,11 @@ void __fastcall hkpPhantomCallbackShape::getAabb(hkpPhantomCallbackShape *this, 
 
 // File Line: 30
 // RVA: 0xCF3530
-hkBool *__fastcall hkpPhantomCallbackShape::castRay(hkpPhantomCallbackShape *this, hkBool *result, hkpShapeRayCastInput *input, hkpShapeRayCastOutput *results)
+hkBool *__fastcall hkpPhantomCallbackShape::castRay(
+        hkpPhantomCallbackShape *this,
+        hkBool *result,
+        hkpShapeRayCastInput *input,
+        hkpShapeRayCastOutput *results)
 {
   result->m_bool = 0;
   return result;
@@ -28,7 +35,11 @@ hkBool *__fastcall hkpPhantomCallbackShape::castRay(hkpPhantomCallbackShape *thi
 
 // File Line: 36
 // RVA: 0xCF3540
-void __fastcall hkpPhantomCallbackShape::castRayWithCollector(hkpPhantomCallbackShape *this, hkpShapeRayCastInput *input, hkpCdBody *cdBody, hkpRayHitCollector *collector)
+void __fastcall hkpPhantomCallbackShape::castRayWithCollector(
+        hkpPhantomCallbackShape *this,
+        hkpShapeRayCastInput *input,
+        hkpCdBody *cdBody,
+        hkpRayHitCollector *collector)
 {
   ;
 }

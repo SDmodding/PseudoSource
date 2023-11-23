@@ -3,11 +3,11 @@
 __int64 dynamic_initializer_for__Render::TransparencySystem::msAlphaStateInHandle__()
 {
   `eh vector constructor iterator(
-    Render::TransparencySystem::msAlphaStateInHandle,
+    (char *)Render::TransparencySystem::msAlphaStateInHandle,
     0x20ui64,
     16,
     (void (__fastcall *)(void *))Illusion::AlphaStateHandle::AlphaStateHandle);
-  return atexit(dynamic_atexit_destructor_for__Render::TransparencySystem::msAlphaStateInHandle__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__Render::TransparencySystem::msAlphaStateInHandle__);
 }
 
 // File Line: 24
@@ -15,22 +15,22 @@ __int64 dynamic_initializer_for__Render::TransparencySystem::msAlphaStateInHandl
 __int64 dynamic_initializer_for__Render::TransparencySystem::msAlphaStateOutHandle__()
 {
   `eh vector constructor iterator(
-    Render::TransparencySystem::msAlphaStateOutHandle,
+    (char *)Render::TransparencySystem::msAlphaStateOutHandle,
     0x20ui64,
     16,
     (void (__fastcall *)(void *))Illusion::AlphaStateHandle::AlphaStateHandle);
-  return atexit(dynamic_atexit_destructor_for__Render::TransparencySystem::msAlphaStateOutHandle__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__Render::TransparencySystem::msAlphaStateOutHandle__);
 }
 
 // File Line: 48
 // RVA: 0x6830
-void __fastcall Render::TransparencySystem::Init(const unsigned int *alpha_state_in_uids, const unsigned int *alpha_state_out_uids, int num_states)
+void __fastcall Render::TransparencySystem::Init(char *alpha_state_in_uids, char *alpha_state_out_uids, int num_states)
 {
   __int64 v3; // rdi
   signed __int64 v4; // r14
   unsigned int *v5; // rbx
   __int64 v6; // rbp
-  UFG::qResourceInventory *v7; // rax
+  UFG::qResourceInventory *Inventory; // rax
   unsigned int v8; // esi
   UFG::qResourceWarehouse *v9; // rax
   UFG::qResourceInventory *v10; // rax
@@ -42,24 +42,20 @@ void __fastcall Render::TransparencySystem::Init(const unsigned int *alpha_state
   if ( num_states > 1 )
   {
     v3 = 0i64;
-    v4 = (char *)alpha_state_in_uids - (char *)alpha_state_out_uids;
-    v5 = (unsigned int *)(alpha_state_out_uids + 1);
+    v4 = alpha_state_in_uids - alpha_state_out_uids;
+    v5 = (unsigned int *)(alpha_state_out_uids + 4);
     v6 = (unsigned int)(num_states - 1);
     do
     {
-      v7 = `UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result;
+      Inventory = `UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result;
       v8 = *(unsigned int *)((char *)v5 + v4);
       if ( !`UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result )
       {
         v9 = UFG::qResourceWarehouse::Instance();
-        v7 = UFG::qResourceWarehouse::GetInventory(v9, 0x12C800F2u);
-        `UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result = v7;
+        Inventory = UFG::qResourceWarehouse::GetInventory(v9, 0x12C800F2u);
+        `UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result = Inventory;
       }
-      UFG::qResourceHandle::Init(
-        (UFG::qResourceHandle *)&Render::TransparencySystem::msAlphaStateInHandle[v3 + 1].mPrev,
-        0x12C800F2u,
-        v8,
-        v7);
+      UFG::qResourceHandle::Init(&Render::TransparencySystem::msAlphaStateInHandle[v3 + 1], 0x12C800F2u, v8, Inventory);
       v10 = `UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result;
       v11 = *v5;
       if ( !`UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result )
@@ -68,12 +64,7 @@ void __fastcall Render::TransparencySystem::Init(const unsigned int *alpha_state
         v10 = UFG::qResourceWarehouse::GetInventory(v12, 0x12C800F2u);
         `UFG::qGetResourceInventory<Illusion::AlphaState>::`2::result = v10;
       }
-      UFG::qResourceHandle::Init(
-        (UFG::qResourceHandle *)&Render::TransparencySystem::msAlphaStateOutHandle[v3 + 1].mPrev,
-        0x12C800F2u,
-        v11,
-        v10);
-      ++v3;
+      UFG::qResourceHandle::Init(&Render::TransparencySystem::msAlphaStateOutHandle[++v3], 0x12C800F2u, v11, v10);
       ++v5;
       --v6;
     }
@@ -86,215 +77,201 @@ void __fastcall Render::TransparencySystem::Init(const unsigned int *alpha_state
 // RVA: 0x6950
 void Render::TransparencySystem::InitDitherMaskTextures(void)
 {
-  Illusion::Texture *v0; // rax
-  unsigned int v1; // eax
-  signed int v2; // ebx
-  Illusion::Texture **v3; // rdi
-  Illusion::Texture *v4; // rax
-  unsigned int v5; // eax
-  char v6; // cl
-  char *v7; // rcx
-  char v8; // al
-  char *v9; // rcx
-  char v10; // al
-  char *v11; // rcx
-  char v12; // al
-  char *v13; // rcx
-  char v14; // al
-  char *v15; // rcx
-  char v16; // al
-  char *v17; // rcx
-  char v18; // al
-  signed int v19; // ebx
-  Illusion::Texture **v20; // rdi
-  Illusion::Texture *v21; // rax
-  unsigned int v22; // eax
-  char *v23; // rcx
-  char v24; // al
-  char *v25; // rcx
-  char v26; // al
-  char *v27; // rcx
-  char v28; // al
-  __int64 v29; // rcx
-  char *v30; // rdx
+  unsigned int SamplerAddressFlags; // eax
+  int v1; // ebx
+  Illusion::Texture **v2; // rdi
+  Illusion::Texture *Texture; // rax
+  unsigned int v4; // eax
+  char v5; // cl
+  char *v6; // rcx
+  char v7; // al
+  char *v8; // rcx
+  char v9; // al
+  char *v10; // rcx
+  char v11; // al
+  char *v12; // rcx
+  char v13; // al
+  char *v14; // rcx
+  char v15; // al
+  char *v16; // rcx
+  char v17; // al
+  int v18; // ebx
+  Illusion::Texture **v19; // rdi
+  Illusion::Texture *v20; // rax
+  unsigned int v21; // eax
+  char *v22; // rcx
+  char v23; // al
+  char *v24; // rcx
+  char v25; // al
+  char *v26; // rcx
+  char v27; // al
+  char *v28; // rdx
+  char v29; // al
+  char *v30; // rcx
   char v31; // al
   char *v32; // rcx
   char v33; // al
   char *v34; // rcx
   char v35; // al
-  char *v36; // rcx
-  char v37; // al
-  Illusion::Texture *v38; // rax
-  unsigned int v39; // eax
-  Illusion::TextureLockInfo info; // [rsp+48h] [rbp-38h]
-  UFG::qString result; // [rsp+58h] [rbp-28h]
+  unsigned int v36; // eax
+  Illusion::TextureLockInfo info; // [rsp+48h] [rbp-38h] BYREF
+  UFG::qString result; // [rsp+58h] [rbp-28h] BYREF
 
   info.mData = 0i64;
   *(_QWORD *)&info.mLinePitch = 0i64;
-  v0 = (Illusion::Texture *)Illusion::CreateTexture("DitherTex_00", 4, 2, FORMAT_X8, 0x440400u, 1, 0, 0);
-  Render::TransparencySystem::msDitherMaskTextures[0] = v0;
-  v1 = Illusion::Texture::GetSamplerAddressFlags(v0);
-  Illusion::Texture::SetSamplerState(Render::TransparencySystem::msDitherMaskTextures[0], 2u, v1 & 0xFFFFFFFC);
-  if ( Illusion::ITexturePlat::Lock(
-         (Illusion::ITexturePlat *)Render::TransparencySystem::msDitherMaskTextures[0],
-         LOCK_MODIFY,
-         &info,
-         0,
-         0) )
+  Render::TransparencySystem::msDitherMaskTextures[0] = (Illusion::Texture *)Illusion::CreateTexture(
+                                                                               "DitherTex_00",
+                                                                               4,
+                                                                               2,
+                                                                               FORMAT_X8,
+                                                                               0x440400u,
+                                                                               1,
+                                                                               0,
+                                                                               0);
+  SamplerAddressFlags = Illusion::Texture::GetSamplerAddressFlags(Render::TransparencySystem::msDitherMaskTextures[0]);
+  Illusion::Texture::SetSamplerState(
+    Render::TransparencySystem::msDitherMaskTextures[0],
+    2u,
+    SamplerAddressFlags & 0xFFFFFFFC);
+  if ( Illusion::ITexturePlat::Lock(Render::TransparencySystem::msDitherMaskTextures[0], LOCK_MODIFY, &info, 0, 0) )
   {
-    *info.mData = 0;
-    ++info.mData;
-    *info.mData = 0;
-    ++info.mData;
-    *info.mData = 0;
-    ++info.mData;
+    *info.mData++ = 0;
+    *info.mData++ = 0;
+    *info.mData++ = 0;
     *info.mData = 0;
     info.mData += info.mLinePitch - 3;
-    *info.mData = 0;
-    ++info.mData;
-    *info.mData = 0;
-    ++info.mData;
-    *info.mData = 0;
-    ++info.mData;
-    *info.mData = 0;
-    ++info.mData;
-    Illusion::ITexturePlat::Unlock((Illusion::ITexturePlat *)Render::TransparencySystem::msDitherMaskTextures[0]);
+    *info.mData++ = 0;
+    *info.mData++ = 0;
+    *info.mData++ = 0;
+    *info.mData++ = 0;
+    Illusion::ITexturePlat::Unlock(Render::TransparencySystem::msDitherMaskTextures[0]);
   }
-  v2 = 1;
-  v3 = (Illusion::Texture **)&unk_142128E78;
+  v1 = 1;
+  v2 = (Illusion::Texture **)&unk_142128E78;
   do
   {
-    UFG::qString::FormatEx(&result, "DitherTexIn_%d", (unsigned int)v2);
-    v4 = (Illusion::Texture *)Illusion::CreateTexture(result.mData, 4, 2, FORMAT_X8, 0x440400u, 1, 0, 0);
-    *v3 = v4;
-    v5 = Illusion::Texture::GetSamplerAddressFlags(v4);
-    Illusion::Texture::SetSamplerState(*v3, 2u, v5 & 0xFFFFFFFC);
-    if ( Illusion::ITexturePlat::Lock((Illusion::ITexturePlat *)*v3, LOCK_MODIFY, &info, 0, 0) )
+    UFG::qString::FormatEx(&result, "DitherTexIn_%d", (unsigned int)v1);
+    Texture = (Illusion::Texture *)Illusion::CreateTexture(result.mData, 4, 2, FORMAT_X8, 0x440400u, 1, 0, 0);
+    *v2 = Texture;
+    v4 = Illusion::Texture::GetSamplerAddressFlags(Texture);
+    Illusion::Texture::SetSamplerState(*v2, 2u, v4 & 0xFFFFFFFC);
+    if ( Illusion::ITexturePlat::Lock(*v2, LOCK_MODIFY, &info, 0, 0) )
     {
-      v6 = 0;
-      if ( v2 > 0 )
-        v6 = -1;
-      *info.mData = v6;
-      v7 = info.mData++ + 1;
-      v8 = 0;
-      if ( v2 > 4 )
-        v8 = -1;
-      *v7 = v8;
-      v9 = info.mData++ + 1;
-      v10 = 0;
-      if ( v2 > 2 )
-        v10 = -1;
-      *v9 = v10;
-      v11 = info.mData++ + 1;
-      v12 = 0;
-      if ( v2 > 6 )
-        v12 = -1;
-      *v11 = v12;
+      v5 = 0;
+      if ( v1 > 0 )
+        v5 = -1;
+      *info.mData = v5;
+      v6 = ++info.mData;
+      v7 = 0;
+      if ( v1 > 4 )
+        v7 = -1;
+      *v6 = v7;
+      v8 = ++info.mData;
+      v9 = 0;
+      if ( v1 > 2 )
+        v9 = -1;
+      *v8 = v9;
+      v10 = ++info.mData;
+      v11 = 0;
+      if ( v1 > 6 )
+        v11 = -1;
+      *v10 = v11;
       info.mData += info.mLinePitch - 3;
       *info.mData = 0;
-      v13 = info.mData++ + 1;
-      v14 = 0;
-      if ( v2 > 1 )
-        v14 = -1;
-      *v13 = v14;
-      v15 = info.mData++ + 1;
-      v16 = 0;
-      if ( v2 > 5 )
-        v16 = -1;
-      *v15 = v16;
-      v17 = info.mData++ + 1;
-      v18 = 0;
-      if ( v2 > 3 )
-        v18 = -1;
-      *v17 = v18;
+      v12 = ++info.mData;
+      v13 = 0;
+      if ( v1 > 1 )
+        v13 = -1;
+      *v12 = v13;
+      v14 = ++info.mData;
+      v15 = 0;
+      if ( v1 > 5 )
+        v15 = -1;
+      *v14 = v15;
+      v16 = ++info.mData;
+      v17 = 0;
+      if ( v1 > 3 )
+        v17 = -1;
+      *v16 = v17;
       ++info.mData;
-      Illusion::ITexturePlat::Unlock((Illusion::ITexturePlat *)*v3);
+      Illusion::ITexturePlat::Unlock(*v2);
     }
     UFG::qString::~qString(&result);
+    ++v1;
     ++v2;
-    ++v3;
   }
-  while ( v2 <= 7 );
-  v19 = 1;
-  v20 = (Illusion::Texture **)&unk_142128EB0;
+  while ( v1 <= 7 );
+  v18 = 1;
+  v19 = (Illusion::Texture **)&unk_142128EB0;
   do
   {
-    UFG::qString::FormatEx(&result, "DitherTexOut_%d", (unsigned int)(v19 + 7));
-    v21 = (Illusion::Texture *)Illusion::CreateTexture(result.mData, 4, 2, FORMAT_X8, 0x440400u, 1, 0, 0);
-    *v20 = v21;
-    v22 = Illusion::Texture::GetSamplerAddressFlags(v21);
-    Illusion::Texture::SetSamplerState(*v20, 2u, v22 & 0xFFFFFFFC);
-    if ( Illusion::ITexturePlat::Lock((Illusion::ITexturePlat *)*v20, LOCK_MODIFY, &info, 0, 0) )
+    UFG::qString::FormatEx(&result, "DitherTexOut_%d", (unsigned int)(v18 + 7));
+    v20 = (Illusion::Texture *)Illusion::CreateTexture(result.mData, 4, 2, FORMAT_X8, 0x440400u, 1, 0, 0);
+    *v19 = v20;
+    v21 = Illusion::Texture::GetSamplerAddressFlags(v20);
+    Illusion::Texture::SetSamplerState(*v19, 2u, v21 & 0xFFFFFFFC);
+    if ( Illusion::ITexturePlat::Lock(*v19, LOCK_MODIFY, &info, 0, 0) )
     {
       *info.mData = 0;
-      v23 = info.mData++ + 1;
-      v24 = 0;
-      if ( v19 > 3 )
-        v24 = -1;
-      *v23 = v24;
-      v25 = info.mData++ + 1;
-      v26 = 0;
-      if ( v19 > 5 )
-        v26 = -1;
-      *v25 = v26;
-      v27 = info.mData++ + 1;
-      v28 = 0;
-      if ( v19 > 1 )
-        v28 = -1;
-      *v27 = v28;
-      v29 = info.mLinePitch - 4;
-      v30 = &info.mData[v29 + 1];
-      info.mData += v29 + 1;
+      v22 = ++info.mData;
+      v23 = 0;
+      if ( v18 > 3 )
+        v23 = -1;
+      *v22 = v23;
+      v24 = ++info.mData;
+      v25 = 0;
+      if ( v18 > 5 )
+        v25 = -1;
+      *v24 = v25;
+      v26 = ++info.mData;
+      v27 = 0;
+      if ( v18 > 1 )
+        v27 = -1;
+      *v26 = v27;
+      v28 = &info.mData[info.mLinePitch - 3];
+      info.mData = v28;
+      v29 = 0;
+      if ( v18 > 0 )
+        v29 = -1;
+      *v28 = v29;
+      v30 = ++info.mData;
       v31 = 0;
-      if ( v19 > 0 )
+      if ( v18 > 6 )
         v31 = -1;
       *v30 = v31;
-      v32 = info.mData++ + 1;
+      v32 = ++info.mData;
       v33 = 0;
-      if ( v19 > 6 )
+      if ( v18 > 2 )
         v33 = -1;
       *v32 = v33;
-      v34 = info.mData++ + 1;
+      v34 = ++info.mData;
       v35 = 0;
-      if ( v19 > 2 )
+      if ( v18 > 4 )
         v35 = -1;
       *v34 = v35;
-      v36 = info.mData++ + 1;
-      v37 = 0;
-      if ( v19 > 4 )
-        v37 = -1;
-      *v36 = v37;
       ++info.mData;
-      Illusion::ITexturePlat::Unlock((Illusion::ITexturePlat *)*v20);
+      Illusion::ITexturePlat::Unlock(*v19);
     }
     UFG::qString::~qString(&result);
+    ++v18;
     ++v19;
-    ++v20;
   }
-  while ( v19 + 7 <= 14 );
-  v38 = (Illusion::Texture *)Illusion::CreateTexture("DitherTex_111", 4, 2, FORMAT_X8, 0x440400u, 1, 0, 0);
-  qword_142128EE8 = v38;
-  v39 = Illusion::Texture::GetSamplerAddressFlags(v38);
-  Illusion::Texture::SetSamplerState(qword_142128EE8, 2u, v39 & 0xFFFFFFFC);
-  if ( Illusion::ITexturePlat::Lock((Illusion::ITexturePlat *)qword_142128EE8, LOCK_MODIFY, &info, 0, 0) )
+  while ( v18 + 7 <= 14 );
+  qword_142128EE8 = (Illusion::Texture *)Illusion::CreateTexture("DitherTex_111", 4, 2, FORMAT_X8, 0x440400u, 1, 0, 0);
+  v36 = Illusion::Texture::GetSamplerAddressFlags(qword_142128EE8);
+  Illusion::Texture::SetSamplerState(qword_142128EE8, 2u, v36 & 0xFFFFFFFC);
+  if ( Illusion::ITexturePlat::Lock(qword_142128EE8, LOCK_MODIFY, &info, 0, 0) )
   {
-    *info.mData = -1;
-    ++info.mData;
-    *info.mData = -1;
-    ++info.mData;
-    *info.mData = -1;
-    ++info.mData;
+    *info.mData++ = -1;
+    *info.mData++ = -1;
+    *info.mData++ = -1;
     *info.mData = -1;
     info.mData += info.mLinePitch - 3;
-    *info.mData = -1;
-    ++info.mData;
-    *info.mData = -1;
-    ++info.mData;
-    *info.mData = -1;
-    ++info.mData;
-    *info.mData = -1;
-    ++info.mData;
-    Illusion::ITexturePlat::Unlock((Illusion::ITexturePlat *)qword_142128EE8);
+    *info.mData++ = -1;
+    *info.mData++ = -1;
+    *info.mData++ = -1;
+    *info.mData++ = -1;
+    Illusion::ITexturePlat::Unlock(qword_142128EE8);
   }
 }
 

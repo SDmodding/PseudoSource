@@ -2,40 +2,34 @@
 // RVA: 0x12CD8F0
 _iobuf *__fastcall openfile(const char *filename, const char *mode, int shflag, _iobuf *str)
 {
-  _iobuf *v4; // r14
-  signed int v5; // er9
-  signed int v6; // er10
-  signed int v7; // er11
-  int v8; // ebp
-  const char *v9; // rbx
-  const char *i; // r15
+  int v5; // r9d
+  int v6; // r10d
+  int v7; // r11d
+  const char *i; // rbx
   int v12; // edi
-  unsigned int v13; // esi
+  int v13; // esi
   const char *v14; // rbx
-  signed int v15; // edx
+  int v15; // edx
   char v16; // al
   const char *j; // rbx
   int v18; // eax
-  int pfh; // [rsp+68h] [rbp+10h]
+  int pfh; // [rsp+68h] [rbp+10h] BYREF
 
-  v4 = str;
   v5 = 0;
   v6 = 0;
   v7 = 0;
-  v8 = shflag;
-  v9 = mode;
-  for ( i = filename; *v9 == 32; ++v9 )
+  for ( i = mode; *i == 32; ++i )
     ;
-  switch ( *v9 )
+  switch ( *i )
   {
-    case 97:
+    case a:
       v12 = 265;
       break;
-    case 114:
+    case r:
       v12 = 0;
       v13 = commode | 1;
       goto LABEL_12;
-    case 119:
+    case w:
       v12 = 769;
       break;
     default:
@@ -46,7 +40,7 @@ LABEL_6:
   }
   v13 = commode | 2;
 LABEL_12:
-  v14 = v9 + 1;
+  v14 = i + 1;
   v15 = 1;
   v16 = *v14;
   if ( !*v14 )
@@ -57,32 +51,32 @@ LABEL_12:
     {
       switch ( v16 )
       {
-        case 84:
-          if ( !_bittest(&v12, 0xCu) )
+        case T:
+          if ( (v12 & 0x1000) == 0 )
           {
             v12 |= 0x1000u;
             break;
           }
           goto LABEL_46;
-        case 98:
-          if ( v12 & 0xC000 )
+        case b:
+          if ( (v12 & 0xC000) != 0 )
             goto LABEL_46;
           v12 |= 0x8000u;
           break;
-        case 99:
+        case c:
           if ( v5 )
             goto LABEL_46;
           v5 = 1;
           v13 |= 0x4000u;
           break;
-        case 110:
+        case n:
           if ( v5 )
             goto LABEL_46;
           v5 = 1;
-          v13 &= 0xFFFFBFFF;
+          v13 &= ~0x4000u;
           break;
-        case 116:
-          if ( v12 & 0xC000 )
+        case t:
+          if ( (v12 & 0xC000) != 0 )
             goto LABEL_46;
           v12 |= 0x4000u;
           break;
@@ -101,26 +95,26 @@ LABEL_12:
     {
       switch ( v16 )
       {
-        case 43:
-          if ( v12 & 2 )
+        case +:
+          if ( (v12 & 2) != 0 )
             goto LABEL_46;
-          v12 = v12 & 0xFFFFFFFE | 2;
-          v13 = v13 & 0xFFFFFFFC | 0x80;
+          v12 = v12 & 0xFFFFFFFC | 2;
+          v13 = v13 & 0xFFFFFF7C | 0x80;
           break;
-        case 44:
+        case ,:
           v7 = 1;
 LABEL_46:
           v15 = 0;
           break;
-        case 68:
-          if ( v12 & 0x40 )
+        case D:
+          if ( (v12 & 0x40) != 0 )
             goto LABEL_46;
           v12 |= 0x40u;
           break;
-        case 78:
+        case N:
           v12 |= 0x80u;
           break;
-        case 82:
+        case R:
           if ( v6 )
             goto LABEL_46;
           v6 = 1;
@@ -168,16 +162,16 @@ LABEL_66:
     ++v14;
   if ( *v14 )
     goto LABEL_6;
-  if ( sopen_s(&pfh, i, v12, v8, 384) )
+  if ( sopen_s(&pfh, filename, v12, shflag, 384) )
     return 0i64;
   ++cflush;
-  v4->_cnt = 0;
+  str->_cnt = 0;
   v18 = pfh;
-  v4->_ptr = 0i64;
-  v4->_base = 0i64;
-  v4->_tmpfname = 0i64;
-  v4->_file = v18;
-  v4->_flag = v13;
-  return v4;
+  str->_ptr = 0i64;
+  str->_base = 0i64;
+  str->_tmpfname = 0i64;
+  str->_file = v18;
+  str->_flag = v13;
+  return str;
 }
 

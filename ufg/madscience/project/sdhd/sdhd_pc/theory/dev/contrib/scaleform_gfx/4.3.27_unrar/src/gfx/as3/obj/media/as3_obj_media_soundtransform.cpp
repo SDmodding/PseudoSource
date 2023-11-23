@@ -168,160 +168,187 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
 
 // File Line: 72
 // RVA: 0x8514F0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundTransform::leftToLeftGet(Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *this, long double *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundTransform::leftToLeftGet(
+        Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *this,
+        long double *result)
 {
-  Scaleform::GFx::AS3::FlashUI *v2; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v2 = this->pTraits.pObject->pVM->UI;
-  v2->vfptr->Output(v2, Output_Warning, "The method SoundTransform::leftToLeftGet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method SoundTransform::leftToLeftGet() is not implemented\n");
 }
 
 // File Line: 79
 // RVA: 0x851520
-void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundTransform::leftToLeftSet(Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *this, Scaleform::GFx::AS3::Value *result, long double value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundTransform::leftToLeftSet(
+        Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *this,
+        Scaleform::GFx::AS3::Value *result,
+        long double value)
 {
-  Scaleform::GFx::AS3::FlashUI *v3; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v3 = this->pTraits.pObject->pVM->UI;
-  v3->vfptr->Output(v3, Output_Warning, "The method SoundTransform::leftToLeftSet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method SoundTransform::leftToLeftSet() is not implemented\n");
 }
 
 // File Line: 86
 // RVA: 0x851550
-void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundTransform::leftToRightGet(Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *this, long double *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundTransform::leftToRightGet(
+        Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *this,
+        long double *result)
 {
-  Scaleform::GFx::AS3::FlashUI *v2; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v2 = this->pTraits.pObject->pVM->UI;
-  v2->vfptr->Output(v2, Output_Warning, "The method SoundTransform::leftToRightGet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method SoundTransform::leftToRightGet() is not implemented\n");
 }
 
 // File Line: 93
 // RVA: 0x851580
-void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundTransform::leftToRightSet(Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *this, Scaleform::GFx::AS3::Value *result, long double value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundTransform::leftToRightSet(
+        Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *this,
+        Scaleform::GFx::AS3::Value *result,
+        long double value)
 {
-  Scaleform::GFx::AS3::FlashUI *v3; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v3 = this->pTraits.pObject->pVM->UI;
-  v3->vfptr->Output(v3, Output_Warning, "The method SoundTransform::leftToRightSet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method SoundTransform::leftToRightSet() is not implemented\n");
 }
 
 // File Line: 100
 // RVA: 0x855E40
-void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundTransform::panGet(Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *this, long double *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundTransform::panGet(
+        Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *this,
+        long double *result)
 {
-  Scaleform::GFx::AS3::FlashUI *v2; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v2 = this->pTraits.pObject->pVM->UI;
-  v2->vfptr->Output(v2, Output_Warning, "The method SoundTransform::panGet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method SoundTransform::panGet() is not implemented\n");
 }
 
 // File Line: 111
 // RVA: 0x855E70
-void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundTransform::panSet(Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *this, Scaleform::GFx::AS3::Value *result, long double value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundTransform::panSet(
+        Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *this,
+        Scaleform::GFx::AS3::Value *result,
+        long double value)
 {
-  Scaleform::GFx::AS3::FlashUI *v3; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v3 = this->pTraits.pObject->pVM->UI;
-  v3->vfptr->Output(v3, Output_Warning, "The method SoundTransform::panSet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method SoundTransform::panSet() is not implemented\n");
 }
 
 // File Line: 123
 // RVA: 0x859D70
-void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundTransform::rightToLeftGet(Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *this, long double *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundTransform::rightToLeftGet(
+        Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *this,
+        long double *result)
 {
-  Scaleform::GFx::AS3::FlashUI *v2; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v2 = this->pTraits.pObject->pVM->UI;
-  v2->vfptr->Output(v2, Output_Warning, "The method SoundTransform::rightToLeftGet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method SoundTransform::rightToLeftGet() is not implemented\n");
 }
 
 // File Line: 130
 // RVA: 0x859DA0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundTransform::rightToLeftSet(Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *this, Scaleform::GFx::AS3::Value *result, long double value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundTransform::rightToLeftSet(
+        Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *this,
+        Scaleform::GFx::AS3::Value *result,
+        long double value)
 {
-  Scaleform::GFx::AS3::FlashUI *v3; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v3 = this->pTraits.pObject->pVM->UI;
-  v3->vfptr->Output(v3, Output_Warning, "The method SoundTransform::rightToLeftSet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method SoundTransform::rightToLeftSet() is not implemented\n");
 }
 
 // File Line: 137
 // RVA: 0x859DD0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundTransform::rightToRightGet(Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *this, long double *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundTransform::rightToRightGet(
+        Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *this,
+        long double *result)
 {
-  Scaleform::GFx::AS3::FlashUI *v2; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v2 = this->pTraits.pObject->pVM->UI;
-  v2->vfptr->Output(v2, Output_Warning, "The method SoundTransform::rightToRightGet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method SoundTransform::rightToRightGet() is not implemented\n");
 }
 
 // File Line: 144
 // RVA: 0x859E00
-void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundTransform::rightToRightSet(Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *this, Scaleform::GFx::AS3::Value *result, long double value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundTransform::rightToRightSet(
+        Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *this,
+        Scaleform::GFx::AS3::Value *result,
+        long double value)
 {
-  Scaleform::GFx::AS3::FlashUI *v3; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v3 = this->pTraits.pObject->pVM->UI;
-  v3->vfptr->Output(v3, Output_Warning, "The method SoundTransform::rightToRightSet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method SoundTransform::rightToRightSet() is not implemented\n");
 }
 
 // File Line: 151
 // RVA: 0x86BE30
-void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundTransform::volumeGet(Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *this, long double *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundTransform::volumeGet(
+        Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *this,
+        long double *result)
 {
-  Scaleform::GFx::AS3::FlashUI *v2; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v2 = this->pTraits.pObject->pVM->UI;
-  v2->vfptr->Output(v2, Output_Warning, "The method SoundTransform::volumeGet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method SoundTransform::volumeGet() is not implemented\n");
 }
 
 // File Line: 162
 // RVA: 0x86BE60
-void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundTransform::volumeSet(Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *this, Scaleform::GFx::AS3::Value *result, long double value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_media::SoundTransform::volumeSet(
+        Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *this,
+        Scaleform::GFx::AS3::Value *result,
+        long double value)
 {
-  Scaleform::GFx::AS3::FlashUI *v3; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v3 = this->pTraits.pObject->pVM->UI;
-  v3->vfptr->Output(v3, Output_Warning, "The method SoundTransform::volumeSet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method SoundTransform::volumeSet() is not implemented\n");
 }
 
 // File Line: 233
 // RVA: 0x8000C0
-void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl_media::SoundTransform::MakeObject(Scaleform::GFx::AS3::InstanceTraits::fl_media::SoundTransform *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::InstanceTraits::Traits *t)
+void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl_media::SoundTransform::MakeObject(
+        Scaleform::GFx::AS3::InstanceTraits::fl_media::SoundTransform *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::InstanceTraits::fl_media::SoundTransform *t)
 {
-  Scaleform::GFx::AS3::Value *v3; // rbx
-  Scaleform::GFx::AS3::Object **v4; // rax
-  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_media::SoundTransform> resulta; // [rsp+48h] [rbp+20h]
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_media::SoundTransform> *Instance; // rax
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_media::SoundTransform> resulta; // [rsp+48h] [rbp+20h] BYREF
 
-  v3 = result;
-  v4 = (Scaleform::GFx::AS3::Object **)Scaleform::GFx::AS3::InstanceTraits::fl_media::SoundTransform::MakeInstance(
-                                         &resulta,
-                                         (Scaleform::GFx::AS3::InstanceTraits::fl_media::SoundTransform *)t);
-  Scaleform::GFx::AS3::Value::Pick(v3, *v4);
+  Instance = Scaleform::GFx::AS3::InstanceTraits::fl_media::SoundTransform::MakeInstance(&resulta, t);
+  Scaleform::GFx::AS3::Value::Pick(result, Instance->pV);
 }
 
 // File Line: 255
 // RVA: 0x73F990
-Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl_media::SoundTransform::MakeClassTraits(Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result, Scaleform::GFx::AS3::VM *vm)
+Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl_media::SoundTransform::MakeClassTraits(
+        Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result,
+        Scaleform::GFx::AS3::VM *vm)
 {
-  Scaleform::GFx::AS3::VM *v2; // rbp
-  Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *v3; // rdi
-  Scaleform::MemoryHeap *v4; // rsi
+  Scaleform::MemoryHeap *MHeap; // rsi
   Scaleform::GFx::AS3::ClassTraits::Traits *v5; // rax
   Scaleform::GFx::AS3::ClassTraits::Traits *v6; // rbx
   Scaleform::GFx::AS3::InstanceTraits::CTraits *v7; // rax
   Scaleform::GFx::AS3::InstanceTraits::CTraits *v8; // rbx
   Scaleform::GFx::AS3::Class *v9; // rax
 
-  v2 = vm;
-  v3 = result;
-  v4 = vm->MHeap;
-  v5 = (Scaleform::GFx::AS3::ClassTraits::Traits *)v4->vfptr->Alloc(v4, 208ui64, 0i64);
+  MHeap = vm->MHeap;
+  v5 = (Scaleform::GFx::AS3::ClassTraits::Traits *)MHeap->vfptr->Alloc(MHeap, 208ui64, 0i64);
   v6 = v5;
   if ( v5 )
   {
-    Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl_media::SoundTransformCI);
+    Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, vm, &Scaleform::GFx::AS3::fl_media::SoundTransformCI);
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_media::SoundTransform::`vftable;
   }
@@ -329,12 +356,12 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   {
     v6 = 0i64;
   }
-  v3->pV = v6;
-  v7 = (Scaleform::GFx::AS3::InstanceTraits::CTraits *)v4->vfptr->Alloc(v4, 240ui64, 0i64);
+  result->pV = v6;
+  v7 = (Scaleform::GFx::AS3::InstanceTraits::CTraits *)MHeap->vfptr->Alloc(MHeap, 240ui64, 0i64);
   v8 = v7;
   if ( v7 )
   {
-    Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, v2, &Scaleform::GFx::AS3::fl_media::SoundTransformCI);
+    Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, vm, &Scaleform::GFx::AS3::fl_media::SoundTransformCI);
     v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
     v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_media::SoundTransform::`vftable;
   }
@@ -343,13 +370,13 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
     v8 = 0i64;
   }
   Scaleform::GFx::AS3::ClassTraits::Traits::SetInstanceTraits(
-    v3->pV,
+    result->pV,
     (Scaleform::Pickable<Scaleform::GFx::AS3::InstanceTraits::Traits>)v8);
-  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))v4->vfptr->Alloc)(
-                                       v4,
+  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))MHeap->vfptr->Alloc)(
+                                       MHeap,
                                        72i64);
   if ( v9 )
-    Scaleform::GFx::AS3::Class::Class(v9, v3->pV);
-  return v3;
+    Scaleform::GFx::AS3::Class::Class(v9, result->pV);
+  return result;
 }
 

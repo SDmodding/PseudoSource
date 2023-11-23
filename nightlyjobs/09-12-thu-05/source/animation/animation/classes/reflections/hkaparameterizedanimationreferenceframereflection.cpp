@@ -28,20 +28,20 @@ hkClass *__fastcall hkaParameterizedAnimationReferenceFrame::staticClass()
 
 // File Line: 78
 // RVA: 0xB1D970
-void __fastcall finishLoadedObjecthkaParameterizedAnimationReferenceFrame(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaParameterizedAnimationReferenceFrame(_BYTE *p, int finishing)
 {
   if ( p )
   {
-    *((_BYTE *)p + 16) = 1;
+    p[16] = 1;
     *(_QWORD *)p = &hkaParameterizedAnimationReferenceFrame::`vftable;
   }
 }
 
 // File Line: 84
 // RVA: 0xB1D990
-void __fastcall cleanupLoadedObjecthkaParameterizedAnimationReferenceFrame(void *p)
+void __fastcall cleanupLoadedObjecthkaParameterizedAnimationReferenceFrame(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 88
@@ -62,8 +62,8 @@ void **dynamic_initializer_for__hkaParameterizedAnimationReferenceFrameTypeInfo_
   hkaParameterizedAnimationReferenceFrameTypeInfo.m_typeName = "hkaParameterizedAnimationReferenceFrame";
   hkaParameterizedAnimationReferenceFrameTypeInfo.m_vtable = result;
   hkaParameterizedAnimationReferenceFrameTypeInfo.m_scopedName = "!hkaParameterizedAnimationReferenceFrame";
-  hkaParameterizedAnimationReferenceFrameTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaParameterizedAnimationReferenceFrame;
-  hkaParameterizedAnimationReferenceFrameTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaParameterizedAnimationReferenceFrame;
+  hkaParameterizedAnimationReferenceFrameTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaParameterizedAnimationReferenceFrame;
+  hkaParameterizedAnimationReferenceFrameTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaParameterizedAnimationReferenceFrame;
   return result;
 }
 

@@ -1,1303 +1,1291 @@
 // File Line: 12
 // RVA: 0xCC24F0
-__int64 __fastcall hkgpConvexHullImpl::build(hkgpConvexHullImpl *this, hkVector4f *points, const int numPoints, bool forcePlanar, hkgpConvexHullImpl *domain)
+__int64 __fastcall hkgpConvexHullImpl::build(
+        hkgpConvexHullImpl *this,
+        hkVector4f *points,
+        signed int numPoints,
+        bool forcePlanar,
+        hkgpConvexHullImpl *domain)
 {
-  bool v5; // si
   hkgpConvexHullImpl *v6; // rdi
   hkVector4f *v7; // r9
-  int v8; // er9
-  __int64 v9; // rcx
-  __int64 v10; // rdx
-  __m128 v11; // xmm0
-  int v12; // eax
-  unsigned int v13; // edi
-  signed int v15; // er10
-  hkgpConvexHullImpl *v16; // rax
-  int v17; // eax
-  hkVector4f *v18; // r9
-  bool v19; // zf
-  signed __int64 v20; // rsi
-  signed __int64 v21; // rbx
+  __int64 v8; // rcx
+  __int64 v9; // rdx
+  hkRelocationInfo::Import m_quad; // xmm0
+  int v11; // eax
+  unsigned int v12; // edi
+  int v14; // r10d
+  hkgpConvexHullImpl *v15; // rax
+  int v16; // eax
+  hkVector4f *p_m_projectionPlane; // r9
+  bool v18; // zf
+  __int64 p_m_pendings; // rsi
+  __int64 v20; // rbx
+  int m_capacityAndFlags; // eax
   int v22; // eax
   int v23; // eax
-  int v24; // eax
-  int v25; // er9
-  int v26; // eax
-  __int64 v27; // rdx
-  int *v28; // rcx
-  signed int v29; // edx
-  __m128 *v30; // r9
-  __int64 v31; // r8
-  hkgpConvexHullImpl::Vertex *v32; // rcx
-  __m128 v33; // xmm2
-  __m128 v34; // xmm1
-  __m128 v35; // xmm0
-  __m128 v36; // xmm2
-  __m128 v37; // xmm3
-  __m128i v38; // xmm1
-  int v39; // eax
-  signed int v40; // er8
-  int v41; // ecx
-  int v42; // ecx
+  int v24; // r9d
+  int v25; // eax
+  __int64 v26; // rdx
+  int *p_m_index; // rcx
+  int v28; // edx
+  hkVector4f *v29; // r9
+  __int64 v30; // r8
+  hkgpConvexHullImpl::Vertex *v31; // rcx
+  __m128 v32; // xmm2
+  __m128 v33; // xmm0
+  __m128 v34; // xmm2
+  __m128 v35; // xmm4
+  __m128 v36; // xmm0
+  __m128 v37; // xmm2
+  __m128 v38; // xmm3
+  __m128i v39; // xmm1
+  int v40; // eax
+  int m_size; // r8d
+  int m_dimensions; // ecx
   int v43; // ecx
-  signed int v44; // edi
-  __m128 v45; // xmm3
-  __int64 v46; // rcx
-  __int64 v47; // r9
-  __int64 v48; // r8
-  hkgpConvexHullImpl::Vertex *v49; // rdx
-  int v50; // ecx
-  __int64 v51; // r9
-  __int64 v52; // r8
-  hkgpConvexHullImpl::Vertex *v53; // rdx
-  int v54; // ecx
-  signed int v55; // er8
-  int v56; // er10
-  int v57; // er9
-  __int64 v58; // r8
-  __int64 v59; // r9
-  _DWORD *v60; // rcx
-  __int64 v61; // r8
-  __int64 v62; // r11
-  int v63; // eax
-  int v64; // esi
-  int *v65; // r10
-  int v66; // ecx
-  hkgpConvexHullImpl::Vertex *v67; // rcx
-  signed __int64 v68; // rdx
+  int v44; // ecx
+  int v45; // edi
+  __m128 v46; // xmm3
+  __int64 v47; // rcx
+  __int64 v48; // r9
+  __int64 v49; // r8
+  hkgpConvexHullImpl::Vertex *v50; // rdx
+  int v51; // ecx
+  __int64 v52; // r9
+  __int64 v53; // r8
+  hkgpConvexHullImpl::Vertex *v54; // rdx
+  int v55; // ecx
+  int v56; // r8d
+  int v57; // r10d
+  int v58; // r9d
+  __int64 v59; // r8
+  __int64 v60; // r9
+  _DWORD *v61; // rcx
+  __int64 v62; // r8
+  __int64 v63; // r11
+  int v64; // eax
+  int v65; // esi
+  int *v66; // r10
+  int v67; // ecx
+  hkgpConvexHullImpl::Vertex *v68; // rcx
   __int64 v69; // rdx
-  __int128 v70; // xmm0
-  signed __int64 v71; // rcx
-  signed __int64 v72; // rax
-  __int64 v73; // r11
-  int v74; // eax
-  int *v75; // r10
-  hkgpConvexHullImpl::Vertex *v76; // rcx
-  signed __int64 v77; // rdx
-  __int128 v78; // xmm0
-  __int64 v79; // rdx
-  int v80; // eax
-  __int64 v81; // rcx
-  int v82; // edi
-  int v83; // eax
+  char *v70; // rdx
+  __int128 v71; // xmm0
+  __int64 v72; // rcx
+  hkRelocationInfo::Import *v73; // rax
+  __int64 v74; // r11
+  int v75; // eax
+  int *v76; // r10
+  hkgpConvexHullImpl::Vertex *v77; // rcx
+  __int64 v78; // rdx
+  __int128 v79; // xmm0
+  char *v80; // rdx
+  int v81; // eax
+  __int64 v82; // rcx
+  int v83; // edi
   int v84; // eax
-  int v85; // er9
-  int v86; // eax
-  __int64 v87; // rdx
-  _DWORD *v88; // rcx
-  __m128 v89; // xmm3
-  __int64 v90; // rcx
-  __int64 v91; // r9
-  __int64 v92; // r8
-  hkgpConvexHullImpl::Vertex *v93; // rdx
-  int v94; // ecx
-  __int64 v95; // r9
-  __int64 v96; // r8
-  hkgpConvexHullImpl::Vertex *v97; // rdx
-  int v98; // ecx
-  signed int v99; // er8
-  __m128 v100; // xmm1
-  __m128 v101; // xmm4
-  __m128 v102; // xmm1
-  __m128 v103; // xmm0
-  __m128 v104; // xmm2
-  __int64 v105; // rcx
-  __m128 *v106; // rax
-  __m128 v107; // xmm4
-  __m128 v108; // xmm5
-  hkgpConvexHullImpl::Vertex *v109; // r9
-  __int64 v110; // rax
-  signed __int64 v111; // rdx
-  __int64 v112; // rcx
-  __m128 v113; // xmm3
-  __m128 v114; // xmm1
-  __m128 v115; // xmm0
-  __m128 v116; // xmm6
+  int v85; // eax
+  int v86; // r9d
+  int v87; // eax
+  __int64 v88; // rdx
+  _DWORD *v89; // rcx
+  __m128 v90; // xmm3
+  __int64 v91; // rcx
+  __int64 v92; // r9
+  __int64 v93; // r8
+  hkgpConvexHullImpl::Vertex *v94; // rdx
+  int v95; // ecx
+  __int64 v96; // r9
+  __int64 v97; // r8
+  hkgpConvexHullImpl::Vertex *v98; // rdx
+  int v99; // ecx
+  int v100; // r8d
+  __m128 v101; // xmm1
+  __m128 v102; // xmm4
+  __m128 v103; // xmm1
+  __m128 v104; // xmm0
+  __m128 v105; // xmm2
+  __int64 v106; // rcx
+  __m128 *v107; // rax
+  __m128 v108; // xmm4
+  __m128 v109; // xmm5
+  hkgpConvexHullImpl::Vertex *v110; // r9
+  __int64 v111; // rax
+  __int64 v112; // rdx
+  __int64 v113; // rcx
+  __m128 v114; // xmm3
+  __m128 v115; // xmm1
+  __m128 v116; // xmm0
   __m128 v117; // xmm6
-  __m128 v118; // xmm1
-  __m128 v119; // xmm5
-  int v120; // edi
-  int v121; // er9
-  int v122; // er9
-  hkVector4f *v123; // rdx
-  hkgpConvexHullImpl::Vertex *v124; // r8
-  signed __int64 v125; // r10
-  signed __int64 v126; // r11
-  __int64 v127; // rcx
-  signed __int64 v128; // rdx
-  unsigned __int64 v129; // r9
-  __int128 v130; // xmm0
-  signed __int64 v131; // r8
-  signed __int64 v132; // rcx
-  signed __int64 v133; // rdx
-  __int128 v134; // xmm0
-  signed __int64 v135; // r10
-  signed __int64 v136; // r8
-  hkVector4f *v137; // r10
-  int v138; // eax
-  signed __int64 v139; // r11
-  signed __int64 v140; // rcx
-  __int64 v141; // rdx
-  unsigned __int64 v142; // r10
-  __int64 v143; // r8
-  signed __int64 v144; // rcx
-  signed __int64 v145; // r9
-  int v146; // er9
-  __int64 v147; // r8
-  hkgpConvexHullImpl::Vertex *v148; // rcx
-  int v149; // edi
-  __int64 v150; // rdx
-  signed __int64 v151; // r8
-  __int64 v152; // rdi
-  hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::Pool *v153; // rax
-  hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::Item *v154; // rdx
-  __int64 v155; // rax
-  hkgpConvexHullImpl::Vertex *v156; // rcx
-  int v157; // eax
-  __m128 v158; // xmm3
-  __int64 v159; // rcx
-  __int64 v160; // r8
-  hkgpConvexHullImpl::Vertex *v161; // rdx
-  int v162; // ecx
-  __int64 v163; // r8
-  hkgpConvexHullImpl::Vertex *v164; // rdx
-  int v165; // ecx
-  signed __int64 v166; // rdx
-  signed __int64 v167; // r9
-  signed __int64 v168; // r8
-  __m128 v169; // xmm4
-  hkgpConvexHullImpl::Vertex *v170; // rax
-  signed __int64 v171; // r11
-  signed __int64 v172; // rdi
-  signed __int64 v173; // rcx
-  __int64 v174; // r10
-  __m128 v175; // xmm1
-  __m128 v176; // xmm2
-  float v177; // xmm3_4
-  __m128 v178; // xmm2
-  signed __int64 v179; // r9
-  signed __int64 v180; // r8
-  int v181; // eax
-  int v182; // ecx
-  int v183; // xmm1_4
-  __int128 v184; // xmm6
-  __int128 v185; // xmm8
-  int v186; // xmm7_4
-  int v187; // xmm9_4
-  int v188; // xmm0_4
-  unsigned int v189; // xmm1_4
-  hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::Pool *v190; // rax
-  signed __int64 v191; // r8
-  hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::Item *v192; // rsi
-  __int64 v193; // rax
-  hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::Pool *v194; // rax
-  hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::Item *v195; // rdx
-  __int64 v196; // rax
-  int v197; // eax
-  int v198; // eax
+  __m128 v118; // xmm6
+  __m128 v119; // xmm1
+  __m128 v120; // xmm5
+  int v121; // edi
+  int v122; // r9d
+  int v123; // r9d
+  hkRelocationInfo::Import *m_data; // rdx
+  hkgpConvexHullImpl::Vertex *v125; // r8
+  __int64 v126; // r10
+  __int64 v127; // r11
+  hkRelocationInfo::Import *v128; // rcx
+  int *m_x; // rdx
+  unsigned __int64 v130; // r9
+  hkRelocationInfo::Import v131; // xmm0
+  signed __int64 v132; // r8
+  __int64 v133; // rcx
+  __int64 v134; // rdx
+  __int128 v135; // xmm0
+  __int64 v136; // r10
+  __int64 v137; // r8
+  hkRelocationInfo::Import *v138; // r10
+  int v139; // eax
+  __int64 v140; // r11
+  hkRelocationInfo::Import *v141; // rcx
+  __int64 v142; // rdx
+  unsigned __int64 v143; // r10
+  __int64 v144; // r8
+  __int64 v145; // rcx
+  __int64 v146; // r9
+  int v147; // r9d
+  __int64 v148; // r8
+  hkgpConvexHullImpl::Vertex *v149; // rcx
+  int v150; // edi
+  hkRelocationInfo::Import *v151; // rdx
+  __int64 p_m_vertices; // r8
+  __int64 v153; // rdi
+  hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::Pool *NewPool; // rax
+  hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::Item *m_free; // rdx
+  __int64 v156; // rax
+  hkgpConvexHullImpl::Vertex *v157; // rcx
+  int m_index; // eax
+  __m128 v159; // xmm3
+  __int64 v160; // rcx
+  __int64 v161; // r8
+  hkgpConvexHullImpl::Vertex *v162; // rdx
+  int v163; // ecx
+  __int64 v164; // r8
+  hkgpConvexHullImpl::Vertex *v165; // rdx
+  int v166; // ecx
+  __int64 v167; // rdx
+  __int64 v168; // r9
+  __int64 v169; // r8
+  __m128 v170; // xmm4
+  hkgpConvexHullImpl::Vertex *v171; // rax
+  __int64 v172; // r11
+  __int64 v173; // rdi
+  __int64 v174; // rcx
+  __int64 v175; // r10
+  __m128 v176; // xmm1
+  __m128 v177; // xmm2
+  float v178; // xmm3_4
+  __m128 v179; // xmm2
+  __int64 v180; // r9
+  __int64 v181; // r8
+  int v182; // eax
+  int v183; // ecx
+  int v184; // xmm1_4
+  __int128 v185; // xmm6
+  __int128 v186; // xmm8
+  int v187; // xmm7_4
+  int v188; // xmm9_4
+  int v189; // xmm0_4
+  unsigned int v190; // xmm1_4
+  hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::Pool *m_firstPool; // rax
+  hkgpAbstractMeshDefinitions::List<hkgpConvexHullImpl::Vertex,hkgpAbstractMeshDefinitions::List<hkgpConvexHullImpl::Vertex,hkgpConvexHull::Vertex,hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator> >::Item,hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator> > *v192; // r8
+  hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::Item *v193; // rsi
+  hkgpConvexHullImpl::Vertex *m_used; // rax
+  hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::Pool *v195; // rax
+  hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::Item *v196; // rdx
+  hkgpConvexHullImpl::Vertex *v197; // rax
+  unsigned int v198; // eax
   int v199; // eax
-  int v200; // eax
-  hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::Pool *v201; // rax
-  signed __int64 v202; // r8
-  __int64 v203; // rax
-  hkgpConvexHullImpl::Vertex *v204; // rcx
-  char v205; // [rsp+30h] [rbp-D0h]
-  int v206; // [rsp+34h] [rbp-CCh]
+  unsigned int v200; // eax
+  int v201; // eax
+  hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::Pool *v202; // rax
+  hkgpAbstractMeshDefinitions::List<hkgpConvexHullImpl::Vertex,hkgpAbstractMeshDefinitions::List<hkgpConvexHullImpl::Vertex,hkgpConvexHull::Vertex,hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator> >::Item,hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator> > *v203; // r8
+  hkgpConvexHullImpl::Vertex *v204; // rax
+  hkgpConvexHullImpl::Vertex *v205; // rcx
+  char v206; // [rsp+30h] [rbp-D0h]
   int v207; // [rsp+34h] [rbp-CCh]
   int v208; // [rsp+34h] [rbp-CCh]
   int v209; // [rsp+34h] [rbp-CCh]
-  char v210; // [rsp+38h] [rbp-C8h]
-  hkVector4f *array; // [rsp+40h] [rbp-C0h]
-  int v212; // [rsp+48h] [rbp-B8h]
-  int v213; // [rsp+4Ch] [rbp-B4h]
-  int v214; // [rsp+50h] [rbp-B0h]
-  signed __int64 v215; // [rsp+58h] [rbp-A8h]
-  hkResult result; // [rsp+60h] [rbp-A0h]
-  __int64 v217; // [rsp+68h] [rbp-98h]
-  __int64 v218; // [rsp+70h] [rbp-90h]
-  hkResult v219; // [rsp+78h] [rbp-88h]
-  hkResult v220; // [rsp+7Ch] [rbp-84h]
-  __int64 v221; // [rsp+80h] [rbp-80h]
-  hkArray<hkgpConvexHullImpl::Vertex,hkContainerHeapAllocator> *v222; // [rsp+88h] [rbp-78h]
-  unsigned __int64 v223; // [rsp+B0h] [rbp-50h]
-  int v224; // [rsp+B8h] [rbp-48h]
-  int v225; // [rsp+C0h] [rbp-40h]
-  __int64 v226; // [rsp+F0h] [rbp-10h]
-  int v227; // [rsp+F8h] [rbp-8h]
-  const __m128i *v228; // [rsp+190h] [rbp+90h]
-  hkVector4f *pointsa; // [rsp+198h] [rbp+98h]
-  int numPointsa; // [rsp+1A0h] [rbp+A0h]
-  bool v231; // [rsp+1A8h] [rbp+A8h]
+  int v210; // [rsp+34h] [rbp-CCh]
+  char v211; // [rsp+38h] [rbp-C8h]
+  hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> array; // [rsp+40h] [rbp-C0h] BYREF
+  int v213; // [rsp+50h] [rbp-B0h]
+  hkRelocationInfo::Import *v214; // [rsp+58h] [rbp-A8h]
+  hkResult result; // [rsp+60h] [rbp-A0h] BYREF
+  __int64 v216; // [rsp+68h] [rbp-98h]
+  __int64 v217; // [rsp+70h] [rbp-90h]
+  hkResult v218; // [rsp+78h] [rbp-88h] BYREF
+  hkResult v219; // [rsp+7Ch] [rbp-84h] BYREF
+  __int64 v220; // [rsp+80h] [rbp-80h]
+  hkArray<hkgpConvexHullImpl::Vertex,hkContainerHeapAllocator> *v221; // [rsp+88h] [rbp-78h]
+  unsigned __int64 v222; // [rsp+B0h] [rbp-50h]
+  unsigned int v223; // [rsp+B8h] [rbp-48h]
+  int v224; // [rsp+C0h] [rbp-40h]
+  __int64 v225; // [rsp+F0h] [rbp-10h]
+  int v226; // [rsp+F8h] [rbp-8h]
+  int numPointsa; // [rsp+1A0h] [rbp+A0h] BYREF
+  bool v230; // [rsp+1A8h] [rbp+A8h]
 
-  v231 = forcePlanar;
+  v230 = forcePlanar;
   numPointsa = numPoints;
-  pointsa = points;
-  v228 = (const __m128i *)this;
-  v5 = forcePlanar;
   v6 = this;
   v7 = points;
-  if ( numPoints && (unsigned __int8)points & 0xF )
+  if ( numPoints && ((unsigned __int8)points & 0xF) != 0 )
   {
-    v213 = 2147483648;
-    array = 0i64;
-    v212 = 0;
+    array.m_capacityAndFlags = 0x80000000;
+    array.m_data = 0i64;
+    array.m_size = 0;
     if ( numPoints > 0 )
     {
-      v8 = numPoints;
-      if ( numPoints < 0 )
-        v8 = 0;
-      hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, v8, 16);
+      hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&array.m_data, numPoints, 16);
       numPoints = numPointsa;
-      v7 = pointsa;
+      v7 = points;
     }
-    v212 = numPoints;
+    array.m_size = numPoints;
     if ( numPoints > 0 )
     {
-      v9 = 0i64;
-      v10 = (unsigned int)numPoints;
+      v8 = 0i64;
+      v9 = (unsigned int)numPoints;
       do
       {
-        v11 = v7->m_quad;
-        ++v9;
+        m_quad = (hkRelocationInfo::Import)v7->m_quad;
+        ++v8;
         ++v7;
-        array[v9 - 1] = (hkVector4f)v11;
-        --v10;
+        array.m_data[v8 - 1] = m_quad;
+        --v9;
       }
-      while ( v10 );
+      while ( v9 );
     }
-    v12 = hkgpConvexHullImpl::build(v6, array, numPoints, v5, domain);
-    v212 = 0;
-    v13 = v12;
-    if ( v213 >= 0 )
+    v11 = hkgpConvexHullImpl::build(v6, (hkVector4f *)array.m_data, numPoints, forcePlanar, domain);
+    array.m_size = 0;
+    v12 = v11;
+    if ( array.m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-        array,
-        16 * v213);
-    return v13;
+        &hkContainerHeapAllocator::s_alloc,
+        array.m_data,
+        16 * array.m_capacityAndFlags);
+    return v12;
   }
-  hkgpConvexHullImpl::reset(this, v5);
-  v15 = numPointsa;
+  hkgpConvexHullImpl::reset(this, forcePlanar);
+  v14 = numPointsa;
   if ( numPointsa > 0 )
   {
-    v16 = domain;
+    v15 = domain;
     if ( domain )
     {
       v6->m_origin = domain->m_origin;
-      v6->m_scale = v16->m_scale;
-      v6->m_scaleInv = v16->m_scaleInv;
+      v6->m_scale = v15->m_scale;
+      v6->m_scaleInv = v15->m_scaleInv;
     }
     else if ( v6->m_config.m_internalInputs.m_bool )
     {
       v6->m_origin = 0i64;
       v6->m_scale = (hkVector4f)query.m_quad;
-      _mm_store_si128((__m128i *)&v6->m_scale, _mm_srli_si128(_mm_slli_si128((__m128i)query.m_quad, 4), 4));
+      v6->m_scale = (hkVector4f)_mm_srli_si128(_mm_slli_si128((__m128i)query.m_quad, 4), 4);
       v6->m_scaleInv = (hkVector4f)query.m_quad;
-      _mm_store_si128((__m128i *)&v6->m_scaleInv, _mm_srli_si128(_mm_slli_si128((__m128i)query.m_quad, 4), 4));
+      v6->m_scaleInv = (hkVector4f)_mm_srli_si128(_mm_slli_si128((__m128i)query.m_quad, 4), 4);
     }
     else
     {
-      hkgpConvexHullImpl::rebuildDomainParameters(v6, pointsa, numPointsa);
-      v15 = numPointsa;
+      hkgpConvexHullImpl::rebuildDomainParameters(v6, points, numPointsa);
+      v14 = numPointsa;
     }
-    v17 = 3;
-    v205 = 0;
-    if ( v15 - 1 < 3 )
-      v17 = v15 - 1;
+    v16 = 3;
+    v206 = 0;
+    if ( v14 - 1 < 3 )
+      v16 = v14 - 1;
     v6->m_projectionAxis = 0i64;
-    v6->m_dimensions = v17;
-    if ( v5 )
+    v6->m_dimensions = v16;
+    if ( forcePlanar )
     {
       v6->m_dimensions = 2;
     }
     else
     {
-      v18 = &v6->m_projectionPlane;
+      p_m_projectionPlane = &v6->m_projectionPlane;
       v6->m_projectionPlane = 0i64;
-      if ( v15 > 1 )
-        v6->m_projectionAxis.m_quad = _mm_sub_ps(pointsa[1].m_quad, pointsa->m_quad);
-      if ( v15 <= 2
-        || (v19 = v6->m_config.m_alwaysComputeProjectionPlane.m_bool == 0,
-            *v18 = (hkVector4f)transform.m_quad,
-            v18->m_quad = _mm_shuffle_ps(
-                            transform.m_quad,
-                            _mm_unpackhi_ps(
-                              transform.m_quad,
-                              _mm_sub_ps((__m128)0i64, _mm_shuffle_ps(pointsa->m_quad, pointsa->m_quad, 0))),
-                            196),
-            v19) )
+      if ( v14 > 1 )
+        v6->m_projectionAxis.m_quad = _mm_sub_ps(points[1].m_quad, points->m_quad);
+      if ( v14 <= 2
+        || (v18 = v6->m_config.m_alwaysComputeProjectionPlane.m_bool == 0,
+            *p_m_projectionPlane = (hkVector4f)transform.m_quad,
+            p_m_projectionPlane->m_quad = _mm_shuffle_ps(
+                                            transform.m_quad,
+                                            _mm_unpackhi_ps(
+                                              transform.m_quad,
+                                              _mm_sub_ps(
+                                                (__m128)0i64,
+                                                _mm_shuffle_ps(points->m_quad, points->m_quad, 0))),
+                                            196),
+            v18) )
       {
-LABEL_29:
-        v20 = (signed __int64)&v6->m_pendings;
-        v21 = 0i64;
+LABEL_27:
+        p_m_pendings = (__int64)&v6->m_pendings;
+        v20 = 0i64;
         v6->m_pendings.m_size = 0;
-        v22 = v6->m_pendings.m_capacityAndFlags;
-        v222 = &v6->m_pendings;
-        v23 = v22 & 0x3FFFFFFF;
-        if ( v23 < v15 )
+        m_capacityAndFlags = v6->m_pendings.m_capacityAndFlags;
+        v221 = &v6->m_pendings;
+        v22 = m_capacityAndFlags & 0x3FFFFFFF;
+        if ( v22 < v14 )
         {
-          v24 = 2 * v23;
-          v25 = v15;
-          if ( v15 < v24 )
-            v25 = v24;
+          v23 = 2 * v22;
+          v24 = v14;
+          if ( v14 < v23 )
+            v24 = v23;
           hkArrayUtil::_reserve(
             &result,
-            (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-            &v6->m_pendings,
-            v25,
+            &hkContainerHeapAllocator::s_alloc,
+            (const void **)&v6->m_pendings.m_data,
+            v24,
             64);
-          v15 = numPointsa;
+          v14 = numPointsa;
         }
-        v26 = v15 - v6->m_pendings.m_size;
-        v27 = v26;
-        if ( v26 > 0 )
+        v25 = v14 - v6->m_pendings.m_size;
+        v26 = v25;
+        if ( v25 > 0 )
         {
-          v28 = &v6->m_pendings.m_data[(signed __int64)v6->m_pendings.m_size].m_index;
+          p_m_index = &v6->m_pendings.m_data[(__int64)v6->m_pendings.m_size].m_index;
           do
           {
-            if ( v28 != (int *)52 )
+            if ( p_m_index != (int *)52 )
             {
-              *(v28 - 2) = 0;
-              *v28 = -1;
+              *(p_m_index - 2) = 0;
+              *p_m_index = -1;
             }
-            v28 += 16;
-            --v27;
+            p_m_index += 16;
+            --v26;
           }
-          while ( v27 );
+          while ( v26 );
         }
-        v6->m_pendings.m_size = v15;
-        v29 = 0;
-        if ( v15 > 0 )
+        v6->m_pendings.m_size = v14;
+        v28 = 0;
+        if ( v14 > 0 )
         {
-          v30 = &pointsa->m_quad;
-          v31 = 0i64;
+          v29 = points;
+          v30 = 0i64;
           do
           {
-            v32 = *(hkgpConvexHullImpl::Vertex **)v20;
-            v33 = _mm_mul_ps(_mm_sub_ps(*v30, v6->m_origin.m_quad), v6->m_scale.m_quad);
-            v34 = _mm_cmpltps(v33, (__m128)_xmm);
-            v35 = _mm_max_ps(
+            v31 = *(hkgpConvexHullImpl::Vertex **)p_m_pendings;
+            v32 = _mm_mul_ps(_mm_sub_ps(v29->m_quad, v6->m_origin.m_quad), v6->m_scale.m_quad);
+            v33 = _mm_cmplt_ps(v32, (__m128)_xmm);
+            v34 = _mm_max_ps(
                     (__m128)_xmm_c6000000c6000000c6000000c6000000,
-                    _mm_or_ps(_mm_andnot_ps(v34, (__m128)_xmm), _mm_and_ps(v34, v33)));
-            v36 = _mm_cmpltps(v35, (__m128)0i64);
-            v32[v31].m_source.m_quad = *v30;
-            v37 = _mm_or_ps(
-                    _mm_andnot_ps(v36, _mm_add_ps(v35, (__m128)xmmword_141A711B0)),
-                    _mm_and_ps(_mm_sub_ps(v35, (__m128)xmmword_141A711B0), v36));
-            v38 = _mm_xor_si128(
-                    (__m128i)_mm_cmpleps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v37),
-                    _mm_cvttps_epi32(v37));
-            v223 = v38.m128i_i64[0];
-            *(_QWORD *)v32[v31].m_x = v38.m128i_i64[0];
-            v224 = (unsigned __int128)_mm_shuffle_epi32(v38, 170);
-            v32[v31].m_x[2] = v224;
-            v39 = v225;
-            v32[v31].m_index = -1;
-            v32[v31].m_scratch = 0.0;
-            v32[v31].m_refs = v39;
+                    _mm_or_ps(_mm_andnot_ps(v33, (__m128)_xmm), _mm_and_ps(v33, v32)));
+            v35 = _mm_sub_ps(v34, (__m128)xmmword_141A711B0);
+            v36 = _mm_add_ps(v34, (__m128)xmmword_141A711B0);
+            v37 = _mm_cmplt_ps(v34, (__m128)0i64);
+            v31[v30].m_source = (hkVector4f)v29->m_quad;
+            v38 = _mm_or_ps(_mm_andnot_ps(v37, v36), _mm_and_ps(v35, v37));
+            v39 = _mm_xor_si128(
+                    (__m128i)_mm_cmple_ps(*(__m128 *)`hkIntVector::setConvertF32toS32::`2::two31, v38),
+                    _mm_cvttps_epi32(v38));
+            v222 = v39.m128i_i64[0];
+            v31[v30].m_x[0] = v39.m128i_i32[0];
+            v31[v30].m_x[1] = HIDWORD(v222);
+            v223 = _mm_shuffle_epi32(v39, 170).m128i_u32[0];
+            v31[v30].m_x[2] = v223;
+            v40 = v224;
+            v31[v30].m_index = -1;
+            v31[v30].m_scratch = 0.0;
+            v31[v30].m_refs = v40;
             if ( v6->m_config.m_setSourceIndices.m_bool )
-              *(_DWORD *)(*(_QWORD *)v20 + v31 * 64 + 28) = v29 | 0x3F000000;
+              *(_DWORD *)(*(_QWORD *)p_m_pendings + v30 * 64 + 28) = v28 | 0x3F000000;
+            ++v28;
             ++v29;
             ++v30;
-            ++v31;
           }
-          while ( v29 < v15 );
+          while ( v28 < v14 );
         }
-        if ( !v231 )
+        if ( !v230 )
         {
           if ( v6->m_config.m_sortInputs.m_bool )
           {
-            v40 = v6->m_pendings.m_size;
-            if ( v40 > 1 )
+            m_size = v6->m_pendings.m_size;
+            if ( m_size > 1 )
             {
               hkAlgorithm::quickSortRecursive<hkgpConvexHullImpl::Vertex,hkAlgorithm::less<hkgpConvexHullImpl::Vertex>>(
-                *(hkgpConvexHullImpl::Vertex **)v20,
+                *(hkgpConvexHullImpl::Vertex **)p_m_pendings,
                 0,
-                v40 - 1,
+                m_size - 1,
                 0);
-              v15 = numPointsa;
+              v14 = numPointsa;
             }
           }
         }
-        v221 = v15;
+        v220 = v14;
         while ( 1 )
         {
-          v41 = v6->m_dimensions;
-          v210 = 0;
-          if ( !v41 )
+          m_dimensions = v6->m_dimensions;
+          v211 = 0;
+          if ( !m_dimensions )
             break;
-          v42 = v41 - 1;
-          if ( v42 )
+          v43 = m_dimensions - 1;
+          if ( v43 )
           {
-            v43 = v42 - 1;
-            if ( v43 )
+            v44 = v43 - 1;
+            if ( v44 )
             {
-              if ( v43 != 1 || hkgpConvexHullImpl::flushPending(v6) )
-                goto LABEL_223;
+              if ( v44 != 1 || hkgpConvexHullImpl::flushPending(v6) )
+                goto LABEL_221;
               if ( !v6->m_config.m_allowLowerDimensions.m_bool )
               {
                 v6->m_dimensions = -1;
-                goto LABEL_223;
+                goto LABEL_221;
               }
-              v15 = numPointsa;
+              v14 = numPointsa;
               v6->m_dimensions = 2;
             }
             else
             {
-              if ( !v205 )
+              if ( !v206 )
               {
-                hkgpConvexHullImpl::computeProjectionPlane(v6, pointsa, v15, &v6->m_projectionPlane);
-                v205 = 1;
+                hkgpConvexHullImpl::computeProjectionPlane(v6, points, v14, &v6->m_projectionPlane);
+                v206 = 1;
               }
-              array = 0i64;
-              v212 = 0;
-              v213 = 2147483648;
-              v44 = 0;
-              v45 = (__m128)_mm_srli_epi32(_mm_slli_epi32(_mm_load_si128(v228 + 16), 1u), 1u);
-              v46 = _mm_movemask_ps(
+              array.m_data = 0i64;
+              array.m_size = 0;
+              array.m_capacityAndFlags = 0x80000000;
+              v45 = 0;
+              v46 = (__m128)_mm_srli_epi32(
+                              _mm_slli_epi32(_mm_load_si128((const __m128i *)&this->m_projectionPlane), 1u),
+                              1u);
+              v47 = _mm_movemask_ps(
                       _mm_and_ps(
-                        _mm_cmpleps(
+                        _mm_cmple_ps(
                           _mm_max_ps(
-                            _mm_shuffle_ps(v45, v45, 170),
-                            _mm_max_ps(_mm_shuffle_ps(v45, v45, 85), _mm_shuffle_ps(v45, v45, 0))),
-                          v45),
+                            _mm_shuffle_ps(v46, v46, 170),
+                            _mm_max_ps(_mm_shuffle_ps(v46, v46, 85), _mm_shuffle_ps(v46, v46, 0))),
+                          v46),
                         *(__m128 *)&hkVector4fComparison_maskToComparison_326[28]));
-              if ( hkVector4Comparison_maskToLastIndex[v46] )
+              if ( hkVector4Comparison_maskToLastIndex[v47] )
               {
-                if ( hkVector4Comparison_maskToLastIndex[v46] == 1 )
+                if ( hkVector4Comparison_maskToLastIndex[v47] == 1 )
                 {
-                  v47 = v228[6].m128i_i32[0];
-                  if ( v47 > 0 )
+                  v48 = this->m_pendings.m_size;
+                  if ( v48 > 0 )
                   {
-                    v48 = 0i64;
+                    v49 = 0i64;
                     do
                     {
-                      v49 = *(hkgpConvexHullImpl::Vertex **)v20;
-                      ++v48;
-                      v50 = *(_DWORD *)(*(_QWORD *)v20 + v48 * 64 - 28);
-                      *((_DWORD *)&v49[v48] - 7) = *(_DWORD *)(*(_QWORD *)v20 + v48 * 64 - 24);
-                      *((_DWORD *)&v49[v48] - 6) = v50;
-                      --v47;
+                      v50 = *(hkgpConvexHullImpl::Vertex **)p_m_pendings;
+                      v51 = *(_DWORD *)(*(_QWORD *)p_m_pendings + ++v49 * 64 - 28);
+                      v50[v49 - 1].m_x[1] = *(_DWORD *)(*(_QWORD *)p_m_pendings + v49 * 64 - 24);
+                      v50[v49 - 1].m_x[2] = v51;
+                      --v48;
                     }
-                    while ( v47 );
+                    while ( v48 );
                   }
                 }
               }
               else
               {
-                v51 = v228[6].m128i_i32[0];
-                if ( v51 > 0 )
+                v52 = this->m_pendings.m_size;
+                if ( v52 > 0 )
                 {
-                  v52 = 0i64;
+                  v53 = 0i64;
                   do
                   {
-                    v53 = *(hkgpConvexHullImpl::Vertex **)v20;
-                    ++v52;
-                    v54 = *(_DWORD *)(*(_QWORD *)v20 + v52 * 64 - 32);
-                    *((_DWORD *)&v53[v52] - 8) = *(_DWORD *)(*(_QWORD *)v20 + v52 * 64 - 24);
-                    *((_DWORD *)&v53[v52] - 6) = v54;
-                    --v51;
+                    v54 = *(hkgpConvexHullImpl::Vertex **)p_m_pendings;
+                    v55 = *(_DWORD *)(*(_QWORD *)p_m_pendings + ++v53 * 64 - 32);
+                    v54[v53 - 1].m_x[0] = *(_DWORD *)(*(_QWORD *)p_m_pendings + v53 * 64 - 24);
+                    v54[v53 - 1].m_x[2] = v55;
+                    --v52;
                   }
-                  while ( v51 );
+                  while ( v52 );
                 }
               }
-              v55 = v228[6].m128i_i32[0];
-              if ( v55 > 1 )
+              v56 = this->m_pendings.m_size;
+              if ( v56 > 1 )
                 hkAlgorithm::quickSortRecursive<hkgpConvexHullImpl::Vertex,hkAlgorithm::less<hkgpConvexHullImpl::Vertex>>(
-                  *(hkgpConvexHullImpl::Vertex **)v20,
+                  *(hkgpConvexHullImpl::Vertex **)p_m_pendings,
                   0,
-                  v55 - 1,
+                  v56 - 1,
                   0);
-              v56 = 2 * numPointsa;
-              v206 = 2 * numPointsa;
-              if ( (v213 & 0x3FFFFFFF) >= 2 * numPointsa )
+              v57 = 2 * numPointsa;
+              v207 = 2 * numPointsa;
+              if ( (array.m_capacityAndFlags & 0x3FFFFFFF) >= 2 * numPointsa )
               {
-                v220.m_enum = 0;
+                v219.m_enum = HK_SUCCESS;
               }
               else
               {
-                v57 = 2 * numPointsa;
-                if ( v56 < 2 * (v213 & 0x3FFFFFFF) )
-                  v57 = 2 * (v213 & 0x3FFFFFFF);
-                hkArrayUtil::_reserve(
-                  &v220,
-                  (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-                  &array,
-                  v57,
-                  64);
-                v56 = v206;
+                v58 = 2 * numPointsa;
+                if ( v57 < 2 * (array.m_capacityAndFlags & 0x3FFFFFFF) )
+                  v58 = 2 * (array.m_capacityAndFlags & 0x3FFFFFFF);
+                hkArrayUtil::_reserve(&v219, &hkContainerHeapAllocator::s_alloc, (const void **)&array.m_data, v58, 64);
+                v57 = v207;
               }
-              v58 = v56 - v212;
-              v59 = (__int64)&array[4 * (signed __int64)v212];
-              if ( v56 - v212 > 0 )
+              v59 = v57 - array.m_size;
+              v60 = (__int64)&array.m_data[4 * (__int64)array.m_size];
+              if ( v57 - array.m_size > 0 )
               {
-                v60 = (_DWORD *)(v59 + 52);
+                v61 = (_DWORD *)(v60 + 52);
                 do
                 {
-                  if ( v60 != (_DWORD *)52 )
+                  if ( v61 != (_DWORD *)52 )
                   {
-                    *(v60 - 2) = 0;
-                    *v60 = -1;
+                    *(v61 - 2) = 0;
+                    *v61 = -1;
                   }
-                  v60 += 16;
-                  --v58;
+                  v61 += 16;
+                  --v59;
                 }
-                while ( v58 );
+                while ( v59 );
               }
-              v61 = v221;
-              v212 = v56;
-              v217 = 0i64;
-              if ( v221 > 0 )
+              v62 = v220;
+              array.m_size = v57;
+              v216 = 0i64;
+              if ( v220 > 0 )
               {
-                v62 = 0i64;
-                v218 = 0i64;
+                v63 = 0i64;
+                v217 = 0i64;
                 do
                 {
-                  if ( v21 >= 2 )
+                  if ( v20 >= 2 )
                   {
-                    v63 = *(_DWORD *)(v62 + *(_QWORD *)v20 + 36);
-                    v64 = *(_DWORD *)(v62 + *(_QWORD *)v20 + 32);
-                    v65 = &array[4 * v21 - 6].m_quad.m128_i32[1];
+                    v64 = *(_DWORD *)(v63 + *(_QWORD *)p_m_pendings + 36);
+                    v65 = *(_DWORD *)(v63 + *(_QWORD *)p_m_pendings + 32);
+                    v66 = &array.m_data[4 * v20 - 6].m_fromOffset + 1;
                     do
                     {
-                      v66 = (v64 - *(v65 - 1)) * (v65[16] - *v65);
-                      v59 = (unsigned int)((v63 - *v65) * (v65[15] - *(v65 - 1)) - v66);
-                      if ( (v63 - *v65) * (v65[15] - *(v65 - 1)) - v66 > 0 )
+                      v67 = (v65 - *(v66 - 1)) * (v66[16] - *v66);
+                      v60 = (unsigned int)((v64 - *v66) * (v66[15] - *(v66 - 1)) - v67);
+                      if ( (v64 - *v66) * (v66[15] - *(v66 - 1)) - v67 > 0 )
                         break;
-                      --v21;
-                      --v44;
-                      v65 -= 16;
+                      --v20;
+                      --v45;
+                      v66 -= 16;
                     }
-                    while ( v21 >= 2 );
-                    v62 = v218;
-                    v20 = (signed __int64)v222;
-                    v61 = v221;
+                    while ( v20 >= 2 );
+                    v63 = v217;
+                    p_m_pendings = (__int64)v221;
+                    v62 = v220;
                   }
-                  v67 = *(hkgpConvexHullImpl::Vertex **)v20;
-                  v62 += 64i64;
-                  v68 = v21 << 6;
-                  ++v44;
-                  ++v21;
-                  v69 = (__int64)array + v68;
-                  v70 = *(_OWORD *)(v62 + *(_QWORD *)v20 - 48);
-                  v218 = v62;
-                  *(_OWORD *)(v69 + 16) = v70;
-                  *(_DWORD *)(v69 + 32) = *(_DWORD *)((char *)v67 + v62 - 32);
-                  *(_DWORD *)(v69 + 36) = *(_DWORD *)((char *)v67 + v62 - 28);
-                  *(_DWORD *)(v69 + 40) = *(_DWORD *)((char *)v67 + v62 - 24);
-                  *(_DWORD *)(v69 + 44) = *(_DWORD *)((char *)v67 + v62 - 20);
-                  *(_DWORD *)(v69 + 48) = *(_DWORD *)((char *)v67 + v62 - 16);
-                  *(_DWORD *)(v69 + 52) = *(_DWORD *)((char *)v67 + v62 - 12);
-                  ++v217;
+                  v68 = *(hkgpConvexHullImpl::Vertex **)p_m_pendings;
+                  v63 += 64i64;
+                  v69 = v20 << 6;
+                  ++v45;
+                  ++v20;
+                  v70 = (char *)array.m_data + v69;
+                  v71 = *(_OWORD *)(v63 + *(_QWORD *)p_m_pendings - 48);
+                  v217 = v63;
+                  *((_OWORD *)v70 + 1) = v71;
+                  *((_DWORD *)v70 + 8) = *(_DWORD *)((char *)v68 + v63 - 32);
+                  *((_DWORD *)v70 + 9) = *(_DWORD *)((char *)v68 + v63 - 28);
+                  *((_DWORD *)v70 + 10) = *(_DWORD *)((char *)v68 + v63 - 24);
+                  *((_DWORD *)v70 + 11) = *(_DWORD *)((char *)v68 + v63 - 20);
+                  *((_DWORD *)v70 + 12) = *(_DWORD *)((char *)v68 + v63 - 16);
+                  *((_DWORD *)v70 + 13) = *(_DWORD *)((char *)v68 + v63 - 12);
+                  ++v216;
                 }
-                while ( v217 < v61 );
+                while ( v216 < v62 );
               }
-              v71 = v61 - 2;
-              v72 = v44 + 1;
-              v218 = v61 - 2;
-              v215 = v44 + 1;
-              if ( v61 - 2 >= 0 )
+              v72 = v62 - 2;
+              v73 = (hkRelocationInfo::Import *)(v45 + 1);
+              v217 = v62 - 2;
+              v214 = v73;
+              if ( v62 - 2 >= 0 )
               {
-                v73 = v71 << 6;
-                v217 = v71 << 6;
+                v74 = v72 << 6;
+                v216 = v72 << 6;
                 do
                 {
-                  if ( v21 >= v72 )
+                  if ( v20 >= (__int64)v73 )
                   {
-                    v74 = *(_DWORD *)(v73 + *(_QWORD *)v20 + 36);
-                    v214 = *(_DWORD *)(v73 + *(_QWORD *)v20 + 32);
-                    v75 = &array[4 * v21 - 6].m_quad.m128_i32[1];
+                    v75 = *(_DWORD *)(v74 + *(_QWORD *)p_m_pendings + 36);
+                    v213 = *(_DWORD *)(v74 + *(_QWORD *)p_m_pendings + 32);
+                    v76 = &array.m_data[4 * v20 - 6].m_fromOffset + 1;
                     do
                     {
-                      v59 = (unsigned int)((v214 - *(v75 - 1)) * (v75[16] - *v75));
-                      if ( (v74 - *v75) * (v75[15] - *(v75 - 1)) - (signed int)v59 > 0 )
+                      v60 = (unsigned int)((v213 - *(v76 - 1)) * (v76[16] - *v76));
+                      if ( (v75 - *v76) * (v76[15] - *(v76 - 1)) - (int)v60 > 0 )
                         break;
-                      --v21;
-                      --v44;
-                      v75 -= 16;
+                      --v20;
+                      --v45;
+                      v76 -= 16;
                     }
-                    while ( v21 >= v215 );
-                    v73 = v217;
-                    v20 = (signed __int64)v222;
+                    while ( v20 >= (__int64)v214 );
+                    v74 = v216;
+                    p_m_pendings = (__int64)v221;
                   }
-                  v76 = *(hkgpConvexHullImpl::Vertex **)v20;
-                  v73 -= 64i64;
-                  v77 = v21 << 6;
-                  ++v44;
-                  ++v21;
-                  v78 = *(_OWORD *)(v73 + *(_QWORD *)v20 + 80);
-                  v79 = (__int64)array + v77;
-                  v217 = v73;
-                  *(_OWORD *)(v79 + 16) = v78;
-                  *(_DWORD *)(v79 + 32) = *(int *)((char *)v76[1].m_x + v73);
-                  *(_DWORD *)(v79 + 36) = *(int *)((char *)&v76[1].m_x[1] + v73);
-                  *(_DWORD *)(v79 + 40) = *(int *)((char *)&v76[1].m_x[2] + v73);
-                  *(float *)(v79 + 44) = *(float *)((char *)&v76[1].m_scratch + v73);
-                  *(_DWORD *)(v79 + 48) = *(int *)((char *)&v76[1].m_refs + v73);
-                  v80 = *(int *)((char *)&v76[1].m_index + v73);
-                  v81 = v218 - 1;
-                  *(_DWORD *)(v79 + 52) = v80;
-                  v72 = v215;
-                  v218 = v81;
+                  v77 = *(hkgpConvexHullImpl::Vertex **)p_m_pendings;
+                  v74 -= 64i64;
+                  v78 = v20 << 6;
+                  ++v45;
+                  ++v20;
+                  v79 = *(_OWORD *)(v74 + *(_QWORD *)p_m_pendings + 80);
+                  v80 = (char *)array.m_data + v78;
+                  v216 = v74;
+                  *((_OWORD *)v80 + 1) = v79;
+                  *((_DWORD *)v80 + 8) = *(int *)((char *)v77[1].m_x + v74);
+                  *((_DWORD *)v80 + 9) = *(int *)((char *)&v77[1].m_x[1] + v74);
+                  *((_DWORD *)v80 + 10) = *(int *)((char *)&v77[1].m_x[2] + v74);
+                  *((_DWORD *)v80 + 11) = *(int *)((char *)&v77[1].m_x[3] + v74);
+                  *((_DWORD *)v80 + 12) = *(int *)((char *)&v77[1].m_refs + v74);
+                  v81 = *(int *)((char *)&v77[1].m_index + v74);
+                  v82 = v217 - 1;
+                  *((_DWORD *)v80 + 13) = v81;
+                  v73 = v214;
+                  v217 = v82;
                 }
-                while ( v81 >= 0 );
+                while ( v82 >= 0 );
               }
-              if ( v44 <= 3 )
+              if ( v45 <= 3 )
               {
-                v6 = (hkgpConvexHullImpl *)v228;
-                v21 = 0i64;
-                v158 = (__m128)_mm_srli_epi32(_mm_slli_epi32(_mm_load_si128(v228 + 16), 1u), 1u);
-                v159 = _mm_movemask_ps(
+                v6 = this;
+                v20 = 0i64;
+                v159 = (__m128)_mm_srli_epi32(
+                                 _mm_slli_epi32(_mm_load_si128((const __m128i *)&this->m_projectionPlane), 1u),
+                                 1u);
+                v160 = _mm_movemask_ps(
                          _mm_and_ps(
-                           _mm_cmpleps(
+                           _mm_cmple_ps(
                              _mm_max_ps(
-                               _mm_shuffle_ps(v158, v158, 170),
-                               _mm_max_ps(_mm_shuffle_ps(v158, v158, 85), _mm_shuffle_ps(v158, v158, 0))),
-                             v158),
+                               _mm_shuffle_ps(v159, v159, 170),
+                               _mm_max_ps(_mm_shuffle_ps(v159, v159, 85), _mm_shuffle_ps(v159, v159, 0))),
+                             v159),
                            *(__m128 *)&hkVector4fComparison_maskToComparison_326[28]));
-                if ( hkVector4Comparison_maskToLastIndex[v159] )
+                if ( hkVector4Comparison_maskToLastIndex[v160] )
                 {
-                  if ( hkVector4Comparison_maskToLastIndex[v159] == 1 )
+                  if ( hkVector4Comparison_maskToLastIndex[v160] == 1 )
                   {
-                    v59 = v228[6].m128i_i32[0];
-                    if ( v59 > 0 )
+                    v60 = this->m_pendings.m_size;
+                    if ( v60 > 0 )
                     {
-                      v160 = 0i64;
+                      v161 = 0i64;
                       do
                       {
-                        v161 = *(hkgpConvexHullImpl::Vertex **)v20;
-                        ++v160;
-                        v162 = *(_DWORD *)(*(_QWORD *)v20 + v160 * 64 - 28);
-                        *((_DWORD *)&v161[v160] - 7) = *(_DWORD *)(*(_QWORD *)v20 + v160 * 64 - 24);
-                        *((_DWORD *)&v161[v160] - 6) = v162;
-                        --v59;
+                        v162 = *(hkgpConvexHullImpl::Vertex **)p_m_pendings;
+                        v163 = *(_DWORD *)(*(_QWORD *)p_m_pendings + ++v161 * 64 - 28);
+                        v162[v161 - 1].m_x[1] = *(_DWORD *)(*(_QWORD *)p_m_pendings + v161 * 64 - 24);
+                        v162[v161 - 1].m_x[2] = v163;
+                        --v60;
                       }
-                      while ( v59 );
+                      while ( v60 );
                     }
                   }
                 }
                 else
                 {
-                  v59 = v228[6].m128i_i32[0];
-                  if ( v59 > 0 )
+                  v60 = this->m_pendings.m_size;
+                  if ( v60 > 0 )
                   {
-                    v163 = 0i64;
+                    v164 = 0i64;
                     do
                     {
-                      v164 = *(hkgpConvexHullImpl::Vertex **)v20;
-                      ++v163;
-                      v165 = *(_DWORD *)(*(_QWORD *)v20 + v163 * 64 - 32);
-                      *((_DWORD *)&v164[v163] - 8) = *(_DWORD *)(*(_QWORD *)v20 + v163 * 64 - 24);
-                      *((_DWORD *)&v164[v163] - 6) = v165;
-                      --v59;
+                      v165 = *(hkgpConvexHullImpl::Vertex **)p_m_pendings;
+                      v166 = *(_DWORD *)(*(_QWORD *)p_m_pendings + ++v164 * 64 - 32);
+                      v165[v164 - 1].m_x[0] = *(_DWORD *)(*(_QWORD *)p_m_pendings + v164 * 64 - 24);
+                      v165[v164 - 1].m_x[2] = v166;
+                      --v60;
                     }
-                    while ( v59 );
+                    while ( v60 );
                   }
                 }
-                v228[30].m128i_i32[0] = 1;
-                v210 = 1;
+                this->m_dimensions = 1;
+                v211 = 1;
               }
               else
               {
                 hkArray<hkpTreeBroadPhase32::Handle,hkContainerHeapAllocator>::swap(
-                  (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)v20,
-                  (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&array);
-                v82 = v44 - 1;
-                v83 = *(_DWORD *)(v20 + 12) & 0x3FFFFFFF;
-                if ( v83 >= v82 )
+                  (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)p_m_pendings,
+                  &array);
+                v83 = v45 - 1;
+                v84 = *(_DWORD *)(p_m_pendings + 12) & 0x3FFFFFFF;
+                if ( v84 >= v83 )
                 {
-                  v21 = 0i64;
-                  v219.m_enum = 0;
+                  v20 = 0i64;
+                  v218.m_enum = HK_SUCCESS;
                 }
                 else
                 {
-                  v84 = 2 * v83;
-                  v85 = v82;
-                  if ( v82 < v84 )
-                    v85 = v84;
-                  hkArrayUtil::_reserve(
-                    &v219,
-                    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-                    (void *)v20,
-                    v85,
-                    64);
-                  v21 = 0i64;
+                  v85 = 2 * v84;
+                  v86 = v83;
+                  if ( v83 < v85 )
+                    v86 = v85;
+                  hkArrayUtil::_reserve(&v218, &hkContainerHeapAllocator::s_alloc, (const void **)p_m_pendings, v86, 64);
+                  v20 = 0i64;
                 }
-                v86 = v82 - *(_DWORD *)(v20 + 8);
-                v87 = v86;
-                if ( v86 > 0 )
+                v87 = v83 - *(_DWORD *)(p_m_pendings + 8);
+                v88 = v87;
+                if ( v87 > 0 )
                 {
-                  v88 = (_DWORD *)(*(_QWORD *)v20 + ((signed __int64)*(signed int *)(v20 + 8) << 6) + 52);
+                  v89 = (_DWORD *)(*(_QWORD *)p_m_pendings + ((__int64)*(int *)(p_m_pendings + 8) << 6) + 52);
                   do
                   {
-                    if ( v88 != (_DWORD *)52 )
+                    if ( v89 != (_DWORD *)52 )
                     {
-                      *(v88 - 2) = 0;
-                      *v88 = -1;
+                      *(v89 - 2) = 0;
+                      *v89 = -1;
                     }
-                    v88 += 16;
-                    --v87;
+                    v89 += 16;
+                    --v88;
                   }
-                  while ( v87 );
+                  while ( v88 );
                 }
-                *(_DWORD *)(v20 + 8) = v82;
-                v6 = (hkgpConvexHullImpl *)v228;
-                v89 = (__m128)_mm_srli_epi32(_mm_slli_epi32(_mm_load_si128(v228 + 16), 1u), 1u);
-                v90 = _mm_movemask_ps(
+                *(_DWORD *)(p_m_pendings + 8) = v83;
+                v6 = this;
+                v90 = (__m128)_mm_srli_epi32(
+                                _mm_slli_epi32(_mm_load_si128((const __m128i *)&this->m_projectionPlane), 1u),
+                                1u);
+                v91 = _mm_movemask_ps(
                         _mm_and_ps(
-                          _mm_cmpleps(
+                          _mm_cmple_ps(
                             _mm_max_ps(
-                              _mm_shuffle_ps(v89, v89, 170),
-                              _mm_max_ps(_mm_shuffle_ps(v89, v89, 85), _mm_shuffle_ps(v89, v89, 0))),
-                            v89),
+                              _mm_shuffle_ps(v90, v90, 170),
+                              _mm_max_ps(_mm_shuffle_ps(v90, v90, 85), _mm_shuffle_ps(v90, v90, 0))),
+                            v90),
                           *(__m128 *)&hkVector4fComparison_maskToComparison_326[28]));
-                if ( hkVector4Comparison_maskToLastIndex[v90] )
+                if ( hkVector4Comparison_maskToLastIndex[v91] )
                 {
-                  if ( hkVector4Comparison_maskToLastIndex[v90] == 1 )
+                  if ( hkVector4Comparison_maskToLastIndex[v91] == 1 )
                   {
-                    v91 = v228[6].m128i_i32[0];
-                    if ( v91 > 0 )
+                    v92 = this->m_pendings.m_size;
+                    if ( v92 > 0 )
                     {
-                      v92 = 0i64;
+                      v93 = 0i64;
                       do
                       {
-                        v93 = *(hkgpConvexHullImpl::Vertex **)v20;
-                        ++v92;
-                        v94 = *(_DWORD *)(*(_QWORD *)v20 + v92 * 64 - 28);
-                        *((_DWORD *)&v93[v92] - 7) = *(_DWORD *)(*(_QWORD *)v20 + v92 * 64 - 24);
-                        *((_DWORD *)&v93[v92] - 6) = v94;
-                        --v91;
+                        v94 = *(hkgpConvexHullImpl::Vertex **)p_m_pendings;
+                        v95 = *(_DWORD *)(*(_QWORD *)p_m_pendings + ++v93 * 64 - 28);
+                        v94[v93 - 1].m_x[1] = *(_DWORD *)(*(_QWORD *)p_m_pendings + v93 * 64 - 24);
+                        v94[v93 - 1].m_x[2] = v95;
+                        --v92;
                       }
-                      while ( v91 );
+                      while ( v92 );
                     }
                   }
                 }
                 else
                 {
-                  v95 = v228[6].m128i_i32[0];
-                  if ( v95 > 0 )
+                  v96 = this->m_pendings.m_size;
+                  if ( v96 > 0 )
                   {
-                    v96 = 0i64;
+                    v97 = 0i64;
                     do
                     {
-                      v97 = *(hkgpConvexHullImpl::Vertex **)v20;
-                      ++v96;
-                      v98 = *(_DWORD *)(*(_QWORD *)v20 + v96 * 64 - 32);
-                      *((_DWORD *)&v97[v96] - 8) = *(_DWORD *)(*(_QWORD *)v20 + v96 * 64 - 24);
-                      *((_DWORD *)&v97[v96] - 6) = v98;
-                      --v95;
+                      v98 = *(hkgpConvexHullImpl::Vertex **)p_m_pendings;
+                      v99 = *(_DWORD *)(*(_QWORD *)p_m_pendings + ++v97 * 64 - 32);
+                      v98[v97 - 1].m_x[0] = *(_DWORD *)(*(_QWORD *)p_m_pendings + v97 * 64 - 24);
+                      v98[v97 - 1].m_x[2] = v99;
+                      --v96;
                     }
-                    while ( v95 );
+                    while ( v96 );
                   }
                 }
-                v99 = v228[6].m128i_i32[0];
-                v100 = 0i64;
+                v100 = this->m_pendings.m_size;
                 v101 = 0i64;
-                v100.m128_f32[0] = (float)v99;
-                v102 = _mm_shuffle_ps(v100, v100, 0);
-                v103 = _mm_rcp_ps(v102);
-                v104 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v102, v103)), v103);
-                if ( v99 > 0 )
+                v102 = 0i64;
+                v101.m128_f32[0] = (float)v100;
+                v103 = _mm_shuffle_ps(v101, v101, 0);
+                v104 = _mm_rcp_ps(v103);
+                v105 = _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v103, v104)), v104);
+                if ( v100 > 0 )
                 {
-                  v105 = (unsigned int)v99;
-                  v106 = (__m128 *)(*(_QWORD *)v20 + 16i64);
+                  v106 = (unsigned int)v100;
+                  v107 = (__m128 *)(*(_QWORD *)p_m_pendings + 16i64);
                   do
                   {
-                    v101 = _mm_add_ps(v101, *v106);
-                    v106 += 4;
-                    --v105;
+                    v102 = _mm_add_ps(v102, *v107);
+                    v107 += 4;
+                    --v106;
                   }
-                  while ( v105 );
+                  while ( v106 );
                 }
-                v107 = _mm_mul_ps(v101, v104);
-                v108 = 0i64;
-                if ( v99 > 0 )
+                v108 = _mm_mul_ps(v102, v105);
+                v109 = 0i64;
+                if ( v100 > 0 )
                 {
-                  v109 = *(hkgpConvexHullImpl::Vertex **)v20;
-                  v110 = 0i64;
-                  v111 = (signed __int64)(v99 - 1) << 6;
-                  v112 = v228[6].m128i_u32[0];
+                  v110 = *(hkgpConvexHullImpl::Vertex **)p_m_pendings;
+                  v111 = 0i64;
+                  v112 = (__int64)(v100 - 1) << 6;
+                  v113 = (unsigned int)this->m_pendings.m_size;
                   do
                   {
-                    v113 = _mm_mul_ps(v108, v108);
-                    v114 = _mm_sub_ps(*(__m128 *)((char *)&v109->m_source.m_quad + v111), v107);
-                    v115 = _mm_sub_ps(v109[v110].m_source.m_quad, v107);
-                    v116 = _mm_sub_ps(
-                             _mm_mul_ps(_mm_shuffle_ps(v115, v115, 201), v114),
-                             _mm_mul_ps(_mm_shuffle_ps(v114, v114, 201), v115));
-                    v117 = _mm_shuffle_ps(v116, v116, 201);
-                    v118 = _mm_mul_ps(v117, v117);
-                    if ( (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v118, v118, 85))
-                                       + COERCE_FLOAT(_mm_shuffle_ps(v118, v118, 0)))
-                               + COERCE_FLOAT(_mm_shuffle_ps(v118, v118, 170))) > (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v113, v113, 85))
-                                                                                                + COERCE_FLOAT(_mm_shuffle_ps(v113, v113, 0)))
-                                                                                        + COERCE_FLOAT(
-                                                                                            _mm_shuffle_ps(
-                                                                                              v113,
-                                                                                              v113,
-                                                                                              170))) )
-                      v108 = v117;
-                    v111 = v110 * 64;
-                    ++v110;
-                    --v112;
+                    v114 = _mm_mul_ps(v109, v109);
+                    v115 = _mm_sub_ps(*(__m128 *)((char *)&v110->m_source.m_quad + v112), v108);
+                    v116 = _mm_sub_ps(v110[v111].m_source.m_quad, v108);
+                    v117 = _mm_sub_ps(
+                             _mm_mul_ps(_mm_shuffle_ps(v116, v116, 201), v115),
+                             _mm_mul_ps(_mm_shuffle_ps(v115, v115, 201), v116));
+                    v118 = _mm_shuffle_ps(v117, v117, 201);
+                    v119 = _mm_mul_ps(v118, v118);
+                    if ( (float)((float)(_mm_shuffle_ps(v119, v119, 85).m128_f32[0]
+                                       + _mm_shuffle_ps(v119, v119, 0).m128_f32[0])
+                               + _mm_shuffle_ps(v119, v119, 170).m128_f32[0]) > (float)((float)(_mm_shuffle_ps(
+                                                                                                  v114,
+                                                                                                  v114,
+                                                                                                  85).m128_f32[0]
+                                                                                              + _mm_shuffle_ps(
+                                                                                                  v114,
+                                                                                                  v114,
+                                                                                                  0).m128_f32[0])
+                                                                                      + _mm_shuffle_ps(v114, v114, 170).m128_f32[0]) )
+                      v109 = v118;
+                    v112 = v111 * 64;
+                    ++v111;
+                    --v113;
                   }
-                  while ( v112 );
+                  while ( v113 );
                 }
-                v119 = _mm_mul_ps(v108, (__m128)v228[16]);
+                v120 = _mm_mul_ps(v109, this->m_projectionPlane.m_quad);
                 if ( _mm_movemask_ps(
                        _mm_add_ps(
-                         _mm_add_ps(_mm_shuffle_ps(v119, v119, 85), _mm_shuffle_ps(v119, v119, 0)),
-                         _mm_shuffle_ps(v119, v119, 170))) )
+                         _mm_add_ps(_mm_shuffle_ps(v120, v120, 85), _mm_shuffle_ps(v120, v120, 0)),
+                         _mm_shuffle_ps(v120, v120, 170))) )
                 {
-                  v120 = *(_DWORD *)(v20 + 8);
-                  v121 = *(_DWORD *)(v20 + 8);
-                  if ( v120 > v212 )
-                    v121 = v212;
-                  v207 = v121;
-                  if ( (v213 & 0x3FFFFFFF) >= v120 )
+                  v121 = *(_DWORD *)(p_m_pendings + 8);
+                  v122 = v121;
+                  if ( v121 > array.m_size )
+                    v122 = array.m_size;
+                  v208 = v122;
+                  if ( (array.m_capacityAndFlags & 0x3FFFFFFF) >= v121 )
                   {
-                    result.m_enum = 0;
+                    result.m_enum = HK_SUCCESS;
                   }
                   else
                   {
-                    v122 = *(_DWORD *)(v20 + 8);
-                    if ( v120 < 2 * (v213 & 0x3FFFFFFF) )
-                      v122 = 2 * (v213 & 0x3FFFFFFF);
+                    v123 = *(_DWORD *)(p_m_pendings + 8);
+                    if ( v121 < 2 * (array.m_capacityAndFlags & 0x3FFFFFFF) )
+                      v123 = 2 * (array.m_capacityAndFlags & 0x3FFFFFFF);
                     hkArrayUtil::_reserve(
                       &result,
-                      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-                      &array,
-                      v122,
+                      &hkContainerHeapAllocator::s_alloc,
+                      (const void **)&array.m_data,
+                      v123,
                       64);
-                    v121 = v207;
+                    v122 = v208;
                   }
-                  v123 = array;
-                  v124 = *(hkgpConvexHullImpl::Vertex **)v20;
-                  v125 = v121;
-                  v126 = 0i64;
-                  v215 = (signed __int64)array;
-                  if ( v121 >= 4i64 )
+                  m_data = array.m_data;
+                  v125 = *(hkgpConvexHullImpl::Vertex **)p_m_pendings;
+                  v126 = v122;
+                  v127 = 0i64;
+                  v214 = array.m_data;
+                  if ( v122 >= 4i64 )
                   {
-                    v127 = (__int64)&array[6];
-                    v128 = (signed __int64)v124[1].m_x;
-                    v129 = ((unsigned __int64)(v121 - 4i64) >> 2) + 1;
-                    v126 = 4 * v129;
+                    v128 = array.m_data + 6;
+                    m_x = v125[1].m_x;
+                    v130 = ((unsigned __int64)(v122 - 4i64) >> 2) + 1;
+                    v127 = 4 * v130;
                     do
                     {
-                      v130 = *(_OWORD *)(v128 - 80);
-                      v127 += 256i64;
-                      v128 += 256i64;
-                      *(_OWORD *)(v127 - 336) = v130;
-                      *(_DWORD *)(v127 - 320) = *(_DWORD *)(v128 - 320);
-                      *(_DWORD *)(v127 - 316) = *(_DWORD *)(v128 - 316);
-                      *(_DWORD *)(v127 - 312) = *(_DWORD *)(v128 - 312);
-                      *(_DWORD *)(v127 - 308) = *(_DWORD *)(v128 - 308);
-                      *(_DWORD *)(v127 - 304) = *(_DWORD *)(v128 - 304);
-                      *(_DWORD *)(v127 - 300) = *(_DWORD *)(v128 - 300);
-                      *(_OWORD *)(v127 - 272) = *(_OWORD *)(v128 - 272);
-                      *(_DWORD *)(v127 - 256) = *(_DWORD *)(v128 - 256);
-                      *(_DWORD *)(v127 - 252) = *(_DWORD *)(v128 - 252);
-                      *(_DWORD *)(v127 - 248) = *(_DWORD *)(v128 - 248);
-                      *(_DWORD *)(v127 - 244) = *(_DWORD *)(v128 - 244);
-                      *(_DWORD *)(v127 - 240) = *(_DWORD *)(v128 - 240);
-                      *(_DWORD *)(v127 - 236) = *(_DWORD *)(v128 - 236);
-                      *(_OWORD *)(v127 - 208) = *(_OWORD *)(v128 - 208);
-                      *(_DWORD *)(v127 - 192) = *(_DWORD *)(v128 - 192);
-                      *(_DWORD *)(v127 - 188) = *(_DWORD *)(v128 - 188);
-                      *(_DWORD *)(v127 - 184) = *(_DWORD *)(v128 - 184);
-                      *(_DWORD *)(v127 - 180) = *(_DWORD *)(v128 - 180);
-                      *(_DWORD *)(v127 - 176) = *(_DWORD *)(v128 - 176);
-                      *(_DWORD *)(v127 - 172) = *(_DWORD *)(v128 - 172);
-                      *(_OWORD *)(v127 - 144) = *(_OWORD *)(v128 - 144);
-                      *(_DWORD *)(v127 - 128) = *(_DWORD *)(v128 - 128);
-                      *(_DWORD *)(v127 - 124) = *(_DWORD *)(v128 - 124);
-                      *(_DWORD *)(v127 - 120) = *(_DWORD *)(v128 - 120);
-                      *(_DWORD *)(v127 - 116) = *(_DWORD *)(v128 - 116);
-                      *(_DWORD *)(v127 - 112) = *(_DWORD *)(v128 - 112);
-                      *(_DWORD *)(v127 - 108) = *(_DWORD *)(v128 - 108);
-                      --v129;
+                      v131 = (hkRelocationInfo::Import)*((_OWORD *)m_x - 5);
+                      v128 += 16;
+                      m_x += 64;
+                      v128[-21] = v131;
+                      v128[-20].m_fromOffset = *(m_x - 80);
+                      *(&v128[-20].m_fromOffset + 1) = *(m_x - 79);
+                      LODWORD(v128[-20].m_identifier) = *(m_x - 78);
+                      HIDWORD(v128[-20].m_identifier) = *(m_x - 77);
+                      v128[-19].m_fromOffset = *(m_x - 76);
+                      *(&v128[-19].m_fromOffset + 1) = *(m_x - 75);
+                      v128[-17] = *((hkRelocationInfo::Import *)m_x - 17);
+                      v128[-16].m_fromOffset = *(m_x - 64);
+                      *(&v128[-16].m_fromOffset + 1) = *(m_x - 63);
+                      LODWORD(v128[-16].m_identifier) = *(m_x - 62);
+                      HIDWORD(v128[-16].m_identifier) = *(m_x - 61);
+                      v128[-15].m_fromOffset = *(m_x - 60);
+                      *(&v128[-15].m_fromOffset + 1) = *(m_x - 59);
+                      v128[-13] = *((hkRelocationInfo::Import *)m_x - 13);
+                      v128[-12].m_fromOffset = *(m_x - 48);
+                      *(&v128[-12].m_fromOffset + 1) = *(m_x - 47);
+                      LODWORD(v128[-12].m_identifier) = *(m_x - 46);
+                      HIDWORD(v128[-12].m_identifier) = *(m_x - 45);
+                      v128[-11].m_fromOffset = *(m_x - 44);
+                      *(&v128[-11].m_fromOffset + 1) = *(m_x - 43);
+                      v128[-9] = *((hkRelocationInfo::Import *)m_x - 9);
+                      v128[-8].m_fromOffset = *(m_x - 32);
+                      *(&v128[-8].m_fromOffset + 1) = *(m_x - 31);
+                      LODWORD(v128[-8].m_identifier) = *(m_x - 30);
+                      HIDWORD(v128[-8].m_identifier) = *(m_x - 29);
+                      v128[-7].m_fromOffset = *(m_x - 28);
+                      *(&v128[-7].m_fromOffset + 1) = *(m_x - 27);
+                      --v130;
                     }
-                    while ( v129 );
-                    v121 = v207;
-                    v123 = (hkVector4f *)v215;
+                    while ( v130 );
+                    v122 = v208;
+                    m_data = v214;
                   }
-                  if ( v126 < v125 )
+                  if ( v127 < v126 )
                   {
-                    v131 = (char *)v124 - (char *)v123;
-                    v132 = (signed __int64)&v123[4 * v126 + 1];
-                    v133 = v125 - v126;
+                    v132 = (char *)v125 - (char *)m_data;
+                    v133 = (__int64)&m_data[4 * v127 + 1];
+                    v134 = v126 - v127;
                     do
                     {
-                      v134 = *(_OWORD *)(v132 + v131);
-                      v132 += 64i64;
-                      *(_OWORD *)(v132 - 64) = v134;
-                      *(_DWORD *)(v132 - 48) = *(_DWORD *)(v132 + v131 - 48);
-                      *(_DWORD *)(v132 - 44) = *(_DWORD *)(v132 + v131 - 44);
-                      *(_DWORD *)(v132 - 40) = *(_DWORD *)(v132 + v131 - 40);
-                      *(_DWORD *)(v132 - 36) = *(_DWORD *)(v132 + v131 - 36);
-                      *(_DWORD *)(v132 - 32) = *(_DWORD *)(v132 + v131 - 32);
-                      *(_DWORD *)(v132 - 28) = *(_DWORD *)(v132 + v131 - 28);
-                      --v133;
+                      v135 = *(_OWORD *)(v133 + v132);
+                      v133 += 64i64;
+                      *(_OWORD *)(v133 - 64) = v135;
+                      *(_DWORD *)(v133 - 48) = *(_DWORD *)(v133 + v132 - 48);
+                      *(_DWORD *)(v133 - 44) = *(_DWORD *)(v133 + v132 - 44);
+                      *(_DWORD *)(v133 - 40) = *(_DWORD *)(v133 + v132 - 40);
+                      *(_DWORD *)(v133 - 36) = *(_DWORD *)(v133 + v132 - 36);
+                      *(_DWORD *)(v133 - 32) = *(_DWORD *)(v133 + v132 - 32);
+                      *(_DWORD *)(v133 - 28) = *(_DWORD *)(v133 + v132 - 28);
+                      --v134;
                     }
-                    while ( v133 );
+                    while ( v134 );
                   }
-                  v135 = v125 << 6;
-                  v136 = v135 + *(_QWORD *)v20;
-                  v137 = (hkVector4f *)((char *)array + v135);
-                  v138 = v120 - v121;
-                  v215 = (signed __int64)v137;
-                  v139 = 0i64;
-                  if ( v120 - v121 >= 4i64 )
+                  v136 = v126 << 6;
+                  v137 = v136 + *(_QWORD *)p_m_pendings;
+                  v138 = (hkRelocationInfo::Import *)((char *)array.m_data + v136);
+                  v139 = v121 - v122;
+                  v214 = v138;
+                  v140 = 0i64;
+                  if ( v121 - v122 >= 4i64 )
                   {
-                    v140 = (signed __int64)&v137[5];
-                    v141 = v136 - (_QWORD)v137;
-                    v142 = ((unsigned __int64)(v138 - 4i64) >> 2) + 1;
-                    v139 = 4 * v142;
+                    v141 = v138 + 5;
+                    v142 = v137 - (_QWORD)v138;
+                    v143 = ((unsigned __int64)(v139 - 4i64) >> 2) + 1;
+                    v140 = 4 * v143;
                     do
                     {
-                      if ( v140 != 80 )
+                      if ( v141 != (hkRelocationInfo::Import *)80 )
                       {
-                        *(_OWORD *)(v140 - 64) = *(_OWORD *)(v141 + v140 - 64);
-                        *(_DWORD *)(v140 - 48) = *(_DWORD *)(v141 + v140 - 48);
-                        *(_DWORD *)(v140 - 44) = *(_DWORD *)(v141 + v140 - 44);
-                        *(_DWORD *)(v140 - 40) = *(_DWORD *)(v141 + v140 - 40);
-                        *(_DWORD *)(v140 - 36) = *(_DWORD *)(v141 + v140 - 36);
-                        *(_DWORD *)(v140 - 32) = *(_DWORD *)(v141 + v140 - 32);
-                        *(_DWORD *)(v140 - 28) = *(_DWORD *)(v141 + v140 - 28);
+                        v141[-4] = *(hkRelocationInfo::Import *)((char *)v141 + v142 - 64);
+                        v141[-3].m_fromOffset = *(int *)((char *)&v141[-3].m_fromOffset + v142);
+                        *(&v141[-3].m_fromOffset + 1) = *(_DWORD *)((char *)&v141[-2] + v142 - 12);
+                        LODWORD(v141[-3].m_identifier) = *(_DWORD *)((char *)&v141[-2] + v142 - 8);
+                        HIDWORD(v141[-3].m_identifier) = *(_DWORD *)((char *)&v141[-2] + v142 - 4);
+                        v141[-2].m_fromOffset = *(int *)((char *)&v141[-2].m_fromOffset + v142);
+                        *(&v141[-2].m_fromOffset + 1) = *(_DWORD *)((char *)&v141[-1] + v142 - 12);
                       }
-                      if ( v140 != 16 )
+                      if ( v141 != (hkRelocationInfo::Import *)16 )
                       {
-                        *(_OWORD *)v140 = *(_OWORD *)(v141 + v140);
-                        *(_DWORD *)(v140 + 16) = *(_DWORD *)(v141 + v140 + 16);
-                        *(_DWORD *)(v140 + 20) = *(_DWORD *)(v141 + v140 + 20);
-                        *(_DWORD *)(v140 + 24) = *(_DWORD *)(v141 + v140 + 24);
-                        *(_DWORD *)(v140 + 28) = *(_DWORD *)(v141 + v140 + 28);
-                        *(_DWORD *)(v140 + 32) = *(_DWORD *)(v141 + v140 + 32);
-                        *(_DWORD *)(v140 + 36) = *(_DWORD *)(v141 + v140 + 36);
+                        *v141 = *(hkRelocationInfo::Import *)((char *)v141 + v142);
+                        v141[1].m_fromOffset = *(int *)((char *)&v141[1].m_fromOffset + v142);
+                        *(&v141[1].m_fromOffset + 1) = *(int *)((char *)&v141[1].m_fromOffset + v142 + 4);
+                        LODWORD(v141[1].m_identifier) = *(_DWORD *)((char *)&v141[1].m_identifier + v142);
+                        HIDWORD(v141[1].m_identifier) = *(_DWORD *)((char *)&v141[1].m_identifier + v142 + 4);
+                        v141[2].m_fromOffset = *(int *)((char *)&v141[2].m_fromOffset + v142);
+                        *(&v141[2].m_fromOffset + 1) = *(int *)((char *)&v141[2].m_fromOffset + v142 + 4);
                       }
-                      if ( v140 != -48 )
+                      if ( v141 != (hkRelocationInfo::Import *)-48i64 )
                       {
-                        *(_OWORD *)(v140 + 64) = *(_OWORD *)(v141 + v140 + 64);
-                        *(_DWORD *)(v140 + 80) = *(_DWORD *)(v141 + v140 + 80);
-                        *(_DWORD *)(v140 + 84) = *(_DWORD *)(v141 + v140 + 84);
-                        *(_DWORD *)(v140 + 88) = *(_DWORD *)(v141 + v140 + 88);
-                        *(_DWORD *)(v140 + 92) = *(_DWORD *)(v141 + v140 + 92);
-                        *(_DWORD *)(v140 + 96) = *(_DWORD *)(v141 + v140 + 96);
-                        *(_DWORD *)(v140 + 100) = *(_DWORD *)(v141 + v140 + 100);
+                        v141[4] = *(hkRelocationInfo::Import *)((char *)v141 + v142 + 64);
+                        v141[5].m_fromOffset = *(int *)((char *)&v141[5].m_fromOffset + v142);
+                        *(&v141[5].m_fromOffset + 1) = *(int *)((char *)&v141[5].m_fromOffset + v142 + 4);
+                        LODWORD(v141[5].m_identifier) = *(_DWORD *)((char *)&v141[5].m_identifier + v142);
+                        HIDWORD(v141[5].m_identifier) = *(_DWORD *)((char *)&v141[5].m_identifier + v142 + 4);
+                        v141[6].m_fromOffset = *(int *)((char *)&v141[6].m_fromOffset + v142);
+                        *(&v141[6].m_fromOffset + 1) = *(int *)((char *)&v141[6].m_fromOffset + v142 + 4);
                       }
-                      if ( v140 != -112 )
+                      if ( v141 != (hkRelocationInfo::Import *)-112i64 )
                       {
-                        *(_OWORD *)(v140 + 128) = *(_OWORD *)(v141 + v140 + 128);
-                        *(_DWORD *)(v140 + 144) = *(_DWORD *)(v141 + v140 + 144);
-                        *(_DWORD *)(v140 + 148) = *(_DWORD *)(v141 + v140 + 148);
-                        *(_DWORD *)(v140 + 152) = *(_DWORD *)(v141 + v140 + 152);
-                        *(_DWORD *)(v140 + 156) = *(_DWORD *)(v141 + v140 + 156);
-                        *(_DWORD *)(v140 + 160) = *(_DWORD *)(v141 + v140 + 160);
-                        *(_DWORD *)(v140 + 164) = *(_DWORD *)(v141 + v140 + 164);
+                        v141[8] = *(hkRelocationInfo::Import *)((char *)v141 + v142 + 128);
+                        v141[9].m_fromOffset = *(int *)((char *)&v141[9].m_fromOffset + v142);
+                        *(&v141[9].m_fromOffset + 1) = *(int *)((char *)&v141[9].m_fromOffset + v142 + 4);
+                        LODWORD(v141[9].m_identifier) = *(_DWORD *)((char *)&v141[9].m_identifier + v142);
+                        HIDWORD(v141[9].m_identifier) = *(_DWORD *)((char *)&v141[9].m_identifier + v142 + 4);
+                        v141[10].m_fromOffset = *(int *)((char *)&v141[10].m_fromOffset + v142);
+                        *(&v141[10].m_fromOffset + 1) = *(int *)((char *)&v141[10].m_fromOffset + v142 + 4);
                       }
-                      v140 += 256i64;
-                      --v142;
+                      v141 += 16;
+                      --v143;
                     }
-                    while ( v142 );
-                    v137 = (hkVector4f *)v215;
+                    while ( v143 );
+                    v138 = v214;
                   }
-                  if ( v139 < v138 )
+                  if ( v140 < v139 )
                   {
-                    v143 = v136 - (_QWORD)v137;
-                    v144 = (signed __int64)&v137[4 * v139 + 1];
-                    v145 = v138 - v139;
+                    v144 = v137 - (_QWORD)v138;
+                    v145 = (__int64)&v138[4 * v140 + 1];
+                    v146 = v139 - v140;
                     do
                     {
-                      if ( v144 != 16 )
+                      if ( v145 != 16 )
                       {
-                        *(_OWORD *)v144 = *(_OWORD *)(v143 + v144);
-                        *(_DWORD *)(v144 + 16) = *(_DWORD *)(v143 + v144 + 16);
-                        *(_DWORD *)(v144 + 20) = *(_DWORD *)(v143 + v144 + 20);
-                        *(_DWORD *)(v144 + 24) = *(_DWORD *)(v143 + v144 + 24);
-                        *(_DWORD *)(v144 + 28) = *(_DWORD *)(v143 + v144 + 28);
-                        *(_DWORD *)(v144 + 32) = *(_DWORD *)(v143 + v144 + 32);
-                        *(_DWORD *)(v144 + 36) = *(_DWORD *)(v143 + v144 + 36);
+                        *(_OWORD *)v145 = *(_OWORD *)(v144 + v145);
+                        *(_DWORD *)(v145 + 16) = *(_DWORD *)(v144 + v145 + 16);
+                        *(_DWORD *)(v145 + 20) = *(_DWORD *)(v144 + v145 + 20);
+                        *(_DWORD *)(v145 + 24) = *(_DWORD *)(v144 + v145 + 24);
+                        *(_DWORD *)(v145 + 28) = *(_DWORD *)(v144 + v145 + 28);
+                        *(_DWORD *)(v145 + 32) = *(_DWORD *)(v144 + v145 + 32);
+                        *(_DWORD *)(v145 + 36) = *(_DWORD *)(v144 + v145 + 36);
                       }
-                      v144 += 64i64;
-                      --v145;
+                      v145 += 64i64;
+                      --v146;
                     }
-                    while ( v145 );
+                    while ( v146 );
                   }
-                  v212 = v120;
-                  v146 = 0;
-                  if ( v120 > 0 )
+                  array.m_size = v121;
+                  v147 = 0;
+                  if ( v121 > 0 )
                   {
-                    v147 = 0i64;
+                    v148 = 0i64;
                     do
                     {
-                      v148 = *(hkgpConvexHullImpl::Vertex **)v20;
-                      v149 = v120 - v146++;
-                      ++v147;
-                      v150 = (__int64)&array[4 * (signed __int64)(v149 - 1)];
-                      *((_OWORD *)&v148[v147] - 3) = *(_OWORD *)(v150 + 16);
-                      *((_DWORD *)&v148[v147] - 8) = *(_DWORD *)(v150 + 32);
-                      *((_DWORD *)&v148[v147] - 7) = *(_DWORD *)(v150 + 36);
-                      *((_DWORD *)&v148[v147] - 6) = *(_DWORD *)(v150 + 40);
-                      *((_DWORD *)&v148[v147] - 5) = *(_DWORD *)(v150 + 44);
-                      *((_DWORD *)&v148[v147] - 4) = *(_DWORD *)(v150 + 48);
-                      *((_DWORD *)&v148[v147] - 3) = *(_DWORD *)(v150 + 52);
-                      v120 = v212;
+                      v149 = *(hkgpConvexHullImpl::Vertex **)p_m_pendings;
+                      v150 = v121 - v147++;
+                      ++v148;
+                      v151 = &array.m_data[4 * (__int64)(v150 - 1)];
+                      v149[v148 - 1].m_source = (hkVector4f)v151[1];
+                      v149[v148 - 1].m_x[0] = v151[2].m_fromOffset;
+                      v149[v148 - 1].m_x[1] = *(&v151[2].m_fromOffset + 1);
+                      v149[v148 - 1].m_x[2] = (int)v151[2].m_identifier;
+                      v149[v148 - 1].m_scratch = *((float *)&v151[2].m_identifier + 1);
+                      v149[v148 - 1].m_refs = v151[3].m_fromOffset;
+                      v149[v148 - 1].m_index = *(&v151[3].m_fromOffset + 1);
+                      v121 = array.m_size;
                     }
-                    while ( v146 < v212 );
+                    while ( v147 < array.m_size );
                   }
-                  v6 = (hkgpConvexHullImpl *)v228;
+                  v6 = this;
                 }
-                v59 = 0i64;
-                v208 = 0;
+                v60 = 0i64;
+                v209 = 0;
                 if ( v6->m_pendings.m_size > 0 )
                 {
-                  v151 = (signed __int64)&v6->m_mesh.m_vertices;
-                  v152 = 0i64;
-                  v215 = v151;
+                  p_m_vertices = (__int64)&v6->m_mesh.m_vertices;
+                  v153 = 0i64;
+                  v214 = (hkRelocationInfo::Import *)p_m_vertices;
                   do
                   {
-                    v153 = *(hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::Pool **)v151;
-                    if ( !*(_QWORD *)v151 || !v153->m_free )
+                    NewPool = *(hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::Pool **)p_m_vertices;
+                    if ( !*(_QWORD *)p_m_vertices || !NewPool->m_free )
                     {
-                      v153 = hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::allocateNewPool((hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator> *)v151);
-                      v151 = v215;
-                      LODWORD(v59) = v208;
+                      NewPool = hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::allocateNewPool((hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator> *)p_m_vertices);
+                      p_m_vertices = (__int64)v214;
+                      LODWORD(v60) = v209;
                     }
-                    if ( v153 )
+                    if ( NewPool )
                     {
-                      v154 = v153->m_free;
-                      v153->m_free = *(hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::Item **)v154->m_data;
-                      v154->m_pool = v153;
-                      ++v153->m_used;
-                      *(_DWORD *)&v154->m_data[44] = 0;
-                      *(_DWORD *)&v154->m_data[52] = -1;
-                      *(_QWORD *)&v154->m_data[8] = 0i64;
-                      *(_QWORD *)v154->m_data = *(_QWORD *)(v151 + 8);
-                      v155 = *(_QWORD *)(v151 + 8);
-                      if ( v155 )
-                        *(_QWORD *)(v155 + 8) = v154;
-                      ++*(_DWORD *)(v151 + 16);
-                      *(_QWORD *)(v151 + 8) = v154;
+                      m_free = NewPool->m_free;
+                      NewPool->m_free = *(hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::Item **)m_free->m_data;
+                      m_free->m_pool = NewPool;
+                      ++NewPool->m_used;
+                      *(_DWORD *)&m_free->m_data[44] = 0;
+                      *(_DWORD *)&m_free->m_data[52] = -1;
+                      *(_QWORD *)&m_free->m_data[8] = 0i64;
+                      *(_QWORD *)m_free->m_data = *(_QWORD *)(p_m_vertices + 8);
+                      v156 = *(_QWORD *)(p_m_vertices + 8);
+                      if ( v156 )
+                        *(_QWORD *)(v156 + 8) = m_free;
+                      ++*(_DWORD *)(p_m_vertices + 16);
+                      *(_QWORD *)(p_m_vertices + 8) = m_free;
                     }
                     else
                     {
-                      v154 = 0i64;
+                      m_free = 0i64;
                     }
-                    v156 = *(hkgpConvexHullImpl::Vertex **)v20;
-                    v59 = (unsigned int)(v59 + 1);
-                    ++v152;
-                    v208 = v59;
-                    *(_OWORD *)&v154->m_data[16] = *(_OWORD *)(v152 * 64 + *(_QWORD *)v20 - 48);
-                    *(_DWORD *)&v154->m_data[32] = *((_DWORD *)&v156[v152] - 8);
-                    *(_DWORD *)&v154->m_data[36] = *((_DWORD *)&v156[v152] - 7);
-                    *(_DWORD *)&v154->m_data[40] = *((_DWORD *)&v156[v152] - 6);
-                    *(_DWORD *)&v154->m_data[44] = *((_DWORD *)&v156[v152] - 5);
-                    *(_DWORD *)&v154->m_data[48] = *((_DWORD *)&v156[v152] - 4);
-                    v157 = *((_DWORD *)&v156[v152] - 3);
-                    *(_DWORD *)&v154->m_data[48] = 0;
-                    *(_DWORD *)&v154->m_data[52] = v157;
+                    v157 = *(hkgpConvexHullImpl::Vertex **)p_m_pendings;
+                    v60 = (unsigned int)(v60 + 1);
+                    ++v153;
+                    v209 = v60;
+                    *(_OWORD *)&m_free->m_data[16] = *(_OWORD *)(v153 * 64 + *(_QWORD *)p_m_pendings - 48);
+                    *(_DWORD *)&m_free->m_data[32] = v157[v153 - 1].m_x[0];
+                    *(_DWORD *)&m_free->m_data[36] = v157[v153 - 1].m_x[1];
+                    *(_DWORD *)&m_free->m_data[40] = v157[v153 - 1].m_x[2];
+                    *(float *)&m_free->m_data[44] = v157[v153 - 1].m_scratch;
+                    *(_DWORD *)&m_free->m_data[48] = v157[v153 - 1].m_refs;
+                    m_index = v157[v153 - 1].m_index;
+                    *(_DWORD *)&m_free->m_data[48] = 0;
+                    *(_DWORD *)&m_free->m_data[52] = m_index;
                   }
-                  while ( (signed int)v59 < v228[6].m128i_i32[0] );
-                  v6 = (hkgpConvexHullImpl *)v228;
+                  while ( (int)v60 < this->m_pendings.m_size );
+                  v6 = this;
                 }
-                *(_DWORD *)(v20 + 8) = 0;
+                *(_DWORD *)(p_m_pendings + 8) = 0;
               }
-              v212 = 0;
-              if ( v213 >= 0 )
-                ((void (__fastcall *)(hkContainerHeapAllocator::Allocator *, hkVector4f *, _QWORD, __int64))hkContainerHeapAllocator::s_alloc.vfptr->bufFree)(
+              array.m_size = 0;
+              if ( array.m_capacityAndFlags >= 0 )
+                ((void (__fastcall *)(hkContainerHeapAllocator::Allocator *, hkRelocationInfo::Import *, _QWORD, __int64))hkContainerHeapAllocator::s_alloc.vfptr->bufFree)(
                   &hkContainerHeapAllocator::s_alloc,
-                  array,
-                  (unsigned int)(v213 << 6),
-                  v59);
-              array = 0i64;
-              v213 = 2147483648;
-              if ( !v210 )
-                goto LABEL_223;
-              v15 = numPointsa;
+                  array.m_data,
+                  (unsigned int)(array.m_capacityAndFlags << 6),
+                  v60);
+              array.m_data = 0i64;
+              array.m_capacityAndFlags = 0x80000000;
+              if ( !v211 )
+                goto LABEL_221;
+              v14 = numPointsa;
             }
           }
           else
           {
-            v166 = 1i64;
-            v167 = 0i64;
+            v167 = 1i64;
             v168 = 0i64;
-            if ( v15 > 1 )
+            v169 = 0i64;
+            if ( v14 > 1 )
             {
-              v169 = v6->m_projectionAxis.m_quad;
-              v170 = *(hkgpConvexHullImpl::Vertex **)v20;
-              v171 = 0i64;
+              v170 = v6->m_projectionAxis.m_quad;
+              v171 = *(hkgpConvexHullImpl::Vertex **)p_m_pendings;
               v172 = 0i64;
-              v173 = 1i64;
-              v174 = (unsigned int)(v15 - 1);
+              v173 = 0i64;
+              v174 = 1i64;
+              v175 = (unsigned int)(v14 - 1);
               do
               {
-                v175 = _mm_mul_ps(v170[v173].m_source.m_quad, v169);
-                v176 = _mm_mul_ps(*(__m128 *)((char *)&v170->m_source.m_quad + v172), v169);
-                v177 = (float)(COERCE_FLOAT(_mm_shuffle_ps(v175, v175, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v175, v175, 0)))
-                     + COERCE_FLOAT(_mm_shuffle_ps(v175, v175, 170));
-                if ( v177 < (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v176, v176, 85))
-                                          + COERCE_FLOAT(_mm_shuffle_ps(v176, v176, 0)))
-                                  + COERCE_FLOAT(_mm_shuffle_ps(v176, v176, 170))) )
+                v176 = _mm_mul_ps(v171[v174].m_source.m_quad, v170);
+                v177 = _mm_mul_ps(*(__m128 *)((char *)&v171->m_source.m_quad + v173), v170);
+                v178 = (float)(_mm_shuffle_ps(v176, v176, 85).m128_f32[0] + _mm_shuffle_ps(v176, v176, 0).m128_f32[0])
+                     + _mm_shuffle_ps(v176, v176, 170).m128_f32[0];
+                if ( v178 < (float)((float)(_mm_shuffle_ps(v177, v177, 85).m128_f32[0]
+                                          + _mm_shuffle_ps(v177, v177, 0).m128_f32[0])
+                                  + _mm_shuffle_ps(v177, v177, 170).m128_f32[0]) )
                 {
-                  v167 = v166;
-                  v172 = v173 * 64;
+                  v168 = v167;
+                  v173 = v174 * 64;
                 }
-                v178 = _mm_mul_ps(*(__m128 *)((char *)&v170->m_source.m_quad + v171), v169);
-                if ( v177 > (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v178, v178, 85))
-                                          + COERCE_FLOAT(_mm_shuffle_ps(v178, v178, 0)))
-                                  + COERCE_FLOAT(_mm_shuffle_ps(v178, v178, 170))) )
+                v179 = _mm_mul_ps(*(__m128 *)((char *)&v171->m_source.m_quad + v172), v170);
+                if ( v178 > (float)((float)(_mm_shuffle_ps(v179, v179, 85).m128_f32[0]
+                                          + _mm_shuffle_ps(v179, v179, 0).m128_f32[0])
+                                  + _mm_shuffle_ps(v179, v179, 170).m128_f32[0]) )
                 {
-                  v168 = v166;
-                  v171 = v173 * 64;
+                  v169 = v167;
+                  v172 = v174 * 64;
                 }
-                ++v166;
-                ++v173;
-                --v174;
+                ++v167;
+                ++v174;
+                --v175;
               }
-              while ( v174 );
-              v6 = (hkgpConvexHullImpl *)v228;
-              v15 = numPointsa;
+              while ( v175 );
+              v6 = this;
+              v14 = numPointsa;
             }
-            v179 = *(_QWORD *)v20 + (v167 << 6);
-            v180 = *(_QWORD *)v20 + (v168 << 6);
-            v181 = *(_DWORD *)(v180 + 52);
-            v182 = *(_DWORD *)(v179 + 52);
-            v183 = *(_DWORD *)(v179 + 36);
-            v184 = *(_OWORD *)(v179 + 16);
+            v180 = *(_QWORD *)p_m_pendings + (v168 << 6);
+            v181 = *(_QWORD *)p_m_pendings + (v169 << 6);
+            v182 = *(_DWORD *)(v181 + 52);
+            v183 = *(_DWORD *)(v180 + 52);
+            v184 = *(_DWORD *)(v180 + 36);
             v185 = *(_OWORD *)(v180 + 16);
-            v186 = *(_DWORD *)(v179 + 44);
+            v186 = *(_OWORD *)(v181 + 16);
             v187 = *(_DWORD *)(v180 + 44);
-            LODWORD(v226) = *(_DWORD *)(v179 + 32);
-            v209 = v181;
-            v214 = v182;
-            v188 = *(_DWORD *)(v179 + 40);
-            HIDWORD(v226) = v183;
-            v189 = *(_DWORD *)(v180 + 36);
-            v227 = v188;
-            v223 = __PAIR__(v189, *(_DWORD *)(v180 + 32));
-            v224 = *(_DWORD *)(v180 + 40);
-            if ( v226 != v223 )
+            v188 = *(_DWORD *)(v181 + 44);
+            LODWORD(v225) = *(_DWORD *)(v180 + 32);
+            v210 = v182;
+            v213 = v183;
+            v189 = *(_DWORD *)(v180 + 40);
+            HIDWORD(v225) = v184;
+            v190 = *(_DWORD *)(v181 + 36);
+            v226 = v189;
+            v222 = __PAIR64__(v190, *(_DWORD *)(v181 + 32));
+            v223 = *(_DWORD *)(v181 + 40);
+            if ( v225 != v222 )
             {
-              v190 = v6->m_mesh.m_vertices.m_allocator.m_firstPool;
-              v191 = (signed __int64)&v6->m_mesh.m_vertices;
-              if ( !v190 || !v190->m_free )
+              m_firstPool = v6->m_mesh.m_vertices.m_allocator.m_firstPool;
+              v192 = &v6->m_mesh.m_vertices;
+              if ( !m_firstPool || !m_firstPool->m_free )
               {
-                v190 = hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::allocateNewPool(&v6->m_mesh.m_vertices.m_allocator);
-                v191 = (signed __int64)&v6->m_mesh.m_vertices;
+                m_firstPool = hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::allocateNewPool(&v6->m_mesh.m_vertices.m_allocator);
+                v192 = &v6->m_mesh.m_vertices;
               }
-              if ( v190 )
+              if ( m_firstPool )
               {
-                v192 = v190->m_free;
-                v190->m_free = *(hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::Item **)v192->m_data;
-                v192->m_pool = v190;
-                ++v190->m_used;
-                *(_DWORD *)&v192->m_data[44] = 0;
-                *(_DWORD *)&v192->m_data[52] = -1;
-                *(_QWORD *)&v192->m_data[8] = 0i64;
-                *(_QWORD *)v192->m_data = *(_QWORD *)(v191 + 8);
-                v193 = *(_QWORD *)(v191 + 8);
-                if ( v193 )
-                  *(_QWORD *)(v193 + 8) = v192;
-                ++*(_DWORD *)(v191 + 16);
-                *(_QWORD *)(v191 + 8) = v192;
-              }
-              else
-              {
-                v192 = 0i64;
-              }
-              v194 = *(hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::Pool **)v191;
-              if ( !*(_QWORD *)v191 || !v194->m_free )
-              {
-                v194 = hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::allocateNewPool((hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator> *)v191);
-                v191 = (signed __int64)&v6->m_mesh.m_vertices;
-              }
-              if ( v194 )
-              {
-                v195 = v194->m_free;
-                v194->m_free = *(hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::Item **)v195->m_data;
-                v195->m_pool = v194;
-                ++v194->m_used;
-                *(_DWORD *)&v195->m_data[44] = 0;
-                *(_DWORD *)&v195->m_data[52] = -1;
-                *(_QWORD *)&v195->m_data[8] = 0i64;
-                *(_QWORD *)v195->m_data = *(_QWORD *)(v191 + 8);
-                v196 = *(_QWORD *)(v191 + 8);
-                if ( v196 )
-                  *(_QWORD *)(v196 + 8) = v195;
-                ++*(_DWORD *)(v191 + 16);
-                *(_QWORD *)(v191 + 8) = v195;
+                v193 = m_firstPool->m_free;
+                m_firstPool->m_free = *(hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::Item **)v193->m_data;
+                v193->m_pool = m_firstPool;
+                ++m_firstPool->m_used;
+                *(_DWORD *)&v193->m_data[44] = 0;
+                *(_DWORD *)&v193->m_data[52] = -1;
+                *(_QWORD *)&v193->m_data[8] = 0i64;
+                *(_QWORD *)v193->m_data = v192->m_used;
+                m_used = v192->m_used;
+                if ( m_used )
+                  m_used->m_prev = (hkgpConvexHullImpl::Vertex *)v193;
+                ++v192->m_numUsed;
+                v192->m_used = (hkgpConvexHullImpl::Vertex *)v193;
               }
               else
               {
-                v195 = 0i64;
+                v193 = 0i64;
               }
-              v197 = v226;
-              *(_OWORD *)&v192->m_data[16] = v184;
-              *(_DWORD *)&v192->m_data[32] = v197;
-              *(_DWORD *)&v192->m_data[36] = HIDWORD(v226);
-              *(_DWORD *)&v192->m_data[40] = v227;
-              v198 = v214;
-              *(_DWORD *)&v192->m_data[48] = 0;
-              *(_DWORD *)&v192->m_data[44] = v186;
-              *(_DWORD *)&v192->m_data[52] = v198;
-              v199 = v223;
-              *(_OWORD *)&v195->m_data[16] = v185;
-              *(_DWORD *)&v195->m_data[32] = v199;
-              *(_DWORD *)&v195->m_data[36] = HIDWORD(v223);
-              *(_DWORD *)&v195->m_data[40] = v224;
-              v200 = v209;
-              *(_DWORD *)&v195->m_data[44] = v187;
-              goto LABEL_222;
+              v195 = v192->m_allocator.m_firstPool;
+              if ( !v192->m_allocator.m_firstPool || !v195->m_free )
+              {
+                v195 = hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::allocateNewPool(&v192->m_allocator);
+                v192 = &v6->m_mesh.m_vertices;
+              }
+              if ( v195 )
+              {
+                v196 = v195->m_free;
+                v195->m_free = *(hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::Item **)v196->m_data;
+                v196->m_pool = v195;
+                ++v195->m_used;
+                *(_DWORD *)&v196->m_data[44] = 0;
+                *(_DWORD *)&v196->m_data[52] = -1;
+                *(_QWORD *)&v196->m_data[8] = 0i64;
+                *(_QWORD *)v196->m_data = v192->m_used;
+                v197 = v192->m_used;
+                if ( v197 )
+                  v197->m_prev = (hkgpConvexHullImpl::Vertex *)v196;
+                ++v192->m_numUsed;
+                v192->m_used = (hkgpConvexHullImpl::Vertex *)v196;
+              }
+              else
+              {
+                v196 = 0i64;
+              }
+              v198 = v225;
+              *(_OWORD *)&v193->m_data[16] = v185;
+              *(_QWORD *)&v193->m_data[32] = __PAIR64__(HIDWORD(v225), v198);
+              *(_DWORD *)&v193->m_data[40] = v226;
+              v199 = v213;
+              *(_DWORD *)&v193->m_data[48] = 0;
+              *(_DWORD *)&v193->m_data[44] = v187;
+              *(_DWORD *)&v193->m_data[52] = v199;
+              v200 = v222;
+              *(_OWORD *)&v196->m_data[16] = v186;
+              *(_QWORD *)&v196->m_data[32] = __PAIR64__(HIDWORD(v222), v200);
+              *(_DWORD *)&v196->m_data[40] = v223;
+              v201 = v210;
+              *(_DWORD *)&v196->m_data[44] = v188;
+              goto LABEL_220;
             }
             v6->m_dimensions = 0;
           }
         }
-        v201 = v6->m_mesh.m_vertices.m_allocator.m_firstPool;
-        v202 = (signed __int64)&v6->m_mesh.m_vertices;
-        if ( !v201 || !v201->m_free )
+        v202 = v6->m_mesh.m_vertices.m_allocator.m_firstPool;
+        v203 = &v6->m_mesh.m_vertices;
+        if ( !v202 || !v202->m_free )
         {
-          v201 = hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::allocateNewPool(&v6->m_mesh.m_vertices.m_allocator);
-          v202 = (signed __int64)&v6->m_mesh.m_vertices;
+          v202 = hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::allocateNewPool(&v6->m_mesh.m_vertices.m_allocator);
+          v203 = &v6->m_mesh.m_vertices;
         }
-        if ( v201 )
+        if ( v202 )
         {
-          v195 = v201->m_free;
-          v201->m_free = *(hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::Item **)v195->m_data;
-          v195->m_pool = v201;
-          ++v201->m_used;
-          *(_DWORD *)&v195->m_data[44] = 0;
-          *(_DWORD *)&v195->m_data[52] = -1;
-          *(_QWORD *)&v195->m_data[8] = 0i64;
-          *(_QWORD *)v195->m_data = *(_QWORD *)(v202 + 8);
-          v203 = *(_QWORD *)(v202 + 8);
-          if ( v203 )
-            *(_QWORD *)(v203 + 8) = v195;
-          ++*(_DWORD *)(v202 + 16);
-          *(_QWORD *)(v202 + 8) = v195;
+          v196 = v202->m_free;
+          v202->m_free = *(hkGeometryProcessing::PoolAllocator<hkgpConvexHullImpl::Vertex,32,hkContainerHeapAllocator>::Item **)v196->m_data;
+          v196->m_pool = v202;
+          ++v202->m_used;
+          *(_DWORD *)&v196->m_data[44] = 0;
+          *(_DWORD *)&v196->m_data[52] = -1;
+          *(_QWORD *)&v196->m_data[8] = 0i64;
+          *(_QWORD *)v196->m_data = v203->m_used;
+          v204 = v203->m_used;
+          if ( v204 )
+            v204->m_prev = (hkgpConvexHullImpl::Vertex *)v196;
+          ++v203->m_numUsed;
+          v203->m_used = (hkgpConvexHullImpl::Vertex *)v196;
         }
         else
         {
-          v195 = 0i64;
+          v196 = 0i64;
         }
-        v204 = *(hkgpConvexHullImpl::Vertex **)v20;
-        *(_OWORD *)&v195->m_data[16] = *(_OWORD *)(*(_QWORD *)v20 + 16i64);
-        *(_DWORD *)&v195->m_data[32] = v204->m_x[0];
-        *(_DWORD *)&v195->m_data[36] = v204->m_x[1];
-        *(_DWORD *)&v195->m_data[40] = v204->m_x[2];
-        *(float *)&v195->m_data[44] = v204->m_scratch;
-        *(_DWORD *)&v195->m_data[48] = v204->m_refs;
-        v200 = v204->m_index;
-LABEL_222:
-        *(_DWORD *)&v195->m_data[48] = 0;
-        *(_DWORD *)&v195->m_data[52] = v200;
-        goto LABEL_223;
+        v205 = *(hkgpConvexHullImpl::Vertex **)p_m_pendings;
+        *(_OWORD *)&v196->m_data[16] = *(_OWORD *)(*(_QWORD *)p_m_pendings + 16i64);
+        *(_DWORD *)&v196->m_data[32] = v205->m_x[0];
+        *(_DWORD *)&v196->m_data[36] = v205->m_x[1];
+        *(_DWORD *)&v196->m_data[40] = v205->m_x[2];
+        *(float *)&v196->m_data[44] = v205->m_scratch;
+        *(_DWORD *)&v196->m_data[48] = v205->m_refs;
+        v201 = v205->m_index;
+LABEL_220:
+        *(_DWORD *)&v196->m_data[48] = 0;
+        *(_DWORD *)&v196->m_data[52] = v201;
+        goto LABEL_221;
       }
-      hkgpConvexHullImpl::computeProjectionPlane(v6, pointsa, v15, v18);
-      v15 = numPointsa;
+      hkgpConvexHullImpl::computeProjectionPlane(v6, points, v14, p_m_projectionPlane);
+      v14 = numPointsa;
     }
-    v205 = 1;
-    goto LABEL_29;
+    v206 = 1;
+    goto LABEL_27;
   }
-LABEL_223:
+LABEL_221:
   if ( v6->m_dimensions != -1 )
   {
     if ( v6->m_config.m_buildIndices.m_bool )
@@ -1306,8 +1294,5 @@ LABEL_223:
       hkgpConvexHullImpl::buildMassProperties<hkgpConvexHullImpl::PositionAsTransform>(v6, (hkResult *)&numPointsa);
   }
   return (unsigned int)v6->m_dimensions;
-}sitionAsTransform>(v6, (hkResult *)&numPointsa);
-  }
-  return (unsigned int)v6->m_dimensions;
 }
 

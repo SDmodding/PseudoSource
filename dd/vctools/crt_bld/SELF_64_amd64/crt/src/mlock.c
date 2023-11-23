@@ -1,10 +1,10 @@
 // File Line: 137
 // RVA: 0x12CD270
-signed __int64 __fastcall mtinitlocks()
+__int64 __fastcall mtinitlocks()
 {
   int v0; // esi
   $8E2FCADB8B1A21CF4E0353D18BB81613 *v1; // rbx
-  signed __int64 v2; // rdi
+  __int64 v2; // rdi
   __int64 v3; // rax
   _RTL_CRITICAL_SECTION *v4; // rcx
 
@@ -13,7 +13,7 @@ signed __int64 __fastcall mtinitlocks()
   v2 = 36i64;
   do
   {
-    if ( v1->kind == 1 )
+    if ( v1->kind == lkPrealloc )
     {
       v3 = v0++;
       v4 = &lclcritsects[v3];
@@ -31,11 +31,11 @@ signed __int64 __fastcall mtinitlocks()
 // RVA: 0x12CD12C
 void mtdeletelocks()
 {
-  signed __int64 v0; // rdi
+  __int64 v0; // rdi
   $8E2FCADB8B1A21CF4E0353D18BB81613 *v1; // rbx
-  signed __int64 v2; // rbp
-  LPCRITICAL_SECTION v3; // rsi
-  $1DD7A03358E0D01DD359262876E6A0F0 *v4; // rbx
+  __int64 v2; // rbp
+  LPCRITICAL_SECTION lock; // rsi
+  $1DD7A03358E0D01DD359262876E6A0F0 *p_kind; // rbx
   _RTL_CRITICAL_SECTION *v5; // rcx
 
   v0 = 36i64;
@@ -43,27 +43,27 @@ void mtdeletelocks()
   v2 = 36i64;
   do
   {
-    v3 = v1->lock;
-    if ( v1->lock && v1->kind != 1 )
+    lock = v1->lock;
+    if ( v1->lock && v1->kind != lkPrealloc )
     {
       DeleteCriticalSection(v1->lock);
-      free(v3);
+      free(lock);
       v1->lock = 0i64;
     }
     ++v1;
     --v2;
   }
   while ( v2 );
-  v4 = &locktable[0].kind;
+  p_kind = &locktable[0].kind;
   do
   {
-    v5 = (_RTL_CRITICAL_SECTION *)*((_QWORD *)v4 - 1);
+    v5 = (_RTL_CRITICAL_SECTION *)*((_QWORD *)p_kind - 1);
     if ( v5 )
     {
-      if ( *v4 == 1 )
+      if ( *p_kind == lkPrealloc )
         DeleteCriticalSection(v5);
     }
-    v4 += 4;
+    p_kind += 4;
     --v0;
   }
   while ( v0 );
@@ -71,7 +71,7 @@ void mtdeletelocks()
 
 // File Line: 254
 // RVA: 0x12CD1B4
-signed __int64 __fastcall mtinitlocknum(int locknum)
+__int64 __fastcall mtinitlocknum(int locknum)
 {
   __int64 v1; // rbx
   _RTL_CRITICAL_SECTION *v3; // rdi
@@ -80,7 +80,7 @@ signed __int64 __fastcall mtinitlocknum(int locknum)
   {
     FF_MSGBANNER();
     NMSG_WRITE(30);
-    _crtExitProcess(255);
+    _crtExitProcess(0xFFu);
   }
   v1 = locknum;
   if ( locktable[locknum].lock )

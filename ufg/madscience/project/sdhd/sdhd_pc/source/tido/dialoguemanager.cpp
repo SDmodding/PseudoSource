@@ -3,7 +3,7 @@
 __int64 UFG::_dynamic_initializer_for__qwsPlayCellPhone__()
 {
   UFG::qWiseSymbol::create_from_string(&qwsPlayCellPhone, "play_cellphone");
-  return atexit(UFG::_dynamic_atexit_destructor_for__qwsPlayCellPhone__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qwsPlayCellPhone__);
 }
 
 // File Line: 59
@@ -11,7 +11,7 @@ __int64 UFG::_dynamic_initializer_for__qwsPlayCellPhone__()
 __int64 UFG::_dynamic_initializer_for__qwsPlay2D__()
 {
   UFG::qWiseSymbol::create_from_string(&qwsPlay2D, "play_2d");
-  return atexit(UFG::_dynamic_atexit_destructor_for__qwsPlay2D__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qwsPlay2D__);
 }
 
 // File Line: 60
@@ -19,7 +19,7 @@ __int64 UFG::_dynamic_initializer_for__qwsPlay2D__()
 __int64 UFG::_dynamic_initializer_for__qwsPlayCB__()
 {
   UFG::qWiseSymbol::create_from_string(&qwsPlayCB, "play_cb");
-  return atexit(UFG::_dynamic_atexit_destructor_for__qwsPlayCB__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qwsPlayCB__);
 }
 
 // File Line: 61
@@ -27,7 +27,7 @@ __int64 UFG::_dynamic_initializer_for__qwsPlayCB__()
 __int64 UFG::_dynamic_initializer_for__qwsPlayDrivingNoLip__()
 {
   UFG::qWiseSymbol::create_from_string(&qwsPlayDrivingNoLip, "play_driving_no_lip");
-  return atexit(UFG::_dynamic_atexit_destructor_for__qwsPlayDrivingNoLip__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qwsPlayDrivingNoLip__);
 }
 
 // File Line: 63
@@ -35,7 +35,7 @@ __int64 UFG::_dynamic_initializer_for__qwsPlayDrivingNoLip__()
 __int64 UFG::_dynamic_initializer_for__qwsPlayCellPhone0__()
 {
   UFG::qWiseSymbol::create_from_string(&qwsPlayCellPhone0, "play_cellphone_0");
-  return atexit(UFG::_dynamic_atexit_destructor_for__qwsPlayCellPhone0__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qwsPlayCellPhone0__);
 }
 
 // File Line: 64
@@ -43,7 +43,7 @@ __int64 UFG::_dynamic_initializer_for__qwsPlayCellPhone0__()
 __int64 UFG::_dynamic_initializer_for__qwsPlayCellPhone2__()
 {
   UFG::qWiseSymbol::create_from_string(&qwsPlayCellPhone2, "play_cellphone_2");
-  return atexit(UFG::_dynamic_atexit_destructor_for__qwsPlayCellPhone2__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qwsPlayCellPhone2__);
 }
 
 // File Line: 65
@@ -51,7 +51,7 @@ __int64 UFG::_dynamic_initializer_for__qwsPlayCellPhone2__()
 __int64 UFG::_dynamic_initializer_for__qwsPlayCellPhone4__()
 {
   UFG::qWiseSymbol::create_from_string(&qwsPlayCellPhone4, "play_cellphone_4");
-  return atexit(UFG::_dynamic_atexit_destructor_for__qwsPlayCellPhone4__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qwsPlayCellPhone4__);
 }
 
 // File Line: 66
@@ -59,7 +59,7 @@ __int64 UFG::_dynamic_initializer_for__qwsPlayCellPhone4__()
 __int64 UFG::_dynamic_initializer_for__qwsPlayCellPhone6__()
 {
   UFG::qWiseSymbol::create_from_string(&qwsPlayCellPhone6, "play_cellphone_6");
-  return atexit(UFG::_dynamic_atexit_destructor_for__qwsPlayCellPhone6__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qwsPlayCellPhone6__);
 }
 
 // File Line: 67
@@ -67,7 +67,7 @@ __int64 UFG::_dynamic_initializer_for__qwsPlayCellPhone6__()
 __int64 UFG::_dynamic_initializer_for__qwsPlayCB4__()
 {
   UFG::qWiseSymbol::create_from_string(&qwsPlayCB4, "play_cb_4");
-  return atexit(UFG::_dynamic_atexit_destructor_for__qwsPlayCB4__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qwsPlayCB4__);
 }
 
 // File Line: 68
@@ -75,7 +75,7 @@ __int64 UFG::_dynamic_initializer_for__qwsPlayCB4__()
 __int64 UFG::_dynamic_initializer_for__qwsPlayCB6__()
 {
   UFG::qWiseSymbol::create_from_string(&qwsPlayCB6, "play_cb_6");
-  return atexit(UFG::_dynamic_atexit_destructor_for__qwsPlayCB6__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qwsPlayCB6__);
 }
 
 // File Line: 69
@@ -83,7 +83,7 @@ __int64 UFG::_dynamic_initializer_for__qwsPlayCB6__()
 __int64 UFG::_dynamic_initializer_for__qwsPlayPoliceBullhorn__()
 {
   UFG::qWiseSymbol::create_from_string(&qwsPlayPoliceBullhorn, "Play_police_bullhorn");
-  return atexit(UFG::_dynamic_atexit_destructor_for__qwsPlayPoliceBullhorn__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qwsPlayPoliceBullhorn__);
 }
 
 // File Line: 70
@@ -91,17 +91,16 @@ __int64 UFG::_dynamic_initializer_for__qwsPlayPoliceBullhorn__()
 __int64 UFG::_dynamic_initializer_for__qwsPlayCellPhoneRingOutgoing__()
 {
   UFG::qWiseSymbol::create_from_string(&qwsPlayCellPhoneRingOutgoing, "Play_cellphone_ring_outgoing");
-  return atexit(UFG::_dynamic_atexit_destructor_for__qwsPlayCellPhoneRingOutgoing__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qwsPlayCellPhoneRingOutgoing__);
 }
 
 // File Line: 138
 // RVA: 0x5931C0
-void __fastcall UFG::Conversation::Conversation(UFG::Conversation *this, unsigned int uid, UFG::Conversation::eConversationType type)
+void __fastcall UFG::Conversation::Conversation(
+        UFG::Conversation *this,
+        unsigned int uid,
+        UFG::Conversation::eConversationType type)
 {
-  UFG::qList<UFG::ConversationElement,UFG::ConversationElement,1,0> *v3; // [rsp+58h] [rbp+20h]
-  UFG::qList<UFG::qPointerNode<UFG::ConversationElement>,UFG::qPointerNode<UFG::ConversationElement>,1,0> *v4; // [rsp+58h] [rbp+20h]
-  UFG::qList<UFG::qValueNode<UFG::qSymbol>,UFG::qValueNode<UFG::qSymbol>,1,0> *v5; // [rsp+58h] [rbp+20h]
-
   this->mNode.mParent = 0i64;
   this->mNode.mChild[0] = 0i64;
   this->mNode.mChild[1] = 0i64;
@@ -112,22 +111,19 @@ void __fastcall UFG::Conversation::Conversation(UFG::Conversation *this, unsigne
   *(_DWORD *)&this->m_curLine = 0;
   this->m_linePriority = 7;
   this->m_type = type;
-  v3 = &this->m_lines;
-  v3->mNode.mPrev = &v3->mNode;
-  v3->mNode.mNext = &v3->mNode;
-  v4 = &this->m_prevPlayed;
-  v4->mNode.mPrev = &v4->mNode;
-  v4->mNode.mNext = &v4->mNode;
-  v5 = &this->m_animationBanks;
-  v5->mNode.mPrev = &v5->mNode;
-  v5->mNode.mNext = &v5->mNode;
+  this->m_lines.mNode.mPrev = &this->m_lines.mNode;
+  this->m_lines.mNode.mNext = &this->m_lines.mNode;
+  this->m_prevPlayed.mNode.mPrev = &this->m_prevPlayed.mNode;
+  this->m_prevPlayed.mNode.mNext = &this->m_prevPlayed.mNode;
+  this->m_animationBanks.mNode.mPrev = &this->m_animationBanks.mNode;
+  this->m_animationBanks.mNode.mNext = &this->m_animationBanks.mNode;
   this->m_externalSourcePlaybackEvent = 0;
   *(_QWORD *)&this->m_topic = 25i64;
   *(_QWORD *)&this->m_maxSeparationDistance = 1101004800i64;
   this->m_interruptedTime = 0.0;
   *(_DWORD *)&this->m_avoidRepeatingLastNLines = 1;
   *((_BYTE *)this + 168) = -118;
-  *((_BYTE *)this + 169) = *((_BYTE *)this + 169) & 0xFB | 0xA;
+  *((_BYTE *)this + 169) = *((_BYTE *)this + 169) & 0xF1 | 0xA;
   UFG::Conversation::Clear(this);
 }
 
@@ -135,88 +131,80 @@ void __fastcall UFG::Conversation::Conversation(UFG::Conversation *this, unsigne
 // RVA: 0x594300
 void __fastcall UFG::Conversation::~Conversation(UFG::Conversation *this)
 {
-  UFG::Conversation *v1; // rdi
-  UFG::qList<UFG::qValueNode<UFG::qSymbol>,UFG::qValueNode<UFG::qSymbol>,1,0> *v2; // rbx
-  UFG::qNode<UFG::qValueNode<UFG::qSymbol>,UFG::qValueNode<UFG::qSymbol> > *v3; // rcx
-  UFG::qNode<UFG::qValueNode<UFG::qSymbol>,UFG::qValueNode<UFG::qSymbol> > *v4; // rax
+  UFG::qList<UFG::qValueNode<UFG::qSymbol>,UFG::qValueNode<UFG::qSymbol>,1,0> *p_m_animationBanks; // rbx
+  UFG::qNode<UFG::qValueNode<UFG::qSymbol>,UFG::qValueNode<UFG::qSymbol> > *mPrev; // rcx
+  UFG::qNode<UFG::qValueNode<UFG::qSymbol>,UFG::qValueNode<UFG::qSymbol> > *mNext; // rax
   UFG::qNode<UFG::qPointerNode<UFG::ConversationElement>,UFG::qPointerNode<UFG::ConversationElement> > *v5; // rcx
   UFG::qNode<UFG::qPointerNode<UFG::ConversationElement>,UFG::qPointerNode<UFG::ConversationElement> > *v6; // rax
   UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *v7; // rcx
   UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *v8; // rax
 
-  v1 = this;
   this->vfptr = (UFG::ConversationVtbl *)&UFG::Conversation::`vftable;
-  v2 = &this->m_animationBanks;
+  p_m_animationBanks = &this->m_animationBanks;
   UFG::qList<UFG::FractureConnectivity::Connection,UFG::FractureConnectivity::Connection,1,0>::DeleteNodes((UFG::qList<UFG::qReflectField,UFG::qReflectField,1,0> *)&this->m_animationBanks);
-  v3 = v2->mNode.mPrev;
-  v4 = v2->mNode.mNext;
-  v3->mNext = v4;
-  v4->mPrev = v3;
-  v2->mNode.mPrev = &v2->mNode;
-  v2->mNode.mNext = &v2->mNode;
-  UFG::qList<UFG::FractureConnectivity::Connection,UFG::FractureConnectivity::Connection,1,0>::DeleteNodes((UFG::qList<UFG::qReflectField,UFG::qReflectField,1,0> *)&v1->m_prevPlayed);
-  v5 = v1->m_prevPlayed.mNode.mPrev;
-  v6 = v1->m_prevPlayed.mNode.mNext;
+  mPrev = p_m_animationBanks->mNode.mPrev;
+  mNext = p_m_animationBanks->mNode.mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  p_m_animationBanks->mNode.mPrev = &p_m_animationBanks->mNode;
+  p_m_animationBanks->mNode.mNext = &p_m_animationBanks->mNode;
+  UFG::qList<UFG::FractureConnectivity::Connection,UFG::FractureConnectivity::Connection,1,0>::DeleteNodes((UFG::qList<UFG::qReflectField,UFG::qReflectField,1,0> *)&this->m_prevPlayed);
+  v5 = this->m_prevPlayed.mNode.mPrev;
+  v6 = this->m_prevPlayed.mNode.mNext;
   v5->mNext = v6;
   v6->mPrev = v5;
-  v1->m_prevPlayed.mNode.mPrev = &v1->m_prevPlayed.mNode;
-  v1->m_prevPlayed.mNode.mNext = &v1->m_prevPlayed.mNode;
-  UFG::qList<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption,1,0>::DeleteNodes((UFG::qList<UFG::GUIObjectBase,UFG::GUIObjectBase,1,0> *)&v1->m_lines);
-  v7 = v1->m_lines.mNode.mPrev;
-  v8 = v1->m_lines.mNode.mNext;
+  this->m_prevPlayed.mNode.mPrev = &this->m_prevPlayed.mNode;
+  this->m_prevPlayed.mNode.mNext = &this->m_prevPlayed.mNode;
+  UFG::qList<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption,1,0>::DeleteNodes((UFG::qList<UFG::GUIObjectBase,UFG::GUIObjectBase,1,0> *)&this->m_lines);
+  v7 = this->m_lines.mNode.mPrev;
+  v8 = this->m_lines.mNode.mNext;
   v7->mNext = v8;
   v8->mPrev = v7;
-  v1->m_lines.mNode.mPrev = &v1->m_lines.mNode;
-  v1->m_lines.mNode.mNext = &v1->m_lines.mNode;
+  this->m_lines.mNode.mPrev = &this->m_lines.mNode;
+  this->m_lines.mNode.mNext = &this->m_lines.mNode;
 }
 
 // File Line: 164
 // RVA: 0x5987F0
 void __fastcall UFG::Conversation::Clear(UFG::Conversation *this)
 {
-  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *v1; // rax
-  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **v2; // rdi
-  UFG::Conversation *v3; // rbx
+  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *mNext; // rax
+  UFG::Conversation::eConversationType *i; // rdi
   UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *v4; // rcx
-  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *v5; // rdx
+  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *mPrev; // rdx
 
-  v1 = this->m_lines.mNode.mNext;
-  v2 = (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **)&this->m_type;
-  v3 = this;
-  if ( &v1[-1].mNext != (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **)&this->m_type )
+  mNext = this->m_lines.mNode.mNext;
+  for ( i = &this->m_type;
+        &mNext[-1].mNext != (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **)i;
+        mNext = this->m_lines.mNode.mNext )
   {
-    do
-    {
-      v4 = v1->mNext;
-      v5 = v1->mPrev;
-      v5->mNext = v4;
-      v4->mPrev = v5;
-      v1->mPrev = v1;
-      v1->mNext = v1;
-      if ( v1 != (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *)8 )
-        ((void (__fastcall *)(UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **, signed __int64))v1[-1].mNext->mPrev)(
-          &v1[-1].mNext,
-          1i64);
-      v1 = v3->m_lines.mNode.mNext;
-    }
-    while ( &v1[-1].mNext != v2 );
+    v4 = mNext->mNext;
+    mPrev = mNext->mPrev;
+    mPrev->mNext = v4;
+    v4->mPrev = mPrev;
+    mNext->mPrev = mNext;
+    mNext->mNext = mNext;
+    if ( mNext != (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *)8 )
+      ((void (__fastcall *)(UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **, __int64))mNext[-1].mNext->mPrev)(
+        &mNext[-1].mNext,
+        1i64);
   }
-  v3->m_onResume = 0i64;
-  v3->m_onInterrupt = 0i64;
-  v3->m_activeElement = 0i64;
+  this->m_onResume = 0i64;
+  this->m_onInterrupt = 0i64;
+  this->m_activeElement = 0i64;
 }
 
 // File Line: 177
 // RVA: 0x596020
 char __fastcall UFG::Conversation::AddElement(UFG::Conversation *this, UFG::ConversationElement *element)
 {
-  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *v2; // rax
+  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *mPrev; // rax
   UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *v3; // rdx
 
-  v2 = this->m_lines.mNode.mPrev;
-  v3 = (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *)&element->mPrev;
-  v2->mNext = v3;
-  v3->mPrev = v2;
+  mPrev = this->m_lines.mNode.mPrev;
+  v3 = &element->UFG::qNode<UFG::ConversationElement,UFG::ConversationElement>;
+  mPrev->mNext = v3;
+  v3->mPrev = mPrev;
   v3->mNext = &this->m_lines.mNode;
   this->m_lines.mNode.mPrev = v3;
   ++this->m_numElements;
@@ -228,70 +216,67 @@ char __fastcall UFG::Conversation::AddElement(UFG::Conversation *this, UFG::Conv
 bool __fastcall UFG::Conversation::UpdateInterruptState(UFG::Conversation *this, float delta_sec)
 {
   float v2; // xmm1_4
-  UFG::Conversation *v3; // rbx
-  UFG::eInterruptType v4; // eax
+  UFG::eInterruptType m_interruptType; // eax
   bool result; // al
   UFG::Conversation *v6; // rax
   UFG::Conversation *v7; // rcx
   float v8; // xmm0_4
-  UFG::Conversation *v9; // rcx
+  UFG::Conversation *m_onInterrupt; // rcx
 
   v2 = delta_sec + this->m_interruptedTime;
-  v3 = this;
   this->m_state = this->m_newState;
-  v4 = this->m_interruptType;
+  m_interruptType = this->m_interruptType;
   this->m_interruptedTime = v2;
-  switch ( v4 )
+  switch ( m_interruptType )
   {
-    case 1:
+    case eInterruptType_Separation:
       if ( UFG::Conversation::IsFurtherThanMaxSeparationDistance(this, this->m_activeElement) )
         goto LABEL_20;
-      v3->m_newState = 5;
+      this->m_newState = eConversationState_Resume;
       return 1;
-    case 2:
-      v9 = this->m_onInterrupt;
-      if ( v9 && v9->m_state == 7 )
+    case eInterruptType_Collision:
+      m_onInterrupt = this->m_onInterrupt;
+      if ( m_onInterrupt && m_onInterrupt->m_state == eConversationState_Finished )
       {
-        *((_BYTE *)v9 + 168) |= 2u;
-        v3->m_onInterrupt = 0i64;
+        *((_BYTE *)m_onInterrupt + 168) |= 2u;
+        this->m_onInterrupt = 0i64;
       }
-      if ( v3->m_onInterrupt )
+      if ( this->m_onInterrupt )
         goto LABEL_20;
       v8 = FLOAT_6_0;
       goto LABEL_18;
-    case 3:
-    case 5:
-    case 7:
-    case 8:
+    case eInterruptType_GetOutOfVehicle:
+    case eInterruptType_GunPointAt:
+    case eInterruptType_PDAHangup:
+    case eInterruptType_Social:
       v6 = this->m_onInterrupt;
-      if ( !v6 || v6->m_state != 7 )
+      if ( !v6 || v6->m_state != eConversationState_Finished )
         goto LABEL_20;
       *((_BYTE *)v6 + 168) |= 2u;
       result = 1;
       this->m_onInterrupt = 0i64;
-      return result;
-    case 4:
+      break;
+    case eInterruptType_HitReaction:
       v7 = this->m_onInterrupt;
-      if ( v7 && v7->m_state == 7 )
+      if ( v7 && v7->m_state == eConversationState_Finished )
       {
         *((_BYTE *)v7 + 168) |= 2u;
-        v3->m_onInterrupt = 0i64;
+        this->m_onInterrupt = 0i64;
       }
-      if ( !v3->m_onInterrupt )
+      if ( !this->m_onInterrupt )
       {
         v8 = FLOAT_2_0;
 LABEL_18:
-        if ( v8 < v3->m_interruptedTime )
+        if ( v8 < this->m_interruptedTime )
         {
-          v3->m_interruptedTime = 0.0;
-          v3->m_newState = 5;
+          this->m_interruptedTime = 0.0;
+          this->m_newState = eConversationState_Resume;
         }
       }
       goto LABEL_20;
-    case 6:
-      UFG::Conversation::ForceFinish(this, 5368709120i64);
-      result = 1;
-      break;
+    case eInterruptType_Death:
+      UFG::Conversation::ForceFinish(this, 0x140000000i64);
+      return 1;
     default:
 LABEL_20:
       result = 1;
@@ -304,46 +289,45 @@ LABEL_20:
 // RVA: 0x5B1110
 bool __fastcall UFG::Conversation::UpdateResumeState(UFG::Conversation *this, float delta_sec)
 {
-  UFG::Conversation *v2; // rbx
-  UFG::Conversation *v3; // rcx
+  UFG::Conversation *m_onResume; // rcx
   bool result; // al
-  UFG::eConversationState v5; // eax
+  UFG::eConversationState m_state; // eax
   bool v6; // zf
 
-  v2 = this;
-  v3 = this->m_onResume;
-  if ( v3 )
+  m_onResume = this->m_onResume;
+  if ( m_onResume )
   {
-    v5 = v3->m_state;
-    if ( v5 )
+    m_state = m_onResume->m_state;
+    if ( m_state )
     {
-      if ( v5 == 7 )
+      if ( m_state == eConversationState_Finished )
       {
-        v2->m_newState = 1;
-        v2->m_interruptedTime = 0.0;
-        *((_BYTE *)v3 + 168) |= 2u;
-        v2->m_onResume = 0i64;
+        this->m_newState = eConversationState_Playing;
+        this->m_interruptedTime = 0.0;
+        *((_BYTE *)m_onResume + 168) |= 2u;
+        this->m_onResume = 0i64;
       }
     }
     else
     {
-      v6 = v2->m_interruptType == 3;
-      v2->m_interruptedTime = delta_sec + v2->m_interruptedTime;
-      if ( v6 && UFG::Conversation::ConversantsInSameVehicle(v2) )
+      v6 = this->m_interruptType == eInterruptType_GetOutOfVehicle;
+      this->m_interruptedTime = delta_sec + this->m_interruptedTime;
+      if ( v6 && UFG::Conversation::ConversantsInSameVehicle(this) )
       {
-        UFG::Conversation::Start(v2->m_onResume);
+        UFG::Conversation::Start(this->m_onResume);
         result = 1;
-        v2->m_interruptType = 0;
+        this->m_interruptType = eInterruptType_None;
         return result;
       }
     }
   }
-  else if ( v2->m_interruptType != 3
-         || (v2->m_interruptedTime = delta_sec + v2->m_interruptedTime, UFG::Conversation::ConversantsInSameVehicle(v2)) )
+  else if ( this->m_interruptType != eInterruptType_GetOutOfVehicle
+         || (this->m_interruptedTime = delta_sec + this->m_interruptedTime,
+             UFG::Conversation::ConversantsInSameVehicle(this)) )
   {
     result = 1;
-    v2->m_newState = 1;
-    v2->m_interruptedTime = 0.0;
+    this->m_newState = eConversationState_Playing;
+    this->m_interruptedTime = 0.0;
     return result;
   }
   return 1;
@@ -353,19 +337,17 @@ bool __fastcall UFG::Conversation::UpdateResumeState(UFG::Conversation *this, fl
 // RVA: 0x5A49E0
 char __fastcall UFG::Conversation::OnResume(UFG::Conversation *this)
 {
-  UFG::Conversation *v1; // rbx
-  UFG::ConversationElement *v2; // rax
+  UFG::ConversationElement *ResumeElement; // rax
   bool v3; // zf
 
-  v1 = this;
-  v2 = UFG::Conversation::GetResumeElement(this);
-  v1->m_activeElement = v2;
-  if ( v2 )
-    v2->vfptr->Reset(v2);
-  v3 = v1->m_interruptType == 3;
-  v1->m_state = 5;
-  if ( !v3 || UFG::Conversation::ConversantsInSameVehicle(v1) )
-    v1->m_interruptType = 0;
+  ResumeElement = UFG::Conversation::GetResumeElement(this);
+  this->m_activeElement = ResumeElement;
+  if ( ResumeElement )
+    ResumeElement->vfptr->Reset(ResumeElement);
+  v3 = this->m_interruptType == eInterruptType_GetOutOfVehicle;
+  this->m_state = eConversationState_Resume;
+  if ( !v3 || UFG::Conversation::ConversantsInSameVehicle(this) )
+    this->m_interruptType = eInterruptType_None;
   return 1;
 }
 
@@ -373,83 +355,80 @@ char __fastcall UFG::Conversation::OnResume(UFG::Conversation *this)
 // RVA: 0x5A43E0
 char __fastcall UFG::Conversation::OnInterrupt(UFG::Conversation *this)
 {
-  UFG::Conversation *v1; // rdi
   UFG::SimObject *v2; // rsi
-  UFG::ConversationElement *v3; // rbp
+  UFG::ConversationElement *m_activeElement; // rbp
   __int64 v4; // r8
-  int v5; // edx
-  unsigned int v6; // ebx
-  UFG::AmbientConversation *v7; // rax
-  UFG::AmbientConversation *v8; // rbx
-  UFG::SimComponent *v9; // rax
-  UFG::SimObject *v10; // r8
+  unsigned int mStringHash32; // ebx
+  UFG::AmbientConversation *v6; // rax
+  UFG::AmbientConversation *v7; // rbx
+  UFG::SimComponent *m_pPointer; // rax
+  UFG::SimObject *m_pSimObject; // r8
+  UFG::SimComponent *v10; // rax
   UFG::SimComponent *v11; // rax
-  UFG::SimComponent *v12; // rax
   char result; // al
-  UFG::qString v14; // [rsp+28h] [rbp-30h]
+  UFG::qString v13; // [rsp+28h] [rbp-30h] BYREF
 
-  v1 = this;
   v2 = 0i64;
-  v3 = 0i64;
+  m_activeElement = 0i64;
   if ( this->m_curLine < this->m_numElements )
-    v3 = this->m_activeElement;
+    m_activeElement = this->m_activeElement;
   v4 = UFG::ConversationManager::sm_idCounter++;
-  UFG::qString::qString(&v14, "AmbientConversation_%u", v4);
-  v6 = v14.mStringHash32;
-  if ( v14.mStringHash32 == -1 )
+  UFG::qString::qString(&v13, "AmbientConversation_%u", v4);
+  mStringHash32 = v13.mStringHash32;
+  if ( v13.mStringHash32 == -1 )
   {
-    v6 = UFG::qStringHash32(v14.mData, v14.mStringHash32 | v5);
-    v14.mStringHash32 = v6;
+    mStringHash32 = UFG::qStringHash32(v13.mData, 0xFFFFFFFF);
+    v13.mStringHash32 = mStringHash32;
   }
-  UFG::qString::~qString(&v14);
-  switch ( v1->m_interruptType )
+  UFG::qString::~qString(&v13);
+  switch ( this->m_interruptType )
   {
-    case 2:
-      v7 = UFG::ConversationManager::AddAmbientConversation(v6);
-      v7->m_topic = 56;
+    case eInterruptType_Collision:
+      v6 = UFG::ConversationManager::AddAmbientConversation(mStringHash32);
+      v6->m_topic = eConversationTopic_PassengerReaction;
       break;
-    case 3:
-      v7 = UFG::ConversationManager::AddAmbientConversation(v6);
-      v7->m_topic = 57;
+    case eInterruptType_GetOutOfVehicle:
+      v6 = UFG::ConversationManager::AddAmbientConversation(mStringHash32);
+      v6->m_topic = eConversationTopic_PlayerGetOutOfCar;
       break;
-    case 4:
-      v7 = UFG::ConversationManager::AddAmbientConversation(v6);
-      v7->m_topic = 65;
+    case eInterruptType_HitReaction:
+      v6 = UFG::ConversationManager::AddAmbientConversation(mStringHash32);
+      v6->m_topic = eConversationTopic_HitReaction;
       break;
     default:
       goto LABEL_23;
   }
-  v8 = v7;
-  if ( *((_BYTE *)v1 + 169) & 1 )
+  v7 = v6;
+  if ( (*((_BYTE *)this + 169) & 1) != 0 )
   {
-    v9 = v3->m_tgtAac.m_pPointer;
-    if ( v9 )
-      v10 = v9->m_pSimObject;
+    m_pPointer = m_activeElement->m_tgtAac.m_pPointer;
+    if ( m_pPointer )
+      m_pSimObject = m_pPointer->m_pSimObject;
     else
-      v10 = 0i64;
-    v11 = v3->m_spkAac.m_pPointer;
+      m_pSimObject = 0i64;
+    v10 = m_activeElement->m_spkAac.m_pPointer;
   }
   else
   {
-    v12 = v3->m_spkAac.m_pPointer;
-    if ( v12 )
-      v10 = v12->m_pSimObject;
+    v11 = m_activeElement->m_spkAac.m_pPointer;
+    if ( v11 )
+      m_pSimObject = v11->m_pSimObject;
     else
-      v10 = 0i64;
-    v11 = v3->m_tgtAac.m_pPointer;
+      m_pSimObject = 0i64;
+    v10 = m_activeElement->m_tgtAac.m_pPointer;
   }
-  if ( v11 )
-    v2 = v11->m_pSimObject;
-  UFG::AmbientConversation::SetupLines(v8, v2, v10);
-  v8->m_linePriority = 9;
-  *((_BYTE *)&v8->0 + 169) &= 0xFDu;
-  *((_BYTE *)&v8->0 + 168) &= 0xFDu;
-  *((_BYTE *)&v8->0 + 168) |= 0x80u;
-  v1->m_onInterrupt = (UFG::Conversation *)&v8->vfptr;
-  UFG::Conversation::Start((UFG::Conversation *)&v8->vfptr);
+  if ( v10 )
+    v2 = v10->m_pSimObject;
+  UFG::AmbientConversation::SetupLines(v7, v2, m_pSimObject);
+  v7->m_linePriority = 9;
+  *((_BYTE *)&v7->UFG::Conversation + 169) &= ~2u;
+  *((_BYTE *)&v7->UFG::Conversation + 168) &= ~2u;
+  *((_BYTE *)&v7->UFG::Conversation + 168) |= 0x80u;
+  this->m_onInterrupt = v7;
+  UFG::Conversation::Start(v7);
 LABEL_23:
   result = 1;
-  v1->m_state = 3;
+  this->m_state = eConversationState_Interrupted;
   return result;
 }
 
@@ -458,32 +437,32 @@ LABEL_23:
 char __fastcall UFG::Conversation::Start(UFG::Conversation *this)
 {
   bool v1; // zf
-  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *v2; // rdx
-  UFG::Conversation::eConversationType *v3; // r9
-  signed __int64 v4; // rdx
-  signed __int64 v5; // rax
+  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *mNext; // rdx
+  UFG::Conversation::eConversationType *p_m_type; // r9
+  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **p_mNext; // rdx
+  __int64 v5; // rax
   char *v6; // rax
 
   v1 = this->m_activeElement == 0i64;
-  this->m_newState = 1;
+  this->m_newState = eConversationState_Playing;
   if ( v1 )
     this->m_activeElement = (UFG::ConversationElement *)&this->m_lines.mNode.mNext[-1].mNext;
-  v2 = this->m_lines.mNode.mNext;
-  v3 = &this->m_type;
+  mNext = this->m_lines.mNode.mNext;
+  p_m_type = &this->m_type;
   while ( 1 )
   {
-    v4 = (signed __int64)&v2[-1].mNext;
-    if ( (UFG::Conversation::eConversationType *)v4 == v3 )
+    p_mNext = &mNext[-1].mNext;
+    if ( p_mNext == (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **)p_m_type )
       break;
-    if ( v4 )
+    if ( p_mNext )
     {
-      v5 = *(_QWORD *)(v4 + 144) - 8i64;
-      if ( v5 != v4 + 128 )
+      v5 = (__int64)&p_mNext[18][-1].mNext;
+      if ( (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **)v5 != p_mNext + 16 )
       {
         while ( !v5 || *(_DWORD *)(v5 + 24) != 2 )
         {
           v5 = *(_QWORD *)(v5 + 16) - 8i64;
-          if ( v5 == v4 + 128 )
+          if ( (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **)v5 == p_mNext + 16 )
             goto LABEL_10;
         }
         *((_BYTE *)this + 168) |= 0x40u;
@@ -491,9 +470,9 @@ char __fastcall UFG::Conversation::Start(UFG::Conversation *this)
       }
     }
 LABEL_10:
-    v2 = *(UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **)(v4 + 16);
+    mNext = p_mNext[2];
   }
-  if ( *v3 == eConversationType_Scripted && UFG::ConversationManager::sm_debugScrConversations )
+  if ( *p_m_type == eConversationType_Scripted && UFG::ConversationManager::sm_debugScrConversations )
   {
     v6 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&this[1].vfptr[4].PrintDebugInfo);
     UFG::qPrintf(
@@ -509,25 +488,23 @@ LABEL_10:
 // RVA: 0x5AA6D0
 char __fastcall UFG::Conversation::Restart(UFG::Conversation *this)
 {
-  UFG::Conversation::eConversationType *v1; // rsi
-  UFG::Conversation *v2; // rbx
-  UFG::Conversation *v3; // rdi
+  UFG::Conversation::eConversationType *p_m_type; // rsi
+  UFG::Conversation *p_mNext; // rbx
 
-  v1 = &this->m_type;
-  v2 = (UFG::Conversation *)&this->m_lines.mNode.mNext[-1].mNext;
-  v3 = this;
+  p_m_type = &this->m_type;
+  p_mNext = (UFG::Conversation *)&this->m_lines.mNode.mNext[-1].mNext;
   this->m_curLine = 0;
   this->m_activeElement = 0i64;
-  if ( v2 != (UFG::Conversation *)&this->m_type )
+  if ( p_mNext != (UFG::Conversation *)&this->m_type )
   {
     do
     {
-      ((void (__fastcall *)(UFG::Conversation *))v2->vfptr->PrintDebugInfo)(v2);
-      v2 = (UFG::Conversation *)&v2->mNode.mChild[0][-1].mUID;
+      ((void (__fastcall *)(UFG::Conversation *))p_mNext->vfptr->PrintDebugInfo)(p_mNext);
+      p_mNext = (UFG::Conversation *)&p_mNext->mNode.mChild[0][-1].mUID;
     }
-    while ( v2 != (UFG::Conversation *)v1 );
+    while ( p_mNext != (UFG::Conversation *)p_m_type );
   }
-  UFG::Conversation::Start(v3);
+  UFG::Conversation::Start(this);
   return 1;
 }
 
@@ -535,21 +512,21 @@ char __fastcall UFG::Conversation::Restart(UFG::Conversation *this)
 // RVA: 0x5AA550
 char __fastcall UFG::Conversation::Reset(UFG::Conversation *this)
 {
-  UFG::Conversation::eConversationType *v1; // rdi
-  UFG::Conversation *v2; // rbx
+  UFG::Conversation::eConversationType *p_m_type; // rdi
+  UFG::Conversation *p_mNext; // rbx
 
-  v1 = &this->m_type;
-  v2 = (UFG::Conversation *)&this->m_lines.mNode.mNext[-1].mNext;
+  p_m_type = &this->m_type;
+  p_mNext = (UFG::Conversation *)&this->m_lines.mNode.mNext[-1].mNext;
   this->m_curLine = 0;
   this->m_activeElement = 0i64;
-  if ( v2 != (UFG::Conversation *)&this->m_type )
+  if ( p_mNext != (UFG::Conversation *)&this->m_type )
   {
     do
     {
-      ((void (__fastcall *)(UFG::Conversation *))v2->vfptr->PrintDebugInfo)(v2);
-      v2 = (UFG::Conversation *)&v2->mNode.mChild[0][-1].mUID;
+      ((void (__fastcall *)(UFG::Conversation *))p_mNext->vfptr->PrintDebugInfo)(p_mNext);
+      p_mNext = (UFG::Conversation *)&p_mNext->mNode.mChild[0][-1].mUID;
     }
-    while ( v2 != (UFG::Conversation *)v1 );
+    while ( p_mNext != (UFG::Conversation *)p_m_type );
   }
   return 1;
 }
@@ -562,8 +539,8 @@ char __fastcall UFG::Conversation::Stop(UFG::Conversation *this, bool stoppedAft
 
   if ( this->m_state )
   {
-    *((_BYTE *)this + 168) &= 0xEFu;
-    this->m_newState = 6;
+    *((_BYTE *)this + 168) &= ~0x10u;
+    this->m_newState = eConversationState_Stopped;
     *((_BYTE *)this + 168) |= 16 * stoppedAfterLine;
     if ( this->m_type == eConversationType_Scripted && UFG::ConversationManager::sm_debugScrConversations )
     {
@@ -582,23 +559,23 @@ char __fastcall UFG::Conversation::Stop(UFG::Conversation *this, bool stoppedAft
 // RVA: 0x5AC8E0
 bool __fastcall UFG::Conversation::StopAfterCurrentLine(UFG::Conversation *this)
 {
-  UFG::ConversationElement *v1; // rax
+  UFG::ConversationElement *m_activeElement; // rax
 
-  v1 = this->m_activeElement;
-  if ( v1 )
+  m_activeElement = this->m_activeElement;
+  if ( m_activeElement )
   {
-    *((_BYTE *)v1 + 156) |= 1u;
-    LOBYTE(v1) = 1;
+    *((_BYTE *)m_activeElement + 156) |= 1u;
+    LOBYTE(m_activeElement) = 1;
   }
-  return (char)v1;
+  return (char)m_activeElement;
 }
 
 // File Line: 620
 // RVA: 0x5A35C0
 char __fastcall UFG::Conversation::NextLine(UFG::Conversation *this)
 {
-  if ( this->m_state != 1 )
-    this->m_activeElement = UFG::Conversation::GetNextElement(this);
+  if ( this->m_state != eConversationState_Playing )
+    this->m_activeElement = (UFG::ConversationElement *)UFG::Conversation::GetNextElement(this);
   return 1;
 }
 
@@ -606,23 +583,23 @@ char __fastcall UFG::Conversation::NextLine(UFG::Conversation *this)
 // RVA: 0x5A8190
 char __fastcall UFG::Conversation::PrevLine(UFG::Conversation *this)
 {
-  UFG::ConversationElement *v1; // rdx
-  UFG::Conversation *v3; // rdx
+  UFG::ConversationElement *m_activeElement; // rdx
+  UFG::Conversation *p_mNext; // rdx
 
-  if ( this->m_state != 1 )
+  if ( this->m_state != eConversationState_Playing )
   {
-    v1 = this->m_activeElement;
-    if ( !v1 )
+    m_activeElement = this->m_activeElement;
+    if ( !m_activeElement )
     {
       this->m_activeElement = 0i64;
       return 1;
     }
-    v3 = (UFG::Conversation *)&v1->mPrev[-1].mNext;
-    if ( v3 == (UFG::Conversation *)&this->m_type )
-      v3 = (UFG::Conversation *)&v3->mNode.mParent[-1].mUID;
-    if ( v3 == (UFG::Conversation *)&this->m_lines.mNode.mPrev[-1].mNext )
-      v3 = (UFG::Conversation *)&this->m_lines.mNode.mNext[-1].mNext;
-    this->m_activeElement = (UFG::ConversationElement *)v3;
+    p_mNext = (UFG::Conversation *)&m_activeElement->mPrev[-1].mNext;
+    if ( p_mNext == (UFG::Conversation *)&this->m_type )
+      p_mNext = (UFG::Conversation *)&p_mNext->mNode.mParent[-1].mUID;
+    if ( p_mNext == (UFG::Conversation *)&this->m_lines.mNode.mPrev[-1].mNext )
+      p_mNext = (UFG::Conversation *)&this->m_lines.mNode.mNext[-1].mNext;
+    this->m_activeElement = (UFG::ConversationElement *)p_mNext;
   }
   return 1;
 }
@@ -631,23 +608,21 @@ char __fastcall UFG::Conversation::PrevLine(UFG::Conversation *this)
 // RVA: 0x5A3510
 bool __fastcall UFG::Conversation::MoveToNextGroup(UFG::Conversation *this)
 {
-  UFG::Conversation *v1; // rdi
-  UFG::ConversationElement *v2; // rax
-  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *v4; // rbx
-  signed __int64 v5; // rdi
+  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **NextElement; // rax
+  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *mNext; // rbx
+  UFG::Conversation::eConversationType *p_m_type; // rdi
   UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **i; // rbx
 
-  v1 = this;
-  if ( this->m_state != 1 )
+  if ( this->m_state != eConversationState_Playing )
   {
     if ( (unsigned int)UFG::Conversation::GetGroupCount(this) <= 1 )
     {
-      v4 = v1->m_lines.mNode.mNext;
-      v1->m_curLine = 0;
-      v1->m_activeElement = 0i64;
-      v5 = (signed __int64)&v1->m_type;
-      for ( i = &v4[-1].mNext;
-            i != (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **)v5;
+      mNext = this->m_lines.mNode.mNext;
+      this->m_curLine = 0;
+      this->m_activeElement = 0i64;
+      p_m_type = &this->m_type;
+      for ( i = &mNext[-1].mNext;
+            i != (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **)p_m_type;
             i = &i[2][-1].mNext )
       {
         ((void (__fastcall *)(UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **))(*i)->mNext)(i);
@@ -657,19 +632,18 @@ bool __fastcall UFG::Conversation::MoveToNextGroup(UFG::Conversation *this)
     {
       while ( 1 )
       {
-        v2 = UFG::Conversation::GetNextElement(v1);
-        v1->m_activeElement = v2;
-        if ( !v2 )
+        NextElement = UFG::Conversation::GetNextElement(this);
+        this->m_activeElement = (UFG::ConversationElement *)NextElement;
+        if ( !NextElement )
           break;
-        if ( *((_BYTE *)v2 + 156) & 1 )
+        if ( (*((_BYTE *)NextElement + 156) & 1) != 0 )
         {
-          if ( v2 )
-            v1->m_activeElement = UFG::Conversation::GetNextElement(v1);
+          this->m_activeElement = (UFG::ConversationElement *)UFG::Conversation::GetNextElement(this);
           break;
         }
       }
-      if ( !v1->m_activeElement )
-        return UFG::Conversation::Reset(v1);
+      if ( !this->m_activeElement )
+        return UFG::Conversation::Reset(this);
     }
   }
   return 1;
@@ -679,15 +653,15 @@ bool __fastcall UFG::Conversation::MoveToNextGroup(UFG::Conversation *this)
 // RVA: 0x5A0620
 bool __fastcall UFG::Conversation::IsLastLineInGroup(UFG::Conversation *this)
 {
-  UFG::ConversationElement *v1; // rax
+  UFG::ConversationElement *m_activeElement; // rax
   bool result; // al
 
   result = 1;
   if ( this->m_curLine != this->m_numElements - 1 )
   {
-    v1 = this->m_activeElement;
-    if ( !v1 || !(*((_BYTE *)v1 + 156) & 1) )
-      result = 0;
+    m_activeElement = this->m_activeElement;
+    if ( !m_activeElement || (*((_BYTE *)m_activeElement + 156) & 1) == 0 )
+      return 0;
   }
   return result;
 }
@@ -696,27 +670,25 @@ bool __fastcall UFG::Conversation::IsLastLineInGroup(UFG::Conversation *this)
 // RVA: 0x59A6E0
 bool __fastcall UFG::Conversation::CurrentGroupIsLast(UFG::Conversation *this)
 {
-  UFG::ConversationElement *v1; // rax
-  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *v3; // rax
+  UFG::ConversationElement *m_activeElement; // rax
+  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *mNext; // rax
   UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *v4; // rcx
-  signed __int64 v5; // rax
+  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **p_mNext; // rax
 
-  v1 = this->m_activeElement;
-  if ( !v1 )
+  m_activeElement = this->m_activeElement;
+  if ( !m_activeElement )
     return UFG::Conversation::GetGroupCount(this) < 2;
-  v3 = v1->mNext;
-  if ( !v3 )
+  mNext = m_activeElement->mNext;
+  if ( !mNext )
     return 1;
-  v4 = v3->mNext;
-  v5 = (signed __int64)&v3[-1].mNext;
+  v4 = mNext->mNext;
+  p_mNext = &mNext[-1].mNext;
   if ( !v4 )
     return 1;
-  while ( !(*(_BYTE *)(v5 + 156) & 1) )
+  while ( (*((_BYTE *)p_mNext + 156) & 1) == 0 )
   {
-    v5 = (signed __int64)&v4[-1].mNext;
-    if ( !v4 )
-      v5 = 0i64;
-    v4 = *(UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **)(v5 + 16);
+    p_mNext = &v4[-1].mNext;
+    v4 = v4->mNext;
     if ( !v4 )
       return 1;
   }
@@ -727,55 +699,53 @@ bool __fastcall UFG::Conversation::CurrentGroupIsLast(UFG::Conversation *this)
 // RVA: 0x59AC30
 void __fastcall UFG::Conversation::Destroy(UFG::Conversation *this)
 {
-  UFG::Conversation *v1; // rdi
-  UFG::Conversation *v2; // rcx
-  UFG::Conversation *v3; // rcx
-  UFG::Conversation::eConversationType *v4; // rsi
-  UFG::ConversationElement *v5; // rbx
+  UFG::Conversation *m_onResume; // rcx
+  UFG::Conversation *m_onInterrupt; // rcx
+  UFG::Conversation::eConversationType *p_m_type; // rsi
+  UFG::ConversationElement *p_mNext; // rbx
   UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *i; // rdx
-  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *v7; // rcx
-  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *v8; // rax
+  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *mPrev; // rcx
+  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *mNext; // rax
   char *v9; // rax
 
-  v1 = this;
-  v2 = this->m_onResume;
-  if ( v2 )
-    UFG::Conversation::Destroy(v2);
-  v3 = v1->m_onInterrupt;
-  if ( v3 )
-    UFG::Conversation::Destroy(v3);
-  v4 = &v1->m_type;
-  v5 = (UFG::ConversationElement *)&v1->m_lines.mNode.mNext[-1].mNext;
-  if ( v5 != (UFG::ConversationElement *)&v1->m_type )
+  m_onResume = this->m_onResume;
+  if ( m_onResume )
+    UFG::Conversation::Destroy(m_onResume);
+  m_onInterrupt = this->m_onInterrupt;
+  if ( m_onInterrupt )
+    UFG::Conversation::Destroy(m_onInterrupt);
+  p_m_type = &this->m_type;
+  p_mNext = (UFG::ConversationElement *)&this->m_lines.mNode.mNext[-1].mNext;
+  if ( p_mNext != (UFG::ConversationElement *)&this->m_type )
   {
     do
     {
-      UFG::ConversationElement::ClearSpeechFlags(v5);
-      v5 = (UFG::ConversationElement *)&v5->mNext[-1].mNext;
+      UFG::ConversationElement::ClearSpeechFlags(p_mNext);
+      p_mNext = (UFG::ConversationElement *)&p_mNext->mNext[-1].mNext;
     }
-    while ( v5 != (UFG::ConversationElement *)v4 );
+    while ( p_mNext != (UFG::ConversationElement *)p_m_type );
   }
-  for ( i = v1->m_lines.mNode.mNext;
-        &i[-1].mNext != (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **)&v1->m_type;
-        i = v1->m_lines.mNode.mNext )
+  for ( i = this->m_lines.mNode.mNext;
+        &i[-1].mNext != (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **)&this->m_type;
+        i = this->m_lines.mNode.mNext )
   {
-    v7 = i->mPrev;
-    v8 = i->mNext;
-    v7->mNext = v8;
-    v8->mPrev = v7;
+    mPrev = i->mPrev;
+    mNext = i->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
     i->mPrev = i;
     i->mNext = i;
     if ( i != (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *)8 )
-      ((void (__fastcall *)(UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **, signed __int64))i[-1].mNext->mPrev)(
+      ((void (__fastcall *)(UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **, __int64))i[-1].mNext->mPrev)(
         &i[-1].mNext,
         1i64);
   }
-  v1->m_activeElement = 0i64;
-  v1->m_numElements = 0;
-  *(_QWORD *)&v1->m_state = 0i64;
-  if ( *v4 == eConversationType_Scripted && UFG::ConversationManager::sm_debugScrConversations )
+  this->m_activeElement = 0i64;
+  this->m_numElements = 0;
+  *(_QWORD *)&this->m_state = 0i64;
+  if ( *p_m_type == eConversationType_Scripted && UFG::ConversationManager::sm_debugScrConversations )
   {
-    v9 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v1[1].vfptr[4].PrintDebugInfo);
+    v9 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&this[1].vfptr[4].PrintDebugInfo);
     UFG::qPrintf(
       "CONV DEBUG: %s : %6u : Forcing Finish %s\n",
       UFG::TidoGame::sm_timeStampStr.mData,
@@ -788,85 +758,80 @@ void __fastcall UFG::Conversation::Destroy(UFG::Conversation *this)
 // RVA: 0x59D4C0
 UFG::ConversationElement *__fastcall UFG::Conversation::GetResumeElement(UFG::Conversation *this)
 {
-  UFG::ConversationElement *v1; // rsi
-  UFG::Conversation *v2; // rdi
-  UFG::ConversationElement *v3; // rbx
-  int v4; // ecx
-  char v5; // al
-  UFG::ConversationElement *result; // rax
+  __int64 v1; // rsi
+  UFG::ConversationElement *m_activeElement; // rbx
+  int m_curLine; // ecx
+  bool v5; // al
 
   v1 = 0i64;
-  v2 = this;
-  v3 = 0i64;
+  m_activeElement = 0i64;
   if ( this->m_curLine < this->m_numElements )
-    v3 = this->m_activeElement;
+    m_activeElement = this->m_activeElement;
   UFG::Conversation::OnLineFinished(this);
-  v4 = v2->m_curLine;
-  v5 = (*((_BYTE *)v3 + 156) >> 4) & 1;
-  if ( v5 )
+  m_curLine = this->m_curLine;
+  v5 = (*((_BYTE *)m_activeElement + 156) & 0x10) != 0;
+  if ( (*((_BYTE *)m_activeElement + 156) & 0x10) != 0 )
     goto LABEL_8;
-  while ( v4 > 0 )
+  while ( m_curLine > 0 )
   {
-    v3 = (UFG::ConversationElement *)&v3->mPrev[-1].mNext;
-    if ( v3 == (UFG::ConversationElement *)&v2->m_type )
-      v3 = (UFG::ConversationElement *)&v3->mPrev[-1].mNext;
-    --v4;
-    v5 = (*((_BYTE *)v3 + 156) >> 4) & 1;
-    if ( v5 )
+    m_activeElement = (UFG::ConversationElement *)&m_activeElement->mPrev[-1].mNext;
+    if ( m_activeElement == (UFG::ConversationElement *)&this->m_type )
+      m_activeElement = (UFG::ConversationElement *)&m_activeElement->mPrev[-1].mNext;
+    --m_curLine;
+    v5 = (*((_BYTE *)m_activeElement + 156) & 0x10) != 0;
+    if ( (*((_BYTE *)m_activeElement + 156) & 0x10) != 0 )
       goto LABEL_8;
   }
   if ( v5 )
   {
 LABEL_8:
-    v2->m_curLine = v4;
-    result = v3;
+    this->m_curLine = m_curLine;
+    return m_activeElement;
   }
   else
   {
-    if ( v2->m_curLine < v2->m_numElements )
-      v1 = v2->m_activeElement;
-    result = v1;
+    if ( this->m_curLine < this->m_numElements )
+      return this->m_activeElement;
+    return (UFG::ConversationElement *)v1;
   }
-  return result;
 }
 
 // File Line: 820
 // RVA: 0x59D0A0
-UFG::ConversationElement *__fastcall UFG::Conversation::GetNextElement(UFG::Conversation *this)
+UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **__fastcall UFG::Conversation::GetNextElement(
+        UFG::Conversation *this)
 {
-  UFG::ConversationElement *result; // rax
-  UFG::Conversation *v2; // rbx
-  UFG::qNode<UFG::qPointerNode<UFG::ConversationElement>,UFG::qPointerNode<UFG::ConversationElement> > *v3; // rax
-  UFG::qList<UFG::qPointerNode<UFG::ConversationElement>,UFG::qPointerNode<UFG::ConversationElement>,1,0> *v4; // rcx
+  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **result; // rax
+  UFG::qNode<UFG::qPointerNode<UFG::ConversationElement>,UFG::qPointerNode<UFG::ConversationElement> > *mNext; // rax
+  UFG::qList<UFG::qPointerNode<UFG::ConversationElement>,UFG::qPointerNode<UFG::ConversationElement>,1,0> *p_m_prevPlayed; // rcx
   int i; // edx
   int v6; // ecx
-  UFG::ConversationElement *v7; // rbx
+  UFG::Conversation::eConversationType *p_m_type; // rbx
 
-  result = this->m_activeElement;
-  v2 = this;
+  result = (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **)this->m_activeElement;
   if ( result )
   {
-    if ( *((_BYTE *)this + 168) & 0x20 )
+    if ( (*((_BYTE *)this + 168) & 0x20) != 0 )
     {
-      v3 = this->m_prevPlayed.mNode.mNext;
-      v4 = &this->m_prevPlayed;
+      mNext = this->m_prevPlayed.mNode.mNext;
+      p_m_prevPlayed = &this->m_prevPlayed;
       for ( i = 0;
-            v3 != (UFG::qNode<UFG::qPointerNode<UFG::ConversationElement>,UFG::qPointerNode<UFG::ConversationElement> > *)v4;
+            mNext != (UFG::qNode<UFG::qPointerNode<UFG::ConversationElement>,UFG::qPointerNode<UFG::ConversationElement> > *)p_m_prevPlayed;
             ++i )
       {
-        v3 = v3->mNext;
+        mNext = mNext->mNext;
       }
-      v6 = UFG::qRandom((unsigned int)v2->m_numElements - i, &UFG::qDefaultSeed);
-      result = (UFG::ConversationElement *)&v2->m_lines.mNode.mNext[-1].mNext;
+      v6 = UFG::qRandom((unsigned int)this->m_numElements - i, (unsigned int *)&UFG::qDefaultSeed);
+      result = &this->m_lines.mNode.mNext[-1].mNext;
       if ( v6 >= 0 )
       {
-        v7 = (UFG::ConversationElement *)&v2->m_type;
+        p_m_type = &this->m_type;
         do
         {
-          result = (UFG::ConversationElement *)&result->mNext[-1].mNext;
-          if ( result == v7 )
-            result = (UFG::ConversationElement *)&result->mNext[-1].mNext;
-          if ( !(*((_BYTE *)result + 156) & 4) )
+          result = &result[2][-1].mNext;
+          if ( result == (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **)p_m_type )
+            result = &result[2][-1].mNext;
+          if ( (*((_BYTE *)result + 156) & 4) == 0 )
             --v6;
         }
         while ( v6 >= 0 );
@@ -875,9 +840,9 @@ UFG::ConversationElement *__fastcall UFG::Conversation::GetNextElement(UFG::Conv
     else
     {
       ++this->m_curLine;
-      result = (UFG::ConversationElement *)&result->mNext[-1].mNext;
-      if ( result == (UFG::ConversationElement *)&this->m_type )
-        result = (UFG::ConversationElement *)&result->mNext[-1].mNext;
+      result = &result[2][-1].mNext;
+      if ( result == (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **)&this->m_type )
+        return &result[2][-1].mNext;
     }
   }
   return result;
@@ -885,21 +850,23 @@ UFG::ConversationElement *__fastcall UFG::Conversation::GetNextElement(UFG::Conv
 
 // File Line: 888
 // RVA: 0x59CE30
-UFG::ConversationElement *__fastcall UFG::Conversation::GetElement(UFG::Conversation *this, int idx)
+UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **__fastcall UFG::Conversation::GetElement(
+        UFG::Conversation *this,
+        int idx)
 {
-  UFG::ConversationElement *result; // rax
-  UFG::ConversationElement *v3; // rcx
+  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **result; // rax
+  UFG::Conversation::eConversationType *p_m_type; // rcx
 
-  result = (UFG::ConversationElement *)&this->m_lines.mNode.mNext[-1].mNext;
+  result = &this->m_lines.mNode.mNext[-1].mNext;
   if ( idx > 0 )
   {
-    v3 = (UFG::ConversationElement *)&this->m_type;
+    p_m_type = &this->m_type;
     do
     {
-      if ( result == v3 )
+      if ( result == (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **)p_m_type )
         break;
       --idx;
-      result = (UFG::ConversationElement *)&result->mNext[-1].mNext;
+      result = &result[2][-1].mNext;
     }
     while ( idx > 0 );
   }
@@ -908,110 +875,105 @@ UFG::ConversationElement *__fastcall UFG::Conversation::GetElement(UFG::Conversa
 
 // File Line: 914
 // RVA: 0x5A4550
-char __fastcall UFG::Conversation::OnLineFinished(UFG::Conversation *this)
+bool __fastcall UFG::Conversation::OnLineFinished(UFG::Conversation *this)
 {
-  UFG::Conversation *v1; // rbx
-  UFG::ConversationElement *v2; // rsi
-  char *v3; // rdi
+  UFG::ConversationElement *m_activeElement; // rsi
+  char *mData; // rdi
   char *v4; // rax
   UFG::allocator::free_link *v5; // rax
-  UFG::allocator::free_link *v6; // rdx
-  UFG::allocator::free_link *v7; // rcx
-  UFG::qNode<UFG::qPointerNode<UFG::ConversationElement>,UFG::qPointerNode<UFG::ConversationElement> > *v8; // rax
-  signed int v9; // ecx
+  UFG::qNode<UFG::qPointerNode<UFG::ConversationElement>,UFG::qPointerNode<UFG::ConversationElement> > *v6; // rdx
+  UFG::ConversationElement *v7; // rcx
+  UFG::qNode<UFG::qPointerNode<UFG::ConversationElement>,UFG::qPointerNode<UFG::ConversationElement> > *mPrev; // rax
+  int v9; // ecx
   UFG::Conversation *i; // rax
-  UFG::qNode<UFG::qPointerNode<UFG::ConversationElement>,UFG::qPointerNode<UFG::ConversationElement> > *v11; // r8
+  UFG::qNode<UFG::qPointerNode<UFG::ConversationElement>,UFG::qPointerNode<UFG::ConversationElement> > *mNext; // r8
   UFG::qNode<UFG::qPointerNode<UFG::ConversationElement>,UFG::qPointerNode<UFG::ConversationElement> > *v12; // rcx
   UFG::qNode<UFG::qPointerNode<UFG::ConversationElement>,UFG::qPointerNode<UFG::ConversationElement> > *v13; // rax
   UFG::qNode<UFG::qPointerNode<UFG::ConversationElement>,UFG::qPointerNode<UFG::ConversationElement> > *v14; // rdx
   UFG::qNode<UFG::qPointerNode<UFG::ConversationElement>,UFG::qPointerNode<UFG::ConversationElement> > *v15; // rax
   char v16; // di
-  char result; // al
-  __int64 v18; // [rsp+20h] [rbp-48h]
-  UFG::qString v19; // [rsp+38h] [rbp-30h]
+  bool result; // al
+  UFG::qString v18; // [rsp+38h] [rbp-30h] BYREF
 
-  v1 = this;
   if ( this->m_type == eConversationType_Scripted && UFG::ConversationManager::sm_debugScrConversations )
   {
     if ( this->m_curLine < this->m_numElements )
-      v2 = this->m_activeElement;
+      m_activeElement = this->m_activeElement;
     else
-      v2 = 0i64;
-    UFG::qString::qString(&v19, &this->m_activeElement->m_context);
-    v3 = v19.mData;
-    v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2[1].vfptr[1].PlayLine);
-    LODWORD(v18) = v1->m_curLine;
+      m_activeElement = 0i64;
+    UFG::qString::qString(&v18, &this->m_activeElement->m_context);
+    mData = v18.mData;
+    v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&m_activeElement[1].vfptr[1].PlayLine);
     UFG::qPrintf(
       "CONV DEBUG: %s : %6u : %s : line finished %u, %s\n",
       UFG::TidoGame::sm_timeStampStr.mData,
       UFG::Metrics::msInstance.mSimFrameCount,
       v4,
-      v18,
-      v3,
-      -2i64);
-    UFG::qString::~qString(&v19);
+      this->m_curLine,
+      mData);
+    UFG::qString::~qString(&v18);
   }
-  if ( v1->m_type == eConversationType_Scripted )
-    UFG::ScriptedConversationElement::ClearConversationTargets((UFG::ScriptedConversationElement *)v1->m_activeElement);
-  *((_BYTE *)v1 + 168) &= 0xFEu;
+  if ( this->m_type == eConversationType_Scripted )
+    UFG::ScriptedConversationElement::ClearConversationTargets((UFG::ScriptedConversationElement *)this->m_activeElement);
+  *((_BYTE *)this + 168) &= ~1u;
   v5 = UFG::qMalloc(0x18ui64, "Conversation.ConversationElementPointerNode", 0i64);
-  v6 = v5;
+  v6 = (UFG::qNode<UFG::qPointerNode<UFG::ConversationElement>,UFG::qPointerNode<UFG::ConversationElement> > *)v5;
   if ( v5 )
   {
-    v7 = (UFG::allocator::free_link *)v1->m_activeElement;
+    v7 = this->m_activeElement;
     v5->mNext = v5;
     v5[1].mNext = v5;
-    v5[2].mNext = v7;
+    v5[2].mNext = (UFG::allocator::free_link *)v7;
   }
   else
   {
     v6 = 0i64;
   }
-  v8 = v1->m_prevPlayed.mNode.mPrev;
-  v8->mNext = (UFG::qNode<UFG::qPointerNode<UFG::ConversationElement>,UFG::qPointerNode<UFG::ConversationElement> > *)v6;
-  v6->mNext = (UFG::allocator::free_link *)v8;
-  v6[1].mNext = (UFG::allocator::free_link *)&v1->m_prevPlayed;
-  v1->m_prevPlayed.mNode.mPrev = (UFG::qNode<UFG::qPointerNode<UFG::ConversationElement>,UFG::qPointerNode<UFG::ConversationElement> > *)v6;
-  *((_BYTE *)v1->m_activeElement + 156) |= 4u;
+  mPrev = this->m_prevPlayed.mNode.mPrev;
+  mPrev->mNext = v6;
+  v6->mPrev = mPrev;
+  v6->mNext = &this->m_prevPlayed.mNode;
+  this->m_prevPlayed.mNode.mPrev = v6;
+  *((_BYTE *)this->m_activeElement + 156) |= 4u;
   v9 = 0;
-  for ( i = (UFG::Conversation *)v1->m_prevPlayed.mNode.mNext;
-        i != (UFG::Conversation *)&v1->m_prevPlayed;
+  for ( i = (UFG::Conversation *)this->m_prevPlayed.mNode.mNext;
+        i != (UFG::Conversation *)&this->m_prevPlayed;
         i = (UFG::Conversation *)i->mNode.mParent )
   {
     ++v9;
   }
-  if ( v9 > v1->m_avoidRepeatingLastNLines )
+  if ( v9 > this->m_avoidRepeatingLastNLines )
   {
-    v11 = v1->m_prevPlayed.mNode.mNext;
-    v12 = v11->mPrev;
-    v13 = v11->mNext;
+    mNext = this->m_prevPlayed.mNode.mNext;
+    v12 = mNext->mPrev;
+    v13 = mNext->mNext;
     v12->mNext = v13;
     v13->mPrev = v12;
-    v11->mPrev = v11;
-    v11->mNext = v11;
-    BYTE4(v11[1].mPrev[9].mNext) &= 0xFBu;
-    v14 = v11->mPrev;
-    v15 = v11->mNext;
+    mNext->mPrev = mNext;
+    mNext->mNext = mNext;
+    BYTE4(mNext[1].mPrev[9].mNext) &= ~4u;
+    v14 = mNext->mPrev;
+    v15 = mNext->mNext;
     v14->mNext = v15;
     v15->mPrev = v14;
-    v11->mPrev = v11;
-    v11->mNext = v11;
-    operator delete[](v11);
+    mNext->mPrev = mNext;
+    mNext->mNext = mNext;
+    operator delete[](mNext);
   }
-  ((void (*)(void))v1->m_activeElement->vfptr->Reset)();
-  if ( v1->m_state != 6 )
+  this->m_activeElement->vfptr->Reset(this->m_activeElement);
+  if ( this->m_state != eConversationState_Stopped )
   {
-    v16 = *((_BYTE *)v1->m_activeElement + 156);
-    v1->m_activeElement = UFG::Conversation::GetNextElement(v1);
-    if ( v16 & 1 )
-      UFG::Conversation::Stop(v1, 1);
+    v16 = *((_BYTE *)this->m_activeElement + 156);
+    this->m_activeElement = (UFG::ConversationElement *)UFG::Conversation::GetNextElement(this);
+    if ( (v16 & 1) != 0 )
+      UFG::Conversation::Stop(this, 1);
   }
   result = 1;
-  if ( v1->m_curLine == v1->m_numElements )
+  if ( this->m_curLine == this->m_numElements )
   {
-    v1->m_activeElement = 0i64;
-    if ( v1->m_newState != 6 )
-      v1->m_newState = 7;
+    this->m_activeElement = 0i64;
+    if ( this->m_newState != eConversationState_Stopped )
+      this->m_newState = eConversationState_Finished;
   }
   return result;
 }
@@ -1020,10 +982,8 @@ char __fastcall UFG::Conversation::OnLineFinished(UFG::Conversation *this)
 // RVA: 0x59CA10
 char __fastcall UFG::Conversation::ForceFinish(UFG::Conversation *this, _BOOL8 a2)
 {
-  UFG::Conversation *v2; // rbx
   char *v3; // rax
 
-  v2 = this;
   if ( this->m_type == eConversationType_Scripted && UFG::ConversationManager::sm_debugScrConversations )
   {
     v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&this[1].vfptr[4].PrintDebugInfo);
@@ -1033,8 +993,8 @@ char __fastcall UFG::Conversation::ForceFinish(UFG::Conversation *this, _BOOL8 a
       UFG::Metrics::msInstance.mSimFrameCount,
       v3);
   }
-  v2->m_newState = 7;
-  UFG::Conversation::OnFinish(v2, a2);
+  this->m_newState = eConversationState_Finished;
+  UFG::Conversation::OnFinish(this, a2);
   return 1;
 }
 
@@ -1042,25 +1002,23 @@ char __fastcall UFG::Conversation::ForceFinish(UFG::Conversation *this, _BOOL8 a
 // RVA: 0x5A0660
 char __fastcall UFG::Conversation::IsSpeaker(UFG::Conversation *this, UFG::SimObject *speaker)
 {
-  UFG::Conversation::eConversationType *v2; // r8
-  UFG::SimObject *v3; // r9
-  UFG::Conversation *v4; // rax
-  UFG::qNode<UFG::qValueNode<UFG::qSymbol>,UFG::qValueNode<UFG::qSymbol> > *v5; // rcx
+  UFG::Conversation::eConversationType *p_m_type; // r8
+  UFG::Conversation *p_mNext; // rax
+  UFG::qNode<UFG::qValueNode<UFG::qSymbol>,UFG::qValueNode<UFG::qSymbol> > *mPrev; // rcx
   UFG::SimObject *v6; // rdx
 
-  v2 = &this->m_type;
-  v3 = speaker;
-  v4 = (UFG::Conversation *)&this->m_lines.mNode.mNext[-1].mNext;
-  if ( v4 == (UFG::Conversation *)&this->m_type )
+  p_m_type = &this->m_type;
+  p_mNext = (UFG::Conversation *)&this->m_lines.mNode.mNext[-1].mNext;
+  if ( p_mNext == (UFG::Conversation *)&this->m_type )
     return 0;
   while ( 1 )
   {
-    v5 = v4->m_animationBanks.mNode.mPrev;
-    v6 = (UFG::SimObject *)(v5 ? v5[2].mNext : 0i64);
-    if ( v6 == v3 )
+    mPrev = p_mNext->m_animationBanks.mNode.mPrev;
+    v6 = mPrev ? (UFG::SimObject *)mPrev[2].mNext : 0i64;
+    if ( v6 == speaker )
       break;
-    v4 = (UFG::Conversation *)&v4->mNode.mChild[0][-1].mUID;
-    if ( v4 == (UFG::Conversation *)v2 )
+    p_mNext = (UFG::Conversation *)&p_mNext->mNode.mChild[0][-1].mUID;
+    if ( p_mNext == (UFG::Conversation *)p_m_type )
       return 0;
   }
   return 1;
@@ -1068,14 +1026,12 @@ char __fastcall UFG::Conversation::IsSpeaker(UFG::Conversation *this, UFG::SimOb
 
 // File Line: 1041
 // RVA: 0x5AEFD0
-bool __usercall UFG::Conversation::Update@<al>(UFG::Conversation *this@<rcx>, float delta_sec@<xmm1>, _BOOL8 a3@<rdx>)
+char __fastcall UFG::Conversation::Update(UFG::Conversation *this, float delta_sec)
 {
-  UFG::Conversation *v3; // rbx
+  _BOOL8 v2; // rdx
   char *v4; // rax
   float v5; // xmm0_4
-  bool result; // al
 
-  v3 = this;
   if ( this->m_type == eConversationType_Scripted
     && this->m_newState != this->m_state
     && UFG::ConversationManager::sm_debugScrConversations )
@@ -1086,50 +1042,49 @@ bool __usercall UFG::Conversation::Update@<al>(UFG::Conversation *this@<rcx>, fl
       UFG::TidoGame::sm_timeStampStr.mData,
       UFG::Metrics::msInstance.mSimFrameCount,
       v4,
-      UFG::ConversationStateNames[v3->m_state],
-      UFG::ConversationStateNames[v3->m_newState]);
+      UFG::ConversationStateNames[this->m_state],
+      UFG::ConversationStateNames[this->m_newState]);
   }
-  v5 = delta_sec + v3->m_timeAlive;
-  v3->m_timeAlive = v5;
-  if ( v5 >= 120.0 && v3->m_type == 1 )
-    UFG::Conversation::ForceFinish(v3, a3);
-  if ( v3->m_newState == 1 )
+  v5 = delta_sec + this->m_timeAlive;
+  this->m_timeAlive = v5;
+  if ( v5 >= 120.0 && this->m_type == eConversationType_Ambient )
+    UFG::Conversation::ForceFinish(this, v2);
+  if ( this->m_newState == eConversationState_Playing )
   {
-    UFG::Conversation::UpdatePlayState(v3, delta_sec);
+    UFG::Conversation::UpdatePlayState(this, delta_sec);
     return 1;
   }
-  if ( v3->m_newState == 3 )
+  if ( this->m_newState == eConversationState_Interrupted )
   {
-    if ( v3->m_state != 3 )
-      UFG::Conversation::OnInterrupt(v3);
-    UFG::Conversation::UpdateInterruptState(v3, delta_sec);
-    result = 1;
+    if ( this->m_state != eConversationState_Interrupted )
+      UFG::Conversation::OnInterrupt(this);
+    UFG::Conversation::UpdateInterruptState(this, delta_sec);
+    return 1;
   }
   else
   {
-    if ( v3->m_newState != 5 )
+    if ( this->m_newState != eConversationState_Resume )
     {
-      if ( v3->m_newState == 6 )
+      if ( this->m_newState == eConversationState_Stopped )
       {
-        if ( v3->m_state != 6 )
+        if ( this->m_state != eConversationState_Stopped )
         {
-          UFG::Conversation::OnStop(v3, a3);
+          UFG::Conversation::OnStop(this, v2);
           return 1;
         }
       }
-      else if ( v3->m_newState == 7 && v3->m_state != 7 )
+      else if ( this->m_newState == eConversationState_Finished && this->m_state != eConversationState_Finished )
       {
-        UFG::Conversation::OnFinish(v3, a3);
+        UFG::Conversation::OnFinish(this, v2);
         return 1;
       }
       return 1;
     }
-    if ( v3->m_state != 5 )
-      UFG::Conversation::OnResume(v3);
-    UFG::Conversation::UpdateResumeState(v3, delta_sec);
-    result = 1;
+    if ( this->m_state != eConversationState_Resume )
+      UFG::Conversation::OnResume(this);
+    UFG::Conversation::UpdateResumeState(this, delta_sec);
+    return 1;
   }
-  return result;
 }
 
 // File Line: 1134
@@ -1145,7 +1100,7 @@ signed __int64 __fastcall UFG::Conversation::LookupTopic(UFG::qSymbol *sym)
   {
     ++v2;
     ++v1;
-    if ( (signed __int64)v2 >= (signed __int64)&UFG::qStaticSymbol_eINVENTORY_ITEM_MEATWRAPPED )
+    if ( (__int64)v2 >= (__int64)&UFG::qStaticSymbol_eINVENTORY_ITEM_MEATWRAPPED )
       return 25i64;
   }
   return v1;
@@ -1153,55 +1108,55 @@ signed __int64 __fastcall UFG::Conversation::LookupTopic(UFG::qSymbol *sym)
 
 // File Line: 1260
 // RVA: 0x5A0400
-bool __fastcall UFG::Conversation::IsFurtherThanMaxSeparationDistance(UFG::Conversation *this, UFG::ConversationElement *element)
+bool __fastcall UFG::Conversation::IsFurtherThanMaxSeparationDistance(
+        UFG::Conversation *this,
+        UFG::ConversationElement *element)
 {
-  UFG::Conversation *v2; // rbx
-  UFG::ActorAudioComponent *v3; // rcx
+  UFG::ActorAudioComponent *m_pPointer; // rcx
   UFG::ActorAudioComponent *v4; // rdx
-  float v5; // xmm6_4
+  float m_maxSeparationDistance; // xmm6_4
 
-  v2 = this;
   if ( !element )
     return 0;
-  v3 = (UFG::ActorAudioComponent *)element->m_spkAac.m_pPointer;
+  m_pPointer = (UFG::ActorAudioComponent *)element->m_spkAac.m_pPointer;
   v4 = (UFG::ActorAudioComponent *)element->m_tgtAac.m_pPointer;
-  if ( !v3 || !v4 )
+  if ( !m_pPointer || !v4 )
     return 0;
-  v5 = v2->m_maxSeparationDistance;
-  return UFG::ActorAudioComponent::Distance2ToActor(v3, v4) >= (float)(v5 * v5) && !(*((_BYTE *)v2 + 168) & 8);
+  m_maxSeparationDistance = this->m_maxSeparationDistance;
+  return UFG::ActorAudioComponent::Distance2ToActor(m_pPointer, v4) >= (float)(m_maxSeparationDistance
+                                                                             * m_maxSeparationDistance)
+      && (*((_BYTE *)this + 168) & 8) == 0;
 }
 
 // File Line: 1297
 // RVA: 0x59CEF0
-signed __int64 __fastcall UFG::Conversation::GetGroupCount(UFG::Conversation *this)
+__int64 __fastcall UFG::Conversation::GetGroupCount(UFG::Conversation *this)
 {
   unsigned int v1; // edx
-  UFG::Conversation *v2; // r11
-  unsigned int v3; // er10
-  unsigned int v4; // er9
-  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *v5; // rbx
-  signed int v6; // eax
-  signed __int64 i; // rcx
+  unsigned int v3; // r10d
+  unsigned int v4; // r9d
+  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *mNext; // rbx
+  int v6; // eax
+  __int64 i; // rcx
 
   v1 = 0;
-  v2 = this;
   v3 = this->m_numElements - 1;
   if ( this->m_numElements == 1 )
     return 0i64;
   v4 = 1;
   if ( this->m_numElements == 1 )
     return 1i64;
-  v5 = this->m_lines.mNode.mNext;
+  mNext = this->m_lines.mNode.mNext;
   do
   {
     v6 = v1;
-    for ( i = (signed __int64)&v5[-1].mNext; v6 > 0; i = *(_QWORD *)(i + 16) - 8i64 )
+    for ( i = (__int64)&mNext[-1].mNext; v6 > 0; i = *(_QWORD *)(i + 16) - 8i64 )
     {
-      if ( (UFG::Conversation::eConversationType *)i == &v2->m_type )
+      if ( (UFG::Conversation::eConversationType *)i == &this->m_type )
         break;
       --v6;
     }
-    if ( *(_BYTE *)(i + 156) & 1 )
+    if ( (*(_BYTE *)(i + 156) & 1) != 0 )
       ++v4;
     ++v1;
   }
@@ -1213,15 +1168,13 @@ signed __int64 __fastcall UFG::Conversation::GetGroupCount(UFG::Conversation *th
 // RVA: 0x5A4A30
 char __fastcall UFG::Conversation::OnStop(UFG::Conversation *this, _BOOL8 a2)
 {
-  UFG::Conversation::eConversationType *v2; // rsi
-  UFG::Conversation *v3; // rdi
+  UFG::Conversation::eConversationType *p_m_type; // rsi
   char *v4; // rax
   char v5; // cl
-  UFG::ConversationElement *v6; // rbx
+  UFG::ConversationElement *m_activeElement; // rbx
   _BOOL8 v8; // rdx
 
-  v2 = &this->m_type;
-  v3 = this;
+  p_m_type = &this->m_type;
   if ( this->m_type == eConversationType_Scripted && UFG::ConversationManager::sm_debugScrConversations )
   {
     v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&this[1].vfptr[4].PrintDebugInfo);
@@ -1231,37 +1184,34 @@ char __fastcall UFG::Conversation::OnStop(UFG::Conversation *this, _BOOL8 a2)
       UFG::Metrics::msInstance.mSimFrameCount,
       v4);
   }
-  v5 = *((_BYTE *)v3 + 168);
-  v3->m_state = 6;
-  if ( !(v5 & 0x10) || v5 & 0x20 )
+  v5 = *((_BYTE *)this + 168);
+  this->m_state = eConversationState_Stopped;
+  if ( (v5 & 0x10) == 0 || (v5 & 0x20) != 0 )
   {
-    if ( v3->m_curLine < v3->m_numElements )
-      v6 = v3->m_activeElement;
+    if ( this->m_curLine < this->m_numElements )
+      m_activeElement = this->m_activeElement;
     else
-      v6 = 0i64;
+      m_activeElement = 0i64;
   }
   else
   {
-    v6 = v3->m_activeElement;
-    if ( v6 )
+    m_activeElement = this->m_activeElement;
+    if ( m_activeElement )
     {
-      v6 = (UFG::ConversationElement *)&v6->mPrev[-1].mNext;
-      if ( v6 == (UFG::ConversationElement *)v2 )
-        v6 = (UFG::ConversationElement *)&v6->mPrev[-1].mNext;
-      if ( v6 == (UFG::ConversationElement *)&v3->m_lines.mNode.mPrev[-1].mNext )
-        v6 = (UFG::ConversationElement *)&v3->m_lines.mNode.mNext[-1].mNext;
+      m_activeElement = (UFG::ConversationElement *)&m_activeElement->mPrev[-1].mNext;
+      if ( m_activeElement == (UFG::ConversationElement *)p_m_type )
+        m_activeElement = (UFG::ConversationElement *)&m_activeElement->mPrev[-1].mNext;
+      if ( m_activeElement == (UFG::ConversationElement *)&this->m_lines.mNode.mPrev[-1].mNext )
+        m_activeElement = (UFG::ConversationElement *)&this->m_lines.mNode.mNext[-1].mNext;
     }
   }
-  *((_BYTE *)v3 + 168) = v5 & 0xEF;
-  if ( !v6
-    || !((unsigned __int8 (__fastcall *)(UFG::ConversationElement *, _BOOL8))v6->vfptr->SpeakerInitialized)(v6, a2) )
-  {
-    return UFG::Conversation::ForceFinish(v3, a2);
-  }
-  v6->vfptr->Reset(v6);
+  *((_BYTE *)this + 168) = v5 & 0xEF;
+  if ( !m_activeElement || !m_activeElement->vfptr->SpeakerInitialized(m_activeElement) )
+    return UFG::Conversation::ForceFinish(this, a2);
+  m_activeElement->vfptr->Reset(m_activeElement);
   LOBYTE(v8) = 1;
-  v6->vfptr->StopLine(v6, v8);
-  UFG::ConversationElement::ClearSpeechFlags(v6);
+  m_activeElement->vfptr->StopLine(m_activeElement, v8);
+  UFG::ConversationElement::ClearSpeechFlags(m_activeElement);
   return 1;
 }
 
@@ -1269,18 +1219,16 @@ char __fastcall UFG::Conversation::OnStop(UFG::Conversation *this, _BOOL8 a2)
 // RVA: 0x5A4280
 char __fastcall UFG::Conversation::OnFinish(UFG::Conversation *this, _BOOL8 a2)
 {
-  UFG::Conversation::eConversationType *v2; // rsi
-  UFG::Conversation *v3; // rdi
+  UFG::Conversation::eConversationType *p_m_type; // rsi
   char *v4; // rax
-  UFG::Conversation *v5; // rcx
-  UFG::Conversation *v6; // rcx
-  unsigned __int16 v7; // ax
-  UFG::ConversationElement *v8; // rcx
+  UFG::Conversation *m_onResume; // rcx
+  UFG::Conversation *m_onInterrupt; // rcx
+  unsigned __int16 m_numElements; // ax
+  UFG::ConversationElement *m_activeElement; // rcx
   UFG::ConversationElement *i; // rbx
-  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **v10; // rbx
+  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **p_mNext; // rbx
 
-  v2 = &this->m_type;
-  v3 = this;
+  p_m_type = &this->m_type;
   if ( this->m_type == eConversationType_Scripted && UFG::ConversationManager::sm_debugScrConversations )
   {
     v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&this[1].vfptr[4].PrintDebugInfo);
@@ -1290,38 +1238,36 @@ char __fastcall UFG::Conversation::OnFinish(UFG::Conversation *this, _BOOL8 a2)
       UFG::Metrics::msInstance.mSimFrameCount,
       v4);
   }
-  v5 = v3->m_onResume;
-  if ( v5 )
-    UFG::Conversation::ForceFinish(v5, a2);
-  v6 = v3->m_onInterrupt;
-  if ( v6 )
-    UFG::Conversation::ForceFinish(v6, a2);
-  v7 = v3->m_numElements;
-  v3->m_state = 7;
-  if ( v3->m_curLine < v7 )
+  m_onResume = this->m_onResume;
+  if ( m_onResume )
+    UFG::Conversation::ForceFinish(m_onResume, a2);
+  m_onInterrupt = this->m_onInterrupt;
+  if ( m_onInterrupt )
+    UFG::Conversation::ForceFinish(m_onInterrupt, a2);
+  m_numElements = this->m_numElements;
+  this->m_state = eConversationState_Finished;
+  if ( this->m_curLine < m_numElements )
   {
-    v8 = v3->m_activeElement;
-    if ( v8 )
+    m_activeElement = this->m_activeElement;
+    if ( m_activeElement )
     {
       LOBYTE(a2) = 1;
-      v8->vfptr->StopLine(v8, a2);
+      m_activeElement->vfptr->StopLine(m_activeElement, a2);
     }
   }
-  for ( i = (UFG::ConversationElement *)&v3->m_lines.mNode.mNext[-1].mNext;
-        i != (UFG::ConversationElement *)v2;
+  for ( i = (UFG::ConversationElement *)&this->m_lines.mNode.mNext[-1].mNext;
+        i != (UFG::ConversationElement *)p_m_type;
         i = (UFG::ConversationElement *)&i->mNext[-1].mNext )
   {
     UFG::ConversationElement::ClearSpeechFlags(i);
   }
-  v10 = &v3->m_lines.mNode.mNext[-1].mNext;
-  v3->m_curLine = 0;
-  for ( v3->m_activeElement = 0i64;
-        v10 != (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **)v2;
-        v10 = &v10[2][-1].mNext )
+  p_mNext = &this->m_lines.mNode.mNext[-1].mNext;
+  this->m_curLine = 0;
+  for ( this->m_activeElement = 0i64;
+        p_mNext != (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **)p_m_type;
+        p_mNext = &p_mNext[2][-1].mNext )
   {
-    ((void (__fastcall *)(UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **, _BOOL8))(*v10)->mNext)(
-      v10,
-      a2);
+    ((void (__fastcall *)(UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **))(*p_mNext)->mNext)(p_mNext);
   }
   return 1;
 }
@@ -1331,23 +1277,23 @@ char __fastcall UFG::Conversation::OnFinish(UFG::Conversation *this, _BOOL8 a2)
 void __fastcall UFG::Conversation::SetContainsActionRequests(UFG::Conversation *this)
 {
   UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *i; // rdx
-  signed __int64 v2; // rdx
-  signed __int64 v3; // rax
+  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **p_mNext; // rdx
+  __int64 v3; // rax
 
-  for ( i = this->m_lines.mNode.mNext; ; i = *(UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **)(v2 + 16) )
+  for ( i = this->m_lines.mNode.mNext; ; i = p_mNext[2] )
   {
-    v2 = (signed __int64)&i[-1].mNext;
-    if ( (UFG::Conversation::eConversationType *)v2 == &this->m_type )
+    p_mNext = &i[-1].mNext;
+    if ( p_mNext == (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **)&this->m_type )
       break;
-    if ( v2 )
+    if ( p_mNext )
     {
-      v3 = *(_QWORD *)(v2 + 144) - 8i64;
-      if ( v3 != v2 + 128 )
+      v3 = (__int64)&p_mNext[18][-1].mNext;
+      if ( (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **)v3 != p_mNext + 16 )
       {
         while ( !v3 || *(_DWORD *)(v3 + 24) != 2 )
         {
           v3 = *(_QWORD *)(v3 + 16) - 8i64;
-          if ( v3 == v2 + 128 )
+          if ( (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **)v3 == p_mNext + 16 )
             goto LABEL_8;
         }
         *((_BYTE *)this + 168) |= 0x40u;
@@ -1361,275 +1307,249 @@ LABEL_8:
 
 // File Line: 1452
 // RVA: 0x5A02B0
-bool __fastcall UFG::Conversation::InterruptIsInvalid(UFG::Conversation *this, UFG::eInterruptType intType)
+char __fastcall UFG::Conversation::InterruptIsInvalid(UFG::Conversation *this, UFG::eInterruptType intType)
 {
-  UFG::Conversation *v2; // r9
   bool v3; // r10
   bool v4; // r11
-  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *v5; // r8
-  UFG::Conversation::eConversationType *v6; // rcx
-  signed __int64 v7; // r8
+  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *mNext; // r8
+  UFG::Conversation::eConversationType *p_m_type; // rcx
+  __int64 p_mNext; // r8
   char v8; // cl
-  char v9; // al
 
-  v2 = this;
   v3 = this->m_numInterrupts >= UFG::ConversationManager::sm_maxNumInterrupts;
-  v4 = this->m_state != 1;
-  if ( intType != 3
-    || (v5 = this->m_lines.mNode.mNext,
-        v6 = &this->m_type,
-        v7 = (signed __int64)&v5[-1].mNext,
-        (UFG::Conversation::eConversationType *)v7 == v6) )
+  v4 = this->m_state != eConversationState_Playing;
+  if ( intType != eInterruptType_GetOutOfVehicle
+    || (mNext = this->m_lines.mNode.mNext,
+        p_m_type = &this->m_type,
+        p_mNext = (__int64)&mNext[-1].mNext,
+        (UFG::Conversation::eConversationType *)p_mNext == p_m_type) )
   {
 LABEL_5:
     v8 = 0;
-    if ( intType != 3 )
-      return *((_BYTE *)v2 + 169) & 4 || v4 || v3;
+    if ( intType != eInterruptType_GetOutOfVehicle )
+      return (*((_BYTE *)this + 169) & 4) != 0 || v4 || v3;
   }
   else
   {
-    while ( *(_DWORD *)(v7 + 24) != qwsPlayCellPhone.mUID )
+    while ( *(_DWORD *)(p_mNext + 24) != qwsPlayCellPhone.mUID )
     {
-      v7 = *(_QWORD *)(v7 + 16) - 8i64;
-      if ( (UFG::Conversation::eConversationType *)v7 == v6 )
+      p_mNext = *(_QWORD *)(p_mNext + 16) - 8i64;
+      if ( (UFG::Conversation::eConversationType *)p_mNext == p_m_type )
         goto LABEL_5;
     }
     v8 = 1;
   }
-  v9 = (*((_BYTE *)v2 + 169) >> 3) & 1;
-  if ( v9 )
-  {
-    if ( !v8 )
-      return 0;
-LABEL_11:
-    if ( !v9 )
-      return 1;
-    goto LABEL_12;
-  }
-  if ( intType == 3 )
-    goto LABEL_11;
-LABEL_12:
-  if ( v8 )
+  if ( (*((_BYTE *)this + 169) & 8) != 0 && !v8 )
+    return 0;
+  if ( (*((_BYTE *)this + 169) & 8) == 0 || v8 )
     return 1;
-  return *((_BYTE *)v2 + 169) & 4 || v4 || v3;
+  return (*((_BYTE *)this + 169) & 4) != 0 || v4 || v3;
 }
 
 // File Line: 1479
 // RVA: 0x5A0070
 char __fastcall UFG::Conversation::Interrupt(UFG::Conversation *this, UFG::eInterruptType intType, bool force)
 {
-  bool v3; // bp
-  UFG::eInterruptType v4; // esi
-  UFG::Conversation *v5; // rbx
-  UFG::ConversationElement *v7; // rdi
-  UFG::SimComponent *v8; // rax
+  UFG::ConversationElement *m_activeElement; // rdi
+  UFG::SimComponent *m_pPointer; // rax
   UFG::ConversationElement *v9; // rcx
 
-  v3 = force;
-  v4 = intType;
-  v5 = this;
   if ( UFG::Conversation::InterruptIsInvalid(this, intType) )
     return 0;
-  if ( v5->m_curLine >= v5->m_numElements )
+  if ( this->m_curLine >= this->m_numElements )
     return 0;
-  v7 = v5->m_activeElement;
-  if ( !v7 )
+  m_activeElement = this->m_activeElement;
+  if ( !m_activeElement )
     return 0;
-  v8 = v7->m_spkAac.m_pPointer;
-  if ( !v8 )
+  m_pPointer = m_activeElement->m_spkAac.m_pPointer;
+  if ( !m_pPointer )
     return 0;
-  v9 = v5->m_activeElement;
-  *((_BYTE *)v5 + 169) ^= (*((_BYTE *)v5 + 169) ^ (BYTE1(v8[8].m_pSimObject) >> 3)) & 1;
-  v7->vfptr->StopLine(v9, v3);
-  v7->vfptr->Reset(v7);
-  ++v5->m_numInterrupts;
-  v5->m_newState = 3;
-  v5->m_interruptType = v4;
-  v5->m_interruptedTime = 0.0;
+  v9 = this->m_activeElement;
+  *((_BYTE *)this + 169) ^= (*((_BYTE *)this + 169) ^ (BYTE1(m_pPointer[8].m_pSimObject) >> 3)) & 1;
+  m_activeElement->vfptr->StopLine(v9, force);
+  m_activeElement->vfptr->Reset(m_activeElement);
+  ++this->m_numInterrupts;
+  this->m_newState = eConversationState_Interrupted;
+  this->m_interruptType = intType;
+  this->m_interruptedTime = 0.0;
   return 1;
 }
 
 // File Line: 1516
 // RVA: 0x5B0BD0
-char __usercall UFG::Conversation::UpdatePlayState@<al>(UFG::Conversation *this@<rcx>, float delta_sec@<xmm1>, _BOOL8 a3@<rdx>)
+char __fastcall UFG::Conversation::UpdatePlayState(UFG::Conversation *this, float delta_sec)
 {
-  UFG::Conversation *v3; // rbp
-  UFG::ConversationElement *v4; // rsi
-  UFG::SimComponent *v5; // rax
-  SSInstance *v6; // rcx
-  UFG::qBaseNodeRB *v7; // rax
+  _BOOL8 v2; // rdx
+  UFG::ConversationElement *m_activeElement; // rsi
+  UFG::SimComponent *m_pPointer; // rax
+  SSInstance *mNext; // rcx
+  UFG::qBaseNodeRB *SimObjectFromSymbol; // rax
   UFG::SimComponent *v8; // rax
   SSInstance *v9; // rcx
   UFG::qBaseNodeRB *v10; // rax
   hkgpIndexedMeshDefinitions::Edge *v11; // rdx
   UFG::SimComponent *v13; // rax
   hkgpIndexedMesh::EdgeBarrier *v14; // rcx
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v15; // rax
-  hkgpIndexedMesh::EdgeBarrierVtbl *v16; // rax
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mPrev; // rax
+  hkgpIndexedMesh::EdgeBarrierVtbl *vfptr; // rax
   float v17; // xmm6_4
   UFG::SimComponent *v18; // rax
   UFG::SimComponent *v19; // rax
   float v20; // xmm6_4
   UFG::ConversationElement *v21; // rdx
   UFG::ConversationElement *v22; // rdi
-  char *v23; // rbx
+  char *mData; // rbx
   char *v24; // rax
   _BOOL8 v25; // rdx
-  __int64 v26; // [rsp+20h] [rbp-68h]
-  UFG::qString v27; // [rsp+38h] [rbp-50h]
+  int m_curLine; // [rsp+20h] [rbp-68h]
+  UFG::qString v27; // [rsp+38h] [rbp-50h] BYREF
 
-  v3 = this;
-  this->m_state = 1;
-  if ( this->m_type == 1
-    && *((_BYTE *)this + 169) & 2
+  this->m_state = eConversationState_Playing;
+  if ( this->m_type == eConversationType_Ambient
+    && (*((_BYTE *)this + 169) & 2) != 0
     && UFG::AudioListener::sm_pInstance
     && UFG::AudioListener::sm_pInstance->m_highSpeedModeEnabled
     && UFG::AudioListener::sm_pInstance->m_highSpeedMode )
   {
-    return UFG::Conversation::ForceFinish(this, a3);
+    return UFG::Conversation::ForceFinish(this, v2);
   }
   if ( this->m_curLine >= this->m_numElements )
-    return UFG::Conversation::ForceFinish(this, a3);
-  v4 = this->m_activeElement;
-  if ( !v4 )
-    return UFG::Conversation::ForceFinish(this, a3);
-  v5 = v4->m_spkAac.m_pPointer;
-  if ( (!v5 || !v5->m_pSimObject) && v4->m_type == eConversationElementType_Scripted )
+    return UFG::Conversation::ForceFinish(this, v2);
+  m_activeElement = this->m_activeElement;
+  if ( !m_activeElement )
+    return UFG::Conversation::ForceFinish(this, v2);
+  m_pPointer = m_activeElement->m_spkAac.m_pPointer;
+  if ( (!m_pPointer || !m_pPointer->m_pSimObject) && m_activeElement->m_type == eConversationElementType_Scripted )
   {
-    v6 = (SSInstance *)v4[1].mNext;
-    if ( v6 )
+    mNext = (SSInstance *)m_activeElement[1].mNext;
+    if ( mNext )
     {
-      v7 = UFG::TSScriptedDialogueElement::GetSimObjectFromSymbol(v6);
-      if ( v7 )
+      SimObjectFromSymbol = UFG::TSScriptedDialogueElement::GetSimObjectFromSymbol(mNext);
+      if ( SimObjectFromSymbol )
       {
-        UFG::ConversationElement::SetSpeaker(v4, (UFG::SimObject *)v7);
-        v4[1].mNext = 0i64;
+        UFG::ConversationElement::SetSpeaker(m_activeElement, (UFG::SimObjectCharacter *)SimObjectFromSymbol);
+        m_activeElement[1].mNext = 0i64;
       }
     }
   }
-  v8 = v4->m_tgtAac.m_pPointer;
-  if ( (!v8 || !v8->m_pSimObject) && v4->m_type == eConversationElementType_Scripted )
+  v8 = m_activeElement->m_tgtAac.m_pPointer;
+  if ( (!v8 || !v8->m_pSimObject) && m_activeElement->m_type == eConversationElementType_Scripted )
   {
-    v9 = *(SSInstance **)&v4[1].m_playbackEvent.mUID;
+    v9 = *(SSInstance **)&m_activeElement[1].m_playbackEvent.mUID;
     if ( v9 )
     {
       v10 = UFG::TSScriptedDialogueElement::GetSimObjectFromSymbol(v9);
       if ( v10 )
       {
-        UFG::ConversationElement::SetTarget(v4, (UFG::SimObject *)v10);
-        *(_QWORD *)&v4[1].m_playbackEvent.mUID = 0i64;
+        UFG::ConversationElement::SetTarget(m_activeElement, (UFG::SimObjectCharacter *)v10);
+        *(_QWORD *)&m_activeElement[1].m_playbackEvent.mUID = 0i64;
       }
     }
   }
-  if ( UFG::Conversation::IsFurtherThanMaxSeparationDistance(v3, v4) && v3->m_type == eConversationType_Scripted )
+  if ( UFG::Conversation::IsFurtherThanMaxSeparationDistance(this, m_activeElement)
+    && this->m_type == eConversationType_Scripted )
   {
-    UFG::Conversation::Interrupt(v3, eInterruptType_Separation, 0);
+    UFG::Conversation::Interrupt(this, eInterruptType_Separation, 0);
     return 1;
   }
-  v13 = v4->m_spkAac.m_pPointer;
-  v14 = (hkgpIndexedMesh::EdgeBarrier *)v4->m_tgtAac.m_pPointer;
+  v13 = m_activeElement->m_spkAac.m_pPointer;
+  v14 = (hkgpIndexedMesh::EdgeBarrier *)m_activeElement->m_tgtAac.m_pPointer;
   if ( v13 )
   {
-    v15 = v13[7].m_BoundComponentHandles.mNode.mPrev;
-    if ( !v15 || !BYTE4(v15[7].mPrev) )
+    mPrev = v13[7].m_BoundComponentHandles.mNode.mPrev;
+    if ( (!mPrev || !BYTE4(mPrev[7].mPrev))
+      && (!v14 || (vfptr = v14[62].vfptr) == 0i64 || !BYTE4(vfptr[7].__vecDelDtor)) )
     {
-      if ( !v14 || (v16 = v14[62].vfptr) == 0i64 || !BYTE4(v16[7].__vecDelDtor) )
+      if ( Scaleform::Render::Text::DocView::DocumentListener::View_OnLineFormat(v14, v11) )
       {
-        if ( Scaleform::Render::Text::DocView::DocumentListener::View_OnLineFormat(v14, v11) )
-        {
-          v17 = delta_sec + v4->m_timeAlive;
-          v4->m_timeAlive = v17;
-          if ( v17 > 2.5 )
-          {
+        v17 = delta_sec + m_activeElement->m_timeAlive;
+        m_activeElement->m_timeAlive = v17;
+        if ( v17 > 2.5 )
 LABEL_63:
-            UFG::Conversation::OnLineFinished(v3);
-            return 1;
-          }
-        }
-        else
+          UFG::Conversation::OnLineFinished(this);
+      }
+      else
+      {
+        v18 = m_activeElement->m_spkAac.m_pPointer;
+        if ( v18 )
+          BYTE1(v18[8].m_pSimObject) &= ~0x10u;
+        if ( !m_activeElement->vfptr->SpeakerInitialized(m_activeElement) )
         {
-          v18 = v4->m_spkAac.m_pPointer;
-          if ( v18 )
-            BYTE1(v18[8].m_pSimObject) &= 0xEFu;
-          if ( !v4->vfptr->SpeakerInitialized(v4) )
+          v19 = m_activeElement->m_spkAac.m_pPointer;
+          if ( v19 )
+            BYTE1(v19[8].m_pSimObject) &= ~0x10u;
+          v20 = delta_sec + m_activeElement->m_timeAlive;
+          m_activeElement->m_timeAlive = v20;
+          if ( v20 <= 3.0 )
+            return 1;
+          goto LABEL_63;
+        }
+        if ( !m_activeElement->vfptr->LineIsPlaying(m_activeElement) && m_activeElement->m_sampleLength < 0.02 )
+        {
+          UFG::ConversationElement::SetTagInterruptFlags(m_activeElement, (*((_BYTE *)this + 168) & 4) != 0);
+          UFG::ConversationElement::SetSpkListFlags(m_activeElement, (*((_BYTE *)this + 168) & 0x40) != 0);
+          if ( this->m_type == eConversationType_Ambient )
+            UFG::ConversationElement::SetActiveAmbConv(m_activeElement, this);
+          if ( this->m_type == eConversationType_Scripted )
+            UFG::ConversationElement::SetDebugFlags(m_activeElement, UFG::ConversationManager::sm_debugScrConversations);
+          if ( m_activeElement->m_preDelay <= m_activeElement->m_timeAlive )
           {
-            v19 = v4->m_spkAac.m_pPointer;
-            if ( v19 )
-              BYTE1(v19[8].m_pSimObject) &= 0xEFu;
-            v20 = delta_sec + v4->m_timeAlive;
-            v4->m_timeAlive = v20;
-            if ( v20 <= 3.0 )
-              return 1;
-            goto LABEL_63;
-          }
-          if ( !v4->vfptr->LineIsPlaying(v4) && v4->m_sampleLength < 0.02 )
-          {
-            UFG::ConversationElement::SetTagInterruptFlags(v4, (*((_BYTE *)v3 + 168) >> 2) & 1);
-            UFG::ConversationElement::SetSpkListFlags(v4, (*((_BYTE *)v3 + 168) >> 6) & 1);
-            if ( v3->m_type == 1 )
-              UFG::ConversationElement::SetActiveAmbConv(v4, v3);
-            if ( v3->m_type == eConversationType_Scripted )
-              UFG::ConversationElement::SetDebugFlags(v4, UFG::ConversationManager::sm_debugScrConversations);
-            if ( v4->m_preDelay <= v4->m_timeAlive )
+            *((_BYTE *)this + 168) |= 1u;
+            if ( !m_activeElement->vfptr->PlayLine(
+                    m_activeElement,
+                    this->m_externalSourcePlaybackEvent,
+                    this->m_linePriority,
+                    *((_BYTE *)this + 168) >> 7)
+              && m_activeElement->m_timeAlive > 3.0 )
             {
-              *((_BYTE *)v3 + 168) |= 1u;
-              if ( !v4->vfptr->PlayLine(
-                      v4,
-                      v3->m_externalSourcePlaybackEvent,
-                      v3->m_linePriority,
-                      *((_BYTE *)v3 + 168) >> 7)
-                && v4->m_timeAlive > 3.0 )
+              UFG::Conversation::OnLineFinished(this);
+            }
+            if ( this->m_type == eConversationType_Scripted )
+            {
+              UFG::ScriptedConversationElement::SetConversationTargets((UFG::ScriptedConversationElement *)m_activeElement);
+              if ( this->m_type == eConversationType_Scripted && UFG::ConversationManager::sm_debugScrConversations )
               {
-                UFG::Conversation::OnLineFinished(v3);
-              }
-              if ( v3->m_type == eConversationType_Scripted )
-              {
-                UFG::ScriptedConversationElement::SetConversationTargets((UFG::ScriptedConversationElement *)v4);
-                if ( v3->m_type == eConversationType_Scripted && UFG::ConversationManager::sm_debugScrConversations )
+                v21 = this->m_activeElement;
+                if ( v21 )
                 {
-                  v21 = v3->m_activeElement;
-                  if ( v21 )
-                  {
-                    v22 = v3->m_activeElement;
-                    if ( v3->m_curLine >= v3->m_numElements )
-                      v22 = 0i64;
-                    UFG::qString::qString(&v27, &v21->m_context);
-                    v23 = v27.mData;
-                    v24 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v22[1].vfptr[1].PlayLine);
-                    LODWORD(v26) = v3->m_curLine;
-                    UFG::qPrintf(
-                      "CONV DEBUG: %s : %6u : %s : line started %u, %s\n",
-                      UFG::TidoGame::sm_timeStampStr.mData,
-                      UFG::Metrics::msInstance.mSimFrameCount,
-                      v24,
-                      v26,
-                      v23,
-                      -2i64);
-                    UFG::qString::~qString(&v27);
-                  }
+                  v22 = this->m_activeElement;
+                  if ( this->m_curLine >= this->m_numElements )
+                    v22 = 0i64;
+                  UFG::qString::qString(&v27, &v21->m_context);
+                  mData = v27.mData;
+                  v24 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v22[1].vfptr[1].PlayLine);
+                  m_curLine = this->m_curLine;
+                  UFG::qPrintf(
+                    "CONV DEBUG: %s : %6u : %s : line started %u, %s\n",
+                    UFG::TidoGame::sm_timeStampStr.mData,
+                    UFG::Metrics::msInstance.mSimFrameCount,
+                    v24,
+                    m_curLine,
+                    mData);
+                  UFG::qString::~qString(&v27);
                 }
               }
             }
-            v4->m_timeAlive = delta_sec + v4->m_timeAlive;
-            return 1;
           }
-          if ( !v4->vfptr->LineIsPlaying(v4) || !(*((_BYTE *)v3 + 168) & 1) )
-          {
-            if ( v4->vfptr->LineIsPlaying(v4) || v4->m_sampleLength <= 0.02 )
-              return 1;
-            v4->m_timeAlive = delta_sec + v4->m_timeAlive;
-            goto LABEL_63;
-          }
-          v4->m_timeAlive = delta_sec + v4->m_timeAlive;
-          v4->m_sampleLength = delta_sec + v4->m_sampleLength;
-          UFG::ConversationElement::UpdateInterruptionPoints(v4, v3);
+          m_activeElement->m_timeAlive = delta_sec + m_activeElement->m_timeAlive;
+          return 1;
         }
-        return 1;
+        if ( !m_activeElement->vfptr->LineIsPlaying(m_activeElement) || (*((_BYTE *)this + 168) & 1) == 0 )
+        {
+          if ( m_activeElement->vfptr->LineIsPlaying(m_activeElement) || m_activeElement->m_sampleLength <= 0.02 )
+            return 1;
+          m_activeElement->m_timeAlive = delta_sec + m_activeElement->m_timeAlive;
+          goto LABEL_63;
+        }
+        m_activeElement->m_timeAlive = delta_sec + m_activeElement->m_timeAlive;
+        m_activeElement->m_sampleLength = delta_sec + m_activeElement->m_sampleLength;
+        UFG::ConversationElement::UpdateInterruptionPoints(m_activeElement, this);
       }
+      return 1;
     }
   }
-  UFG::Conversation::Interrupt(v3, eInterruptType_Death, 0);
-  UFG::Conversation::ForceFinish(v3, v25);
+  UFG::Conversation::Interrupt(this, eInterruptType_Death, 0);
+  UFG::Conversation::ForceFinish(this, v25);
   return 1;
 }
 
@@ -1637,176 +1557,138 @@ LABEL_63:
 // RVA: 0x599120
 bool __fastcall UFG::Conversation::ConversantsInSameVehicle(UFG::Conversation *this)
 {
-  UFG::ConversationElement *v1; // rax
-  UFG::Conversation *v2; // rbp
-  UFG::SimComponent *v3; // rcx
-  UFG::SimObjectGame *v4; // rcx
+  UFG::ConversationElement *m_activeElement; // rax
+  UFG::SimComponent *m_pPointer; // rcx
+  UFG::SimObjectGame *m_pSimObject; // rcx
   UFG::SimComponent *v5; // rbx
   UFG::SimObjectGame *v6; // rbx
-  UFG::CharacterOccupantComponent *v7; // rdi
-  unsigned __int16 v8; // dx
-  UFG::SimComponent *v9; // rax
+  UFG::CharacterOccupantComponent *m_pComponent; // rdi
+  __int16 m_Flags; // dx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   UFG::CharacterOccupantComponent *v10; // rbx
-  unsigned __int16 v11; // cx
-  UFG::SimComponent *v12; // rax
-  signed __int64 v13; // rcx
-  UFG::VehicleOccupantComponent *v14; // rbx
+  __int16 v11; // cx
+  UFG::SimComponent *ComponentOfType; // rax
+  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **p_mNext; // rcx
+  UFG::VehicleOccupantComponent *CurrentVehicle; // rbx
 
-  v1 = this->m_activeElement;
-  v2 = this;
-  if ( v1 )
+  m_activeElement = this->m_activeElement;
+  if ( m_activeElement )
   {
-    v3 = v1->m_spkAac.m_pPointer;
-    if ( v3 )
-      v4 = (UFG::SimObjectGame *)v3->m_pSimObject;
+    m_pPointer = m_activeElement->m_spkAac.m_pPointer;
+    if ( m_pPointer )
+      m_pSimObject = (UFG::SimObjectGame *)m_pPointer->m_pSimObject;
     else
-      v4 = 0i64;
-    v5 = v1->m_tgtAac.m_pPointer;
+      m_pSimObject = 0i64;
+    v5 = m_activeElement->m_tgtAac.m_pPointer;
     if ( v5 )
       v6 = (UFG::SimObjectGame *)v5->m_pSimObject;
     else
       v6 = 0i64;
-    if ( v4 )
+    if ( m_pSimObject )
     {
-      v8 = v4->m_Flags;
-      if ( (v8 >> 14) & 1 )
+      m_Flags = m_pSimObject->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
       {
-        v7 = (UFG::CharacterOccupantComponent *)v4->m_Components.p[44].m_pComponent;
+        m_pComponent = (UFG::CharacterOccupantComponent *)m_pSimObject->m_Components.p[44].m_pComponent;
       }
       else
       {
-        if ( (v8 & 0x8000u) == 0 )
-        {
-          if ( (v8 >> 13) & 1 )
-          {
-            v9 = UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::CharacterOccupantComponent::_TypeUID);
-          }
-          else if ( (v8 >> 12) & 1 )
-          {
-            v9 = UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::CharacterOccupantComponent::_TypeUID);
-          }
-          else
-          {
-            v9 = UFG::SimObject::GetComponentOfType(
-                   (UFG::SimObject *)&v4->vfptr,
-                   UFG::CharacterOccupantComponent::_TypeUID);
-          }
-        }
+        if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+          ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                m_pSimObject,
+                                UFG::CharacterOccupantComponent::_TypeUID);
         else
-        {
-          v9 = UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::CharacterOccupantComponent::_TypeUID);
-        }
-        v7 = (UFG::CharacterOccupantComponent *)v9;
+          ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(
+                                m_pSimObject,
+                                UFG::CharacterOccupantComponent::_TypeUID);
+        m_pComponent = (UFG::CharacterOccupantComponent *)ComponentOfTypeHK;
       }
     }
     else
     {
-      v7 = 0i64;
+      m_pComponent = 0i64;
     }
     if ( v6 )
     {
       v11 = v6->m_Flags;
-      if ( (v11 >> 14) & 1 )
+      if ( (v11 & 0x4000) != 0 )
       {
         v10 = (UFG::CharacterOccupantComponent *)v6->m_Components.p[44].m_pComponent;
       }
       else
       {
-        if ( (v11 & 0x8000u) == 0 )
-        {
-          if ( (v11 >> 13) & 1 )
-          {
-            v12 = UFG::SimObjectGame::GetComponentOfTypeHK(v6, UFG::CharacterOccupantComponent::_TypeUID);
-          }
-          else if ( (v11 >> 12) & 1 )
-          {
-            v12 = UFG::SimObjectGame::GetComponentOfTypeHK(v6, UFG::CharacterOccupantComponent::_TypeUID);
-          }
-          else
-          {
-            v12 = UFG::SimObject::GetComponentOfType(
-                    (UFG::SimObject *)&v6->vfptr,
-                    UFG::CharacterOccupantComponent::_TypeUID);
-          }
-        }
+        if ( v11 < 0 || (v11 & 0x2000) != 0 || (v11 & 0x1000) != 0 )
+          ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(v6, UFG::CharacterOccupantComponent::_TypeUID);
         else
-        {
-          v12 = UFG::SimObjectGame::GetComponentOfTypeHK(v6, UFG::CharacterOccupantComponent::_TypeUID);
-        }
-        v10 = (UFG::CharacterOccupantComponent *)v12;
+          ComponentOfType = UFG::SimObject::GetComponentOfType(v6, UFG::CharacterOccupantComponent::_TypeUID);
+        v10 = (UFG::CharacterOccupantComponent *)ComponentOfType;
       }
     }
     else
     {
       v10 = 0i64;
     }
-    v13 = (signed __int64)&v2->m_lines.mNode.mNext[-1].mNext;
-    if ( (UFG::Conversation::eConversationType *)v13 == &v2->m_type )
+    p_mNext = &this->m_lines.mNode.mNext[-1].mNext;
+    if ( p_mNext == (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **)&this->m_type )
     {
-LABEL_35:
-      if ( v7 && v10 )
+LABEL_33:
+      if ( m_pComponent && v10 )
       {
-        UFG::CharacterOccupantComponent::GetCurrentVehicle(v7);
-        v14 = UFG::CharacterOccupantComponent::GetCurrentVehicle(v10);
-        LOBYTE(v1) = UFG::CharacterOccupantComponent::GetCurrentVehicle(v7) == v14;
+        UFG::CharacterOccupantComponent::GetCurrentVehicle(m_pComponent);
+        CurrentVehicle = UFG::CharacterOccupantComponent::GetCurrentVehicle(v10);
+        LOBYTE(m_activeElement) = UFG::CharacterOccupantComponent::GetCurrentVehicle(m_pComponent) == CurrentVehicle;
       }
       else
       {
-        LOBYTE(v1) = 0;
+        LOBYTE(m_activeElement) = 0;
       }
     }
     else
     {
-      while ( *(_DWORD *)(v13 + 24) != qwsPlayCellPhone.mUID )
+      while ( *((_DWORD *)p_mNext + 6) != qwsPlayCellPhone.mUID )
       {
-        v13 = *(_QWORD *)(v13 + 16) - 8i64;
-        if ( (UFG::Conversation::eConversationType *)v13 == &v2->m_type )
-          goto LABEL_35;
+        p_mNext = &p_mNext[2][-1].mNext;
+        if ( p_mNext == (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **)&this->m_type )
+          goto LABEL_33;
       }
-      LOBYTE(v1) = 1;
+      LOBYTE(m_activeElement) = 1;
     }
   }
-  return (char)v1;
+  return (char)m_activeElement;
 }
 
 // File Line: 1776
 // RVA: 0x5935E0
-void __fastcall UFG::ScriptedConversation::ScriptedConversation(UFG::ScriptedConversation *this, ASymbol *symbol, unsigned int uid)
+void __fastcall UFG::ScriptedConversation::ScriptedConversation(
+        UFG::ScriptedConversation *this,
+        ASymbol *symbol,
+        unsigned int uid)
 {
-  ASymbol *v3; // rbx
-  UFG::ScriptedConversation *v4; // rdi
-
-  v3 = symbol;
-  v4 = this;
-  UFG::Conversation::Conversation((UFG::Conversation *)&this->vfptr, uid, 0);
-  v4->vfptr = (UFG::ConversationVtbl *)&UFG::ScriptedConversation::`vftable;
-  v4->m_script = 0i64;
-  *((_BYTE *)&v4->0 + 168) &= 0xFDu;
-  UFG::ScriptedConversation::SetupScript(v4, v3);
+  UFG::Conversation::Conversation(this, uid, eConversationType_Scripted);
+  this->vfptr = (UFG::ConversationVtbl *)&UFG::ScriptedConversation::`vftable;
+  this->m_script = 0i64;
+  *((_BYTE *)&this->UFG::Conversation + 168) &= ~2u;
+  UFG::ScriptedConversation::SetupScript(this, symbol);
 }
 
 // File Line: 1802
 // RVA: 0x5AC310
 void __fastcall UFG::ScriptedConversation::SetupScript(UFG::ScriptedConversation *this, ASymbol *symbol)
 {
-  ASymbol *v2; // rsi
-  UFG::ScriptedConversation *v3; // rbx
   SSActorClass *v4; // rdi
   UFG::TSScriptedDialogue *v5; // rax
 
-  v2 = symbol;
-  v3 = this;
   v4 = (SSActorClass *)SSBrain::get_class("ScriptedDialogue");
   if ( v4 )
   {
     v5 = (UFG::TSScriptedDialogue *)AMemory::c_malloc_func(0x88ui64, "TSScriptedDialogue");
     if ( v5 )
-      UFG::TSScriptedDialogue::TSScriptedDialogue(v5, v3, v2, v4);
-    v3->m_script = v5;
+      UFG::TSScriptedDialogue::TSScriptedDialogue(v5, this, symbol, v4);
+    this->m_script = v5;
     ++UFG::gNumScriptedConversations;
-    ++v3->m_script->i_ref_count;
-    SSInstance::call_default_constructor((SSInstance *)&v3->m_script->vfptr);
-    SSActor::enable_behavior((SSActor *)&v3->m_script->vfptr, 1);
+    ++this->m_script->i_ref_count;
+    SSInstance::call_default_constructor(this->m_script);
+    SSActor::enable_behavior(this->m_script, 1);
   }
 }
 
@@ -1814,29 +1696,22 @@ void __fastcall UFG::ScriptedConversation::SetupScript(UFG::ScriptedConversation
 // RVA: 0x592B50
 void __fastcall UFG::AmbientConversation::AmbientConversation(UFG::AmbientConversation *this, unsigned int uid)
 {
-  UFG::AmbientConversation *v2; // rbx
-
-  v2 = this;
-  UFG::Conversation::Conversation((UFG::Conversation *)&this->vfptr, uid, eConversationType_Ambient);
-  v2->vfptr = (UFG::ConversationVtbl *)&UFG::AmbientConversation::`vftable;
-  *((_BYTE *)&v2->0 + 168) |= 4u;
-  v2->m_linePriority = 5;
+  UFG::Conversation::Conversation(this, uid, eConversationType_Ambient);
+  this->vfptr = (UFG::ConversationVtbl *)&UFG::AmbientConversation::`vftable;
+  *((_BYTE *)&this->UFG::Conversation + 168) |= 4u;
+  this->m_linePriority = 5;
 }
 
 // File Line: 1966
 // RVA: 0x5AC2A0
-void __fastcall UFG::AmbientConversation::SetupLines(UFG::AmbientConversation *this, UFG::SimObject *person1, UFG::SimObject *person2)
+void __fastcall UFG::AmbientConversation::SetupLines(
+        UFG::AmbientConversation *this,
+        UFG::SimObjectCharacter *person1,
+        UFG::SimObjectCharacter *person2)
 {
-  UFG::SimObject *v3; // rsi
-  UFG::AmbientConversation *v4; // rbx
-  UFG::SimObject *v5; // rdi
-
-  v3 = person1;
-  v4 = this;
-  v5 = person2;
-  if ( UFG::AmbientConversationConfigurator::Start(this->m_topic, (UFG::Conversation *)&this->vfptr) )
+  if ( UFG::AmbientConversationConfigurator::Start(this->m_topic, this) )
   {
-    UFG::AmbientConversationConfigurator::SetupConversation((UFG::Conversation *)&v4->vfptr, v3, v5);
+    UFG::AmbientConversationConfigurator::SetupConversation(this, person1, person2);
     UFG::AmbientConversationConfigurator::sm_isBusy = 0;
     UFG::AmbientConversationConfigurator::sm_curModel = 0i64;
     UFG::AmbientConversationConfigurator::sm_lastLineGroup = 0i64;
@@ -1849,349 +1724,344 @@ void __fastcall UFG::AmbientConversation::SetupLines(UFG::AmbientConversation *t
 // RVA: 0x1554DB0
 __int64 dynamic_initializer_for__UFG::AmbientConversationConfigurator::sm_models__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::AmbientConversationConfigurator::sm_models__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::AmbientConversationConfigurator::sm_models__);
 }
 
 // File Line: 2001
 // RVA: 0x5A0960
-void __fastcall UFG::AmbientConversationConfigurator::LoadDefinitionFile(float a1)
+void UFG::AmbientConversationConfigurator::LoadDefinitionFile(void)
 {
-  SimpleXML::XMLDocument *v1; // rax
-  SimpleXML::XMLDocument *v2; // rsi
-  SimpleXML::XMLNode *v3; // rax
-  SimpleXML::XMLNode *v4; // r13
-  char *v5; // rdi
-  char v6; // si
-  char v7; // bp
-  __int16 v8; // r14
-  char v9; // r15
-  char *v10; // r12
-  UFG::allocator::free_link *v11; // rax
-  UFG::allocator::free_link *v12; // rbx
-  UFG::allocator::free_link *v13; // r8
-  UFG::allocator::free_link *v14; // rdx
-  UFG::allocator::free_link *v15; // rcx
-  UFG::allocator::free_link *v16; // rax
-  signed int v17; // edx
-  UFG::qStaticSymbol *v18; // rcx
-  UFG::qNode<UFG::AmbientConversationConfigurator::ConversationModel,UFG::AmbientConversationConfigurator::ConversationModel> *v19; // rax
-  SimpleXML::XMLNode *v20; // r12
-  __int16 v21; // bx
-  __int16 v22; // di
-  __int16 v23; // si
-  __int16 v24; // bp
-  char v25; // r14
-  char v26; // r15
-  UFG::allocator::free_link *v27; // rax
-  __int64 v28; // r13
-  UFG::allocator::free_link *v29; // ST38_8
-  signed __int64 k; // rax
-  _QWORD *v31; // rdx
-  __int64 v32; // rcx
-  _QWORD *v33; // rax
-  __int64 *v34; // rax
-  SimpleXML::XMLNode *v35; // r12
-  char *v36; // rbx
-  char *v37; // rbx
-  unsigned int v38; // edi
-  UFG::AmbientConversationConfigurator::Context *v39; // rax
-  UFG::AmbientConversationConfigurator::Context *v40; // r13
-  SimpleXML::XMLNode *v41; // rbp
-  UFG::qList<UFG::AmbientConversationConfigurator::Action,UFG::AmbientConversationConfigurator::Action,1,0> *v42; // r15
-  char *v43; // r14
-  char v44; // di
-  UFG::allocator::free_link *v45; // rax
-  UFG::allocator::free_link *v46; // rbx
-  UFG::allocator::free_link *v47; // rcx
-  char *v48; // rax
+  SimpleXML::XMLDocument *v0; // rax
+  SimpleXML::XMLDocument *v1; // rsi
+  SimpleXML::XMLNode *Node; // rax
+  SimpleXML::XMLNode *ChildNode; // r13
+  char *Attribute; // rdi
+  char v5; // si
+  char v6; // bp
+  __int16 v7; // r14
+  double v8; // xmm0_8
+  int v9; // xmm6_4
+  double v10; // xmm0_8
+  char v11; // r15
+  char *v12; // r12
+  UFG::allocator::free_link *v13; // rax
+  UFG::allocator::free_link *v14; // rbx
+  UFG::allocator::free_link *v15; // r8
+  UFG::allocator::free_link *mNext; // rdx
+  UFG::allocator::free_link *v17; // rcx
+  UFG::allocator::free_link *v18; // rax
+  int v19; // edx
+  UFG::qStaticSymbol *v20; // rcx
+  UFG::qNode<UFG::AmbientConversationConfigurator::ConversationModel,UFG::AmbientConversationConfigurator::ConversationModel> *mPrev; // rax
+  SimpleXML::XMLNode *v22; // r12
+  __int16 v23; // bx
+  __int16 v24; // di
+  __int16 v25; // si
+  __int16 v26; // bp
+  char v27; // r14
+  char v28; // r15
+  UFG::allocator::free_link *v29; // rax
+  __int64 v30; // r13
+  __int64 k; // rax
+  _QWORD *v32; // rdx
+  __int64 v33; // rcx
+  _QWORD *v34; // rax
+  __int64 *v35; // rax
+  SimpleXML::XMLNode *v36; // r12
+  char *Name; // rbx
+  char *v38; // rbx
+  unsigned int v39; // edi
+  UFG::AmbientConversationConfigurator::Context *v40; // rax
+  UFG::AmbientConversationConfigurator::Context *v41; // r13
+  SimpleXML::XMLNode *v42; // rbp
+  UFG::qList<UFG::AmbientConversationConfigurator::Action,UFG::AmbientConversationConfigurator::Action,1,0> *p_m_actions; // r15
+  char *v44; // r14
+  double v45; // xmm0_8
+  char v46; // di
+  UFG::allocator::free_link *v47; // rax
+  UFG::allocator::free_link *v48; // rbx
   char *v49; // rax
-  signed int v50; // esi
-  signed __int64 v51; // rdi
-  UFG::allocator::free_link *v52; // rcx
+  char *v50; // rax
+  int v51; // esi
+  __int64 v52; // rdi
   UFG::allocator::free_link *v53; // rax
-  __int64 v54; // rcx
-  __int64 *v55; // rdx
-  UFG::allocator::free_link *v56; // rax
-  UFG::AmbientConversationConfigurator::Context *v57; // [rsp+30h] [rbp-B8h]
-  SimpleXML::XMLNode *l; // [rsp+38h] [rbp-B0h]
+  UFG::qNode<UFG::AmbientConversationConfigurator::Context,UFG::AmbientConversationConfigurator::Context> *v54; // rcx
+  UFG::qNode<UFG::AmbientConversationConfigurator::Context,UFG::AmbientConversationConfigurator::Context> *v55; // rax
+  UFG::AmbientConversationConfigurator::Context *v56; // [rsp+30h] [rbp-B8h]
+  SimpleXML::XMLNode *m; // [rsp+38h] [rbp-B0h]
   SimpleXML::XMLNode *prev_node; // [rsp+40h] [rbp-A8h]
   SimpleXML::XMLNode *j; // [rsp+48h] [rbp-A0h]
   SimpleXML::XMLNode *i; // [rsp+50h] [rbp-98h]
-  signed __int64 v62; // [rsp+58h] [rbp-90h]
-  void *action_request; // [rsp+F0h] [rbp+8h]
-  UFG::qSymbol result; // [rsp+F8h] [rbp+10h]
-  SimpleXML::XMLDocument *v65; // [rsp+100h] [rbp+18h]
-  UFG::allocator::free_link *v66; // [rsp+108h] [rbp+20h]
+  UFG::allocator::free_link *v61; // [rsp+58h] [rbp-90h]
+  void *action_request; // [rsp+F0h] [rbp+8h] BYREF
+  UFG::qSymbol result; // [rsp+F8h] [rbp+10h] BYREF
+  SimpleXML::XMLDocument *v64; // [rsp+100h] [rbp+18h]
+  UFG::allocator::free_link *v65; // [rsp+108h] [rbp+20h]
 
-  v1 = SimpleXML::XMLDocument::Open("Data\\Audio\\AmbientConversationConfig.xml", 1ui64, 0i64);
-  v2 = v1;
-  v65 = v1;
-  if ( v1 )
+  v0 = SimpleXML::XMLDocument::Open("Data\\Audio\\AmbientConversationConfig.xml", 1ui64, 0i64);
+  v1 = v0;
+  v64 = v0;
+  if ( v0 )
   {
-    v3 = SimpleXML::XMLDocument::GetNode(v1, 0i64, 0i64);
-    for ( i = v3; v3; i = v3 )
+    Node = SimpleXML::XMLDocument::GetNode(v0, 0i64, 0i64);
+    for ( i = Node; Node; i = Node )
     {
-      v4 = SimpleXML::XMLDocument::GetChildNode(v2, 0i64, v3);
-      for ( j = v4; v4; j = v4 )
+      ChildNode = SimpleXML::XMLDocument::GetChildNode(v1, 0i64, Node);
+      for ( j = ChildNode; ChildNode; j = ChildNode )
       {
-        v5 = SimpleXML::XMLNode::GetAttribute(v4, "topic", &customWorldMapCaption);
-        v6 = SimpleXML::XMLNode::GetAttribute(v4, "minLines", 0);
-        v7 = SimpleXML::XMLNode::GetAttribute(v4, "maxLines", 0);
-        v8 = SimpleXML::XMLNode::GetAttribute(v4, "numSpeakers", 0);
-        SimpleXML::XMLNode::GetAttribute(v4, "minTimeBetweenLines", 1.0);
-        SimpleXML::XMLNode::GetAttribute(v4, "maxTimeBetweenLines", 1.0);
-        v9 = SimpleXML::XMLNode::GetAttribute(v4, "showSubtitles", 0);
-        v10 = SimpleXML::XMLNode::GetAttribute(v4, "event", &customWorldMapCaption);
-        v11 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x38ui64, "ConversationModel", 0i64, 1u);
-        v12 = v11;
-        action_request = v11;
-        if ( v11 )
+        Attribute = SimpleXML::XMLNode::GetAttribute(ChildNode, "topic", &customCaption);
+        v5 = SimpleXML::XMLNode::GetAttribute(ChildNode, "minLines", 0);
+        v6 = SimpleXML::XMLNode::GetAttribute(ChildNode, "maxLines", 0);
+        v7 = SimpleXML::XMLNode::GetAttribute(ChildNode, "numSpeakers", 0);
+        v8 = SimpleXML::XMLNode::GetAttribute(
+               ChildNode,
+               "minTimeBetweenLines",
+               COERCE_DOUBLE((unsigned __int64)(unsigned int)FLOAT_1_0));
+        v9 = LODWORD(v8);
+        v10 = SimpleXML::XMLNode::GetAttribute(
+                ChildNode,
+                "maxTimeBetweenLines",
+                COERCE_DOUBLE((unsigned __int64)(unsigned int)FLOAT_1_0));
+        v11 = SimpleXML::XMLNode::GetAttribute(ChildNode, "showSubtitles", 0);
+        v12 = SimpleXML::XMLNode::GetAttribute(ChildNode, "event", &customCaption);
+        v13 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x38ui64, "ConversationModel", 0i64, 1u);
+        v14 = v13;
+        action_request = v13;
+        if ( v13 )
         {
-          v11->mNext = v11;
-          v11[1].mNext = v11;
-          v11[2].mNext = 0i64;
-          v11[3].mNext = 0i64;
-          LODWORD(v11[4].mNext) = 0;
-          BYTE4(v11[4].mNext) = 0;
-          v13 = v11 + 5;
-          v66 = v13;
           v13->mNext = v13;
           v13[1].mNext = v13;
-          v14 = v11[6].mNext;
-          if ( v14 != &v11[5] )
+          v13[2].mNext = 0i64;
+          v13[3].mNext = 0i64;
+          LODWORD(v13[4].mNext) = 0;
+          BYTE4(v13[4].mNext) = 0;
+          v15 = v13 + 5;
+          v65 = v13 + 5;
+          v13[5].mNext = v13 + 5;
+          v13[6].mNext = v13 + 5;
+          mNext = v13[6].mNext;
+          if ( mNext != &v13[5] )
           {
             do
             {
-              v15 = v14->mNext;
-              v16 = v14[1].mNext;
-              v15[1].mNext = v16;
-              v16->mNext = v15;
-              v14->mNext = v14;
-              v14[1].mNext = v14;
-              v14 = v12[6].mNext;
+              v17 = mNext->mNext;
+              v18 = mNext[1].mNext;
+              v17[1].mNext = v18;
+              v18->mNext = v17;
+              mNext->mNext = mNext;
+              mNext[1].mNext = mNext;
+              mNext = v14[6].mNext;
             }
-            while ( v14 != v13 );
+            while ( mNext != v15 );
           }
         }
         else
         {
-          v12 = 0i64;
+          v14 = 0i64;
         }
-        LOBYTE(v12[3].mNext) = v6;
-        BYTE1(v12[3].mNext) = v7;
-        WORD1(v12[3].mNext) = v8;
-        *((float *)&v12[3].mNext + 1) = a1;
-        *(float *)&v12[4].mNext = a1;
-        BYTE4(v12[4].mNext) = v9;
-        UFG::qSymbol::create_from_string(&result, v5);
-        v17 = 0;
-        v18 = UFG::ConversationTopicEnumSymbols;
-        while ( result.mUID != v18->mUID )
+        LOBYTE(v14[3].mNext) = v5;
+        BYTE1(v14[3].mNext) = v6;
+        WORD1(v14[3].mNext) = v7;
+        HIDWORD(v14[3].mNext) = v9;
+        LODWORD(v14[4].mNext) = LODWORD(v10);
+        BYTE4(v14[4].mNext) = v11;
+        UFG::qSymbol::create_from_string(&result, Attribute);
+        v19 = 0;
+        v20 = UFG::ConversationTopicEnumSymbols;
+        while ( result.mUID != v20->mUID )
         {
-          ++v17;
-          ++v18;
-          if ( (signed __int64)v18 >= (signed __int64)&UFG::qStaticSymbol_eINVENTORY_ITEM_MEATWRAPPED )
+          ++v19;
+          if ( (__int64)++v20 >= (__int64)&UFG::qStaticSymbol_eINVENTORY_ITEM_MEATWRAPPED )
           {
-            v17 = 25;
+            v19 = 25;
             break;
           }
         }
-        LODWORD(v12[2].mNext) = v17;
-        if ( (signed int)UFG::qStringLength(v10) > 0 )
-          HIDWORD(v12[2].mNext) = UFG::TiDo::CalcWwiseUid(v10);
-        v19 = UFG::AmbientConversationConfigurator::sm_models.mNode.mPrev;
-        UFG::AmbientConversationConfigurator::sm_models.mNode.mPrev->mNext = (UFG::qNode<UFG::AmbientConversationConfigurator::ConversationModel,UFG::AmbientConversationConfigurator::ConversationModel> *)v12;
-        v12->mNext = (UFG::allocator::free_link *)v19;
-        v12[1].mNext = (UFG::allocator::free_link *)&UFG::AmbientConversationConfigurator::sm_models;
-        UFG::AmbientConversationConfigurator::sm_models.mNode.mPrev = (UFG::qNode<UFG::AmbientConversationConfigurator::ConversationModel,UFG::AmbientConversationConfigurator::ConversationModel> *)v12;
-        v2 = v65;
-        v20 = SimpleXML::XMLDocument::GetChildNode(v65, 0i64, v4);
-        prev_node = v20;
-        if ( v20 )
+        LODWORD(v14[2].mNext) = v19;
+        if ( (int)UFG::qStringLength(v12) > 0 )
+          HIDWORD(v14[2].mNext) = UFG::TiDo::CalcWwiseUid(v12);
+        mPrev = UFG::AmbientConversationConfigurator::sm_models.mNode.mPrev;
+        UFG::AmbientConversationConfigurator::sm_models.mNode.mPrev->mNext = (UFG::qNode<UFG::AmbientConversationConfigurator::ConversationModel,UFG::AmbientConversationConfigurator::ConversationModel> *)v14;
+        v14->mNext = (UFG::allocator::free_link *)mPrev;
+        v14[1].mNext = (UFG::allocator::free_link *)&UFG::AmbientConversationConfigurator::sm_models;
+        UFG::AmbientConversationConfigurator::sm_models.mNode.mPrev = (UFG::qNode<UFG::AmbientConversationConfigurator::ConversationModel,UFG::AmbientConversationConfigurator::ConversationModel> *)v14;
+        v1 = v64;
+        v22 = SimpleXML::XMLDocument::GetChildNode(v64, 0i64, ChildNode);
+        prev_node = v22;
+        if ( v22 )
         {
-          v62 = (signed __int64)&v12[5];
+          v61 = v14 + 5;
           do
           {
-            SimpleXML::XMLNode::GetName(v20);
-            v21 = SimpleXML::XMLNode::GetAttribute(v20, "groupId", 0);
-            v22 = SimpleXML::XMLNode::GetAttribute(v20, "precedingGroupId", 0);
-            v23 = SimpleXML::XMLNode::GetAttribute(v20, "speaker", 0);
-            v24 = SimpleXML::XMLNode::GetAttribute(v20, "maxLinesFromGroup", 0);
-            v25 = SimpleXML::XMLNode::GetAttribute(v20, "terminalNode", 0);
-            v26 = SimpleXML::XMLNode::GetAttribute(v20, "startNode", 0);
-            v27 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x30ui64, "ConversationModel.LineGroup", 0i64, 1u);
-            v28 = (__int64)v27;
-            v66 = v27;
-            action_request = v27;
-            if ( v27 )
+            SimpleXML::XMLNode::GetName(v22);
+            v23 = SimpleXML::XMLNode::GetAttribute(v22, "groupId", 0);
+            v24 = SimpleXML::XMLNode::GetAttribute(v22, "precedingGroupId", 0);
+            v25 = SimpleXML::XMLNode::GetAttribute(v22, "speaker", 0);
+            v26 = SimpleXML::XMLNode::GetAttribute(v22, "maxLinesFromGroup", 0);
+            v27 = SimpleXML::XMLNode::GetAttribute(v22, "terminalNode", 0);
+            v28 = SimpleXML::XMLNode::GetAttribute(v22, "startNode", 0);
+            v29 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x30ui64, "ConversationModel.LineGroup", 0i64, 1u);
+            v30 = (__int64)v29;
+            v65 = v29;
+            action_request = v29;
+            if ( v29 )
             {
-              v27->mNext = v27;
-              v27[1].mNext = v27;
-              LODWORD(v27[2].mNext) = 0;
-              WORD2(v27[2].mNext) = -1;
-              HIWORD(v27[2].mNext) = 0;
-              LOBYTE(v27[3].mNext) = 0;
-              v29 = v27 + 4;
               v29->mNext = v29;
               v29[1].mNext = v29;
-              for ( k = (signed __int64)&v27[5].mNext[-1]; k != v28 + 24; k = *(_QWORD *)(v28 + 40) - 8i64 )
+              LODWORD(v29[2].mNext) = 0;
+              WORD2(v29[2].mNext) = -1;
+              HIWORD(v29[2].mNext) = 0;
+              LOBYTE(v29[3].mNext) = 0;
+              v29[4].mNext = v29 + 4;
+              v29[5].mNext = v29 + 4;
+              for ( k = (__int64)&v29[5].mNext[-1]; k != v30 + 24; k = *(_QWORD *)(v30 + 40) - 8i64 )
               {
-                v31 = (_QWORD *)(k + 8);
-                v32 = *(_QWORD *)(k + 8);
-                v33 = *(_QWORD **)(k + 16);
-                *(_QWORD *)(v32 + 8) = v33;
-                *v33 = v32;
-                *v31 = v31;
-                v31[1] = v31;
+                v32 = (_QWORD *)(k + 8);
+                v33 = *(_QWORD *)(k + 8);
+                v34 = *(_QWORD **)(k + 16);
+                *(_QWORD *)(v33 + 8) = v34;
+                *v34 = v33;
+                *v32 = v32;
+                v32[1] = v32;
               }
             }
             else
             {
-              v28 = 0i64;
-              v66 = 0i64;
+              v30 = 0i64;
+              v65 = 0i64;
             }
-            *(_WORD *)(v28 + 16) = v21;
-            *(_WORD *)(v28 + 22) = v22;
-            *(_WORD *)(v28 + 18) = v23;
-            *(_WORD *)(v28 + 20) = v24;
-            *(_BYTE *)(v28 + 24) = v25;
-            *(_BYTE *)(v28 + 25) = v26;
-            v34 = *(__int64 **)(v62 + 8);
-            *(_QWORD *)(v62 + 8) = v28;
-            *(_QWORD *)v28 = v62;
-            *(_QWORD *)(v28 + 8) = v34;
-            *v34 = v28;
-            v2 = v65;
-            v35 = SimpleXML::XMLDocument::GetChildNode(v65, 0i64, v20);
-            for ( l = v35; v35; l = v35 )
+            *(_WORD *)(v30 + 16) = v23;
+            *(_WORD *)(v30 + 22) = v24;
+            *(_WORD *)(v30 + 18) = v25;
+            *(_WORD *)(v30 + 20) = v26;
+            *(_BYTE *)(v30 + 24) = v27;
+            *(_BYTE *)(v30 + 25) = v28;
+            v35 = (__int64 *)v61[1].mNext;
+            v61[1].mNext = (UFG::allocator::free_link *)v30;
+            *(_QWORD *)v30 = v61;
+            *(_QWORD *)(v30 + 8) = v35;
+            *v35 = v30;
+            v1 = v64;
+            v36 = SimpleXML::XMLDocument::GetChildNode(v64, 0i64, v22);
+            for ( m = v36; v36; m = v36 )
             {
-              v36 = SimpleXML::XMLNode::GetName(v35);
-              if ( (unsigned int)UFG::qStringCompare(v36, "Context", -1) )
+              Name = SimpleXML::XMLNode::GetName(v36);
+              if ( (unsigned int)UFG::qStringCompare(Name, "Context", -1) )
               {
-                if ( !(unsigned int)UFG::qStringCompare(v36, "PrecedingGroup", -1) )
-                  *(_WORD *)(v28 + 22) |= 1 << SimpleXML::XMLNode::GetAttribute(v35, "id", 0);
+                if ( !(unsigned int)UFG::qStringCompare(Name, "PrecedingGroup", -1) )
+                  *(_WORD *)(v30 + 22) |= 1 << SimpleXML::XMLNode::GetAttribute(v36, "id", 0);
               }
               else
               {
-                v37 = SimpleXML::XMLNode::GetAttribute(v35, "name", &customWorldMapCaption);
-                v38 = SimpleXML::XMLNode::GetAttribute(v35, "weight", 0);
-                v39 = (UFG::AmbientConversationConfigurator::Context *)UFG::qMemoryPool::Allocate(
+                v38 = SimpleXML::XMLNode::GetAttribute(v36, "name", &customCaption);
+                v39 = SimpleXML::XMLNode::GetAttribute(v36, "weight", 0);
+                v40 = (UFG::AmbientConversationConfigurator::Context *)UFG::qMemoryPool::Allocate(
                                                                          &g_AudioComponentPool,
                                                                          0x58ui64,
                                                                          "ConversationModel.Context",
                                                                          0i64,
                                                                          1u);
-                action_request = v39;
-                if ( v39 )
-                  UFG::AmbientConversationConfigurator::Context::Context(v39);
-                v40 = v39;
-                v57 = v39;
-                UFG::qString::Set(&v39->m_contextStr, v37);
-                v40->m_weight = v38;
-                v41 = SimpleXML::XMLDocument::GetChildNode(v2, 0i64, v35);
-                if ( v41 )
+                action_request = v40;
+                if ( v40 )
+                  UFG::AmbientConversationConfigurator::Context::Context(v40);
+                v41 = v40;
+                v56 = v40;
+                UFG::qString::Set(&v40->m_contextStr, v38);
+                v41->m_weight = v39;
+                v42 = SimpleXML::XMLDocument::GetChildNode(v1, 0i64, v36);
+                if ( v42 )
                 {
-                  v42 = &v40->m_actions;
+                  p_m_actions = &v41->m_actions;
                   do
                   {
-                    v43 = SimpleXML::XMLNode::GetAttribute(v41, "name", &customWorldMapCaption);
-                    SimpleXML::XMLNode::GetAttribute(v41, "time", 0.0);
-                    v44 = SimpleXML::XMLNode::GetAttribute(v41, "onListener", 0);
-                    v45 = UFG::qMemoryPool::Allocate(
+                    v44 = SimpleXML::XMLNode::GetAttribute(v42, "name", &customCaption);
+                    v45 = SimpleXML::XMLNode::GetAttribute(v42, "time", 0.0);
+                    v46 = SimpleXML::XMLNode::GetAttribute(v42, "onListener", 0);
+                    v47 = UFG::qMemoryPool::Allocate(
                             &g_AudioComponentPool,
                             0x28ui64,
                             "AmbientConversation.Action",
                             0i64,
                             1u);
-                    v46 = v45;
-                    action_request = v45;
-                    if ( v45 )
+                    v48 = v47;
+                    action_request = v47;
+                    if ( v47 )
                     {
-                      v47 = v45 + 1;
-                      v47->mNext = v47;
-                      v47[1].mNext = v47;
-                      v45->mNext = (UFG::allocator::free_link *)&UFG::AmbientConversationConfigurator::Action::`vftable;
-                      *(UFG::allocator::free_link **)((char *)&v45[3].mNext + 4) = 0i64;
-                      BYTE4(v45[4].mNext) = 0;
+                      v47[1].mNext = v47 + 1;
+                      v47[2].mNext = v47 + 1;
+                      v47->mNext = (UFG::allocator::free_link *)&UFG::AmbientConversationConfigurator::Action::`vftable;
+                      *(UFG::allocator::free_link **)((char *)&v47[3].mNext + 4) = 0i64;
+                      BYTE4(v47[4].mNext) = 0;
                     }
                     else
                     {
-                      v46 = 0i64;
+                      v48 = 0i64;
                     }
-                    *((float *)&v46[3].mNext + 1) = a1;
-                    BYTE4(v46[4].mNext) = v44;
-                    v48 = SimpleXML::XMLNode::GetName(v41);
-                    if ( (unsigned int)UFG::qStringCompare(v48, "Gesture", -1) )
+                    HIDWORD(v48[3].mNext) = LODWORD(v45);
+                    BYTE4(v48[4].mNext) = v46;
+                    v49 = SimpleXML::XMLNode::GetName(v42);
+                    if ( (unsigned int)UFG::qStringCompare(v49, "Gesture", -1) )
                     {
-                      v49 = SimpleXML::XMLNode::GetName(v41);
-                      if ( !(unsigned int)UFG::qStringCompare(v49, "Emotion", -1) )
+                      v50 = SimpleXML::XMLNode::GetName(v42);
+                      if ( !(unsigned int)UFG::qStringCompare(v50, "Emotion", -1) )
                       {
-                        LODWORD(v46[3].mNext) = 0;
-                        v50 = 0;
-                        v51 = 0i64;
-                        while ( (unsigned int)UFG::qStringCompareInsensitive(
-                                                v43,
-                                                *(const char **)(v51 + 5402706272i64),
-                                                -1)
-                             && (unsigned int)UFG::qStringCompareInsensitive(
-                                                v43,
-                                                *(const char **)(v51 + 5402833232i64),
-                                                -1) )
+                        LODWORD(v48[3].mNext) = 0;
+                        v51 = 0;
+                        v52 = 0i64;
+                        while ( (unsigned int)UFG::qStringCompareInsensitive(v44, UFG::AIEmotionNames[v52], -1)
+                             && (unsigned int)UFG::qStringCompareInsensitive(v44, UFG::FacialEmotionNames[v52], -1) )
                         {
-                          ++v50;
-                          v51 += 8i64;
-                          if ( v51 >= 104 )
+                          ++v51;
+                          if ( ++v52 >= 13 )
                           {
-                            v50 = -1;
+                            v51 = -1;
                             break;
                           }
                         }
-                        LODWORD(v46[4].mNext) = v50;
-                        v2 = v65;
+                        LODWORD(v48[4].mNext) = v51;
+                        v1 = v64;
                       }
                     }
                     else
                     {
-                      LODWORD(v46[3].mNext) = 1;
+                      LODWORD(v48[3].mNext) = 1;
                       LODWORD(action_request) = gActionRequest_Action.m_EnumValue;
-                      Intention::GetActionRequest(v43, (unsigned int *)&action_request);
-                      LODWORD(v46[4].mNext) = (_DWORD)action_request;
+                      Intention::GetActionRequest(v44, (unsigned int *)&action_request);
+                      LODWORD(v48[4].mNext) = (_DWORD)action_request;
                     }
-                    v52 = v46 + 1;
-                    v53 = (UFG::allocator::free_link *)v42->mNode.mPrev;
-                    v53[1].mNext = v46 + 1;
-                    v52->mNext = v53;
-                    v52[1].mNext = (UFG::allocator::free_link *)v42;
-                    v42->mNode.mPrev = (UFG::qNode<UFG::AmbientConversationConfigurator::Action,UFG::AmbientConversationConfigurator::Action> *)&v46[1];
-                    v41 = SimpleXML::XMLDocument::GetNode(v2, 0i64, v41);
+                    v53 = (UFG::allocator::free_link *)p_m_actions->mNode.mPrev;
+                    v53[1].mNext = v48 + 1;
+                    v48[1].mNext = v53;
+                    v48[2].mNext = (UFG::allocator::free_link *)p_m_actions;
+                    p_m_actions->mNode.mPrev = (UFG::qNode<UFG::AmbientConversationConfigurator::Action,UFG::AmbientConversationConfigurator::Action> *)&v48[1];
+                    v42 = SimpleXML::XMLDocument::GetNode(v1, 0i64, v42);
                   }
-                  while ( v41 );
-                  v35 = l;
-                  v40 = v57;
+                  while ( v42 );
+                  v36 = m;
+                  v41 = v56;
                 }
-                v54 = (__int64)&v66[4];
-                v55 = (__int64 *)&v40->mPrev;
-                v56 = v66[5].mNext;
-                *(_QWORD *)(v54 + 8) = (char *)v40 + 8;
-                *v55 = v54;
-                v55[1] = (__int64)v56;
-                v56->mNext = (UFG::allocator::free_link *)&v40->mPrev;
-                v28 = (__int64)v66;
+                v54 = (UFG::qNode<UFG::AmbientConversationConfigurator::Context,UFG::AmbientConversationConfigurator::Context> *)&v65[4];
+                v55 = (UFG::qNode<UFG::AmbientConversationConfigurator::Context,UFG::AmbientConversationConfigurator::Context> *)v65[5].mNext;
+                v65[5].mNext = (UFG::allocator::free_link *)&v41->UFG::qNode<UFG::AmbientConversationConfigurator::Context,UFG::AmbientConversationConfigurator::Context>;
+                v41->mPrev = v54;
+                v41->mNext = v55;
+                v55->mPrev = &v41->UFG::qNode<UFG::AmbientConversationConfigurator::Context,UFG::AmbientConversationConfigurator::Context>;
+                v30 = (__int64)v65;
               }
-              v35 = SimpleXML::XMLDocument::GetNode(v2, 0i64, v35);
+              v36 = SimpleXML::XMLDocument::GetNode(v1, 0i64, v36);
             }
-            v20 = SimpleXML::XMLDocument::GetNode(v2, 0i64, prev_node);
-            prev_node = v20;
+            v22 = SimpleXML::XMLDocument::GetNode(v1, 0i64, prev_node);
+            prev_node = v22;
           }
-          while ( v20 );
-          v4 = j;
+          while ( v22 );
+          ChildNode = j;
         }
-        v4 = SimpleXML::XMLDocument::GetNode(v2, 0i64, v4);
+        ChildNode = SimpleXML::XMLDocument::GetNode(v1, 0i64, ChildNode);
       }
-      v3 = SimpleXML::XMLDocument::GetNode(v2, 0i64, i);
+      Node = SimpleXML::XMLDocument::GetNode(v1, 0i64, i);
     }
-    SimpleXML::XMLDocument::~XMLDocument(v2);
-    operator delete[](v2);
+    SimpleXML::XMLDocument::~XMLDocument(v1);
+    operator delete[](v1);
   }
 }
 
@@ -2199,21 +2069,18 @@ void __fastcall UFG::AmbientConversationConfigurator::LoadDefinitionFile(float a
 // RVA: 0x5AC5E0
 char __fastcall UFG::AmbientConversationConfigurator::Start(UFG::eConversationTopic topic, UFG::Conversation *conv)
 {
-  UFG::Conversation *v2; // rbx
-  int v3; // eax
-  UFG::qNode<UFG::AmbientConversationConfigurator::ConversationModel,UFG::AmbientConversationConfigurator::ConversationModel> *v4; // r8
-  int v5; // er9
-  UFG::qNode<UFG::AmbientConversationConfigurator::ConversationModel,UFG::AmbientConversationConfigurator::ConversationModel> *v6; // rax
+  int RandomTopic; // eax
+  UFG::qNode<UFG::AmbientConversationConfigurator::ConversationModel,UFG::AmbientConversationConfigurator::ConversationModel> *mNext; // r8
+  int v5; // r9d
+  UFG::qNode<UFG::AmbientConversationConfigurator::ConversationModel,UFG::AmbientConversationConfigurator::ConversationModel> *mPrev; // rax
   int v7; // ecx
-  char result; // al
 
-  v2 = conv;
-  v3 = UFG::AmbientConversationConfigurator::GetRandomTopic(topic);
-  v4 = UFG::AmbientConversationConfigurator::sm_models.mNode.mNext;
+  RandomTopic = UFG::AmbientConversationConfigurator::GetRandomTopic(topic);
+  mNext = UFG::AmbientConversationConfigurator::sm_models.mNode.mNext;
   UFG::AmbientConversationConfigurator::sm_isBusy = 1;
-  v5 = v3;
+  v5 = RandomTopic;
   UFG::AmbientConversationConfigurator::sm_curLine = 0;
-  UFG::AmbientConversationConfigurator::sm_curConversation = v2;
+  UFG::AmbientConversationConfigurator::sm_curConversation = conv;
   UFG::AmbientConversationConfigurator::sm_lastLineGroup = 0i64;
   if ( (UFG::qList<UFG::AmbientConversationConfigurator::ConversationModel,UFG::AmbientConversationConfigurator::ConversationModel,1,0> *)UFG::AmbientConversationConfigurator::sm_models.mNode.mNext == &UFG::AmbientConversationConfigurator::sm_models )
   {
@@ -2223,44 +2090,43 @@ LABEL_7:
     UFG::AmbientConversationConfigurator::sm_curModel = 0i64;
     UFG::AmbientConversationConfigurator::sm_lastLineGroup = 0i64;
     UFG::AmbientConversationConfigurator::sm_curConversation = 0i64;
-    result = 0;
+    return 0;
   }
   else
   {
     while ( 1 )
     {
-      if ( LODWORD(v4[1].mPrev) == v5 )
+      if ( LODWORD(mNext[1].mPrev) == v5 )
       {
-        v6 = v4[3].mPrev;
+        mPrev = mNext[3].mPrev;
         v7 = 0;
-        if ( v6 != (UFG::qNode<UFG::AmbientConversationConfigurator::ConversationModel,UFG::AmbientConversationConfigurator::ConversationModel> *)&v4[2].mNext )
+        if ( mPrev != (UFG::qNode<UFG::AmbientConversationConfigurator::ConversationModel,UFG::AmbientConversationConfigurator::ConversationModel> *)&mNext[2].mNext )
         {
           do
           {
-            v6 = v6->mNext;
+            mPrev = mPrev->mNext;
             ++v7;
           }
-          while ( v6 != (UFG::qNode<UFG::AmbientConversationConfigurator::ConversationModel,UFG::AmbientConversationConfigurator::ConversationModel> *)&v4[2].mNext );
+          while ( mPrev != (UFG::qNode<UFG::AmbientConversationConfigurator::ConversationModel,UFG::AmbientConversationConfigurator::ConversationModel> *)&mNext[2].mNext );
           if ( v7 > 0 )
             break;
         }
       }
-      v4 = v4->mNext;
-      if ( v4 == (UFG::qNode<UFG::AmbientConversationConfigurator::ConversationModel,UFG::AmbientConversationConfigurator::ConversationModel> *)&UFG::AmbientConversationConfigurator::sm_models )
+      mNext = mNext->mNext;
+      if ( mNext == (UFG::qNode<UFG::AmbientConversationConfigurator::ConversationModel,UFG::AmbientConversationConfigurator::ConversationModel> *)&UFG::AmbientConversationConfigurator::sm_models )
         goto LABEL_7;
     }
-    UFG::AmbientConversationConfigurator::sm_curModel = (UFG::AmbientConversationConfigurator::ConversationModel *)v4;
-    result = 1;
+    UFG::AmbientConversationConfigurator::sm_curModel = (UFG::AmbientConversationConfigurator::ConversationModel *)mNext;
+    return 1;
   }
-  return result;
 }
 
 // File Line: 2225
 // RVA: 0x59D400
-signed __int64 __fastcall UFG::AmbientConversationConfigurator::GetRandomTopic(UFG::eConversationTopic inTopic)
+__int64 __fastcall UFG::AmbientConversationConfigurator::GetRandomTopic(UFG::eConversationTopic inTopic)
 {
   UFG::eConversationTopic v1; // ebx
-  signed __int64 result; // rax
+  __int64 result; // rax
   float v3; // xmm0_4
 
   v1 = inTopic;
@@ -2275,10 +2141,10 @@ signed __int64 __fastcall UFG::AmbientConversationConfigurator::GetRandomTopic(U
       return 44i64;
     if ( UFG::ConversationManager::sm_debugConversationTopic == 4 )
       return 29i64;
-    v3 = UFG::qRandom(1.0, &UFG::qDefaultSeed);
+    v3 = UFG::qRandom(1.0, (unsigned int *)&UFG::qDefaultSeed);
     if ( v3 <= 0.25 )
     {
-      v1 = 25;
+      return 25;
     }
     else
     {
@@ -2296,206 +2162,171 @@ signed __int64 __fastcall UFG::AmbientConversationConfigurator::GetRandomTopic(U
 
 // File Line: 2271
 // RVA: 0x5ABD20
-void __fastcall UFG::AmbientConversationConfigurator::SetupConversation(UFG::Conversation *conv, UFG::SimObject *speaker1, UFG::SimObject *speaker2)
+void __fastcall UFG::AmbientConversationConfigurator::SetupConversation(
+        UFG::Conversation *conv,
+        UFG::SimObjectCharacter *speaker1,
+        UFG::SimObjectCharacter *speaker2)
 {
-  UFG::SimObject *v3; // r13
-  UFG::SimObject *v4; // r15
   UFG::Conversation *v5; // rbp
-  unsigned __int8 v6; // si
-  unsigned __int16 v7; // r12
-  float v8; // xmm6_4
-  float v9; // xmm7_4
-  char v10; // r9
+  unsigned __int8 m_maxLines; // si
+  unsigned __int16 m_numSpeakers; // r12
+  float m_minTimeBetweenLines; // xmm6_4
+  float m_maxTimeBetweenLines; // xmm7_4
+  char m_showSubtitles; // r9
   char *v11; // rax
   char *v12; // rax
   UFG::ActorAudioComponent *v13; // r14
-  unsigned __int16 v14; // cx
-  UFG::ActorAudioComponent *v15; // rax
-  unsigned int v16; // edx
+  signed __int16 m_Flags; // cx
+  UFG::ActorAudioComponent *ComponentOfTypeHK; // rax
+  unsigned int m_activeAmbientConversationId; // edx
   UFG::qBaseTreeRB *v17; // rax
   unsigned int v18; // edx
   UFG::qBaseTreeRB *v19; // rax
-  signed __int64 v20; // rdi
+  int *p_mCount; // rdi
   unsigned int v21; // ebx
   char *v22; // rax
   _BOOL8 v23; // rdx
-  UFG::AudioEvent *v24; // rcx
-  unsigned __int16 v25; // cx
+  UFG::AudioEvent *m_pEvent; // rcx
+  signed __int16 v25; // cx
   UFG::ActorAudioComponent *v26; // rax
   UFG::AudioEvent *v27; // rcx
   unsigned int v28; // ebx
-  unsigned __int16 v29; // r14
-  UFG::AmbientConversationConfigurator::Context *v30; // r12
+  unsigned __int16 mUID; // r14
+  UFG::qNode<UFG::AmbientConversationConfigurator::Context,UFG::AmbientConversationConfigurator::Context> **NextLine; // r12
   UFG::allocator::free_link *v31; // rax
   __int64 v32; // rax
   __int64 v33; // rdi
-  __int16 v34; // ax
-  UFG::SimObject *v35; // rdx
+  __int16 m_speakerId; // ax
+  UFG::SimObjectCharacter *v35; // rdx
   __int64 v36; // rax
   int v37; // esi
-  signed __int64 i; // rbx
-  unsigned int v39; // er9
+  __int64 i; // rbx
+  unsigned int v39; // r9d
   float v40; // xmm2_4
-  UFG::qWiseSymbol *v41; // rax
-  char *v42; // rbx
-  const char *v43; // rax
+  UFG::qWiseSymbol *VoiceId; // rax
+  const char *v42; // rbx
+  char *v43; // rax
   char *v44; // rax
-  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **v45; // rcx
-  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *v46; // rax
-  bool v47; // cf
-  bool v48; // zf
-  UFG::AudioEvent *v49; // rcx
+  UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *mPrev; // rax
+  bool v46; // cc
+  UFG::AudioEvent *v47; // rcx
   char check_null; // [rsp+20h] [rbp-B8h]
-  unsigned int v51; // [rsp+30h] [rbp-A8h]
-  UFG::ActorAudioComponent *v52; // [rsp+38h] [rbp-A0h]
-  UFG::qString v53; // [rsp+50h] [rbp-88h]
-  UFG::Conversation *v54; // [rsp+E0h] [rbp+8h]
-  UFG::qWiseSymbol result; // [rsp+E8h] [rbp+10h]
-  unsigned int v56; // [rsp+F8h] [rbp+20h]
+  unsigned int v49; // [rsp+30h] [rbp-A8h]
+  UFG::ActorAudioComponent *v50; // [rsp+38h] [rbp-A0h]
+  UFG::qString v51; // [rsp+50h] [rbp-88h] BYREF
+  UFG::qWiseSymbol result; // [rsp+E8h] [rbp+10h] BYREF
+  unsigned int v54; // [rsp+F8h] [rbp+20h]
 
-  v54 = conv;
-  v3 = speaker2;
-  v4 = speaker1;
   v5 = conv;
-  v6 = UFG::AmbientConversationConfigurator::sm_curModel->m_maxLines;
-  v7 = UFG::AmbientConversationConfigurator::sm_curModel->m_numSpeakers;
-  LOWORD(result.mUID) = UFG::AmbientConversationConfigurator::sm_curModel->m_numSpeakers;
-  v8 = UFG::AmbientConversationConfigurator::sm_curModel->m_minTimeBetweenLines;
-  v9 = UFG::AmbientConversationConfigurator::sm_curModel->m_maxTimeBetweenLines;
-  v10 = UFG::AmbientConversationConfigurator::sm_curModel->m_showSubtitles;
-  *((_BYTE *)conv + 168) &= 0x7Fu;
-  *((_BYTE *)conv + 168) |= v10 << 7;
+  m_maxLines = UFG::AmbientConversationConfigurator::sm_curModel->m_maxLines;
+  m_numSpeakers = UFG::AmbientConversationConfigurator::sm_curModel->m_numSpeakers;
+  LOWORD(result.mUID) = m_numSpeakers;
+  m_minTimeBetweenLines = UFG::AmbientConversationConfigurator::sm_curModel->m_minTimeBetweenLines;
+  m_maxTimeBetweenLines = UFG::AmbientConversationConfigurator::sm_curModel->m_maxTimeBetweenLines;
+  m_showSubtitles = UFG::AmbientConversationConfigurator::sm_curModel->m_showSubtitles;
+  *((_BYTE *)conv + 168) &= ~0x80u;
+  *((_BYTE *)conv + 168) |= m_showSubtitles << 7;
   conv->m_externalSourcePlaybackEvent = UFG::AmbientConversationConfigurator::sm_curModel->m_eventId;
   if ( UFG::ConversationManager::sm_debugAmbConversations )
   {
     v11 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&speaker1->m_Name);
     UFG::qPrintf("AmbConv:: Speaker1: %s \n", v11);
-    if ( v3 )
+    if ( speaker2 )
     {
-      v12 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v3->m_Name);
+      v12 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&speaker2->m_Name);
       UFG::qPrintf("AmbConv:: Speaker2: %s \n", v12);
     }
   }
-  if ( v4 )
+  if ( speaker1 )
   {
-    v14 = v4->m_Flags;
-    if ( (v14 >> 14) & 1 )
+    m_Flags = speaker1->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v15 = UFG::SimObjectCharacter::GetComponent<UFG::ActorAudioComponent>((UFG::SimObjectCharacter *)v4);
+      ComponentOfTypeHK = UFG::SimObjectCharacter::GetComponent<UFG::ActorAudioComponent>(speaker1);
     }
-    else if ( (v14 & 0x8000u) == 0 )
+    else if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v14 >> 13) & 1 )
-      {
-        v15 = (UFG::ActorAudioComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                            (UFG::SimObjectGame *)v4,
-                                            UFG::ActorAudioComponent::_TypeUID);
-      }
-      else if ( (v14 >> 12) & 1 )
-      {
-        v15 = (UFG::ActorAudioComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                            (UFG::SimObjectGame *)v4,
-                                            UFG::ActorAudioComponent::_TypeUID);
-      }
-      else
-      {
-        v15 = (UFG::ActorAudioComponent *)UFG::SimObject::GetComponentOfType(v4, UFG::ActorAudioComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = (UFG::ActorAudioComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                        speaker1,
+                                                        UFG::ActorAudioComponent::_TypeUID);
     }
     else
     {
-      v15 = (UFG::ActorAudioComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                          (UFG::SimObjectGame *)v4,
-                                          UFG::ActorAudioComponent::_TypeUID);
+      ComponentOfTypeHK = (UFG::ActorAudioComponent *)UFG::SimObject::GetComponentOfType(
+                                                        speaker1,
+                                                        UFG::ActorAudioComponent::_TypeUID);
     }
-    v13 = v15;
+    v13 = ComponentOfTypeHK;
   }
   else
   {
     v13 = 0i64;
   }
-  v52 = v13;
-  v16 = v13->m_activeAmbientConversationId;
-  if ( v16 )
+  v50 = v13;
+  m_activeAmbientConversationId = v13->m_activeAmbientConversationId;
+  if ( m_activeAmbientConversationId )
   {
-    v17 = UFG::qBaseTreeRB::Get(&UFG::ConversationManager::sm_conversationDb.mTree, v16);
+    v17 = UFG::qBaseTreeRB::Get(&UFG::ConversationManager::sm_conversationDb.mTree, m_activeAmbientConversationId);
     if ( v17 )
     {
       if ( v17 != (UFG::qBaseTreeRB *)8 )
       {
         v18 = v13->m_activeAmbientConversationId;
         if ( v18 && (v19 = UFG::qBaseTreeRB::Get(&UFG::ConversationManager::sm_conversationDb.mTree, v18)) != 0i64 )
-          v20 = (signed __int64)&v19[-1].mCount;
+          p_mCount = &v19[-1].mCount;
         else
-          v20 = 0i64;
-        v21 = *(_DWORD *)(v20 + 144);
-        v22 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v4->m_Name);
+          p_mCount = 0i64;
+        v21 = p_mCount[36];
+        v22 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&speaker1->m_Name);
         UFG::qPrintf("AmbConv:: Ambient ped in more than 1 ambient conversation: %s %u\n", v22, v21);
-        UFG::Conversation::ForceFinish((UFG::Conversation *)v20, v23);
+        UFG::Conversation::ForceFinish((UFG::Conversation *)p_mCount, v23);
       }
     }
   }
   v13->m_activeAmbientConversationId = 0;
   v13->m_activeAmbientConversationId = v5->mNode.mUID;
-  if ( v13->m_curPlayingPriority <= 5 )
+  if ( v13->m_curPlayingPriority <= 5 && (*((_BYTE *)v13 + 552) & 8) != 0 )
   {
-    if ( *((_BYTE *)v13 + 552) & 8 )
-    {
-      v24 = v13->m_controller.m_pEvent;
-      if ( v24 )
-        UFG::AudioEvent::StopAndForget(v24, 0x1F4u);
-    }
+    m_pEvent = v13->m_controller.m_pEvent;
+    if ( m_pEvent )
+      UFG::AudioEvent::StopAndForget(m_pEvent, 500);
   }
-  if ( v7 == 2 )
+  if ( m_numSpeakers == 2 )
   {
-    if ( !v3 )
-      goto LABEL_79;
-    v25 = v3->m_Flags;
-    if ( (v25 >> 14) & 1 )
-    {
-      v26 = UFG::SimObjectCharacter::GetComponent<UFG::ActorAudioComponent>((UFG::SimObjectCharacter *)v3);
-    }
-    else if ( (v25 & 0x8000u) == 0 )
-    {
-      if ( (v25 >> 13) & 1 )
-        v26 = (UFG::ActorAudioComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                            (UFG::SimObjectGame *)v3,
-                                            UFG::ActorAudioComponent::_TypeUID);
-      else
-        v26 = (UFG::ActorAudioComponent *)((v25 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                               (UFG::SimObjectGame *)v3,
-                                                               UFG::ActorAudioComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(v3, UFG::ActorAudioComponent::_TypeUID));
-    }
+    if ( !speaker2 )
+      goto LABEL_76;
+    v25 = speaker2->m_Flags;
+    if ( (v25 & 0x4000) != 0 )
+      v26 = UFG::SimObjectCharacter::GetComponent<UFG::ActorAudioComponent>(speaker2);
     else
-    {
-      v26 = (UFG::ActorAudioComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                          (UFG::SimObjectGame *)v3,
-                                          UFG::ActorAudioComponent::_TypeUID);
-    }
+      v26 = (UFG::ActorAudioComponent *)(v25 < 0 || (v25 & 0x2000) != 0 || (v25 & 0x1000) != 0
+                                       ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                           speaker2,
+                                           UFG::ActorAudioComponent::_TypeUID)
+                                       : UFG::SimObject::GetComponentOfType(
+                                           speaker2,
+                                           UFG::ActorAudioComponent::_TypeUID));
     if ( !v26 )
-      goto LABEL_79;
+      goto LABEL_76;
     v26->m_activeAmbientConversationId = 0;
     v26->m_activeAmbientConversationId = v5->mNode.mUID;
-    if ( v26->m_curPlayingPriority <= 5 )
+    if ( v26->m_curPlayingPriority <= 5 && (*((_BYTE *)v26 + 552) & 8) != 0 )
     {
-      if ( *((_BYTE *)v26 + 552) & 8 )
-      {
-        v27 = v26->m_controller.m_pEvent;
-        if ( v27 )
-          UFG::AudioEvent::StopAndForget(v27, 0x1F4u);
-      }
+      v27 = v26->m_controller.m_pEvent;
+      if ( v27 )
+        UFG::AudioEvent::StopAndForget(v27, 500);
     }
   }
   v28 = 0;
-  v56 = 0;
-  v51 = v6;
-  if ( !v6 )
-    goto LABEL_78;
-  v29 = result.mUID;
+  v54 = 0;
+  v49 = m_maxLines;
+  if ( !m_maxLines )
+    goto LABEL_75;
+  mUID = result.mUID;
   while ( !UFG::AmbientConversationConfigurator::sm_lastLineGroup
        || !UFG::AmbientConversationConfigurator::sm_lastLineGroup->m_terminalNode )
   {
-    v30 = UFG::AmbientConversationConfigurator::GetNextLine();
+    NextLine = UFG::AmbientConversationConfigurator::GetNextLine();
     if ( UFG::AmbientConversationConfigurator::sm_lastLineGroup )
     {
       v31 = UFG::qMemoryPool::Allocate(
@@ -2513,39 +2344,40 @@ void __fastcall UFG::AmbientConversationConfigurator::SetupConversation(UFG::Con
       {
         v33 = 0i64;
       }
-      if ( v29 == 1 || (v34 = UFG::AmbientConversationConfigurator::sm_lastLineGroup->m_speakerId, v34 < 0) )
+      if ( mUID == 1
+        || (m_speakerId = UFG::AmbientConversationConfigurator::sm_lastLineGroup->m_speakerId, m_speakerId < 0) )
       {
-        if ( v28 % v29 )
-          goto LABEL_60;
-        UFG::ConversationElement::SetSpeaker((UFG::ConversationElement *)v33, v4);
-        v35 = v3;
-LABEL_61:
+        if ( v28 % mUID )
+          goto LABEL_57;
+LABEL_53:
+        UFG::ConversationElement::SetSpeaker((UFG::ConversationElement *)v33, speaker1);
+        v35 = speaker2;
+LABEL_58:
         UFG::ConversationElement::SetTarget((UFG::ConversationElement *)v33, v35);
       }
       else
       {
-        if ( v34 == 1 )
+        if ( m_speakerId == 1 )
+          goto LABEL_53;
+        if ( m_speakerId == 2 )
         {
-          UFG::ConversationElement::SetSpeaker((UFG::ConversationElement *)v33, v4);
-          v35 = v3;
-          goto LABEL_61;
-        }
-        if ( v34 == 2 )
-        {
-LABEL_60:
-          UFG::ConversationElement::SetSpeaker((UFG::ConversationElement *)v33, v3);
-          v35 = v4;
-          goto LABEL_61;
+LABEL_57:
+          UFG::ConversationElement::SetSpeaker((UFG::ConversationElement *)v33, speaker2);
+          v35 = speaker1;
+          goto LABEL_58;
         }
       }
       v36 = *(_QWORD *)(v33 + 104);
-      if ( v36 && *(_QWORD *)(v36 + 40) && v30->m_contextStr.mLength )
+      if ( v36 && *(_QWORD *)(v36 + 40) && *((_DWORD *)NextLine + 17) )
       {
         if ( v28 )
-          *(float *)(v33 + 72) = UFG::qRandom(v9 - v8, &UFG::qDefaultSeed) + v8;
+          *(float *)(v33 + 72) = UFG::qRandom(
+                                   m_maxTimeBetweenLines - m_minTimeBetweenLines,
+                                   (unsigned int *)&UFG::qDefaultSeed)
+                               + m_minTimeBetweenLines;
         v37 = 0;
-        for ( i = (signed __int64)&v30->m_actions.mNode.mNext[-1].mNext;
-              (unsigned int *)i != &v30->m_weight;
+        for ( i = (__int64)&NextLine[5][-1].mNext;
+              (UFG::qNode<UFG::AmbientConversationConfigurator::Context,UFG::AmbientConversationConfigurator::Context> **)i != NextLine + 3;
               i = *(_QWORD *)(i + 16) - 8i64 )
         {
           v39 = *(_DWORD *)(i + 32);
@@ -2557,67 +2389,65 @@ LABEL_60:
             UFG::ConversationElement::AddEmotionRequest((UFG::ConversationElement *)v33, v37, v40, v39, check_null);
           ++v37;
         }
-        UFG::qString::Set((UFG::qString *)(v33 + 32), v30->m_contextStr.mData, v30->m_contextStr.mLength, 0i64, 0);
+        UFG::qString::Set((UFG::qString *)(v33 + 32), (const char *)NextLine[9], *((_DWORD *)NextLine + 17), 0i64, 0);
         if ( UFG::ConversationManager::sm_debugAmbConversations )
         {
-          v41 = UFG::ActorAudioComponent::GetVoiceId(*(UFG::ActorAudioComponent **)(v33 + 104), &result);
-          v42 = v30->m_contextStr.mData;
-          v43 = UFG::qWiseSymbol::as_cstr_dbg(v41);
-          UFG::qString::qString(&v53, "%s.%s", v43, v42);
+          VoiceId = UFG::ActorAudioComponent::GetVoiceId(*(UFG::ActorAudioComponent **)(v33 + 104), &result);
+          v42 = (const char *)NextLine[9];
+          v43 = UFG::qWiseSymbol::as_cstr_dbg(VoiceId);
+          UFG::qString::qString(&v51, "%s.%s", v43, v42);
           _((AMD_HD3D *)result.mUID);
           v44 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)(*(_QWORD *)(*(_QWORD *)(v33 + 104) + 40i64) + 72i64));
-          UFG::qPrintf("AmbConv:: %s \t\t %s \n", v44, v53.mData);
-          UFG::qString::~qString(&v53);
+          UFG::qPrintf("AmbConv:: %s \t\t %s \n", v44, v51.mData);
+          UFG::qString::~qString(&v51);
         }
-        v5 = v54;
-        v45 = (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> **)(v33 + 8);
-        v46 = v54->m_lines.mNode.mPrev;
-        v46->mNext = (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *)(v33 + 8);
-        *v45 = v46;
-        v45[1] = &v54->m_lines.mNode;
-        v54->m_lines.mNode.mPrev = (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *)(v33 + 8);
-        ++v5->m_numElements;
-        v28 = v56;
+        v5 = conv;
+        mPrev = conv->m_lines.mNode.mPrev;
+        mPrev->mNext = (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *)(v33 + 8);
+        *(_QWORD *)(v33 + 8) = mPrev;
+        *(_QWORD *)(v33 + 16) = &conv->m_lines;
+        conv->m_lines.mNode.mPrev = (UFG::qNode<UFG::ConversationElement,UFG::ConversationElement> *)(v33 + 8);
+        ++conv->m_numElements;
+        v28 = v54;
       }
       else
       {
-        (**(void (__fastcall ***)(__int64, signed __int64))v33)(v33, 1i64);
+        (**(void (__fastcall ***)(__int64, __int64))v33)(v33, 1i64);
       }
     }
-    v56 = ++v28;
-    if ( v28 >= v51 )
+    v54 = ++v28;
+    if ( v28 >= v49 )
       break;
   }
-  v13 = v52;
-LABEL_78:
+  v13 = v50;
+LABEL_75:
   if ( !v5->m_numElements )
   {
-LABEL_79:
-    v47 = v13->m_curPlayingPriority < 5;
-    v48 = v13->m_curPlayingPriority == 5;
+LABEL_76:
+    v46 = v13->m_curPlayingPriority <= 5;
     v13->m_activeAmbientConversationId = 0;
-    if ( (v47 || v48) && *((_BYTE *)v13 + 552) & 8 )
+    if ( v46 && (*((_BYTE *)v13 + 552) & 8) != 0 )
     {
-      v49 = v13->m_controller.m_pEvent;
-      if ( v49 )
-        UFG::AudioEvent::StopAndForget(v49, 0x1F4u);
+      v47 = v13->m_controller.m_pEvent;
+      if ( v47 )
+        UFG::AudioEvent::StopAndForget(v47, 500);
     }
   }
 }
 
 // File Line: 2441
 // RVA: 0x59D150
-UFG::AmbientConversationConfigurator::Context *__fastcall UFG::AmbientConversationConfigurator::GetNextLine()
+UFG::qNode<UFG::AmbientConversationConfigurator::Context,UFG::AmbientConversationConfigurator::Context> **__fastcall UFG::AmbientConversationConfigurator::GetNextLine()
 {
   UFG::AmbientConversationConfigurator::LineGroup *v0; // rdi
-  UFG::AmbientConversationConfigurator::ConversationModel *v1; // rcx
-  UFG::AmbientConversationConfigurator::Context *result; // rax
-  unsigned int v3; // edx
+  UFG::AmbientConversationConfigurator::ConversationModel *mNext; // rcx
+  UFG::qNode<UFG::AmbientConversationConfigurator::Context,UFG::AmbientConversationConfigurator::Context> **result; // rax
+  unsigned int m_numElements; // edx
   bool v4; // r14
   bool v5; // si
   UFG::qNode<UFG::AmbientConversationConfigurator::LineGroup,UFG::AmbientConversationConfigurator::LineGroup> *v6; // rbx
   UFG::AmbientConversationConfigurator::LineGroup *i; // rdi
-  int v8; // eax
+  int mPrev_high; // eax
   UFG::allocator::free_link *v9; // rax
   __int64 *v10; // rcx
   UFG::allocator::free_link *v11; // rax
@@ -2626,7 +2456,7 @@ UFG::AmbientConversationConfigurator::Context *__fastcall UFG::AmbientConversati
   __int64 *v14; // rax
   int v15; // eax
   __int64 *v16; // rcx
-  UFG::AmbientConversationConfigurator::Context *v17; // rbx
+  UFG::qNode<UFG::AmbientConversationConfigurator::Context,UFG::AmbientConversationConfigurator::Context> **v17; // rbx
   __int64 *j; // rcx
   __int64 v19; // rdx
   _QWORD *v20; // rax
@@ -2634,31 +2464,31 @@ UFG::AmbientConversationConfigurator::Context *__fastcall UFG::AmbientConversati
   _QWORD *v22; // rax
   __int64 *v23; // rcx
   _QWORD *v24; // rax
-  __int64 *v25; // [rsp+28h] [rbp-18h]
+  __int64 *v25; // [rsp+28h] [rbp-18h] BYREF
   void *mem; // [rsp+30h] [rbp-10h]
 
   if ( !UFG::AmbientConversationConfigurator::sm_lastLineGroup )
   {
     v0 = 0i64;
-    v1 = (UFG::AmbientConversationConfigurator::ConversationModel *)UFG::AmbientConversationConfigurator::sm_curModel->m_lineGroups.mNode.mNext;
-    if ( v1 != (UFG::AmbientConversationConfigurator::ConversationModel *)&UFG::AmbientConversationConfigurator::sm_curModel->m_lineGroups )
+    mNext = (UFG::AmbientConversationConfigurator::ConversationModel *)UFG::AmbientConversationConfigurator::sm_curModel->m_lineGroups.mNode.mNext;
+    if ( mNext != (UFG::AmbientConversationConfigurator::ConversationModel *)&UFG::AmbientConversationConfigurator::sm_curModel->m_lineGroups )
     {
-      while ( !v1->m_maxLines )
+      while ( !mNext->m_maxLines )
       {
-        v1 = (UFG::AmbientConversationConfigurator::ConversationModel *)v1->mNext;
-        if ( v1 == (UFG::AmbientConversationConfigurator::ConversationModel *)&UFG::AmbientConversationConfigurator::sm_curModel->m_lineGroups )
+        mNext = (UFG::AmbientConversationConfigurator::ConversationModel *)mNext->mNext;
+        if ( mNext == (UFG::AmbientConversationConfigurator::ConversationModel *)&UFG::AmbientConversationConfigurator::sm_curModel->m_lineGroups )
           goto LABEL_7;
       }
-      v0 = (UFG::AmbientConversationConfigurator::LineGroup *)v1;
+      v0 = (UFG::AmbientConversationConfigurator::LineGroup *)mNext;
     }
 LABEL_7:
     result = UFG::AmbientConversationConfigurator::LineGroup::ChooseContext(v0);
     UFG::AmbientConversationConfigurator::sm_lastLineGroup = v0;
     return result;
   }
-  v3 = UFG::AmbientConversationConfigurator::sm_curConversation->m_numElements;
-  v4 = v3 >= (unsigned int)(unsigned __int8)UFG::AmbientConversationConfigurator::sm_curModel->m_minLines - 1;
-  v5 = v3 == (unsigned __int8)UFG::AmbientConversationConfigurator::sm_curModel->m_maxLines - 1;
+  m_numElements = UFG::AmbientConversationConfigurator::sm_curConversation->m_numElements;
+  v4 = m_numElements >= (unsigned int)(unsigned __int8)UFG::AmbientConversationConfigurator::sm_curModel->m_minLines - 1;
+  v5 = m_numElements == (unsigned __int8)UFG::AmbientConversationConfigurator::sm_curModel->m_maxLines - 1;
   v25 = (__int64 *)&v25;
   mem = &v25;
   v6 = UFG::AmbientConversationConfigurator::sm_curModel->m_lineGroups.mNode.mNext;
@@ -2667,8 +2497,8 @@ LABEL_7:
         v6 = v6->mNext )
   {
     if ( v5
-      || (v8 = HIWORD(v6[1].mPrev),
-          !_bittest(&v8, LOBYTE(UFG::AmbientConversationConfigurator::sm_lastLineGroup->m_groupId))) )
+      || (mPrev_high = HIWORD(v6[1].mPrev),
+          !_bittest(&mPrev_high, LOBYTE(UFG::AmbientConversationConfigurator::sm_lastLineGroup->m_groupId))) )
     {
       if ( !LOBYTE(v6[1].mNext) )
         continue;
@@ -2687,7 +2517,7 @@ LABEL_7:
       {
         v10 = 0i64;
       }
-LABEL_22:
+LABEL_21:
       v12 = v25;
       v25[1] = (__int64)v10;
       *v10 = (__int64)v12;
@@ -2709,7 +2539,7 @@ LABEL_22:
       {
         v10 = 0i64;
       }
-      goto LABEL_22;
+      goto LABEL_21;
     }
   }
   v13 = 0;
@@ -2723,7 +2553,7 @@ LABEL_22:
     }
     while ( v14 != (__int64 *)&v25 );
   }
-  v15 = UFG::qRandom(50 * v13, &UFG::qDefaultSeed);
+  v15 = UFG::qRandom(50 * v13, (unsigned int *)&UFG::qDefaultSeed);
   v16 = (__int64 *)mem;
   if ( mem != &v25 )
   {
@@ -2734,11 +2564,11 @@ LABEL_22:
         break;
       v16 = (__int64 *)v16[1];
       if ( v16 == (__int64 *)&v25 )
-        goto LABEL_31;
+        goto LABEL_30;
     }
     i = (UFG::AmbientConversationConfigurator::LineGroup *)v16[2];
   }
-LABEL_31:
+LABEL_30:
   v17 = UFG::AmbientConversationConfigurator::LineGroup::ChooseContext(i);
   UFG::AmbientConversationConfigurator::sm_lastLineGroup = i;
   for ( j = (__int64 *)mem; mem != &v25; j = (__int64 *)mem )
@@ -2766,54 +2596,53 @@ LABEL_31:
 
 // File Line: 2546
 // RVA: 0x598630
-UFG::AmbientConversationConfigurator::Context *__fastcall UFG::AmbientConversationConfigurator::LineGroup::ChooseContext(UFG::AmbientConversationConfigurator::LineGroup *this)
+UFG::qNode<UFG::AmbientConversationConfigurator::Context,UFG::AmbientConversationConfigurator::Context> **__fastcall UFG::AmbientConversationConfigurator::LineGroup::ChooseContext(
+        UFG::AmbientConversationConfigurator::LineGroup *this)
 {
-  UFG::AmbientConversationConfigurator::LineGroup *v1; // rdi
-  int v2; // ecx
+  unsigned int v2; // ecx
   int v3; // edx
-  signed __int64 v4; // rax
-  UFG::AmbientConversationConfigurator::Context *result; // rax
-  UFG::AmbientConversationConfigurator::Context *v6; // rbx
-  signed __int64 v7; // rax
+  bool *p_mNext; // rax
+  UFG::qNode<UFG::AmbientConversationConfigurator::Context,UFG::AmbientConversationConfigurator::Context> **result; // rax
+  bool *p_m_terminalNode; // rbx
+  bool *v7; // rax
   int v8; // ecx
 
-  v1 = this;
   v2 = 0;
   v3 = 0;
-  v4 = (signed __int64)&v1->m_contexts.mNode.mNext[-1].mNext;
-  if ( (bool *)v4 != &v1->m_terminalNode )
+  p_mNext = (bool *)&this->m_contexts.mNode.mNext[-1].mNext;
+  if ( p_mNext != &this->m_terminalNode )
   {
     do
     {
       ++v3;
-      v4 = *(_QWORD *)(v4 + 16) - 8i64;
+      p_mNext = (bool *)(*((_QWORD *)p_mNext + 2) - 8i64);
     }
-    while ( (bool *)v4 != &v1->m_terminalNode );
+    while ( p_mNext != &this->m_terminalNode );
     if ( v3 == 1 )
-      return (UFG::AmbientConversationConfigurator::Context *)&v1->m_contexts.mNode.mNext[-1].mNext;
+      return &this->m_contexts.mNode.mNext[-1].mNext;
   }
-  v6 = (UFG::AmbientConversationConfigurator::Context *)&v1->m_terminalNode;
-  v7 = (signed __int64)&v1->m_contexts.mNode.mNext[-1].mNext;
-  if ( (bool *)v7 != &v1->m_terminalNode )
+  p_m_terminalNode = &this->m_terminalNode;
+  v7 = (bool *)&this->m_contexts.mNode.mNext[-1].mNext;
+  if ( v7 != &this->m_terminalNode )
   {
     do
     {
-      v2 += *(_DWORD *)(v7 + 24);
-      v7 = *(_QWORD *)(v7 + 16) - 8i64;
+      v2 += *((_DWORD *)v7 + 6);
+      v7 = (bool *)(*((_QWORD *)v7 + 2) - 8i64);
     }
-    while ( (UFG::AmbientConversationConfigurator::Context *)v7 != v6 );
+    while ( v7 != p_m_terminalNode );
   }
-  v8 = UFG::qRandom(v2, &UFG::qDefaultSeed);
-  result = (UFG::AmbientConversationConfigurator::Context *)&v1->m_contexts.mNode.mNext[-1].mNext;
-  if ( result == v6 )
+  v8 = UFG::qRandom(v2, (unsigned int *)&UFG::qDefaultSeed);
+  result = &this->m_contexts.mNode.mNext[-1].mNext;
+  if ( result == (UFG::qNode<UFG::AmbientConversationConfigurator::Context,UFG::AmbientConversationConfigurator::Context> **)p_m_terminalNode )
     return 0i64;
   while ( 1 )
   {
-    v8 -= result->m_weight;
+    v8 -= *((_DWORD *)result + 6);
     if ( v8 <= 0 )
       break;
-    result = (UFG::AmbientConversationConfigurator::Context *)&result->mNext[-1].mNext;
-    if ( result == v6 )
+    result = &result[2][-1].mNext;
+    if ( result == (UFG::qNode<UFG::AmbientConversationConfigurator::Context,UFG::AmbientConversationConfigurator::Context> **)p_m_terminalNode )
       return 0i64;
   }
   return result;
@@ -2821,146 +2650,108 @@ UFG::AmbientConversationConfigurator::Context *__fastcall UFG::AmbientConversati
 
 // File Line: 2578
 // RVA: 0x5AB170
-void __fastcall UFG::ConversationElement::SetSpeaker(UFG::ConversationElement *this, UFG::SimObject *speaker)
+void __fastcall UFG::ConversationElement::SetSpeaker(UFG::ConversationElement *this, UFG::SimObjectCharacter *speaker)
 {
-  UFG::SimObjectCharacter *v2; // r8
-  unsigned __int16 v3; // dx
-  UFG::ConversationElement *v4; // rbx
-  UFG::ActorAudioComponent *v5; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::ActorAudioComponent> *v6; // rdx
-  UFG::ActorAudioComponent *v7; // r8
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v8; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v9; // rax
+  signed __int16 m_Flags; // dx
+  UFG::ActorAudioComponent *ComponentOfTypeHK; // rax
+  UFG::qSafePointer<UFG::SimComponent,UFG::ActorAudioComponent> *p_m_spkAac; // rdx
+  UFG::SimComponent *v7; // r8
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v10; // rax
 
   if ( speaker )
   {
-    v2 = (UFG::SimObjectCharacter *)speaker;
-    v3 = speaker->m_Flags;
-    v4 = this;
-    if ( (v3 >> 14) & 1 )
+    m_Flags = speaker->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v5 = UFG::SimObjectCharacter::GetComponent<UFG::ActorAudioComponent>(v2);
+      ComponentOfTypeHK = UFG::SimObjectCharacter::GetComponent<UFG::ActorAudioComponent>(speaker);
     }
-    else if ( (v3 & 0x8000u) == 0 )
+    else if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v3 >> 13) & 1 )
-      {
-        v5 = (UFG::ActorAudioComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                           (UFG::SimObjectGame *)&v2->vfptr,
-                                           UFG::ActorAudioComponent::_TypeUID);
-      }
-      else if ( (v3 >> 12) & 1 )
-      {
-        v5 = (UFG::ActorAudioComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                           (UFG::SimObjectGame *)&v2->vfptr,
-                                           UFG::ActorAudioComponent::_TypeUID);
-      }
-      else
-      {
-        v5 = (UFG::ActorAudioComponent *)UFG::SimObject::GetComponentOfType(
-                                           (UFG::SimObject *)&v2->vfptr,
-                                           UFG::ActorAudioComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = (UFG::ActorAudioComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                        speaker,
+                                                        UFG::ActorAudioComponent::_TypeUID);
     }
     else
     {
-      v5 = (UFG::ActorAudioComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                         (UFG::SimObjectGame *)&v2->vfptr,
-                                         UFG::ActorAudioComponent::_TypeUID);
+      ComponentOfTypeHK = (UFG::ActorAudioComponent *)UFG::SimObject::GetComponentOfType(
+                                                        speaker,
+                                                        UFG::ActorAudioComponent::_TypeUID);
     }
-    v6 = &v4->m_spkAac;
-    v7 = v5;
-    if ( v4->m_spkAac.m_pPointer )
+    p_m_spkAac = &this->m_spkAac;
+    v7 = ComponentOfTypeHK;
+    if ( this->m_spkAac.m_pPointer )
     {
-      v8 = v6->mPrev;
-      v9 = v4->m_spkAac.mNext;
-      v8->mNext = v9;
-      v9->mPrev = v8;
-      v6->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v6->mPrev;
-      v4->m_spkAac.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v4->m_spkAac.mPrev;
+      mPrev = p_m_spkAac->mPrev;
+      mNext = this->m_spkAac.mNext;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
+      p_m_spkAac->mPrev = p_m_spkAac;
+      this->m_spkAac.mNext = &this->m_spkAac;
     }
-    v4->m_spkAac.m_pPointer = (UFG::SimComponent *)&v7->vfptr;
+    this->m_spkAac.m_pPointer = v7;
     if ( v7 )
     {
       v10 = v7->m_SafePointerList.mNode.mPrev;
-      v10->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v6->mPrev;
-      v6->mPrev = v10;
-      v4->m_spkAac.mNext = &v7->m_SafePointerList.mNode;
-      v7->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v6->mPrev;
+      v10->mNext = p_m_spkAac;
+      p_m_spkAac->mPrev = v10;
+      this->m_spkAac.mNext = &v7->m_SafePointerList.mNode;
+      v7->m_SafePointerList.mNode.mPrev = p_m_spkAac;
     }
   }
 }
 
 // File Line: 2586
 // RVA: 0x5AB790
-void __fastcall UFG::ConversationElement::SetTarget(UFG::ConversationElement *this, UFG::SimObject *target)
+void __fastcall UFG::ConversationElement::SetTarget(UFG::ConversationElement *this, UFG::SimObjectCharacter *target)
 {
-  UFG::SimObjectCharacter *v2; // r8
-  unsigned __int16 v3; // dx
-  UFG::ConversationElement *v4; // rbx
-  UFG::ActorAudioComponent *v5; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::ActorAudioComponent> *v6; // rdx
-  UFG::ActorAudioComponent *v7; // r8
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v8; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v9; // rax
+  signed __int16 m_Flags; // dx
+  UFG::ActorAudioComponent *ComponentOfTypeHK; // rax
+  UFG::qSafePointer<UFG::SimComponent,UFG::ActorAudioComponent> *p_m_tgtAac; // rdx
+  UFG::SimComponent *v7; // r8
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v10; // rax
 
   if ( target )
   {
-    v2 = (UFG::SimObjectCharacter *)target;
-    v3 = target->m_Flags;
-    v4 = this;
-    if ( (v3 >> 14) & 1 )
+    m_Flags = target->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v5 = UFG::SimObjectCharacter::GetComponent<UFG::ActorAudioComponent>(v2);
+      ComponentOfTypeHK = UFG::SimObjectCharacter::GetComponent<UFG::ActorAudioComponent>(target);
     }
-    else if ( (v3 & 0x8000u) == 0 )
+    else if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v3 >> 13) & 1 )
-      {
-        v5 = (UFG::ActorAudioComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                           (UFG::SimObjectGame *)&v2->vfptr,
-                                           UFG::ActorAudioComponent::_TypeUID);
-      }
-      else if ( (v3 >> 12) & 1 )
-      {
-        v5 = (UFG::ActorAudioComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                           (UFG::SimObjectGame *)&v2->vfptr,
-                                           UFG::ActorAudioComponent::_TypeUID);
-      }
-      else
-      {
-        v5 = (UFG::ActorAudioComponent *)UFG::SimObject::GetComponentOfType(
-                                           (UFG::SimObject *)&v2->vfptr,
-                                           UFG::ActorAudioComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = (UFG::ActorAudioComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                        target,
+                                                        UFG::ActorAudioComponent::_TypeUID);
     }
     else
     {
-      v5 = (UFG::ActorAudioComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                         (UFG::SimObjectGame *)&v2->vfptr,
-                                         UFG::ActorAudioComponent::_TypeUID);
+      ComponentOfTypeHK = (UFG::ActorAudioComponent *)UFG::SimObject::GetComponentOfType(
+                                                        target,
+                                                        UFG::ActorAudioComponent::_TypeUID);
     }
-    v6 = &v4->m_tgtAac;
-    v7 = v5;
-    if ( v4->m_tgtAac.m_pPointer )
+    p_m_tgtAac = &this->m_tgtAac;
+    v7 = ComponentOfTypeHK;
+    if ( this->m_tgtAac.m_pPointer )
     {
-      v8 = v6->mPrev;
-      v9 = v4->m_tgtAac.mNext;
-      v8->mNext = v9;
-      v9->mPrev = v8;
-      v6->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v6->mPrev;
-      v4->m_tgtAac.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v4->m_tgtAac.mPrev;
+      mPrev = p_m_tgtAac->mPrev;
+      mNext = this->m_tgtAac.mNext;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
+      p_m_tgtAac->mPrev = p_m_tgtAac;
+      this->m_tgtAac.mNext = &this->m_tgtAac;
     }
-    v4->m_tgtAac.m_pPointer = (UFG::SimComponent *)&v7->vfptr;
+    this->m_tgtAac.m_pPointer = v7;
     if ( v7 )
     {
       v10 = v7->m_SafePointerList.mNode.mPrev;
-      v10->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v6->mPrev;
-      v6->mPrev = v10;
-      v4->m_tgtAac.mNext = &v7->m_SafePointerList.mNode;
-      v7->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v6->mPrev;
+      v10->mNext = p_m_tgtAac;
+      p_m_tgtAac->mPrev = v10;
+      this->m_tgtAac.mNext = &v7->m_SafePointerList.mNode;
+      v7->m_SafePointerList.mNode.mPrev = p_m_tgtAac;
     }
   }
 }
@@ -2969,120 +2760,110 @@ void __fastcall UFG::ConversationElement::SetTarget(UFG::ConversationElement *th
 // RVA: 0x5A35E0
 void __fastcall UFG::ConversationElement::NullifyMembers(UFG::ConversationElement *this)
 {
-  UFG::ConversationElement *v1; // rbx
   UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *i; // rdx
-  UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *v3; // rax
-  UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *v4; // rcx
-  UFG::SimComponent *v5; // rcx
+  UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *mNext; // rax
+  UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *mPrev; // rcx
+  UFG::SimComponent *m_pPointer; // rcx
   UFG::SimComponent *v6; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::ActorAudioComponent> *v7; // rdx
+  UFG::qSafePointer<UFG::SimComponent,UFG::ActorAudioComponent> *p_m_spkAac; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v8; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v9; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::ActorAudioComponent> *v10; // rdx
+  UFG::qSafePointer<UFG::SimComponent,UFG::ActorAudioComponent> *p_m_tgtAac; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v11; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v12; // rax
 
-  *((_BYTE *)this + 156) &= 0xF7u;
-  v1 = this;
+  *((_BYTE *)this + 156) &= ~8u;
   this->m_preDelay = 0.0;
   UFG::qWiseSymbol::set_null(&this->m_playbackEvent);
-  for ( i = v1->m_interruptionPoints.mNode.mNext;
-        &i[-1].mNext != (UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> **)&v1->m_tgtAac.m_pPointer;
-        i = v1->m_interruptionPoints.mNode.mNext )
+  for ( i = this->m_interruptionPoints.mNode.mNext;
+        &i[-1].mNext != (UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> **)&this->m_tgtAac.m_pPointer;
+        i = this->m_interruptionPoints.mNode.mNext )
   {
-    v3 = i->mNext;
-    v4 = i->mPrev;
-    v4->mNext = v3;
-    v3->mPrev = v4;
+    mNext = i->mNext;
+    mPrev = i->mPrev;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
     i->mPrev = i;
     i->mNext = i;
   }
-  *((_BYTE *)v1 + 156) &= 0xE8u;
-  v1->m_interjectionPoint = -1.0;
-  *(_QWORD *)&v1->m_timeAlive = 0i64;
+  *((_BYTE *)this + 156) &= 0xE8u;
+  this->m_interjectionPoint = -1.0;
+  *(_QWORD *)&this->m_timeAlive = 0i64;
   if ( UFG::ConversationManager::sm_debugAmbConversations )
   {
-    v5 = v1->m_spkAac.m_pPointer;
-    v6 = v1->m_tgtAac.m_pPointer;
-    if ( v5 )
-      BYTE1(v5[8].m_pSimObject) &= 0xFDu;
+    m_pPointer = this->m_spkAac.m_pPointer;
+    v6 = this->m_tgtAac.m_pPointer;
+    if ( m_pPointer )
+      BYTE1(m_pPointer[8].m_pSimObject) &= ~2u;
     if ( v6 )
-      BYTE1(v6[8].m_pSimObject) &= 0xFDu;
+      BYTE1(v6[8].m_pSimObject) &= ~2u;
   }
-  v7 = &v1->m_spkAac;
-  if ( v1->m_spkAac.m_pPointer )
+  p_m_spkAac = &this->m_spkAac;
+  if ( this->m_spkAac.m_pPointer )
   {
-    v8 = v7->mPrev;
-    v9 = v1->m_spkAac.mNext;
+    v8 = p_m_spkAac->mPrev;
+    v9 = this->m_spkAac.mNext;
     v8->mNext = v9;
     v9->mPrev = v8;
-    v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v7->mPrev;
-    v1->m_spkAac.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->m_spkAac.mPrev;
+    p_m_spkAac->mPrev = p_m_spkAac;
+    this->m_spkAac.mNext = &this->m_spkAac;
   }
-  v1->m_spkAac.m_pPointer = 0i64;
-  v10 = &v1->m_tgtAac;
-  if ( v1->m_tgtAac.m_pPointer )
+  this->m_spkAac.m_pPointer = 0i64;
+  p_m_tgtAac = &this->m_tgtAac;
+  if ( this->m_tgtAac.m_pPointer )
   {
-    v11 = v10->mPrev;
-    v12 = v1->m_tgtAac.mNext;
+    v11 = p_m_tgtAac->mPrev;
+    v12 = this->m_tgtAac.mNext;
     v11->mNext = v12;
     v12->mPrev = v11;
-    v10->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v10->mPrev;
-    v1->m_tgtAac.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->m_tgtAac.mPrev;
+    p_m_tgtAac->mPrev = p_m_tgtAac;
+    this->m_tgtAac.mNext = &this->m_tgtAac;
   }
-  v1->m_tgtAac.m_pPointer = 0i64;
-  UFG::qString::Set(&v1->m_context, &customWorldMapCaption);
+  this->m_tgtAac.m_pPointer = 0i64;
+  UFG::qString::Set(&this->m_context, &customCaption);
 }
 
 // File Line: 2640
 // RVA: 0x596270
 void __fastcall UFG::ConversationElement::AddInterruptPoint(UFG::ConversationElement *this, int id, float point)
 {
-  int v3; // edi
-  UFG::ConversationElement *v4; // rbx
   UFG::allocator::free_link *v5; // rax
-  UFG::allocator::free_link *v6; // rcx
-  UFG::allocator::free_link *v7; // rcx
-  UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *v8; // rax
+  UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *v6; // rcx
+  UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *mPrev; // rax
 
-  v3 = id;
-  v4 = this;
   v5 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x28ui64, "ConversationElement.ElementInterruption", 0i64, 1u);
   if ( v5 )
   {
-    v6 = v5 + 1;
-    v6->mNext = v6;
-    v6[1].mNext = v6;
+    v5[1].mNext = v5 + 1;
+    v5[2].mNext = v5 + 1;
     v5->mNext = (UFG::allocator::free_link *)&UFG::ConversationElementInterruption::`vftable;
     LODWORD(v5[3].mNext) = 0;
-    HIDWORD(v5[3].mNext) = v3;
+    HIDWORD(v5[3].mNext) = id;
     *(float *)&v5[4].mNext = point;
-    BYTE4(v5[4].mNext) &= 0xFEu;
+    BYTE4(v5[4].mNext) &= ~1u;
   }
-  v7 = v5 + 1;
-  v8 = v4->m_interruptionPoints.mNode.mPrev;
-  v8->mNext = (UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *)v7;
-  v7->mNext = (UFG::allocator::free_link *)v8;
-  v7[1].mNext = (UFG::allocator::free_link *)&v4->m_interruptionPoints;
-  v4->m_interruptionPoints.mNode.mPrev = (UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *)v7;
+  v6 = (UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *)&v5[1];
+  mPrev = this->m_interruptionPoints.mNode.mPrev;
+  mPrev->mNext = v6;
+  v6->mPrev = mPrev;
+  v6->mNext = &this->m_interruptionPoints.mNode;
+  this->m_interruptionPoints.mNode.mPrev = v6;
 }
 
 // File Line: 2649
 // RVA: 0x596130
-UFG::allocator::free_link *__fastcall UFG::ConversationElement::AddEmotionRequest(UFG::ConversationElement *this, int id, float point, const char *emotion, bool onListener)
+UFG::allocator::free_link *__fastcall UFG::ConversationElement::AddEmotionRequest(
+        UFG::ConversationElement *this,
+        int id,
+        float point,
+        const char *emotion,
+        bool onListener)
 {
-  const char *v5; // rsi
-  int v6; // ebp
-  UFG::ConversationElement *v7; // rdi
   UFG::allocator::free_link *v8; // rax
   UFG::allocator::free_link *v9; // rbx
   UFG::allocator::free_link *v10; // rax
-  _QWORD *v11; // rdx
-  UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *v12; // rcx
+  UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *mPrev; // rcx
 
-  v5 = emotion;
-  v6 = id;
-  v7 = this;
   v8 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x30ui64, "ConversationElement.ElementEmotionScr", 0i64, 1u);
   v9 = v8;
   if ( v8 )
@@ -3092,42 +2873,39 @@ UFG::allocator::free_link *__fastcall UFG::ConversationElement::AddEmotionReques
     v10[1].mNext = v10;
     v9->mNext = (UFG::allocator::free_link *)&UFG::ConversationElementInterruption::`vftable;
     LODWORD(v9[3].mNext) = 1;
-    HIDWORD(v9[3].mNext) = v6;
+    HIDWORD(v9[3].mNext) = id;
     *(float *)&v9[4].mNext = point;
-    BYTE4(v9[4].mNext) &= 0xFEu;
+    BYTE4(v9[4].mNext) &= ~1u;
     v9->mNext = (UFG::allocator::free_link *)&UFG::ConversationElementEmotionRequest::`vftable;
     BYTE4(v9[5].mNext) = onListener;
-    LODWORD(v9[5].mNext) = UFG::ConversationElementEmotionRequest::LookupEmotion(v5);
+    LODWORD(v9[5].mNext) = UFG::ConversationElementEmotionRequest::LookupEmotion(emotion);
   }
   else
   {
     v9 = 0i64;
   }
-  v11 = &v9[1].mNext;
-  v12 = v7->m_interruptionPoints.mNode.mPrev;
-  v12->mNext = (UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *)&v9[1];
-  *v11 = v12;
-  v11[1] = (char *)v7 + 136;
-  v7->m_interruptionPoints.mNode.mPrev = (UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *)&v9[1];
+  mPrev = this->m_interruptionPoints.mNode.mPrev;
+  mPrev->mNext = (UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *)&v9[1];
+  v9[1].mNext = (UFG::allocator::free_link *)mPrev;
+  v9[2].mNext = (UFG::allocator::free_link *)&this->m_interruptionPoints;
+  this->m_interruptionPoints.mNode.mPrev = (UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *)&v9[1];
   return v9;
 }
 
 // File Line: 2659
 // RVA: 0x596050
-UFG::allocator::free_link *__fastcall UFG::ConversationElement::AddEmotionRequest(UFG::ConversationElement *this, int id, float point, unsigned int emotion_id, bool onListener)
+UFG::allocator::free_link *__fastcall UFG::ConversationElement::AddEmotionRequest(
+        UFG::ConversationElement *this,
+        int id,
+        float point,
+        unsigned int emotion_id,
+        bool onListener)
 {
-  unsigned int v5; // edi
-  int v6; // esi
-  UFG::ConversationElement *v7; // rbx
   UFG::allocator::free_link *v8; // rax
   UFG::allocator::free_link *v9; // r10
   UFG::allocator::free_link *v10; // rax
-  _QWORD *v11; // rdx
-  UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *v12; // rcx
+  UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *mPrev; // rcx
 
-  v5 = emotion_id;
-  v6 = id;
-  v7 = this;
   v8 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x30ui64, "ConversationElement.ElementEmotionAmb", 0i64, 1u);
   v9 = v8;
   if ( v8 )
@@ -3137,50 +2915,47 @@ UFG::allocator::free_link *__fastcall UFG::ConversationElement::AddEmotionReques
     v10[1].mNext = v10;
     v9->mNext = (UFG::allocator::free_link *)&UFG::ConversationElementInterruption::`vftable;
     LODWORD(v9[3].mNext) = 1;
-    HIDWORD(v9[3].mNext) = v6;
+    HIDWORD(v9[3].mNext) = id;
     *(float *)&v9[4].mNext = point;
-    BYTE4(v9[4].mNext) &= 0xFEu;
+    BYTE4(v9[4].mNext) &= ~1u;
     v9->mNext = (UFG::allocator::free_link *)&UFG::ConversationElementEmotionRequest::`vftable;
     BYTE4(v9[5].mNext) = onListener;
-    LODWORD(v9[5].mNext) = v5;
+    LODWORD(v9[5].mNext) = emotion_id;
   }
   else
   {
     v9 = 0i64;
   }
-  v11 = &v9[1].mNext;
-  v12 = v7->m_interruptionPoints.mNode.mPrev;
-  v12->mNext = (UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *)&v9[1];
-  *v11 = v12;
-  v11[1] = (char *)v7 + 136;
-  v7->m_interruptionPoints.mNode.mPrev = (UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *)&v9[1];
+  mPrev = this->m_interruptionPoints.mNode.mPrev;
+  mPrev->mNext = (UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *)&v9[1];
+  v9[1].mNext = (UFG::allocator::free_link *)mPrev;
+  v9[2].mNext = (UFG::allocator::free_link *)&this->m_interruptionPoints;
+  this->m_interruptionPoints.mNode.mPrev = (UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *)&v9[1];
   return v9;
 }
 
 // File Line: 2670
 // RVA: 0x595E10
-UFG::ConversationElementActionRequest *__fastcall UFG::ConversationElement::AddActionRequest(UFG::ConversationElement *this, int id, float point, const char *action_request_name, bool onListner)
+UFG::ConversationElementActionRequest *__fastcall UFG::ConversationElement::AddActionRequest(
+        UFG::ConversationElement *this,
+        unsigned int id,
+        float point,
+        const char *action_request_name,
+        bool onListner)
 {
-  const char *v5; // rdi
-  int v6; // esi
-  UFG::ConversationElement *v7; // rbx
   UFG::allocator::free_link *v8; // rax
   __int64 v9; // rax
   __int64 v10; // r8
-  UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> **v11; // rcx
-  UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *v12; // rax
+  UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *mPrev; // rax
 
-  v5 = action_request_name;
-  v6 = id;
-  v7 = this;
   v8 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x48ui64, "ConversationElement.ActionRequest", 0i64, 1u);
   if ( v8 )
   {
     UFG::ConversationElementActionRequest::ConversationElementActionRequest(
       (UFG::ConversationElementActionRequest *)v8,
-      v6,
+      id,
       point,
-      v5,
+      action_request_name,
       onListner);
     v10 = v9;
   }
@@ -3188,31 +2963,28 @@ UFG::ConversationElementActionRequest *__fastcall UFG::ConversationElement::AddA
   {
     v10 = 0i64;
   }
-  v11 = (UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> **)(v10 + 8);
-  v12 = v7->m_interruptionPoints.mNode.mPrev;
-  v12->mNext = (UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *)(v10 + 8);
-  *v11 = v12;
-  v11[1] = &v7->m_interruptionPoints.mNode;
-  v7->m_interruptionPoints.mNode.mPrev = (UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *)(v10 + 8);
+  mPrev = this->m_interruptionPoints.mNode.mPrev;
+  mPrev->mNext = (UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *)(v10 + 8);
+  *(_QWORD *)(v10 + 8) = mPrev;
+  *(_QWORD *)(v10 + 16) = &this->m_interruptionPoints;
+  this->m_interruptionPoints.mNode.mPrev = (UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *)(v10 + 8);
   return (UFG::ConversationElementActionRequest *)v10;
 }
 
 // File Line: 2680
 // RVA: 0x595D20
-UFG::allocator::free_link *__fastcall UFG::ConversationElement::AddActionRequest(UFG::ConversationElement *this, int id, float point, unsigned int action_request_id, bool onListner)
+UFG::allocator::free_link *__fastcall UFG::ConversationElement::AddActionRequest(
+        UFG::ConversationElement *this,
+        int id,
+        float point,
+        unsigned int action_request_id,
+        bool onListner)
 {
-  unsigned int v5; // edi
-  int v6; // esi
-  UFG::ConversationElement *v7; // rbx
   UFG::allocator::free_link *v8; // rax
   UFG::allocator::free_link *v9; // r10
   UFG::allocator::free_link *v10; // rax
-  _QWORD *v11; // rdx
-  UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *v12; // rcx
+  UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *mPrev; // rcx
 
-  v5 = action_request_id;
-  v6 = id;
-  v7 = this;
   v8 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x48ui64, "ConversationElement.ActionRequest", 0i64, 1u);
   v9 = v8;
   if ( v8 )
@@ -3222,11 +2994,11 @@ UFG::allocator::free_link *__fastcall UFG::ConversationElement::AddActionRequest
     v10[1].mNext = v10;
     v9->mNext = (UFG::allocator::free_link *)&UFG::ConversationElementInterruption::`vftable;
     LODWORD(v9[3].mNext) = 2;
-    HIDWORD(v9[3].mNext) = v6;
+    HIDWORD(v9[3].mNext) = id;
     *(float *)&v9[4].mNext = point;
-    BYTE4(v9[4].mNext) &= 0xFEu;
+    BYTE4(v9[4].mNext) &= ~1u;
     v9->mNext = (UFG::allocator::free_link *)&UFG::ConversationElementActionRequest::`vftable;
-    LODWORD(v9[5].mNext) = v5;
+    LODWORD(v9[5].mNext) = action_request_id;
     v9[6].mNext = 0i64;
     v9[7].mNext = 0i64;
     LOBYTE(v9[8].mNext) = onListner;
@@ -3235,12 +3007,11 @@ UFG::allocator::free_link *__fastcall UFG::ConversationElement::AddActionRequest
   {
     v9 = 0i64;
   }
-  v11 = &v9[1].mNext;
-  v12 = v7->m_interruptionPoints.mNode.mPrev;
-  v12->mNext = (UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *)&v9[1];
-  *v11 = v12;
-  v11[1] = (char *)v7 + 136;
-  v7->m_interruptionPoints.mNode.mPrev = (UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *)&v9[1];
+  mPrev = this->m_interruptionPoints.mNode.mPrev;
+  mPrev->mNext = (UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *)&v9[1];
+  v9[1].mNext = (UFG::allocator::free_link *)mPrev;
+  v9[2].mNext = (UFG::allocator::free_link *)&this->m_interruptionPoints;
+  this->m_interruptionPoints.mNode.mPrev = (UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *)&v9[1];
   return v9;
 }
 
@@ -3248,62 +3019,51 @@ UFG::allocator::free_link *__fastcall UFG::ConversationElement::AddActionRequest
 // RVA: 0x598B20
 void __fastcall UFG::ConversationElement::ClearSpeechFlags(UFG::ConversationElement *this)
 {
-  UFG::SimComponent *v1; // rbx
-  UFG::ConversationElement *v2; // rdi
-  bool v3; // cf
-  bool v4; // zf
-  UFG::AudioEvent *v5; // rcx
-  UFG::SimComponent *v6; // rbx
-  UFG::AudioEvent *v7; // rcx
+  UFG::SimComponent *m_pPointer; // rbx
+  bool v3; // cc
+  UFG::AudioEvent *mNext; // rcx
+  UFG::SimComponent *v5; // rbx
+  UFG::AudioEvent *v6; // rcx
 
-  v1 = this->m_spkAac.m_pPointer;
-  v2 = this;
-  if ( v1 )
+  m_pPointer = this->m_spkAac.m_pPointer;
+  if ( m_pPointer )
   {
     if ( this->m_type )
     {
-      v3 = LODWORD(v1[6].m_pSimObject) < 5;
-      v4 = LODWORD(v1[6].m_pSimObject) == 5;
-      HIDWORD(v1[6].m_BoundComponentHandles.mNode.mPrev) = 0;
-      if ( v3 || v4 )
+      v3 = LODWORD(m_pPointer[6].m_pSimObject) <= 5;
+      HIDWORD(m_pPointer[6].m_BoundComponentHandles.mNode.mPrev) = 0;
+      if ( v3 && ((__int64)m_pPointer[8].m_pSimObject & 8) != 0 )
       {
-        if ( (_QWORD)v1[8].m_pSimObject & 8 )
-        {
-          v5 = (UFG::AudioEvent *)v1[6].m_SafePointerList.mNode.mNext;
-          if ( v5 )
-            UFG::AudioEvent::StopAndForget(v5, 0x1F4u);
-        }
+        mNext = (UFG::AudioEvent *)m_pPointer[6].m_SafePointerList.mNode.mNext;
+        if ( mNext )
+          UFG::AudioEvent::StopAndForget(mNext, 500);
       }
     }
-    LOBYTE(v1[8].m_pSimObject) &= 0xFCu;
-    BYTE1(v1[8].m_pSimObject) &= 0xDFu;
-    LOBYTE(v1[8].m_pSimObject) |= 0x18u;
+    LOBYTE(m_pPointer[8].m_pSimObject) &= 0xFCu;
+    BYTE1(m_pPointer[8].m_pSimObject) &= ~0x20u;
+    LOBYTE(m_pPointer[8].m_pSimObject) |= 0x18u;
     if ( UFG::ConversationManager::sm_debugScrConversations )
-      BYTE1(v1[8].m_pSimObject) &= 0xFDu;
+      BYTE1(m_pPointer[8].m_pSimObject) &= ~2u;
   }
-  v6 = v2->m_tgtAac.m_pPointer;
-  if ( v6 )
+  v5 = this->m_tgtAac.m_pPointer;
+  if ( v5 )
   {
-    if ( v2->m_type )
+    if ( this->m_type )
     {
-      v3 = LODWORD(v6[6].m_pSimObject) < 5;
-      v4 = LODWORD(v6[6].m_pSimObject) == 5;
-      HIDWORD(v6[6].m_BoundComponentHandles.mNode.mPrev) = 0;
-      if ( v3 || v4 )
+      v3 = LODWORD(v5[6].m_pSimObject) <= 5;
+      HIDWORD(v5[6].m_BoundComponentHandles.mNode.mPrev) = 0;
+      if ( v3 && ((__int64)v5[8].m_pSimObject & 8) != 0 )
       {
-        if ( (_QWORD)v6[8].m_pSimObject & 8 )
-        {
-          v7 = (UFG::AudioEvent *)v6[6].m_SafePointerList.mNode.mNext;
-          if ( v7 )
-            UFG::AudioEvent::StopAndForget(v7, 0x1F4u);
-        }
+        v6 = (UFG::AudioEvent *)v5[6].m_SafePointerList.mNode.mNext;
+        if ( v6 )
+          UFG::AudioEvent::StopAndForget(v6, 500);
       }
     }
-    LOBYTE(v6[8].m_pSimObject) &= 0xFCu;
-    BYTE1(v6[8].m_pSimObject) &= 0xDFu;
-    LOBYTE(v6[8].m_pSimObject) |= 0x18u;
+    LOBYTE(v5[8].m_pSimObject) &= 0xFCu;
+    BYTE1(v5[8].m_pSimObject) &= ~0x20u;
+    LOBYTE(v5[8].m_pSimObject) |= 0x18u;
     if ( UFG::ConversationManager::sm_debugScrConversations )
-      BYTE1(v6[8].m_pSimObject) &= 0xFDu;
+      BYTE1(v5[8].m_pSimObject) &= ~2u;
   }
 }
 
@@ -3311,16 +3071,16 @@ void __fastcall UFG::ConversationElement::ClearSpeechFlags(UFG::ConversationElem
 // RVA: 0x5AB330
 void __fastcall UFG::ConversationElement::SetTagInterruptFlags(UFG::ConversationElement *this, bool enable)
 {
-  UFG::SimComponent *v2; // rax
+  UFG::SimComponent *m_pPointer; // rax
   UFG::SimComponent *v3; // rax
 
-  v2 = this->m_spkAac.m_pPointer;
-  if ( v2 )
+  m_pPointer = this->m_spkAac.m_pPointer;
+  if ( m_pPointer )
   {
     if ( enable )
-      LOBYTE(v2[8].m_pSimObject) |= 0x18u;
+      LOBYTE(m_pPointer[8].m_pSimObject) |= 0x18u;
     else
-      LOBYTE(v2[8].m_pSimObject) &= 0xE7u;
+      LOBYTE(m_pPointer[8].m_pSimObject) &= 0xE7u;
   }
   v3 = this->m_tgtAac.m_pPointer;
   if ( v3 )
@@ -3336,23 +3096,23 @@ void __fastcall UFG::ConversationElement::SetTagInterruptFlags(UFG::Conversation
 // RVA: 0x5AB240
 void __fastcall UFG::ConversationElement::SetSpkListFlags(UFG::ConversationElement *this, bool actionRequests)
 {
-  UFG::SimComponent *v2; // r8
-  char v3; // al
+  UFG::SimComponent *m_pPointer; // r8
+  char m_pSimObject; // al
   UFG::SimComponent *v4; // rax
 
-  v2 = this->m_spkAac.m_pPointer;
-  if ( v2 )
+  m_pPointer = this->m_spkAac.m_pPointer;
+  if ( m_pPointer )
   {
-    v3 = (char)v2[8].m_pSimObject;
-    BYTE1(v2[8].m_pSimObject) &= 0xDFu;
-    LOBYTE(v2[8].m_pSimObject) = v3 & 0xFD | 1;
-    BYTE1(v2[8].m_pSimObject) |= 32 * actionRequests;
+    m_pSimObject = (char)m_pPointer[8].m_pSimObject;
+    BYTE1(m_pPointer[8].m_pSimObject) &= ~0x20u;
+    LOBYTE(m_pPointer[8].m_pSimObject) = m_pSimObject & 0xFC | 1;
+    BYTE1(m_pPointer[8].m_pSimObject) |= 32 * actionRequests;
   }
   v4 = this->m_tgtAac.m_pPointer;
   if ( v4 )
   {
-    LOBYTE(v4[8].m_pSimObject) &= 0xFEu;
-    BYTE1(v4[8].m_pSimObject) &= 0xDFu;
+    LOBYTE(v4[8].m_pSimObject) &= ~1u;
+    BYTE1(v4[8].m_pSimObject) &= ~0x20u;
     LOBYTE(v4[8].m_pSimObject) |= 2u;
     BYTE1(v4[8].m_pSimObject) |= 32 * actionRequests;
   }
@@ -3362,20 +3122,20 @@ void __fastcall UFG::ConversationElement::SetSpkListFlags(UFG::ConversationEleme
 // RVA: 0x5AA980
 void __fastcall UFG::ConversationElement::SetActiveAmbConv(UFG::ConversationElement *this, UFG::Conversation *conv)
 {
-  UFG::SimComponent *v2; // r8
-  UFG::AudioEvent *v3; // rcx
+  UFG::SimComponent *m_pPointer; // r8
+  UFG::AudioEvent *mNext; // rcx
 
-  v2 = this->m_spkAac.m_pPointer;
-  if ( v2 )
+  m_pPointer = this->m_spkAac.m_pPointer;
+  if ( m_pPointer )
   {
-    HIDWORD(v2[6].m_BoundComponentHandles.mNode.mPrev) = 0;
+    HIDWORD(m_pPointer[6].m_BoundComponentHandles.mNode.mPrev) = 0;
     if ( conv )
-      HIDWORD(v2[6].m_BoundComponentHandles.mNode.mPrev) = conv->mNode.mUID;
-    if ( LODWORD(v2[6].m_pSimObject) <= 5 && (_QWORD)v2[8].m_pSimObject & 8 )
+      HIDWORD(m_pPointer[6].m_BoundComponentHandles.mNode.mPrev) = conv->mNode.mUID;
+    if ( LODWORD(m_pPointer[6].m_pSimObject) <= 5 && ((__int64)m_pPointer[8].m_pSimObject & 8) != 0 )
     {
-      v3 = (UFG::AudioEvent *)v2[6].m_SafePointerList.mNode.mNext;
-      if ( v3 )
-        UFG::AudioEvent::StopAndForget(v3, 0x1F4u);
+      mNext = (UFG::AudioEvent *)m_pPointer[6].m_SafePointerList.mNode.mNext;
+      if ( mNext )
+        UFG::AudioEvent::StopAndForget(mNext, 500);
     }
   }
 }
@@ -3384,19 +3144,19 @@ void __fastcall UFG::ConversationElement::SetActiveAmbConv(UFG::ConversationElem
 // RVA: 0x5AAB90
 void __fastcall UFG::ConversationElement::SetDebugFlags(UFG::ConversationElement *this, bool enable)
 {
-  UFG::SimComponent *v2; // r8
+  UFG::SimComponent *m_pPointer; // r8
   UFG::SimComponent *v3; // rax
 
-  v2 = this->m_spkAac.m_pPointer;
-  if ( v2 )
+  m_pPointer = this->m_spkAac.m_pPointer;
+  if ( m_pPointer )
   {
-    BYTE1(v2[8].m_pSimObject) &= 0xFDu;
-    BYTE1(v2[8].m_pSimObject) |= 2 * enable;
+    BYTE1(m_pPointer[8].m_pSimObject) &= ~2u;
+    BYTE1(m_pPointer[8].m_pSimObject) |= 2 * enable;
   }
   v3 = this->m_tgtAac.m_pPointer;
   if ( v3 )
   {
-    BYTE1(v3[8].m_pSimObject) &= 0xFDu;
+    BYTE1(v3[8].m_pSimObject) &= ~2u;
     BYTE1(v3[8].m_pSimObject) |= 2 * enable;
   }
 }
@@ -3405,35 +3165,35 @@ void __fastcall UFG::ConversationElement::SetDebugFlags(UFG::ConversationElement
 // RVA: 0x5ACB00
 void __fastcall UFG::ConversationElement::StopLine(UFG::ConversationElement *this, bool force)
 {
-  UFG::SimComponent *v2; // rax
-  UFG::AudioEvent *v3; // rcx
-  unsigned int v4; // ebx
-  UFG::TiDo *v5; // rax
+  UFG::SimComponent *m_pPointer; // rax
+  UFG::AudioEvent *mNext; // rcx
+  unsigned int m_uPlayingId; // ebx
+  UFG::TiDo *Instance; // rax
 
-  v2 = this->m_spkAac.m_pPointer;
-  if ( v2 )
+  m_pPointer = this->m_spkAac.m_pPointer;
+  if ( m_pPointer )
   {
-    if ( LOBYTE(v2[5].m_pSimObject) )
+    if ( LOBYTE(m_pPointer[5].m_pSimObject) )
     {
-      if ( SHIDWORD(v2[6].m_BoundComponentHandles.mNode.mNext) > 0 )
+      if ( SHIDWORD(m_pPointer[6].m_BoundComponentHandles.mNode.mNext) > 0 )
       {
-        v3 = (UFG::AudioEvent *)v2[6].m_SafePointerList.mNode.mNext;
-        if ( v3 )
+        mNext = (UFG::AudioEvent *)m_pPointer[6].m_SafePointerList.mNode.mNext;
+        if ( mNext )
         {
           if ( force )
           {
-            v4 = v3->m_uPlayingId;
-            v3->m_pController = 0i64;
-            v2[6].m_SafePointerList.mNode.mNext = 0i64;
-            if ( v4 )
+            m_uPlayingId = mNext->m_uPlayingId;
+            mNext->m_pController = 0i64;
+            m_pPointer[6].m_SafePointerList.mNode.mNext = 0i64;
+            if ( m_uPlayingId )
             {
-              v5 = UFG::TiDo::GetInstance();
-              UFG::TiDo::StopPlaying(v5, v4);
+              Instance = UFG::TiDo::GetInstance();
+              UFG::TiDo::StopPlaying(Instance, m_uPlayingId);
             }
           }
-          else if ( (_QWORD)v2[8].m_pSimObject & 8 )
+          else if ( ((__int64)m_pPointer[8].m_pSimObject & 8) != 0 )
           {
-            UFG::AudioEvent::StopAndForget(v3, 0x1F4u);
+            UFG::AudioEvent::StopAndForget(mNext, 500);
           }
         }
       }
@@ -3445,35 +3205,33 @@ void __fastcall UFG::ConversationElement::StopLine(UFG::ConversationElement *thi
 // RVA: 0x5AA5A0
 void __fastcall UFG::ConversationElement::Reset(UFG::ConversationElement *this)
 {
-  UFG::SimComponent **v1; // r14
-  UFG::SimComponent **v2; // rsi
-  UFG::ConversationElement *v3; // rbp
+  UFG::SimComponent **p_m_pPointer; // r14
+  UFG::SimComponent **p_mNext; // rsi
   UFG::SimComponent *v4; // rdi
-  UFG::SimObject *v5; // rbx
-  UFG::SimObject *v6; // rax
+  UFG::qBaseNodeRB *Target; // rbx
+  UFG::qBaseNodeRB *Speaker; // rax
 
-  v1 = &this->m_tgtAac.m_pPointer;
-  v2 = (UFG::SimComponent **)&this->m_interruptionPoints.mNode.mNext[-1].mNext;
-  v3 = this;
+  p_m_pPointer = &this->m_tgtAac.m_pPointer;
+  p_mNext = (UFG::SimComponent **)&this->m_interruptionPoints.mNode.mNext[-1].mNext;
   *(_QWORD *)&this->m_timeAlive = 0i64;
-  if ( v2 != &this->m_tgtAac.m_pPointer )
+  if ( p_mNext != &this->m_tgtAac.m_pPointer )
   {
     do
     {
-      if ( v2 )
+      if ( p_mNext )
       {
-        *((_BYTE *)v2 + 36) &= 0xFEu;
-        v4 = *v2;
-        v5 = UFG::ConversationElement::GetTarget(v3);
-        v6 = UFG::ConversationElement::GetSpeaker(v3);
-        ((void (__fastcall *)(UFG::SimComponent **, UFG::SimObject *, UFG::SimObject *))v4->m_SafePointerList.mNode.mNext)(
-          v2,
-          v6,
-          v5);
+        *((_BYTE *)p_mNext + 36) &= ~1u;
+        v4 = *p_mNext;
+        Target = UFG::ConversationElement::GetTarget(this);
+        Speaker = UFG::ConversationElement::GetSpeaker(this);
+        ((void (__fastcall *)(UFG::SimComponent **, UFG::qBaseNodeRB *, UFG::qBaseNodeRB *))v4->m_SafePointerList.mNode.mNext)(
+          p_mNext,
+          Speaker,
+          Target);
       }
-      v2 = (UFG::SimComponent **)&v2[2][-1].m_BoundComponentHandles.mNode.mNext;
+      p_mNext = (UFG::SimComponent **)&p_mNext[2][-1].m_BoundComponentHandles.mNode.mNext;
     }
-    while ( v2 != v1 );
+    while ( p_mNext != p_m_pPointer );
   }
 }
 
@@ -3485,38 +3243,41 @@ UFG::SimComponent *__fastcall UFG::ConversationElement::SpeakerInitialized(UFG::
 
   result = this->m_spkAac.m_pPointer;
   if ( result )
-    result = (UFG::SimComponent *)LOBYTE(result[5].m_pSimObject);
+    return (UFG::SimComponent *)LOBYTE(result[5].m_pSimObject);
   return result;
 }
 
 // File Line: 2941
 // RVA: 0x5A6450
-char __fastcall UFG::ConversationElement::PlayLine(UFG::ConversationElement *this, unsigned int eventId, unsigned int inPriority, bool subtitle)
+char __fastcall UFG::ConversationElement::PlayLine(
+        UFG::ConversationElement *this,
+        unsigned int eventId,
+        unsigned int inPriority,
+        bool subtitle)
 {
-  UFG::ActorAudioComponent *v4; // rbp
-  signed int priority; // esi
-  bool v6; // r14
-  unsigned int v7; // er15
-  UFG::ConversationElement *v8; // rbx
-  unsigned int v9; // edi
+  UFG::ActorAudioComponent *m_pPointer; // rbp
+  unsigned int mUID; // edi
   unsigned int v10; // eax
 
-  v4 = (UFG::ActorAudioComponent *)this->m_spkAac.m_pPointer;
-  priority = inPriority;
-  v6 = subtitle;
-  v7 = eventId;
-  if ( *((_BYTE *)this + 156) & 8 )
-    priority = 10;
-  v8 = this;
-  if ( !v4 )
+  m_pPointer = (UFG::ActorAudioComponent *)this->m_spkAac.m_pPointer;
+  if ( (*((_BYTE *)this + 156) & 8) != 0 )
+    inPriority = 10;
+  if ( !m_pPointer )
     return 0;
-  v9 = this->m_playbackEvent.mUID;
-  if ( this->m_playbackEvent.mUID == UFG::qWiseSymbol::get_null()->mUID )
-    v9 = v7;
-  if ( v8->m_type )
-    return UFG::ActorAudioComponent::QueueSpeechExternalAmbient(v4, v9, v8->m_context.mData, 0i64, priority, 0, v6);
-  v10 = UFG::TiDo::CalcWwiseUid(v8->m_context.mData);
-  return UFG::ActorAudioComponent::QueueSpeechExternalMission(v4, v9, v10, 0i64, priority, v6);
+  mUID = this->m_playbackEvent.mUID;
+  if ( mUID == UFG::qWiseSymbol::get_null()->mUID )
+    mUID = eventId;
+  if ( this->m_type )
+    return UFG::ActorAudioComponent::QueueSpeechExternalAmbient(
+             m_pPointer,
+             mUID,
+             this->m_context.mData,
+             0i64,
+             inPriority,
+             0,
+             subtitle);
+  v10 = UFG::TiDo::CalcWwiseUid(this->m_context.mData);
+  return UFG::ActorAudioComponent::QueueSpeechExternalMission(m_pPointer, mUID, v10, 0i64, inPriority, subtitle);
 }
 
 // File Line: 2975
@@ -3527,8 +3288,8 @@ UFG::SimComponent *__fastcall UFG::ConversationElement::LineIsPlaying(UFG::Conve
 
   result = this->m_spkAac.m_pPointer;
   if ( result )
-    result = (UFG::SimComponent *)(SHIDWORD(result[6].m_BoundComponentHandles.mNode.mNext) > 0
-                                && result[6].m_SafePointerList.mNode.mNext);
+    return (UFG::SimComponent *)(SHIDWORD(result[6].m_BoundComponentHandles.mNode.mNext) > 0
+                              && result[6].m_SafePointerList.mNode.mNext);
   return result;
 }
 
@@ -3536,35 +3297,31 @@ UFG::SimComponent *__fastcall UFG::ConversationElement::LineIsPlaying(UFG::Conve
 // RVA: 0x5A9FE0
 void __fastcall UFG::ConversationElement::RemoveInterruptPoint(UFG::ConversationElement *this, int id)
 {
-  UFG::SimComponent **v2; // rsi
-  int v3; // edi
-  UFG::SimComponent **v4; // rbx
+  UFG::SimComponent **p_m_pPointer; // rsi
+  UFG::SimComponent **p_mNext; // rbx
   UFG::SimComponent *v5; // rcx
   UFG::SimComponent *v6; // rax
-  _QWORD *v7; // rdx
 
-  v2 = &this->m_tgtAac.m_pPointer;
-  v3 = id;
-  v4 = (UFG::SimComponent **)&this->m_interruptionPoints.mNode.mNext[-1].mNext;
-  if ( v4 != &this->m_tgtAac.m_pPointer )
+  p_m_pPointer = &this->m_tgtAac.m_pPointer;
+  p_mNext = (UFG::SimComponent **)&this->m_interruptionPoints.mNode.mNext[-1].mNext;
+  if ( p_mNext != &this->m_tgtAac.m_pPointer )
   {
     do
     {
-      if ( *((_DWORD *)v4 + 7) == v3 )
+      if ( *((_DWORD *)p_mNext + 7) == id )
       {
-        v5 = v4[1];
-        v6 = v4[2];
-        v7 = v4 + 1;
+        v5 = p_mNext[1];
+        v6 = p_mNext[2];
         v5->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)v6;
         v6->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)v5;
-        *v7 = v7;
-        v7[1] = v7;
-        if ( v4 )
-          ((void (__fastcall *)(UFG::SimComponent **, signed __int64))(*v4)->vfptr)(v4, 1i64);
+        p_mNext[1] = (UFG::SimComponent *)(p_mNext + 1);
+        p_mNext[2] = (UFG::SimComponent *)(p_mNext + 1);
+        if ( p_mNext )
+          ((void (__fastcall *)(UFG::SimComponent **, __int64))(*p_mNext)->vfptr)(p_mNext, 1i64);
       }
-      v4 = (UFG::SimComponent **)&v4[2][-1].m_BoundComponentHandles.mNode.mNext;
+      p_mNext = (UFG::SimComponent **)&p_mNext[2][-1].m_BoundComponentHandles.mNode.mNext;
     }
-    while ( v4 != v2 );
+    while ( p_mNext != p_m_pPointer );
   }
 }
 
@@ -3572,58 +3329,58 @@ void __fastcall UFG::ConversationElement::RemoveInterruptPoint(UFG::Conversation
 // RVA: 0x5A0390
 bool __fastcall UFG::ConversationElement::InterruptPointReached(UFG::ConversationElement *this, int id)
 {
-  UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *v2; // rax
-  UFG::SimComponent **v3; // rcx
-  signed __int64 v4; // rax
+  UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *mNext; // rax
+  UFG::SimComponent **p_m_pPointer; // rcx
+  __int64 p_mNext; // rax
 
-  v2 = this->m_interruptionPoints.mNode.mNext;
-  v3 = &this->m_tgtAac.m_pPointer;
-  v4 = (signed __int64)&v2[-1].mNext;
-  if ( (UFG::SimComponent **)v4 == v3 )
+  mNext = this->m_interruptionPoints.mNode.mNext;
+  p_m_pPointer = &this->m_tgtAac.m_pPointer;
+  p_mNext = (__int64)&mNext[-1].mNext;
+  if ( (UFG::SimComponent **)p_mNext == p_m_pPointer )
     return 0;
-  while ( *(_DWORD *)(v4 + 28) != id )
+  while ( *(_DWORD *)(p_mNext + 28) != id )
   {
-    v4 = *(_QWORD *)(v4 + 16) - 8i64;
-    if ( (UFG::SimComponent **)v4 == v3 )
+    p_mNext = *(_QWORD *)(p_mNext + 16) - 8i64;
+    if ( (UFG::SimComponent **)p_mNext == p_m_pPointer )
       return 0;
   }
-  return *(_BYTE *)(v4 + 36) & 1;
+  return *(_BYTE *)(p_mNext + 36) & 1;
 }
 
 // File Line: 3023
 // RVA: 0x5B0B20
-void __fastcall UFG::ConversationElement::UpdateInterruptionPoints(UFG::ConversationElement *this, UFG::Conversation *conversation)
+void __fastcall UFG::ConversationElement::UpdateInterruptionPoints(
+        UFG::ConversationElement *this,
+        UFG::Conversation *conversation)
 {
-  UFG::SimComponent **v2; // r14
-  UFG::ConversationElement *v3; // rbp
-  float *v4; // rsi
+  UFG::SimComponent **p_m_pPointer; // r14
+  float *p_mNext; // rsi
   char v5; // al
   __int64 v6; // rdi
-  UFG::SimObject *v7; // rbx
-  UFG::SimObject *v8; // rax
+  UFG::qBaseNodeRB *Target; // rbx
+  UFG::qBaseNodeRB *Speaker; // rax
 
-  v2 = &this->m_tgtAac.m_pPointer;
-  v3 = this;
-  v4 = (float *)&this->m_interruptionPoints.mNode.mNext[-1].mNext;
-  if ( v4 != (float *)&this->m_tgtAac.m_pPointer )
+  p_m_pPointer = &this->m_tgtAac.m_pPointer;
+  p_mNext = (float *)&this->m_interruptionPoints.mNode.mNext[-1].mNext;
+  if ( p_mNext != (float *)&this->m_tgtAac.m_pPointer )
   {
     do
     {
-      if ( v4[8] <= v3->m_sampleLength )
+      if ( p_mNext[8] <= this->m_sampleLength )
       {
-        v5 = *((_BYTE *)v4 + 36);
-        if ( !(v5 & 1) )
+        v5 = *((_BYTE *)p_mNext + 36);
+        if ( (v5 & 1) == 0 )
         {
-          v6 = *(_QWORD *)v4;
-          *((_BYTE *)v4 + 36) = v5 | 1;
-          v7 = UFG::ConversationElement::GetTarget(v3);
-          v8 = UFG::ConversationElement::GetSpeaker(v3);
-          (*(void (__fastcall **)(float *, UFG::SimObject *, UFG::SimObject *))(v6 + 8))(v4, v8, v7);
+          v6 = *(_QWORD *)p_mNext;
+          *((_BYTE *)p_mNext + 36) = v5 | 1;
+          Target = UFG::ConversationElement::GetTarget(this);
+          Speaker = UFG::ConversationElement::GetSpeaker(this);
+          (*(void (__fastcall **)(float *, UFG::qBaseNodeRB *, UFG::qBaseNodeRB *))(v6 + 8))(p_mNext, Speaker, Target);
         }
       }
-      v4 = (float *)(*((_QWORD *)v4 + 2) - 8i64);
+      p_mNext = (float *)(*((_QWORD *)p_mNext + 2) - 8i64);
     }
-    while ( v4 != (float *)v2 );
+    while ( p_mNext != (float *)p_m_pPointer );
   }
 }
 
@@ -3631,204 +3388,181 @@ void __fastcall UFG::ConversationElement::UpdateInterruptionPoints(UFG::Conversa
 // RVA: 0x5ACCB0
 char *__fastcall UFG::ConversationElement::ToString(UFG::ConversationElement *this)
 {
-  UFG::ConversationElement *v1; // rbx
-  UFG::SimComponent *v2; // rcx
+  UFG::SimComponent *m_pPointer; // rcx
   char *v3; // rdi
   char *v4; // rax
   UFG::SimComponent *v5; // rcx
   __int64 v6; // r8
-  signed __int64 i; // rax
+  UFG::ConversationElement *i; // rax
   UFG::qString *v8; // rax
-  char *v9; // rbx
-  UFG::qString v11; // [rsp+20h] [rbp-88h]
+  char *mData; // rbx
+  UFG::qString v11; // [rsp+20h] [rbp-88h] BYREF
   __int64 v12; // [rsp+48h] [rbp-60h]
-  UFG::qString text; // [rsp+50h] [rbp-58h]
-  UFG::qString v14; // [rsp+78h] [rbp-30h]
+  UFG::qString text; // [rsp+50h] [rbp-58h] BYREF
+  UFG::qString v14; // [rsp+78h] [rbp-30h] BYREF
 
   v12 = -2i64;
-  v1 = this;
-  v2 = this->m_spkAac.m_pPointer;
-  v3 = &customWorldMapCaption;
-  if ( v2 )
-    v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v2->m_pSimObject->m_Name);
+  m_pPointer = this->m_spkAac.m_pPointer;
+  v3 = &customCaption;
+  if ( m_pPointer )
+    v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&m_pPointer->m_pSimObject->m_Name);
   else
-    v4 = &customWorldMapCaption;
+    v4 = &customCaption;
   UFG::qString::qString(&v11, v4);
   UFG::qString::operator+=(&v11, "->");
-  v5 = v1->m_tgtAac.m_pPointer;
+  v5 = this->m_tgtAac.m_pPointer;
   if ( v5 )
     v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v5->m_pSimObject->m_Name);
   UFG::qString::operator+=(&v11, v3);
   UFG::qString::operator+=(&v11, " : ");
-  UFG::qString::qString(&text, &v1->m_context);
+  UFG::qString::qString(&text, &this->m_context);
   UFG::qString::operator+=(&v11, &text);
   v6 = 0i64;
-  for ( i = (signed __int64)&v1->m_interruptionPoints.mNode.mNext[-1].mNext;
-        (UFG::SimComponent **)i != &v1->m_tgtAac.m_pPointer;
-        i = *(_QWORD *)(i + 16) - 8i64 )
+  for ( i = (UFG::ConversationElement *)&this->m_interruptionPoints.mNode.mNext[-1].mNext;
+        i != (UFG::ConversationElement *)&this->m_tgtAac.m_pPointer;
+        i = (UFG::ConversationElement *)&i->mNext[-1].mNext )
   {
     v6 = (unsigned int)(v6 + 1);
   }
   UFG::qString::qString(&v14, " : %u int pts", v6);
   UFG::qString::operator+=(&v11, v8);
   UFG::qString::~qString(&v14);
-  v9 = v11.mData;
+  mData = v11.mData;
   UFG::qString::~qString(&text);
   UFG::qString::~qString(&v11);
-  return v9;
+  return mData;
 }
 
 // File Line: 3144
 // RVA: 0x593290
-void __fastcall UFG::ConversationElementActionRequest::ConversationElementActionRequest(UFG::ConversationElementActionRequest *this, int id, float time, const char *action_request_name, bool onListener)
+void __fastcall UFG::ConversationElementActionRequest::ConversationElementActionRequest(
+        UFG::ConversationElementActionRequest *this,
+        unsigned int id,
+        float time,
+        const char *action_request_name,
+        bool onListener)
 {
   const char *v5; // rbx
-  unsigned int v6; // edi
-  UFG::ConversationElementActionRequest *v7; // rsi
-  UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *v8; // rax
-  const char *v9; // r9
-  unsigned int action_request; // [rsp+48h] [rbp+10h]
+  const char *v8; // r9
+  unsigned int action_request; // [rsp+48h] [rbp+10h] BYREF
 
   v5 = action_request_name;
-  v6 = id;
-  v7 = this;
-  v8 = (UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption> *)&this->mPrev;
-  v8->mPrev = v8;
-  v8->mNext = v8;
+  this->mPrev = &this->UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption>;
+  this->mNext = &this->UFG::qNode<UFG::ConversationElementInterruption,UFG::ConversationElementInterruption>;
   this->vfptr = (UFG::ConversationElementInterruptionVtbl *)&UFG::ConversationElementInterruption::`vftable;
-  this->m_type = 2;
+  this->m_type = eElementInterruptionType_ActionRequest;
   this->m_id = id;
   this->m_point = time;
-  *((_BYTE *)&this->0 + 36) &= 0xFEu;
+  *((_BYTE *)&this->UFG::ConversationElementInterruption + 36) &= ~1u;
   this->vfptr = (UFG::ConversationElementInterruptionVtbl *)&UFG::ConversationElementActionRequest::`vftable;
   this->m_target = 0i64;
   this->m_targetInst = 0i64;
   this->m_playOnListener = onListener;
   action_request = gActionRequest_Action.m_EnumValue;
   Intention::GetActionRequest(action_request_name, &action_request);
-  v9 = v5;
+  v8 = v5;
   LODWORD(v5) = action_request;
-  UFG::qPrintf("Added action request: id: %3d   %10u --> %s\n", v6, action_request, v9, -2i64);
-  v7->m_actionRequest = (unsigned int)v5;
+  UFG::qPrintf("Added action request: id: %3d   %10u --> %s\n", id, action_request, v8);
+  this->m_actionRequest = (unsigned int)v5;
 }
 
 // File Line: 3167
 // RVA: 0x5A4760
-void __fastcall UFG::ConversationElementActionRequest::OnReached(UFG::ConversationElementActionRequest *this, UFG::SimObject *speaker, UFG::SimObject *listener)
+void __fastcall UFG::ConversationElementActionRequest::OnReached(
+        UFG::ConversationElementActionRequest *this,
+        UFG::SimObjectGame *speaker,
+        UFG::SimObjectGame *listener)
 {
-  UFG::SimObjectGame *v3; // rbx
-  UFG::ConversationElementActionRequest *v4; // rdi
-  unsigned __int16 v5; // dx
-  UFG::SimComponent *v6; // rdx
-  UFG::SimComponent *v7; // rax
-  SSInstance *v8; // rcx
-  UFG::TargetingSystemBaseComponent *v9; // rax
-  unsigned __int16 v10; // cx
+  signed __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rdx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
+  SSInstance *m_targetInst; // rcx
+  UFG::TargetingSystemBaseComponent *ComponentOfType; // rax
+  signed __int16 v10; // cx
   UFG::SimObjectGame *v11; // rcx
   bool v12; // zf
 
-  v3 = (UFG::SimObjectGame *)speaker;
-  v4 = this;
   if ( this->m_playOnListener )
-    v3 = (UFG::SimObjectGame *)listener;
-  if ( v3 )
+    speaker = listener;
+  if ( speaker )
   {
-    v5 = v3->m_Flags;
-    if ( (v5 >> 14) & 1 )
+    m_Flags = speaker->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v6 = v3->m_Components.p[41].m_pComponent;
+      m_pComponent = speaker->m_Components.p[41].m_pComponent;
     }
     else
     {
-      if ( (v5 & 0x8000u) == 0 )
-      {
-        if ( (v5 >> 13) & 1 )
-        {
-          v7 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::DialogueAnimationComponent::_TypeUID);
-        }
-        else if ( (v5 >> 12) & 1 )
-        {
-          v7 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::DialogueAnimationComponent::_TypeUID);
-        }
-        else
-        {
-          v7 = UFG::SimObject::GetComponentOfType(
-                 (UFG::SimObject *)&v3->vfptr,
-                 UFG::DialogueAnimationComponent::_TypeUID);
-        }
-      }
+      if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(speaker, UFG::DialogueAnimationComponent::_TypeUID);
       else
-      {
-        v7 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::DialogueAnimationComponent::_TypeUID);
-      }
-      v6 = v7;
+        ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(speaker, UFG::DialogueAnimationComponent::_TypeUID);
+      m_pComponent = ComponentOfTypeHK;
     }
-    if ( v6 )
-      *((_QWORD *)&v6[2].m_BoundComponentHandles.mNode.mPrev + ((signed __int64)(signed int)v4->m_actionRequest >> 6)) |= 1i64 << (v4->m_actionRequest & 0x3F);
+    if ( m_pComponent )
+      *((_QWORD *)&m_pComponent[2].m_BoundComponentHandles.mNode.mPrev + ((__int64)(int)this->m_actionRequest >> 6)) |= 1i64 << (this->m_actionRequest & 0x3F);
   }
-  if ( !v4->m_target )
+  if ( !this->m_target )
   {
-    if ( !v4->m_targetInst )
+    if ( !this->m_targetInst )
       return;
-    v8 = v4->m_targetInst;
-    if ( v8 )
-      v4->m_target = (UFG::SimObject *)UFG::TSScriptedDialogueElement::GetSimObjectFromSymbol(v8);
+    m_targetInst = this->m_targetInst;
+    if ( m_targetInst )
+      this->m_target = (UFG::SimObject *)UFG::TSScriptedDialogueElement::GetSimObjectFromSymbol(m_targetInst);
   }
-  if ( v3 )
+  if ( speaker )
   {
-    v10 = v3->m_Flags;
-    if ( (v10 >> 14) & 1 || (v10 & 0x8000u) != 0 )
+    v10 = speaker->m_Flags;
+    if ( (v10 & 0x4000) != 0 || v10 < 0 )
     {
-      v9 = (UFG::TargetingSystemBaseComponent *)v3->m_Components.p[20].m_pComponent;
+      ComponentOfType = (UFG::TargetingSystemBaseComponent *)speaker->m_Components.p[20].m_pComponent;
     }
     else
     {
-      if ( (v10 >> 13) & 1 )
+      if ( (v10 & 0x2000) != 0 )
       {
-        v11 = v3;
+        v11 = speaker;
       }
       else
       {
-        v12 = ((v10 >> 12) & 1) == 0;
-        v11 = v3;
+        v12 = (v10 & 0x1000) == 0;
+        v11 = speaker;
         if ( v12 )
         {
-          v9 = (UFG::TargetingSystemBaseComponent *)UFG::SimObject::GetComponentOfType(
-                                                      (UFG::SimObject *)&v3->vfptr,
-                                                      UFG::TargetingSystemBaseComponent::_TypeUID);
-          goto LABEL_30;
+          ComponentOfType = (UFG::TargetingSystemBaseComponent *)UFG::SimObject::GetComponentOfType(
+                                                                   speaker,
+                                                                   UFG::TargetingSystemBaseComponent::_TypeUID);
+          goto LABEL_29;
         }
       }
-      v9 = (UFG::TargetingSystemBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                  v11,
-                                                  UFG::TargetingSystemBaseComponent::_TypeUID);
+      ComponentOfType = (UFG::TargetingSystemBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                               v11,
+                                                               UFG::TargetingSystemBaseComponent::_TypeUID);
     }
   }
   else
   {
-    v9 = 0i64;
+    ComponentOfType = 0i64;
   }
-LABEL_30:
-  UFG::TargetingSystemBaseComponent::SetTarget(v9, eTARGET_TYPE_POINT_AT, v4->m_target);
+LABEL_29:
+  UFG::TargetingSystemBaseComponent::SetTarget(ComponentOfType, 0x25u, this->m_target);
 }
 
 // File Line: 3265
 // RVA: 0x5A30D0
-signed __int64 __fastcall UFG::ConversationElementEmotionRequest::LookupEmotion(const char *emotion_name)
+__int64 __fastcall UFG::ConversationElementEmotionRequest::LookupEmotion(const char *emotion_name)
 {
   unsigned int v1; // edi
-  const char *v2; // rsi
-  signed __int64 v3; // rbx
+  __int64 v3; // rbx
 
   v1 = 0;
-  v2 = emotion_name;
   v3 = 0i64;
-  while ( (unsigned int)UFG::qStringCompareInsensitive(v2, *(const char **)(v3 + 5402706272i64), -1)
-       && (unsigned int)UFG::qStringCompareInsensitive(v2, *(const char **)(v3 + 5402833232i64), -1) )
+  while ( (unsigned int)UFG::qStringCompareInsensitive(emotion_name, UFG::AIEmotionNames[v3], -1)
+       && (unsigned int)UFG::qStringCompareInsensitive(emotion_name, UFG::FacialEmotionNames[v3], -1) )
   {
-    v3 += 8i64;
+    ++v3;
     ++v1;
-    if ( v3 >= 104 )
+    if ( v3 >= 13 )
       return 0xFFFFFFFFi64;
   }
   return v1;
@@ -3836,99 +3570,73 @@ signed __int64 __fastcall UFG::ConversationElementEmotionRequest::LookupEmotion(
 
 // File Line: 3291
 // RVA: 0x5A48C0
-void __fastcall UFG::ConversationElementEmotionRequest::OnReached(UFG::ConversationElementEmotionRequest *this, UFG::SimObject *speaker, UFG::SimObject *listener)
+void __fastcall UFG::ConversationElementEmotionRequest::OnReached(
+        UFG::ConversationElementEmotionRequest *this,
+        UFG::SimObjectCVBase *speaker,
+        UFG::SimObjectCVBase *listener)
 {
-  UFG::SimObjectCVBase *v3; // r9
-  UFG::ConversationElementEmotionRequest *v4; // rbx
-  unsigned __int16 v5; // dx
-  UFG::ActiveAIEntityComponent *v6; // rax
+  signed __int16 m_Flags; // dx
+  UFG::ActiveAIEntityComponent *ComponentOfTypeHK; // rax
 
-  v3 = (UFG::SimObjectCVBase *)speaker;
-  v4 = this;
   if ( this->m_playOnListener )
-    v3 = (UFG::SimObjectCVBase *)listener;
-  if ( v3 )
+    speaker = listener;
+  if ( speaker )
   {
-    v5 = v3->m_Flags;
-    if ( (v5 >> 14) & 1 )
+    m_Flags = speaker->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
     {
-      v6 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v3);
+      ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(speaker);
     }
-    else if ( (v5 & 0x8000u) == 0 )
+    else if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v5 >> 13) & 1 )
-      {
-        v6 = (UFG::ActiveAIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                               (UFG::SimObjectGame *)&v3->vfptr,
-                                               UFG::ActiveAIEntityComponent::_TypeUID);
-      }
-      else if ( (v5 >> 12) & 1 )
-      {
-        v6 = (UFG::ActiveAIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                               (UFG::SimObjectGame *)&v3->vfptr,
-                                               UFG::ActiveAIEntityComponent::_TypeUID);
-      }
-      else
-      {
-        v6 = (UFG::ActiveAIEntityComponent *)UFG::SimObject::GetComponentOfType(
-                                               (UFG::SimObject *)&v3->vfptr,
-                                               UFG::ActiveAIEntityComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = (UFG::ActiveAIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                            speaker,
+                                                            UFG::ActiveAIEntityComponent::_TypeUID);
     }
     else
     {
-      v6 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v3);
+      ComponentOfTypeHK = (UFG::ActiveAIEntityComponent *)UFG::SimObject::GetComponentOfType(
+                                                            speaker,
+                                                            UFG::ActiveAIEntityComponent::_TypeUID);
     }
-    if ( v6 )
-      v6->m_FacialEmotion = v4->m_emotion;
+    if ( ComponentOfTypeHK )
+      ComponentOfTypeHK->m_FacialEmotion = this->m_emotion;
   }
 }
 
 // File Line: 3310
 // RVA: 0x5A4950
-void __fastcall UFG::ConversationElementEmotionRequest::OnReset(UFG::ConversationElementEmotionRequest *this, UFG::SimObject *speaker, UFG::SimObject *listener)
+void __fastcall UFG::ConversationElementEmotionRequest::OnReset(
+        UFG::ConversationElementEmotionRequest *this,
+        UFG::SimObjectCVBase *speaker,
+        UFG::SimObjectCVBase *listener)
 {
-  UFG::SimObjectCVBase *v3; // r9
-  unsigned __int16 v4; // cx
-  UFG::ActiveAIEntityComponent *v5; // rax
+  signed __int16 m_Flags; // cx
+  UFG::ActiveAIEntityComponent *ComponentOfTypeHK; // rax
 
-  v3 = (UFG::SimObjectCVBase *)speaker;
   if ( this->m_playOnListener )
-    v3 = (UFG::SimObjectCVBase *)listener;
-  if ( v3 )
+    speaker = listener;
+  if ( speaker )
   {
-    v4 = v3->m_Flags;
-    if ( (v4 >> 14) & 1 )
+    m_Flags = speaker->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
     {
-      v5 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v3);
+      ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(speaker);
     }
-    else if ( (v4 & 0x8000u) == 0 )
+    else if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v4 >> 13) & 1 )
-      {
-        v5 = (UFG::ActiveAIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                               (UFG::SimObjectGame *)&v3->vfptr,
-                                               UFG::ActiveAIEntityComponent::_TypeUID);
-      }
-      else if ( (v4 >> 12) & 1 )
-      {
-        v5 = (UFG::ActiveAIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                               (UFG::SimObjectGame *)&v3->vfptr,
-                                               UFG::ActiveAIEntityComponent::_TypeUID);
-      }
-      else
-      {
-        v5 = (UFG::ActiveAIEntityComponent *)UFG::SimObject::GetComponentOfType(
-                                               (UFG::SimObject *)&v3->vfptr,
-                                               UFG::ActiveAIEntityComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = (UFG::ActiveAIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                            speaker,
+                                                            UFG::ActiveAIEntityComponent::_TypeUID);
     }
     else
     {
-      v5 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v3);
+      ComponentOfTypeHK = (UFG::ActiveAIEntityComponent *)UFG::SimObject::GetComponentOfType(
+                                                            speaker,
+                                                            UFG::ActiveAIEntityComponent::_TypeUID);
     }
-    if ( v5 )
-      v5->m_FacialEmotion = 0;
+    if ( ComponentOfTypeHK )
+      ComponentOfTypeHK->m_FacialEmotion = eAI_EMOTION_NONE;
   }
 }
 
@@ -3936,24 +3644,20 @@ void __fastcall UFG::ConversationElementEmotionRequest::OnReset(UFG::Conversatio
 // RVA: 0x5AC3C0
 void __fastcall UFG::ScriptedConversationElement::SetupScript(UFG::ScriptedConversationElement *this, ASymbol *symbol)
 {
-  ASymbol *v2; // rsi
-  UFG::ScriptedConversationElement *v3; // rbx
   SSActorClass *v4; // rdi
   UFG::TSScriptedDialogueElement *v5; // rax
 
-  v2 = symbol;
-  v3 = this;
   v4 = (SSActorClass *)SSBrain::get_class("ScriptedDialogueElement");
   if ( v4 )
   {
     v5 = (UFG::TSScriptedDialogueElement *)AMemory::c_malloc_func(0x88ui64, "TSScriptedDialogueElement");
     if ( v5 )
-      UFG::TSScriptedDialogueElement::TSScriptedDialogueElement(v5, v3, v2, v4);
-    v3->m_script = v5;
+      UFG::TSScriptedDialogueElement::TSScriptedDialogueElement(v5, this, symbol, v4);
+    this->m_script = v5;
     ++UFG::gNumScriptedConversationElements;
-    ++v3->m_script->i_ref_count;
-    SSInstance::call_default_constructor((SSInstance *)&v3->m_script->vfptr);
-    SSActor::enable_behavior((SSActor *)&v3->m_script->vfptr, 1);
+    ++this->m_script->i_ref_count;
+    SSInstance::call_default_constructor(this->m_script);
+    SSActor::enable_behavior(this->m_script, 1);
   }
 }
 
@@ -3961,216 +3665,204 @@ void __fastcall UFG::ScriptedConversationElement::SetupScript(UFG::ScriptedConve
 // RVA: 0x5948E0
 void __fastcall UFG::ScriptedConversationElement::~ScriptedConversationElement(UFG::ScriptedConversationElement *this)
 {
-  UFG::ScriptedConversationElement *v1; // rbx
-  UFG::TSScriptedDialogueElement *v2; // rcx
-  bool v3; // zf
-  UFG::AudioEntity *v4; // rcx
+  UFG::TSScriptedDialogueElement *m_script; // rcx
+  UFG::NonCharacterDialogueContainer *m_nonCharInfo; // rcx
   UFG::NonCharacterDialogueContainer *v5; // rcx
 
-  v1 = this;
   this->vfptr = (UFG::ConversationElementVtbl *)&UFG::ScriptedConversationElement::`vftable;
-  v2 = this->m_script;
-  if ( v2 )
+  m_script = this->m_script;
+  if ( m_script )
   {
-    v3 = v2->i_ref_count-- == 1;
-    if ( v3 )
+    if ( m_script->i_ref_count-- == 1 )
     {
-      v2->i_ref_count = 2147483648;
-      ((void (__cdecl *)(UFG::TSScriptedDialogueElement *))v2->vfptr[1].get_scope_context)(v2);
+      m_script->i_ref_count = 0x80000000;
+      m_script->vfptr[1].get_scope_context(m_script);
     }
     --UFG::gNumScriptedConversationElements;
-    v1->m_script = 0i64;
+    this->m_script = 0i64;
   }
-  v4 = (UFG::AudioEntity *)&v1->m_nonCharInfo->vfptr;
-  if ( v4 )
+  m_nonCharInfo = this->m_nonCharInfo;
+  if ( m_nonCharInfo )
   {
-    UFG::AudioEntity::Shutdown(v4);
-    v5 = v1->m_nonCharInfo;
+    UFG::AudioEntity::Shutdown(m_nonCharInfo);
+    v5 = this->m_nonCharInfo;
     if ( v5 )
-      v5->vfptr->__vecDelDtor((UFG::AudioEntity *)&v5->vfptr, 1u);
+      v5->vfptr->__vecDelDtor(v5, 1u);
   }
-  v1->m_nonCharInfo = 0i64;
-  UFG::ConversationElement::~ConversationElement((UFG::ConversationElement *)&v1->vfptr);
+  this->m_nonCharInfo = 0i64;
+  UFG::ConversationElement::~ConversationElement(this);
 }
 
 // File Line: 3379
 // RVA: 0x5AB0E0
-void __fastcall UFG::ScriptedConversationElement::SetPlaybackEvent(UFG::ScriptedConversationElement *this, const char *playback_event)
+void __fastcall UFG::ScriptedConversationElement::SetPlaybackEvent(
+        UFG::ScriptedConversationElement *this,
+        const char *playback_event)
 {
-  UFG::ScriptedConversationElement *v2; // rdi
-  unsigned int v3; // eax
+  unsigned int mUID; // eax
 
-  v2 = this;
   UFG::qWiseSymbol::set_from_cstr(&this->m_playbackEvent, playback_event);
-  v3 = v2->m_playbackEvent.mUID;
-  if ( v3 == qwsPlayCellPhone.mUID
-    || v3 == qwsPlay2D.mUID
-    || v3 == qwsPlayCB.mUID
-    || v3 == qwsPlayDrivingNoLip.mUID
-    || v3 == qwsPlayCellPhone0.mUID
-    || v3 == qwsPlayCellPhone2.mUID
-    || v3 == qwsPlayCellPhone4.mUID
-    || v3 == qwsPlayCellPhone6.mUID
-    || v3 == qwsPlayCB4.mUID
-    || v3 == qwsPlayCB6.mUID
-    || v3 == qwsPlayPoliceBullhorn.mUID
-    || v3 == qwsPlayCellPhoneRingOutgoing.mUID )
+  mUID = this->m_playbackEvent.mUID;
+  if ( mUID == qwsPlayCellPhone.mUID
+    || mUID == qwsPlay2D.mUID
+    || mUID == qwsPlayCB.mUID
+    || mUID == qwsPlayDrivingNoLip.mUID
+    || mUID == qwsPlayCellPhone0.mUID
+    || mUID == qwsPlayCellPhone2.mUID
+    || mUID == qwsPlayCellPhone4.mUID
+    || mUID == qwsPlayCellPhone6.mUID
+    || mUID == qwsPlayCB4.mUID
+    || mUID == qwsPlayCB6.mUID
+    || mUID == qwsPlayPoliceBullhorn.mUID
+    || mUID == qwsPlayCellPhoneRingOutgoing.mUID )
   {
-    UFG::ScriptedConversationElement::CreateNonCharacterContainer(v2, 0i64);
+    UFG::ScriptedConversationElement::CreateNonCharacterContainer(this, 0i64);
   }
 }
 
 // File Line: 3405
 // RVA: 0x59A5F0
-void __fastcall UFG::ScriptedConversationElement::CreateNonCharacterContainer(UFG::ScriptedConversationElement *this, UFG::qVector3 *pos)
+void __fastcall UFG::ScriptedConversationElement::CreateNonCharacterContainer(
+        UFG::ScriptedConversationElement *this,
+        UFG::qVector3 *pos)
 {
-  UFG::qVector3 *v2; // rsi
-  UFG::ScriptedConversationElement *v3; // rbp
-  UFG::TransformNodeComponent *v4; // rdi
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rdi
   UFG::allocator::free_link *v5; // rax
-  UFG::allocator::free_link *v6; // rbx
-  UFG::SimObjectCharacter *v7; // rax
-  float v8; // xmm0_4
-  float v9; // xmm1_4
-  float v10; // eax
-  UFG::NonCharacterDialogueContainer *v11; // rcx
+  UFG::NonCharacterDialogueContainer *v6; // rbx
+  UFG::SimObjectCharacter *LocalPlayer; // rax
+  float y; // xmm0_4
+  float z; // xmm1_4
+  float x; // eax
+  UFG::NonCharacterDialogueContainer *m_nonCharInfo; // rcx
 
-  v2 = pos;
-  v3 = this;
-  v4 = 0i64;
+  m_pTransformNodeComponent = 0i64;
   if ( !this->m_nonCharInfo )
   {
     v5 = UFG::qMalloc(0x150ui64, "DialogueManager.NonCharContainer", 0i64);
-    v6 = v5;
+    v6 = (UFG::NonCharacterDialogueContainer *)v5;
     if ( v5 )
     {
       UFG::AudioEntity::AudioEntity((UFG::AudioEntity *)v5);
-      v6->mNext = (UFG::allocator::free_link *)&UFG::NonCharacterDialogueContainer::`vftable;
-      v6[40].mNext = 0i64;
+      v6->vfptr = (UFG::AudioEntityVtbl *)&UFG::NonCharacterDialogueContainer::`vftable;
+      v6->m_controller.m_pEvent = 0i64;
     }
     else
     {
       v6 = 0i64;
     }
-    v3->m_nonCharInfo = (UFG::NonCharacterDialogueContainer *)v6;
+    this->m_nonCharInfo = v6;
   }
-  if ( v2 )
+  if ( pos )
   {
-    v8 = v2->y;
-    v9 = v2->z;
-    v10 = v2->x;
+    y = pos->y;
+    z = pos->z;
+    x = pos->x;
   }
   else
   {
-    v7 = UFG::GetLocalPlayer();
-    if ( v7 )
-      v4 = v7->m_pTransformNodeComponent;
-    UFG::TransformNodeComponent::UpdateWorldTransform(v4);
-    v8 = v4->mWorldTransform.v3.y;
-    v9 = v4->mWorldTransform.v3.z;
-    v10 = v4->mWorldTransform.v3.x;
+    LocalPlayer = UFG::GetLocalPlayer();
+    if ( LocalPlayer )
+      m_pTransformNodeComponent = LocalPlayer->m_pTransformNodeComponent;
+    UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+    y = m_pTransformNodeComponent->mWorldTransform.v3.y;
+    z = m_pTransformNodeComponent->mWorldTransform.v3.z;
+    x = m_pTransformNodeComponent->mWorldTransform.v3.x;
   }
-  v11 = v3->m_nonCharInfo;
-  v11->m_WorldMatrix.v3.x = v10;
-  v11->m_WorldMatrix.v3.y = v8;
-  v11->m_WorldMatrix.v3.z = v9;
-  v11->m_WorldMatrix.v3.w = 1.0;
-  UFG::AudioEntity::ForcePositionUpdate((UFG::AudioEntity *)&v11->vfptr);
+  m_nonCharInfo = this->m_nonCharInfo;
+  m_nonCharInfo->m_WorldMatrix.v3.x = x;
+  m_nonCharInfo->m_WorldMatrix.v3.y = y;
+  m_nonCharInfo->m_WorldMatrix.v3.z = z;
+  m_nonCharInfo->m_WorldMatrix.v3.w = 1.0;
+  UFG::AudioEntity::ForcePositionUpdate(m_nonCharInfo);
 }
 
 // File Line: 3432
 // RVA: 0x5AA640
 void __fastcall UFG::ScriptedConversationElement::Reset(UFG::ScriptedConversationElement *this)
 {
-  UFG::ScriptedConversationElement *v1; // rbx
-  UFG::NonCharacterDialogueContainer *v2; // rcx
+  UFG::NonCharacterDialogueContainer *m_nonCharInfo; // rcx
 
-  v1 = this;
-  v2 = this->m_nonCharInfo;
-  if ( v2 )
-    UFG::AudioEntity::Shutdown((UFG::AudioEntity *)&v2->vfptr);
-  UFG::ConversationElement::Reset((UFG::ConversationElement *)&v1->vfptr);
+  m_nonCharInfo = this->m_nonCharInfo;
+  if ( m_nonCharInfo )
+    UFG::AudioEntity::Shutdown(m_nonCharInfo);
+  UFG::ConversationElement::Reset(this);
 }
 
 // File Line: 3446
 // RVA: 0x5AC580
 char __fastcall UFG::ScriptedConversationElement::SpeakerInitialized(UFG::ScriptedConversationElement *this)
 {
-  UFG::ScriptedConversationElement *v1; // rbx
-  UFG::NonCharacterDialogueContainer *v2; // rcx
-  UFG::SimComponent *v3; // rcx
+  UFG::NonCharacterDialogueContainer *m_nonCharInfo; // rcx
+  UFG::SimComponent *m_pPointer; // rcx
   char result; // al
 
-  v1 = this;
-  v2 = this->m_nonCharInfo;
-  if ( v2 )
+  m_nonCharInfo = this->m_nonCharInfo;
+  if ( m_nonCharInfo )
   {
-    if ( v2->m_bIsInitialized )
+    if ( m_nonCharInfo->m_bIsInitialized )
     {
-      result = 1;
+      return 1;
     }
     else
     {
-      UFG::NonCharacterDialogueContainer::Init(v2);
-      result = v1->m_nonCharInfo->m_bIsInitialized;
+      UFG::NonCharacterDialogueContainer::Init(m_nonCharInfo);
+      return this->m_nonCharInfo->m_bIsInitialized;
     }
   }
   else
   {
-    v3 = v1->m_spkAac.m_pPointer;
+    m_pPointer = this->m_spkAac.m_pPointer;
     result = 0;
-    if ( v3 )
-      result = (char)v3[5].m_pSimObject;
+    if ( m_pPointer )
+      return (char)m_pPointer[5].m_pSimObject;
   }
   return result;
 }
 
 // File Line: 3466
 // RVA: 0x5A66D0
-char __fastcall UFG::ScriptedConversationElement::PlayLine(UFG::ScriptedConversationElement *this, unsigned int eventId, unsigned int inPriority, bool subtitle)
+char __fastcall UFG::ScriptedConversationElement::PlayLine(
+        UFG::ScriptedConversationElement *this,
+        unsigned int eventId,
+        unsigned int inPriority,
+        bool subtitle)
 {
-  bool v4; // si
-  unsigned int v5; // ebp
-  UFG::ScriptedConversationElement *v6; // rdi
-  unsigned int v8; // ebx
+  unsigned int mUID; // ebx
 
-  v4 = subtitle;
-  v5 = eventId;
-  v6 = this;
   if ( !this->m_nonCharInfo )
-    return UFG::ConversationElement::PlayLine((UFG::ConversationElement *)&this->vfptr, eventId, inPriority, subtitle);
-  v8 = this->m_playbackEvent.mUID;
-  if ( this->m_playbackEvent.mUID == UFG::qWiseSymbol::get_null()->mUID )
-    v8 = v5;
-  return UFG::NonCharacterDialogueContainer::PlayLine(v6->m_nonCharInfo, v8, v6->m_context.mData, v4);
+    return UFG::ConversationElement::PlayLine(this, eventId, inPriority, subtitle);
+  mUID = this->m_playbackEvent.mUID;
+  if ( mUID == UFG::qWiseSymbol::get_null()->mUID )
+    mUID = eventId;
+  return UFG::NonCharacterDialogueContainer::PlayLine(this->m_nonCharInfo, mUID, this->m_context.mData, subtitle);
 }
 
 // File Line: 3481
 // RVA: 0x5ACB90
 void __fastcall UFG::ScriptedConversationElement::StopLine(UFG::ScriptedConversationElement *this, bool force)
 {
-  UFG::NonCharacterDialogueContainer *v2; // r8
-  UFG::AudioEvent *v3; // rax
-  unsigned int v4; // ebx
-  UFG::TiDo *v5; // rax
+  UFG::NonCharacterDialogueContainer *m_nonCharInfo; // r8
+  UFG::AudioEvent *m_pEvent; // rax
+  unsigned int m_uPlayingId; // ebx
+  UFG::TiDo *Instance; // rax
 
-  v2 = this->m_nonCharInfo;
-  if ( v2 )
+  m_nonCharInfo = this->m_nonCharInfo;
+  if ( m_nonCharInfo )
   {
-    v3 = v2->m_controller.m_pEvent;
-    if ( v3 )
-      v4 = v3->m_uPlayingId;
+    m_pEvent = m_nonCharInfo->m_controller.m_pEvent;
+    if ( m_pEvent )
+      m_uPlayingId = m_pEvent->m_uPlayingId;
     else
-      v4 = 0;
-    if ( v3 )
-      v3->m_pController = 0i64;
-    v2->m_controller.m_pEvent = 0i64;
-    v5 = UFG::TiDo::GetInstance();
-    UFG::TiDo::StopPlaying(v5, v4);
+      m_uPlayingId = 0;
+    if ( m_pEvent )
+      m_pEvent->m_pController = 0i64;
+    m_nonCharInfo->m_controller.m_pEvent = 0i64;
+    Instance = UFG::TiDo::GetInstance();
+    UFG::TiDo::StopPlaying(Instance, m_uPlayingId);
   }
   else
   {
-    UFG::ConversationElement::StopLine((UFG::ConversationElement *)&this->vfptr, force);
+    UFG::ConversationElement::StopLine(this, force);
   }
 }
 
@@ -4178,102 +3870,88 @@ void __fastcall UFG::ScriptedConversationElement::StopLine(UFG::ScriptedConversa
 // RVA: 0x5A08F0
 bool __fastcall UFG::ScriptedConversationElement::LineIsPlaying(UFG::ScriptedConversationElement *this)
 {
-  UFG::NonCharacterDialogueContainer *v1; // rdx
-  UFG::SimComponent *v2; // rax
+  UFG::NonCharacterDialogueContainer *m_nonCharInfo; // rdx
+  UFG::SimComponent *m_pPointer; // rax
 
-  v1 = this->m_nonCharInfo;
-  if ( v1 )
-    return v1->m_controller.m_pEvent != 0i64;
-  v2 = this->m_spkAac.m_pPointer;
-  return v2 && SHIDWORD(v2[6].m_BoundComponentHandles.mNode.mNext) > 0 && v2[6].m_SafePointerList.mNode.mNext;
+  m_nonCharInfo = this->m_nonCharInfo;
+  if ( m_nonCharInfo )
+    return m_nonCharInfo->m_controller.m_pEvent != 0i64;
+  m_pPointer = this->m_spkAac.m_pPointer;
+  return m_pPointer
+      && SHIDWORD(m_pPointer[6].m_BoundComponentHandles.mNode.mNext) > 0
+      && m_pPointer[6].m_SafePointerList.mNode.mNext;
 }
 
 // File Line: 3506
 // RVA: 0x5AAA30
 void __fastcall UFG::ScriptedConversationElement::SetConversationTargets(UFG::ScriptedConversationElement *this)
 {
-  UFG::SimComponent *v1; // rdi
+  UFG::SimComponent *m_pPointer; // rdi
   UFG::SimObjectGame *v2; // rbx
-  UFG::SimObjectGame *v3; // rdi
+  UFG::SimObjectGame *m_pSimObject; // rdi
   UFG::SimComponent *v4; // rax
-  unsigned __int16 v5; // cx
-  UFG::TargetingSystemBaseComponent *v6; // rbp
-  UFG::SimComponent *v7; // rax
-  unsigned __int16 v8; // cx
+  __int16 m_Flags; // cx
+  UFG::TargetingSystemBaseComponent *m_pComponent; // rbp
+  UFG::SimComponent *ComponentOfTypeHK; // rax
+  __int16 v8; // cx
   UFG::TargetingSystemBaseComponent *v9; // rsi
-  UFG::SimComponent *v10; // rax
+  UFG::SimComponent *ComponentOfType; // rax
 
-  v1 = this->m_spkAac.m_pPointer;
+  m_pPointer = this->m_spkAac.m_pPointer;
   v2 = 0i64;
-  if ( v1 )
-    v3 = (UFG::SimObjectGame *)v1->m_pSimObject;
+  if ( m_pPointer )
+    m_pSimObject = (UFG::SimObjectGame *)m_pPointer->m_pSimObject;
   else
-    v3 = 0i64;
+    m_pSimObject = 0i64;
   v4 = this->m_tgtAac.m_pPointer;
   if ( v4 )
     v2 = (UFG::SimObjectGame *)v4->m_pSimObject;
-  if ( v3 && v2 )
+  if ( m_pSimObject && v2 )
   {
-    v5 = v3->m_Flags;
-    if ( (v5 >> 14) & 1 )
+    m_Flags = m_pSimObject->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v6 = (UFG::TargetingSystemBaseComponent *)v3->m_Components.p[20].m_pComponent;
+      m_pComponent = (UFG::TargetingSystemBaseComponent *)m_pSimObject->m_Components.p[20].m_pComponent;
     }
-    else if ( (v5 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v5 >> 13) & 1 )
-      {
-        v7 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
-      else if ( (v5 >> 12) & 1 )
-      {
-        v7 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
+      if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                              m_pSimObject,
+                              UFG::TargetingSystemBaseComponent::_TypeUID);
       else
-      {
-        v7 = UFG::SimObject::GetComponentOfType(
-               (UFG::SimObject *)&v3->vfptr,
-               UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
-      v6 = (UFG::TargetingSystemBaseComponent *)v7;
+        ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(
+                              m_pSimObject,
+                              UFG::TargetingSystemBaseComponent::_TypeUID);
+      m_pComponent = (UFG::TargetingSystemBaseComponent *)ComponentOfTypeHK;
     }
     else
     {
-      v6 = (UFG::TargetingSystemBaseComponent *)v3->m_Components.p[20].m_pComponent;
+      m_pComponent = (UFG::TargetingSystemBaseComponent *)m_pSimObject->m_Components.p[20].m_pComponent;
     }
     v8 = v2->m_Flags;
-    if ( (v8 >> 14) & 1 )
+    if ( (v8 & 0x4000) != 0 )
     {
       v9 = (UFG::TargetingSystemBaseComponent *)v2->m_Components.p[20].m_pComponent;
     }
-    else if ( (v8 & 0x8000u) == 0 )
+    else if ( v8 >= 0 )
     {
-      if ( (v8 >> 13) & 1 )
-      {
-        v10 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
-      else if ( (v8 >> 12) & 1 )
-      {
-        v10 = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
+      if ( (v8 & 0x2000) != 0 || (v8 & 0x1000) != 0 )
+        ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(v2, UFG::TargetingSystemBaseComponent::_TypeUID);
       else
-      {
-        v10 = UFG::SimObject::GetComponentOfType(
-                (UFG::SimObject *)&v2->vfptr,
-                UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
-      v9 = (UFG::TargetingSystemBaseComponent *)v10;
+        ComponentOfType = UFG::SimObject::GetComponentOfType(v2, UFG::TargetingSystemBaseComponent::_TypeUID);
+      v9 = (UFG::TargetingSystemBaseComponent *)ComponentOfType;
     }
     else
     {
       v9 = (UFG::TargetingSystemBaseComponent *)v2->m_Components.p[20].m_pComponent;
     }
-    if ( v6 )
+    if ( m_pComponent )
     {
       if ( v9 )
       {
-        UFG::TargetingSystemBaseComponent::SetTarget(v6, eTARGET_TYPE_CONVERSATION, (UFG::SimObject *)&v2->vfptr);
-        UFG::TargetingSystemBaseComponent::SetTarget(v9, eTARGET_TYPE_CONVERSATION, (UFG::SimObject *)&v3->vfptr);
+        UFG::TargetingSystemBaseComponent::SetTarget(m_pComponent, 0x27u, v2);
+        UFG::TargetingSystemBaseComponent::SetTarget(v9, 0x27u, m_pSimObject);
       }
     }
   }
@@ -4283,90 +3961,72 @@ void __fastcall UFG::ScriptedConversationElement::SetConversationTargets(UFG::Sc
 // RVA: 0x5988D0
 void __fastcall UFG::ScriptedConversationElement::ClearConversationTargets(UFG::ScriptedConversationElement *this)
 {
-  UFG::ScriptedConversationElement *v1; // rax
-  UFG::SimComponent *v2; // rcx
+  UFG::SimComponent *m_pPointer; // rcx
   UFG::SimObjectGame *v3; // rbx
-  UFG::SimObjectGame *v4; // rcx
+  UFG::SimObjectGame *m_pSimObject; // rcx
   UFG::SimComponent *v5; // rax
-  unsigned __int16 v6; // dx
-  UFG::TargetingSystemBaseComponent *v7; // rdi
-  UFG::SimComponent *v8; // rax
-  unsigned __int16 v9; // cx
+  __int16 m_Flags; // dx
+  UFG::TargetingSystemBaseComponent *m_pComponent; // rdi
+  UFG::SimComponent *ComponentOfTypeHK; // rax
+  __int16 v9; // cx
   UFG::TargetingSystemBaseComponent *v10; // rbx
-  UFG::SimComponent *v11; // rax
+  UFG::SimComponent *ComponentOfType; // rax
 
-  v1 = this;
-  v2 = this->m_spkAac.m_pPointer;
+  m_pPointer = this->m_spkAac.m_pPointer;
   v3 = 0i64;
-  if ( v2 )
-    v4 = (UFG::SimObjectGame *)v2->m_pSimObject;
+  if ( m_pPointer )
+    m_pSimObject = (UFG::SimObjectGame *)m_pPointer->m_pSimObject;
   else
-    v4 = 0i64;
-  v5 = v1->m_tgtAac.m_pPointer;
+    m_pSimObject = 0i64;
+  v5 = this->m_tgtAac.m_pPointer;
   if ( v5 )
     v3 = (UFG::SimObjectGame *)v5->m_pSimObject;
-  if ( v4 && v3 )
+  if ( m_pSimObject && v3 )
   {
-    v6 = v4->m_Flags;
-    if ( (v6 >> 14) & 1 )
+    m_Flags = m_pSimObject->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v7 = (UFG::TargetingSystemBaseComponent *)v4->m_Components.p[20].m_pComponent;
+      m_pComponent = (UFG::TargetingSystemBaseComponent *)m_pSimObject->m_Components.p[20].m_pComponent;
     }
-    else if ( (v6 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v6 >> 13) & 1 )
-      {
-        v8 = UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
-      else if ( (v6 >> 12) & 1 )
-      {
-        v8 = UFG::SimObjectGame::GetComponentOfTypeHK(v4, UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
+      if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                              m_pSimObject,
+                              UFG::TargetingSystemBaseComponent::_TypeUID);
       else
-      {
-        v8 = UFG::SimObject::GetComponentOfType(
-               (UFG::SimObject *)&v4->vfptr,
-               UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
-      v7 = (UFG::TargetingSystemBaseComponent *)v8;
+        ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(
+                              m_pSimObject,
+                              UFG::TargetingSystemBaseComponent::_TypeUID);
+      m_pComponent = (UFG::TargetingSystemBaseComponent *)ComponentOfTypeHK;
     }
     else
     {
-      v7 = (UFG::TargetingSystemBaseComponent *)v4->m_Components.p[20].m_pComponent;
+      m_pComponent = (UFG::TargetingSystemBaseComponent *)m_pSimObject->m_Components.p[20].m_pComponent;
     }
     v9 = v3->m_Flags;
-    if ( (v9 >> 14) & 1 )
+    if ( (v9 & 0x4000) != 0 )
     {
       v10 = (UFG::TargetingSystemBaseComponent *)v3->m_Components.p[20].m_pComponent;
     }
-    else if ( (v9 & 0x8000u) == 0 )
+    else if ( v9 >= 0 )
     {
-      if ( (v9 >> 13) & 1 )
-      {
-        v11 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
-      else if ( (v9 >> 12) & 1 )
-      {
-        v11 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
+      if ( (v9 & 0x2000) != 0 || (v9 & 0x1000) != 0 )
+        ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::TargetingSystemBaseComponent::_TypeUID);
       else
-      {
-        v11 = UFG::SimObject::GetComponentOfType(
-                (UFG::SimObject *)&v3->vfptr,
-                UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
-      v10 = (UFG::TargetingSystemBaseComponent *)v11;
+        ComponentOfType = UFG::SimObject::GetComponentOfType(v3, UFG::TargetingSystemBaseComponent::_TypeUID);
+      v10 = (UFG::TargetingSystemBaseComponent *)ComponentOfType;
     }
     else
     {
       v10 = (UFG::TargetingSystemBaseComponent *)v3->m_Components.p[20].m_pComponent;
     }
-    if ( v7 )
+    if ( m_pComponent )
     {
       if ( v10 )
       {
-        UFG::TargetingSystemBaseComponent::SetTarget(v7, eTARGET_TYPE_CONVERSATION, 0i64);
-        UFG::TargetingSystemBaseComponent::SetTarget(v10, eTARGET_TYPE_CONVERSATION, 0i64);
+        UFG::TargetingSystemBaseComponent::SetTarget(m_pComponent, 0x27u, 0i64);
+        UFG::TargetingSystemBaseComponent::SetTarget(v10, 0x27u, 0i64);
       }
     }
   }
@@ -4376,41 +4036,37 @@ void __fastcall UFG::ScriptedConversationElement::ClearConversationTargets(UFG::
 // RVA: 0x59F770
 void __fastcall UFG::NonCharacterDialogueContainer::Init(UFG::NonCharacterDialogueContainer *this)
 {
-  UFG::NonCharacterDialogueContainer *v1; // rbx
   __int64 v2; // r8
-  UFG::qString v3; // [rsp+28h] [rbp-30h]
-  UFG::qSymbol result; // [rsp+68h] [rbp+10h]
+  UFG::qString v3; // [rsp+28h] [rbp-30h] BYREF
+  UFG::qSymbol result; // [rsp+68h] [rbp+10h] BYREF
 
-  v1 = this;
   v2 = sNum++;
   UFG::qString::qString(&v3, "NCDC_%u", v2);
   UFG::qSymbol::create_from_string(&result, v3.mData);
-  UFG::AudioEntity::Init((UFG::AudioEntity *)&v1->vfptr, &result, &UFG::qMatrix44::msIdentity);
+  UFG::AudioEntity::Init(this, (UFG::qSymbolUC *)&result, &UFG::qMatrix44::msIdentity);
   UFG::qString::~qString(&v3);
 }
 
 // File Line: 3570
 // RVA: 0x5A6510
-char __fastcall UFG::NonCharacterDialogueContainer::PlayLine(UFG::NonCharacterDialogueContainer *this, unsigned int eventId, const char *context, bool subtitle)
+char __fastcall UFG::NonCharacterDialogueContainer::PlayLine(
+        UFG::NonCharacterDialogueContainer *this,
+        unsigned int eventId,
+        const char *context,
+        bool subtitle)
 {
-  bool v4; // r14
-  unsigned int v5; // er15
-  UFG::NonCharacterDialogueContainer *v6; // rbp
   unsigned int v7; // ebx
   UFG::allocator::free_link *v8; // rax
   UFG::AudioEventExternalSourceInfo *v9; // rax
   UFG::AudioEventExternalSourceInfo *v10; // rsi
-  CAkSwitchCntr *v11; // rcx
+  CAkSwitchCntr *p; // rcx
   UFG::ExternalSourceInfoNode *v12; // rbx
-  UFG::AudioEvent **v13; // rdi
-  UFG::AudioEventCallbackObject *v14; // rbx
+  UFG::AudioEventController *p_m_controller; // rdi
+  UFG::AudioEventCallbackObject *mFreeListHead; // rbx
   unsigned int v15; // eax
 
-  v4 = subtitle;
-  v5 = eventId;
-  v6 = this;
   v7 = UFG::TiDo::CalcWwiseUid(context);
-  if ( (signed int)UFG::TiDo::GetWwiseStreamFileSize(v7) > 0 )
+  if ( (int)UFG::TiDo::GetWwiseStreamFileSize(v7) > 0 )
   {
     v8 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x20ui64, "ExternalSourceInfo.QueueSpeech", 0i64, 1u);
     if ( v8 )
@@ -4422,20 +4078,20 @@ char __fastcall UFG::NonCharacterDialogueContainer::PlayLine(UFG::NonCharacterDi
     {
       v10 = 0i64;
     }
-    v11 = (CAkSwitchCntr *)v10->m_externals.p;
-    LODWORD(v11->vfptr) = slot_1_22;
+    p = (CAkSwitchCntr *)v10->m_externals.p;
+    LODWORD(p->CAkMultiPlayNode::CAkContainerBase::CAkActiveParent<CAkParameterNode>::CAkParentNode<CAkParameterNode>::CAkParameterNode::CAkParameterNodeBase::CAkPBIAware::CAkIndexable::vfptr) = slot_1_22;
     v10->m_externals.p->m_fileId = v7;
     v12 = v10->m_externals.p;
-    v12->m_codecID = Scaleform::Render::DICommand_ApplyFilter::GetType(v11);
-    v13 = &v6->m_controller.m_pEvent;
-    if ( !v6->m_controller.m_pEvent )
+    v12->m_codecID = Scaleform::Render::DICommand_ApplyFilter::GetType(p);
+    p_m_controller = &this->m_controller;
+    if ( !this->m_controller.m_pEvent )
     {
-      UFG::AudioEntity::CreateEventA((UFG::AudioEntity *)&v6->vfptr, v5, &v6->m_controller, 0i64, v10);
-      if ( *v13 )
+      UFG::AudioEntity::CreateEventA(this, eventId, &this->m_controller, 0i64, v10);
+      if ( p_m_controller->m_pEvent )
       {
-        if ( v4 )
+        if ( subtitle )
         {
-          v14 = (UFG::AudioEventCallbackObject *)UFG::gAudioEventCallbackObjectPool.mFreeListHead;
+          mFreeListHead = (UFG::AudioEventCallbackObject *)UFG::gAudioEventCallbackObjectPool.mFreeListHead;
           if ( UFG::gAudioEventCallbackObjectPool.mFreeListHead )
           {
             UFG::gAudioEventCallbackObjectPool.mFreeListHead = *(char **)UFG::gAudioEventCallbackObjectPool.mFreeListHead;
@@ -4448,26 +4104,26 @@ char __fastcall UFG::NonCharacterDialogueContainer::PlayLine(UFG::NonCharacterDi
           {
             UFG::qFixedAllocator::ReportFull(&UFG::gAudioEventCallbackObjectPool);
           }
-          if ( v14 )
+          if ( mFreeListHead )
           {
-            v14->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AudioEventCallbackObject::`vftable;
-            v14->m_next = 0i64;
-            v14->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::SubtitleCallback::`vftable;
+            mFreeListHead->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::AudioEventCallbackObject::`vftable;
+            mFreeListHead->m_next = 0i64;
+            mFreeListHead->vfptr = (UFG::AudioEventCallbackObjectVtbl *)&UFG::SubtitleCallback::`vftable;
           }
-          if ( *v13 )
-            UFG::AudioEvent::AddCallback(*v13, v14);
+          if ( p_m_controller->m_pEvent )
+            UFG::AudioEvent::AddCallback(p_m_controller->m_pEvent, mFreeListHead);
         }
-        if ( *v13 )
+        if ( p_m_controller->m_pEvent )
         {
-          if ( (*v13)->vfptr->Play(*v13, 0) )
+          if ( p_m_controller->m_pEvent->vfptr->Play(p_m_controller->m_pEvent, 0) )
             return 1;
-          *((_BYTE *)*v13 + 144) |= 4u;
-          if ( *v13 )
-            (*v13)->m_pController = 0i64;
-          *v13 = 0i64;
+          *((_BYTE *)p_m_controller->m_pEvent + 144) |= 4u;
+          if ( p_m_controller->m_pEvent )
+            p_m_controller->m_pEvent->m_pController = 0i64;
+          p_m_controller->m_pEvent = 0i64;
         }
-        if ( *v13 )
-          UFG::AudioEvent::Destroy(*v13);
+        if ( p_m_controller->m_pEvent )
+          UFG::AudioEvent::Destroy(p_m_controller->m_pEvent);
       }
     }
   }
@@ -4479,40 +4135,42 @@ char __fastcall UFG::NonCharacterDialogueContainer::PlayLine(UFG::NonCharacterDi
 __int64 dynamic_initializer_for__UFG::ConversationManager::sm_conversationDb__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::ConversationManager::sm_conversationDb.mTree);
-  return atexit(dynamic_atexit_destructor_for__UFG::ConversationManager::sm_conversationDb__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::ConversationManager::sm_conversationDb__);
 }
 
 // File Line: 3678
 // RVA: 0x59AD30
 void UFG::ConversationManager::Destroy(void)
 {
-  Render::SkinningCacheNode *v0; // rax
-  Illusion::Buffer **v1; // rbx
-  UFG::qBaseNodeVariableRB<unsigned __int64> *v2; // rdx
+  Render::SkinningCacheNode *Head; // rax
+  Illusion::Buffer **p_mCachedBufferPtr; // rbx
+  UFG::qBaseNodeVariableRB<unsigned __int64> *p_mNode; // rdx
 
   if ( UFG::ConversationManager::sm_conversationDb.mTree.mCount )
   {
     while ( 1 )
     {
-      v0 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::ConversationManager::sm_conversationDb);
-      if ( !v0 )
+      Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::ConversationManager::sm_conversationDb);
+      if ( !Head )
         break;
-      v1 = &v0[-1].mCachedBufferPtr;
-      if ( v0 == (Render::SkinningCacheNode *)8 )
+      p_mCachedBufferPtr = &Head[-1].mCachedBufferPtr;
+      if ( Head == (Render::SkinningCacheNode *)8 )
         goto LABEL_6;
-      v2 = &v0->mNode;
+      p_mNode = &Head->mNode;
 LABEL_7:
       UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
         (UFG::qBaseTreeVariableRB<unsigned __int64> *)&UFG::ConversationManager::sm_conversationDb,
-        v2);
-      if ( v1 )
-        ((void (__fastcall *)(Illusion::Buffer **, signed __int64))(*v1)->mNode.mParent)(v1, 1i64);
+        p_mNode);
+      if ( p_mCachedBufferPtr )
+        ((void (__fastcall *)(Illusion::Buffer **, __int64))(*p_mCachedBufferPtr)->mNode.mParent)(
+          p_mCachedBufferPtr,
+          1i64);
       if ( !UFG::ConversationManager::sm_conversationDb.mTree.mCount )
         return;
     }
-    v1 = 0i64;
+    p_mCachedBufferPtr = 0i64;
 LABEL_6:
-    v2 = 0i64;
+    p_mNode = 0i64;
     goto LABEL_7;
   }
 }
@@ -4521,8 +4179,7 @@ LABEL_6:
 // RVA: 0x5966C0
 UFG::ScriptedConversation *__fastcall UFG::ConversationManager::AddScriptedConversation(ASymbol *symbol)
 {
-  ASymbol *v1; // r14
-  unsigned int v2; // ebx
+  unsigned int i_uid; // ebx
   UFG::qBaseTreeRB *v3; // rax
   UFG::allocator::free_link *v5; // rax
   UFG::qBaseNodeRB *v6; // rsi
@@ -4531,11 +4188,10 @@ UFG::ScriptedConversation *__fastcall UFG::ConversationManager::AddScriptedConve
   __int64 v9; // rbx
   char *v10; // rax
 
-  v1 = symbol;
-  v2 = symbol->i_uid;
+  i_uid = symbol->i_uid;
   if ( symbol->i_uid )
   {
-    v3 = UFG::qBaseTreeRB::Get(&UFG::ConversationManager::sm_conversationDb.mTree, v2);
+    v3 = UFG::qBaseTreeRB::Get(&UFG::ConversationManager::sm_conversationDb.mTree, i_uid);
     if ( v3 )
     {
       if ( v3 != (UFG::qBaseTreeRB *)8 )
@@ -4546,7 +4202,7 @@ UFG::ScriptedConversation *__fastcall UFG::ConversationManager::AddScriptedConve
   v6 = 0i64;
   if ( v5 )
   {
-    UFG::ScriptedConversation::ScriptedConversation((UFG::ScriptedConversation *)v5, v1, v2);
+    UFG::ScriptedConversation::ScriptedConversation((UFG::ScriptedConversation *)v5, symbol, i_uid);
     v8 = v7;
   }
   else
@@ -4556,7 +4212,7 @@ UFG::ScriptedConversation *__fastcall UFG::ConversationManager::AddScriptedConve
   if ( UFG::ConversationManager::sm_debugScrConversations )
   {
     v9 = *(_QWORD *)(v8 + 176);
-    v10 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)v1);
+    v10 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)symbol);
     UFG::qPrintf("Added scripted conversation %s: 0x%08x  0x%08x\n", v10, v8, v9);
   }
   if ( v8 )
@@ -4569,14 +4225,12 @@ UFG::ScriptedConversation *__fastcall UFG::ConversationManager::AddScriptedConve
 // RVA: 0x595EC0
 UFG::AmbientConversation *__fastcall UFG::ConversationManager::AddAmbientConversation(unsigned int uid)
 {
-  unsigned int v1; // ebx
   UFG::qBaseTreeRB *v2; // rax
   UFG::allocator::free_link *v3; // rax
   UFG::qBaseNodeRB *v4; // rdi
   __int64 v5; // rax
   __int64 v6; // rbx
 
-  v1 = uid;
   if ( uid )
   {
     v2 = UFG::qBaseTreeRB::Get(&UFG::ConversationManager::sm_conversationDb.mTree, uid);
@@ -4592,7 +4246,7 @@ UFG::AmbientConversation *__fastcall UFG::ConversationManager::AddAmbientConvers
   v4 = 0i64;
   if ( v3 )
   {
-    UFG::AmbientConversation::AmbientConversation((UFG::AmbientConversation *)v3, v1);
+    UFG::AmbientConversation::AmbientConversation((UFG::AmbientConversation *)v3, uid);
     v6 = v5;
   }
   else
@@ -4609,21 +4263,18 @@ UFG::AmbientConversation *__fastcall UFG::ConversationManager::AddAmbientConvers
 // RVA: 0x5A9F40
 void __fastcall UFG::ConversationManager::RemoveConversation(UFG::Conversation *conv, _BOOL8 a2)
 {
-  UFG::Conversation *v2; // rbx
-
   if ( conv )
   {
-    v2 = conv;
     if ( conv->m_type )
     {
-      if ( conv->m_state == 1 )
+      if ( conv->m_state == eConversationState_Playing )
         UFG::Conversation::OnFinish(conv, a2);
     }
     UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
       (UFG::qBaseTreeVariableRB<unsigned __int64> *)&UFG::ConversationManager::sm_conversationDb,
-      (UFG::qBaseNodeVariableRB<unsigned __int64> *)&v2->mNode);
-    UFG::Conversation::Destroy(v2);
-    v2->vfptr->__vecDelDtor(v2, 1u);
+      (UFG::qBaseNodeVariableRB<unsigned __int64> *)&conv->UFG::qNodeRB<UFG::Conversation>);
+    UFG::Conversation::Destroy(conv);
+    conv->vfptr->__vecDelDtor(conv, 1i64);
   }
 }
 
@@ -4632,124 +4283,122 @@ void __fastcall UFG::ConversationManager::RemoveConversation(UFG::Conversation *
 void __fastcall UFG::ConversationManager::UpdateConversations(float delta_sec)
 {
   UFG::allocator::free_link *v1; // rbp
-  unsigned int v2; // er13
-  unsigned int v3; // er12
+  unsigned int v2; // r13d
+  unsigned int v3; // r12d
   unsigned int v4; // ebx
   UFG::qBaseTreeRB *i; // rax
-  _BOOL8 v6; // rdx
-  signed __int64 v7; // rdi
-  _BOOL8 v8; // rdx
-  int v9; // er14
-  __int64 v10; // r15
-  unsigned int v11; // esi
-  unsigned int v12; // ebx
-  unsigned __int64 v13; // rax
-  UFG::allocator::free_link *v14; // rax
-  UFG::allocator::free_link *v15; // rdx
-  __int64 v16; // r8
-  signed __int64 v17; // rcx
-  signed __int64 v18; // rax
-  signed __int64 v19; // r9
-  __int64 v20; // rdx
-  UFG::SimObject *v21; // r8
-  __int64 v22; // rax
-  UFG::SimObject *v23; // rdx
-  unsigned int *v24; // rdi
-  __int64 v25; // rsi
-  UFG::qBaseTreeRB *v26; // rax
-  _BOOL8 v27; // rdx
-  signed __int64 v28; // rbx
+  __int64 v6; // rdi
+  int v7; // r14d
+  __int64 v8; // r15
+  unsigned int v9; // esi
+  unsigned int v10; // ebx
+  unsigned __int64 v11; // rax
+  UFG::allocator::free_link *v12; // rax
+  UFG::allocator::free_link *v13; // rdx
+  __int64 v14; // r8
+  __int64 v15; // rcx
+  __int64 v16; // rax
+  __int64 v17; // r9
+  __int64 v18; // rdx
+  UFG::SimObject *v19; // r8
+  __int64 v20; // rax
+  UFG::SimObject *v21; // rdx
+  unsigned int *v22; // rdi
+  __int64 v23; // rsi
+  UFG::qBaseTreeRB *v24; // rax
+  _BOOL8 v25; // rdx
+  int *p_mCount; // rbx
   UFG::allocator::free_link *mem; // [rsp+30h] [rbp-48h]
-  signed int v30; // [rsp+88h] [rbp+10h]
+  int v28; // [rsp+88h] [rbp+10h]
 
   v1 = 0i64;
   mem = 0i64;
   v2 = 0;
   v3 = 0;
   v4 = 180;
-  v30 = 180;
+  v28 = 180;
   for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::ConversationManager::sm_conversationDb);
         ;
-        i = UFG::qBaseTreeRB::GetNext(&UFG::ConversationManager::sm_conversationDb.mTree, (UFG::qBaseNodeRB *)(v7 + 8)) )
+        i = UFG::qBaseTreeRB::GetNext(&UFG::ConversationManager::sm_conversationDb.mTree, (UFG::qBaseNodeRB *)(v6 + 8)) )
   {
-    v7 = (signed __int64)(i ? &i[-1].mCount : 0i64);
-    if ( !v7 )
+    v6 = i ? (__int64)&i[-1].mCount : 0i64;
+    if ( !v6 )
       break;
-    UFG::Conversation::Update((UFG::Conversation *)v7, delta_sec, v6);
-    if ( *(_BYTE *)(v7 + 168) & 2 && *(_DWORD *)(v7 + 48) == 7 )
+    UFG::Conversation::Update((UFG::Conversation *)v6, delta_sec);
+    if ( (*(_BYTE *)(v6 + 168) & 2) != 0 && *(_DWORD *)(v6 + 48) == 7 )
     {
-      UFG::Conversation::Update((UFG::Conversation *)v7, 0.0, v8);
-      v9 = *(_DWORD *)(v7 + 32);
-      v10 = v2;
-      v11 = v2 + 1;
+      UFG::Conversation::Update((UFG::Conversation *)v6, 0.0);
+      v7 = *(_DWORD *)(v6 + 32);
+      v8 = v2;
+      v9 = v2 + 1;
       if ( v2 + 1 > v3 )
       {
-        v12 = 1;
+        v10 = 1;
         if ( v3 )
-          v12 = 2 * v3;
-        for ( ; v12 < v11; v12 *= 2 )
+          v10 = 2 * v3;
+        for ( ; v10 < v9; v10 *= 2 )
           ;
-        if ( v12 <= 4 )
-          v12 = 4;
-        if ( v12 - v11 > 0x10000 )
-          v12 = v2 + 65537;
-        if ( v12 != v2 )
+        if ( v10 <= 4 )
+          v10 = 4;
+        if ( v10 - v9 > 0x10000 )
+          v10 = v2 + 65537;
+        if ( v10 != v2 )
         {
-          v13 = 4i64 * v12;
-          if ( !is_mul_ok(v12, 4ui64) )
-            v13 = -1i64;
-          v14 = UFG::qMalloc(v13, "TiDoHK", 0i64);
-          v1 = v14;
+          v11 = 4i64 * v10;
+          if ( !is_mul_ok(v10, 4ui64) )
+            v11 = -1i64;
+          v12 = UFG::qMalloc(v11, "TiDoHK", 0i64);
+          v1 = v12;
           if ( mem )
           {
             if ( v2 )
             {
-              v15 = v14;
-              v16 = v2;
+              v13 = v12;
+              v14 = v2;
               do
               {
-                LODWORD(v15->mNext) = *(_DWORD *)((char *)&v15->mNext + (char *)mem - (char *)v14);
-                v15 = (UFG::allocator::free_link *)((char *)v15 + 4);
-                --v16;
+                LODWORD(v13->mNext) = *(_DWORD *)((char *)&v13->mNext + (char *)mem - (char *)v12);
+                v13 = (UFG::allocator::free_link *)((char *)v13 + 4);
+                --v14;
               }
-              while ( v16 );
+              while ( v14 );
             }
             operator delete[](mem);
           }
           mem = v1;
-          v3 = v12;
+          v3 = v10;
         }
-        v4 = v30;
+        v4 = v28;
       }
       ++v2;
-      *((_DWORD *)&v1->mNext + v10) = v9;
+      *((_DWORD *)&v1->mNext + v8) = v7;
     }
     if ( UFG::ConversationManager::sm_debugConversationsWithActor )
     {
-      v17 = *(_QWORD *)(v7 + 80) - 8i64;
-      v18 = v17;
-      v19 = v7 + 64;
-      if ( v17 == v7 + 64 )
+      v15 = *(_QWORD *)(v6 + 80) - 8i64;
+      v16 = v15;
+      v17 = v6 + 64;
+      if ( v15 == v6 + 64 )
         continue;
       while ( 1 )
       {
-        v20 = *(_QWORD *)(v18 + 104);
-        v21 = (UFG::SimObject *)(v20 ? *(_QWORD *)(v20 + 40) : 0i64);
-        if ( v21 == UFG::ConversationManager::sm_debugConversationsWithActor )
+        v18 = *(_QWORD *)(v16 + 104);
+        v19 = v18 ? *(UFG::SimObject **)(v18 + 40) : 0i64;
+        if ( v19 == UFG::ConversationManager::sm_debugConversationsWithActor )
           break;
-        v18 = *(_QWORD *)(v18 + 16) - 8i64;
-        if ( v18 == v19 )
+        v16 = *(_QWORD *)(v16 + 16) - 8i64;
+        if ( v16 == v17 )
         {
-          if ( v17 == v19 )
+          if ( v15 == v17 )
             goto LABEL_49;
           while ( 1 )
           {
-            v22 = *(_QWORD *)(v17 + 128);
-            v23 = (UFG::SimObject *)(v22 ? *(_QWORD *)(v22 + 40) : 0i64);
-            if ( v23 == UFG::ConversationManager::sm_debugConversationsWithActor )
+            v20 = *(_QWORD *)(v15 + 128);
+            v21 = v20 ? *(UFG::SimObject **)(v20 + 40) : 0i64;
+            if ( v21 == UFG::ConversationManager::sm_debugConversationsWithActor )
               goto LABEL_42;
-            v17 = *(_QWORD *)(v17 + 16) - 8i64;
-            if ( v17 == v19 )
+            v15 = *(_QWORD *)(v15 + 16) - 8i64;
+            if ( v15 == v17 )
               goto LABEL_49;
           }
         }
@@ -4758,46 +4407,46 @@ LABEL_42:
       v4 += 20;
       goto LABEL_48;
     }
-    if ( UFG::ConversationManager::sm_debugAmbConversations && *(_DWORD *)(v7 + 64) == 1
-      || UFG::ConversationManager::sm_debugScrConversations && !*(_DWORD *)(v7 + 64) )
+    if ( UFG::ConversationManager::sm_debugAmbConversations && *(_DWORD *)(v6 + 64) == 1
+      || UFG::ConversationManager::sm_debugScrConversations && !*(_DWORD *)(v6 + 64) )
     {
       v4 += 15;
 LABEL_48:
-      v30 = v4;
-      (*(void (__fastcall **)(signed __int64, _QWORD))(*(_QWORD *)v7 + 8i64))(v7, v4);
+      v28 = v4;
+      (*(void (__fastcall **)(__int64, _QWORD))(*(_QWORD *)v6 + 8i64))(v6, v4);
       continue;
     }
 LABEL_49:
     ;
   }
-  if ( v2 >= 1 )
+  if ( v2 )
   {
-    v24 = (unsigned int *)v1;
-    v25 = v2;
+    v22 = (unsigned int *)v1;
+    v23 = v2;
     do
     {
-      if ( *v24 )
+      if ( *v22 )
       {
-        v26 = UFG::qBaseTreeRB::Get(&UFG::ConversationManager::sm_conversationDb.mTree, *v24);
-        if ( v26 )
+        v24 = UFG::qBaseTreeRB::Get(&UFG::ConversationManager::sm_conversationDb.mTree, *v22);
+        if ( v24 )
         {
-          v28 = (signed __int64)&v26[-1].mCount;
-          if ( v26 != (UFG::qBaseTreeRB *)8 )
+          p_mCount = &v24[-1].mCount;
+          if ( v24 != (UFG::qBaseTreeRB *)8 )
           {
-            if ( *(_DWORD *)(v28 + 64) && *(_DWORD *)(v28 + 48) == 1 )
-              UFG::Conversation::OnFinish((UFG::Conversation *)&v26[-1].mCount, v27);
+            if ( p_mCount[16] && p_mCount[12] == 1 )
+              UFG::Conversation::OnFinish((UFG::Conversation *)&v24[-1].mCount, v25);
             UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
               (UFG::qBaseTreeVariableRB<unsigned __int64> *)&UFG::ConversationManager::sm_conversationDb,
-              (UFG::qBaseNodeVariableRB<unsigned __int64> *)(v28 + 8));
-            UFG::Conversation::Destroy((UFG::Conversation *)v28);
-            (**(void (__fastcall ***)(signed __int64, signed __int64))v28)(v28, 1i64);
+              (UFG::qBaseNodeVariableRB<unsigned __int64> *)(p_mCount + 2));
+            UFG::Conversation::Destroy((UFG::Conversation *)p_mCount);
+            (**(void (__fastcall ***)(char *, __int64))p_mCount)((char *)p_mCount, 1i64);
           }
         }
       }
-      ++v24;
-      --v25;
+      ++v22;
+      --v23;
     }
-    while ( v25 );
+    while ( v23 );
   }
   if ( v1 )
     operator delete[](v1);
@@ -4805,34 +4454,36 @@ LABEL_49:
 
 // File Line: 3973
 // RVA: 0x5A0470
-char __fastcall UFG::ConversationManager::IsInConversationWithTopic(UFG::SimObject *simObject, UFG::eConversationTopic topic)
+char __fastcall UFG::ConversationManager::IsInConversationWithTopic(
+        UFG::SimObject *simObject,
+        UFG::eConversationTopic topic)
 {
-  UFG::SimObject *v2; // rbx
   UFG::qBaseTreeRB *i; // rax
-  signed __int64 v4; // r10
-  signed __int64 v5; // r9
-  signed __int64 v6; // rax
-  signed __int64 v7; // rcx
+  int *p_mCount; // r10
+  char *v5; // r9
+  __int64 v6; // rax
+  __int64 v7; // rcx
   __int64 v8; // rdx
   UFG::SimObject *v9; // r8
   __int64 v10; // rcx
   UFG::SimObject *v11; // rdx
 
-  v2 = simObject;
   for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::ConversationManager::sm_conversationDb);
         ;
-        i = UFG::qBaseTreeRB::GetNext(&UFG::ConversationManager::sm_conversationDb.mTree, (UFG::qBaseNodeRB *)(v4 + 8)) )
+        i = UFG::qBaseTreeRB::GetNext(
+              &UFG::ConversationManager::sm_conversationDb.mTree,
+              (UFG::qBaseNodeRB *)(p_mCount + 2)) )
   {
     if ( i )
-      v4 = (signed __int64)&i[-1].mCount;
+      p_mCount = &i[-1].mCount;
     else
-      v4 = 0i64;
-    if ( !v4 )
+      p_mCount = 0i64;
+    if ( !p_mCount )
       return 0;
-    v5 = v4 + 64;
-    v6 = *(_QWORD *)(v4 + 80) - 8i64;
+    v5 = (char *)(p_mCount + 16);
+    v6 = *((_QWORD *)p_mCount + 10) - 8i64;
     v7 = v6;
-    if ( v6 != v4 + 64 )
+    if ( (int *)v6 != p_mCount + 16 )
       break;
 LABEL_18:
     ;
@@ -4840,22 +4491,22 @@ LABEL_18:
   while ( 1 )
   {
     v8 = *(_QWORD *)(v7 + 104);
-    v9 = (UFG::SimObject *)(v8 ? *(_QWORD *)(v8 + 40) : 0i64);
-    if ( v9 == v2 )
+    v9 = v8 ? *(UFG::SimObject **)(v8 + 40) : 0i64;
+    if ( v9 == simObject )
       return 1;
     v7 = *(_QWORD *)(v7 + 16) - 8i64;
-    if ( v7 == v5 )
+    if ( (char *)v7 == v5 )
     {
-      if ( v6 == v5 )
+      if ( (char *)v6 == v5 )
         goto LABEL_18;
       while ( 1 )
       {
         v10 = *(_QWORD *)(v6 + 128);
-        v11 = (UFG::SimObject *)(v10 ? *(_QWORD *)(v10 + 40) : 0i64);
-        if ( v11 == v2 )
+        v11 = v10 ? *(UFG::SimObject **)(v10 + 40) : 0i64;
+        if ( v11 == simObject )
           return 1;
         v6 = *(_QWORD *)(v6 + 16) - 8i64;
-        if ( v6 == v5 )
+        if ( (char *)v6 == v5 )
           goto LABEL_18;
       }
     }
@@ -4867,20 +4518,19 @@ LABEL_18:
 __int64 __fastcall UFG::ConversationManager::GetConversationId()
 {
   __int64 v0; // r8
-  int v1; // edx
-  unsigned int v2; // ebx
-  UFG::qString v4; // [rsp+28h] [rbp-30h]
+  unsigned int mStringHash32; // ebx
+  UFG::qString v3; // [rsp+28h] [rbp-30h] BYREF
 
   v0 = UFG::ConversationManager::sm_idCounter++;
-  UFG::qString::qString(&v4, "AmbientConversation_%u", v0);
-  v2 = v4.mStringHash32;
-  if ( v4.mStringHash32 == -1 )
+  UFG::qString::qString(&v3, "AmbientConversation_%u", v0);
+  mStringHash32 = v3.mStringHash32;
+  if ( v3.mStringHash32 == -1 )
   {
-    v2 = UFG::qStringHash32(v4.mData, v4.mStringHash32 | v1);
-    v4.mStringHash32 = v2;
+    mStringHash32 = UFG::qStringHash32(v3.mData, 0xFFFFFFFF);
+    v3.mStringHash32 = mStringHash32;
   }
-  UFG::qString::~qString(&v4);
-  return v2;
+  UFG::qString::~qString(&v3);
+  return mStringHash32;
 }
 
 // File Line: 4044
@@ -4889,14 +4539,14 @@ void UFG::ConversationManager::StopAllScriptedConversations(void)
 {
   UFG::qBaseTreeRB *i; // rax
   _BOOL8 v1; // rdx
-  signed __int64 v2; // rbx
+  __int64 v2; // rbx
   char *v3; // rax
 
   for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::ConversationManager::sm_conversationDb);
         ;
         i = UFG::qBaseTreeRB::GetNext(&UFG::ConversationManager::sm_conversationDb.mTree, (UFG::qBaseNodeRB *)(v2 + 8)) )
   {
-    v2 = (signed __int64)(i ? &i[-1].mCount : 0i64);
+    v2 = i ? (__int64)&i[-1].mCount : 0i64;
     if ( !v2 )
       break;
     if ( !*(_DWORD *)(v2 + 64) )
@@ -4922,13 +4572,13 @@ void UFG::ConversationManager::StopAllAmbientConversations(void)
 {
   UFG::qBaseTreeRB *i; // rax
   _BOOL8 v1; // rdx
-  signed __int64 v2; // rbx
+  __int64 v2; // rbx
 
   for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::ConversationManager::sm_conversationDb);
         ;
         i = UFG::qBaseTreeRB::GetNext(&UFG::ConversationManager::sm_conversationDb.mTree, (UFG::qBaseNodeRB *)(v2 + 8)) )
   {
-    v2 = (signed __int64)(i ? &i[-1].mCount : 0i64);
+    v2 = i ? (__int64)&i[-1].mCount : 0i64;
     if ( !v2 )
       break;
     if ( *(_DWORD *)(v2 + 64) == 1 )
@@ -4942,55 +4592,48 @@ void UFG::ConversationManager::StopAllAmbientConversations(void)
 
 // File Line: 4087
 // RVA: 0x5A0350
-__int64 __fastcall UFG::ConversationManager::InterruptPlayerConversations(UFG::eInterruptType intType, bool force, UFG::SimObject *ignore)
+__int64 __fastcall UFG::ConversationManager::InterruptPlayerConversations(
+        UFG::eInterruptType intType,
+        bool force,
+        UFG::SimObject *ignore)
 {
-  UFG::SimObject *v3; // rbx
-  bool v4; // di
-  UFG::eInterruptType v5; // esi
-  UFG::SimObjectCharacter *v6; // rax
+  UFG::SimObjectCharacter *LocalPlayer; // rax
 
-  v3 = ignore;
-  v4 = force;
-  v5 = intType;
-  v6 = UFG::GetLocalPlayer();
-  return UFG::ConversationManager::InterruptConversationsWithCharacter((UFG::SimObject *)&v6->vfptr, v5, v4, v3);
+  LocalPlayer = UFG::GetLocalPlayer();
+  return UFG::ConversationManager::InterruptConversationsWithCharacter(LocalPlayer, intType, force, ignore);
 }
 
 // File Line: 4100
 // RVA: 0x5A0130
-__int64 __fastcall UFG::ConversationManager::InterruptConversationsWithCharacter(UFG::SimObject *character, UFG::eInterruptType intType, bool force, UFG::SimObject *ignore)
+__int64 __fastcall UFG::ConversationManager::InterruptConversationsWithCharacter(
+        UFG::SimObject *character,
+        UFG::eInterruptType intType,
+        bool force,
+        UFG::SimObject *ignore)
 {
-  UFG::SimObject *v4; // rbp
-  UFG::SimObject *v5; // rsi
-  bool v6; // r14
-  UFG::eInterruptType v7; // er15
   unsigned __int8 v8; // di
   UFG::qBaseTreeRB *i; // rax
-  signed __int64 v10; // rbx
-  signed __int64 v11; // r9
-  signed __int64 v12; // rcx
-  signed __int64 v13; // rax
+  __int64 v10; // rbx
+  __int64 v11; // r9
+  __int64 v12; // rcx
+  __int64 v13; // rax
   __int64 v14; // rdx
   UFG::SimObject *v15; // r8
-  signed __int64 v16; // rax
+  __int64 v16; // rax
   __int64 v17; // rdx
   UFG::SimObject *v18; // r8
-  signed __int64 v19; // rax
+  __int64 v19; // rax
   __int64 v20; // rdx
   UFG::SimObject *v21; // r8
   __int64 v22; // rax
   UFG::SimObject *v23; // rdx
 
-  v4 = character;
-  v5 = ignore;
-  v6 = force;
-  v7 = intType;
   v8 = 0;
   for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::ConversationManager::sm_conversationDb);
         ;
         i = UFG::qBaseTreeRB::GetNext(&UFG::ConversationManager::sm_conversationDb.mTree, (UFG::qBaseNodeRB *)(v10 + 8)) )
   {
-    v10 = (signed __int64)(i ? &i[-1].mCount : 0i64);
+    v10 = i ? (__int64)&i[-1].mCount : 0i64;
     if ( !v10 )
       break;
     if ( *(_DWORD *)(v10 + 48) == 1 )
@@ -5009,8 +4652,8 @@ LABEL_14:
           while ( 1 )
           {
             v17 = *(_QWORD *)(v16 + 128);
-            v18 = (UFG::SimObject *)(v17 ? *(_QWORD *)(v17 + 40) : 0i64);
-            if ( v18 == v4 )
+            v18 = v17 ? *(UFG::SimObject **)(v17 + 40) : 0i64;
+            if ( v18 == character )
               break;
             v16 = *(_QWORD *)(v16 + 16) - 8i64;
             if ( v16 == v11 )
@@ -5022,21 +4665,26 @@ LABEL_14:
           while ( 1 )
           {
             v14 = *(_QWORD *)(v13 + 104);
-            v15 = (UFG::SimObject *)(v14 ? *(_QWORD *)(v14 + 40) : 0i64);
-            if ( v15 == v4 )
+            v15 = v14 ? *(UFG::SimObject **)(v14 + 40) : 0i64;
+            if ( v15 == character )
               break;
             v13 = *(_QWORD *)(v13 + 16) - 8i64;
             if ( v13 == v11 )
               goto LABEL_14;
           }
         }
-        if ( v5 && (v19 = *(_QWORD *)(v10 + 80) - 8i64, v12 != v11) )
+        if ( !ignore || (v19 = *(_QWORD *)(v10 + 80) - 8i64, v12 == v11) )
+        {
+LABEL_34:
+          UFG::Conversation::Interrupt((UFG::Conversation *)v10, intType, force);
+        }
+        else
         {
           while ( 1 )
           {
             v20 = *(_QWORD *)(v19 + 104);
-            v21 = (UFG::SimObject *)(v20 ? *(_QWORD *)(v20 + 40) : 0i64);
-            if ( v21 == v5 )
+            v21 = v20 ? *(UFG::SimObject **)(v20 + 40) : 0i64;
+            if ( v21 == ignore )
               break;
             v19 = *(_QWORD *)(v19 + 16) - 8i64;
             if ( v19 == v11 )
@@ -5046,8 +4694,8 @@ LABEL_14:
               while ( 1 )
               {
                 v22 = *(_QWORD *)(v12 + 128);
-                v23 = (UFG::SimObject *)(v22 ? *(_QWORD *)(v22 + 40) : 0i64);
-                if ( v23 == v5 )
+                v23 = v22 ? *(UFG::SimObject **)(v22 + 40) : 0i64;
+                if ( v23 == ignore )
                   goto LABEL_35;
                 v12 = *(_QWORD *)(v12 + 16) - 8i64;
                 if ( v12 == v11 )
@@ -5055,11 +4703,6 @@ LABEL_14:
               }
             }
           }
-        }
-        else
-        {
-LABEL_34:
-          UFG::Conversation::Interrupt((UFG::Conversation *)v10, v7, v6);
         }
 LABEL_35:
         v8 = 1;
@@ -5075,39 +4718,35 @@ LABEL_36:
 // RVA: 0x5AA830
 __int64 __fastcall UFG::ConversationManager::ResumePlayerConversations(UFG::eInterruptType intType)
 {
-  UFG::eInterruptType v1; // ebx
-  UFG::SimObjectCharacter *v2; // rax
+  UFG::SimObjectCharacter *LocalPlayer; // rax
 
-  v1 = intType;
-  v2 = UFG::GetLocalPlayer();
-  return UFG::ConversationManager::ResumeConversationsWithCharacter((UFG::SimObject *)&v2->vfptr, v1);
+  LocalPlayer = UFG::GetLocalPlayer();
+  return UFG::ConversationManager::ResumeConversationsWithCharacter(LocalPlayer, intType);
 }
 
 // File Line: 4147
 // RVA: 0x5AA730
-__int64 __fastcall UFG::ConversationManager::ResumeConversationsWithCharacter(UFG::SimObject *character, UFG::eInterruptType intType)
+__int64 __fastcall UFG::ConversationManager::ResumeConversationsWithCharacter(
+        UFG::SimObject *character,
+        UFG::eInterruptType intType)
 {
-  UFG::SimObject *v2; // rbx
-  UFG::eInterruptType v3; // esi
   unsigned __int8 v4; // di
   UFG::qBaseTreeRB *i; // rax
-  signed __int64 v6; // r10
-  signed __int64 v7; // r9
-  signed __int64 v8; // rax
-  signed __int64 v9; // rcx
+  __int64 v6; // r10
+  __int64 v7; // r9
+  __int64 v8; // rax
+  __int64 v9; // rcx
   __int64 v10; // rdx
   UFG::SimObject *v11; // r8
   __int64 v12; // rcx
   UFG::SimObject *v13; // rdx
 
-  v2 = character;
-  v3 = intType;
   v4 = 0;
   for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::ConversationManager::sm_conversationDb);
         ;
         i = UFG::qBaseTreeRB::GetNext(&UFG::ConversationManager::sm_conversationDb.mTree, (UFG::qBaseNodeRB *)(v6 + 8)) )
   {
-    v6 = (signed __int64)(i ? &i[-1].mCount : 0i64);
+    v6 = i ? (__int64)&i[-1].mCount : 0i64;
     if ( !v6 )
       break;
     if ( *(_DWORD *)(v6 + 48) == 3 )
@@ -5122,8 +4761,8 @@ __int64 __fastcall UFG::ConversationManager::ResumeConversationsWithCharacter(UF
           while ( 1 )
           {
             v10 = *(_QWORD *)(v9 + 104);
-            v11 = (UFG::SimObject *)(v10 ? *(_QWORD *)(v10 + 40) : 0i64);
-            if ( v11 == v2 )
+            v11 = v10 ? *(UFG::SimObject **)(v10 + 40) : 0i64;
+            if ( v11 == character )
               break;
             v9 = *(_QWORD *)(v9 + 16) - 8i64;
             if ( v9 == v7 )
@@ -5133,8 +4772,8 @@ __int64 __fastcall UFG::ConversationManager::ResumeConversationsWithCharacter(UF
               while ( 1 )
               {
                 v12 = *(_QWORD *)(v8 + 128);
-                v13 = (UFG::SimObject *)(v12 ? *(_QWORD *)(v12 + 40) : 0i64);
-                if ( v13 == v2 )
+                v13 = v12 ? *(UFG::SimObject **)(v12 + 40) : 0i64;
+                if ( v13 == character )
                   goto LABEL_21;
                 v8 = *(_QWORD *)(v8 + 16) - 8i64;
                 if ( v8 == v7 )
@@ -5143,7 +4782,7 @@ __int64 __fastcall UFG::ConversationManager::ResumeConversationsWithCharacter(UF
             }
           }
 LABEL_21:
-          if ( v3 == *(_DWORD *)(v6 + 148) )
+          if ( intType == *(_DWORD *)(v6 + 148) )
             *(_DWORD *)(v6 + 52) = 5;
           v4 = 1;
         }

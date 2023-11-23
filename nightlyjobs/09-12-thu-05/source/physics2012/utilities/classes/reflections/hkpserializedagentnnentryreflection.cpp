@@ -35,9 +35,10 @@ void __fastcall finishLoadedObjecthkpSerializedTrack1nInfo(void *p, int finishin
 
 // File Line: 75
 // RVA: 0xE0B830
-void __fastcall cleanupLoadedObjecthkpSerializedTrack1nInfo(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkpSerializedTrack1nInfo(hkpSerializedTrack1nInfo *p)
 {
-  hkpSerializedTrack1nInfo::~hkpSerializedTrack1nInfo((hkpSerializedTrack1nInfo *)p);
+  hkpSerializedTrack1nInfo::~hkpSerializedTrack1nInfo(p);
 }
 
 // File Line: 112
@@ -77,9 +78,10 @@ void __fastcall finishLoadedObjecthkpSerializedSubTrack1nInfo(void *p, int finis
 
 // File Line: 128
 // RVA: 0xE0B850
-void __fastcall cleanupLoadedObjecthkpSerializedSubTrack1nInfo(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkpSerializedSubTrack1nInfo(hkpSerializedTrack1nInfo *p)
 {
-  hkpSerializedTrack1nInfo::~hkpSerializedTrack1nInfo((hkpSerializedTrack1nInfo *)p);
+  hkpSerializedTrack1nInfo::~hkpSerializedTrack1nInfo(p);
 }
 
 // File Line: 175
@@ -111,7 +113,7 @@ void dynamic_initializer_for__hkpSerializedAgentNnEntryClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 203
@@ -123,30 +125,30 @@ hkClass *__fastcall hkpSerializedAgentNnEntry::staticClass()
 
 // File Line: 210
 // RVA: 0xE0B860
-void __fastcall finishLoadedObjecthkpSerializedAgentNnEntry(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpSerializedAgentNnEntry(char *p, hkFinishLoadedObjectFlag finishing)
 {
   hkpSimpleContactConstraintAtom *v2; // rcx
 
   if ( p )
   {
-    v2 = (hkpSimpleContactConstraintAtom *)((char *)p + 64);
+    v2 = (hkpSimpleContactConstraintAtom *)(p + 64);
     *(_QWORD *)v2[-2].m_info.m_data = &hkpSerializedAgentNnEntry::`vftable;
-    hkpSimpleContactConstraintAtom::hkpSimpleContactConstraintAtom(v2, (hkFinishLoadedObjectFlag)finishing);
+    hkpSimpleContactConstraintAtom::hkpSimpleContactConstraintAtom(v2, finishing);
   }
 }
 
 // File Line: 216
 // RVA: 0xE0B890
-void __fastcall cleanupLoadedObjecthkpSerializedAgentNnEntry(void *p)
+void __fastcall cleanupLoadedObjecthkpSerializedAgentNnEntry(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 220
 // RVA: 0xE0B8A0
 void **__fastcall getVtablehkpSerializedAgentNnEntry()
 {
-  hkpSimpleContactConstraintAtom v1; // [rsp+60h] [rbp-158h]
+  hkpSimpleContactConstraintAtom v1; // [rsp+60h] [rbp-158h] BYREF
 
   hkpSimpleContactConstraintAtom::hkpSimpleContactConstraintAtom(&v1, 0);
   return &hkpSerializedAgentNnEntry::`vftable;
@@ -163,8 +165,8 @@ void **dynamic_initializer_for__hkpSerializedAgentNnEntryTypeInfo__()
   hkpSerializedAgentNnEntryTypeInfo.m_typeName = "hkpSerializedAgentNnEntry";
   hkpSerializedAgentNnEntryTypeInfo.m_vtable = result;
   hkpSerializedAgentNnEntryTypeInfo.m_scopedName = "!hkpSerializedAgentNnEntry";
-  hkpSerializedAgentNnEntryTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpSerializedAgentNnEntry;
-  hkpSerializedAgentNnEntryTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpSerializedAgentNnEntry;
+  hkpSerializedAgentNnEntryTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpSerializedAgentNnEntry;
+  hkpSerializedAgentNnEntryTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpSerializedAgentNnEntry;
   return result;
 }
 

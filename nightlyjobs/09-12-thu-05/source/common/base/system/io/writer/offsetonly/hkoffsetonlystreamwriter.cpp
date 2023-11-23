@@ -17,17 +17,20 @@ hkBool *__fastcall hkOffsetOnlyStreamWriter::isOk(hkOffsetOnlyStreamWriter *this
 
 // File Line: 23
 // RVA: 0x13004A0
-__int64 __fastcall hkOffsetOnlyStreamWriter::write(hkOffsetOnlyStreamWriter *this, const void *__formal, int n)
+__int64 __fastcall hkOffsetOnlyStreamWriter::write(
+        hkOffsetOnlyStreamWriter *this,
+        const void *__formal,
+        unsigned int n)
 {
-  int v3; // edx
+  int m_eofOffset; // edx
   __int64 result; // rax
 
-  v3 = this->m_eofOffset;
+  m_eofOffset = this->m_eofOffset;
   this->m_offset += n;
-  result = (unsigned int)n;
-  if ( this->m_offset > v3 )
-    v3 = this->m_offset;
-  this->m_eofOffset = v3;
+  result = n;
+  if ( this->m_offset > m_eofOffset )
+    m_eofOffset = this->m_offset;
+  this->m_eofOffset = m_eofOffset;
   return result;
 }
 
@@ -41,14 +44,16 @@ hkBool *__fastcall hkOffsetOnlyStreamWriter::seekTellSupported(hkOffsetOnlyStrea
 
 // File Line: 35
 // RVA: 0x13004D0
-hkResult *__fastcall hkOffsetOnlyStreamWriter::seek(hkOffsetOnlyStreamWriter *this, hkResult *result, int offset, hkStreamWriter::SeekWhence whence)
+hkResult *__fastcall hkOffsetOnlyStreamWriter::seek(
+        hkOffsetOnlyStreamWriter *this,
+        hkResult *result,
+        int offset,
+        hkStreamWriter::SeekWhence whence)
 {
-  hkOffsetOnlyStreamWriter *v4; // r10
-  __int32 v5; // er9
-  int v6; // ecx
+  int v5; // r9d
+  int m_eofOffset; // ecx
   hkResult *v7; // rax
 
-  v4 = this;
   if ( whence )
   {
     v5 = whence - 1;
@@ -66,12 +71,12 @@ hkResult *__fastcall hkOffsetOnlyStreamWriter::seek(hkOffsetOnlyStreamWriter *th
   {
     this->m_offset = offset;
   }
-  v6 = this->m_eofOffset;
-  result->m_enum = 0;
+  m_eofOffset = this->m_eofOffset;
+  result->m_enum = HK_SUCCESS;
   v7 = result;
-  if ( v4->m_offset > v6 )
-    v6 = v4->m_offset;
-  v4->m_eofOffset = v6;
+  if ( this->m_offset > m_eofOffset )
+    m_eofOffset = this->m_offset;
+  this->m_eofOffset = m_eofOffset;
   return v7;
 }
 

@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkpConstraintInstanceSmallArraySerializeOverrideTy
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 133
@@ -63,7 +63,7 @@ void dynamic_initializer_for__hkpConstraintInstanceClass__()
     &hkpConstraintInstance_Default,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 211
@@ -75,35 +75,33 @@ hkClass *__fastcall hkpConstraintInstance::staticClass()
 
 // File Line: 218
 // RVA: 0xD4F530
-void __fastcall finishLoadedObjecthkpConstraintInstance(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpConstraintInstance(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
-  _DWORD *v2; // rbx
   hkStringPtr *v3; // rcx
 
   if ( p )
   {
-    v2 = p;
-    v3 = (hkStringPtr *)((char *)p + 80);
+    v3 = p + 10;
     v3[-10].m_stringAndFlag = (const char *)&hkpConstraintInstance::`vftable;
-    LODWORD(v3[-1].m_stringAndFlag) = 2147483648;
+    LODWORD(v3[-1].m_stringAndFlag) = 0x80000000;
     v3[-2].m_stringAndFlag = 0i64;
-    hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
-    v2[26] = -16;
+    hkStringPtr::hkStringPtr(v3, finishing);
+    LODWORD(p[13].m_stringAndFlag) = -16;
   }
 }
 
 // File Line: 224
 // RVA: 0xD4F580
-void __fastcall cleanupLoadedObjecthkpConstraintInstance(void *p)
+void __fastcall cleanupLoadedObjecthkpConstraintInstance(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 228
 // RVA: 0xD4F590
 void **__fastcall getVtablehkpConstraintInstance()
 {
-  hkStringPtr v1; // [rsp+70h] [rbp-28h]
+  hkStringPtr v1; // [rsp+70h] [rbp-28h] BYREF
 
   hkStringPtr::hkStringPtr(&v1, 0);
   return &hkpConstraintInstance::`vftable;
@@ -120,8 +118,8 @@ void **dynamic_initializer_for__hkpConstraintInstanceTypeInfo__()
   hkpConstraintInstanceTypeInfo.m_typeName = "hkpConstraintInstance";
   hkpConstraintInstanceTypeInfo.m_vtable = result;
   hkpConstraintInstanceTypeInfo.m_scopedName = "!hkpConstraintInstance";
-  hkpConstraintInstanceTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpConstraintInstance;
-  hkpConstraintInstanceTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpConstraintInstance;
+  hkpConstraintInstanceTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpConstraintInstance;
+  hkpConstraintInstanceTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpConstraintInstance;
   return result;
 }
 

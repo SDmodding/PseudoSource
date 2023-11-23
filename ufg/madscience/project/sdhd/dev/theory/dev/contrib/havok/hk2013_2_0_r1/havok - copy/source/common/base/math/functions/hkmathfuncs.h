@@ -1,8 +1,12 @@
 // File Line: 274
 // RVA: 0xBDE380
-void __fastcall hkMath::atan2(const float y, const float x)
+// attributes: thunk
+double __fastcall hkMath::atan2(float y, float x)
 {
-  atan2f(y, x);
+  double result; // xmm0_8
+
+  *(float *)&result = atan2f(y, x);
+  return result;
 }
 
 // File Line: 1140

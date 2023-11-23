@@ -10,23 +10,28 @@ void __fastcall hkaiUFGAStarEdgeFilter::~hkaiUFGAStarEdgeFilter(hkaiUFGAStarEdge
 
 // File Line: 20
 // RVA: 0xF5800
-bool __fastcall hkaiUFGAStarEdgeFilter::isEnabled(hkaiUFGAStarEdgeFilter *this, hkaiAstarEdgeFilter::NavMeshIsEnabledCallbackContext *context)
+bool __fastcall hkaiUFGAStarEdgeFilter::isEnabled(
+        hkaiUFGAStarEdgeFilter *this,
+        hkaiAstarEdgeFilter::NavMeshIsEnabledCallbackContext *context)
 {
-  hkaiNavMeshEdgePairInfo *v2; // r8
-  hkaiAgentTraversalInfo *v3; // r9
+  hkaiNavMeshEdgePairInfo *m_edgeFaceInfo; // r8
+  hkaiAgentTraversalInfo *m_agentInfo; // r9
   bool result; // al
-  hkaiNavMesh::Edge *v5; // rcx
+  hkaiNavMesh::Edge *m_edge; // rcx
   hkaiNavMesh::Edge *v6; // rax
 
-  v2 = context->m_edgeFaceInfo;
-  v3 = context->m_agentInfo;
+  m_edgeFaceInfo = context->m_edgeFaceInfo;
+  m_agentInfo = context->m_agentInfo;
   result = 0;
-  if ( !v2->m_face || BYTE1(v3->m_filterInfo) & *(_BYTE *)v2->m_faceData )
+  if ( !m_edgeFaceInfo->m_face || (BYTE1(m_agentInfo->m_filterInfo) & *(_BYTE *)m_edgeFaceInfo->m_faceData) != 0 )
   {
-    v5 = v2->m_incomingEdgeInfo.m_edge;
-    v6 = v2->m_outgoingEdgeInfo.m_edge;
-    if ( v3->m_filterInfo & 1 || (!v5 || !(v5->m_flags.m_storage & 0x10)) && (!v6 || !(v6->m_flags.m_storage & 0x10)) )
-      result = 1;
+    m_edge = m_edgeFaceInfo->m_incomingEdgeInfo.m_edge;
+    v6 = m_edgeFaceInfo->m_outgoingEdgeInfo.m_edge;
+    if ( (m_agentInfo->m_filterInfo & 1) != 0
+      || (!m_edge || (m_edge->m_flags.m_storage & 0x10) == 0) && (!v6 || (v6->m_flags.m_storage & 0x10) == 0) )
+    {
+      return 1;
+    }
   }
   return result;
 }

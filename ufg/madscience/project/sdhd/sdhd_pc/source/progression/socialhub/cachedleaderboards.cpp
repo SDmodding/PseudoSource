@@ -2,7 +2,7 @@
 // RVA: 0x4AB5C0
 UFG::CachedLeaderboardManager *__fastcall UFG::CachedLeaderboardManager::Instance()
 {
-  if ( !(_S15_1 & 1) )
+  if ( (_S15_1 & 1) == 0 )
   {
     _S15_1 |= 1u;
     instance_5.m_lLeaderboards.mNode.mPrev = (UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *)&instance_5;
@@ -17,79 +17,78 @@ UFG::CachedLeaderboardManager *__fastcall UFG::CachedLeaderboardManager::Instanc
 // RVA: 0x495890
 void __fastcall UFG::CachedLeaderboardManager::BuildCachedLeaderboard(UFG::CachedLeaderboardManager *this)
 {
-  UFG::CachedLeaderboardManager *v1; // r14
   UFG::OSuiteLeaderboardManager *v2; // r15
-  unsigned int v3; // er12
+  unsigned int size; // r12d
   unsigned int v4; // esi
   __int64 v5; // rbp
-  UFG::allocator::free_link *v6; // rbx
-  signed __int64 v7; // rdi
-  UFG::StatGamePropertyManager *v8; // rax
-  UFG::allocator::free_link *v9; // rax
-  UFG::allocator::free_link *v10; // [rsp+78h] [rbp+10h]
+  UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *v6; // rbx
+  __int64 v7; // rdi
+  UFG::StatGamePropertyManager *p_mNext; // rax
+  UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *mPrev; // rax
 
-  v1 = this;
   if ( !this->m_bIsCachedLeaderboardBuilt )
   {
     v2 = UFG::OSuiteLeaderboardManager::Instance();
-    v3 = v2->mLeaderboardData.size;
+    size = v2->mLeaderboardData.size;
     v4 = 0;
-    if ( v3 )
+    if ( size )
     {
       v5 = 0i64;
       do
       {
-        if ( v2->mLeaderboardData.p[v5].mCategory == 1 )
+        if ( v2->mLeaderboardData.p[v5].mCategory == LeaderboardCategory_StatGame )
         {
-          v6 = UFG::qMalloc(0x30ui64, "CachedLeaderboardManager", 0i64);
+          v6 = (UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *)UFG::qMalloc(
+                                                                              0x30ui64,
+                                                                              "CachedLeaderboardManager",
+                                                                              0i64);
           if ( v6 )
           {
-            v7 = (signed __int64)&v2->mLeaderboardData.p[v4];
-            if ( !(_S18_2 & 1) )
+            v7 = (__int64)&v2->mLeaderboardData.p[v4];
+            if ( (_S18_2 & 1) == 0 )
             {
               _S18_2 |= 1u;
               UFG::StatGamePropertyManager::StatGamePropertyManager(&instance_8);
               atexit(UFG::StatGamePropertyManager::Instance_::_2_::_dynamic_atexit_destructor_for__instance__);
             }
-            v8 = (UFG::StatGamePropertyManager *)&instance_8.m_lProperties.mNode.mNext[-1].mNext;
+            p_mNext = (UFG::StatGamePropertyManager *)&instance_8.m_lProperties.mNode.mNext[-1].mNext;
             if ( &instance_8.m_lProperties.mNode.mNext[-1].mNext == (UFG::qNode<UFG::StatGamePropertyData,UFG::StatGamePropertyData> **)((char *)&instance_8 - 8) )
             {
 LABEL_11:
-              v8 = 0i64;
+              p_mNext = 0i64;
             }
             else
             {
-              while ( v8[1].m_lProperties.mNode.mNext != (UFG::qNode<UFG::StatGamePropertyData,UFG::StatGamePropertyData> *)v7 )
+              while ( p_mNext[1].m_lProperties.mNode.mNext != (UFG::qNode<UFG::StatGamePropertyData,UFG::StatGamePropertyData> *)v7 )
               {
-                v8 = (UFG::StatGamePropertyManager *)&v8[1].m_lProperties.mNode.mPrev[-1].mNext;
-                if ( v8 == (UFG::StatGamePropertyManager *)((char *)&instance_8 - 8) )
+                p_mNext = (UFG::StatGamePropertyManager *)&p_mNext[1].m_lProperties.mNode.mPrev[-1].mNext;
+                if ( p_mNext == (UFG::StatGamePropertyManager *)((char *)&instance_8 - 8) )
                   goto LABEL_11;
               }
             }
+            v6->mPrev = v6;
             v6->mNext = v6;
-            v6[1].mNext = v6;
-            v10 = v6 + 2;
-            v10->mNext = v10;
-            v10[1].mNext = v10;
-            v6[4].mNext = (UFG::allocator::free_link *)v8;
-            v6[5].mNext = 0i64;
+            v6[1].mPrev = v6 + 1;
+            v6[1].mNext = v6 + 1;
+            v6[2].mPrev = (UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *)p_mNext;
+            v6[2].mNext = 0i64;
           }
           else
           {
             v6 = 0i64;
           }
-          v9 = (UFG::allocator::free_link *)v1->m_lLeaderboards.mNode.mPrev;
-          v9[1].mNext = v6;
-          v6->mNext = v9;
-          v6[1].mNext = (UFG::allocator::free_link *)v1;
-          v1->m_lLeaderboards.mNode.mPrev = (UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *)v6;
+          mPrev = this->m_lLeaderboards.mNode.mPrev;
+          mPrev->mNext = v6;
+          v6->mPrev = mPrev;
+          v6->mNext = &this->m_lLeaderboards.mNode;
+          this->m_lLeaderboards.mNode.mPrev = v6;
         }
         ++v4;
         ++v5;
       }
-      while ( v4 < v3 );
+      while ( v4 < size );
     }
-    v1->m_bIsCachedLeaderboardBuilt = 1;
+    this->m_bIsCachedLeaderboardBuilt = 1;
   }
 }
 
@@ -97,9 +96,8 @@ LABEL_11:
 // RVA: 0x497A70
 void __fastcall UFG::CachedLeaderboardManager::ClearCachedLeaderboards(UFG::CachedLeaderboardManager *this)
 {
-  UFG::CachedLeaderboardManager *v1; // rsi
-  UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *v2; // rbx
-  UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *v3; // rdx
+  UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *mNext; // rbx
+  UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *mPrev; // rdx
   UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *v4; // rax
   UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *v5; // rdi
   UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *v6; // rax
@@ -112,7 +110,6 @@ void __fastcall UFG::CachedLeaderboardManager::ClearCachedLeaderboards(UFG::Cach
   UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *v13; // rdx
   UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *v14; // rax
 
-  v1 = this;
   if ( (UFG::CachedLeaderboardManager *)this->m_lLeaderboards.mNode.mNext == this )
   {
     this->m_bIsCachedLeaderboardBuilt = 0;
@@ -121,16 +118,16 @@ void __fastcall UFG::CachedLeaderboardManager::ClearCachedLeaderboards(UFG::Cach
   {
     do
     {
-      v2 = v1->m_lLeaderboards.mNode.mNext;
-      v3 = v2->mPrev;
-      v4 = v2->mNext;
-      v3->mNext = v4;
-      v4->mPrev = v3;
-      v2->mPrev = v2;
-      v2->mNext = v2;
-      v5 = v2 + 1;
-      v6 = v2[1].mNext;
-      if ( v6 != &v2[1] )
+      mNext = this->m_lLeaderboards.mNode.mNext;
+      mPrev = mNext->mPrev;
+      v4 = mNext->mNext;
+      mPrev->mNext = v4;
+      v4->mPrev = mPrev;
+      mNext->mPrev = mNext;
+      mNext->mNext = mNext;
+      v5 = mNext + 1;
+      v6 = mNext[1].mNext;
+      if ( v6 != &mNext[1] )
       {
         do
         {
@@ -147,42 +144,44 @@ void __fastcall UFG::CachedLeaderboardManager::ClearCachedLeaderboards(UFG::Cach
           v6->mPrev = v6;
           v6->mNext = v6;
           operator delete[](v6);
-          v6 = v2[1].mNext;
+          v6 = mNext[1].mNext;
         }
         while ( v6 != v5 );
       }
       v11 = v5->mPrev;
-      v12 = v2[1].mNext;
+      v12 = mNext[1].mNext;
       v11->mNext = v12;
       v12->mPrev = v11;
       v5->mPrev = v5;
-      v2[1].mNext = v2 + 1;
-      v13 = v2->mPrev;
-      v14 = v2->mNext;
+      mNext[1].mNext = mNext + 1;
+      v13 = mNext->mPrev;
+      v14 = mNext->mNext;
       v13->mNext = v14;
       v14->mPrev = v13;
-      v2->mPrev = v2;
-      v2->mNext = v2;
-      operator delete[](v2);
+      mNext->mPrev = mNext;
+      mNext->mNext = mNext;
+      operator delete[](mNext);
     }
-    while ( (UFG::CachedLeaderboardManager *)v1->m_lLeaderboards.mNode.mNext != v1 );
-    v1->m_bIsCachedLeaderboardBuilt = 0;
+    while ( (UFG::CachedLeaderboardManager *)this->m_lLeaderboards.mNode.mNext != this );
+    this->m_bIsCachedLeaderboardBuilt = 0;
   }
 }
 
 // File Line: 94
 // RVA: 0x4C8BD0
-void __fastcall UFG::CachedLeaderboardManager::UpsertEntry(UFG::CachedLeaderboardManager *this, int id, UFG::CachedLeaderboard::Entry *entry)
+void __fastcall UFG::CachedLeaderboardManager::UpsertEntry(
+        UFG::CachedLeaderboardManager *this,
+        int id,
+        UFG::CachedLeaderboard::Entry *entry)
 {
-  UFG::CachedLeaderboard::Entry *v3; // rsi
-  UFG::CachedLeaderboardManager *v4; // rbp
-  UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *v5; // rdi
-  bool *v6; // rbx
-  int v7; // eax
+  UFG::CachedLeaderboardManager *mNext; // rbp
+  UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *mPrev; // rdi
+  bool *p_m_bIsCachedLeaderboardBuilt; // rbx
+  int m_iRating; // eax
   UFG::allocator::free_link *v8; // rax
   UFG::allocator::free_link *v9; // rdi
   UFG::allocator::free_link *v10; // rax
-  signed int v11; // edi
+  int v11; // edi
   UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *v12; // r11
   UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *v13; // rax
   UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *v14; // r9
@@ -202,21 +201,20 @@ void __fastcall UFG::CachedLeaderboardManager::UpsertEntry(UFG::CachedLeaderboar
   UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *v28; // rcx
   UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *i; // rax
 
-  v3 = entry;
-  v4 = (UFG::CachedLeaderboardManager *)this->m_lLeaderboards.mNode.mNext;
-  if ( v4 != this )
+  mNext = (UFG::CachedLeaderboardManager *)this->m_lLeaderboards.mNode.mNext;
+  if ( mNext != this )
   {
-    while ( v4[1].m_lLeaderboards.mNode.mNext[1].mNext->mPrev != (UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *)id )
+    while ( mNext[1].m_lLeaderboards.mNode.mNext[1].mNext->mPrev != (UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *)id )
     {
-      v4 = (UFG::CachedLeaderboardManager *)v4->m_lLeaderboards.mNode.mNext;
-      if ( v4 == this )
+      mNext = (UFG::CachedLeaderboardManager *)mNext->m_lLeaderboards.mNode.mNext;
+      if ( mNext == this )
         return;
     }
-    v5 = v4[1].m_lLeaderboards.mNode.mPrev;
-    v6 = &v4->m_bIsCachedLeaderboardBuilt;
+    mPrev = mNext[1].m_lLeaderboards.mNode.mPrev;
+    p_m_bIsCachedLeaderboardBuilt = &mNext->m_bIsCachedLeaderboardBuilt;
     while ( 1 )
     {
-      if ( v5 == (UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *)v6 )
+      if ( mPrev == (UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *)p_m_bIsCachedLeaderboardBuilt )
       {
         v8 = UFG::qMalloc(0x60ui64, "CachedLeaderboardManager", 0i64);
         v9 = v8;
@@ -224,42 +222,42 @@ void __fastcall UFG::CachedLeaderboardManager::UpsertEntry(UFG::CachedLeaderboar
         {
           v8->mNext = v8;
           v8[1].mNext = v8;
-          LODWORD(v8[2].mNext) = v3->m_iRating;
-          HIDWORD(v8[2].mNext) = v3->m_uRank;
-          LODWORD(v8[11].mNext) = v3->m_eEntryType;
-          UFG::qStringCopy((char *)&v8[3], 64, v3->m_sUsername, -1);
+          LODWORD(v8[2].mNext) = entry->m_iRating;
+          HIDWORD(v8[2].mNext) = entry->m_uRank;
+          LODWORD(v8[11].mNext) = entry->m_eEntryType;
+          UFG::qStringCopy((char *)&v8[3], 64, entry->m_sUsername, -1);
         }
         else
         {
           v9 = 0i64;
         }
-        v10 = *(UFG::allocator::free_link **)v6;
+        v10 = *(UFG::allocator::free_link **)p_m_bIsCachedLeaderboardBuilt;
         v10[1].mNext = v9;
         v9->mNext = v10;
-        v9[1].mNext = (UFG::allocator::free_link *)v6;
-        *(_QWORD *)v6 = v9;
+        v9[1].mNext = (UFG::allocator::free_link *)p_m_bIsCachedLeaderboardBuilt;
+        *(_QWORD *)p_m_bIsCachedLeaderboardBuilt = v9;
         goto LABEL_16;
       }
-      if ( LODWORD(v5[5].mNext) == v3->m_eEntryType
-        && !(unsigned int)UFG::qStringCompare((const char *)&v5[1].mNext, v3->m_sUsername, -1) )
+      if ( LODWORD(mPrev[5].mNext) == entry->m_eEntryType
+        && !(unsigned int)UFG::qStringCompare((const char *)&mPrev[1].mNext, entry->m_sUsername, -1) )
       {
         break;
       }
-      v5 = v5->mNext;
+      mPrev = mPrev->mNext;
     }
-    v7 = v3->m_iRating;
-    if ( v7 > SLODWORD(v5[1].mPrev) )
-      LODWORD(v5[1].mPrev) = v7;
+    m_iRating = entry->m_iRating;
+    if ( m_iRating > SLODWORD(mPrev[1].mPrev) )
+      LODWORD(mPrev[1].mPrev) = m_iRating;
 LABEL_16:
     v11 = 1;
-    v12 = v4[1].m_lLeaderboards.mNode.mPrev;
+    v12 = mNext[1].m_lLeaderboards.mNode.mPrev;
     do
     {
       v13 = 0i64;
-      while ( v12 != (UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *)v6 )
+      while ( v12 != (UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *)p_m_bIsCachedLeaderboardBuilt )
       {
         v14 = v12->mNext;
-        if ( v14 == (UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *)v6 )
+        if ( v14 == (UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *)p_m_bIsCachedLeaderboardBuilt )
           break;
         if ( SLODWORD(v12[1].mPrev) >= SLODWORD(v14[1].mPrev) )
         {
@@ -293,12 +291,12 @@ LABEL_16:
         }
       }
       v12 = 0i64;
-      if ( !v13 || v13 == (UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *)v6 )
+      if ( !v13 || v13 == (UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *)p_m_bIsCachedLeaderboardBuilt )
         break;
       do
       {
         v21 = v13->mPrev;
-        if ( (bool *)v13->mPrev == v6 )
+        if ( (bool *)v13->mPrev == p_m_bIsCachedLeaderboardBuilt )
           break;
         if ( SLODWORD(v21[1].mPrev) >= SLODWORD(v13[1].mPrev) )
         {
@@ -332,11 +330,11 @@ LABEL_16:
           v12 = v21;
         }
       }
-      while ( v13 != (UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *)v6 );
+      while ( v13 != (UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *)p_m_bIsCachedLeaderboardBuilt );
     }
     while ( v12 );
-    for ( i = v4[1].m_lLeaderboards.mNode.mPrev;
-          i != (UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *)v6;
+    for ( i = mNext[1].m_lLeaderboards.mNode.mPrev;
+          i != (UFG::qNode<UFG::CachedLeaderboard,UFG::CachedLeaderboard> *)p_m_bIsCachedLeaderboardBuilt;
           i = i->mNext )
     {
       HIDWORD(i[1].mPrev) = v11++;

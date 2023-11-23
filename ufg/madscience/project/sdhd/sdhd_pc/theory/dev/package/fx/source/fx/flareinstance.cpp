@@ -3,27 +3,23 @@
 void __fastcall Render::FlareInstance::Init(Render::FlareInstance *this, unsigned int settingsId)
 {
   bool v2; // zf
-  unsigned int v3; // edi
-  Render::FlareInstance *v4; // rbx
-  UFG::qResourceInventory *v5; // rax
+  UFG::qResourceInventory *Inventory; // rax
   UFG::qResourceWarehouse *v6; // rax
   UFG::qResourceInventory *v7; // rax
   UFG::qResourceWarehouse *v8; // rax
 
   v2 = this->mFlare.mSettings.mData == 0i64;
-  v3 = settingsId;
-  v4 = this;
   this->mSettingsId = settingsId;
   if ( !v2 )
   {
-    v5 = `UFG::qGetResourceInventory<Render::FlareSettings>::`2::result;
+    Inventory = `UFG::qGetResourceInventory<Render::FlareSettings>::`2::result;
     if ( !`UFG::qGetResourceInventory<Render::FlareSettings>::`2::result )
     {
       v6 = UFG::qResourceWarehouse::Instance();
-      v5 = UFG::qResourceWarehouse::GetInventory(v6, 0xA6535FBB);
-      `UFG::qGetResourceInventory<Render::FlareSettings>::`2::result = v5;
+      Inventory = UFG::qResourceWarehouse::GetInventory(v6, 0xA6535FBB);
+      `UFG::qGetResourceInventory<Render::FlareSettings>::`2::result = Inventory;
     }
-    UFG::qResourceHandle::Close((UFG::qResourceHandle *)&v4->mFlare.mSettings.mPrev, v5);
+    UFG::qResourceHandle::Close(&this->mFlare.mSettings, Inventory);
   }
   v7 = `UFG::qGetResourceInventory<Render::FlareSettings>::`2::result;
   if ( !`UFG::qGetResourceInventory<Render::FlareSettings>::`2::result )
@@ -32,7 +28,7 @@ void __fastcall Render::FlareInstance::Init(Render::FlareInstance *this, unsigne
     v7 = UFG::qResourceWarehouse::GetInventory(v8, 0xA6535FBB);
     `UFG::qGetResourceInventory<Render::FlareSettings>::`2::result = v7;
   }
-  UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v4->mFlare.mSettings.mPrev, 0xA6535FBB, v3, v7);
+  UFG::qResourceHandle::Init(&this->mFlare.mSettings, 0xA6535FBB, settingsId, v7);
 }
 
 // File Line: 24
@@ -54,7 +50,7 @@ void __fastcall Render::FlareInstance::Deactivate(Render::FlareInstance *this, b
 
   if ( this->mIsActive )
   {
-    v2 = this->mIsSuspended == 0;
+    v2 = !this->mIsSuspended;
     this->mIsActive = 0;
     if ( v2 )
       Render::FlareManager::RemoveFlare(&Render::gFlareManager, &this->mFlare);
@@ -67,16 +63,14 @@ void __fastcall Render::FlareInstance::Deactivate(Render::FlareInstance *this, b
 // RVA: 0x1D9740
 void __fastcall Render::FlareInstance::Update(Render::FlareInstance *this, UFG::qVector3 *cam_pos, float delta_sec)
 {
-  float v3; // xmm3_4
-  Render::FlareInstance *v4; // rbx
+  float mStartTime; // xmm3_4
   float v5; // xmm1_4
 
-  v3 = this->mStartTime;
-  v4 = this;
-  v5 = this->mEndTime - v3;
+  mStartTime = this->mStartTime;
+  v5 = this->mEndTime - mStartTime;
   if ( v5 > 0.0 )
-    this->mFlare.mLifeTime = (float)(delta_sec - v3) / v5;
-  Render::FXComponentInstance::GetBasis((Render::FXComponentInstance *)&this->vfptr, &this->mFlare.mTransform);
-  v4->mFlare.mSplitScreenViewMask = v4->mContainer->mSplitScreenViewMask;
+    this->mFlare.mLifeTime = (float)(delta_sec - mStartTime) / v5;
+  Render::FXComponentInstance::GetBasis(this, &this->mFlare.mTransform);
+  this->mFlare.mSplitScreenViewMask = this->mContainer->mSplitScreenViewMask;
 }
 

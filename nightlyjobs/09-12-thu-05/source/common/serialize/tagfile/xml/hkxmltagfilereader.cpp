@@ -2,371 +2,348 @@
 // RVA: 0xE533C0
 void __fastcall `anonymous namespace::Reader::Reader(Reader *this, hkStreamReader *sr, hkDataWorld *cont)
 {
-  hkDataWorld *v3; // rbx
-  Reader *v4; // rsi
-  signed __int64 v5; // rdi
-  signed __int64 v6; // rbx
-  hkSubString text; // [rsp+20h] [rbp-18h]
+  hkArray<char *,hkContainerHeapAllocator> *p_m_prevStrings; // rbx
+  hkSubString text; // [rsp+20h] [rbp-18h] BYREF
 
-  v3 = cont;
-  v4 = this;
   hkXmlStreamParser::hkXmlStreamParser(&this->m_parser, sr);
-  v4->m_world = v3;
-  v5 = (signed __int64)&v4->m_classes;
-  *(_QWORD *)v5 = 0i64;
-  *(_DWORD *)(v5 + 8) = 0;
-  *(_DWORD *)(v5 + 12) = 2147483648;
-  v6 = (signed __int64)&v4->m_prevStrings;
-  *(_QWORD *)v6 = 0i64;
-  *(_DWORD *)(v6 + 8) = 0;
-  *(_DWORD *)(v6 + 12) = 2147483648;
-  v4->m_numPrevStringsStatic = 0;
+  this->m_world = cont;
+  this->m_classes.m_data = 0i64;
+  this->m_classes.m_size = 0;
+  this->m_classes.m_capacityAndFlags = 0x80000000;
+  p_m_prevStrings = &this->m_prevStrings;
+  this->m_prevStrings.m_data = 0i64;
+  this->m_prevStrings.m_size = 0;
+  this->m_prevStrings.m_capacityAndFlags = 0x80000000;
+  this->m_numPrevStringsStatic = 0;
   hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>(
-    &v4->m_stringMap.m_map,
+    &this->m_stringMap.m_map,
     0);
-  v4->m_blockStack.m_data = 0i64;
-  v4->m_blockStack.m_size = 0;
-  v4->m_blockStack.m_capacityAndFlags = 2147483648;
+  this->m_blockStack.m_data = 0i64;
+  this->m_blockStack.m_size = 0;
+  this->m_blockStack.m_capacityAndFlags = 0x80000000;
   hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>(
-    &v4->m_referenceMap.m_map,
+    &this->m_referenceMap.m_map,
     0);
-  v4->m_tmpObjects.m_data = 0i64;
-  v4->m_tmpObjects.m_size = 0;
-  v4->m_tmpObjects.m_capacityAndFlags = 2147483648;
-  if ( v4->m_classes.m_size == (v4->m_classes.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v4->m_classes, 8);
-  *(_QWORD *)(*(_QWORD *)v5 + 8i64 * v4->m_classes.m_size++) = 0i64;
-  if ( v4->m_prevStrings.m_size == (v4->m_prevStrings.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v4->m_prevStrings, 8);
-  *(_QWORD *)(*(_QWORD *)v6 + 8i64 * v4->m_prevStrings.m_size++) = &customWorldMapCaption;
-  if ( v4->m_prevStrings.m_size == (v4->m_prevStrings.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v4->m_prevStrings, 8);
-  *(_QWORD *)(*(_QWORD *)v6 + 8i64 * v4->m_prevStrings.m_size++) = 0i64;
-  v4->m_numPrevStringsStatic = 2;
+  this->m_tmpObjects.m_data = 0i64;
+  this->m_tmpObjects.m_size = 0;
+  this->m_tmpObjects.m_capacityAndFlags = 0x80000000;
+  if ( this->m_classes.m_size == (this->m_classes.m_capacityAndFlags & 0x3FFFFFFF) )
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&this->m_classes.m_data, 8);
+  this->m_classes.m_data[this->m_classes.m_size++] = 0i64;
+  if ( this->m_prevStrings.m_size == (this->m_prevStrings.m_capacityAndFlags & 0x3FFFFFFF) )
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&this->m_prevStrings.m_data, 8);
+  p_m_prevStrings->m_data[this->m_prevStrings.m_size++] = &customCaption;
+  if ( this->m_prevStrings.m_size == (this->m_prevStrings.m_capacityAndFlags & 0x3FFFFFFF) )
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&this->m_prevStrings.m_data, 8);
+  p_m_prevStrings->m_data[this->m_prevStrings.m_size++] = 0i64;
+  this->m_numPrevStringsStatic = 2;
   text.m_start = "#0000";
-  text.m_end = &a0000[(signed int)hkString::strLen("#0000")];
-  v4->m_null = `anonymous namespace::Reader::_getString(v4, &text);
+  text.m_end = &a0000[(int)hkString::strLen("#0000")];
+  this->m_null = `anonymous namespace::Reader::_getString(this, &text);
 }
 
 // File Line: 141
 // RVA: 0xE53560
 void __fastcall `anonymous namespace::Reader::~Reader(Reader *this)
 {
-  hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *v1; // rbp
-  Reader *v2; // rbx
-  Dummy *v3; // rdi
-  ReferenceInfo *v4; // rax
+  hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *p_m_referenceMap; // rbp
+  Dummy *Iterator; // rdi
+  ReferenceInfo *Value; // rax
   ReferenceInfo *v5; // rsi
   _QWORD **v6; // rax
-  hkDataObject *v7; // rsi
+  hkDataObject *m_data; // rsi
   int v8; // eax
   __int64 i; // rdi
-  hkDataObjectImpl *v10; // rcx
-  bool v11; // zf
-  int v12; // er8
-  int v13; // er8
-  Dummy *v14; // rsi
-  char *v15; // rax
-  int v16; // er8
-  int v17; // er8
-  hkBool result; // [rsp+40h] [rbp+8h]
+  hkDataObjectImpl *m_impl; // rcx
+  int m_capacityAndFlags; // r8d
+  int v13; // r8d
+  Dummy *Next; // rsi
+  char *Key; // rax
+  int v16; // r8d
+  int v17; // r8d
+  hkBool result; // [rsp+40h] [rbp+8h] BYREF
 
-  v1 = (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_referenceMap;
-  v2 = this;
-  v3 = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::getIterator((hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_referenceMap);
-  hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::isValid(v1, &result, v3);
+  p_m_referenceMap = (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_referenceMap;
+  Iterator = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::getIterator((hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_referenceMap);
+  hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::isValid(p_m_referenceMap, &result, Iterator);
   while ( result.m_bool )
   {
-    v4 = (ReferenceInfo *)hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getValue(v1, v3);
-    v5 = v4;
-    if ( v4 )
+    Value = (ReferenceInfo *)hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getValue(
+                               p_m_referenceMap,
+                               Iterator);
+    v5 = Value;
+    if ( Value )
     {
-      `anonymous namespace::ReferenceInfo::~ReferenceInfo(v4);
+      `anonymous namespace::ReferenceInfo::~ReferenceInfo(Value);
       v6 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      (*(void (__fastcall **)(_QWORD *, ReferenceInfo *, signed __int64))(*v6[11] + 16i64))(v6[11], v5, 40i64);
+      (*(void (__fastcall **)(_QWORD *, ReferenceInfo *, __int64))(*v6[11] + 16i64))(v6[11], v5, 40i64);
     }
-    v3 = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::getNext(v1, v3);
-    hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::isValid(v1, &result, v3);
+    Iterator = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::getNext(
+                 p_m_referenceMap,
+                 Iterator);
+    hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::isValid(p_m_referenceMap, &result, Iterator);
   }
-  v7 = v2->m_tmpObjects.m_data;
-  v8 = v2->m_tmpObjects.m_size - 1;
+  m_data = this->m_tmpObjects.m_data;
+  v8 = this->m_tmpObjects.m_size - 1;
   for ( i = v8; i >= 0; --i )
   {
-    v10 = v7[i].m_impl;
-    if ( v10 )
+    m_impl = m_data[i].m_impl;
+    if ( m_impl )
     {
-      --v10->m_externalCount;
-      v11 = v10->m_count-- == 1;
-      if ( v11 )
-        v10->vfptr->__vecDelDtor((hkDataRefCounted *)&v10->vfptr, 1u);
+      --m_impl->m_externalCount;
+      if ( m_impl->m_count-- == 1 )
+        m_impl->vfptr->__vecDelDtor(m_impl, 1u);
     }
   }
-  v12 = v2->m_tmpObjects.m_capacityAndFlags;
-  v2->m_tmpObjects.m_size = 0;
-  if ( v12 >= 0 )
+  m_capacityAndFlags = this->m_tmpObjects.m_capacityAndFlags;
+  this->m_tmpObjects.m_size = 0;
+  if ( m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_tmpObjects.m_data,
-      8 * v12);
-  v2->m_tmpObjects.m_data = 0i64;
-  v2->m_tmpObjects.m_capacityAndFlags = 2147483648;
-  hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::~hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>((hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator> *)v1);
-  v13 = v2->m_blockStack.m_capacityAndFlags;
-  v2->m_blockStack.m_size = 0;
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_tmpObjects.m_data,
+      8 * m_capacityAndFlags);
+  this->m_tmpObjects.m_data = 0i64;
+  this->m_tmpObjects.m_capacityAndFlags = 0x80000000;
+  hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::~hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>((hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator> *)p_m_referenceMap);
+  v13 = this->m_blockStack.m_capacityAndFlags;
+  this->m_blockStack.m_size = 0;
   if ( v13 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_blockStack.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_blockStack.m_data,
       8 * v13);
-  v2->m_blockStack.m_data = 0i64;
-  v2->m_blockStack.m_capacityAndFlags = 2147483648;
-  v14 = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::getIterator((hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&v2->m_stringMap);
+  this->m_blockStack.m_data = 0i64;
+  this->m_blockStack.m_capacityAndFlags = 0x80000000;
+  Next = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::getIterator((hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_stringMap);
   hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::isValid(
-    (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&v2->m_stringMap,
+    (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_stringMap,
     &result,
-    v14);
+    Next);
   while ( result.m_bool )
   {
-    v15 = (char *)hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getKey(&v2->m_stringMap.m_map, v14);
-    hkString::strFree(v15, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr);
-    v14 = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::getNext(
-            (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&v2->m_stringMap,
-            v14);
+    Key = (char *)hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getKey(
+                    &this->m_stringMap.m_map,
+                    Next);
+    hkString::strFree(Key, &hkContainerHeapAllocator::s_alloc);
+    Next = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::getNext(
+             (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_stringMap,
+             Next);
     hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::isValid(
-      (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&v2->m_stringMap,
+      (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_stringMap,
       &result,
-      v14);
+      Next);
   }
-  hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::clear(&v2->m_stringMap.m_map);
-  hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::~hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>(&v2->m_stringMap.m_map);
-  v16 = v2->m_prevStrings.m_capacityAndFlags;
-  v2->m_prevStrings.m_size = 0;
+  hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::clear(&this->m_stringMap.m_map);
+  hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::~hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>(&this->m_stringMap.m_map);
+  v16 = this->m_prevStrings.m_capacityAndFlags;
+  this->m_prevStrings.m_size = 0;
   if ( v16 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_prevStrings.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_prevStrings.m_data,
       8 * v16);
-  v2->m_prevStrings.m_data = 0i64;
-  v2->m_prevStrings.m_capacityAndFlags = 2147483648;
-  v17 = v2->m_classes.m_capacityAndFlags;
-  v2->m_classes.m_size = 0;
+  this->m_prevStrings.m_data = 0i64;
+  this->m_prevStrings.m_capacityAndFlags = 0x80000000;
+  v17 = this->m_classes.m_capacityAndFlags;
+  this->m_classes.m_size = 0;
   if ( v17 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_classes.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_classes.m_data,
       8 * v17);
-  v2->m_classes.m_data = 0i64;
-  v2->m_classes.m_capacityAndFlags = 2147483648;
-  hkXmlStreamParser::~hkXmlStreamParser(&v2->m_parser);
+  this->m_classes.m_data = 0i64;
+  this->m_classes.m_capacityAndFlags = 0x80000000;
+  hkXmlStreamParser::~hkXmlStreamParser(&this->m_parser);
 }
 
 // File Line: 152
 // RVA: 0xE55B00
-hkResult *__fastcall `anonymous namespace::Reader::_parseObjectReferenceImpl<hkDataArray_Value>(Reader *this, hkResult *result, hkDataArray_Value *valueOut)
+hkResult *__fastcall `anonymous namespace::Reader::_parseObjectReferenceImpl<hkDataArray_Value>(
+        Reader *this,
+        hkResult *result,
+        hkSubString *valueOut)
 {
-  hkDataArray_Value *v3; // rsi
-  hkResult *v4; // rdi
-  Reader *v5; // rbx
-  hkXmlStreamParser::Token v6; // eax
+  hkXmlStreamParser::Token m_token; // eax
   hkSubString *v7; // rax
-  hkSubString *v8; // rax
-  char *v9; // rax
+  hkSubString *Lexeme; // rax
+  char *String; // rax
   ReferenceInfo *v10; // rax
   hkSubString v11; // xmm0
-  signed int *v12; // rsi
+  hkArray<hkDataArray_Value,hkContainerHeapAllocator> *p_m_arrayRefs; // rsi
   hkSubString *v13; // rax
-  hkSubString *v15; // rax
-  hkSubString resulta; // [rsp+20h] [rbp-18h]
-  hkBool v17; // [rsp+40h] [rbp+8h]
+  hkSubString *BlockName; // rax
+  hkSubString resulta; // [rsp+20h] [rbp-18h] BYREF
+  hkBool v17; // [rsp+40h] [rbp+8h] BYREF
 
-  v3 = valueOut;
-  v4 = result;
-  v5 = this;
   `anonymous namespace::Reader::_skipWhiteSpace(this);
-  v6 = v5->m_parser.m_token;
-  if ( v6 != 1 )
+  m_token = this->m_parser.m_token;
+  if ( m_token != TOKEN_BLOCK_START )
   {
-    if ( v6 == 2 )
+    if ( m_token == TOKEN_BLOCK_START_END )
     {
-      v15 = hkXmlStreamParser::getBlockName(&v5->m_parser, &resulta);
-      if ( hkSubString::operator==(v15, &v17, "null")->m_bool )
+      BlockName = hkXmlStreamParser::getBlockName(&this->m_parser, &resulta);
+      if ( hkSubString::operator==(BlockName, &v17, "null")->m_bool )
       {
-        ((void (__fastcall *)(hkDataArrayImpl *, _QWORD, _QWORD))v3->m_impl->vfptr[22].__vecDelDtor)(
-          v3->m_impl,
-          (unsigned int)v3->m_index,
+        (*(void (__fastcall **)(const char *, _QWORD, _QWORD))(*(_QWORD *)valueOut->m_start + 176i64))(
+          valueOut->m_start,
+          LODWORD(valueOut->m_end),
           0i64);
-        v4->m_enum = 0;
-        return v4;
+        result->m_enum = HK_SUCCESS;
+        return result;
       }
     }
     goto LABEL_15;
   }
-  v7 = hkXmlStreamParser::getBlockName(&v5->m_parser, &resulta);
+  v7 = hkXmlStreamParser::getBlockName(&this->m_parser, &resulta);
   if ( !hkSubString::operator==(v7, &v17, "ref")->m_bool
-    || (`anonymous namespace::Reader::_pushBlock(v5),
-        hkXmlStreamParser::advance(&v5->m_parser),
-        `anonymous namespace::Reader::_skipWhiteSpace(v5) != 4) )
+    || (`anonymous namespace::Reader::_pushBlock(this),
+        hkXmlStreamParser::advance(&this->m_parser),
+        `anonymous namespace::Reader::_skipWhiteSpace(this) != TOKEN_TEXT) )
   {
 LABEL_15:
-    v4->m_enum = 1;
-    return v4;
+    result->m_enum = HK_FAILURE;
+    return result;
   }
-  v8 = hkXmlStreamParser::getLexeme(&v5->m_parser, &resulta);
-  v9 = `anonymous namespace::Reader::_getString(v5, v8);
-  if ( v9 == v5->m_null )
+  Lexeme = hkXmlStreamParser::getLexeme(&this->m_parser, &resulta);
+  String = `anonymous namespace::Reader::_getString(this, Lexeme);
+  if ( String == this->m_null )
   {
-    ((void (__fastcall *)(hkDataArrayImpl *, _QWORD, _QWORD))v3->m_impl->vfptr[22].__vecDelDtor)(
-      v3->m_impl,
-      (unsigned int)v3->m_index,
+    (*(void (__fastcall **)(const char *, _QWORD, _QWORD))(*(_QWORD *)valueOut->m_start + 176i64))(
+      valueOut->m_start,
+      LODWORD(valueOut->m_end),
       0i64);
   }
   else
   {
-    v10 = `anonymous namespace::Reader::_requireReferenceInfo(v5, v9);
-    v11 = (hkSubString)*v3;
-    v12 = (signed int *)&v10->m_arrayRefs;
+    v10 = `anonymous namespace::Reader::_requireReferenceInfo(this, String);
+    v11 = *valueOut;
+    p_m_arrayRefs = &v10->m_arrayRefs;
     resulta = v11;
     if ( v10->m_arrayRefs.m_size == (v10->m_arrayRefs.m_capacityAndFlags & 0x3FFFFFFF) )
     {
-      hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v12, 16);
+      hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&p_m_arrayRefs->m_data, 16);
       v11 = resulta;
     }
-    v13 = (hkSubString *)(*(_QWORD *)v12 + 16i64 * v12[2]);
+    v13 = (hkSubString *)&p_m_arrayRefs->m_data[p_m_arrayRefs->m_size];
     if ( v13 )
       *v13 = v11;
-    ++v12[2];
+    ++p_m_arrayRefs->m_size;
   }
-  hkXmlStreamParser::advance(&v5->m_parser);
-  `anonymous namespace::Reader::_skipWhiteSpace(v5);
-  `anonymous namespace::Reader::_popBlock(v5, v4);
-  return v4;
+  hkXmlStreamParser::advance(&this->m_parser);
+  `anonymous namespace::Reader::_skipWhiteSpace(this);
+  `anonymous namespace::Reader::_popBlock(this, result);
+  return result;
 }
 
 // File Line: 199
 // RVA: 0xE53DA0
 char *__fastcall `anonymous namespace::Reader::_getString(Reader *this, hkSubString *text)
 {
-  Reader *v2; // rbp
   char *v3; // rcx
-  int v4; // ebx
-  hkSubString *v5; // rsi
-  int v6; // er9
-  const char *v7; // rdx
-  const char *v8; // rbx
-  Dummy *v9; // rsi
+  signed int v4; // ebx
+  int v6; // r9d
+  const char *m_start; // rdx
+  char *v8; // rbx
+  Dummy *Key; // rsi
   char *v10; // rbx
-  char *array; // [rsp+30h] [rbp-98h]
+  char *array; // [rsp+30h] [rbp-98h] BYREF
   int v13; // [rsp+38h] [rbp-90h]
   int v14; // [rsp+3Ch] [rbp-8Ch]
-  char v15; // [rsp+40h] [rbp-88h]
-  hkBool result; // [rsp+D0h] [rbp+8h]
+  char v15[128]; // [rsp+40h] [rbp-88h] BYREF
+  hkResult result; // [rsp+D0h] [rbp+8h] BYREF
 
-  v2 = this;
-  v3 = &v15;
+  v3 = v15;
   v4 = LODWORD(text->m_end) - LODWORD(text->m_start);
-  v5 = text;
   v13 = 0;
-  array = &v15;
+  array = v15;
   v14 = -2147483520;
   if ( v4 + 1 > 128 )
   {
     v6 = v4 + 1;
     if ( v4 + 1 < 256 )
       v6 = 256;
-    hkArrayUtil::_reserve(
-      (hkResult *)&result,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &array,
-      v6,
-      1);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&array, v6, 1);
     v3 = array;
   }
-  v7 = v5->m_start;
+  m_start = text->m_start;
   v13 = v4 + 1;
-  hkString::strNcpy(v3, v7, v4);
+  hkString::strNcpy(v3, m_start, v4);
   array[v4] = 0;
   v8 = array;
-  v9 = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::findKey(
-         (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&v2->m_stringMap,
-         (unsigned __int64)array);
+  Key = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::findKey(
+          (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_stringMap,
+          array);
   hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::isValid(
-    (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&v2->m_stringMap,
-    &result,
-    v9);
-  if ( result.m_bool )
+    (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_stringMap,
+    (hkBool *)&result,
+    Key);
+  if ( LOBYTE(result.m_enum) )
   {
-    v10 = (char *)hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getKey(&v2->m_stringMap.m_map, v9);
-    hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::setValue(&v2->m_stringMap.m_map, v9, 1ui64);
+    v10 = (char *)hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getKey(&this->m_stringMap.m_map, Key);
+    hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::setValue(&this->m_stringMap.m_map, Key, 1ui64);
   }
   else
   {
-    v10 = hkString::strDup(v8, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr);
-    hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::insert(
-      &v2->m_stringMap.m_map,
-      (unsigned __int64)v10,
-      1ui64);
+    v10 = hkString::strDup(v8, &hkContainerHeapAllocator::s_alloc);
+    hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::insert(&this->m_stringMap.m_map, v10, 1ui64);
   }
   v13 = 0;
   if ( v14 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      array,
-      v14 & 0x3FFFFFFF);
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, array, v14 & 0x3FFFFFFF);
   return v10;
 }
 
 // File Line: 212
 // RVA: 0xE54330
-hkTypeManager::Type *__fastcall `anonymous namespace::Reader::_getType(Reader *this, const char *name, const char *className)
+hkTypeManager::Type *__fastcall `anonymous namespace::Reader::_getType(
+        Reader *this,
+        const char *name,
+        const char *className)
 {
-  const char *v3; // rsi
-  const char *v4; // rdi
   hkTypeManager *v5; // rbx
   char v7; // al
-  _BYTE *v8; // rcx
+  const char *v8; // rcx
   int v9; // eax
   hkTypeManager::Type *v10; // rax
 
-  v3 = className;
-  v4 = name;
-  v5 = (hkTypeManager *)((__int64 (*)(void))this->m_world->vfptr[5].__first_virtual_table_function__)();
-  switch ( *v4 )
+  v5 = (hkTypeManager *)((__int64 (__fastcall *)(hkDataWorld *))this->m_world->vfptr[5].__first_virtual_table_function__)(this->m_world);
+  switch ( *name )
   {
-    case 98:
-      if ( !(unsigned int)hkString::strCmp(v4, "byte") )
+    case b:
+      if ( !(unsigned int)hkString::strCmp(name, "byte") )
         return v5->m_builtInTypes[2];
       break;
-    case 105:
-      if ( !(unsigned int)hkString::strCmp(v4, "int") )
+    case i:
+      if ( !(unsigned int)hkString::strCmp(name, "int") )
         return v5->m_builtInTypes[4];
       break;
-    case 114:
-      if ( !(unsigned int)hkString::strCmp(v4, "real") )
+    case r:
+      if ( !(unsigned int)hkString::strCmp(name, "real") )
         return v5->m_builtInTypes[3];
-      if ( !(unsigned int)hkString::strCmp(v4, "ref") )
+      if ( !(unsigned int)hkString::strCmp(name, "ref") )
       {
-        v10 = hkTypeManager::addClass(v5, v3);
+        v10 = hkTypeManager::addClass(v5, className);
         return hkTypeManager::makePointer(v5, v10);
       }
       break;
-    case 115:
-      if ( !(unsigned int)hkString::strCmp(v4, "string") )
+    case s:
+      if ( !(unsigned int)hkString::strCmp(name, "string") )
         return v5->m_builtInTypes[5];
-      if ( !(unsigned int)hkString::strCmp(v4, "struct") )
-        return hkTypeManager::addClass(v5, v3);
+      if ( !(unsigned int)hkString::strCmp(name, "struct") )
+        return hkTypeManager::addClass(v5, className);
       break;
-    case 118:
-      if ( !(unsigned int)hkString::strCmp(v4, "void") )
+    case v:
+      if ( !(unsigned int)hkString::strCmp(name, "void") )
         return v5->m_builtInTypes[1];
-      if ( !hkString::strNcmp(v4, "vec", 3) )
+      if ( !hkString::strNcmp(name, "vec", 3u) )
       {
-        v7 = v4[3];
-        v8 = v4 + 3;
+        v7 = name[3];
+        v8 = name + 3;
         if ( v7 )
         {
           while ( (unsigned __int8)(v7 - 48) <= 9u )
           {
-            v7 = (v8++)[1];
+            v7 = *++v8;
             if ( !v7 )
               goto LABEL_14;
           }
@@ -374,7 +351,7 @@ hkTypeManager::Type *__fastcall `anonymous namespace::Reader::_getType(Reader *t
         if ( !*v8 )
         {
 LABEL_14:
-          v9 = hkString::atoi(v4 + 3, 0);
+          v9 = hkString::atoi(name + 3, 0);
           return hkTypeManager::makeTuple(v5, v5->m_builtInTypes[3], v9);
         }
       }
@@ -387,352 +364,322 @@ LABEL_14:
 // RVA: 0xE53CA0
 void __fastcall `anonymous namespace::Reader::_pushBlock(Reader *this)
 {
-  Reader *v1; // rbx
-  hkSubString *v2; // rax
-  const char *v3; // rax
-  hkArray<char const *,hkContainerHeapAllocator> *v4; // rbx
+  hkSubString *BlockName; // rax
+  const char *String; // rax
+  hkArray<char const *,hkContainerHeapAllocator> *p_m_blockStack; // rbx
   const char *v5; // rdi
-  hkSubString result; // [rsp+20h] [rbp-18h]
+  hkSubString result; // [rsp+20h] [rbp-18h] BYREF
 
-  v1 = this;
-  v2 = hkXmlStreamParser::getBlockName(&this->m_parser, &result);
-  v3 = `anonymous namespace::Reader::_getString(v1, v2);
-  v4 = &v1->m_blockStack;
-  v5 = v3;
-  if ( v4->m_size == (v4->m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v4, 8);
-  v4->m_data[v4->m_size++] = v5;
+  BlockName = hkXmlStreamParser::getBlockName(&this->m_parser, &result);
+  String = `anonymous namespace::Reader::_getString(this, BlockName);
+  p_m_blockStack = &this->m_blockStack;
+  v5 = String;
+  if ( p_m_blockStack->m_size == (p_m_blockStack->m_capacityAndFlags & 0x3FFFFFFF) )
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&p_m_blockStack->m_data, 8);
+  p_m_blockStack->m_data[p_m_blockStack->m_size++] = v5;
 }
 
 // File Line: 289
 // RVA: 0xE53D10
 hkResult *__fastcall `anonymous namespace::Reader::_popBlock(Reader *this, hkResult *result)
 {
-  hkResult *v2; // rbx
-  Reader *v3; // rdi
-  hkSubString *v4; // rax
-  const char *v5; // rdx
-  hkResult *v6; // rax
-  hkSubString resulta; // [rsp+20h] [rbp-18h]
+  hkSubString *BlockName; // rax
+  const char *String; // rdx
+  hkSubString resulta; // [rsp+20h] [rbp-18h] BYREF
 
-  v2 = result;
-  v3 = this;
   `anonymous namespace::Reader::_skipWhiteSpace(this);
-  v4 = hkXmlStreamParser::getBlockName(&v3->m_parser, &resulta);
-  v5 = `anonymous namespace::Reader::_getString(v3, v4);
-  if ( v3->m_blockStack.m_size <= 0 || v5 != v3->m_blockStack.m_data[v3->m_blockStack.m_size - 1] )
+  BlockName = hkXmlStreamParser::getBlockName(&this->m_parser, &resulta);
+  String = `anonymous namespace::Reader::_getString(this, BlockName);
+  if ( this->m_blockStack.m_size > 0 && String == this->m_blockStack.m_data[this->m_blockStack.m_size - 1] )
   {
-    v2->m_enum = 1;
-    v6 = v2;
+    hkXmlStreamParser::advance(&this->m_parser);
+    --this->m_blockStack.m_size;
+    result->m_enum = HK_SUCCESS;
+    return result;
   }
   else
   {
-    hkXmlStreamParser::advance(&v3->m_parser);
-    --v3->m_blockStack.m_size;
-    v2->m_enum = 0;
-    v6 = v2;
+    result->m_enum = HK_FAILURE;
+    return result;
   }
-  return v6;
 }
 
 // File Line: 313
 // RVA: 0xE54060
 hkResult *__fastcall `anonymous namespace::Reader::_parseClassDefinition(Reader *this, hkResult *result)
 {
-  hkResult *v2; // rsi
-  Reader *v3; // rbx
-  char *v4; // rdi
-  hkResult *v5; // rax
+  char *Attribute; // rdi
   char *v6; // rax
-  hkDataWorld *v7; // rcx
+  hkDataWorld *m_world; // rcx
   hkTypeManager *v8; // r12
-  hkSubString *v9; // rax
+  hkSubString *BlockName; // rax
   char *v10; // r15
   char *v11; // rdi
   char *v12; // rax
   char *v13; // r14
-  hkTypeManager::Type *v14; // rdi
+  hkTypeManager::Type *Type; // rdi
   int v15; // edx
-  signed __int64 v16; // rcx
+  __int64 v16; // rcx
   _QWORD *v17; // rax
-  int value; // [rsp+20h] [rbp-29h]
-  int tupleSize; // [rsp+24h] [rbp-25h]
-  hkResult v20; // [rsp+28h] [rbp-21h]
-  hkSubString v21; // [rsp+30h] [rbp-19h]
-  char *v22; // [rsp+40h] [rbp-9h]
+  int value; // [rsp+20h] [rbp-29h] BYREF
+  int tupleSize; // [rsp+24h] [rbp-25h] BYREF
+  hkResult v20; // [rsp+28h] [rbp-21h] BYREF
+  hkSubString v21; // [rsp+30h] [rbp-19h] BYREF
+  char *v22; // [rsp+40h] [rbp-9h] BYREF
   int v23; // [rsp+48h] [rbp-1h]
   char *v24; // [rsp+50h] [rbp+7h]
-  _QWORD *array; // [rsp+58h] [rbp+Fh]
+  _QWORD *array; // [rsp+58h] [rbp+Fh] BYREF
   int v26; // [rsp+60h] [rbp+17h]
   int v27; // [rsp+64h] [rbp+1Bh]
-  hkResult resulta; // [rsp+C0h] [rbp+77h]
-  hkBool v29; // [rsp+C8h] [rbp+7Fh]
+  hkResult resulta; // [rsp+C0h] [rbp+77h] BYREF
+  hkBool v29; // [rsp+C8h] [rbp+7Fh] BYREF
 
-  v2 = result;
-  v3 = this;
   `anonymous namespace::Reader::_pushBlock(this);
-  v4 = `anonymous namespace::Reader::_getAttribute(v3, "name");
-  if ( v4 )
+  Attribute = `anonymous namespace::Reader::_getAttribute(this, "name");
+  if ( Attribute )
   {
     value = 0;
-    hkXmlStreamParser::getIntAttribute(&v3->m_parser, &resulta, "version", &value);
-    v6 = `anonymous namespace::Reader::_getAttribute(v3, "parent");
+    hkXmlStreamParser::getIntAttribute(&this->m_parser, &resulta, "version", &value);
+    v6 = `anonymous namespace::Reader::_getAttribute(this, "parent");
     array = 0i64;
     v23 = value;
-    v7 = v3->m_world;
+    m_world = this->m_world;
     v26 = 0;
-    v27 = 2147483648;
-    v22 = v4;
+    v27 = 0x80000000;
+    v22 = Attribute;
     v24 = v6;
-    v8 = (hkTypeManager *)((__int64 (*)(void))v7->vfptr[5].__first_virtual_table_function__)();
-    hkXmlStreamParser::advance(&v3->m_parser);
-    while ( `anonymous namespace::Reader::_skipWhiteSpace(v3) == 2 )
+    v8 = (hkTypeManager *)((__int64 (__fastcall *)(hkDataWorld *))m_world->vfptr[5].__first_virtual_table_function__)(m_world);
+    hkXmlStreamParser::advance(&this->m_parser);
+    while ( `anonymous namespace::Reader::_skipWhiteSpace(this) == TOKEN_BLOCK_START_END )
     {
-      v9 = hkXmlStreamParser::getBlockName(&v3->m_parser, &v21);
-      if ( !hkSubString::operator==(v9, (hkBool *)&resulta, "member")->m_bool )
+      BlockName = hkXmlStreamParser::getBlockName(&this->m_parser, &v21);
+      if ( !hkSubString::operator==(BlockName, (hkBool *)&resulta, "member")->m_bool )
         break;
-      v10 = `anonymous namespace::Reader::_getAttribute(v3, "name");
-      v11 = `anonymous namespace::Reader::_getAttribute(v3, "type");
-      v12 = `anonymous namespace::Reader::_getAttribute(v3, "class");
+      v10 = `anonymous namespace::Reader::_getAttribute(this, "name");
+      v11 = `anonymous namespace::Reader::_getAttribute(this, "type");
+      v12 = `anonymous namespace::Reader::_getAttribute(this, "class");
       v13 = v12;
       if ( !v10 )
         goto LABEL_18;
       if ( !v11 )
         goto LABEL_18;
-      v14 = `anonymous namespace::Reader::_getType(v3, v11, v12);
-      if ( !v14 )
+      Type = `anonymous namespace::Reader::_getType(this, v11, v12);
+      if ( !Type )
         goto LABEL_18;
-      if ( `anonymous namespace::Reader::_getBoolAttribute(v3, &v29, "array", 0)->m_bool )
-        v14 = hkTypeManager::makeArray(v8, v14);
+      if ( `anonymous namespace::Reader::_getBoolAttribute(this, &v29, "array", 0)->m_bool )
+        Type = hkTypeManager::makeArray(v8, Type);
       tupleSize = 0;
-      hkXmlStreamParser::getIntAttribute(&v3->m_parser, &v20, "count", &tupleSize);
+      hkXmlStreamParser::getIntAttribute(&this->m_parser, &v20, "count", &tupleSize);
       if ( tupleSize > 0 )
-        v14 = hkTypeManager::makeTuple(v8, v14, tupleSize);
+        Type = hkTypeManager::makeTuple(v8, Type, tupleSize);
       v15 = v26;
       if ( v26 == (v27 & 0x3FFFFFFF) )
       {
-        hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, 24);
+        hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&array, 24);
         v15 = v26;
       }
       v16 = 3i64 * v15;
       v17 = array;
       v26 = v15 + 1;
       array[v16] = v10;
-      v17[v16 + 1] = v14;
+      v17[v16 + 1] = Type;
       v17[v16 + 2] = 0i64;
       if ( v13 )
-        ((void (__fastcall *)(hkDataWorld *, char *))v3->m_world->vfptr[4].__first_virtual_table_function__)(
-          v3->m_world,
+        ((void (__fastcall *)(hkDataWorld *, char *))this->m_world->vfptr[4].__first_virtual_table_function__)(
+          this->m_world,
           v13);
-      hkXmlStreamParser::advance(&v3->m_parser);
+      hkXmlStreamParser::advance(&this->m_parser);
     }
-    if ( `anonymous namespace::Reader::_popBlock(v3, &resulta)->m_enum == 1 )
+    if ( `anonymous namespace::Reader::_popBlock(this, &resulta)->m_enum == HK_FAILURE )
     {
 LABEL_18:
-      v2->m_enum = 1;
+      result->m_enum = HK_FAILURE;
     }
     else
     {
-      hkXmlStreamParser::advance(&v3->m_parser);
-      ((void (__fastcall *)(hkDataWorld *, char **))v3->m_world->vfptr[1].__first_virtual_table_function__)(
-        v3->m_world,
+      hkXmlStreamParser::advance(&this->m_parser);
+      ((void (__fastcall *)(hkDataWorld *, char **))this->m_world->vfptr[1].__first_virtual_table_function__)(
+        this->m_world,
         &v22);
-      v2->m_enum = 0;
+      result->m_enum = HK_SUCCESS;
     }
     v26 = 0;
     if ( v27 >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+        &hkContainerHeapAllocator::s_alloc,
         array,
         24 * (v27 & 0x3FFFFFFF));
-    v5 = v2;
+    return result;
   }
   else
   {
-    v2->m_enum = 1;
-    v5 = v2;
+    result->m_enum = HK_FAILURE;
+    return result;
   }
-  return v5;
 }
 
 // File Line: 409
 // RVA: 0xE54AE0
-hkResult *__fastcall `anonymous namespace::Reader::_parseInt(Reader *this, hkResult *result, const char *blockName, __int64 *valueOut)
+hkResult *__fastcall `anonymous namespace::Reader::_parseInt(
+        Reader *this,
+        hkResult *result,
+        const char *blockName,
+        __int64 *valueOut)
 {
-  __int64 *v4; // rbp
-  const char *v5; // rsi
-  hkResult *v6; // rbx
-  Reader *v7; // rdi
   hkSubString *v8; // rax
-  hkSubString *v9; // rax
-  hkResult v11; // [rsp+20h] [rbp-28h]
-  hkSubString resulta; // [rsp+28h] [rbp-20h]
-  hkBool v13; // [rsp+50h] [rbp+8h]
+  hkSubString *Lexeme; // rax
+  hkResult v11; // [rsp+20h] [rbp-28h] BYREF
+  hkSubString resulta; // [rsp+28h] [rbp-20h] BYREF
+  hkBool v13; // [rsp+50h] [rbp+8h] BYREF
 
-  v4 = valueOut;
-  v5 = blockName;
-  v6 = result;
-  v7 = this;
-  if ( this->m_parser.m_token == 1
-    && (v8 = hkXmlStreamParser::getBlockName(&this->m_parser, &resulta), hkSubString::operator==(v8, &v13, v5)->m_bool)
-    && (`anonymous namespace::Reader::_pushBlock(v7),
-        hkXmlStreamParser::advance(&v7->m_parser),
-        `anonymous namespace::Reader::_skipWhiteSpace(v7) == 4) )
+  if ( this->m_parser.m_token == TOKEN_BLOCK_START
+    && (v8 = hkXmlStreamParser::getBlockName(&this->m_parser, &resulta),
+        hkSubString::operator==(v8, &v13, blockName)->m_bool)
+    && (`anonymous namespace::Reader::_pushBlock(this),
+        hkXmlStreamParser::advance(&this->m_parser),
+        `anonymous namespace::Reader::_skipWhiteSpace(this) == TOKEN_TEXT) )
   {
-    v9 = hkXmlStreamParser::getLexeme(&v7->m_parser, &resulta);
-    hkXmlStreamParser::parseInt(&v11, v9, v4);
+    Lexeme = hkXmlStreamParser::getLexeme(&this->m_parser, &resulta);
+    hkXmlStreamParser::parseInt(&v11, Lexeme, valueOut);
     if ( v11.m_enum )
     {
-      v6->m_enum = v11.m_enum;
+      result->m_enum = v11.m_enum;
     }
     else
     {
-      hkXmlStreamParser::advance(&v7->m_parser);
-      `anonymous namespace::Reader::_popBlock(v7, v6);
+      hkXmlStreamParser::advance(&this->m_parser);
+      `anonymous namespace::Reader::_popBlock(this, result);
     }
   }
   else
   {
-    v6->m_enum = 1;
+    result->m_enum = HK_FAILURE;
   }
-  return v6;
+  return result;
 }
 
 // File Line: 436
 // RVA: 0xE54BB0
-hkResult *__fastcall `anonymous namespace::Reader::_parseReal(Reader *this, hkResult *result, const char *blockName, float *valueOut)
+hkResult *__fastcall `anonymous namespace::Reader::_parseReal(
+        Reader *this,
+        hkResult *result,
+        const char *blockName,
+        float *valueOut)
 {
-  float *v4; // rbp
-  const char *v5; // rsi
-  hkResult *v6; // rbx
-  Reader *v7; // rdi
   hkSubString *v8; // rax
-  hkSubString *v9; // rax
-  hkResult v11; // [rsp+20h] [rbp-28h]
-  hkSubString resulta; // [rsp+28h] [rbp-20h]
-  hkBool v13; // [rsp+50h] [rbp+8h]
+  hkSubString *Lexeme; // rax
+  hkResult v11; // [rsp+20h] [rbp-28h] BYREF
+  hkSubString resulta; // [rsp+28h] [rbp-20h] BYREF
+  hkBool v13; // [rsp+50h] [rbp+8h] BYREF
 
-  v4 = valueOut;
-  v5 = blockName;
-  v6 = result;
-  v7 = this;
-  if ( this->m_parser.m_token == 1
-    && (v8 = hkXmlStreamParser::getBlockName(&this->m_parser, &resulta), hkSubString::operator==(v8, &v13, v5)->m_bool)
-    && (`anonymous namespace::Reader::_pushBlock(v7),
-        hkXmlStreamParser::advance(&v7->m_parser),
-        `anonymous namespace::Reader::_skipWhiteSpace(v7) == 4) )
+  if ( this->m_parser.m_token == TOKEN_BLOCK_START
+    && (v8 = hkXmlStreamParser::getBlockName(&this->m_parser, &resulta),
+        hkSubString::operator==(v8, &v13, blockName)->m_bool)
+    && (`anonymous namespace::Reader::_pushBlock(this),
+        hkXmlStreamParser::advance(&this->m_parser),
+        `anonymous namespace::Reader::_skipWhiteSpace(this) == TOKEN_TEXT) )
   {
-    v9 = hkXmlStreamParser::getLexeme(&v7->m_parser, &resulta);
-    hkXmlStreamParser::parseReal(&v11, v9, v4);
+    Lexeme = hkXmlStreamParser::getLexeme(&this->m_parser, &resulta);
+    hkXmlStreamParser::parseReal(&v11, Lexeme, valueOut);
     if ( v11.m_enum )
     {
-      v6->m_enum = v11.m_enum;
+      result->m_enum = v11.m_enum;
     }
     else
     {
-      hkXmlStreamParser::advance(&v7->m_parser);
-      `anonymous namespace::Reader::_popBlock(v7, v6);
+      hkXmlStreamParser::advance(&this->m_parser);
+      `anonymous namespace::Reader::_popBlock(this, result);
     }
   }
   else
   {
-    v6->m_enum = 1;
+    result->m_enum = HK_FAILURE;
   }
-  return v6;
+  return result;
 }
 
 // File Line: 487
 // RVA: 0xE55040
-hkResult *__fastcall `anonymous namespace::Reader::_parseRealVector(Reader *this, hkResult *result, float *out, int numReal)
+hkResult *__fastcall `anonymous namespace::Reader::_parseRealVector(
+        Reader *this,
+        hkResult *result,
+        float *out,
+        int numReal)
 {
-  int v4; // ebp
-  float *v5; // r14
-  hkResult *v6; // rsi
-  Reader *v7; // rdi
   int v8; // ebx
-  hkSubString resulta; // [rsp+20h] [rbp-28h]
-  hkResult v11; // [rsp+68h] [rbp+20h]
+  hkSubString resulta; // [rsp+20h] [rbp-28h] BYREF
+  hkResult v11; // [rsp+68h] [rbp+20h] BYREF
 
-  v4 = numReal;
-  v5 = out;
-  v6 = result;
-  v7 = this;
   `anonymous namespace::Reader::_pushBlock(this);
-  hkXmlStreamParser::advance(&v7->m_parser);
+  hkXmlStreamParser::advance(&this->m_parser);
   v8 = 0;
-  if ( v4 <= 0 )
+  if ( numReal <= 0 )
   {
 LABEL_5:
-    `anonymous namespace::Reader::_popBlock(v7, v6);
+    `anonymous namespace::Reader::_popBlock(this, result);
   }
   else
   {
-    while ( `anonymous namespace::Reader::_skipWhiteSpace(v7) == 4 )
+    while ( `anonymous namespace::Reader::_skipWhiteSpace(this) == TOKEN_TEXT )
     {
-      hkXmlStreamParser::getLexeme(&v7->m_parser, &resulta);
-      hkXmlStreamParser::parseReal(&v11, &resulta, &v5[v8]);
+      hkXmlStreamParser::getLexeme(&this->m_parser, &resulta);
+      hkXmlStreamParser::parseReal(&v11, &resulta, &out[v8]);
       if ( v11.m_enum )
       {
-        v6->m_enum = v11.m_enum;
-        return v6;
+        result->m_enum = v11.m_enum;
+        return result;
       }
-      hkXmlStreamParser::advance(&v7->m_parser);
-      if ( ++v8 >= v4 )
+      hkXmlStreamParser::advance(&this->m_parser);
+      if ( ++v8 >= numReal )
         goto LABEL_5;
     }
-    v6->m_enum = 1;
+    result->m_enum = HK_FAILURE;
   }
-  return v6;
+  return result;
 }
 
 // File Line: 515
 // RVA: 0xE550F0
-hkResult *__fastcall `anonymous namespace::Reader::_parseString(Reader *this, hkResult *result, const char **stringOut)
+hkResult *__fastcall `anonymous namespace::Reader::_parseString(Reader *this, hkResult *result, char **stringOut)
 {
-  hkResult *v3; // rbx
-  const char **v4; // r14
-  Reader *v5; // rdi
-  hkXmlStreamParser::Token v6; // eax
+  hkXmlStreamParser::Token m_token; // eax
   hkXmlStreamParser::Token v7; // eax
-  char *v8; // r15
-  Dummy *v9; // r12
+  char *m_data; // r15
+  Dummy *Key; // r12
   char *v10; // r15
-  hkSubString subString; // [rsp+20h] [rbp-E0h]
-  hkSubString resulta; // [rsp+30h] [rbp-D0h]
-  hkStringBuf v14; // [rsp+40h] [rbp-C0h]
-  hkStringBuf buf; // [rsp+D0h] [rbp-30h]
-  hkBool v16; // [rsp+190h] [rbp+90h]
+  hkSubString subString; // [rsp+20h] [rbp-E0h] BYREF
+  hkSubString resulta; // [rsp+30h] [rbp-D0h] BYREF
+  hkStringBuf v14; // [rsp+40h] [rbp-C0h] BYREF
+  hkStringBuf buf; // [rsp+D0h] [rbp-30h] BYREF
+  hkResult v16; // [rsp+190h] [rbp+90h] BYREF
 
-  v3 = result;
-  v4 = stringOut;
-  v5 = this;
   *stringOut = 0i64;
   hkXmlStreamParser::getBlockName(&this->m_parser, &resulta);
-  if ( hkSubString::operator==(&resulta, &v16, "null")->m_bool )
+  if ( hkSubString::operator==(&resulta, (hkBool *)&v16, "null")->m_bool )
   {
-    hkXmlStreamParser::advance(&v5->m_parser);
-    v3->m_enum = 0;
+    hkXmlStreamParser::advance(&this->m_parser);
+    result->m_enum = HK_SUCCESS;
   }
   else
   {
-    if ( !hkSubString::operator==(&resulta, &v16, "string")->m_bool )
-      goto LABEL_24;
-    v6 = v5->m_parser.m_token;
-    if ( v6 == 2 )
+    if ( !hkSubString::operator==(&resulta, (hkBool *)&v16, "string")->m_bool )
+      goto LABEL_4;
+    m_token = this->m_parser.m_token;
+    if ( m_token == TOKEN_BLOCK_START_END )
     {
-      hkXmlStreamParser::advance(&v5->m_parser);
-      *v4 = &customWorldMapCaption;
-      v3->m_enum = 0;
-      return v3;
+      hkXmlStreamParser::advance(&this->m_parser);
+      *stringOut = &customCaption;
+      result->m_enum = HK_SUCCESS;
+      return result;
     }
-    if ( v6 == 1 )
+    if ( m_token == TOKEN_BLOCK_START )
     {
-      `anonymous namespace::Reader::_pushBlock(v5);
-      v7 = hkXmlStreamParser::advance(&v5->m_parser);
-      if ( v7 == 3 )
+      `anonymous namespace::Reader::_pushBlock(this);
+      v7 = hkXmlStreamParser::advance(&this->m_parser);
+      if ( v7 == TOKEN_BLOCK_END )
       {
-        *v4 = &customWorldMapCaption;
-        `anonymous namespace::Reader::_popBlock(v5, v3);
+        *stringOut = &customCaption;
+        `anonymous namespace::Reader::_popBlock(this, result);
       }
       else
       {
@@ -742,13 +689,13 @@ hkResult *__fastcall `anonymous namespace::Reader::_parseString(Reader *this, hk
         v14.m_string.m_storage[0] = 0;
         while ( (unsigned int)(v7 - 4) <= 1 )
         {
-          hkXmlStreamParser::getLexeme(&v5->m_parser, &subString);
+          hkXmlStreamParser::getLexeme(&this->m_parser, &subString);
           hkStringBuf::append(&v14, subString.m_start, LODWORD(subString.m_end) - LODWORD(subString.m_start));
-          v7 = hkXmlStreamParser::advance(&v5->m_parser);
+          v7 = hkXmlStreamParser::advance(&this->m_parser);
         }
         subString.m_start = v14.m_string.m_data;
         subString.m_end = &v14.m_string.m_data[v14.m_string.m_size - 1];
-        if ( hkXmlStreamParser::needsDecode(&v16, &subString)->m_bool )
+        if ( hkXmlStreamParser::needsDecode((hkBool *)&v16, &subString)->m_bool )
         {
           buf.m_string.m_data = buf.m_string.m_storage;
           subString.m_start = v14.m_string.m_data;
@@ -756,728 +703,695 @@ hkResult *__fastcall `anonymous namespace::Reader::_parseString(Reader *this, hk
           buf.m_string.m_size = 1;
           buf.m_string.m_storage[0] = 0;
           subString.m_end = &v14.m_string.m_data[v14.m_string.m_size - 1];
-          hkXmlStreamParser::decodeString((hkResult *)&v16, &subString, &buf);
+          hkXmlStreamParser::decodeString(&v16, &subString, &buf);
           hkStringBuf::operator=(&v14, &buf);
           buf.m_string.m_size = 0;
           if ( buf.m_string.m_capacityAndFlags >= 0 )
             hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-              (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
+              &hkContainerTempAllocator::s_alloc,
               buf.m_string.m_data,
               buf.m_string.m_capacityAndFlags & 0x3FFFFFFF);
         }
-        v8 = v14.m_string.m_data;
-        v9 = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::findKey(
-               (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&v5->m_stringMap,
-               (unsigned __int64)v14.m_string.m_data);
+        m_data = v14.m_string.m_data;
+        Key = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::findKey(
+                (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_stringMap,
+                v14.m_string.m_data);
         hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::isValid(
-          (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&v5->m_stringMap,
-          &v16,
-          v9);
-        if ( v16.m_bool )
+          (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_stringMap,
+          (hkBool *)&v16,
+          Key);
+        if ( LOBYTE(v16.m_enum) )
         {
           v10 = (char *)hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getKey(
-                          &v5->m_stringMap.m_map,
-                          v9);
-          hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::setValue(&v5->m_stringMap.m_map, v9, 1ui64);
+                          &this->m_stringMap.m_map,
+                          Key);
+          hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::setValue(
+            &this->m_stringMap.m_map,
+            Key,
+            1ui64);
         }
         else
         {
-          v10 = hkString::strDup(v8, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr);
-          hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::insert(
-            &v5->m_stringMap.m_map,
-            (unsigned __int64)v10,
-            1ui64);
+          v10 = hkString::strDup(m_data, &hkContainerHeapAllocator::s_alloc);
+          hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::insert(&this->m_stringMap.m_map, v10, 1ui64);
         }
-        *v4 = v10;
-        `anonymous namespace::Reader::_popBlock(v5, v3);
+        *stringOut = v10;
+        `anonymous namespace::Reader::_popBlock(this, result);
         v14.m_string.m_size = 0;
         if ( v14.m_string.m_capacityAndFlags >= 0 )
           hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-            (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
+            &hkContainerTempAllocator::s_alloc,
             v14.m_string.m_data,
             v14.m_string.m_capacityAndFlags & 0x3FFFFFFF);
       }
     }
     else
     {
-LABEL_24:
-      v3->m_enum = 1;
+LABEL_4:
+      result->m_enum = HK_FAILURE;
     }
   }
-  return v3;
+  return result;
 }
 
 // File Line: 575
 // RVA: 0xE55660
-hkResult *__fastcall `anonymous namespace::Reader::_parseIntArray(Reader *this, hkResult *result, const char *blockName, hkDataArray *arr)
+hkResult *__fastcall `anonymous namespace::Reader::_parseIntArray(
+        Reader *this,
+        hkResult *result,
+        const char *blockName,
+        hkDataArray *arr)
 {
-  Reader *v4; // rdi
-  hkDataArray *v5; // r14
-  const char *v6; // r15
-  hkResult *v7; // rsi
   unsigned int v8; // ebx
   int v9; // ebp
-  hkXmlStreamParser::Token v10; // ecx
-  hkResultEnum v11; // eax
-  hkResult v13; // [rsp+20h] [rbp-48h]
-  __int64 valueOut; // [rsp+28h] [rbp-40h]
-  __int64 v15; // [rsp+30h] [rbp-38h]
-  hkSubString subString; // [rsp+38h] [rbp-30h]
-  hkResult resulta; // [rsp+88h] [rbp+20h]
+  hkXmlStreamParser::Token m_token; // ecx
+  hkResultEnum m_enum; // eax
+  hkResult v13; // [rsp+20h] [rbp-48h] BYREF
+  __int64 valueOut; // [rsp+28h] [rbp-40h] BYREF
+  __int64 v15; // [rsp+30h] [rbp-38h] BYREF
+  hkSubString subString; // [rsp+38h] [rbp-30h] BYREF
+  hkResult resulta; // [rsp+88h] [rbp+20h] BYREF
 
-  v4 = this;
-  v5 = arr;
-  v6 = blockName;
-  v7 = result;
   v8 = 0;
-  v9 = ((__int64 (*)(void))arr->m_impl->vfptr[5].__vecDelDtor)();
+  v9 = ((__int64 (__fastcall *)(hkDataArrayImpl *))arr->m_impl->vfptr[5].__vecDelDtor)(arr->m_impl);
   if ( v9 > 0 )
   {
     do
     {
-      `anonymous namespace::Reader::_skipWhiteSpace(v4);
-      v10 = v4->m_parser.m_token;
-      if ( v10 == 1 )
+      `anonymous namespace::Reader::_skipWhiteSpace(this);
+      m_token = this->m_parser.m_token;
+      if ( m_token == TOKEN_BLOCK_START )
       {
-        `anonymous namespace::Reader::_parseInt(v4, &resulta, v6, &valueOut);
-        v11 = resulta.m_enum;
+        `anonymous namespace::Reader::_parseInt(this, &resulta, blockName, &valueOut);
+        m_enum = resulta.m_enum;
         if ( resulta.m_enum )
           goto LABEL_11;
-        ((void (__fastcall *)(hkDataArrayImpl *, _QWORD, __int64))v5->m_impl->vfptr[20].__vecDelDtor)(
-          v5->m_impl,
+        ((void (__fastcall *)(hkDataArrayImpl *, _QWORD, __int64))arr->m_impl->vfptr[20].__vecDelDtor)(
+          arr->m_impl,
           v8,
           valueOut);
       }
       else
       {
-        if ( v10 != 4 )
+        if ( m_token != TOKEN_TEXT )
         {
-          v7->m_enum = 1;
-          return v7;
+          result->m_enum = HK_FAILURE;
+          return result;
         }
-        hkXmlStreamParser::getLexeme(&v4->m_parser, &subString);
+        hkXmlStreamParser::getLexeme(&this->m_parser, &subString);
         hkXmlStreamParser::parseInt(&v13, &subString, &v15);
-        v11 = v13.m_enum;
+        m_enum = v13.m_enum;
         if ( v13.m_enum )
         {
 LABEL_11:
-          v7->m_enum = v11;
-          return v7;
+          result->m_enum = m_enum;
+          return result;
         }
-        ((void (__fastcall *)(hkDataArrayImpl *, _QWORD, __int64))v5->m_impl->vfptr[20].__vecDelDtor)(
-          v5->m_impl,
+        ((void (__fastcall *)(hkDataArrayImpl *, _QWORD, __int64))arr->m_impl->vfptr[20].__vecDelDtor)(
+          arr->m_impl,
           v8,
           v15);
-        hkXmlStreamParser::advance(&v4->m_parser);
+        hkXmlStreamParser::advance(&this->m_parser);
       }
       ++v8;
     }
-    while ( (signed int)v8 < v9 );
+    while ( (int)v8 < v9 );
   }
-  v7->m_enum = 0;
-  return v7;
+  result->m_enum = HK_SUCCESS;
+  return result;
 }
 
 // File Line: 617
 // RVA: 0xE55780
-hkResult *__fastcall `anonymous namespace::Reader::_parseRealArray(Reader *this, hkResult *result, const char *blockName, hkDataArray *arr)
+hkResult *__fastcall `anonymous namespace::Reader::_parseRealArray(
+        Reader *this,
+        hkResult *result,
+        const char *blockName,
+        hkDataArray *arr)
 {
-  Reader *v4; // rdi
-  hkDataArray *v5; // r14
-  const char *v6; // r15
-  hkResult *v7; // rsi
   signed int v8; // ebx
-  signed int v9; // ebp
-  hkXmlStreamParser::Token v10; // ecx
-  hkResultEnum v11; // eax
-  hkSubString *v12; // rax
-  float valueOut; // [rsp+20h] [rbp-38h]
-  hkResult v15; // [rsp+24h] [rbp-34h]
-  float v16; // [rsp+28h] [rbp-30h]
-  hkSubString v17; // [rsp+30h] [rbp-28h]
-  hkResult resulta; // [rsp+78h] [rbp+20h]
+  int v9; // ebp
+  hkXmlStreamParser::Token m_token; // ecx
+  hkResultEnum m_enum; // eax
+  hkSubString *Lexeme; // rax
+  float valueOut; // [rsp+20h] [rbp-38h] BYREF
+  hkResult v15; // [rsp+24h] [rbp-34h] BYREF
+  float v16; // [rsp+28h] [rbp-30h] BYREF
+  hkSubString v17; // [rsp+30h] [rbp-28h] BYREF
+  hkResult resulta; // [rsp+78h] [rbp+20h] BYREF
 
-  v4 = this;
-  v5 = arr;
-  v6 = blockName;
-  v7 = result;
   v8 = 0;
-  v9 = ((__int64 (*)(void))arr->m_impl->vfptr[5].__vecDelDtor)();
+  v9 = ((__int64 (__fastcall *)(hkDataArrayImpl *))arr->m_impl->vfptr[5].__vecDelDtor)(arr->m_impl);
   if ( v9 > 0 )
   {
     do
     {
-      `anonymous namespace::Reader::_skipWhiteSpace(v4);
-      v10 = v4->m_parser.m_token;
-      if ( v10 == 1 )
+      `anonymous namespace::Reader::_skipWhiteSpace(this);
+      m_token = this->m_parser.m_token;
+      if ( m_token == TOKEN_BLOCK_START )
       {
-        `anonymous namespace::Reader::_parseReal(v4, &resulta, v6, &valueOut);
-        v11 = resulta.m_enum;
+        `anonymous namespace::Reader::_parseReal(this, &resulta, blockName, &valueOut);
+        m_enum = resulta.m_enum;
         if ( resulta.m_enum )
           goto LABEL_11;
-        v5->m_impl->vfptr[16].__vecDelDtor((hkDataRefCounted *)v5->m_impl, v8);
+        arr->m_impl->vfptr[16].__vecDelDtor(arr->m_impl, v8);
       }
       else
       {
-        if ( v10 != 4 )
+        if ( m_token != TOKEN_TEXT )
         {
-          v7->m_enum = 1;
-          return v7;
+          result->m_enum = HK_FAILURE;
+          return result;
         }
-        v12 = hkXmlStreamParser::getLexeme(&v4->m_parser, &v17);
-        hkXmlStreamParser::parseReal(&v15, v12, &v16);
-        v11 = v15.m_enum;
+        Lexeme = hkXmlStreamParser::getLexeme(&this->m_parser, &v17);
+        hkXmlStreamParser::parseReal(&v15, Lexeme, &v16);
+        m_enum = v15.m_enum;
         if ( v15.m_enum )
         {
 LABEL_11:
-          v7->m_enum = v11;
-          return v7;
+          result->m_enum = m_enum;
+          return result;
         }
-        v5->m_impl->vfptr[16].__vecDelDtor((hkDataRefCounted *)v5->m_impl, v8);
-        hkXmlStreamParser::advance(&v4->m_parser);
+        arr->m_impl->vfptr[16].__vecDelDtor(arr->m_impl, v8);
+        hkXmlStreamParser::advance(&this->m_parser);
       }
       ++v8;
     }
     while ( v8 < v9 );
   }
-  v7->m_enum = 0;
-  return v7;
+  result->m_enum = HK_SUCCESS;
+  return result;
 }
 
 // File Line: 656
 // RVA: 0xE54C80
-hkResult *__fastcall `anonymous namespace::Reader::_parseArrayItems(Reader *this, hkResult *result, int numElems, hkDataArray *arr)
+hkResult *__fastcall `anonymous namespace::Reader::_parseArrayItems(
+        Reader *this,
+        hkResult *result,
+        int numElems,
+        hkDataArray *arr)
 {
-  Reader *v4; // rdi
-  hkDataArray *v5; // r15
-  int v6; // esi
-  hkResult *v7; // r14
-  _DWORD *v8; // rax
-  _DWORD *v9; // rdx
-  int v10; // eax
-  const char *v11; // r8
-  int v12; // eax
-  signed int v13; // er8
-  int v14; // er12
-  int v15; // er9
-  int v16; // ebx
-  int v17; // er8
-  int v18; // ebx
-  unsigned int v19; // er12
-  hkDataObjectImpl *v20; // rax
-  hkDataObjectImpl *v21; // rdx
-  hkDataObject *v22; // r8
-  hkDataObjectImpl *v23; // rax
-  hkDataObjectImpl *v24; // rcx
-  bool v25; // zf
+  __int64 v8; // rdx
+  int v9; // eax
+  const char *v10; // r8
+  int TupleSize; // eax
+  int v12; // r8d
+  int v13; // r12d
+  int v14; // r9d
+  int v15; // ebx
+  int v16; // r8d
+  int v17; // ebx
+  unsigned int v18; // r12d
+  hkDataArrayImpl *v19; // rax
+  hkDataArrayImpl *m_impl; // rdx
+  hkDataObject *v21; // r8
+  hkDataArrayImpl *v22; // rax
+  hkDataArrayImpl *v23; // rcx
+  bool v24; // zf
   int i; // ebx
-  hkDataObjectImpl *v27; // rax
-  hkDataObject obj; // [rsp+30h] [rbp-39h]
-  int v30; // [rsp+38h] [rbp-31h]
-  hkResult v31; // [rsp+40h] [rbp-29h]
-  hkResult v32; // [rsp+44h] [rbp-25h]
-  char *array; // [rsp+50h] [rbp-19h]
-  int v34; // [rsp+58h] [rbp-11h]
-  int v35; // [rsp+5Ch] [rbp-Dh]
-  char v36; // [rsp+60h] [rbp-9h]
-  hkResult resulta; // [rsp+E8h] [rbp+7Fh]
+  hkDataArrayImpl *v26; // rax
+  hkDataArray_Value obj; // [rsp+30h] [rbp-39h] BYREF
+  hkResult v29; // [rsp+40h] [rbp-29h] BYREF
+  hkResult v30; // [rsp+44h] [rbp-25h] BYREF
+  char *array; // [rsp+50h] [rbp-19h] BYREF
+  int v32; // [rsp+58h] [rbp-11h]
+  int v33; // [rsp+5Ch] [rbp-Dh]
+  char v34; // [rsp+60h] [rbp-9h] BYREF
+  const char *resulta; // [rsp+E8h] [rbp+7Fh] BYREF
 
-  v4 = this;
-  v5 = arr;
-  v6 = numElems;
-  v7 = result;
-  v8 = (_DWORD *)((__int64 (*)(void))arr->m_impl->vfptr[1].__vecDelDtor)();
-  v9 = v8;
-  v10 = *v8;
-  switch ( v10 )
+  v8 = ((__int64 (__fastcall *)(hkDataArrayImpl *))arr->m_impl->vfptr[1].__vecDelDtor)(arr->m_impl);
+  v9 = *(_DWORD *)v8;
+  switch ( *(_DWORD *)v8 )
   {
     case 2:
     case 4:
-      v11 = "int";
-      if ( v10 == 2 )
-        v11 = "byte";
-      `anonymous namespace::Reader::_parseIntArray(v4, v7, v11, v5);
-      return v7;
+      v10 = "int";
+      if ( v9 == 2 )
+        v10 = "byte";
+      `anonymous namespace::Reader::_parseIntArray(this, result, v10, arr);
+      return result;
     case 3:
-      `anonymous namespace::Reader::_parseRealArray(v4, v7, "real", v5);
-      return v7;
+      `anonymous namespace::Reader::_parseRealArray(this, result, "real", arr);
+      return result;
     case 5:
-      v18 = 0;
-      if ( v6 <= 0 )
-        goto LABEL_44;
+      v17 = 0;
+      if ( numElems <= 0 )
+        goto LABEL_38;
       do
       {
-        `anonymous namespace::Reader::_skipWhiteSpace(v4);
-        if ( `anonymous namespace::Reader::_parseString(v4, &v31, (const char **)&resulta)->m_enum )
+        `anonymous namespace::Reader::_skipWhiteSpace(this);
+        if ( `anonymous namespace::Reader::_parseString(this, &v29, &resulta)->m_enum )
           goto LABEL_45;
-        ((void (__fastcall *)(hkDataArrayImpl *, _QWORD, _QWORD))v5->m_impl->vfptr[14].__vecDelDtor)(
-          v5->m_impl,
-          (unsigned int)v18++,
-          *(_QWORD *)&resulta.m_enum);
+        ((void (__fastcall *)(hkDataArrayImpl *, _QWORD, const char *))arr->m_impl->vfptr[14].__vecDelDtor)(
+          arr->m_impl,
+          (unsigned int)v17++,
+          resulta);
       }
-      while ( v18 < v6 );
-      `anonymous namespace::Reader::_skipWhiteSpace(v4);
-      v7->m_enum = 0;
-      return v7;
+      while ( v17 < numElems );
+      `anonymous namespace::Reader::_skipWhiteSpace(this);
+      result->m_enum = HK_SUCCESS;
+      return result;
     case 6:
-      v19 = 0;
-      if ( v6 <= 0 )
-        goto LABEL_44;
+      v18 = 0;
+      if ( numElems <= 0 )
+        goto LABEL_38;
       while ( 1 )
       {
-        `anonymous namespace::Reader::_skipWhiteSpace(v4);
-        v20 = (hkDataObjectImpl *)v5->m_impl->vfptr[21].__vecDelDtor((hkDataRefCounted *)v5->m_impl, v19);
-        v21 = v20;
-        obj.m_impl = v20;
-        if ( v20 )
+        `anonymous namespace::Reader::_skipWhiteSpace(this);
+        v19 = (hkDataArrayImpl *)arr->m_impl->vfptr[21].__vecDelDtor(arr->m_impl, v18);
+        m_impl = v19;
+        obj.m_impl = v19;
+        if ( v19 )
         {
-          ++v20->m_externalCount;
-          ++v20->m_count;
-          v21 = obj.m_impl;
+          ++v19->m_externalCount;
+          ++v19->m_count;
+          m_impl = obj.m_impl;
         }
-        if ( v4->m_tmpObjects.m_size == (v4->m_tmpObjects.m_capacityAndFlags & 0x3FFFFFFF) )
+        if ( this->m_tmpObjects.m_size == (this->m_tmpObjects.m_capacityAndFlags & 0x3FFFFFFF) )
         {
-          hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v4->m_tmpObjects, 8);
-          v21 = obj.m_impl;
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&this->m_tmpObjects.m_data, 8);
+          m_impl = obj.m_impl;
         }
-        v22 = &v4->m_tmpObjects.m_data[v4->m_tmpObjects.m_size];
-        if ( v22 )
+        v21 = &this->m_tmpObjects.m_data[this->m_tmpObjects.m_size];
+        if ( v21 )
         {
-          v22->m_impl = v21;
-          v23 = obj.m_impl;
+          v21->m_impl = (hkDataObjectImpl *)m_impl;
+          v22 = obj.m_impl;
           if ( obj.m_impl )
           {
             ++obj.m_impl->m_externalCount;
-            ++v23->m_count;
+            ++v22->m_count;
           }
         }
-        ++v4->m_tmpObjects.m_size;
-        `anonymous namespace::Reader::_parseObject(v4, &resulta, &obj);
-        v24 = obj.m_impl;
-        if ( resulta.m_enum )
+        ++this->m_tmpObjects.m_size;
+        `anonymous namespace::Reader::_parseObject(this, (hkResult *)&resulta, (hkDataObject *)&obj);
+        v23 = obj.m_impl;
+        if ( (_DWORD)resulta )
           break;
         if ( obj.m_impl )
         {
           --obj.m_impl->m_externalCount;
-          v25 = v24->m_count-- == 1;
-          if ( v25 )
-            v24->vfptr->__vecDelDtor((hkDataRefCounted *)&v24->vfptr, 1u);
+          v24 = v23->m_count-- == 1;
+          if ( v24 )
+            v23->vfptr->__vecDelDtor(v23, 1u);
         }
-        if ( (signed int)++v19 >= v6 )
-        {
-          `anonymous namespace::Reader::_skipWhiteSpace(v4);
-          v7->m_enum = 0;
-          return v7;
-        }
+        if ( (int)++v18 >= numElems )
+          goto LABEL_38;
       }
-      v7->m_enum = resulta.m_enum;
-      if ( v24 )
+      result->m_enum = (int)resulta;
+      if ( v23 )
       {
-        --v24->m_externalCount;
-        v25 = v24->m_count-- == 1;
-        if ( v25 )
-          v24->vfptr->__vecDelDtor((hkDataRefCounted *)&v24->vfptr, 1u);
+        --v23->m_externalCount;
+        v24 = v23->m_count-- == 1;
+        if ( v24 )
+          v23->vfptr->__vecDelDtor(v23, 1u);
       }
-      return v7;
+      return result;
     case 7:
-      for ( i = 0; i < v6; ++i )
+      for ( i = 0; i < numElems; ++i )
       {
-        v27 = (hkDataObjectImpl *)v5->m_impl;
-        v30 = i;
-        obj.m_impl = v27;
-        `anonymous namespace::Reader::_parseObjectReferenceImpl<hkDataArray_Value>(
-          v4,
-          &resulta,
-          (hkDataArray_Value *)&obj);
+        v26 = arr->m_impl;
+        obj.m_index = i;
+        obj.m_impl = v26;
+        `anonymous namespace::Reader::_parseObjectReferenceImpl<hkDataArray_Value>(this, (hkResult *)&resulta, &obj);
       }
-      goto LABEL_44;
+      goto LABEL_38;
     case 9:
-      if ( v10 != 9 || **((_DWORD **)v9 + 1) != 3 || (v9[4] - 4) & 0xFFFFFFF3 )
-        goto LABEL_44;
-      v12 = hkTypeManager::Type::getTupleSize((hkTypeManager::Type *)v9);
-      v13 = -2147483632;
-      v34 = 0;
-      v14 = v12;
-      v35 = -2147483632;
-      array = &v36;
-      if ( v12 > 16 )
+      if ( v9 != 9 || **(_DWORD **)(v8 + 8) != 3 || ((*(_DWORD *)(v8 + 16) - 4) & 0xFFFFFFF3) != 0 )
+        goto LABEL_38;
+      TupleSize = hkTypeManager::Type::getTupleSize((hkTypeManager::Type *)v8);
+      v12 = -2147483632;
+      v32 = 0;
+      v13 = TupleSize;
+      v33 = -2147483632;
+      array = &v34;
+      if ( TupleSize > 16 )
       {
-        v15 = v12;
-        if ( v12 < 32 )
-          v15 = 32;
-        hkArrayUtil::_reserve(&resulta, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, v15, 4);
-        v13 = v35;
+        v14 = TupleSize;
+        if ( TupleSize < 32 )
+          v14 = 32;
+        hkArrayUtil::_reserve((hkResult *)&resulta, &hkContainerHeapAllocator::s_alloc, (const void **)&array, v14, 4);
+        v12 = v33;
       }
-      v34 = v14;
-      v16 = 0;
-      if ( v6 <= 0 )
+      v32 = v13;
+      v15 = 0;
+      if ( numElems <= 0 )
         goto LABEL_17;
       break;
     default:
 LABEL_45:
-      v7->m_enum = 1;
-      return v7;
+      result->m_enum = HK_FAILURE;
+      return result;
   }
   do
   {
-    `anonymous namespace::Reader::_skipWhiteSpace(v4);
-    if ( `anonymous namespace::Reader::_parseRealVector(v4, &v32, (float *)array, v14)->m_enum )
+    `anonymous namespace::Reader::_skipWhiteSpace(this);
+    if ( `anonymous namespace::Reader::_parseRealVector(this, &v30, (float *)array, v13)->m_enum )
     {
-      v17 = v35;
-      v7->m_enum = 1;
-      v34 = 0;
-      if ( v17 >= 0 )
-        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-          array,
-          4 * v17);
-      return v7;
+      v16 = v33;
+      result->m_enum = HK_FAILURE;
+      v32 = 0;
+      if ( v16 >= 0 )
+        hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, array, 4 * v16);
+      return result;
     }
-    ((void (__fastcall *)(hkDataArrayImpl *, _QWORD, char *))v5->m_impl->vfptr[12].__vecDelDtor)(
-      v5->m_impl,
-      (unsigned int)v16++,
+    ((void (__fastcall *)(hkDataArrayImpl *, _QWORD, char *))arr->m_impl->vfptr[12].__vecDelDtor)(
+      arr->m_impl,
+      (unsigned int)v15++,
       array);
   }
-  while ( v16 < v6 );
-  v13 = v35;
+  while ( v15 < numElems );
+  v12 = v33;
 LABEL_17:
-  v34 = 0;
-  if ( v13 < 0 )
+  v32 = 0;
+  if ( v12 < 0 )
   {
-LABEL_44:
-    `anonymous namespace::Reader::_skipWhiteSpace(v4);
-    v7->m_enum = 0;
+LABEL_38:
+    `anonymous namespace::Reader::_skipWhiteSpace(this);
+    result->m_enum = HK_SUCCESS;
   }
   else
   {
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      array,
-      4 * v13);
-    `anonymous namespace::Reader::_skipWhiteSpace(v4);
-    v7->m_enum = 0;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, array, 4 * v12);
+    `anonymous namespace::Reader::_skipWhiteSpace(this);
+    result->m_enum = HK_SUCCESS;
   }
-  return v7;
+  return result;
 }
 
 // File Line: 753
 // RVA: 0xE54550
-hkResult *__fastcall `anonymous namespace::Reader::_parseMemberValue(Reader *this, hkResult *result, hkDataClass_MemberInfo *minfo, hkDataObject_Value *valueOut)
+hkResult *__fastcall `anonymous namespace::Reader::_parseMemberValue(
+        Reader *this,
+        hkResult *result,
+        hkDataClass_MemberInfo *minfo,
+        hkDataObject_Value *valueOut)
 {
-  hkTypeManager::Type *v4; // r15
-  hkDataObject_Value *v5; // rdi
-  hkDataClass_MemberInfo *v6; // rbx
-  hkTypeManager::SubType v7; // eax
-  hkResult *v8; // rsi
-  Reader *v9; // r14
-  int v10; // eax
+  hkTypeManager::Type *m_type; // r15
+  hkTypeManager::SubType m_subType; // eax
+  int TupleSize; // eax
   bool v11; // zf
-  __int32 v12; // eax
+  hkResultEnum m_enum; // eax
   int v13; // eax
   hkDataObjectImpl *v14; // rdi
   hkDataArrayImpl *v15; // rax
   hkDataArrayImpl *v16; // rbx
-  hkSubString *v17; // rax
+  hkSubString *BlockName; // rax
   int v18; // eax
   hkResultEnum v19; // eax
   hkDataArrayImpl *v20; // rcx
   hkDataArrayImpl *v21; // rax
   hkDataArrayImpl *v22; // rbx
   hkDataArrayImpl *v23; // rcx
-  hkDataArrayImpl *v24; // rcx
-  hkBaseObjectVtbl *v25; // rbx
-  const char *v26; // rax
-  hkDataClassImpl *v27; // rax
+  hkBaseObjectVtbl *vfptr; // rbx
+  const char *TypeName; // rax
+  hkDataClassImpl *v26; // rax
+  hkDataArrayImpl *m_impl; // rcx
   hkDataArrayImpl *v28; // rcx
-  hkDataArrayImpl *v29; // rcx
-  int value; // [rsp+20h] [rbp-39h]
-  hkDataArray arr; // [rsp+28h] [rbp-31h]
-  hkDataArray v33; // [rsp+30h] [rbp-29h]
-  __int64 v34; // [rsp+38h] [rbp-21h]
-  hkResult v35; // [rsp+40h] [rbp-19h]
-  hkSubString v36; // [rsp+48h] [rbp-11h]
-  float out; // [rsp+60h] [rbp+7h]
-  hkResult resulta; // [rsp+D0h] [rbp+77h]
+  int value; // [rsp+20h] [rbp-39h] BYREF
+  hkDataArray arr; // [rsp+28h] [rbp-31h] BYREF
+  hkDataArray v32; // [rsp+30h] [rbp-29h] BYREF
+  __int64 v33; // [rsp+38h] [rbp-21h]
+  hkResult v34; // [rsp+40h] [rbp-19h] BYREF
+  hkSubString v35; // [rsp+48h] [rbp-11h] BYREF
+  float out[16]; // [rsp+60h] [rbp+7h] BYREF
+  hkResult resulta; // [rsp+D0h] [rbp+77h] BYREF
 
-  v4 = minfo->m_type;
-  v5 = valueOut;
-  v6 = minfo;
-  v7 = v4->m_subType;
-  v8 = result;
-  v9 = this;
-  if ( v4->m_subType == 9 )
+  m_type = minfo->m_type;
+  m_subType = m_type->m_subType;
+  if ( m_type->m_subType != SUB_TYPE_TUPLE )
   {
-    v10 = hkTypeManager::Type::getTupleSize(minfo->m_type);
-    v11 = v4->m_subType == 9;
-    value = v10;
-    if ( v11 && v4->m_parent->m_subType == 3 && !((v4->m_extra.m_size - 4) & 0xFFFFFFF3) )
+    if ( m_subType != SUB_TYPE_ARRAY )
     {
-      if ( `anonymous namespace::Reader::_parseRealVector(v9, &resulta, &out, v10)->m_enum == HK_SUCCESS )
+      switch ( m_subType )
       {
-        ((void (__fastcall *)(hkDataObjectImpl *, const struct _hkDataObject_MemberHandle *, float *, _QWORD))v5->m_impl->vfptr[18].__vecDelDtor)(
-          v5->m_impl,
-          v5->m_handle,
-          &out,
-          (unsigned int)value);
-        v8->m_enum = 0;
-        return v8;
+        case SUB_TYPE_BYTE:
+          `anonymous namespace::Reader::_parseInt(this, &resulta, "byte", (__int64 *)&v32);
+          m_enum = resulta.m_enum;
+          if ( resulta.m_enum )
+            goto LABEL_53;
+          goto LABEL_51;
+        case SUB_TYPE_REAL:
+          `anonymous namespace::Reader::_parseReal(this, &resulta, "real", (float *)&value);
+          m_enum = resulta.m_enum;
+          if ( resulta.m_enum )
+            goto LABEL_53;
+          valueOut->m_impl->vfptr[20].__vecDelDtor(valueOut->m_impl, (unsigned int)valueOut->m_handle);
+          result->m_enum = HK_SUCCESS;
+          return result;
+        case SUB_TYPE_INT:
+          `anonymous namespace::Reader::_parseInt(this, &resulta, "int", (__int64 *)&v32);
+          m_enum = resulta.m_enum;
+          if ( resulta.m_enum )
+            goto LABEL_53;
+LABEL_51:
+          ((void (__fastcall *)(hkDataObjectImpl *, const struct _hkDataObject_MemberHandle *, hkDataArrayImpl *))valueOut->m_impl->vfptr[16].__vecDelDtor)(
+            valueOut->m_impl,
+            valueOut->m_handle,
+            v32.m_impl);
+          result->m_enum = HK_SUCCESS;
+          return result;
+        case SUB_TYPE_CSTRING:
+          `anonymous namespace::Reader::_parseString(this, &resulta, (const char **)&v32);
+          if ( resulta.m_enum )
+            goto LABEL_68;
+          ((void (__fastcall *)(hkDataObjectImpl *, const struct _hkDataObject_MemberHandle *, hkDataArrayImpl *))valueOut->m_impl->vfptr[21].__vecDelDtor)(
+            valueOut->m_impl,
+            valueOut->m_handle,
+            v32.m_impl);
+          goto LABEL_67;
+        case SUB_TYPE_CLASS:
+          vfptr = this->m_world->vfptr;
+          TypeName = hkTypeManager::Type::getTypeName(minfo->m_type);
+          v26 = (hkDataClassImpl *)((__int64 (__fastcall *)(hkDataWorld *, const char *))vfptr[4].__first_virtual_table_function__)(
+                                     this->m_world,
+                                     TypeName);
+          if ( !v26 )
+            goto LABEL_68;
+          arr.m_impl = 0i64;
+          `anonymous namespace::Reader::_parseAndCreateObject(this, &resulta, v26, (hkDataObject *)&arr);
+          if ( resulta.m_enum )
+          {
+            m_impl = arr.m_impl;
+            result->m_enum = resulta.m_enum;
+            if ( m_impl )
+            {
+              --m_impl->m_externalCount;
+              v11 = m_impl->m_count-- == 1;
+              if ( v11 )
+                m_impl->vfptr->__vecDelDtor(m_impl, 1u);
+            }
+          }
+          else
+          {
+            ((void (__fastcall *)(hkDataObjectImpl *, const struct _hkDataObject_MemberHandle *, hkDataArrayImpl *))valueOut->m_impl->vfptr[23].__vecDelDtor)(
+              valueOut->m_impl,
+              valueOut->m_handle,
+              arr.m_impl);
+            v28 = arr.m_impl;
+            if ( arr.m_impl && (--arr.m_impl->m_externalCount, v11 = v28->m_count == 1, --v28->m_count, v11) )
+            {
+              v28->vfptr->__vecDelDtor(v28, 1u);
+              result->m_enum = HK_SUCCESS;
+            }
+            else
+            {
+LABEL_67:
+              result->m_enum = HK_SUCCESS;
+            }
+          }
+          break;
+        case SUB_TYPE_POINTER:
+          `anonymous namespace::Reader::_parseObjectReferenceImpl<hkDataObject_Value>(this, result, valueOut);
+          return result;
+        default:
+          goto LABEL_68;
       }
-LABEL_68:
-      v8->m_enum = 1;
-      return v8;
+      return result;
     }
-    if ( !hkXmlStreamParser::hasAttribute(&v9->m_parser, (hkBool *)&resulta, "size")->m_bool )
-      goto LABEL_10;
-    v12 = hkXmlStreamParser::getIntAttribute(&v9->m_parser, &resulta, "size", &value)->m_enum;
-    if ( !v12 )
+    hkXmlStreamParser::getIntAttribute(&this->m_parser, (hkResult *)&value, "size", (int *)&resulta);
+    m_enum = value;
+    if ( !value )
     {
-      v13 = hkTypeManager::Type::getTupleSize(v4);
-      if ( value != v13 )
-        goto LABEL_68;
-LABEL_10:
-      v14 = v5->m_impl;
-      if ( v14 )
+      v20 = (hkDataArrayImpl *)valueOut->m_impl;
+      arr.m_impl = v20;
+      if ( v20 )
       {
-        ++v14->m_externalCount;
-        ++v14->m_count;
+        ++v20->m_externalCount;
+        ++v20->m_count;
+        v20 = arr.m_impl;
       }
-      ((void (__fastcall *)(hkDataObjectImpl *, hkDataArray *, const char *))v14->vfptr[3].__vecDelDtor)(
-        v14,
-        &v33,
-        v6->m_name);
-      v15 = (hkDataArrayImpl *)v33.m_impl->vfptr[10].__vecDelDtor((hkDataRefCounted *)v33.m_impl, v34);
-      v16 = v15;
-      arr.m_impl = v15;
-      if ( v15 )
+      ((void (__fastcall *)(hkDataArrayImpl *, hkSubString *, const char *))v20->vfptr[3].__vecDelDtor)(
+        v20,
+        &v35,
+        minfo->m_name);
+      v21 = (hkDataArrayImpl *)((__int64 (__fastcall *)(hkDataWorld *, hkDataArray *, const char *, hkDataClass_MemberInfo *))this->m_world->vfptr[2].__first_virtual_table_function__)(
+                                 this->m_world,
+                                 &arr,
+                                 v35.m_end,
+                                 minfo);
+      v22 = v21;
+      v32.m_impl = v21;
+      if ( v21 )
       {
-        ++v15->m_externalCount;
-        ++v15->m_count;
+        ++v21->m_externalCount;
+        ++v21->m_count;
       }
-      if ( v9->m_parser.m_token == 1
-        && (v17 = hkXmlStreamParser::getBlockName(&v9->m_parser, &v36),
-            hkSubString::operator==(v17, (hkBool *)&resulta, "tuple")->m_bool) )
+      v21->vfptr[4].__vecDelDtor(v21, resulta.m_enum);
+      `anonymous namespace::Reader::_pushBlock(this);
+      hkXmlStreamParser::advance(&this->m_parser);
+      if ( `anonymous namespace::Reader::_parseArrayItems(this, &v34, resulta.m_enum, &v32)->m_enum )
       {
-        `anonymous namespace::Reader::_pushBlock(v9);
-        hkXmlStreamParser::advance(&v9->m_parser);
-        v18 = hkTypeManager::Type::getTupleSize(v4);
-        v19 = `anonymous namespace::Reader::_parseArrayItems(v9, &resulta, v18, &arr)->m_enum;
-        if ( v19 )
-        {
-          v8->m_enum = v19;
-          if ( v16 )
-          {
-            --v16->m_externalCount;
-            v11 = v16->m_count-- == 1;
-            if ( v11 )
-              v16->vfptr->__vecDelDtor((hkDataRefCounted *)&v16->vfptr, 1u);
-          }
-          --v14->m_externalCount;
-          v11 = v14->m_count-- == 1;
-          if ( v11 )
-            v14->vfptr->__vecDelDtor((hkDataRefCounted *)&v14->vfptr, 1u);
-        }
-        else
-        {
-          `anonymous namespace::Reader::_popBlock(v9, v8);
-          if ( v16 )
-          {
-            --v16->m_externalCount;
-            v11 = v16->m_count-- == 1;
-            if ( v11 )
-              v16->vfptr->__vecDelDtor((hkDataRefCounted *)&v16->vfptr, 1u);
-          }
-          --v14->m_externalCount;
-          v11 = v14->m_count-- == 1;
-          if ( v11 )
-            v14->vfptr->__vecDelDtor((hkDataRefCounted *)&v14->vfptr, 1u);
-        }
+        result->m_enum = HK_FAILURE;
+        --v22->m_externalCount;
+        v11 = v22->m_count-- == 1;
+        if ( v11 )
+          v22->vfptr->__vecDelDtor(v22, 1u);
+        v23 = arr.m_impl;
+        if ( !arr.m_impl )
+          return result;
+        --arr.m_impl->m_externalCount;
+        v11 = v23->m_count-- == 1;
+        if ( !v11 )
+          return result;
       }
       else
       {
-        v8->m_enum = 1;
-        if ( v16 )
-        {
-          --v16->m_externalCount;
-          v11 = v16->m_count-- == 1;
-          if ( v11 )
-            v16->vfptr->__vecDelDtor((hkDataRefCounted *)&v16->vfptr, 1u);
-        }
-        --v14->m_externalCount;
-        v11 = v14->m_count-- == 1;
+        `anonymous namespace::Reader::_popBlock(this, result);
+        --v22->m_externalCount;
+        v11 = v22->m_count-- == 1;
         if ( v11 )
-          v14->vfptr->__vecDelDtor((hkDataRefCounted *)&v14->vfptr, 1u);
-      }
-      return v8;
-    }
-LABEL_53:
-    v8->m_enum = v12;
-    return v8;
-  }
-  if ( v7 == 8 )
-  {
-    hkXmlStreamParser::getIntAttribute(&this->m_parser, (hkResult *)&value, "size", (int *)&resulta);
-    v12 = value;
-    if ( value )
-      goto LABEL_53;
-    v20 = (hkDataArrayImpl *)v5->m_impl;
-    arr.m_impl = v20;
-    if ( v20 )
-    {
-      ++v20->m_externalCount;
-      ++v20->m_count;
-      v20 = arr.m_impl;
-    }
-    ((void (__fastcall *)(hkDataArrayImpl *, hkSubString *, const char *))v20->vfptr[3].__vecDelDtor)(
-      v20,
-      &v36,
-      v6->m_name);
-    v21 = (hkDataArrayImpl *)((__int64 (__fastcall *)(hkDataWorld *, hkDataArray *, const char *, hkDataClass_MemberInfo *))v9->m_world->vfptr[2].__first_virtual_table_function__)(
-                               v9->m_world,
-                               &arr,
-                               v36.m_end,
-                               v6);
-    v22 = v21;
-    v33.m_impl = v21;
-    if ( v21 )
-    {
-      ++v21->m_externalCount;
-      ++v21->m_count;
-    }
-    v21->vfptr[4].__vecDelDtor((hkDataRefCounted *)&v21->vfptr, resulta.m_enum);
-    `anonymous namespace::Reader::_pushBlock(v9);
-    hkXmlStreamParser::advance(&v9->m_parser);
-    if ( `anonymous namespace::Reader::_parseArrayItems(v9, &v35, resulta.m_enum, &v33)->m_enum )
-    {
-      v8->m_enum = 1;
-      --v22->m_externalCount;
-      v11 = v22->m_count-- == 1;
-      if ( v11 )
-        v22->vfptr->__vecDelDtor((hkDataRefCounted *)&v22->vfptr, 1u);
-      v23 = arr.m_impl;
-      if ( arr.m_impl )
-      {
+          v22->vfptr->__vecDelDtor(v22, 1u);
+        v23 = arr.m_impl;
+        if ( !arr.m_impl )
+          return result;
         --arr.m_impl->m_externalCount;
         v11 = v23->m_count-- == 1;
-        if ( v11 )
-          v23->vfptr->__vecDelDtor((hkDataRefCounted *)&v23->vfptr, 1u);
+        if ( !v11 )
+          return result;
       }
+      v23->vfptr->__vecDelDtor(v23, 1u);
+      return result;
+    }
+    goto LABEL_53;
+  }
+  TupleSize = hkTypeManager::Type::getTupleSize(minfo->m_type);
+  v11 = m_type->m_subType == SUB_TYPE_TUPLE;
+  value = TupleSize;
+  if ( v11 && m_type->m_parent->m_subType == SUB_TYPE_REAL && ((m_type->m_extra.m_size - 4) & 0xFFFFFFF3) == 0 )
+  {
+    if ( `anonymous namespace::Reader::_parseRealVector(this, &resulta, out, TupleSize)->m_enum == HK_SUCCESS )
+    {
+      ((void (__fastcall *)(hkDataObjectImpl *, const struct _hkDataObject_MemberHandle *, float *, _QWORD))valueOut->m_impl->vfptr[18].__vecDelDtor)(
+        valueOut->m_impl,
+        valueOut->m_handle,
+        out,
+        (unsigned int)value);
+      result->m_enum = HK_SUCCESS;
+      return result;
+    }
+LABEL_68:
+    result->m_enum = HK_FAILURE;
+    return result;
+  }
+  if ( hkXmlStreamParser::hasAttribute(&this->m_parser, (hkBool *)&resulta, "size")->m_bool )
+  {
+    m_enum = hkXmlStreamParser::getIntAttribute(&this->m_parser, &resulta, "size", &value)->m_enum;
+    if ( m_enum == HK_SUCCESS )
+    {
+      v13 = hkTypeManager::Type::getTupleSize(m_type);
+      if ( value != v13 )
+        goto LABEL_68;
+      goto LABEL_10;
+    }
+LABEL_53:
+    result->m_enum = m_enum;
+    return result;
+  }
+LABEL_10:
+  v14 = valueOut->m_impl;
+  if ( v14 )
+  {
+    ++v14->m_externalCount;
+    ++v14->m_count;
+  }
+  ((void (__fastcall *)(hkDataObjectImpl *, hkDataArray *, const char *))v14->vfptr[3].__vecDelDtor)(
+    v14,
+    &v32,
+    minfo->m_name);
+  v15 = (hkDataArrayImpl *)v32.m_impl->vfptr[10].__vecDelDtor(v32.m_impl, v33);
+  v16 = v15;
+  arr.m_impl = v15;
+  if ( v15 )
+  {
+    ++v15->m_externalCount;
+    ++v15->m_count;
+  }
+  if ( this->m_parser.m_token == TOKEN_BLOCK_START
+    && (BlockName = hkXmlStreamParser::getBlockName(&this->m_parser, &v35),
+        hkSubString::operator==(BlockName, (hkBool *)&resulta, "tuple")->m_bool) )
+  {
+    `anonymous namespace::Reader::_pushBlock(this);
+    hkXmlStreamParser::advance(&this->m_parser);
+    v18 = hkTypeManager::Type::getTupleSize(m_type);
+    v19 = `anonymous namespace::Reader::_parseArrayItems(this, &resulta, v18, &arr)->m_enum;
+    if ( v19 )
+    {
+      result->m_enum = v19;
+      if ( v16 )
+      {
+        --v16->m_externalCount;
+        v11 = v16->m_count-- == 1;
+        if ( v11 )
+          v16->vfptr->__vecDelDtor(v16, 1u);
+      }
+      --v14->m_externalCount;
+      v11 = v14->m_count-- == 1;
+      if ( v11 )
+LABEL_31:
+        v14->vfptr->__vecDelDtor(v14, 1u);
     }
     else
     {
-      `anonymous namespace::Reader::_popBlock(v9, v8);
-      --v22->m_externalCount;
-      v11 = v22->m_count-- == 1;
-      if ( v11 )
-        v22->vfptr->__vecDelDtor((hkDataRefCounted *)&v22->vfptr, 1u);
-      v24 = arr.m_impl;
-      if ( arr.m_impl )
+      `anonymous namespace::Reader::_popBlock(this, result);
+      if ( v16 )
       {
-        --arr.m_impl->m_externalCount;
-        v11 = v24->m_count-- == 1;
+        --v16->m_externalCount;
+        v11 = v16->m_count-- == 1;
         if ( v11 )
-          v24->vfptr->__vecDelDtor((hkDataRefCounted *)&v24->vfptr, 1u);
+          v16->vfptr->__vecDelDtor(v16, 1u);
       }
+      --v14->m_externalCount;
+      v11 = v14->m_count-- == 1;
+      if ( v11 )
+        goto LABEL_31;
     }
   }
   else
   {
-    switch ( v7 )
+    result->m_enum = HK_FAILURE;
+    if ( v16 )
     {
-      case 2:
-        `anonymous namespace::Reader::_parseInt(this, &resulta, "byte", (__int64 *)&v33);
-        v12 = resulta.m_enum;
-        if ( resulta.m_enum )
-          goto LABEL_53;
-        goto LABEL_51;
-      case 3:
-        `anonymous namespace::Reader::_parseReal(this, &resulta, "real", (float *)&value);
-        v12 = resulta.m_enum;
-        if ( resulta.m_enum )
-          goto LABEL_53;
-        v5->m_impl->vfptr[20].__vecDelDtor((hkDataRefCounted *)v5->m_impl, (unsigned int)v5->m_handle);
-        v8->m_enum = 0;
-        return v8;
-      case 4:
-        `anonymous namespace::Reader::_parseInt(this, &resulta, "int", (__int64 *)&v33);
-        v12 = resulta.m_enum;
-        if ( resulta.m_enum )
-          goto LABEL_53;
-LABEL_51:
-        ((void (__fastcall *)(hkDataObjectImpl *, const struct _hkDataObject_MemberHandle *, hkDataArrayImpl *))v5->m_impl->vfptr[16].__vecDelDtor)(
-          v5->m_impl,
-          v5->m_handle,
-          v33.m_impl);
-        v8->m_enum = 0;
-        return v8;
-      case 5:
-        `anonymous namespace::Reader::_parseString(this, &resulta, (const char **)&v33);
-        if ( resulta.m_enum )
-          goto LABEL_68;
-        ((void (__fastcall *)(hkDataObjectImpl *, const struct _hkDataObject_MemberHandle *, hkDataArrayImpl *))v5->m_impl->vfptr[21].__vecDelDtor)(
-          v5->m_impl,
-          v5->m_handle,
-          v33.m_impl);
-        goto LABEL_67;
-      case 6:
-        v25 = this->m_world->vfptr;
-        v26 = hkTypeManager::Type::getTypeName(minfo->m_type);
-        v27 = (hkDataClassImpl *)((__int64 (__fastcall *)(hkDataWorld *, const char *))v25[4].__first_virtual_table_function__)(
-                                   v9->m_world,
-                                   v26);
-        if ( !v27 )
-          goto LABEL_68;
-        arr.m_impl = 0i64;
-        `anonymous namespace::Reader::_parseAndCreateObject(v9, &resulta, v27, (hkDataObject *)&arr);
-        if ( resulta.m_enum )
-        {
-          v28 = arr.m_impl;
-          v8->m_enum = resulta.m_enum;
-          if ( v28 )
-          {
-            --v28->m_externalCount;
-            v11 = v28->m_count-- == 1;
-            if ( v11 )
-              v28->vfptr->__vecDelDtor((hkDataRefCounted *)&v28->vfptr, 1u);
-          }
-        }
-        else
-        {
-          ((void (__fastcall *)(hkDataObjectImpl *, const struct _hkDataObject_MemberHandle *, hkDataArrayImpl *))v5->m_impl->vfptr[23].__vecDelDtor)(
-            v5->m_impl,
-            v5->m_handle,
-            arr.m_impl);
-          v29 = arr.m_impl;
-          if ( arr.m_impl && (--arr.m_impl->m_externalCount, v11 = v29->m_count == 1, --v29->m_count, v11) )
-          {
-            v29->vfptr->__vecDelDtor((hkDataRefCounted *)&v29->vfptr, 1u);
-            v8->m_enum = 0;
-          }
-          else
-          {
-LABEL_67:
-            v8->m_enum = 0;
-          }
-        }
-        break;
-      case 7:
-        `anonymous namespace::Reader::_parseObjectReferenceImpl<hkDataObject_Value>(this, result, valueOut);
-        break;
-      default:
-        goto LABEL_68;
+      --v16->m_externalCount;
+      v11 = v16->m_count-- == 1;
+      if ( v11 )
+        v16->vfptr->__vecDelDtor(v16, 1u);
     }
+    --v14->m_externalCount;
+    v11 = v14->m_count-- == 1;
+    if ( v11 )
+      goto LABEL_31;
   }
-  return v8;
+  return result;
 }
 
 // File Line: 917
 // RVA: 0xE53F10
 char *__fastcall `anonymous namespace::Reader::_getAttribute(Reader *this, const char *key)
 {
-  Reader *v2; // rbx
-  hkSubString valueOut; // [rsp+20h] [rbp-18h]
-  hkResult result; // [rsp+40h] [rbp+8h]
+  hkSubString valueOut; // [rsp+20h] [rbp-18h] BYREF
+  hkResult result; // [rsp+40h] [rbp+8h] BYREF
 
-  v2 = this;
   valueOut.m_start = 0i64;
   valueOut.m_end = 0i64;
   if ( hkXmlStreamParser::getValue(&this->m_parser, &result, key, &valueOut)->m_enum
@@ -1489,42 +1403,42 @@ char *__fastcall `anonymous namespace::Reader::_getAttribute(Reader *this, const
   }
   --valueOut.m_end;
   ++valueOut.m_start;
-  return `anonymous namespace::Reader::_getString(v2, &valueOut);
+  return `anonymous namespace::Reader::_getString(this, &valueOut);
 }
 
 // File Line: 936
 // RVA: 0xE53FC0
-hkBool *__fastcall `anonymous namespace::Reader::_getBoolAttribute(Reader *this, hkBool *result, const char *key, hkBool defaultValue)
+hkBool *__fastcall `anonymous namespace::Reader::_getBoolAttribute(
+        Reader *this,
+        hkBool *result,
+        const char *key,
+        hkBool defaultValue)
 {
-  hkBool *v4; // rbx
-  hkBool *v5; // rax
-  hkSubString valueOut; // [rsp+20h] [rbp-18h]
-  hkResult resulta; // [rsp+40h] [rbp+8h]
-  char v8; // [rsp+58h] [rbp+20h]
+  hkSubString valueOut; // [rsp+20h] [rbp-18h] BYREF
+  hkResult resulta; // [rsp+40h] [rbp+8h] BYREF
+  char m_bool; // [rsp+58h] [rbp+20h]
 
-  v8 = defaultValue.m_bool;
-  v4 = result;
+  m_bool = defaultValue.m_bool;
   valueOut.m_start = 0i64;
   valueOut.m_end = 0i64;
   if ( hkXmlStreamParser::getValue(&this->m_parser, &resulta, key, &valueOut)->m_enum )
-    goto LABEL_9;
+    goto LABEL_6;
   if ( hkSubString::operator==(&valueOut, (hkBool *)&resulta, "\"true\"")->m_bool )
   {
-    v4->m_bool = 1;
-    return v4;
+    result->m_bool = 1;
+    return result;
   }
   if ( !hkSubString::operator==(&valueOut, (hkBool *)&resulta, "\"false\"")->m_bool )
   {
-LABEL_9:
-    v4->m_bool = v8;
-    v5 = v4;
+LABEL_6:
+    result->m_bool = m_bool;
+    return result;
   }
   else
   {
-    v4->m_bool = 0;
-    v5 = v4;
+    result->m_bool = 0;
+    return result;
   }
-  return v5;
 }
 
 // File Line: 957
@@ -1532,10 +1446,8 @@ LABEL_9:
 hkXmlStreamParser::Token __fastcall `anonymous namespace::Reader::_skipWhiteSpace(Reader *this)
 {
   hkXmlStreamParser::Token result; // eax
-  Reader *i; // rbx
 
-  result = this->m_parser.m_token;
-  for ( i = this; result == 5; result = hkXmlStreamParser::advance(&i->m_parser) )
+  for ( result = this->m_parser.m_token; result == TOKEN_WHITESPACE; result = hkXmlStreamParser::advance(&this->m_parser) )
     ;
   return result;
 }
@@ -1546,7 +1458,7 @@ ReferenceInfo *__fastcall `anonymous namespace::Reader::_findReferenceInfo(Reade
 {
   return (ReferenceInfo *)hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::getWithDefault(
                             (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_referenceMap,
-                            (unsigned __int64)key,
+                            key,
                             0i64);
 }
 
@@ -1554,108 +1466,100 @@ ReferenceInfo *__fastcall `anonymous namespace::Reader::_findReferenceInfo(Reade
 // RVA: 0xE55910
 ReferenceInfo *__fastcall `anonymous namespace::Reader::_requireReferenceInfo(Reader *this, const char *key)
 {
-  hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator> *v2; // rsi
-  const char *v3; // rdi
+  hkStringMap<ReferenceInfo *,hkContainerHeapAllocator> *p_m_referenceMap; // rsi
   ReferenceInfo *result; // rax
-  _QWORD **v5; // rax
-  ReferenceInfo *v6; // rbx
+  _QWORD **Value; // rax
+  unsigned __int64 v6; // rbx
 
-  v2 = &this->m_referenceMap.m_map;
-  v3 = key;
+  p_m_referenceMap = &this->m_referenceMap;
   result = (ReferenceInfo *)hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::getWithDefault(
                               (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_referenceMap,
-                              (unsigned __int64)key,
+                              key,
                               0i64);
   if ( !result )
   {
-    v5 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v6 = (ReferenceInfo *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v5[11] + 8i64))(v5[11], 40i64);
+    Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    v6 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 40i64);
     if ( v6 )
     {
-      v6->m_object = 0i64;
-      v6->m_arrayRefs.m_data = 0i64;
-      v6->m_arrayRefs.m_size = 0;
-      v6->m_arrayRefs.m_capacityAndFlags = 2147483648;
-      v6->m_objectRefs.m_data = 0i64;
-      v6->m_objectRefs.m_size = 0;
-      v6->m_objectRefs.m_capacityAndFlags = 2147483648;
+      *(_QWORD *)v6 = 0i64;
+      *(_QWORD *)(v6 + 8) = 0i64;
+      *(_DWORD *)(v6 + 16) = 0;
+      *(_DWORD *)(v6 + 20) = 0x80000000;
+      *(_QWORD *)(v6 + 24) = 0i64;
+      *(_DWORD *)(v6 + 32) = 0;
+      *(_DWORD *)(v6 + 36) = 0x80000000;
     }
     else
     {
       v6 = 0i64;
     }
-    hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::insert(
-      v2,
-      (unsigned __int64)v3,
-      (unsigned __int64)v6);
-    result = v6;
+    hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::insert(&p_m_referenceMap->m_map, key, v6);
+    return (ReferenceInfo *)v6;
   }
   return result;
 }
 
 // File Line: 985
 // RVA: 0xE558B0
-hkResult *__fastcall `anonymous namespace::Reader::_setReferencedObject(Reader *this, hkResult *result, const char *id, hkDataObject *obj)
+hkResult *__fastcall `anonymous namespace::Reader::_setReferencedObject(
+        Reader *this,
+        hkResult *result,
+        const char *id,
+        hkDataObject *obj)
 {
-  hkResult *v4; // rbx
-  hkDataObject *v5; // rdi
   ReferenceInfo *v6; // rcx
-  hkDataObjectImpl *v8; // rax
+  hkDataObjectImpl *m_impl; // rax
 
-  v4 = result;
-  v5 = obj;
   v6 = `anonymous namespace::Reader::_requireReferenceInfo(this, id);
   if ( v6->m_object )
   {
-    v4->m_enum = 1;
+    result->m_enum = HK_FAILURE;
   }
   else
   {
-    v8 = v5->m_impl;
-    v4->m_enum = 0;
-    v6->m_object = v8;
+    m_impl = obj->m_impl;
+    result->m_enum = HK_SUCCESS;
+    v6->m_object = m_impl;
   }
-  return v4;
+  return result;
 }
 
 // File Line: 998
 // RVA: 0xE553E0
-hkResult *__fastcall `anonymous namespace::Reader::_parseAndCreateObject(Reader *this, hkResult *result, hkDataClassImpl *klassImpl, hkDataObject *objOut)
+hkResult *__fastcall `anonymous namespace::Reader::_parseAndCreateObject(
+        Reader *this,
+        hkResult *result,
+        hkDataClassImpl *klassImpl,
+        hkDataObject *objOut)
 {
-  hkDataObject *v4; // r14
   hkDataClassImpl *v5; // rbx
-  hkResult *v6; // rdi
-  Reader *v7; // rsi
   char *v8; // rdx
-  hkResult *v9; // rax
-  char *v10; // rax
-  hkDataWorld *v11; // rcx
+  char *Attribute; // rax
+  hkDataWorld *m_world; // rcx
   const char *v12; // rbp
   hkDataObjectImpl *v13; // rax
   hkDataObjectImpl *v14; // rbx
-  hkResultEnum v15; // eax
-  hkDataObjectImpl *v16; // rcx
+  hkResultEnum m_enum; // eax
+  hkDataObjectImpl *m_impl; // rcx
   bool v17; // zf
-  hkDataObject obj; // [rsp+20h] [rbp-28h]
-  hkDataClassImpl *v19; // [rsp+28h] [rbp-20h]
-  hkResult resulta; // [rsp+60h] [rbp+18h]
+  hkDataObject obj; // [rsp+20h] [rbp-28h] BYREF
+  hkDataClassImpl *v19; // [rsp+28h] [rbp-20h] BYREF
+  hkResult resulta; // [rsp+60h] [rbp+18h] BYREF
 
-  v4 = objOut;
   v5 = klassImpl;
-  v6 = result;
-  v7 = this;
   if ( klassImpl
     || (v8 = `anonymous namespace::Reader::_getAttribute(this, "type")) != 0i64
-    && (v5 = (hkDataClassImpl *)((__int64 (__fastcall *)(hkDataWorld *, char *))v7->m_world->vfptr[4].__first_virtual_table_function__)(
-                                  v7->m_world,
+    && (v5 = (hkDataClassImpl *)((__int64 (__fastcall *)(hkDataWorld *, char *))this->m_world->vfptr[4].__first_virtual_table_function__)(
+                                  this->m_world,
                                   v8)) != 0i64 )
   {
-    v10 = `anonymous namespace::Reader::_getAttribute(v7, "id");
-    v11 = v7->m_world;
+    Attribute = `anonymous namespace::Reader::_getAttribute(this, "id");
+    m_world = this->m_world;
     v19 = v5;
-    v12 = v10;
-    v13 = (hkDataObjectImpl *)((__int64 (__fastcall *)(hkDataWorld *, hkDataClassImpl **, _QWORD))v11->vfptr[2].__vecDelDtor)(
-                                v11,
+    v12 = Attribute;
+    v13 = (hkDataObjectImpl *)((__int64 (__fastcall *)(hkDataWorld *, hkDataClassImpl **, _QWORD))m_world->vfptr[2].__vecDelDtor)(
+                                m_world,
                                 &v19,
                                 0i64);
     v14 = v13;
@@ -1665,14 +1569,15 @@ hkResult *__fastcall `anonymous namespace::Reader::_parseAndCreateObject(Reader 
       ++v13->m_externalCount;
       ++v13->m_count;
     }
-    `anonymous namespace::Reader::_parseObject(v7, &resulta, &obj);
+    `anonymous namespace::Reader::_parseObject(this, &resulta, &obj);
     if ( resulta.m_enum )
     {
-      v6->m_enum = resulta.m_enum;
+      result->m_enum = resulta.m_enum;
     }
-    else if ( v12 && (v15 = `anonymous namespace::Reader::_setReferencedObject(v7, &resulta, v12, &obj)->m_enum) != 0 )
+    else if ( v12
+           && (m_enum = `anonymous namespace::Reader::_setReferencedObject(this, &resulta, v12, &obj)->m_enum) != HK_SUCCESS )
     {
-      v6->m_enum = v15;
+      result->m_enum = m_enum;
     }
     else
     {
@@ -1681,120 +1586,108 @@ hkResult *__fastcall `anonymous namespace::Reader::_parseAndCreateObject(Reader 
         ++v14->m_externalCount;
         ++v14->m_count;
       }
-      v16 = v4->m_impl;
-      if ( v4->m_impl )
+      m_impl = objOut->m_impl;
+      if ( objOut->m_impl )
       {
-        --v16->m_externalCount;
-        v17 = v16->m_count-- == 1;
+        --m_impl->m_externalCount;
+        v17 = m_impl->m_count-- == 1;
         if ( v17 )
-          v16->vfptr->__vecDelDtor((hkDataRefCounted *)&v16->vfptr, 1u);
+          m_impl->vfptr->__vecDelDtor(m_impl, 1u);
       }
-      v4->m_impl = v14;
-      v6->m_enum = 0;
+      objOut->m_impl = v14;
+      result->m_enum = HK_SUCCESS;
     }
     if ( v14 )
     {
       --v14->m_externalCount;
       v17 = v14->m_count-- == 1;
       if ( v17 )
-        v14->vfptr->__vecDelDtor((hkDataRefCounted *)&v14->vfptr, 1u);
+        v14->vfptr->__vecDelDtor(v14, 1u);
     }
-    v9 = v6;
+    return result;
   }
   else
   {
-    v6->m_enum = 1;
-    v9 = v6;
+    result->m_enum = HK_FAILURE;
+    return result;
   }
-  return v9;
 }
 
 // File Line: 1043
 // RVA: 0xE55530
 hkResult *__fastcall `anonymous namespace::Reader::_parseObject(Reader *this, hkResult *result, hkDataObject *obj)
 {
-  hkDataObject *v3; // r14
-  hkResult *v4; // rdi
-  Reader *v5; // rsi
   __int64 v6; // rbx
-  char *v7; // rax
-  unsigned int v8; // eax
+  char *Attribute; // rax
+  int v8; // eax
   __int64 v9; // r9
-  hkDataObject_Value valueOut; // [rsp+20h] [rbp-48h]
-  hkDataClass_MemberInfo minfo; // [rsp+30h] [rbp-38h]
-  hkResult resulta; // [rsp+70h] [rbp+8h]
+  hkDataObject_Value valueOut; // [rsp+20h] [rbp-48h] BYREF
+  hkDataClass_MemberInfo minfo; // [rsp+30h] [rbp-38h] BYREF
+  hkResult resulta; // [rsp+70h] [rbp+8h] BYREF
 
-  v3 = obj;
-  v4 = result;
-  v5 = this;
   `anonymous namespace::Reader::_pushBlock(this);
-  v6 = ((__int64 (*)(void))v3->m_impl->vfptr[2].__vecDelDtor)();
-  hkXmlStreamParser::advance(&v5->m_parser);
-  while ( `anonymous namespace::Reader::_skipWhiteSpace(v5) == 1 )
+  v6 = ((__int64 (__fastcall *)(hkDataObjectImpl *))obj->m_impl->vfptr[2].__vecDelDtor)(obj->m_impl);
+  hkXmlStreamParser::advance(&this->m_parser);
+  while ( `anonymous namespace::Reader::_skipWhiteSpace(this) == TOKEN_BLOCK_START )
   {
-    v7 = `anonymous namespace::Reader::_getAttribute(v5, "name");
-    if ( !v7 )
+    Attribute = `anonymous namespace::Reader::_getAttribute(this, "name");
+    if ( !Attribute )
       goto LABEL_10;
-    v8 = (*(__int64 (__fastcall **)(__int64, char *))(*(_QWORD *)v6 + 88i64))(v6, v7);
-    if ( (v8 & 0x80000000) != 0 )
+    v8 = (*(__int64 (__fastcall **)(__int64, char *))(*(_QWORD *)v6 + 88i64))(v6, Attribute);
+    if ( v8 < 0 )
       goto LABEL_10;
     v9 = *(_QWORD *)v6;
-    *(_OWORD *)&minfo.m_name = 0ui64;
-    minfo.m_type = 0i64;
-    minfo.m_valuePtr = 0i64;
-    (*(void (__fastcall **)(__int64, _QWORD, hkDataClass_MemberInfo *))(v9 + 80))(v6, v8, &minfo);
-    ((void (__fastcall *)(hkDataObjectImpl *, hkDataObject_Value *, const char *))v3->m_impl->vfptr[3].__vecDelDtor)(
-      v3->m_impl,
+    memset(&minfo, 0, sizeof(minfo));
+    (*(void (__fastcall **)(__int64, _QWORD, hkDataClass_MemberInfo *))(v9 + 80))(v6, (unsigned int)v8, &minfo);
+    ((void (__fastcall *)(hkDataObjectImpl *, hkDataObject_Value *, const char *))obj->m_impl->vfptr[3].__vecDelDtor)(
+      obj->m_impl,
       &valueOut,
       minfo.m_name);
-    `anonymous namespace::Reader::_parseMemberValue(v5, &resulta, &minfo, &valueOut);
+    `anonymous namespace::Reader::_parseMemberValue(this, &resulta, &minfo, &valueOut);
     if ( resulta.m_enum )
     {
-      v4->m_enum = resulta.m_enum;
-      return v4;
+      result->m_enum = resulta.m_enum;
+      return result;
     }
   }
-  if ( `anonymous namespace::Reader::_popBlock(v5, &resulta)->m_enum )
+  if ( `anonymous namespace::Reader::_popBlock(this, &resulta)->m_enum )
   {
 LABEL_10:
-    v4->m_enum = 1;
-    return v4;
+    result->m_enum = HK_FAILURE;
+    return result;
   }
-  v4->m_enum = 0;
-  return v4;
+  result->m_enum = HK_SUCCESS;
+  return result;
 }
 
 // File Line: 1096
 // RVA: 0xE559B0
 hkResult *__fastcall `anonymous namespace::Reader::_fixUpReferences(Reader *this, hkResult *result)
 {
-  hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *v2; // r15
-  hkResult *v3; // r12
-  Dummy *v4; // rbp
-  unsigned __int64 v5; // rax
+  hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *p_m_referenceMap; // r15
+  Dummy *Iterator; // rbp
+  unsigned __int64 Value; // rax
   unsigned __int64 v6; // rdi
   int v7; // esi
   __int64 v8; // r14
   __int64 v9; // rbx
-  bool v10; // zf
   int v11; // ebx
   __int64 v12; // rsi
-  hkBool resulta; // [rsp+50h] [rbp+8h]
+  hkBool resulta; // [rsp+50h] [rbp+8h] BYREF
 
-  v2 = (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_referenceMap;
-  v3 = result;
-  v4 = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::getIterator((hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_referenceMap);
-  hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::isValid(v2, &resulta, v4);
+  p_m_referenceMap = (hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_referenceMap;
+  Iterator = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::getIterator((hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator> *)&this->m_referenceMap);
+  hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::isValid(p_m_referenceMap, &resulta, Iterator);
   if ( resulta.m_bool )
   {
     while ( 1 )
     {
-      v5 = hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getValue(v2, v4);
-      v6 = v5;
-      if ( !*(_QWORD *)v5 )
+      Value = hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::getValue(p_m_referenceMap, Iterator);
+      v6 = Value;
+      if ( !*(_QWORD *)Value )
         break;
       v7 = 0;
-      if ( *(_DWORD *)(v5 + 16) > 0 )
+      if ( *(int *)(Value + 16) > 0 )
       {
         v8 = 0i64;
         do
@@ -1812,9 +1705,8 @@ hkResult *__fastcall `anonymous namespace::Reader::_fixUpReferences(Reader *this
           if ( v9 )
           {
             --*(_WORD *)(v9 + 10);
-            v10 = (*(_DWORD *)(v9 + 12))-- == 1;
-            if ( v10 )
-              (**(void (__fastcall ***)(__int64, signed __int64))v9)(v9, 1i64);
+            if ( (*(_DWORD *)(v9 + 12))-- == 1 )
+              (**(void (__fastcall ***)(__int64, __int64))v9)(v9, 1i64);
           }
           ++v7;
           v8 += 16i64;
@@ -1822,12 +1714,12 @@ hkResult *__fastcall `anonymous namespace::Reader::_fixUpReferences(Reader *this
         while ( v7 < *(_DWORD *)(v6 + 16) );
       }
       v11 = 0;
-      if ( *(_DWORD *)(v6 + 32) > 0 )
+      if ( *(int *)(v6 + 32) > 0 )
       {
         v12 = 0i64;
         do
         {
-          (*(void (__fastcall **)(_QWORD, _QWORD, __int64))(**(_QWORD **)(v12 + *(_QWORD *)(v6 + 24)) + 184i64))(
+          (*(void (__fastcall **)(_QWORD, _QWORD, _QWORD))(**(_QWORD **)(v12 + *(_QWORD *)(v6 + 24)) + 184i64))(
             *(_QWORD *)(v12 + *(_QWORD *)(v6 + 24)),
             *(_QWORD *)(v12 + *(_QWORD *)(v6 + 24) + 8),
             *(_QWORD *)v6);
@@ -1836,139 +1728,135 @@ hkResult *__fastcall `anonymous namespace::Reader::_fixUpReferences(Reader *this
         }
         while ( v11 < *(_DWORD *)(v6 + 32) );
       }
-      v4 = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::getNext(v2, v4);
-      hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::isValid(v2, &resulta, v4);
+      Iterator = hkCachedHashMap<hkStringMapOperations,hkDefaultMemoryTrackerAllocator>::getNext(
+                   p_m_referenceMap,
+                   Iterator);
+      hkCachedHashMap<hkStringMapOperations,hkContainerHeapAllocator>::isValid(p_m_referenceMap, &resulta, Iterator);
       if ( !resulta.m_bool )
         goto LABEL_15;
     }
-    v3->m_enum = 1;
+    result->m_enum = HK_FAILURE;
   }
   else
   {
 LABEL_15:
-    v3->m_enum = 0;
+    result->m_enum = HK_SUCCESS;
   }
-  return v3;
+  return result;
 }
 
 // File Line: 1117
 // RVA: 0xE53B30
-hkResult *__fastcall `anonymous namespace::Reader::readHeader(Reader *this, hkResult *result, hkXmlTagfile::Header *out)
+hkResult *__fastcall `anonymous namespace::Reader::readHeader(
+        Reader *this,
+        hkResult *result,
+        hkXmlTagfile::Header *out)
 {
-  hkXmlTagfile::Header *v3; // rsi
-  hkResult *v4; // rbx
-  Reader *v5; // rdi
-  hkSubString *v6; // rax
+  hkSubString *BlockName; // rax
   hkOstream *v7; // rax
-  hkSubString resulta; // [rsp+20h] [rbp-228h]
-  char buf; // [rsp+40h] [rbp-208h]
-  hkBool v11; // [rsp+250h] [rbp+8h]
+  hkErrStream resulta; // [rsp+20h] [rbp-228h] BYREF
+  char buf[512]; // [rsp+40h] [rbp-208h] BYREF
+  hkResult v11; // [rsp+250h] [rbp+8h] BYREF
 
-  v3 = out;
-  v4 = result;
-  v5 = this;
   hkXmlStreamParser::advance(&this->m_parser);
-  if ( `anonymous namespace::Reader::_skipWhiteSpace(v5) == TOKEN_QBLOCK )
-    hkXmlStreamParser::advance(&v5->m_parser);
-  if ( `anonymous namespace::Reader::_skipWhiteSpace(v5) != 1 )
+  if ( `anonymous namespace::Reader::_skipWhiteSpace(this) == TOKEN_QBLOCK )
+    hkXmlStreamParser::advance(&this->m_parser);
+  if ( `anonymous namespace::Reader::_skipWhiteSpace(this) != TOKEN_BLOCK_START )
     goto LABEL_11;
-  v6 = hkXmlStreamParser::getBlockName(&v5->m_parser, &resulta);
-  if ( !hkSubString::operator==(v6, &v11, "hktagfile")->m_bool
-    || hkXmlStreamParser::getIntAttribute(&v5->m_parser, (hkResult *)&v11, "version", &v3->m_version)->m_enum == 1 )
+  BlockName = hkXmlStreamParser::getBlockName(&this->m_parser, (hkSubString *)&resulta);
+  if ( !hkSubString::operator==(BlockName, (hkBool *)&v11, "hktagfile")->m_bool
+    || hkXmlStreamParser::getIntAttribute(&this->m_parser, &v11, "version", &out->m_version)->m_enum == HK_FAILURE )
   {
     goto LABEL_11;
   }
-  if ( (unsigned int)(v3->m_version - 1) > 1 )
+  if ( (unsigned int)(out->m_version - 1) > 1 )
   {
-    hkErrStream::hkErrStream((hkErrStream *)&resulta, &buf, 512);
-    v7 = hkOstream::operator<<((hkOstream *)&resulta, "Unrecognised tagfile version ");
-    hkOstream::operator<<(v7, v3->m_version, (int)v7);
-    hkError::messageWarning(600179583, &buf, "Tagfile\\Xml\\hkXmlTagfileReader.cpp", 1162);
-    hkOstream::~hkOstream((hkOstream *)&resulta);
+    hkErrStream::hkErrStream(&resulta, buf, 512);
+    v7 = hkOstream::operator<<(&resulta, "Unrecognised tagfile version ");
+    hkOstream::operator<<(v7, out->m_version);
+    hkError::messageWarning(0x23C6037Fu, buf, "Tagfile\\Xml\\hkXmlTagfileReader.cpp", 1162);
+    hkOstream::~hkOstream(&resulta);
 LABEL_11:
-    v4->m_enum = 1;
-    return v4;
+    result->m_enum = HK_FAILURE;
+    return result;
   }
-  resulta.m_start = 0i64;
-  resulta.m_end = 0i64;
-  if ( hkXmlStreamParser::getValue(&v5->m_parser, (hkResult *)&v11, "sdkversion", &resulta)->m_enum == HK_SUCCESS )
-    hkStringPtr::set(&v3->m_sdkVersion, resulta.m_start + 1, LODWORD(resulta.m_end) - LODWORD(resulta.m_start) - 2);
-  v4->m_enum = 0;
-  return v4;
+  resulta.vfptr = 0i64;
+  *(_QWORD *)&resulta.m_memSizeAndFlags = 0i64;
+  if ( hkXmlStreamParser::getValue(&this->m_parser, &v11, "sdkversion", (hkSubString *)&resulta)->m_enum == HK_SUCCESS )
+    hkStringPtr::set(
+      &out->m_sdkVersion,
+      (const char *)&resulta.vfptr->__vecDelDtor + 1,
+      *(_DWORD *)&resulta.m_memSizeAndFlags - LODWORD(resulta.vfptr) - 2);
+  result->m_enum = HK_SUCCESS;
+  return result;
 }
 
 // File Line: 1171
 // RVA: 0xE53800
 hkResult *__fastcall `anonymous namespace::Reader::parseRoot(Reader *this, hkResult *result, hkDataObject *objOut)
 {
-  hkDataObject *v3; // r15
-  hkResult *v4; // r14
-  Reader *v5; // rsi
-  int v6; // er9
-  hkSubString *v8; // rax
+  int v6; // r9d
+  hkSubString *BlockName; // rax
   hkSubString *v9; // rax
   hkDataObjectImpl *v10; // rbx
   const char *v11; // rdi
   bool v12; // zf
-  const char *v13; // rcx
-  hkDataObjectImpl *v14; // rcx
-  hkSubString resulta; // [rsp+20h] [rbp-E0h]
-  hkErrStream v16; // [rsp+30h] [rbp-D0h]
-  char buf; // [rsp+50h] [rbp-B0h]
-  hkBool v18; // [rsp+280h] [rbp+180h]
-  int value; // [rsp+298h] [rbp+198h]
+  const char *m_start; // rcx
+  hkDataObjectImpl *m_impl; // rcx
+  hkSubString resulta; // [rsp+20h] [rbp-E0h] BYREF
+  hkErrStream v16; // [rsp+30h] [rbp-D0h] BYREF
+  char buf[512]; // [rsp+50h] [rbp-B0h] BYREF
+  hkResult v18; // [rsp+280h] [rbp+180h] BYREF
+  int value; // [rsp+298h] [rbp+198h] BYREF
 
-  v3 = objOut;
-  v4 = result;
-  v5 = this;
   hkXmlStreamParser::advance(&this->m_parser);
-  if ( `anonymous namespace::Reader::_skipWhiteSpace(v5) == TOKEN_QBLOCK )
-    hkXmlStreamParser::advance(&v5->m_parser);
-  if ( `anonymous namespace::Reader::_skipWhiteSpace(v5) != 1 )
+  if ( `anonymous namespace::Reader::_skipWhiteSpace(this) == TOKEN_QBLOCK )
+    hkXmlStreamParser::advance(&this->m_parser);
+  if ( `anonymous namespace::Reader::_skipWhiteSpace(this) != TOKEN_BLOCK_START )
   {
-    hkErrStream::hkErrStream(&v16, &buf, 512);
-    hkOstream::operator<<((hkOstream *)&v16.vfptr, "Didnt find the root hktagfile block");
+    hkErrStream::hkErrStream(&v16, buf, 512);
+    hkOstream::operator<<(&v16, "Didnt find the root hktagfile block");
     v6 = 1187;
 LABEL_5:
-    hkError::messageWarning(-18022230, &buf, "Tagfile\\Xml\\hkXmlTagfileReader.cpp", v6);
-    hkOstream::~hkOstream((hkOstream *)&v16.vfptr);
-    v4->m_enum = 1;
-    return v4;
+    hkError::messageWarning(0xFEED00AA, buf, "Tagfile\\Xml\\hkXmlTagfileReader.cpp", v6);
+    hkOstream::~hkOstream(&v16);
+    result->m_enum = HK_FAILURE;
+    return result;
   }
-  v8 = hkXmlStreamParser::getBlockName(&v5->m_parser, &resulta);
-  if ( !hkSubString::operator==(v8, &v18, "hktagfile")->m_bool )
+  BlockName = hkXmlStreamParser::getBlockName(&this->m_parser, &resulta);
+  if ( !hkSubString::operator==(BlockName, (hkBool *)&v18, "hktagfile")->m_bool )
   {
-    hkErrStream::hkErrStream(&v16, &buf, 512);
-    hkOstream::operator<<((hkOstream *)&v16.vfptr, "Expecting hktagfile block");
+    hkErrStream::hkErrStream(&v16, buf, 512);
+    hkOstream::operator<<(&v16, "Expecting hktagfile block");
     v6 = 1193;
     goto LABEL_5;
   }
   value = 0;
-  hkXmlStreamParser::getIntAttribute(&v5->m_parser, (hkResult *)&v18, "version", &value);
-  `anonymous namespace::Reader::_pushBlock(v5);
-  hkXmlStreamParser::advance(&v5->m_parser);
-  while ( `anonymous namespace::Reader::_skipWhiteSpace(v5) == 1 )
+  hkXmlStreamParser::getIntAttribute(&this->m_parser, &v18, "version", &value);
+  `anonymous namespace::Reader::_pushBlock(this);
+  hkXmlStreamParser::advance(&this->m_parser);
+  while ( `anonymous namespace::Reader::_skipWhiteSpace(this) == TOKEN_BLOCK_START )
   {
-    v9 = hkXmlStreamParser::getBlockName(&v5->m_parser, (hkSubString *)&v16);
-    if ( !hkSubString::operator==(v9, &v18, "class")->m_bool )
+    v9 = hkXmlStreamParser::getBlockName(&this->m_parser, (hkSubString *)&v16);
+    if ( !hkSubString::operator==(v9, (hkBool *)&v18, "class")->m_bool )
       break;
-    `anonymous namespace::Reader::_parseClassDefinition(v5, (hkResult *)&resulta);
+    `anonymous namespace::Reader::_parseClassDefinition(this, (hkResult *)&resulta);
   }
   v10 = 0i64;
-  while ( (unsigned int)(`anonymous namespace::Reader::_skipWhiteSpace(v5) - 1) <= 1 )
+  while ( (unsigned int)(`anonymous namespace::Reader::_skipWhiteSpace(this) - 1) <= 1 )
   {
     resulta.m_start = 0i64;
-    `anonymous namespace::Reader::_parseAndCreateObject(v5, (hkResult *)&v18, 0i64, (hkDataObject *)&resulta);
-    if ( *(_DWORD *)&v18.m_bool == 1 )
+    `anonymous namespace::Reader::_parseAndCreateObject(this, &v18, 0i64, (hkDataObject *)&resulta);
+    if ( v18.m_enum == HK_FAILURE )
     {
-      v13 = resulta.m_start;
-      v4->m_enum = 1;
-      if ( v13 )
+      m_start = resulta.m_start;
+      result->m_enum = HK_FAILURE;
+      if ( m_start )
       {
-        --*((_WORD *)v13 + 5);
-        v12 = (*((_DWORD *)v13 + 3))-- == 1;
+        --*((_WORD *)m_start + 5);
+        v12 = (*((_DWORD *)m_start + 3))-- == 1;
         if ( v12 )
-          (**(void (__fastcall ***)(const char *, signed __int64))v13)(v13, 1i64);
+          (**(void (__fastcall ***)(const char *, __int64))m_start)(m_start, 1i64);
       }
       goto LABEL_37;
     }
@@ -1983,7 +1871,7 @@ LABEL_5:
       --v10->m_externalCount;
       v12 = v10->m_count-- == 1;
       if ( v12 )
-        v10->vfptr->__vecDelDtor((hkDataRefCounted *)&v10->vfptr, 1u);
+        v10->vfptr->__vecDelDtor(v10, 1u);
     }
     v10 = (hkDataObjectImpl *)v11;
     if ( v11 )
@@ -1991,19 +1879,19 @@ LABEL_5:
       --*((_WORD *)v11 + 5);
       v12 = (*((_DWORD *)v11 + 3))-- == 1;
       if ( v12 )
-        (**(void (__fastcall ***)(const char *, signed __int64))v11)(v11, 1i64);
+        (**(void (__fastcall ***)(const char *, __int64))v11)(v11, 1i64);
     }
   }
-  if ( `anonymous namespace::Reader::_popBlock(v5, (hkResult *)&v18)->m_enum )
+  if ( `anonymous namespace::Reader::_popBlock(this, &v18)->m_enum )
   {
-    v4->m_enum = 1;
+    result->m_enum = HK_FAILURE;
   }
-  else if ( `anonymous namespace::Reader::_skipWhiteSpace(v5) == 7 )
+  else if ( `anonymous namespace::Reader::_skipWhiteSpace(this) == TOKEN_EOF )
   {
-    `anonymous namespace::Reader::_fixUpReferences(v5, (hkResult *)&v18);
-    if ( *(_DWORD *)&v18.m_bool )
+    `anonymous namespace::Reader::_fixUpReferences(this, &v18);
+    if ( v18.m_enum )
     {
-      v4->m_enum = *(hkResultEnum *)&v18.m_bool;
+      result->m_enum = v18.m_enum;
     }
     else
     {
@@ -2012,21 +1900,21 @@ LABEL_5:
         ++v10->m_externalCount;
         ++v10->m_count;
       }
-      v14 = v3->m_impl;
-      if ( v3->m_impl )
+      m_impl = objOut->m_impl;
+      if ( objOut->m_impl )
       {
-        --v14->m_externalCount;
-        v12 = v14->m_count-- == 1;
+        --m_impl->m_externalCount;
+        v12 = m_impl->m_count-- == 1;
         if ( v12 )
-          v14->vfptr->__vecDelDtor((hkDataRefCounted *)&v14->vfptr, 1u);
+          m_impl->vfptr->__vecDelDtor(m_impl, 1u);
       }
-      v3->m_impl = v10;
-      v4->m_enum = 0;
+      objOut->m_impl = v10;
+      result->m_enum = HK_SUCCESS;
     }
   }
   else
   {
-    v4->m_enum = 1;
+    result->m_enum = HK_FAILURE;
   }
 LABEL_37:
   if ( v10 )
@@ -2034,65 +1922,68 @@ LABEL_37:
     --v10->m_externalCount;
     v12 = v10->m_count-- == 1;
     if ( v12 )
-      v10->vfptr->__vecDelDtor((hkDataRefCounted *)&v10->vfptr, 1u);
+      v10->vfptr->__vecDelDtor(v10, 1u);
   }
-  return v4;
-}
+  return result;
+}m_externalCount;
+    v12 = v10->m_count-- 
 
 // File Line: 1273
 // RVA: 0xE532C0
-hkDataObject *__fastcall hkXmlTagfileReader::load(hkXmlTagfileReader *this, hkDataObject *result, hkStreamReader *stream, hkDataWorld *world)
+hkDataObject *__fastcall hkXmlTagfileReader::load(
+        hkXmlTagfileReader *this,
+        hkDataObject *result,
+        hkStreamReader *stream,
+        hkDataWorld *world)
 {
-  hkDataObject *v4; // rbx
-  hkDataObjectImpl *v5; // rcx
+  hkDataObjectImpl *m_impl; // rcx
   bool v6; // zf
-  int v7; // eax
-  hkDataObject objOut; // [rsp+20h] [rbp-158h]
-  hkResult resulta; // [rsp+28h] [rbp-150h]
-  Reader v11; // [rsp+30h] [rbp-148h]
+  int m_count; // eax
+  hkDataObject objOut; // [rsp+20h] [rbp-158h] BYREF
+  hkResult resulta; // [rsp+28h] [rbp-150h] BYREF
+  Reader v11; // [rsp+30h] [rbp-148h] BYREF
 
-  v4 = result;
   `anonymous namespace::Reader::Reader(&v11, stream, world);
   objOut.m_impl = 0i64;
   `anonymous namespace::Reader::parseRoot(&v11, &resulta, &objOut);
-  v5 = objOut.m_impl;
+  m_impl = objOut.m_impl;
   if ( resulta.m_enum )
   {
-    v4->m_impl = 0i64;
-    if ( !v5 )
+    result->m_impl = 0i64;
+    if ( !m_impl )
       goto LABEL_8;
-    --v5->m_externalCount;
-    v6 = v5->m_count-- == 1;
+    --m_impl->m_externalCount;
+    v6 = m_impl->m_count-- == 1;
   }
   else
   {
-    v4->m_impl = objOut.m_impl;
-    if ( !v5 )
+    result->m_impl = objOut.m_impl;
+    if ( !m_impl )
       goto LABEL_8;
-    v7 = v5->m_count;
-    v5->m_count = v7;
-    v6 = v7 == 0;
+    m_count = m_impl->m_count;
+    m_impl->m_count = m_count;
+    v6 = m_count == 0;
   }
   if ( v6 )
-    v5->vfptr->__vecDelDtor((hkDataRefCounted *)&v5->vfptr, 1u);
+    m_impl->vfptr->__vecDelDtor(m_impl, 1u);
 LABEL_8:
   `anonymous namespace::Reader::~Reader(&v11);
-  return v4;
+  return result;
 }
 
 // File Line: 1287
 // RVA: 0xE53360
-hkResult *__fastcall hkXmlTagfileReader::readHeader(hkXmlTagfileReader *this, hkResult *result, hkStreamReader *stream, hkXmlTagfile::Header *out)
+hkResult *__fastcall hkXmlTagfileReader::readHeader(
+        hkXmlTagfileReader *this,
+        hkResult *result,
+        hkStreamReader *stream,
+        hkXmlTagfile::Header *out)
 {
-  hkResult *v4; // rdi
-  hkXmlTagfile::Header *v5; // rbx
-  Reader v7; // [rsp+20h] [rbp-148h]
+  Reader v7; // [rsp+20h] [rbp-148h] BYREF
 
-  v4 = result;
-  v5 = out;
   `anonymous namespace::Reader::Reader(&v7, stream, 0i64);
-  `anonymous namespace::Reader::readHeader(&v7, v4, v5);
+  `anonymous namespace::Reader::readHeader(&v7, result, out);
   `anonymous namespace::Reader::~Reader(&v7);
-  return v4;
+  return result;
 }
 

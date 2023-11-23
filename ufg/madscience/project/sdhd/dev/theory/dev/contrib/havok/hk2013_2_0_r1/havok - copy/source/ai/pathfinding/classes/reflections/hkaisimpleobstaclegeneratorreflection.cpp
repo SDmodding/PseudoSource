@@ -28,30 +28,29 @@ hkClass *__fastcall hkaiSimpleObstacleGenerator::staticClass()
 
 // File Line: 65
 // RVA: 0xBB7570
-void __fastcall finishLoadedObjecthkaiSimpleObstacleGenerator(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiSimpleObstacleGenerator(
+        hkaiObstacleGenerator *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  _QWORD *v2; // rbx
-
   if ( p )
   {
-    v2 = p;
-    hkaiObstacleGenerator::hkaiObstacleGenerator((hkaiObstacleGenerator *)p, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkaiSimpleObstacleGenerator::`vftable;
+    hkaiObstacleGenerator::hkaiObstacleGenerator(p, finishing);
+    p->vfptr = (hkBaseObjectVtbl *)&hkaiSimpleObstacleGenerator::`vftable;
   }
 }
 
 // File Line: 71
 // RVA: 0xBB75A0
-void __fastcall cleanupLoadedObjecthkaiSimpleObstacleGenerator(void *p)
+void __fastcall cleanupLoadedObjecthkaiSimpleObstacleGenerator(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 75
 // RVA: 0xBB75B0
 void **__fastcall getVtablehkaiSimpleObstacleGenerator()
 {
-  hkaiObstacleGenerator v1; // [rsp+20h] [rbp-B8h]
+  hkaiObstacleGenerator v1; // [rsp+20h] [rbp-B8h] BYREF
 
   hkaiObstacleGenerator::hkaiObstacleGenerator(&v1, 0);
   return &hkaiSimpleObstacleGenerator::`vftable;
@@ -68,8 +67,8 @@ void **dynamic_initializer_for__hkaiSimpleObstacleGeneratorTypeInfo__()
   hkaiSimpleObstacleGeneratorTypeInfo.m_typeName = "hkaiSimpleObstacleGenerator";
   hkaiSimpleObstacleGeneratorTypeInfo.m_vtable = result;
   hkaiSimpleObstacleGeneratorTypeInfo.m_scopedName = "!hkaiSimpleObstacleGenerator";
-  hkaiSimpleObstacleGeneratorTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiSimpleObstacleGenerator;
-  hkaiSimpleObstacleGeneratorTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiSimpleObstacleGenerator;
+  hkaiSimpleObstacleGeneratorTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiSimpleObstacleGenerator;
+  hkaiSimpleObstacleGeneratorTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiSimpleObstacleGenerator;
   return result;
 }
 

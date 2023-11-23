@@ -3,12 +3,10 @@
 void __fastcall hkpWorldObject::hkpWorldObject(hkpWorldObject *this, hkFinishLoadedObjectFlag flag)
 {
   char v2; // di
-  hkpLinkedCollidable *v3; // rbx
-  int v4; // [rsp+38h] [rbp+10h]
+  hkpLinkedCollidable *p_m_collidable; // rbx
 
-  v4 = flag.m_finishing;
   v2 = (char)this;
-  v3 = &this->m_collidable;
+  p_m_collidable = &this->m_collidable;
   this->vfptr = (hkBaseObjectVtbl *)&hkpWorldObject::`vftable;
   if ( flag.m_finishing )
   {
@@ -21,51 +19,47 @@ void __fastcall hkpWorldObject::hkpWorldObject(hkpWorldObject *this, hkFinishLoa
   }
   this->m_collidable.m_collisionEntries.m_data = 0i64;
   this->m_collidable.m_collisionEntries.m_size = 0;
-  this->m_collidable.m_collisionEntries.m_capacityAndFlags = 2147483648;
+  this->m_collidable.m_collisionEntries.m_capacityAndFlags = 0x80000000;
   this->m_multiThreadCheck.m_threadId = -15;
-  this->m_multiThreadCheck.m_markCount = -32768;
+  this->m_multiThreadCheck.m_markCount = 0x8000;
   hkStringPtr::hkStringPtr(&this->m_name, flag);
-  if ( v4 )
-    v3->m_ownerOffset = v2 - (_BYTE)v3;
+  if ( flag.m_finishing )
+    p_m_collidable->m_ownerOffset = v2 - (_BYTE)p_m_collidable;
 }
 
 // File Line: 38
 // RVA: 0xD55490
-void __fastcall hkpWorldObject::hkpWorldObject(hkpWorldObject *this, hkpShape *shape, hkpWorldObject::BroadPhaseType type)
+void __fastcall hkpWorldObject::hkpWorldObject(hkpWorldObject *this, hkpShape *shape, int type)
 {
-  hkpLinkedCollidable *v3; // rbx
-  hkpWorldObject *v4; // rdi
-  hkpShape *v5; // rsi
+  hkpLinkedCollidable *p_m_collidable; // rbx
 
-  v3 = &this->m_collidable;
-  v4 = this;
+  p_m_collidable = &this->m_collidable;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->vfptr = (hkBaseObjectVtbl *)&hkpWorldObject::`vftable;
   this->m_world = 0i64;
   this->m_userData = 0i64;
-  v5 = shape;
   hkpLinkedCollidable::hkpLinkedCollidable(&this->m_collidable, shape, 0i64, type);
-  v4->m_multiThreadCheck.m_threadId = -15;
-  v4->m_multiThreadCheck.m_markCount = -32768;
-  hkStringPtr::hkStringPtr(&v4->m_name);
-  v4->m_properties.m_data = 0i64;
-  v4->m_properties.m_size = 0;
-  v4->m_properties.m_capacityAndFlags = 2147483648;
-  v3->m_ownerOffset = (_BYTE)v4 - (_BYTE)v3;
-  if ( v5 )
-    hkReferencedObject::addReference((hkReferencedObject *)&v5->vfptr);
+  this->m_multiThreadCheck.m_threadId = -15;
+  this->m_multiThreadCheck.m_markCount = 0x8000;
+  hkStringPtr::hkStringPtr(&this->m_name);
+  this->m_properties.m_data = 0i64;
+  this->m_properties.m_size = 0;
+  this->m_properties.m_capacityAndFlags = 0x80000000;
+  p_m_collidable->m_ownerOffset = (_BYTE)this - (_BYTE)p_m_collidable;
+  if ( shape )
+    hkReferencedObject::addReference(shape);
 }
 
 // File Line: 48
 // RVA: 0xD55440
-signed __int64 __fastcall hkpWorldObject::setShape(hkpWorldObject *this, hkpShape *shape)
+__int64 __fastcall hkpWorldObject::setShape(hkpWorldObject *this, hkpShape *shape)
 {
   return 1i64;
 }
 
 // File Line: 76
 // RVA: 0xD55450
-signed __int64 __fastcall hkpWorldObject::updateShape(hkpWorldObject *this, hkpShapeModifier *shapeModifier)
+__int64 __fastcall hkpWorldObject::updateShape(hkpWorldObject *this, hkpShapeModifier *shapeModifier)
 {
   return 1i64;
 }
@@ -74,30 +68,28 @@ signed __int64 __fastcall hkpWorldObject::updateShape(hkpWorldObject *this, hkpS
 // RVA: 0xD55190
 void __fastcall hkpWorldObject::addProperty(hkpWorldObject *this, unsigned int key, hkSimplePropertyValue value)
 {
-  __int64 v3; // r10
+  __int64 m_size; // r10
   __int64 v4; // r9
-  unsigned int v5; // edi
   hkSimpleProperty *v6; // rax
-  hkArray<hkSimpleProperty,hkContainerHeapAllocator> *v7; // rbx
-  signed __int64 v8; // rcx
-  unsigned __int64 v9; // [rsp+40h] [rbp+18h]
+  hkArray<hkSimpleProperty,hkContainerHeapAllocator> *p_m_properties; // rbx
+  __int64 v8; // rcx
+  unsigned __int64 m_data; // [rsp+40h] [rbp+18h]
 
-  v9 = value.m_data;
-  v3 = this->m_properties.m_size;
+  m_data = value.m_data;
+  m_size = this->m_properties.m_size;
   v4 = 0i64;
-  v5 = key;
-  if ( v3 <= 0 )
+  if ( m_size <= 0 )
   {
 LABEL_5:
-    v7 = &this->m_properties;
+    p_m_properties = &this->m_properties;
     if ( this->m_properties.m_size == (this->m_properties.m_capacityAndFlags & 0x3FFFFFFF) )
     {
-      hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v7, 16);
-      value.m_data = v9;
+      hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&p_m_properties->m_data, 16);
+      value.m_data = m_data;
     }
-    v8 = (signed __int64)&v7->m_data[v7->m_size++];
+    v8 = (__int64)&p_m_properties->m_data[p_m_properties->m_size++];
     *(hkSimplePropertyValue *)(v8 + 8) = value;
-    *(_DWORD *)v8 = v5;
+    *(_DWORD *)v8 = key;
   }
   else
   {
@@ -106,7 +98,7 @@ LABEL_5:
     {
       ++v4;
       ++v6;
-      if ( v4 >= v3 )
+      if ( v4 >= m_size )
         goto LABEL_5;
     }
   }
@@ -116,32 +108,30 @@ LABEL_5:
 // RVA: 0xD552E0
 void __fastcall hkpWorldObject::setProperty(hkpWorldObject *this, unsigned int key, hkSimplePropertyValue value)
 {
-  __int64 v3; // r11
-  int v4; // er10
-  unsigned int v5; // edi
+  __int64 m_size; // r11
+  int v4; // r10d
   __int64 v6; // r9
   hkSimpleProperty *v7; // rax
-  hkArray<hkSimpleProperty,hkContainerHeapAllocator> *v8; // rbx
-  signed __int64 v9; // rcx
-  unsigned __int64 v10; // [rsp+40h] [rbp+18h]
+  hkArray<hkSimpleProperty,hkContainerHeapAllocator> *p_m_properties; // rbx
+  __int64 v9; // rcx
+  unsigned __int64 m_data; // [rsp+40h] [rbp+18h]
 
-  v10 = value.m_data;
-  v3 = this->m_properties.m_size;
+  m_data = value.m_data;
+  m_size = this->m_properties.m_size;
   v4 = 0;
-  v5 = key;
   v6 = 0i64;
-  if ( v3 <= 0 )
+  if ( m_size <= 0 )
   {
 LABEL_5:
-    v8 = &this->m_properties;
+    p_m_properties = &this->m_properties;
     if ( this->m_properties.m_size == (this->m_properties.m_capacityAndFlags & 0x3FFFFFFF) )
     {
-      hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v8, 16);
-      value.m_data = v10;
+      hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&p_m_properties->m_data, 16);
+      value.m_data = m_data;
     }
-    v9 = (signed __int64)&v8->m_data[v8->m_size++];
+    v9 = (__int64)&p_m_properties->m_data[p_m_properties->m_size++];
     *(hkSimplePropertyValue *)(v9 + 8) = value;
-    *(_DWORD *)v9 = v5;
+    *(_DWORD *)v9 = key;
   }
   else
   {
@@ -151,7 +141,7 @@ LABEL_5:
       ++v6;
       ++v4;
       ++v7;
-      if ( v6 >= v3 )
+      if ( v6 >= m_size )
         goto LABEL_5;
     }
     this->m_properties.m_data[v4].m_value = value;
@@ -160,94 +150,93 @@ LABEL_5:
 
 // File Line: 119
 // RVA: 0xD55220
-hkSimplePropertyValue *__fastcall hkpWorldObject::removeProperty(hkpWorldObject *this, hkSimplePropertyValue *result, unsigned int key)
+hkSimplePropertyValue *__fastcall hkpWorldObject::removeProperty(
+        hkpWorldObject *this,
+        hkSimplePropertyValue *result,
+        unsigned int key)
 {
-  hkSimplePropertyValue *v3; // r11
-  __int64 v4; // rdx
-  int v5; // er10
+  __int64 m_size; // rdx
+  int v5; // r10d
   __int64 v6; // r9
-  hkSimpleProperty *v7; // rbx
+  hkSimpleProperty *m_data; // rbx
   hkSimpleProperty *v8; // rax
-  hkSimplePropertyValue *v9; // rax
-  __int64 v10; // ST00_8
-  unsigned __int64 v11; // rax
-  int v12; // er8
-  signed __int64 v13; // rcx
-  int v14; // er8
-  __int64 v15; // r8
-  __int64 v16; // rdx
+  unsigned __int64 v10; // rax
+  int v11; // r8d
+  hkSimpleProperty *v12; // rcx
+  int v13; // r8d
+  __int64 v14; // r8
+  unsigned __int64 v15; // rdx
 
-  v3 = result;
-  v4 = this->m_properties.m_size;
+  m_size = this->m_properties.m_size;
   v5 = 0;
   v6 = 0i64;
-  if ( v4 <= 0 )
+  if ( m_size <= 0 )
   {
 LABEL_5:
-    v3->m_data = 0i64;
-    v9 = v3;
+    result->m_data = 0i64;
+    return result;
   }
   else
   {
-    v7 = this->m_properties.m_data;
-    v8 = this->m_properties.m_data;
+    m_data = this->m_properties.m_data;
+    v8 = m_data;
     while ( v8->m_key != key )
     {
       ++v6;
       ++v5;
       ++v8;
-      if ( v6 >= v4 )
+      if ( v6 >= m_size )
         goto LABEL_5;
     }
-    v10 = *(_QWORD *)&v7[v5].m_key;
-    v11 = v7[v5].m_value.m_data;
-    v12 = --this->m_properties.m_size;
-    v13 = (signed __int64)&v7[v5];
-    v14 = 16 * (v12 - v5);
-    if ( v14 > 0 )
+    v10 = m_data[v5].m_value.m_data;
+    v11 = --this->m_properties.m_size;
+    v12 = &m_data[v5];
+    v13 = 16 * (v11 - v5);
+    if ( v13 > 0 )
     {
-      v15 = ((unsigned int)(v14 - 1) >> 3) + 1;
+      v14 = ((unsigned int)(v13 - 1) >> 3) + 1;
       do
       {
-        v16 = *(_QWORD *)(v13 + 16);
-        v13 += 8i64;
-        *(_QWORD *)(v13 - 8) = v16;
-        --v15;
+        v15 = *(_QWORD *)&v12[1].m_key;
+        v12 = (hkSimpleProperty *)((char *)v12 + 8);
+        v12[-1].m_value.m_data = v15;
+        --v14;
       }
-      while ( v15 );
+      while ( v14 );
     }
-    v3->m_data = v11;
-    v9 = v3;
+    result->m_data = v10;
+    return result;
   }
-  return v9;
 }
 
 // File Line: 141
 // RVA: 0xD55390
-void __fastcall hkpWorldObject::editProperty(hkpWorldObject *this, unsigned int key, hkSimplePropertyValue value, hkpWorldObject::MtChecks mtCheck)
+void __fastcall hkpWorldObject::editProperty(
+        hkpWorldObject *this,
+        unsigned int key,
+        hkSimplePropertyValue value,
+        hkpWorldObject::MtChecks mtCheck)
 {
-  __int64 v4; // r11
-  int v5; // er10
+  __int64 m_size; // r11
+  int v5; // r10d
   __int64 v6; // r9
-  hkSimpleProperty *v7; // rcx
-  hkSimpleProperty *v8; // rax
+  hkSimpleProperty *m_data; // rcx
+  hkSimpleProperty *i; // rax
 
-  v4 = this->m_properties.m_size;
+  m_size = this->m_properties.m_size;
   v5 = 0;
   v6 = 0i64;
-  if ( v4 > 0 )
+  if ( m_size > 0 )
   {
-    v7 = this->m_properties.m_data;
-    v8 = v7;
-    while ( v8->m_key != key )
+    m_data = this->m_properties.m_data;
+    for ( i = m_data; i->m_key != key; ++i )
     {
       ++v6;
       ++v5;
-      ++v8;
-      if ( v6 >= v4 )
+      if ( v6 >= m_size )
         return;
     }
-    v7[v5].m_value = value;
+    m_data[v5].m_value = value;
   }
 }
 
@@ -255,15 +244,15 @@ void __fastcall hkpWorldObject::editProperty(hkpWorldObject *this, unsigned int 
 // RVA: 0xD553E0
 void __fastcall hkpWorldObject::lockProperty(hkpWorldObject *this, unsigned int key)
 {
-  hkpWorld *v2; // rcx
-  _RTL_CRITICAL_SECTION *v3; // rcx
+  hkpWorld *m_world; // rcx
+  _RTL_CRITICAL_SECTION *p_m_section; // rcx
 
-  v2 = this->m_world;
-  if ( v2 )
+  m_world = this->m_world;
+  if ( m_world )
   {
-    v3 = &v2->m_propertyMasterLock->m_section;
-    if ( v3 )
-      EnterCriticalSection(v3);
+    p_m_section = &m_world->m_propertyMasterLock->m_section;
+    if ( p_m_section )
+      EnterCriticalSection(p_m_section);
   }
 }
 
@@ -271,15 +260,15 @@ void __fastcall hkpWorldObject::lockProperty(hkpWorldObject *this, unsigned int 
 // RVA: 0xD55410
 void __fastcall hkpWorldObject::unlockProperty(hkpWorldObject *this, unsigned int key)
 {
-  hkpWorld *v2; // rcx
-  _RTL_CRITICAL_SECTION *v3; // rcx
+  hkpWorld *m_world; // rcx
+  _RTL_CRITICAL_SECTION *p_m_section; // rcx
 
-  v2 = this->m_world;
-  if ( v2 )
+  m_world = this->m_world;
+  if ( m_world )
   {
-    v3 = &v2->m_propertyMasterLock->m_section;
-    if ( v3 )
-      LeaveCriticalSection(v3);
+    p_m_section = &m_world->m_propertyMasterLock->m_section;
+    if ( p_m_section )
+      LeaveCriticalSection(p_m_section);
   }
 }
 

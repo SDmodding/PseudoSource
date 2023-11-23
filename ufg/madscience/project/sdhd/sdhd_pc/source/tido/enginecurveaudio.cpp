@@ -6,7 +6,7 @@ __int64 dynamic_initializer_for__EngAudioSym_gear_list__()
 
   v0 = UFG::qStringHash32("gear_list", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngAudioSym_gear_list, v0);
-  return atexit(dynamic_atexit_destructor_for__EngAudioSym_gear_list__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__EngAudioSym_gear_list__);
 }
 
 // File Line: 28
@@ -17,7 +17,7 @@ __int64 dynamic_initializer_for__EngAudioSym_curve_list__()
 
   v0 = UFG::qStringHash32("curve_list", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngAudioSym_curve_list, v0);
-  return atexit(dynamic_atexit_destructor_for__EngAudioSym_curve_list__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__EngAudioSym_curve_list__);
 }
 
 // File Line: 29
@@ -28,7 +28,7 @@ __int64 dynamic_initializer_for__EngAudioSym_curve_properties__()
 
   v0 = UFG::qStringHash32("curve_properties", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngAudioSym_curve_properties, v0);
-  return atexit(dynamic_atexit_destructor_for__EngAudioSym_curve_properties__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__EngAudioSym_curve_properties__);
 }
 
 // File Line: 30
@@ -39,7 +39,7 @@ __int64 dynamic_initializer_for__EngAudioSym_point_index__()
 
   v0 = UFG::qStringHash32("point_index", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngAudioSym_point_index, v0);
-  return atexit(dynamic_atexit_destructor_for__EngAudioSym_point_index__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__EngAudioSym_point_index__);
 }
 
 // File Line: 31
@@ -50,7 +50,7 @@ __int64 dynamic_initializer_for__EngAudioSym_point_list_x__()
 
   v0 = UFG::qStringHash32("point_list_x", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngAudioSym_point_list_x, v0);
-  return atexit(dynamic_atexit_destructor_for__EngAudioSym_point_list_x__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__EngAudioSym_point_list_x__);
 }
 
 // File Line: 32
@@ -61,7 +61,7 @@ __int64 dynamic_initializer_for__EngAudioSym_point_list_y__()
 
   v0 = UFG::qStringHash32("point_list_y", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngAudioSym_point_list_y, v0);
-  return atexit(dynamic_atexit_destructor_for__EngAudioSym_point_list_y__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__EngAudioSym_point_list_y__);
 }
 
 // File Line: 33
@@ -72,7 +72,7 @@ __int64 dynamic_initializer_for__EngAudioSym_point_list_properties__()
 
   v0 = UFG::qStringHash32("point_list_properties", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngAudioSym_point_list_properties, v0);
-  return atexit(dynamic_atexit_destructor_for__EngAudioSym_point_list_properties__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__EngAudioSym_point_list_properties__);
 }
 
 // File Line: 34
@@ -83,7 +83,7 @@ __int64 dynamic_initializer_for__EngAudioSym_x__()
 
   v0 = UFG::qStringHash32("x", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngAudioSym_x, v0);
-  return atexit(dynamic_atexit_destructor_for__EngAudioSym_x__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__EngAudioSym_x__);
 }
 
 // File Line: 35
@@ -94,7 +94,7 @@ __int64 dynamic_initializer_for__EngAudioSym_y__()
 
   v0 = UFG::qStringHash32("y", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngAudioSym_y, v0);
-  return atexit(dynamic_atexit_destructor_for__EngAudioSym_y__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__EngAudioSym_y__);
 }
 
 // File Line: 36
@@ -105,7 +105,7 @@ __int64 dynamic_initializer_for__EngAudioSym_name__()
 
   v0 = UFG::qStringHash32("name", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngAudioSym_name, v0);
-  return atexit(dynamic_atexit_destructor_for__EngAudioSym_name__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__EngAudioSym_name__);
 }
 
 // File Line: 37
@@ -116,7 +116,7 @@ __int64 dynamic_initializer_for__EngAudioSym_id__()
 
   v0 = UFG::qStringHash32("id", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngAudioSym_id, v0);
-  return atexit(dynamic_atexit_destructor_for__EngAudioSym_id__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__EngAudioSym_id__);
 }
 
 // File Line: 38
@@ -127,7 +127,7 @@ __int64 dynamic_initializer_for__EngAudioSym_type_decel__()
 
   v0 = UFG::qStringHash32("type_decel", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngAudioSym_type_decel, v0);
-  return atexit(dynamic_atexit_destructor_for__EngAudioSym_type_decel__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__EngAudioSym_type_decel__);
 }
 
 // File Line: 39
@@ -138,7 +138,7 @@ __int64 dynamic_initializer_for__EngAudioSym_minSpeed__()
 
   v0 = UFG::qStringHash32("minSpeed", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngAudioSym_minSpeed, v0);
-  return atexit(dynamic_atexit_destructor_for__EngAudioSym_minSpeed__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__EngAudioSym_minSpeed__);
 }
 
 // File Line: 40
@@ -149,7 +149,7 @@ __int64 dynamic_initializer_for__EngAudioSym_maxSpeed__()
 
   v0 = UFG::qStringHash32("maxSpeed", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngAudioSym_maxSpeed, v0);
-  return atexit(dynamic_atexit_destructor_for__EngAudioSym_maxSpeed__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__EngAudioSym_maxSpeed__);
 }
 
 // File Line: 41
@@ -160,7 +160,7 @@ __int64 dynamic_initializer_for__EngAudioSym_minRpm__()
 
   v0 = UFG::qStringHash32("minRpm", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngAudioSym_minRpm, v0);
-  return atexit(dynamic_atexit_destructor_for__EngAudioSym_minRpm__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__EngAudioSym_minRpm__);
 }
 
 // File Line: 42
@@ -171,7 +171,7 @@ __int64 dynamic_initializer_for__EngAudioSym_maxRpm__()
 
   v0 = UFG::qStringHash32("maxRpm", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngAudioSym_maxRpm, v0);
-  return atexit(dynamic_atexit_destructor_for__EngAudioSym_maxRpm__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__EngAudioSym_maxRpm__);
 }
 
 // File Line: 43
@@ -182,7 +182,7 @@ __int64 dynamic_initializer_for__EngAudioSym_Gear0__()
 
   v0 = UFG::qStringHash32("Gear0", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngAudioSym_Gear0, v0);
-  return atexit(dynamic_atexit_destructor_for__EngAudioSym_Gear0__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__EngAudioSym_Gear0__);
 }
 
 // File Line: 44
@@ -193,7 +193,7 @@ __int64 dynamic_initializer_for__EngAudioSym_wwise_event__()
 
   v0 = UFG::qStringHash32("wwise_event", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngAudioSym_wwise_event, v0);
-  return atexit(dynamic_atexit_destructor_for__EngAudioSym_wwise_event__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__EngAudioSym_wwise_event__);
 }
 
 // File Line: 45
@@ -204,28 +204,28 @@ __int64 dynamic_initializer_for__EngAudioSym_vehicle_event__()
 
   v0 = UFG::qStringHash32("vehicle_event", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&EngAudioSym_vehicle_event, v0);
-  return atexit(dynamic_atexit_destructor_for__EngAudioSym_vehicle_event__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__EngAudioSym_vehicle_event__);
 }
 
 // File Line: 60
 // RVA: 0x59C620
 float __fastcall UFG::AudioCurve::FindMinValue(UFG::AudioCurve *this)
 {
-  signed __int64 v1; // rdx
+  __int64 nData; // rdx
   float result; // xmm0_4
-  signed __int64 v3; // r9
+  __int64 v3; // r9
   const float *v4; // rax
   unsigned __int64 v5; // r8
-  signed __int64 v6; // rdx
+  __int64 v6; // rdx
   float *v7; // rcx
 
-  v1 = this->m_graphCurve.nData;
+  nData = this->m_graphCurve.nData;
   result = FLOAT_1_0e10;
   v3 = 0i64;
-  if ( v1 >= 4 )
+  if ( nData >= 4 )
   {
     v4 = this->m_graphCurve.tRange + 2;
-    v5 = ((unsigned __int64)(v1 - 4) >> 2) + 1;
+    v5 = ((unsigned __int64)(nData - 4) >> 2) + 1;
     v3 = 4 * v5;
     do
     {
@@ -242,9 +242,9 @@ float __fastcall UFG::AudioCurve::FindMinValue(UFG::AudioCurve *this)
     }
     while ( v5 );
   }
-  if ( v3 < v1 )
+  if ( v3 < nData )
   {
-    v6 = v1 - v3;
+    v6 = nData - v3;
     v7 = (float *)&this->m_graphCurve.tRange[v3];
     do
     {
@@ -266,7 +266,7 @@ __int64 UFG::_dynamic_initializer_for__gsym_source_value__()
 
   v0 = UFG::qStringHash32("source_value", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::gsym_source_value, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gsym_source_value__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gsym_source_value__);
 }
 
 // File Line: 119
@@ -277,7 +277,7 @@ __int64 UFG::_dynamic_initializer_for__gsym_target_value__()
 
   v0 = UFG::qStringHash32("target_value", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::gsym_target_value, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gsym_target_value__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gsym_target_value__);
 }
 
 // File Line: 120
@@ -288,7 +288,7 @@ __int64 UFG::_dynamic_initializer_for__gsym_blend_mode__()
 
   v0 = UFG::qStringHash32("blend_mode", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::gsym_blend_mode, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gsym_blend_mode__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gsym_blend_mode__);
 }
 
 // File Line: 121
@@ -299,7 +299,7 @@ __int64 UFG::_dynamic_initializer_for__gsym_play_length__()
 
   v0 = UFG::qStringHash32("play_length", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::gsym_play_length, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gsym_play_length__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gsym_play_length__);
 }
 
 // File Line: 122
@@ -310,21 +310,20 @@ __int64 UFG::_dynamic_initializer_for__gsym_enable__()
 
   v0 = UFG::qStringHash32("enable", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::gsym_enable, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gsym_enable__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gsym_enable__);
 }
 
 // File Line: 125
 // RVA: 0x599AB0
 char __fastcall UFG::CreateFromPropertySet(UFG::AudioCurve *ac, UFG::qPropertySet *ps)
 {
-  UFG::qPropertySet *v2; // r13
   UFG::AudioCurve *v3; // r15
-  unsigned int v4; // ebx
+  unsigned int mUID; // ebx
   UFG::AudioCurveSymbolManager *v5; // r8
   UFG::allocator::free_link *v6; // rax
   UFG::AudioCurveSymbolManager *v7; // rax
   char v8; // cl
-  char v9; // dl
+  char m_numSymbols; // dl
   UFG::qPropertySet *v10; // rax
   UFG::qPropertySet *v11; // r12
   UFG::qSymbol *v12; // rax
@@ -336,7 +335,7 @@ char __fastcall UFG::CreateFromPropertySet(UFG::AudioCurve *ac, UFG::qPropertySe
   unsigned int v18; // esi
   UFG::qSymbol *v19; // rax
   unsigned int v20; // ebp
-  UFG::AudioCurveSymbolManager *v21; // rax
+  UFG::AudioCurveSymbolManager *Instance; // rax
   char v22; // cl
   char v23; // dl
   UFG::AudioCurveSymbolManager *v24; // rax
@@ -354,50 +353,47 @@ char __fastcall UFG::CreateFromPropertySet(UFG::AudioCurve *ac, UFG::qPropertySe
   __int64 v36; // rsi
   UFG::allocator::free_link *v37; // rax
   UFG::allocator::free_link *v38; // rdx
-  signed __int64 v39; // rcx
-  int v40; // er8
-  signed int v41; // er9
-  __int16 v42; // dx
+  const float *v39; // rcx
+  int v40; // r8d
+  int v41; // r9d
+  __int16 m_minSpeed; // dx
   unsigned int v43; // ebx
-  signed __int64 v44; // rbp
+  __int64 v44; // rbp
   float *v45; // rdi
   signed __int64 v46; // rsi
-  unsigned int v47; // er15
+  unsigned int v47; // r15d
   UFG::qPropertyList *v48; // rax
   UFG::qPropertyList *v49; // r13
-  unsigned int v50; // er14
+  unsigned int mNumElements; // r14d
   UFG::qArray<UFG::AudioCurve::PointProperties,0> *v51; // rax
   UFG::qArray<UFG::AudioCurve::PointProperties,0> *v52; // rbx
-  unsigned int v53; // ecx
+  unsigned int size; // ecx
   int v54; // eax
   unsigned int v55; // edi
-  unsigned int v56; // edx
+  unsigned int capacity; // edx
   unsigned int v57; // edx
   unsigned int v58; // eax
-  unsigned int v59; // ebp
-  char *v60; // rax
+  unsigned int i; // ebp
+  char *ValuePtr; // rax
   UFG::qPropertySet *v61; // rbx
   UFG::qWiseSymbol *v62; // rax
   UFG::qSymbol *v63; // rax
-  UFG::qArray<UFG::AudioCurve::PointProperties,0> *v64; // rsi
-  signed __int64 v65; // rdi
+  UFG::qArray<UFG::AudioCurve::PointProperties,0> *mPointProperties; // rsi
+  __int64 v65; // rdi
   unsigned int v66; // ebx
   unsigned int v67; // edx
   unsigned int v68; // edx
-  signed __int64 v69; // rdi
-  UFG::AudioCurve::PointProperties *v70; // rbx
-  signed __int64 v72; // [rsp+30h] [rbp-58h]
+  __int64 v69; // rdi
+  UFG::AudioCurve::PointProperties *p; // rbx
+  const float *v72; // [rsp+30h] [rbp-58h]
   unsigned int v73; // [rsp+40h] [rbp-48h]
-  UFG::qWiseSymbol source; // [rsp+44h] [rbp-44h]
-  UFG::qSymbol v75; // [rsp+48h] [rbp-40h]
-  UFG::AudioCurve *v76; // [rsp+90h] [rbp+8h]
-  UFG::allocator::free_link *v77; // [rsp+A0h] [rbp+18h]
+  UFG::qWiseSymbol source; // [rsp+44h] [rbp-44h] BYREF
+  UFG::qSymbol v75; // [rsp+48h] [rbp-40h] BYREF
+  UFG::allocator::free_link *v77; // [rsp+A0h] [rbp+18h] BYREF
   UFG::allocator::free_link *v78; // [rsp+A8h] [rbp+20h]
 
-  v76 = ac;
-  v2 = ps;
   v3 = ac;
-  v4 = UFG::qPropertySet::Get<UFG::qSymbol>(ps, (UFG::qSymbol *)&EngAudioSym_id.mUID, DEPTH_RECURSE)->mUID;
+  mUID = UFG::qPropertySet::Get<UFG::qSymbol>(ps, (UFG::qArray<unsigned long,0> *)&EngAudioSym_id, DEPTH_RECURSE)->mUID;
   v5 = UFG::AudioCurveSymbolManager::ms_instance;
   if ( !UFG::AudioCurveSymbolManager::ms_instance )
   {
@@ -414,61 +410,79 @@ char __fastcall UFG::CreateFromPropertySet(UFG::AudioCurve *ac, UFG::qPropertySe
     }
     UFG::AudioCurveSymbolManager::ms_instance = v5;
   }
-  if ( v4 == UFG::gNullQSymbol.mUID )
+  if ( mUID == UFG::gNullQSymbol.mUID )
   {
     v8 = 0;
   }
   else
   {
     v8 = 1;
-    v9 = v5->m_numSymbols;
-    if ( v9 <= 1 )
+    m_numSymbols = v5->m_numSymbols;
+    if ( m_numSymbols <= 1 )
       goto LABEL_13;
-    while ( v5->m_symbols[v8].mUID != v4 )
+    while ( v5->m_symbols[v8].mUID != mUID )
     {
-      if ( ++v8 >= v9 )
+      if ( ++v8 >= m_numSymbols )
         goto LABEL_13;
     }
     if ( !v8 )
     {
 LABEL_13:
       v8 = v5->m_numSymbols;
-      v5->m_symbols[v9].mUID = v4;
+      v5->m_symbols[m_numSymbols].mUID = mUID;
       ++v5->m_numSymbols;
     }
   }
   v3->mId = v8;
-  v3->m_minRpm = (signed int)*UFG::qPropertySet::Get<float>(v2, (UFG::qSymbol *)&EngAudioSym_minRpm.mUID, DEPTH_RECURSE);
-  v3->m_maxRpm = (signed int)*UFG::qPropertySet::Get<float>(v2, (UFG::qSymbol *)&EngAudioSym_maxRpm.mUID, DEPTH_RECURSE);
-  v3->m_minSpeed = (signed int)*UFG::qPropertySet::Get<float>(
-                                  v2,
-                                  (UFG::qSymbol *)&EngAudioSym_minSpeed.mUID,
-                                  DEPTH_RECURSE);
-  v3->m_maxSpeed = (signed int)*UFG::qPropertySet::Get<float>(
-                                  v2,
-                                  (UFG::qSymbol *)&EngAudioSym_maxSpeed.mUID,
-                                  DEPTH_RECURSE);
-  v10 = UFG::qPropertySet::Get<UFG::qPropertySet>(v2, (UFG::qSymbol *)&EngAudioSym_curve_properties.mUID, DEPTH_RECURSE);
+  v3->m_minRpm = (int)*UFG::qPropertySet::Get<float>(
+                         ps,
+                         (UFG::qArray<unsigned long,0> *)&EngAudioSym_minRpm,
+                         DEPTH_RECURSE);
+  v3->m_maxRpm = (int)*UFG::qPropertySet::Get<float>(
+                         ps,
+                         (UFG::qArray<unsigned long,0> *)&EngAudioSym_maxRpm,
+                         DEPTH_RECURSE);
+  v3->m_minSpeed = (int)*UFG::qPropertySet::Get<float>(
+                           ps,
+                           (UFG::qArray<unsigned long,0> *)&EngAudioSym_minSpeed,
+                           DEPTH_RECURSE);
+  v3->m_maxSpeed = (int)*UFG::qPropertySet::Get<float>(
+                           ps,
+                           (UFG::qArray<unsigned long,0> *)&EngAudioSym_maxSpeed,
+                           DEPTH_RECURSE);
+  v10 = UFG::qPropertySet::Get<UFG::qPropertySet>(
+          ps,
+          (UFG::qArray<unsigned long,0> *)&EngAudioSym_curve_properties,
+          DEPTH_RECURSE);
   v11 = v10;
   v3->mPlayLength = 0.0;
   if ( v10 && v10->mNumProperties )
   {
-    v12 = UFG::qPropertySet::Get<UFG::qSymbol>(v10, (UFG::qSymbol *)&UFG::gsym_source_value.mUID, DEPTH_RECURSE);
+    v12 = UFG::qPropertySet::Get<UFG::qSymbol>(
+            v10,
+            (UFG::qArray<unsigned long,0> *)&UFG::gsym_source_value,
+            DEPTH_RECURSE);
     v13 = &UFG::gNullQSymbol;
     v14 = &UFG::gNullQSymbol;
     if ( v12 )
       v14 = v12;
     v15 = v14->mUID;
-    v16 = UFG::qPropertySet::Get<UFG::qSymbol>(v11, (UFG::qSymbol *)&UFG::gsym_target_value.mUID, DEPTH_RECURSE);
+    v16 = UFG::qPropertySet::Get<UFG::qSymbol>(
+            v11,
+            (UFG::qArray<unsigned long,0> *)&UFG::gsym_target_value,
+            DEPTH_RECURSE);
     v17 = &UFG::gNullQSymbol;
     if ( v16 )
       v17 = v16;
     v18 = v17->mUID;
-    v19 = UFG::qPropertySet::Get<UFG::qSymbol>(v11, (UFG::qSymbol *)&UFG::gsym_blend_mode.mUID, DEPTH_RECURSE);
+    v19 = UFG::qPropertySet::Get<UFG::qSymbol>(
+            v11,
+            (UFG::qArray<unsigned long,0> *)&UFG::gsym_blend_mode,
+            DEPTH_RECURSE);
     if ( v19 )
       v13 = v19;
     v20 = v13->mUID;
-    v21 = UFG::AudioCurveSymbolManager::GetInstance();
+    Instance = UFG::AudioCurveSymbolManager::GetInstance();
     if ( v15 == UFG::gNullQSymbol.mUID )
     {
       v22 = 0;
@@ -476,10 +490,10 @@ LABEL_13:
     else
     {
       v22 = 1;
-      v23 = v21->m_numSymbols;
+      v23 = Instance->m_numSymbols;
       if ( v23 <= 1 )
         goto LABEL_29;
-      while ( v21->m_symbols[v22].mUID != v15 )
+      while ( Instance->m_symbols[v22].mUID != v15 )
       {
         if ( ++v22 >= v23 )
           goto LABEL_29;
@@ -487,9 +501,9 @@ LABEL_13:
       if ( !v22 )
       {
 LABEL_29:
-        v22 = v21->m_numSymbols;
-        v21->m_symbols[v23].mUID = v15;
-        ++v21->m_numSymbols;
+        v22 = Instance->m_numSymbols;
+        Instance->m_symbols[v23].mUID = v15;
+        ++Instance->m_numSymbols;
       }
     }
     v3->mSourceValue = v22;
@@ -544,41 +558,42 @@ LABEL_45:
     }
     v3->mBlendMode = v28;
     LODWORD(v77) = 0;
-    v30 = UFG::qPropertySet::Get<float>(v11, (UFG::qSymbol *)&UFG::gsym_play_length.mUID, DEPTH_RECURSE);
+    v30 = UFG::qPropertySet::Get<float>(v11, (UFG::qArray<unsigned long,0> *)&UFG::gsym_play_length, DEPTH_RECURSE);
     v31 = (__int64 *)&v77;
     if ( v30 )
       v31 = (__int64 *)v30;
     v3->mPlayLength = *(float *)v31;
     LOBYTE(v77) = 1;
-    v32 = UFG::qPropertySet::Get<bool>(v11, (UFG::qSymbol *)&UFG::gsym_enable.mUID, DEPTH_RECURSE);
+    v32 = UFG::qPropertySet::Get<bool>(v11, (UFG::qArray<unsigned long,0> *)&UFG::gsym_enable, DEPTH_RECURSE);
     v33 = (__int64 *)&v77;
     if ( v32 )
       v33 = (__int64 *)v32;
     if ( !*(_BYTE *)v33 )
       v3->mPlayLength = -1.0;
   }
-  v34 = UFG::qPropertySet::Get<UFG::qPropertyList>(v2, (UFG::qSymbol *)&EngAudioSym_point_list_x.mUID, DEPTH_RECURSE);
-  v35 = UFG::qPropertySet::Get<UFG::qPropertyList>(v2, (UFG::qSymbol *)&EngAudioSym_point_list_y.mUID, DEPTH_RECURSE);
+  v34 = UFG::qPropertySet::Get<UFG::qPropertyList>(
+          ps,
+          (UFG::qArray<unsigned long,0> *)&EngAudioSym_point_list_x,
+          DEPTH_RECURSE);
+  v35 = UFG::qPropertySet::Get<UFG::qPropertyList>(
+          ps,
+          (UFG::qArray<unsigned long,0> *)&EngAudioSym_point_list_y,
+          DEPTH_RECURSE);
   LODWORD(v77) = v34->mNumElements;
-  v36 = (signed int)v77;
-  v37 = UFG::qMemoryPool::Allocate(
-          &g_AudioComponentPool,
-          8i64 * (signed int)v77,
-          "AudioCurve.CurveMapAndValues",
-          0i64,
-          1u);
+  v36 = (int)v77;
+  v37 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 8i64 * (int)v77, "AudioCurve.CurveMapAndValues", 0i64, 1u);
   v38 = v37;
   v78 = v37;
-  v39 = (signed __int64)v37 + 4 * v36;
-  v72 = (signed __int64)v37 + 4 * v36;
-  if ( v4 == EngAudioSym_type_decel.mUID )
+  v39 = (const float *)v37 + v36;
+  v72 = v39;
+  if ( mUID == EngAudioSym_type_decel.mUID )
   {
     v40 = v36 - 1;
     v41 = -1;
-    v42 = v3->m_minSpeed;
+    m_minSpeed = v3->m_minSpeed;
     v3->m_minSpeed = v3->m_maxSpeed;
-    v3->m_maxSpeed = v42;
-    v39 = (signed __int64)v37 + 4 * v36;
+    v3->m_maxSpeed = m_minSpeed;
+    v39 = (const float *)v37 + v36;
     v38 = v37;
   }
   else
@@ -590,8 +605,8 @@ LABEL_45:
   if ( (_DWORD)v36 )
   {
     v44 = 4i64 * v41;
-    v45 = (float *)(v39 + 4i64 * v40);
-    v46 = (signed __int64)v38 - v39;
+    v45 = (float *)&v39[v40];
+    v46 = (char *)v38 - (char *)v39;
     v47 = (unsigned int)v77;
     do
     {
@@ -601,51 +616,51 @@ LABEL_45:
       ++v43;
     }
     while ( v43 < v47 );
-    v3 = v76;
+    v3 = ac;
   }
   v48 = UFG::qPropertySet::Get<UFG::qPropertyList>(
-          v2,
-          (UFG::qSymbol *)&EngAudioSym_point_list_properties.mUID,
+          ps,
+          (UFG::qArray<unsigned long,0> *)&EngAudioSym_point_list_properties,
           DEPTH_RECURSE);
   v49 = v48;
   if ( v48 )
   {
-    v50 = v48->mNumElements;
+    mNumElements = v48->mNumElements;
     v51 = (UFG::qArray<UFG::AudioCurve::PointProperties,0> *)UFG::qMalloc(0x10ui64, "AudioCurve::PointProperties", 0i64);
     v52 = v51;
     if ( v51 )
     {
       v51->p = 0i64;
       *(_QWORD *)&v51->size = 0i64;
-      UFG::qArray<UFG::AudioCurve::PointProperties,0>::Reallocate(v51, v50, "qArray.Reallocate(Constructor)");
-      v52->size = v50;
+      UFG::qArray<UFG::AudioCurve::PointProperties,0>::Reallocate(v51, mNumElements, "qArray.Reallocate(Constructor)");
+      v52->size = mNumElements;
     }
     else
     {
       v52 = 0i64;
     }
     v3->mPointProperties = v52;
-    v53 = v52->size;
-    v54 = v50 - v52->size;
-    if ( (signed int)(v50 - v52->size) <= 0 )
+    size = v52->size;
+    v54 = mNumElements - v52->size;
+    if ( v54 <= 0 )
     {
-      v58 = v52->size - v50;
-      if ( v52->size != v50 )
+      v58 = v52->size - mNumElements;
+      if ( v58 )
       {
-        if ( v58 < v53 )
-          v52->size = v53 - v58;
+        if ( v58 < size )
+          v52->size = size - v58;
         else
           v52->size = 0;
       }
     }
     else
     {
-      v55 = v53 + v54;
-      v56 = v52->capacity;
-      if ( v53 + v54 > v56 )
+      v55 = size + v54;
+      capacity = v52->capacity;
+      if ( size + v54 > capacity )
       {
-        if ( v56 )
-          v57 = 2 * v56;
+        if ( capacity )
+          v57 = 2 * capacity;
         else
           v57 = 1;
         for ( ; v57 < v55; v57 *= 2 )
@@ -656,283 +671,274 @@ LABEL_45:
       }
       v52->size = v55;
     }
-    v59 = 0;
-    if ( v50 )
+    for ( i = 0; i < mNumElements; ++i )
     {
-      do
+      ValuePtr = UFG::qPropertyList::GetValuePtr(v49, 0x1Au, i);
+      if ( ValuePtr && *(_QWORD *)ValuePtr )
+        v61 = (UFG::qPropertySet *)&ValuePtr[*(_QWORD *)ValuePtr];
+      else
+        v61 = 0i64;
+      source.mUID = -1;
+      _((AMD_HD3D *)0xFFFFFFFFi64);
+      v75.mUID = -1;
+      v73 = *UFG::qPropertySet::Get<unsigned long>(
+               v61,
+               (UFG::qArray<unsigned long,0> *)&EngAudioSym_point_index,
+               DEPTH_RECURSE);
+      v62 = UFG::qPropertySet::Get<UFG::qWiseSymbol>(
+              v61,
+              (UFG::qArray<unsigned long,0> *)&EngAudioSym_wwise_event,
+              DEPTH_RECURSE);
+      if ( v62 )
+        UFG::qWiseSymbol::set_from_symbol(&source, v62);
+      v63 = UFG::qPropertySet::Get<UFG::qSymbol>(
+              v61,
+              (UFG::qArray<unsigned long,0> *)&EngAudioSym_vehicle_event,
+              DEPTH_RECURSE);
+      if ( v63 )
+        UFG::qSymbol::set_from_symbol(&v75, v63);
+      mPointProperties = v3->mPointProperties;
+      v65 = mPointProperties->size;
+      v66 = v65 + 1;
+      v67 = mPointProperties->capacity;
+      if ( (int)v65 + 1 > v67 )
       {
-        v60 = UFG::qPropertyList::GetValuePtr(v49, 0x1Au, v59);
-        if ( v60 && *(_QWORD *)v60 )
-          v61 = (UFG::qPropertySet *)&v60[*(_QWORD *)v60];
+        if ( v67 )
+          v68 = 2 * v67;
         else
-          v61 = 0i64;
-        source.mUID = -1;
-        _((AMD_HD3D *)0xFFFFFFFFi64);
-        v75.mUID = -1;
-        v73 = *UFG::qPropertySet::Get<unsigned long>(v61, (UFG::qSymbol *)&EngAudioSym_point_index.mUID, DEPTH_RECURSE);
-        v62 = UFG::qPropertySet::Get<UFG::qWiseSymbol>(
-                v61,
-                (UFG::qSymbol *)&EngAudioSym_wwise_event.mUID,
-                DEPTH_RECURSE);
-        if ( v62 )
-          UFG::qWiseSymbol::set_from_symbol(&source, v62);
-        v63 = UFG::qPropertySet::Get<UFG::qSymbol>(v61, (UFG::qSymbol *)&EngAudioSym_vehicle_event.mUID, DEPTH_RECURSE);
-        if ( v63 )
-          UFG::qSymbol::set_from_symbol(&v75, v63);
-        v64 = v3->mPointProperties;
-        v65 = v64->size;
-        v66 = v65 + 1;
-        v67 = v64->capacity;
-        if ( (signed int)v65 + 1 > v67 )
-        {
-          if ( v67 )
-            v68 = 2 * v67;
-          else
-            v68 = 1;
-          for ( ; v68 < v66; v68 *= 2 )
-            ;
-          if ( v68 - v66 > 0x10000 )
-            v68 = v65 + 65537;
-          UFG::qArray<UFG::AudioCurve::PointProperties,0>::Reallocate(v3->mPointProperties, v68, "qArray.Add");
-        }
-        v64->size = v66;
-        v69 = v65;
-        v70 = v64->p;
-        v70[v69].mPointIndex = v73;
-        UFG::qWiseSymbol::operator=((UFG::qWiseSymbol *)&v70->mPointIndex + v69 * 3 + 1, &source);
-        v70[v69].mVehicleEvent = v75;
-        _((AMD_HD3D *)source.mUID);
-        ++v59;
+          v68 = 1;
+        for ( ; v68 < v66; v68 *= 2 )
+          ;
+        if ( v68 - v66 > 0x10000 )
+          v68 = v65 + 65537;
+        UFG::qArray<UFG::AudioCurve::PointProperties,0>::Reallocate(v3->mPointProperties, v68, "qArray.Add");
       }
-      while ( v59 < v50 );
+      mPointProperties->size = v66;
+      v69 = v65;
+      p = mPointProperties->p;
+      p[v69].mPointIndex = v73;
+      UFG::qWiseSymbol::operator=(&p[v69].mEvent, &source);
+      p[v69].mVehicleEvent = v75;
+      _((AMD_HD3D *)source.mUID);
     }
   }
-  v3->m_graphCurve.nData = (signed int)v77;
+  v3->m_graphCurve.nData = (int)v77;
   v3->m_graphCurve.fDomain = (const float *)v78;
-  v3->m_graphCurve.tRange = (const float *)v72;
+  v3->m_graphCurve.tRange = v72;
   return 1;
-}
+};
+      }
+      mPointProperties->size = v66;
+      v69 = v65;
+      p = mPointProperties->p;
+      p[v69].mPointIndex = v73;
+      UFG::qWiseSymbol::operator=(&p[v69].mEvent, &source);
+      p[v69].mVehicleEvent = v75;
+      _((AMD_HD3D *)source.mUID);
+    }
+  }
+  v3->m_graphCurve.nData = (int)v77;
+  v3->m_graphCurve.fDomain = (const float *)v78;
+  v3->m
 
 // File Line: 272
 // RVA: 0x59A160
 char __fastcall UFG::CreateFromPropertySet(UFG::AudioCurveSet *acs, UFG::qPropertySet *ps)
 {
   UFG::qPropertySet *v2; // rbx
-  UFG::AudioCurveSet *v3; // rdi
-  UFG::qPropertyList *v4; // rax
-  UFG::qPropertyList *v5; // rsi
-  UFG::qPropertyList *v6; // rax
-  UFG::qPropertyList *v7; // rcx
-  unsigned int v8; // eax
-  char *v9; // rax
-  UFG::allocator::free_link *v10; // rax
-  UFG::AudioCurveSet *v11; // rsi
-  unsigned int v12; // ecx
-  unsigned int v13; // ebp
+  UFG::qPropertyList *v4; // rsi
+  UFG::qPropertyList *v5; // rax
+  UFG::qPropertyList *v6; // rcx
+  unsigned int v7; // eax
+  char *ValuePtr; // rax
+  UFG::allocator::free_link *v9; // rax
+  UFG::AudioCurveSet *v10; // rsi
+  unsigned int size; // ecx
+  unsigned int v12; // ebp
+  unsigned int capacity; // ebx
   unsigned int v14; // ebx
-  unsigned int v15; // ebx
-  unsigned __int64 v16; // rax
-  UFG::allocator::free_link *v17; // rax
-  unsigned int v18; // er9
-  unsigned int v19; // eax
-  char *v20; // rax
-  UFG::allocator::free_link *v21; // rax
-  UFG::AudioCurve *v22; // rsi
-  unsigned int v23; // ecx
-  unsigned int v24; // ebp
+  unsigned __int64 v15; // rax
+  UFG::AudioCurveSet **v16; // rax
+  unsigned int i; // r9d
+  unsigned int v18; // eax
+  char *v19; // rax
+  UFG::allocator::free_link *v20; // rax
+  UFG::AudioCurve *v21; // rsi
+  unsigned int v22; // ecx
+  unsigned int v23; // ebp
+  unsigned int v24; // ebx
   unsigned int v25; // ebx
-  unsigned int v26; // ebx
-  unsigned __int64 v27; // rax
-  UFG::allocator::free_link *v28; // rax
-  unsigned int v29; // er9
+  unsigned __int64 v26; // rax
+  UFG::AudioCurve **v27; // rax
+  unsigned int k; // r9d
   UFG::qPropertySet *psa; // [rsp+30h] [rbp-58h]
-  UFG::qPropertyList *v32; // [rsp+38h] [rbp-50h]
-  UFG::allocator::free_link *v33; // [rsp+40h] [rbp-48h]
-  UFG::qPropertyList *v34; // [rsp+48h] [rbp-40h]
-  UFG::allocator::free_link *v35; // [rsp+48h] [rbp-40h]
+  UFG::qPropertyList *v31; // [rsp+38h] [rbp-50h]
+  UFG::AudioCurveSet **v32; // [rsp+40h] [rbp-48h]
+  UFG::qPropertyList *v33; // [rsp+48h] [rbp-40h]
+  UFG::AudioCurve **v34; // [rsp+48h] [rbp-40h]
+  unsigned int v35; // [rsp+90h] [rbp+8h]
   unsigned int v36; // [rsp+90h] [rbp+8h]
-  unsigned int v37; // [rsp+90h] [rbp+8h]
-  UFG::qPropertySet *v38; // [rsp+98h] [rbp+10h]
-  unsigned int v39; // [rsp+98h] [rbp+10h]
+  unsigned int j; // [rsp+98h] [rbp+10h]
+  unsigned int v39; // [rsp+A0h] [rbp+18h]
   unsigned int v40; // [rsp+A0h] [rbp+18h]
-  unsigned int v41; // [rsp+A0h] [rbp+18h]
-  unsigned int v42; // [rsp+A8h] [rbp+20h]
-  UFG::qPropertySet *v43; // [rsp+A8h] [rbp+20h]
+  unsigned int mNumElements; // [rsp+A8h] [rbp+20h]
+  UFG::qPropertySet *v42; // [rsp+A8h] [rbp+20h]
 
-  v38 = ps;
   v2 = ps;
-  v3 = acs;
-  v4 = UFG::qPropertySet::Get<UFG::qPropertyList>(ps, (UFG::qSymbol *)&EngAudioSym_curve_list.mUID, DEPTH_RECURSE);
-  v5 = v4;
-  v32 = v4;
-  v6 = UFG::qPropertySet::Get<UFG::qPropertyList>(v2, (UFG::qSymbol *)&EngAudioSym_gear_list.mUID, DEPTH_RECURSE);
-  v7 = v6;
-  v34 = v6;
-  if ( v6 )
+  v4 = UFG::qPropertySet::Get<UFG::qPropertyList>(
+         ps,
+         (UFG::qArray<unsigned long,0> *)&EngAudioSym_curve_list,
+         DEPTH_RECURSE);
+  v31 = v4;
+  v5 = UFG::qPropertySet::Get<UFG::qPropertyList>(
+         v2,
+         (UFG::qArray<unsigned long,0> *)&EngAudioSym_gear_list,
+         DEPTH_RECURSE);
+  v6 = v5;
+  v33 = v5;
+  if ( v5 )
   {
-    v42 = v6->mNumElements;
-    v8 = 0;
-    v36 = 0;
-    if ( v42 )
+    mNumElements = v5->mNumElements;
+    v7 = 0;
+    v35 = 0;
+    if ( mNumElements )
     {
       do
       {
-        v9 = UFG::qPropertyList::GetValuePtr(v7, 0x1Au, v8);
-        if ( v9 && *(_QWORD *)v9 )
-          psa = (UFG::qPropertySet *)&v9[*(_QWORD *)v9];
+        ValuePtr = UFG::qPropertyList::GetValuePtr(v6, 0x1Au, v7);
+        if ( ValuePtr && *(_QWORD *)ValuePtr )
+          psa = (UFG::qPropertySet *)&ValuePtr[*(_QWORD *)ValuePtr];
         else
           psa = 0i64;
-        v10 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x38ui64, "AudioCurveSet", 0i64, 1u);
-        v11 = (UFG::AudioCurveSet *)v10;
-        if ( v10 )
+        v9 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x38ui64, "AudioCurveSet", 0i64, 1u);
+        v10 = (UFG::AudioCurveSet *)v9;
+        if ( v9 )
         {
-          v10->mNext = v10;
-          v10[1].mNext = v10;
-          LODWORD(v10[2].mNext) = UFG::gNullQSymbol;
-          v10[4].mNext = 0i64;
-          v10[3].mNext = 0i64;
-          v10[6].mNext = 0i64;
-          v10[5].mNext = 0i64;
+          v9->mNext = v9;
+          v9[1].mNext = v9;
+          LODWORD(v9[2].mNext) = UFG::gNullQSymbol;
+          v9[4].mNext = 0i64;
+          v9[3].mNext = 0i64;
+          v9[6].mNext = 0i64;
+          v9[5].mNext = 0i64;
         }
         else
         {
-          v11 = 0i64;
+          v10 = 0i64;
         }
-        v12 = v3->m_childCurveSets.size;
-        v40 = v12;
-        v13 = v12 + 1;
-        v14 = v3->m_childCurveSets.capacity;
-        if ( v12 + 1 > v14 )
+        size = acs->m_childCurveSets.size;
+        v39 = size;
+        v12 = size + 1;
+        capacity = acs->m_childCurveSets.capacity;
+        if ( size + 1 > capacity )
         {
-          if ( v14 )
-            v15 = 2 * v14;
+          if ( capacity )
+            v14 = 2 * capacity;
           else
-            v15 = 1;
-          for ( ; v15 < v13; v15 *= 2 )
+            v14 = 1;
+          for ( ; v14 < v12; v14 *= 2 )
             ;
-          if ( v15 <= 2 )
-            v15 = 2;
-          if ( v15 - v13 > 0x10000 )
-            v15 = v12 + 65537;
-          if ( v15 != v12 )
+          if ( v14 <= 2 )
+            v14 = 2;
+          if ( v14 - v12 > 0x10000 )
+            v14 = size + 65537;
+          if ( v14 != size )
           {
-            v16 = 8i64 * v15;
-            if ( !is_mul_ok(v15, 8ui64) )
-              v16 = -1i64;
-            v17 = UFG::qMalloc(v16, "m_childCurveSets", 0i64);
-            v33 = v17;
-            if ( v3->m_childCurveSets.p )
+            v15 = 8i64 * v14;
+            if ( !is_mul_ok(v14, 8ui64) )
+              v15 = -1i64;
+            v16 = (UFG::AudioCurveSet **)UFG::qMalloc(v15, "m_childCurveSets", 0i64);
+            v32 = v16;
+            if ( acs->m_childCurveSets.p )
             {
-              v18 = 0;
-              if ( v3->m_childCurveSets.size )
-              {
-                do
-                {
-                  v17[v18] = (UFG::allocator::free_link)v3->m_childCurveSets.p[v18];
-                  ++v18;
-                }
-                while ( v18 < v3->m_childCurveSets.size );
-              }
-              operator delete[](v3->m_childCurveSets.p);
-              v17 = v33;
+              for ( i = 0; i < acs->m_childCurveSets.size; ++i )
+                v16[i] = acs->m_childCurveSets.p[i];
+              operator delete[](acs->m_childCurveSets.p);
+              v16 = v32;
             }
-            v3->m_childCurveSets.p = (UFG::AudioCurveSet **)v17;
-            v3->m_childCurveSets.capacity = v15;
-            v12 = v40;
+            acs->m_childCurveSets.p = v16;
+            acs->m_childCurveSets.capacity = v14;
+            size = v39;
           }
         }
-        v3->m_childCurveSets.size = v13;
-        v3->m_childCurveSets.p[v12] = v11;
-        UFG::CreateFromPropertySet(v11, psa);
-        v8 = v36 + 1;
-        v36 = v8;
-        v7 = v34;
+        acs->m_childCurveSets.size = v12;
+        acs->m_childCurveSets.p[size] = v10;
+        UFG::CreateFromPropertySet(v10, psa);
+        v7 = v35 + 1;
+        v35 = v7;
+        v6 = v33;
       }
-      while ( v8 < v42 );
-      v2 = v38;
-      v5 = v32;
+      while ( v7 < mNumElements );
+      v2 = ps;
+      v4 = v31;
     }
   }
-  v3->m_name.mUID = v2->mName.mUID;
-  v41 = v5->mNumElements;
-  v19 = 0;
-  v39 = 0;
-  if ( v41 )
+  acs->m_name.mUID = v2->mName.mUID;
+  v40 = v4->mNumElements;
+  v18 = 0;
+  for ( j = 0; v18 < v40; v4 = v31 )
   {
-    do
+    v19 = UFG::qPropertyList::GetValuePtr(v4, 0x1Au, v18);
+    if ( v19 && *(_QWORD *)v19 )
+      v42 = (UFG::qPropertySet *)&v19[*(_QWORD *)v19];
+    else
+      v42 = 0i64;
+    v20 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x38ui64, "AudioCurve", 0i64, 1u);
+    v21 = (UFG::AudioCurve *)v20;
+    if ( v20 )
     {
-      v20 = UFG::qPropertyList::GetValuePtr(v5, 0x1Au, v19);
-      if ( v20 && *(_QWORD *)v20 )
-        v43 = (UFG::qPropertySet *)&v20[*(_QWORD *)v20];
-      else
-        v43 = 0i64;
-      v21 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x38ui64, "AudioCurve", 0i64, 1u);
-      v22 = (UFG::AudioCurve *)v21;
-      if ( v21 )
-      {
-        LODWORD(v21->mNext) = 0;
-        *(UFG::allocator::free_link **)((char *)&v21->mNext + 4) = 0i64;
-        v21[2].mNext = 0i64;
-        v21[3].mNext = 0i64;
-        v21[5].mNext = 0i64;
-        LODWORD(v21[6].mNext) = 0;
-        ++UFG::AudioCurve::sm_count;
-      }
-      else
-      {
-        v22 = 0i64;
-      }
-      v23 = v3->m_curves.size;
-      v37 = v23;
-      v24 = v23 + 1;
-      v25 = v3->m_curves.capacity;
-      if ( v23 + 1 > v25 )
-      {
-        if ( v25 )
-          v26 = 2 * v25;
-        else
-          v26 = 1;
-        for ( ; v26 < v24; v26 *= 2 )
-          ;
-        if ( v26 <= 2 )
-          v26 = 2;
-        if ( v26 - v24 > 0x10000 )
-          v26 = v23 + 65537;
-        if ( v26 != v23 )
-        {
-          v27 = 8i64 * v26;
-          if ( !is_mul_ok(v26, 8ui64) )
-            v27 = -1i64;
-          v28 = UFG::qMalloc(v27, "m_childCurveSets", 0i64);
-          v35 = v28;
-          if ( v3->m_curves.p )
-          {
-            v29 = 0;
-            if ( v3->m_curves.size )
-            {
-              do
-              {
-                v28[v29] = (UFG::allocator::free_link)v3->m_curves.p[v29];
-                ++v29;
-              }
-              while ( v29 < v3->m_curves.size );
-            }
-            operator delete[](v3->m_curves.p);
-            v28 = v35;
-          }
-          v3->m_curves.p = (UFG::AudioCurve **)v28;
-          v3->m_curves.capacity = v26;
-          v23 = v37;
-        }
-      }
-      v3->m_curves.size = v24;
-      v3->m_curves.p[v23] = v22;
-      UFG::CreateFromPropertySet(v22, v43);
-      v19 = v39 + 1;
-      v39 = v19;
-      v5 = v32;
+      LODWORD(v20->mNext) = 0;
+      *(UFG::allocator::free_link **)((char *)&v20->mNext + 4) = 0i64;
+      v20[2].mNext = 0i64;
+      v20[3].mNext = 0i64;
+      v20[5].mNext = 0i64;
+      LODWORD(v20[6].mNext) = 0;
+      ++UFG::AudioCurve::sm_count;
     }
-    while ( v19 < v41 );
+    else
+    {
+      v21 = 0i64;
+    }
+    v22 = acs->m_curves.size;
+    v36 = v22;
+    v23 = v22 + 1;
+    v24 = acs->m_curves.capacity;
+    if ( v22 + 1 > v24 )
+    {
+      if ( v24 )
+        v25 = 2 * v24;
+      else
+        v25 = 1;
+      for ( ; v25 < v23; v25 *= 2 )
+        ;
+      if ( v25 <= 2 )
+        v25 = 2;
+      if ( v25 - v23 > 0x10000 )
+        v25 = v22 + 65537;
+      if ( v25 != v22 )
+      {
+        v26 = 8i64 * v25;
+        if ( !is_mul_ok(v25, 8ui64) )
+          v26 = -1i64;
+        v27 = (UFG::AudioCurve **)UFG::qMalloc(v26, "m_childCurveSets", 0i64);
+        v34 = v27;
+        if ( acs->m_curves.p )
+        {
+          for ( k = 0; k < acs->m_curves.size; ++k )
+            v27[k] = acs->m_curves.p[k];
+          operator delete[](acs->m_curves.p);
+          v27 = v34;
+        }
+        acs->m_curves.p = v27;
+        acs->m_curves.capacity = v25;
+        v22 = v36;
+      }
+    }
+    acs->m_curves.size = v23;
+    acs->m_curves.p[v22] = v21;
+    UFG::CreateFromPropertySet(v21, v42);
+    v18 = j + 1;
+    j = v18;
   }
   return 1;
 }
@@ -941,88 +947,81 @@ char __fastcall UFG::CreateFromPropertySet(UFG::AudioCurveSet *acs, UFG::qProper
 // RVA: 0x5AB860
 char __fastcall UFG::EngineCurve::SetUpFromPropertySet(UFG::EngineCurve *this, UFG::qPropertySet *ps)
 {
-  UFG::qPropertySet *v2; // rbx
-  UFG::EngineCurve *v3; // r15
   float *v5; // rax
   UFG::qPropertyList *v6; // rax
   UFG::qPropertyList *v7; // r13
-  UFG::qArray<UFG::qReflectInventoryBase *,0> *v8; // r14
-  unsigned int v9; // er12
-  char *v10; // rax
+  UFG::qArray<UFG::qReflectInventoryBase *,0> *p_m_namedCurveSets; // r14
+  unsigned int i; // r12d
+  char *ValuePtr; // rax
   UFG::qPropertySet *v11; // rsi
   UFG::allocator::free_link *v12; // rax
   UFG::AudioCurveSet *v13; // rbx
-  __int64 v14; // rbp
+  __int64 size; // rbp
   unsigned int v15; // edi
-  unsigned int v16; // edx
+  unsigned int capacity; // edx
   unsigned int v17; // edx
-  unsigned int v18; // [rsp+88h] [rbp+10h]
+  unsigned int mNumElements; // [rsp+88h] [rbp+10h]
 
-  v2 = ps;
-  v3 = this;
   if ( !ps )
     return 0;
   this->m_name.mUID = ps->mName.mUID;
-  v5 = UFG::qPropertySet::Get<float>(ps, (UFG::qSymbol *)&EngAudioSym_maxRpm.mUID, DEPTH_RECURSE);
+  v5 = UFG::qPropertySet::Get<float>(ps, (UFG::qArray<unsigned long,0> *)&EngAudioSym_maxRpm, DEPTH_RECURSE);
   if ( v5 )
-    v3->m_maxRpm = *v5;
+    this->m_maxRpm = *v5;
   else
-    v3->m_maxRpm = 0.0;
-  v6 = UFG::qPropertySet::Get<UFG::qPropertyList>(v2, (UFG::qSymbol *)&EngAudioSym_gear_list.mUID, DEPTH_RECURSE);
+    this->m_maxRpm = 0.0;
+  v6 = UFG::qPropertySet::Get<UFG::qPropertyList>(
+         ps,
+         (UFG::qArray<unsigned long,0> *)&EngAudioSym_gear_list,
+         DEPTH_RECURSE);
   v7 = v6;
   if ( !v6 )
     return 0;
-  v8 = (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&v3->m_namedCurveSets;
-  v18 = v6->mNumElements;
-  v9 = 0;
-  if ( v18 )
+  p_m_namedCurveSets = (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&this->m_namedCurveSets;
+  mNumElements = v6->mNumElements;
+  for ( i = 0; i < mNumElements; ++i )
   {
-    do
+    ValuePtr = UFG::qPropertyList::GetValuePtr(v7, 0x1Au, i);
+    if ( !ValuePtr || (v11 = (UFG::qPropertySet *)&ValuePtr[*(_QWORD *)ValuePtr], !*(_QWORD *)ValuePtr) )
+      v11 = 0i64;
+    if ( v11->mName.mUID == EngAudioSym_Gear0.mUID )
+      p_m_namedCurveSets = (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&this->m_gears;
+    v12 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x38ui64, "AudioCurveSet", 0i64, 1u);
+    v13 = (UFG::AudioCurveSet *)v12;
+    if ( v12 )
     {
-      v10 = UFG::qPropertyList::GetValuePtr(v7, 0x1Au, v9);
-      if ( !v10 || (v11 = (UFG::qPropertySet *)&v10[*(_QWORD *)v10], !*(_QWORD *)v10) )
-        v11 = 0i64;
-      if ( v11->mName.mUID == EngAudioSym_Gear0.mUID )
-        v8 = (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&v3->m_gears;
-      v12 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x38ui64, "AudioCurveSet", 0i64, 1u);
-      v13 = (UFG::AudioCurveSet *)v12;
-      if ( v12 )
-      {
-        v12->mNext = v12;
-        v12[1].mNext = v12;
-        LODWORD(v12[2].mNext) = UFG::gNullQSymbol;
-        v12[4].mNext = 0i64;
-        v12[3].mNext = 0i64;
-        v12[6].mNext = 0i64;
-        v12[5].mNext = 0i64;
-      }
-      else
-      {
-        v13 = 0i64;
-      }
-      v14 = v8->size;
-      v15 = v14 + 1;
-      v16 = v8->capacity;
-      if ( (signed int)v14 + 1 > v16 )
-      {
-        if ( v16 )
-          v17 = 2 * v16;
-        else
-          v17 = 1;
-        for ( ; v17 < v15; v17 *= 2 )
-          ;
-        if ( v17 <= 2 )
-          v17 = 2;
-        if ( v17 - v15 > 0x10000 )
-          v17 = v14 + 65537;
-        UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(v8, v17, "curveSetArray");
-      }
-      v8->size = v15;
-      v8->p[v14] = (UFG::qReflectInventoryBase *)v13;
-      UFG::CreateFromPropertySet(v13, v11);
-      ++v9;
+      v12->mNext = v12;
+      v12[1].mNext = v12;
+      LODWORD(v12[2].mNext) = UFG::gNullQSymbol;
+      v12[4].mNext = 0i64;
+      v12[3].mNext = 0i64;
+      v12[6].mNext = 0i64;
+      v12[5].mNext = 0i64;
     }
-    while ( v9 < v18 );
+    else
+    {
+      v13 = 0i64;
+    }
+    size = p_m_namedCurveSets->size;
+    v15 = size + 1;
+    capacity = p_m_namedCurveSets->capacity;
+    if ( (int)size + 1 > capacity )
+    {
+      if ( capacity )
+        v17 = 2 * capacity;
+      else
+        v17 = 1;
+      for ( ; v17 < v15; v17 *= 2 )
+        ;
+      if ( v17 <= 2 )
+        v17 = 2;
+      if ( v17 - v15 > 0x10000 )
+        v17 = size + 65537;
+      UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(p_m_namedCurveSets, v17, "curveSetArray");
+    }
+    p_m_namedCurveSets->size = v15;
+    p_m_namedCurveSets->p[size] = (UFG::qReflectInventoryBase *)v13;
+    UFG::CreateFromPropertySet(v13, v11);
   }
   return 1;
 }
@@ -1031,118 +1030,98 @@ char __fastcall UFG::EngineCurve::SetUpFromPropertySet(UFG::EngineCurve *this, U
 // RVA: 0x5A9CF0
 void __fastcall UFG::EngineCurve::Reload(UFG::EngineCurve *this, UFG::qPropertySet *ps)
 {
-  UFG::qPropertySet *v2; // rbx
-  UFG::EngineCurve *v3; // rdi
-
-  v2 = ps;
-  v3 = this;
   UFG::EngineCurve::DestroyEngineCurve(this);
-  UFG::EngineCurve::SetUpFromPropertySet(v3, v2);
+  UFG::EngineCurve::SetUpFromPropertySet(this, ps);
 }
 
 // File Line: 383
 // RVA: 0x59ADA0
 void __fastcall UFG::EngineCurve::DestroyCurveSet(UFG::EngineCurve *this, UFG::AudioCurveSet *curveSet)
 {
-  UFG::AudioCurveSet *v2; // rbx
   unsigned int v3; // edi
-  signed __int64 v4; // rbp
-  UFG::AudioCurve **v5; // rax
-  UFG::AudioCurve *v6; // rsi
-  unsigned int v7; // esi
-  signed __int64 v8; // rbp
-  UFG::AudioCurveSet *v9; // rdi
-  UFG::AudioCurveSet **v10; // rcx
-  UFG::AudioCurve **v11; // rcx
-  UFG::qNode<UFG::AudioCurveSet,UFG::AudioCurveSet> *v12; // rcx
-  UFG::qNode<UFG::AudioCurveSet,UFG::AudioCurveSet> *v13; // rax
-  UFG::AudioCurveSet **v14; // rcx
-  UFG::AudioCurve **v15; // rcx
-  UFG::EngineCurve *v16; // [rsp+50h] [rbp+8h]
+  UFG::AudioCurve **p; // rax
+  char *v5; // rsi
+  unsigned int i; // esi
+  UFG::AudioCurveSet *v7; // rdi
+  UFG::AudioCurveSet **v8; // rcx
+  UFG::AudioCurve **v9; // rcx
+  UFG::qNode<UFG::AudioCurveSet,UFG::AudioCurveSet> *mPrev; // rcx
+  UFG::qNode<UFG::AudioCurveSet,UFG::AudioCurveSet> *mNext; // rax
+  UFG::AudioCurveSet **v12; // rcx
+  UFG::AudioCurve **v13; // rcx
+  UFG::EngineCurve *v14; // [rsp+50h] [rbp+8h]
 
-  v16 = this;
-  v2 = curveSet;
+  v14 = this;
   v3 = 0;
   if ( curveSet->m_curves.size )
   {
     do
     {
-      v4 = v3;
-      UFG::qMemoryPool::Free(&g_AudioComponentPool, (void *)v2->m_curves.p[v4]->m_graphCurve.fDomain);
-      v5 = v2->m_curves.p;
-      v6 = v5[v4];
-      if ( v6 )
+      UFG::qMemoryPool::Free(&g_AudioComponentPool, (char *)curveSet->m_curves.p[v3]->m_graphCurve.fDomain);
+      p = curveSet->m_curves.p;
+      v5 = (char *)p[v3];
+      if ( v5 )
       {
-        UFG::AudioCurve::~AudioCurve(v5[v4]);
-        UFG::qMemoryPool::Free(&g_AudioComponentPool, v6);
+        UFG::AudioCurve::~AudioCurve(p[v3]);
+        UFG::qMemoryPool::Free(&g_AudioComponentPool, v5);
       }
-      v2->m_curves.p[v4] = 0i64;
-      ++v3;
+      curveSet->m_curves.p[v3++] = 0i64;
     }
-    while ( v3 < v2->m_curves.size );
-    this = v16;
+    while ( v3 < curveSet->m_curves.size );
+    this = v14;
   }
-  v7 = 0;
-  if ( v2->m_childCurveSets.size )
+  for ( i = 0; i < curveSet->m_childCurveSets.size; this = v14 )
   {
-    do
+    UFG::EngineCurve::DestroyCurveSet(this, curveSet->m_childCurveSets.p[i]);
+    v7 = curveSet->m_childCurveSets.p[i];
+    if ( v7 )
     {
-      v8 = v7;
-      UFG::EngineCurve::DestroyCurveSet(this, v2->m_childCurveSets.p[v8]);
-      v9 = v2->m_childCurveSets.p[v8];
+      v8 = v7->m_childCurveSets.p;
+      if ( v8 )
+        operator delete[](v8);
+      v7->m_childCurveSets.p = 0i64;
+      *(_QWORD *)&v7->m_childCurveSets.size = 0i64;
+      v9 = v7->m_curves.p;
       if ( v9 )
-      {
-        v10 = v9->m_childCurveSets.p;
-        if ( v10 )
-          operator delete[](v10);
-        v9->m_childCurveSets.p = 0i64;
-        *(_QWORD *)&v9->m_childCurveSets.size = 0i64;
-        v11 = v9->m_curves.p;
-        if ( v11 )
-          operator delete[](v11);
-        v9->m_curves.p = 0i64;
-        *(_QWORD *)&v9->m_curves.size = 0i64;
-        v12 = v9->mPrev;
-        v13 = v9->mNext;
-        v12->mNext = v13;
-        v13->mPrev = v12;
-        v9->mPrev = (UFG::qNode<UFG::AudioCurveSet,UFG::AudioCurveSet> *)&v9->mPrev;
-        v9->mNext = (UFG::qNode<UFG::AudioCurveSet,UFG::AudioCurveSet> *)&v9->mPrev;
-        UFG::qMemoryPool::Free(&g_AudioComponentPool, v9);
-      }
-      v2->m_childCurveSets.p[v8] = 0i64;
-      ++v7;
-      this = v16;
+        operator delete[](v9);
+      v7->m_curves.p = 0i64;
+      *(_QWORD *)&v7->m_curves.size = 0i64;
+      mPrev = v7->mPrev;
+      mNext = v7->mNext;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
+      v7->mPrev = v7;
+      v7->mNext = v7;
+      UFG::qMemoryPool::Free(&g_AudioComponentPool, (char *)v7);
     }
-    while ( v7 < v2->m_childCurveSets.size );
+    curveSet->m_childCurveSets.p[i++] = 0i64;
   }
-  v14 = v2->m_childCurveSets.p;
-  if ( v14 )
-    operator delete[](v14);
-  v2->m_childCurveSets.p = 0i64;
-  *(_QWORD *)&v2->m_childCurveSets.size = 0i64;
-  v15 = v2->m_curves.p;
-  if ( v15 )
-    operator delete[](v15);
-  v2->m_curves.p = 0i64;
-  *(_QWORD *)&v2->m_curves.size = 0i64;
+  v12 = curveSet->m_childCurveSets.p;
+  if ( v12 )
+    operator delete[](v12);
+  curveSet->m_childCurveSets.p = 0i64;
+  *(_QWORD *)&curveSet->m_childCurveSets.size = 0i64;
+  v13 = curveSet->m_curves.p;
+  if ( v13 )
+    operator delete[](v13);
+  curveSet->m_curves.p = 0i64;
+  *(_QWORD *)&curveSet->m_curves.size = 0i64;
 }
 
 // File Line: 421
 // RVA: 0x59AF20
 void __fastcall UFG::EngineCurve::DestroyEngineCurve(UFG::EngineCurve *this)
 {
-  UFG::EngineCurve *v1; // rbx
-  unsigned int v2; // esi
-  signed __int64 v3; // r14
-  UFG::AudioCurveSet *v4; // rdi
-  UFG::AudioCurveSet **v5; // rcx
-  UFG::AudioCurve **v6; // rcx
-  UFG::qNode<UFG::AudioCurveSet,UFG::AudioCurveSet> *v7; // rcx
-  UFG::qNode<UFG::AudioCurveSet,UFG::AudioCurveSet> *v8; // rax
-  UFG::AudioCurveSet **v9; // rcx
   unsigned int i; // esi
-  signed __int64 v11; // r14
+  __int64 v3; // r14
+  UFG::AudioCurveSet *v4; // rdi
+  UFG::AudioCurveSet **p; // rcx
+  UFG::AudioCurve **v6; // rcx
+  UFG::qNode<UFG::AudioCurveSet,UFG::AudioCurveSet> *mPrev; // rcx
+  UFG::qNode<UFG::AudioCurveSet,UFG::AudioCurveSet> *mNext; // rax
+  UFG::AudioCurveSet **v9; // rcx
+  unsigned int j; // esi
+  __int64 v11; // r14
   UFG::AudioCurveSet *v12; // rdi
   UFG::AudioCurveSet **v13; // rcx
   UFG::AudioCurve **v14; // rcx
@@ -1150,51 +1129,44 @@ void __fastcall UFG::EngineCurve::DestroyEngineCurve(UFG::EngineCurve *this)
   UFG::qNode<UFG::AudioCurveSet,UFG::AudioCurveSet> *v16; // rax
   UFG::AudioCurveSet **v17; // rcx
 
-  v1 = this;
   this->m_name = UFG::gNullQSymbol;
-  v2 = 0;
-  if ( this->m_gears.size )
+  for ( i = 0; i < this->m_gears.size; ++i )
   {
-    do
+    v3 = i;
+    UFG::EngineCurve::DestroyCurveSet(this, this->m_gears.p[v3]);
+    v4 = this->m_gears.p[v3];
+    if ( v4 )
     {
-      v3 = v2;
-      UFG::EngineCurve::DestroyCurveSet(v1, v1->m_gears.p[v3]);
-      v4 = v1->m_gears.p[v3];
-      if ( v4 )
-      {
-        v5 = v4->m_childCurveSets.p;
-        if ( v5 )
-          operator delete[](v5);
-        v4->m_childCurveSets.p = 0i64;
-        *(_QWORD *)&v4->m_childCurveSets.size = 0i64;
-        v6 = v4->m_curves.p;
-        if ( v6 )
-          operator delete[](v6);
-        v4->m_curves.p = 0i64;
-        *(_QWORD *)&v4->m_curves.size = 0i64;
-        v7 = v4->mPrev;
-        v8 = v4->mNext;
-        v7->mNext = v8;
-        v8->mPrev = v7;
-        v4->mPrev = (UFG::qNode<UFG::AudioCurveSet,UFG::AudioCurveSet> *)&v4->mPrev;
-        v4->mNext = (UFG::qNode<UFG::AudioCurveSet,UFG::AudioCurveSet> *)&v4->mPrev;
-        UFG::qMemoryPool::Free(&g_AudioComponentPool, v4);
-      }
-      v1->m_gears.p[v3] = 0i64;
-      ++v2;
+      p = v4->m_childCurveSets.p;
+      if ( p )
+        operator delete[](p);
+      v4->m_childCurveSets.p = 0i64;
+      *(_QWORD *)&v4->m_childCurveSets.size = 0i64;
+      v6 = v4->m_curves.p;
+      if ( v6 )
+        operator delete[](v6);
+      v4->m_curves.p = 0i64;
+      *(_QWORD *)&v4->m_curves.size = 0i64;
+      mPrev = v4->mPrev;
+      mNext = v4->mNext;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
+      v4->mPrev = v4;
+      v4->mNext = v4;
+      UFG::qMemoryPool::Free(&g_AudioComponentPool, (char *)v4);
     }
-    while ( v2 < v1->m_gears.size );
+    this->m_gears.p[v3] = 0i64;
   }
-  v9 = v1->m_gears.p;
+  v9 = this->m_gears.p;
   if ( v9 )
     operator delete[](v9);
-  v1->m_gears.p = 0i64;
-  *(_QWORD *)&v1->m_gears.size = 0i64;
-  for ( i = 0; i < v1->m_namedCurveSets.size; ++i )
+  this->m_gears.p = 0i64;
+  *(_QWORD *)&this->m_gears.size = 0i64;
+  for ( j = 0; j < this->m_namedCurveSets.size; ++j )
   {
-    v11 = i;
-    UFG::EngineCurve::DestroyCurveSet(v1, v1->m_namedCurveSets.p[v11]);
-    v12 = v1->m_namedCurveSets.p[v11];
+    v11 = j;
+    UFG::EngineCurve::DestroyCurveSet(this, this->m_namedCurveSets.p[v11]);
+    v12 = this->m_namedCurveSets.p[v11];
     if ( v12 )
     {
       v13 = v12->m_childCurveSets.p;
@@ -1211,37 +1183,35 @@ void __fastcall UFG::EngineCurve::DestroyEngineCurve(UFG::EngineCurve *this)
       v16 = v12->mNext;
       v15->mNext = v16;
       v16->mPrev = v15;
-      v12->mPrev = (UFG::qNode<UFG::AudioCurveSet,UFG::AudioCurveSet> *)&v12->mPrev;
-      v12->mNext = (UFG::qNode<UFG::AudioCurveSet,UFG::AudioCurveSet> *)&v12->mPrev;
-      UFG::qMemoryPool::Free(&g_AudioComponentPool, v12);
+      v12->mPrev = v12;
+      v12->mNext = v12;
+      UFG::qMemoryPool::Free(&g_AudioComponentPool, (char *)v12);
     }
-    v1->m_namedCurveSets.p[v11] = 0i64;
+    this->m_namedCurveSets.p[v11] = 0i64;
   }
-  v17 = v1->m_namedCurveSets.p;
+  v17 = this->m_namedCurveSets.p;
   if ( v17 )
     operator delete[](v17);
-  v1->m_namedCurveSets.p = 0i64;
-  *(_QWORD *)&v1->m_namedCurveSets.size = 0i64;
-  v1->m_refCount = 0;
+  this->m_namedCurveSets.p = 0i64;
+  *(_QWORD *)&this->m_namedCurveSets.size = 0i64;
+  this->m_refCount = 0;
 }
 
 // File Line: 457
 // RVA: 0x59BF40
 UFG::AudioCurve *__fastcall UFG::AudioCurveSet::FindCurve(UFG::AudioCurveSet *this, UFG::qSymbol *type)
 {
-  UFG::AudioCurveSet *v2; // rdi
   unsigned int v3; // ebx
   int v4; // ebp
   UFG::AudioCurveSymbolManager *v5; // rsi
   UFG::AudioCurve *v6; // rax
   UFG::qSymbol *v7; // rax
-  signed __int64 v8; // rdx
+  __int64 v8; // rdx
   UFG::AudioCurve *result; // rax
   UFG::AudioCurve *v10; // [rsp+60h] [rbp+8h]
   UFG::qSymbol *v11; // [rsp+68h] [rbp+10h]
 
   v11 = type;
-  v2 = this;
   v3 = 0;
   v4 = 0;
   if ( this->m_curves.size )
@@ -1249,8 +1219,8 @@ UFG::AudioCurve *__fastcall UFG::AudioCurveSet::FindCurve(UFG::AudioCurveSet *th
     v5 = UFG::AudioCurveSymbolManager::ms_instance;
     while ( 1 )
     {
-      v6 = v2->m_curves.p[v4];
-      v10 = v2->m_curves.p[v4];
+      v6 = this->m_curves.p[v4];
+      v10 = v6;
       if ( !v5 )
       {
         v5 = (UFG::AudioCurveSymbolManager *)UFG::qMemoryPool::Allocate(
@@ -1282,32 +1252,30 @@ UFG::AudioCurve *__fastcall UFG::AudioCurveSet::FindCurve(UFG::AudioCurveSet *th
         v6 = v10;
       }
       if ( v5->m_symbols[v6->mId].mUID == type->mUID )
-        break;
-      if ( ++v4 >= v2->m_curves.size )
+        return this->m_curves.p[v4];
+      if ( ++v4 >= this->m_curves.size )
         goto LABEL_14;
     }
-    result = v2->m_curves.p[v4];
   }
   else
   {
 LABEL_14:
-    if ( v2->m_childCurveSets.size )
+    if ( this->m_childCurveSets.size )
     {
       while ( 1 )
       {
-        result = UFG::AudioCurveSet::FindCurve(v2->m_childCurveSets.p[v3], type);
+        result = UFG::AudioCurveSet::FindCurve(this->m_childCurveSets.p[v3], type);
         if ( result )
           break;
         ++v3;
         type = v11;
-        if ( v3 >= v2->m_childCurveSets.size )
-          goto LABEL_17;
+        if ( v3 >= this->m_childCurveSets.size )
+          return 0i64;
       }
     }
     else
     {
-LABEL_17:
-      result = 0i64;
+      return 0i64;
     }
   }
   return result;
@@ -1317,41 +1285,35 @@ LABEL_17:
 // RVA: 0x59BE30
 UFG::AudioCurveSet *__fastcall UFG::AudioCurveSet::FindChildCurveSet(UFG::AudioCurveSet *this, UFG::qSymbol *name)
 {
-  unsigned int v2; // er9
+  unsigned int size; // r9d
   __int64 v3; // rbx
-  UFG::qSymbol *v4; // rsi
-  UFG::AudioCurveSet *v5; // rdi
-  unsigned int v6; // er8
-  UFG::AudioCurveSet **v7; // rdx
+  unsigned int v6; // r8d
+  UFG::AudioCurveSet **p; // rdx
   UFG::AudioCurveSet **v8; // rcx
   UFG::AudioCurveSet *result; // rax
 
-  v2 = this->m_childCurveSets.size;
+  size = this->m_childCurveSets.size;
   v3 = 0i64;
-  v4 = name;
-  v5 = this;
   v6 = 0;
-  if ( !v2 )
+  if ( !size )
     return 0i64;
-  v7 = this->m_childCurveSets.p;
-  v8 = this->m_childCurveSets.p;
+  p = this->m_childCurveSets.p;
+  v8 = p;
   do
   {
-    if ( (*v8)->m_name.mUID == v4->mUID )
-      return v7[v6];
+    if ( (*v8)->m_name.mUID == name->mUID )
+      return p[v6];
     ++v6;
     ++v8;
   }
-  while ( v6 < v2 );
-  if ( !v2 )
-    return 0i64;
+  while ( v6 < size );
   while ( 1 )
   {
-    result = UFG::AudioCurveSet::FindChildCurveSet(v5->m_childCurveSets.p[v3], v4);
+    result = UFG::AudioCurveSet::FindChildCurveSet(this->m_childCurveSets.p[v3], name);
     if ( result )
       break;
     v3 = (unsigned int)(v3 + 1);
-    if ( (unsigned int)v3 >= v5->m_childCurveSets.size )
+    if ( (unsigned int)v3 >= this->m_childCurveSets.size )
       return 0i64;
   }
   return result;
@@ -1361,54 +1323,50 @@ UFG::AudioCurveSet *__fastcall UFG::AudioCurveSet::FindChildCurveSet(UFG::AudioC
 // RVA: 0x59CED0
 UFG::AudioCurveSet *__fastcall UFG::EngineCurve::GetGear(UFG::EngineCurve *this, unsigned int gear)
 {
-  UFG::AudioCurveSet *result; // rax
-
   if ( gear >= this->m_gears.size )
-    result = 0i64;
+    return 0i64;
   else
-    result = this->m_gears.p[gear];
-  return result;
+    return this->m_gears.p[gear];
 }
 
 // File Line: 522
 // RVA: 0x59C0B0
-UFG::AudioCurve *__fastcall UFG::EngineCurve::FindGearCurve(UFG::EngineCurve *this, unsigned int gear, UFG::qSymbol *type)
+UFG::AudioCurve *__fastcall UFG::EngineCurve::FindGearCurve(
+        UFG::EngineCurve *this,
+        unsigned int gear,
+        UFG::qSymbol *type)
 {
   UFG::AudioCurveSet *v3; // rcx
-  UFG::AudioCurve *result; // rax
 
   if ( gear < this->m_gears.size && (v3 = this->m_gears.p[gear]) != 0i64 )
-    result = UFG::AudioCurveSet::FindCurve(v3, type);
+    return UFG::AudioCurveSet::FindCurve(v3, type);
   else
-    result = 0i64;
-  return result;
+    return 0i64;
 }
 
 // File Line: 534
 // RVA: 0x59C6C0
 UFG::AudioCurveSet *__fastcall UFG::EngineCurve::FindNamedCurveSet(UFG::EngineCurve *this, UFG::qSymbol *type)
 {
-  unsigned int v2; // er9
+  unsigned int size; // r9d
   __int64 v3; // r8
-  UFG::AudioCurveSet **v4; // r10
-  unsigned int v5; // edx
-  UFG::AudioCurveSet **v6; // rcx
+  UFG::AudioCurveSet **p; // r10
+  unsigned int mUID; // edx
+  UFG::AudioCurveSet **i; // rcx
 
-  v2 = this->m_namedCurveSets.size;
+  size = this->m_namedCurveSets.size;
   v3 = 0i64;
-  if ( !v2 )
+  if ( !size )
     return 0i64;
-  v4 = this->m_namedCurveSets.p;
-  v5 = type->mUID;
-  v6 = this->m_namedCurveSets.p;
-  while ( (*v6)->m_name.mUID != v5 )
+  p = this->m_namedCurveSets.p;
+  mUID = type->mUID;
+  for ( i = p; (*i)->m_name.mUID != mUID; ++i )
   {
     v3 = (unsigned int)(v3 + 1);
-    ++v6;
-    if ( (unsigned int)v3 >= v2 )
+    if ( (unsigned int)v3 >= size )
       return 0i64;
   }
-  return v4[v3];
+  return p[v3];
 }
 
 // File Line: 563
@@ -1444,7 +1402,7 @@ __int64 UFG::_dynamic_initializer_for__gsymEngineManifest__()
 
   v0 = UFG::qStringHash32("vehicles-audio-engines-manifest", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::gsymEngineManifest, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gsymEngineManifest__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gsymEngineManifest__);
 }
 
 // File Line: 577
@@ -1455,35 +1413,36 @@ __int64 UFG::_dynamic_initializer_for__gsymEngines__()
 
   v0 = UFG::qStringHash32("engines", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::gsymEngines, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gsymEngines__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gsymEngines__);
 }
 
 // File Line: 599
 // RVA: 0x59C900
-UFG::qNode<UFG::EngineCurve,UFG::EngineCurve> *__fastcall UFG::EngineManager::FindOrCreateEngine(UFG::EngineManager *this, UFG::qSymbol *propSetName, fastdelegate::FastDelegate1<char const *,void> *hotSwapFileCallback)
+UFG::EngineCurve *__fastcall UFG::EngineManager::FindOrCreateEngine(
+        UFG::EngineManager *this,
+        UFG::qSymbol *propSetName,
+        fastdelegate::FastDelegate1<char const *,void> *hotSwapFileCallback)
 {
-  UFG::EngineManager *v3; // rdi
-  UFG::qNode<UFG::EngineCurve,UFG::EngineCurve> *v4; // rbx
-  UFG::qPropertySet *v5; // rbp
+  UFG::qNode<UFG::EngineCurve,UFG::EngineCurve> *mNext; // rbx
+  UFG::qPropertySet *PropertySet; // rbp
   UFG::allocator::free_link *v6; // rax
-  UFG::qNode<UFG::EngineCurve,UFG::EngineCurve> *v7; // rcx
+  UFG::qNode<UFG::EngineCurve,UFG::EngineCurve> *mPrev; // rcx
 
-  v3 = this;
-  v4 = this->m_engineList.mNode.mNext;
-  if ( v4 != (UFG::qNode<UFG::EngineCurve,UFG::EngineCurve> *)this )
+  mNext = this->m_engineList.mNode.mNext;
+  if ( mNext != (UFG::qNode<UFG::EngineCurve,UFG::EngineCurve> *)this )
   {
-    while ( !v4 || LODWORD(v4[3].mPrev) != propSetName->mUID )
+    while ( !mNext || LODWORD(mNext[3].mPrev) != propSetName->mUID )
     {
-      v4 = v4->mNext;
-      if ( v4 == (UFG::qNode<UFG::EngineCurve,UFG::EngineCurve> *)this )
+      mNext = mNext->mNext;
+      if ( mNext == (UFG::qNode<UFG::EngineCurve,UFG::EngineCurve> *)this )
         goto LABEL_5;
     }
     goto LABEL_10;
   }
 LABEL_5:
-  v5 = UFG::PropertySetManager::GetPropertySet(propSetName);
+  PropertySet = UFG::PropertySetManager::GetPropertySet(propSetName);
   v6 = UFG::qMemoryPool::Allocate(&g_AudioComponentPool, 0x40ui64, "EngineCurve", 0i64, 1u);
-  v4 = (UFG::qNode<UFG::EngineCurve,UFG::EngineCurve> *)v6;
+  mNext = (UFG::qNode<UFG::EngineCurve,UFG::EngineCurve> *)v6;
   if ( v6 )
   {
     v6->mNext = v6;
@@ -1497,23 +1456,23 @@ LABEL_5:
   }
   else
   {
-    v4 = 0i64;
+    mNext = 0i64;
   }
-  if ( UFG::EngineCurve::SetUpFromPropertySet((UFG::EngineCurve *)v4, v5) )
+  if ( UFG::EngineCurve::SetUpFromPropertySet((UFG::EngineCurve *)mNext, PropertySet) )
   {
-    v7 = v3->m_engineList.mNode.mPrev;
-    v7->mNext = v4;
-    v4->mPrev = v7;
-    v4->mNext = &v3->m_engineList.mNode;
-    v3->m_engineList.mNode.mPrev = v4;
+    mPrev = this->m_engineList.mNode.mPrev;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    mNext->mNext = &this->m_engineList.mNode;
+    this->m_engineList.mNode.mPrev = mNext;
 LABEL_10:
-    ++LODWORD(v4[3].mNext);
-    return v4;
+    ++LODWORD(mNext[3].mNext);
+    return (UFG::EngineCurve *)mNext;
   }
-  if ( v4 )
+  if ( mNext )
   {
-    UFG::EngineCurve::~EngineCurve((UFG::EngineCurve *)v4);
-    UFG::qMemoryPool::Free(&g_AudioComponentPool, v4);
+    UFG::EngineCurve::~EngineCurve((UFG::EngineCurve *)mNext);
+    UFG::qMemoryPool::Free(&g_AudioComponentPool, (char *)mNext);
   }
   return 0i64;
 }
@@ -1522,29 +1481,29 @@ LABEL_10:
 // RVA: 0x5A9C80
 void __fastcall UFG::EngineManager::ReleaseEngine(UFG::EngineManager *this, UFG::qSymbol *engineName)
 {
-  UFG::qNode<UFG::EngineCurve,UFG::EngineCurve> *v2; // rbx
-  UFG::qNode<UFG::EngineCurve,UFG::EngineCurve> *v3; // rcx
+  UFG::qNode<UFG::EngineCurve,UFG::EngineCurve> *mNext; // rbx
+  UFG::qNode<UFG::EngineCurve,UFG::EngineCurve> *mPrev; // rcx
   UFG::qNode<UFG::EngineCurve,UFG::EngineCurve> *v4; // rax
 
-  v2 = this->m_engineList.mNode.mNext;
-  if ( v2 != (UFG::qNode<UFG::EngineCurve,UFG::EngineCurve> *)this )
+  mNext = this->m_engineList.mNode.mNext;
+  if ( mNext != (UFG::qNode<UFG::EngineCurve,UFG::EngineCurve> *)this )
   {
-    while ( !v2 || LODWORD(v2[3].mPrev) != engineName->mUID )
+    while ( !mNext || LODWORD(mNext[3].mPrev) != engineName->mUID )
     {
-      v2 = v2->mNext;
-      if ( v2 == (UFG::qNode<UFG::EngineCurve,UFG::EngineCurve> *)this )
+      mNext = mNext->mNext;
+      if ( mNext == (UFG::qNode<UFG::EngineCurve,UFG::EngineCurve> *)this )
         return;
     }
-    if ( --LODWORD(v2[3].mNext) <= 0 )
+    if ( (int)--LODWORD(mNext[3].mNext) <= 0 )
     {
-      v3 = v2->mPrev;
-      v4 = v2->mNext;
-      v3->mNext = v4;
-      v4->mPrev = v3;
-      v2->mPrev = v2;
-      v2->mNext = v2;
-      UFG::EngineCurve::~EngineCurve((UFG::EngineCurve *)v2);
-      UFG::qMemoryPool::Free(&g_AudioComponentPool, v2);
+      mPrev = mNext->mPrev;
+      v4 = mNext->mNext;
+      mPrev->mNext = v4;
+      v4->mPrev = mPrev;
+      mNext->mPrev = mNext;
+      mNext->mNext = mNext;
+      UFG::EngineCurve::~EngineCurve((UFG::EngineCurve *)mNext);
+      UFG::qMemoryPool::Free(&g_AudioComponentPool, (char *)mNext);
     }
   }
 }

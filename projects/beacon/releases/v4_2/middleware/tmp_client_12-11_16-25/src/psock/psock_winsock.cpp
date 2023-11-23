@@ -10,13 +10,13 @@ void OSuite::psock::platform::GetDefaultProxyServer()
   char *i; // rax
   char *v6; // rax
   char *v7; // rsi
-  int v8; // er8
+  int v8; // r8d
   unsigned __int64 v9; // rdx
   size_t v10; // rax
-  DWORD pcbData; // [rsp+40h] [rbp-B8h]
-  int pvData; // [rsp+44h] [rbp-B4h]
-  DWORD pdwType; // [rsp+48h] [rbp-B0h]
-  char str1; // [rsp+50h] [rbp-A8h]
+  DWORD pcbData; // [rsp+40h] [rbp-B8h] BYREF
+  int pvData; // [rsp+44h] [rbp-B4h] BYREF
+  DWORD pdwType; // [rsp+48h] [rbp-B0h] BYREF
+  char str1[248]; // [rsp+50h] [rbp-A8h] BYREF
 
   pcbData = 4;
   if ( !SHRegGetUSValueA_0(
@@ -35,34 +35,34 @@ void OSuite::psock::platform::GetDefaultProxyServer()
             "Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings",
             "ProxyServer",
             &pdwType,
-            &str1,
+            str1,
             &pcbData,
             0,
             0i64,
             0) )
     {
-      v0 = strstr(&str1, "socks=");
+      v0 = strstr(str1, "socks=");
       if ( v0 )
       {
         v1 = v0 + 6;
-        v2 = 2;
+        v2 = PROXY_SOCKS5;
       }
       else
       {
-        v3 = strstr(&str1, "https=");
+        v3 = strstr(str1, "https=");
         if ( v3 )
         {
           v1 = v3 + 6;
-          v2 = 1;
+          v2 = PROXY_HTTP_CONNECT;
         }
         else
         {
-          v4 = strstr(&str1, "http=");
-          v2 = 3;
+          v4 = strstr(str1, "http=");
+          v2 = PROXY_HTTP;
           if ( v4 )
             v1 = v4 + 5;
           else
-            v1 = &str1;
+            v1 = str1;
         }
       }
       for ( i = v1; *i != 59; ++i )
@@ -85,7 +85,7 @@ void OSuite::psock::platform::GetDefaultProxyServer()
         v9 = v10;
       }
       OSuite::psock::SetProxyInfo(v1, v9, v8, v2);
-      if ( v2 == 3 )
+      if ( v2 == PROXY_HTTP )
         OSuite::psock::ProbeHttpProxy();
     }
   }
@@ -95,14 +95,14 @@ void OSuite::psock::platform::GetDefaultProxyServer()
 // RVA: 0xEEC294
 char __fastcall OSuite::psock::platform::InitializePlatform()
 {
-  HMODULE v0; // rax
+  HMODULE LibraryA; // rax
 
-  v0 = LoadLibraryA("iphlpapi.dll");
-  g_hIphlpapi = v0;
-  if ( v0 )
+  LibraryA = LoadLibraryA("iphlpapi.dll");
+  g_hIphlpapi = LibraryA;
+  if ( LibraryA )
   {
     g_fpGetAdaptersInfo = (unsigned int (__fastcall *)(_IP_ADAPTER_INFO *, unsigned int *))GetProcAddress(
-                                                                                             v0,
+                                                                                             LibraryA,
                                                                                              "GetAdaptersInfo");
     g_fpGetIpAddrTable = (unsigned int (__fastcall *)(_MIB_IPADDRTABLE *, unsigned int *, int))GetProcAddress(
                                                                                                  g_hIphlpapi,
@@ -113,11 +113,11 @@ char __fastcall OSuite::psock::platform::InitializePlatform()
 
 // File Line: 239
 // RVA: 0xEEC4C4
-bool __fastcall OSuite::psock::platform::SetAsync(unsigned __int64 socket, bool async)
+bool __fastcall OSuite::psock::platform::SetAsync(SOCKET socket, bool async)
 {
-  u_long argp; // [rsp+20h] [rbp-18h]
+  u_long argp; // [rsp+20h] [rbp-18h] BYREF
 
-  argp = async != 0;
+  argp = async;
   return ioctlsocket(socket, -2147195266, &argp) == 0;
 }
 

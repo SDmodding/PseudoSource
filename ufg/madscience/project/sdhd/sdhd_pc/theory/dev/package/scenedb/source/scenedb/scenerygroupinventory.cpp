@@ -3,200 +3,187 @@
 __int64 UFG::_dynamic_initializer_for__gSceneryGroupInventory__()
 {
   UFG::qResourceInventory::qResourceInventory(
-    (UFG::qResourceInventory *)&UFG::gSceneryGroupInventory.vfptr,
+    &UFG::gSceneryGroupInventory,
     "SceneryGroupInventory",
     0xF0A07244,
     0x7480E00Bu,
     0,
     0);
   UFG::gSceneryGroupInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::SceneryGroupInventory::`vftable;
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSceneryGroupInventory__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSceneryGroupInventory__);
 }
 
 // File Line: 27
 // RVA: 0x230020
-void __fastcall UFG::SceneryGroupInventory::Add(UFG::SceneryGroupInventory *this, UFG::qResourceData *resource_data)
+void __fastcall UFG::SceneryGroupInventory::Add(UFG::SceneryGroupInventory *this, UFG::SceneryGroup *resource_data)
 {
-  UFG::SceneryGroup *v2; // rbp
-  UFG::SceneryGroupInventory *v3; // r15
-  UFG::qMemoryPool *v4; // rax
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
   UFG::allocator::free_link *v5; // rax
   UFG::SceneryGroupComponent *v6; // rax
-  __int64 v7; // rax
-  signed __int64 v8; // rsi
-  int v9; // er14
-  unsigned int v10; // er10
+  UFG::qBaseNodeRB *mOffset; // rax
+  char *v8; // rsi
+  int mNumObjects; // r14d
+  unsigned int i; // r10d
   __int64 v11; // rax
-  signed __int64 v12; // rcx
-  unsigned __int64 v13; // rdx
-  __int64 v14; // rax
-  signed __int64 v15; // r8
-  signed __int64 v16; // rcx
-  signed int v17; // ebx
+  char *v12; // rcx
+  char *v13; // rdx
+  UFG::qBaseNodeRB *v14; // rax
+  char *v15; // r8
+  char *v16; // rcx
+  int v17; // ebx
   UFG::qResourceHandle *v18; // rdi
-  signed __int64 v19; // rax
-  UFG::qResourceInventory *v20; // rax
+  UFG::qResourceHandle *v19; // rcx
+  UFG::qResourceInventory *Inventory; // rax
   UFG::qResourceWarehouse *v21; // rax
 
-  v2 = (UFG::SceneryGroup *)resource_data;
-  v3 = this;
   if ( resource_data )
   {
     UFG::qResourceData::qResourceData(resource_data);
-    v2->mRenderComponent = 0i64;
+    resource_data->mRenderComponent = 0i64;
   }
-  v4 = UFG::GetSimulationMemoryPool();
-  v5 = UFG::qMemoryPool::Allocate(v4, 0x78ui64, "SceneryGroupComponent", 0i64, 1u);
+  SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+  v5 = UFG::qMemoryPool::Allocate(SimulationMemoryPool, 0x78ui64, "SceneryGroupComponent", 0i64, 1u);
   if ( v5 )
-    UFG::SceneryGroupComponent::SceneryGroupComponent((UFG::SceneryGroupComponent *)v5, v2);
+    UFG::SceneryGroupComponent::SceneryGroupComponent((UFG::SceneryGroupComponent *)v5, resource_data);
   else
     v6 = 0i64;
-  v2->mRenderComponent = v6;
-  v7 = v2->mObjects.mOffset;
-  if ( v7 )
-    v8 = (signed __int64)&v2->mObjects + v7;
+  resource_data->mRenderComponent = v6;
+  mOffset = (UFG::qBaseNodeRB *)resource_data->mObjects.mOffset;
+  if ( mOffset )
+    v8 = (char *)&resource_data->mObjects + (_QWORD)mOffset;
   else
     v8 = 0i64;
-  v9 = v2->mNumObjects;
-  v10 = 0;
-  if ( v2->mNumInstances > 0u )
+  mNumObjects = resource_data->mNumObjects;
+  for ( i = 0; i < resource_data->mNumInstances; ++i )
   {
-    do
-    {
-      v11 = v2->mCullInfo.mOffset;
-      if ( v11 )
-        v12 = (signed __int64)&v2->mCullInfo + v11;
-      else
-        v12 = 0i64;
-      v13 = v12 + ((unsigned __int64)v10 << 6);
-      v14 = v2->mInstances.mOffset;
-      if ( v14 )
-        v15 = (signed __int64)&v2->mInstances + v14;
-      else
-        v15 = 0i64;
-      v16 = v15 + 96i64 * v10;
-      *(_WORD *)(v13 + 30) = 0;
-      *(_QWORD *)(v13 + 56) = v16 + 32;
-      *(_QWORD *)(v13 + 40) = v16;
-      *(_QWORD *)(v13 + 48) = v2;
-      ++v10;
-    }
-    while ( v10 < v2->mNumInstances );
+    v11 = resource_data->mCullInfo.mOffset;
+    if ( v11 )
+      v12 = (char *)&resource_data->mCullInfo + v11;
+    else
+      v12 = 0i64;
+    v13 = &v12[64 * (unsigned __int64)i];
+    v14 = (UFG::qBaseNodeRB *)resource_data->mInstances.mOffset;
+    if ( v14 )
+      v15 = (char *)&resource_data->mInstances + (_QWORD)v14;
+    else
+      v15 = 0i64;
+    v16 = &v15[96 * i];
+    *((_WORD *)v13 + 15) = 0;
+    *((_QWORD *)v13 + 7) = v16 + 32;
+    *((_QWORD *)v13 + 5) = v16;
+    *((_QWORD *)v13 + 6) = resource_data;
   }
-  for ( ; v9; v8 += 144i64 )
+  for ( ; mNumObjects; v8 += 144 )
   {
-    --v9;
+    --mNumObjects;
     v17 = 0;
     v18 = (UFG::qResourceHandle *)(v8 + 16);
     do
     {
-      v19 = 32i64 * v17;
-      if ( v19 + v8 + 16 )
-        UFG::qResourceHandle::qResourceHandle((UFG::qResourceHandle *)(v19 + v8 + 16));
-      v20 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+      v19 = (UFG::qResourceHandle *)&v8[32 * v17 + 16];
+      if ( v19 )
+        UFG::qResourceHandle::qResourceHandle(v19);
+      Inventory = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
       if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
       {
         v21 = UFG::qResourceWarehouse::Instance();
-        v20 = UFG::qResourceWarehouse::GetInventory(v21, 0xA2ADCD77);
-        `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v20;
+        Inventory = UFG::qResourceWarehouse::GetInventory(v21, 0xA2ADCD77);
+        `UFG::qGetResourceInventory<Illusion::Model>::`2::result = Inventory;
       }
-      UFG::qResourceHandle::Init(v18, 0xA2ADCD77, v18->mNameUID, v20);
+      UFG::qResourceHandle::Init(v18, 0xA2ADCD77, v18->mNameUID, Inventory);
       ++v17;
       ++v18;
     }
     while ( v17 < 2 );
   }
-  UFG::qResourceInventory::Add((UFG::qResourceInventory *)&v3->vfptr, (UFG::qResourceData *)&v2->mNode);
-  if ( v2->mSectionVisIndex >= 0x400u )
-    UFG::FarGroundLayout::OnFarGroundSceneryGroupLoad(v2);
+  UFG::qResourceInventory::Add(this, resource_data);
+  if ( resource_data->mSectionVisIndex >= 0x400u )
+    UFG::FarGroundLayout::OnFarGroundSceneryGroupLoad(resource_data);
 }
 
 // File Line: 96
 // RVA: 0x234E10
-void __fastcall UFG::SceneryGroupInventory::Remove(UFG::SceneryGroupInventory *this, UFG::qResourceData *resource_data)
+void __fastcall UFG::SceneryGroupInventory::Remove(UFG::SceneryGroupInventory *this, UFG::SceneryGroup *resource_data)
 {
-  UFG::qResourceData *v2; // r14
-  UFG::SceneryGroupInventory *v3; // rbx
-  UFG::qBaseNodeRB *v4; // rax
-  signed __int64 v5; // rbp
-  int v6; // esi
-  signed __int64 v7; // rbp
+  UFG::qBaseNodeRB *mOffset; // rax
+  char *v5; // rbp
+  int mNumObjects; // esi
+  UFG::qResourceHandle *v7; // rbp
   UFG::qResourceHandle *v8; // rbx
-  signed __int64 v9; // rdi
-  UFG::qResourceInventory *v10; // rax
+  __int64 v9; // rdi
+  UFG::qResourceInventory *Inventory; // rax
   UFG::qResourceWarehouse *v11; // rax
-  __int64 v12; // rcx
-  UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0> *v13; // rdi
-  UFG::qResourceHandle *v14; // rbx
-  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v15; // rdx
+  UFG::SceneryGroupComponent *mRenderComponent; // rcx
+  UFG::qList<UFG::qResourceHandle,UFG::qResourceHandle,1,0> *p_mResourceHandles; // rdi
+  UFG::qResourceHandle *mNext; // rbx
+  UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *mPrev; // rdx
   UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v16; // rax
   UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v17; // rcx
   UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *v18; // rax
 
-  v2 = resource_data;
-  v3 = this;
-  if ( *(_WORD *)&resource_data[1].mDebugName[30] >= 0x400u )
-    UFG::FarGroundLayout::OnFarGroundSceneryGroupUnload((UFG::SceneryGroup *)resource_data);
-  UFG::qResourceInventory::Remove((UFG::qResourceInventory *)&v3->vfptr, v2);
-  v4 = v2[1].mNode.mChild[0];
-  if ( v4 )
-    v5 = (signed __int64)v2[1].mNode.mChild + (_QWORD)v4;
+  if ( resource_data->mSectionVisIndex >= 0x400u )
+    UFG::FarGroundLayout::OnFarGroundSceneryGroupUnload(resource_data);
+  UFG::qResourceInventory::Remove(this, resource_data);
+  mOffset = (UFG::qBaseNodeRB *)resource_data->mObjects.mOffset;
+  if ( mOffset )
+    v5 = (char *)&resource_data->mObjects + (_QWORD)mOffset;
   else
     v5 = 0i64;
-  v6 = LOWORD(v2[1].mNode.mParent);
-  if ( LOWORD(v2[1].mNode.mParent) )
+  mNumObjects = resource_data->mNumObjects;
+  if ( resource_data->mNumObjects )
   {
-    v7 = v5 + 16;
+    v7 = (UFG::qResourceHandle *)(v5 + 16);
     do
     {
-      --v6;
-      v8 = (UFG::qResourceHandle *)v7;
+      --mNumObjects;
+      v8 = v7;
       v9 = 2i64;
       do
       {
-        v10 = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
+        Inventory = `UFG::qGetResourceInventory<Illusion::Model>::`2::result;
         if ( !`UFG::qGetResourceInventory<Illusion::Model>::`2::result )
         {
           v11 = UFG::qResourceWarehouse::Instance();
-          v10 = UFG::qResourceWarehouse::GetInventory(v11, 0xA2ADCD77);
-          `UFG::qGetResourceInventory<Illusion::Model>::`2::result = v10;
+          Inventory = UFG::qResourceWarehouse::GetInventory(v11, 0xA2ADCD77);
+          `UFG::qGetResourceInventory<Illusion::Model>::`2::result = Inventory;
         }
-        UFG::qResourceHandle::Close(v8, v10);
-        ++v8;
+        UFG::qResourceHandle::Close(v8++, Inventory);
         --v9;
       }
       while ( v9 );
-      v7 += 144i64;
+      v7 = (UFG::qResourceHandle *)((char *)v7 + 144);
     }
-    while ( v6 );
+    while ( mNumObjects );
   }
-  v12 = *(_QWORD *)&v2[1].mTypeUID;
-  if ( v12 )
-    (**(void (__fastcall ***)(signed __int64, signed __int64))(v12 + 24))(v12 + 24, 1i64);
-  *(_QWORD *)&v2[1].mTypeUID = 0i64;
-  v13 = &v2->mResourceHandles;
-  v14 = (UFG::qResourceHandle *)v2->mResourceHandles.mNode.mNext;
-  if ( v14 != (UFG::qResourceHandle *)&v2->mResourceHandles )
+  mRenderComponent = resource_data->mRenderComponent;
+  if ( mRenderComponent )
+    mRenderComponent->UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr->__vecDelDtor(
+      &mRenderComponent->UFG::SimComponent,
+      1u);
+  resource_data->mRenderComponent = 0i64;
+  p_mResourceHandles = &resource_data->mResourceHandles;
+  mNext = (UFG::qResourceHandle *)resource_data->mResourceHandles.UFG::qResourceData::mNode.mNext;
+  if ( mNext != (UFG::qResourceHandle *)&resource_data->mResourceHandles )
   {
     do
     {
-      v15 = v14->mPrev;
-      v16 = v14->mNext;
-      v15->mNext = v16;
-      v16->mPrev = v15;
-      v14->mPrev = (UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *)&v14->mPrev;
-      v14->mNext = (UFG::qNode<UFG::qResourceHandle,UFG::qResourceHandle> *)&v14->mPrev;
-      UFG::qResourceHandle::~qResourceHandle(v14);
-      operator delete[](v14);
-      v14 = (UFG::qResourceHandle *)v2->mResourceHandles.mNode.mNext;
+      mPrev = mNext->mPrev;
+      v16 = mNext->mNext;
+      mPrev->mNext = v16;
+      v16->mPrev = mPrev;
+      mNext->mPrev = mNext;
+      mNext->mNext = mNext;
+      UFG::qResourceHandle::~qResourceHandle(mNext);
+      operator delete[](mNext);
+      mNext = (UFG::qResourceHandle *)resource_data->mResourceHandles.UFG::qResourceData::mNode.mNext;
     }
-    while ( v14 != (UFG::qResourceHandle *)v13 );
+    while ( mNext != (UFG::qResourceHandle *)p_mResourceHandles );
   }
-  v17 = v13->mNode.mPrev;
-  v18 = v2->mResourceHandles.mNode.mNext;
+  v17 = p_mResourceHandles->mNode.mPrev;
+  v18 = resource_data->mResourceHandles.UFG::qResourceData::mNode.mNext;
   v17->mNext = v18;
   v18->mPrev = v17;
-  v13->mNode.mPrev = &v13->mNode;
-  v2->mResourceHandles.mNode.mNext = &v2->mResourceHandles.mNode;
+  p_mResourceHandles->mNode.mPrev = &p_mResourceHandles->mNode;
+  resource_data->mResourceHandles.UFG::qResourceData::mNode.mNext = &resource_data->mResourceHandles.UFG::qResourceData::mNode;
 }
 

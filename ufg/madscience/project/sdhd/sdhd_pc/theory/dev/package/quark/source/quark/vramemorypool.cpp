@@ -2,20 +2,20 @@
 // RVA: 0x1467BB0
 __int64 UFG::_dynamic_initializer_for__VRAMChannel__()
 {
-  UFG::VRAMChannel.mLogFilename.mPrev = (UFG::qNode<UFG::qString,UFG::qString> *)&UFG::VRAMChannel.mLogFilename.mPrev;
-  UFG::VRAMChannel.mLogFilename.mNext = (UFG::qNode<UFG::qString,UFG::qString> *)&UFG::VRAMChannel.mLogFilename.mPrev;
+  UFG::VRAMChannel.mLogFilename.mPrev = &UFG::VRAMChannel.mLogFilename;
+  UFG::VRAMChannel.mLogFilename.mNext = &UFG::VRAMChannel.mLogFilename;
   *(_QWORD *)&UFG::VRAMChannel.mLogFilename.mMagic = 16909060i64;
   UFG::VRAMChannel.mLogFilename.mData = (char *)UFG::qString::sEmptyString;
   *(_QWORD *)&UFG::VRAMChannel.mLogFilename.mStringHash32 = -1i64;
-  return atexit(UFG::_dynamic_atexit_destructor_for__VRAMChannel__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__VRAMChannel__);
 }
 
 // File Line: 116
 // RVA: 0x1623A0
 void __fastcall UFG::qVRAMemoryHandle::qVRAMemoryHandle(UFG::qVRAMemoryHandle *this)
 {
-  this->mPrev = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&this->mPrev;
-  this->mNext = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&this->mPrev;
+  this->mPrev = this;
+  this->mNext = this;
   this->mData = 0i64;
   *(_DWORD *)&this->mReadOnlyAndPoolID = 0;
   UFG::qPrintChannel::Print(
@@ -26,87 +26,95 @@ void __fastcall UFG::qVRAMemoryHandle::qVRAMemoryHandle(UFG::qVRAMemoryHandle *t
 
 // File Line: 122
 // RVA: 0x1622A0
-UFG::qVRAMemoryHandle::qVRAMemoryHandle
+void __fastcall UFG::qVRAMemoryHandle::qVRAMemoryHandle(UFG::qVRAMemoryHandle *this, UFG::qVRAMemoryHandle *handle)
+{
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *mNext; // rax
+
+  this->mPrev = this;
+  this->mNext = this;
+  this->mData = 0i64;
+  *(_DWORD *)&this->mReadOnlyAndPoolID = 0;
+  UFG::qVRAMemoryPools::GetAllocatedSize(handle);
+  UFG::qVRAMemoryPools::GetAllocatedSize(handle);
+  UFG::qPrintChannel::Print(
+    &UFG::VRAMChannel,
+    OUTPUT_LEVEL_DEBUG,
+    "[VRAM Channel] - Creating new qVRAMemoryHandle(%p) from existing handle(%p) - PoolID:0x%02x BlockID:0x%04x Data:%p-%"
+    "p AllocatedSize:%u\n");
+  if ( handle->mPrev != handle || handle->mNext != handle )
+  {
+    if ( handle->mData )
+    {
+      mNext = handle->mNext;
+      handle->mNext = this;
+      this->mPrev = handle;
+      this->mNext = mNext;
+      mNext->mPrev = this;
+      this->mData = handle->mData;
+      this->mReadOnlyAndPoolID = handle->mReadOnlyAndPoolID;
+      this->mBlockID = handle->mBlockID;
+    }
+  }
+}
 
 // File Line: 137
 // RVA: 0x164800
-UFG::qVRAMemoryHandle *__fastcall UFG::qVRAMemoryHandle::operator=(UFG::qVRAMemoryHandle *this, UFG::qVRAMemoryHandle *handle)
+UFG::qVRAMemoryHandle *__fastcall UFG::qVRAMemoryHandle::operator=(
+        UFG::qVRAMemoryHandle *this,
+        UFG::qVRAMemoryHandle *handle)
 {
-  UFG::qVRAMemoryHandle *v2; // r14
-  UFG::qVRAMemoryHandle *v3; // rsi
-  char *v4; // rbx
-  signed __int64 v5; // ST40_8
-  char *v6; // ST38_8
-  int v7; // ST30_4
-  int v8; // ST28_4
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v9; // rax
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *mNext; // rax
 
-  v2 = this;
-  v3 = handle;
   UFG::qVRAMemoryPools::GetAllocatedSize(handle);
-  v4 = v3->mData;
-  v5 = (signed __int64)&v4[UFG::qVRAMemoryPools::GetAllocatedSize(v3) - 1];
-  v6 = v3->mData;
-  v7 = v3->mBlockID;
-  v8 = v3->mReadOnlyAndPoolID & 0x7FFF;
+  UFG::qVRAMemoryPools::GetAllocatedSize(handle);
   UFG::qPrintChannel::Print(
     &UFG::VRAMChannel,
     OUTPUT_LEVEL_DEBUG,
     "[VRAM Channel] - Assigning qVRAMemoryHandle(%p) from existing handle(%p) - PoolID:0x%02x BlockID:0x%04x Data:%p-%p A"
     "llocatedSize:%u\n");
-  UFG::qVRAMemoryHandle::Close(v2);
-  if ( (UFG::qVRAMemoryHandle *)v3->mPrev != v3 || (UFG::qVRAMemoryHandle *)v3->mNext != v3 )
+  UFG::qVRAMemoryHandle::Close(this);
+  if ( handle->mPrev != handle || handle->mNext != handle )
   {
-    if ( v3->mData )
+    if ( handle->mData )
     {
-      v9 = v3->mNext;
-      v3->mNext = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v2->mPrev;
-      v2->mPrev = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v3->mPrev;
-      v2->mNext = v9;
-      v9->mPrev = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v2->mPrev;
-      v2->mData = v3->mData;
-      v2->mReadOnlyAndPoolID = v3->mReadOnlyAndPoolID;
-      v2->mBlockID = v3->mBlockID;
+      mNext = handle->mNext;
+      handle->mNext = this;
+      this->mPrev = handle;
+      this->mNext = mNext;
+      mNext->mPrev = this;
+      this->mData = handle->mData;
+      this->mReadOnlyAndPoolID = handle->mReadOnlyAndPoolID;
+      this->mBlockID = handle->mBlockID;
     }
   }
-  return v2;
+  return this;
 }
 
 // File Line: 157
 // RVA: 0x164550
 void __fastcall UFG::qVRAMemoryHandle::~qVRAMemoryHandle(UFG::qVRAMemoryHandle *this)
 {
-  UFG::qVRAMemoryHandle *v1; // rsi
-  char *v2; // rbx
-  signed __int64 v3; // ST38_8
-  char *v4; // ST30_8
-  int v5; // ST28_4
-  int v6; // ST20_4
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v7; // rcx
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v8; // rax
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *mPrev; // rcx
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *mNext; // rax
 
-  v1 = this;
   UFG::qVRAMemoryPools::GetAllocatedSize(this);
-  v2 = v1->mData;
-  v3 = (signed __int64)&v2[UFG::qVRAMemoryPools::GetAllocatedSize(v1) - 1];
-  v4 = v1->mData;
-  v5 = v1->mBlockID;
-  v6 = v1->mReadOnlyAndPoolID & 0x7FFF;
+  UFG::qVRAMemoryPools::GetAllocatedSize(this);
   UFG::qPrintChannel::Print(
     &UFG::VRAMChannel,
     OUTPUT_LEVEL_DEBUG,
     "[VRAM Channel] - Deleting qVRAMemoryHandle(%p) was pointing at - PoolID:0x%02x BlockID:0x%04x Data:%p-%p AllocatedSize:%u\n");
-  UFG::qVRAMemoryHandle::Close(v1);
-  v7 = v1->mPrev;
-  v8 = v1->mNext;
-  v7->mNext = v8;
-  v8->mPrev = v7;
-  v1->mPrev = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v1->mPrev;
-  v1->mNext = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v1->mPrev;
+  UFG::qVRAMemoryHandle::Close(this);
+  mPrev = this->mPrev;
+  mNext = this->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->mPrev = this;
+  this->mNext = this;
 }
 
 // File Line: 170
 // RVA: 0x16F2E0
+// attributes: thunk
 unsigned int __fastcall UFG::qVRAMemoryHandle::GetAllocatedSize(UFG::qVRAMemoryHandle *this)
 {
   return UFG::qVRAMemoryPools::GetAllocatedSize(this);
@@ -114,6 +122,7 @@ unsigned int __fastcall UFG::qVRAMemoryHandle::GetAllocatedSize(UFG::qVRAMemoryH
 
 // File Line: 180
 // RVA: 0x1772B0
+// attributes: thunk
 bool __fastcall UFG::qVRAMemoryHandle::Lock(UFG::qVRAMemoryHandle *this)
 {
   return UFG::qVRAMemoryPools::Lock(this);
@@ -121,6 +130,7 @@ bool __fastcall UFG::qVRAMemoryHandle::Lock(UFG::qVRAMemoryHandle *this)
 
 // File Line: 185
 // RVA: 0x17F370
+// attributes: thunk
 bool __fastcall UFG::qVRAMemoryHandle::Unlock(UFG::qVRAMemoryHandle *this)
 {
   return UFG::qVRAMemoryPools::Unlock(this);
@@ -130,92 +140,73 @@ bool __fastcall UFG::qVRAMemoryHandle::Unlock(UFG::qVRAMemoryHandle *this)
 // RVA: 0x168110
 void __fastcall UFG::qVRAMemoryHandle::Close(UFG::qVRAMemoryHandle *this)
 {
-  UFG::qVRAMemoryHandle *v1; // rsi
-  char *v2; // rbx
-  signed __int64 v3; // ST38_8
-  char *v4; // ST30_8
-  int v5; // ST28_4
-  int v6; // ST20_4
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v7; // rax
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v8; // rcx
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *mNext; // rax
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *mPrev; // rcx
 
-  v1 = this;
   UFG::qVRAMemoryPools::GetAllocatedSize(this);
-  v2 = v1->mData;
-  v3 = (signed __int64)&v2[UFG::qVRAMemoryPools::GetAllocatedSize(v1) - 1];
-  v4 = v1->mData;
-  v5 = v1->mBlockID;
-  v6 = v1->mReadOnlyAndPoolID & 0x7FFF;
+  UFG::qVRAMemoryPools::GetAllocatedSize(this);
   UFG::qPrintChannel::Print(
     &UFG::VRAMChannel,
     OUTPUT_LEVEL_DEBUG,
     "[VRAM Channel] - Closing qVRAMemoryHandle(%p) was pointing at - PoolID:0x%02x BlockID:0x%04x Data:%p-%p AllocatedSize:%u\n");
-  if ( v1->mData )
+  if ( this->mData )
   {
-    v7 = v1->mNext;
-    v8 = v1->mPrev;
-    v8->mNext = v7;
-    v7->mPrev = v8;
-    v1->mPrev = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v1->mPrev;
-    v1->mNext = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v1->mPrev;
-    v1->mData = 0i64;
-    *(_DWORD *)&v1->mReadOnlyAndPoolID = 0;
+    mNext = this->mNext;
+    mPrev = this->mPrev;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    this->mPrev = this;
+    this->mNext = this;
+    this->mData = 0i64;
+    *(_DWORD *)&this->mReadOnlyAndPoolID = 0;
   }
 }
 
 // File Line: 210
 // RVA: 0x17CB70
-void __fastcall UFG::qVRAMemoryHandle::Set(UFG::qVRAMemoryHandle *this, char *data, unsigned int size, unsigned __int16 pool_id, unsigned __int16 block_id)
+void __fastcall UFG::qVRAMemoryHandle::Set(
+        UFG::qVRAMemoryHandle *this,
+        char *data,
+        unsigned int size,
+        unsigned __int16 pool_id,
+        unsigned __int16 block_id)
 {
-  unsigned __int16 v5; // bp
-  UFG::qVRAMemoryHandle *v6; // rsi
-  char *v7; // rdi
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v8; // rcx
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v9; // rax
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *mPrev; // rcx
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *mNext; // rax
 
-  v5 = pool_id;
-  v6 = this;
-  v7 = data;
   UFG::qPrintChannel::Print(
     &UFG::VRAMChannel,
     OUTPUT_LEVEL_DEBUG,
     "[VRAM Channel] - Setting qVRAMemoryHandle(%p) to point at - PoolID:0x%02x BlockID:0x%04x Data:%p-%p AllocatedSize:%u\n");
-  v8 = v6->mPrev;
-  v9 = v6->mNext;
-  v8->mNext = v9;
-  v9->mPrev = v8;
-  v6->mReadOnlyAndPoolID = v5;
-  v6->mBlockID = block_id;
-  v6->mPrev = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v6->mPrev;
-  v6->mNext = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v6->mPrev;
-  v6->mData = v7;
+  mPrev = this->mPrev;
+  mNext = this->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->mReadOnlyAndPoolID = pool_id;
+  this->mBlockID = block_id;
+  this->mPrev = this;
+  this->mNext = this;
+  this->mData = data;
 }
 
 // File Line: 260
 // RVA: 0x15FED0
 void __fastcall UFG::BlockInfo::BlockInfo(UFG::BlockInfo *this)
 {
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v1; // rax
-  UFG::qList<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly,1,0> *v2; // [rsp+28h] [rbp+10h]
-  UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *v3; // [rsp+28h] [rbp+10h]
-
-  this->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&this->mPrev;
-  this->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&this->mPrev;
-  v1 = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&this->mPrev;
-  v1->mPrev = v1;
-  v1->mNext = v1;
-  v2 = &this->mAllocationHandles;
-  v2->mNode.mPrev = &v2->mNode;
-  v2->mNode.mNext = &v2->mNode;
+  this->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev = this;
+  this->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext = this;
+  this->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev = &this->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+  this->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext = &this->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+  this->mAllocationHandles.mNode.mPrev = &this->mAllocationHandles.mNode;
+  this->mAllocationHandles.mNode.mNext = &this->mAllocationHandles.mNode;
   this->mData = 0i64;
   this->mName = 0i64;
   *(_QWORD *)&this->mRequestedSize = 0i64;
   *(_DWORD *)&this->mBlockID = 0xFFFF;
   *(_WORD *)&this->mKeepAliveFrames = 0;
   this->mMemoryPool = 0i64;
-  v3 = &this->mContainedBlocks;
-  v3->mNode.mPrev = &v3->mNode;
-  v3->mNode.mNext = &v3->mNode;
+  this->mContainedBlocks.mNode.mPrev = &this->mContainedBlocks.mNode;
+  this->mContainedBlocks.mNode.mNext = &this->mContainedBlocks.mNode;
   *(_DWORD *)&this->mContainerID = -1;
   this->mCallbackData64 = 0i64;
   this->mCallbackData32 = 0;
@@ -223,75 +214,106 @@ void __fastcall UFG::BlockInfo::BlockInfo(UFG::BlockInfo *this)
 
 // File Line: 265
 // RVA: 0x162D00
-UFG::BlockInfo::~BlockInfo
+void __fastcall UFG::BlockInfo::~BlockInfo(UFG::BlockInfo *this)
+{
+  UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *p_mContainedBlocks; // rbx
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *mPrev; // rcx
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *mNext; // rax
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v5; // rcx
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v6; // rax
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v7; // rcx
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v8; // rax
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v9; // rcx
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v10; // rax
+
+  p_mContainedBlocks = &this->mContainedBlocks;
+  UFG::qList<UFG::BlockInfo,UFG::Primary,1,0>::DeleteNodes(&this->mContainedBlocks);
+  mPrev = p_mContainedBlocks->mNode.mPrev;
+  mNext = p_mContainedBlocks->mNode.mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  p_mContainedBlocks->mNode.mPrev = &p_mContainedBlocks->mNode;
+  p_mContainedBlocks->mNode.mNext = &p_mContainedBlocks->mNode;
+  UFG::qList<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly,1,0>::DeleteNodes(&this->mAllocationHandles);
+  v5 = this->mAllocationHandles.mNode.mPrev;
+  v6 = this->mAllocationHandles.mNode.mNext;
+  v5->mNext = v6;
+  v6->mPrev = v5;
+  this->mAllocationHandles.mNode.mPrev = &this->mAllocationHandles.mNode;
+  this->mAllocationHandles.mNode.mNext = &this->mAllocationHandles.mNode;
+  v7 = this->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev;
+  v8 = this->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext;
+  v7->mNext = v8;
+  v8->mPrev = v7;
+  this->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev = &this->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+  this->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext = &this->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+  v9 = this->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev;
+  v10 = this->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext;
+  v9->mNext = v10;
+  v10->mPrev = v9;
+  this->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev = this;
+  this->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext = this;
+}
 
 // File Line: 270
 // RVA: 0x17CF20
 void __fastcall UFG::BlockInfo::SetFree(UFG::BlockInfo *this)
 {
-  unsigned int v1; // edi
-  char *v2; // rbx
-  __int64 v3; // r9
-  UFG::BlockInfo *v4; // rsi
+  unsigned int mActualSize; // edi
+  char *mData; // rbx
 
-  v1 = this->mActualSize;
-  v2 = this->mData;
-  v3 = this->mBlockID;
-  v4 = this;
+  mActualSize = this->mActualSize;
+  mData = this->mData;
   UFG::qPrintChannel::Print(
     &UFG::VRAMChannel,
     OUTPUT_LEVEL_DEBUG,
     "[VRAM Channel] - Setting Block ID:0x%04x to free data:%p size:0x%08x (%9u)\n");
-  v4->mName = "Free VRAM";
-  v4->mData = v2;
-  v4->mRequestedSize = v1;
-  v4->mActualSize = v1;
-  v4->mMemoryPool = 0i64;
-  v4->mContainerID = 0;
-  v4->mCallbackData64 = 0i64;
-  v4->mCallbackData32 = 0;
-  *(_DWORD *)&v4->mUsage = 1;
+  this->mName = "Free VRAM";
+  this->mData = mData;
+  this->mRequestedSize = mActualSize;
+  this->mActualSize = mActualSize;
+  this->mMemoryPool = 0i64;
+  this->mContainerID = 0;
+  this->mCallbackData64 = 0i64;
+  this->mCallbackData32 = 0;
+  *(_DWORD *)&this->mUsage = 1;
 }
 
 // File Line: 447
 // RVA: 0x16B9B0
 void __fastcall UFG::BlockInfo::DefragmentMovedTo(UFG::BlockInfo *this, char *new_location)
 {
-  __int64 v2; // r9
-  UFG::BlockInfo *v3; // rdi
-  char *v4; // rbx
-  char *v5; // ST20_8
-  UFG::BlockInfo *v6; // rcx
-  int v7; // er8
-  UFG::BlockInfo *v8; // rbx
-  signed __int64 v9; // rdi
-  __int64 v10; // rsi
+  UFG::BlockInfo *mNext; // rcx
+  int v5; // r8d
+  UFG::BlockInfo *v6; // rbx
+  UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *p_mContainedBlocks; // rdi
+  __int64 v8; // rsi
 
-  v2 = this->mBlockID;
-  v3 = this;
-  v4 = new_location;
-  v5 = this->mData;
   UFG::qPrintChannel::Print(
     &UFG::VRAMChannel,
     OUTPUT_LEVEL_NORMAL,
     "[VRAM Channel] - Moving Block ID:0x%04x from %p to %p\n");
-  v6 = (UFG::BlockInfo *)v3->mAllocationHandles.mNode.mNext;
-  v7 = (_DWORD)v4 - LODWORD(v3->mData);
-  for ( v3->mData = v4; v6 != (UFG::BlockInfo *)&v3->mAllocationHandles; v6 = (UFG::BlockInfo *)v6->mNext )
-    v6->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)v3->mData;
-  if ( (unsigned __int8)(v3->mUsage - 9) <= 1u )
+  mNext = (UFG::BlockInfo *)this->mAllocationHandles.mNode.mNext;
+  v5 = (_DWORD)new_location - LODWORD(this->mData);
+  for ( this->mData = new_location;
+        mNext != (UFG::BlockInfo *)&this->mAllocationHandles;
+        mNext = (UFG::BlockInfo *)mNext->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext )
   {
-    v8 = (UFG::BlockInfo *)v3->mContainedBlocks.mNode.mNext;
-    v9 = (signed __int64)&v3->mContainedBlocks;
-    if ( v8 != (UFG::BlockInfo *)v9 )
+    mNext->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)this->mData;
+  }
+  if ( (unsigned __int8)(this->mUsage - 9) <= 1u )
+  {
+    v6 = (UFG::BlockInfo *)this->mContainedBlocks.mNode.mNext;
+    p_mContainedBlocks = &this->mContainedBlocks;
+    if ( v6 != (UFG::BlockInfo *)p_mContainedBlocks )
     {
-      v10 = v7;
+      v8 = v5;
       do
       {
-        UFG::BlockInfo::DefragmentMovedTo(v8, &v8->mData[v10]);
-        v8 = (UFG::BlockInfo *)v8->mNext;
+        UFG::BlockInfo::DefragmentMovedTo(v6, &v6->mData[v8]);
+        v6 = (UFG::BlockInfo *)v6->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext;
       }
-      while ( v8 != (UFG::BlockInfo *)v9 );
+      while ( v6 != (UFG::BlockInfo *)p_mContainedBlocks );
     }
   }
 }
@@ -300,60 +322,55 @@ void __fastcall UFG::BlockInfo::DefragmentMovedTo(UFG::BlockInfo *this, char *ne
 // RVA: 0x178CD0
 void __fastcall UFG::BlockInfo::Print(UFG::BlockInfo *this, bool print_container_contents)
 {
-  unsigned __int8 v2; // al
-  bool v3; // bl
-  UFG::BlockInfo *v4; // rdi
+  unsigned __int8 mUsage; // al
   const char *v5; // r10
-  UFG::BlockInfo *v6; // rbx
-  signed __int64 i; // rdi
-  __int64 v8; // [rsp+20h] [rbp-38h]
-  __int64 v9; // [rsp+28h] [rbp-30h]
-  __int64 v10; // [rsp+30h] [rbp-28h]
+  UFG::BlockInfo *mNext; // rbx
+  UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *i; // rdi
+  unsigned int mRequestedSize; // [rsp+20h] [rbp-38h]
+  unsigned int mActualSize; // [rsp+28h] [rbp-30h]
 
-  v2 = this->mUsage;
-  v3 = print_container_contents;
-  v4 = this;
-  if ( v2 == 11 )
+  mUsage = this->mUsage;
+  if ( mUsage == 11 )
   {
-    LODWORD(v10) = 21;
-    LODWORD(v9) = this->mActualSize;
-    LODWORD(v8) = this->mRequestedSize;
+    mRequestedSize = this->mRequestedSize;
     UFG::qPrintf(
       "      BlockID:%05u [%p - %p] %9u bytes requested %9u bytes allocated type(%*s) name:(%.64s)\n",
       this->mBlockID,
       this->mData,
-      &this->mData[this->mRequestedSize - 1],
-      v8,
-      v9,
-      v10,
+      &this->mData[mRequestedSize - 1],
+      mRequestedSize,
+      this->mActualSize,
+      21,
       off_14203C4E8[0],
       this->mName);
   }
   else
   {
-    if ( v2 > 0x12u )
+    if ( mUsage > 0x12u )
       v5 = "Unknown VRAMType";
     else
-      v5 = off_14203C490[v2];
-    LODWORD(v10) = 21;
-    LODWORD(v9) = this->mActualSize;
-    LODWORD(v8) = this->mRequestedSize;
+      v5 = off_14203C490[mUsage];
+    mActualSize = this->mActualSize;
     UFG::qPrintf(
       "    BlockID  :%05u [%p - %p] %9u bytes requested %9u bytes allocated type(%*s) name:(%.64s)\n",
       this->mBlockID,
       this->mData,
-      &this->mData[this->mActualSize - 1],
-      v8,
-      v9,
-      v10,
+      &this->mData[mActualSize - 1],
+      this->mRequestedSize,
+      mActualSize,
+      21,
       v5,
       this->mName);
   }
-  if ( v3 == 1 )
+  if ( print_container_contents )
   {
-    v6 = (UFG::BlockInfo *)v4->mContainedBlocks.mNode.mNext;
-    for ( i = (signed __int64)&v4->mContainedBlocks; v6 != (UFG::BlockInfo *)i; v6 = (UFG::BlockInfo *)v6->mNext )
-      UFG::BlockInfo::Print(v6, 1);
+    mNext = (UFG::BlockInfo *)this->mContainedBlocks.mNode.mNext;
+    for ( i = &this->mContainedBlocks;
+          mNext != (UFG::BlockInfo *)i;
+          mNext = (UFG::BlockInfo *)mNext->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext )
+    {
+      UFG::BlockInfo::Print(mNext, 1);
+    }
   }
 }
 
@@ -361,91 +378,73 @@ void __fastcall UFG::BlockInfo::Print(UFG::BlockInfo *this, bool print_container
 // RVA: 0x1623F0
 void __fastcall UFG::qVRAMemoryPool::qVRAMemoryPool(UFG::qVRAMemoryPool *this)
 {
-  UFG::qVRAMemoryPool *v1; // rbx
   const char *v2; // rdx
-  signed int v3; // er8
-  char *v4; // rax
+  int v3; // r8d
+  char *mName; // rax
   char v5; // cl
-  UFG::qVRAMemoryHandle *v6; // [rsp+48h] [rbp+10h]
-  UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *v7; // [rsp+48h] [rbp+10h]
-  UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *v8; // [rsp+48h] [rbp+10h]
-  UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *v9; // [rsp+48h] [rbp+10h]
-  UFG::qList<UFG::BlockInfo,UFG::Secondary,1,0> *v10; // [rsp+48h] [rbp+10h]
-  UFG::qList<UFG::BlockInfo,UFG::Secondary,1,0> *v11; // [rsp+48h] [rbp+10h]
-  UFG::qList<UFG::BlockInfo,UFG::Secondary,1,0> *v12; // [rsp+48h] [rbp+10h]
-  UFG::qList<UFG::BlockInfo,UFG::Secondary,1,0> *v13; // [rsp+48h] [rbp+10h]
 
-  v1 = this;
-  this->mPrev = (UFG::qNode<UFG::qVRAMemoryPool,UFG::qVRAMemoryPool> *)&this->mPrev;
-  this->mNext = (UFG::qNode<UFG::qVRAMemoryPool,UFG::qVRAMemoryPool> *)&this->mPrev;
-  UFG::qMutex::qMutex(&this->mPoolLock, &customWorldMapCaption);
-  v6 = &v1->mPoolMemory;
-  v6->mPrev = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v6->mPrev;
-  v6->mNext = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v6->mPrev;
-  v1->mPoolMemory.mData = 0i64;
-  *(_DWORD *)&v1->mPoolMemory.mReadOnlyAndPoolID = 0;
+  this->mPrev = this;
+  this->mNext = this;
+  UFG::qMutex::qMutex(&this->mPoolLock, &customCaption);
+  this->mPoolMemory.mPrev = &this->mPoolMemory;
+  this->mPoolMemory.mNext = &this->mPoolMemory;
+  this->mPoolMemory.mData = 0i64;
+  *(_DWORD *)&this->mPoolMemory.mReadOnlyAndPoolID = 0;
   UFG::qPrintChannel::Print(
     &UFG::VRAMChannel,
     OUTPUT_LEVEL_DEBUG,
     "[VRAM Channel] - Creating new empty qVRAMemoryHandle(%p)\n");
-  v1->mVRAMemoryStart = 0i64;
-  v1->mVRAMemorySize = 0;
-  v1->mMainMemoryPool = 0i64;
-  v1->mOverflowVRAM = 0i64;
-  v1->mOverflowMain = 0i64;
-  v7 = &v1->mUnusedBlocks;
-  v7->mNode.mPrev = &v7->mNode;
-  v7->mNode.mNext = &v7->mNode;
-  v8 = &v1->mMainMemoryBlocks;
-  v8->mNode.mPrev = &v8->mNode;
-  v8->mNode.mNext = &v8->mNode;
-  v9 = &v1->mUsedBlocks;
-  v9->mNode.mPrev = &v9->mNode;
-  v9->mNode.mNext = &v9->mNode;
-  v10 = &v1->mFreeList;
-  v10->mNode.mPrev = &v10->mNode;
-  v10->mNode.mNext = &v10->mNode;
-  v11 = &v1->mPendingFreeList;
-  v11->mNode.mPrev = &v11->mNode;
-  v11->mNode.mNext = &v11->mNode;
-  v12 = &v1->mMoveTargetsList;
-  v12->mNode.mPrev = &v12->mNode;
-  v12->mNode.mNext = &v12->mNode;
-  v13 = &v1->mContainerList;
-  v13->mNode.mPrev = &v13->mNode;
-  v13->mNode.mNext = &v13->mNode;
-  v1->mBlocks = 0i64;
-  v1->mBlocksMemory = 0i64;
-  v1->mBlocksMemorySize = 0;
-  v1->mNumBlocksTotal = -1;
-  *(_QWORD *)&v1->mMinAlignment = 256i64;
-  *(_QWORD *)&v1->mLargestFreeBlock = 0i64;
-  *(_QWORD *)&v1->mPeakUsedMemory = 0i64;
-  *(_QWORD *)&v1->mAlignmentLoss = 0i64;
-  *(_QWORD *)&v1->mUsedBlocksCount = 0i64;
-  v1->mPoolID = -1;
-  v1->mDefragFreeFrameDelay = 2;
-  *(_DWORD *)&v1->mDefragAllowed = 1;
-  v1->mValidate = 0;
+  this->mVRAMemoryStart = 0i64;
+  this->mVRAMemorySize = 0;
+  this->mMainMemoryPool = 0i64;
+  this->mOverflowVRAM = 0i64;
+  this->mOverflowMain = 0i64;
+  this->mUnusedBlocks.mNode.mPrev = &this->mUnusedBlocks.mNode;
+  this->mUnusedBlocks.mNode.mNext = &this->mUnusedBlocks.mNode;
+  this->mMainMemoryBlocks.mNode.mPrev = &this->mMainMemoryBlocks.mNode;
+  this->mMainMemoryBlocks.mNode.mNext = &this->mMainMemoryBlocks.mNode;
+  this->mUsedBlocks.mNode.mPrev = &this->mUsedBlocks.mNode;
+  this->mUsedBlocks.mNode.mNext = &this->mUsedBlocks.mNode;
+  this->mFreeList.mNode.mPrev = &this->mFreeList.mNode;
+  this->mFreeList.mNode.mNext = &this->mFreeList.mNode;
+  this->mPendingFreeList.mNode.mPrev = &this->mPendingFreeList.mNode;
+  this->mPendingFreeList.mNode.mNext = &this->mPendingFreeList.mNode;
+  this->mMoveTargetsList.mNode.mPrev = &this->mMoveTargetsList.mNode;
+  this->mMoveTargetsList.mNode.mNext = &this->mMoveTargetsList.mNode;
+  this->mContainerList.mNode.mPrev = &this->mContainerList.mNode;
+  this->mContainerList.mNode.mNext = &this->mContainerList.mNode;
+  this->mBlocks = 0i64;
+  this->mBlocksMemory = 0i64;
+  this->mBlocksMemorySize = 0;
+  this->mNumBlocksTotal = -1;
+  *(_QWORD *)&this->mMinAlignment = 256i64;
+  *(_QWORD *)&this->mLargestFreeBlock = 0i64;
+  *(_QWORD *)&this->mPeakUsedMemory = 0i64;
+  *(_QWORD *)&this->mAlignmentLoss = 0i64;
+  *(_QWORD *)&this->mUsedBlocksCount = 0i64;
+  this->mPoolID = -1;
+  this->mDefragFreeFrameDelay = 2;
+  *(_DWORD *)&this->mDefragAllowed = 1;
+  this->mValidate = 0;
   v2 = UFG::qVRAMemoryPool::sUninitializedName;
   v3 = 32;
-  v4 = v1->mName;
-  if ( v1 != (UFG::qVRAMemoryPool *)-312i64 )
+  mName = this->mName;
+  if ( this != (UFG::qVRAMemoryPool *)-312i64 )
   {
     if ( !UFG::qVRAMemoryPool::sUninitializedName )
-      goto LABEL_9;
+      goto LABEL_6;
     do
     {
       v5 = *v2;
-      *v4++ = *v2++;
+      *mName++ = *v2++;
       if ( !v5 )
         break;
       --v3;
     }
     while ( v3 > 1 );
-    if ( *(v4 - 1) )
-LABEL_9:
-      *v4 = 0;
+    if ( *(mName - 1) )
+LABEL_6:
+      *mName = 0;
   }
 }
 
@@ -453,9 +452,8 @@ LABEL_9:
 // RVA: 0x164610
 void __fastcall UFG::qVRAMemoryPool::~qVRAMemoryPool(UFG::qVRAMemoryPool *this)
 {
-  UFG::qVRAMemoryPool *v1; // rdi
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v2; // rcx
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v3; // rax
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *mPrev; // rcx
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *mNext; // rax
   UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v4; // rcx
   UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v5; // rax
   UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v6; // rcx
@@ -471,160 +469,136 @@ void __fastcall UFG::qVRAMemoryPool::~qVRAMemoryPool(UFG::qVRAMemoryPool *this)
   UFG::qNode<UFG::qVRAMemoryPool,UFG::qVRAMemoryPool> *v16; // rcx
   UFG::qNode<UFG::qVRAMemoryPool,UFG::qVRAMemoryPool> *v17; // rax
 
-  v1 = this;
   UFG::qVRAMemoryPool::Close(this);
-  UFG::qList<UFG::BlockInfo,UFG::Secondary,1,0>::DeleteNodes(&v1->mContainerList);
-  v2 = v1->mContainerList.mNode.mPrev;
-  v3 = v1->mContainerList.mNode.mNext;
-  v2->mNext = v3;
-  v3->mPrev = v2;
-  v1->mContainerList.mNode.mPrev = &v1->mContainerList.mNode;
-  v1->mContainerList.mNode.mNext = &v1->mContainerList.mNode;
-  UFG::qList<UFG::BlockInfo,UFG::Secondary,1,0>::DeleteNodes(&v1->mMoveTargetsList);
-  v4 = v1->mMoveTargetsList.mNode.mPrev;
-  v5 = v1->mMoveTargetsList.mNode.mNext;
+  UFG::qList<UFG::BlockInfo,UFG::Secondary,1,0>::DeleteNodes(&this->mContainerList);
+  mPrev = this->mContainerList.mNode.mPrev;
+  mNext = this->mContainerList.mNode.mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->mContainerList.mNode.mPrev = &this->mContainerList.mNode;
+  this->mContainerList.mNode.mNext = &this->mContainerList.mNode;
+  UFG::qList<UFG::BlockInfo,UFG::Secondary,1,0>::DeleteNodes(&this->mMoveTargetsList);
+  v4 = this->mMoveTargetsList.mNode.mPrev;
+  v5 = this->mMoveTargetsList.mNode.mNext;
   v4->mNext = v5;
   v5->mPrev = v4;
-  v1->mMoveTargetsList.mNode.mPrev = &v1->mMoveTargetsList.mNode;
-  v1->mMoveTargetsList.mNode.mNext = &v1->mMoveTargetsList.mNode;
-  UFG::qList<UFG::BlockInfo,UFG::Secondary,1,0>::DeleteNodes(&v1->mPendingFreeList);
-  v6 = v1->mPendingFreeList.mNode.mPrev;
-  v7 = v1->mPendingFreeList.mNode.mNext;
+  this->mMoveTargetsList.mNode.mPrev = &this->mMoveTargetsList.mNode;
+  this->mMoveTargetsList.mNode.mNext = &this->mMoveTargetsList.mNode;
+  UFG::qList<UFG::BlockInfo,UFG::Secondary,1,0>::DeleteNodes(&this->mPendingFreeList);
+  v6 = this->mPendingFreeList.mNode.mPrev;
+  v7 = this->mPendingFreeList.mNode.mNext;
   v6->mNext = v7;
   v7->mPrev = v6;
-  v1->mPendingFreeList.mNode.mPrev = &v1->mPendingFreeList.mNode;
-  v1->mPendingFreeList.mNode.mNext = &v1->mPendingFreeList.mNode;
-  UFG::qList<UFG::BlockInfo,UFG::Secondary,1,0>::DeleteNodes(&v1->mFreeList);
-  v8 = v1->mFreeList.mNode.mPrev;
-  v9 = v1->mFreeList.mNode.mNext;
+  this->mPendingFreeList.mNode.mPrev = &this->mPendingFreeList.mNode;
+  this->mPendingFreeList.mNode.mNext = &this->mPendingFreeList.mNode;
+  UFG::qList<UFG::BlockInfo,UFG::Secondary,1,0>::DeleteNodes(&this->mFreeList);
+  v8 = this->mFreeList.mNode.mPrev;
+  v9 = this->mFreeList.mNode.mNext;
   v8->mNext = v9;
   v9->mPrev = v8;
-  v1->mFreeList.mNode.mPrev = &v1->mFreeList.mNode;
-  v1->mFreeList.mNode.mNext = &v1->mFreeList.mNode;
-  UFG::qList<UFG::BlockInfo,UFG::Primary,1,0>::DeleteNodes(&v1->mUsedBlocks);
-  v10 = v1->mUsedBlocks.mNode.mPrev;
-  v11 = v1->mUsedBlocks.mNode.mNext;
+  this->mFreeList.mNode.mPrev = &this->mFreeList.mNode;
+  this->mFreeList.mNode.mNext = &this->mFreeList.mNode;
+  UFG::qList<UFG::BlockInfo,UFG::Primary,1,0>::DeleteNodes(&this->mUsedBlocks);
+  v10 = this->mUsedBlocks.mNode.mPrev;
+  v11 = this->mUsedBlocks.mNode.mNext;
   v10->mNext = v11;
   v11->mPrev = v10;
-  v1->mUsedBlocks.mNode.mPrev = &v1->mUsedBlocks.mNode;
-  v1->mUsedBlocks.mNode.mNext = &v1->mUsedBlocks.mNode;
-  UFG::qList<UFG::BlockInfo,UFG::Primary,1,0>::DeleteNodes(&v1->mMainMemoryBlocks);
-  v12 = v1->mMainMemoryBlocks.mNode.mPrev;
-  v13 = v1->mMainMemoryBlocks.mNode.mNext;
+  this->mUsedBlocks.mNode.mPrev = &this->mUsedBlocks.mNode;
+  this->mUsedBlocks.mNode.mNext = &this->mUsedBlocks.mNode;
+  UFG::qList<UFG::BlockInfo,UFG::Primary,1,0>::DeleteNodes(&this->mMainMemoryBlocks);
+  v12 = this->mMainMemoryBlocks.mNode.mPrev;
+  v13 = this->mMainMemoryBlocks.mNode.mNext;
   v12->mNext = v13;
   v13->mPrev = v12;
-  v1->mMainMemoryBlocks.mNode.mPrev = &v1->mMainMemoryBlocks.mNode;
-  v1->mMainMemoryBlocks.mNode.mNext = &v1->mMainMemoryBlocks.mNode;
-  UFG::qList<UFG::BlockInfo,UFG::Primary,1,0>::DeleteNodes(&v1->mUnusedBlocks);
-  v14 = v1->mUnusedBlocks.mNode.mPrev;
-  v15 = v1->mUnusedBlocks.mNode.mNext;
+  this->mMainMemoryBlocks.mNode.mPrev = &this->mMainMemoryBlocks.mNode;
+  this->mMainMemoryBlocks.mNode.mNext = &this->mMainMemoryBlocks.mNode;
+  UFG::qList<UFG::BlockInfo,UFG::Primary,1,0>::DeleteNodes(&this->mUnusedBlocks);
+  v14 = this->mUnusedBlocks.mNode.mPrev;
+  v15 = this->mUnusedBlocks.mNode.mNext;
   v14->mNext = v15;
   v15->mPrev = v14;
-  v1->mUnusedBlocks.mNode.mPrev = &v1->mUnusedBlocks.mNode;
-  v1->mUnusedBlocks.mNode.mNext = &v1->mUnusedBlocks.mNode;
-  UFG::qVRAMemoryHandle::~qVRAMemoryHandle(&v1->mPoolMemory);
-  Scaleform::Lock::~Lock((LPCRITICAL_SECTION)&v1->mPoolLock);
-  v16 = v1->mPrev;
-  v17 = v1->mNext;
+  this->mUnusedBlocks.mNode.mPrev = &this->mUnusedBlocks.mNode;
+  this->mUnusedBlocks.mNode.mNext = &this->mUnusedBlocks.mNode;
+  UFG::qVRAMemoryHandle::~qVRAMemoryHandle(&this->mPoolMemory);
+  Scaleform::Lock::~Lock((LPCRITICAL_SECTION)&this->mPoolLock);
+  v16 = this->mPrev;
+  v17 = this->mNext;
   v16->mNext = v17;
   v17->mPrev = v16;
-  v1->mPrev = (UFG::qNode<UFG::qVRAMemoryPool,UFG::qVRAMemoryPool> *)&v1->mPrev;
-  v1->mNext = (UFG::qNode<UFG::qVRAMemoryPool,UFG::qVRAMemoryPool> *)&v1->mPrev;
+  this->mPrev = this;
+  this->mNext = this;
 }
 
 // File Line: 602
 // RVA: 0x173750
-_BOOL8 __fastcall UFG::qVRAMemoryPool::Init(UFG::qVRAMemoryPool *this, char *vram_start, unsigned int vram_size, const char *name, unsigned __int16 num_blocks, unsigned int min_alignment, char *block_memory, unsigned int block_memory_size)
+__int64 __fastcall UFG::qVRAMemoryPool::Init(
+        UFG::qVRAMemoryPool *this,
+        char *vram_start,
+        unsigned int vram_size,
+        const char *name,
+        unsigned __int16 num_blocks,
+        unsigned int min_alignment,
+        char *block_memory,
+        unsigned int block_memory_size)
 {
   signed int v8; // ebp
-  signed __int16 v9; // r14
-  __int64 v10; // rbx
-  UFG::qVRAMemoryPool *v11; // rsi
-  char *v12; // rdi
-  bool v13; // r15
-  unsigned __int16 v14; // ax
-  signed __int64 v15; // r10
-  unsigned int v16; // edx
-  char *v18; // [rsp+20h] [rbp-68h]
-  __int64 v19; // [rsp+38h] [rbp-50h]
-  _QWORD v20[4]; // [rsp+40h] [rbp-48h]
-  __int64 v21; // [rsp+50h] [rbp-38h]
-  __int64 v22; // [rsp+58h] [rbp-30h]
-  char *namea; // [rsp+A8h] [rbp+20h]
+  __int64 v9; // rbx
+  unsigned __int8 v12; // r15
+  char *v13; // r10
+  unsigned int v14; // edx
+  int v16; // [rsp+40h] [rbp-48h]
 
-  namea = (char *)name;
   v8 = min_alignment;
-  v9 = num_blocks;
-  LODWORD(v22) = block_memory_size;
-  LODWORD(v21) = block_memory_size;
-  v10 = vram_size;
-  v11 = this;
-  v12 = vram_start;
+  v9 = vram_size;
   UFG::qPrintChannel::Print(
     &UFG::VRAMChannel,
     OUTPUT_LEVEL_WARNING,
     "[VRAM Channel] - Init(%p, 0x%08x(%u), %.64s, %u, %u, %p, 0x%08x(%u))\n");
-  v13 = 0;
+  v12 = 0;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
-  UFG::qMutex::Lock((LPCRITICAL_SECTION)&v11->mPoolLock);
-  UFG::qVRAMemoryPool::AssertValid(v11);
-  v14 = -1;
-  if ( num_blocks > 0xFFFFu )
-    v9 = -1;
+  UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mPoolLock);
+  UFG::qVRAMemoryPool::AssertValid(this);
   if ( min_alignment < 0x100 )
     v8 = 256;
-  if ( v11->mInitialized != 1 )
+  if ( this->mInitialized != 1
+    && (!block_memory || block_memory_size >= num_blocks << 7)
+    && vram_start
+    && (_DWORD)v9
+    && !UFG::qVRAMemoryPools::OverlapsPool(vram_start, v9) )
   {
-    if ( !block_memory )
-      goto LABEL_20;
-    if ( (unsigned __int16)v9 <= 0xFFFFu )
-      v14 = v9;
-    if ( block_memory_size >= (unsigned int)v14 << 7 )
+    v13 = (char *)(~(v8 - 1i64) & (unsigned __int64)&vram_start[v8 - 1]);
+    this->mVRAMemoryStart = v13;
+    v14 = ~(v8 - 1) & (v9 + (_DWORD)vram_start - (_DWORD)v13);
+    this->mVRAMemorySize = v14;
+    if ( v13 != vram_start || v14 != (_DWORD)v9 )
     {
-LABEL_20:
-      if ( v12 && (_DWORD)v10 && !UFG::qVRAMemoryPools::OverlapsPool(v12, v10) )
-      {
-        v15 = ~(v8 - 1i64) & (unsigned __int64)&v12[v8 - 1];
-        v11->mVRAMemoryStart = (char *)v15;
-        v16 = ~(v8 - 1) & (v10 + (_DWORD)v12 - v15);
-        v11->mVRAMemorySize = v16;
-        if ( (char *)v15 != v12 || v16 != (_DWORD)v10 )
-        {
-          LODWORD(v20[0]) = ~(v8 - 1) & (v10 + (_DWORD)v12 - v15);
-          LODWORD(v19) = ~(v8 - 1) & (v10 + (_DWORD)v12 - v15);
-          LODWORD(v18) = v10;
-          UFG::qPrintf(
-            "Passed in memory %p-%p of size %d (0x%08x) aligned down to %p-%p of size %d (0x%08x)\n",
-            v12,
-            &v12[v10 - 1],
-            (unsigned int)v10,
-            v18,
-            ~(v8 - 1i64) & (unsigned __int64)&v12[v8 - 1],
-            v16 + v15 - 1,
-            v19,
-            v20[0],
-            block_memory,
-            v21,
-            v22);
-        }
-        v13 = UFG::qVRAMemoryPool::CommonInit(v11, namea, v9, v8, block_memory, block_memory_size);
-      }
+      v16 = ~(v8 - 1) & (v9 + (_DWORD)vram_start - (_DWORD)v13);
+      UFG::qPrintf(
+        "Passed in memory %p-%p of size %d (0x%08x) aligned down to %p-%p of size %d (0x%08x)\n",
+        vram_start,
+        &vram_start[v9 - 1],
+        (unsigned int)v9,
+        v9,
+        (const void *)(~(v8 - 1i64) & (unsigned __int64)&vram_start[v8 - 1]),
+        &v13[v14 - 1],
+        v16,
+        v16);
     }
+    v12 = UFG::qVRAMemoryPool::CommonInit(this, name, num_blocks, v8, block_memory, block_memory_size);
   }
-  UFG::qVRAMemoryPool::AssertValid(v11);
-  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&v11->mPoolLock);
+  UFG::qVRAMemoryPool::AssertValid(this);
+  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&this->mPoolLock);
   UFG::qMutex::Unlock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
-  return v13;
+  return v12;
 }
 
 // File Line: 748
 // RVA: 0x1681C0
 void __fastcall UFG::qVRAMemoryPool::Close(UFG::qVRAMemoryPool *this)
 {
-  char *v1; // rdi
-  UFG::qVRAMemoryPool *v2; // rbx
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v3; // rdx
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v4; // rcx
+  char *mName; // rdi
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *mNext; // rdx
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *mPrev; // rcx
   UFG::qNode<UFG::BlockInfo,UFG::Primary> *v5; // rax
   UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v6; // rdx
   UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v7; // rcx
@@ -632,104 +606,103 @@ void __fastcall UFG::qVRAMemoryPool::Close(UFG::qVRAMemoryPool *this)
   UFG::qNode<UFG::BlockInfo,UFG::Primary> *v9; // rdx
   UFG::qNode<UFG::BlockInfo,UFG::Primary> *v10; // rcx
   UFG::qNode<UFG::BlockInfo,UFG::Primary> *v11; // rax
-  UFG::BlockInfo *v12; // rcx
-  unsigned int *v13; // rsi
+  UFG::BlockInfo *mBlocks; // rcx
+  unsigned int *p_mCallbackData32; // rsi
   const char *v14; // rdx
-  signed int v15; // ecx
+  int v15; // ecx
   char v16; // al
 
-  v1 = this->mName;
-  v2 = this;
+  mName = this->mName;
   UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - %.64s->Close()\n");
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
-  UFG::qMutex::Lock((LPCRITICAL_SECTION)&v2->mPoolLock);
-  UFG::qVRAMemoryPool::AssertValid(v2);
-  if ( v2->mInitialized == 1 )
+  UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mPoolLock);
+  UFG::qVRAMemoryPool::AssertValid(this);
+  if ( this->mInitialized == 1 )
   {
-    UFG::qVRAMemoryPool::ForceEmptyPool(v2);
-    if ( v2->mPoolMemory.mData )
-      UFG::qVRAMemoryPools::Free(&v2->mPoolMemory, 0);
-    v3 = v2->mUsedBlocks.mNode.mNext;
-    v2->mVRAMemoryStart = 0i64;
-    v2->mVRAMemorySize = 0;
-    v2->mMainMemoryPool = 0i64;
-    v2->mOverflowVRAM = 0i64;
-    v2->mOverflowMain = 0i64;
-    v4 = v3->mPrev;
-    v5 = v3->mNext;
-    v4->mNext = v5;
-    v5->mPrev = v4;
-    v3->mPrev = v3;
-    v3->mNext = v3;
-    v6 = v2->mFreeList.mNode.mNext;
+    UFG::qVRAMemoryPool::ForceEmptyPool(this);
+    if ( this->mPoolMemory.mData )
+      UFG::qVRAMemoryPools::Free(&this->mPoolMemory, 0);
+    mNext = this->mUsedBlocks.mNode.mNext;
+    this->mVRAMemoryStart = 0i64;
+    this->mVRAMemorySize = 0;
+    this->mMainMemoryPool = 0i64;
+    this->mOverflowVRAM = 0i64;
+    this->mOverflowMain = 0i64;
+    mPrev = mNext->mPrev;
+    v5 = mNext->mNext;
+    mPrev->mNext = v5;
+    v5->mPrev = mPrev;
+    mNext->mPrev = mNext;
+    mNext->mNext = mNext;
+    v6 = this->mFreeList.mNode.mNext;
     v7 = v6->mPrev;
     v8 = v6->mNext;
     v7->mNext = v8;
     v8->mPrev = v7;
     v6->mPrev = v6;
     for ( v6->mNext = v6;
-          (UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *)v2->mUnusedBlocks.mNode.mNext != &v2->mUnusedBlocks;
+          (UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *)this->mUnusedBlocks.mNode.mNext != &this->mUnusedBlocks;
           v9->mNext = v9 )
     {
-      v9 = v2->mUnusedBlocks.mNode.mNext;
+      v9 = this->mUnusedBlocks.mNode.mNext;
       v10 = v9->mPrev;
       v11 = v9->mNext;
       v10->mNext = v11;
       v11->mPrev = v10;
       v9->mPrev = v9;
     }
-    if ( !v2->mBlocksMemory )
+    if ( !this->mBlocksMemory )
     {
-      v12 = v2->mBlocks;
-      if ( v12 )
+      mBlocks = this->mBlocks;
+      if ( mBlocks )
       {
-        v13 = &v12[-1].mCallbackData32;
+        p_mCallbackData32 = &mBlocks[-1].mCallbackData32;
         `eh vector destructor iterator(
-          v12,
+          mBlocks,
           0x80ui64,
-          v12[-1].mCallbackData32,
+          mBlocks[-1].mCallbackData32,
           (void (__fastcall *)(void *))UFG::BlockInfo::~BlockInfo);
-        if ( v13 )
-          UFG::qMemoryPool::Free(UFG::gMainMemoryPool, v13);
+        if ( p_mCallbackData32 )
+          UFG::qMemoryPool::Free(UFG::gMainMemoryPool, p_mCallbackData32);
       }
     }
-    v2->mBlocks = 0i64;
-    v2->mBlocksMemory = 0i64;
-    v2->mBlocksMemorySize = 0;
-    *(_QWORD *)&v2->mMinAlignment = 256i64;
-    *(_QWORD *)&v2->mLargestFreeBlock = 0i64;
-    v2->mNumBlocksTotal = -1;
-    *(_QWORD *)&v2->mPeakUsedMemory = 0i64;
-    *(_QWORD *)&v2->mAlignmentLoss = 0i64;
-    *(_QWORD *)&v2->mUsedBlocksCount = 0i64;
+    this->mBlocks = 0i64;
+    this->mBlocksMemory = 0i64;
+    this->mBlocksMemorySize = 0;
+    *(_QWORD *)&this->mMinAlignment = 256i64;
+    *(_QWORD *)&this->mLargestFreeBlock = 0i64;
+    this->mNumBlocksTotal = -1;
+    *(_QWORD *)&this->mPeakUsedMemory = 0i64;
+    *(_QWORD *)&this->mAlignmentLoss = 0i64;
+    *(_QWORD *)&this->mUsedBlocksCount = 0i64;
     v14 = UFG::qVRAMemoryPool::sUninitializedName;
     v15 = 32;
-    if ( v1 )
+    if ( mName )
     {
       if ( !UFG::qVRAMemoryPool::sUninitializedName )
-        goto LABEL_20;
+        goto LABEL_15;
       do
       {
         v16 = *v14;
-        ++v1;
+        ++mName;
         ++v14;
-        *(v1 - 1) = v16;
+        *(mName - 1) = v16;
         if ( !v16 )
           break;
         --v15;
       }
       while ( v15 > 1 );
-      if ( *(v1 - 1) )
-LABEL_20:
-        *v1 = 0;
+      if ( *(mName - 1) )
+LABEL_15:
+        *mName = 0;
     }
-    UFG::qVRAMemoryPools::sVRAMemoryPools[v2->mPoolID] = 0i64;
-    *(_WORD *)&v2->mNeedsDefragmentUp = 0;
-    v2->mInitialized = 0;
-    v2->mPoolID = -1;
+    UFG::qVRAMemoryPools::sVRAMemoryPools[this->mPoolID] = 0i64;
+    *(_WORD *)&this->mNeedsDefragmentUp = 0;
+    this->mInitialized = 0;
+    this->mPoolID = -1;
   }
-  UFG::qVRAMemoryPool::AssertValid(v2);
-  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&v2->mPoolLock);
+  UFG::qVRAMemoryPool::AssertValid(this);
+  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&this->mPoolLock);
   UFG::qMutex::Unlock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
 }
 
@@ -737,123 +710,108 @@ LABEL_20:
 // RVA: 0x16E2A0
 char __fastcall UFG::qVRAMemoryPool::ForceEmptyPool(UFG::qVRAMemoryPool *this)
 {
-  UFG::qVRAMemoryPool *v1; // rbx
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v2; // rax
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *mNext; // rax
   bool v3; // cl
   bool v4; // zf
   UFG::BlockInfo *v5; // rdx
 
-  v1 = this;
   UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - %.64s->ForceEmptyPool()\n");
-  UFG::qMutex::Lock((LPCRITICAL_SECTION)&v1->mPoolLock);
-  UFG::qVRAMemoryPool::AssertValid(v1);
-  if ( v1->mInitialized == 1 )
+  UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mPoolLock);
+  UFG::qVRAMemoryPool::AssertValid(this);
+  if ( this->mInitialized == 1 )
   {
-    v2 = v1->mUsedBlocks.mNode.mNext;
-    v3 = BYTE2(v2[4].mNext) == 1;
-    if ( v2 != v1->mUsedBlocks.mNode.mPrev || v3 != 1 )
+    mNext = this->mUsedBlocks.mNode.mNext;
+    v3 = BYTE2(mNext[4].mNext) == 1;
+    if ( mNext != this->mUsedBlocks.mNode.mPrev || !v3 )
     {
       while ( 1 )
       {
-        v4 = v3 == 1;
+        v4 = v3;
         while ( 1 )
         {
-          v5 = (UFG::BlockInfo *)(v4 ? v2->mNext : v2);
-          UFG::qVRAMemoryPool::InternalFree(v1, v5);
-          v2 = v1->mUsedBlocks.mNode.mNext;
-          v3 = BYTE2(v2[4].mNext) == 1;
-          if ( v2 != v1->mUsedBlocks.mNode.mPrev )
+          v5 = (UFG::BlockInfo *)(v4 ? mNext->mNext : mNext);
+          UFG::qVRAMemoryPool::InternalFree(this, v5);
+          mNext = this->mUsedBlocks.mNode.mNext;
+          v3 = BYTE2(mNext[4].mNext) == 1;
+          if ( mNext != this->mUsedBlocks.mNode.mPrev )
             break;
-          v4 = v3 == 1;
-          if ( v3 == 1 )
+          v4 = v3;
+          if ( v3 )
             goto LABEL_10;
         }
       }
     }
   }
 LABEL_10:
-  UFG::qVRAMemoryPool::AssertValid(v1);
+  UFG::qVRAMemoryPool::AssertValid(this);
   return 1;
 }
 
 // File Line: 919
 // RVA: 0x166D30
-_BOOL8 __fastcall UFG::qVRAMemoryPool::Allocate(UFG::qVRAMemoryPool *this, UFG::qVRAMemoryHandle *handle, unsigned int size, unsigned int usage, const char *name, unsigned int alignment, char flags, UFG::qMemoryPool *pool, unsigned __int64 user_data_64, unsigned int user_data_32)
+_BOOL8 __fastcall UFG::qVRAMemoryPool::Allocate(
+        UFG::qVRAMemoryPool *this,
+        UFG::qVRAMemoryHandle *handle,
+        unsigned int size,
+        unsigned int usage,
+        const char *name,
+        unsigned int alignment,
+        unsigned __int8 flags,
+        UFG::qMemoryPool *pool,
+        unsigned __int64 user_data_64,
+        unsigned int user_data_32)
 {
   unsigned __int64 v10; // rsi
-  UFG::qVRAMemoryHandle *v11; // rbx
-  UFG::qVRAMemoryPool *v12; // rbp
-  const char *v13; // rcx
-  char *v14; // rdx
-  char v15; // di
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v16; // rcx
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v17; // rax
-  signed int v18; // ebx
-  UFG::BlockInfo *v19; // r10
-  signed __int64 v20; // rax
-  UFG::BlockInfo *v21; // rdi
-  unsigned int v22; // er11
-  unsigned int v23; // er8
-  UFG::BlockInfo *v24; // rdi
-  unsigned int v25; // er11
-  unsigned int v26; // er8
+  char v13; // di
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *mPrev; // rcx
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *mNext; // rax
+  signed int mMinAlignment; // ebx
+  UFG::BlockInfo *v17; // r10
+  UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *p_mUsedBlocks; // rax
+  UFG::BlockInfo *v19; // rdi
+  unsigned int mActualSize; // r11d
+  unsigned int v21; // r8d
+  UFG::BlockInfo *v22; // rdi
+  unsigned int v23; // r11d
+  unsigned int v24; // r8d
   char i; // al
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v28; // rdx
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v29; // rax
-  char *v30; // rbx
-  unsigned __int16 v31; // si
-  unsigned __int16 v32; // di
-  UFG::qMemoryPool *v33; // ST38_8
-  UFG::qVRAMemoryHandle *v34; // r8
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v35; // rcx
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v36; // rax
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v37; // rax
-  unsigned int v38; // eax
-  UFG::qMemoryPool *v39; // rcx
-  unsigned __int64 v40; // r9
-  UFG::BlockInfo *v41; // rax
-  char v42; // cl
-  UFG::BlockInfo *v43; // rdi
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v44; // rax
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v45; // rax
-  UFG::qVRAMemoryPool *v46; // rcx
-  UFG::qMemoryPool *v47; // rcx
-  UFG::BlockInfo *v48; // rax
-  UFG::qMemoryPool *v49; // r8
-  char v50; // cl
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v51; // rax
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v52; // rdx
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v53; // rax
-  unsigned int v54; // ST28_4
-  unsigned int v55; // ST20_4
-  signed __int64 v56; // ST30_8
-  char *v58; // [rsp+80h] [rbp-38h]
-  UFG::BlockInfo *v59; // [rsp+88h] [rbp-30h]
-  UFG::qMemoryPool *v60; // [rsp+88h] [rbp-30h]
-  bool v61; // [rsp+C0h] [rbp+8h]
-  UFG::qVRAMemoryHandle *handlea; // [rsp+C8h] [rbp+10h]
-  unsigned int v63; // [rsp+D0h] [rbp+18h]
-  unsigned int usagea; // [rsp+D8h] [rbp+20h]
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v26; // rax
+  char *mData; // rbx
+  unsigned __int16 mBlockID; // si
+  unsigned __int16 mPoolID; // di
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v30; // rcx
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v31; // rax
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v32; // rax
+  unsigned int mUsedMemory; // eax
+  UFG::qMemoryPool *mMainMemoryPool; // rcx
+  unsigned __int64 v35; // r9
+  UFG::BlockInfo *UnusedBlock; // rax
+  char v37; // cl
+  UFG::BlockInfo *v38; // rdi
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v39; // rax
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v40; // rax
+  UFG::qVRAMemoryPool *mOverflowVRAM; // rcx
+  UFG::qMemoryPool *mOverflowMain; // rcx
+  UFG::BlockInfo *v43; // rax
+  UFG::qMemoryPool *v44; // r8
+  char v45; // cl
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v46; // rax
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v47; // rax
+  char *v49; // [rsp+80h] [rbp-38h]
+  UFG::BlockInfo *v50; // [rsp+88h] [rbp-30h]
+  UFG::qMemoryPool *v51; // [rsp+88h] [rbp-30h]
+  bool v52; // [rsp+C0h] [rbp+8h]
   char *poola; // [rsp+F8h] [rbp+40h]
 
-  usagea = usage;
-  v63 = size;
-  handlea = handle;
   v10 = size;
-  v11 = handle;
-  v12 = this;
-  if ( pool )
-    v13 = pool->mData->mAllocator.mName;
-  if ( usage <= 0x12 )
-    v14 = off_14203C490[usage];
-  v15 = flags;
+  v13 = flags;
   UFG::qPrintChannel::Print(
     &UFG::VRAMChannel,
     OUTPUT_LEVEL_WARNING,
     "[VRAM Channel] - %.64s->Allocate(handle(%p), 0x%08x(%u), %s, %.64s%s, %u, 0x%08x, %s, 0x%016x64, 0x%08x)\n");
-  v61 = 0;
-  UFG::qMutex::Lock((LPCRITICAL_SECTION)&v12->mPoolLock);
-  UFG::qVRAMemoryPool::AssertValid(v12);
+  v52 = 0;
+  UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mPoolLock);
+  UFG::qVRAMemoryPool::AssertValid(this);
   if ( !(_DWORD)v10 )
   {
     UFG::qPrintChannel::Print(
@@ -864,320 +822,304 @@ _BOOL8 __fastcall UFG::qVRAMemoryPool::Allocate(UFG::qVRAMemoryPool *this, UFG::
       &UFG::VRAMChannel,
       OUTPUT_LEVEL_DEBUG,
       "[VRAM Channel] - Setting qVRAMemoryHandle(%p) to point at - PoolID:0x%02x BlockID:0x%04x Data:%p-%p AllocatedSize:%u\n");
-    v16 = v11->mPrev;
-    v17 = v11->mNext;
-    v16->mNext = v17;
-    v17->mPrev = v16;
-    v11->mPrev = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v11->mPrev;
-    v11->mNext = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v11->mPrev;
-    v11->mData = 0i64;
-    *(_DWORD *)&v11->mReadOnlyAndPoolID = 0;
-    goto LABEL_61;
+    mPrev = handle->mPrev;
+    mNext = handle->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    handle->mPrev = handle;
+    handle->mNext = handle;
+    handle->mData = 0i64;
+    *(_DWORD *)&handle->mReadOnlyAndPoolID = 0;
+    goto LABEL_55;
   }
-  if ( v12->mInitialized == 1 )
+  if ( this->mInitialized == 1 )
   {
-    v18 = alignment;
-    if ( v12->mMinAlignment > alignment )
-      v18 = v12->mMinAlignment;
-    if ( usagea == 14 )
+    mMinAlignment = alignment;
+    if ( this->mMinAlignment > alignment )
+      mMinAlignment = this->mMinAlignment;
+    if ( usage == 14 )
     {
-      v39 = pool;
-      v60 = pool;
+      mMainMemoryPool = pool;
+      v51 = pool;
       if ( !pool )
       {
-        v39 = UFG::gMainMemoryPool;
-        if ( v12->mMainMemoryPool )
-          v39 = v12->mMainMemoryPool;
-        v60 = v39;
+        mMainMemoryPool = UFG::gMainMemoryPool;
+        if ( this->mMainMemoryPool )
+          mMainMemoryPool = this->mMainMemoryPool;
+        v51 = mMainMemoryPool;
       }
-      v40 = (unsigned __int64)(v18 & 0xFFFFFF) << 8;
-      if ( flags & 2 )
-        v40 |= 1ui64;
-      v58 = (char *)UFG::qMemoryPool::Allocate(v39, v10, name, v40, 0);
-      if ( v58 )
+      v35 = (unsigned __int64)(mMinAlignment & 0xFFFFFF) << 8;
+      if ( (flags & 2) != 0 )
+        v35 |= 1ui64;
+      v49 = (char *)UFG::qMemoryPool::Allocate(mMainMemoryPool, v10, name, v35, 0);
+      if ( v49 )
       {
-        v41 = UFG::qVRAMemoryPool::GetUnusedBlock(v12);
-        v42 = 0;
-        v43 = v41;
-        v41->mData = v58;
-        v41->mName = name;
-        v41->mRequestedSize = v10;
-        for ( v41->mActualSize = v10; v18 != 1; ++v42 )
-          v18 = (unsigned int)v18 >> 1;
-        v11 = handlea;
-        v41->mAlignmentShift = v42;
-        v41->mUsage = 14;
-        v41->mKeepAliveFrames = 0;
-        v41->mFlags = flags | 0x10;
-        v41->mMemoryPool = v60;
-        v41->mContainerID = 0;
-        v41->mCallbackData64 = user_data_64;
-        v41->mCallbackData32 = user_data_32;
-        UFG::qVRAMemoryHandle::Set(handlea, v58, v10, v12->mPoolID, v41->mBlockID);
-        v44 = v43->mAllocationHandles.mNode.mPrev;
-        v44->mNext = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&handlea->mPrev;
-        handlea->mPrev = v44;
-        handlea->mNext = &v43->mAllocationHandles.mNode;
-        v43->mAllocationHandles.mNode.mPrev = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&handlea->mPrev;
-        goto LABEL_47;
+        UnusedBlock = UFG::qVRAMemoryPool::GetUnusedBlock(this);
+        v37 = 0;
+        v38 = UnusedBlock;
+        UnusedBlock->mData = v49;
+        UnusedBlock->mName = name;
+        UnusedBlock->mRequestedSize = v10;
+        for ( UnusedBlock->mActualSize = v10; mMinAlignment != 1; ++v37 )
+          mMinAlignment = (unsigned int)mMinAlignment >> 1;
+        UnusedBlock->mAlignmentShift = v37;
+        UnusedBlock->mUsage = 14;
+        UnusedBlock->mKeepAliveFrames = 0;
+        UnusedBlock->mFlags = flags | 0x10;
+        UnusedBlock->mMemoryPool = v51;
+        UnusedBlock->mContainerID = 0;
+        UnusedBlock->mCallbackData64 = user_data_64;
+        UnusedBlock->mCallbackData32 = user_data_32;
+        UFG::qVRAMemoryHandle::Set(handle, v49, v10, this->mPoolID, UnusedBlock->mBlockID);
+        v39 = v38->mAllocationHandles.mNode.mPrev;
+        v39->mNext = handle;
+        handle->mPrev = v39;
+        handle->mNext = &v38->mAllocationHandles.mNode;
+        v38->mAllocationHandles.mNode.mPrev = handle;
+        goto LABEL_43;
       }
     }
     else
     {
-      v19 = 0i64;
-      v20 = (signed __int64)&v12->mUsedBlocks;
-      v59 = 0i64;
-      if ( flags & 1 )
+      v17 = 0i64;
+      p_mUsedBlocks = &this->mUsedBlocks;
+      v50 = 0i64;
+      if ( (flags & 1) != 0 )
       {
-        v21 = (UFG::BlockInfo *)&v12->mFreeList.mNode.mNext[-1];
-        while ( v21 != (UFG::BlockInfo *)v20 )
+        v19 = (UFG::BlockInfo *)&this->mFreeList.mNode.mNext[-1];
+        while ( v19 != (UFG::BlockInfo *)p_mUsedBlocks )
         {
-          if ( v21->mUsage == 1 )
+          if ( v19->mUsage == 1 )
           {
-            v22 = v21->mActualSize;
-            if ( v22 >= (unsigned int)v10 )
+            mActualSize = v19->mActualSize;
+            if ( mActualSize >= (unsigned int)v10 )
             {
-              v23 = ~(v12->mMinAlignment - 1) & (v12->mMinAlignment + v10 - 1);
-              if ( (_QWORD)&v21->mData[v22 - (~(v18 - 1i64) & (_QWORD)&v21->mData[v18 - 1])] >= v23 )
+              v21 = ~(this->mMinAlignment - 1) & (this->mMinAlignment + v10 - 1);
+              if ( (__int64)&v19->mData[mActualSize
+                                      - (~(mMinAlignment - 1i64) & (__int64)&v19->mData[mMinAlignment - 1])] >= v21 )
               {
-                v19 = UFG::qVRAMemoryPool::SplitFreeBlock(v12, v21, v23, v18, (unsigned __int8)flags);
-                v59 = v19;
+                v17 = UFG::qVRAMemoryPool::SplitFreeBlock(this, v19, v21, mMinAlignment, flags);
+                v50 = v17;
               }
-              v20 = (signed __int64)&v12->mUsedBlocks;
+              p_mUsedBlocks = &this->mUsedBlocks;
             }
           }
-          v21 = (UFG::BlockInfo *)&v21->mNext[-1];
-          if ( v19 )
-            goto LABEL_30;
+          v19 = (UFG::BlockInfo *)&v19->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext[-1];
+          if ( v17 )
+            goto LABEL_26;
         }
       }
       else
       {
         flags |= 2u;
-        v24 = (UFG::BlockInfo *)&v12->mFreeList.mNode.mPrev[-1];
-        while ( v24 != (UFG::BlockInfo *)v20 )
+        v22 = (UFG::BlockInfo *)&this->mFreeList.mNode.mPrev[-1];
+        while ( v22 != (UFG::BlockInfo *)p_mUsedBlocks )
         {
-          v25 = v24->mActualSize;
-          if ( v25 >= (unsigned int)v10 )
+          v23 = v22->mActualSize;
+          if ( v23 >= (unsigned int)v10 )
           {
-            v26 = ~(v12->mMinAlignment - 1) & (v12->mMinAlignment + v10 - 1);
-            if ( (_QWORD)&v24->mData[v25 - (~(v18 - 1i64) & (_QWORD)&v24->mData[v18 - 1])] >= v26 )
+            v24 = ~(this->mMinAlignment - 1) & (this->mMinAlignment + v10 - 1);
+            if ( (__int64)&v22->mData[v23 - (~(mMinAlignment - 1i64) & (__int64)&v22->mData[mMinAlignment - 1])] >= v24 )
             {
-              v19 = UFG::qVRAMemoryPool::SplitFreeBlock(v12, v24, v26, v18, (unsigned __int8)flags);
-              v59 = v19;
+              v17 = UFG::qVRAMemoryPool::SplitFreeBlock(this, v22, v24, mMinAlignment, flags);
+              v50 = v17;
             }
-            v20 = (signed __int64)&v12->mUsedBlocks;
+            p_mUsedBlocks = &this->mUsedBlocks;
           }
-          v24 = (UFG::BlockInfo *)&v24->mPrev[-1];
-          if ( v19 )
-            goto LABEL_30;
+          v22 = (UFG::BlockInfo *)&v22->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev[-1];
+          if ( v17 )
+          {
+LABEL_26:
+            v17->mRequestedSize = v10;
+            v17->mName = name;
+            for ( i = 0; mMinAlignment != 1; ++i )
+              mMinAlignment = (unsigned int)mMinAlignment >> 1;
+            v17->mAlignmentShift = i;
+            v17->mFlags = flags;
+            v17->mUsage = usage;
+            v17->mMemoryPool = 0i64;
+            v17->mContainerID = 0;
+            v17->mCallbackData64 = user_data_64;
+            v17->mKeepAliveFrames = 0;
+            v17->mCallbackData32 = user_data_32;
+            if ( usage - 9 <= 1 )
+            {
+              v26 = this->mContainerList.mNode.mNext;
+              this->mContainerList.mNode.mNext = &v17->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+              v17->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev = &this->mContainerList.mNode;
+              v17->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext = v26;
+              v26->mPrev = &v17->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+            }
+            mData = v17->mData;
+            mBlockID = v17->mBlockID;
+            mPoolID = this->mPoolID;
+            UFG::qPrintChannel::Print(
+              &UFG::VRAMChannel,
+              OUTPUT_LEVEL_DEBUG,
+              "[VRAM Channel] - Setting qVRAMemoryHandle(%p) to point at - PoolID:0x%02x BlockID:0x%04x Data:%p-%p AllocatedSize:%u\n");
+            v30 = handle->mPrev;
+            v31 = handle->mNext;
+            v30->mNext = v31;
+            v31->mPrev = v30;
+            handle->mPrev = handle;
+            handle->mNext = handle;
+            handle->mData = mData;
+            handle->mReadOnlyAndPoolID = mPoolID;
+            handle->mBlockID = mBlockID;
+            v32 = v50->mAllocationHandles.mNode.mPrev;
+            v32->mNext = handle;
+            handle->mPrev = v32;
+            handle->mNext = &v50->mAllocationHandles.mNode;
+            v50->mAllocationHandles.mNode.mPrev = handle;
+            this->mFreeMemory -= v50->mActualSize;
+            this->mUsedMemory += v50->mActualSize;
+            this->mAllocatedMemory += v50->mRequestedSize;
+            this->mAlignmentLoss += v50->mActualSize - v50->mRequestedSize;
+            mUsedMemory = this->mUsedMemory;
+            if ( mUsedMemory > this->mPeakUsedMemory )
+              this->mPeakUsedMemory = mUsedMemory;
+            v52 = 1;
+            goto LABEL_55;
+          }
         }
       }
-      if ( v19 )
+      v13 = flags;
+    }
+    mOverflowVRAM = this->mOverflowVRAM;
+    if ( !mOverflowVRAM
+      || !(v52 = UFG::qVRAMemoryPool::Allocate(
+                   mOverflowVRAM,
+                   handle,
+                   v10,
+                   usage,
+                   name,
+                   alignment,
+                   v13,
+                   pool,
+                   user_data_64,
+                   user_data_32)) )
+    {
+      mOverflowMain = this->mOverflowMain;
+      if ( mOverflowMain )
       {
-LABEL_30:
-        v19->mRequestedSize = v10;
-        v19->mName = name;
-        for ( i = 0; v18 != 1; ++i )
-          v18 = (unsigned int)v18 >> 1;
-        v19->mAlignmentShift = i;
-        v19->mFlags = flags;
-        v19->mUsage = usagea;
-        v19->mMemoryPool = 0i64;
-        v19->mContainerID = 0;
-        v19->mCallbackData64 = user_data_64;
-        v19->mKeepAliveFrames = 0;
-        v19->mCallbackData32 = user_data_32;
-        if ( usagea - 9 <= 1 )
+        poola = (char *)UFG::qMemoryPool::Allocate(
+                          mOverflowMain,
+                          v10,
+                          name,
+                          (unsigned __int64)(mMinAlignment & 0xFFFFFF) << 8,
+                          0);
+        if ( poola )
         {
-          v28 = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v19->mPrev;
-          v29 = v12->mContainerList.mNode.mNext;
-          v12->mContainerList.mNode.mNext = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v19->mPrev;
-          v28->mPrev = &v12->mContainerList.mNode;
-          v28->mNext = v29;
-          v29->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v19->mPrev;
+          v43 = UFG::qVRAMemoryPool::GetUnusedBlock(this);
+          v44 = this->mOverflowMain;
+          v38 = v43;
+          v43->mData = poola;
+          v45 = 0;
+          v43->mName = name;
+          v43->mRequestedSize = v10;
+          for ( v43->mActualSize = v10; mMinAlignment != 1; ++v45 )
+            mMinAlignment = (unsigned int)mMinAlignment >> 1;
+          v43->mAlignmentShift = v45;
+          v43->mMemoryPool = v44;
+          v43->mUsage = 15;
+          v43->mFlags = flags | 0x10;
+          v43->mKeepAliveFrames = 0;
+          v43->mContainerID = 0;
+          v43->mCallbackData64 = user_data_64;
+          v43->mCallbackData32 = user_data_32;
+          UFG::qVRAMemoryHandle::Set(handle, poola, v10, this->mPoolID, v43->mBlockID);
+          v46 = v38->mAllocationHandles.mNode.mPrev;
+          v46->mNext = handle;
+          handle->mPrev = v46;
+          handle->mNext = &v38->mAllocationHandles.mNode;
+          v38->mAllocationHandles.mNode.mPrev = handle;
+          if ( usage - 9 <= 1 )
+          {
+            v47 = this->mContainerList.mNode.mNext;
+            this->mContainerList.mNode.mNext = &v38->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+            v38->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev = &this->mContainerList.mNode;
+            v38->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext = v47;
+            v47->mPrev = &v38->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+          }
+LABEL_43:
+          v52 = 1;
+          v40 = this->mMainMemoryBlocks.mNode.mPrev;
+          v40->mNext = v38;
+          v38->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev = v40;
+          v38->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext = &this->mMainMemoryBlocks.mNode;
+          this->mMainMemoryBlocks.mNode.mPrev = v38;
+          this->mUsedMainMemory += v10;
+          goto LABEL_55;
         }
-        v30 = v19->mData;
-        v31 = v19->mBlockID;
-        v32 = v12->mPoolID;
-        v33 = (UFG::qMemoryPool *)&v30[v19->mActualSize - 1];
-        UFG::qPrintChannel::Print(
-          &UFG::VRAMChannel,
-          OUTPUT_LEVEL_DEBUG,
-          "[VRAM Channel] - Setting qVRAMemoryHandle(%p) to point at - PoolID:0x%02x BlockID:0x%04x Data:%p-%p AllocatedSize:%u\n");
-        v34 = handlea;
-        v35 = handlea->mPrev;
-        v36 = handlea->mNext;
-        v35->mNext = v36;
-        v36->mPrev = v35;
-        v34->mPrev = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v34->mPrev;
-        v34->mNext = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v34->mPrev;
-        handlea->mData = v30;
-        handlea->mReadOnlyAndPoolID = v32;
-        handlea->mBlockID = v31;
-        v37 = v59->mAllocationHandles.mNode.mPrev;
-        v37->mNext = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&handlea->mPrev;
-        handlea->mPrev = v37;
-        handlea->mNext = &v59->mAllocationHandles.mNode;
-        v59->mAllocationHandles.mNode.mPrev = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&handlea->mPrev;
-        v12->mFreeMemory -= v59->mActualSize;
-        v12->mUsedMemory += v59->mActualSize;
-        v12->mAllocatedMemory += v59->mRequestedSize;
-        v12->mAlignmentLoss += v59->mActualSize - v59->mRequestedSize;
-        v38 = v12->mUsedMemory;
-        if ( v38 > v12->mPeakUsedMemory )
-          v12->mPeakUsedMemory = v38;
-        LODWORD(v10) = v63;
-        v61 = 1;
-        goto LABEL_60;
       }
-      v15 = flags;
-    }
-    v46 = v12->mOverflowVRAM;
-    if ( v46 )
-    {
-      v61 = UFG::qVRAMemoryPool::Allocate(
-              v46,
-              handlea,
-              v10,
-              usagea,
-              name,
-              alignment,
-              v15,
-              pool,
-              user_data_64,
-              user_data_32);
-      if ( v61 )
-      {
-LABEL_60:
-        v11 = handlea;
-        goto LABEL_61;
-      }
-    }
-    v47 = v12->mOverflowMain;
-    if ( !v47
-      || (poola = (char *)UFG::qMemoryPool::Allocate(v47, v10, name, (unsigned __int64)(v18 & 0xFFFFFF) << 8, 0)) == 0i64 )
-    {
-      if ( v15 & 8 )
-      {
-        v54 = v12->mLargestFreeBlock;
-        v55 = v12->mFreeMemory;
+      if ( (v13 & 8) != 0 )
         UFG::qPrintChannel::Print(
           &UFG::VRAMChannel,
           OUTPUT_LEVEL_WARNING,
           "Pool %s (Free:%u Largest:%u) is too full for named allocation %s of size %u, allowable fail, try again next frame\n");
-        v11 = handlea;
-        goto LABEL_61;
-      }
-      UFG::qVRAMemoryPool::Print(v12, 5u);
-      goto LABEL_60;
+      else
+        UFG::qVRAMemoryPool::Print(this, 5u);
     }
-    v48 = UFG::qVRAMemoryPool::GetUnusedBlock(v12);
-    v49 = v12->mOverflowMain;
-    v43 = v48;
-    v48->mData = poola;
-    v50 = 0;
-    v48->mName = name;
-    v48->mRequestedSize = v10;
-    for ( v48->mActualSize = v10; v18 != 1; ++v50 )
-      v18 = (unsigned int)v18 >> 1;
-    v11 = handlea;
-    v48->mAlignmentShift = v50;
-    v48->mMemoryPool = v49;
-    v48->mUsage = 15;
-    v48->mFlags = flags | 0x10;
-    v48->mKeepAliveFrames = 0;
-    v48->mContainerID = 0;
-    v48->mCallbackData64 = user_data_64;
-    v48->mCallbackData32 = user_data_32;
-    UFG::qVRAMemoryHandle::Set(handlea, poola, v10, v12->mPoolID, v48->mBlockID);
-    v51 = v43->mAllocationHandles.mNode.mPrev;
-    v51->mNext = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&handlea->mPrev;
-    handlea->mPrev = v51;
-    handlea->mNext = &v43->mAllocationHandles.mNode;
-    v43->mAllocationHandles.mNode.mPrev = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&handlea->mPrev;
-    if ( usagea - 9 <= 1 )
-    {
-      v52 = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v43->mPrev;
-      v53 = v12->mContainerList.mNode.mNext;
-      v12->mContainerList.mNode.mNext = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v43->mPrev;
-      v52->mPrev = &v12->mContainerList.mNode;
-      v52->mNext = v53;
-      v53->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v43->mPrev;
-    }
-LABEL_47:
-    v61 = 1;
-    v45 = v12->mMainMemoryBlocks.mNode.mPrev;
-    v45->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v43->mPrev;
-    v43->mPrev = v45;
-    v43->mNext = &v12->mMainMemoryBlocks.mNode;
-    v12->mMainMemoryBlocks.mNode.mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v43->mPrev;
-    v12->mUsedMainMemory += v10;
   }
-LABEL_61:
-  if ( v12->mValidate )
+LABEL_55:
+  if ( this->mValidate )
   {
     UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - %.64s->AssertValid()\n");
-    UFG::qMutex::Lock((LPCRITICAL_SECTION)&v12->mPoolLock);
-    if ( v12->mInitialized == 1 )
-      UFG::qVRAMemoryPool::AssertValidInitialized(v12);
-    UFG::qMutex::Unlock((LPCRITICAL_SECTION)&v12->mPoolLock);
+    UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mPoolLock);
+    if ( this->mInitialized == 1 )
+      UFG::qVRAMemoryPool::AssertValidInitialized(this);
+    UFG::qMutex::Unlock((LPCRITICAL_SECTION)&this->mPoolLock);
   }
-  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&v12->mPoolLock);
-  v56 = (signed __int64)&v11->mData[(unsigned int)v10 - 1];
+  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&this->mPoolLock);
   UFG::qPrintChannel::Print(
     &UFG::VRAMChannel,
     OUTPUT_LEVEL_WARNING,
     "[VRAM Channel] -   Allocated 0x%08x(%u) bytes at [%p - %p] named %.64s in pool %.64s\n");
-  return v61;
+  return v52;
 }
 
 // File Line: 1290
 // RVA: 0x178B60
 __int64 __fastcall UFG::qVRAMemoryPool::PreMove(UFG::qVRAMemoryPool *this, UFG::qVRAMemoryHandle *handle)
 {
-  UFG::qVRAMemoryPool *v2; // rdi
-  UFG::qVRAMemoryHandle *v3; // rbx
   unsigned __int8 v4; // si
-  unsigned __int16 v5; // ax
-  unsigned __int16 v6; // cx
-  UFG::BlockInfo *v7; // rax
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v8; // rdx
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v9; // rax
+  unsigned __int16 mNumBlocksTotal; // ax
+  unsigned __int16 mBlockID; // cx
+  UFG::BlockInfo *Block; // rax
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *mPrev; // rdx
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *mNext; // rax
 
-  v2 = this;
-  v3 = handle;
   UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - %.64s->PreMove(handle(%p))\n");
   v4 = 0;
-  UFG::qMutex::Lock((LPCRITICAL_SECTION)&v2->mPoolLock);
-  UFG::qVRAMemoryPool::AssertValid(v2);
-  if ( v2->mInitialized == 1 && (v3->mReadOnlyAndPoolID & 0x7FFF) == v2->mPoolID )
+  UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mPoolLock);
+  UFG::qVRAMemoryPool::AssertValid(this);
+  if ( this->mInitialized == 1 && (handle->mReadOnlyAndPoolID & 0x7FFF) == this->mPoolID )
   {
-    v5 = v2->mNumBlocksTotal;
-    v6 = v3->mBlockID;
-    if ( v5 )
+    mNumBlocksTotal = this->mNumBlocksTotal;
+    mBlockID = handle->mBlockID;
+    if ( mNumBlocksTotal )
     {
-      if ( v6 >= v5 )
+      if ( mBlockID >= mNumBlocksTotal )
         goto LABEL_9;
-      v7 = &v2->mBlocks[(unsigned __int64)v6];
+      Block = &this->mBlocks[(unsigned __int64)mBlockID];
     }
     else
     {
-      v7 = UFG::qVRAMemoryPools::GetBlock(v6);
+      Block = UFG::qVRAMemoryPools::GetBlock(mBlockID);
     }
-    if ( v7 )
+    if ( Block )
     {
-      v8 = v3->mPrev;
-      v9 = v3->mNext;
+      mPrev = handle->mPrev;
+      mNext = handle->mNext;
       v4 = 1;
-      v8->mNext = v9;
-      v9->mPrev = v8;
-      v3->mPrev = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v3->mPrev;
-      v3->mNext = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v3->mPrev;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
+      handle->mPrev = handle;
+      handle->mNext = handle;
     }
   }
 LABEL_9:
-  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&v2->mPoolLock);
+  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&this->mPoolLock);
   return v4;
 }
 
@@ -1185,238 +1127,224 @@ LABEL_9:
 // RVA: 0x178990
 __int64 __fastcall UFG::qVRAMemoryPool::PostMove(UFG::qVRAMemoryPool *this, UFG::qVRAMemoryHandle *handle)
 {
-  UFG::qVRAMemoryPool *v2; // rdi
-  UFG::qVRAMemoryHandle *v3; // rbx
   unsigned __int8 v4; // si
-  unsigned __int16 v5; // ax
-  unsigned __int16 v6; // cx
-  UFG::BlockInfo *v7; // rax
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v8; // rdx
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v9; // rax
+  unsigned __int16 mNumBlocksTotal; // ax
+  unsigned __int16 mBlockID; // cx
+  UFG::BlockInfo *Block; // rax
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *p_mNode; // rdx
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *mPrev; // rax
 
-  v2 = this;
-  v3 = handle;
   UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - %.64s->PostMove(handle(%p))\n");
   v4 = 0;
-  UFG::qMutex::Lock((LPCRITICAL_SECTION)&v2->mPoolLock);
-  UFG::qVRAMemoryPool::AssertValid(v2);
-  if ( v2->mInitialized == 1 && (v3->mReadOnlyAndPoolID & 0x7FFF) == v2->mPoolID )
+  UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mPoolLock);
+  UFG::qVRAMemoryPool::AssertValid(this);
+  if ( this->mInitialized == 1 && (handle->mReadOnlyAndPoolID & 0x7FFF) == this->mPoolID )
   {
-    v5 = v2->mNumBlocksTotal;
-    v6 = v3->mBlockID;
-    if ( v5 )
+    mNumBlocksTotal = this->mNumBlocksTotal;
+    mBlockID = handle->mBlockID;
+    if ( mNumBlocksTotal )
     {
-      if ( v6 >= v5 )
+      if ( mBlockID >= mNumBlocksTotal )
         goto LABEL_9;
-      v7 = &v2->mBlocks[(unsigned __int64)v6];
+      Block = &this->mBlocks[(unsigned __int64)mBlockID];
     }
     else
     {
-      v7 = UFG::qVRAMemoryPools::GetBlock(v6);
+      Block = UFG::qVRAMemoryPools::GetBlock(mBlockID);
     }
-    if ( v7 )
+    if ( Block )
     {
-      v3->mPrev = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v3->mPrev;
-      v3->mNext = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v3->mPrev;
-      v8 = &v7->mAllocationHandles.mNode;
-      v9 = v7->mAllocationHandles.mNode.mPrev;
+      handle->mPrev = handle;
+      handle->mNext = handle;
+      p_mNode = &Block->mAllocationHandles.mNode;
+      mPrev = Block->mAllocationHandles.mNode.mPrev;
       v4 = 1;
-      v9->mNext = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v3->mPrev;
-      v3->mPrev = v9;
-      v3->mNext = v8;
-      v8->mPrev = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v3->mPrev;
+      mPrev->mNext = handle;
+      handle->mPrev = mPrev;
+      handle->mNext = p_mNode;
+      p_mNode->mPrev = handle;
     }
   }
 LABEL_9:
-  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&v2->mPoolLock);
+  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&this->mPoolLock);
   return v4;
 }
 
 // File Line: 1347
 // RVA: 0x16EA30
-_BOOL8 __fastcall UFG::qVRAMemoryPool::Free(UFG::qVRAMemoryPool *this, UFG::qVRAMemoryHandle *handle, unsigned int frames_to_delay)
+_BOOL8 __fastcall UFG::qVRAMemoryPool::Free(
+        UFG::qVRAMemoryPool *this,
+        UFG::qVRAMemoryHandle *handle,
+        int frames_to_delay)
 {
-  unsigned int v3; // edi
-  UFG::qVRAMemoryPool *v4; // rbp
-  UFG::qVRAMemoryHandle *v5; // rbx
   bool v6; // r14
-  unsigned __int16 v7; // ax
-  unsigned __int16 v8; // cx
-  UFG::BlockInfo *v9; // rsi
-  char v10; // cl
+  unsigned __int16 mNumBlocksTotal; // ax
+  unsigned __int16 mBlockID; // cx
+  UFG::BlockInfo *Block; // rsi
+  char mUsage; // cl
   unsigned __int16 v11; // ax
-  unsigned __int16 v12; // cx
+  unsigned __int16 mContainerID; // cx
   UFG::BlockInfo *v13; // rdi
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v14; // rcx
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v15; // rax
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v16; // rdx
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v17; // rax
-  bool v18; // al
-  signed int v19; // eax
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v20; // rcx
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *mPrev; // rcx
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *mNext; // rax
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v16; // rax
+  bool v17; // al
+  int v18; // eax
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v19; // rcx
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v20; // rax
   UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v21; // rax
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v22; // rdx
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v23; // rcx
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v24; // rax
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v25; // rcx
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v26; // rax
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v22; // rcx
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v23; // rax
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v24; // rcx
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v25; // rax
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v26; // rbx
   UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v27; // rcx
   UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v28; // rax
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v29; // rbx
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v30; // rcx
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v31; // rax
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v32; // rcx
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v33; // rax
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v29; // rcx
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v30; // rax
 
-  v3 = frames_to_delay;
-  v4 = this;
-  v5 = handle;
   UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - %.64s->Free(handle(%p), %u)\n");
   v6 = 0;
-  UFG::qMutex::Lock((LPCRITICAL_SECTION)&v4->mPoolLock);
-  UFG::qVRAMemoryPool::AssertValid(v4);
-  if ( v4->mInitialized == 1 )
+  UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mPoolLock);
+  UFG::qVRAMemoryPool::AssertValid(this);
+  if ( this->mInitialized == 1 )
   {
-    if ( (v5->mReadOnlyAndPoolID & 0x7FFF) != v4->mPoolID )
+    if ( (handle->mReadOnlyAndPoolID & 0x7FFF) != this->mPoolID )
     {
-      v18 = UFG::qVRAMemoryPools::Free(v5, v3);
+      v17 = UFG::qVRAMemoryPools::Free(handle, frames_to_delay);
       goto LABEL_32;
     }
-    v7 = v4->mNumBlocksTotal;
-    v8 = v5->mBlockID;
-    if ( v7 )
+    mNumBlocksTotal = this->mNumBlocksTotal;
+    mBlockID = handle->mBlockID;
+    if ( mNumBlocksTotal )
     {
-      if ( v8 >= v7 )
+      if ( mBlockID >= mNumBlocksTotal )
         goto LABEL_33;
-      v9 = &v4->mBlocks[(unsigned __int64)v8];
+      Block = &this->mBlocks[(unsigned __int64)mBlockID];
     }
     else
     {
-      v9 = UFG::qVRAMemoryPools::GetBlock(v8);
+      Block = UFG::qVRAMemoryPools::GetBlock(mBlockID);
     }
-    if ( v9 )
+    if ( Block )
     {
-      v10 = v9->mUsage;
-      if ( v10 == 11 )
+      mUsage = Block->mUsage;
+      if ( mUsage == 11 )
       {
-        v11 = v4->mNumBlocksTotal;
-        v12 = v9->mContainerID;
+        v11 = this->mNumBlocksTotal;
+        mContainerID = Block->mContainerID;
         v13 = 0i64;
         if ( v11 )
         {
-          if ( v12 < v11 )
-            v13 = &v4->mBlocks[(unsigned __int64)v12];
+          if ( mContainerID < v11 )
+            v13 = &this->mBlocks[(unsigned __int64)mContainerID];
         }
         else
         {
-          v13 = UFG::qVRAMemoryPools::GetBlock(v12);
+          v13 = UFG::qVRAMemoryPools::GetBlock(mContainerID);
         }
-        v6 = UFG::qVRAMemoryPool::InternalFree(v4, v9);
+        v6 = UFG::qVRAMemoryPool::InternalFree(this, Block);
         if ( v13->mUsage == 9
-          && (UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *)v13->mContainedBlocks.mNode.mNext == &v13->mContainedBlocks )
+          && v13->mContainedBlocks.mNode.mNext == (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v13->mContainedBlocks )
         {
-          if ( v13->mFlags & 0x40 )
+          if ( (v13->mFlags & 0x40) != 0 )
           {
-            v14 = v13->mPrev;
-            v15 = v13->mNext;
-            v16 = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v13->mPrev;
-            v14->mNext = v15;
-            v15->mPrev = v14;
-            v16->mPrev = v16;
-            v16->mNext = v16;
+            mPrev = v13->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev;
+            mNext = v13->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext;
+            mPrev->mNext = mNext;
+            mNext->mPrev = mPrev;
+            v13->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev = &v13->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+            v13->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext = &v13->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
             v13->mKeepAliveFrames = 1;
-            v17 = v4->mPendingFreeList.mNode.mPrev;
-            v17->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v13->mPrev;
-            v16->mNext = &v4->mPendingFreeList.mNode;
-            v16->mPrev = v17;
-            v4->mPendingFreeList.mNode.mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v13->mPrev;
-            UFG::qVRAMemoryHandle::Close(v5);
+            v16 = this->mPendingFreeList.mNode.mPrev;
+            v16->mNext = &v13->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+            v13->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext = &this->mPendingFreeList.mNode;
+            v13->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev = v16;
+            this->mPendingFreeList.mNode.mPrev = &v13->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+            UFG::qVRAMemoryHandle::Close(handle);
             v6 = 1;
             goto LABEL_33;
           }
-          v18 = UFG::qVRAMemoryPool::InternalFree(v4, v13);
+          v17 = UFG::qVRAMemoryPool::InternalFree(this, v13);
 LABEL_32:
-          v6 = v18;
-          goto LABEL_33;
+          v6 = v17;
         }
       }
       else
       {
-        if ( v9->mFlags & 0x40 )
+        if ( (Block->mFlags & 0x40) != 0 )
         {
-          v19 = 1;
-          if ( v3 )
-            v19 = v3;
-          v3 = v19;
+          v18 = 1;
+          if ( frames_to_delay )
+            v18 = frames_to_delay;
+          frames_to_delay = v18;
         }
-        if ( !v3 )
+        if ( !frames_to_delay )
         {
-          v18 = UFG::qVRAMemoryPool::InternalFree(v4, v9);
+          v17 = UFG::qVRAMemoryPool::InternalFree(this, Block);
           goto LABEL_32;
         }
-        if ( (unsigned __int8)(v10 - 9) <= 1u )
+        if ( (unsigned __int8)(mUsage - 9) <= 1u )
         {
-          v20 = v9->mPrev;
-          v21 = v9->mNext;
-          v22 = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v9->mPrev;
-          v20->mNext = v21;
-          v21->mPrev = v20;
-          v22->mPrev = v22;
-          v22->mNext = v22;
+          v19 = Block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev;
+          v20 = Block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext;
+          v19->mNext = v20;
+          v20->mPrev = v19;
+          Block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev = &Block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+          Block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext = &Block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
         }
-        v9->mKeepAliveFrames = v3;
-        v23 = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v9->mPrev;
-        v24 = v4->mPendingFreeList.mNode.mPrev;
-        v24->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v9->mPrev;
-        v23->mPrev = v24;
-        v23->mNext = &v4->mPendingFreeList.mNode;
-        v4->mPendingFreeList.mNode.mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v9->mPrev;
-        if ( v9->mFlags & 0x40 )
+        Block->mKeepAliveFrames = frames_to_delay;
+        v21 = this->mPendingFreeList.mNode.mPrev;
+        v21->mNext = &Block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+        Block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev = v21;
+        Block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext = &this->mPendingFreeList.mNode;
+        this->mPendingFreeList.mNode.mPrev = &Block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+        if ( (Block->mFlags & 0x40) != 0 )
         {
-          v25 = v5->mPrev;
-          v26 = v5->mNext;
-          v25->mNext = v26;
-          v26->mPrev = v25;
-          v5->mPrev = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v5->mPrev;
-          v5->mNext = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v5->mPrev;
+          v22 = handle->mPrev;
+          v23 = handle->mNext;
+          v22->mNext = v23;
+          v23->mPrev = v22;
+          handle->mPrev = handle;
+          handle->mNext = handle;
           UFG::qPrintChannel::Print(
             &UFG::VRAMChannel,
             OUTPUT_LEVEL_DEBUG,
             "[VRAM Channel] - Setting qVRAMemoryHandle(%p) to point at - PoolID:0x%02x BlockID:0x%04x Data:%p-%p AllocatedSize:%u\n");
-          v27 = v5->mPrev;
-          v28 = v5->mNext;
+          v24 = handle->mPrev;
+          v25 = handle->mNext;
           v6 = 1;
-          v27->mNext = v28;
-          v28->mPrev = v27;
-          v5->mPrev = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v5->mPrev;
-          v5->mNext = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v5->mPrev;
-          v5->mData = 0i64;
-          *(_DWORD *)&v5->mReadOnlyAndPoolID = 0;
+          v24->mNext = v25;
+          v25->mPrev = v24;
+          handle->mPrev = handle;
+          handle->mNext = handle;
+          handle->mData = 0i64;
+          *(_DWORD *)&handle->mReadOnlyAndPoolID = 0;
         }
         else
         {
           for ( ;
-                (UFG::qList<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly,1,0> *)v9->mAllocationHandles.mNode.mNext != &v9->mAllocationHandles;
-                LODWORD(v29[1].mNext) = 0 )
+                (UFG::qList<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly,1,0> *)Block->mAllocationHandles.mNode.mNext != &Block->mAllocationHandles;
+                LODWORD(v26[1].mNext) = 0 )
           {
-            v29 = v9->mAllocationHandles.mNode.mNext;
-            v30 = v29->mPrev;
-            v31 = v29->mNext;
-            v30->mNext = v31;
-            v31->mPrev = v30;
-            v29->mPrev = v29;
-            v29->mNext = v29;
+            v26 = Block->mAllocationHandles.mNode.mNext;
+            v27 = v26->mPrev;
+            v28 = v26->mNext;
+            v27->mNext = v28;
+            v28->mPrev = v27;
+            v26->mPrev = v26;
+            v26->mNext = v26;
             UFG::qPrintChannel::Print(
               &UFG::VRAMChannel,
               OUTPUT_LEVEL_DEBUG,
               "[VRAM Channel] - Setting qVRAMemoryHandle(%p) to point at - PoolID:0x%02x BlockID:0x%04x Data:%p-%p AllocatedSize:%u\n");
-            v32 = v29->mPrev;
-            v33 = v29->mNext;
-            v32->mNext = v33;
-            v33->mPrev = v32;
-            v29->mPrev = v29;
-            v29->mNext = v29;
-            v29[1].mPrev = 0i64;
+            v29 = v26->mPrev;
+            v30 = v26->mNext;
+            v29->mNext = v30;
+            v30->mPrev = v29;
+            v26->mPrev = v26;
+            v26->mNext = v26;
+            v26[1].mPrev = 0i64;
           }
           v6 = 1;
         }
@@ -1424,8 +1352,8 @@ LABEL_32:
     }
   }
 LABEL_33:
-  UFG::qVRAMemoryPool::AssertValid(v4);
-  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&v4->mPoolLock);
+  UFG::qVRAMemoryPool::AssertValid(this);
+  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&this->mPoolLock);
   return v6;
 }
 
@@ -1433,58 +1361,50 @@ LABEL_33:
 // RVA: 0x1772C0
 __int64 __fastcall UFG::qVRAMemoryPool::Lock(UFG::qVRAMemoryPool *this, UFG::qVRAMemoryHandle *handle)
 {
-  UFG::qVRAMemoryPool *v2; // rdi
-  UFG::qVRAMemoryHandle *v3; // rsi
   unsigned __int8 v4; // bp
-  unsigned __int16 v5; // ax
-  unsigned __int16 v6; // cx
-  UFG::BlockInfo *v7; // rbx
-  char *v8; // ST20_8
-  char *v9; // ST20_8
+  unsigned __int16 mNumBlocksTotal; // ax
+  unsigned __int16 mBlockID; // cx
+  UFG::BlockInfo *Block; // rbx
 
-  v2 = this;
-  v3 = handle;
   UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - %.64s->Lock(handle(%p))\n");
   v4 = 0;
-  UFG::qMutex::Lock((LPCRITICAL_SECTION)&v2->mPoolLock);
-  UFG::qVRAMemoryPool::AssertValid(v2);
-  if ( v2->mInitialized == 1 && (v3->mReadOnlyAndPoolID & 0x7FFF) == v2->mPoolID )
+  UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mPoolLock);
+  UFG::qVRAMemoryPool::AssertValid(this);
+  if ( this->mInitialized == 1 && (handle->mReadOnlyAndPoolID & 0x7FFF) == this->mPoolID )
   {
-    v5 = v2->mNumBlocksTotal;
-    v6 = v3->mBlockID;
-    if ( v5 )
+    mNumBlocksTotal = this->mNumBlocksTotal;
+    mBlockID = handle->mBlockID;
+    if ( mNumBlocksTotal )
     {
-      if ( v6 >= v5 )
+      if ( mBlockID >= mNumBlocksTotal )
         goto LABEL_11;
-      v7 = &v2->mBlocks[(unsigned __int64)v6];
+      Block = &this->mBlocks[(unsigned __int64)mBlockID];
     }
     else
     {
-      v7 = UFG::qVRAMemoryPools::GetBlock(v6);
+      Block = UFG::qVRAMemoryPools::GetBlock(mBlockID);
     }
-    if ( v7 )
+    if ( Block )
     {
-      v8 = v7->mData;
       UFG::qPrintChannel::Print(
         &UFG::VRAMChannel,
         OUTPUT_LEVEL_NORMAL,
         "[VRAM Channel] -   handle(%p) at memory location %p locked\n");
-      v7->mFlags |= 0x20u;
-      if ( v7->mFlags & 0x40 )
+      Block->mFlags |= 0x20u;
+      if ( (Block->mFlags & 0x40) != 0 )
       {
-        v9 = v7->mData;
         UFG::qPrintChannel::Print(
           &UFG::VRAMChannel,
           OUTPUT_LEVEL_WARNING,
           "[VRAM Channel] -   handle(%p) at memory location %p was pending move, flagging to discard move\n");
-        v7->mFlags |= 0x80u;
+        Block->mFlags |= 0x80u;
       }
       v4 = 1;
     }
   }
 LABEL_11:
-  UFG::qVRAMemoryPool::AssertValid(v2);
-  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&v2->mPoolLock);
+  UFG::qVRAMemoryPool::AssertValid(this);
+  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&this->mPoolLock);
   return v4;
 }
 
@@ -1492,42 +1412,38 @@ LABEL_11:
 // RVA: 0x17F380
 __int64 __fastcall UFG::qVRAMemoryPool::Unlock(UFG::qVRAMemoryPool *this, UFG::qVRAMemoryHandle *handle)
 {
-  UFG::qVRAMemoryPool *v2; // rbx
-  UFG::qVRAMemoryHandle *v3; // rdi
   unsigned __int8 v4; // si
-  unsigned __int16 v5; // ax
-  unsigned __int16 v6; // cx
-  UFG::BlockInfo *v7; // rax
+  unsigned __int16 mNumBlocksTotal; // ax
+  unsigned __int16 mBlockID; // cx
+  UFG::BlockInfo *Block; // rax
 
-  v2 = this;
-  v3 = handle;
   UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - %.64s->Unlock(handle(%p))\n");
   v4 = 0;
-  UFG::qMutex::Lock((LPCRITICAL_SECTION)&v2->mPoolLock);
-  UFG::qVRAMemoryPool::AssertValid(v2);
-  if ( v2->mInitialized == 1 && (v3->mReadOnlyAndPoolID & 0x7FFF) == v2->mPoolID )
+  UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mPoolLock);
+  UFG::qVRAMemoryPool::AssertValid(this);
+  if ( this->mInitialized == 1 && (handle->mReadOnlyAndPoolID & 0x7FFF) == this->mPoolID )
   {
-    v5 = v2->mNumBlocksTotal;
-    v6 = v3->mBlockID;
-    if ( v5 )
+    mNumBlocksTotal = this->mNumBlocksTotal;
+    mBlockID = handle->mBlockID;
+    if ( mNumBlocksTotal )
     {
-      if ( v6 >= v5 )
+      if ( mBlockID >= mNumBlocksTotal )
         goto LABEL_9;
-      v7 = &v2->mBlocks[(unsigned __int64)v6];
+      Block = &this->mBlocks[(unsigned __int64)mBlockID];
     }
     else
     {
-      v7 = UFG::qVRAMemoryPools::GetBlock(v6);
+      Block = UFG::qVRAMemoryPools::GetBlock(mBlockID);
     }
-    if ( v7 )
+    if ( Block )
     {
-      v7->mFlags &= 0xDFu;
+      Block->mFlags &= ~0x20u;
       v4 = 1;
     }
   }
 LABEL_9:
-  UFG::qVRAMemoryPool::AssertValid(v2);
-  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&v2->mPoolLock);
+  UFG::qVRAMemoryPool::AssertValid(this);
+  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&this->mPoolLock);
   return v4;
 }
 
@@ -1535,133 +1451,115 @@ LABEL_9:
 // RVA: 0x1720C0
 __int64 __fastcall UFG::qVRAMemoryPool::GetRequestedSize(UFG::qVRAMemoryPool *this, UFG::qVRAMemoryHandle *handle)
 {
-  UFG::qVRAMemoryHandle *v2; // rsi
-  UFG::qVRAMemoryPool *v3; // rbx
-  unsigned int v4; // edi
-  unsigned __int16 v5; // ax
-  unsigned __int16 v6; // cx
-  UFG::BlockInfo *v7; // rax
+  unsigned int mRequestedSize; // edi
+  unsigned __int16 mNumBlocksTotal; // ax
+  unsigned __int16 mBlockID; // cx
+  UFG::BlockInfo *Block; // rax
 
-  v2 = handle;
-  v3 = this;
-  v4 = 0;
+  mRequestedSize = 0;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mPoolLock);
-  UFG::qVRAMemoryPool::AssertValid(v3);
-  if ( v3->mInitialized == 1 && (v2->mReadOnlyAndPoolID & 0x7FFF) == v3->mPoolID )
+  UFG::qVRAMemoryPool::AssertValid(this);
+  if ( this->mInitialized == 1 && (handle->mReadOnlyAndPoolID & 0x7FFF) == this->mPoolID )
   {
-    v5 = v3->mNumBlocksTotal;
-    v6 = v2->mBlockID;
-    if ( v5 )
+    mNumBlocksTotal = this->mNumBlocksTotal;
+    mBlockID = handle->mBlockID;
+    if ( mNumBlocksTotal )
     {
-      if ( v6 >= v5 )
+      if ( mBlockID >= mNumBlocksTotal )
         goto LABEL_9;
-      v7 = &v3->mBlocks[(unsigned __int64)v6];
+      Block = &this->mBlocks[(unsigned __int64)mBlockID];
     }
     else
     {
-      v7 = UFG::qVRAMemoryPools::GetBlock(v6);
+      Block = UFG::qVRAMemoryPools::GetBlock(mBlockID);
     }
-    if ( v7 )
-      v4 = v7->mRequestedSize;
+    if ( Block )
+      mRequestedSize = Block->mRequestedSize;
   }
 LABEL_9:
-  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&v3->mPoolLock);
-  return v4;
+  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&this->mPoolLock);
+  return mRequestedSize;
 }
 
 // File Line: 1556
 // RVA: 0x16F2F0
 __int64 __fastcall UFG::qVRAMemoryPool::GetAllocatedSize(UFG::qVRAMemoryPool *this, UFG::qVRAMemoryHandle *handle)
 {
-  UFG::qVRAMemoryHandle *v2; // rsi
-  UFG::qVRAMemoryPool *v3; // rbx
-  unsigned int v4; // edi
-  unsigned __int16 v5; // ax
-  unsigned __int16 v6; // cx
-  UFG::BlockInfo *v7; // rax
+  unsigned int mActualSize; // edi
+  unsigned __int16 mNumBlocksTotal; // ax
+  unsigned __int16 mBlockID; // cx
+  UFG::BlockInfo *Block; // rax
 
-  v2 = handle;
-  v3 = this;
-  v4 = 0;
+  mActualSize = 0;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mPoolLock);
-  UFG::qVRAMemoryPool::AssertValid(v3);
-  if ( v3->mInitialized == 1 && (v2->mReadOnlyAndPoolID & 0x7FFF) == v3->mPoolID )
+  UFG::qVRAMemoryPool::AssertValid(this);
+  if ( this->mInitialized == 1 && (handle->mReadOnlyAndPoolID & 0x7FFF) == this->mPoolID )
   {
-    v5 = v3->mNumBlocksTotal;
-    v6 = v2->mBlockID;
-    if ( v5 )
+    mNumBlocksTotal = this->mNumBlocksTotal;
+    mBlockID = handle->mBlockID;
+    if ( mNumBlocksTotal )
     {
-      if ( v6 >= v5 )
+      if ( mBlockID >= mNumBlocksTotal )
         goto LABEL_9;
-      v7 = &v3->mBlocks[(unsigned __int64)v6];
+      Block = &this->mBlocks[(unsigned __int64)mBlockID];
     }
     else
     {
-      v7 = UFG::qVRAMemoryPools::GetBlock(v6);
+      Block = UFG::qVRAMemoryPools::GetBlock(mBlockID);
     }
-    if ( v7 )
-      v4 = v7->mActualSize;
+    if ( Block )
+      mActualSize = Block->mActualSize;
   }
 LABEL_9:
-  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&v3->mPoolLock);
-  return v4;
+  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&this->mPoolLock);
+  return mActualSize;
 }
 
 // File Line: 1681
 // RVA: 0x17CC20
-void __fastcall UFG::qVRAMemoryPool::SetCanDefrag(UFG::qVRAMemoryPool *this, bool can_defrag)
+void __fastcall UFG::qVRAMemoryPool::SetCanDefrag(UFG::qVRAMemoryPool *this, char can_defrag)
 {
-  bool v2; // bl
-  UFG::qVRAMemoryPool *v3; // rsi
-
-  v2 = can_defrag;
-  v3 = this;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mPoolLock);
-  v3->mDefragAllowed = v2 != 0;
-  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&v3->mPoolLock);
+  this->mDefragAllowed = can_defrag != 0;
+  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&this->mPoolLock);
 }
 
 // File Line: 1752
 // RVA: 0x1676D0
 void __fastcall UFG::qVRAMemoryPool::AssertValid(UFG::qVRAMemoryPool *this)
 {
-  UFG::qVRAMemoryPool *v1; // rbx
-
-  v1 = this;
   if ( this->mValidate )
   {
     UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - %.64s->AssertValid()\n");
-    UFG::qMutex::Lock((LPCRITICAL_SECTION)&v1->mPoolLock);
-    if ( v1->mInitialized == 1 )
-      UFG::qVRAMemoryPool::AssertValidInitialized(v1);
-    UFG::qMutex::Unlock((LPCRITICAL_SECTION)&v1->mPoolLock);
+    UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mPoolLock);
+    if ( this->mInitialized == 1 )
+      UFG::qVRAMemoryPool::AssertValidInitialized(this);
+    UFG::qMutex::Unlock((LPCRITICAL_SECTION)&this->mPoolLock);
   }
 }
 
 // File Line: 1773
 // RVA: 0x178DC0
-void __fastcall UFG::qVRAMemoryPool::Print(UFG::qVRAMemoryPool *this, unsigned int print_flags)
+void __fastcall UFG::qVRAMemoryPool::Print(UFG::qVRAMemoryPool *this, char print_flags)
 {
-  _RTL_CRITICAL_SECTION *v2; // r15
-  unsigned int v3; // er14
-  UFG::qVRAMemoryPool *v4; // rdi
-  UFG::qVRAMemoryPool *v5; // rax
-  UFG::qMemoryPool *v6; // rdx
-  UFG::qMemoryPool *v7; // rdx
-  signed __int64 i; // rcx
-  __int64 j; // rax
-  signed __int64 v10; // rbp
+  _RTL_CRITICAL_SECTION *p_mPoolLock; // r15
+  UFG::qVRAMemoryPool *mOverflowVRAM; // rax
+  UFG::qMemoryPool *mOverflowMain; // rdx
+  UFG::qMemoryPool *mMainMemoryPool; // rdx
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *i; // rcx
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *j; // rax
+  UFG::qList<UFG::BlockInfo,UFG::Secondary,1,0> *p_mMoveTargetsList; // rbp
   bool v11; // si
   UFG::BlockInfo *k; // rbx
-  UFG::BlockInfo *v13; // rbx
-  bool l; // si
-  UFG::BlockInfo *m; // rbx
+  UFG::BlockInfo *mNext; // rbx
+  bool m; // si
+  UFG::BlockInfo *n; // rbx
   unsigned __int16 v16; // si
-  unsigned __int16 v17; // bp
+  unsigned __int16 mBlockID; // bp
   unsigned __int16 v18; // r14
-  unsigned __int16 v19; // ax
+  unsigned __int16 mNumBlocksTotal; // ax
   UFG::BlockInfo *v20; // rbx
-  unsigned __int8 v21; // al
+  unsigned __int8 mUsage; // al
   const char *v22; // r10
   unsigned __int16 v23; // ax
   int v24; // ecx
@@ -1670,77 +1568,79 @@ void __fastcall UFG::qVRAMemoryPool::Print(UFG::qVRAMemoryPool *this, unsigned i
   __int64 v27; // [rsp+28h] [rbp-50h]
   __int64 v28; // [rsp+30h] [rbp-48h]
 
-  v2 = (_RTL_CRITICAL_SECTION *)&this->mPoolLock;
-  v3 = print_flags;
-  v4 = this;
+  p_mPoolLock = (_RTL_CRITICAL_SECTION *)&this->mPoolLock;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mPoolLock);
-  UFG::qVRAMemoryPool::AssertValid(v4);
-  UFG::qPrintf("Summary of Pool %u %s\n", v4->mPoolID, v4->mName);
-  if ( v3 & 1 )
+  UFG::qVRAMemoryPool::AssertValid(this);
+  UFG::qPrintf("Summary of Pool %u %s\n", this->mPoolID, this->mName);
+  if ( (print_flags & 1) != 0 )
   {
-    v5 = v4->mOverflowVRAM;
-    if ( v5 )
-      UFG::qPrintf("  Overflow qVRAMemoryPool ID:%u %s\n", v5->mPoolID, v5->mName);
-    v6 = v4->mOverflowMain;
-    if ( v6 )
-      UFG::qPrintf("  Overflow qMemoryPool %s\n", v6->mData->mAllocator.mName);
-    v7 = v4->mMainMemoryPool;
-    if ( v7 )
-      UFG::qPrintf("  Main Memory Allocations qMemoryPool %s\n", v7->mData->mAllocator.mName);
-    if ( v4->mPoolMemory.mData )
+    mOverflowVRAM = this->mOverflowVRAM;
+    if ( mOverflowVRAM )
+      UFG::qPrintf("  Overflow qVRAMemoryPool ID:%u %s\n", mOverflowVRAM->mPoolID, mOverflowVRAM->mName);
+    mOverflowMain = this->mOverflowMain;
+    if ( mOverflowMain )
+      UFG::qPrintf("  Overflow qMemoryPool %s\n", mOverflowMain->mData->mAllocator.mName);
+    mMainMemoryPool = this->mMainMemoryPool;
+    if ( mMainMemoryPool )
+      UFG::qPrintf("  Main Memory Allocations qMemoryPool %s\n", mMainMemoryPool->mData->mAllocator.mName);
+    if ( this->mPoolMemory.mData )
       UFG::qPrintf(
         "  Parent qVRAMemoryPool ID:%u %s\n",
-        v4->mPoolMemory.mReadOnlyAndPoolID & 0x7FFF,
-        UFG::qVRAMemoryPools::sVRAMemoryPools[v4->mPoolMemory.mReadOnlyAndPoolID & 0x7FFF]->mName);
-    UFG::qPrintf("  Memory Range: %p - %p\n", v4->mVRAMemoryStart, &v4->mVRAMemoryStart[v4->mVRAMemorySize - 1]);
-    for ( i = (signed __int64)&v4->mContainerList.mNode.mNext[-1];
-          (UFG::qList<UFG::BlockInfo,UFG::Secondary,1,0> *)i != &v4->mMoveTargetsList;
-          i = *(_QWORD *)(i + 24) - 16i64 )
+        this->mPoolMemory.mReadOnlyAndPoolID & 0x7FFF,
+        UFG::qVRAMemoryPools::sVRAMemoryPools[this->mPoolMemory.mReadOnlyAndPoolID & 0x7FFF]->mName);
+    UFG::qPrintf("  Memory Range: %p - %p\n", this->mVRAMemoryStart, &this->mVRAMemoryStart[this->mVRAMemorySize - 1]);
+    for ( i = this->mContainerList.mNode.mNext - 1;
+          i != (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&this->mMoveTargetsList;
+          i = i[1].mNext - 1 )
     {
-      for ( j = *(_QWORD *)(i + 96); j != i + 88; j = *(_QWORD *)(j + 8) )
+      for ( j = i[6].mPrev; j != (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&i[5].mNext; j = j->mNext )
         ;
     }
   }
-  if ( v3 & 2 )
+  if ( (print_flags & 2) != 0 )
   {
-    v10 = (signed __int64)&v4->mMoveTargetsList;
-    v11 = (v3 >> 3) & 1;
-    if ( v3 & 4 )
+    p_mMoveTargetsList = &this->mMoveTargetsList;
+    v11 = (print_flags & 8) != 0;
+    if ( (print_flags & 4) != 0 )
       v11 = 0;
-    for ( k = (UFG::BlockInfo *)&v4->mContainerList.mNode.mNext[-1];
-          k != (UFG::BlockInfo *)v10;
-          k = (UFG::BlockInfo *)&k->mNext[-1] )
+    for ( k = (UFG::BlockInfo *)&this->mContainerList.mNode.mNext[-1];
+          k != (UFG::BlockInfo *)p_mMoveTargetsList;
+          k = (UFG::BlockInfo *)&k->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext[-1] )
     {
       UFG::BlockInfo::Print(k, v11);
     }
   }
-  if ( v3 & 4 )
+  if ( (print_flags & 4) != 0 )
   {
-    v13 = (UFG::BlockInfo *)v4->mUsedBlocks.mNode.mNext;
-    for ( l = (v3 >> 3) & 1; v13 != (UFG::BlockInfo *)&v4->mUsedBlocks; v13 = (UFG::BlockInfo *)v13->mNext )
-      UFG::BlockInfo::Print(v13, l);
-    for ( m = (UFG::BlockInfo *)v4->mMainMemoryBlocks.mNode.mNext;
-          m != (UFG::BlockInfo *)&v4->mMainMemoryBlocks;
-          m = (UFG::BlockInfo *)m->mNext )
+    mNext = (UFG::BlockInfo *)this->mUsedBlocks.mNode.mNext;
+    for ( m = (print_flags & 8) != 0;
+          mNext != (UFG::BlockInfo *)&this->mUsedBlocks;
+          mNext = (UFG::BlockInfo *)mNext->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext )
     {
-      UFG::BlockInfo::Print(m, l);
+      UFG::BlockInfo::Print(mNext, m);
+    }
+    for ( n = (UFG::BlockInfo *)this->mMainMemoryBlocks.mNode.mNext;
+          n != (UFG::BlockInfo *)&this->mMainMemoryBlocks;
+          n = (UFG::BlockInfo *)n->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext )
+    {
+      UFG::BlockInfo::Print(n, m);
     }
   }
-  if ( !(v3 & 0x10) )
+  if ( (print_flags & 0x10) == 0 )
     goto LABEL_57;
   v16 = 0;
-  v17 = -1;
+  mBlockID = -1;
   v18 = -1;
-  if ( v4->mUsedBlocksMax <= 0u )
+  if ( !this->mUsedBlocksMax )
     goto LABEL_51;
   do
   {
-    v19 = v4->mNumBlocksTotal;
-    if ( v19 )
+    mNumBlocksTotal = this->mNumBlocksTotal;
+    if ( mNumBlocksTotal )
     {
-      if ( v16 >= v19 )
+      if ( v16 >= mNumBlocksTotal )
         goto LABEL_49;
-      v20 = &v4->mBlocks[(unsigned __int64)v16];
+      v20 = &this->mBlocks[(unsigned __int64)v16];
     }
     else
     {
@@ -1754,26 +1654,26 @@ void __fastcall UFG::qVRAMemoryPool::Print(UFG::qVRAMemoryPool *this, unsigned i
     {
       if ( v20->mUsage )
       {
-        if ( v17 != -1 )
+        if ( mBlockID != 0xFFFF )
         {
-          if ( v17 == v18 )
+          if ( mBlockID == v18 )
             UFG::qPrintf(
               "    BlockID  :%05u                                                                               type(%*s)\n",
-              v17,
-              21i64,
+              mBlockID,
+              21,
               off_14203C490[0]);
           else
             UFG::qPrintf(
               "    BlockID  :%05u - %05u                                                                       type(%*s)\n",
-              v17,
+              mBlockID,
               v18,
-              21i64,
+              21,
               off_14203C490[0]);
-          v17 = -1;
+          mBlockID = -1;
           v18 = -1;
         }
-        v21 = v20->mUsage;
-        if ( v21 == 11 )
+        mUsage = v20->mUsage;
+        if ( mUsage == 11 )
         {
           LODWORD(v28) = 21;
           LODWORD(v27) = v20->mActualSize;
@@ -1782,7 +1682,7 @@ void __fastcall UFG::qVRAMemoryPool::Print(UFG::qVRAMemoryPool *this, unsigned i
             "      BlockID:%05u [%p - %p] %9u bytes requested %9u bytes allocated type(%*s) name:(%.64s)\n",
             v20->mBlockID,
             v20->mData,
-            &v20->mData[v20->mRequestedSize - 1],
+            &v20->mData[(unsigned int)v26 - 1],
             v26,
             v27,
             v28,
@@ -1791,10 +1691,10 @@ void __fastcall UFG::qVRAMemoryPool::Print(UFG::qVRAMemoryPool *this, unsigned i
         }
         else
         {
-          if ( v21 > 0x12u )
+          if ( mUsage > 0x12u )
             v22 = "Unknown VRAMType";
           else
-            v22 = off_14203C490[v21];
+            v22 = off_14203C490[mUsage];
           LODWORD(v28) = 21;
           LODWORD(v27) = v20->mActualSize;
           LODWORD(v26) = v20->mRequestedSize;
@@ -1802,7 +1702,7 @@ void __fastcall UFG::qVRAMemoryPool::Print(UFG::qVRAMemoryPool *this, unsigned i
             "    BlockID  :%05u [%p - %p] %9u bytes requested %9u bytes allocated type(%*s) name:(%.64s)\n",
             v20->mBlockID,
             v20->mData,
-            &v20->mData[v20->mActualSize - 1],
+            &v20->mData[(unsigned int)v27 - 1],
             v26,
             v27,
             v28,
@@ -1812,18 +1712,18 @@ void __fastcall UFG::qVRAMemoryPool::Print(UFG::qVRAMemoryPool *this, unsigned i
       }
       else
       {
-        if ( v17 == -1 )
-          v17 = v20->mBlockID;
+        if ( mBlockID == 0xFFFF )
+          mBlockID = v20->mBlockID;
         v18 = v20->mBlockID;
       }
     }
 LABEL_49:
     ++v16;
   }
-  while ( v16 < v4->mUsedBlocksMax );
-  v2 = (_RTL_CRITICAL_SECTION *)&v4->mPoolLock;
+  while ( v16 < this->mUsedBlocksMax );
+  p_mPoolLock = (_RTL_CRITICAL_SECTION *)&this->mPoolLock;
 LABEL_51:
-  v23 = v4->mNumBlocksTotal;
+  v23 = this->mNumBlocksTotal;
   if ( v23 )
   {
     v24 = v23;
@@ -1835,216 +1735,367 @@ LABEL_51:
     UFG::qMutex::Unlock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMBlocksLock);
     v24 = v25;
   }
-  if ( v4->mUsedBlocksMax != v24 && v4->mNumBlocksTotal <= 0u )
+  if ( this->mUsedBlocksMax != v24 && !this->mNumBlocksTotal )
   {
     UFG::qMutex::Lock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMBlocksLock);
     UFG::qMutex::Unlock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMBlocksLock);
   }
 LABEL_57:
-  UFG::qMutex::Unlock(v2);
+  UFG::qMutex::Unlock(p_mPoolLock);
 }
 
 // File Line: 1901
 // RVA: 0x1696E0
-UFG::qVRAMemoryPool::CommonInit
+char __fastcall UFG::qVRAMemoryPool::CommonInit(
+        UFG::qVRAMemoryPool *this,
+        const char *name,
+        unsigned __int16 num_blocks,
+        unsigned int min_alignment,
+        char *block_memory,
+        unsigned int block_memory_size)
+{
+  unsigned __int64 v10; // rsi
+  bool v11; // cf
+  unsigned __int64 v12; // rsi
+  UFG::qMemoryPool *v13; // rcx
+  UFG::allocator::free_link *v14; // rax
+  UFG::BlockInfo *v15; // rsi
+  unsigned __int16 i; // dx
+  UFG::BlockInfo *v17; // rcx
+  unsigned __int16 v18; // dx
+  UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *p_mUnusedBlocks; // r8
+  UFG::BlockInfo *v20; // rcx
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *mPrev; // rax
+  unsigned __int16 v22; // cx
+  unsigned int mVRAMemorySize; // eax
+  int v24; // edx
+  char *mName; // rcx
+  const char *v26; // rdi
+  char v27; // al
+  UFG::BlockInfo *UnusedBlock; // rsi
+  unsigned int v29; // edi
+  char *mVRAMemoryStart; // rbx
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v31; // rax
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v32; // rax
+
+  if ( num_blocks )
+  {
+    if ( block_memory )
+    {
+      this->mBlocks = (UFG::BlockInfo *)block_memory;
+      this->mBlocksMemory = block_memory;
+      this->mBlocksMemorySize = block_memory_size;
+      for ( i = 0; i < num_blocks; ++i )
+      {
+        v17 = &this->mBlocks[(unsigned __int64)i];
+        if ( v17 )
+        {
+          v17->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev = v17;
+          v17->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext = v17;
+          v17->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev = &v17->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+          v17->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext = &v17->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+          v17->mAllocationHandles.mNode.mPrev = &v17->mAllocationHandles.mNode;
+          v17->mAllocationHandles.mNode.mNext = &v17->mAllocationHandles.mNode;
+          v17->mData = 0i64;
+          v17->mName = 0i64;
+          *(_QWORD *)&v17->mRequestedSize = 0i64;
+          *(_DWORD *)&v17->mBlockID = 0xFFFF;
+          *(_WORD *)&v17->mKeepAliveFrames = 0;
+          v17->mMemoryPool = 0i64;
+          v17->mContainedBlocks.mNode.mPrev = &v17->mContainedBlocks.mNode;
+          v17->mContainedBlocks.mNode.mNext = &v17->mContainedBlocks.mNode;
+          *(_DWORD *)&v17->mContainerID = -1;
+          v17->mCallbackData64 = 0i64;
+          v17->mCallbackData32 = 0;
+        }
+      }
+    }
+    else
+    {
+      v10 = (unsigned __int64)num_blocks << 7;
+      if ( !is_mul_ok(num_blocks, 0x80ui64) )
+        v10 = -1i64;
+      v11 = __CFADD__(v10, 8i64);
+      v12 = v10 + 8;
+      if ( v11 )
+        v12 = -1i64;
+      v13 = UFG::gMainMemoryPool;
+      if ( !UFG::gMainMemoryPool )
+      {
+        UFG::InternalSetupMainMemoryPool((UFG *)UFG::gMainMemoryPool);
+        v13 = UFG::gMainMemoryPool;
+      }
+      v14 = UFG::qMemoryPool::Allocate(v13, v12, "qVRAMemoryPool::mBlocks", 0i64, 1u);
+      if ( v14 )
+      {
+        LODWORD(v14->mNext) = num_blocks;
+        v15 = (UFG::BlockInfo *)&v14[1];
+        `eh vector constructor iterator(
+          &v14[1],
+          0x80ui64,
+          num_blocks,
+          (void (__fastcall *)(void *))UFG::BlockInfo::BlockInfo);
+      }
+      else
+      {
+        v15 = 0i64;
+      }
+      this->mBlocks = v15;
+      this->mBlocksMemory = 0i64;
+      this->mBlocksMemorySize = 0;
+    }
+  }
+  this->mNumBlocksTotal = num_blocks;
+  this->mMinAlignment = min_alignment;
+  this->mOverflowVRAM = 0i64;
+  this->mOverflowMain = 0i64;
+  v18 = 0;
+  if ( num_blocks )
+  {
+    p_mUnusedBlocks = &this->mUnusedBlocks;
+    do
+    {
+      v20 = &this->mBlocks[(unsigned __int64)v18];
+      v20->mBlockID = v18;
+      mPrev = p_mUnusedBlocks->mNode.mPrev;
+      mPrev->mNext = v20;
+      v20->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev = mPrev;
+      v20->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext = &p_mUnusedBlocks->mNode;
+      p_mUnusedBlocks->mNode.mPrev = v20;
+      ++v18;
+    }
+    while ( v18 < this->mNumBlocksTotal );
+  }
+  v22 = 0;
+  while ( UFG::qVRAMemoryPools::sVRAMemoryPools[v22] )
+  {
+    if ( ++v22 >= 0x10u )
+      return 0;
+  }
+  this->mPoolID = v22;
+  UFG::qVRAMemoryPools::sVRAMemoryPools[v22] = this;
+  mVRAMemorySize = this->mVRAMemorySize;
+  this->mFreeMemory = mVRAMemorySize;
+  this->mLargestFreeBlock = mVRAMemorySize;
+  *(_QWORD *)&this->mUsedMemory = 0i64;
+  *(_QWORD *)&this->mAllocatedMemory = 0i64;
+  *(_QWORD *)&this->mUsedMainMemory = 0i64;
+  *(_DWORD *)&this->mAllocatedBlocksCount = 0;
+  v24 = 32;
+  mName = this->mName;
+  if ( this != (UFG::qVRAMemoryPool *)-312i64 )
+  {
+    if ( !name )
+      goto LABEL_30;
+    v26 = (const char *)(name - mName);
+    do
+    {
+      v27 = mName[(_QWORD)v26];
+      *mName++ = v27;
+      if ( !v27 )
+        break;
+      --v24;
+    }
+    while ( v24 > 1 );
+    if ( *(mName - 1) )
+LABEL_30:
+      *mName = 0;
+  }
+  *(_WORD *)&this->mNeedsDefragmentUp = 0;
+  UnusedBlock = UFG::qVRAMemoryPool::GetUnusedBlock(this);
+  v29 = this->mVRAMemorySize;
+  mVRAMemoryStart = this->mVRAMemoryStart;
+  UFG::qPrintChannel::Print(
+    &UFG::VRAMChannel,
+    OUTPUT_LEVEL_DEBUG,
+    "[VRAM Channel] - Setting Block ID:0x%04x to free data:%p size:0x%08x (%9u)\n");
+  UnusedBlock->mData = mVRAMemoryStart;
+  UnusedBlock->mName = "Free VRAM";
+  UnusedBlock->mRequestedSize = v29;
+  UnusedBlock->mActualSize = v29;
+  *(_DWORD *)&UnusedBlock->mUsage = 1;
+  UnusedBlock->mMemoryPool = 0i64;
+  UnusedBlock->mContainerID = 0;
+  UnusedBlock->mCallbackData64 = 0i64;
+  UnusedBlock->mCallbackData32 = 0;
+  v31 = this->mUsedBlocks.mNode.mPrev;
+  v31->mNext = UnusedBlock;
+  UnusedBlock->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev = v31;
+  UnusedBlock->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext = &this->mUsedBlocks.mNode;
+  this->mUsedBlocks.mNode.mPrev = UnusedBlock;
+  v32 = this->mFreeList.mNode.mPrev;
+  v32->mNext = &UnusedBlock->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+  UnusedBlock->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev = v32;
+  UnusedBlock->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext = &this->mFreeList.mNode;
+  this->mFreeList.mNode.mPrev = &UnusedBlock->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+  this->mInitialized = 1;
+  return 1;
+}
 
 // File Line: 1993
 // RVA: 0x16FF90
-__int64 __fastcall UFG::qVRAMemoryPool::GetDefragmentMoves(UFG::qVRAMemoryPool *this, UFG::qVRAMemoryMoveOrder *moves, int moves_count, unsigned int requested_total_bytes, unsigned int *total_bytes)
+__int64 __fastcall UFG::qVRAMemoryPool::GetDefragmentMoves(
+        UFG::qVRAMemoryPool *this,
+        UFG::qVRAMemoryMoveOrder *moves,
+        int moves_count,
+        unsigned int requested_total_bytes,
+        unsigned int *total_bytes)
 {
   UFG::qVRAMemoryMoveOrder *v5; // rbp
   unsigned int v6; // esi
   int v7; // edi
-  UFG::qVRAMemoryPool *v8; // rbx
   UFG::qPrintChannel::OutputLevel v9; // edx
-  int v10; // er13
-  _RTL_CRITICAL_SECTION *v11; // r12
+  int v10; // r13d
+  _RTL_CRITICAL_SECTION *p_mPoolLock; // r12
   char v12; // al
   unsigned int *v13; // r14
-  char **v14; // r15
-  unsigned int v15; // eax
-  unsigned int v16; // er8
-  UFG::qVRAMemoryHandle *v17; // r12
-  char *v18; // r14
-  char *v19; // r15
-  int v20; // esi
-  char *v21; // rbp
-  __int64 v22; // r9
-  __int64 v23; // r15
-  char *v24; // ST20_8
-  bool found_move_too_large; // [rsp+50h] [rbp-58h]
-  char **v27; // [rsp+58h] [rbp-50h]
-  char v28; // [rsp+B0h] [rbp+8h]
-  UFG::qVRAMemoryMoveOrder *v29; // [rsp+B8h] [rbp+10h]
-  int v30; // [rsp+C0h] [rbp+18h]
-  unsigned int v31; // [rsp+C8h] [rbp+20h]
+  unsigned int v14; // eax
+  unsigned int v15; // r8d
+  UFG::qVRAMemoryMoveOrder *v16; // r12
+  __int64 v17; // r15
+  bool found_move_too_large; // [rsp+50h] [rbp-58h] BYREF
+  char **p_mData; // [rsp+58h] [rbp-50h]
+  char v21; // [rsp+B0h] [rbp+8h]
 
-  v31 = requested_total_bytes;
-  v30 = moves_count;
-  v29 = moves;
   v5 = moves;
   v6 = requested_total_bytes;
   v7 = moves_count;
-  v8 = this;
-  v9 = 4;
+  v9 = OUTPUT_LEVEL_DEBUG;
   if ( v5
     && moves_count > 0
     && (unsigned __int8)this->mNeedsDefragmentUp + (unsigned __int8)this->mNeedsDefragmentDown > 0 )
   {
-    v9 = 2;
+    v9 = OUTPUT_LEVEL_WARNING;
   }
   UFG::qPrintChannel::Print(&UFG::VRAMChannel, v9, "[VRAM Channel] - %.64s->GetDefragmentMoves(%p, %u)\n");
   v10 = 0;
   if ( v5 && v7 > 0 )
   {
-    v11 = (_RTL_CRITICAL_SECTION *)&v8->mPoolLock;
-    UFG::qMutex::Lock((LPCRITICAL_SECTION)&v8->mPoolLock);
-    UFG::qVRAMemoryPool::AssertValid(v8);
-    if ( v8->mDefragAllowed == 1
-      && (unsigned __int8)v8->mNeedsDefragmentUp + (unsigned __int8)v8->mNeedsDefragmentDown > 0 )
+    p_mPoolLock = (_RTL_CRITICAL_SECTION *)&this->mPoolLock;
+    UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mPoolLock);
+    UFG::qVRAMemoryPool::AssertValid(this);
+    if ( this->mDefragAllowed == 1
+      && (unsigned __int8)this->mNeedsDefragmentUp + (unsigned __int8)this->mNeedsDefragmentDown > 0 )
     {
       v12 = 0;
-      v28 = 0;
-      if ( v7 > 0 )
+      v21 = 0;
+      v13 = total_bytes;
+      p_mData = &v5->mTargetHandle.mData;
+      do
       {
-        v13 = total_bytes;
-        v14 = &v5->mTargetHandle.mData;
-        v27 = &v5->mTargetHandle.mData;
-        do
+        if ( v12 )
+          break;
+        v14 = *v13;
+        if ( *v13 >= v6 )
+          break;
+        v15 = v14 ? v6 - v14 : -1;
+        found_move_too_large = 0;
+        v16 = &v5[(__int64)v10];
+        if ( (unsigned __int8)UFG::qVRAMemoryPool::GetDefragmentMove(this, v16, v15, &found_move_too_large) == 1 )
         {
-          if ( v12 )
-            break;
-          v15 = *v13;
-          if ( *v13 >= v6 )
-            break;
-          v16 = v15 ? v6 - v15 : -1;
-          found_move_too_large = 0;
-          v17 = &v5[(signed __int64)v10].mTargetHandle;
-          if ( (unsigned __int8)UFG::qVRAMemoryPool::GetDefragmentMove(
-                                  v8,
-                                  &v5[(signed __int64)v10],
-                                  v16,
-                                  &found_move_too_large) == 1 )
-          {
-            v18 = *v14;
-            UFG::qVRAMemoryPools::GetAllocatedSize(v17);
-            v19 = *v14;
-            v20 = *((unsigned __int16 *)v27 + 5);
-            v21 = v27[4];
-            UFG::qVRAMemoryPools::GetAllocatedSize(v17 + 1);
-            v22 = *((unsigned __int16 *)v27 + 21);
-            v23 = (__int64)v27;
-            v24 = v27[4];
-            UFG::qPrintChannel::Print(
-              &UFG::VRAMChannel,
-              OUTPUT_LEVEL_DEBUG,
-              "[VRAM Channel]    - Found Move [%04u]%p-%p to [%04u]%p-%p\n");
-            v7 = v30;
-            *total_bytes += UFG::qVRAMemoryPools::GetAllocatedSize(v17 + 1);
-            v6 = v31;
-            v5 = v29;
-            v12 = v28;
-            ++v10;
-            v14 = (char **)(v23 + 64);
-            v27 = v14;
-            v13 = total_bytes;
-          }
-          else
-          {
-            v12 = 1;
-            v28 = 1;
-            if ( found_move_too_large != 1 )
-              *(_WORD *)&v8->mNeedsDefragmentUp = 0;
-          }
+          UFG::qVRAMemoryPools::GetAllocatedSize(&v16->mTargetHandle);
+          UFG::qVRAMemoryPools::GetAllocatedSize(&v16->mSourceHandle);
+          v17 = (__int64)p_mData;
+          UFG::qPrintChannel::Print(
+            &UFG::VRAMChannel,
+            OUTPUT_LEVEL_DEBUG,
+            "[VRAM Channel]    - Found Move [%04u]%p-%p to [%04u]%p-%p\n");
+          v7 = moves_count;
+          *total_bytes += UFG::qVRAMemoryPools::GetAllocatedSize(&v16->mSourceHandle);
+          v6 = requested_total_bytes;
+          v5 = moves;
+          v12 = v21;
+          ++v10;
+          p_mData = (char **)(v17 + 64);
+          v13 = total_bytes;
         }
-        while ( v10 < v7 );
-        v11 = (_RTL_CRITICAL_SECTION *)&v8->mPoolLock;
+        else
+        {
+          v12 = 1;
+          v21 = 1;
+          if ( !found_move_too_large )
+            *(_WORD *)&this->mNeedsDefragmentUp = 0;
+        }
       }
+      while ( v10 < v7 );
+      p_mPoolLock = (_RTL_CRITICAL_SECTION *)&this->mPoolLock;
     }
-    UFG::qVRAMemoryPool::AssertValid(v8);
-    UFG::qMutex::Unlock(v11);
+    UFG::qVRAMemoryPool::AssertValid(this);
+    UFG::qMutex::Unlock(p_mPoolLock);
   }
   return (unsigned int)v10;
 }
 
 // File Line: 2062
 // RVA: 0x16FB00
-__int64 __fastcall UFG::qVRAMemoryPool::GetDefragmentMove(UFG::qVRAMemoryPool *this, UFG::qVRAMemoryMoveOrder *move, unsigned int allowable_bytes, bool *found_move_too_large)
+__int64 __fastcall UFG::qVRAMemoryPool::GetDefragmentMove(
+        UFG::qVRAMemoryPool *this,
+        UFG::qVRAMemoryMoveOrder *move,
+        unsigned int allowable_bytes,
+        bool *found_move_too_large)
 {
   unsigned __int8 v4; // si
   bool *v5; // rbx
   unsigned int v6; // edi
   UFG::qVRAMemoryMoveOrder *v7; // r14
-  UFG::qVRAMemoryPool *v8; // r13
   UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v9; // r12
   UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v10; // rbp
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v11; // r8
-  unsigned int v12; // er10
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *mPrev; // r8
+  unsigned int v12; // r10d
   UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v13; // r15
-  unsigned int v14; // er11
+  unsigned int v14; // r11d
   char v15; // al
-  unsigned int v16; // eax
-  unsigned int v17; // er9
-  unsigned int v18; // er8
-  unsigned __int16 v19; // dx
-  unsigned __int16 v20; // ax
-  UFG::BlockInfo *v21; // rcx
-  signed __int64 v22; // r14
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v23; // rbx
-  __int16 v24; // si
-  unsigned __int16 v25; // di
-  UFG::qMemoryPool *pool; // ST38_8
-  __int64 v27; // rcx
-  _QWORD *v28; // rax
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v29; // rax
+  unsigned int mPrev_high; // eax
+  unsigned int v17; // r9d
+  unsigned int v18; // r8d
+  unsigned __int16 mNumBlocksTotal; // dx
+  unsigned __int16 mBlockID; // ax
+  UFG::BlockInfo *Block; // rcx
+  UFG::qVRAMemoryHandle *p_mSourceHandle; // r14
+  char *v23; // rbx
+  unsigned __int16 mNext; // si
+  unsigned __int16 mPoolID; // di
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v26; // rcx
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v27; // rax
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v28; // rax
   UFG::qNode<UFG::BlockInfo,UFG::Secondary> *i; // rax
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v31; // rax
-  unsigned int v32; // ebx
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v33; // rbp
-  unsigned int v34; // edi
-  char v35; // cl
-  unsigned int v36; // er11
-  __int64 v37; // r9
-  __int64 v38; // r10
-  unsigned int v39; // er11
-  unsigned __int64 v40; // r10
-  unsigned __int64 v41; // rcx
-  unsigned int v42; // er10
-  unsigned int v43; // er8
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v44; // rbx
-  __int16 v45; // si
-  unsigned __int16 v46; // di
-  signed __int64 v47; // r14
-  UFG::qMemoryPool *v48; // ST38_8
-  __int64 v49; // rcx
-  _QWORD *v50; // rax
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v51; // rax
-  UFG::qVRAMemoryMoveOrder *v52; // rax
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v54; // [rsp+A0h] [rbp+8h]
-  UFG::qVRAMemoryMoveOrder *v55; // [rsp+A8h] [rbp+10h]
-  unsigned int v56; // [rsp+B0h] [rbp+18h]
-  bool *v57; // [rsp+B8h] [rbp+20h]
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v30; // rax
+  unsigned int v31; // ebx
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v32; // rbp
+  unsigned int v33; // edi
+  char v34; // cl
+  __int64 v35; // r9
+  __int64 v36; // r10
+  unsigned int v37; // r11d
+  unsigned __int64 v38; // r10
+  unsigned __int64 v39; // rcx
+  unsigned int v40; // r10d
+  unsigned int v41; // r8d
+  char *v42; // rbx
+  unsigned __int16 v43; // si
+  unsigned __int16 v44; // di
+  UFG::qVRAMemoryHandle *v45; // r14
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v46; // rcx
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v47; // rax
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v48; // rax
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v50; // [rsp+A0h] [rbp+8h]
 
-  v57 = found_move_too_large;
-  v56 = allowable_bytes;
-  v55 = move;
   v4 = 0;
   v5 = found_move_too_large;
   v6 = allowable_bytes;
   v7 = move;
-  v8 = this;
   if ( (UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *)&this->mFreeList.mNode.mNext[-1] == &this->mUsedBlocks )
     return 0i64;
   v9 = this->mFreeList.mNode.mPrev - 1;
-  v54 = this->mFreeList.mNode.mNext - 1;
-  if ( v54 != v9 )
+  v50 = this->mFreeList.mNode.mNext - 1;
+  if ( v50 != v9 )
   {
     v10 = this->mFreeList.mNode.mNext - 1;
     do
     {
       if ( v4 || *v5 )
         break;
-      v11 = v9->mPrev;
+      mPrev = v9->mPrev;
       v12 = -1;
       v13 = 0i64;
       v14 = -1;
@@ -2052,34 +2103,28 @@ __int64 __fastcall UFG::qVRAMemoryPool::GetDefragmentMove(UFG::qVRAMemoryPool *t
       {
         do
         {
-          v15 = BYTE3(v11[4].mNext);
-          if ( v15 & 4 )
+          v15 = BYTE3(mPrev[4].mNext);
+          if ( (v15 & 4) != 0 && (v15 & 0x40) == 0 && (v15 & 0x20) == 0 && !BYTE4(mPrev[4].mNext) && (v15 & 1) != 0 )
           {
-            if ( !(v15 & 0x40) && !(v15 & 0x20) && !BYTE4(v11[4].mNext) )
+            mPrev_high = HIDWORD(mPrev[4].mPrev);
+            v17 = (~((1 << BYTE5(mPrev[4].mNext)) - 1) & (LODWORD(v10[3].mPrev) + (1 << BYTE5(mPrev[4].mNext)) - 1))
+                - LODWORD(v10[3].mPrev);
+            if ( HIDWORD(v10[4].mPrev) - v17 >= mPrev_high )
             {
-              if ( v15 & 1 )
+              if ( v17 < v12 || v17 == v12 && HIDWORD(v10[4].mPrev) - mPrev_high < v14 )
               {
-                v16 = HIDWORD(v11[4].mPrev);
-                v17 = (~((1 << BYTE5(v11[4].mNext)) - 1) & (LODWORD(v10[3].mPrev) + (1 << BYTE5(v11[4].mNext)) - 1))
+                v14 = HIDWORD(v10[4].mPrev) - mPrev_high;
+                v12 = (~((1 << BYTE5(mPrev[4].mNext)) - 1) & (LODWORD(v10[3].mPrev) + (1 << BYTE5(mPrev[4].mNext)) - 1))
                     - LODWORD(v10[3].mPrev);
-                if ( HIDWORD(v10[4].mPrev) - v17 >= v16 )
-                {
-                  if ( v17 < v12 || v17 == v12 && HIDWORD(v10[4].mPrev) - v16 < v14 )
-                  {
-                    v14 = HIDWORD(v10[4].mPrev) - v16;
-                    v12 = (~((1 << BYTE5(v11[4].mNext)) - 1) & (LODWORD(v10[3].mPrev) + (1 << BYTE5(v11[4].mNext)) - 1))
-                        - LODWORD(v10[3].mPrev);
-                    v13 = v11;
-                  }
-                  if ( !v12 && !v14 )
-                    break;
-                }
+                v13 = mPrev;
               }
+              if ( !v12 && !v14 )
+                break;
             }
           }
-          v11 = v11->mPrev;
+          mPrev = mPrev->mPrev;
         }
-        while ( v11 != v10 );
+        while ( mPrev != v10 );
         if ( v13 )
         {
           v18 = HIDWORD(v13[4].mPrev);
@@ -2090,162 +2135,152 @@ __int64 __fastcall UFG::qVRAMemoryPool::GetDefragmentMove(UFG::qVRAMemoryPool *t
           else
           {
             UFG::qVRAMemoryPool::Allocate(
-              v8,
+              this,
               &v7->mTargetHandle,
               v18,
               0x10u,
               "Move Target",
               1 << BYTE5(v13[4].mNext),
-              1,
+              1u,
               0i64,
               0i64,
               0);
-            v19 = v8->mNumBlocksTotal;
-            v20 = v7->mTargetHandle.mBlockID;
-            v21 = 0i64;
-            if ( v19 )
+            mNumBlocksTotal = this->mNumBlocksTotal;
+            mBlockID = v7->mTargetHandle.mBlockID;
+            Block = 0i64;
+            if ( mNumBlocksTotal )
             {
-              if ( v20 < v19 )
-                v21 = &v8->mBlocks[(unsigned __int64)v20];
+              if ( mBlockID < mNumBlocksTotal )
+                Block = &this->mBlocks[(unsigned __int64)mBlockID];
             }
             else
             {
-              v21 = UFG::qVRAMemoryPools::GetBlock(v20);
+              Block = UFG::qVRAMemoryPools::GetBlock(mBlockID);
             }
-            v22 = (signed __int64)&v7->mSourceHandle;
-            v21->mMoveSourceID = (unsigned __int16)v13[4].mNext;
-            v23 = v13[3].mPrev;
-            v24 = (__int16)v13[4].mNext;
-            v25 = v8->mPoolID;
-            pool = (UFG::qMemoryPool *)((char *)v23 + HIDWORD(v13[4].mPrev) - 1);
+            p_mSourceHandle = &v7->mSourceHandle;
+            Block->mMoveSourceID = (unsigned __int16)v13[4].mNext;
+            v23 = (char *)v13[3].mPrev;
+            mNext = (unsigned __int16)v13[4].mNext;
+            mPoolID = this->mPoolID;
             UFG::qPrintChannel::Print(
               &UFG::VRAMChannel,
               OUTPUT_LEVEL_DEBUG,
               "[VRAM Channel] - Setting qVRAMemoryHandle(%p) to point at - PoolID:0x%02x BlockID:0x%04x Data:%p-%p AllocatedSize:%u\n");
-            v27 = *(_QWORD *)v22;
-            v28 = *(_QWORD **)(v22 + 8);
-            *(_QWORD *)(v27 + 8) = v28;
-            *v28 = v27;
-            *(_QWORD *)(v22 + 16) = v23;
-            v5 = v57;
-            *(_WORD *)(v22 + 24) = v25;
-            v6 = v56;
-            *(_WORD *)(v22 + 26) = v24;
-            *(_QWORD *)v22 = v22;
-            *(_QWORD *)(v22 + 8) = v22;
-            v29 = v13[2].mPrev;
+            v26 = p_mSourceHandle->mPrev;
+            v27 = p_mSourceHandle->mNext;
+            v26->mNext = v27;
+            v27->mPrev = v26;
+            p_mSourceHandle->mData = v23;
+            v5 = found_move_too_large;
+            p_mSourceHandle->mReadOnlyAndPoolID = mPoolID;
+            v6 = allowable_bytes;
+            p_mSourceHandle->mBlockID = mNext;
+            p_mSourceHandle->mPrev = p_mSourceHandle;
+            p_mSourceHandle->mNext = p_mSourceHandle;
+            v28 = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)v13[2].mPrev;
             v4 = 1;
-            v29->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)v22;
-            *(_QWORD *)v22 = v29;
-            *(_QWORD *)(v22 + 8) = v13 + 2;
-            v13[2].mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)v22;
+            v28->mNext = p_mSourceHandle;
+            p_mSourceHandle->mPrev = v28;
+            p_mSourceHandle->mNext = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v13[2];
+            v13[2].mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)p_mSourceHandle;
             BYTE3(v13[4].mNext) |= 0x40u;
-            v7 = v55;
+            v7 = move;
           }
         }
       }
       v10 = v10[1].mNext - 1;
     }
     while ( v10 != v9 );
-    for ( i = v54; v9 != v54; v9 = v9[1].mPrev - 1 )
+    for ( i = v50; v9 != v50; v9 = v9[1].mPrev - 1 )
     {
       if ( v4 )
         break;
-      v31 = i->mNext;
-      v32 = -1;
-      v33 = 0i64;
-      v34 = -1;
-      if ( v31 != v9 )
+      v30 = i->mNext;
+      v31 = -1;
+      v32 = 0i64;
+      v33 = -1;
+      if ( v30 != v9 )
       {
         do
         {
-          v35 = BYTE3(v31[4].mNext);
-          if ( v35 & 4 )
+          v34 = BYTE3(v30[4].mNext);
+          if ( (v34 & 4) != 0 && (v34 & 0x40) == 0 && (v34 & 0x20) == 0 && !BYTE4(v30[4].mNext) && (v34 & 2) != 0 )
           {
-            if ( !(v35 & 0x40) && !(v35 & 0x20) && !BYTE4(v31[4].mNext) )
+            v35 = HIDWORD(v30[4].mPrev);
+            v36 = HIDWORD(v9[4].mPrev);
+            v37 = v36 - v35;
+            v38 = (unsigned __int64)v9[3].mPrev + v36 - v35;
+            v39 = v38 & ~((1 << BYTE5(v30[4].mNext)) - 1i64);
+            v40 = v38 - v39;
+            if ( v9[3].mPrev <= (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)v39 )
             {
-              if ( v35 & 2 )
+              if ( v40 < v31 || v40 == v31 && v37 < v33 )
               {
-                v36 = HIDWORD(v9[4].mPrev);
-                v37 = HIDWORD(v31[4].mPrev);
-                v38 = v36;
-                v39 = v36 - v37;
-                v40 = (unsigned __int64)v9[3].mPrev + v38 - v37;
-                v41 = v40 & ~((1 << BYTE5(v31[4].mNext)) - 1i64);
-                v42 = v40 - v41;
-                if ( v9[3].mPrev <= (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)v41 )
-                {
-                  if ( v42 < v32 || v42 == v32 && v39 < v34 )
-                  {
-                    v34 = v39;
-                    v32 = v42;
-                    v33 = v31;
-                  }
-                  if ( !v32 && !v34 )
-                    break;
-                }
+                v33 = v37;
+                v31 = v40;
+                v32 = v30;
               }
+              if ( !v31 && !v33 )
+                break;
             }
           }
-          v31 = v31->mNext;
+          v30 = v30->mNext;
         }
-        while ( v31 != v9 );
-        if ( v33 )
+        while ( v30 != v9 );
+        if ( v32 )
         {
-          v43 = HIDWORD(v33[4].mPrev);
-          if ( v43 >= v56 )
+          v41 = HIDWORD(v32[4].mPrev);
+          if ( v41 >= allowable_bytes )
           {
-            *v57 = 1;
+            *found_move_too_large = 1;
           }
           else
           {
             UFG::qVRAMemoryPool::Allocate(
-              v8,
+              this,
               &v7->mTargetHandle,
-              v43,
+              v41,
               0x10u,
               "Move Target",
-              1 << BYTE5(v33[4].mNext),
-              2,
+              1 << BYTE5(v32[4].mNext),
+              2u,
               0i64,
               0i64,
               0);
-            v44 = v33[3].mPrev;
-            v45 = (__int16)v33[4].mNext;
-            v46 = v8->mPoolID;
-            v47 = (signed __int64)&v7->mSourceHandle;
-            v48 = (UFG::qMemoryPool *)((char *)v44 + HIDWORD(v33[4].mPrev) - 1);
+            v42 = (char *)v32[3].mPrev;
+            v43 = (unsigned __int16)v32[4].mNext;
+            v44 = this->mPoolID;
+            v45 = &v7->mSourceHandle;
             UFG::qPrintChannel::Print(
               &UFG::VRAMChannel,
               OUTPUT_LEVEL_DEBUG,
               "[VRAM Channel] - Setting qVRAMemoryHandle(%p) to point at - PoolID:0x%02x BlockID:0x%04x Data:%p-%p AllocatedSize:%u\n");
-            v49 = *(_QWORD *)v47;
-            v50 = *(_QWORD **)(v47 + 8);
-            *(_QWORD *)(v49 + 8) = v50;
-            *v50 = v49;
-            *(_WORD *)(v47 + 26) = v45;
-            *(_QWORD *)v47 = v47;
-            *(_QWORD *)(v47 + 8) = v47;
-            *(_QWORD *)(v47 + 16) = v44;
-            *(_WORD *)(v47 + 24) = v46;
-            v51 = v33[2].mPrev;
-            v51->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)v47;
-            *(_QWORD *)v47 = v51;
-            *(_QWORD *)(v47 + 8) = v33 + 2;
-            v33[2].mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)v47;
-            BYTE3(v33[4].mNext) |= 0x40u;
+            v46 = v45->mPrev;
+            v47 = v45->mNext;
+            v46->mNext = v47;
+            v47->mPrev = v46;
+            v45->mBlockID = v43;
+            v45->mPrev = v45;
+            v45->mNext = v45;
+            v45->mData = v42;
+            v45->mReadOnlyAndPoolID = v44;
+            v48 = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)v32[2].mPrev;
+            v48->mNext = v45;
+            v45->mPrev = v48;
+            v45->mNext = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v32[2];
+            v32[2].mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)v45;
+            BYTE3(v32[4].mNext) |= 0x40u;
             v4 = 1;
           }
         }
       }
-      i = v54;
-      v7 = v55;
+      i = v50;
+      v7 = move;
     }
     if ( v4 == 1 )
     {
-      v52 = v55;
-      v52->mSourceHandle.mReadOnlyAndPoolID |= 0x8000u;
-      v52->mTargetHandle.mReadOnlyAndPoolID |= 0x8000u;
+      move->mSourceHandle.mReadOnlyAndPoolID |= 0x8000u;
+      move->mTargetHandle.mReadOnlyAndPoolID |= 0x8000u;
     }
   }
   return v4;
@@ -2253,539 +2288,514 @@ __int64 __fastcall UFG::qVRAMemoryPool::GetDefragmentMove(UFG::qVRAMemoryPool *t
 
 // File Line: 2243
 // RVA: 0x177C10
-void __fastcall UFG::qVRAMemoryPool::MoveCompleted(UFG::qVRAMemoryPool *this, UFG::qVRAMemoryMoveOrder *move, void (__fastcall *callback)(UFG::qVRAMemoryHandle *, char *, UFG::VRAMType, unsigned __int64, unsigned int))
+void __fastcall UFG::qVRAMemoryPool::MoveCompleted(
+        UFG::qVRAMemoryPool *this,
+        UFG::qVRAMemoryMoveOrder *move,
+        void (__fastcall *callback)(UFG::qVRAMemoryHandle *, char *, UFG::VRAMType, unsigned __int64, unsigned int))
 {
-  void (__fastcall *v3)(UFG::qVRAMemoryHandle *, char *, UFG::VRAMType, unsigned __int64, unsigned int); // r12
-  UFG::qVRAMemoryMoveOrder *v4; // rdi
-  UFG::qVRAMemoryPool *v5; // r13
-  unsigned __int16 v6; // cx
-  UFG::BlockInfo *v7; // rsi
-  unsigned __int16 v8; // ax
+  unsigned __int16 mBlockID; // cx
+  UFG::BlockInfo *Block; // rsi
+  unsigned __int16 mNumBlocksTotal; // ax
   unsigned __int16 v9; // cx
   UFG::BlockInfo *v10; // rbx
   unsigned __int16 v11; // ax
-  char *v12; // r15
+  char *mData; // r15
   char *v13; // rax
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v14; // rdx
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v15; // rcx
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v16; // rax
-  __int64 *v17; // rax
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *mPrev; // rcx
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *mNext; // rax
+  __int64 *v16; // rax
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v17; // rax
   UFG::qNode<UFG::BlockInfo,UFG::Primary> *v18; // rax
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v19; // rax
-  __int64 *v20; // rax
-  _QWORD *v21; // rax
+  __int64 *v19; // rax
+  _QWORD *v20; // rax
   UFG::BlockInfo *i; // rbx
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v23; // rdi
-  signed __int64 j; // rax
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v25; // rbx
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v22; // rdi
+  UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *j; // rax
+  UFG::qVRAMemoryHandle *v24; // rbx
   UFG::BlockInfo *k; // rbx
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v27; // rcx
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v28; // rax
-  __int64 *v29; // rcx
-  UFG::BlockInfo *v30; // rax
-  UFG::qVRAMemoryHandle *l; // rbx
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v32; // rcx
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v33; // rax
-  __int64 *v34; // rcx
-  UFG::qVRAMemoryHandle *v35; // rax
-  __int64 *v36; // rcx
-  __int64 **v37; // rax
-  __int64 *v38; // rcx
-  __int64 **v39; // rax
-  _RTL_CRITICAL_SECTION *v40; // rbx
-  __int64 v41; // [rsp+20h] [rbp-79h]
-  void (__fastcall *v42)(UFG::qVRAMemoryHandle *, char *, UFG::VRAMType, unsigned __int64, unsigned int); // [rsp+28h] [rbp-71h]
-  __int64 *v43; // [rsp+30h] [rbp-69h]
-  __int64 **v44; // [rsp+38h] [rbp-61h]
-  __int64 *v45; // [rsp+40h] [rbp-59h]
-  __int64 **v46; // [rsp+48h] [rbp-51h]
-  __int64 *v47; // [rsp+50h] [rbp-49h]
-  UFG::qVRAMemoryHandle *v48; // [rsp+58h] [rbp-41h]
-  __int128 v49; // [rsp+60h] [rbp-39h]
-  __int64 v50; // [rsp+70h] [rbp-29h]
-  int v51; // [rsp+78h] [rbp-21h]
-  __int16 v52; // [rsp+7Ch] [rbp-1Dh]
-  __int64 v53; // [rsp+80h] [rbp-19h]
-  __int64 *v54; // [rsp+88h] [rbp-11h]
-  UFG::BlockInfo *v55; // [rsp+90h] [rbp-9h]
-  int v56; // [rsp+98h] [rbp-1h]
-  __int64 v57; // [rsp+A0h] [rbp+7h]
-  int v58; // [rsp+A8h] [rbp+Fh]
-  __int64 v59; // [rsp+B0h] [rbp+17h]
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v26; // rcx
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v27; // rax
+  __int64 *v28; // rcx
+  UFG::BlockInfo *v29; // rax
+  UFG::qVRAMemoryHandle *m; // rbx
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v31; // rcx
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v32; // rax
+  __int64 *v33; // rcx
+  UFG::qVRAMemoryHandle *v34; // rax
+  __int64 *v35; // rcx
+  __int64 **v36; // rax
+  __int64 *v37; // rcx
+  __int64 **v38; // rax
+  _RTL_CRITICAL_SECTION *p_mPoolLock; // rbx
+  __int64 v40; // [rsp+20h] [rbp-79h]
+  void (__fastcall *v41)(UFG::qVRAMemoryHandle *, char *, UFG::VRAMType, unsigned __int64, unsigned int); // [rsp+28h] [rbp-71h]
+  __int64 *v42; // [rsp+30h] [rbp-69h] BYREF
+  __int64 **v43; // [rsp+38h] [rbp-61h]
+  __int64 *v44; // [rsp+40h] [rbp-59h] BYREF
+  __int64 **v45; // [rsp+48h] [rbp-51h]
+  __int64 *v46; // [rsp+50h] [rbp-49h] BYREF
+  UFG::qVRAMemoryHandle *v47; // [rsp+58h] [rbp-41h]
+  __int128 v48; // [rsp+60h] [rbp-39h]
+  __int64 v49; // [rsp+70h] [rbp-29h]
+  int v50; // [rsp+78h] [rbp-21h]
+  __int16 v51; // [rsp+7Ch] [rbp-1Dh]
+  __int64 v52; // [rsp+80h] [rbp-19h]
+  __int64 *v53; // [rsp+88h] [rbp-11h] BYREF
+  UFG::BlockInfo *v54; // [rsp+90h] [rbp-9h]
+  int v55; // [rsp+98h] [rbp-1h]
+  __int64 v56; // [rsp+A0h] [rbp+7h]
+  int v57; // [rsp+A8h] [rbp+Fh]
+  __int64 v58; // [rsp+B0h] [rbp+17h]
   char *new_location; // [rsp+100h] [rbp+67h]
 
-  v59 = -2i64;
-  v3 = callback;
-  v4 = move;
-  v5 = this;
-  v42 = callback;
+  v58 = -2i64;
+  v41 = callback;
   UFG::qPrintChannel::Print(
     &UFG::VRAMChannel,
     OUTPUT_LEVEL_WARNING,
     "[VRAM Channel] - %.64s->MoveCompleted(%p, %p)\n");
-  UFG::qMutex::Lock((LPCRITICAL_SECTION)&v5->mPoolLock);
-  UFG::qVRAMemoryPool::AssertValid(v5);
-  v4->mSourceHandle.mReadOnlyAndPoolID &= 0x7FFFu;
-  v4->mTargetHandle.mReadOnlyAndPoolID &= 0x7FFFu;
-  v6 = v4->mSourceHandle.mBlockID;
-  v7 = 0i64;
-  v8 = v5->mNumBlocksTotal;
-  if ( v8 )
+  UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mPoolLock);
+  UFG::qVRAMemoryPool::AssertValid(this);
+  move->mSourceHandle.mReadOnlyAndPoolID &= ~0x8000u;
+  move->mTargetHandle.mReadOnlyAndPoolID &= ~0x8000u;
+  mBlockID = move->mSourceHandle.mBlockID;
+  Block = 0i64;
+  mNumBlocksTotal = this->mNumBlocksTotal;
+  if ( mNumBlocksTotal )
   {
-    if ( v6 < v8 )
-      v7 = &v5->mBlocks[(unsigned __int64)v6];
+    if ( mBlockID < mNumBlocksTotal )
+      Block = &this->mBlocks[(unsigned __int64)mBlockID];
   }
   else
   {
-    v7 = UFG::qVRAMemoryPools::GetBlock(v6);
+    Block = UFG::qVRAMemoryPools::GetBlock(mBlockID);
   }
-  v9 = v4->mTargetHandle.mBlockID;
+  v9 = move->mTargetHandle.mBlockID;
   v10 = 0i64;
-  v11 = v5->mNumBlocksTotal;
+  v11 = this->mNumBlocksTotal;
   if ( v11 )
   {
     if ( v9 < v11 )
-      v10 = &v5->mBlocks[(unsigned __int64)v9];
+      v10 = &this->mBlocks[(unsigned __int64)v9];
   }
   else
   {
     v10 = UFG::qVRAMemoryPools::GetBlock(v9);
   }
-  v12 = v7->mData;
+  mData = Block->mData;
   v13 = v10->mData;
-  new_location = v10->mData;
-  v7->mFlags &= 0xBFu;
-  if ( v7->mKeepAliveFrames || v7->mFlags < 0 )
+  new_location = v13;
+  Block->mFlags &= ~0x40u;
+  if ( Block->mKeepAliveFrames || Block->mFlags < 0 )
   {
     UFG::qPrintChannel::Print(
       &UFG::VRAMChannel,
       OUTPUT_LEVEL_NORMAL,
       "[VRAM Channel] -  Move cancelled by free or lock, memory moved from %p to %p\n");
-    v7->mFlags &= 0x7Fu;
-    UFG::qVRAMemoryPool::Free(v5, &v4->mTargetHandle, 0);
-    UFG::qVRAMemoryHandle::Close(&v4->mSourceHandle);
+    Block->mFlags &= ~0x80u;
+    UFG::qVRAMemoryPool::Free(this, &move->mTargetHandle, 0);
+    UFG::qVRAMemoryHandle::Close(&move->mSourceHandle);
   }
   else
   {
-    HIDWORD(v41) = HIDWORD(v13);
+    HIDWORD(v40) = HIDWORD(v13);
     UFG::qPrintChannel::Print(
       &UFG::VRAMChannel,
       OUTPUT_LEVEL_NORMAL,
       "[VRAM Channel] -  Move still valid, memory moved from %p to %p\n");
-    v14 = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v10->mPrev;
-    v15 = v10->mPrev;
-    v16 = v10->mNext;
-    v15->mNext = v16;
-    v16->mPrev = v15;
-    v14->mPrev = v14;
-    v14->mNext = v14;
-    v43 = (__int64 *)&v43;
-    v44 = &v43;
-    v45 = (__int64 *)&v45;
-    v46 = &v45;
-    v47 = (__int64 *)&v47;
-    v48 = (UFG::qVRAMemoryHandle *)&v47;
-    _mm_store_si128((__m128i *)&v49, (__m128i)0i64);
-    v50 = 0i64;
-    v51 = 0xFFFF;
-    v52 = 0;
-    v53 = 0i64;
-    v54 = (__int64 *)&v54;
-    v55 = (UFG::BlockInfo *)&v54;
-    v56 = -1;
-    v57 = 0i64;
-    v58 = 0;
-    v17 = (__int64 *)v10->mPrev;
-    v17[1] = (__int64)&v43;
-    v43 = v17;
-    v44 = (__int64 **)v10;
-    v44 = (__int64 **)v10->mNext;
-    *v44 = (__int64 *)&v43;
-    v10->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v10->mPrev;
-    v10->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v10->mPrev;
-    v18 = v7->mPrev;
-    v18->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v10->mPrev;
-    v10->mPrev = v18;
-    v10->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v7->mPrev;
-    v19 = v7->mNext;
-    v10->mNext = v19;
-    v19->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v10->mPrev;
+    mPrev = v10->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev;
+    mNext = v10->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    v10->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev = &v10->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+    v10->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext = &v10->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+    v42 = (__int64 *)&v42;
+    v43 = &v42;
+    v44 = (__int64 *)&v44;
+    v45 = &v44;
+    v46 = (__int64 *)&v46;
+    v47 = (UFG::qVRAMemoryHandle *)&v46;
+    v48 = 0i64;
+    v49 = 0i64;
+    v50 = 0xFFFF;
+    v51 = 0;
+    v52 = 0i64;
+    v53 = (__int64 *)&v53;
+    v54 = (UFG::BlockInfo *)&v53;
+    v55 = -1;
+    v56 = 0i64;
+    v57 = 0;
+    v16 = (__int64 *)v10->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev;
+    v16[1] = (__int64)&v42;
+    v42 = v16;
+    v43 = (__int64 **)v10;
+    v43 = (__int64 **)v10->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext;
+    *v43 = (__int64 *)&v42;
+    v10->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev = v10;
+    v10->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext = v10;
+    v17 = Block->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev;
+    v17->mNext = v10;
+    v10->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev = v17;
+    v10->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext = Block;
+    v18 = Block->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext;
+    v10->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext = v18;
+    v18->mPrev = v10;
+    v19 = v42;
+    v42[1] = (__int64)Block;
+    Block->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)v19;
     v20 = v43;
-    v43[1] = (__int64)v7;
-    v7->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)v20;
-    v21 = v44;
-    v7->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)v44;
-    *v21 = v7;
-    v43 = (__int64 *)&v43;
-    v44 = &v43;
-    UFG::BlockInfo::DefragmentMovedTo(v10, v12);
-    UFG::BlockInfo::DefragmentMovedTo(v7, new_location);
-    UFG::qVRAMemoryHandle::Close(&v4->mSourceHandle);
+    Block->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)v43;
+    *v20 = Block;
+    v42 = (__int64 *)&v42;
+    v43 = &v42;
+    UFG::BlockInfo::DefragmentMovedTo(v10, mData);
+    UFG::BlockInfo::DefragmentMovedTo(Block, new_location);
+    UFG::qVRAMemoryHandle::Close(&move->mSourceHandle);
     v10->mName = "Moved Source VRAM";
     v10->mUsage = 17;
-    UFG::qVRAMemoryPool::Free(v5, &v4->mTargetHandle, v5->mDefragFreeFrameDelay);
-    if ( v3 )
+    UFG::qVRAMemoryPool::Free(this, &move->mTargetHandle, this->mDefragFreeFrameDelay);
+    if ( callback )
     {
-      for ( i = (UFG::BlockInfo *)v7->mAllocationHandles.mNode.mNext;
-            i != (UFG::BlockInfo *)&v7->mAllocationHandles;
-            i = (UFG::BlockInfo *)i->mNext )
+      for ( i = (UFG::BlockInfo *)Block->mAllocationHandles.mNode.mNext;
+            i != (UFG::BlockInfo *)&Block->mAllocationHandles;
+            i = (UFG::BlockInfo *)i->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext )
       {
-        LODWORD(v41) = v7->mCallbackData32;
-        ((void (__fastcall *)(UFG::BlockInfo *, char *, _QWORD, unsigned __int64, __int64, void (__fastcall *)(UFG::qVRAMemoryHandle *, char *, UFG::VRAMType, unsigned __int64, unsigned int)))v3)(
+        LODWORD(v40) = Block->mCallbackData32;
+        ((void (__fastcall *)(UFG::BlockInfo *, char *, _QWORD, unsigned __int64, __int64, void (__fastcall *)(UFG::qVRAMemoryHandle *, char *, UFG::VRAMType, unsigned __int64, unsigned int)))callback)(
           i,
-          v12,
-          (unsigned __int8)v7->mUsage,
-          v7->mCallbackData64,
-          v41,
-          v42);
+          mData,
+          (unsigned __int8)Block->mUsage,
+          Block->mCallbackData64,
+          v40,
+          v41);
       }
-      v23 = v7->mContainedBlocks.mNode.mNext;
-      for ( j = (signed __int64)&v7->mContainedBlocks; v23 != (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)j; v23 = v23->mNext )
+      v22 = Block->mContainedBlocks.mNode.mNext;
+      for ( j = &Block->mContainedBlocks; v22 != (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)j; v22 = v22->mNext )
       {
-        v25 = v23[2].mNext;
-        if ( v25 != &v23[2] )
+        v24 = (UFG::qVRAMemoryHandle *)v22[2].mNext;
+        if ( v24 != (UFG::qVRAMemoryHandle *)&v22[2] )
         {
           do
           {
-            LODWORD(v41) = v23[7].mNext;
-            ((void (__fastcall *)(UFG::qNode<UFG::BlockInfo,UFG::Primary> *, char *, _QWORD, UFG::qNode<UFG::BlockInfo,UFG::Primary> *, __int64, void (__fastcall *)(UFG::qVRAMemoryHandle *, char *, UFG::VRAMType, unsigned __int64, unsigned int)))v3)(
-              v25,
-              &v12[(unsigned int)v25[1].mPrev - LODWORD(v7->mData)],
-              BYTE2(v23[4].mNext),
-              v23[7].mPrev,
-              v41,
-              v42);
-            v25 = v25->mNext;
+            LODWORD(v40) = v22[7].mNext;
+            callback(
+              v24,
+              &mData[(unsigned int)v24->mData - LODWORD(Block->mData)],
+              (UFG::VRAMType)BYTE2(v22[4].mNext),
+              (unsigned __int64)v22[7].mPrev,
+              v40);
+            v24 = (UFG::qVRAMemoryHandle *)v24->mNext;
           }
-          while ( v25 != &v23[2] );
-          j = (signed __int64)&v7->mContainedBlocks;
+          while ( v24 != (UFG::qVRAMemoryHandle *)&v22[2] );
+          j = &Block->mContainedBlocks;
         }
       }
     }
-    for ( k = v55; v55 != (UFG::BlockInfo *)&v54; k = v55 )
+    for ( k = v54; v54 != (UFG::BlockInfo *)&v53; k = v54 )
     {
-      v27 = k->mPrev;
-      v28 = k->mNext;
-      v27->mNext = v28;
-      v28->mPrev = v27;
-      k->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&k->mPrev;
-      k->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&k->mPrev;
+      v26 = k->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev;
+      v27 = k->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext;
+      v26->mNext = v27;
+      v27->mPrev = v26;
+      k->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev = k;
+      k->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext = k;
       UFG::BlockInfo::~BlockInfo(k);
-      UFG::qMemoryPool::Free(UFG::gMainMemoryPool, k);
+      UFG::qMemoryPool::Free(UFG::gMainMemoryPool, (char *)k);
     }
+    v28 = v53;
     v29 = v54;
-    v30 = v55;
-    v54[1] = (__int64)v55;
-    v30->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)v29;
-    v54 = (__int64 *)&v54;
-    v55 = (UFG::BlockInfo *)&v54;
-    for ( l = v48; v48 != (UFG::qVRAMemoryHandle *)&v47; l = v48 )
+    v53[1] = (__int64)v54;
+    v29->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)v28;
+    v53 = (__int64 *)&v53;
+    v54 = (UFG::BlockInfo *)&v53;
+    for ( m = v47; v47 != (UFG::qVRAMemoryHandle *)&v46; m = v47 )
     {
-      v32 = l->mPrev;
-      v33 = l->mNext;
-      v32->mNext = v33;
-      v33->mPrev = v32;
-      l->mPrev = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&l->mPrev;
-      l->mNext = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&l->mPrev;
-      UFG::qVRAMemoryHandle::~qVRAMemoryHandle(l);
-      UFG::qMemoryPool::Free(UFG::gMainMemoryPool, l);
+      v31 = m->mPrev;
+      v32 = m->mNext;
+      v31->mNext = v32;
+      v32->mPrev = v31;
+      m->mPrev = m;
+      m->mNext = m;
+      UFG::qVRAMemoryHandle::~qVRAMemoryHandle(m);
+      UFG::qMemoryPool::Free(UFG::gMainMemoryPool, (char *)m);
     }
+    v33 = v46;
     v34 = v47;
-    v35 = v48;
-    v47[1] = (__int64)v48;
-    v35->mPrev = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)v34;
-    v47 = (__int64 *)&v47;
-    v48 = (UFG::qVRAMemoryHandle *)&v47;
+    v46[1] = (__int64)v47;
+    v34->mPrev = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)v33;
+    v46 = (__int64 *)&v46;
+    v47 = (UFG::qVRAMemoryHandle *)&v46;
+    v35 = v44;
     v36 = v45;
-    v37 = v46;
-    v45[1] = (__int64)v46;
-    *v37 = v36;
-    v45 = (__int64 *)&v45;
-    v46 = &v45;
+    v44[1] = (__int64)v45;
+    *v36 = v35;
+    v44 = (__int64 *)&v44;
+    v45 = &v44;
+    v37 = v42;
     v38 = v43;
-    v39 = v44;
-    v43[1] = (__int64)v44;
-    *v39 = v38;
-    v43 = (__int64 *)&v43;
-    v44 = &v43;
+    v42[1] = (__int64)v43;
+    *v38 = v37;
+    v42 = (__int64 *)&v42;
+    v43 = &v42;
   }
-  if ( v5->mValidate )
+  if ( this->mValidate )
   {
     UFG::qPrintChannel::Print(&UFG::VRAMChannel, OUTPUT_LEVEL_WARNING, "[VRAM Channel] - %.64s->AssertValid()\n");
-    v40 = (_RTL_CRITICAL_SECTION *)&v5->mPoolLock;
-    UFG::qMutex::Lock((LPCRITICAL_SECTION)&v5->mPoolLock);
-    if ( v5->mInitialized == 1 )
-      UFG::qVRAMemoryPool::AssertValidInitialized(v5);
-    UFG::qMutex::Unlock((LPCRITICAL_SECTION)&v5->mPoolLock);
+    p_mPoolLock = (_RTL_CRITICAL_SECTION *)&this->mPoolLock;
+    UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mPoolLock);
+    if ( this->mInitialized == 1 )
+      UFG::qVRAMemoryPool::AssertValidInitialized(this);
+    UFG::qMutex::Unlock((LPCRITICAL_SECTION)&this->mPoolLock);
   }
   else
   {
-    v40 = (_RTL_CRITICAL_SECTION *)&v5->mPoolLock;
+    p_mPoolLock = (_RTL_CRITICAL_SECTION *)&this->mPoolLock;
   }
-  UFG::qMutex::Unlock(v40);
+  UFG::qMutex::Unlock(p_mPoolLock);
 }
 
 // File Line: 2388
 // RVA: 0x17DA10
-UFG::BlockInfo *__fastcall UFG::qVRAMemoryPool::SplitFreeBlock(UFG::qVRAMemoryPool *this, UFG::BlockInfo *block, unsigned int aligned_size, unsigned int alignment, unsigned int flags)
+UFG::BlockInfo *__fastcall UFG::qVRAMemoryPool::SplitFreeBlock(
+        UFG::qVRAMemoryPool *this,
+        UFG::BlockInfo *block,
+        unsigned int aligned_size,
+        int alignment,
+        char flags)
 {
   unsigned int v5; // ebx
-  UFG::BlockInfo *v6; // r15
   UFG::qVRAMemoryPool *v7; // rdi
-  unsigned int v8; // ecx
+  unsigned int mActualSize; // ecx
   __int64 v9; // r13
-  char *v10; // r8
+  char *mData; // r8
   unsigned int v11; // ebp
-  signed __int64 v12; // rdx
-  signed __int64 v13; // r12
-  int v14; // er12
+  __int64 v12; // rdx
+  __int64 v13; // r12
+  unsigned int v14; // r12d
   char *v15; // rax
-  signed __int64 v16; // rdx
-  UFG::BlockInfo *v17; // rax
+  __int64 v16; // rdx
+  UFG::BlockInfo *UnusedBlock; // rax
   char *v18; // rdi
-  __int64 v19; // r9
-  UFG::BlockInfo *v20; // rsi
-  __int64 v21; // r9
+  UFG::BlockInfo *v19; // rsi
+  char *v20; // rdi
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *mPrev; // rax
   char *v22; // rdi
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v23; // rax
-  UFG::BlockInfo *v24; // rax
-  __int64 v25; // r9
+  char *v23; // rdi
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *mNext; // rax
+  UFG::BlockInfo *v25; // rax
   char *v26; // rdi
-  char *v27; // rdi
-  __int64 v28; // r9
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v29; // rax
-  UFG::BlockInfo *v30; // rax
-  char *v31; // rdi
-  __int64 v32; // r9
-  UFG::BlockInfo *v33; // r14
-  __int64 v34; // r9
-  char *v35; // rdi
-  __int64 v36; // r9
-  char *v37; // rdi
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v38; // rcx
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v39; // rdx
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v40; // rax
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v41; // rax
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v42; // rax
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v43; // rcx
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v44; // rax
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v45; // rcx
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v46; // rax
-  signed __int64 i; // rdx
-  UFG::qVRAMemoryPool *v49; // [rsp+80h] [rbp+8h]
-  bool v50; // [rsp+98h] [rbp+20h]
+  UFG::BlockInfo *v27; // r14
+  char *v28; // rdi
+  char *v29; // rdi
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v30; // rdx
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v31; // rax
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v32; // rax
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v33; // rax
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v34; // rax
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v35; // rcx
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v36; // rax
+  __int64 i; // rdx
+  bool v40; // [rsp+98h] [rbp+20h]
 
-  v49 = this;
   v5 = 0;
-  v6 = block;
   v7 = this;
-  v8 = block->mActualSize;
+  mActualSize = block->mActualSize;
   v9 = aligned_size;
-  v10 = block->mData;
+  mData = block->mData;
   v11 = 0;
-  v12 = ~((signed int)alignment - 1i64);
-  v13 = v12 & (unsigned __int64)&v10[alignment - 1];
-  v50 = v8 == v7->mLargestFreeBlock;
-  if ( (char *)v13 == v10 && (_DWORD)v9 == v8 )
+  v12 = ~(alignment - 1i64);
+  v13 = v12 & (unsigned __int64)&mData[alignment - 1];
+  v40 = mActualSize == v7->mLargestFreeBlock;
+  if ( (char *)v13 == mData && (_DWORD)v9 == mActualSize )
     goto LABEL_16;
-  if ( !(flags & 1) )
+  if ( (flags & 1) == 0 )
   {
-    if ( flags & 2 )
+    if ( (flags & 2) != 0 )
     {
-      v14 = v8 - v9;
-      v15 = &v10[v8 - (unsigned int)v9];
+      v14 = mActualSize - v9;
+      v15 = &mData[mActualSize - (unsigned int)v9];
       v16 = (unsigned __int64)v15 & v12;
       if ( (char *)v16 != v15 )
       {
         v11 = (_DWORD)v15 - v16;
-        v14 = v16 - (_DWORD)v10;
+        v14 = v16 - (_DWORD)mData;
       }
       goto LABEL_10;
     }
 LABEL_16:
-    v39 = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v6->mPrev;
+    v30 = &block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
     goto LABEL_17;
   }
-  if ( (char *)v13 == v10 )
+  if ( (char *)v13 == mData )
   {
-    v11 = v8 - v9;
+    v11 = mActualSize - v9;
     goto LABEL_11;
   }
-  v14 = v13 - LODWORD(v6->mData);
-  v11 = v8 - v14 - v9;
+  v14 = v13 - LODWORD(block->mData);
+  v11 = mActualSize - v14 - v9;
 LABEL_10:
   if ( !v14 )
   {
 LABEL_11:
     if ( v11 )
     {
-      v17 = UFG::qVRAMemoryPool::GetUnusedBlock(v7);
-      v18 = v6->mData;
-      v19 = v17->mBlockID;
-      v20 = v17;
+      UnusedBlock = UFG::qVRAMemoryPool::GetUnusedBlock(v7);
+      v18 = block->mData;
+      v19 = UnusedBlock;
       UFG::qPrintChannel::Print(
         &UFG::VRAMChannel,
         OUTPUT_LEVEL_DEBUG,
         "[VRAM Channel] - Setting Block ID:0x%04x to free data:%p size:0x%08x (%9u)\n");
-      v20->mData = v18;
-      v20->mRequestedSize = v9;
-      v20->mActualSize = v9;
-      *(_DWORD *)&v20->mUsage = 1;
-      v20->mMemoryPool = 0i64;
-      v20->mContainerID = 0;
-      v20->mCallbackData64 = 0i64;
-      v20->mCallbackData32 = 0;
-      v20->mName = "Free VRAM";
-      v21 = v6->mBlockID;
-      v22 = &v6->mData[v9];
+      v19->mData = v18;
+      v19->mRequestedSize = v9;
+      v19->mActualSize = v9;
+      *(_DWORD *)&v19->mUsage = 1;
+      v19->mMemoryPool = 0i64;
+      v19->mContainerID = 0;
+      v19->mCallbackData64 = 0i64;
+      v19->mCallbackData32 = 0;
+      v19->mName = "Free VRAM";
+      v20 = &block->mData[v9];
       UFG::qPrintChannel::Print(
         &UFG::VRAMChannel,
         OUTPUT_LEVEL_DEBUG,
         "[VRAM Channel] - Setting Block ID:0x%04x to free data:%p size:0x%08x (%9u)\n");
-      v23 = v6->mPrev;
-      v6->mData = v22;
-      v7 = v49;
-      v6->mName = "Free VRAM";
-      v6->mRequestedSize = v11;
-      v6->mActualSize = v11;
-      *(_DWORD *)&v6->mUsage = 1;
-      v6->mMemoryPool = 0i64;
-      v6->mContainerID = 0;
-      v6->mCallbackData64 = 0i64;
-      v6->mCallbackData32 = 0;
-      v23->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v20->mPrev;
-      v20->mPrev = v23;
-      v20->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v6->mPrev;
-      v6->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v20->mPrev;
+      mPrev = block->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev;
+      block->mData = v20;
+      v7 = this;
+      block->mName = "Free VRAM";
+      block->mRequestedSize = v11;
+      block->mActualSize = v11;
+      *(_DWORD *)&block->mUsage = 1;
+      block->mMemoryPool = 0i64;
+      block->mContainerID = 0;
+      block->mCallbackData64 = 0i64;
+      block->mCallbackData32 = 0;
+      mPrev->mNext = v19;
+      v19->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev = mPrev;
+      v19->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext = block;
+      block->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev = v19;
       goto LABEL_18;
     }
     goto LABEL_16;
   }
-  v24 = UFG::qVRAMemoryPool::GetUnusedBlock(v7);
-  v20 = v24;
+  v19 = UFG::qVRAMemoryPool::GetUnusedBlock(v7);
   if ( !v11 )
   {
-    v25 = v24->mBlockID;
-    v26 = &v6->mData[v14];
+    v22 = &block->mData[v14];
     UFG::qPrintChannel::Print(
       &UFG::VRAMChannel,
       OUTPUT_LEVEL_DEBUG,
       "[VRAM Channel] - Setting Block ID:0x%04x to free data:%p size:0x%08x (%9u)\n");
-    v20->mData = v26;
-    v20->mRequestedSize = v9;
-    v20->mActualSize = v9;
-    *(_DWORD *)&v20->mUsage = 1;
-    v20->mMemoryPool = 0i64;
-    v20->mContainerID = 0;
-    v20->mCallbackData64 = 0i64;
-    v20->mCallbackData32 = 0;
-    v20->mName = "Free VRAM";
-    v27 = v6->mData;
-    v28 = v6->mBlockID;
+    v19->mData = v22;
+    v19->mRequestedSize = v9;
+    v19->mActualSize = v9;
+    *(_DWORD *)&v19->mUsage = 1;
+    v19->mMemoryPool = 0i64;
+    v19->mContainerID = 0;
+    v19->mCallbackData64 = 0i64;
+    v19->mCallbackData32 = 0;
+    v19->mName = "Free VRAM";
+    v23 = block->mData;
     UFG::qPrintChannel::Print(
       &UFG::VRAMChannel,
       OUTPUT_LEVEL_DEBUG,
       "[VRAM Channel] - Setting Block ID:0x%04x to free data:%p size:0x%08x (%9u)\n");
-    v29 = v6->mNext;
-    v6->mData = v27;
-    v7 = v49;
-    v6->mName = "Free VRAM";
-    v6->mRequestedSize = v14;
-    v6->mActualSize = v14;
-    *(_DWORD *)&v6->mUsage = 1;
-    v6->mMemoryPool = 0i64;
-    v6->mContainerID = 0;
-    v6->mCallbackData64 = 0i64;
-    v6->mCallbackData32 = 0;
-    v6->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v20->mPrev;
-    v20->mNext = v29;
-    v20->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v6->mPrev;
-    v29->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v20->mPrev;
+    mNext = block->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext;
+    block->mData = v23;
+    v7 = this;
+    block->mName = "Free VRAM";
+    block->mRequestedSize = v14;
+    block->mActualSize = v14;
+    *(_DWORD *)&block->mUsage = 1;
+    block->mMemoryPool = 0i64;
+    block->mContainerID = 0;
+    block->mCallbackData64 = 0i64;
+    block->mCallbackData32 = 0;
+    block->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext = v19;
+    v19->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext = mNext;
+    v19->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev = block;
+    mNext->mPrev = v19;
     goto LABEL_18;
   }
-  v30 = UFG::qVRAMemoryPool::GetUnusedBlock(v7);
-  v31 = v6->mData;
-  v32 = v20->mBlockID;
-  v33 = v30;
+  v25 = UFG::qVRAMemoryPool::GetUnusedBlock(v7);
+  v26 = block->mData;
+  v27 = v25;
   UFG::qPrintChannel::Print(
     &UFG::VRAMChannel,
     OUTPUT_LEVEL_DEBUG,
     "[VRAM Channel] - Setting Block ID:0x%04x to free data:%p size:0x%08x (%9u)\n");
-  v20->mData = v31;
-  v20->mRequestedSize = v14;
-  v20->mActualSize = v14;
-  *(_DWORD *)&v20->mUsage = 1;
-  v20->mMemoryPool = 0i64;
-  v20->mContainerID = 0;
-  v20->mCallbackData64 = 0i64;
-  v20->mCallbackData32 = 0;
-  v20->mName = "Free VRAM";
-  v34 = v33->mBlockID;
-  v35 = &v6->mData[v6->mActualSize - v11];
+  v19->mData = v26;
+  v19->mRequestedSize = v14;
+  v19->mActualSize = v14;
+  *(_DWORD *)&v19->mUsage = 1;
+  v19->mMemoryPool = 0i64;
+  v19->mContainerID = 0;
+  v19->mCallbackData64 = 0i64;
+  v19->mCallbackData32 = 0;
+  v19->mName = "Free VRAM";
+  v28 = &block->mData[block->mActualSize - v11];
   UFG::qPrintChannel::Print(
     &UFG::VRAMChannel,
     OUTPUT_LEVEL_DEBUG,
     "[VRAM Channel] - Setting Block ID:0x%04x to free data:%p size:0x%08x (%9u)\n");
-  v33->mData = v35;
-  v33->mRequestedSize = v11;
-  v33->mActualSize = v11;
-  *(_DWORD *)&v33->mUsage = 1;
-  v33->mMemoryPool = 0i64;
-  v33->mContainerID = 0;
-  v33->mCallbackData64 = 0i64;
-  v33->mCallbackData32 = 0;
-  v33->mName = "Free VRAM";
-  v36 = v6->mBlockID;
-  v37 = &v6->mData[v14];
+  v27->mData = v28;
+  v27->mRequestedSize = v11;
+  v27->mActualSize = v11;
+  *(_DWORD *)&v27->mUsage = 1;
+  v27->mMemoryPool = 0i64;
+  v27->mContainerID = 0;
+  v27->mCallbackData64 = 0i64;
+  v27->mCallbackData32 = 0;
+  v27->mName = "Free VRAM";
+  v29 = &block->mData[v14];
   UFG::qPrintChannel::Print(
     &UFG::VRAMChannel,
     OUTPUT_LEVEL_DEBUG,
     "[VRAM Channel] - Setting Block ID:0x%04x to free data:%p size:0x%08x (%9u)\n");
-  v6->mData = v37;
-  v6->mRequestedSize = v9;
-  v6->mActualSize = v9;
-  *(_DWORD *)&v6->mUsage = 1;
-  v6->mMemoryPool = 0i64;
-  v6->mContainerID = 0;
-  v6->mCallbackData64 = 0i64;
-  v6->mCallbackData32 = 0;
-  v38 = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v20->mPrev;
-  v39 = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v6->mPrev;
-  v6->mName = "Free VRAM";
-  v40 = v6->mPrev;
-  v40->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v20->mPrev;
-  v20->mPrev = v40;
-  v20->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v6->mPrev;
-  v41 = v6->mNext;
-  v6->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v20->mPrev;
-  v6->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v33->mPrev;
-  v33->mNext = v41;
-  v33->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v6->mPrev;
-  v41->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v33->mPrev;
-  v42 = v6->mPrev;
-  v42->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v20->mPrev;
-  v38->mPrev = v42;
-  v38->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v6->mPrev;
-  v39->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v20->mPrev;
-  v43 = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v33->mPrev;
-  v44 = v6->mNext;
-  v7 = v49;
-  v39->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v33->mPrev;
-  v43->mNext = v44;
-  v43->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v6->mPrev;
-  v44->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v33->mPrev;
+  block->mData = v29;
+  block->mRequestedSize = v9;
+  block->mActualSize = v9;
+  *(_DWORD *)&block->mUsage = 1;
+  block->mMemoryPool = 0i64;
+  block->mContainerID = 0;
+  block->mCallbackData64 = 0i64;
+  block->mCallbackData32 = 0;
+  v30 = &block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+  block->mName = "Free VRAM";
+  v31 = block->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev;
+  v31->mNext = v19;
+  v19->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev = v31;
+  v19->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext = block;
+  v32 = block->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext;
+  block->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev = v19;
+  block->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext = v27;
+  v27->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext = v32;
+  v27->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev = block;
+  v32->mPrev = v27;
+  v33 = block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev;
+  v33->mNext = &v19->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+  v19->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev = v33;
+  v19->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext = &block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+  block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev = &v19->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+  v34 = block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext;
+  v7 = this;
+  block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext = &v27->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+  v27->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext = v34;
+  v27->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev = &block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+  v34->mPrev = &v27->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
 LABEL_17:
-  v45 = v39->mPrev;
-  v46 = v39->mNext;
-  v20 = v6;
-  v45->mNext = v46;
-  v46->mPrev = v45;
-  v39->mNext = v39;
-  v39->mPrev = v39;
+  v35 = v30->mPrev;
+  v36 = v30->mNext;
+  v19 = block;
+  v35->mNext = v36;
+  v36->mPrev = v35;
+  v30->mNext = v30;
+  v30->mPrev = v30;
 LABEL_18:
-  if ( v50 == 1 )
+  if ( v40 )
   {
-    for ( i = (signed __int64)&v7->mFreeList.mNode.mNext[-1];
+    for ( i = (__int64)&v7->mFreeList.mNode.mNext[-1];
           (UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *)i != &v7->mUsedBlocks;
           i = *(_QWORD *)(i + 24) - 16i64 )
     {
@@ -2794,41 +2804,39 @@ LABEL_18:
     }
     v7->mLargestFreeBlock = v5;
   }
-  return v20;
+  return v19;
 }
 
 // File Line: 2539
 // RVA: 0x172DF0
 UFG::BlockInfo *__fastcall UFG::qVRAMemoryPool::GetUnusedBlock(UFG::qVRAMemoryPool *this)
 {
-  UFG::qVRAMemoryPool *v1; // rbx
   unsigned __int16 v2; // ax
-  UFG::BlockInfo *v3; // rdx
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *mNext; // rdx
   UFG::qNode<UFG::BlockInfo,UFG::Primary> *v4; // rax
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v5; // rcx
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *mPrev; // rcx
   UFG::BlockInfo *result; // rax
   unsigned __int16 v7; // cx
 
-  v1 = this;
   if ( this->mNumBlocksTotal )
   {
     if ( (UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *)this->mUnusedBlocks.mNode.mNext == &this->mUnusedBlocks )
     {
-      result = 0i64;
+      return 0i64;
     }
     else
     {
       v2 = ++this->mUsedBlocksCount;
       if ( v2 > this->mUsedBlocksMax )
         this->mUsedBlocksMax = v2;
-      v3 = (UFG::BlockInfo *)this->mUnusedBlocks.mNode.mNext;
-      v4 = v3->mNext;
-      v5 = v3->mPrev;
-      v5->mNext = v4;
-      v4->mPrev = v5;
-      v3->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v3->mPrev;
-      v3->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v3->mPrev;
-      result = v3;
+      mNext = this->mUnusedBlocks.mNode.mNext;
+      v4 = mNext->mNext;
+      mPrev = mNext->mPrev;
+      mPrev->mNext = v4;
+      v4->mPrev = mPrev;
+      mNext->mPrev = mNext;
+      mNext->mNext = mNext;
+      return (UFG::BlockInfo *)mNext;
     }
   }
   else
@@ -2836,9 +2844,9 @@ UFG::BlockInfo *__fastcall UFG::qVRAMemoryPool::GetUnusedBlock(UFG::qVRAMemoryPo
     result = UFG::qVRAMemoryPools::GetUnusedBlock();
     if ( result )
     {
-      v7 = ++v1->mUsedBlocksCount;
-      if ( v7 > v1->mUsedBlocksMax )
-        v1->mUsedBlocksMax = v7;
+      v7 = ++this->mUsedBlocksCount;
+      if ( v7 > this->mUsedBlocksMax )
+        this->mUsedBlocksMax = v7;
     }
   }
   return result;
@@ -2848,8 +2856,8 @@ UFG::BlockInfo *__fastcall UFG::qVRAMemoryPool::GetUnusedBlock(UFG::qVRAMemoryPo
 // RVA: 0x17BBF0
 void __fastcall UFG::qVRAMemoryPool::ReturnUsedBlock(UFG::qVRAMemoryPool *this, UFG::BlockInfo *block)
 {
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v2; // rax
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v3; // rcx
+  UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *p_mUnusedBlocks; // rax
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *mNext; // rcx
 
   block->mName = "Unused VRAM BlockInfo";
   block->mData = 0i64;
@@ -2862,12 +2870,12 @@ void __fastcall UFG::qVRAMemoryPool::ReturnUsedBlock(UFG::qVRAMemoryPool *this, 
   --this->mUsedBlocksCount;
   if ( this->mNumBlocksTotal )
   {
-    v2 = &this->mUnusedBlocks.mNode;
-    v3 = this->mUnusedBlocks.mNode.mNext;
-    v2->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&block->mPrev;
-    block->mPrev = v2;
-    block->mNext = v3;
-    v3->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&block->mPrev;
+    p_mUnusedBlocks = &this->mUnusedBlocks;
+    mNext = this->mUnusedBlocks.mNode.mNext;
+    p_mUnusedBlocks->mNode.mNext = block;
+    block->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev = &p_mUnusedBlocks->mNode;
+    block->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext = mNext;
+    mNext->mPrev = block;
   }
   else
   {
@@ -2879,187 +2887,176 @@ void __fastcall UFG::qVRAMemoryPool::ReturnUsedBlock(UFG::qVRAMemoryPool *this, 
 // RVA: 0x174150
 char __fastcall UFG::qVRAMemoryPool::InternalFree(UFG::qVRAMemoryPool *this, UFG::BlockInfo *block)
 {
-  UFG::BlockInfo *v2; // rbx
   UFG::qVRAMemoryPool *v3; // rbp
-  char *v4; // ST30_8
-  int v5; // ST28_4
-  char v6; // al
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v7; // rax
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v8; // rcx
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v9; // rdi
+  char mUsage; // al
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *mNext; // rax
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *mPrev; // rcx
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v7; // rdi
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v8; // rcx
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v9; // rax
   UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v10; // rcx
   UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v11; // rax
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v12; // rcx
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v13; // rax
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v15; // rdi
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v13; // rdi
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v14; // rcx
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v15; // rax
   UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v16; // rcx
   UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v17; // rax
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v18; // rcx
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v19; // rax
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v20; // rcx
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v21; // rax
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v22; // rcx
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v23; // rax
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v24; // rdx
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v25; // rdi
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v26; // rcx
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v27; // rax
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v28; // rcx
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v29; // rax
-  UFG::BlockInfo *v30; // rax
-  UFG::BlockInfo *v31; // rbx
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v32; // rax
-  unsigned int v33; // eax
-  UFG::qVRAMemoryPool *v34; // [rsp+60h] [rbp+8h]
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v18; // rcx
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v19; // rax
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v20; // rcx
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v21; // rax
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v22; // rdi
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v23; // rcx
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v24; // rax
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v25; // rcx
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v26; // rax
+  UFG::BlockInfo *v27; // rbx
+  unsigned int mActualSize; // eax
 
-  v34 = this;
-  v2 = block;
   v3 = this;
-  v4 = block->mData;
-  v5 = block->mBlockID;
   UFG::qPrintChannel::Print(
     &UFG::VRAMChannel,
     OUTPUT_LEVEL_WARNING,
     "[VRAM Channel] - %.64s->InternalFree(%p - [%04u]%p)\n");
-  v6 = v2->mUsage;
-  if ( (unsigned __int8)v6 >= 2u )
+  mUsage = block->mUsage;
+  if ( (unsigned __int8)mUsage >= 2u )
   {
-    if ( v6 == 11 )
+    if ( mUsage == 11 )
     {
       if ( !v3->mNumBlocksTotal )
-        UFG::qVRAMemoryPools::GetBlock(v2->mContainerID);
-      v7 = v2->mNext;
-      v8 = v2->mPrev;
-      v8->mNext = v7;
-      v7->mPrev = v8;
-      v2->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v2->mPrev;
-      v2->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v2->mPrev;
-      if ( (UFG::qList<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly,1,0> *)v2->mAllocationHandles.mNode.mNext != &v2->mAllocationHandles )
+        UFG::qVRAMemoryPools::GetBlock(block->mContainerID);
+      mNext = block->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext;
+      mPrev = block->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
+      block->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev = block;
+      block->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext = block;
+      if ( (UFG::qList<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly,1,0> *)block->mAllocationHandles.mNode.mNext != &block->mAllocationHandles )
       {
         do
         {
-          v9 = v2->mAllocationHandles.mNode.mNext;
-          v10 = v9->mPrev;
-          v11 = v9->mNext;
-          v10->mNext = v11;
-          v11->mPrev = v10;
-          v9->mPrev = v9;
-          v9->mNext = v9;
+          v7 = block->mAllocationHandles.mNode.mNext;
+          v8 = v7->mPrev;
+          v9 = v7->mNext;
+          v8->mNext = v9;
+          v9->mPrev = v8;
+          v7->mPrev = v7;
+          v7->mNext = v7;
           UFG::qPrintChannel::Print(
             &UFG::VRAMChannel,
             OUTPUT_LEVEL_DEBUG,
             "[VRAM Channel] - Setting qVRAMemoryHandle(%p) to point at - PoolID:0x%02x BlockID:0x%04x Data:%p-%p AllocatedSize:%u\n");
-          v12 = v9->mPrev;
-          v13 = v9->mNext;
-          v12->mNext = v13;
-          v13->mPrev = v12;
-          v9->mPrev = v9;
-          v9->mNext = v9;
-          v9[1].mPrev = 0i64;
-          LODWORD(v9[1].mNext) = 0;
+          v10 = v7->mPrev;
+          v11 = v7->mNext;
+          v10->mNext = v11;
+          v11->mPrev = v10;
+          v7->mPrev = v7;
+          v7->mNext = v7;
+          v7[1].mPrev = 0i64;
+          LODWORD(v7[1].mNext) = 0;
         }
-        while ( (UFG::qList<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly,1,0> *)v2->mAllocationHandles.mNode.mNext != &v2->mAllocationHandles );
-        v3 = v34;
+        while ( (UFG::qList<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly,1,0> *)block->mAllocationHandles.mNode.mNext != &block->mAllocationHandles );
+        v3 = this;
       }
     }
     else
     {
-      if ( !(v2->mFlags & 0x10) )
+      if ( (block->mFlags & 0x10) == 0 )
       {
-        if ( (unsigned __int8)(v6 - 9) <= 1u )
+        if ( (unsigned __int8)(mUsage - 9) <= 1u )
         {
-          v22 = v2->mPrev;
-          v23 = v2->mNext;
-          v24 = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v2->mPrev;
-          v22->mNext = v23;
-          v23->mPrev = v22;
-          v24->mPrev = v24;
-          v24->mNext = v24;
-          while ( (UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *)v2->mContainedBlocks.mNode.mNext != &v2->mContainedBlocks )
-            UFG::qVRAMemoryPool::InternalFree(v3, (UFG::BlockInfo *)v2->mContainedBlocks.mNode.mNext);
+          v20 = block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev;
+          v21 = block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext;
+          v20->mNext = v21;
+          v21->mPrev = v20;
+          block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev = &block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+          block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext = &block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+          while ( block->mContainedBlocks.mNode.mNext != (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&block->mContainedBlocks )
+            UFG::qVRAMemoryPool::InternalFree(v3, (UFG::BlockInfo *)block->mContainedBlocks.mNode.mNext);
         }
-        if ( (UFG::qList<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly,1,0> *)v2->mAllocationHandles.mNode.mNext != &v2->mAllocationHandles )
+        if ( (UFG::qList<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly,1,0> *)block->mAllocationHandles.mNode.mNext != &block->mAllocationHandles )
         {
           do
           {
-            v25 = v2->mAllocationHandles.mNode.mNext;
-            v26 = v25->mPrev;
-            v27 = v25->mNext;
-            v26->mNext = v27;
-            v27->mPrev = v26;
-            v25->mPrev = v25;
-            v25->mNext = v25;
+            v22 = block->mAllocationHandles.mNode.mNext;
+            v23 = v22->mPrev;
+            v24 = v22->mNext;
+            v23->mNext = v24;
+            v24->mPrev = v23;
+            v22->mPrev = v22;
+            v22->mNext = v22;
             UFG::qPrintChannel::Print(
               &UFG::VRAMChannel,
               OUTPUT_LEVEL_DEBUG,
               "[VRAM Channel] - Setting qVRAMemoryHandle(%p) to point at - PoolID:0x%02x BlockID:0x%04x Data:%p-%p AllocatedSize:%u\n");
-            v28 = v25->mPrev;
-            v29 = v25->mNext;
-            v28->mNext = v29;
-            v29->mPrev = v28;
-            v25->mPrev = v25;
-            v25->mNext = v25;
-            v25[1].mPrev = 0i64;
-            LODWORD(v25[1].mNext) = 0;
+            v25 = v22->mPrev;
+            v26 = v22->mNext;
+            v25->mNext = v26;
+            v26->mPrev = v25;
+            v22->mPrev = v22;
+            v22->mNext = v22;
+            v22[1].mPrev = 0i64;
+            LODWORD(v22[1].mNext) = 0;
           }
-          while ( (UFG::qList<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly,1,0> *)v2->mAllocationHandles.mNode.mNext != &v2->mAllocationHandles );
-          v3 = v34;
+          while ( (UFG::qList<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly,1,0> *)block->mAllocationHandles.mNode.mNext != &block->mAllocationHandles );
+          v3 = this;
         }
-        v3->mFreeMemory += v2->mActualSize;
-        v3->mUsedMemory -= v2->mActualSize;
-        v3->mAllocatedMemory -= v2->mRequestedSize;
-        v3->mAlignmentLoss += v2->mRequestedSize - v2->mActualSize;
-        UFG::BlockInfo::SetFree(v2);
-        v30 = UFG::qVRAMemoryPool::MergeFreeBlock(v3, v2);
-        v31 = v30;
-        v32 = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v30->mPrev;
-        if ( v32->mPrev == v32 && v32->mNext == v32 )
-          UFG::qVRAMemoryPool::AddBlockToFreeList(v3, v31);
-        v33 = v31->mActualSize;
-        if ( v33 > v3->mLargestFreeBlock )
-          v3->mLargestFreeBlock = v33;
+        v3->mFreeMemory += block->mActualSize;
+        v3->mUsedMemory -= block->mActualSize;
+        v3->mAllocatedMemory -= block->mRequestedSize;
+        v3->mAlignmentLoss += block->mRequestedSize - block->mActualSize;
+        UFG::BlockInfo::SetFree(block);
+        v27 = UFG::qVRAMemoryPool::MergeFreeBlock(v3, block);
+        if ( v27->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev == &v27->UFG::qNode<UFG::BlockInfo,UFG::Secondary>
+          && v27->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext == &v27->UFG::qNode<UFG::BlockInfo,UFG::Secondary> )
+        {
+          UFG::qVRAMemoryPool::AddBlockToFreeList(v3, v27);
+        }
+        mActualSize = v27->mActualSize;
+        if ( mActualSize > v3->mLargestFreeBlock )
+          v3->mLargestFreeBlock = mActualSize;
         if ( v3->mLargestFreeBlock != v3->mFreeMemory )
           *(_WORD *)&v3->mNeedsDefragmentUp = 257;
         return 1;
       }
-      if ( (UFG::qList<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly,1,0> *)v2->mAllocationHandles.mNode.mNext != &v2->mAllocationHandles )
+      if ( (UFG::qList<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly,1,0> *)block->mAllocationHandles.mNode.mNext != &block->mAllocationHandles )
       {
         do
         {
-          v15 = v2->mAllocationHandles.mNode.mNext;
-          v16 = v15->mPrev;
-          v17 = v15->mNext;
-          v16->mNext = v17;
-          v17->mPrev = v16;
-          v15->mPrev = v15;
-          v15->mNext = v15;
+          v13 = block->mAllocationHandles.mNode.mNext;
+          v14 = v13->mPrev;
+          v15 = v13->mNext;
+          v14->mNext = v15;
+          v15->mPrev = v14;
+          v13->mPrev = v13;
+          v13->mNext = v13;
           UFG::qPrintChannel::Print(
             &UFG::VRAMChannel,
             OUTPUT_LEVEL_DEBUG,
             "[VRAM Channel] - Setting qVRAMemoryHandle(%p) to point at - PoolID:0x%02x BlockID:0x%04x Data:%p-%p AllocatedSize:%u\n");
-          v18 = v15->mPrev;
-          v19 = v15->mNext;
-          v18->mNext = v19;
-          v19->mPrev = v18;
-          v15->mPrev = v15;
-          v15->mNext = v15;
-          v15[1].mPrev = 0i64;
-          LODWORD(v15[1].mNext) = 0;
+          v16 = v13->mPrev;
+          v17 = v13->mNext;
+          v16->mNext = v17;
+          v17->mPrev = v16;
+          v13->mPrev = v13;
+          v13->mNext = v13;
+          v13[1].mPrev = 0i64;
+          LODWORD(v13[1].mNext) = 0;
         }
-        while ( (UFG::qList<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly,1,0> *)v2->mAllocationHandles.mNode.mNext != &v2->mAllocationHandles );
-        v3 = v34;
+        while ( (UFG::qList<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly,1,0> *)block->mAllocationHandles.mNode.mNext != &block->mAllocationHandles );
+        v3 = this;
       }
-      v20 = v2->mPrev;
-      v21 = v2->mNext;
-      v20->mNext = v21;
-      v21->mPrev = v20;
-      LODWORD(v21) = v2->mRequestedSize;
-      v2->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v2->mPrev;
-      v2->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v2->mPrev;
-      v3->mUsedMainMemory -= (unsigned int)v21;
-      UFG::qMemoryPool::Free(v2->mMemoryPool, v2->mData);
+      v18 = block->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev;
+      v19 = block->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext;
+      v18->mNext = v19;
+      v19->mPrev = v18;
+      LODWORD(v19) = block->mRequestedSize;
+      block->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev = block;
+      block->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext = block;
+      v3->mUsedMainMemory -= (unsigned int)v19;
+      UFG::qMemoryPool::Free(block->mMemoryPool, block->mData);
     }
-    UFG::qVRAMemoryPool::ReturnUsedBlock(v3, v2);
+    UFG::qVRAMemoryPool::ReturnUsedBlock(v3, block);
     return 1;
   }
   return 0;
@@ -3069,144 +3066,129 @@ char __fastcall UFG::qVRAMemoryPool::InternalFree(UFG::qVRAMemoryPool *this, UFG
 // RVA: 0x177A50
 UFG::BlockInfo *__fastcall UFG::qVRAMemoryPool::MergeFreeBlock(UFG::qVRAMemoryPool *this, UFG::BlockInfo *block)
 {
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v2; // rbp
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v3; // r14
-  UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *v4; // r15
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *mNext; // rbp
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *mPrev; // r14
+  UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *p_mUsedBlocks; // r15
   UFG::BlockInfo *v5; // rsi
-  UFG::qVRAMemoryPool *v6; // r13
   UFG::qNode<UFG::BlockInfo,UFG::Primary> *v7; // rbx
-  __int64 v8; // r9
-  unsigned int v9; // edi
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v10; // rdx
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v11; // rcx
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v12; // rax
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v13; // rcx
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v14; // rax
-  char *v15; // rbx
-  __int64 v16; // r9
-  int v17; // edi
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v18; // r9
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v19; // rcx
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v20; // rax
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v21; // rcx
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v22; // r8
+  unsigned int v8; // edi
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v9; // rcx
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v10; // rax
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v11; // rcx
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v12; // rax
+  char *mData; // rbx
+  int v14; // edi
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v15; // rcx
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v16; // rax
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v17; // rcx
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v18; // r8
 
-  v2 = block->mNext;
-  v3 = block->mPrev;
-  v4 = &this->mUsedBlocks;
+  mNext = block->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext;
+  mPrev = block->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev;
+  p_mUsedBlocks = &this->mUsedBlocks;
   v5 = block;
-  v6 = this;
-  if ( (UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *)block->mPrev != &this->mUsedBlocks
-    && BYTE2(v3[4].mNext) == block->mUsage )
+  if ( (UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *)block->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev != &this->mUsedBlocks
+    && BYTE2(mPrev[4].mNext) == block->mUsage )
   {
-    v7 = v3[3].mPrev;
-    v8 = LOWORD(v3[4].mNext);
-    v9 = HIDWORD(v3[4].mPrev) + block->mActualSize;
+    v7 = mPrev[3].mPrev;
+    v8 = HIDWORD(mPrev[4].mPrev) + block->mActualSize;
     UFG::qPrintChannel::Print(
       &UFG::VRAMChannel,
       OUTPUT_LEVEL_DEBUG,
       "[VRAM Channel] - Setting Block ID:0x%04x to free data:%p size:0x%08x (%9u)\n");
-    v3[3].mPrev = v7;
-    LODWORD(v3[4].mPrev) = v9;
-    HIDWORD(v3[4].mPrev) = v9;
-    *(_DWORD *)((char *)&v3[4].mNext + 2) = 1;
-    v3[5].mPrev = 0i64;
-    LOWORD(v3[6].mNext) = 0;
-    v3[7].mPrev = 0i64;
-    LODWORD(v3[7].mNext) = 0;
-    v10 = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v5->mPrev;
-    v3[3].mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)"Free VRAM";
-    v11 = v5->mPrev;
-    v12 = v5->mNext;
+    mPrev[3].mPrev = v7;
+    LODWORD(mPrev[4].mPrev) = v8;
+    HIDWORD(mPrev[4].mPrev) = v8;
+    *(_DWORD *)((char *)&mPrev[4].mNext + 2) = 1;
+    mPrev[5].mPrev = 0i64;
+    LOWORD(mPrev[6].mNext) = 0;
+    mPrev[7].mPrev = 0i64;
+    LODWORD(mPrev[7].mNext) = 0;
+    mPrev[3].mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)"Free VRAM";
+    v9 = v5->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev;
+    v10 = v5->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext;
+    v9->mNext = v10;
+    v10->mPrev = v9;
+    v5->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev = v5;
+    v5->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext = v5;
+    v11 = v5->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev;
+    v12 = v5->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext;
     v11->mNext = v12;
     v12->mPrev = v11;
-    v5->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v5->mPrev;
-    v5->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v5->mPrev;
-    v13 = v5->mPrev;
-    v14 = v5->mNext;
-    v13->mNext = v14;
-    v14->mPrev = v13;
-    v10->mPrev = v10;
-    v10->mNext = v10;
-    UFG::qVRAMemoryPool::ReturnUsedBlock(v6, v5);
-    v5 = (UFG::BlockInfo *)v3;
+    v5->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev = &v5->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+    v5->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext = &v5->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+    UFG::qVRAMemoryPool::ReturnUsedBlock(this, v5);
+    v5 = (UFG::BlockInfo *)mPrev;
   }
-  if ( v2 == (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)v4 || BYTE2(v2[4].mNext) != v5->mUsage )
+  if ( mNext == (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)p_mUsedBlocks || BYTE2(mNext[4].mNext) != v5->mUsage )
     return v5;
-  v15 = v5->mData;
-  v16 = LOWORD(v2[4].mNext);
-  v17 = HIDWORD(v2[4].mPrev) + v5->mActualSize;
+  mData = v5->mData;
+  v14 = HIDWORD(mNext[4].mPrev) + v5->mActualSize;
   UFG::qPrintChannel::Print(
     &UFG::VRAMChannel,
     OUTPUT_LEVEL_DEBUG,
     "[VRAM Channel] - Setting Block ID:0x%04x to free data:%p size:0x%08x (%9u)\n");
-  v2[3].mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)v15;
-  LODWORD(v2[4].mPrev) = v17;
-  HIDWORD(v2[4].mPrev) = v17;
-  *(_DWORD *)((char *)&v2[4].mNext + 2) = 1;
-  v2[5].mPrev = 0i64;
-  LOWORD(v2[6].mNext) = 0;
-  v2[7].mPrev = 0i64;
-  LODWORD(v2[7].mNext) = 0;
-  v18 = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v5->mPrev;
-  v2[3].mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)"Free VRAM";
-  v19 = v5->mPrev;
-  v20 = v5->mNext;
-  v19->mNext = v20;
-  v20->mPrev = v19;
-  v5->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v5->mPrev;
-  v5->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v5->mPrev;
-  v21 = v5->mNext;
-  v22 = v5->mPrev;
-  v22->mNext = v21;
-  v21->mPrev = v22;
-  v18->mPrev = v18;
-  v18->mNext = v18;
-  UFG::qVRAMemoryPool::ReturnUsedBlock(v6, v5);
-  return (UFG::BlockInfo *)v2;
-}
+  mNext[3].mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)mData;
+  LODWORD(mNext[4].mPrev) = v14;
+  HIDWORD(mNext[4].mPrev) = v14;
+  *(_DWORD *)((char *)&mNext[4].mNext + 2) = 1;
+  mNext[5].mPrev = 0i64;
+  LOWORD(mNext[6].mNext) = 0;
+  mNext[7].mPrev = 0i64;
+  LODWORD(mNext[7].mNext) = 0;
+  mNext[3].mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)"Free VRAM";
+  v15 = v5->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev;
+  v16 = v5->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext;
+  v15->mNext = v16;
+  v16->mPrev = v15;
+  v5->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev = v5;
+  v5->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext = v5;
+  v17 = v5->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext;
+  v18 = v5->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev;
+  v18->mNext = v17;
+  v17->mPrev = v18;
+  v5->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev = &v5->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+  v5->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext = &v5->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+  UFG::qVRAMemoryPool::ReturnUsedBlock(this, v5);
+  return (UFG::BlockInfo *)mNext;
+}  UFG::qVRAMemoryPo
 
 // File Line: 2719
 // RVA: 0x165EC0
 char __fastcall UFG::qVRAMemoryPool::AddBlockToFreeList(UFG::qVRAMemoryPool *this, UFG::BlockInfo *block)
 {
-  UFG::BlockInfo *v2; // r9
   UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v3; // rdx
-  UFG::qVRAMemoryPool *v4; // r10
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v5; // rax
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v6; // rcx
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v7; // rdx
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v8; // rdx
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v9; // rax
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *mPrev; // rax
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v5; // rdx
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v6; // rdx
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v7; // rax
 
-  v2 = block;
   v3 = this->mFreeList.mNode.mNext - 1;
-  v4 = this;
   if ( v3 != (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&this->mUsedBlocks )
   {
-    while ( v3[3].mPrev <= (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)v2->mData )
+    while ( v3[3].mPrev <= (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)block->mData )
     {
       v3 = v3[1].mNext - 1;
       if ( v3 == (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&this->mUsedBlocks )
         goto LABEL_6;
     }
-    v5 = v3[1].mPrev;
-    v6 = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v2->mPrev;
-    v7 = v3 + 1;
-    v5->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v2->mPrev;
-    v6->mPrev = v5;
-    v6->mNext = v7;
-    v7->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v2->mPrev;
+    mPrev = v3[1].mPrev;
+    v5 = v3 + 1;
+    mPrev->mNext = &block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+    block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev = mPrev;
+    block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext = v5;
+    v5->mPrev = &block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
   }
 LABEL_6:
-  v8 = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v2->mPrev;
-  if ( v8->mPrev == v8 && (UFG::qNode<UFG::BlockInfo,UFG::Secondary> **)v2->mNext == &v2->mPrev )
+  v6 = &block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+  if ( v6->mPrev == v6
+    && block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext == &block->UFG::qNode<UFG::BlockInfo,UFG::Secondary> )
   {
-    v9 = v4->mFreeList.mNode.mPrev;
-    v9->mNext = v8;
-    v8->mPrev = v9;
-    v2->mNext = &v4->mFreeList.mNode;
-    v4->mFreeList.mNode.mPrev = v8;
+    v7 = this->mFreeList.mNode.mPrev;
+    v7->mNext = v6;
+    v6->mPrev = v7;
+    block->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext = &this->mFreeList.mNode;
+    this->mFreeList.mNode.mPrev = v6;
   }
   return 1;
 }
@@ -3215,62 +3197,69 @@ LABEL_6:
 // RVA: 0x167740
 void __fastcall UFG::qVRAMemoryPool::AssertValidInitialized(UFG::qVRAMemoryPool *this)
 {
-  UFG::qVRAMemoryPool *v1; // rbx
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v2; // rax
-  signed __int64 v3; // rdx
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *i; // rcx
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *mNext; // rax
+  UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *p_mMainMemoryBlocks; // rdx
+  UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *v4; // rcx
   UFG::qNode<UFG::BlockInfo,UFG::Primary> *v5; // rcx
-  signed __int64 j; // r8
-  unsigned int v7; // edx
-  signed __int64 k; // rcx
-  signed __int64 l; // rax
+  UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *i; // r8
+  unsigned int mPrev_high; // edx
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *j; // rcx
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *k; // rax
   UFG::qVRAMemoryPool *m; // rax
   UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v11; // rax
-  signed __int64 v12; // rbx
-  signed __int64 n; // rax
+  UFG::qList<UFG::BlockInfo,UFG::Secondary,1,0> *p_mMoveTargetsList; // rbx
+  __int64 n; // rax
 
-  v1 = this;
   if ( !this->mNumBlocksTotal )
   {
     UFG::qMutex::Lock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMBlocksLock);
     UFG::qMutex::Unlock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMBlocksLock);
   }
-  if ( !v1->mNumBlocksTotal )
+  if ( !this->mNumBlocksTotal )
   {
     UFG::qMutex::Lock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMBlocksLock);
     UFG::qMutex::Unlock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMBlocksLock);
   }
-  v2 = v1->mMainMemoryBlocks.mNode.mNext;
-  v3 = (signed __int64)&v1->mMainMemoryBlocks;
-  for ( i = v2; i != (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)v3; i = i->mNext )
-    ;
-  v5 = v1->mUsedBlocks.mNode.mNext;
-  for ( j = (signed __int64)&v1->mUsedBlocks; v5 != (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)j; v5 = v5->mNext )
-    ;
-  for ( ; v2 != (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)v3; v2 = v2->mNext )
-    ;
-  v7 = 0;
-  for ( k = (signed __int64)&v1->mFreeList.mNode.mNext[-1]; k != j; k = *(_QWORD *)(k + 24) - 16i64 )
+  mNext = this->mMainMemoryBlocks.mNode.mNext;
+  p_mMainMemoryBlocks = &this->mMainMemoryBlocks;
+  v4 = (UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *)mNext;
+  if ( mNext != (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&this->mMainMemoryBlocks )
   {
-    if ( *(_DWORD *)(k + 68) > v7 )
-      v7 = *(_DWORD *)(k + 68);
+    do
+      v4 = (UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *)v4->mNode.mNext;
+    while ( v4 != p_mMainMemoryBlocks );
   }
-  for ( l = (signed __int64)&v1->mPendingFreeList.mNode.mNext[-1];
-        (UFG::qList<UFG::BlockInfo,UFG::Secondary,1,0> *)l != &v1->mFreeList;
-        l = *(_QWORD *)(l + 24) - 16i64 )
+  v5 = this->mUsedBlocks.mNode.mNext;
+  for ( i = &this->mUsedBlocks; v5 != (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)i; v5 = v5->mNext )
+    ;
+  for ( ; mNext != (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)p_mMainMemoryBlocks; mNext = mNext->mNext )
+    ;
+  mPrev_high = 0;
+  for ( j = this->mFreeList.mNode.mNext - 1; j != (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)i; j = j[1].mNext - 1 )
+  {
+    if ( HIDWORD(j[4].mPrev) > mPrev_high )
+      mPrev_high = HIDWORD(j[4].mPrev);
+  }
+  for ( k = this->mPendingFreeList.mNode.mNext - 1;
+        k != (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&this->mFreeList;
+        k = k[1].mNext - 1 )
   {
     ;
   }
-  for ( m = (UFG::qVRAMemoryPool *)v1->mUnusedBlocks.mNode.mNext;
-        m != (UFG::qVRAMemoryPool *)&v1->mUnusedBlocks;
+  for ( m = (UFG::qVRAMemoryPool *)this->mUnusedBlocks.mNode.mNext;
+        m != (UFG::qVRAMemoryPool *)&this->mUnusedBlocks;
         m = (UFG::qVRAMemoryPool *)m->mNext )
   {
     ;
   }
-  v11 = v1->mContainerList.mNode.mNext;
-  v12 = (signed __int64)&v1->mMoveTargetsList;
-  for ( n = (signed __int64)&v11[-1]; n != v12; n = *(_QWORD *)(n + 24) - 16i64 )
+  v11 = this->mContainerList.mNode.mNext;
+  p_mMoveTargetsList = &this->mMoveTargetsList;
+  for ( n = (__int64)&v11[-1];
+        (UFG::qList<UFG::BlockInfo,UFG::Secondary,1,0> *)n != p_mMoveTargetsList;
+        n = *(_QWORD *)(n + 24) - 16i64 )
+  {
     ;
+  }
 }
 
 // File Line: 3006
@@ -3278,7 +3267,7 @@ void __fastcall UFG::qVRAMemoryPool::AssertValidInitialized(UFG::qVRAMemoryPool 
 __int64 dynamic_initializer_for__UFG::qVRAMemoryPools::sVRAMPoolsLock__()
 {
   UFG::qMutex::qMutex(&UFG::qVRAMemoryPools::sVRAMPoolsLock, "qVRAMemory::sVRAMPoolsLock");
-  return atexit(dynamic_atexit_destructor_for__UFG::qVRAMemoryPools::sVRAMPoolsLock__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::qVRAMemoryPools::sVRAMPoolsLock__);
 }
 
 // File Line: 3007
@@ -3286,7 +3275,7 @@ __int64 dynamic_initializer_for__UFG::qVRAMemoryPools::sVRAMPoolsLock__()
 __int64 dynamic_initializer_for__UFG::qVRAMemoryPools::sMainVRAMemoryPool__()
 {
   UFG::qVRAMemoryPool::qVRAMemoryPool(&UFG::qVRAMemoryPools::sMainVRAMemoryPool);
-  return atexit(dynamic_atexit_destructor_for__UFG::qVRAMemoryPools::sMainVRAMemoryPool__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::qVRAMemoryPools::sMainVRAMemoryPool__);
 }
 
 // File Line: 3011
@@ -3294,26 +3283,32 @@ __int64 dynamic_initializer_for__UFG::qVRAMemoryPools::sMainVRAMemoryPool__()
 __int64 dynamic_initializer_for__UFG::qVRAMemoryPools::sVRAMBlocksLock__()
 {
   UFG::qMutex::qMutex(&UFG::qVRAMemoryPools::sVRAMBlocksLock, "qVRAMemory::sVRAMBlocksLock");
-  return atexit(dynamic_atexit_destructor_for__UFG::qVRAMemoryPools::sVRAMBlocksLock__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::qVRAMemoryPools::sVRAMBlocksLock__);
 }
 
 // File Line: 3012
 // RVA: 0x1467B30
 __int64 dynamic_initializer_for__UFG::qVRAMemoryPools::sUnusedBlocks__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::qVRAMemoryPools::sUnusedBlocks__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::qVRAMemoryPools::sUnusedBlocks__);
 }
 
 // File Line: 3023
 // RVA: 0x173B70
-char __fastcall UFG::qVRAMemoryPools::InitSystem(char *main_pool_vram_start, unsigned int main_pool_vram_size, const char *main_pool_name, unsigned __int16 main_pool_num_blocks, unsigned int main_pool_alignment, char *main_pool_block_memory, unsigned int main_pool_block_memory_size, unsigned __int16 common_num_blocks, char *common_block_memory, unsigned int common_block_memory_size)
+char __fastcall UFG::qVRAMemoryPools::InitSystem(
+        char *main_pool_vram_start,
+        unsigned int main_pool_vram_size,
+        const char *main_pool_name,
+        unsigned __int16 main_pool_num_blocks,
+        unsigned int main_pool_alignment,
+        char *main_pool_block_memory,
+        unsigned int main_pool_block_memory_size,
+        unsigned __int16 common_num_blocks,
+        char *common_block_memory,
+        unsigned int common_block_memory_size)
 {
-  unsigned __int16 v10; // r14
-  const char *v11; // r15
-  unsigned int v12; // er12
-  char *v13; // r13
   unsigned __int64 v14; // rbx
-  unsigned __int8 v15; // cf
+  bool v15; // cf
   unsigned __int64 v16; // rbx
   UFG::qMemoryPool *v17; // rcx
   UFG::allocator::free_link *v18; // rax
@@ -3321,17 +3316,10 @@ char __fastcall UFG::qVRAMemoryPools::InitSystem(char *main_pool_vram_start, uns
   UFG::BlockInfo *v20; // rsi
   unsigned __int16 i; // dx
   UFG::BlockInfo *v22; // rcx
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v23; // rax
-  UFG::qList<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly,1,0> *v24; // ST50_8
-  UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *v25; // ST50_8
-  UFG::BlockInfo *v26; // rcx
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v27; // rax
-  UFG::qVRAMemoryPool *v28; // rbx
+  UFG::BlockInfo *v23; // rcx
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *mPrev; // rax
+  UFG::qVRAMemoryPool *v25; // rbx
 
-  v10 = main_pool_num_blocks;
-  v11 = main_pool_name;
-  v12 = main_pool_vram_size;
-  v13 = main_pool_vram_start;
   if ( common_num_blocks )
   {
     if ( common_block_memory )
@@ -3345,23 +3333,20 @@ char __fastcall UFG::qVRAMemoryPools::InitSystem(char *main_pool_vram_start, uns
         v22 = &UFG::qVRAMemoryPools::sBlocks[(unsigned __int64)i];
         if ( v22 )
         {
-          v22->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v22->mPrev;
-          v22->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v22->mPrev;
-          v23 = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v22->mPrev;
-          v23->mPrev = v23;
-          v23->mNext = v23;
-          v24 = &v22->mAllocationHandles;
-          v24->mNode.mPrev = &v24->mNode;
-          v24->mNode.mNext = &v24->mNode;
+          v22->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev = v22;
+          v22->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext = v22;
+          v22->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev = &v22->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+          v22->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext = &v22->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+          v22->mAllocationHandles.mNode.mPrev = &v22->mAllocationHandles.mNode;
+          v22->mAllocationHandles.mNode.mNext = &v22->mAllocationHandles.mNode;
           v22->mData = 0i64;
           v22->mName = 0i64;
           *(_QWORD *)&v22->mRequestedSize = 0i64;
           *(_DWORD *)&v22->mBlockID = 0xFFFF;
           *(_WORD *)&v22->mKeepAliveFrames = 0;
           v22->mMemoryPool = 0i64;
-          v25 = &v22->mContainedBlocks;
-          v25->mNode.mPrev = &v25->mNode;
-          v25->mNode.mNext = &v25->mNode;
+          v22->mContainedBlocks.mNode.mPrev = &v22->mContainedBlocks.mNode;
+          v22->mContainedBlocks.mNode.mNext = &v22->mContainedBlocks.mNode;
           *(_DWORD *)&v22->mContainerID = -1;
           v22->mCallbackData64 = 0i64;
           v22->mCallbackData32 = 0;
@@ -3406,87 +3391,81 @@ char __fastcall UFG::qVRAMemoryPools::InitSystem(char *main_pool_vram_start, uns
     UFG::qVRAMemoryPools::sNumBlocksTotal = common_num_blocks;
     UFG::qVRAMemoryPools::sUsedBlocksCount = 0;
     UFG::qVRAMemoryPools::sUsedBlocksMax = 0;
-    if ( common_num_blocks > 0u )
+    do
     {
-      do
-      {
-        v26 = &UFG::qVRAMemoryPools::sBlocks[(unsigned __int64)v19];
-        v26->mBlockID = v19;
-        v27 = UFG::qVRAMemoryPools::sUnusedBlocks.mNode.mPrev;
-        UFG::qVRAMemoryPools::sUnusedBlocks.mNode.mPrev->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v26->mPrev;
-        v26->mPrev = v27;
-        v26->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&UFG::qVRAMemoryPools::sUnusedBlocks;
-        UFG::qVRAMemoryPools::sUnusedBlocks.mNode.mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v26->mPrev;
-        ++v19;
-      }
-      while ( v19 < UFG::qVRAMemoryPools::sNumBlocksTotal );
+      v23 = &UFG::qVRAMemoryPools::sBlocks[(unsigned __int64)v19];
+      v23->mBlockID = v19;
+      mPrev = UFG::qVRAMemoryPools::sUnusedBlocks.mNode.mPrev;
+      UFG::qVRAMemoryPools::sUnusedBlocks.mNode.mPrev->mNext = v23;
+      v23->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev = mPrev;
+      v23->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&UFG::qVRAMemoryPools::sUnusedBlocks;
+      UFG::qVRAMemoryPools::sUnusedBlocks.mNode.mPrev = v23;
+      ++v19;
     }
+    while ( v19 < UFG::qVRAMemoryPools::sNumBlocksTotal );
   }
-  v28 = &UFG::qVRAMemoryPools::sMainVRAMemoryPool;
+  v25 = &UFG::qVRAMemoryPools::sMainVRAMemoryPool;
   if ( (unsigned __int8)UFG::qVRAMemoryPool::Init(
                           &UFG::qVRAMemoryPools::sMainVRAMemoryPool,
-                          v13,
-                          v12,
-                          v11,
-                          v10,
+                          main_pool_vram_start,
+                          main_pool_vram_size,
+                          main_pool_name,
+                          main_pool_num_blocks,
                           main_pool_alignment,
                           main_pool_block_memory,
                           main_pool_block_memory_size) != 1 )
-    v28 = UFG::gMainVRAMemoryPool;
-  UFG::gMainVRAMemoryPool = v28;
+    v25 = UFG::gMainVRAMemoryPool;
+  UFG::gMainVRAMemoryPool = v25;
   return 1;
 }
 
 // File Line: 3080
 // RVA: 0x17CEE0
-void __fastcall UFG::qVRAMemoryPools::SetDefaultDefragCallback(void (__fastcall *callback)(UFG::qVRAMemoryHandle *, char *, UFG::VRAMType, unsigned __int64, unsigned int))
+void __fastcall UFG::qVRAMemoryPools::SetDefaultDefragCallback(
+        void (__fastcall *callback)(UFG::qVRAMemoryHandle *, char *, UFG::VRAMType, unsigned __int64, unsigned int))
 {
-  void (__fastcall *v1)(UFG::qVRAMemoryHandle *, char *, UFG::VRAMType, unsigned __int64, unsigned int); // rbx
-
-  v1 = callback;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
-  UFG::qVRAMemoryPools::sVRAMDefaultDefragCallback = v1;
+  UFG::qVRAMemoryPools::sVRAMDefaultDefragCallback = callback;
   UFG::qMutex::Unlock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
 }
 
 // File Line: 3132
 // RVA: 0x1701F0
-__int64 __fastcall UFG::qVRAMemoryPools::GetDefragmentMoves(UFG::qVRAMemoryMoveOrder *moves, int moves_count, unsigned int requested_total_bytes)
+__int64 __fastcall UFG::qVRAMemoryPools::GetDefragmentMoves(
+        UFG::qVRAMemoryMoveOrder *moves,
+        int moves_count,
+        unsigned int requested_total_bytes)
 {
   int v3; // ebx
-  unsigned int v4; // er14
-  int v5; // esi
-  UFG::qVRAMemoryMoveOrder *v6; // rbp
   int v7; // eax
-  signed int v8; // edi
+  int i; // edi
   UFG::qVRAMemoryPool *v9; // rcx
-  unsigned int total_bytes; // [rsp+58h] [rbp+10h]
+  unsigned int total_bytes; // [rsp+58h] [rbp+10h] BYREF
 
   v3 = 0;
-  v4 = requested_total_bytes;
-  v5 = moves_count;
-  v6 = moves;
   total_bytes = 0;
   if ( moves_count > 0 && moves )
   {
     UFG::qMutex::Lock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
     v7 = sCurrentPoolId;
-    v8 = 0;
-    do
+    for ( i = 0; i < 16; ++i )
     {
-      if ( v3 >= v5 )
+      if ( v3 >= moves_count )
         break;
       v9 = UFG::qVRAMemoryPools::sVRAMemoryPools[v7];
       if ( v9 )
       {
-        v3 += UFG::qVRAMemoryPool::GetDefragmentMoves(v9, &v6[(signed __int64)v3], v5 - v3, v4, &total_bytes);
+        v3 += UFG::qVRAMemoryPool::GetDefragmentMoves(
+                v9,
+                &moves[(__int64)v3],
+                moves_count - v3,
+                requested_total_bytes,
+                &total_bytes);
         LOBYTE(v7) = sCurrentPoolId;
       }
-      ++v8;
       v7 = ((_BYTE)v7 + 1) & 0xF;
       sCurrentPoolId = v7;
     }
-    while ( v8 < 16 );
     UFG::qMutex::Unlock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
   }
   return (unsigned int)v3;
@@ -3494,34 +3473,33 @@ __int64 __fastcall UFG::qVRAMemoryPools::GetDefragmentMoves(UFG::qVRAMemoryMoveO
 
 // File Line: 3168
 // RVA: 0x178100
-void __fastcall UFG::qVRAMemoryPools::MovesCompleted(UFG::qVRAMemoryMoveOrder *moves, int moves_count, void (__fastcall *callback)(UFG::qVRAMemoryHandle *, char *, UFG::VRAMType, unsigned __int64, unsigned int))
+void __fastcall UFG::qVRAMemoryPools::MovesCompleted(
+        UFG::qVRAMemoryMoveOrder *moves,
+        unsigned int moves_count,
+        void (__fastcall *callback)(UFG::qVRAMemoryHandle *, char *, UFG::VRAMType, unsigned __int64, unsigned int))
 {
   __int64 v3; // rsi
-  UFG::qVRAMemoryMoveOrder *v4; // rbx
-  void (__fastcall *v5)(UFG::qVRAMemoryHandle *, char *, UFG::VRAMType, unsigned __int64, unsigned int); // rbp
-  unsigned __int16 *v6; // rdi
+  unsigned __int16 *p_mReadOnlyAndPoolID; // rdi
   UFG::qVRAMemoryPool *v7; // rcx
   void (__fastcall *v8)(UFG::qVRAMemoryHandle *, char *, UFG::VRAMType, unsigned __int64, unsigned int); // r8
 
-  v3 = (unsigned int)moves_count;
-  v4 = moves;
-  v5 = callback;
+  v3 = moves_count;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
-  if ( (signed int)v3 > 0 )
+  if ( (int)v3 > 0 )
   {
-    v6 = &v4->mTargetHandle.mReadOnlyAndPoolID;
+    p_mReadOnlyAndPoolID = &moves->mTargetHandle.mReadOnlyAndPoolID;
     do
     {
-      v7 = UFG::qVRAMemoryPools::sVRAMemoryPools[*v6 & 0x7FFF];
+      v7 = UFG::qVRAMemoryPools::sVRAMemoryPools[*p_mReadOnlyAndPoolID & 0x7FFF];
       if ( v7 )
       {
         v8 = UFG::qVRAMemoryPools::sVRAMDefaultDefragCallback;
-        if ( v5 )
-          v8 = v5;
-        UFG::qVRAMemoryPool::MoveCompleted(v7, v4, v8);
+        if ( callback )
+          v8 = callback;
+        UFG::qVRAMemoryPool::MoveCompleted(v7, moves, v8);
       }
-      ++v4;
-      v6 += 32;
+      ++moves;
+      p_mReadOnlyAndPoolID += 32;
       --v3;
     }
     while ( v3 );
@@ -3534,14 +3512,13 @@ void __fastcall UFG::qVRAMemoryPools::MovesCompleted(UFG::qVRAMemoryMoveOrder *m
 void UFG::qVRAMemoryPools::ServiceDeletes(void)
 {
   UFG::qVRAMemoryPool **v0; // r14
-  signed __int64 v1; // r15
+  __int64 v1; // r15
   UFG::qVRAMemoryPool *v2; // rdi
   UFG::BlockInfo *v3; // rdx
-  signed __int64 v4; // rbx
-  char v5; // al
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v6; // rcx
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v7; // rax
-  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *v8; // r8
+  __int64 v4; // rbx
+  char mKeepAliveFrames; // al
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *mPrev; // rcx
+  UFG::qNode<UFG::BlockInfo,UFG::Secondary> *mNext; // rax
 
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
   v0 = UFG::qVRAMemoryPools::sVRAMemoryPools;
@@ -3566,24 +3543,23 @@ void UFG::qVRAMemoryPools::ServiceDeletes(void)
       {
         do
         {
-          v4 = (signed __int64)&v3->mNext[-1];
-          if ( !(v3->mFlags & 0x40) )
+          v4 = (__int64)&v3->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext[-1];
+          if ( (v3->mFlags & 0x40) == 0 )
           {
-            v5 = v3->mKeepAliveFrames;
-            if ( (unsigned __int8)v5 <= 1u )
+            mKeepAliveFrames = v3->mKeepAliveFrames;
+            if ( (unsigned __int8)mKeepAliveFrames <= 1u )
             {
-              v6 = v3->mPrev;
-              v7 = v3->mNext;
-              v8 = (UFG::qNode<UFG::BlockInfo,UFG::Secondary> *)&v3->mPrev;
-              v6->mNext = v7;
-              v7->mPrev = v6;
-              v8->mPrev = v8;
-              v8->mNext = v8;
+              mPrev = v3->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev;
+              mNext = v3->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext;
+              mPrev->mNext = mNext;
+              mNext->mPrev = mPrev;
+              v3->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mPrev = &v3->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
+              v3->UFG::qNode<UFG::BlockInfo,UFG::Secondary>::mNext = &v3->UFG::qNode<UFG::BlockInfo,UFG::Secondary>;
               UFG::qVRAMemoryPool::InternalFree(v2, v3);
             }
             else
             {
-              v3->mKeepAliveFrames = v5 - 1;
+              v3->mKeepAliveFrames = mKeepAliveFrames - 1;
             }
           }
           v3 = (UFG::BlockInfo *)v4;
@@ -3611,22 +3587,20 @@ void UFG::qVRAMemoryPools::ServiceDeletes(void)
 // RVA: 0x177410
 __int64 __fastcall UFG::qVRAMemoryPools::Lock(UFG::qVRAMemoryHandle *handle)
 {
-  UFG::qVRAMemoryHandle *v1; // rbx
   unsigned __int8 v2; // di
   unsigned __int16 v3; // ax
   UFG::qVRAMemoryPool *v4; // rcx
 
-  v1 = handle;
   v2 = 0;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
-  if ( v1->mData )
+  if ( handle->mData )
   {
-    v3 = v1->mReadOnlyAndPoolID & 0x7FFF;
+    v3 = handle->mReadOnlyAndPoolID & 0x7FFF;
     if ( v3 < 0x10u )
     {
       v4 = UFG::qVRAMemoryPools::sVRAMemoryPools[v3];
       if ( v4 )
-        v2 = UFG::qVRAMemoryPool::Lock(v4, v1);
+        v2 = UFG::qVRAMemoryPool::Lock(v4, handle);
     }
   }
   UFG::qMutex::Unlock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
@@ -3637,22 +3611,20 @@ __int64 __fastcall UFG::qVRAMemoryPools::Lock(UFG::qVRAMemoryHandle *handle)
 // RVA: 0x17F460
 __int64 __fastcall UFG::qVRAMemoryPools::Unlock(UFG::qVRAMemoryHandle *handle)
 {
-  UFG::qVRAMemoryHandle *v1; // rbx
   unsigned __int8 v2; // di
   unsigned __int16 v3; // ax
   UFG::qVRAMemoryPool *v4; // rcx
 
-  v1 = handle;
   v2 = 0;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
-  if ( v1->mData )
+  if ( handle->mData )
   {
-    v3 = v1->mReadOnlyAndPoolID & 0x7FFF;
+    v3 = handle->mReadOnlyAndPoolID & 0x7FFF;
     if ( v3 < 0x10u )
     {
       v4 = UFG::qVRAMemoryPools::sVRAMemoryPools[v3];
       if ( v4 )
-        v2 = UFG::qVRAMemoryPool::Unlock(v4, v1);
+        v2 = UFG::qVRAMemoryPool::Unlock(v4, handle);
     }
   }
   UFG::qMutex::Unlock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
@@ -3663,22 +3635,20 @@ __int64 __fastcall UFG::qVRAMemoryPools::Unlock(UFG::qVRAMemoryHandle *handle)
 // RVA: 0x178C50
 __int64 __fastcall UFG::qVRAMemoryPools::PreMove(UFG::qVRAMemoryHandle *handle)
 {
-  UFG::qVRAMemoryHandle *v1; // rbx
   unsigned __int8 v2; // di
   unsigned __int16 v3; // ax
   UFG::qVRAMemoryPool *v4; // rcx
 
-  v1 = handle;
   v2 = 0;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
-  if ( v1->mData )
+  if ( handle->mData )
   {
-    v3 = v1->mReadOnlyAndPoolID & 0x7FFF;
+    v3 = handle->mReadOnlyAndPoolID & 0x7FFF;
     if ( v3 < 0x10u )
     {
       v4 = UFG::qVRAMemoryPools::sVRAMemoryPools[v3];
       if ( v4 )
-        v2 = UFG::qVRAMemoryPool::PreMove(v4, v1);
+        v2 = UFG::qVRAMemoryPool::PreMove(v4, handle);
     }
   }
   UFG::qMutex::Unlock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
@@ -3689,22 +3659,20 @@ __int64 __fastcall UFG::qVRAMemoryPools::PreMove(UFG::qVRAMemoryHandle *handle)
 // RVA: 0x178A80
 __int64 __fastcall UFG::qVRAMemoryPools::PostMove(UFG::qVRAMemoryHandle *handle)
 {
-  UFG::qVRAMemoryHandle *v1; // rbx
   unsigned __int8 v2; // di
   unsigned __int16 v3; // ax
   UFG::qVRAMemoryPool *v4; // rcx
 
-  v1 = handle;
   v2 = 0;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
-  if ( v1->mData )
+  if ( handle->mData )
   {
-    v3 = v1->mReadOnlyAndPoolID & 0x7FFF;
+    v3 = handle->mReadOnlyAndPoolID & 0x7FFF;
     if ( v3 < 0x10u )
     {
       v4 = UFG::qVRAMemoryPools::sVRAMemoryPools[v3];
       if ( v4 )
-        v2 = UFG::qVRAMemoryPool::PostMove(v4, v1);
+        v2 = UFG::qVRAMemoryPool::PostMove(v4, handle);
     }
   }
   UFG::qMutex::Unlock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
@@ -3715,88 +3683,81 @@ __int64 __fastcall UFG::qVRAMemoryPools::PostMove(UFG::qVRAMemoryHandle *handle)
 // RVA: 0x172170
 __int64 __fastcall UFG::qVRAMemoryPools::GetRequestedSize(UFG::qVRAMemoryHandle *handle)
 {
-  UFG::qVRAMemoryHandle *v1; // rbx
-  unsigned int v2; // edi
+  unsigned int RequestedSize; // edi
   unsigned __int16 v3; // ax
   UFG::qVRAMemoryPool *v4; // rcx
 
-  v1 = handle;
-  v2 = 0;
+  RequestedSize = 0;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
-  if ( v1->mData )
+  if ( handle->mData )
   {
-    v3 = v1->mReadOnlyAndPoolID & 0x7FFF;
+    v3 = handle->mReadOnlyAndPoolID & 0x7FFF;
     if ( v3 < 0x10u )
     {
       v4 = UFG::qVRAMemoryPools::sVRAMemoryPools[v3];
       if ( v4 )
-        v2 = UFG::qVRAMemoryPool::GetRequestedSize(v4, v1);
+        RequestedSize = UFG::qVRAMemoryPool::GetRequestedSize(v4, handle);
     }
   }
   UFG::qMutex::Unlock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
-  return v2;
+  return RequestedSize;
 }
 
 // File Line: 3290
 // RVA: 0x16F3A0
 __int64 __fastcall UFG::qVRAMemoryPools::GetAllocatedSize(UFG::qVRAMemoryHandle *handle)
 {
-  UFG::qVRAMemoryHandle *v1; // rbx
-  unsigned int v2; // edi
+  unsigned int AllocatedSize; // edi
   unsigned __int16 v3; // ax
   UFG::qVRAMemoryPool *v4; // rcx
 
-  v1 = handle;
-  v2 = 0;
+  AllocatedSize = 0;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
-  if ( v1->mData )
+  if ( handle->mData )
   {
-    v3 = v1->mReadOnlyAndPoolID & 0x7FFF;
+    v3 = handle->mReadOnlyAndPoolID & 0x7FFF;
     if ( v3 < 0x10u )
     {
       v4 = UFG::qVRAMemoryPools::sVRAMemoryPools[v3];
       if ( v4 )
-        v2 = UFG::qVRAMemoryPool::GetAllocatedSize(v4, v1);
+        AllocatedSize = UFG::qVRAMemoryPool::GetAllocatedSize(v4, handle);
     }
   }
   UFG::qMutex::Unlock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
-  return v2;
+  return AllocatedSize;
 }
 
 // File Line: 3308
 // RVA: 0x167A40
-__int64 __fastcall UFG::qVRAMemoryPools::BindWithinContainer(UFG::qVRAMemoryHandle *handle, char *data, unsigned int data_size, const char *name)
+__int64 __fastcall UFG::qVRAMemoryPools::BindWithinContainer(
+        UFG::qVRAMemoryHandle *handle,
+        char *data,
+        unsigned int data_size,
+        const char *name)
 {
-  char *v4; // rbp
-  UFG::qVRAMemoryHandle *v5; // r13
   __int64 v6; // rdi
   unsigned __int8 v7; // si
-  unsigned int v8; // er11
+  unsigned int v8; // r11d
   UFG::qVRAMemoryPool *v9; // r14
   UFG::qVRAMemoryPool **v10; // r10
-  signed __int64 v11; // r9
+  __int64 v11; // r9
   UFG::qVRAMemoryPool *v12; // rdx
-  unsigned __int64 v13; // rax
-  __int64 v14; // r8
-  signed __int64 v15; // rbx
+  unsigned __int64 mVRAMemoryStart; // rax
+  __int64 mVRAMemorySize; // r8
+  __int64 v15; // rbx
   unsigned __int64 v16; // rcx
   __int64 v17; // rcx
-  __int64 v18; // rdx
-  UFG::BlockInfo *v19; // rsi
+  char *v18; // rdx
+  UFG::BlockInfo *UnusedBlock; // rsi
   UFG::qNode<UFG::BlockInfo,UFG::Primary> *v20; // rax
-  unsigned __int16 v21; // di
-  unsigned __int16 v22; // bx
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v23; // rax
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v24; // rcx
-  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v25; // r10
+  unsigned __int16 mBlockID; // di
+  unsigned __int16 mPoolID; // bx
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *mNext; // rax
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *mPrev; // rcx
+  UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *p_mNode; // r10
   UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *v26; // rax
   __int64 v28; // [rsp+28h] [rbp-50h]
-  __int64 v29; // [rsp+30h] [rbp-48h]
-  const char *v30; // [rsp+98h] [rbp+20h]
 
-  v30 = name;
-  v4 = data;
-  v5 = handle;
   v6 = data_size;
   v7 = 0;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
@@ -3809,9 +3770,11 @@ __int64 __fastcall UFG::qVRAMemoryPools::BindWithinContainer(UFG::qVRAMemoryHand
     v12 = *v10;
     if ( *v10 )
     {
-      v13 = (unsigned __int64)v12->mVRAMemoryStart;
-      v14 = v12->mVRAMemorySize;
-      if ( v13 <= (unsigned __int64)v4 && v13 + v14 >= (unsigned __int64)&v4[v6] && (unsigned int)v14 < v8 )
+      mVRAMemoryStart = (unsigned __int64)v12->mVRAMemoryStart;
+      mVRAMemorySize = v12->mVRAMemorySize;
+      if ( mVRAMemoryStart <= (unsigned __int64)data
+        && mVRAMemoryStart + mVRAMemorySize >= (unsigned __int64)&data[v6]
+        && (unsigned int)mVRAMemorySize < v8 )
       {
         v9 = *v10;
         v8 = v12->mVRAMemorySize;
@@ -3823,7 +3786,7 @@ __int64 __fastcall UFG::qVRAMemoryPools::BindWithinContainer(UFG::qVRAMemoryHand
   while ( v11 );
   if ( v9 )
   {
-    HIDWORD(v28) = HIDWORD(v4);
+    HIDWORD(v28) = HIDWORD(data);
     UFG::qPrintChannel::Print(
       &UFG::VRAMChannel,
       OUTPUT_LEVEL_WARNING,
@@ -3840,74 +3803,72 @@ __int64 __fastcall UFG::qVRAMemoryPools::BindWithinContainer(UFG::qVRAMemoryHand
     }
     if ( v9->mInitialized == 1 )
     {
-      v15 = (signed __int64)&v9->mContainerList.mNode.mNext[-1];
+      v15 = (__int64)&v9->mContainerList.mNode.mNext[-1];
       if ( (UFG::qList<UFG::BlockInfo,UFG::Secondary,1,0> *)v15 != &v9->mMoveTargetsList )
       {
         while ( 1 )
         {
           v16 = *(_QWORD *)(v15 + 48);
-          if ( v16 <= (unsigned __int64)v4 && v16 + *(unsigned int *)(v15 + 68) > (unsigned __int64)v4 )
+          if ( v16 <= (unsigned __int64)data && v16 + *(unsigned int *)(v15 + 68) > (unsigned __int64)data )
             break;
           v15 = *(_QWORD *)(v15 + 24) - 16i64;
           if ( (UFG::qList<UFG::BlockInfo,UFG::Secondary,1,0> *)v15 == &v9->mMoveTargetsList )
             goto LABEL_22;
         }
         v17 = *(unsigned int *)(v15 + 68);
-        v18 = *(_QWORD *)(v15 + 48);
-        if ( v17 + v18 < (unsigned __int64)&v4[v6] )
+        v18 = *(char **)(v15 + 48);
+        if ( &v18[v17] < &data[v6] )
         {
-          LODWORD(v29) = *(_DWORD *)(v15 + 68);
           LODWORD(v28) = *(_DWORD *)(v15 + 68);
           UFG::qPrintf(
             "WARNING: Requested block of size %u(0x%08x) from %p to %p does not fit within\n"
             "               container of size %u(0x%08x) from %p to %p\n",
             (unsigned int)v6,
             (unsigned int)v6,
-            v4,
-            &v4[v6],
+            data,
+            &data[v6],
             v28,
-            v29,
+            v17,
             v18,
-            v17 + v18,
-            &customWorldMapCaption);
+            &v18[v17]);
         }
-        v19 = UFG::qVRAMemoryPool::GetUnusedBlock(v9);
+        UnusedBlock = UFG::qVRAMemoryPool::GetUnusedBlock(v9);
         v20 = *(UFG::qNode<UFG::BlockInfo,UFG::Primary> **)(v15 + 88);
-        v20->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v19->mPrev;
-        v19->mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)(v15 + 88);
-        v19->mPrev = v20;
-        *(_QWORD *)(v15 + 88) = v19;
-        v19->mContainerID = *(_WORD *)(v15 + 72);
-        v19->mRequestedSize = v6;
-        v21 = v19->mBlockID;
-        v19->mName = v30;
-        v19->mActualSize = 0;
-        v19->mMemoryPool = 0i64;
-        v19->mCallbackData64 = 0i64;
-        v19->mCallbackData32 = 0;
-        v19->mData = v4;
-        *(_DWORD *)&v19->mUsage = 11;
-        v22 = v9->mPoolID;
+        v20->mNext = UnusedBlock;
+        UnusedBlock->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)(v15 + 88);
+        UnusedBlock->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev = v20;
+        *(_QWORD *)(v15 + 88) = UnusedBlock;
+        UnusedBlock->mContainerID = *(_WORD *)(v15 + 72);
+        UnusedBlock->mRequestedSize = v6;
+        mBlockID = UnusedBlock->mBlockID;
+        UnusedBlock->mName = name;
+        UnusedBlock->mActualSize = 0;
+        UnusedBlock->mMemoryPool = 0i64;
+        UnusedBlock->mCallbackData64 = 0i64;
+        UnusedBlock->mCallbackData32 = 0;
+        UnusedBlock->mData = data;
+        *(_DWORD *)&UnusedBlock->mUsage = 11;
+        mPoolID = v9->mPoolID;
         UFG::qPrintChannel::Print(
           &UFG::VRAMChannel,
           OUTPUT_LEVEL_DEBUG,
           "[VRAM Channel] - Setting qVRAMemoryHandle(%p) to point at - PoolID:0x%02x BlockID:0x%04x Data:%p-%p AllocatedSize:%u\n");
-        v23 = v5->mNext;
-        v24 = v5->mPrev;
-        v25 = &v19->mAllocationHandles.mNode;
-        v24->mNext = v23;
-        v23->mPrev = v24;
-        v5->mPrev = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v5->mPrev;
-        v5->mNext = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v5->mPrev;
-        v5->mData = v4;
-        v5->mReadOnlyAndPoolID = v22;
-        v5->mBlockID = v21;
-        v26 = v19->mAllocationHandles.mNode.mPrev;
+        mNext = handle->mNext;
+        mPrev = handle->mPrev;
+        p_mNode = &UnusedBlock->mAllocationHandles.mNode;
+        mPrev->mNext = mNext;
+        mNext->mPrev = mPrev;
+        handle->mPrev = handle;
+        handle->mNext = handle;
+        handle->mData = data;
+        handle->mReadOnlyAndPoolID = mPoolID;
+        handle->mBlockID = mBlockID;
+        v26 = UnusedBlock->mAllocationHandles.mNode.mPrev;
         v7 = 1;
-        v26->mNext = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v5->mPrev;
-        v5->mPrev = v26;
-        v5->mNext = v25;
-        v25->mPrev = (UFG::qNode<UFG::qVRAMemoryHandle,UFG::qVRAMemoryPoolOnly> *)&v5->mPrev;
+        v26->mNext = handle;
+        handle->mPrev = v26;
+        handle->mNext = p_mNode;
+        p_mNode->mPrev = handle;
       }
     }
 LABEL_22:
@@ -3927,26 +3888,22 @@ LABEL_22:
 
 // File Line: 3341
 // RVA: 0x16ED60
-_BOOL8 __fastcall UFG::qVRAMemoryPools::Free(UFG::qVRAMemoryHandle *handle, unsigned int frames_to_delay)
+_BOOL8 __fastcall UFG::qVRAMemoryPools::Free(UFG::qVRAMemoryHandle *handle, int frames_to_delay)
 {
-  unsigned int v2; // esi
-  UFG::qVRAMemoryHandle *v3; // rbx
   bool v4; // di
   unsigned __int16 v5; // ax
   UFG::qVRAMemoryPool *v6; // rcx
 
-  v2 = frames_to_delay;
-  v3 = handle;
   v4 = 0;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
-  if ( v3->mData )
+  if ( handle->mData )
   {
-    v5 = v3->mReadOnlyAndPoolID & 0x7FFF;
+    v5 = handle->mReadOnlyAndPoolID & 0x7FFF;
     if ( v5 < 0x10u )
     {
       v6 = UFG::qVRAMemoryPools::sVRAMemoryPools[v5];
       if ( v6 )
-        v4 = UFG::qVRAMemoryPool::Free(v6, v3, v2);
+        v4 = UFG::qVRAMemoryPool::Free(v6, handle, frames_to_delay);
     }
   }
   UFG::qMutex::Unlock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
@@ -3958,15 +3915,13 @@ _BOOL8 __fastcall UFG::qVRAMemoryPools::Free(UFG::qVRAMemoryHandle *handle, unsi
 __int64 __fastcall UFG::qVRAMemoryPools::OverlapsPool(char *data, unsigned int data_size)
 {
   __int64 v2; // rsi
-  char *v3; // rdi
   unsigned __int8 v4; // bl
-  signed int v5; // er8
+  int v5; // r8d
   UFG::qVRAMemoryPool **v6; // r9
   UFG::qVRAMemoryPool *v7; // rax
-  char *v8; // r10
+  char *mVRAMemoryStart; // r10
 
   v2 = data_size;
-  v3 = data;
   v4 = 0;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMPoolsLock);
   v5 = 0;
@@ -3978,8 +3933,8 @@ __int64 __fastcall UFG::qVRAMemoryPools::OverlapsPool(char *data, unsigned int d
     v7 = *v6;
     if ( *v6 )
     {
-      v8 = v7->mVRAMemoryStart;
-      if ( &v8[v7->mVRAMemorySize] > v3 && &v3[v2] > v8 )
+      mVRAMemoryStart = v7->mVRAMemoryStart;
+      if ( &mVRAMemoryStart[v7->mVRAMemorySize] > data && &data[v2] > mVRAMemoryStart )
         v4 = 1;
     }
     ++v5;
@@ -3994,71 +3949,67 @@ __int64 __fastcall UFG::qVRAMemoryPools::OverlapsPool(char *data, unsigned int d
 // RVA: 0x16F450
 UFG::BlockInfo *__fastcall UFG::qVRAMemoryPools::GetBlock(unsigned __int16 block_id)
 {
-  unsigned __int16 v1; // di
   UFG::BlockInfo *v2; // rbx
 
-  v1 = block_id;
   v2 = 0i64;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMBlocksLock);
-  if ( UFG::qVRAMemoryPools::sNumBlocksTotal && v1 < UFG::qVRAMemoryPools::sNumBlocksTotal )
-    v2 = &UFG::qVRAMemoryPools::sBlocks[(unsigned __int64)v1];
+  if ( UFG::qVRAMemoryPools::sNumBlocksTotal && block_id < UFG::qVRAMemoryPools::sNumBlocksTotal )
+    v2 = &UFG::qVRAMemoryPools::sBlocks[(unsigned __int64)block_id];
   UFG::qMutex::Unlock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMBlocksLock);
   return v2;
 }
 
 // File Line: 3461
 // RVA: 0x172E90
-UFG::qNode<UFG::BlockInfo,UFG::Primary> *__fastcall UFG::qVRAMemoryPools::GetUnusedBlock()
+UFG::BlockInfo *__fastcall UFG::qVRAMemoryPools::GetUnusedBlock()
 {
   UFG::qNode<UFG::BlockInfo,UFG::Primary> *v0; // rbx
   unsigned __int16 v1; // ax
   unsigned __int16 v2; // cx
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v3; // rax
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v4; // r8
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *mNext; // rax
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *mPrev; // r8
   UFG::qNode<UFG::BlockInfo,UFG::Primary> *v5; // rdx
 
   v0 = 0i64;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMBlocksLock);
-  if ( UFG::qVRAMemoryPools::sNumBlocksTotal > 0u )
+  if ( UFG::qVRAMemoryPools::sNumBlocksTotal )
   {
     v1 = UFG::qVRAMemoryPools::sUsedBlocksMax;
-    v2 = UFG::qVRAMemoryPools::sUsedBlocksCount++ + 1;
+    v2 = ++UFG::qVRAMemoryPools::sUsedBlocksCount;
     if ( UFG::qVRAMemoryPools::sUsedBlocksCount > UFG::qVRAMemoryPools::sUsedBlocksMax )
       v1 = v2;
     UFG::qVRAMemoryPools::sUsedBlocksMax = v1;
-    v3 = UFG::qVRAMemoryPools::sUnusedBlocks.mNode.mNext;
+    mNext = UFG::qVRAMemoryPools::sUnusedBlocks.mNode.mNext;
     if ( (UFG::qList<UFG::BlockInfo,UFG::Primary,1,0> *)UFG::qVRAMemoryPools::sUnusedBlocks.mNode.mNext != &UFG::qVRAMemoryPools::sUnusedBlocks )
     {
-      v4 = UFG::qVRAMemoryPools::sUnusedBlocks.mNode.mNext->mPrev;
+      mPrev = UFG::qVRAMemoryPools::sUnusedBlocks.mNode.mNext->mPrev;
       v5 = UFG::qVRAMemoryPools::sUnusedBlocks.mNode.mNext->mNext;
       v0 = UFG::qVRAMemoryPools::sUnusedBlocks.mNode.mNext;
-      v4->mNext = v5;
-      v5->mPrev = v4;
-      v3->mPrev = v3;
-      v3->mNext = v3;
+      mPrev->mNext = v5;
+      v5->mPrev = mPrev;
+      mNext->mPrev = mNext;
+      mNext->mNext = mNext;
     }
   }
   UFG::qMutex::Unlock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMBlocksLock);
-  return v0;
+  return (UFG::BlockInfo *)v0;
 }
 
 // File Line: 3485
 // RVA: 0x17BC60
 void __fastcall UFG::qVRAMemoryPools::ReturnUsedBlock(UFG::BlockInfo *block)
 {
-  UFG::BlockInfo *v1; // rbx
-  UFG::qNode<UFG::BlockInfo,UFG::Primary> *v2; // rax
+  UFG::qNode<UFG::BlockInfo,UFG::Primary> *mNext; // rax
 
-  v1 = block;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMBlocksLock);
   if ( UFG::qVRAMemoryPools::sNumBlocksTotal )
   {
     --UFG::qVRAMemoryPools::sUsedBlocksCount;
-    v2 = UFG::qVRAMemoryPools::sUnusedBlocks.mNode.mNext;
-    UFG::qVRAMemoryPools::sUnusedBlocks.mNode.mNext = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v1->mPrev;
-    v1->mNext = v2;
-    v1->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&UFG::qVRAMemoryPools::sUnusedBlocks;
-    v2->mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&v1->mPrev;
+    mNext = UFG::qVRAMemoryPools::sUnusedBlocks.mNode.mNext;
+    UFG::qVRAMemoryPools::sUnusedBlocks.mNode.mNext = block;
+    block->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mNext = mNext;
+    block->UFG::qNode<UFG::BlockInfo,UFG::Primary>::mPrev = (UFG::qNode<UFG::BlockInfo,UFG::Primary> *)&UFG::qVRAMemoryPools::sUnusedBlocks;
+    mNext->mPrev = block;
   }
   UFG::qMutex::Unlock((LPCRITICAL_SECTION)&UFG::qVRAMemoryPools::sVRAMBlocksLock);
 }

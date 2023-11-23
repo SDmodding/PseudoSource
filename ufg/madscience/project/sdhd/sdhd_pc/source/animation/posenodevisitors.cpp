@@ -2,18 +2,14 @@
 // RVA: 0x3B5F50
 void __fastcall PoseStackCalculatorVisitor::Visit(PoseStackCalculatorVisitor *this, BlendPhaseNode *node)
 {
-  BlendPhaseNode *v2; // rsi
-  PoseStackCalculatorVisitor *v3; // rdi
   float v4; // xmm0_4
-  signed int v5; // eax
-  UFG::qNode<PoseNode,PoseNode> **v6; // rcx
-  signed __int64 v7; // rsi
-  UFG::qNode<PoseNode,PoseNode> *v8; // rbx
-  signed __int64 v9; // rsi
-  UFG::qNode<PoseNode,PoseNode> **i; // rbx
+  int v5; // eax
+  int *p_mNext; // rcx
+  int *p_mNetPoseSequence; // rsi
+  UFG::qNode<PoseNode,PoseNode> *mNext; // rbx
+  int *v9; // rsi
+  int *i; // rbx
 
-  v2 = node;
-  v3 = this;
   v4 = (float)(sinf((float)(node->mBlendParam * 3.1415927) - 1.5707964) + 1.0) * 0.5;
   if ( v4 <= 0.0 )
   {
@@ -25,38 +21,38 @@ void __fastcall PoseStackCalculatorVisitor::Visit(PoseStackCalculatorVisitor *th
 LABEL_5:
     if ( v4 < 0.000099999997 )
     {
-      ((void (__fastcall *)(UFG::qNode<PoseNode,PoseNode> **, PoseStackCalculatorVisitor *))v2->mChildren.mNode.mNext[-3].mNext[5].mPrev)(
-        &v2->mChildren.mNode.mNext[-3].mNext,
-        v3);
+      ((void (__fastcall *)(UFG::qNode<PoseNode,PoseNode> **, PoseStackCalculatorVisitor *))node->mChildren.mNode.mNext[-3].mNext[5].mPrev)(
+        &node->mChildren.mNode.mNext[-3].mNext,
+        this);
       return;
     }
     if ( v4 <= 0.99989998 )
       goto LABEL_13;
   }
-  if ( !v2->mWeightSet )
+  if ( !node->mWeightSet )
   {
     v5 = 1;
-    v6 = &v2->mChildren.mNode.mNext[-3].mNext;
-    v7 = (signed __int64)&v2->mNetPoseSequence;
+    p_mNext = (int *)&node->mChildren.mNode.mNext[-3].mNext;
+    p_mNetPoseSequence = &node->mNetPoseSequence;
     do
     {
-      if ( v6 == (UFG::qNode<PoseNode,PoseNode> **)v7 )
+      if ( p_mNext == p_mNetPoseSequence )
         break;
       --v5;
-      v6 = &v6[6][-3].mNext;
+      p_mNext = (int *)(*((_QWORD *)p_mNext + 6) - 40i64);
     }
     while ( v5 > 0 );
-    ((void (__fastcall *)(UFG::qNode<PoseNode,PoseNode> **, PoseStackCalculatorVisitor *))(*v6)[5].mPrev)(v6, v3);
+    (*(void (__fastcall **)(int *, PoseStackCalculatorVisitor *))(*(_QWORD *)p_mNext + 80i64))(p_mNext, this);
     return;
   }
 LABEL_13:
-  ++v3->mStackCount;
-  if ( v3->mRecurse )
+  ++this->mStackCount;
+  if ( this->mRecurse )
   {
-    v8 = v2->mChildren.mNode.mNext;
-    v9 = (signed __int64)&v2->mNetPoseSequence;
-    for ( i = &v8[-3].mNext; i != (UFG::qNode<PoseNode,PoseNode> **)v9; i = &i[6][-3].mNext )
-      ((void (__fastcall *)(UFG::qNode<PoseNode,PoseNode> **, PoseStackCalculatorVisitor *))(*i)[5].mPrev)(i, v3);
+    mNext = node->mChildren.mNode.mNext;
+    v9 = &node->mNetPoseSequence;
+    for ( i = (int *)&mNext[-3].mNext; i != v9; i = (int *)(*((_QWORD *)i + 6) - 40i64) )
+      (*(void (__fastcall **)(int *, PoseStackCalculatorVisitor *))(*(_QWORD *)i + 80i64))(i, this);
   }
 }
 
@@ -64,31 +60,27 @@ LABEL_13:
 // RVA: 0x3B6070
 void __fastcall PoseStackCalculatorVisitor::Visit(PoseStackCalculatorVisitor *this, BlendSubNode *node)
 {
-  BlendSubNode *v2; // rsi
-  PoseStackCalculatorVisitor *v3; // rdi
   float v4; // xmm0_4
-  UFG::qNode<PoseNode,PoseNode> *v5; // rbx
-  signed __int64 v6; // rsi
-  UFG::qNode<PoseNode,PoseNode> **i; // rbx
+  UFG::qNode<PoseNode,PoseNode> *mNext; // rbx
+  int *p_mNetPoseSequence; // rsi
+  int *i; // rbx
 
-  v2 = node;
-  v3 = this;
   v4 = (float)(sinf((float)(node->mBlendParam * 3.1415927) - 1.5707964) + 1.0) * 0.5;
   if ( v4 <= 0.0 || v4 < 1.0 && v4 < 0.000099999997 )
   {
-    ((void (__fastcall *)(UFG::qNode<PoseNode,PoseNode> **, PoseStackCalculatorVisitor *))v2->mChildren.mNode.mNext[-3].mNext[5].mPrev)(
-      &v2->mChildren.mNode.mNext[-3].mNext,
-      v3);
+    ((void (__fastcall *)(UFG::qNode<PoseNode,PoseNode> **, PoseStackCalculatorVisitor *))node->mChildren.mNode.mNext[-3].mNext[5].mPrev)(
+      &node->mChildren.mNode.mNext[-3].mNext,
+      this);
   }
   else
   {
-    ++v3->mStackCount;
-    if ( v3->mRecurse )
+    ++this->mStackCount;
+    if ( this->mRecurse )
     {
-      v5 = v2->mChildren.mNode.mNext;
-      v6 = (signed __int64)&v2->mNetPoseSequence;
-      for ( i = &v5[-3].mNext; i != (UFG::qNode<PoseNode,PoseNode> **)v6; i = &i[6][-3].mNext )
-        ((void (__fastcall *)(UFG::qNode<PoseNode,PoseNode> **, PoseStackCalculatorVisitor *))(*i)[5].mPrev)(i, v3);
+      mNext = node->mChildren.mNode.mNext;
+      p_mNetPoseSequence = &node->mNetPoseSequence;
+      for ( i = (int *)&mNext[-3].mNext; i != p_mNetPoseSequence; i = (int *)(*((_QWORD *)i + 6) - 40i64) )
+        (*(void (__fastcall **)(int *, PoseStackCalculatorVisitor *))(*(_QWORD *)i + 80i64))(i, this);
     }
   }
 }
@@ -97,91 +89,84 @@ void __fastcall PoseStackCalculatorVisitor::Visit(PoseStackCalculatorVisitor *th
 // RVA: 0x3B5E80
 void __fastcall PoseStackCalculatorVisitor::Visit(PoseStackCalculatorVisitor *this, BlendDirectionNode *node)
 {
-  int v2; // er8
-  float v3; // xmm0_4
-  UFG::qNode<PoseNode,PoseNode> **v4; // rbx
-  PoseStackCalculatorVisitor *v5; // rdi
+  int mChild0ID; // r8d
+  float mWeight; // xmm0_4
+  int *p_mNext; // rbx
   BlendDirectionNode *i; // rcx
-  int v7; // eax
-  int *v8; // rdx
+  int mChild1ID; // eax
+  int *p_mNetPoseSequence; // rdx
   PoseStackCalculatorVisitor *v9; // rdx
-  UFG::qNode<PoseNode,PoseNode> *v10; // rax
-  UFG::qNode<PoseNode,PoseNode> **v11; // rcx
+  __int64 v10; // rax
+  int *v11; // rcx
 
-  v2 = node->mChild0ID;
-  v3 = node->mWeight;
-  v4 = &node->mChildren.mNode.mNext[-3].mNext;
-  v5 = this;
-  for ( i = (BlendDirectionNode *)&node->mChildren.mNode.mNext[-3].mNext;
-        v2 > 0;
-        i = (BlendDirectionNode *)&i->mNext[-3].mNext )
+  mChild0ID = node->mChild0ID;
+  mWeight = node->mWeight;
+  p_mNext = (int *)&node->mChildren.mNode.mNext[-3].mNext;
+  for ( i = (BlendDirectionNode *)p_mNext; mChild0ID > 0; i = (BlendDirectionNode *)&i->mNext[-3].mNext )
   {
     if ( i == (BlendDirectionNode *)&node->mNetPoseSequence )
       break;
-    --v2;
+    --mChild0ID;
   }
-  v7 = node->mChild1ID;
-  if ( v7 > 0 )
+  mChild1ID = node->mChild1ID;
+  if ( mChild1ID > 0 )
   {
-    v8 = &node->mNetPoseSequence;
+    p_mNetPoseSequence = &node->mNetPoseSequence;
     do
     {
-      if ( v4 == (UFG::qNode<PoseNode,PoseNode> **)v8 )
+      if ( p_mNext == p_mNetPoseSequence )
         break;
-      --v7;
-      v4 = &v4[6][-3].mNext;
+      --mChild1ID;
+      p_mNext = (int *)(*((_QWORD *)p_mNext + 6) - 40i64);
     }
-    while ( v7 > 0 );
+    while ( mChild1ID > 0 );
   }
-  if ( v3 >= 0.000099999997 )
+  if ( mWeight >= 0.000099999997 )
   {
-    v9 = v5;
-    if ( v3 <= 0.99989998 )
+    v9 = this;
+    if ( mWeight <= 0.99989998 )
     {
-      ++v5->mStackCount;
-      i->vfptr[1].FindWithOldPath((Expression::IMemberMap *)&i->vfptr, (const char *)v5);
-      v10 = *v4;
-      v11 = v4;
-      v9 = v5;
+      ++this->mStackCount;
+      i->PoseNodeParent::PoseNode::Expression::IMemberMap::vfptr[1].FindWithOldPath(i, (const char *)this);
+      v10 = *(_QWORD *)p_mNext;
+      v11 = p_mNext;
+      v9 = this;
     }
     else
     {
-      v10 = *v4;
-      v11 = v4;
+      v10 = *(_QWORD *)p_mNext;
+      v11 = p_mNext;
     }
-    ((void (__fastcall *)(UFG::qNode<PoseNode,PoseNode> **, PoseStackCalculatorVisitor *))v10[5].mPrev)(v11, v9);
+    (*(void (__fastcall **)(int *, PoseStackCalculatorVisitor *))(v10 + 80))(v11, v9);
   }
   else
   {
-    i->vfptr[1].FindWithOldPath((Expression::IMemberMap *)&i->vfptr, (const char *)v5);
+    i->PoseNodeParent::PoseNode::Expression::IMemberMap::vfptr[1].FindWithOldPath(i, (const char *)this);
   }
 }
 
 // File Line: 131
 // RVA: 0x3B5E10
-void __usercall PoseStackCalculatorVisitor::Visit(PoseStackCalculatorVisitor *this@<rcx>, AnimationNode *node@<rdx>, float a3@<xmm0>)
+void __fastcall PoseStackCalculatorVisitor::Visit(PoseStackCalculatorVisitor *this, AnimationNode *node)
 {
-  SkeletalAnimation *v3; // rax
-  PoseStackCalculatorVisitor *v4; // rbx
-  UFG::qResourceData *v5; // rcx
-  SkeletalAnimation *v6; // rcx
-  UFG::qResourceData *v7; // rax
+  SkeletalAnimation *m_pPointer; // rax
+  UFG::qResourceData *mData; // rcx
+  SkeletalAnimation *m_pFallbackAnimation; // rcx
+  UFG::qResourceData *v6; // rax
 
-  v3 = node->mSkeletalAnimationHandle.m_SkeletalAnimation.m_pPointer;
-  v4 = this;
-  if ( v3 )
+  m_pPointer = node->mSkeletalAnimationHandle.m_SkeletalAnimation.m_pPointer;
+  if ( m_pPointer )
   {
-    v5 = v3->m_AnimationResourceHandle.mData;
-    if ( v5 && v5[1].mNode.mChild[0]
-      || (v6 = v3->m_pFallbackAnimation) != 0i64
-      && (v7 = v6->m_AnimationResourceHandle.mData) != 0i64
-      && v7[1].mNode.mChild[0] )
+    mData = m_pPointer->m_AnimationResourceHandle.mData;
+    if ( (mData && mData[1].mNode.mChild[0]
+       || (m_pFallbackAnimation = m_pPointer->m_pFallbackAnimation) != 0i64
+       && (v6 = m_pFallbackAnimation->m_AnimationResourceHandle.mData) != 0i64
+       && v6[1].mNode.mChild[0])
+      && ((float (__fastcall *)(AnimationNode *))node->PoseNode::Expression::IMemberMap::vfptr[4].GetResourceOwner)(node) >= 0.0 )
     {
-      node->vfptr[4].GetResourceOwner((Expression::IMemberMap *)node);
-      if ( a3 >= 0.0 )
-        ++v4->mAnimDataCount;
+      ++this->mAnimDataCount;
     }
-    ++v4->mStackCount;
+    ++this->mStackCount;
   }
   else
   {
@@ -193,56 +178,55 @@ void __usercall PoseStackCalculatorVisitor::Visit(PoseStackCalculatorVisitor *th
 // RVA: 0x3B92A0
 void __fastcall PoseNode_SetPauseBlend::visit_blendNodes(PoseNode_SetPauseBlend *this, BlendNode *node)
 {
-  unsigned int v2; // eax
-  BlendNode *v3; // rbx
-  PoseNode_SetPauseBlend *v4; // rsi
-  Weightset *v5; // rax
+  unsigned int mPlayPriority; // eax
+  Weightset *mWeightSet; // rax
   __int64 v6; // rax
   __int64 v7; // r8
   BlendNode *v8; // rdi
-  __int64 v9; // rax
-  signed __int64 v10; // rcx
+  __int64 mOffset; // rax
+  char *v10; // rcx
   __int64 v11; // rsi
   bool v12; // zf
 
-  v2 = this->mPlayPriority;
-  v3 = node;
-  v4 = this;
-  if ( !v2 || node->mPriority != v2 )
+  mPlayPriority = this->mPlayPriority;
+  if ( !mPlayPriority || node->mPriority != mPlayPriority )
     return;
-  if ( this->mPauseState == 1 )
+  if ( this->mPauseState )
   {
-    v5 = this->mWeightSet;
-    if ( v5 && v5 != node->mWeightSet )
+    mWeightSet = this->mWeightSet;
+    if ( mWeightSet && mWeightSet != node->mWeightSet )
     {
       if ( sReparent )
       {
-        v6 = ((__int64 (__fastcall *)(BlendNode *))node->vfptr[1].Serialize)(node);
+        v6 = ((__int64 (__fastcall *)(BlendNode *))node->PoseNodeParent::PoseNode::Expression::IMemberMap::vfptr[1].Serialize)(node);
         v7 = *(_QWORD *)v6;
-        *(_QWORD *)(v6 + 136) = v3->mWeightSet;
-        *(_QWORD *)(v6 + 144) = v4->mWeightSet;
+        *(_QWORD *)(v6 + 136) = node->mWeightSet;
+        *(_QWORD *)(v6 + 144) = this->mWeightSet;
         *(_BYTE *)(v6 + 154) = 1;
         v8 = (BlendNode *)v6;
-        (*(void (__fastcall **)(__int64, _QWORD))(v7 + 328))(v6, v4->mPlayPriority);
+        (*(void (__fastcall **)(__int64, _QWORD))(v7 + 328))(v6, this->mPlayPriority);
         if ( sUnpauseMaskedPose )
-          v3->mPauseBlend = 0;
-        v3->mPauseBlend = 0;
-        v9 = v3->mParent.mOffset;
-        if ( v9 )
-          v10 = (signed __int64)&v3->mParent + v9;
+          node->mPauseBlend = 0;
+        node->mPauseBlend = 0;
+        mOffset = node->mParent.mOffset;
+        if ( mOffset )
+          v10 = (char *)&node->mParent + mOffset;
         else
           v10 = 0i64;
-        (*(void (__fastcall **)(signed __int64, BlendNode *, BlendNode *))(*(_QWORD *)v10 + 400i64))(v10, v3, v8);
-        v11 = (__int64)v8->vfptr[1].__vecDelDtor((Expression::IMemberMap *)&v8->vfptr, 0);
-        ((void (__fastcall *)(BlendNode *, __int64, BlendNode *))v8->vfptr[5].FindWithOldPath)(v8, v11, v3);
+        (*(void (__fastcall **)(char *, BlendNode *, BlendNode *))(*(_QWORD *)v10 + 400i64))(v10, node, v8);
+        v11 = (__int64)v8->PoseNodeParent::PoseNode::Expression::IMemberMap::vfptr[1].__vecDelDtor(v8, 0);
+        ((void (__fastcall *)(BlendNode *, __int64, BlendNode *))v8->PoseNodeParent::PoseNode::Expression::IMemberMap::vfptr[5].FindWithOldPath)(
+          v8,
+          v11,
+          node);
         if ( v8->mBlendRate >= 0.0 )
           BlendNode::SetBlendOut(v8, 0.033333335);
         if ( sForceBlendout )
           BlendNode::SetBlendOut(v8, 0.033333335);
         if ( sForcePlayPause )
-          ((void (__fastcall *)(BlendNode *))v8->vfptr[2].__vecDelDtor)(v8);
+          ((void (__fastcall *)(BlendNode *))v8->PoseNodeParent::PoseNode::Expression::IMemberMap::vfptr[2].__vecDelDtor)(v8);
         if ( v11 )
-          (*(void (__fastcall **)(__int64, signed __int64))(*(_QWORD *)v11 + 8i64))(v11, 1i64);
+          (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)v11 + 8i64))(v11, 1i64);
         return;
       }
       if ( sPauseBlendOnlyOnLikeWeightSets )
@@ -251,7 +235,7 @@ void __fastcall PoseNode_SetPauseBlend::visit_blendNodes(PoseNode_SetPauseBlend 
     node->mPauseBlend = 1;
     return;
   }
-  v12 = sBlendOff == 0;
+  v12 = !sBlendOff;
   node->mPauseBlend = 0;
   if ( !v12 )
     node->mBlendParam = 0.0;

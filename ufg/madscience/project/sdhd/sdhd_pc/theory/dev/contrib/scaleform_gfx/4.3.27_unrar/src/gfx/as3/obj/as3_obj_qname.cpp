@@ -8,7 +8,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243B360 = v1;
-  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl::QName,0,Scaleform::GFx::ASString>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl::QName *, Scaleform::GFx::ASString *))Scaleform::GFx::AS3::Instances::fl_net::URLRequest::urlGet;
+  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl::QName,0,Scaleform::GFx::ASString>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl::QName *, Scaleform::GFx::ASString *))Scaleform::GFx::AS3::Instances::fl_net::URLRequest::urlGet;
   return result;
 }
 
@@ -36,7 +36,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243B380 = v1;
-  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl::QName,2,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::QName>>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl::QName *, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::QName> *))Scaleform::GFx::AS3::Instances::fl::XML::AS3valueOf;
+  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl::QName,2,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::QName>>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl::QName *, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::QName> *))Scaleform::GFx::AS3::Instances::fl::XML::AS3valueOf;
   return result;
 }
 
@@ -56,411 +56,400 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
 
 // File Line: 53
 // RVA: 0x7816F0
-void __fastcall Scaleform::GFx::AS3::Instances::fl::QName::QName(Scaleform::GFx::AS3::Instances::fl::QName *this, Scaleform::GFx::AS3::InstanceTraits::Traits *t)
+void __fastcall Scaleform::GFx::AS3::Instances::fl::QName::QName(
+        Scaleform::GFx::AS3::Instances::fl::QName *this,
+        Scaleform::GFx::AS3::InstanceTraits::Traits *t)
 {
-  Scaleform::GFx::AS3::InstanceTraits::Traits *v2; // rbx
-  Scaleform::GFx::AS3::Instances::fl::QName *v3; // rdi
-  Scaleform::GFx::AS3::Instances::fl::Namespace *v4; // rcx
+  Scaleform::GFx::AS3::Instances::fl::Namespace *pObject; // rcx
 
-  v2 = t;
-  v3 = this;
-  Scaleform::GFx::AS3::Instance::Instance((Scaleform::GFx::AS3::Instance *)&this->vfptr, t);
-  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable;
-  v3->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::QName::`vftable;
-  Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(
-    (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v3->pTraits.pObject->pVM->StringManagerRef->Builtins,
-    &v3->LocalName);
-  v4 = v2->pVM->PublicNamespace.pObject;
-  v3->Ns.pObject = v4;
-  if ( v4 )
-    v4->RefCount = (v4->RefCount + 1) & 0x8FBFFFFF;
+  Scaleform::GFx::AS3::Instance::Instance(this, t);
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable;
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::QName::`vftable;
+  Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(
+    this->pTraits.pObject->pVM->StringManagerRef,
+    &this->LocalName);
+  pObject = t->pVM->PublicNamespace.pObject;
+  this->Ns.pObject = pObject;
+  if ( pObject )
+    pObject->RefCount = (pObject->RefCount + 1) & 0x8FBFFFFF;
 }
 
 // File Line: 68
 // RVA: 0x86B920
-void __fastcall Scaleform::GFx::AS3::Instances::fl::QName::uriGet(Scaleform::GFx::AS3::Instances::fl::QName *this, Scaleform::GFx::AS3::Value *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl::QName::uriGet(
+        Scaleform::GFx::AS3::Instances::fl::QName *this,
+        Scaleform::GFx::AS3::Value *result)
 {
-  Scaleform::GFx::AS3::Value *v2; // rax
-  Scaleform::GFx::AS3::Instances::fl::Namespace *v3; // rdx
+  Scaleform::GFx::AS3::Instances::fl::Namespace *pObject; // rdx
 
-  v2 = result;
-  v3 = this->Ns.pObject;
-  if ( v3 )
-    Scaleform::GFx::AS3::Value::Assign(v2, &v3->Uri);
+  pObject = this->Ns.pObject;
+  if ( pObject )
+    Scaleform::GFx::AS3::Value::Assign(result, &pObject->Uri);
   else
-    Scaleform::GFx::AS3::Value::SetNull(v2);
+    Scaleform::GFx::AS3::Value::SetNull(result);
 }
 
 // File Line: 81
 // RVA: 0x7A9260
-void __fastcall Scaleform::GFx::AS3::Instances::fl::XML::AS3valueOf(Scaleform::GFx::AS3::Instances::fl::XMLList *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl::XML::AS3valueOf(
+        Scaleform::GFx::AS3::Instances::fl::XMLList *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *result)
 {
   Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(result, this);
 }
 
 // File Line: 87
 // RVA: 0x7A81A0
-void __fastcall Scaleform::GFx::AS3::Instances::fl::QName::AS3toString(Scaleform::GFx::AS3::Instances::fl::QName *this, Scaleform::GFx::ASString *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl::QName::AS3toString(
+        Scaleform::GFx::AS3::Instances::fl::QName *this,
+        Scaleform::GFx::ASString *result)
 {
-  Scaleform::GFx::ASString *v2; // rbx
-  Scaleform::GFx::AS3::Instances::fl::QName *v3; // rsi
-  Scaleform::GFx::AS3::Instances::fl::Namespace *v4; // rdi
+  Scaleform::GFx::AS3::Instances::fl::Namespace *pObject; // rdi
   Scaleform::StringDH *v5; // rax
-  Scaleform::GFx::ASStringNode *v6; // rdi
+  Scaleform::GFx::ASStringNode *pNode; // rdi
   Scaleform::GFx::ASStringNode *v7; // rdi
   Scaleform::GFx::ASStringNode *v8; // rcx
   bool v9; // zf
   Scaleform::GFx::ASStringNode *v10; // rcx
-  Scaleform::String resulta; // [rsp+40h] [rbp+8h]
+  Scaleform::String resulta; // [rsp+40h] [rbp+8h] BYREF
 
-  v2 = result;
-  v3 = this;
-  v4 = this->Ns.pObject;
-  if ( v4 )
+  pObject = this->Ns.pObject;
+  if ( pObject )
   {
-    v6 = v4->Uri.pNode;
-    if ( v6->Size )
+    pNode = pObject->Uri.pNode;
+    if ( pNode->Size )
     {
-      ++v6->RefCount;
+      ++pNode->RefCount;
       v10 = result->pNode;
-      v9 = result->pNode->RefCount == 1;
-      --v10->RefCount;
+      v9 = result->pNode->RefCount-- == 1;
       if ( v9 )
         Scaleform::GFx::ASStringNode::ReleaseNode(v10);
-      v2->pNode = v6;
-      Scaleform::GFx::ASString::Append(v2, "::", 2ui64);
-      Scaleform::GFx::ASString::Append(v2, &v3->LocalName);
+      result->pNode = pNode;
+      Scaleform::GFx::ASString::Append(result, "::", 2ui64);
+      Scaleform::GFx::ASString::Append(result, &this->LocalName);
     }
     else
     {
       v7 = this->LocalName.pNode;
       ++v7->RefCount;
       v8 = result->pNode;
-      v9 = result->pNode->RefCount == 1;
-      --v8->RefCount;
+      v9 = result->pNode->RefCount-- == 1;
       if ( v9 )
         Scaleform::GFx::ASStringNode::ReleaseNode(v8);
-      v2->pNode = v7;
+      result->pNode = v7;
     }
   }
   else
   {
     v5 = (Scaleform::StringDH *)Scaleform::operator+(&resulta, "*::", &this->LocalName);
-    Scaleform::GFx::ASString::operator=<Scaleform::String>(v2, v5);
+    Scaleform::GFx::ASString::operator=<Scaleform::String>(result, v5);
     if ( !_InterlockedDecrement((volatile signed __int32 *)((resulta.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-      ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+      ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
   }
 }
 
 // File Line: 115
 // RVA: 0x747820
-void __fastcall Scaleform::GFx::AS3::Instances::fl::QName::toStringProto(Scaleform::GFx::AS3::ThunkInfo *ti, Scaleform::GFx::AS3::VM *vm, Scaleform::GFx::AS3::Value *_this, Scaleform::GFx::AS3::Value *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl::QName::toStringProto(
+        Scaleform::GFx::AS3::ThunkInfo *ti,
+        Scaleform::GFx::AS3::VM *vm,
+        Scaleform::GFx::AS3::Value *_this,
+        Scaleform::GFx::AS3::Value *result)
 {
-  Scaleform::GFx::AS3::Value *v4; // rbp
-  Scaleform::GFx::AS3::Value *v5; // rsi
-  Scaleform::GFx::AS3::VM *v6; // rdi
-  long double v7; // r14
-  Scaleform::GFx::AS3::InstanceTraits::Traits *v8; // rbx
-  Scaleform::GFx::AS3::Traits *v9; // rax
-  Scaleform::GFx::AS3::Instances::fl::QName *v10; // rbx
-  Scaleform::GFx::ASStringNode *v11; // rcx
+  Scaleform::GFx::AS3::Object *VObj; // r14
+  Scaleform::GFx::AS3::InstanceTraits::Traits *pObject; // rbx
+  Scaleform::GFx::AS3::Traits *ValueTraits; // rax
+  Scaleform::GFx::AS3::Instances::fl::QName *VStr; // rbx
+  Scaleform::GFx::ASStringNode *pNode; // rcx
   Scaleform::GFx::AS3::VM::Error *v12; // rax
-  bool v13; // zf
-  Scaleform::GFx::AS3::VM::Error v14; // [rsp+28h] [rbp-30h]
-  Scaleform::GFx::ASString resulta; // [rsp+70h] [rbp+18h]
+  Scaleform::GFx::AS3::VM::Error v14; // [rsp+28h] [rbp-30h] BYREF
+  Scaleform::GFx::ASString resulta; // [rsp+70h] [rbp+18h] BYREF
 
-  v4 = result;
-  v5 = _this;
-  v6 = vm;
   if ( (_this->Flags & 0x1F) - 12 > 3 )
-    goto LABEL_14;
-  v7 = _this->value.VNumber;
-  v8 = vm->TraitsQName.pObject->ITraits.pObject;
-  if ( !v8->pConstructor.pObject )
-    v8->vfptr[3].~RefCountBaseGC<328>((Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v8->vfptr);
-  if ( *(Scaleform::GFx::AS3::Object **)&v7 != Scaleform::GFx::AS3::Class::GetPrototype(v8->pConstructor.pObject) )
+    goto LABEL_6;
+  VObj = _this->value.VS._1.VObj;
+  pObject = vm->TraitsQName.pObject->ITraits.pObject;
+  if ( !pObject->pConstructor.pObject )
+    pObject->vfptr[3].~RefCountBaseGC<328>(pObject);
+  if ( VObj == Scaleform::GFx::AS3::Class::GetPrototype(pObject->pConstructor.pObject) )
   {
-LABEL_14:
-    v9 = Scaleform::GFx::AS3::VM::GetValueTraits(v6, v5);
-    if ( v9->TraitsType != 17 || (LOBYTE(v9->Flags) >> 5) & 1 )
-    {
-      Scaleform::GFx::AS3::VM::Error::Error(&v14, eInvokeOnIncompatibleObjectError, v6);
-      Scaleform::GFx::AS3::VM::ThrowErrorInternal(v6, v12, &Scaleform::GFx::AS3::fl::TypeErrorTI);
-      v11 = v14.Message.pNode;
-    }
-    else
-    {
-      v10 = (Scaleform::GFx::AS3::Instances::fl::QName *)v5->value.VS._1.VStr;
-      Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(
-        (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v6->StringManagerRef->Builtins,
-        &resulta);
-      Scaleform::GFx::AS3::Instances::fl::QName::AS3toString(v10, &resulta);
-      Scaleform::GFx::AS3::Value::Assign(v4, &resulta);
-      v11 = resulta.pNode;
-    }
-    v13 = v11->RefCount-- == 1;
-    if ( v13 )
-      Scaleform::GFx::ASStringNode::ReleaseNode(v11);
+    Scaleform::GFx::AS3::Value::Assign(result, (Scaleform::GFx::ASString *)vm->StringManagerRef);
   }
   else
   {
-    Scaleform::GFx::AS3::Value::Assign(v4, (Scaleform::GFx::ASString *)v6->StringManagerRef);
+LABEL_6:
+    ValueTraits = Scaleform::GFx::AS3::VM::GetValueTraits(vm, _this);
+    if ( ValueTraits->TraitsType != Traits_QName || (ValueTraits->Flags & 0x20) != 0 )
+    {
+      Scaleform::GFx::AS3::VM::Error::Error(&v14, eInvokeOnIncompatibleObjectError, vm);
+      Scaleform::GFx::AS3::VM::ThrowErrorInternal(vm, v12, &Scaleform::GFx::AS3::fl::TypeErrorTI);
+      pNode = v14.Message.pNode;
+    }
+    else
+    {
+      VStr = (Scaleform::GFx::AS3::Instances::fl::QName *)_this->value.VS._1.VStr;
+      Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(
+        vm->StringManagerRef,
+        &resulta);
+      Scaleform::GFx::AS3::Instances::fl::QName::AS3toString(VStr, &resulta);
+      Scaleform::GFx::AS3::Value::Assign(result, &resulta);
+      pNode = resulta.pNode;
+    }
+    if ( pNode->RefCount-- == 1 )
+      Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
   }
 }
 
 // File Line: 154
 // RVA: 0x781780
-void __fastcall Scaleform::GFx::AS3::Instances::fl::QName::QName(Scaleform::GFx::AS3::Instances::fl::QName *this, Scaleform::GFx::AS3::InstanceTraits::Traits *t, Scaleform::GFx::ASString *n, Scaleform::GFx::AS3::Instances::fl::Namespace *ns)
+void __fastcall Scaleform::GFx::AS3::Instances::fl::QName::QName(
+        Scaleform::GFx::AS3::Instances::fl::QName *this,
+        Scaleform::GFx::AS3::InstanceTraits::Traits *t,
+        Scaleform::GFx::ASString *n,
+        Scaleform::GFx::AS3::Instances::fl::Namespace *ns)
 {
-  Scaleform::GFx::AS3::Instances::fl::Namespace *v4; // rsi
-  Scaleform::GFx::ASString *v5; // rbx
-  Scaleform::GFx::AS3::Instances::fl::QName *v6; // rdi
-  Scaleform::GFx::ASStringNode *v7; // rax
+  Scaleform::GFx::ASStringNode *pNode; // rax
 
-  v4 = ns;
-  v5 = n;
-  v6 = this;
-  Scaleform::GFx::AS3::Instance::Instance((Scaleform::GFx::AS3::Instance *)&this->vfptr, t);
-  v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable;
-  v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::QName::`vftable;
-  v7 = v5->pNode;
-  v6->LocalName = (Scaleform::GFx::ASString)v5->pNode;
-  ++v7->RefCount;
-  v6->Ns.pObject = v4;
-  if ( v4 )
-    v4->RefCount = (v4->RefCount + 1) & 0x8FBFFFFF;
+  Scaleform::GFx::AS3::Instance::Instance(this, t);
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::Object::`vftable;
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Instances::fl::QName::`vftable;
+  pNode = n->pNode;
+  this->LocalName = (Scaleform::GFx::ASString)n->pNode;
+  ++pNode->RefCount;
+  this->Ns.pObject = ns;
+  if ( ns )
+    ns->RefCount = (ns->RefCount + 1) & 0x8FBFFFFF;
 }
 
 // File Line: 163
 // RVA: 0x7D6D70
-void __fastcall Scaleform::GFx::AS3::Instances::fl::QName::ForEachChild_GC(Scaleform::GFx::AS3::Instances::fl::XML *this, Scaleform::GFx::AS3::RefCountCollector<328> *prcc, void (__fastcall *op)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::RefCountBaseGC<328> **))
+void __fastcall Scaleform::GFx::AS3::Instances::fl::QName::ForEachChild_GC(
+        Scaleform::GFx::AS3::Instances::fl::XML *this,
+        Scaleform::GFx::AS3::RefCountCollector<328> *prcc,
+        void (__fastcall *op)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::RefCountBaseGC<328> **))
 {
-  void (__fastcall *v3)(Scaleform::GFx::AS3::RefCountCollector<328> *, Scaleform::GFx::AS3::RefCountBaseGC<328> **); // rdi
-  Scaleform::GFx::AS3::RefCountCollector<328> *v4; // rsi
-  Scaleform::GFx::AS3::Instances::fl::XML *v5; // rbx
-
-  v3 = op;
-  v4 = prcc;
-  v5 = this;
-  Scaleform::GFx::AS3::Object::ForEachChild_GC((Scaleform::GFx::AS3::Object *)&this->vfptr, prcc, op);
-  if ( v5->Parent.pObject )
-    v3(v4, (Scaleform::GFx::AS3::RefCountBaseGC<328> **)&v5->Parent);
+  Scaleform::GFx::AS3::Object::ForEachChild_GC(this, prcc, op);
+  if ( this->Parent.pObject )
+    op(prcc, &this->Parent.pObject);
 }
 
 // File Line: 177
 // RVA: 0x798E70
-void __fastcall Scaleform::GFx::AS3::Instances::fl::QName::AS3Constructor(Scaleform::GFx::AS3::Instances::fl::QName *this, unsigned int argc, Scaleform::GFx::AS3::Value *argv)
+void __fastcall Scaleform::GFx::AS3::Instances::fl::QName::AS3Constructor(
+        Scaleform::GFx::AS3::Instances::fl::QName *this,
+        unsigned int argc,
+        Scaleform::GFx::AS3::Value *argv)
 {
-  Scaleform::GFx::AS3::Value *v3; // rsi
-  Scaleform::GFx::AS3::Instances::fl::QName *v4; // rdi
-  Scaleform::GFx::AS3::VM *v5; // r9
-  Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *v6; // rbp
-  Scaleform::GFx::ASStringNode *v7; // rbx
-  Scaleform::GFx::ASStringNode *v8; // rcx
-  bool v9; // zf
-  const char *v10; // rcx
-  Scaleform::GFx::AS3::Instances::fl::Namespace *v11; // rcx
-  unsigned int v12; // eax
-  Scaleform::GFx::AS3::Instances::fl::Namespace *v13; // rcx
-  unsigned int v14; // eax
-  int v15; // ecx
-  Scaleform::GFx::AS3::InstanceTraits::Traits *v16; // rbx
+  Scaleform::GFx::AS3::VM *pVM; // r9
+  Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *StringManagerRef; // rbp
+  Scaleform::GFx::ASString *v7; // rax
+  Scaleform::GFx::ASStringNode *pNode; // rbx
+  Scaleform::GFx::ASStringNode *v9; // rcx
+  bool v10; // zf
+  const char *pData; // rcx
+  Scaleform::GFx::AS3::Instances::fl::Namespace *pObject; // rcx
+  unsigned int RefCount; // eax
+  Scaleform::GFx::AS3::Instances::fl::Namespace *v14; // rcx
+  unsigned int v15; // eax
+  unsigned int v16; // ecx
+  Scaleform::GFx::AS3::InstanceTraits::Traits *v17; // rbx
   Scaleform::GFx::AS3::Value *prefix; // rax
-  Scaleform::GFx::ASStringNode *v18; // rcx
-  int v19; // ebx
-  Scaleform::GFx::AS3::Value *v20; // rcx
-  Scaleform::GFx::ASStringNode *v21; // rbx
-  Scaleform::GFx::ASStringNode *v22; // rcx
-  Scaleform::GFx::ASString *v23; // rax
-  Scaleform::GFx::ASStringNode *v24; // rcx
-  Scaleform::GFx::ASString result; // [rsp+70h] [rbp+8h]
-  Scaleform::GFx::AS3::CheckResult v26; // [rsp+78h] [rbp+10h]
-  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl::Namespace> v27; // [rsp+88h] [rbp+20h]
+  Scaleform::GFx::ASStringNode *v19; // rcx
+  unsigned int v20; // ebx
+  Scaleform::GFx::AS3::Value *p_Size; // rcx
+  Scaleform::GFx::ASStringNode *pLower; // rbx
+  Scaleform::GFx::ASStringNode *v23; // rcx
+  Scaleform::GFx::ASString *v24; // rax
+  Scaleform::GFx::ASStringNode *v25; // rcx
+  Scaleform::GFx::ASString result; // [rsp+70h] [rbp+8h] BYREF
+  Scaleform::GFx::AS3::CheckResult v27; // [rsp+78h] [rbp+10h] BYREF
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl::Namespace> v28; // [rsp+88h] [rbp+20h] BYREF
 
-  v3 = argv;
-  v4 = this;
-  v5 = this->pTraits.pObject->pVM;
-  v6 = (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v5->StringManagerRef->Builtins;
+  pVM = this->pTraits.pObject->pVM;
+  StringManagerRef = pVM->StringManagerRef;
   if ( !argc )
   {
-    v7 = Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(
-           (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v5->StringManagerRef->Builtins,
-           &result)->pNode;
-    ++v7->RefCount;
-    v8 = v4->LocalName.pNode;
-    v9 = v8->RefCount-- == 1;
-    if ( v9 )
-      Scaleform::GFx::ASStringNode::ReleaseNode(v8);
-    v4->LocalName.pNode = v7;
+    v7 = Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(
+           pVM->StringManagerRef,
+           &result);
+    pNode = v7->pNode;
+    ++v7->pNode->RefCount;
+    v9 = this->LocalName.pNode;
+    v10 = v9->RefCount-- == 1;
+    if ( v10 )
+      Scaleform::GFx::ASStringNode::ReleaseNode(v9);
+    this->LocalName.pNode = pNode;
     goto LABEL_41;
   }
   if ( argc == 1 )
   {
-    if ( !(argv->Flags & 0x1F) || Scaleform::GFx::AS3::Value::Convert2String(argv, &v26, &this->LocalName)->Result )
+    if ( (argv->Flags & 0x1F) == 0 || Scaleform::GFx::AS3::Value::Convert2String(argv, &v27, &this->LocalName)->Result )
     {
-      v10 = v4->LocalName.pNode->pData;
-      if ( *v10 == pattern[0] && !v10[1] )
+      pData = this->LocalName.pNode->pData;
+      if ( *pData == pattern[0] && !pData[1] )
       {
-        v11 = v4->Ns.pObject;
-        if ( v11 )
+        pObject = this->Ns.pObject;
+        if ( pObject )
         {
-          if ( (unsigned __int8)v11 & 1 )
+          if ( ((unsigned __int8)pObject & 1) != 0 )
           {
-            v4->Ns.pObject = (Scaleform::GFx::AS3::Instances::fl::Namespace *)((char *)v11 - 1);
+            this->Ns.pObject = (Scaleform::GFx::AS3::Instances::fl::Namespace *)((char *)pObject - 1);
           }
           else
           {
-            v12 = v11->RefCount;
-            if ( v12 & 0x3FFFFF )
+            RefCount = pObject->RefCount;
+            if ( (RefCount & 0x3FFFFF) != 0 )
             {
-              v11->RefCount = v12 - 1;
-              Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v11->vfptr);
+              pObject->RefCount = RefCount - 1;
+              Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(pObject);
             }
           }
-          v4->Ns.pObject = 0i64;
+          this->Ns.pObject = 0i64;
         }
       }
     }
     return;
   }
-  v13 = this->Ns.pObject;
-  if ( v13 )
+  v14 = this->Ns.pObject;
+  if ( v14 )
   {
-    if ( (unsigned __int8)v13 & 1 )
+    if ( ((unsigned __int8)v14 & 1) != 0 )
     {
-      v4->Ns.pObject = (Scaleform::GFx::AS3::Instances::fl::Namespace *)((char *)v13 - 1);
+      this->Ns.pObject = (Scaleform::GFx::AS3::Instances::fl::Namespace *)((char *)v14 - 1);
     }
     else
     {
-      v14 = v13->RefCount;
-      if ( v14 & 0x3FFFFF )
+      v15 = v14->RefCount;
+      if ( (v15 & 0x3FFFFF) != 0 )
       {
-        v13->RefCount = v14 - 1;
-        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v13->vfptr);
+        v14->RefCount = v15 - 1;
+        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(v14);
       }
     }
-    v4->Ns.pObject = 0i64;
+    this->Ns.pObject = 0i64;
   }
-  v15 = v3->Flags & 0x1F;
-  if ( (unsigned int)(v15 - 12) > 3 && v15 != 10 || *(_QWORD *)&v3->value.VNumber )
+  v16 = argv->Flags & 0x1F;
+  if ( v16 - 12 > 3 && v16 != 10 || argv->value.VS._1.VStr )
   {
-    if ( v15 == 11 )
+    if ( v16 == 11 )
     {
       Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(
-        (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&v4->Ns,
-        (Scaleform::GFx::AS3::Instances::fl::XMLList *)v3->value.VS._1.VStr);
+        (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&this->Ns,
+        (Scaleform::GFx::AS3::Instances::fl::XMLList *)argv->value.VS._1.VStr);
     }
-    else if ( Scaleform::GFx::AS3::IsQNameObject(v3) )
+    else if ( Scaleform::GFx::AS3::IsQNameObject(argv) )
     {
       Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::Object>::operator=(
-        (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML> *)&v4->Ns,
-        (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML> *)(*(_QWORD *)&v3->value.VNumber + 64i64));
+        (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML> *)&this->Ns,
+        (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML> *)&argv->value.VS._1.VStr[1].RefCount);
     }
     else
     {
-      Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(v6, &result);
-      if ( Scaleform::GFx::AS3::Value::Convert2String(v3, &v26, &result)->Result )
+      Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(
+        StringManagerRef,
+        &result);
+      if ( Scaleform::GFx::AS3::Value::Convert2String(argv, &v27, &result)->Result )
       {
-        v16 = v4->pTraits.pObject->pVM->TraitsNamespace.pObject->ITraits.pObject;
+        v17 = this->pTraits.pObject->pVM->TraitsNamespace.pObject->ITraits.pObject;
         prefix = Scaleform::GFx::AS3::Value::GetUndefined();
         Scaleform::GFx::AS3::NamespaceInstanceFactory::MakeNamespace(
-          *(Scaleform::GFx::AS3::NamespaceInstanceFactory **)&v16[1].RefCount,
-          &v27,
-          0,
+          *(Scaleform::GFx::AS3::NamespaceInstanceFactory **)&v17[1].RefCount,
+          &v28,
+          NS_Public,
           &result,
           prefix);
         Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XML>::operator=(
-          (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&v4->Ns,
-          (Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl::XMLList>)v27.pV);
+          (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&this->Ns,
+          (Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl::XMLList>)v28.pV);
       }
-      v18 = result.pNode;
-      v9 = result.pNode->RefCount == 1;
-      --v18->RefCount;
-      if ( v9 )
-        Scaleform::GFx::ASStringNode::ReleaseNode(v18);
+      v19 = result.pNode;
+      v10 = result.pNode->RefCount-- == 1;
+      if ( v10 )
+        Scaleform::GFx::ASStringNode::ReleaseNode(v19);
     }
   }
-  v19 = v3[1].Flags & 0x1F;
-  if ( v19 == 11 )
+  v20 = argv[1].Flags & 0x1F;
+  if ( v20 == 11 )
   {
-    v20 = (Scaleform::GFx::AS3::Value *)(*(_QWORD *)&v3->value.VNumber + 72i64);
+    p_Size = (Scaleform::GFx::AS3::Value *)&argv->value.VS._1.VStr[1].Size;
     goto LABEL_44;
   }
-  if ( !Scaleform::GFx::AS3::IsQNameObject(v3 + 1) )
+  if ( !Scaleform::GFx::AS3::IsQNameObject(argv + 1) )
   {
-    if ( !v19 )
+    if ( !v20 )
     {
-      v23 = Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(
-              v6,
+      v24 = Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(
+              StringManagerRef,
               &result);
-      Scaleform::GFx::ASString::operator=(&v4->LocalName, v23);
+      Scaleform::GFx::ASString::operator=(&this->LocalName, v24);
 LABEL_41:
-      v24 = result.pNode;
-      v9 = result.pNode->RefCount == 1;
-      --v24->RefCount;
-      if ( v9 )
-        Scaleform::GFx::ASStringNode::ReleaseNode(v24);
+      v25 = result.pNode;
+      v10 = result.pNode->RefCount-- == 1;
+      if ( v10 )
+        Scaleform::GFx::ASStringNode::ReleaseNode(v25);
       return;
     }
-    v20 = v3 + 1;
+    p_Size = argv + 1;
 LABEL_44:
-    Scaleform::GFx::AS3::Value::Convert2String(v20, &v26, &v4->LocalName);
+    Scaleform::GFx::AS3::Value::Convert2String(p_Size, &v27, &this->LocalName);
     return;
   }
-  v21 = *(Scaleform::GFx::ASStringNode **)(*(_QWORD *)&v3[1].value.VNumber + 56i64);
-  ++v21->RefCount;
-  v22 = v4->LocalName.pNode;
-  v9 = v22->RefCount-- == 1;
-  if ( v9 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v22);
-  v4->LocalName.pNode = v21;
+  pLower = argv[1].value.VS._1.VStr[1].pLower;
+  ++pLower->RefCount;
+  v23 = this->LocalName.pNode;
+  v10 = v23->RefCount-- == 1;
+  if ( v10 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(v23);
+  this->LocalName.pNode = pLower;
 }
 
 // File Line: 284
 // RVA: 0x7ECED0
-void __fastcall Scaleform::GFx::AS3::Instances::fl::QName::GetNextPropertyName(Scaleform::GFx::AS3::Instances::fl::QName *this, Scaleform::GFx::AS3::Value *name, Scaleform::GFx::AS3::GlobalSlotIndex ind)
+void __fastcall Scaleform::GFx::AS3::Instances::fl::QName::GetNextPropertyName(
+        Scaleform::GFx::AS3::Instances::fl::QName *this,
+        Scaleform::GFx::AS3::Value *name,
+        Scaleform::GFx::AS3::GlobalSlotIndex ind)
 {
-  Scaleform::GFx::AS3::Value *v3; // rbx
-  Scaleform::GFx::AS3::StringManager *v4; // rcx
-  unsigned int v5; // er8
+  Scaleform::GFx::AS3::StringManager *StringManagerRef; // rcx
+  unsigned int v5; // r8d
   Scaleform::GFx::ASString *v6; // rax
-  Scaleform::GFx::ASStringNode *v7; // rcx
+  Scaleform::GFx::ASStringNode *pNode; // rcx
   Scaleform::GFx::ASString *v8; // rax
-  bool v9; // zf
-  Scaleform::GFx::ASString result; // [rsp+40h] [rbp+8h]
-  Scaleform::GFx::ASString v11; // [rsp+58h] [rbp+20h]
+  Scaleform::GFx::ASString result; // [rsp+40h] [rbp+8h] BYREF
+  Scaleform::GFx::ASString v11; // [rsp+58h] [rbp+20h] BYREF
 
-  v3 = name;
-  v4 = this->pTraits.pObject->pVM->StringManagerRef;
+  StringManagerRef = this->pTraits.pObject->pVM->StringManagerRef;
   v5 = ind.Index - 1;
   if ( v5 )
   {
     if ( v5 != 1 )
       return;
-    v6 = Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
-           (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v4->Builtins,
+    v6 = Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
+           StringManagerRef,
            &result,
            "localName");
-    Scaleform::GFx::AS3::Value::Assign(v3, v6);
-    v7 = result.pNode;
+    Scaleform::GFx::AS3::Value::Assign(name, v6);
+    pNode = result.pNode;
   }
   else
   {
-    v8 = Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
-           (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v4->Builtins,
+    v8 = Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
+           StringManagerRef,
            &v11,
            "uri");
-    Scaleform::GFx::AS3::Value::Assign(v3, v8);
-    v7 = v11.pNode;
+    Scaleform::GFx::AS3::Value::Assign(name, v8);
+    pNode = v11.pNode;
   }
-  v9 = v7->RefCount-- == 1;
-  if ( v9 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v7);
+  if ( pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
 }
 
 // File Line: 302
 // RVA: 0x7ECCB0
-Scaleform::GFx::AS3::GlobalSlotIndex *__fastcall Scaleform::GFx::AS3::Instances::fl::QName::GetNextDynPropIndex(Scaleform::GFx::AS3::Instances::fl::QName *this, Scaleform::GFx::AS3::GlobalSlotIndex *result, Scaleform::GFx::AS3::GlobalSlotIndex ind)
+Scaleform::GFx::AS3::GlobalSlotIndex *__fastcall Scaleform::GFx::AS3::Instances::fl::QName::GetNextDynPropIndex(
+        Scaleform::GFx::AS3::Instances::fl::QName *this,
+        Scaleform::GFx::AS3::GlobalSlotIndex *result,
+        Scaleform::GFx::AS3::GlobalSlotIndex ind)
 {
   Scaleform::GFx::AS3::GlobalSlotIndex *v3; // rax
 
@@ -474,13 +463,14 @@ Scaleform::GFx::AS3::GlobalSlotIndex *__fastcall Scaleform::GFx::AS3::Instances:
 
 // File Line: 316
 // RVA: 0x7ED130
-void __fastcall Scaleform::GFx::AS3::Instances::fl::QName::GetNextPropertyValue(Scaleform::GFx::AS3::Instances::fl::QName *this, Scaleform::GFx::AS3::Value *value, Scaleform::GFx::AS3::GlobalSlotIndex ind)
+void __fastcall Scaleform::GFx::AS3::Instances::fl::QName::GetNextPropertyValue(
+        Scaleform::GFx::AS3::Instances::fl::QName *this,
+        Scaleform::GFx::AS3::Value *value,
+        Scaleform::GFx::AS3::GlobalSlotIndex ind)
 {
-  Scaleform::GFx::AS3::Value *v3; // rax
-  unsigned int v4; // er8
-  Scaleform::GFx::AS3::Instances::fl::Namespace *v5; // rdx
+  unsigned int v4; // r8d
+  Scaleform::GFx::AS3::Instances::fl::Namespace *pObject; // rdx
 
-  v3 = value;
   v4 = ind.Index - 1;
   if ( v4 )
   {
@@ -489,11 +479,11 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl::QName::GetNextPropertyValue(
   }
   else
   {
-    v5 = this->Ns.pObject;
-    if ( v5 )
-      Scaleform::GFx::AS3::Value::Assign(v3, &v5->Uri);
+    pObject = this->Ns.pObject;
+    if ( pObject )
+      Scaleform::GFx::AS3::Value::Assign(value, &pObject->Uri);
     else
-      Scaleform::GFx::AS3::Value::SetNull(v3);
+      Scaleform::GFx::AS3::Value::SetNull(value);
   }
 }
 
@@ -511,134 +501,119 @@ const char *dynamic_initializer_for__Scaleform::GFx::AS3::InstanceTraits::fl::QN
 
 // File Line: 368
 // RVA: 0x7FFE80
-void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl::QName::MakeObject(Scaleform::GFx::AS3::InstanceTraits::fl::QName *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::InstanceTraits::Traits *t)
+void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl::QName::MakeObject(
+        Scaleform::GFx::AS3::InstanceTraits::fl::QName *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::InstanceTraits::fl::QName *t)
 {
-  Scaleform::GFx::AS3::Value *v3; // rbx
-  Scaleform::GFx::AS3::Object **v4; // rax
-  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl::QName> resulta; // [rsp+48h] [rbp+20h]
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl::QName> *Instance; // rax
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl::QName> resulta; // [rsp+48h] [rbp+20h] BYREF
 
-  v3 = result;
-  v4 = (Scaleform::GFx::AS3::Object **)Scaleform::GFx::AS3::InstanceTraits::fl::QName::MakeInstance(
-                                         &resulta,
-                                         (Scaleform::GFx::AS3::InstanceTraits::fl::QName *)t);
-  Scaleform::GFx::AS3::Value::Pick(v3, *v4);
+  Instance = Scaleform::GFx::AS3::InstanceTraits::fl::QName::MakeInstance(&resulta, t);
+  Scaleform::GFx::AS3::Value::Pick(result, Instance->pV);
 }
 
 // File Line: 397
 // RVA: 0x7F4AC0
-void __fastcall Scaleform::GFx::AS3::Classes::fl::QName::InitPrototype(Scaleform::GFx::AS3::Classes::fl::QName *this, Scaleform::GFx::AS3::Object *obj)
+void __fastcall Scaleform::GFx::AS3::Classes::fl::QName::InitPrototype(
+        Scaleform::GFx::AS3::Classes::fl::QName *this,
+        Scaleform::GFx::AS3::Object *obj)
 {
-  Scaleform::GFx::AS3::Object *v2; // rdi
-  Scaleform::GFx::ASStringNode *v3; // rbx
-  Scaleform::GFx::AS3::Class *v4; // rcx
+  Scaleform::GFx::AS3::Class *pObject; // rcx
   Scaleform::GFx::ASString *v5; // rax
   Scaleform::GFx::ASStringNode *v6; // rcx
   bool v7; // zf
   Scaleform::GFx::ASStringNode *v8; // rcx
-  int v9; // eax
-  _DWORD *v10; // rdx
-  Scaleform::GFx::ASStringNode *v11; // rcx
-  Scaleform::GFx::AS3::RefCountBaseGC<328> *v12; // rcx
-  unsigned int v13; // eax
-  int v14; // [rsp+28h] [rbp-48h]
-  Scaleform::GFx::ASStringNode *v15; // [rsp+30h] [rbp-40h]
-  Scaleform::HashNode<Scaleform::GFx::AS3::Object::DynAttrsKey,Scaleform::GFx::AS3::Value,Scaleform::GFx::AS3::Object::DynAttrsKey::HashFunctor>::NodeRef key; // [rsp+38h] [rbp-38h]
-  unsigned int v17; // [rsp+48h] [rbp-28h]
-  _DWORD *v18; // [rsp+50h] [rbp-20h]
-  Scaleform::GFx::ASStringNode *v19; // [rsp+58h] [rbp-18h]
-  Scaleform::GFx::AS3::RefCountBaseGC<328> *v20; // [rsp+60h] [rbp-10h]
-  Scaleform::GFx::ASString result; // [rsp+80h] [rbp+10h]
+  Scaleform::GFx::ASStringNode *v9; // rcx
+  Scaleform::GFx::AS3::RefCountBaseGC<328> *v10; // rcx
+  unsigned int RefCount; // eax
+  int v12; // [rsp+28h] [rbp-48h] BYREF
+  Scaleform::GFx::ASStringNode *pNode; // [rsp+30h] [rbp-40h]
+  Scaleform::HashNode<Scaleform::GFx::AS3::Object::DynAttrsKey,Scaleform::GFx::AS3::Value,Scaleform::GFx::AS3::Object::DynAttrsKey::HashFunctor>::NodeRef key; // [rsp+38h] [rbp-38h] BYREF
+  int v15; // [rsp+48h] [rbp-28h] BYREF
+  _DWORD *v16; // [rsp+50h] [rbp-20h]
+  Scaleform::GFx::ASStringNode *v17; // [rsp+58h] [rbp-18h]
+  Scaleform::GFx::AS3::RefCountBaseGC<328> *v18; // [rsp+60h] [rbp-10h]
+  Scaleform::GFx::ASString result; // [rsp+80h] [rbp+10h] BYREF
 
-  v2 = obj;
-  v3 = (Scaleform::GFx::ASStringNode *)this;
-  v4 = this->ParentClass.pObject;
-  if ( v4 )
-    ((void (__cdecl *)(Scaleform::GFx::AS3::Class *))v4->vfptr[7].Finalize_GC)(v4);
-  Scaleform::GFx::AS3::Object::AddDynamicFunc(v2, Scaleform::GFx::AS3::Classes::fl::QName::ti);
-  v17 = 13;
-  v18 = 0i64;
-  v19 = v3;
-  v3->Size = (v3->Size + 1) & 0x8FBFFFFF;
-  v5 = Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
-         *(Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> **)(*((_QWORD *)v3[1].pData
-                                                                                                 + 16)
-                                                                                               + 16i64),
+  pObject = this->ParentClass.pObject;
+  if ( pObject )
+    pObject->vfptr[7].Finalize_GC(pObject);
+  Scaleform::GFx::AS3::Object::AddDynamicFunc(obj, Scaleform::GFx::AS3::Classes::fl::QName::ti);
+  v15 = 13;
+  v16 = 0i64;
+  v17 = (Scaleform::GFx::ASStringNode *)this;
+  this->RefCount = (this->RefCount + 1) & 0x8FBFFFFF;
+  v5 = Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateConstString(
+         this->pTraits.pObject->pVM->StringManagerRef,
          &result,
          "constructor");
-  v14 = 1;
-  v15 = v5->pNode;
-  ++v15->RefCount;
-  key.pFirst = (Scaleform::GFx::AS3::Object::DynAttrsKey *)&v14;
-  key.pSecond = (Scaleform::GFx::AS3::Value *)&v17;
+  v12 = 1;
+  pNode = v5->pNode;
+  ++pNode->RefCount;
+  key.pFirst = (Scaleform::GFx::AS3::Object::DynAttrsKey *)&v12;
+  key.pSecond = (Scaleform::GFx::AS3::Value *)&v15;
   Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::AS3::Object::DynAttrsKey,Scaleform::GFx::AS3::Value,Scaleform::GFx::AS3::Object::DynAttrsKey::HashFunctor>,Scaleform::HashNode<Scaleform::GFx::AS3::Object::DynAttrsKey,Scaleform::GFx::AS3::Value,Scaleform::GFx::AS3::Object::DynAttrsKey::HashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::AS3::Object::DynAttrsKey,Scaleform::GFx::AS3::Value,Scaleform::GFx::AS3::Object::DynAttrsKey::HashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::AS3::Object::DynAttrsKey,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::HashNode<Scaleform::GFx::AS3::Object::DynAttrsKey,Scaleform::GFx::AS3::Value,Scaleform::GFx::AS3::Object::DynAttrsKey::HashFunctor>,Scaleform::HashNode<Scaleform::GFx::AS3::Object::DynAttrsKey,Scaleform::GFx::AS3::Value,Scaleform::GFx::AS3::Object::DynAttrsKey::HashFunctor>::NodeHashF>>::Set<Scaleform::HashNode<Scaleform::GFx::AS3::Object::DynAttrsKey,Scaleform::GFx::AS3::Value,Scaleform::GFx::AS3::Object::DynAttrsKey::HashFunctor>::NodeRef>(
-    (Scaleform::HashSetBase<Scaleform::HashNode<Scaleform::GFx::AS3::Object::DynAttrsKey,Scaleform::GFx::AS3::Value,Scaleform::GFx::AS3::Object::DynAttrsKey::HashFunctor>,Scaleform::HashNode<Scaleform::GFx::AS3::Object::DynAttrsKey,Scaleform::GFx::AS3::Value,Scaleform::GFx::AS3::Object::DynAttrsKey::HashFunctor>::NodeHashF,Scaleform::HashNode<Scaleform::GFx::AS3::Object::DynAttrsKey,Scaleform::GFx::AS3::Value,Scaleform::GFx::AS3::Object::DynAttrsKey::HashFunctor>::NodeAltHashF,Scaleform::AllocatorLH<Scaleform::GFx::AS3::Object::DynAttrsKey,2>,Scaleform::HashsetCachedNodeEntry<Scaleform::HashNode<Scaleform::GFx::AS3::Object::DynAttrsKey,Scaleform::GFx::AS3::Value,Scaleform::GFx::AS3::Object::DynAttrsKey::HashFunctor>,Scaleform::HashNode<Scaleform::GFx::AS3::Object::DynAttrsKey,Scaleform::GFx::AS3::Value,Scaleform::GFx::AS3::Object::DynAttrsKey::HashFunctor>::NodeHashF> > *)&v2->DynAttrs.mHash.pTable,
-    &v2->DynAttrs,
+    &obj->DynAttrs.mHash,
+    &obj->DynAttrs,
     &key);
-  v6 = v15;
-  v7 = v15->RefCount == 1;
-  --v6->RefCount;
+  v6 = pNode;
+  v7 = pNode->RefCount-- == 1;
   if ( v7 )
     Scaleform::GFx::ASStringNode::ReleaseNode(v6);
   v8 = result.pNode;
-  v7 = result.pNode->RefCount == 1;
-  --v8->RefCount;
+  v7 = result.pNode->RefCount-- == 1;
   if ( v7 )
     Scaleform::GFx::ASStringNode::ReleaseNode(v8);
-  v9 = v17 & 0x1F;
-  if ( v9 > 9 )
+  if ( (v15 & 0x1Fu) > 9 )
   {
-    if ( (v17 >> 9) & 1 )
+    if ( (v15 & 0x200) != 0 )
     {
-      v10 = v18;
-      v7 = *v18 == 1;
-      --*v10;
+      v7 = (*v16)-- == 1;
       if ( v7 )
-        ((void (__cdecl *)(Scaleform::MemoryHeap *, _DWORD *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(
-          Scaleform::Memory::pGlobalHeap,
-          v10);
+        ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+      v16 = 0i64;
+      v17 = 0i64;
       v18 = 0i64;
-      v19 = 0i64;
-      v20 = 0i64;
-      v17 &= 0xFFFFFDE0;
+      v15 &= 0xFFFFFDE0;
     }
     else
     {
-      switch ( v9 )
+      switch ( v15 & 0x1F )
       {
-        case 10:
-          v11 = v19;
-          v7 = v19->RefCount == 1;
-          --v11->RefCount;
+        case 0xA:
+          v9 = v17;
+          v7 = v17->RefCount-- == 1;
           if ( v7 )
-            Scaleform::GFx::ASStringNode::ReleaseNode(v11);
+            Scaleform::GFx::ASStringNode::ReleaseNode(v9);
           break;
-        case 11:
-        case 12:
-        case 13:
-        case 14:
-        case 15:
-          v12 = (Scaleform::GFx::AS3::RefCountBaseGC<328> *)v19;
-          if ( !((unsigned __int8)v19 & 1) )
+        case 0xB:
+        case 0xC:
+        case 0xD:
+        case 0xE:
+        case 0xF:
+          v10 = (Scaleform::GFx::AS3::RefCountBaseGC<328> *)v17;
+          if ( ((unsigned __int8)v17 & 1) == 0 )
             goto LABEL_19;
-          v19 = (Scaleform::GFx::ASStringNode *)((char *)v19 - 1);
+          v17 = (Scaleform::GFx::ASStringNode *)((char *)v17 - 1);
           break;
-        case 16:
-        case 17:
-          v12 = v20;
-          if ( (unsigned __int8)v20 & 1 )
+        case 0x10:
+        case 0x11:
+          v10 = v18;
+          if ( ((unsigned __int8)v18 & 1) != 0 )
           {
-            v20 = (Scaleform::GFx::AS3::RefCountBaseGC<328> *)((char *)v20 - 1);
+            v18 = (Scaleform::GFx::AS3::RefCountBaseGC<328> *)((char *)v18 - 1);
           }
           else
           {
 LABEL_19:
-            if ( v12 )
+            if ( v10 )
             {
-              v13 = v12->RefCount;
-              if ( v13 & 0x3FFFFF )
+              RefCount = v10->RefCount;
+              if ( (RefCount & 0x3FFFFF) != 0 )
               {
-                v12->RefCount = v13 - 1;
-                Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(v12);
+                v10->RefCount = RefCount - 1;
+                Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(v10);
               }
             }
           }
@@ -652,37 +627,35 @@ LABEL_19:
 
 // File Line: 407
 // RVA: 0x7B8E40
-void __fastcall Scaleform::GFx::AS3::Classes::fl::QName::Construct(Scaleform::GFx::AS3::Classes::fl::QName *this, Scaleform::GFx::AS3::Value *_this, unsigned int argc, Scaleform::GFx::AS3::Value *argv, bool extCall)
+void __fastcall Scaleform::GFx::AS3::Classes::fl::QName::Construct(
+        Scaleform::GFx::AS3::Classes::fl::QName *this,
+        Scaleform::GFx::AS3::Value *_this,
+        unsigned int argc,
+        Scaleform::GFx::AS3::Value *argv,
+        bool extCall)
 {
-  Scaleform::GFx::AS3::Value *v5; // rbx
-  unsigned int v6; // ebp
-  Scaleform::GFx::AS3::Value *v7; // rdi
-  Scaleform::GFx::AS3::Classes::fl::QName *v8; // rsi
-  Scaleform::GFx::AS3::Traits *v9; // rax
+  Scaleform::GFx::AS3::Traits *ValueTraits; // rax
 
-  v5 = argv;
-  v6 = argc;
-  v7 = _this;
-  v8 = this;
   if ( argc == 1
-    && (v9 = Scaleform::GFx::AS3::VM::GetValueTraits(this->pTraits.pObject->pVM, argv), v9->TraitsType == 17)
-    && (unsigned __int8)~(LOBYTE(v9->Flags) >> 5) & (unsigned __int8)v6 )
+    && (ValueTraits = Scaleform::GFx::AS3::VM::GetValueTraits(this->pTraits.pObject->pVM, argv),
+        ValueTraits->TraitsType == Traits_QName)
+    && (ValueTraits->Flags & 0x20) == 0 )
   {
-    Scaleform::GFx::AS3::Value::Assign(v7, v5);
+    Scaleform::GFx::AS3::Value::Assign(_this, argv);
   }
   else
   {
-    Scaleform::GFx::AS3::Class::Construct((Scaleform::GFx::AS3::Class *)&v8->vfptr, v7, v6, v5, extCall);
+    Scaleform::GFx::AS3::Class::Construct(this, _this, argc, argv, extCall);
   }
 }
 
 // File Line: 447
 // RVA: 0x7541E0
-Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl::QName::MakeClassTraits(Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result, Scaleform::GFx::AS3::VM *vm)
+Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl::QName::MakeClassTraits(
+        Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result,
+        Scaleform::GFx::AS3::VM *vm)
 {
-  Scaleform::GFx::AS3::VM *v2; // rbp
-  Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *v3; // rdi
-  Scaleform::MemoryHeap *v4; // rsi
+  Scaleform::MemoryHeap *MHeap; // rsi
   Scaleform::GFx::AS3::ClassTraits::Traits *v5; // rax
   Scaleform::GFx::AS3::ClassTraits::Traits *v6; // rbx
   Scaleform::GFx::AS3::InstanceTraits::CTraits *v7; // rax
@@ -690,46 +663,44 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   Scaleform::GFx::AS3::Class *v9; // rax
   Scaleform::GFx::AS3::Class *v10; // rbx
 
-  v2 = vm;
-  v3 = result;
-  v4 = vm->MHeap;
-  v5 = (Scaleform::GFx::AS3::ClassTraits::Traits *)v4->vfptr->Alloc(v4, 208ui64, 0i64);
+  MHeap = vm->MHeap;
+  v5 = (Scaleform::GFx::AS3::ClassTraits::Traits *)MHeap->vfptr->Alloc(MHeap, 208ui64, 0i64);
   v6 = v5;
   if ( v5 )
   {
-    Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl::QNameCI);
+    Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, vm, &Scaleform::GFx::AS3::fl::QNameCI);
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::QName::`vftable;
-    v6->TraitsType = 17;
+    v6->TraitsType = Traits_QName;
   }
   else
   {
     v6 = 0i64;
   }
-  v3->pV = v6;
-  v7 = (Scaleform::GFx::AS3::InstanceTraits::CTraits *)v4->vfptr->Alloc(v4, 240ui64, 0i64);
-  v8.pV = (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v7->vfptr;
+  result->pV = v6;
+  v7 = (Scaleform::GFx::AS3::InstanceTraits::CTraits *)MHeap->vfptr->Alloc(MHeap, 240ui64, 0i64);
+  v8.pV = v7;
   if ( v7 )
   {
-    Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, v2, &Scaleform::GFx::AS3::fl::QNameCI);
+    Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, vm, &Scaleform::GFx::AS3::fl::QNameCI);
     v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
     v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::QName::`vftable;
-    v8.pV->TraitsType = 17;
+    v8.pV->TraitsType = Traits_QName;
   }
   else
   {
     v8.pV = 0i64;
   }
-  Scaleform::GFx::AS3::ClassTraits::Traits::SetInstanceTraits(v3->pV, v8);
-  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))v4->vfptr->Alloc)(
-                                       v4,
+  Scaleform::GFx::AS3::ClassTraits::Traits::SetInstanceTraits(result->pV, v8);
+  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))MHeap->vfptr->Alloc)(
+                                       MHeap,
                                        72i64);
   v10 = v9;
   if ( v9 )
   {
-    Scaleform::GFx::AS3::Class::Class(v9, v3->pV);
+    Scaleform::GFx::AS3::Class::Class(v9, result->pV);
     v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl::QName::`vftable;
   }
-  return v3;
+  return result;
 }
 

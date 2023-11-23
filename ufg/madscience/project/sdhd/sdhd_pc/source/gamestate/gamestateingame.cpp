@@ -2,14 +2,12 @@
 // RVA: 0x410660
 void __fastcall UFG::GameStateInGame::OnEnter(UFG::GameStateInGame *this, float fRealTimeDelta)
 {
-  UFG::GameStateInGame *v2; // rbx
   char v3; // cl
   UFG::GameStatTracker *v4; // rax
 
-  v2 = this;
   gbUseHotswapping = 0;
   UFG::HotSwapFileManager::SetEnabled(0);
-  v2->vfptr->ModeSet((UFG::GameState *)&v2->vfptr, eGSM_PAUSED, 0);
+  this->vfptr->ModeSet(this, eGSM_PAUSED, 0);
   *(_QWORD *)UFG::Metrics::msFramesPerSecBuckets = 0i64;
   qword_14235C0D0 = 0i64;
   qword_14235C0D8 = 0i64;
@@ -30,32 +28,30 @@ void __fastcall UFG::GameStateInGame::OnEnter(UFG::GameStateInGame *this, float 
 void __fastcall UFG::CBUpdateUI(float deltaTime)
 {
   UFG::UI::gUpdateWorldPos = 1;
-  ((void (*)(void))UFG::UIScreenManager::s_instance->vfptr->update)();
+  ((void (__fastcall *)(UFG::UIScreenManager *))UFG::UIScreenManager::s_instance->vfptr->update)(UFG::UIScreenManager::s_instance);
 }
 
 // File Line: 156
 // RVA: 0x412240
 void __fastcall UFG::GameStateInGame::OnUpdate(UFG::GameStateInGame *this, float fRealTimeDelta)
 {
-  UFG::GameStateInGame *v2; // rbx
-  AMD_HD3D *v3; // rax
+  AMD_HD3D *Instance; // rax
   UFG *v4; // rcx
-  float v5; // xmm6_4
+  float mSimTimeDelta; // xmm6_4
   Render *v6; // rcx
-  UFG::SimObjectCharacter *v7; // rdi
-  UFG::TransformNodeComponent *v8; // rbx
+  UFG::SimObjectCharacter *LocalPlayer; // rdi
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rbx
   float v9; // xmm2_4
   float v10; // xmm3_4
-  unsigned int v11; // ebx
+  unsigned int CellIndexAtPosition; // ebx
   Render *v12; // rcx
   float v13; // xmm0_4
   AMD_HD3D *v14; // rcx
-  UFG::qVector3 position; // [rsp+20h] [rbp-48h]
+  UFG::qVector3 position; // [rsp+20h] [rbp-48h] BYREF
 
-  v2 = this;
-  v3 = (AMD_HD3D *)UserManager::GetInstance();
-  _(v3);
-  if ( v2->mUpdateCount )
+  Instance = (AMD_HD3D *)UserManager::GetInstance();
+  _(Instance);
+  if ( this->mUpdateCount )
   {
     if ( !dump )
       goto LABEL_5;
@@ -66,43 +62,46 @@ void __fastcall UFG::GameStateInGame::OnUpdate(UFG::GameStateInGame *this, float
   }
   dump = 0;
 LABEL_5:
-  ++v2->mUpdateCount;
-  ((void (*)(void))UFG::gInputSystem->vfptr->Update)();
+  ++this->mUpdateCount;
+  ((void (__fastcall *)(UFG::InputSystem *))UFG::gInputSystem->vfptr->Update)(UFG::gInputSystem);
   CheckForConsoleInput(v4);
-  if ( !v2->mUpdateSim )
+  if ( !this->mUpdateSim )
   {
     gUIUpdateDelta = fRealTimeDelta;
     UFG::UI::gUpdateWorldPos = 1;
-    ((void (*)(void))UFG::UIScreenManager::s_instance->vfptr->update)();
+    ((void (__fastcall *)(UFG::UIScreenManager *))UFG::UIScreenManager::s_instance->vfptr->update)(UFG::UIScreenManager::s_instance);
     UFG::PhotoManager::Update(fRealTimeDelta);
     return;
   }
-  v5 = UFG::Metrics::msInstance.mSimTimeDelta;
-  v7 = UFG::GetLocalPlayer();
-  if ( UFG::GameSetup::msProject || !v2->vfptr->ModeIsSet((UFG::GameState *)&v2->vfptr, eGSM_PAUSED) )
+  mSimTimeDelta = UFG::Metrics::msInstance.mSimTimeDelta;
+  LocalPlayer = UFG::GetLocalPlayer();
+  if ( UFG::GameSetup::msProject || !this->vfptr->ModeIsSet(this, eGSM_PAUSED) )
   {
-    if ( v5 > 0.0 )
+    if ( mSimTimeDelta > 0.0 )
     {
-      if ( v7 )
+      if ( LocalPlayer )
       {
-        v8 = v7->m_pTransformNodeComponent;
-        UFG::TransformNodeComponent::UpdateWorldTransform(v7->m_pTransformNodeComponent);
-        UFG::TransformNodeComponent::UpdateWorldTransform(v8);
-        v9 = (float)(v8->mWorldVelocity.z * 0.06666667) + v8->mWorldTransform.v3.z;
-        v10 = (float)(v8->mWorldVelocity.y * 0.06666667) + v8->mWorldTransform.v3.y;
-        position.x = (float)(v8->mWorldVelocity.x * 0.06666667) + v8->mWorldTransform.v3.x;
+        m_pTransformNodeComponent = LocalPlayer->m_pTransformNodeComponent;
+        UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+        UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+        v9 = (float)(m_pTransformNodeComponent->mWorldVelocity.z * 0.06666667)
+           + m_pTransformNodeComponent->mWorldTransform.v3.z;
+        v10 = (float)(m_pTransformNodeComponent->mWorldVelocity.y * 0.06666667)
+            + m_pTransformNodeComponent->mWorldTransform.v3.y;
+        position.x = (float)(m_pTransformNodeComponent->mWorldVelocity.x * 0.06666667)
+                   + m_pTransformNodeComponent->mWorldTransform.v3.x;
         position.y = v10;
         position.z = v9;
-        v11 = UFG::SectionChooser::GetCellIndexAtPosition(&position, 0);
-        if ( !UFG::SectionChooser::IsSectionVisible_CellIndex(v11, SCENERY_LAYER_STD, 0)
-          && !(*(_BYTE *)(UFG::SectionLayout::GetSectionFromCellIndex(v11) + 4) & 2) )
+        CellIndexAtPosition = UFG::SectionChooser::GetCellIndexAtPosition(&position, 0);
+        if ( !UFG::SectionChooser::IsSectionVisible_CellIndex(CellIndexAtPosition, SCENERY_LAYER_STD, 0)
+          && (*(_BYTE *)(UFG::SectionLayout::GetSectionFromCellIndex(CellIndexAtPosition) + 4) & 2) == 0 )
         {
           if ( !UFG::UIHK_NISOverlay::IsCurtainVisible()
             && NISManager::GetInstance()->mState == STATE_INVALID
             && freeze_time < 20.0 )
           {
-            v13 = freeze_time + v5;
-            v5 = 0.0;
+            v13 = freeze_time + mSimTimeDelta;
+            mSimTimeDelta = 0.0;
             freeze_time = v13;
             Render::StartEmergencyLoadScreen(v12);
           }
@@ -116,14 +115,14 @@ LABEL_5:
   else
   {
     UFG::OnlineManager::Instance();
-    v5 = 0.0;
+    mSimTimeDelta = 0.0;
   }
 LABEL_19:
   gUIUpdateDelta = fRealTimeDelta;
-  UFG::UpdateSim(v5, UFG::CBUpdateUI);
+  UFG::UpdateSim(mSimTimeDelta, UFG::CBUpdateUI);
   if ( !UFG::bCameraUseSimTime )
-    v5 = fRealTimeDelta;
-  UFG::UpdateCamera(v5, v14);
+    mSimTimeDelta = fRealTimeDelta;
+  UFG::UpdateCamera(mSimTimeDelta, v14);
   UFG::PhotoManager::Update(fRealTimeDelta);
 }
 
@@ -141,90 +140,78 @@ void __fastcall UFG::GameStateInGame::OnExit(UFG::GameStateInGame *this, float f
 
 // File Line: 425
 // RVA: 0x40E8E0
-bool __fastcall UFG::GameStateInGame::ModeSet(UFG::GameStateInGame *this, UFG::eGameStateMode mode, const bool enable)
+bool __fastcall UFG::GameStateInGame::ModeSet(UFG::GameStateInGame *this, UFG::eGameStateMode mode, bool enable)
 {
-  UFG::GameStateInGame *v3; // rbx
-  bool v4; // bp
-  UFG::eGameStateMode v5; // edi
   bool result; // al
   bool v7; // si
   unsigned int v8; // edx
   NISManager *v9; // rax
-  const char *v10; // rsi
+  char *mData; // rsi
   unsigned int v11; // edx
-  NISManager *v12; // rax
+  NISManager *Instance; // rax
 
-  v3 = this;
-  v4 = enable;
-  v5 = mode;
-  if ( mode == 1 )
+  if ( mode == eGSM_PAUSED )
   {
     UFG::OnlineManager::Instance();
-    UFG::Metrics::msInstance.mSimPausedInGame = v4;
+    UFG::Metrics::msInstance.mSimPausedInGame = enable;
     UFG::Metrics::msInstance.mSimTimeDeltaStep = 0.0;
-    if ( v4 == v3->vfptr->ModeIsSet((UFG::GameState *)&v3->vfptr, eGSM_PAUSED) )
+    if ( enable == this->vfptr->ModeIsSet(this, eGSM_PAUSED) )
       return 0;
-    if ( !v4 )
+    if ( !enable )
     {
       v11 = UI_HASH_GAMESTATE_UNPAUSE_0;
-      v3->mUpdateSim = 1;
-      UFG::UIScreenManagerBase::queueMessage(
-        (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-        v11,
-        0xFFFFFFFF);
-      v12 = NISManager::GetInstance();
-      NISManager::Resume(v12);
+      this->mUpdateSim = 1;
+      UFG::UIScreenManagerBase::queueMessage(UFG::UIScreenManager::s_instance, v11, 0xFFFFFFFF);
+      Instance = NISManager::GetInstance();
+      NISManager::Resume(Instance);
       UFG::MovieHandler::Unpause(&UFG::TheMovieHandler);
-      if ( (unsigned __int8)UFG::TiDo::GetIsInstantiated() )
-        ((void (__fastcall *)(UFG::TiDo *, signed __int64))UFG::TiDo::m_pInstance->vfptr[1].Close)(
+      if ( UFG::TiDo::GetIsInstantiated() )
+        ((void (__fastcall *)(UFG::TiDo *, __int64))UFG::TiDo::m_pInstance->vfptr[1].Close)(
           UFG::TiDo::m_pInstance,
           4i64);
       goto LABEL_27;
     }
-    v7 = !v3->vfptr->ModeIsSet((UFG::GameState *)&v3->vfptr, eGSM_PAUSED) || UFG::GameSetup::msProject;
+    v7 = !this->vfptr->ModeIsSet(this, eGSM_PAUSED) || UFG::GameSetup::msProject;
     UFG::RenderWorld::SetRenderWorld(v7);
     v8 = UI_HASH_GAMESTATE_PAUSE_0;
-    v3->mUpdateSim = v7;
-    UFG::UIScreenManagerBase::queueMessage(
-      (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-      v8,
-      0xFFFFFFFF);
+    this->mUpdateSim = v7;
+    UFG::UIScreenManagerBase::queueMessage(UFG::UIScreenManager::s_instance, v8, 0xFFFFFFFF);
     v9 = NISManager::GetInstance();
     NISManager::Pause(v9);
     UFG::MovieHandler::Pause(&UFG::TheMovieHandler);
-    v10 = v3->mGameStateUserDataStr.mData;
-    if ( *v10 )
+    mData = this->mGameStateUserDataStr.mData;
+    if ( *mData )
     {
-      if ( (!(unsigned int)UFG::qStringCompare("PauseMenu", v3->mGameStateUserDataStr.mData, -1)
-         || !(unsigned int)UFG::qStringCompare("WorldMap", v10, -1)
-         || !(unsigned int)UFG::qStringCompare("SocialHub", v10, -1)
-         || !(unsigned int)UFG::qStringCompare("UIMenuActionMenu", v10, -1)
-         || !(unsigned int)UFG::qStringCompare("UIMenuRacePaused", v10, -1))
-        && (unsigned __int8)UFG::TiDo::GetIsInstantiated() )
+      if ( (!(unsigned int)UFG::qStringCompare("PauseMenu", this->mGameStateUserDataStr.mData, -1)
+         || !(unsigned int)UFG::qStringCompare("WorldMap", mData, -1)
+         || !(unsigned int)UFG::qStringCompare("SocialHub", mData, -1)
+         || !(unsigned int)UFG::qStringCompare("UIMenuActionMenu", mData, -1)
+         || !(unsigned int)UFG::qStringCompare("UIMenuRacePaused", mData, -1))
+        && UFG::TiDo::GetIsInstantiated() )
       {
-        ((void (__fastcall *)(UFG::TiDo *, signed __int64))UFG::TiDo::m_pInstance->vfptr[1].Close)(
+        ((void (__fastcall *)(UFG::TiDo *, __int64))UFG::TiDo::m_pInstance->vfptr[1].Close)(
           UFG::TiDo::m_pInstance,
           1i64);
       }
-      if ( !(unsigned int)UFG::qStringCompare("NISPause", v10, -1) && (unsigned __int8)UFG::TiDo::GetIsInstantiated() )
-        ((void (__fastcall *)(UFG::TiDo *, signed __int64))UFG::TiDo::m_pInstance->vfptr[1].Close)(
+      if ( !(unsigned int)UFG::qStringCompare("NISPause", mData, -1) && UFG::TiDo::GetIsInstantiated() )
+        ((void (__fastcall *)(UFG::TiDo *, __int64))UFG::TiDo::m_pInstance->vfptr[1].Close)(
           UFG::TiDo::m_pInstance,
           10i64);
-      UFG::qString::Set(&v3->mGameStateUserDataStr, &customWorldMapCaption);
+      UFG::qString::Set(&this->mGameStateUserDataStr, &customCaption);
     }
   }
-  else if ( mode != 2 || enable == this->vfptr->ModeIsSet((UFG::GameState *)this, eGSM_DEBUG_CAM) )
+  else if ( mode != eGSM_DEBUG_CAM || enable == this->vfptr->ModeIsSet(this, eGSM_DEBUG_CAM) )
   {
     return 0;
   }
-  if ( v4 )
+  if ( enable )
   {
-    v3->mMode |= v5;
+    this->mMode |= mode;
     return 1;
   }
 LABEL_27:
   result = 1;
-  v3->mMode &= ~v5;
+  this->mMode &= ~mode;
   return result;
 }
 

@@ -43,71 +43,53 @@ _BOOL8 __fastcall DNA::Database::IsInitialized()
 // RVA: 0x1A2400
 void __fastcall DNA::Database::Database(DNA::Database *this)
 {
-  DNA::Database *v1; // rbx
-  UFG::qTree64<DNA::PropertyBag,DNA::PropertyBag,0> *v2; // rax
-  UFG::qTree64<DNA::PropertyBag,DNA::PropertyBag,0> *v3; // rax
-  UFG::qTree64<DNA::SchemaType,DNA::SchemaType,0> *v4; // rax
-  UFG::qTree64<DNA::SchemaEnum,DNA::SchemaEnum,0> *v5; // rax
-  DNA::Event<void __cdecl(DNA::PropertyBag *)> *v6; // [rsp+48h] [rbp+10h]
-  DNA::Event<void __cdecl(DNA::PropertyBag *)> *v7; // [rsp+48h] [rbp+10h]
-  UFG::qList<DNA::PropertyChangedEvent,DNA::PropertyChangedEvent,1,0> *v8; // [rsp+48h] [rbp+10h]
-
-  v1 = this;
   this->PropertyBagCreated.mDelegates.p = 0i64;
   *(_QWORD *)&this->PropertyBagCreated.mDelegates.size = 0i64;
-  v6 = &this->PropertyBagDeleted;
-  v6->mDelegates.p = 0i64;
-  *(_QWORD *)&v6->mDelegates.size = 0i64;
-  v7 = &this->PropertyBagMarkedDirty;
-  v7->mDelegates.p = 0i64;
-  *(_QWORD *)&v7->mDelegates.size = 0i64;
+  this->PropertyBagDeleted.mDelegates.p = 0i64;
+  *(_QWORD *)&this->PropertyBagDeleted.mDelegates.size = 0i64;
+  this->PropertyBagMarkedDirty.mDelegates.p = 0i64;
+  *(_QWORD *)&this->PropertyBagMarkedDirty.mDelegates.size = 0i64;
   this->mBroadcastChangeNotifications = 0;
-  v2 = &this->mPropertyBags;
-  v2->mTree.mHead.mUID = 0i64;
-  v2->mTree.mHead.mParent = &v2->mTree.mHead;
-  v2->mTree.mHead.mChildren[0] = &v2->mTree.mHead;
-  v2->mTree.mHead.mChildren[1] = &v2->mTree.mHead;
-  v2->mTree.mHead.mNeighbours[0] = &v2->mTree.mHead;
-  v2->mTree.mHead.mNeighbours[1] = &v2->mTree.mHead;
-  v2->mTree.mCount = 0i64;
-  v3 = &this->mPropertyBagsInternal;
-  v3->mTree.mHead.mUID = 0i64;
-  v3->mTree.mHead.mParent = &v3->mTree.mHead;
-  v3->mTree.mHead.mChildren[0] = &v3->mTree.mHead;
-  v3->mTree.mHead.mChildren[1] = &v3->mTree.mHead;
-  v3->mTree.mHead.mNeighbours[0] = &v3->mTree.mHead;
-  v3->mTree.mHead.mNeighbours[1] = &v3->mTree.mHead;
-  v3->mTree.mCount = 0i64;
-  v4 = &this->mSchemaTypes;
-  v4->mTree.mHead.mUID = 0i64;
-  v4->mTree.mHead.mParent = &v4->mTree.mHead;
-  v4->mTree.mHead.mChildren[0] = &v4->mTree.mHead;
-  v4->mTree.mHead.mChildren[1] = &v4->mTree.mHead;
-  v4->mTree.mHead.mNeighbours[0] = &v4->mTree.mHead;
-  v4->mTree.mHead.mNeighbours[1] = &v4->mTree.mHead;
-  v4->mTree.mCount = 0i64;
-  v5 = &this->mSchemaEnums;
-  v5->mTree.mHead.mUID = 0i64;
-  v5->mTree.mHead.mParent = &v5->mTree.mHead;
-  v5->mTree.mHead.mChildren[0] = &v5->mTree.mHead;
-  v5->mTree.mHead.mChildren[1] = &v5->mTree.mHead;
-  v5->mTree.mHead.mNeighbours[0] = &v5->mTree.mHead;
-  v5->mTree.mHead.mNeighbours[1] = &v5->mTree.mHead;
-  v5->mTree.mCount = 0i64;
-  v8 = &this->mQueuedChangeEvents;
-  v8->mNode.mPrev = &v8->mNode;
-  v8->mNode.mNext = &v8->mNode;
+  this->mPropertyBags.mTree.mHead.mUID = 0i64;
+  this->mPropertyBags.mTree.mHead.mParent = &this->mPropertyBags.mTree.mHead;
+  this->mPropertyBags.mTree.mHead.mChildren[0] = &this->mPropertyBags.mTree.mHead;
+  this->mPropertyBags.mTree.mHead.mChildren[1] = &this->mPropertyBags.mTree.mHead;
+  this->mPropertyBags.mTree.mHead.mNeighbours[0] = &this->mPropertyBags.mTree.mHead;
+  this->mPropertyBags.mTree.mHead.mNeighbours[1] = &this->mPropertyBags.mTree.mHead;
+  this->mPropertyBags.mTree.mCount = 0i64;
+  this->mPropertyBagsInternal.mTree.mHead.mUID = 0i64;
+  this->mPropertyBagsInternal.mTree.mHead.mParent = &this->mPropertyBagsInternal.mTree.mHead;
+  this->mPropertyBagsInternal.mTree.mHead.mChildren[0] = &this->mPropertyBagsInternal.mTree.mHead;
+  this->mPropertyBagsInternal.mTree.mHead.mChildren[1] = &this->mPropertyBagsInternal.mTree.mHead;
+  this->mPropertyBagsInternal.mTree.mHead.mNeighbours[0] = &this->mPropertyBagsInternal.mTree.mHead;
+  this->mPropertyBagsInternal.mTree.mHead.mNeighbours[1] = &this->mPropertyBagsInternal.mTree.mHead;
+  this->mPropertyBagsInternal.mTree.mCount = 0i64;
+  this->mSchemaTypes.mTree.mHead.mUID = 0i64;
+  this->mSchemaTypes.mTree.mHead.mParent = &this->mSchemaTypes.mTree.mHead;
+  this->mSchemaTypes.mTree.mHead.mChildren[0] = &this->mSchemaTypes.mTree.mHead;
+  this->mSchemaTypes.mTree.mHead.mChildren[1] = &this->mSchemaTypes.mTree.mHead;
+  this->mSchemaTypes.mTree.mHead.mNeighbours[0] = &this->mSchemaTypes.mTree.mHead;
+  this->mSchemaTypes.mTree.mHead.mNeighbours[1] = &this->mSchemaTypes.mTree.mHead;
+  this->mSchemaTypes.mTree.mCount = 0i64;
+  this->mSchemaEnums.mTree.mHead.mUID = 0i64;
+  this->mSchemaEnums.mTree.mHead.mParent = &this->mSchemaEnums.mTree.mHead;
+  this->mSchemaEnums.mTree.mHead.mChildren[0] = &this->mSchemaEnums.mTree.mHead;
+  this->mSchemaEnums.mTree.mHead.mChildren[1] = &this->mSchemaEnums.mTree.mHead;
+  this->mSchemaEnums.mTree.mHead.mNeighbours[0] = &this->mSchemaEnums.mTree.mHead;
+  this->mSchemaEnums.mTree.mHead.mNeighbours[1] = &this->mSchemaEnums.mTree.mHead;
+  this->mSchemaEnums.mTree.mCount = 0i64;
+  this->mQueuedChangeEvents.mNode.mPrev = &this->mQueuedChangeEvents.mNode;
+  this->mQueuedChangeEvents.mNode.mNext = &this->mQueuedChangeEvents.mNode;
   this->mQueuedReloadEvents.p = 0i64;
   *(_QWORD *)&this->mQueuedReloadEvents.size = 0i64;
   DNA::ActionManager::ActionManager(&this->mActionManager);
-  UFG::qMutex::qMutex(&v1->mMutex, &customWorldMapCaption);
+  UFG::qMutex::qMutex(&this->mMutex, &customCaption);
 }
 
 // File Line: 219
 // RVA: 0x1A3AC0
-void __fastcall DNA::Database::Unload(DNA::Database *this, const char *filePath)
+void __fastcall DNA::Database::Unload(DNA::Database *this, char *filePath)
 {
-  DNA::Database *v2; // r14
   DNA::IQueryNode *v3; // rsi
   DNA::PropertyBag *i; // rdi
   UFG::allocator::free_link *v5; // rax
@@ -115,25 +97,24 @@ void __fastcall DNA::Database::Unload(DNA::Database *this, const char *filePath)
   __int64 *v7; // rcx
   __int64 *v8; // rax
   DNA::PropertyBagHandle *j; // rbx
-  DNA::PropertyBag *v10; // rax
+  UFG::qTree64Base *v10; // rax
   DNA::PropertyBagHandle *k; // rbx
-  UFG::qNode<DNA::PropertyBagHandle,DNA::PropertyBagHandle> *v12; // rcx
-  UFG::qNode<DNA::PropertyBagHandle,DNA::PropertyBagHandle> *v13; // rax
+  UFG::qNode<DNA::PropertyBagHandle,DNA::PropertyBagHandle> *mPrev; // rcx
+  UFG::qNode<DNA::PropertyBagHandle,DNA::PropertyBagHandle> *mNext; // rax
   __int64 *v14; // rcx
   DNA::PropertyBagHandle *v15; // rax
-  __int64 *v16; // [rsp+28h] [rbp-38h]
+  __int64 *v16; // [rsp+28h] [rbp-38h] BYREF
   DNA::PropertyBagHandle *v17; // [rsp+30h] [rbp-30h]
-  UFG::qString result; // [rsp+38h] [rbp-28h]
+  UFG::qString result; // [rsp+38h] [rbp-28h] BYREF
 
-  v2 = this;
   UFG::qCleanupFilepath(&result, filePath, 92);
   v3 = DNA::Query::FilePath(result.mData);
   v16 = (__int64 *)&v16;
   v17 = (DNA::PropertyBagHandle *)&v16;
-  UFG::qMutex::Lock((LPCRITICAL_SECTION)&v2->mMutex);
-  for ( i = (DNA::PropertyBag *)UFG::qTree64Base::GetHead(&v2->mPropertyBags.mTree);
+  UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mMutex);
+  for ( i = (DNA::PropertyBag *)UFG::qTree64Base::GetHead(&this->mPropertyBags.mTree);
         i;
-        i = (DNA::PropertyBag *)UFG::qTree64Base::GetNext(&v2->mPropertyBags.mTree, &i->mBaseNode) )
+        i = (DNA::PropertyBag *)UFG::qTree64Base::GetNext(&this->mPropertyBags.mTree, &i->mBaseNode) )
   {
     if ( v3 && v3->vfptr->Match(v3, i) )
     {
@@ -154,20 +135,20 @@ void __fastcall DNA::Database::Unload(DNA::Database *this, const char *filePath)
       v16 = v7;
     }
   }
-  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&v2->mMutex);
+  UFG::qMutex::Unlock((LPCRITICAL_SECTION)&this->mMutex);
   for ( j = v17; j != (DNA::PropertyBagHandle *)&v16; j = (DNA::PropertyBagHandle *)j->mNext )
   {
-    v10 = DNA::PropertyBagHandle::Get(j);
-    DNA::Database::DeleteBag(v2, v10);
+    v10 = (UFG::qTree64Base *)DNA::PropertyBagHandle::Get(j);
+    DNA::Database::DeleteBag(this, v10);
   }
   for ( k = v17; v17 != (DNA::PropertyBagHandle *)&v16; k = v17 )
   {
-    v12 = k->mPrev;
-    v13 = k->mNext;
-    v12->mNext = v13;
-    v13->mPrev = v12;
-    k->mPrev = (UFG::qNode<DNA::PropertyBagHandle,DNA::PropertyBagHandle> *)&k->mPrev;
-    k->mNext = (UFG::qNode<DNA::PropertyBagHandle,DNA::PropertyBagHandle> *)&k->mPrev;
+    mPrev = k->mPrev;
+    mNext = k->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    k->mPrev = k;
+    k->mNext = k;
     DNA::PropertyBagHandle::~PropertyBagHandle(k);
     operator delete[](k);
   }
@@ -178,7 +159,7 @@ void __fastcall DNA::Database::Unload(DNA::Database *this, const char *filePath)
   v16 = (__int64 *)&v16;
   v17 = (DNA::PropertyBagHandle *)&v16;
   if ( v3 )
-    ((void (__fastcall *)(DNA::IQueryNode *, signed __int64))v3->vfptr->~IQueryNode)(v3, 1i64);
+    ((void (__fastcall *)(DNA::IQueryNode *, __int64))v3->vfptr->~IQueryNode)(v3, 1i64);
   UFG::qString::~qString(&result);
 }
 
@@ -186,30 +167,30 @@ void __fastcall DNA::Database::Unload(DNA::Database *this, const char *filePath)
 // RVA: 0x1A2F70
 char __fastcall DNA::IsDefaultPropertyBagWrapper(DNA::PropertyBagWrapper *wrapper)
 {
-  UFG::qNode<DNA::PropertyWrapper,DNA::PropertyWrapper> *v1; // rsi
+  UFG::qNode<DNA::PropertyWrapper,DNA::PropertyWrapper> *mNext; // rsi
   unsigned int v2; // ebx
   DNA::SchemaField *v3; // rdi
-  signed int v4; // eax
-  DNA::PropertyData *v5; // rdi
-  const char *v6; // rax
-  DNA::PropertyInfo result; // [rsp+28h] [rbp-50h]
-  UFG::qString v9; // [rsp+40h] [rbp-38h]
-  DNA::PropertyBagWrapper *v; // [rsp+A0h] [rbp+28h]
+  int mArrayLength; // eax
+  DNA::PropertyData *Property; // rdi
+  const char *DefaultValue; // rax
+  DNA::PropertyInfo result; // [rsp+28h] [rbp-50h] BYREF
+  UFG::qString v9; // [rsp+40h] [rbp-38h] BYREF
+  DNA::PropertyBagWrapper *v; // [rsp+A0h] [rbp+28h] BYREF
   DNA::PropertyBag *v11; // [rsp+A8h] [rbp+30h]
   DNA::SchemaField *v12; // [rsp+B0h] [rbp+38h]
-  UFG::qList<DNA::PropertyWrapper,DNA::PropertyWrapper,1,0> *v13; // [rsp+B8h] [rbp+40h]
+  UFG::qList<DNA::PropertyWrapper,DNA::PropertyWrapper,1,0> *p_mProperties; // [rsp+B8h] [rbp+40h]
 
   v11 = *wrapper->mPropertyBags.p;
-  v1 = wrapper->mProperties.mNode.mNext;
-  v13 = &wrapper->mProperties;
-  if ( v1 == (UFG::qNode<DNA::PropertyWrapper,DNA::PropertyWrapper> *)&wrapper->mProperties )
+  mNext = wrapper->mProperties.mNode.mNext;
+  p_mProperties = &wrapper->mProperties;
+  if ( mNext == (UFG::qNode<DNA::PropertyWrapper,DNA::PropertyWrapper> *)&wrapper->mProperties )
     return 1;
   v2 = 0;
   while ( 1 )
   {
-    v3 = (DNA::SchemaField *)v1[1].mNext;
-    v12 = (DNA::SchemaField *)v1[1].mNext;
-    DNA::PropertyWrapper::GetPropertyInfo((DNA::PropertyWrapper *)v1, &result);
+    v3 = (DNA::SchemaField *)mNext[1].mNext;
+    v12 = v3;
+    DNA::PropertyWrapper::GetPropertyInfo((DNA::PropertyWrapper *)mNext, &result);
     if ( result.Size )
     {
       if ( (result.Type != -915936389
@@ -224,12 +205,12 @@ char __fastcall DNA::IsDefaultPropertyBagWrapper(DNA::PropertyBagWrapper *wrappe
     *(_QWORD *)&result.States.size = 0i64;
 LABEL_23:
     result.States.p = 0i64;
-    v1 = v1->mNext;
-    if ( v1 == (UFG::qNode<DNA::PropertyWrapper,DNA::PropertyWrapper> *)v13 )
+    mNext = mNext->mNext;
+    if ( mNext == (UFG::qNode<DNA::PropertyWrapper,DNA::PropertyWrapper> *)p_mProperties )
       return 1;
   }
-  v4 = v3->mArrayLength;
-  if ( v4 < 2 && v4 != -1 || v4 != -1 )
+  mArrayLength = v3->mArrayLength;
+  if ( mArrayLength < 2 && mArrayLength != -1 || mArrayLength != -1 )
   {
     if ( result.Size )
     {
@@ -237,18 +218,18 @@ LABEL_23:
       {
         if ( result.Type == -915936389 )
         {
-          DNA::PropertyWrapper::Get((DNA::PropertyWrapper *)v1, v2, &v, 0);
+          DNA::PropertyWrapper::Get((DNA::PropertyWrapper *)mNext, v2, &v, 0);
           if ( !DNA::IsDefaultPropertyBagWrapper(v) )
             goto LABEL_26;
         }
         else
         {
-          v5 = DNA::PropertyBag::GetProperty(v11, v3->mName.mData);
+          Property = DNA::PropertyBag::GetProperty(v11, v3->mName.mData);
           UFG::qString::qString(&v9);
-          DNA::PropertyData::GetRaw(v5, v2, &v9);
+          DNA::PropertyData::GetRaw(Property, v2, &v9);
           v3 = v12;
-          v6 = DNA::SchemaField::GetDefaultValue(v12);
-          if ( !DNA::DataConverter::Equals(v3->mType, v6, v9.mData) )
+          DefaultValue = DNA::SchemaField::GetDefaultValue(v12);
+          if ( !DNA::DataConverter::Equals(v3->mType, DefaultValue, v9.mData) )
           {
             UFG::qString::~qString(&v9);
             goto LABEL_26;
@@ -277,239 +258,213 @@ LABEL_26:
 // RVA: 0x1A3610
 void __fastcall DNA::SaveWrapper(SimpleXML::XMLWriter *writer, DNA::PropertyBagWrapper *wrapper)
 {
-  DNA::PropertyBagWrapper *v2; // rbx
-  SimpleXML::XMLWriter *v3; // rdi
-  UFG::qString *v4; // rax
-  UFG::qString *v5; // rax
+  UFG::qString *Name; // rax
+  UFG::qString *SchemaName; // rax
   __int64 v6; // rsi
   unsigned __int64 v7; // rax
-  UFG::allocator::free_link *v8; // rax
-  DNA::PropertyBagWrapper **v9; // rdi
-  DNA::PropertyWrapper *v10; // rax
-  DNA::PropertyWrapper *v11; // r10
-  signed int v12; // ecx
-  unsigned int v13; // ebx
-  UFG::qString *v14; // rax
-  unsigned int v15; // ebx
-  UFG::qString *v16; // rax
-  __int64 v17; // rcx
-  unsigned int v18; // edi
-  unsigned int v19; // ebx
-  unsigned __int64 v20; // rax
-  UFG::allocator::free_link *v21; // rax
-  UFG::allocator::free_link *v22; // rdx
-  __int64 v23; // r8
-  DNA::PropertyBagWrapper **v24; // rbx
+  UFG::allocator::free_link *v8; // rdi
+  DNA::PropertyWrapper *mNext; // rax
+  DNA::PropertyWrapper *v10; // r10
+  int mArrayLength; // ecx
+  unsigned int v12; // ebx
+  UFG::qString *v13; // rax
+  unsigned int v14; // ebx
+  UFG::qString *v15; // rax
+  __int64 v16; // rcx
+  unsigned int v17; // edi
+  unsigned int v18; // ebx
+  unsigned __int64 v19; // rax
+  UFG::allocator::free_link *v20; // rax
+  UFG::allocator::free_link *v21; // rdx
+  __int64 v22; // r8
+  DNA::PropertyBagWrapper **v23; // rbx
   UFG::allocator::free_link *mem; // [rsp+28h] [rbp-D8h]
-  DNA::PropertyInfo v26; // [rsp+30h] [rbp-D0h]
-  UFG::allocator::free_link *v27; // [rsp+48h] [rbp-B8h]
-  UFG::qList<DNA::PropertyWrapper,DNA::PropertyWrapper,1,0> *v28; // [rsp+50h] [rbp-B0h]
-  DNA::PropertyBag *v29; // [rsp+58h] [rbp-A8h]
-  DNA::PropertyData *v30; // [rsp+60h] [rbp-A0h]
-  DNA::PropertyBagWrapper *v; // [rsp+68h] [rbp-98h]
-  DNA::PropertyBagWrapper *v32; // [rsp+70h] [rbp-90h]
-  UFG::qString result; // [rsp+78h] [rbp-88h]
-  __int64 v34; // [rsp+A0h] [rbp-60h]
-  UFG::qString v35; // [rsp+A8h] [rbp-58h]
-  UFG::qString v36; // [rsp+D0h] [rbp-30h]
-  SimpleXML::XMLWriter *writera; // [rsp+130h] [rbp+30h]
-  DNA::SchemaField *v38; // [rsp+138h] [rbp+38h]
-  unsigned int v39; // [rsp+138h] [rbp+38h]
-  DNA::PropertyWrapper *v40; // [rsp+148h] [rbp+48h]
+  DNA::PropertyInfo v25; // [rsp+30h] [rbp-D0h] BYREF
+  unsigned __int64 v26; // [rsp+48h] [rbp-B8h]
+  UFG::qList<DNA::PropertyWrapper,DNA::PropertyWrapper,1,0> *i; // [rsp+50h] [rbp-B0h]
+  DNA::PropertyBag *v28; // [rsp+58h] [rbp-A8h]
+  DNA::PropertyData *Property; // [rsp+60h] [rbp-A0h]
+  DNA::PropertyBagWrapper *v; // [rsp+68h] [rbp-98h] BYREF
+  DNA::PropertyBagWrapper *v31; // [rsp+70h] [rbp-90h] BYREF
+  UFG::qString result; // [rsp+78h] [rbp-88h] BYREF
+  __int64 v33; // [rsp+A0h] [rbp-60h]
+  UFG::qString v34; // [rsp+A8h] [rbp-58h] BYREF
+  UFG::qString v35; // [rsp+D0h] [rbp-30h] BYREF
+  DNA::SchemaField *mSchemaField; // [rsp+138h] [rbp+38h]
+  unsigned int j; // [rsp+138h] [rbp+38h]
+  DNA::PropertyWrapper *v39; // [rsp+148h] [rbp+48h]
 
-  writera = writer;
-  v34 = -2i64;
-  v2 = wrapper;
-  v3 = writer;
-  v29 = *wrapper->mPropertyBags.p;
+  v33 = -2i64;
+  v28 = *wrapper->mPropertyBags.p;
   SimpleXML::XMLWriter::BeginNode(writer, "PropertyBag");
-  SimpleXML::XMLWriter::AddAttribute(v3, "ID", v29->mBaseNode.mUID);
-  v4 = DNA::PropertyBag::GetName(v29, &result);
-  SimpleXML::XMLWriter::AddAttribute(v3, "Name", v4->mData, 1);
+  SimpleXML::XMLWriter::AddAttribute(writer, "ID", v28->mBaseNode.mUID);
+  Name = DNA::PropertyBag::GetName(v28, &result);
+  SimpleXML::XMLWriter::AddAttribute(writer, "Name", Name->mData, 1);
   UFG::qString::~qString(&result);
-  v5 = DNA::PropertyBag::GetSchemaName(v29, &result);
-  SimpleXML::XMLWriter::AddAttribute(v3, "SchemaName", v5->mData, 1);
+  SchemaName = DNA::PropertyBag::GetSchemaName(v28, &result);
+  SimpleXML::XMLWriter::AddAttribute(writer, "SchemaName", SchemaName->mData, 1);
   UFG::qString::~qString(&result);
-  SimpleXML::XMLWriter::AddAttribute(v3, "Checksum", v2->mSchema->mReflectionType->mChecksum);
+  SimpleXML::XMLWriter::AddAttribute(writer, "Checksum", wrapper->mSchema->mReflectionType->mChecksum);
   v6 = 0i64;
-  v27 = (UFG::allocator::free_link *)16;
+  v26 = 16i64;
   v7 = 128i64;
   if ( !is_mul_ok(0x10ui64, 8ui64) )
     v7 = -1i64;
   v8 = UFG::qMalloc(v7, "qArray.Reallocate(Constructor)", 0i64);
-  v9 = (DNA::PropertyBagWrapper **)v8;
   mem = v8;
-  v10 = (DNA::PropertyWrapper *)v2->mProperties.mNode.mNext;
-  v40 = v10;
-  v28 = &v2->mProperties;
-  if ( v10 != (DNA::PropertyWrapper *)&v2->mProperties )
+  mNext = (DNA::PropertyWrapper *)wrapper->mProperties.mNode.mNext;
+  v39 = mNext;
+  for ( i = &wrapper->mProperties; mNext != (DNA::PropertyWrapper *)i; v39 = mNext )
   {
-    while ( 1 )
+    mSchemaField = mNext->mSchemaField;
+    DNA::PropertyWrapper::GetPropertyInfo(mNext, &v25);
+    if ( v25.Size )
     {
-      v38 = v10->mSchemaField;
-      DNA::PropertyWrapper::GetPropertyInfo(v10, &v26);
-      if ( v26.Size )
+      if ( v25.Type == -915936389 )
       {
-        if ( v26.Type != -915936389 )
-          goto LABEL_16;
-        v11 = v40;
-        v12 = v40->mSchemaField->mArrayLength;
-        if ( (v12 >= 2 || v12 == -1) && v12 == -1 )
-          goto LABEL_16;
-        v13 = 0;
-        if ( v26.Size )
-          break;
+        if ( (v10 = v39, mArrayLength = v39->mSchemaField->mArrayLength, mArrayLength < 2) && mArrayLength != -1
+          || mArrayLength != -1 )
+        {
+          v12 = 0;
+          while ( 1 )
+          {
+            DNA::PropertyWrapper::Get(v10, v12, &v, 0);
+            if ( !DNA::IsDefaultPropertyBagWrapper(v) )
+              break;
+            ++v12;
+            v10 = v39;
+            if ( v12 >= v25.Size )
+              goto LABEL_5;
+          }
+        }
       }
-LABEL_5:
-      if ( v26.States.p )
-        operator delete[](v26.States.p);
-      v26.States.p = 0i64;
-      *(_QWORD *)&v26.States.size = 0i64;
-LABEL_44:
-      v10 = (DNA::PropertyWrapper *)v40->mNext;
-      v40 = v10;
-      if ( v10 == (DNA::PropertyWrapper *)v28 )
-        goto LABEL_45;
-    }
-    while ( 1 )
-    {
-      DNA::PropertyWrapper::Get(v11, v13, &v, 0);
-      if ( !DNA::IsDefaultPropertyBagWrapper(v) )
-        break;
-      ++v13;
-      v11 = v40;
-      if ( v13 >= v26.Size )
-        goto LABEL_5;
-    }
-LABEL_16:
-    SimpleXML::XMLWriter::BeginNode(writera, "Property");
-    SimpleXML::XMLWriter::AddAttribute(writera, "Name", v38->mName.mData, 1);
-    v14 = UFG::qToHex(&v35, v26.Type);
-    SimpleXML::XMLWriter::AddAttribute(writera, "Type", v14->mData, 1);
-    UFG::qString::~qString(&v35);
-    if ( v26.Size != 1 )
-      SimpleXML::XMLWriter::AddAttribute(writera, "Count", v26.Size);
-    v30 = DNA::PropertyBag::GetProperty(v29, v38->mName.mData);
-    v15 = 0;
-    v39 = 0;
-    if ( v26.Size )
-    {
-      do
+      SimpleXML::XMLWriter::BeginNode(writer, "Property");
+      SimpleXML::XMLWriter::AddAttribute(writer, "Name", mSchemaField->mName.mData, 1);
+      v13 = UFG::qToHex(&v34, v25.Type);
+      SimpleXML::XMLWriter::AddAttribute(writer, "Type", v13->mData, 1);
+      UFG::qString::~qString(&v34);
+      if ( v25.Size != 1 )
+        SimpleXML::XMLWriter::AddAttribute(writer, "Count", v25.Size);
+      Property = DNA::PropertyBag::GetProperty(v28, mSchemaField->mName.mData);
+      v14 = 0;
+      for ( j = 0; v14 < v25.Size; j = v14 )
       {
         UFG::qString::qString(&result);
-        DNA::PropertyData::GetRaw(v30, v15, &result);
-        SimpleXML::XMLWriter::BeginNode(writera, "Value");
-        v16 = UFG::qToHex(&v36, v15);
-        SimpleXML::XMLWriter::AddAttribute(writera, "ID", v16->mData, 1);
-        UFG::qString::~qString(&v36);
-        SimpleXML::XMLWriter::AddValue(writera, result.mData, 1);
-        SimpleXML::XMLWriter::EndNode(writera, "Value");
-        if ( v26.Type == -915936389 )
+        DNA::PropertyData::GetRaw(Property, v14, &result);
+        SimpleXML::XMLWriter::BeginNode(writer, "Value");
+        v15 = UFG::qToHex(&v35, v14);
+        SimpleXML::XMLWriter::AddAttribute(writer, "ID", v15->mData, 1);
+        UFG::qString::~qString(&v35);
+        SimpleXML::XMLWriter::AddValue(writer, result.mData, 1);
+        SimpleXML::XMLWriter::EndNode(writer, "Value");
+        if ( v25.Type == -915936389 )
         {
-          DNA::PropertyWrapper::Get(v40, v15, &v32, 0);
-          v17 = (unsigned int)v6;
-          v18 = v6 + 1;
-          if ( (signed int)v6 + 1 > (unsigned int)v27 )
+          DNA::PropertyWrapper::Get(v39, v14, &v31, 0);
+          v16 = (unsigned int)v6;
+          v17 = v6 + 1;
+          if ( (int)v6 + 1 > (unsigned int)v26 )
           {
-            v19 = 1;
-            if ( (_DWORD)v27 )
-              v19 = 2 * (_DWORD)v27;
-            for ( ; v19 < v18; v19 *= 2 )
+            v18 = 1;
+            if ( (_DWORD)v26 )
+              v18 = 2 * v26;
+            for ( ; v18 < v17; v18 *= 2 )
               ;
-            if ( v19 <= 2 )
-              v19 = 2;
-            if ( v19 - v18 > 0x10000 )
-              v19 = v6 + 65537;
-            if ( v19 != (_DWORD)v6 )
+            if ( v18 <= 2 )
+              v18 = 2;
+            if ( v18 - v17 > 0x10000 )
+              v18 = v6 + 65537;
+            if ( v18 != (_DWORD)v6 )
             {
-              v20 = 8i64 * v19;
-              if ( !is_mul_ok(v19, 8ui64) )
-                v20 = -1i64;
-              v21 = UFG::qMalloc(v20, "qArray.Add", 0i64);
-              v27 = v21;
+              v19 = 8i64 * v18;
+              if ( !is_mul_ok(v18, 8ui64) )
+                v19 = -1i64;
+              v20 = UFG::qMalloc(v19, "qArray.Add", 0i64);
+              v26 = (unsigned __int64)v20;
               if ( mem )
               {
                 if ( (_DWORD)v6 )
                 {
-                  v22 = v21;
-                  v23 = (unsigned int)v6;
+                  v21 = v20;
+                  v22 = (unsigned int)v6;
                   do
                   {
-                    v22->mNext = *(UFG::allocator::free_link **)((char *)v22 + (char *)mem - (char *)v21);
-                    ++v22;
-                    --v23;
+                    v21->mNext = *(UFG::allocator::free_link **)((char *)v21 + (char *)mem - (char *)v20);
+                    ++v21;
+                    --v22;
                   }
-                  while ( v23 );
+                  while ( v22 );
                 }
                 operator delete[](mem);
-                v21 = v27;
+                v20 = (UFG::allocator::free_link *)v26;
               }
-              mem = v21;
-              v27 = (UFG::allocator::free_link *)v19;
-              v17 = (unsigned int)v6;
+              mem = v20;
+              v26 = v18;
+              v16 = (unsigned int)v6;
             }
-            v15 = v39;
+            v14 = j;
           }
-          v6 = v18;
-          v9 = (DNA::PropertyBagWrapper **)mem;
-          mem[v17].mNext = (UFG::allocator::free_link *)v32;
+          v6 = v17;
+          v8 = mem;
+          mem[v16].mNext = (UFG::allocator::free_link *)v31;
         }
         UFG::qString::~qString(&result);
-        v39 = ++v15;
+        ++v14;
       }
-      while ( v15 < v26.Size );
+      SimpleXML::XMLWriter::EndNode(writer, "Property");
+      if ( v25.States.p )
+        operator delete[](v25.States.p);
+      v25.States.p = 0i64;
+      *(_QWORD *)&v25.States.size = 0i64;
     }
-    SimpleXML::XMLWriter::EndNode(writera, "Property");
-    if ( v26.States.p )
-      operator delete[](v26.States.p);
-    v26.States.p = 0i64;
-    *(_QWORD *)&v26.States.size = 0i64;
-    goto LABEL_44;
+    else
+    {
+LABEL_5:
+      if ( v25.States.p )
+        operator delete[](v25.States.p);
+      v25.States.p = 0i64;
+      *(_QWORD *)&v25.States.size = 0i64;
+    }
+    mNext = (DNA::PropertyWrapper *)v39->mNext;
   }
-LABEL_45:
   if ( (_DWORD)v6 )
   {
-    v24 = v9;
+    v23 = (DNA::PropertyBagWrapper **)v8;
     do
     {
-      DNA::SaveWrapper(writera, *v24);
-      ++v24;
+      DNA::SaveWrapper(writer, *v23++);
       --v6;
     }
     while ( v6 );
-    v9 = (DNA::PropertyBagWrapper **)mem;
+    v8 = mem;
   }
-  SimpleXML::XMLWriter::EndNode(writera, "PropertyBag");
-  if ( v9 )
-    operator delete[](v9);
+  SimpleXML::XMLWriter::EndNode(writer, "PropertyBag");
+  if ( v8 )
+    operator delete[](v8);
 }
 
 // File Line: 581
 // RVA: 0x1A3560
-bool __fastcall DNA::Database::SaveToBuffer(DNA::Database *this, const char **buffer, unsigned int *buffer_size, DNA::PropertyBag *propertyBag)
+bool __fastcall DNA::Database::SaveToBuffer(
+        DNA::Database *this,
+        const char **buffer,
+        unsigned int *buffer_size,
+        DNA::PropertyBag *propertyBag)
 {
-  DNA::PropertyBag *v4; // rbx
-  unsigned int *v5; // rdi
-  const char **v6; // rsi
   SimpleXML::XMLWriter *v7; // rax
-  SimpleXML::XMLWriter *writer; // [rsp+20h] [rbp-48h]
-  __int64 v10; // [rsp+28h] [rbp-40h]
-  DNA::PropertyBagWrapper wrapper; // [rsp+30h] [rbp-38h]
+  SimpleXML::XMLWriter *writer[2]; // [rsp+20h] [rbp-48h] BYREF
+  DNA::PropertyBagWrapper wrapper; // [rsp+30h] [rbp-38h] BYREF
 
-  v10 = -2i64;
-  v4 = propertyBag;
-  v5 = buffer_size;
-  v6 = buffer;
-  v7 = (SimpleXML::XMLWriter *)SimpleXML::XMLWriter::CreateBuffer(0x400u, 1);
-  writer = v7;
+  writer[1] = (SimpleXML::XMLWriter *)-2i64;
+  v7 = SimpleXML::XMLWriter::CreateBuffer(0x400u, 1);
+  writer[0] = v7;
   if ( v7 )
   {
     SimpleXML::XMLWriter::BeginNode(v7, "DNAFile");
-    DNA::PropertyBagWrapper::PropertyBagWrapper(&wrapper, v4);
-    DNA::SaveWrapper(writer, &wrapper);
-    SimpleXML::XMLWriter::EndNode(writer, "DNAFile");
-    *v6 = SimpleXML::XMLWriter::CloseBuffer(&writer, v5);
-    writer = 0i64;
+    DNA::PropertyBagWrapper::PropertyBagWrapper(&wrapper, propertyBag);
+    DNA::SaveWrapper(writer[0], &wrapper);
+    SimpleXML::XMLWriter::EndNode(writer[0], "DNAFile");
+    *buffer = SimpleXML::XMLWriter::CloseBuffer((SimpleXML::XMLWriterData ***)writer, buffer_size);
+    writer[0] = 0i64;
     DNA::PropertyBagWrapper::~PropertyBagWrapper(&wrapper);
     LOBYTE(v7) = 1;
   }
@@ -520,55 +475,50 @@ bool __fastcall DNA::Database::SaveToBuffer(DNA::Database *this, const char **bu
 // RVA: 0x1A2BF0
 unsigned __int64 __fastcall DNA::Database::GenUID(DNA::Database *this)
 {
-  DNA::Database *v1; // rsi
-  _RTL_CRITICAL_SECTION *v2; // rbx
-  char *v3; // rdi
-  unsigned __int64 v4; // rax
+  _RTL_CRITICAL_SECTION *p_mMutex; // rbx
+  char *mData; // rdi
+  unsigned __int64 Ticks; // rax
   unsigned __int64 v5; // rdi
-  UFG::qString result; // [rsp+28h] [rbp-40h]
+  UFG::qString result; // [rsp+28h] [rbp-40h] BYREF
 
-  v1 = this;
-  v2 = (_RTL_CRITICAL_SECTION *)&this->mMutex;
+  p_mMutex = (_RTL_CRITICAL_SECTION *)&this->mMutex;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mMutex);
   do
   {
     do
     {
-      v3 = UFG::qGetUserName(&result)->mData;
-      v4 = UFG::qGetTicks();
-      v5 = UFG::qStringHash64(v3, v4) ^ 0x7FFFFFFFFFFFFFE7i64;
+      mData = UFG::qGetUserName(&result)->mData;
+      Ticks = UFG::qGetTicks();
+      v5 = UFG::qStringHash64(mData, Ticks) ^ 0x7FFFFFFFFFFFFFE7i64;
       UFG::qString::~qString(&result);
     }
-    while ( UFG::qTree64Base::Get(&v1->mPropertyBags.mTree, v5) );
+    while ( UFG::qTree64Base::Get(&this->mPropertyBags.mTree, v5) );
   }
-  while ( UFG::qTree64Base::Get(&v1->mPropertyBagsInternal.mTree, v5) );
-  UFG::qMutex::Unlock(v2);
+  while ( UFG::qTree64Base::Get(&this->mPropertyBagsInternal.mTree, v5) );
+  UFG::qMutex::Unlock(p_mMutex);
   return v5;
 }
 
 // File Line: 625
 // RVA: 0x1A26F0
-DNA::PropertyBag *__fastcall DNA::Database::CreateBag(DNA::Database *this, const char *name, const char *schemaName, const char *filePath, unsigned __int64 id)
+DNA::PropertyBag *__fastcall DNA::Database::CreateBag(
+        DNA::Database *this,
+        const char *name,
+        const char *schemaName,
+        char *filePath,
+        unsigned __int64 id)
 {
-  const char *v5; // rdi
-  const char *v6; // r14
-  const char *v7; // r15
-  DNA::Database *v8; // rbp
-  _RTL_CRITICAL_SECTION *v9; // rbx
+  _RTL_CRITICAL_SECTION *p_mMutex; // rbx
   UFG::allocator::free_link *v10; // rax
   unsigned int v11; // edi
   DNA::PropertyBag *v12; // rax
   DNA::PropertyBag *v13; // rsi
-  signed __int64 v14; // rcx
-  UFG::qString result; // [rsp+30h] [rbp-48h]
+  fastdelegate::FastDelegate1<DNA::PropertyBag *,void> *v14; // rcx
+  UFG::qString result; // [rsp+30h] [rbp-48h] BYREF
 
-  v5 = filePath;
-  v6 = schemaName;
-  v7 = name;
-  v8 = this;
-  v9 = (_RTL_CRITICAL_SECTION *)&this->mMutex;
+  p_mMutex = (_RTL_CRITICAL_SECTION *)&this->mMutex;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mMutex);
-  UFG::qCleanupFilepath(&result, v5, 92);
+  UFG::qCleanupFilepath(&result, filePath, 92);
   v10 = UFG::qMalloc(0x80ui64, "DNA::PropertyBag", 0i64);
   v11 = 0;
   if ( v10 )
@@ -580,52 +530,50 @@ DNA::PropertyBag *__fastcall DNA::Database::CreateBag(DNA::Database *this, const
   {
     v13 = 0i64;
   }
-  DNA::PropertyBag::SetName(v13, v7);
-  DNA::PropertyBag::SetSchemaName(v13, v6);
+  DNA::PropertyBag::SetName(v13, name);
+  DNA::PropertyBag::SetSchemaName(v13, schemaName);
   DNA::PropertyBag::SetFilePath(v13, result.mData);
-  UFG::qTree64Base::Add(&v8->mPropertyBags.mTree, &v13->mBaseNode);
-  if ( v8->PropertyBagCreated.mDelegates.size )
+  UFG::qTree64Base::Add(&this->mPropertyBags.mTree, &v13->mBaseNode);
+  if ( this->PropertyBagCreated.mDelegates.size )
   {
     do
     {
-      v14 = (signed __int64)&v8->PropertyBagCreated.mDelegates.p[v11];
-      (*(void (__fastcall **)(_QWORD, DNA::PropertyBag *))(v14 + 8))(*(_QWORD *)v14, v13);
+      v14 = &this->PropertyBagCreated.mDelegates.p[v11];
+      ((void (__fastcall *)(fastdelegate::detail::GenericClass *, DNA::PropertyBag *))v14->m_Closure.m_pFunction)(
+        v14->m_Closure.m_pthis,
+        v13);
       ++v11;
     }
-    while ( v11 < v8->PropertyBagCreated.mDelegates.size );
+    while ( v11 < this->PropertyBagCreated.mDelegates.size );
   }
   UFG::qString::~qString(&result);
-  UFG::qMutex::Unlock(v9);
+  UFG::qMutex::Unlock(p_mMutex);
   return v13;
 }
 
 // File Line: 643
 // RVA: 0x1A2810
-DNA::PropertyBag *__fastcall DNA::Database::CreateBag(DNA::Database *this, const char *name, const char *schemaName, DNA::PropertyBag *owner)
+DNA::PropertyBag *__fastcall DNA::Database::CreateBag(
+        DNA::Database *this,
+        const char *name,
+        const char *schemaName,
+        DNA::PropertyBag *owner)
 {
-  DNA::PropertyBag *v4; // r14
-  const char *v5; // r15
-  const char *v6; // r12
-  DNA::Database *v7; // rbp
-  _RTL_CRITICAL_SECTION *v8; // rbx
+  _RTL_CRITICAL_SECTION *p_mMutex; // rbx
   UFG::allocator::free_link *v9; // rsi
   unsigned int v10; // edi
   unsigned __int64 v11; // rax
   DNA::PropertyBag *v12; // rax
   DNA::PropertyBag *v13; // rsi
-  signed __int64 v14; // rcx
+  fastdelegate::FastDelegate1<DNA::PropertyBag *,void> *v14; // rcx
 
-  v4 = owner;
-  v5 = schemaName;
-  v6 = name;
-  v7 = this;
-  v8 = (_RTL_CRITICAL_SECTION *)&this->mMutex;
+  p_mMutex = (_RTL_CRITICAL_SECTION *)&this->mMutex;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mMutex);
   v9 = UFG::qMalloc(0x80ui64, "DNA::PropertyBag", 0i64);
   v10 = 0;
   if ( v9 )
   {
-    v11 = DNA::Database::GenUID(v7);
+    v11 = DNA::Database::GenUID(this);
     DNA::PropertyBag::PropertyBag((DNA::PropertyBag *)v9, v11);
     v13 = v12;
   }
@@ -633,227 +581,203 @@ DNA::PropertyBag *__fastcall DNA::Database::CreateBag(DNA::Database *this, const
   {
     v13 = 0i64;
   }
-  DNA::PropertyBag::SetName(v13, v6);
-  DNA::PropertyBag::SetSchemaName(v13, v5);
-  DNA::PropertyBag::SetOwner(v13, v4);
-  UFG::qTree64Base::Add(&v7->mPropertyBagsInternal.mTree, &v13->mBaseNode);
-  if ( v7->PropertyBagCreated.mDelegates.size )
+  DNA::PropertyBag::SetName(v13, name);
+  DNA::PropertyBag::SetSchemaName(v13, schemaName);
+  DNA::PropertyBag::SetOwner(v13, owner);
+  UFG::qTree64Base::Add(&this->mPropertyBagsInternal.mTree, &v13->mBaseNode);
+  if ( this->PropertyBagCreated.mDelegates.size )
   {
     do
     {
-      v14 = (signed __int64)&v7->PropertyBagCreated.mDelegates.p[v10];
-      (*(void (__fastcall **)(_QWORD, DNA::PropertyBag *))(v14 + 8))(*(_QWORD *)v14, v13);
+      v14 = &this->PropertyBagCreated.mDelegates.p[v10];
+      ((void (__fastcall *)(fastdelegate::detail::GenericClass *, DNA::PropertyBag *))v14->m_Closure.m_pFunction)(
+        v14->m_Closure.m_pthis,
+        v13);
       ++v10;
     }
-    while ( v10 < v7->PropertyBagCreated.mDelegates.size );
+    while ( v10 < this->PropertyBagCreated.mDelegates.size );
   }
-  UFG::qMutex::Unlock(v8);
+  UFG::qMutex::Unlock(p_mMutex);
   return v13;
 }
 
 // File Line: 660
 // RVA: 0x1A2A00
-void __fastcall DNA::Database::DeleteBag(DNA::Database *this, DNA::PropertyBag *bag)
+void __fastcall DNA::Database::DeleteBag(DNA::Database *this, UFG::qTree64Base *bag)
 {
-  DNA::PropertyBag *v2; // rdi
-  DNA::Database *v3; // rbp
-  _RTL_CRITICAL_SECTION *v4; // rbx
-  unsigned int v5; // esi
-  signed __int64 v6; // rcx
+  _RTL_CRITICAL_SECTION *p_mMutex; // rbx
+  unsigned int i; // esi
+  fastdelegate::FastDelegate1<DNA::PropertyBag *,void> *v6; // rcx
 
-  v2 = bag;
-  v3 = this;
-  v4 = (_RTL_CRITICAL_SECTION *)&this->mMutex;
+  p_mMutex = (_RTL_CRITICAL_SECTION *)&this->mMutex;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mMutex);
-  v5 = 0;
-  if ( v3->PropertyBagDeleted.mDelegates.size )
+  for ( i = 0; i < this->PropertyBagDeleted.mDelegates.size; ++i )
   {
-    do
-    {
-      v6 = (signed __int64)&v3->PropertyBagDeleted.mDelegates.p[v5];
-      (*(void (__fastcall **)(_QWORD, DNA::PropertyBag *))(v6 + 8))(*(_QWORD *)v6, v2);
-      ++v5;
-    }
-    while ( v5 < v3->PropertyBagDeleted.mDelegates.size );
+    v6 = &this->PropertyBagDeleted.mDelegates.p[i];
+    ((void (__fastcall *)(fastdelegate::detail::GenericClass *, UFG::qTree64Base *))v6->m_Closure.m_pFunction)(
+      v6->m_Closure.m_pthis,
+      bag);
   }
-  if ( UFG::qTree64Base::Contains(&v3->mPropertyBags.mTree, v2->mBaseNode.mUID) )
-    UFG::qTree64Base::Remove(&v3->mPropertyBags.mTree, &v2->mBaseNode);
-  if ( UFG::qTree64Base::Contains(&v3->mPropertyBagsInternal.mTree, v2->mBaseNode.mUID) )
-    UFG::qTree64Base::Remove(&v3->mPropertyBagsInternal.mTree, &v2->mBaseNode);
-  DNA::PropertyBag::~PropertyBag(v2);
-  operator delete[](v2);
-  UFG::qMutex::Unlock(v4);
+  if ( UFG::qTree64Base::Contains(&this->mPropertyBags.mTree, bag->mHead.mUID) )
+    UFG::qTree64Base::Remove(&this->mPropertyBags.mTree, bag);
+  if ( UFG::qTree64Base::Contains(&this->mPropertyBagsInternal.mTree, bag->mHead.mUID) )
+    UFG::qTree64Base::Remove(&this->mPropertyBagsInternal.mTree, bag);
+  DNA::PropertyBag::~PropertyBag((DNA::PropertyBag *)bag);
+  operator delete[](bag);
+  UFG::qMutex::Unlock(p_mMutex);
 }
 
 // File Line: 769
 // RVA: 0x1A3370
-void __fastcall DNA::Database::OnOwnerChanged(DNA::Database *this, DNA::PropertyBag *bag, DNA::PropertyBag *owner)
+void __fastcall DNA::Database::OnOwnerChanged(DNA::Database *this, UFG::qTree64Base *bag, DNA::PropertyBag *owner)
 {
-  DNA::PropertyBag *v3; // rdi
-  DNA::PropertyBag *v4; // rsi
-  DNA::Database *v5; // rbp
-  _RTL_CRITICAL_SECTION *v6; // rbx
-  unsigned __int64 v7; // rdx
-  UFG::qTree64Base *v8; // rcx
+  _RTL_CRITICAL_SECTION *p_mMutex; // rbx
+  unsigned __int64 mUID; // rdx
+  UFG::qTree64<DNA::PropertyBag,DNA::PropertyBag,0> *p_mPropertyBagsInternal; // rcx
 
-  v3 = owner;
-  v4 = bag;
-  v5 = this;
-  v6 = (_RTL_CRITICAL_SECTION *)&this->mMutex;
+  p_mMutex = (_RTL_CRITICAL_SECTION *)&this->mMutex;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mMutex);
-  v7 = v4->mBaseNode.mUID;
-  if ( v3 )
+  mUID = bag->mHead.mUID;
+  if ( owner )
   {
-    if ( UFG::qTree64Base::Contains(&v5->mPropertyBags.mTree, v7) )
+    if ( UFG::qTree64Base::Contains(&this->mPropertyBags.mTree, mUID) )
     {
-      UFG::qTree64Base::Remove(&v5->mPropertyBags.mTree, &v4->mBaseNode);
-      v8 = &v5->mPropertyBagsInternal.mTree;
+      UFG::qTree64Base::Remove(&this->mPropertyBags.mTree, bag);
+      p_mPropertyBagsInternal = &this->mPropertyBagsInternal;
 LABEL_6:
-      UFG::qTree64Base::Add(v8, &v4->mBaseNode);
-      goto LABEL_7;
+      UFG::qTree64Base::Add(&p_mPropertyBagsInternal->mTree, &bag->mHead);
     }
   }
-  else if ( UFG::qTree64Base::Contains(&v5->mPropertyBagsInternal.mTree, v7) )
+  else if ( UFG::qTree64Base::Contains(&this->mPropertyBagsInternal.mTree, mUID) )
   {
-    UFG::qTree64Base::Remove(&v5->mPropertyBagsInternal.mTree, &v4->mBaseNode);
-    v8 = &v5->mPropertyBags.mTree;
+    UFG::qTree64Base::Remove(&this->mPropertyBagsInternal.mTree, bag);
+    p_mPropertyBagsInternal = &this->mPropertyBags;
     goto LABEL_6;
   }
-LABEL_7:
-  UFG::qMutex::Unlock(v6);
+  UFG::qMutex::Unlock(p_mMutex);
 }
 
 // File Line: 794
 // RVA: 0x1A2CE0
 UFG::qTree64Base *__fastcall DNA::Database::GetPropertyBag(DNA::Database *this, unsigned __int64 uid)
 {
-  unsigned __int64 v2; // rbp
-  DNA::Database *v3; // rsi
-  _RTL_CRITICAL_SECTION *v4; // rbx
+  _RTL_CRITICAL_SECTION *p_mMutex; // rbx
   UFG::qTree64Base *v5; // rdi
 
-  v2 = uid;
-  v3 = this;
-  v4 = (_RTL_CRITICAL_SECTION *)&this->mMutex;
+  p_mMutex = (_RTL_CRITICAL_SECTION *)&this->mMutex;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mMutex);
-  v5 = UFG::qTree64Base::Get(&v3->mPropertyBags.mTree, v2);
+  v5 = UFG::qTree64Base::Get(&this->mPropertyBags.mTree, uid);
   if ( !v5 )
-    v5 = UFG::qTree64Base::Get(&v3->mPropertyBagsInternal.mTree, v2);
-  UFG::qMutex::Unlock(v4);
+    v5 = UFG::qTree64Base::Get(&this->mPropertyBagsInternal.mTree, uid);
+  UFG::qMutex::Unlock(p_mMutex);
   return v5;
 }
 
 // File Line: 806
 // RVA: 0x1A2D70
-void __fastcall DNA::Database::GetPropertyBags(DNA::Database *this, DNA::Query *query, UFG::qList<DNA::PropertyBagHandle,DNA::PropertyBagHandle,1,0> *propertyBags)
+void __fastcall DNA::Database::GetPropertyBags(
+        DNA::Database *this,
+        DNA::Query *query,
+        UFG::qList<DNA::PropertyBagHandle,DNA::PropertyBagHandle,1,0> *propertyBags)
 {
-  UFG::qList<DNA::PropertyBagHandle,DNA::PropertyBagHandle,1,0> *v3; // rsi
-  DNA::Query *v4; // r14
-  DNA::Database *v5; // rbp
-  _RTL_CRITICAL_SECTION *v6; // rbx
+  _RTL_CRITICAL_SECTION *p_mMutex; // rbx
   DNA::PropertyBag *i; // rdi
   DNA::PropertyBagHandle *v8; // rax
-  UFG::qNode<DNA::PropertyBagHandle,DNA::PropertyBagHandle> *v9; // rcx
+  UFG::qNode<DNA::PropertyBagHandle,DNA::PropertyBagHandle> *mPrev; // rcx
 
-  v3 = propertyBags;
-  v4 = query;
-  v5 = this;
-  v6 = (_RTL_CRITICAL_SECTION *)&this->mMutex;
+  p_mMutex = (_RTL_CRITICAL_SECTION *)&this->mMutex;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mMutex);
-  for ( i = (DNA::PropertyBag *)UFG::qTree64Base::GetHead(&v5->mPropertyBags.mTree);
+  for ( i = (DNA::PropertyBag *)UFG::qTree64Base::GetHead(&this->mPropertyBags.mTree);
         i;
-        i = (DNA::PropertyBag *)UFG::qTree64Base::GetNext(&v5->mPropertyBags.mTree, &i->mBaseNode) )
+        i = (DNA::PropertyBag *)UFG::qTree64Base::GetNext(&this->mPropertyBags.mTree, &i->mBaseNode) )
   {
-    if ( v4->mRoot && v4->mRoot->vfptr->Match(v4->mRoot, i) )
+    if ( query->mRoot
+      && ((__int64 (__fastcall *)(DNA::IQueryNode *, DNA::PropertyBag *))query->mRoot->vfptr->Match)(query->mRoot, i) )
     {
       v8 = (DNA::PropertyBagHandle *)UFG::qMalloc(0x20ui64, "DNA::PropertyBagHandle", 0i64);
       if ( v8 )
         DNA::PropertyBagHandle::PropertyBagHandle(v8, i);
-      v9 = v3->mNode.mPrev;
-      v9->mNext = (UFG::qNode<DNA::PropertyBagHandle,DNA::PropertyBagHandle> *)&v8->mPrev;
-      v8->mPrev = v9;
-      v8->mNext = &v3->mNode;
-      v3->mNode.mPrev = (UFG::qNode<DNA::PropertyBagHandle,DNA::PropertyBagHandle> *)&v8->mPrev;
+      mPrev = propertyBags->mNode.mPrev;
+      mPrev->mNext = v8;
+      v8->mPrev = mPrev;
+      v8->mNext = &propertyBags->mNode;
+      propertyBags->mNode.mPrev = v8;
     }
   }
-  UFG::qMutex::Unlock(v6);
+  UFG::qMutex::Unlock(p_mMutex);
 }
 
 // File Line: 819
 // RVA: 0x1A3140
-__int64 __fastcall DNA::Database::LoadReflectionDatabase(DNA::Database *this, const char *filePath, bool validate_type_sizes)
+__int64 __fastcall DNA::Database::LoadReflectionDatabase(
+        DNA::Database *this,
+        const char *filePath,
+        bool validate_type_sizes)
 {
-  bool v3; // r13
-  const char *v4; // rdi
-  DNA::Database *v5; // r15
-  _RTL_CRITICAL_SECTION *v6; // rbx
+  _RTL_CRITICAL_SECTION *p_mMutex; // rbx
   UFG::ReflectionDB *v7; // rax
   unsigned __int8 v8; // r12
   UFG::ReflectionDB *v9; // rax
-  UFG::qReflectType *v10; // rsi
-  unsigned __int64 v11; // rdi
+  UFG::qReflectType *Head; // rsi
+  unsigned __int64 mUID; // rdi
   UFG::ReflectionDB *v12; // rax
   UFG::qTree64Base *v13; // rdi
   UFG::allocator::free_link *v14; // rax
   UFG::ReflectionDB *v15; // rax
   UFG::ReflectionDB *v16; // rax
-  UFG::qReflectEnum *v17; // r14
+  UFG::qReflectEnum *Next; // r14
   UFG::allocator::free_link *v18; // rax
   UFG::qTree64Base::BaseNode *v19; // rax
   UFG::qTree64Base::BaseNode *v20; // rsi
-  UFG::allocator::free_link *v21; // rdi
-  UFG::allocator::free_link *v22; // rsi
+  UFG::allocator::free_link *mNext; // rdi
+  UFG::allocator::free_link *p_mParent; // rsi
   UFG::allocator::free_link *v23; // rax
   UFG::allocator::free_link *v24; // rcx
-  UFG::allocator::free_link *v25; // rcx
+  UFG::ReflectionDB *v25; // rax
   UFG::ReflectionDB *v26; // rax
-  UFG::ReflectionDB *v27; // rax
 
-  v3 = validate_type_sizes;
-  v4 = filePath;
-  v5 = this;
-  v6 = (_RTL_CRITICAL_SECTION *)&this->mMutex;
+  p_mMutex = (_RTL_CRITICAL_SECTION *)&this->mMutex;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mMutex);
   v7 = UFG::ReflectionDB::Instance();
-  v8 = UFG::ReflectionDB::Load(v7, v4);
+  v8 = UFG::ReflectionDB::Load(v7, filePath);
   if ( v8 )
   {
     v9 = UFG::ReflectionDB::Instance();
-    v10 = (UFG::qReflectType *)UFG::qTree64Base::GetHead(&v9->mTypes.mTree);
+    Head = (UFG::qReflectType *)UFG::qTree64Base::GetHead(&v9->mTypes.mTree);
     UFG::ReflectionDB::Instance();
-    while ( v10 )
+    while ( Head )
     {
-      v11 = v10->mBaseNode.mUID;
+      mUID = Head->mBaseNode.mUID;
       v12 = UFG::ReflectionDB::Instance();
-      v13 = UFG::qTree64Base::Get(&v12->mSchemas.mTree, v11);
+      v13 = UFG::qTree64Base::Get(&v12->mSchemas.mTree, mUID);
       v14 = UFG::qMalloc(0xE8ui64, "Database::SchemaType", 0i64);
       if ( v14 )
-        DNA::SchemaType::SchemaType((DNA::SchemaType *)v14, v10, (UFG::qReflectSchema *)v13);
-      UFG::qTree64Base::Add(&v5->mSchemaTypes.mTree, (UFG::qTree64Base::BaseNode *)v14);
+        DNA::SchemaType::SchemaType((DNA::SchemaType *)v14, Head, (UFG::qReflectSchema *)v13);
+      UFG::qTree64Base::Add(&this->mSchemaTypes.mTree, (UFG::qTree64Base::BaseNode *)v14);
       v15 = UFG::ReflectionDB::Instance();
-      v10 = (UFG::qReflectType *)UFG::qTree64Base::GetNext(&v15->mTypes.mTree, &v10->mBaseNode);
+      Head = (UFG::qReflectType *)UFG::qTree64Base::GetNext(&v15->mTypes.mTree, &Head->mBaseNode);
       UFG::ReflectionDB::Instance();
     }
     v16 = UFG::ReflectionDB::Instance();
-    v17 = (UFG::qReflectEnum *)UFG::qTree64Base::GetHead(&v16->mEnums.mTree);
+    Next = (UFG::qReflectEnum *)UFG::qTree64Base::GetHead(&v16->mEnums.mTree);
     UFG::ReflectionDB::Instance();
-    while ( v17 )
+    while ( Next )
     {
       v18 = UFG::qMalloc(0x48ui64, "Database::SchemaEnum", 0i64);
       if ( v18 )
       {
-        DNA::SchemaEnum::SchemaEnum((DNA::SchemaEnum *)v18, v17);
+        DNA::SchemaEnum::SchemaEnum((DNA::SchemaEnum *)v18, Next);
         v20 = v19;
       }
       else
       {
         v20 = 0i64;
       }
-      UFG::qTree64Base::Add(&v5->mSchemaEnums.mTree, v20);
-      v21 = (UFG::allocator::free_link *)v17->mValues.mNode.mNext;
-      if ( v21 != (UFG::allocator::free_link *)&v17->mValues )
+      UFG::qTree64Base::Add(&this->mSchemaEnums.mTree, v20);
+      mNext = (UFG::allocator::free_link *)Next->mValues.mNode.mNext;
+      if ( mNext != (UFG::allocator::free_link *)&Next->mValues )
       {
-        v22 = (UFG::allocator::free_link *)&v20[1].mParent;
+        p_mParent = (UFG::allocator::free_link *)&v20[1].mParent;
         do
         {
           v23 = UFG::qMalloc(0x50ui64, "Database::SchemaEnumValue", 0i64);
@@ -861,36 +785,35 @@ __int64 __fastcall DNA::Database::LoadReflectionDatabase(DNA::Database *this, co
           {
             v23->mNext = v23;
             v23[1].mNext = v23;
-            v23[2].mNext = v21;
-            v24 = v23 + 3;
-            v24->mNext = 0i64;
-            v24[1].mNext = v24;
-            v24[2].mNext = v24;
-            v24[3].mNext = v24;
-            v24[4].mNext = v24;
-            v24[5].mNext = v24;
-            v24[6].mNext = 0i64;
+            v23[2].mNext = mNext;
+            v23[3].mNext = 0i64;
+            v23[4].mNext = v23 + 3;
+            v23[5].mNext = v23 + 3;
+            v23[6].mNext = v23 + 3;
+            v23[7].mNext = v23 + 3;
+            v23[8].mNext = v23 + 3;
+            v23[9].mNext = 0i64;
           }
-          v25 = v22->mNext;
-          v25[1].mNext = v23;
-          v23->mNext = v25;
-          v23[1].mNext = v22;
-          v22->mNext = v23;
-          v21 = v21[1].mNext;
+          v24 = p_mParent->mNext;
+          v24[1].mNext = v23;
+          v23->mNext = v24;
+          v23[1].mNext = p_mParent;
+          p_mParent->mNext = v23;
+          mNext = mNext[1].mNext;
         }
-        while ( v21 != (UFG::allocator::free_link *)&v17->mValues );
+        while ( mNext != (UFG::allocator::free_link *)&Next->mValues );
       }
-      v26 = UFG::ReflectionDB::Instance();
-      v17 = (UFG::qReflectEnum *)UFG::qTree64Base::GetNext(&v26->mEnums.mTree, &v17->mBaseNode);
+      v25 = UFG::ReflectionDB::Instance();
+      Next = (UFG::qReflectEnum *)UFG::qTree64Base::GetNext(&v25->mEnums.mTree, &Next->mBaseNode);
       UFG::ReflectionDB::Instance();
     }
-    if ( v3 )
+    if ( validate_type_sizes )
     {
-      v27 = UFG::ReflectionDB::Instance();
-      UFG::ReflectionDB::ValidateClassSizes(v27);
+      v26 = UFG::ReflectionDB::Instance();
+      UFG::ReflectionDB::ValidateClassSizes(v26);
     }
   }
-  UFG::qMutex::Unlock(v6);
+  UFG::qMutex::Unlock(p_mMutex);
   return v8;
 }
 
@@ -898,34 +821,30 @@ __int64 __fastcall DNA::Database::LoadReflectionDatabase(DNA::Database *this, co
 // RVA: 0x1A2CB0
 UFG::qTree64Base *__fastcall DNA::Database::GetEnum(DNA::Database *this, const char *enumName)
 {
-  DNA::Database *v2; // rbx
   unsigned __int64 v3; // rax
 
-  v2 = this;
   v3 = UFG::qStringHash64(enumName, 0xFFFFFFFFFFFFFFFFui64);
-  return UFG::qTree64Base::Get(&v2->mSchemaEnums.mTree, v3);
+  return UFG::qTree64Base::Get(&this->mSchemaEnums.mTree, v3);
 }
 
 // File Line: 865
 // RVA: 0x1A2E50
 UFG::qTree64Base *__fastcall DNA::Database::GetSchema(DNA::Database *this, const char *schemaName)
 {
-  DNA::Database *v2; // rbx
   unsigned __int64 v3; // rax
 
-  v2 = this;
   v3 = UFG::qStringHash64(schemaName, 0xFFFFFFFFFFFFFFFFui64);
-  return UFG::qTree64Base::Get(&v2->mSchemaTypes.mTree, v3);
+  return UFG::qTree64Base::Get(&this->mSchemaTypes.mTree, v3);
 }
 
 // File Line: 995
 // RVA: 0x1A3420
 void __fastcall DNA::Database::OnStructureChanged(DNA::Database *this, DNA::PropertyData *data)
 {
-  _RTL_CRITICAL_SECTION *v2; // rbx
+  _RTL_CRITICAL_SECTION *p_mMutex; // rbx
 
-  v2 = (_RTL_CRITICAL_SECTION *)&this->mMutex;
+  p_mMutex = (_RTL_CRITICAL_SECTION *)&this->mMutex;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&this->mMutex);
-  UFG::qMutex::Unlock(v2);
+  UFG::qMutex::Unlock(p_mMutex);
 }
 

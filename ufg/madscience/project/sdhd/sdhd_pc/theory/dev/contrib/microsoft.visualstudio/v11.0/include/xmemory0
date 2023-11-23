@@ -3,6 +3,6 @@
 __int64 dynamic_initializer_for__std::_Error_objects_int_::_Generic_object__()
 {
   std::_Error_objects<int>::_Generic_object.vfptr = (std::error_categoryVtbl *)&std::_Generic_error_category::`vftable;
-  return atexit(dynamic_atexit_destructor_for__std::_Error_objects_int_::_Generic_object__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__std::_Error_objects_int_::_Generic_object__);
 }
 

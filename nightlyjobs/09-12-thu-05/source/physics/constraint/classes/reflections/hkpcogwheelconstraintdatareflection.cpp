@@ -70,30 +70,27 @@ hkClass *__fastcall hkpCogWheelConstraintData::staticClass()
 
 // File Line: 120
 // RVA: 0xD43710
-void __fastcall finishLoadedObjecthkpCogWheelConstraintData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpCogWheelConstraintData(hkpConstraintData *p, hkFinishLoadedObjectFlag finishing)
 {
-  _QWORD *v2; // rbx
-
   if ( p )
   {
-    v2 = p;
-    hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpCogWheelConstraintData::`vftable;
+    hkpConstraintData::hkpConstraintData(p, finishing);
+    p->vfptr = (hkBaseObjectVtbl *)&hkpCogWheelConstraintData::`vftable;
   }
 }
 
 // File Line: 126
 // RVA: 0xD43740
-void __fastcall cleanupLoadedObjecthkpCogWheelConstraintData(void *p)
+void __fastcall cleanupLoadedObjecthkpCogWheelConstraintData(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 130
 // RVA: 0xD43750
 void **__fastcall getVtablehkpCogWheelConstraintData()
 {
-  hkpConstraintData v1; // [rsp+20h] [rbp-C8h]
+  hkpConstraintData v1; // [rsp+20h] [rbp-C8h] BYREF
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
   return &hkpCogWheelConstraintData::`vftable;
@@ -110,8 +107,8 @@ void **dynamic_initializer_for__hkpCogWheelConstraintDataTypeInfo__()
   hkpCogWheelConstraintDataTypeInfo.m_typeName = "hkpCogWheelConstraintData";
   hkpCogWheelConstraintDataTypeInfo.m_vtable = result;
   hkpCogWheelConstraintDataTypeInfo.m_scopedName = "!hkpCogWheelConstraintData";
-  hkpCogWheelConstraintDataTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpCogWheelConstraintData;
-  hkpCogWheelConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpCogWheelConstraintData;
+  hkpCogWheelConstraintDataTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpCogWheelConstraintData;
+  hkpCogWheelConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpCogWheelConstraintData;
   return result;
 }
 

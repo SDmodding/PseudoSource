@@ -2,67 +2,65 @@
 // RVA: 0x15BDF70
 __int64 dynamic_initializer_for__CAkOutputMgr::m_Devices__()
 {
-  return atexit(dynamic_atexit_destructor_for__CAkOutputMgr::m_Devices__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__CAkOutputMgr::m_Devices__);
 }
 
 // File Line: 14
 // RVA: 0xA4F8F0
 void __fastcall AkDevice::~AkDevice(AkDevice *this)
 {
-  AkDevice *v1; // rdi
-  CAkSink *v2; // rcx
+  CAkSink *pSink; // rcx
   CAkSink *v3; // rbx
   int v4; // esi
-  CAkVPLFinalMixNode *v5; // rbx
+  CAkVPLFinalMixNode *pFinalMix; // rbx
   int v6; // esi
-  unsigned int *v7; // rdx
-  MapStruct<unsigned long,CAkSpeakerPan::PanPair *> *v8; // rbx
+  unsigned int *puSpeakerAngles; // rdx
+  MapStruct<unsigned long,CAkSpeakerPan::PanPair *> *m_pItems; // rbx
 
-  v1 = this;
-  v2 = this->pSink;
-  if ( v2 )
+  pSink = this->pSink;
+  if ( pSink )
   {
-    ((void (*)(void))v2->vfptr->Term)();
-    v3 = v1->pSink;
+    pSink->vfptr->Term(pSink);
+    v3 = this->pSink;
     v4 = g_LEngineDefaultPoolId;
     if ( v3 )
     {
-      v3->vfptr->__vecDelDtor(v1->pSink, 0);
+      v3->vfptr->__vecDelDtor(this->pSink, 0);
       AK::MemoryMgr::Free(v4, v3);
     }
-    v1->pSink = 0i64;
+    this->pSink = 0i64;
   }
-  if ( v1->pFinalMix )
+  if ( this->pFinalMix )
   {
-    CAkVPLFinalMixNode::Term(v1->pFinalMix);
-    v5 = v1->pFinalMix;
+    CAkVPLFinalMixNode::Term(this->pFinalMix);
+    pFinalMix = this->pFinalMix;
     v6 = g_LEngineDefaultPoolId;
-    if ( v1->pFinalMix )
+    if ( this->pFinalMix )
     {
-      _((AMD_HD3D *)v1->pFinalMix);
-      AK::MemoryMgr::Free(v6, v5);
+      _((AMD_HD3D *)this->pFinalMix);
+      AK::MemoryMgr::Free(v6, pFinalMix);
     }
-    v1->pFinalMix = 0i64;
+    this->pFinalMix = 0i64;
   }
-  v7 = v1->puSpeakerAngles;
-  if ( v7 )
-    AK::MemoryMgr::Free(g_LEngineDefaultPoolId, v7);
-  v8 = v1->m_mapConfig2PanPlane.m_pItems;
-  if ( v8 != &v8[v1->m_mapConfig2PanPlane.m_uLength] )
+  puSpeakerAngles = this->puSpeakerAngles;
+  if ( puSpeakerAngles )
+    AK::MemoryMgr::Free(g_LEngineDefaultPoolId, puSpeakerAngles);
+  m_pItems = this->m_mapConfig2PanPlane.m_pItems;
+  if ( m_pItems != &m_pItems[this->m_mapConfig2PanPlane.m_uLength] )
   {
     do
     {
-      AK::MemoryMgr::Free(g_DefaultPoolId, v8->item);
-      ++v8;
+      AK::MemoryMgr::Free(g_DefaultPoolId, m_pItems->item);
+      ++m_pItems;
     }
-    while ( v8 != &v1->m_mapConfig2PanPlane.m_pItems[v1->m_mapConfig2PanPlane.m_uLength] );
+    while ( m_pItems != &this->m_mapConfig2PanPlane.m_pItems[this->m_mapConfig2PanPlane.m_uLength] );
   }
-  if ( v1->m_mapConfig2PanPlane.m_pItems )
+  if ( this->m_mapConfig2PanPlane.m_pItems )
   {
-    v1->m_mapConfig2PanPlane.m_uLength = 0;
-    AK::MemoryMgr::Free(g_DefaultPoolId, v1->m_mapConfig2PanPlane.m_pItems);
-    v1->m_mapConfig2PanPlane.m_pItems = 0i64;
-    v1->m_mapConfig2PanPlane.m_ulReserved = 0;
+    this->m_mapConfig2PanPlane.m_uLength = 0;
+    AK::MemoryMgr::Free(g_DefaultPoolId, this->m_mapConfig2PanPlane.m_pItems);
+    this->m_mapConfig2PanPlane.m_pItems = 0i64;
+    this->m_mapConfig2PanPlane.m_ulReserved = 0;
   }
 }
 
@@ -70,76 +68,73 @@ void __fastcall AkDevice::~AkDevice(AkDevice *this)
 // RVA: 0xA4FE50
 void __fastcall AkDevice::PushData(AkDevice *this)
 {
-  CAkSink *v1; // rax
-  AkDevice *v2; // rdi
-  signed __int64 v3; // rbx
-  CAkSinkVtbl *v4; // rax
+  CAkSink *pSink; // rax
+  AkPipelineBufferBase *p_m_MasterOut; // rbx
+  CAkSinkVtbl *vfptr; // rax
 
-  v1 = this->pSink;
-  v2 = this;
-  v3 = (signed __int64)&v1->m_MasterOut;
-  v1->m_MasterOut.uValidFrames = 0;
-  v1->m_MasterOut.uValidFrames = 0;
-  CAkVPLFinalMixNode::GetResultingBuffer(this->pFinalMix, &v1->m_MasterOut);
-  v4 = v2->pSink->vfptr;
-  if ( *(_WORD *)(v3 + 18) )
-    ((void (*)(void))v4->PassData)();
+  pSink = this->pSink;
+  p_m_MasterOut = &pSink->m_MasterOut;
+  pSink->m_MasterOut.uValidFrames = 0;
+  pSink->m_MasterOut.uValidFrames = 0;
+  CAkVPLFinalMixNode::GetResultingBuffer(this->pFinalMix, &pSink->m_MasterOut);
+  vfptr = this->pSink->vfptr;
+  if ( p_m_MasterOut->uValidFrames )
+    ((void (*)(void))vfptr->PassData)();
   else
-    ((void (*)(void))v4->PassSilence)();
+    ((void (*)(void))vfptr->PassSilence)();
 }
 
 // File Line: 65
 // RVA: 0xA50060
-signed __int64 __fastcall AkDevice::SetSpeakerAngles(AkDevice *this, const float *in_pfSpeakerAngles, unsigned int in_uNumAngles)
+__int64 __fastcall AkDevice::SetSpeakerAngles(
+        AkDevice *this,
+        const float *in_pfSpeakerAngles,
+        unsigned int in_uNumAngles)
 {
-  unsigned int v3; // er12
-  AkDevice *v4; // rbx
-  const float *v5; // r15
+  unsigned int uNumAngles; // r12d
   unsigned __int64 v6; // rsi
   __int64 v7; // rdi
-  unsigned int *v8; // r14
-  signed __int64 v10; // rax
+  char *v8; // r14
+  __int64 v10; // rax
   void *v11; // rsp
-  unsigned int i; // er9
+  unsigned int i; // r9d
   __int64 v13; // r8
-  signed int v14; // edx
+  int v14; // edx
   unsigned int v15; // edi
-  unsigned int *v16; // rdx
+  unsigned int *puSpeakerAngles; // rdx
   signed int v17; // eax
-  char Dst[32]; // [rsp+20h] [rbp+0h]
-  unsigned int out_uMinAngleBetweenSpeakers; // [rsp+60h] [rbp+40h]
+  float Dst[8]; // [rsp+20h] [rbp+0h] BYREF
+  unsigned int out_uMinAngleBetweenSpeakers; // [rsp+60h] [rbp+40h] BYREF
 
-  v3 = in_uNumAngles;
+  uNumAngles = in_uNumAngles;
   if ( this->uNumAngles > in_uNumAngles )
-    v3 = this->uNumAngles;
-  v4 = this;
-  v5 = in_pfSpeakerAngles;
-  v6 = 4i64 * v3;
+    uNumAngles = this->uNumAngles;
+  v6 = 4i64 * uNumAngles;
   v7 = in_uNumAngles;
-  v8 = (unsigned int *)AK::MemoryMgr::Malloc(g_LEngineDefaultPoolId, 4i64 * v3);
+  v8 = (char *)AK::MemoryMgr::Malloc(g_LEngineDefaultPoolId, v6);
   if ( !v8 )
     return 2i64;
   v10 = v6 + 15;
   if ( v6 + 15 <= v6 )
-    v10 = 1152921504606846960i64;
-  v11 = alloca(v10);
+    v10 = 0xFFFFFFFFFFFFFF0i64;
+  v11 = alloca(v10 & 0xFFFFFFFFFFFFFFF0ui64);
   if ( (_DWORD)v7 )
-    memmove(Dst, v5, 4 * v7);
-  for ( i = v7; i < v4->uNumAngles; *(float *)&Dst[4 * v13] = (float)((float)v14 * 360.0) * 0.001953125 )
+    memmove(Dst, in_pfSpeakerAngles, 4 * v7);
+  for ( i = v7; i < this->uNumAngles; Dst[v13] = (float)((float)v14 * 360.0) * 0.001953125 )
   {
     v13 = i;
-    v14 = v4->puSpeakerAngles[i++];
+    v14 = this->puSpeakerAngles[i++];
   }
-  v15 = CAkSpeakerPan::SetSpeakerAngles((const float *)Dst, v7, v8, &out_uMinAngleBetweenSpeakers);
+  v15 = CAkSpeakerPan::SetSpeakerAngles(Dst, v7, v8, &out_uMinAngleBetweenSpeakers);
   if ( v15 == 1 )
   {
-    v16 = v4->puSpeakerAngles;
-    if ( v16 )
-      AK::MemoryMgr::Free(g_LEngineDefaultPoolId, v16);
+    puSpeakerAngles = this->puSpeakerAngles;
+    if ( puSpeakerAngles )
+      AK::MemoryMgr::Free(g_LEngineDefaultPoolId, puSpeakerAngles);
     v17 = out_uMinAngleBetweenSpeakers;
-    v4->puSpeakerAngles = v8;
-    v4->uNumAngles = v3;
-    v4->fOneOverMinAngleBetweenSpeakers = 1.0 / (float)v17;
+    this->puSpeakerAngles = (unsigned int *)v8;
+    this->uNumAngles = uNumAngles;
+    this->fOneOverMinAngleBetweenSpeakers = 1.0 / (float)v17;
   }
   else
   {
@@ -150,77 +145,73 @@ signed __int64 __fastcall AkDevice::SetSpeakerAngles(AkDevice *this, const float
 
 // File Line: 111
 // RVA: 0xA4FC50
-signed __int64 __fastcall AkDevice::CreatePanCache(AkDevice *this, unsigned int in_uOutputConfig)
+__int64 __fastcall AkDevice::CreatePanCache(AkDevice *this, unsigned int in_uOutputConfig)
 {
-  MapStruct<unsigned long,CAkSpeakerPan::PanPair *> *v2; // rax
-  unsigned int v3; // esi
-  AkDevice *v4; // rbp
-  signed __int64 v5; // rdi
-  _QWORD *v6; // rdi
+  MapStruct<unsigned long,CAkSpeakerPan::PanPair *> *m_pItems; // rax
+  MapStruct<unsigned long,CAkSpeakerPan::PanPair *> *v5; // rdi
+  _QWORD *p_item; // rdi
   MapStruct<unsigned __int64,AkVPL *> *v7; // rax
   CAkSpeakerPan::PanPair *v8; // rax
   MapStruct<unsigned long,CAkSpeakerPan::PanPair *> *v10; // rdi
-  signed __int64 v11; // rax
+  MapStruct<unsigned long,CAkSpeakerPan::PanPair *> *v11; // rax
 
-  v2 = this->m_mapConfig2PanPlane.m_pItems;
-  v3 = in_uOutputConfig;
-  v4 = this;
-  v5 = (signed __int64)&v2[this->m_mapConfig2PanPlane.m_uLength];
-  if ( v2 == (MapStruct<unsigned long,CAkSpeakerPan::PanPair *> *)v5 )
-    goto LABEL_25;
+  m_pItems = this->m_mapConfig2PanPlane.m_pItems;
+  v5 = &m_pItems[this->m_mapConfig2PanPlane.m_uLength];
+  if ( m_pItems == v5 )
+    goto LABEL_7;
   do
   {
-    if ( v2->key == in_uOutputConfig )
+    if ( m_pItems->key == in_uOutputConfig )
       break;
-    ++v2;
+    ++m_pItems;
   }
-  while ( v2 != (MapStruct<unsigned long,CAkSpeakerPan::PanPair *> *)v5 );
-  if ( v2 == (MapStruct<unsigned long,CAkSpeakerPan::PanPair *> *)v5 )
+  while ( m_pItems != v5 );
+  if ( m_pItems == v5 )
   {
-LABEL_25:
-    v6 = 0i64;
+LABEL_7:
+    p_item = 0i64;
     goto LABEL_8;
   }
-  v6 = &v2->item;
-  if ( v2 == (MapStruct<unsigned long,CAkSpeakerPan::PanPair *> *)-8i64 )
+  p_item = &m_pItems->item;
+  if ( m_pItems == (MapStruct<unsigned long,CAkSpeakerPan::PanPair *> *)-8i64 )
   {
 LABEL_8:
     v7 = AkArray<CAkRanSeqCntr::CntrInfoEntry,CAkRanSeqCntr::CntrInfoEntry const &,ArrayPoolDefault,1,AkArrayAllocatorDefault>::AddLast((AkArray<MapStruct<unsigned __int64,AkVPL *>,MapStruct<unsigned __int64,AkVPL *> const &,ArrayPoolDefault,1,AkArrayAllocatorDefault> *)&this->m_mapConfig2PanPlane);
     if ( v7 )
     {
-      LODWORD(v7->key) = v3;
-      v6 = &v7->item;
+      LODWORD(v7->key) = in_uOutputConfig;
+      p_item = &v7->item;
     }
-    if ( !v6 )
+    if ( !p_item )
       goto LABEL_15;
   }
   v8 = (CAkSpeakerPan::PanPair *)AK::MemoryMgr::Malloc(g_DefaultPoolId, 0x808ui64);
-  *v6 = v8;
+  *p_item = v8;
   if ( v8 )
-    CAkSpeakerPan::CreatePanCache(v3, v4->puSpeakerAngles, v8);
-  if ( *v6 )
+    CAkSpeakerPan::CreatePanCache(in_uOutputConfig, this->puSpeakerAngles, v8);
+  if ( *p_item )
     return 1i64;
 LABEL_15:
-  v10 = v4->m_mapConfig2PanPlane.m_pItems;
-  v11 = (signed __int64)&v10[v4->m_mapConfig2PanPlane.m_uLength];
-  if ( v10 != (MapStruct<unsigned long,CAkSpeakerPan::PanPair *> *)v11 )
+  v10 = this->m_mapConfig2PanPlane.m_pItems;
+  v11 = &v10[this->m_mapConfig2PanPlane.m_uLength];
+  if ( v10 != v11 )
   {
     do
     {
-      if ( v10->key == v3 )
+      if ( v10->key == in_uOutputConfig )
         break;
       ++v10;
     }
-    while ( v10 != (MapStruct<unsigned long,CAkSpeakerPan::PanPair *> *)v11 );
-    if ( v10 != (MapStruct<unsigned long,CAkSpeakerPan::PanPair *> *)v11 )
+    while ( v10 != v11 );
+    if ( v10 != v11 )
     {
-      if ( (unsigned __int64)v10 < v11 - 16 )
+      if ( v10 < &v11[-1] )
         qmemcpy(
           v10,
           &v10[1],
           8
-        * (((((unsigned __int64)(v11 - 16 - (_QWORD)v10 - 1) >> 3) & 0xFFFFFFFFFFFFFFFEui64) + 2) & 0x1FFFFFFFFFFFFFFEi64));
-      --v4->m_mapConfig2PanPlane.m_uLength;
+        * (((((unsigned __int64)((char *)&v11[-1] - (char *)v10 - 1) >> 3) & 0xFFFFFFFFFFFFFFFEui64) + 2) & 0x1FFFFFFFFFFFFFFEi64));
+      --this->m_mapConfig2PanPlane.m_uLength;
     }
   }
   return 2i64;
@@ -230,25 +221,22 @@ LABEL_15:
 // RVA: 0xA50330
 void CAkOutputMgr::Term(void)
 {
-  AkDevice *v0; // rbx
+  AkDevice *m_pItems; // rbx
   AkDevice *v1; // rdi
 
-  v0 = CAkOutputMgr::m_Devices.m_pItems;
+  m_pItems = CAkOutputMgr::m_Devices.m_pItems;
   if ( CAkOutputMgr::m_Devices.m_pItems )
   {
     v1 = &CAkOutputMgr::m_Devices.m_pItems[CAkOutputMgr::m_Devices.m_uLength];
     if ( CAkOutputMgr::m_Devices.m_pItems != v1 )
     {
       do
-      {
-        AkDevice::~AkDevice(v0);
-        ++v0;
-      }
-      while ( v0 != v1 );
-      v0 = CAkOutputMgr::m_Devices.m_pItems;
+        AkDevice::~AkDevice(m_pItems++);
+      while ( m_pItems != v1 );
+      m_pItems = CAkOutputMgr::m_Devices.m_pItems;
     }
     CAkOutputMgr::m_Devices.m_uLength = 0;
-    AK::MemoryMgr::Free(g_LEngineDefaultPoolId, v0);
+    AK::MemoryMgr::Free(g_LEngineDefaultPoolId, m_pItems);
     CAkOutputMgr::m_Devices.m_pItems = 0i64;
     CAkOutputMgr::m_Devices.m_ulReserved = 0;
   }
@@ -256,14 +244,16 @@ void CAkOutputMgr::Term(void)
 
 // File Line: 134
 // RVA: 0xA503B0
-signed __int64 __fastcall CAkOutputMgr::_AddOutputDevice(unsigned __int64 in_uKey, AkOutputSettings *in_settings, AkSinkType in_eSinkType, unsigned int in_uDeviceInstance, unsigned int in_uListeners, void *in_pUserData)
+__int64 __fastcall CAkOutputMgr::_AddOutputDevice(
+        unsigned __int64 in_uKey,
+        AkOutputSettings *in_settings,
+        AkSinkType in_eSinkType,
+        unsigned int in_uDeviceInstance,
+        unsigned int in_uListeners,
+        void *in_pUserData)
 {
-  unsigned int v6; // er10
-  unsigned int v7; // er11
-  unsigned int v8; // er15
-  AkSinkType v9; // er12
-  AkOutputSettings *v10; // r13
-  unsigned __int64 v11; // r14
+  unsigned int m_uLength; // r10d
+  unsigned int m_ulReserved; // r11d
   unsigned __int64 v12; // rbx
   AkDevice *v13; // rsi
   unsigned int v14; // edi
@@ -273,23 +263,19 @@ signed __int64 __fastcall CAkOutputMgr::_AddOutputDevice(unsigned __int64 in_uKe
   CAkBusFX *v18; // rax
   AkDevice *v19; // rdi
   AkDevice *v20; // rax
-  unsigned __int64 v21; // rbx
-  signed int v23; // ecx
+  AkDevice *v21; // rbx
+  int v23; // ecx
   unsigned int v24; // edi
   unsigned __int64 v25; // rax
-  signed __int64 v26; // rcx
+  __int64 v26; // rcx
   signed __int64 v27; // rcx
   void *v28; // rsp
   void *v29; // rsp
   AKRESULT v30; // edi
-  float out_angles; // [rsp+20h] [rbp+0h]
+  float out_angles[8]; // [rsp+20h] [rbp+0h] BYREF
 
-  v6 = CAkOutputMgr::m_Devices.m_uLength;
-  v7 = CAkOutputMgr::m_Devices.m_ulReserved;
-  v8 = in_uDeviceInstance;
-  v9 = in_eSinkType;
-  v10 = in_settings;
-  v11 = in_uKey;
+  m_uLength = CAkOutputMgr::m_Devices.m_uLength;
+  m_ulReserved = CAkOutputMgr::m_Devices.m_ulReserved;
   v12 = CAkOutputMgr::m_Devices.m_uLength;
   if ( CAkOutputMgr::m_Devices.m_uLength >= (unsigned __int64)CAkOutputMgr::m_Devices.m_ulReserved )
   {
@@ -297,21 +283,21 @@ signed __int64 __fastcall CAkOutputMgr::_AddOutputDevice(unsigned __int64 in_uKe
             &CAkOutputMgr::m_Devices,
             1u) )
       return 52i64;
-    v7 = CAkOutputMgr::m_Devices.m_ulReserved;
-    v6 = CAkOutputMgr::m_Devices.m_uLength;
+    m_ulReserved = CAkOutputMgr::m_Devices.m_ulReserved;
+    m_uLength = CAkOutputMgr::m_Devices.m_uLength;
   }
-  if ( v12 >= v7 )
+  if ( v12 >= m_ulReserved )
     return 52i64;
-  CAkOutputMgr::m_Devices.m_uLength = v6 + 1;
-  v13 = &CAkOutputMgr::m_Devices.m_pItems[v6];
+  CAkOutputMgr::m_Devices.m_uLength = m_uLength + 1;
+  v13 = &CAkOutputMgr::m_Devices.m_pItems[m_uLength];
   if ( !v13 )
     return 52i64;
   v14 = 0;
-  v15 = &CAkOutputMgr::m_Devices.m_pItems[v6];
+  v15 = &CAkOutputMgr::m_Devices.m_pItems[m_uLength];
   v13->m_mapConfig2PanPlane.m_pItems = 0i64;
   *(_QWORD *)&v13->m_mapConfig2PanPlane.m_uLength = 0i64;
-  memset(v15, 0, 0x50ui64);
-  v16 = CAkSink::Create(v10, v9, v8);
+  memset(v15, 0, sizeof(AkDevice));
+  v16 = CAkSink::Create(in_settings, in_eSinkType, in_uDeviceInstance);
   v13->pSink = v16;
   v17 = v16 == 0i64;
   v18 = (CAkBusFX *)AK::MemoryMgr::Malloc(g_LEngineDefaultPoolId, 0x540ui64);
@@ -326,11 +312,11 @@ signed __int64 __fastcall CAkOutputMgr::_AddOutputDevice(unsigned __int64 in_uKe
     {
       do
       {
-        v21 = (unsigned __int64)&v20[1];
+        v21 = v20 + 1;
         AkDevice::operator=(v20, v20 + 1);
-        v20 = (AkDevice *)v21;
+        v20 = v21;
       }
-      while ( v21 < (unsigned __int64)v19 );
+      while ( v21 < v19 );
     }
     AkDevice::~AkDevice(v19);
     --CAkOutputMgr::m_Devices.m_uLength;
@@ -347,154 +333,166 @@ signed __int64 __fastcall CAkOutputMgr::_AddOutputDevice(unsigned __int64 in_uKe
   v25 = 4i64 * v24;
   v26 = v25 + 15;
   if ( v25 + 15 <= v25 )
-    v26 = 1152921504606846960i64;
+    v26 = 0xFFFFFFFFFFFFFF0i64;
   v27 = v26 & 0xFFFFFFFFFFFFFFF0ui64;
   v28 = alloca(v27);
   v29 = alloca(v27);
-  CAkSpeakerPan::GetDefaultSpeakerAngles(v13->pSink->m_SpeakersConfig, &out_angles);
-  if ( (unsigned int)AkDevice::SetSpeakerAngles(v13, &out_angles, v24) != 1 )
+  CAkSpeakerPan::GetDefaultSpeakerAngles(v13->pSink->m_SpeakersConfig, out_angles);
+  if ( (unsigned int)AkDevice::SetSpeakerAngles(v13, out_angles, v24) != 1 )
     return 2i64;
-  v13->uDeviceID = v11;
+  v13->uDeviceID = in_uKey;
   v13->uListeners = in_uListeners;
   v13->pUserData = in_pUserData;
-  v13->ePanningRule = v10->ePanningRule;
-  CAkOutputMgr::SetListenersOnDevice(in_uListeners, v11);
-  CAkListener::RouteListenersToDevice(in_uListeners, v11);
+  v13->ePanningRule = in_settings->ePanningRule;
+  CAkOutputMgr::SetListenersOnDevice(in_uListeners, in_uKey);
+  CAkListener::RouteListenersToDevice(in_uListeners, in_uKey);
   v30 = CAkVPLFinalMixNode::Init(v13->pFinalMix, v13->pSink->m_SpeakersConfig);
-  if ( v30 == 1 )
-    CAkLEngine::ReevaluateBussesForDevice(v11, in_uListeners);
+  if ( v30 == AK_Success )
+    CAkLEngine::ReevaluateBussesForDevice(in_uKey, in_uListeners);
   return (unsigned int)v30;
 }
 
 // File Line: 189
 // RVA: 0xA4FB80
-AKRESULT __fastcall CAkOutputMgr::AddMainDevice(AkOutputSettings *in_outputSettings, AkSinkType in_eSinkType, unsigned int in_uListeners, void *in_pUserData)
+AKRESULT __fastcall CAkOutputMgr::AddMainDevice(
+        AkOutputSettings *in_outputSettings,
+        AkSinkType in_eSinkType,
+        unsigned int in_uListeners,
+        void *in_pUserData)
 {
   return CAkOutputMgr::_AddOutputDevice(0i64, in_outputSettings, in_eSinkType, 0, in_uListeners, in_pUserData);
 }
 
 // File Line: 194
 // RVA: 0xA4FBB0
-AKRESULT __fastcall CAkOutputMgr::AddOutputDevice(AkOutputSettings *in_settings, AkSinkType in_eSinkType, unsigned int in_uDeviceInstance, unsigned int in_uListeners, void *in_pUserData)
+AKRESULT __fastcall CAkOutputMgr::AddOutputDevice(
+        AkOutputSettings *in_settings,
+        AkSinkType in_eSinkType,
+        unsigned int in_uDeviceInstance,
+        unsigned int in_uListeners,
+        void *in_pUserData)
 {
-  AkOutputSettings *v5; // rdi
   unsigned __int64 v6; // r10
-  AKRESULT result; // eax
   __int64 v8; // rax
-  unsigned __int64 *v9; // rcx
+  unsigned __int64 *i; // rcx
 
-  v5 = in_settings;
-  v6 = (signed int)in_eSinkType | ((unsigned __int64)in_uDeviceInstance << 32);
+  v6 = (int)in_eSinkType | ((unsigned __int64)in_uDeviceInstance << 32);
   if ( !v6 )
     return 2;
   v8 = 0i64;
   if ( !CAkOutputMgr::m_Devices.m_uLength )
-    goto LABEL_7;
-  v9 = &CAkOutputMgr::m_Devices.m_pItems->uDeviceID;
-  while ( *v9 != v6 )
+    return CAkOutputMgr::_AddOutputDevice(
+             v6,
+             in_settings,
+             in_eSinkType,
+             in_uDeviceInstance,
+             in_uListeners,
+             in_pUserData);
+  for ( i = &CAkOutputMgr::m_Devices.m_pItems->uDeviceID; *i != v6; i += 10 )
   {
     v8 = (unsigned int)(v8 + 1);
-    v9 += 10;
     if ( (unsigned int)v8 >= CAkOutputMgr::m_Devices.m_uLength )
-      goto LABEL_7;
+      return CAkOutputMgr::_AddOutputDevice(
+               v6,
+               in_settings,
+               in_eSinkType,
+               in_uDeviceInstance,
+               in_uListeners,
+               in_pUserData);
   }
   if ( &CAkOutputMgr::m_Devices.m_pItems[v8] )
-    result = 1;
+    return 1;
   else
-LABEL_7:
-    result = CAkOutputMgr::_AddOutputDevice(v6, v5, in_eSinkType, in_uDeviceInstance, in_uListeners, in_pUserData);
-  return result;
+    return CAkOutputMgr::_AddOutputDevice(
+             v6,
+             in_settings,
+             in_eSinkType,
+             in_uDeviceInstance,
+             in_uListeners,
+             in_pUserData);
 }
 
 // File Line: 210
 // RVA: 0xA4FEB0
-signed __int64 __fastcall CAkOutputMgr::RemoveOutputDevice(unsigned __int64 in_uDeviceID)
+__int64 __fastcall CAkOutputMgr::RemoveOutputDevice(unsigned __int64 in_uDeviceID)
 {
-  AkDevice *v1; // rbx
+  AkDevice *m_pItems; // rbx
   AkDevice *v2; // rdx
-  unsigned int v4; // eax
+  unsigned int m_uLength; // eax
 
-  v1 = CAkOutputMgr::m_Devices.m_pItems;
+  m_pItems = CAkOutputMgr::m_Devices.m_pItems;
   v2 = &CAkOutputMgr::m_Devices.m_pItems[CAkOutputMgr::m_Devices.m_uLength];
   if ( CAkOutputMgr::m_Devices.m_pItems == v2 )
     return 2i64;
-  while ( v1->uDeviceID != in_uDeviceID )
+  while ( m_pItems->uDeviceID != in_uDeviceID )
   {
-    ++v1;
-    if ( v1 == v2 )
+    if ( ++m_pItems == v2 )
       return 2i64;
   }
   CAkLEngine::ReevaluateBussesForDevice(in_uDeviceID, 0);
-  v4 = CAkOutputMgr::m_Devices.m_uLength;
+  m_uLength = CAkOutputMgr::m_Devices.m_uLength;
   if ( CAkOutputMgr::m_Devices.m_uLength > 1 )
   {
-    AkDevice::~AkDevice(v1);
-    AkDevice::operator=(v1, &CAkOutputMgr::m_Devices.m_pItems[CAkOutputMgr::m_Devices.m_uLength - 1]);
-    v4 = CAkOutputMgr::m_Devices.m_uLength;
+    AkDevice::~AkDevice(m_pItems);
+    AkDevice::operator=(m_pItems, &CAkOutputMgr::m_Devices.m_pItems[CAkOutputMgr::m_Devices.m_uLength - 1]);
+    m_uLength = CAkOutputMgr::m_Devices.m_uLength;
   }
-  CAkOutputMgr::m_Devices.m_uLength = v4 - 1;
+  CAkOutputMgr::m_Devices.m_uLength = m_uLength - 1;
   return 1i64;
 }
 
 // File Line: 226
 // RVA: 0xA50000
-signed __int64 __fastcall CAkOutputMgr::SetListenersOnDevice(unsigned int in_uListeners, unsigned __int64 in_uDeviceID)
+__int64 __fastcall CAkOutputMgr::SetListenersOnDevice(unsigned int in_uListeners, unsigned __int64 in_uDeviceID)
 {
-  unsigned int v2; // er11
   __int64 v3; // rax
-  unsigned __int64 *v4; // r8
-  signed __int64 result; // rax
+  unsigned __int64 *i; // r8
+  __int64 result; // rax
   __int64 v6; // rcx
 
-  v2 = in_uListeners;
   CAkOutputMgr::m_Devices.m_pItems->uListeners &= ~in_uListeners;
   v3 = 0i64;
   if ( !CAkOutputMgr::m_Devices.m_uLength )
     return 2i64;
-  v4 = &CAkOutputMgr::m_Devices.m_pItems->uDeviceID;
-  while ( *v4 != in_uDeviceID )
+  for ( i = &CAkOutputMgr::m_Devices.m_pItems->uDeviceID; *i != in_uDeviceID; i += 10 )
   {
     v3 = (unsigned int)(v3 + 1);
-    v4 += 10;
     if ( (unsigned int)v3 >= CAkOutputMgr::m_Devices.m_uLength )
       return 2i64;
   }
   v6 = v3;
   result = 1i64;
-  CAkOutputMgr::m_Devices.m_pItems[v6].uListeners = v2;
+  CAkOutputMgr::m_Devices.m_pItems[v6].uListeners = in_uListeners;
   return result;
 }
 
 // File Line: 243
 // RVA: 0xA4FF50
-signed __int64 __fastcall CAkOutputMgr::ReplaceSink(unsigned __int64 in_uDeviceID, CAkSink *in_pSink)
+__int64 __fastcall CAkOutputMgr::ReplaceSink(unsigned __int64 in_uDeviceID, CAkSink *in_pSink)
 {
-  AkDevice *v2; // rbx
-  CAkSink *v3; // rbp
+  AkDevice *m_pItems; // rbx
   AkDevice *v4; // r8
-  CAkSink *v6; // rdi
+  CAkSink *pSink; // rdi
   int v7; // esi
 
-  v2 = CAkOutputMgr::m_Devices.m_pItems;
-  v3 = in_pSink;
+  m_pItems = CAkOutputMgr::m_Devices.m_pItems;
   v4 = &CAkOutputMgr::m_Devices.m_pItems[CAkOutputMgr::m_Devices.m_uLength];
   if ( CAkOutputMgr::m_Devices.m_pItems == v4 )
     return 2i64;
-  while ( v2->uDeviceID != in_uDeviceID )
+  while ( m_pItems->uDeviceID != in_uDeviceID )
   {
-    ++v2;
-    if ( v2 == v4 )
+    if ( ++m_pItems == v4 )
       return 2i64;
   }
-  ((void (*)(void))v2->pSink->vfptr->Term)();
-  v6 = v2->pSink;
+  m_pItems->pSink->vfptr->Term(m_pItems->pSink);
+  pSink = m_pItems->pSink;
   v7 = g_LEngineDefaultPoolId;
-  if ( v6 )
+  if ( pSink )
   {
-    v6->vfptr->__vecDelDtor(v6, 0);
-    AK::MemoryMgr::Free(v7, v6);
+    pSink->vfptr->__vecDelDtor(pSink, 0);
+    AK::MemoryMgr::Free(v7, pSink);
   }
-  v2->pSink = v3;
+  m_pItems->pSink = in_pSink;
   return 1i64;
 }
 
@@ -502,41 +500,39 @@ signed __int64 __fastcall CAkOutputMgr::ReplaceSink(unsigned __int64 in_uDeviceI
 // RVA: 0xA501B0
 void __fastcall CAkOutputMgr::StartOutputCapture(const wchar_t *in_CaptureFileName)
 {
-  const wchar_t *v1; // rsi
-  signed __int64 v2; // rbx
+  __int64 v2; // rbx
   unsigned __int64 v4; // rcx
   signed __int64 v5; // rcx
   void *v6; // rsp
   void *v7; // rsp
-  signed __int64 v8; // rdi
+  __int64 v8; // rdi
   char *v9; // r15
-  AkDevice *v10; // rbx
+  AkDevice *m_pItems; // rbx
   char i; // di
   const wchar_t *v12; // rdx
-  char Dst[16]; // [rsp+20h] [rbp+0h]
+  char Dst[16]; // [rsp+20h] [rbp+0h] BYREF
 
-  v1 = in_CaptureFileName;
   v2 = -1i64;
-  while ( in_CaptureFileName[v2++ + 1] != 0 )
+  while ( in_CaptureFileName[++v2] != 0 )
     ;
   v4 = 2 * v2 + 19;
   if ( v4 <= 2 * v2 + 4 )
-    v4 = 1152921504606846960i64;
+    v4 = 0xFFFFFFFFFFFFFF0i64;
   v5 = v4 & 0xFFFFFFFFFFFFFFF0ui64;
   v6 = alloca(v5);
   v7 = alloca(v5);
   v8 = 2 * v2;
-  memmove(Dst, v1, 2 * v2);
+  memmove(Dst, in_CaptureFileName, 2 * v2);
   v9 = &Dst[2 * v2];
   *(_WORD *)&Dst[v8] = *(_WORD *)&Dst[v8 - 2];
-  *(_WORD *)&Dst[v8 - 2] = *(_WORD *)&Dst[2 * v2 - 4];
-  *(_WORD *)&Dst[2 * v2 - 4] = *(_WORD *)&Dst[2 * v2 - 6];
-  *(_WORD *)&Dst[2 * v2 - 6] = *((_WORD *)v9 - 4);
+  *(_WORD *)&Dst[v8 - 2] = *((_WORD *)v9 - 2);
+  *((_WORD *)v9 - 2) = *((_WORD *)v9 - 3);
+  *((_WORD *)v9 - 3) = *((_WORD *)v9 - 4);
   *(_WORD *)&Dst[v8 + 2] = 0;
-  v10 = CAkOutputMgr::m_Devices.m_pItems;
-  for ( i = 0; v10 != &CAkOutputMgr::m_Devices.m_pItems[CAkOutputMgr::m_Devices.m_uLength]; ++v10 )
+  m_pItems = CAkOutputMgr::m_Devices.m_pItems;
+  for ( i = 0; m_pItems != &CAkOutputMgr::m_Devices.m_pItems[CAkOutputMgr::m_Devices.m_uLength]; ++m_pItems )
   {
-    if ( v10->uDeviceID )
+    if ( m_pItems->uDeviceID )
     {
       ++i;
       v12 = (const wchar_t *)Dst;
@@ -544,9 +540,9 @@ void __fastcall CAkOutputMgr::StartOutputCapture(const wchar_t *in_CaptureFileNa
     }
     else
     {
-      v12 = v1;
+      v12 = in_CaptureFileName;
     }
-    CAkSink::StartOutputCapture(v10->pSink, v12);
+    CAkSink::StartOutputCapture(m_pItems->pSink, v12);
   }
 }
 

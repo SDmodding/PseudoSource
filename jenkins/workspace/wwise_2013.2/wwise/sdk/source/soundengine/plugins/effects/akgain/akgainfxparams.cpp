@@ -4,7 +4,7 @@ AK::IAkPluginParam *__fastcall CreateGainFXParams(AK::IAkPluginMemAlloc *in_pAll
 {
   AK::IAkPluginParam *result; // rax
 
-  result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 16ui64);
+  result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 16i64);
   if ( result )
     result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkGainFXParams::`vftable;
   return result;
@@ -36,22 +36,24 @@ void __fastcall CAkGainFXParams::CAkGainFXParams(CAkGainFXParams *this, CAkGainF
 // RVA: 0xAF6380
 AK::IAkPluginParam *__fastcall CAkGainFXParams::Clone(CAkGainFXParams *this, AK::IAkPluginMemAlloc *in_pAllocator)
 {
-  CAkGainFXParams *v2; // rbx
   AK::IAkPluginParam *result; // rax
 
-  v2 = this;
-  result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 16ui64);
+  result = (AK::IAkPluginParam *)in_pAllocator->vfptr->Malloc(in_pAllocator, 16i64);
   if ( result )
   {
     result->vfptr = (AK::IAkRTPCSubscriberVtbl *)&CAkGainFXParams::`vftable;
-    result[1].vfptr = (AK::IAkRTPCSubscriberVtbl *)v2->m_Params;
+    result[1].vfptr = (AK::IAkRTPCSubscriberVtbl *)this->m_Params;
   }
   return result;
 }
 
 // File Line: 49
 // RVA: 0xAF63D0
-__int64 __fastcall CAkGainFXParams::Init(CAkGainFXParams *this, AK::IAkPluginMemAlloc *in_pAllocator, const void *in_pParamsBlock, unsigned int in_ulBlockSize)
+__int64 __fastcall CAkGainFXParams::Init(
+        CAkGainFXParams *this,
+        AK::IAkPluginMemAlloc *in_pAllocator,
+        const void *in_pParamsBlock,
+        unsigned int in_ulBlockSize)
 {
   if ( in_ulBlockSize )
     return ((__int64 (__fastcall *)(CAkGainFXParams *, const void *, _QWORD))this->vfptr[2].SetParam)(
@@ -64,35 +66,36 @@ __int64 __fastcall CAkGainFXParams::Init(CAkGainFXParams *this, AK::IAkPluginMem
 
 // File Line: 62
 // RVA: 0xAF6400
-signed __int64 __fastcall CAkGainFXParams::Term(CAkGainFXParams *this, AK::IAkPluginMemAlloc *in_pAllocator)
+__int64 __fastcall CAkGainFXParams::Term(CAkGainFXParams *this, AK::IAkPluginMemAlloc *in_pAllocator)
 {
-  AK::IAkPluginMemAlloc *v2; // rdi
-  CAkGainFXParams *v3; // rbx
-
-  v2 = in_pAllocator;
-  v3 = this;
   if ( this )
   {
-    this->vfptr->__vecDelDtor((AK::IAkRTPCSubscriber *)this, 0);
-    v2->vfptr->Free(v2, v3);
+    this->vfptr->__vecDelDtor(this, 0i64);
+    in_pAllocator->vfptr->Free(in_pAllocator, this);
   }
   return 1i64;
 }
 
 // File Line: 72
 // RVA: 0xAF6440
-signed __int64 __fastcall CAkGainFXParams::SetParamsBlock(CAkGainFXParams *this, const void *in_pParamsBlock, unsigned int in_ulBlockSize)
+__int64 __fastcall CAkGainFXParams::SetParamsBlock(
+        CAkGainFXParams *this,
+        AkGainFXParams *in_pParamsBlock,
+        unsigned int in_ulBlockSize)
 {
-  this->m_Params.fFullbandGain = *(float *)in_pParamsBlock;
-  this->m_Params.fLFEGain = *((float *)in_pParamsBlock + 1);
+  this->m_Params = *in_pParamsBlock;
   return 1i64;
 }
 
 // File Line: 87
 // RVA: 0xAF6460
-signed __int64 __fastcall CAkGainFXParams::SetParam(CAkGainFXParams *this, __int16 in_ParamID, const void *in_pValue, unsigned int in_ulParamSize)
+__int64 __fastcall CAkGainFXParams::SetParam(
+        CAkGainFXParams *this,
+        __int16 in_ParamID,
+        float *in_pValue,
+        unsigned int in_ulParamSize)
 {
-  signed __int64 result; // rax
+  __int64 result; // rax
 
   if ( !in_pValue )
     return 31i64;
@@ -100,18 +103,18 @@ signed __int64 __fastcall CAkGainFXParams::SetParam(CAkGainFXParams *this, __int
   {
     if ( in_ParamID == 1 )
     {
-      this->m_Params.fLFEGain = *(float *)in_pValue;
-      result = 1i64;
+      this->m_Params.fLFEGain = *in_pValue;
+      return 1i64;
     }
     else
     {
-      result = 31i64;
+      return 31i64;
     }
   }
   else
   {
     result = 1i64;
-    this->m_Params.fFullbandGain = *(float *)in_pValue;
+    this->m_Params.fFullbandGain = *in_pValue;
   }
   return result;
 }

@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkpVehicleRayCastWheelCollideClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 61
@@ -28,26 +28,26 @@ hkClass *__fastcall hkpVehicleRayCastWheelCollide::staticClass()
 
 // File Line: 68
 // RVA: 0xE25E10
-void __fastcall finishLoadedObjecthkpVehicleRayCastWheelCollide(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpVehicleRayCastWheelCollide(_BYTE *p, int finishing)
 {
   if ( p )
   {
     *(_QWORD *)p = &hkpVehicleWheelCollide::`vftable;
     if ( finishing )
-      *((_BYTE *)p + 17) = 0;
+      p[17] = 0;
     *(_QWORD *)p = &hkpVehicleRayCastWheelCollide::`vftable;
     *((_QWORD *)p + 5) = &hkpRejectChassisListener::`vftable{for `hkReferencedObject};
     *((_QWORD *)p + 7) = &hkpRejectChassisListener::`vftable{for `hkpPhantomOverlapListener};
     if ( finishing )
-      *((_BYTE *)p + 17) = 1;
+      p[17] = 1;
   }
 }
 
 // File Line: 74
 // RVA: 0xE25E60
-void __fastcall cleanupLoadedObjecthkpVehicleRayCastWheelCollide(void *p)
+void __fastcall cleanupLoadedObjecthkpVehicleRayCastWheelCollide(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 78
@@ -68,8 +68,8 @@ void **dynamic_initializer_for__hkpVehicleRayCastWheelCollideTypeInfo__()
   hkpVehicleRayCastWheelCollideTypeInfo.m_typeName = "hkpVehicleRayCastWheelCollide";
   hkpVehicleRayCastWheelCollideTypeInfo.m_vtable = result;
   hkpVehicleRayCastWheelCollideTypeInfo.m_scopedName = "!hkpVehicleRayCastWheelCollide";
-  hkpVehicleRayCastWheelCollideTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpVehicleRayCastWheelCollide;
-  hkpVehicleRayCastWheelCollideTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpVehicleRayCastWheelCollide;
+  hkpVehicleRayCastWheelCollideTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpVehicleRayCastWheelCollide;
+  hkpVehicleRayCastWheelCollideTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpVehicleRayCastWheelCollide;
   return result;
 }
 

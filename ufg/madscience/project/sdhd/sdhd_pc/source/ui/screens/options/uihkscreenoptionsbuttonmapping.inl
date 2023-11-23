@@ -1,14 +1,12 @@
 // File Line: 18
 // RVA: 0x5EEFD0
-void __fastcall UFG::KeyToKeyName(UFG::qString *keyName, char key)
+void __fastcall UFG::KeyToKeyName(UFG::qString *keyName, unsigned __int8 key)
 {
   int v2; // ebx
-  UFG::qString *v3; // rdi
   const char *v4; // rdx
 
-  v2 = (unsigned __int8)key;
-  v3 = keyName;
-  UFG::qString::Set(keyName, &customWorldMapCaption);
+  v2 = key;
+  UFG::qString::Set(keyName, &customCaption);
   switch ( v2 )
   {
     case 1:
@@ -590,12 +588,12 @@ void __fastcall UFG::KeyToKeyName(UFG::qString *keyName, char key)
     case 254:
       v4 = "$BUTTON_REMAP_OEM_CLEAR";
 LABEL_195:
-      UFG::qString::Set(v3, v4);
+      UFG::qString::Set(keyName, v4);
       break;
     default:
       break;
   }
-  UFG::qString::MakeUpper(v3);
+  UFG::qString::MakeUpper(keyName);
 }
 
 // File Line: 610
@@ -605,7 +603,7 @@ const char *__fastcall UFG::KeyToTextureName(char key)
   const char *v1; // rdx
   const char *result; // rax
 
-  v1 = &customWorldMapCaption;
+  v1 = &customCaption;
   switch ( key )
   {
     case 1:
@@ -629,331 +627,331 @@ const char *__fastcall UFG::KeyToTextureName(char key)
     case 9:
       result = "BUTTON_TAB";
       break;
-    case 0xD:
+    case 13:
       result = "BUTTON_ENTER";
       break;
-    case 0x10:
+    case 16:
       result = "BUTTON_SHIFT";
       break;
-    case 0x11:
+    case 17:
       result = "BUTTON_CTRL";
       break;
-    case 0x12:
+    case 18:
       result = "BUTTON_ALT";
       break;
-    case 0x20:
+    case 32:
       result = "BUTTON_SPACE";
       break;
-    case 0x21:
+    case 33:
       result = "BUTTON_PAGEUP";
       break;
-    case 0x22:
+    case 34:
       result = "BUTTON_PAGEDOWN";
       break;
-    case 0x23:
+    case 35:
       result = "BUTTON_END";
       break;
-    case 0x24:
+    case 36:
       result = "BUTTON_HOME";
       break;
-    case 0x25:
+    case 37:
       result = "BUTTON_ARROW_L";
       break;
-    case 0x26:
+    case 38:
       result = "BUTTON_ARROW_U";
       break;
-    case 0x27:
+    case 39:
       result = "BUTTON_ARROW_R";
       break;
-    case 0x28:
+    case 40:
       result = "BUTTON_ARROW_D";
       break;
-    case 0x2D:
+    case 45:
       result = "BUTTON_INSERT";
       break;
-    case 0x2E:
+    case 46:
       result = "BUTTON_DELETE";
       break;
-    case 0x30:
+    case 48:
       result = "BUTTON_ZERO";
       break;
-    case 0x31:
+    case 49:
       result = "BUTTON_ONE";
       break;
-    case 0x32:
+    case 50:
       result = "BUTTON_TWO";
       break;
-    case 0x33:
+    case 51:
       result = "BUTTON_THREE";
       break;
-    case 0x34:
+    case 52:
       result = "BUTTON_FOUR";
       break;
-    case 0x35:
+    case 53:
       result = "BUTTON_FIVE";
       break;
-    case 0x36:
+    case 54:
       result = "BUTTON_SIX";
       break;
-    case 0x37:
+    case 55:
       result = "BUTTON_SEVEN";
       break;
-    case 0x38:
+    case 56:
       result = "BUTTON_EIGHT";
       break;
-    case 0x39:
+    case 57:
       result = "BUTTON_NINE";
       break;
-    case 0x41:
+    case 65:
       result = "BUTTON_A";
       break;
-    case 0x42:
+    case 66:
       result = "BUTTON_B";
       break;
-    case 0x43:
+    case 67:
       result = "BUTTON_C";
       break;
-    case 0x44:
+    case 68:
       result = "BUTTON_D";
       break;
-    case 0x45:
+    case 69:
       result = "BUTTON_E";
       break;
-    case 0x46:
+    case 70:
       result = "BUTTON_F";
       break;
-    case 0x47:
+    case 71:
       result = "BUTTON_G";
       break;
-    case 0x48:
+    case 72:
       result = "BUTTON_H";
       break;
-    case 0x49:
+    case 73:
       result = "BUTTON_I";
       break;
-    case 0x4A:
+    case 74:
       result = "BUTTON_J";
       break;
-    case 0x4B:
+    case 75:
       result = "BUTTON_K";
       break;
-    case 0x4C:
+    case 76:
       result = "BUTTON_L";
       break;
-    case 0x4D:
+    case 77:
       result = "BUTTON_M";
       break;
-    case 0x4E:
+    case 78:
       result = "BUTTON_N";
       break;
-    case 0x4F:
+    case 79:
       result = "BUTTON_O";
       break;
-    case 0x50:
+    case 80:
       result = "BUTTON_P";
       break;
-    case 0x51:
+    case 81:
       result = "BUTTON_Q";
       break;
-    case 0x52:
+    case 82:
       result = "BUTTON_R";
       break;
-    case 0x53:
+    case 83:
       result = "BUTTON_S";
       break;
-    case 0x54:
+    case 84:
       result = "BUTTON_T";
       break;
-    case 0x55:
+    case 85:
       result = "BUTTON_U";
       break;
-    case 0x56:
+    case 86:
       result = "BUTTON_V";
       break;
-    case 0x57:
+    case 87:
       result = "BUTTON_W";
       break;
-    case 0x58:
+    case 88:
       result = "BUTTON_X";
       break;
-    case 0x59:
+    case 89:
       result = "BUTTON_Y";
       break;
-    case 0x5A:
+    case 90:
       result = "BUTTON_Z";
       break;
-    case 0x5E:
+    case 94:
       result = "BUTTON_NUMENTER";
       break;
-    case 0x60:
+    case 96:
       result = "BUTTON_NUMZERO";
       break;
-    case 0x61:
+    case 97:
       result = "BUTTON_NUMONE";
       break;
-    case 0x62:
+    case 98:
       result = "BUTTON_NUMTWO";
       break;
-    case 0x63:
+    case 99:
       result = "BUTTON_NUMTHREE";
       break;
-    case 0x64:
+    case 100:
       result = "BUTTON_NUMFOUR";
       break;
-    case 0x65:
+    case 101:
       result = "BUTTON_NUMFIVE";
       break;
-    case 0x66:
+    case 102:
       result = "BUTTON_NUMSIX";
       break;
-    case 0x67:
+    case 103:
       result = "BUTTON_NUMSEVEN";
       break;
-    case 0x68:
+    case 104:
       result = "BUTTON_NUMEIGHT";
       break;
-    case 0x69:
+    case 105:
       result = "BUTTON_NUMNINE";
       break;
-    case 0x6A:
+    case 106:
       result = "BUTTON_NUMSTAR";
       break;
-    case 0x6B:
+    case 107:
       result = "BUTTON_NUMPLUS";
       break;
-    case 0x6D:
+    case 109:
       result = "BUTTON_NUMDASH";
       break;
-    case 0x6E:
+    case 110:
       result = "BUTTON_NUMDEL";
       break;
-    case 0x6F:
+    case 111:
       result = "BUTTON_NUMSLASH";
       break;
-    case 0x70:
+    case 112:
       result = "BUTTON_F1";
       break;
-    case 0x71:
+    case 113:
       result = "BUTTON_F2";
       break;
-    case 0x72:
+    case 114:
       result = "BUTTON_F3";
       break;
-    case 0x73:
+    case 115:
       result = "BUTTON_F4";
       break;
-    case 0x74:
+    case 116:
       result = "BUTTON_F5";
       break;
-    case 0x75:
+    case 117:
       result = "BUTTON_F6";
       break;
-    case 0x76:
+    case 118:
       result = "BUTTON_F7";
       break;
-    case 0x77:
+    case 119:
       result = "BUTTON_F8";
       break;
-    case 0x78:
+    case 120:
       result = "BUTTON_F9";
       break;
-    case 0x79:
+    case 121:
       result = "BUTTON_F10";
       break;
-    case 0x7A:
+    case 122:
       result = "BUTTON_F11";
       break;
-    case 0x7B:
+    case 123:
       result = "BUTTON_F12";
       break;
-    case 0x7C:
+    case 124:
       result = "BUTTON_F13";
       break;
-    case 0x7D:
+    case 125:
       result = "BUTTON_F14";
       break;
-    case 0x7E:
+    case 126:
       result = "BUTTON_F15";
       break;
-    case 0x7F:
+    case 127:
       result = "BUTTON_F16";
       break;
-    case 0x80:
+    case -128:
       result = "BUTTON_F17";
       break;
-    case 0x81:
+    case -127:
       result = "BUTTON_F18";
       break;
-    case 0x82:
+    case -126:
       result = "BUTTON_F19";
       break;
-    case 0x83:
+    case -125:
       result = "BUTTON_F20";
       break;
-    case 0x84:
+    case -124:
       result = "BUTTON_F21";
       break;
-    case 0x85:
+    case -123:
       result = "BUTTON_F22";
       break;
-    case 0x86:
+    case -122:
       result = "BUTTON_F23";
       break;
-    case 0x87:
+    case -121:
       v1 = "BUTTON_F24";
       goto LABEL_118;
-    case 0x90:
+    case -112:
       result = "BUTTON_NUMLOCK";
       break;
-    case 0xA0:
+    case -96:
       result = "BUTTON_LSHIFT";
       break;
-    case 0xA1:
+    case -95:
       result = "BUTTON_RSHIFT";
       break;
-    case 0xA2:
+    case -94:
       result = "BUTTON_LCTRL";
       break;
-    case 0xA3:
+    case -93:
       result = "BUTTON_RCTRL";
       break;
-    case 0xA4:
+    case -92:
       result = "BUTTON_LALT";
       break;
-    case 0xA5:
+    case -91:
       result = "BUTTON_RALT";
       break;
-    case 0xBA:
+    case -70:
       result = "BUTTON_SEMICOLON";
       break;
-    case 0xBB:
+    case -69:
       result = "BUTTON_EQUALES";
       break;
-    case 0xBC:
+    case -68:
       result = "BUTTON_COMMA";
       break;
-    case 0xBD:
+    case -67:
       result = "BUTTON_DASH";
       break;
-    case 0xBE:
+    case -66:
       result = "BUTTON_PERIOD";
       break;
-    case 0xBF:
+    case -65:
       result = "BUTTON_SLASH";
       break;
-    case 0xC0:
+    case -64:
       result = "BUTTON_TILDE";
       break;
-    case 0xDB:
+    case -37:
       result = "BUTTON_LSB";
       break;
-    case 0xDC:
+    case -36:
       result = "BUTTON_BACKSLASH";
       break;
-    case 0xDD:
+    case -35:
       result = "BUTTON_RSB";
       break;
-    case 0xDE:
+    case -34:
       result = "BUTTON_APOSTROPHE";
       break;
     default:

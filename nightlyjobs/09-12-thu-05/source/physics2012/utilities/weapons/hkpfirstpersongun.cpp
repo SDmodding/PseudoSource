@@ -2,69 +2,63 @@
 // RVA: 0xE14070
 void __fastcall hkpFirstPersonGun::hkpFirstPersonGun(hkpFirstPersonGun *this)
 {
-  hkpFirstPersonGun *v1; // rbx
-
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  v1 = this;
   this->vfptr = (hkBaseObjectVtbl *)&hkpFirstPersonGun::`vftable;
   this->m_type.m_storage = 0;
-  hkStringPtr::hkStringPtr(&this->m_name, &customWorldMapCaption);
-  v1->m_keyboardKey.m_storage = 113;
-  v1->m_listeners.m_data = 0i64;
-  v1->m_listeners.m_size = 0;
-  v1->m_listeners.m_capacityAndFlags = 2147483648;
+  hkStringPtr::hkStringPtr(&this->m_name, &customCaption);
+  this->m_keyboardKey.m_storage = 113;
+  this->m_listeners.m_data = 0i64;
+  this->m_listeners.m_size = 0;
+  this->m_listeners.m_capacityAndFlags = 0x80000000;
 }
 
 // File Line: 27
 // RVA: 0xE140E0
 const char *__fastcall hkpFirstPersonGun::getName(hkpFirstPersonGun *this)
 {
-  return (const char *)((_QWORD)this->m_name.m_stringAndFlag & 0xFFFFFFFFFFFFFFFEui64);
+  return (const char *)((unsigned __int64)this->m_name.m_stringAndFlag & 0xFFFFFFFFFFFFFFFEui64);
 }
 
 // File Line: 32
 // RVA: 0xE140D0
 void __fastcall hkpFirstPersonGun::quitGun(hkpFirstPersonGun *this, hkpWorld *world)
 {
-  this->vfptr[4].__vecDelDtor((hkBaseObject *)this, (unsigned int)world);
+  this->vfptr[4].__vecDelDtor(this, (unsigned int)world);
 }
 
 // File Line: 37
 // RVA: 0xE140F0
-hkResult *__fastcall hkpFirstPersonGun::sweepSphere(hkResult *result, hkpWorld *world, hkVector4f *sweepStart, float radius, hkVector4f *sweepEnd, hkpFirstPersonGun::SweepSphereOut *out)
+hkResult *__fastcall hkpFirstPersonGun::sweepSphere(
+        hkResult *result,
+        hkpWorld *world,
+        hkVector4f *sweepStart,
+        float radius,
+        hkVector4f *sweepEnd,
+        hkpFirstPersonGun::SweepSphereOut *out)
 {
-  hkResult *v6; // rbx
-  hkVector4f *v7; // rsi
-  hkpWorld *v8; // r14
-  _QWORD **v9; // rax
+  _QWORD **Value; // rax
   hkpSphereShape *v10; // rax
   hkpShape *v11; // rax
   hkpShape *v12; // rdi
-  __int128 v13; // xmm1
+  __m128 m_quad; // xmm1
   char v14; // sp
   char v15; // cl
   __m128 v16; // xmm0
   hkVector4f v17; // xmm1
   __int64 v18; // rdx
   __int64 v19; // rax
-  hkpCollidable collA; // [rsp+30h] [rbp-D0h]
-  hkpLinearCastInput input; // [rsp+A0h] [rbp-60h]
-  hkpCdPointCollector castCollector; // [rsp+C0h] [rbp-40h]
+  hkpCollidable collA; // [rsp+30h] [rbp-D0h] BYREF
+  hkpLinearCastInput input; // [rsp+A0h] [rbp-60h] BYREF
+  hkpCdPointCollector castCollector; // [rsp+C0h] [rbp-40h] BYREF
   hkVector4f v24; // [rsp+D0h] [rbp-30h]
   __m128 v25; // [rsp+E0h] [rbp-20h]
   __int64 v26; // [rsp+F0h] [rbp-10h]
   __int64 v27; // [rsp+100h] [rbp+0h]
   unsigned int v28; // [rsp+108h] [rbp+8h]
-  __m128 v29; // [rsp+120h] [rbp+20h]
-  __m128 v30; // [rsp+130h] [rbp+30h]
-  __m128 v31; // [rsp+140h] [rbp+40h]
-  __int128 v32; // [rsp+150h] [rbp+50h]
+  __int128 v29[5]; // [rsp+120h] [rbp+20h] BYREF
 
-  v6 = result;
-  v7 = sweepStart;
-  v8 = world;
-  v9 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v10 = (hkpSphereShape *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v9[11] + 8i64))(v9[11], 56i64);
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v10 = (hkpSphereShape *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 56i64);
   if ( v10 )
   {
     hkpSphereShape::hkpSphereShape(v10, radius);
@@ -76,18 +70,18 @@ hkResult *__fastcall hkpFirstPersonGun::sweepSphere(hkResult *result, hkpWorld *
   }
   collA.m_shape = v12;
   collA.m_parent = 0i64;
-  v29 = transform.m_quad;
-  v30 = direction.m_quad;
-  collA.m_motion = &v29;
+  v29[0] = (__int128)transform.m_quad;
+  v29[1] = (__int128)direction.m_quad;
+  collA.m_motion = v29;
   collA.m_shapeKey = -1;
   collA.m_ownerOffset = 0;
-  v13 = (__int128)v7->m_quad;
-  v31 = stru_141A71280.m_quad;
+  m_quad = sweepStart->m_quad;
+  v29[2] = (__int128)stru_141A71280.m_quad;
   collA.m_broadPhaseHandle.m_id = 0;
   *(_WORD *)&collA.m_broadPhaseHandle.m_type = 32512;
   collA.m_broadPhaseHandle.m_collisionFilterInfo = 0;
   collA.m_broadPhaseHandle.m_objectQualityType = -1;
-  v32 = v13;
+  v29[3] = (__int128)m_quad;
   hkpCollidable::BoundingVolumeData::BoundingVolumeData(&collA.m_boundingVolumeData);
   v15 = v14 + 84;
   collA.m_allowedPenetrationDepth = FLOAT_N1_0;
@@ -102,8 +96,8 @@ hkResult *__fastcall hkpFirstPersonGun::sweepSphere(hkResult *result, hkpWorld *
   input.m_maxExtraPenetration = 0.00000011920929;
   castCollector.vfptr = (hkpCdPointCollectorVtbl *)&hkpClosestCdPointCollector::`vftable;
   input.m_startPointTolerance = 0.00000011920929;
-  hkpWorld::linearCast(v8, &collA, &input, &castCollector, 0i64);
-  hkReferencedObject::removeReference((hkReferencedObject *)&v12->vfptr);
+  hkpWorld::linearCast(world, &collA, &input, &castCollector, 0i64);
+  hkReferencedObject::removeReference(v12);
   if ( v26 )
   {
     v17.m_quad = v25;
@@ -113,32 +107,37 @@ hkResult *__fastcall hkpFirstPersonGun::sweepSphere(hkResult *result, hkpWorld *
     if ( *(_BYTE *)(v18 + 40) == 1 )
     {
       v19 = *(char *)(v18 + 32);
-      v6->m_enum = 0;
+      result->m_enum = HK_SUCCESS;
       out->m_body = (hkpRigidBody *)(v18 + v19);
     }
     else
     {
-      v6->m_enum = 0;
+      result->m_enum = HK_SUCCESS;
       out->m_body = 0i64;
     }
     out->m_shapeKey = v28;
   }
   else
   {
-    v6->m_enum = 1;
+    result->m_enum = HK_FAILURE;
     out->m_body = 0i64;
     out->m_contactPoint.m_position = (hkVector4f)sweepEnd->m_quad;
     out->m_shapeKey = -1;
     out->m_contactPoint.m_separatingNormal = (hkVector4f)aabbOut.m_quad;
   }
-  return v6;
+  return result;
 }
 
 // File Line: 76
 // RVA: 0xE14300
-void __fastcall hkpFirstPersonGun::calcVelocityToTarget(hkVector4f *position, hkVector4f *target, hkVector4f *gravity, float speedR, hkVector4f *velocity)
+void __fastcall hkpFirstPersonGun::calcVelocityToTarget(
+        hkVector4f *position,
+        hkVector4f *target,
+        hkVector4f *gravity,
+        float speedR,
+        hkVector4f *velocity)
 {
-  hkVector4f v5; // xmm6
+  __m128 v5; // xmm6
   __m128 v6; // xmm7
   __m128 v7; // xmm1
   __m128 v8; // xmm3
@@ -153,19 +152,19 @@ void __fastcall hkpFirstPersonGun::calcVelocityToTarget(hkVector4f *position, hk
   __m128 v17; // xmm1
   __m128 v18; // xmm1
 
-  v5.m_quad = _mm_sub_ps(target->m_quad, position->m_quad);
+  v5 = _mm_sub_ps(target->m_quad, position->m_quad);
   v6 = _mm_shuffle_ps((__m128)LODWORD(speedR), (__m128)LODWORD(speedR), 0);
-  v7 = _mm_mul_ps(v5.m_quad, v5.m_quad);
+  v7 = _mm_mul_ps(v5, v5);
   v8 = _mm_add_ps(_mm_add_ps(_mm_shuffle_ps(v7, v7, 85), _mm_shuffle_ps(v7, v7, 0)), _mm_shuffle_ps(v7, v7, 170));
   v9 = _mm_rsqrt_ps(v8);
   v10 = _mm_andnot_ps(
-          _mm_cmpleps(v8, (__m128)0i64),
+          _mm_cmple_ps(v8, (__m128)0i64),
           _mm_mul_ps(
             _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v9, v8), v9)), _mm_mul_ps(*(__m128 *)_xmm, v9)),
             v8));
   if ( v10.m128_f32[0] <= 0.00000011920929 )
   {
-    *velocity = (hkVector4f)v5.m_quad;
+    *velocity = (hkVector4f)v5;
   }
   else
   {
@@ -181,7 +180,7 @@ void __fastcall hkpFirstPersonGun::calcVelocityToTarget(hkVector4f *position, hk
             _mm_shuffle_ps(v13, v13, 170));
     v15 = _mm_rsqrt_ps(v14);
     v16 = _mm_andnot_ps(
-            _mm_cmpleps(v14, (__m128)0i64),
+            _mm_cmple_ps(v14, (__m128)0i64),
             _mm_mul_ps(
               _mm_mul_ps(
                 _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v15, v14), v15)),
@@ -194,9 +193,7 @@ void __fastcall hkpFirstPersonGun::calcVelocityToTarget(hkVector4f *position, hk
     }
     v18 = _mm_rcp_ps(v10);
     velocity->m_quad = _mm_add_ps(
-                         _mm_mul_ps(
-                           _mm_mul_ps(_mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v18, v10)), v18), v6),
-                           v5.m_quad),
+                         _mm_mul_ps(_mm_mul_ps(_mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v18, v10)), v18), v6), v5),
                          v12);
   }
 }

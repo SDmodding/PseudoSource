@@ -1,28 +1,24 @@
 // File Line: 64
 // RVA: 0xD3ED70
-void __fastcall fixupPotentialContactPointers(const char *extensionBuffer, void *dst, int bytesUsedInExtensionBuffer, hkpProcessCollisionOutput::PotentialInfo *potentialInfo)
+void __fastcall fixupPotentialContactPointers(
+        char *extensionBuffer,
+        _BYTE *dst,
+        int bytesUsedInExtensionBuffer,
+        hkpProcessCollisionOutput::PotentialInfo *potentialInfo)
 {
-  hkpProcessCollisionOutput::PotentialInfo *v4; // r10
-  hkpProcessCollisionOutput::ContactRef *v5; // rax
-  signed __int64 v6; // r9
+  hkpProcessCollisionOutput::ContactRef *i; // rax
+  __int64 v6; // r9
 
-  v4 = potentialInfo;
   if ( potentialInfo )
   {
-    v5 = potentialInfo->m_potentialContacts;
-    if ( potentialInfo->m_potentialContacts < potentialInfo->m_firstFreePotentialContact )
+    for ( i = potentialInfo->m_potentialContacts; i < potentialInfo->m_firstFreePotentialContact; ++i )
     {
-      do
+      v6 = (char *)i->m_agentEntry - extensionBuffer;
+      if ( v6 >= 0 && v6 < bytesUsedInExtensionBuffer )
       {
-        v6 = (char *)v5->m_agentEntry - (char *)extensionBuffer;
-        if ( v6 >= 0 && v6 < bytesUsedInExtensionBuffer )
-        {
-          v5->m_agentEntry = (hkpAgentEntry *)((char *)dst + v6);
-          v5->m_agentData = (char *)v5->m_agentData + (_BYTE *)dst - extensionBuffer;
-        }
-        ++v5;
+        i->m_agentEntry = (hkpAgentEntry *)&dst[v6];
+        i->m_agentData = (char *)i->m_agentData + dst - extensionBuffer;
       }
-      while ( v5 < v4->m_firstFreePotentialContact );
     }
   }
 }

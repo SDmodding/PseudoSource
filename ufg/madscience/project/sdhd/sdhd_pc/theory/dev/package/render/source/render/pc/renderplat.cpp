@@ -6,7 +6,7 @@ __int64 UFG::_dynamic_initializer_for__gScreenMinimizedEvent__()
     &UFG::gScreenMinimizedEvent,
     "ScreenMinimizedEvent",
     "This is an event that gets generated when the screen is minimized.");
-  return atexit(UFG::_dynamic_atexit_destructor_for__gScreenMinimizedEvent__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gScreenMinimizedEvent__);
 }
 
 // File Line: 118
@@ -17,7 +17,7 @@ __int64 UFG::_dynamic_initializer_for__gScreenRestoredEvent__()
     &UFG::gScreenRestoredEvent,
     "ScreenRestoredEvent",
     "This is an event that gets generated when the screen is restored.");
-  return atexit(UFG::_dynamic_atexit_destructor_for__gScreenRestoredEvent__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gScreenRestoredEvent__);
 }
 
 // File Line: 162
@@ -31,37 +31,37 @@ void dynamic_initializer_for__gOutputParams__()
 // RVA: 0x15879B0
 __int64 dynamic_initializer_for__sDXGIMutex__()
 {
-  UFG::qMutex::qMutex(&sDXGIMutex, &customWorldMapCaption);
-  return atexit(dynamic_atexit_destructor_for__sDXGIMutex__);
+  UFG::qMutex::qMutex(&sDXGIMutex, &customCaption);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__sDXGIMutex__);
 }
 
 // File Line: 187
 // RVA: 0x1587990
 __int64 dynamic_initializer_for__sAvailableDXGIAdapters__()
 {
-  return atexit(dynamic_atexit_destructor_for__sAvailableDXGIAdapters__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__sAvailableDXGIAdapters__);
 }
 
 // File Line: 197
 // RVA: 0x15879A0
 __int64 dynamic_initializer_for__sAvailableDXGIOutputs__()
 {
-  return atexit(dynamic_atexit_destructor_for__sAvailableDXGIOutputs__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__sAvailableDXGIOutputs__);
 }
 
 // File Line: 213
 // RVA: 0x15879E0
 __int64 dynamic_initializer_for__sPendingCommandBuilders__()
 {
-  return atexit(dynamic_atexit_destructor_for__sPendingCommandBuilders__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__sPendingCommandBuilders__);
 }
 
 // File Line: 214
 // RVA: 0x1587A00
 __int64 dynamic_initializer_for__sPendingCommandBuildersMutex__()
 {
-  UFG::qMutex::qMutex(&sPendingCommandBuildersMutex, &customWorldMapCaption);
-  return atexit(dynamic_atexit_destructor_for__sPendingCommandBuildersMutex__);
+  UFG::qMutex::qMutex(&sPendingCommandBuildersMutex, &customCaption);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__sPendingCommandBuildersMutex__);
 }
 
 // File Line: 250
@@ -73,45 +73,36 @@ void __fastcall Stereo3D::~Stereo3D(Stereo3D *this)
 
 // File Line: 313
 // RVA: 0x69F9C0
-signed __int64 __fastcall NVStereo3D::Init(NVStereo3D *this)
+__int64 __fastcall NVStereo3D::Init(NVStereo3D *this)
 {
-  NVStereo3D *v1; // rbx
-  char pIsStereoEnabled; // [rsp+30h] [rbp+8h]
+  char pIsStereoEnabled; // [rsp+30h] [rbp+8h] BYREF
 
-  v1 = this;
   *(_WORD *)&this->mNV3DVision = 256;
   if ( NvAPI_Stereo_IsEnabled(&pIsStereoEnabled) || !pIsStereoEnabled )
     return 2147500037i64;
   NvAPI_Stereo_SetDriverMode(NVAPI_STEREO_DRIVER_MODE_DIRECT);
-  NvAPI_Stereo_CreateConfigurationProfileRegistryKey(0);
-  v1->mNV3DVision = 1;
+  NvAPI_Stereo_CreateConfigurationProfileRegistryKey(NVAPI_STEREO_DEFAULT_REGISTRY_PROFILE);
+  this->mNV3DVision = 1;
   return 0i64;
 }
 
 // File Line: 349
 // RVA: 0x6A0440
-signed __int64 __fastcall NVStereo3D::InitStereo3D(NVStereo3D *this, ID3D11Device *pDevice, HWND__ *hwnd)
+__int64 __fastcall NVStereo3D::InitStereo3D(NVStereo3D *this, IUnknown *pDevice, HWND__ *hwnd)
 {
-  HWND__ *v3; // rsi
-  NVStereo3D *v4; // rbx
-  signed __int64 result; // rax
-
-  v3 = hwnd;
-  v4 = this;
   if ( !this->mNV3DVision )
     return 2147500037i64;
-  if ( NvAPI_Stereo_CreateHandleFromIUnknown((IUnknown *)pDevice, &this->mStereoHandle) )
+  if ( NvAPI_Stereo_CreateHandleFromIUnknown(pDevice, &this->mStereoHandle) )
   {
-    v4->mNV3DVision = 0;
-    result = 2147500037i64;
+    this->mNV3DVision = 0;
+    return 2147500037i64;
   }
   else
   {
-    NvAPI_Stereo_SetActiveEye(v4->mStereoHandle, NVAPI_STEREO_EYE_MONO);
-    NvAPI_Stereo_SetNotificationMessage(v4->mStereoHandle, (unsigned __int64)v3, 0xBB8ui64);
-    result = 0i64;
+    NvAPI_Stereo_SetActiveEye(this->mStereoHandle, NVAPI_STEREO_EYE_MONO);
+    NvAPI_Stereo_SetNotificationMessage(this->mStereoHandle, (unsigned __int64)hwnd, 0xBB8ui64);
+    return 0i64;
   }
-  return result;
 }
 
 // File Line: 378
@@ -123,19 +114,24 @@ _BOOL8 __fastcall NVStereo3D::Stereo3DAvailable(NVStereo3D *this)
 
 // File Line: 384
 // RVA: 0x69ED40
-signed __int64 __fastcall NVStereo3D::CreateStereoSwapChain(NVStereo3D *this, IDXGIFactory1 *pIDXGIFactory, ID3D11Device *pd3d11Device, DXGI_SWAP_CHAIN_DESC *pRequestedSwapChainDesc, IDXGISwapChain **ppSwapChain)
+__int64 __fastcall NVStereo3D::CreateStereoSwapChain(
+        NVStereo3D *this,
+        IDXGIFactory1 *pIDXGIFactory,
+        ID3D11Device *pd3d11Device,
+        DXGI_SWAP_CHAIN_DESC *pRequestedSwapChainDesc,
+        IDXGISwapChain **ppSwapChain)
 {
   unsigned int v5; // ebx
 
   if ( !this->mNV3DVision )
     return 2147500037i64;
   v5 = 0;
-  if ( (NvAPI_D3D1x_CreateSwapChain(
-          this->mStereoHandle,
-          &pRequestedSwapChainDesc->BufferDesc.Width,
-          (unsigned int **)ppSwapChain,
-          NVAPI_STEREO_SWAPCHAIN_STEREO) & 0x80000000) != 0 )
-    v5 = -2147467259;
+  if ( NvAPI_D3D1x_CreateSwapChain(
+         this->mStereoHandle,
+         &pRequestedSwapChainDesc->BufferDesc.Width,
+         (unsigned int **)ppSwapChain,
+         NVAPI_STEREO_SWAPCHAIN_STEREO) < NVAPI_OK )
+    return (unsigned int)-2147467259;
   return v5;
 }
 
@@ -145,7 +141,7 @@ void __fastcall NVStereo3D::SelectEye(NVStereo3D *this, Render::eStereoRenderEye
 {
   if ( eye )
   {
-    if ( eye == 1 )
+    if ( eye == STEREO_EYE_RIGHT )
       NvAPI_Stereo_SetActiveEye(this->mStereoHandle, NVAPI_STEREO_EYE_RIGHT);
   }
   else
@@ -156,30 +152,29 @@ void __fastcall NVStereo3D::SelectEye(NVStereo3D *this, Render::eStereoRenderEye
 
 // File Line: 420
 // RVA: 0x69EC70
-void __fastcall NVStereo3D::CopyToEye(NVStereo3D *this, Render::eStereoRenderEye eye, ID3D11DeviceContext *pD3DContext, ID3D11Resource *pDstResource, ID3D11Resource *pSrcResource, const int pixelConvergence)
+void __fastcall NVStereo3D::CopyToEye(
+        NVStereo3D *this,
+        Render::eStereoRenderEye eye,
+        ID3D11DeviceContext *pD3DContext,
+        ID3D11Resource *pDstResource,
+        ID3D11Resource *pSrcResource,
+        unsigned int pixelConvergence)
 {
-  ID3D11Resource *v6; // rsi
-  ID3D11DeviceContext *v7; // rdi
-  Render::eStereoRenderEye v8; // ebx
-  IUnknownVtbl *v9; // r10
+  IUnknownVtbl *vfptr; // r10
   int v10; // eax
   __int64 v11; // r9
-  char v12[12]; // [rsp+50h] [rbp-28h]
+  _BYTE v12[12]; // [rsp+50h] [rbp-28h] BYREF
   int v13; // [rsp+5Ch] [rbp-1Ch]
   int v14; // [rsp+60h] [rbp-18h]
   int v15; // [rsp+64h] [rbp-14h]
 
-  v6 = pDstResource;
-  v7 = pD3DContext;
-  v8 = eye;
-  ((void (*)(void))this->vfptr->SelectEye)();
-  v9 = v7->vfptr;
+  ((void (__fastcall *)(NVStereo3D *))this->vfptr->SelectEye)(this);
+  vfptr = pD3DContext->vfptr;
   v15 = 1;
-  if ( v8 )
+  if ( eye )
   {
-    v11 = (unsigned int)pixelConvergence;
-    *(_QWORD *)v12 = 0i64;
-    *(_DWORD *)&v12[8] = 0;
+    v11 = pixelConvergence;
+    memset(v12, 0, sizeof(v12));
     v10 = gScreenWidth - pixelConvergence;
   }
   else
@@ -191,9 +186,9 @@ void __fastcall NVStereo3D::CopyToEye(NVStereo3D *this, Render::eStereoRenderEye
   }
   v13 = v10;
   v14 = gScreenHeight;
-  ((void (__fastcall *)(ID3D11DeviceContext *, ID3D11Resource *, _QWORD, __int64, _DWORD, _DWORD, ID3D11Resource *, _DWORD, char *))v9[15].AddRef)(
-    v7,
-    v6,
+  ((void (__fastcall *)(ID3D11DeviceContext *, ID3D11Resource *, _QWORD, __int64, _DWORD, _DWORD, ID3D11Resource *, _DWORD, _BYTE *))vfptr[15].AddRef)(
+    pD3DContext,
+    pDstResource,
     0i64,
     v11,
     0,
@@ -205,6 +200,7 @@ void __fastcall NVStereo3D::CopyToEye(NVStereo3D *this, Render::eStereoRenderEye
 
 // File Line: 449
 // RVA: 0x69F230
+// attributes: thunk
 void __fastcall NVStereo3D::Enable(NVStereo3D *this)
 {
   NvAPI_Stereo_Enable();
@@ -212,6 +208,7 @@ void __fastcall NVStereo3D::Enable(NVStereo3D *this)
 
 // File Line: 455
 // RVA: 0x69EDA0
+// attributes: thunk
 void __fastcall NVStereo3D::Disable(NVStereo3D *this)
 {
   NvAPI_Stereo_Disable();
@@ -221,13 +218,10 @@ void __fastcall NVStereo3D::Disable(NVStereo3D *this)
 // RVA: 0x69E5E0
 void __fastcall AMDStereo3D::AMDStereo3D(AMDStereo3D *this)
 {
-  AMDStereo3D *v1; // rbx
-
-  v1 = this;
   this->vfptr = (Stereo3DVtbl *)&Stereo3D::`vftable;
   this->vfptr = (Stereo3DVtbl *)&AMDStereo3D::`vftable;
   AMD_HD3D::AMD_HD3D(&this->mHD3D);
-  *(_WORD *)&v1->mAMDHD3D = 0;
+  *(_WORD *)&this->mAMDHD3D = 0;
 }
 
 // File Line: 512
@@ -254,7 +248,12 @@ _BOOL8 __fastcall Scaleform::MemoryFile::IsValid(TargetPlayHoldTask *this, float
 
 // File Line: 535
 // RVA: 0x69ED30
-HRESULT __fastcall AMDStereo3D::CreateStereoSwapChain(AMDStereo3D *this, IDXGIFactory1 *pIDXGIFactory, ID3D11Device *pd3d11Device, DXGI_SWAP_CHAIN_DESC *pRequestedSwapChainDesc, IDXGISwapChain **ppSwapChain)
+HRESULT __fastcall AMDStereo3D::CreateStereoSwapChain(
+        AMDStereo3D *this,
+        IDXGIFactory1 *pIDXGIFactory,
+        ID3D11Device *pd3d11Device,
+        DXGI_SWAP_CHAIN_DESC *pRequestedSwapChainDesc,
+        IDXGISwapChain **ppSwapChain)
 {
   return AMD_HD3D::CreateStereoSwapChain(
            &this->mHD3D,
@@ -266,59 +265,52 @@ HRESULT __fastcall AMDStereo3D::CreateStereoSwapChain(AMDStereo3D *this, IDXGIFa
 
 // File Line: 541
 // RVA: 0x6A2020
-void __fastcall AMDStereo3D::SelectEye(AMDStereo3D *this, Render::eStereoRenderEye eye)
+void __fastcall AMDStereo3D::SelectEye(AMDStereo3D *this, unsigned int eye)
 {
-  if ( eye )
-  {
-    if ( eye == 1 )
-      _(&this->mHD3D);
-  }
-  else
-  {
+  if ( eye <= 1 )
     _(&this->mHD3D);
-  }
 }
 
 // File Line: 557
 // RVA: 0x69EBB0
-void __fastcall AMDStereo3D::CopyToEye(AMDStereo3D *this, Render::eStereoRenderEye eye, ID3D11DeviceContext *pD3DContext, ID3D11Resource *pDstResource, ID3D11Resource *pSrcResource, const int pixelConvergence)
+void __fastcall AMDStereo3D::CopyToEye(
+        AMDStereo3D *this,
+        Render::eStereoRenderEye eye,
+        ID3D11DeviceContext *pD3DContext,
+        ID3D11Resource *pDstResource,
+        ID3D11Resource *pSrcResource,
+        int pixelConvergence)
 {
-  IUnknownVtbl *v6; // r10
-  int v7; // ST38_4
-  int v8; // ST28_4
-  int v9; // ST20_4
-  int v10; // [rsp+50h] [rbp-28h]
-  __int64 v11; // [rsp+54h] [rbp-24h]
-  int v12; // [rsp+5Ch] [rbp-1Ch]
-  int v13; // [rsp+60h] [rbp-18h]
-  int v14; // [rsp+64h] [rbp-14h]
+  IUnknownVtbl *vfptr; // r10
+  int v7; // [rsp+50h] [rbp-28h] BYREF
+  __int64 v8; // [rsp+54h] [rbp-24h]
+  int v9; // [rsp+5Ch] [rbp-1Ch]
+  int v10; // [rsp+60h] [rbp-18h]
+  int v11; // [rsp+64h] [rbp-14h]
 
   if ( eye )
   {
-    if ( eye == 1 )
+    if ( eye == STEREO_EYE_RIGHT )
       AMD_HD3D::UpdateRightQuadBuffer(&this->mHD3D, pD3DContext, pDstResource, pSrcResource, pixelConvergence);
   }
   else
   {
-    v6 = pD3DContext->vfptr;
-    v10 = pixelConvergence;
-    v12 = gScreenWidth - pixelConvergence;
-    v11 = 0i64;
-    v13 = gScreenHeight;
-    v7 = 0;
-    v8 = 0;
-    v9 = 0;
-    v14 = 1;
-    ((void (__fastcall *)(ID3D11DeviceContext *, ID3D11Resource *, _QWORD, _QWORD, int, int, ID3D11Resource *, int, int *))v6[15].AddRef)(
+    vfptr = pD3DContext->vfptr;
+    v7 = pixelConvergence;
+    v9 = gScreenWidth - pixelConvergence;
+    v8 = 0i64;
+    v10 = gScreenHeight;
+    v11 = 1;
+    ((void (__fastcall *)(ID3D11DeviceContext *, ID3D11Resource *, _QWORD, _QWORD, _DWORD, _DWORD, ID3D11Resource *, _DWORD, int *))vfptr[15].AddRef)(
       pD3DContext,
       pDstResource,
       0i64,
       0i64,
-      v9,
-      v8,
+      0,
+      0,
       pSrcResource,
-      v7,
-      &v10);
+      0,
+      &v7);
   }
 }
 
@@ -406,34 +398,28 @@ Render::WndProc
 
 // File Line: 839
 // RVA: 0x69F950
-void __fastcall Render::GetWindowRectAndStyle(tagRECT *rc, unsigned int *dwStyle, unsigned int *dwStyleEx, int client_w, int client_h)
+void __fastcall Render::GetWindowRectAndStyle(
+        tagRECT *rc,
+        unsigned int *dwStyle,
+        unsigned int *dwStyleEx,
+        int client_w,
+        int client_h)
 {
-  unsigned int *v5; // rbx
-  unsigned int *v6; // rdi
-  tagRECT *v7; // rsi
-
   *dwStyle = 13565952;
-  v5 = dwStyleEx;
-  v6 = dwStyle;
   *dwStyleEx = 0;
-  v7 = rc;
   SetRect(rc, 0, 0, client_w, client_h);
-  AdjustWindowRectEx(v7, *v6, 0, *v5);
+  AdjustWindowRectEx(rc, *dwStyle, 0, *dwStyleEx);
 }
 
 // File Line: 849
 // RVA: 0x6A2250
 void __fastcall Render::SetWindow(int width, int height)
 {
-  int v2; // edi
-  int yBottom; // ebx
-  tagRECT rc; // [rsp+30h] [rbp-28h]
-  tagRECT Rect; // [rsp+40h] [rbp-18h]
+  tagRECT rc; // [rsp+30h] [rbp-28h] BYREF
+  tagRECT Rect; // [rsp+40h] [rbp-18h] BYREF
 
-  v2 = width;
-  yBottom = height;
   GetWindowRect(ghWnd, &Rect);
-  SetRect(&rc, 0, 0, v2, yBottom);
+  SetRect(&rc, 0, 0, width, height);
   AdjustWindowRectEx(&rc, 0xCF0000u, 0, 0);
   MoveWindow(ghWnd, Rect.left, Rect.top, rc.right - rc.left, rc.bottom - rc.top, 1);
 }
@@ -442,57 +428,47 @@ void __fastcall Render::SetWindow(int width, int height)
 // RVA: 0x6A0650
 signed __int64 __fastcall Render::InitWindow(Render::RenderInitParams *params)
 {
-  unsigned int v1; // ebx
-  Render::RenderInitParams *v2; // rdi
-  HMODULE v3; // rax
-  HICON__ *v4; // rax
-  unsigned int v5; // ebx
+  unsigned int mIconResourceId; // ebx
+  HMODULE ModuleHandleA; // rax
+  HICON__ *IconA; // rax
+  unsigned int mCursorResourceId; // ebx
   HMODULE v6; // rax
-  HICON__ *v7; // rax
-  int v9; // er9
+  HICON__ *CursorA; // rax
+  int v9; // r9d
   __int64 yBottom; // rcx
-  HWND v11; // rax
-  tagRECT rc; // [rsp+60h] [rbp-78h]
-  tagRECT Rect; // [rsp+70h] [rbp-68h]
-  WNDCLASSEXA v14; // [rsp+80h] [rbp-58h]
+  HWND Window; // rax
+  tagRECT rc; // [rsp+60h] [rbp-78h] BYREF
+  tagRECT Rect; // [rsp+70h] [rbp-68h] BYREF
+  WNDCLASSEXA v14; // [rsp+80h] [rbp-58h] BYREF
 
-  v1 = (unsigned __int16)params->mIconResourceId;
-  v2 = params;
+  mIconResourceId = (unsigned __int16)params->mIconResourceId;
   v14.lpfnWndProc = Render::WndProc;
   v14.cbSize = 80;
   v14.style = 11;
   v14.hInstance = gInstance;
   *(_QWORD *)&v14.cbClsExtra = 0i64;
-  v3 = GetModuleHandleA(0i64);
-  v4 = LoadIconA(v3, (LPCSTR)v1);
-  v5 = (unsigned __int16)v2->mCursorResourceId;
-  v14.hIcon = v4;
+  ModuleHandleA = GetModuleHandleA(0i64);
+  IconA = LoadIconA(ModuleHandleA, (LPCSTR)mIconResourceId);
+  mCursorResourceId = (unsigned __int16)params->mCursorResourceId;
+  v14.hIcon = IconA;
   v6 = GetModuleHandleA(0i64);
-  v7 = LoadCursorA(v6, (LPCSTR)v5);
-  _mm_store_si128((__m128i *)&v14.hbrBackground, _mm_load_si128((const __m128i *)&_xmm));
+  CursorA = LoadCursorA(v6, (LPCSTR)mCursorResourceId);
+  *(__m128i *)&v14.hbrBackground = _mm_load_si128((const __m128i *)&_xmm);
   v14.lpszClassName = "TheoryWindowClassPC64";
   v14.hIconSm = 0i64;
-  v14.hCursor = v7;
+  v14.hCursor = CursorA;
   if ( !RegisterClassExA(&v14) )
     return 0i64;
-  *(_OWORD *)&gOutputParams.mDisplayMode.mBackBufferWidth = *(_OWORD *)&v2->mRenderOutputParams.mDisplayMode.mBackBufferWidth;
+  gOutputParams = params->mRenderOutputParams;
   v9 = _mm_cvtsi128_si32(*(__m128i *)&gOutputParams.mDisplayMode.mBackBufferWidth);
-  *(_OWORD *)&gOutputParams.mDisplayMode.mAdapterUID = *(_OWORD *)&v2->mRenderOutputParams.mDisplayMode.mAdapterUID;
-  *(_OWORD *)&gOutputParams.mEnableFullscreen = *(_OWORD *)&v2->mRenderOutputParams.mEnableFullscreen;
-  *(_OWORD *)&gOutputParams.mShadowFilter = *(_OWORD *)&v2->mRenderOutputParams.mShadowFilter;
-  *(_OWORD *)&gOutputParams.mFPSLimiter = *(_OWORD *)&v2->mRenderOutputParams.mFPSLimiter;
-  *(_OWORD *)&gOutputParams.mLODSetting = *(_OWORD *)&v2->mRenderOutputParams.mLODSetting;
-  *(_QWORD *)&gOutputParams.mTextureFilterQuality = *(_QWORD *)&v2->mRenderOutputParams.mTextureFilterQuality;
-  if ( !v9 )
-    goto LABEL_11;
-  yBottom = *(_QWORD *)&gOutputParams.mDisplayMode.mBackBufferWidth >> 32;
-  if ( gOutputParams.mDisplayMode.mBackBufferHeight )
+  if ( v9
+    && (yBottom = HIDWORD(*(_QWORD *)&gOutputParams.mDisplayMode.mBackBufferWidth),
+        gOutputParams.mDisplayMode.mBackBufferHeight) )
   {
-    gScreenHeight = yBottom;
+    gScreenHeight = gOutputParams.mDisplayMode.mBackBufferHeight;
   }
   else
   {
-LABEL_11:
     v9 = g_MainViewWidth;
     LODWORD(yBottom) = g_MainViewHeight;
     gScreenHeight = g_MainViewHeight;
@@ -501,26 +477,26 @@ LABEL_11:
   }
   gScreenWidth = v9;
   g_Fullscreen = gOutputParams.mEnableFullscreen;
-  g_PrevFullscreen = gOutputParams.mEnableFullscreen == 0;
+  g_PrevFullscreen = !gOutputParams.mEnableFullscreen;
   SetRect(&rc, 0, 0, v9, yBottom);
   AdjustWindowRectEx(&rc, 0xCF0000u, 0, 0);
-  v11 = CreateWindowExA(
-          0,
-          "TheoryWindowClassPC64",
-          v2->mTitleName,
-          0xCF0000u,
-          2147483648,
-          2147483648,
-          rc.right - rc.left,
-          rc.bottom - rc.top,
-          0i64,
-          0i64,
-          gInstance,
-          0i64);
-  ghWnd = v11;
-  if ( !v11 )
+  Window = CreateWindowExA(
+             0,
+             "TheoryWindowClassPC64",
+             params->mTitleName,
+             0xCF0000u,
+             0x80000000,
+             0x80000000,
+             rc.right - rc.left,
+             rc.bottom - rc.top,
+             0i64,
+             0i64,
+             gInstance,
+             0i64);
+  ghWnd = Window;
+  if ( !Window )
     return 0i64;
-  GetClientRect(v11, &Rect);
+  GetClientRect(Window, &Rect);
   ShowWindow(ghWnd, gCmdShow);
   return 1i64;
 }
@@ -529,118 +505,109 @@ LABEL_11:
 // RVA: 0x69F270
 void __fastcall Render::EnumerateAdaptersAndOutputs(Render *this)
 {
-  unsigned int v1; // er15
-  int v2; // er14
-  unsigned int v3; // esi
+  unsigned int v1; // r15d
+  int v2; // r14d
+  unsigned int i; // esi
   unsigned __int64 v4; // rax
   unsigned __int64 v5; // rdi
   unsigned int v6; // ebx
   unsigned int v7; // edx
-  OutputInfo *v8; // rax
+  OutputInfo *p; // rax
   unsigned __int64 v9; // rcx
   __int64 v10; // rdi
   unsigned int v11; // ebx
   unsigned int v12; // edx
   char *v13; // rdx
   AdapterInfo *v14; // rcx
-  signed __int64 v15; // rax
+  __int64 v15; // rax
   __int128 v16; // xmm0
   __int64 v17; // rdx
-  __int128 v18; // [rsp+30h] [rbp-D0h]
-  __int128 v19; // [rsp+40h] [rbp-C0h]
-  __int128 v20; // [rsp+50h] [rbp-B0h]
-  __int128 v21; // [rsp+60h] [rbp-A0h]
-  tagRECT v22; // [rsp+70h] [rbp-90h]
-  __int128 v23; // [rsp+80h] [rbp-80h]
-  __int128 v24; // [rsp+90h] [rbp-70h]
-  UFG::allocator::free_link *v25; // [rsp+A0h] [rbp-60h]
-  char Src; // [rsp+B0h] [rbp-50h]
-  int v27; // [rsp+1E0h] [rbp+E0h]
-  __int64 v28; // [rsp+1E8h] [rbp+E8h]
-  unsigned int v29; // [rsp+1F0h] [rbp+F0h]
-  unsigned int v30; // [rsp+1F4h] [rbp+F4h]
-  unsigned int v31; // [rsp+1F8h] [rbp+F8h]
-  __int64 v32; // [rsp+240h] [rbp+140h]
-  __int64 v33; // [rsp+248h] [rbp+148h]
+  __int128 v18[6]; // [rsp+30h] [rbp-D0h] BYREF
+  __int128 v19; // [rsp+90h] [rbp-70h] BYREF
+  UFG::allocator::free_link *v20; // [rsp+A0h] [rbp-60h]
+  char Src[304]; // [rsp+B0h] [rbp-50h] BYREF
+  int v22; // [rsp+1E0h] [rbp+E0h]
+  __int64 v23; // [rsp+1E8h] [rbp+E8h]
+  unsigned int v24; // [rsp+1F0h] [rbp+F0h]
+  unsigned int size; // [rsp+1F4h] [rbp+F4h]
+  unsigned int v26; // [rsp+1F8h] [rbp+F8h]
+  __int64 v27; // [rsp+240h] [rbp+140h] BYREF
+  __int64 v28; // [rsp+248h] [rbp+148h] BYREF
 
   v1 = 0;
   v2 = 0;
-  if ( sDXGIFactory->vfptr[4].QueryInterface((IUnknown *)sDXGIFactory, 0i64, (void **)&v32) != -2005270526 )
+  if ( sDXGIFactory->vfptr[4].QueryInterface(sDXGIFactory, 0i64, (void **)&v27) != -2005270526 )
   {
     do
     {
-      if ( (*(signed int (__fastcall **)(__int64, GUID *, _QWORD))(*(_QWORD *)v32 + 72i64))(
-             v32,
+      if ( (*(int (__fastcall **)(__int64, GUID *, _QWORD))(*(_QWORD *)v27 + 72i64))(
+             v27,
              &GUID_9b7e4c0f_342c_4106_a19f_4f2704f689f0,
              0i64) >= 0 )
       {
-        (*(void (__fastcall **)(__int64, char *))(*(_QWORD *)v32 + 80i64))(v32, &Src);
-        v28 = v32;
-        v30 = sAvailableDXGIOutputs.size;
-        v29 = v1;
-        v3 = 0;
-        if ( (*(unsigned int (__fastcall **)(__int64, _QWORD, __int64 *))(*(_QWORD *)v32 + 56i64))(v32, 0i64, &v33) != -2005270526 )
+        (*(void (__fastcall **)(__int64, char *))(*(_QWORD *)v27 + 80i64))(v27, Src);
+        v23 = v27;
+        size = sAvailableDXGIOutputs.size;
+        v24 = v1;
+        for ( i = 0;
+              (*(unsigned int (__fastcall **)(__int64, _QWORD, __int64 *))(*(_QWORD *)v27 + 56i64))(v27, i, &v28) != -2005270526;
+              p[v9].mpValidDisplayModes = (DXGI_MODE_DESC *)v20 )
         {
-          do
+          (*(void (__fastcall **)(__int64, __int128 *))(*(_QWORD *)v28 + 56i64))(v28, v18);
+          *(_QWORD *)&v19 = v28;
+          *((_QWORD *)&v19 + 1) = sAvailableDXGIAdapters.size;
+          v20 = 0i64;
+          if ( v22 != 1 )
           {
-            (*(void (__fastcall **)(__int64, __int128 *))(*(_QWORD *)v33 + 56i64))(v33, &v18);
-            *(_QWORD *)&v24 = v33;
-            *((_QWORD *)&v24 + 1) = sAvailableDXGIAdapters.size;
-            v25 = 0i64;
-            if ( v27 != 1 )
+            (*(void (__fastcall **)(__int64, __int64, __int64, char *, _QWORD))(*(_QWORD *)v28 + 64i64))(
+              v28,
+              28i64,
+              3i64,
+              (char *)&v19 + 12,
+              0i64);
+            if ( HIDWORD(v19) )
             {
-              (*(void (__fastcall **)(__int64, signed __int64, signed __int64, char *, _QWORD))(*(_QWORD *)v33 + 64i64))(
-                v33,
+              v4 = 28i64 * HIDWORD(v19);
+              if ( !is_mul_ok(HIDWORD(v19), 0x1Cui64) )
+                v4 = -1i64;
+              v20 = UFG::qMalloc(v4, UFG::gGlobalNewName, 0i64);
+              (*(void (__fastcall **)(__int64, __int64, __int64, char *, UFG::allocator::free_link *))(*(_QWORD *)v28 + 64i64))(
+                v28,
                 28i64,
                 3i64,
-                (char *)&v24 + 12,
-                0i64);
-              if ( HIDWORD(v24) )
-              {
-                v4 = 28i64 * HIDWORD(v24);
-                if ( !is_mul_ok(HIDWORD(v24), 0x1Cui64) )
-                  v4 = -1i64;
-                v25 = UFG::qMalloc(v4, UFG::gGlobalNewName, 0i64);
-                (*(void (__fastcall **)(__int64, signed __int64, signed __int64, char *, UFG::allocator::free_link *))(*(_QWORD *)v33 + 64i64))(
-                  v33,
-                  28i64,
-                  3i64,
-                  (char *)&v24 + 12,
-                  v25);
-                v2 += HIDWORD(v24);
-              }
+                (char *)&v19 + 12,
+                v20);
+              v2 += HIDWORD(v19);
             }
-            v5 = sAvailableDXGIOutputs.size;
-            v6 = sAvailableDXGIOutputs.size + 1;
-            if ( sAvailableDXGIOutputs.size + 1 > sAvailableDXGIOutputs.capacity )
-            {
-              if ( sAvailableDXGIOutputs.capacity )
-                v7 = 2 * sAvailableDXGIOutputs.capacity;
-              else
-                v7 = 1;
-              for ( ; v7 < v6; v7 *= 2 )
-                ;
-              if ( v7 - v6 > 0x10000 )
-                v7 = sAvailableDXGIOutputs.size + 65537;
-              UFG::qArray<OutputInfo,0>::Reallocate(&sAvailableDXGIOutputs, v7, "qArray.Add");
-            }
-            v8 = sAvailableDXGIOutputs.p;
-            sAvailableDXGIOutputs.size = v6;
-            ++v3;
-            v9 = v5;
-            *(_OWORD *)sAvailableDXGIOutputs.p[v9].mOutputDesc.DeviceName = v18;
-            *(_OWORD *)&v8[v9].mOutputDesc.DeviceName[8] = v19;
-            *(_OWORD *)&v8[v9].mOutputDesc.DeviceName[16] = v20;
-            *(_OWORD *)&v8[v9].mOutputDesc.DeviceName[24] = v21;
-            v8[v9].mOutputDesc.DesktopCoordinates = v22;
-            *(_OWORD *)&v8[v9].mOutputDesc.AttachedToDesktop = v23;
-            *(_OWORD *)&v8[v9].mOutputInterface = v24;
-            v8[v9].mpValidDisplayModes = (DXGI_MODE_DESC *)v25;
           }
-          while ( (*(unsigned int (__fastcall **)(__int64, _QWORD, __int64 *))(*(_QWORD *)v32 + 56i64))(v32, v3, &v33) != -2005270526 );
+          v5 = sAvailableDXGIOutputs.size;
+          v6 = sAvailableDXGIOutputs.size + 1;
+          if ( sAvailableDXGIOutputs.size + 1 > sAvailableDXGIOutputs.capacity )
+          {
+            if ( sAvailableDXGIOutputs.capacity )
+              v7 = 2 * sAvailableDXGIOutputs.capacity;
+            else
+              v7 = 1;
+            for ( ; v7 < v6; v7 *= 2 )
+              ;
+            if ( v7 - v6 > 0x10000 )
+              v7 = sAvailableDXGIOutputs.size + 65537;
+            UFG::qArray<OutputInfo,0>::Reallocate(&sAvailableDXGIOutputs, v7, "qArray.Add");
+          }
+          p = sAvailableDXGIOutputs.p;
+          sAvailableDXGIOutputs.size = v6;
+          ++i;
+          v9 = v5;
+          *(_OWORD *)sAvailableDXGIOutputs.p[v9].mOutputDesc.DeviceName = v18[0];
+          *(_OWORD *)&p[v9].mOutputDesc.DeviceName[8] = v18[1];
+          *(_OWORD *)&p[v9].mOutputDesc.DeviceName[16] = v18[2];
+          *(_OWORD *)&p[v9].mOutputDesc.DeviceName[24] = v18[3];
+          p[v9].mOutputDesc.DesktopCoordinates = (tagRECT)v18[4];
+          *(_OWORD *)&p[v9].mOutputDesc.AttachedToDesktop = v18[5];
+          *(_OWORD *)&p[v9].mOutputInterface = v19;
         }
         v10 = sAvailableDXGIAdapters.size;
-        v31 = v3;
+        v26 = i;
         v11 = sAvailableDXGIAdapters.size + 1;
         if ( sAvailableDXGIAdapters.size + 1 > sAvailableDXGIAdapters.capacity )
         {
@@ -654,12 +621,12 @@ void __fastcall Render::EnumerateAdaptersAndOutputs(Render *this)
             v12 = sAvailableDXGIAdapters.size + 65537;
           UFG::qArray<AdapterInfo,0>::Reallocate(&sAvailableDXGIAdapters, v12, "qArray.Add");
         }
-        v13 = &Src;
+        v13 = Src;
         sAvailableDXGIAdapters.size = v11;
         v14 = &sAvailableDXGIAdapters.p[v10];
-        if ( ((unsigned __int8)v14 | (unsigned __int8)&Src) & 0xF )
+        if ( (((unsigned __int8)v14 | (unsigned __int8)Src) & 0xF) != 0 )
         {
-          memmove(v14, &Src, 0x150ui64);
+          memmove(v14, Src, 0x150ui64);
         }
         else
         {
@@ -689,12 +656,12 @@ void __fastcall Render::EnumerateAdaptersAndOutputs(Render *this)
       }
       ++v1;
     }
-    while ( sDXGIFactory->vfptr[4].QueryInterface((IUnknown *)sDXGIFactory, (_GUID *)v1, (void **)&v32) != -2005270526 );
+    while ( sDXGIFactory->vfptr[4].QueryInterface(sDXGIFactory, (_GUID *)v1, (void **)&v27) != -2005270526 );
     if ( v2 )
     {
       v17 = sAvailableDXGIOutputs.p->mNumValidDisplayModes - 1;
-      gMonitorNativeDisplayAspectRatio = (float)(signed int)sAvailableDXGIOutputs.p->mpValidDisplayModes[v17].Width
-                                       / (float)(signed int)sAvailableDXGIOutputs.p->mpValidDisplayModes[v17].Height;
+      gMonitorNativeDisplayAspectRatio = (float)(int)sAvailableDXGIOutputs.p->mpValidDisplayModes[v17].Width
+                                       / (float)(int)sAvailableDXGIOutputs.p->mpValidDisplayModes[v17].Height;
     }
   }
 }
@@ -703,62 +670,50 @@ void __fastcall Render::EnumerateAdaptersAndOutputs(Render *this)
 // RVA: 0x6A0CE0
 void __fastcall Render::ReleaseAdaptersAndOutputs(Render *this)
 {
-  OutputInfo *v1; // rcx
-  unsigned int v2; // edi
+  OutputInfo *p; // rcx
+  unsigned int i; // edi
   unsigned __int64 v3; // rbx
-  IDXGIOutput *v4; // rdx
-  unsigned int v5; // edx
+  IDXGIOutput *mOutputInterface; // rdx
+  unsigned int size; // edx
   AdapterInfo *v6; // rax
-  unsigned int v7; // ebx
+  unsigned int j; // ebx
   __int64 v8; // rdi
-  IDXGIAdapter1 *v9; // rcx
+  IDXGIAdapter1 *mAdapterInterface; // rcx
 
-  v1 = sAvailableDXGIOutputs.p;
-  v2 = 0;
-  if ( sAvailableDXGIOutputs.size )
+  p = sAvailableDXGIOutputs.p;
+  for ( i = 0; i < sAvailableDXGIOutputs.size; ++i )
   {
-    do
+    v3 = i;
+    mOutputInterface = p[v3].mOutputInterface;
+    if ( mOutputInterface )
     {
-      v3 = v2;
-      v4 = v1[v3].mOutputInterface;
-      if ( v4 )
-      {
-        v4->vfptr->Release((IUnknown *)&v1[v3].mOutputInterface->vfptr);
-        sAvailableDXGIOutputs.p[v3].mOutputInterface = 0i64;
-        v1 = sAvailableDXGIOutputs.p;
-      }
-      if ( v1[v3].mpValidDisplayModes )
-      {
-        operator delete[](v1[v3].mpValidDisplayModes);
-        v1 = sAvailableDXGIOutputs.p;
-      }
-      ++v2;
+      mOutputInterface->vfptr->Release(p[v3].mOutputInterface);
+      sAvailableDXGIOutputs.p[v3].mOutputInterface = 0i64;
+      p = sAvailableDXGIOutputs.p;
     }
-    while ( v2 < sAvailableDXGIOutputs.size );
+    if ( p[v3].mpValidDisplayModes )
+    {
+      operator delete[](p[v3].mpValidDisplayModes);
+      p = sAvailableDXGIOutputs.p;
+    }
   }
-  if ( v1 )
-    operator delete[](v1);
-  v5 = sAvailableDXGIAdapters.size;
+  if ( p )
+    operator delete[](p);
+  size = sAvailableDXGIAdapters.size;
   v6 = sAvailableDXGIAdapters.p;
   sAvailableDXGIOutputs.p = 0i64;
   *(_QWORD *)&sAvailableDXGIOutputs.size = 0i64;
-  v7 = 0;
-  if ( sAvailableDXGIAdapters.size )
+  for ( j = 0; j < size; ++j )
   {
-    do
+    v8 = j;
+    mAdapterInterface = v6[v8].mAdapterInterface;
+    if ( mAdapterInterface )
     {
-      v8 = v7;
-      v9 = v6[v8].mAdapterInterface;
-      if ( v9 )
-      {
-        ((void (*)(void))v9->vfptr->Release)();
-        sAvailableDXGIAdapters.p[v8].mAdapterInterface = 0i64;
-        v6 = sAvailableDXGIAdapters.p;
-        v5 = sAvailableDXGIAdapters.size;
-      }
-      ++v7;
+      mAdapterInterface->vfptr->Release(mAdapterInterface);
+      sAvailableDXGIAdapters.p[v8].mAdapterInterface = 0i64;
+      v6 = sAvailableDXGIAdapters.p;
+      size = sAvailableDXGIAdapters.size;
     }
-    while ( v7 < v5 );
   }
   if ( v6 )
     operator delete[](v6);
@@ -770,13 +725,13 @@ void __fastcall Render::ReleaseAdaptersAndOutputs(Render *this)
 // RVA: 0x6A1EB0
 void __fastcall Render::SelectDXGIAdapterAndOutput(Render *this)
 {
-  unsigned int v1; // ebx
+  int v1; // ebx
   unsigned int v2; // eax
-  unsigned int *v3; // rcx
+  unsigned int *i; // rcx
   __int64 v4; // rdi
-  IDXGIAdapter1 *v5; // rax
-  IDXGIOutput *v6; // rcx
-  const unsigned __int16 *v7; // rax
+  IDXGIAdapter1 *mAdapterInterface; // rax
+  IDXGIOutput *mOutputInterface; // rcx
+  const unsigned __int16 *j; // rax
 
   v1 = 0;
   sDXGIAdapter = 0i64;
@@ -785,115 +740,106 @@ void __fastcall Render::SelectDXGIAdapterAndOutput(Render *this)
   v2 = 0;
   if ( sAvailableDXGIAdapters.size )
   {
-    v3 = &sAvailableDXGIAdapters.p->mNumOutputs;
-    while ( *v3 <= 0 )
+    for ( i = &sAvailableDXGIAdapters.p->mNumOutputs; !*i; i += 84 )
     {
-      ++v2;
-      v3 += 84;
-      if ( v2 >= sAvailableDXGIAdapters.size )
+      if ( ++v2 >= sAvailableDXGIAdapters.size )
         return;
     }
     v4 = v2;
-    v5 = sAvailableDXGIAdapters.p[v4].mAdapterInterface;
+    mAdapterInterface = sAvailableDXGIAdapters.p[v4].mAdapterInterface;
     sSelectedOutputIndex = sAvailableDXGIAdapters.p[v4].mStartOutputIndex;
-    sDXGIAdapter = v5;
-    v6 = sAvailableDXGIOutputs.p[sSelectedOutputIndex].mOutputInterface;
+    sDXGIAdapter = mAdapterInterface;
+    mOutputInterface = sAvailableDXGIOutputs.p[sSelectedOutputIndex].mOutputInterface;
     sAvailableDXGIAdapters.p[v4].mAdapterDesc.Description[127] = 0;
-    sDXGIOutput = v6;
+    sDXGIOutput = mOutputInterface;
     UFG::qWideStringCopy(Render::gVideoCardDesc, sAvailableDXGIAdapters.p[v4].mAdapterDesc.Description);
     Render::gVideoMemory = sAvailableDXGIAdapters.p[v4].mAdapterDesc.DedicatedVideoMemory;
     gOutputParams.mDisplayMode.mAdapterUID = UFG::qDataHash32(
-                                               &sAvailableDXGIAdapters.p[v4].mAdapterDesc.VendorId,
+                                               (char *)&sAvailableDXGIAdapters.p[v4].mAdapterDesc.VendorId,
                                                0x10ui64,
                                                0xFFFFFFFF);
     gOutputParams.mDisplayMode.mMonitorUID = UFG::qDataHash32(
-                                               &sAvailableDXGIOutputs.p[sSelectedOutputIndex],
+                                               (char *)&sAvailableDXGIOutputs.p[sSelectedOutputIndex],
                                                0x58ui64,
                                                0xFFFFFFFF);
     if ( LOWORD(sAvailableDXGIAdapters.p[v4].mAdapterDesc.VendorId) == 4098 )
     {
-      v7 = s_LegacyATIDevices;
-      while ( LOWORD(sAvailableDXGIAdapters.p[v4].mAdapterDesc.DeviceId) != *v7 )
+      for ( j = s_LegacyATIDevices; LOWORD(sAvailableDXGIAdapters.p[v4].mAdapterDesc.DeviceId) != *j; ++j )
       {
-        ++v1;
-        ++v7;
-        if ( v1 >= 0xE2 )
+        if ( (unsigned int)++v1 >= 0xE2 )
         {
-          gOutputParams.mDeviceType = 2;
+          gOutputParams.mDeviceType = DEVICE_TYPE_CURRENT_AMD;
           return;
         }
       }
-      gOutputParams.mDeviceType = 1;
+      gOutputParams.mDeviceType = DEVICE_TYPE_LEGACY_ATI;
     }
   }
 }
 
 // File Line: 1346
 // RVA: 0x69EDB0
-__int64 __fastcall Render::DisplayModesInternal(Render::DisplayMode *filter, Render::DisplayMode *outDisplayModes, bool setDXGIMode)
+__int64 __fastcall Render::DisplayModesInternal(
+        Render::DisplayMode *filter,
+        Render::DisplayMode *outDisplayModes,
+        bool setDXGIMode)
 {
-  Render::DisplayMode *v3; // r13
   unsigned int v4; // ebx
   unsigned __int64 v5; // rax
   UFG::allocator::free_link *v6; // rax
-  OutputInfo *v7; // r14
-  unsigned int v8; // er12
+  OutputInfo *p; // r14
+  unsigned int v8; // r12d
   UFG::allocator::free_link *v9; // r10
-  signed __int64 v10; // rax
+  __int64 v10; // rax
   DXGI_MODE_DESC *v11; // r15
-  DXGI_MODE_DESC *v12; // rdx
-  unsigned int v13; // eax
-  Render::eDisplayScalingModes v14; // eax
-  Render::eScanlineMode v15; // eax
+  __int64 v12; // rdx
+  unsigned int mBackBufferHeight; // eax
+  Render::eDisplayScalingModes mScaling; // eax
+  Render::eScanlineMode mScanlineMode; // eax
   char v16; // di
-  unsigned int v17; // er8
-  signed __int64 v18; // r9
-  signed int v19; // ebp
-  signed __int64 v20; // r11
+  unsigned int v17; // r8d
+  __int64 v18; // r9
+  int v19; // ebp
+  __int64 v20; // r11
   unsigned int v21; // esi
   _DWORD *v22; // rcx
   int v23; // eax
-  signed __int64 v24; // r11
-  signed __int64 v25; // rcx
-  signed int v26; // eax
-  signed __int64 v27; // rcx
-  Render::DisplayMode *v29; // [rsp+68h] [rbp+10h]
-  bool v30; // [rsp+70h] [rbp+18h]
-  signed __int64 v31; // [rsp+78h] [rbp+20h]
+  __int64 v24; // r11
+  __int64 v25; // rcx
+  int v26; // eax
+  __int64 v27; // rcx
+  __int64 v31; // [rsp+78h] [rbp+20h]
 
-  v30 = setDXGIMode;
-  v29 = outDisplayModes;
-  v3 = filter;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&sDXGIMutex);
   v4 = 0;
   v5 = 28i64 * sAvailableDXGIOutputs.p[sSelectedOutputIndex].mNumValidDisplayModes;
   if ( !is_mul_ok(sAvailableDXGIOutputs.p[sSelectedOutputIndex].mNumValidDisplayModes, 0x1Cui64) )
     v5 = -1i64;
   v6 = UFG::qMalloc(v5, UFG::gGlobalNewName, 0i64);
-  v7 = sAvailableDXGIOutputs.p;
+  p = sAvailableDXGIOutputs.p;
   v8 = 0;
   v9 = v6;
   v10 = 120i64 * sSelectedOutputIndex;
   v31 = v10;
-  if ( *(unsigned int *)((char *)&sAvailableDXGIOutputs.p->mNumValidDisplayModes + v10) <= 0 )
+  if ( !*(unsigned int *)((char *)&sAvailableDXGIOutputs.p->mNumValidDisplayModes + v10) )
     goto LABEL_40;
   v11 = sDXGIMode;
   do
   {
-    v12 = &(*(DXGI_MODE_DESC **)((char *)&v7->mpValidDisplayModes + v10))[v8];
-    if ( v3->mBackBufferWidth && v3->mBackBufferWidth != v12->Width )
+    v12 = (__int64)&(*(DXGI_MODE_DESC **)((char *)&p->mpValidDisplayModes + v10))[v8];
+    if ( filter->mBackBufferWidth && filter->mBackBufferWidth != *(_DWORD *)v12 )
       goto LABEL_39;
-    v13 = v3->mBackBufferHeight;
-    if ( v13 )
+    mBackBufferHeight = filter->mBackBufferHeight;
+    if ( mBackBufferHeight )
     {
-      if ( v13 != v12->Height )
+      if ( mBackBufferHeight != *(_DWORD *)(v12 + 4) )
         goto LABEL_39;
     }
-    v14 = v3->mScaling;
-    if ( v14 != -1 && v14 != v12->Scaling )
+    mScaling = filter->mScaling;
+    if ( mScaling != SCALING_MODE_NOTFILTERED && mScaling != *(_DWORD *)(v12 + 24) )
       goto LABEL_39;
-    v15 = v3->mScanlineMode;
-    if ( v15 != -1 && v15 != v12->ScanlineOrdering )
+    mScanlineMode = filter->mScanlineMode;
+    if ( mScanlineMode != SCANLINE_MODE_NOTFILTERED && mScanlineMode != *(_DWORD *)(v12 + 20) )
       goto LABEL_39;
     v16 = 0;
     v17 = 0;
@@ -902,16 +848,17 @@ __int64 __fastcall Render::DisplayModesInternal(Render::DisplayMode *filter, Ren
     v20 = -1i64;
     if ( !v4 )
       goto LABEL_30;
-    v21 = v12->Width;
-    v22 = (_DWORD *)((char *)&v9[2].mNext + 4);
+    v21 = *(_DWORD *)v12;
+    v22 = (_DWORD *)&v9[2].mNext + 1;
     while ( 1 )
     {
-      if ( v21 != *(v22 - 5) || v12->Height != *(v22 - 4) || v12->ScanlineOrdering != *v22 )
+      if ( v21 != *(v22 - 5) || *(_DWORD *)(v12 + 4) != *(v22 - 4) || *(_DWORD *)(v12 + 20) != *v22 )
         goto LABEL_24;
-      if ( (float)((float)(signed int)v12->RefreshRate.Numerator / (float)(signed int)v12->RefreshRate.Denominator) < (float)((float)(signed int)*(v22 - 3) / (float)(signed int)*(v22 - 2)) )
+      if ( (float)((float)*(int *)(v12 + 8) / (float)*(int *)(v12 + 12)) < (float)((float)(int)*(v22 - 3)
+                                                                                 / (float)(int)*(v22 - 2)) )
         goto LABEL_39;
       v23 = v22[1];
-      if ( (v23 || v12->Scaling == DXGI_MODE_SCALING_UNSPECIFIED) && (v23 != 2 || v12->Scaling != 1) )
+      if ( (v23 || !*(_DWORD *)(v12 + 24)) && (v23 != 2 || *(_DWORD *)(v12 + 24) != 1) )
         break;
       v16 = 1;
 LABEL_24:
@@ -930,42 +877,42 @@ LABEL_27:
       {
         v24 = 28 * v20;
         *(_DWORD *)((char *)&v9->mNext + v24) = v21;
-        *(_DWORD *)((char *)&v9->mNext + v24 + 4) = v12->Height;
-        *(_DWORD *)((char *)&v9[1].mNext + v24) = v12->RefreshRate.Numerator;
-        *(_DWORD *)((char *)&v9[1].mNext + v24 + 4) = v12->RefreshRate.Denominator;
-        *(_DWORD *)((char *)&v9[2].mNext + v24) = *(_DWORD *)v12->Format;
-        *(_DWORD *)((char *)&v9[2].mNext + v24 + 4) = v12->ScanlineOrdering;
-        *(_DWORD *)((char *)&v9[3].mNext + v24) = v12->Scaling;
+        *(_DWORD *)((char *)&v9->mNext + v24 + 4) = *(_DWORD *)(v12 + 4);
+        *(_DWORD *)((char *)&v9[1].mNext + v24) = *(_DWORD *)(v12 + 8);
+        *(_DWORD *)((char *)&v9[1].mNext + v24 + 4) = *(_DWORD *)(v12 + 12);
+        *(_DWORD *)((char *)&v9[2].mNext + v24) = *(_DWORD *)(v12 + 16);
+        *(_DWORD *)((char *)&v9[2].mNext + v24 + 4) = *(_DWORD *)(v12 + 20);
+        *(_DWORD *)((char *)&v9[3].mNext + v24) = *(_DWORD *)(v12 + 24);
         goto LABEL_31;
       }
 LABEL_30:
       v25 = 28i64 * v4;
-      *(_DWORD *)((char *)&v9->mNext + v25) = v12->Width;
-      *(_DWORD *)((char *)&v9->mNext + v25 + 4) = v12->Height;
-      *(_DWORD *)((char *)&v9[1].mNext + v25) = v12->RefreshRate.Numerator;
-      *(_DWORD *)((char *)&v9[1].mNext + v25 + 4) = v12->RefreshRate.Denominator;
-      *(_DWORD *)((char *)&v9[2].mNext + v25) = *(_DWORD *)v12->Format;
-      *(_DWORD *)((char *)&v9[2].mNext + v25 + 4) = v12->ScanlineOrdering;
-      *(_DWORD *)((char *)&v9[3].mNext + v25) = v12->Scaling;
+      *(_DWORD *)((char *)&v9->mNext + v25) = *(_DWORD *)v12;
+      *(_DWORD *)((char *)&v9->mNext + v25 + 4) = *(_DWORD *)(v12 + 4);
+      *(_DWORD *)((char *)&v9[1].mNext + v25) = *(_DWORD *)(v12 + 8);
+      *(_DWORD *)((char *)&v9[1].mNext + v25 + 4) = *(_DWORD *)(v12 + 12);
+      *(_DWORD *)((char *)&v9[2].mNext + v25) = *(_DWORD *)(v12 + 16);
+      *(_DWORD *)((char *)&v9[2].mNext + v25 + 4) = *(_DWORD *)(v12 + 20);
+      *(_DWORD *)((char *)&v9[3].mNext + v25) = *(_DWORD *)(v12 + 24);
 LABEL_31:
-      if ( v29 )
+      if ( outDisplayModes )
       {
         v26 = v19;
         if ( v19 == -1 )
           v26 = v4;
         v27 = v26;
-        v29[v27].mBackBufferWidth = v12->Width;
-        v29[v27].mBackBufferHeight = v12->Height;
-        v29[v27].mRefreshRateNumerator = v12->RefreshRate.Numerator;
-        v29[v27].mRefreshRateDenominator = v12->RefreshRate.Denominator;
-        v29[v27].mAdapterUID = gOutputParams.mDisplayMode.mAdapterUID;
-        v29[v27].mMonitorUID = gOutputParams.mDisplayMode.mMonitorUID;
-        v29[v27].mScaling = v12->Scaling;
-        v29[v27].mScanlineMode = v12->ScanlineOrdering;
+        outDisplayModes[v27].mBackBufferWidth = *(_DWORD *)v12;
+        outDisplayModes[v27].mBackBufferHeight = *(_DWORD *)(v12 + 4);
+        outDisplayModes[v27].mRefreshRateNumerator = *(_DWORD *)(v12 + 8);
+        outDisplayModes[v27].mRefreshRateDenominator = *(_DWORD *)(v12 + 12);
+        outDisplayModes[v27].mAdapterUID = gOutputParams.mDisplayMode.mAdapterUID;
+        outDisplayModes[v27].mMonitorUID = gOutputParams.mDisplayMode.mMonitorUID;
+        outDisplayModes[v27].mScaling = *(_DWORD *)(v12 + 24);
+        outDisplayModes[v27].mScanlineMode = *(_DWORD *)(v12 + 20);
       }
-      v7 = sAvailableDXGIOutputs.p;
-      if ( v30 )
-        v11 = v12;
+      p = sAvailableDXGIOutputs.p;
+      if ( setDXGIMode )
+        v11 = (DXGI_MODE_DESC *)v12;
       sDXGIMode = v11;
       if ( v19 == -1 )
         ++v4;
@@ -974,7 +921,7 @@ LABEL_39:
     v10 = v31;
     ++v8;
   }
-  while ( v8 < *(unsigned int *)((char *)&v7->mNumValidDisplayModes + v31) );
+  while ( v8 < *(unsigned int *)((char *)&p->mNumValidDisplayModes + v31) );
 LABEL_40:
   operator delete[](v9);
   UFG::qMutex::Unlock((LPCRITICAL_SECTION)&sDXGIMutex);
@@ -999,23 +946,18 @@ void __fastcall Render::GetDisplayModeArray(Render::DisplayMode *filter, Render:
 // RVA: 0x6A2730
 bool __fastcall Render::ValidateDisplaySettings(Render::RenderOutputParams *settings)
 {
-  bool result; // al
-
-  if ( *(_QWORD *)&settings->mDisplayMode.mAdapterUID == *(_QWORD *)&gOutputParams.mDisplayMode.mAdapterUID )
-    result = (unsigned int)Render::DisplayModesInternal(&settings->mDisplayMode, 0i64, 0) == 1;
-  else
-    result = 0;
-  return result;
+  return settings->mDisplayMode.mAdapterUID == gOutputParams.mDisplayMode.mAdapterUID
+      && settings->mDisplayMode.mMonitorUID == gOutputParams.mDisplayMode.mMonitorUID
+      && (unsigned int)Render::DisplayModesInternal(&settings->mDisplayMode, 0i64, 0) == 1;
 }
 
 // File Line: 1471
 // RVA: 0x69E7C0
 void __fastcall Render::ApplyDisplaySettings(Render::RenderOutputParams *settings)
 {
-  Render::RenderOutputParams *v1; // rbx
   char v2; // cl
   bool v3; // zf
-  char v4; // cl
+  bool v4; // cl
   char v5; // cl
   char v6; // cl
   char v7; // cl
@@ -1023,62 +965,61 @@ void __fastcall Render::ApplyDisplaySettings(Render::RenderOutputParams *setting
   __m128i v9; // xmm2
   __int64 v10; // xmm1_8
   char v11; // al
-  Render::DisplayMode outDisplayModes; // [rsp+20h] [rbp-28h]
+  Render::DisplayMode outDisplayModes; // [rsp+20h] [rbp-28h] BYREF
 
-  v1 = settings;
   if ( Render::DisplayModesInternal(&settings->mDisplayMode, 0i64, 0) == 1 )
   {
-    Render::DisplayModesInternal(&v1->mDisplayMode, &outDisplayModes, 1);
-    Illusion::SetDefaultTextureFilterQuality(v1->mTextureFilterQuality);
+    Render::DisplayModesInternal(&settings->mDisplayMode, &outDisplayModes, 1);
+    Illusion::SetDefaultTextureFilterQuality(settings->mTextureFilterQuality);
     v2 = sbEventResizeShadows;
-    if ( v1->mShadowRes != gOutputParams.mShadowRes )
+    if ( settings->mShadowRes != gOutputParams.mShadowRes )
       v2 = 1;
-    v3 = v1->mAAQuality == gOutputParams.mAAQuality;
+    v3 = settings->mAAQuality == gOutputParams.mAAQuality;
     sbEventResizeShadows = v2;
     v4 = sbEventResizeBuffers;
     if ( !v3 )
       v4 = 1;
-    if ( v1->mSSAO != gOutputParams.mSSAO )
+    if ( settings->mSSAO != gOutputParams.mSSAO )
       v4 = 1;
-    v3 = v1->mTextureDetailLevel == gOutputParams.mTextureDetailLevel;
+    v3 = settings->mTextureDetailLevel == gOutputParams.mTextureDetailLevel;
     sbEventResizeBuffers = v4;
     v5 = sbEventChangeTexturePack;
     if ( !v3 )
       v5 = 1;
-    v3 = v1->mLODSetting == gOutputParams.mLODSetting;
+    v3 = settings->mLODSetting == gOutputParams.mLODSetting;
     sbEventChangeTexturePack = v5;
     v6 = sbEventChangeLODSetting;
     if ( !v3 )
       v6 = 1;
     sbEventChangeLODSetting = v6;
     v7 = 0;
-    if ( v1->mDisplayMode.mBackBufferHeight != gOutputParams.mDisplayMode.mBackBufferHeight
-      || v1->mDisplayMode.mBackBufferWidth != gOutputParams.mDisplayMode.mBackBufferWidth
-      || g_Fullscreen != v1->mEnableFullscreen )
+    if ( settings->mDisplayMode.mBackBufferHeight != gOutputParams.mDisplayMode.mBackBufferHeight
+      || settings->mDisplayMode.mBackBufferWidth != gOutputParams.mDisplayMode.mBackBufferWidth
+      || g_Fullscreen != settings->mEnableFullscreen )
     {
       v7 = 1;
     }
     v8 = v7;
-    v3 = gOutputParams.mEnableLowResBuffer == v1->mEnableLowResBuffer;
-    *(_OWORD *)&gOutputParams.mDisplayMode.mBackBufferWidth = *(_OWORD *)&v1->mDisplayMode.mBackBufferWidth;
+    v3 = gOutputParams.mEnableLowResBuffer == settings->mEnableLowResBuffer;
+    *(_OWORD *)&gOutputParams.mDisplayMode.mBackBufferWidth = *(_OWORD *)&settings->mDisplayMode.mBackBufferWidth;
     if ( !v3 )
       v8 = 1;
-    *(_OWORD *)&gOutputParams.mDisplayMode.mAdapterUID = *(_OWORD *)&v1->mDisplayMode.mAdapterUID;
-    *(_OWORD *)&gOutputParams.mEnableFullscreen = *(_OWORD *)&v1->mEnableFullscreen;
+    *(_OWORD *)&gOutputParams.mDisplayMode.mAdapterUID = *(_OWORD *)&settings->mDisplayMode.mAdapterUID;
+    *(_OWORD *)&gOutputParams.mEnableFullscreen = *(_OWORD *)&settings->mEnableFullscreen;
     v9 = _mm_srli_si128(*(__m128i *)&gOutputParams.mEnableFullscreen, 3);
-    *(_OWORD *)&gOutputParams.mShadowFilter = *(_OWORD *)&v1->mShadowFilter;
-    *(_OWORD *)&gOutputParams.mFPSLimiter = *(_OWORD *)&v1->mFPSLimiter;
-    *(_OWORD *)&gOutputParams.mLODSetting = *(_OWORD *)&v1->mLODSetting;
-    v10 = *(_QWORD *)&v1->mTextureFilterQuality;
+    *(_OWORD *)&gOutputParams.mShadowFilter = *(_OWORD *)&settings->mShadowFilter;
+    *(_OWORD *)&gOutputParams.mFPSLimiter = *(_OWORD *)&settings->mFPSLimiter;
+    *(_OWORD *)&gOutputParams.mLODSetting = *(_OWORD *)&settings->mLODSetting;
+    v10 = *(_QWORD *)&settings->mTextureFilterQuality;
     gOutputParams.mDisplayMode.mRefreshRateNumerator = outDisplayModes.mRefreshRateNumerator;
     *(_QWORD *)&gOutputParams.mTextureFilterQuality = v10;
     gOutputParams.mDisplayMode.mRefreshRateDenominator = outDisplayModes.mRefreshRateDenominator;
-    g_Fullscreen = v1->mEnableFullscreen;
-    g_signalEnable3D = v1->mEnable3D;
+    g_Fullscreen = settings->mEnableFullscreen;
+    g_signalEnable3D = settings->mEnable3D;
     if ( g_signalEnable3D != g_enable3D )
       v8 = 1;
-    g_interAxialDistance = v1->mInterAxialDistance;
-    Render::gEnableCloudVolumes = v1->mEnableCloudVolumes;
+    g_interAxialDistance = settings->mInterAxialDistance;
+    Render::gEnableCloudVolumes = settings->mEnableCloudVolumes;
     UFG::gEnableHalfResolutionGbuffer = _mm_cvtsi128_si32(v9);
     v11 = sbEventResizeSwapChain;
     if ( v8 )
@@ -1091,26 +1032,18 @@ void __fastcall Render::ApplyDisplaySettings(Render::RenderOutputParams *setting
 // RVA: 0x69F820
 void __fastcall Render::GetCurrentDisplaySettings(Render::RenderOutputParams *outSettings)
 {
-  *(_OWORD *)&outSettings->mDisplayMode.mBackBufferWidth = *(_OWORD *)&gOutputParams.mDisplayMode.mBackBufferWidth;
-  *(_OWORD *)&outSettings->mDisplayMode.mAdapterUID = *(_OWORD *)&gOutputParams.mDisplayMode.mAdapterUID;
-  *(_OWORD *)&outSettings->mEnableFullscreen = *(_OWORD *)&gOutputParams.mEnableFullscreen;
-  *(_OWORD *)&outSettings->mShadowFilter = *(_OWORD *)&gOutputParams.mShadowFilter;
-  *(_OWORD *)&outSettings->mFPSLimiter = *(_OWORD *)&gOutputParams.mFPSLimiter;
-  *(_OWORD *)&outSettings->mLODSetting = *(_OWORD *)&gOutputParams.mLODSetting;
-  *(_QWORD *)&outSettings->mTextureFilterQuality = *(_QWORD *)&gOutputParams.mTextureFilterQuality;
+  *outSettings = gOutputParams;
 }
 
 // File Line: 1541
 // RVA: 0x69F8A0
 float __fastcall Render::GetExtraWideAspectCorrectedFOV(float inputFOV)
 {
-  float v1; // xmm6_4
   float v2; // xmm1_4
   float v3; // xmm2_4
   float v4; // xmm0_4
   float v5; // xmm2_4
 
-  v1 = inputFOV;
   if ( inputFOV <= 1.085 )
     v2 = FLOAT_1_085;
   else
@@ -1120,7 +1053,7 @@ float __fastcall Render::GetExtraWideAspectCorrectedFOV(float inputFOV)
   v5 = (float)(v3 * (float)((float)((float)(gDisplayAspectRatio * 0.5625) - 1.0) * gExtraWideAspectFOVCorrection)) + 1.0;
   if ( v5 >= 1.0 )
     v4 = v5;
-  return v4 * v1;
+  return v4 * inputFOV;
 }
 
 // File Line: 1547
@@ -1130,7 +1063,7 @@ void __fastcall Render::SetInitialDisplayMode(Render *this)
   OutputInfo *v1; // rdx
   bool v2; // bl
   char v3; // al
-  Render::DisplayMode filter; // [rsp+20h] [rbp-28h]
+  Render::DisplayMode filter; // [rsp+20h] [rbp-28h] BYREF
 
   if ( (unsigned int)Render::DisplayModesInternal(&gOutputParams.mDisplayMode, 0i64, 0) == 1 )
   {
@@ -1138,10 +1071,8 @@ void __fastcall Render::SetInitialDisplayMode(Render *this)
   }
   else
   {
-    filter.mScanlineMode = 1;
-    *(_QWORD *)&filter.mRefreshRateNumerator = 0i64;
-    *(_QWORD *)&filter.mAdapterUID = 0i64;
-    filter.mScaling = 0;
+    filter.mScanlineMode = SCANLINE_MODE_PROGRESSIVE;
+    memset(&filter.mRefreshRateNumerator, 0, 20);
     v1 = &sAvailableDXGIOutputs.p[sSelectedOutputIndex];
     if ( v1->mOutputDesc.AttachedToDesktop )
     {
@@ -1157,10 +1088,10 @@ void __fastcall Render::SetInitialDisplayMode(Render *this)
       *(_QWORD *)&filter.mBackBufferWidth = 0i64;
       if ( !(unsigned int)Render::DisplayModesInternal(&filter, 0i64, 1) )
       {
-        filter.mScaling = -1;
+        filter.mScaling = SCALING_MODE_NOTFILTERED;
         if ( !(unsigned int)Render::DisplayModesInternal(&filter, 0i64, 1) )
         {
-          filter.mScanlineMode = -1;
+          filter.mScanlineMode = SCANLINE_MODE_NOTFILTERED;
           Render::DisplayModesInternal(&filter, 0i64, 1);
         }
       }
@@ -1173,8 +1104,7 @@ void __fastcall Render::SetInitialDisplayMode(Render *this)
       || sDXGIMode->Width != gOutputParams.mDisplayMode.mBackBufferWidth;
     gOutputParams.mDisplayMode.mBackBufferWidth = sDXGIMode->Width;
     gOutputParams.mDisplayMode.mBackBufferHeight = sDXGIMode->Height;
-    gOutputParams.mDisplayMode.mRefreshRateNumerator = sDXGIMode->RefreshRate.Numerator;
-    gOutputParams.mDisplayMode.mRefreshRateDenominator = sDXGIMode->RefreshRate.Denominator;
+    *(DXGI_RATIONAL *)&gOutputParams.mDisplayMode.mRefreshRateNumerator = sDXGIMode->RefreshRate;
     gOutputParams.mDisplayMode.mScaling = sDXGIMode->Scaling;
     gOutputParams.mDisplayMode.mScanlineMode = sDXGIMode->ScanlineOrdering;
     Render::ApplyDisplaySettings(&gOutputParams);
@@ -1190,36 +1120,36 @@ void __fastcall Render::SetInitialDisplayMode(Render *this)
 // RVA: 0x6A0E00
 void __fastcall Render::ReleaseD3D(Render *this)
 {
-  _QWORD *v1; // rbx
-  signed __int64 v2; // rdi
-  __int64 v3; // rcx
-  __int64 v4; // rcx
-  __int64 v5; // rcx
+  __int64 v1; // rbx
+  __int64 v2; // rdi
+  ID3D11Query *v3; // rcx
+  ID3D11Query *v4; // rcx
+  ID3D11Query *v5; // rcx
 
   Render::ReleaseAdaptersAndOutputs(this);
   if ( sDXGIFactory )
   {
-    ((void (*)(void))sDXGIFactory->vfptr->Release)();
+    sDXGIFactory->vfptr->Release(sDXGIFactory);
     sDXGIFactory = 0i64;
   }
   if ( sDXGIDevice )
   {
-    ((void (*)(void))sDXGIDevice->vfptr->Release)();
+    sDXGIDevice->vfptr->Release(sDXGIDevice);
     sDXGIDevice = 0i64;
   }
   if ( sContext )
   {
-    ((void (*)(void))sContext->vfptr->Release)();
+    sContext->vfptr->Release(sContext);
     sContext = 0i64;
   }
   if ( sDevice )
   {
-    ((void (*)(void))sDevice->vfptr->Release)();
+    ((void (__fastcall *)(ID3D11Device *))sDevice->vfptr->Release)(sDevice);
     sDevice = 0i64;
   }
   if ( sStereo3D )
   {
-    ((void (*)(void))sStereo3D->vfptr->Release)();
+    sStereo3D->vfptr->Release(sStereo3D);
     sStereo3D = 0i64;
   }
   sDXGIMode = 0i64;
@@ -1228,23 +1158,23 @@ void __fastcall Render::ReleaseD3D(Render *this)
   v2 = 2i64;
   do
   {
-    v3 = v1[675836757];
+    v3 = sQueryGPUTimeStampDisjoint[v1];
     if ( v3 )
     {
-      (*(void (**)(void))(*(_QWORD *)v3 + 16i64))();
-      v1[675836757] = 0i64;
+      v3->vfptr->Release(v3);
+      sQueryGPUTimeStampDisjoint[v1] = 0i64;
     }
-    v4 = v1[675836759];
+    v4 = sQueryGPUTimeStart[v1];
     if ( v4 )
     {
-      (*(void (**)(void))(*(_QWORD *)v4 + 16i64))();
-      v1[675836759] = 0i64;
+      v4->vfptr->Release(v4);
+      sQueryGPUTimeStart[v1] = 0i64;
     }
-    v5 = v1[675836761];
+    v5 = sQueryGPUTimeEnd[v1];
     if ( v5 )
     {
-      (*(void (**)(void))(*(_QWORD *)v5 + 16i64))();
-      v1[675836761] = 0i64;
+      v5->vfptr->Release(v5);
+      sQueryGPUTimeEnd[v1] = 0i64;
     }
     ++v1;
     --v2;
@@ -1263,27 +1193,28 @@ char __fastcall Render::InitD3D(Render *a1)
   UFG::allocator::free_link *v5; // rcx
   UFG::allocator::free_link *v6; // rax
   UFG::allocator::free_link *v7; // rax
-  float v8; // xmm0_4
+  float maxNumAFRGroups; // xmm0_4
   __int64 v9; // rdi
-  signed __int64 v10; // rsi
-  NV_GET_CURRENT_SLI_STATE pSliState; // [rsp+58h] [rbp-240h]
-  NvPhysicalGpuHandle__ *nvGPUHandle; // [rsp+80h] [rbp-218h]
-  unsigned int pGpuCount; // [rsp+2A0h] [rbp+8h]
-  int v15; // [rsp+2A8h] [rbp+10h]
-  UFG::allocator::free_link *v16; // [rsp+2B0h] [rbp+18h]
+  __int64 v10; // rsi
+  NV_GET_CURRENT_SLI_STATE pSliState; // [rsp+58h] [rbp-240h] BYREF
+  NvPhysicalGpuHandle__ *nvGPUHandle; // [rsp+80h] [rbp-218h] BYREF
+  unsigned int pGpuCount; // [rsp+2A0h] [rbp+8h] BYREF
+  int v15; // [rsp+2A4h] [rbp+Ch]
+  int v16; // [rsp+2A8h] [rbp+10h] BYREF
+  UFG::allocator::free_link *v17; // [rsp+2B0h] [rbp+18h]
 
   Render::ReleaseD3D(a1);
   CreateDXGIFactory1_0(&GUID_770aae78_f26f_4dba_a829_253c83d1b387, (void **)&sDXGIFactory);
   Render::EnumerateAdaptersAndOutputs(v1);
   if ( !sAvailableDXGIOutputs.size )
-    goto LABEL_32;
+    goto $D3D_ERROR_HANDLER;
   Render::SelectDXGIAdapterAndOutput(v2);
   Render::SetInitialDisplayMode(v3);
   v4 = 0;
-  if ( (unsigned int)NvAPI_Initialize() || NvAPI_EnumPhysicalGPUs(&nvGPUHandle, &pGpuCount) || pGpuCount <= 0 )
+  if ( (unsigned int)NvAPI_Initialize() || NvAPI_EnumPhysicalGPUs(&nvGPUHandle, &pGpuCount) || !pGpuCount )
   {
     v6 = UFG::qMalloc(0x30ui64, UFG::gGlobalNewName, 0i64);
-    v16 = v6;
+    v17 = v6;
     if ( v6 )
     {
       AMDStereo3D::AMDStereo3D((AMDStereo3D *)v6);
@@ -1297,7 +1228,7 @@ char __fastcall Render::InitD3D(Render *a1)
   else
   {
     v5 = UFG::qMalloc(0x18ui64, UFG::gGlobalNewName, 0i64);
-    v16 = v5;
+    v17 = v5;
     if ( v5 )
     {
       v5->mNext = (UFG::allocator::free_link *)&Stereo3D::`vftable;
@@ -1311,21 +1242,21 @@ char __fastcall Render::InitD3D(Render *a1)
     v4 = 1;
   }
   sStereo3D = (Stereo3D *)v5;
-  ((void (*)(void))v5->mNext[1].mNext)();
-  if ( (signed int)D3D11CreateDevice_0(sDXGIAdapter, 0i64, 0i64, 32i64, 0i64, 0, 7, &sDevice, &v15, &sContext, -2i64) < 0 )
-    goto LABEL_32;
-  if ( v15 < 40960 )
+  ((void (__fastcall *)(UFG::allocator::free_link *))v5->mNext[1].mNext)(v5);
+  if ( (int)D3D11CreateDevice_0(sDXGIAdapter, 0i64, 0i64, 32i64, 0i64, 0, 7, &sDevice, &v16, &sContext, -2i64) < 0 )
+    goto $D3D_ERROR_HANDLER;
+  if ( v16 < 40960 )
     return 0;
-  gOutputParams.mFeatureLevel = v15 < 0xB000 ? (unsigned __int8)(v15 >= 41216) : 2;
+  gOutputParams.mFeatureLevel = v16 < 0xB000 ? v16 >= 41216 : FEATURE_LEVEL_D3D11_0;
   if ( v4 )
   {
     pSliState.version = 65564;
     if ( NvAPI_D3D_GetCurrentSLIState((IUnknown *)sDevice, &pSliState) == NVAPI_OK )
     {
-      v8 = *(float *)&FLOAT_1_0;
-      if ( (float)(signed int)pSliState.maxNumAFRGroups >= 1.0 )
-        v8 = (float)(signed int)pSliState.maxNumAFRGroups;
-      gNumGPUs = (signed int)v8;
+      maxNumAFRGroups = *(float *)&FLOAT_1_0;
+      if ( (float)(int)pSliState.maxNumAFRGroups >= 1.0 )
+        maxNumAFRGroups = (float)(int)pSliState.maxNumAFRGroups;
+      gNumGPUs = (int)maxNumAFRGroups;
       if ( pSliState.maxNumAFRGroups > 4 )
         gNumGPUs = 4;
     }
@@ -1340,7 +1271,7 @@ char __fastcall Render::InitD3D(Render *a1)
          &GUID_77db970f_6276_48ba_ba28_070143b4392c,
          &sDXGIDevice) < 0 )
   {
-LABEL_32:
+$D3D_ERROR_HANDLER:
     Render::ReleaseD3D(v2);
     return 0;
   }
@@ -1348,7 +1279,7 @@ LABEL_32:
   v10 = 2i64;
   do
   {
-    *(_QWORD *)&pGpuCount = 0i64;
+    v15 = 0;
     pGpuCount = 3;
     ((void (__fastcall *)(ID3D11Device *, unsigned int *, ID3D11Query **))sDevice->vfptr->OMSetRenderTargets)(
       sDevice,
@@ -1362,8 +1293,7 @@ LABEL_32:
     ((void (__fastcall *)(ID3D11Device *, unsigned int *, ID3D11Query **))sDevice->vfptr->OMSetRenderTargets)(
       sDevice,
       &pGpuCount,
-      &sQueryGPUTimeEnd[v9]);
-    ++v9;
+      &sQueryGPUTimeEnd[v9++]);
     --v10;
   }
   while ( v10 );
@@ -1386,67 +1316,63 @@ void __fastcall Render::ReleaseSwapChain(Render *this)
   }
   if ( sPresentRenderTargetView )
   {
-    sPresentRenderTargetView->vfptr->Release((IUnknown *)sPresentRenderTargetView);
+    sPresentRenderTargetView->vfptr->Release(sPresentRenderTargetView);
     v1 = sDXGISwapChain;
     sPresentRenderTargetView = 0i64;
   }
   if ( gPresentBuffer )
   {
-    gPresentBuffer->vfptr->Release((IUnknown *)gPresentBuffer);
+    gPresentBuffer->vfptr->Release(gPresentBuffer);
     v1 = sDXGISwapChain;
     gPresentBuffer = 0i64;
   }
   if ( v1 )
   {
-    ((void (*)(void))v1->vfptr->Release)();
+    v1->vfptr->Release(v1);
     sDXGISwapChain = 0i64;
   }
 }
 
 // File Line: 1844
 // RVA: 0x6A04D0
-char __fastcall Render::InitSwapChain(__int64 fullscreen)
+char __fastcall Render::InitSwapChain(Render *fullscreen)
 {
   char v1; // bl
   Render *v2; // rcx
-  __int64 v4; // [rsp+30h] [rbp-50h]
-  __int64 v5; // [rsp+38h] [rbp-48h]
-  __int64 v6; // [rsp+40h] [rbp-40h]
-  __int64 v7; // [rsp+48h] [rbp-38h]
-  __int64 v8; // [rsp+50h] [rbp-30h]
-  __int64 v9; // [rsp+58h] [rbp-28h]
-  HWND v10; // [rsp+60h] [rbp-20h]
-  _BOOL8 v11; // [rsp+68h] [rbp-18h]
-  __int64 v12; // [rsp+70h] [rbp-10h]
+  __int64 v4[3]; // [rsp+30h] [rbp-50h] BYREF
+  int v5; // [rsp+48h] [rbp-38h]
+  __int64 v6; // [rsp+4Ch] [rbp-34h]
+  int v7; // [rsp+54h] [rbp-2Ch]
+  __int64 v8; // [rsp+58h] [rbp-28h]
+  HWND v9; // [rsp+60h] [rbp-20h]
+  _BOOL8 v10; // [rsp+68h] [rbp-18h]
+  __int64 v11; // [rsp+70h] [rbp-10h]
 
-  v1 = fullscreen;
-  Render::ReleaseSwapChain((Render *)fullscreen);
-  v6 = 0i64;
-  v7 = 0i64;
-  v9 = 0i64;
-  v12 = 0i64;
-  v4 = __PAIR__(gScreenHeight, gScreenWidth);
-  LODWORD(v6) = 28;
-  *(__int64 *)((char *)&v7 + 4) = 1i64;
-  v10 = ghWnd;
-  v11 = v1 == 0;
-  v5 = *(_QWORD *)&gOutputParams.mDisplayMode.mRefreshRateNumerator;
-  HIDWORD(v8) = 32;
-  LODWORD(v9) = 2;
-  LODWORD(v12) = 2;
+  v1 = (char)fullscreen;
+  Render::ReleaseSwapChain(fullscreen);
+  v5 = 0;
+  v4[0] = __PAIR64__(gScreenHeight, gScreenWidth);
+  v4[2] = 28i64;
+  v6 = 1i64;
+  v9 = ghWnd;
+  v10 = v1 == 0;
+  v4[1] = *(_QWORD *)&gOutputParams.mDisplayMode.mRefreshRateNumerator;
+  v7 = 32;
+  v8 = 2i64;
+  v11 = 2i64;
   g_stereoSwapChain = 0;
   if ( !g_enable3D
     || sStereo3D->vfptr->CreateStereoSwapChain(
          sStereo3D,
          sDXGIFactory,
          sDevice,
-         (DXGI_SWAP_CHAIN_DESC *)&v4,
+         (DXGI_SWAP_CHAIN_DESC *)v4,
          &sDXGISwapChain) )
   {
-    if ( ((signed int (__fastcall *)(IDXGIFactory1 *, ID3D11Device *, __int64 *, IDXGISwapChain **))sDXGIFactory->vfptr[3].AddRef)(
+    if ( ((int (__fastcall *)(IDXGIFactory1 *, ID3D11Device *, __int64 *, IDXGISwapChain **))sDXGIFactory->vfptr[3].AddRef)(
            sDXGIFactory,
            sDevice,
-           &v4,
+           v4,
            &sDXGISwapChain) < 0 )
       goto $D3D_ERROR_HANDLER_0;
   }
@@ -1454,12 +1380,12 @@ char __fastcall Render::InitSwapChain(__int64 fullscreen)
   {
     g_stereoSwapChain = 1;
   }
-  if ( ((signed int (__fastcall *)(IDXGISwapChain *, _QWORD, GUID *, ID3D11Texture2D **))sDXGISwapChain->vfptr[3].QueryInterface)(
+  if ( ((int (__fastcall *)(IDXGISwapChain *, _QWORD, GUID *, ID3D11Texture2D **))sDXGISwapChain->vfptr[3].QueryInterface)(
          sDXGISwapChain,
          0i64,
          &GUID_6f15aaf2_d208_4e89_9ab4_489535d34f9c,
          &gPresentBuffer) >= 0
-    && ((signed int (__fastcall *)(ID3D11Device *, ID3D11Texture2D *, _QWORD, ID3D11RenderTargetView **))sDevice->vfptr->Draw)(
+    && ((int (__fastcall *)(ID3D11Device *, ID3D11Texture2D *, _QWORD, ID3D11RenderTargetView **))sDevice->vfptr->Draw)(
          sDevice,
          gPresentBuffer,
          0i64,
@@ -1476,18 +1402,14 @@ $D3D_ERROR_HANDLER_0:
 // RVA: 0x6A03A0
 void __fastcall Render::InitEngineCB(Render::RenderInitParams *params)
 {
-  char v1; // bl
+  bool v1; // bl
   Render *v2; // rcx
 
   Render::InitWindow(params);
   v1 = 0;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&sDXGIMutex);
   if ( Render::InitD3D(v2) )
-  {
-    v1 = 0;
-    if ( Render::InitSwapChain(0i64) )
-      v1 = 1;
-  }
+    v1 = Render::InitSwapChain(0i64) != 0;
   UFG::qMutex::Unlock((LPCRITICAL_SECTION)&sDXGIMutex);
   if ( v1 )
   {
@@ -1501,30 +1423,29 @@ void __fastcall Render::InitEngineCB(Render::RenderInitParams *params)
 // RVA: 0x69FD10
 void __fastcall Render::InitEngine(Render::RenderInitParams *params)
 {
-  Render::RenderInitParams *v1; // r14
   Illusion *v2; // rcx
   ID3D11DeviceContext *v3; // rax
   Illusion *v4; // rcx
   Render *v5; // rcx
-  unsigned int v6; // edi
+  unsigned int i; // edi
   unsigned int v7; // ebx
-  UFG::allocator::free_link *v8; // rax
+  char *v8; // rax
   int v9; // edi
   unsigned int v10; // ebx
   Illusion::FrameWriteMemoryPlat *v11; // rsi
   int v12; // edi
   unsigned int v13; // ebx
   Illusion::FrameWriteMemoryPlat *v14; // rsi
-  unsigned int v15; // ebx
-  unsigned int v16; // ebx
+  unsigned int j; // ebx
+  unsigned int k; // ebx
   Render *v17; // rcx
   Render *v18; // rcx
-  int v19; // [rsp+20h] [rbp-C8h]
+  int v19; // [rsp+20h] [rbp-C8h] BYREF
   __int64 v20; // [rsp+24h] [rbp-C4h]
   __int64 v21; // [rsp+2Ch] [rbp-BCh]
   int v22; // [rsp+34h] [rbp-B4h]
-  UFG::qVRAMemoryHandle handle; // [rsp+38h] [rbp-B0h]
-  UFG::qString v24; // [rsp+60h] [rbp-88h]
+  UFG::qVRAMemoryHandle handle; // [rsp+38h] [rbp-B0h] BYREF
+  char v24[44]; // [rsp+60h] [rbp-88h] BYREF
   int v25; // [rsp+8Ch] [rbp-5Ch]
   int v26; // [rsp+90h] [rbp-58h]
   __int128 v27; // [rsp+98h] [rbp-50h]
@@ -1537,64 +1458,12 @@ void __fastcall Render::InitEngine(Render::RenderInitParams *params)
   __int64 v34; // [rsp+E0h] [rbp-8h]
   int v35; // [rsp+E8h] [rbp+0h]
   char v36; // [rsp+ECh] [rbp+4h]
-  UFG::qString v37; // [rsp+F8h] [rbp+10h]
-  __int64 v38; // [rsp+120h] [rbp+38h]
-  int v39; // [rsp+128h] [rbp+40h]
-  int v40; // [rsp+12Ch] [rbp+44h]
-  int v41; // [rsp+130h] [rbp+48h]
-  __int64 v42; // [rsp+134h] [rbp+4Ch]
-  int v43; // [rsp+13Ch] [rbp+54h]
-  int v44; // [rsp+140h] [rbp+58h]
-  __int128 v45; // [rsp+148h] [rbp+60h]
-  __int128 v46; // [rsp+158h] [rbp+70h]
-  __int64 v47; // [rsp+168h] [rbp+80h]
-  __int64 v48; // [rsp+170h] [rbp+88h]
-  __int64 v49; // [rsp+178h] [rbp+90h]
-  __int64 v50; // [rsp+180h] [rbp+98h]
-  __int64 v51; // [rsp+188h] [rbp+A0h]
-  __int64 v52; // [rsp+190h] [rbp+A8h]
-  int v53; // [rsp+198h] [rbp+B0h]
-  char v54; // [rsp+19Ch] [rbp+B4h]
-  UFG::qString v55; // [rsp+1A8h] [rbp+C0h]
-  __int64 v56; // [rsp+1D0h] [rbp+E8h]
-  int v57; // [rsp+1D8h] [rbp+F0h]
-  int v58; // [rsp+1DCh] [rbp+F4h]
-  int v59; // [rsp+1E0h] [rbp+F8h]
-  __int64 v60; // [rsp+1E4h] [rbp+FCh]
-  int v61; // [rsp+1ECh] [rbp+104h]
-  int v62; // [rsp+1F0h] [rbp+108h]
-  __int128 v63; // [rsp+1F8h] [rbp+110h]
-  __int128 v64; // [rsp+208h] [rbp+120h]
-  __int64 v65; // [rsp+218h] [rbp+130h]
-  __int64 v66; // [rsp+220h] [rbp+138h]
-  __int64 v67; // [rsp+228h] [rbp+140h]
-  __int64 v68; // [rsp+230h] [rbp+148h]
-  __int64 v69; // [rsp+238h] [rbp+150h]
-  __int64 v70; // [rsp+240h] [rbp+158h]
-  int v71; // [rsp+248h] [rbp+160h]
-  char v72; // [rsp+24Ch] [rbp+164h]
-  UFG::qString v73; // [rsp+258h] [rbp+170h]
-  __int64 v74; // [rsp+280h] [rbp+198h]
-  int v75; // [rsp+288h] [rbp+1A0h]
-  int v76; // [rsp+28Ch] [rbp+1A4h]
-  int v77; // [rsp+290h] [rbp+1A8h]
-  __int64 v78; // [rsp+294h] [rbp+1ACh]
-  int v79; // [rsp+29Ch] [rbp+1B4h]
-  int v80; // [rsp+2A0h] [rbp+1B8h]
-  __int128 v81; // [rsp+2A8h] [rbp+1C0h]
-  __int128 v82; // [rsp+2B8h] [rbp+1D0h]
-  __int64 v83; // [rsp+2C8h] [rbp+1E0h]
-  __int64 v84; // [rsp+2D0h] [rbp+1E8h]
-  __int64 v85; // [rsp+2D8h] [rbp+1F0h]
-  __int64 v86; // [rsp+2E0h] [rbp+1F8h]
-  __int64 v87; // [rsp+2E8h] [rbp+200h]
-  __int64 v88; // [rsp+2F0h] [rbp+208h]
-  int v89; // [rsp+2F8h] [rbp+210h]
-  char v90; // [rsp+2FCh] [rbp+214h]
-  __int64 v91; // [rsp+308h] [rbp+220h]
+  Illusion::CreateTargetParams v37; // [rsp+F8h] [rbp+10h] BYREF
+  Illusion::CreateTargetParams v38; // [rsp+1A8h] [rbp+C0h] BYREF
+  Illusion::CreateTargetParams v39; // [rsp+258h] [rbp+170h] BYREF
+  __int64 v40; // [rsp+308h] [rbp+220h]
 
-  v91 = -2i64;
-  v1 = params;
+  v40 = -2i64;
   Illusion::AddRenderThreadCommand(RTCMD_CALLBACK, Render::InitEngineCB, params, 0i64);
   Illusion::WaitForRenderThread(v2);
   v3 = Illusion::EnginePlat::AllocDeferredContextBlocking(&Illusion::gEnginePlat);
@@ -1607,40 +1476,34 @@ void __fastcall Render::InitEngine(Render::RenderInitParams *params)
   Render::UpdateUIViewportScalesBasedOnAspectRatio(v5);
   CurrFrameBuffer = 0;
   Render::SetFrameMemoryNumBuffers(2u);
-  v6 = 0;
-  do
+  for ( i = 0; i < 2; ++i )
   {
-    v7 = (v1->mFrameMemoryTotalBytes >> 1) & 0x7FFFFF80;
-    v8 = UFG::qMalloc(v7, "FrameMemoryBuffer", 0x8000ui64);
-    Render::SetFrameMemory(v6, v8, v7);
-    Render::SetFrameMemoryOverflow(v6++, 0i64, 0);
+    v7 = (params->mFrameMemoryTotalBytes >> 1) & 0x7FFFFF80;
+    v8 = (char *)UFG::qMalloc(v7, "FrameMemoryBuffer", 0x8000ui64);
+    Render::SetFrameMemory(i, v8, v7);
+    Render::SetFrameMemoryOverflow(i, 0i64, 0);
   }
-  while ( v6 < 2 );
-  v9 = (v1->mFrameWriteMemoryTotalBytes >> 1) & 0x7FFFFF80;
-  Illusion::gFrameWriteMemoryPlat.mBufferSize = (v1->mFrameWriteMemoryTotalBytes >> 1) & 0x7FFFFF80;
+  v9 = (params->mFrameWriteMemoryTotalBytes >> 1) & 0x7FFFFF80;
+  Illusion::gFrameWriteMemoryPlat.mBufferSize = v9;
   Illusion::gFrameWriteMemoryPlat.mNumFrameMemoryBuffers = 2;
   UFG::qVRAMemoryHandle::qVRAMemoryHandle(&handle);
   v10 = 0;
   v11 = &Illusion::gFrameWriteMemoryPlat;
   do
   {
-    v21 = 0i64;
     v22 = 0;
     v19 = v9;
     v20 = 0x300000002i64;
-    LODWORD(v21) = 0x10000;
-    ((void (__fastcall *)(ID3D11Device *, int *, _QWORD, Illusion::FrameWriteMemoryPlat *, _QWORD, _QWORD, _QWORD))UFG::gD3D11Device->vfptr->VSSetConstantBuffers)(
+    v21 = 0x10000i64;
+    ((void (__fastcall *)(ID3D11Device *, int *, _QWORD, Illusion::FrameWriteMemoryPlat *))UFG::gD3D11Device->vfptr->VSSetConstantBuffers)(
       UFG::gD3D11Device,
       &v19,
       0i64,
-      v11,
-      *(_QWORD *)&v19,
-      *(__int64 *)((char *)&v20 + 4),
-      BYTE4(v21));
+      v11);
     Illusion::FrameWriteMemoryPlat::Lock(&Illusion::gFrameWriteMemoryPlat, v10);
     Render::SetFrameWriteMemory(
       v10,
-      Illusion::gFrameWriteMemoryPlat.mLockData,
+      (char *)Illusion::gFrameWriteMemoryPlat.mLockData,
       &handle,
       Illusion::gFrameWriteMemoryPlat.mBufferSize);
     Render::SetFrameWriteMemoryOverflow(v10, 0i64, &handle, 0);
@@ -1649,30 +1512,26 @@ void __fastcall Render::InitEngine(Render::RenderInitParams *params)
     v11 = (Illusion::FrameWriteMemoryPlat *)((char *)v11 + 8);
   }
   while ( v10 < 2 );
-  v12 = (v1->mPrimitiveFrameWriteMemoryTotalBytes >> 1) & 0x7FFFFF80;
-  Illusion::gPrimitiveFrameWriteMemoryPlat.mBufferSize = (v1->mPrimitiveFrameWriteMemoryTotalBytes >> 1) & 0x7FFFFF80;
+  v12 = (params->mPrimitiveFrameWriteMemoryTotalBytes >> 1) & 0x7FFFFF80;
+  Illusion::gPrimitiveFrameWriteMemoryPlat.mBufferSize = v12;
   Illusion::gPrimitiveFrameWriteMemoryPlat.mNumFrameMemoryBuffers = 2;
   v13 = 0;
   v14 = &Illusion::gPrimitiveFrameWriteMemoryPlat;
   do
   {
-    v21 = 0i64;
     v22 = 0;
     v19 = v12;
-    v20 = 12884901890i64;
-    LODWORD(v21) = 0x10000;
-    ((void (__fastcall *)(ID3D11Device *, int *, _QWORD, Illusion::FrameWriteMemoryPlat *, _QWORD, _QWORD, _QWORD))UFG::gD3D11Device->vfptr->VSSetConstantBuffers)(
+    v20 = 0x300000002i64;
+    v21 = 0x10000i64;
+    ((void (__fastcall *)(ID3D11Device *, int *, _QWORD, Illusion::FrameWriteMemoryPlat *))UFG::gD3D11Device->vfptr->VSSetConstantBuffers)(
       UFG::gD3D11Device,
       &v19,
       0i64,
-      v14,
-      *(_QWORD *)&v19,
-      *(__int64 *)((char *)&v20 + 4),
-      BYTE4(v21));
+      v14);
     Illusion::FrameWriteMemoryPlat::Lock(&Illusion::gPrimitiveFrameWriteMemoryPlat, v13);
     Render::SetPrimitiveFrameWriteMemory(
       v13,
-      Illusion::gPrimitiveFrameWriteMemoryPlat.mLockData,
+      (char *)Illusion::gPrimitiveFrameWriteMemoryPlat.mLockData,
       &handle,
       Illusion::gPrimitiveFrameWriteMemoryPlat.mBufferSize);
     Render::SetPrimitiveFrameWriteMemoryOverflow(v13, 0i64, &handle, 0);
@@ -1681,96 +1540,54 @@ void __fastcall Render::InitEngine(Render::RenderInitParams *params)
     v14 = (Illusion::FrameWriteMemoryPlat *)((char *)v14 + 8);
   }
   while ( v13 < 2 );
-  v15 = 0;
-  do
+  for ( j = 0; j < 2; ++j )
   {
-    Render::SetFramePatchMemory(v15, 0i64, &handle, 0);
-    Render::SetFramePatchMemoryOverflow(v15++, 0i64, &handle, 0);
+    Render::SetFramePatchMemory(j, 0i64, &handle, 0);
+    Render::SetFramePatchMemoryOverflow(j, 0i64, &handle, 0);
   }
-  while ( v15 < 2 );
-  v16 = 0;
-  do
+  for ( k = 0; k < 2; ++k )
   {
-    Render::SetFrameIndexMemory(v16, 0i64, &handle, 0);
-    Render::SetFrameIndexMemoryOverflow(v16++, 0i64, &handle, 0);
+    Render::SetFrameIndexMemory(k, 0i64, &handle, 0);
+    Render::SetFrameIndexMemoryOverflow(k, 0i64, &handle, 0);
   }
-  while ( v16 < 2 );
   Render::SwapFrameMemoryBuffers(v17);
-  UFG::qString::qString(&v73, "BackBuffer");
-  v78 = 1i64;
-  v74 = 0i64;
-  v75 = 1;
-  v76 = 1;
-  v77 = -1;
-  v79 = 0;
-  v80 = 1;
-  _mm_store_si128((__m128i *)&v81, (__m128i)0i64);
-  _mm_store_si128((__m128i *)&v82, (__m128i)0i64);
-  v83 = 0i64;
-  v84 = 0i64;
-  v85 = 0i64;
-  v86 = 0i64;
-  v87 = 0i64;
-  v88 = 0i64;
-  v89 = 0;
-  v90 = 0;
-  v74 = __PAIR__(gScreenHeight, gScreenWidth);
-  LOBYTE(v77) = 0;
-  v79 = 19;
-  BackBufferTarget = Illusion::CreateTarget((Illusion::CreateTargetParams *)&v73);
-  UFG::qString::qString(&v55, "PresentBuffer");
-  v60 = 1i64;
-  v56 = 0i64;
-  v57 = 1;
-  v58 = 1;
-  v59 = -1;
-  v61 = 0;
-  v62 = 1;
-  _mm_store_si128((__m128i *)&v63, (__m128i)0i64);
-  _mm_store_si128((__m128i *)&v64, (__m128i)0i64);
-  v65 = 0i64;
-  v66 = 0i64;
-  v67 = 0i64;
-  v68 = 0i64;
-  v69 = 0i64;
-  v70 = 0i64;
-  v71 = 0;
-  v72 = 0;
-  v56 = __PAIR__(gScreenHeight, gScreenWidth);
-  LOBYTE(v59) = 0;
-  v61 = 0x40000;
-  PresentBufferTarget = Illusion::CreateTarget((Illusion::CreateTargetParams *)&v55);
-  UFG::qString::qString(&v37, "LeftEye");
-  v42 = 1i64;
-  v38 = 0i64;
-  v39 = 1;
-  v40 = 1;
-  v41 = -1;
-  v43 = 0;
-  v44 = 1;
-  _mm_store_si128((__m128i *)&v45, (__m128i)0i64);
-  _mm_store_si128((__m128i *)&v46, (__m128i)0i64);
-  v47 = 0i64;
-  v48 = 0i64;
-  v49 = 0i64;
-  v50 = 0i64;
-  v51 = 0i64;
-  v52 = 0i64;
-  v53 = 0;
-  v54 = 0;
-  v38 = __PAIR__(gScreenHeight, gScreenWidth);
-  LOBYTE(v41) = 0;
-  v43 = 19;
-  LeftEyeTarget = Illusion::CreateTarget((Illusion::CreateTargetParams *)&v37);
-  UFG::qString::qString(&v24, "RightEye");
-  *(_QWORD *)&v24.mStringHashUpper32 = 1i64;
-  *(_QWORD *)&v24.mMagic = 0i64;
-  v24.mData = (char *)4294967297i64;
-  v24.mStringHash32 = -1;
-  v25 = 0;
+  UFG::qString::qString(&v39.name, "BackBuffer");
+  *(_QWORD *)&v39.num_mrt = 1i64;
+  v39.depth = 1;
+  v39.array_size = 1;
+  *(_DWORD *)v39.mrt_formats = -256;
+  v39.num_mips = 1;
+  memset(v39.textures, 0, 85);
+  *(_QWORD *)&v39.width = __PAIR64__(gScreenHeight, gScreenWidth);
+  v39.target_flags = 19;
+  BackBufferTarget = Illusion::CreateTarget(&v39);
+  UFG::qString::qString(&v38.name, "PresentBuffer");
+  *(_QWORD *)&v38.num_mrt = 1i64;
+  v38.depth = 1;
+  v38.array_size = 1;
+  *(_DWORD *)v38.mrt_formats = -256;
+  v38.num_mips = 1;
+  memset(v38.textures, 0, 85);
+  *(_QWORD *)&v38.width = __PAIR64__(gScreenHeight, gScreenWidth);
+  v38.target_flags = 0x40000;
+  PresentBufferTarget = Illusion::CreateTarget(&v38);
+  UFG::qString::qString(&v37.name, "LeftEye");
+  *(_QWORD *)&v37.num_mrt = 1i64;
+  v37.depth = 1;
+  v37.array_size = 1;
+  *(_DWORD *)v37.mrt_formats = -256;
+  v37.num_mips = 1;
+  memset(v37.textures, 0, 85);
+  *(_QWORD *)&v37.width = __PAIR64__(gScreenHeight, gScreenWidth);
+  v37.target_flags = 19;
+  LeftEyeTarget = Illusion::CreateTarget(&v37);
+  UFG::qString::qString((UFG::qString *)v24, "RightEye");
+  *(_QWORD *)&v24[36] = 1i64;
+  *(_QWORD *)&v24[24] = 0x100000001i64;
+  *(_DWORD *)&v24[32] = -256;
   v26 = 1;
-  _mm_store_si128((__m128i *)&v27, (__m128i)0i64);
-  _mm_store_si128((__m128i *)&v28, (__m128i)0i64);
+  v27 = 0i64;
+  v28 = 0i64;
   v29 = 0i64;
   v30 = 0i64;
   v31 = 0i64;
@@ -1779,17 +1596,16 @@ void __fastcall Render::InitEngine(Render::RenderInitParams *params)
   v34 = 0i64;
   v35 = 0;
   v36 = 0;
-  v24.mMagic = gScreenWidth;
-  v24.mLength = gScreenHeight;
-  LOBYTE(v24.mStringHash32) = 0;
+  *(_DWORD *)&v24[16] = gScreenWidth;
+  *(_DWORD *)&v24[20] = gScreenHeight;
   v25 = 19;
-  RightEyeTarget = Illusion::CreateTarget((Illusion::CreateTargetParams *)&v24);
+  RightEyeTarget = Illusion::CreateTarget((Illusion::CreateTargetParams *)v24);
   Render::InitVertexDeclarations(v18);
   Render::Skinning::Init(&Render::Skinning::gSkinning);
-  UFG::qString::~qString(&v24);
-  UFG::qString::~qString(&v37);
-  UFG::qString::~qString(&v55);
-  UFG::qString::~qString(&v73);
+  UFG::qString::~qString((UFG::qString *)v24);
+  UFG::qString::~qString(&v37.name);
+  UFG::qString::~qString(&v38.name);
+  UFG::qString::~qString(&v39.name);
   UFG::qVRAMemoryHandle::~qVRAMemoryHandle(&handle);
 }
 
@@ -1820,14 +1636,14 @@ Illusion::Target *__fastcall Render::Get3DTarget(Render::eStereoRenderEye eye)
 {
   if ( eye == STEREO_EYE_LEFT )
     return LeftEyeTarget;
-  if ( eye == 1 )
+  if ( eye == STEREO_EYE_RIGHT )
     return RightEyeTarget;
   return 0i64;
 }
 
 // File Line: 2178
 // RVA: 0x6A2240
-void __fastcall Render::SetVSyncEnable(Render::VSyncMode newVal)
+void __fastcall Render::SetVSyncEnable(int newVal)
 {
   gEnableVsync = newVal;
 }
@@ -1842,21 +1658,21 @@ void Render::DisplayCalibration::UpdatePlat(void)
   float v3; // xmm10_4
   float v4; // xmm8_4
   unsigned int v5; // esi
-  signed int v6; // ebx
+  int v6; // ebx
   float *v7; // rcx
   float v8; // xmm0_4
   float *v9; // rdi
   float v10; // xmm0_4
-  char v11; // [rsp+30h] [rbp-40B8h]
+  char v11[12]; // [rsp+30h] [rbp-40B8h] BYREF
   unsigned int v12; // [rsp+3Ch] [rbp-40ACh]
-  __int128 v13; // [rsp+1050h] [rbp-3098h]
+  __int128 v13; // [rsp+1050h] [rbp-3098h] BYREF
   __int64 v14; // [rsp+1060h] [rbp-3088h]
-  char v15; // [rsp+106Ch] [rbp-307Ch]
-  __int64 v16; // [rsp+40F0h] [rbp+8h]
+  char v15[12308]; // [rsp+106Ch] [rbp-307Ch] BYREF
+  __int64 v16; // [rsp+40F0h] [rbp+8h] BYREF
   UFG::qMutex *v17; // [rsp+40F8h] [rbp+10h]
 
   v0 = _S1_30;
-  if ( _S1_30 & 1 )
+  if ( (_S1_30 & 1) != 0 )
   {
     v1 = sGammaControlEnabled;
   }
@@ -1867,7 +1683,7 @@ void Render::DisplayCalibration::UpdatePlat(void)
     v1 = gEnableGammaControl;
     sGammaControlEnabled = gEnableGammaControl;
   }
-  if ( v0 & 2 )
+  if ( (v0 & 2) != 0 )
   {
     v2 = sDeviceBrightness;
   }
@@ -1878,9 +1694,7 @@ void Render::DisplayCalibration::UpdatePlat(void)
     sDeviceBrightness = Render::DisplayCalibration::msBrightness;
   }
   v3 = Render::DisplayCalibration::msGamma;
-  if ( Render::DisplayCalibration::msBrightness != v2
-    || g_ForceDisplayCalibrationUpdate == 1
-    || v1 != gEnableGammaControl )
+  if ( Render::DisplayCalibration::msBrightness != v2 || g_ForceDisplayCalibrationUpdate || v1 != gEnableGammaControl )
   {
     sDeviceBrightness = Render::DisplayCalibration::msBrightness;
     sGammaControlEnabled = gEnableGammaControl;
@@ -1892,7 +1706,7 @@ void Render::DisplayCalibration::UpdatePlat(void)
       if ( !((unsigned int (__fastcall *)(IDXGISwapChain *, __int64 *))sDXGISwapChain->vfptr[5].QueryInterface)(
               sDXGISwapChain,
               &v16)
-        && !(*(unsigned int (__fastcall **)(__int64, char *))(*(_QWORD *)v16 + 104i64))(v16, &v11) )
+        && !(*(unsigned int (__fastcall **)(__int64, char *))(*(_QWORD *)v16 + 104i64))(v16, v11) )
       {
         v13 = _xmm;
         v14 = 0i64;
@@ -1902,35 +1716,32 @@ void Render::DisplayCalibration::UpdatePlat(void)
           v6 = 0;
           if ( gEnableGammaControl )
           {
-            if ( v12 )
-            {
-              v9 = (float *)&v15;
-              do
-              {
-                v10 = powf((float)v6 * (float)(1.0 / (float)(signed int)(v5 - 1)), v3) + v4;
-                if ( v10 <= 0.0 )
-                {
-                  v10 = 0.0;
-                }
-                else if ( v10 >= 1.0 )
-                {
-                  v10 = *(float *)&FLOAT_1_0;
-                }
-                *(v9 - 1) = v10;
-                *v9 = v10;
-                v9[1] = v10;
-                ++v6;
-                v9 += 3;
-              }
-              while ( v6 < v5 );
-            }
-          }
-          else if ( v12 )
-          {
-            v7 = (float *)&v15;
+            v9 = (float *)v15;
             do
             {
-              v8 = (float)v6 * (float)(1.0 / (float)(signed int)(v5 - 1));
+              v10 = powf((float)v6 * (float)(1.0 / (float)(int)(v5 - 1)), v3) + v4;
+              if ( v10 <= 0.0 )
+              {
+                v10 = 0.0;
+              }
+              else if ( v10 >= 1.0 )
+              {
+                v10 = *(float *)&FLOAT_1_0;
+              }
+              *(v9 - 1) = v10;
+              *v9 = v10;
+              v9[1] = v10;
+              ++v6;
+              v9 += 3;
+            }
+            while ( v6 < v5 );
+          }
+          else
+          {
+            v7 = (float *)v15;
+            do
+            {
+              v8 = (float)v6 * (float)(1.0 / (float)(int)(v5 - 1));
               if ( v8 <= 0.0 )
               {
                 v8 = 0.0;
@@ -1968,10 +1779,10 @@ void __fastcall Render::BeginRenderToDevice(unsigned int *param)
 // RVA: 0x69F240
 void __fastcall Render::EndRenderToDevice(unsigned int *param)
 {
-  unsigned __int64 v1; // rax
+  unsigned __int64 Ticks; // rax
 
-  v1 = UFG::qGetTicks();
-  RenderDrawQueueCPUTime = UFG::qGetTickTime(Render::RenderToDeviceStartTicks, v1);
+  Ticks = UFG::qGetTicks();
+  RenderDrawQueueCPUTime = UFG::qGetTickTime(Render::RenderToDeviceStartTicks, Ticks);
 }
 
 // File Line: 2291
@@ -1984,11 +1795,10 @@ void __fastcall Render::ConvergeFunction(unsigned int *param)
   __int64 v4; // r11
   _QWORD *v5; // rax
   __int64 v6; // rax
-  __int64 v7; // [rsp+50h] [rbp-28h]
-  int v8; // [rsp+58h] [rbp-20h]
-  int v9; // [rsp+5Ch] [rbp-1Ch]
-  int v10; // [rsp+60h] [rbp-18h]
-  int v11; // [rsp+64h] [rbp-14h]
+  _BYTE v7[12]; // [rsp+50h] [rbp-28h] BYREF
+  int v8; // [rsp+5Ch] [rbp-1Ch]
+  int v9; // [rsp+60h] [rbp-18h]
+  int v10; // [rsp+64h] [rbp-14h]
 
   if ( (_DWORD)param )
   {
@@ -2002,28 +1812,27 @@ void __fastcall Render::ConvergeFunction(unsigned int *param)
     v1 = LeftEyeTarget;
   }
   v2 = *(_QWORD *)(*(_QWORD *)&v1->mTargetTexture[0][1].mMipMapBias + 136i64);
-  v3 = (unsigned int)(signed int)(float)((float)((float)gOutputParams.m3DConvergence * 0.1) * 32.0);
+  v3 = (unsigned int)(int)(float)((float)((float)gOutputParams.m3DConvergence * 0.1) * 32.0);
   v4 = *(_QWORD *)(*(_QWORD *)&BackBufferTarget->mTargetTexture[0][1].mMipMapBias + 136i64);
-  v11 = 1;
+  v10 = 1;
   if ( (_DWORD)param )
   {
-    v7 = 0i64;
-    v9 = gScreenWidth - v3;
-    v8 = 0;
-    v10 = gScreenHeight;
+    memset(v7, 0, sizeof(v7));
+    v8 = gScreenWidth - v3;
+    v9 = gScreenHeight;
     v6 = *((_QWORD *)NtCurrentTeb()->Reserved1[11] + tls_index);
   }
   else
   {
-    v9 = gScreenWidth;
-    v10 = gScreenHeight;
+    v8 = gScreenWidth;
+    v9 = gScreenHeight;
     v5 = NtCurrentTeb()->Reserved1[11];
-    LODWORD(v7) = v3;
+    *(_DWORD *)v7 = (int)(float)((float)((float)gOutputParams.m3DConvergence * 0.1) * 32.0);
     v6 = v5[tls_index];
-    *(__int64 *)((char *)&v7 + 4) = 0i64;
+    *(_QWORD *)&v7[4] = 0i64;
     v3 = 0i64;
   }
-  (*(void (__fastcall **)(_QWORD, __int64, _QWORD, __int64, _DWORD, _DWORD, __int64, _DWORD, __int64 *))(**(_QWORD **)(v6 + 104) + 368i64))(
+  (*(void (__fastcall **)(_QWORD, __int64, _QWORD, __int64, _DWORD, _DWORD, __int64, _DWORD, _BYTE *))(**(_QWORD **)(v6 + 104) + 368i64))(
     *(_QWORD *)(v6 + 104),
     v2,
     0i64,
@@ -2032,47 +1841,41 @@ void __fastcall Render::ConvergeFunction(unsigned int *param)
     0,
     v4,
     0,
-    &v7);
+    v7);
 }
 
 // File Line: 2329
 // RVA: 0x6A08A0
 void __fastcall Render::PerformFlip(unsigned int syncInterval)
 {
-  unsigned int v1; // edi
   _QWORD *v2; // rax
   __int64 v3; // rcx
-  int v4; // ST28_4
-  ID3D11DeviceContext **v5; // rbx
-  __int64 v6; // ST28_8
-  int v7; // ebx
+  ID3D11DeviceContext **v4; // rbx
+  int v5; // ebx
+  Render *v6; // rcx
+  Render *v7; // rcx
   Render *v8; // rcx
-  Render *v9; // rcx
-  Render *v10; // rcx
 
-  v1 = syncInterval;
   if ( g_Fullscreen )
   {
     v2 = NtCurrentTeb()->Reserved1[11];
     if ( g_enable3D )
     {
-      v4 = 0;
-      v5 = (ID3D11DeviceContext **)(v2[tls_index] + 104i64);
+      v4 = (ID3D11DeviceContext **)(v2[tls_index] + 104i64);
       sStereo3D->vfptr->CopyToEye(
         sStereo3D,
-        0i64,
-        *v5,
-        (ID3D11Resource *)gPresentBuffer,
+        STEREO_EYE_LEFT,
+        *v4,
+        gPresentBuffer,
         *(ID3D11Resource **)(*(_QWORD *)&LeftEyeTarget->mTargetTexture[0][1].mMipMapBias + 136i64),
-        v4);
-      LODWORD(v6) = 0;
+        0);
       sStereo3D->vfptr->CopyToEye(
         sStereo3D,
         STEREO_EYE_RIGHT,
-        *v5,
-        (ID3D11Resource *)gPresentBuffer,
+        *v4,
+        gPresentBuffer,
         *(ID3D11Resource **)(*(_QWORD *)&RightEyeTarget->mTargetTexture[0][1].mMipMapBias + 136i64),
-        v6);
+        0);
     }
     else
     {
@@ -2084,17 +1887,17 @@ void __fastcall Render::PerformFlip(unsigned int syncInterval)
     }
   }
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&sDXGIMutex);
-  v7 = ((__int64 (__fastcall *)(IDXGISwapChain *, _QWORD, _QWORD))sDXGISwapChain->vfptr[2].Release)(
+  v5 = ((__int64 (__fastcall *)(IDXGISwapChain *, _QWORD, _QWORD))sDXGISwapChain->vfptr[2].Release)(
          sDXGISwapChain,
-         v1,
+         syncInterval,
          0i64);
   UFG::qMutex::Unlock((LPCRITICAL_SECTION)&sDXGIMutex);
-  if ( !((v7 + 0x7785FFFB) & 0xFFFFFFFD) )
+  if ( ((v5 + 0x7785FFFB) & 0xFFFFFFFD) == 0 )
   {
     UFG::qMutex::Lock((LPCRITICAL_SECTION)&sDXGIMutex);
-    Render::ReleaseSwapChain(v8);
-    Render::ReleaseD3D(v9);
-    Render::InitD3D(v10);
+    Render::ReleaseSwapChain(v6);
+    Render::ReleaseD3D(v7);
+    Render::InitD3D(v8);
     Render::InitSwapChain(0i64);
     UFG::qMutex::Unlock((LPCRITICAL_SECTION)&sDXGIMutex);
   }
@@ -2105,10 +1908,8 @@ void __fastcall Render::PerformFlip(unsigned int syncInterval)
 // RVA: 0x6A1D20
 void __fastcall Render::RenderThreadWindowsMsgProc(bool *quitMsgReceived)
 {
-  bool *v1; // rbx
-  tagMSG Msg; // [rsp+30h] [rbp-38h]
+  tagMSG Msg; // [rsp+30h] [rbp-38h] BYREF
 
-  v1 = quitMsgReceived;
   if ( PeekMessageA(&Msg, 0i64, 0, 0, 1u) )
   {
     while ( Msg.message != 18 )
@@ -2119,14 +1920,14 @@ void __fastcall Render::RenderThreadWindowsMsgProc(bool *quitMsgReceived)
         goto LABEL_4;
     }
     PostQuitMessage(Msg.wParam);
-    if ( v1 )
-      *v1 = 1;
+    if ( quitMsgReceived )
+      *quitMsgReceived = 1;
   }
   else
   {
 LABEL_4:
-    if ( v1 )
-      *v1 = 0;
+    if ( quitMsgReceived )
+      *quitMsgReceived = 0;
   }
 }
 
@@ -2134,10 +1935,9 @@ LABEL_4:
 // RVA: 0x6A1510
 void __fastcall Render::RenderThreadSwapChainEventTriggers(bool *resizeEvent)
 {
-  bool *v1; // rbx
-  Render::RenderCallbacks *v2; // rax
-  int v3; // esi
-  int v4; // edi
+  Render::RenderCallbacks *RenderCallbacks; // rax
+  int Width; // esi
+  int Height; // edi
   float v5; // xmm2_4
   bool v6; // al
   int v7; // eax
@@ -2147,7 +1947,7 @@ void __fastcall Render::RenderThreadSwapChainEventTriggers(bool *resizeEvent)
   Render::RenderCallbacks *v11; // rax
   Render::RenderCallbacks *v12; // rax
   Render::RenderCallbacks *v13; // rax
-  char v14; // al
+  bool v14; // al
   bool v15; // cl
   char v16; // al
   char v17; // al
@@ -2155,85 +1955,34 @@ void __fastcall Render::RenderThreadSwapChainEventTriggers(bool *resizeEvent)
   bool v19; // r8
   _BOOL8 v20; // rdx
   IDXGIOutput *v21; // r8
-  tagRECT Rect; // [rsp+30h] [rbp-B8h]
-  UFG::qString v23; // [rsp+40h] [rbp-A8h]
-  __int64 v24; // [rsp+68h] [rbp-80h]
-  int v25; // [rsp+70h] [rbp-78h]
-  int v26; // [rsp+74h] [rbp-74h]
-  __int128 v27; // [rsp+78h] [rbp-70h]
-  __int128 v28; // [rsp+88h] [rbp-60h]
-  __int64 v29; // [rsp+98h] [rbp-50h]
-  __int64 v30; // [rsp+A0h] [rbp-48h]
-  __int64 v31; // [rsp+A8h] [rbp-40h]
-  __int64 v32; // [rsp+B0h] [rbp-38h]
-  __int64 v33; // [rsp+B8h] [rbp-30h]
-  __int64 v34; // [rsp+C0h] [rbp-28h]
-  int v35; // [rsp+C8h] [rbp-20h]
-  char v36; // [rsp+CCh] [rbp-1Ch]
-  UFG::qString v37; // [rsp+D8h] [rbp-10h]
-  __int64 v38; // [rsp+100h] [rbp+18h]
-  int v39; // [rsp+108h] [rbp+20h]
-  int v40; // [rsp+10Ch] [rbp+24h]
-  int v41; // [rsp+110h] [rbp+28h]
-  __int64 v42; // [rsp+114h] [rbp+2Ch]
-  int v43; // [rsp+11Ch] [rbp+34h]
-  int v44; // [rsp+120h] [rbp+38h]
-  __int128 v45; // [rsp+128h] [rbp+40h]
-  __int128 v46; // [rsp+138h] [rbp+50h]
-  __int64 v47; // [rsp+148h] [rbp+60h]
-  __int64 v48; // [rsp+150h] [rbp+68h]
-  __int64 v49; // [rsp+158h] [rbp+70h]
-  __int64 v50; // [rsp+160h] [rbp+78h]
-  __int64 v51; // [rsp+168h] [rbp+80h]
-  __int64 v52; // [rsp+170h] [rbp+88h]
-  int v53; // [rsp+178h] [rbp+90h]
-  char v54; // [rsp+17Ch] [rbp+94h]
-  UFG::qString v55; // [rsp+188h] [rbp+A0h]
-  __int64 v56; // [rsp+1B0h] [rbp+C8h]
-  int v57; // [rsp+1B8h] [rbp+D0h]
-  int v58; // [rsp+1BCh] [rbp+D4h]
-  int v59; // [rsp+1C0h] [rbp+D8h]
-  __int64 v60; // [rsp+1C4h] [rbp+DCh]
-  int v61; // [rsp+1CCh] [rbp+E4h]
-  int v62; // [rsp+1D0h] [rbp+E8h]
-  __int128 v63; // [rsp+1D8h] [rbp+F0h]
-  __int128 v64; // [rsp+1E8h] [rbp+100h]
-  __int64 v65; // [rsp+1F8h] [rbp+110h]
-  __int64 v66; // [rsp+200h] [rbp+118h]
-  __int64 v67; // [rsp+208h] [rbp+120h]
-  __int64 v68; // [rsp+210h] [rbp+128h]
-  __int64 v69; // [rsp+218h] [rbp+130h]
-  __int64 v70; // [rsp+220h] [rbp+138h]
-  int v71; // [rsp+228h] [rbp+140h]
-  char v72; // [rsp+22Ch] [rbp+144h]
-  UFG::qString v73; // [rsp+238h] [rbp+150h]
-  __int64 v74; // [rsp+260h] [rbp+178h]
-  int v75; // [rsp+268h] [rbp+180h]
-  int v76; // [rsp+26Ch] [rbp+184h]
-  int v77; // [rsp+270h] [rbp+188h]
-  __int64 v78; // [rsp+274h] [rbp+18Ch]
-  int v79; // [rsp+27Ch] [rbp+194h]
-  int v80; // [rsp+280h] [rbp+198h]
-  __int128 v81; // [rsp+288h] [rbp+1A0h]
-  __int128 v82; // [rsp+298h] [rbp+1B0h]
-  __int64 v83; // [rsp+2A8h] [rbp+1C0h]
-  __int64 v84; // [rsp+2B0h] [rbp+1C8h]
-  __int64 v85; // [rsp+2B8h] [rbp+1D0h]
-  __int64 v86; // [rsp+2C0h] [rbp+1D8h]
-  __int64 v87; // [rsp+2C8h] [rbp+1E0h]
-  __int64 v88; // [rsp+2D0h] [rbp+1E8h]
-  int v89; // [rsp+2D8h] [rbp+1F0h]
-  char v90; // [rsp+2DCh] [rbp+1F4h]
-  __int64 v91; // [rsp+2E8h] [rbp+200h]
-  UFG::qString result; // [rsp+2F0h] [rbp+208h]
-  char v93; // [rsp+318h] [rbp+230h]
-  int v94; // [rsp+350h] [rbp+268h]
+  tagRECT Rect; // [rsp+30h] [rbp-B8h] BYREF
+  UFG::qString v23; // [rsp+40h] [rbp-A8h] BYREF
+  int v24; // [rsp+68h] [rbp-80h]
+  int v25; // [rsp+6Ch] [rbp-7Ch]
+  int v26; // [rsp+70h] [rbp-78h]
+  int v27; // [rsp+74h] [rbp-74h]
+  __int128 v28; // [rsp+78h] [rbp-70h]
+  __int128 v29; // [rsp+88h] [rbp-60h]
+  __int64 v30; // [rsp+98h] [rbp-50h]
+  __int64 v31; // [rsp+A0h] [rbp-48h]
+  __int64 v32; // [rsp+A8h] [rbp-40h]
+  __int64 v33; // [rsp+B0h] [rbp-38h]
+  __int64 v34; // [rsp+B8h] [rbp-30h]
+  __int64 v35; // [rsp+C0h] [rbp-28h]
+  int v36; // [rsp+C8h] [rbp-20h]
+  char v37; // [rsp+CCh] [rbp-1Ch]
+  Illusion::CreateTargetParams v38; // [rsp+D8h] [rbp-10h] BYREF
+  Illusion::CreateTargetParams v39; // [rsp+188h] [rbp+A0h] BYREF
+  Illusion::CreateTargetParams v40; // [rsp+238h] [rbp+150h] BYREF
+  __int64 v41; // [rsp+2E8h] [rbp+200h]
+  UFG::qString result; // [rsp+2F0h] [rbp+208h] BYREF
+  char v43[56]; // [rsp+318h] [rbp+230h] BYREF
+  int v44; // [rsp+350h] [rbp+268h]
 
-  v91 = -2i64;
-  v1 = resizeEvent;
+  v41 = -2i64;
   if ( resizeEvent )
     *resizeEvent = 0;
-  if ( sbEventResizeBuffers != 1 )
+  if ( !sbEventResizeBuffers )
   {
 LABEL_9:
     if ( !sbEventResizeSwapChain )
@@ -2244,60 +1993,60 @@ LABEL_9:
   {
     if ( Render::GetRenderCallbacks()->mResizeRenderBuffersFunc )
     {
-      v2 = Render::GetRenderCallbacks();
-      v2->mResizeRenderBuffersFunc();
+      RenderCallbacks = Render::GetRenderCallbacks();
+      RenderCallbacks->mResizeRenderBuffersFunc();
     }
     sbEventResizeBuffers = 0;
-    if ( v1 )
-      *v1 = 1;
+    if ( resizeEvent )
+      *resizeEvent = 1;
     goto LABEL_9;
   }
 LABEL_10:
-  Illusion::IEnginePlat::WaitUntilGPUDone((Illusion::IEnginePlat *)&Illusion::gEngine);
+  Illusion::IEnginePlat::WaitUntilGPUDone(&Illusion::gEngine);
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&sDXGIMutex);
   if ( !sDXGIMode || sbEventManualWindowSizing )
   {
     GetClientRect(ghWnd, &Rect);
-    v3 = Rect.right - Rect.left;
-    v4 = Rect.bottom - Rect.top;
+    Width = Rect.right - Rect.left;
+    Height = Rect.bottom - Rect.top;
     v5 = (float)(Rect.right - Rect.left);
     if ( (float)(v5 / (float)(Rect.bottom - Rect.top)) > 7.1111112 )
-      v4 = (signed int)(float)(v5 * 0.140625);
+      Height = (int)(float)(v5 * 0.140625);
   }
   else
   {
-    v3 = sDXGIMode->Width;
-    v4 = sDXGIMode->Height;
+    Width = sDXGIMode->Width;
+    Height = sDXGIMode->Height;
   }
-  Render::SetWindow(v3, v4);
+  Render::SetWindow(Width, Height);
   if ( sPresentRenderTargetView )
   {
-    ((void (*)(void))sPresentRenderTargetView->vfptr->Release)();
+    sPresentRenderTargetView->vfptr->Release(sPresentRenderTargetView);
     sPresentRenderTargetView = 0i64;
   }
   if ( gPresentBuffer )
   {
-    ((void (*)(void))gPresentBuffer->vfptr->Release)();
+    gPresentBuffer->vfptr->Release(gPresentBuffer);
     gPresentBuffer = 0i64;
   }
-  Illusion::DeleteTarget(BackBufferTarget, 1);
-  Illusion::DeleteTarget(PresentBufferTarget, 1);
-  Illusion::DeleteTarget(LeftEyeTarget, 1);
-  Illusion::DeleteTarget(RightEyeTarget, 1);
-  gScreenWidth = v3;
-  gScreenHeight = v4;
+  Illusion::DeleteTarget((AMD_HD3D *)BackBufferTarget, 1);
+  Illusion::DeleteTarget((AMD_HD3D *)PresentBufferTarget, 1);
+  Illusion::DeleteTarget((AMD_HD3D *)LeftEyeTarget, 1);
+  Illusion::DeleteTarget((AMD_HD3D *)RightEyeTarget, 1);
+  gScreenWidth = Width;
+  gScreenHeight = Height;
   if ( g_signalNewSwapChain )
   {
-    Render::InitSwapChain(g_Fullscreen);
+    Render::InitSwapChain((Render *)g_Fullscreen);
     g_signalNewSwapChain = 0;
   }
   else
   {
-    ((void (__fastcall *)(IDXGISwapChain *, signed __int64, _QWORD, _QWORD, signed int, signed int))sDXGISwapChain->vfptr[4].AddRef)(
+    ((void (__fastcall *)(IDXGISwapChain *, __int64, _QWORD, _QWORD, int, int))sDXGISwapChain->vfptr[4].AddRef)(
       sDXGISwapChain,
       2i64,
-      (unsigned int)v3,
-      (unsigned int)v4,
+      (unsigned int)Width,
+      (unsigned int)Height,
       28,
       2);
     ((void (__fastcall *)(IDXGISwapChain *, _QWORD, GUID *, ID3D11Texture2D **))sDXGISwapChain->vfptr[3].QueryInterface)(
@@ -2311,13 +2060,13 @@ LABEL_10:
       0i64,
       &sPresentRenderTargetView);
   }
-  ((void (__fastcall *)(IDXGISwapChain *, char *))sDXGISwapChain->vfptr[4].QueryInterface)(sDXGISwapChain, &v93);
+  ((void (__fastcall *)(IDXGISwapChain *, char *))sDXGISwapChain->vfptr[4].QueryInterface)(sDXGISwapChain, v43);
   v6 = g_Fullscreen;
   if ( g_Fullscreen == g_PrevFullscreen )
   {
-    v6 = v94 == 0;
-    g_Fullscreen = v94 == 0;
-    gOutputParams.mEnableFullscreen = v94 == 0;
+    v6 = v44 == 0;
+    g_Fullscreen = v44 == 0;
+    gOutputParams.mEnableFullscreen = v44 == 0;
   }
   g_renderMouse = 0;
   if ( v6 )
@@ -2331,94 +2080,55 @@ LABEL_10:
     UFG::qString::~qString(&result);
   }
   UFG::qMutex::Unlock((LPCRITICAL_SECTION)&sDXGIMutex);
-  gDisplayAspectRatio = (float)v3 / (float)v4;
+  gDisplayAspectRatio = (float)Width / (float)Height;
   Render::UpdateUIViewportScalesBasedOnAspectRatio(v9);
   UFG::qString::qString(&v23, "BackBuffer");
-  *(_QWORD *)((char *)&v27 + 4) = 1i64;
-  v24 = 0i64;
+  v27 = 1;
   v26 = 1;
-  LODWORD(v27) = -1;
-  v25 = 1;
-  _mm_store_si128((__m128i *)&v27, (__m128i)0i64);
-  _mm_store_si128((__m128i *)&v28, (__m128i)0i64);
+  v28 = 0i64;
   v29 = 0i64;
   v30 = 0i64;
   v31 = 0i64;
   v32 = 0i64;
   v33 = 0i64;
   v34 = 0i64;
-  v35 = 0;
+  v35 = 0i64;
   v36 = 0;
-  v24 = (unsigned int)gScreenWidth;
-  LOBYTE(v27) = 0;
-  HIDWORD(v24) = 19;
+  v37 = 0;
+  v24 = gScreenWidth;
+  LOBYTE(v28) = 0;
+  v25 = 19;
   BackBufferTarget = Illusion::CreateTarget((Illusion::CreateTargetParams *)&v23);
-  UFG::qString::qString(&v55, "PresentBuffer");
-  v60 = 1i64;
-  v56 = 0i64;
-  v57 = 1;
-  v58 = 1;
-  v59 = -1;
-  v61 = 0;
-  v62 = 1;
-  _mm_store_si128((__m128i *)&v63, (__m128i)0i64);
-  _mm_store_si128((__m128i *)&v64, (__m128i)0i64);
-  v65 = 0i64;
-  v66 = 0i64;
-  v67 = 0i64;
-  v68 = 0i64;
-  v69 = 0i64;
-  v70 = 0i64;
-  v71 = 0;
-  v72 = 0;
-  v56 = __PAIR__(gScreenHeight, gScreenWidth);
-  LOBYTE(v59) = 0;
-  v61 = 0x40000;
-  PresentBufferTarget = Illusion::CreateTarget((Illusion::CreateTargetParams *)&v55);
-  UFG::qString::qString(&v73, "LeftEye");
-  v78 = 1i64;
-  v74 = 0i64;
-  v75 = 1;
-  v76 = 1;
-  v77 = -1;
-  v79 = 0;
-  v80 = 1;
-  _mm_store_si128((__m128i *)&v81, (__m128i)0i64);
-  _mm_store_si128((__m128i *)&v82, (__m128i)0i64);
-  v83 = 0i64;
-  v84 = 0i64;
-  v85 = 0i64;
-  v86 = 0i64;
-  v87 = 0i64;
-  v88 = 0i64;
-  v89 = 0;
-  v90 = 0;
-  v74 = __PAIR__(gScreenHeight, gScreenWidth);
-  LOBYTE(v77) = 0;
-  v79 = 19;
-  LeftEyeTarget = Illusion::CreateTarget((Illusion::CreateTargetParams *)&v73);
-  UFG::qString::qString(&v37, "RightEye");
-  v42 = 1i64;
-  v38 = 0i64;
-  v39 = 1;
-  v40 = 1;
-  v41 = -1;
-  v43 = 0;
-  v44 = 1;
-  _mm_store_si128((__m128i *)&v45, (__m128i)0i64);
-  _mm_store_si128((__m128i *)&v46, (__m128i)0i64);
-  v47 = 0i64;
-  v48 = 0i64;
-  v49 = 0i64;
-  v50 = 0i64;
-  v51 = 0i64;
-  v52 = 0i64;
-  v53 = 0;
-  v54 = 0;
-  v38 = __PAIR__(gScreenHeight, gScreenWidth);
-  LOBYTE(v41) = 0;
-  v43 = 19;
-  RightEyeTarget = Illusion::CreateTarget((Illusion::CreateTargetParams *)&v37);
+  UFG::qString::qString(&v39.name, "PresentBuffer");
+  *(_QWORD *)&v39.num_mrt = 1i64;
+  v39.depth = 1;
+  v39.array_size = 1;
+  *(_DWORD *)v39.mrt_formats = -256;
+  v39.num_mips = 1;
+  memset(v39.textures, 0, 85);
+  *(_QWORD *)&v39.width = __PAIR64__(gScreenHeight, gScreenWidth);
+  v39.target_flags = 0x40000;
+  PresentBufferTarget = Illusion::CreateTarget(&v39);
+  UFG::qString::qString(&v40.name, "LeftEye");
+  *(_QWORD *)&v40.num_mrt = 1i64;
+  v40.depth = 1;
+  v40.array_size = 1;
+  *(_DWORD *)v40.mrt_formats = -256;
+  v40.num_mips = 1;
+  memset(v40.textures, 0, 85);
+  *(_QWORD *)&v40.width = __PAIR64__(gScreenHeight, gScreenWidth);
+  v40.target_flags = 19;
+  LeftEyeTarget = Illusion::CreateTarget(&v40);
+  UFG::qString::qString(&v38.name, "RightEye");
+  *(_QWORD *)&v38.num_mrt = 1i64;
+  v38.depth = 1;
+  v38.array_size = 1;
+  *(_DWORD *)v38.mrt_formats = -256;
+  v38.num_mips = 1;
+  memset(v38.textures, 0, 85);
+  *(_QWORD *)&v38.width = __PAIR64__(gScreenHeight, gScreenWidth);
+  v38.target_flags = 19;
+  RightEyeTarget = Illusion::CreateTarget(&v38);
   if ( Render::GetRenderCallbacks()->mResizeRenderBuffersFunc )
   {
     v10 = Render::GetRenderCallbacks();
@@ -2427,11 +2137,11 @@ LABEL_10:
   sbEventResizeBuffers = 0;
   sbEventResizeSwapChain = 0;
   sbEventManualWindowSizing = 0;
-  if ( v1 )
-    *v1 = 1;
-  UFG::qString::~qString(&v37);
-  UFG::qString::~qString(&v73);
-  UFG::qString::~qString(&v55);
+  if ( resizeEvent )
+    *resizeEvent = 1;
+  UFG::qString::~qString(&v38.name);
+  UFG::qString::~qString(&v40.name);
+  UFG::qString::~qString(&v39.name);
   UFG::qString::~qString(&v23);
 LABEL_33:
   if ( sbEventResizeShadows )
@@ -2442,8 +2152,8 @@ LABEL_33:
       v11->mResizeShadowsFunc();
     }
     sbEventResizeShadows = 0;
-    if ( v1 )
-      *v1 = 1;
+    if ( resizeEvent )
+      *resizeEvent = 1;
   }
   if ( sbEventChangeTexturePack )
   {
@@ -2463,7 +2173,7 @@ LABEL_33:
     }
     sbEventChangeLODSetting = 0;
   }
-  v14 = ((__int64 (*)(void))sStereo3D->vfptr->Stereo3DAvailable)();
+  v14 = sStereo3D->vfptr->Stereo3DAvailable(sStereo3D);
   v15 = g_signalEnable3D;
   if ( !v14 )
     v15 = 0;
@@ -2482,9 +2192,9 @@ LABEL_33:
       v17 = 1;
     g_signalNewSwapChain = v17;
     if ( v15 && g_Fullscreen )
-      ((void (*)(void))sStereo3D->vfptr->Enable)();
+      sStereo3D->vfptr->Enable(sStereo3D);
     else
-      ((void (*)(void))sStereo3D->vfptr->Disable)();
+      sStereo3D->vfptr->Disable(sStereo3D);
     UFG::qMutex::Lock((LPCRITICAL_SECTION)&sDXGIMutex);
     v18 = sDXGISwapChain;
     if ( sDXGISwapChain )
@@ -2561,10 +2271,11 @@ void __fastcall Render::RenderThreadGetOcclusionQueryResults(Render *this)
 
 // File Line: 2716
 // RVA: 0x6A0FF0
-__int64 __usercall Render::RenderFrame@<rax>(float ftime@<xmm0>, Render *a2@<rcx>)
+_BOOL8 __fastcall Render::RenderFrame(float ftime)
 {
+  Render *v1; // rcx
   __int32 v2; // esi
-  int v3; // ebx
+  unsigned int v3; // ebx
   char *v4; // rax
   Render *v5; // rcx
   Render *v6; // rcx
@@ -2573,29 +2284,29 @@ __int64 __usercall Render::RenderFrame@<rax>(float ftime@<xmm0>, Render *a2@<rcx
   __int64 v9; // rcx
   Illusion *v10; // rcx
   Illusion *v11; // rcx
-  Render::RenderCallbacks *v12; // rax
-  unsigned __int8 v13; // bp
+  Render::RenderCallbacks *RenderCallbacks; // rax
+  bool v13; // bp
   __int64 v14; // rdi
   __int64 v15; // rbx
-  unsigned __int64 v16; // rax
+  unsigned __int64 Ticks; // rax
   Render *v17; // rcx
   Illusion *v18; // rcx
-  UFG::qList<Illusion::RenderPhase,Illusion::RenderPhase,1,0> *v19; // rax
+  UFG::qList<Illusion::RenderPhase,Illusion::RenderPhase,1,0> *RenderPhasesForNextFrame; // rax
   unsigned __int32 v20; // ebx
   unsigned __int64 v21; // rax
   float i; // xmm0_4
   unsigned __int64 v23; // rax
-  char v25; // [rsp+98h] [rbp+10h]
-  char data0; // [rsp+A0h] [rbp+18h]
+  char v25; // [rsp+98h] [rbp+10h] BYREF
+  char data0; // [rsp+A0h] [rbp+18h] BYREF
   char *v27; // [rsp+A8h] [rbp+20h]
 
-  Render::CommitPendingCommandBuilders(a2);
+  Render::CommitPendingCommandBuilders(v1);
   UFG::qTaskManager::Sync(&UFG::gTaskManager);
   v2 = 0;
   v3 = Render::g_DefragMovesUsedCount;
   if ( Render::g_DefragMovesUsedCount > 0 && Render::g_DefragMovesFinishedCount == Render::g_DefragMovesUsedCount )
   {
-    if ( Render::g_DoDefragPrints == 1 )
+    if ( Render::g_DoDefragPrints )
       UFG::qPrintf(
         "Defrag starting move callbacks on %d moves at 0x%08x, frame[%d]\n",
         (unsigned int)Render::g_DefragMovesUsedCount,
@@ -2636,12 +2347,12 @@ __int64 __usercall Render::RenderFrame@<rax>(float ftime@<xmm0>, Render *a2@<rcx
   if ( g_enable3D && g_Fullscreen )
   {
     g_interAxialDistance = (float)((float)gOutputParams.m3DDepth * 0.1) * 0.1;
-    Render::RenderWorldEye(ftime, 0);
+    Render::RenderWorldEye(ftime, STEREO_EYE_LEFT);
     Render::RenderWorldEye(ftime, STEREO_EYE_RIGHT);
   }
   else
   {
-    gCurrentEye = 0;
+    gCurrentEye = STEREO_EYE_LEFT;
     Render::RenderWorld(ftime);
   }
   Illusion::FrameWriteMemoryPlat::Unlock(&Illusion::gFrameWriteMemoryPlat);
@@ -2677,17 +2388,15 @@ __int64 __usercall Render::RenderFrame@<rax>(float ftime@<xmm0>, Render *a2@<rcx
   Illusion::AddRenderThreadCommand(RTCMD_CALLBACK, Render::RenderThreadSwapChainEventTriggers, &v25, 0i64);
   if ( Render::GetRenderCallbacks()->mRenderThreadSyncPointFunc )
   {
-    v12 = Render::GetRenderCallbacks();
-    Illusion::AddRenderThreadCommand(RTCMD_CALLBACK, v12->mRenderThreadSyncPointFunc, &v25, 0i64);
+    RenderCallbacks = Render::GetRenderCallbacks();
+    Illusion::AddRenderThreadCommand(RTCMD_CALLBACK, RenderCallbacks->mRenderThreadSyncPointFunc, &v25, 0i64);
   }
   Illusion::WaitForRenderThread(v11);
-  v13 = 1;
-  if ( data0 )
-    v13 = 0;
+  v13 = data0 == 0;
   v14 = (LOBYTE(Illusion::gEngine.mFrameCount) + 1) & 3;
   v15 = Illusion::gEngine.mFrameCount & 3;
-  v16 = UFG::qGetTicks();
-  Render::gFrameTimes[v15].mCPUTimeMs = UFG::qGetTickTime(Render::gFrameTimes[v15].mCPUStartTime, v16) * 1000.0;
+  Ticks = UFG::qGetTicks();
+  Render::gFrameTimes[v15].mCPUTimeMs = UFG::qGetTickTime(Render::gFrameTimes[v15].mCPUStartTime, Ticks) * 1000.0;
   Render::gFrameTimes[v14].mCPUStartTime = UFG::qGetTicks();
   UFG::qVRAMemoryPools::ServiceDeletes();
   Render::SwapFrameMemoryBuffers(v17);
@@ -2699,15 +2408,15 @@ __int64 __usercall Render::RenderFrame@<rax>(float ftime@<xmm0>, Render *a2@<rcx
   }
   else
   {
-    v19 = Illusion::RenderQueuePlat::GetRenderPhasesForNextFrame();
-    Illusion::AddRenderThreadCommand(RTCMD_SUBMIT, v19, 0i64, 0i64);
+    RenderPhasesForNextFrame = Illusion::RenderQueuePlat::GetRenderPhasesForNextFrame();
+    Illusion::AddRenderThreadCommand(RTCMD_SUBMIT, RenderPhasesForNextFrame, 0i64, 0i64);
     v20 = gOutputParams.mFPSLimiter % 5;
-    LOBYTE(v2) = gOutputParams.mEnableVSync != 0;
+    LOBYTE(v2) = gOutputParams.mEnableVSync;
     if ( v2 > gOutputParams.mFPSLimiter % 5 )
       v20 = v2;
     if ( gGovernMaxFrameRate && !v20 )
     {
-      if ( !(_S2_11 & 1) )
+      if ( (_S2_11 & 1) == 0 )
       {
         _S2_11 |= 1u;
         prevTick = UFG::qGetTicks();
@@ -2730,19 +2439,15 @@ __int64 __usercall Render::RenderFrame@<rax>(float ftime@<xmm0>, Render *a2@<rcx
 // RVA: 0x6A2300
 void __fastcall Render::StreamingLoopProcessQueuedOperations(bool bBlocking, bool bProcessUnloads)
 {
-  bool v2; // di
-  bool v3; // bl
-  void *v4; // rbx
+  void *CurrentThreadID; // rbx
   Illusion *v5; // rcx
 
-  v2 = bProcessUnloads;
-  v3 = bBlocking;
   Illusion::BufferD3DResourceInventory::ProcessQueuedLoads(&Illusion::gBufferD3DResourceInventory, bBlocking);
-  Illusion::TextureD3DResourceInventory::ProcessQueuedLoads(&Illusion::gTextureD3DResourceInventory, v3);
-  if ( v2 )
+  Illusion::TextureD3DResourceInventory::ProcessQueuedLoads(&Illusion::gTextureD3DResourceInventory, bBlocking);
+  if ( bProcessUnloads )
   {
-    v4 = UFG::qGetCurrentThreadID();
-    if ( v4 == (void *)UFG::qGetMainThreadID() )
+    CurrentThreadID = UFG::qGetCurrentThreadID();
+    if ( CurrentThreadID == (void *)UFG::qGetMainThreadID() )
     {
       Illusion::Engine::WaitUntilSafeToDelete(&Illusion::gEngine);
       Illusion::AddRenderThreadCommand(RTCMD_CALLBACK, Render::RenderThreadDelayedTextureProcess, 0i64, 0i64);
@@ -2794,7 +2499,7 @@ void __fastcall Render::ExecuteDeferredContextForThread(Render *this)
 {
   __int64 v1; // rax
   Illusion *v2; // rcx
-  __int64 param; // [rsp+30h] [rbp+8h]
+  __int64 param; // [rsp+30h] [rbp+8h] BYREF
 
   v1 = *((_QWORD *)NtCurrentTeb()->Reserved1[11] + tls_index);
   param = 0i64;
@@ -2825,11 +2530,11 @@ __int64 __fastcall Render::GetGPUCount()
 __int64 Render::_dynamic_initializer_for__g_DefragMoves__()
 {
   `eh vector constructor iterator(
-    Render::g_DefragMoves,
+    (char *)Render::g_DefragMoves,
     0x40ui64,
     25,
     (void (__fastcall *)(void *))UFG::qVRAMemoryMoveOrder::qVRAMemoryMoveOrder);
-  return atexit(Render::_dynamic_atexit_destructor_for__g_DefragMoves__);
+  return atexit((int (__fastcall *)())Render::_dynamic_atexit_destructor_for__g_DefragMoves__);
 }
 
 // File Line: 3205
@@ -2852,44 +2557,44 @@ void __fastcall Render::SetVRAMDefragPerFrameLimits(bool inLoadScreen)
 // RVA: 0x6A1DB0
 void __fastcall Render::ScheduleNewDefragMoves(Render *this)
 {
-  int v1; // eax
+  int DefragmentMoves; // eax
   int v2; // ebp
-  char **v3; // rbx
+  char **p_mData; // rbx
   char *v4; // rsi
   char *v5; // rdi
-  unsigned int v6; // eax
+  unsigned int AllocatedSize; // eax
   __int64 v7; // [rsp+20h] [rbp-18h]
   __int64 v8; // [rsp+28h] [rbp-10h]
 
-  if ( !Render::g_DefragMovesUsedCount && Render::g_EnableVRAMDefragmentation == 1 )
+  if ( !Render::g_DefragMovesUsedCount && Render::g_EnableVRAMDefragmentation )
   {
-    v1 = UFG::qVRAMemoryPools::GetDefragmentMoves(
-           Render::g_DefragMoves,
-           Render::g_DefragTotalMovesPerFrame,
-           Render::g_DefragTotalBytesPerFrame);
-    Render::g_DefragMovesUsedCount = v1;
-    if ( Render::g_DoDefragPrints == 1 )
+    DefragmentMoves = UFG::qVRAMemoryPools::GetDefragmentMoves(
+                        Render::g_DefragMoves,
+                        Render::g_DefragTotalMovesPerFrame,
+                        Render::g_DefragTotalBytesPerFrame);
+    Render::g_DefragMovesUsedCount = DefragmentMoves;
+    if ( Render::g_DoDefragPrints )
     {
       v2 = Render::g_DefragMovesFinishedCount;
-      if ( Render::g_DefragMovesFinishedCount < v1 )
+      if ( Render::g_DefragMovesFinishedCount < DefragmentMoves )
       {
-        v3 = &Render::g_DefragMoves[(signed __int64)Render::g_DefragMovesFinishedCount].mTargetHandle.mData;
+        p_mData = &Render::g_DefragMoves[(__int64)Render::g_DefragMovesFinishedCount].mTargetHandle.mData;
         do
         {
-          v4 = v3[4];
-          v5 = *v3;
-          v6 = UFG::qVRAMemoryHandle::GetAllocatedSize(&Render::g_DefragMoves[(signed __int64)v2].mSourceHandle);
+          v4 = p_mData[4];
+          v5 = *p_mData;
+          AllocatedSize = UFG::qVRAMemoryHandle::GetAllocatedSize(&Render::g_DefragMoves[(__int64)v2].mSourceHandle);
           LODWORD(v8) = Illusion::gEngine.mFrameCount;
-          LODWORD(v7) = v6;
+          LODWORD(v7) = AllocatedSize;
           UFG::qPrintf(
             " - Scheduling defrag from 0x%08x to 0x%08x of %8d(0x%08x) bytes, frame[%d]\n",
             v4,
             v5,
-            v6,
+            AllocatedSize,
             v7,
             v8);
           ++v2;
-          v3 += 8;
+          p_mData += 8;
         }
         while ( v2 < Render::g_DefragMovesUsedCount );
       }
@@ -2903,13 +2608,13 @@ void __fastcall Render::DoDefragMoves(Render *this)
 {
   int v1; // esi
   unsigned int v2; // edi
-  char **v3; // r14
+  char **p_mData; // r14
   unsigned int v4; // eax
   char *v5; // rbp
   char *v6; // r15
-  unsigned int v7; // eax
-  unsigned int v8; // er12
-  unsigned int v9; // er13
+  unsigned int AllocatedSize; // eax
+  unsigned int v8; // r12d
+  unsigned int v9; // r13d
   unsigned int v10; // ebx
   __int64 v11; // [rsp+20h] [rbp-38h]
   __int64 v12; // [rsp+28h] [rbp-30h]
@@ -2920,23 +2625,23 @@ void __fastcall Render::DoDefragMoves(Render *this)
     v2 = 0;
     if ( Render::g_DefragMovesFinishedCount < Render::g_DefragMovesUsedCount )
     {
-      v3 = &Render::g_DefragMoves[(signed __int64)Render::g_DefragMovesFinishedCount].mTargetHandle.mData;
+      p_mData = &Render::g_DefragMoves[(__int64)Render::g_DefragMovesFinishedCount].mTargetHandle.mData;
       v4 = Render::g_DefragCurrentMoveProgress;
       do
       {
         if ( v2 >= Render::g_DefragTotalBytesPerFrame )
           break;
-        v5 = &v3[4][v4];
-        v6 = &(*v3)[v4];
-        v7 = UFG::qVRAMemoryHandle::GetAllocatedSize(&Render::g_DefragMoves[(signed __int64)v1].mSourceHandle);
-        v8 = v7 - Render::g_DefragCurrentMoveProgress;
-        v9 = v7 - Render::g_DefragCurrentMoveProgress + v2;
+        v5 = &p_mData[4][v4];
+        v6 = &(*p_mData)[v4];
+        AllocatedSize = UFG::qVRAMemoryHandle::GetAllocatedSize(&Render::g_DefragMoves[(__int64)v1].mSourceHandle);
+        v8 = AllocatedSize - Render::g_DefragCurrentMoveProgress;
+        v9 = AllocatedSize - Render::g_DefragCurrentMoveProgress + v2;
         if ( v9 <= Render::g_DefragTotalBytesPerFrame )
         {
-          if ( Render::g_DoDefragPrints == 1 )
+          if ( Render::g_DoDefragPrints )
           {
             LODWORD(v12) = Illusion::gEngine.mFrameCount;
-            LODWORD(v11) = v7 - Render::g_DefragCurrentMoveProgress;
+            LODWORD(v11) = AllocatedSize - Render::g_DefragCurrentMoveProgress;
             UFG::qPrintf(
               " - Doing         defrag from 0x%08x to 0x%08x of %8d(0x%08x) bytes, frame[%d]\n",
               v5,
@@ -2953,7 +2658,7 @@ void __fastcall Render::DoDefragMoves(Render *this)
         else
         {
           v10 = Render::g_DefragTotalBytesPerFrame - v2;
-          if ( Render::g_DoDefragPrints == 1 )
+          if ( Render::g_DoDefragPrints )
           {
             LODWORD(v12) = Illusion::gEngine.mFrameCount;
             LODWORD(v11) = Render::g_DefragTotalBytesPerFrame - v2;
@@ -2970,7 +2675,7 @@ void __fastcall Render::DoDefragMoves(Render *this)
           v4 = v10 + Render::g_DefragCurrentMoveProgress;
         }
         ++v1;
-        v3 += 8;
+        p_mData += 8;
         Render::g_DefragCurrentMoveProgress = v4;
       }
       while ( v1 < Render::g_DefragMovesUsedCount );
@@ -2980,48 +2685,46 @@ void __fastcall Render::DoDefragMoves(Render *this)
 
 // File Line: 3313
 // RVA: 0x69F6D0
-void __fastcall Render::FastMemMove(void *dest, const void *source, unsigned int countBytes)
+void __fastcall Render::FastMemMove(char *dest, char *source, unsigned int countBytes)
 {
   __int64 v3; // r8
-  _BYTE *v4; // r10
-  unsigned int v5; // er9
+  unsigned int v5; // r9d
   char *v6; // r11
   char *v7; // rdx
   char *i; // rcx
   __int64 v9; // rax
   char *v10; // rcx
-  char *v11; // rdx
+  signed __int64 v11; // rdx
   __int64 v12; // rax
 
   v3 = countBytes >> 3;
-  v4 = dest;
   v5 = (unsigned int)v3 >> 4;
-  if ( dest <= source || (v6 = (char *)source + 8 * v3, dest >= v6) )
+  if ( dest <= source || (v6 = &source[8 * v3], dest >= v6) )
   {
     if ( v5 )
     {
-      v10 = (char *)dest + 16;
-      v11 = (char *)((_BYTE *)source - v4);
+      v10 = dest + 16;
+      v11 = source - dest;
       do
       {
-        v12 = *(_QWORD *)&v11[(_QWORD)v10 - 16];
+        v12 = *(_QWORD *)&v10[v11 - 16];
         v10 += 128;
         *((_QWORD *)v10 - 18) = v12;
-        *((_QWORD *)v10 - 17) = *(_QWORD *)&v10[(_QWORD)v11 - 136];
-        *((_QWORD *)v10 - 16) = *(_QWORD *)&v10[(_QWORD)v11 - 128];
-        *((_QWORD *)v10 - 15) = *(_QWORD *)&v10[(_QWORD)v11 - 120];
-        *((_QWORD *)v10 - 14) = *(_QWORD *)&v11[(_QWORD)v10 - 112];
-        *((_QWORD *)v10 - 13) = *(_QWORD *)&v11[(_QWORD)v10 - 104];
-        *((_QWORD *)v10 - 12) = *(_QWORD *)&v11[(_QWORD)v10 - 96];
-        *((_QWORD *)v10 - 11) = *(_QWORD *)&v11[(_QWORD)v10 - 88];
-        *((_QWORD *)v10 - 10) = *(_QWORD *)&v11[(_QWORD)v10 - 80];
-        *((_QWORD *)v10 - 9) = *(_QWORD *)&v11[(_QWORD)v10 - 72];
-        *((_QWORD *)v10 - 8) = *(_QWORD *)&v11[(_QWORD)v10 - 64];
-        *((_QWORD *)v10 - 7) = *(_QWORD *)&v11[(_QWORD)v10 - 56];
-        *((_QWORD *)v10 - 6) = *(_QWORD *)&v11[(_QWORD)v10 - 48];
-        *((_QWORD *)v10 - 5) = *(_QWORD *)&v11[(_QWORD)v10 - 40];
-        *((_QWORD *)v10 - 4) = *(_QWORD *)&v11[(_QWORD)v10 - 32];
-        *((_QWORD *)v10 - 3) = *(_QWORD *)&v11[(_QWORD)v10 - 24];
+        *((_QWORD *)v10 - 17) = *(_QWORD *)&v10[v11 - 136];
+        *((_QWORD *)v10 - 16) = *(_QWORD *)&v10[v11 - 128];
+        *((_QWORD *)v10 - 15) = *(_QWORD *)&v10[v11 - 120];
+        *((_QWORD *)v10 - 14) = *(_QWORD *)&v10[v11 - 112];
+        *((_QWORD *)v10 - 13) = *(_QWORD *)&v10[v11 - 104];
+        *((_QWORD *)v10 - 12) = *(_QWORD *)&v10[v11 - 96];
+        *((_QWORD *)v10 - 11) = *(_QWORD *)&v10[v11 - 88];
+        *((_QWORD *)v10 - 10) = *(_QWORD *)&v10[v11 - 80];
+        *((_QWORD *)v10 - 9) = *(_QWORD *)&v10[v11 - 72];
+        *((_QWORD *)v10 - 8) = *(_QWORD *)&v10[v11 - 64];
+        *((_QWORD *)v10 - 7) = *(_QWORD *)&v10[v11 - 56];
+        *((_QWORD *)v10 - 6) = *(_QWORD *)&v10[v11 - 48];
+        *((_QWORD *)v10 - 5) = *(_QWORD *)&v10[v11 - 40];
+        *((_QWORD *)v10 - 4) = *(_QWORD *)&v10[v11 - 32];
+        *((_QWORD *)v10 - 3) = *(_QWORD *)&v10[v11 - 24];
         --v5;
       }
       while ( v5 );
@@ -3030,7 +2733,7 @@ void __fastcall Render::FastMemMove(void *dest, const void *source, unsigned int
   else
   {
     v7 = v6 - 8;
-    for ( i = (char *)dest + 8 * v3 - 8; (_DWORD)v3; LODWORD(v3) = v3 - 1 )
+    for ( i = &dest[8 * v3 - 8]; (_DWORD)v3; LODWORD(v3) = v3 - 1 )
     {
       v9 = *(_QWORD *)v7;
       i -= 8;
@@ -3052,7 +2755,7 @@ void __fastcall CloseEngineCB(Render *a1)
 
 // File Line: 3396
 // RVA: 0x69E9B0
-signed __int64 __fastcall CloseRenderEngine()
+__int64 __fastcall CloseRenderEngine()
 {
   Illusion *v0; // rcx
 

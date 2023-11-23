@@ -10,18 +10,11 @@ void __fastcall UFG::UIHKSaveLoadOverlay::update(UFG::UIHKSaveLoadOverlay *this,
     {
       v3 = this->m_fTimeToHideOverlay - elapsed;
       this->m_fTimeToHideOverlay = v3;
-      if ( v3 <= 0.0 )
+      if ( v3 <= 0.0 && this->m_bRecievedStopSaveMsg )
       {
-        if ( this->m_bRecievedStopSaveMsg )
-        {
-          *(_WORD *)&this->m_bOverlayVisible = 0;
-          this->m_fTimeToHideOverlay = 0.0;
-          Scaleform::GFx::Movie::Invoke(
-            screen->mRenderable->m_movie.pObject,
-            "stopSaving",
-            0i64,
-            &customWorldMapCaption);
-        }
+        *(_WORD *)&this->m_bOverlayVisible = 0;
+        this->m_fTimeToHideOverlay = 0.0;
+        Scaleform::GFx::Movie::Invoke(screen->mRenderable->m_movie.pObject, "stopSaving", 0i64, &customCaption);
       }
     }
   }
@@ -29,11 +22,12 @@ void __fastcall UFG::UIHKSaveLoadOverlay::update(UFG::UIHKSaveLoadOverlay *this,
 
 // File Line: 50
 // RVA: 0x621630
-char __fastcall UFG::UIHKSaveLoadOverlay::handleMessage(UFG::UIHKSaveLoadOverlay *this, UFG::UIScreen *screen, unsigned int msgId, UFG::UIMessage *msg)
+char __fastcall UFG::UIHKSaveLoadOverlay::handleMessage(
+        UFG::UIHKSaveLoadOverlay *this,
+        UFG::UIScreen *screen,
+        unsigned int msgId,
+        UFG::UIMessage *msg)
 {
-  UFG::UIHKSaveLoadOverlay *v4; // rbx
-
-  v4 = this;
   if ( !screen )
     return 0;
   if ( msgId != UI_HASH_SAVELOAD_START_SAVING_9 )
@@ -47,10 +41,10 @@ char __fastcall UFG::UIHKSaveLoadOverlay::handleMessage(UFG::UIHKSaveLoadOverlay
   }
   if ( !this->m_bOverlayVisible )
   {
-    Scaleform::GFx::Movie::Invoke(screen->mRenderable->m_movie.pObject, "startSaving", 0i64, &customWorldMapCaption);
-    v4->m_bOverlayVisible = 1;
+    Scaleform::GFx::Movie::Invoke(screen->mRenderable->m_movie.pObject, "startSaving", 0i64, &customCaption);
+    this->m_bOverlayVisible = 1;
   }
-  v4->m_fTimeToHideOverlay = 1.0;
+  this->m_fTimeToHideOverlay = 1.0;
   return 1;
 }
 

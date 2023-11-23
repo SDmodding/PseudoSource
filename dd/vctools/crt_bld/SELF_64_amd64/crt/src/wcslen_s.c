@@ -4,17 +4,11 @@ unsigned __int64 __fastcall wcsnlen(const wchar_t *wcs, unsigned __int64 maxsize
 {
   unsigned __int64 result; // rax
 
-  result = 0i64;
-  if ( maxsize )
+  for ( result = 0i64; result < maxsize; ++wcs )
   {
-    do
-    {
-      if ( !*wcs )
-        break;
-      ++result;
-      ++wcs;
-    }
-    while ( result < maxsize );
+    if ( !*wcs )
+      break;
+    ++result;
   }
   return result;
 }

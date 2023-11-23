@@ -1,16 +1,15 @@
 // File Line: 52
 // RVA: 0x12C2E90
-signed __int64 __fastcall alloc_osfhnd()
+__int64 __fastcall alloc_osfhnd()
 {
   unsigned int v0; // esi
-  signed int i; // edi
+  int i; // edi
   ioinfo *v3; // rbx
-  unsigned __int64 v4; // rdx
-  ioinfo *v5; // rax
-  int v6; // edi
+  ioinfo *v4; // rax
+  int v5; // edi
 
   v0 = -1;
-  if ( !mtinitlocknum(11) || (signed int)ioinit() < 0 )
+  if ( !mtinitlocknum(11) || (int)ioinit() < 0 )
     return 0xFFFFFFFFi64;
   lock(11);
   for ( i = 0; i < 64; ++i )
@@ -18,29 +17,29 @@ signed __int64 __fastcall alloc_osfhnd()
     v3 = _pioinfo[i];
     if ( !v3 )
     {
-      v5 = (ioinfo *)calloc_crt(0x20ui64, 0x58ui64);
-      if ( v5 )
+      v4 = (ioinfo *)calloc_crt(0x20ui64, 0x58ui64);
+      if ( v4 )
       {
-        _pioinfo[i] = v5;
+        _pioinfo[i] = v4;
         nhandle += 32;
-        while ( v5 < &_pioinfo[i][32] )
+        while ( v4 < &_pioinfo[i][32] )
         {
-          *(_WORD *)&v5->osfile = 2560;
-          v5->osfhnd = -1i64;
-          v5->lockinitflag = 0;
-          ++v5;
+          *(_WORD *)&v4->osfile = 2560;
+          v4->osfhnd = -1i64;
+          v4->lockinitflag = 0;
+          ++v4;
         }
-        v6 = 32 * i;
-        _pioinfo[(signed __int64)v6 >> 5][v6 & 0x1F].osfile = 1;
-        if ( !(unsigned int)_lock_fhandle(v6) )
-          v6 = -1;
-        v0 = v6;
+        v5 = 32 * i;
+        _pioinfo[(__int64)v5 >> 5][v5 & 0x1F].osfile = 1;
+        if ( !(unsigned int)_lock_fhandle(v5) )
+          v5 = -1;
+        v0 = v5;
       }
       break;
     }
     while ( v3 < &_pioinfo[i][32] )
     {
-      if ( !(v3->osfile & 1) )
+      if ( (v3->osfile & 1) == 0 )
       {
         if ( !v3->lockinitflag )
         {
@@ -53,12 +52,11 @@ signed __int64 __fastcall alloc_osfhnd()
           unlock(10);
         }
         EnterCriticalSection(&v3->lock);
-        if ( !(v3->osfile & 1) )
+        if ( (v3->osfile & 1) == 0 )
         {
           v3->osfile = 1;
           v3->osfhnd = -1i64;
-          v4 = (unsigned __int128)(((char *)v3 - (char *)_pioinfo[i]) * (signed __int128)3353953467947191203i64) >> 64;
-          v0 = 32 * i + (v4 >> 63) + ((signed __int64)v4 >> 4);
+          v0 = 32 * i + ((int)v3 - LODWORD(_pioinfo[i])) / 88;
           break;
         }
         LeaveCriticalSection(&v3->lock);
@@ -82,18 +80,16 @@ _alloc_osfhnd$fin$1
 
 // File Line: 207
 // RVA: 0x12C32BC
-signed __int64 __fastcall set_osfhnd(int fh, __int64 value)
+__int64 __fastcall set_osfhnd(unsigned int fh, void *value)
 {
-  __int64 v2; // rbx
-  signed __int64 v3; // rsi
+  __int64 v3; // rsi
   __int64 v4; // rdi
-  int v5; // ecx
+  unsigned int v5; // ecx
   DWORD v6; // ecx
 
-  v2 = value;
-  if ( fh >= 0 && fh < (unsigned int)nhandle )
+  if ( (fh & 0x80000000) == 0 && fh < nhandle )
   {
-    v3 = (signed __int64)fh >> 5;
+    v3 = (__int64)(int)fh >> 5;
     v4 = fh & 0x1F;
     if ( _pioinfo[v3][v4].osfhnd == -1 )
     {
@@ -114,12 +110,10 @@ signed __int64 __fastcall set_osfhnd(int fh, __int64 value)
         {
           v6 = -12;
 LABEL_11:
-          SetStdHandle(v6, (HANDLE)value);
-          goto LABEL_12;
+          SetStdHandle(v6, value);
         }
       }
-LABEL_12:
-      _pioinfo[v3][v4].osfhnd = v2;
+      _pioinfo[v3][v4].osfhnd = (__int64)value;
       return 0i64;
     }
   }
@@ -130,48 +124,43 @@ LABEL_12:
 
 // File Line: 257
 // RVA: 0x12C3090
-signed __int64 __fastcall free_osfhnd(int fh)
+__int64 __fastcall free_osfhnd(unsigned int fh)
 {
-  signed __int64 v1; // rdi
-  unsigned __int64 v2; // rbx
+  __int64 v1; // rdi
+  __int64 v2; // rbx
   ioinfo *v3; // rax
-  int v4; // ecx
+  unsigned int v4; // ecx
   DWORD v5; // ecx
 
-  if ( fh >= 0 && fh < (unsigned int)nhandle )
+  if ( (fh & 0x80000000) == 0 && fh < nhandle )
   {
-    v1 = (signed __int64)fh >> 5;
+    v1 = (__int64)(int)fh >> 5;
     v2 = fh & 0x1F;
     v3 = _pioinfo[v1];
-    if ( v3[v2].osfile & 1 )
+    if ( (v3[v2].osfile & 1) != 0 && v3[fh & 0x1F].osfhnd != -1 )
     {
-      if ( v3[v2].osfhnd != -1 )
+      if ( _app_type == 1 )
       {
-        if ( _app_type == 1 )
+        if ( !fh )
         {
-          if ( !fh )
-          {
-            v5 = -10;
-            goto LABEL_12;
-          }
-          v4 = fh - 1;
-          if ( !v4 )
-          {
-            v5 = -11;
-            goto LABEL_12;
-          }
-          if ( v4 == 1 )
-          {
-            v5 = -12;
-LABEL_12:
-            SetStdHandle(v5, 0i64);
-            goto LABEL_13;
-          }
+          v5 = -10;
+          goto LABEL_12;
         }
-LABEL_13:
-        _pioinfo[v1][v2].osfhnd = -1i64;
-        return 0i64;
+        v4 = fh - 1;
+        if ( !v4 )
+        {
+          v5 = -11;
+          goto LABEL_12;
+        }
+        if ( v4 == 1 )
+        {
+          v5 = -12;
+LABEL_12:
+          SetStdHandle(v5, 0i64);
+        }
       }
+      _pioinfo[v1][v2].osfhnd = -1i64;
+      return 0i64;
     }
   }
   *errno() = 9;
@@ -185,7 +174,6 @@ __int64 __fastcall get_osfhandle(int fh)
 {
   __int64 v1; // rbx
   ioinfo *v2; // rax
-  signed __int64 v3; // rcx
 
   v1 = fh;
   if ( fh == -2 )
@@ -193,14 +181,13 @@ __int64 __fastcall get_osfhandle(int fh)
     *_doserrno() = 0;
     *errno() = 9;
   }
-  else if ( (signed int)ioinit() >= 0 )
+  else if ( (int)ioinit() >= 0 )
   {
-    if ( (signed int)v1 >= 0 && (unsigned int)v1 < nhandle )
+    if ( (int)v1 >= 0 && (unsigned int)v1 < nhandle )
     {
       v2 = _pioinfo[v1 >> 5];
-      v3 = v1 & 0x1F;
-      if ( v2[v3].osfile & 1 )
-        return v2[v3].osfhnd;
+      if ( (v2[v1 & 0x1F].osfile & 1) != 0 )
+        return v2[v1 & 0x1F].osfhnd;
     }
     *_doserrno() = 0;
     *errno() = 9;
@@ -211,30 +198,28 @@ __int64 __fastcall get_osfhandle(int fh)
 
 // File Line: 338
 // RVA: 0x12C31C0
-signed __int64 __fastcall open_osfhandle(__int64 osfhandle, int flags)
+__int64 __fastcall open_osfhandle(void *osfhandle, __int16 flags)
 {
-  __int64 v2; // rsi
   char v3; // bl
-  DWORD v4; // eax
-  unsigned int v5; // eax
+  DWORD FileType; // eax
+  unsigned int LastError; // eax
   int v7; // eax
   __int64 v8; // rdi
   __int64 v9; // rdx
 
-  v2 = osfhandle;
   v3 = 0;
-  if ( flags & 8 )
+  if ( (flags & 8) != 0 )
     v3 = 32;
-  if ( _bittest(&flags, 0xEu) )
+  if ( (flags & 0x4000) != 0 )
     v3 |= 0x80u;
   if ( (flags & 0x80u) != 0 )
     v3 |= 0x10u;
-  v4 = GetFileType((HANDLE)osfhandle);
-  switch ( v4 )
+  FileType = GetFileType(osfhandle);
+  switch ( FileType )
   {
     case 0u:
-      v5 = GetLastError();
-      dosmaperr(v5);
+      LastError = GetLastError();
+      dosmaperr(LastError);
       return 0xFFFFFFFFi64;
     case 2u:
       v3 |= 0x40u;
@@ -251,11 +236,11 @@ signed __int64 __fastcall open_osfhandle(__int64 osfhandle, int flags)
     *_doserrno() = 0;
     return 0xFFFFFFFFi64;
   }
-  set_osfhnd(v7, v2);
+  set_osfhnd(v7, (__int64)osfhandle);
   v9 = v8 & 0x1F;
   _pioinfo[v8 >> 5][v9].osfile = v3 | 1;
   *((_BYTE *)&_pioinfo[v8 >> 5][v9] + 56) &= 0x80u;
-  *((_BYTE *)&_pioinfo[v8 >> 5][v9] + 56) &= 0x7Fu;
+  *((_BYTE *)&_pioinfo[v8 >> 5][v9] + 56) &= ~0x80u;
   unlock_fhandle(v8);
   return (unsigned int)v8;
 }
@@ -266,13 +251,13 @@ _open_osfhandle$fin$0
 
 // File Line: 431
 // RVA: 0x12C2DF8
-signed __int64 __fastcall _lock_fhandle(int fh)
+__int64 __fastcall _lock_fhandle(int fh)
 {
-  signed __int64 v1; // rsi
+  __int64 v1; // rsi
   unsigned __int64 v2; // rbx
   ioinfo *v3; // rdi
 
-  v1 = (signed __int64)fh >> 5;
+  v1 = (__int64)fh >> 5;
   v2 = fh & 0x1F;
   v3 = _pioinfo[v1];
   if ( !v3[v2].lockinitflag )
@@ -297,6 +282,6 @@ __lock_fhandle$fin$0
 // RVA: 0x12C336C
 void __fastcall unlock_fhandle(int fh)
 {
-  LeaveCriticalSection(&_pioinfo[(signed __int64)fh >> 5][fh & 0x1F].lock);
+  LeaveCriticalSection(&_pioinfo[(__int64)fh >> 5][fh & 0x1F].lock);
 }
 

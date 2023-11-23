@@ -74,30 +74,30 @@ hkClass *__fastcall hkxVertexAnimation::staticClass()
 
 // File Line: 118
 // RVA: 0xE33700
-void __fastcall finishLoadedObjecthkxVertexAnimation(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxVertexAnimation(char *p, hkFinishLoadedObjectFlag finishing)
 {
   hkxVertexBuffer *v2; // rcx
 
   if ( p )
   {
-    v2 = (hkxVertexBuffer *)((char *)p + 24);
+    v2 = (hkxVertexBuffer *)(p + 24);
     *(_QWORD *)&v2[-1].m_data.m_uint16Stride = &hkxVertexAnimation::`vftable;
-    hkxVertexBuffer::hkxVertexBuffer(v2, (hkFinishLoadedObjectFlag)finishing);
+    hkxVertexBuffer::hkxVertexBuffer(v2, finishing);
   }
 }
 
 // File Line: 124
 // RVA: 0xE33730
-void __fastcall cleanupLoadedObjecthkxVertexAnimation(void *p)
+void __fastcall cleanupLoadedObjecthkxVertexAnimation(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 128
 // RVA: 0xE33740
 void **__fastcall getVtablehkxVertexAnimation()
 {
-  hkxVertexBuffer v1; // [rsp+38h] [rbp-B0h]
+  hkxVertexBuffer v1; // [rsp+38h] [rbp-B0h] BYREF
 
   hkxVertexBuffer::hkxVertexBuffer(&v1, 0);
   return &hkxVertexAnimation::`vftable;
@@ -114,8 +114,8 @@ void **dynamic_initializer_for__hkxVertexAnimationTypeInfo__()
   hkxVertexAnimationTypeInfo.m_typeName = "hkxVertexAnimation";
   hkxVertexAnimationTypeInfo.m_vtable = result;
   hkxVertexAnimationTypeInfo.m_scopedName = "!hkxVertexAnimation";
-  hkxVertexAnimationTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxVertexAnimation;
-  hkxVertexAnimationTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxVertexAnimation;
+  hkxVertexAnimationTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxVertexAnimation;
+  hkxVertexAnimationTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxVertexAnimation;
   return result;
 }
 

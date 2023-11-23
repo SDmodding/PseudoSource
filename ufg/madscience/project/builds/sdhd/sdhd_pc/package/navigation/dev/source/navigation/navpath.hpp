@@ -1,24 +1,22 @@
 // File Line: 37
 // RVA: 0x340D70
-void __fastcall UFG::NavPath::AddResource(UFG::NavPath *this, UFG::NavResource *pNavResource)
+void __fastcall UFG::NavPath::AddResource(UFG::NavPath *this, UFG::qReflectInventoryBase *pNavResource)
 {
-  __int64 v2; // rbp
-  UFG::qArray<UFG::qReflectInventoryBase *,0> *v3; // rdi
-  UFG::NavResource *v4; // rsi
-  unsigned int v5; // edx
+  __int64 size; // rbp
+  UFG::qArray<UFG::qReflectInventoryBase *,0> *p_m_aResources; // rdi
+  unsigned int capacity; // edx
   unsigned int v6; // ebx
   unsigned int v7; // edx
-  UFG::qReflectInventoryBase **v8; // rax
+  UFG::qReflectInventoryBase **p; // rax
 
-  v2 = this->m_aResources.size;
-  v3 = (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&this->m_aResources;
-  v4 = pNavResource;
-  v5 = this->m_aResources.capacity;
-  v6 = v2 + 1;
-  if ( (signed int)v2 + 1 > v5 )
+  size = this->m_aResources.size;
+  p_m_aResources = (UFG::qArray<UFG::qReflectInventoryBase *,0> *)&this->m_aResources;
+  capacity = this->m_aResources.capacity;
+  v6 = size + 1;
+  if ( (int)size + 1 > capacity )
   {
-    if ( v5 )
-      v7 = 2 * v5;
+    if ( capacity )
+      v7 = 2 * capacity;
     else
       v7 = 1;
     for ( ; v7 < v6; v7 *= 2 )
@@ -26,28 +24,26 @@ void __fastcall UFG::NavPath::AddResource(UFG::NavPath *this, UFG::NavResource *
     if ( v7 <= 2 )
       v7 = 2;
     if ( v7 - v6 > 0x10000 )
-      v7 = v2 + 65537;
-    UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(v3, v7, "qArray.Add");
+      v7 = size + 65537;
+    UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(p_m_aResources, v7, "qArray.Add");
   }
-  v8 = v3->p;
-  v3->size = v6;
-  v8[v2] = (UFG::qReflectInventoryBase *)v4;
-  v4->vfptr->Reference(v4);
+  p = p_m_aResources->p;
+  p_m_aResources->size = v6;
+  p[size] = pNavResource;
+  ((void (__fastcall *)(UFG::qReflectInventoryBase *))pNavResource->vfptr->IsBaseClassOfThis)(pNavResource);
 }
 
 // File Line: 96
 // RVA: 0xE6330
 void __fastcall UFG::NavPathRefPtr::~NavPathRefPtr(UFG::NavPathRefPtr *this)
 {
-  UFG::NavPath *v1; // rcx
-  bool v2; // zf
+  UFG::NavPath *m_pNavPath; // rcx
 
-  v1 = this->m_pNavPath;
-  if ( v1 )
+  m_pNavPath = this->m_pNavPath;
+  if ( m_pNavPath )
   {
-    v2 = v1->m_uRefCount-- == 1;
-    if ( v2 )
-      v1->vfptr->__vecDelDtor(v1, 1u);
+    if ( m_pNavPath->m_uRefCount-- == 1 )
+      m_pNavPath->vfptr->__vecDelDtor(m_pNavPath, 1u);
   }
 }
 
@@ -55,55 +51,43 @@ void __fastcall UFG::NavPathRefPtr::~NavPathRefPtr(UFG::NavPathRefPtr *this)
 // RVA: 0xE66B0
 UFG::NavPathRefPtr *__fastcall UFG::NavPathRefPtr::operator=(UFG::NavPathRefPtr *this, UFG::NavPathRefPtr *ref_ptr)
 {
-  UFG::NavPath *v2; // rax
-  UFG::NavPathRefPtr *v3; // rdi
-  UFG::NavPathRefPtr *v4; // rbx
+  UFG::NavPath *m_pNavPath; // rax
   UFG::NavPath *v5; // rcx
-  bool v6; // zf
 
-  v2 = ref_ptr->m_pNavPath;
-  v3 = ref_ptr;
-  v4 = this;
+  m_pNavPath = ref_ptr->m_pNavPath;
   if ( this->m_pNavPath != ref_ptr->m_pNavPath )
   {
-    if ( v2 )
-      ++v2->m_uRefCount;
+    if ( m_pNavPath )
+      ++m_pNavPath->m_uRefCount;
     v5 = this->m_pNavPath;
     if ( v5 )
     {
-      v6 = v5->m_uRefCount-- == 1;
-      if ( v6 )
+      if ( v5->m_uRefCount-- == 1 )
         v5->vfptr->__vecDelDtor(v5, 1u);
     }
-    v4->m_pNavPath = v3->m_pNavPath;
+    this->m_pNavPath = ref_ptr->m_pNavPath;
   }
-  return v4;
+  return this;
 }
 
 // File Line: 124
 // RVA: 0xE6700
 UFG::NavPathRefPtr *__fastcall UFG::NavPathRefPtr::operator=(UFG::NavPathRefPtr *this, UFG::NavPath *pNavPath)
 {
-  UFG::NavPath *v2; // rdi
-  UFG::NavPathRefPtr *v3; // rbx
-  UFG::NavPath *v4; // rcx
-  bool v5; // zf
+  UFG::NavPath *m_pNavPath; // rcx
 
-  v2 = pNavPath;
-  v3 = this;
   if ( this->m_pNavPath != pNavPath )
   {
     if ( pNavPath )
       ++pNavPath->m_uRefCount;
-    v4 = this->m_pNavPath;
-    if ( v4 )
+    m_pNavPath = this->m_pNavPath;
+    if ( m_pNavPath )
     {
-      v5 = v4->m_uRefCount-- == 1;
-      if ( v5 )
-        v4->vfptr->__vecDelDtor(v4, 1u);
+      if ( m_pNavPath->m_uRefCount-- == 1 )
+        m_pNavPath->vfptr->__vecDelDtor(m_pNavPath, 1u);
     }
-    v3->m_pNavPath = v2;
+    this->m_pNavPath = pNavPath;
   }
-  return v3;
+  return this;
 }
 

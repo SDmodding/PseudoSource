@@ -14,15 +14,12 @@ void FF_MSGBANNER()
 const wchar_t *__fastcall GET_RTERRMSG(int rterrnum)
 {
   int v1; // edx
-  rterrmsgs *v2; // r8
+  rterrmsgs *i; // r8
 
   v1 = 0;
-  v2 = rterrs;
-  while ( rterrnum != v2->rterrno )
+  for ( i = rterrs; rterrnum != i->rterrno; ++i )
   {
-    ++v1;
-    ++v2;
-    if ( (unsigned __int64)v1 >= 0x17 )
+    if ( (unsigned __int64)++v1 >= 0x17 )
       return 0i64;
   }
   return rterrs[v1].rterrtxt;
@@ -32,85 +29,74 @@ const wchar_t *__fastcall GET_RTERRMSG(int rterrnum)
 // RVA: 0x12C5344
 void __fastcall NMSG_WRITE(int rterrnum)
 {
-  int v1; // edi
   const wchar_t *v2; // rbx
-  int v3; // eax
-  const wchar_t *v4; // rcx
-  unsigned __int64 v5; // rax
-  char *v6; // rdi
-  int v7; // er8
-  char *v8; // rdx
-  DWORD v9; // eax
-  unsigned int NumberOfBytesWritten; // [rsp+30h] [rbp-238h]
-  char Str; // [rsp+40h] [rbp-228h]
-  char v12; // [rsp+233h] [rbp-35h]
+  unsigned __int64 v3; // rax
+  char *StdHandle; // rdi
+  int v5; // r8d
+  char *v6; // rdx
+  DWORD v7; // eax
+  unsigned int NumberOfBytesWritten; // [rsp+30h] [rbp-238h] BYREF
+  char Str[512]; // [rsp+40h] [rbp-228h] BYREF
 
-  v1 = rterrnum;
   v2 = GET_RTERRMSG(rterrnum);
   if ( v2 )
   {
-    if ( set_error_mode(3) != 1 && (set_error_mode(3) || _app_type != 1) )
+    if ( set_error_mode(3) == 1 || !set_error_mode(3) && _app_type == 1 )
     {
-      if ( v1 == 252 )
-        return;
-      v3 = wcscpy_s(outmsg, 0x314ui64, L"Runtime Error!\n\nProgram: ");
-      v4 = 0i64;
-      if ( v3 )
+      StdHandle = (char *)GetStdHandle(0xFFFFFFF4);
+      if ( (unsigned __int64)(StdHandle - 1) <= 0xFFFFFFFFFFFFFFFDui64 )
       {
-LABEL_24:
-        invoke_watson(v4, 0i64, 0i64, 0, 0i64);
-        JUMPOUT(*(_QWORD *)&byte_1412C55B2);
+        v5 = 0;
+        v6 = Str;
+        do
+        {
+          *v6 = *(_BYTE *)v2;
+          if ( !*v2 )
+            break;
+          ++v5;
+          ++v6;
+          ++v2;
+        }
+        while ( (unsigned __int64)v5 < 0x1F4 );
+        Str[499] = 0;
+        v7 = strlen(Str);
+        WriteFile(StdHandle, Str, v7, &NumberOfBytesWritten, 0i64);
+      }
+    }
+    else if ( rterrnum != 252 )
+    {
+      if ( (unsigned int)wcscpy_s((char *)outmsg, 0x314ui64, L"Runtime Error!\n\nProgram: ") )
+      {
+        invoke_watson(0i64, 0i64, 0i64, 0, 0i64);
+        JUMPOUT(0x1412C55B2i64);
       }
       outmsg[285] = 0;
       if ( !GetModuleFileNameW(0i64, &outmsg[25], 0x104u)
-        && (unsigned int)wcscpy_s(&outmsg[25], 0x2FBui64, L"<program name unknown>") )
+        && (unsigned int)wcscpy_s((char *)&outmsg[25], 0x2FBui64, L"<program name unknown>") )
       {
         invoke_watson(0i64, 0i64, 0i64, 0, 0i64);
         __debugbreak();
       }
-      else if ( wcslen(&outmsg[25]) + 1 <= 0x3C
-             || (v5 = wcslen(&outmsg[25]),
-                 !(unsigned int)wcsncpy_s(&outmsg[v5 - 34], 763 - (&outmsg[v5 - 34] - &outmsg[25]), L"...", 3ui64)) )
+      if ( wcslen(&outmsg[25]) + 1 > 0x3C )
       {
-        if ( (unsigned int)wcscat_s(outmsg, 0x314ui64, L"\n\n") )
+        v3 = wcslen(&outmsg[25]);
+        if ( (unsigned int)wcsncpy_s((char *)&outmsg[v3 - 34], 763 - (&outmsg[v3 - 34] - &outmsg[25]), L"...", 3ui64) )
         {
-LABEL_23:
           invoke_watson(0i64, 0i64, 0i64, 0, 0i64);
           __debugbreak();
-          goto LABEL_24;
         }
-        if ( !(unsigned int)wcscat_s(outmsg, 0x314ui64, v2) )
-        {
-          _crtMessageBoxW(outmsg, L"Microsoft Visual C++ Runtime Library", 0x12010u);
-          return;
-        }
-LABEL_22:
+      }
+      if ( (unsigned int)wcscat_s((char *)outmsg, 0x314ui64, L"\n\n") )
+      {
         invoke_watson(0i64, 0i64, 0i64, 0, 0i64);
         __debugbreak();
-        goto LABEL_23;
       }
-      invoke_watson(0i64, 0i64, 0i64, 0, 0i64);
-      __debugbreak();
-      goto LABEL_22;
-    }
-    v6 = (char *)GetStdHandle(0xFFFFFFF4);
-    if ( (unsigned __int64)(v6 - 1) <= 0xFFFFFFFFFFFFFFFDui64 )
-    {
-      v7 = 0;
-      v8 = &Str;
-      do
+      if ( (unsigned int)wcscat_s((char *)outmsg, 0x314ui64, v2) )
       {
-        *v8 = *(_BYTE *)v2;
-        if ( !*v2 )
-          break;
-        ++v7;
-        ++v8;
-        ++v2;
+        invoke_watson(0i64, 0i64, 0i64, 0, 0i64);
+        __debugbreak();
       }
-      while ( (unsigned __int64)v7 < 0x1F4 );
-      v12 = 0;
-      v9 = strlen(&Str);
-      WriteFile(v6, &Str, v9, &NumberOfBytesWritten, 0i64);
+      _crtMessageBoxW(outmsg, L"Microsoft Visual C++ Runtime Library", 0x12010u);
     }
   }
 }

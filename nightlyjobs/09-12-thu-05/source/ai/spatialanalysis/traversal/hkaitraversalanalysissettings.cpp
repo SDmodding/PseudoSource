@@ -14,7 +14,9 @@ void __fastcall hkaiTraversalAnalysisSettings::hkaiTraversalAnalysisSettings(hka
 
 // File Line: 25
 // RVA: 0xC37790
-void __fastcall hkaiTraversalAnalysisSettings::hkaiTraversalAnalysisSettings(hkaiTraversalAnalysisSettings *this, hkFinishLoadedObjectFlag f)
+void __fastcall hkaiTraversalAnalysisSettings::hkaiTraversalAnalysisSettings(
+        hkaiTraversalAnalysisSettings *this,
+        hkFinishLoadedObjectFlag f)
 {
   this->vfptr = (hkBaseObjectVtbl *)&hkaiTraversalAnalysisSettings::`vftable;
 }

@@ -2,191 +2,37 @@
 // RVA: 0x14AEA60
 __int64 dynamic_initializer_for__UFG::AIScriptInterfaceComponent::s_AIScriptInterfaceComponentList__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::AIScriptInterfaceComponent::s_AIScriptInterfaceComponentList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::AIScriptInterfaceComponent::s_AIScriptInterfaceComponentList__);
 }
 
 // File Line: 54
 // RVA: 0x363450
-signed __int64 __fastcall UFG::AIScriptInterfaceComponent::GetTypeSize(UFG::AIScriptInterfaceComponent *this)
+__int64 __fastcall UFG::AIScriptInterfaceComponent::GetTypeSize(UFG::AIScriptInterfaceComponent *this)
 {
   return 2104i64;
 }
 
 // File Line: 58
 // RVA: 0x32BD40
-void __fastcall UFG::AIScriptInterfaceComponent::AIScriptInterfaceComponent(UFG::AIScriptInterfaceComponent *this, unsigned int name_uid, UFG::qPropertySet *properties)
+void __fastcall UFG::AIScriptInterfaceComponent::AIScriptInterfaceComponent(
+        UFG::AIScriptInterfaceComponent *this,
+        unsigned int name_uid,
+        UFG::qPropertySet *properties)
 {
-  UFG::AIScriptInterfaceComponent *v3; // rdi
-  UFG::qNode<UFG::AIScriptInterfaceComponent,UFG::AIScriptInterfaceComponent> *v4; // rbx
-  UFG::qNode<UFG::AIScriptInterfaceComponent,UFG::AIScriptInterfaceComponent> *v5; // rax
+  UFG::qNode<UFG::AIScriptInterfaceComponent,UFG::AIScriptInterfaceComponent> *mPrev; // rax
 
-  v3 = this;
-  UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v4 = (UFG::qNode<UFG::AIScriptInterfaceComponent,UFG::AIScriptInterfaceComponent> *)&v3->mPrev;
-  v4->mPrev = v4;
-  v4->mNext = v4;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIScriptInterfaceComponent::`vftable;
+  UFG::SimComponent::SimComponent(this, name_uid);
+  this->mPrev = &this->UFG::qNode<UFG::AIScriptInterfaceComponent,UFG::AIScriptInterfaceComponent>;
+  this->mNext = &this->UFG::qNode<UFG::AIScriptInterfaceComponent,UFG::AIScriptInterfaceComponent>;
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIScriptInterfaceComponent::`vftable;
   `eh vector constructor iterator(
-    v3->m_ScriptArgument,
+    this->m_ScriptArgument,
     0x48ui64,
     5,
     (void (__fastcall *)(void *))UFG::ScriptArgument::ScriptArgument);
-  UFG::RebindingComponentHandle<UFG::ActiveAIEntityComponent,0>::RebindingComponentHandle<UFG::ActiveAIEntityComponent,0>(&v3->m_pAIEntityComponent);
-  UFG::RebindingComponentHandle<UFG::SimObjectCharacterPropertiesComponent,0>::RebindingComponentHandle<UFG::SimObjectCharacterPropertiesComponent,0>(&v3->m_pSimObjectCharacterPropertiesComponent);
-  UFG::RebindingComponentHandle<UFG::TargetingSystemBaseComponent,0>::RebindingComponentHandle<UFG::TargetingSystemBaseComponent,0>(&v3->m_pTargetingSystemBaseComponent);
-  v3->m_ActionRequestToHold.mBits[0] = 0i64;
-  v3->m_ActionRequestToHold.mBits[1] = 0i64;
-  v3->m_ActionRequestToHold.mBits[2] = 0i64;
-  v3->m_ActionRequestToHold.mBits[3] = 0i64;
-  v3->m_ActionRequestToHold.mBits[4] = 0i64;
-  v3->m_ActionRequestToHold.mBits[5] = 0i64;
-  v3->m_ActionRequestToHold.mBits[6] = 0i64;
-  v3->m_ActionRequestToHold.mBits[7] = 0i64;
-  v3->m_ActionRequestToHold.mBits[8] = 0i64;
-  `eh vector constructor iterator(
-    v3->m_pFollower,
-    0x18ui64,
-    10,
-    (void (__fastcall *)(void *))UFG::qSafePointer<UFG::SimComponent,UFG::RigidBody>::qSafePointer<UFG::SimComponent,UFG::RigidBody>);
-  v5 = UFG::AIScriptInterfaceComponent::s_AIScriptInterfaceComponentList.mNode.mPrev;
-  UFG::AIScriptInterfaceComponent::s_AIScriptInterfaceComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::AIScriptInterfaceComponent,UFG::AIScriptInterfaceComponent> *)&v3->mPrev;
-  v4->mPrev = v5;
-  v3->mNext = (UFG::qNode<UFG::AIScriptInterfaceComponent,UFG::AIScriptInterfaceComponent> *)&UFG::AIScriptInterfaceComponent::s_AIScriptInterfaceComponentList;
-  UFG::AIScriptInterfaceComponent::s_AIScriptInterfaceComponentList.mNode.mPrev = (UFG::qNode<UFG::AIScriptInterfaceComponent,UFG::AIScriptInterfaceComponent> *)&v3->mPrev;
-  UFG::SimComponent::AddType(
-    (UFG::SimComponent *)&v3->vfptr,
-    UFG::AIScriptInterfaceComponent::_AIScriptInterfaceComponentTypeUID,
-    "AIScriptInterfaceComponent");
-  UFG::AIScriptInterfaceComponent::Reset(v3);
-}
-
-// File Line: 67
-// RVA: 0x334A10
-void __fastcall UFG::AIScriptInterfaceComponent::~AIScriptInterfaceComponent(UFG::AIScriptInterfaceComponent *this)
-{
-  UFG::AIScriptInterfaceComponent *v1; // rdi
-  UFG::qNode<UFG::AIScriptInterfaceComponent,UFG::AIScriptInterfaceComponent> *v2; // rbx
-  UFG::qNode<UFG::AIScriptInterfaceComponent,UFG::AIScriptInterfaceComponent> *v3; // rcx
-  UFG::qNode<UFG::AIScriptInterfaceComponent,UFG::AIScriptInterfaceComponent> *v4; // rax
-  UFG::qNode<UFG::AIScriptInterfaceComponent,UFG::AIScriptInterfaceComponent> *v5; // rcx
-  UFG::qNode<UFG::AIScriptInterfaceComponent,UFG::AIScriptInterfaceComponent> *v6; // rax
-
-  v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIScriptInterfaceComponent::`vftable;
-  if ( this == UFG::AIScriptInterfaceComponent::s_AIScriptInterfaceComponentpCurrentIterator )
-    UFG::AIScriptInterfaceComponent::s_AIScriptInterfaceComponentpCurrentIterator = (UFG::AIScriptInterfaceComponent *)&this->mPrev[-4];
-  v2 = (UFG::qNode<UFG::AIScriptInterfaceComponent,UFG::AIScriptInterfaceComponent> *)&this->mPrev;
-  v3 = this->mPrev;
-  v4 = v2->mNext;
-  v3->mNext = v4;
-  v4->mPrev = v3;
-  v2->mPrev = v2;
-  v2->mNext = v2;
-  `eh vector destructor iterator(
-    v1->m_pFollower,
-    0x18ui64,
-    10,
-    (void (__fastcall *)(void *))UFG::qSafePointer<UFG::SimComponent,UFG::HealthComponent>::~qSafePointer<UFG::SimComponent,UFG::HealthComponent>);
-  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->m_pTargetingSystemBaseComponent);
-  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->m_pSimObjectCharacterPropertiesComponent);
-  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->m_pAIEntityComponent);
-  `eh vector destructor iterator(
-    v1->m_ScriptArgument,
-    0x48ui64,
-    5,
-    (void (__fastcall *)(void *))UFG::ScriptArgument::~ScriptArgument);
-  v5 = v2->mPrev;
-  v6 = v2->mNext;
-  v5->mNext = v6;
-  v6->mPrev = v5;
-  v2->mPrev = v2;
-  v2->mNext = v2;
-  UFG::SimComponent::~SimComponent((UFG::SimComponent *)&v1->vfptr);
-}
-
-// File Line: 73
-// RVA: 0x37E950
-UFG::qPropertySet *__fastcall UFG::AIScriptInterfaceComponent::PropertiesOnActivateNew(UFG::SceneObjectProperties *pSceneObj, bool required)
-{
-  UFG::SceneObjectProperties *v2; // rbx
-  UFG::qPropertySet *v3; // rcx
-  UFG::qPropertySet *result; // rax
-  UFG::qMemoryPool *v5; // rax
-  UFG::allocator::free_link *v6; // rax
-  UFG::qPropertySet *v7; // r8
-  UFG::AIScriptInterfaceComponent *v8; // rax
-  UFG::AIScriptInterfaceComponent *v9; // rdi
-  UFG::SimObject *v10; // rdx
-  unsigned __int16 v11; // cx
-  unsigned int v12; // ebx
-  UFG::SimObjectModifier v13; // [rsp+38h] [rbp-30h]
-
-  v2 = pSceneObj;
-  if ( required )
-    goto LABEL_17;
-  v3 = pSceneObj->mpWritableProperties;
-  if ( !v3 )
-    v3 = v2->mpConstProperties;
-  result = UFG::qPropertySet::GetParentFromName(
-             v3,
-             (UFG::qSymbol *)&SimSymX_propset_componentAiScriptInterface.mUID,
-             DEPTH_RECURSE);
-  if ( result )
-  {
-LABEL_17:
-    v5 = UFG::GetSimulationMemoryPool();
-    v6 = UFG::qMemoryPool::Allocate(v5, 0x838ui64, "AIScriptInterfaceComponent", 0i64, 1u);
-    if ( v6 )
-    {
-      v7 = v2->mpWritableProperties;
-      if ( !v7 )
-        v7 = v2->mpConstProperties;
-      UFG::AIScriptInterfaceComponent::AIScriptInterfaceComponent(
-        (UFG::AIScriptInterfaceComponent *)v6,
-        v2->m_NameUID,
-        v7);
-      v9 = v8;
-    }
-    else
-    {
-      v9 = 0i64;
-    }
-    v10 = v2->m_pSimObject;
-    v11 = v10->m_Flags;
-    if ( (v11 >> 14) & 1 || (v11 & 0x8000u) != 0 )
-      v12 = 5;
-    else
-      v12 = -1;
-    UFG::SimObjectModifier::SimObjectModifier(&v13, v10, 1);
-    UFG::SimObjectModifier::AttachComponent(&v13, (UFG::SimComponent *)&v9->vfptr, v12);
-    UFG::SimObjectModifier::Close(&v13);
-    UFG::SimObjectModifier::~SimObjectModifier(&v13);
-    result = (UFG::qPropertySet *)v9;
-  }
-  return result;
-}
-
-// File Line: 88
-// RVA: 0x382720
-void __fastcall UFG::AIScriptInterfaceComponent::Reset(UFG::AIScriptInterfaceComponent *this)
-{
-  UFG::AIScriptInterfaceComponent *v1; // rdi
-  float v2; // xmm1_4
-  float v3; // xmm2_4
-  UFG::SimComponent *v4; // rsi
-  unsigned __int8 v5; // cl
-  signed __int64 v6; // rbx
-
-  v1 = this;
-  *(_QWORD *)&this->m_ScriptTaskRefCount = 0i64;
-  v2 = UFG::qVector3::msZero.y;
-  v3 = UFG::qVector3::msZero.z;
-  this->m_Offset.x = UFG::qVector3::msZero.x;
-  this->m_Offset.y = v2;
-  this->m_Offset.z = v3;
-  *((_BYTE *)this + 2096) |= 1u;
-  this->m_NumScriptArguments = 0;
-  this->m_DesiredEmotion = 0;
+  UFG::RebindingComponentHandle<UFG::ActiveAIEntityComponent,0>::RebindingComponentHandle<UFG::ActiveAIEntityComponent,0>(&this->m_pAIEntityComponent);
+  UFG::RebindingComponentHandle<UFG::SimObjectCharacterPropertiesComponent,0>::RebindingComponentHandle<UFG::SimObjectCharacterPropertiesComponent,0>(&this->m_pSimObjectCharacterPropertiesComponent);
+  UFG::RebindingComponentHandle<UFG::TargetingSystemBaseComponent,0>::RebindingComponentHandle<UFG::TargetingSystemBaseComponent,0>(&this->m_pTargetingSystemBaseComponent);
   this->m_ActionRequestToHold.mBits[0] = 0i64;
   this->m_ActionRequestToHold.mBits[1] = 0i64;
   this->m_ActionRequestToHold.mBits[2] = 0i64;
@@ -196,295 +42,446 @@ void __fastcall UFG::AIScriptInterfaceComponent::Reset(UFG::AIScriptInterfaceCom
   this->m_ActionRequestToHold.mBits[6] = 0i64;
   this->m_ActionRequestToHold.mBits[7] = 0i64;
   this->m_ActionRequestToHold.mBits[8] = 0i64;
-  *((_BYTE *)this + 2096) &= 0xF7u;
-  UFG::AIScriptInterfaceComponent::ClearCollisionAvoidanceOverride(this);
-  v4 = v1->m_pTargetingSystemBaseComponent.m_pSimComponent;
-  *((_BYTE *)v1 + 2096) &= 0x8Fu;
-  v1->m_DesiredEmotion = 0;
-  if ( v4 )
+  `eh vector constructor iterator(
+    this->m_pFollower,
+    0x18ui64,
+    10,
+    (void (__fastcall *)(void *))UFG::qSafePointer<UFG::SimComponent,UFG::RigidBody>::qSafePointer<UFG::SimComponent,UFG::RigidBody>);
+  mPrev = UFG::AIScriptInterfaceComponent::s_AIScriptInterfaceComponentList.mNode.mPrev;
+  UFG::AIScriptInterfaceComponent::s_AIScriptInterfaceComponentList.mNode.mPrev->mNext = &this->UFG::qNode<UFG::AIScriptInterfaceComponent,UFG::AIScriptInterfaceComponent>;
+  this->mPrev = mPrev;
+  this->mNext = (UFG::qNode<UFG::AIScriptInterfaceComponent,UFG::AIScriptInterfaceComponent> *)&UFG::AIScriptInterfaceComponent::s_AIScriptInterfaceComponentList;
+  UFG::AIScriptInterfaceComponent::s_AIScriptInterfaceComponentList.mNode.mPrev = &this->UFG::qNode<UFG::AIScriptInterfaceComponent,UFG::AIScriptInterfaceComponent>;
+  UFG::SimComponent::AddType(
+    this,
+    UFG::AIScriptInterfaceComponent::_AIScriptInterfaceComponentTypeUID,
+    "AIScriptInterfaceComponent");
+  UFG::AIScriptInterfaceComponent::Reset(this);
+}
+
+// File Line: 67
+// RVA: 0x334A10
+void __fastcall UFG::AIScriptInterfaceComponent::~AIScriptInterfaceComponent(UFG::AIScriptInterfaceComponent *this)
+{
+  UFG::qNode<UFG::AIScriptInterfaceComponent,UFG::AIScriptInterfaceComponent> *v2; // rbx
+  UFG::qNode<UFG::AIScriptInterfaceComponent,UFG::AIScriptInterfaceComponent> *mPrev; // rcx
+  UFG::qNode<UFG::AIScriptInterfaceComponent,UFG::AIScriptInterfaceComponent> *mNext; // rax
+  UFG::qNode<UFG::AIScriptInterfaceComponent,UFG::AIScriptInterfaceComponent> *v5; // rcx
+  UFG::qNode<UFG::AIScriptInterfaceComponent,UFG::AIScriptInterfaceComponent> *v6; // rax
+
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AIScriptInterfaceComponent::`vftable;
+  if ( this == UFG::AIScriptInterfaceComponent::s_AIScriptInterfaceComponentpCurrentIterator )
+    UFG::AIScriptInterfaceComponent::s_AIScriptInterfaceComponentpCurrentIterator = (UFG::AIScriptInterfaceComponent *)&this->mPrev[-4];
+  v2 = &this->UFG::qNode<UFG::AIScriptInterfaceComponent,UFG::AIScriptInterfaceComponent>;
+  mPrev = this->mPrev;
+  mNext = v2->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  v2->mPrev = v2;
+  v2->mNext = v2;
+  `eh vector destructor iterator(
+    this->m_pFollower,
+    0x18ui64,
+    10,
+    (void (__fastcall *)(void *))UFG::qSafePointer<UFG::SimComponent,UFG::HealthComponent>::~qSafePointer<UFG::SimComponent,UFG::HealthComponent>);
+  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&this->m_pTargetingSystemBaseComponent);
+  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&this->m_pSimObjectCharacterPropertiesComponent);
+  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&this->m_pAIEntityComponent);
+  `eh vector destructor iterator(
+    this->m_ScriptArgument,
+    0x48ui64,
+    5,
+    (void (__fastcall *)(void *))UFG::ScriptArgument::~ScriptArgument);
+  v5 = v2->mPrev;
+  v6 = v2->mNext;
+  v5->mNext = v6;
+  v6->mPrev = v5;
+  v2->mPrev = v2;
+  v2->mNext = v2;
+  UFG::SimComponent::~SimComponent(this);
+}
+
+// File Line: 73
+// RVA: 0x37E950
+UFG::qPropertySet *__fastcall UFG::AIScriptInterfaceComponent::PropertiesOnActivateNew(
+        UFG::SceneObjectProperties *pSceneObj,
+        bool required)
+{
+  UFG::qPropertySet *mpWritableProperties; // rcx
+  UFG::qPropertySet *result; // rax
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
+  UFG::allocator::free_link *v6; // rax
+  UFG::qPropertySet *mpConstProperties; // r8
+  UFG::SimComponent *v8; // rax
+  UFG::SimComponent *v9; // rdi
+  UFG::SimObject *m_pSimObject; // rdx
+  __int16 m_Flags; // cx
+  unsigned int v12; // ebx
+  UFG::SimObjectModifier v13; // [rsp+38h] [rbp-30h] BYREF
+
+  if ( required )
+    goto LABEL_5;
+  mpWritableProperties = pSceneObj->mpWritableProperties;
+  if ( !mpWritableProperties )
+    mpWritableProperties = pSceneObj->mpConstProperties;
+  result = UFG::qPropertySet::GetParentFromName(
+             mpWritableProperties,
+             (UFG::qArray<unsigned long,0> *)&SimSymX_propset_componentAiScriptInterface,
+             DEPTH_RECURSE);
+  if ( result )
   {
-    v5 = *(_BYTE *)(*(_QWORD *)&v4[1].m_Flags + 40i64);
+LABEL_5:
+    SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+    v6 = UFG::qMemoryPool::Allocate(SimulationMemoryPool, 0x838ui64, "AIScriptInterfaceComponent", 0i64, 1u);
+    if ( v6 )
+    {
+      mpConstProperties = pSceneObj->mpWritableProperties;
+      if ( !mpConstProperties )
+        mpConstProperties = pSceneObj->mpConstProperties;
+      UFG::AIScriptInterfaceComponent::AIScriptInterfaceComponent(
+        (UFG::AIScriptInterfaceComponent *)v6,
+        pSceneObj->m_NameUID,
+        mpConstProperties);
+      v9 = v8;
+    }
+    else
+    {
+      v9 = 0i64;
+    }
+    m_pSimObject = pSceneObj->m_pSimObject;
+    m_Flags = m_pSimObject->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
+      v12 = 5;
+    else
+      v12 = -1;
+    UFG::SimObjectModifier::SimObjectModifier(&v13, m_pSimObject, 1);
+    UFG::SimObjectModifier::AttachComponent(&v13, v9, v12);
+    UFG::SimObjectModifier::Close(&v13);
+    UFG::SimObjectModifier::~SimObjectModifier(&v13);
+    return (UFG::qPropertySet *)v9;
+  }
+  return result;
+}
+
+// File Line: 88
+// RVA: 0x382720
+void __fastcall UFG::AIScriptInterfaceComponent::Reset(UFG::AIScriptInterfaceComponent *this)
+{
+  float y; // xmm1_4
+  float z; // xmm2_4
+  UFG::SimComponent *m_pSimComponent; // rsi
+  unsigned __int8 v5; // cl
+  __int64 v6; // rbx
+
+  *(_QWORD *)&this->m_ScriptTaskRefCount = 0i64;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
+  this->m_Offset.x = UFG::qVector3::msZero.x;
+  this->m_Offset.y = y;
+  this->m_Offset.z = z;
+  *((_BYTE *)this + 2096) |= 1u;
+  this->m_NumScriptArguments = 0;
+  this->m_DesiredEmotion = eAI_EMOTION_NONE;
+  this->m_ActionRequestToHold.mBits[0] = 0i64;
+  this->m_ActionRequestToHold.mBits[1] = 0i64;
+  this->m_ActionRequestToHold.mBits[2] = 0i64;
+  this->m_ActionRequestToHold.mBits[3] = 0i64;
+  this->m_ActionRequestToHold.mBits[4] = 0i64;
+  this->m_ActionRequestToHold.mBits[5] = 0i64;
+  this->m_ActionRequestToHold.mBits[6] = 0i64;
+  this->m_ActionRequestToHold.mBits[7] = 0i64;
+  this->m_ActionRequestToHold.mBits[8] = 0i64;
+  *((_BYTE *)this + 2096) &= ~8u;
+  UFG::AIScriptInterfaceComponent::ClearCollisionAvoidanceOverride(this);
+  m_pSimComponent = this->m_pTargetingSystemBaseComponent.m_pSimComponent;
+  *((_BYTE *)this + 2096) &= 0x8Fu;
+  this->m_DesiredEmotion = eAI_EMOTION_NONE;
+  if ( m_pSimComponent )
+  {
+    v5 = *(_BYTE *)(*(_QWORD *)&m_pSimComponent[1].m_Flags + 40i64);
     if ( v5 )
     {
       v6 = 56i64 * v5;
-      UFG::TargetingSimObject::SetTarget((UFG::TargetingSimObject *)(v6 + *(_QWORD *)&v4[1].m_TypeUID), 0i64);
-      UFG::TargetingSimObject::SetLock((UFG::TargetingSimObject *)(v6 + *(_QWORD *)&v4[1].m_TypeUID), 0);
+      UFG::TargetingSimObject::SetTarget(
+        (UFG::TargetingSimObject *)(v6 + *(_QWORD *)&m_pSimComponent[1].m_TypeUID),
+        0i64);
+      UFG::TargetingSimObject::SetLock((UFG::TargetingSimObject *)(v6 + *(_QWORD *)&m_pSimComponent[1].m_TypeUID), 0);
     }
   }
-  *((_BYTE *)v1 + 2096) &= 0x73u;
-  *((_BYTE *)v1 + 2098) &= 0xFCu;
-  *((_BYTE *)v1 + 2097) = 83;
-  v1->m_DebugDrawFollowers = 0;
+  *((_BYTE *)this + 2096) &= 0x73u;
+  *((_BYTE *)this + 2098) &= 0xFCu;
+  *((_BYTE *)this + 2097) = 83;
+  this->m_DebugDrawFollowers = 0;
 }
 
 // File Line: 152
 // RVA: 0x378690
-void __fastcall UFG::AIScriptInterfaceComponent::OnAttach(UFG::AIScriptInterfaceComponent *this, UFG::SimObject *object)
+void __fastcall UFG::AIScriptInterfaceComponent::OnAttach(
+        UFG::AIScriptInterfaceComponent *this,
+        UFG::SimObject *object)
 {
-  UFG::AIScriptInterfaceComponent *v2; // rdi
-  UFG::RebindingComponentHandle<UFG::ActiveAIEntityComponent,0> *v3; // rcx
-  UFG::SimObject *v4; // rbx
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v5; // r8
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v6; // rax
+  UFG::RebindingComponentHandle<UFG::ActiveAIEntityComponent,0> *p_m_pAIEntityComponent; // rcx
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mPrev; // r8
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mNext; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v7; // rdx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v8; // rax
-  UFG::RebindingComponentHandle<UFG::SimObjectCharacterPropertiesComponent,0> *v9; // r8
+  UFG::RebindingComponentHandle<UFG::SimObjectCharacterPropertiesComponent,0> *p_m_pSimObjectCharacterPropertiesComponent; // r8
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v10; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v11; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v12; // rdx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v13; // rax
-  UFG::RebindingComponentHandle<UFG::TargetingSystemBaseComponent,0> *v14; // r8
+  UFG::RebindingComponentHandle<UFG::TargetingSystemBaseComponent,0> *p_m_pTargetingSystemBaseComponent; // r8
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v15; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v16; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v17; // rdx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v18; // rax
 
-  v2 = this;
-  v3 = &this->m_pAIEntityComponent;
-  v4 = object;
-  if ( v3->m_pSimComponent )
+  p_m_pAIEntityComponent = &this->m_pAIEntityComponent;
+  if ( p_m_pAIEntityComponent->m_pSimComponent )
   {
-    v5 = v3->mPrev;
-    v6 = v3->mNext;
-    v5->mNext = v6;
-    v6->mPrev = v5;
-    v3->m_pSimComponent = 0i64;
+    mPrev = p_m_pAIEntityComponent->mPrev;
+    mNext = p_m_pAIEntityComponent->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_m_pAIEntityComponent->m_pSimComponent = 0i64;
 LABEL_7:
-    v3->m_pSimObject = 0i64;
-    v3->mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v3->mPrev;
-    v3->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v3->mPrev;
+    p_m_pAIEntityComponent->m_pSimObject = 0i64;
+    p_m_pAIEntityComponent->mNext = p_m_pAIEntityComponent;
+    p_m_pAIEntityComponent->mPrev = p_m_pAIEntityComponent;
     goto LABEL_8;
   }
-  if ( v3->m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::ActiveAIEntityComponent,0> *)v3->mPrev != v3
-     || (UFG::RebindingComponentHandle<UFG::ActiveAIEntityComponent,0> *)v3->mNext != v3) )
+  if ( p_m_pAIEntityComponent->m_pSimObject
+    && (p_m_pAIEntityComponent->mPrev != p_m_pAIEntityComponent
+     || p_m_pAIEntityComponent->mNext != p_m_pAIEntityComponent) )
   {
-    v7 = v3->mPrev;
-    v8 = v3->mNext;
+    v7 = p_m_pAIEntityComponent->mPrev;
+    v8 = p_m_pAIEntityComponent->mNext;
     v7->mNext = v8;
     v8->mPrev = v7;
     goto LABEL_7;
   }
 LABEL_8:
-  v3->m_Changed = 1;
-  v3->m_pSimObject = v4;
-  v3->m_TypeUID = UFG::ActiveAIEntityComponent::_TypeUID;
-  UFG::RebindingComponentHandle<UFG::ActiveAIEntityComponent,0>::BindInternal<UFG::SimObject>(v3, v4);
-  v9 = &v2->m_pSimObjectCharacterPropertiesComponent;
-  if ( v2->m_pSimObjectCharacterPropertiesComponent.m_pSimComponent )
+  p_m_pAIEntityComponent->m_Changed = 1;
+  p_m_pAIEntityComponent->m_pSimObject = object;
+  p_m_pAIEntityComponent->m_TypeUID = UFG::ActiveAIEntityComponent::_TypeUID;
+  UFG::RebindingComponentHandle<UFG::ActiveAIEntityComponent,0>::BindInternal<UFG::SimObject>(
+    p_m_pAIEntityComponent,
+    object);
+  p_m_pSimObjectCharacterPropertiesComponent = &this->m_pSimObjectCharacterPropertiesComponent;
+  if ( this->m_pSimObjectCharacterPropertiesComponent.m_pSimComponent )
   {
-    v10 = v9->mPrev;
-    v11 = v2->m_pSimObjectCharacterPropertiesComponent.mNext;
+    v10 = p_m_pSimObjectCharacterPropertiesComponent->mPrev;
+    v11 = this->m_pSimObjectCharacterPropertiesComponent.mNext;
     v10->mNext = v11;
     v11->mPrev = v10;
-    v2->m_pSimObjectCharacterPropertiesComponent.m_pSimComponent = 0i64;
+    this->m_pSimObjectCharacterPropertiesComponent.m_pSimComponent = 0i64;
 LABEL_14:
-    v2->m_pSimObjectCharacterPropertiesComponent.m_pSimObject = 0i64;
-    v2->m_pSimObjectCharacterPropertiesComponent.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v2->m_pSimObjectCharacterPropertiesComponent.mPrev;
-    v9->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v9->mPrev;
+    this->m_pSimObjectCharacterPropertiesComponent.m_pSimObject = 0i64;
+    this->m_pSimObjectCharacterPropertiesComponent.mNext = &this->m_pSimObjectCharacterPropertiesComponent;
+    p_m_pSimObjectCharacterPropertiesComponent->mPrev = p_m_pSimObjectCharacterPropertiesComponent;
     goto LABEL_15;
   }
-  if ( v2->m_pSimObjectCharacterPropertiesComponent.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::SimObjectCharacterPropertiesComponent,0> *)v9->mPrev != v9
-     || (UFG::RebindingComponentHandle<UFG::SimObjectCharacterPropertiesComponent,0> *)v2->m_pSimObjectCharacterPropertiesComponent.mNext != &v2->m_pSimObjectCharacterPropertiesComponent) )
+  if ( this->m_pSimObjectCharacterPropertiesComponent.m_pSimObject
+    && (p_m_pSimObjectCharacterPropertiesComponent->mPrev != p_m_pSimObjectCharacterPropertiesComponent
+     || this->m_pSimObjectCharacterPropertiesComponent.mNext != &this->m_pSimObjectCharacterPropertiesComponent) )
   {
-    v12 = v9->mPrev;
-    v13 = v2->m_pSimObjectCharacterPropertiesComponent.mNext;
+    v12 = p_m_pSimObjectCharacterPropertiesComponent->mPrev;
+    v13 = this->m_pSimObjectCharacterPropertiesComponent.mNext;
     v12->mNext = v13;
     v13->mPrev = v12;
     goto LABEL_14;
   }
 LABEL_15:
-  v2->m_pSimObjectCharacterPropertiesComponent.m_Changed = 1;
-  v2->m_pSimObjectCharacterPropertiesComponent.m_pSimObject = v4;
-  v2->m_pSimObjectCharacterPropertiesComponent.m_TypeUID = UFG::SimObjectCharacterPropertiesComponent::_TypeUID;
+  this->m_pSimObjectCharacterPropertiesComponent.m_Changed = 1;
+  this->m_pSimObjectCharacterPropertiesComponent.m_pSimObject = object;
+  this->m_pSimObjectCharacterPropertiesComponent.m_TypeUID = UFG::SimObjectCharacterPropertiesComponent::_TypeUID;
   UFG::RebindingComponentHandle<UFG::SimObjectCharacterPropertiesComponent,0>::BindInternal<UFG::SimObject>(
-    &v2->m_pSimObjectCharacterPropertiesComponent,
-    v4);
-  v14 = &v2->m_pTargetingSystemBaseComponent;
-  if ( v2->m_pTargetingSystemBaseComponent.m_pSimComponent )
+    &this->m_pSimObjectCharacterPropertiesComponent,
+    object);
+  p_m_pTargetingSystemBaseComponent = &this->m_pTargetingSystemBaseComponent;
+  if ( this->m_pTargetingSystemBaseComponent.m_pSimComponent )
   {
-    v15 = v14->mPrev;
-    v16 = v2->m_pTargetingSystemBaseComponent.mNext;
+    v15 = p_m_pTargetingSystemBaseComponent->mPrev;
+    v16 = this->m_pTargetingSystemBaseComponent.mNext;
     v15->mNext = v16;
     v16->mPrev = v15;
-    v2->m_pTargetingSystemBaseComponent.m_pSimComponent = 0i64;
+    this->m_pTargetingSystemBaseComponent.m_pSimComponent = 0i64;
 LABEL_21:
-    v2->m_pTargetingSystemBaseComponent.m_pSimObject = 0i64;
-    v2->m_pTargetingSystemBaseComponent.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v2->m_pTargetingSystemBaseComponent.mPrev;
-    v14->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v14->mPrev;
+    this->m_pTargetingSystemBaseComponent.m_pSimObject = 0i64;
+    this->m_pTargetingSystemBaseComponent.mNext = &this->m_pTargetingSystemBaseComponent;
+    p_m_pTargetingSystemBaseComponent->mPrev = p_m_pTargetingSystemBaseComponent;
     goto LABEL_22;
   }
-  if ( v2->m_pTargetingSystemBaseComponent.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::TargetingSystemBaseComponent,0> *)v14->mPrev != v14
-     || (UFG::RebindingComponentHandle<UFG::TargetingSystemBaseComponent,0> *)v2->m_pTargetingSystemBaseComponent.mNext != &v2->m_pTargetingSystemBaseComponent) )
+  if ( this->m_pTargetingSystemBaseComponent.m_pSimObject
+    && (p_m_pTargetingSystemBaseComponent->mPrev != p_m_pTargetingSystemBaseComponent
+     || this->m_pTargetingSystemBaseComponent.mNext != &this->m_pTargetingSystemBaseComponent) )
   {
-    v17 = v14->mPrev;
-    v18 = v2->m_pTargetingSystemBaseComponent.mNext;
+    v17 = p_m_pTargetingSystemBaseComponent->mPrev;
+    v18 = this->m_pTargetingSystemBaseComponent.mNext;
     v17->mNext = v18;
     v18->mPrev = v17;
     goto LABEL_21;
   }
 LABEL_22:
-  v2->m_pTargetingSystemBaseComponent.m_Changed = 1;
-  v2->m_pTargetingSystemBaseComponent.m_pSimObject = v4;
-  v2->m_pTargetingSystemBaseComponent.m_TypeUID = UFG::TargetingSystemBaseComponent::_TypeUID;
+  this->m_pTargetingSystemBaseComponent.m_Changed = 1;
+  this->m_pTargetingSystemBaseComponent.m_pSimObject = object;
+  this->m_pTargetingSystemBaseComponent.m_TypeUID = UFG::TargetingSystemBaseComponent::_TypeUID;
   UFG::RebindingComponentHandle<UFG::TargetingSystemBaseComponent,0>::BindInternal<UFG::SimObject>(
-    &v2->m_pTargetingSystemBaseComponent,
-    v4);
-  UFG::AIScriptInterfaceComponent::ReadParametersFromPropertySet(v2);
+    &this->m_pTargetingSystemBaseComponent,
+    object);
+  UFG::AIScriptInterfaceComponent::ReadParametersFromPropertySet(this);
 }
 
 // File Line: 166
 // RVA: 0x379D90
 void __fastcall UFG::AIScriptInterfaceComponent::OnDetach(UFG::AIScriptInterfaceComponent *this)
 {
-  UFG::RebindingComponentHandle<UFG::ActiveAIEntityComponent,0> *v1; // r8
-  UFG::AIScriptInterfaceComponent *v2; // r9
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v3; // rdx
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v4; // rax
+  UFG::RebindingComponentHandle<UFG::ActiveAIEntityComponent,0> *p_m_pAIEntityComponent; // r8
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mPrev; // rdx
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mNext; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v5; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v6; // rax
-  UFG::RebindingComponentHandle<UFG::SimObjectCharacterPropertiesComponent,0> *v7; // rdx
+  UFG::RebindingComponentHandle<UFG::SimObjectCharacterPropertiesComponent,0> *p_m_pSimObjectCharacterPropertiesComponent; // rdx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v8; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v9; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v10; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v11; // rax
-  UFG::RebindingComponentHandle<UFG::TargetingSystemBaseComponent,0> *v12; // rdx
+  UFG::RebindingComponentHandle<UFG::TargetingSystemBaseComponent,0> *p_m_pTargetingSystemBaseComponent; // rdx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v13; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v14; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v15; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v16; // rax
 
-  v1 = &this->m_pAIEntityComponent;
-  v2 = this;
+  p_m_pAIEntityComponent = &this->m_pAIEntityComponent;
   if ( this->m_pAIEntityComponent.m_pSimComponent )
   {
-    v3 = v1->mPrev;
-    v4 = this->m_pAIEntityComponent.mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
+    mPrev = p_m_pAIEntityComponent->mPrev;
+    mNext = this->m_pAIEntityComponent.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
     this->m_pAIEntityComponent.m_pSimComponent = 0i64;
 LABEL_7:
-    v1->m_pSimObject = 0i64;
-    v1->mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v1->mPrev;
-    v1->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v1->mPrev;
+    p_m_pAIEntityComponent->m_pSimObject = 0i64;
+    p_m_pAIEntityComponent->mNext = p_m_pAIEntityComponent;
+    p_m_pAIEntityComponent->mPrev = p_m_pAIEntityComponent;
     goto LABEL_8;
   }
   if ( this->m_pAIEntityComponent.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::ActiveAIEntityComponent,0> *)v1->mPrev != v1
-     || (UFG::RebindingComponentHandle<UFG::ActiveAIEntityComponent,0> *)this->m_pAIEntityComponent.mNext != &this->m_pAIEntityComponent) )
+    && (p_m_pAIEntityComponent->mPrev != p_m_pAIEntityComponent
+     || this->m_pAIEntityComponent.mNext != &this->m_pAIEntityComponent) )
   {
-    v5 = v1->mPrev;
-    v6 = v1->mNext;
+    v5 = p_m_pAIEntityComponent->mPrev;
+    v6 = p_m_pAIEntityComponent->mNext;
     v5->mNext = v6;
     v6->mPrev = v5;
     goto LABEL_7;
   }
 LABEL_8:
-  v7 = &v2->m_pSimObjectCharacterPropertiesComponent;
-  v1->m_Changed = 1;
-  if ( v2->m_pSimObjectCharacterPropertiesComponent.m_pSimComponent )
+  p_m_pSimObjectCharacterPropertiesComponent = &this->m_pSimObjectCharacterPropertiesComponent;
+  p_m_pAIEntityComponent->m_Changed = 1;
+  if ( this->m_pSimObjectCharacterPropertiesComponent.m_pSimComponent )
   {
-    v8 = v7->mPrev;
-    v9 = v2->m_pSimObjectCharacterPropertiesComponent.mNext;
+    v8 = p_m_pSimObjectCharacterPropertiesComponent->mPrev;
+    v9 = this->m_pSimObjectCharacterPropertiesComponent.mNext;
     v8->mNext = v9;
     v9->mPrev = v8;
-    v2->m_pSimObjectCharacterPropertiesComponent.m_pSimComponent = 0i64;
+    this->m_pSimObjectCharacterPropertiesComponent.m_pSimComponent = 0i64;
 LABEL_14:
-    v2->m_pSimObjectCharacterPropertiesComponent.m_pSimObject = 0i64;
-    v2->m_pSimObjectCharacterPropertiesComponent.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v2->m_pSimObjectCharacterPropertiesComponent.mPrev;
-    v7->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v7->mPrev;
+    this->m_pSimObjectCharacterPropertiesComponent.m_pSimObject = 0i64;
+    this->m_pSimObjectCharacterPropertiesComponent.mNext = &this->m_pSimObjectCharacterPropertiesComponent;
+    p_m_pSimObjectCharacterPropertiesComponent->mPrev = p_m_pSimObjectCharacterPropertiesComponent;
     goto LABEL_15;
   }
-  if ( v2->m_pSimObjectCharacterPropertiesComponent.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::SimObjectCharacterPropertiesComponent,0> *)v7->mPrev != v7
-     || (UFG::RebindingComponentHandle<UFG::SimObjectCharacterPropertiesComponent,0> *)v2->m_pSimObjectCharacterPropertiesComponent.mNext != &v2->m_pSimObjectCharacterPropertiesComponent) )
+  if ( this->m_pSimObjectCharacterPropertiesComponent.m_pSimObject
+    && (p_m_pSimObjectCharacterPropertiesComponent->mPrev != p_m_pSimObjectCharacterPropertiesComponent
+     || this->m_pSimObjectCharacterPropertiesComponent.mNext != &this->m_pSimObjectCharacterPropertiesComponent) )
   {
-    v10 = v7->mPrev;
-    v11 = v2->m_pSimObjectCharacterPropertiesComponent.mNext;
+    v10 = p_m_pSimObjectCharacterPropertiesComponent->mPrev;
+    v11 = this->m_pSimObjectCharacterPropertiesComponent.mNext;
     v10->mNext = v11;
     v11->mPrev = v10;
     goto LABEL_14;
   }
 LABEL_15:
-  v2->m_pSimObjectCharacterPropertiesComponent.m_Changed = 1;
-  v12 = &v2->m_pTargetingSystemBaseComponent;
-  if ( v2->m_pTargetingSystemBaseComponent.m_pSimComponent )
+  this->m_pSimObjectCharacterPropertiesComponent.m_Changed = 1;
+  p_m_pTargetingSystemBaseComponent = &this->m_pTargetingSystemBaseComponent;
+  if ( this->m_pTargetingSystemBaseComponent.m_pSimComponent )
   {
-    v13 = v12->mPrev;
-    v14 = v2->m_pTargetingSystemBaseComponent.mNext;
+    v13 = p_m_pTargetingSystemBaseComponent->mPrev;
+    v14 = this->m_pTargetingSystemBaseComponent.mNext;
     v13->mNext = v14;
     v14->mPrev = v13;
-    v2->m_pTargetingSystemBaseComponent.m_pSimComponent = 0i64;
-    v2->m_pTargetingSystemBaseComponent.m_pSimObject = 0i64;
-    v2->m_pTargetingSystemBaseComponent.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v2->m_pTargetingSystemBaseComponent.mPrev;
-    v12->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v12->mPrev;
-    v2->m_pTargetingSystemBaseComponent.m_Changed = 1;
+    this->m_pTargetingSystemBaseComponent.m_pSimComponent = 0i64;
+    this->m_pTargetingSystemBaseComponent.m_pSimObject = 0i64;
+    this->m_pTargetingSystemBaseComponent.mNext = &this->m_pTargetingSystemBaseComponent;
+    p_m_pTargetingSystemBaseComponent->mPrev = p_m_pTargetingSystemBaseComponent;
+    this->m_pTargetingSystemBaseComponent.m_Changed = 1;
   }
   else
   {
-    if ( v2->m_pTargetingSystemBaseComponent.m_pSimObject
-      && ((UFG::RebindingComponentHandle<UFG::TargetingSystemBaseComponent,0> *)v12->mPrev != v12
-       || (UFG::RebindingComponentHandle<UFG::TargetingSystemBaseComponent,0> *)v2->m_pTargetingSystemBaseComponent.mNext != &v2->m_pTargetingSystemBaseComponent) )
+    if ( this->m_pTargetingSystemBaseComponent.m_pSimObject
+      && (p_m_pTargetingSystemBaseComponent->mPrev != p_m_pTargetingSystemBaseComponent
+       || this->m_pTargetingSystemBaseComponent.mNext != &this->m_pTargetingSystemBaseComponent) )
     {
-      v15 = v12->mPrev;
-      v16 = v2->m_pTargetingSystemBaseComponent.mNext;
+      v15 = p_m_pTargetingSystemBaseComponent->mPrev;
+      v16 = this->m_pTargetingSystemBaseComponent.mNext;
       v15->mNext = v16;
       v16->mPrev = v15;
-      v2->m_pTargetingSystemBaseComponent.m_pSimObject = 0i64;
-      v2->m_pTargetingSystemBaseComponent.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v2->m_pTargetingSystemBaseComponent.mPrev;
-      v12->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v12->mPrev;
+      this->m_pTargetingSystemBaseComponent.m_pSimObject = 0i64;
+      this->m_pTargetingSystemBaseComponent.mNext = &this->m_pTargetingSystemBaseComponent;
+      p_m_pTargetingSystemBaseComponent->mPrev = p_m_pTargetingSystemBaseComponent;
     }
-    v2->m_pTargetingSystemBaseComponent.m_Changed = 1;
+    this->m_pTargetingSystemBaseComponent.m_Changed = 1;
   }
 }
 
 // File Line: 178
 // RVA: 0x388DE0
-void __fastcall UFG::AIScriptInterfaceComponent::StartHoldingActionRequest(UFG::AIScriptInterfaceComponent *this, const char *action_request_name)
+void __fastcall UFG::AIScriptInterfaceComponent::StartHoldingActionRequest(
+        UFG::AIScriptInterfaceComponent *this,
+        const char *action_request_name)
 {
-  UFG::AIScriptInterfaceComponent *v2; // rbx
-  unsigned int action_request; // [rsp+40h] [rbp+18h]
+  unsigned int action_request; // [rsp+40h] [rbp+18h] BYREF
 
-  v2 = this;
   action_request = gActionRequest_Action.m_EnumValue;
   if ( Intention::GetActionRequest(action_request_name, &action_request) )
   {
-    v2->m_ActionRequestToHold.mBits[(signed __int64)(signed int)action_request >> 6] |= 1i64 << (action_request & 0x3F);
-    *((_BYTE *)v2 + 2096) |= 8u;
+    this->m_ActionRequestToHold.mBits[(__int64)(int)action_request >> 6] |= 1i64 << (action_request & 0x3F);
+    *((_BYTE *)this + 2096) |= 8u;
   }
 }
 
 // File Line: 190
 // RVA: 0x3891C0
-void __fastcall UFG::AIScriptInterfaceComponent::StopHoldingActionRequest(UFG::AIScriptInterfaceComponent *this, const char *action_request_name)
+void __fastcall UFG::AIScriptInterfaceComponent::StopHoldingActionRequest(
+        UFG::AIScriptInterfaceComponent *this,
+        const char *action_request_name)
 {
-  UFG::AIScriptInterfaceComponent *v2; // rbx
   int v3; // eax
-  unsigned int v4; // er8
+  unsigned int v4; // r8d
   unsigned __int64 v5; // rcx
-  unsigned int action_request; // [rsp+40h] [rbp+18h]
+  unsigned int action_request; // [rsp+40h] [rbp+18h] BYREF
 
-  v2 = this;
   action_request = gActionRequest_Action.m_EnumValue;
   if ( Intention::GetActionRequest(action_request_name, &action_request) )
   {
-    v2->m_ActionRequestToHold.mBits[(signed __int64)(signed int)action_request >> 6] &= ~(1i64 << (action_request & 0x3F));
-    *((_BYTE *)v2 + 2096) &= 0xF7u;
+    this->m_ActionRequestToHold.mBits[(__int64)(int)action_request >> 6] &= ~(1i64 << (action_request & 0x3F));
+    *((_BYTE *)this + 2096) &= ~8u;
     v3 = 0;
-    v4 = (gActionRequestEnum.m_enumLists.size & 0x80000000) != 0 ? 0 : (*gActionRequestEnum.m_enumLists.p)->m_enumName.size;
+    v4 = (gActionRequestEnum.m_enumLists.size & 0x80000000) != 0
+       ? 0
+       : (*gActionRequestEnum.m_enumLists.p)->m_enumName.size;
     if ( v4 )
     {
       while ( 1 )
       {
-        v5 = v2->m_ActionRequestToHold.mBits[(signed __int64)v3 >> 6];
-        if ( _bittest64((const signed __int64 *)&v5, v3 & 0x3F) )
+        v5 = this->m_ActionRequestToHold.mBits[(__int64)v3 >> 6];
+        if ( _bittest64((const __int64 *)&v5, v3 & 0x3F) )
           break;
         if ( ++v3 >= v4 )
           return;
       }
-      *((_BYTE *)v2 + 2096) |= 8u;
+      *((_BYTE *)this + 2096) |= 8u;
     }
   }
 }
@@ -502,7 +499,7 @@ void __fastcall UFG::AIScriptInterfaceComponent::StopHoldingAllActionRequests(UF
   this->m_ActionRequestToHold.mBits[6] = 0i64;
   this->m_ActionRequestToHold.mBits[7] = 0i64;
   this->m_ActionRequestToHold.mBits[8] = 0i64;
-  *((_BYTE *)this + 2096) &= 0xF7u;
+  *((_BYTE *)this + 2096) &= ~8u;
 }
 
 // File Line: 219
@@ -528,7 +525,9 @@ void __fastcall UFG::AIScriptInterfaceComponent::BeginCommandActionRequest(UFG::
 
 // File Line: 274
 // RVA: 0x363830
-char __fastcall UFG::AIScriptInterfaceComponent::GiveCommand(UFG::AIScriptInterfaceComponent *this, UFG::eScriptCommand command)
+char __fastcall UFG::AIScriptInterfaceComponent::GiveCommand(
+        UFG::AIScriptInterfaceComponent *this,
+        UFG::eScriptCommand command)
 {
   if ( this->m_pAIEntityComponent.m_pSimComponent )
   {
@@ -550,10 +549,13 @@ char __fastcall UFG::AIScriptInterfaceComponent::GiveCommand(UFG::AIScriptInterf
 
 // File Line: 289
 // RVA: 0x363880
-char __fastcall UFG::AIScriptInterfaceComponent::GiveCommand(UFG::AIScriptInterfaceComponent *this, UFG::eScriptCommand command, UFG::qVector3 *vector)
+char __fastcall UFG::AIScriptInterfaceComponent::GiveCommand(
+        UFG::AIScriptInterfaceComponent *this,
+        UFG::eScriptCommand command,
+        UFG::qVector3 *vector)
 {
-  float v3; // xmm0_4
-  float v4; // xmm1_4
+  float y; // xmm0_4
+  float z; // xmm1_4
   char result; // al
 
   if ( this->m_pAIEntityComponent.m_pSimComponent )
@@ -561,13 +563,13 @@ char __fastcall UFG::AIScriptInterfaceComponent::GiveCommand(UFG::AIScriptInterf
     if ( this->m_CurrentScriptCommand == eSCRIPT_COMMAND_NONE )
     {
       this->m_CurrentScriptCommand = command;
-      v3 = vector->y;
-      v4 = vector->z;
+      y = vector->y;
+      z = vector->z;
       this->m_ScriptArgument[0].m_Vector.x = vector->x;
-      this->m_ScriptArgument[0].m_Vector.y = v3;
+      this->m_ScriptArgument[0].m_Vector.y = y;
       result = 1;
-      this->m_ScriptArgument[0].m_Vector.z = v4;
-      this->m_ScriptArgument[0].m_Type = 1;
+      this->m_ScriptArgument[0].m_Vector.z = z;
+      this->m_ScriptArgument[0].m_Type = eSCRIPT_ARGUMENT_VECTOR;
       this->m_NumScriptArguments = 1;
       return result;
     }
@@ -576,15 +578,17 @@ char __fastcall UFG::AIScriptInterfaceComponent::GiveCommand(UFG::AIScriptInterf
   {
     UFG::qPrintf(
       "WARNING: Cannot perform script command %s because no AIEntityComponent\n",
-      UFG::ScriptCommandNames[command],
-      vector);
+      UFG::ScriptCommandNames[command]);
   }
   return 0;
 }
 
 // File Line: 340
 // RVA: 0x3638F0
-char __fastcall UFG::AIScriptInterfaceComponent::GiveCommand(UFG::AIScriptInterfaceComponent *this, UFG::eScriptCommand command, float floating_point)
+char __fastcall UFG::AIScriptInterfaceComponent::GiveCommand(
+        UFG::AIScriptInterfaceComponent *this,
+        UFG::eScriptCommand command,
+        float floating_point)
 {
   if ( this->m_pAIEntityComponent.m_pSimComponent )
   {
@@ -592,7 +596,7 @@ char __fastcall UFG::AIScriptInterfaceComponent::GiveCommand(UFG::AIScriptInterf
     {
       this->m_CurrentScriptCommand = command;
       this->m_ScriptArgument[0].m_Float = floating_point;
-      this->m_ScriptArgument[0].m_Type = 4;
+      this->m_ScriptArgument[0].m_Type = eSCRIPT_ARGUMENT_FLOAT;
       this->m_NumScriptArguments = 1;
       return 1;
     }
@@ -608,50 +612,49 @@ char __fastcall UFG::AIScriptInterfaceComponent::GiveCommand(UFG::AIScriptInterf
 
 // File Line: 357
 // RVA: 0x363950
-char __fastcall UFG::AIScriptInterfaceComponent::GiveCommand(UFG::AIScriptInterfaceComponent *this, UFG::eScriptCommand command, UFG::TransformNodeComponent *transform_node_component)
+char __fastcall UFG::AIScriptInterfaceComponent::GiveCommand(
+        UFG::AIScriptInterfaceComponent *this,
+        UFG::eScriptCommand command,
+        UFG::TransformNodeComponent *transform_node_component)
 {
-  UFG::AIScriptInterfaceComponent *v3; // r9
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v4; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v5; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v6; // rax
+  UFG::qSafePointer<UFG::SimComponent,UFG::TransformNodeComponent> *p_m_pTransformNodeComponent; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v7; // rax
   char result; // al
 
-  v3 = this;
   if ( !this->m_pAIEntityComponent.m_pSimComponent )
   {
     UFG::qPrintf(
       "WARNING: Cannot perform script command %s because no AIEntityComponent\n",
-      UFG::ScriptCommandNames[command],
-      transform_node_component,
-      this);
+      UFG::ScriptCommandNames[command]);
     return 0;
   }
   if ( this->m_CurrentScriptCommand )
     return 0;
   this->m_CurrentScriptCommand = command;
-  v4 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&this->m_ScriptArgument[0].m_pTransformNodeComponent.mPrev;
+  p_m_pTransformNodeComponent = &this->m_ScriptArgument[0].m_pTransformNodeComponent;
   if ( this->m_ScriptArgument[0].m_pTransformNodeComponent.m_pPointer )
   {
-    v5 = v4->mPrev;
-    v6 = v4->mNext;
-    v5->mNext = v6;
-    v6->mPrev = v5;
-    v4->mPrev = v4;
-    v4->mNext = v4;
+    mPrev = p_m_pTransformNodeComponent->mPrev;
+    mNext = p_m_pTransformNodeComponent->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_m_pTransformNodeComponent->mPrev = p_m_pTransformNodeComponent;
+    p_m_pTransformNodeComponent->mNext = p_m_pTransformNodeComponent;
   }
-  v4[1].mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)transform_node_component;
+  p_m_pTransformNodeComponent->m_pPointer = transform_node_component;
   if ( transform_node_component )
   {
-    v7 = transform_node_component->m_SafePointerList.mNode.mPrev;
-    v7->mNext = v4;
-    v4->mPrev = v7;
-    v4->mNext = &transform_node_component->m_SafePointerList.mNode;
-    transform_node_component->m_SafePointerList.mNode.mPrev = v4;
+    v7 = transform_node_component->m_SafePointerList.mNode.UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mPrev;
+    v7->mNext = p_m_pTransformNodeComponent;
+    p_m_pTransformNodeComponent->mPrev = v7;
+    p_m_pTransformNodeComponent->mNext = &transform_node_component->m_SafePointerList.mNode;
+    transform_node_component->m_SafePointerList.mNode.UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mPrev = p_m_pTransformNodeComponent;
   }
-  v3->m_ScriptArgument[0].m_Type = 6;
+  this->m_ScriptArgument[0].m_Type = eSCRIPT_ARGUMENT_TRANSFORM_NODE;
   result = 1;
-  v3->m_NumScriptArguments = 1;
+  this->m_NumScriptArguments = 1;
   return result;
 }
 
@@ -659,171 +662,166 @@ char __fastcall UFG::AIScriptInterfaceComponent::GiveCommand(UFG::AIScriptInterf
 // RVA: 0x33FF70
 char __fastcall UFG::AIScriptInterfaceComponent::AddArgument(UFG::AIScriptInterfaceComponent *this, const char *string)
 {
-  __int64 v2; // rax
-  UFG::AIScriptInterfaceComponent *v3; // rbx
+  __int64 m_NumScriptArguments; // rax
   char result; // al
 
-  v2 = this->m_NumScriptArguments;
-  v3 = this;
-  if ( (signed int)v2 >= 5 )
+  m_NumScriptArguments = this->m_NumScriptArguments;
+  if ( (int)m_NumScriptArguments >= 5 )
     return 0;
-  UFG::qSharedString::operator=((UFG::qSharedString *)&(&this->vfptr)[v2 + 8 * v2 + 14], string);
+  UFG::qSharedString::operator=(
+    &this->m_ScriptArgument[0].m_String + 8 * m_NumScriptArguments + m_NumScriptArguments,
+    string);
   result = 1;
-  v3->m_ScriptArgument[v3->m_NumScriptArguments++].m_Type = 2;
+  this->m_ScriptArgument[this->m_NumScriptArguments++].m_Type = eSCRIPT_ARGUMENT_STRING;
   return result;
 }
 
 // File Line: 404
 // RVA: 0x33FF30
-char __fastcall UFG::AIScriptInterfaceComponent::AddArgument(UFG::AIScriptInterfaceComponent *this, int integer)
+bool __fastcall UFG::AIScriptInterfaceComponent::AddArgument(UFG::AIScriptInterfaceComponent *this, int integer)
 {
-  __int64 v2; // rax
-  char result; // al
+  __int64 m_NumScriptArguments; // rax
+  bool result; // al
 
-  v2 = this->m_NumScriptArguments;
-  if ( (signed int)v2 >= 5 )
+  m_NumScriptArguments = this->m_NumScriptArguments;
+  if ( (int)m_NumScriptArguments >= 5 )
     return 0;
-  this->m_ScriptArgument[v2].m_Int = integer;
+  this->m_ScriptArgument[m_NumScriptArguments].m_Int = integer;
   result = 1;
-  this->m_ScriptArgument[this->m_NumScriptArguments++].m_Type = 3;
+  this->m_ScriptArgument[this->m_NumScriptArguments++].m_Type = eSCRIPT_ARGUMENT_INT;
   return result;
 }
 
 // File Line: 419
 // RVA: 0x33FFD0
-char __fastcall UFG::AIScriptInterfaceComponent::AddArgument(UFG::AIScriptInterfaceComponent *this, __int64 symbol)
+bool __fastcall UFG::AIScriptInterfaceComponent::AddArgument(
+        UFG::AIScriptInterfaceComponent *this,
+        unsigned int *symbol)
 {
-  __int64 v2; // rax
-  char result; // al
+  __int64 m_NumScriptArguments; // rax
+  bool result; // al
 
-  v2 = this->m_NumScriptArguments;
-  if ( (signed int)v2 >= 5 )
+  m_NumScriptArguments = this->m_NumScriptArguments;
+  if ( (int)m_NumScriptArguments >= 5 )
     return 0;
-  this->m_ScriptArgument[v2].m_Symbol.mUID = *(_DWORD *)symbol;
+  this->m_ScriptArgument[m_NumScriptArguments].m_Symbol.mUID = *symbol;
   result = 1;
-  this->m_ScriptArgument[this->m_NumScriptArguments++].m_Type = 5;
+  this->m_ScriptArgument[this->m_NumScriptArguments++].m_Type = eSCRIPT_ARGUMENT_SYMBOL;
   return result;
 }
 
 // File Line: 464
 // RVA: 0x386060
-void __fastcall UFG::AIScriptInterfaceComponent::SetDesiredTarget(UFG::AIScriptInterfaceComponent *this, UFG::eTargetTypeEnum target_type, UFG::SimObject *prop_target)
+void __fastcall UFG::AIScriptInterfaceComponent::SetDesiredTarget(
+        UFG::AIScriptInterfaceComponent *this,
+        UFG::eTargetTypeEnum target_type,
+        UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *prop_target)
 {
-  UFG::AIEntityComponent *v3; // r9
+  UFG::AIEntityComponent *m_pSimComponent; // r9
   bool v4; // zf
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v5; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v6; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v7; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v8; // rax
 
-  v3 = (UFG::AIEntityComponent *)this->m_pAIEntityComponent.m_pSimComponent;
-  if ( v3 )
+  m_pSimComponent = (UFG::AIEntityComponent *)this->m_pAIEntityComponent.m_pSimComponent;
+  if ( m_pSimComponent )
   {
-    v4 = *((_QWORD *)&v3->m_SafePointerList.mNode.mNext + 3 * ((signed int)target_type + 81i64)) == 0i64;
-    v5 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&(&v3->vfptr)[3 * ((signed int)target_type + 81i64)];
+    v4 = *((_QWORD *)&m_pSimComponent[1].m_WanderData.mGoals[0].mpDestinationNode.mData + 3 * target_type + 2) == 0i64;
+    v5 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)(&m_pSimComponent[1].m_WanderData.mGoals[0].mpDestinationNode.mData
+                                                                                       + 3 * target_type);
     if ( !v4 )
     {
-      v6 = v5->mPrev;
-      v7 = v5->mNext;
-      v6->mNext = v7;
-      v7->mPrev = v6;
+      mPrev = v5->mPrev;
+      mNext = v5->mNext;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
       v5->mPrev = v5;
       v5->mNext = v5;
     }
-    v5[1].mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)prop_target;
+    v5[1].mPrev = prop_target;
     if ( prop_target )
     {
-      v8 = prop_target->m_SafePointerList.mNode.mPrev;
+      v8 = prop_target->mNext;
       v8->mNext = v5;
       v5->mPrev = v8;
-      v5->mNext = &prop_target->m_SafePointerList.mNode;
-      prop_target->m_SafePointerList.mNode.mPrev = v5;
+      v5->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&prop_target->mNext;
+      prop_target->mNext = v5;
     }
   }
 }
 
 // File Line: 532
 // RVA: 0x385050
-void __fastcall UFG::AIScriptInterfaceComponent::SetCollisionAvoidanceOverride(UFG::AIScriptInterfaceComponent *this, __int64 overRideType)
+void __fastcall UFG::AIScriptInterfaceComponent::SetCollisionAvoidanceOverride(
+        UFG::AIScriptInterfaceComponent *this,
+        __int64 overRideType)
 {
-  UFG::SimObjectGame *v2; // rcx
+  UFG::SimObjectGame *m_pSimObject; // rcx
   unsigned int v3; // ebx
-  unsigned __int16 v4; // dx
+  __int16 m_Flags; // dx
   unsigned int v5; // edx
-  UFG::NavComponent *v6; // rax
+  UFG::NavComponent *ComponentOfTypeHK; // rax
   bool v7; // zf
-  UFG::NavComponent *v8; // rax
+  UFG::NavComponent *ComponentOfType; // rax
 
-  v2 = (UFG::SimObjectGame *)this->m_pSimObject;
+  m_pSimObject = (UFG::SimObjectGame *)this->m_pSimObject;
   v3 = overRideType;
-  if ( !v2 )
+  if ( !m_pSimObject )
   {
     UFG::NavComponent::SetCollisionAvoidanceType(0i64, overRideType);
     return;
   }
-  v4 = v2->m_Flags;
-  if ( (v4 >> 14) & 1 )
+  m_Flags = m_pSimObject->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 )
   {
-    UFG::NavComponent::SetCollisionAvoidanceType((UFG::NavComponent *)v2->m_Components.p[36].m_pComponent, v3);
+    UFG::NavComponent::SetCollisionAvoidanceType((UFG::NavComponent *)m_pSimObject->m_Components.p[36].m_pComponent, v3);
     return;
   }
-  if ( (v4 & 0x8000u) != 0 || (v4 >> 13) & 1 )
+  if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 )
   {
     v5 = UFG::NavComponent::_TypeUID;
 LABEL_7:
-    v6 = (UFG::NavComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v2, v5);
-    UFG::NavComponent::SetCollisionAvoidanceType(v6, v3);
+    ComponentOfTypeHK = (UFG::NavComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(m_pSimObject, v5);
+    UFG::NavComponent::SetCollisionAvoidanceType(ComponentOfTypeHK, v3);
     return;
   }
-  v7 = ((v4 >> 12) & 1) == 0;
+  v7 = (m_Flags & 0x1000) == 0;
   v5 = UFG::NavComponent::_TypeUID;
   if ( !v7 )
     goto LABEL_7;
-  v8 = (UFG::NavComponent *)UFG::SimObject::GetComponentOfType(
-                              (UFG::SimObject *)&v2->vfptr,
-                              UFG::NavComponent::_TypeUID);
-  UFG::NavComponent::SetCollisionAvoidanceType(v8, v3);
+  ComponentOfType = (UFG::NavComponent *)UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::NavComponent::_TypeUID);
+  UFG::NavComponent::SetCollisionAvoidanceType(ComponentOfType, v3);
 }
 
 // File Line: 541
 // RVA: 0x34F100
 void __fastcall UFG::AIScriptInterfaceComponent::ClearCollisionAvoidanceOverride(UFG::AIScriptInterfaceComponent *this)
 {
-  UFG::SimObjectGame *v1; // rcx
-  unsigned __int16 v2; // dx
-  UFG::NavComponent *v3; // rax
+  UFG::SimObjectGame *m_pSimObject; // rcx
+  __int16 m_Flags; // dx
+  UFG::NavComponent *m_pComponent; // rax
 
-  v1 = (UFG::SimObjectGame *)this->m_pSimObject;
-  if ( v1 )
+  m_pSimObject = (UFG::SimObjectGame *)this->m_pSimObject;
+  if ( m_pSimObject )
   {
-    v2 = v1->m_Flags;
-    if ( (v2 >> 14) & 1 )
+    m_Flags = m_pSimObject->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v3 = (UFG::NavComponent *)v1->m_Components.p[36].m_pComponent;
+      m_pComponent = (UFG::NavComponent *)m_pSimObject->m_Components.p[36].m_pComponent;
     }
-    else if ( (v2 & 0x8000u) == 0 )
+    else if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v2 >> 13) & 1 )
-      {
-        v3 = (UFG::NavComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v1, UFG::NavComponent::_TypeUID);
-      }
-      else if ( (v2 >> 12) & 1 )
-      {
-        v3 = (UFG::NavComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v1, UFG::NavComponent::_TypeUID);
-      }
-      else
-      {
-        v3 = (UFG::NavComponent *)UFG::SimObject::GetComponentOfType(
-                                    (UFG::SimObject *)&v1->vfptr,
-                                    UFG::NavComponent::_TypeUID);
-      }
+      m_pComponent = (UFG::NavComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                            m_pSimObject,
+                                            UFG::NavComponent::_TypeUID);
     }
     else
     {
-      v3 = (UFG::NavComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(v1, UFG::NavComponent::_TypeUID);
+      m_pComponent = (UFG::NavComponent *)UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::NavComponent::_TypeUID);
     }
-    if ( v3 )
-      UFG::NavComponent::SetCollisionAvoidanceType(v3, 0i64);
+    if ( m_pComponent )
+      UFG::NavComponent::SetCollisionAvoidanceType(m_pComponent, 0i64);
   }
 }
 
@@ -831,165 +829,160 @@ void __fastcall UFG::AIScriptInterfaceComponent::ClearCollisionAvoidanceOverride
 // RVA: 0x37F670
 void __fastcall UFG::AIScriptInterfaceComponent::ReadParametersFromPropertySet(UFG::AIScriptInterfaceComponent *this)
 {
-  UFG::AIScriptInterfaceComponent *v1; // rdi
-  UFG::SimObject *v2; // rax
-  UFG::SceneObjectProperties *v3; // rdx
-  UFG::qPropertySet *v4; // r15
+  UFG::SimObject *m_pSimObject; // rax
+  UFG::SceneObjectProperties *m_pSceneObj; // rdx
+  UFG::qPropertySet *mpWritableProperties; // r15
   UFG::qPropertySet *v5; // rax
-  object_physical_character_stats_BaseAttackParameters *v6; // rax
-  signed __int64 v7; // rbp
-  signed __int64 v8; // r11
-  signed __int64 v9; // r9
-  signed __int64 v10; // rbx
-  signed __int64 v11; // r10
-  _DWORD *v12; // rcx
+  object_physical_character_stats_BaseAttackParameters *MemImagePtr; // rax
+  __int64 v7; // rbp
+  __int64 i; // r11
+  float (*m_InitialAttackTimeMax)[3][2][2][2]; // r9
+  __int64 v10; // rbx
+  __int64 v11; // r10
+  float (*v12)[3][2][2][2]; // rcx
   _DWORD *v13; // rdx
-  signed __int64 v14; // r8
+  __int64 v14; // r8
   float (*v15)[2][2][2]; // rcx
-  signed __int64 v16; // r9
-  signed __int64 v17; // r8
-  signed __int64 v18; // rdx
+  __int64 v16; // r9
+  __int64 v17; // r8
+  __int64 v18; // rdx
   bool *v19; // rax
   char *v20; // rcx
-  char v21; // [rsp+50h] [rbp+8h]
+  char v21; // [rsp+50h] [rbp+8h] BYREF
 
-  v1 = this;
-  v2 = this->m_pSimObject;
-  if ( !v2 || !v2->m_pSceneObj )
+  m_pSimObject = this->m_pSimObject;
+  if ( !m_pSimObject || !m_pSimObject->m_pSceneObj )
   {
-    v4 = 0i64;
+    mpWritableProperties = 0i64;
 LABEL_6:
-    if ( !v4 )
+    if ( !mpWritableProperties )
       return;
     goto LABEL_7;
   }
-  v3 = v2->m_pSceneObj;
-  v4 = v3->mpWritableProperties;
-  if ( !v4 )
+  m_pSceneObj = m_pSimObject->m_pSceneObj;
+  mpWritableProperties = m_pSceneObj->mpWritableProperties;
+  if ( !mpWritableProperties )
   {
-    v4 = v3->mpConstProperties;
+    mpWritableProperties = m_pSceneObj->mpConstProperties;
     goto LABEL_6;
   }
 LABEL_7:
   v5 = UFG::qPropertySet::Get<UFG::qPropertySet>(
-         v4,
-         (UFG::qSymbol *)&object_physical_character_stats_BaseAttackParameters::sPropertyName.mUID,
+         mpWritableProperties,
+         (UFG::qArray<unsigned long,0> *)&object_physical_character_stats_BaseAttackParameters::sPropertyName,
          DEPTH_RECURSE);
   if ( v5 )
   {
-    v6 = (object_physical_character_stats_BaseAttackParameters *)UFG::qPropertySet::GetMemImagePtr(v5);
-    if ( v6 )
+    MemImagePtr = (object_physical_character_stats_BaseAttackParameters *)UFG::qPropertySet::GetMemImagePtr(v5);
+    if ( MemImagePtr )
     {
-      v1->m_InitialAttackTimeMin[0][0][0][0][0] = v6->InitialAttackTimeMinMeleeVSHumanAsEnemy;
-      v1->m_InitialAttackTimeMax[0][0][0][0][0] = v6->InitialAttackTimeMaxMeleeVSHumanAsEnemy;
-      v1->m_AttackTimeMin[0][0][0][0][0] = v6->AttackTimeMinMeleeVSHumanAsEnemy;
-      v1->m_AttackTimeMax[0][0][0][0][0] = v6->AttackTimeMaxMeleeVSHumanAsEnemy;
-      v1->m_AttackTimeMinDowned[0][0][0][0][0] = v6->AttackTimeMinMeleeDownedVSHumanAsEnemy;
-      v1->m_AttackTimeMaxDowned[0][0][0][0][0] = v6->AttackTimeMaxMeleeDownedVSHumanAsEnemy;
-      v1->m_InitialAttackTimeMin[0][0][0][1][0] = v6->InitialAttackTimeMinMeleeVSAIAsEnemy;
-      v1->m_InitialAttackTimeMax[0][0][0][1][0] = v6->InitialAttackTimeMaxMeleeVSAIAsEnemy;
-      v1->m_AttackTimeMin[0][0][0][1][0] = v6->AttackTimeMinMeleeVSAIAsEnemy;
-      v1->m_AttackTimeMax[0][0][0][1][0] = v6->AttackTimeMaxMeleeVSAIAsEnemy;
-      v1->m_AttackTimeMinDowned[0][0][0][1][0] = v6->AttackTimeMinMeleeDownedVSAIAsEnemy;
-      v1->m_AttackTimeMaxDowned[0][0][0][1][0] = v6->AttackTimeMaxMeleeDownedVSAIAsEnemy;
-      v1->m_InitialAttackTimeMin[0][0][1][1][0] = v6->InitialAttackTimeMinMeleeVSAIAsAlly;
-      v1->m_InitialAttackTimeMax[0][0][1][1][0] = v6->InitialAttackTimeMaxMeleeVSAIAsAlly;
-      v1->m_AttackTimeMin[0][0][1][1][0] = v6->AttackTimeMinMeleeVSAIAsAlly;
-      v1->m_AttackTimeMax[0][0][1][1][0] = v6->AttackTimeMaxMeleeVSAIAsAlly;
-      v1->m_AttackTimeMinDowned[0][0][1][1][0] = v6->AttackTimeMinMeleeDownedVSAIAsAlly;
-      v1->m_AttackTimeMaxDowned[0][0][1][1][0] = v6->AttackTimeMaxMeleeDownedVSAIAsAlly;
-      v1->m_InitialAttackTimeMin[0][1][0][0][0] = v6->InitialAttackTimeMinRangedVSHumanAsEnemy;
-      v1->m_InitialAttackTimeMax[0][1][0][0][0] = v6->InitialAttackTimeMaxRangedVSHumanAsEnemy;
-      v1->m_AttackTimeMin[0][1][0][0][0] = v6->AttackTimeMinRangedVSHumanAsEnemy;
-      v1->m_AttackTimeMax[0][1][0][0][0] = v6->AttackTimeMaxRangedVSHumanAsEnemy;
-      v1->m_AttackTimeMinDowned[0][1][0][0][0] = v6->AttackTimeMinRangedDownedVSHumanAsEnemy;
-      v1->m_AttackTimeMaxDowned[0][1][0][0][0] = v6->AttackTimeMaxRangedDownedVSHumanAsEnemy;
-      v1->m_InitialAttackTimeMin[0][1][0][1][0] = v6->InitialAttackTimeMinRangedVSAIAsEnemy;
-      v1->m_InitialAttackTimeMax[0][1][0][1][0] = v6->InitialAttackTimeMaxRangedVSAIAsEnemy;
-      v1->m_AttackTimeMin[0][1][0][1][0] = v6->AttackTimeMinRangedVSAIAsEnemy;
-      v1->m_AttackTimeMax[0][1][0][1][0] = v6->AttackTimeMaxRangedVSAIAsEnemy;
-      v1->m_AttackTimeMinDowned[0][1][0][1][0] = v6->AttackTimeMinRangedDownedVSAIAsEnemy;
-      v1->m_AttackTimeMaxDowned[0][1][0][1][0] = v6->AttackTimeMaxRangedDownedVSAIAsEnemy;
-      v1->m_InitialAttackTimeMin[0][2][0][0][0] = v6->InitialAttackTimeMinDirectFollowersVSHumanAsEnemy;
-      v1->m_InitialAttackTimeMax[0][2][0][0][0] = v6->InitialAttackTimeMaxDirectFollowersVSHumanAsEnemy;
-      v1->m_AttackTimeMin[0][2][0][0][0] = v6->AttackTimeMinDirectFollowersVSHumanAsEnemy;
-      v1->m_AttackTimeMax[0][2][0][0][0] = v6->AttackTimeMaxDirectFollowersVSHumanAsEnemy;
-      v1->m_AttackTimeMinDowned[0][2][0][0][0] = v6->AttackTimeMinDirectFollowersDownedVSHumanAsEnemy;
-      v1->m_AttackTimeMaxDowned[0][2][0][0][0] = v6->AttackTimeMaxDirectFollowersDownedVSHumanAsEnemy;
-      v1->m_InitialAttackTimeMin[0][2][0][1][0] = v6->InitialAttackTimeMinDirectFollowersVSAIAsEnemy;
-      v1->m_InitialAttackTimeMax[0][2][0][1][0] = v6->InitialAttackTimeMaxDirectFollowersVSAIAsEnemy;
-      v1->m_AttackTimeMin[0][2][0][1][0] = v6->AttackTimeMinDirectFollowersVSAIAsEnemy;
-      v1->m_AttackTimeMax[0][2][0][1][0] = v6->AttackTimeMaxDirectFollowersVSAIAsEnemy;
-      v1->m_AttackTimeMinDowned[0][2][0][1][0] = v6->AttackTimeMinDirectFollowersDownedVSAIAsEnemy;
-      v1->m_AttackTimeMaxDowned[0][2][0][1][0] = v6->AttackTimeMaxDirectFollowersDownedVSAIAsEnemy;
-      v1->m_InitialAttackTimeMin[0][1][1][1][0] = v6->InitialAttackTimeMinRangedVSAIAsAlly;
-      v1->m_InitialAttackTimeMax[0][1][1][1][0] = v6->InitialAttackTimeMaxRangedVSAIAsAlly;
-      v1->m_AttackTimeMin[0][1][1][1][0] = v6->AttackTimeMinRangedVSAIAsAlly;
-      v1->m_AttackTimeMax[0][1][1][1][0] = v6->AttackTimeMaxRangedVSAIAsAlly;
-      v1->m_AttackTimeMinDowned[0][1][1][1][0] = v6->AttackTimeMinRangedDownedVSAIAsAlly;
-      v1->m_AttackTimeMaxDowned[0][1][1][1][0] = v6->AttackTimeMaxRangedDownedVSAIAsAlly;
-      v1->m_InitialAttackTimeMin[0][2][1][1][0] = v6->InitialAttackTimeMinDirectFollowersVSAIAsAlly;
-      v1->m_InitialAttackTimeMax[0][2][1][1][0] = v6->InitialAttackTimeMaxDirectFollowersVSAIAsAlly;
-      v1->m_AttackTimeMin[0][2][1][1][0] = v6->AttackTimeMinDirectFollowersVSAIAsAlly;
-      v1->m_AttackTimeMax[0][2][1][1][0] = v6->AttackTimeMaxDirectFollowersVSAIAsAlly;
-      v1->m_AttackTimeMinDowned[0][2][1][1][0] = v6->AttackTimeMinDirectFollowersDownedVSAIAsAlly;
-      v1->m_AttackTimeMaxDowned[0][2][1][1][0] = v6->AttackTimeMaxDirectFollowersDownedVSAIAsAlly;
+      this->m_InitialAttackTimeMin[0][0][0][0][0] = MemImagePtr->InitialAttackTimeMinMeleeVSHumanAsEnemy;
+      this->m_InitialAttackTimeMax[0][0][0][0][0] = MemImagePtr->InitialAttackTimeMaxMeleeVSHumanAsEnemy;
+      this->m_AttackTimeMin[0][0][0][0][0] = MemImagePtr->AttackTimeMinMeleeVSHumanAsEnemy;
+      this->m_AttackTimeMax[0][0][0][0][0] = MemImagePtr->AttackTimeMaxMeleeVSHumanAsEnemy;
+      this->m_AttackTimeMinDowned[0][0][0][0][0] = MemImagePtr->AttackTimeMinMeleeDownedVSHumanAsEnemy;
+      this->m_AttackTimeMaxDowned[0][0][0][0][0] = MemImagePtr->AttackTimeMaxMeleeDownedVSHumanAsEnemy;
+      this->m_InitialAttackTimeMin[0][0][0][1][0] = MemImagePtr->InitialAttackTimeMinMeleeVSAIAsEnemy;
+      this->m_InitialAttackTimeMax[0][0][0][1][0] = MemImagePtr->InitialAttackTimeMaxMeleeVSAIAsEnemy;
+      this->m_AttackTimeMin[0][0][0][1][0] = MemImagePtr->AttackTimeMinMeleeVSAIAsEnemy;
+      this->m_AttackTimeMax[0][0][0][1][0] = MemImagePtr->AttackTimeMaxMeleeVSAIAsEnemy;
+      this->m_AttackTimeMinDowned[0][0][0][1][0] = MemImagePtr->AttackTimeMinMeleeDownedVSAIAsEnemy;
+      this->m_AttackTimeMaxDowned[0][0][0][1][0] = MemImagePtr->AttackTimeMaxMeleeDownedVSAIAsEnemy;
+      this->m_InitialAttackTimeMin[0][0][1][1][0] = MemImagePtr->InitialAttackTimeMinMeleeVSAIAsAlly;
+      this->m_InitialAttackTimeMax[0][0][1][1][0] = MemImagePtr->InitialAttackTimeMaxMeleeVSAIAsAlly;
+      this->m_AttackTimeMin[0][0][1][1][0] = MemImagePtr->AttackTimeMinMeleeVSAIAsAlly;
+      this->m_AttackTimeMax[0][0][1][1][0] = MemImagePtr->AttackTimeMaxMeleeVSAIAsAlly;
+      this->m_AttackTimeMinDowned[0][0][1][1][0] = MemImagePtr->AttackTimeMinMeleeDownedVSAIAsAlly;
+      this->m_AttackTimeMaxDowned[0][0][1][1][0] = MemImagePtr->AttackTimeMaxMeleeDownedVSAIAsAlly;
+      this->m_InitialAttackTimeMin[0][1][0][0][0] = MemImagePtr->InitialAttackTimeMinRangedVSHumanAsEnemy;
+      this->m_InitialAttackTimeMax[0][1][0][0][0] = MemImagePtr->InitialAttackTimeMaxRangedVSHumanAsEnemy;
+      this->m_AttackTimeMin[0][1][0][0][0] = MemImagePtr->AttackTimeMinRangedVSHumanAsEnemy;
+      this->m_AttackTimeMax[0][1][0][0][0] = MemImagePtr->AttackTimeMaxRangedVSHumanAsEnemy;
+      this->m_AttackTimeMinDowned[0][1][0][0][0] = MemImagePtr->AttackTimeMinRangedDownedVSHumanAsEnemy;
+      this->m_AttackTimeMaxDowned[0][1][0][0][0] = MemImagePtr->AttackTimeMaxRangedDownedVSHumanAsEnemy;
+      this->m_InitialAttackTimeMin[0][1][0][1][0] = MemImagePtr->InitialAttackTimeMinRangedVSAIAsEnemy;
+      this->m_InitialAttackTimeMax[0][1][0][1][0] = MemImagePtr->InitialAttackTimeMaxRangedVSAIAsEnemy;
+      this->m_AttackTimeMin[0][1][0][1][0] = MemImagePtr->AttackTimeMinRangedVSAIAsEnemy;
+      this->m_AttackTimeMax[0][1][0][1][0] = MemImagePtr->AttackTimeMaxRangedVSAIAsEnemy;
+      this->m_AttackTimeMinDowned[0][1][0][1][0] = MemImagePtr->AttackTimeMinRangedDownedVSAIAsEnemy;
+      this->m_AttackTimeMaxDowned[0][1][0][1][0] = MemImagePtr->AttackTimeMaxRangedDownedVSAIAsEnemy;
+      this->m_InitialAttackTimeMin[0][2][0][0][0] = MemImagePtr->InitialAttackTimeMinDirectFollowersVSHumanAsEnemy;
+      this->m_InitialAttackTimeMax[0][2][0][0][0] = MemImagePtr->InitialAttackTimeMaxDirectFollowersVSHumanAsEnemy;
+      this->m_AttackTimeMin[0][2][0][0][0] = MemImagePtr->AttackTimeMinDirectFollowersVSHumanAsEnemy;
+      this->m_AttackTimeMax[0][2][0][0][0] = MemImagePtr->AttackTimeMaxDirectFollowersVSHumanAsEnemy;
+      this->m_AttackTimeMinDowned[0][2][0][0][0] = MemImagePtr->AttackTimeMinDirectFollowersDownedVSHumanAsEnemy;
+      this->m_AttackTimeMaxDowned[0][2][0][0][0] = MemImagePtr->AttackTimeMaxDirectFollowersDownedVSHumanAsEnemy;
+      this->m_InitialAttackTimeMin[0][2][0][1][0] = MemImagePtr->InitialAttackTimeMinDirectFollowersVSAIAsEnemy;
+      this->m_InitialAttackTimeMax[0][2][0][1][0] = MemImagePtr->InitialAttackTimeMaxDirectFollowersVSAIAsEnemy;
+      this->m_AttackTimeMin[0][2][0][1][0] = MemImagePtr->AttackTimeMinDirectFollowersVSAIAsEnemy;
+      this->m_AttackTimeMax[0][2][0][1][0] = MemImagePtr->AttackTimeMaxDirectFollowersVSAIAsEnemy;
+      this->m_AttackTimeMinDowned[0][2][0][1][0] = MemImagePtr->AttackTimeMinDirectFollowersDownedVSAIAsEnemy;
+      this->m_AttackTimeMaxDowned[0][2][0][1][0] = MemImagePtr->AttackTimeMaxDirectFollowersDownedVSAIAsEnemy;
+      this->m_InitialAttackTimeMin[0][1][1][1][0] = MemImagePtr->InitialAttackTimeMinRangedVSAIAsAlly;
+      this->m_InitialAttackTimeMax[0][1][1][1][0] = MemImagePtr->InitialAttackTimeMaxRangedVSAIAsAlly;
+      this->m_AttackTimeMin[0][1][1][1][0] = MemImagePtr->AttackTimeMinRangedVSAIAsAlly;
+      this->m_AttackTimeMax[0][1][1][1][0] = MemImagePtr->AttackTimeMaxRangedVSAIAsAlly;
+      this->m_AttackTimeMinDowned[0][1][1][1][0] = MemImagePtr->AttackTimeMinRangedDownedVSAIAsAlly;
+      this->m_AttackTimeMaxDowned[0][1][1][1][0] = MemImagePtr->AttackTimeMaxRangedDownedVSAIAsAlly;
+      this->m_InitialAttackTimeMin[0][2][1][1][0] = MemImagePtr->InitialAttackTimeMinDirectFollowersVSAIAsAlly;
+      this->m_InitialAttackTimeMax[0][2][1][1][0] = MemImagePtr->InitialAttackTimeMaxDirectFollowersVSAIAsAlly;
+      this->m_AttackTimeMin[0][2][1][1][0] = MemImagePtr->AttackTimeMinDirectFollowersVSAIAsAlly;
+      this->m_AttackTimeMax[0][2][1][1][0] = MemImagePtr->AttackTimeMaxDirectFollowersVSAIAsAlly;
+      this->m_AttackTimeMinDowned[0][2][1][1][0] = MemImagePtr->AttackTimeMinDirectFollowersDownedVSAIAsAlly;
+      this->m_AttackTimeMaxDowned[0][2][1][1][0] = MemImagePtr->AttackTimeMaxDirectFollowersDownedVSAIAsAlly;
       v7 = 3i64;
-      v8 = 4i64;
-      do
+      for ( i = 1i64; i < 49; i += 24i64 )
       {
-        v9 = (signed __int64)v1->m_InitialAttackTimeMax;
+        m_InitialAttackTimeMax = this->m_InitialAttackTimeMax;
         v10 = 3i64;
         do
         {
           v11 = 2i64;
           do
           {
-            v12 = (_DWORD *)v9;
-            v13 = (_DWORD *)(v8 + v9);
+            v12 = m_InitialAttackTimeMax;
+            v13 = (_DWORD *)&(*m_InitialAttackTimeMax)[0][0][0][i];
             v14 = 2i64;
             do
             {
-              *(v13 - 48) = *(v12 - 48);
-              *v13 = *v12;
-              v13[48] = v12[48];
-              v13[96] = v12[96];
-              v13[144] = v12[144];
-              v13[192] = v12[192];
-              v12 += 2;
+              *(v13 - 48) = LODWORD((*v12)[-6][0][0][0]);
+              *v13 = *(_DWORD *)v12;
+              v13[48] = LODWORD((*v12)[6][0][0][0]);
+              v13[96] = LODWORD((*v12)[12][0][0][0]);
+              v13[144] = LODWORD((*v12)[18][0][0][0]);
+              v13[192] = LODWORD((*v12)[24][0][0][0]);
+              v12 = (float (*)[3][2][2][2])((char *)v12 + 8);
               v13 += 2;
               --v14;
             }
             while ( v14 );
-            v9 += 16i64;
+            m_InitialAttackTimeMax = (float (*)[3][2][2][2])((char *)m_InitialAttackTimeMax + 16);
             --v11;
           }
           while ( v11 );
           --v10;
         }
         while ( v10 );
-        v8 += 96i64;
       }
-      while ( v8 < 196 );
-      v1->m_InitialAttackTimeMin[0][1][0][0][1] = v6->InitialAttackTimeMinRangedInCoverVSHumanAsEnemy;
-      v1->m_InitialAttackTimeMax[0][1][0][0][1] = v6->InitialAttackTimeMaxRangedInCoverVSHumanAsEnemy;
-      v1->m_AttackTimeMin[0][1][0][0][1] = v6->AttackTimeMinRangedInCoverVSHumanAsEnemy;
-      v1->m_AttackTimeMax[0][1][0][0][1] = v6->AttackTimeMaxRangedInCoverVSHumanAsEnemy;
-      v1->m_AttackTimeMinDowned[0][1][0][0][1] = v6->AttackTimeMinRangedInCoverDownedVSHumanAsEnemy;
-      v1->m_AttackTimeMaxDowned[0][1][0][0][1] = v6->AttackTimeMaxRangedInCoverDownedVSHumanAsEnemy;
-      v1->m_InitialAttackTimeMin[0][1][0][1][1] = v6->InitialAttackTimeMinRangedInCoverVSAIAsEnemy;
-      v1->m_InitialAttackTimeMax[0][1][0][1][1] = v6->InitialAttackTimeMaxRangedInCoverVSAIAsEnemy;
-      v1->m_AttackTimeMin[0][1][0][1][1] = v6->AttackTimeMinRangedInCoverVSAIAsEnemy;
-      v1->m_AttackTimeMax[0][1][0][1][1] = v6->AttackTimeMaxRangedInCoverVSAIAsEnemy;
-      v1->m_AttackTimeMinDowned[0][1][0][1][1] = v6->AttackTimeMinRangedInCoverDownedVSAIAsEnemy;
-      v1->m_AttackTimeMaxDowned[0][1][0][1][1] = v6->AttackTimeMaxRangedInCoverDownedVSAIAsEnemy;
-      v1->m_InitialAttackTimeMin[0][1][0][1][1] = v6->InitialAttackTimeMinRangedInCoverVSAIAsAlly;
-      v1->m_InitialAttackTimeMax[0][1][0][1][1] = v6->InitialAttackTimeMaxRangedInCoverVSAIAsAlly;
-      v1->m_AttackTimeMin[0][1][0][1][1] = v6->AttackTimeMinRangedInCoverVSAIAsAlly;
-      v1->m_AttackTimeMax[0][1][0][1][1] = v6->AttackTimeMaxRangedInCoverVSAIAsAlly;
-      v1->m_AttackTimeMinDowned[0][1][0][1][1] = v6->AttackTimeMinRangedInCoverDownedVSAIAsAlly;
-      v1->m_AttackTimeMaxDowned[0][1][0][1][1] = v6->AttackTimeMaxRangedInCoverDownedVSAIAsAlly;
-      v15 = v1->m_InitialAttackTimeMin[1];
+      this->m_InitialAttackTimeMin[0][1][0][0][1] = MemImagePtr->InitialAttackTimeMinRangedInCoverVSHumanAsEnemy;
+      this->m_InitialAttackTimeMax[0][1][0][0][1] = MemImagePtr->InitialAttackTimeMaxRangedInCoverVSHumanAsEnemy;
+      this->m_AttackTimeMin[0][1][0][0][1] = MemImagePtr->AttackTimeMinRangedInCoverVSHumanAsEnemy;
+      this->m_AttackTimeMax[0][1][0][0][1] = MemImagePtr->AttackTimeMaxRangedInCoverVSHumanAsEnemy;
+      this->m_AttackTimeMinDowned[0][1][0][0][1] = MemImagePtr->AttackTimeMinRangedInCoverDownedVSHumanAsEnemy;
+      this->m_AttackTimeMaxDowned[0][1][0][0][1] = MemImagePtr->AttackTimeMaxRangedInCoverDownedVSHumanAsEnemy;
+      this->m_InitialAttackTimeMin[0][1][0][1][1] = MemImagePtr->InitialAttackTimeMinRangedInCoverVSAIAsEnemy;
+      this->m_InitialAttackTimeMax[0][1][0][1][1] = MemImagePtr->InitialAttackTimeMaxRangedInCoverVSAIAsEnemy;
+      this->m_AttackTimeMin[0][1][0][1][1] = MemImagePtr->AttackTimeMinRangedInCoverVSAIAsEnemy;
+      this->m_AttackTimeMax[0][1][0][1][1] = MemImagePtr->AttackTimeMaxRangedInCoverVSAIAsEnemy;
+      this->m_AttackTimeMinDowned[0][1][0][1][1] = MemImagePtr->AttackTimeMinRangedInCoverDownedVSAIAsEnemy;
+      this->m_AttackTimeMaxDowned[0][1][0][1][1] = MemImagePtr->AttackTimeMaxRangedInCoverDownedVSAIAsEnemy;
+      this->m_InitialAttackTimeMin[0][1][0][1][1] = MemImagePtr->InitialAttackTimeMinRangedInCoverVSAIAsAlly;
+      this->m_InitialAttackTimeMax[0][1][0][1][1] = MemImagePtr->InitialAttackTimeMaxRangedInCoverVSAIAsAlly;
+      this->m_AttackTimeMin[0][1][0][1][1] = MemImagePtr->AttackTimeMinRangedInCoverVSAIAsAlly;
+      this->m_AttackTimeMax[0][1][0][1][1] = MemImagePtr->AttackTimeMaxRangedInCoverVSAIAsAlly;
+      this->m_AttackTimeMinDowned[0][1][0][1][1] = MemImagePtr->AttackTimeMinRangedInCoverDownedVSAIAsAlly;
+      this->m_AttackTimeMaxDowned[0][1][0][1][1] = MemImagePtr->AttackTimeMaxRangedInCoverDownedVSAIAsAlly;
+      v15 = this->m_InitialAttackTimeMin[1];
       do
       {
         v16 = 2i64;
@@ -1020,94 +1013,101 @@ LABEL_7:
         --v7;
       }
       while ( v7 );
-      v1->m_AttackTimeMin[1][0][0][0][0] = v6->AttackTimeMinMeleeVSHumanAsEnemyMobBattle;
-      v1->m_AttackTimeMin[1][0][0][0][1] = v6->AttackTimeMinMeleeVSHumanAsEnemyMobBattle;
-      v1->m_AttackTimeMax[1][0][0][0][0] = v6->AttackTimeMaxMeleeVSHumanAsEnemyMobBattle;
-      v1->m_AttackTimeMax[1][0][0][0][1] = v6->AttackTimeMaxMeleeVSHumanAsEnemyMobBattle;
-      if ( !(_S27_0 & 1) )
+      this->m_AttackTimeMin[1][0][0][0][0] = MemImagePtr->AttackTimeMinMeleeVSHumanAsEnemyMobBattle;
+      this->m_AttackTimeMin[1][0][0][0][1] = MemImagePtr->AttackTimeMinMeleeVSHumanAsEnemyMobBattle;
+      this->m_AttackTimeMax[1][0][0][0][0] = MemImagePtr->AttackTimeMaxMeleeVSHumanAsEnemyMobBattle;
+      this->m_AttackTimeMax[1][0][0][0][1] = MemImagePtr->AttackTimeMaxMeleeVSHumanAsEnemyMobBattle;
+      if ( (_S27_0 & 1) == 0 )
       {
         _S27_0 |= 1u;
         UFG::qSymbol::create_from_string(&AllowedToSprintDuringCombatSymbol, "AllowedToSprintDuringCombat");
         atexit(UFG::AIScriptInterfaceComponent::ReadParametersFromPropertySet_::_28_::_dynamic_atexit_destructor_for__AllowedToSprintDuringCombatSymbol__);
       }
       v21 = 0;
-      v19 = UFG::qPropertySet::Get<bool>(v4, &AllowedToSprintDuringCombatSymbol, DEPTH_RECURSE);
+      v19 = UFG::qPropertySet::Get<bool>(
+              mpWritableProperties,
+              (UFG::qArray<unsigned long,0> *)&AllowedToSprintDuringCombatSymbol,
+              DEPTH_RECURSE);
       v20 = &v21;
       if ( v19 )
         v20 = (char *)v19;
-      *((_BYTE *)v1 + 2097) ^= (*((_BYTE *)v1 + 2097) ^ (*v20 << 6)) & 0x40;
+      *((_BYTE *)this + 2097) ^= (*((_BYTE *)this + 2097) ^ (*v20 << 6)) & 0x40;
     }
   }
 }
 
 // File Line: 864
 // RVA: 0x360770
-float __fastcall UFG::AIScriptInterfaceComponent::GetInitialAttackTimeMin(UFG::AIScriptInterfaceComponent *this, UFG::eAttackType attack_type, UFG::eTargetTypeEnum target_type, UFG::eInCoverType in_cover_type)
+float __fastcall UFG::AIScriptInterfaceComponent::GetInitialAttackTimeMin(
+        UFG::AIScriptInterfaceComponent *this,
+        UFG::eAttackType attack_type,
+        unsigned int target_type,
+        UFG::eInCoverType in_cover_type)
 {
-  signed int v4; // edi
+  int v4; // edi
   __int64 v5; // r14
-  __int64 v6; // r12
-  UFG::SimComponent *v7; // rax
+  __int64 m_CurrentBattleType; // r12
+  UFG::SimComponent *m_pSimComponent; // rax
   __int64 v8; // rbp
   __int64 v9; // r15
-  UFG::AIScriptInterfaceComponent *v10; // rsi
-  signed int v11; // er10
-  __int64 v12; // rbx
+  int v11; // r10d
+  __int64 mPrev_low; // rbx
   UFG::TargetingSystemBaseComponent *v13; // rdx
-  UFG::SimObjectCharacter *v14; // rdx
+  UFG::SimObjectCharacter *m_pPointer; // rdx
 
   v4 = -1;
   v5 = in_cover_type;
-  v6 = (signed int)UFG::BattleManager::s_pInstance->m_CurrentBattleType;
-  v7 = this->m_pSimObjectCharacterPropertiesComponent.m_pSimComponent;
-  v8 = (unsigned int)target_type;
-  v9 = (signed int)attack_type;
-  v10 = this;
+  m_CurrentBattleType = UFG::BattleManager::s_pInstance->m_CurrentBattleType;
+  m_pSimComponent = this->m_pSimObjectCharacterPropertiesComponent.m_pSimComponent;
+  v8 = target_type;
+  v9 = attack_type;
   v11 = -1;
-  if ( v7 )
+  if ( m_pSimComponent )
   {
-    v12 = SLODWORD(v7[3].m_SafePointerList.mNode.mPrev);
-    v11 = UFG::GameStatTracker::Instance()->mFactionInterface.mStandings[v12][2] == 0;
+    mPrev_low = SLODWORD(m_pSimComponent[3].m_SafePointerList.mNode.mPrev);
+    v11 = UFG::GameStatTracker::Instance()->mFactionInterface.mStandings[mPrev_low][2] == FACTIONSTANDING_ALLIED;
   }
-  v13 = (UFG::TargetingSystemBaseComponent *)v10->m_pTargetingSystemBaseComponent.m_pSimComponent;
+  v13 = (UFG::TargetingSystemBaseComponent *)this->m_pTargetingSystemBaseComponent.m_pSimComponent;
   if ( v13 && v13->m_pTargets[(unsigned __int8)v13->m_pTargetingMap->m_Map.p[v8]].m_pTarget.m_pPointer )
   {
-    v14 = (UFG::SimObjectCharacter *)v13->m_pTargets[(unsigned __int8)v13->m_pTargetingMap->m_Map.p[v8]].m_pTarget.m_pPointer;
-    v4 = !v14 || v14 != LocalPlayer;
+    m_pPointer = (UFG::SimObjectCharacter *)v13->m_pTargets[(unsigned __int8)v13->m_pTargetingMap->m_Map.p[v8]].m_pTarget.m_pPointer;
+    v4 = !m_pPointer || m_pPointer != LocalPlayer;
   }
-  return *((float *)&v10->vfptr + v5 + 2 * (v4 + 2 * (v11 + 2 * (v9 + 22 + 3 * v6))));
+  return this->m_InitialAttackTimeMin[m_CurrentBattleType][v9][v11][v4][v5];
 }
 
 // File Line: 873
 // RVA: 0x360670
-float __fastcall UFG::AIScriptInterfaceComponent::GetInitialAttackTimeMax(UFG::AIScriptInterfaceComponent *this, UFG::eAttackType attack_type, UFG::eTargetTypeEnum target_type, UFG::eInCoverType in_cover_type)
+float __fastcall UFG::AIScriptInterfaceComponent::GetInitialAttackTimeMax(
+        UFG::AIScriptInterfaceComponent *this,
+        UFG::eAttackType attack_type,
+        unsigned int target_type,
+        UFG::eInCoverType in_cover_type)
 {
-  signed int v4; // edi
+  int v4; // edi
   __int64 v5; // r14
-  __int64 v6; // r12
-  UFG::SimComponent *v7; // rax
+  __int64 m_CurrentBattleType; // r12
+  UFG::SimComponent *m_pSimComponent; // rax
   __int64 v8; // rbp
   __int64 v9; // r15
-  UFG::AIScriptInterfaceComponent *v10; // rsi
-  signed int v11; // er10
-  __int64 v12; // rbx
+  int v11; // r10d
+  __int64 mPrev_low; // rbx
   UFG::SimComponent *v13; // rdx
   UFG::SimObjectCharacter *v14; // rdx
 
   v4 = -1;
   v5 = in_cover_type;
-  v6 = (signed int)UFG::BattleManager::s_pInstance->m_CurrentBattleType;
-  v7 = this->m_pSimObjectCharacterPropertiesComponent.m_pSimComponent;
-  v8 = (unsigned int)target_type;
-  v9 = (signed int)attack_type;
-  v10 = this;
+  m_CurrentBattleType = UFG::BattleManager::s_pInstance->m_CurrentBattleType;
+  m_pSimComponent = this->m_pSimObjectCharacterPropertiesComponent.m_pSimComponent;
+  v8 = target_type;
+  v9 = attack_type;
   v11 = -1;
-  if ( v7 )
+  if ( m_pSimComponent )
   {
-    v12 = SLODWORD(v7[3].m_SafePointerList.mNode.mPrev);
-    v11 = UFG::GameStatTracker::Instance()->mFactionInterface.mStandings[v12][2] == 0;
+    mPrev_low = SLODWORD(m_pSimComponent[3].m_SafePointerList.mNode.mPrev);
+    v11 = UFG::GameStatTracker::Instance()->mFactionInterface.mStandings[mPrev_low][2] == FACTIONSTANDING_ALLIED;
   }
-  v13 = v10->m_pTargetingSystemBaseComponent.m_pSimComponent;
+  v13 = this->m_pTargetingSystemBaseComponent.m_pSimComponent;
   if ( v13
     && *(_QWORD *)(56i64 * *(unsigned __int8 *)(*(_QWORD *)&v13[1].m_Flags + v8 + 8) + *(_QWORD *)&v13[1].m_TypeUID + 40) )
   {
@@ -1116,39 +1116,41 @@ float __fastcall UFG::AIScriptInterfaceComponent::GetInitialAttackTimeMax(UFG::A
                                       + 40);
     v4 = !v14 || v14 != LocalPlayer;
   }
-  return *((float *)&v10->vfptr + v5 + 2 * (v4 + 2 * (v11 + 2 * (v9 + 28 + 3 * v6))));
+  return this->m_InitialAttackTimeMax[m_CurrentBattleType][v9][v11][v4][v5];
 }
 
 // File Line: 882
 // RVA: 0x35A140
-float __fastcall UFG::AIScriptInterfaceComponent::GetAttackTimeMin(UFG::AIScriptInterfaceComponent *this, UFG::eAttackType attack_type, UFG::eTargetTypeEnum target_type, UFG::eInCoverType in_cover_type)
+float __fastcall UFG::AIScriptInterfaceComponent::GetAttackTimeMin(
+        UFG::AIScriptInterfaceComponent *this,
+        UFG::eAttackType attack_type,
+        unsigned int target_type,
+        UFG::eInCoverType in_cover_type)
 {
-  signed int v4; // edi
+  int v4; // edi
   __int64 v5; // r14
-  __int64 v6; // r12
-  UFG::SimComponent *v7; // rax
+  __int64 m_CurrentBattleType; // r12
+  UFG::SimComponent *m_pSimComponent; // rax
   __int64 v8; // rbp
   __int64 v9; // r15
-  UFG::AIScriptInterfaceComponent *v10; // rsi
-  signed int v11; // er10
-  __int64 v12; // rbx
+  int v11; // r10d
+  __int64 mPrev_low; // rbx
   UFG::SimComponent *v13; // rdx
   UFG::SimObjectCharacter *v14; // rdx
 
   v4 = -1;
   v5 = in_cover_type;
-  v6 = (signed int)UFG::BattleManager::s_pInstance->m_CurrentBattleType;
-  v7 = this->m_pSimObjectCharacterPropertiesComponent.m_pSimComponent;
-  v8 = (unsigned int)target_type;
-  v9 = (signed int)attack_type;
-  v10 = this;
+  m_CurrentBattleType = UFG::BattleManager::s_pInstance->m_CurrentBattleType;
+  m_pSimComponent = this->m_pSimObjectCharacterPropertiesComponent.m_pSimComponent;
+  v8 = target_type;
+  v9 = attack_type;
   v11 = -1;
-  if ( v7 )
+  if ( m_pSimComponent )
   {
-    v12 = SLODWORD(v7[3].m_SafePointerList.mNode.mPrev);
-    v11 = UFG::GameStatTracker::Instance()->mFactionInterface.mStandings[v12][2] == 0;
+    mPrev_low = SLODWORD(m_pSimComponent[3].m_SafePointerList.mNode.mPrev);
+    v11 = UFG::GameStatTracker::Instance()->mFactionInterface.mStandings[mPrev_low][2] == FACTIONSTANDING_ALLIED;
   }
-  v13 = v10->m_pTargetingSystemBaseComponent.m_pSimComponent;
+  v13 = this->m_pTargetingSystemBaseComponent.m_pSimComponent;
   if ( v13
     && *(_QWORD *)(56i64 * *(unsigned __int8 *)(*(_QWORD *)&v13[1].m_Flags + v8 + 8) + *(_QWORD *)&v13[1].m_TypeUID + 40) )
   {
@@ -1157,39 +1159,41 @@ float __fastcall UFG::AIScriptInterfaceComponent::GetAttackTimeMin(UFG::AIScript
                                       + 40);
     v4 = !v14 || v14 != LocalPlayer;
   }
-  return *((float *)&v10->vfptr + v5 + 2 * (v4 + 2 * (v11 + 2 * (v9 + 34 + 3 * v6))));
+  return this->m_AttackTimeMin[m_CurrentBattleType][v9][v11][v4][v5];
 }
 
 // File Line: 891
 // RVA: 0x359F40
-float __fastcall UFG::AIScriptInterfaceComponent::GetAttackTimeMax(UFG::AIScriptInterfaceComponent *this, UFG::eAttackType attack_type, UFG::eTargetTypeEnum target_type, UFG::eInCoverType in_cover_type)
+float __fastcall UFG::AIScriptInterfaceComponent::GetAttackTimeMax(
+        UFG::AIScriptInterfaceComponent *this,
+        UFG::eAttackType attack_type,
+        unsigned int target_type,
+        UFG::eInCoverType in_cover_type)
 {
-  signed int v4; // edi
+  int v4; // edi
   __int64 v5; // r14
-  __int64 v6; // r12
-  UFG::SimComponent *v7; // rax
+  __int64 m_CurrentBattleType; // r12
+  UFG::SimComponent *m_pSimComponent; // rax
   __int64 v8; // rbp
   __int64 v9; // r15
-  UFG::AIScriptInterfaceComponent *v10; // rsi
-  signed int v11; // er10
-  __int64 v12; // rbx
+  int v11; // r10d
+  __int64 mPrev_low; // rbx
   UFG::SimComponent *v13; // rdx
   UFG::SimObjectCharacter *v14; // rdx
 
   v4 = -1;
   v5 = in_cover_type;
-  v6 = (signed int)UFG::BattleManager::s_pInstance->m_CurrentBattleType;
-  v7 = this->m_pSimObjectCharacterPropertiesComponent.m_pSimComponent;
-  v8 = (unsigned int)target_type;
-  v9 = (signed int)attack_type;
-  v10 = this;
+  m_CurrentBattleType = UFG::BattleManager::s_pInstance->m_CurrentBattleType;
+  m_pSimComponent = this->m_pSimObjectCharacterPropertiesComponent.m_pSimComponent;
+  v8 = target_type;
+  v9 = attack_type;
   v11 = -1;
-  if ( v7 )
+  if ( m_pSimComponent )
   {
-    v12 = SLODWORD(v7[3].m_SafePointerList.mNode.mPrev);
-    v11 = UFG::GameStatTracker::Instance()->mFactionInterface.mStandings[v12][2] == 0;
+    mPrev_low = SLODWORD(m_pSimComponent[3].m_SafePointerList.mNode.mPrev);
+    v11 = UFG::GameStatTracker::Instance()->mFactionInterface.mStandings[mPrev_low][2] == FACTIONSTANDING_ALLIED;
   }
-  v13 = v10->m_pTargetingSystemBaseComponent.m_pSimComponent;
+  v13 = this->m_pTargetingSystemBaseComponent.m_pSimComponent;
   if ( v13
     && *(_QWORD *)(56i64 * *(unsigned __int8 *)(*(_QWORD *)&v13[1].m_Flags + v8 + 8) + *(_QWORD *)&v13[1].m_TypeUID + 40) )
   {
@@ -1198,39 +1202,41 @@ float __fastcall UFG::AIScriptInterfaceComponent::GetAttackTimeMax(UFG::AIScript
                                       + 40);
     v4 = !v14 || v14 != LocalPlayer;
   }
-  return *((float *)&v10->vfptr + v5 + 2 * (v4 + 2 * (v11 + 2 * (v9 + 40 + 3 * v6))));
+  return this->m_AttackTimeMax[m_CurrentBattleType][v9][v11][v4][v5];
 }
 
 // File Line: 900
 // RVA: 0x35A240
-float __fastcall UFG::AIScriptInterfaceComponent::GetAttackTimeMinDowned(UFG::AIScriptInterfaceComponent *this, UFG::eAttackType attack_type, UFG::eTargetTypeEnum target_type, UFG::eInCoverType in_cover_type)
+float __fastcall UFG::AIScriptInterfaceComponent::GetAttackTimeMinDowned(
+        UFG::AIScriptInterfaceComponent *this,
+        UFG::eAttackType attack_type,
+        unsigned int target_type,
+        UFG::eInCoverType in_cover_type)
 {
-  signed int v4; // edi
+  int v4; // edi
   __int64 v5; // r14
-  __int64 v6; // r12
-  UFG::SimComponent *v7; // rax
+  __int64 m_CurrentBattleType; // r12
+  UFG::SimComponent *m_pSimComponent; // rax
   __int64 v8; // rbp
   __int64 v9; // r15
-  UFG::AIScriptInterfaceComponent *v10; // rsi
-  signed int v11; // er10
-  __int64 v12; // rbx
+  int v11; // r10d
+  __int64 mPrev_low; // rbx
   UFG::SimComponent *v13; // rdx
   UFG::SimObjectCharacter *v14; // rdx
 
   v4 = -1;
   v5 = in_cover_type;
-  v6 = (signed int)UFG::BattleManager::s_pInstance->m_CurrentBattleType;
-  v7 = this->m_pSimObjectCharacterPropertiesComponent.m_pSimComponent;
-  v8 = (unsigned int)target_type;
-  v9 = (signed int)attack_type;
-  v10 = this;
+  m_CurrentBattleType = UFG::BattleManager::s_pInstance->m_CurrentBattleType;
+  m_pSimComponent = this->m_pSimObjectCharacterPropertiesComponent.m_pSimComponent;
+  v8 = target_type;
+  v9 = attack_type;
   v11 = -1;
-  if ( v7 )
+  if ( m_pSimComponent )
   {
-    v12 = SLODWORD(v7[3].m_SafePointerList.mNode.mPrev);
-    v11 = UFG::GameStatTracker::Instance()->mFactionInterface.mStandings[v12][2] == 0;
+    mPrev_low = SLODWORD(m_pSimComponent[3].m_SafePointerList.mNode.mPrev);
+    v11 = UFG::GameStatTracker::Instance()->mFactionInterface.mStandings[mPrev_low][2] == FACTIONSTANDING_ALLIED;
   }
-  v13 = v10->m_pTargetingSystemBaseComponent.m_pSimComponent;
+  v13 = this->m_pTargetingSystemBaseComponent.m_pSimComponent;
   if ( v13
     && *(_QWORD *)(56i64 * *(unsigned __int8 *)(*(_QWORD *)&v13[1].m_Flags + v8 + 8) + *(_QWORD *)&v13[1].m_TypeUID + 40) )
   {
@@ -1239,39 +1245,41 @@ float __fastcall UFG::AIScriptInterfaceComponent::GetAttackTimeMinDowned(UFG::AI
                                       + 40);
     v4 = !v14 || v14 != LocalPlayer;
   }
-  return *((float *)&v10->vfptr + v5 + 2 * (v4 + 2 * (v11 + 2 * (v9 + 46 + 3 * v6))));
+  return this->m_AttackTimeMinDowned[m_CurrentBattleType][v9][v11][v4][v5];
 }
 
 // File Line: 909
 // RVA: 0x35A040
-float __fastcall UFG::AIScriptInterfaceComponent::GetAttackTimeMaxDowned(UFG::AIScriptInterfaceComponent *this, UFG::eAttackType attack_type, UFG::eTargetTypeEnum target_type, UFG::eInCoverType in_cover_type)
+float __fastcall UFG::AIScriptInterfaceComponent::GetAttackTimeMaxDowned(
+        UFG::AIScriptInterfaceComponent *this,
+        UFG::eAttackType attack_type,
+        unsigned int target_type,
+        UFG::eInCoverType in_cover_type)
 {
-  signed int v4; // edi
+  int v4; // edi
   __int64 v5; // r14
-  __int64 v6; // r12
-  UFG::SimComponent *v7; // rax
+  __int64 m_CurrentBattleType; // r12
+  UFG::SimComponent *m_pSimComponent; // rax
   __int64 v8; // rbp
   __int64 v9; // r15
-  UFG::AIScriptInterfaceComponent *v10; // rsi
-  signed int v11; // er10
-  __int64 v12; // rbx
+  int v11; // r10d
+  __int64 mPrev_low; // rbx
   UFG::SimComponent *v13; // rdx
   UFG::SimObjectCharacter *v14; // rdx
 
   v4 = -1;
   v5 = in_cover_type;
-  v6 = (signed int)UFG::BattleManager::s_pInstance->m_CurrentBattleType;
-  v7 = this->m_pSimObjectCharacterPropertiesComponent.m_pSimComponent;
-  v8 = (unsigned int)target_type;
-  v9 = (signed int)attack_type;
-  v10 = this;
+  m_CurrentBattleType = UFG::BattleManager::s_pInstance->m_CurrentBattleType;
+  m_pSimComponent = this->m_pSimObjectCharacterPropertiesComponent.m_pSimComponent;
+  v8 = target_type;
+  v9 = attack_type;
   v11 = -1;
-  if ( v7 )
+  if ( m_pSimComponent )
   {
-    v12 = SLODWORD(v7[3].m_SafePointerList.mNode.mPrev);
-    v11 = UFG::GameStatTracker::Instance()->mFactionInterface.mStandings[v12][2] == 0;
+    mPrev_low = SLODWORD(m_pSimComponent[3].m_SafePointerList.mNode.mPrev);
+    v11 = UFG::GameStatTracker::Instance()->mFactionInterface.mStandings[mPrev_low][2] == FACTIONSTANDING_ALLIED;
   }
-  v13 = v10->m_pTargetingSystemBaseComponent.m_pSimComponent;
+  v13 = this->m_pTargetingSystemBaseComponent.m_pSimComponent;
   if ( v13
     && *(_QWORD *)(56i64 * *(unsigned __int8 *)(*(_QWORD *)&v13[1].m_Flags + v8 + 8) + *(_QWORD *)&v13[1].m_TypeUID + 40) )
   {
@@ -1280,154 +1288,158 @@ float __fastcall UFG::AIScriptInterfaceComponent::GetAttackTimeMaxDowned(UFG::AI
                                       + 40);
     v4 = !v14 || v14 != LocalPlayer;
   }
-  return *((float *)&v10->vfptr + v5 + 2 * (v4 + 2 * (v11 + 2 * (v9 + 52 + 3 * v6))));
+  return this->m_AttackTimeMaxDowned[m_CurrentBattleType][v9][v11][v4][v5];
 }
 
 // File Line: 918
 // RVA: 0x34F6B0
 void __fastcall UFG::AIScriptInterfaceComponent::ClearPositionToDefend(UFG::AIScriptInterfaceComponent *this)
 {
-  UFG::SimComponent *v1; // rdi
+  UFG::SimComponent *m_pSimComponent; // rdi
   unsigned __int8 v2; // cl
-  signed __int64 v3; // rbx
+  __int64 v3; // rbx
 
-  v1 = this->m_pTargetingSystemBaseComponent.m_pSimComponent;
-  *((_BYTE *)this + 2096) &= 0xBFu;
-  if ( v1 )
+  m_pSimComponent = this->m_pTargetingSystemBaseComponent.m_pSimComponent;
+  *((_BYTE *)this + 2096) &= ~0x40u;
+  if ( m_pSimComponent )
   {
-    v2 = *(_BYTE *)(*(_QWORD *)&v1[1].m_Flags + 40i64);
+    v2 = *(_BYTE *)(*(_QWORD *)&m_pSimComponent[1].m_Flags + 40i64);
     if ( v2 )
     {
       v3 = 56i64 * v2;
-      UFG::TargetingSimObject::SetTarget((UFG::TargetingSimObject *)(v3 + *(_QWORD *)&v1[1].m_TypeUID), 0i64);
-      UFG::TargetingSimObject::SetLock((UFG::TargetingSimObject *)(v3 + *(_QWORD *)&v1[1].m_TypeUID), 0);
+      UFG::TargetingSimObject::SetTarget(
+        (UFG::TargetingSimObject *)(v3 + *(_QWORD *)&m_pSimComponent[1].m_TypeUID),
+        0i64);
+      UFG::TargetingSimObject::SetLock((UFG::TargetingSimObject *)(v3 + *(_QWORD *)&m_pSimComponent[1].m_TypeUID), 0);
     }
   }
 }
 
 // File Line: 929
 // RVA: 0x387A40
-void __fastcall UFG::AIScriptInterfaceComponent::SetPositionToDefend(UFG::AIScriptInterfaceComponent *this, UFG::SimObject *marker_to_defend, float radius, bool crouch, bool abandon_when_compromised, bool abandon_when_no_gun)
+void __fastcall UFG::AIScriptInterfaceComponent::SetPositionToDefend(
+        UFG::AIScriptInterfaceComponent *this,
+        UFG::SimObject *marker_to_defend,
+        float radius,
+        bool crouch,
+        bool abandon_when_compromised,
+        bool abandon_when_no_gun)
 {
-  UFG::AIScriptInterfaceComponent *v6; // rbx
-  UFG::TargetingSystemBaseComponent *v7; // rcx
-  char v8; // di
+  UFG::TargetingSystemBaseComponent *m_pSimComponent; // rcx
   char v9; // al
 
-  v6 = this;
-  v7 = (UFG::TargetingSystemBaseComponent *)this->m_pTargetingSystemBaseComponent.m_pSimComponent;
-  v8 = crouch;
-  if ( v7 )
-    UFG::TargetingSystemBaseComponent::SetTarget(v7, eTARGET_TYPE_SCRIPTED_MARKER, marker_to_defend);
-  v9 = *((_BYTE *)v6 + 2096);
-  *((_BYTE *)v6 + 2097) &= 0xFCu;
-  v6->m_RadiusToDefend = radius;
-  *((_BYTE *)v6 + 2096) = (v8 << 7) | v9 & 0x3F | 0x40;
-  *((_BYTE *)v6 + 2097) |= abandon_when_compromised | (unsigned __int8)(2 * abandon_when_no_gun);
+  m_pSimComponent = (UFG::TargetingSystemBaseComponent *)this->m_pTargetingSystemBaseComponent.m_pSimComponent;
+  if ( m_pSimComponent )
+    UFG::TargetingSystemBaseComponent::SetTarget(m_pSimComponent, eTARGET_TYPE_SCRIPTED_MARKER, marker_to_defend);
+  v9 = *((_BYTE *)this + 2096);
+  *((_BYTE *)this + 2097) &= 0xFCu;
+  this->m_RadiusToDefend = radius;
+  *((_BYTE *)this + 2096) = (crouch << 7) | v9 & 0x3F | 0x40;
+  *((_BYTE *)this + 2097) |= abandon_when_compromised | (unsigned __int8)(2 * abandon_when_no_gun);
 }
 
 // File Line: 943
 // RVA: 0x362270
 UFG::qVector3 *__fastcall UFG::AIScriptInterfaceComponent::GetPositionToDefend(UFG::AIScriptInterfaceComponent *this)
 {
-  UFG::TransformNodeComponent *v1; // rbx
+  UFG::TransformNodeComponent *mNext; // rbx
 
-  v1 = *(UFG::TransformNodeComponent **)(56i64
-                                       * *(unsigned __int8 *)(*(_QWORD *)&this->m_pTargetingSystemBaseComponent.m_pSimComponent[1].m_Flags
-                                                            + 40i64)
-                                       + *(_QWORD *)&this->m_pTargetingSystemBaseComponent.m_pSimComponent[1].m_TypeUID
-                                       + 40);
-  if ( v1 )
-    v1 = (UFG::TransformNodeComponent *)v1->mChildren.mNode.mNext;
-  if ( !v1 )
+  mNext = *(UFG::TransformNodeComponent **)(56i64
+                                          * *(unsigned __int8 *)(*(_QWORD *)&this->m_pTargetingSystemBaseComponent.m_pSimComponent[1].m_Flags
+                                                               + 40i64)
+                                          + *(_QWORD *)&this->m_pTargetingSystemBaseComponent.m_pSimComponent[1].m_TypeUID
+                                          + 40);
+  if ( mNext )
+    mNext = (UFG::TransformNodeComponent *)mNext->mChildren.mNode.mNext;
+  if ( !mNext )
     return &UFG::qVector3::msZero;
-  UFG::TransformNodeComponent::UpdateWorldTransform(v1);
-  return (UFG::qVector3 *)&v1->mWorldTransform.v3;
+  UFG::TransformNodeComponent::UpdateWorldTransform(mNext);
+  return (UFG::qVector3 *)&mNext->mWorldTransform.v3;
 }
 
 // File Line: 958
 // RVA: 0x340760
-void __fastcall UFG::AIScriptInterfaceComponent::AddFollower(UFG::AIScriptInterfaceComponent *this, UFG::ActiveAIEntityComponent *follower)
+void __fastcall UFG::AIScriptInterfaceComponent::AddFollower(
+        UFG::AIScriptInterfaceComponent *this,
+        UFG::ActiveAIEntityComponent *follower)
 {
-  int v2; // er9
-  UFG::ActiveAIEntityComponent *v3; // r10
-  UFG::SimComponent **v4; // rax
-  signed __int64 v5; // r8
+  int v2; // r9d
+  UFG::SimComponent **p_m_pPointer; // rax
+  __int64 v5; // r8
   UFG::qSafePointer<UFG::SimComponent,UFG::ActiveAIEntityComponent> *v6; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v7; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v8; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v9; // rax
 
   v2 = 0;
-  v3 = follower;
-  v4 = &this->m_pFollower[0].m_pPointer;
+  p_m_pPointer = &this->m_pFollower[0].m_pPointer;
   v5 = 0i64;
-  while ( *v4 )
+  while ( *p_m_pPointer )
   {
     ++v5;
     ++v2;
-    v4 += 3;
+    p_m_pPointer += 3;
     if ( v5 >= 10 )
       return;
   }
   v6 = &this->m_pFollower[v2];
   if ( this->m_pFollower[v2].m_pPointer )
   {
-    v7 = v6->mPrev;
-    v8 = v6->mNext;
-    v7->mNext = v8;
-    v8->mPrev = v7;
-    v6->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v6->mPrev;
-    v6->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v6->mPrev;
+    mPrev = v6->mPrev;
+    mNext = v6->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    v6->mPrev = v6;
+    v6->mNext = v6;
   }
-  v6->m_pPointer = (UFG::SimComponent *)&v3->vfptr;
-  if ( v3 )
+  v6->m_pPointer = follower;
+  if ( follower )
   {
-    v9 = v3->m_SafePointerList.mNode.mPrev;
-    v9->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v6->mPrev;
+    v9 = follower->m_SafePointerList.mNode.UFG::AIEntityComponent::UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mPrev;
+    v9->mNext = v6;
     v6->mPrev = v9;
-    v6->mNext = &v3->m_SafePointerList.mNode;
-    v3->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v6->mPrev;
+    v6->mNext = &follower->m_SafePointerList.mNode;
+    follower->m_SafePointerList.mNode.UFG::AIEntityComponent::UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mPrev = v6;
   }
 }
 
 // File Line: 973
 // RVA: 0x3539F0
-void __fastcall UFG::AIScriptInterfaceComponent::DrawDebugInfo(UFG::AIScriptInterfaceComponent *this, Render::View *view)
+void __fastcall UFG::AIScriptInterfaceComponent::DrawDebugInfo(
+        UFG::AIScriptInterfaceComponent *this,
+        Render::View *view)
 {
-  UFG::SimObject *v2; // rbp
-  UFG::AIScriptInterfaceComponent *v3; // r14
-  UFG::TransformNodeComponent *v4; // rbp
-  UFG::SimComponent **v5; // rbx
-  signed __int64 v6; // rsi
+  UFG::SimObject *m_pSimObject; // rbp
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rbp
+  UFG::SimComponent **p_m_pPointer; // rbx
+  __int64 v6; // rsi
   UFG::SimComponent *v7; // rax
   UFG::SimObject *v8; // rcx
   UFG::TransformNodeComponent *v9; // rdi
-  __m128i v10; // xmm6
+  UFG::qColour v10; // xmm6
   UFG::TransformNodeComponent *v11; // rdx
-  float v12; // xmm1_4
-  float v13; // xmm0_4
-  Render::DebugDrawContext *v14; // rax
+  float y; // xmm1_4
+  float z; // xmm0_4
+  Render::DebugDrawContext *Context; // rax
   const char *v15; // rbx
   Render::DebugDrawContext *v16; // rax
-  UFG::qVector3 point; // [rsp+30h] [rbp-68h]
-  __int128 v18; // [rsp+40h] [rbp-58h]
-  UFG::qColour colour; // [rsp+50h] [rbp-48h]
+  UFG::qVector3 point; // [rsp+30h] [rbp-68h] BYREF
+  UFG::qColour v18; // [rsp+40h] [rbp-58h] BYREF
+  UFG::qColour colour; // [rsp+50h] [rbp-48h] BYREF
 
-  v2 = this->m_pSimObject;
-  v3 = this;
-  if ( v2 )
-    v4 = v2->m_pTransformNodeComponent;
+  m_pSimObject = this->m_pSimObject;
+  if ( m_pSimObject )
+    m_pTransformNodeComponent = m_pSimObject->m_pTransformNodeComponent;
   else
-    v4 = 0i64;
-  if ( this->m_DebugDrawFollowers && v4 )
+    m_pTransformNodeComponent = 0i64;
+  if ( this->m_DebugDrawFollowers && m_pTransformNodeComponent )
   {
-    v5 = &this->m_pFollower[0].m_pPointer;
+    p_m_pPointer = &this->m_pFollower[0].m_pPointer;
     v6 = 10i64;
     do
     {
-      v7 = *v5;
-      if ( *v5 )
+      v7 = *p_m_pPointer;
+      if ( *p_m_pPointer )
       {
         v8 = v7[6].m_pSimObject;
         v9 = *(UFG::TransformNodeComponent **)&v7[1].m_TypeUID;
@@ -1435,34 +1447,38 @@ void __fastcall UFG::AIScriptInterfaceComponent::DrawDebugInfo(UFG::AIScriptInte
         {
           if ( v9 )
           {
-            v10 = (__m128i)UFG::qColour::Green;
+            v10 = UFG::qColour::Green;
             if ( BYTE4(v8->m_UnboundComponentHandles.mNode.mPrev) )
-              v10 = (__m128i)UFG::qColour::Red;
+              v10 = UFG::qColour::Red;
             v11 = *(UFG::TransformNodeComponent **)&v7[1].m_TypeUID;
-            _mm_store_si128((__m128i *)&v18, v10);
-            UFG::DrawLine(v4, v11, (UFG::qColour *)&v18, 0.5);
-            _mm_store_si128((__m128i *)&colour, v10);
+            v18 = v10;
+            UFG::DrawLine(m_pTransformNodeComponent, v11, &v18, 0.5);
+            colour = v10;
             UFG::TransformNodeComponent::UpdateWorldTransform(v9);
-            v12 = v9->mWorldTransform.v3.y;
+            y = v9->mWorldTransform.v3.y;
             point.x = v9->mWorldTransform.v3.x;
-            v13 = v9->mWorldTransform.v3.z;
-            point.y = v12;
-            point.z = v13 + 0.5;
-            v14 = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(
-                                                Render::DebugDrawManager::mInstance,
-                                                1u);
-            Render::DebugDrawContext::DrawPoint(v14, &point, &colour, &UFG::qMatrix44::msIdentity, 0i64);
+            z = v9->mWorldTransform.v3.z;
+            point.y = y;
+            point.z = z + 0.5;
+            Context = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(
+                                                    Render::DebugDrawManager::mInstance,
+                                                    1u);
+            Render::DebugDrawContext::DrawPoint(Context, &point, &colour, &UFG::qMatrix44::msIdentity, 0i64);
           }
         }
       }
-      v5 += 3;
+      p_m_pPointer += 3;
       --v6;
     }
     while ( v6 );
-    UFG::TransformNodeComponent::UpdateWorldTransform(v4);
-    v15 = UFG::ScriptCommandNames[v3->m_CurrentScriptCommand];
+    UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+    v15 = UFG::ScriptCommandNames[this->m_CurrentScriptCommand];
     v16 = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 1u);
-    Render::DebugDrawContext::DrawText(v16, (UFG::qVector3 *)&v4->mWorldTransform.v3, &UFG::qColour::Red, v15);
+    Render::DebugDrawContext::DrawText(
+      v16,
+      (UFG::qVector3 *)&m_pTransformNodeComponent->mWorldTransform.v3,
+      &UFG::qColour::Red,
+      v15);
   }
 }
 

@@ -1,91 +1,103 @@
 // File Line: 45
 // RVA: 0x77F8F0
-void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::Math(Scaleform::GFx::AS3::Classes::fl::Math *this, Scaleform::GFx::AS3::ClassTraits::Traits *t)
+void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::Math(
+        Scaleform::GFx::AS3::Classes::fl::Math *this,
+        Scaleform::GFx::AS3::ClassTraits::Traits *t)
 {
-  Scaleform::GFx::AS3::Classes::fl::Math *v2; // rbx
-
-  v2 = this;
-  Scaleform::GFx::AS3::Class::Class((Scaleform::GFx::AS3::Class *)&this->vfptr, t);
-  v2->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl::Math::`vftable;
-  v2->LN10 = 2.302585092994046;
-  v2->E = 2.718281828459045;
-  v2->LN2 = 0.6931471805599453;
-  v2->LOG10E = 0.4342944819032518;
-  v2->LOG2E = 1.442695040888963;
-  v2->PI = 3.141592653589793;
-  v2->SQRT1_2 = 0.7071067811865476;
-  v2->SQRT2 = 1.414213562373095;
+  Scaleform::GFx::AS3::Class::Class(this, t);
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl::Math::`vftable;
+  this->LN10 = 2.302585092994046;
+  this->E = 2.718281828459045;
+  this->LN2 = 0.6931471805599453;
+  this->LOG10E = 0.4342944819032518;
+  this->LOG2E = 1.442695040888963;
+  this->PI = 3.141592653589793;
+  this->SQRT1_2 = 0.7071067811865476;
+  this->SQRT2 = 1.414213562373095;
 }
 
 // File Line: 50
 // RVA: 0x82AAC0
-void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::abs(Scaleform::GFx::AS3::Classes::fl::Math *this, long double *result, long double x)
+void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::abs(
+        Scaleform::GFx::AS3::Classes::fl::Math *this,
+        long double *result,
+        long double x)
 {
-  long double *v3; // rbx
-
-  v3 = result;
   if ( Scaleform::GFx::NumberUtil::IsNEGATIVE_ZERO(x) )
-    *v3 = 0.0;
+    *result = 0.0;
   else
-    *(_QWORD *)v3 = *(_QWORD *)&x & _xmm;
+    *(_QWORD *)result = *(_QWORD *)&x & _xmm;
 }
 
 // File Line: 59
 // RVA: 0x82AB80
-void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::acos(Scaleform::GFx::AS3::Classes::fl::Math *this, long double *result, long double x)
+void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::acos(
+        Scaleform::GFx::AS3::Classes::fl::Math *this,
+        long double *result,
+        long double x)
 {
   *result = acos(x);
 }
 
 // File Line: 65
 // RVA: 0x82D720
-void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::asin(Scaleform::GFx::AS3::Classes::fl::Math *this, long double *result, long double x)
+void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::asin(
+        Scaleform::GFx::AS3::Classes::fl::Math *this,
+        long double *result,
+        long double x)
 {
   *result = asin(x);
 }
 
 // File Line: 71
 // RVA: 0x82D870
-void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::atan(Scaleform::GFx::AS3::Classes::fl::Math *this, long double *result, long double x)
+void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::atan(
+        Scaleform::GFx::AS3::Classes::fl::Math *this,
+        long double *result,
+        long double x)
 {
   *result = atan(x);
 }
 
 // File Line: 77
 // RVA: 0x82D770
-void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::atan2(Scaleform::GFx::AS3::Classes::fl::Math *this, long double *result, long double y, long double x)
+void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::atan2(
+        Scaleform::GFx::AS3::Classes::fl::Math *this,
+        long double *result,
+        long double y,
+        long double x)
 {
-  double v4; // xmm0_8
+  double PI; // xmm0_8
   double v5; // xmm0_8
   double v6; // xmm0_8
   double v7; // xmm0_8
 
-  if ( y == 1.797693134862316e308/*+Inf*/ )
+  if ( y == INFINITY )
   {
-    v4 = this->PI;
-    if ( x == 1.797693134862316e308/*+Inf*/ )
+    PI = this->PI;
+    if ( x == INFINITY )
     {
-      *result = v4 * 0.25;
+      *result = PI * 0.25;
     }
     else
     {
-      if ( x == -1.797693134862316e308/*-Inf*/ )
-        v5 = v4 * 0.75;
+      if ( x == -INFINITY )
+        v5 = PI * 0.75;
       else
-        v5 = v4 * 0.5;
+        v5 = PI * 0.5;
       *result = v5;
     }
   }
-  else if ( y == -1.797693134862316e308/*-Inf*/ )
+  else if ( y == -INFINITY )
   {
     v6 = this->PI;
-    if ( x == 1.797693134862316e308/*+Inf*/ )
+    if ( x == INFINITY )
     {
       *result = v6 * -0.25;
     }
     else
     {
-      if ( x == -1.797693134862316e308/*-Inf*/ )
+      if ( x == -INFINITY )
         v7 = v6 * -0.75;
       else
         v7 = v6 * -0.5;
@@ -100,142 +112,174 @@ void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::atan2(Scaleform::GFx::AS
 
 // File Line: 102
 // RVA: 0x82E990
-int Scaleform::GFx::AS3::Classes::fl::Math::ceil(...)
+// local variable allocation has failed, the output may be wrong!
+void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::ceil(
+        Scaleform::GFx::AS3::Classes::fl::Math *this,
+        long double *result,
+        double x)
 {
-  __int64 v3; // rcx
+  int v3; // ecx
 
-  v3 = (unsigned int)(signed int)*(double *)&x;
-  if ( v3 != 0x8000000000000000i64 && (double)(signed int)v3 != *(double *)&x )
-    *(double *)&x = (double)((_mm_movemask_pd(_mm_unpckl_pd((__m128d)x, (__m128d)x)) & 1 ^ 1) + (signed int)v3);
-  *(_QWORD *)result = x;
+  v3 = (int)x;
+  if ( (double)v3 != x )
+    x = (double)(!(_mm_movemask_pd(_mm_unpacklo_pd(*(__m128d *)&x, *(__m128d *)&x)) & 1) + v3);
+  *result = x;
 }
 
 // File Line: 108
 // RVA: 0x8328C0
-void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::cos(Scaleform::GFx::AS3::Classes::fl::Math *this, long double *result, long double x)
+void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::cos(
+        Scaleform::GFx::AS3::Classes::fl::Math *this,
+        long double *result,
+        double x)
 {
   *result = cos(x);
 }
 
 // File Line: 114
 // RVA: 0x8475A0
-void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::exp(Scaleform::GFx::AS3::Classes::fl::Math *this, long double *result, long double x)
+void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::exp(
+        Scaleform::GFx::AS3::Classes::fl::Math *this,
+        long double *result,
+        double x)
 {
   *result = exp(x);
 }
 
 // File Line: 120
 // RVA: 0x848760
-int Scaleform::GFx::AS3::Classes::fl::Math::floor(...)
+// local variable allocation has failed, the output may be wrong!
+void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::floor(
+        Scaleform::GFx::AS3::Classes::fl::Math *this,
+        long double *result,
+        double x)
 {
-  __int64 v3; // rcx
+  int v3; // ecx
 
-  v3 = (unsigned int)(signed int)*(double *)&x;
-  if ( v3 != 0x8000000000000000i64 && (double)(signed int)v3 != *(double *)&x )
-    *(double *)&x = (double)(signed int)(v3 - (_mm_movemask_pd(_mm_unpckl_pd((__m128d)x, (__m128d)x)) & 1));
-  *(_QWORD *)result = x;
+  v3 = (int)x;
+  if ( (double)v3 != x )
+    x = (double)(v3 - (_mm_movemask_pd(_mm_unpacklo_pd(*(__m128d *)&x, *(__m128d *)&x)) & 1));
+  *result = x;
 }
 
 // File Line: 126
 // RVA: 0x852FC0
-void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::log(Scaleform::GFx::AS3::Classes::fl::Math *this, long double *result, long double x)
+void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::log(
+        Scaleform::GFx::AS3::Classes::fl::Math *this,
+        long double *result,
+        double x)
 {
   *result = log(x);
 }
 
 // File Line: 132
 // RVA: 0x85A080
-int Scaleform::GFx::AS3::Classes::fl::Math::round(...)
+// local variable allocation has failed, the output may be wrong!
+void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::round(
+        Scaleform::GFx::AS3::Classes::fl::Math *this,
+        long double *result,
+        double x)
 {
-  __int64 v3; // rcx
+  int v3; // ecx
 
-  if ( (x & 0x7FF0000000000000i64) != 9218868437227405312i64 )
+  if ( (*(_QWORD *)&x & 0x7FF0000000000000i64) != 0x7FF0000000000000i64 )
   {
-    *(double *)&x = *(double *)&x + 0.5;
-    v3 = (unsigned int)(signed int)*(double *)&x;
-    if ( v3 != 0x8000000000000000i64 && (double)(signed int)v3 != *(double *)&x )
-      *(double *)&x = (double)(signed int)(v3 - (_mm_movemask_pd(_mm_unpckl_pd((__m128d)x, (__m128d)x)) & 1));
+    x = x + 0.5;
+    v3 = (int)x;
+    if ( (double)v3 != x )
+      x = (double)(v3 - (_mm_movemask_pd(_mm_unpacklo_pd(*(__m128d *)&x, *(__m128d *)&x)) & 1));
   }
-  *(_QWORD *)result = x;
+  *result = x;
 }
 
 // File Line: 143
 // RVA: 0x85F450
-void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::sin(Scaleform::GFx::AS3::Classes::fl::Math *this, long double *result, long double x)
+void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::sin(
+        Scaleform::GFx::AS3::Classes::fl::Math *this,
+        long double *result,
+        double x)
 {
   *result = sin(x);
 }
 
 // File Line: 149
 // RVA: 0x85F8C0
-void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::sqrt(Scaleform::GFx::AS3::Classes::fl::Math *this, long double *result, long double x)
+void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::sqrt(
+        Scaleform::GFx::AS3::Classes::fl::Math *this,
+        long double *result,
+        double x)
 {
   *result = sqrt(x);
 }
 
 // File Line: 155
 // RVA: 0x860A10
-void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::tan(Scaleform::GFx::AS3::Classes::fl::Math *this, long double *result, long double x)
+void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::tan(
+        Scaleform::GFx::AS3::Classes::fl::Math *this,
+        long double *result,
+        long double x)
 {
   *result = tan(x);
 }
 
 // File Line: 161
 // RVA: 0x857CA0
-void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::pow(Scaleform::GFx::AS3::Classes::fl::Math *this, long double *result, long double x, long double y)
+void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::pow(
+        Scaleform::GFx::AS3::Classes::fl::Math *this,
+        long double *result,
+        double x,
+        double y)
 {
   if ( y == 0.0 )
   {
     *result = 1.0;
   }
-  else if ( x != 1.0 && x != -1.0 || (*(_QWORD *)&y & 0x7FF0000000000000i64) != 9218868437227405312i64 )
+  else if ( (x == 1.0 || x == -1.0) && (*(_QWORD *)&y & 0x7FF0000000000000i64) == 0x7FF0000000000000i64 )
   {
-    *result = pow(x, y);
+    *result = Scaleform::GFx::NumberUtil::NaN();
   }
   else
   {
-    *result = Scaleform::GFx::NumberUtil::NaN();
+    *result = pow(x, y);
   }
 }
 
 // File Line: 172
 // RVA: 0x8541B0
-void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::max(Scaleform::GFx::AS3::Classes::fl::Math *this, Scaleform::GFx::AS3::Value *result, unsigned int argc, Scaleform::GFx::AS3::Value *const argv)
+void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::max(
+        Scaleform::GFx::AS3::Classes::fl::Math *this,
+        Scaleform::GFx::AS3::Value *result,
+        unsigned int argc,
+        Scaleform::GFx::AS3::Value *const argv)
 {
-  Scaleform::GFx::AS3::Value *v4; // r14
-  unsigned int v5; // ebp
-  Scaleform::GFx::AS3::Value *v6; // rsi
-  unsigned int v7; // ebx
+  int v7; // ebx
   long double v8; // xmm0_8
   long double v9; // xmm0_8
-  Scaleform::GFx::AS3::Boolean3 v10; // [rsp+20h] [rbp-28h]
-  Scaleform::GFx::AS3::CheckResult resulta; // [rsp+60h] [rbp+18h]
+  Scaleform::GFx::AS3::Boolean3 v10[10]; // [rsp+20h] [rbp-28h] BYREF
+  Scaleform::GFx::AS3::CheckResult resulta; // [rsp+60h] [rbp+18h] BYREF
 
-  v4 = argv;
-  v5 = argc;
-  v6 = result;
   if ( argc )
   {
     Scaleform::GFx::AS3::Value::Assign(result, argv);
     v7 = 1;
-    if ( v5 <= 1 )
+    if ( argc <= 1 )
     {
 LABEL_8:
-      Scaleform::GFx::AS3::Value::ToNumberValue(v6, &resulta);
+      Scaleform::GFx::AS3::Value::ToNumberValue(result, &resulta);
     }
     else
     {
-      while ( Scaleform::GFx::AS3::AbstractLessThan(&resulta, &v10, &v4[v7], v6)->Result )
+      while ( Scaleform::GFx::AS3::AbstractLessThan(&resulta, v10, &argv[v7], result)->Result )
       {
-        if ( v10 == undefined3 )
+        if ( v10[0] == undefined3 )
         {
           v8 = Scaleform::GFx::NumberUtil::NaN();
-          Scaleform::GFx::AS3::Value::SetNumber(v6, v8);
+          Scaleform::GFx::AS3::Value::SetNumber(result, v8);
           return;
         }
-        if ( v10 == 2 )
-          Scaleform::GFx::AS3::Value::Assign(v6, &v4[v7]);
-        if ( ++v7 >= v5 )
+        if ( v10[0] == false3 )
+          Scaleform::GFx::AS3::Value::Assign(result, &argv[v7]);
+        if ( ++v7 >= argc )
           goto LABEL_8;
       }
     }
@@ -243,48 +287,46 @@ LABEL_8:
   else
   {
     v9 = Scaleform::GFx::NumberUtil::NEGATIVE_INFINITY();
-    Scaleform::GFx::AS3::Value::SetNumber(v6, v9);
+    Scaleform::GFx::AS3::Value::SetNumber(result, v9);
   }
 }
 
 // File Line: 200
 // RVA: 0x854560
-void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::min(Scaleform::GFx::AS3::Classes::fl::Math *this, Scaleform::GFx::AS3::Value *result, unsigned int argc, Scaleform::GFx::AS3::Value *const argv)
+void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::min(
+        Scaleform::GFx::AS3::Classes::fl::Math *this,
+        Scaleform::GFx::AS3::Value *result,
+        unsigned int argc,
+        Scaleform::GFx::AS3::Value *const argv)
 {
-  Scaleform::GFx::AS3::Value *v4; // r14
-  unsigned int v5; // ebp
-  Scaleform::GFx::AS3::Value *v6; // rsi
-  unsigned int v7; // ebx
+  int v7; // ebx
   long double v8; // xmm0_8
   long double v9; // xmm0_8
-  Scaleform::GFx::AS3::Boolean3 v10; // [rsp+20h] [rbp-28h]
-  Scaleform::GFx::AS3::CheckResult resulta; // [rsp+60h] [rbp+18h]
+  Scaleform::GFx::AS3::Boolean3 v10[10]; // [rsp+20h] [rbp-28h] BYREF
+  Scaleform::GFx::AS3::CheckResult resulta; // [rsp+60h] [rbp+18h] BYREF
 
-  v4 = argv;
-  v5 = argc;
-  v6 = result;
   if ( argc )
   {
     Scaleform::GFx::AS3::Value::Assign(result, argv);
     v7 = 1;
-    if ( v5 <= 1 )
+    if ( argc <= 1 )
     {
 LABEL_8:
-      Scaleform::GFx::AS3::Value::ToNumberValue(v6, &resulta);
+      Scaleform::GFx::AS3::Value::ToNumberValue(result, &resulta);
     }
     else
     {
-      while ( Scaleform::GFx::AS3::AbstractLessThan(&resulta, &v10, v6, &v4[v7])->Result )
+      while ( Scaleform::GFx::AS3::AbstractLessThan(&resulta, v10, result, &argv[v7])->Result )
       {
-        if ( v10 == undefined3 )
+        if ( v10[0] == undefined3 )
         {
           v8 = Scaleform::GFx::NumberUtil::NaN();
-          Scaleform::GFx::AS3::Value::SetNumber(v6, v8);
+          Scaleform::GFx::AS3::Value::SetNumber(result, v8);
           return;
         }
-        if ( v10 == 2 )
-          Scaleform::GFx::AS3::Value::Assign(v6, &v4[v7]);
-        if ( ++v7 >= v5 )
+        if ( v10[0] == false3 )
+          Scaleform::GFx::AS3::Value::Assign(result, &argv[v7]);
+        if ( ++v7 >= argc )
           goto LABEL_8;
       }
     }
@@ -292,55 +334,55 @@ LABEL_8:
   else
   {
     v9 = Scaleform::GFx::NumberUtil::POSITIVE_INFINITY();
-    Scaleform::GFx::AS3::Value::SetNumber(v6, v9);
+    Scaleform::GFx::AS3::Value::SetNumber(result, v9);
   }
 }
 
 // File Line: 228
 // RVA: 0x858BE0
-void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::random(Scaleform::GFx::AS3::Classes::fl::Math *this, long double *result)
+void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::random(
+        Scaleform::GFx::AS3::Classes::fl::Math *this,
+        long double *result)
 {
-  *result = (double)(signed int)Scaleform::Alg::Random::NextRandom() * 2.328306437080797e-10;
+  *result = (double)(int)Scaleform::Alg::Random::NextRandom() * 2.328306437080797e-10;
 }
 
 // File Line: 235
 // RVA: 0x7B2CC0
-void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::Call(Scaleform::GFx::AS3::Classes::fl::Math *this, Scaleform::GFx::AS3::Value *_this, Scaleform::GFx::AS3::Value *result, unsigned int argc)
+void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::Call(
+        Scaleform::GFx::AS3::Classes::fl::Math *this,
+        Scaleform::GFx::AS3::Value *_this,
+        Scaleform::GFx::AS3::Value *result,
+        unsigned int argc)
 {
-  Scaleform::GFx::AS3::Classes::fl::Math *v4; // rbx
   Scaleform::GFx::AS3::VM::Error *v5; // rax
-  Scaleform::GFx::ASStringNode *v6; // rcx
-  bool v7; // zf
-  Scaleform::GFx::AS3::VM::Error v8; // [rsp+28h] [rbp-20h]
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  Scaleform::GFx::AS3::VM::Error v8; // [rsp+28h] [rbp-20h] BYREF
 
-  v4 = this;
-  Scaleform::GFx::AS3::VM::Error::Error(&v8, eMathNotFunctionError, this->pTraits.pObject->pVM);
-  Scaleform::GFx::AS3::VM::ThrowErrorInternal(v4->pTraits.pObject->pVM, v5, &Scaleform::GFx::AS3::fl::TypeErrorTI);
-  v6 = v8.Message.pNode;
-  v7 = v8.Message.pNode->RefCount == 1;
-  --v6->RefCount;
-  if ( v7 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v6);
+  Scaleform::GFx::AS3::VM::Error::Error(&v8, 1075, this->pTraits.pObject->pVM);
+  Scaleform::GFx::AS3::VM::ThrowErrorInternal(this->pTraits.pObject->pVM, v5, &Scaleform::GFx::AS3::fl::TypeErrorTI);
+  pNode = v8.Message.pNode;
+  if ( v8.Message.pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
 }
 
 // File Line: 240
 // RVA: 0x7B8AF0
-void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::Construct(Scaleform::GFx::AS3::Classes::fl::Math *this, Scaleform::GFx::AS3::Value *_this, unsigned int argc, Scaleform::GFx::AS3::Value *argv)
+void __fastcall Scaleform::GFx::AS3::Classes::fl::Math::Construct(
+        Scaleform::GFx::AS3::Classes::fl::Math *this,
+        Scaleform::GFx::AS3::Value *_this,
+        unsigned int argc,
+        Scaleform::GFx::AS3::Value *argv)
 {
-  Scaleform::GFx::AS3::Classes::fl::Math *v4; // rbx
   Scaleform::GFx::AS3::VM::Error *v5; // rax
-  Scaleform::GFx::ASStringNode *v6; // rcx
-  bool v7; // zf
-  Scaleform::GFx::AS3::VM::Error v8; // [rsp+28h] [rbp-20h]
+  Scaleform::GFx::ASStringNode *pNode; // rcx
+  Scaleform::GFx::AS3::VM::Error v8; // [rsp+28h] [rbp-20h] BYREF
 
-  v4 = this;
-  Scaleform::GFx::AS3::VM::Error::Error(&v8, eMathNotConstructorError, this->pTraits.pObject->pVM);
-  Scaleform::GFx::AS3::VM::ThrowErrorInternal(v4->pTraits.pObject->pVM, v5, &Scaleform::GFx::AS3::fl::TypeErrorTI);
-  v6 = v8.Message.pNode;
-  v7 = v8.Message.pNode->RefCount == 1;
-  --v6->RefCount;
-  if ( v7 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v6);
+  Scaleform::GFx::AS3::VM::Error::Error(&v8, 1076, this->pTraits.pObject->pVM);
+  Scaleform::GFx::AS3::VM::ThrowErrorInternal(this->pTraits.pObject->pVM, v5, &Scaleform::GFx::AS3::fl::TypeErrorTI);
+  pNode = v8.Message.pNode;
+  if ( v8.Message.pNode->RefCount-- == 1 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(pNode);
 }
 
 // File Line: 267
@@ -423,7 +465,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243AB40 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Classes::fl::Math,5,double,double>::Method = Scaleform::GFx::AS3::Classes::fl::Math::ceil;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Classes::fl::Math,5,double,double>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Classes::fl::Math *, long double *, long double))Scaleform::GFx::AS3::Classes::fl::Math::ceil;
   return result;
 }
 
@@ -437,7 +479,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243AB50 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Classes::fl::Math,6,double,double>::Method = Scaleform::GFx::AS3::Classes::fl::Math::cos;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Classes::fl::Math,6,double,double>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Classes::fl::Math *, long double *, long double))Scaleform::GFx::AS3::Classes::fl::Math::cos;
   return result;
 }
 
@@ -451,7 +493,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243AB60 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Classes::fl::Math,7,double,double>::Method = Scaleform::GFx::AS3::Classes::fl::Math::exp;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Classes::fl::Math,7,double,double>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Classes::fl::Math *, long double *, long double))Scaleform::GFx::AS3::Classes::fl::Math::exp;
   return result;
 }
 
@@ -465,7 +507,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243AB70 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Classes::fl::Math,8,double,double>::Method = Scaleform::GFx::AS3::Classes::fl::Math::floor;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Classes::fl::Math,8,double,double>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Classes::fl::Math *, long double *, long double))Scaleform::GFx::AS3::Classes::fl::Math::floor;
   return result;
 }
 
@@ -479,7 +521,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243AB80 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Classes::fl::Math,9,double,double>::Method = Scaleform::GFx::AS3::Classes::fl::Math::log;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Classes::fl::Math,9,double,double>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Classes::fl::Math *, long double *, long double))Scaleform::GFx::AS3::Classes::fl::Math::log;
   return result;
 }
 
@@ -493,7 +535,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243AB90 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Classes::fl::Math,10,double,double>::Method = Scaleform::GFx::AS3::Classes::fl::Math::round;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Classes::fl::Math,10,double,double>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Classes::fl::Math *, long double *, long double))Scaleform::GFx::AS3::Classes::fl::Math::round;
   return result;
 }
 
@@ -507,7 +549,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243ABA0 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Classes::fl::Math,11,double,double>::Method = Scaleform::GFx::AS3::Classes::fl::Math::sin;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Classes::fl::Math,11,double,double>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Classes::fl::Math *, long double *, long double))Scaleform::GFx::AS3::Classes::fl::Math::sin;
   return result;
 }
 
@@ -521,7 +563,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243ABB0 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Classes::fl::Math,12,double,double>::Method = Scaleform::GFx::AS3::Classes::fl::Math::sqrt;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Classes::fl::Math,12,double,double>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Classes::fl::Math *, long double *, long double))Scaleform::GFx::AS3::Classes::fl::Math::sqrt;
   return result;
 }
 
@@ -549,7 +591,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc2_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243ABD0 = v1;
-  Scaleform::GFx::AS3::ThunkFunc2<Scaleform::GFx::AS3::Classes::fl::Math,14,double,double,double>::Method = Scaleform::GFx::AS3::Classes::fl::Math::pow;
+  Scaleform::GFx::AS3::ThunkFunc2<Scaleform::GFx::AS3::Classes::fl::Math,14,double,double,double>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Classes::fl::Math *, long double *, long double, long double))Scaleform::GFx::AS3::Classes::fl::Math::pow;
   return result;
 }
 
@@ -563,7 +605,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc2_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243ABE0 = v1;
-  Scaleform::GFx::AS3::ThunkFunc2<Scaleform::GFx::AS3::Classes::fl::Math,15,Scaleform::GFx::AS3::Value,unsigned int,Scaleform::GFx::AS3::Value const *>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Classes::fl::Math *, Scaleform::GFx::AS3::Value *, unsigned int, Scaleform::GFx::AS3::Value *))Scaleform::GFx::AS3::Classes::fl::Math::max;
+  Scaleform::GFx::AS3::ThunkFunc2<Scaleform::GFx::AS3::Classes::fl::Math,15,Scaleform::GFx::AS3::Value,unsigned int,Scaleform::GFx::AS3::Value const *>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Classes::fl::Math *, Scaleform::GFx::AS3::Value *, unsigned int, Scaleform::GFx::AS3::Value *))Scaleform::GFx::AS3::Classes::fl::Math::max;
   return result;
 }
 
@@ -577,7 +619,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc2_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243ABF0 = v1;
-  Scaleform::GFx::AS3::ThunkFunc2<Scaleform::GFx::AS3::Classes::fl::Math,16,Scaleform::GFx::AS3::Value,unsigned int,Scaleform::GFx::AS3::Value const *>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Classes::fl::Math *, Scaleform::GFx::AS3::Value *, unsigned int, Scaleform::GFx::AS3::Value *))Scaleform::GFx::AS3::Classes::fl::Math::min;
+  Scaleform::GFx::AS3::ThunkFunc2<Scaleform::GFx::AS3::Classes::fl::Math,16,Scaleform::GFx::AS3::Value,unsigned int,Scaleform::GFx::AS3::Value const *>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Classes::fl::Math *, Scaleform::GFx::AS3::Value *, unsigned int, Scaleform::GFx::AS3::Value *))Scaleform::GFx::AS3::Classes::fl::Math::min;
   return result;
 }
 
@@ -597,25 +639,23 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
 
 // File Line: 356
 // RVA: 0x7409E0
-Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl::Math::MakeClassTraits(Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result, Scaleform::GFx::AS3::VM *vm)
+Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl::Math::MakeClassTraits(
+        Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result,
+        Scaleform::GFx::AS3::VM *vm)
 {
-  Scaleform::GFx::AS3::VM *v2; // rbp
-  Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *v3; // rbx
-  Scaleform::MemoryHeap *v4; // rsi
+  Scaleform::MemoryHeap *MHeap; // rsi
   Scaleform::GFx::AS3::ClassTraits::Traits *v5; // rax
   Scaleform::GFx::AS3::ClassTraits::Traits *v6; // rdi
   Scaleform::GFx::AS3::InstanceTraits::CTraits *v7; // rax
   Scaleform::GFx::AS3::InstanceTraits::CTraits *v8; // rdi
   Scaleform::GFx::AS3::Classes::fl::Math *v9; // rax
 
-  v2 = vm;
-  v3 = result;
-  v4 = vm->MHeap;
-  v5 = (Scaleform::GFx::AS3::ClassTraits::Traits *)v4->vfptr->Alloc(v4, 208ui64, 0i64);
+  MHeap = vm->MHeap;
+  v5 = (Scaleform::GFx::AS3::ClassTraits::Traits *)MHeap->vfptr->Alloc(MHeap, 208ui64, 0i64);
   v6 = v5;
   if ( v5 )
   {
-    Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl::MathCI);
+    Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, vm, &Scaleform::GFx::AS3::fl::MathCI);
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Math::`vftable;
   }
@@ -623,12 +663,12 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   {
     v6 = 0i64;
   }
-  v3->pV = v6;
-  v7 = (Scaleform::GFx::AS3::InstanceTraits::CTraits *)v4->vfptr->Alloc(v4, 240ui64, 0i64);
+  result->pV = v6;
+  v7 = (Scaleform::GFx::AS3::InstanceTraits::CTraits *)MHeap->vfptr->Alloc(MHeap, 240ui64, 0i64);
   v8 = v7;
   if ( v7 )
   {
-    Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, v2, &Scaleform::GFx::AS3::fl::MathCI);
+    Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, vm, &Scaleform::GFx::AS3::fl::MathCI);
     v8->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
   }
   else
@@ -636,11 +676,11 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
     v8 = 0i64;
   }
   Scaleform::GFx::AS3::ClassTraits::Traits::SetInstanceTraits(
-    v3->pV,
+    result->pV,
     (Scaleform::Pickable<Scaleform::GFx::AS3::InstanceTraits::Traits>)v8);
-  v9 = (Scaleform::GFx::AS3::Classes::fl::Math *)v4->vfptr->Alloc(v4, 136ui64, 0i64);
+  v9 = (Scaleform::GFx::AS3::Classes::fl::Math *)MHeap->vfptr->Alloc(MHeap, 136ui64, 0i64);
   if ( v9 )
-    Scaleform::GFx::AS3::Classes::fl::Math::Math(v9, v3->pV);
-  return v3;
+    Scaleform::GFx::AS3::Classes::fl::Math::Math(v9, result->pV);
+  return result;
 }
 

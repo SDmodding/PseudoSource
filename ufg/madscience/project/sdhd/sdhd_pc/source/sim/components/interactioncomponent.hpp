@@ -2,36 +2,28 @@
 // RVA: 0x518000
 void __fastcall UFG::InteractionPoint::InteractionPoint(UFG::InteractionPoint *this)
 {
-  UFG::InteractionPoint *v1; // rbx
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v2; // [rsp+48h] [rbp+10h]
-
-  v1 = this;
-  UFG::qSafePointerNode<UFG::InteractionPoint>::qSafePointerNode<UFG::InteractionPoint>((UFG::qSafePointerNode<UFG::InteractionPoint> *)&this->vfptr);
-  v1->vfptr = (UFG::qSafePointerNode<UFG::InteractionPoint>Vtbl *)&UFG::InteractionPoint::`vftable;
-  v1->m_InteractorList.p = 0i64;
-  *(_QWORD *)&v1->m_InteractorList.size = 0i64;
-  v1->m_eInteractionPointUpdate = 0;
-  v2 = &v1->m_pSimObject;
-  v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->m_pSimObject.m_pPointer = 0i64;
-  v1->m_uBoneUID = UFG::gNullQSymbolUC;
-  v1->m_eOffsetTarget = 0;
-  v1->m_bIsActive = 0;
+  UFG::qSafePointerNode<UFG::InteractionPoint>::qSafePointerNode<UFG::InteractionPoint>(this);
+  this->vfptr = (UFG::qSafePointerNode<UFG::InteractionPoint>Vtbl *)&UFG::InteractionPoint::`vftable;
+  this->m_InteractorList.p = 0i64;
+  *(_QWORD *)&this->m_InteractorList.size = 0i64;
+  this->m_eInteractionPointUpdate = eINTERACTION_POINT_UPDATE_INVALID;
+  this->m_pSimObject.mPrev = &this->m_pSimObject;
+  this->m_pSimObject.mNext = &this->m_pSimObject;
+  this->m_pSimObject.m_pPointer = 0i64;
+  this->m_uBoneUID = UFG::gNullQSymbolUC;
+  this->m_eOffsetTarget = eTARGET_TYPE_INVALID;
+  this->m_bIsActive = 0;
 }
 
 // File Line: 107
 // RVA: 0x51F1E0
 UFG::ComponentIDDesc *__fastcall UFG::InteractorComponent::AccessComponentDesc()
 {
-  UFG::ComponentIDDesc *v0; // rax
-  UFG::ComponentIDDesc result; // [rsp+20h] [rbp-18h]
+  UFG::ComponentIDDesc result; // [rsp+20h] [rbp-18h] BYREF
 
   if ( !UFG::InteractorComponent::_DescInit )
   {
-    v0 = UFG::Simulation_GetNewBaseDesc(&result);
-    *(_QWORD *)&UFG::InteractorComponent::_TypeIDesc.mBaseTypeIndex = *(_QWORD *)&v0->mBaseTypeIndex;
-    UFG::InteractorComponent::_TypeIDesc.mChildren = v0->mChildren;
+    UFG::InteractorComponent::_TypeIDesc = *UFG::Simulation_GetNewBaseDesc(&result);
     UFG::InteractorComponent::_DescInit = 1;
     UFG::InteractorComponent::_TypeUID = UFG::InteractorComponent::_TypeIDesc.mChildBitMask | (UFG::InteractorComponent::_TypeIDesc.mBaseTypeIndex << 25);
     UFG::InteractorComponent::_InteractorComponentTypeUID = UFG::InteractorComponent::_TypeIDesc.mChildBitMask | (UFG::InteractorComponent::_TypeIDesc.mBaseTypeIndex << 25);
@@ -43,14 +35,11 @@ UFG::ComponentIDDesc *__fastcall UFG::InteractorComponent::AccessComponentDesc()
 // RVA: 0x51F170
 UFG::ComponentIDDesc *__fastcall UFG::InteractableComponent::AccessComponentDesc()
 {
-  UFG::ComponentIDDesc *v0; // rax
-  UFG::ComponentIDDesc result; // [rsp+20h] [rbp-18h]
+  UFG::ComponentIDDesc result; // [rsp+20h] [rbp-18h] BYREF
 
   if ( !UFG::InteractableComponent::_DescInit )
   {
-    v0 = UFG::Simulation_GetNewBaseDesc(&result);
-    *(_QWORD *)&UFG::InteractableComponent::_TypeIDesc.mBaseTypeIndex = *(_QWORD *)&v0->mBaseTypeIndex;
-    UFG::InteractableComponent::_TypeIDesc.mChildren = v0->mChildren;
+    UFG::InteractableComponent::_TypeIDesc = *UFG::Simulation_GetNewBaseDesc(&result);
     UFG::InteractableComponent::_DescInit = 1;
     UFG::InteractableComponent::_TypeUID = UFG::InteractableComponent::_TypeIDesc.mChildBitMask | (UFG::InteractableComponent::_TypeIDesc.mBaseTypeIndex << 25);
     UFG::InteractableComponent::_InteractableComponentTypeUID = UFG::InteractableComponent::_TypeIDesc.mChildBitMask | (UFG::InteractableComponent::_TypeIDesc.mBaseTypeIndex << 25);

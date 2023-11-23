@@ -30,7 +30,7 @@ void dynamic_initializer_for__hkpWorldCinfoClass__()
     &hkpWorldCinfo_Default,
     0i64,
     0,
-    0x12u);
+    18);
 }
 
 // File Line: 241
@@ -42,23 +42,24 @@ hkClass *__fastcall hkpWorldCinfo::staticClass()
 
 // File Line: 248
 // RVA: 0xD4FCF0
-void __fastcall finishLoadedObjecthkpWorldCinfo(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpWorldCinfo(hkpWorldCinfo *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpWorldCinfo::hkpWorldCinfo);
+  if ( p )
+    hkpWorldCinfo::hkpWorldCinfo(p, finishing);
 }
 
 // File Line: 254
 // RVA: 0xD4FD10
-void __fastcall cleanupLoadedObjecthkpWorldCinfo(void *p)
+void __fastcall cleanupLoadedObjecthkpWorldCinfo(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 258
 // RVA: 0xD4FD20
 hkBaseObjectVtbl *__fastcall getVtablehkpWorldCinfo()
 {
-  hkpWorldCinfo v1; // [rsp+20h] [rbp-108h]
+  hkpWorldCinfo v1; // [rsp+20h] [rbp-108h] BYREF
 
   hkpWorldCinfo::hkpWorldCinfo(&v1, 0);
   return v1.vfptr;
@@ -75,8 +76,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpWorldCinfoTypeInfo__()
   hkpWorldCinfoTypeInfo.m_typeName = "hkpWorldCinfo";
   hkpWorldCinfoTypeInfo.m_vtable = result;
   hkpWorldCinfoTypeInfo.m_scopedName = "!hkpWorldCinfo";
-  hkpWorldCinfoTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpWorldCinfo;
-  hkpWorldCinfoTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpWorldCinfo;
+  hkpWorldCinfoTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpWorldCinfo;
+  hkpWorldCinfoTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpWorldCinfo;
   return result;
 }
 

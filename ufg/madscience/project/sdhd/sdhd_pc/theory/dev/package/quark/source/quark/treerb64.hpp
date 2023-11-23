@@ -1,20 +1,20 @@
 // File Line: 185
 // RVA: 0x1C0F0
-void __fastcall UFG::qTreeRB64<Render::PersistentSkinningCacheNode,Render::PersistentSkinningCacheNode,1>::~qTreeRB64<Render::PersistentSkinningCacheNode,Render::PersistentSkinningCacheNode,1>(UFG::qTreeRB64<Render::PersistentSkinningCacheNode,Render::PersistentSkinningCacheNode,1> *this)
+void __fastcall UFG::qTreeRB64<Render::PersistentSkinningCacheNode,Render::PersistentSkinningCacheNode,1>::~qTreeRB64<Render::PersistentSkinningCacheNode,Render::PersistentSkinningCacheNode,1>(
+        UFG::qTreeRB64<Render::PersistentSkinningCacheNode,Render::PersistentSkinningCacheNode,1> *this)
 {
-  UFG::qTreeRB64<Render::PersistentSkinningCacheNode,Render::PersistentSkinningCacheNode,1> *v1; // rbx
-
-  v1 = this;
   UFG::qTreeRB64<PoseCacheNode,PoseCacheNode,1>::DeleteAll(this);
-  v1->mTree.mRoot.mParent = (UFG::qBaseNodeVariableRB<unsigned __int64> *)((unsigned __int64)&v1->mTree.mNULL | (_QWORD)v1->mTree.mRoot.mParent & 1);
-  v1->mTree.mRoot.mChild[0] = &v1->mTree.mNULL;
-  v1->mTree.mRoot.mChild[1] = &v1->mTree.mNULL;
-  v1->mTree.mCount = 0;
+  this->mTree.mRoot.mParent = (UFG::qBaseNodeVariableRB<unsigned __int64> *)((unsigned __int64)&this->mTree.mNULL | (__int64)this->mTree.mRoot.mParent & 1);
+  this->mTree.mRoot.mChild[0] = &this->mTree.mNULL;
+  this->mTree.mRoot.mChild[1] = &this->mTree.mNULL;
+  this->mTree.mCount = 0;
 }
 
 // File Line: 192
 // RVA: 0x2971D0
-Render::PersistentSkinningCache *__fastcall Render::PersistentSkinningCache::Find(Render::PersistentSkinningCache *this, unsigned __int64 uid)
+Render::PersistentSkinningCache *__fastcall Render::PersistentSkinningCache::Find(
+        Render::PersistentSkinningCache *this,
+        unsigned __int64 uid)
 {
   Render::PersistentSkinningCache *result; // rax
   bool i; // zf
@@ -50,61 +50,57 @@ Render::PersistentSkinningCache *__fastcall Render::PersistentSkinningCache::Fin
 
 // File Line: 197
 // RVA: 0x16BD00
-void __fastcall UFG::qTreeRB<UFG::qHotswappedFile,UFG::qHotswappedFile,1>::DeleteAll(UFG::qTreeRB<UFG::tPatchPoint,UFG::tPatchPoint,1> *this)
+void __fastcall UFG::qTreeRB<UFG::qHotswappedFile,UFG::qHotswappedFile,1>::DeleteAll(
+        UFG::qTreeRB<UFG::tPatchPoint,UFG::tPatchPoint,1> *this)
 {
-  UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *v1; // rsi
-  Render::SkinningCacheNode *v2; // rdi
-  Illusion::Buffer **v3; // rbx
+  Render::SkinningCacheNode *Head; // rdi
+  Illusion::Buffer **p_mCachedBufferPtr; // rbx
   UFG::qBaseNodeVariableRB<unsigned __int64> *v4; // rdx
   UFG::qBaseNodeVariableRB<unsigned __int64> *v5; // rcx
-  UFG::qBaseNodeVariableRB<unsigned __int64> *v6; // rax
+  UFG::qBaseNodeVariableRB<unsigned __int64> *mParent; // rax
 
-  v1 = (UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)this;
-  if ( this->mTree.mCount )
+  while ( this->mTree.mCount )
   {
-    do
+    Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)this);
+    UFG::qBaseTreeVariableRB<unsigned __int64>::Remove((UFG::qBaseTreeVariableRB<unsigned __int64> *)this, &Head->mNode);
+    if ( Head )
     {
-      v2 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead(v1);
-      UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(&v1->mTree, &v2->mNode);
-      if ( v2 )
+      p_mCachedBufferPtr = &Head->mCachedBufferPtr;
+      v4 = Head[1].mNode.mChild[1];
+      if ( v4 != (UFG::qBaseNodeVariableRB<unsigned __int64> *)UFG::qString::sEmptyString )
       {
-        v3 = &v2->mCachedBufferPtr;
-        v4 = v2[1].mNode.mChild[1];
-        if ( v4 != (UFG::qBaseNodeVariableRB<unsigned __int64> *)UFG::qString::sEmptyString )
-        {
-          if ( v4 )
-            UFG::qMemoryPool::Free(UFG::gMainMemoryPool, v4);
-        }
-        LODWORD(v2[1].mNode.mChild[0]) = 0;
-        v5 = (UFG::qBaseNodeVariableRB<unsigned __int64> *)*v3;
-        v6 = v2[1].mNode.mParent;
-        v5->mChild[0] = v6;
-        v6->mParent = v5;
-        *v3 = (Illusion::Buffer *)v3;
-        v2[1].mNode.mParent = (UFG::qBaseNodeVariableRB<unsigned __int64> *)&v2->mCachedBufferPtr;
-        UFG::qMemoryPool::Free(UFG::gMainMemoryPool, v2);
+        if ( v4 )
+          UFG::qMemoryPool::Free(UFG::gMainMemoryPool, v4);
       }
+      LODWORD(Head[1].mNode.mChild[0]) = 0;
+      v5 = (UFG::qBaseNodeVariableRB<unsigned __int64> *)*p_mCachedBufferPtr;
+      mParent = Head[1].mNode.mParent;
+      v5->mChild[0] = mParent;
+      mParent->mParent = v5;
+      *p_mCachedBufferPtr = (Illusion::Buffer *)p_mCachedBufferPtr;
+      Head[1].mNode.mParent = (UFG::qBaseNodeVariableRB<unsigned __int64> *)&Head->mCachedBufferPtr;
+      UFG::qMemoryPool::Free(UFG::gMainMemoryPool, Head);
     }
-    while ( v1->mTree.mCount );
   }
 }
 
 // File Line: 202
 // RVA: 0x2C3100
-Render::SkinningCacheNode *__fastcall UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead(UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *this)
+Render::SkinningCacheNode *__fastcall UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead(
+        UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *this)
 {
-  Render::SkinningCacheNode *v1; // rdx
-  Render::SkinningCacheNode *v2; // rcx
-  Render::SkinningCacheNode *i; // rax
+  UFG::qBaseNodeVariableRB<unsigned __int64> *v1; // rdx
+  UFG::qBaseNodeVariableRB<unsigned __int64> *p_mNULL; // rcx
+  UFG::qBaseNodeVariableRB<unsigned __int64> *i; // rax
   Render::SkinningCacheNode *result; // rax
 
-  v1 = (Render::SkinningCacheNode *)this->mTree.mRoot.mChild[0];
-  v2 = (Render::SkinningCacheNode *)&this->mTree.mNULL;
-  for ( i = (Render::SkinningCacheNode *)v1->mNode.mChild[0]; i != v2; i = (Render::SkinningCacheNode *)i->mNode.mChild[0] )
+  v1 = this->mTree.mRoot.mChild[0];
+  p_mNULL = &this->mTree.mNULL;
+  for ( i = v1->mChild[0]; i != p_mNULL; i = i->mChild[0] )
     v1 = i;
   result = 0i64;
-  if ( v1 != v2 )
-    result = v1;
+  if ( v1 != p_mNULL )
+    return (Render::SkinningCacheNode *)v1;
   return result;
 }
 

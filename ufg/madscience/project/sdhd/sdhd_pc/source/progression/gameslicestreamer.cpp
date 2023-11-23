@@ -2,14 +2,12 @@
 // RVA: 0x48AD00
 void __fastcall UFG::GameSliceStreamer::GameSliceStreamer(UFG::GameSliceStreamer *this)
 {
-  UFG::GameSliceStreamer *v1; // rbx
-  signed __int64 v2; // rdi
-  signed __int64 v3; // rax
-  unsigned __int8 v4; // cf
+  UFG::GameSliceStreamer::DeferScriptDeletionRequest *v2; // rdi
+  __int64 v3; // rax
+  bool v4; // cf
   unsigned __int64 v5; // rax
   UFG::allocator::free_link *v6; // rax
 
-  v1 = this;
   this->mStreamRequests.mNode.mPrev = &this->mStreamRequests.mNode;
   this->mStreamRequests.mNode.mNext = &this->mStreamRequests.mNode;
   v2 = 0i64;
@@ -27,58 +25,56 @@ void __fastcall UFG::GameSliceStreamer::GameSliceStreamer(UFG::GameSliceStreamer
   if ( v6 )
   {
     LODWORD(v6->mNext) = 128;
-    v2 = (signed __int64)&v6[1];
+    v2 = (UFG::GameSliceStreamer::DeferScriptDeletionRequest *)&v6[1];
     `eh vector constructor iterator(
       &v6[1],
       0x18ui64,
       128,
       (void (__fastcall *)(void *))UFG::GameSliceStreamer::DeferScriptDeletionRequest::DeferScriptDeletionRequest);
   }
-  v1->mDeferScriptDeletionRequests.mData = (UFG::GameSliceStreamer::DeferScriptDeletionRequest *)v2;
-  *(_QWORD *)&v1->mDeferScriptDeletionRequests.mHeadIndex = -1i64;
-  UFG::GameSliceStreamer::mspInstance = v1;
+  this->mDeferScriptDeletionRequests.mData = v2;
+  *(_QWORD *)&this->mDeferScriptDeletionRequests.mHeadIndex = -1i64;
+  UFG::GameSliceStreamer::mspInstance = this;
 }
 
 // File Line: 26
 // RVA: 0x490530
 void __fastcall UFG::GameSliceStreamer::~GameSliceStreamer(UFG::GameSliceStreamer *this)
 {
-  UFG::GameSliceStreamer *v1; // rdi
-  UFG::qMemoryPool *v2; // rcx
-  UFG::GameSliceStreamer::DeferScriptDeletionRequest *v3; // rcx
-  UFG::SSGameSlice **v4; // rbx
-  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *v5; // rcx
-  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *v6; // rax
+  UFG::qMemoryPool *mpMemoryPool; // rcx
+  UFG::GameSliceStreamer::DeferScriptDeletionRequest *mData; // rcx
+  UFG::SSGameSlice **p_m_pPointer; // rbx
+  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *mPrev; // rcx
+  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *mNext; // rax
 
-  v1 = this;
   UFG::GameSliceStreamer::mspInstance = 0i64;
-  v2 = this->mDeferScriptDeletionRequests.mpMemoryPool;
-  if ( v2 )
+  mpMemoryPool = this->mDeferScriptDeletionRequests.mpMemoryPool;
+  if ( mpMemoryPool )
   {
-    UFG::qMemoryPool::Free(v2, v1->mDeferScriptDeletionRequests.mData);
+    UFG::qMemoryPool::Free(mpMemoryPool, (char *)this->mDeferScriptDeletionRequests.mData);
   }
   else
   {
-    v3 = v1->mDeferScriptDeletionRequests.mData;
-    if ( v3 )
+    mData = this->mDeferScriptDeletionRequests.mData;
+    if ( mData )
     {
-      v4 = &v3[-1].mScript.m_pPointer;
+      p_m_pPointer = &mData[-1].mScript.m_pPointer;
       `eh vector destructor iterator(
-        v3,
+        mData,
         0x18ui64,
-        (int)v3[-1].mScript.m_pPointer,
+        (int)mData[-1].mScript.m_pPointer,
         (void (__fastcall *)(void *))UFG::InterestPointUseDetails::~InterestPointUseDetails);
-      operator delete[](v4);
+      operator delete[](p_m_pPointer);
     }
   }
-  v1->mStreamData.size = 0;
-  UFG::qList<UFG::FractureConnectivity::Connection,UFG::FractureConnectivity::Connection,1,0>::DeleteNodes((UFG::qList<UFG::qReflectField,UFG::qReflectField,1,0> *)v1);
-  v5 = v1->mStreamRequests.mNode.mPrev;
-  v6 = v1->mStreamRequests.mNode.mNext;
-  v5->mNext = v6;
-  v6->mPrev = v5;
-  v1->mStreamRequests.mNode.mPrev = &v1->mStreamRequests.mNode;
-  v1->mStreamRequests.mNode.mNext = &v1->mStreamRequests.mNode;
+  this->mStreamData.size = 0;
+  UFG::qList<UFG::FractureConnectivity::Connection,UFG::FractureConnectivity::Connection,1,0>::DeleteNodes((UFG::qList<UFG::qReflectField,UFG::qReflectField,1,0> *)this);
+  mPrev = this->mStreamRequests.mNode.mPrev;
+  mNext = this->mStreamRequests.mNode.mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->mStreamRequests.mNode.mPrev = &this->mStreamRequests.mNode;
+  this->mStreamRequests.mNode.mNext = &this->mStreamRequests.mNode;
 }
 
 // File Line: 31
@@ -90,208 +86,192 @@ UFG::GameSliceStreamer *__fastcall UFG::GameSliceStreamer::Instance()
 
 // File Line: 36
 // RVA: 0x497700
-void __fastcall UFG::GameSliceStreamer::Clear(UFG::GameSliceStreamer *this, __int64 a2, __int64 a3, __int64 a4)
+void __fastcall UFG::GameSliceStreamer::Clear(UFG::GameSliceStreamer *this)
 {
-  UFG::GameSliceStreamer *v4; // rbx
-  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *v5; // rdi
-  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *v6; // rcx
-  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *v7; // rax
-  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *v8; // rdx
-  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *v9; // rax
-  __int64 v10; // rdx
-  unsigned int v11; // er8
-  int v12; // ecx
-  int v13; // er9
-  signed __int64 v14; // r9
-  int v15; // er8
-  __int64 v16; // rcx
-  bool v17; // zf
-  __int64 v18; // rsi
-  UFG::qSymbolUC **v19; // rdi
+  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *mNext; // rdi
+  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *mPrev; // rcx
+  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *v4; // rax
+  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *v5; // rdx
+  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *v6; // rax
+  __int64 mHeadIndex; // rdx
+  unsigned int mTailIndex; // r8d
+  int v9; // ecx
+  UFG::GameSliceStreamer::DeferScriptDeletionRequest *v11; // r9
+  int v12; // r8d
+  UFG::SSGameSlice *m_pPointer; // rcx
+  __int64 size; // rsi
+  UFG::GameSliceStreamer::StreamData *p; // rdi
 
-  v4 = this;
-  while ( (UFG::GameSliceStreamer *)v4->mStreamRequests.mNode.mNext != v4 )
+  while ( (UFG::GameSliceStreamer *)this->mStreamRequests.mNode.mNext != this )
   {
-    v5 = v4->mStreamRequests.mNode.mNext;
-    v6 = v5->mPrev;
-    v7 = v5->mNext;
-    v6->mNext = v7;
-    v7->mPrev = v6;
-    v5->mPrev = v5;
-    v5->mNext = v5;
-    UFG::GameSliceStreamer::CancelStream(v4, (UFG::GameSlice *)v5[1].mPrev, a3, a4);
-    v8 = v5->mPrev;
-    v9 = v5->mNext;
-    v8->mNext = v9;
-    v9->mPrev = v8;
-    v5->mPrev = v5;
-    v5->mNext = v5;
-    operator delete[](v5);
+    mNext = this->mStreamRequests.mNode.mNext;
+    mPrev = mNext->mPrev;
+    v4 = mNext->mNext;
+    mPrev->mNext = v4;
+    v4->mPrev = mPrev;
+    mNext->mPrev = mNext;
+    mNext->mNext = mNext;
+    UFG::GameSliceStreamer::CancelStream(this, (UFG::GameSlice *)mNext[1].mPrev);
+    v5 = mNext->mPrev;
+    v6 = mNext->mNext;
+    v5->mNext = v6;
+    v6->mPrev = v5;
+    mNext->mPrev = mNext;
+    mNext->mNext = mNext;
+    operator delete[](mNext);
   }
   while ( 1 )
   {
-    v10 = v4->mDeferScriptDeletionRequests.mHeadIndex;
-    if ( (_DWORD)v10 == -1 )
+    mHeadIndex = this->mDeferScriptDeletionRequests.mHeadIndex;
+    if ( (_DWORD)mHeadIndex == -1 )
       break;
-    v11 = v4->mDeferScriptDeletionRequests.mTailIndex;
-    v12 = v4->mDeferScriptDeletionRequests.mTailIndex - v10;
-    v13 = (unsigned int)v10 <= v11 ? v12 + 1 : v12 + v4->mDeferScriptDeletionRequests.mCapacity + 1;
-    if ( !v13 )
+    mTailIndex = this->mDeferScriptDeletionRequests.mTailIndex;
+    v9 = mTailIndex - mHeadIndex;
+    if ( !((unsigned int)mHeadIndex <= mTailIndex ? v9 + 1 : v9 + this->mDeferScriptDeletionRequests.mCapacity + 1) )
       break;
-    v14 = 0i64;
-    if ( (unsigned int)v10 <= v11 )
-      v15 = v12 + 1;
+    v11 = 0i64;
+    if ( (unsigned int)mHeadIndex <= mTailIndex )
+      v12 = v9 + 1;
     else
-      v15 = v12 + v4->mDeferScriptDeletionRequests.mCapacity + 1;
-    if ( v15 > 0 )
+      v12 = v9 + this->mDeferScriptDeletionRequests.mCapacity + 1;
+    if ( v12 > 0 )
     {
-      v14 = (signed __int64)&v4->mDeferScriptDeletionRequests.mData[v10];
-      v4->mDeferScriptDeletionRequests.mHeadIndex = (unsigned int)(v10 + 1) % v4->mDeferScriptDeletionRequests.mCapacity;
-      if ( v15 == 1 )
-        *(_QWORD *)&v4->mDeferScriptDeletionRequests.mHeadIndex = -1i64;
+      v11 = &this->mDeferScriptDeletionRequests.mData[mHeadIndex];
+      this->mDeferScriptDeletionRequests.mHeadIndex = (unsigned int)(mHeadIndex + 1)
+                                                    % this->mDeferScriptDeletionRequests.mCapacity;
+      if ( v12 == 1 )
+        *(_QWORD *)&this->mDeferScriptDeletionRequests.mHeadIndex = -1i64;
     }
-    v16 = *(_QWORD *)(v14 + 16);
-    if ( v16 )
+    m_pPointer = v11->mScript.m_pPointer;
+    if ( m_pPointer )
     {
-      v17 = (*(_DWORD *)(v16 + 40))-- == 1;
-      if ( v17 )
+      if ( m_pPointer->i_ref_count-- == 1 )
       {
-        *(_DWORD *)(v16 + 40) = 2147483648;
-        (*(void (__cdecl **)(__int64))(*(_QWORD *)(v16 + 24) + 112i64))(v16 + 24);
+        m_pPointer->i_ref_count = 0x80000000;
+        m_pPointer->SSActor::SSDataInstance::SSInstance::SSObjectBase::vfptr[1].get_scope_context(&m_pPointer->SSActor);
       }
     }
   }
-  v18 = v4->mStreamData.size;
-  if ( v18 > 0 )
+  size = this->mStreamData.size;
+  if ( this->mStreamData.size )
   {
-    v19 = (UFG::qSymbolUC **)v4->mStreamData.p;
+    p = this->mStreamData.p;
     do
     {
-      if ( (*v19)[3].mUID & 1 )
+      if ( (p->mpRoot->i_flags & 1) != 0 )
       {
-        (*(void (__cdecl **)(UFG::qSymbolUC *))(*(_QWORD *)&(*v19)->mUID + 248i64))(*v19);
-        UFG::qSymbol::as_cstr_dbg(*v19 + 2);
+        ((void (__fastcall *)(SSClass *))p->mpRoot->vfptr[1].find_common_type)(p->mpRoot);
+        UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&p->mpRoot->ANamed);
         UFG::qPrintChannel::Print(
           &UFG::gPrintChannel_HK_GameSliceStreamer,
           OUTPUT_LEVEL_DEBUG,
           "[GameSliceStreamer]: ########## Unloading game slice group: %s\n");
       }
-      v19 += 3;
-      --v18;
+      ++p;
+      --size;
     }
-    while ( v18 );
+    while ( size );
   }
-  v4->mStreamData.size = 0;
+  this->mStreamData.size = 0;
 }
 
 // File Line: 72
 // RVA: 0x4B15B0
-void __fastcall UFG::GameSliceStreamer::OnAsyncRead(const char *filename, void *data, int fileSize, void *pCallbackParam)
+void __fastcall UFG::GameSliceStreamer::OnAsyncRead(
+        const char *filename,
+        char *data,
+        int fileSize,
+        UFG::qSymbolUC *pCallbackParam)
 {
-  SSClass *v4; // rbx
-  void *v5; // rdi
   __int64 v6; // rcx
-  __int64 v7; // rdx
-  UFG::GameSliceStreamer::StreamData *v8; // rax
+  UFG::GameSliceStreamer::StreamData *p; // rax
 
-  if ( fileSize )
+  if ( fileSize && data )
   {
-    v4 = (SSClass *)pCallbackParam;
-    v5 = data;
-    if ( data )
+    UFG::qSymbol::as_cstr_dbg(pCallbackParam + 2);
+    UFG::qPrintChannel::Print(
+      &UFG::gPrintChannel_HK_GameSliceStreamer,
+      OUTPUT_LEVEL_DEBUG,
+      "[GameSliceStreamer]: OnAsyncRead called for (%s) (%s)\n");
+    v6 = 0i64;
+    if ( UFG::GameSliceStreamer::mspInstance->mStreamData.size )
     {
-      UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)pCallbackParam + 2);
-      UFG::qPrintChannel::Print(
-        &UFG::gPrintChannel_HK_GameSliceStreamer,
-        OUTPUT_LEVEL_DEBUG,
-        "[GameSliceStreamer]: OnAsyncRead called for (%s) (%s)\n");
-      v6 = 0i64;
-      v7 = UFG::GameSliceStreamer::mspInstance->mStreamData.size;
-      if ( v7 > 0 )
+      p = UFG::GameSliceStreamer::mspInstance->mStreamData.p;
+      while ( (UFG::qSymbolUC *)p->mpRoot != pCallbackParam )
       {
-        v8 = UFG::GameSliceStreamer::mspInstance->mStreamData.p;
-        while ( v8->mpRoot != v4 )
-        {
-          ++v6;
-          ++v8;
-          if ( v6 >= v7 )
-            goto LABEL_12;
-        }
-        if ( v4->i_flags & 1 )
-        {
-          v4->i_flags &= 0xFFFFFFF7;
-          v4->i_flags |= 1u;
-        }
-        else if ( !v8->mpBuffer )
-        {
-          v8->mpBuffer = v5;
-          return;
-        }
+        ++v6;
+        ++p;
+        if ( v6 >= UFG::GameSliceStreamer::mspInstance->mStreamData.size )
+          goto LABEL_12;
       }
-LABEL_12:
-      UFG::qFreeEntireFile(v5, 0i64);
+      if ( (pCallbackParam[3].mUID & 1) != 0 )
+      {
+        pCallbackParam[3].mUID &= ~8u;
+        pCallbackParam[3].mUID |= 1u;
+      }
+      else if ( !p->mpBuffer )
+      {
+        p->mpBuffer = data;
+        return;
+      }
     }
+LABEL_12:
+    UFG::qFreeEntireFile(data, 0i64);
   }
 }
 
 // File Line: 94
 // RVA: 0x4B66D0
-void __fastcall UFG::GameSliceStreamer::RequestStream(UFG::GameSliceStreamer *this, UFG::GameSlice *pGameSlice)
+void __fastcall UFG::GameSliceStreamer::RequestStream(
+        UFG::GameSliceStreamer *this,
+        UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *pGameSlice)
 {
-  UFG::GameSlice *v2; // rdi
-  UFG::GameSliceStreamer *v3; // rbx
-  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *v4; // rax
-  char *v5; // r9
-  char *v6; // r9
-  SSClass *v7; // rax
-  SSClass *v8; // rsi
-  UFG::allocator::free_link *v9; // rax
-  UFG::allocator::free_link *v10; // rcx
-  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *v11; // rax
+  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *mNext; // rax
+  SSClass *v5; // rax
+  UFG::allocator::free_link *demand_loaded_root; // rsi
+  UFG::allocator::free_link *v7; // rax
+  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *v8; // rcx
+  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *mPrev; // rax
 
-  v2 = pGameSlice;
-  v3 = this;
-  v4 = this->mStreamRequests.mNode.mNext;
-  if ( v4 == (UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *)this )
+  mNext = this->mStreamRequests.mNode.mNext;
+  if ( mNext == (UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *)this )
   {
 LABEL_6:
-    v6 = pGameSlice->mName.mText;
     UFG::qPrintChannel::Print(
       &UFG::gPrintChannel_HK_GameSliceStreamer,
       OUTPUT_LEVEL_DEBUG,
       "[GameSliceStreamer]: RequestStream (%s) - Queuing!\n");
-    v7 = SSBrain::get_class(v2->mScriptClassName.mText);
-    v8 = SSClass::get_demand_loaded_root(v7);
-    v9 = UFG::qMalloc(0x20ui64, "GameSliceStreamer::StreamRequest", 0i64);
-    v10 = v9;
-    if ( v9 )
+    v5 = SSBrain::get_class((const char *)pGameSlice[3].mPrev);
+    demand_loaded_root = (UFG::allocator::free_link *)SSClass::get_demand_loaded_root(v5);
+    v7 = UFG::qMalloc(0x20ui64, "GameSliceStreamer::StreamRequest", 0i64);
+    v8 = (UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *)v7;
+    if ( v7 )
     {
-      v9->mNext = v9;
-      v9[1].mNext = v9;
+      v7->mNext = v7;
+      v7[1].mNext = v7;
     }
     else
     {
-      v10 = 0i64;
+      v8 = 0i64;
     }
-    v10[2].mNext = (UFG::allocator::free_link *)v2;
-    v10[3].mNext = (UFG::allocator::free_link *)v8;
-    v11 = v3->mStreamRequests.mNode.mPrev;
-    v11->mNext = (UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *)v10;
-    v10->mNext = (UFG::allocator::free_link *)v11;
-    v10[1].mNext = (UFG::allocator::free_link *)v3;
-    v3->mStreamRequests.mNode.mPrev = (UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *)v10;
-    if ( v8 )
-      UFG::GameSliceStreamer::RequestStream(v3, v2, v8);
+    v8[1].mPrev = pGameSlice;
+    v8[1].mNext = (UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *)demand_loaded_root;
+    mPrev = this->mStreamRequests.mNode.mPrev;
+    mPrev->mNext = v8;
+    v8->mPrev = mPrev;
+    v8->mNext = &this->mStreamRequests.mNode;
+    this->mStreamRequests.mNode.mPrev = v8;
+    if ( demand_loaded_root )
+      UFG::GameSliceStreamer::RequestStream(this, (UFG::GameSlice *)pGameSlice, demand_loaded_root);
   }
   else
   {
-    while ( (UFG::GameSlice *)v4[1].mPrev != pGameSlice )
+    while ( mNext[1].mPrev != pGameSlice )
     {
-      v4 = v4->mNext;
-      if ( v4 == (UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *)this )
+      mNext = mNext->mNext;
+      if ( mNext == (UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *)this )
         goto LABEL_6;
     }
-    v5 = pGameSlice->mName.mText;
     UFG::qPrintChannel::Print(
       &UFG::gPrintChannel_HK_GameSliceStreamer,
       OUTPUT_LEVEL_DEBUG,
@@ -303,227 +283,173 @@ LABEL_6:
 // RVA: 0x49A360
 void __fastcall UFG::GameSliceStreamer::DeferScriptDelete(UFG::GameSliceStreamer *this, UFG::SSGameSlice *pScript)
 {
-  UFG::SSGameSlice *v2; // rdi
-  UFG::GameSliceStreamer *v3; // rbx
-  __int64 v4; // rdx
+  __int64 mHeadIndex; // rdx
   int v5; // ecx
-  unsigned int v6; // ecx
-  int v7; // eax
-  signed __int64 v8; // rcx
-  unsigned int v9; // er8
-  int v10; // er8
-  __int64 v11; // rcx
-  bool v12; // zf
-  __int64 *v15; // rax
-  unsigned int v16; // eax
-  int v17; // ecx
-  unsigned int v18; // ecx
-  int v19; // er8
-  UFG::GameSliceStreamer::DeferScriptDeletionRequest *v20; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SSGameSlice>,UFG::qSafePointerNodeList> *v21; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SSGameSlice>,UFG::qSafePointerNodeList> *v22; // rax
-  UFG::qNode<UFG::qSafePointerBase<UFG::SSGameSlice>,UFG::qSafePointerNodeList> *v23; // rax
+  unsigned int mTailIndex; // ecx
+  int mCapacity; // eax
+  UFG::GameSliceStreamer::DeferScriptDeletionRequest *v8; // rcx
+  unsigned int v9; // r8d
+  int v10; // r8d
+  UFG::SSGameSlice *m_pPointer; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SSGameSlice>,UFG::qSafePointerNodeList> *mPrev; // rax
+  unsigned int v14; // eax
+  int v15; // ecx
+  unsigned int v16; // ecx
+  int v17; // r8d
+  UFG::GameSliceStreamer::DeferScriptDeletionRequest *v18; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SSGameSlice>,UFG::qSafePointerNodeList> *v19; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SSGameSlice>,UFG::qSafePointerNodeList> *mNext; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::SSGameSlice>,UFG::qSafePointerNodeList> *v21; // rax
+  __int64 *v22; // rcx
+  _QWORD *p_mPrev; // rax
   __int64 *v24; // rcx
-  __int64 **v25; // rax
-  __int64 *v26; // rcx
-  __int64 **v27; // rax
-  __int64 *v28; // [rsp+28h] [rbp-18h]
-  __int64 **v29; // [rsp+30h] [rbp-10h]
-  UFG::SSGameSlice *v30; // [rsp+38h] [rbp-8h]
+  _QWORD *v25; // rax
+  __int64 *v26; // [rsp+28h] [rbp-18h] BYREF
+  UFG::qList<UFG::qSafePointerBase<UFG::SSGameSlice>,UFG::qSafePointerNodeList,1,0> *p_m_SafePointerList; // [rsp+30h] [rbp-10h]
+  UFG::SSGameSlice *v28; // [rsp+38h] [rbp-8h]
 
-  v2 = pScript;
-  v3 = this;
-  v4 = this->mDeferScriptDeletionRequests.mHeadIndex;
-  if ( (_DWORD)v4 == -1 )
+  mHeadIndex = this->mDeferScriptDeletionRequests.mHeadIndex;
+  if ( (_DWORD)mHeadIndex == -1 )
   {
     v5 = 0;
   }
   else
   {
-    v6 = this->mDeferScriptDeletionRequests.mTailIndex;
-    if ( (unsigned int)v4 <= v6 )
-      v5 = v6 - v4 + 1;
+    mTailIndex = this->mDeferScriptDeletionRequests.mTailIndex;
+    if ( (unsigned int)mHeadIndex <= mTailIndex )
+      v5 = mTailIndex - mHeadIndex + 1;
     else
-      v5 = v3->mDeferScriptDeletionRequests.mCapacity - v4 + v6 + 1;
+      v5 = this->mDeferScriptDeletionRequests.mCapacity - mHeadIndex + mTailIndex + 1;
   }
-  v7 = v3->mDeferScriptDeletionRequests.mCapacity;
-  if ( v5 == v7 )
+  mCapacity = this->mDeferScriptDeletionRequests.mCapacity;
+  if ( v5 == mCapacity )
   {
     v8 = 0i64;
-    if ( (_DWORD)v4 != -1 )
+    if ( (_DWORD)mHeadIndex != -1 )
     {
-      v9 = v3->mDeferScriptDeletionRequests.mTailIndex;
-      v10 = (unsigned int)v4 <= v9 ? v9 - v4 + 1 : v7 + v9 - (unsigned int)v4 + 1;
+      v9 = this->mDeferScriptDeletionRequests.mTailIndex;
+      v10 = (unsigned int)mHeadIndex <= v9 ? v9 - mHeadIndex + 1 : mCapacity + v9 - (unsigned int)mHeadIndex + 1;
       if ( v10 > 0 )
       {
-        v8 = (signed __int64)&v3->mDeferScriptDeletionRequests.mData[v4];
-        v3->mDeferScriptDeletionRequests.mHeadIndex = (unsigned int)(v4 + 1)
-                                                    % v3->mDeferScriptDeletionRequests.mCapacity;
+        v8 = &this->mDeferScriptDeletionRequests.mData[mHeadIndex];
+        this->mDeferScriptDeletionRequests.mHeadIndex = (unsigned int)(mHeadIndex + 1)
+                                                      % this->mDeferScriptDeletionRequests.mCapacity;
         if ( v10 == 1 )
-          *(_QWORD *)&v3->mDeferScriptDeletionRequests.mHeadIndex = -1i64;
+          *(_QWORD *)&this->mDeferScriptDeletionRequests.mHeadIndex = -1i64;
       }
     }
-    v11 = *(_QWORD *)(v8 + 16);
-    if ( v11 )
+    m_pPointer = v8->mScript.m_pPointer;
+    if ( m_pPointer )
     {
-      v12 = (*(_DWORD *)(v11 + 40))-- == 1;
-      if ( v12 )
+      if ( m_pPointer->i_ref_count-- == 1 )
       {
-        *(_DWORD *)(v11 + 40) = 2147483648;
-        (*(void (__cdecl **)(__int64))(*(_QWORD *)(v11 + 24) + 112i64))(v11 + 24);
+        m_pPointer->i_ref_count = 0x80000000;
+        m_pPointer->SSActor::SSDataInstance::SSInstance::SSObjectBase::vfptr[1].get_scope_context(&m_pPointer->SSActor);
       }
     }
   }
-  v28 = (__int64 *)&v28;
-  v29 = &v28;
-  v30 = 0i64;
-  v30 = v2;
-  if ( v2 )
+  v26 = (__int64 *)&v26;
+  p_m_SafePointerList = (UFG::qList<UFG::qSafePointerBase<UFG::SSGameSlice>,UFG::qSafePointerNodeList,1,0> *)&v26;
+  v28 = pScript;
+  if ( pScript )
   {
-    v15 = (__int64 *)v2->m_SafePointerList.mNode.mPrev;
-    v15[1] = (__int64)&v28;
-    v28 = v15;
-    v29 = (__int64 **)&v2->m_SafePointerList;
-    v2->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SSGameSlice>,UFG::qSafePointerNodeList> *)&v28;
-    v2 = v30;
+    mPrev = pScript->m_SafePointerList.mNode.mPrev;
+    mPrev->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SSGameSlice>,UFG::qSafePointerNodeList> *)&v26;
+    v26 = (__int64 *)mPrev;
+    p_m_SafePointerList = &pScript->m_SafePointerList;
+    pScript->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SSGameSlice>,UFG::qSafePointerNodeList> *)&v26;
+    pScript = v28;
   }
-  v16 = v3->mDeferScriptDeletionRequests.mHeadIndex;
-  if ( v16 == -1 )
+  v14 = this->mDeferScriptDeletionRequests.mHeadIndex;
+  if ( v14 == -1 )
   {
-    v17 = 0;
+    v15 = 0;
   }
   else
   {
-    v18 = v3->mDeferScriptDeletionRequests.mTailIndex;
-    if ( v16 <= v18 )
-      v17 = v18 - v16 + 1;
+    v16 = this->mDeferScriptDeletionRequests.mTailIndex;
+    if ( v14 <= v16 )
+      v15 = v16 - v14 + 1;
     else
-      v17 = v3->mDeferScriptDeletionRequests.mCapacity + 1 + v18 - v16;
+      v15 = this->mDeferScriptDeletionRequests.mCapacity + 1 + v16 - v14;
   }
-  v19 = v3->mDeferScriptDeletionRequests.mCapacity;
-  if ( v17 < v19 )
+  v17 = this->mDeferScriptDeletionRequests.mCapacity;
+  if ( v15 < v17 )
   {
-    if ( v17 )
-      v3->mDeferScriptDeletionRequests.mTailIndex = (v3->mDeferScriptDeletionRequests.mTailIndex + 1) % v19;
+    if ( v15 )
+      this->mDeferScriptDeletionRequests.mTailIndex = (this->mDeferScriptDeletionRequests.mTailIndex + 1) % v17;
     else
-      *(_QWORD *)&v3->mDeferScriptDeletionRequests.mHeadIndex = 0i64;
-    v20 = &v3->mDeferScriptDeletionRequests.mData[v3->mDeferScriptDeletionRequests.mTailIndex];
-    if ( v20->mScript.m_pPointer )
+      *(_QWORD *)&this->mDeferScriptDeletionRequests.mHeadIndex = 0i64;
+    v18 = &this->mDeferScriptDeletionRequests.mData[this->mDeferScriptDeletionRequests.mTailIndex];
+    if ( v18->mScript.m_pPointer )
     {
-      v21 = v20->mScript.mPrev;
-      v22 = v20->mScript.mNext;
-      v21->mNext = v22;
-      v22->mPrev = v21;
-      v20->mScript.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SSGameSlice>,UFG::qSafePointerNodeList> *)&v20->mScript.mPrev;
-      v20->mScript.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SSGameSlice>,UFG::qSafePointerNodeList> *)&v20->mScript.mPrev;
+      v19 = v18->mScript.mPrev;
+      mNext = v18->mScript.mNext;
+      v19->mNext = mNext;
+      mNext->mPrev = v19;
+      v18->mScript.mPrev = &v18->mScript;
+      v18->mScript.mNext = &v18->mScript;
     }
-    v20->mScript.m_pPointer = v2;
-    if ( v2 )
+    v18->mScript.m_pPointer = pScript;
+    if ( pScript )
     {
-      v23 = v2->m_SafePointerList.mNode.mPrev;
-      v23->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SSGameSlice>,UFG::qSafePointerNodeList> *)&v20->mScript.mPrev;
-      v20->mScript.mPrev = v23;
-      v20->mScript.mNext = &v2->m_SafePointerList.mNode;
-      v2->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SSGameSlice>,UFG::qSafePointerNodeList> *)&v20->mScript.mPrev;
+      v21 = pScript->m_SafePointerList.mNode.mPrev;
+      v21->mNext = &v18->mScript;
+      v18->mScript.mPrev = v21;
+      v18->mScript.mNext = &pScript->m_SafePointerList.mNode;
+      pScript->m_SafePointerList.mNode.mPrev = &v18->mScript;
     }
   }
-  if ( v30 )
+  if ( v28 )
   {
-    v24 = v28;
-    v25 = v29;
-    v28[1] = (__int64)v29;
-    *v25 = v24;
-    v28 = (__int64 *)&v28;
-    v29 = &v28;
+    v22 = v26;
+    p_mPrev = &p_m_SafePointerList->mNode.mPrev;
+    v26[1] = (__int64)p_m_SafePointerList;
+    *p_mPrev = v22;
+    v26 = (__int64 *)&v26;
+    p_m_SafePointerList = (UFG::qList<UFG::qSafePointerBase<UFG::SSGameSlice>,UFG::qSafePointerNodeList,1,0> *)&v26;
   }
-  v26 = v28;
-  v27 = v29;
-  v28[1] = (__int64)v29;
-  *v27 = v26;
+  v24 = v26;
+  v25 = &p_m_SafePointerList->mNode.mPrev;
+  v26[1] = (__int64)p_m_SafePointerList;
+  *v25 = v24;
 }
 
 // File Line: 145
 // RVA: 0x4B6530
-void __fastcall UFG::GameSliceStreamer::RequestStream(UFG::GameSliceStreamer *this, UFG::GameSlice *pGameSlice, SSClass *pRoot)
+void __fastcall UFG::GameSliceStreamer::RequestStream(
+        UFG::GameSliceStreamer *this,
+        UFG::GameSlice *pGameSlice,
+        UFG::allocator::free_link *pRoot)
 {
-  UFG::GameSlice *v3; // rdi
-  UFG::qFixedArray<UFG::GameSliceStreamer::StreamData,128> *v4; // r14
+  UFG::qFixedArray<UFG::GameSliceStreamer::StreamData,128> *p_mStreamData; // r14
   bool v5; // dl
-  UFG::qSymbolUC *v6; // rbp
-  __int64 v7; // r8
-  __int64 v8; // rax
-  UFG::GameSliceStreamer::StreamData *v9; // rsi
-  __int64 v10; // rbx
-  __int64 v11; // rcx
-  signed __int64 v12; // rdx
-  UFG::qSymbolUC *v13; // rcx
-  char *v14; // rdi
-  UFG::qSymbolUC v15; // ebx
-  int dbg_tag; // ST30_4
-  char *v17; // rdi
-  UFG::qSymbolUC v18; // ebx
-  const char *v19; // rax
-  UFG::StreamFileWrapper::QUEUE_CLASS v20; // edx
+  __int64 v7; // rax
+  UFG::GameSliceStreamer::StreamData *p; // rsi
+  __int64 size; // rcx
+  char *v10; // rdx
+  ANamed *v11; // rcx
+  char *v12; // rax
+  UFG::StreamFileWrapper::QUEUE_CLASS v13; // edx
 
-  v3 = pGameSlice;
-  v4 = &this->mStreamData;
+  p_mStreamData = &this->mStreamData;
   v5 = pGameSlice->mStreamRequested != 0;
-  v6 = (UFG::qSymbolUC *)pRoot;
-  v3->mStreamRequested = 1;
-  v7 = this->mStreamData.size;
-  v8 = 0i64;
-  if ( v7 <= 0 )
+  pGameSlice->mStreamRequested = 1;
+  v7 = 0i64;
+  if ( this->mStreamData.size )
   {
-LABEL_5:
-    v10 = v6[2].mUID;
-    UFG::qSymbol::as_cstr_dbg(v6 + 2);
-    UFG::qPrintChannel::Print(
-      &UFG::gPrintChannel_HK_GameSliceStreamer,
-      OUTPUT_LEVEL_DEBUG,
-      "[GameSliceStreamer]: RequestStream (%s)(%0x08d) - New pRoot request\n");
-    v11 = v4->size;
-    v12 = (signed __int64)v4 + 24 * v11;
-    v4->size = v11 + 1;
-    *(_QWORD *)(v12 + 8) = v6;
-    *(_QWORD *)(v12 + 16) = 0i64;
-    *(_BYTE *)(v12 + 24) = 1;
-    if ( v6[3].mUID & 1 )
+    p = this->mStreamData.p;
+    while ( (UFG::allocator::free_link *)p->mpRoot != pRoot )
     {
-      v6[3].mUID &= 0xFFFFFFF7;
-      v6[3].mUID |= 1u;
-    }
-    else
-    {
-      v19 = a_cstr_format("Data\\Scripts\\Class[%x].skoo-bin", v6[2].mUID);
-      v20 = 3;
-      if ( (unsigned int)(v3->mType - 10) <= 1 )
-        v20 = 2;
-      UFG::StreamFileWrapper::ReadEntireFileAsync(
-        v19,
-        v20,
-        UFG::GameSliceStreamer::OnAsyncRead,
-        v6,
-        0i64,
-        0,
-        "StreamFileWrapper::ReadEntireFileAsync");
-    }
-  }
-  else
-  {
-    v9 = this->mStreamData.p;
-    while ( (UFG::qSymbolUC *)v9->mpRoot != v6 )
-    {
-      ++v8;
-      ++v9;
-      if ( v8 >= v7 )
+      ++v7;
+      ++p;
+      if ( v7 >= this->mStreamData.size )
         goto LABEL_5;
     }
-    v13 = v6 + 2;
+    v11 = (ANamed *)&pRoot[1];
     if ( v5 )
     {
-      v17 = v3->mName.mText;
-      v18.mUID = v13->mUID;
-      UFG::qSymbol::as_cstr_dbg(v13);
+      UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)v11);
       UFG::qPrintChannel::Print(
         &UFG::gPrintChannel_HK_GameSliceStreamer,
         OUTPUT_LEVEL_DEBUG,
@@ -531,93 +457,117 @@ LABEL_5:
     }
     else
     {
-      ++v9->mUsageCount;
-      v14 = v3->mName.mText;
-      v15.mUID = v13->mUID;
-      UFG::qSymbol::as_cstr_dbg(v13);
-      dbg_tag = v9->mUsageCount;
+      ++p->mUsageCount;
+      UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)v11);
       UFG::qPrintChannel::Print(
         &UFG::gPrintChannel_HK_GameSliceStreamer,
         OUTPUT_LEVEL_DEBUG,
         "[GameSliceStreamer]: RequestStream (%s)(%0x08d) - pRoot request by (%s) - now at (%d)\n");
     }
   }
+  else
+  {
+LABEL_5:
+    UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&pRoot[1]);
+    UFG::qPrintChannel::Print(
+      &UFG::gPrintChannel_HK_GameSliceStreamer,
+      OUTPUT_LEVEL_DEBUG,
+      "[GameSliceStreamer]: RequestStream (%s)(%0x08d) - New pRoot request\n");
+    size = p_mStreamData->size;
+    v10 = (char *)p_mStreamData + 24 * size;
+    p_mStreamData->size = size + 1;
+    *((_QWORD *)v10 + 1) = pRoot;
+    *((_QWORD *)v10 + 2) = 0i64;
+    v10[24] = 1;
+    if ( (BYTE4(pRoot[1].mNext) & 1) != 0 )
+    {
+      HIDWORD(pRoot[1].mNext) &= ~8u;
+      HIDWORD(pRoot[1].mNext) |= 1u;
+    }
+    else
+    {
+      v12 = a_cstr_format("Data\\Scripts\\Class[%x].skoo-bin", LODWORD(pRoot[1].mNext));
+      v13 = STREAM_DATA_LOW_PRIORITY;
+      if ( (unsigned int)(pGameSlice->mType - 10) <= 1 )
+        v13 = STREAM_DATA_HIGH_PRIORITY;
+      UFG::StreamFileWrapper::ReadEntireFileAsync(
+        v12,
+        v13,
+        (UFG::allocator::free_link *)UFG::GameSliceStreamer::OnAsyncRead,
+        pRoot,
+        0i64,
+        0,
+        "StreamFileWrapper::ReadEntireFileAsync");
+    }
+  }
 }
 
 // File Line: 200
 // RVA: 0x496A50
-void __fastcall UFG::GameSliceStreamer::CancelStream(UFG::GameSliceStreamer *this, UFG::GameSlice *pGameSlice, __int64 a3, __int64 a4)
+void __fastcall UFG::GameSliceStreamer::CancelStream(UFG::GameSliceStreamer *this, UFG::GameSlice *pGameSlice)
 {
-  UFG::GameSlice *v4; // rsi
-  UFG::GameSliceStreamer *v5; // rdi
-  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *v6; // rbx
-  char *v7; // r9
-  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *v8; // rcx
-  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *v9; // rax
-  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *v10; // rcx
-  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *v11; // rax
-  SSClass *v12; // rax
-  SSClass *v13; // r10
-  bool v14; // cl
-  __int64 v15; // r9
-  char *v16; // rax
-  char *v17; // r9
+  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *mNext; // rbx
+  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *mPrev; // rcx
+  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *v6; // rax
+  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *v7; // rcx
+  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *v8; // rax
+  SSClass *v9; // rax
+  SSClass *demand_loaded_root; // r10
+  bool v11; // cl
+  __int64 size; // r9
+  char *p_mUsageCount; // rax
 
-  v4 = pGameSlice;
-  v5 = this;
-  v6 = this->mStreamRequests.mNode.mNext;
-  if ( v6 != (UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *)this )
+  mNext = this->mStreamRequests.mNode.mNext;
+  if ( mNext != (UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *)this )
   {
-    while ( (UFG::GameSlice *)v6[1].mPrev != pGameSlice )
+    while ( (UFG::GameSlice *)mNext[1].mPrev != pGameSlice )
     {
-      v6 = v6->mNext;
-      if ( v6 == (UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *)this )
+      mNext = mNext->mNext;
+      if ( mNext == (UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *)this )
         goto LABEL_6;
     }
-    v7 = pGameSlice->mName.mText;
     UFG::qPrintChannel::Print(
       &UFG::gPrintChannel_HK_GameSliceStreamer,
       OUTPUT_LEVEL_DEBUG,
       "[GameSliceStreamer]: CancelStream (%s) - Request found, cancelling.\n");
-    v8 = v6->mPrev;
-    v9 = v6->mNext;
-    v8->mNext = v9;
-    v9->mPrev = v8;
-    v6->mPrev = v6;
-    v6->mNext = v6;
-    v10 = v6->mPrev;
-    v11 = v6->mNext;
-    v10->mNext = v11;
-    v11->mPrev = v10;
-    v6->mPrev = v6;
-    v6->mNext = v6;
-    operator delete[](v6);
+    mPrev = mNext->mPrev;
+    v6 = mNext->mNext;
+    mPrev->mNext = v6;
+    v6->mPrev = mPrev;
+    mNext->mPrev = mNext;
+    mNext->mNext = mNext;
+    v7 = mNext->mPrev;
+    v8 = mNext->mNext;
+    v7->mNext = v8;
+    v8->mPrev = v7;
+    mNext->mPrev = mNext;
+    mNext->mNext = mNext;
+    operator delete[](mNext);
   }
 LABEL_6:
-  v12 = SSBrain::get_class(v4->mScriptClassName.mText);
-  v13 = SSClass::get_demand_loaded_root(v12);
-  if ( v13 )
+  v9 = SSBrain::get_class(pGameSlice->mScriptClassName.mText);
+  demand_loaded_root = SSClass::get_demand_loaded_root(v9);
+  if ( demand_loaded_root )
   {
-    v14 = v4->mStreamRequested != 0;
-    v4->mStreamRequested = 0;
-    if ( v14 )
+    v11 = pGameSlice->mStreamRequested != 0;
+    pGameSlice->mStreamRequested = 0;
+    if ( v11 )
     {
-      v15 = v5->mStreamData.size;
-      if ( v15 > 0 )
+      size = this->mStreamData.size;
+      if ( this->mStreamData.size )
       {
-        v16 = &v5->mStreamData.p[0].mUsageCount;
+        p_mUsageCount = &this->mStreamData.p[0].mUsageCount;
         do
         {
-          if ( *((SSClass **)v16 - 2) == v13 && *v16 > 0 )
-            --*v16;
-          v16 += 24;
-          --v15;
+          if ( *((SSClass **)p_mUsageCount - 2) == demand_loaded_root && *p_mUsageCount > 0 )
+            --*p_mUsageCount;
+          p_mUsageCount += 24;
+          --size;
         }
-        while ( v15 );
+        while ( size );
       }
     }
   }
-  v17 = v4->mName.mText;
   UFG::qPrintChannel::Print(
     &UFG::gPrintChannel_HK_GameSliceStreamer,
     OUTPUT_LEVEL_DEBUG,
@@ -628,85 +578,75 @@ LABEL_6:
 // RVA: 0x4C3FA0
 void __fastcall UFG::GameSliceStreamer::Update(UFG::GameSliceStreamer *this)
 {
-  UFG::GameSliceStreamer *v1; // rdi
-  UFG::GameSliceStreamer *v2; // rbx
+  UFG::GameSliceStreamer *mNext; // rbx
   unsigned int v3; // ebp
-  SSClass *v4; // rcx
+  SSClass *mpRoot; // rcx
   __int64 v5; // rax
-  __int64 v6; // rdx
-  signed __int64 v7; // rsi
-  UFG::qSymbolUC *v8; // rcx
-  UFG::qSymbolUC v9; // ebx
-  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *v10; // rcx
+  UFG::GameSliceStreamer::StreamData *p; // rsi
+  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *mPrev; // rcx
+  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *v8; // rax
+  __int64 v9; // rcx
+  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *v10; // rdx
   UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *v11; // rax
-  __int64 v12; // rcx
-  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *v13; // rdx
-  UFG::qNode<UFG::GameSliceStreamer::StreamRequest,UFG::GameSliceStreamer::StreamRequest> *v14; // rax
-  __int64 v15; // rdx
-  unsigned int v16; // er8
-  int v17; // ecx
-  int v18; // er9
-  signed __int64 v19; // r9
-  int v20; // er8
-  __int64 v21; // rcx
-  bool v22; // zf
-  __int64 v23; // rax
-  UFG::qFixedArray<UFG::GameSliceStreamer::StreamData,128> *v24; // rbx
-  __int64 v25; // rcx
-  signed __int64 v26; // rdi
-  UFG::qSymbolUC *v27; // rcx
-  const char *v28; // r8
-  signed __int64 v29; // rdx
-  signed __int64 v30; // rcx
-  void *binary_pp; // [rsp+50h] [rbp+8h]
+  __int64 mHeadIndex; // rdx
+  unsigned int mTailIndex; // r8d
+  int v14; // ecx
+  UFG::GameSliceStreamer::DeferScriptDeletionRequest *v16; // r9
+  int v17; // r8d
+  UFG::SSGameSlice *m_pPointer; // rcx
+  __int64 v20; // rax
+  UFG::qFixedArray<UFG::GameSliceStreamer::StreamData,128> *p_mStreamData; // rbx
+  __int64 size; // rcx
+  UFG::GameSliceStreamer::StreamData *i; // rdi
+  UFG::qSymbolUC *v24; // rcx
+  const char *v25; // r8
+  __int64 v26; // rdx
+  __int64 v27; // rcx
+  void *binary_pp; // [rsp+50h] [rbp+8h] BYREF
 
-  v1 = this;
-  v2 = (UFG::GameSliceStreamer *)this->mStreamRequests.mNode.mNext;
+  mNext = (UFG::GameSliceStreamer *)this->mStreamRequests.mNode.mNext;
   v3 = 0;
-  if ( v2 != this )
+  if ( mNext != this )
   {
-    v4 = v2->mStreamData.p[0].mpRoot;
-    if ( !v4 || v4->i_flags & 1 )
+    mpRoot = mNext->mStreamData.p[0].mpRoot;
+    if ( !mpRoot || (mpRoot->i_flags & 1) != 0 )
     {
-      v10 = v2->mStreamRequests.mNode.mPrev;
-      v11 = v2->mStreamRequests.mNode.mNext;
+      mPrev = mNext->mStreamRequests.mNode.mPrev;
+      v8 = mNext->mStreamRequests.mNode.mNext;
+      mPrev->mNext = v8;
+      v8->mPrev = mPrev;
+      mNext->mStreamRequests.mNode.mPrev = &mNext->mStreamRequests.mNode;
+      mNext->mStreamRequests.mNode.mNext = &mNext->mStreamRequests.mNode;
+      v9 = *(_QWORD *)&mNext->mStreamData.size;
+      if ( (unsigned int)(*(_DWORD *)(v9 + 264) - 1) <= 6 )
+        UFG::GameSlice::StartScript((UFG::GameSlice *)v9);
+      binary_pp = mNext;
+      v10 = mNext->mStreamRequests.mNode.mPrev;
+      v11 = mNext->mStreamRequests.mNode.mNext;
       v10->mNext = v11;
       v11->mPrev = v10;
-      v2->mStreamRequests.mNode.mPrev = &v2->mStreamRequests.mNode;
-      v2->mStreamRequests.mNode.mNext = &v2->mStreamRequests.mNode;
-      v12 = *(_QWORD *)&v2->mStreamData.size;
-      if ( (unsigned int)(*(_DWORD *)(v12 + 264) - 1) <= 6 )
-        UFG::GameSlice::StartScript((UFG::GameSlice *)v12);
-      binary_pp = v2;
-      v13 = v2->mStreamRequests.mNode.mPrev;
-      v14 = v2->mStreamRequests.mNode.mNext;
-      v13->mNext = v14;
-      v14->mPrev = v13;
-      v2->mStreamRequests.mNode.mPrev = &v2->mStreamRequests.mNode;
-      v2->mStreamRequests.mNode.mNext = &v2->mStreamRequests.mNode;
-      operator delete[](v2);
+      mNext->mStreamRequests.mNode.mPrev = &mNext->mStreamRequests.mNode;
+      mNext->mStreamRequests.mNode.mNext = &mNext->mStreamRequests.mNode;
+      operator delete[](mNext);
     }
     else
     {
       v5 = 0i64;
-      v6 = v1->mStreamData.size;
-      if ( v6 > 0 )
+      if ( this->mStreamData.size )
       {
-        v7 = (signed __int64)v1->mStreamData.p;
-        while ( *(SSClass **)v7 != v4 )
+        p = this->mStreamData.p;
+        while ( p->mpRoot != mpRoot )
         {
           ++v5;
-          v7 += 24i64;
-          if ( v5 >= v6 )
+          ++p;
+          if ( v5 >= this->mStreamData.size )
             goto LABEL_17;
         }
-        if ( *(_QWORD *)(v7 + 8) )
+        if ( p->mpBuffer )
         {
-          if ( *(_BYTE *)(*(_QWORD *)v7 + 12i64) & 1 )
+          if ( (p->mpRoot->i_flags & 1) != 0 )
           {
-            v8 = (UFG::qSymbolUC *)(*(_QWORD *)v7 + 8i64);
-            v9.mUID = v8->mUID;
-            UFG::qSymbol::as_cstr_dbg(v8);
+            UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&p->mpRoot->ANamed);
             UFG::qPrintChannel::Print(
               &UFG::gPrintChannel_HK_GameSliceStreamer,
               OUTPUT_LEVEL_WARNING,
@@ -714,12 +654,12 @@ void __fastcall UFG::GameSliceStreamer::Update(UFG::GameSliceStreamer *this)
           }
           else
           {
-            binary_pp = *(void **)(v7 + 8);
+            binary_pp = p->mpBuffer;
             SSClass::from_binary_group((const void **)&binary_pp);
-            SSClass::invoke_class_ctor_recurse(*(SSClass **)v7);
+            SSClass::invoke_class_ctor_recurse(p->mpRoot);
           }
-          UFG::qFreeEntireFile(*(void **)(v7 + 8), 0i64);
-          *(_QWORD *)(v7 + 8) = 0i64;
+          UFG::qFreeEntireFile((char *)p->mpBuffer, 0i64);
+          p->mpBuffer = 0i64;
         }
       }
     }
@@ -727,79 +667,75 @@ void __fastcall UFG::GameSliceStreamer::Update(UFG::GameSliceStreamer *this)
   do
   {
 LABEL_17:
-    v15 = v1->mDeferScriptDeletionRequests.mHeadIndex;
-    if ( (_DWORD)v15 == -1 )
+    mHeadIndex = this->mDeferScriptDeletionRequests.mHeadIndex;
+    if ( (_DWORD)mHeadIndex == -1 )
       break;
-    v16 = v1->mDeferScriptDeletionRequests.mTailIndex;
-    v17 = v1->mDeferScriptDeletionRequests.mTailIndex - v15;
-    v18 = (unsigned int)v15 <= v16 ? v17 + 1 : v17 + v1->mDeferScriptDeletionRequests.mCapacity + 1;
-    if ( !v18 )
+    mTailIndex = this->mDeferScriptDeletionRequests.mTailIndex;
+    v14 = mTailIndex - mHeadIndex;
+    if ( !((unsigned int)mHeadIndex <= mTailIndex ? v14 + 1 : v14 + this->mDeferScriptDeletionRequests.mCapacity + 1) )
       break;
-    v19 = 0i64;
-    if ( (unsigned int)v15 <= v16 )
-      v20 = v17 + 1;
+    v16 = 0i64;
+    if ( (unsigned int)mHeadIndex <= mTailIndex )
+      v17 = v14 + 1;
     else
-      v20 = v17 + v1->mDeferScriptDeletionRequests.mCapacity + 1;
-    if ( v20 > 0 )
+      v17 = v14 + this->mDeferScriptDeletionRequests.mCapacity + 1;
+    if ( v17 > 0 )
     {
-      v19 = (signed __int64)&v1->mDeferScriptDeletionRequests.mData[v15];
-      v1->mDeferScriptDeletionRequests.mHeadIndex = (unsigned int)(v15 + 1) % v1->mDeferScriptDeletionRequests.mCapacity;
-      if ( v20 == 1 )
-        *(_QWORD *)&v1->mDeferScriptDeletionRequests.mHeadIndex = -1i64;
+      v16 = &this->mDeferScriptDeletionRequests.mData[mHeadIndex];
+      this->mDeferScriptDeletionRequests.mHeadIndex = (unsigned int)(mHeadIndex + 1)
+                                                    % this->mDeferScriptDeletionRequests.mCapacity;
+      if ( v17 == 1 )
+        *(_QWORD *)&this->mDeferScriptDeletionRequests.mHeadIndex = -1i64;
     }
-    v21 = *(_QWORD *)(v19 + 16);
-    if ( v21 )
+    m_pPointer = v16->mScript.m_pPointer;
+    if ( m_pPointer )
     {
-      v22 = (*(_DWORD *)(v21 + 40))-- == 1;
-      if ( v22 )
+      if ( m_pPointer->i_ref_count-- == 1 )
       {
-        *(_DWORD *)(v21 + 40) = 2147483648;
-        (*(void (__cdecl **)(__int64))(*(_QWORD *)(v21 + 24) + 112i64))(v21 + 24);
+        m_pPointer->i_ref_count = 0x80000000;
+        m_pPointer->SSActor::SSDataInstance::SSInstance::SSObjectBase::vfptr[1].get_scope_context(&m_pPointer->SSActor);
       }
     }
-    if ( !(_S19_1 & 1) )
+    if ( (_S19_1 & 1) == 0 )
     {
       _S19_1 |= 1u;
       UFG::ProgressionTracker::ProgressionTracker(&sProgressionTracker);
       atexit(UFG::ProgressionTracker::Instance_::_2_::_dynamic_atexit_destructor_for__sProgressionTracker__);
     }
     UFG::ProgressionTracker::mspInstance = &sProgressionTracker;
-    if ( !unk_14240B6D0 )
+    if ( !qword_14240B6D0 )
       break;
   }
-  while ( *(_DWORD *)(unk_14240B6D0 + 268i64) >= 6 );
-  v23 = 0i64;
-  v24 = &v1->mStreamData;
-  v25 = v1->mStreamData.size;
-  if ( v25 > 0 )
+  while ( *(int *)(qword_14240B6D0 + 268) >= 6 );
+  v20 = 0i64;
+  p_mStreamData = &this->mStreamData;
+  size = this->mStreamData.size;
+  if ( this->mStreamData.size )
   {
-    v26 = (signed __int64)v1->mStreamData.p;
-    while ( *(_BYTE *)(v26 + 16) )
+    for ( i = this->mStreamData.p; i->mUsageCount; ++i )
     {
       ++v3;
-      ++v23;
-      v26 += 24i64;
-      if ( v23 >= v25 )
+      if ( ++v20 >= size )
         return;
     }
-    v27 = *(UFG::qSymbolUC **)v26;
-    if ( *(_BYTE *)(*(_QWORD *)v26 + 12i64) & 1 )
+    v24 = (UFG::qSymbolUC *)i->mpRoot;
+    if ( (i->mpRoot->i_flags & 1) != 0 )
     {
-      (*(void (__cdecl **)(UFG::qSymbolUC *))(*(_QWORD *)&v27->mUID + 248i64))(v27);
-      UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)(*(_QWORD *)v26 + 8i64));
-      v28 = "[GameSliceStreamer]: ########## Unloading game slice group: %s\n";
+      (*(void (__fastcall **)(UFG::qSymbolUC *))(*(_QWORD *)&v24->mUID + 248i64))(v24);
+      UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&i->mpRoot->ANamed);
+      v25 = "[GameSliceStreamer]: ########## Unloading game slice group: %s\n";
     }
     else
     {
-      UFG::qSymbol::as_cstr_dbg(v27 + 2);
-      v28 = "[GameSliceStreamer]: ########## Unloading game slice group: %s.  No need to unload, not yet loaded\n";
+      UFG::qSymbol::as_cstr_dbg(v24 + 2);
+      v25 = "[GameSliceStreamer]: ########## Unloading game slice group: %s.  No need to unload, not yet loaded\n";
     }
-    UFG::qPrintChannel::Print(&UFG::gPrintChannel_HK_GameSliceStreamer, OUTPUT_LEVEL_DEBUG, v28);
-    v29 = --v24->size;
-    v30 = v3;
-    v24->p[v30].mpRoot = v24->p[v24->size].mpRoot;
-    v24->p[v30].mpBuffer = v24->p[v29].mpBuffer;
-    *(_QWORD *)&v24->p[v30].mUsageCount = *(_QWORD *)&v24->p[v29].mUsageCount;
+    UFG::qPrintChannel::Print(&UFG::gPrintChannel_HK_GameSliceStreamer, OUTPUT_LEVEL_DEBUG, v25);
+    v26 = --p_mStreamData->size;
+    v27 = v3;
+    p_mStreamData->p[v27].mpRoot = p_mStreamData->p[p_mStreamData->size].mpRoot;
+    p_mStreamData->p[v27].mpBuffer = p_mStreamData->p[v26].mpBuffer;
+    *(_QWORD *)&p_mStreamData->p[v27].mUsageCount = *(_QWORD *)&p_mStreamData->p[v26].mUsageCount;
   }
 }
 

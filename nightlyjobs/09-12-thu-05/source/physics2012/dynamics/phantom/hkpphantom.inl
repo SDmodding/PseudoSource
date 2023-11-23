@@ -2,31 +2,28 @@
 // RVA: 0xD67370
 __int64 __fastcall hkpPhantom::fireCollidableAdded(hkpPhantom *this, hkpCollidable *collidable)
 {
-  int v2; // eax
-  hkpPhantom *v3; // rdi
+  int m_size; // eax
   __int64 v4; // rbx
   hkpPhantomOverlapListener *v5; // rcx
-  hkpPhantom *v7; // [rsp+20h] [rbp-28h]
-  hkpCollidable *v8; // [rsp+28h] [rbp-20h]
-  unsigned int v9; // [rsp+30h] [rbp-18h]
+  __int64 v7[2]; // [rsp+20h] [rbp-28h] BYREF
+  unsigned int v8; // [rsp+30h] [rbp-18h]
 
-  v2 = this->m_overlapListeners.m_size;
-  v3 = this;
-  v8 = collidable;
-  --v2;
-  v7 = this;
-  v9 = 0;
-  v4 = v2;
-  if ( v2 < 0 )
+  m_size = this->m_overlapListeners.m_size;
+  v7[1] = (__int64)collidable;
+  --m_size;
+  v7[0] = (__int64)this;
+  v8 = 0;
+  v4 = m_size;
+  if ( m_size < 0 )
     return 0i64;
   do
   {
-    v5 = v3->m_overlapListeners.m_data[v4];
+    v5 = this->m_overlapListeners.m_data[v4];
     if ( v5 )
-      v5->vfptr->collidableAddedCallback(v5, (hkpCollidableAddedEvent *)&v7);
+      v5->vfptr->collidableAddedCallback(v5, (hkpCollidableAddedEvent *)v7);
     --v4;
   }
   while ( v4 >= 0 );
-  return v9;
+  return v8;
 }
 

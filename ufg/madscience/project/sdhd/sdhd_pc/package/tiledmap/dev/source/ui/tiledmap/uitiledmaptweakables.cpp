@@ -2,7 +2,7 @@
 // RVA: 0xC5BC0
 void UFG::UITiledMapTweakables::Initialize(void)
 {
-  if ( !(_S13 & 1) )
+  if ( (_S13 & 1) == 0 )
     _S13 |= 1u;
 }
 

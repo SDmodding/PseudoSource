@@ -6,7 +6,7 @@ __int64 UFG::_dynamic_initializer_for__qStaticSymbol_eMELEE_WEAPON_BLADED__()
 
   v0 = UFG::qStringHash32("eMELEE_WEAPON_BLADED", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::qStaticSymbol_eMELEE_WEAPON_BLADED, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qStaticSymbol_eMELEE_WEAPON_BLADED__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qStaticSymbol_eMELEE_WEAPON_BLADED__);
 }
 
 // File Line: 412
@@ -17,7 +17,7 @@ __int64 UFG::_dynamic_initializer_for__qStaticSymbol_eRANGED_WEAPON_RIFLE__()
 
   v0 = UFG::qStringHash32("eRANGED_WEAPON_RIFLE", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::qStaticSymbol_eRANGED_WEAPON_RIFLE, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qStaticSymbol_eRANGED_WEAPON_RIFLE__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qStaticSymbol_eRANGED_WEAPON_RIFLE__);
 }
 
 // File Line: 413
@@ -28,7 +28,7 @@ __int64 UFG::_dynamic_initializer_for__qStaticSymbol_eFACEACTION_ANY__()
 
   v0 = UFG::qStringHash32("eFACEACTION_ANY", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::qStaticSymbol_eFACEACTION_ANY, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qStaticSymbol_eFACEACTION_ANY__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qStaticSymbol_eFACEACTION_ANY__);
 }
 
 // File Line: 414
@@ -39,7 +39,7 @@ __int64 UFG::_dynamic_initializer_for__qStaticSymbol_eHEATEVENT_GRAPPLE_COP__()
 
   v0 = UFG::qStringHash32("eHEATEVENT_GRAPPLE_COP", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::qStaticSymbol_eHEATEVENT_GRAPPLE_COP, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qStaticSymbol_eHEATEVENT_GRAPPLE_COP__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qStaticSymbol_eHEATEVENT_GRAPPLE_COP__);
 }
 
 // File Line: 415
@@ -50,7 +50,7 @@ __int64 UFG::_dynamic_initializer_for__qStaticSymbol_eHIGHLIGHTING_MODE_ONE_TIME
 
   v0 = UFG::qStringHash32("eHIGHLIGHTING_MODE_ONE_TIME", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::qStaticSymbol_eHIGHLIGHTING_MODE_ONE_TIME, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qStaticSymbol_eHIGHLIGHTING_MODE_ONE_TIME__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qStaticSymbol_eHIGHLIGHTING_MODE_ONE_TIME__);
 }
 
 // File Line: 416
@@ -61,7 +61,7 @@ __int64 UFG::_dynamic_initializer_for__qStaticSymbol_eConversationTopic_Invalid_
 
   v0 = UFG::qStringHash32("eConversationTopic_Invalid", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::qStaticSymbol_eConversationTopic_Invalid, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qStaticSymbol_eConversationTopic_Invalid__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qStaticSymbol_eConversationTopic_Invalid__);
 }
 
 // File Line: 417
@@ -72,7 +72,7 @@ __int64 UFG::_dynamic_initializer_for__qStaticSymbol_eITEM_PROPERTIES_DEFAULT_CA
 
   v0 = UFG::qStringHash32("eITEM_PROPERTIES_DEFAULT_CARRY", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::qStaticSymbol_eITEM_PROPERTIES_DEFAULT_CARRY, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qStaticSymbol_eITEM_PROPERTIES_DEFAULT_CARRY__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qStaticSymbol_eITEM_PROPERTIES_DEFAULT_CARRY__);
 }
 
 // File Line: 418
@@ -83,7 +83,7 @@ __int64 UFG::_dynamic_initializer_for__qStaticSymbol_eINVENTORY_ITEM_RAGWIPING__
 
   v0 = UFG::qStringHash32("eINVENTORY_ITEM_RAGWIPING", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::qStaticSymbol_eINVENTORY_ITEM_RAGWIPING, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qStaticSymbol_eINVENTORY_ITEM_RAGWIPING__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qStaticSymbol_eINVENTORY_ITEM_RAGWIPING__);
 }
 
 // File Line: 419
@@ -94,7 +94,7 @@ __int64 UFG::_dynamic_initializer_for__qStaticSymbol_eSOCIALINTERACTIONRESULT_MI
 
   v0 = UFG::qStringHash32("eSOCIALINTERACTIONRESULT_MINIGAMESUCCESS", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::qStaticSymbol_eSOCIALINTERACTIONRESULT_MINIGAMESUCCESS, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qStaticSymbol_eSOCIALINTERACTIONRESULT_MINIGAMESUCCESS__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qStaticSymbol_eSOCIALINTERACTIONRESULT_MINIGAMESUCCESS__);
 }
 
 // File Line: 420
@@ -105,7 +105,7 @@ __int64 UFG::_dynamic_initializer_for__qStaticSymbol_eSOCIAL_CONVERSATION_STATE_
 
   v0 = UFG::qStringHash32("eSOCIAL_CONVERSATION_STATE_LOOPING", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::qStaticSymbol_eSOCIAL_CONVERSATION_STATE_LOOPING, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qStaticSymbol_eSOCIAL_CONVERSATION_STATE_LOOPING__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qStaticSymbol_eSOCIAL_CONVERSATION_STATE_LOOPING__);
 }
 
 // File Line: 421
@@ -116,7 +116,7 @@ __int64 UFG::_dynamic_initializer_for__qStaticSymbol_ePLAYER_BUFF_SHARPSHOOTER_L
 
   v0 = UFG::qStringHash32("ePLAYER_BUFF_SHARPSHOOTER_LEVEL3", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::qStaticSymbol_ePLAYER_BUFF_SHARPSHOOTER_LEVEL3, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qStaticSymbol_ePLAYER_BUFF_SHARPSHOOTER_LEVEL3__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qStaticSymbol_ePLAYER_BUFF_SHARPSHOOTER_LEVEL3__);
 }
 
 // File Line: 422
@@ -127,7 +127,7 @@ __int64 UFG::_dynamic_initializer_for__qStaticSymbol_eCLOTHINGBUFF_DLC_35__()
 
   v0 = UFG::qStringHash32("eCLOTHINGBUFF_DLC_35", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::qStaticSymbol_eCLOTHINGBUFF_DLC_35, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qStaticSymbol_eCLOTHINGBUFF_DLC_35__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qStaticSymbol_eCLOTHINGBUFF_DLC_35__);
 }
 
 // File Line: 423
@@ -138,7 +138,7 @@ __int64 UFG::_dynamic_initializer_for__qStaticSymbol_ePOIUseType_ScriptNoInterru
 
   v0 = UFG::qStringHash32("ePOIUseType_ScriptNoInterrupt", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UFG::qStaticSymbol_ePOIUseType_ScriptNoInterrupt, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__qStaticSymbol_ePOIUseType_ScriptNoInterrupt__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qStaticSymbol_ePOIUseType_ScriptNoInterrupt__);
 }
 
 // File Line: 434
@@ -149,7 +149,7 @@ __int64 UFG::_dynamic_initializer_for__MeleeWeaponEnumSymbols__()
   dword_1423B7ED4 = UFG::qStaticSymbol_eMELEE_WEAPON_BLUNT.mUID;
   dword_1423B7ED8 = UFG::qStaticSymbol_eMELEE_WEAPON_BLADED.mUID;
   dword_1423B7EDC = UFG::qStaticSymbol_eMELEE_WEAPON_TWOHANDED.mUID;
-  return atexit(UFG::_dynamic_atexit_destructor_for__MeleeWeaponEnumSymbols__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__MeleeWeaponEnumSymbols__);
 }
 
 // File Line: 439
@@ -162,7 +162,7 @@ __int64 UFG::_dynamic_initializer_for__RangedWeaponEnumSymbols__()
   dword_1423B98FC = UFG::qStaticSymbol_eRANGED_WEAPON_RIFLE.mUID;
   dword_1423B9900 = UFG::qStaticSymbol_eRANGED_WEAPON_SHOTGUN.mUID;
   dword_1423B9904 = UFG::qStaticSymbol_eRANGED_WEAPON_EXOTIC.mUID;
-  return atexit(UFG::_dynamic_atexit_destructor_for__RangedWeaponEnumSymbols__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__RangedWeaponEnumSymbols__);
 }
 
 // File Line: 444
@@ -188,7 +188,7 @@ __int64 UFG::_dynamic_initializer_for__FaceActionEnumSymbols__()
   dword_1423B9950 = UFG::qStaticSymbol_eFACEACTION_BUZZER_INTERACT.mUID;
   dword_1423B9954 = UFG::qStaticSymbol_eFACEACTION_ANY.mUID;
   dword_1423B9958 = UFG::qStaticSymbol_eFACEACTION_INVALID.mUID;
-  return atexit(UFG::_dynamic_atexit_destructor_for__FaceActionEnumSymbols__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__FaceActionEnumSymbols__);
 }
 
 // File Line: 449
@@ -221,7 +221,7 @@ __int64 UFG::_dynamic_initializer_for__HeatEventEnumSymbols__()
   dword_1423B7E7C = UFG::qStaticSymbol_eHEATEVENT_KIDNAP.mUID;
   dword_1423B7E80 = UFG::qStaticSymbol_eHEATEVENT_EXPLOSION.mUID;
   dword_1423B7E84 = UFG::qStaticSymbol_eHEATEVENT_RESIST_ARREST.mUID;
-  return atexit(UFG::_dynamic_atexit_destructor_for__HeatEventEnumSymbols__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__HeatEventEnumSymbols__);
 }
 
 // File Line: 454
@@ -233,7 +233,7 @@ __int64 UFG::_dynamic_initializer_for__HighlightingModeEnumSymbols__()
   dword_1423B8340 = UFG::qStaticSymbol_eHIGHLIGHTING_MODE_OFF.mUID;
   dword_1423B8344 = UFG::qStaticSymbol_eHIGHLIGHTING_MODE_ONE_TIME.mUID;
   dword_1423B8348 = UFG::qStaticSymbol_eHIGHLIGHTING_MODE_GRAPPLE.mUID;
-  return atexit(UFG::_dynamic_atexit_destructor_for__HighlightingModeEnumSymbols__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__HighlightingModeEnumSymbols__);
 }
 
 // File Line: 459
@@ -308,7 +308,7 @@ __int64 UFG::_dynamic_initializer_for__ConversationTopicEnumSymbols__()
   dword_1423B8F04 = UFG::qStaticSymbol_eConversationTopic_HitReaction.mUID;
   dword_1423B8F08 = UFG::qStaticSymbol_eConversationTopic_PurchaseMassageClinical.mUID;
   dword_1423B8F0C = UFG::qStaticSymbol_eConversationTopic_Invalid.mUID;
-  return atexit(UFG::_dynamic_atexit_destructor_for__ConversationTopicEnumSymbols__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__ConversationTopicEnumSymbols__);
 }
 
 // File Line: 464
@@ -321,7 +321,7 @@ __int64 UFG::_dynamic_initializer_for__ItemPropertiesEnumSymbols__()
   dword_1423B7D94 = UFG::qStaticSymbol_eITEM_PROPERTIES_DROP_ON_GRAPPLE.mUID;
   dword_1423B7D98 = UFG::qStaticSymbol_eITEM_PROPERTIES_IGNORE_DAMAGE.mUID;
   dword_1423B7D9C = UFG::qStaticSymbol_eITEM_PROPERTIES_LEFT_HAND_ONLY.mUID;
-  return atexit(UFG::_dynamic_atexit_destructor_for__ItemPropertiesEnumSymbols__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__ItemPropertiesEnumSymbols__);
 }
 
 // File Line: 469
@@ -537,7 +537,7 @@ __int64 UFG::_dynamic_initializer_for__InventoryItemEnumSymbols__()
   dword_1423B8878 = UFG::qStaticSymbol_eINVENTORY_ITEM_DLC_23.mUID;
   dword_1423B887C = UFG::qStaticSymbol_eINVENTORY_ITEM_DLC_24.mUID;
   dword_1423B8880 = UFG::qStaticSymbol_eINVENTORY_ITEM_DLC_25.mUID;
-  return atexit(UFG::_dynamic_atexit_destructor_for__InventoryItemEnumSymbols__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__InventoryItemEnumSymbols__);
 }
 
 // File Line: 474
@@ -552,7 +552,7 @@ __int64 UFG::_dynamic_initializer_for__SocialInteractionEnumSymbols__()
   dword_1423B9894 = UFG::qStaticSymbol_eSOCIALINTERACTIONRESULT_GREETSUCCESS.mUID;
   dword_1423B9898 = UFG::qStaticSymbol_eSOCIALINTERACTIONRESULT_GREETFAILURE.mUID;
   dword_1423B989C = UFG::qStaticSymbol_eSOCIALINTERACTIONRESULT_OTHERFAILURE.mUID;
-  return atexit(UFG::_dynamic_atexit_destructor_for__SocialInteractionEnumSymbols__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__SocialInteractionEnumSymbols__);
 }
 
 // File Line: 479
@@ -563,7 +563,7 @@ __int64 UFG::_dynamic_initializer_for__ConversationStateEnumSymbols__()
   dword_1423B9A1C = UFG::qStaticSymbol_eSOCIAL_CONVERSATION_STATE_LOOPING.mUID;
   dword_1423B9A20 = UFG::qStaticSymbol_eSOCIAL_CONVERSATION_STATE_EXIT.mUID;
   dword_1423B9A24 = UFG::qStaticSymbol_eSOCIAL_CONVERSATION_STATE_ENDED.mUID;
-  return atexit(UFG::_dynamic_atexit_destructor_for__ConversationStateEnumSymbols__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__ConversationStateEnumSymbols__);
 }
 
 // File Line: 484
@@ -582,7 +582,7 @@ __int64 UFG::_dynamic_initializer_for__PlayerBuffEnumSymbols__()
   dword_1423B9AF4 = UFG::qStaticSymbol_ePLAYER_BUFF_HEALTHREGEN.mUID;
   dword_1423B9AF8 = UFG::qStaticSymbol_ePLAYER_BUFF_FACEMETER.mUID;
   dword_1423B9AFC = UFG::qStaticSymbol_ePLAYER_BUFF_STRIKING.mUID;
-  return atexit(UFG::_dynamic_atexit_destructor_for__PlayerBuffEnumSymbols__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__PlayerBuffEnumSymbols__);
 }
 
 // File Line: 489
@@ -672,7 +672,7 @@ __int64 UFG::_dynamic_initializer_for__ClothingBuffEnumSymbols__()
   dword_1423B81E0 = UFG::qStaticSymbol_eCLOTHINGBUFF_DLC_48.mUID;
   dword_1423B81E4 = UFG::qStaticSymbol_eCLOTHINGBUFF_DLC_49.mUID;
   dword_1423B81E8 = UFG::qStaticSymbol_eCLOTHINGBUFF_DLC_50.mUID;
-  return atexit(UFG::_dynamic_atexit_destructor_for__ClothingBuffEnumSymbols__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__ClothingBuffEnumSymbols__);
 }
 
 // File Line: 494
@@ -683,7 +683,7 @@ __int64 UFG::_dynamic_initializer_for__POIUseTypeEnumSymbols__()
   dword_1423B9714 = UFG::qStaticSymbol_ePOIUseType_System.mUID;
   dword_1423B9718 = UFG::qStaticSymbol_ePOIUseType_Script.mUID;
   dword_1423B971C = UFG::qStaticSymbol_ePOIUseType_ScriptNoInterrupt.mUID;
-  return atexit(UFG::_dynamic_atexit_destructor_for__POIUseTypeEnumSymbols__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__POIUseTypeEnumSymbols__);
 }
 
 // File Line: 624
@@ -691,7 +691,7 @@ __int64 UFG::_dynamic_initializer_for__POIUseTypeEnumSymbols__()
 __int64 UFG::_dynamic_initializer_for__gPDAStateEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gPDAStateEnum, UFG::PDAStateEnumNames, 13, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gPDAStateEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gPDAStateEnum__);
 }
 
 // File Line: 625
@@ -699,7 +699,7 @@ __int64 UFG::_dynamic_initializer_for__gPDAStateEnum__()
 __int64 UFG::_dynamic_initializer_for__equalityEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::equalityEnum, UFG::gInEqualityOperatorStringList, 5, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__equalityEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__equalityEnum__);
 }
 
 // File Line: 626
@@ -707,7 +707,7 @@ __int64 UFG::_dynamic_initializer_for__equalityEnum__()
 __int64 UFG::_dynamic_initializer_for__vehicleVectorEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::vehicleVectorEnum, UFG::gVehicleVectorStringList, 8, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__vehicleVectorEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__vehicleVectorEnum__);
 }
 
 // File Line: 627
@@ -719,7 +719,7 @@ __int64 UFG::_dynamic_initializer_for__vehicleAttachmentIDEnum__()
     UFG::gVehicleAttachmentIDStringList,
     8,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__vehicleAttachmentIDEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__vehicleAttachmentIDEnum__);
 }
 
 // File Line: 628
@@ -731,7 +731,7 @@ __int64 UFG::_dynamic_initializer_for__vehicleAttachmentStateEnum__()
     UFG::gVehicleAttachmentStateStringList,
     5,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__vehicleAttachmentStateEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__vehicleAttachmentStateEnum__);
 }
 
 // File Line: 629
@@ -739,7 +739,7 @@ __int64 UFG::_dynamic_initializer_for__vehicleAttachmentStateEnum__()
 __int64 UFG::_dynamic_initializer_for__enableOptionEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::enableOptionEnum, UFG::gEnableOptionStringList, 3, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__enableOptionEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__enableOptionEnum__);
 }
 
 // File Line: 630
@@ -747,7 +747,7 @@ __int64 UFG::_dynamic_initializer_for__enableOptionEnum__()
 __int64 UFG::_dynamic_initializer_for__gMoveTypeEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gMoveTypeEnum, UFG::gMoveTypeStringList, 2, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gMoveTypeEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gMoveTypeEnum__);
 }
 
 // File Line: 631
@@ -759,7 +759,7 @@ __int64 UFG::_dynamic_initializer_for__gCopUpgradeTypeEnum__()
     UFG::gCopUpgradeTypeStringsList,
     2,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gCopUpgradeTypeEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gCopUpgradeTypeEnum__);
 }
 
 // File Line: 632
@@ -771,7 +771,7 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectTypeTracksEnum__()
     UFG::SimObjectTypeEnumNames,
     6,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSimObjectTypeTracksEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSimObjectTypeTracksEnum__);
 }
 
 // File Line: 633
@@ -779,7 +779,7 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectTypeTracksEnum__()
 __int64 UFG::_dynamic_initializer_for__gCharacterTypeEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gCharacterTypeEnum, UFG::CharacterTypeNames, 43, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gCharacterTypeEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gCharacterTypeEnum__);
 }
 
 // File Line: 634
@@ -791,7 +791,7 @@ __int64 UFG::_dynamic_initializer_for__gAnimationPriorityEnum__()
     UFG::AnimationPriorityNames,
     17,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gAnimationPriorityEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gAnimationPriorityEnum__);
 }
 
 // File Line: 635
@@ -799,7 +799,7 @@ __int64 UFG::_dynamic_initializer_for__gAnimationPriorityEnum__()
 __int64 UFG::_dynamic_initializer_for__gCoverPopoutSideEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gCoverPopoutSideEnum, UFG::CoverPopoutSideNames, 4, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gCoverPopoutSideEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gCoverPopoutSideEnum__);
 }
 
 // File Line: 636
@@ -811,7 +811,7 @@ __int64 UFG::_dynamic_initializer_for__gCoverComponentObjectEnum__()
     UFG::CoverComponentObjectNames,
     5,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gCoverComponentObjectEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gCoverComponentObjectEnum__);
 }
 
 // File Line: 637
@@ -819,7 +819,7 @@ __int64 UFG::_dynamic_initializer_for__gCoverComponentObjectEnum__()
 __int64 UFG::_dynamic_initializer_for__gFightingClassEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gFightingClassEnum, UFG::FightingClassNames, 10, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gFightingClassEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gFightingClassEnum__);
 }
 
 // File Line: 638
@@ -827,7 +827,7 @@ __int64 UFG::_dynamic_initializer_for__gFightingClassEnum__()
 __int64 UFG::_dynamic_initializer_for__gMeleeWeaponEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gMeleeWeaponEnum, UFG::MeleeWeaponNames, 4, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gMeleeWeaponEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gMeleeWeaponEnum__);
 }
 
 // File Line: 639
@@ -835,7 +835,7 @@ __int64 UFG::_dynamic_initializer_for__gMeleeWeaponEnum__()
 __int64 UFG::_dynamic_initializer_for__gRangedWeaponEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gRangedWeaponEnum, UFG::RangedWeaponNames, 6, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gRangedWeaponEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gRangedWeaponEnum__);
 }
 
 // File Line: 640
@@ -843,7 +843,7 @@ __int64 UFG::_dynamic_initializer_for__gRangedWeaponEnum__()
 __int64 UFG::_dynamic_initializer_for__gThrownWeaponEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gThrownWeaponEnum, UFG::ThrownWeaponNames, 5, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gThrownWeaponEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gThrownWeaponEnum__);
 }
 
 // File Line: 641
@@ -855,7 +855,7 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectBooleanTracksEnum__()
     UFG::SimObjectBooleanEnumNames,
     7,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSimObjectBooleanTracksEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSimObjectBooleanTracksEnum__);
 }
 
 // File Line: 642
@@ -867,7 +867,7 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectFlagsTracksEnum__()
     UFG::SimObjectFlagEnumNames,
     2,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSimObjectFlagsTracksEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSimObjectFlagsTracksEnum__);
 }
 
 // File Line: 644
@@ -877,7 +877,7 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum__()
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(
     &UFG::gSimObjectWeaponTypeTrackEnum,
     "Global/Act/SimObjectWeaponType.xml");
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum__);
 }
 
 // File Line: 649
@@ -885,12 +885,12 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum__()
 __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_PISTOL__()
 {
   UFG::qSymbol *v0; // rax
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v1; // rax
-  UFG::qSymbol result; // [rsp+40h] [rbp+8h]
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
+  UFG::qSymbol result; // [rsp+40h] [rbp+8h] BYREF
 
   v0 = UFG::qSymbol::create_from_string(&result, "eSIM_OBJ_WEAPON_TYPE_PISTOL");
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_PISTOL.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_PISTOL;
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_PISTOL.mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_PISTOL;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_PISTOL.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_PISTOL;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_PISTOL.mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_PISTOL;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_PISTOL.m_EnumSymbol.mUID = -1;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_PISTOL.m_EnumSymbol = (UFG::qSymbol)v0->mUID;
   *(_QWORD *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_PISTOL.m_EnumValue = 0i64;
@@ -903,13 +903,13 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
   }
   else
   {
-    v1 = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_PISTOL;
-    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_PISTOL.mPrev = v1;
+    mPrev = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_PISTOL;
+    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_PISTOL.mPrev = mPrev;
     UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_PISTOL.mNext = &UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_PISTOL;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_PISTOL;
   }
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_PISTOL__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_PISTOL__);
 }
 
 // File Line: 650
@@ -917,12 +917,12 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
 __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_RIFLE__()
 {
   UFG::qSymbol *v0; // rax
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v1; // rax
-  UFG::qSymbol result; // [rsp+40h] [rbp+8h]
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
+  UFG::qSymbol result; // [rsp+40h] [rbp+8h] BYREF
 
   v0 = UFG::qSymbol::create_from_string(&result, "eSIM_OBJ_WEAPON_TYPE_RIFLE");
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_RIFLE.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_RIFLE;
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_RIFLE.mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_RIFLE;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_RIFLE.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_RIFLE;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_RIFLE.mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_RIFLE;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_RIFLE.m_EnumSymbol.mUID = -1;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_RIFLE.m_EnumSymbol = (UFG::qSymbol)v0->mUID;
   *(_QWORD *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_RIFLE.m_EnumValue = 0i64;
@@ -935,13 +935,13 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
   }
   else
   {
-    v1 = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_RIFLE;
-    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_RIFLE.mPrev = v1;
+    mPrev = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_RIFLE;
+    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_RIFLE.mPrev = mPrev;
     UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_RIFLE.mNext = &UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_RIFLE;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_RIFLE;
   }
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_RIFLE__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_RIFLE__);
 }
 
 // File Line: 651
@@ -949,12 +949,12 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
 __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SHOTGUN__()
 {
   UFG::qSymbol *v0; // rax
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v1; // rax
-  UFG::qSymbol result; // [rsp+40h] [rbp+8h]
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
+  UFG::qSymbol result; // [rsp+40h] [rbp+8h] BYREF
 
   v0 = UFG::qSymbol::create_from_string(&result, "eSIM_OBJ_WEAPON_TYPE_SHOTGUN");
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SHOTGUN.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SHOTGUN;
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SHOTGUN.mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SHOTGUN;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SHOTGUN.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SHOTGUN;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SHOTGUN.mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SHOTGUN;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SHOTGUN.m_EnumSymbol.mUID = -1;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SHOTGUN.m_EnumSymbol = (UFG::qSymbol)v0->mUID;
   *(_QWORD *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SHOTGUN.m_EnumValue = 0i64;
@@ -967,13 +967,13 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
   }
   else
   {
-    v1 = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SHOTGUN;
-    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SHOTGUN.mPrev = v1;
+    mPrev = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SHOTGUN;
+    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SHOTGUN.mPrev = mPrev;
     UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SHOTGUN.mNext = &UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SHOTGUN;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SHOTGUN;
   }
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SHOTGUN__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SHOTGUN__);
 }
 
 // File Line: 652
@@ -981,12 +981,12 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
 __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SMG__()
 {
   UFG::qSymbol *v0; // rax
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v1; // rax
-  UFG::qSymbol result; // [rsp+40h] [rbp+8h]
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
+  UFG::qSymbol result; // [rsp+40h] [rbp+8h] BYREF
 
   v0 = UFG::qSymbol::create_from_string(&result, "eSIM_OBJ_WEAPON_TYPE_SMG");
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SMG.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SMG;
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SMG.mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SMG;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SMG.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SMG;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SMG.mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SMG;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SMG.m_EnumSymbol.mUID = -1;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SMG.m_EnumSymbol = (UFG::qSymbol)v0->mUID;
   *(_QWORD *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SMG.m_EnumValue = 0i64;
@@ -999,13 +999,13 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
   }
   else
   {
-    v1 = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SMG;
-    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SMG.mPrev = v1;
+    mPrev = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SMG;
+    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SMG.mPrev = mPrev;
     UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SMG.mNext = &UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SMG;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SMG;
   }
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SMG__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SMG__);
 }
 
 // File Line: 653
@@ -1013,12 +1013,12 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
 __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SNIPER__()
 {
   UFG::qSymbol *v0; // rax
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v1; // rax
-  UFG::qSymbol result; // [rsp+40h] [rbp+8h]
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
+  UFG::qSymbol result; // [rsp+40h] [rbp+8h] BYREF
 
   v0 = UFG::qSymbol::create_from_string(&result, "eSIM_OBJ_WEAPON_TYPE_SNIPER");
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SNIPER.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SNIPER;
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SNIPER.mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SNIPER;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SNIPER.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SNIPER;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SNIPER.mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SNIPER;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SNIPER.m_EnumSymbol.mUID = -1;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SNIPER.m_EnumSymbol = (UFG::qSymbol)v0->mUID;
   *(_QWORD *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SNIPER.m_EnumValue = 0i64;
@@ -1031,13 +1031,13 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
   }
   else
   {
-    v1 = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SNIPER;
-    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SNIPER.mPrev = v1;
+    mPrev = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SNIPER;
+    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SNIPER.mPrev = mPrev;
     UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SNIPER.mNext = &UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SNIPER;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SNIPER;
   }
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SNIPER__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SNIPER__);
 }
 
 // File Line: 654
@@ -1045,12 +1045,12 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
 __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_KNIFE__()
 {
   UFG::qSymbol *v0; // rax
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v1; // rax
-  UFG::qSymbol result; // [rsp+40h] [rbp+8h]
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
+  UFG::qSymbol result; // [rsp+40h] [rbp+8h] BYREF
 
   v0 = UFG::qSymbol::create_from_string(&result, "eSIM_OBJ_WEAPON_TYPE_KNIFE");
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_KNIFE.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_KNIFE;
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_KNIFE.mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_KNIFE;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_KNIFE.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_KNIFE;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_KNIFE.mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_KNIFE;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_KNIFE.m_EnumSymbol.mUID = -1;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_KNIFE.m_EnumSymbol = (UFG::qSymbol)v0->mUID;
   *(_QWORD *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_KNIFE.m_EnumValue = 0i64;
@@ -1063,13 +1063,13 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
   }
   else
   {
-    v1 = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_KNIFE;
-    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_KNIFE.mPrev = v1;
+    mPrev = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_KNIFE;
+    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_KNIFE.mPrev = mPrev;
     UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_KNIFE.mNext = &UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_KNIFE;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_KNIFE;
   }
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_KNIFE__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_KNIFE__);
 }
 
 // File Line: 655
@@ -1077,12 +1077,12 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
 __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_CLEAVER__()
 {
   UFG::qSymbol *v0; // rax
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v1; // rax
-  UFG::qSymbol result; // [rsp+40h] [rbp+8h]
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
+  UFG::qSymbol result; // [rsp+40h] [rbp+8h] BYREF
 
   v0 = UFG::qSymbol::create_from_string(&result, "eSIM_OBJ_WEAPON_TYPE_CLEAVER");
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_CLEAVER.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_CLEAVER;
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_CLEAVER.mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_CLEAVER;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_CLEAVER.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_CLEAVER;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_CLEAVER.mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_CLEAVER;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_CLEAVER.m_EnumSymbol.mUID = -1;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_CLEAVER.m_EnumSymbol = (UFG::qSymbol)v0->mUID;
   *(_QWORD *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_CLEAVER.m_EnumValue = 0i64;
@@ -1095,13 +1095,13 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
   }
   else
   {
-    v1 = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_CLEAVER;
-    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_CLEAVER.mPrev = v1;
+    mPrev = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_CLEAVER;
+    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_CLEAVER.mPrev = mPrev;
     UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_CLEAVER.mNext = &UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_CLEAVER;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_CLEAVER;
   }
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_CLEAVER__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_CLEAVER__);
 }
 
 // File Line: 656
@@ -1109,12 +1109,12 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
 __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_STRAIGHT_SWORD__()
 {
   UFG::qSymbol *v0; // rax
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v1; // rax
-  UFG::qSymbol result; // [rsp+40h] [rbp+8h]
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
+  UFG::qSymbol result; // [rsp+40h] [rbp+8h] BYREF
 
   v0 = UFG::qSymbol::create_from_string(&result, "eSIM_OBJ_WEAPON_TYPE_STRAIGHT_SWORD");
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_STRAIGHT_SWORD.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_STRAIGHT_SWORD;
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_STRAIGHT_SWORD.mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_STRAIGHT_SWORD;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_STRAIGHT_SWORD.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_STRAIGHT_SWORD;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_STRAIGHT_SWORD.mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_STRAIGHT_SWORD;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_STRAIGHT_SWORD.m_EnumSymbol.mUID = -1;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_STRAIGHT_SWORD.m_EnumSymbol = (UFG::qSymbol)v0->mUID;
   *(_QWORD *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_STRAIGHT_SWORD.m_EnumValue = 0i64;
@@ -1127,13 +1127,13 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
   }
   else
   {
-    v1 = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_STRAIGHT_SWORD;
-    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_STRAIGHT_SWORD.mPrev = v1;
+    mPrev = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_STRAIGHT_SWORD;
+    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_STRAIGHT_SWORD.mPrev = mPrev;
     UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_STRAIGHT_SWORD.mNext = &UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_STRAIGHT_SWORD;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_STRAIGHT_SWORD;
   }
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_STRAIGHT_SWORD__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_STRAIGHT_SWORD__);
 }
 
 // File Line: 657
@@ -1141,12 +1141,12 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
 __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SWORD__()
 {
   UFG::qSymbol *v0; // rax
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v1; // rax
-  UFG::qSymbol result; // [rsp+40h] [rbp+8h]
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
+  UFG::qSymbol result; // [rsp+40h] [rbp+8h] BYREF
 
   v0 = UFG::qSymbol::create_from_string(&result, "eSIM_OBJ_WEAPON_TYPE_SWORD");
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SWORD.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SWORD;
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SWORD.mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SWORD;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SWORD.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SWORD;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SWORD.mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SWORD;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SWORD.m_EnumSymbol.mUID = -1;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SWORD.m_EnumSymbol = (UFG::qSymbol)v0->mUID;
   *(_QWORD *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SWORD.m_EnumValue = 0i64;
@@ -1159,13 +1159,13 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
   }
   else
   {
-    v1 = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SWORD;
-    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SWORD.mPrev = v1;
+    mPrev = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SWORD;
+    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SWORD.mPrev = mPrev;
     UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SWORD.mNext = &UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SWORD;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SWORD;
   }
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SWORD__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_SWORD__);
 }
 
 // File Line: 658
@@ -1173,12 +1173,12 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
 __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BATON__()
 {
   UFG::qSymbol *v0; // rax
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v1; // rax
-  UFG::qSymbol result; // [rsp+40h] [rbp+8h]
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
+  UFG::qSymbol result; // [rsp+40h] [rbp+8h] BYREF
 
   v0 = UFG::qSymbol::create_from_string(&result, "eSIM_OBJ_WEAPON_TYPE_BATON");
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BATON.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BATON;
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BATON.mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BATON;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BATON.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BATON;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BATON.mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BATON;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BATON.m_EnumSymbol.mUID = -1;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BATON.m_EnumSymbol = (UFG::qSymbol)v0->mUID;
   *(_QWORD *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BATON.m_EnumValue = 0i64;
@@ -1191,13 +1191,13 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
   }
   else
   {
-    v1 = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BATON;
-    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BATON.mPrev = v1;
+    mPrev = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BATON;
+    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BATON.mPrev = mPrev;
     UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BATON.mNext = &UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BATON;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BATON;
   }
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BATON__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BATON__);
 }
 
 // File Line: 659
@@ -1205,12 +1205,12 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
 __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_LONG__()
 {
   UFG::qSymbol *v0; // rax
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v1; // rax
-  UFG::qSymbol result; // [rsp+40h] [rbp+8h]
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
+  UFG::qSymbol result; // [rsp+40h] [rbp+8h] BYREF
 
   v0 = UFG::qSymbol::create_from_string(&result, "eSIM_OBJ_WEAPON_TYPE_LONG");
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_LONG.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_LONG;
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_LONG.mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_LONG;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_LONG.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_LONG;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_LONG.mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_LONG;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_LONG.m_EnumSymbol.mUID = -1;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_LONG.m_EnumSymbol = (UFG::qSymbol)v0->mUID;
   *(_QWORD *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_LONG.m_EnumValue = 0i64;
@@ -1223,13 +1223,13 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
   }
   else
   {
-    v1 = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_LONG;
-    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_LONG.mPrev = v1;
+    mPrev = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_LONG;
+    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_LONG.mPrev = mPrev;
     UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_LONG.mNext = &UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_LONG;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_LONG;
   }
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_LONG__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_LONG__);
 }
 
 // File Line: 660
@@ -1237,12 +1237,12 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
 __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BROOM_FULL__()
 {
   UFG::qSymbol *v0; // rax
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v1; // rax
-  UFG::qSymbol result; // [rsp+40h] [rbp+8h]
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
+  UFG::qSymbol result; // [rsp+40h] [rbp+8h] BYREF
 
   v0 = UFG::qSymbol::create_from_string(&result, "eSIM_OBJ_WEAPON_TYPE_BROOM_FULL");
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BROOM_FULL.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BROOM_FULL;
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BROOM_FULL.mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BROOM_FULL;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BROOM_FULL.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BROOM_FULL;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BROOM_FULL.mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BROOM_FULL;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BROOM_FULL.m_EnumSymbol.mUID = -1;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BROOM_FULL.m_EnumSymbol = (UFG::qSymbol)v0->mUID;
   *(_QWORD *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BROOM_FULL.m_EnumValue = 0i64;
@@ -1255,13 +1255,13 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
   }
   else
   {
-    v1 = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BROOM_FULL;
-    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BROOM_FULL.mPrev = v1;
+    mPrev = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BROOM_FULL;
+    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BROOM_FULL.mPrev = mPrev;
     UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BROOM_FULL.mNext = &UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BROOM_FULL;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BROOM_FULL;
   }
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BROOM_FULL__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_BROOM_FULL__);
 }
 
 // File Line: 661
@@ -1269,12 +1269,12 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
 __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_POLEARM__()
 {
   UFG::qSymbol *v0; // rax
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v1; // rax
-  UFG::qSymbol result; // [rsp+40h] [rbp+8h]
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
+  UFG::qSymbol result; // [rsp+40h] [rbp+8h] BYREF
 
   v0 = UFG::qSymbol::create_from_string(&result, "eSIM_OBJ_WEAPON_TYPE_POLEARM");
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_POLEARM.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_POLEARM;
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_POLEARM.mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_POLEARM;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_POLEARM.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_POLEARM;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_POLEARM.mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_POLEARM;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_POLEARM.m_EnumSymbol.mUID = -1;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_POLEARM.m_EnumSymbol = (UFG::qSymbol)v0->mUID;
   *(_QWORD *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_POLEARM.m_EnumValue = 0i64;
@@ -1287,13 +1287,13 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
   }
   else
   {
-    v1 = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_POLEARM;
-    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_POLEARM.mPrev = v1;
+    mPrev = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_POLEARM;
+    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_POLEARM.mPrev = mPrev;
     UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_POLEARM.mNext = &UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_POLEARM;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_POLEARM;
   }
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_POLEARM__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_POLEARM__);
 }
 
 // File Line: 662
@@ -1301,12 +1301,12 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
 __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_GAS__()
 {
   UFG::qSymbol *v0; // rax
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v1; // rax
-  UFG::qSymbol result; // [rsp+40h] [rbp+8h]
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
+  UFG::qSymbol result; // [rsp+40h] [rbp+8h] BYREF
 
   v0 = UFG::qSymbol::create_from_string(&result, "eSIM_OBJ_WEAPON_TYPE_GAS");
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_GAS.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_GAS;
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_GAS.mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_GAS;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_GAS.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_GAS;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_GAS.mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_GAS;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_GAS.m_EnumSymbol.mUID = -1;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_GAS.m_EnumSymbol = (UFG::qSymbol)v0->mUID;
   *(_QWORD *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_GAS.m_EnumValue = 0i64;
@@ -1319,13 +1319,13 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
   }
   else
   {
-    v1 = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_GAS;
-    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_GAS.mPrev = v1;
+    mPrev = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_GAS;
+    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_GAS.mPrev = mPrev;
     UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_GAS.mNext = &UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_GAS;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_GAS;
   }
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_GAS__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_GAS__);
 }
 
 // File Line: 663
@@ -1333,12 +1333,12 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
 __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FRAG__()
 {
   UFG::qSymbol *v0; // rax
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v1; // rax
-  UFG::qSymbol result; // [rsp+40h] [rbp+8h]
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
+  UFG::qSymbol result; // [rsp+40h] [rbp+8h] BYREF
 
   v0 = UFG::qSymbol::create_from_string(&result, "eSIM_OBJ_WEAPON_TYPE_FRAG");
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FRAG.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FRAG;
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FRAG.mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FRAG;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FRAG.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FRAG;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FRAG.mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FRAG;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FRAG.m_EnumSymbol.mUID = -1;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FRAG.m_EnumSymbol = (UFG::qSymbol)v0->mUID;
   *(_QWORD *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FRAG.m_EnumValue = 0i64;
@@ -1351,13 +1351,13 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
   }
   else
   {
-    v1 = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FRAG;
-    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FRAG.mPrev = v1;
+    mPrev = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FRAG;
+    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FRAG.mPrev = mPrev;
     UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FRAG.mNext = &UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FRAG;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FRAG;
   }
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FRAG__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FRAG__);
 }
 
 // File Line: 664
@@ -1365,12 +1365,12 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
 __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_MOLOTOV__()
 {
   UFG::qSymbol *v0; // rax
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v1; // rax
-  UFG::qSymbol result; // [rsp+40h] [rbp+8h]
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
+  UFG::qSymbol result; // [rsp+40h] [rbp+8h] BYREF
 
   v0 = UFG::qSymbol::create_from_string(&result, "eSIM_OBJ_WEAPON_TYPE_MOLOTOV");
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_MOLOTOV.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_MOLOTOV;
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_MOLOTOV.mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_MOLOTOV;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_MOLOTOV.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_MOLOTOV;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_MOLOTOV.mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_MOLOTOV;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_MOLOTOV.m_EnumSymbol.mUID = -1;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_MOLOTOV.m_EnumSymbol = (UFG::qSymbol)v0->mUID;
   *(_QWORD *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_MOLOTOV.m_EnumValue = 0i64;
@@ -1383,13 +1383,13 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
   }
   else
   {
-    v1 = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_MOLOTOV;
-    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_MOLOTOV.mPrev = v1;
+    mPrev = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_MOLOTOV;
+    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_MOLOTOV.mPrev = mPrev;
     UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_MOLOTOV.mNext = &UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_MOLOTOV;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_MOLOTOV;
   }
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_MOLOTOV__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_MOLOTOV__);
 }
 
 // File Line: 665
@@ -1397,12 +1397,12 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
 __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FLASH__()
 {
   UFG::qSymbol *v0; // rax
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v1; // rax
-  UFG::qSymbol result; // [rsp+40h] [rbp+8h]
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
+  UFG::qSymbol result; // [rsp+40h] [rbp+8h] BYREF
 
   v0 = UFG::qSymbol::create_from_string(&result, "eSIM_OBJ_WEAPON_TYPE_FLASH");
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FLASH.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FLASH;
-  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FLASH.mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FLASH;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FLASH.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FLASH;
+  UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FLASH.mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FLASH;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FLASH.m_EnumSymbol.mUID = -1;
   UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FLASH.m_EnumSymbol = (UFG::qSymbol)v0->mUID;
   *(_QWORD *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FLASH.m_EnumValue = 0i64;
@@ -1415,13 +1415,13 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WE
   }
   else
   {
-    v1 = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FLASH;
-    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FLASH.mPrev = v1;
+    mPrev = UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FLASH;
+    UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FLASH.mPrev = mPrev;
     UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FLASH.mNext = &UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode;
-    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FLASH;
+    UFG::gSimObjectWeaponTypeTrackEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &UFG::gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FLASH;
   }
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FLASH__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponTypeTrackEnum_eSIM_OBJ_WEAPON_TYPE_FLASH__);
 }
 
 // File Line: 667
@@ -1433,7 +1433,7 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponBooleanTracksEnum__()
     UFG::SimObjectWeaponBooleanEnumNames,
     6,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponBooleanTracksEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponBooleanTracksEnum__);
 }
 
 // File Line: 668
@@ -1443,7 +1443,7 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectWeaponReticleTracksEnum__()
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(
     &UFG::gSimObjectWeaponReticleTracksEnum,
     "Global/Act/SimObjectWeaponReticle.xml");
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponReticleTracksEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSimObjectWeaponReticleTracksEnum__);
 }
 
 // File Line: 670
@@ -1455,7 +1455,7 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectVehicleTypeTracksEnum__()
     UFG::SimObjectVehicleTypeEnumNames,
     10,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSimObjectVehicleTypeTracksEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSimObjectVehicleTypeTracksEnum__);
 }
 
 // File Line: 671
@@ -1467,7 +1467,7 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectBoatTypeTracksEnum__()
     UFG::SimObjectBoatTypeEnumNames,
     7,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSimObjectBoatTypeTracksEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSimObjectBoatTypeTracksEnum__);
 }
 
 // File Line: 672
@@ -1479,7 +1479,7 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectCharacterBooleanTracksEnum__()
     UFG::SimObjectCharacterBooleanEnumNames,
     11,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSimObjectCharacterBooleanTracksEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSimObjectCharacterBooleanTracksEnum__);
 }
 
 // File Line: 674
@@ -1487,7 +1487,7 @@ __int64 UFG::_dynamic_initializer_for__gSimObjectCharacterBooleanTracksEnum__()
 __int64 UFG::_dynamic_initializer_for__gInventoryItemTracksEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gInventoryItemTracksEnum, "Global/Act/InventoryItems.xml");
-  return atexit(UFG::_dynamic_atexit_destructor_for__gInventoryItemTracksEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gInventoryItemTracksEnum__);
 }
 
 // File Line: 676
@@ -1499,7 +1499,7 @@ __int64 UFG::_dynamic_initializer_for__gItemPropertiesTracksEnum__()
     UFG::ItemPropertiesEnumNames,
     6,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gItemPropertiesTracksEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gItemPropertiesTracksEnum__);
 }
 
 // File Line: 677
@@ -1511,7 +1511,7 @@ __int64 UFG::_dynamic_initializer_for__gInventoryEquipSlotsTracksEnum__()
     UFG::InventoryEquipSlotEnumNames,
     6,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gInventoryEquipSlotsTracksEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gInventoryEquipSlotsTracksEnum__);
 }
 
 // File Line: 678
@@ -1523,7 +1523,7 @@ __int64 UFG::_dynamic_initializer_for__gCharacterStatTracksEnum__()
     UFG::CharacterStatEnumNames,
     7,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gCharacterStatTracksEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gCharacterStatTracksEnum__);
 }
 
 // File Line: 679
@@ -1531,7 +1531,7 @@ __int64 UFG::_dynamic_initializer_for__gCharacterStatTracksEnum__()
 __int64 UFG::_dynamic_initializer_for__gFaceActionTracksEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gFaceActionTracksEnum, UFG::FaceActionEnumNames, 19, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gFaceActionTracksEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gFaceActionTracksEnum__);
 }
 
 // File Line: 680
@@ -1539,7 +1539,7 @@ __int64 UFG::_dynamic_initializer_for__gFaceActionTracksEnum__()
 __int64 UFG::_dynamic_initializer_for__gHeatEventTracksEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gHeatEventTracksEnum, UFG::HeatEventEnumNames, 26, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gHeatEventTracksEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gHeatEventTracksEnum__);
 }
 
 // File Line: 681
@@ -1551,7 +1551,7 @@ __int64 UFG::_dynamic_initializer_for__gHighlightingModeEnum__()
     UFG::HighlightingModeEnumNames,
     5,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gHighlightingModeEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gHighlightingModeEnum__);
 }
 
 // File Line: 682
@@ -1563,7 +1563,7 @@ __int64 UFG::_dynamic_initializer_for__gVehicleOrientationEnum__()
     UFG::VehicleOrientationEnumNames,
     6,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gVehicleOrientationEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gVehicleOrientationEnum__);
 }
 
 // File Line: 683
@@ -1571,7 +1571,7 @@ __int64 UFG::_dynamic_initializer_for__gVehicleOrientationEnum__()
 __int64 UFG::_dynamic_initializer_for__gTargetTypeEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gTargetTypeEnum, UFG::TargetTypeEnumNames, 91, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gTargetTypeEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gTargetTypeEnum__);
 }
 
 // File Line: 684
@@ -1579,7 +1579,7 @@ __int64 UFG::_dynamic_initializer_for__gTargetTypeEnum__()
 __int64 UFG::_dynamic_initializer_for__gAIDesiredRangeEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gAIDesiredRangeEnum, UFG::AIDesiredRangeEnumNames, 3, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gAIDesiredRangeEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gAIDesiredRangeEnum__);
 }
 
 // File Line: 685
@@ -1587,7 +1587,7 @@ __int64 UFG::_dynamic_initializer_for__gAIDesiredRangeEnum__()
 __int64 UFG::_dynamic_initializer_for__gAttackTypeEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gAttackTypeEnum, UFG::AttackTypeNames, 3, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gAttackTypeEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gAttackTypeEnum__);
 }
 
 // File Line: 686
@@ -1595,7 +1595,7 @@ __int64 UFG::_dynamic_initializer_for__gAttackTypeEnum__()
 __int64 UFG::_dynamic_initializer_for__gFocusModeEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gFocusModeEnum, UFG::FocusModeEnumNames, 5, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gFocusModeEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gFocusModeEnum__);
 }
 
 // File Line: 687
@@ -1607,7 +1607,7 @@ __int64 UFG::_dynamic_initializer_for__gMissionFailTriggerTypeEnum__()
     UFG::MissionFailTriggerTypeEnumNames,
     1,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gMissionFailTriggerTypeEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gMissionFailTriggerTypeEnum__);
 }
 
 // File Line: 688
@@ -1615,7 +1615,7 @@ __int64 UFG::_dynamic_initializer_for__gMissionFailTriggerTypeEnum__()
 __int64 UFG::_dynamic_initializer_for__gAttackPhaseEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gAttackPhaseEnum, UFG::AttackPhaseEnumNames, 4, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gAttackPhaseEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gAttackPhaseEnum__);
 }
 
 // File Line: 689
@@ -1627,7 +1627,7 @@ __int64 UFG::_dynamic_initializer_for__gProjectileReactionEnum__()
     UFG::ProjectileReactionEnumNames,
     4,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gProjectileReactionEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gProjectileReactionEnum__);
 }
 
 // File Line: 690
@@ -1635,7 +1635,7 @@ __int64 UFG::_dynamic_initializer_for__gProjectileReactionEnum__()
 __int64 UFG::_dynamic_initializer_for__gHeatLevelEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gHeatLevelEnum, UFG::gHeatLevelStringTable, 6, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gHeatLevelEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gHeatLevelEnum__);
 }
 
 // File Line: 691
@@ -1647,7 +1647,7 @@ __int64 UFG::_dynamic_initializer_for__gVehicleDamageTypeEnum__()
     UFG::VehicleDamageTypeEnumNames,
     10,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gVehicleDamageTypeEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gVehicleDamageTypeEnum__);
 }
 
 // File Line: 692
@@ -1659,7 +1659,7 @@ __int64 UFG::_dynamic_initializer_for__gVehicleWindowTypeEnum__()
     UFG::VehicleWindowTypeEnumNames,
     6,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gVehicleWindowTypeEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gVehicleWindowTypeEnum__);
 }
 
 // File Line: 693
@@ -1671,7 +1671,7 @@ __int64 UFG::_dynamic_initializer_for__gDriverProfileTypeEnum__()
     UFG::DriverProfileTypeEnumNames,
     3,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gDriverProfileTypeEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gDriverProfileTypeEnum__);
 }
 
 // File Line: 694
@@ -1679,7 +1679,7 @@ __int64 UFG::_dynamic_initializer_for__gDriverProfileTypeEnum__()
 __int64 UFG::_dynamic_initializer_for__gModifierTypeEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gModifierTypeEnum, UFG::ModiferTypeEnumNames, 3, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gModifierTypeEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gModifierTypeEnum__);
 }
 
 // File Line: 695
@@ -1687,7 +1687,7 @@ __int64 UFG::_dynamic_initializer_for__gModifierTypeEnum__()
 __int64 UFG::_dynamic_initializer_for__gFollowCameraTypeEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gFollowCameraTypeEnum, UFG::FollowCameraTypeNames, 4, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gFollowCameraTypeEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gFollowCameraTypeEnum__);
 }
 
 // File Line: 696
@@ -1695,7 +1695,7 @@ __int64 UFG::_dynamic_initializer_for__gFollowCameraTypeEnum__()
 __int64 UFG::_dynamic_initializer_for__gCameraTypeEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gCameraTypeEnum, UFG::CameraTypeNames, 6, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gCameraTypeEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gCameraTypeEnum__);
 }
 
 // File Line: 697
@@ -1707,7 +1707,7 @@ __int64 UFG::_dynamic_initializer_for__gConversationTopicEnum__()
     UFG::ConversationTopicNames,
     68,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gConversationTopicEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gConversationTopicEnum__);
 }
 
 // File Line: 698
@@ -1719,7 +1719,7 @@ __int64 UFG::_dynamic_initializer_for__gConversationOperationEnum__()
     UFG::ConversationOperationNames,
     2,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gConversationOperationEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gConversationOperationEnum__);
 }
 
 // File Line: 699
@@ -1727,7 +1727,7 @@ __int64 UFG::_dynamic_initializer_for__gConversationOperationEnum__()
 __int64 UFG::_dynamic_initializer_for__gBoxSideEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gBoxSideEnum, UFG::BoxSideEnumNames, 6, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gBoxSideEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gBoxSideEnum__);
 }
 
 // File Line: 700
@@ -1735,7 +1735,7 @@ __int64 UFG::_dynamic_initializer_for__gBoxSideEnum__()
 __int64 UFG::_dynamic_initializer_for__stimulusTrackEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::stimulusTrackEnum, UFG::g_StimulusName, 116, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__stimulusTrackEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__stimulusTrackEnum__);
 }
 
 // File Line: 701
@@ -1747,7 +1747,7 @@ __int64 UFG::_dynamic_initializer_for__eFactionStandingTracksEnum__()
     UFG::gFactionStandingStrings,
     4,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__eFactionStandingTracksEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__eFactionStandingTracksEnum__);
 }
 
 // File Line: 702
@@ -1759,7 +1759,7 @@ __int64 UFG::_dynamic_initializer_for__gActionTreeStateFlagTracksEnum__()
     UFG::ActionTreeStateFlagEnumNames,
     10,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gActionTreeStateFlagTracksEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gActionTreeStateFlagTracksEnum__);
 }
 
 // File Line: 703
@@ -1771,7 +1771,7 @@ __int64 UFG::_dynamic_initializer_for__gAttackIntensityEnum__()
     UFG::AttackIntensityEnumNames,
     6,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gAttackIntensityEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gAttackIntensityEnum__);
 }
 
 // File Line: 704
@@ -1779,7 +1779,7 @@ __int64 UFG::_dynamic_initializer_for__gAttackIntensityEnum__()
 __int64 UFG::_dynamic_initializer_for__gPlayerBuffEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gPlayerBuffEnum, UFG::PlayerBuffEnumNames, 12, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gPlayerBuffEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gPlayerBuffEnum__);
 }
 
 // File Line: 705
@@ -1791,7 +1791,7 @@ __int64 UFG::_dynamic_initializer_for__gPedFormationFacingTypeTracksEnum__()
     UFG::PedFormationFacingTypeEnumNames,
     4,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gPedFormationFacingTypeTracksEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gPedFormationFacingTypeTracksEnum__);
 }
 
 // File Line: 706
@@ -1803,7 +1803,7 @@ __int64 UFG::_dynamic_initializer_for__gSocialInteractionResultEnum__()
     UFG::SocialInteractionResultNames,
     8,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSocialInteractionResultEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSocialInteractionResultEnum__);
 }
 
 // File Line: 707
@@ -1811,7 +1811,7 @@ __int64 UFG::_dynamic_initializer_for__gSocialInteractionResultEnum__()
 __int64 UFG::_dynamic_initializer_for__gFaceActionStateEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gFaceActionStateEnum, UFG::FaceActionStateNames, 9, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gFaceActionStateEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gFaceActionStateEnum__);
 }
 
 // File Line: 708
@@ -1823,7 +1823,7 @@ __int64 UFG::_dynamic_initializer_for__gSocialInteractionDistanceEnum__()
     UFG::SocialInteractionDistanceNames,
     5,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSocialInteractionDistanceEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSocialInteractionDistanceEnum__);
 }
 
 // File Line: 709
@@ -1835,7 +1835,7 @@ __int64 UFG::_dynamic_initializer_for__gAnimationPriorityTracksEnum__()
     UFG::AnimationPriorityEnumNames,
     17,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gAnimationPriorityTracksEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gAnimationPriorityTracksEnum__);
 }
 
 // File Line: 710
@@ -1843,7 +1843,7 @@ __int64 UFG::_dynamic_initializer_for__gAnimationPriorityTracksEnum__()
 __int64 UFG::_dynamic_initializer_for__gInteriorsEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gInteriorsEnum, UFG::InteriorNames, 26, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gInteriorsEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gInteriorsEnum__);
 }
 
 // File Line: 711
@@ -1855,7 +1855,7 @@ __int64 UFG::_dynamic_initializer_for__gInteractionPointUpdateTracksEnum__()
     UFG::InteractionPointUpdateEnumNames,
     7,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gInteractionPointUpdateTracksEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gInteractionPointUpdateTracksEnum__);
 }
 
 // File Line: 712
@@ -1867,7 +1867,7 @@ __int64 UFG::_dynamic_initializer_for__gConversationStateEnum__()
     UFG::ConversationStateEnumNames,
     4,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gConversationStateEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gConversationStateEnum__);
 }
 
 // File Line: 713
@@ -1879,7 +1879,7 @@ __int64 UFG::_dynamic_initializer_for__constrainToSidewalksEnum__()
     UFG::ConstrainToSidewalksNames,
     2,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__constrainToSidewalksEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__constrainToSidewalksEnum__);
 }
 
 // File Line: 714
@@ -1891,7 +1891,7 @@ __int64 UFG::_dynamic_initializer_for__gVehicleSubjectTypesetEnum__()
     UFG::VehicleSubjectTypesetEnumNames,
     2,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gVehicleSubjectTypesetEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gVehicleSubjectTypesetEnum__);
 }
 
 // File Line: 715
@@ -1903,7 +1903,7 @@ __int64 UFG::_dynamic_initializer_for__gVehicleAudioEventsEnum__()
     UFG::VehicleAudioEventsEnumNames,
     5,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gVehicleAudioEventsEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gVehicleAudioEventsEnum__);
 }
 
 // File Line: 716
@@ -1915,7 +1915,7 @@ __int64 UFG::_dynamic_initializer_for__gPoliceScannerAudioEventsEnum__()
     UFG::PoliceScannerAudioEventsEnumNames,
     2,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gPoliceScannerAudioEventsEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gPoliceScannerAudioEventsEnum__);
 }
 
 // File Line: 720
@@ -1923,7 +1923,7 @@ __int64 UFG::_dynamic_initializer_for__gPoliceScannerAudioEventsEnum__()
 __int64 UFG::_dynamic_initializer_for__gVehicleEffectsEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gVehicleEffectsEnum, UFG::VehicleEffectEnumNames, 4, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gVehicleEffectsEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gVehicleEffectsEnum__);
 }
 
 // File Line: 721
@@ -1931,7 +1931,7 @@ __int64 UFG::_dynamic_initializer_for__gVehicleEffectsEnum__()
 __int64 UFG::_dynamic_initializer_for__gClothingBuffEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gClothingBuffEnum, UFG::ClothingBuffEnumNames, 83, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gClothingBuffEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gClothingBuffEnum__);
 }
 
 // File Line: 722
@@ -1939,7 +1939,7 @@ __int64 UFG::_dynamic_initializer_for__gClothingBuffEnum__()
 __int64 UFG::_dynamic_initializer_for__gActionTreeTypeEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gActionTreeTypeEnum, UFG::ActionTreeTypeEnumNames, 4, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gActionTreeTypeEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gActionTreeTypeEnum__);
 }
 
 // File Line: 723
@@ -1947,7 +1947,7 @@ __int64 UFG::_dynamic_initializer_for__gActionTreeTypeEnum__()
 __int64 UFG::_dynamic_initializer_for__gPOIUseTypeEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gPOIUseTypeEnum, UFG::POIUseTypeEnumNames, 4, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gPOIUseTypeEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gPOIUseTypeEnum__);
 }
 
 // File Line: 724
@@ -1955,7 +1955,7 @@ __int64 UFG::_dynamic_initializer_for__gPOIUseTypeEnum__()
 __int64 UFG::_dynamic_initializer_for__gWeatherTypeEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gWeatherTypeEnum, UFG::WeatherTypeEnumNames, 6, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gWeatherTypeEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gWeatherTypeEnum__);
 }
 
 // File Line: 725
@@ -1967,7 +1967,7 @@ __int64 UFG::_dynamic_initializer_for__gWorldEffectModeEnum__()
     UFG::WorldEffectModeEnumNames,
     4,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gWorldEffectModeEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gWorldEffectModeEnum__);
 }
 
 // File Line: 726
@@ -1975,7 +1975,7 @@ __int64 UFG::_dynamic_initializer_for__gWorldEffectModeEnum__()
 __int64 UFG::_dynamic_initializer_for__gFactionClassEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gFactionClassEnum, UFG::FactionClassNames, 39, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gFactionClassEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gFactionClassEnum__);
 }
 
 // File Line: 727
@@ -1987,7 +1987,7 @@ __int64 UFG::_dynamic_initializer_for__gSocialCombatFastTalkLineTypes__()
     UFG::SocialCombatFastTalkLineTypes,
     3,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gSocialCombatFastTalkLineTypes__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gSocialCombatFastTalkLineTypes__);
 }
 
 // File Line: 728
@@ -1995,7 +1995,7 @@ __int64 UFG::_dynamic_initializer_for__gSocialCombatFastTalkLineTypes__()
 __int64 UFG::_dynamic_initializer_for__gTargetOpenFiredTypes__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&UFG::gTargetOpenFiredTypes, UFG::TargetOpenFiredTypes, 2, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gTargetOpenFiredTypes__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gTargetOpenFiredTypes__);
 }
 
 // File Line: 729
@@ -2007,6 +2007,6 @@ __int64 UFG::_dynamic_initializer_for__gVehicleTrunkTypeEnum__()
     UFG::VehicleTrunkTypeEnumNames,
     9,
     0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gVehicleTrunkTypeEnum__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gVehicleTrunkTypeEnum__);
 }
 

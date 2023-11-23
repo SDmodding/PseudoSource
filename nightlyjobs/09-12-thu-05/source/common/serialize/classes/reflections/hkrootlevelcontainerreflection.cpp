@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkRootLevelContainerNamedVariantClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 58
@@ -28,25 +28,26 @@ hkClass *__fastcall hkRootLevelContainer::NamedVariant::staticClass()
 
 // File Line: 65
 // RVA: 0xE39180
-void __fastcall finishLoadedObjecthkRootLevelContainerNamedVariant(void *p, int finishing)
+void __fastcall finishLoadedObjecthkRootLevelContainerNamedVariant(
+        hkRootLevelContainer::NamedVariant *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkRootLevelContainer::NamedVariant::NamedVariant);
+  if ( p )
+    hkRootLevelContainer::NamedVariant::NamedVariant(p, finishing);
 }
 
 // File Line: 71
 // RVA: 0xE391A0
-void __fastcall cleanupLoadedObjecthkRootLevelContainerNamedVariant(void *p)
+void __fastcall cleanupLoadedObjecthkRootLevelContainerNamedVariant(hkStringPtr *p)
 {
-  hkStringPtr *v1; // rbx
-  hkReferencedObject *v2; // rcx
+  hkReferencedObject *m_stringAndFlag; // rcx
 
-  v1 = (hkStringPtr *)p;
-  v2 = (hkReferencedObject *)*((_QWORD *)p + 2);
-  if ( v2 )
-    hkReferencedObject::removeReference(v2);
-  v1[2].m_stringAndFlag = 0i64;
-  hkStringPtr::~hkStringPtr(v1 + 1);
-  hkStringPtr::~hkStringPtr(v1);
+  m_stringAndFlag = (hkReferencedObject *)p[2].m_stringAndFlag;
+  if ( m_stringAndFlag )
+    hkReferencedObject::removeReference(m_stringAndFlag);
+  p[2].m_stringAndFlag = 0i64;
+  hkStringPtr::~hkStringPtr(p + 1);
+  hkStringPtr::~hkStringPtr(p);
 }
 
 // File Line: 107
@@ -79,15 +80,16 @@ hkClass *__fastcall hkRootLevelContainer::staticClass()
 
 // File Line: 117
 // RVA: 0xE391E0
-void __fastcall finishLoadedObjecthkRootLevelContainer(void *p, int finishing)
+void __fastcall finishLoadedObjecthkRootLevelContainer(hkRootLevelContainer *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkRootLevelContainer::hkRootLevelContainer);
+  if ( p )
+    hkRootLevelContainer::hkRootLevelContainer(p, finishing);
 }
 
 // File Line: 123
 // RVA: 0xE39200
-void __fastcall cleanupLoadedObjecthkRootLevelContainer(void *p)
+void __fastcall cleanupLoadedObjecthkRootLevelContainer(hkRootLevelContainer *p)
 {
-  hkRootLevelContainer::`scalar deleting destructor((hkRootLevelContainer *)p, 0);
+  hkRootLevelContainer::`scalar deleting destructor(p, 0);
 }
 

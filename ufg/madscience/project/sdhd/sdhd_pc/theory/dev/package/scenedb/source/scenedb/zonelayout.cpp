@@ -3,44 +3,33 @@
 __int64 UFG::_dynamic_initializer_for__gZoneLayoutEvent__()
 {
   UFG::ChannelObj::ChannelObj(&UFG::gZoneLayoutEvent, "ZoneLayoutEvent", 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gZoneLayoutEvent__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gZoneLayoutEvent__);
 }
 
 // File Line: 53
 // RVA: 0x1470480
 __int64 UFG::_dynamic_initializer_for__gZoneLayoutInventory__()
 {
-  UFG::qResourceInventory::qResourceInventory(
-    (UFG::qResourceInventory *)&UFG::gZoneLayoutInventory.vfptr,
-    "ZoneLayout",
-    0xC35E39D5,
-    0x43FF83A9u,
-    0,
-    0);
+  UFG::qResourceInventory::qResourceInventory(&UFG::gZoneLayoutInventory, "ZoneLayout", 0xC35E39D5, 0x43FF83A9u, 0, 0);
   UFG::gZoneLayoutInventory.vfptr = (UFG::qResourceInventoryVtbl *)&UFG::ZoneLayoutInventory::`vftable;
-  return atexit(UFG::_dynamic_atexit_destructor_for__gZoneLayoutInventory__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gZoneLayoutInventory__);
 }
 
 // File Line: 61
 // RVA: 0x2302D0
-void __fastcall UFG::ZoneLayoutInventory::Add(UFG::ZoneLayoutInventory *this, UFG::qResourceData *resource_data)
+void __fastcall UFG::ZoneLayoutInventory::Add(UFG::ZoneLayoutInventory *this, UFG::ZoneLayout *resource_data)
 {
-  UFG::ZoneLayout *v2; // rbx
-  UFG::ZoneLayoutInventory *v3; // rdi
-
-  v2 = (UFG::ZoneLayout *)resource_data;
-  v3 = this;
   if ( resource_data )
     UFG::qResourceData::qResourceData(resource_data);
-  UFG::gZoneLayout = v2;
-  UFG::qResourceInventory::Add((UFG::qResourceInventory *)&v3->vfptr, (UFG::qResourceData *)&v2->mNode);
+  UFG::gZoneLayout = resource_data;
+  UFG::qResourceInventory::Add(this, resource_data);
 }
 
 // File Line: 76
 // RVA: 0x235060
 void __fastcall UFG::ZoneLayoutInventory::Remove(UFG::ZoneLayoutInventory *this, UFG::qResourceData *resource_data)
 {
-  UFG::qResourceInventory::Remove((UFG::qResourceInventory *)&this->vfptr, resource_data);
+  UFG::qResourceInventory::Remove(this, resource_data);
   UFG::gZoneLayout = 0i64;
   if ( UFG::ZoneLayout::smDebugText )
   {
@@ -54,19 +43,19 @@ void __fastcall UFG::ZoneLayoutInventory::Remove(UFG::ZoneLayoutInventory *this,
 signed __int64 __fastcall UFG::ZoneTag::GetCurrentZone()
 {
   char *v0; // r8
-  __int64 v1; // rcx
+  __int64 mOffset; // rcx
   char *v2; // rdx
   unsigned __int16 v3; // r9
   __int64 v4; // rcx
 
   v0 = 0i64;
-  v1 = UFG::gSectionLayout->mSectionVis.mOffset;
-  if ( v1 )
-    v2 = (char *)&UFG::gSectionLayout->mSectionVis + v1;
+  mOffset = UFG::gSectionLayout->mSectionVis.mOffset;
+  if ( mOffset )
+    v2 = (char *)&UFG::gSectionLayout->mSectionVis + mOffset;
   else
     v2 = 0i64;
   v3 = *(_WORD *)&v2[96 * UFG::ZoneTag::sVisibleIndex + 68];
-  if ( v3 == -1 )
+  if ( v3 == 0xFFFF )
     return 18507i64;
   v4 = UFG::gZoneLayout->mZones.mOffset;
   if ( v4 )

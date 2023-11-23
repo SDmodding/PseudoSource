@@ -9,36 +9,32 @@ void __fastcall forcdecpt(char *buffer)
 // RVA: 0x12C6628
 void __fastcall forcdecpt_l(char *buffer, localeinfo_struct *_Locale)
 {
-  char *v2; // rbx
-  char v3; // dl
+  unsigned __int8 v3; // dl
   char *v4; // rbx
-  char v5; // al
-  char v6; // al
-  _LocaleUpdate v7; // [rsp+20h] [rbp-28h]
+  unsigned __int8 v5; // al
+  _LocaleUpdate v7; // [rsp+20h] [rbp-28h] BYREF
 
-  v2 = buffer;
   _LocaleUpdate::_LocaleUpdate(&v7, _Locale);
-  if ( (unsigned int)tolower_0(*v2) != 101 )
+  if ( (unsigned int)tolower_0(*buffer) != 101 )
   {
     do
-      ++v2;
-    while ( (unsigned int)isdigit((unsigned __int8)*v2) );
+      ++buffer;
+    while ( (unsigned int)isdigit((unsigned __int8)*buffer) );
   }
-  if ( (unsigned int)tolower_0(*v2) == 120 )
-    v2 += 2;
-  v3 = *v2;
-  *v2 = *v7.localeinfo.locinfo->lconv->decimal_point;
-  v4 = v2 + 1;
+  if ( (unsigned int)tolower_0(*buffer) == 120 )
+    buffer += 2;
+  v3 = *buffer;
+  *buffer = *v7.localeinfo.locinfo->lconv->decimal_point;
+  v4 = buffer + 1;
   do
   {
     v5 = *v4;
     *v4 = v3;
     v3 = v5;
-    v6 = *v4++;
   }
-  while ( v6 );
+  while ( *v4++ );
   if ( v7.updated )
-    v7.ptd->_ownlocale &= 0xFFFFFFFD;
+    v7.ptd->_ownlocale &= ~2u;
 }
 
 // File Line: 193
@@ -52,26 +48,24 @@ void __fastcall cropzeros(char *buf)
 // RVA: 0x12C6540
 void __fastcall cropzeros_l(char *buf, localeinfo_struct *_Locale)
 {
-  char *v2; // rbx
   char i; // cl
   char v4; // al
   char *v5; // rbx
   char *v6; // rdx
   char v7; // al
-  _LocaleUpdate v8; // [rsp+20h] [rbp-28h]
+  _LocaleUpdate v8; // [rsp+20h] [rbp-28h] BYREF
 
-  v2 = buf;
   _LocaleUpdate::_LocaleUpdate(&v8, _Locale);
-  for ( i = *v2; *v2; i = *++v2 )
+  for ( i = *buf; *buf; i = *++buf )
   {
     if ( i == *v8.localeinfo.locinfo->lconv->decimal_point )
       break;
   }
-  v4 = *v2;
-  v5 = v2 + 1;
+  v4 = *buf;
+  v5 = buf + 1;
   if ( v4 )
   {
-    while ( *v5 && (*v5 - 69) & 0xDF )
+    while ( *v5 && ((*v5 - 69) & 0xDF) != 0 )
       ++v5;
     v6 = v5;
     do
@@ -89,7 +83,7 @@ void __fastcall cropzeros_l(char *buf, localeinfo_struct *_Locale)
     while ( v7 );
   }
   if ( v8.updated )
-    v8.ptd->_ownlocale &= 0xFFFFFFFD;
+    v8.ptd->_ownlocale &= ~2u;
 }
 
 // File Line: 223
@@ -101,22 +95,20 @@ _BOOL8 __fastcall positive(long double *arg)
 
 // File Line: 229
 // RVA: 0x12C65E0
-void __fastcall fassign_l(int flag, char *argument, char *number, localeinfo_struct *plocinfo)
+void __fastcall fassign_l(int flag, _CRT_DOUBLE *argument, char *number, localeinfo_struct *plocinfo)
 {
-  char *v4; // rbx
-  _CRT_DOUBLE d; // [rsp+20h] [rbp-18h]
-  _CRT_FLOAT v6; // [rsp+40h] [rbp+8h]
+  _CRT_DOUBLE d; // [rsp+20h] [rbp-18h] BYREF
+  _CRT_FLOAT v6; // [rsp+40h] [rbp+8h] BYREF
 
-  v4 = argument;
   if ( flag )
   {
     atodbl_l(&d, number, plocinfo);
-    *(_CRT_DOUBLE *)v4 = d;
+    argument->x = d.x;
   }
   else
   {
     atoflt_l(&v6, number, plocinfo);
-    *(_CRT_FLOAT *)v4 = v6;
+    LODWORD(argument->x) = v6;
   }
 }
 
@@ -129,33 +121,30 @@ void __fastcall fassign(int flag, char *argument, char *number)
 
 // File Line: 300
 // RVA: 0x12C5EC4
-__int64 __fastcall cftoe2_l(char *buf, unsigned __int64 sizeInBytes, int ndec, int caps, _strflt *pflt, char g_fmt, localeinfo_struct *plocinfo)
+__int64 __fastcall cftoe2_l(
+        char *buf,
+        unsigned __int64 sizeInBytes,
+        int ndec,
+        int caps,
+        _strflt *pflt,
+        char g_fmt,
+        localeinfo_struct *plocinfo)
 {
-  unsigned __int64 v7; // r14
-  char *v8; // rdi
-  int v9; // er13
   __int64 v10; // rsi
   int *v11; // rax
   unsigned int v12; // ebx
   int v13; // eax
-  char *v14; // rbx
-  size_t v15; // rax
-  char *v16; // rdx
-  char *v17; // rbx
-  char *v18; // rcx
-  unsigned __int64 v19; // rdx
-  _BYTE *v20; // rcx
-  int v21; // er8
-  __int64 v23; // [rsp+30h] [rbp-38h]
-  __int64 v24; // [rsp+40h] [rbp-28h]
-  char v25; // [rsp+48h] [rbp-20h]
+  size_t v14; // rax
+  char *v15; // rdx
+  char *v16; // rbx
+  unsigned __int64 v17; // rdx
+  _BYTE *v18; // rcx
+  int v19; // r8d
+  _LocaleUpdate v21; // [rsp+30h] [rbp-38h] BYREF
 
-  v7 = sizeInBytes;
-  v8 = buf;
-  v9 = caps;
   v10 = ndec;
-  _LocaleUpdate::_LocaleUpdate((_LocaleUpdate *)&v23, plocinfo);
-  if ( !v8 || !v7 )
+  _LocaleUpdate::_LocaleUpdate(&v21, plocinfo);
+  if ( !buf || !sizeInBytes )
   {
     v11 = errno();
     v12 = 22;
@@ -165,108 +154,103 @@ LABEL_8:
     goto LABEL_33;
   }
   v13 = 0;
-  if ( (signed int)v10 > 0 )
+  if ( (int)v10 > 0 )
     v13 = v10;
-  if ( v7 <= v13 + 9 )
+  if ( sizeInBytes <= v13 + 9 )
   {
     v11 = errno();
     v12 = 34;
     goto LABEL_8;
   }
-  if ( g_fmt )
+  if ( g_fmt && (int)v10 > 0 )
   {
-    v14 = &v8[pflt->sign == 45];
-    if ( (signed int)v10 > 0 )
-    {
-      v15 = strlen(&v8[pflt->sign == 45]);
-      memmove(&v14[(signed int)v10 > 0], v14, v15 + 1);
-    }
+    v14 = strlen(&buf[pflt->sign == 45]);
+    memmove(&buf[(pflt->sign == 45) + ((int)v10 > 0)], &buf[pflt->sign == 45], v14 + 1);
   }
-  v16 = v8;
+  v15 = buf;
   if ( pflt->sign == 45 )
   {
-    *v8 = 45;
-    v16 = v8 + 1;
+    *buf = 45;
+    v15 = buf + 1;
   }
-  if ( (signed int)v10 > 0 )
+  if ( (int)v10 > 0 )
   {
-    *v16 = v16[1];
-    *++v16 = ***(_BYTE ***)(v23 + 240);
+    *v15 = v15[1];
+    *++v15 = *v21.localeinfo.locinfo->lconv->decimal_point;
   }
-  v17 = &v16[v10 + (g_fmt == 0)];
-  v18 = &v16[v10 + (g_fmt == 0)];
-  v19 = v7 + v8 - v17;
-  if ( v7 == -1i64 )
-    v19 = -1i64;
-  if ( (unsigned int)strcpy_s(v18, v19, "e+000") )
+  v16 = &v15[v10 + (g_fmt == 0)];
+  v17 = sizeInBytes + buf - v16;
+  if ( sizeInBytes == -1i64 )
+    v17 = -1i64;
+  if ( (unsigned int)strcpy_s(v16, v17, "e+000") )
   {
     invoke_watson(0i64, 0i64, 0i64, 0, 0i64);
-    JUMPOUT(*(_QWORD *)&byte_1412C60BC);
+    JUMPOUT(0x1412C60BCi64);
   }
-  v20 = v17 + 2;
-  if ( v9 )
-    *v17 = 69;
+  v18 = v16 + 2;
+  if ( caps )
+    *v16 = 69;
   if ( *pflt->mantissa != 48 )
   {
-    v21 = pflt->decpt - 1;
-    if ( v21 < 0 )
+    v19 = pflt->decpt - 1;
+    if ( v19 < 0 )
     {
-      v21 = 1 - pflt->decpt;
-      v17[1] = 45;
+      v19 = 1 - pflt->decpt;
+      v16[1] = 45;
     }
-    if ( v21 >= 100 )
+    if ( v19 >= 100 )
     {
-      v17[2] += v21 / 100;
-      v21 %= 100;
+      v16[2] += v19 / 100;
+      v19 %= 100;
     }
-    if ( v21 >= 10 )
+    if ( v19 >= 10 )
     {
-      v17[3] += v21 / 10;
-      v21 %= 10;
+      v16[3] += v19 / 10;
+      v19 %= 10;
     }
-    v17[4] += v21;
+    v16[4] += v19;
   }
-  if ( outputformat & 1 && *v20 == 48 )
-    memmove(v20, v17 + 3, 3ui64);
+  if ( (outputformat & 1) != 0 && *v18 == 48 )
+    memmove(v18, v16 + 3, 3ui64);
   v12 = 0;
 LABEL_33:
-  if ( v25 )
-    *(_DWORD *)(v24 + 200) &= 0xFFFFFFFD;
+  if ( v21.updated )
+    v21.ptd->_ownlocale &= ~2u;
   return v12;
 }
 
 // File Line: 412
 // RVA: 0x12C60C0
-int __fastcall cftoe_l(long double *pvalue, char *buf, unsigned __int64 sizeInBytes, int ndec, int caps, localeinfo_struct *plocinfo)
+int __fastcall cftoe_l(
+        _CRT_DOUBLE *pvalue,
+        char *buf,
+        unsigned __int64 sizeInBytes,
+        int ndec,
+        int caps,
+        localeinfo_struct *plocinfo)
 {
-  unsigned __int64 v6; // rbx
-  char *v7; // rdi
-  int v8; // esi
   int result; // eax
   unsigned __int64 v10; // rdx
-  _strflt flt; // [rsp+40h] [rbp-68h]
-  char resultstr; // [rsp+58h] [rbp-50h]
+  _strflt flt; // [rsp+40h] [rbp-68h] BYREF
+  char resultstr[24]; // [rsp+58h] [rbp-50h] BYREF
 
-  v6 = sizeInBytes;
-  v7 = buf;
-  v8 = ndec;
-  fltout2(*(_CRT_DOUBLE *)pvalue, &flt, &resultstr, 0x16ui64);
-  if ( v7 && v6 )
+  fltout2(*(_CRT_DOUBLE *)&pvalue->x, &flt, resultstr, 0x16ui64);
+  if ( buf && sizeInBytes )
   {
     v10 = -1i64;
-    if ( v6 != -1i64 )
-      v10 = v6 - (flt.sign == 45) - (v8 > 0);
-    result = fptostr(&v7[(flt.sign == 45) + (v8 > 0)], v10, v8 + 1, &flt);
+    if ( sizeInBytes != -1i64 )
+      v10 = sizeInBytes - (flt.sign == 45) - (ndec > 0);
+    result = fptostr(&buf[(flt.sign == 45) + (ndec > 0)], v10, ndec + 1, &flt);
     if ( result )
-      *v7 = 0;
+      *buf = 0;
     else
-      result = cftoe2_l(v7, v6, v8, caps, &flt, 0, plocinfo);
+      return cftoe2_l(buf, sizeInBytes, ndec, caps, &flt, 0, plocinfo);
   }
   else
   {
     *errno() = 22;
     invalid_parameter_noinfo();
-    result = 22;
+    return 22;
   }
   return result;
 }
@@ -280,48 +264,43 @@ int __fastcall cftoe(long double *pvalue, char *buf, unsigned __int64 sizeInByte
 
 // File Line: 473
 // RVA: 0x12C5AF8
-__int64 __fastcall cftoa_l(long double *pvalue, char *buf, unsigned __int64 sizeInBytes, int ndec, int caps, localeinfo_struct *plocinfo)
+__int64 __fastcall cftoa_l(
+        long double *pvalue,
+        char *buf,
+        unsigned __int64 sizeInBytes,
+        unsigned int ndec,
+        int caps,
+        localeinfo_struct *plocinfo)
 {
-  char *v6; // rdi
-  long double *v7; // r14
   size_t v8; // rbx
-  unsigned __int64 v9; // rsi
-  signed __int64 v10; // r12
-  signed __int16 v11; // bp
+  __int64 v10; // r12
+  __int16 v11; // bp
   int *v12; // rax
   unsigned int v13; // ebx
   unsigned __int64 v14; // r8
-  char *v15; // rax
-  _BYTE *v16; // rdi
+  __m128i *v15; // rax
+  char *v16; // rdi
   _BYTE *v17; // rdi
   int v18; // edx
-  signed __int64 v19; // rdi
-  _BYTE *v20; // r15
-  _BYTE *v21; // rdi
+  char *v19; // rdi
+  char *v20; // r15
+  char *v21; // rdi
   unsigned __int64 v22; // r8
   unsigned __int16 v23; // ax
-  _BYTE *i; // rcx
+  char *i; // rcx
   _BYTE *v25; // rdi
-  signed __int64 v26; // rcx
+  __int64 v26; // rcx
   _BYTE *v27; // rdi
   _BYTE *v28; // r8
-  unsigned __int64 v29; // rdx
-  unsigned __int64 v30; // rdx
-  unsigned __int64 v31; // rdx
-  __int64 v33; // [rsp+30h] [rbp-48h]
-  __int64 v34; // [rsp+40h] [rbp-38h]
-  char v35; // [rsp+48h] [rbp-30h]
+  _LocaleUpdate v30; // [rsp+30h] [rbp-48h] BYREF
 
-  v6 = buf;
-  v7 = pvalue;
-  v8 = (unsigned int)ndec;
-  v9 = sizeInBytes;
+  v8 = ndec;
   v10 = 1023i64;
   v11 = 48;
-  _LocaleUpdate::_LocaleUpdate((_LocaleUpdate *)&v33, plocinfo);
+  _LocaleUpdate::_LocaleUpdate(&v30, plocinfo);
   if ( (v8 & 0x80000000) != 0i64 )
     v8 = 0i64;
-  if ( !v6 || !v9 )
+  if ( !buf || !sizeInBytes )
   {
     v12 = errno();
     v13 = 22;
@@ -330,69 +309,69 @@ LABEL_8:
     invalid_parameter_noinfo();
     goto LABEL_58;
   }
-  *v6 = 0;
-  if ( v9 <= (signed int)v8 + 11 )
+  *buf = 0;
+  if ( sizeInBytes <= (int)v8 + 11 )
   {
     v12 = errno();
     v13 = 34;
     goto LABEL_8;
   }
-  if ( ((*(_QWORD *)v7 >> 52) & 0x7FFi64) == 2047 )
+  if ( ((*(_QWORD *)pvalue >> 52) & 0x7FFi64) == 2047 )
   {
-    v14 = v9 - 2;
-    if ( v9 == -1i64 )
+    v14 = sizeInBytes - 2;
+    if ( sizeInBytes == -1i64 )
       v14 = -1i64;
-    v13 = cftoe_l(v7, v6 + 2, v14, v8, 0, 0i64);
+    v13 = cftoe_l(pvalue, buf + 2, v14, v8, 0, 0i64);
     if ( v13 )
     {
-      *v6 = 0;
+      *buf = 0;
       goto LABEL_58;
     }
-    if ( v6[2] == 45 )
-      *v6++ = 45;
-    *v6 = 48;
-    v6[1] = caps != 0 ? 88 : 120;
-    v15 = strrchr(v6 + 2, 101);
+    if ( buf[2] == 45 )
+      *buf++ = 45;
+    *buf = 48;
+    buf[1] = caps != 0 ? 88 : 120;
+    v15 = strrchr((unsigned __int64)(buf + 2), 101);
     if ( v15 )
     {
-      *v15 = caps != 0 ? 80 : 112;
-      v15[3] = 0;
+      v15->m128i_i8[0] = caps != 0 ? 80 : 112;
+      v15->m128i_i8[3] = 0;
     }
   }
   else
   {
-    if ( *(_QWORD *)v7 < 0i64 )
-      *v6++ = 45;
-    *v6 = 48;
-    v16 = v6 + 1;
+    if ( *(__int64 *)pvalue < 0 )
+      *buf++ = 45;
+    *buf = 48;
+    v16 = buf + 1;
     *v16 = caps != 0 ? 88 : 120;
     v17 = v16 + 1;
     v18 = caps != 0 ? 7 : 39;
-    if ( *(_QWORD *)v7 & 0x7FF0000000000000i64 )
+    if ( (*(_QWORD *)pvalue & 0x7FF0000000000000i64) != 0 )
     {
       *v17 = 49;
-      v19 = (signed __int64)(v17 + 1);
+      v19 = v17 + 1;
     }
     else
     {
       *v17 = 48;
-      v19 = (signed __int64)(v17 + 1);
-      v10 = (*(_QWORD *)v7 & 0xFFFFFFFFFFFFFi64) != 0 ? 0x3FE : 0;
+      v19 = v17 + 1;
+      v10 = (*(_QWORD *)pvalue & 0xFFFFFFFFFFFFFi64) != 0 ? 0x3FE : 0;
     }
-    v20 = (_BYTE *)v19;
-    v21 = (_BYTE *)(v19 + 1);
+    v20 = v19;
+    v21 = v19 + 1;
     if ( (_DWORD)v8 )
-      *v20 = ***(_BYTE ***)(v33 + 240);
+      *v20 = *v30.localeinfo.locinfo->lconv->decimal_point;
     else
       *v20 = 0;
-    if ( *(_QWORD *)v7 & 0xFFFFFFFFFFFFFi64 )
+    if ( (*(_QWORD *)pvalue & 0xFFFFFFFFFFFFFi64) != 0 )
     {
-      v22 = 4222124650659840i64;
+      v22 = 0xF000000000000i64;
       do
       {
-        if ( (signed int)v8 <= 0 )
+        if ( (int)v8 <= 0 )
           break;
-        v23 = ((v22 & *(_QWORD *)v7 & 0xFFFFFFFFFFFFFi64) >> v11) + 48;
+        v23 = ((v22 & *(_QWORD *)pvalue & 0xFFFFFFFFFFFFFi64) >> v11) + 48;
         if ( v23 > 0x39u )
           LOBYTE(v23) = v18 + v23;
         *v21 = v23;
@@ -402,9 +381,9 @@ LABEL_8:
         v11 -= 4;
       }
       while ( v11 >= 0 );
-      if ( v11 >= 0 && (unsigned __int16)((v22 & *(_QWORD *)v7 & 0xFFFFFFFFFFFFFi64) >> v11) > 8u )
+      if ( v11 >= 0 && (unsigned __int16)((v22 & *(_QWORD *)pvalue & 0xFFFFFFFFFFFFFi64) >> v11) > 8u )
       {
-        for ( i = v21 - 1; !((*i - 70) & 0xDF); --i )
+        for ( i = v21 - 1; ((*i - 70) & 0xDF) == 0; --i )
           *i = 48;
         if ( i == v20 )
         {
@@ -420,7 +399,7 @@ LABEL_8:
         }
       }
     }
-    if ( (signed int)v8 > 0 )
+    if ( (int)v8 > 0 )
     {
       LOBYTE(v18) = 48;
       memset(v21, v18, v8);
@@ -430,7 +409,7 @@ LABEL_8:
       v21 = v20;
     *v21 = caps != 0 ? 80 : 112;
     v25 = v21 + 1;
-    v26 = ((*(_QWORD *)v7 >> 52) & 0x7FFi64) - v10;
+    v26 = ((*(_QWORD *)pvalue >> 52) & 0x7FFi64) - v10;
     if ( v26 < 0 )
     {
       *v25 = 45;
@@ -444,95 +423,80 @@ LABEL_8:
     }
     v28 = v27;
     *v27 = 48;
-    if ( v26 >= 1000
-      && (v29 = ((unsigned __int64)((unsigned __int128)(v26 * (signed __int128)2361183241434822607i64) >> 64) >> 63)
-              + ((signed __int64)((unsigned __int128)(v26 * (signed __int128)2361183241434822607i64) >> 64) >> 7),
-          *v27 = v29 + 48,
-          ++v27,
-          v26 += -1000i64 * v29,
-          v27 != v28)
-      || v26 >= 100 )
+    if ( v26 >= 1000 && (*v27 = v26 / 1000 + 48, ++v27, v26 %= 1000i64, v27 != v28) || v26 >= 100 )
     {
-      v30 = ((unsigned __int64)(v26 + ((unsigned __int128)(v26 * (signed __int128)-6640827866535438581i64) >> 64)) >> 63)
-          + ((signed __int64)(v26 + ((unsigned __int128)(v26 * (signed __int128)-6640827866535438581i64) >> 64)) >> 6);
-      *v27++ = v30 + 48;
-      v26 += -100i64 * v30;
+      *v27++ = v26 / 100 + 48;
+      v26 %= 100i64;
     }
     if ( v27 != v28 || v26 >= 10 )
     {
-      v31 = ((unsigned __int64)((unsigned __int128)(v26 * (signed __int128)7378697629483820647i64) >> 64) >> 63)
-          + ((signed __int64)((unsigned __int128)(v26 * (signed __int128)7378697629483820647i64) >> 64) >> 2);
-      *v27++ = v31 + 48;
-      LOBYTE(v26) = -10 * v31 + v26;
+      *v27++ = v26 / 10 + 48;
+      v26 %= 10i64;
     }
     *v27 = v26 + 48;
     v27[1] = 0;
   }
   v13 = 0;
 LABEL_58:
-  if ( v35 )
-    *(_DWORD *)(v34 + 200) &= 0xFFFFFFFD;
+  if ( v30.updated )
+    v30.ptd->_ownlocale &= ~2u;
   return v13;
 }
 
 // File Line: 696
 // RVA: 0x12C61CC
-__int64 __fastcall cftof2_l(char *buf, unsigned __int64 sizeInBytes, int ndec, _strflt *pflt, char g_fmt, localeinfo_struct *plocinfo)
+__int64 __fastcall cftof2_l(
+        char *buf,
+        unsigned __int64 sizeInBytes,
+        int ndec,
+        _strflt *pflt,
+        char g_fmt,
+        localeinfo_struct *plocinfo)
 {
-  unsigned __int64 v6; // rsi
-  char *v7; // rdi
-  _strflt *v8; // rbp
   int v9; // ebx
-  int v10; // er14
   unsigned int v11; // ebx
   size_t v12; // rax
   char *v13; // rdi
   size_t v14; // rax
-  int v15; // ebx
+  int decpt; // ebx
   int v16; // ebx
   int v17; // eax
   size_t v18; // rax
-  __int64 v20; // [rsp+20h] [rbp-28h]
-  __int64 v21; // [rsp+30h] [rbp-18h]
-  char v22; // [rsp+38h] [rbp-10h]
+  _LocaleUpdate v20; // [rsp+20h] [rbp-28h] BYREF
 
-  v6 = sizeInBytes;
-  v7 = buf;
-  v8 = pflt;
   v9 = pflt->decpt - 1;
-  v10 = ndec;
-  _LocaleUpdate::_LocaleUpdate((_LocaleUpdate *)&v20, plocinfo);
-  if ( v7 && v6 )
+  _LocaleUpdate::_LocaleUpdate(&v20, plocinfo);
+  if ( buf && sizeInBytes )
   {
-    if ( g_fmt && v9 == v10 )
-      *(_WORD *)&v7[(v8->sign == 45) + v9] = 48;
-    if ( v8->sign == 45 )
-      *v7++ = 45;
-    if ( v8->decpt > 0 )
+    if ( g_fmt && v9 == ndec )
+      *(_WORD *)&buf[(pflt->sign == 45) + v9] = 48;
+    if ( pflt->sign == 45 )
+      *buf++ = 45;
+    if ( pflt->decpt > 0 )
     {
-      v13 = &v7[v8->decpt];
+      v13 = &buf[pflt->decpt];
     }
     else
     {
-      v12 = strlen(v7);
-      memmove(v7 + 1, v7, v12 + 1);
-      *v7 = 48;
-      v13 = v7 + 1;
+      v12 = strlen(buf);
+      memmove(buf + 1, buf, v12 + 1);
+      *buf = 48;
+      v13 = buf + 1;
     }
-    if ( v10 > 0 )
+    if ( ndec > 0 )
     {
       v14 = strlen(v13);
       memmove(v13 + 1, v13, v14 + 1);
-      *v13 = ***(_BYTE ***)(v20 + 240);
-      v15 = v8->decpt;
-      if ( v15 < 0 )
+      *v13 = *v20.localeinfo.locinfo->lconv->decimal_point;
+      decpt = pflt->decpt;
+      if ( decpt < 0 )
       {
-        v16 = -v15;
+        v16 = -decpt;
         if ( !g_fmt )
         {
           v17 = v16;
-          v16 = v10;
-          if ( v10 >= v17 )
+          v16 = ndec;
+          if ( ndec >= v17 )
             v16 = v17;
         }
         if ( v16 )
@@ -551,43 +515,42 @@ __int64 __fastcall cftof2_l(char *buf, unsigned __int64 sizeInBytes, int ndec, _
     *errno() = 22;
     invalid_parameter_noinfo();
   }
-  if ( v22 )
-    *(_DWORD *)(v21 + 200) &= 0xFFFFFFFD;
+  if ( v20.updated )
+    v20.ptd->_ownlocale &= ~2u;
   return v11;
 }
 
 // File Line: 798
 // RVA: 0x12C6330
-int __fastcall cftof_l(long double *pvalue, char *buf, unsigned __int64 sizeInBytes, int ndec, localeinfo_struct *plocinfo)
+int __fastcall cftof_l(
+        _CRT_DOUBLE *pvalue,
+        char *buf,
+        unsigned __int64 sizeInBytes,
+        int ndec,
+        localeinfo_struct *plocinfo)
 {
-  unsigned __int64 v5; // rbx
-  char *v6; // rdi
-  int v7; // esi
   int result; // eax
   unsigned __int64 v9; // rdx
-  _strflt flt; // [rsp+30h] [rbp-68h]
-  char resultstr; // [rsp+48h] [rbp-50h]
+  _strflt flt; // [rsp+30h] [rbp-68h] BYREF
+  char resultstr[24]; // [rsp+48h] [rbp-50h] BYREF
 
-  v5 = sizeInBytes;
-  v6 = buf;
-  v7 = ndec;
-  fltout2(*(_CRT_DOUBLE *)pvalue, &flt, &resultstr, 0x16ui64);
-  if ( v6 && v5 )
+  fltout2(*(_CRT_DOUBLE *)&pvalue->x, &flt, resultstr, 0x16ui64);
+  if ( buf && sizeInBytes )
   {
     v9 = -1i64;
-    if ( v5 != -1i64 )
-      v9 = v5 - (flt.sign == 45);
-    result = fptostr(&v6[flt.sign == 45], v9, v7 + flt.decpt, &flt);
+    if ( sizeInBytes != -1i64 )
+      v9 = sizeInBytes - (flt.sign == 45);
+    result = fptostr(&buf[flt.sign == 45], v9, ndec + flt.decpt, &flt);
     if ( result )
-      *v6 = 0;
+      *buf = 0;
     else
-      result = cftof2_l(v6, v5, v7, &flt, 0, plocinfo);
+      return cftof2_l(buf, sizeInBytes, ndec, &flt, 0, plocinfo);
   }
   else
   {
     *errno() = 22;
     invalid_parameter_noinfo();
-    result = 22;
+    return 22;
   }
   return result;
 }
@@ -601,78 +564,94 @@ int __fastcall cftof(long double *pvalue, char *buf, unsigned __int64 sizeInByte
 
 // File Line: 861
 // RVA: 0x12C6404
-int __fastcall cftog_l(long double *pvalue, char *buf, unsigned __int64 sizeInBytes, int ndec, int caps, localeinfo_struct *plocinfo)
+int __fastcall cftog_l(
+        _CRT_DOUBLE *pvalue,
+        char *buf,
+        unsigned __int64 sizeInBytes,
+        int ndec,
+        int caps,
+        localeinfo_struct *plocinfo)
 {
-  unsigned __int64 v6; // rdi
-  char *v7; // rsi
-  int v8; // ebp
   int result; // eax
-  int v10; // er14
+  int v10; // r14d
   _BOOL8 v11; // rax
   unsigned __int64 v12; // rdx
   char *v13; // rbx
-  char v14; // al
-  _strflt flt; // [rsp+40h] [rbp-68h]
-  char resultstr; // [rsp+58h] [rbp-50h]
+  int v14; // eax
+  _strflt flt; // [rsp+40h] [rbp-68h] BYREF
+  char resultstr[24]; // [rsp+58h] [rbp-50h] BYREF
 
-  v6 = sizeInBytes;
-  v7 = buf;
-  v8 = ndec;
-  fltout2(*(_CRT_DOUBLE *)pvalue, &flt, &resultstr, 0x16ui64);
-  if ( v7 && v6 )
+  fltout2(*(_CRT_DOUBLE *)&pvalue->x, &flt, resultstr, 0x16ui64);
+  if ( buf && sizeInBytes )
   {
     v10 = flt.decpt - 1;
     v11 = flt.sign == 45;
     v12 = -1i64;
-    v13 = &v7[v11];
-    if ( v6 != -1i64 )
-      v12 = v6 - v11;
-    result = fptostr(&v7[v11], v12, v8, &flt);
+    v13 = &buf[v11];
+    if ( sizeInBytes != -1i64 )
+      v12 = sizeInBytes - v11;
+    result = fptostr(&buf[v11], v12, ndec, &flt);
     if ( result )
     {
-      *v7 = 0;
-    }
-    else if ( flt.decpt - 1 < -4 || flt.decpt - 1 >= v8 )
-    {
-      result = cftoe2_l(v7, v6, v8, caps, &flt, 1, plocinfo);
+      *buf = 0;
     }
     else
     {
-      if ( v10 < flt.decpt - 1 )
+      v14 = flt.decpt - 1;
+      if ( flt.decpt - 1 < -4 || v14 >= ndec )
       {
-        do
-          v14 = *v13++;
-        while ( v14 );
-        *(v13 - 2) = 0;
+        return cftoe2_l(buf, sizeInBytes, ndec, caps, &flt, 1, plocinfo);
       }
-      result = cftof2_l(v7, v6, v8, &flt, 1, plocinfo);
+      else
+      {
+        if ( v10 < v14 )
+        {
+          while ( *v13++ )
+            ;
+          *(v13 - 2) = 0;
+        }
+        return cftof2_l(buf, sizeInBytes, ndec, &flt, 1, plocinfo);
+      }
     }
   }
   else
   {
     *errno() = 22;
     invalid_parameter_noinfo();
-    result = 22;
+    return 22;
   }
   return result;
 }
 
 // File Line: 966
 // RVA: 0x12C5A78
-int __fastcall cfltcvt_l(long double *arg, char *buffer, unsigned __int64 sizeInBytes, int format, int precision, int caps, localeinfo_struct *plocinfo)
+int __fastcall cfltcvt_l(
+        long double *arg,
+        char *buffer,
+        unsigned __int64 sizeInBytes,
+        int format,
+        int precision,
+        int caps,
+        localeinfo_struct *plocinfo)
 {
-  if ( !((format - 69) & 0xFFFFFFDF) )
+  if ( ((format - 69) & 0xFFFFFFDF) == 0 )
     return cftoe_l(arg, buffer, sizeInBytes, precision, caps, plocinfo);
   if ( format == 102 )
     return cftof_l(arg, buffer, sizeInBytes, precision, plocinfo);
-  if ( (format - 65) & 0xFFFFFFDF )
+  if ( ((format - 65) & 0xFFFFFFDF) != 0 )
     return cftog_l(arg, buffer, sizeInBytes, precision, caps, plocinfo);
   return cftoa_l(arg, buffer, sizeInBytes, precision, caps, plocinfo);
 }
 
 // File Line: 982
 // RVA: 0x12C5A54
-int __fastcall cfltcvt(long double *arg, char *buffer, unsigned __int64 sizeInBytes, int format, int precision, int caps)
+int __fastcall cfltcvt(
+        long double *arg,
+        char *buffer,
+        unsigned __int64 sizeInBytes,
+        int format,
+        int precision,
+        int caps)
 {
   return cfltcvt_l(arg, buffer, sizeInBytes, format, precision, caps, 0i64);
 }

@@ -3,7 +3,7 @@
 __int64 dynamic_initializer_for__gCurrentLocationDirectory__()
 {
   UFG::qString::qString(&gCurrentLocationDirectory);
-  return atexit(dynamic_atexit_destructor_for__gCurrentLocationDirectory__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gCurrentLocationDirectory__);
 }
 
 // File Line: 376
@@ -11,7 +11,7 @@ __int64 dynamic_initializer_for__gCurrentLocationDirectory__()
 __int64 dynamic_initializer_for__currVehicle__()
 {
   UFG::qString::qString(&currVehicle);
-  return atexit(dynamic_atexit_destructor_for__currVehicle__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__currVehicle__);
 }
 
 // File Line: 396
@@ -19,7 +19,7 @@ __int64 dynamic_initializer_for__currVehicle__()
 __int64 dynamic_initializer_for__gPIXCaptureFileName__()
 {
   UFG::qString::qString(&gPIXCaptureFileName, "e:\\test.pix2");
-  return atexit(dynamic_atexit_destructor_for__gPIXCaptureFileName__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gPIXCaptureFileName__);
 }
 
 // File Line: 399
@@ -27,7 +27,7 @@ __int64 dynamic_initializer_for__gPIXCaptureFileName__()
 __int64 dynamic_initializer_for__gUserName__()
 {
   UFG::qString::qString(&gUserName);
-  return atexit(dynamic_atexit_destructor_for__gUserName__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gUserName__);
 }
 
 // File Line: 400
@@ -35,7 +35,7 @@ __int64 dynamic_initializer_for__gUserName__()
 __int64 dynamic_initializer_for__gLoginPassword__()
 {
   UFG::qString::qString(&gLoginPassword);
-  return atexit(dynamic_atexit_destructor_for__gLoginPassword__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gLoginPassword__);
 }
 
 // File Line: 401
@@ -43,7 +43,7 @@ __int64 dynamic_initializer_for__gLoginPassword__()
 __int64 dynamic_initializer_for__gSessionId__()
 {
   UFG::qString::qString(&gSessionId);
-  return atexit(dynamic_atexit_destructor_for__gSessionId__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gSessionId__);
 }
 
 // File Line: 402
@@ -51,7 +51,7 @@ __int64 dynamic_initializer_for__gSessionId__()
 __int64 dynamic_initializer_for__gProxyCredentials__()
 {
   UFG::qString::qString(&gProxyCredentials);
-  return atexit(dynamic_atexit_destructor_for__gProxyCredentials__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gProxyCredentials__);
 }
 
 // File Line: 403
@@ -59,7 +59,7 @@ __int64 dynamic_initializer_for__gProxyCredentials__()
 __int64 dynamic_initializer_for__gEnvironmentURL__()
 {
   UFG::qString::qString(&gEnvironmentURL);
-  return atexit(dynamic_atexit_destructor_for__gEnvironmentURL__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gEnvironmentURL__);
 }
 
 // File Line: 431
@@ -67,7 +67,7 @@ __int64 dynamic_initializer_for__gEnvironmentURL__()
 __int64 UFG::_dynamic_initializer_for__gFlowController__()
 {
   UFG::FlowController::FlowController(&UFG::gFlowController);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gFlowController__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gFlowController__);
 }
 
 // File Line: 435
@@ -75,7 +75,7 @@ __int64 UFG::_dynamic_initializer_for__gFlowController__()
 void __fastcall UFG::qUserCallback_WaitForGPU(UFG *this)
 {
   if ( Illusion::gEngine.FrameMemory )
-    Illusion::IEnginePlat::WaitUntilGPUDone((Illusion::IEnginePlat *)&Illusion::gEngine);
+    Illusion::IEnginePlat::WaitUntilGPUDone(&Illusion::gEngine);
 }
 
 // File Line: 452
@@ -83,7 +83,7 @@ void __fastcall UFG::qUserCallback_WaitForGPU(UFG *this)
 __int64 dynamic_initializer_for__gScaleformMemoryPool__()
 {
   UFG::qMemoryPool::qMemoryPool(&gScaleformMemoryPool);
-  return atexit(dynamic_atexit_destructor_for__gScaleformMemoryPool__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gScaleformMemoryPool__);
 }
 
 // File Line: 457
@@ -91,15 +91,15 @@ __int64 dynamic_initializer_for__gScaleformMemoryPool__()
 __int64 dynamic_initializer_for__gNetworkMemoryPool__()
 {
   UFG::qMemoryPool::qMemoryPool(&gNetworkMemoryPool);
-  return atexit(dynamic_atexit_destructor_for__gNetworkMemoryPool__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gNetworkMemoryPool__);
 }
 
 // File Line: 458
 // RVA: 0x14FF6E0
 __int64 dynamic_initializer_for__gActionTreeMemoryPool__()
 {
-  UFG::qMemoryPool::qMemoryPool((UFG::qMemoryPool *)&gActionTreeMemoryPool.mPrev);
-  return atexit(dynamic_atexit_destructor_for__gActionTreeMemoryPool__);
+  UFG::qMemoryPool::qMemoryPool(&gActionTreeMemoryPool);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gActionTreeMemoryPool__);
 }
 
 // File Line: 459
@@ -107,7 +107,7 @@ __int64 dynamic_initializer_for__gActionTreeMemoryPool__()
 __int64 dynamic_initializer_for__gPropertySetMemoryPool__()
 {
   UFG::qMemoryPool::qMemoryPool(&gPropertySetMemoryPool);
-  return atexit(dynamic_atexit_destructor_for__gPropertySetMemoryPool__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gPropertySetMemoryPool__);
 }
 
 // File Line: 460
@@ -115,7 +115,7 @@ __int64 dynamic_initializer_for__gPropertySetMemoryPool__()
 __int64 dynamic_initializer_for__gSkookumMemoryPool__()
 {
   UFG::qMemoryPool::qMemoryPool(&gSkookumMemoryPool);
-  return atexit(dynamic_atexit_destructor_for__gSkookumMemoryPool__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gSkookumMemoryPool__);
 }
 
 // File Line: 461
@@ -123,7 +123,7 @@ __int64 dynamic_initializer_for__gSkookumMemoryPool__()
 __int64 dynamic_initializer_for__gSimulationMemoryPool__()
 {
   UFG::qMemoryPool::qMemoryPool(&gSimulationMemoryPool);
-  return atexit(dynamic_atexit_destructor_for__gSimulationMemoryPool__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gSimulationMemoryPool__);
 }
 
 // File Line: 476
@@ -131,7 +131,7 @@ __int64 dynamic_initializer_for__gSimulationMemoryPool__()
 __int64 dynamic_initializer_for__gHKGlobalStreams__()
 {
   HKGlobalStreams::HKGlobalStreams(&gHKGlobalStreams);
-  return atexit(dynamic_atexit_destructor_for__gHKGlobalStreams__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gHKGlobalStreams__);
 }
 
 // File Line: 477
@@ -143,15 +143,15 @@ __int64 dynamic_initializer_for__gHKLocationStreams__()
   unk_14207EE20 = 0i64;
   unk_14207EE28 = 536870915;
   unk_14207EE2C = 1;
-  stru_14207EE30.mPrev = (UFG::qNode<UFG::DataStreamer::Handle,UFG::DataStreamer::Handle> *)&stru_14207EE30;
-  stru_14207EE30.mNext = (UFG::qNode<UFG::DataStreamer::Handle,UFG::DataStreamer::Handle> *)&stru_14207EE30;
+  stru_14207EE30.mPrev = &stru_14207EE30;
+  stru_14207EE30.mNext = &stru_14207EE30;
   stru_14207EE30.mCallback = 0i64;
   stru_14207EE30.mCallbackParam = 0i64;
   stru_14207EE30.mImpl = 0i64;
   *(_DWORD *)&stru_14207EE30.mFlags = 536870915;
   stru_14207EE30._mTargetState.mValue = 1;
-  stru_14207EE60.mPrev = (UFG::qNode<UFG::DataStreamer::Handle,UFG::DataStreamer::Handle> *)&stru_14207EE60;
-  stru_14207EE60.mNext = (UFG::qNode<UFG::DataStreamer::Handle,UFG::DataStreamer::Handle> *)&stru_14207EE60;
+  stru_14207EE60.mPrev = &stru_14207EE60;
+  stru_14207EE60.mNext = &stru_14207EE60;
   stru_14207EE60.mCallback = 0i64;
   stru_14207EE60.mCallbackParam = 0i64;
   stru_14207EE60.mImpl = 0i64;
@@ -159,7 +159,7 @@ __int64 dynamic_initializer_for__gHKLocationStreams__()
   stru_14207EE60._mTargetState.mValue = 1;
   unk_14207EE98 = 0i64;
   *(_QWORD *)&dword_14207EE90 = 0i64;
-  return atexit(dynamic_atexit_destructor_for__gHKLocationStreams__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gHKLocationStreams__);
 }
 
 // File Line: 487
@@ -167,62 +167,58 @@ __int64 dynamic_initializer_for__gHKLocationStreams__()
 __int64 dynamic_initializer_for__gpc_PC_VRamMemoryPool__()
 {
   UFG::qMemoryPool::qMemoryPool(&gpc_PC_VRamMemoryPool);
-  return atexit(dynamic_atexit_destructor_for__gpc_PC_VRamMemoryPool__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gpc_PC_VRamMemoryPool__);
 }
 
 // File Line: 542
 // RVA: 0x426590
-__int64 __fastcall UFG::AgogErrorOutput::determine_choice(UFG::AgogErrorOutput *this, AErrMsg *msg, eAErrAction *pAction)
+__int64 __fastcall UFG::AgogErrorOutput::determine_choice(
+        UFG::AgogErrorOutput *this,
+        AErrMsg *msg,
+        eAErrAction *pAction)
 {
-  eAErrAction *v3; // r12
-  AErrMsg *v4; // rbx
   const char *v5; // r15
-  const char *v6; // rdi
-  const char *v7; // rbp
-  char *v8; // r8
-  char *v9; // r9
-  const char *v10; // rcx
-  signed int v11; // esi
+  const char *i_title_p; // rdi
+  char *i_desc_high_p; // rbp
+  char *i_func_name_p; // r8
+  char *i_desc_low_p; // r9
+  const char *i_source_path_p; // rcx
+  eAErrAction v11; // esi
   unsigned __int8 v12; // r14
-  signed __int64 v13; // rbx
+  __int64 v13; // rbx
   unsigned int v14; // eax
-  AStringRef *v15; // rbx
+  AStringRef *i_str_ref_p; // rbx
   bool v16; // zf
-  AObjReusePool<AStringRef> *v17; // rax
-  AObjReusePool<AStringRef> *v18; // r8
-  AObjBlock<AStringRef> *v19; // rax
-  unsigned __int64 v20; // rdx
-  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *v21; // rcx
-  AStringRef *v22; // rdx
-  unsigned int v23; // ebx
-  AStringRef *v24; // rax
-  unsigned int v25; // ebp
-  int v26; // eax
-  AStringRef *v27; // rbx
-  AObjReusePool<AStringRef> *v28; // rax
-  AObjReusePool<AStringRef> *v29; // r8
-  AObjBlock<AStringRef> *v30; // rax
-  unsigned __int64 v31; // rdx
-  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *v32; // rcx
-  AStringRef *v33; // rbx
-  AObjReusePool<AStringRef> *v34; // rax
-  AObjBlock<AStringRef> *v35; // rcx
-  unsigned __int64 v36; // rdx
-  bool v37; // cf
-  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *v38; // rcx
+  AObjReusePool<AStringRef> *pool; // r8
+  AObjBlock<AStringRef> *i_block_p; // rax
+  unsigned __int64 i_objects_a; // rdx
+  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *p_i_exp_pool; // rcx
+  AStringRef *v21; // rdx
+  unsigned int i_length; // ebx
+  AStringRef *v23; // rax
+  unsigned int v24; // ebp
+  int v25; // eax
+  AStringRef *v26; // rbx
+  AObjReusePool<AStringRef> *v27; // r8
+  AObjBlock<AStringRef> *v28; // rax
+  unsigned __int64 v29; // rdx
+  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *p_i_pool; // rcx
+  AStringRef *v31; // rbx
+  AObjReusePool<AStringRef> *v32; // rax
+  AObjBlock<AStringRef> *v33; // rcx
+  unsigned __int64 v34; // rdx
+  bool v35; // cf
+  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *v36; // rcx
   __int64 deallocate; // [rsp+20h] [rbp-868h]
-  __int64 v41; // [rsp+30h] [rbp-858h]
-  char buffer_p; // [rsp+50h] [rbp-838h]
-  AString str; // [rsp+898h] [rbp+10h]
-  AString result; // [rsp+8A0h] [rbp+18h]
-  AString v45; // [rsp+8A8h] [rbp+20h]
+  char buffer_p[2104]; // [rsp+50h] [rbp-838h] BYREF
+  AString str; // [rsp+898h] [rbp+10h] BYREF
+  AString result; // [rsp+8A0h] [rbp+18h] BYREF
+  AString v42; // [rsp+8A8h] [rbp+20h] BYREF
 
-  v3 = pAction;
-  v4 = msg;
   v5 = 0i64;
   if ( msg->i_err_level )
   {
-    v6 = "Error";
+    i_title_p = "Error";
     v5 = "\n"
          "Choose:\n"
          "  Abort  - break into C++ & get callstack [then ignore on continue]\n"
@@ -231,124 +227,126 @@ __int64 __fastcall UFG::AgogErrorOutput::determine_choice(UFG::AgogErrorOutput *
   }
   else
   {
-    v6 = "Internal recoverable exception";
+    i_title_p = "Internal recoverable exception";
   }
   if ( msg->i_title_p )
-    v6 = msg->i_title_p;
-  AString::AString(&str, &buffer_p, 0x800u, 0, 0);
-  v7 = "An error has occurred.";
-  if ( v4->i_desc_high_p )
-    v7 = v4->i_desc_high_p;
-  v8 = &customWorldMapCaption;
-  v9 = &customWorldMapCaption;
-  if ( v4->i_desc_low_p )
-    v9 = (char *)v4->i_desc_low_p;
-  if ( v4->i_func_name_p )
-    v8 = (char *)v4->i_func_name_p;
-  v10 = v4->i_source_path_p;
-  if ( v10 )
+    i_title_p = msg->i_title_p;
+  AString::AString(&str, buffer_p, 0x800u, 0, 0);
+  i_desc_high_p = "An error has occurred.";
+  if ( msg->i_desc_high_p )
+    i_desc_high_p = (char *)msg->i_desc_high_p;
+  i_func_name_p = &customCaption;
+  i_desc_low_p = &customCaption;
+  if ( msg->i_desc_low_p )
+    i_desc_low_p = (char *)msg->i_desc_low_p;
+  if ( msg->i_func_name_p )
+    i_func_name_p = (char *)msg->i_func_name_p;
+  i_source_path_p = msg->i_source_path_p;
+  if ( i_source_path_p )
   {
-    LODWORD(v41) = v4->i_err_id;
-    LODWORD(deallocate) = v4->i_source_line;
-    AString::format(&str, "\n\n  C++ Internal Info:\n    %s\n    %s(%u) :\n    %s\n", v8, v10, deallocate, v9, v41);
+    LODWORD(deallocate) = msg->i_source_line;
+    AString::format(
+      &str,
+      "\n\n  C++ Internal Info:\n    %s\n    %s(%u) :\n    %s\n",
+      i_func_name_p,
+      i_source_path_p,
+      deallocate,
+      i_desc_low_p);
   }
   else
   {
-    LODWORD(deallocate) = v4->i_err_id;
-    AString::format(&str, "\n\n  C++ Internal Info:\n    %s\n    %s\n", v8, v9, deallocate);
+    AString::format(&str, "\n\n  C++ Internal Info:\n    %s\n    %s\n", i_func_name_p, i_desc_low_p);
   }
   ADebug::context_string(&result);
-  ADebug::print_format("\n###%s : ", v6);
-  ADebug::print(v7, 1);
-  ADebug::print(&str, 1);
-  ADebug::print(&result, 1);
-  v11 = 3;
+  ADebug::print_format("\n###%s : ", i_title_p);
+  ADebug::print(i_desc_high_p, 1);
+  ADebug::print((AMD_HD3D *)&str, 1);
+  ADebug::print((AMD_HD3D *)&result, 1);
+  v11 = AErrAction_ignore;
   v12 = 0;
   if ( v5 )
   {
     if ( UFG::gAutoSmoketest )
-      goto LABEL_53;
+      goto LABEL_34;
     v13 = -1i64;
     do
       ++v13;
-    while ( v7[v13] );
+    while ( i_desc_high_p[v13] );
     v14 = AMemory::c_req_byte_size_func(v13 + 1);
-    v45.i_str_ref_p = AStringRef::pool_new(v7, v13, v14, 1u, 0, 1);
-    AString::insert(&str, &v45, 0);
-    v15 = v45.i_str_ref_p;
-    v16 = v45.i_str_ref_p->i_ref_count == 1;
-    --v15->i_ref_count;
+    v42.i_str_ref_p = AStringRef::pool_new(i_desc_high_p, v13, v14, 1u, 0, 1);
+    AString::insert(&str, &v42, 0);
+    i_str_ref_p = v42.i_str_ref_p;
+    v16 = v42.i_str_ref_p->i_ref_count-- == 1;
     if ( v16 )
     {
-      if ( v15->i_deallocate )
-        AMemory::c_free_func(v15->i_cstr_p);
-      v17 = AStringRef::get_pool();
-      v18 = v17;
-      v19 = v17->i_block_p;
-      v20 = (unsigned __int64)v19->i_objects_a;
-      if ( (unsigned __int64)v15 < v20 || (v21 = &v18->i_pool, (unsigned __int64)v15 >= v20 + 24i64 * v19->i_size) )
-        v21 = &v18->i_exp_pool;
-      APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(v21, v15);
-    }
-    v22 = result.i_str_ref_p;
-    v23 = result.i_str_ref_p->i_length;
-    if ( v23 )
-    {
-      v24 = str.i_str_ref_p;
-      v25 = v23 + str.i_str_ref_p->i_length;
-      if ( v25 >= str.i_str_ref_p->i_size || str.i_str_ref_p->i_ref_count + str.i_str_ref_p->i_read_only != 1 )
+      if ( i_str_ref_p->i_deallocate )
+        AMemory::c_free_func(i_str_ref_p->i_cstr_p);
+      pool = AStringRef::get_pool();
+      i_block_p = pool->i_block_p;
+      i_objects_a = (unsigned __int64)i_block_p->i_objects_a;
+      if ( (unsigned __int64)i_str_ref_p < i_objects_a
+        || (p_i_exp_pool = &pool->i_pool, (unsigned __int64)i_str_ref_p >= i_objects_a + 24i64 * i_block_p->i_size) )
       {
-        AString::set_size(&str, v25);
-        v24 = str.i_str_ref_p;
-        v22 = result.i_str_ref_p;
+        p_i_exp_pool = &pool->i_exp_pool;
       }
-      memmove(&v24->i_cstr_p[v24->i_length], v22->i_cstr_p, v23 + 1);
-      str.i_str_ref_p->i_length = v25;
+      APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(p_i_exp_pool, i_str_ref_p);
+    }
+    v21 = result.i_str_ref_p;
+    i_length = result.i_str_ref_p->i_length;
+    if ( i_length )
+    {
+      v23 = str.i_str_ref_p;
+      v24 = i_length + str.i_str_ref_p->i_length;
+      if ( v24 >= str.i_str_ref_p->i_size || str.i_str_ref_p->i_ref_count + str.i_str_ref_p->i_read_only != 1 )
+      {
+        AString::set_size(&str, v24);
+        v23 = str.i_str_ref_p;
+        v21 = result.i_str_ref_p;
+      }
+      memmove(&v23->i_cstr_p[v23->i_length], v21->i_cstr_p, i_length + 1);
+      str.i_str_ref_p->i_length = v24;
     }
     AString::append(&str, v5, 0xFFFFFFFF);
-    v26 = MessageBoxA(0i64, str.i_str_ref_p->i_cstr_p, v6, 0x10032u);
-    if ( v26 == 3 )
+    v25 = MessageBoxA(0i64, str.i_str_ref_p->i_cstr_p, i_title_p, 0x10032u);
+    if ( v25 == 3 )
     {
-LABEL_53:
+LABEL_34:
       v12 = 1;
     }
-    else if ( v26 != 4 && v26 == 5 )
+    else if ( v25 == 5 )
     {
-      v11 = 4;
+      v11 = AErrAction_ignore_all;
     }
   }
-  *v3 = v11;
-  v27 = result.i_str_ref_p;
-  v16 = result.i_str_ref_p->i_ref_count == 1;
-  --v27->i_ref_count;
+  *pAction = v11;
+  v26 = result.i_str_ref_p;
+  v16 = result.i_str_ref_p->i_ref_count-- == 1;
   if ( v16 )
   {
-    if ( v27->i_deallocate )
-      AMemory::c_free_func(v27->i_cstr_p);
-    v28 = AStringRef::get_pool();
-    v29 = v28;
-    v30 = v28->i_block_p;
-    v31 = (unsigned __int64)v30->i_objects_a;
-    if ( (unsigned __int64)v27 < v31 || (v32 = &v29->i_pool, (unsigned __int64)v27 >= v31 + 24i64 * v30->i_size) )
-      v32 = &v29->i_exp_pool;
-    APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(v32, v27);
+    if ( v26->i_deallocate )
+      AMemory::c_free_func(v26->i_cstr_p);
+    v27 = AStringRef::get_pool();
+    v28 = v27->i_block_p;
+    v29 = (unsigned __int64)v28->i_objects_a;
+    if ( (unsigned __int64)v26 < v29 || (p_i_pool = &v27->i_pool, (unsigned __int64)v26 >= v29 + 24i64 * v28->i_size) )
+      p_i_pool = &v27->i_exp_pool;
+    APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(p_i_pool, v26);
   }
-  v33 = str.i_str_ref_p;
-  v16 = str.i_str_ref_p->i_ref_count == 1;
-  --v33->i_ref_count;
+  v31 = str.i_str_ref_p;
+  v16 = str.i_str_ref_p->i_ref_count-- == 1;
   if ( v16 )
   {
-    if ( v33->i_deallocate )
-      AMemory::c_free_func(v33->i_cstr_p);
-    v34 = AStringRef::get_pool();
-    v35 = v34->i_block_p;
-    v36 = (unsigned __int64)v35->i_objects_a;
-    if ( (unsigned __int64)v33 < v36
-      || (v37 = (unsigned __int64)v33 < v36 + 24i64 * v35->i_size, v38 = &v34->i_pool, !v37) )
+    if ( v31->i_deallocate )
+      AMemory::c_free_func(v31->i_cstr_p);
+    v32 = AStringRef::get_pool();
+    v33 = v32->i_block_p;
+    v34 = (unsigned __int64)v33->i_objects_a;
+    if ( (unsigned __int64)v31 < v34
+      || (v35 = (unsigned __int64)v31 < v34 + 24i64 * v33->i_size, v36 = &v32->i_pool, !v35) )
     {
-      v38 = &v34->i_exp_pool;
+      v36 = &v32->i_exp_pool;
     }
-    APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(v38, v33);
+    APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(v36, v31);
   }
   return v12;
 }
@@ -359,7 +357,7 @@ AgogCoreVals *__fastcall Agog::get_agog_core_vals()
 {
   AgogCoreVals *result; // rax
 
-  if ( !(_S7_10 & 1) )
+  if ( (_S7_10 & 1) == 0 )
   {
     _S7_10 |= 1u;
     AgogCoreVals::AgogCoreVals(&s_values);
@@ -378,7 +376,7 @@ AgogCoreVals *__fastcall Agog::get_agog_core_vals()
 // RVA: 0x426970
 UFG::AgogErrorOutput *__fastcall Agog::on_error_pre(bool nested)
 {
-  if ( !(_S8_10 & 1) )
+  if ( (_S8_10 & 1) == 0 )
   {
     _S8_10 |= 1u;
     s_simple_err_out.vfptr = (AErrorOutputBaseVtbl *)&UFG::AgogErrorOutput::`vftable;
@@ -391,41 +389,40 @@ UFG::AgogErrorOutput *__fastcall Agog::on_error_pre(bool nested)
 // RVA: 0x14FF710
 __int64 dynamic_initializer_for__gAssertContextFuncs__()
 {
-  return atexit(dynamic_atexit_destructor_for__gAssertContextFuncs__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gAssertContextFuncs__);
 }
 
 // File Line: 797
 // RVA: 0x421130
-__int64 HKAssertHandler(const char *pConditionCStr, const char *pFileCStr, __int64 line, bool *pIgnoreAlways, const char *pMsgCStr, ...)
+__int64 HKAssertHandler(
+        const char *pConditionCStr,
+        const char *pFileCStr,
+        __int64 line,
+        bool *pIgnoreAlways,
+        const char *pMsgCStr,
+        ...)
 {
-  bool *v5; // r14
-  int v6; // er12
-  const char *v7; // r13
+  int v6; // r12d
   const char *v8; // rsi
   unsigned int v9; // edi
-  int v10; // er15
-  fastdelegate::FastDelegate<bool __cdecl(UFG::qString *)> *v11; // rbx
+  int v10; // r15d
+  fastdelegate::FastDelegate<bool __cdecl(UFG::qString *)> *p; // rbx
   fastdelegate::FastDelegate<bool __cdecl(UFG::qString *)> *v12; // rsi
   unsigned __int64 v13; // rdx
-  signed __int64 v14; // rcx
+  __int64 v14; // rcx
   signed __int64 v15; // rcx
   void *v16; // rsp
   void *v17; // rsp
   int v18; // eax
   int v19; // eax
-  __int64 v21; // [rsp+20h] [rbp-20h]
-  UFG::qString v22; // [rsp+40h] [rbp+0h]
-  __int64 v23; // [rsp+68h] [rbp+28h]
-  char dest; // [rsp+70h] [rbp+30h]
-  const char *v25; // [rsp+8C0h] [rbp+880h]
-  va_list va; // [rsp+8E8h] [rbp+8A8h]
+  UFG::qString v21; // [rsp+40h] [rbp+0h] BYREF
+  __int64 v22; // [rsp+68h] [rbp+28h]
+  char dest[2112]; // [rsp+70h] [rbp+30h] BYREF
+  va_list va; // [rsp+8E8h] [rbp+8A8h] BYREF
 
   va_start(va, pMsgCStr);
-  v25 = pConditionCStr;
-  v23 = -2i64;
-  v5 = pIgnoreAlways;
+  v22 = -2i64;
   v6 = line;
-  v7 = pFileCStr;
   v8 = pConditionCStr;
   UFG::qPrintf(
     "\n"
@@ -440,47 +437,46 @@ __int64 HKAssertHandler(const char *pConditionCStr, const char *pFileCStr, __int
     pConditionCStr);
   v9 = 0;
   v10 = 0;
-  dest = 0;
+  dest[0] = 0;
   if ( pMsgCStr )
-    v10 = UFG::qVSPrintf(&dest, 2048, pMsgCStr, va);
-  UFG::qString::qString(&v22);
+    v10 = UFG::qVSPrintf(dest, 2048, pMsgCStr, va);
+  UFG::qString::qString(&v21);
   if ( gAssertContextFuncs.size )
   {
-    v11 = gAssertContextFuncs.p;
+    p = gAssertContextFuncs.p;
     v12 = &gAssertContextFuncs.p[gAssertContextFuncs.size];
     if ( gAssertContextFuncs.p < v12 )
     {
       do
       {
-        ((void (__fastcall *)(fastdelegate::detail::GenericClass *, UFG::qString *))v11->m_Closure.m_pFunction)(
-          v11->m_Closure.m_pthis,
-          &v22);
-        ++v11;
+        ((void (__fastcall *)(fastdelegate::detail::GenericClass *, UFG::qString *))p->m_Closure.m_pFunction)(
+          p->m_Closure.m_pthis,
+          &v21);
+        ++p;
       }
-      while ( v11 < v12 );
+      while ( p < v12 );
     }
-    v8 = v25;
+    v8 = pConditionCStr;
   }
-  if ( !v5 || UFG::gAutoSmoketest )
+  if ( !pIgnoreAlways || UFG::gAutoSmoketest )
     goto LABEL_15;
-  v13 = (unsigned int)(v10 + v22.mLength + 512);
+  v13 = (unsigned int)(v10 + v21.mLength + 512);
   v14 = v13 + 15;
   if ( v13 + 15 <= v13 )
-    v14 = 1152921504606846960i64;
+    v14 = 0xFFFFFFFFFFFFFF0i64;
   v15 = v14 & 0xFFFFFFFFFFFFFFF0ui64;
   v16 = alloca(v15);
   v17 = alloca(v15);
-  LODWORD(v21) = v6;
   UFG::qSPrintf(
-    (char *)&v22,
+    (char *)&v21,
     v13,
     "Data Assert Failed!\nFile      :   %s\nLine      :   %d\nCondition :  %s\nMessage   :  %s\n%s\n",
-    v7,
-    v21,
+    pFileCStr,
+    v6,
     v8,
-    &dest,
-    v22.mData);
-  v18 = MessageBoxA(0i64, (LPCSTR)&v22, "Assert Failed!", 0x12032u) - 3;
+    dest,
+    v21.mData);
+  v18 = MessageBoxA(0i64, (LPCSTR)&v21, "Assert Failed!", 0x12032u) - 3;
   if ( !v18 )
     goto LABEL_15;
   v19 = v18 - 1;
@@ -488,14 +484,14 @@ __int64 HKAssertHandler(const char *pConditionCStr, const char *pFileCStr, __int
   {
     if ( v19 == 1 )
     {
-      *v5 = 1;
+      *pIgnoreAlways = 1;
       goto LABEL_16;
     }
 LABEL_15:
     v9 = 1;
   }
 LABEL_16:
-  UFG::qString::~qString(&v22);
+  UFG::qString::~qString(&v21);
   return v9;
 }
 
@@ -503,42 +499,41 @@ LABEL_16:
 // RVA: 0x426320
 __int64 __fastcall SkookumExtraContext(UFG::qString *pStr)
 {
-  UFG::qString *v1; // rbx
   unsigned __int8 v2; // di
-  AStringRef *v3; // rbx
-  bool v4; // zf
-  AObjReusePool<AStringRef> *v5; // rax
-  AObjBlock<AStringRef> *v6; // rcx
-  unsigned __int64 v7; // rdx
+  AStringRef *i_str_ref_p; // rbx
+  AObjReusePool<AStringRef> *pool; // rax
+  AObjBlock<AStringRef> *i_block_p; // rcx
+  unsigned __int64 i_objects_a; // rdx
   bool v8; // cf
-  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *v9; // rcx
-  AString str_p; // [rsp+48h] [rbp+10h]
+  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *p_i_exp_pool; // rcx
+  AString str_p; // [rsp+48h] [rbp+10h] BYREF
 
-  v1 = pStr;
   str_p.i_str_ref_p = AStringRef::get_empty();
   ++str_p.i_str_ref_p->i_ref_count;
   if ( ADebug::context_append(&str_p) )
   {
-    UFG::qString::append(v1, str_p.i_str_ref_p->i_cstr_p, str_p.i_str_ref_p->i_length);
+    UFG::qString::append(pStr, str_p.i_str_ref_p->i_cstr_p, str_p.i_str_ref_p->i_length);
     v2 = 1;
   }
   else
   {
     v2 = 0;
   }
-  v3 = str_p.i_str_ref_p;
-  v4 = str_p.i_str_ref_p->i_ref_count == 1;
-  --v3->i_ref_count;
-  if ( v4 )
+  i_str_ref_p = str_p.i_str_ref_p;
+  if ( str_p.i_str_ref_p->i_ref_count-- == 1 )
   {
-    if ( v3->i_deallocate )
-      AMemory::c_free_func(v3->i_cstr_p);
-    v5 = AStringRef::get_pool();
-    v6 = v5->i_block_p;
-    v7 = (unsigned __int64)v6->i_objects_a;
-    if ( (unsigned __int64)v3 < v7 || (v8 = (unsigned __int64)v3 < v7 + 24i64 * v6->i_size, v9 = &v5->i_pool, !v8) )
-      v9 = &v5->i_exp_pool;
-    APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(v9, v3);
+    if ( i_str_ref_p->i_deallocate )
+      AMemory::c_free_func(i_str_ref_p->i_cstr_p);
+    pool = AStringRef::get_pool();
+    i_block_p = pool->i_block_p;
+    i_objects_a = (unsigned __int64)i_block_p->i_objects_a;
+    if ( (unsigned __int64)i_str_ref_p < i_objects_a
+      || (v8 = (unsigned __int64)i_str_ref_p < i_objects_a + 24i64 * i_block_p->i_size, p_i_exp_pool = &pool->i_pool,
+                                                                                        !v8) )
+    {
+      p_i_exp_pool = &pool->i_exp_pool;
+    }
+    APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(p_i_exp_pool, i_str_ref_p);
   }
   return v2;
 }
@@ -562,10 +557,10 @@ char __fastcall WaitForStreamer(UFG *a1)
 
 // File Line: 925
 // RVA: 0x424D70
-UFG::allocator::free_link *__fastcall LoadTexturePackHK(const char *perm_filename, UFG::StreamingMemory::DATA_TYPE eDataType)
+UFG::allocator::free_link *__fastcall LoadTexturePackHK(
+        const char *perm_filename,
+        UFG::StreamingMemory::DATA_TYPE eDataType)
 {
-  UFG::StreamingMemory::DATA_TYPE v2; // ebp
-  const char *v3; // r14
   UFG::allocator::free_link *v4; // rsi
   unsigned int v5; // ebx
   unsigned int v6; // edi
@@ -575,8 +570,6 @@ UFG::allocator::free_link *__fastcall LoadTexturePackHK(const char *perm_filenam
   UFG::allocator::free_link *v10; // r14
   char *v11; // rdx
 
-  v2 = eDataType;
-  v3 = perm_filename;
   v4 = UFG::qMalloc(0x30ui64, "DataStreamer::Handle", 0i64);
   v5 = 1;
   if ( v4 )
@@ -595,11 +588,18 @@ UFG::allocator::free_link *__fastcall LoadTexturePackHK(const char *perm_filenam
     v6 = 0;
     v4 = 0i64;
   }
-  UFG::DataStreamer::QueueStream((UFG::DataStreamer::Handle *)v4, v3, v2, DEFAULT_PRIORITY, 3u, 0i64, 0i64);
+  UFG::DataStreamer::QueueStream(
+    (UFG::DataStreamer::Handle *)v4,
+    perm_filename,
+    eDataType,
+    DEFAULT_PRIORITY,
+    3u,
+    0i64,
+    0i64);
   v7 = dword_14207EE90;
   v8 = dword_14207EE90 + 1;
   if ( dword_14207EE90 + 1 <= unk_14207EE94 )
-    goto LABEL_25;
+    goto LABEL_21;
   if ( unk_14207EE94 )
     v5 = 2 * unk_14207EE94;
   for ( ; v5 < v8; v5 *= 2 )
@@ -608,9 +608,9 @@ UFG::allocator::free_link *__fastcall LoadTexturePackHK(const char *perm_filenam
     v5 = 2;
   if ( v5 - v8 > 0x10000 )
     v5 = dword_14207EE90 + 65537;
-  if ( v5 == (_DWORD)v7 )
+  if ( v5 == dword_14207EE90 )
   {
-LABEL_25:
+LABEL_21:
     v10 = (UFG::allocator::free_link *)unk_14207EE98;
   }
   else
@@ -646,12 +646,11 @@ LABEL_25:
 // RVA: 0x424680
 void __fastcall LoadGlobalBins(UFG::qString *dataDir)
 {
-  UFG::qString *v1; // rdi
   UFG::qString *v2; // rax
   UFG::qString *v3; // rax
   UFG::qString *v4; // rax
   UFG::qString *v5; // rax
-  char *v6; // rbx
+  char *mData; // rbx
   UFG::UIScreenTextureManager *v7; // rax
   char *v8; // rbx
   UFG::UIScreenTextureManager *v9; // rax
@@ -668,53 +667,52 @@ void __fastcall LoadGlobalBins(UFG::qString *dataDir)
   UFG::qString *v20; // rax
   UFG::qString *v21; // rax
   UFG::qString *v22; // rax
-  UFG::qString result; // [rsp+40h] [rbp-B8h]
+  UFG::qString result; // [rsp+40h] [rbp-B8h] BYREF
   __int64 v24; // [rsp+68h] [rbp-90h]
-  UFG::qString v25; // [rsp+70h] [rbp-88h]
+  UFG::qString v25; // [rsp+70h] [rbp-88h] BYREF
   const char *v26; // [rsp+A8h] [rbp-50h]
-  UFG::qString v27; // [rsp+B8h] [rbp-40h]
-  UFG::qString v28; // [rsp+E0h] [rbp-18h]
+  UFG::qString v27; // [rsp+B8h] [rbp-40h] BYREF
+  UFG::qString v28; // [rsp+E0h] [rbp-18h] BYREF
 
   v24 = -2i64;
-  v1 = dataDir;
   v2 = UFG::operator+(&result, dataDir, "\\Global\\StateBlocks.perm.bin");
   UFG::StreamResourceLoader::LoadResourceFile(v2->mData, 0i64, 0, 0i64, 0i64, 0i64);
   UFG::qString::~qString(&result);
   _(0i64);
-  v3 = UFG::operator+(&result, v1, "\\Global\\TexturePack.perm.bin");
+  v3 = UFG::operator+(&result, dataDir, "\\Global\\TexturePack.perm.bin");
   LoadTexturePackHK(v3->mData, DATA_GAME_GLOBAL_TEXTURES);
   UFG::qString::~qString(&result);
   _(0i64);
-  v4 = UFG::operator+(&result, v1, "\\Global\\EffectsTexturePack.perm.bin");
+  v4 = UFG::operator+(&result, dataDir, "\\Global\\EffectsTexturePack.perm.bin");
   LoadTexturePackHK(v4->mData, DATA_GAME_GLOBAL_TEXTURES);
   UFG::qString::~qString(&result);
   _(0i64);
-  v5 = UFG::operator+(&result, v1, "\\Global\\LightingTexturePack.perm.bin");
+  v5 = UFG::operator+(&result, dataDir, "\\Global\\LightingTexturePack.perm.bin");
   LoadTexturePackHK(v5->mData, DATA_GAME_GLOBAL_TEXTURES);
   UFG::qString::~qString(&result);
   _(0i64);
-  v6 = UFG::operator+(&result, v1, "\\UI\\global_win32_texturepack.perm.bin")->mData;
+  mData = UFG::operator+(&result, dataDir, "\\UI\\global_win32_texturepack.perm.bin")->mData;
   v7 = UFG::UIScreenTextureManager::Instance();
-  UFG::UIScreenTextureManager::QueueTexturePackLoad(v7, v6, DEFAULT_PRIORITY, 0i64, 0i64);
+  UFG::UIScreenTextureManager::QueueTexturePackLoad(v7, mData, DEFAULT_PRIORITY, 0i64, 0i64);
   UFG::qString::~qString(&result);
   _(0i64);
-  v8 = UFG::operator+(&result, v1, "\\UI\\racecountdown_texturepack.perm.bin")->mData;
+  v8 = UFG::operator+(&result, dataDir, "\\UI\\racecountdown_texturepack.perm.bin")->mData;
   v9 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::QueueTexturePackLoad(v9, v8, DEFAULT_PRIORITY, 0i64, 0i64);
   UFG::qString::~qString(&result);
   _(0i64);
-  v10 = UFG::operator+(&result, v1, "\\UI\\widgetarray_texturepack.perm.bin")->mData;
+  v10 = UFG::operator+(&result, dataDir, "\\UI\\widgetarray_texturepack.perm.bin")->mData;
   v11 = UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::QueueTexturePackLoad(v11, v10, DEFAULT_PRIORITY, 0i64, 0i64);
   UFG::qString::~qString(&result);
   _(0i64);
-  UFG::operator+((UFG::qString *)((char *)&v25 + 32), v1, "\\Vehicles_New\\dummyvehiclerig.perm.bin");
+  UFG::operator+((UFG::qString *)&v25.mStringHash32, dataDir, "\\Vehicles_New\\dummyvehiclerig.perm.bin");
   if ( UFG::StreamFileWrapper::FileExists(v26) )
   {
     UFG::DataStreamer::QueueStream(&stru_1423EC590, v26, DATA_TRUECROWD_RESOURCE, DEFAULT_PRIORITY, 7u, 0i64, 0i64);
     _(0i64);
   }
-  UFG::operator+(&v27, v1, "\\Props_new\\PropPhysics.bin");
+  UFG::operator+(&v27, dataDir, "\\Props_new\\PropPhysics.bin");
   if ( UFG::StreamFileWrapper::FileExists(v27.mData) )
   {
     UFG::DataStreamer::QueueStream(
@@ -727,7 +725,7 @@ void __fastcall LoadGlobalBins(UFG::qString *dataDir)
       0i64);
     _(0i64);
   }
-  UFG::operator+(&v25, v1, "\\Vehicles_New\\Global.perm.bin");
+  UFG::operator+(&v25, dataDir, "\\Vehicles_New\\Global.perm.bin");
   if ( UFG::StreamFileWrapper::FileExists(*(const char **)&v25.mMagic) )
   {
     UFG::DataStreamer::QueueStream(
@@ -740,7 +738,7 @@ void __fastcall LoadGlobalBins(UFG::qString *dataDir)
       0i64);
     _(0i64);
   }
-  UFG::operator+(&v28, v1, "\\Characters_New\\Global.perm.bin");
+  UFG::operator+(&v28, dataDir, "\\Characters_New\\Global.perm.bin");
   if ( UFG::StreamFileWrapper::FileExists(v28.mData) )
   {
     UFG::DataStreamer::QueueStream(
@@ -762,46 +760,46 @@ void __fastcall LoadGlobalBins(UFG::qString *dataDir)
     Render::StreamingLoopProcessQueuedOperations(1, 0);
   }
   while ( !UFG::DataStreamer::IsStalled(0i64, 0) && UFG::DataStreamer::IsBusy(0i64, 0) );
-  v14 = UFG::operator+(&result, v1, "\\Global\\Models.perm.bin");
+  v14 = UFG::operator+(&result, dataDir, "\\Global\\Models.perm.bin");
   UFG::StreamResourceLoader::LoadResourceFile(v14->mData, 0i64, 0, 0i64, 0i64, 0i64);
   UFG::qString::~qString(&result);
   _(0i64);
-  v15 = UFG::operator+(&result, v1, "\\Global\\fonts.perm.bin");
+  v15 = UFG::operator+(&result, dataDir, "\\Global\\fonts.perm.bin");
   UFG::StreamResourceLoader::LoadResourceFile(v15->mData, 0i64, 0, 0i64, 0i64, 0i64);
   UFG::qString::~qString(&result);
   _(0i64);
-  v16 = UFG::operator+(&result, v1, "\\Global\\Effects.perm.bin");
+  v16 = UFG::operator+(&result, dataDir, "\\Global\\Effects.perm.bin");
   UFG::StreamResourceLoader::LoadResourceFile(v16->mData, 0i64, 0, 0i64, 0i64, 0i64);
   UFG::qString::~qString(&result);
   _(0i64);
-  v17 = UFG::operator+(&result, v1, "\\Global\\Clouds.perm.bin");
+  v17 = UFG::operator+(&result, dataDir, "\\Global\\Clouds.perm.bin");
   UFG::StreamResourceLoader::LoadResourceFile(v17->mData, 0i64, 0, 0i64, 0i64, 0i64);
   UFG::qString::~qString(&result);
   _(0i64);
-  v18 = UFG::operator+(&result, v1, "\\Global\\Physics.perm.bin");
+  v18 = UFG::operator+(&result, dataDir, "\\Global\\Physics.perm.bin");
   UFG::StreamResourceLoader::LoadResourceFile(v18->mData, 0i64, 0, 0i64, 0i64, 0i64);
   UFG::qString::~qString(&result);
   _(0i64);
-  v19 = UFG::operator+(&result, v1, "\\Global\\Rig.perm.bin");
+  v19 = UFG::operator+(&result, dataDir, "\\Global\\Rig.perm.bin");
   UFG::StreamResourceLoader::LoadResourceFile(v19->mData, 0i64, 0, 0i64, 0i64, 0i64);
   UFG::qString::~qString(&result);
   _(0i64);
-  v20 = UFG::operator+(&result, v1, "\\Global\\GlobalDNA.perm.bin");
+  v20 = UFG::operator+(&result, dataDir, "\\Global\\GlobalDNA.perm.bin");
   UFG::StreamResourceLoader::LoadResourceFile(v20->mData, 0i64, 0, 0i64, 0i64, 0i64);
   UFG::qString::~qString(&result);
   _(0i64);
-  v21 = UFG::operator+(&result, v1, "\\PrefabData\\Database.bin");
+  v21 = UFG::operator+(&result, dataDir, "\\PrefabData\\Database.bin");
   UFG::StreamResourceLoader::LoadResourceFile(v21->mData, 0i64, 0, 0i64, 0i64, 0i64);
   UFG::qString::~qString(&result);
   _(0i64);
-  v22 = UFG::operator+(&result, v1, "\\Global\\Audio.perm.bin");
+  v22 = UFG::operator+(&result, dataDir, "\\Global\\Audio.perm.bin");
   UFG::StreamResourceLoader::LoadResourceFile(v22->mData, 0i64, 0, 0i64, 0i64, 0i64);
   UFG::qString::~qString(&result);
   _(0i64);
   UFG::qString::~qString(&v28);
   UFG::qString::~qString(&v25);
   UFG::qString::~qString(&v27);
-  UFG::qString::~qString((UFG::qString *)((char *)&v25 + 32));
+  UFG::qString::~qString((UFG::qString *)&v25.mStringHash32);
 }
 
 // File Line: 1071
@@ -845,21 +843,27 @@ void QueueLoadRigs(void)
 // RVA: 0x425E70
 void __fastcall OnZoneLayoutLoadCallback(UFG::DataStreamer::Handle *handle, void *param)
 {
-  UFG::qVector2 *v2; // rsi
-  UFG::qVector2 *v3; // rbp
+  UFG::qVector2 *WorldExtents_max; // rsi
+  UFG::qVector2 *WorldExtents_min; // rbp
   UFG::qVector2 *v4; // rbx
   UFG::qVector2 *v5; // rdi
-  UFG::CoverDataInventory *v6; // rax
+  UFG::CoverDataInventory *Instance; // rax
   AMD_HD3D *v7; // rcx
   AMD_HD3D *v8; // rcx
 
   UFG::InterestPoint::InitGrid();
-  v2 = UFG::GetWorldExtents_max();
-  v3 = UFG::GetWorldExtents_min();
+  WorldExtents_max = UFG::GetWorldExtents_max();
+  WorldExtents_min = UFG::GetWorldExtents_min();
   v4 = UFG::GetWorldExtents_max();
   v5 = UFG::GetWorldExtents_min();
-  v6 = UFG::CoverDataInventory::GetInstance();
-  UFG::GridIntrusive<UFG::CoverCorner>::Init(&v6->m_CornerGrid, v3->x, v5->y, v2->x, v4->y, 100.0);
+  Instance = UFG::CoverDataInventory::GetInstance();
+  UFG::GridIntrusive<UFG::CoverCorner>::Init(
+    &Instance->m_CornerGrid,
+    WorldExtents_min->x,
+    v5->y,
+    WorldExtents_max->x,
+    v4->y,
+    100.0);
   UFG::WheeledVehicleManager::InitGlobalData(UFG::WheeledVehicleManager::m_Instance);
   _(v7);
   _(v8);
@@ -869,7 +873,7 @@ void __fastcall OnZoneLayoutLoadCallback(UFG::DataStreamer::Handle *handle, void
 // RVA: 0x4263D0
 void UnloadCurrentLocation(void)
 {
-  UFG::TerrainCollisionManager *v0; // rax
+  UFG::TerrainCollisionManager *Instance; // rax
   UFG::SectionChooser *v1; // rcx
   UFG::ObjectResourceManager *v2; // rax
   UFG::PartDatabase *v3; // rax
@@ -878,11 +882,11 @@ void UnloadCurrentLocation(void)
 
   if ( gCurrentLocationDirectory.mLength )
   {
-    Illusion::IEnginePlat::WaitUntilGPUDone((Illusion::IEnginePlat *)&Illusion::gEngine);
+    Illusion::IEnginePlat::WaitUntilGPUDone(&Illusion::gEngine);
     if ( UFG::WheeledVehicleManager::m_Instance )
       UFG::WheeledVehicleManager::ReleaseGlobalData(UFG::WheeledVehicleManager::m_Instance);
-    v0 = UFG::TerrainCollisionManager::GetInstance();
-    UFG::TerrainCollisionManager::Shutdown(v0);
+    Instance = UFG::TerrainCollisionManager::GetInstance();
+    UFG::TerrainCollisionManager::Shutdown(Instance);
     UFG::SectionChooser::Destroy(v1);
     UFG::InterestPoint::DeleteGrid();
     v2 = UFG::ObjectResourceManager::Instance();
@@ -901,23 +905,27 @@ void UnloadCurrentLocation(void)
     UFG::DataStreamer::Service(0.1);
     Render::StreamingLoopProcessQueuedOperations(1, 0);
     UFG::BigFileLogic::SetSystemBigFileEnabled(UFG::BigFileLogic::SYSTEM_WORLD, gCurrentLocationDirectory.mData, 0);
-    UFG::qString::Set(&stru_1423AA4D0, &customWorldMapCaption);
-    UFG::qString::Set(&stru_1423AA4A8, &customWorldMapCaption);
-    UFG::qString::Set(&gCurrentLocationDirectory, &customWorldMapCaption);
+    UFG::qString::Set(&stru_1423AA4D0, &customCaption);
+    UFG::qString::Set(&stru_1423AA4A8, &customCaption);
+    UFG::qString::Set(&gCurrentLocationDirectory, &customCaption);
   }
 }
 
 // File Line: 1216
 // RVA: 0x4212C0
-void __fastcall HK_VRAMMoveCallback(UFG::qVRAMemoryHandle *handle, char *previous_location, UFG::VRAMType usage, unsigned __int64 callback_data_64)
+void __fastcall HK_VRAMMoveCallback(
+        UFG::qVRAMemoryHandle *handle,
+        char *previous_location,
+        UFG::VRAMType usage,
+        unsigned __int64 callback_data_64)
 {
-  void *buffer_ptr; // [rsp+20h] [rbp-18h]
-  unsigned int buffer_size; // [rsp+50h] [rbp+18h]
+  void *buffer_ptr; // [rsp+20h] [rbp-18h] BYREF
+  unsigned int buffer_size; // [rsp+50h] [rbp+18h] BYREF
 
   if ( (unsigned int)(usage - 9) <= 1 )
   {
-    if ( UFG::DataStreamer::GetBufferFromUID(callback_data_64, &buffer_ptr, &buffer_size) )
-      UFG::StreamResourceLoader::OnVRAMMove(buffer_ptr, buffer_size);
+    if ( UFG::DataStreamer::GetBufferFromUID(callback_data_64, (UFG::qBaseNodeRB **)&buffer_ptr, &buffer_size) )
+      UFG::StreamResourceLoader::OnVRAMMove((char *)buffer_ptr, buffer_size);
   }
 }
 
@@ -931,7 +939,7 @@ void InitGlobalPools(void)
   UFG::qMemoryPool::Init(
     &gSimulationMemoryPool,
     "SimulationMemoryPool",
-    (signed int)g_HK_SimulationMemoryPoolSize,
+    (int)g_HK_SimulationMemoryPoolSize,
     g_HK_SimulationMemorySmallBlockSize,
     1,
     1u,
@@ -950,7 +958,7 @@ void InitGlobalPools(void)
     1,
     1);
   if ( UFG::gPageBasedStompDetector )
-    UFG::qMemoryPool::EnablePageBasedStompDetection((UFG::qMemoryPool *)&gActionTreeMemoryPool.mPrev);
+    UFG::qMemoryPool::EnablePageBasedStompDetection(&gActionTreeMemoryPool);
   UFG::qMemoryPool2::Init(
     &gActionTreeMemoryPool,
     "ActionTreeMemoryPool",
@@ -965,7 +973,7 @@ void InitGlobalPools(void)
   UFG::qMemoryPool::Init(
     &gPropertySetMemoryPool,
     "PropertySetMemoryPool",
-    (signed int)g_HK_PropertySetPoolSize,
+    (int)g_HK_PropertySetPoolSize,
     g_HK_PropertySetPoolSmallBlockSize,
     1,
     1u,
@@ -977,7 +985,7 @@ void InitGlobalPools(void)
   UFG::qMemoryPool::Init(
     &gSkookumMemoryPool,
     "SkookumMemoryPool",
-    (signed int)g_HK_SkookumPoolSize,
+    (int)g_HK_SkookumPoolSize,
     g_HK_SkookumPoolSmallBlockSize,
     1,
     1u,
@@ -987,23 +995,14 @@ void InitGlobalPools(void)
   UFG::qMemoryPool::Init(
     &gOnlineMemoryPool,
     "OnlineMemoryPool",
-    (signed int)g_HK_OnlinePoolSize,
+    (int)g_HK_OnlinePoolSize,
     g_HK_OnlinePoolSmallBlockSize,
     1,
     1u,
     UFG::gMainMemoryPool,
     1,
     1);
-  UFG::qMemoryPool::Init(
-    &gpc_PC_VRamMemoryPool,
-    "PCVRAM_MemoryPool",
-    (signed int)(g_HK_VRAMSize + 4096),
-    0,
-    0,
-    1u,
-    0i64,
-    1,
-    1);
+  UFG::qMemoryPool::Init(&gpc_PC_VRamMemoryPool, "PCVRAM_MemoryPool", (int)(g_HK_VRAMSize + 4096), 0, 0, 1u, 0i64, 1, 1);
   gpPC_VRAM = UFG::qMemoryPool::Allocate(&gpc_PC_VRamMemoryPool, g_HK_VRAMSize, "PCVRAMbuffer", 0i64, 1u);
   UFG::qVRAMemoryPools::InitSystem((char *)gpPC_VRAM, g_HK_VRAMSize, "Global", 0, 0x80u, 0i64, 0, 0x1F40u, 0i64, 0);
   UFG::qVRAMemoryPool::SetCanDefrag(UFG::gMainVRAMemoryPool, 0);
@@ -1024,60 +1023,36 @@ void InitGlobalPools(void)
 // RVA: 0x422D00
 void InitStreamingPools(void)
 {
-  unsigned int dest; // [rsp+20h] [rbp-19h]
-  int v1; // [rsp+24h] [rbp-15h]
-  int v2; // [rsp+28h] [rbp-11h]
-  unsigned int v3; // [rsp+2Ch] [rbp-Dh]
-  unsigned int v4; // [rsp+30h] [rbp-9h]
-  unsigned int v5; // [rsp+34h] [rbp-5h]
-  unsigned int v6; // [rsp+38h] [rbp-1h]
-  int v7; // [rsp+3Ch] [rbp+3h]
-  unsigned int v8; // [rsp+40h] [rbp+7h]
-  unsigned int v9; // [rsp+44h] [rbp+Bh]
-  unsigned int v10; // [rsp+48h] [rbp+Fh]
-  unsigned int v11; // [rsp+4Ch] [rbp+13h]
-  unsigned int v12; // [rsp+50h] [rbp+17h]
-  unsigned int v13; // [rsp+54h] [rbp+1Bh]
-  unsigned int v14; // [rsp+58h] [rbp+1Fh]
-  unsigned int v15; // [rsp+5Ch] [rbp+23h]
-  unsigned int v16; // [rsp+60h] [rbp+27h]
-  __int64 v17; // [rsp+64h] [rbp+2Bh]
-  unsigned int v18; // [rsp+6Ch] [rbp+33h]
-  unsigned int v19; // [rsp+70h] [rbp+37h]
-  unsigned int v20; // [rsp+74h] [rbp+3Bh]
-  unsigned int v21; // [rsp+78h] [rbp+3Fh]
-  unsigned int v22; // [rsp+7Ch] [rbp+43h]
-  unsigned int v23; // [rsp+80h] [rbp+47h]
-  unsigned int v24; // [rsp+84h] [rbp+4Bh]
+  UFG::StreamingMemory::InitParams dest; // [rsp+20h] [rbp-19h] BYREF
 
   UFG::StreamPool_InitSystem();
   UFG::qMemSet(&dest, 0, 0x68u);
-  dest = g_HK_LocationMemoryPoolSize;
-  v3 = g_HK_AnimationMemoryPoolSize;
-  v14 = g_HK_TrueCrowdMemoryPoolSize + g_HK_PartsDBMemoryPoolSize;
-  v4 = g_HK_CloudsTexturePoolSize;
-  v5 = g_HK_UIPoolSize;
-  v6 = g_HK_LocalizationPoolSize;
-  v15 = g_HK_TrueCrowdTextureHeaderPoolSize + g_HK_PartsDBTextureHeaderPoolSize;
-  v8 = g_HK_GameplayCellBlockSize;
-  v9 = g_HK_ScriptPoolSize;
-  v10 = g_HK_UIVRamMemoryPoolSize;
-  v16 = g_HK_TrueCrowdTexturePoolSize + g_HK_PartsDBTexturePoolSize;
-  v11 = g_MaxTerrainElements;
-  v12 = g_TerrainElementSize;
-  v1 = 0x1400000;
-  v13 = g_TerrainVRAMElementSize;
-  v2 = 0xA00000;
-  v17 = 0i64;
-  v7 = 0xF00000;
-  v18 = g_stdSectionElementSize;
-  v19 = g_stdSectionVRAMElementSize;
-  v20 = g_lodcSectionElementSize;
-  v21 = g_lodcSectionVRAMElementSize;
-  v22 = g_zoneElementSize;
-  v23 = g_zoneVRAMElementSize;
-  v24 = g_globalVRAMElementSize;
-  UFG::StreamingMemory::Init((UFG::StreamingMemory::InitParams *)&dest);
+  dest.locationMemoryPoolSize = g_HK_LocationMemoryPoolSize;
+  dest.animationMemoryPoolSize = g_HK_AnimationMemoryPoolSize;
+  dest.streamedMemoryPoolSize = g_HK_TrueCrowdMemoryPoolSize + g_HK_PartsDBMemoryPoolSize;
+  dest.cloudsTexturePoolSize = g_HK_CloudsTexturePoolSize;
+  dest.uiMemoryPoolSize = g_HK_UIPoolSize;
+  dest.localizationMemoryPoolSize = g_HK_LocalizationPoolSize;
+  dest.streamedTextureHeaderPoolSize = g_HK_TrueCrowdTextureHeaderPoolSize + g_HK_PartsDBTextureHeaderPoolSize;
+  dest.cellGameplayPoolSize = g_HK_GameplayCellBlockSize;
+  dest.scriptPoolSize = g_HK_ScriptPoolSize;
+  dest.uiVRamPoolSize = g_HK_UIVRamMemoryPoolSize;
+  dest.streamedTexturePoolSize = g_HK_TrueCrowdTexturePoolSize + g_HK_PartsDBTexturePoolSize;
+  dest.terrainElementCount = g_MaxTerrainElements;
+  dest.terrainElementSize = g_TerrainElementSize;
+  dest.globalLocationOverrideSize = 0x1400000;
+  dest.terrainVRAMElementSize = g_TerrainVRAMElementSize;
+  dest.locationMiscOverrideMemoryPoolSize = 0xA00000;
+  *(_QWORD *)&dest.turfMemoryPoolSize = 0i64;
+  dest.globalGameplayPoolSize = 0xF00000;
+  dest.stdSectionElementSize = g_stdSectionElementSize;
+  dest.stdSectionVRAMElementSize = g_stdSectionVRAMElementSize;
+  dest.lodcSectionElementSize = g_lodcSectionElementSize;
+  dest.lodcSectionVRAMElementSize = g_lodcSectionVRAMElementSize;
+  dest.zoneElementSize = g_zoneElementSize;
+  dest.zoneVRAMElementSize = g_zoneVRAMElementSize;
+  dest.globalVRAMElementSize = g_globalVRAMElementSize;
+  UFG::StreamingMemory::Init(&dest);
 }
 
 // File Line: 1473
@@ -1085,20 +1060,20 @@ void InitStreamingPools(void)
 void __fastcall SetUpCameraForFERender(UFG *a1)
 {
   UFG::qSymbol *v1; // rax
-  UFG::SimObject *v2; // rdi
-  UFG::qMemoryPool *v3; // rax
+  UFG::SimObject *SimObject; // rdi
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
   UFG::allocator::free_link *v4; // rbx
   unsigned int v5; // eax
   UFG::BaseCameraComponent *v6; // rax
   UFG::BaseCameraComponent *v7; // rbx
-  UFG::SimObjectModifier v8; // [rsp+38h] [rbp-30h]
-  UFG::qSymbol result; // [rsp+78h] [rbp+10h]
+  UFG::SimObjectModifier v8; // [rsp+38h] [rbp-30h] BYREF
+  UFG::qSymbol result; // [rsp+78h] [rbp+10h] BYREF
 
   UFG::CreateDirector(a1);
   v1 = UFG::qSymbol::create_from_string(&result, "ChaseCamera");
-  v2 = UFG::Simulation::CreateSimObject(&UFG::gSim, v1);
-  v3 = UFG::GetSimulationMemoryPool();
-  v4 = UFG::qMemoryPool::Allocate(v3, 0xD60ui64, "ChaseCameraComponent", 0i64, 1u);
+  SimObject = UFG::Simulation::CreateSimObject(&UFG::gSim, v1);
+  SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+  v4 = UFG::qMemoryPool::Allocate(SimulationMemoryPool, 0xD60ui64, "ChaseCameraComponent", 0i64, 1u);
   if ( v4 )
   {
     v5 = UFG::qStringHash32("ChaseCamera", 0xFFFFFFFF);
@@ -1109,8 +1084,8 @@ void __fastcall SetUpCameraForFERender(UFG *a1)
   {
     v7 = 0i64;
   }
-  UFG::SimObjectModifier::SimObjectModifier(&v8, v2, 1);
-  UFG::SimObjectModifier::AttachComponent(&v8, (UFG::SimComponent *)&v7->vfptr, 0xFFFFFFFFi64);
+  UFG::SimObjectModifier::SimObjectModifier(&v8, SimObject, 1);
+  UFG::SimObjectModifier::AttachComponent(&v8, v7, 0xFFFFFFFFi64);
   UFG::SimObjectModifier::Close(&v8);
   UFG::SimObjectModifier::~SimObjectModifier(&v8);
   UFG::AttachCameraToView(v7);
@@ -1122,8 +1097,8 @@ void LoadGlobalPropertySets(void)
 {
   UFG::allocator::free_link *v0; // rdi
   UFG::allocator::free_link *v1; // rax
-  UFG::allocator::free_link *v2; // rbx
-  UFG::BIGFileSize fileSize; // [rsp+30h] [rbp-18h]
+  UFG::qFile **v2; // rbx
+  UFG::BIGFileSize fileSize; // [rsp+30h] [rbp-18h] BYREF
 
   *(_QWORD *)&fileSize.load_offset = 0i64;
   *(_QWORD *)&fileSize.compressed_extra = 0i64;
@@ -1135,15 +1110,15 @@ void LoadGlobalPropertySets(void)
          0i64,
          1u);
   v1 = UFG::StreamFileWrapper::Open("Data\\Global\\PropertySets\\globalproperties.bin", QACCESS_READ, 1, 0i64, 0i64);
-  v2 = v1;
+  v2 = (UFG::qFile **)v1;
   if ( v1 )
   {
     UFG::StreamFileWrapper::Read(v1, STREAM_DATA_HIGH_PRIORITY, v0, &fileSize, 0i64, 0i64);
     UFG::StreamResourceLoader::Load(
-      v0,
+      (unsigned int *)v0,
       fileSize.uncompressed_size,
       "Data\\Global\\PropertySets\\globalproperties.bin",
-      0,
+      DATA_UNKNOWN,
       0i64);
     UFG::StreamFileWrapper::Close(v2);
   }
@@ -1175,7 +1150,7 @@ void UnloadXMLCache(void)
 __int64 dynamic_initializer_for__gLegalTexturePackFileName__()
 {
   UFG::qString::qString(&gLegalTexturePackFileName);
-  return atexit(dynamic_atexit_destructor_for__gLegalTexturePackFileName__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gLegalTexturePackFileName__);
 }
 
 // File Line: 1558
@@ -1183,7 +1158,7 @@ __int64 dynamic_initializer_for__gLegalTexturePackFileName__()
 __int64 dynamic_initializer_for__gLegalRatingsPackFileName__()
 {
   UFG::qString::qString(&gLegalRatingsPackFileName);
-  return atexit(dynamic_atexit_destructor_for__gLegalRatingsPackFileName__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gLegalRatingsPackFileName__);
 }
 
 // File Line: 1559
@@ -1208,148 +1183,145 @@ __int64 dynamic_initializer_for__gBootSequenceImages__()
 // RVA: 0x424F90
 signed __int64 __fastcall MapRegionCodeToRegion(const char *code)
 {
-  const char *v1; // rbx
   signed __int64 result; // rax
   int v3; // eax
   unsigned int v4; // ecx
 
-  v1 = code;
   if ( !code || (unsigned int)UFG::qStringLength(code) != 2 )
-    goto LABEL_122;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "ae", -1) )
+    return 59i64;
+  if ( !(unsigned int)UFG::qStringCompare(code, "ae", -1) )
     return 56i64;
-  result = UFG::qStringCompare(v1, "ar", -1);
+  result = UFG::qStringCompare(code, "ar", -1);
   if ( (_DWORD)result )
   {
-    if ( !(unsigned int)UFG::qStringCompare(v1, "at", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "at", -1) )
       return 2i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "au", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "au", -1) )
       return 1i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "be", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "be", -1) )
       return 4i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "bg", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "bg", -1) )
       return 6i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "bh", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "bh", -1) )
       return 3i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "br", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "br", -1) )
       return 5i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "ca", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "ca", -1) )
       return 7i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "cn", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "cn", -1) )
       return 9i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "ch", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "ch", -1) )
       return 52i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "cl", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "cl", -1) )
       return 8i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "co", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "co", -1) )
       return 10i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "cy", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "cy", -1) )
       return 12i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "cz", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "cz", -1) )
       return 13i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "de", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "de", -1) )
       return 17i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "dk", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "dk", -1) )
       return 14i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "es", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "es", -1) )
       return 50i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "fi", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "fi", -1) )
       return 15i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "fr", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "fr", -1) )
       return 16i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "gb", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "gb", -1) )
       return 57i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "gr", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "gr", -1) )
       return 18i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "hk", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "hk", -1) )
       return 19i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "hr", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "hr", -1) )
       return 11i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "hu", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "hu", -1) )
       return 20i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "id", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "id", -1) )
       return 23i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "ie", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "ie", -1) )
       return 24i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "il", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "il", -1) )
       return 25i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "in", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "in", -1) )
       return 22i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "is", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "is", -1) )
       return 21i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "it", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "it", -1) )
       return 26i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "jp", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "jp", -1) )
       return 27i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "kr", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "kr", -1) )
       return 28i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "kw", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "kw", -1) )
       return 29i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "lb", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "lb", -1) )
       return 30i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "lu", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "lu", -1) )
       return 31i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "mt", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "mt", -1) )
       return 33i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "mx", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "mx", -1) )
       return 34i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "my", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "my", -1) )
       return 32i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "nl", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "nl", -1) )
       return 35i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "no", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "no", -1) )
       return 37i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "nz", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "nz", -1) )
       return 36i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "om", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "om", -1) )
       return 38i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "pe", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "pe", -1) )
       return 39i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "pl", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "pl", -1) )
       return 40i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "pt", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "pt", -1) )
       return 41i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "qa", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "qa", -1) )
       return 42i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "ro", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "ro", -1) )
       return 43i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "ru", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "ru", -1) )
       return 44i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "sa", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "sa", -1) )
       return 45i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "se", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "se", -1) )
       return 51i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "sg", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "sg", -1) )
       return 46i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "si", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "si", -1) )
       return 48i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "sk", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "sk", -1) )
       return 47i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "th", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "th", -1) )
       return 54i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "tr", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "tr", -1) )
       return 55i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "tw", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "tw", -1) )
       return 53i64;
-    if ( !(unsigned int)UFG::qStringCompare(v1, "ua", -1) )
+    if ( !(unsigned int)UFG::qStringCompare(code, "ua", -1) )
       return 58i64;
-    if ( (unsigned int)UFG::qStringCompare(v1, "us", -1) )
+    if ( (unsigned int)UFG::qStringCompare(code, "us", -1) )
     {
-      v3 = UFG::qStringCompare(v1, "za", -1);
+      v3 = UFG::qStringCompare(code, "za", -1);
       v4 = 59;
       if ( !v3 )
-        v4 = 49;
+        return 49;
       return v4;
     }
-LABEL_122:
-    result = 59i64;
+    return 59i64;
   }
   return result;
 }
 
 // File Line: 1705
 // RVA: 0x4257B0
-const char *__fastcall MapRegionToRegionCode(Region region)
+const char *__fastcall MapRegionToRegionCode(unsigned int region)
 {
   const char *result; // rax
 
@@ -1357,7 +1329,7 @@ const char *__fastcall MapRegionToRegionCode(Region region)
   {
     region = 59;
   }
-  else if ( (unsigned int)region > 0x3B )
+  else if ( region > 0x3B )
   {
     return "us";
   }
@@ -1548,149 +1520,147 @@ const char *__fastcall MapRegionToRegionCode(Region region)
 
 // File Line: 1777
 // RVA: 0x420E40
-Region __fastcall GetSystemRegion()
+int __fastcall GetSystemRegion()
 {
-  Region result; // eax
   int v1; // eax
-  Region v2; // ecx
-  char dest; // [rsp+20h] [rbp-E0h]
-  char v4; // [rsp+22h] [rbp-DEh]
-  char code; // [rsp+23h] [rbp-DDh]
-  char v6; // [rsp+25h] [rbp-DBh]
-  wchar_t text; // [rsp+80h] [rbp-80h]
+  int v2; // ecx
+  char dest[3]; // [rsp+20h] [rbp-E0h] BYREF
+  char code[93]; // [rsp+23h] [rbp-DDh] BYREF
+  wchar_t text[88]; // [rsp+80h] [rbp-80h] BYREF
 
-  if ( (signed int)GetUserDefaultLocaleName(&text, 85i64) < 3 )
+  if ( (int)GetUserDefaultLocaleName(text, 85i64) < 3 )
     return 59;
-  UFG::qWideStringCopy(&dest, 85, &text, -1);
-  UFG::qStringToLower(&dest);
-  if ( (unsigned int)UFG::qStringLength(&dest) == 5 )
+  UFG::qWideStringCopy(dest, 85, text, -1);
+  UFG::qStringToLower(dest);
+  if ( (unsigned int)UFG::qStringLength(dest) == 5 )
   {
-    v6 = 0;
-    result = MapRegionCodeToRegion(&code);
+    code[2] = 0;
+    return MapRegionCodeToRegion(code);
   }
   else
   {
-    v4 = 0;
-    if ( (unsigned int)UFG::qStringCompare("zh", &dest, -1) )
+    dest[2] = 0;
+    if ( (unsigned int)UFG::qStringCompare("zh", dest, -1) )
     {
-      if ( (unsigned int)UFG::qStringCompare("da", &dest, -1) )
+      if ( (unsigned int)UFG::qStringCompare("da", dest, -1) )
       {
-        if ( (unsigned int)UFG::qStringCompare("nl", &dest, -1) )
+        if ( (unsigned int)UFG::qStringCompare("nl", dest, -1) )
         {
-          if ( !(unsigned int)UFG::qStringCompare("en", &dest, -1) )
+          if ( !(unsigned int)UFG::qStringCompare("en", dest, -1) )
             return 59;
-          if ( (unsigned int)UFG::qStringCompare("fi", &dest, -1) )
+          if ( (unsigned int)UFG::qStringCompare("fi", dest, -1) )
           {
-            if ( (unsigned int)UFG::qStringCompare("fr", &dest, -1) )
+            if ( (unsigned int)UFG::qStringCompare("fr", dest, -1) )
             {
-              if ( (unsigned int)UFG::qStringCompare("de", &dest, -1) )
+              if ( (unsigned int)UFG::qStringCompare("de", dest, -1) )
               {
-                if ( (unsigned int)UFG::qStringCompare("it", &dest, -1) )
+                if ( (unsigned int)UFG::qStringCompare("it", dest, -1) )
                 {
-                  if ( (unsigned int)UFG::qStringCompare("ja", &dest, -1) )
+                  if ( (unsigned int)UFG::qStringCompare("ja", dest, -1) )
                   {
-                    if ( (unsigned int)UFG::qStringCompare("ko", &dest, -1) )
+                    if ( (unsigned int)UFG::qStringCompare("ko", dest, -1) )
                     {
-                      if ( (unsigned int)UFG::qStringCompare("no", &dest, -1) )
+                      if ( (unsigned int)UFG::qStringCompare("no", dest, -1) )
                       {
-                        if ( (unsigned int)UFG::qStringCompare("pl", &dest, -1) )
+                        if ( (unsigned int)UFG::qStringCompare("pl", dest, -1) )
                         {
-                          if ( (unsigned int)UFG::qStringCompare("pt", &dest, -1) )
+                          if ( (unsigned int)UFG::qStringCompare("pt", dest, -1) )
                           {
-                            if ( (unsigned int)UFG::qStringCompare("ru", &dest, -1) )
+                            if ( (unsigned int)UFG::qStringCompare("ru", dest, -1) )
                             {
-                              if ( (unsigned int)UFG::qStringCompare("es", &dest, -1) )
+                              if ( (unsigned int)UFG::qStringCompare("es", dest, -1) )
                               {
-                                v1 = UFG::qStringCompare("sv", &dest, -1);
+                                v1 = UFG::qStringCompare("sv", dest, -1);
                                 v2 = 59;
                                 if ( !v1 )
-                                  v2 = 51;
-                                result = v2;
+                                  return 51;
+                                return v2;
                               }
                               else
                               {
-                                result = 50;
+                                return 50;
                               }
                             }
                             else
                             {
-                              result = 44;
+                              return 44;
                             }
                           }
                           else
                           {
-                            result = 41;
+                            return 41;
                           }
                         }
                         else
                         {
-                          result = 40;
+                          return 40;
                         }
                       }
                       else
                       {
-                        result = 37;
+                        return 37;
                       }
                     }
                     else
                     {
-                      result = 28;
+                      return 28;
                     }
                   }
                   else
                   {
-                    result = 27;
+                    return 27;
                   }
                 }
                 else
                 {
-                  result = 26;
+                  return 26;
                 }
               }
               else
               {
-                result = 17;
+                return 17;
               }
             }
             else
             {
-              result = 16;
+              return 16;
             }
           }
           else
           {
-            result = 15;
+            return 15;
           }
         }
         else
         {
-          result = 35;
+          return 35;
         }
       }
       else
       {
-        result = 14;
+        return 14;
       }
     }
     else
     {
-      result = 9;
+      return 9;
     }
   }
-  return result;
 }
 
 // File Line: 1878
 // RVA: 0x4206E0
-void __fastcall DisplayLegalLoadScreen(UFG::UILanguages::eLanguage systemLanguage, UFG::UILanguages::eLanguage gameLanguage, Region systemRegion)
+void __fastcall DisplayLegalLoadScreen(
+        UFG::UILanguages::eLanguage systemLanguage,
+        UFG::UILanguages::eLanguage gameLanguage,
+        Region systemRegion)
 {
-  Region v3; // ebx
   UFG::UI *v4; // rcx
   bool v5; // al
   UFG::qString *v6; // rax
-  unsigned int v7; // esi
+  unsigned int mStringHashUpper32; // esi
   UFG::qString *v8; // rax
-  signed int v9; // ebx
+  int v9; // ebx
   int v10; // edi
   UFG::qString *v11; // rax
   UFG::qString *v12; // rax
@@ -1717,76 +1687,75 @@ void __fastcall DisplayLegalLoadScreen(UFG::UILanguages::eLanguage systemLanguag
   UFG::qResourceWarehouse *v33; // rax
   UFG::qResourceInventory *i; // rdi
   UFG *v35; // rcx
-  Render::LoadScreenInitParams params; // [rsp+30h] [rbp-C8h]
-  UFG::qString v37; // [rsp+A0h] [rbp-58h]
-  UFG::qString v38; // [rsp+C8h] [rbp-30h]
-  UFG::qString v39; // [rsp+F0h] [rbp-8h]
-  UFG::qString v40; // [rsp+118h] [rbp+20h]
-  UFG::qString v41; // [rsp+140h] [rbp+48h]
-  UFG::qString v42; // [rsp+168h] [rbp+70h]
-  UFG::qString v43; // [rsp+190h] [rbp+98h]
-  UFG::qString v44; // [rsp+1B8h] [rbp+C0h]
-  UFG::qString v45; // [rsp+1E0h] [rbp+E8h]
-  UFG::qString v46; // [rsp+208h] [rbp+110h]
-  UFG::qString v47; // [rsp+230h] [rbp+138h]
-  UFG::qString v48; // [rsp+258h] [rbp+160h]
-  UFG::qString v49; // [rsp+280h] [rbp+188h]
-  UFG::qString v50; // [rsp+2A8h] [rbp+1B0h]
-  UFG::qString v51; // [rsp+2D0h] [rbp+1D8h]
-  UFG::qString result; // [rsp+2F8h] [rbp+200h]
-  Render::RenderOutputParams outSettings; // [rsp+328h] [rbp+230h]
+  Render::LoadScreenInitParams params; // [rsp+30h] [rbp-C8h] BYREF
+  UFG::qString v37; // [rsp+A0h] [rbp-58h] BYREF
+  UFG::qString v38; // [rsp+C8h] [rbp-30h] BYREF
+  UFG::qString v39; // [rsp+F0h] [rbp-8h] BYREF
+  UFG::qString v40; // [rsp+118h] [rbp+20h] BYREF
+  UFG::qString v41; // [rsp+140h] [rbp+48h] BYREF
+  UFG::qString v42; // [rsp+168h] [rbp+70h] BYREF
+  UFG::qString v43; // [rsp+190h] [rbp+98h] BYREF
+  UFG::qString v44; // [rsp+1B8h] [rbp+C0h] BYREF
+  UFG::qString v45; // [rsp+1E0h] [rbp+E8h] BYREF
+  UFG::qString v46; // [rsp+208h] [rbp+110h] BYREF
+  UFG::qString v47; // [rsp+230h] [rbp+138h] BYREF
+  UFG::qString v48; // [rsp+258h] [rbp+160h] BYREF
+  UFG::qString v49; // [rsp+280h] [rbp+188h] BYREF
+  UFG::qString v50; // [rsp+2A8h] [rbp+1B0h] BYREF
+  UFG::qString v51; // [rsp+2D0h] [rbp+1D8h] BYREF
+  UFG::qString result; // [rsp+2F8h] [rbp+200h] BYREF
+  Render::RenderOutputParams outSettings; // [rsp+328h] [rbp+230h] BYREF
 
   *(_QWORD *)&params.mBackgroundName.mStringHash32 = -2i64;
-  v3 = systemRegion;
   LoadTexturePackHK("Data\\Global\\BootTexturePack.perm.bin", DATA_GAME_GLOBAL_TEXTURES);
   UFG::UI::InitHDSettings(v4);
   v5 = UFG::UI::IsInHDMode();
-  switch ( v3 )
+  switch ( systemRegion )
   {
-    case 2u:
-    case 4u:
-    case 6u:
-    case 0xBu:
-    case 0xCu:
-    case 0xDu:
-    case 0xEu:
-    case 0xFu:
-    case 0x10u:
-    case 0x11u:
-    case 0x12u:
-    case 0x13u:
-    case 0x14u:
-    case 0x15u:
-    case 0x18u:
-    case 0x1Au:
-    case 0x1Fu:
-    case 0x21u:
-    case 0x23u:
-    case 0x25u:
-    case 0x28u:
-    case 0x29u:
-    case 0x2Bu:
-    case 0x2Cu:
-    case 0x2Fu:
-    case 0x30u:
-    case 0x32u:
-    case 0x33u:
-    case 0x34u:
-    case 0x39u:
-    case 0x3Au:
+    case 2:
+    case 4:
+    case 6:
+    case 11:
+    case 12:
+    case 13:
+    case 14:
+    case 15:
+    case 16:
+    case 17:
+    case 18:
+    case 19:
+    case 20:
+    case 21:
+    case 24:
+    case 26:
+    case 31:
+    case 33:
+    case 35:
+    case 37:
+    case 40:
+    case 41:
+    case 43:
+    case 44:
+    case 47:
+    case 48:
+    case 50:
+    case 51:
+    case 52:
+    case 57:
+    case 58:
       if ( v5 )
       {
         v15 = UFG::qString::FormatEx(&v48, "LEGAL_%s_SCREENENGLISH_EU", "PC64");
         v16 = v15;
         if ( v15->mStringHashUpper32 == -1 )
-          v15->mStringHashUpper32 = UFG::qStringHashUpper32(v15->mData, 0xFFFFFFFF);
-        v7 = v16->mStringHashUpper32;
+          v15->mStringHashUpper32 = UFG::qStringHashUpper32(v15->mData, -1);
+        mStringHashUpper32 = v16->mStringHashUpper32;
         UFG::qString::~qString(&v48);
         v17 = UFG::qString::FormatEx(&v44, "Data\\UI\\Legal_%s_ScreenEnglish_EU_TexturePack.perm.bin", "PC64");
         v9 = 0;
         UFG::qString::Set(&gLegalTexturePackFileName, v17->mData, v17->mLength, 0i64, 0);
         UFG::qString::~qString(&v44);
-        v10 = UFG::qStringHashUpper32("LEGAL_ESRB_EU", 0xFFFFFFFF);
+        v10 = UFG::qStringHashUpper32("LEGAL_ESRB_EU", -1);
         v18 = UFG::qString::FormatEx(&v37, "Data\\UI\\Legal_ESRB_EU_TexturePack.perm.bin");
         UFG::qString::Set(&gLegalRatingsPackFileName, v18->mData, v18->mLength, 0i64, 0);
         UFG::qString::~qString(&v37);
@@ -1796,34 +1765,34 @@ void __fastcall DisplayLegalLoadScreen(UFG::UILanguages::eLanguage systemLanguag
         v19 = UFG::qString::FormatEx(&v38, "LEGAL_%s_SCREENENGLISH_EU_SD", "PC64");
         v20 = v19;
         if ( v19->mStringHashUpper32 == -1 )
-          v19->mStringHashUpper32 = UFG::qStringHashUpper32(v19->mData, 0xFFFFFFFF);
-        v7 = v20->mStringHashUpper32;
+          v19->mStringHashUpper32 = UFG::qStringHashUpper32(v19->mData, -1);
+        mStringHashUpper32 = v20->mStringHashUpper32;
         UFG::qString::~qString(&v38);
         v21 = UFG::qString::FormatEx(&v39, "Data\\UI\\Legal_%s_ScreenEnglish_EU_SD_TexturePack.perm.bin", "PC64");
         v9 = 0;
         UFG::qString::Set(&gLegalTexturePackFileName, v21->mData, v21->mLength, 0i64, 0);
         UFG::qString::~qString(&v39);
-        v10 = UFG::qStringHashUpper32("LEGAL_ESRB_EU_SD", 0xFFFFFFFF);
+        v10 = UFG::qStringHashUpper32("LEGAL_ESRB_EU_SD", -1);
         v22 = UFG::qString::FormatEx(&v41, "Data\\UI\\Legal_ESRB_EU_SD_TexturePack.perm.bin");
         UFG::qString::Set(&gLegalRatingsPackFileName, v22->mData, v22->mLength, 0i64, 0);
         UFG::qString::~qString(&v41);
       }
       break;
-    case 5u:
-    case 7u:
-    case 0xAu:
-    case 0x22u:
-    case 0x3Bu:
+    case 5:
+    case 7:
+    case 10:
+    case 34:
+    case 59:
       if ( v5 )
       {
         v6 = UFG::qString::FormatEx(&result, "LEGAL_%s_SCREENENGLISH_US", "PC64");
-        v7 = UFG::qString::GetStringHashUpper32(v6);
+        mStringHashUpper32 = UFG::qString::GetStringHashUpper32(v6);
         UFG::qString::~qString(&result);
         v8 = UFG::qString::FormatEx(&v51, "Data\\UI\\Legal_%s_ScreenEnglish_US_TexturePack.perm.bin", "PC64");
         v9 = 0;
         UFG::qString::Set(&gLegalTexturePackFileName, v8->mData, v8->mLength, 0i64, 0);
         UFG::qString::~qString(&v51);
-        v10 = UFG::qStringHashUpper32("LEGAL_ESRB_US", 0xFFFFFFFF);
+        v10 = UFG::qStringHashUpper32("LEGAL_ESRB_US", -1);
         v11 = UFG::qString::FormatEx(&v46, "Data\\UI\\Legal_ESRB_US_TexturePack.perm.bin");
         UFG::qString::Set(&gLegalRatingsPackFileName, v11->mData, v11->mLength, 0i64, 0);
         UFG::qString::~qString(&v46);
@@ -1831,13 +1800,13 @@ void __fastcall DisplayLegalLoadScreen(UFG::UILanguages::eLanguage systemLanguag
       else
       {
         v12 = UFG::qString::FormatEx(&v40, "LEGAL_%s_SCREENENGLISH_US_SD", "PC64");
-        v7 = UFG::qString::GetStringHashUpper32(v12);
+        mStringHashUpper32 = UFG::qString::GetStringHashUpper32(v12);
         UFG::qString::~qString(&v40);
         v13 = UFG::qString::FormatEx(&v50, "Data\\UI\\Legal_%s_ScreenEnglish_US_SD_TexturePack.perm.bin", "PC64");
         v9 = 0;
         UFG::qString::Set(&gLegalTexturePackFileName, v13->mData, v13->mLength, 0i64, 0);
         UFG::qString::~qString(&v50);
-        v10 = UFG::qStringHashUpper32("LEGAL_ESRB_US_SD", 0xFFFFFFFF);
+        v10 = UFG::qStringHashUpper32("LEGAL_ESRB_US_SD", -1);
         v14 = UFG::qString::FormatEx(&v42, "Data\\UI\\Legal_ESRB_US_SD_TexturePack.perm.bin");
         UFG::qString::Set(&gLegalRatingsPackFileName, v14->mData, v14->mLength, 0i64, 0);
         UFG::qString::~qString(&v42);
@@ -1849,8 +1818,8 @@ void __fastcall DisplayLegalLoadScreen(UFG::UILanguages::eLanguage systemLanguag
         v23 = UFG::qString::FormatEx(&v43, "LEGAL_%s_SCREENENGLISH_EU", "PC64");
         v24 = v23;
         if ( v23->mStringHashUpper32 == -1 )
-          v23->mStringHashUpper32 = UFG::qStringHashUpper32(v23->mData, 0xFFFFFFFF);
-        v7 = v24->mStringHashUpper32;
+          v23->mStringHashUpper32 = UFG::qStringHashUpper32(v23->mData, -1);
+        mStringHashUpper32 = v24->mStringHashUpper32;
         UFG::qString::~qString(&v43);
         v25 = UFG::qString::FormatEx(&v45, "Data\\UI\\Legal_%s_ScreenEnglish_EU_TexturePack.perm.bin", "PC64");
         v9 = 0;
@@ -1862,8 +1831,8 @@ void __fastcall DisplayLegalLoadScreen(UFG::UILanguages::eLanguage systemLanguag
         v27 = UFG::qString::FormatEx(&v47, "LEGAL_%s_SCREENENGLISH_EU_SD", "PC64");
         v28 = v27;
         if ( v27->mStringHashUpper32 == -1 )
-          v27->mStringHashUpper32 = UFG::qStringHashUpper32(v27->mData, 0xFFFFFFFF);
-        v7 = v28->mStringHashUpper32;
+          v27->mStringHashUpper32 = UFG::qStringHashUpper32(v27->mData, -1);
+        mStringHashUpper32 = v28->mStringHashUpper32;
         UFG::qString::~qString(&v47);
         v29 = UFG::qString::FormatEx(&v49, "Data\\UI\\Legal_%s_ScreenEnglish_EU_SD_TexturePack.perm.bin", "PC64");
         v9 = 0;
@@ -1871,7 +1840,7 @@ void __fastcall DisplayLegalLoadScreen(UFG::UILanguages::eLanguage systemLanguag
         v26 = &v49;
       }
       UFG::qString::~qString(v26);
-      UFG::qString::Set(&gLegalRatingsPackFileName, &customWorldMapCaption);
+      UFG::qString::Set(&gLegalRatingsPackFileName, &customCaption);
       v10 = 0;
       break;
   }
@@ -1886,7 +1855,7 @@ void __fastcall DisplayLegalLoadScreen(UFG::UILanguages::eLanguage systemLanguag
   params.mFlipbookEnabled = 1;
   params.mNumFlipbookPagesHoriz = 8;
   params.mNumFlipbookPagesVert = 8;
-  *(_OWORD *)&params.mFlipbookHorizSpeed = _xmm;
+  params.mBackgroundScale = *((float *)&_xmm + 2);
   UFG::qString::qString(&params.mAnimationName, "LoadingAnimation");
   UFG::qString::qString(&params.mBackgroundName, "LoadingAnimationBackground");
   params.mFlipbookVertSpeed = 0.25;
@@ -1899,7 +1868,7 @@ void __fastcall DisplayLegalLoadScreen(UFG::UILanguages::eLanguage systemLanguag
   Render::SetLoadScreenSpinnerTint(&kMainSpinnerColour);
   if ( !UFG::gUIBootModeSkipFE )
   {
-    dword_1423EC6E4 = v7;
+    dword_1423EC6E4 = mStringHashUpper32;
     qword_1423EC6E8 = (__int64)gLegalTexturePackFileName.mData;
     qword_1423EC6F0 = 0i64;
     Render::RenderOutputParams::RenderOutputParams(&outSettings);
@@ -1916,9 +1885,9 @@ void __fastcall DisplayLegalLoadScreen(UFG::UILanguages::eLanguage systemLanguag
     if ( !outSettings.mEnable3D )
       v31 = FLOAT_2_0;
     *(float *)&dword_1423EC6F8 = v31 + 4.0;
-    UFG::LoadingLogic::StartLoadScreen(&UFG::gLoadingLogic, 3u, gBootSequenceImages, 1u);
+    UFG::LoadingLogic::StartLoadScreen(&UFG::gLoadingLogic, 3, gBootSequenceImages, 1u);
     v33 = UFG::qResourceWarehouse::Instance();
-    for ( i = UFG::qResourceWarehouse::GetInventory(v33, 0x8B43FABF); !(__int64)i->vfptr->Get(i, v7); ++v9 )
+    for ( i = UFG::qResourceWarehouse::GetInventory(v33, 0x8B43FABF); !i->vfptr->Get(i, mStringHashUpper32); ++v9 )
     {
       if ( v9 >= 1000 )
         break;
@@ -1942,7 +1911,7 @@ void __fastcall DisplayLegalLoadScreen(UFG::UILanguages::eLanguage systemLanguag
 __int64 dynamic_initializer_for__gTempFrameMemoryAllocator__()
 {
   UFG::qLinearAllocator::qLinearAllocator(&gTempFrameMemoryAllocator);
-  return atexit(dynamic_atexit_destructor_for__gTempFrameMemoryAllocator__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gTempFrameMemoryAllocator__);
 }
 
 // File Line: 2176
@@ -1954,13 +1923,13 @@ void AddFrameMemoryOverflow(void)
 
   if ( gFrameMemoryOverflowBuffer )
   {
-    if ( gFrameMemoryOverflowEnabled != 1 )
+    if ( !gFrameMemoryOverflowEnabled )
     {
       UFG::qPrintf(
         "[TempFrameMemory] Added - addr=0x%08x sz=%7d!\n",
         gFrameMemoryOverflowBuffer,
         gFrameMemoryOverflowTotalBytes);
-      Illusion::IEnginePlat::WaitUntilGPUDone((Illusion::IEnginePlat *)&Illusion::gEngine);
+      Illusion::IEnginePlat::WaitUntilGPUDone(&Illusion::gEngine);
       UFG::qTaskManager::Sync(&UFG::gTaskManager);
       UFG::qLinearAllocator::Init(&gTempFrameMemoryAllocator, 0i64, 0i64, 0i64, 0i64);
       v0 = (gFrameMemoryOverflowTotalBytes >> 1) & 0x7FFFFF80;
@@ -1976,7 +1945,7 @@ void AddFrameMemoryOverflow(void)
 // RVA: 0x4269F0
 void __fastcall qTaskThreadInit()
 {
-  hkResult result; // [rsp+30h] [rbp+8h]
+  hkResult result; // [rsp+30h] [rbp+8h] BYREF
 
   hkBaseSystem::initThread(&result, UFG::BasePhysicsSystem::mMemoryRouter);
 }
@@ -1985,7 +1954,7 @@ void __fastcall qTaskThreadInit()
 // RVA: 0x4269D0
 void __fastcall qTaskThreadClose()
 {
-  hkResult result; // [rsp+30h] [rbp+8h]
+  hkResult result; // [rsp+30h] [rbp+8h] BYREF
 
   hkBaseSystem::quitThread(&result);
 }
@@ -2002,7 +1971,7 @@ void MountBigFiles(void)
   bool v5; // r15
   bool v6; // r12
   bool v7; // r13
-  int v8; // ebx
+  int BigFileMode; // ebx
 
   v0 = UFG::BigFileLogic::MountSystemBigFile(UFG::BigFileLogic::SYSTEM_BOOT, 0i64, 0i64);
   _(0i64);
@@ -2044,25 +2013,25 @@ void MountBigFiles(void)
   _(0i64);
   if ( v0 )
   {
-    v8 = UFG::BigFileLogic::GetBigFileMode(UFG::BigFileLogic::SYSTEM_BOOT, 0i64);
-    if ( v8 )
+    BigFileMode = UFG::BigFileLogic::GetBigFileMode(UFG::BigFileLogic::SYSTEM_BOOT, 0i64);
+    if ( BigFileMode )
     {
       if ( !v1
-        || v8 != (unsigned int)UFG::BigFileLogic::GetBigFileMode(
-                                 (const char *)&UFG::BigFileLogic::SYSTEM_GLOBAL->mEnableStereo,
-                                 0i64)
+        || BigFileMode != (unsigned int)UFG::BigFileLogic::GetBigFileMode(
+                                          (const char *)&UFG::BigFileLogic::SYSTEM_GLOBAL->mEnableStereo,
+                                          0i64)
         || !v2
-        || v8 != (unsigned int)UFG::BigFileLogic::GetBigFileMode(UFG::BigFileLogic::SYSTEM_UI, 0i64)
+        || BigFileMode != (unsigned int)UFG::BigFileLogic::GetBigFileMode(UFG::BigFileLogic::SYSTEM_UI, 0i64)
         || !v3
-        || v8 != (unsigned int)UFG::BigFileLogic::GetBigFileMode(UFG::BigFileLogic::SYSTEM_VEHICLES, 0i64)
+        || BigFileMode != (unsigned int)UFG::BigFileLogic::GetBigFileMode(UFG::BigFileLogic::SYSTEM_VEHICLES, 0i64)
         || !v4
-        || v8 != (unsigned int)UFG::BigFileLogic::GetBigFileMode(UFG::BigFileLogic::SYSTEM_CHARACTERS, 0i64)
+        || BigFileMode != (unsigned int)UFG::BigFileLogic::GetBigFileMode(UFG::BigFileLogic::SYSTEM_CHARACTERS, 0i64)
         || !v5
-        || v8 != (unsigned int)UFG::BigFileLogic::GetBigFileMode(UFG::BigFileLogic::SYSTEM_ANIMATION, 0i64)
+        || BigFileMode != (unsigned int)UFG::BigFileLogic::GetBigFileMode(UFG::BigFileLogic::SYSTEM_ANIMATION, 0i64)
         || !v6
-        || v8 != (unsigned int)UFG::BigFileLogic::GetBigFileMode(UFG::BigFileLogic::SYSTEM_NISANIMATION, 0i64)
+        || BigFileMode != (unsigned int)UFG::BigFileLogic::GetBigFileMode(UFG::BigFileLogic::SYSTEM_NISANIMATION, 0i64)
         || !v7
-        || v8 != (unsigned int)UFG::BigFileLogic::GetBigFileMode(UFG::BigFileLogic::SYSTEM_WORLD, "Game") )
+        || BigFileMode != (unsigned int)UFG::BigFileLogic::GetBigFileMode(UFG::BigFileLogic::SYSTEM_WORLD, "Game") )
       {
         UFG::BigFileLogic::UnmountSystemBigFile(UFG::BigFileLogic::SYSTEM_BOOT, 0i64);
       }
@@ -2075,12 +2044,12 @@ void MountBigFiles(void)
 void RenderChangeTexturePack(void)
 {
   UFG::DataStreamer *v0; // rcx
-  Render::RenderOutputParams outSettings; // [rsp+20h] [rbp-78h]
+  Render::RenderOutputParams outSettings; // [rsp+20h] [rbp-78h] BYREF
 
   Render::RenderOutputParams::RenderOutputParams(&outSettings);
   Render::GetCurrentDisplaySettings(&outSettings);
   UFG::DataStreamer::DisableSpreadedUnload(v0);
-  gIsHDWorldTextures = outSettings.mTextureDetailLevel == 2;
+  gIsHDWorldTextures = outSettings.mTextureDetailLevel == TEXTURE_DETAIL_HIGH;
   UFG::SectionChooser::BeginFlush(1);
 }
 
@@ -2088,18 +2057,16 @@ void RenderChangeTexturePack(void)
 // RVA: 0x426110
 void __fastcall RenderSimOcclusionQueriesCallback(UFG::RenderContext *render_context, Render::View *view)
 {
-  Render::View *v2; // rbx
   UFG::SimAsyncOcclusionQueryManager *v3; // rax
 
-  v2 = view;
   v3 = UFG::SimAsyncOcclusionQueryManager::Get();
   if ( v3 )
-    UFG::SimAsyncOcclusionQueryManager::UpdateQueries(v3, v2);
+    UFG::SimAsyncOcclusionQueryManager::UpdateQueries(v3, view);
 }
 
 // File Line: 2482
 // RVA: 0x425AB0
-signed __int64 __fastcall MapSystemLanguageToLanguageGameSupports(UFG::UILanguages::eLanguage systemLang)
+signed __int64 __fastcall MapSystemLanguageToLanguageGameSupports(unsigned int systemLang)
 {
   signed __int64 result; // rax
 
@@ -2127,175 +2094,175 @@ signed __int64 __fastcall MapSystemLanguageToLanguageGameSupports(UFG::UILanguag
 
 // File Line: 2516
 // RVA: 0x421470
-signed __int64 __usercall InitGameSystems@<rax>(hkEntitySelectorAll *a1@<rcx>, hkpEntity *a2@<rdx>, float a3@<xmm0>)
+signed __int64 __fastcall InitGameSystems(hkEntitySelectorAll *a1, hkpEntity *a2)
 {
-  UFG::qNode<UFG::qString,UFG::qString> *v3; // rax
-  __int64 v4; // rdi
-  unsigned int v5; // ebx
-  unsigned int v6; // edx
-  fastdelegate::FastDelegate<bool __cdecl(UFG::qString *)> *v7; // rcx
-  AMD_HD3D *v8; // rcx
-  UFG::qString *v9; // rax
-  DNA::Database *v10; // rax
-  UFG::StreamingMemory *v11; // rcx
-  Render *v12; // rcx
-  AMD_HD3D *v13; // rcx
-  UFG::OnlineManager *v14; // rax
-  UFG::OSuiteManager *v15; // rax
-  MinimumDistanceTask *v16; // rax
+  UFG::qNode<UFG::qString,UFG::qString> *mNext; // rax
+  __int64 size; // rdi
+  unsigned int v4; // ebx
+  unsigned int v5; // edx
+  fastdelegate::FastDelegate<bool __cdecl(UFG::qString *)> *v6; // rcx
+  AMD_HD3D *v7; // rcx
+  UFG::qString *LocalIP; // rax
+  DNA::Database *v9; // rax
+  UFG::StreamingMemory *v10; // rcx
+  Render *v11; // rcx
+  AMD_HD3D *v12; // rcx
+  UFG::OnlineManager *v13; // rax
+  UFG::OSuiteManager *v14; // rax
+  MinimumDistanceTask *v15; // rax
+  AMD_HD3D *v16; // rax
   AMD_HD3D *v17; // rax
-  AMD_HD3D *v18; // rax
-  UFG *v19; // rcx
-  UFG::DataStreamer *v20; // rcx
-  unsigned __int64 v21; // rsi
-  bool v22; // al
-  bool v23; // bl
-  bool v24; // di
-  int v25; // edx
-  int v26; // er8
-  hkGeometryUtils::IVertices *v27; // rcx
-  hkgpIndexedMesh::EdgeBarrier *v28; // rcx
-  int v29; // edx
-  int v30; // er8
-  int v31; // er8
-  int v32; // er8
-  int v33; // er8
-  int v34; // er8
-  int v35; // er8
-  int v36; // er8
-  int v37; // er8
-  int v38; // er8
-  int v39; // er8
-  int v40; // er8
-  Region v41; // ebx
-  __int64 v42; // rcx
-  UFG::UILanguages::eLanguage v43; // edi
-  UFG::UILanguages::eLanguage v44; // esi
-  AMD_HD3D *v45; // rcx
-  UFG *v46; // rcx
-  UFG::OSuiteLeaderboardManager *v47; // rax
-  AMD_HD3D *v48; // rcx
-  UFG *v49; // rcx
-  UFG::qString *v50; // rax
-  AMD_HD3D *v51; // rcx
-  UFG::PartDatabase *v52; // rax
+  UFG *v18; // rcx
+  UFG::DataStreamer *v19; // rcx
+  unsigned __int64 FileChecksum64; // rsi
+  bool v21; // al
+  bool v22; // bl
+  bool v23; // di
+  int v24; // edx
+  int v25; // r8d
+  hkGeometryUtils::IVertices *v26; // rcx
+  hkgpIndexedMesh::EdgeBarrier *v27; // rcx
+  int v28; // edx
+  int v29; // r8d
+  int v30; // r8d
+  int v31; // r8d
+  int v32; // r8d
+  int v33; // r8d
+  int v34; // r8d
+  int v35; // r8d
+  int v36; // r8d
+  int v37; // r8d
+  int v38; // r8d
+  int v39; // r8d
+  int SystemRegion; // ebx
+  __int64 v41; // rcx
+  UFG::UILanguages::eLanguage SystemLanguage; // edi
+  UFG::UILanguages::eLanguage v43; // esi
+  AMD_HD3D *v44; // rcx
+  UFG *v45; // rcx
+  UFG::OSuiteLeaderboardManager *v46; // rax
+  AMD_HD3D *v47; // rcx
+  UFG *v48; // rcx
+  UFG::qString *Directory; // rax
+  AMD_HD3D *v50; // rcx
+  UFG::PartDatabase *v51; // rax
+  AMD_HD3D *v52; // rcx
   AMD_HD3D *v53; // rcx
-  AMD_HD3D *v54; // rcx
-  UFG::OnlineEventManager *v55; // rcx
-  UFG *v56; // rcx
-  int v57; // edx
-  UFG::SectionChooser::Lookahead *v58; // rax
-  UFG::GameStatTracker *v59; // rax
-  UFG *v60; // rcx
-  UFG::TimeOfDayManager *v61; // rax
-  UFG::TimeOfDayManager *v62; // rbx
-  UFG::qResourceInventory *v63; // rax
-  UFG::qResourceWarehouse *v64; // rax
-  UFG::TimeOfDayManager *v65; // rbx
-  UFG::qResourceInventory *v66; // rax
-  UFG::qResourceWarehouse *v67; // rax
-  CullManager *v68; // rax
+  UFG::OnlineEventManager *v54; // rcx
+  UFG *v55; // rcx
+  int v56; // edx
+  UFG::SectionChooser::Lookahead *RoadNetworkLookahead; // rax
+  UFG::GameStatTracker *v58; // rax
+  UFG *v59; // rcx
+  UFG::TimeOfDayManager *Instance; // rax
+  UFG::TimeOfDayManager *v61; // rbx
+  UFG::qResourceInventory *Inventory; // rax
+  UFG::qResourceWarehouse *v63; // rax
+  UFG::TimeOfDayManager *v64; // rbx
+  UFG::qResourceInventory *v65; // rax
+  UFG::qResourceWarehouse *v66; // rax
+  CullManager *v67; // rax
+  UFG *v68; // rcx
   UFG *v69; // rcx
-  UFG *v70; // rcx
-  UFG::qMemoryPool *v71; // rax
-  UFG::allocator::free_link *v72; // rax
-  UFG::SimComponent *v73; // rax
-  UFG::qMemoryPool *v74; // rax
-  UFG::allocator::free_link *v75; // rax
-  UFG::SimComponent *v76; // rax
-  UFG::qMemoryPool *v77; // rax
-  UFG::allocator::free_link *v78; // rax
-  UFG::SimComponent *v79; // rax
-  UFG::qMemoryPool *v80; // rax
-  UFG::allocator::free_link *v81; // rax
-  UFG::SimComponent *v82; // rax
-  UFG::qMemoryPool *v83; // rax
-  UFG::allocator::free_link *v84; // rax
-  UFG::SimComponent *v85; // rax
-  UFG *v86; // rcx
-  signed int v87; // er8
-  char **v88; // r9
-  EnumList<unsigned long> **v89; // r11
-  signed int v90; // er10
-  signed int v91; // ecx
-  char *v92; // rax
-  int v93; // edx
-  UFG::UIScreenTextureManager *v94; // rbx
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
+  UFG::allocator::free_link *v71; // rax
+  UFG::SimComponent *v72; // rax
+  UFG::qMemoryPool *v73; // rax
+  UFG::allocator::free_link *v74; // rax
+  UFG::SimComponent *v75; // rax
+  UFG::qMemoryPool *v76; // rax
+  UFG::allocator::free_link *v77; // rax
+  UFG::SimComponent *v78; // rax
+  UFG::qMemoryPool *v79; // rax
+  UFG::allocator::free_link *v80; // rax
+  UFG::SimComponent *v81; // rax
+  UFG::qMemoryPool *v82; // rax
+  UFG::allocator::free_link *v83; // rax
+  UFG::SimComponent *v84; // rax
+  UFG *v85; // rcx
+  signed int v86; // r8d
+  char **v87; // r9
+  EnumList<unsigned long> **p; // r11
+  signed int v89; // r10d
+  signed int v90; // ecx
+  char *v91; // rax
+  int v92; // edx
+  UFG::UIScreenTextureManager *v93; // rbx
+  UFG::UIScreenManager *v94; // rax
   UFG::UIScreenManager *v95; // rax
-  UFG::UIScreenManager *v96; // rax
-  UIHKGFxTranslator *v97; // rax
-  UFG::UIGfxTranslator *v98; // rax
-  UFG::UIGfxTranslator *v99; // rdi
-  UFG::UIScreenManager *v100; // rbx
-  Scaleform::Render::RenderBuffer *v101; // rcx
-  UFG::UIScreenTextureManager *v102; // rax
-  int v103; // edx
-  hkGeometryUtils::IVertices *v104; // rcx
-  int v105; // er8
+  UIHKGFxTranslator *v96; // rax
+  UFG::UIGfxTranslator *v97; // rax
+  UFG::UIGfxTranslator *v98; // rdi
+  UFG::UIScreenManager *v99; // rbx
+  Scaleform::Render::RenderBuffer *m_translator; // rcx
+  UFG::UIScreenTextureManager *v101; // rax
+  int v102; // edx
+  hkGeometryUtils::IVertices *v103; // rcx
+  int v104; // r8d
+  UFG::TiDo *v105; // rax
   UFG::TiDo *v106; // rax
-  UFG::TiDo *v107; // rax
-  AMD_HD3D *v108; // rcx
-  UFG::allocator::free_link *v109; // rax
-  unsigned int v110; // edi
-  UFG::GameState *v111; // rax
-  UFG::ProgressionTracker *v112; // rax
-  UFG::GameSetup *v113; // rbx
-  char *v114; // rdx
+  AMD_HD3D *v107; // rcx
+  char *v108; // rax
+  unsigned int v109; // edi
+  UFG::GameState *GameStateObj; // rax
+  UFG::ProgressionTracker *v111; // rax
+  UFG::GameSetup *GameSetup; // rbx
+  char *mData; // rdx
+  UFG *v114; // rcx
   UFG *v115; // rcx
-  UFG *v116; // rcx
-  UFG::qString result; // [rsp+50h] [rbp-98h]
-  Render::RenderInitParams params; // [rsp+78h] [rbp-70h]
-  __int64 v120; // [rsp+108h] [rbp+20h]
-  Render::RenderCallbacks v121; // [rsp+118h] [rbp+30h]
-  Render::RenderOutputParams v122; // [rsp+188h] [rbp+A0h]
-  UFG::qString v123; // [rsp+1F8h] [rbp+110h]
-  UFG::qString v124; // [rsp+220h] [rbp+138h]
-  UFG::qInitParams init_params; // [rsp+248h] [rbp+160h]
-  Render::RenderCallbacks render_callbacks; // [rsp+278h] [rbp+190h]
-  char *visual_treatment_name; // [rsp+2E8h] [rbp+200h]
-  void *v128; // [rsp+708h] [rbp+620h]
+  UFG::qString result; // [rsp+50h] [rbp-98h] BYREF
+  Render::RenderInitParams params; // [rsp+78h] [rbp-70h] BYREF
+  __int64 v119; // [rsp+108h] [rbp+20h]
+  Render::RenderCallbacks v120; // [rsp+118h] [rbp+30h] BYREF
+  Render::RenderOutputParams v121; // [rsp+188h] [rbp+A0h] BYREF
+  UFG::qString v122; // [rsp+1F8h] [rbp+110h] BYREF
+  UFG::qString v123; // [rsp+220h] [rbp+138h] BYREF
+  UFG::qInitParams init_params; // [rsp+248h] [rbp+160h] BYREF
+  Render::RenderCallbacks render_callbacks; // [rsp+278h] [rbp+190h] BYREF
+  char *visual_treatment_name[131]; // [rsp+2E8h] [rbp+200h] BYREF
+  void *v127; // [rsp+708h] [rbp+620h]
 
-  v120 = -2i64;
+  v119 = -2i64;
   hkaReferencePoseAnimation::getNumOriginalFrames(a1, a2);
   UFG::qInitParams::qInitParams(&init_params);
   UFG::qInit(&init_params);
   UFG::qSetAssertHandler((int (*)(const char *, const char *, int, bool *, const char *, ...))HKAssertHandler);
-  v3 = (UFG::qNode<UFG::qString,UFG::qString> *)fastdelegate::FastDelegate1<char const *,void>::InvokeStaticFunction;
+  mNext = (UFG::qNode<UFG::qString,UFG::qString> *)fastdelegate::FastDelegate1<char const *,void>::InvokeStaticFunction;
   if ( !SkookumExtraContext )
-    v3 = 0i64;
-  result.mNext = v3;
+    mNext = 0i64;
+  result.mNext = mNext;
   result.mPrev = (UFG::qNode<UFG::qString,UFG::qString> *)SkookumExtraContext;
-  v4 = gAssertContextFuncs.size;
-  v5 = gAssertContextFuncs.size + 1;
+  size = gAssertContextFuncs.size;
+  v4 = gAssertContextFuncs.size + 1;
   if ( gAssertContextFuncs.size + 1 > gAssertContextFuncs.capacity )
   {
     if ( gAssertContextFuncs.capacity )
-      v6 = 2 * gAssertContextFuncs.capacity;
+      v5 = 2 * gAssertContextFuncs.capacity;
     else
-      v6 = 1;
-    for ( ; v6 < v5; v6 *= 2 )
+      v5 = 1;
+    for ( ; v5 < v4; v5 *= 2 )
       ;
-    if ( v6 - v5 > 0x10000 )
-      v6 = gAssertContextFuncs.size + 65537;
-    UFG::qArray<fastdelegate::FastDelegate<bool (UFG::qString *)>,0>::Reallocate(&gAssertContextFuncs, v6, "qArray.Add");
-    v3 = result.mNext;
+    if ( v5 - v4 > 0x10000 )
+      v5 = gAssertContextFuncs.size + 65537;
+    UFG::qArray<fastdelegate::FastDelegate<bool (UFG::qString *)>,0>::Reallocate(&gAssertContextFuncs, v5, "qArray.Add");
+    mNext = result.mNext;
   }
-  gAssertContextFuncs.size = v5;
-  v7 = &gAssertContextFuncs.p[v4];
-  v7->m_Closure.m_pFunction = (void (__fastcall *)(fastdelegate::detail::GenericClass *))v3;
-  v7->m_Closure.m_pthis = (fastdelegate::detail::GenericClass *)result.mPrev;
-  UFG::qString::Set(&gCurrentLocationDirectory, &customWorldMapCaption);
-  _(v8);
+  gAssertContextFuncs.size = v4;
+  v6 = &gAssertContextFuncs.p[size];
+  v6->m_Closure.m_pFunction = (void (__fastcall *)(fastdelegate::detail::GenericClass *))mNext;
+  v6->m_Closure.m_pthis = (fastdelegate::detail::GenericClass *)result.mPrev;
+  UFG::qString::Set(&gCurrentLocationDirectory, &customCaption);
+  _(v7);
   InitConfig("UserOptions.xml");
-  UFG::qString::qString(&v124, "TheoryEngine.PC64_");
-  v9 = UFG::qGetLocalIP(&result);
-  UFG::qString::operator+=(&v124, v9->mData);
+  UFG::qString::qString(&v123, "TheoryEngine.PC64_");
+  LocalIP = UFG::qGetLocalIP(&result);
+  UFG::qString::operator+=(&v123, LocalIP->mData);
   UFG::qString::~qString(&result);
   UFG::HDDmanager::Instantiate();
   UserManager::CreateInstance();
   DNA::Database::Init();
   DNA::Database::Instance();
-  DNA::Database::LoadReflectionDatabase(v10, "reflection.rdb", 1);
+  DNA::Database::LoadReflectionDatabase(v9, "reflection.rdb", 1);
   DNA::DNAFactory::Init();
   UFG::qMemoryPool::Init(
     &gPhysicsMemoryPool,
@@ -2307,25 +2274,25 @@ signed __int64 __usercall InitGameSystems@<rax>(hkEntitySelectorAll *a1@<rcx>, h
     UFG::gMainMemoryPool,
     1,
     1);
-  UFG::StreamingMemory::InitPcCPUPools(v11);
+  UFG::StreamingMemory::InitPcCPUPools(v10);
   UFG::PhysicsSystem::InitializeMemory();
   UFG::qTaskManager::Init(&UFG::gTaskManager, qTaskThreadInit, qTaskThreadClose);
   Render::RenderCallbacks::RenderCallbacks(&render_callbacks);
   render_callbacks.mRenderWorldFunc = UFG::RenderWorld::RenderWorldClearScreen;
   Render::SetRenderCallbacks(&render_callbacks);
-  Render::RenderCallbacks::RenderCallbacks(&v121);
-  v121.mRenderThreadSyncPointFunc = (void (__fastcall *)())UFG::RenderWorld::RenderThreadSyncUpdate;
-  v121.mUpdateWorldFunc = (bool (__fastcall *)(float))MainUpdateGameSystems;
-  v121.mRenderWorldFunc = UFG::RenderWorld::RenderWorldCallback;
-  v121.mRenderSim = UFG::RenderSim;
-  v121.mRenderSimDebug = (void (__fastcall *)(UFG::RenderContext *, Render::View *))_;
-  v121.mRenderSimDebugOverlay = UFG::RenderSimDebugOverlay;
-  v121.mChangeTexturePackFunc = (void (__fastcall *)())RenderChangeTexturePack;
-  v121.mRenderSimOcclusionQueries = RenderSimOcclusionQueriesCallback;
+  Render::RenderCallbacks::RenderCallbacks(&v120);
+  v120.mRenderThreadSyncPointFunc = UFG::RenderWorld::RenderThreadSyncUpdate;
+  v120.mUpdateWorldFunc = (bool (__fastcall *)(float))MainUpdateGameSystems;
+  v120.mRenderWorldFunc = (void (__fastcall *)(float, void *))UFG::RenderWorld::RenderWorldCallback;
+  v120.mRenderSim = UFG::RenderSim;
+  v120.mRenderSimDebug = (void (__fastcall *)(UFG::RenderContext *, Render::View *))_;
+  v120.mRenderSimDebugOverlay = UFG::RenderSimDebugOverlay;
+  v120.mChangeTexturePackFunc = RenderChangeTexturePack;
+  v120.mRenderSimOcclusionQueries = RenderSimOcclusionQueriesCallback;
   if ( gRunPCRemotely )
   {
     gUsePCController = 0;
-    v121.mRenderWorldFunc = 0i64;
+    v120.mRenderWorldFunc = 0i64;
   }
   Render::RenderInitParams::RenderInitParams(&params);
   params.mFrameMemoryTotalBytes = g_HK_FrameMemoryTotalSize;
@@ -2335,15 +2302,14 @@ signed __int64 __usercall InitGameSystems@<rax>(hkEntitySelectorAll *a1@<rcx>, h
   params.mFrameIndexMemoryTotalBytes = g_HK_FrameIndexTotalSize;
   params.mTitleName = "Sleeping Dogs: Definitive Edition[PC64-Ship]";
   *(_DWORD *)&params.mIconResourceId = 6684773;
-  Render::RenderOutputParams::RenderOutputParams(&v122);
+  Render::RenderOutputParams::RenderOutputParams(&v121);
   if ( UFG::GameStatPCDisplaySettings::LoadFromXML(
-         (UFG::GameStatPCDisplaySettings *)&v122,
+         (UFG::GameStatPCDisplaySettings *)&v121,
          UFG::GameStatPCDisplaySettings::gDefaultSavePath) )
   {
-    params.mRenderOutputParams = v122;
-    a3 = *(float *)&v122.mTextureFilterQuality;
-    gIsHDWorldTextures = v122.mTextureDetailLevel == 2;
-    gExtendedMidground = _mm_cvtsi128_si32(*(__m128i *)&v122.mLODSetting) > 1;
+    params.mRenderOutputParams = v121;
+    gIsHDWorldTextures = v121.mTextureDetailLevel == TEXTURE_DETAIL_HIGH;
+    gExtendedMidground = _mm_cvtsi128_si32(*(__m128i *)&v121.mLODSetting) > 1;
     goto LABEL_21;
   }
   if ( UFG::qString::operator==(&gDebugResolution, "1920x1080") )
@@ -2358,10 +2324,10 @@ signed __int64 __usercall InitGameSystems@<rax>(hkEntitySelectorAll *a1@<rcx>, h
     params.mRenderOutputParams.mDisplayMode.mBackBufferWidth = 1600;
     params.mRenderOutputParams.mDisplayMode.mBackBufferHeight = 900;
   }
-  params.mRenderOutputParams.mDisplayMode.mScanlineMode = -1;
+  params.mRenderOutputParams.mDisplayMode.mScanlineMode = SCANLINE_MODE_NOTFILTERED;
 LABEL_21:
   Illusion::Engine::Init(&Illusion::gEngine);
-  Render::InitStateParams(v12);
+  Render::InitStateParams(v11);
   Render::InitEngine(&params);
   UFG::RenderWorldState::Init();
   Render::View::InitShared();
@@ -2373,96 +2339,96 @@ LABEL_21:
                                          0x8000ui64);
   AddFrameMemoryOverflow();
   UFG::CompositeDrawableComponent::SystemInit();
-  _(v13);
+  _(v12);
   MountBigFiles();
   InitGlobalPools();
-  v14 = UFG::OnlineManager::Instance();
-  UFG::OnlineManager::Init(v14);
-  v15 = UFG::OSuiteManager::Instance();
-  UFG::OSuiteManager::Init(v15);
-  v16 = (MinimumDistanceTask *)UFG::OSuiteDBLogger::Instance();
-  UFG::OSuiteDBLogger::Init(v16);
-  v17 = (AMD_HD3D *)UFG::OSuiteTickerManager::Instance();
+  v13 = UFG::OnlineManager::Instance();
+  UFG::OnlineManager::Init(v13);
+  v14 = UFG::OSuiteManager::Instance();
+  UFG::OSuiteManager::Init(v14);
+  v15 = (MinimumDistanceTask *)UFG::OSuiteDBLogger::Instance();
+  UFG::OSuiteDBLogger::Init(v15);
+  v16 = (AMD_HD3D *)UFG::OSuiteTickerManager::Instance();
+  _(v16);
+  v17 = (AMD_HD3D *)UFG::OSuiteMessenger::Instance();
   _(v17);
-  v18 = (AMD_HD3D *)UFG::OSuiteMessenger::Instance();
-  _(v18);
   UFG::WebSystem::Init("SDHD", gProxyCredentials.mData, 1);
   UFG::DataLogger::Init();
   InitStreamingPools();
-  if ( UFG::gAutoSmoketest == 1 )
+  if ( UFG::gAutoSmoketest )
     UFG::StreamFileWrapper::EnableLogging(1);
   if ( gCreateFinalBinDir )
   {
     UFG::qString::qString(&result, "data\\global\\xmlcache\\XML_CacheList.bin");
     UFG::DataStreamer::QueueStream(&handle, result.mData, DATA_ANIMATION, DEFAULT_PRIORITY, 7u, 0i64, 0i64);
-    WaitForStreamer(v19);
+    WaitForStreamer(v18);
     UFG::qString::~qString(&result);
   }
   TracksEnum<unsigned long>::Initialize("Data\\");
   TracksEnum<float>::Initialize("Data\\");
   _(0i64);
   _(0i64);
-  Illusion::IEnginePlat::WaitUntilGPUDone((Illusion::IEnginePlat *)&Illusion::gEngine);
-  UFG::qChunkFileSystem::Load("Data\\Shaders\\Shaders.temp.bin", 0i64, 0i64, 0i64, 0);
-  UFG::qChunkFileSystem::Load("Data\\Shaders\\Shaders.perm.bin", 0i64, 0i64, 0i64, 0);
+  Illusion::IEnginePlat::WaitUntilGPUDone(&Illusion::gEngine);
+  UFG::qChunkFileSystem::Load("Data\\Shaders\\Shaders.temp.bin", 0i64, 0i64, 0i64, ResourceFileContentType_Standard);
+  UFG::qChunkFileSystem::Load("Data\\Shaders\\Shaders.perm.bin", 0i64, 0i64, 0i64, ResourceFileContentType_Standard);
   _(0i64);
-  UFG::UIAmbientMapBlipManager::getInstance(a3);
+  UFG::UIAmbientMapBlipManager::getInstance();
   UFG::Fingerprint::InitFingerprintSystem("Data\\Global\\ufg_sig.sig");
   params.mFrameMemoryTotalBytes = 512000;
   params.mFrameWriteMemoryTotalBytes = 512000;
-  result.mData = (char *)10555311629107200i64;
+  result.mData = (char *)0x25800000258000i64;
   Render::DebugDrawManager::Init((Render::DebugDrawManager::InitInfo *)&params);
   UFG::QuarkProbe::Init();
-  UFG::GameSetup::msProject = 0;
+  UFG::GameSetup::msProject = ePROJ_HK;
   _(0i64);
-  UFG::DataStreamer::Initialize(v20);
+  UFG::DataStreamer::Initialize(v19);
   _((AMD_HD3D *)2);
   _(0i64);
   if ( !gDiskLine )
   {
-    v21 = -1i64;
-    v22 = UFG::qFileExists((const char *)&stru_141787D48);
-    v23 = v22;
-    v24 = UFG::gBuildingBigFiles;
-    if ( !UFG::gBuildingBigFiles && v22 )
-      v21 = UFG::qGetFileChecksum64((const char *)&stru_141787D48, 0xFFFFFFFFFFFFFFFFui64);
+    FileChecksum64 = -1i64;
+    v21 = UFG::qFileExists((const char *)&stru_141787D48);
+    v22 = v21;
+    v23 = UFG::gBuildingBigFiles;
+    if ( !UFG::gBuildingBigFiles && v21 )
+      FileChecksum64 = UFG::qGetFileChecksum64((const char *)&stru_141787D48, 0xFFFFFFFFFFFFFFFFui64);
     Scaleform::Render::Text::DocView::DocumentListener::View_OnLineFormat(
-      (hkgpIndexedMesh::EdgeBarrier *)v24,
+      (hkgpIndexedMesh::EdgeBarrier *)v23,
       (hkgpIndexedMeshDefinitions::Edge *)0x30000000);
-    if ( !v24 )
+    if ( !v23 )
     {
-      if ( !v23 )
+      if ( !v22 )
       {
 LABEL_35:
-        LOBYTE(v25) = 1;
-        Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(&stru_141789DD8, v25, v26);
-        LOBYTE(v29) = 1;
-        Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(&stru_141789DE8, v29, v30);
-        Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(&stru_141789DF8, 0, v31);
-        Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(&stru_141789E08, 0, v32);
-        Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(&stru_141789E14, 0, v33);
-        Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(&stru_141789E20, 0, v34);
-        Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(&stru_141789E48, 0, v35);
-        Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(&stru_141789E70, 0, v36);
-        Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(&stru_141789E98, 0, v37);
-        Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(&stru_141789EC0, 0, v38);
-        Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(&stru_141789EE8, 0, v39);
-        Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(&stru_141789F10, 0, v40);
+        LOBYTE(v24) = 1;
+        Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(&stru_141789DD8, v24, v25);
+        LOBYTE(v28) = 1;
+        Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(&stru_141789DE8, v28, v29);
+        Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(&stru_141789DF8, 0, v30);
+        Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(&stru_141789E08, 0, v31);
+        Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(&stru_141789E14, 0, v32);
+        Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(&stru_141789E20, 0, v33);
+        Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(&stru_141789E48, 0, v34);
+        Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(&stru_141789E70, 0, v35);
+        Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(&stru_141789E98, 0, v36);
+        Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(&stru_141789EC0, 0, v37);
+        Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(&stru_141789EE8, 0, v38);
+        Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(&stru_141789F10, 0, v39);
         goto LABEL_36;
       }
-      if ( v21 != UFG::qGetFileChecksum64((const char *)&stru_141787D48, 0xFFFFFFFFFFFFFFFFui64) )
+      if ( FileChecksum64 != UFG::qGetFileChecksum64((const char *)&stru_141787D48, 0xFFFFFFFFFFFFFFFFui64) )
       {
-        Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(v27, v25, v26);
-        LOBYTE(v28) = 1;
+        Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(v26, v24, v25);
+        LOBYTE(v27) = 1;
         Scaleform::Render::Text::DocView::DocumentListener::View_OnLineFormat(
-          v28,
+          v27,
           (hkgpIndexedMeshDefinitions::Edge *)0x30000000);
       }
     }
-    if ( v23 )
+    if ( v22 )
     {
-      LOBYTE(v25) = 1;
-      Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(&stru_141787D48, v25, v26);
+      LOBYTE(v24) = 1;
+      Track<TriggerRecoilPostEffectTask>::DeleteTaskWhenItReturnsFalse(&stru_141787D48, v24, v25);
     }
     goto LABEL_35;
   }
@@ -2470,34 +2436,34 @@ LABEL_36:
   UFG::TicketBoothManager::Initialize();
   UFG::HotSwapFileManager::SetEnabled(0);
   _(0i64);
-  Render::SetRenderCallbacks(&v121);
-  v41 = GetSystemRegion();
-  v43 = (unsigned int)UFG::UIGfxTranslator::getSystemLanguage(v42);
-  v44 = (unsigned int)MapSystemLanguageToLanguageGameSupports(v43);
+  Render::SetRenderCallbacks(&v120);
+  SystemRegion = GetSystemRegion();
+  SystemLanguage = (unsigned int)UFG::UIGfxTranslator::getSystemLanguage(v41);
+  v43 = (unsigned int)MapSystemLanguageToLanguageGameSupports(SystemLanguage);
   UFG::UIScreenTextureManager::Init(g_HK_UIVRamMemoryPoolSize);
-  DisplayLegalLoadScreen(v43, v44, v41);
-  _(v45);
+  DisplayLegalLoadScreen(SystemLanguage, v43, (Region)SystemRegion);
+  _(v44);
   _(0i64);
   UFG::LightGroupComponent::LoadLightGroupCache();
-  UFG::CreateAndRegisterGameStates(v46);
+  UFG::CreateAndRegisterGameStates(v45);
   UFG::GeographicalLayerManager::GetInstance();
   UFG::PropertySetManager::Init(0i64);
   UFG::PropertySetManager::SetRootPath("Data\\CheckedIn\\Common\\Data\\PropertySets\\");
   _(0i64);
   LoadGlobalPropertySets();
   _(0i64);
-  v47 = UFG::OSuiteLeaderboardManager::Instance();
-  UFG::OSuiteLeaderboardManager::Init(v47);
+  v46 = UFG::OSuiteLeaderboardManager::Instance();
+  UFG::OSuiteLeaderboardManager::Init(v46);
   UFG::EventDispatcher::Initialize(&UFG::EventDispatcher::mInstance);
   UFG::SkookumMgr::Init();
-  _(v48);
+  _(v47);
   UFG::StreamResourceLoader::LoadResourceFile("Data\\Global\\PhysicsProperties.perm.bin", 0i64, 0, 0i64, 0i64, 0i64);
   _(0i64);
-  UFG::PhysicsSystem::Initialize(v49);
-  v50 = UFG::qGetDirectory(&result);
-  UFG::qString::FormatEx(&v123, "%s\\Data\\", v50->mData);
+  UFG::PhysicsSystem::Initialize(v48);
+  Directory = UFG::qGetDirectory(&result);
+  UFG::qString::FormatEx(&v122, "%s\\Data\\", Directory->mData);
   UFG::qString::~qString(&result);
-  MemberMapFileManager::Init(v123.mData);
+  MemberMapFileManager::Init(v122.mData);
   _(0i64);
   ActionNode::Init();
   UFG::CoverDataInventory::Initialize();
@@ -2522,7 +2488,7 @@ LABEL_36:
   _(0i64);
   UFG::WorldEffectsManager::Init();
   _(0i64);
-  _(v51);
+  _(v50);
   _(0i64);
   UFG::SpawnResourceInfoCache::Init();
   _(0i64);
@@ -2533,8 +2499,8 @@ LABEL_36:
   UFG::PropSpawnManager::Init();
   _(0i64);
   UFG::PartDatabase::Init();
-  v52 = UFG::PartDatabase::Instance();
-  UFG::PartDatabase::InitPool(v52);
+  v51 = UFG::PartDatabase::Instance();
+  UFG::PartDatabase::InitPool(v51);
   _(0i64);
   UFG::ObjectResourceManager::Init();
   _(0i64);
@@ -2579,9 +2545,9 @@ LABEL_36:
   _(0i64);
   UFG::PedFormationManagerComponent::StaticInit();
   _(0i64);
-  _(v53);
+  _(v52);
   _(0i64);
-  _(v54);
+  _(v53);
   _(0i64);
   UFG::SimObjectWeaponPropertiesComponent::StaticInit();
   _(0i64);
@@ -2589,68 +2555,64 @@ LABEL_36:
   _(0i64);
   if ( !gDemoVersion )
   {
-    UFG::OnlineEventManager::Initialize(v55);
+    UFG::OnlineEventManager::Initialize(v54);
     UFG::AchievementTrophyManager::Init(60);
     _(0i64);
   }
-  UFG::HK_InitInput(v55);
+  UFG::HK_InitInput(v54);
   _(0i64);
   UFG::InputSystem::Init();
   _(0i64);
-  UFG::HK_PostInputInit(v56);
+  UFG::HK_PostInputInit(v55);
   _(0i64);
   UFG::qString::qString(&result, "Data");
   LoadGlobalBins(&result);
   UFG::qString::~qString(&result);
   _(0i64);
-  v57 = gDebugControllerPort;
+  v56 = gDebugControllerPort;
   if ( gDebugControllerPort > 0 )
   {
     if ( !UFG::gInputSystem->mControllers[gDebugControllerPort] )
-      v57 = 0;
-    gDebugControllerPort = v57;
+      v56 = 0;
+    gDebugControllerPort = v56;
   }
-  v58 = UFG::CreateRoadNetworkLookahead();
-  UFG::SectionChooser::SetLookahead(v58);
+  RoadNetworkLookahead = UFG::CreateRoadNetworkLookahead();
+  UFG::SectionChooser::SetLookahead(RoadNetworkLookahead);
   UFG::SectionChooser::SetOnZoneLayoutLoadCallback(OnZoneLayoutLoadCallback);
-  v59 = UFG::GameStatTracker::Instance();
-  UFG::GameStatTracker::Initialize(v59);
+  v58 = UFG::GameStatTracker::Instance();
+  UFG::GameStatTracker::Initialize(v58);
   _(0i64);
   UFG::StatGameManager::Instantiate();
   _(0i64);
   UFG::CachedLeaderboardManager::Instance();
   UFG::StatAwardPropertyManager::Instance();
   UFG::Metrics::msInstance.mSimTimeDeltaMax = FLOAT_0_050000001;
-  UFG::InitSim(v60);
+  UFG::InitSim(v59);
   _(0i64);
   UFG::GroupManager::CreateInstance();
   _(0i64);
   UFG::PedSpawnManager::CreateInstance();
   _(0i64);
+  Instance = UFG::TimeOfDayManager::GetInstance();
+  UFG::TimeOfDayManager::Init(Instance);
   v61 = UFG::TimeOfDayManager::GetInstance();
-  UFG::TimeOfDayManager::Init(v61);
-  v62 = UFG::TimeOfDayManager::GetInstance();
-  v63 = `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result;
+  Inventory = `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result;
   if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result )
   {
-    v64 = UFG::qResourceWarehouse::Instance();
-    v63 = UFG::qResourceWarehouse::GetInventory(v64, 0x4D04C7F2u);
-    `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result = v63;
+    v63 = UFG::qResourceWarehouse::Instance();
+    Inventory = UFG::qResourceWarehouse::GetInventory(v63, 0x4D04C7F2u);
+    `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result = Inventory;
   }
-  UFG::qResourceHandle::Init((UFG::qResourceHandle *)&v62->mSunnyStateBlockHandle.mPrev, 0x4D04C7F2u, 0x764E403Au, v63);
-  v65 = UFG::TimeOfDayManager::GetInstance();
-  v66 = `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result;
+  UFG::qResourceHandle::Init(&v61->mSunnyStateBlockHandle, 0x4D04C7F2u, 0x764E403Au, Inventory);
+  v64 = UFG::TimeOfDayManager::GetInstance();
+  v65 = `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result;
   if ( !`UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result )
   {
-    v67 = UFG::qResourceWarehouse::Instance();
-    v66 = UFG::qResourceWarehouse::GetInventory(v67, 0x4D04C7F2u);
-    `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result = v66;
+    v66 = UFG::qResourceWarehouse::Instance();
+    v65 = UFG::qResourceWarehouse::GetInventory(v66, 0x4D04C7F2u);
+    `UFG::qGetResourceInventory<Illusion::StateBlock>::`2::result = v65;
   }
-  UFG::qResourceHandle::Init(
-    (UFG::qResourceHandle *)&v65->mOvercastStateBlockHandle.mPrev,
-    0x4D04C7F2u,
-    0x8512348D,
-    v66);
+  UFG::qResourceHandle::Init(&v64->mOvercastStateBlockHandle, 0x4D04C7F2u, 0x8512348D, v65);
   _(0i64);
   Render::FXManager::Init(&Render::gFXManager, g_HK_NumFXBuffers);
   _(0i64);
@@ -2665,68 +2627,68 @@ LABEL_36:
   UFG::RenderStageTerrain::msTerrainVramSize = g_TerrainVramSize;
   UFG::RenderStageTerrain::msMaxTerrainElements = g_MaxTerrainElements;
   _(0i64);
-  v68 = CullManager::Instance();
-  CullManager::Init(v68, 0i64);
+  v67 = CullManager::Instance();
+  CullManager::Init(v67, 0i64);
   _(0i64);
   UFG::RenderWorld::Init();
-  UFG::CreateHighlightPlugin(v69);
-  UFG::CreateWireframePlugin(v70);
+  UFG::CreateHighlightPlugin(v68);
+  UFG::CreateWireframePlugin(v69);
   UFG::SimObjectModifier::SimObjectModifier((UFG::SimObjectModifier *)&result, UFG::RenderWorld::msRenderStagePlugin, 1);
-  v71 = UFG::GetSimulationMemoryPool();
-  v72 = UFG::qMemoryPool::Allocate(v71, 0x58ui64, "DamagePostEffect", 0i64, 1u);
-  v128 = v72;
-  if ( v72 )
-    UFG::DamagePostEffect::DamagePostEffect((UFG::DamagePostEffect *)v72);
+  SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+  v71 = UFG::qMemoryPool::Allocate(SimulationMemoryPool, 0x58ui64, "DamagePostEffect", 0i64, 1u);
+  v127 = v71;
+  if ( v71 )
+    UFG::DamagePostEffect::DamagePostEffect((UFG::DamagePostEffect *)v71);
   else
-    v73 = 0i64;
-  UFG::SimObjectModifier::AttachComponent((UFG::SimObjectModifier *)&result, v73, 0xFFFFFFFFi64);
+    v72 = 0i64;
+  UFG::SimObjectModifier::AttachComponent((UFG::SimObjectModifier *)&result, v72, 0xFFFFFFFFi64);
   UFG::SimObjectModifier::Close((UFG::SimObjectModifier *)&result);
   UFG::SimObjectModifier::~SimObjectModifier((UFG::SimObjectModifier *)&result);
   UFG::SimObjectModifier::SimObjectModifier((UFG::SimObjectModifier *)&result, UFG::RenderWorld::msRenderStagePlugin, 1);
-  v74 = UFG::GetSimulationMemoryPool();
-  v75 = UFG::qMemoryPool::Allocate(v74, 0x58ui64, "GunRecoilPostEffect", 0i64, 1u);
-  v128 = v75;
-  if ( v75 )
-    UFG::GunRecoilPostEffect::GunRecoilPostEffect((UFG::GunRecoilPostEffect *)v75);
+  v73 = UFG::GetSimulationMemoryPool();
+  v74 = UFG::qMemoryPool::Allocate(v73, 0x58ui64, "GunRecoilPostEffect", 0i64, 1u);
+  v127 = v74;
+  if ( v74 )
+    UFG::GunRecoilPostEffect::GunRecoilPostEffect((UFG::GunRecoilPostEffect *)v74);
   else
-    v76 = 0i64;
-  UFG::SimObjectModifier::AttachComponent((UFG::SimObjectModifier *)&result, v76, 0xFFFFFFFFi64);
+    v75 = 0i64;
+  UFG::SimObjectModifier::AttachComponent((UFG::SimObjectModifier *)&result, v75, 0xFFFFFFFFi64);
   UFG::SimObjectModifier::Close((UFG::SimObjectModifier *)&result);
   UFG::SimObjectModifier::~SimObjectModifier((UFG::SimObjectModifier *)&result);
   UFG::SimObjectModifier::SimObjectModifier((UFG::SimObjectModifier *)&result, UFG::RenderWorld::msRenderStagePlugin, 1);
-  v77 = UFG::GetSimulationMemoryPool();
-  v78 = UFG::qMemoryPool::Allocate(v77, 0x250ui64, "VisualTreatmentPostEffect", 0i64, 1u);
-  v128 = v78;
-  if ( v78 )
-    UFG::VisualTreatmentPostEffect::VisualTreatmentPostEffect((UFG::VisualTreatmentPostEffect *)v78);
+  v76 = UFG::GetSimulationMemoryPool();
+  v77 = UFG::qMemoryPool::Allocate(v76, 0x250ui64, "VisualTreatmentPostEffect", 0i64, 1u);
+  v127 = v77;
+  if ( v77 )
+    UFG::VisualTreatmentPostEffect::VisualTreatmentPostEffect((UFG::VisualTreatmentPostEffect *)v77);
   else
-    v79 = 0i64;
-  UFG::SimObjectModifier::AttachComponent((UFG::SimObjectModifier *)&result, v79, 0xFFFFFFFFi64);
+    v78 = 0i64;
+  UFG::SimObjectModifier::AttachComponent((UFG::SimObjectModifier *)&result, v78, 0xFFFFFFFFi64);
   UFG::SimObjectModifier::Close((UFG::SimObjectModifier *)&result);
   UFG::SimObjectModifier::~SimObjectModifier((UFG::SimObjectModifier *)&result);
   UFG::SimObjectModifier::SimObjectModifier((UFG::SimObjectModifier *)&result, UFG::RenderWorld::msRenderStagePlugin, 1);
-  v80 = UFG::GetSimulationMemoryPool();
-  v81 = UFG::qMemoryPool::Allocate(v80, 0x58ui64, "AccumulationBufferPostEffect", 0i64, 1u);
-  v128 = v81;
-  if ( v81 )
-    UFG::AccumulationBufferPostEffect::AccumulationBufferPostEffect((UFG::AccumulationBufferPostEffect *)v81);
+  v79 = UFG::GetSimulationMemoryPool();
+  v80 = UFG::qMemoryPool::Allocate(v79, 0x58ui64, "AccumulationBufferPostEffect", 0i64, 1u);
+  v127 = v80;
+  if ( v80 )
+    UFG::AccumulationBufferPostEffect::AccumulationBufferPostEffect((UFG::AccumulationBufferPostEffect *)v80);
   else
-    v82 = 0i64;
-  UFG::SimObjectModifier::AttachComponent((UFG::SimObjectModifier *)&result, v82, 0xFFFFFFFFi64);
+    v81 = 0i64;
+  UFG::SimObjectModifier::AttachComponent((UFG::SimObjectModifier *)&result, v81, 0xFFFFFFFFi64);
   UFG::SimObjectModifier::Close((UFG::SimObjectModifier *)&result);
   UFG::SimObjectModifier::~SimObjectModifier((UFG::SimObjectModifier *)&result);
   UFG::SimObjectModifier::SimObjectModifier((UFG::SimObjectModifier *)&result, UFG::RenderWorld::msRenderStagePlugin, 1);
-  v83 = UFG::GetSimulationMemoryPool();
-  v84 = UFG::qMemoryPool::Allocate(v83, 0x68ui64, "FrontEndPauseEffect", 0i64, 1u);
-  v128 = v84;
-  if ( v84 )
-    UFG::FrontEndPauseEffect::FrontEndPauseEffect((UFG::FrontEndPauseEffect *)v84);
+  v82 = UFG::GetSimulationMemoryPool();
+  v83 = UFG::qMemoryPool::Allocate(v82, 0x68ui64, "FrontEndPauseEffect", 0i64, 1u);
+  v127 = v83;
+  if ( v83 )
+    UFG::FrontEndPauseEffect::FrontEndPauseEffect((UFG::FrontEndPauseEffect *)v83);
   else
-    v85 = 0i64;
-  UFG::SimObjectModifier::AttachComponent((UFG::SimObjectModifier *)&result, v85, 0xFFFFFFFFi64);
+    v84 = 0i64;
+  UFG::SimObjectModifier::AttachComponent((UFG::SimObjectModifier *)&result, v84, 0xFFFFFFFFi64);
   UFG::SimObjectModifier::Close((UFG::SimObjectModifier *)&result);
   UFG::SimObjectModifier::~SimObjectModifier((UFG::SimObjectModifier *)&result);
-  UFG::CreateAltColorPlugin(v86);
+  UFG::CreateAltColorPlugin(v85);
   UFG::SetAltColorEffectActiveGlobally(1);
   UFG::EnableAltColorEffect(0);
   UFG::TerrainCollisionManager::Initialize();
@@ -2778,118 +2740,118 @@ LABEL_36:
     0i64,
     0i64,
     0i64);
-  v87 = 0;
-  v88 = &visual_treatment_name;
-  v89 = gVisualTreatmentEnum.m_enumLists.p;
-  v90 = gVisualTreatmentEnum.m_enumLists.size;
+  v86 = 0;
+  v87 = visual_treatment_name;
+  p = gVisualTreatmentEnum.m_enumLists.p;
+  v89 = gVisualTreatmentEnum.m_enumLists.size;
   while ( 1 )
   {
-    v91 = v90 < 0 ? 0 : (*v89)->m_enumName.size;
-    if ( v87 >= v91 )
+    v90 = v89 < 0 ? 0 : (*p)->m_enumName.size;
+    if ( v86 >= v90 )
       break;
-    if ( v90 < 0 )
-      v92 = 0i64;
+    if ( v89 < 0 )
+      v91 = 0i64;
     else
-      v92 = (*v89)->m_enumName.p[v87];
-    *v88 = v92;
+      v91 = (*p)->m_enumName.p[v86];
+    *v87 = v91;
+    ++v86;
     ++v87;
-    ++v88;
   }
-  if ( v90 < 0 )
-    v93 = 0;
+  if ( v89 < 0 )
+    v92 = 0;
   else
-    v93 = (*v89)->m_enumName.size;
-  UFG::VisualTreatmentPostEffect::StaticInit((const char **)&visual_treatment_name, v93);
+    v92 = (*p)->m_enumName.size;
+  UFG::VisualTreatmentPostEffect::StaticInit((const char **)visual_treatment_name, v92);
   UFG::UIHKTweakables::Initialize();
   UFG::UITiledMapTweakables::Initialize();
   _(0i64);
   UFG::UIHKScreenHud::Initialize();
   _(0i64);
-  v94 = UFG::UIScreenTextureManager::Instance();
-  v95 = (UFG::UIScreenManager *)UFG::qMemoryPool::Allocate(
+  v93 = UFG::UIScreenTextureManager::Instance();
+  v94 = (UFG::UIScreenManager *)UFG::qMemoryPool::Allocate(
                                   &gScaleformMemoryPool,
                                   0x320ui64,
                                   "UIScreenManager::UIScreenManager",
                                   0i64,
                                   1u);
-  v128 = v95;
-  if ( v95 )
-    UFG::UIScreenManager::UIScreenManager(v95, (UFG::UIScreenFactory *)&v94->vfptr);
+  v127 = v94;
+  if ( v94 )
+    UFG::UIScreenManager::UIScreenManager(v94, v93);
   else
-    v96 = 0i64;
-  UFG::UIScreenManager::s_instance = v96;
-  v97 = (UIHKGFxTranslator *)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(
+    v95 = 0i64;
+  UFG::UIScreenManager::s_instance = v95;
+  v96 = (UIHKGFxTranslator *)Scaleform::Memory::pGlobalHeap->vfptr->Alloc(
                                Scaleform::Memory::pGlobalHeap,
-                               20632ui64,
+                               20632i64,
                                0i64);
-  v128 = v97;
-  if ( v97 )
+  v127 = v96;
+  if ( v96 )
   {
-    UIHKGFxTranslator::UIHKGFxTranslator(v97);
-    v99 = v98;
+    UIHKGFxTranslator::UIHKGFxTranslator(v96);
+    v98 = v97;
   }
   else
   {
-    v99 = 0i64;
+    v98 = 0i64;
   }
-  v100 = UFG::UIScreenManager::s_instance;
-  v101 = (Scaleform::Render::RenderBuffer *)UFG::UIScreenManager::s_instance->m_translator;
-  if ( v101 )
-    Scaleform::RefCountImpl::Release(v101);
-  v100->m_translator = v99;
-  UFG::UIGfxTranslator::init(v99, v100->m_screenFactory, v100->m_gfxMovieLoader);
-  UFG::UIGfxTranslator::setLanguage(v100->m_translator, eLang_English, 1);
+  v99 = UFG::UIScreenManager::s_instance;
+  m_translator = (Scaleform::Render::RenderBuffer *)UFG::UIScreenManager::s_instance->m_translator;
+  if ( m_translator )
+    Scaleform::RefCountImpl::Release(m_translator);
+  v99->m_translator = v98;
+  UFG::UIGfxTranslator::init(v98, v99->m_screenFactory, v99->m_gfxMovieLoader);
+  UFG::UIGfxTranslator::setLanguage(v99->m_translator, eLang_English, 1);
   UFG::UIScreenManager::s_instance->mScaleViewportInCode = 1;
-  ((void (*)(void))UFG::UIScreenManager::s_instance->vfptr->update)();
+  ((void (__fastcall *)(UFG::UIScreenManager *))UFG::UIScreenManager::s_instance->vfptr->update)(UFG::UIScreenManager::s_instance);
   _(0i64);
   UFG::UIScreenManager::s_instance->m_DisplayChangeCallback = UFG::UI::DisplayChangeCallback;
   _(0i64);
-  UFG::UIScreenManager::s_instance->m_gfxFileOpener->vfptr[4].__vecDelDtor(
-    (Scaleform::RefCountImplCore *)UFG::UIScreenManager::s_instance->m_gfxFileOpener,
+  UFG::UIScreenManager::s_instance->m_gfxFileOpener->UFG::UIScreenManagerBase::vfptr[4].__vecDelDtor(
+    UFG::UIScreenManager::s_instance->m_gfxFileOpener,
     (unsigned int)"Global.BIN");
-  UFG::UIGfxTranslator::setLanguage(UFG::UIScreenManager::s_instance->m_translator, v44, 1);
+  UFG::UIGfxTranslator::setLanguage(UFG::UIScreenManager::s_instance->m_translator, v43, 1);
   UFG::UIGfxTranslator::loadDictionary(UFG::UIScreenManager::s_instance->m_translator, "Global");
   UFG::UIGfxTranslator::loadDictionary(UFG::UIScreenManager::s_instance->m_translator, "Front-End");
-  v102 = UFG::UIScreenTextureManager::Instance();
-  UFG::UIScreenTextureManager::QueueLoadAndPush(v102, "GlobalOverlay", 0i64);
-  UFG::TidoGame::CreateInstance(v104, v103, v105);
-  if ( (unsigned __int8)UFG::TiDo::GetIsInstantiated() )
+  v101 = UFG::UIScreenTextureManager::Instance();
+  UFG::UIScreenTextureManager::QueueLoadAndPush(v101, "GlobalOverlay", 0i64);
+  UFG::TidoGame::CreateInstance(v103, v102, v104);
+  if ( UFG::TiDo::GetIsInstantiated() )
   {
-    v106 = UFG::TiDo::GetInstance();
-    v106->vfptr->Init(v106);
+    v105 = UFG::TiDo::GetInstance();
+    v105->vfptr->Init(v105);
   }
-  v107 = UFG::TiDo::GetInstance();
-  UFG::TiDo::LoadEventSymbols(v107);
-  _(v108);
+  v106 = UFG::TiDo::GetInstance();
+  UFG::TiDo::LoadEventSymbols(v106);
+  _(v107);
   _(0i64);
-  UFG::qMemoryPool::Init(&gAntlrMemoryPool, "AntlrParser", 1572864i64, 0x80000, 1, 1u, UFG::gMainMemoryPool, 1, 1);
-  v109 = UFG::qMemoryPool::Allocate(UFG::gMainMemoryPool, 0x8C8C000ui64, "VideoBroadcast", 0i64, 1u);
-  UFG::qMemoryPool::Init(&gVideoBroadcastMemoryPool, "VideoBroadcast", v109, 147374080i64, 0x200000, 1, 1u, 0i64, 1, 1);
-  v110 = uidGameStateFE_5;
+  UFG::qMemoryPool::Init(&gAntlrMemoryPool, "AntlrParser", 0x180000ui64, 0x80000, 1, 1u, UFG::gMainMemoryPool, 1, 1);
+  v108 = (char *)UFG::qMemoryPool::Allocate(UFG::gMainMemoryPool, 0x8C8C000ui64, "VideoBroadcast", 0i64, 1u);
+  UFG::qMemoryPool::Init(&gVideoBroadcastMemoryPool, "VideoBroadcast", v108, 147374080i64, 0x200000, 1, 1u, 0i64, 1, 1);
+  v109 = uidGameStateFE_5;
   if ( UFG::gUIBootModeSkipFE || UFG::gAutoSmoketest || gAutoBenchmarkMode )
   {
-    v110 = uidGameStateLoadGame_5;
+    v109 = uidGameStateLoadGame_5;
     if ( gAutoBenchmarkMode )
     {
       UFG::qStringCopy(gameSetupStr, 100, "gameSetupGame_Calibration", -1);
-      v111 = UFG::FlowController::GetGameStateObj(&UFG::gFlowController, uidGameStateLoadGame_5);
-      if ( v111 )
-        UFG::qString::Set(&v111->mGameStateUserDataStr, gameSetupStr);
+      GameStateObj = UFG::FlowController::GetGameStateObj(&UFG::gFlowController, uidGameStateLoadGame_5);
+      if ( GameStateObj )
+        UFG::qString::Set(&GameStateObj->mGameStateUserDataStr, gameSetupStr);
     }
-    v112 = UFG::ProgressionTracker::Instance();
-    v113 = UFG::ProgressionTracker::GetGameSetup(v112);
-    UFG::GameSetup::SetDebugSaveGame(v113, "Empty");
-    v114 = UFG::gSmoketestStartTrack.mData;
+    v111 = UFG::ProgressionTracker::Instance();
+    GameSetup = UFG::ProgressionTracker::GetGameSetup(v111);
+    UFG::GameSetup::SetDebugSaveGame(GameSetup, "Empty");
+    mData = UFG::gSmoketestStartTrack.mData;
     if ( !UFG::gTestLevelTest )
-      v114 = StartTrack.mData;
-    UFG::GameSetup::SetLocationDir(v113, v114);
+      mData = StartTrack.mData;
+    UFG::GameSetup::SetLocationDir(GameSetup, mData);
   }
   _(0i64);
-  if ( !(unsigned int)UFG::FlowController::RequestSetNewState(&UFG::gFlowController, v110) )
-    SetUpCameraForFERender(v115);
+  if ( !(unsigned int)UFG::FlowController::RequestSetNewState(&UFG::gFlowController, v109) )
+    SetUpCameraForFERender(v114);
   DebugTestInit();
   _(0i64);
-  if ( !(`UFG::qStaticInitAllocator::Instance::`2::`local static guard & 1) )
+  if ( (`UFG::qStaticInitAllocator::Instance::`2::`local static guard & 1) == 0 )
   {
     `UFG::qStaticInitAllocator::Instance::`2::`local static guard |= 1u;
     UFG::qStaticInitAllocator::qStaticInitAllocator(&`UFG::qStaticInitAllocator::Instance::`2::instance);
@@ -2897,12 +2859,12 @@ LABEL_36:
   }
   UFG::qStaticInitAllocator::Done(&`UFG::qStaticInitAllocator::Instance::`2::instance);
   InitGameSystems_Stage2();
-  UFG::MemoryUtil_MarkAllPools(v116);
+  UFG::MemoryUtil_MarkAllPools(v115);
   while ( !UFG::LoadingLogic::HasRequiredScreensFinished(&UFG::gLoadingLogic) )
     UFG::qSleep(1u);
   UFG::LoadingLogic::StopLoadScreen(&UFG::gLoadingLogic, 0.0);
+  UFG::qString::~qString(&v122);
   UFG::qString::~qString(&v123);
-  UFG::qString::~qString(&v124);
   return 1i64;
 }
 
@@ -2911,7 +2873,7 @@ LABEL_36:
 signed __int64 __fastcall InitGameSystems_Stage2()
 {
   ActionNode *v0; // rbx
-  AnimationDataBase *v1; // rax
+  AnimationDataBase *Instance; // rax
   AnimationDataBase *v2; // rax
 
   if ( once_2 )
@@ -2925,8 +2887,8 @@ signed __int64 __fastcall InitGameSystems_Stage2()
     UFG::qMemoryPool2::DoneWithLinearAllocations(&gActionTreeMemoryPool);
     LoadBinaryACTandABKFiles();
     ActionNodePlayableDataBase::Init();
-    v1 = AnimationDataBase::GetInstance();
-    AnimationDataBase::ResolveFallbackAnimations(v1);
+    Instance = AnimationDataBase::GetInstance();
+    AnimationDataBase::ResolveFallbackAnimations(Instance);
     _(0i64);
     if ( v0 )
       ActionNode::EndDeferredResolve(v0);
@@ -2952,7 +2914,7 @@ signed __int64 __fastcall InitGameSystems_Stage2()
 
 // File Line: 3644
 // RVA: 0x4204F0
-signed __int64 __fastcall CloseGameSystems()
+__int64 __fastcall CloseGameSystems()
 {
   AMD_HD3D *v0; // rcx
   AMD_HD3D *v1; // rcx
@@ -2969,8 +2931,8 @@ signed __int64 __fastcall CloseGameSystems()
 
   UFG::UIGfxTranslator::unloadDictionary(UFG::UIScreenManager::s_instance->m_translator, "Front-End");
   UFG::UIGfxTranslator::unloadDictionary(UFG::UIScreenManager::s_instance->m_translator, "Global");
-  UFG::UIScreenManager::s_instance->m_gfxFileOpener->vfptr[5].__vecDelDtor(
-    (Scaleform::RefCountImplCore *)UFG::UIScreenManager::s_instance->m_gfxFileOpener,
+  UFG::UIScreenManager::s_instance->m_gfxFileOpener->UFG::UIScreenManagerBase::vfptr[5].__vecDelDtor(
+    UFG::UIScreenManager::s_instance->m_gfxFileOpener,
     (unsigned int)"Global.BIN");
   UFG::UIScreenTextureManager::Quit();
   _((AMD_HD3D *)&Render::SkyMarshall::gSkyMarshall);
@@ -3025,16 +2987,16 @@ signed __int64 __fastcall CloseGameSystems()
 // RVA: 0x424F10
 char __fastcall MainUpdateGameSystems(float fRealTimeDelta)
 {
-  bool v1; // bl
+  bool IsLoadScreenRendering; // bl
   bool v2; // al
   bool v3; // cl
   UFG *v4; // rcx
 
   UFG::LoadingLogic::UpdateLoadTimers(&UFG::gLoadingLogic, fRealTimeDelta);
   UFG::FlowController::DoMainLoop(&UFG::gFlowController, fRealTimeDelta);
-  v1 = (unsigned int)Render::IsLoadScreenRendering() != 0;
+  IsLoadScreenRendering = Render::IsLoadScreenRendering();
   v2 = UFG::UIHK_NISOverlay::IsCurtainVisible() && UFG::UIHK_NISOverlay::IsCurtainStable();
-  v3 = v1 || v2;
+  v3 = IsLoadScreenRendering || v2;
   Render::SetVRAMDefragPerFrameLimits(v3);
   UFG::UpdateIsForcedLetterBox(v4);
   return 1;

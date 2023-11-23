@@ -2,17 +2,15 @@
 // RVA: 0x3FD3E0
 void UFG::GameCheats::RestartMission(void)
 {
-  UFG::ProgressionTracker *v0; // rax
-  UFG::ProgressionTracker *v1; // rbx
-  UFG::GameSlice *v2; // rax
+  UFG::ProgressionTracker *v0; // rbx
+  UFG::GameSlice *ActiveMaster; // rax
 
   v0 = UFG::ProgressionTracker::Instance();
-  v1 = v0;
-  v2 = UFG::ProgressionTracker::GetActiveMaster(v0);
-  if ( v2 )
+  ActiveMaster = UFG::ProgressionTracker::GetActiveMaster(v0);
+  if ( ActiveMaster )
   {
-    if ( v2->mType != 2 )
-      UFG::ProgressionTracker::Restart(v1, v2);
+    if ( ActiveMaster->mType != NUM_TYPES )
+      UFG::ProgressionTracker::Restart(v0, ActiveMaster);
   }
 }
 
@@ -20,13 +18,13 @@ void UFG::GameCheats::RestartMission(void)
 // RVA: 0x3FD420
 void UFG::GameCheats::RestoreCheckpoint(void)
 {
-  UFG::GameSlice *v0; // rcx
+  UFG::GameSlice *mpLastCheckpoint; // rcx
   UFG::ProgressionTracker *v1; // rax
 
-  v0 = UFG::ProgressionTracker::Instance()->mpLastCheckpoint;
-  if ( v0 )
+  mpLastCheckpoint = UFG::ProgressionTracker::Instance()->mpLastCheckpoint;
+  if ( mpLastCheckpoint )
   {
-    if ( v0->mType != 2 )
+    if ( mpLastCheckpoint->mType != NUM_TYPES )
     {
       v1 = UFG::ProgressionTracker::Instance();
       UFG::ProgressionTracker::RestoreCheckpoint(v1);
@@ -38,17 +36,15 @@ void UFG::GameCheats::RestoreCheckpoint(void)
 // RVA: 0x3FC640
 void UFG::GameCheats::CancelMission(void)
 {
-  UFG::ProgressionTracker *v0; // rax
-  UFG::ProgressionTracker *v1; // rbx
-  UFG::GameSlice *v2; // rax
+  UFG::ProgressionTracker *v0; // rbx
+  UFG::GameSlice *ActiveMaster; // rax
 
   v0 = UFG::ProgressionTracker::Instance();
-  v1 = v0;
-  v2 = UFG::ProgressionTracker::GetActiveMaster(v0);
-  if ( v2 )
+  ActiveMaster = UFG::ProgressionTracker::GetActiveMaster(v0);
+  if ( ActiveMaster )
   {
-    if ( v2->mType != 2 )
-      UFG::ProgressionTracker::CancelMission(v1, v2, 1, RestoreType_SafehouseFailure);
+    if ( ActiveMaster->mType != NUM_TYPES )
+      UFG::ProgressionTracker::CancelMission(v0, ActiveMaster, 1, RestoreType_SafehouseFailure);
   }
 }
 

@@ -1,15 +1,19 @@
 // File Line: 22
 // RVA: 0xE5CCD0
-hkResult *__fastcall hkSerializeDeprecated::saveXmlPackfile(hkSerializeDeprecated *this, hkResult *result, const void *object, hkClass *klass, hkStreamWriter *writer, hkPackfileWriter::Options *options, hkPackfileWriter::AddObjectListener *userListener, hkSerializeUtil::ErrorDetails *errorOut)
+hkResult *__fastcall hkSerializeDeprecated::saveXmlPackfile(
+        hkSerializeDeprecated *this,
+        hkResult *result,
+        const void *object,
+        hkClass *klass,
+        hkStreamWriter *writer,
+        hkPackfileWriter::Options *options,
+        hkPackfileWriter::AddObjectListener *userListener,
+        hkSerializeUtil::ErrorDetails *errorOut)
 {
-  hkResult *v8; // rbx
-  hkResult *v9; // rax
-
-  v8 = result;
   if ( !errorOut || errorOut->id.m_storage )
   {
-    result->m_enum = 1;
-    v9 = result;
+    result->m_enum = HK_FAILURE;
+    return result;
   }
   else
   {
@@ -17,22 +21,27 @@ hkResult *__fastcall hkSerializeDeprecated::saveXmlPackfile(hkSerializeDeprecate
     hkStringPtr::operator=(
       &errorOut->defaultMessage,
       "XML packfile support is not linked. Perhaps you have HK_EXCLUDE_FEATURE_SerializeDeprecatedPre700 in hkProductFeatures");
-    v8->m_enum = 1;
-    v9 = v8;
+    result->m_enum = HK_FAILURE;
+    return result;
   }
-  return v9;
 }
 
 // File Line: 31
 // RVA: 0xE5CD30
-__int64 __fastcall hkSerializeDeprecated::isLoadable(hkSerializeDeprecated *this, hkSerializeUtil::FormatDetails *details)
+__int64 __fastcall hkSerializeDeprecated::isLoadable(
+        hkSerializeDeprecated *this,
+        hkSerializeUtil::FormatDetails *details)
 {
   return 0i64;
 }
 
 // File Line: 36
 // RVA: 0xE5CD40
-hkResource *__fastcall hkSerializeDeprecated::loadOldPackfile(hkSerializeDeprecated *this, hkStreamReader *sr, hkSerializeUtil::FormatDetails *details, hkSerializeUtil::ErrorDetails *errorOut)
+hkResource *__fastcall hkSerializeDeprecated::loadOldPackfile(
+        hkSerializeDeprecated *this,
+        hkStreamReader *sr,
+        hkSerializeUtil::FormatDetails *details,
+        hkSerializeUtil::ErrorDetails *errorOut)
 {
   if ( errorOut && !errorOut->id.m_storage )
   {
@@ -51,7 +60,11 @@ hkResource *__fastcall hkSerializeDeprecated::loadOldPackfile(hkSerializeDepreca
 
 // File Line: 45
 // RVA: 0xE5CD80
-hkObjectResource *__fastcall hkSerializeDeprecated::loadOldPackfileOnHeap(hkSerializeDeprecated *this, hkStreamReader *sr, hkSerializeUtil::FormatDetails *details, hkSerializeUtil::ErrorDetails *errorOut)
+hkObjectResource *__fastcall hkSerializeDeprecated::loadOldPackfileOnHeap(
+        hkSerializeDeprecated *this,
+        hkStreamReader *sr,
+        hkSerializeUtil::FormatDetails *details,
+        hkSerializeUtil::ErrorDetails *errorOut)
 {
   if ( errorOut && !errorOut->id.m_storage )
   {
@@ -70,33 +83,36 @@ hkObjectResource *__fastcall hkSerializeDeprecated::loadOldPackfileOnHeap(hkSeri
 
 // File Line: 54
 // RVA: 0xE5CDC0
-hkResult *__fastcall hkSerializeDeprecated::readXmlPackfileHeader(hkSerializeDeprecated *this, hkResult *result, hkStreamReader *stream, hkSerializeDeprecated::XmlPackfileHeader *out, hkSerializeUtil::ErrorDetails *errorOut)
+hkResult *__fastcall hkSerializeDeprecated::readXmlPackfileHeader(
+        hkSerializeDeprecated *this,
+        hkResult *result,
+        hkStreamReader *stream,
+        hkSerializeDeprecated::XmlPackfileHeader *out,
+        hkSerializeUtil::ErrorDetails *errorOut)
 {
   hkSerializeUtil::ErrorDetails *v5; // rdi
-  hkStreamReader *v6; // rbp
-  hkResult *v7; // rbx
   hkXmlParser::Node *v8; // rsi
   hkXmlParser::Node *v9; // rcx
   hkResult *v10; // rax
-  hkXmlParser v11; // [rsp+20h] [rbp-38h]
-  hkXmlParser::Node *ret; // [rsp+68h] [rbp+10h]
+  hkXmlParser v11; // [rsp+20h] [rbp-38h] BYREF
+  hkXmlParser::Node *ret; // [rsp+68h] [rbp+10h] BYREF
 
   v5 = errorOut;
-  v6 = stream;
-  v7 = result;
   if ( errorOut )
   {
     hkXmlParser::hkXmlParser(&v11);
     v8 = 0i64;
     ret = 0i64;
-    if ( hkXmlParser::nextNode(&v11, (hkResult *)&errorOut, &ret, v6)->m_enum == HK_SUCCESS )
+    if ( hkXmlParser::nextNode(&v11, (hkResult *)&errorOut, &ret, stream)->m_enum == HK_SUCCESS )
     {
       v9 = ret;
-      if ( ret->type == 1 )
+      if ( ret->type == CYLINDER )
         v8 = ret;
-      if ( v8 && (_QWORD)v8[1].vfptr & 0xFFFFFFFFFFFFFFFEui64 )
+      if ( v8 && ((unsigned __int64)v8[1].vfptr & 0xFFFFFFFFFFFFFFFEui64) != 0 )
       {
-        if ( !(unsigned int)hkString::strCmp((const char *)((_QWORD)v8[1].vfptr & 0xFFFFFFFFFFFFFFFEui64), "hkpackfile")
+        if ( !(unsigned int)hkString::strCmp(
+                              (const char *)((unsigned __int64)v8[1].vfptr & 0xFFFFFFFFFFFFFFFEui64),
+                              "hkpackfile")
           && !v5->id.m_storage )
         {
           v5->id.m_storage = 7;
@@ -113,16 +129,16 @@ hkResult *__fastcall hkSerializeDeprecated::readXmlPackfileHeader(hkSerializeDep
         }
         v9 = ret;
       }
-      hkReferencedObject::removeReference((hkReferencedObject *)&v9->vfptr);
+      hkReferencedObject::removeReference(v9);
     }
     hkXmlParser::~hkXmlParser(&v11);
-    v7->m_enum = 1;
-    v10 = v7;
+    result->m_enum = HK_FAILURE;
+    return result;
   }
   else
   {
     v10 = result;
-    result->m_enum = 1;
+    result->m_enum = HK_FAILURE;
   }
   return v10;
 }
@@ -138,14 +154,14 @@ bool __fastcall hkSerializeDeprecated::isEnabled(hkSerializeDeprecated *this)
 // RVA: 0xE5CEC0
 hkSerializeDeprecated *__fastcall createInstance()
 {
-  if ( !(_S1_44 & 1) )
+  if ( (_S1_44 & 1) == 0 )
   {
     *(_DWORD *)&s_instance.m_memSizeAndFlags = 0x1FFFF;
     _S1_44 |= 1u;
     s_instance.vfptr = (hkBaseObjectVtbl *)&hkSerializeDeprecated::`vftable;
     atexit(createInstance_::_2_::_dynamic_atexit_destructor_for__s_instance__);
   }
-  hkReferencedObject::addReference((hkReferencedObject *)&s_instance.vfptr);
+  hkReferencedObject::addReference(&s_instance);
   return &s_instance;
 }
 

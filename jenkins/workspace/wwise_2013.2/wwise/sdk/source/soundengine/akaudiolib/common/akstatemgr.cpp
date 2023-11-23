@@ -2,18 +2,16 @@
 // RVA: 0xA472E0
 void __fastcall AkStateGroupInfo::Term(AkStateGroupInfo *this)
 {
-  MapStruct<AkStateTransition,long> *v1; // rdx
-  AkStateGroupInfo *v2; // rbx
+  MapStruct<AkStateTransition,long> *m_pItems; // rdx
 
-  v1 = this->mapTransitions.m_pItems;
-  v2 = this;
-  if ( v1 )
+  m_pItems = this->mapTransitions.m_pItems;
+  if ( m_pItems )
   {
     this->mapTransitions.m_uLength = 0;
-    AK::MemoryMgr::Free(g_DefaultPoolId, v1);
-    v2->mapTransitions.m_pItems = 0i64;
-    v2->mapTransitions.m_ulReserved = 0;
-    v2->members.m_pFirst = 0i64;
+    AK::MemoryMgr::Free(g_DefaultPoolId, m_pItems);
+    this->mapTransitions.m_pItems = 0i64;
+    this->mapTransitions.m_ulReserved = 0;
+    this->members.m_pFirst = 0i64;
   }
   else
   {
@@ -23,44 +21,41 @@ void __fastcall AkStateGroupInfo::Term(AkStateGroupInfo *this)
 
 // File Line: 41
 // RVA: 0xA46740
-__int64 __fastcall CAkStateMgr::PreparationStateItem::Notify(CAkStateMgr::PreparationStateItem *this, unsigned int in_GameSyncID, bool in_bIsActive)
+__int64 __fastcall CAkStateMgr::PreparationStateItem::Notify(
+        CAkStateMgr::PreparationStateItem *this,
+        unsigned int in_GameSyncID,
+        bool in_bIsActive)
 {
-  CAkPreparationAware *v3; // rbx
-  bool v4; // di
-  unsigned int v5; // ebp
-  CAkStateMgr::PreparationStateItem *v6; // r14
+  CAkPreparationAware *m_pFirst; // rbx
   __int64 result; // rax
   unsigned int v8; // esi
   CAkPreparationAware *v9; // rdi
 
-  v3 = this->m_PreparationList.m_pFirst;
-  v4 = in_bIsActive;
-  v5 = in_GameSyncID;
-  v6 = this;
-  if ( !v3 )
+  m_pFirst = this->m_PreparationList.m_pFirst;
+  if ( !m_pFirst )
     return 1i64;
   while ( 1 )
   {
-    result = v3->vfptr->ModifyActiveState(v3, v5, v4);
+    result = m_pFirst->vfptr->ModifyActiveState(m_pFirst, in_GameSyncID, in_bIsActive);
     v8 = result;
     if ( (_DWORD)result != 1 )
       break;
-    v3 = v3->pNextItemPrepare;
-    if ( !v3 )
+    m_pFirst = m_pFirst->pNextItemPrepare;
+    if ( !m_pFirst )
       return result;
   }
-  if ( v4 )
+  if ( in_bIsActive )
   {
-    v9 = v6->m_PreparationList.m_pFirst;
-    if ( v3 != v9 )
+    v9 = this->m_PreparationList.m_pFirst;
+    if ( m_pFirst != v9 )
     {
       do
       {
-        v9->vfptr->ModifyActiveState(v9, v5, 0);
+        v9->vfptr->ModifyActiveState(v9, in_GameSyncID, 0);
         v9 = v9->pNextItemPrepare;
       }
-      while ( v3 != v9 );
-      result = v8;
+      while ( m_pFirst != v9 );
+      return v8;
     }
   }
   return result;
@@ -70,22 +65,20 @@ __int64 __fastcall CAkStateMgr::PreparationStateItem::Notify(CAkStateMgr::Prepar
 // RVA: 0xA46200
 void __fastcall CAkStateMgr::CAkStateMgr(CAkStateMgr *this)
 {
-  CAkStateMgr *v1; // rbx
-  _RTL_CRITICAL_SECTION *v2; // rcx
+  CAkLock *p_m_PrepareGameSyncLock; // rcx
 
-  v1 = this;
-  v2 = &this->m_PrepareGameSyncLock.m_csLock;
-  *(_QWORD *)&v2[-3].LockCount = 0i64;
-  v2[-3].OwningThread = 0i64;
-  *(_QWORD *)&v2[-2].LockCount = 0i64;
-  LODWORD(v2[-2].OwningThread) = 0;
-  v2[-1].OwningThread = 0i64;
-  LODWORD(v2[-1].LockSemaphore) = 0;
-  InitializeCriticalSection(v2);
-  v1->m_PreparationGroupsStates.m_pFirst = 0i64;
-  v1->m_PreparationGroupsStates.m_pLast = 0i64;
-  v1->m_PreparationGroupsSwitches.m_pFirst = 0i64;
-  v1->m_PreparationGroupsSwitches.m_pLast = 0i64;
+  p_m_PrepareGameSyncLock = &this->m_PrepareGameSyncLock;
+  *(_QWORD *)&p_m_PrepareGameSyncLock[-3].m_csLock.LockCount = 0i64;
+  p_m_PrepareGameSyncLock[-3].m_csLock.OwningThread = 0i64;
+  *(_QWORD *)&p_m_PrepareGameSyncLock[-2].m_csLock.LockCount = 0i64;
+  LODWORD(p_m_PrepareGameSyncLock[-2].m_csLock.OwningThread) = 0;
+  p_m_PrepareGameSyncLock[-1].m_csLock.OwningThread = 0i64;
+  LODWORD(p_m_PrepareGameSyncLock[-1].m_csLock.LockSemaphore) = 0;
+  InitializeCriticalSection(&p_m_PrepareGameSyncLock->m_csLock);
+  this->m_PreparationGroupsStates.m_pFirst = 0i64;
+  this->m_PreparationGroupsStates.m_pLast = 0i64;
+  this->m_PreparationGroupsSwitches.m_pFirst = 0i64;
+  this->m_PreparationGroupsSwitches.m_pLast = 0i64;
 }
 
 // File Line: 71
@@ -97,77 +90,75 @@ void __fastcall CAkStateMgr::~CAkStateMgr(CAkStateMgr *this)
 
 // File Line: 75
 // RVA: 0xA46640
-signed __int64 __fastcall CAkStateMgr::Init(CAkStateMgr *this)
+__int64 __fastcall CAkStateMgr::Init(CAkStateMgr *this)
 {
-  CAkStateMgr *v1; // rbx
   CAkList2<CAkStateMgr::RegisteredSwitch,CAkStateMgr::RegisteredSwitch const &,1,ArrayPoolDefault>::ListItem *v2; // rax
   unsigned int v3; // edi
   CAkList2<CAkStateMgr::RegisteredSwitch,CAkStateMgr::RegisteredSwitch const &,1,ArrayPoolDefault>::ListItem *v4; // rcx
-  signed __int64 result; // rax
+  __int64 result; // rax
   unsigned int v6; // edx
-  signed __int64 v7; // rax
+  CAkList2<CAkStateMgr::RegisteredSwitch,CAkStateMgr::RegisteredSwitch const &,1,ArrayPoolDefault>::ListItem *v7; // rax
   CAkList2<CAkStateMgr::RegisteredTrigger,CAkStateMgr::RegisteredTrigger const &,1,ArrayPoolDefault>::ListItem *v8; // rax
   CAkList2<CAkStateMgr::RegisteredTrigger,CAkStateMgr::RegisteredTrigger const &,1,ArrayPoolDefault>::ListItem *v9; // rcx
   unsigned int v10; // edx
-  signed __int64 v11; // rax
+  CAkList2<CAkStateMgr::RegisteredTrigger,CAkStateMgr::RegisteredTrigger const &,1,ArrayPoolDefault>::ListItem *v11; // rax
 
-  v1 = this;
   this->m_listRegisteredSwitch.m_ulMaxNumListItems = -1;
   this->m_listRegisteredSwitch.m_ulNumListItems = 0;
   this->m_listRegisteredSwitch.m_pFree = 0i64;
   v2 = (CAkList2<CAkStateMgr::RegisteredSwitch,CAkStateMgr::RegisteredSwitch const &,1,ArrayPoolDefault>::ListItem *)AK::MemoryMgr::Malloc(g_DefaultPoolId, 0xC0ui64);
   v3 = 52;
   v4 = v2;
-  v1->m_listRegisteredSwitch.m_pvMemStart = v2;
+  this->m_listRegisteredSwitch.m_pvMemStart = v2;
   if ( v2 )
   {
-    v1->m_listRegisteredSwitch.m_ulMinNumListItems = 8;
-    v1->m_listRegisteredSwitch.m_pFree = v2;
+    this->m_listRegisteredSwitch.m_ulMinNumListItems = 8;
+    this->m_listRegisteredSwitch.m_pFree = v2;
     v6 = 0;
     do
     {
-      v7 = (signed __int64)&v4[1];
+      v7 = v4 + 1;
       ++v6;
       v4->pNextListItem = v4 + 1;
       ++v4;
     }
-    while ( v6 < v1->m_listRegisteredSwitch.m_ulMinNumListItems );
-    *(_QWORD *)(v7 - 24) = 0i64;
+    while ( v6 < this->m_listRegisteredSwitch.m_ulMinNumListItems );
+    v7[-1].pNextListItem = 0i64;
     result = 1i64;
   }
   else
   {
     result = 52i64;
   }
-  v1->m_listRegisteredSwitch.m_pFirst = 0i64;
-  v1->m_listRegisteredSwitch.m_pLast = 0i64;
+  this->m_listRegisteredSwitch.m_pFirst = 0i64;
+  this->m_listRegisteredSwitch.m_pLast = 0i64;
   if ( (_DWORD)result == 1 )
   {
-    v1->m_listRegisteredTrigger.m_ulNumListItems = 0;
-    v1->m_listRegisteredTrigger.m_ulMaxNumListItems = -1;
-    v1->m_listRegisteredTrigger.m_pFree = 0i64;
+    this->m_listRegisteredTrigger.m_ulNumListItems = 0;
+    this->m_listRegisteredTrigger.m_ulMaxNumListItems = -1;
+    this->m_listRegisteredTrigger.m_pFree = 0i64;
     v8 = (CAkList2<CAkStateMgr::RegisteredTrigger,CAkStateMgr::RegisteredTrigger const &,1,ArrayPoolDefault>::ListItem *)AK::MemoryMgr::Malloc(g_DefaultPoolId, 0x100ui64);
     v9 = v8;
-    v1->m_listRegisteredTrigger.m_pvMemStart = v8;
+    this->m_listRegisteredTrigger.m_pvMemStart = v8;
     if ( v8 )
     {
-      v1->m_listRegisteredTrigger.m_ulMinNumListItems = 8;
-      v1->m_listRegisteredTrigger.m_pFree = v8;
+      this->m_listRegisteredTrigger.m_ulMinNumListItems = 8;
+      this->m_listRegisteredTrigger.m_pFree = v8;
       v10 = 0;
       do
       {
-        v11 = (signed __int64)&v9[1];
+        v11 = v9 + 1;
         ++v10;
         v9->pNextListItem = v9 + 1;
         ++v9;
       }
-      while ( v10 < v1->m_listRegisteredTrigger.m_ulMinNumListItems );
-      *(_QWORD *)(v11 - 32) = 0i64;
+      while ( v10 < this->m_listRegisteredTrigger.m_ulMinNumListItems );
+      v11[-1].pNextListItem = 0i64;
       v3 = 1;
     }
-    v1->m_listRegisteredTrigger.m_pFirst = 0i64;
-    v1->m_listRegisteredTrigger.m_pLast = 0i64;
-    result = v3;
+    this->m_listRegisteredTrigger.m_pFirst = 0i64;
+    this->m_listRegisteredTrigger.m_pLast = 0i64;
+    return v3;
   }
   return result;
 }
@@ -176,99 +167,98 @@ signed __int64 __fastcall CAkStateMgr::Init(CAkStateMgr *this)
 // RVA: 0xA47330
 void __fastcall CAkStateMgr::Term(CAkStateMgr *this)
 {
-  MapStruct<unsigned long,AkStateGroupInfo *> *v1; // rbx
-  CAkStateMgr *i; // rdi
-  AkStateGroupInfo *v3; // rsi
-  MapStruct<AkStateTransition,long> *v4; // rdx
-  unsigned int v5; // eax
-  signed __int64 v6; // rcx
+  MapStruct<unsigned long,AkStateGroupInfo *> *i; // rbx
+  AkStateGroupInfo *item; // rsi
+  MapStruct<AkStateTransition,long> *m_pItems; // rdx
+  unsigned int m_uLength; // eax
+  MapStruct<unsigned long,AkStateGroupInfo *> *v6; // rcx
   MapStruct<unsigned long,AkStateGroupInfo *> *v7; // rdx
 
-  v1 = this->m_StateGroups.m_pItems;
-  for ( i = this; v1 != &i->m_StateGroups.m_pItems[i->m_StateGroups.m_uLength]; --i->m_StateGroups.m_uLength )
+  for ( i = this->m_StateGroups.m_pItems;
+        i != &this->m_StateGroups.m_pItems[this->m_StateGroups.m_uLength];
+        --this->m_StateGroups.m_uLength )
   {
-    v3 = v1->item;
-    v4 = v3->mapTransitions.m_pItems;
-    if ( v4 )
+    item = i->item;
+    m_pItems = item->mapTransitions.m_pItems;
+    if ( m_pItems )
     {
-      v3->mapTransitions.m_uLength = 0;
-      AK::MemoryMgr::Free(g_DefaultPoolId, v4);
-      v3->mapTransitions.m_pItems = 0i64;
-      v3->mapTransitions.m_ulReserved = 0;
+      item->mapTransitions.m_uLength = 0;
+      AK::MemoryMgr::Free(g_DefaultPoolId, m_pItems);
+      item->mapTransitions.m_pItems = 0i64;
+      item->mapTransitions.m_ulReserved = 0;
     }
-    v3->members.m_pFirst = 0i64;
-    AK::MemoryMgr::Free(g_DefaultPoolId, v3);
-    v5 = i->m_StateGroups.m_uLength;
-    if ( v5 > 1 )
+    item->members.m_pFirst = 0i64;
+    AK::MemoryMgr::Free(g_DefaultPoolId, item);
+    m_uLength = this->m_StateGroups.m_uLength;
+    if ( m_uLength > 1 )
     {
-      v6 = (signed __int64)&i->m_StateGroups.m_pItems[v5];
-      *(_QWORD *)&v1->key = *(_QWORD *)(v6 - 16);
-      v1->item = *(AkStateGroupInfo **)(v6 - 8);
+      v6 = &this->m_StateGroups.m_pItems[m_uLength];
+      *(_QWORD *)&i->key = *(_QWORD *)&v6[-1].key;
+      i->item = v6[-1].item;
     }
   }
-  v7 = i->m_StateGroups.m_pItems;
-  if ( i->m_StateGroups.m_pItems )
+  v7 = this->m_StateGroups.m_pItems;
+  if ( this->m_StateGroups.m_pItems )
   {
-    i->m_StateGroups.m_uLength = 0;
+    this->m_StateGroups.m_uLength = 0;
     AK::MemoryMgr::Free(g_DefaultPoolId, v7);
-    i->m_StateGroups.m_pItems = 0i64;
-    i->m_StateGroups.m_ulReserved = 0;
+    this->m_StateGroups.m_pItems = 0i64;
+    this->m_StateGroups.m_ulReserved = 0;
   }
-  CAkList2<CAkStateMgr::RegisteredSwitch,CAkStateMgr::RegisteredSwitch const &,1,ArrayPoolDefault>::Term(&i->m_listRegisteredSwitch);
-  CAkList2<CAkStateMgr::RegisteredTrigger,CAkStateMgr::RegisteredTrigger const &,1,ArrayPoolDefault>::Term(&i->m_listRegisteredTrigger);
-  CAkStateMgr::TermPreparationGroup(i, &i->m_PreparationGroupsStates);
-  CAkStateMgr::TermPreparationGroup(i, &i->m_PreparationGroupsSwitches);
+  CAkList2<CAkStateMgr::RegisteredSwitch,CAkStateMgr::RegisteredSwitch const &,1,ArrayPoolDefault>::Term(&this->m_listRegisteredSwitch);
+  CAkList2<CAkStateMgr::RegisteredTrigger,CAkStateMgr::RegisteredTrigger const &,1,ArrayPoolDefault>::Term(&this->m_listRegisteredTrigger);
+  CAkStateMgr::TermPreparationGroup(this, &this->m_PreparationGroupsStates);
+  CAkStateMgr::TermPreparationGroup(this, &this->m_PreparationGroupsSwitches);
 }
 
 // File Line: 99
 // RVA: 0xA47430
-void __fastcall CAkStateMgr::TermPreparationGroup(CAkStateMgr *this, AkListBare<CAkStateMgr::PreparationStateItem,AkListBareNextItem<CAkStateMgr::PreparationStateItem>,AkCountPolicyNoCount> *in_rGroup)
+void __fastcall CAkStateMgr::TermPreparationGroup(
+        CAkStateMgr *this,
+        AkListBare<CAkStateMgr::PreparationStateItem,AkListBareNextItem<CAkStateMgr::PreparationStateItem>,AkCountPolicyNoCount> *in_rGroup)
 {
-  CAkStateMgr::PreparationStateItem *v2; // rbx
-  AkListBare<CAkStateMgr::PreparationStateItem,AkListBareNextItem<CAkStateMgr::PreparationStateItem>,AkCountPolicyNoCount> *v3; // rdi
+  CAkStateMgr::PreparationStateItem *m_pFirst; // rbx
   CAkStateMgr::PreparationStateItem *v4; // rax
-  CAkStateMgr::PreparationStateItem *v5; // rsi
+  CAkStateMgr::PreparationStateItem *pNextItem; // rsi
   int v6; // ebp
-  unsigned int *v7; // rdx
-  __m128i v8; // [rsp+20h] [rbp-28h]
-  __m128i v9; // [rsp+30h] [rbp-18h]
+  unsigned int *m_pItems; // rdx
+  CAkStateMgr::PreparationStateItem *v8; // [rsp+20h] [rbp-28h]
+  CAkStateMgr::PreparationStateItem *v9; // [rsp+28h] [rbp-20h]
 
-  v2 = in_rGroup->m_pFirst;
-  v3 = in_rGroup;
+  m_pFirst = in_rGroup->m_pFirst;
   v4 = 0i64;
   if ( in_rGroup->m_pFirst )
   {
     while ( 1 )
     {
-      v5 = v2->pNextItem;
-      v8.m128i_i64[1] = (__int64)v4;
-      v8.m128i_i64[0] = (__int64)v2->pNextItem;
-      if ( v2 == v3->m_pFirst )
-        v3->m_pFirst = v5;
+      pNextItem = m_pFirst->pNextItem;
+      v9 = v4;
+      v8 = m_pFirst->pNextItem;
+      if ( m_pFirst == in_rGroup->m_pFirst )
+        in_rGroup->m_pFirst = pNextItem;
       else
-        v4->pNextItem = v5;
-      if ( v2 == v3->m_pLast )
-        v3->m_pLast = v4;
+        v4->pNextItem = pNextItem;
+      if ( m_pFirst == in_rGroup->m_pLast )
+        in_rGroup->m_pLast = v4;
       v6 = g_DefaultPoolId;
-      v2->m_PreparationList.m_pFirst = 0i64;
-      v2->m_PreparationList.m_pLast = 0i64;
-      v7 = v2->m_PreparedContent.m_PreparableContentList.m_pItems;
-      _mm_store_si128(&v9, v8);
-      if ( v7 )
+      m_pFirst->m_PreparationList.m_pFirst = 0i64;
+      m_pFirst->m_PreparationList.m_pLast = 0i64;
+      m_pItems = m_pFirst->m_PreparedContent.m_PreparableContentList.m_pItems;
+      if ( m_pItems )
       {
-        v2->m_PreparedContent.m_PreparableContentList.m_uLength = 0;
-        AK::MemoryMgr::Free(g_DefaultPoolId, v7);
-        v2->m_PreparedContent.m_PreparableContentList.m_pItems = 0i64;
-        v2->m_PreparedContent.m_PreparableContentList.m_ulReserved = 0;
+        m_pFirst->m_PreparedContent.m_PreparableContentList.m_uLength = 0;
+        AK::MemoryMgr::Free(g_DefaultPoolId, m_pItems);
+        m_pFirst->m_PreparedContent.m_PreparableContentList.m_pItems = 0i64;
+        m_pFirst->m_PreparedContent.m_PreparableContentList.m_ulReserved = 0;
       }
-      AK::MemoryMgr::Free(v6, v2);
-      if ( !v5 )
+      AK::MemoryMgr::Free(v6, m_pFirst);
+      if ( !pNextItem )
         break;
-      v4 = (CAkStateMgr::PreparationStateItem *)v9.m128i_i64[1];
-      v2 = (CAkStateMgr::PreparationStateItem *)v9.m128i_i64[0];
+      v4 = v9;
+      m_pFirst = v8;
     }
-    v3->m_pFirst = 0i64;
-    v3->m_pLast = 0i64;
+    in_rGroup->m_pFirst = 0i64;
+    in_rGroup->m_pLast = 0i64;
   }
   else
   {
@@ -279,30 +269,26 @@ void __fastcall CAkStateMgr::TermPreparationGroup(CAkStateMgr *this, AkListBare<
 
 // File Line: 111
 // RVA: 0xA46320
-signed __int64 __fastcall CAkStateMgr::AddStateGroup(CAkStateMgr *this, unsigned int in_ulStateGroupID)
+__int64 __fastcall CAkStateMgr::AddStateGroup(CAkStateMgr *this, unsigned int in_ulStateGroupID)
 {
-  MapStruct<unsigned long,AkStateGroupInfo *> *v2; // rax
-  unsigned int v3; // esi
-  CAkStateMgr *v4; // r14
+  MapStruct<unsigned long,AkStateGroupInfo *> *m_pItems; // rax
   unsigned int v5; // edi
   MapStruct<unsigned long,AkStateGroupInfo *> *v6; // r8
   CAkSplitterBus *v8; // rbx
 
-  v2 = this->m_StateGroups.m_pItems;
-  v3 = in_ulStateGroupID;
-  v4 = this;
+  m_pItems = this->m_StateGroups.m_pItems;
   v5 = 1;
   v6 = &this->m_StateGroups.m_pItems[this->m_StateGroups.m_uLength];
   if ( this->m_StateGroups.m_pItems != v6 )
   {
     do
     {
-      if ( v2->key == in_ulStateGroupID )
+      if ( m_pItems->key == in_ulStateGroupID )
         break;
-      ++v2;
+      ++m_pItems;
     }
-    while ( v2 != v6 );
-    if ( v2 != v6 && v2 != (MapStruct<unsigned long,AkStateGroupInfo *> *)-8i64 )
+    while ( m_pItems != v6 );
+    if ( m_pItems != v6 && m_pItems != (MapStruct<unsigned long,AkStateGroupInfo *> *)-8i64 )
       return 1i64;
   }
   v8 = (CAkSplitterBus *)AK::MemoryMgr::Malloc(g_DefaultPoolId, 0x20ui64);
@@ -313,8 +299,8 @@ signed __int64 __fastcall CAkStateMgr::AddStateGroup(CAkStateMgr *this, unsigned
   *(_QWORD *)&v8->m_iMaxPlayers = 0i64;
   v8[1].m_aBusses.m_pItems = 0i64;
   if ( !CAkKeyArray<unsigned long,AkStateGroupInfo *,4>::Set(
-          (CAkKeyArray<unsigned long,CAkSplitterBus *,4> *)v4,
-          v3,
+          (CAkKeyArray<unsigned long,CAkSplitterBus *,4> *)this,
+          in_ulStateGroupID,
           v8) )
   {
     v5 = 2;
@@ -326,35 +312,38 @@ signed __int64 __fastcall CAkStateMgr::AddStateGroup(CAkStateMgr *this, unsigned
 
 // File Line: 141
 // RVA: 0xA46400
-signed __int64 __fastcall CAkStateMgr::AddStateGroupMember(CAkStateMgr *this, unsigned int in_ulStateGroupID, AkStateGroupChunk *in_pMember)
+__int64 __fastcall CAkStateMgr::AddStateGroupMember(
+        CAkStateMgr *this,
+        unsigned int in_ulStateGroupID,
+        AkStateGroupChunk *in_pMember)
 {
-  MapStruct<unsigned long,AkStateGroupInfo *> *v3; // rax
+  MapStruct<unsigned long,AkStateGroupInfo *> *m_pItems; // rax
   MapStruct<unsigned long,AkStateGroupInfo *> *v4; // rcx
-  AkStateGroupInfo **v5; // rax
+  AkStateGroupInfo **p_item; // rax
   AkStateGroupInfo *v6; // rax
-  AkStateGroupChunk *v7; // rcx
+  AkStateGroupChunk *m_pFirst; // rcx
 
-  v3 = this->m_StateGroups.m_pItems;
+  m_pItems = this->m_StateGroups.m_pItems;
   v4 = &this->m_StateGroups.m_pItems[this->m_StateGroups.m_uLength];
-  if ( v3 == v4 )
+  if ( m_pItems == v4 )
     return 20i64;
   do
   {
-    if ( v3->key == in_ulStateGroupID )
+    if ( m_pItems->key == in_ulStateGroupID )
       break;
-    ++v3;
+    ++m_pItems;
   }
-  while ( v3 != v4 );
-  if ( v3 == v4 )
+  while ( m_pItems != v4 );
+  if ( m_pItems == v4 )
     return 20i64;
-  v5 = &v3->item;
-  if ( !v5 )
+  p_item = &m_pItems->item;
+  if ( !p_item )
     return 20i64;
-  v6 = *v5;
-  v7 = v6->members.m_pFirst;
-  if ( v7 )
+  v6 = *p_item;
+  m_pFirst = v6->members.m_pFirst;
+  if ( m_pFirst )
   {
-    in_pMember->m_pNextInGroup = v7;
+    in_pMember->m_pNextInGroup = m_pFirst;
     v6->members.m_pFirst = in_pMember;
   }
   else
@@ -367,67 +356,71 @@ signed __int64 __fastcall CAkStateMgr::AddStateGroupMember(CAkStateMgr *this, un
 
 // File Line: 156
 // RVA: 0xA47180
-signed __int64 __fastcall CAkStateMgr::SetdefaultTransitionTime(CAkStateMgr *this, unsigned int in_ulStateGroupID, int lTransitionTime)
+__int64 __fastcall CAkStateMgr::SetdefaultTransitionTime(
+        CAkStateMgr *this,
+        unsigned int in_ulStateGroupID,
+        int lTransitionTime)
 {
-  MapStruct<unsigned long,AkStateGroupInfo *> *v3; // rax
+  MapStruct<unsigned long,AkStateGroupInfo *> *m_pItems; // rax
   MapStruct<unsigned long,AkStateGroupInfo *> *v4; // rcx
-  _DWORD **v5; // rax
+  AkStateGroupInfo **p_item; // rax
 
-  v3 = this->m_StateGroups.m_pItems;
+  m_pItems = this->m_StateGroups.m_pItems;
   v4 = &this->m_StateGroups.m_pItems[this->m_StateGroups.m_uLength];
-  if ( v3 == v4 )
+  if ( m_pItems == v4 )
     return 20i64;
   do
   {
-    if ( v3->key == in_ulStateGroupID )
+    if ( m_pItems->key == in_ulStateGroupID )
       break;
-    ++v3;
+    ++m_pItems;
   }
-  while ( v3 != v4 );
-  if ( v3 == v4 )
+  while ( m_pItems != v4 );
+  if ( m_pItems == v4 )
     return 20i64;
-  v5 = (_DWORD **)&v3->item;
-  if ( !v5 )
+  p_item = &m_pItems->item;
+  if ( !p_item )
     return 20i64;
-  **v5 = lTransitionTime;
+  (*p_item)->lDefaultTransitionTime = lTransitionTime;
   return 1i64;
 }
 
 // File Line: 198
 // RVA: 0xA46C30
-signed __int64 __fastcall CAkStateMgr::RemoveStateGroupMember(CAkStateMgr *this, unsigned int in_ulStateGroupID, AkStateGroupChunk *in_pMember)
+__int64 __fastcall CAkStateMgr::RemoveStateGroupMember(
+        CAkStateMgr *this,
+        unsigned int in_ulStateGroupID,
+        AkStateGroupChunk *in_pMember)
 {
-  MapStruct<unsigned long,AkStateGroupInfo *> *v3; // rax
-  AkStateGroupChunk *v4; // r9
+  MapStruct<unsigned long,AkStateGroupInfo *> *m_pItems; // rax
   MapStruct<unsigned long,AkStateGroupInfo *> *v5; // rcx
-  AkStateGroupInfo *v6; // r8
+  AkStateGroupInfo *item; // r8
   AkStateGroupChunk *v7; // rdx
-  AkStateGroupChunk *v8; // rcx
+  AkStateGroupChunk *m_pFirst; // rcx
   AkStateGroupChunk *v9; // rax
   bool v11; // zf
-  AkStateGroupChunk *v12; // rcx
+  AkStateGroupChunk *m_pNextInGroup; // rcx
 
-  v3 = this->m_StateGroups.m_pItems;
-  v4 = in_pMember;
+  m_pItems = this->m_StateGroups.m_pItems;
   v5 = &this->m_StateGroups.m_pItems[this->m_StateGroups.m_uLength];
-  if ( v3 == v5 )
+  if ( m_pItems == v5 )
     return 20i64;
   do
   {
-    if ( v3->key == in_ulStateGroupID )
+    if ( m_pItems->key == in_ulStateGroupID )
       break;
-    ++v3;
+    ++m_pItems;
   }
-  while ( v3 != v5 );
-  if ( v3 == v5 || v3 == (MapStruct<unsigned long,AkStateGroupInfo *> *)-8i64 )
+  while ( m_pItems != v5 );
+  if ( m_pItems == v5 || m_pItems == (MapStruct<unsigned long,AkStateGroupInfo *> *)-8i64 )
     return 20i64;
-  v6 = v3->item;
+  item = m_pItems->item;
   v7 = 0i64;
-  v8 = v6->members.m_pFirst;
-  v9 = v8;
-  if ( v8 )
+  m_pFirst = item->members.m_pFirst;
+  v9 = m_pFirst;
+  if ( m_pFirst )
   {
-    while ( v9 != v4 )
+    while ( v9 != in_pMember )
     {
       v7 = v9;
       v9 = v9->m_pNextInGroup;
@@ -436,14 +429,14 @@ signed __int64 __fastcall CAkStateMgr::RemoveStateGroupMember(CAkStateMgr *this,
     }
     if ( v9 )
     {
-      v11 = v9 == v8;
-      v12 = v9->m_pNextInGroup;
+      v11 = v9 == m_pFirst;
+      m_pNextInGroup = v9->m_pNextInGroup;
       if ( v11 )
       {
-        v6->members.m_pFirst = v12;
+        item->members.m_pFirst = m_pNextInGroup;
         return 1i64;
       }
-      v7->m_pNextInGroup = v12;
+      v7->m_pNextInGroup = m_pNextInGroup;
     }
   }
   return 1i64;
@@ -451,33 +444,38 @@ signed __int64 __fastcall CAkStateMgr::RemoveStateGroupMember(CAkStateMgr *this,
 
 // File Line: 214
 // RVA: 0xA46460
-signed __int64 __fastcall CAkStateMgr::AddStateTransition(CAkStateMgr *this, unsigned int in_ulStateGroupID, unsigned int in_ulStateID1, unsigned int in_ulStateID2, int lTransitionTime, bool in_bIsShared)
+__int64 __fastcall CAkStateMgr::AddStateTransition(
+        CAkStateMgr *this,
+        unsigned int in_ulStateGroupID,
+        unsigned int in_ulStateID1,
+        unsigned int in_ulStateID2,
+        int lTransitionTime,
+        bool in_bIsShared)
 {
-  MapStruct<unsigned long,AkStateGroupInfo *> *v6; // rax
-  unsigned int v7; // esi
-  unsigned int v8; // ebp
+  MapStruct<unsigned long,AkStateGroupInfo *> *m_pItems; // rax
   MapStruct<unsigned long,AkStateGroupInfo *> *i; // rcx
-  CAkKeyArray<AkStateTransition,long,5> **v10; // rbx
+  CAkKeyArray<AkStateTransition,long,5> **p_item; // rbx
 
-  v6 = this->m_StateGroups.m_pItems;
-  v7 = in_ulStateID2;
-  v8 = in_ulStateID1;
-  for ( i = &this->m_StateGroups.m_pItems[this->m_StateGroups.m_uLength]; v6 != i; ++v6 )
+  m_pItems = this->m_StateGroups.m_pItems;
+  for ( i = &this->m_StateGroups.m_pItems[this->m_StateGroups.m_uLength]; m_pItems != i; ++m_pItems )
   {
-    if ( v6->key == in_ulStateGroupID )
+    if ( m_pItems->key == in_ulStateGroupID )
       break;
   }
-  if ( v6 == i )
+  if ( m_pItems == i )
     return 20i64;
-  v10 = (CAkKeyArray<AkStateTransition,long,5> **)&v6->item;
-  if ( v6 == (MapStruct<unsigned long,AkStateGroupInfo *> *)-8i64 )
+  p_item = (CAkKeyArray<AkStateTransition,long,5> **)&m_pItems->item;
+  if ( m_pItems == (MapStruct<unsigned long,AkStateGroupInfo *> *)-8i64 )
     return 20i64;
   if ( CAkKeyArray<AkStateTransition,long,5>::Set(
-         *v10 + 1,
-         (AkStateTransition)__PAIR__(in_ulStateID2, in_ulStateID1),
+         *p_item + 1,
+         (AkStateTransition)__PAIR64__(in_ulStateID2, in_ulStateID1),
          lTransitionTime)
     && (!in_bIsShared
-     || CAkKeyArray<AkStateTransition,long,5>::Set(*v10 + 1, (AkStateTransition)__PAIR__(v8, v7), lTransitionTime)) )
+     || CAkKeyArray<AkStateTransition,long,5>::Set(
+          *p_item + 1,
+          (AkStateTransition)__PAIR64__(in_ulStateID1, in_ulStateID2),
+          lTransitionTime)) )
   {
     return 1i64;
   }
@@ -486,138 +484,137 @@ signed __int64 __fastcall CAkStateMgr::AddStateTransition(CAkStateMgr *this, uns
 
 // File Line: 284
 // RVA: 0xA46DF0
-void __fastcall CAkStateMgr::SetStateInternal(CAkStateMgr *this, unsigned int in_ulStateGroupID, unsigned int in_ulStateID, bool in_bSkipTransitionTime, bool in_bSkipExtension)
+void __fastcall CAkStateMgr::SetStateInternal(
+        CAkStateMgr *this,
+        unsigned int in_ulStateGroupID,
+        unsigned int in_ulStateID,
+        bool in_bSkipTransitionTime,
+        bool in_bSkipExtension)
 {
-  MapStruct<unsigned long,AkStateGroupInfo *> *v5; // rax
-  bool v6; // di
+  MapStruct<unsigned long,AkStateGroupInfo *> *m_pItems; // rax
   unsigned int v7; // ebp
-  unsigned int v8; // ebx
   MapStruct<unsigned long,AkStateGroupInfo *> *v9; // r10
-  __int64 *v10; // rax
+  __int64 *p_item; // rax
   __int64 v11; // r14
   int in_NewDuration; // esi
   _DWORD *v13; // rax
-  signed __int64 v14; // rcx
+  _DWORD *v14; // rcx
   int *v15; // rax
-  __int64 v16; // rbx
-  CAkState *v17; // rax
-  __int64 *v18; // r13
+  AkStateGroupChunk *v16; // rbx
+  CAkState *State; // rax
+  __int64 *p_m_props; // r13
   unsigned __int8 v19; // bp
   const bool *v20; // r15
-  unsigned __int8 *v21; // r8
-  unsigned int v22; // er9
+  char *m_pProps; // r8
+  unsigned int v22; // r9d
   int v23; // ecx
   __int64 v24; // rdx
   AkStateValue *v25; // rdi
   unsigned __int8 *v26; // r8
-  unsigned int v27; // er9
+  unsigned int v27; // r9d
   __int64 v28; // rcx
   __int64 v29; // rdx
   float v30; // xmm6_4
-  CAkTransition *v31; // rdx
+  CAkTransition *pTransition; // rdx
   float *v32; // rdx
-  float v33; // xmm0_4
+  float fValue; // xmm0_4
   bool v34; // al
   CAkTransition *v35; // rsi
   char v36; // di
   __int64 v37; // r8
   __int64 v38; // r9
   int v39; // [rsp+40h] [rbp-88h]
-  __int64 v40; // [rsp+48h] [rbp-80h]
+  __int64 v40; // [rsp+48h] [rbp-80h] BYREF
   __int64 v41; // [rsp+50h] [rbp-78h]
-  TransitionParameters in_Params; // [rsp+58h] [rbp-70h]
+  TransitionParameters in_Params; // [rsp+58h] [rbp-70h] BYREF
   char v43; // [rsp+D0h] [rbp+8h]
-  unsigned int v44; // [rsp+E0h] [rbp+18h]
 
-  v44 = in_ulStateID;
-  v5 = this->m_StateGroups.m_pItems;
-  v6 = in_bSkipTransitionTime;
+  m_pItems = this->m_StateGroups.m_pItems;
   v7 = in_ulStateID;
-  v8 = in_ulStateGroupID;
   v9 = &this->m_StateGroups.m_pItems[this->m_StateGroups.m_uLength];
   if ( this->m_StateGroups.m_pItems != v9 )
   {
     do
     {
-      if ( v5->key == in_ulStateGroupID )
+      if ( m_pItems->key == in_ulStateGroupID )
         break;
-      ++v5;
+      ++m_pItems;
     }
-    while ( v5 != v9 );
-    if ( v5 != v9 )
+    while ( m_pItems != v9 );
+    if ( m_pItems != v9 )
     {
-      v10 = (__int64 *)&v5->item;
-      if ( v10 )
+      p_item = (__int64 *)&m_pItems->item;
+      if ( p_item )
       {
-        v11 = *v10;
-        v41 = *v10;
+        v11 = *p_item;
+        v41 = *p_item;
         if ( in_bSkipExtension
           || (CAkStateMgr::UpdateSwitches(this, in_ulStateGroupID, *(_DWORD *)(v11 + 4), in_ulStateID),
               !g_pExternalStateHandler)
-          || v6
-          || !g_pExternalStateHandler(v8, v7) )
+          || in_bSkipTransitionTime
+          || !g_pExternalStateHandler(in_ulStateGroupID, v7) )
         {
           in_NewDuration = 0;
           v39 = 0;
-          if ( !v6 )
+          if ( !in_bSkipTransitionTime )
           {
             v13 = *(_DWORD **)(v11 + 16);
-            v14 = (signed __int64)&v13[3 * *(unsigned int *)(v11 + 24)];
-            if ( v13 == (_DWORD *)v14 )
-              goto LABEL_62;
+            v14 = &v13[3 * *(unsigned int *)(v11 + 24)];
+            if ( v13 == v14 )
+              goto LABEL_18;
             do
             {
               if ( *v13 == *(_DWORD *)(v11 + 4) && v13[1] == v7 )
                 break;
               v13 += 3;
             }
-            while ( v13 != (_DWORD *)v14 );
-            if ( v13 != (_DWORD *)v14 && (v15 = v13 + 2) != 0i64 )
-              in_NewDuration = *v15;
-            else
-LABEL_62:
+            while ( v13 != v14 );
+            if ( v13 == v14 || (v15 = v13 + 2) == 0i64 )
+LABEL_18:
               in_NewDuration = *(_DWORD *)v11;
+            else
+              in_NewDuration = *v15;
             v39 = in_NewDuration;
           }
-          v16 = *(_QWORD *)(v11 + 8);
+          v16 = *(AkStateGroupChunk **)(v11 + 8);
           if ( v16 )
           {
             v40 = 0i64;
             while ( 1 )
             {
               v43 = 0;
-              *(_DWORD *)(v16 + 60) = v7;
-              v17 = AkStateGroupChunk::GetState((AkStateGroupChunk *)v16, v7);
-              v18 = (__int64 *)&v17->m_props;
-              if ( !v17 )
-                v18 = &v40;
+              v16->m_ulActualState = v7;
+              State = AkStateGroupChunk::GetState(v16, v7);
+              p_m_props = (__int64 *)&State->m_props;
+              if ( !State )
+                p_m_props = &v40;
               v19 = 0;
               v20 = g_AkPropDecibel;
               do
               {
-                v21 = *(unsigned __int8 **)(v16 + 32);
-                if ( v21 )
+                m_pProps = v16->m_values.m_pProps;
+                if ( m_pProps )
                 {
-                  v22 = *v21;
+                  v22 = (unsigned __int8)*m_pProps;
                   v23 = 0;
                   while ( 1 )
                   {
                     v24 = (unsigned int)(v23 + 1);
-                    if ( v21[v24] == v19 )
+                    if ( m_pProps[v24] == v19 )
                       break;
                     ++v23;
                     if ( (unsigned int)v24 >= v22 )
                       goto LABEL_29;
                   }
-                  v25 = (AkStateValue *)&v21[16 * v23 + ((v22 + 4) & 0xFFFFFFFC)];
+                  v25 = (AkStateValue *)&m_pProps[16 * v23 + ((v22 + 4) & 0xFFFFFFFC)];
                 }
                 else
                 {
 LABEL_29:
                   v25 = 0i64;
                 }
-                v26 = (unsigned __int8 *)*v18;
-                if ( !*v18 )
+                v26 = (unsigned __int8 *)*p_m_props;
+                if ( !*p_m_props )
                   goto LABEL_34;
                 v27 = *v26;
                 v28 = 0i64;
@@ -638,40 +635,40 @@ LABEL_34:
                   v30 = 0.0;
                 if ( v25 )
                 {
-                  v31 = v25->pTransition;
-                  if ( v31 )
+                  pTransition = v25->pTransition;
+                  if ( pTransition )
                   {
                     CAkTransitionManager::ChangeParameter(
                       g_pTransitionManager,
-                      v31,
+                      pTransition,
                       v19,
                       v30,
                       in_NewDuration,
                       AkCurveInterpolation_Linear,
-                      0);
+                      AkValueMeaning_Default);
                     goto LABEL_48;
                   }
-                  v33 = v25->fValue;
+                  fValue = v25->fValue;
                 }
                 else
                 {
-                  v33 = 0.0;
+                  fValue = 0.0;
                 }
-                if ( v33 == v30 )
+                if ( fValue == v30 )
                   goto LABEL_48;
                 v34 = *v20;
-                in_Params.fStartValue = v33;
+                in_Params.fStartValue = fValue;
                 in_Params.fTargetValue = v30;
-                in_Params.pUser = (ITransitionable *)v16;
+                in_Params.pUser = v16;
                 in_Params.bdBs = v34;
                 in_Params.eTarget = v19;
                 in_Params.lDuration = in_NewDuration;
-                in_Params.eFadeCurve = 4;
+                in_Params.eFadeCurve = AkCurveInterpolation_Linear;
                 in_Params.bUseReciprocalCurve = 1;
                 v35 = CAkTransitionManager::AddTransitionToList(g_pTransitionManager, &in_Params, 1, TC_State);
                 if ( !v25 )
                 {
-                  v25 = AkPropBundle<AkStateValue>::AddAkProp((AkPropBundle<AkStateValue> *)(v16 + 32), v19);
+                  v25 = AkPropBundle<AkStateValue>::AddAkProp(&v16->m_values, v19);
                   if ( !v25 )
                   {
                     if ( v35 )
@@ -682,14 +679,18 @@ LABEL_34:
                 v25->pTransition = v35;
                 if ( v35 )
                 {
-                  if ( !(*(unsigned __int8 (__fastcall **)(_QWORD, signed __int64))(**(_QWORD **)(v16 + 24) + 304i64))(
-                          *(_QWORD *)(v16 + 24),
+                  if ( !((unsigned __int8 (__fastcall *)(CAkParameterNodeBase *, __int64))v16->m_pOwner->vfptr[9].Release)(
+                          v16->m_pOwner,
                           3i64) )
                   {
                     LOBYTE(v38) = 1;
-                    (**(void (__fastcall ***)(__int64, _QWORD, __int64, __int64))v16)(v16, v19, v37, v38);
+                    ((void (__fastcall *)(AkStateGroupChunk *, _QWORD, __int64, __int64))v16->vfptr->TransUpdateValue)(
+                      v16,
+                      v19,
+                      v37,
+                      v38);
 LABEL_47:
-                    CAkTransitionManager::RemoveTransitionUser(g_pTransitionManager, v35, (ITransitionable *)v16);
+                    CAkTransitionManager::RemoveTransitionUser(g_pTransitionManager, v35, v16);
                   }
 LABEL_48:
                   v36 = v43;
@@ -705,9 +706,9 @@ LABEL_49:
               }
               while ( v19 < 5u );
               if ( v36 )
-                (*(void (**)(void))(**(_QWORD **)(v16 + 24) + 408i64))();
-              v16 = *(_QWORD *)(v16 + 8);
-              v7 = v44;
+                v16->m_pOwner->vfptr[12].Category(v16->m_pOwner);
+              v16 = v16->m_pNextInGroup;
+              v7 = in_ulStateID;
               if ( !v16 )
               {
                 v11 = v41;
@@ -726,72 +727,68 @@ LABEL_49:
 // RVA: 0xA46600
 __int64 __fastcall CAkStateMgr::GetState(CAkStateMgr *this, unsigned int in_ulStateGroupID)
 {
-  MapStruct<unsigned long,AkStateGroupInfo *> *v2; // rax
+  MapStruct<unsigned long,AkStateGroupInfo *> *m_pItems; // rax
   MapStruct<unsigned long,AkStateGroupInfo *> *v3; // rcx
-  signed __int64 v4; // rax
-  __int64 result; // rax
+  AkStateGroupInfo **p_item; // rax
 
-  v2 = this->m_StateGroups.m_pItems;
+  m_pItems = this->m_StateGroups.m_pItems;
   v3 = &this->m_StateGroups.m_pItems[this->m_StateGroups.m_uLength];
-  if ( v2 == v3 )
-    goto LABEL_10;
+  if ( m_pItems == v3 )
+    return 0i64;
   do
   {
-    if ( v2->key == in_ulStateGroupID )
+    if ( m_pItems->key == in_ulStateGroupID )
       break;
-    ++v2;
+    ++m_pItems;
   }
-  while ( v2 != v3 );
-  if ( v2 != v3 && (v4 = (signed __int64)&v2->item) != 0 )
-    result = *(unsigned int *)(*(_QWORD *)v4 + 4i64);
+  while ( m_pItems != v3 );
+  if ( m_pItems == v3 )
+    return 0i64;
+  p_item = &m_pItems->item;
+  if ( !p_item )
+    return 0i64;
   else
-LABEL_10:
-    result = 0i64;
-  return result;
+    return (*p_item)->ActualState;
 }
 
 // File Line: 486
 // RVA: 0xA46B50
-signed __int64 __fastcall CAkStateMgr::RemoveAllStateGroups(CAkStateMgr *this, bool in_bIsFromClearBanks)
+__int64 __fastcall CAkStateMgr::RemoveAllStateGroups(CAkStateMgr *this, bool in_bIsFromClearBanks)
 {
-  MapStruct<unsigned long,AkStateGroupInfo *> *v2; // rbx
-  bool v3; // bp
-  CAkStateMgr *v4; // rsi
-  AkStateGroupInfo *v5; // rdi
+  MapStruct<unsigned long,AkStateGroupInfo *> *m_pItems; // rbx
+  AkStateGroupInfo *item; // rdi
   MapStruct<AkStateTransition,long> *v6; // rdx
-  unsigned int v7; // eax
-  signed __int64 v8; // rcx
+  unsigned int m_uLength; // eax
+  MapStruct<unsigned long,AkStateGroupInfo *> *v8; // rcx
 
-  v2 = this->m_StateGroups.m_pItems;
-  v3 = in_bIsFromClearBanks;
-  v4 = this;
-  while ( v2 != &v4->m_StateGroups.m_pItems[v4->m_StateGroups.m_uLength] )
+  m_pItems = this->m_StateGroups.m_pItems;
+  while ( m_pItems != &this->m_StateGroups.m_pItems[this->m_StateGroups.m_uLength] )
   {
-    v5 = v2->item;
-    if ( v3 && v5->members.m_pFirst )
+    item = m_pItems->item;
+    if ( in_bIsFromClearBanks && item->members.m_pFirst )
     {
-      ++v2;
+      ++m_pItems;
     }
     else
     {
-      v6 = v5->mapTransitions.m_pItems;
+      v6 = item->mapTransitions.m_pItems;
       if ( v6 )
       {
-        v5->mapTransitions.m_uLength = 0;
+        item->mapTransitions.m_uLength = 0;
         AK::MemoryMgr::Free(g_DefaultPoolId, v6);
-        v5->mapTransitions.m_pItems = 0i64;
-        v5->mapTransitions.m_ulReserved = 0;
+        item->mapTransitions.m_pItems = 0i64;
+        item->mapTransitions.m_ulReserved = 0;
       }
-      v5->members.m_pFirst = 0i64;
-      AK::MemoryMgr::Free(g_DefaultPoolId, v5);
-      v7 = v4->m_StateGroups.m_uLength;
-      if ( v7 > 1 )
+      item->members.m_pFirst = 0i64;
+      AK::MemoryMgr::Free(g_DefaultPoolId, item);
+      m_uLength = this->m_StateGroups.m_uLength;
+      if ( m_uLength > 1 )
       {
-        v8 = (signed __int64)&v4->m_StateGroups.m_pItems[v7];
-        *(_QWORD *)&v2->key = *(_QWORD *)(v8 - 16);
-        v2->item = *(AkStateGroupInfo **)(v8 - 8);
+        v8 = &this->m_StateGroups.m_pItems[m_uLength];
+        *(_QWORD *)&m_pItems->key = *(_QWORD *)&v8[-1].key;
+        m_pItems->item = v8[-1].item;
       }
-      --v4->m_StateGroups.m_uLength;
+      --this->m_StateGroups.m_uLength;
     }
   }
   return 1i64;
@@ -799,20 +796,19 @@ signed __int64 __fastcall CAkStateMgr::RemoveAllStateGroups(CAkStateMgr *this, b
 
 // File Line: 506
 // RVA: 0xA468F0
-signed __int64 __fastcall CAkStateMgr::RegisterSwitch(CAkStateMgr *this, CAkSwitchAware *in_pSwitchCntr, unsigned int in_ulStateGroup)
+__int64 __fastcall CAkStateMgr::RegisterSwitch(
+        CAkStateMgr *this,
+        CAkSwitchAware *in_pSwitchCntr,
+        unsigned int in_ulStateGroup)
 {
-  CAkSwitchAware *v3; // rdi
-  CAkStateMgr *v4; // rbx
   CAkList2<CAkStateMgr::RegisteredSwitch,CAkStateMgr::RegisteredSwitch const &,1,ArrayPoolDefault>::ListItem *v5; // rcx
-  CAkList2<CAkStateMgr::RegisteredSwitch,CAkStateMgr::RegisteredSwitch const &,1,ArrayPoolDefault>::ListItem *v6; // rcx
-  CAkList2<CAkStateMgr::RegisteredSwitch,CAkStateMgr::RegisteredSwitch const &,1,ArrayPoolDefault>::ListItem *v7; // rax
-  signed __int64 result; // rax
+  CAkList2<CAkStateMgr::RegisteredSwitch,CAkStateMgr::RegisteredSwitch const &,1,ArrayPoolDefault>::ListItem *m_pLast; // rcx
+  CAkList2<CAkStateMgr::RegisteredSwitch,CAkStateMgr::RegisteredSwitch const &,1,ArrayPoolDefault>::ListItem *m_pFree; // rax
+  __int64 result; // rax
   CAkList2<CAkStateMgr::RegisteredSwitch,CAkStateMgr::RegisteredSwitch const &,1,ArrayPoolDefault>::ListItem *v9; // rdx
   CAkList2<CAkStateMgr::RegisteredSwitch,CAkStateMgr::RegisteredSwitch const &,1,ArrayPoolDefault>::ListItem *v10; // rdx
   __int64 v11; // [rsp+28h] [rbp-10h]
 
-  v3 = in_pSwitchCntr;
-  v4 = this;
   if ( !in_pSwitchCntr )
     return 31i64;
   LODWORD(v11) = in_ulStateGroup;
@@ -823,76 +819,71 @@ signed __int64 __fastcall CAkStateMgr::RegisterSwitch(CAkStateMgr *this, CAkSwit
     v5 = (CAkList2<CAkStateMgr::RegisteredSwitch,CAkStateMgr::RegisteredSwitch const &,1,ArrayPoolDefault>::ListItem *)AK::MemoryMgr::Malloc(g_DefaultPoolId, 0x18ui64);
     if ( !v5 )
       return 2i64;
-    v5->pNextListItem = v4->m_listRegisteredSwitch.m_pFree;
-    v4->m_listRegisteredSwitch.m_pFree = v5;
+    v5->pNextListItem = this->m_listRegisteredSwitch.m_pFree;
+    this->m_listRegisteredSwitch.m_pFree = v5;
   }
-  v6 = v4->m_listRegisteredSwitch.m_pLast;
-  v7 = v4->m_listRegisteredSwitch.m_pFree;
-  if ( v6 )
-    v6->pNextListItem = v7;
+  m_pLast = this->m_listRegisteredSwitch.m_pLast;
+  m_pFree = this->m_listRegisteredSwitch.m_pFree;
+  if ( m_pLast )
+    m_pLast->pNextListItem = m_pFree;
   else
-    v4->m_listRegisteredSwitch.m_pFirst = v7;
-  v9 = v4->m_listRegisteredSwitch.m_pFree;
+    this->m_listRegisteredSwitch.m_pFirst = m_pFree;
+  v9 = this->m_listRegisteredSwitch.m_pFree;
   result = 1i64;
-  v4->m_listRegisteredSwitch.m_pLast = v9;
-  v4->m_listRegisteredSwitch.m_pFree = v9->pNextListItem;
+  this->m_listRegisteredSwitch.m_pLast = v9;
+  this->m_listRegisteredSwitch.m_pFree = v9->pNextListItem;
   v9->pNextListItem = 0i64;
-  v10 = v4->m_listRegisteredSwitch.m_pLast;
-  ++v4->m_listRegisteredSwitch.m_ulNumListItems;
-  v10->Item.pSwitch = v3;
+  v10 = this->m_listRegisteredSwitch.m_pLast;
+  ++this->m_listRegisteredSwitch.m_ulNumListItems;
+  v10->Item.pSwitch = in_pSwitchCntr;
   *(_QWORD *)&v10->Item.ulStateGroup = v11;
   return result;
 }
 
 // File Line: 528
 // RVA: 0xA47580
-signed __int64 __fastcall CAkStateMgr::UnregisterSwitch(CAkStateMgr *this, CAkSwitchAware *in_pSwitchCntr)
+__int64 __fastcall CAkStateMgr::UnregisterSwitch(CAkStateMgr *this, CAkSwitchAware *in_pSwitchCntr)
 {
-  CAkSwitchAware *v2; // rdi
-  CAkList2<CAkStateMgr::RegisteredSwitch,CAkStateMgr::RegisteredSwitch const &,1,ArrayPoolDefault>::ListItem *v3; // rdx
+  CAkList2<CAkStateMgr::RegisteredSwitch,CAkStateMgr::RegisteredSwitch const &,1,ArrayPoolDefault>::ListItem *m_pFirst; // rdx
   CAkList2<CAkStateMgr::RegisteredSwitch,CAkStateMgr::RegisteredSwitch const &,1,ArrayPoolDefault>::ListItem *v4; // rax
-  CAkStateMgr *v5; // rbx
-  CAkList2<CAkStateMgr::RegisteredSwitch,CAkStateMgr::RegisteredSwitch const &,1,ArrayPoolDefault>::ListItem *v6; // rcx
-  CAkList2<CAkStateMgr::RegisteredSwitch,CAkStateMgr::RegisteredSwitch const &,1,ArrayPoolDefault>::ListItem *v7; // r8
-  __m128i v9; // [rsp+20h] [rbp-28h]
-  __m128i v10; // [rsp+30h] [rbp-18h]
+  CAkList2<CAkStateMgr::RegisteredSwitch,CAkStateMgr::RegisteredSwitch const &,1,ArrayPoolDefault>::ListItem *pNextListItem; // rcx
+  CAkList2<CAkStateMgr::RegisteredSwitch,CAkStateMgr::RegisteredSwitch const &,1,ArrayPoolDefault>::ListItem *m_pvMemStart; // r8
+  CAkList2<CAkStateMgr::RegisteredSwitch,CAkStateMgr::RegisteredSwitch const &,1,ArrayPoolDefault>::ListItem *v9; // [rsp+20h] [rbp-28h]
+  CAkList2<CAkStateMgr::RegisteredSwitch,CAkStateMgr::RegisteredSwitch const &,1,ArrayPoolDefault>::ListItem *v10; // [rsp+28h] [rbp-20h]
 
-  v2 = in_pSwitchCntr;
-  v3 = this->m_listRegisteredSwitch.m_pFirst;
+  m_pFirst = this->m_listRegisteredSwitch.m_pFirst;
   v4 = 0i64;
-  v5 = this;
-  while ( v3 )
+  while ( m_pFirst )
   {
-    if ( v3->Item.pSwitch == v2 )
+    if ( m_pFirst->Item.pSwitch == in_pSwitchCntr )
     {
-      v6 = v3->pNextListItem;
-      v9.m128i_i64[1] = (__int64)v4;
-      v9.m128i_i64[0] = (__int64)v3->pNextListItem;
-      if ( v3 == v5->m_listRegisteredSwitch.m_pFirst )
-        v5->m_listRegisteredSwitch.m_pFirst = v6;
+      pNextListItem = m_pFirst->pNextListItem;
+      v10 = v4;
+      v9 = m_pFirst->pNextListItem;
+      if ( m_pFirst == this->m_listRegisteredSwitch.m_pFirst )
+        this->m_listRegisteredSwitch.m_pFirst = pNextListItem;
       else
-        v4->pNextListItem = v6;
-      if ( v3 == v5->m_listRegisteredSwitch.m_pLast )
-        v5->m_listRegisteredSwitch.m_pLast = v4;
-      v7 = v5->m_listRegisteredSwitch.m_pvMemStart;
-      if ( v3 < v7 || v3 >= &v7[v5->m_listRegisteredSwitch.m_ulMinNumListItems] )
+        v4->pNextListItem = pNextListItem;
+      if ( m_pFirst == this->m_listRegisteredSwitch.m_pLast )
+        this->m_listRegisteredSwitch.m_pLast = v4;
+      m_pvMemStart = this->m_listRegisteredSwitch.m_pvMemStart;
+      if ( m_pFirst < m_pvMemStart || m_pFirst >= &m_pvMemStart[this->m_listRegisteredSwitch.m_ulMinNumListItems] )
       {
-        AK::MemoryMgr::Free(g_DefaultPoolId, v3);
+        AK::MemoryMgr::Free(g_DefaultPoolId, m_pFirst);
       }
       else
       {
-        v3->pNextListItem = v5->m_listRegisteredSwitch.m_pFree;
-        v5->m_listRegisteredSwitch.m_pFree = v3;
+        m_pFirst->pNextListItem = this->m_listRegisteredSwitch.m_pFree;
+        this->m_listRegisteredSwitch.m_pFree = m_pFirst;
       }
-      --v5->m_listRegisteredSwitch.m_ulNumListItems;
-      _mm_store_si128(&v10, v9);
-      v4 = (CAkList2<CAkStateMgr::RegisteredSwitch,CAkStateMgr::RegisteredSwitch const &,1,ArrayPoolDefault>::ListItem *)v10.m128i_i64[1];
-      v3 = (CAkList2<CAkStateMgr::RegisteredSwitch,CAkStateMgr::RegisteredSwitch const &,1,ArrayPoolDefault>::ListItem *)v10.m128i_i64[0];
+      --this->m_listRegisteredSwitch.m_ulNumListItems;
+      v4 = v10;
+      m_pFirst = v9;
     }
     else
     {
-      v4 = v3;
-      v3 = v3->pNextListItem;
+      v4 = m_pFirst;
+      m_pFirst = m_pFirst->pNextListItem;
     }
   }
   return 1i64;
@@ -900,32 +891,29 @@ signed __int64 __fastcall CAkStateMgr::UnregisterSwitch(CAkStateMgr *this, CAkSw
 
 // File Line: 548
 // RVA: 0xA46540
-CAkStateMgr::PreparationStateItem *__fastcall CAkStateMgr::GetPreparationItem(CAkStateMgr *this, unsigned int in_ulGroup, AkGroupType in_eGroupType)
+CAkStateMgr::PreparationStateItem *__fastcall CAkStateMgr::GetPreparationItem(
+        CAkStateMgr *this,
+        unsigned int in_ulGroup,
+        AkGroupType in_eGroupType)
 {
-  _RTL_CRITICAL_SECTION *v3; // rbx
-  CAkStateMgr *v4; // rsi
-  AkGroupType v5; // edi
-  unsigned int v6; // ebp
-  AkListBare<CAkStateMgr::PreparationStateItem,AkListBareNextItem<CAkStateMgr::PreparationStateItem>,AkCountPolicyNoCount> *v7; // rsi
-  CAkStateMgr::PreparationStateItem *v8; // rdi
+  CAkLock *p_m_PrepareGameSyncLock; // rbx
+  AkListBare<CAkStateMgr::PreparationStateItem,AkListBareNextItem<CAkStateMgr::PreparationStateItem>,AkCountPolicyNoCount> *p_m_PreparationGroupsStates; // rsi
+  CAkStateMgr::PreparationStateItem *m_pFirst; // rdi
   CAkStateMgr::PreparationStateItem *v9; // rax
 
-  v3 = &this->m_PrepareGameSyncLock.m_csLock;
-  v4 = this;
-  v5 = in_eGroupType;
-  v6 = in_ulGroup;
+  p_m_PrepareGameSyncLock = &this->m_PrepareGameSyncLock;
   EnterCriticalSection(&this->m_PrepareGameSyncLock.m_csLock);
-  if ( v5 == 1 )
-    v7 = &v4->m_PreparationGroupsStates;
+  if ( in_eGroupType == AkGroupType_State )
+    p_m_PreparationGroupsStates = &this->m_PreparationGroupsStates;
   else
-    v7 = &v4->m_PreparationGroupsSwitches;
-  v8 = v7->m_pFirst;
-  if ( v7->m_pFirst )
+    p_m_PreparationGroupsStates = &this->m_PreparationGroupsSwitches;
+  m_pFirst = p_m_PreparationGroupsStates->m_pFirst;
+  if ( p_m_PreparationGroupsStates->m_pFirst )
   {
-    while ( v6 != v8->m_GroupID )
+    while ( in_ulGroup != m_pFirst->m_GroupID )
     {
-      v8 = v8->pNextItem;
-      if ( !v8 )
+      m_pFirst = m_pFirst->pNextItem;
+      if ( !m_pFirst )
         goto LABEL_7;
     }
   }
@@ -933,86 +921,89 @@ CAkStateMgr::PreparationStateItem *__fastcall CAkStateMgr::GetPreparationItem(CA
   {
 LABEL_7:
     v9 = (CAkStateMgr::PreparationStateItem *)AK::MemoryMgr::Malloc(g_DefaultPoolId, 0x30ui64);
-    v8 = v9;
+    m_pFirst = v9;
     if ( v9 )
     {
       v9->pNextItem = 0i64;
       v9->m_PreparedContent.m_PreparableContentList.m_pItems = 0i64;
       *(_QWORD *)&v9->m_PreparedContent.m_PreparableContentList.m_uLength = 0i64;
-      v9->m_GroupID = v6;
+      v9->m_GroupID = in_ulGroup;
       v9->m_PreparationList.m_pFirst = 0i64;
       v9->m_PreparationList.m_pLast = 0i64;
-      if ( v7->m_pFirst )
+      if ( p_m_PreparationGroupsStates->m_pFirst )
       {
-        v9->pNextItem = v7->m_pFirst;
-        v7->m_pFirst = v9;
+        v9->pNextItem = p_m_PreparationGroupsStates->m_pFirst;
+        p_m_PreparationGroupsStates->m_pFirst = v9;
       }
       else
       {
-        v7->m_pLast = v9;
-        v7->m_pFirst = v9;
+        p_m_PreparationGroupsStates->m_pLast = v9;
+        p_m_PreparationGroupsStates->m_pFirst = v9;
         v9->pNextItem = 0i64;
       }
     }
   }
-  LeaveCriticalSection(v3);
-  return v8;
+  LeaveCriticalSection(&p_m_PrepareGameSyncLock->m_csLock);
+  return m_pFirst;
 }
 
 // File Line: 587
 // RVA: 0xA467F0
-__int64 __fastcall CAkStateMgr::PrepareGameSync(CAkStateMgr *this, AkGroupType in_eGroupType, unsigned int in_uGroupID, unsigned int in_uGameSyncID, bool in_bIsActive)
+__int64 __fastcall CAkStateMgr::PrepareGameSync(
+        CAkStateMgr *this,
+        AkGroupType in_eGroupType,
+        unsigned int in_uGroupID,
+        unsigned int in_uGameSyncID,
+        bool in_bIsActive)
 {
-  unsigned int v5; // esi
-  CAkStateMgr::PreparationStateItem *v6; // rax
+  CAkStateMgr::PreparationStateItem *PreparationItem; // rax
   CAkStateMgr::PreparationStateItem *v7; // r14
   __int64 result; // rax
-  __int64 v9; // rcx
-  unsigned int *v10; // rbx
-  signed __int64 i; // rax
+  __int64 m_uLength; // rcx
+  unsigned int *m_pItems; // rbx
+  unsigned int *i; // rax
   unsigned int *v12; // rax
   unsigned int v13; // ecx
 
-  v5 = in_uGameSyncID;
-  v6 = CAkStateMgr::GetPreparationItem(this, in_uGroupID, in_eGroupType);
-  v7 = v6;
-  if ( !v6 )
+  PreparationItem = CAkStateMgr::GetPreparationItem(this, in_uGroupID, in_eGroupType);
+  v7 = PreparationItem;
+  if ( !PreparationItem )
   {
     result = 1i64;
-    if ( in_bIsActive != (_BYTE)v7 )
-      result = 52i64;
+    if ( in_bIsActive )
+      return 52i64;
     return result;
   }
-  v9 = v6->m_PreparedContent.m_PreparableContentList.m_uLength;
-  v10 = v6->m_PreparedContent.m_PreparableContentList.m_pItems;
-  for ( i = (signed __int64)&v10[v9]; v10 != (unsigned int *)i; ++v10 )
+  m_uLength = PreparationItem->m_PreparedContent.m_PreparableContentList.m_uLength;
+  m_pItems = PreparationItem->m_PreparedContent.m_PreparableContentList.m_pItems;
+  for ( i = &m_pItems[m_uLength]; m_pItems != i; ++m_pItems )
   {
-    if ( *v10 == v5 )
+    if ( *m_pItems == in_uGameSyncID )
       break;
   }
-  if ( v10 == (unsigned int *)i )
+  if ( m_pItems == i )
   {
     if ( in_bIsActive )
     {
       v12 = AkArray<unsigned long,unsigned long,ArrayPoolDefault,4,AkArrayAllocatorDefault>::AddLast(&v7->m_PreparedContent.m_PreparableContentList);
       if ( v12 )
-        *v12 = v5;
+        *v12 = in_uGameSyncID;
       goto LABEL_17;
     }
     return 1i64;
   }
   if ( in_bIsActive )
     return 1i64;
-  if ( (unsigned int)v9 > 1 )
-    *v10 = *(_DWORD *)(i - 4);
+  if ( (unsigned int)m_uLength > 1 )
+    *m_pItems = *(i - 1);
   --v7->m_PreparedContent.m_PreparableContentList.m_uLength;
 LABEL_17:
-  result = CAkStateMgr::PreparationStateItem::Notify(v7, v5, in_bIsActive);
+  result = CAkStateMgr::PreparationStateItem::Notify(v7, in_uGameSyncID, in_bIsActive);
   if ( (_DWORD)result != 1 )
   {
     v13 = v7->m_PreparedContent.m_PreparableContentList.m_uLength;
     if ( v13 > 1 )
-      *v10 = v7->m_PreparedContent.m_PreparableContentList.m_pItems[v13 - 1];
+      *m_pItems = v7->m_PreparedContent.m_PreparableContentList.m_pItems[v13 - 1];
     --v7->m_PreparedContent.m_PreparableContentList.m_uLength;
   }
   return result;
@@ -1020,41 +1011,38 @@ LABEL_17:
 
 // File Line: 631
 // RVA: 0xA47700
-signed __int64 __fastcall CAkStateMgr::UpdateSwitches(CAkStateMgr *this, unsigned int in_ulStateGroup, unsigned int in_StateFrom, unsigned int in_StateTo)
+__int64 __fastcall CAkStateMgr::UpdateSwitches(
+        CAkStateMgr *this,
+        unsigned int in_ulStateGroup,
+        unsigned int in_StateFrom,
+        unsigned int in_StateTo)
 {
-  unsigned int v4; // esi
-  unsigned int v5; // edi
   CAkList2<CAkStateMgr::RegisteredSwitch,CAkStateMgr::RegisteredSwitch const &,1,ArrayPoolDefault>::ListItem *i; // rbx
 
-  v4 = in_StateTo;
-  v5 = in_ulStateGroup;
   if ( in_StateFrom == in_StateTo )
     return 1i64;
   for ( i = this->m_listRegisteredSwitch.m_pFirst; i; i = i->pNextListItem )
   {
-    if ( i->Item.ulStateGroup == v5 )
-      i->Item.pSwitch->vfptr->SetSwitch(i->Item.pSwitch, v4, 0i64);
+    if ( i->Item.ulStateGroup == in_ulStateGroup )
+      i->Item.pSwitch->vfptr->SetSwitch(i->Item.pSwitch, in_StateTo, 0i64);
   }
   return 1i64;
 }
 
 // File Line: 685
 // RVA: 0xA469B0
-signed __int64 __fastcall CAkStateMgr::RegisterTrigger(CAkStateMgr *this, IAkTriggerAware *in_pTrigerAware, CAkRegisteredObj *in_GameObj)
+__int64 __fastcall CAkStateMgr::RegisterTrigger(
+        CAkStateMgr *this,
+        IAkTriggerAware *in_pTrigerAware,
+        CAkRegisteredObj *in_GameObj)
 {
-  CAkRegisteredObj *v3; // rsi
-  IAkTriggerAware *v4; // rdi
-  CAkStateMgr *v5; // rbx
   CAkList2<CAkStateMgr::RegisteredTrigger,CAkStateMgr::RegisteredTrigger const &,1,ArrayPoolDefault>::ListItem *v6; // rax
-  CAkList2<CAkStateMgr::RegisteredTrigger,CAkStateMgr::RegisteredTrigger const &,1,ArrayPoolDefault>::ListItem *v7; // rcx
-  CAkList2<CAkStateMgr::RegisteredTrigger,CAkStateMgr::RegisteredTrigger const &,1,ArrayPoolDefault>::ListItem *v8; // rax
+  CAkList2<CAkStateMgr::RegisteredTrigger,CAkStateMgr::RegisteredTrigger const &,1,ArrayPoolDefault>::ListItem *m_pLast; // rcx
+  CAkList2<CAkStateMgr::RegisteredTrigger,CAkStateMgr::RegisteredTrigger const &,1,ArrayPoolDefault>::ListItem *m_pFree; // rax
   CAkList2<CAkStateMgr::RegisteredTrigger,CAkStateMgr::RegisteredTrigger const &,1,ArrayPoolDefault>::ListItem *v10; // rcx
   CAkList2<CAkStateMgr::RegisteredTrigger,CAkStateMgr::RegisteredTrigger const &,1,ArrayPoolDefault>::ListItem *v11; // rcx
   __int64 v12; // [rsp+28h] [rbp-20h]
 
-  v3 = in_GameObj;
-  v4 = in_pTrigerAware;
-  v5 = this;
   LODWORD(v12) = 0;
   if ( !this->m_listRegisteredTrigger.m_pFree )
   {
@@ -1063,76 +1051,71 @@ signed __int64 __fastcall CAkStateMgr::RegisterTrigger(CAkStateMgr *this, IAkTri
     v6 = (CAkList2<CAkStateMgr::RegisteredTrigger,CAkStateMgr::RegisteredTrigger const &,1,ArrayPoolDefault>::ListItem *)AK::MemoryMgr::Malloc(g_DefaultPoolId, 0x20ui64);
     if ( !v6 )
       return 2i64;
-    v6->pNextListItem = v5->m_listRegisteredTrigger.m_pFree;
-    v5->m_listRegisteredTrigger.m_pFree = v6;
+    v6->pNextListItem = this->m_listRegisteredTrigger.m_pFree;
+    this->m_listRegisteredTrigger.m_pFree = v6;
   }
-  v7 = v5->m_listRegisteredTrigger.m_pLast;
-  v8 = v5->m_listRegisteredTrigger.m_pFree;
-  if ( v7 )
-    v7->pNextListItem = v8;
+  m_pLast = this->m_listRegisteredTrigger.m_pLast;
+  m_pFree = this->m_listRegisteredTrigger.m_pFree;
+  if ( m_pLast )
+    m_pLast->pNextListItem = m_pFree;
   else
-    v5->m_listRegisteredTrigger.m_pFirst = v8;
-  v10 = v5->m_listRegisteredTrigger.m_pFree;
-  v5->m_listRegisteredTrigger.m_pLast = v10;
-  v5->m_listRegisteredTrigger.m_pFree = v10->pNextListItem;
+    this->m_listRegisteredTrigger.m_pFirst = m_pFree;
+  v10 = this->m_listRegisteredTrigger.m_pFree;
+  this->m_listRegisteredTrigger.m_pLast = v10;
+  this->m_listRegisteredTrigger.m_pFree = v10->pNextListItem;
   v10->pNextListItem = 0i64;
-  v11 = v5->m_listRegisteredTrigger.m_pLast;
-  ++v5->m_listRegisteredTrigger.m_ulNumListItems;
-  v11->Item.pTriggerAware = v4;
+  v11 = this->m_listRegisteredTrigger.m_pLast;
+  ++this->m_listRegisteredTrigger.m_ulNumListItems;
+  v11->Item.pTriggerAware = in_pTrigerAware;
   *(_QWORD *)&v11->Item.triggerID = v12;
-  v11->Item.gameObj = v3;
+  v11->Item.gameObj = in_GameObj;
   return 1i64;
 }
 
 // File Line: 700
 // RVA: 0xA47640
-signed __int64 __fastcall CAkStateMgr::UnregisterTrigger(CAkStateMgr *this, IAkTriggerAware *in_pTrigerAware)
+__int64 __fastcall CAkStateMgr::UnregisterTrigger(CAkStateMgr *this, IAkTriggerAware *in_pTrigerAware)
 {
-  CAkStateMgr *v2; // rbx
-  CAkList2<CAkStateMgr::RegisteredTrigger,CAkStateMgr::RegisteredTrigger const &,1,ArrayPoolDefault>::ListItem *v3; // rcx
+  CAkList2<CAkStateMgr::RegisteredTrigger,CAkStateMgr::RegisteredTrigger const &,1,ArrayPoolDefault>::ListItem *m_pFirst; // rcx
   CAkList2<CAkStateMgr::RegisteredTrigger,CAkStateMgr::RegisteredTrigger const &,1,ArrayPoolDefault>::ListItem *v4; // rax
-  IAkTriggerAware *v5; // rdi
-  CAkList2<CAkStateMgr::RegisteredTrigger,CAkStateMgr::RegisteredTrigger const &,1,ArrayPoolDefault>::ListItem *v6; // rdx
-  CAkList2<CAkStateMgr::RegisteredTrigger,CAkStateMgr::RegisteredTrigger const &,1,ArrayPoolDefault>::ListItem *v7; // rdx
-  __m128i v9; // [rsp+20h] [rbp-28h]
-  __m128i v10; // [rsp+30h] [rbp-18h]
+  CAkList2<CAkStateMgr::RegisteredTrigger,CAkStateMgr::RegisteredTrigger const &,1,ArrayPoolDefault>::ListItem *pNextListItem; // rdx
+  CAkList2<CAkStateMgr::RegisteredTrigger,CAkStateMgr::RegisteredTrigger const &,1,ArrayPoolDefault>::ListItem *m_pvMemStart; // rdx
+  CAkList2<CAkStateMgr::RegisteredTrigger,CAkStateMgr::RegisteredTrigger const &,1,ArrayPoolDefault>::ListItem *v9; // [rsp+20h] [rbp-28h]
+  CAkList2<CAkStateMgr::RegisteredTrigger,CAkStateMgr::RegisteredTrigger const &,1,ArrayPoolDefault>::ListItem *v10; // [rsp+28h] [rbp-20h]
 
-  v2 = this;
-  v3 = this->m_listRegisteredTrigger.m_pFirst;
+  m_pFirst = this->m_listRegisteredTrigger.m_pFirst;
   v4 = 0i64;
-  v5 = in_pTrigerAware;
-  while ( v3 )
+  while ( m_pFirst )
   {
-    if ( v3->Item.pTriggerAware == v5 )
+    if ( m_pFirst->Item.pTriggerAware == in_pTrigerAware )
     {
-      v6 = v3->pNextListItem;
-      v9.m128i_i64[1] = (__int64)v4;
-      v9.m128i_i64[0] = (__int64)v3->pNextListItem;
-      if ( v3 == v2->m_listRegisteredTrigger.m_pFirst )
-        v2->m_listRegisteredTrigger.m_pFirst = v6;
+      pNextListItem = m_pFirst->pNextListItem;
+      v10 = v4;
+      v9 = m_pFirst->pNextListItem;
+      if ( m_pFirst == this->m_listRegisteredTrigger.m_pFirst )
+        this->m_listRegisteredTrigger.m_pFirst = pNextListItem;
       else
-        v4->pNextListItem = v6;
-      if ( v3 == v2->m_listRegisteredTrigger.m_pLast )
-        v2->m_listRegisteredTrigger.m_pLast = v4;
-      v7 = v2->m_listRegisteredTrigger.m_pvMemStart;
-      if ( v3 < v7 || v3 >= &v7[v2->m_listRegisteredTrigger.m_ulMinNumListItems] )
+        v4->pNextListItem = pNextListItem;
+      if ( m_pFirst == this->m_listRegisteredTrigger.m_pLast )
+        this->m_listRegisteredTrigger.m_pLast = v4;
+      m_pvMemStart = this->m_listRegisteredTrigger.m_pvMemStart;
+      if ( m_pFirst < m_pvMemStart || m_pFirst >= &m_pvMemStart[this->m_listRegisteredTrigger.m_ulMinNumListItems] )
       {
-        AK::MemoryMgr::Free(g_DefaultPoolId, v3);
+        AK::MemoryMgr::Free(g_DefaultPoolId, m_pFirst);
       }
       else
       {
-        v3->pNextListItem = v2->m_listRegisteredTrigger.m_pFree;
-        v2->m_listRegisteredTrigger.m_pFree = v3;
+        m_pFirst->pNextListItem = this->m_listRegisteredTrigger.m_pFree;
+        this->m_listRegisteredTrigger.m_pFree = m_pFirst;
       }
-      --v2->m_listRegisteredTrigger.m_ulNumListItems;
-      _mm_store_si128(&v10, v9);
-      v4 = (CAkList2<CAkStateMgr::RegisteredTrigger,CAkStateMgr::RegisteredTrigger const &,1,ArrayPoolDefault>::ListItem *)v10.m128i_i64[1];
-      v3 = (CAkList2<CAkStateMgr::RegisteredTrigger,CAkStateMgr::RegisteredTrigger const &,1,ArrayPoolDefault>::ListItem *)v10.m128i_i64[0];
+      --this->m_listRegisteredTrigger.m_ulNumListItems;
+      v4 = v10;
+      m_pFirst = v9;
     }
     else
     {
-      v4 = v3;
-      v3 = v3->pNextListItem;
+      v4 = m_pFirst;
+      m_pFirst = m_pFirst->pNextListItem;
     }
   }
   return 1i64;
@@ -1142,18 +1125,14 @@ signed __int64 __fastcall CAkStateMgr::UnregisterTrigger(CAkStateMgr *this, IAkT
 // RVA: 0xA47520
 void __fastcall CAkStateMgr::Trigger(CAkStateMgr *this, unsigned int in_Trigger, CAkRegisteredObj *in_GameObj)
 {
-  CAkList2<CAkStateMgr::RegisteredTrigger,CAkStateMgr::RegisteredTrigger const &,1,ArrayPoolDefault>::ListItem *v3; // rbx
-  CAkRegisteredObj *v4; // rdi
-  unsigned int i; // esi
-  unsigned int v6; // eax
+  CAkList2<CAkStateMgr::RegisteredTrigger,CAkStateMgr::RegisteredTrigger const &,1,ArrayPoolDefault>::ListItem *i; // rbx
+  unsigned int triggerID; // eax
 
-  v3 = this->m_listRegisteredTrigger.m_pFirst;
-  v4 = in_GameObj;
-  for ( i = in_Trigger; v3; v3 = v3->pNextListItem )
+  for ( i = this->m_listRegisteredTrigger.m_pFirst; i; i = i->pNextListItem )
   {
-    v6 = v3->Item.triggerID;
-    if ( (!v6 || v6 == i) && (!v4 || v3->Item.gameObj == v4) )
-      v3->Item.pTriggerAware->vfptr->Trigger(v3->Item.pTriggerAware, i);
+    triggerID = i->Item.triggerID;
+    if ( (!triggerID || triggerID == in_Trigger) && (!in_GameObj || i->Item.gameObj == in_GameObj) )
+      i->Item.pTriggerAware->vfptr->Trigger(i->Item.pTriggerAware, in_Trigger);
   }
 }
 

@@ -2,22 +2,20 @@
 // RVA: 0xA79620
 CAkSound *__fastcall CAkSound::Create(unsigned int in_ulID)
 {
-  unsigned int v1; // edi
   CAkSound *result; // rax
   CAkSound *v3; // rbx
   unsigned int v4; // eax
-  signed int v5; // ecx
+  int v5; // ecx
   bool v6; // al
 
-  v1 = in_ulID;
   result = (CAkSound *)AK::MemoryMgr::Malloc(g_DefaultPoolId, 0xC0ui64);
   v3 = result;
   if ( result )
   {
-    CAkSoundBase::CAkSoundBase((CAkSoundBase *)&result->vfptr, v1);
+    CAkSoundBase::CAkSoundBase(result, in_ulID);
     v3->vfptr = (CAkIndexableVtbl *)&CAkSound::`vftable;
     CAkSource::CAkSource(&v3->m_Source);
-    v4 = v3->vfptr[3].Release((CAkIndexable *)&v3->vfptr);
+    v4 = v3->vfptr[3].Release(v3);
     v6 = 0;
     if ( v4 <= 0xC )
     {
@@ -25,10 +23,10 @@ CAkSound *__fastcall CAkSound::Create(unsigned int in_ulID)
       if ( _bittest(&v5, v4) )
         v6 = 1;
     }
-    *((_BYTE *)&v3->0 + 83) &= 0xFDu;
-    *((_BYTE *)&v3->0 + 83) |= 2 * v6;
-    CAkParameterNodeBase::AddToIndex((CAkParameterNodeBase *)&v3->vfptr);
-    result = v3;
+    *((_BYTE *)&v3->CAkParameterNodeBase + 83) &= ~2u;
+    *((_BYTE *)&v3->CAkParameterNodeBase + 83) |= 2 * v6;
+    CAkParameterNodeBase::AddToIndex(v3);
+    return v3;
   }
   return result;
 }
@@ -37,49 +35,42 @@ CAkSound *__fastcall CAkSound::Create(unsigned int in_ulID)
 // RVA: 0xA79890
 AKRESULT __fastcall CAkSound::PlayInternal(CAkSound *this, AkPBIParams *in_rPBIParams)
 {
-  return CAkURenderer::Play((CAkSoundBase *)&this->vfptr, &this->m_Source, in_rPBIParams);
+  return CAkURenderer::Play(this, &this->m_Source, in_rPBIParams);
 }
 
 // File Line: 66
 // RVA: 0xA796B0
-signed __int64 __fastcall CAkSound::ExecuteAction(CAkSound *this, ActionParams *in_rAction)
+__int64 __fastcall CAkSound::ExecuteAction(CAkSound *this, SeekActionParams *in_rAction)
 {
   SeekActionParams *v2; // rbx
-  CAkSound *v3; // rdi
-  AkActivityChunk *v4; // rax
+  AkActivityChunk *m_pActivityChunk; // rax
 
-  v2 = (SeekActionParams *)in_rAction;
-  v3 = this;
+  v2 = in_rAction;
   if ( in_rAction->bIsMasterCall )
   {
-    LOBYTE(in_rAction) = in_rAction->eType == 1;
-    ((void (__fastcall *)(CAkSound *, ActionParams *))this->vfptr[10].Category)(this, in_rAction);
+    LOBYTE(in_rAction) = in_rAction->eType == ActionParamType_Pause;
+    ((void (__fastcall *)(CAkSound *, SeekActionParams *))this->vfptr[10].Category)(this, in_rAction);
   }
-  v4 = v3->m_pActivityChunk;
-  if ( !v4 || !v4->m_PlayCount )
+  m_pActivityChunk = this->m_pActivityChunk;
+  if ( !m_pActivityChunk || !m_pActivityChunk->m_PlayCount )
     return 1i64;
   switch ( v2->eType )
   {
-    case 0:
-      return CAkURenderer::Stop((CAkSoundBase *)&v3->vfptr, v2->pGameObj, &v2->transParams, v2->playingID);
-    case 1:
-      return CAkURenderer::Pause((CAkSoundBase *)&v3->vfptr, v2->pGameObj, &v2->transParams, v2->playingID);
-    case 2:
-      return CAkURenderer::Resume(
-               (CAkSoundBase *)&v3->vfptr,
-               v2->pGameObj,
-               &v2->transParams,
-               v2->bIsMasterResume,
-               v2->playingID);
+    case ActionParamType_Stop:
+      return CAkURenderer::Stop(this, v2->pGameObj, &v2->transParams, v2->playingID);
+    case ActionParamType_Pause:
+      return CAkURenderer::Pause(this, v2->pGameObj, &v2->transParams, v2->playingID);
+    case ActionParamType_Resume:
+      return CAkURenderer::Resume(this, v2->pGameObj, &v2->transParams, v2->bIsMasterResume, v2->playingID);
   }
-  if ( v2->eType != 3 )
+  if ( v2->eType != ActionParamType_Break )
   {
-    if ( v2->eType == 4 )
-      CAkSound::SeekSound(v3, v2->pGameObj, v2);
+    if ( v2->eType == ActionParamType_Seek )
+      CAkSound::SeekSound(this, v2->pGameObj, v2);
     return 1i64;
   }
-  ((void (__fastcall *)(CAkSound *, CAkRegisteredObj *, CAkParameterNodeBase *, _QWORD))v3->vfptr[4].Category)(
-    v3,
+  ((void (__fastcall *)(CAkSound *, CAkRegisteredObj *, CAkParameterNodeBase *, _QWORD))this->vfptr[4].Category)(
+    this,
     v2->pGameObj,
     v2->targetNodePtr,
     v2->playingID);
@@ -88,89 +79,77 @@ signed __int64 __fastcall CAkSound::ExecuteAction(CAkSound *this, ActionParams *
 
 // File Line: 100
 // RVA: 0xA797B0
-signed __int64 __fastcall CAkSound::ExecuteActionExcept(CAkSound *this, ActionParamsExcept *in_rAction)
+__int64 __fastcall CAkSound::ExecuteActionExcept(CAkSound *this, SeekActionParamsExcept *in_rAction)
 {
   SeekActionParamsExcept *v2; // rbx
-  CAkSound *v3; // rdi
-  AkActivityChunk *v4; // rax
+  AkActivityChunk *m_pActivityChunk; // rax
 
-  v2 = (SeekActionParamsExcept *)in_rAction;
-  v3 = this;
+  v2 = in_rAction;
   if ( !in_rAction->pGameObj )
   {
-    LOBYTE(in_rAction) = in_rAction->eType == 1;
-    ((void (__fastcall *)(CAkSound *, ActionParamsExcept *))this->vfptr[10].Category)(this, in_rAction);
+    LOBYTE(in_rAction) = in_rAction->eType == ActionParamType_Pause;
+    ((void (__fastcall *)(CAkSound *, SeekActionParamsExcept *))this->vfptr[10].Category)(this, in_rAction);
   }
-  v4 = v3->m_pActivityChunk;
-  if ( !v4 || !v4->m_PlayCount )
+  m_pActivityChunk = this->m_pActivityChunk;
+  if ( !m_pActivityChunk || !m_pActivityChunk->m_PlayCount )
     return 1i64;
   if ( v2->eType == ActionParamType_Stop )
-    return CAkURenderer::Stop((CAkSoundBase *)&v3->vfptr, v2->pGameObj, &v2->transParams, v2->playingID);
-  if ( v2->eType == 1 )
-    return CAkURenderer::Pause((CAkSoundBase *)&v3->vfptr, v2->pGameObj, &v2->transParams, v2->playingID);
-  if ( v2->eType != 2 )
+    return CAkURenderer::Stop(this, v2->pGameObj, &v2->transParams, v2->playingID);
+  if ( v2->eType == ActionParamType_Pause )
+    return CAkURenderer::Pause(this, v2->pGameObj, &v2->transParams, v2->playingID);
+  if ( v2->eType != ActionParamType_Resume )
   {
-    if ( v2->eType == 4 )
-      CAkSound::SeekSound(v3, v2->pGameObj, v2);
+    if ( v2->eType == ActionParamType_Seek )
+      CAkSound::SeekSound(this, v2->pGameObj, v2);
     return 1i64;
   }
-  return CAkURenderer::Resume(
-           (CAkSoundBase *)&v3->vfptr,
-           v2->pGameObj,
-           &v2->transParams,
-           v2->bIsMasterResume,
-           v2->playingID);
+  return CAkURenderer::Resume(this, v2->pGameObj, &v2->transParams, v2->bIsMasterResume, v2->playingID);
 }
 
 // File Line: 132
 // RVA: 0xA798B0
 void __fastcall CAkSound::SeekSound(CAkSound *this, CAkRegisteredObj *in_pGameObj, SeekActionParams *in_rActionParams)
 {
-  SeekActionParams *v3; // rsi
-  CAkRegisteredObj *v4; // rdi
-  AkActivityChunk *v5; // rbx
+  AkActivityChunk *m_pActivityChunk; // rbx
   CAkPBI *i; // rbx
-  unsigned int v7; // eax
+  unsigned int playingID; // eax
   AkActivityChunk *v8; // rbx
-  int v9; // ebp
+  int iSeekTime; // ebp
   CAkPBI *j; // rbx
   unsigned int v11; // eax
 
-  v3 = in_rActionParams;
-  v4 = in_pGameObj;
-  if ( *((_BYTE *)in_rActionParams + 44) & 1 )
+  if ( (*((_BYTE *)in_rActionParams + 44) & 1) != 0 )
   {
-    in_rActionParams->fSeekPercent;
-    v5 = this->m_pActivityChunk;
-    if ( v5 )
+    m_pActivityChunk = this->m_pActivityChunk;
+    if ( m_pActivityChunk )
     {
-      for ( i = v5->m_listPBI.m_pFirst; i; i = i->pNextLightItem )
+      for ( i = m_pActivityChunk->m_listPBI.m_pFirst; i; i = i->pNextLightItem )
       {
-        v7 = v3->playingID;
-        if ( (!v4 || v4 == i->m_pGameObj) && (!v7 || v7 == i->m_UserParams.m_PlayingID) )
-          ((void (__fastcall *)(CAkPBI *, CAkRegisteredObj *, _QWORD))i->vfptr[4].~CAkTransportAware)(
+        playingID = in_rActionParams->playingID;
+        if ( (!in_pGameObj || in_pGameObj == i->m_pGameObj) && (!playingID || playingID == i->m_UserParams.m_PlayingID) )
+          ((void (__fastcall *)(CAkPBI *, CAkRegisteredObj *, bool))i->CAkTransportAware::vfptr[4].~CAkTransportAware)(
             i,
             in_pGameObj,
-            (*((_BYTE *)v3 + 44) >> 1) & 1);
+            (*((_BYTE *)in_rActionParams + 44) & 2) != 0);
       }
     }
   }
   else
   {
     v8 = this->m_pActivityChunk;
-    v9 = in_rActionParams->iSeekTime;
-    if ( v9 < 0 )
-      v9 = 0;
+    iSeekTime = in_rActionParams->iSeekTime;
+    if ( iSeekTime < 0 )
+      iSeekTime = 0;
     if ( v8 )
     {
       for ( j = v8->m_listPBI.m_pFirst; j; j = j->pNextLightItem )
       {
-        v11 = v3->playingID;
-        if ( (!v4 || v4 == j->m_pGameObj) && (!v11 || v11 == j->m_UserParams.m_PlayingID) )
-          ((void (__fastcall *)(CAkPBI *, _QWORD, _QWORD))j->vfptr[4]._Stop)(
+        v11 = in_rActionParams->playingID;
+        if ( (!in_pGameObj || in_pGameObj == j->m_pGameObj) && (!v11 || v11 == j->m_UserParams.m_PlayingID) )
+          ((void (__fastcall *)(CAkPBI *, _QWORD, bool))j->CAkTransportAware::vfptr[4]._Stop)(
             j,
-            (unsigned int)v9,
-            (*((_BYTE *)v3 + 44) >> 1) & 1);
+            (unsigned int)iSeekTime,
+            (*((_BYTE *)in_rActionParams + 44) & 2) != 0);
       }
     }
   }
@@ -178,49 +157,47 @@ void __fastcall CAkSound::SeekSound(CAkSound *this, CAkRegisteredObj *in_pGameOb
 
 // File Line: 182
 // RVA: 0xA799D0
-void __fastcall CAkSound::SeekSound(CAkSound *this, CAkRegisteredObj *in_pGameObj, SeekActionParamsExcept *in_rActionParams)
+void __fastcall CAkSound::SeekSound(
+        CAkSound *this,
+        CAkRegisteredObj *in_pGameObj,
+        SeekActionParamsExcept *in_rActionParams)
 {
-  SeekActionParamsExcept *v3; // rsi
-  CAkRegisteredObj *v4; // rdi
-  AkActivityChunk *v5; // rbx
+  AkActivityChunk *m_pActivityChunk; // rbx
   CAkPBI *i; // rbx
   AkActivityChunk *v7; // rbx
-  int v8; // ebp
+  int iSeekTime; // ebp
   CAkPBI *j; // rbx
 
-  v3 = in_rActionParams;
-  v4 = in_pGameObj;
-  if ( *((_BYTE *)in_rActionParams + 44) & 1 )
+  if ( (*((_BYTE *)in_rActionParams + 44) & 1) != 0 )
   {
-    in_rActionParams->fSeekPercent;
-    v5 = this->m_pActivityChunk;
-    if ( v5 )
+    m_pActivityChunk = this->m_pActivityChunk;
+    if ( m_pActivityChunk )
     {
-      for ( i = v5->m_listPBI.m_pFirst; i; i = i->pNextLightItem )
+      for ( i = m_pActivityChunk->m_listPBI.m_pFirst; i; i = i->pNextLightItem )
       {
-        if ( !v4 || i->m_pGameObj == v4 )
-          ((void (__fastcall *)(CAkPBI *, CAkRegisteredObj *, _QWORD))i->vfptr[4].~CAkTransportAware)(
+        if ( !in_pGameObj || i->m_pGameObj == in_pGameObj )
+          ((void (__fastcall *)(CAkPBI *, CAkRegisteredObj *, bool))i->CAkTransportAware::vfptr[4].~CAkTransportAware)(
             i,
             in_pGameObj,
-            (*((_BYTE *)v3 + 44) >> 1) & 1);
+            (*((_BYTE *)in_rActionParams + 44) & 2) != 0);
       }
     }
   }
   else
   {
     v7 = this->m_pActivityChunk;
-    v8 = in_rActionParams->iSeekTime;
-    if ( v8 < 0 )
-      v8 = 0;
+    iSeekTime = in_rActionParams->iSeekTime;
+    if ( iSeekTime < 0 )
+      iSeekTime = 0;
     if ( v7 )
     {
       for ( j = v7->m_listPBI.m_pFirst; j; j = j->pNextLightItem )
       {
-        if ( !v4 || j->m_pGameObj == v4 )
-          ((void (__fastcall *)(CAkPBI *, _QWORD, _QWORD))j->vfptr[4]._Stop)(
+        if ( !in_pGameObj || j->m_pGameObj == in_pGameObj )
+          ((void (__fastcall *)(CAkPBI *, _QWORD, bool))j->CAkTransportAware::vfptr[4]._Stop)(
             j,
-            (unsigned int)v8,
-            (*((_BYTE *)v3 + 44) >> 1) & 1);
+            (unsigned int)iSeekTime,
+            (*((_BYTE *)in_rActionParams + 44) & 2) != 0);
       }
     }
   }
@@ -228,42 +205,36 @@ void __fastcall CAkSound::SeekSound(CAkSound *this, CAkRegisteredObj *in_pGameOb
 
 // File Line: 251
 // RVA: 0xA79AD0
-signed __int64 __fastcall CAkSound::SetInitialValues(CAkSound *this, char *in_pData, unsigned int in_ulDataSize, CAkUsageSlot *__formal, bool in_bIsPartialLoadOnly)
+__int64 __fastcall CAkSound::SetInitialValues(
+        CAkSound *this,
+        char *in_pData,
+        unsigned int in_ulDataSize,
+        CAkUsageSlot *__formal,
+        bool in_bIsPartialLoadOnly)
 {
-  CAkSound *v5; // rbx
-  signed __int64 result; // rax
-  CAkSource *v7; // rcx
-  __int128 v8; // [rsp+20h] [rbp-58h]
-  int v9; // [rsp+30h] [rbp-48h]
-  __int64 v10; // [rsp+40h] [rbp-38h]
-  unsigned int in_sourceID[4]; // [rsp+48h] [rbp-30h]
-  int v12; // [rsp+58h] [rbp-20h]
-  __int64 v13; // [rsp+60h] [rbp-18h]
-  char *io_rpData; // [rsp+88h] [rbp+10h]
-  unsigned int io_rulDataSize; // [rsp+90h] [rbp+18h]
+  __int64 result; // rax
+  CAkSource *p_m_Source; // rcx
+  AkMediaInformation m_MediaInfo; // [rsp+20h] [rbp-58h] BYREF
+  AkBankSourceData v9; // [rsp+40h] [rbp-38h] BYREF
+  char *io_rpData; // [rsp+88h] [rbp+10h] BYREF
+  unsigned int io_rulDataSize; // [rsp+90h] [rbp+18h] BYREF
 
   io_rulDataSize = in_ulDataSize;
-  v5 = this;
   io_rpData = in_pData + 4;
-  result = CAkBankMgr::LoadSource(&io_rpData, &io_rulDataSize, (AkBankSourceData *)&v10);
+  result = CAkBankMgr::LoadSource(&io_rpData, &io_rulDataSize, &v9);
   if ( (_DWORD)result == 1 )
   {
-    v7 = &v5->m_Source;
-    if ( v13 )
+    p_m_Source = &this->m_Source;
+    if ( v9.m_pParam )
     {
-      CAkSource::SetSource(v7, in_sourceID[0]);
+      CAkSource::SetSource(p_m_Source, v9.m_MediaInfo.sourceID);
     }
     else
     {
-      v9 = v12;
-      v8 = *(_OWORD *)in_sourceID;
-      CAkSource::SetSource(v7, HIDWORD(v10), (AkMediaInformation *)&v8);
+      m_MediaInfo = v9.m_MediaInfo;
+      CAkSource::SetSource(p_m_Source, v9.m_PluginID, &m_MediaInfo);
     }
-    result = CAkParameterNodeBase::SetNodeBaseParams(
-               (CAkParameterNodeBase *)&v5->vfptr,
-               &io_rpData,
-               &io_rulDataSize,
-               in_bIsPartialLoadOnly);
+    return CAkParameterNodeBase::SetNodeBaseParams(this, &io_rpData, &io_rulDataSize, in_bIsPartialLoadOnly);
   }
   return result;
 }

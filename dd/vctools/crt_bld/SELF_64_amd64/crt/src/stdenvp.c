@@ -1,6 +1,6 @@
 // File Line: 77
 // RVA: 0x12D1E68
-signed __int64 __fastcall setenvp()
+__int64 __fastcall setenvp()
 {
   char *v0; // rbx
   int v1; // edi
@@ -44,7 +44,7 @@ signed __int64 __fastcall setenvp()
         if ( (unsigned int)strcpy_s(v6, v5, v4) )
         {
           invoke_watson(0i64, 0i64, 0i64, 0, 0i64);
-          JUMPOUT(*(_QWORD *)&byte_1412D1F98);
+          JUMPOUT(0x1412D1F98i64);
         }
         ++v3;
       }

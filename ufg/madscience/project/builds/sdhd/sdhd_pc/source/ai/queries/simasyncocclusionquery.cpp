@@ -41,24 +41,23 @@ UFG::SimAsyncOcclusionQueryManager *__fastcall UFG::SimAsyncOcclusionQueryManage
 
 // File Line: 36
 // RVA: 0x331DE0
-void __fastcall UFG::SimAsyncOcclusionQueryManager::SimAsyncOcclusionQueryManager(UFG::SimAsyncOcclusionQueryManager *this)
+void __fastcall UFG::SimAsyncOcclusionQueryManager::SimAsyncOcclusionQueryManager(
+        UFG::SimAsyncOcclusionQueryManager *this)
 {
-  UFG::SimAsyncOcclusionQueryManager *v1; // rdi
-  signed __int64 v2; // rbx
-  bool *v3; // rax
+  __int64 v2; // rbx
+  bool *p_mInUse; // rax
 
-  v1 = this;
   v2 = 64i64;
   `eh vector constructor iterator(
     this,
     0x30ui64,
     64,
     (void (__fastcall *)(void *))UFG::SimAsyncOcclusionQuery::SimAsyncOcclusionQuery);
-  v3 = &v1->mQueries[0].mInUse;
+  p_mInUse = &this->mQueries[0].mInUse;
   do
   {
-    *v3 = 0;
-    v3 += 48;
+    *p_mInUse = 0;
+    p_mInUse += 48;
     --v2;
   }
   while ( v2 );
@@ -66,28 +65,27 @@ void __fastcall UFG::SimAsyncOcclusionQueryManager::SimAsyncOcclusionQueryManage
 
 // File Line: 45
 // RVA: 0x33AF60
-void __fastcall UFG::SimAsyncOcclusionQueryManager::~SimAsyncOcclusionQueryManager(UFG::SimAsyncOcclusionQueryManager *this)
+void __fastcall UFG::SimAsyncOcclusionQueryManager::~SimAsyncOcclusionQueryManager(
+        UFG::SimAsyncOcclusionQueryManager *this)
 {
-  UFG::SimAsyncOcclusionQueryManager *v1; // rsi
-  bool *v2; // rbx
-  signed __int64 v3; // rdi
+  bool *p_mInUse; // rbx
+  __int64 v3; // rdi
 
-  v1 = this;
-  v2 = &this->mQueries[0].mInUse;
+  p_mInUse = &this->mQueries[0].mInUse;
   v3 = 64i64;
   do
   {
-    if ( *v2 )
+    if ( *p_mInUse )
     {
-      FX::HardwareOcclusionQuery::Release((FX::HardwareOcclusionQuery *)(v2 - 44));
-      *v2 = 0;
+      FX::HardwareOcclusionQuery::Release((FX::HardwareOcclusionQuery *)(p_mInUse - 44));
+      *p_mInUse = 0;
     }
-    v2 += 48;
+    p_mInUse += 48;
     --v3;
   }
   while ( v3 );
   `eh vector destructor iterator(
-    v1,
+    this,
     0x30ui64,
     64,
     (void (__fastcall *)(void *))UFG::SimAsyncOcclusionQuery::~SimAsyncOcclusionQuery);
@@ -95,85 +93,83 @@ void __fastcall UFG::SimAsyncOcclusionQueryManager::~SimAsyncOcclusionQueryManag
 
 // File Line: 58
 // RVA: 0x351060
-UFG::SimAsyncOcclusionQueryManager *__fastcall UFG::SimAsyncOcclusionQueryManager::CreateQuery(UFG::SimAsyncOcclusionQueryManager *this, UFG::qVector3 *queryPosition, const float radius)
+UFG::SimAsyncOcclusionQueryManager *__fastcall UFG::SimAsyncOcclusionQueryManager::CreateQuery(
+        UFG::SimAsyncOcclusionQueryManager *this,
+        UFG::qVector3 *queryPosition,
+        float radius)
 {
-  UFG::qVector3 *v3; // rdi
-  UFG::SimAsyncOcclusionQueryManager *v4; // rbx
-  signed __int64 v5; // rax
+  __int64 v5; // rax
   UFG::SimAsyncOcclusionQueryManager *result; // rax
-  float v7; // xmm0_4
-  float v8; // xmm1_4
+  float y; // xmm0_4
+  float z; // xmm1_4
 
-  v3 = queryPosition;
-  v4 = this;
   v5 = 0i64;
-  while ( v4->mQueries[0].mInUse )
+  while ( this->mQueries[0].mInUse )
   {
     ++v5;
-    v4 = (UFG::SimAsyncOcclusionQueryManager *)((char *)v4 + 48);
+    this = (UFG::SimAsyncOcclusionQueryManager *)((char *)this + 48);
     if ( v5 >= 64 )
       return 0i64;
   }
-  v4->mQueries[0].mInUse = 1;
-  FX::HardwareOcclusionQuery::Init((FX::HardwareOcclusionQuery *)v4);
-  v7 = v3->y;
-  v8 = v3->z;
-  v4->mQueries[0].mPosition.x = v3->x;
-  result = v4;
-  v4->mQueries[0].mPosition.y = v7;
-  v4->mQueries[0].mPosition.z = v8;
-  v4->mQueries[0].mVisibility = 0.0;
-  *(_WORD *)&v4->mQueries[0].mQueryCompleted = 0;
-  v4->mQueries[0].mRadius = radius;
+  this->mQueries[0].mInUse = 1;
+  FX::HardwareOcclusionQuery::Init((FX::HardwareOcclusionQuery *)this);
+  y = queryPosition->y;
+  z = queryPosition->z;
+  this->mQueries[0].mPosition.x = queryPosition->x;
+  result = this;
+  this->mQueries[0].mPosition.y = y;
+  this->mQueries[0].mPosition.z = z;
+  this->mQueries[0].mVisibility = 0.0;
+  *(_WORD *)&this->mQueries[0].mQueryCompleted = 0;
+  this->mQueries[0].mRadius = radius;
   return result;
 }
 
 // File Line: 81
 // RVA: 0x380C50
-void __fastcall UFG::SimAsyncOcclusionQueryManager::ReleaseQuery(UFG::SimAsyncOcclusionQueryManager *this, UFG::SimAsyncOcclusionQuery *pQuery)
+void __fastcall UFG::SimAsyncOcclusionQueryManager::ReleaseQuery(
+        UFG::SimAsyncOcclusionQueryManager *this,
+        UFG::SimAsyncOcclusionQuery *pQuery)
 {
-  UFG::SimAsyncOcclusionQuery *v2; // rbx
-
   if ( pQuery )
   {
-    v2 = pQuery;
     FX::HardwareOcclusionQuery::Release(&pQuery->mHardwareOcclusionQuery);
-    v2->mInUse = 0;
+    pQuery->mInUse = 0;
   }
 }
 
 // File Line: 90
 // RVA: 0x398720
-void __fastcall UFG::SimAsyncOcclusionQueryManager::UpdateQueries(UFG::SimAsyncOcclusionQueryManager *this, Render::View *pView)
+void __fastcall UFG::SimAsyncOcclusionQueryManager::UpdateQueries(
+        UFG::SimAsyncOcclusionQueryManager *this,
+        Render::View *pView)
 {
-  Render::View *v2; // r14
-  UFG::qVector3 *v3; // rbx
-  signed __int64 v4; // rdi
+  UFG::qVector3 *p_mPosition; // rbx
+  __int64 v4; // rdi
   bool v5; // zf
   __m128 v6; // xmm2
-  UFG::qMatrix44 dest; // [rsp+20h] [rbp-40h]
+  UFG::qMatrix44 dest; // [rsp+20h] [rbp-40h] BYREF
 
-  v2 = pView;
-  v3 = &this->mQueries[0].mPosition;
+  p_mPosition = &this->mQueries[0].mPosition;
   v4 = 64i64;
   do
   {
-    if ( LOBYTE(v3[1].z) )
+    if ( LOBYTE(p_mPosition[1].z) )
     {
-      UFG::qTranslationMatrix(&dest, v3);
-      v5 = LODWORD(v3[-2].x) == -1;
-      v6 = _mm_shuffle_ps((__m128)LODWORD(v3[1].x), (__m128)LODWORD(v3[1].x), 0);
+      UFG::qTranslationMatrix(&dest, p_mPosition);
+      v5 = LODWORD(p_mPosition[-2].x) == -1;
+      v6 = _mm_shuffle_ps((__m128)LODWORD(p_mPosition[1].x), (__m128)LODWORD(p_mPosition[1].x), 0);
       dest.v0 = (UFG::qVector4)_mm_mul_ps((__m128)dest.v0, v6);
       dest.v1 = (UFG::qVector4)_mm_mul_ps((__m128)dest.v1, v6);
       dest.v2 = (UFG::qVector4)_mm_mul_ps((__m128)dest.v2, v6);
-      if ( !v5 && LODWORD(v3[-2].y) != -1 && ++BYTE2(v3[1].z) > 5 )
+      if ( !v5 && LODWORD(p_mPosition[-2].y) != -1 && (char)++BYTE2(p_mPosition[1].z) > 5 )
       {
-        BYTE1(v3[1].z) = 1;
-        v3[1].y = FX::HardwareOcclusionQuery::GetVisibility((FX::HardwareOcclusionQuery *)&v3[-2]);
+        BYTE1(p_mPosition[1].z) = 1;
+        p_mPosition[1].y = FX::HardwareOcclusionQuery::GetVisibility((FX::HardwareOcclusionQuery *)&p_mPosition[-2]);
       }
-      FX::HardwareOcclusionQuery::DrawSphere((FX::HardwareOcclusionQuery *)&v3[-2], v2, &dest);
+      FX::HardwareOcclusionQuery::DrawSphere((FX::HardwareOcclusionQuery *)&p_mPosition[-2], pView, &dest);
     }
-    v3 += 4;
+    p_mPosition += 4;
     --v4;
   }
   while ( v4 );

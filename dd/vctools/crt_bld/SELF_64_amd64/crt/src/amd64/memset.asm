@@ -9,7 +9,7 @@ void *__cdecl memset(void *Dst, int Val, size_t Size)
   unsigned __int64 v6; // r9
   size_t v7; // r9
   size_t i; // r9
-  void *retaddr; // [rsp+0h] [rbp+0h]
+  void *retaddr; // [rsp+0h] [rbp+0h] BYREF
 
   v3 = Dst;
   if ( Size >= 8 )
@@ -20,10 +20,10 @@ void *__cdecl memset(void *Dst, int Val, size_t Size)
       memset(Dst, Val, Size);
       return v3;
     }
-    *(_QWORD *)&Val *= 72340172838076673i64;
+    *(_QWORD *)&Val *= 0x101010101010101i64;
     if ( Size >= 0x40 )
     {
-      v4 = -(signed int)Dst & 7;
+      v4 = -(int)Dst & 7;
       if ( v4 )
       {
         Size -= v4;

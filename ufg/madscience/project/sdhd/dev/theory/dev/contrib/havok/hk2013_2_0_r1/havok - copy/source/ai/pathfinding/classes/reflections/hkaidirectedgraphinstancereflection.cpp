@@ -35,27 +35,22 @@ void __fastcall finishLoadedObjecthkaiDirectedGraphInstanceFreeBlockList(void *p
 
 // File Line: 71
 // RVA: 0xBB6610
-void __fastcall cleanupLoadedObjecthkaiDirectedGraphInstanceFreeBlockList(void *p)
+void __fastcall cleanupLoadedObjecthkaiDirectedGraphInstanceFreeBlockList(_DWORD *p)
 {
-  int v1; // er8
-  _DWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      *(void **)p,
-      4 * v1);
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, *(void **)p, 4 * v1);
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 
@@ -77,7 +72,7 @@ void dynamic_initializer_for__hkaiDirectedGraphInstanceClass__()
     &hkaiDirectedGraphInstance_Default,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 150
@@ -89,23 +84,26 @@ hkClass *__fastcall hkaiDirectedGraphInstance::staticClass()
 
 // File Line: 157
 // RVA: 0xBB6680
-void __fastcall finishLoadedObjecthkaiDirectedGraphInstance(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiDirectedGraphInstance(
+        hkaiDirectedGraphInstance *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiDirectedGraphInstance::hkaiDirectedGraphInstance);
+  if ( p )
+    hkaiDirectedGraphInstance::hkaiDirectedGraphInstance(p, finishing);
 }
 
 // File Line: 163
 // RVA: 0xBB66A0
-void __fastcall cleanupLoadedObjecthkaiDirectedGraphInstance(void *p)
+void __fastcall cleanupLoadedObjecthkaiDirectedGraphInstance(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 167
 // RVA: 0xBB66B0
 hkBaseObjectVtbl *__fastcall getVtablehkaiDirectedGraphInstance()
 {
-  hkaiDirectedGraphInstance v1; // [rsp+20h] [rbp-118h]
+  hkaiDirectedGraphInstance v1; // [rsp+20h] [rbp-118h] BYREF
 
   hkaiDirectedGraphInstance::hkaiDirectedGraphInstance(&v1, 0);
   return v1.vfptr;
@@ -122,8 +120,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiDirectedGraphInstanceTypeInfo__()
   hkaiDirectedGraphInstanceTypeInfo.m_typeName = "hkaiDirectedGraphInstance";
   hkaiDirectedGraphInstanceTypeInfo.m_vtable = result;
   hkaiDirectedGraphInstanceTypeInfo.m_scopedName = "!hkaiDirectedGraphInstance";
-  hkaiDirectedGraphInstanceTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiDirectedGraphInstance;
-  hkaiDirectedGraphInstanceTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiDirectedGraphInstance;
+  hkaiDirectedGraphInstanceTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiDirectedGraphInstance;
+  hkaiDirectedGraphInstanceTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiDirectedGraphInstance;
   return result;
 }
 

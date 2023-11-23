@@ -1,90 +1,71 @@
 // File Line: 47
 // RVA: 0x33BC80
-UFG::CoverObjectCorner *__fastcall UFG::CoverObjectCorner::operator=(UFG::CoverObjectCorner *this, UFG::CoverObjectCorner *other)
+UFG::CoverObjectCorner *__fastcall UFG::CoverObjectCorner::operator=(
+        UFG::CoverObjectCorner *this,
+        UFG::CoverObjectCorner *other)
 {
-  UFG::CoverObjectCorner *v2; // rbx
-  UFG::CoverObjectCorner *v3; // rdi
-
-  v2 = other;
-  v3 = this;
-  (*((void (**)(void))&this->vfptr->__vecDelDtor + 1))();
-  v3->m_fPriority = v2->m_fPriority;
-  UFG::CoverCornerHandle::operator=(&v3->m_CornerHandle, &v2->m_CornerHandle);
-  return v3;
+  (*((void (__fastcall **)(UFG::CoverObjectCorner *))&this->vfptr->__vecDelDtor + 1))(this);
+  this->m_fPriority = other->m_fPriority;
+  UFG::CoverCornerHandle::operator=(&this->m_CornerHandle, &other->m_CornerHandle);
+  return this;
 }
 
 // File Line: 56
 // RVA: 0x36A3A0
-char __fastcall UFG::CoverObjectCorner::IsConnectedTo(UFG::CoverObjectCorner *this, UFG::CoverObjectBase *coOther)
+char __fastcall UFG::CoverObjectCorner::IsConnectedTo(UFG::CoverObjectCorner *this, UFG::CoverObjectParkour *coOther)
 {
-  UFG::CoverObjectCorner *v2; // rdi
-  UFG::CoverObjectParkour *v3; // rbx
-  char result; // al
-
-  v2 = this;
-  v3 = (UFG::CoverObjectParkour *)coOther;
   if ( coOther->vfptr->IsParkour(coOther) )
-    result = UFG::CoverObjectBase::IsConnected(v3, v2);
+    return UFG::CoverObjectBase::IsConnected(coOther, this);
   else
-    result = UFG::CoverObjectBase::IsConnected(v2, (UFG::CoverObjectCorner *)v3);
-  return result;
+    return UFG::CoverObjectBase::IsConnected(this, (UFG::CoverObjectCorner *)coOther);
 }
 
 // File Line: 75
 // RVA: 0x36B800
-bool __fastcall UFG::CoverObjectCorner::IsLeftOf(UFG::CoverObjectCorner *this, UFG::CoverObjectBase *coOther)
+bool __fastcall UFG::CoverObjectCorner::IsLeftOf(UFG::CoverObjectCorner *this, UFG::CoverObjectParkour *coOther)
 {
-  UFG::CoverObjectCorner *v2; // rdi
-  UFG::CoverObjectParkour *v3; // rbx
-  bool result; // al
-
-  v2 = this;
-  v3 = (UFG::CoverObjectParkour *)coOther;
   if ( coOther->vfptr->IsParkour(coOther) )
-    result = UFG::CoverObjectBase::IsLeft(v3, v2) == 0;
+    return !UFG::CoverObjectBase::IsLeft(coOther, this);
   else
-    result = UFG::CoverObjectBase::IsLeft(v2, (UFG::CoverObjectCorner *)v3);
-  return result;
+    return UFG::CoverObjectBase::IsLeft(this, (UFG::CoverObjectCorner *)coOther);
 }
 
 // File Line: 94
 // RVA: 0x35BFD0
-UFG::CoverPosition *__fastcall UFG::CoverObjectCorner::GetCoverPosition(UFG::CoverObjectCorner *this, UFG::qVector3 *vCharPos, UFG::CoverPosition *pCurrentPosition, float fRange)
+UFG::CoverPosition *__fastcall UFG::CoverObjectCorner::GetCoverPosition(
+        UFG::CoverObjectCorner *this,
+        UFG::qVector3 *vCharPos,
+        UFG::CoverPosition *pCurrentPosition,
+        float fRange)
 {
-  UFG::CoverPosition *v4; // rdi
-  UFG::qVector3 *v5; // rbp
-  UFG::CoverObjectCorner *v6; // r8
-  UFG::DynamicCoverCorner *v7; // rbx
+  UFG::DynamicCoverCorner *m_pPointer; // rbx
   __int64 v8; // rsi
   UFG::CoverCorner *v9; // rbx
-  UFG::qResourceData *v10; // rax
+  UFG::qResourceData *mData; // rax
   UFG::qBaseNodeRB *v11; // rcx
-  signed __int64 v12; // rcx
-  UFG::CoverCornerHandle *v13; // rcx
+  char *v12; // rcx
+  UFG::CoverCornerHandle *p_m_RightCorner; // rcx
   UFG::allocator::free_link *v14; // rax
   __int64 v15; // rax
-  UFG::qVector3 result; // [rsp+28h] [rbp-30h]
+  UFG::qVector3 result; // [rsp+28h] [rbp-30h] BYREF
 
-  v4 = pCurrentPosition;
-  v5 = vCharPos;
-  v6 = this;
-  v7 = this->m_CornerHandle.m_pDynamicCoverCorner.m_pPointer;
+  m_pPointer = this->m_CornerHandle.m_pDynamicCoverCorner.m_pPointer;
   v8 = 0i64;
-  if ( v7 )
+  if ( m_pPointer )
   {
-    v9 = (UFG::CoverCorner *)&v7->mPrev;
+    v9 = &m_pPointer->UFG::CoverCorner;
   }
   else
   {
-    v10 = this->m_CornerHandle.m_ResourceHandle.mData;
-    if ( v10 )
+    mData = this->m_CornerHandle.m_ResourceHandle.mData;
+    if ( mData )
     {
-      v11 = v10[1].mNode.mChild[0];
+      v11 = mData[1].mNode.mChild[0];
       if ( v11 )
-        v12 = (signed __int64)&v11[3] + (_QWORD)v10;
+        v12 = (char *)&v11[3] + (_QWORD)mData;
       else
         v12 = 0i64;
-      v9 = (UFG::CoverCorner *)(v12 + 48i64 * v6->m_CornerHandle.m_uCoverCornerIndex);
+      v9 = (UFG::CoverCorner *)&v12[48 * this->m_CornerHandle.m_uCoverCornerIndex];
     }
     else
     {
@@ -92,70 +73,68 @@ UFG::CoverPosition *__fastcall UFG::CoverObjectCorner::GetCoverPosition(UFG::Cov
     }
   }
   UFG::CoverCorner::GetSyncPos(v9, &result);
-  if ( COERCE_FLOAT(COERCE_UNSIGNED_INT(result.z - v5->z) & _xmm) >= kfMaxHeightDiff_0
-    || (float)((float)((float)(result.y - v5->y) * (float)(result.y - v5->y))
-             + (float)((float)(result.x - v5->x) * (float)(result.x - v5->x))) >= (float)(fRange * fRange) )
+  if ( COERCE_FLOAT(COERCE_UNSIGNED_INT(result.z - vCharPos->z) & _xmm) >= kfMaxHeightDiff_0
+    || (float)((float)((float)(result.y - vCharPos->y) * (float)(result.y - vCharPos->y))
+             + (float)((float)(result.x - vCharPos->x) * (float)(result.x - vCharPos->x))) >= (float)(fRange * fRange) )
   {
-    return v4;
+    return pCurrentPosition;
   }
-  if ( v4 )
+  if ( pCurrentPosition )
   {
     if ( v9->m_eCoverSide.mValue == 1 )
-      v13 = &v4->m_RightCorner;
+      p_m_RightCorner = &pCurrentPosition->m_RightCorner;
     else
-      v13 = &v4->m_LeftCorner;
-    UFG::CoverCornerHandle::operator=(v13, v9);
-    return v4;
+      p_m_RightCorner = &pCurrentPosition->m_LeftCorner;
+    UFG::CoverCornerHandle::operator=(p_m_RightCorner, v9);
+    return pCurrentPosition;
   }
   v14 = UFG::qMalloc(0x170ui64, "CoverPosition", 0i64);
   if ( v14 )
   {
     UFG::CoverPosition::CoverPosition((UFG::CoverPosition *)v14, v9);
-    v8 = v15;
+    return (UFG::CoverPosition *)v15;
   }
   return (UFG::CoverPosition *)v8;
 }
 
 // File Line: 128
 // RVA: 0x35CCC0
-char __fastcall UFG::CoverObjectCorner::GetCoverPositions(UFG::CoverObjectCorner *this, UFG::qArray<UFG::CoverPosition *,0> *aCoverPositions)
+char __fastcall UFG::CoverObjectCorner::GetCoverPositions(
+        UFG::CoverObjectCorner *this,
+        UFG::qArray<UFG::qReflectInventoryBase *,0> *aCoverPositions)
 {
-  UFG::qArray<UFG::qReflectInventoryBase *,0> *v2; // rsi
-  UFG::CoverObjectCorner *v3; // rdi
   UFG::allocator::free_link *v4; // r8
-  UFG::DynamicCoverCorner *v5; // rbx
+  UFG::DynamicCoverCorner *m_pPointer; // rbx
   UFG::CoverCorner *v6; // rbx
-  UFG::qResourceData *v7; // rax
+  UFG::qResourceData *mData; // rax
   UFG::qBaseNodeRB *v8; // rcx
-  signed __int64 v9; // rcx
-  UFG::qReflectInventoryBase *v10; // rax
-  UFG::qReflectInventoryBase *v11; // rbx
-  __int64 v12; // rbp
+  char *v9; // rcx
+  UFG::CoverPosition *v10; // rax
+  UFG::CoverPosition *v11; // rbx
+  __int64 size; // rbp
   unsigned int v13; // edi
-  unsigned int v14; // edx
+  unsigned int capacity; // edx
   unsigned int v15; // edx
 
-  v2 = (UFG::qArray<UFG::qReflectInventoryBase *,0> *)aCoverPositions;
-  v3 = this;
   v4 = UFG::qMalloc(0x170ui64, "CoverPosition", 0i64);
   if ( v4 )
   {
-    v5 = v3->m_CornerHandle.m_pDynamicCoverCorner.m_pPointer;
-    if ( v5 )
+    m_pPointer = this->m_CornerHandle.m_pDynamicCoverCorner.m_pPointer;
+    if ( m_pPointer )
     {
-      v6 = (UFG::CoverCorner *)&v5->mPrev;
+      v6 = &m_pPointer->UFG::CoverCorner;
     }
     else
     {
-      v7 = v3->m_CornerHandle.m_ResourceHandle.mData;
-      if ( v7 )
+      mData = this->m_CornerHandle.m_ResourceHandle.mData;
+      if ( mData )
       {
-        v8 = v7[1].mNode.mChild[0];
+        v8 = mData[1].mNode.mChild[0];
         if ( v8 )
-          v9 = (signed __int64)&v8[3] + (_QWORD)v7;
+          v9 = (char *)&v8[3] + (_QWORD)mData;
         else
           v9 = 0i64;
-        v6 = (UFG::CoverCorner *)(v9 + 48i64 * v3->m_CornerHandle.m_uCoverCornerIndex);
+        v6 = (UFG::CoverCorner *)&v9[48 * this->m_CornerHandle.m_uCoverCornerIndex];
       }
       else
       {
@@ -169,13 +148,13 @@ char __fastcall UFG::CoverObjectCorner::GetCoverPositions(UFG::CoverObjectCorner
   {
     v11 = 0i64;
   }
-  v12 = v2->size;
-  v13 = v12 + 1;
-  v14 = v2->capacity;
-  if ( (signed int)v12 + 1 > v14 )
+  size = aCoverPositions->size;
+  v13 = size + 1;
+  capacity = aCoverPositions->capacity;
+  if ( (int)size + 1 > capacity )
   {
-    if ( v14 )
-      v15 = 2 * v14;
+    if ( capacity )
+      v15 = 2 * capacity;
     else
       v15 = 1;
     for ( ; v15 < v13; v15 *= 2 )
@@ -183,11 +162,11 @@ char __fastcall UFG::CoverObjectCorner::GetCoverPositions(UFG::CoverObjectCorner
     if ( v15 <= 2 )
       v15 = 2;
     if ( v15 - v13 > 0x10000 )
-      v15 = v12 + 65537;
-    UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(v2, v15, "qArray.Add");
+      v15 = size + 65537;
+    UFG::qArray<UFG::CompositeDrawableComponent *,32>::Reallocate(aCoverPositions, v15, "qArray.Add");
   }
-  v2->size = v13;
-  v2->p[v12] = v11;
+  aCoverPositions->size = v13;
+  aCoverPositions->p[size] = (UFG::qReflectInventoryBase *)v11;
   return 1;
 }
 
@@ -195,172 +174,145 @@ char __fastcall UFG::CoverObjectCorner::GetCoverPositions(UFG::CoverObjectCorner
 // RVA: 0x34E9A0
 void __fastcall UFG::CoverObjectCorner::Clear(UFG::CoverObjectCorner *this)
 {
-  UFG::CoverObjectCorner *v1; // rbx
-
-  v1 = this;
-  ((void (*)(void))this->vfptr->RemoveUser)();
-  v1->m_fPriority = 0.0;
-  v1->m_pCoverObjectGroup = 0i64;
-  UFG::CoverCornerHandle::Reset(&v1->m_CornerHandle);
-  v1->m_pCoverUser = 0i64;
+  this->vfptr->RemoveUser(this);
+  this->m_fPriority = 0.0;
+  this->m_pCoverObjectGroup = 0i64;
+  UFG::CoverCornerHandle::Reset(&this->m_CornerHandle);
+  this->m_pCoverUser = 0i64;
 }
 
 // File Line: 148
 // RVA: 0x36BE80
-char __fastcall UFG::CoverObjectCorner::IsValid(UFG::CoverObjectCorner *this)
+bool __fastcall UFG::CoverObjectCorner::IsValid(UFG::CoverObjectCorner *this)
 {
-  UFG::CoverCornerHandle *v1; // rbx
-  UFG::CoverObjectCorner *v2; // rdi
-  char result; // al
-  signed __int64 v4; // rdi
+  UFG::CoverCornerHandle *p_m_CornerHandle; // rbx
+  UFG::CoverCorner *v4; // rdi
   UFG::DynamicCoverCorner *v5; // rcx
-  UFG::DynamicCoverCorner *v6; // rax
-  signed __int64 v7; // rax
-  UFG::qResourceData *v8; // rax
+  UFG::DynamicCoverCorner *m_pPointer; // rax
+  UFG::CoverCorner *v7; // rax
+  UFG::qResourceData *mData; // rax
   UFG::qBaseNodeRB *v9; // rcx
-  signed __int64 v10; // rax
-  signed __int64 v11; // rcx
-  UFG::qVector3 *v12; // rax
+  UFG::qBaseNodeRB **mChild; // rax
+  __int64 v11; // rcx
+  UFG::qVector3 *Velocity; // rax
 
-  v1 = &this->m_CornerHandle;
-  v2 = this;
+  p_m_CornerHandle = &this->m_CornerHandle;
   if ( !UFG::CoverCornerHandle::Get(&this->m_CornerHandle) )
-    goto LABEL_20;
-  if ( !v2->m_CornerHandle.m_pDynamicCoverCorner.m_pPointer )
-    goto LABEL_21;
+    return 0;
+  if ( !this->m_CornerHandle.m_pDynamicCoverCorner.m_pPointer )
+    return 1;
   v4 = 0i64;
-  if ( v1->m_ResourceHandle.mData && v1->m_uCoverCornerIndex != -1
-    || (v5 = v1->m_pDynamicCoverCorner.m_pPointer) != 0i64
+  if ( p_m_CornerHandle->m_ResourceHandle.mData && p_m_CornerHandle->m_uCoverCornerIndex != 0xFFFF
+    || (v5 = p_m_CornerHandle->m_pDynamicCoverCorner.m_pPointer) != 0i64
     && UFG::DynamicCoverComponent::IsEnabled((UFG::DynamicCoverComponent *)v5->m_pParentInstance.m_pPointer) )
   {
-    v6 = v1->m_pDynamicCoverCorner.m_pPointer;
-    if ( v6 )
+    m_pPointer = p_m_CornerHandle->m_pDynamicCoverCorner.m_pPointer;
+    if ( m_pPointer )
     {
-      v7 = (signed __int64)&v6->mPrev;
+      v7 = &m_pPointer->UFG::CoverCorner;
     }
     else
     {
-      v8 = v1->m_ResourceHandle.mData;
-      v9 = v8[1].mNode.mChild[0];
-      v10 = (signed __int64)v8[1].mNode.mChild;
+      mData = p_m_CornerHandle->m_ResourceHandle.mData;
+      v9 = mData[1].mNode.mChild[0];
+      mChild = mData[1].mNode.mChild;
       if ( v9 )
-        v11 = (signed __int64)v9 + v10;
+        v11 = (__int64)v9 + (_QWORD)mChild;
       else
         v11 = 0i64;
-      v7 = v11 + 48i64 * v1->m_uCoverCornerIndex;
+      v7 = (UFG::CoverCorner *)(v11 + 48i64 * p_m_CornerHandle->m_uCoverCornerIndex);
     }
     if ( v7 )
-      v4 = v7 - 24;
+      v4 = (UFG::CoverCorner *)((char *)v7 - 24);
   }
-  v12 = UFG::DynamicCoverComponent::GetVelocity(*(UFG::DynamicCoverComponent **)(v4 + 88));
-  if ( (float)((float)(v12->x * v12->x) + (float)(v12->y * v12->y)) >= (float)(UFG::CoverObjectBase::ms_fMaxCoverVelocity
-                                                                             * UFG::CoverObjectBase::ms_fMaxCoverVelocity) )
-LABEL_20:
-    result = 0;
-  else
-LABEL_21:
-    result = 1;
-  return result;
+  Velocity = UFG::DynamicCoverComponent::GetVelocity(*(UFG::DynamicCoverComponent **)&v4[1].m_fWallHeight);
+  return (float)((float)(Velocity->x * Velocity->x) + (float)(Velocity->y * Velocity->y)) < (float)(UFG::CoverObjectBase::ms_fMaxCoverVelocity
+                                                                                                  * UFG::CoverObjectBase::ms_fMaxCoverVelocity);
 }
 
 // File Line: 171
 // RVA: 0x365000
 bool __fastcall UFG::CoverObjectCorner::InRange2(UFG::CoverObjectCorner *this, UFG::qVector3 *vPosition, float fRange2)
 {
-  UFG::DynamicCoverCorner *v3; // rax
-  UFG::qVector3 *v4; // r10
+  UFG::DynamicCoverCorner *m_pPointer; // rax
   float *v5; // rax
-  UFG::qResourceData *v6; // rax
+  UFG::qResourceData *mData; // rax
   UFG::qBaseNodeRB *v7; // rdx
-  signed __int64 v8; // r9
+  char *v8; // r9
 
-  v3 = this->m_CornerHandle.m_pDynamicCoverCorner.m_pPointer;
-  v4 = vPosition;
-  if ( v3 )
+  m_pPointer = this->m_CornerHandle.m_pDynamicCoverCorner.m_pPointer;
+  if ( m_pPointer )
   {
-    v5 = (float *)&v3->mPrev;
+    v5 = (float *)&m_pPointer->UFG::CoverCorner;
   }
   else
   {
-    v6 = this->m_CornerHandle.m_ResourceHandle.mData;
-    if ( v6 )
+    mData = this->m_CornerHandle.m_ResourceHandle.mData;
+    if ( mData )
     {
-      v7 = v6[1].mNode.mChild[0];
+      v7 = mData[1].mNode.mChild[0];
       if ( v7 )
-        v8 = (signed __int64)v6[1].mNode.mChild + (_QWORD)v7;
+        v8 = (char *)mData[1].mNode.mChild + (_QWORD)v7;
       else
         v8 = 0i64;
-      v5 = (float *)(v8 + 48i64 * this->m_CornerHandle.m_uCoverCornerIndex);
+      v5 = (float *)&v8[48 * this->m_CornerHandle.m_uCoverCornerIndex];
     }
     else
     {
       v5 = 0i64;
     }
   }
-  return fRange2 > (float)((float)((float)((float)(v5[5] - v4->y) * (float)(v5[5] - v4->y))
-                                 + (float)((float)(v5[4] - v4->x) * (float)(v5[4] - v4->x)))
-                         + (float)((float)(v5[6] - v4->z) * (float)(v5[6] - v4->z)));
+  return fRange2 > (float)((float)((float)((float)(v5[5] - vPosition->y) * (float)(v5[5] - vPosition->y))
+                                 + (float)((float)(v5[4] - vPosition->x) * (float)(v5[4] - vPosition->x)))
+                         + (float)((float)(v5[6] - vPosition->z) * (float)(v5[6] - vPosition->z)));
 }
 
 // File Line: 182
 // RVA: 0x361F30
 UFG::qVector3 *__fastcall UFG::CoverObjectCorner::GetPosition(UFG::CoverObjectCorner *this, UFG::qVector3 *result)
 {
-  UFG::qVector3 *v2; // rbx
-  float *v3; // rax
-  float v4; // ecx
-
-  v2 = result;
-  v3 = (float *)UFG::CoverCornerHandle::Get(&this->m_CornerHandle);
-  v2->x = v3[4];
-  v4 = v3[5];
-  v2->z = v3[6];
-  v2->y = v4;
-  return v2;
+  *result = UFG::CoverCornerHandle::Get(&this->m_CornerHandle)->m_vCornerPosition;
+  return result;
 }
 
 // File Line: 189
 // RVA: 0x35F640
-UFG::qVector3 *__fastcall UFG::CoverObjectCorner::GetFiringPosition(UFG::CoverObjectCorner *this, UFG::qVector3 *result)
+UFG::qVector3 *__fastcall UFG::CoverObjectCorner::GetFiringPosition(
+        UFG::CoverObjectCorner *this,
+        UFG::qVector3 *result)
 {
-  UFG::qVector3 *v2; // rbx
   UFG::CoverCorner *v3; // rax
 
-  v2 = result;
-  v3 = (UFG::CoverCorner *)UFG::CoverCornerHandle::Get(&this->m_CornerHandle);
-  UFG::CoverCorner::GetFiringPos(v3, v2);
-  return v2;
+  v3 = UFG::CoverCornerHandle::Get(&this->m_CornerHandle);
+  UFG::CoverCorner::GetFiringPos(v3, result);
+  return result;
 }
 
 // File Line: 196
 // RVA: 0x3628C0
 UFG::qVector3 *__fastcall UFG::CoverObjectCorner::GetSweetSpotDir(UFG::CoverObjectCorner *this, UFG::qVector3 *result)
 {
-  UFG::qVector3 *v2; // rbx
   UFG::CoverCorner *v3; // rax
 
-  v2 = result;
-  v3 = (UFG::CoverCorner *)UFG::CoverCornerHandle::Get(&this->m_CornerHandle);
-  UFG::CoverCorner::GetSweetSpotDir(v3, v2);
-  return v2;
+  v3 = UFG::CoverCornerHandle::Get(&this->m_CornerHandle);
+  UFG::CoverCorner::GetSweetSpotDir(v3, result);
+  return result;
 }
 
 // File Line: 203
 // RVA: 0x3636A0
 UFG::qVector3 *__fastcall UFG::CoverObjectCorner::GetWallNormal(UFG::CoverObjectCorner *this, UFG::qVector3 *result)
 {
-  UFG::qVector3 *v2; // rbx
-  signed __int64 v3; // rax
-  float v4; // ecx
+  UFG::CoverCorner *v3; // rax
+  float x; // ecx
   UFG::qVector3 *v5; // rax
 
-  v2 = result;
   v3 = UFG::CoverCornerHandle::Get(&this->m_CornerHandle);
-  v2->z = 0.0;
-  v4 = *(float *)(v3 + 28);
-  v2->y = *(float *)(v3 + 32);
-  v5 = v2;
-  v2->x = v4;
+  result->z = 0.0;
+  x = v3->m_vWallNormal.x;
+  result->y = v3->m_vWallNormal.y;
+  v5 = result;
+  result->x = x;
   return v5;
 }
 
@@ -368,66 +320,60 @@ UFG::qVector3 *__fastcall UFG::CoverObjectCorner::GetWallNormal(UFG::CoverObject
 // RVA: 0x362940
 UFG::qVector3 *__fastcall UFG::CoverObjectCorner::GetSyncPos(UFG::CoverObjectCorner *this, UFG::qVector3 *result)
 {
-  UFG::qVector3 *v2; // rbx
   UFG::CoverCorner *v3; // rax
 
-  v2 = result;
-  v3 = (UFG::CoverCorner *)UFG::CoverCornerHandle::Get(&this->m_CornerHandle);
-  UFG::CoverCorner::GetSyncPos(v3, v2);
-  return v2;
+  v3 = UFG::CoverCornerHandle::Get(&this->m_CornerHandle);
+  UFG::CoverCorner::GetSyncPos(v3, result);
+  return result;
 }
 
 // File Line: 217
 // RVA: 0x360070
 bool __fastcall UFG::CoverObjectCorner::GetInUse(UFG::CoverObjectCorner *this)
 {
-  UFG::CoverObjectCorner *v1; // rbx
-  UFG::DynamicCoverCorner *v2; // rax
-  UFG::qResourceData *v4; // rax
+  UFG::DynamicCoverCorner *m_pPointer; // rax
+  UFG::qResourceData *mData; // rax
   UFG::qBaseNodeRB *v5; // rcx
-  signed __int64 v6; // r8
+  char *v6; // r8
 
-  v1 = this;
-  if ( !(*((unsigned __int8 (**)(void))&this->vfptr->__vecDelDtor + 2))() )
+  if ( !(*((unsigned __int8 (__fastcall **)(UFG::CoverObjectCorner *))&this->vfptr->__vecDelDtor + 2))(this) )
     return 0;
-  v2 = v1->m_CornerHandle.m_pDynamicCoverCorner.m_pPointer;
-  if ( v2 )
-    return v2->m_IsInUse != 0;
-  v4 = v1->m_CornerHandle.m_ResourceHandle.mData;
-  if ( !v4 )
+  m_pPointer = this->m_CornerHandle.m_pDynamicCoverCorner.m_pPointer;
+  if ( m_pPointer )
+    return m_pPointer->m_IsInUse != 0;
+  mData = this->m_CornerHandle.m_ResourceHandle.mData;
+  if ( !mData )
     return MEMORY[0x26] != 0;
-  v5 = v4[1].mNode.mChild[0];
+  v5 = mData[1].mNode.mChild[0];
   if ( v5 )
-    v6 = (signed __int64)v4[1].mNode.mChild + (_QWORD)v5;
+    v6 = (char *)mData[1].mNode.mChild + (_QWORD)v5;
   else
     v6 = 0i64;
-  return *(_BYTE *)(v6 + 48i64 * v1->m_CornerHandle.m_uCoverCornerIndex + 38) != 0;
+  return v6[48 * this->m_CornerHandle.m_uCoverCornerIndex + 38] != 0;
 }
 
 // File Line: 227
 // RVA: 0x386810
-void __fastcall UFG::CoverObjectCorner::SetInUse(UFG::CoverObjectCorner *this, bool bInUse)
+void __fastcall UFG::CoverObjectCorner::SetInUse(UFG::CoverObjectCorner *this, char bInUse)
 {
-  UFG::DynamicCoverCorner *v2; // rax
-  bool v3; // r8
-  UFG::qResourceData *v4; // rax
+  UFG::DynamicCoverCorner *m_pPointer; // rax
+  UFG::qResourceData *mData; // rax
   UFG::qBaseNodeRB *v5; // rdx
 
-  v2 = this->m_CornerHandle.m_pDynamicCoverCorner.m_pPointer;
-  v3 = bInUse;
-  if ( v2 )
+  m_pPointer = this->m_CornerHandle.m_pDynamicCoverCorner.m_pPointer;
+  if ( m_pPointer )
   {
-    v2->m_IsInUse = bInUse;
+    m_pPointer->m_IsInUse = bInUse;
   }
   else
   {
-    v4 = this->m_CornerHandle.m_ResourceHandle.mData;
-    if ( v4 )
+    mData = this->m_CornerHandle.m_ResourceHandle.mData;
+    if ( mData )
     {
-      v5 = v4[1].mNode.mChild[0];
+      v5 = mData[1].mNode.mChild[0];
       if ( v5 )
-        v5 = (UFG::qBaseNodeRB *)((char *)v5 + (_QWORD)v4 + 96);
-      *((_BYTE *)&v5[1].mParent + 48 * this->m_CornerHandle.m_uCoverCornerIndex + 6) = v3;
+        v5 = (UFG::qBaseNodeRB *)((char *)v5 + (_QWORD)mData + 96);
+      *((_BYTE *)&v5[1].mParent + 48 * this->m_CornerHandle.m_uCoverCornerIndex + 6) = bInUse;
     }
     else
     {
@@ -440,82 +386,76 @@ void __fastcall UFG::CoverObjectCorner::SetInUse(UFG::CoverObjectCorner *this, b
 // RVA: 0x341550
 void __fastcall UFG::CoverObjectCorner::AddUser(UFG::CoverObjectCorner *this, UFG::SimObject *pUser)
 {
-  UFG::SimObject *v2; // rsi
-  UFG::CoverObjectCorner *v3; // rdi
   _BOOL8 v4; // rdx
-  UFG::DynamicCoverCorner *v5; // rbx
-  signed __int64 v6; // rbx
-  UFG::qResourceData *v7; // rax
+  UFG::DynamicCoverCorner *m_pPointer; // rbx
+  UFG::CoverCorner *v6; // rbx
+  UFG::qResourceData *mData; // rax
   UFG::qBaseNodeRB *v8; // rcx
-  UFG::allocator::free_link *v9; // rax
-  UFG::qNode<UFG::CoverObjectBase::CoverUser,UFG::CoverObjectBase::CoverUser> *v10; // rcx
-  UFG::qNode<UFG::CoverObjectBase::CoverUser,UFG::CoverObjectBase::CoverUser> *v11; // rax
+  UFG::CoverObjectBase::CoverUser *v9; // rax
+  UFG::CoverObjectBase::CoverUser *m_pCoverUser; // rcx
+  UFG::qNode<UFG::CoverObjectBase::CoverUser,UFG::CoverObjectBase::CoverUser> *mPrev; // rax
 
-  v2 = pUser;
-  v3 = this;
-  ((void (__cdecl *)(UFG::CoverObjectCorner *))this->vfptr->GetInUse)(this);
+  this->vfptr->GetInUse(this);
   LOBYTE(v4) = 1;
-  v3->vfptr->SetInUse((UFG::CoverObjectBase *)&v3->vfptr, v4);
-  v5 = v3->m_CornerHandle.m_pDynamicCoverCorner.m_pPointer;
-  if ( v5 )
+  this->vfptr->SetInUse(this, v4);
+  m_pPointer = this->m_CornerHandle.m_pDynamicCoverCorner.m_pPointer;
+  if ( m_pPointer )
   {
-    v6 = (signed __int64)&v5->mPrev;
+    v6 = &m_pPointer->UFG::CoverCorner;
   }
   else
   {
-    v7 = v3->m_CornerHandle.m_ResourceHandle.mData;
-    if ( v7 )
+    mData = this->m_CornerHandle.m_ResourceHandle.mData;
+    if ( mData )
     {
-      v8 = v7[1].mNode.mChild[0];
+      v8 = mData[1].mNode.mChild[0];
       if ( v8 )
-        v8 = (UFG::qBaseNodeRB *)((char *)v8 + (_QWORD)v7 + 96);
-      v6 = (signed __int64)v8 + 48 * v3->m_CornerHandle.m_uCoverCornerIndex;
+        v8 = (UFG::qBaseNodeRB *)((char *)v8 + (_QWORD)mData + 96);
+      v6 = (UFG::CoverCorner *)((char *)v8 + 48 * this->m_CornerHandle.m_uCoverCornerIndex);
     }
     else
     {
       v6 = 0i64;
     }
   }
-  v9 = UFG::qMalloc(0x20ui64, "CoverUser", 0i64);
+  v9 = (UFG::CoverObjectBase::CoverUser *)UFG::qMalloc(0x20ui64, "CoverUser", 0i64);
   if ( v9 )
   {
+    v9->mPrev = v9;
     v9->mNext = v9;
-    v9[1].mNext = v9;
   }
-  v3->m_pCoverUser = (UFG::CoverObjectBase::CoverUser *)v9;
-  v9[2].mNext = (UFG::allocator::free_link *)v6;
-  v3->m_pCoverUser->pUser = v2;
-  v10 = (UFG::qNode<UFG::CoverObjectBase::CoverUser,UFG::CoverObjectBase::CoverUser> *)&v3->m_pCoverUser->mPrev;
-  v11 = UFG::CoverObjectBase::ms_listUsers.mNode.mPrev;
-  UFG::CoverObjectBase::ms_listUsers.mNode.mPrev->mNext = v10;
-  v10->mPrev = v11;
-  v10->mNext = (UFG::qNode<UFG::CoverObjectBase::CoverUser,UFG::CoverObjectBase::CoverUser> *)&UFG::CoverObjectBase::ms_listUsers;
-  UFG::CoverObjectBase::ms_listUsers.mNode.mPrev = v10;
+  this->m_pCoverUser = v9;
+  v9->pCoverObject = v6;
+  this->m_pCoverUser->pUser = pUser;
+  m_pCoverUser = this->m_pCoverUser;
+  mPrev = UFG::CoverObjectBase::ms_listUsers.mNode.mPrev;
+  UFG::CoverObjectBase::ms_listUsers.mNode.mPrev->mNext = m_pCoverUser;
+  m_pCoverUser->mPrev = mPrev;
+  m_pCoverUser->mNext = (UFG::qNode<UFG::CoverObjectBase::CoverUser,UFG::CoverObjectBase::CoverUser> *)&UFG::CoverObjectBase::ms_listUsers;
+  UFG::CoverObjectBase::ms_listUsers.mNode.mPrev = m_pCoverUser;
 }
 
 // File Line: 263
 // RVA: 0x3815B0
 void __fastcall UFG::CoverObjectCorner::RemoveUser(UFG::CoverObjectCorner *this)
 {
-  UFG::CoverObjectCorner *v1; // rbx
-  UFG::CoverObjectBase::CoverUser *v2; // rdx
-  UFG::qNode<UFG::CoverObjectBase::CoverUser,UFG::CoverObjectBase::CoverUser> *v3; // rcx
-  UFG::qNode<UFG::CoverObjectBase::CoverUser,UFG::CoverObjectBase::CoverUser> *v4; // rax
+  UFG::CoverObjectBase::CoverUser *m_pCoverUser; // rdx
+  UFG::qNode<UFG::CoverObjectBase::CoverUser,UFG::CoverObjectBase::CoverUser> *mPrev; // rcx
+  UFG::qNode<UFG::CoverObjectBase::CoverUser,UFG::CoverObjectBase::CoverUser> *mNext; // rax
 
-  v1 = this;
-  if ( (*((unsigned __int8 (**)(void))&this->vfptr->__vecDelDtor + 2))() )
-    v1->vfptr->GetInUse((UFG::CoverObjectBase *)&v1->vfptr);
-  v1->vfptr->SetInUse((UFG::CoverObjectBase *)&v1->vfptr, 0);
-  v2 = v1->m_pCoverUser;
-  if ( v2 )
+  if ( (*((unsigned __int8 (__fastcall **)(UFG::CoverObjectCorner *))&this->vfptr->__vecDelDtor + 2))(this) )
+    this->vfptr->GetInUse(this);
+  this->vfptr->SetInUse(this, 0);
+  m_pCoverUser = this->m_pCoverUser;
+  if ( m_pCoverUser )
   {
-    v3 = v2->mPrev;
-    v4 = v2->mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v2->mPrev = (UFG::qNode<UFG::CoverObjectBase::CoverUser,UFG::CoverObjectBase::CoverUser> *)&v2->mPrev;
-    v2->mNext = (UFG::qNode<UFG::CoverObjectBase::CoverUser,UFG::CoverObjectBase::CoverUser> *)&v2->mPrev;
-    v1->m_pCoverUser = 0i64;
+    mPrev = m_pCoverUser->mPrev;
+    mNext = m_pCoverUser->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    m_pCoverUser->mPrev = m_pCoverUser;
+    m_pCoverUser->mNext = m_pCoverUser;
+    this->m_pCoverUser = 0i64;
   }
 }
 
@@ -523,51 +463,46 @@ void __fastcall UFG::CoverObjectCorner::RemoveUser(UFG::CoverObjectCorner *this)
 // RVA: 0x34C960
 char __fastcall UFG::CoverObjectCorner::CanUse(UFG::CoverObjectCorner *this, UFG::SimObject *pUser)
 {
-  UFG::SimObject *v2; // rdi
-  UFG::CoverObjectCorner *v3; // rbx
-  UFG::DynamicCoverCorner *v5; // rcx
-  signed __int64 v6; // rcx
-  UFG::qResourceData *v7; // rax
+  UFG::DynamicCoverCorner *m_pPointer; // rcx
+  UFG::CoverCorner *v6; // rcx
+  UFG::qResourceData *mData; // rax
   UFG::qBaseNodeRB *v8; // rcx
-  signed __int64 v9; // rdx
-  UFG::qList<UFG::CoverObjectBase::CoverUser,UFG::CoverObjectBase::CoverUser,1,0> *v10; // rax
+  char *v9; // rdx
+  UFG::qNode<UFG::CoverObjectBase::CoverUser,UFG::CoverObjectBase::CoverUser> *mNext; // rax
 
-  v2 = pUser;
-  v3 = this;
-  if ( (*((unsigned __int8 (**)(void))&this->vfptr->__vecDelDtor + 2))() )
+  if ( (*((unsigned __int8 (__fastcall **)(UFG::CoverObjectCorner *))&this->vfptr->__vecDelDtor + 2))(this) )
   {
-    if ( !v3->vfptr->GetInUse((UFG::CoverObjectBase *)&v3->vfptr) )
+    if ( !this->vfptr->GetInUse(this) )
       return 1;
-    v5 = v3->m_CornerHandle.m_pDynamicCoverCorner.m_pPointer;
-    if ( v5 )
+    m_pPointer = this->m_CornerHandle.m_pDynamicCoverCorner.m_pPointer;
+    if ( m_pPointer )
     {
-      v6 = (signed __int64)&v5->mPrev;
+      v6 = &m_pPointer->UFG::CoverCorner;
     }
     else
     {
-      v7 = v3->m_CornerHandle.m_ResourceHandle.mData;
-      if ( v7 )
+      mData = this->m_CornerHandle.m_ResourceHandle.mData;
+      if ( mData )
       {
-        v8 = v7[1].mNode.mChild[0];
+        v8 = mData[1].mNode.mChild[0];
         if ( v8 )
-          v9 = (signed __int64)v7[1].mNode.mChild + (_QWORD)v8;
+          v9 = (char *)mData[1].mNode.mChild + (_QWORD)v8;
         else
           v9 = 0i64;
-        v6 = v9 + 48i64 * v3->m_CornerHandle.m_uCoverCornerIndex;
+        v6 = (UFG::CoverCorner *)&v9[48 * this->m_CornerHandle.m_uCoverCornerIndex];
       }
       else
       {
         v6 = 0i64;
       }
     }
-    v10 = (UFG::qList<UFG::CoverObjectBase::CoverUser,UFG::CoverObjectBase::CoverUser,1,0> *)UFG::CoverObjectBase::ms_listUsers.mNode.mNext;
+    mNext = UFG::CoverObjectBase::ms_listUsers.mNode.mNext;
     if ( (UFG::qList<UFG::CoverObjectBase::CoverUser,UFG::CoverObjectBase::CoverUser,1,0> *)UFG::CoverObjectBase::ms_listUsers.mNode.mNext != &UFG::CoverObjectBase::ms_listUsers )
     {
-      while ( v10[1].mNode.mPrev != (UFG::qNode<UFG::CoverObjectBase::CoverUser,UFG::CoverObjectBase::CoverUser> *)v6
-           || (UFG::SimObject *)v10[1].mNode.mNext != v2 )
+      while ( (UFG::CoverCorner *)mNext[1].mPrev != v6 || (UFG::SimObject *)mNext[1].mNext != pUser )
       {
-        v10 = (UFG::qList<UFG::CoverObjectBase::CoverUser,UFG::CoverObjectBase::CoverUser,1,0> *)v10->mNode.mNext;
-        if ( v10 == &UFG::CoverObjectBase::ms_listUsers )
+        mNext = mNext->mNext;
+        if ( mNext == (UFG::qNode<UFG::CoverObjectBase::CoverUser,UFG::CoverObjectBase::CoverUser> *)&UFG::CoverObjectBase::ms_listUsers )
           return 0;
       }
       return 1;
@@ -578,23 +513,21 @@ char __fastcall UFG::CoverObjectCorner::CanUse(UFG::CoverObjectCorner *this, UFG
 
 // File Line: 309
 // RVA: 0x369A30
-bool __fastcall UFG::CoverObjectCorner::IsAnyLineOrCornerShared(UFG::CoverObjectCorner *this, UFG::CoverObjectBase *pOther)
+bool __fastcall UFG::CoverObjectCorner::IsAnyLineOrCornerShared(
+        UFG::CoverObjectCorner *this,
+        UFG::CoverObjectBase *pOther)
 {
-  UFG::CoverObjectCorner *v2; // rbx
-  UFG::CoverObjectBase *v3; // rdi
-  signed __int64 v4; // rbx
+  UFG::CoverCorner *v4; // rbx
   bool result; // al
 
-  v2 = this;
-  v3 = pOther;
   result = 0;
   if ( pOther->vfptr->IsCorner(pOther) )
   {
-    v4 = UFG::CoverCornerHandle::Get(&v2->m_CornerHandle);
+    v4 = UFG::CoverCornerHandle::Get(&this->m_CornerHandle);
     if ( v4 )
     {
-      if ( v4 == UFG::CoverCornerHandle::Get((UFG::CoverCornerHandle *)&v3[1]) )
-        result = 1;
+      if ( v4 == UFG::CoverCornerHandle::Get((UFG::CoverCornerHandle *)&pOther[1]) )
+        return 1;
     }
   }
   return result;

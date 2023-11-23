@@ -11,16 +11,19 @@ void __fastcall hkQueue<hkJobQueue::JobQueueEntry>::hkQueue<hkJobQueue::JobQueue
 // RVA: 0xB59D60
 void __fastcall hkQueue<int>::~hkQueue<int>(hkQueue<int> *this)
 {
-  int v1; // edi
-  int *v2; // rbx
-  _QWORD **v3; // rax
+  int m_capacity; // edi
+  int *m_data; // rbx
+  _QWORD **Value; // rax
 
-  v1 = this->m_capacity;
-  if ( v1 )
+  m_capacity = this->m_capacity;
+  if ( m_capacity )
   {
-    v2 = this->m_data;
-    v3 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    (*(void (__fastcall **)(_QWORD *, int *, _QWORD))(*v3[11] + 16i64))(v3[11], v2, (unsigned int)(4 * v1));
+    m_data = this->m_data;
+    Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    (*(void (__fastcall **)(_QWORD *, int *, _QWORD))(*Value[11] + 16i64))(
+      Value[11],
+      m_data,
+      (unsigned int)(4 * m_capacity));
   }
 }
 
@@ -28,187 +31,181 @@ void __fastcall hkQueue<int>::~hkQueue<int>(hkQueue<int> *this)
 // RVA: 0xB5A9E0
 void __fastcall hkQueue<int>::setCapacity(hkQueue<int> *this, int n)
 {
-  int v2; // eax
+  int m_capacity; // eax
   int v3; // esi
-  hkQueue<int> *v4; // rdi
   int v5; // eax
-  _QWORD **v6; // rax
+  _QWORD **Value; // rax
   int *v7; // rax
   int *v8; // r14
-  int *v9; // rcx
-  int v10; // er8
-  signed int v11; // ebp
-  __int64 v12; // rdx
+  int *m_data; // rcx
+  int m_elementsInUse; // r8d
+  int m_tail; // ebp
+  __int64 m_head; // rdx
   int v13; // ebx
   int *v14; // rdx
   int *v15; // rcx
-  int v16; // er8
+  int v16; // r8d
   int v17; // eax
   int v18; // ebp
   int *v19; // rbx
   _QWORD **v20; // rax
 
-  v2 = this->m_capacity;
+  m_capacity = this->m_capacity;
   v3 = n;
-  v4 = this;
-  if ( v2 < n )
+  if ( m_capacity < n )
   {
-    v5 = 2 * v2;
+    v5 = 2 * m_capacity;
     if ( v5 >= n )
       v3 = v5;
-    v6 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v7 = (int *)(*(__int64 (__fastcall **)(_QWORD *, _QWORD))(*v6[11] + 8i64))(v6[11], (unsigned int)(4 * v3));
+    Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    v7 = (int *)(*(__int64 (__fastcall **)(_QWORD *, _QWORD))(*Value[11] + 8i64))(Value[11], (unsigned int)(4 * v3));
     v8 = v7;
     if ( v7 )
     {
-      v9 = v4->m_data;
-      if ( v4->m_data )
+      m_data = this->m_data;
+      if ( this->m_data )
       {
-        v10 = v4->m_elementsInUse;
-        if ( v10 )
+        m_elementsInUse = this->m_elementsInUse;
+        if ( m_elementsInUse )
         {
-          v11 = v4->m_tail;
-          v12 = v4->m_head;
-          if ( v11 > (signed int)v12 )
+          m_tail = this->m_tail;
+          m_head = this->m_head;
+          if ( m_tail > (int)m_head )
           {
-            v14 = &v9[v12];
-            v16 = 4 * v10;
+            v14 = &m_data[m_head];
+            v16 = 4 * m_elementsInUse;
             v15 = v7;
           }
           else
           {
-            v13 = v4->m_capacity - v12;
-            hkString::memCpy(v7, &v9[v12], 4 * v13);
-            v14 = v4->m_data;
+            v13 = this->m_capacity - m_head;
+            hkString::memCpy(v7, &m_data[m_head], 4 * v13);
+            v14 = this->m_data;
             v15 = &v8[v13];
-            v16 = 4 * v11;
+            v16 = 4 * m_tail;
           }
           hkString::memCpy(v15, v14, v16);
         }
-        v17 = v4->m_elementsInUse;
-        v4->m_head = 0;
-        v4->m_tail = v17;
+        v17 = this->m_elementsInUse;
+        this->m_head = 0;
+        this->m_tail = v17;
       }
     }
-    v18 = v4->m_capacity;
+    v18 = this->m_capacity;
     if ( v18 )
     {
-      v19 = v4->m_data;
+      v19 = this->m_data;
       v20 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
       (*(void (__fastcall **)(_QWORD *, int *, _QWORD))(*v20[11] + 16i64))(v20[11], v19, (unsigned int)(4 * v18));
     }
-    v4->m_data = v8;
-    v4->m_capacity = v3;
+    this->m_data = v8;
+    this->m_capacity = v3;
   }
 }
 
 // File Line: 154
 // RVA: 0xC64FE0
-void __fastcall hkQueue<hkJobQueue::JobQueueEntry>::enqueue(hkQueue<hkJobQueue::JobQueueEntry> *this, hkJobQueue::JobQueueEntry *element)
+void __fastcall hkQueue<hkJobQueue::JobQueueEntry>::enqueue(
+        hkQueue<hkJobQueue::JobQueueEntry> *this,
+        hkJobQueue::JobQueueEntry *element)
 {
-  hkJobQueue::JobQueueEntry *v2; // rdi
-  int v3; // edx
-  hkQueue<hkJobQueue::JobQueueEntry> *v4; // rbx
+  int m_capacity; // edx
   int v5; // edx
   hkJobQueue::JobQueueEntry *v6; // rcx
-  signed __int64 v7; // rax
+  __int64 v7; // rax
   hkJob v8; // xmm0
 
-  v2 = element;
-  v3 = this->m_capacity;
-  v4 = this;
-  if ( this->m_elementsInUse >= v3 )
+  m_capacity = this->m_capacity;
+  if ( this->m_elementsInUse >= m_capacity )
   {
-    if ( v3 )
-      v5 = 2 * v3;
+    if ( m_capacity )
+      v5 = 2 * m_capacity;
     else
       v5 = 8;
     hkQueue<hkJobQueue::JobQueueEntry>::setCapacity(this, v5);
   }
-  if ( v4->m_tail == v4->m_capacity )
-    v4->m_tail = 0;
-  v6 = &v4->m_data[(signed __int64)v4->m_tail];
-  if ( (LOBYTE(v4->m_data) | (unsigned __int8)v2) & 0xF )
+  if ( this->m_tail == this->m_capacity )
+    this->m_tail = 0;
+  v6 = &this->m_data[(__int64)this->m_tail];
+  if ( ((LOBYTE(this->m_data) | (unsigned __int8)element) & 0xF) != 0 )
   {
-    memmove(v6, v2, 0x100ui64);
-    ++v4->m_tail;
-    ++v4->m_elementsInUse;
+    memmove(v6, element, 0x100ui64);
+    ++this->m_tail;
+    ++this->m_elementsInUse;
   }
   else
   {
     v7 = 2i64;
     do
     {
-      v8 = v2->0;
+      v8 = element->hkJob;
       v6 = (hkJobQueue::JobQueueEntry *)((char *)v6 + 128);
-      v2 = (hkJobQueue::JobQueueEntry *)((char *)v2 + 128);
-      *(hkJob *)&v6[-1].m_data[112] = v8;
-      *(_OWORD *)&v6[-1].m_data[128] = *(_OWORD *)&v2[-1].m_data[128];
-      *(_OWORD *)&v6[-1].m_data[144] = *(_OWORD *)&v2[-1].m_data[144];
-      *(_OWORD *)&v6[-1].m_data[160] = *(_OWORD *)&v2[-1].m_data[160];
-      *(_OWORD *)&v6[-1].m_data[176] = *(_OWORD *)&v2[-1].m_data[176];
-      *(_OWORD *)&v6[-1].m_data[192] = *(_OWORD *)&v2[-1].m_data[192];
-      *(_OWORD *)&v6[-1].m_data[208] = *(_OWORD *)&v2[-1].m_data[208];
-      *(_OWORD *)&v6[-1].m_data[224] = *(_OWORD *)&v2[-1].m_data[224];
+      element = (hkJobQueue::JobQueueEntry *)((char *)element + 128);
+      *((hkJob *)v6 - 8) = v8;
+      *(_OWORD *)&v6[-1].m_data[128] = *(_OWORD *)&element[-1].m_data[128];
+      *(_OWORD *)&v6[-1].m_data[144] = *(_OWORD *)&element[-1].m_data[144];
+      *(_OWORD *)&v6[-1].m_data[160] = *(_OWORD *)&element[-1].m_data[160];
+      *(_OWORD *)&v6[-1].m_data[176] = *(_OWORD *)&element[-1].m_data[176];
+      *(_OWORD *)&v6[-1].m_data[192] = *(_OWORD *)&element[-1].m_data[192];
+      *(_OWORD *)&v6[-1].m_data[208] = *(_OWORD *)&element[-1].m_data[208];
+      *(_OWORD *)&v6[-1].m_data[224] = *(_OWORD *)&element[-1].m_data[224];
       --v7;
     }
     while ( v7 );
-    ++v4->m_tail;
-    ++v4->m_elementsInUse;
+    ++this->m_tail;
+    ++this->m_elementsInUse;
   }
 }
 
 // File Line: 174
 // RVA: 0xC650C0
-void __fastcall hkQueue<hkJobQueue::JobQueueEntry>::enqueueInFront(hkQueue<hkJobQueue::JobQueueEntry> *this, hkJobQueue::JobQueueEntry *element)
+void __fastcall hkQueue<hkJobQueue::JobQueueEntry>::enqueueInFront(
+        hkQueue<hkJobQueue::JobQueueEntry> *this,
+        hkJobQueue::JobQueueEntry *element)
 {
-  hkJobQueue::JobQueueEntry *v2; // rbx
-  int v3; // edx
-  hkQueue<hkJobQueue::JobQueueEntry> *v4; // rdi
+  int m_capacity; // edx
   int v5; // edx
   hkJobQueue::JobQueueEntry *v6; // rcx
-  signed __int64 v7; // rax
+  __int64 v7; // rax
   hkJob v8; // xmm0
 
-  v2 = element;
-  v3 = this->m_capacity;
-  v4 = this;
-  if ( this->m_elementsInUse >= v3 )
+  m_capacity = this->m_capacity;
+  if ( this->m_elementsInUse >= m_capacity )
   {
-    if ( v3 )
-      v5 = 2 * v3;
+    if ( m_capacity )
+      v5 = 2 * m_capacity;
     else
       v5 = 8;
     hkQueue<hkJobQueue::JobQueueEntry>::setCapacity(this, v5);
   }
-  if ( !v4->m_head )
-    v4->m_head = v4->m_capacity;
-  v6 = &v4->m_data[(signed __int64)--v4->m_head];
-  if ( (LOBYTE(v4->m_data) | (unsigned __int8)v2) & 0xF )
+  if ( !this->m_head )
+    this->m_head = this->m_capacity;
+  v6 = &this->m_data[(__int64)--this->m_head];
+  if ( ((LOBYTE(this->m_data) | (unsigned __int8)element) & 0xF) != 0 )
   {
-    memmove(v6, v2, 0x100ui64);
-    ++v4->m_elementsInUse;
+    memmove(v6, element, 0x100ui64);
+    ++this->m_elementsInUse;
   }
   else
   {
     v7 = 2i64;
     do
     {
-      v8 = v2->0;
+      v8 = element->hkJob;
       v6 = (hkJobQueue::JobQueueEntry *)((char *)v6 + 128);
-      v2 = (hkJobQueue::JobQueueEntry *)((char *)v2 + 128);
-      *(hkJob *)&v6[-1].m_data[112] = v8;
-      *(_OWORD *)&v6[-1].m_data[128] = *(_OWORD *)&v2[-1].m_data[128];
-      *(_OWORD *)&v6[-1].m_data[144] = *(_OWORD *)&v2[-1].m_data[144];
-      *(_OWORD *)&v6[-1].m_data[160] = *(_OWORD *)&v2[-1].m_data[160];
-      *(_OWORD *)&v6[-1].m_data[176] = *(_OWORD *)&v2[-1].m_data[176];
-      *(_OWORD *)&v6[-1].m_data[192] = *(_OWORD *)&v2[-1].m_data[192];
-      *(_OWORD *)&v6[-1].m_data[208] = *(_OWORD *)&v2[-1].m_data[208];
-      *(_OWORD *)&v6[-1].m_data[224] = *(_OWORD *)&v2[-1].m_data[224];
+      element = (hkJobQueue::JobQueueEntry *)((char *)element + 128);
+      *((hkJob *)v6 - 8) = v8;
+      *(_OWORD *)&v6[-1].m_data[128] = *(_OWORD *)&element[-1].m_data[128];
+      *(_OWORD *)&v6[-1].m_data[144] = *(_OWORD *)&element[-1].m_data[144];
+      *(_OWORD *)&v6[-1].m_data[160] = *(_OWORD *)&element[-1].m_data[160];
+      *(_OWORD *)&v6[-1].m_data[176] = *(_OWORD *)&element[-1].m_data[176];
+      *(_OWORD *)&v6[-1].m_data[192] = *(_OWORD *)&element[-1].m_data[192];
+      *(_OWORD *)&v6[-1].m_data[208] = *(_OWORD *)&element[-1].m_data[208];
+      *(_OWORD *)&v6[-1].m_data[224] = *(_OWORD *)&element[-1].m_data[224];
       --v7;
     }
     while ( v7 );
-    ++v4->m_elementsInUse;
+    ++this->m_elementsInUse;
   }
 }
 

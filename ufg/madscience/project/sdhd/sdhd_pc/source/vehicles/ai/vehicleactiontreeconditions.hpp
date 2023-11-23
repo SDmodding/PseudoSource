@@ -151,19 +151,16 @@ CarOccupantHasTarget *__fastcall CarOccupantHasTarget::Create()
 // RVA: 0x3136B0
 void __fastcall CarOccupantTargetInFrustum::CarOccupantTargetInFrustum(CarOccupantTargetInFrustum *this)
 {
-  CarOccupantTargetInFrustum *v1; // rbx
-
-  v1 = this;
-  Condition::Condition((Condition *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&CarOccupantTargetInFrustum::`vftable;
-  v1->m_eTargetType.mValue = 4;
-  v1->m_fNearDistance = 0.0;
-  v1->m_fFarDistance = 10.0;
-  v1->m_fAngleStartCW = 4.712389;
-  v1->m_fAngleEndCW = 1.5707964;
-  v1->m_sAimingJointName.mOffset = 1i64;
-  BinString::Set(&v1->m_sAimingJointName, &customWorldMapCaption);
-  *(_WORD *)&v1->m_bTestLOS = 0;
+  Condition::Condition(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&CarOccupantTargetInFrustum::`vftable;
+  this->m_eTargetType.mValue = 4;
+  this->m_fNearDistance = 0.0;
+  this->m_fFarDistance = 10.0;
+  this->m_fAngleStartCW = 4.712389;
+  this->m_fAngleEndCW = 1.5707964;
+  this->m_sAimingJointName.mOffset = 1i64;
+  BinString::Set(&this->m_sAimingJointName, &customCaption);
+  *(_WORD *)&this->m_bTestLOS = 0;
 }
 
 // File Line: 361

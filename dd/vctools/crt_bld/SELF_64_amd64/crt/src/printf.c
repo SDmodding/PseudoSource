@@ -1,8 +1,7 @@
 // File Line: 49
 // RVA: 0x12B2DC8
-signed __int64 printf(const char *format, ...)
+__int64 printf(const char *format, ...)
 {
-  signed __int64 result; // rax
   _iobuf *v2; // rax
   _iobuf *v3; // rax
   int v4; // ebx
@@ -10,11 +9,9 @@ signed __int64 printf(const char *format, ...)
   unsigned int v6; // edi
   _iobuf *v7; // rax
   _iobuf *v8; // rax
-  char *formata; // [rsp+40h] [rbp+8h]
-  va_list argptr; // [rsp+48h] [rbp+10h]
+  va_list argptr; // [rsp+48h] [rbp+10h] BYREF
 
   va_start(argptr, format);
-  formata = (char *)format;
   if ( format )
   {
     v2 = _iob_func();
@@ -22,20 +19,19 @@ signed __int64 printf(const char *format, ...)
     v3 = _iob_func();
     v4 = stbuf(v3 + 1);
     v5 = _iob_func();
-    v6 = output_l(v5 + 1, formata, 0i64, argptr);
+    v6 = output_l(v5 + 1, format, 0i64, argptr);
     v7 = _iob_func();
     ftbuf(v4, v7 + 1);
     v8 = _iob_func();
     unlock_file2(1, &v8[1]);
-    result = v6;
+    return v6;
   }
   else
   {
     *errno() = 22;
     invalid_parameter_noinfo();
-    result = 0xFFFFFFFFi64;
+    return 0xFFFFFFFFi64;
   }
-  return result;
 }
 
 // File Line: 67

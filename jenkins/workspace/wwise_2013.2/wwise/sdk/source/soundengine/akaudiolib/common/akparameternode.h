@@ -1,12 +1,12 @@
 // File Line: 140
 // RVA: 0xA6DE00
-bool __fastcall CAkParameterNode::ParamOverriden(CAkParameterNode *this, AkRTPC_ParameterID in_ParamID)
+bool __fastcall CAkParameterNode::ParamOverriden(CAkParameterNode *this, int in_ParamID)
 {
   bool v3; // zf
 
-  if ( (signed int)in_ParamID >= 15 )
+  if ( in_ParamID >= 15 )
   {
-    if ( (signed int)in_ParamID <= 18 )
+    if ( in_ParamID <= 18 )
     {
       v3 = (*((_BYTE *)this + 145) & 0x40) == 0;
     }
@@ -28,13 +28,13 @@ bool __fastcall CAkParameterNode::ParamOverriden(CAkParameterNode *this, AkRTPC_
 
 // File Line: 167
 // RVA: 0xA6DDC0
-bool __fastcall CAkParameterNode::ParamMustNotify(CAkParameterNode *this, AkRTPC_ParameterID in_ParamID)
+bool __fastcall CAkParameterNode::ParamMustNotify(CAkParameterNode *this, int in_ParamID)
 {
   bool v3; // zf
 
-  if ( (signed int)in_ParamID >= 15 )
+  if ( in_ParamID >= 15 )
   {
-    if ( (signed int)in_ParamID <= 18 )
+    if ( in_ParamID <= 18 )
     {
       v3 = (*((_BYTE *)this + 145) & 0x40) == 0;
     }

@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkpModifierConstraintAtomClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 60
@@ -58,7 +58,7 @@ void dynamic_initializer_for__hkpMassChangerModifierConstraintAtomClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 114

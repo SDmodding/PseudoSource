@@ -6,7 +6,7 @@ __int64 UFG::_dynamic_initializer_for__gCollisionEventChannel__()
     &UFG::gCollisionEventChannel,
     "CollisionEvent",
     "This is an event that gets generated when collisions happen.");
-  return atexit(UFG::_dynamic_atexit_destructor_for__gCollisionEventChannel__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gCollisionEventChannel__);
 }
 
 // File Line: 25
@@ -17,7 +17,7 @@ __int64 UFG::_dynamic_initializer_for__gBulletCollisionEventChannel__()
     &UFG::gBulletCollisionEventChannel,
     "BulletCollisionEvent",
     "This is an event that gets generated when bullets hit things");
-  return atexit(UFG::_dynamic_atexit_destructor_for__gBulletCollisionEventChannel__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gBulletCollisionEventChannel__);
 }
 
 // File Line: 34
@@ -31,7 +31,7 @@ void UFG::CollisionEvent::Initialize(void)
   v1 = (UFG::ThreadSafeQueue<UFG::CollisionEvent> *)v0;
   if ( v0 )
   {
-    UFG::qMutex::qMutex((UFG::qMutex *)v0 + 1, &customWorldMapCaption);
+    UFG::qMutex::qMutex((UFG::qMutex *)v0 + 1, &customCaption);
     v1->head.next = &v1->tail;
     v1->head.prev = 0i64;
     v1->tail.prev = &v1->head;
@@ -48,17 +48,13 @@ void UFG::CollisionEvent::Initialize(void)
 // RVA: 0x97550
 void __fastcall UFG::CollisionEvent::CollisionEvent(UFG::CollisionEvent *this)
 {
-  UFG::CollisionEvent *v1; // rbx
-  unsigned int v2; // edx
-  UFG::qNode<UFG::Event,UFG::Event> *v3; // rax
+  unsigned int mUID; // edx
 
-  v1 = this;
-  v2 = UFG::gCollisionEventChannel.mUID;
-  v3 = (UFG::qNode<UFG::Event,UFG::Event> *)&this->mPrev;
-  v3->mPrev = v3;
-  v3->mNext = v3;
+  mUID = UFG::gCollisionEventChannel.mUID;
+  this->mPrev = &this->UFG::qNode<UFG::Event,UFG::Event>;
+  this->mNext = &this->UFG::qNode<UFG::Event,UFG::Event>;
   this->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
-  this->m_EventUID = v2;
+  this->m_EventUID = mUID;
   this->m_NamePTR = 0i64;
   this->vfptr = (UFG::EventVtbl *)&UFG::CollisionEvent::`vftable;
   `eh vector constructor iterator(
@@ -66,56 +62,56 @@ void __fastcall UFG::CollisionEvent::CollisionEvent(UFG::CollisionEvent *this)
     0x18ui64,
     2,
     (void (__fastcall *)(void *))UFG::qSafePointer<UFG::SimObject,UFG::SimObjectCharacter>::qSafePointer<UFG::SimObject,UFG::SimObjectCharacter>);
-  v1->havokUserData[0] = 0i64;
-  v1->havokUserData[1] = 0i64;
-  UFG::ThreadSafeQueue<hkpEntity>::AddHead(UFG::CollisionEvent::mQueue, v1);
+  this->havokUserData[0] = 0i64;
+  this->havokUserData[1] = 0i64;
+  UFG::ThreadSafeQueue<hkpEntity>::AddHead(UFG::CollisionEvent::mQueue, this);
 }
 
 // File Line: 60
 // RVA: 0x96FC0
 void __fastcall UFG::BulletCollisionEvent::BulletCollisionEvent(UFG::BulletCollisionEvent *this)
 {
-  UFG::BulletCollisionEvent *v1; // rbx
-
-  v1 = this;
-  UFG::CollisionEvent::CollisionEvent((UFG::CollisionEvent *)&this->vfptr);
-  v1->vfptr = (UFG::EventVtbl *)&UFG::BulletCollisionEvent::`vftable;
-  v1->m_EventUID = UFG::gBulletCollisionEventChannel.mUID;
+  UFG::CollisionEvent::CollisionEvent(this);
+  this->vfptr = (UFG::EventVtbl *)&UFG::BulletCollisionEvent::`vftable;
+  this->m_EventUID = UFG::gBulletCollisionEventChannel.mUID;
 }
 
 // File Line: 82
 // RVA: 0x97300
-void __fastcall UFG::CollisionEvent::CollisionEvent(UFG::CollisionEvent *this, UFG::CollisionEvent::ContactType type, hkpRigidBody *rbA, hkpRigidBody *rbB, hkVector4f *_position, hkVector4f *_normal, float _speed, unsigned __int64 objectPropertiesHandleUIDA, unsigned __int64 objectPropertiesHandleUIDB, unsigned __int64 surfacePropertiesHandleUIDA, unsigned __int64 surfacePropertiesHandleUIDB)
+void __fastcall UFG::CollisionEvent::CollisionEvent(
+        UFG::CollisionEvent *this,
+        UFG::CollisionEvent::ContactType type,
+        hkpRigidBody *rbA,
+        hkpRigidBody *rbB,
+        hkVector4f *_position,
+        hkVector4f *_normal,
+        float _speed,
+        unsigned __int64 objectPropertiesHandleUIDA,
+        unsigned __int64 objectPropertiesHandleUIDB,
+        unsigned __int64 surfacePropertiesHandleUIDA,
+        unsigned __int64 surfacePropertiesHandleUIDB)
 {
-  hkpRigidBody *v11; // rdi
-  hkpRigidBody *v12; // rsi
-  UFG::CollisionEvent *v13; // rbx
-  unsigned int v14; // er10
-  UFG::qNode<UFG::Event,UFG::Event> *v15; // rax
-  float v16; // xmm1_4
-  float v17; // xmm2_4
-  float v18; // xmm1_4
-  float v19; // xmm2_4
+  unsigned int mUID; // r10d
+  float v15; // xmm1_4
+  float v16; // xmm2_4
+  float v17; // xmm1_4
+  float v18; // xmm2_4
+  float v19; // xmm0_4
   float v20; // xmm0_4
-  float v21; // xmm0_4
-  float v22; // xmm1_4
-  float v23; // xmm2_4
-  float v24; // xmm1_4
-  float v25; // xmm2_4
-  float v26; // xmm1_4
-  float v27; // xmm2_4
-  float v28; // xmm1_4
-  float v29; // xmm2_4
+  float v21; // xmm1_4
+  float v22; // xmm2_4
+  float v23; // xmm1_4
+  float v24; // xmm2_4
+  float v25; // xmm1_4
+  float v26; // xmm2_4
+  float v27; // xmm1_4
+  float v28; // xmm2_4
 
-  v11 = rbB;
-  v12 = rbA;
-  v13 = this;
-  v14 = UFG::gCollisionEventChannel.mUID;
-  v15 = (UFG::qNode<UFG::Event,UFG::Event> *)&this->mPrev;
-  v15->mPrev = v15;
-  v15->mNext = v15;
+  mUID = UFG::gCollisionEventChannel.mUID;
+  this->mPrev = &this->UFG::qNode<UFG::Event,UFG::Event>;
+  this->mNext = &this->UFG::qNode<UFG::Event,UFG::Event>;
   this->vfptr = (UFG::EventVtbl *)&UFG::Event::`vftable;
-  this->m_EventUID = v14;
+  this->m_EventUID = mUID;
   this->m_NamePTR = 0i64;
   this->vfptr = (UFG::EventVtbl *)&UFG::CollisionEvent::`vftable;
   this->mType = type;
@@ -124,49 +120,49 @@ void __fastcall UFG::CollisionEvent::CollisionEvent(UFG::CollisionEvent *this, U
     0x18ui64,
     2,
     (void (__fastcall *)(void *))UFG::qSafePointer<UFG::SimObject,UFG::SimObjectCharacter>::qSafePointer<UFG::SimObject,UFG::SimObjectCharacter>);
-  v16 = _position->m_quad.m128_f32[1];
-  v17 = _position->m_quad.m128_f32[2];
-  LODWORD(v13->position.x) = _position->m_quad.m128_i32[0];
-  v13->position.y = v16;
-  v13->position.z = v17;
-  v18 = _normal->m_quad.m128_f32[1];
-  v19 = _normal->m_quad.m128_f32[2];
-  LODWORD(v13->normal.x) = _normal->m_quad.m128_i32[0];
-  v13->normal.y = v18;
-  v13->normal.z = v19;
-  v13->speed = _speed;
-  v20 = UFG::EstimateImpulseMagnitude(v12, v11, _position, _normal, _speed, 0.5);
-  v21 = logf(v20);
-  v13->estimatedImpulseMagnitude = v21;
-  if ( v21 < 0.0 )
-    v13->estimatedImpulseMagnitude = 0.0;
-  v22 = v12->m_motion.m_motionState.m_transform.m_translation.m_quad.m128_f32[1];
-  v23 = v12->m_motion.m_motionState.m_transform.m_translation.m_quad.m128_f32[2];
-  v13->preCollisionPosition[0].x = v12->m_motion.m_motionState.m_transform.m_translation.m_quad.m128_f32[0];
-  v13->preCollisionPosition[0].y = v22;
-  v13->preCollisionPosition[0].z = v23;
-  v24 = v11->m_motion.m_motionState.m_transform.m_translation.m_quad.m128_f32[1];
-  v25 = v11->m_motion.m_motionState.m_transform.m_translation.m_quad.m128_f32[2];
-  v13->preCollisionPosition[1].x = v11->m_motion.m_motionState.m_transform.m_translation.m_quad.m128_f32[0];
-  v13->preCollisionPosition[1].y = v24;
-  v13->preCollisionPosition[1].z = v25;
-  v26 = v12->m_motion.m_linearVelocity.m_quad.m128_f32[1];
-  v27 = v12->m_motion.m_linearVelocity.m_quad.m128_f32[2];
-  v13->velocity[0].x = v12->m_motion.m_linearVelocity.m_quad.m128_f32[0];
-  v13->velocity[0].y = v26;
-  v13->velocity[0].z = v27;
-  v28 = v11->m_motion.m_linearVelocity.m_quad.m128_f32[1];
-  v29 = v11->m_motion.m_linearVelocity.m_quad.m128_f32[2];
-  v13->velocity[1].x = v11->m_motion.m_linearVelocity.m_quad.m128_f32[0];
-  v13->velocity[1].y = v28;
-  v13->velocity[1].z = v29;
-  v13->havokUserData[0] = (UFG::HavokUserData *)v12->m_userData;
-  v13->havokUserData[1] = (UFG::HavokUserData *)v11->m_userData;
-  v13->objectPropertyHandleUID[0] = objectPropertiesHandleUIDA;
-  v13->objectPropertyHandleUID[1] = objectPropertiesHandleUIDB;
-  v13->surfacePropertyHandleUID[0] = surfacePropertiesHandleUIDA;
-  v13->surfacePropertyHandleUID[1] = surfacePropertiesHandleUIDB;
-  UFG::ThreadSafeQueue<hkpEntity>::AddHead(UFG::CollisionEvent::mQueue, v13);
+  v15 = _position->m_quad.m128_f32[1];
+  v16 = _position->m_quad.m128_f32[2];
+  LODWORD(this->position.x) = _position->m_quad.m128_i32[0];
+  this->position.y = v15;
+  this->position.z = v16;
+  v17 = _normal->m_quad.m128_f32[1];
+  v18 = _normal->m_quad.m128_f32[2];
+  LODWORD(this->normal.x) = _normal->m_quad.m128_i32[0];
+  this->normal.y = v17;
+  this->normal.z = v18;
+  this->speed = _speed;
+  v19 = UFG::EstimateImpulseMagnitude(rbA, rbB, _position, _normal, _speed, 0.5);
+  v20 = logf(v19);
+  this->estimatedImpulseMagnitude = v20;
+  if ( v20 < 0.0 )
+    this->estimatedImpulseMagnitude = 0.0;
+  v21 = rbA->m_motion.m_motionState.m_transform.m_translation.m_quad.m128_f32[1];
+  v22 = rbA->m_motion.m_motionState.m_transform.m_translation.m_quad.m128_f32[2];
+  LODWORD(this->preCollisionPosition[0].x) = rbA->m_motion.m_motionState.m_transform.m_translation.m_quad.m128_i32[0];
+  this->preCollisionPosition[0].y = v21;
+  this->preCollisionPosition[0].z = v22;
+  v23 = rbB->m_motion.m_motionState.m_transform.m_translation.m_quad.m128_f32[1];
+  v24 = rbB->m_motion.m_motionState.m_transform.m_translation.m_quad.m128_f32[2];
+  LODWORD(this->preCollisionPosition[1].x) = rbB->m_motion.m_motionState.m_transform.m_translation.m_quad.m128_i32[0];
+  this->preCollisionPosition[1].y = v23;
+  this->preCollisionPosition[1].z = v24;
+  v25 = rbA->m_motion.m_linearVelocity.m_quad.m128_f32[1];
+  v26 = rbA->m_motion.m_linearVelocity.m_quad.m128_f32[2];
+  LODWORD(this->velocity[0].x) = rbA->m_motion.m_linearVelocity.m_quad.m128_i32[0];
+  this->velocity[0].y = v25;
+  this->velocity[0].z = v26;
+  v27 = rbB->m_motion.m_linearVelocity.m_quad.m128_f32[1];
+  v28 = rbB->m_motion.m_linearVelocity.m_quad.m128_f32[2];
+  LODWORD(this->velocity[1].x) = rbB->m_motion.m_linearVelocity.m_quad.m128_i32[0];
+  this->velocity[1].y = v27;
+  this->velocity[1].z = v28;
+  this->havokUserData[0] = (UFG::HavokUserData *)rbA->m_userData;
+  this->havokUserData[1] = (UFG::HavokUserData *)rbB->m_userData;
+  this->objectPropertyHandleUID[0] = objectPropertiesHandleUIDA;
+  this->objectPropertyHandleUID[1] = objectPropertiesHandleUIDB;
+  this->surfacePropertyHandleUID[0] = surfacePropertiesHandleUIDA;
+  this->surfacePropertyHandleUID[1] = surfacePropertiesHandleUIDB;
+  UFG::ThreadSafeQueue<hkpEntity>::AddHead(UFG::CollisionEvent::mQueue, this);
 }
 
 // File Line: 121
@@ -175,12 +171,11 @@ void __fastcall UFG::CollisionEvent::FixupSimObjectPtrs(UFG::CollisionEvent *thi
 {
   UFG::HavokUserData *v1; // rax
   UFG::SimObject *v2; // r8
-  UFG::CollisionEvent *v3; // r9
-  UFG::SimComponent *v4; // r10
-  UFG::SimObject *v5; // r10
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v6; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v7; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v8; // rax
+  UFG::SimComponent *m_pPointer; // r10
+  UFG::SimObject *m_pSimObject; // r10
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *mSimObject; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v9; // rax
   UFG::HavokUserData *v10; // rax
   UFG::SimComponent *v11; // rcx
@@ -191,58 +186,57 @@ void __fastcall UFG::CollisionEvent::FixupSimObjectPtrs(UFG::CollisionEvent *thi
 
   v1 = this->havokUserData[0];
   v2 = 0i64;
-  v3 = this;
   if ( v1 )
   {
-    v4 = v1->simComponent.m_pPointer;
-    if ( v4 )
-      v5 = v4->m_pSimObject;
+    m_pPointer = v1->simComponent.m_pPointer;
+    if ( m_pPointer )
+      m_pSimObject = m_pPointer->m_pSimObject;
     else
-      v5 = 0i64;
-    v6 = this->mSimObject;
+      m_pSimObject = 0i64;
+    mSimObject = this->mSimObject;
     if ( this->mSimObject[0].m_pPointer )
     {
-      v7 = v6->mPrev;
-      v8 = v6->mNext;
-      v7->mNext = v8;
-      v8->mPrev = v7;
-      v6->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v6->mPrev;
-      v6->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v6->mPrev;
+      mPrev = mSimObject->mPrev;
+      mNext = mSimObject->mNext;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
+      mSimObject->mPrev = mSimObject;
+      mSimObject->mNext = mSimObject;
     }
-    v6->m_pPointer = v5;
-    if ( v5 )
+    mSimObject->m_pPointer = m_pSimObject;
+    if ( m_pSimObject )
     {
-      v9 = v5->m_SafePointerList.mNode.mPrev;
-      v9->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v6->mPrev;
-      v6->mPrev = v9;
-      v6->mNext = &v5->m_SafePointerList.mNode;
-      v5->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v6->mPrev;
+      v9 = m_pSimObject->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+      v9->mNext = mSimObject;
+      mSimObject->mPrev = v9;
+      mSimObject->mNext = &m_pSimObject->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+      m_pSimObject->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = mSimObject;
     }
   }
-  v10 = v3->havokUserData[1];
+  v10 = this->havokUserData[1];
   if ( v10 )
   {
     v11 = v10->simComponent.m_pPointer;
     if ( v11 )
       v2 = v11->m_pSimObject;
-    v12 = &v3->mSimObject[1];
-    if ( v3->mSimObject[1].m_pPointer )
+    v12 = &this->mSimObject[1];
+    if ( this->mSimObject[1].m_pPointer )
     {
       v13 = v12->mPrev;
-      v14 = v3->mSimObject[1].mNext;
+      v14 = this->mSimObject[1].mNext;
       v13->mNext = v14;
       v14->mPrev = v13;
-      v12->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v12->mPrev;
-      v3->mSimObject[1].mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v3->mSimObject[1].mPrev;
+      v12->mPrev = v12;
+      this->mSimObject[1].mNext = &this->mSimObject[1];
     }
-    v3->mSimObject[1].m_pPointer = v2;
+    this->mSimObject[1].m_pPointer = v2;
     if ( v2 )
     {
-      v15 = v2->m_SafePointerList.mNode.mPrev;
-      v15->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v12->mPrev;
+      v15 = v2->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+      v15->mNext = v12;
       v12->mPrev = v15;
-      v3->mSimObject[1].mNext = &v2->m_SafePointerList.mNode;
-      v2->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v12->mPrev;
+      this->mSimObject[1].mNext = &v2->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+      v2->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = v12;
     }
   }
 }
@@ -252,45 +246,45 @@ void __fastcall UFG::CollisionEvent::FixupSimObjectPtrs(UFG::CollisionEvent *thi
 void UFG::CollisionEvent::PostEvents(void)
 {
   UFG::ThreadSafeQueue<UFG::CollisionEvent> *v0; // rbx
-  _RTL_CRITICAL_SECTION *v1; // rdi
+  _RTL_CRITICAL_SECTION *p_mutex; // rdi
   UFG::ThreadSafeQueue<UFG::CollisionEvent> *v2; // rdi
   _RTL_CRITICAL_SECTION *v3; // rbp
-  UFG::CollisionEvent *v4; // rsi
-  UFG::QueueNode<UFG::CollisionEvent> *v5; // rbx
-  UFG::QueueNode<UFG::CollisionEvent> *v6; // rcx
+  UFG::CollisionEvent *data; // rsi
+  UFG::QueueNode<UFG::CollisionEvent> *p_tail; // rbx
+  UFG::QueueNode<UFG::CollisionEvent> *prev; // rcx
   UFG::QueueNode<UFG::CollisionEvent> *v7; // rax
   UFG::ThreadSafeQueue<UFG::CollisionEvent> *v8; // rbx
   _RTL_CRITICAL_SECTION *v9; // rdi
 
   v0 = UFG::CollisionEvent::mQueue;
-  v1 = (_RTL_CRITICAL_SECTION *)&UFG::CollisionEvent::mQueue->mutex;
+  p_mutex = (_RTL_CRITICAL_SECTION *)&UFG::CollisionEvent::mQueue->mutex;
   UFG::qMutex::Lock((LPCRITICAL_SECTION)&UFG::CollisionEvent::mQueue->mutex);
   LOBYTE(v0) = v0->head.next == &v0->tail;
-  UFG::qMutex::Unlock(v1);
+  UFG::qMutex::Unlock(p_mutex);
   if ( !(_BYTE)v0 )
   {
     do
     {
       v2 = UFG::CollisionEvent::mQueue;
       v3 = (_RTL_CRITICAL_SECTION *)&UFG::CollisionEvent::mQueue->mutex;
-      v4 = 0i64;
+      data = 0i64;
       UFG::qMutex::Lock((LPCRITICAL_SECTION)&UFG::CollisionEvent::mQueue->mutex);
       UFG::qMutex::Lock(v3);
-      v5 = &v2->tail;
+      p_tail = &v2->tail;
       LOBYTE(v2) = v2->head.next == &v2->tail;
       UFG::qMutex::Unlock(v3);
       if ( !(_BYTE)v2 )
       {
-        v6 = v5->prev;
-        v7 = v5->prev->prev;
-        v7->next = v5;
-        v5->prev = v7;
-        v4 = v6->data;
-        operator delete[](v6);
+        prev = p_tail->prev;
+        v7 = p_tail->prev->prev;
+        v7->next = p_tail;
+        p_tail->prev = v7;
+        data = prev->data;
+        operator delete[](prev);
       }
       UFG::qMutex::Unlock(v3);
-      UFG::CollisionEvent::FixupSimObjectPtrs(v4);
-      UFG::EventDispatcher::QueueEvent(&UFG::EventDispatcher::mInstance, (UFG::Event *)&v4->vfptr);
+      UFG::CollisionEvent::FixupSimObjectPtrs(data);
+      UFG::EventDispatcher::QueueEvent(&UFG::EventDispatcher::mInstance, data);
       v8 = UFG::CollisionEvent::mQueue;
       v9 = (_RTL_CRITICAL_SECTION *)&UFG::CollisionEvent::mQueue->mutex;
       UFG::qMutex::Lock((LPCRITICAL_SECTION)&UFG::CollisionEvent::mQueue->mutex);
@@ -305,10 +299,8 @@ void UFG::CollisionEvent::PostEvents(void)
 // RVA: 0xACAD0
 void __fastcall UFG::WorldCollisionListener::Initialize(hkpWorld *world)
 {
-  hkpWorld *v1; // rbx
   char *v2; // rax
 
-  v1 = world;
   v2 = UFG::qMemoryPool::Allocate(&gPhysicsMemoryPool, 0x10ui64, "WorldCollisionListener", 0i64, 1u);
   if ( v2 )
   {
@@ -317,7 +309,7 @@ void __fastcall UFG::WorldCollisionListener::Initialize(hkpWorld *world)
     *((_QWORD *)v2 + 1) = 0i64;
   }
   UFG::WorldCollisionListener::mInstance = (UFG::WorldCollisionListener *)v2;
-  hkpWorld::addContactListener(v1, (hkpContactListener *)v2);
+  hkpWorld::addContactListener(world, (hkpContactListener *)v2);
 }
 
 // File Line: 181
@@ -329,6 +321,7 @@ void __fastcall UFG::WorldCollisionListener::BeginFrame(UFG::WorldCollisionListe
 
 // File Line: 189
 // RVA: 0xA7DF0
+// attributes: thunk
 void __fastcall UFG::WorldCollisionListener::EndFrame(UFG::WorldCollisionListener *this, hkpWorld *world)
 {
   UFG::CollisionEvent::PostEvents();
@@ -336,147 +329,136 @@ void __fastcall UFG::WorldCollisionListener::EndFrame(UFG::WorldCollisionListene
 
 // File Line: 198
 // RVA: 0xB7160
-void __fastcall UFG::WorldCollisionListener::contactPointAddedCallback(UFG::WorldCollisionListener *this, hkpContactPointAddedEvent *evt)
+void __fastcall UFG::WorldCollisionListener::contactPointAddedCallback(
+        UFG::WorldCollisionListener *this,
+        hkpContactPointAddedEvent *evt)
 {
-  hkpCdBody *v2; // r9
-  UFG::WorldCollisionListener *v3; // r10
-  hkpCdBody *v4; // rax
+  hkpCdBody *m_bodyA; // r9
+  hkpCdBody *m_parent; // rax
   hkpCollidable *i; // r8
-  hkpCdBody *v6; // r8
+  hkpCdBody *m_bodyB; // r8
   hkpCollidable *v7; // rax
   hkpCollidable *j; // rcx
-  unsigned int v9; // eax
-  hkContactPoint *v10; // rax
+  unsigned int m_shapeKey; // eax
+  hkContactPoint *m_contactPoint; // rax
   hkVector4f v11; // xmm1
-  UFG::WorldCollisionListener::ContactPointAddedEvent evta; // [rsp+20h] [rbp-48h]
+  UFG::WorldCollisionListener::ContactPointAddedEvent evta; // [rsp+20h] [rbp-48h] BYREF
 
-  v2 = evt->m_bodyA;
-  v3 = this;
-  v4 = evt->m_bodyA->m_parent;
-  for ( i = (hkpCollidable *)evt->m_bodyA; v4; v4 = v4->m_parent )
-    i = (hkpCollidable *)v4;
+  m_bodyA = evt->m_bodyA;
+  m_parent = evt->m_bodyA->m_parent;
+  for ( i = (hkpCollidable *)evt->m_bodyA; m_parent; m_parent = m_parent->m_parent )
+    i = (hkpCollidable *)m_parent;
   evta.collA = i;
-  v6 = evt->m_bodyB;
-  v7 = (hkpCollidable *)v6->m_parent;
-  for ( j = (hkpCollidable *)evt->m_bodyB; v7; v7 = (hkpCollidable *)v7->m_parent )
+  m_bodyB = evt->m_bodyB;
+  v7 = (hkpCollidable *)m_bodyB->m_parent;
+  for ( j = (hkpCollidable *)m_bodyB; v7; v7 = (hkpCollidable *)v7->m_parent )
     j = v7;
-  v9 = v2->m_shapeKey;
+  m_shapeKey = m_bodyA->m_shapeKey;
   evta.collB = j;
-  evta.shapeKeyA = v9;
-  evta.shapeKeyB = v6->m_shapeKey;
-  v10 = evt->m_contactPoint;
-  v11.m_quad = (__m128)v10->m_separatingNormal;
-  evta.position = v10->m_position;
+  evta.shapeKeyA = m_shapeKey;
+  evta.shapeKeyB = m_bodyB->m_shapeKey;
+  m_contactPoint = evt->m_contactPoint;
+  v11.m_quad = (__m128)m_contactPoint->m_separatingNormal;
+  evta.position = m_contactPoint->m_position;
   evta.normal = (hkVector4f)v11.m_quad;
   evta.projectedVel = evt->m_projectedVelocity;
-  UFG::WorldCollisionListener::ContactPointAddedCallback(v3, &evta);
+  UFG::WorldCollisionListener::ContactPointAddedCallback(this, &evta);
 }
 
 // File Line: 214
 // RVA: 0xB7200
-void __fastcall UFG::WorldCollisionListener::contactProcessCallback(UFG::WorldCollisionListener *this, hkpContactProcessEvent *evt)
+void __fastcall UFG::WorldCollisionListener::contactProcessCallback(
+        UFG::WorldCollisionListener *this,
+        hkpContactProcessEvent *evt)
 {
-  hkpProcessCollisionData *v2; // rbx
-  hkpContactProcessEvent *v3; // rsi
-  signed int v4; // edi
-  UFG::WorldCollisionListener *i; // rbp
-  UFG::WorldCollisionListener::ContactProcessEvent evta; // [rsp+20h] [rbp-28h]
+  hkpProcessCollisionData *m_collisionData; // rbx
+  int i; // edi
+  UFG::WorldCollisionListener::ContactProcessEvent evta; // [rsp+20h] [rbp-28h] BYREF
 
-  v2 = evt->m_collisionData;
-  v3 = evt;
-  v4 = 0;
-  for ( i = this;
-        v4 < (signed int)(((unsigned __int64)((unsigned __int128)((_QWORD)((char *)v2->m_firstFreeContactPoint.m_storage
-                                                                         - (char *)v2
-                                                                         - 16)
-                                                                * (signed __int128)3074457345618258603i64) >> 64) >> 63)
-                        + ((signed __int64)((unsigned __int128)((_QWORD)((char *)v2->m_firstFreeContactPoint.m_storage
-                                                                       - (char *)v2
-                                                                       - 16)
-                                                              * (signed __int128)3074457345618258603i64) >> 64) >> 3));
-        ++v4 )
+  m_collisionData = evt->m_collisionData;
+  for ( i = 0;
+        i < (int)(((char *)m_collisionData->m_firstFreeContactPoint.m_storage - (char *)m_collisionData - 16) / 48);
+        ++i )
   {
-    evta.collA = v3->m_collidableA;
-    evta.collB = v3->m_collidableB;
-    evta.cp = &v2->m_contactPoints[v4].m_contact;
-    UFG::WorldCollisionListener::ContactProcessCallback(i, &evta);
+    evta.collA = evt->m_collidableA;
+    evta.collB = evt->m_collidableB;
+    evta.cp = &m_collisionData->m_contactPoints[i].m_contact;
+    UFG::WorldCollisionListener::ContactProcessCallback(this, &evta);
   }
 }
 
 // File Line: 230
 // RVA: 0xA3FE0
-void __fastcall UFG::WorldCollisionListener::ContactPointAddedCallback(UFG::WorldCollisionListener *this, UFG::WorldCollisionListener::ContactPointAddedEvent *evt)
+void __fastcall UFG::WorldCollisionListener::ContactPointAddedCallback(
+        UFG::WorldCollisionListener *this,
+        UFG::WorldCollisionListener::ContactPointAddedEvent *evt)
 {
-  UFG::WorldCollisionListener::ContactPointAddedEvent *_position; // r13
-  UFG::WorldCollisionListener *v3; // r12
-  hkpCollidable *v4; // r8
-  hkpShape *v5; // rdx
-  hkpCollidable *v6; // rax
+  hkpCollidable *collA; // r8
+  hkpShape *m_shape; // rdx
+  hkpCollidable *collB; // rax
   hkpShape *v7; // rdi
   unsigned __int64 surfacePropertiesHandleUIDB; // rbx
   hkpRigidBody *v9; // r15
   hkpRigidBody *v10; // rbp
-  signed int v11; // er9
+  signed int shapeKeyA; // r9d
   __int64 v12; // rsi
-  unsigned __int64 v13; // rdx
+  unsigned __int64 m_userData; // rdx
   char v14; // cl
-  signed int v15; // er8
-  signed __int64 v16; // rcx
-  signed int v17; // er9
+  signed int v15; // r8d
+  __int64 v16; // rcx
+  signed int shapeKeyB; // r9d
   __int64 v18; // r10
   unsigned __int64 v19; // rdx
   char v20; // r8
   __int64 v21; // rax
-  signed __int64 v22; // rcx
+  __int64 v22; // rcx
   unsigned __int64 objectPropertiesHandleUIDA; // r14
   int v24; // eax
-  int v25; // er8
-  hkSimpleProperty *v26; // rcx
+  int m_size; // r8d
+  hkSimpleProperty *m_data; // rcx
   unsigned __int64 objectPropertiesHandleUIDB; // rdi
   int v28; // eax
-  int v29; // er8
+  int v29; // r8d
   hkSimpleProperty *v30; // rcx
   unsigned __int64 surfacePropertiesHandleUIDA; // rsi
-  unsigned int v32; // ecx
+  unsigned int mCollisionEventsThisFrame; // ecx
   char *v33; // rax
 
-  _position = evt;
-  v3 = this;
-  v4 = evt->collA;
-  v5 = v4->m_shape;
-  v6 = _position->collB;
-  v7 = v6->m_shape;
+  collA = evt->collA;
+  m_shape = collA->m_shape;
+  collB = evt->collB;
+  v7 = collB->m_shape;
   surfacePropertiesHandleUIDB = 0i64;
-  if ( v4->m_broadPhaseHandle.m_type == 1 )
-    v9 = (hkpRigidBody *)((char *)v4 + v4->m_ownerOffset);
+  if ( collA->m_broadPhaseHandle.m_type == 1 )
+    v9 = (hkpRigidBody *)((char *)collA + collA->m_ownerOffset);
   else
     v9 = 0i64;
-  if ( v6->m_broadPhaseHandle.m_type == 1 )
-    v10 = (hkpRigidBody *)((char *)v6 + v6->m_ownerOffset);
+  if ( collB->m_broadPhaseHandle.m_type == 1 )
+    v10 = (hkpRigidBody *)((char *)collB + collB->m_ownerOffset);
   else
     v10 = 0i64;
-  v11 = _position->shapeKeyA;
+  shapeKeyA = evt->shapeKeyA;
   v12 = 0i64;
-  if ( v11 != -1 && v5->m_type.m_storage == 9 )
+  if ( shapeKeyA != -1 && m_shape->m_type.m_storage == 9 )
   {
-    v13 = v5[2].m_userData;
-    if ( v13 )
+    m_userData = m_shape[2].m_userData;
+    if ( m_userData )
     {
-      v14 = *(_BYTE *)(v13 + 41);
+      v14 = *(_BYTE *)(m_userData + 41);
       if ( v14 == 1 || v14 == 3 )
       {
-        v15 = (v11 & 0x7FFFFFFFu) >> (32 - *(_BYTE *)(v13 + 232));
-        if ( v11 < 0 )
-          v16 = *(_QWORD *)(v13 + 256) + 80i64 * v15;
+        v15 = (shapeKeyA & 0x7FFFFFFFu) >> (32 - *(_BYTE *)(m_userData + 232));
+        if ( shapeKeyA < 0 )
+          v16 = *(_QWORD *)(m_userData + 256) + 80i64 * v15;
         else
-          v16 = *(_QWORD *)(v13 + 240) + 144i64 * v15;
+          v16 = *(_QWORD *)(m_userData + 240) + 144i64 * v15;
         v12 = *(_QWORD *)(v16 + 16);
       }
     }
   }
-  v17 = _position->shapeKeyB;
+  shapeKeyB = evt->shapeKeyB;
   v18 = 0i64;
-  if ( v17 != -1 && v7->m_type.m_storage == 9 )
+  if ( shapeKeyB != -1 && v7->m_type.m_storage == 9 )
   {
     v19 = v7[2].m_userData;
     if ( v19 )
@@ -484,8 +466,8 @@ void __fastcall UFG::WorldCollisionListener::ContactPointAddedCallback(UFG::Worl
       v20 = *(_BYTE *)(v19 + 41);
       if ( v20 == 1 || v20 == 3 )
       {
-        v21 = (signed int)((v17 & 0x7FFFFFFFu) >> (32 - *(_BYTE *)(v19 + 232)));
-        if ( v17 < 0 )
+        v21 = (shapeKeyB & 0x7FFFFFFFu) >> (32 - *(_BYTE *)(v19 + 232));
+        if ( shapeKeyB < 0 )
           v22 = *(_QWORD *)(v19 + 256) + 80 * v21;
         else
           v22 = *(_QWORD *)(v19 + 240) + 144 * v21;
@@ -500,20 +482,20 @@ void __fastcall UFG::WorldCollisionListener::ContactPointAddedCallback(UFG::Worl
   else
   {
     v24 = 0;
-    v25 = v9->m_properties.m_size;
-    if ( v25 <= 0 )
+    m_size = v9->m_properties.m_size;
+    if ( m_size <= 0 )
     {
 LABEL_33:
       objectPropertiesHandleUIDA = 0i64;
     }
     else
     {
-      v26 = v9->m_properties.m_data;
-      while ( v26->m_key != UFG::physicsObjectPropertyTypeUid )
+      m_data = v9->m_properties.m_data;
+      while ( m_data->m_key != UFG::physicsObjectPropertyTypeUid )
       {
         ++v24;
-        ++v26;
-        if ( v24 >= v25 )
+        ++m_data;
+        if ( v24 >= m_size )
           goto LABEL_33;
       }
       objectPropertiesHandleUIDA = v9->m_properties.m_data[v24].m_value.m_data;
@@ -555,22 +537,22 @@ LABEL_42:
   {
     if ( v10 )
     {
-      if ( COERCE_FLOAT(LODWORD(_position->projectedVel) & _xmm) >= 2.25 )
+      if ( COERCE_FLOAT(LODWORD(evt->projectedVel) & _xmm) >= 2.25 )
       {
-        v32 = v3->mCollisionEventsThisFrame;
-        v3->mCollisionEventsThisFrame = v32 + 1;
-        if ( v32 < 0x10 )
+        mCollisionEventsThisFrame = this->mCollisionEventsThisFrame;
+        this->mCollisionEventsThisFrame = mCollisionEventsThisFrame + 1;
+        if ( mCollisionEventsThisFrame < 0x10 )
         {
           v33 = UFG::qMalloc(0xF0ui64, "CollisionEvent", 0i64);
           if ( v33 )
             UFG::CollisionEvent::CollisionEvent(
               (UFG::CollisionEvent *)v33,
-              0,
+              UNSUPPORTED,
               v9,
               v10,
-              &_position->position,
-              &_position->normal,
-              _position->projectedVel,
+              &evt->position,
+              &evt->normal,
+              evt->projectedVel,
               objectPropertiesHandleUIDA,
               objectPropertiesHandleUIDB,
               surfacePropertiesHandleUIDA,
@@ -583,22 +565,23 @@ LABEL_42:
 
 // File Line: 275
 // RVA: 0xA42A0
-void __fastcall UFG::WorldCollisionListener::ContactProcessCallback(UFG::WorldCollisionListener *this, UFG::WorldCollisionListener::ContactProcessEvent *evt)
+void __fastcall UFG::WorldCollisionListener::ContactProcessCallback(
+        UFG::WorldCollisionListener *this,
+        UFG::WorldCollisionListener::ContactProcessEvent *evt)
 {
-  UFG::WorldCollisionListener *v2; // r9
   hkpRigidBody *v3; // rsi
-  hkpCollidable *v4; // rax
+  hkpCollidable *collB; // rax
   hkpRigidBody *v5; // rbp
   int v6; // eax
-  int v7; // er8
-  hkSimpleProperty *v8; // rcx
+  int m_size; // r8d
+  hkSimpleProperty *m_data; // rcx
   unsigned __int64 objectPropertiesHandleUIDA; // rdi
   int v10; // eax
-  int v11; // er8
+  int v11; // r8d
   hkSimpleProperty *v12; // rcx
   unsigned __int64 objectPropertiesHandleUIDB; // rbx
   hkContactPoint *_position; // r14
-  __m128 v15; // xmm8
+  __m128 m_quad; // xmm8
   __m128 v16; // xmm2
   __m128 v17; // xmm3
   __m128 v18; // xmm4
@@ -623,37 +606,36 @@ void __fastcall UFG::WorldCollisionListener::ContactProcessCallback(UFG::WorldCo
   __m128 v37; // xmm6
   __m128 v38; // xmm3
   __m128 v39; // xmm1
-  unsigned int v40; // ecx
+  unsigned int mContinuousEventsThisFrame; // ecx
   char *v41; // rax
   __m128 v42; // xmm6
   __m128 v43; // xmm1
-  hkVector4f _normal; // [rsp+70h] [rbp-78h]
+  hkVector4f _normal; // [rsp+70h] [rbp-78h] BYREF
 
-  v2 = this;
   if ( evt->collA->m_broadPhaseHandle.m_type == 1 )
     v3 = (hkpRigidBody *)((char *)evt->collA + evt->collA->m_ownerOffset);
   else
     v3 = 0i64;
-  v4 = evt->collB;
-  if ( v4->m_broadPhaseHandle.m_type == 1 )
-    v5 = (hkpRigidBody *)((char *)v4 + v4->m_ownerOffset);
+  collB = evt->collB;
+  if ( collB->m_broadPhaseHandle.m_type == 1 )
+    v5 = (hkpRigidBody *)((char *)collB + collB->m_ownerOffset);
   else
     v5 = 0i64;
   v6 = 0;
-  v7 = v3->m_properties.m_size;
-  if ( v7 <= 0 )
+  m_size = v3->m_properties.m_size;
+  if ( m_size <= 0 )
   {
 LABEL_13:
     objectPropertiesHandleUIDA = 0i64;
   }
   else
   {
-    v8 = v3->m_properties.m_data;
-    while ( v8->m_key != UFG::physicsObjectPropertyTypeUid )
+    m_data = v3->m_properties.m_data;
+    while ( m_data->m_key != UFG::physicsObjectPropertyTypeUid )
     {
       ++v6;
-      ++v8;
-      if ( v6 >= v7 )
+      ++m_data;
+      if ( v6 >= m_size )
         goto LABEL_13;
     }
     objectPropertiesHandleUIDA = v3->m_properties.m_data[v6].m_value.m_data;
@@ -678,8 +660,8 @@ LABEL_20:
     objectPropertiesHandleUIDB = v5->m_properties.m_data[v10].m_value.m_data;
   }
   _position = evt->cp;
-  v15 = _position->m_separatingNormal.m_quad;
-  _normal.m_quad = v15;
+  m_quad = _position->m_separatingNormal.m_quad;
+  _normal.m_quad = m_quad;
   v16 = _mm_sub_ps(_position->m_position.m_quad, v3->m_motion.m_motionState.m_sweptTransform.m_centerOfMass1.m_quad);
   v17 = _mm_sub_ps(
           _mm_mul_ps(v3->m_motion.m_angularVelocity.m_quad, _mm_shuffle_ps(v16, v16, 201)),
@@ -695,21 +677,21 @@ LABEL_20:
   v20 = _mm_sub_ps(
           _mm_add_ps(_mm_shuffle_ps(v19, v19, 201), v5->m_motion.m_linearVelocity.m_quad),
           _mm_add_ps(_mm_shuffle_ps(v17, v17, 201), v3->m_motion.m_linearVelocity.m_quad));
-  v21 = _mm_mul_ps(v20, v15);
+  v21 = _mm_mul_ps(v20, m_quad);
   v22 = _mm_shuffle_ps(v21, v21, 0);
-  v22.m128_f32[0] = COERCE_FLOAT(_mm_shuffle_ps(v21, v21, 170))
-                  + (float)(COERCE_FLOAT(_mm_shuffle_ps(v21, v21, 85)) + v22.m128_f32[0]);
-  v23 = _mm_sub_ps(v20, _mm_mul_ps(v15, _mm_shuffle_ps(v22, v22, 0)));
+  v22.m128_f32[0] = _mm_shuffle_ps(v21, v21, 170).m128_f32[0]
+                  + (float)(_mm_shuffle_ps(v21, v21, 85).m128_f32[0] + v22.m128_f32[0]);
+  v23 = _mm_sub_ps(v20, _mm_mul_ps(m_quad, _mm_shuffle_ps(v22, v22, 0)));
   v24 = _mm_mul_ps(v23, v23);
   v25 = _mm_add_ps(_mm_shuffle_ps(v24, v24, 170), _mm_add_ps(_mm_shuffle_ps(v24, v24, 85), _mm_shuffle_ps(v24, v24, 0)));
   v26 = _mm_rsqrt_ps(v25);
-  LODWORD(_speed) = (unsigned __int128)_mm_andnot_ps(
-                                         _mm_cmpleps(v25, (__m128)0i64),
-                                         _mm_mul_ps(
-                                           _mm_mul_ps(
-                                             _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v26, v25), v26)),
-                                             _mm_mul_ps(v26, *(__m128 *)_xmm)),
-                                           v25));
+  LODWORD(_speed) = _mm_andnot_ps(
+                      _mm_cmple_ps(v25, (__m128)0i64),
+                      _mm_mul_ps(
+                        _mm_mul_ps(
+                          _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v26, v25), v26)),
+                          _mm_mul_ps(v26, *(__m128 *)_xmm)),
+                        v25)).m128_u32[0];
   if ( COERCE_FLOAT((unsigned int)(2 * v22.m128_i32[0]) >> 1) >= 0.0099999998 || _speed <= 0.5 )
   {
     v30 = _mm_mul_ps(v20, v20);
@@ -717,38 +699,36 @@ LABEL_20:
             _mm_shuffle_ps(v30, v30, 170),
             _mm_add_ps(_mm_shuffle_ps(v30, v30, 85), _mm_shuffle_ps(v30, v30, 0)));
     v32 = _mm_rsqrt_ps(v31);
-    if ( COERCE_FLOAT(
-           _mm_andnot_ps(
-             _mm_cmpleps(v31, (__m128)0i64),
+    if ( _mm_andnot_ps(
+           _mm_cmple_ps(v31, (__m128)0i64),
+           _mm_mul_ps(
              _mm_mul_ps(
-               _mm_mul_ps(
-                 _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v32, v31), v32)),
-                 _mm_mul_ps(v32, *(__m128 *)_xmm)),
-               v31))) < 0.1 )
+               _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v32, v31), v32)),
+               _mm_mul_ps(v32, *(__m128 *)_xmm)),
+             v31)).m128_f32[0] < 0.1 )
     {
       v33 = _mm_sub_ps(v5->m_motion.m_linearVelocity.m_quad, v3->m_motion.m_linearVelocity.m_quad);
-      v34 = _mm_mul_ps(v33, v15);
+      v34 = _mm_mul_ps(v33, m_quad);
       v35 = _mm_add_ps(
               _mm_add_ps(_mm_shuffle_ps(v34, v34, 0), _mm_shuffle_ps(v34, v34, 85)),
               _mm_shuffle_ps(v34, v34, 170));
-      v36 = _mm_sub_ps(v33, _mm_mul_ps(v15, _mm_shuffle_ps(v35, v35, 0)));
+      v36 = _mm_sub_ps(v33, _mm_mul_ps(m_quad, _mm_shuffle_ps(v35, v35, 0)));
       v37 = _mm_mul_ps(v36, v36);
       v38 = _mm_add_ps(
               _mm_shuffle_ps(v37, v37, 170),
               _mm_add_ps(_mm_shuffle_ps(v37, v37, 85), _mm_shuffle_ps(v37, v37, 0)));
       v39 = _mm_rsqrt_ps(v38);
-      if ( COERCE_FLOAT(
-             _mm_andnot_ps(
-               _mm_cmpleps(v38, (__m128)0i64),
+      if ( _mm_andnot_ps(
+             _mm_cmple_ps(v38, (__m128)0i64),
+             _mm_mul_ps(
                _mm_mul_ps(
-                 _mm_mul_ps(
-                   _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v39, v38), v39)),
-                   _mm_mul_ps(v39, *(__m128 *)_xmm)),
-                 v38))) > 0.5 )
+                 _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v39, v38), v39)),
+                 _mm_mul_ps(v39, *(__m128 *)_xmm)),
+               v38)).m128_f32[0] > 0.5 )
       {
-        v40 = v2->mContinuousEventsThisFrame;
-        v2->mContinuousEventsThisFrame = v40 + 1;
-        if ( v40 < 4 )
+        mContinuousEventsThisFrame = this->mContinuousEventsThisFrame;
+        this->mContinuousEventsThisFrame = mContinuousEventsThisFrame + 1;
+        if ( mContinuousEventsThisFrame < 4 )
         {
           v41 = UFG::qMalloc(0xF0ui64, "CollisionEvent", 0i64);
           if ( v41 )
@@ -764,14 +744,13 @@ LABEL_20:
               v5,
               &_position->m_position,
               &_normal,
-              COERCE_FLOAT(
-                _mm_andnot_ps(
-                  _mm_cmpleps(v42, (__m128)0i64),
+              _mm_andnot_ps(
+                _mm_cmple_ps(v42, (__m128)0i64),
+                _mm_mul_ps(
                   _mm_mul_ps(
-                    _mm_mul_ps(
-                      _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v43, v42), v43)),
-                      _mm_mul_ps(v43, *(__m128 *)_xmm)),
-                    v42))),
+                    _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v43, v42), v43)),
+                    _mm_mul_ps(v43, *(__m128 *)_xmm)),
+                  v42)).m128_f32[0],
               objectPropertiesHandleUIDA,
               objectPropertiesHandleUIDB,
               0i64,
@@ -783,8 +762,8 @@ LABEL_20:
   }
   else
   {
-    v28 = v2->mContinuousEventsThisFrame;
-    v2->mContinuousEventsThisFrame = v28 + 1;
+    v28 = this->mContinuousEventsThisFrame;
+    this->mContinuousEventsThisFrame = v28 + 1;
     if ( v28 < 4 )
     {
       v29 = UFG::qMalloc(0xF0ui64, "CollisionEvent", 0i64);

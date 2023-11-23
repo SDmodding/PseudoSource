@@ -2,7 +2,7 @@
 // RVA: 0x1467230
 __int64 dynamic_initializer_for__NetPlayerComponent::s_NetPlayerComponentList__()
 {
-  return atexit(dynamic_atexit_destructor_for__NetPlayerComponent::s_NetPlayerComponentList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__NetPlayerComponent::s_NetPlayerComponentList__);
 }
 
 // File Line: 65

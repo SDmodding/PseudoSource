@@ -3,133 +3,123 @@
 __int64 dynamic_initializer_for__UFG::VisualEffectAudioManager::sm_visualEffectTracks__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::VisualEffectAudioManager::sm_visualEffectTracks.mTree);
-  return atexit(dynamic_atexit_destructor_for__UFG::VisualEffectAudioManager::sm_visualEffectTracks__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::VisualEffectAudioManager::sm_visualEffectTracks__);
 }
 
 // File Line: 37
 // RVA: 0x5A18E0
 void UFG::VisualEffectAudioManager::LoadProperties(void)
 {
-  UFG::qPropertySet *v0; // rax
-  UFG::qPropertyList *v1; // rax
-  UFG::qPropertyList *v2; // r9
-  unsigned int v3; // eax
-  char *v4; // rax
-  UFG::qPropertySet *v5; // rbx
-  UFG::qSymbol *v6; // rsi
-  UFG::allocator::free_link *v7; // rax
-  __int64 v8; // rax
-  __int64 v9; // rdi
-  UFG::qPropertyList *v10; // r13
-  unsigned int v11; // er12
-  unsigned int v12; // esi
-  __int64 *v13; // r14
-  char *v14; // rax
-  UFG::qPropertySet *v15; // rbx
-  float *v16; // r15
-  UFG::qWiseSymbol *v17; // rbp
-  UFG::allocator::free_link *v18; // rax
-  UFG::qWiseSymbol *v19; // rdi
-  UFG::allocator::free_link *v20; // rcx
-  UFG::qWiseSymbol *v21; // rax
-  UFG::qWiseSymbol *v22; // rcx
-  __int64 v23; // rax
-  unsigned int v24; // [rsp+80h] [rbp+8h]
-  UFG::qSymbol result; // [rsp+88h] [rbp+10h]
-  unsigned int v26; // [rsp+90h] [rbp+18h]
-  UFG::qPropertyList *v27; // [rsp+98h] [rbp+20h]
+  UFG::qPropertyList *v0; // r9
+  unsigned int v1; // eax
+  char *ValuePtr; // rax
+  UFG::qPropertySet *v3; // rbx
+  UFG::qSymbol *v4; // rsi
+  UFG::allocator::free_link *v5; // rax
+  __int64 v6; // rax
+  __int64 v7; // rdi
+  UFG::qPropertyList *v8; // r13
+  unsigned int v9; // r12d
+  unsigned int v10; // esi
+  UFG::allocator::free_link *v11; // r14
+  char *v12; // rax
+  UFG::qPropertySet *v13; // rbx
+  float *v14; // r15
+  UFG::qWiseSymbol *v15; // rbp
+  UFG::allocator::free_link *v16; // rax
+  UFG::allocator::free_link *v17; // rdi
+  UFG::qWiseSymbol *null; // rax
+  UFG::allocator::free_link *mNext; // rax
+  unsigned int i; // [rsp+80h] [rbp+8h]
+  UFG::qSymbol result; // [rsp+88h] [rbp+10h] BYREF
+  unsigned int mNumElements; // [rsp+90h] [rbp+18h]
+  UFG::qPropertyList *v23; // [rsp+98h] [rbp+20h]
 
   UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)&UFG::VisualEffectAudioManager::sm_visualEffectTracks);
   UFG::qSymbol::create_from_string(&result, "Audio-VisualEffectAudio");
-  v0 = UFG::PropertySetManager::GetPropertySet(&result);
-  UFG::VisualEffectAudioManager::sm_propertySet = v0;
-  v1 = UFG::qPropertySet::Get<UFG::qPropertyList>(v0, (UFG::qSymbol *)&TiDoSym_VisualEffectList.mUID, DEPTH_RECURSE);
-  v2 = v1;
-  v27 = v1;
-  v26 = v1->mNumElements;
-  v3 = 0;
-  v24 = 0;
-  if ( v26 )
+  UFG::VisualEffectAudioManager::sm_propertySet = UFG::PropertySetManager::GetPropertySet(&result);
+  v0 = UFG::qPropertySet::Get<UFG::qPropertyList>(
+         UFG::VisualEffectAudioManager::sm_propertySet,
+         (UFG::qArray<unsigned long,0> *)&TiDoSym_VisualEffectList,
+         DEPTH_RECURSE);
+  v23 = v0;
+  mNumElements = v0->mNumElements;
+  v1 = 0;
+  for ( i = 0; v1 < mNumElements; v0 = v23 )
   {
-    do
+    ValuePtr = UFG::qPropertyList::GetValuePtr(v0, 0x1Au, v1);
+    if ( ValuePtr && *(_QWORD *)ValuePtr )
+      v3 = (UFG::qPropertySet *)&ValuePtr[*(_QWORD *)ValuePtr];
+    else
+      v3 = 0i64;
+    v4 = UFG::qPropertySet::Get<UFG::qSymbol>(
+           v3,
+           (UFG::qArray<unsigned long,0> *)&TiDoSym_VisualEffectName,
+           DEPTH_RECURSE);
+    v5 = UFG::qMalloc(0x40ui64, "VisualEffectAudioTrack", 0i64);
+    if ( v5 )
     {
-      v4 = UFG::qPropertyList::GetValuePtr(v2, 0x1Au, v3);
-      if ( v4 && *(_QWORD *)v4 )
-        v5 = (UFG::qPropertySet *)&v4[*(_QWORD *)v4];
-      else
-        v5 = 0i64;
-      v6 = UFG::qPropertySet::Get<UFG::qSymbol>(v5, (UFG::qSymbol *)&TiDoSym_VisualEffectName.mUID, DEPTH_RECURSE);
-      v7 = UFG::qMalloc(0x40ui64, "VisualEffectAudioTrack", 0i64);
-      if ( v7 )
-      {
-        UFG::VisualEffectAudioTrack::VisualEffectAudioTrack((UFG::VisualEffectAudioTrack *)v7);
-        v9 = v8;
-      }
-      else
-      {
-        v9 = 0i64;
-      }
-      *(UFG::qSymbol *)(v9 + 32) = (UFG::qSymbol)v6->mUID;
-      *(UFG::qSymbol *)(v9 + 40) = (UFG::qSymbol)v6->mUID;
-      UFG::qBaseTreeRB::Add(&UFG::VisualEffectAudioManager::sm_visualEffectTracks.mTree, (UFG::qBaseNodeRB *)(v9 + 8));
-      v10 = UFG::qPropertySet::Get<UFG::qPropertyList>(v5, (UFG::qSymbol *)&TiDoSym_Tags.mUID, DEPTH_RECURSE);
-      v11 = v10->mNumElements;
-      v12 = 0;
-      if ( v11 )
-      {
-        v13 = (__int64 *)(v9 + 48);
-        do
-        {
-          v14 = UFG::qPropertyList::GetValuePtr(v10, 0x1Au, v12);
-          if ( v14 && *(_QWORD *)v14 )
-            v15 = (UFG::qPropertySet *)&v14[*(_QWORD *)v14];
-          else
-            v15 = 0i64;
-          v16 = UFG::qPropertySet::Get<float>(v15, (UFG::qSymbol *)&TiDoSym_TimeBegin.mUID, DEPTH_RECURSE);
-          v17 = UFG::qPropertySet::Get<UFG::qWiseSymbol>(v15, (UFG::qSymbol *)&TiDoSym_SampleUid.mUID, DEPTH_RECURSE);
-          v18 = UFG::qMalloc(0x28ui64, "VisualEffectAudioNode", 0i64);
-          v19 = (UFG::qWiseSymbol *)v18;
-          if ( v18 )
-          {
-            v20 = v18 + 1;
-            v20->mNext = v20;
-            v20[1].mNext = v20;
-            v18->mNext = (UFG::allocator::free_link *)&UFG::VisualEffectAudioNode::`vftable;
-            v18[3].mNext = 0i64;
-            LODWORD(v18[4].mNext) = -1;
-            _((AMD_HD3D *)0xFFFFFFFFi64);
-            v21 = UFG::qWiseSymbol::get_null();
-            UFG::qWiseSymbol::operator=(v19 + 8, v21);
-            v19[9].mUID = 0;
-          }
-          else
-          {
-            v19 = 0i64;
-          }
-          v22 = v19 + 2;
-          v23 = *v13;
-          *(_QWORD *)(v23 + 8) = v19 + 2;
-          *(_QWORD *)&v22->mUID = v23;
-          *(_QWORD *)&v22[2].mUID = v13;
-          *v13 = (__int64)&v19[2];
-          v19[9].mUID = *(unsigned int *)v16;
-          UFG::qWiseSymbol::operator=(v19 + 8, v17);
-          ++v12;
-        }
-        while ( v12 < v11 );
-      }
-      v3 = v24 + 1;
-      v24 = v3;
-      v2 = v27;
+      UFG::VisualEffectAudioTrack::VisualEffectAudioTrack((UFG::VisualEffectAudioTrack *)v5);
+      v7 = v6;
     }
-    while ( v3 < v26 );
+    else
+    {
+      v7 = 0i64;
+    }
+    *(UFG::qSymbol *)(v7 + 32) = (UFG::qSymbol)v4->mUID;
+    *(UFG::qSymbol *)(v7 + 40) = (UFG::qSymbol)v4->mUID;
+    UFG::qBaseTreeRB::Add(&UFG::VisualEffectAudioManager::sm_visualEffectTracks.mTree, (UFG::qBaseNodeRB *)(v7 + 8));
+    v8 = UFG::qPropertySet::Get<UFG::qPropertyList>(v3, (UFG::qArray<unsigned long,0> *)&TiDoSym_Tags, DEPTH_RECURSE);
+    v9 = v8->mNumElements;
+    v10 = 0;
+    if ( v9 )
+    {
+      v11 = (UFG::allocator::free_link *)(v7 + 48);
+      do
+      {
+        v12 = UFG::qPropertyList::GetValuePtr(v8, 0x1Au, v10);
+        if ( v12 && *(_QWORD *)v12 )
+          v13 = (UFG::qPropertySet *)&v12[*(_QWORD *)v12];
+        else
+          v13 = 0i64;
+        v14 = UFG::qPropertySet::Get<float>(v13, (UFG::qArray<unsigned long,0> *)&TiDoSym_TimeBegin, DEPTH_RECURSE);
+        v15 = UFG::qPropertySet::Get<UFG::qWiseSymbol>(
+                v13,
+                (UFG::qArray<unsigned long,0> *)&TiDoSym_SampleUid,
+                DEPTH_RECURSE);
+        v16 = UFG::qMalloc(0x28ui64, "VisualEffectAudioNode", 0i64);
+        v17 = v16;
+        if ( v16 )
+        {
+          v16[1].mNext = v16 + 1;
+          v16[2].mNext = v16 + 1;
+          v16->mNext = (UFG::allocator::free_link *)&UFG::VisualEffectAudioNode::`vftable;
+          v16[3].mNext = 0i64;
+          LODWORD(v16[4].mNext) = -1;
+          _((AMD_HD3D *)0xFFFFFFFFi64);
+          null = UFG::qWiseSymbol::get_null();
+          UFG::qWiseSymbol::operator=((UFG::qWiseSymbol *)&v17[4], null);
+          HIDWORD(v17[4].mNext) = 0;
+        }
+        else
+        {
+          v17 = 0i64;
+        }
+        mNext = v11->mNext;
+        mNext[1].mNext = v17 + 1;
+        v17[1].mNext = mNext;
+        v17[2].mNext = v11;
+        v11->mNext = v17 + 1;
+        *((float *)&v17[4].mNext + 1) = *v14;
+        UFG::qWiseSymbol::operator=((UFG::qWiseSymbol *)&v17[4], v15);
+        ++v10;
+      }
+      while ( v10 < v9 );
+    }
+    v1 = i + 1;
+    i = v1;
   }
-}v12 < v11 );
-      }
-      v3 = v24 + 1;
-      v24 = v3;
-      v2 = v27;
-   
+}
 
 // File Line: 108
 // RVA: 0x5AF770
@@ -165,7 +155,7 @@ __int64 dynamic_initializer_for__UFG::DoorStateManager::sm_indoorState__()
 {
   UFG::DoorStateManager::sm_indoorState.mUID = UFG::qWiseSymbol::get_null()->mUID;
   _((AMD_HD3D *)UFG::DoorStateManager::sm_indoorState.mUID);
-  return atexit(dynamic_atexit_destructor_for__UFG::DoorStateManager::sm_indoorState__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::DoorStateManager::sm_indoorState__);
 }
 
 // File Line: 168
@@ -174,7 +164,7 @@ __int64 dynamic_initializer_for__UFG::DoorStateManager::sm_outdoorState__()
 {
   UFG::DoorStateManager::sm_outdoorState.mUID = UFG::qWiseSymbol::get_null()->mUID;
   _((AMD_HD3D *)UFG::DoorStateManager::sm_outdoorState.mUID);
-  return atexit(dynamic_atexit_destructor_for__UFG::DoorStateManager::sm_outdoorState__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::DoorStateManager::sm_outdoorState__);
 }
 
 // File Line: 169
@@ -183,7 +173,7 @@ __int64 dynamic_initializer_for__UFG::DoorStateManager::sm_doorMix__()
 {
   UFG::DoorStateManager::sm_doorMix.mUID = UFG::qWiseSymbol::get_null()->mUID;
   _((AMD_HD3D *)UFG::DoorStateManager::sm_doorMix.mUID);
-  return atexit(dynamic_atexit_destructor_for__UFG::DoorStateManager::sm_doorMix__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::DoorStateManager::sm_doorMix__);
 }
 
 // File Line: 171
@@ -191,7 +181,7 @@ __int64 dynamic_initializer_for__UFG::DoorStateManager::sm_doorMix__()
 __int64 dynamic_initializer_for__UFG::DoorStateManager::sm_doorRegionName__()
 {
   UFG::DoorStateManager::sm_doorRegionName.mUID = UFG::gNullQSymbol.mUID;
-  return atexit(dynamic_atexit_destructor_for__UFG::DoorStateManager::sm_doorRegionName__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::DoorStateManager::sm_doorRegionName__);
 }
 
 // File Line: 172
@@ -199,7 +189,7 @@ __int64 dynamic_initializer_for__UFG::DoorStateManager::sm_doorRegionName__()
 __int64 dynamic_initializer_for__UFG::DoorStateManager::sm_doorName__()
 {
   UFG::DoorStateManager::sm_doorName.mUID = UFG::gNullQSymbol.mUID;
-  return atexit(dynamic_atexit_destructor_for__UFG::DoorStateManager::sm_doorName__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::DoorStateManager::sm_doorName__);
 }
 
 // File Line: 179
@@ -207,7 +197,7 @@ __int64 dynamic_initializer_for__UFG::DoorStateManager::sm_doorName__()
 __int64 dynamic_initializer_for__UFG::DoorStateManager::sm_doors__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::DoorStateManager::sm_doors.mTree);
-  return atexit(dynamic_atexit_destructor_for__UFG::DoorStateManager::sm_doors__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::DoorStateManager::sm_doors__);
 }
 
 // File Line: 190
@@ -215,7 +205,7 @@ __int64 dynamic_initializer_for__UFG::DoorStateManager::sm_doors__()
 __int64 UFG::_dynamic_initializer_for__qws_MS_LOCATION__()
 {
   UFG::qWiseSymbol::create_from_string(&qws_MS_LOCATION, "MS_LOCATION");
-  return atexit(UFG::_dynamic_atexit_destructor_for__qws_MS_LOCATION__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qws_MS_LOCATION__);
 }
 
 // File Line: 191
@@ -223,7 +213,7 @@ __int64 UFG::_dynamic_initializer_for__qws_MS_LOCATION__()
 __int64 UFG::_dynamic_initializer_for__qws_MS_NONE__()
 {
   UFG::qWiseSymbol::create_from_string(&qws_MS_NONE, "None");
-  return atexit(UFG::_dynamic_atexit_destructor_for__qws_MS_NONE__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__qws_MS_NONE__);
 }
 
 // File Line: 192
@@ -231,7 +221,7 @@ __int64 UFG::_dynamic_initializer_for__qws_MS_NONE__()
 __int64 UFG::_dynamic_initializer_for__play_door_close__()
 {
   UFG::qWiseSymbol::create_from_string(&play_door_close_0, "play_door_close");
-  return atexit(UFG::_dynamic_atexit_destructor_for__play_door_close__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__play_door_close__);
 }
 
 // File Line: 193
@@ -239,37 +229,35 @@ __int64 UFG::_dynamic_initializer_for__play_door_close__()
 __int64 UFG::_dynamic_initializer_for__play_door_open__()
 {
   UFG::qWiseSymbol::create_from_string(&play_door_open_0, "play_door_open");
-  return atexit(UFG::_dynamic_atexit_destructor_for__play_door_open__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__play_door_open__);
 }
 
 // File Line: 197
 // RVA: 0x59E350
 void __fastcall UFG::DoorStateManager::HandleDoorOpen(UFG::SimObject *door, hkgpIndexedMeshDefinitions::Edge *a2)
 {
-  UFG::SimObject *v2; // rbx
-  UFG::TransformNodeComponent *v3; // rdi
-  UFG::OneShotHandle pHandle; // [rsp+48h] [rbp+10h]
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rdi
+  UFG::OneShotHandle pHandle; // [rsp+48h] [rbp+10h] BYREF
 
-  v2 = door;
   if ( !Scaleform::Render::Text::DocView::DocumentListener::View_OnLineFormat((hkgpIndexedMesh::EdgeBarrier *)door, a2) )
   {
-    if ( v2 )
-      v3 = v2->m_pTransformNodeComponent;
+    if ( door )
+      m_pTransformNodeComponent = door->m_pTransformNodeComponent;
     else
-      v3 = 0i64;
-    UFG::TransformNodeComponent::UpdateWorldTransform(v3);
+      m_pTransformNodeComponent = 0i64;
+    UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
     pHandle.m_pOneShot = 0i64;
-    UFG::OneShotPool::GetOneShotHandle(&pHandle, &v3->mWorldTransform);
+    UFG::OneShotPool::GetOneShotHandle(&pHandle, &m_pTransformNodeComponent->mWorldTransform);
     if ( UFG::OneShotHandle::IsValid(&pHandle) )
     {
-      UFG::TidoGame::HandleDoorType(v2, &pHandle);
+      UFG::TidoGame::HandleDoorType(door, &pHandle);
       UFG::OneShot::Play(pHandle.m_pOneShot, play_door_open_0.mUID);
     }
     if ( UFG::DoorStateManager::sm_active )
     {
       UFG::DoorStateManager::sm_open = 1;
       UFG::DoorStateManager::sm_inside = UFG::AudioTriggerRegion::sm_interiorTransitionCount > 0;
-      UFG::DoorStateManager::sm_doorName.mUID = v2->m_Name.mUID;
+      UFG::DoorStateManager::sm_doorName.mUID = door->m_Name.mUID;
       UFG::DoorStateManager::SetDoorMix();
     }
     UFG::OneShotHandle::Release(&pHandle);
@@ -280,30 +268,28 @@ void __fastcall UFG::DoorStateManager::HandleDoorOpen(UFG::SimObject *door, hkgp
 // RVA: 0x59E280
 void __fastcall UFG::DoorStateManager::HandleDoorClose(UFG::SimObject *door, hkgpIndexedMeshDefinitions::Edge *a2)
 {
-  UFG::SimObject *v2; // rbx
-  UFG::TransformNodeComponent *v3; // rdi
-  UFG::OneShotHandle pHandle; // [rsp+48h] [rbp+10h]
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rdi
+  UFG::OneShotHandle pHandle; // [rsp+48h] [rbp+10h] BYREF
 
-  v2 = door;
   if ( !Scaleform::Render::Text::DocView::DocumentListener::View_OnLineFormat((hkgpIndexedMesh::EdgeBarrier *)door, a2) )
   {
-    if ( v2 )
-      v3 = v2->m_pTransformNodeComponent;
+    if ( door )
+      m_pTransformNodeComponent = door->m_pTransformNodeComponent;
     else
-      v3 = 0i64;
-    UFG::TransformNodeComponent::UpdateWorldTransform(v3);
+      m_pTransformNodeComponent = 0i64;
+    UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
     pHandle.m_pOneShot = 0i64;
-    UFG::OneShotPool::GetOneShotHandle(&pHandle, &v3->mWorldTransform);
+    UFG::OneShotPool::GetOneShotHandle(&pHandle, &m_pTransformNodeComponent->mWorldTransform);
     if ( UFG::OneShotHandle::IsValid(&pHandle) )
     {
-      UFG::TidoGame::HandleDoorType(v2, &pHandle);
+      UFG::TidoGame::HandleDoorType(door, &pHandle);
       UFG::OneShot::Play(pHandle.m_pOneShot, play_door_close_0.mUID);
     }
-    if ( UFG::DoorStateManager::sm_active && v2->m_Name.mUID == UFG::DoorStateManager::sm_doorName.mUID )
+    if ( UFG::DoorStateManager::sm_active && door->m_Name.mUID == UFG::DoorStateManager::sm_doorName.mUID )
     {
       UFG::DoorStateManager::sm_open = 0;
       UFG::DoorStateManager::sm_inside = UFG::AudioTriggerRegion::sm_interiorTransitionCount > 0;
-      UFG::DoorStateManager::sm_doorName.mUID = v2->m_Name.mUID;
+      UFG::DoorStateManager::sm_doorName.mUID = door->m_Name.mUID;
       UFG::DoorStateManager::SetDoorMix();
     }
     UFG::OneShotHandle::Release(&pHandle);
@@ -314,22 +300,19 @@ void __fastcall UFG::DoorStateManager::HandleDoorClose(UFG::SimObject *door, hkg
 // RVA: 0x59E830
 void UFG::DoorStateManager::HandleInOutTransition(void)
 {
-  bool v0; // al
-
   if ( UFG::DoorStateManager::sm_active )
   {
-    v0 = UFG::AudioTriggerRegion::sm_interiorTransitionCount > 0;
     if ( UFG::DoorStateManager::sm_inside )
     {
       UFG::DoorStateManager::sm_inside = 0;
-      if ( !v0 )
+      if ( UFG::AudioTriggerRegion::sm_interiorTransitionCount <= 0 )
       {
 LABEL_7:
         UFG::DoorStateManager::SetDoorMix();
         return;
       }
     }
-    else if ( v0 )
+    else if ( UFG::AudioTriggerRegion::sm_interiorTransitionCount > 0 )
     {
       UFG::DoorStateManager::sm_inside = 1;
       UFG::DoorStateManager::SetDoorMix();
@@ -344,51 +327,34 @@ LABEL_7:
 // RVA: 0x5A3C80
 void UFG::DoorStateManager::OnEnterRegion(void)
 {
-  UFG::SimComponent *v0; // rax
-  unsigned __int16 v1; // cx
-  bool v2; // cl
-  UFG::qSymbol result; // [rsp+30h] [rbp+8h]
+  UFG::SimComponent *SimObject; // rax
+  __int16 v1; // cx
+  bool IsOpen; // cl
+  UFG::qSymbol result; // [rsp+30h] [rbp+8h] BYREF
 
   UFG::DoorStateManager::sm_doorName.mUID = UFG::AudioTriggerRegion::CheckRegionForDoors(
                                               &result,
-                                              &UFG::DoorStateManager::sm_doors)->mUID;
-  v0 = (UFG::SimComponent *)UFG::Simulation::GetSimObject(&UFG::gSim, &UFG::DoorStateManager::sm_doorName);
-  if ( v0 )
+                                              (UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::DoorStateManager::sm_doors)->mUID;
+  SimObject = (UFG::SimComponent *)UFG::Simulation::GetSimObject(&UFG::gSim, &UFG::DoorStateManager::sm_doorName);
+  if ( SimObject )
   {
-    v1 = WORD2(v0[1].m_SafePointerList.mNode.mPrev);
-    if ( (v1 >> 14) & 1 )
-    {
-      v0 = UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)v0, UFG::DoorComponent::_TypeUID);
-    }
-    else if ( (v1 & 0x8000u) == 0 )
-    {
-      if ( (v1 >> 13) & 1 )
-      {
-        v0 = UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)v0, UFG::DoorComponent::_TypeUID);
-      }
-      else if ( (v1 >> 12) & 1 )
-      {
-        v0 = UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)v0, UFG::DoorComponent::_TypeUID);
-      }
-      else
-      {
-        v0 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)v0, UFG::DoorComponent::_TypeUID);
-      }
-    }
+    v1 = WORD2(SimObject[1].m_SafePointerList.mNode.mPrev);
+    if ( (v1 & 0x4000) != 0 || v1 < 0 || (v1 & 0x2000) != 0 || (v1 & 0x1000) != 0 )
+      SimObject = UFG::SimObjectGame::GetComponentOfTypeHK(
+                    (UFG::SimObjectGame *)SimObject,
+                    UFG::DoorComponent::_TypeUID);
     else
-    {
-      v0 = UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)v0, UFG::DoorComponent::_TypeUID);
-    }
+      SimObject = UFG::SimObject::GetComponentOfType((UFG::SimObject *)SimObject, UFG::DoorComponent::_TypeUID);
   }
-  v2 = 0;
-  if ( v0 )
-    v2 = UFG::DoorComponent::IsOpen((UFG::DoorComponent *)v0);
+  IsOpen = 0;
+  if ( SimObject )
+    IsOpen = UFG::DoorComponent::IsOpen((UFG::DoorComponent *)SimObject);
   if ( UFG::AudioTriggerRegion::sm_interiorTransitionCount <= 0
     || (UFG::DoorStateManager::sm_inside = 1, UFG::AudioTriggerRegion::sm_rainDrawOverride) )
   {
     UFG::DoorStateManager::sm_inside = 0;
   }
-  UFG::DoorStateManager::sm_open = v2;
+  UFG::DoorStateManager::sm_open = IsOpen;
   UFG::DoorStateManager::sm_active = 1;
   UFG::DoorStateManager::SetDoorMix();
 }
@@ -397,13 +363,13 @@ void UFG::DoorStateManager::OnEnterRegion(void)
 // RVA: 0x5A4000
 void UFG::DoorStateManager::OnExitRegion(void)
 {
-  UFG::qWiseSymbol *v0; // rax
+  UFG::qWiseSymbol *null; // rax
   UFG::qWiseSymbol *v1; // rax
 
   UFG::DoorStateManager::sm_active = 0;
   UFG::DoorStateManager::sm_doorName.mUID = UFG::gNullQSymbol.mUID;
-  v0 = UFG::qWiseSymbol::get_null();
-  UFG::qWiseSymbol::operator=(&UFG::DoorStateManager::sm_indoorState, v0);
+  null = UFG::qWiseSymbol::get_null();
+  UFG::qWiseSymbol::operator=(&UFG::DoorStateManager::sm_indoorState, null);
   v1 = UFG::qWiseSymbol::get_null();
   UFG::qWiseSymbol::operator=(&UFG::DoorStateManager::sm_outdoorState, v1);
   UFG::DoorStateManager::sm_inside = UFG::AudioTriggerRegion::sm_interiorTransitionCount > 0;
@@ -414,14 +380,14 @@ void UFG::DoorStateManager::OnExitRegion(void)
 // RVA: 0x5AABD0
 void UFG::DoorStateManager::SetDoorMix(void)
 {
-  UFG::TiDoVtbl *v0; // rax
+  UFG::TiDoVtbl *vfptr; // rax
 
   if ( UFG::DoorStateManager::sm_open && UFG::DoorStateManager::sm_active )
   {
-    v0 = UFG::TiDo::m_pInstance->vfptr;
+    vfptr = UFG::TiDo::m_pInstance->vfptr;
     if ( UFG::DoorStateManager::sm_inside )
     {
-      ((void (__fastcall *)(UFG::TiDo *, _QWORD, _QWORD))v0[1].CreateAudioEntityRegionData)(
+      ((void (__fastcall *)(UFG::TiDo *, _QWORD, _QWORD))vfptr[1].CreateAudioEntityRegionData)(
         UFG::TiDo::m_pInstance,
         qws_MS_LOCATION.mUID,
         UFG::DoorStateManager::sm_indoorState.mUID);
@@ -429,7 +395,7 @@ void UFG::DoorStateManager::SetDoorMix(void)
     }
     else
     {
-      ((void (__fastcall *)(UFG::TiDo *, _QWORD, _QWORD))v0[1].CreateAudioEntityRegionData)(
+      ((void (__fastcall *)(UFG::TiDo *, _QWORD, _QWORD))vfptr[1].CreateAudioEntityRegionData)(
         UFG::TiDo::m_pInstance,
         qws_MS_LOCATION.mUID,
         UFG::DoorStateManager::sm_outdoorState.mUID);
@@ -450,15 +416,11 @@ void UFG::DoorStateManager::SetDoorMix(void)
 // RVA: 0x595F70
 void __fastcall UFG::DoorStateManager::AddDoor(UFG::qSymbol *name, UFG::qVector3 *pos)
 {
-  UFG::qVector3 *v2; // rdi
-  UFG::qSymbol *v3; // rbx
   UFG::allocator::free_link *v4; // rax
   UFG::qBaseNodeRB *v5; // rdx
-  float v6; // xmm1_4
-  float v7; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
 
-  v2 = pos;
-  v3 = name;
   if ( !name->mUID || !UFG::qBaseTreeRB::Get(&UFG::DoorStateManager::sm_doors.mTree, name->mUID) )
   {
     v4 = UFG::qMalloc(0x30ui64, "AudioDoorManager.DoorNode", 0i64);
@@ -469,12 +431,12 @@ void __fastcall UFG::DoorStateManager::AddDoor(UFG::qSymbol *name, UFG::qVector3
       v4[1].mNext = 0i64;
       v4[2].mNext = 0i64;
       LODWORD(v4[4].mNext) = -1;
-      LODWORD(v4[4].mNext) = (UFG::qSymbol)v3->mUID;
-      v6 = v2->y;
-      v7 = v2->z;
-      HIDWORD(v4[4].mNext) = LODWORD(v2->x);
-      *(float *)&v4[5].mNext = v6;
-      *((float *)&v4[5].mNext + 1) = v7;
+      LODWORD(v4[4].mNext) = (UFG::qSymbol)name->mUID;
+      y = pos->y;
+      z = pos->z;
+      HIDWORD(v4[4].mNext) = LODWORD(pos->x);
+      *(float *)&v4[5].mNext = y;
+      *((float *)&v4[5].mNext + 1) = z;
       LODWORD(v4[3].mNext) = v4[4].mNext;
     }
     else
@@ -511,224 +473,219 @@ void __fastcall UFG::DoorStateManager::RemoveDoor(UFG::qSymbol *name)
 __int64 dynamic_initializer_for__UFG::AudioSurfaceTypeManager::sm_database__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::AudioSurfaceTypeManager::sm_database.mTree);
-  return atexit(dynamic_atexit_destructor_for__UFG::AudioSurfaceTypeManager::sm_database__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::AudioSurfaceTypeManager::sm_database__);
 }
 
 // File Line: 475
 // RVA: 0x5A2120
 void __fastcall UFG::AudioSurfaceTypeManager::LoadSurfaceBankInfo(const char *filename)
 {
-  const char *v1; // rdi
-  Render::SkinningCacheNode *v2; // rax
-  Illusion::Buffer **v3; // rbx
-  UFG::qBaseNodeVariableRB<unsigned __int64> *v4; // rdx
-  SimpleXML::XMLDocument *v5; // rax
-  SimpleXML::XMLDocument *v6; // r15
-  SimpleXML::XMLNode *v7; // rax
-  SimpleXML::XMLNode *v8; // r12
-  char *v9; // rax
-  UFG::qBaseTreeRB *v10; // rax
-  UFG::allocator::free_link *v11; // rax
-  UFG::allocator::free_link *v12; // rdi
-  unsigned int v13; // ebx
-  UFG::qBaseNodeRB *v14; // rdx
-  SimpleXML::XMLNode *v15; // rbp
+  Render::SkinningCacheNode *Head; // rax
+  Illusion::Buffer **p_mCachedBufferPtr; // rbx
+  UFG::qBaseNodeVariableRB<unsigned __int64> *p_mNode; // rdx
+  SimpleXML::XMLDocument *v5; // r15
+  SimpleXML::XMLNode *Node; // rax
+  SimpleXML::XMLNode *ChildNode; // r12
+  char *Attribute; // rax
+  UFG::qBaseTreeRB *v9; // rax
+  UFG::allocator::free_link *v10; // rax
+  UFG::allocator::free_link *v11; // rdi
+  unsigned int mUID; // ebx
+  UFG::qBaseNodeRB *v13; // rdx
+  SimpleXML::XMLNode *v14; // rbp
+  char *v15; // rax
   char *v16; // rax
-  char *v17; // rax
-  UFG::qBaseTreeRB *v18; // rax
-  UFG::allocator::free_link *v19; // rax
-  UFG::allocator::free_link *v20; // rbx
-  unsigned int v21; // esi
-  UFG::qWiseSymbol *v22; // rax
+  UFG::qBaseTreeRB *v17; // rax
+  UFG::allocator::free_link *v18; // rax
+  UFG::allocator::free_link *v19; // rbx
+  unsigned int v20; // esi
+  UFG::qWiseSymbol *null; // rax
   SimpleXML::XMLNode *i; // [rsp+30h] [rbp-58h]
-  UFG::qSymbol v24; // [rsp+98h] [rbp+10h]
-  UFG::qSymbol result; // [rsp+A0h] [rbp+18h]
-  UFG::qWiseSymbol source; // [rsp+A8h] [rbp+20h]
+  UFG::qSymbol v23; // [rsp+98h] [rbp+10h] BYREF
+  UFG::qSymbol result; // [rsp+A0h] [rbp+18h] BYREF
+  UFG::qWiseSymbol source; // [rsp+A8h] [rbp+20h] BYREF
 
-  v1 = filename;
   if ( UFG::AudioSurfaceTypeManager::sm_database.mTree.mCount )
   {
     while ( 1 )
     {
-      v2 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::AudioSurfaceTypeManager::sm_database);
-      if ( !v2 )
+      Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::AudioSurfaceTypeManager::sm_database);
+      if ( !Head )
         break;
-      v3 = &v2[-1].mCachedBufferPtr;
-      if ( v2 == (Render::SkinningCacheNode *)8 )
+      p_mCachedBufferPtr = &Head[-1].mCachedBufferPtr;
+      if ( Head == (Render::SkinningCacheNode *)8 )
         goto LABEL_6;
-      v4 = &v2->mNode;
+      p_mNode = &Head->mNode;
 LABEL_7:
       UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
         (UFG::qBaseTreeVariableRB<unsigned __int64> *)&UFG::AudioSurfaceTypeManager::sm_database,
-        v4);
-      if ( v3 )
-        ((void (__fastcall *)(Illusion::Buffer **, signed __int64))(*v3)->mNode.mParent)(v3, 1i64);
+        p_mNode);
+      if ( p_mCachedBufferPtr )
+        ((void (__fastcall *)(Illusion::Buffer **, __int64))(*p_mCachedBufferPtr)->mNode.mParent)(
+          p_mCachedBufferPtr,
+          1i64);
       if ( !UFG::AudioSurfaceTypeManager::sm_database.mTree.mCount )
         goto LABEL_10;
     }
-    v3 = 0i64;
+    p_mCachedBufferPtr = 0i64;
 LABEL_6:
-    v4 = 0i64;
+    p_mNode = 0i64;
     goto LABEL_7;
   }
 LABEL_10:
-  v5 = SimpleXML::XMLDocument::Open(v1, 1ui64, 0i64);
-  v6 = v5;
-  v7 = SimpleXML::XMLDocument::GetNode(v5, "SurfaceBankMap", 0i64);
-  v8 = SimpleXML::XMLDocument::GetChildNode(v6, "Surface", v7);
-  for ( i = v8; v8; i = v8 )
+  v5 = SimpleXML::XMLDocument::Open(filename, 1ui64, 0i64);
+  Node = SimpleXML::XMLDocument::GetNode(v5, "SurfaceBankMap", 0i64);
+  ChildNode = SimpleXML::XMLDocument::GetChildNode(v5, "Surface", Node);
+  for ( i = ChildNode; ChildNode; i = ChildNode )
   {
-    v9 = SimpleXML::XMLNode::GetAttribute(v8, "name", 0i64);
-    UFG::qSymbol::create_from_string(&result, v9);
+    Attribute = SimpleXML::XMLNode::GetAttribute(ChildNode, "name", 0i64);
+    UFG::qSymbol::create_from_string(&result, Attribute);
     if ( !result.mUID
-      || (v10 = UFG::qBaseTreeRB::Get(&UFG::AudioSurfaceTypeManager::sm_database.mTree, result.mUID)) == 0i64
-      || v10 == (UFG::qBaseTreeRB *)8 )
+      || (v9 = UFG::qBaseTreeRB::Get(&UFG::AudioSurfaceTypeManager::sm_database.mTree, result.mUID)) == 0i64
+      || v9 == (UFG::qBaseTreeRB *)8 )
     {
-      v11 = UFG::qMemoryPool::Allocate(&g_AudioMemoryPool, 0x70ui64, "SurfaceBankNode", 0i64, 1u);
-      v12 = v11;
-      if ( v11 )
+      v10 = UFG::qMemoryPool::Allocate(&g_AudioMemoryPool, 0x70ui64, "SurfaceBankNode", 0i64, 1u);
+      v11 = v10;
+      if ( v10 )
       {
-        v13 = result.mUID;
-        v11[1].mNext = 0i64;
-        v11[2].mNext = 0i64;
-        v11[3].mNext = 0i64;
-        v11->mNext = (UFG::allocator::free_link *)&UFG::SurfaceBankNode::`vftable;
-        UFG::qBaseTreeRB::qBaseTreeRB((UFG::qBaseTreeRB *)&v11[5]);
-        LODWORD(v12[4].mNext) = v13;
+        mUID = result.mUID;
+        v10[1].mNext = 0i64;
+        v10[2].mNext = 0i64;
+        v10[3].mNext = 0i64;
+        v10->mNext = (UFG::allocator::free_link *)&UFG::SurfaceBankNode::`vftable;
+        UFG::qBaseTreeRB::qBaseTreeRB((UFG::qBaseTreeRB *)&v10[5]);
+        LODWORD(v11[4].mNext) = mUID;
       }
       else
       {
-        v12 = 0i64;
+        v11 = 0i64;
       }
-      v14 = (UFG::qBaseNodeRB *)&v12[1];
-      if ( !v12 )
-        v14 = 0i64;
-      UFG::qBaseTreeRB::Add(&UFG::AudioSurfaceTypeManager::sm_database.mTree, v14);
-      v15 = SimpleXML::XMLDocument::GetChildNode(v6, "Bank", v8);
-      if ( v15 )
+      v13 = (UFG::qBaseNodeRB *)&v11[1];
+      if ( !v11 )
+        v13 = 0i64;
+      UFG::qBaseTreeRB::Add(&UFG::AudioSurfaceTypeManager::sm_database.mTree, v13);
+      v14 = SimpleXML::XMLDocument::GetChildNode(v5, "Bank", ChildNode);
+      if ( v14 )
       {
         do
         {
-          v16 = SimpleXML::XMLNode::GetAttribute(v15, "footwear", &customWorldMapCaption);
-          UFG::qSymbol::create_from_string(&v24, v16);
-          v17 = SimpleXML::XMLNode::GetAttribute(v15, "bankId", &customWorldMapCaption);
-          UFG::qWiseSymbol::create_from_string(&source, v17);
-          if ( !v24.mUID
-            || (v18 = UFG::qBaseTreeRB::Get((UFG::qBaseTreeRB *)&v12[5], v24.mUID)) == 0i64
-            || v18 == (UFG::qBaseTreeRB *)8 )
+          v15 = SimpleXML::XMLNode::GetAttribute(v14, "footwear", &customCaption);
+          UFG::qSymbol::create_from_string(&v23, v15);
+          v16 = SimpleXML::XMLNode::GetAttribute(v14, "bankId", &customCaption);
+          UFG::qWiseSymbol::create_from_string(&source, v16);
+          if ( !v23.mUID
+            || (v17 = UFG::qBaseTreeRB::Get((UFG::qBaseTreeRB *)&v11[5], v23.mUID)) == 0i64
+            || v17 == (UFG::qBaseTreeRB *)8 )
           {
-            v19 = UFG::qMemoryPool::Allocate(&g_AudioMemoryPool, 0x30ui64, "BankNode", 0i64, 1u);
-            v20 = v19;
-            if ( v19 )
+            v18 = UFG::qMemoryPool::Allocate(&g_AudioMemoryPool, 0x30ui64, "BankNode", 0i64, 1u);
+            v19 = v18;
+            if ( v18 )
             {
-              v21 = v24.mUID;
-              v19[1].mNext = 0i64;
-              v19[2].mNext = 0i64;
-              v19[3].mNext = 0i64;
-              v19->mNext = (UFG::allocator::free_link *)&UFG::BankNode::`vftable;
-              LODWORD(v19[5].mNext) = -1;
+              v20 = v23.mUID;
+              v18[1].mNext = 0i64;
+              v18[2].mNext = 0i64;
+              v18[3].mNext = 0i64;
+              v18->mNext = (UFG::allocator::free_link *)&UFG::BankNode::`vftable;
+              LODWORD(v18[5].mNext) = -1;
               _((AMD_HD3D *)0xFFFFFFFFi64);
-              HIDWORD(v20[5].mNext) = -1;
-              LODWORD(v20[4].mNext) = v21;
-              v22 = UFG::qWiseSymbol::get_null();
-              UFG::qWiseSymbol::operator=((UFG::qWiseSymbol *)&v20[5], v22);
-              HIDWORD(v20[5].mNext) = UFG::gNullQSymbol;
+              HIDWORD(v19[5].mNext) = -1;
+              LODWORD(v19[4].mNext) = v20;
+              null = UFG::qWiseSymbol::get_null();
+              UFG::qWiseSymbol::operator=((UFG::qWiseSymbol *)&v19[5], null);
+              HIDWORD(v19[5].mNext) = UFG::gNullQSymbol;
             }
             else
             {
-              v20 = 0i64;
+              v19 = 0i64;
             }
-            HIDWORD(v20[5].mNext) = v24;
-            UFG::qWiseSymbol::operator=((UFG::qWiseSymbol *)&v20[5], &source);
-            UFG::qBaseTreeRB::Add((UFG::qBaseTreeRB *)&v12[5], (UFG::qBaseNodeRB *)&v20[1]);
+            HIDWORD(v19[5].mNext) = v23;
+            UFG::qWiseSymbol::operator=((UFG::qWiseSymbol *)&v19[5], &source);
+            UFG::qBaseTreeRB::Add((UFG::qBaseTreeRB *)&v11[5], (UFG::qBaseNodeRB *)&v19[1]);
           }
           _((AMD_HD3D *)source.mUID);
-          v15 = SimpleXML::XMLDocument::GetNode(v6, "Bank", v15);
+          v14 = SimpleXML::XMLDocument::GetNode(v5, "Bank", v14);
         }
-        while ( v15 );
-        v8 = i;
+        while ( v14 );
+        ChildNode = i;
       }
     }
-    v8 = SimpleXML::XMLDocument::GetNode(v6, "Surface", v8);
+    ChildNode = SimpleXML::XMLDocument::GetNode(v5, "Surface", ChildNode);
   }
 }
 
 // File Line: 531
 // RVA: 0x59D580
-UFG::qWiseSymbol *__fastcall UFG::AudioSurfaceTypeManager::GetSurfaceBankId(UFG::qWiseSymbol *result, unsigned int surfaceId, unsigned int footwear)
+UFG::qWiseSymbol *__fastcall UFG::AudioSurfaceTypeManager::GetSurfaceBankId(
+        UFG::qWiseSymbol *result,
+        unsigned int surfaceId,
+        unsigned int footwear)
 {
-  unsigned int v3; // esi
-  unsigned int v4; // ebp
-  UFG::qWiseSymbol *v5; // rdi
-  signed __int64 v6; // rbx
-  unsigned int v7; // edx
+  int *v6; // rbx
+  unsigned int mUID; // edx
   UFG::qBaseTreeRB *v8; // rax
-  signed __int64 v9; // rbp
+  int *v9; // rbp
   UFG::qBaseTreeRB *v10; // rax
-  signed __int64 v11; // rax
+  int *v11; // rax
   AMD_HD3D *v12; // rcx
   unsigned int v13; // edx
   UFG::qBaseTreeRB *v14; // rcx
   UFG::qBaseTreeRB *v15; // rax
-  signed __int64 v16; // rcx
+  int *p_mCount; // rcx
   UFG::qBaseTreeRB *v17; // rax
   AMD_HD3D *v18; // rcx
 
-  v3 = footwear;
-  v4 = surfaceId;
-  v5 = result;
   v6 = 0i64;
-  if ( !(_S38_1 & 1) )
+  if ( (_S38_1 & 1) == 0 )
   {
     _S38_1 |= 1u;
     UFG::qSymbol::create_from_string(&qSymbol_default, "default");
     atexit(UFG::AudioSurfaceTypeManager::GetSurfaceBankId_::_2_::_dynamic_atexit_destructor_for__qSymbol_default__);
   }
-  v7 = qSymbol_default.mUID;
-  if ( !v3 )
-    v3 = qSymbol_default.mUID;
-  if ( !v4 )
+  mUID = qSymbol_default.mUID;
+  if ( !footwear )
+    footwear = qSymbol_default.mUID;
+  if ( !surfaceId )
     goto LABEL_15;
-  v8 = UFG::qBaseTreeRB::Get(&UFG::AudioSurfaceTypeManager::sm_database.mTree, v4);
-  if ( !v8 || (v9 = (signed __int64)&v8[-1].mCount, v8 == (UFG::qBaseTreeRB *)8) )
+  v8 = UFG::qBaseTreeRB::Get(&UFG::AudioSurfaceTypeManager::sm_database.mTree, surfaceId);
+  if ( !v8 || (v9 = &v8[-1].mCount, v8 == (UFG::qBaseTreeRB *)8) )
   {
-    v7 = qSymbol_default.mUID;
+    mUID = qSymbol_default.mUID;
 LABEL_15:
-    if ( !v7 )
+    if ( !mUID )
       goto LABEL_22;
-    v15 = UFG::qBaseTreeRB::Get(&UFG::AudioSurfaceTypeManager::sm_database.mTree, v7);
-    v16 = (signed __int64)&v15[-1].mCount;
+    v15 = UFG::qBaseTreeRB::Get(&UFG::AudioSurfaceTypeManager::sm_database.mTree, mUID);
+    p_mCount = &v15[-1].mCount;
     if ( !v15 )
-      v16 = 0i64;
+      p_mCount = 0i64;
     v13 = qSymbol_default.mUID;
     if ( !qSymbol_default.mUID )
       goto LABEL_22;
-    v14 = (UFG::qBaseTreeRB *)(v16 + 40);
+    v14 = (UFG::qBaseTreeRB *)(p_mCount + 10);
     goto LABEL_20;
   }
-  if ( !v3
-    || (v10 = UFG::qBaseTreeRB::Get((UFG::qBaseTreeRB *)(v9 + 40), v3)) == 0i64
-    || (v11 = (signed __int64)&v10[-1].mCount) == 0 )
+  if ( !footwear
+    || (v10 = UFG::qBaseTreeRB::Get((UFG::qBaseTreeRB *)(v9 + 10), footwear)) == 0i64
+    || (v11 = &v10[-1].mCount) == 0i64 )
   {
     v13 = qSymbol_default.mUID;
     if ( !qSymbol_default.mUID )
     {
 LABEL_22:
-      v18 = (AMD_HD3D *)*(unsigned int *)(v6 + 40);
-      v5->mUID = (unsigned int)v18;
+      v18 = (AMD_HD3D *)(unsigned int)v6[10];
+      result->mUID = (unsigned int)v18;
       _(v18);
-      return v5;
+      return result;
     }
-    v14 = (UFG::qBaseTreeRB *)(v9 + 40);
+    v14 = (UFG::qBaseTreeRB *)(v9 + 10);
 LABEL_20:
     v17 = UFG::qBaseTreeRB::Get(v14, v13);
     if ( v17 )
-      v6 = (signed __int64)&v17[-1].mCount;
+      v6 = &v17[-1].mCount;
     goto LABEL_22;
   }
-  v12 = (AMD_HD3D *)*(unsigned int *)(v11 + 40);
-  v5->mUID = (unsigned int)v12;
+  v12 = (AMD_HD3D *)(unsigned int)v11[10];
+  result->mUID = (unsigned int)v12;
   _(v12);
-  return v5;
+  return result;
 }
 

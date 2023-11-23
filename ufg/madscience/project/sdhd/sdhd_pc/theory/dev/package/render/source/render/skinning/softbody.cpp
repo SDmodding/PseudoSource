@@ -2,24 +2,26 @@
 // RVA: 0x1453A40
 __int64 dynamic_initializer_for__Render::Softbody::s_List__()
 {
-  return atexit(dynamic_atexit_destructor_for__Render::Softbody::s_List__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__Render::Softbody::s_List__);
 }
 
 // File Line: 57
 // RVA: 0x1453A30
 __int64 dynamic_initializer_for__Render::ISoftbody::s_DeletionQueue__()
 {
-  return atexit(dynamic_atexit_destructor_for__Render::ISoftbody::s_DeletionQueue__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__Render::ISoftbody::s_DeletionQueue__);
 }
 
 // File Line: 77
 // RVA: 0x20C00
-void __fastcall Render::VerletCloth::VerletCloth(Render::VerletCloth *this, Illusion::SoftbodyData *softbodyData, Illusion::Mesh *src_mesh)
+void __fastcall Render::VerletCloth::VerletCloth(
+        Render::VerletCloth *this,
+        Illusion::SoftbodyData *softbodyData,
+        Illusion::Mesh *src_mesh)
 {
-  Render::VerletCloth *v3; // rbx
-  float v4; // xmm1_4
-  float v5; // xmm2_4
-  float v6; // xmm3_4
+  float y; // xmm1_4
+  float z; // xmm2_4
+  float w; // xmm3_4
   float v7; // xmm1_4
   float v8; // xmm2_4
   float v9; // xmm3_4
@@ -31,19 +33,18 @@ void __fastcall Render::VerletCloth::VerletCloth(Render::VerletCloth *this, Illu
   float v15; // xmm3_4
   unsigned __int64 v16; // rcx
 
-  v3 = this;
-  this->mPrev = (UFG::qNode<Render::VerletCloth,Render::VerletCloth> *)&this->mPrev;
-  this->mNext = (UFG::qNode<Render::VerletCloth,Render::VerletCloth> *)&this->mPrev;
+  this->mPrev = this;
+  this->mNext = this;
   this->mPrevSoftVertPosUnconstrained = 0i64;
   this->mPrevSoftVertPosConstrained = 0i64;
   this->mNeedsReset = 2;
-  v4 = UFG::qMatrix44::msIdentity.v0.y;
-  v5 = UFG::qMatrix44::msIdentity.v0.z;
-  v6 = UFG::qMatrix44::msIdentity.v0.w;
+  y = UFG::qMatrix44::msIdentity.v0.y;
+  z = UFG::qMatrix44::msIdentity.v0.z;
+  w = UFG::qMatrix44::msIdentity.v0.w;
   this->mPrevWorld.v0.x = UFG::qMatrix44::msIdentity.v0.x;
-  this->mPrevWorld.v0.y = v4;
-  this->mPrevWorld.v0.z = v5;
-  this->mPrevWorld.v0.w = v6;
+  this->mPrevWorld.v0.y = y;
+  this->mPrevWorld.v0.z = z;
+  this->mPrevWorld.v0.w = w;
   v7 = UFG::qMatrix44::msIdentity.v1.y;
   v8 = UFG::qMatrix44::msIdentity.v1.z;
   v9 = UFG::qMatrix44::msIdentity.v1.w;
@@ -67,294 +68,297 @@ void __fastcall Render::VerletCloth::VerletCloth(Render::VerletCloth *this, Illu
   this->mPrevWorld.v3.w = v15;
   this->mPendingTimeStep = 0.0;
   v16 = (6 * softbodyData->mNumSoftVertIndices + 15) & 0xFFFFFFF0;
-  v3->mPrevSoftVertPositionsSize = v16;
-  v3->mPrevSoftVertPosConstrained = (Render::PackedPosition *)UFG::qMalloc(
-                                                                v16,
-                                                                "VerletCloth::mPrevSoftVertPosConstrained",
-                                                                0x8000ui64);
-  v3->mPrevSoftVertPosUnconstrained = (Render::PackedPosition *)UFG::qMalloc(
-                                                                  v3->mPrevSoftVertPositionsSize,
-                                                                  "VerletCloth::mPrevSoftVertPosUnconstrained",
+  this->mPrevSoftVertPositionsSize = v16;
+  this->mPrevSoftVertPosConstrained = (Render::PackedPosition *)UFG::qMalloc(
+                                                                  v16,
+                                                                  "VerletCloth::mPrevSoftVertPosConstrained",
                                                                   0x8000ui64);
+  this->mPrevSoftVertPosUnconstrained = (Render::PackedPosition *)UFG::qMalloc(
+                                                                    this->mPrevSoftVertPositionsSize,
+                                                                    "VerletCloth::mPrevSoftVertPosUnconstrained",
+                                                                    0x8000ui64);
 }
 
 // File Line: 104
 // RVA: 0x214B0
-void __fastcall Render::VerletCloth::FillTaskParameters(Render::VerletCloth *this, Render::sSoftbodyParams *output, Illusion::Model *source_model, UFG::qMatrix44 *worldMat, UFG::qMatrix44 *invWorldMat, Render::Softbody *context)
+void __fastcall Render::VerletCloth::FillTaskParameters(
+        Render::VerletCloth *this,
+        Render::sSoftbodyParams *output,
+        Illusion::Model *source_model,
+        UFG::qMatrix44 *worldMat,
+        UFG::qMatrix44 *invWorldMat,
+        Render::Softbody *context)
 {
-  Render::sSoftbodyParams *v6; // rdi
-  Illusion::Model *v7; // r14
-  Render::VerletCloth *v8; // r13
-  UFG::qMatrix44 *v9; // rbp
-  float v10; // xmm6_4
-  __m128 v11; // xmm4
-  __m128 v12; // xmm2
-  float v13; // xmm1_4
-  float v14; // xmm0_4
-  float v15; // eax
-  __int64 v16; // rax
-  _QWORD *v17; // rax
-  char *v18; // rcx
-  __int64 v19; // rax
-  signed __int64 v20; // rax
-  __int64 v21; // rax
-  signed __int64 v22; // rax
-  char *v23; // rax
-  __int64 v24; // rax
-  signed __int64 v25; // rdx
-  UFG::qVector4 v26; // xmm0
-  UFG::qVector4 v27; // xmm1
-  UFG::qNode<Render::SoftbodyCollisionShape,Render::SoftbodyCollisionShape> **v28; // r14
-  UFG::qVector4 v29; // xmm3
-  UFG::qVector4 v30; // xmm2
-  UFG::qVector4 v31; // xmm1
-  Render::Softbody *v32; // rbx
-  UFG::qNode<Render::SoftbodyCollisionShape,Render::SoftbodyCollisionShape> **v33; // rsi
-  Render::Softbody *v34; // rbx
+  float mPendingTimeStep; // xmm6_4
+  __m128 y_low; // xmm2
+  float v12; // xmm1_4
+  float v13; // xmm0_4
+  float mDrag; // eax
+  __int64 mOffset; // rax
+  _QWORD *v16; // rax
+  char *v17; // rcx
+  __int64 v18; // rax
+  char *v19; // rax
+  __int64 v20; // rax
+  char *v21; // rax
+  char *v22; // rax
+  __int64 v23; // rax
+  char *v24; // rdx
+  UFG::qVector4 v25; // xmm0
+  UFG::qVector4 v26; // xmm1
+  UFG::qNode<Render::SoftbodyCollisionShape,Render::SoftbodyCollisionShape> **p_mNext; // r14
+  UFG::qVector4 v28; // xmm3
+  UFG::qVector4 v29; // xmm2
+  UFG::qVector4 v30; // xmm1
+  Render::Softbody *v31; // rbx
+  UFG::qNode<Render::SoftbodyCollisionShape,Render::SoftbodyCollisionShape> **v32; // rsi
+  Render::Softbody *v33; // rbx
   Render::Softbody *i; // rbx
   UFG::qNode<Render::SoftbodyCollisionShape,Render::SoftbodyCollisionShape> **j; // rbx
   UFG::qNode<Render::SoftbodyCollisionShape,Render::SoftbodyCollisionShape> **k; // rbx
-  UFG::qVector4 v38; // xmm3
-  UFG::qVector4 v39; // xmm2
-  UFG::qVector4 v40; // xmm1
-  unsigned int v41; // eax
-  UFG::qMatrix44 result; // [rsp+20h] [rbp-B8h]
-  UFG::qMatrix44 v43; // [rsp+60h] [rbp-78h]
+  UFG::qVector4 v37; // xmm3
+  UFG::qVector4 v38; // xmm2
+  UFG::qVector4 v39; // xmm1
+  unsigned int mNeedsReset; // eax
+  UFG::qMatrix44 result; // [rsp+20h] [rbp-B8h] BYREF
+  UFG::qMatrix44 v42; // [rsp+60h] [rbp-78h] BYREF
 
-  v6 = output;
-  v7 = source_model;
-  v8 = this;
-  v9 = worldMat;
   UFG::qMatrix44::operator*(&this->mPrevWorld, &result, invWorldMat);
-  v10 = v8->mPendingTimeStep;
-  if ( v10 <= 0.00000011920929
-    || v10 > 0.30000001
-    || UFG::qMatrix44::operator==(&v8->mPrevWorld, &UFG::qMatrix44::msIdentity) )
+  mPendingTimeStep = this->mPendingTimeStep;
+  if ( mPendingTimeStep <= 0.00000011920929
+    || mPendingTimeStep > 0.30000001
+    || UFG::qMatrix44::operator==(&this->mPrevWorld, &UFG::qMatrix44::msIdentity) )
   {
-    v8->mPendingTimeStep = 0.0;
+    this->mPendingTimeStep = 0.0;
   }
   else
   {
-    v11 = (__m128)LODWORD(result.v3.y);
-    v12 = v11;
-    v12.m128_f32[0] = (float)((float)(v11.m128_f32[0] * v11.m128_f32[0]) + (float)(result.v3.x * result.v3.x))
-                    + (float)(result.v3.z * result.v3.z);
-    v13 = COERCE_FLOAT(_mm_sqrt_ps(v12)) / v10;
-    if ( v13 > Render::VERLET_maxTranslationSpeed )
+    y_low = (__m128)LODWORD(result.v3.y);
+    y_low.m128_f32[0] = (float)((float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(result.v3.x * result.v3.x))
+                      + (float)(result.v3.z * result.v3.z);
+    v12 = _mm_sqrt_ps(y_low).m128_f32[0] / mPendingTimeStep;
+    if ( v12 > Render::VERLET_maxTranslationSpeed )
     {
       LODWORD(result.v3.w) = (_DWORD)FLOAT_1_0;
-      result.v3.x = result.v3.x * (float)(Render::VERLET_maxTranslationSpeed / v13);
-      result.v3.y = result.v3.y * (float)(Render::VERLET_maxTranslationSpeed / v13);
-      result.v3.z = result.v3.z * (float)(Render::VERLET_maxTranslationSpeed / v13);
+      result.v3.x = result.v3.x * (float)(Render::VERLET_maxTranslationSpeed / v12);
+      result.v3.y = result.v3.y * (float)(Render::VERLET_maxTranslationSpeed / v12);
+      result.v3.z = result.v3.z * (float)(Render::VERLET_maxTranslationSpeed / v12);
     }
   }
-  v14 = v8->mPendingTimeStep;
-  if ( v14 >= 0.1 )
-    v14 = FLOAT_0_1;
-  v6->timestep = v14;
-  v6->friction = context->mFriction;
-  v15 = context->mDrag;
-  v6->noisetime = 0.0;
-  v6->drag = v15;
-  v16 = v7->mModelUser.mOffset;
-  if ( v16 )
-    v17 = (__int64 *)((char *)&v7->mModelUser.mOffset + v16);
+  v13 = this->mPendingTimeStep;
+  if ( v13 >= 0.1 )
+    v13 = FLOAT_0_1;
+  output->timestep = v13;
+  output->friction = context->mFriction;
+  mDrag = context->mDrag;
+  output->noisetime = 0.0;
+  output->drag = mDrag;
+  mOffset = source_model->mModelUser.mOffset;
+  if ( mOffset )
+    v16 = (__int64 *)((char *)&source_model->mModelUser.mOffset + mOffset);
+  else
+    v16 = 0i64;
+  if ( *v16 )
+    v17 = (char *)v16 + *v16;
   else
     v17 = 0i64;
-  if ( *v17 )
-    v18 = (char *)v17 + *v17;
+  output->spring_size = 4 * *((_DWORD *)v17 + 10);
+  v18 = *((_QWORD *)v17 + 2);
+  if ( v18 )
+    v19 = &v17[v18 + 16];
   else
-    v18 = 0i64;
-  v6->spring_size = 4 * *((_DWORD *)v18 + 10);
-  v19 = *((_QWORD *)v18 + 2);
-  if ( v19 )
-    v20 = (signed __int64)&v18[v19 + 16];
+    v19 = 0i64;
+  output->spring_data = v19;
+  output->remapper_size = 2 * *((_DWORD *)v17 + 11);
+  v20 = *((_QWORD *)v17 + 3);
+  if ( v20 )
+    v21 = &v17[v20 + 24];
   else
-    v20 = 0i64;
-  v6->spring_data = (void *)v20;
-  v6->remapper_size = 2 * *((_DWORD *)v18 + 11);
-  v21 = *((_QWORD *)v18 + 3);
-  if ( v21 )
-    v22 = (signed __int64)&v18[v21 + 24];
+    v21 = 0i64;
+  output->remapper_data = v21;
+  output->soft_indices_count = *((_DWORD *)v17 + 8);
+  output->hard_indices_count = *((_DWORD *)v17 + 9) - *((_DWORD *)v17 + 8);
+  if ( *(_QWORD *)v17 )
+    v22 = &v17[*(_QWORD *)v17];
   else
     v22 = 0i64;
-  v6->remapper_data = (void *)v22;
-  v6->soft_indices_count = *((_DWORD *)v18 + 8);
-  v6->hard_indices_count = *((_DWORD *)v18 + 9) - *((_DWORD *)v18 + 8);
-  if ( *(_QWORD *)v18 )
-    v23 = &v18[*(_QWORD *)v18];
+  output->verlet_indices_data = v22;
+  v23 = *((_QWORD *)v17 + 1);
+  if ( v23 )
+    v24 = &v17[v23 + 8];
   else
-    v23 = 0i64;
-  v6->verlet_indices_data = v23;
-  v24 = *((_QWORD *)v18 + 1);
-  if ( v24 )
-    v25 = (signed __int64)&v18[v24 + 8];
-  else
-    v25 = 0i64;
-  v6->render_indices_data = (void *)v25;
-  v26 = result.v0;
-  v6->prev_soft_positions_unconstrained_data = v8->mPrevSoftVertPosUnconstrained;
-  v27 = result.v2;
-  v6->prev_soft_positions_constrained_data = v8->mPrevSoftVertPosConstrained;
-  v28 = &context->mSoftbodySpaceShapes.mShapes.mNode.mNext;
-  v6->delta_world_transform.v0 = v26;
-  v6->delta_world_transform.v1 = result.v1;
-  v6->delta_world_transform.v2 = v27;
-  v6->delta_world_transform.v3 = result.v3;
-  v29 = invWorldMat->v1;
-  v30 = invWorldMat->v2;
-  v31 = invWorldMat->v3;
-  v6->inverse_world_transform.v0 = invWorldMat->v0;
-  v6->inverse_world_transform.v1 = v29;
-  v6->inverse_world_transform.v2 = v30;
-  v6->inverse_world_transform.v3 = v31;
-  v26.x = context->mAccel.x;
-  v31.x = context->mAccel.y;
-  v30.x = context->mAccel.z;
-  v6->accel.w = 1.0;
-  v6->accel.x = v26.x;
-  v6->accel.y = v31.x;
-  v6->accel.z = v30.x;
-  v30.x = UFG::qVector4::msZero.z;
-  v29.x = UFG::qVector4::msZero.w;
-  v26.x = UFG::qVector4::msZero.x;
-  v6->winddir.y = UFG::qVector4::msZero.y;
-  v6->winddir.z = v30.x;
-  v6->winddir.x = v26.x;
-  v6->winddir.w = v29.x;
-  v31.x = UFG::qVector4::msZero.y;
-  v30.x = UFG::qVector4::msZero.z;
-  v29.x = UFG::qVector4::msZero.w;
-  v6->ground_plane.x = UFG::qVector4::msZero.x;
-  v6->ground_plane.y = v31.x;
-  v6->ground_plane.z = v30.x;
-  v6->ground_plane.w = v29.x;
-  v6->windspeed = 0.0;
-  v6->need_reset = v8->mNeedsReset > 0;
-  v32 = (Render::Softbody *)&context->mWorldSpaceShapes.mShapes.mNode.mNext[-1].mNext;
-  if ( v32 != (Render::Softbody *)&context->mSoftbodySpaceShapes.mShapes.mNode.mNext )
+    v24 = 0i64;
+  output->render_indices_data = v24;
+  v25 = result.v0;
+  output->prev_soft_positions_unconstrained_data = this->mPrevSoftVertPosUnconstrained;
+  v26 = result.v2;
+  output->prev_soft_positions_constrained_data = this->mPrevSoftVertPosConstrained;
+  p_mNext = &context->mSoftbodySpaceShapes.mShapes.mNode.mNext;
+  output->delta_world_transform.v0 = v25;
+  output->delta_world_transform.v1 = result.v1;
+  output->delta_world_transform.v2 = v26;
+  output->delta_world_transform.v3 = result.v3;
+  v28 = invWorldMat->v1;
+  v29 = invWorldMat->v2;
+  v30 = invWorldMat->v3;
+  output->inverse_world_transform.v0 = invWorldMat->v0;
+  output->inverse_world_transform.v1 = v28;
+  output->inverse_world_transform.v2 = v29;
+  output->inverse_world_transform.v3 = v30;
+  v25.x = context->mAccel.x;
+  v30.x = context->mAccel.y;
+  v29.x = context->mAccel.z;
+  output->accel.w = 1.0;
+  output->accel.x = v25.x;
+  output->accel.y = v30.x;
+  output->accel.z = v29.x;
+  v29.x = UFG::qVector4::msZero.z;
+  v28.x = UFG::qVector4::msZero.w;
+  v25.x = UFG::qVector4::msZero.x;
+  output->winddir.y = UFG::qVector4::msZero.y;
+  output->winddir.z = v29.x;
+  output->winddir.x = v25.x;
+  output->winddir.w = v28.x;
+  v30.x = UFG::qVector4::msZero.y;
+  v29.x = UFG::qVector4::msZero.z;
+  v28.x = UFG::qVector4::msZero.w;
+  output->ground_plane.x = UFG::qVector4::msZero.x;
+  output->ground_plane.y = v30.x;
+  output->ground_plane.z = v29.x;
+  output->ground_plane.w = v28.x;
+  output->windspeed = 0.0;
+  output->need_reset = this->mNeedsReset != 0;
+  v31 = (Render::Softbody *)&context->mWorldSpaceShapes.mShapes.mNode.mNext[-1].mNext;
+  if ( v31 != (Render::Softbody *)&context->mSoftbodySpaceShapes.mShapes.mNode.mNext )
   {
     do
     {
-      ((void (__fastcall *)(Render::Softbody *, UFG::qMatrix44 *, UFG::qMatrix44 *))v32->mPrev->mPrev)(
-        v32,
+      ((void (__fastcall *)(Render::Softbody *, UFG::qMatrix44 *, UFG::qMatrix44 *))v31->mPrev->mPrev)(
+        v31,
         invWorldMat,
-        v9);
-      v32 = (Render::Softbody *)&v32->mModelSpaceShapes.mShapes.mNode.mPrev[-1].mNext;
+        worldMat);
+      v31 = (Render::Softbody *)&v31->mModelSpaceShapes.mShapes.mNode.mPrev[-1].mNext;
     }
-    while ( v32 != (Render::Softbody *)v28 );
+    while ( v31 != (Render::Softbody *)p_mNext );
   }
-  UFG::qMatrix44::operator*(&context->mWorld, &v43, invWorldMat);
-  UFG::qMatrix44::operator*(v9, &result, &context->mInvWorld);
-  v33 = &context->mModelSpaceShapes.mShapes.mNode.mNext;
-  v34 = (Render::Softbody *)&(*v28)[-1].mNext;
-  if ( v34 != (Render::Softbody *)&context->mModelSpaceShapes.mShapes.mNode.mNext )
+  UFG::qMatrix44::operator*(&context->mWorld, &v42, invWorldMat);
+  UFG::qMatrix44::operator*(worldMat, &result, &context->mInvWorld);
+  v32 = &context->mModelSpaceShapes.mShapes.mNode.mNext;
+  v33 = (Render::Softbody *)&(*p_mNext)[-1].mNext;
+  if ( v33 != (Render::Softbody *)&context->mModelSpaceShapes.mShapes.mNode.mNext )
   {
     do
     {
-      ((void (__fastcall *)(Render::Softbody *, UFG::qMatrix44 *, UFG::qMatrix44 *))v34->mPrev->mPrev)(
-        v34,
-        &v43,
+      ((void (__fastcall *)(Render::Softbody *, UFG::qMatrix44 *, UFG::qMatrix44 *))v33->mPrev->mPrev)(
+        v33,
+        &v42,
         &result);
-      v34 = (Render::Softbody *)&v34->mModelSpaceShapes.mShapes.mNode.mPrev[-1].mNext;
+      v33 = (Render::Softbody *)&v33->mModelSpaceShapes.mShapes.mNode.mPrev[-1].mNext;
     }
-    while ( v34 != (Render::Softbody *)v33 );
+    while ( v33 != (Render::Softbody *)v32 );
   }
-  *(_QWORD *)&v6->collision_plane_count = 0i64;
-  for ( i = (Render::Softbody *)&(*v33)[-1].mNext;
+  *(_QWORD *)&output->collision_plane_count = 0i64;
+  for ( i = (Render::Softbody *)&(*v32)[-1].mNext;
         i != (Render::Softbody *)&context->mNext;
         i = (Render::Softbody *)&i->mModelSpaceShapes.mShapes.mNode.mPrev[-1].mNext )
   {
-    ((void (__fastcall *)(Render::Softbody *, Render::sSoftbodyParams *))i->mPrev->mNext)(i, v6);
+    ((void (__fastcall *)(Render::Softbody *, Render::sSoftbodyParams *))i->mPrev->mNext)(i, output);
   }
-  for ( j = &(*v28)[-1].mNext; j != v33; j = &j[2][-1].mNext )
+  for ( j = &(*p_mNext)[-1].mNext; j != v32; j = &j[2][-1].mNext )
     ((void (__fastcall *)(UFG::qNode<Render::SoftbodyCollisionShape,Render::SoftbodyCollisionShape> **, Render::sSoftbodyParams *))(*j)->mNext)(
       j,
-      v6);
-  for ( k = &context->mWorldSpaceShapes.mShapes.mNode.mNext[-1].mNext; k != v28; k = &k[2][-1].mNext )
+      output);
+  for ( k = &context->mWorldSpaceShapes.mShapes.mNode.mNext[-1].mNext; k != p_mNext; k = &k[2][-1].mNext )
     ((void (__fastcall *)(UFG::qNode<Render::SoftbodyCollisionShape,Render::SoftbodyCollisionShape> **, Render::sSoftbodyParams *))(*k)->mNext)(
       k,
-      v6);
-  v38 = v9->v1;
-  v39 = v9->v2;
-  v40 = v9->v3;
-  v8->mPrevWorld.v0 = v9->v0;
-  v8->mPrevWorld.v1 = v38;
-  v8->mPrevWorld.v2 = v39;
-  v8->mPrevWorld.v3 = v40;
-  v41 = v8->mNeedsReset;
-  v8->mPendingTimeStep = 0.0;
-  if ( v41 )
-    v8->mNeedsReset = v41 - 1;
+      output);
+  v37 = worldMat->v1;
+  v38 = worldMat->v2;
+  v39 = worldMat->v3;
+  this->mPrevWorld.v0 = worldMat->v0;
+  this->mPrevWorld.v1 = v37;
+  this->mPrevWorld.v2 = v38;
+  this->mPrevWorld.v3 = v39;
+  mNeedsReset = this->mNeedsReset;
+  this->mPendingTimeStep = 0.0;
+  if ( mNeedsReset )
+    this->mNeedsReset = mNeedsReset - 1;
 }
 
 // File Line: 188
 // RVA: 0x21D60
-void __fastcall Render::SoftbodyCollisionSphere::UpdateTransform(Render::SoftbodyCollisionSphere *this, UFG::qMatrix44 *initial2local, UFG::qMatrix44 *local2initial)
+void __fastcall Render::SoftbodyCollisionSphere::UpdateTransform(
+        Render::SoftbodyCollisionSphere *this,
+        UFG::qMatrix44 *initial2local,
+        UFG::qMatrix44 *local2initial)
 {
-  float v3; // xmm3_4
-  float v4; // xmm5_4
-  float v5; // xmm6_4
-  __m128 v6; // xmm3
+  float y; // xmm5_4
+  float v4; // xmm6_4
+  float x; // xmm0_4
+  float v6; // xmm5_4
+  float v7; // xmm6_4
+  __m128 x_low; // xmm3
 
-  v3 = this->mCentre_initial.x;
-  v4 = (float)((float)((float)(this->mCentre_initial.y * initial2local->v1.x)
-                     + (float)(this->mCentre_initial.x * initial2local->v0.x))
+  y = this->mCentre_initial.y;
+  v4 = y * initial2local->v1.z;
+  x = this->mCentre_initial.x;
+  v6 = (float)((float)((float)(y * initial2local->v1.x) + (float)(x * initial2local->v0.x))
              + (float)(this->mCentre_initial.z * initial2local->v2.x))
      + initial2local->v3.x;
-  v5 = (float)((float)((float)(this->mCentre_initial.y * initial2local->v1.z) + (float)(v3 * initial2local->v0.z))
-             + (float)(this->mCentre_initial.z * initial2local->v2.z))
+  v7 = (float)((float)(v4 + (float)(x * initial2local->v0.z)) + (float)(this->mCentre_initial.z * initial2local->v2.z))
      + initial2local->v3.z;
   this->mCentre_local.y = (float)((float)((float)(this->mCentre_initial.y * initial2local->v1.y)
-                                        + (float)(v3 * initial2local->v0.y))
+                                        + (float)(x * initial2local->v0.y))
                                 + (float)(this->mCentre_initial.z * initial2local->v2.y))
                         + initial2local->v3.y;
-  this->mCentre_local.x = v4;
-  this->mCentre_local.z = v5;
-  v6 = (__m128)LODWORD(initial2local->v0.x);
-  v6.m128_f32[0] = (float)((float)((float)(v6.m128_f32[0] * v6.m128_f32[0])
-                                 + (float)(initial2local->v0.y * initial2local->v0.y))
-                         + (float)(initial2local->v0.z * initial2local->v0.z))
-                 + (float)(initial2local->v0.w * initial2local->v0.w);
-  this->mRadius_local = this->mRadius_initial / COERCE_FLOAT(_mm_sqrt_ps(v6));
+  this->mCentre_local.x = v6;
+  this->mCentre_local.z = v7;
+  x_low = (__m128)LODWORD(initial2local->v0.x);
+  x_low.m128_f32[0] = (float)((float)((float)(x_low.m128_f32[0] * x_low.m128_f32[0])
+                                    + (float)(initial2local->v0.y * initial2local->v0.y))
+                            + (float)(initial2local->v0.z * initial2local->v0.z))
+                    + (float)(initial2local->v0.w * initial2local->v0.w);
+  this->mRadius_local = this->mRadius_initial / _mm_sqrt_ps(x_low).m128_f32[0];
 }
 
 // File Line: 218
 // RVA: 0x21460
-void __fastcall Render::SoftbodyCollisionSphere::FillTaskParameters(Render::SoftbodyCollisionSphere *this, Render::sSoftbodyParams *output)
+void __fastcall Render::SoftbodyCollisionSphere::FillTaskParameters(
+        Render::SoftbodyCollisionSphere *this,
+        Render::sSoftbodyParams *output)
 {
-  __int64 v2; // rax
-  float v3; // xmm1_4
-  float v4; // xmm2_4
-  float *v5; // rax
-  float v6; // xmm3_4
+  __int64 collision_sphere_count; // rax
+  float y; // xmm1_4
+  float z; // xmm2_4
+  UFG::qVector4 *v5; // rax
+  float mRadius_local; // xmm3_4
 
-  v2 = output->collision_sphere_count;
-  if ( (unsigned int)v2 < 4 )
+  collision_sphere_count = output->collision_sphere_count;
+  if ( (unsigned int)collision_sphere_count < 4 )
   {
-    v3 = this->mCentre_local.y;
-    v4 = this->mCentre_local.z;
-    v5 = &output->timestep + 4 * (v2 + 18);
-    v6 = this->mRadius_local;
-    *v5 = this->mCentre_local.x;
-    v5[1] = v3;
-    v5[2] = v4;
-    v5[3] = v6;
+    y = this->mCentre_local.y;
+    z = this->mCentre_local.z;
+    v5 = &output->collision_sphere_data[collision_sphere_count];
+    mRadius_local = this->mRadius_local;
+    v5->x = this->mCentre_local.x;
+    v5->y = y;
+    v5->z = z;
+    v5->w = mRadius_local;
     ++output->collision_sphere_count;
   }
 }
 
 // File Line: 288
 // RVA: 0x20920
-void __fastcall Render::Softbody::Softbody(Render::Softbody *this, UFG::CompositeDrawableComponent *src_composite_drawable)
+void __fastcall Render::Softbody::Softbody(
+        Render::Softbody *this,
+        UFG::CompositeDrawableComponent *src_composite_drawable)
 {
-  UFG::CompositeDrawableComponent *v2; // rbx
-  Render::Softbody *v3; // rdi
-  Render::Softbody::CollisionShapeCollection *v4; // rax
-  Render::Softbody::CollisionShapeCollection *v5; // rax
-  Render::Softbody::CollisionShapeCollection *v6; // rax
-  float v7; // xmm1_4
-  float v8; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
+  float v6; // xmm1_4
+  float v7; // xmm2_4
+  float w; // xmm3_4
   float v9; // xmm1_4
   float v10; // xmm2_4
   float v11; // xmm3_4
@@ -376,113 +380,104 @@ void __fastcall Render::Softbody::Softbody(Render::Softbody *this, UFG::Composit
   float v27; // xmm1_4
   float v28; // xmm2_4
   float v29; // xmm3_4
-  float v30; // xmm1_4
-  float v31; // xmm2_4
-  float v32; // xmm3_4
-  UFG::qNode<Render::Softbody,Render::Softbody> *v33; // rax
+  UFG::qNode<Render::Softbody,Render::Softbody> *mPrev; // rax
 
-  v2 = src_composite_drawable;
-  v3 = this;
-  this->mPrev = (UFG::qNode<Render::Softbody,Render::Softbody> *)&this->mPrev;
-  this->mNext = (UFG::qNode<Render::Softbody,Render::Softbody> *)&this->mPrev;
-  v4 = &this->mModelSpaceShapes;
-  v4->mShapes.mNode.mPrev = &v4->mShapes.mNode;
-  v4->mShapes.mNode.mNext = &v4->mShapes.mNode;
-  v5 = &this->mSoftbodySpaceShapes;
-  v5->mShapes.mNode.mPrev = &v5->mShapes.mNode;
-  v5->mShapes.mNode.mNext = &v5->mShapes.mNode;
-  v6 = &this->mWorldSpaceShapes;
-  v6->mShapes.mNode.mPrev = &v6->mShapes.mNode;
-  v6->mShapes.mNode.mNext = &v6->mShapes.mNode;
+  this->mPrev = this;
+  this->mNext = this;
+  this->mModelSpaceShapes.mShapes.mNode.mPrev = &this->mModelSpaceShapes.mShapes.mNode;
+  this->mModelSpaceShapes.mShapes.mNode.mNext = &this->mModelSpaceShapes.mShapes.mNode;
+  this->mSoftbodySpaceShapes.mShapes.mNode.mPrev = &this->mSoftbodySpaceShapes.mShapes.mNode;
+  this->mSoftbodySpaceShapes.mShapes.mNode.mNext = &this->mSoftbodySpaceShapes.mShapes.mNode;
+  this->mWorldSpaceShapes.mShapes.mNode.mPrev = &this->mWorldSpaceShapes.mShapes.mNode;
+  this->mWorldSpaceShapes.mShapes.mNode.mNext = &this->mWorldSpaceShapes.mShapes.mNode;
   UFG::qBaseTreeRB::qBaseTreeRB(&this->mModelGuidToClothMap.mTree.mTree);
-  v3->mCompDrawComp = v2;
-  v7 = UFG::qVector3::msZero.y;
-  v8 = UFG::qVector3::msZero.z;
-  v3->mSystemVelocity.x = UFG::qVector3::msZero.x;
-  v3->mSystemVelocity.y = v7;
-  v3->mSystemVelocity.z = v8;
-  v3->mSystemVelocityOnceOnly = 1;
-  v9 = UFG::qMatrix44::msIdentity.v0.y;
-  v10 = UFG::qMatrix44::msIdentity.v0.z;
-  v11 = UFG::qMatrix44::msIdentity.v0.w;
-  v3->mWorld.v0.x = UFG::qMatrix44::msIdentity.v0.x;
-  v3->mWorld.v0.y = v9;
-  v3->mWorld.v0.z = v10;
-  v3->mWorld.v0.w = v11;
-  v12 = UFG::qMatrix44::msIdentity.v1.y;
-  v13 = UFG::qMatrix44::msIdentity.v1.z;
-  v14 = UFG::qMatrix44::msIdentity.v1.w;
-  v3->mWorld.v1.x = UFG::qMatrix44::msIdentity.v1.x;
-  v3->mWorld.v1.y = v12;
-  v3->mWorld.v1.z = v13;
-  v3->mWorld.v1.w = v14;
-  v15 = UFG::qMatrix44::msIdentity.v2.y;
-  v16 = UFG::qMatrix44::msIdentity.v2.z;
-  v17 = UFG::qMatrix44::msIdentity.v2.w;
-  v3->mWorld.v2.x = UFG::qMatrix44::msIdentity.v2.x;
-  v3->mWorld.v2.y = v15;
-  v3->mWorld.v2.z = v16;
-  v3->mWorld.v2.w = v17;
-  v18 = UFG::qMatrix44::msIdentity.v3.y;
-  v19 = UFG::qMatrix44::msIdentity.v3.z;
-  v20 = UFG::qMatrix44::msIdentity.v3.w;
-  v3->mWorld.v3.x = UFG::qMatrix44::msIdentity.v3.x;
-  v3->mWorld.v3.y = v18;
-  v3->mWorld.v3.z = v19;
-  v3->mWorld.v3.w = v20;
-  v21 = UFG::qMatrix44::msIdentity.v0.y;
-  v22 = UFG::qMatrix44::msIdentity.v0.z;
-  v23 = UFG::qMatrix44::msIdentity.v0.w;
-  v3->mInvWorld.v0.x = UFG::qMatrix44::msIdentity.v0.x;
-  v3->mInvWorld.v0.y = v21;
-  v3->mInvWorld.v0.z = v22;
-  v3->mInvWorld.v0.w = v23;
-  v24 = UFG::qMatrix44::msIdentity.v1.y;
-  v25 = UFG::qMatrix44::msIdentity.v1.z;
-  v26 = UFG::qMatrix44::msIdentity.v1.w;
-  v3->mInvWorld.v1.x = UFG::qMatrix44::msIdentity.v1.x;
-  v3->mInvWorld.v1.y = v24;
-  v3->mInvWorld.v1.z = v25;
-  v3->mInvWorld.v1.w = v26;
-  v27 = UFG::qMatrix44::msIdentity.v2.y;
-  v28 = UFG::qMatrix44::msIdentity.v2.z;
-  v29 = UFG::qMatrix44::msIdentity.v2.w;
-  v3->mInvWorld.v2.x = UFG::qMatrix44::msIdentity.v2.x;
-  v3->mInvWorld.v2.y = v27;
-  v3->mInvWorld.v2.z = v28;
-  v3->mInvWorld.v2.w = v29;
-  v30 = UFG::qMatrix44::msIdentity.v3.y;
-  v31 = UFG::qMatrix44::msIdentity.v3.z;
-  v32 = UFG::qMatrix44::msIdentity.v3.w;
-  v3->mInvWorld.v3.x = UFG::qMatrix44::msIdentity.v3.x;
-  v3->mInvWorld.v3.y = v30;
-  v3->mInvWorld.v3.z = v31;
-  v3->mInvWorld.v3.w = v32;
-  v33 = Render::Softbody::s_List.mNode.mPrev;
-  Render::Softbody::s_List.mNode.mPrev->mNext = (UFG::qNode<Render::Softbody,Render::Softbody> *)&v3->mPrev;
-  v3->mPrev = v33;
-  v3->mNext = (UFG::qNode<Render::Softbody,Render::Softbody> *)&Render::Softbody::s_List;
-  Render::Softbody::s_List.mNode.mPrev = (UFG::qNode<Render::Softbody,Render::Softbody> *)&v3->mPrev;
-}
+  this->mCompDrawComp = src_composite_drawable;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
+  this->mSystemVelocity.x = UFG::qVector3::msZero.x;
+  this->mSystemVelocity.y = y;
+  this->mSystemVelocity.z = z;
+  this->mSystemVelocityOnceOnly = 1;
+  v6 = UFG::qMatrix44::msIdentity.v0.y;
+  v7 = UFG::qMatrix44::msIdentity.v0.z;
+  w = UFG::qMatrix44::msIdentity.v0.w;
+  this->mWorld.v0.x = UFG::qMatrix44::msIdentity.v0.x;
+  this->mWorld.v0.y = v6;
+  this->mWorld.v0.z = v7;
+  this->mWorld.v0.w = w;
+  v9 = UFG::qMatrix44::msIdentity.v1.y;
+  v10 = UFG::qMatrix44::msIdentity.v1.z;
+  v11 = UFG::qMatrix44::msIdentity.v1.w;
+  this->mWorld.v1.x = UFG::qMatrix44::msIdentity.v1.x;
+  this->mWorld.v1.y = v9;
+  this->mWorld.v1.z = v10;
+  this->mWorld.v1.w = v11;
+  v12 = UFG::qMatrix44::msIdentity.v2.y;
+  v13 = UFG::qMatrix44::msIdentity.v2.z;
+  v14 = UFG::qMatrix44::msIdentity.v2.w;
+  this->mWorld.v2.x = UFG::qMatrix44::msIdentity.v2.x;
+  this->mWorld.v2.y = v12;
+  this->mWorld.v2.z = v13;
+  this->mWorld.v2.w = v14;
+  v15 = UFG::qMatrix44::msIdentity.v3.y;
+  v16 = UFG::qMatrix44::msIdentity.v3.z;
+  v17 = UFG::qMatrix44::msIdentity.v3.w;
+  this->mWorld.v3.x = UFG::qMatrix44::msIdentity.v3.x;
+  this->mWorld.v3.y = v15;
+  this->mWorld.v3.z = v16;
+  this->mWorld.v3.w = v17;
+  v18 = UFG::qMatrix44::msIdentity.v0.y;
+  v19 = UFG::qMatrix44::msIdentity.v0.z;
+  v20 = UFG::qMatrix44::msIdentity.v0.w;
+  this->mInvWorld.v0.x = UFG::qMatrix44::msIdentity.v0.x;
+  this->mInvWorld.v0.y = v18;
+  this->mInvWorld.v0.z = v19;
+  this->mInvWorld.v0.w = v20;
+  v21 = UFG::qMatrix44::msIdentity.v1.y;
+  v22 = UFG::qMatrix44::msIdentity.v1.z;
+  v23 = UFG::qMatrix44::msIdentity.v1.w;
+  this->mInvWorld.v1.x = UFG::qMatrix44::msIdentity.v1.x;
+  this->mInvWorld.v1.y = v21;
+  this->mInvWorld.v1.z = v22;
+  this->mInvWorld.v1.w = v23;
+  v24 = UFG::qMatrix44::msIdentity.v2.y;
+  v25 = UFG::qMatrix44::msIdentity.v2.z;
+  v26 = UFG::qMatrix44::msIdentity.v2.w;
+  this->mInvWorld.v2.x = UFG::qMatrix44::msIdentity.v2.x;
+  this->mInvWorld.v2.y = v24;
+  this->mInvWorld.v2.z = v25;
+  this->mInvWorld.v2.w = v26;
+  v27 = UFG::qMatrix44::msIdentity.v3.y;
+  v28 = UFG::qMatrix44::msIdentity.v3.z;
+  v29 = UFG::qMatrix44::msIdentity.v3.w;
+  this->mInvWorld.v3.x = UFG::qMatrix44::msIdentity.v3.x;
+  this->mInvWorld.v3.y = v27;
+  this->mInvWorld.v3.z = v28;
+  this->mInvWorld.v3.w = v29;
+  mPrev = Render::Softbody::s_List.mNode.mPrev;
+  Render::Softbody::s_List.mNode.mPrev->mNext = this;
+  this->mPrev = mPrev;
+  this->mNext = (UFG::qNode<Render::Softbody,Render::Softbody> *)&Render::Softbody::s_List;
+  Render::Softbody::s_List.mNode.mPrev = this;
+}r::So
 
 // File Line: 294
 // RVA: 0x20D90
 void __fastcall Render::Softbody::~Softbody(Render::Softbody *this)
 {
-  Render::Softbody *v1; // r14
-  UFG::qNode<Render::Softbody,Render::Softbody> *v2; // rdx
-  UFG::qNode<Render::Softbody,Render::Softbody> *v3; // rax
-  UFG::qBaseTreeRB *v4; // rdi
+  UFG::qNode<Render::Softbody,Render::Softbody> *mPrev; // rdx
+  UFG::qNode<Render::Softbody,Render::Softbody> *mNext; // rax
+  Render::Skinning *p_mModelGuidToClothMap; // rdi
   UFG::qBaseTreeRB *i; // rsi
-  UFG::qBaseNodeRB *v6; // rbx
+  UFG::qBaseNodeRB *mParent; // rbx
   Render::PackedPosition *v7; // rdx
   Render::PackedPosition *v8; // rdx
   UFG::qBaseNodeRB *v9; // rdx
   UFG::qBaseNodeRB *v10; // rax
-  Render::SkinningCacheNode *v11; // rbx
-  Render::Softbody::CollisionShapeCollection *v12; // rbp
-  Render::Softbody::CollisionShapeCollection *v13; // r15
-  Render::Softbody::CollisionShapeCollection *v14; // rsi
+  Render::SkinningCacheNode *Head; // rbx
+  Render::Softbody::CollisionShapeCollection *p_mModelSpaceShapes; // rbp
+  Render::Softbody::CollisionShapeCollection *p_mSoftbodySpaceShapes; // r15
+  Render::Softbody::CollisionShapeCollection *p_mWorldSpaceShapes; // rsi
   Render::SkinningCacheNode *v15; // rbx
   UFG::qNode<Render::SoftbodyCollisionShape,Render::SoftbodyCollisionShape> *v16; // rcx
   UFG::qNode<Render::SoftbodyCollisionShape,Render::SoftbodyCollisionShape> *v17; // rax
@@ -493,88 +488,91 @@ void __fastcall Render::Softbody::~Softbody(Render::Softbody *this)
   UFG::qNode<Render::Softbody,Render::Softbody> *v22; // rcx
   UFG::qNode<Render::Softbody,Render::Softbody> *v23; // rax
 
-  v1 = this;
-  v2 = this->mPrev;
-  v3 = this->mNext;
-  v2->mNext = v3;
-  v3->mPrev = v2;
-  this->mPrev = (UFG::qNode<Render::Softbody,Render::Softbody> *)&this->mPrev;
-  this->mNext = (UFG::qNode<Render::Softbody,Render::Softbody> *)&this->mPrev;
-  v4 = &this->mModelGuidToClothMap.mTree.mTree;
+  mPrev = this->mPrev;
+  mNext = this->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->mPrev = this;
+  this->mNext = this;
+  p_mModelGuidToClothMap = (Render::Skinning *)&this->mModelGuidToClothMap;
   for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&this->mModelGuidToClothMap);
         i;
-        i = UFG::qBaseTreeRB::GetNext(v4, &i->mRoot) )
+        i = UFG::qBaseTreeRB::GetNext((UFG::qBaseTreeRB *)p_mModelGuidToClothMap, &i->mRoot) )
   {
-    v6 = i->mNULL.mParent;
-    if ( v6 )
+    mParent = i->mNULL.mParent;
+    if ( mParent )
     {
-      v7 = (Render::PackedPosition *)v6[1].mParent;
+      v7 = (Render::PackedPosition *)mParent[1].mParent;
       if ( v7 )
       {
         Render::ISoftbody::AddBufferForDeletion(&Render::gSoftbody, v7);
-        v6[1].mParent = 0i64;
+        mParent[1].mParent = 0i64;
       }
-      v8 = *(Render::PackedPosition **)&v6->mUID;
+      v8 = *(Render::PackedPosition **)&mParent->mUID;
       if ( v8 )
       {
         Render::ISoftbody::AddBufferForDeletion(&Render::gSoftbody, v8);
-        *(_QWORD *)&v6->mUID = 0i64;
+        *(_QWORD *)&mParent->mUID = 0i64;
       }
-      v9 = v6->mParent;
-      v10 = v6->mChild[0];
+      v9 = mParent->mParent;
+      v10 = mParent->mChild[0];
       v9->mChild[0] = v10;
       v10->mParent = v9;
-      v6->mParent = v6;
-      v6->mChild[0] = v6;
-      operator delete[](v6);
+      mParent->mParent = mParent;
+      mParent->mChild[0] = mParent;
+      operator delete[](mParent);
     }
   }
-  while ( v4->mCount )
+  while ( p_mModelGuidToClothMap->mSkinnedVertexBuffers.mTree.mCount )
   {
-    v11 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)v4);
-    UFG::qBaseTreeVariableRB<unsigned __int64>::Remove((UFG::qBaseTreeVariableRB<unsigned __int64> *)v4, &v11->mNode);
-    operator delete[](v11);
+    Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead(&p_mModelGuidToClothMap->mSkinnedVertexBuffers);
+    UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
+      &p_mModelGuidToClothMap->mSkinnedVertexBuffers.mTree,
+      &Head->mNode);
+    operator delete[](Head);
   }
-  v12 = &v1->mModelSpaceShapes;
-  UFG::qList<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode,1,0>::DeleteNodes(&v1->mModelSpaceShapes.mShapes);
-  v13 = &v1->mSoftbodySpaceShapes;
-  UFG::qList<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode,1,0>::DeleteNodes(&v1->mSoftbodySpaceShapes.mShapes);
-  v14 = &v1->mWorldSpaceShapes;
-  UFG::qList<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode,1,0>::DeleteNodes(&v1->mWorldSpaceShapes.mShapes);
-  while ( v4->mCount )
+  p_mModelSpaceShapes = &this->mModelSpaceShapes;
+  UFG::qList<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode,1,0>::DeleteNodes(&this->mModelSpaceShapes.mShapes);
+  p_mSoftbodySpaceShapes = &this->mSoftbodySpaceShapes;
+  UFG::qList<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode,1,0>::DeleteNodes(&this->mSoftbodySpaceShapes.mShapes);
+  p_mWorldSpaceShapes = &this->mWorldSpaceShapes;
+  UFG::qList<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode,1,0>::DeleteNodes(&this->mWorldSpaceShapes.mShapes);
+  while ( p_mModelGuidToClothMap->mSkinnedVertexBuffers.mTree.mCount )
   {
-    v15 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)v4);
-    UFG::qBaseTreeVariableRB<unsigned __int64>::Remove((UFG::qBaseTreeVariableRB<unsigned __int64> *)v4, &v15->mNode);
+    v15 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead(&p_mModelGuidToClothMap->mSkinnedVertexBuffers);
+    UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
+      &p_mModelGuidToClothMap->mSkinnedVertexBuffers.mTree,
+      &v15->mNode);
     operator delete[](v15);
   }
-  UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)v4);
-  UFG::qList<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode,1,0>::DeleteNodes(&v1->mWorldSpaceShapes.mShapes);
-  v16 = v14->mShapes.mNode.mPrev;
-  v17 = v1->mWorldSpaceShapes.mShapes.mNode.mNext;
+  UFG::qBaseTreeRB::~qBaseTreeRB(p_mModelGuidToClothMap);
+  UFG::qList<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode,1,0>::DeleteNodes(&this->mWorldSpaceShapes.mShapes);
+  v16 = p_mWorldSpaceShapes->mShapes.mNode.mPrev;
+  v17 = this->mWorldSpaceShapes.mShapes.mNode.mNext;
   v16->mNext = v17;
   v17->mPrev = v16;
-  v14->mShapes.mNode.mPrev = &v14->mShapes.mNode;
-  v1->mWorldSpaceShapes.mShapes.mNode.mNext = &v1->mWorldSpaceShapes.mShapes.mNode;
-  UFG::qList<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode,1,0>::DeleteNodes(&v1->mSoftbodySpaceShapes.mShapes);
-  v18 = v13->mShapes.mNode.mPrev;
-  v19 = v1->mSoftbodySpaceShapes.mShapes.mNode.mNext;
+  p_mWorldSpaceShapes->mShapes.mNode.mPrev = &p_mWorldSpaceShapes->mShapes.mNode;
+  this->mWorldSpaceShapes.mShapes.mNode.mNext = &this->mWorldSpaceShapes.mShapes.mNode;
+  UFG::qList<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode,1,0>::DeleteNodes(&this->mSoftbodySpaceShapes.mShapes);
+  v18 = p_mSoftbodySpaceShapes->mShapes.mNode.mPrev;
+  v19 = this->mSoftbodySpaceShapes.mShapes.mNode.mNext;
   v18->mNext = v19;
   v19->mPrev = v18;
-  v13->mShapes.mNode.mPrev = &v13->mShapes.mNode;
-  v1->mSoftbodySpaceShapes.mShapes.mNode.mNext = &v1->mSoftbodySpaceShapes.mShapes.mNode;
-  UFG::qList<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode,1,0>::DeleteNodes(&v1->mModelSpaceShapes.mShapes);
-  v20 = v12->mShapes.mNode.mPrev;
-  v21 = v1->mModelSpaceShapes.mShapes.mNode.mNext;
+  p_mSoftbodySpaceShapes->mShapes.mNode.mPrev = &p_mSoftbodySpaceShapes->mShapes.mNode;
+  this->mSoftbodySpaceShapes.mShapes.mNode.mNext = &this->mSoftbodySpaceShapes.mShapes.mNode;
+  UFG::qList<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode,1,0>::DeleteNodes(&this->mModelSpaceShapes.mShapes);
+  v20 = p_mModelSpaceShapes->mShapes.mNode.mPrev;
+  v21 = this->mModelSpaceShapes.mShapes.mNode.mNext;
   v20->mNext = v21;
   v21->mPrev = v20;
-  v12->mShapes.mNode.mPrev = &v12->mShapes.mNode;
-  v1->mModelSpaceShapes.mShapes.mNode.mNext = &v1->mModelSpaceShapes.mShapes.mNode;
-  v22 = v1->mPrev;
-  v23 = v1->mNext;
+  p_mModelSpaceShapes->mShapes.mNode.mPrev = &p_mModelSpaceShapes->mShapes.mNode;
+  this->mModelSpaceShapes.mShapes.mNode.mNext = &this->mModelSpaceShapes.mShapes.mNode;
+  v22 = this->mPrev;
+  v23 = this->mNext;
   v22->mNext = v23;
   v23->mPrev = v22;
-  v1->mPrev = (UFG::qNode<Render::Softbody,Render::Softbody> *)&v1->mPrev;
-  v1->mNext = (UFG::qNode<Render::Softbody,Render::Softbody> *)&v1->mPrev;
+  this->mPrev = this;
+  this->mNext = this;
 }
 
 // File Line: 313
@@ -582,27 +580,27 @@ void __fastcall Render::Softbody::~Softbody(Render::Softbody *this)
 void __fastcall Render::Softbody::SimUpdate(Render::Softbody *this, float timeStep)
 {
   float v2; // xmm6_4
-  float v3; // xmm2_4
-  float v4; // xmm3_4
+  float y; // xmm2_4
+  float z; // xmm3_4
   float v5; // xmm1_4
   float v6; // xmm2_4
-  UFG::qBaseTreeRB *v7; // rbx
+  UFG::qMap<Render::VerletCloth *> *p_mModelGuidToClothMap; // rbx
   UFG::qBaseTreeRB *i; // rax
-  UFG::qBaseNodeRB *v9; // rcx
+  UFG::qBaseNodeRB *mParent; // rcx
   float v10; // xmm0_4
 
   v2 = timeStep * Render::VERLET_timescale;
   if ( this->mSystemVelocityOnceOnly )
   {
-    v3 = UFG::qVector3::msZero.y;
-    v4 = UFG::qVector3::msZero.z;
+    y = UFG::qVector3::msZero.y;
+    z = UFG::qVector3::msZero.z;
     this->mSystemVelocity.x = UFG::qVector3::msZero.x;
-    this->mSystemVelocity.y = v3;
-    this->mSystemVelocity.z = v4;
+    this->mSystemVelocity.y = y;
+    this->mSystemVelocity.z = z;
   }
   v5 = Render::VERLET_gravity.y;
   v6 = Render::VERLET_gravity.z;
-  v7 = &this->mModelGuidToClothMap.mTree.mTree;
+  p_mModelGuidToClothMap = &this->mModelGuidToClothMap;
   this->mAccel.x = Render::VERLET_gravity.x;
   this->mAccel.y = v5;
   this->mAccel.z = v6;
@@ -610,14 +608,14 @@ void __fastcall Render::Softbody::SimUpdate(Render::Softbody *this, float timeSt
   this->mFriction = Render::VERLET_friction;
   for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&this->mModelGuidToClothMap);
         i;
-        i = UFG::qBaseTreeRB::GetNext(v7, &i->mRoot) )
+        i = UFG::qBaseTreeRB::GetNext(&p_mModelGuidToClothMap->mTree.mTree, &i->mRoot) )
   {
-    v9 = i->mNULL.mParent;
-    v10 = *(float *)&v9->mChild[1];
+    mParent = i->mNULL.mParent;
+    v10 = *(float *)&mParent->mChild[1];
     if ( v10 > 0.0 )
-      *(float *)&v9->mChild[1] = v10 + v2;
+      *(float *)&mParent->mChild[1] = v10 + v2;
     else
-      *(float *)&v9->mChild[1] = v2;
+      *(float *)&mParent->mChild[1] = v2;
   }
 }
 
@@ -625,13 +623,13 @@ void __fastcall Render::Softbody::SimUpdate(Render::Softbody *this, float timeSt
 // RVA: 0x21960
 void __fastcall Render::Softbody::ForceReset(Render::Softbody *this)
 {
-  UFG::qBaseTreeRB *v1; // rbx
+  UFG::qMap<Render::VerletCloth *> *p_mModelGuidToClothMap; // rbx
   UFG::qBaseTreeRB *i; // rax
 
-  v1 = &this->mModelGuidToClothMap.mTree.mTree;
+  p_mModelGuidToClothMap = &this->mModelGuidToClothMap;
   for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&this->mModelGuidToClothMap);
         i;
-        i = UFG::qBaseTreeRB::GetNext(v1, &i->mRoot) )
+        i = UFG::qBaseTreeRB::GetNext(&p_mModelGuidToClothMap->mTree.mTree, &i->mRoot) )
   {
     HIDWORD(i->mNULL.mParent[1].mChild[0]) = 1;
   }
@@ -639,39 +637,36 @@ void __fastcall Render::Softbody::ForceReset(Render::Softbody *this)
 
 // File Line: 369
 // RVA: 0x21330
-Render::sSoftbodyParams *__fastcall Render::Softbody::CreateTaskParameters(Render::Softbody *this, Illusion::Model *source_model, UFG::qMatrix44 *local2world)
+Render::sSoftbodyParams *__fastcall Render::Softbody::CreateTaskParameters(
+        Render::Softbody *this,
+        Illusion::Model *source_model,
+        UFG::qMatrix44 *local2world)
 {
-  Illusion::Model *v3; // rbp
-  unsigned int v4; // edx
-  UFG::qMatrix44 *v5; // r14
-  Render::Softbody *context; // rsi
+  unsigned int mUID; // edx
   UFG::qBaseTreeRB *v7; // rax
-  Render::VerletCloth **v8; // rax
+  Render::VerletCloth **p_mNULL; // rax
   Render::VerletCloth *v9; // rdi
   Render::sSoftbodyParams *result; // rax
   Render::sSoftbodyParams *v11; // rbx
-  UFG::qMatrix44 d; // [rsp+30h] [rbp-58h]
-  __int64 v13; // [rsp+98h] [rbp+10h]
+  UFG::qMatrix44 d; // [rsp+30h] [rbp-58h] BYREF
+  __int64 v13; // [rsp+98h] [rbp+10h] BYREF
 
-  v3 = source_model;
-  v4 = source_model->mNode.mUID;
-  v5 = local2world;
-  context = this;
+  mUID = source_model->mNode.mUID;
   v13 = 0i64;
-  if ( v4 && (v7 = UFG::qBaseTreeRB::Get(&this->mModelGuidToClothMap.mTree.mTree, v4)) != 0i64 )
-    v8 = (Render::VerletCloth **)&v7->mNULL;
+  if ( mUID && (v7 = UFG::qBaseTreeRB::Get(&this->mModelGuidToClothMap.mTree.mTree, mUID)) != 0i64 )
+    p_mNULL = (Render::VerletCloth **)&v7->mNULL;
   else
-    v8 = (Render::VerletCloth **)&v13;
-  v9 = *v8;
-  if ( !*v8 )
+    p_mNULL = (Render::VerletCloth **)&v13;
+  v9 = *p_mNULL;
+  if ( !*p_mNULL )
     return 0i64;
   result = (Render::sSoftbodyParams *)UFG::qLinearAllocator::Malloc(Illusion::gEngine.FrameMemory, 0x1A0u, 0x10u);
   v11 = result;
   if ( result )
   {
-    UFG::qInverse(&d, v5);
-    Render::VerletCloth::FillTaskParameters(v9, v11, v3, v5, &d, context);
-    result = v11;
+    UFG::qInverse(&d, local2world);
+    Render::VerletCloth::FillTaskParameters(v9, v11, source_model, local2world, &d, this);
+    return v11;
   }
   return result;
 }
@@ -682,7 +677,7 @@ __int64 Render::_dynamic_initializer_for__s_uDirectionUID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("Direction", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("Direction", -1);
   s_uDirectionUID = result;
   return result;
 }
@@ -693,7 +688,7 @@ __int64 Render::_dynamic_initializer_for__s_uSync01UID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("Sync01", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("Sync01", -1);
   s_uSync01UID = result;
   return result;
 }
@@ -704,7 +699,7 @@ __int64 Render::_dynamic_initializer_for__s_uBalanceUID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("Balance", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("Balance", -1);
   s_uBalanceUID = result;
   return result;
 }
@@ -715,7 +710,7 @@ __int64 Render::_dynamic_initializer_for__s_uBip01_R_ClavicleUID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("Bip01 R Clavicle", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("Bip01 R Clavicle", -1);
   s_uBip01_R_ClavicleUID = result;
   return result;
 }
@@ -726,7 +721,7 @@ __int64 Render::_dynamic_initializer_for__s_uBip01_R_UpperArmUID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("Bip01 R UpperArm", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("Bip01 R UpperArm", -1);
   s_uBip01_R_UpperArmUID = result;
   return result;
 }
@@ -737,7 +732,7 @@ __int64 Render::_dynamic_initializer_for__s_ur_upperarm_twistUID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("r_upperarm_twist", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("r_upperarm_twist", -1);
   s_ur_upperarm_twistUID = result;
   return result;
 }
@@ -748,7 +743,7 @@ __int64 Render::_dynamic_initializer_for__s_ur_shoulder_jointUID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("r_shoulder_joint", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("r_shoulder_joint", -1);
   s_ur_shoulder_jointUID = result;
   return result;
 }
@@ -759,7 +754,7 @@ __int64 Render::_dynamic_initializer_for__s_uBip01_L_ClavicleUID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("Bip01 L Clavicle", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("Bip01 L Clavicle", -1);
   s_uBip01_L_ClavicleUID = result;
   return result;
 }
@@ -770,7 +765,7 @@ __int64 Render::_dynamic_initializer_for__s_uBip01_L_UpperArmUID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("Bip01 L UpperArm", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("Bip01 L UpperArm", -1);
   s_uBip01_L_UpperArmUID = result;
   return result;
 }
@@ -781,7 +776,7 @@ __int64 Render::_dynamic_initializer_for__s_ul_upperarm_twistUID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("l_upperarm_twist", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("l_upperarm_twist", -1);
   s_ul_upperarm_twistUID = result;
   return result;
 }
@@ -792,7 +787,7 @@ __int64 Render::_dynamic_initializer_for__s_ul_shoulder_jointUID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("l_shoulder_joint", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("l_shoulder_joint", -1);
   s_ul_shoulder_jointUID = result;
   return result;
 }
@@ -803,7 +798,7 @@ __int64 Render::_dynamic_initializer_for__s_R_Forearm_UID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("Bip01 R Forearm", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("Bip01 R Forearm", -1);
   s_R_Forearm_UID = result;
   return result;
 }
@@ -814,7 +809,7 @@ __int64 Render::_dynamic_initializer_for__s_R_Hand_UID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("Bip01 R Hand", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("Bip01 R Hand", -1);
   s_R_Hand_UID = result;
   return result;
 }
@@ -825,7 +820,7 @@ __int64 Render::_dynamic_initializer_for__s_R_ForeTwist_UID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("Bip01 R ForeTwist", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("Bip01 R ForeTwist", -1);
   s_R_ForeTwist_UID = result;
   return result;
 }
@@ -836,7 +831,7 @@ __int64 Render::_dynamic_initializer_for__s_L_Forearm_UID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("Bip01 L Forearm", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("Bip01 L Forearm", -1);
   s_L_Forearm_UID = result;
   return result;
 }
@@ -847,7 +842,7 @@ __int64 Render::_dynamic_initializer_for__s_L_Hand_UID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("Bip01 L Hand", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("Bip01 L Hand", -1);
   s_L_Hand_UID = result;
   return result;
 }
@@ -858,7 +853,7 @@ __int64 Render::_dynamic_initializer_for__s_L_ForeTwist_UID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("Bip01 L ForeTwist", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("Bip01 L ForeTwist", -1);
   s_L_ForeTwist_UID = result;
   return result;
 }
@@ -869,7 +864,7 @@ __int64 Render::_dynamic_initializer_for__s_uBip01_Neck_UID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("Bip01 Neck", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("Bip01 Neck", -1);
   s_uBip01_Neck_UID = result;
   return result;
 }
@@ -880,7 +875,7 @@ __int64 Render::_dynamic_initializer_for__s_uBip01_Spine_UID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("Bip01 Spine", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("Bip01 Spine", -1);
   s_uBip01_Spine_UID = result;
   return result;
 }
@@ -889,51 +884,48 @@ __int64 Render::_dynamic_initializer_for__s_uBip01_Spine_UID__()
 // RVA: 0x21B70
 void __fastcall Render::Softbody::UpdateTransform(Render::Softbody *this)
 {
-  UFG::CompositeDrawableComponent *v1; // rbx
-  Render::Softbody *v2; // rdi
-  SkeletalPose *v3; // rbx
-  int v4; // eax
+  UFG::CompositeDrawableComponent *mCompDrawComp; // rbx
+  SkeletalPose *mPose; // rbx
+  int BoneID; // eax
   int v5; // eax
   int v6; // eax
   int v7; // eax
   UFG::qVector4 v8; // xmm1
-  signed __int64 v9; // rdx
-  UFG::qVector4 v10; // xmm0
-  UFG::qVector3 centre; // [rsp+18h] [rbp-39h]
-  UFG::qMatrix44 v12; // [rsp+28h] [rbp-29h]
-  UFG::qMatrix44 matrixWS; // [rsp+68h] [rbp+17h]
+  UFG::qVector4 v9; // xmm0
+  UFG::qVector3 centre; // [rsp+18h] [rbp-39h] BYREF
+  UFG::qMatrix44 v11; // [rsp+28h] [rbp-29h] BYREF
+  UFG::qMatrix44 matrixWS; // [rsp+68h] [rbp+17h] BYREF
 
-  v1 = this->mCompDrawComp;
-  v2 = this;
-  if ( v1 )
+  mCompDrawComp = this->mCompDrawComp;
+  if ( mCompDrawComp )
   {
-    v3 = v1->mPose;
-    if ( v3 )
+    mPose = mCompDrawComp->mPose;
+    if ( mPose )
     {
-      v4 = Skeleton::GetBoneID(v3->mRigHandle.mUFGSkeleton, s_uBip01_Spine_UID);
-      if ( v4 >= 0 )
-        SkeletalPose::GetPositionWS(v3, v4, &matrixWS);
-      UFG::qList<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode,1,0>::DeleteNodes(&v2->mWorldSpaceShapes.mShapes);
-      v5 = Skeleton::GetBoneID(v3->mRigHandle.mUFGSkeleton, s_uBip01_R_ClavicleUID);
+      BoneID = Skeleton::GetBoneID(mPose->mRigHandle.mUFGSkeleton, s_uBip01_Spine_UID);
+      if ( BoneID >= 0 )
+        SkeletalPose::GetPositionWS(mPose, BoneID, &matrixWS);
+      UFG::qList<UFG::EngineModelBlendMode,UFG::EngineModelBlendMode,1,0>::DeleteNodes(&this->mWorldSpaceShapes.mShapes);
+      v5 = Skeleton::GetBoneID(mPose->mRigHandle.mUFGSkeleton, s_uBip01_R_ClavicleUID);
       if ( v5 >= 0 )
       {
-        SkeletalPose::GetPositionWS(v3, v5, &v12);
-        centre.z = v12.v3.z;
-        Render::Softbody::CollisionShapeCollection::AddSphere(&v2->mWorldSpaceShapes, &centre, 0.1);
+        SkeletalPose::GetPositionWS(mPose, v5, &v11);
+        centre.z = v11.v3.z;
+        Render::Softbody::CollisionShapeCollection::AddSphere(&this->mWorldSpaceShapes, &centre, 0.1);
       }
-      v6 = Skeleton::GetBoneID(v3->mRigHandle.mUFGSkeleton, s_uBip01_L_ClavicleUID);
+      v6 = Skeleton::GetBoneID(mPose->mRigHandle.mUFGSkeleton, s_uBip01_L_ClavicleUID);
       if ( v6 >= 0 )
       {
-        SkeletalPose::GetPositionWS(v3, v6, &v12);
-        centre.z = v12.v3.z;
-        Render::Softbody::CollisionShapeCollection::AddSphere(&v2->mWorldSpaceShapes, &centre, 0.1);
+        SkeletalPose::GetPositionWS(mPose, v6, &v11);
+        centre.z = v11.v3.z;
+        Render::Softbody::CollisionShapeCollection::AddSphere(&this->mWorldSpaceShapes, &centre, 0.1);
       }
-      v7 = Skeleton::GetBoneID(v3->mRigHandle.mUFGSkeleton, s_uBip01_Neck_UID);
+      v7 = Skeleton::GetBoneID(mPose->mRigHandle.mUFGSkeleton, s_uBip01_Neck_UID);
       if ( v7 >= 0 )
       {
-        SkeletalPose::GetPositionWS(v3, v7, &v12);
-        centre.z = v12.v3.z;
-        Render::Softbody::CollisionShapeCollection::AddSphere(&v2->mWorldSpaceShapes, &centre, 0.1);
+        SkeletalPose::GetPositionWS(mPose, v7, &v11);
+        centre.z = v11.v3.z;
+        Render::Softbody::CollisionShapeCollection::AddSphere(&this->mWorldSpaceShapes, &centre, 0.1);
       }
     }
     else
@@ -941,13 +933,12 @@ void __fastcall Render::Softbody::UpdateTransform(Render::Softbody *this)
       matrixWS = UFG::qMatrix44::msIdentity;
     }
     v8 = matrixWS.v2;
-    v9 = (signed __int64)&v2->mWorld;
-    *(UFG::qVector4 *)v9 = matrixWS.v0;
-    *(UFG::qVector4 *)(v9 + 16) = matrixWS.v1;
-    v10 = matrixWS.v3;
-    *(UFG::qVector4 *)(v9 + 32) = v8;
-    *(UFG::qVector4 *)(v9 + 48) = v10;
-    UFG::qInverse(&v2->mInvWorld, &v2->mWorld);
+    this->mWorld.v0 = matrixWS.v0;
+    this->mWorld.v1 = matrixWS.v1;
+    v9 = matrixWS.v3;
+    this->mWorld.v2 = v8;
+    this->mWorld.v3 = v9;
+    UFG::qInverse(&this->mInvWorld, &this->mWorld);
   }
 }
 
@@ -955,10 +946,8 @@ void __fastcall Render::Softbody::UpdateTransform(Render::Softbody *this)
 // RVA: 0x21170
 Render::VerletCloth *__fastcall Render::Softbody::AddModel(Render::Softbody *this, Illusion::Model *src_model)
 {
-  Illusion::Model *v2; // rbp
-  Render::Softbody *v3; // r14
   Render::VerletCloth *v4; // rbx
-  __int64 v5; // rax
+  __int64 mOffset; // rax
   char *v6; // rax
   Illusion::SoftbodyData *v7; // rdi
   __int64 v8; // rax
@@ -966,15 +955,13 @@ Render::VerletCloth *__fastcall Render::Softbody::AddModel(Render::Softbody *thi
   Illusion::Mesh *v10; // rsi
   char *v12; // rax
   Render::VerletCloth *v13; // rax
-  Render::VerletCloth *value; // [rsp+58h] [rbp+10h]
+  Render::VerletCloth *value; // [rsp+58h] [rbp+10h] BYREF
 
-  v2 = src_model;
-  v3 = this;
   v4 = 0i64;
-  v5 = src_model->mModelUser.mOffset;
-  if ( v5 )
+  mOffset = src_model->mModelUser.mOffset;
+  if ( mOffset )
   {
-    v6 = (char *)&src_model->mModelUser + v5;
+    v6 = (char *)&src_model->mModelUser + mOffset;
     if ( v6 )
     {
       if ( *((_DWORD *)v6 + 2) )
@@ -1002,7 +989,7 @@ Render::VerletCloth *__fastcall Render::Softbody::AddModel(Render::Softbody *thi
         if ( v4 )
         {
           value = v4;
-          UFG::qMap<Render::VerletCloth *>::Set(&v3->mModelGuidToClothMap, v2->mNode.mUID, &value);
+          UFG::qMap<Render::VerletCloth *>::Set(&this->mModelGuidToClothMap, src_model->mNode.mUID, &value);
         }
       }
     }
@@ -1012,87 +999,81 @@ Render::VerletCloth *__fastcall Render::Softbody::AddModel(Render::Softbody *thi
 
 // File Line: 545
 // RVA: 0x21260
-void __fastcall Render::Softbody::CollisionShapeCollection::AddSphere(Render::Softbody::CollisionShapeCollection *this, UFG::qVector3 *centre, float radius)
+void __fastcall Render::Softbody::CollisionShapeCollection::AddSphere(
+        Render::Softbody::CollisionShapeCollection *this,
+        UFG::qVector3 *centre,
+        float radius)
 {
-  float v3; // xmm6_4
-  UFG::qVector3 *v4; // rdi
-  Render::Softbody::CollisionShapeCollection *v5; // rbx
   char *v6; // rax
-  _QWORD *v7; // r8
-  float v8; // xmm1_4
-  float v9; // xmm0_4
-  float v10; // xmm1_4
-  float v11; // xmm2_4
-  UFG::qNode<Render::SoftbodyCollisionShape,Render::SoftbodyCollisionShape> *v12; // rcx
-  UFG::qNode<Render::SoftbodyCollisionShape,Render::SoftbodyCollisionShape> *v13; // rax
+  float y; // xmm1_4
+  float z; // xmm0_4
+  float v9; // xmm1_4
+  float v10; // xmm2_4
+  UFG::qNode<Render::SoftbodyCollisionShape,Render::SoftbodyCollisionShape> *v11; // rcx
+  UFG::qNode<Render::SoftbodyCollisionShape,Render::SoftbodyCollisionShape> *mPrev; // rax
 
-  v3 = radius;
-  v4 = centre;
-  v5 = this;
   v6 = UFG::qMalloc(0x38ui64, "SoftbodyCollisionSphere", 0i64);
   if ( v6 )
   {
-    v7 = v6 + 8;
-    *v7 = v7;
-    v7[1] = v7;
+    *((_QWORD *)v6 + 1) = v6 + 8;
+    *((_QWORD *)v6 + 2) = v6 + 8;
     *(_QWORD *)v6 = &Render::SoftbodyCollisionShape::`vftable;
     *(_QWORD *)v6 = &Render::SoftbodyCollisionSphere::`vftable;
-    v8 = v4->y;
-    v9 = v4->z;
-    *((_DWORD *)v6 + 6) = LODWORD(v4->x);
-    *((float *)v6 + 7) = v8;
-    *((float *)v6 + 8) = v9;
+    y = centre->y;
+    z = centre->z;
+    *((_DWORD *)v6 + 6) = LODWORD(centre->x);
+    *((float *)v6 + 7) = y;
+    *((float *)v6 + 8) = z;
     *((float *)v6 + 9) = radius;
-    v10 = v4->y;
-    v11 = v4->z;
-    *((_DWORD *)v6 + 10) = LODWORD(v4->x);
-    *((float *)v6 + 11) = v10;
-    *((float *)v6 + 12) = v11;
-    *((float *)v6 + 13) = v3;
+    v9 = centre->y;
+    v10 = centre->z;
+    *((_DWORD *)v6 + 10) = LODWORD(centre->x);
+    *((float *)v6 + 11) = v9;
+    *((float *)v6 + 12) = v10;
+    *((float *)v6 + 13) = radius;
   }
-  v12 = (UFG::qNode<Render::SoftbodyCollisionShape,Render::SoftbodyCollisionShape> *)(v6 + 8);
-  v13 = v5->mShapes.mNode.mPrev;
-  v13->mNext = v12;
-  v12->mPrev = v13;
-  v12->mNext = &v5->mShapes.mNode;
-  v5->mShapes.mNode.mPrev = v12;
+  v11 = (UFG::qNode<Render::SoftbodyCollisionShape,Render::SoftbodyCollisionShape> *)(v6 + 8);
+  mPrev = this->mShapes.mNode.mPrev;
+  mPrev->mNext = v11;
+  v11->mPrev = mPrev;
+  v11->mNext = &this->mShapes.mNode;
+  this->mShapes.mNode.mPrev = v11;
 }
 
 // File Line: 563
 // RVA: 0x219B0
-Render::Softbody *__fastcall Render::ISoftbody::GenerateSoftbody(Render::ISoftbody *this, UFG::CompositeDrawableComponent *src_composite_drawable, ModelType::ModelBindingSkin *binding)
+Render::Softbody *__fastcall Render::ISoftbody::GenerateSoftbody(
+        Render::ISoftbody *this,
+        UFG::CompositeDrawableComponent *src_composite_drawable,
+        ModelType::ModelBindingSkin *binding)
 {
-  ModelType::ModelBindingSkin *v3; // rdi
-  UFG::CompositeDrawableComponent *v4; // rsi
-  Render::Softbody *v5; // rbx
+  Render::Softbody *mSoftbody; // rbx
   char *v7; // rax
   Render::Softbody *v8; // rax
   Render::Softbody *v9; // rbx
 
-  v3 = binding;
-  v4 = src_composite_drawable;
-  v5 = binding->mSoftbody;
-  if ( v5 )
+  mSoftbody = binding->mSoftbody;
+  if ( mSoftbody )
   {
     Render::Softbody::~Softbody(binding->mSoftbody);
-    operator delete[](v5);
-    v3->mSoftbody = 0i64;
+    operator delete[](mSoftbody);
+    binding->mSoftbody = 0i64;
   }
-  if ( !v3->mModelProxy.mModelHandle.mData )
+  if ( !binding->mModelProxy.mModelHandle.mData )
     return 0i64;
   v7 = UFG::qMalloc(0x138ui64, "Softbody", 0i64);
   if ( v7 )
   {
-    Render::Softbody::Softbody((Render::Softbody *)v7, v4);
+    Render::Softbody::Softbody((Render::Softbody *)v7, src_composite_drawable);
     v9 = v8;
   }
   else
   {
     v9 = 0i64;
   }
-  if ( Render::Softbody::AddModel(v9, (Illusion::Model *)v3->mModelProxy.mModelHandle.mData) )
+  if ( Render::Softbody::AddModel(v9, (Illusion::Model *)binding->mModelProxy.mModelHandle.mData) )
   {
-    v3->mSoftbody = v9;
+    binding->mSoftbody = v9;
   }
   else
   {
@@ -1101,31 +1082,31 @@ Render::Softbody *__fastcall Render::ISoftbody::GenerateSoftbody(Render::ISoftbo
       Render::Softbody::~Softbody(v9);
       operator delete[](v9);
     }
-    v9 = 0i64;
+    return 0i64;
   }
   return v9;
 }
 
 // File Line: 612
 // RVA: 0x21050
-void __fastcall Render::ISoftbody::AddBufferForDeletion(Render::ISoftbody *this, Render::PackedPosition *packedPositions)
+void __fastcall Render::ISoftbody::AddBufferForDeletion(
+        Render::ISoftbody *this,
+        Render::PackedPosition *packedPositions)
 {
-  __int64 v2; // rbp
-  Render::PackedPosition *v3; // r14
+  __int64 size; // rbp
   unsigned int v4; // edi
   unsigned int v5; // ebx
   unsigned __int64 v6; // rax
   char *v7; // rax
   Render::PackedPosition **v8; // r9
-  Render::PackedPosition **v9; // rsi
-  signed __int64 v10; // r8
-  signed __int64 v11; // rdx
+  Render::PackedPosition **p; // rsi
+  __int64 i; // r8
+  __int64 v11; // rdx
 
-  v2 = Render::ISoftbody::s_DeletionQueue.size;
-  v3 = packedPositions;
+  size = Render::ISoftbody::s_DeletionQueue.size;
   v4 = Render::ISoftbody::s_DeletionQueue.size + 1;
   if ( Render::ISoftbody::s_DeletionQueue.size + 1 <= Render::ISoftbody::s_DeletionQueue.capacity )
-    goto LABEL_23;
+    goto LABEL_19;
   if ( Render::ISoftbody::s_DeletionQueue.capacity )
     v5 = 2 * Render::ISoftbody::s_DeletionQueue.capacity;
   else
@@ -1136,10 +1117,10 @@ void __fastcall Render::ISoftbody::AddBufferForDeletion(Render::ISoftbody *this,
     v5 = 2;
   if ( v5 - v4 > 0x10000 )
     v5 = Render::ISoftbody::s_DeletionQueue.size + 65537;
-  if ( v5 == (_DWORD)v2 )
+  if ( v5 == Render::ISoftbody::s_DeletionQueue.size )
   {
-LABEL_23:
-    v9 = Render::ISoftbody::s_DeletionQueue.p;
+LABEL_19:
+    p = Render::ISoftbody::s_DeletionQueue.p;
   }
   else
   {
@@ -1148,35 +1129,29 @@ LABEL_23:
       v6 = -1i64;
     v7 = UFG::qMalloc(v6, "qArray.Add", 0i64);
     v8 = Render::ISoftbody::s_DeletionQueue.p;
-    v9 = (Render::PackedPosition **)v7;
+    p = (Render::PackedPosition **)v7;
     if ( Render::ISoftbody::s_DeletionQueue.p )
     {
-      v10 = 0i64;
-      if ( Render::ISoftbody::s_DeletionQueue.size )
+      for ( i = 0i64; (unsigned int)i < Render::ISoftbody::s_DeletionQueue.size; v8 = Render::ISoftbody::s_DeletionQueue.p )
       {
-        do
-        {
-          v11 = v10;
-          v10 = (unsigned int)(v10 + 1);
-          *(_QWORD *)&v7[v11 * 8] = v8[v11];
-          v8 = Render::ISoftbody::s_DeletionQueue.p;
-        }
-        while ( (unsigned int)v10 < Render::ISoftbody::s_DeletionQueue.size );
+        v11 = i;
+        i = (unsigned int)(i + 1);
+        *(_QWORD *)&v7[v11 * 8] = v8[v11];
       }
       operator delete[](v8);
     }
-    Render::ISoftbody::s_DeletionQueue.p = v9;
+    Render::ISoftbody::s_DeletionQueue.p = p;
     Render::ISoftbody::s_DeletionQueue.capacity = v5;
   }
   Render::ISoftbody::s_DeletionQueue.size = v4;
-  v9[v2] = v3;
+  p[size] = packedPositions;
 }
 
 // File Line: 617
 // RVA: 0x21400
 void __fastcall Render::ISoftbody::DeleteQueuedBuffers(Render::ISoftbody *this)
 {
-  unsigned int v1; // eax
+  unsigned int size; // eax
 
   if ( Render::ISoftbody::s_DeletionQueue.size )
   {
@@ -1185,11 +1160,11 @@ void __fastcall Render::ISoftbody::DeleteQueuedBuffers(Render::ISoftbody *this)
       operator delete[](*(void **)Render::ISoftbody::s_DeletionQueue.p);
       *Render::ISoftbody::s_DeletionQueue.p = Render::ISoftbody::s_DeletionQueue.p[Render::ISoftbody::s_DeletionQueue.size
                                                                                  - 1];
-      v1 = Render::ISoftbody::s_DeletionQueue.size;
+      size = Render::ISoftbody::s_DeletionQueue.size;
       if ( Render::ISoftbody::s_DeletionQueue.size <= 1 )
         break;
       --Render::ISoftbody::s_DeletionQueue.size;
-      if ( v1 == 1 )
+      if ( size == 1 )
         return;
     }
     Render::ISoftbody::s_DeletionQueue.size = 0;

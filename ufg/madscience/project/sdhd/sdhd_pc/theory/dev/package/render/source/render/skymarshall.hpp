@@ -16,15 +16,12 @@ void __fastcall Render::SkyMarshall::SkydomeResource::SkydomeResource(Render::Sk
 // RVA: 0x64760
 void __fastcall Render::SkyMarshall::WispIndexBuffer::WispIndexBuffer(Render::SkyMarshall::WispIndexBuffer *this)
 {
-  Render::SkyMarshall::WispIndexBuffer *v1; // rbx
-
-  v1 = this;
   `eh vector constructor iterator(
     this->mBufferHandle,
     0x20ui64,
     2,
     (void (__fastcall *)(void *))Illusion::BufferHandle::BufferHandle);
-  v1->mNumWisps = 0;
-  v1->mOutOfSync = 0;
+  this->mNumWisps = 0;
+  this->mOutOfSync = 0;
 }
 

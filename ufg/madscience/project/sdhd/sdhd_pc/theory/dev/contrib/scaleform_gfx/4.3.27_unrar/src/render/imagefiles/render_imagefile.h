@@ -7,10 +7,11 @@ void __fastcall Scaleform::Render::ImageFileHandler::~ImageFileHandler(Scaleform
 
 // File Line: 204
 // RVA: 0x8A4EB0
-void __fastcall Scaleform::Render::ImageFileHandlerRegistry::~ImageFileHandlerRegistry(Scaleform::Render::ImageFileHandlerRegistry *this)
+void __fastcall Scaleform::Render::ImageFileHandlerRegistry::~ImageFileHandlerRegistry(
+        Scaleform::Render::ImageFileHandlerRegistry *this)
 {
   this->vfptr = (Scaleform::Render::ImageFileHandlerRegistryVtbl *)&Scaleform::Render::ImageFileHandlerRegistry::`vftable;
   if ( this->Handlers.Data.Data )
-    ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
 }
 

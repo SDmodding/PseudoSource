@@ -1,38 +1,37 @@
 // File Line: 299
 // RVA: 0x787C30
-void __fastcall Scaleform::GFx::AS3::SH2<2,Scaleform::GFx::AS3::Value,Scaleform::GFx::AS3::Value>::~SH2<2,Scaleform::GFx::AS3::Value,Scaleform::GFx::AS3::Value>(Scaleform::GFx::AS3::SH2<2,Scaleform::GFx::AS3::Value,Scaleform::GFx::AS3::Value> *this)
+void __fastcall Scaleform::GFx::AS3::SH2<2,Scaleform::GFx::AS3::Value,Scaleform::GFx::AS3::Value>::~SH2<2,Scaleform::GFx::AS3::Value,Scaleform::GFx::AS3::Value>(
+        Scaleform::GFx::AS3::SH2<2,Scaleform::GFx::AS3::Value,Scaleform::GFx::AS3::Value> *this)
 {
-  Scaleform::GFx::AS3::VSBase *v1; // rdi
-  signed int v2; // esi
-  Scaleform::GFx::AS3::Value *v3; // rbx
-  Scaleform::GFx::AS3::WeakProxy *v4; // rdx
-  bool v5; // zf
+  Scaleform::GFx::AS3::VSBase *stack; // rdi
+  int v2; // esi
+  Scaleform::GFx::AS3::Value *pCurrent; // rbx
+  Scaleform::GFx::AS3::WeakProxy *pWeakProxy; // rdx
 
-  v1 = this->stack;
+  stack = this->stack;
   v2 = 2;
   do
   {
-    v3 = v1->pCurrent;
+    pCurrent = stack->pCurrent;
     --v2;
-    if ( (v1->pCurrent->Flags & 0x1F) > 9 )
+    if ( (stack->pCurrent->Flags & 0x1F) > 9 )
     {
-      if ( (v1->pCurrent->Flags >> 9) & 1 )
+      if ( (stack->pCurrent->Flags & 0x200) != 0 )
       {
-        v4 = v3->Bonus.pWeakProxy;
-        v5 = v4->RefCount-- == 1;
-        if ( v5 )
-          ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-        v3->Flags &= 0xFFFFFDE0;
-        v3->Bonus.pWeakProxy = 0i64;
-        v3->value.VNumber = 0.0;
-        v3->value.VS._2.VObj = 0i64;
+        pWeakProxy = pCurrent->Bonus.pWeakProxy;
+        if ( pWeakProxy->RefCount-- == 1 )
+          ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+        pCurrent->Flags &= 0xFFFFFDE0;
+        pCurrent->Bonus.pWeakProxy = 0i64;
+        pCurrent->value.VS._1.VStr = 0i64;
+        pCurrent->value.VS._2.VObj = 0i64;
       }
       else
       {
-        Scaleform::GFx::AS3::Value::ReleaseInternal(v1->pCurrent);
+        Scaleform::GFx::AS3::Value::ReleaseInternal(stack->pCurrent);
       }
     }
-    --v1->pCurrent;
+    --stack->pCurrent;
   }
   while ( v2 );
 }

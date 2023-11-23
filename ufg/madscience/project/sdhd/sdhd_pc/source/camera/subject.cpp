@@ -9,29 +9,20 @@ const char *__fastcall UFG::CameraSubject::GetTypeName(UFG::CameraSubject *this)
 // RVA: 0x3BA9E0
 void __fastcall UFG::CameraSubject::CameraSubject(UFG::CameraSubject *this, unsigned int name_uid)
 {
-  UFG::CameraSubject *v2; // rbx
-
-  v2 = this;
-  UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v2->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CameraSubject::`vftable;
-  UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::RebindingComponentHandle<UFG::TransformNodeComponent,0>(&v2->pTransformNodeComponent);
-  UFG::SimComponent::AddType(
-    (UFG::SimComponent *)&v2->vfptr,
-    UFG::CameraSubject::_CameraSubjectTypeUID,
-    "CameraSubject");
-  UFG::CameraSubject::Init(v2);
+  UFG::SimComponent::SimComponent(this, name_uid);
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CameraSubject::`vftable;
+  UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::RebindingComponentHandle<UFG::TransformNodeComponent,0>(&this->pTransformNodeComponent);
+  UFG::SimComponent::AddType(this, UFG::CameraSubject::_CameraSubjectTypeUID, "CameraSubject");
+  UFG::CameraSubject::Init(this);
 }
 
 // File Line: 24
 // RVA: 0x3BDC30
 void __fastcall UFG::CameraSubject::~CameraSubject(UFG::CameraSubject *this)
 {
-  UFG::CameraSubject *v1; // rbx
-
-  v1 = this;
   this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::CameraSubject::`vftable;
   UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>(&this->pTransformNodeComponent);
-  UFG::SimComponent::~SimComponent((UFG::SimComponent *)&v1->vfptr);
+  UFG::SimComponent::~SimComponent(this);
 }
 
 // File Line: 30
@@ -39,8 +30,8 @@ void __fastcall UFG::CameraSubject::~CameraSubject(UFG::CameraSubject *this)
 void __fastcall UFG::CameraSubject::Init(UFG::CameraSubject *this)
 {
   __m128 v1; // xmm2
-  float v2; // xmm3_4
-  float v3; // xmm0_4
+  float w; // xmm3_4
+  float x; // xmm0_4
   float v4; // xmm3_4
   float v5; // xmm0_4
 
@@ -57,12 +48,12 @@ void __fastcall UFG::CameraSubject::Init(UFG::CameraSubject *this)
   this->bPinnedPosition = 0;
   this->mPinPosParam = 0.0;
   v1.m128_i32[0] = LODWORD(UFG::qVector4::msZero.z);
-  v2 = UFG::qVector4::msZero.w;
-  v3 = UFG::qVector4::msZero.x;
+  w = UFG::qVector4::msZero.w;
+  x = UFG::qVector4::msZero.x;
   this->mPinPos.y = UFG::qVector4::msZero.y;
   LODWORD(this->mPinPos.z) = v1.m128_i32[0];
-  this->mPinPos.x = v3;
-  this->mPinPos.w = v2;
+  this->mPinPos.x = x;
+  this->mPinPos.w = w;
   this->bPinnedOrientation = 0;
   this->mPinOrientParam = 0.0;
   v1.m128_i32[0] = LODWORD(UFG::qQuaternion::msUnity.z);
@@ -78,27 +69,25 @@ void __fastcall UFG::CameraSubject::Init(UFG::CameraSubject *this)
 // RVA: 0x3C7940
 void __fastcall UFG::CameraSubject::OnAttach(UFG::CameraSubject *this, UFG::SimObject *object)
 {
-  UFG::CameraSubject *v2; // rbx
-  UFG::SimComponent *v3; // rdi
+  UFG::SimComponent *m_pSimComponent; // rdi
   UFG::qVector4 v4; // xmm3
   UFG::qVector4 v5; // xmm2
-  UFG::qVector4 v6; // xmm1
+  UFG::qVector4 m_BoundComponentHandles; // xmm1
 
-  v2 = this;
   UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0>::Bind<UFG::SimObject>(
     &this->pTransformNodeComponent,
     object);
-  v3 = v2->pTransformNodeComponent.m_pSimComponent;
-  if ( v3 )
+  m_pSimComponent = this->pTransformNodeComponent.m_pSimComponent;
+  if ( m_pSimComponent )
   {
-    UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v2->pTransformNodeComponent.m_pSimComponent);
-    v4 = *(UFG::qVector4 *)&v3[2].m_SafePointerList.mNode.mNext;
-    v5 = *(UFG::qVector4 *)&v3[2].m_Flags;
-    v6 = (UFG::qVector4)v3[2].m_BoundComponentHandles;
-    v2->mLocalWorld.v0 = *(UFG::qVector4 *)&v3[2].vfptr;
-    v2->mLocalWorld.v1 = v4;
-    v2->mLocalWorld.v2 = v5;
-    v2->mLocalWorld.v3 = v6;
+    UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)this->pTransformNodeComponent.m_pSimComponent);
+    v4 = *(UFG::qVector4 *)&m_pSimComponent[2].m_SafePointerList.mNode.mNext;
+    v5 = *(UFG::qVector4 *)&m_pSimComponent[2].m_Flags;
+    m_BoundComponentHandles = (UFG::qVector4)m_pSimComponent[2].m_BoundComponentHandles;
+    this->mLocalWorld.v0 = *(UFG::qVector4 *)&m_pSimComponent[2].vfptr;
+    this->mLocalWorld.v1 = v4;
+    this->mLocalWorld.v2 = v5;
+    this->mLocalWorld.v3 = m_BoundComponentHandles;
   }
 }
 
@@ -106,40 +95,40 @@ void __fastcall UFG::CameraSubject::OnAttach(UFG::CameraSubject *this, UFG::SimO
 // RVA: 0x3C7B10
 void __fastcall UFG::CameraSubject::OnDetach(UFG::CameraSubject *this)
 {
-  UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *v1; // rdx
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v2; // rax
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v3; // rcx
+  UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *p_pTransformNodeComponent; // rdx
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mNext; // rax
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mPrev; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v4; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v5; // rcx
 
-  v1 = &this->pTransformNodeComponent;
+  p_pTransformNodeComponent = &this->pTransformNodeComponent;
   if ( this->pTransformNodeComponent.m_pSimComponent )
   {
-    v2 = this->pTransformNodeComponent.mNext;
-    v3 = v1->mPrev;
-    v3->mNext = v2;
-    v2->mPrev = v3;
-    v1->mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v1->mPrev;
-    v1->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v1->mPrev;
-    v1->m_Changed = 1;
-    v1->m_pSimComponent = 0i64;
-    v1->m_pSimObject = 0i64;
+    mNext = this->pTransformNodeComponent.mNext;
+    mPrev = p_pTransformNodeComponent->mPrev;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_pTransformNodeComponent->mNext = p_pTransformNodeComponent;
+    p_pTransformNodeComponent->mPrev = p_pTransformNodeComponent;
+    p_pTransformNodeComponent->m_Changed = 1;
+    p_pTransformNodeComponent->m_pSimComponent = 0i64;
+    p_pTransformNodeComponent->m_pSimObject = 0i64;
   }
   else
   {
     if ( this->pTransformNodeComponent.m_pSimObject
-      && ((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)v1->mPrev != v1
-       || (UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)this->pTransformNodeComponent.mNext != &this->pTransformNodeComponent) )
+      && (p_pTransformNodeComponent->mPrev != p_pTransformNodeComponent
+       || this->pTransformNodeComponent.mNext != &this->pTransformNodeComponent) )
     {
       v4 = this->pTransformNodeComponent.mNext;
-      v5 = v1->mPrev;
+      v5 = p_pTransformNodeComponent->mPrev;
       v5->mNext = v4;
       v4->mPrev = v5;
-      v1->mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v1->mPrev;
-      v1->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v1->mPrev;
-      v1->m_pSimObject = 0i64;
+      p_pTransformNodeComponent->mNext = p_pTransformNodeComponent;
+      p_pTransformNodeComponent->mPrev = p_pTransformNodeComponent;
+      p_pTransformNodeComponent->m_pSimObject = 0i64;
     }
-    v1->m_Changed = 1;
+    p_pTransformNodeComponent->m_Changed = 1;
   }
 }
 
@@ -147,147 +136,146 @@ void __fastcall UFG::CameraSubject::OnDetach(UFG::CameraSubject *this)
 // RVA: 0x3C4380
 UFG::qVector3 *__fastcall UFG::CameraSubject::GetVelocity(UFG::CameraSubject *this)
 {
-  UFG::SimComponent *v1; // rbx
+  UFG::SimComponent *m_pSimComponent; // rbx
 
-  v1 = this->pTransformNodeComponent.m_pSimComponent;
-  if ( !v1 )
+  m_pSimComponent = this->pTransformNodeComponent.m_pSimComponent;
+  if ( !m_pSimComponent )
     return &UFG::qVector3::msZero;
   UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)this->pTransformNodeComponent.m_pSimComponent);
-  return (UFG::qVector3 *)&v1[4];
+  return (UFG::qVector3 *)&m_pSimComponent[4];
 }
 
 // File Line: 111
 // RVA: 0x3C7DA0
-void __fastcall UFG::CameraSubject::PinOrientationSmooth(UFG::CameraSubject *this, UFG::CameraSubject::PinOrientMode mode)
+void __fastcall UFG::CameraSubject::PinOrientationSmooth(
+        UFG::CameraSubject *this,
+        UFG::CameraSubject::PinOrientMode mode)
 {
-  UFG::TransformNodeComponent *v2; // rbx
-  UFG::CameraSubject::PinOrientMode v3; // esi
-  UFG::CameraSubject *v4; // rdi
-  float v5; // xmm4_4
-  float v6; // xmm5_4
-  __m128 v7; // xmm1
+  UFG::TransformNodeComponent *m_pSimComponent; // rbx
+  float x; // xmm4_4
+  float y; // xmm5_4
+  __m128 y_low; // xmm1
   float v8; // xmm3_4
-  float v9; // xmm2_4
-  float v10; // xmm3_4
-  UFG::qMatrix44 *v11; // rdx
-  UFG::SimComponent *v12; // rbx
-  UFG::qVector4 v13; // [rsp+20h] [rbp-48h]
-  UFG::qVector4 v14; // [rsp+30h] [rbp-38h]
-  UFG::qVector4 v15; // [rsp+40h] [rbp-28h]
-  UFG::qVector4 v16; // [rsp+50h] [rbp-18h]
+  UFG::qMatrix44 *p_mWorldTransform; // rdx
+  UFG::TransformNodeComponent *v10; // rbx
+  float v11[2]; // [rsp+20h] [rbp-48h] BYREF
+  __int64 v12; // [rsp+28h] [rbp-40h]
+  unsigned int v13; // [rsp+30h] [rbp-38h]
+  float v14; // [rsp+34h] [rbp-34h]
+  __int64 v15; // [rsp+38h] [rbp-30h]
+  UFG::qVector4 v16; // [rsp+40h] [rbp-28h]
+  UFG::qVector4 v17; // [rsp+50h] [rbp-18h]
 
-  v2 = (UFG::TransformNodeComponent *)this->pTransformNodeComponent.m_pSimComponent;
-  v3 = mode;
-  v4 = this;
+  m_pSimComponent = (UFG::TransformNodeComponent *)this->pTransformNodeComponent.m_pSimComponent;
   this->bPinnedOrientation = 1;
-  if ( v2 )
+  if ( m_pSimComponent )
   {
-    UFG::TransformNodeComponent::UpdateWorldTransform(v2);
-    v5 = v2->mWorldVelocity.x;
-    v6 = v2->mWorldVelocity.y;
-    if ( v3 != 1
-      || (v7 = (__m128)LODWORD(v2->mWorldVelocity.y),
-          v7.m128_f32[0] = (float)(v6 * v6) + (float)(v5 * v5),
-          v7.m128_f32[0] <= 1.0) )
+    UFG::TransformNodeComponent::UpdateWorldTransform(m_pSimComponent);
+    x = m_pSimComponent->mWorldVelocity.x;
+    y = m_pSimComponent->mWorldVelocity.y;
+    if ( mode == PinOrientMode_Velocity
+      && (y_low = (__m128)LODWORD(m_pSimComponent->mWorldVelocity.y),
+          y_low.m128_f32[0] = (float)(y * y) + (float)(x * x),
+          y_low.m128_f32[0] > 1.0) )
     {
-      v12 = v4->pTransformNodeComponent.m_pSimComponent;
-      UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v4->pTransformNodeComponent.m_pSimComponent);
-      v11 = (UFG::qMatrix44 *)&v12[2];
+      if ( y_low.m128_f32[0] == 0.0 )
+        v8 = 0.0;
+      else
+        v8 = 1.0 / _mm_sqrt_ps(y_low).m128_f32[0];
+      p_mWorldTransform = (UFG::qMatrix44 *)v11;
+      v12 = *(_QWORD *)&UFG::qMatrix44::msIdentity.v0.z;
+      v15 = *(_QWORD *)&UFG::qMatrix44::msIdentity.v1.z;
+      v11[1] = v8 * y;
+      v11[0] = v8 * x;
+      v14 = v8 * x;
+      v16 = UFG::qMatrix44::msIdentity.v2;
+      v17 = UFG::qMatrix44::msIdentity.v3;
+      v13 = COERCE_UNSIGNED_INT(v8 * y) ^ _xmm[0];
     }
     else
     {
-      if ( v7.m128_f32[0] == 0.0 )
-        v8 = 0.0;
-      else
-        v8 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v7));
-      v9 = v8;
-      v10 = v8 * v6;
-      v11 = (UFG::qMatrix44 *)&v13;
-      v13 = UFG::qMatrix44::msIdentity.v0;
-      v14 = UFG::qMatrix44::msIdentity.v1;
-      v13.y = v10;
-      v13.x = v9 * v5;
-      v14.y = v9 * v5;
-      v15 = UFG::qMatrix44::msIdentity.v2;
-      v16 = UFG::qMatrix44::msIdentity.v3;
-      LODWORD(v14.x) = LODWORD(v10) ^ _xmm[0];
+      v10 = (UFG::TransformNodeComponent *)this->pTransformNodeComponent.m_pSimComponent;
+      UFG::TransformNodeComponent::UpdateWorldTransform(v10);
+      p_mWorldTransform = &v10->mWorldTransform;
     }
-    UFG::qQuaternion::Set(&v4->mPinOrient, v11);
+    UFG::qQuaternion::Set(&this->mPinOrient, p_mWorldTransform);
   }
 }
 
 // File Line: 144
 // RVA: 0x3D85E0
-void __fastcall UFG::CameraSubject::UpdateBase(UFG::CameraSubject *this, float delta_sec, bool debug_draw, UFG::CameraSubject::UpdateParams *update_params)
+void __fastcall UFG::CameraSubject::UpdateBase(
+        UFG::CameraSubject *this,
+        float delta_sec,
+        bool debug_draw,
+        UFG::CameraSubject::UpdateParams *update_params)
 {
-  UFG::CameraSubject::UpdateParams *v4; // rsi
-  float v5; // xmm10_4
-  UFG::CameraSubject *v6; // rdi
-  UFG::TransformNodeComponent *v7; // rbx
-  UFG::qMatrix44 *v8; // rax
+  UFG::TransformNodeComponent *m_pSimComponent; // rbx
+  UFG::qMatrix44 *Matrix; // rax
   float v9; // xmm9_4
   UFG::qVector4 v10; // xmm3
   UFG::qVector4 v11; // xmm2
   UFG::qVector4 v12; // xmm1
-  bool v13; // al
+  bool bPinnedOrientation; // al
   float v14; // xmm1_4
-  float v15; // xmm2_4
-  float v16; // xmm0_4
+  float mPinRotRate; // xmm2_4
+  float mPinPosParam; // xmm0_4
   float v17; // xmm5_4
   float v18; // xmm3_4
   float v19; // xmm1_4
-  float v20; // xmm2_4
-  UFG::qQuaternion a; // [rsp+30h] [rbp-98h]
-  UFG::qQuaternion result; // [rsp+40h] [rbp-88h]
-  UFG::qMatrix44 v23; // [rsp+50h] [rbp-78h]
+  float mPinPosRate; // xmm2_4
+  UFG::qQuaternion a; // [rsp+30h] [rbp-98h] BYREF
+  UFG::qQuaternion result; // [rsp+40h] [rbp-88h] BYREF
+  UFG::qMatrix44 v23; // [rsp+50h] [rbp-78h] BYREF
 
-  v4 = update_params;
-  v5 = delta_sec;
-  v6 = this;
   if ( this->pTransformNodeComponent.m_pSimComponent )
   {
-    v7 = (UFG::TransformNodeComponent *)this->pTransformNodeComponent.m_pSimComponent;
-    UFG::TransformNodeComponent::UpdateWorldTransform(v7);
-    UFG::qQuaternion::Set(&a, &v7->mWorldTransform);
-    UFG::qNlerp(&result, &a, &v6->mPinOrient, v6->mPinOrientParam, 0);
-    v8 = UFG::qQuaternion::GetMatrix(&result, &v23, &UFG::qVector3::msZero);
+    m_pSimComponent = (UFG::TransformNodeComponent *)this->pTransformNodeComponent.m_pSimComponent;
+    UFG::TransformNodeComponent::UpdateWorldTransform(m_pSimComponent);
+    UFG::qQuaternion::Set(&a, &m_pSimComponent->mWorldTransform);
+    UFG::qNlerp(&result, &a, &this->mPinOrient, this->mPinOrientParam, qAngularPath_Shortest);
+    Matrix = UFG::qQuaternion::GetMatrix(&result, &v23, &UFG::qVector3::msZero);
     v9 = *(float *)&FLOAT_1_0;
-    v10 = v8->v1;
-    v11 = v8->v2;
-    v12 = v8->v3;
-    v6->mLocalWorld.v0 = v8->v0;
-    v6->mLocalWorld.v1 = v10;
-    v6->mLocalWorld.v2 = v11;
-    v6->mLocalWorld.v3 = v12;
-    v13 = v6->bPinnedOrientation;
-    if ( v13 )
+    v10 = Matrix->v1;
+    v11 = Matrix->v2;
+    v12 = Matrix->v3;
+    this->mLocalWorld.v0 = Matrix->v0;
+    this->mLocalWorld.v1 = v10;
+    this->mLocalWorld.v2 = v11;
+    this->mLocalWorld.v3 = v12;
+    bPinnedOrientation = this->bPinnedOrientation;
+    if ( bPinnedOrientation )
       v14 = *(float *)&FLOAT_1_0;
     else
       v14 = 0.0;
-    if ( v13 )
-      v15 = v4->mPinRotRate;
+    if ( bPinnedOrientation )
+      mPinRotRate = update_params->mPinRotRate;
     else
-      v15 = v4->mUnpinRotRate;
-    UFG::qApproach(&v6->mPinOrientParam, v14, v15, v5);
-    v16 = v6->mPinPosParam;
-    v17 = (float)((float)(v6->mPinPos.y - v7->mWorldTransform.v3.y) * v16) + v7->mWorldTransform.v3.y;
-    v18 = (float)((float)(v6->mPinPos.z - v7->mWorldTransform.v3.z) * v16) + v7->mWorldTransform.v3.z;
-    v19 = (float)((float)(v6->mPinPos.w - v7->mWorldTransform.v3.w) * v16) + v7->mWorldTransform.v3.w;
-    v6->mLocalWorld.v3.x = (float)((float)(v6->mPinPos.x - v7->mWorldTransform.v3.x) * v16) + v7->mWorldTransform.v3.x;
-    v6->mLocalWorld.v3.y = v17;
-    v6->mLocalWorld.v3.z = v18;
-    v6->mLocalWorld.v3.w = v19;
-    if ( v6->bPinnedPosition )
+      mPinRotRate = update_params->mUnpinRotRate;
+    UFG::qApproach(&this->mPinOrientParam, v14, mPinRotRate, delta_sec);
+    mPinPosParam = this->mPinPosParam;
+    v17 = (float)((float)(this->mPinPos.y - m_pSimComponent->mWorldTransform.v3.y) * mPinPosParam)
+        + m_pSimComponent->mWorldTransform.v3.y;
+    v18 = (float)((float)(this->mPinPos.z - m_pSimComponent->mWorldTransform.v3.z) * mPinPosParam)
+        + m_pSimComponent->mWorldTransform.v3.z;
+    v19 = (float)((float)(this->mPinPos.w - m_pSimComponent->mWorldTransform.v3.w) * mPinPosParam)
+        + m_pSimComponent->mWorldTransform.v3.w;
+    this->mLocalWorld.v3.x = (float)((float)(this->mPinPos.x - m_pSimComponent->mWorldTransform.v3.x) * mPinPosParam)
+                           + m_pSimComponent->mWorldTransform.v3.x;
+    this->mLocalWorld.v3.y = v17;
+    this->mLocalWorld.v3.z = v18;
+    this->mLocalWorld.v3.w = v19;
+    if ( this->bPinnedPosition )
     {
-      v20 = v4->mPinPosRate;
+      mPinPosRate = update_params->mPinPosRate;
     }
     else
     {
-      v20 = v4->mUnpinPosRate;
+      mPinPosRate = update_params->mUnpinPosRate;
       v9 = 0.0;
     }
-    UFG::qApproach(&v6->mPinPosParam, v9, v20, v5);
-    UFG::qInverseAffine(&v6->mWorldLocal, &v6->mLocalWorld);
+    UFG::qApproach(&this->mPinPosParam, v9, mPinPosRate, delta_sec);
+    UFG::qInverseAffine(&this->mWorldLocal, &this->mLocalWorld);
   }
 }
 
@@ -295,8 +283,6 @@ void __fastcall UFG::CameraSubject::UpdateBase(UFG::CameraSubject *this, float d
 // RVA: 0x3C28C0
 void __fastcall UFG::CameraSubject::GetBoxVerts(UFG::CameraSubject *this, UFG::qVector3 *verts, float margin)
 {
-  UFG::qVector3 *v3; // rdi
-  UFG::CameraSubject *v4; // rbx
   __int64 v5; // rax
   float v6; // xmm8_4
   float v7; // xmm6_4
@@ -306,61 +292,62 @@ void __fastcall UFG::CameraSubject::GetBoxVerts(UFG::CameraSubject *this, UFG::q
   float v11; // xmm1_4
   float v12; // xmm0_4
 
-  v3 = verts;
-  v4 = this;
-  v5 = ((__int64 (*)(void))this->vfptr[23].__vecDelDtor)();
+  v5 = ((__int64 (__fastcall *)(UFG::CameraSubject *))this->vfptr[23].__vecDelDtor)(this);
   v6 = *(float *)(v5 + 8);
   v7 = *(float *)v5 - margin;
   v8 = *(float *)(v5 + 4) - margin;
-  v9 = ((__int64 (__fastcall *)(UFG::CameraSubject *))v4->vfptr[24].__vecDelDtor)(v4);
+  v9 = ((__int64 (__fastcall *)(UFG::CameraSubject *))this->vfptr[24].__vecDelDtor)(this);
   v10 = margin + *(float *)(v9 + 4);
   v11 = margin + *(float *)v9;
   v12 = *(float *)(v9 + 8);
-  v3->x = v7;
-  v3->y = v8;
-  v3->z = v6;
-  v3[1].x = v7;
-  v3[1].y = v8;
-  v3[1].z = v12;
-  v3[2].y = v10;
-  v3[2].x = v7;
-  v3[2].z = v6;
-  v3[3].x = v7;
-  v3[3].y = v10;
-  v3[3].z = v12;
-  v3[4].y = v8;
-  v3[4].z = v6;
-  v3[4].x = v11;
-  v3[5].y = v8;
-  v3[5].x = v11;
-  v3[5].z = v12;
-  v3[6].y = v10;
-  v3[6].z = v6;
-  v3[6].x = v11;
-  v3[7].y = v10;
-  v3[7].x = v11;
-  v3[7].z = v12;
+  verts->x = v7;
+  verts->y = v8;
+  verts->z = v6;
+  verts[1].x = v7;
+  verts[1].y = v8;
+  verts[1].z = v12;
+  verts[2].y = v10;
+  verts[2].x = v7;
+  verts[2].z = v6;
+  verts[3].x = v7;
+  verts[3].y = v10;
+  verts[3].z = v12;
+  verts[4].y = v8;
+  verts[4].z = v6;
+  verts[4].x = v11;
+  verts[5].y = v8;
+  verts[5].x = v11;
+  verts[5].z = v12;
+  verts[6].y = v10;
+  verts[6].z = v6;
+  verts[6].x = v11;
+  verts[7].y = v10;
+  verts[7].x = v11;
+  verts[7].z = v12;
 }
 
 // File Line: 223
 // RVA: 0x3C2D70
-UFG::qVector3 *__fastcall UFG::CameraSubject::GetExtentInDirection(UFG::CameraSubject *this, UFG::qVector3 *result, UFG::qVector3 *world_direction, UFG::qVector3 *local_corners)
+UFG::qVector3 *__fastcall UFG::CameraSubject::GetExtentInDirection(
+        UFG::CameraSubject *this,
+        UFG::qVector3 *result,
+        UFG::qVector3 *world_direction,
+        UFG::qVector3 *local_corners)
 {
-  signed int v4; // eax
-  UFG::CameraSubject *v5; // r10
+  int v4; // eax
   float v6; // xmm7_4
   float v7; // xmm5_4
   float v8; // xmm6_4
   float v9; // xmm2_4
   __int64 v10; // rcx
   UFG::qVector3 *v11; // rax
-  float v12; // xmm4_4
-  float v13; // xmm6_4
-  float v14; // xmm2_4
+  float x; // xmm0_4
+  float z; // xmm1_4
+  float v14; // xmm6_4
   float v15; // xmm2_4
+  float v16; // xmm2_4
 
   v4 = 0;
-  v5 = this;
   v6 = (float)((float)((float)(world_direction->y * this->mWorldLocal.v1.x)
                      + (float)(world_direction->x * this->mWorldLocal.v0.x))
              + (float)(world_direction->z * this->mWorldLocal.v2.x))
@@ -415,16 +402,17 @@ UFG::qVector3 *__fastcall UFG::CameraSubject::GetExtentInDirection(UFG::CameraSu
     v4 = 7;
   v10 = v4;
   v11 = result;
-  v12 = local_corners[v10].z;
-  v13 = (float)(local_corners[v10].y * v5->mLocalWorld.v1.z) + (float)(local_corners[v10].x * v5->mLocalWorld.v0.z);
-  v14 = (float)(local_corners[v10].y * v5->mLocalWorld.v1.y) + (float)(local_corners[v10].x * v5->mLocalWorld.v0.y);
-  result->x = (float)((float)((float)(local_corners[v10].y * v5->mLocalWorld.v1.x)
-                            + (float)(local_corners[v10].x * v5->mLocalWorld.v0.x))
-                    + (float)(local_corners[v10].z * v5->mLocalWorld.v2.x))
-            + v5->mLocalWorld.v3.x;
-  v15 = (float)(v14 + (float)(v12 * v5->mLocalWorld.v2.y)) + v5->mLocalWorld.v3.y;
-  result->z = (float)(v13 + (float)(v12 * v5->mLocalWorld.v2.z)) + v5->mLocalWorld.v3.z;
-  result->y = v15;
+  x = local_corners[v10].x;
+  z = local_corners[v10].z;
+  v14 = (float)(local_corners[v10].y * this->mLocalWorld.v1.z) + (float)(x * this->mLocalWorld.v0.z);
+  v15 = (float)(local_corners[v10].y * this->mLocalWorld.v1.y) + (float)(x * this->mLocalWorld.v0.y);
+  result->x = (float)((float)((float)(local_corners[v10].y * this->mLocalWorld.v1.x)
+                            + (float)(x * this->mLocalWorld.v0.x))
+                    + (float)(z * this->mLocalWorld.v2.x))
+            + this->mLocalWorld.v3.x;
+  v16 = (float)(v15 + (float)(z * this->mLocalWorld.v2.y)) + this->mLocalWorld.v3.y;
+  result->z = (float)(v14 + (float)(z * this->mLocalWorld.v2.z)) + this->mLocalWorld.v3.z;
+  result->y = v16;
   return v11;
-}->mLocalW
+}is->mLocalWorld.v2.z)) + this->mLocalWor
 

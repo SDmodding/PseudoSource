@@ -3,38 +3,46 @@
 void UFG::TSUI_HUD_PerkObjective::BindAtomics(void)
 {
   SSClass *v0; // rbx
+  ASymbol rebind; // [rsp+20h] [rbp-18h]
+  ASymbol rebinda; // [rsp+20h] [rbp-18h]
+  ASymbol rebindb; // [rsp+20h] [rbp-18h]
+  ASymbol rebindc; // [rsp+20h] [rbp-18h]
 
+  LOBYTE(rebind.i_uid) = 0;
   v0 = SSBrain::get_class("PerkObjective");
-  SSClass::register_method_func(v0, "show", UFG::TSUI_HUD_PerkObjective::MthdC_show, 1, 0);
-  SSClass::register_method_func(v0, "hide", UFG::TSUI_HUD_PerkObjective::MthdC_hide, 1, 0);
-  SSClass::register_method_func(v0, "update", UFG::TSUI_HUD_PerkObjective::MthdC_update, 1, 0);
-  SSClass::register_method_func(v0, "set_success", UFG::TSUI_HUD_PerkObjective::MthdC_set_success, 1, 0);
+  SSClass::register_method_func(v0, "show", UFG::TSUI_HUD_PerkObjective::MthdC_show, 1, rebind);
+  LOBYTE(rebinda.i_uid) = 0;
+  SSClass::register_method_func(v0, "hide", UFG::TSUI_HUD_PerkObjective::MthdC_hide, 1, rebinda);
+  LOBYTE(rebindb.i_uid) = 0;
+  SSClass::register_method_func(v0, "update", UFG::TSUI_HUD_PerkObjective::MthdC_update, 1, rebindb);
+  LOBYTE(rebindc.i_uid) = 0;
+  SSClass::register_method_func(v0, "set_success", UFG::TSUI_HUD_PerkObjective::MthdC_set_success, 1, rebindc);
 }
 
 // File Line: 45
 // RVA: 0x4EFB60
 void __fastcall UFG::TSUI_HUD_PerkObjective::MthdC_show(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSData **v2; // rdx
+  SSData **i_array_p; // rdx
   UFG::SecondaryObjective::eID v3; // edi
-  SSInstance *v4; // r14
-  unsigned int v5; // esi
+  SSInstance *i_data_p; // r14
+  unsigned int i_user_data; // esi
   unsigned int maxProgress; // ebx
   UFG::ProgressionTracker *v7; // rax
 
-  v2 = pScope->i_data.i_array_p;
-  v3 = 0;
-  v4 = v2[1]->i_data_p;
-  v5 = v2[2]->i_data_p->i_user_data;
-  maxProgress = v2[3]->i_data_p->i_user_data;
-  if ( LODWORD((*v2)->i_data_p->i_user_data) == qSymbol_Triad_15.mUID )
-    v3 = 1;
+  i_array_p = pScope->i_data.i_array_p;
+  v3 = ID_COP_OBJECTIVE;
+  i_data_p = i_array_p[1]->i_data_p;
+  i_user_data = i_array_p[2]->i_data_p->i_user_data;
+  maxProgress = i_array_p[3]->i_data_p->i_user_data;
+  if ( LODWORD((*i_array_p)->i_data_p->i_user_data) == qSymbol_Triad_15.mUID )
+    v3 = ID_TRIAD_OBJECTIVE;
   v7 = UFG::ProgressionTracker::Instance();
   UFG::SecondaryObjectiveTracker::AddObjective(
     &v7->mSecondaryObjectiveTracker,
     v3,
-    *(const char **)v4->i_user_data,
-    v5,
+    *(const char **)i_data_p->i_user_data,
+    i_user_data,
     maxProgress);
 }
 
@@ -42,12 +50,10 @@ void __fastcall UFG::TSUI_HUD_PerkObjective::MthdC_show(SSInvokedMethod *pScope,
 // RVA: 0x4E8E30
 void __fastcall UFG::TSUI_HUD_PerkObjective::MthdC_hide(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  UFG::SecondaryObjective::eID v2; // ebx
+  int v2; // ebx
   UFG::ProgressionTracker *v3; // rax
 
-  v2 = 0;
-  if ( LODWORD((*pScope->i_data.i_array_p)->i_data_p->i_user_data) == qSymbol_Triad_15.mUID )
-    v2 = 1;
+  v2 = LODWORD((*pScope->i_data.i_array_p)->i_data_p->i_user_data) == qSymbol_Triad_15.mUID;
   v3 = UFG::ProgressionTracker::Instance();
   UFG::SecondaryObjectiveTracker::RemoveObjective(&v3->mSecondaryObjectiveTracker, v2);
 }
@@ -56,26 +62,26 @@ void __fastcall UFG::TSUI_HUD_PerkObjective::MthdC_hide(SSInvokedMethod *pScope,
 // RVA: 0x4F2C00
 void __fastcall UFG::TSUI_HUD_PerkObjective::MthdC_update(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSData **v2; // rdx
+  SSData **i_array_p; // rdx
   UFG::SecondaryObjective::eID v3; // edi
-  SSInstance *v4; // r14
-  unsigned int v5; // esi
+  SSInstance *i_data_p; // r14
+  unsigned int i_user_data; // esi
   unsigned int maxProgress; // ebx
   UFG::ProgressionTracker *v7; // rax
 
-  v2 = pScope->i_data.i_array_p;
-  v3 = 0;
-  v4 = v2[1]->i_data_p;
-  v5 = v2[2]->i_data_p->i_user_data;
-  maxProgress = v2[3]->i_data_p->i_user_data;
-  if ( LODWORD((*v2)->i_data_p->i_user_data) == qSymbol_Triad_15.mUID )
-    v3 = 1;
+  i_array_p = pScope->i_data.i_array_p;
+  v3 = ID_COP_OBJECTIVE;
+  i_data_p = i_array_p[1]->i_data_p;
+  i_user_data = i_array_p[2]->i_data_p->i_user_data;
+  maxProgress = i_array_p[3]->i_data_p->i_user_data;
+  if ( LODWORD((*i_array_p)->i_data_p->i_user_data) == qSymbol_Triad_15.mUID )
+    v3 = ID_TRIAD_OBJECTIVE;
   v7 = UFG::ProgressionTracker::Instance();
   UFG::SecondaryObjectiveTracker::UpdateCaption(
     &v7->mSecondaryObjectiveTracker,
     v3,
-    *(const char **)v4->i_user_data,
-    v5,
+    *(const char **)i_data_p->i_user_data,
+    i_user_data,
     maxProgress);
 }
 
@@ -83,23 +89,22 @@ void __fastcall UFG::TSUI_HUD_PerkObjective::MthdC_update(SSInvokedMethod *pScop
 // RVA: 0x4EF250
 void __fastcall UFG::TSUI_HUD_PerkObjective::MthdC_set_success(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSData **v2; // rdx
-  SSInstance *v3; // rbx
+  SSData **i_array_p; // rdx
+  SSInstance *i_data_p; // rbx
   bool v4; // di
   UFG::ProgressionTracker *v5; // rax
-  UFG::SecondaryObjective::eID v6; // edx
-  UFG::SecondaryObjective::eStatus v7; // er8
+  UFG::SecondaryObjective::eStatus v6; // r8d
 
-  v2 = pScope->i_data.i_array_p;
-  v3 = (*v2)->i_data_p;
-  v4 = v2[1]->i_data_p->i_user_data != 0;
+  i_array_p = pScope->i_data.i_array_p;
+  i_data_p = (*i_array_p)->i_data_p;
+  v4 = i_array_p[1]->i_data_p->i_user_data != 0;
   v5 = UFG::ProgressionTracker::Instance();
-  v6 = 0;
-  if ( LODWORD(v3->i_user_data) == qSymbol_Triad_15.mUID )
-    v6 = 1;
-  v7 = 3;
+  v6 = STATUS_COMPLETED;
   if ( v4 )
-    v7 = 2;
-  UFG::SecondaryObjectiveTracker::UpdateStatus(&v5->mSecondaryObjectiveTracker, v6, v7);
+    v6 = STATUS_HIGHLIGHT;
+  UFG::SecondaryObjectiveTracker::UpdateStatus(
+    &v5->mSecondaryObjectiveTracker,
+    (UFG::SecondaryObjective::eID)(LODWORD(i_data_p->i_user_data) == qSymbol_Triad_15.mUID),
+    v6);
 }
 

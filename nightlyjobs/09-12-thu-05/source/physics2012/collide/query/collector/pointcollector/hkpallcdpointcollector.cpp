@@ -2,41 +2,43 @@
 // RVA: 0xCED530
 void __fastcall hkpAllCdPointCollector::addCdPoint(hkpAllCdPointCollector *this, hkpCdPoint *event)
 {
-  hkInplaceArray<hkpRootCdPoint,8,hkContainerHeapAllocator> *v2; // rbx
-  hkpCdPoint *v3; // rdi
-  signed __int64 v4; // rdx
-  hkpCdBody *v5; // rcx
+  hkInplaceArray<hkpRootCdPoint,8,hkContainerHeapAllocator> *p_m_hits; // rbx
+  hkVector4f *p_m_position; // rdx
+  hkpCdBody *m_cdBodyA; // rcx
   hkpCdBody *i; // rax
-  hkpCdBody *v7; // rcx
+  hkpCdBody *m_cdBodyB; // rcx
   hkpCdBody *j; // rax
 
-  v2 = &this->m_hits;
-  v3 = event;
+  p_m_hits = &this->m_hits;
   if ( this->m_hits.m_size == (this->m_hits.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v2, 64);
-  v4 = (signed __int64)&v2->m_data[(signed __int64)v2->m_size++];
-  *(hkVector4f *)v4 = v3->m_contact.m_position;
-  *(hkVector4f *)(v4 + 16) = v3->m_contact.m_separatingNormal;
-  v5 = v3->m_cdBodyA;
-  for ( i = v5->m_parent; i; i = i->m_parent )
-    v5 = i;
-  *(_QWORD *)(v4 + 32) = v5;
-  *(_DWORD *)(v4 + 40) = v3->m_cdBodyA->m_shapeKey;
-  v7 = v3->m_cdBodyB;
-  for ( j = v7->m_parent; j; j = j->m_parent )
-    v7 = j;
-  *(_QWORD *)(v4 + 48) = v7;
-  *(_DWORD *)(v4 + 56) = v3->m_cdBodyB->m_shapeKey;
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&p_m_hits->m_data, 64);
+  p_m_position = &p_m_hits->m_data[(__int64)p_m_hits->m_size++].m_contact.m_position;
+  *p_m_position = event->m_contact.m_position;
+  p_m_position[1] = event->m_contact.m_separatingNormal;
+  m_cdBodyA = event->m_cdBodyA;
+  for ( i = m_cdBodyA->m_parent; i; i = i->m_parent )
+    m_cdBodyA = i;
+  p_m_position[2].m_quad.m128_u64[0] = (unsigned __int64)m_cdBodyA;
+  p_m_position[2].m_quad.m128_i32[2] = event->m_cdBodyA->m_shapeKey;
+  m_cdBodyB = event->m_cdBodyB;
+  for ( j = m_cdBodyB->m_parent; j; j = j->m_parent )
+    m_cdBodyB = j;
+  p_m_position[3].m_quad.m128_u64[0] = (unsigned __int64)m_cdBodyB;
+  p_m_position[3].m_quad.m128_i32[2] = event->m_cdBodyB->m_shapeKey;
 }
 
 // File Line: 26
 // RVA: 0xCED500
 void __fastcall hkpAllCdPointCollector::sortHits(hkpAllCdPointCollector *this)
 {
-  int v1; // er8
+  int m_size; // r8d
 
-  v1 = this->m_hits.m_size;
-  if ( v1 > 1 )
-    hkAlgorithm::quickSortRecursive<hkpRootCdPoint,hkAlgorithm::less<hkpRootCdPoint>>(this->m_hits.m_data, 0, v1 - 1, 0);
+  m_size = this->m_hits.m_size;
+  if ( m_size > 1 )
+    hkAlgorithm::quickSortRecursive<hkpRootCdPoint,hkAlgorithm::less<hkpRootCdPoint>>(
+      this->m_hits.m_data,
+      0,
+      m_size - 1,
+      0);
 }
 

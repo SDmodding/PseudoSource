@@ -28,23 +28,24 @@ hkClass *__fastcall hkpGravityGun::staticClass()
 
 // File Line: 168
 // RVA: 0xE0AED0
-void __fastcall finishLoadedObjecthkpGravityGun(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpGravityGun(hkpGravityGun *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpGravityGun::hkpGravityGun);
+  if ( p )
+    hkpGravityGun::hkpGravityGun(p, finishing);
 }
 
 // File Line: 174
 // RVA: 0xE0AEF0
-void __fastcall cleanupLoadedObjecthkpGravityGun(void *p)
+void __fastcall cleanupLoadedObjecthkpGravityGun(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 178
 // RVA: 0xE0AF00
 hkBaseObjectVtbl *__fastcall getVtablehkpGravityGun()
 {
-  hkpGravityGun v1; // [rsp+20h] [rbp-88h]
+  hkpGravityGun v1; // [rsp+20h] [rbp-88h] BYREF
 
   hkpGravityGun::hkpGravityGun(&v1, 0);
   return v1.vfptr;
@@ -61,8 +62,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpGravityGunTypeInfo__()
   hkpGravityGunTypeInfo.m_typeName = "hkpGravityGun";
   hkpGravityGunTypeInfo.m_vtable = result;
   hkpGravityGunTypeInfo.m_scopedName = "!hkpGravityGun";
-  hkpGravityGunTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpGravityGun;
-  hkpGravityGunTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpGravityGun;
+  hkpGravityGunTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpGravityGun;
+  hkpGravityGunTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpGravityGun;
   return result;
 }
 

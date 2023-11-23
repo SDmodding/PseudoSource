@@ -28,22 +28,22 @@ hkClass *__fastcall hkpKeyframedRigidMotion::staticClass()
 
 // File Line: 58
 // RVA: 0xD4FD60
-void __fastcall finishLoadedObjecthkpKeyframedRigidMotion(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpKeyframedRigidMotion(_WORD *p, int finishing)
 {
   if ( p )
   {
     *(_QWORD *)p = &hkpMotion::`vftable;
     if ( finishing )
-      *((_WORD *)p + 153) = 16256;
+      p[153] = 16256;
     *(_QWORD *)p = &hkpKeyframedRigidMotion::`vftable;
   }
 }
 
 // File Line: 64
 // RVA: 0xD4FDA0
-void __fastcall cleanupLoadedObjecthkpKeyframedRigidMotion(void *p)
+void __fastcall cleanupLoadedObjecthkpKeyframedRigidMotion(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 68
@@ -64,8 +64,8 @@ void **dynamic_initializer_for__hkpKeyframedRigidMotionTypeInfo__()
   hkpKeyframedRigidMotionTypeInfo.m_typeName = "hkpKeyframedRigidMotion";
   hkpKeyframedRigidMotionTypeInfo.m_vtable = result;
   hkpKeyframedRigidMotionTypeInfo.m_scopedName = "!hkpKeyframedRigidMotion";
-  hkpKeyframedRigidMotionTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpKeyframedRigidMotion;
-  hkpKeyframedRigidMotionTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpKeyframedRigidMotion;
+  hkpKeyframedRigidMotionTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpKeyframedRigidMotion;
+  hkpKeyframedRigidMotionTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpKeyframedRigidMotion;
   return result;
 }
 
@@ -99,22 +99,22 @@ hkClass *__fastcall hkpMaxSizeMotion::staticClass()
 
 // File Line: 122
 // RVA: 0xD4FDC0
-void __fastcall finishLoadedObjecthkpMaxSizeMotion(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpMaxSizeMotion(_WORD *p, int finishing)
 {
   if ( p )
   {
     *(_QWORD *)p = &hkpMotion::`vftable;
     if ( finishing )
-      *((_WORD *)p + 153) = 16256;
+      p[153] = 16256;
     *(_QWORD *)p = &hkpMaxSizeMotion::`vftable;
   }
 }
 
 // File Line: 128
 // RVA: 0xD4FE00
-void __fastcall cleanupLoadedObjecthkpMaxSizeMotion(void *p)
+void __fastcall cleanupLoadedObjecthkpMaxSizeMotion(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 132
@@ -135,8 +135,8 @@ void **dynamic_initializer_for__hkpMaxSizeMotionTypeInfo__()
   hkpMaxSizeMotionTypeInfo.m_typeName = "hkpMaxSizeMotion";
   hkpMaxSizeMotionTypeInfo.m_vtable = result;
   hkpMaxSizeMotionTypeInfo.m_scopedName = "!hkpMaxSizeMotion";
-  hkpMaxSizeMotionTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpMaxSizeMotion;
-  hkpMaxSizeMotionTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpMaxSizeMotion;
+  hkpMaxSizeMotionTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpMaxSizeMotion;
+  hkpMaxSizeMotionTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpMaxSizeMotion;
   return result;
 }
 

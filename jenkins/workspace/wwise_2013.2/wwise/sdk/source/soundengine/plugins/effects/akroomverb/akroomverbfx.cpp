@@ -4,7 +4,7 @@ void __fastcall CreateRoomVerbFX(AK::IAkPluginMemAlloc *in_pAllocator)
 {
   CAkRoomVerbFX *v1; // rax
 
-  v1 = (CAkRoomVerbFX *)in_pAllocator->vfptr->Malloc(in_pAllocator, 496ui64);
+  v1 = (CAkRoomVerbFX *)in_pAllocator->vfptr->Malloc(in_pAllocator, 496i64);
   if ( v1 )
     CAkRoomVerbFX::CAkRoomVerbFX(v1);
 }
@@ -13,27 +13,25 @@ void __fastcall CreateRoomVerbFX(AK::IAkPluginMemAlloc *in_pAllocator)
 // RVA: 0xAE10A0
 void __fastcall CAkRoomVerbFX::CAkRoomVerbFX(CAkRoomVerbFX *this)
 {
-  CAkRoomVerbFX *v1; // rbx
-  ReverbState *v2; // rcx
+  ReverbState *p_m_Reverb; // rcx
 
-  v1 = this;
-  v2 = &this->m_Reverb;
-  *(_QWORD *)v2[-1].uTCFilterIndex = &CAkRoomVerbFX::`vftable;
-  ReverbState::ReverbState(v2);
-  v1->m_pParams = 0i64;
-  v1->m_pAllocator = 0i64;
-  v1->m_pReverbUnitsState = 0i64;
-  v1->m_pTCFiltersState = 0i64;
-  v1->m_pERUnit = 0i64;
-  memset(&v1->m_PrevRTPCParams, 0, 0x54ui64);
-  *(_QWORD *)&v1->m_PrevInvariantParams.uERPattern = 0i64;
-  *(_QWORD *)&v1->m_PrevInvariantParams.fRoomSize = 0i64;
-  *(_QWORD *)&v1->m_PrevInvariantParams.fDensity = 0i64;
-  *(_QWORD *)&v1->m_PrevInvariantParams.uNumReverbUnits = 0i64;
-  *(_QWORD *)&v1->m_PrevInvariantParams.fInputLFELevel = 0i64;
-  *(_QWORD *)&v1->m_PrevInvariantParams.eFilter1Curve = 0i64;
-  *(_QWORD *)&v1->m_PrevInvariantParams.eFilter2Curve = 0i64;
-  *(_QWORD *)&v1->m_PrevInvariantParams.eFilter3Curve = 0i64;
+  p_m_Reverb = &this->m_Reverb;
+  *(_QWORD *)p_m_Reverb[-1].uTCFilterIndex = &CAkRoomVerbFX::`vftable;
+  ReverbState::ReverbState(p_m_Reverb);
+  this->m_pParams = 0i64;
+  this->m_pAllocator = 0i64;
+  this->m_pReverbUnitsState = 0i64;
+  this->m_pTCFiltersState = 0i64;
+  this->m_pERUnit = 0i64;
+  memset(&this->m_PrevRTPCParams, 0, sizeof(this->m_PrevRTPCParams));
+  *(_QWORD *)&this->m_PrevInvariantParams.uERPattern = 0i64;
+  *(_QWORD *)&this->m_PrevInvariantParams.fRoomSize = 0i64;
+  *(_QWORD *)&this->m_PrevInvariantParams.fDensity = 0i64;
+  *(_QWORD *)&this->m_PrevInvariantParams.uNumReverbUnits = 0i64;
+  *(_QWORD *)&this->m_PrevInvariantParams.fInputLFELevel = 0i64;
+  *(_QWORD *)&this->m_PrevInvariantParams.eFilter1Curve = 0i64;
+  *(_QWORD *)&this->m_PrevInvariantParams.eFilter2Curve = 0i64;
+  *(_QWORD *)&this->m_PrevInvariantParams.eFilter3Curve = 0i64;
 }
 
 // File Line: 72
@@ -45,83 +43,84 @@ void __fastcall CAkRoomVerbFX::~CAkRoomVerbFX(CAkRoomVerbFX *this)
 
 // File Line: 82
 // RVA: 0xAE1160
-AKRESULT __fastcall CAkRoomVerbFX::Init(CAkRoomVerbFX *this, AK::IAkPluginMemAlloc *in_pAllocator, AK::IAkEffectPluginContext *in_pFXCtx, AK::IAkPluginParam *in_pParams, AkAudioFormat *in_rFormat)
+AKRESULT __fastcall CAkRoomVerbFX::Init(
+        CAkRoomVerbFX *this,
+        AK::IAkPluginMemAlloc *in_pAllocator,
+        AK::IAkEffectPluginContext *in_pFXCtx,
+        CAkRoomVerbFXParams *in_pParams,
+        AkAudioFormat *in_rFormat)
 {
-  CAkRoomVerbFX *v5; // rbx
-  AK::IAkPluginMemAlloc *v6; // rdi
-  unsigned int v7; // eax
+  unsigned int uSampleRate; // eax
   char v8; // al
-  CAkRoomVerbFXParams *v9; // rcx
+  CAkRoomVerbFXParams *m_pParams; // rcx
   char v10; // dl
   char v11; // al
   AKRESULT result; // eax
 
-  v5 = this;
-  v6 = in_pAllocator;
-  v7 = in_rFormat->uSampleRate;
-  this->m_pParams = (CAkRoomVerbFXParams *)in_pParams;
+  uSampleRate = in_rFormat->uSampleRate;
+  this->m_pParams = in_pParams;
   this->m_pAllocator = in_pAllocator;
-  this->m_Reverb.uSampleRate = v7;
-  this->m_Reverb.uNumReverbUnits = HIDWORD(in_pParams[14].vfptr);
+  this->m_Reverb.uSampleRate = uSampleRate;
+  this->m_Reverb.uNumReverbUnits = in_pParams->sInvariantParams.uNumReverbUnits;
   v8 = ((__int64 (__fastcall *)(AK::IAkEffectPluginContext *))in_pFXCtx->vfptr[1].__vecDelDtor)(in_pFXCtx);
-  v5->m_Reverb.bIsSentMode = v8;
+  this->m_Reverb.bIsSentMode = v8;
   if ( v8 )
-    v5->m_pParams->sRTPCParams.fDryLevel = 0.0;
-  v9 = v5->m_pParams;
-  v5->m_PrevRTPCParams.fDecayTime = v9->sRTPCParams.fDecayTime;
-  v5->m_PrevRTPCParams.fHFDamping = v9->sRTPCParams.fHFDamping;
-  v5->m_PrevRTPCParams.fDiffusion = v9->sRTPCParams.fDiffusion;
-  v5->m_PrevRTPCParams.fStereoWidth = v9->sRTPCParams.fStereoWidth;
-  v5->m_PrevRTPCParams.fFilter1Gain = v9->sRTPCParams.fFilter1Gain;
-  v5->m_PrevRTPCParams.fFilter1Freq = v9->sRTPCParams.fFilter1Freq;
-  v5->m_PrevRTPCParams.fFilter1Q = v9->sRTPCParams.fFilter1Q;
-  v5->m_PrevRTPCParams.fFilter2Gain = v9->sRTPCParams.fFilter2Gain;
-  v5->m_PrevRTPCParams.fFilter2Freq = v9->sRTPCParams.fFilter2Freq;
-  v5->m_PrevRTPCParams.fFilter2Q = v9->sRTPCParams.fFilter2Q;
-  v5->m_PrevRTPCParams.fFilter3Gain = v9->sRTPCParams.fFilter3Gain;
-  v5->m_PrevRTPCParams.fFilter3Freq = v9->sRTPCParams.fFilter3Freq;
-  v5->m_PrevRTPCParams.fFilter3Q = v9->sRTPCParams.fFilter3Q;
-  v5->m_PrevRTPCParams.fFrontLevel = v9->sRTPCParams.fFrontLevel;
-  v5->m_PrevRTPCParams.fRearLevel = v9->sRTPCParams.fRearLevel;
-  v5->m_PrevRTPCParams.fCenterLevel = v9->sRTPCParams.fCenterLevel;
-  v5->m_PrevRTPCParams.fLFELevel = v9->sRTPCParams.fLFELevel;
-  v5->m_PrevRTPCParams.fDryLevel = v9->sRTPCParams.fDryLevel;
-  v5->m_PrevRTPCParams.fERLevel = v9->sRTPCParams.fERLevel;
-  v5->m_PrevRTPCParams.fReverbLevel = v9->sRTPCParams.fReverbLevel;
-  *(_DWORD *)&v5->m_PrevRTPCParams.bDirty = *(_DWORD *)&v9->sRTPCParams.bDirty;
-  v10 = v9->sInvariantParams.bEnableEarlyReflections != 0 ? 2 : 0;
-  v5->m_Reverb.uNumERSignals = v10;
+    this->m_pParams->sRTPCParams.fDryLevel = 0.0;
+  m_pParams = this->m_pParams;
+  this->m_PrevRTPCParams.fDecayTime = m_pParams->sRTPCParams.fDecayTime;
+  this->m_PrevRTPCParams.fHFDamping = m_pParams->sRTPCParams.fHFDamping;
+  this->m_PrevRTPCParams.fDiffusion = m_pParams->sRTPCParams.fDiffusion;
+  this->m_PrevRTPCParams.fStereoWidth = m_pParams->sRTPCParams.fStereoWidth;
+  this->m_PrevRTPCParams.fFilter1Gain = m_pParams->sRTPCParams.fFilter1Gain;
+  this->m_PrevRTPCParams.fFilter1Freq = m_pParams->sRTPCParams.fFilter1Freq;
+  this->m_PrevRTPCParams.fFilter1Q = m_pParams->sRTPCParams.fFilter1Q;
+  this->m_PrevRTPCParams.fFilter2Gain = m_pParams->sRTPCParams.fFilter2Gain;
+  this->m_PrevRTPCParams.fFilter2Freq = m_pParams->sRTPCParams.fFilter2Freq;
+  this->m_PrevRTPCParams.fFilter2Q = m_pParams->sRTPCParams.fFilter2Q;
+  this->m_PrevRTPCParams.fFilter3Gain = m_pParams->sRTPCParams.fFilter3Gain;
+  this->m_PrevRTPCParams.fFilter3Freq = m_pParams->sRTPCParams.fFilter3Freq;
+  this->m_PrevRTPCParams.fFilter3Q = m_pParams->sRTPCParams.fFilter3Q;
+  this->m_PrevRTPCParams.fFrontLevel = m_pParams->sRTPCParams.fFrontLevel;
+  this->m_PrevRTPCParams.fRearLevel = m_pParams->sRTPCParams.fRearLevel;
+  this->m_PrevRTPCParams.fCenterLevel = m_pParams->sRTPCParams.fCenterLevel;
+  this->m_PrevRTPCParams.fLFELevel = m_pParams->sRTPCParams.fLFELevel;
+  this->m_PrevRTPCParams.fDryLevel = m_pParams->sRTPCParams.fDryLevel;
+  this->m_PrevRTPCParams.fERLevel = m_pParams->sRTPCParams.fERLevel;
+  this->m_PrevRTPCParams.fReverbLevel = m_pParams->sRTPCParams.fReverbLevel;
+  *(_DWORD *)&this->m_PrevRTPCParams.bDirty = *(_DWORD *)&m_pParams->sRTPCParams.bDirty;
+  v10 = m_pParams->sInvariantParams.bEnableEarlyReflections ? 2 : 0;
+  this->m_Reverb.uNumERSignals = v10;
   v11 = v10;
   if ( (*((_DWORD *)in_rFormat + 1) & 0x3FFFF) == 8 )
     v11 = 0;
-  v5->m_Reverb.uNumERSignals = v11;
-  CAkRoomVerbFX::SetupDCFilters(v5);
-  result = CAkRoomVerbFX::SetupToneControlFilters(v5);
-  if ( result == 1 )
+  this->m_Reverb.uNumERSignals = v11;
+  CAkRoomVerbFX::SetupDCFilters(this);
+  result = CAkRoomVerbFX::SetupToneControlFilters(this);
+  if ( result == AK_Success )
   {
-    result = CAkRoomVerbFX::SetupFDNs(v5, v6);
-    if ( result == 1 )
+    result = CAkRoomVerbFX::SetupFDNs(this, in_pAllocator);
+    if ( result == AK_Success )
     {
-      result = CAkRoomVerbFX::SetupERDelay(v5, v6);
-      if ( result == 1 )
+      result = CAkRoomVerbFX::SetupERDelay(this, in_pAllocator);
+      if ( result == AK_Success )
       {
-        result = CAkRoomVerbFX::SetupReverbDelay(v5, v6);
-        if ( result == 1 )
+        result = CAkRoomVerbFX::SetupReverbDelay(this, in_pAllocator);
+        if ( result == AK_Success )
         {
-          result = CAkRoomVerbFX::SetupERUnit(v5, v6);
-          if ( result == 1 )
+          result = CAkRoomVerbFX::SetupERUnit(this, in_pAllocator);
+          if ( result == AK_Success )
           {
-            result = CAkRoomVerbFX::SetupERFrontBackDelay(v5, v6, *((_DWORD *)in_rFormat + 1) & 0x3FFFF);
-            if ( result == 1 )
+            result = CAkRoomVerbFX::SetupERFrontBackDelay(this, in_pAllocator, *((_DWORD *)in_rFormat + 1) & 0x3FFFF);
+            if ( result == AK_Success )
             {
-              result = CAkRoomVerbFX::SetupDiffusionAPF(v5, v6);
-              if ( result == 1 )
+              result = CAkRoomVerbFX::SetupDiffusionAPF(this, in_pAllocator);
+              if ( result == AK_Success )
               {
-                v5->m_Reverb.uTailLength = (signed int)(float)((float)((float)(v5->m_pParams->sInvariantParams.fReverbDelay
-                                                                             * 0.001)
-                                                                     + v5->m_pParams->sRTPCParams.fDecayTime)
-                                                             * (float)(signed int)v5->m_Reverb.uSampleRate);
-                result = 1;
+                this->m_Reverb.uTailLength = (int)(float)((float)((float)(this->m_pParams->sInvariantParams.fReverbDelay
+                                                                        * 0.001)
+                                                                + this->m_pParams->sRTPCParams.fDecayTime)
+                                                        * (float)(int)this->m_Reverb.uSampleRate);
+                return 1;
               }
             }
           }
@@ -130,7 +129,9 @@ AKRESULT __fastcall CAkRoomVerbFX::Init(CAkRoomVerbFX *this, AK::IAkPluginMemAll
     }
   }
   return result;
-}
+}    }
+            }
+      
 
 // File Line: 171
 // RVA: 0xAE17C0
@@ -138,61 +139,59 @@ void __fastcall CAkRoomVerbFX::SetupDCFilters(CAkRoomVerbFX *this)
 {
   this->m_Reverb.DCFilter[0].m_fA1 = 1.0
                                    - (float)((float)(this->m_pParams->sAlgoTunings.fDCFilterCutFreq * 6.2831855)
-                                           / (float)(signed int)this->m_Reverb.uSampleRate);
+                                           / (float)(int)this->m_Reverb.uSampleRate);
   this->m_Reverb.DCFilter[1].m_fA1 = 1.0
                                    - (float)((float)(this->m_pParams->sAlgoTunings.fDCFilterCutFreq * 6.2831855)
-                                           / (float)(signed int)this->m_Reverb.uSampleRate);
+                                           / (float)(int)this->m_Reverb.uSampleRate);
   this->m_Reverb.DCFilter[2].m_fA1 = 1.0
                                    - (float)((float)(this->m_pParams->sAlgoTunings.fDCFilterCutFreq * 6.2831855)
-                                           / (float)(signed int)this->m_Reverb.uSampleRate);
+                                           / (float)(int)this->m_Reverb.uSampleRate);
   this->m_Reverb.DCFilter[3].m_fA1 = 1.0
                                    - (float)((float)(this->m_pParams->sAlgoTunings.fDCFilterCutFreq * 6.2831855)
-                                           / (float)(signed int)this->m_Reverb.uSampleRate);
+                                           / (float)(int)this->m_Reverb.uSampleRate);
   this->m_Reverb.DCFilter[4].m_fA1 = 1.0
                                    - (float)((float)(this->m_pParams->sAlgoTunings.fDCFilterCutFreq * 6.2831855)
-                                           / (float)(signed int)this->m_Reverb.uSampleRate);
+                                           / (float)(int)this->m_Reverb.uSampleRate);
   this->m_Reverb.DCFilter[5].m_fA1 = 1.0
                                    - (float)((float)(this->m_pParams->sAlgoTunings.fDCFilterCutFreq * 6.2831855)
-                                           / (float)(signed int)this->m_Reverb.uSampleRate);
+                                           / (float)(int)this->m_Reverb.uSampleRate);
 }
 
 // File Line: 180
 // RVA: 0xAE1910
 void __fastcall CAkRoomVerbFX::ComputeTCCoefs1(CAkRoomVerbFX *this)
 {
-  CAkRoomVerbFXParams *v1; // rdx
-  CAkRoomVerbFX *v2; // rbx
-  FilterInsertType v3; // eax
+  CAkRoomVerbFXParams *m_pParams; // rdx
+  FilterInsertType eFilter1Pos; // eax
   CAkRoomVerbFXParams *v4; // rdx
 
-  v1 = this->m_pParams;
-  v2 = this;
-  if ( v1->sInvariantParams.bEnableToneControls )
+  m_pParams = this->m_pParams;
+  if ( m_pParams->sInvariantParams.bEnableToneControls )
   {
-    v3 = v1->sInvariantParams.eFilter1Pos;
-    if ( v3 )
+    eFilter1Pos = m_pParams->sInvariantParams.eFilter1Pos;
+    if ( eFilter1Pos )
     {
-      if ( v3 != 1 || this->m_Reverb.uNumERSignals )
+      if ( eFilter1Pos != FILTERINSERTTYPE_ERONLY || this->m_Reverb.uNumERSignals )
       {
         DSP::BiquadFilter<DSP::SingleChannelPolicy>::ComputeCoefs(
           &this->m_pTCFiltersState[(unsigned __int8)this->m_Reverb.uTCFilterIndex[1]].Filter,
-          (DSP::BiquadFilter<DSP::SingleChannelPolicy>::FilterType)v1->sInvariantParams.eFilter1Curve,
-          (float)(signed int)this->m_Reverb.uSampleRate,
-          v1->sRTPCParams.fFilter1Freq,
-          v1->sRTPCParams.fFilter1Gain,
-          v1->sRTPCParams.fFilter1Q);
-        v2->m_pTCFiltersState[(unsigned __int8)v2->m_Reverb.uTCFilterIndex[1]].FilterPos = v2->m_pParams->sInvariantParams.eFilter1Pos;
-        v4 = v2->m_pParams;
-        if ( v4->sInvariantParams.eFilter1Pos == 1 && v2->m_Reverb.uNumERSignals == 2 )
+          (DSP::BiquadFilter<DSP::SingleChannelPolicy>::FilterType)m_pParams->sInvariantParams.eFilter1Curve,
+          (float)(int)this->m_Reverb.uSampleRate,
+          m_pParams->sRTPCParams.fFilter1Freq,
+          m_pParams->sRTPCParams.fFilter1Gain,
+          m_pParams->sRTPCParams.fFilter1Q);
+        this->m_pTCFiltersState[(unsigned __int8)this->m_Reverb.uTCFilterIndex[1]].FilterPos = this->m_pParams->sInvariantParams.eFilter1Pos;
+        v4 = this->m_pParams;
+        if ( v4->sInvariantParams.eFilter1Pos == FILTERINSERTTYPE_ERONLY && this->m_Reverb.uNumERSignals == 2 )
         {
           DSP::BiquadFilter<DSP::SingleChannelPolicy>::ComputeCoefs(
-            &v2->m_pTCFiltersState[(unsigned __int8)v2->m_Reverb.uTCFilterIndex[1] + 1].Filter,
+            &this->m_pTCFiltersState[(unsigned __int8)this->m_Reverb.uTCFilterIndex[1] + 1].Filter,
             (DSP::BiquadFilter<DSP::SingleChannelPolicy>::FilterType)v4->sInvariantParams.eFilter1Curve,
-            (float)(signed int)v2->m_Reverb.uSampleRate,
+            (float)(int)this->m_Reverb.uSampleRate,
             v4->sRTPCParams.fFilter1Freq,
             v4->sRTPCParams.fFilter1Gain,
             v4->sRTPCParams.fFilter1Q);
-          v2->m_pTCFiltersState[(unsigned __int8)v2->m_Reverb.uTCFilterIndex[1] + 1].FilterPos = v2->m_pParams->sInvariantParams.eFilter1Pos;
+          this->m_pTCFiltersState[(unsigned __int8)this->m_Reverb.uTCFilterIndex[1] + 1].FilterPos = this->m_pParams->sInvariantParams.eFilter1Pos;
         }
       }
     }
@@ -203,39 +202,37 @@ void __fastcall CAkRoomVerbFX::ComputeTCCoefs1(CAkRoomVerbFX *this)
 // RVA: 0xAE1A70
 void __fastcall CAkRoomVerbFX::ComputeTCCoefs2(CAkRoomVerbFX *this)
 {
-  CAkRoomVerbFXParams *v1; // rdx
-  CAkRoomVerbFX *v2; // rbx
-  FilterInsertType v3; // eax
+  CAkRoomVerbFXParams *m_pParams; // rdx
+  FilterInsertType eFilter2Pos; // eax
   CAkRoomVerbFXParams *v4; // rdx
 
-  v1 = this->m_pParams;
-  v2 = this;
-  if ( v1->sInvariantParams.bEnableToneControls )
+  m_pParams = this->m_pParams;
+  if ( m_pParams->sInvariantParams.bEnableToneControls )
   {
-    v3 = v1->sInvariantParams.eFilter2Pos;
-    if ( v3 )
+    eFilter2Pos = m_pParams->sInvariantParams.eFilter2Pos;
+    if ( eFilter2Pos )
     {
-      if ( v3 != 1 || this->m_Reverb.uNumERSignals )
+      if ( eFilter2Pos != FILTERINSERTTYPE_ERONLY || this->m_Reverb.uNumERSignals )
       {
         DSP::BiquadFilter<DSP::SingleChannelPolicy>::ComputeCoefs(
           &this->m_pTCFiltersState[(unsigned __int8)this->m_Reverb.uTCFilterIndex[2]].Filter,
-          (DSP::BiquadFilter<DSP::SingleChannelPolicy>::FilterType)v1->sInvariantParams.eFilter2Curve,
-          (float)(signed int)this->m_Reverb.uSampleRate,
-          v1->sRTPCParams.fFilter2Freq,
-          v1->sRTPCParams.fFilter2Gain,
-          v1->sRTPCParams.fFilter2Q);
-        v2->m_pTCFiltersState[(unsigned __int8)v2->m_Reverb.uTCFilterIndex[2]].FilterPos = v2->m_pParams->sInvariantParams.eFilter2Pos;
-        v4 = v2->m_pParams;
-        if ( v4->sInvariantParams.eFilter2Pos == 1 && v2->m_Reverb.uNumERSignals == 2 )
+          (DSP::BiquadFilter<DSP::SingleChannelPolicy>::FilterType)m_pParams->sInvariantParams.eFilter2Curve,
+          (float)(int)this->m_Reverb.uSampleRate,
+          m_pParams->sRTPCParams.fFilter2Freq,
+          m_pParams->sRTPCParams.fFilter2Gain,
+          m_pParams->sRTPCParams.fFilter2Q);
+        this->m_pTCFiltersState[(unsigned __int8)this->m_Reverb.uTCFilterIndex[2]].FilterPos = this->m_pParams->sInvariantParams.eFilter2Pos;
+        v4 = this->m_pParams;
+        if ( v4->sInvariantParams.eFilter2Pos == FILTERINSERTTYPE_ERONLY && this->m_Reverb.uNumERSignals == 2 )
         {
           DSP::BiquadFilter<DSP::SingleChannelPolicy>::ComputeCoefs(
-            &v2->m_pTCFiltersState[(unsigned __int8)v2->m_Reverb.uTCFilterIndex[2] + 1].Filter,
+            &this->m_pTCFiltersState[(unsigned __int8)this->m_Reverb.uTCFilterIndex[2] + 1].Filter,
             (DSP::BiquadFilter<DSP::SingleChannelPolicy>::FilterType)v4->sInvariantParams.eFilter2Curve,
-            (float)(signed int)v2->m_Reverb.uSampleRate,
+            (float)(int)this->m_Reverb.uSampleRate,
             v4->sRTPCParams.fFilter2Freq,
             v4->sRTPCParams.fFilter2Gain,
             v4->sRTPCParams.fFilter2Q);
-          v2->m_pTCFiltersState[(unsigned __int8)v2->m_Reverb.uTCFilterIndex[2] + 1].FilterPos = v2->m_pParams->sInvariantParams.eFilter2Pos;
+          this->m_pTCFiltersState[(unsigned __int8)this->m_Reverb.uTCFilterIndex[2] + 1].FilterPos = this->m_pParams->sInvariantParams.eFilter2Pos;
         }
       }
     }
@@ -246,39 +243,37 @@ void __fastcall CAkRoomVerbFX::ComputeTCCoefs2(CAkRoomVerbFX *this)
 // RVA: 0xAE1BD0
 void __fastcall CAkRoomVerbFX::ComputeTCCoefs3(CAkRoomVerbFX *this)
 {
-  CAkRoomVerbFXParams *v1; // rdx
-  CAkRoomVerbFX *v2; // rbx
-  FilterInsertType v3; // eax
+  CAkRoomVerbFXParams *m_pParams; // rdx
+  FilterInsertType eFilter3Pos; // eax
   CAkRoomVerbFXParams *v4; // rdx
 
-  v1 = this->m_pParams;
-  v2 = this;
-  if ( v1->sInvariantParams.bEnableToneControls )
+  m_pParams = this->m_pParams;
+  if ( m_pParams->sInvariantParams.bEnableToneControls )
   {
-    v3 = v1->sInvariantParams.eFilter3Pos;
-    if ( v3 )
+    eFilter3Pos = m_pParams->sInvariantParams.eFilter3Pos;
+    if ( eFilter3Pos )
     {
-      if ( v3 != 1 || this->m_Reverb.uNumERSignals )
+      if ( eFilter3Pos != FILTERINSERTTYPE_ERONLY || this->m_Reverb.uNumERSignals )
       {
         DSP::BiquadFilter<DSP::SingleChannelPolicy>::ComputeCoefs(
           &this->m_pTCFiltersState[(unsigned __int8)this->m_Reverb.uTCFilterIndex[3]].Filter,
-          (DSP::BiquadFilter<DSP::SingleChannelPolicy>::FilterType)v1->sInvariantParams.eFilter3Curve,
-          (float)(signed int)this->m_Reverb.uSampleRate,
-          v1->sRTPCParams.fFilter3Freq,
-          v1->sRTPCParams.fFilter3Gain,
-          v1->sRTPCParams.fFilter3Q);
-        v2->m_pTCFiltersState[(unsigned __int8)v2->m_Reverb.uTCFilterIndex[3]].FilterPos = v2->m_pParams->sInvariantParams.eFilter3Pos;
-        v4 = v2->m_pParams;
-        if ( v4->sInvariantParams.eFilter3Pos == 1 && v2->m_Reverb.uNumERSignals == 2 )
+          (DSP::BiquadFilter<DSP::SingleChannelPolicy>::FilterType)m_pParams->sInvariantParams.eFilter3Curve,
+          (float)(int)this->m_Reverb.uSampleRate,
+          m_pParams->sRTPCParams.fFilter3Freq,
+          m_pParams->sRTPCParams.fFilter3Gain,
+          m_pParams->sRTPCParams.fFilter3Q);
+        this->m_pTCFiltersState[(unsigned __int8)this->m_Reverb.uTCFilterIndex[3]].FilterPos = this->m_pParams->sInvariantParams.eFilter3Pos;
+        v4 = this->m_pParams;
+        if ( v4->sInvariantParams.eFilter3Pos == FILTERINSERTTYPE_ERONLY && this->m_Reverb.uNumERSignals == 2 )
         {
           DSP::BiquadFilter<DSP::SingleChannelPolicy>::ComputeCoefs(
-            &v2->m_pTCFiltersState[(unsigned __int8)v2->m_Reverb.uTCFilterIndex[3] + 1].Filter,
+            &this->m_pTCFiltersState[(unsigned __int8)this->m_Reverb.uTCFilterIndex[3] + 1].Filter,
             (DSP::BiquadFilter<DSP::SingleChannelPolicy>::FilterType)v4->sInvariantParams.eFilter3Curve,
-            (float)(signed int)v2->m_Reverb.uSampleRate,
+            (float)(int)this->m_Reverb.uSampleRate,
             v4->sRTPCParams.fFilter3Freq,
             v4->sRTPCParams.fFilter3Gain,
             v4->sRTPCParams.fFilter3Q);
-          v2->m_pTCFiltersState[(unsigned __int8)v2->m_Reverb.uTCFilterIndex[3] + 1].FilterPos = v2->m_pParams->sInvariantParams.eFilter3Pos;
+          this->m_pTCFiltersState[(unsigned __int8)this->m_Reverb.uTCFilterIndex[3] + 1].FilterPos = this->m_pParams->sInvariantParams.eFilter3Pos;
         }
       }
     }
@@ -287,84 +282,79 @@ void __fastcall CAkRoomVerbFX::ComputeTCCoefs3(CAkRoomVerbFX *this)
 
 // File Line: 255
 // RVA: 0xAE71D0
-signed __int64 __fastcall CAkRoomVerbFX::SetupToneControlFilters(CAkRoomVerbFX *this)
+__int64 __fastcall CAkRoomVerbFX::SetupToneControlFilters(CAkRoomVerbFX *this)
 {
-  CAkRoomVerbFXParams *v1; // rax
-  CAkRoomVerbFX *v2; // rbx
-  unsigned int v3; // edi
-  FilterInsertType v4; // eax
-  FilterInsertType v5; // eax
-  FilterInsertType v6; // eax
+  CAkRoomVerbFXParams *m_pParams; // rax
+  unsigned int uNumERSignals; // edi
+  FilterInsertType eFilter1Pos; // eax
+  FilterInsertType eFilter2Pos; // eax
+  FilterInsertType eFilter3Pos; // eax
   __int64 v7; // rsi
   ToneControlsState *v8; // rax
   __int64 v10; // rdi
   ToneControlsState *v11; // rcx
 
-  v1 = this->m_pParams;
-  v2 = this;
-  v3 = 0;
-  if ( v1->sInvariantParams.bEnableToneControls )
+  m_pParams = this->m_pParams;
+  uNumERSignals = 0;
+  if ( m_pParams->sInvariantParams.bEnableToneControls )
   {
     this->m_Reverb.uTCFilterIndex[1] = 0;
-    v4 = v1->sInvariantParams.eFilter1Pos;
-    if ( v4 == 1 )
+    eFilter1Pos = m_pParams->sInvariantParams.eFilter1Pos;
+    if ( eFilter1Pos == FILTERINSERTTYPE_ERONLY )
     {
-      v3 = (unsigned __int8)this->m_Reverb.uNumERSignals;
+      uNumERSignals = (unsigned __int8)this->m_Reverb.uNumERSignals;
     }
-    else if ( (unsigned int)(v4 - 2) <= 1 )
+    else if ( (unsigned int)(eFilter1Pos - 2) <= 1 )
     {
-      v3 = 1;
+      uNumERSignals = 1;
     }
-    this->m_Reverb.uTCFilterIndex[2] = v3;
-    v5 = this->m_pParams->sInvariantParams.eFilter2Pos;
-    if ( v5 == 1 )
+    this->m_Reverb.uTCFilterIndex[2] = uNumERSignals;
+    eFilter2Pos = this->m_pParams->sInvariantParams.eFilter2Pos;
+    if ( eFilter2Pos == FILTERINSERTTYPE_ERONLY )
     {
-      v3 += (unsigned __int8)this->m_Reverb.uNumERSignals;
+      uNumERSignals += (unsigned __int8)this->m_Reverb.uNumERSignals;
     }
-    else if ( (unsigned int)(v5 - 2) <= 1 )
+    else if ( (unsigned int)(eFilter2Pos - 2) <= 1 )
     {
-      ++v3;
+      ++uNumERSignals;
     }
-    this->m_Reverb.uTCFilterIndex[3] = v3;
-    v6 = this->m_pParams->sInvariantParams.eFilter3Pos;
-    if ( v6 == 1 )
+    this->m_Reverb.uTCFilterIndex[3] = uNumERSignals;
+    eFilter3Pos = this->m_pParams->sInvariantParams.eFilter3Pos;
+    if ( eFilter3Pos == FILTERINSERTTYPE_ERONLY )
     {
-      v3 += (unsigned __int8)this->m_Reverb.uNumERSignals;
+      uNumERSignals += (unsigned __int8)this->m_Reverb.uNumERSignals;
     }
-    else if ( (unsigned int)(v6 - 2) <= 1 )
+    else if ( (unsigned int)(eFilter3Pos - 2) <= 1 )
     {
-      ++v3;
+      ++uNumERSignals;
     }
   }
-  this->m_Reverb.uTCFilterIndex[0] = v3;
-  if ( v3 )
+  this->m_Reverb.uTCFilterIndex[0] = uNumERSignals;
+  if ( uNumERSignals )
   {
-    v7 = v3;
-    v8 = (ToneControlsState *)this->m_pAllocator->vfptr->Malloc(this->m_pAllocator, 192i64 * v3);
-    v2->m_pTCFiltersState = v8;
+    v7 = uNumERSignals;
+    v8 = (ToneControlsState *)this->m_pAllocator->vfptr->Malloc(this->m_pAllocator, 192i64 * uNumERSignals);
+    this->m_pTCFiltersState = v8;
     if ( !v8 )
       return 52i64;
-    if ( v3 )
+    v10 = 0i64;
+    do
     {
-      v10 = 0i64;
-      do
+      v11 = &this->m_pTCFiltersState[v10];
+      if ( v11 )
       {
-        v11 = &v2->m_pTCFiltersState[v10];
-        if ( v11 )
-        {
-          *(_QWORD *)&v11->Filter.m_Memories.m_Memories.fFFwd1 = 0i64;
-          *(_QWORD *)&v11->Filter.m_Memories.m_Memories.fFFbk1 = 0i64;
-          DSP::BiquadFilter<DSP::SingleChannelPolicy>::SetCoefs(&v11->Filter, 1.0, 0.0, 0.0, 0.0, 0.0);
-        }
-        ++v10;
-        --v7;
+        *(_QWORD *)&v11->Filter.m_Memories.m_Memories.fFFwd1 = 0i64;
+        *(_QWORD *)&v11->Filter.m_Memories.m_Memories.fFFbk1 = 0i64;
+        DSP::BiquadFilter<DSP::SingleChannelPolicy>::SetCoefs(&v11->Filter, 1.0, 0.0, 0.0, 0.0, 0.0);
       }
-      while ( v7 );
+      ++v10;
+      --v7;
     }
+    while ( v7 );
   }
-  CAkRoomVerbFX::ComputeTCCoefs1(v2);
-  CAkRoomVerbFX::ComputeTCCoefs2(v2);
-  CAkRoomVerbFX::ComputeTCCoefs3(v2);
+  CAkRoomVerbFX::ComputeTCCoefs1(this);
+  CAkRoomVerbFX::ComputeTCCoefs2(this);
+  CAkRoomVerbFX::ComputeTCCoefs3(this);
   return 1i64;
 }
 
@@ -372,34 +362,27 @@ signed __int64 __fastcall CAkRoomVerbFX::SetupToneControlFilters(CAkRoomVerbFX *
 // RVA: 0xAE6BC0
 AKRESULT __fastcall CAkRoomVerbFX::SetupERDelay(CAkRoomVerbFX *this, AK::IAkPluginMemAlloc *in_pAllocator)
 {
-  AK::IAkPluginMemAlloc *v2; // rsi
-  CAkRoomVerbFX *v3; // rdi
-  CAkRoomVerbFXParams *v4; // rbx
+  CAkRoomVerbFXParams *m_pParams; // rbx
   float v5; // xmm0_4
-  __int64 v6; // rax
+  __int64 uERPattern; // rax
   float v7; // xmm1_4
   float v8; // xmm0_4
   unsigned int v9; // eax
-  AKRESULT result; // eax
 
-  v2 = in_pAllocator;
-  v3 = this;
   if ( !this->m_Reverb.uNumERSignals )
-    goto LABEL_9;
-  v4 = this->m_pParams;
-  v5 = powf(2.0, v4->sInvariantParams.fRoomSize * 0.0099999998);
-  v6 = v4->sInvariantParams.uERPattern;
-  v7 = v5 * g_ERPatternsList[v6].TapInfoLeft->fTapTime;
-  v8 = v5 * g_ERPatternsList[v6].TapInfoRight->fTapTime;
+    return 1;
+  m_pParams = this->m_pParams;
+  v5 = powf(2.0, m_pParams->sInvariantParams.fRoomSize * 0.0099999998);
+  uERPattern = m_pParams->sInvariantParams.uERPattern;
+  v7 = v5 * g_ERPatternsList[uERPattern].TapInfoLeft->fTapTime;
+  v8 = v5 * g_ERPatternsList[uERPattern].TapInfoRight->fTapTime;
   if ( v7 >= v8 )
     v7 = v8;
-  v9 = (signed int)(float)((float)(signed int)v3->m_Reverb.uSampleRate * (float)(v7 * 0.001));
+  v9 = (int)(float)((float)(int)this->m_Reverb.uSampleRate * (float)(v7 * 0.001));
   if ( v9 )
-    result = DSP::DelayLine::Init(&v3->m_Reverb.ERDelay, v2, v9);
+    return DSP::DelayLine::Init(&this->m_Reverb.ERDelay, in_pAllocator, v9);
   else
-LABEL_9:
-    result = 1;
-  return result;
+    return 1;
 }
 
 // File Line: 341
@@ -407,59 +390,56 @@ LABEL_9:
 AKRESULT __fastcall CAkRoomVerbFX::SetupReverbDelay(CAkRoomVerbFX *this, AK::IAkPluginMemAlloc *in_pAllocator)
 {
   unsigned int v2; // eax
-  AKRESULT result; // eax
 
-  v2 = (signed int)(float)((float)(this->m_pParams->sInvariantParams.fReverbDelay * 0.001)
-                         * (float)(signed int)this->m_Reverb.uSampleRate);
+  v2 = (int)(float)((float)(this->m_pParams->sInvariantParams.fReverbDelay * 0.001)
+                  * (float)(int)this->m_Reverb.uSampleRate);
   if ( v2 )
-    result = DSP::DelayLine::Init(&this->m_Reverb.ReverbDelay, in_pAllocator, v2);
+    return DSP::DelayLine::Init(&this->m_Reverb.ReverbDelay, in_pAllocator, v2);
   else
-    result = 1;
-  return result;
+    return 1;
 }
 
 // File Line: 352
 // RVA: 0xAE6C90
-AKRESULT __fastcall CAkRoomVerbFX::SetupERFrontBackDelay(CAkRoomVerbFX *this, AK::IAkPluginMemAlloc *in_pAllocator, unsigned int in_uChannelMask)
+AKRESULT __fastcall CAkRoomVerbFX::SetupERFrontBackDelay(
+        CAkRoomVerbFX *this,
+        AK::IAkPluginMemAlloc *in_pAllocator,
+        char in_uChannelMask)
 {
-  char v3; // di
-  AK::IAkPluginMemAlloc *v4; // rbp
-  CAkRoomVerbFX *v5; // rbx
   unsigned int v6; // esi
   AKRESULT result; // eax
 
-  v3 = in_uChannelMask;
-  v4 = in_pAllocator;
-  v5 = this;
-  if ( !this->m_Reverb.uNumERSignals
-    || (v6 = (signed int)(float)((float)(this->m_pParams->sInvariantParams.fERFrontBackDelay * 0.001)
-                               * (float)(signed int)this->m_Reverb.uSampleRate)) == 0
-    || (!(in_uChannelMask & 0x10)
-     || (result = DSP::DelayLine::Init(this->m_Reverb.ERFrontBackDelay, in_pAllocator, v6), result == 1))
-    && (!(v3 & 0x20) || (result = DSP::DelayLine::Init(&v5->m_Reverb.ERFrontBackDelay[1], v4, v6), result == 1)) )
+  if ( !this->m_Reverb.uNumERSignals )
+    return 1;
+  v6 = (int)(float)((float)(this->m_pParams->sInvariantParams.fERFrontBackDelay * 0.001)
+                  * (float)(int)this->m_Reverb.uSampleRate);
+  if ( !v6 )
+    return 1;
+  if ( (in_uChannelMask & 0x10) == 0
+    || (result = DSP::DelayLine::Init(this->m_Reverb.ERFrontBackDelay, in_pAllocator, v6), result == AK_Success) )
   {
-    result = 1;
+    if ( (in_uChannelMask & 0x20) == 0 )
+      return 1;
+    result = DSP::DelayLine::Init(&this->m_Reverb.ERFrontBackDelay[1], in_pAllocator, v6);
+    if ( result == AK_Success )
+      return 1;
   }
   return result;
 }
 
 // File Line: 376
 // RVA: 0xAE6D40
-signed __int64 __fastcall CAkRoomVerbFX::SetupERUnit(CAkRoomVerbFX *this, AK::IAkPluginMemAlloc *in_pAllocator)
+__int64 __fastcall CAkRoomVerbFX::SetupERUnit(CAkRoomVerbFX *this, AK::IAkPluginMemAlloc *in_pAllocator)
 {
-  CAkRoomVerbFX *v2; // rdi
-  AK::IAkPluginMemAlloc *v3; // rsi
-  AKRESULT v4; // ecx
-  __int64 v5; // rbp
+  unsigned int v4; // ecx
+  __int64 uERPattern; // rbp
   _QWORD *v6; // rbx
 
-  v2 = this;
-  v3 = in_pAllocator;
   v4 = 1;
-  v5 = v2->m_pParams->sInvariantParams.uERPattern;
-  if ( v2->m_Reverb.uNumERSignals )
+  uERPattern = this->m_pParams->sInvariantParams.uERPattern;
+  if ( this->m_Reverb.uNumERSignals )
   {
-    v6 = (_QWORD *)in_pAllocator->vfptr->Malloc(in_pAllocator, 800ui64);
+    v6 = in_pAllocator->vfptr->Malloc(in_pAllocator, 800i64);
     if ( v6 )
     {
       *(_DWORD *)v6 = 0;
@@ -475,39 +455,37 @@ signed __int64 __fastcall CAkRoomVerbFX::SetupERUnit(CAkRoomVerbFX *this, AK::IA
     {
       v6 = 0i64;
     }
-    v2->m_pERUnit = (DSP::ERUnitDual *)v6;
+    this->m_pERUnit = (DSP::ERUnitDual *)v6;
     if ( !v6 )
       return 52i64;
-    v4 = DSP::ERUnitDual::Init(
-           (DSP::ERUnitDual *)v6,
-           v3,
-           v2->m_pParams->sInvariantParams.fRoomSize,
-           g_ERPatternsList[v5].TapInfoLeft,
-           g_ERPatternsList[v5].TapInfoRight,
-           g_ERPatternsList[v5].uNumTapsLeft,
-           g_ERPatternsList[v5].uNumTapsRight,
-           v2->m_Reverb.uSampleRate);
+    return (unsigned int)DSP::ERUnitDual::Init(
+                           (DSP::ERUnitDual *)v6,
+                           in_pAllocator,
+                           this->m_pParams->sInvariantParams.fRoomSize,
+                           g_ERPatternsList[uERPattern].TapInfoLeft,
+                           g_ERPatternsList[uERPattern].TapInfoRight,
+                           g_ERPatternsList[uERPattern].uNumTapsLeft,
+                           g_ERPatternsList[uERPattern].uNumTapsRight,
+                           this->m_Reverb.uSampleRate);
   }
-  return (unsigned int)v4;
+  return v4;
 }
 
 // File Line: 397
 // RVA: 0xAE6E70
 AKRESULT __fastcall CAkRoomVerbFX::SetupFDNs(CAkRoomVerbFX *this, AK::IAkPluginMemAlloc *in_pAllocator)
 {
-  AK::IAkPluginMemAlloc *v2; // r15
-  CAkRoomVerbFX *v3; // rdi
   ReverbUnitState *v4; // rax
   AKRESULT result; // eax
   unsigned int v6; // ebx
-  unsigned int v7; // ecx
-  signed __int64 v8; // rax
-  signed int v9; // er8
+  unsigned int i; // ecx
+  ReverbUnitState *v8; // rax
+  unsigned int uNumReverbUnits; // r8d
   __m128 v10; // xmm0
   __int64 v11; // rsi
   __int64 v12; // r8
   __int64 v13; // r9
-  unsigned int v14; // er10
+  unsigned int v14; // r10d
   unsigned int *v15; // r11
   char *v16; // rdx
   __int64 v17; // rbp
@@ -517,86 +495,75 @@ AKRESULT __fastcall CAkRoomVerbFX::SetupFDNs(CAkRoomVerbFX *this, AK::IAkPluginM
   unsigned int v21; // ecx
   __int64 v22; // rcx
   __int64 v23; // rdx
-  float v24; // xmm1_4
+  float uSampleRate; // xmm1_4
   float v25; // xmm0_4
-  int v26; // esi
-  signed __int64 v27; // r14
-  float out_pfFDNInputDelayTimes[15]; // [rsp+30h] [rbp-398h]
-  int v29; // [rsp+6Ch] [rbp-35Ch]
-  unsigned int in_uDelayLineLength[16]; // [rsp+70h] [rbp-358h]
-  unsigned int out_puDelayLengths[64]; // [rsp+B0h] [rbp-318h]
-  float in_pfDelayTimes; // [rsp+1B0h] [rbp-218h]
-  char v33[8]; // [rsp+2B0h] [rbp-118h]
-  char v34; // [rsp+2B8h] [rbp-110h]
+  int j; // esi
+  __int64 v27; // r14
+  float out_pfFDNInputDelayTimes[32]; // [rsp+30h] [rbp-398h] BYREF
+  unsigned int out_puDelayLengths[64]; // [rsp+B0h] [rbp-318h] BYREF
+  float in_pfDelayTimes[66]; // [rsp+1B0h] [rbp-218h] BYREF
+  char v31; // [rsp+2B8h] [rbp-110h] BYREF
 
-  v2 = in_pAllocator;
-  v3 = this;
   v4 = (ReverbUnitState *)in_pAllocator->vfptr->Malloc(in_pAllocator, 168i64 * this->m_Reverb.uNumReverbUnits);
-  v3->m_pReverbUnitsState = v4;
+  this->m_pReverbUnitsState = v4;
   if ( !v4 )
     return 52;
   v6 = 0;
-  v7 = 0;
-  if ( v3->m_Reverb.uNumReverbUnits )
+  for ( i = 0; i < this->m_Reverb.uNumReverbUnits; ++i )
   {
-    do
+    v8 = &this->m_pReverbUnitsState[i];
+    if ( v8 )
     {
-      v8 = (signed __int64)&v3->m_pReverbUnitsState[v7];
-      if ( v8 )
-      {
-        *(_DWORD *)v8 = 0;
-        *(_QWORD *)(v8 + 8) = 0i64;
-        *(_DWORD *)(v8 + 16) = 0;
-        *(_DWORD *)(v8 + 24) = 0;
-        *(_QWORD *)(v8 + 32) = 0i64;
-        *(_DWORD *)(v8 + 40) = 0;
-        *(_DWORD *)(v8 + 48) = 0;
-        *(_QWORD *)(v8 + 56) = 0i64;
-        *(_DWORD *)(v8 + 64) = 0;
-        *(_DWORD *)(v8 + 72) = 0;
-        *(_QWORD *)(v8 + 80) = 0i64;
-        *(_DWORD *)(v8 + 88) = 0;
-        *(_QWORD *)(v8 + 96) = 0i64;
-        *(_QWORD *)(v8 + 104) = 0i64;
-        *(_QWORD *)(v8 + 112) = 0i64;
-        *(_QWORD *)(v8 + 120) = 0i64;
-        *(_QWORD *)(v8 + 128) = 0i64;
-        *(_QWORD *)(v8 + 136) = 0i64;
-        *(_DWORD *)(v8 + 144) = 0;
-        *(_QWORD *)(v8 + 152) = 0i64;
-        *(_DWORD *)(v8 + 160) = 0;
-      }
-      ++v7;
+      v8->ReverbUnits.FDNDelayLine[0].uDelayLineLength = 0;
+      v8->ReverbUnits.FDNDelayLine[0].pfDelay = 0i64;
+      v8->ReverbUnits.FDNDelayLine[0].uCurOffset = 0;
+      v8->ReverbUnits.FDNDelayLine[1].uDelayLineLength = 0;
+      v8->ReverbUnits.FDNDelayLine[1].pfDelay = 0i64;
+      v8->ReverbUnits.FDNDelayLine[1].uCurOffset = 0;
+      v8->ReverbUnits.FDNDelayLine[2].uDelayLineLength = 0;
+      v8->ReverbUnits.FDNDelayLine[2].pfDelay = 0i64;
+      v8->ReverbUnits.FDNDelayLine[2].uCurOffset = 0;
+      v8->ReverbUnits.FDNDelayLine[3].uDelayLineLength = 0;
+      v8->ReverbUnits.FDNDelayLine[3].pfDelay = 0i64;
+      v8->ReverbUnits.FDNDelayLine[3].uCurOffset = 0;
+      *(_QWORD *)&v8->ReverbUnits.delayLowPassFilter[0].fFFbk1 = 0i64;
+      *(_QWORD *)&v8->ReverbUnits.delayLowPassFilter[0].fA1 = 0i64;
+      *(_QWORD *)&v8->ReverbUnits.delayLowPassFilter[1].fB0 = 0i64;
+      *(_QWORD *)&v8->ReverbUnits.delayLowPassFilter[2].fFFbk1 = 0i64;
+      *(_QWORD *)&v8->ReverbUnits.delayLowPassFilter[2].fA1 = 0i64;
+      *(_QWORD *)&v8->ReverbUnits.delayLowPassFilter[3].fB0 = 0i64;
+      v8->RUInputDelay.uDelayLineLength = 0;
+      v8->RUInputDelay.pfDelay = 0i64;
+      v8->RUInputDelay.uCurOffset = 0;
     }
-    while ( v7 < v3->m_Reverb.uNumReverbUnits );
   }
-  v9 = v3->m_Reverb.uNumReverbUnits;
-  v3->m_Reverb.fReverbUnitsMixGain = 1.0;
-  if ( (unsigned int)v9 > 1 )
+  uNumReverbUnits = this->m_Reverb.uNumReverbUnits;
+  this->m_Reverb.fReverbUnitsMixGain = 1.0;
+  if ( uNumReverbUnits > 1 )
   {
     v10 = 0i64;
-    v10.m128_f32[0] = (float)v9;
-    v3->m_Reverb.fReverbUnitsMixGain = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v10));
+    v10.m128_f32[0] = (float)(int)uNumReverbUnits;
+    this->m_Reverb.fReverbUnitsMixGain = 1.0 / _mm_sqrt_ps(v10).m128_f32[0];
   }
   DelayLengths::ComputeFDNDelayTimes(
-    v3->m_pParams->sInvariantParams.fDensity,
-    v3->m_pParams->sInvariantParams.fRoomShape,
-    4 * v9,
-    &v3->m_pParams->sAlgoTunings,
-    &in_pfDelayTimes);
+    this->m_pParams->sInvariantParams.fDensity,
+    this->m_pParams->sInvariantParams.fRoomShape,
+    4 * uNumReverbUnits,
+    &this->m_pParams->sAlgoTunings,
+    in_pfDelayTimes);
   DelayLengths::ComputePrimeDelayLengths(
-    &in_pfDelayTimes,
-    v3->m_Reverb.uSampleRate,
-    4 * v3->m_Reverb.uNumReverbUnits,
-    out_puDelayLengths);
-  v11 = v3->m_Reverb.uNumReverbUnits;
+    in_pfDelayTimes,
+    this->m_Reverb.uSampleRate,
+    4 * this->m_Reverb.uNumReverbUnits,
+    (char *)out_puDelayLengths);
+  v11 = this->m_Reverb.uNumReverbUnits;
   if ( (_DWORD)v11 )
   {
     v12 = (unsigned int)(3 * v11);
     v13 = (unsigned int)(2 * v11);
-    v14 = v3->m_Reverb.uNumReverbUnits;
+    v14 = this->m_Reverb.uNumReverbUnits;
     v15 = out_puDelayLengths;
-    v16 = &v34;
+    v16 = &v31;
     v17 = (unsigned int)v11;
     do
     {
@@ -616,42 +583,41 @@ AKRESULT __fastcall CAkRoomVerbFX::SetupFDNs(CAkRoomVerbFX *this, AK::IAkPluginM
     }
     while ( v17 );
   }
-  DelayLengths::ComputeFDNInputDelayTimes(v11, &v3->m_pParams->sAlgoTunings, out_pfFDNInputDelayTimes);
+  DelayLengths::ComputeFDNInputDelayTimes(v11, &this->m_pParams->sAlgoTunings, out_pfFDNInputDelayTimes);
   if ( (_DWORD)v11 )
   {
     v22 = 0i64;
     v23 = v11;
-    v24 = (float)(signed int)v3->m_Reverb.uSampleRate;
+    uSampleRate = (float)(int)this->m_Reverb.uSampleRate;
     do
     {
-      v25 = out_pfFDNInputDelayTimes[v22];
-      ++v22;
-      *(int *)((char *)&v29 + v22 * 4) = (signed int)(float)((float)(v25 * 0.001) * v24);
+      v25 = out_pfFDNInputDelayTimes[v22++];
+      LODWORD(out_pfFDNInputDelayTimes[v22 + 15]) = (int)(float)((float)(v25 * 0.001) * uSampleRate);
       --v23;
     }
     while ( v23 );
   }
   if ( !(_DWORD)v11 )
     return 1;
-  v26 = 0;
-  while ( 1 )
+  for ( j = 0; ; j += 4 )
   {
     v27 = v6;
     result = DSP::FDN4::Init(
-               &v3->m_pReverbUnitsState[v27].ReverbUnits,
-               v2,
-               (unsigned int *)&v33[4 * v26],
-               v3->m_pParams->sRTPCParams.fDecayTime,
-               v3->m_pParams->sRTPCParams.fHFDamping,
-               v3->m_Reverb.uSampleRate);
-    if ( result != 1 )
+               &this->m_pReverbUnitsState[v27].ReverbUnits,
+               in_pAllocator,
+               (unsigned int *)&in_pfDelayTimes[j + 64],
+               this->m_pParams->sRTPCParams.fDecayTime,
+               this->m_pParams->sRTPCParams.fHFDamping,
+               this->m_Reverb.uSampleRate);
+    if ( result != AK_Success )
       break;
-    result = DSP::DelayLine::Init(&v3->m_pReverbUnitsState[v27].RUInputDelay, v2, in_uDelayLineLength[v6]);
-    if ( result != 1 )
+    result = DSP::DelayLine::Init(
+               &this->m_pReverbUnitsState[v27].RUInputDelay,
+               in_pAllocator,
+               LODWORD(out_pfFDNInputDelayTimes[v6 + 16]));
+    if ( result != AK_Success )
       break;
-    ++v6;
-    v26 += 4;
-    if ( v6 >= v3->m_Reverb.uNumReverbUnits )
+    if ( ++v6 >= this->m_Reverb.uNumReverbUnits )
       return 1;
   }
   return result;
@@ -661,24 +627,20 @@ AKRESULT __fastcall CAkRoomVerbFX::SetupFDNs(CAkRoomVerbFX *this, AK::IAkPluginM
 // RVA: 0xAE6A90
 AKRESULT __fastcall CAkRoomVerbFX::SetupDiffusionAPF(CAkRoomVerbFX *this, AK::IAkPluginMemAlloc *in_pAllocator)
 {
-  AK::IAkPluginMemAlloc *v2; // rbp
-  CAkRoomVerbFX *v3; // rsi
   __int64 v4; // rbx
   unsigned int *v5; // rdi
   float v6; // xmm3_4
   AKRESULT result; // eax
-  float in_pfDelayTimes; // [rsp+20h] [rbp-68h]
-  unsigned int out_puDelayLengths; // [rsp+30h] [rbp-58h]
+  float in_pfDelayTimes[4]; // [rsp+20h] [rbp-68h] BYREF
+  char out_puDelayLengths[48]; // [rsp+30h] [rbp-58h] BYREF
 
-  v2 = in_pAllocator;
-  v3 = this;
-  DelayLengths::ComputeDiffusionFiltersDelayTimes(4u, &this->m_pParams->sAlgoTunings, &in_pfDelayTimes);
-  DelayLengths::ComputePrimeDelayLengths(&in_pfDelayTimes, v3->m_Reverb.uSampleRate, 4u, &out_puDelayLengths);
+  DelayLengths::ComputeDiffusionFiltersDelayTimes(4, &this->m_pParams->sAlgoTunings, in_pfDelayTimes);
+  DelayLengths::ComputePrimeDelayLengths(in_pfDelayTimes, this->m_Reverb.uSampleRate, 4u, out_puDelayLengths);
   v4 = 0i64;
-  v5 = &out_puDelayLengths;
+  v5 = (unsigned int *)out_puDelayLengths;
   do
   {
-    v6 = (float)((float)((float)(v3->m_pParams->sRTPCParams.fDiffusion * 0.0099999998) * 0.61803001) * 4.0)
+    v6 = (float)((float)((float)(this->m_pParams->sRTPCParams.fDiffusion * 0.0099999998) * 0.61803001) * 4.0)
        - (float)((float)(3 - v4) * 0.61803001);
     if ( v6 <= 0.0 )
     {
@@ -689,11 +651,11 @@ AKRESULT __fastcall CAkRoomVerbFX::SetupDiffusionAPF(CAkRoomVerbFX *this, AK::IA
       v6 = FLOAT_0_61803001;
     }
     result = DSP::AllpassFilter::Init(
-               (DSP::AllpassFilter *)(&v3->vfptr + (unsigned int)v4 + 1i64 + 2 * v4),
-               v2,
+               (DSP::AllpassFilter *)((char *)this->m_Reverb.DiffusionFilters + 16 * v4 + 8 * (unsigned int)v4),
+               in_pAllocator,
                *v5,
                v6);
-    if ( result != 1 )
+    if ( result != AK_Success )
       break;
     v4 = (unsigned int)(v4 + 1);
     ++v5;
@@ -704,48 +666,44 @@ AKRESULT __fastcall CAkRoomVerbFX::SetupDiffusionAPF(CAkRoomVerbFX *this, AK::IA
 
 // File Line: 492
 // RVA: 0xAE1390
-signed __int64 __fastcall CAkRoomVerbFX::Term(CAkRoomVerbFX *this, AK::IAkPluginMemAlloc *in_pAllocator)
+__int64 __fastcall CAkRoomVerbFX::Term(CAkRoomVerbFX *this, AK::IAkPluginMemAlloc *in_pAllocator)
 {
-  CAkRoomVerbFX *v2; // rsi
-  AK::IAkPluginMemAlloc *v3; // rdi
-  DSP::ERUnitDual *v4; // rcx
-  DSP::AllpassFilter *v5; // rbx
-  signed __int64 v6; // rbp
+  DSP::ERUnitDual *m_pERUnit; // rcx
+  ReverbState *p_m_Reverb; // rbx
+  __int64 v6; // rbp
 
-  v2 = this;
-  v3 = in_pAllocator;
   DSP::DelayLine::Term(&this->m_Reverb.ERDelay, in_pAllocator);
-  DSP::DelayLine::Term(&v2->m_Reverb.ReverbDelay, v3);
-  DSP::DelayLine::Term(v2->m_Reverb.ERFrontBackDelay, v3);
-  DSP::DelayLine::Term(&v2->m_Reverb.ERFrontBackDelay[1], v3);
-  if ( v2->m_Reverb.uNumERSignals )
+  DSP::DelayLine::Term(&this->m_Reverb.ReverbDelay, in_pAllocator);
+  DSP::DelayLine::Term(this->m_Reverb.ERFrontBackDelay, in_pAllocator);
+  DSP::DelayLine::Term(&this->m_Reverb.ERFrontBackDelay[1], in_pAllocator);
+  if ( this->m_Reverb.uNumERSignals )
   {
-    v4 = v2->m_pERUnit;
-    if ( v4 )
+    m_pERUnit = this->m_pERUnit;
+    if ( m_pERUnit )
     {
-      DSP::ERUnitDual::Term(v4, v3);
-      if ( v2->m_pERUnit )
-        ((void (__fastcall *)(AK::IAkPluginMemAlloc *))v3->vfptr->Free)(v3);
-      v2->m_pERUnit = 0i64;
+      DSP::ERUnitDual::Term(m_pERUnit, in_pAllocator);
+      if ( this->m_pERUnit )
+        ((void (__fastcall *)(AK::IAkPluginMemAlloc *))in_pAllocator->vfptr->Free)(in_pAllocator);
+      this->m_pERUnit = 0i64;
     }
   }
-  if ( v2->m_pTCFiltersState )
+  if ( this->m_pTCFiltersState )
   {
-    ((void (__fastcall *)(AK::IAkPluginMemAlloc *))v3->vfptr->Free)(v3);
-    v2->m_pTCFiltersState = 0i64;
+    ((void (__fastcall *)(AK::IAkPluginMemAlloc *))in_pAllocator->vfptr->Free)(in_pAllocator);
+    this->m_pTCFiltersState = 0i64;
   }
-  CAkRoomVerbFX::TermFDNs(v2, v3);
-  v5 = v2->m_Reverb.DiffusionFilters;
+  CAkRoomVerbFX::TermFDNs(this, in_pAllocator);
+  p_m_Reverb = &this->m_Reverb;
   v6 = 4i64;
   do
   {
-    DSP::AllpassFilter::Term(v5, v3);
-    ++v5;
+    DSP::AllpassFilter::Term(p_m_Reverb->DiffusionFilters, in_pAllocator);
+    p_m_Reverb = (ReverbState *)((char *)p_m_Reverb + 24);
     --v6;
   }
   while ( v6 );
-  v2->vfptr->__vecDelDtor((AK::IAkPlugin *)&v2->vfptr, 0);
-  v3->vfptr->Free(v3, v2);
+  this->vfptr->__vecDelDtor(this, 0i64);
+  in_pAllocator->vfptr->Free(in_pAllocator, this);
   return 1i64;
 }
 
@@ -753,13 +711,10 @@ signed __int64 __fastcall CAkRoomVerbFX::Term(CAkRoomVerbFX *this, AK::IAkPlugin
 // RVA: 0xAE1D30
 void __fastcall CAkRoomVerbFX::TermToneControlFilters(CAkRoomVerbFX *this, AK::IAkPluginMemAlloc *in_pAllocator)
 {
-  CAkRoomVerbFX *v2; // rbx
-
-  v2 = this;
   if ( this->m_pTCFiltersState )
   {
     ((void (__fastcall *)(AK::IAkPluginMemAlloc *))in_pAllocator->vfptr->Free)(in_pAllocator);
-    v2->m_pTCFiltersState = 0i64;
+    this->m_pTCFiltersState = 0i64;
   }
 }
 
@@ -767,29 +722,19 @@ void __fastcall CAkRoomVerbFX::TermToneControlFilters(CAkRoomVerbFX *this, AK::I
 // RVA: 0xAE1D70
 void __fastcall CAkRoomVerbFX::TermFDNs(CAkRoomVerbFX *this, AK::IAkPluginMemAlloc *in_pAllocator)
 {
-  AK::IAkPluginMemAlloc *v2; // r14
-  CAkRoomVerbFX *v3; // rbx
-  unsigned int v4; // esi
-  signed __int64 v5; // rdi
+  unsigned int i; // esi
+  __int64 v5; // rdi
 
-  v2 = in_pAllocator;
-  v3 = this;
   if ( this->m_pReverbUnitsState )
   {
-    v4 = 0;
-    if ( this->m_Reverb.uNumReverbUnits )
+    for ( i = 0; i < this->m_Reverb.uNumReverbUnits; ++i )
     {
-      do
-      {
-        v5 = v4;
-        DSP::FDN4::Term(&v3->m_pReverbUnitsState[v5].ReverbUnits, v2);
-        DSP::DelayLine::Term(&v3->m_pReverbUnitsState[v5].RUInputDelay, v2);
-        ++v4;
-      }
-      while ( v4 < v3->m_Reverb.uNumReverbUnits );
+      v5 = i;
+      DSP::FDN4::Term(&this->m_pReverbUnitsState[v5].ReverbUnits, in_pAllocator);
+      DSP::DelayLine::Term(&this->m_pReverbUnitsState[v5].RUInputDelay, in_pAllocator);
     }
-    v2->vfptr->Free(v2, v3->m_pReverbUnitsState);
-    v3->m_pReverbUnitsState = 0i64;
+    in_pAllocator->vfptr->Free(in_pAllocator, this->m_pReverbUnitsState);
+    this->m_pReverbUnitsState = 0i64;
   }
 }
 
@@ -797,17 +742,15 @@ void __fastcall CAkRoomVerbFX::TermFDNs(CAkRoomVerbFX *this, AK::IAkPluginMemAll
 // RVA: 0xAE1E20
 void __fastcall CAkRoomVerbFX::TermDiffusionAPF(CAkRoomVerbFX *this, AK::IAkPluginMemAlloc *in_pAllocator)
 {
-  AK::IAkPluginMemAlloc *v2; // rsi
-  DSP::AllpassFilter *v3; // rbx
-  signed __int64 v4; // rdi
+  ReverbState *p_m_Reverb; // rbx
+  __int64 v4; // rdi
 
-  v2 = in_pAllocator;
-  v3 = this->m_Reverb.DiffusionFilters;
+  p_m_Reverb = &this->m_Reverb;
   v4 = 4i64;
   do
   {
-    DSP::AllpassFilter::Term(v3, v2);
-    ++v3;
+    DSP::AllpassFilter::Term(p_m_Reverb->DiffusionFilters, in_pAllocator);
+    p_m_Reverb = (ReverbState *)((char *)p_m_Reverb + 24);
     --v4;
   }
   while ( v4 );
@@ -817,71 +760,65 @@ void __fastcall CAkRoomVerbFX::TermDiffusionAPF(CAkRoomVerbFX *this, AK::IAkPlug
 // RVA: 0xAE1E70
 void __fastcall CAkRoomVerbFX::TermERUnit(CAkRoomVerbFX *this, AK::IAkPluginMemAlloc *in_pAllocator)
 {
-  AK::IAkPluginMemAlloc *v2; // rdi
-  CAkRoomVerbFX *v3; // rbx
-  DSP::ERUnitDual *v4; // rcx
+  DSP::ERUnitDual *m_pERUnit; // rcx
 
-  v2 = in_pAllocator;
-  v3 = this;
   if ( this->m_Reverb.uNumERSignals )
   {
-    v4 = this->m_pERUnit;
-    if ( v4 )
+    m_pERUnit = this->m_pERUnit;
+    if ( m_pERUnit )
     {
-      DSP::ERUnitDual::Term(v4, in_pAllocator);
-      if ( v3->m_pERUnit )
-        ((void (__fastcall *)(AK::IAkPluginMemAlloc *))v2->vfptr->Free)(v2);
-      v3->m_pERUnit = 0i64;
+      DSP::ERUnitDual::Term(m_pERUnit, in_pAllocator);
+      if ( this->m_pERUnit )
+        ((void (__fastcall *)(AK::IAkPluginMemAlloc *))in_pAllocator->vfptr->Free)(in_pAllocator);
+      this->m_pERUnit = 0i64;
     }
   }
 }
 
 // File Line: 559
 // RVA: 0xAE14A0
-signed __int64 __fastcall CAkRoomVerbFX::Reset(CAkRoomVerbFX *this)
+__int64 __fastcall CAkRoomVerbFX::Reset(CAkRoomVerbFX *this)
 {
-  CAkRoomVerbFX *v1; // rbx
-  DSP::ERUnitDual *v2; // rcx
-  signed __int64 v3; // rdx
-  ToneControlsState *v4; // rax
-  signed __int64 v5; // rcx
-  DSP::AllpassFilter *v6; // rbx
-  signed __int64 v7; // rdi
+  DSP::ERUnitDual *m_pERUnit; // rcx
+  __int64 v3; // rdx
+  ToneControlsState *m_pTCFiltersState; // rax
+  __int64 v5; // rcx
+  ReverbState *p_m_Reverb; // rbx
+  __int64 v7; // rdi
 
-  v1 = this;
   DSP::DelayLine::Reset(&this->m_Reverb.ERDelay);
-  DSP::DelayLine::Reset(&v1->m_Reverb.ReverbDelay);
-  DSP::DelayLine::Reset(v1->m_Reverb.ERFrontBackDelay);
-  DSP::DelayLine::Reset(&v1->m_Reverb.ERFrontBackDelay[1]);
-  v2 = v1->m_pERUnit;
-  if ( v2 )
-    DSP::ERUnitDual::Reset(v2);
+  DSP::DelayLine::Reset(&this->m_Reverb.ReverbDelay);
+  DSP::DelayLine::Reset(this->m_Reverb.ERFrontBackDelay);
+  DSP::DelayLine::Reset(&this->m_Reverb.ERFrontBackDelay[1]);
+  m_pERUnit = this->m_pERUnit;
+  if ( m_pERUnit )
+    DSP::ERUnitDual::Reset(m_pERUnit);
   v3 = 0i64;
-  *(_QWORD *)&v1->m_Reverb.DCFilter[0].m_fFFwd1 = 0i64;
-  *(_QWORD *)&v1->m_Reverb.DCFilter[1].m_fFFwd1 = 0i64;
-  *(_QWORD *)&v1->m_Reverb.DCFilter[2].m_fFFwd1 = 0i64;
-  *(_QWORD *)&v1->m_Reverb.DCFilter[3].m_fFFwd1 = 0i64;
-  *(_QWORD *)&v1->m_Reverb.DCFilter[4].m_fFFwd1 = 0i64;
-  *(_QWORD *)&v1->m_Reverb.DCFilter[5].m_fFFwd1 = 0i64;
-  if ( v1->m_pParams->sInvariantParams.bEnableToneControls && v1->m_Reverb.uTCFilterIndex[0] > 0u )
+  *(_QWORD *)&this->m_Reverb.DCFilter[0].m_fFFwd1 = 0i64;
+  *(_QWORD *)&this->m_Reverb.DCFilter[1].m_fFFwd1 = 0i64;
+  *(_QWORD *)&this->m_Reverb.DCFilter[2].m_fFFwd1 = 0i64;
+  *(_QWORD *)&this->m_Reverb.DCFilter[3].m_fFFwd1 = 0i64;
+  *(_QWORD *)&this->m_Reverb.DCFilter[4].m_fFFwd1 = 0i64;
+  *(_QWORD *)&this->m_Reverb.DCFilter[5].m_fFFwd1 = 0i64;
+  if ( this->m_pParams->sInvariantParams.bEnableToneControls && this->m_Reverb.uTCFilterIndex[0] )
   {
     do
     {
-      v4 = v1->m_pTCFiltersState;
+      m_pTCFiltersState = this->m_pTCFiltersState;
       v5 = v3;
       v3 = (unsigned int)(v3 + 1);
-      *(_QWORD *)&v4[v5].Filter.m_Memories.m_Memories.fFFwd1 = 0i64;
-      *(_QWORD *)&v4[v5].Filter.m_Memories.m_Memories.fFFbk1 = 0i64;
+      *(_QWORD *)&m_pTCFiltersState[v5].Filter.m_Memories.m_Memories.fFFwd1 = 0i64;
+      *(_QWORD *)&m_pTCFiltersState[v5].Filter.m_Memories.m_Memories.fFFbk1 = 0i64;
     }
-    while ( (unsigned int)v3 < (unsigned __int8)v1->m_Reverb.uTCFilterIndex[0] );
+    while ( (unsigned int)v3 < (unsigned __int8)this->m_Reverb.uTCFilterIndex[0] );
   }
-  CAkRoomVerbFX::ResetFDNs(v1);
-  v6 = v1->m_Reverb.DiffusionFilters;
+  CAkRoomVerbFX::ResetFDNs(this);
+  p_m_Reverb = &this->m_Reverb;
   v7 = 4i64;
   do
   {
-    DSP::AllpassFilter::Reset(v6);
-    ++v6;
+    DSP::AllpassFilter::Reset(p_m_Reverb->DiffusionFilters);
+    p_m_Reverb = (ReverbState *)((char *)p_m_Reverb + 24);
     --v7;
   }
   while ( v7 );
@@ -892,24 +829,16 @@ signed __int64 __fastcall CAkRoomVerbFX::Reset(CAkRoomVerbFX *this)
 // RVA: 0xAE1ED0
 void __fastcall CAkRoomVerbFX::ResetFDNs(CAkRoomVerbFX *this)
 {
-  CAkRoomVerbFX *v1; // rbx
-  unsigned int v2; // esi
-  signed __int64 v3; // rdi
+  unsigned int i; // esi
+  __int64 v3; // rdi
 
-  v1 = this;
   if ( this->m_pReverbUnitsState )
   {
-    v2 = 0;
-    if ( this->m_Reverb.uNumReverbUnits )
+    for ( i = 0; i < this->m_Reverb.uNumReverbUnits; ++i )
     {
-      do
-      {
-        v3 = v2;
-        DSP::FDN4::Reset(&v1->m_pReverbUnitsState[v3].ReverbUnits);
-        DSP::DelayLine::Reset(&v1->m_pReverbUnitsState[v3].RUInputDelay);
-        ++v2;
-      }
-      while ( v2 < v1->m_Reverb.uNumReverbUnits );
+      v3 = i;
+      DSP::FDN4::Reset(&this->m_pReverbUnitsState[v3].ReverbUnits);
+      DSP::DelayLine::Reset(&this->m_pReverbUnitsState[v3].RUInputDelay);
     }
   }
 }
@@ -918,15 +847,15 @@ void __fastcall CAkRoomVerbFX::ResetFDNs(CAkRoomVerbFX *this)
 // RVA: 0xAE1F50
 void __fastcall CAkRoomVerbFX::ResetDiffusionAPF(CAkRoomVerbFX *this)
 {
-  DSP::AllpassFilter *v1; // rbx
-  signed __int64 v2; // rdi
+  ReverbState *p_m_Reverb; // rbx
+  __int64 v2; // rdi
 
-  v1 = this->m_Reverb.DiffusionFilters;
+  p_m_Reverb = &this->m_Reverb;
   v2 = 4i64;
   do
   {
-    DSP::AllpassFilter::Reset(v1);
-    ++v1;
+    DSP::AllpassFilter::Reset(p_m_Reverb->DiffusionFilters);
+    p_m_Reverb = (ReverbState *)((char *)p_m_Reverb + 24);
     --v2;
   }
   while ( v2 );
@@ -948,26 +877,20 @@ void __fastcall CAkRoomVerbFX::ResetDCFilters(CAkRoomVerbFX *this)
 // RVA: 0xAE1FC0
 void __fastcall CAkRoomVerbFX::ResetToneControlFilters(CAkRoomVerbFX *this)
 {
-  CAkRoomVerbFX *v1; // r8
-  signed __int64 v2; // rdx
-  ToneControlsState *v3; // rax
-  signed __int64 v4; // rcx
+  __int64 i; // rdx
+  ToneControlsState *m_pTCFiltersState; // rax
+  __int64 v4; // rcx
 
-  v1 = this;
   if ( this->m_pParams->sInvariantParams.bEnableToneControls )
   {
-    v2 = 0i64;
-    if ( this->m_Reverb.uTCFilterIndex[0] )
+    for ( i = 0i64;
+          (unsigned int)i < (unsigned __int8)this->m_Reverb.uTCFilterIndex[0];
+          *(_QWORD *)&m_pTCFiltersState[v4].Filter.m_Memories.m_Memories.fFFbk1 = 0i64 )
     {
-      do
-      {
-        v3 = v1->m_pTCFiltersState;
-        v4 = v2;
-        v2 = (unsigned int)(v2 + 1);
-        *(_QWORD *)&v3[v4].Filter.m_Memories.m_Memories.fFFwd1 = 0i64;
-        *(_QWORD *)&v3[v4].Filter.m_Memories.m_Memories.fFFbk1 = 0i64;
-      }
-      while ( (unsigned int)v2 < (unsigned __int8)v1->m_Reverb.uTCFilterIndex[0] );
+      m_pTCFiltersState = this->m_pTCFiltersState;
+      v4 = i;
+      i = (unsigned int)(i + 1);
+      *(_QWORD *)&m_pTCFiltersState[v4].Filter.m_Memories.m_Memories.fFFwd1 = 0i64;
     }
   }
 }
@@ -976,14 +899,18 @@ void __fastcall CAkRoomVerbFX::ResetToneControlFilters(CAkRoomVerbFX *this)
 // RVA: 0xAE2020
 void __fastcall CAkRoomVerbFX::ResetERUnit(CAkRoomVerbFX *this)
 {
-  JUMPOUT(this->m_pERUnit, 0i64, DSP::ERUnitDual::Reset);
+  DSP::ERUnitDual *m_pERUnit; // rcx
+
+  m_pERUnit = this->m_pERUnit;
+  if ( m_pERUnit )
+    DSP::ERUnitDual::Reset(m_pERUnit);
 }
 
 // File Line: 621
 // RVA: 0xAE15A0
-signed __int64 __fastcall CAkRoomVerbFX::GetPluginInfo(CAkRoomVerbFX *this, AkPluginInfo *out_rPluginInfo)
+__int64 __fastcall CAkRoomVerbFX::GetPluginInfo(CAkRoomVerbFX *this, AkPluginInfo *out_rPluginInfo)
 {
-  out_rPluginInfo->eType = 3;
+  out_rPluginInfo->eType = AkPluginTypeEffect;
   *(_WORD *)&out_rPluginInfo->bIsInPlace = 1;
   return 1i64;
 }
@@ -992,12 +919,10 @@ signed __int64 __fastcall CAkRoomVerbFX::GetPluginInfo(CAkRoomVerbFX *this, AkPl
 // RVA: 0xAE2040
 char __fastcall CAkRoomVerbFX::LiveParametersUpdate(CAkRoomVerbFX *this, AkAudioBuffer *io_pBuffer)
 {
-  CAkRoomVerbFX *v2; // rbx
-  CAkRoomVerbFXParams *v3; // rcx
-  AkAudioBuffer *v4; // r15
-  AK::IAkPluginMemAlloc *v5; // rdx
+  CAkRoomVerbFXParams *m_pParams; // rcx
+  AK::IAkPluginMemAlloc *m_pAllocator; // rdx
   AK::IAkPluginMemAlloc *v7; // rdi
-  DSP::ERUnitDual *v8; // rcx
+  DSP::ERUnitDual *m_pERUnit; // rcx
   CAkRoomVerbFXParams *v9; // rax
   AK::IAkPluginMemAlloc *v10; // rdx
   char v11; // al
@@ -1007,208 +932,205 @@ char __fastcall CAkRoomVerbFX::LiveParametersUpdate(CAkRoomVerbFX *this, AkAudio
   CAkRoomVerbFXParams *v15; // rcx
   DSP::ERUnitDual *v16; // rcx
   CAkRoomVerbFXParams *v17; // rcx
-  bool v18; // dl
+  bool bEnableToneControls; // dl
   CAkRoomVerbFXParams *v19; // rcx
 
-  v2 = this;
-  v3 = this->m_pParams;
-  v4 = io_pBuffer;
-  if ( v2->m_PrevInvariantParams.uNumReverbUnits != v3->sInvariantParams.uNumReverbUnits
-    || v3->sInvariantParams.fRoomShape != v2->m_PrevInvariantParams.fRoomShape
-    || v3->sInvariantParams.fDensity != v2->m_PrevInvariantParams.fDensity )
+  m_pParams = this->m_pParams;
+  if ( this->m_PrevInvariantParams.uNumReverbUnits != m_pParams->sInvariantParams.uNumReverbUnits
+    || m_pParams->sInvariantParams.fRoomShape != this->m_PrevInvariantParams.fRoomShape
+    || m_pParams->sInvariantParams.fDensity != this->m_PrevInvariantParams.fDensity )
   {
-    CAkRoomVerbFX::TermFDNs(v2, v2->m_pAllocator);
-    v5 = v2->m_pAllocator;
-    v2->m_Reverb.uNumReverbUnits = v2->m_pParams->sInvariantParams.uNumReverbUnits;
-    if ( CAkRoomVerbFX::SetupFDNs(v2, v5) != 1 )
+    CAkRoomVerbFX::TermFDNs(this, this->m_pAllocator);
+    m_pAllocator = this->m_pAllocator;
+    this->m_Reverb.uNumReverbUnits = this->m_pParams->sInvariantParams.uNumReverbUnits;
+    if ( CAkRoomVerbFX::SetupFDNs(this, m_pAllocator) != AK_Success )
       return 1;
-    CAkRoomVerbFX::ResetFDNs(v2);
+    CAkRoomVerbFX::ResetFDNs(this);
   }
-  if ( v2->m_PrevInvariantParams.bEnableEarlyReflections != v2->m_pParams->sInvariantParams.bEnableEarlyReflections )
+  if ( this->m_PrevInvariantParams.bEnableEarlyReflections != this->m_pParams->sInvariantParams.bEnableEarlyReflections )
   {
-    DSP::DelayLine::Term(v2->m_Reverb.ERFrontBackDelay, v2->m_pAllocator);
-    DSP::DelayLine::Term(&v2->m_Reverb.ERFrontBackDelay[1], v2->m_pAllocator);
-    DSP::DelayLine::Term(&v2->m_Reverb.ERDelay, v2->m_pAllocator);
-    v7 = v2->m_pAllocator;
-    if ( v2->m_Reverb.uNumERSignals )
+    DSP::DelayLine::Term(this->m_Reverb.ERFrontBackDelay, this->m_pAllocator);
+    DSP::DelayLine::Term(&this->m_Reverb.ERFrontBackDelay[1], this->m_pAllocator);
+    DSP::DelayLine::Term(&this->m_Reverb.ERDelay, this->m_pAllocator);
+    v7 = this->m_pAllocator;
+    if ( this->m_Reverb.uNumERSignals )
     {
-      v8 = v2->m_pERUnit;
-      if ( v8 )
+      m_pERUnit = this->m_pERUnit;
+      if ( m_pERUnit )
       {
-        DSP::ERUnitDual::Term(v8, v2->m_pAllocator);
-        if ( v2->m_pERUnit )
+        DSP::ERUnitDual::Term(m_pERUnit, this->m_pAllocator);
+        if ( this->m_pERUnit )
           ((void (__fastcall *)(AK::IAkPluginMemAlloc *))v7->vfptr->Free)(v7);
-        v2->m_pERUnit = 0i64;
+        this->m_pERUnit = 0i64;
       }
     }
-    v9 = v2->m_pParams;
+    v9 = this->m_pParams;
     if ( v9->sInvariantParams.bEnableToneControls
       && (v9->sInvariantParams.eFilter1Pos || v9->sInvariantParams.eFilter2Pos || v9->sInvariantParams.eFilter3Pos)
-      && v2->m_pTCFiltersState )
+      && this->m_pTCFiltersState )
     {
-      ((void (*)(void))v2->m_pAllocator->vfptr->Free)();
-      v2->m_pTCFiltersState = 0i64;
+      ((void (__fastcall *)(AK::IAkPluginMemAlloc *))this->m_pAllocator->vfptr->Free)(this->m_pAllocator);
+      this->m_pTCFiltersState = 0i64;
     }
-    v10 = v2->m_pAllocator;
-    v11 = v2->m_pParams->sInvariantParams.bEnableEarlyReflections != 0 ? 2 : 0;
-    v2->m_Reverb.uNumERSignals = v11;
+    v10 = this->m_pAllocator;
+    v11 = this->m_pParams->sInvariantParams.bEnableEarlyReflections ? 2 : 0;
+    this->m_Reverb.uNumERSignals = v11;
     v12 = v11;
-    if ( v4->uChannelMask == 8 )
+    if ( io_pBuffer->uChannelMask == 8 )
       v12 = 0;
-    v2->m_Reverb.uNumERSignals = v12;
-    if ( CAkRoomVerbFX::SetupERFrontBackDelay(v2, v10, v4->uChannelMask) != 1 )
+    this->m_Reverb.uNumERSignals = v12;
+    if ( CAkRoomVerbFX::SetupERFrontBackDelay(this, v10, io_pBuffer->uChannelMask) != AK_Success )
       return 1;
-    DSP::DelayLine::Reset(v2->m_Reverb.ERFrontBackDelay);
-    DSP::DelayLine::Reset(&v2->m_Reverb.ERFrontBackDelay[1]);
-    if ( CAkRoomVerbFX::SetupERDelay(v2, v2->m_pAllocator) != 1 )
+    DSP::DelayLine::Reset(this->m_Reverb.ERFrontBackDelay);
+    DSP::DelayLine::Reset(&this->m_Reverb.ERFrontBackDelay[1]);
+    if ( CAkRoomVerbFX::SetupERDelay(this, this->m_pAllocator) != AK_Success )
       return 1;
-    DSP::DelayLine::Reset(&v2->m_Reverb.ERDelay);
-    if ( CAkRoomVerbFX::SetupERUnit(v2, v2->m_pAllocator) != 1 )
+    DSP::DelayLine::Reset(&this->m_Reverb.ERDelay);
+    if ( CAkRoomVerbFX::SetupERUnit(this, this->m_pAllocator) != AK_Success )
       return 1;
-    v13 = v2->m_pERUnit;
+    v13 = this->m_pERUnit;
     if ( v13 )
       DSP::ERUnitDual::Reset(v13);
-    v14 = v2->m_pParams;
-    if ( v14->sInvariantParams.bEnableToneControls )
+    v14 = this->m_pParams;
+    if ( v14->sInvariantParams.bEnableToneControls
+      && (v14->sInvariantParams.eFilter1Pos || v14->sInvariantParams.eFilter2Pos || v14->sInvariantParams.eFilter3Pos) )
     {
-      if ( v14->sInvariantParams.eFilter1Pos || v14->sInvariantParams.eFilter2Pos || v14->sInvariantParams.eFilter3Pos )
-      {
-        if ( CAkRoomVerbFX::SetupToneControlFilters(v2) != 1 )
-          return 1;
-        CAkRoomVerbFX::ResetToneControlFilters(v2);
-      }
+      if ( CAkRoomVerbFX::SetupToneControlFilters(this) != AK_Success )
+        return 1;
+      CAkRoomVerbFX::ResetToneControlFilters(this);
     }
   }
-  if ( v2->m_pParams->sInvariantParams.fERFrontBackDelay != v2->m_PrevInvariantParams.fERFrontBackDelay )
+  if ( this->m_pParams->sInvariantParams.fERFrontBackDelay != this->m_PrevInvariantParams.fERFrontBackDelay )
   {
-    DSP::DelayLine::Term(v2->m_Reverb.ERFrontBackDelay, v2->m_pAllocator);
-    DSP::DelayLine::Term(&v2->m_Reverb.ERFrontBackDelay[1], v2->m_pAllocator);
-    if ( CAkRoomVerbFX::SetupERFrontBackDelay(v2, v2->m_pAllocator, v4->uChannelMask) != 1 )
+    DSP::DelayLine::Term(this->m_Reverb.ERFrontBackDelay, this->m_pAllocator);
+    DSP::DelayLine::Term(&this->m_Reverb.ERFrontBackDelay[1], this->m_pAllocator);
+    if ( CAkRoomVerbFX::SetupERFrontBackDelay(this, this->m_pAllocator, io_pBuffer->uChannelMask) != AK_Success )
       return 1;
-    DSP::DelayLine::Reset(v2->m_Reverb.ERFrontBackDelay);
-    DSP::DelayLine::Reset(&v2->m_Reverb.ERFrontBackDelay[1]);
+    DSP::DelayLine::Reset(this->m_Reverb.ERFrontBackDelay);
+    DSP::DelayLine::Reset(&this->m_Reverb.ERFrontBackDelay[1]);
   }
-  v15 = v2->m_pParams;
-  if ( v15->sInvariantParams.fReverbDelay != v2->m_PrevInvariantParams.fReverbDelay )
+  v15 = this->m_pParams;
+  if ( v15->sInvariantParams.fReverbDelay != this->m_PrevInvariantParams.fReverbDelay )
   {
-    DSP::DelayLine::Term(&v2->m_Reverb.ReverbDelay, v2->m_pAllocator);
-    if ( CAkRoomVerbFX::SetupReverbDelay(v2, v2->m_pAllocator) == 1 )
+    DSP::DelayLine::Term(&this->m_Reverb.ReverbDelay, this->m_pAllocator);
+    if ( CAkRoomVerbFX::SetupReverbDelay(this, this->m_pAllocator) == AK_Success )
     {
-      DSP::DelayLine::Reset(&v2->m_Reverb.ReverbDelay);
-      v15 = v2->m_pParams;
-      v2->m_Reverb.uTailLength = (signed int)(float)((float)((float)(v15->sInvariantParams.fReverbDelay * 0.001)
-                                                           + v15->sRTPCParams.fDecayTime)
-                                                   * (float)(signed int)v2->m_Reverb.uSampleRate);
+      DSP::DelayLine::Reset(&this->m_Reverb.ReverbDelay);
+      v15 = this->m_pParams;
+      this->m_Reverb.uTailLength = (int)(float)((float)((float)(v15->sInvariantParams.fReverbDelay * 0.001)
+                                                      + v15->sRTPCParams.fDecayTime)
+                                              * (float)(int)this->m_Reverb.uSampleRate);
       goto LABEL_38;
     }
     return 1;
   }
 LABEL_38:
-  if ( v2->m_PrevInvariantParams.uERPattern != v15->sInvariantParams.uERPattern
-    || v15->sInvariantParams.fRoomSize != v2->m_PrevInvariantParams.fRoomSize )
+  if ( this->m_PrevInvariantParams.uERPattern != v15->sInvariantParams.uERPattern
+    || v15->sInvariantParams.fRoomSize != this->m_PrevInvariantParams.fRoomSize )
   {
-    DSP::DelayLine::Term(&v2->m_Reverb.ERDelay, v2->m_pAllocator);
-    if ( CAkRoomVerbFX::SetupERDelay(v2, v2->m_pAllocator) != 1 )
+    DSP::DelayLine::Term(&this->m_Reverb.ERDelay, this->m_pAllocator);
+    if ( CAkRoomVerbFX::SetupERDelay(this, this->m_pAllocator) != AK_Success )
       return 1;
-    DSP::DelayLine::Reset(&v2->m_Reverb.ERDelay);
-    CAkRoomVerbFX::TermERUnit(v2, v2->m_pAllocator);
-    if ( CAkRoomVerbFX::SetupERUnit(v2, v2->m_pAllocator) != 1 )
+    DSP::DelayLine::Reset(&this->m_Reverb.ERDelay);
+    CAkRoomVerbFX::TermERUnit(this, this->m_pAllocator);
+    if ( CAkRoomVerbFX::SetupERUnit(this, this->m_pAllocator) != AK_Success )
       return 1;
-    v16 = v2->m_pERUnit;
+    v16 = this->m_pERUnit;
     if ( v16 )
       DSP::ERUnitDual::Reset(v16);
   }
-  v17 = v2->m_pParams;
-  v18 = v17->sInvariantParams.bEnableToneControls;
-  if ( (v2->m_PrevInvariantParams.bEnableToneControls != v18
-     || v2->m_PrevInvariantParams.eFilter1Pos != v17->sInvariantParams.eFilter1Pos
-     || v2->m_PrevInvariantParams.eFilter2Pos != v17->sInvariantParams.eFilter2Pos
-     || v2->m_PrevInvariantParams.eFilter3Pos != v17->sInvariantParams.eFilter3Pos)
-    && v18
+  v17 = this->m_pParams;
+  bEnableToneControls = v17->sInvariantParams.bEnableToneControls;
+  if ( (this->m_PrevInvariantParams.bEnableToneControls != bEnableToneControls
+     || this->m_PrevInvariantParams.eFilter1Pos != v17->sInvariantParams.eFilter1Pos
+     || this->m_PrevInvariantParams.eFilter2Pos != v17->sInvariantParams.eFilter2Pos
+     || this->m_PrevInvariantParams.eFilter3Pos != v17->sInvariantParams.eFilter3Pos)
+    && bEnableToneControls
     && (v17->sInvariantParams.eFilter1Pos || v17->sInvariantParams.eFilter2Pos || v17->sInvariantParams.eFilter3Pos) )
   {
-    CAkRoomVerbFX::TermToneControlFilters(v2, v2->m_pAllocator);
-    if ( CAkRoomVerbFX::SetupToneControlFilters(v2) != 1 )
+    CAkRoomVerbFX::TermToneControlFilters(this, this->m_pAllocator);
+    if ( CAkRoomVerbFX::SetupToneControlFilters(this) != AK_Success )
       return 1;
-    CAkRoomVerbFX::ResetToneControlFilters(v2);
+    CAkRoomVerbFX::ResetToneControlFilters(this);
   }
-  if ( v2->m_PrevInvariantParams.eFilter1Curve != v2->m_pParams->sInvariantParams.eFilter1Curve )
-    CAkRoomVerbFX::ComputeTCCoefs1(v2);
-  if ( v2->m_PrevInvariantParams.eFilter2Curve != v2->m_pParams->sInvariantParams.eFilter2Curve )
-    CAkRoomVerbFX::ComputeTCCoefs2(v2);
-  if ( v2->m_PrevInvariantParams.eFilter3Curve != v2->m_pParams->sInvariantParams.eFilter3Curve )
-    CAkRoomVerbFX::ComputeTCCoefs3(v2);
-  v19 = v2->m_pParams;
-  v2->m_PrevInvariantParams.uERPattern = v19->sInvariantParams.uERPattern;
-  v2->m_PrevInvariantParams.fReverbDelay = v19->sInvariantParams.fReverbDelay;
-  v2->m_PrevInvariantParams.fRoomSize = v19->sInvariantParams.fRoomSize;
-  v2->m_PrevInvariantParams.fERFrontBackDelay = v19->sInvariantParams.fERFrontBackDelay;
-  v2->m_PrevInvariantParams.fDensity = v19->sInvariantParams.fDensity;
-  v2->m_PrevInvariantParams.fRoomShape = v19->sInvariantParams.fRoomShape;
-  v2->m_PrevInvariantParams.uNumReverbUnits = v19->sInvariantParams.uNumReverbUnits;
-  v2->m_PrevInvariantParams.fInputCenterLevel = v19->sInvariantParams.fInputCenterLevel;
-  v2->m_PrevInvariantParams.fInputLFELevel = v19->sInvariantParams.fInputLFELevel;
-  v2->m_PrevInvariantParams.eFilter1Pos = v19->sInvariantParams.eFilter1Pos;
-  v2->m_PrevInvariantParams.eFilter1Curve = v19->sInvariantParams.eFilter1Curve;
-  v2->m_PrevInvariantParams.eFilter2Pos = v19->sInvariantParams.eFilter2Pos;
-  v2->m_PrevInvariantParams.eFilter2Curve = v19->sInvariantParams.eFilter2Curve;
-  v2->m_PrevInvariantParams.eFilter3Pos = v19->sInvariantParams.eFilter3Pos;
-  v2->m_PrevInvariantParams.eFilter3Curve = v19->sInvariantParams.eFilter3Curve;
-  *(_DWORD *)&v2->m_PrevInvariantParams.bEnableToneControls = *(_DWORD *)&v19->sInvariantParams.bEnableToneControls;
+  if ( this->m_PrevInvariantParams.eFilter1Curve != this->m_pParams->sInvariantParams.eFilter1Curve )
+    CAkRoomVerbFX::ComputeTCCoefs1(this);
+  if ( this->m_PrevInvariantParams.eFilter2Curve != this->m_pParams->sInvariantParams.eFilter2Curve )
+    CAkRoomVerbFX::ComputeTCCoefs2(this);
+  if ( this->m_PrevInvariantParams.eFilter3Curve != this->m_pParams->sInvariantParams.eFilter3Curve )
+    CAkRoomVerbFX::ComputeTCCoefs3(this);
+  v19 = this->m_pParams;
+  this->m_PrevInvariantParams.uERPattern = v19->sInvariantParams.uERPattern;
+  this->m_PrevInvariantParams.fReverbDelay = v19->sInvariantParams.fReverbDelay;
+  this->m_PrevInvariantParams.fRoomSize = v19->sInvariantParams.fRoomSize;
+  this->m_PrevInvariantParams.fERFrontBackDelay = v19->sInvariantParams.fERFrontBackDelay;
+  this->m_PrevInvariantParams.fDensity = v19->sInvariantParams.fDensity;
+  this->m_PrevInvariantParams.fRoomShape = v19->sInvariantParams.fRoomShape;
+  this->m_PrevInvariantParams.uNumReverbUnits = v19->sInvariantParams.uNumReverbUnits;
+  this->m_PrevInvariantParams.fInputCenterLevel = v19->sInvariantParams.fInputCenterLevel;
+  this->m_PrevInvariantParams.fInputLFELevel = v19->sInvariantParams.fInputLFELevel;
+  this->m_PrevInvariantParams.eFilter1Pos = v19->sInvariantParams.eFilter1Pos;
+  this->m_PrevInvariantParams.eFilter1Curve = v19->sInvariantParams.eFilter1Curve;
+  this->m_PrevInvariantParams.eFilter2Pos = v19->sInvariantParams.eFilter2Pos;
+  this->m_PrevInvariantParams.eFilter2Curve = v19->sInvariantParams.eFilter2Curve;
+  this->m_PrevInvariantParams.eFilter3Pos = v19->sInvariantParams.eFilter3Pos;
+  this->m_PrevInvariantParams.eFilter3Curve = v19->sInvariantParams.eFilter3Curve;
+  *(_DWORD *)&this->m_PrevInvariantParams.bEnableToneControls = *(_DWORD *)&v19->sInvariantParams.bEnableToneControls;
   v19->sInvariantParams.bDirty = 0;
   return 0;
+}nableToneControls;
+  v19->sInvariantParams.bDirty = 0;
+  return 0;
 }
 
 // File Line: 755
 // RVA: 0xAE25F0
 void __fastcall CAkRoomVerbFX::RTPCParametersUpdate(CAkRoomVerbFX *this)
 {
-  CAkRoomVerbFX *v1; // rbx
-  CAkRoomVerbFXParams *v2; // rcx
-  float *v3; // rax
-  float *v4; // rax
-  float *v5; // rax
+  CAkRoomVerbFXParams *m_pParams; // rcx
+  CAkRoomVerbFXParams *v3; // rax
+  CAkRoomVerbFXParams *v4; // rax
+  CAkRoomVerbFXParams *v5; // rax
   CAkRoomVerbFXParams *v6; // rax
 
-  v1 = this;
-  v2 = this->m_pParams;
-  if ( v1->m_PrevRTPCParams.fDecayTime != v2->sRTPCParams.fDecayTime
-    || v1->m_PrevRTPCParams.fHFDamping != v2->sRTPCParams.fHFDamping )
+  m_pParams = this->m_pParams;
+  if ( this->m_PrevRTPCParams.fDecayTime != m_pParams->sRTPCParams.fDecayTime
+    || this->m_PrevRTPCParams.fHFDamping != m_pParams->sRTPCParams.fHFDamping )
   {
-    CAkRoomVerbFX::ChangeDecay(v1);
-    v2 = v1->m_pParams;
-    v1->m_Reverb.uTailLength = (signed int)(float)((float)((float)(v2->sInvariantParams.fReverbDelay * 0.001)
-                                                         + v2->sRTPCParams.fDecayTime)
-                                                 * (float)(signed int)v1->m_Reverb.uSampleRate);
+    CAkRoomVerbFX::ChangeDecay(this);
+    m_pParams = this->m_pParams;
+    this->m_Reverb.uTailLength = (int)(float)((float)((float)(m_pParams->sInvariantParams.fReverbDelay * 0.001)
+                                                    + m_pParams->sRTPCParams.fDecayTime)
+                                            * (float)(int)this->m_Reverb.uSampleRate);
   }
-  if ( v1->m_PrevRTPCParams.fDiffusion != v2->sRTPCParams.fDiffusion )
-    CAkRoomVerbFX::ChangeDiffusion(v1);
-  v3 = (float *)v1->m_pParams;
-  if ( v1->m_PrevRTPCParams.fFilter1Gain != v3[6]
-    || v1->m_PrevRTPCParams.fFilter1Freq != v3[7]
-    || v1->m_PrevRTPCParams.fFilter1Q != v3[8] )
+  if ( this->m_PrevRTPCParams.fDiffusion != m_pParams->sRTPCParams.fDiffusion )
+    CAkRoomVerbFX::ChangeDiffusion(this);
+  v3 = this->m_pParams;
+  if ( this->m_PrevRTPCParams.fFilter1Gain != v3->sRTPCParams.fFilter1Gain
+    || this->m_PrevRTPCParams.fFilter1Freq != v3->sRTPCParams.fFilter1Freq
+    || this->m_PrevRTPCParams.fFilter1Q != v3->sRTPCParams.fFilter1Q )
   {
-    CAkRoomVerbFX::ComputeTCCoefs1(v1);
+    CAkRoomVerbFX::ComputeTCCoefs1(this);
   }
-  v4 = (float *)v1->m_pParams;
-  if ( v1->m_PrevRTPCParams.fFilter2Gain != v4[9]
-    || v1->m_PrevRTPCParams.fFilter2Freq != v4[10]
-    || v1->m_PrevRTPCParams.fFilter2Q != v4[11] )
+  v4 = this->m_pParams;
+  if ( this->m_PrevRTPCParams.fFilter2Gain != v4->sRTPCParams.fFilter2Gain
+    || this->m_PrevRTPCParams.fFilter2Freq != v4->sRTPCParams.fFilter2Freq
+    || this->m_PrevRTPCParams.fFilter2Q != v4->sRTPCParams.fFilter2Q )
   {
-    CAkRoomVerbFX::ComputeTCCoefs2(v1);
+    CAkRoomVerbFX::ComputeTCCoefs2(this);
   }
-  v5 = (float *)v1->m_pParams;
-  if ( v1->m_PrevRTPCParams.fFilter3Gain != v5[12]
-    || v1->m_PrevRTPCParams.fFilter3Freq != v5[13]
-    || v1->m_PrevRTPCParams.fFilter3Q != v5[14] )
+  v5 = this->m_pParams;
+  if ( this->m_PrevRTPCParams.fFilter3Gain != v5->sRTPCParams.fFilter3Gain
+    || this->m_PrevRTPCParams.fFilter3Freq != v5->sRTPCParams.fFilter3Freq
+    || this->m_PrevRTPCParams.fFilter3Q != v5->sRTPCParams.fFilter3Q )
   {
-    CAkRoomVerbFX::ComputeTCCoefs3(v1);
+    CAkRoomVerbFX::ComputeTCCoefs3(this);
   }
-  v6 = v1->m_pParams;
-  if ( v1->m_Reverb.bIsSentMode )
+  v6 = this->m_pParams;
+  if ( this->m_Reverb.bIsSentMode )
   {
     v6->sRTPCParams.fDryLevel = 0.0;
-    v6 = v1->m_pParams;
+    v6 = this->m_pParams;
   }
   v6->sRTPCParams.bDirty = 0;
 }
@@ -1217,39 +1139,35 @@ void __fastcall CAkRoomVerbFX::RTPCParametersUpdate(CAkRoomVerbFX *this)
 // RVA: 0xAE15C0
 void __fastcall CAkRoomVerbFX::Execute(CAkRoomVerbFX *this, AkAudioBuffer *io_pBuffer)
 {
-  AkAudioBuffer *v2; // rdi
-  CAkRoomVerbFX *v3; // rbx
-  unsigned int v4; // ecx
-  int v5; // ecx
-  CAkRoomVerbFXParams *v6; // rcx
+  unsigned int uChannelMask; // ecx
+  unsigned int v5; // ecx
+  CAkRoomVerbFXParams *m_pParams; // rcx
 
-  v2 = io_pBuffer;
-  v3 = this;
   if ( !this->m_pParams->sInvariantParams.bDirty || !CAkRoomVerbFX::LiveParametersUpdate(this, io_pBuffer) )
   {
-    if ( v3->m_pParams->sRTPCParams.bDirty )
-      CAkRoomVerbFX::RTPCParametersUpdate(v3);
-    AkFXTailHandler::HandleTail(&v3->m_Reverb.FXTailHandler, v2, v3->m_Reverb.uTailLength);
-    if ( v2->uValidFrames )
+    if ( this->m_pParams->sRTPCParams.bDirty )
+      CAkRoomVerbFX::RTPCParametersUpdate(this);
+    AkFXTailHandler::HandleTail(&this->m_Reverb.FXTailHandler, io_pBuffer, this->m_Reverb.uTailLength);
+    if ( io_pBuffer->uValidFrames )
     {
-      v4 = v2->uChannelMask;
-      if ( v4 <= 0x37 )
+      uChannelMask = io_pBuffer->uChannelMask;
+      if ( uChannelMask <= 0x37 )
       {
-        if ( v4 != 55 )
+        if ( uChannelMask != 55 )
         {
-          switch ( v4 )
+          switch ( uChannelMask )
           {
             case 3u:
             case 4u:
             case 8u:
             case 0xBu:
             case 0xCu:
-              CAkRoomVerbFX::ProcessSpread1Out(v3, v2);
+              CAkRoomVerbFX::ProcessSpread1Out(this, io_pBuffer);
               break;
             case 7u:
             case 0xFu:
             case 0x33u:
-              CAkRoomVerbFX::ProcessSpread2Out(v3, v2);
+              CAkRoomVerbFX::ProcessSpread2Out(this, io_pBuffer);
               break;
             default:
               goto LABEL_20;
@@ -1258,47 +1176,47 @@ void __fastcall CAkRoomVerbFX::Execute(CAkRoomVerbFX *this, AkAudioBuffer *io_pB
         }
         goto LABEL_16;
       }
-      if ( v4 > 0x637 )
+      if ( uChannelMask > 0x637 )
       {
-        v5 = v4 - 1595;
+        v5 = uChannelMask - 1595;
         if ( v5 && v5 != 4 )
           goto LABEL_20;
       }
-      else if ( v4 != 1591 )
+      else if ( uChannelMask != 1591 )
       {
-        if ( !((v4 - 59) & 0xFFFFFFFB) )
+        if ( ((uChannelMask - 59) & 0xFFFFFFFB) == 0 )
         {
 LABEL_16:
-          CAkRoomVerbFX::ProcessSpread3Out(v3, v2);
+          CAkRoomVerbFX::ProcessSpread3Out(this, io_pBuffer);
 LABEL_20:
-          v6 = v3->m_pParams;
-          v3->m_PrevRTPCParams.fDecayTime = v6->sRTPCParams.fDecayTime;
-          v3->m_PrevRTPCParams.fHFDamping = v6->sRTPCParams.fHFDamping;
-          v3->m_PrevRTPCParams.fDiffusion = v6->sRTPCParams.fDiffusion;
-          v3->m_PrevRTPCParams.fStereoWidth = v6->sRTPCParams.fStereoWidth;
-          v3->m_PrevRTPCParams.fFilter1Gain = v6->sRTPCParams.fFilter1Gain;
-          v3->m_PrevRTPCParams.fFilter1Freq = v6->sRTPCParams.fFilter1Freq;
-          v3->m_PrevRTPCParams.fFilter1Q = v6->sRTPCParams.fFilter1Q;
-          v3->m_PrevRTPCParams.fFilter2Gain = v6->sRTPCParams.fFilter2Gain;
-          v3->m_PrevRTPCParams.fFilter2Freq = v6->sRTPCParams.fFilter2Freq;
-          v3->m_PrevRTPCParams.fFilter2Q = v6->sRTPCParams.fFilter2Q;
-          v3->m_PrevRTPCParams.fFilter3Gain = v6->sRTPCParams.fFilter3Gain;
-          v3->m_PrevRTPCParams.fFilter3Freq = v6->sRTPCParams.fFilter3Freq;
-          v3->m_PrevRTPCParams.fFilter3Q = v6->sRTPCParams.fFilter3Q;
-          v3->m_PrevRTPCParams.fFrontLevel = v6->sRTPCParams.fFrontLevel;
-          v3->m_PrevRTPCParams.fRearLevel = v6->sRTPCParams.fRearLevel;
-          v3->m_PrevRTPCParams.fCenterLevel = v6->sRTPCParams.fCenterLevel;
-          v3->m_PrevRTPCParams.fLFELevel = v6->sRTPCParams.fLFELevel;
-          v3->m_PrevRTPCParams.fDryLevel = v6->sRTPCParams.fDryLevel;
-          v3->m_PrevRTPCParams.fERLevel = v6->sRTPCParams.fERLevel;
-          v3->m_PrevRTPCParams.fReverbLevel = v6->sRTPCParams.fReverbLevel;
-          *(_DWORD *)&v3->m_PrevRTPCParams.bDirty = *(_DWORD *)&v6->sRTPCParams.bDirty;
+          m_pParams = this->m_pParams;
+          this->m_PrevRTPCParams.fDecayTime = m_pParams->sRTPCParams.fDecayTime;
+          this->m_PrevRTPCParams.fHFDamping = m_pParams->sRTPCParams.fHFDamping;
+          this->m_PrevRTPCParams.fDiffusion = m_pParams->sRTPCParams.fDiffusion;
+          this->m_PrevRTPCParams.fStereoWidth = m_pParams->sRTPCParams.fStereoWidth;
+          this->m_PrevRTPCParams.fFilter1Gain = m_pParams->sRTPCParams.fFilter1Gain;
+          this->m_PrevRTPCParams.fFilter1Freq = m_pParams->sRTPCParams.fFilter1Freq;
+          this->m_PrevRTPCParams.fFilter1Q = m_pParams->sRTPCParams.fFilter1Q;
+          this->m_PrevRTPCParams.fFilter2Gain = m_pParams->sRTPCParams.fFilter2Gain;
+          this->m_PrevRTPCParams.fFilter2Freq = m_pParams->sRTPCParams.fFilter2Freq;
+          this->m_PrevRTPCParams.fFilter2Q = m_pParams->sRTPCParams.fFilter2Q;
+          this->m_PrevRTPCParams.fFilter3Gain = m_pParams->sRTPCParams.fFilter3Gain;
+          this->m_PrevRTPCParams.fFilter3Freq = m_pParams->sRTPCParams.fFilter3Freq;
+          this->m_PrevRTPCParams.fFilter3Q = m_pParams->sRTPCParams.fFilter3Q;
+          this->m_PrevRTPCParams.fFrontLevel = m_pParams->sRTPCParams.fFrontLevel;
+          this->m_PrevRTPCParams.fRearLevel = m_pParams->sRTPCParams.fRearLevel;
+          this->m_PrevRTPCParams.fCenterLevel = m_pParams->sRTPCParams.fCenterLevel;
+          this->m_PrevRTPCParams.fLFELevel = m_pParams->sRTPCParams.fLFELevel;
+          this->m_PrevRTPCParams.fDryLevel = m_pParams->sRTPCParams.fDryLevel;
+          this->m_PrevRTPCParams.fERLevel = m_pParams->sRTPCParams.fERLevel;
+          this->m_PrevRTPCParams.fReverbLevel = m_pParams->sRTPCParams.fReverbLevel;
+          *(_DWORD *)&this->m_PrevRTPCParams.bDirty = *(_DWORD *)&m_pParams->sRTPCParams.bDirty;
           return;
         }
-        if ( v4 != 1587 )
+        if ( uChannelMask != 1587 )
           goto LABEL_20;
       }
-      CAkRoomVerbFX::ProcessSpread4Out(v3, v2);
+      CAkRoomVerbFX::ProcessSpread4Out(this, io_pBuffer);
       goto LABEL_20;
     }
   }
@@ -1308,14 +1226,14 @@ LABEL_20:
 // RVA: 0xAE6210
 void __fastcall CAkRoomVerbFX::ChangeDiffusion(CAkRoomVerbFX *this)
 {
-  CAkRoomVerbFXParams *v1; // rax
+  CAkRoomVerbFXParams *m_pParams; // rax
   float v2; // xmm1_4
   float v3; // xmm1_4
   float v4; // xmm1_4
   float v5; // xmm2_4
 
-  v1 = this->m_pParams;
-  v2 = (float)((float)((float)(v1->sRTPCParams.fDiffusion * 0.0099999998) * 0.61803001) * 4.0) - 1.85409;
+  m_pParams = this->m_pParams;
+  v2 = (float)((float)((float)(m_pParams->sRTPCParams.fDiffusion * 0.0099999998) * 0.61803001) * 4.0) - 1.85409;
   if ( v2 <= 0.0 )
   {
     v2 = 0.0;
@@ -1325,7 +1243,7 @@ void __fastcall CAkRoomVerbFX::ChangeDiffusion(CAkRoomVerbFX *this)
     v2 = FLOAT_0_61803001;
   }
   this->m_Reverb.DiffusionFilters[0].fG = v2;
-  v3 = (float)((float)((float)(v1->sRTPCParams.fDiffusion * 0.0099999998) * 0.61803001) * 4.0) - 1.23606;
+  v3 = (float)((float)((float)(m_pParams->sRTPCParams.fDiffusion * 0.0099999998) * 0.61803001) * 4.0) - 1.23606;
   if ( v3 <= 0.0 )
   {
     v3 = 0.0;
@@ -1335,7 +1253,7 @@ void __fastcall CAkRoomVerbFX::ChangeDiffusion(CAkRoomVerbFX *this)
     v3 = FLOAT_0_61803001;
   }
   this->m_Reverb.DiffusionFilters[1].fG = v3;
-  v4 = (float)((float)((float)(v1->sRTPCParams.fDiffusion * 0.0099999998) * 0.61803001) * 4.0) - 0.61803001;
+  v4 = (float)((float)((float)(m_pParams->sRTPCParams.fDiffusion * 0.0099999998) * 0.61803001) * 4.0) - 0.61803001;
   if ( v4 <= 0.0 )
   {
     v4 = 0.0;
@@ -1345,7 +1263,7 @@ void __fastcall CAkRoomVerbFX::ChangeDiffusion(CAkRoomVerbFX *this)
     v4 = FLOAT_0_61803001;
   }
   this->m_Reverb.DiffusionFilters[2].fG = v4;
-  v5 = (float)((float)(v1->sRTPCParams.fDiffusion * 0.0099999998) * 0.61803001) * 4.0;
+  v5 = (float)((float)(m_pParams->sRTPCParams.fDiffusion * 0.0099999998) * 0.61803001) * 4.0;
   if ( v5 <= 0.0 )
   {
     this->m_Reverb.DiffusionFilters[3].fG = 0.0;
@@ -1364,53 +1282,45 @@ void __fastcall CAkRoomVerbFX::ChangeDiffusion(CAkRoomVerbFX *this)
 // RVA: 0xAE61A0
 void __fastcall CAkRoomVerbFX::ChangeDecay(CAkRoomVerbFX *this)
 {
-  unsigned int v1; // edi
-  CAkRoomVerbFX *v2; // rbx
+  unsigned int i; // edi
 
-  v1 = 0;
-  v2 = this;
-  if ( this->m_Reverb.uNumReverbUnits )
-  {
-    do
-      DSP::FDN4::ChangeDecay(
-        &v2->m_pReverbUnitsState[v1++].ReverbUnits,
-        v2->m_pParams->sRTPCParams.fDecayTime,
-        v2->m_pParams->sRTPCParams.fHFDamping,
-        v2->m_Reverb.uSampleRate);
-    while ( v1 < v2->m_Reverb.uNumReverbUnits );
-  }
+  for ( i = 0; i < this->m_Reverb.uNumReverbUnits; ++i )
+    DSP::FDN4::ChangeDecay(
+      &this->m_pReverbUnitsState[i].ReverbUnits,
+      this->m_pParams->sRTPCParams.fDecayTime,
+      this->m_pParams->sRTPCParams.fHFDamping,
+      this->m_Reverb.uSampleRate);
 }
 
 // File Line: 1048
 // RVA: 0xAE2750
-void __fastcall CAkRoomVerbFX::WetPreProcess(CAkRoomVerbFX *this, AkAudioBuffer *in_pBuffer, float *out_pfWetIn, unsigned int in_uNumFrames, unsigned int in_uFrameOffset)
+void __fastcall CAkRoomVerbFX::WetPreProcess(
+        CAkRoomVerbFX *this,
+        AkAudioBuffer *in_pBuffer,
+        float *out_pfWetIn,
+        unsigned int in_uNumFrames,
+        unsigned int in_uFrameOffset)
 {
-  unsigned int v5; // ebp
-  float *v6; // r14
-  CAkRoomVerbFX *v7; // r15
-  unsigned __int8 v8; // si
-  signed __int64 v9; // rdi
+  unsigned __int8 i; // si
+  ToneControlsState *v9; // rdi
   unsigned int v10; // eax
   float *v11; // rdx
   __int64 v12; // rbx
   unsigned int v13; // eax
-  int v14; // er8
+  int v14; // r8d
   __m128 v15; // xmm6
   __m128 v16; // xmm5
   __m128 v17; // xmm0
-  unsigned __int64 v18; // rcx
+  float *v18; // rcx
   __m128 v19; // xmm4
   __m128 v20; // xmm3
   __m128 v21; // xmm2
   __m128 v22; // xmm4
-  int v23; // [rsp+40h] [rbp-68h]
-  int v24; // [rsp+50h] [rbp-58h]
-  int v25; // [rsp+60h] [rbp-48h]
-  int v26; // [rsp+70h] [rbp-38h]
+  float v23; // [rsp+40h] [rbp-68h]
+  float v24; // [rsp+50h] [rbp-58h]
+  float v25; // [rsp+60h] [rbp-48h]
+  float v26; // [rsp+70h] [rbp-38h]
 
-  v5 = in_uNumFrames;
-  v6 = out_pfWetIn;
-  v7 = this;
   DSP::ConstantPowerChannelMixdown(
     in_pBuffer,
     in_uNumFrames,
@@ -1419,84 +1329,90 @@ void __fastcall CAkRoomVerbFX::WetPreProcess(CAkRoomVerbFX *this, AkAudioBuffer 
     in_pBuffer->uChannelMask,
     this->m_pParams->sInvariantParams.fInputCenterLevel,
     this->m_pParams->sInvariantParams.fInputLFELevel);
-  if ( v7->m_pParams->sInvariantParams.bEnableToneControls )
+  if ( this->m_pParams->sInvariantParams.bEnableToneControls )
   {
-    v8 = 0;
-    if ( v7->m_Reverb.uTCFilterIndex[0] )
+    for ( i = 0; i < (unsigned int)this->m_Reverb.uTCFilterIndex[0]; ++i )
     {
-      do
+      v9 = &this->m_pTCFiltersState[i];
+      if ( v9->FilterPos == FILTERINSERTTYPE_ERANDREVERB )
       {
-        v9 = (signed __int64)&v7->m_pTCFiltersState[v8];
-        if ( *(_DWORD *)(v9 + 176) == 3 )
+        v10 = in_uNumFrames;
+        v11 = out_pfWetIn;
+        if ( ((unsigned __int8)out_pfWetIn & 0xF) != 0 )
         {
-          v10 = v5;
-          v11 = v6;
-          if ( (unsigned __int8)v6 & 0xF )
+          v12 = in_uNumFrames;
+          v13 = (16 - ((unsigned __int8)out_pfWetIn & 0xFu)) >> 2;
+          if ( v13 < in_uNumFrames )
+            v12 = v13;
+          DSP::BiquadFilter<DSP::SingleChannelPolicy>::ProcessBufferScalar(
+            &this->m_pTCFiltersState[i].Filter,
+            out_pfWetIn,
+            v12,
+            0);
+          v11 = &out_pfWetIn[v12];
+          v10 = in_uNumFrames - v12;
+        }
+        v14 = v10 & 3;
+        v15 = _mm_shuffle_ps(
+                (__m128)LODWORD(v9->Filter.m_Memories.m_Memories.fFFwd1),
+                (__m128)LODWORD(v9->Filter.m_Memories.m_Memories.fFFwd1),
+                0);
+        v16 = _mm_shuffle_ps(
+                (__m128)LODWORD(v9->Filter.m_Memories.m_Memories.fFFwd2),
+                (__m128)LODWORD(v9->Filter.m_Memories.m_Memories.fFFwd2),
+                0);
+        v17 = _mm_shuffle_ps(
+                (__m128)LODWORD(v9->Filter.m_Memories.m_Memories.fFFbk1),
+                (__m128)LODWORD(v9->Filter.m_Memories.m_Memories.fFFbk1),
+                0);
+        v18 = &v11[v10 - v14];
+        v23 = v15.m128_f32[0];
+        v24 = v16.m128_f32[0];
+        v25 = v17.m128_f32[0];
+        v19 = _mm_shuffle_ps(
+                (__m128)LODWORD(v9->Filter.m_Memories.m_Memories.fFFbk2),
+                (__m128)LODWORD(v9->Filter.m_Memories.m_Memories.fFFbk2),
+                0);
+        v26 = v19.m128_f32[0];
+        if ( v11 < v18 )
+        {
+          do
           {
-            v12 = v5;
-            v13 = (16 - ((unsigned __int8)v6 & 0xFu)) >> 2;
-            if ( v13 < v5 )
-              v12 = v13;
-            DSP::BiquadFilter<DSP::SingleChannelPolicy>::ProcessBufferScalar(
-              &v7->m_pTCFiltersState[v8].Filter,
-              v6,
-              v12,
-              0);
-            v11 = &v6[v12];
-            v10 = v5 - v12;
-          }
-          v14 = v10 & 3;
-          v15 = _mm_shuffle_ps((__m128)*(unsigned int *)(v9 + 160), (__m128)*(unsigned int *)(v9 + 160), 0);
-          v16 = _mm_shuffle_ps((__m128)*(unsigned int *)(v9 + 164), (__m128)*(unsigned int *)(v9 + 164), 0);
-          v17 = _mm_shuffle_ps((__m128)*(unsigned int *)(v9 + 168), (__m128)*(unsigned int *)(v9 + 168), 0);
-          v18 = (unsigned __int64)&v11[v10 - v14];
-          v23 = v15.m128_i32[0];
-          v24 = v16.m128_i32[0];
-          v25 = v17.m128_i32[0];
-          v19 = _mm_shuffle_ps((__m128)*(unsigned int *)(v9 + 172), (__m128)*(unsigned int *)(v9 + 172), 0);
-          v26 = v19.m128_i32[0];
-          if ( (unsigned __int64)v11 < v18 )
-          {
-            do
-            {
-              v20 = *(__m128 *)v11;
-              v11 += 4;
-              v21 = _mm_add_ps(_mm_mul_ps(*(__m128 *)(v9 + 80), v16), _mm_mul_ps(*(__m128 *)(v9 + 64), v15));
-              v16 = _mm_shuffle_ps(v20, v20, 170);
-              v15 = _mm_shuffle_ps(v20, v20, 255);
-              v22 = _mm_add_ps(
+            v20 = *(__m128 *)v11;
+            v11 += 4;
+            v21 = _mm_add_ps(
+                    _mm_mul_ps(v9->Filter.m_Coefficients.vXPrev2, v16),
+                    _mm_mul_ps(v9->Filter.m_Coefficients.vXPrev1, v15));
+            v16 = _mm_shuffle_ps(v20, v20, 170);
+            v15 = _mm_shuffle_ps(v20, v20, 255);
+            v22 = _mm_add_ps(
+                    _mm_add_ps(
                       _mm_add_ps(
                         _mm_add_ps(
-                          _mm_add_ps(_mm_mul_ps(v19, *(__m128 *)(v9 + 112)), _mm_mul_ps(v17, *(__m128 *)(v9 + 96))),
-                          _mm_mul_ps(*(__m128 *)(v9 + 16), v16)),
-                        _mm_add_ps(v21, _mm_mul_ps(v20, *(__m128 *)v9))),
-                      _mm_add_ps(
-                        _mm_mul_ps(_mm_shuffle_ps(v20, v20, 85), *(__m128 *)(v9 + 32)),
-                        _mm_mul_ps(_mm_shuffle_ps(v20, v20, 0), *(__m128 *)(v9 + 48))));
-              *((__m128 *)v11 - 1) = v22;
-              v17 = _mm_shuffle_ps(v22, v22, 255);
-              v19 = _mm_shuffle_ps(v22, v22, 170);
-            }
-            while ( (unsigned __int64)v11 < v18 );
-            v26 = v19.m128_i32[0];
-            v25 = v17.m128_i32[0];
-            v24 = v16.m128_i32[0];
-            v23 = v15.m128_i32[0];
+                          _mm_mul_ps(v19, v9->Filter.m_Coefficients.vYPrev2),
+                          _mm_mul_ps(v17, v9->Filter.m_Coefficients.vYPrev1)),
+                        _mm_mul_ps(v9->Filter.m_Coefficients.vSecond, v16)),
+                      _mm_add_ps(v21, _mm_mul_ps(v20, v9->Filter.m_Coefficients.vFirst))),
+                    _mm_add_ps(
+                      _mm_mul_ps(_mm_shuffle_ps(v20, v20, 85), v9->Filter.m_Coefficients.vThird),
+                      _mm_mul_ps(_mm_shuffle_ps(v20, v20, 0), v9->Filter.m_Coefficients.vFourth)));
+            *((__m128 *)v11 - 1) = v22;
+            v17 = _mm_shuffle_ps(v22, v22, 255);
+            v19 = _mm_shuffle_ps(v22, v22, 170);
           }
-          *(_DWORD *)(v9 + 160) = v23;
-          *(_DWORD *)(v9 + 164) = v24;
-          *(_DWORD *)(v9 + 168) = v25;
-          *(_DWORD *)(v9 + 172) = v26;
-          if ( v10 & 3 )
-            DSP::BiquadFilter<DSP::SingleChannelPolicy>::ProcessBufferScalar(
-              (DSP::BiquadFilter<DSP::SingleChannelPolicy> *)v9,
-              v11,
-              v14,
-              0);
+          while ( v11 < v18 );
+          v26 = v19.m128_f32[0];
+          v25 = v17.m128_f32[0];
+          v24 = v16.m128_f32[0];
+          v23 = v15.m128_f32[0];
         }
-        ++v8;
+        v9->Filter.m_Memories.m_Memories.fFFwd1 = v23;
+        v9->Filter.m_Memories.m_Memories.fFFwd2 = v24;
+        v9->Filter.m_Memories.m_Memories.fFFbk1 = v25;
+        v9->Filter.m_Memories.m_Memories.fFFbk2 = v26;
+        if ( (v10 & 3) != 0 )
+          DSP::BiquadFilter<DSP::SingleChannelPolicy>::ProcessBufferScalar(&v9->Filter, v11, v14, 0);
       }
-      while ( v8 < v7->m_Reverb.uTCFilterIndex[0] );
     }
   }
 }
@@ -1505,132 +1421,133 @@ void __fastcall CAkRoomVerbFX::WetPreProcess(CAkRoomVerbFX *this, AkAudioBuffer 
 // RVA: 0xAE29C0
 void __fastcall CAkRoomVerbFX::ReverbPreProcess(CAkRoomVerbFX *this, float *io_pfBuffer, unsigned int in_uNumFrames)
 {
-  unsigned int v3; // ebp
-  float *v4; // r14
-  CAkRoomVerbFX *v5; // r15
-  unsigned __int8 v6; // si
-  signed __int64 v7; // rdi
+  unsigned __int8 i; // si
+  ToneControlsState *v7; // rdi
   unsigned int v8; // eax
   float *v9; // rdx
   __int64 v10; // rbx
   unsigned int v11; // eax
-  int v12; // er8
+  int v12; // r8d
   __m128 v13; // xmm7
   __m128 v14; // xmm6
   __m128 v15; // xmm8
-  unsigned __int64 v16; // rcx
+  float *v16; // rcx
   __m128 v17; // xmm5
   __m128 v18; // xmm4
   __m128 v19; // xmm2
   __m128 v20; // xmm5
-  int v21; // [rsp+20h] [rbp-88h]
-  int v22; // [rsp+30h] [rbp-78h]
-  int v23; // [rsp+40h] [rbp-68h]
-  int v24; // [rsp+50h] [rbp-58h]
+  float v21; // [rsp+20h] [rbp-88h]
+  float v22; // [rsp+30h] [rbp-78h]
+  float v23; // [rsp+40h] [rbp-68h]
+  float v24; // [rsp+50h] [rbp-58h]
 
-  v3 = in_uNumFrames;
-  v4 = io_pfBuffer;
-  v5 = this;
   if ( this->m_pParams->sInvariantParams.bEnableToneControls )
   {
-    v6 = 0;
-    if ( this->m_Reverb.uTCFilterIndex[0] )
+    for ( i = 0; i < (unsigned int)this->m_Reverb.uTCFilterIndex[0]; ++i )
     {
-      do
+      v7 = &this->m_pTCFiltersState[i];
+      if ( v7->FilterPos == FILTERINSERTTYPE_REVERBONLY )
       {
-        v7 = (signed __int64)&v5->m_pTCFiltersState[v6];
-        if ( *(_DWORD *)(v7 + 176) == 2 )
+        v8 = in_uNumFrames;
+        v9 = io_pfBuffer;
+        if ( ((unsigned __int8)io_pfBuffer & 0xF) != 0 )
         {
-          v8 = v3;
-          v9 = v4;
-          if ( (unsigned __int8)v4 & 0xF )
+          v10 = in_uNumFrames;
+          v11 = (16 - ((unsigned __int8)io_pfBuffer & 0xFu)) >> 2;
+          if ( v11 < in_uNumFrames )
+            v10 = v11;
+          DSP::BiquadFilter<DSP::SingleChannelPolicy>::ProcessBufferScalar(
+            &this->m_pTCFiltersState[i].Filter,
+            io_pfBuffer,
+            v10,
+            0);
+          v9 = &io_pfBuffer[v10];
+          v8 = in_uNumFrames - v10;
+        }
+        v12 = v8 & 3;
+        v13 = _mm_shuffle_ps(
+                (__m128)LODWORD(v7->Filter.m_Memories.m_Memories.fFFwd1),
+                (__m128)LODWORD(v7->Filter.m_Memories.m_Memories.fFFwd1),
+                0);
+        v14 = _mm_shuffle_ps(
+                (__m128)LODWORD(v7->Filter.m_Memories.m_Memories.fFFwd2),
+                (__m128)LODWORD(v7->Filter.m_Memories.m_Memories.fFFwd2),
+                0);
+        v15 = _mm_shuffle_ps(
+                (__m128)LODWORD(v7->Filter.m_Memories.m_Memories.fFFbk1),
+                (__m128)LODWORD(v7->Filter.m_Memories.m_Memories.fFFbk1),
+                0);
+        v16 = &v9[v8 - v12];
+        v21 = v13.m128_f32[0];
+        v22 = v14.m128_f32[0];
+        v23 = v15.m128_f32[0];
+        v17 = _mm_shuffle_ps(
+                (__m128)LODWORD(v7->Filter.m_Memories.m_Memories.fFFbk2),
+                (__m128)LODWORD(v7->Filter.m_Memories.m_Memories.fFFbk2),
+                0);
+        v24 = v17.m128_f32[0];
+        if ( v9 < v16 )
+        {
+          do
           {
-            v10 = v3;
-            v11 = (16 - ((unsigned __int8)v4 & 0xFu)) >> 2;
-            if ( v11 < v3 )
-              v10 = v11;
-            DSP::BiquadFilter<DSP::SingleChannelPolicy>::ProcessBufferScalar(
-              &v5->m_pTCFiltersState[v6].Filter,
-              v4,
-              v10,
-              0);
-            v9 = &v4[v10];
-            v8 = v3 - v10;
-          }
-          v12 = v8 & 3;
-          v13 = _mm_shuffle_ps((__m128)*(unsigned int *)(v7 + 160), (__m128)*(unsigned int *)(v7 + 160), 0);
-          v14 = _mm_shuffle_ps((__m128)*(unsigned int *)(v7 + 164), (__m128)*(unsigned int *)(v7 + 164), 0);
-          v15 = _mm_shuffle_ps((__m128)*(unsigned int *)(v7 + 168), (__m128)*(unsigned int *)(v7 + 168), 0);
-          v16 = (unsigned __int64)&v9[v8 - v12];
-          v21 = v13.m128_i32[0];
-          v22 = v14.m128_i32[0];
-          v23 = v15.m128_i32[0];
-          v17 = _mm_shuffle_ps((__m128)*(unsigned int *)(v7 + 172), (__m128)*(unsigned int *)(v7 + 172), 0);
-          v24 = v17.m128_i32[0];
-          if ( (unsigned __int64)v9 < v16 )
-          {
-            do
-            {
-              v18 = *(__m128 *)v9;
-              v9 += 4;
-              v19 = _mm_add_ps(_mm_mul_ps(*(__m128 *)(v7 + 80), v14), _mm_mul_ps(*(__m128 *)(v7 + 64), v13));
-              v14 = _mm_shuffle_ps(v18, v18, 170);
-              v13 = _mm_shuffle_ps(v18, v18, 255);
-              v20 = _mm_add_ps(
+            v18 = *(__m128 *)v9;
+            v9 += 4;
+            v19 = _mm_add_ps(
+                    _mm_mul_ps(v7->Filter.m_Coefficients.vXPrev2, v14),
+                    _mm_mul_ps(v7->Filter.m_Coefficients.vXPrev1, v13));
+            v14 = _mm_shuffle_ps(v18, v18, 170);
+            v13 = _mm_shuffle_ps(v18, v18, 255);
+            v20 = _mm_add_ps(
+                    _mm_add_ps(
                       _mm_add_ps(
                         _mm_add_ps(
-                          _mm_add_ps(_mm_mul_ps(v17, *(__m128 *)(v7 + 112)), _mm_mul_ps(*(__m128 *)(v7 + 96), v15)),
-                          _mm_mul_ps(*(__m128 *)(v7 + 16), v14)),
-                        _mm_add_ps(_mm_mul_ps(*(__m128 *)v7, v18), v19)),
-                      _mm_add_ps(
-                        _mm_mul_ps(_mm_shuffle_ps(v18, v18, 0), *(__m128 *)(v7 + 48)),
-                        _mm_mul_ps(_mm_shuffle_ps(v18, v18, 85), *(__m128 *)(v7 + 32))));
-              *((__m128 *)v9 - 1) = v20;
-              v15 = _mm_shuffle_ps(v20, v20, 255);
-              v17 = _mm_shuffle_ps(v20, v20, 170);
-            }
-            while ( (unsigned __int64)v9 < v16 );
-            v24 = v17.m128_i32[0];
-            v22 = v14.m128_i32[0];
-            v21 = v13.m128_i32[0];
-            v23 = v15.m128_i32[0];
+                          _mm_mul_ps(v17, v7->Filter.m_Coefficients.vYPrev2),
+                          _mm_mul_ps(v7->Filter.m_Coefficients.vYPrev1, v15)),
+                        _mm_mul_ps(v7->Filter.m_Coefficients.vSecond, v14)),
+                      _mm_add_ps(_mm_mul_ps(v7->Filter.m_Coefficients.vFirst, v18), v19)),
+                    _mm_add_ps(
+                      _mm_mul_ps(_mm_shuffle_ps(v18, v18, 0), v7->Filter.m_Coefficients.vFourth),
+                      _mm_mul_ps(_mm_shuffle_ps(v18, v18, 85), v7->Filter.m_Coefficients.vThird)));
+            *((__m128 *)v9 - 1) = v20;
+            v15 = _mm_shuffle_ps(v20, v20, 255);
+            v17 = _mm_shuffle_ps(v20, v20, 170);
           }
-          *(_DWORD *)(v7 + 160) = v21;
-          *(_DWORD *)(v7 + 164) = v22;
-          *(_DWORD *)(v7 + 168) = v23;
-          *(_DWORD *)(v7 + 172) = v24;
-          if ( v8 & 3 )
-            DSP::BiquadFilter<DSP::SingleChannelPolicy>::ProcessBufferScalar(
-              (DSP::BiquadFilter<DSP::SingleChannelPolicy> *)v7,
-              v9,
-              v12,
-              0);
+          while ( v9 < v16 );
+          v24 = v17.m128_f32[0];
+          v22 = v14.m128_f32[0];
+          v21 = v13.m128_f32[0];
+          v23 = v15.m128_f32[0];
         }
-        ++v6;
+        v7->Filter.m_Memories.m_Memories.fFFwd1 = v21;
+        v7->Filter.m_Memories.m_Memories.fFFwd2 = v22;
+        v7->Filter.m_Memories.m_Memories.fFFbk1 = v23;
+        v7->Filter.m_Memories.m_Memories.fFFbk2 = v24;
+        if ( (v8 & 3) != 0 )
+          DSP::BiquadFilter<DSP::SingleChannelPolicy>::ProcessBufferScalar(&v7->Filter, v9, v12, 0);
       }
-      while ( v6 < v5->m_Reverb.uTCFilterIndex[0] );
     }
   }
 }
 
 // File Line: 1075
 // RVA: 0xAE2C10
-void __fastcall CAkRoomVerbFX::ReverbPostProcess(CAkRoomVerbFX *this, float **out_ppfReverb, unsigned int in_uNumOutSignals, float in_fGain, unsigned int in_uNumFrames)
+void __fastcall CAkRoomVerbFX::ReverbPostProcess(
+        CAkRoomVerbFX *this,
+        float **out_ppfReverb,
+        unsigned int in_uNumOutSignals,
+        float in_fGain,
+        unsigned int in_uNumFrames)
 {
   __int64 v5; // rsi
-  float **v6; // rdi
-  DSP::OnePoleZeroHPFilter *v7; // rbx
+  DSP::OnePoleZeroHPFilter *DCFilter; // rbx
 
   if ( in_uNumOutSignals )
   {
     v5 = in_uNumOutSignals;
-    v6 = out_ppfReverb;
-    v7 = this->m_Reverb.DCFilter;
+    DCFilter = this->m_Reverb.DCFilter;
     do
     {
-      DSP::OnePoleZeroHPFilter::ProcessBufferWithGain(v7, *v6, in_uNumFrames, in_fGain);
-      ++v7;
-      ++v6;
+      DSP::OnePoleZeroHPFilter::ProcessBufferWithGain(DCFilter++, *out_ppfReverb++, in_uNumFrames, in_fGain);
       --v5;
     }
     while ( v5 );
@@ -1639,10 +1556,9 @@ void __fastcall CAkRoomVerbFX::ReverbPostProcess(CAkRoomVerbFX *this, float **ou
 
 // File Line: 1106
 // RVA: 0xAE2C80
-signed __int64 __fastcall CAkRoomVerbFX::ProcessSpread1Out(CAkRoomVerbFX *this, AkAudioBuffer *io_pBuffer)
+__int64 __fastcall CAkRoomVerbFX::ProcessSpread1Out(CAkRoomVerbFX *this, AkAudioBuffer *io_pBuffer)
 {
   AkAudioBuffer *v2; // r14
-  CAkRoomVerbFX *v3; // rsi
   float *v4; // rax
   float *v5; // r13
   float *v7; // r15
@@ -1654,41 +1570,38 @@ signed __int64 __fastcall CAkRoomVerbFX::ProcessSpread1Out(CAkRoomVerbFX *this, 
   float v13; // xmm9_4
   float v14; // xmm8_4
   __m128 v15; // xmm1
-  unsigned int v16; // ecx
+  unsigned int uValidFrames; // ecx
   unsigned int in_uFrameOffset; // eax
-  DSP::DelayLine *v18; // rbx
+  DSP::DelayLine *p_ERDelay; // rbx
   unsigned int in_uNumFrames; // ebp
-  unsigned __int8 v20; // bl
-  DSP::BiquadFilter<DSP::SingleChannelPolicy> *v21; // rcx
-  DSP::AllpassFilter *v22; // rbx
-  signed __int64 v23; // rdi
-  unsigned int v24; // er14
-  signed __int64 v25; // rbx
+  unsigned __int8 i; // bl
+  DSP::BiquadFilter<DSP::SingleChannelPolicy> *p_Filter; // rcx
+  ReverbState *p_m_Reverb; // rbx
+  __int64 v23; // rdi
+  unsigned int j; // r14d
+  __int64 v25; // rbx
   float **v26; // rbx
-  DSP::OnePoleZeroHPFilter *v27; // rdi
-  signed __int64 v28; // r14
+  DSP::OnePoleZeroHPFilter *DCFilter; // rdi
+  __int64 v28; // r14
   float v29; // xmm6_4
   AkAudioBuffer *v30; // r14
   unsigned int v31; // ebx
-  unsigned int v32; // edi
+  unsigned int uChannelMask; // edi
   float *v33; // rbx
   float *v34; // r14
   float *v35; // r14
   float in_fTargetGain2; // xmm1_4
-  float *v37; // rdx
+  CAkRoomVerbFXParams *m_pParams; // rdx
   float in_fTargetGain3; // xmm1_4
   CAkRoomVerbFXParams *v39; // rdx
   bool v40; // zf
-  float *io_pfOutBuffer; // [rsp+50h] [rbp-D8h]
-  char *v42; // [rsp+58h] [rbp-D0h]
+  float in_fCurrentGain2; // [rsp+28h] [rbp-100h]
+  float *io_pfOutBuffer[2]; // [rsp+50h] [rbp-D8h] BYREF
   unsigned int v43; // [rsp+130h] [rbp+8h]
-  AkAudioBuffer *v44; // [rsp+138h] [rbp+10h]
-  int v45; // [rsp+140h] [rbp+18h]
+  unsigned int v45; // [rsp+140h] [rbp+18h]
   float *in_pfInput3; // [rsp+148h] [rbp+20h]
 
-  v44 = io_pBuffer;
   v2 = io_pBuffer;
-  v3 = this;
   v4 = (float *)this->m_pAllocator->vfptr->Malloc(
                   this->m_pAllocator,
                   (unsigned __int64)((unsigned int)(unsigned __int8)this->m_Reverb.uNumERSignals + 4) << 10);
@@ -1697,254 +1610,241 @@ signed __int64 __fastcall CAkRoomVerbFX::ProcessSpread1Out(CAkRoomVerbFX *this, 
     return 52i64;
   v7 = v4 + 256;
   v8 = 0i64;
-  io_pfOutBuffer = v4 + 512;
+  io_pfOutBuffer[0] = v4 + 512;
   v9 = 0i64;
   in_pfInput3 = 0i64;
-  v42 = (char *)(v4 + 768);
-  if ( v3->m_Reverb.uNumERSignals )
+  io_pfOutBuffer[1] = v4 + 768;
+  if ( this->m_Reverb.uNumERSignals )
   {
     v8 = v4 + 1280;
     v9 = v4 + 1024;
     in_pfInput3 = v4 + 1280;
   }
   v10 = 0.0;
-  v11 = (float)((float)(v3->m_PrevRTPCParams.fStereoWidth * 0.0055555557) * 0.29289401) + 0.70710599;
+  v11 = (float)((float)(this->m_PrevRTPCParams.fStereoWidth * 0.0055555557) * 0.29289401) + 0.70710599;
   v12 = (__m128)(unsigned int)FLOAT_1_0;
   v12.m128_f32[0] = 1.0 - (float)(v11 * v11);
   if ( v12.m128_f32[0] <= 0.0 )
     v13 = 0.0;
   else
-    LODWORD(v13) = (unsigned __int128)_mm_sqrt_ps(v12);
+    LODWORD(v13) = _mm_sqrt_ps(v12).m128_u32[0];
   v15 = (__m128)(unsigned int)FLOAT_1_0;
-  v14 = (float)((float)(v3->m_pParams->sRTPCParams.fStereoWidth * 0.0055555557) * 0.29289401) + 0.70710599;
+  v14 = (float)((float)(this->m_pParams->sRTPCParams.fStereoWidth * 0.0055555557) * 0.29289401) + 0.70710599;
   v15.m128_f32[0] = 1.0 - (float)(v14 * v14);
   if ( v15.m128_f32[0] > 0.0 )
-    LODWORD(v10) = (unsigned __int128)_mm_sqrt_ps(v15);
-  v16 = v2->uValidFrames;
+    LODWORD(v10) = _mm_sqrt_ps(v15).m128_u32[0];
+  uValidFrames = v2->uValidFrames;
   in_uFrameOffset = 0;
   v43 = 0;
-  v45 = v2->uValidFrames;
+  v45 = uValidFrames;
   if ( v2->uValidFrames )
   {
-    v18 = &v3->m_Reverb.ERDelay;
+    p_ERDelay = &this->m_Reverb.ERDelay;
     do
     {
       in_uNumFrames = 256;
-      if ( v16 < 0x100 )
-        in_uNumFrames = v16;
-      CAkRoomVerbFX::WetPreProcess(v3, v2, v5, in_uNumFrames, in_uFrameOffset);
-      if ( v3->m_Reverb.ReverbDelay.uDelayLineLength )
-        DSP::DelayLine::ProcessBuffer(&v3->m_Reverb.ReverbDelay, v5, v7, in_uNumFrames);
+      if ( uValidFrames < 0x100 )
+        in_uNumFrames = uValidFrames;
+      CAkRoomVerbFX::WetPreProcess(this, v2, v5, in_uNumFrames, in_uFrameOffset);
+      if ( this->m_Reverb.ReverbDelay.uDelayLineLength )
+        DSP::DelayLine::ProcessBuffer(&this->m_Reverb.ReverbDelay, v5, v7, in_uNumFrames);
       else
         memmove(v7, v5, 4 * in_uNumFrames);
-      if ( v18->uDelayLineLength )
-        DSP::DelayLine::ProcessBuffer(v18, v5, in_uNumFrames);
-      if ( v3->m_Reverb.uNumERSignals )
+      if ( p_ERDelay->uDelayLineLength )
+        DSP::DelayLine::ProcessBuffer(p_ERDelay, v5, in_uNumFrames);
+      if ( this->m_Reverb.uNumERSignals )
       {
-        DSP::ERUnitDual::ProcessBuffer(v3->m_pERUnit, v5, v9, v8, in_uNumFrames);
-        if ( v3->m_pParams->sInvariantParams.bEnableToneControls )
+        DSP::ERUnitDual::ProcessBuffer(this->m_pERUnit, v5, v9, v8, in_uNumFrames);
+        if ( this->m_pParams->sInvariantParams.bEnableToneControls )
         {
-          v20 = 0;
-          if ( v3->m_Reverb.uTCFilterIndex[0] )
+          for ( i = 0; i < (unsigned int)this->m_Reverb.uTCFilterIndex[0]; ++i )
           {
-            do
+            p_Filter = &this->m_pTCFiltersState[i].Filter;
+            if ( p_Filter[1].m_Coefficients.vFirst.m128_i32[0] == 1 )
             {
-              v21 = &v3->m_pTCFiltersState[v20].Filter;
-              if ( v21[1].m_Coefficients.vFirst.m128_i32[0] == 1 )
-              {
-                DSP::BiquadFilter<DSP::SingleChannelPolicy>::ProcessBuffer(v21, v9, in_uNumFrames, 0);
-                DSP::BiquadFilter<DSP::SingleChannelPolicy>::ProcessBuffer(
-                  &v3->m_pTCFiltersState[v20++ + 1].Filter,
-                  v8,
-                  in_uNumFrames,
-                  0);
-              }
-              ++v20;
+              DSP::BiquadFilter<DSP::SingleChannelPolicy>::ProcessBuffer(p_Filter, v9, in_uNumFrames, 0);
+              DSP::BiquadFilter<DSP::SingleChannelPolicy>::ProcessBuffer(
+                &this->m_pTCFiltersState[++i].Filter,
+                v8,
+                in_uNumFrames,
+                0);
             }
-            while ( v20 < v3->m_Reverb.uTCFilterIndex[0] );
           }
         }
       }
-      v22 = v3->m_Reverb.DiffusionFilters;
+      p_m_Reverb = &this->m_Reverb;
       v23 = 4i64;
       do
       {
-        DSP::AllpassFilter::ProcessBuffer(v22, v7, in_uNumFrames);
-        ++v22;
+        DSP::AllpassFilter::ProcessBuffer(p_m_Reverb->DiffusionFilters, v7, in_uNumFrames);
+        p_m_Reverb = (ReverbState *)((char *)p_m_Reverb + 24);
         --v23;
       }
       while ( v23 );
-      CAkRoomVerbFX::ReverbPreProcess(v3, v7, in_uNumFrames);
+      CAkRoomVerbFX::ReverbPreProcess(this, v7, in_uNumFrames);
       memset(v5 + 512, 0, 0x800ui64);
-      v24 = 0;
-      if ( v3->m_Reverb.uNumReverbUnits )
+      for ( j = 0; j < this->m_Reverb.uNumReverbUnits; ++j )
       {
-        do
-        {
-          v25 = v24;
-          DSP::DelayLine::ProcessBuffer(&v3->m_pReverbUnitsState[v25].RUInputDelay, v7, in_uNumFrames);
-          DSP::FDN4::ProcessBufferAccum(
-            &v3->m_pReverbUnitsState[v25].ReverbUnits,
-            v7,
-            (&io_pfOutBuffer)[v24++ & 1],
-            in_uNumFrames);
-        }
-        while ( v24 < v3->m_Reverb.uNumReverbUnits );
+        v25 = j;
+        DSP::DelayLine::ProcessBuffer(&this->m_pReverbUnitsState[v25].RUInputDelay, v7, in_uNumFrames);
+        DSP::FDN4::ProcessBufferAccum(
+          &this->m_pReverbUnitsState[v25].ReverbUnits,
+          v7,
+          io_pfOutBuffer[j & 1],
+          in_uNumFrames);
       }
-      v26 = &io_pfOutBuffer;
-      v27 = v3->m_Reverb.DCFilter;
+      v26 = io_pfOutBuffer;
+      DCFilter = this->m_Reverb.DCFilter;
       v28 = 2i64;
-      v29 = v3->m_Reverb.fReverbUnitsMixGain * 1.4142135;
+      v29 = this->m_Reverb.fReverbUnitsMixGain * 1.4142135;
       do
       {
-        DSP::OnePoleZeroHPFilter::ProcessBufferWithGain(v27, *v26, in_uNumFrames, v29);
-        ++v27;
-        ++v26;
+        DSP::OnePoleZeroHPFilter::ProcessBufferWithGain(DCFilter++, *v26++, in_uNumFrames, v29);
         --v28;
       }
       while ( v28 );
-      v30 = v44;
+      v30 = io_pBuffer;
       v31 = 0;
-      v32 = v44->uChannelMask;
-      if ( v32 & 1 )
+      uChannelMask = io_pBuffer->uChannelMask;
+      if ( (uChannelMask & 1) != 0 )
       {
-        v33 = (float *)((char *)v44->pData + 4 * v43);
+        v33 = (float *)((char *)io_pBuffer->pData + 4 * v43);
         DSP::Mix3Interp(
           v33,
           v5 + 512,
           v5 + 768,
-          v3->m_PrevRTPCParams.fDryLevel,
-          v3->m_pParams->sRTPCParams.fDryLevel,
-          v3->m_PrevRTPCParams.fReverbLevel * v11,
-          v3->m_pParams->sRTPCParams.fReverbLevel * v14,
-          v3->m_PrevRTPCParams.fReverbLevel * v13,
-          v3->m_pParams->sRTPCParams.fReverbLevel * v10,
+          this->m_PrevRTPCParams.fDryLevel,
+          this->m_pParams->sRTPCParams.fDryLevel,
+          this->m_PrevRTPCParams.fReverbLevel * v11,
+          this->m_pParams->sRTPCParams.fReverbLevel * v14,
+          this->m_PrevRTPCParams.fReverbLevel * v13,
+          this->m_pParams->sRTPCParams.fReverbLevel * v10,
           in_uNumFrames);
-        if ( v3->m_Reverb.uNumERSignals )
+        if ( this->m_Reverb.uNumERSignals )
           DSP::Mix3Interp(
             v33,
             v9,
             in_pfInput3,
             1.0,
             1.0,
-            v3->m_PrevRTPCParams.fERLevel * v11,
-            v3->m_pParams->sRTPCParams.fERLevel * v14,
-            v3->m_PrevRTPCParams.fERLevel * v13,
-            v3->m_pParams->sRTPCParams.fERLevel * v10,
+            this->m_PrevRTPCParams.fERLevel * v11,
+            this->m_pParams->sRTPCParams.fERLevel * v14,
+            this->m_PrevRTPCParams.fERLevel * v13,
+            this->m_pParams->sRTPCParams.fERLevel * v10,
             in_uNumFrames);
         v31 = 1;
       }
-      if ( v32 & 2 )
+      if ( (uChannelMask & 2) != 0 )
       {
-        v34 = (float *)((char *)v44->pData + 4 * (v43 + v31 * (unsigned __int64)v44->uMaxFrames));
+        v34 = (float *)((char *)io_pBuffer->pData + 4 * v43 + 4 * v31 * (unsigned __int64)io_pBuffer->uMaxFrames);
         DSP::Mix3Interp(
           v34,
           v5 + 512,
           v5 + 768,
-          v3->m_PrevRTPCParams.fDryLevel,
-          v3->m_pParams->sRTPCParams.fDryLevel,
-          v3->m_PrevRTPCParams.fReverbLevel * v13,
-          v3->m_pParams->sRTPCParams.fReverbLevel * v10,
-          v3->m_PrevRTPCParams.fReverbLevel * v11,
-          v3->m_pParams->sRTPCParams.fReverbLevel * v14,
+          this->m_PrevRTPCParams.fDryLevel,
+          this->m_pParams->sRTPCParams.fDryLevel,
+          this->m_PrevRTPCParams.fReverbLevel * v13,
+          this->m_pParams->sRTPCParams.fReverbLevel * v10,
+          this->m_PrevRTPCParams.fReverbLevel * v11,
+          this->m_pParams->sRTPCParams.fReverbLevel * v14,
           in_uNumFrames);
-        if ( v3->m_Reverb.uNumERSignals )
+        if ( this->m_Reverb.uNumERSignals )
           DSP::Mix3Interp(
             v34,
             v9,
             in_pfInput3,
             1.0,
             1.0,
-            v3->m_PrevRTPCParams.fERLevel * v13,
-            v3->m_pParams->sRTPCParams.fERLevel * v10,
-            v3->m_PrevRTPCParams.fERLevel * v11,
-            v3->m_pParams->sRTPCParams.fERLevel * v14,
+            this->m_PrevRTPCParams.fERLevel * v13,
+            this->m_pParams->sRTPCParams.fERLevel * v10,
+            this->m_PrevRTPCParams.fERLevel * v11,
+            this->m_pParams->sRTPCParams.fERLevel * v14,
             in_uNumFrames);
-        v30 = v44;
+        v30 = io_pBuffer;
         ++v31;
       }
-      if ( v32 & 4 )
+      if ( (uChannelMask & 4) != 0 )
       {
-        v35 = (float *)((char *)v30->pData + 4 * (v43 + v31 * (unsigned __int64)v30->uMaxFrames));
+        v35 = (float *)((char *)v30->pData + 4 * v43 + 4 * v31 * (unsigned __int64)v30->uMaxFrames);
         DSP::Mix3Interp(
           v35,
           v5 + 512,
           v5 + 768,
-          v3->m_PrevRTPCParams.fDryLevel,
-          v3->m_pParams->sRTPCParams.fDryLevel,
-          v3->m_PrevRTPCParams.fReverbLevel * 0.70710599,
-          v3->m_pParams->sRTPCParams.fReverbLevel * 0.70710599,
-          v3->m_PrevRTPCParams.fReverbLevel * 0.70710599,
-          v3->m_pParams->sRTPCParams.fReverbLevel * 0.70710599,
+          this->m_PrevRTPCParams.fDryLevel,
+          this->m_pParams->sRTPCParams.fDryLevel,
+          this->m_PrevRTPCParams.fReverbLevel * 0.70710599,
+          this->m_pParams->sRTPCParams.fReverbLevel * 0.70710599,
+          this->m_PrevRTPCParams.fReverbLevel * 0.70710599,
+          this->m_pParams->sRTPCParams.fReverbLevel * 0.70710599,
           in_uNumFrames);
-        if ( v3->m_Reverb.uNumERSignals )
+        if ( this->m_Reverb.uNumERSignals )
         {
-          in_fTargetGain2 = v3->m_pParams->sRTPCParams.fERLevel * 0.70710599;
+          in_fTargetGain2 = this->m_pParams->sRTPCParams.fERLevel * 0.70710599;
           DSP::Mix3Interp(
             v35,
             v9,
             in_pfInput3,
             1.0,
             1.0,
-            v3->m_PrevRTPCParams.fERLevel * 0.70710599,
+            this->m_PrevRTPCParams.fERLevel * 0.70710599,
             in_fTargetGain2,
-            v3->m_PrevRTPCParams.fERLevel * 0.70710599,
+            this->m_PrevRTPCParams.fERLevel * 0.70710599,
             in_fTargetGain2,
             in_uNumFrames);
         }
         ++v31;
       }
-      v2 = v44;
-      if ( v32 & 8 )
+      v2 = io_pBuffer;
+      if ( (uChannelMask & 8) != 0 )
       {
-        v37 = (float *)v3->m_pParams;
-        in_fTargetGain3 = (float)(v37[21] * v37[18]) * 0.70710599;
+        m_pParams = this->m_pParams;
+        in_fTargetGain3 = (float)(m_pParams->sRTPCParams.fReverbLevel * m_pParams->sRTPCParams.fLFELevel) * 0.70710599;
+        in_fCurrentGain2 = (float)(this->m_PrevRTPCParams.fReverbLevel * this->m_PrevRTPCParams.fLFELevel) * 0.70710599;
         DSP::Mix3Interp(
-          (float *)v44->pData + v43 + v31 * (unsigned __int64)v44->uMaxFrames,
+          (float *)io_pBuffer->pData + v43 + v31 * (unsigned __int64)io_pBuffer->uMaxFrames,
           v5 + 512,
           v5 + 768,
-          v3->m_PrevRTPCParams.fDryLevel,
-          v37[19],
-          (float)(v3->m_PrevRTPCParams.fReverbLevel * v3->m_PrevRTPCParams.fLFELevel) * 0.70710599,
+          this->m_PrevRTPCParams.fDryLevel,
+          m_pParams->sRTPCParams.fDryLevel,
+          in_fCurrentGain2,
           in_fTargetGain3,
-          (float)(v3->m_PrevRTPCParams.fReverbLevel * v3->m_PrevRTPCParams.fLFELevel) * 0.70710599,
+          in_fCurrentGain2,
           in_fTargetGain3,
           in_uNumFrames);
       }
-      v39 = v3->m_pParams;
+      v39 = this->m_pParams;
       v8 = in_pfInput3;
       v11 = v14;
       v13 = v10;
-      v18 = &v3->m_Reverb.ERDelay;
-      v3->m_PrevRTPCParams.fDryLevel = v39->sRTPCParams.fDryLevel;
-      v3->m_PrevRTPCParams.fERLevel = v39->sRTPCParams.fERLevel;
-      v3->m_PrevRTPCParams.fReverbLevel = v39->sRTPCParams.fReverbLevel;
+      p_ERDelay = &this->m_Reverb.ERDelay;
+      this->m_PrevRTPCParams.fDryLevel = v39->sRTPCParams.fDryLevel;
+      this->m_PrevRTPCParams.fERLevel = v39->sRTPCParams.fERLevel;
+      this->m_PrevRTPCParams.fReverbLevel = v39->sRTPCParams.fReverbLevel;
       in_uFrameOffset = in_uNumFrames + v43;
-      v3->m_PrevRTPCParams.fLFELevel = v39->sRTPCParams.fLFELevel;
+      this->m_PrevRTPCParams.fLFELevel = v39->sRTPCParams.fLFELevel;
       v43 += in_uNumFrames;
       v40 = v45 == in_uNumFrames;
-      v16 = v45 - in_uNumFrames;
+      uValidFrames = v45 - in_uNumFrames;
       v45 -= in_uNumFrames;
     }
     while ( !v40 );
   }
-  v3->m_pAllocator->vfptr->Free(v3->m_pAllocator, v5);
+  this->m_pAllocator->vfptr->Free(this->m_pAllocator, v5);
   return 1i64;
 }
 
 // File Line: 1322
 // RVA: 0xAE34D0
-signed __int64 __fastcall CAkRoomVerbFX::ProcessSpread2Out(CAkRoomVerbFX *this, AkAudioBuffer *io_pBuffer)
+__int64 __fastcall CAkRoomVerbFX::ProcessSpread2Out(CAkRoomVerbFX *this, AkAudioBuffer *io_pBuffer)
 {
-  unsigned int v2; // eax
+  unsigned int uChannelMask; // eax
   AkAudioBuffer *v3; // r14
-  int v4; // edx
-  CAkRoomVerbFX *v5; // rsi
+  int uNumERSignals; // edx
   int v6; // ebx
-  CAkRoomVerbFXParams *v7; // rax
-  AK::IAkPluginMemAlloc *v8; // rcx
+  CAkRoomVerbFXParams *m_pParams; // rax
+  AK::IAkPluginMemAlloc *m_pAllocator; // rcx
   int v9; // ebp
-  __int64 v10; // rax
+  float *v10; // rax
   float *v11; // r15
   float *v13; // r12
   float *v14; // r13
@@ -1957,421 +1857,415 @@ signed __int64 __fastcall CAkRoomVerbFX::ProcessSpread2Out(CAkRoomVerbFX *this, 
   float v21; // xmm8_4
   __m128 v22; // xmm1
   unsigned int in_uFrameOffset; // eax
-  unsigned int v24; // ecx
+  unsigned int uValidFrames; // ecx
   char v25; // dl
-  DSP::DelayLine *v26; // rbx
+  DSP::DelayLine *p_ERDelay; // rbx
   unsigned int in_uNumFrames; // ebp
-  unsigned __int8 v28; // bl
-  DSP::BiquadFilter<DSP::SingleChannelPolicy> *v29; // rcx
-  DSP::AllpassFilter *v30; // rbx
-  signed __int64 v31; // rdi
-  unsigned int v32; // er14
-  signed __int64 v33; // rbx
+  unsigned __int8 i; // bl
+  DSP::BiquadFilter<DSP::SingleChannelPolicy> *p_Filter; // rcx
+  ReverbState *p_m_Reverb; // rbx
+  __int64 v31; // rdi
+  unsigned int j; // r14d
+  __int64 v33; // rbx
   float **v34; // rbx
-  DSP::OnePoleZeroHPFilter *v35; // rdi
-  signed __int64 v36; // r14
+  DSP::OnePoleZeroHPFilter *DCFilter; // rdi
+  __int64 v36; // r14
   float v37; // xmm6_4
   unsigned int v38; // ebx
   float *v39; // rbx
-  float *v40; // rax
-  float v41; // xmm3_4
-  float *v42; // r14
-  float v43; // xmm2_4
-  float v44; // xmm3_4
-  float *v45; // rdi
-  float *v46; // rax
-  float v47; // xmm3_4
-  float v48; // xmm2_4
+  CAkRoomVerbFXParams *v40; // rax
+  float v41; // xmm0_4
+  float v42; // xmm3_4
+  float *v43; // r14
+  float v44; // xmm2_4
+  float v45; // xmm3_4
+  float v46; // xmm0_4
+  float *v47; // rdi
+  CAkRoomVerbFXParams *v48; // rax
   float v49; // xmm3_4
-  float *v50; // rdx
-  unsigned int v51; // edi
+  float v50; // xmm2_4
+  float v51; // xmm3_4
+  CAkRoomVerbFXParams *v52; // rdx
+  unsigned int v53; // edi
   float in_fTargetGain2; // xmm1_4
-  float *v53; // rdi
-  float *v54; // rax
-  float v55; // xmm3_4
-  float v56; // xmm2_4
-  float v57; // xmm3_4
-  float *v58; // rdi
-  float *v59; // rax
+  float v55; // xmm0_4
+  float *v56; // rdi
+  CAkRoomVerbFXParams *v57; // rax
+  float v58; // xmm3_4
+  float v59; // xmm2_4
   float v60; // xmm3_4
-  float v61; // xmm2_4
-  float v62; // xmm3_4
-  float *v63; // rdx
+  float v61; // xmm0_4
+  float *v62; // rdi
+  CAkRoomVerbFXParams *v63; // rax
+  float v64; // xmm3_4
+  float v65; // xmm2_4
+  float v66; // xmm3_4
+  CAkRoomVerbFXParams *v67; // rdx
   float in_fTargetGain3; // xmm1_4
-  CAkRoomVerbFXParams *v65; // rdx
-  bool v66; // zf
-  float *v67; // [rsp+50h] [rbp-118h]
+  CAkRoomVerbFXParams *v69; // rdx
+  bool v70; // zf
+  float in_fCurrentGain2; // [rsp+28h] [rbp-140h]
+  float in_fCurrentGain2a; // [rsp+28h] [rbp-140h]
+  float *v73; // [rsp+50h] [rbp-118h]
   float *in_pfInput3; // [rsp+58h] [rbp-110h]
   float *out_pfOutBuffer; // [rsp+60h] [rbp-108h]
-  int v70; // [rsp+68h] [rbp-100h]
-  int v71; // [rsp+6Ch] [rbp-FCh]
-  int v72; // [rsp+70h] [rbp-F8h]
-  int v73; // [rsp+74h] [rbp-F4h]
-  int v74; // [rsp+78h] [rbp-F0h]
-  int v75; // [rsp+7Ch] [rbp-ECh]
-  float *io_pfOutBuffer2; // [rsp+80h] [rbp-E8h]
-  __int64 v77; // [rsp+88h] [rbp-E0h]
-  __int64 v78; // [rsp+90h] [rbp-D8h]
-  __int64 v79; // [rsp+98h] [rbp-D0h]
-  unsigned int v80; // [rsp+170h] [rbp+8h]
-  AkAudioBuffer *v81; // [rsp+178h] [rbp+10h]
-  unsigned int v82; // [rsp+180h] [rbp+18h]
-  int v83; // [rsp+180h] [rbp+18h]
-  int v84; // [rsp+188h] [rbp+20h]
+  int v76; // [rsp+68h] [rbp-100h]
+  int v77; // [rsp+6Ch] [rbp-FCh]
+  int v78; // [rsp+70h] [rbp-F8h]
+  int v79; // [rsp+74h] [rbp-F4h]
+  int v80; // [rsp+78h] [rbp-F0h]
+  int v81; // [rsp+7Ch] [rbp-ECh]
+  float *io_pfOutBuffer2[4]; // [rsp+80h] [rbp-E8h] BYREF
+  unsigned int v83; // [rsp+170h] [rbp+8h]
+  char v85; // [rsp+180h] [rbp+18h]
+  int v86; // [rsp+180h] [rbp+18h]
+  unsigned int v87; // [rsp+188h] [rbp+20h]
 
-  v81 = io_pBuffer;
-  v2 = io_pBuffer->uChannelMask;
+  uChannelMask = io_pBuffer->uChannelMask;
   v3 = io_pBuffer;
-  v4 = (unsigned __int8)this->m_Reverb.uNumERSignals;
-  v82 = v2;
-  v5 = this;
-  v6 = v2 & 0x30;
-  v7 = this->m_pParams;
-  v8 = this->m_pAllocator;
+  uNumERSignals = (unsigned __int8)this->m_Reverb.uNumERSignals;
+  v85 = uChannelMask;
+  v6 = uChannelMask & 0x30;
+  m_pParams = this->m_pParams;
+  m_pAllocator = this->m_pAllocator;
   v9 = 0;
-  if ( v7->sInvariantParams.bEnableEarlyReflections )
+  if ( m_pParams->sInvariantParams.bEnableEarlyReflections )
     v9 = v6 != 0 ? 2 : 0;
-  v75 = v9;
-  v10 = (__int64)v8->vfptr->Malloc(v8, (unsigned __int64)(unsigned int)(v9 + v4 + 6) << 10);
-  v11 = (float *)v10;
+  v81 = v9;
+  v10 = (float *)m_pAllocator->vfptr->Malloc(
+                   m_pAllocator,
+                   (unsigned __int64)(unsigned int)(v9 + uNumERSignals + 6) << 10);
+  v11 = v10;
   if ( !v10 )
     return 52i64;
-  v13 = (float *)(v10 + 1024);
-  io_pfOutBuffer2 = (float *)(v10 + 2048);
+  v13 = v10 + 256;
+  io_pfOutBuffer2[0] = v10 + 512;
   v14 = 0i64;
-  v77 = v10 + 3072;
+  io_pfOutBuffer2[1] = v10 + 768;
   v15 = 0i64;
-  v78 = v10 + 4096;
+  io_pfOutBuffer2[2] = v10 + 1024;
   in_pfInput3 = 0i64;
   out_pfOutBuffer = 0i64;
-  v67 = 0i64;
-  v79 = v10 + 5120;
-  if ( v5->m_Reverb.uNumERSignals )
+  v73 = 0i64;
+  io_pfOutBuffer2[3] = v10 + 1280;
+  if ( this->m_Reverb.uNumERSignals )
   {
-    v15 = (float *)(v10 + 7168);
-    v14 = (float *)(v10 + 6144);
-    in_pfInput3 = (float *)(v10 + 7168);
+    v15 = v10 + 1792;
+    v14 = v10 + 1536;
+    in_pfInput3 = v10 + 1792;
     if ( v9 == 2 )
     {
-      out_pfOutBuffer = (float *)(v10 + 0x2000);
-      v67 = (float *)(v10 + 9216);
+      out_pfOutBuffer = v10 + 2048;
+      v73 = v10 + 2304;
     }
   }
   v16 = 0.0;
-  v17 = (float)((float)(v5->m_PrevRTPCParams.fStereoWidth * 0.0055555557) * 0.29289401) + 0.70710599;
+  v17 = (float)((float)(this->m_PrevRTPCParams.fStereoWidth * 0.0055555557) * 0.29289401) + 0.70710599;
   v18 = (__m128)(unsigned int)FLOAT_1_0;
   v18.m128_f32[0] = 1.0 - (float)(v17 * v17);
   if ( v18.m128_f32[0] <= 0.0 )
     v19 = 0.0;
   else
-    LODWORD(v19) = (unsigned __int128)_mm_sqrt_ps(v18);
-  v20 = v5->m_pParams;
+    LODWORD(v19) = _mm_sqrt_ps(v18).m128_u32[0];
+  v20 = this->m_pParams;
   v22 = (__m128)(unsigned int)FLOAT_1_0;
   v21 = (float)((float)(v20->sRTPCParams.fStereoWidth * 0.0055555557) * 0.29289401) + 0.70710599;
   v22.m128_f32[0] = 1.0 - (float)(v21 * v21);
   if ( v22.m128_f32[0] > 0.0 )
-    LODWORD(v16) = (unsigned __int128)_mm_sqrt_ps(v22);
+    LODWORD(v16) = _mm_sqrt_ps(v22).m128_u32[0];
   if ( !v6 )
   {
     v20->sRTPCParams.fFrontLevel = 1.0;
-    v5->m_pParams->sRTPCParams.fRearLevel = 1.0;
+    this->m_pParams->sRTPCParams.fRearLevel = 1.0;
   }
   in_uFrameOffset = 0;
-  v80 = 0;
-  v24 = v3->uValidFrames;
-  v84 = v3->uValidFrames;
+  v83 = 0;
+  uValidFrames = v3->uValidFrames;
+  v87 = uValidFrames;
   if ( v3->uValidFrames )
   {
-    v25 = v82;
-    v26 = &v5->m_Reverb.ERDelay;
-    v71 = v82 & 1;
-    v72 = v82 & 2;
-    v74 = v82 & 4;
-    v70 = v82 & 0x10;
-    v83 = v82 & 8;
-    v73 = v25 & 0x20;
+    v25 = v85;
+    p_ERDelay = &this->m_Reverb.ERDelay;
+    v77 = v85 & 1;
+    v78 = v85 & 2;
+    v80 = v85 & 4;
+    v76 = v85 & 0x10;
+    v86 = v85 & 8;
+    v79 = v25 & 0x20;
     do
     {
       in_uNumFrames = 256;
-      if ( v24 < 0x100 )
-        in_uNumFrames = v24;
-      CAkRoomVerbFX::WetPreProcess(v5, v3, v11, in_uNumFrames, in_uFrameOffset);
-      if ( v5->m_Reverb.ReverbDelay.uDelayLineLength )
-        DSP::DelayLine::ProcessBuffer(&v5->m_Reverb.ReverbDelay, v11, v13, in_uNumFrames);
+      if ( uValidFrames < 0x100 )
+        in_uNumFrames = uValidFrames;
+      CAkRoomVerbFX::WetPreProcess(this, v3, v11, in_uNumFrames, in_uFrameOffset);
+      if ( this->m_Reverb.ReverbDelay.uDelayLineLength )
+        DSP::DelayLine::ProcessBuffer(&this->m_Reverb.ReverbDelay, v11, v13, in_uNumFrames);
       else
         memmove(v13, v11, 4 * in_uNumFrames);
-      if ( v26->uDelayLineLength )
-        DSP::DelayLine::ProcessBuffer(v26, v11, in_uNumFrames);
-      if ( v5->m_Reverb.uNumERSignals )
+      if ( p_ERDelay->uDelayLineLength )
+        DSP::DelayLine::ProcessBuffer(p_ERDelay, v11, in_uNumFrames);
+      if ( this->m_Reverb.uNumERSignals )
       {
-        DSP::ERUnitDual::ProcessBuffer(v5->m_pERUnit, v11, v14, v15, in_uNumFrames);
-        if ( v5->m_pParams->sInvariantParams.bEnableToneControls )
+        DSP::ERUnitDual::ProcessBuffer(this->m_pERUnit, v11, v14, v15, in_uNumFrames);
+        if ( this->m_pParams->sInvariantParams.bEnableToneControls )
         {
-          v28 = 0;
-          if ( v5->m_Reverb.uTCFilterIndex[0] )
+          for ( i = 0; i < (unsigned int)this->m_Reverb.uTCFilterIndex[0]; ++i )
           {
-            do
+            p_Filter = &this->m_pTCFiltersState[i].Filter;
+            if ( p_Filter[1].m_Coefficients.vFirst.m128_i32[0] == 1 )
             {
-              v29 = &v5->m_pTCFiltersState[v28].Filter;
-              if ( v29[1].m_Coefficients.vFirst.m128_i32[0] == 1 )
-              {
-                DSP::BiquadFilter<DSP::SingleChannelPolicy>::ProcessBuffer(v29, v14, in_uNumFrames, 0);
-                DSP::BiquadFilter<DSP::SingleChannelPolicy>::ProcessBuffer(
-                  &v5->m_pTCFiltersState[v28++ + 1].Filter,
-                  v15,
-                  in_uNumFrames,
-                  0);
-              }
-              ++v28;
+              DSP::BiquadFilter<DSP::SingleChannelPolicy>::ProcessBuffer(p_Filter, v14, in_uNumFrames, 0);
+              DSP::BiquadFilter<DSP::SingleChannelPolicy>::ProcessBuffer(
+                &this->m_pTCFiltersState[++i].Filter,
+                v15,
+                in_uNumFrames,
+                0);
             }
-            while ( v28 < v5->m_Reverb.uTCFilterIndex[0] );
           }
         }
-        if ( v75 == 2 )
+        if ( v81 == 2 )
         {
-          if ( v5->m_Reverb.ERFrontBackDelay[0].uDelayLineLength )
+          if ( this->m_Reverb.ERFrontBackDelay[0].uDelayLineLength )
           {
-            DSP::DelayLine::ProcessBuffer(v5->m_Reverb.ERFrontBackDelay, v14, out_pfOutBuffer, in_uNumFrames);
-            DSP::DelayLine::ProcessBuffer(&v5->m_Reverb.ERFrontBackDelay[1], v15, v67, in_uNumFrames);
+            DSP::DelayLine::ProcessBuffer(this->m_Reverb.ERFrontBackDelay, v14, out_pfOutBuffer, in_uNumFrames);
+            DSP::DelayLine::ProcessBuffer(&this->m_Reverb.ERFrontBackDelay[1], v15, v73, in_uNumFrames);
           }
           else
           {
             out_pfOutBuffer = v14;
-            v67 = v15;
+            v73 = v15;
           }
         }
       }
-      v30 = v5->m_Reverb.DiffusionFilters;
+      p_m_Reverb = &this->m_Reverb;
       v31 = 4i64;
       do
       {
-        DSP::AllpassFilter::ProcessBuffer(v30, v13, in_uNumFrames);
-        ++v30;
+        DSP::AllpassFilter::ProcessBuffer(p_m_Reverb->DiffusionFilters, v13, in_uNumFrames);
+        p_m_Reverb = (ReverbState *)((char *)p_m_Reverb + 24);
         --v31;
       }
       while ( v31 );
-      CAkRoomVerbFX::ReverbPreProcess(v5, v13, in_uNumFrames);
+      CAkRoomVerbFX::ReverbPreProcess(this, v13, in_uNumFrames);
       memset(v11 + 512, 0, 0x1000ui64);
-      v32 = 0;
-      if ( v5->m_Reverb.uNumReverbUnits )
+      for ( j = 0; j < this->m_Reverb.uNumReverbUnits; ++j )
       {
-        do
-        {
-          v33 = v32;
-          DSP::DelayLine::ProcessBuffer(&v5->m_pReverbUnitsState[v33].RUInputDelay, v13, in_uNumFrames);
-          DSP::FDN4::ProcessBufferAccum(
-            &v5->m_pReverbUnitsState[v33].ReverbUnits,
-            v13,
-            (&io_pfOutBuffer2)[v32 & 1],
-            (&io_pfOutBuffer2)[(v32 & 1) + 2],
-            in_uNumFrames);
-          ++v32;
-        }
-        while ( v32 < v5->m_Reverb.uNumReverbUnits );
+        v33 = j;
+        DSP::DelayLine::ProcessBuffer(&this->m_pReverbUnitsState[v33].RUInputDelay, v13, in_uNumFrames);
+        DSP::FDN4::ProcessBufferAccum(
+          &this->m_pReverbUnitsState[v33].ReverbUnits,
+          v13,
+          io_pfOutBuffer2[j & 1],
+          io_pfOutBuffer2[(j & 1) + 2],
+          in_uNumFrames);
       }
-      v34 = &io_pfOutBuffer2;
-      v35 = v5->m_Reverb.DCFilter;
+      v34 = io_pfOutBuffer2;
+      DCFilter = this->m_Reverb.DCFilter;
       v36 = 4i64;
-      v37 = v5->m_Reverb.fReverbUnitsMixGain * 1.4142135;
+      v37 = this->m_Reverb.fReverbUnitsMixGain * 1.4142135;
       do
       {
-        DSP::OnePoleZeroHPFilter::ProcessBufferWithGain(v35, *v34, in_uNumFrames, v37);
-        ++v35;
-        ++v34;
+        DSP::OnePoleZeroHPFilter::ProcessBufferWithGain(DCFilter++, *v34++, in_uNumFrames, v37);
         --v36;
       }
       while ( v36 );
       v38 = 0;
-      if ( v71 )
+      if ( v77 )
       {
-        v39 = (float *)((char *)v81->pData + 4 * v80);
-        v40 = (float *)v5->m_pParams;
-        v41 = v40[21] * v40[15];
+        v39 = (float *)((char *)io_pBuffer->pData + 4 * v83);
+        v40 = this->m_pParams;
+        v41 = this->m_PrevRTPCParams.fFrontLevel * this->m_PrevRTPCParams.fReverbLevel;
+        v42 = v40->sRTPCParams.fReverbLevel * v40->sRTPCParams.fFrontLevel;
         DSP::Mix3Interp(
           v39,
           v11 + 512,
           v11 + 768,
-          v5->m_PrevRTPCParams.fDryLevel,
-          v40[19],
-          (float)(v5->m_PrevRTPCParams.fFrontLevel * v5->m_PrevRTPCParams.fReverbLevel) * v17,
-          v41 * v21,
-          (float)(v5->m_PrevRTPCParams.fFrontLevel * v5->m_PrevRTPCParams.fReverbLevel) * v19,
-          v41 * v16,
+          this->m_PrevRTPCParams.fDryLevel,
+          v40->sRTPCParams.fDryLevel,
+          v41 * v17,
+          v42 * v21,
+          v41 * v19,
+          v42 * v16,
           in_uNumFrames);
-        v42 = in_pfInput3;
-        if ( v5->m_Reverb.uNumERSignals )
+        v43 = in_pfInput3;
+        if ( this->m_Reverb.uNumERSignals )
         {
-          v43 = v5->m_PrevRTPCParams.fERLevel * v5->m_PrevRTPCParams.fFrontLevel;
-          v44 = v5->m_pParams->sRTPCParams.fERLevel * v5->m_pParams->sRTPCParams.fFrontLevel;
-          DSP::Mix3Interp(v39, v14, in_pfInput3, 1.0, 1.0, v43 * v17, v44 * v21, v43 * v19, v44 * v16, in_uNumFrames);
+          v44 = this->m_PrevRTPCParams.fERLevel * this->m_PrevRTPCParams.fFrontLevel;
+          v45 = this->m_pParams->sRTPCParams.fERLevel * this->m_pParams->sRTPCParams.fFrontLevel;
+          DSP::Mix3Interp(v39, v14, in_pfInput3, 1.0, 1.0, v44 * v17, v45 * v21, v44 * v19, v45 * v16, in_uNumFrames);
         }
         v38 = 1;
       }
       else
       {
-        v42 = in_pfInput3;
+        v43 = in_pfInput3;
       }
-      if ( v72 )
+      if ( v78 )
       {
-        v45 = (float *)((char *)v81->pData + 4 * (v80 + v38 * (unsigned __int64)v81->uMaxFrames));
-        v46 = (float *)v5->m_pParams;
-        v47 = v46[21] * v46[15];
+        v46 = this->m_PrevRTPCParams.fFrontLevel * this->m_PrevRTPCParams.fReverbLevel;
+        v47 = (float *)((char *)io_pBuffer->pData + 4 * v83 + 4 * v38 * (unsigned __int64)io_pBuffer->uMaxFrames);
+        v48 = this->m_pParams;
+        v49 = v48->sRTPCParams.fReverbLevel * v48->sRTPCParams.fFrontLevel;
         DSP::Mix3Interp(
-          v45,
+          v47,
           v11 + 512,
           v11 + 768,
-          v5->m_PrevRTPCParams.fDryLevel,
-          v46[19],
-          (float)(v5->m_PrevRTPCParams.fFrontLevel * v5->m_PrevRTPCParams.fReverbLevel) * v19,
-          v47 * v16,
-          (float)(v5->m_PrevRTPCParams.fFrontLevel * v5->m_PrevRTPCParams.fReverbLevel) * v17,
-          v47 * v21,
+          this->m_PrevRTPCParams.fDryLevel,
+          v48->sRTPCParams.fDryLevel,
+          v46 * v19,
+          v49 * v16,
+          v46 * v17,
+          v49 * v21,
           in_uNumFrames);
-        if ( v5->m_Reverb.uNumERSignals )
+        if ( this->m_Reverb.uNumERSignals )
         {
-          v48 = v5->m_PrevRTPCParams.fERLevel * v5->m_PrevRTPCParams.fFrontLevel;
-          v49 = v5->m_pParams->sRTPCParams.fERLevel * v5->m_pParams->sRTPCParams.fFrontLevel;
-          DSP::Mix3Interp(v45, v14, v42, 1.0, 1.0, v48 * v19, v49 * v16, v48 * v17, v49 * v21, in_uNumFrames);
+          v50 = this->m_PrevRTPCParams.fERLevel * this->m_PrevRTPCParams.fFrontLevel;
+          v51 = this->m_pParams->sRTPCParams.fERLevel * this->m_pParams->sRTPCParams.fFrontLevel;
+          DSP::Mix3Interp(v47, v14, v43, 1.0, 1.0, v50 * v19, v51 * v16, v50 * v17, v51 * v21, in_uNumFrames);
         }
         ++v38;
       }
-      v3 = v81;
-      if ( v74 )
+      v3 = io_pBuffer;
+      if ( v80 )
       {
-        v50 = (float *)v5->m_pParams;
-        v51 = v80;
-        in_fTargetGain2 = (float)(v50[21] * v50[17]) * 0.70710599;
+        v52 = this->m_pParams;
+        v53 = v83;
+        in_fTargetGain2 = (float)(v52->sRTPCParams.fReverbLevel * v52->sRTPCParams.fCenterLevel) * 0.70710599;
+        in_fCurrentGain2 = (float)(this->m_PrevRTPCParams.fReverbLevel * this->m_PrevRTPCParams.fCenterLevel)
+                         * 0.70710599;
         DSP::Mix3Interp(
-          (float *)v81->pData + v80 + v38++ * (unsigned __int64)v81->uMaxFrames,
+          (float *)io_pBuffer->pData + v83 + v38++ * (unsigned __int64)io_pBuffer->uMaxFrames,
           v11 + 1024,
           v11 + 1280,
-          v5->m_PrevRTPCParams.fDryLevel,
-          v50[19],
-          (float)(v5->m_PrevRTPCParams.fReverbLevel * v5->m_PrevRTPCParams.fCenterLevel) * 0.70710599,
+          this->m_PrevRTPCParams.fDryLevel,
+          v52->sRTPCParams.fDryLevel,
+          in_fCurrentGain2,
           in_fTargetGain2,
-          (float)(v5->m_PrevRTPCParams.fReverbLevel * v5->m_PrevRTPCParams.fCenterLevel) * 0.70710599,
+          in_fCurrentGain2,
           in_fTargetGain2,
           in_uNumFrames);
       }
       else
       {
-        v51 = v80;
+        v53 = v83;
       }
-      if ( v70 )
+      if ( v76 )
       {
-        v53 = (float *)((char *)v81->pData + 4 * (v51 + v38 * (unsigned __int64)v81->uMaxFrames));
-        v54 = (float *)v5->m_pParams;
-        v55 = v54[21] * v54[16];
+        v55 = this->m_PrevRTPCParams.fRearLevel * this->m_PrevRTPCParams.fReverbLevel;
+        v56 = (float *)((char *)io_pBuffer->pData + 4 * v53 + 4 * v38 * (unsigned __int64)io_pBuffer->uMaxFrames);
+        v57 = this->m_pParams;
+        v58 = v57->sRTPCParams.fReverbLevel * v57->sRTPCParams.fRearLevel;
         DSP::Mix3Interp(
-          v53,
+          v56,
           v11 + 1024,
           v11 + 1280,
-          v5->m_PrevRTPCParams.fDryLevel,
-          v54[19],
-          (float)(v5->m_PrevRTPCParams.fRearLevel * v5->m_PrevRTPCParams.fReverbLevel) * v17,
-          v55 * v21,
-          (float)(v5->m_PrevRTPCParams.fRearLevel * v5->m_PrevRTPCParams.fReverbLevel) * v19,
-          v55 * v16,
+          this->m_PrevRTPCParams.fDryLevel,
+          v57->sRTPCParams.fDryLevel,
+          v55 * v17,
+          v58 * v21,
+          v55 * v19,
+          v58 * v16,
           in_uNumFrames);
-        if ( v5->m_Reverb.uNumERSignals )
+        if ( this->m_Reverb.uNumERSignals )
         {
-          v56 = v5->m_PrevRTPCParams.fERLevel * v5->m_PrevRTPCParams.fRearLevel;
-          v57 = v5->m_pParams->sRTPCParams.fERLevel * v5->m_pParams->sRTPCParams.fRearLevel;
+          v59 = this->m_PrevRTPCParams.fERLevel * this->m_PrevRTPCParams.fRearLevel;
+          v60 = this->m_pParams->sRTPCParams.fERLevel * this->m_pParams->sRTPCParams.fRearLevel;
           DSP::Mix3Interp(
-            v53,
+            v56,
             out_pfOutBuffer,
-            v67,
+            v73,
             1.0,
             1.0,
-            v56 * v17,
-            v57 * v21,
-            v56 * v19,
-            v57 * v16,
+            v59 * v17,
+            v60 * v21,
+            v59 * v19,
+            v60 * v16,
             in_uNumFrames);
         }
         ++v38;
       }
-      if ( v73 )
+      if ( v79 )
       {
-        v58 = (float *)((char *)v81->pData + 4 * (v80 + v38 * (unsigned __int64)v81->uMaxFrames));
-        v59 = (float *)v5->m_pParams;
-        v60 = v59[21] * v59[16];
+        v61 = this->m_PrevRTPCParams.fRearLevel * this->m_PrevRTPCParams.fReverbLevel;
+        v62 = (float *)((char *)io_pBuffer->pData + 4 * v83 + 4 * v38 * (unsigned __int64)io_pBuffer->uMaxFrames);
+        v63 = this->m_pParams;
+        v64 = v63->sRTPCParams.fReverbLevel * v63->sRTPCParams.fRearLevel;
         DSP::Mix3Interp(
-          v58,
+          v62,
           v11 + 1024,
           v11 + 1280,
-          v5->m_PrevRTPCParams.fDryLevel,
-          v59[19],
-          (float)(v5->m_PrevRTPCParams.fRearLevel * v5->m_PrevRTPCParams.fReverbLevel) * v19,
-          v60 * v16,
-          (float)(v5->m_PrevRTPCParams.fRearLevel * v5->m_PrevRTPCParams.fReverbLevel) * v17,
-          v60 * v21,
+          this->m_PrevRTPCParams.fDryLevel,
+          v63->sRTPCParams.fDryLevel,
+          v61 * v19,
+          v64 * v16,
+          v61 * v17,
+          v64 * v21,
           in_uNumFrames);
-        if ( v5->m_Reverb.uNumERSignals )
+        if ( this->m_Reverb.uNumERSignals )
         {
-          v61 = v5->m_PrevRTPCParams.fERLevel * v5->m_PrevRTPCParams.fRearLevel;
-          v62 = v5->m_pParams->sRTPCParams.fERLevel * v5->m_pParams->sRTPCParams.fRearLevel;
+          v65 = this->m_PrevRTPCParams.fERLevel * this->m_PrevRTPCParams.fRearLevel;
+          v66 = this->m_pParams->sRTPCParams.fERLevel * this->m_pParams->sRTPCParams.fRearLevel;
           DSP::Mix3Interp(
-            v58,
+            v62,
             out_pfOutBuffer,
-            v67,
+            v73,
             1.0,
             1.0,
-            v61 * v19,
-            v62 * v16,
-            v61 * v17,
-            v62 * v21,
+            v65 * v19,
+            v66 * v16,
+            v65 * v17,
+            v66 * v21,
             in_uNumFrames);
         }
         ++v38;
       }
-      if ( v83 )
+      if ( v86 )
       {
-        v63 = (float *)v5->m_pParams;
-        in_fTargetGain3 = (float)(v63[21] * v63[18]) * 0.70710599;
+        v67 = this->m_pParams;
+        in_fTargetGain3 = (float)(v67->sRTPCParams.fReverbLevel * v67->sRTPCParams.fLFELevel) * 0.70710599;
+        in_fCurrentGain2a = (float)(this->m_PrevRTPCParams.fLFELevel * this->m_PrevRTPCParams.fReverbLevel) * 0.70710599;
         DSP::Mix3Interp(
-          (float *)v81->pData + v80 + v38 * (unsigned __int64)v81->uMaxFrames,
+          (float *)io_pBuffer->pData + v83 + v38 * (unsigned __int64)io_pBuffer->uMaxFrames,
           v11 + 1024,
           v11 + 1280,
-          v5->m_PrevRTPCParams.fDryLevel,
-          v63[19],
-          (float)(v5->m_PrevRTPCParams.fLFELevel * v5->m_PrevRTPCParams.fReverbLevel) * 0.70710599,
+          this->m_PrevRTPCParams.fDryLevel,
+          v67->sRTPCParams.fDryLevel,
+          in_fCurrentGain2a,
           in_fTargetGain3,
-          (float)(v5->m_PrevRTPCParams.fLFELevel * v5->m_PrevRTPCParams.fReverbLevel) * 0.70710599,
+          in_fCurrentGain2a,
           in_fTargetGain3,
           in_uNumFrames);
       }
-      v65 = v5->m_pParams;
+      v69 = this->m_pParams;
       v15 = in_pfInput3;
       v17 = v21;
       v19 = v16;
-      v26 = &v5->m_Reverb.ERDelay;
-      v5->m_PrevRTPCParams.fDryLevel = v65->sRTPCParams.fDryLevel;
-      v5->m_PrevRTPCParams.fERLevel = v65->sRTPCParams.fERLevel;
-      v5->m_PrevRTPCParams.fReverbLevel = v65->sRTPCParams.fReverbLevel;
-      v5->m_PrevRTPCParams.fFrontLevel = v65->sRTPCParams.fFrontLevel;
-      v5->m_PrevRTPCParams.fCenterLevel = v65->sRTPCParams.fCenterLevel;
-      v5->m_PrevRTPCParams.fRearLevel = v65->sRTPCParams.fRearLevel;
-      in_uFrameOffset = in_uNumFrames + v80;
-      v5->m_PrevRTPCParams.fLFELevel = v65->sRTPCParams.fLFELevel;
-      v80 += in_uNumFrames;
-      v66 = v84 == in_uNumFrames;
-      v24 = v84 - in_uNumFrames;
-      v84 -= in_uNumFrames;
+      p_ERDelay = &this->m_Reverb.ERDelay;
+      this->m_PrevRTPCParams.fDryLevel = v69->sRTPCParams.fDryLevel;
+      this->m_PrevRTPCParams.fERLevel = v69->sRTPCParams.fERLevel;
+      this->m_PrevRTPCParams.fReverbLevel = v69->sRTPCParams.fReverbLevel;
+      this->m_PrevRTPCParams.fFrontLevel = v69->sRTPCParams.fFrontLevel;
+      this->m_PrevRTPCParams.fCenterLevel = v69->sRTPCParams.fCenterLevel;
+      this->m_PrevRTPCParams.fRearLevel = v69->sRTPCParams.fRearLevel;
+      in_uFrameOffset = in_uNumFrames + v83;
+      this->m_PrevRTPCParams.fLFELevel = v69->sRTPCParams.fLFELevel;
+      v83 += in_uNumFrames;
+      v70 = v87 == in_uNumFrames;
+      uValidFrames = v87 - in_uNumFrames;
+      v87 -= in_uNumFrames;
     }
-    while ( !v66 );
+    while ( !v70 );
   }
-  v5->m_pAllocator->vfptr->Free(v5->m_pAllocator, v11);
+  this->m_pAllocator->vfptr->Free(this->m_pAllocator, v11);
   return 1i64;
 }
 
 // File Line: 1613
 // RVA: 0xAE40A0
-signed __int64 __fastcall CAkRoomVerbFX::ProcessSpread3Out(CAkRoomVerbFX *this, AkAudioBuffer *io_pBuffer)
+__int64 __fastcall CAkRoomVerbFX::ProcessSpread3Out(CAkRoomVerbFX *this, AkAudioBuffer *io_pBuffer)
 {
-  unsigned int v2; // ebp
+  unsigned int uChannelMask; // ebp
   AkAudioBuffer *v3; // rbx
-  CAkRoomVerbFX *v4; // rsi
   float *v5; // rax
   float *v6; // r15
   float *v8; // r12
@@ -2384,71 +2278,65 @@ signed __int64 __fastcall CAkRoomVerbFX::ProcessSpread3Out(CAkRoomVerbFX *this, 
   float v15; // xmm10_4
   float v16; // xmm8_4
   __m128 v17; // xmm1
-  unsigned int v18; // eax
+  unsigned int uValidFrames; // eax
   unsigned int in_uFrameOffset; // ecx
   unsigned int v20; // ebp
-  unsigned __int8 v21; // bl
-  DSP::BiquadFilter<DSP::SingleChannelPolicy> *v22; // rcx
-  DSP::AllpassFilter *v23; // rbx
-  signed __int64 v24; // rdi
-  unsigned int v25; // er14
-  signed __int64 v26; // rbx
+  unsigned __int8 i; // bl
+  DSP::BiquadFilter<DSP::SingleChannelPolicy> *p_Filter; // rcx
+  ReverbState *p_m_Reverb; // rbx
+  __int64 v24; // rdi
+  unsigned int j; // r14d
+  __int64 v26; // rbx
   float **v27; // rbx
-  DSP::OnePoleZeroHPFilter *v28; // rdi
-  signed __int64 v29; // r14
+  DSP::OnePoleZeroHPFilter *DCFilter; // rdi
+  __int64 v29; // r14
   float v30; // xmm6_4
-  float v31; // xmm2_4
+  float v31; // xmm0_4
   float *v32; // rbx
-  float *v33; // rax
+  CAkRoomVerbFXParams *m_pParams; // rax
   float v34; // xmm3_4
   float v35; // xmm2_4
   float v36; // xmm3_4
-  float v37; // xmm2_4
+  float v37; // xmm0_4
   float *v38; // rbx
-  float *v39; // rax
+  CAkRoomVerbFXParams *v39; // rax
   float v40; // xmm3_4
   float v41; // xmm2_4
   float v42; // xmm3_4
   unsigned int v43; // ebx
-  float *v44; // rdx
-  float in_fTargetGain2; // ST30_4
-  float in_uNumFrames; // ST28_4
-  float v47; // xmm2_4
-  float *v48; // rdi
-  float *v49; // rax
+  CAkRoomVerbFXParams *v44; // rdx
+  float v45; // xmm0_4
+  float *v46; // rdi
+  CAkRoomVerbFXParams *v47; // rax
+  float v48; // xmm3_4
+  float v49; // xmm2_4
   float v50; // xmm3_4
-  float v51; // xmm2_4
-  float v52; // xmm3_4
-  unsigned int v53; // ebx
-  float *v54; // rdi
-  float *v55; // rax
-  float v56; // xmm3_4
-  float v57; // xmm2_4
-  float v58; // xmm3_4
-  float *v59; // rdx
-  __int64 v60; // rcx
+  unsigned int v51; // ebx
+  float v52; // xmm0_4
+  float *v53; // rdi
+  CAkRoomVerbFXParams *v54; // rax
+  float v55; // xmm3_4
+  float v56; // xmm2_4
+  float v57; // xmm3_4
+  CAkRoomVerbFXParams *v58; // rdx
+  __int64 v59; // rcx
   float in_fTargetGain3; // xmm1_4
-  CAkRoomVerbFXParams *v62; // rcx
-  bool v63; // zf
-  int v64; // [rsp+50h] [rbp-118h]
+  CAkRoomVerbFXParams *v61; // rcx
+  bool v62; // zf
+  float in_uNumFrames; // [rsp+28h] [rbp-140h]
+  float in_uNumFramesa; // [rsp+28h] [rbp-140h]
+  float in_fTargetGain2; // [rsp+30h] [rbp-138h]
+  int v66; // [rsp+50h] [rbp-118h]
   float *out_pfOutBuffer; // [rsp+58h] [rbp-110h]
   float *in_pfInput2; // [rsp+60h] [rbp-108h]
   float *in_pfInput3; // [rsp+68h] [rbp-100h]
-  float *io_pfOutBuffer3; // [rsp+70h] [rbp-F8h]
-  char *v69; // [rsp+78h] [rbp-F0h]
-  char *v70; // [rsp+80h] [rbp-E8h]
-  char *v71; // [rsp+88h] [rbp-E0h]
-  char *v72; // [rsp+90h] [rbp-D8h]
-  char *v73; // [rsp+98h] [rbp-D0h]
-  unsigned int v74; // [rsp+170h] [rbp+8h]
-  AkAudioBuffer *v75; // [rsp+178h] [rbp+10h]
-  int v76; // [rsp+180h] [rbp+18h]
-  int v77; // [rsp+188h] [rbp+20h]
+  float *io_pfOutBuffer3[6]; // [rsp+70h] [rbp-F8h] BYREF
+  unsigned int v71; // [rsp+170h] [rbp+8h]
+  unsigned int v73; // [rsp+180h] [rbp+18h]
+  int v74; // [rsp+188h] [rbp+20h]
 
-  v75 = io_pBuffer;
-  v2 = io_pBuffer->uChannelMask;
+  uChannelMask = io_pBuffer->uChannelMask;
   v3 = io_pBuffer;
-  v4 = this;
   v5 = (float *)this->m_pAllocator->vfptr->Malloc(
                   this->m_pAllocator,
                   (unsigned __int64)(2 * (unsigned int)(unsigned __int8)this->m_Reverb.uNumERSignals + 8) << 10);
@@ -2456,19 +2344,19 @@ signed __int64 __fastcall CAkRoomVerbFX::ProcessSpread3Out(CAkRoomVerbFX *this, 
   if ( !v5 )
     return 52i64;
   v8 = v5 + 256;
-  io_pfOutBuffer3 = v5 + 512;
+  io_pfOutBuffer3[0] = v5 + 512;
   v9 = 0i64;
-  v69 = (char *)(v5 + 768);
+  io_pfOutBuffer3[1] = v5 + 768;
   v10 = 0i64;
-  v70 = (char *)(v5 + 1024);
+  io_pfOutBuffer3[2] = v5 + 1024;
   v11 = 0i64;
-  v71 = (char *)(v5 + 1280);
+  io_pfOutBuffer3[3] = v5 + 1280;
   in_pfInput3 = 0i64;
-  v72 = (char *)(v5 + 1536);
+  io_pfOutBuffer3[4] = v5 + 1536;
   in_pfInput2 = 0i64;
   out_pfOutBuffer = 0i64;
-  v73 = (char *)(v5 + 1792);
-  if ( v4->m_Reverb.uNumERSignals )
+  io_pfOutBuffer3[5] = v5 + 1792;
+  if ( this->m_Reverb.uNumERSignals )
   {
     v9 = v5 + 2304;
     v10 = v5 + 2560;
@@ -2478,67 +2366,61 @@ signed __int64 __fastcall CAkRoomVerbFX::ProcessSpread3Out(CAkRoomVerbFX *this, 
     v11 = v5 + 2048;
   }
   v12 = 0.0;
-  v13 = (float)((float)(v4->m_PrevRTPCParams.fStereoWidth * 0.0055555557) * 0.29289401) + 0.70710599;
+  v13 = (float)((float)(this->m_PrevRTPCParams.fStereoWidth * 0.0055555557) * 0.29289401) + 0.70710599;
   v14 = (__m128)(unsigned int)FLOAT_1_0;
   v14.m128_f32[0] = 1.0 - (float)(v13 * v13);
   if ( v14.m128_f32[0] <= 0.0 )
     v15 = 0.0;
   else
-    LODWORD(v15) = (unsigned __int128)_mm_sqrt_ps(v14);
+    LODWORD(v15) = _mm_sqrt_ps(v14).m128_u32[0];
   v17 = (__m128)(unsigned int)FLOAT_1_0;
-  v16 = (float)((float)(v4->m_pParams->sRTPCParams.fStereoWidth * 0.0055555557) * 0.29289401) + 0.70710599;
+  v16 = (float)((float)(this->m_pParams->sRTPCParams.fStereoWidth * 0.0055555557) * 0.29289401) + 0.70710599;
   v17.m128_f32[0] = 1.0 - (float)(v16 * v16);
   if ( v17.m128_f32[0] > 0.0 )
-    LODWORD(v12) = (unsigned __int128)_mm_sqrt_ps(v17);
-  v18 = v3->uValidFrames;
+    LODWORD(v12) = _mm_sqrt_ps(v17).m128_u32[0];
+  uValidFrames = v3->uValidFrames;
   in_uFrameOffset = 0;
-  v74 = 0;
-  v76 = v3->uValidFrames;
+  v71 = 0;
+  v73 = uValidFrames;
   if ( v3->uValidFrames )
   {
-    v64 = v2 & 8;
-    v77 = v2 & 4;
+    v66 = uChannelMask & 8;
+    v74 = uChannelMask & 4;
     do
     {
       v20 = 256;
-      if ( v18 < 0x100 )
-        v20 = v18;
-      CAkRoomVerbFX::WetPreProcess(v4, v3, v6, v20, in_uFrameOffset);
-      if ( v4->m_Reverb.ReverbDelay.uDelayLineLength )
-        DSP::DelayLine::ProcessBuffer(&v4->m_Reverb.ReverbDelay, v6, v8, v20);
+      if ( uValidFrames < 0x100 )
+        v20 = uValidFrames;
+      CAkRoomVerbFX::WetPreProcess(this, v3, v6, v20, in_uFrameOffset);
+      if ( this->m_Reverb.ReverbDelay.uDelayLineLength )
+        DSP::DelayLine::ProcessBuffer(&this->m_Reverb.ReverbDelay, v6, v8, v20);
       else
         memmove(v8, v6, 4 * v20);
-      if ( v4->m_Reverb.ERDelay.uDelayLineLength )
-        DSP::DelayLine::ProcessBuffer(&v4->m_Reverb.ERDelay, v6, v20);
-      if ( v4->m_Reverb.uNumERSignals )
+      if ( this->m_Reverb.ERDelay.uDelayLineLength )
+        DSP::DelayLine::ProcessBuffer(&this->m_Reverb.ERDelay, v6, v20);
+      if ( this->m_Reverb.uNumERSignals )
       {
-        DSP::ERUnitDual::ProcessBuffer(v4->m_pERUnit, v6, v11, v9, v20);
-        if ( v4->m_pParams->sInvariantParams.bEnableToneControls )
+        DSP::ERUnitDual::ProcessBuffer(this->m_pERUnit, v6, v11, v9, v20);
+        if ( this->m_pParams->sInvariantParams.bEnableToneControls )
         {
-          v21 = 0;
-          if ( v4->m_Reverb.uTCFilterIndex[0] )
+          for ( i = 0; i < (unsigned int)this->m_Reverb.uTCFilterIndex[0]; ++i )
           {
-            do
+            p_Filter = &this->m_pTCFiltersState[i].Filter;
+            if ( p_Filter[1].m_Coefficients.vFirst.m128_i32[0] == 1 )
             {
-              v22 = &v4->m_pTCFiltersState[v21].Filter;
-              if ( v22[1].m_Coefficients.vFirst.m128_i32[0] == 1 )
-              {
-                DSP::BiquadFilter<DSP::SingleChannelPolicy>::ProcessBuffer(v22, v11, v20, 0);
-                DSP::BiquadFilter<DSP::SingleChannelPolicy>::ProcessBuffer(
-                  &v4->m_pTCFiltersState[v21++ + 1].Filter,
-                  v9,
-                  v20,
-                  0);
-              }
-              ++v21;
+              DSP::BiquadFilter<DSP::SingleChannelPolicy>::ProcessBuffer(p_Filter, v11, v20, 0);
+              DSP::BiquadFilter<DSP::SingleChannelPolicy>::ProcessBuffer(
+                &this->m_pTCFiltersState[++i].Filter,
+                v9,
+                v20,
+                0);
             }
-            while ( v21 < v4->m_Reverb.uTCFilterIndex[0] );
           }
         }
-        if ( v4->m_Reverb.ERFrontBackDelay[0].uDelayLineLength )
+        if ( this->m_Reverb.ERFrontBackDelay[0].uDelayLineLength )
         {
-          DSP::DelayLine::ProcessBuffer(v4->m_Reverb.ERFrontBackDelay, v11, v10, v20);
-          DSP::DelayLine::ProcessBuffer(&v4->m_Reverb.ERFrontBackDelay[1], v9, out_pfOutBuffer, v20);
+          DSP::DelayLine::ProcessBuffer(this->m_Reverb.ERFrontBackDelay, v11, v10, v20);
+          DSP::DelayLine::ProcessBuffer(&this->m_Reverb.ERFrontBackDelay[1], v9, out_pfOutBuffer, v20);
         }
         else
         {
@@ -2546,101 +2428,93 @@ signed __int64 __fastcall CAkRoomVerbFX::ProcessSpread3Out(CAkRoomVerbFX *this, 
           out_pfOutBuffer = v9;
         }
       }
-      v23 = v4->m_Reverb.DiffusionFilters;
+      p_m_Reverb = &this->m_Reverb;
       v24 = 4i64;
       do
       {
-        DSP::AllpassFilter::ProcessBuffer(v23, v8, v20);
-        ++v23;
+        DSP::AllpassFilter::ProcessBuffer(p_m_Reverb->DiffusionFilters, v8, v20);
+        p_m_Reverb = (ReverbState *)((char *)p_m_Reverb + 24);
         --v24;
       }
       while ( v24 );
-      CAkRoomVerbFX::ReverbPreProcess(v4, v8, v20);
+      CAkRoomVerbFX::ReverbPreProcess(this, v8, v20);
       memset(v6 + 512, 0, 0x1800ui64);
-      v25 = 0;
-      if ( v4->m_Reverb.uNumReverbUnits )
+      for ( j = 0; j < this->m_Reverb.uNumReverbUnits; ++j )
       {
-        do
-        {
-          v26 = v25;
-          DSP::DelayLine::ProcessBuffer(&v4->m_pReverbUnitsState[v26].RUInputDelay, v8, v20);
-          DSP::FDN4::ProcessBufferAccum(
-            &v4->m_pReverbUnitsState[v26].ReverbUnits,
-            v8,
-            (&io_pfOutBuffer3)[v25 & 1],
-            (&io_pfOutBuffer3)[(v25 & 1) + 2],
-            (&io_pfOutBuffer3)[(v25 & 1) + 4],
-            v20);
-          ++v25;
-        }
-        while ( v25 < v4->m_Reverb.uNumReverbUnits );
+        v26 = j;
+        DSP::DelayLine::ProcessBuffer(&this->m_pReverbUnitsState[v26].RUInputDelay, v8, v20);
+        DSP::FDN4::ProcessBufferAccum(
+          &this->m_pReverbUnitsState[v26].ReverbUnits,
+          v8,
+          io_pfOutBuffer3[j & 1],
+          io_pfOutBuffer3[(j & 1) + 2],
+          io_pfOutBuffer3[(j & 1) + 4],
+          v20);
       }
-      v27 = &io_pfOutBuffer3;
-      v28 = v4->m_Reverb.DCFilter;
+      v27 = io_pfOutBuffer3;
+      DCFilter = this->m_Reverb.DCFilter;
       v29 = 6i64;
-      v30 = v4->m_Reverb.fReverbUnitsMixGain * 1.4142135;
+      v30 = this->m_Reverb.fReverbUnitsMixGain * 1.4142135;
       do
       {
-        DSP::OnePoleZeroHPFilter::ProcessBufferWithGain(v28, *v27, v20, v30);
-        ++v28;
-        ++v27;
+        DSP::OnePoleZeroHPFilter::ProcessBufferWithGain(DCFilter++, *v27++, v20, v30);
         --v29;
       }
       while ( v29 );
-      v31 = v4->m_PrevRTPCParams.fReverbLevel * v4->m_PrevRTPCParams.fFrontLevel;
-      v32 = (float *)((char *)v75->pData + 4 * v74);
-      v33 = (float *)v4->m_pParams;
-      v34 = v33[21] * v33[15];
+      v31 = this->m_PrevRTPCParams.fReverbLevel * this->m_PrevRTPCParams.fFrontLevel;
+      v32 = (float *)((char *)io_pBuffer->pData + 4 * v71);
+      m_pParams = this->m_pParams;
+      v34 = m_pParams->sRTPCParams.fReverbLevel * m_pParams->sRTPCParams.fFrontLevel;
       DSP::Mix3Interp(
         v32,
         v6 + 512,
         v6 + 768,
-        v4->m_PrevRTPCParams.fDryLevel,
-        v33[19],
+        this->m_PrevRTPCParams.fDryLevel,
+        m_pParams->sRTPCParams.fDryLevel,
         v31 * v13,
         v34 * v16,
         v31 * v15,
         v34 * v12,
         v20);
-      if ( v4->m_Reverb.uNumERSignals )
+      if ( this->m_Reverb.uNumERSignals )
       {
-        v35 = v4->m_PrevRTPCParams.fERLevel * v4->m_PrevRTPCParams.fFrontLevel;
-        v36 = v4->m_pParams->sRTPCParams.fERLevel * v4->m_pParams->sRTPCParams.fFrontLevel;
+        v35 = this->m_PrevRTPCParams.fERLevel * this->m_PrevRTPCParams.fFrontLevel;
+        v36 = this->m_pParams->sRTPCParams.fERLevel * this->m_pParams->sRTPCParams.fFrontLevel;
         DSP::Mix3Interp(v32, v11, in_pfInput3, 1.0, 1.0, v35 * v13, v36 * v16, v35 * v15, v36 * v12, v20);
       }
-      v37 = v4->m_PrevRTPCParams.fReverbLevel * v4->m_PrevRTPCParams.fFrontLevel;
-      v38 = (float *)((char *)v75->pData + 4 * (v74 + (unsigned __int64)v75->uMaxFrames));
-      v39 = (float *)v4->m_pParams;
-      v40 = v39[21] * v39[15];
+      v37 = this->m_PrevRTPCParams.fReverbLevel * this->m_PrevRTPCParams.fFrontLevel;
+      v38 = (float *)((char *)io_pBuffer->pData + 4 * v71 + 4 * (unsigned __int64)io_pBuffer->uMaxFrames);
+      v39 = this->m_pParams;
+      v40 = v39->sRTPCParams.fReverbLevel * v39->sRTPCParams.fFrontLevel;
       DSP::Mix3Interp(
         v38,
         v6 + 512,
         v6 + 768,
-        v4->m_PrevRTPCParams.fDryLevel,
-        v39[19],
+        this->m_PrevRTPCParams.fDryLevel,
+        v39->sRTPCParams.fDryLevel,
         v37 * v15,
         v40 * v12,
         v37 * v13,
         v40 * v16,
         v20);
-      if ( v4->m_Reverb.uNumERSignals )
+      if ( this->m_Reverb.uNumERSignals )
       {
-        v41 = v4->m_PrevRTPCParams.fERLevel * v4->m_PrevRTPCParams.fFrontLevel;
-        v42 = v4->m_pParams->sRTPCParams.fERLevel * v4->m_pParams->sRTPCParams.fFrontLevel;
+        v41 = this->m_PrevRTPCParams.fERLevel * this->m_PrevRTPCParams.fFrontLevel;
+        v42 = this->m_pParams->sRTPCParams.fERLevel * this->m_pParams->sRTPCParams.fFrontLevel;
         DSP::Mix3Interp(v38, v11, in_pfInput3, 1.0, 1.0, v41 * v15, v42 * v12, v41 * v13, v42 * v16, v20);
       }
       v43 = 2;
-      if ( v77 )
+      if ( v74 )
       {
-        v44 = (float *)v4->m_pParams;
-        in_fTargetGain2 = (float)(v44[21] * v44[17]) * 0.70710599;
-        in_uNumFrames = (float)(v4->m_PrevRTPCParams.fReverbLevel * v4->m_PrevRTPCParams.fCenterLevel) * 0.70710599;
+        v44 = this->m_pParams;
+        in_fTargetGain2 = (float)(v44->sRTPCParams.fReverbLevel * v44->sRTPCParams.fCenterLevel) * 0.70710599;
+        in_uNumFrames = (float)(this->m_PrevRTPCParams.fReverbLevel * this->m_PrevRTPCParams.fCenterLevel) * 0.70710599;
         DSP::Mix3Interp(
-          (float *)v75->pData + v74 + 2i64 * v75->uMaxFrames,
+          (float *)io_pBuffer->pData + 2 * io_pBuffer->uMaxFrames + v71,
           v6 + 1024,
           v6 + 1280,
-          v4->m_PrevRTPCParams.fDryLevel,
-          v44[19],
+          this->m_PrevRTPCParams.fDryLevel,
+          v44->sRTPCParams.fDryLevel,
           in_uNumFrames,
           in_fTargetGain2,
           in_uNumFrames,
@@ -2648,111 +2522,101 @@ signed __int64 __fastcall CAkRoomVerbFX::ProcessSpread3Out(CAkRoomVerbFX *this, 
           v20);
         v43 = 3;
       }
-      v47 = v4->m_PrevRTPCParams.fReverbLevel * v4->m_PrevRTPCParams.fRearLevel;
-      v48 = (float *)((char *)v75->pData + 4 * (v74 + v43 * (unsigned __int64)v75->uMaxFrames));
-      v49 = (float *)v4->m_pParams;
-      v50 = v49[21] * v49[16];
+      v45 = this->m_PrevRTPCParams.fReverbLevel * this->m_PrevRTPCParams.fRearLevel;
+      v46 = (float *)((char *)io_pBuffer->pData + 4 * v71 + 4 * v43 * (unsigned __int64)io_pBuffer->uMaxFrames);
+      v47 = this->m_pParams;
+      v48 = v47->sRTPCParams.fReverbLevel * v47->sRTPCParams.fRearLevel;
       DSP::Mix3Interp(
-        v48,
+        v46,
         v6 + 1536,
         v6 + 1792,
-        v4->m_PrevRTPCParams.fDryLevel,
-        v49[19],
-        v47 * v13,
-        v50 * v16,
-        v47 * v15,
-        v50 * v12,
+        this->m_PrevRTPCParams.fDryLevel,
+        v47->sRTPCParams.fDryLevel,
+        v45 * v13,
+        v48 * v16,
+        v45 * v15,
+        v48 * v12,
         v20);
-      if ( v4->m_Reverb.uNumERSignals )
+      if ( this->m_Reverb.uNumERSignals )
       {
-        v51 = v4->m_PrevRTPCParams.fERLevel * v4->m_PrevRTPCParams.fRearLevel;
-        v52 = v4->m_pParams->sRTPCParams.fERLevel * v4->m_pParams->sRTPCParams.fRearLevel;
-        DSP::Mix3Interp(v48, in_pfInput2, out_pfOutBuffer, 1.0, 1.0, v51 * v13, v52 * v16, v51 * v15, v52 * v12, v20);
+        v49 = this->m_PrevRTPCParams.fERLevel * this->m_PrevRTPCParams.fRearLevel;
+        v50 = this->m_pParams->sRTPCParams.fERLevel * this->m_pParams->sRTPCParams.fRearLevel;
+        DSP::Mix3Interp(v46, in_pfInput2, out_pfOutBuffer, 1.0, 1.0, v49 * v13, v50 * v16, v49 * v15, v50 * v12, v20);
       }
-      v53 = v43 + 1;
-      v54 = (float *)((char *)v75->pData + 4 * (v74 + v53 * (unsigned __int64)v75->uMaxFrames));
-      v55 = (float *)v4->m_pParams;
-      v56 = v55[21] * v55[16];
+      v51 = v43 + 1;
+      v52 = this->m_PrevRTPCParams.fReverbLevel * this->m_PrevRTPCParams.fRearLevel;
+      v53 = (float *)((char *)io_pBuffer->pData + 4 * v71 + 4 * v51 * (unsigned __int64)io_pBuffer->uMaxFrames);
+      v54 = this->m_pParams;
+      v55 = v54->sRTPCParams.fReverbLevel * v54->sRTPCParams.fRearLevel;
       DSP::Mix3Interp(
-        v54,
+        v53,
         v6 + 1536,
         v6 + 1792,
-        v4->m_PrevRTPCParams.fDryLevel,
-        v55[19],
-        (float)(v4->m_PrevRTPCParams.fReverbLevel * v4->m_PrevRTPCParams.fRearLevel) * v15,
-        v56 * v12,
-        (float)(v4->m_PrevRTPCParams.fReverbLevel * v4->m_PrevRTPCParams.fRearLevel) * v13,
-        v56 * v16,
+        this->m_PrevRTPCParams.fDryLevel,
+        v54->sRTPCParams.fDryLevel,
+        v52 * v15,
+        v55 * v12,
+        v52 * v13,
+        v55 * v16,
         v20);
-      if ( v4->m_Reverb.uNumERSignals )
+      if ( this->m_Reverb.uNumERSignals )
       {
-        v57 = v4->m_PrevRTPCParams.fERLevel * v4->m_PrevRTPCParams.fRearLevel;
-        v58 = v4->m_pParams->sRTPCParams.fERLevel * v4->m_pParams->sRTPCParams.fRearLevel;
-        DSP::Mix3Interp(v54, in_pfInput2, out_pfOutBuffer, 1.0, 1.0, v57 * v15, v58 * v12, v57 * v13, v58 * v16, v20);
+        v56 = this->m_PrevRTPCParams.fERLevel * this->m_PrevRTPCParams.fRearLevel;
+        v57 = this->m_pParams->sRTPCParams.fERLevel * this->m_pParams->sRTPCParams.fRearLevel;
+        DSP::Mix3Interp(v53, in_pfInput2, out_pfOutBuffer, 1.0, 1.0, v56 * v15, v57 * v12, v56 * v13, v57 * v16, v20);
       }
-      if ( v64 )
+      if ( v66 )
       {
-        v59 = (float *)v4->m_pParams;
-        v60 = v53 + 1;
-        v3 = v75;
-        in_fTargetGain3 = (float)(v59[21] * v59[18]) * 0.70710599;
+        v58 = this->m_pParams;
+        v59 = v51 + 1;
+        v3 = io_pBuffer;
+        in_fTargetGain3 = (float)(v58->sRTPCParams.fReverbLevel * v58->sRTPCParams.fLFELevel) * 0.70710599;
+        in_uNumFramesa = (float)(this->m_PrevRTPCParams.fReverbLevel * this->m_PrevRTPCParams.fLFELevel) * 0.70710599;
         DSP::Mix3Interp(
-          (float *)v75->pData + v74 + v75->uMaxFrames * v60,
+          (float *)io_pBuffer->pData + v71 + io_pBuffer->uMaxFrames * v59,
           v6 + 1024,
           v6 + 1280,
-          v4->m_PrevRTPCParams.fDryLevel,
-          v59[19],
-          (float)(v4->m_PrevRTPCParams.fReverbLevel * v4->m_PrevRTPCParams.fLFELevel) * 0.70710599,
+          this->m_PrevRTPCParams.fDryLevel,
+          v58->sRTPCParams.fDryLevel,
+          in_uNumFramesa,
           in_fTargetGain3,
-          (float)(v4->m_PrevRTPCParams.fReverbLevel * v4->m_PrevRTPCParams.fLFELevel) * 0.70710599,
+          in_uNumFramesa,
           in_fTargetGain3,
           v20);
       }
       else
       {
-        v3 = v75;
+        v3 = io_pBuffer;
       }
-      v62 = v4->m_pParams;
+      v61 = this->m_pParams;
       v9 = in_pfInput3;
       v10 = in_pfInput2;
       v13 = v16;
       v15 = v12;
-      v4->m_PrevRTPCParams.fDryLevel = v62->sRTPCParams.fDryLevel;
-      v4->m_PrevRTPCParams.fERLevel = v62->sRTPCParams.fERLevel;
-      v4->m_PrevRTPCParams.fReverbLevel = v62->sRTPCParams.fReverbLevel;
-      v4->m_PrevRTPCParams.fFrontLevel = v62->sRTPCParams.fFrontLevel;
-      v4->m_PrevRTPCParams.fCenterLevel = v62->sRTPCParams.fCenterLevel;
-      v4->m_PrevRTPCParams.fRearLevel = v62->sRTPCParams.fRearLevel;
-      v4->m_PrevRTPCParams.fLFELevel = v62->sRTPCParams.fLFELevel;
-      in_uFrameOffset = v20 + v74;
-      v63 = v76 == v20;
-      v18 = v76 - v20;
-      v74 += v20;
-      v76 -= v20;
+      this->m_PrevRTPCParams.fDryLevel = v61->sRTPCParams.fDryLevel;
+      this->m_PrevRTPCParams.fERLevel = v61->sRTPCParams.fERLevel;
+      this->m_PrevRTPCParams.fReverbLevel = v61->sRTPCParams.fReverbLevel;
+      this->m_PrevRTPCParams.fFrontLevel = v61->sRTPCParams.fFrontLevel;
+      this->m_PrevRTPCParams.fCenterLevel = v61->sRTPCParams.fCenterLevel;
+      this->m_PrevRTPCParams.fRearLevel = v61->sRTPCParams.fRearLevel;
+      this->m_PrevRTPCParams.fLFELevel = v61->sRTPCParams.fLFELevel;
+      in_uFrameOffset = v20 + v71;
+      v62 = v73 == v20;
+      uValidFrames = v73 - v20;
+      v71 += v20;
+      v73 -= v20;
     }
-    while ( !v63 );
+    while ( !v62 );
   }
-  v4->m_pAllocator->vfptr->Free(v4->m_pAllocator, v6);
+  this->m_pAllocator->vfptr->Free(this->m_pAllocator, v6);
   return 1i64;
-}      v4->m_PrevRTPCParams.fRearLevel = v62->sRTPCParams.fRearLevel;
-      v4->m_PrevRTPCParams.fLFELevel = v62->sRTPCParams.fLFELevel;
-      in_uFrameOffset = v20 + v74;
-      v63 = v76 == v20;
-      v18 = v76 - v20;
-      v74 += v20;
-      v76 -= v20;
-    }
-    while ( !v63 );
-  }
-  v
+}vel = v61->sRTPCParams.fRe
 
 // File Line: 1893
 // RVA: 0xAE4BB0
-signed __int64 __fastcall CAkRoomVerbFX::ProcessSpread4Out(CAkRoomVerbFX *this, AkAudioBuffer *io_pBuffer)
+__int64 __fastcall CAkRoomVerbFX::ProcessSpread4Out(CAkRoomVerbFX *this, AkAudioBuffer *io_pBuffer)
 {
-  unsigned int v2; // ebp
-  AkAudioBuffer *v3; // r12
-  CAkRoomVerbFX *v4; // rsi
+  unsigned int uChannelMask; // ebp
   float *v5; // rax
   float *v6; // r13
   unsigned int in_uFrameOffset; // ecx
@@ -2766,81 +2630,75 @@ signed __int64 __fastcall CAkRoomVerbFX::ProcessSpread4Out(CAkRoomVerbFX *this, 
   float v16; // xmm8_4
   float v17; // xmm15_4
   __m128 v18; // xmm1
-  unsigned int v19; // eax
-  DSP::DelayLine *v20; // rbx
+  unsigned int uValidFrames; // eax
+  DSP::DelayLine *p_ERDelay; // rbx
   unsigned int v21; // ebp
-  unsigned __int8 v22; // bl
-  DSP::BiquadFilter<DSP::SingleChannelPolicy> *v23; // rcx
-  DSP::AllpassFilter *v24; // rbx
-  signed __int64 v25; // rdi
-  unsigned int v26; // er14
-  signed __int64 v27; // rbx
+  unsigned __int8 i; // bl
+  DSP::BiquadFilter<DSP::SingleChannelPolicy> *p_Filter; // rcx
+  ReverbState *p_m_Reverb; // rbx
+  __int64 v25; // rdi
+  unsigned int j; // r14d
+  __int64 v27; // rbx
   float **v28; // rbx
-  DSP::OnePoleZeroHPFilter *v29; // rdi
-  signed __int64 v30; // r14
+  DSP::OnePoleZeroHPFilter *DCFilter; // rdi
+  __int64 v30; // r14
   float v31; // xmm6_4
   float *v32; // rbx
-  float *v33; // rax
-  float v34; // xmm2_4
+  CAkRoomVerbFXParams *m_pParams; // rax
+  float v34; // xmm0_4
   float v35; // xmm3_4
   float v36; // xmm2_4
   float v37; // xmm3_4
-  float v38; // xmm2_4
+  float v38; // xmm0_4
   float *v39; // rbx
-  float *v40; // rax
+  CAkRoomVerbFXParams *v40; // rax
   float v41; // xmm3_4
   float v42; // xmm2_4
   float v43; // xmm3_4
   unsigned int v44; // ebx
-  float *v45; // rdx
+  CAkRoomVerbFXParams *v45; // rdx
   float in_fTargetGain2; // xmm1_4
-  float in_uNumFrames; // ST28_4
-  float *v48; // rdx
-  float v49; // xmm10_4
-  float v50; // xmm11_4
-  float v51; // xmm12_4
-  float *v52; // r14
-  float v53; // xmm13_4
+  CAkRoomVerbFXParams *v47; // rdx
+  float fRearLevel; // xmm10_4
+  float v49; // xmm6_4
+  float v50; // xmm12_4
+  float *v51; // r14
+  float v52; // xmm13_4
   float in_fTargetGain3; // xmm11_4
   float in_fCurrentGain3; // xmm10_4
-  float v56; // xmm12_4
-  float v57; // xmm8_4
-  float v58; // xmm6_4
-  float v59; // xmm8_4
-  float v60; // xmm13_4
-  float v61; // xmm9_4
-  float v62; // xmm7_4
-  float v63; // xmm9_4
-  unsigned int v64; // ebx
-  float *v65; // r14
-  unsigned int v66; // ebx
-  float *v67; // r14
-  unsigned int v68; // ebx
-  float *v69; // r14
-  float *v70; // rdx
-  float v71; // xmm1_4
-  CAkRoomVerbFXParams *v72; // rcx
-  bool v73; // zf
+  float v55; // xmm12_4
+  float v56; // xmm8_4
+  float v57; // xmm6_4
+  float v58; // xmm8_4
+  float v59; // xmm13_4
+  float v60; // xmm9_4
+  float v61; // xmm7_4
+  float v62; // xmm9_4
+  unsigned int v63; // ebx
+  float *v64; // r14
+  unsigned int v65; // ebx
+  float *v66; // r14
+  unsigned int v67; // ebx
+  float *v68; // r14
+  CAkRoomVerbFXParams *v69; // rdx
+  float v70; // xmm1_4
+  CAkRoomVerbFXParams *v71; // rcx
+  bool v72; // zf
+  float in_uNumFrames; // [rsp+28h] [rbp-170h]
+  float in_uNumFramesa; // [rsp+28h] [rbp-170h]
   float *out_pfOutBuffer; // [rsp+50h] [rbp-148h]
-  float *v75; // [rsp+58h] [rbp-140h]
+  float *v76; // [rsp+58h] [rbp-140h]
   float *in_pfInput3; // [rsp+60h] [rbp-138h]
   float *in_pfInput2; // [rsp+68h] [rbp-130h]
-  int v78; // [rsp+70h] [rbp-128h]
-  int v79; // [rsp+74h] [rbp-124h]
-  float *io_pfOutBuffer3; // [rsp+78h] [rbp-120h]
-  char *v81; // [rsp+80h] [rbp-118h]
-  char *v82; // [rsp+88h] [rbp-110h]
-  char *v83; // [rsp+90h] [rbp-108h]
-  char *v84; // [rsp+98h] [rbp-100h]
-  char *v85; // [rsp+A0h] [rbp-F8h]
-  float v86; // [rsp+1A0h] [rbp+8h]
-  float v87; // [rsp+1A8h] [rbp+10h]
-  unsigned int v88; // [rsp+1B0h] [rbp+18h]
-  int v89; // [rsp+1B8h] [rbp+20h]
+  int v79; // [rsp+70h] [rbp-128h]
+  int v80; // [rsp+74h] [rbp-124h]
+  float *io_pfOutBuffer3[7]; // [rsp+78h] [rbp-120h] BYREF
+  float v82; // [rsp+1A0h] [rbp+8h]
+  float v83; // [rsp+1A8h] [rbp+10h]
+  unsigned int v84; // [rsp+1B0h] [rbp+18h]
+  unsigned int v85; // [rsp+1B8h] [rbp+20h]
 
-  v2 = io_pBuffer->uChannelMask;
-  v3 = io_pBuffer;
-  v4 = this;
+  uChannelMask = io_pBuffer->uChannelMask;
   v5 = (float *)this->m_pAllocator->vfptr->Malloc(
                   this->m_pAllocator,
                   (unsigned __int64)(2 * (unsigned int)(unsigned __int8)this->m_Reverb.uNumERSignals + 8) << 10);
@@ -2849,197 +2707,183 @@ signed __int64 __fastcall CAkRoomVerbFX::ProcessSpread4Out(CAkRoomVerbFX *this, 
     return 52i64;
   in_uFrameOffset = 0;
   v9 = v5 + 256;
-  io_pfOutBuffer3 = v5 + 512;
+  io_pfOutBuffer3[0] = v5 + 512;
   v10 = 0i64;
-  v81 = (char *)(v5 + 768);
+  io_pfOutBuffer3[1] = v5 + 768;
   in_pfInput2 = 0i64;
-  v82 = (char *)(v5 + 1024);
+  io_pfOutBuffer3[2] = v5 + 1024;
   v11 = 0i64;
-  v83 = (char *)(v5 + 1280);
+  io_pfOutBuffer3[3] = v5 + 1280;
   in_pfInput3 = 0i64;
-  v84 = (char *)(v5 + 1536);
+  io_pfOutBuffer3[4] = v5 + 1536;
   out_pfOutBuffer = 0i64;
-  v75 = 0i64;
-  v85 = (char *)(v5 + 1792);
-  if ( v4->m_Reverb.uNumERSignals )
+  v76 = 0i64;
+  io_pfOutBuffer3[5] = v5 + 1792;
+  if ( this->m_Reverb.uNumERSignals )
   {
     v10 = v5 + 2048;
     v11 = v5 + 2304;
     out_pfOutBuffer = v5 + 2560;
     in_pfInput2 = v5 + 2048;
-    v75 = v5 + 2816;
+    v76 = v5 + 2816;
     in_pfInput3 = v5 + 2304;
   }
   v12 = 0.0;
   v13 = FLOAT_0_70710599;
-  v86 = 0.0;
+  v82 = 0.0;
   v15 = (__m128)(unsigned int)FLOAT_1_0;
-  v14 = (float)((float)(v4->m_PrevRTPCParams.fStereoWidth * 0.0055555557) * 0.29289401) + 0.70710599;
+  v14 = (float)((float)(this->m_PrevRTPCParams.fStereoWidth * 0.0055555557) * 0.29289401) + 0.70710599;
   v15.m128_f32[0] = 1.0 - (float)(v14 * v14);
   if ( v15.m128_f32[0] <= 0.0 )
     v16 = 0.0;
   else
-    LODWORD(v16) = (unsigned __int128)_mm_sqrt_ps(v15);
+    LODWORD(v16) = _mm_sqrt_ps(v15).m128_u32[0];
   v18 = (__m128)(unsigned int)FLOAT_1_0;
-  v87 = v16;
-  v17 = (float)((float)(v4->m_pParams->sRTPCParams.fStereoWidth * 0.0055555557) * 0.29289401) + 0.70710599;
+  v83 = v16;
+  v17 = (float)((float)(this->m_pParams->sRTPCParams.fStereoWidth * 0.0055555557) * 0.29289401) + 0.70710599;
   v18.m128_f32[0] = 1.0 - (float)(v17 * v17);
   if ( v18.m128_f32[0] > 0.0 )
   {
-    LODWORD(v12) = (unsigned __int128)_mm_sqrt_ps(v18);
-    v86 = v12;
+    LODWORD(v12) = _mm_sqrt_ps(v18).m128_u32[0];
+    v82 = v12;
   }
-  v19 = v3->uValidFrames;
-  v88 = 0;
-  v89 = v3->uValidFrames;
-  if ( v3->uValidFrames )
+  uValidFrames = io_pBuffer->uValidFrames;
+  v84 = 0;
+  v85 = uValidFrames;
+  if ( io_pBuffer->uValidFrames )
   {
-    v79 = v2 & 8;
-    v20 = &v4->m_Reverb.ERDelay;
-    v78 = v2 & 4;
+    v80 = uChannelMask & 8;
+    p_ERDelay = &this->m_Reverb.ERDelay;
+    v79 = uChannelMask & 4;
     do
     {
       v21 = 256;
-      if ( v19 < 0x100 )
-        v21 = v19;
-      CAkRoomVerbFX::WetPreProcess(v4, v3, v6, v21, in_uFrameOffset);
-      if ( v4->m_Reverb.ReverbDelay.uDelayLineLength )
-        DSP::DelayLine::ProcessBuffer(&v4->m_Reverb.ReverbDelay, v6, v9, v21);
+      if ( uValidFrames < 0x100 )
+        v21 = uValidFrames;
+      CAkRoomVerbFX::WetPreProcess(this, io_pBuffer, v6, v21, in_uFrameOffset);
+      if ( this->m_Reverb.ReverbDelay.uDelayLineLength )
+        DSP::DelayLine::ProcessBuffer(&this->m_Reverb.ReverbDelay, v6, v9, v21);
       else
         memmove(v9, v6, 4 * v21);
-      if ( v20->uDelayLineLength )
-        DSP::DelayLine::ProcessBuffer(v20, v6, v21);
-      if ( v4->m_Reverb.uNumERSignals )
+      if ( p_ERDelay->uDelayLineLength )
+        DSP::DelayLine::ProcessBuffer(p_ERDelay, v6, v21);
+      if ( this->m_Reverb.uNumERSignals )
       {
-        DSP::ERUnitDual::ProcessBuffer(v4->m_pERUnit, v6, v10, v11, v21);
-        if ( v4->m_pParams->sInvariantParams.bEnableToneControls )
+        DSP::ERUnitDual::ProcessBuffer(this->m_pERUnit, v6, v10, v11, v21);
+        if ( this->m_pParams->sInvariantParams.bEnableToneControls )
         {
-          v22 = 0;
-          if ( v4->m_Reverb.uTCFilterIndex[0] )
+          for ( i = 0; i < (unsigned int)this->m_Reverb.uTCFilterIndex[0]; ++i )
           {
-            do
+            p_Filter = &this->m_pTCFiltersState[i].Filter;
+            if ( p_Filter[1].m_Coefficients.vFirst.m128_i32[0] == 1 )
             {
-              v23 = &v4->m_pTCFiltersState[v22].Filter;
-              if ( v23[1].m_Coefficients.vFirst.m128_i32[0] == 1 )
-              {
-                DSP::BiquadFilter<DSP::SingleChannelPolicy>::ProcessBuffer(v23, v10, v21, 0);
-                DSP::BiquadFilter<DSP::SingleChannelPolicy>::ProcessBuffer(
-                  &v4->m_pTCFiltersState[v22++ + 1].Filter,
-                  v11,
-                  v21,
-                  0);
-              }
-              ++v22;
+              DSP::BiquadFilter<DSP::SingleChannelPolicy>::ProcessBuffer(p_Filter, v10, v21, 0);
+              DSP::BiquadFilter<DSP::SingleChannelPolicy>::ProcessBuffer(
+                &this->m_pTCFiltersState[++i].Filter,
+                v11,
+                v21,
+                0);
             }
-            while ( v22 < v4->m_Reverb.uTCFilterIndex[0] );
           }
         }
-        if ( v4->m_Reverb.ERFrontBackDelay[0].uDelayLineLength )
+        if ( this->m_Reverb.ERFrontBackDelay[0].uDelayLineLength )
         {
-          DSP::DelayLine::ProcessBuffer(v4->m_Reverb.ERFrontBackDelay, v10, out_pfOutBuffer, v21);
-          DSP::DelayLine::ProcessBuffer(&v4->m_Reverb.ERFrontBackDelay[1], v11, v75, v21);
+          DSP::DelayLine::ProcessBuffer(this->m_Reverb.ERFrontBackDelay, v10, out_pfOutBuffer, v21);
+          DSP::DelayLine::ProcessBuffer(&this->m_Reverb.ERFrontBackDelay[1], v11, v76, v21);
         }
         else
         {
           out_pfOutBuffer = v10;
-          v75 = v11;
+          v76 = v11;
         }
       }
-      v24 = v4->m_Reverb.DiffusionFilters;
+      p_m_Reverb = &this->m_Reverb;
       v25 = 4i64;
       do
       {
-        DSP::AllpassFilter::ProcessBuffer(v24, v9, v21);
-        ++v24;
+        DSP::AllpassFilter::ProcessBuffer(p_m_Reverb->DiffusionFilters, v9, v21);
+        p_m_Reverb = (ReverbState *)((char *)p_m_Reverb + 24);
         --v25;
       }
       while ( v25 );
-      CAkRoomVerbFX::ReverbPreProcess(v4, v9, v21);
+      CAkRoomVerbFX::ReverbPreProcess(this, v9, v21);
       memset(v6 + 512, 0, 0x1800ui64);
-      v26 = 0;
-      if ( v4->m_Reverb.uNumReverbUnits )
+      for ( j = 0; j < this->m_Reverb.uNumReverbUnits; ++j )
       {
-        do
-        {
-          v27 = v26;
-          DSP::DelayLine::ProcessBuffer(&v4->m_pReverbUnitsState[v27].RUInputDelay, v9, v21);
-          DSP::FDN4::ProcessBufferAccum(
-            &v4->m_pReverbUnitsState[v27].ReverbUnits,
-            v9,
-            (&io_pfOutBuffer3)[v26 & 1],
-            (&io_pfOutBuffer3)[(v26 & 1) + 2],
-            (&io_pfOutBuffer3)[(v26 & 1) + 4],
-            v21);
-          ++v26;
-        }
-        while ( v26 < v4->m_Reverb.uNumReverbUnits );
+        v27 = j;
+        DSP::DelayLine::ProcessBuffer(&this->m_pReverbUnitsState[v27].RUInputDelay, v9, v21);
+        DSP::FDN4::ProcessBufferAccum(
+          &this->m_pReverbUnitsState[v27].ReverbUnits,
+          v9,
+          io_pfOutBuffer3[j & 1],
+          io_pfOutBuffer3[(j & 1) + 2],
+          io_pfOutBuffer3[(j & 1) + 4],
+          v21);
       }
-      v28 = &io_pfOutBuffer3;
-      v29 = v4->m_Reverb.DCFilter;
+      v28 = io_pfOutBuffer3;
+      DCFilter = this->m_Reverb.DCFilter;
       v30 = 6i64;
-      v31 = v4->m_Reverb.fReverbUnitsMixGain * 1.4142135;
+      v31 = this->m_Reverb.fReverbUnitsMixGain * 1.4142135;
       do
       {
-        DSP::OnePoleZeroHPFilter::ProcessBufferWithGain(v29, *v28, v21, v31);
-        ++v29;
-        ++v28;
+        DSP::OnePoleZeroHPFilter::ProcessBufferWithGain(DCFilter++, *v28++, v21, v31);
         --v30;
       }
       while ( v30 );
-      v32 = (float *)((char *)v3->pData + 4 * v88);
-      v33 = (float *)v4->m_pParams;
-      v34 = v4->m_PrevRTPCParams.fReverbLevel * v4->m_PrevRTPCParams.fFrontLevel;
-      v35 = v33[21] * v33[15];
+      v32 = (float *)((char *)io_pBuffer->pData + 4 * v84);
+      m_pParams = this->m_pParams;
+      v34 = this->m_PrevRTPCParams.fReverbLevel * this->m_PrevRTPCParams.fFrontLevel;
+      v35 = m_pParams->sRTPCParams.fReverbLevel * m_pParams->sRTPCParams.fFrontLevel;
       DSP::Mix3Interp(
         v32,
         v6 + 512,
         v6 + 768,
-        v4->m_PrevRTPCParams.fDryLevel,
-        v33[19],
+        this->m_PrevRTPCParams.fDryLevel,
+        m_pParams->sRTPCParams.fDryLevel,
         v34 * v14,
         v35 * v17,
         v34 * v16,
         v35 * v12,
         v21);
-      if ( v4->m_Reverb.uNumERSignals )
+      if ( this->m_Reverb.uNumERSignals )
       {
-        v36 = v4->m_PrevRTPCParams.fERLevel * v4->m_PrevRTPCParams.fFrontLevel;
-        v37 = v4->m_pParams->sRTPCParams.fERLevel * v4->m_pParams->sRTPCParams.fFrontLevel;
+        v36 = this->m_PrevRTPCParams.fERLevel * this->m_PrevRTPCParams.fFrontLevel;
+        v37 = this->m_pParams->sRTPCParams.fERLevel * this->m_pParams->sRTPCParams.fFrontLevel;
         DSP::Mix3Interp(v32, in_pfInput2, in_pfInput3, 1.0, 1.0, v36 * v14, v37 * v17, v36 * v16, v37 * v12, v21);
       }
-      v38 = v4->m_PrevRTPCParams.fReverbLevel * v4->m_PrevRTPCParams.fFrontLevel;
-      v39 = (float *)((char *)v3->pData + 4 * (v88 + (unsigned __int64)v3->uMaxFrames));
-      v40 = (float *)v4->m_pParams;
-      v41 = v40[21] * v40[15];
+      v38 = this->m_PrevRTPCParams.fReverbLevel * this->m_PrevRTPCParams.fFrontLevel;
+      v39 = (float *)((char *)io_pBuffer->pData + 4 * v84 + 4 * (unsigned __int64)io_pBuffer->uMaxFrames);
+      v40 = this->m_pParams;
+      v41 = v40->sRTPCParams.fReverbLevel * v40->sRTPCParams.fFrontLevel;
       DSP::Mix3Interp(
         v39,
         v6 + 512,
         v6 + 768,
-        v4->m_PrevRTPCParams.fDryLevel,
-        v40[19],
+        this->m_PrevRTPCParams.fDryLevel,
+        v40->sRTPCParams.fDryLevel,
         v38 * v16,
         v41 * v12,
         v38 * v14,
         v41 * v17,
         v21);
-      if ( v4->m_Reverb.uNumERSignals )
+      if ( this->m_Reverb.uNumERSignals )
       {
-        v42 = v4->m_PrevRTPCParams.fERLevel * v4->m_PrevRTPCParams.fFrontLevel;
-        v43 = v4->m_pParams->sRTPCParams.fERLevel * v4->m_pParams->sRTPCParams.fFrontLevel;
+        v42 = this->m_PrevRTPCParams.fERLevel * this->m_PrevRTPCParams.fFrontLevel;
+        v43 = this->m_pParams->sRTPCParams.fERLevel * this->m_pParams->sRTPCParams.fFrontLevel;
         DSP::Mix3Interp(v39, in_pfInput2, in_pfInput3, 1.0, 1.0, v42 * v16, v43 * v12, v42 * v14, v43 * v17, v21);
       }
       v44 = 2;
-      if ( v78 )
+      if ( v79 )
       {
-        v45 = (float *)v4->m_pParams;
-        in_fTargetGain2 = (float)(v45[21] * v45[17]) * v13;
-        in_uNumFrames = (float)(v4->m_PrevRTPCParams.fReverbLevel * v4->m_PrevRTPCParams.fCenterLevel) * v13;
+        v45 = this->m_pParams;
+        in_fTargetGain2 = (float)(v45->sRTPCParams.fReverbLevel * v45->sRTPCParams.fCenterLevel) * v13;
+        in_uNumFrames = (float)(this->m_PrevRTPCParams.fReverbLevel * this->m_PrevRTPCParams.fCenterLevel) * v13;
         DSP::Mix3Interp(
-          (float *)v3->pData + v88 + 2i64 * v3->uMaxFrames,
+          (float *)io_pBuffer->pData + 2 * io_pBuffer->uMaxFrames + v84,
           v6 + 1024,
           v6 + 1280,
-          v4->m_PrevRTPCParams.fDryLevel,
-          v45[19],
+          this->m_PrevRTPCParams.fDryLevel,
+          v45->sRTPCParams.fDryLevel,
           in_uNumFrames,
           in_fTargetGain2,
           in_uNumFrames,
@@ -3047,121 +2891,122 @@ signed __int64 __fastcall CAkRoomVerbFX::ProcessSpread4Out(CAkRoomVerbFX *this, 
           v21);
         v44 = 3;
       }
-      v48 = (float *)v4->m_pParams;
-      v49 = v4->m_PrevRTPCParams.fRearLevel * v4->m_PrevRTPCParams.fReverbLevel;
-      v50 = v48[16] * v48[21];
-      v51 = v49;
-      v52 = (float *)((char *)v3->pData + 4 * (v88 + v44 * (unsigned __int64)v3->uMaxFrames));
-      v53 = v50;
-      in_fTargetGain3 = v50 * v86;
-      in_fCurrentGain3 = v49 * v16;
-      v56 = v51 * v14;
-      v57 = v4->m_PrevRTPCParams.fRearLevel * v4->m_PrevRTPCParams.fERLevel;
-      v58 = v57 * v87;
-      v59 = v57 * v14;
-      v60 = v53 * v17;
-      v61 = v48[16] * v48[20];
-      v62 = v61 * v86;
-      v63 = v61 * v17;
+      v47 = this->m_pParams;
+      fRearLevel = this->m_PrevRTPCParams.fRearLevel;
+      v49 = fRearLevel * this->m_PrevRTPCParams.fERLevel;
+      v50 = fRearLevel * this->m_PrevRTPCParams.fReverbLevel;
+      v51 = (float *)((char *)io_pBuffer->pData + 4 * v84 + 4 * v44 * (unsigned __int64)io_pBuffer->uMaxFrames);
+      v52 = v47->sRTPCParams.fRearLevel * v47->sRTPCParams.fReverbLevel;
+      in_fTargetGain3 = v52 * v82;
+      in_fCurrentGain3 = v50 * v16;
+      v55 = v50 * v14;
+      v56 = v49;
+      v57 = v49 * v83;
+      v58 = v56 * v14;
+      v59 = v52 * v17;
+      v60 = v47->sRTPCParams.fRearLevel * v47->sRTPCParams.fERLevel;
+      v61 = v60 * v82;
+      v62 = v60 * v17;
       DSP::Mix3Interp(
-        v52,
+        v51,
         v6 + 1536,
         v6 + 1792,
-        v4->m_PrevRTPCParams.fDryLevel,
-        v48[19],
-        v56,
-        v60,
+        this->m_PrevRTPCParams.fDryLevel,
+        v47->sRTPCParams.fDryLevel,
+        v55,
+        v59,
         in_fCurrentGain3,
         in_fTargetGain3,
         v21);
-      if ( v4->m_Reverb.uNumERSignals )
-        DSP::Mix3Interp(v52, out_pfOutBuffer, v75, 1.0, 1.0, v59, v63, v58, v62, v21);
-      v64 = v44 + 1;
-      v65 = (float *)((char *)v3->pData + 4 * (v88 + v64 * (unsigned __int64)v3->uMaxFrames));
+      if ( this->m_Reverb.uNumERSignals )
+        DSP::Mix3Interp(v51, out_pfOutBuffer, v76, 1.0, 1.0, v58, v62, v57, v61, v21);
+      v63 = v44 + 1;
+      v64 = (float *)((char *)io_pBuffer->pData + 4 * v84 + 4 * v63 * (unsigned __int64)io_pBuffer->uMaxFrames);
       DSP::Mix3Interp(
-        v65,
+        v64,
         v6 + 1536,
         v6 + 1792,
-        v4->m_PrevRTPCParams.fDryLevel,
-        v4->m_pParams->sRTPCParams.fDryLevel,
+        this->m_PrevRTPCParams.fDryLevel,
+        this->m_pParams->sRTPCParams.fDryLevel,
         in_fCurrentGain3,
         in_fTargetGain3,
-        v56,
-        v60,
+        v55,
+        v59,
         v21);
-      if ( v4->m_Reverb.uNumERSignals )
-        DSP::Mix3Interp(v65, out_pfOutBuffer, v75, 1.0, 1.0, v58, v62, v59, v63, v21);
-      v66 = v64 + 1;
-      v67 = (float *)((char *)v3->pData + 4 * (v88 + v66 * (unsigned __int64)v3->uMaxFrames));
+      if ( this->m_Reverb.uNumERSignals )
+        DSP::Mix3Interp(v64, out_pfOutBuffer, v76, 1.0, 1.0, v57, v61, v58, v62, v21);
+      v65 = v63 + 1;
+      v66 = (float *)((char *)io_pBuffer->pData + 4 * v84 + 4 * v65 * (unsigned __int64)io_pBuffer->uMaxFrames);
       DSP::Mix3Interp(
-        v67,
+        v66,
         v6 + 1536,
         v6 + 1792,
-        v4->m_PrevRTPCParams.fDryLevel,
-        v4->m_pParams->sRTPCParams.fDryLevel,
-        v56,
-        v60,
+        this->m_PrevRTPCParams.fDryLevel,
+        this->m_pParams->sRTPCParams.fDryLevel,
+        v55,
+        v59,
         in_fCurrentGain3,
         in_fTargetGain3,
         v21);
-      if ( v4->m_Reverb.uNumERSignals )
-        DSP::Mix3Interp(v67, out_pfOutBuffer, v75, 1.0, 1.0, v59, v63, v58, v62, v21);
-      v68 = v66 + 1;
-      v69 = (float *)((char *)v3->pData + 4 * (v88 + v68 * (unsigned __int64)v3->uMaxFrames));
+      if ( this->m_Reverb.uNumERSignals )
+        DSP::Mix3Interp(v66, out_pfOutBuffer, v76, 1.0, 1.0, v58, v62, v57, v61, v21);
+      v67 = v65 + 1;
+      v68 = (float *)((char *)io_pBuffer->pData + 4 * v84 + 4 * v67 * (unsigned __int64)io_pBuffer->uMaxFrames);
       DSP::Mix3Interp(
-        v69,
+        v68,
         v6 + 1536,
         v6 + 1792,
-        v4->m_PrevRTPCParams.fDryLevel,
-        v4->m_pParams->sRTPCParams.fDryLevel,
+        this->m_PrevRTPCParams.fDryLevel,
+        this->m_pParams->sRTPCParams.fDryLevel,
         in_fCurrentGain3,
         in_fTargetGain3,
-        v56,
-        v60,
+        v55,
+        v59,
         v21);
-      if ( v4->m_Reverb.uNumERSignals )
-        DSP::Mix3Interp(v69, out_pfOutBuffer, v75, 1.0, 1.0, v58, v62, v59, v63, v21);
+      if ( this->m_Reverb.uNumERSignals )
+        DSP::Mix3Interp(v68, out_pfOutBuffer, v76, 1.0, 1.0, v57, v61, v58, v62, v21);
       v13 = FLOAT_0_70710599;
-      if ( v79 )
+      if ( v80 )
       {
-        v70 = (float *)v4->m_pParams;
-        v71 = (float)(v70[21] * v70[18]) * 0.70710599;
+        v69 = this->m_pParams;
+        v70 = (float)(v69->sRTPCParams.fReverbLevel * v69->sRTPCParams.fLFELevel) * 0.70710599;
+        in_uNumFramesa = (float)(this->m_PrevRTPCParams.fReverbLevel * this->m_PrevRTPCParams.fLFELevel) * 0.70710599;
         DSP::Mix3Interp(
-          (float *)v3->pData + v88 + v3->uMaxFrames * (unsigned __int64)(v68 + 1),
+          (float *)io_pBuffer->pData + v84 + io_pBuffer->uMaxFrames * (unsigned __int64)(v67 + 1),
           v6 + 1024,
           v6 + 1280,
-          v4->m_PrevRTPCParams.fDryLevel,
-          v70[19],
-          (float)(v4->m_PrevRTPCParams.fReverbLevel * v4->m_PrevRTPCParams.fLFELevel) * 0.70710599,
-          v71,
-          (float)(v4->m_PrevRTPCParams.fReverbLevel * v4->m_PrevRTPCParams.fLFELevel) * 0.70710599,
-          v71,
+          this->m_PrevRTPCParams.fDryLevel,
+          v69->sRTPCParams.fDryLevel,
+          in_uNumFramesa,
+          v70,
+          in_uNumFramesa,
+          v70,
           v21);
       }
-      v72 = v4->m_pParams;
-      v12 = v86;
+      v71 = this->m_pParams;
+      v12 = v82;
       v10 = in_pfInput2;
       v11 = in_pfInput3;
       v14 = v17;
-      v16 = v86;
-      v87 = v86;
-      v4->m_PrevRTPCParams.fDryLevel = v72->sRTPCParams.fDryLevel;
-      v20 = &v4->m_Reverb.ERDelay;
-      v4->m_PrevRTPCParams.fERLevel = v72->sRTPCParams.fERLevel;
-      v4->m_PrevRTPCParams.fReverbLevel = v72->sRTPCParams.fReverbLevel;
-      v4->m_PrevRTPCParams.fFrontLevel = v72->sRTPCParams.fFrontLevel;
-      v4->m_PrevRTPCParams.fCenterLevel = v72->sRTPCParams.fCenterLevel;
-      v4->m_PrevRTPCParams.fRearLevel = v72->sRTPCParams.fRearLevel;
-      v4->m_PrevRTPCParams.fLFELevel = v72->sRTPCParams.fLFELevel;
-      in_uFrameOffset = v21 + v88;
-      v73 = v89 == v21;
-      v19 = v89 - v21;
-      v88 += v21;
-      v89 -= v21;
+      v16 = v82;
+      v83 = v82;
+      this->m_PrevRTPCParams.fDryLevel = v71->sRTPCParams.fDryLevel;
+      p_ERDelay = &this->m_Reverb.ERDelay;
+      this->m_PrevRTPCParams.fERLevel = v71->sRTPCParams.fERLevel;
+      this->m_PrevRTPCParams.fReverbLevel = v71->sRTPCParams.fReverbLevel;
+      this->m_PrevRTPCParams.fFrontLevel = v71->sRTPCParams.fFrontLevel;
+      this->m_PrevRTPCParams.fCenterLevel = v71->sRTPCParams.fCenterLevel;
+      this->m_PrevRTPCParams.fRearLevel = v71->sRTPCParams.fRearLevel;
+      this->m_PrevRTPCParams.fLFELevel = v71->sRTPCParams.fLFELevel;
+      in_uFrameOffset = v21 + v84;
+      v72 = v85 == v21;
+      uValidFrames = v85 - v21;
+      v84 += v21;
+      v85 -= v21;
     }
-    while ( !v73 );
+    while ( !v72 );
   }
-  v4->m_pAllocator->vfptr->Free(v4->m_pAllocator, v6);
+  this->m_pAllocator->vfptr->Free(this->m_pAllocator, v6);
   return 1i64;
 }
 

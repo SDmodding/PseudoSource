@@ -3,6 +3,6 @@
 __int64 dynamic_initializer_for__NetMemoryPool::mNetMemoryPool__()
 {
   UFG::qMemoryPool::qMemoryPool(&NetMemoryPool::mNetMemoryPool);
-  return atexit(dynamic_atexit_destructor_for__NetMemoryPool::mNetMemoryPool__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__NetMemoryPool::mNetMemoryPool__);
 }
 

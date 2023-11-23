@@ -1,30 +1,34 @@
 // File Line: 18
 // RVA: 0x61F080
-bool __fastcall UFG::UIFlowFrontEnd::canChangeState(UFG::UIFlowFrontEnd *this, UFG::UIFlow::eState old_state, UFG::UIFlow::eState new_state)
+bool __fastcall UFG::UIFlowFrontEnd::canChangeState(
+        UFG::UIFlowFrontEnd *this,
+        UFG::UIFlow::eState old_state,
+        UFG::UIFlow::eState new_state)
 {
-  __int32 v3; // edx
+  int v3; // edx
 
   if ( old_state )
   {
     v3 = old_state - 14;
     if ( !v3 )
-      return new_state == 15;
+      return new_state == (NUM_STATES|STATE_NORMAL|0x8);
     if ( v3 != 1 )
       return 0;
   }
-  return new_state == 14;
+  return new_state == (NUM_STATES|0x8);
 }
 
 // File Line: 37
 // RVA: 0x620DB0
-void __fastcall UFG::UIFlowFrontEnd::handleEnterState(UFG::UIFlowFrontEnd *this, UFG::UIFlow::eState old_state, UFG::UIFlow::eState new_state)
+void __fastcall UFG::UIFlowFrontEnd::handleEnterState(
+        UFG::UIFlowFrontEnd *this,
+        UFG::UIFlow::eState old_state,
+        UFG::UIFlow::eState new_state)
 {
-  UFG::UIFlowFrontEnd *v3; // rbx
-  __int32 v4; // er8
+  int v4; // r8d
   UFG::UIScreenTextureManager *v5; // rax
   UFG::UIScreenTextureManager *v6; // rax
 
-  v3 = this;
   v4 = new_state - 14;
   if ( v4 )
   {
@@ -38,15 +42,18 @@ void __fastcall UFG::UIFlowFrontEnd::handleEnterState(UFG::UIFlowFrontEnd *this,
   {
     v6 = UFG::UIScreenTextureManager::Instance();
     UFG::UIScreenTextureManager::QueueLoadAndPush(v6, "Splash", 0i64);
-    v3->m_screen_id = -1;
+    this->m_screen_id = -1;
   }
 }
 
 // File Line: 57
 // RVA: 0x620F10
-void __fastcall UFG::UIFlowFrontEnd::handleExitState(UFG::UIFlowFrontEnd *this, UFG::UIFlow::eState old_state, UFG::UIFlow::eState new_state)
+void __fastcall UFG::UIFlowFrontEnd::handleExitState(
+        UFG::UIFlowFrontEnd *this,
+        UFG::UIFlow::eState old_state,
+        UFG::UIFlow::eState new_state)
 {
-  __int32 v3; // edx
+  int v3; // edx
 
   v3 = old_state - 14;
   if ( v3 )
@@ -62,20 +69,17 @@ void __fastcall UFG::UIFlowFrontEnd::handleExitState(UFG::UIFlowFrontEnd *this, 
 
 // File Line: 76
 // RVA: 0x6202D0
-bool __fastcall UFG::UIFlowFrontEnd::flowHandleMessage(UFG::UIFlowFrontEnd *this, unsigned int msg_id, UFG::UIMessage *msg)
+bool __fastcall UFG::UIFlowFrontEnd::flowHandleMessage(
+        UFG::UIFlowFrontEnd *this,
+        unsigned int msg_id,
+        UFG::UIMessage *msg)
 {
-  UFG::UIFlowFrontEnd *v3; // rbx
-  UFG::UIMessage *v4; // rdi
-  unsigned int v5; // esi
   __int32 v6; // ecx
-  signed __int64 v7; // rdx
-  UFG::UIFlowVtbl *v8; // rax
-  UFG::UIFlow *v9; // rcx
+  __int64 v7; // rdx
+  UFG::UIFlowVtbl *vfptr; // rax
+  UFG::UIFlow *m_child_flow; // rcx
   bool result; // al
 
-  v3 = this;
-  v4 = msg;
-  v5 = msg_id;
   v6 = this->m_state - 14;
   if ( v6 )
   {
@@ -84,34 +88,34 @@ bool __fastcall UFG::UIFlowFrontEnd::flowHandleMessage(UFG::UIFlowFrontEnd *this
     if ( msg_id == UI_HASH_SCREEN_PUSHED_30 )
     {
       if ( !(unsigned int)UFG::qStringCompare(*(const char **)&msg[1].m_commandType, "MainMenu", -1) )
-        v3->m_screen_id = v4[1].m_messageId;
+        this->m_screen_id = msg[1].m_messageId;
       goto LABEL_16;
     }
-    if ( msg_id != UI_HASH_SCREEN_POPPED_30 || LODWORD(msg[1].vfptr) != v3->m_screen_id )
+    if ( msg_id != UI_HASH_SCREEN_POPPED_30 || LODWORD(msg[1].vfptr) != this->m_screen_id )
       goto LABEL_16;
     v7 = 14i64;
 LABEL_15:
-    v8 = v3->vfptr;
-    v3->m_screen_id = -1;
-    v8->changeState((UFG::UIFlow *)&v3->vfptr, (UFG::UIFlow::eState)v7);
+    vfptr = this->vfptr;
+    this->m_screen_id = -1;
+    vfptr->changeState(this, (UFG::UIFlow::eState)v7);
     goto LABEL_16;
   }
   if ( msg_id != UI_HASH_SCREEN_PUSHED_30 )
   {
-    if ( msg_id != UI_HASH_SCREEN_POPPED_30 || LODWORD(msg[1].vfptr) != v3->m_screen_id )
+    if ( msg_id != UI_HASH_SCREEN_POPPED_30 || LODWORD(msg[1].vfptr) != this->m_screen_id )
       goto LABEL_16;
     v7 = 15i64;
     goto LABEL_15;
   }
   if ( !(unsigned int)UFG::qStringCompare(*(const char **)&msg[1].m_commandType, "Splash", -1) )
-    v3->m_screen_id = v4[1].m_messageId;
+    this->m_screen_id = msg[1].m_messageId;
 LABEL_16:
-  v9 = v3->m_child_flow;
+  m_child_flow = this->m_child_flow;
   result = 0;
-  if ( !v9 || (result = v9->vfptr->flowHandleMessage(v9, v5, v4)) == 0 )
+  if ( (!m_child_flow || !(result = m_child_flow->vfptr->flowHandleMessage(m_child_flow, msg_id, msg)))
+    && msg_id == UI_HASH_REQUEST_STATE_CHANGE_30 )
   {
-    if ( v5 == UI_HASH_REQUEST_STATE_CHANGE_30 )
-      result = v3->vfptr->changeState((UFG::UIFlow *)&v3->vfptr, (UFG::UIFlow::eState)LODWORD(v4[1].vfptr));
+    return this->vfptr->changeState(this, (UFG::UIFlow::eState)msg[1].vfptr);
   }
   return result;
 }

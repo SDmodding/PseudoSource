@@ -18,48 +18,49 @@ void __fastcall OSuite::ZGameInterface::~ZGameInterface(OSuite::ZGameInterface *
 
 // File Line: 39
 // RVA: 0x15E450
-__int64 __fastcall OSuite::ZGameInterface::Initialize(OSuite::ZGameInterface *this, const char *gameUrl, OSuite::IGameConfig *pGameConfig)
+__int64 __fastcall OSuite::ZGameInterface::Initialize(
+        OSuite::ZGameInterface *this,
+        const char *gameUrl,
+        OSuite::IGameConfig *pGameConfig)
 {
   unsigned int v3; // eax
-  void (__fastcall *v4)(OSuite::fastdelegate::FastDelegate2<unsigned __int64,OSuite::TPair<enum OSuite::ZError::EError,OSuite::ZString> const &,void> *, unsigned __int64, OSuite::TPair<enum OSuite::ZError::EError,OSuite::ZString> *); // rcx
+  void (__fastcall *v4)(OSuite::fastdelegate::detail::GenericClass *); // rcx
   unsigned int v5; // ebx
   OSuite::ZError *v6; // rax
   void (__fastcall *v7)(OSuite::fastdelegate::detail::GenericClass *); // rcx
-  void (__fastcall *v8)(OSuite::fastdelegate::FastDelegate3<enum OSuite::ZLog::LogLevel,char const *,char const *,void> *, OSuite::ZLog::LogLevel, const char *, const char *); // rax
+  void (__fastcall *v8)(OSuite::fastdelegate::detail::GenericClass *); // rax
   OSuite::ZLog *v9; // rax
-  void (__fastcall *v11)(unsigned __int64, OSuite::TPair<enum OSuite::ZError::EError,OSuite::ZString> *); // [rsp+20h] [rbp-18h]
-  void *v12; // [rsp+28h] [rbp-10h]
+  OSuite::fastdelegate::FastDelegate3<enum OSuite::ZLog::LogLevel,char const *,char const *,void> v11; // [rsp+20h] [rbp-18h] BYREF
 
   v3 = OSuite::ZGameInterface::PlatformInit(this, gameUrl, pGameConfig);
-  v4 = OSuite::fastdelegate::FastDelegate2<OSuite::SCallbackData *,OSuite::ZWebServiceClient *,void>::InvokeStaticFunction;
+  v4 = (void (__fastcall *)(OSuite::fastdelegate::detail::GenericClass *))OSuite::fastdelegate::FastDelegate2<OSuite::SCallbackData *,OSuite::ZWebServiceClient *,void>::InvokeStaticFunction;
   v5 = v3;
-  v11 = OSuite::ZGameInterface::OnError;
+  v11.m_Closure.m_pthis = (OSuite::fastdelegate::detail::GenericClass *)OSuite::ZGameInterface::OnError;
   if ( !OSuite::ZGameInterface::OnError )
     v4 = 0i64;
-  v12 = v4;
+  v11.m_Closure.m_pFunction = v4;
   v6 = OSuite::TSingleton<OSuite::ZError>::Object();
   OSuite::ZError::SetErrorDelegate(
     v6,
     (OSuite::fastdelegate::FastDelegate2<unsigned __int64,OSuite::TPair<enum OSuite::ZError::EError,OSuite::ZString> const &,void> *)&v11);
   v7 = (void (__fastcall *)(OSuite::fastdelegate::detail::GenericClass *))OSuite::fastdelegate::FastDelegate2<bool,char const *,void>::InvokeStaticFunction;
   OSuite::gAssertDelegate.m_Closure.m_pthis = (OSuite::fastdelegate::detail::GenericClass *)_;
-  v8 = OSuite::fastdelegate::FastDelegate3<enum  OSuite::ZLog::LogLevel,char const *,char const *,void>::InvokeStaticFunction;
+  v8 = (void (__fastcall *)(OSuite::fastdelegate::detail::GenericClass *))OSuite::fastdelegate::FastDelegate3<enum OSuite::ZLog::LogLevel,char const *,char const *,void>::InvokeStaticFunction;
   if ( !_ )
     v7 = 0i64;
   OSuite::gAssertDelegate.m_Closure.m_pFunction = v7;
-  v11 = (void (__fastcall *)(unsigned __int64, OSuite::TPair<enum OSuite::ZError::EError,OSuite::ZString> *))OSuite::ZGameInterface::OnLog;
+  v11.m_Closure.m_pthis = (OSuite::fastdelegate::detail::GenericClass *)OSuite::ZGameInterface::OnLog;
   if ( !OSuite::ZGameInterface::OnLog )
     v8 = 0i64;
-  v12 = v8;
+  v11.m_Closure.m_pFunction = v8;
   v9 = OSuite::TSingleton<OSuite::ZLog>::Object();
-  OSuite::ZLog::SetLogDelegate(
-    v9,
-    (OSuite::fastdelegate::FastDelegate3<enum OSuite::ZLog::LogLevel,char const *,char const *,void> *)&v11);
+  OSuite::ZLog::SetLogDelegate(v9, &v11);
   return v5;
 }
 
 // File Line: 56
 // RVA: 0x15E7E0
+// attributes: thunk
 __int64 __fastcall OSuite::ZGameInterface::Shutdown(OSuite::ZGameInterface *this)
 {
   return OSuite::ZGameInterface::PlatformShutdown(this);
@@ -74,20 +75,20 @@ void __fastcall OSuite::ZGameInterface::OnLog(OSuite::ZLog::LogLevel __formal, c
 
 // File Line: 82
 // RVA: 0x15E710
-void __fastcall OSuite::ZGameInterface::OnError(unsigned __int64 __formal, OSuite::TPair<enum OSuite::ZError::EError,OSuite::ZString> *error)
+void __fastcall OSuite::ZGameInterface::OnError(
+        unsigned __int64 __formal,
+        OSuite::TPair<enum OSuite::ZError::EError,OSuite::ZString> *error)
 {
-  OSuite::TPair<enum OSuite::ZError::EError,OSuite::ZString> *v2; // rbx
-  const char *v3; // rax
+  const char *ErrorString; // rax
   const char *v4; // rax
   const char *v5; // rax
   const char *v6; // rax
-  OSuite::ZString v7; // [rsp+28h] [rbp-40h]
-  OSuite::ZString v8; // [rsp+40h] [rbp-28h]
+  OSuite::ZString v7; // [rsp+28h] [rbp-40h] BYREF
+  OSuite::ZString v8; // [rsp+40h] [rbp-28h] BYREF
 
-  v2 = error;
-  v3 = OSuite::ZError::GetErrorString(error->m_First);
-  OSuite::ZString::ZString(&v8, v3);
-  v4 = OSuite::ZString::c_str(&v2->m_Second);
+  ErrorString = OSuite::ZError::GetErrorString(error->m_First);
+  OSuite::ZString::ZString(&v8, ErrorString);
+  v4 = OSuite::ZString::c_str(&error->m_Second);
   OSuite::ZString::ZString(&v7, v4);
   if ( OSuite::ZString::Count(&v8) )
   {

@@ -29,7 +29,7 @@ void dynamic_initializer_for__hkxVertexDescriptionElementDeclClass__()
     0i64,
     0i64,
     0,
-    3u);
+    3);
 }
 
 // File Line: 109
@@ -64,7 +64,7 @@ void dynamic_initializer_for__hkxVertexDescriptionClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 155
@@ -76,34 +76,30 @@ hkClass *__fastcall hkxVertexDescription::staticClass()
 
 // File Line: 162
 // RVA: 0xE33CD0
-void __fastcall finishLoadedObjecthkxVertexDescription(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxVertexDescription(hkxVertexDescription *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkxVertexDescription::hkxVertexDescription);
+  if ( p )
+    hkxVertexDescription::hkxVertexDescription(p, finishing);
 }
 
 // File Line: 168
 // RVA: 0xE33CF0
-void __fastcall cleanupLoadedObjecthkxVertexDescription(void *p)
+void __fastcall cleanupLoadedObjecthkxVertexDescription(_DWORD *p)
 {
-  int v1; // er8
-  _DWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      *(void **)p,
-      16 * v1);
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, *(void **)p, 16 * v1);
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 

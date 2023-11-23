@@ -2,7 +2,7 @@
 // RVA: 0x1458DA0
 __int64 dynamic_initializer_for__UFG::DevastatorComponent::s_DevastatorComponentList__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::DevastatorComponent::s_DevastatorComponentList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::DevastatorComponent::s_DevastatorComponentList__);
 }
 
 // File Line: 1071

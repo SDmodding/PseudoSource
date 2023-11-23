@@ -5,7 +5,7 @@ AK::IAkPlugin *__fastcall CreatePitchShifterFX(AK::IAkPluginMemAlloc *in_pAlloca
   AK::IAkPlugin *result; // rax
   AK::IAkPlugin *v2; // rbx
 
-  result = (AK::IAkPlugin *)in_pAllocator->vfptr->Malloc(in_pAllocator, 720ui64);
+  result = (AK::IAkPlugin *)in_pAllocator->vfptr->Malloc(in_pAllocator, 720i64);
   v2 = result;
   if ( result )
   {
@@ -13,7 +13,7 @@ AK::IAkPlugin *__fastcall CreatePitchShifterFX(AK::IAkPluginMemAlloc *in_pAlloca
     result->vfptr = (AK::IAkPluginVtbl *)&CAkPitchShifterFX::`vftable;
     result[2].vfptr = 0i64;
     AkPitchShifterFXInfo::AkPitchShifterFXInfo((AkPitchShifterFXInfo *)&result[3]);
-    result = v2;
+    return v2;
   }
   return result;
 }
@@ -22,13 +22,13 @@ AK::IAkPlugin *__fastcall CreatePitchShifterFX(AK::IAkPluginMemAlloc *in_pAlloca
 // RVA: 0xAEA2E0
 void __fastcall CAkPitchShifterFX::CAkPitchShifterFX(CAkPitchShifterFX *this)
 {
-  AkPitchShifterFXInfo *v1; // rcx
+  AkPitchShifterFXInfo *p_m_FXInfo; // rcx
 
-  v1 = &this->m_FXInfo;
-  *(_QWORD *)&v1[-1].uNumProcessedChannels = &CAkPitchShifterFX::`vftable;
-  *(_QWORD *)&v1[-1].uTotalNumChannels = 0i64;
-  *(_QWORD *)&v1[-1].uTailLength = 0i64;
-  AkPitchShifterFXInfo::AkPitchShifterFXInfo(v1);
+  p_m_FXInfo = &this->m_FXInfo;
+  *(_QWORD *)&p_m_FXInfo[-1].uNumProcessedChannels = &CAkPitchShifterFX::`vftable;
+  *(_QWORD *)&p_m_FXInfo[-1].uTotalNumChannels = 0i64;
+  *(_QWORD *)&p_m_FXInfo[-1].uTailLength = 0i64;
+  AkPitchShifterFXInfo::AkPitchShifterFXInfo(p_m_FXInfo);
 }
 
 // File Line: 43
@@ -40,48 +40,51 @@ void __fastcall CAkPitchShifterFX::~CAkPitchShifterFX(CAkPitchShifterFX *this)
 
 // File Line: 53
 // RVA: 0xAEA340
-AKRESULT __fastcall CAkPitchShifterFX::Init(CAkPitchShifterFX *this, AK::IAkPluginMemAlloc *in_pAllocator, AK::IAkEffectPluginContext *in_pFXCtx, AK::IAkPluginParam *in_pParams, AkAudioFormat *in_rFormat)
+AKRESULT __fastcall CAkPitchShifterFX::Init(
+        CAkPitchShifterFX *this,
+        AK::IAkPluginMemAlloc *in_pAllocator,
+        AK::IAkEffectPluginContext *in_pFXCtx,
+        CAkPitchShifterFXParams *in_pParams,
+        AkAudioFormat *in_rFormat)
 {
-  CAkPitchShifterFX *v5; // rbx
   char v6; // al
   unsigned int v7; // ecx
   int i; // edx
   AKRESULT result; // eax
 
-  this->m_pParams = (CAkPitchShifterFXParams *)in_pParams;
+  this->m_pParams = in_pParams;
   this->m_pAllocator = in_pAllocator;
-  v5 = this;
   v6 = ((__int64 (__fastcall *)(AK::IAkEffectPluginContext *))in_pFXCtx->vfptr[1].__vecDelDtor)(in_pFXCtx);
   v7 = 0;
-  v5->m_FXInfo.bSendMode = v6;
+  this->m_FXInfo.bSendMode = v6;
   for ( i = *((_DWORD *)in_rFormat + 1) & 0x3FFFF; i; i &= i - 1 )
     ++v7;
-  v5->m_FXInfo.uTotalNumChannels = v7;
-  CAkPitchShifterFXParams::GetParams(v5->m_pParams, &v5->m_FXInfo.Params);
-  if ( v5->m_FXInfo.bSendMode )
-    v5->m_FXInfo.Params.fDryLevel = 0.0;
-  v5->m_FXInfo.PrevParams.Voice.Filter.eFilterType = v5->m_FXInfo.Params.Voice.Filter.eFilterType;
-  v5->m_FXInfo.PrevParams.Voice.Filter.fFilterGain = v5->m_FXInfo.Params.Voice.Filter.fFilterGain;
-  v5->m_FXInfo.PrevParams.Voice.Filter.fFilterFrequency = v5->m_FXInfo.Params.Voice.Filter.fFilterFrequency;
-  v5->m_FXInfo.PrevParams.Voice.Filter.fFilterQFactor = v5->m_FXInfo.Params.Voice.Filter.fFilterQFactor;
-  v5->m_FXInfo.PrevParams.Voice.fPitchFactor = v5->m_FXInfo.Params.Voice.fPitchFactor;
-  v5->m_FXInfo.PrevParams.Voice.fGain = v5->m_FXInfo.Params.Voice.fGain;
-  v5->m_FXInfo.PrevParams.fDryLevel = v5->m_FXInfo.Params.fDryLevel;
-  v5->m_FXInfo.PrevParams.fWetLevel = v5->m_FXInfo.Params.fWetLevel;
-  v5->m_FXInfo.PrevParams.fDelayTime = v5->m_FXInfo.Params.fDelayTime;
-  *(_DWORD *)&v5->m_FXInfo.PrevParams.bProcessLFE = *(_DWORD *)&v5->m_FXInfo.Params.bProcessLFE;
-  v5->m_FXInfo.uSampleRate = in_rFormat->uSampleRate;
-  CAkPitchShifterFX::ComputeNumProcessedChannels(v5, *((_DWORD *)in_rFormat + 1) & 0x3FFFF);
-  v5->m_FXInfo.uTailLength = (signed int)(float)((float)(v5->m_FXInfo.Params.fDelayTime * 0.001)
-                                               * (float)(signed int)v5->m_FXInfo.uSampleRate);
-  result = CAkPitchShifterFX::InitPitchVoice(v5);
-  if ( result == 1 )
+  this->m_FXInfo.uTotalNumChannels = v7;
+  CAkPitchShifterFXParams::GetParams(this->m_pParams, &this->m_FXInfo.Params);
+  if ( this->m_FXInfo.bSendMode )
+    this->m_FXInfo.Params.fDryLevel = 0.0;
+  this->m_FXInfo.PrevParams.Voice.Filter.eFilterType = this->m_FXInfo.Params.Voice.Filter.eFilterType;
+  this->m_FXInfo.PrevParams.Voice.Filter.fFilterGain = this->m_FXInfo.Params.Voice.Filter.fFilterGain;
+  this->m_FXInfo.PrevParams.Voice.Filter.fFilterFrequency = this->m_FXInfo.Params.Voice.Filter.fFilterFrequency;
+  this->m_FXInfo.PrevParams.Voice.Filter.fFilterQFactor = this->m_FXInfo.Params.Voice.Filter.fFilterQFactor;
+  this->m_FXInfo.PrevParams.Voice.fPitchFactor = this->m_FXInfo.Params.Voice.fPitchFactor;
+  this->m_FXInfo.PrevParams.eInputType = this->m_FXInfo.Params.eInputType;
+  this->m_FXInfo.PrevParams.fDryLevel = this->m_FXInfo.Params.fDryLevel;
+  this->m_FXInfo.PrevParams.fWetLevel = this->m_FXInfo.Params.fWetLevel;
+  this->m_FXInfo.PrevParams.fDelayTime = this->m_FXInfo.Params.fDelayTime;
+  *(_DWORD *)&this->m_FXInfo.PrevParams.bProcessLFE = *(_DWORD *)&this->m_FXInfo.Params.bProcessLFE;
+  this->m_FXInfo.uSampleRate = in_rFormat->uSampleRate;
+  CAkPitchShifterFX::ComputeNumProcessedChannels(this, *((_DWORD *)in_rFormat + 1) & 0x3FFFF);
+  this->m_FXInfo.uTailLength = (int)(float)((float)(this->m_FXInfo.Params.fDelayTime * 0.001)
+                                          * (float)(int)this->m_FXInfo.uSampleRate);
+  result = CAkPitchShifterFX::InitPitchVoice(this);
+  if ( result == AK_Success )
   {
-    result = CAkPitchShifterFX::InitDryDelay(v5);
-    if ( result == 1 )
+    result = CAkPitchShifterFX::InitDryDelay(this);
+    if ( result == AK_Success )
     {
-      v5->m_pParams->m_ParamChangeHandler = 0;
-      result = 1;
+      this->m_pParams->m_ParamChangeHandler = 0;
+      return 1;
     }
   }
   return result;
@@ -94,18 +97,18 @@ void __fastcall CAkPitchShifterFX::ComputeNumProcessedChannels(CAkPitchShifterFX
   char v2; // r10
   unsigned int v3; // eax
   bool v4; // zf
-  unsigned int v5; // er8
+  unsigned int v5; // r8d
   unsigned int v6; // edx
   unsigned int i; // edx
   unsigned int j; // edx
   unsigned int k; // edx
-  unsigned int l; // edx
   unsigned int m; // edx
+  unsigned int n; // edx
 
   v2 = in_eChannelMask;
-  switch ( LODWORD(this->m_FXInfo.Params.Voice.fGain) )
+  switch ( this->m_FXInfo.Params.eInputType )
   {
-    case 0:
+    case AKINPUTTYPE_ASINPUT:
       v3 = 0;
       v4 = (in_eChannelMask & 0xFFFFFFF7) == 0;
       v5 = in_eChannelMask & 0xFFFFFFF7;
@@ -121,33 +124,33 @@ void __fastcall CAkPitchShifterFX::ComputeNumProcessedChannels(CAkPitchShifterFX
       }
       this->m_FXInfo.eProcessChannelMask = v5;
       goto LABEL_20;
-    case 1:
+    case AKINPUTTYPE_CENTER:
       v3 = 0;
       for ( i = in_eChannelMask & 4; i; i &= i - 1 )
         ++v3;
       this->m_FXInfo.eProcessChannelMask = 4;
       goto LABEL_20;
-    case 2:
+    case AKINPUTTYPE_STEREO:
       v3 = 0;
       for ( j = in_eChannelMask & 3; j; j &= j - 1 )
         ++v3;
       this->m_FXInfo.eProcessChannelMask = 3;
       goto LABEL_20;
-    case 3:
+    case AKINPUTCHANNELTYPE_3POINT0:
       v3 = 0;
       for ( k = in_eChannelMask & 7; k; k &= k - 1 )
         ++v3;
       this->m_FXInfo.eProcessChannelMask = 7;
       goto LABEL_20;
-    case 4:
+    case AKINPUTTYPE_4POINT0:
       v3 = 0;
-      for ( l = in_eChannelMask & 0x33; l; l &= l - 1 )
+      for ( m = in_eChannelMask & 0x33; m; m &= m - 1 )
         ++v3;
       this->m_FXInfo.eProcessChannelMask = 51;
       goto LABEL_20;
-    case 5:
+    case AKINPUTTYPE_5POINT0:
       v3 = 0;
-      for ( m = in_eChannelMask & 0x37; m; m &= m - 1 )
+      for ( n = in_eChannelMask & 0x37; n; n &= n - 1 )
         ++v3;
       this->m_FXInfo.eProcessChannelMask = 55;
 LABEL_20:
@@ -156,13 +159,10 @@ LABEL_20:
     default:
       break;
   }
-  if ( this->m_FXInfo.Params.bProcessLFE )
+  if ( this->m_FXInfo.Params.bProcessLFE && (v2 & 8) != 0 )
   {
-    if ( v2 & 8 )
-    {
-      ++this->m_FXInfo.uNumProcessedChannels;
-      this->m_FXInfo.eProcessChannelMask |= 8u;
-    }
+    ++this->m_FXInfo.uNumProcessedChannels;
+    this->m_FXInfo.eProcessChannelMask |= 8u;
   }
 }
 
@@ -170,41 +170,39 @@ LABEL_20:
 // RVA: 0xAEA920
 void __fastcall CAkPitchShifterFX::ComputeTailLength(CAkPitchShifterFX *this)
 {
-  this->m_FXInfo.uTailLength = (signed int)(float)((float)(this->m_FXInfo.Params.fDelayTime * 0.001)
-                                                 * (float)(signed int)this->m_FXInfo.uSampleRate);
+  this->m_FXInfo.uTailLength = (int)(float)((float)(this->m_FXInfo.Params.fDelayTime * 0.001)
+                                          * (float)(int)this->m_FXInfo.uSampleRate);
 }
 
 // File Line: 127
 // RVA: 0xAEA960
 AKRESULT __fastcall CAkPitchShifterFX::InitPitchVoice(CAkPitchShifterFX *this)
 {
-  unsigned int v1; // er9
-  CAkPitchShifterFX *v2; // rbx
+  unsigned int uNumProcessedChannels; // r9d
   AKRESULT result; // eax
-  AkFilterType v4; // edx
+  AkFilterType eFilterType; // edx
 
-  v1 = this->m_FXInfo.uNumProcessedChannels;
-  v2 = this;
-  if ( v1 )
+  uNumProcessedChannels = this->m_FXInfo.uNumProcessedChannels;
+  if ( uNumProcessedChannels )
   {
     result = AK::DSP::AkDelayPitchShift::Init(
                &this->m_FXInfo.PitchShifter,
                this->m_pAllocator,
                this->m_FXInfo.Params.fDelayTime,
-               v1,
+               uNumProcessedChannels,
                this->m_FXInfo.uSampleRate);
-    if ( result != 1 )
+    if ( result != AK_Success )
       return result;
-    AK::DSP::AkDelayPitchShift::SetPitchFactor(&v2->m_FXInfo.PitchShifter, v2->m_FXInfo.Params.Voice.fPitchFactor);
-    v4 = v2->m_FXInfo.Params.Voice.Filter.eFilterType;
-    if ( v4 )
+    AK::DSP::AkDelayPitchShift::SetPitchFactor(&this->m_FXInfo.PitchShifter, this->m_FXInfo.Params.Voice.fPitchFactor);
+    eFilterType = this->m_FXInfo.Params.Voice.Filter.eFilterType;
+    if ( eFilterType )
       AK::DSP::MultiChannelBiquadFilter<8>::ComputeCoefs(
-        &v2->m_FXInfo.Filter,
-        (AK::DSP::MultiChannelBiquadFilter<8>::FilterType)(v4 - 1),
-        v2->m_FXInfo.uSampleRate,
-        v2->m_FXInfo.Params.Voice.Filter.fFilterFrequency,
-        v2->m_FXInfo.Params.Voice.Filter.fFilterGain,
-        v2->m_FXInfo.Params.Voice.Filter.fFilterQFactor);
+        &this->m_FXInfo.Filter,
+        (AK::DSP::MultiChannelBiquadFilter<8>::FilterType)(eFilterType - 1),
+        this->m_FXInfo.uSampleRate,
+        this->m_FXInfo.Params.Voice.Filter.fFilterFrequency,
+        this->m_FXInfo.Params.Voice.Filter.fFilterGain,
+        this->m_FXInfo.Params.Voice.Filter.fFilterQFactor);
   }
   return 1;
 }
@@ -221,28 +219,25 @@ void __fastcall CAkPitchShifterFX::TermPitchVoice(CAkPitchShifterFX *this)
 // RVA: 0xAEAA40
 void __fastcall CAkPitchShifterFX::ResetPitchVoice(CAkPitchShifterFX *this)
 {
-  CAkPitchShifterFX *v1; // rbx
-
-  v1 = this;
   if ( this->m_FXInfo.uNumProcessedChannels )
   {
     AK::DSP::AkDelayPitchShift::Reset(&this->m_FXInfo.PitchShifter);
-    *(_QWORD *)&v1->m_FXInfo.Filter.m_Memories[0].fFFbk1 = 0i64;
-    *(_QWORD *)&v1->m_FXInfo.Filter.m_Memories[0].fFFwd1 = 0i64;
-    *(_QWORD *)&v1->m_FXInfo.Filter.m_Memories[1].fFFbk1 = 0i64;
-    *(_QWORD *)&v1->m_FXInfo.Filter.m_Memories[1].fFFwd1 = 0i64;
-    *(_QWORD *)&v1->m_FXInfo.Filter.m_Memories[2].fFFbk1 = 0i64;
-    *(_QWORD *)&v1->m_FXInfo.Filter.m_Memories[2].fFFwd1 = 0i64;
-    *(_QWORD *)&v1->m_FXInfo.Filter.m_Memories[3].fFFbk1 = 0i64;
-    *(_QWORD *)&v1->m_FXInfo.Filter.m_Memories[3].fFFwd1 = 0i64;
-    *(_QWORD *)&v1->m_FXInfo.Filter.m_Memories[4].fFFbk1 = 0i64;
-    *(_QWORD *)&v1->m_FXInfo.Filter.m_Memories[4].fFFwd1 = 0i64;
-    *(_QWORD *)&v1->m_FXInfo.Filter.m_Memories[5].fFFbk1 = 0i64;
-    *(_QWORD *)&v1->m_FXInfo.Filter.m_Memories[5].fFFwd1 = 0i64;
-    *(_QWORD *)&v1->m_FXInfo.Filter.m_Memories[6].fFFbk1 = 0i64;
-    *(_QWORD *)&v1->m_FXInfo.Filter.m_Memories[6].fFFwd1 = 0i64;
-    *(_QWORD *)&v1->m_FXInfo.Filter.m_Memories[7].fFFbk1 = 0i64;
-    *(_QWORD *)&v1->m_FXInfo.Filter.m_Memories[7].fFFwd1 = 0i64;
+    *(_QWORD *)&this->m_FXInfo.Filter.m_Memories[0].fFFbk1 = 0i64;
+    *(_QWORD *)&this->m_FXInfo.Filter.m_Memories[0].fFFwd1 = 0i64;
+    *(_QWORD *)&this->m_FXInfo.Filter.m_Memories[1].fFFbk1 = 0i64;
+    *(_QWORD *)&this->m_FXInfo.Filter.m_Memories[1].fFFwd1 = 0i64;
+    *(_QWORD *)&this->m_FXInfo.Filter.m_Memories[2].fFFbk1 = 0i64;
+    *(_QWORD *)&this->m_FXInfo.Filter.m_Memories[2].fFFwd1 = 0i64;
+    *(_QWORD *)&this->m_FXInfo.Filter.m_Memories[3].fFFbk1 = 0i64;
+    *(_QWORD *)&this->m_FXInfo.Filter.m_Memories[3].fFFwd1 = 0i64;
+    *(_QWORD *)&this->m_FXInfo.Filter.m_Memories[4].fFFbk1 = 0i64;
+    *(_QWORD *)&this->m_FXInfo.Filter.m_Memories[4].fFFwd1 = 0i64;
+    *(_QWORD *)&this->m_FXInfo.Filter.m_Memories[5].fFFbk1 = 0i64;
+    *(_QWORD *)&this->m_FXInfo.Filter.m_Memories[5].fFFwd1 = 0i64;
+    *(_QWORD *)&this->m_FXInfo.Filter.m_Memories[6].fFFbk1 = 0i64;
+    *(_QWORD *)&this->m_FXInfo.Filter.m_Memories[6].fFFwd1 = 0i64;
+    *(_QWORD *)&this->m_FXInfo.Filter.m_Memories[7].fFFbk1 = 0i64;
+    *(_QWORD *)&this->m_FXInfo.Filter.m_Memories[7].fFFwd1 = 0i64;
   }
 }
 
@@ -250,12 +245,10 @@ void __fastcall CAkPitchShifterFX::ResetPitchVoice(CAkPitchShifterFX *this)
 // RVA: 0xAEAAE0
 AKRESULT __fastcall CAkPitchShifterFX::InitDryDelay(CAkPitchShifterFX *this)
 {
-  CAkPitchShifterFX *v1; // rdi
   unsigned int v2; // esi
   __int64 v3; // rbx
   AKRESULT result; // eax
 
-  v1 = this;
   v2 = this->m_FXInfo.uTailLength >> 1;
   if ( !this->m_FXInfo.Params.bSyncDry )
     return 1;
@@ -264,11 +257,14 @@ AKRESULT __fastcall CAkPitchShifterFX::InitDryDelay(CAkPitchShifterFX *this)
     return 1;
   while ( 1 )
   {
-    result = DSP::CDelayLight::Init((DSP::CDelayLight *)(&v1->vfptr + v3 + 2 * (v3 + 26)), v1->m_pAllocator, v2);
-    if ( result != 1 )
+    result = DSP::CDelayLight::Init(
+               (DSP::CDelayLight *)((char *)this->m_FXInfo.DryDelay + 16 * v3 + 8 * v3),
+               this->m_pAllocator,
+               v2);
+    if ( result != AK_Success )
       break;
     v3 = (unsigned int)(v3 + 1);
-    if ( (unsigned int)v3 >= v1->m_FXInfo.uTotalNumChannels )
+    if ( (unsigned int)v3 >= this->m_FXInfo.uTotalNumChannels )
       return 1;
   }
   return result;
@@ -278,96 +274,54 @@ AKRESULT __fastcall CAkPitchShifterFX::InitDryDelay(CAkPitchShifterFX *this)
 // RVA: 0xAEAB60
 void __fastcall CAkPitchShifterFX::TermDryDelay(CAkPitchShifterFX *this)
 {
-  __int64 v1; // rbx
-  CAkPitchShifterFX *v2; // rdi
+  __int64 i; // rbx
 
-  v1 = 0i64;
-  v2 = this;
-  if ( this->m_FXInfo.uTotalNumChannels )
-  {
-    do
-    {
-      DSP::CDelayLight::Term((DSP::CDelayLight *)(&v2->vfptr + v1 + 2 * (v1 + 26)), v2->m_pAllocator);
-      v1 = (unsigned int)(v1 + 1);
-    }
-    while ( (unsigned int)v1 < v2->m_FXInfo.uTotalNumChannels );
-  }
+  for ( i = 0i64; (unsigned int)i < this->m_FXInfo.uTotalNumChannels; i = (unsigned int)(i + 1) )
+    DSP::CDelayLight::Term((DSP::CDelayLight *)((char *)this->m_FXInfo.DryDelay + 16 * i + 8 * i), this->m_pAllocator);
 }
 
 // File Line: 186
 // RVA: 0xAEABB0
 void __fastcall CAkPitchShifterFX::ResetDryDelay(CAkPitchShifterFX *this)
 {
-  __int64 v1; // rbx
-  CAkPitchShifterFX *v2; // rdi
+  __int64 i; // rbx
 
-  v1 = 0i64;
-  v2 = this;
-  if ( this->m_FXInfo.uTotalNumChannels )
-  {
-    do
-    {
-      DSP::CDelayLight::Reset((DSP::CDelayLight *)(&v2->vfptr + v1 + 2 * (v1 + 26)));
-      v1 = (unsigned int)(v1 + 1);
-    }
-    while ( (unsigned int)v1 < v2->m_FXInfo.uTotalNumChannels );
-  }
+  for ( i = 0i64; (unsigned int)i < this->m_FXInfo.uTotalNumChannels; i = (unsigned int)(i + 1) )
+    DSP::CDelayLight::Reset((DSP::CDelayLight *)((char *)this->m_FXInfo.DryDelay + 16 * i + 8 * i));
 }
 
 // File Line: 193
 // RVA: 0xAEA4A0
-signed __int64 __fastcall CAkPitchShifterFX::Term(CAkPitchShifterFX *this, AK::IAkPluginMemAlloc *in_pAllocator)
+__int64 __fastcall CAkPitchShifterFX::Term(CAkPitchShifterFX *this, AK::IAkPluginMemAlloc *in_pAllocator)
 {
-  AK::IAkPluginMemAlloc *v2; // rsi
-  CAkPitchShifterFX *v3; // rbx
-  __int64 v4; // rdi
+  __int64 i; // rdi
 
-  v2 = in_pAllocator;
-  v3 = this;
   if ( this->m_FXInfo.uNumProcessedChannels )
     AK::DSP::AkDelayPitchShift::Term(&this->m_FXInfo.PitchShifter, this->m_pAllocator);
-  v4 = 0i64;
-  if ( v3->m_FXInfo.uTotalNumChannels )
-  {
-    do
-    {
-      DSP::CDelayLight::Term((DSP::CDelayLight *)(&v3->vfptr + v4 + 2 * (v4 + 26)), v3->m_pAllocator);
-      v4 = (unsigned int)(v4 + 1);
-    }
-    while ( (unsigned int)v4 < v3->m_FXInfo.uTotalNumChannels );
-  }
-  v3->vfptr->__vecDelDtor((AK::IAkPlugin *)&v3->vfptr, 0);
-  v2->vfptr->Free(v2, v3);
+  for ( i = 0i64; (unsigned int)i < this->m_FXInfo.uTotalNumChannels; i = (unsigned int)(i + 1) )
+    DSP::CDelayLight::Term((DSP::CDelayLight *)((char *)this->m_FXInfo.DryDelay + 16 * i + 8 * i), this->m_pAllocator);
+  this->vfptr->__vecDelDtor(this, 0i64);
+  in_pAllocator->vfptr->Free(in_pAllocator, this);
   return 1i64;
 }
 
 // File Line: 202
 // RVA: 0xAEA530
-signed __int64 __fastcall CAkPitchShifterFX::Reset(CAkPitchShifterFX *this)
+__int64 __fastcall CAkPitchShifterFX::Reset(CAkPitchShifterFX *this)
 {
-  CAkPitchShifterFX *v1; // rdi
-  __int64 v2; // rbx
+  __int64 i; // rbx
 
-  v1 = this;
   CAkPitchShifterFX::ResetPitchVoice(this);
-  v2 = 0i64;
-  if ( v1->m_FXInfo.uTotalNumChannels )
-  {
-    do
-    {
-      DSP::CDelayLight::Reset((DSP::CDelayLight *)(&v1->vfptr + v2 + 2 * (v2 + 26)));
-      v2 = (unsigned int)(v2 + 1);
-    }
-    while ( (unsigned int)v2 < v1->m_FXInfo.uTotalNumChannels );
-  }
+  for ( i = 0i64; (unsigned int)i < this->m_FXInfo.uTotalNumChannels; i = (unsigned int)(i + 1) )
+    DSP::CDelayLight::Reset((DSP::CDelayLight *)((char *)this->m_FXInfo.DryDelay + 16 * i + 8 * i));
   return 1i64;
 }
 
 // File Line: 211
 // RVA: 0xAEA590
-signed __int64 __fastcall CAkPitchShifterFX::GetPluginInfo(CAkPitchShifterFX *this, AkPluginInfo *out_rPluginInfo)
+__int64 __fastcall CAkPitchShifterFX::GetPluginInfo(CAkPitchShifterFX *this, AkPluginInfo *out_rPluginInfo)
 {
-  out_rPluginInfo->eType = 3;
+  out_rPluginInfo->eType = AkPluginTypeEffect;
   *(_WORD *)&out_rPluginInfo->bIsInPlace = 1;
   return 1i64;
 }
@@ -376,81 +330,77 @@ signed __int64 __fastcall CAkPitchShifterFX::GetPluginInfo(CAkPitchShifterFX *th
 // RVA: 0xAEA5B0
 void __fastcall CAkPitchShifterFX::Execute(CAkPitchShifterFX *this, AkAudioBuffer *io_pBuffer)
 {
-  AkAudioBuffer *v2; // rbp
-  CAkPitchShifterFX *v3; // rbx
   float *v4; // rsi
-  CAkPitchShifterFXParams *v5; // rdx
+  CAkPitchShifterFXParams *m_pParams; // rdx
   int v6; // ecx
   char v7; // al
   unsigned int i; // edi
   CAkPitchShifterFXParams *v9; // rax
   char v10; // al
-  AkFilterType v11; // edx
+  AkFilterType eFilterType; // edx
 
-  v2 = io_pBuffer;
-  v3 = this;
   CAkPitchShifterFXParams::GetParams(this->m_pParams, &this->m_FXInfo.Params);
   v4 = 0i64;
-  if ( v3->m_FXInfo.bSendMode )
-    v3->m_FXInfo.Params.fDryLevel = 0.0;
-  v5 = v3->m_pParams;
+  if ( this->m_FXInfo.bSendMode )
+    this->m_FXInfo.Params.fDryLevel = 0.0;
+  m_pParams = this->m_pParams;
   v6 = 0;
-  while ( v5->m_ParamChangeHandler.m_uParamBitArray[v6] <= 0u )
+  while ( !m_pParams->m_ParamChangeHandler.m_uParamBitArray[v6] )
   {
     if ( (unsigned int)++v6 >= 2 )
       goto LABEL_28;
   }
-  v7 = v5->m_ParamChangeHandler.m_uParamBitArray[0];
-  if ( !(v7 & 0x20) && !(v7 & 1) && !(v7 & 2) )
+  v7 = m_pParams->m_ParamChangeHandler.m_uParamBitArray[0];
+  if ( (v7 & 0x20) == 0 && (v7 & 1) == 0 && (v7 & 2) == 0 )
   {
 LABEL_17:
-    if ( v3->m_pParams->m_ParamChangeHandler.m_uParamBitArray[0] & 4 )
+    if ( (this->m_pParams->m_ParamChangeHandler.m_uParamBitArray[0] & 4) != 0 )
     {
-      CAkPitchShifterFX::TermDryDelay(v3);
-      if ( CAkPitchShifterFX::InitDryDelay(v3) != 1 )
+      CAkPitchShifterFX::TermDryDelay(this);
+      if ( CAkPitchShifterFX::InitDryDelay(this) != AK_Success )
         return;
-      CAkPitchShifterFX::ResetDryDelay(v3);
+      CAkPitchShifterFX::ResetDryDelay(this);
     }
-    if ( v3->m_pParams->m_ParamChangeHandler.m_uParamBitArray[0] & 0x40 )
-      AK::DSP::AkDelayPitchShift::SetPitchFactor(&v3->m_FXInfo.PitchShifter, v3->m_FXInfo.Params.Voice.fPitchFactor);
-    v9 = v3->m_pParams;
+    if ( (this->m_pParams->m_ParamChangeHandler.m_uParamBitArray[0] & 0x40) != 0 )
+      AK::DSP::AkDelayPitchShift::SetPitchFactor(&this->m_FXInfo.PitchShifter, this->m_FXInfo.Params.Voice.fPitchFactor);
+    v9 = this->m_pParams;
     if ( v9->m_ParamChangeHandler.m_uParamBitArray[0] < 0
-      || (v10 = v9->m_ParamChangeHandler.m_uParamBitArray[1], v10 & 2)
-      || v10 & 1
-      || v10 & 4 )
+      || (v10 = v9->m_ParamChangeHandler.m_uParamBitArray[1], (v10 & 2) != 0)
+      || (v10 & 1) != 0
+      || (v10 & 4) != 0 )
     {
-      v11 = v3->m_FXInfo.Params.Voice.Filter.eFilterType;
-      if ( v11 )
+      eFilterType = this->m_FXInfo.Params.Voice.Filter.eFilterType;
+      if ( eFilterType )
         AK::DSP::MultiChannelBiquadFilter<8>::ComputeCoefs(
-          &v3->m_FXInfo.Filter,
-          (AK::DSP::MultiChannelBiquadFilter<8>::FilterType)(v11 - 1),
-          v3->m_FXInfo.uSampleRate,
-          v3->m_FXInfo.Params.Voice.Filter.fFilterFrequency,
-          v3->m_FXInfo.Params.Voice.Filter.fFilterGain,
-          v3->m_FXInfo.Params.Voice.Filter.fFilterQFactor);
+          &this->m_FXInfo.Filter,
+          (AK::DSP::MultiChannelBiquadFilter<8>::FilterType)(eFilterType - 1),
+          this->m_FXInfo.uSampleRate,
+          this->m_FXInfo.Params.Voice.Filter.fFilterFrequency,
+          this->m_FXInfo.Params.Voice.Filter.fFilterGain,
+          this->m_FXInfo.Params.Voice.Filter.fFilterQFactor);
     }
 LABEL_28:
-    v3->m_pParams->m_ParamChangeHandler = 0;
-    if ( !v3->m_FXInfo.uNumProcessedChannels
-      || (v4 = (float *)v3->m_pAllocator->vfptr->Malloc(v3->m_pAllocator, 4i64 * v2->uMaxFrames)) != 0i64 )
+    this->m_pParams->m_ParamChangeHandler = 0;
+    if ( !this->m_FXInfo.uNumProcessedChannels
+      || (v4 = (float *)this->m_pAllocator->vfptr->Malloc(this->m_pAllocator, 4i64 * io_pBuffer->uMaxFrames)) != 0i64 )
     {
-      AkPitchShifterDSPProcess(v2, &v3->m_FXInfo, v4, 0i64);
+      AkPitchShifterDSPProcess(io_pBuffer, &this->m_FXInfo, v4, 0i64);
       if ( v4 )
-        v3->m_pAllocator->vfptr->Free(v3->m_pAllocator, v4);
+        this->m_pAllocator->vfptr->Free(this->m_pAllocator, v4);
     }
     return;
   }
-  if ( v3->m_FXInfo.uNumProcessedChannels > 0 )
-    AK::DSP::AkDelayPitchShift::Term(&v3->m_FXInfo.PitchShifter, v3->m_pAllocator);
-  for ( i = 0; i < v3->m_FXInfo.uTotalNumChannels; ++i )
-    DSP::CDelayLight::Term((DSP::CDelayLight *)(&v3->vfptr + i + 2 * (i + 26i64)), v3->m_pAllocator);
-  v3->m_FXInfo.uTailLength = (signed int)(float)((float)(v3->m_FXInfo.Params.fDelayTime * 0.001)
-                                               * (float)(signed int)v3->m_FXInfo.uSampleRate);
-  CAkPitchShifterFX::ComputeNumProcessedChannels(v3, v2->uChannelMask);
-  if ( CAkPitchShifterFX::InitPitchVoice(v3) == 1 && CAkPitchShifterFX::InitDryDelay(v3) == 1 )
+  if ( this->m_FXInfo.uNumProcessedChannels )
+    AK::DSP::AkDelayPitchShift::Term(&this->m_FXInfo.PitchShifter, this->m_pAllocator);
+  for ( i = 0; i < this->m_FXInfo.uTotalNumChannels; ++i )
+    DSP::CDelayLight::Term((DSP::CDelayLight *)((char *)this->m_FXInfo.DryDelay + 16 * i + 8 * i), this->m_pAllocator);
+  this->m_FXInfo.uTailLength = (int)(float)((float)(this->m_FXInfo.Params.fDelayTime * 0.001)
+                                          * (float)(int)this->m_FXInfo.uSampleRate);
+  CAkPitchShifterFX::ComputeNumProcessedChannels(this, io_pBuffer->uChannelMask);
+  if ( CAkPitchShifterFX::InitPitchVoice(this) == AK_Success && CAkPitchShifterFX::InitDryDelay(this) == AK_Success )
   {
-    CAkPitchShifterFX::ResetPitchVoice(v3);
-    CAkPitchShifterFX::ResetDryDelay(v3);
+    CAkPitchShifterFX::ResetPitchVoice(this);
+    CAkPitchShifterFX::ResetDryDelay(this);
     goto LABEL_17;
   }
 }

@@ -14,112 +14,103 @@ void __fastcall hkxVertexBuffer::VertexData::clear(hkxVertexBuffer::VertexData *
 
 // File Line: 28
 // RVA: 0xE36CC0
-void __fastcall hkxVertexBuffer::VertexData::setSize(hkxVertexBuffer::VertexData *this, int n)
+void __fastcall hkxVertexBuffer::VertexData::setSize(hkxVertexBuffer::VertexData *this, unsigned int n)
 {
-  unsigned int v2; // edi
+  unsigned int m_uint8Stride; // edi
   int v3; // edi
   int v4; // eax
-  int v5; // esi
-  hkxVertexBuffer::VertexData *v6; // rbx
   int v7; // eax
-  int v8; // er9
+  int v8; // r9d
   int v9; // eax
-  signed int v10; // edi
+  int v10; // edi
   int v11; // eax
-  int v12; // er9
+  int v12; // r9d
   int v13; // eax
-  signed int v14; // edi
+  int v14; // edi
   int v15; // eax
-  int v16; // er9
+  int v16; // r9d
   int v17; // eax
-  signed int v18; // edi
+  int v18; // edi
   int v19; // eax
-  int v20; // er9
+  int v20; // r9d
   int v21; // eax
-  signed int v22; // edi
+  int v22; // edi
   int v23; // eax
-  int v24; // er9
-  hkResult result; // [rsp+48h] [rbp+10h]
+  int v24; // r9d
+  hkResult result; // [rsp+48h] [rbp+10h] BYREF
 
-  v2 = this->m_uint8Stride;
+  m_uint8Stride = this->m_uint8Stride;
   this->m_numVerts = n;
-  v3 = n * v2;
+  v3 = n * m_uint8Stride;
   v4 = this->m_uint8Data.m_capacityAndFlags & 0x3FFFFFFF;
-  v5 = n;
-  v6 = this;
   if ( v4 < v3 )
   {
     v7 = 2 * v4;
     v8 = v3;
     if ( v3 < v7 )
       v8 = v7;
-    hkArrayUtil::_reserve(
-      &result,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &this->m_uint8Data,
-      v8,
-      1);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&this->m_uint8Data.m_data, v8, 1);
   }
-  v6->m_uint8Data.m_size = v3;
-  v9 = v6->m_uint16Data.m_capacityAndFlags & 0x3FFFFFFF;
-  v10 = v5 * v6->m_uint16Stride >> 1;
+  this->m_uint8Data.m_size = v3;
+  v9 = this->m_uint16Data.m_capacityAndFlags & 0x3FFFFFFF;
+  v10 = (n * this->m_uint16Stride) >> 1;
   if ( v9 < v10 )
   {
     v11 = 2 * v9;
-    v12 = v5 * v6->m_uint16Stride >> 1;
+    v12 = (n * this->m_uint16Stride) >> 1;
     if ( v10 < v11 )
       v12 = v11;
     hkArrayUtil::_reserve(
       &result,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &v6->m_uint16Data,
+      &hkContainerHeapAllocator::s_alloc,
+      (const void **)&this->m_uint16Data.m_data,
       v12,
       2);
   }
-  v6->m_uint16Data.m_size = v10;
-  v13 = v6->m_uint32Data.m_capacityAndFlags & 0x3FFFFFFF;
-  v14 = v5 * v6->m_uint32Stride >> 2;
+  this->m_uint16Data.m_size = v10;
+  v13 = this->m_uint32Data.m_capacityAndFlags & 0x3FFFFFFF;
+  v14 = (n * this->m_uint32Stride) >> 2;
   if ( v13 < v14 )
   {
     v15 = 2 * v13;
-    v16 = v5 * v6->m_uint32Stride >> 2;
+    v16 = (n * this->m_uint32Stride) >> 2;
     if ( v14 < v15 )
       v16 = v15;
     hkArrayUtil::_reserve(
       &result,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &v6->m_uint32Data,
+      &hkContainerHeapAllocator::s_alloc,
+      (const void **)&this->m_uint32Data.m_data,
       v16,
       4);
   }
-  v6->m_uint32Data.m_size = v14;
-  v17 = v6->m_floatData.m_capacityAndFlags & 0x3FFFFFFF;
-  v18 = v5 * v6->m_floatStride >> 2;
+  this->m_uint32Data.m_size = v14;
+  v17 = this->m_floatData.m_capacityAndFlags & 0x3FFFFFFF;
+  v18 = (n * this->m_floatStride) >> 2;
   if ( v17 < v18 )
   {
     v19 = 2 * v17;
-    v20 = v5 * v6->m_floatStride >> 2;
+    v20 = (n * this->m_floatStride) >> 2;
     if ( v18 < v19 )
       v20 = v19;
-    hkArrayUtil::_reserve(
-      &result,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &v6->m_floatData,
-      v20,
-      4);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&this->m_floatData.m_data, v20, 4);
   }
-  v6->m_floatData.m_size = v18;
-  v21 = v6->m_vectorData.m_capacityAndFlags & 0x3FFFFFFF;
-  v22 = v5 * v6->m_vectorStride >> 2;
+  this->m_floatData.m_size = v18;
+  v21 = this->m_vectorData.m_capacityAndFlags & 0x3FFFFFFF;
+  v22 = (n * this->m_vectorStride) >> 2;
   if ( v21 < v22 )
   {
     v23 = 2 * v21;
-    v24 = v5 * v6->m_vectorStride >> 2;
+    v24 = (n * this->m_vectorStride) >> 2;
     if ( v22 < v23 )
       v24 = v23;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v6, v24, 4);
+    hkArrayUtil::_reserve(
+      &result,
+      &hkContainerHeapAllocator::s_alloc,
+      (const void **)&this->m_vectorData.m_data,
+      v24,
+      4);
   }
-  v6->m_vectorData.m_size = v22;
+  this->m_vectorData.m_size = v22;
 }
 
 // File Line: 38
@@ -127,67 +118,53 @@ void __fastcall hkxVertexBuffer::VertexData::setSize(hkxVertexBuffer::VertexData
 void __fastcall hkxVertexBuffer::VertexData::expandBy(hkxVertexBuffer::VertexData *this, int n)
 {
   unsigned int v2; // esi
-  int v3; // er9
-  int v4; // ebp
+  int v3; // r9d
   int v5; // eax
-  hkxVertexBuffer::VertexData *v6; // rbx
   int v7; // eax
   unsigned int v8; // edi
-  int v9; // er9
+  int v9; // r9d
   int v10; // eax
   int v11; // eax
   unsigned int v12; // edi
-  int v13; // er9
+  int v13; // r9d
   int v14; // eax
   int v15; // eax
   unsigned int v16; // edi
-  int v17; // er9
+  int v17; // r9d
   int v18; // eax
   int v19; // eax
   unsigned int v20; // edi
-  int v21; // er9
+  int v21; // r9d
   int v22; // eax
   int v23; // eax
-  hkResult result; // [rsp+48h] [rbp+10h]
+  hkResult result; // [rsp+48h] [rbp+10h] BYREF
 
   this->m_numVerts += n;
   v2 = n * this->m_uint8Stride;
   v3 = v2 + this->m_uint8Data.m_size;
-  v4 = n;
   v5 = this->m_uint8Data.m_capacityAndFlags & 0x3FFFFFFF;
-  v6 = this;
   if ( v5 < v3 )
   {
     v7 = 2 * v5;
     if ( v3 < v7 )
       v3 = v7;
-    hkArrayUtil::_reserve(
-      &result,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &this->m_uint8Data,
-      v3,
-      1);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&this->m_uint8Data.m_data, v3, 1);
   }
-  v6->m_uint8Data.m_size += v2;
-  v8 = v4 * v6->m_uint16Stride >> 1;
-  v9 = v8 + v6->m_uint16Data.m_size;
-  v10 = v6->m_uint16Data.m_capacityAndFlags & 0x3FFFFFFF;
+  this->m_uint8Data.m_size += v2;
+  v8 = (n * this->m_uint16Stride) >> 1;
+  v9 = v8 + this->m_uint16Data.m_size;
+  v10 = this->m_uint16Data.m_capacityAndFlags & 0x3FFFFFFF;
   if ( v10 < v9 )
   {
     v11 = 2 * v10;
     if ( v9 < v11 )
       v9 = v11;
-    hkArrayUtil::_reserve(
-      &result,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &v6->m_uint16Data,
-      v9,
-      2);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&this->m_uint16Data.m_data, v9, 2);
   }
-  v6->m_uint16Data.m_size += v8;
-  v12 = v4 * v6->m_uint32Stride >> 2;
-  v13 = v12 + v6->m_uint32Data.m_size;
-  v14 = v6->m_uint32Data.m_capacityAndFlags & 0x3FFFFFFF;
+  this->m_uint16Data.m_size += v8;
+  v12 = (n * this->m_uint32Stride) >> 2;
+  v13 = v12 + this->m_uint32Data.m_size;
+  v14 = this->m_uint32Data.m_capacityAndFlags & 0x3FFFFFFF;
   if ( v14 < v13 )
   {
     v15 = 2 * v14;
@@ -195,200 +172,193 @@ void __fastcall hkxVertexBuffer::VertexData::expandBy(hkxVertexBuffer::VertexDat
       v13 = v15;
     hkArrayUtil::_reserve(
       &result,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &v6->m_uint32Data,
+      &hkContainerHeapAllocator::s_alloc,
+      (const void **)&this->m_uint32Data.m_data,
       v13,
       4);
   }
-  v6->m_uint32Data.m_size += v12;
-  v16 = v4 * v6->m_floatStride >> 2;
-  v17 = v16 + v6->m_floatData.m_size;
-  v18 = v6->m_floatData.m_capacityAndFlags & 0x3FFFFFFF;
+  this->m_uint32Data.m_size += v12;
+  v16 = (n * this->m_floatStride) >> 2;
+  v17 = v16 + this->m_floatData.m_size;
+  v18 = this->m_floatData.m_capacityAndFlags & 0x3FFFFFFF;
   if ( v18 < v17 )
   {
     v19 = 2 * v18;
     if ( v17 < v19 )
       v17 = v19;
-    hkArrayUtil::_reserve(
-      &result,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &v6->m_floatData,
-      v17,
-      4);
+    hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&this->m_floatData.m_data, v17, 4);
   }
-  v6->m_floatData.m_size += v16;
-  v20 = v4 * v6->m_vectorStride >> 2;
-  v21 = v20 + v6->m_vectorData.m_size;
-  v22 = v6->m_vectorData.m_capacityAndFlags & 0x3FFFFFFF;
+  this->m_floatData.m_size += v16;
+  v20 = (n * this->m_vectorStride) >> 2;
+  v21 = v20 + this->m_vectorData.m_size;
+  v22 = this->m_vectorData.m_capacityAndFlags & 0x3FFFFFFF;
   if ( v22 < v21 )
   {
     v23 = 2 * v22;
     if ( v21 < v23 )
       v21 = v23;
-    hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v6, v21, 4);
+    hkArrayUtil::_reserve(
+      &result,
+      &hkContainerHeapAllocator::s_alloc,
+      (const void **)&this->m_vectorData.m_data,
+      v21,
+      4);
   }
-  v6->m_vectorData.m_size += v20;
+  this->m_vectorData.m_size += v20;
 }
 
 // File Line: 50
 // RVA: 0xE36490
 void __fastcall hkxVertexBuffer::hkxVertexBuffer(hkxVertexBuffer *this, hkFinishLoadedObjectFlag f)
 {
-  hkxVertexDescription *v2; // rcx
+  hkxVertexDescription *p_m_desc; // rcx
 
-  v2 = &this->m_desc;
-  *(_QWORD *)&v2[-8].m_decls.m_size = &hkxVertexBuffer::`vftable;
-  hkxVertexDescription::hkxVertexDescription(v2, f);
+  p_m_desc = &this->m_desc;
+  *(_QWORD *)&p_m_desc[-8].m_decls.m_size = &hkxVertexBuffer::`vftable;
+  hkxVertexDescription::hkxVertexDescription(p_m_desc, f);
 }
 
 // File Line: 55
 // RVA: 0xE364C0
-void __fastcall hkxVertexBuffer::setNumVertices(hkxVertexBuffer *this, int n, hkxVertexDescription *format)
+void __fastcall hkxVertexBuffer::setNumVertices(hkxVertexBuffer *this, unsigned int n, hkxVertexDescription *format)
 {
-  hkxVertexDescription *v3; // r12
-  int v4; // er13
-  hkxVertexBuffer *v5; // rbx
-  hkxVertexBuffer::VertexData *v6; // r15
+  hkxVertexBuffer::VertexData *p_m_data; // r15
   int v7; // edi
   int v8; // ebp
   __int64 v9; // r15
   hkxVertexDescription::ElementDecl *v10; // rsi
-  signed __int64 v11; // rax
-  signed __int64 v12; // rdx
-  char v13; // cl
+  hkxVertexDescription::ElementDecl *v11; // rax
+  hkxVertexDescription::ElementDecl *v12; // rdx
+  char m_numElements; // cl
   __int64 v14; // r8
   hkxVertexDescription::ElementDecl *v15; // rdx
   char v16; // cl
-  unsigned int v17; // eax
+  unsigned int m_uint8Stride; // eax
   unsigned int v18; // edi
   int v19; // edi
   int v20; // eax
   int v21; // eax
-  int v22; // er9
+  int v22; // r9d
   int v23; // eax
-  signed int v24; // edi
+  int v24; // edi
   int v25; // eax
-  int v26; // er9
+  int v26; // r9d
   int v27; // eax
-  signed int v28; // edi
+  int v28; // edi
   int v29; // eax
-  int v30; // er9
+  int v30; // r9d
   int v31; // eax
-  signed int v32; // edi
+  int v32; // edi
   int v33; // eax
-  int v34; // er9
+  int v34; // r9d
   signed int v35; // ebx
   int v36; // eax
   int v37; // eax
-  int v38; // er9
-  hkResult result; // [rsp+68h] [rbp+10h]
+  int v38; // r9d
+  hkResult result; // [rsp+68h] [rbp+10h] BYREF
 
-  v3 = format;
-  v4 = n;
-  v5 = this;
   if ( n != this->m_data.m_numVerts || !hkxVertexDescription::operator==(format, &this->m_desc) )
   {
-    v6 = &v5->m_data;
+    p_m_data = &this->m_data;
     v7 = 0;
-    v5->m_desc.m_decls.m_size = 0;
-    hkxVertexBuffer::VertexData::clear(&v5->m_data);
+    this->m_desc.m_decls.m_size = 0;
+    hkxVertexBuffer::VertexData::clear(&this->m_data);
     v8 = 0;
-    if ( v3->m_decls.m_size > 0 )
+    if ( format->m_decls.m_size > 0 )
     {
       v9 = 0i64;
       do
       {
-        v10 = &v3->m_decls.m_data[v9];
-        if ( v5->m_desc.m_decls.m_size == (v5->m_desc.m_decls.m_capacityAndFlags & 0x3FFFFFFF) )
-          hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v5->m_desc, 16);
-        v11 = (signed __int64)&v5->m_desc.m_decls.m_data[v5->m_desc.m_decls.m_size];
+        v10 = &format->m_decls.m_data[v9];
+        if ( this->m_desc.m_decls.m_size == (this->m_desc.m_decls.m_capacityAndFlags & 0x3FFFFFFF) )
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&this->m_desc.m_decls.m_data, 16);
+        v11 = &this->m_desc.m_decls.m_data[this->m_desc.m_decls.m_size];
         if ( v11 )
         {
-          *(_DWORD *)v11 = 0;
-          *(_QWORD *)(v11 + 4) = 0i64;
-          *(_WORD *)(v11 + 14) = 0;
+          v11->m_byteOffset = 0;
+          *(_QWORD *)&v11->m_type.m_storage = 0i64;
+          v11->m_hint.m_storage = 0;
         }
-        v12 = (signed __int64)&v5->m_desc.m_decls.m_data[v5->m_desc.m_decls.m_size++];
-        *(_WORD *)(v12 + 4) = v10->m_type.m_storage;
-        *(_WORD *)(v12 + 6) = v10->m_usage.m_storage;
-        *(_BYTE *)(v12 + 12) = v10->m_numElements;
-        *(_WORD *)(v12 + 14) = v10->m_hint.m_storage;
+        v12 = &this->m_desc.m_decls.m_data[this->m_desc.m_decls.m_size++];
+        v12->m_type.m_storage = v10->m_type.m_storage;
+        v12->m_usage.m_storage = v10->m_usage.m_storage;
+        v12->m_numElements = v10->m_numElements;
+        v12->m_hint.m_storage = v10->m_hint.m_storage;
         switch ( v10->m_type.m_storage )
         {
           case 1u:
-            *(_DWORD *)v12 = v5->m_data.m_uint8Stride;
-            v5->m_data.m_uint8Stride += (unsigned __int8)v10->m_numElements;
+            v12->m_byteOffset = this->m_data.m_uint8Stride;
+            this->m_data.m_uint8Stride += (unsigned __int8)v10->m_numElements;
             break;
           case 2u:
-            *(_DWORD *)v12 = v5->m_data.m_uint16Stride;
-            v5->m_data.m_uint16Stride += 2 * (unsigned __int8)v10->m_numElements;
+            v12->m_byteOffset = this->m_data.m_uint16Stride;
+            this->m_data.m_uint16Stride += 2 * (unsigned __int8)v10->m_numElements;
             break;
           case 3u:
-            *(_DWORD *)v12 = v5->m_data.m_uint32Stride;
-            v5->m_data.m_uint32Stride += 4 * (unsigned __int8)v10->m_numElements;
+            v12->m_byteOffset = this->m_data.m_uint32Stride;
+            this->m_data.m_uint32Stride += 4 * (unsigned __int8)v10->m_numElements;
             break;
           case 4u:
-            v13 = v10->m_numElements;
-            if ( (unsigned __int8)(v13 - 3) <= 1u )
+            m_numElements = v10->m_numElements;
+            if ( (unsigned __int8)(m_numElements - 3) <= 1u )
             {
-              *(_DWORD *)v12 = v5->m_data.m_vectorStride;
-              v5->m_data.m_vectorStride += 16;
+              v12->m_byteOffset = this->m_data.m_vectorStride;
+              this->m_data.m_vectorStride += 16;
             }
-            else if ( (unsigned __int8)v13 < 3u )
+            else if ( (unsigned __int8)m_numElements < 3u )
             {
-              *(_DWORD *)v12 = v5->m_data.m_floatStride;
-              v5->m_data.m_floatStride += 4 * (unsigned __int8)v10->m_numElements;
+              v12->m_byteOffset = this->m_data.m_floatStride;
+              this->m_data.m_floatStride += 4 * (unsigned __int8)v10->m_numElements;
             }
             break;
         }
         ++v8;
         ++v9;
       }
-      while ( v8 < v3->m_decls.m_size );
-      v6 = &v5->m_data;
+      while ( v8 < format->m_decls.m_size );
+      p_m_data = &this->m_data;
     }
-    if ( v5->m_desc.m_decls.m_size > 0 )
+    if ( this->m_desc.m_decls.m_size > 0 )
     {
       v14 = 0i64;
       do
       {
-        v15 = &v5->m_desc.m_decls.m_data[v14];
+        v15 = &this->m_desc.m_decls.m_data[v14];
         switch ( v15->m_type.m_storage )
         {
           case 1u:
-            v17 = v5->m_data.m_uint8Stride;
+            m_uint8Stride = this->m_data.m_uint8Stride;
             goto LABEL_35;
           case 2u:
-            v17 = v5->m_data.m_uint16Stride;
+            m_uint8Stride = this->m_data.m_uint16Stride;
             goto LABEL_35;
           case 3u:
-            v17 = v5->m_data.m_uint32Stride;
+            m_uint8Stride = this->m_data.m_uint32Stride;
             goto LABEL_35;
           case 4u:
-            v16 = v3->m_decls.m_data[v14].m_numElements;
+            v16 = format->m_decls.m_data[v14].m_numElements;
             if ( (unsigned __int8)(v16 - 3) <= 1u )
             {
-              v17 = v5->m_data.m_vectorStride;
+              m_uint8Stride = this->m_data.m_vectorStride;
               goto LABEL_35;
             }
             if ( (unsigned __int8)v16 < 3u )
             {
-              v17 = v5->m_data.m_floatStride;
+              m_uint8Stride = this->m_data.m_floatStride;
 LABEL_35:
-              v15->m_byteStride = v17;
-              break;
+              v15->m_byteStride = m_uint8Stride;
             }
             break;
         }
         ++v7;
         ++v14;
       }
-      while ( v7 < v5->m_desc.m_decls.m_size );
+      while ( v7 < this->m_desc.m_decls.m_size );
     }
-    v18 = v5->m_data.m_uint8Stride;
-    v5->m_data.m_numVerts = v4;
-    v19 = v4 * v18;
-    v20 = v5->m_data.m_uint8Data.m_capacityAndFlags & 0x3FFFFFFF;
+    v18 = this->m_data.m_uint8Stride;
+    this->m_data.m_numVerts = n;
+    v19 = n * v18;
+    v20 = this->m_data.m_uint8Data.m_capacityAndFlags & 0x3FFFFFFF;
     if ( v20 < v19 )
     {
       v21 = 2 * v20;
@@ -397,71 +367,76 @@ LABEL_35:
         v22 = v21;
       hkArrayUtil::_reserve(
         &result,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        &v5->m_data.m_uint8Data,
+        &hkContainerHeapAllocator::s_alloc,
+        (const void **)&this->m_data.m_uint8Data.m_data,
         v22,
         1);
     }
-    v5->m_data.m_uint8Data.m_size = v19;
-    v23 = v5->m_data.m_uint16Data.m_capacityAndFlags & 0x3FFFFFFF;
-    v24 = v4 * v5->m_data.m_uint16Stride >> 1;
+    this->m_data.m_uint8Data.m_size = v19;
+    v23 = this->m_data.m_uint16Data.m_capacityAndFlags & 0x3FFFFFFF;
+    v24 = (n * this->m_data.m_uint16Stride) >> 1;
     if ( v23 < v24 )
     {
       v25 = 2 * v23;
-      v26 = v4 * v5->m_data.m_uint16Stride >> 1;
+      v26 = (n * this->m_data.m_uint16Stride) >> 1;
       if ( v24 < v25 )
         v26 = v25;
       hkArrayUtil::_reserve(
         &result,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        &v5->m_data.m_uint16Data,
+        &hkContainerHeapAllocator::s_alloc,
+        (const void **)&this->m_data.m_uint16Data.m_data,
         v26,
         2);
     }
-    v5->m_data.m_uint16Data.m_size = v24;
-    v27 = v5->m_data.m_uint32Data.m_capacityAndFlags & 0x3FFFFFFF;
-    v28 = v4 * v5->m_data.m_uint32Stride >> 2;
+    this->m_data.m_uint16Data.m_size = v24;
+    v27 = this->m_data.m_uint32Data.m_capacityAndFlags & 0x3FFFFFFF;
+    v28 = (n * this->m_data.m_uint32Stride) >> 2;
     if ( v27 < v28 )
     {
       v29 = 2 * v27;
-      v30 = v4 * v5->m_data.m_uint32Stride >> 2;
+      v30 = (n * this->m_data.m_uint32Stride) >> 2;
       if ( v28 < v29 )
         v30 = v29;
       hkArrayUtil::_reserve(
         &result,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        &v5->m_data.m_uint32Data,
+        &hkContainerHeapAllocator::s_alloc,
+        (const void **)&this->m_data.m_uint32Data.m_data,
         v30,
         4);
     }
-    v5->m_data.m_uint32Data.m_size = v28;
-    v31 = v5->m_data.m_floatData.m_capacityAndFlags & 0x3FFFFFFF;
-    v32 = v4 * v5->m_data.m_floatStride >> 2;
+    this->m_data.m_uint32Data.m_size = v28;
+    v31 = this->m_data.m_floatData.m_capacityAndFlags & 0x3FFFFFFF;
+    v32 = (n * this->m_data.m_floatStride) >> 2;
     if ( v31 < v32 )
     {
       v33 = 2 * v31;
-      v34 = v4 * v5->m_data.m_floatStride >> 2;
+      v34 = (n * this->m_data.m_floatStride) >> 2;
       if ( v32 < v33 )
         v34 = v33;
       hkArrayUtil::_reserve(
         &result,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        &v5->m_data.m_floatData,
+        &hkContainerHeapAllocator::s_alloc,
+        (const void **)&this->m_data.m_floatData.m_data,
         v34,
         4);
     }
-    v5->m_data.m_floatData.m_size = v32;
-    v35 = v4 * v5->m_data.m_vectorStride >> 2;
-    v36 = v6->m_vectorData.m_capacityAndFlags & 0x3FFFFFFF;
+    this->m_data.m_floatData.m_size = v32;
+    v35 = (n * this->m_data.m_vectorStride) >> 2;
+    v36 = p_m_data->m_vectorData.m_capacityAndFlags & 0x3FFFFFFF;
     if ( v36 < v35 )
     {
       v37 = 2 * v36;
       v38 = v35;
       if ( v35 < v37 )
         v38 = v37;
-      hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v6, v38, 4);
+      hkArrayUtil::_reserve(
+        &result,
+        &hkContainerHeapAllocator::s_alloc,
+        (const void **)&p_m_data->m_vectorData.m_data,
+        v38,
+        4);
     }
-    v6->m_vectorData.m_size = v35;
+    p_m_data->m_vectorData.m_size = v35;
   }
 }
 
@@ -476,10 +451,8 @@ void __fastcall hkxVertexBuffer::expandNumVertices(hkxVertexBuffer *this, int n)
 // RVA: 0xE36840
 char *__fastcall hkxVertexBuffer::getVertexDataPtr(hkxVertexBuffer *this, hkxVertexDescription::ElementDecl *elem)
 {
-  hkxVertexDescription::ElementDecl *v2; // r9
-  char v3; // dl
+  char m_numElements; // dl
 
-  v2 = elem;
   switch ( elem->m_type.m_storage )
   {
     case 1u:
@@ -491,78 +464,65 @@ char *__fastcall hkxVertexBuffer::getVertexDataPtr(hkxVertexBuffer *this, hkxVer
   }
   if ( elem->m_type.m_storage != 4 )
     return 0i64;
-  v3 = elem->m_numElements;
-  if ( (unsigned __int8)(v3 - 3) > 1u )
+  m_numElements = elem->m_numElements;
+  if ( (unsigned __int8)(m_numElements - 3) > 1u )
   {
-    if ( (unsigned __int8)v3 < 3u )
-      return (char *)this->m_data.m_floatData.m_data + v2->m_byteOffset;
+    if ( (unsigned __int8)m_numElements < 3u )
+      return (char *)this->m_data.m_floatData.m_data + elem->m_byteOffset;
     return 0i64;
   }
-  return (char *)this->m_data.m_vectorData.m_data + v2->m_byteOffset;
+  return (char *)this->m_data.m_vectorData.m_data + elem->m_byteOffset;
 }
 
 // File Line: 189
 // RVA: 0xE36830
+// attributes: thunk
 void *__fastcall hkxVertexBuffer::getVertexDataPtr(hkxVertexBuffer *this, hkxVertexDescription::ElementDecl *elem)
 {
-  return hkxVertexBuffer::getVertexDataPtr(this, elem);
+  return ?getVertexDataPtr@hkxVertexBuffer@@QEAAPEAXAEBUElementDecl@hkxVertexDescription@@@Z(this, elem);
 }
 
 // File Line: 194
 // RVA: 0xE368B0
 void __fastcall hkxVertexBuffer::copy(hkxVertexBuffer *this, hkxVertexBuffer *other, bool resize)
 {
-  hkxVertexBuffer *v3; // rsi
-  hkxVertexBuffer *v4; // rdi
-  bool v5; // bl
   bool v6; // r14
-  unsigned int v7; // ebx
-  unsigned int v8; // er8
-  unsigned int v9; // er8
-  unsigned int v10; // er8
-  unsigned int v11; // er8
-  unsigned int v12; // er8
-  unsigned int v13; // ebx
+  unsigned int m_numVerts; // ebx
+  unsigned int m_uint8Stride; // r8d
+  unsigned int m_uint16Stride; // r8d
+  unsigned int m_uint32Stride; // r8d
+  unsigned int m_floatStride; // r8d
+  unsigned int m_vectorStride; // r8d
+  unsigned int i; // ebx
 
-  v3 = other;
-  v4 = this;
-  v5 = resize;
   v6 = hkxVertexDescription::operator==(&this->m_desc, &other->m_desc);
-  if ( v5 )
-    hkxVertexBuffer::setNumVertices(v4, v3->m_data.m_numVerts, &v4->m_desc);
+  if ( resize )
+    hkxVertexBuffer::setNumVertices(this, other->m_data.m_numVerts, &this->m_desc);
   if ( v6 )
   {
-    v7 = v4->m_data.m_numVerts;
-    v8 = v4->m_data.m_uint8Stride;
-    if ( v3->m_data.m_numVerts < v7 )
-      v7 = v3->m_data.m_numVerts;
-    if ( v8 )
-      hkString::memCpy(v4->m_data.m_uint8Data.m_data, v3->m_data.m_uint8Data.m_data, v7 * v8);
-    v9 = v4->m_data.m_uint16Stride;
-    if ( v9 )
-      hkString::memCpy(v4->m_data.m_uint16Data.m_data, v3->m_data.m_uint16Data.m_data, v7 * v9);
-    v10 = v4->m_data.m_uint32Stride;
-    if ( v10 )
-      hkString::memCpy(v4->m_data.m_uint32Data.m_data, v3->m_data.m_uint32Data.m_data, v7 * v10);
-    v11 = v4->m_data.m_floatStride;
-    if ( v11 )
-      hkString::memCpy(v4->m_data.m_floatData.m_data, v3->m_data.m_floatData.m_data, v7 * v11);
-    v12 = v4->m_data.m_vectorStride;
-    if ( v12 )
-      hkString::memCpy(v4->m_data.m_vectorData.m_data, v3->m_data.m_vectorData.m_data, v7 * v12);
+    m_numVerts = this->m_data.m_numVerts;
+    m_uint8Stride = this->m_data.m_uint8Stride;
+    if ( other->m_data.m_numVerts < m_numVerts )
+      m_numVerts = other->m_data.m_numVerts;
+    if ( m_uint8Stride )
+      hkString::memCpy(this->m_data.m_uint8Data.m_data, other->m_data.m_uint8Data.m_data, m_numVerts * m_uint8Stride);
+    m_uint16Stride = this->m_data.m_uint16Stride;
+    if ( m_uint16Stride )
+      hkString::memCpy(this->m_data.m_uint16Data.m_data, other->m_data.m_uint16Data.m_data, m_numVerts * m_uint16Stride);
+    m_uint32Stride = this->m_data.m_uint32Stride;
+    if ( m_uint32Stride )
+      hkString::memCpy(this->m_data.m_uint32Data.m_data, other->m_data.m_uint32Data.m_data, m_numVerts * m_uint32Stride);
+    m_floatStride = this->m_data.m_floatStride;
+    if ( m_floatStride )
+      hkString::memCpy(this->m_data.m_floatData.m_data, other->m_data.m_floatData.m_data, m_numVerts * m_floatStride);
+    m_vectorStride = this->m_data.m_vectorStride;
+    if ( m_vectorStride )
+      hkString::memCpy(this->m_data.m_vectorData.m_data, other->m_data.m_vectorData.m_data, m_numVerts * m_vectorStride);
   }
   else
   {
-    v13 = 0;
-    if ( v3->m_data.m_numVerts )
-    {
-      do
-      {
-        hkxVertexBuffer::copyVertex(v4, v3, v13, v13);
-        ++v13;
-      }
-      while ( v13 < v3->m_data.m_numVerts );
-    }
+    for ( i = 0; i < other->m_data.m_numVerts; ++i )
+      hkxVertexBuffer::copyVertex(this, other, i, i);
   }
 }
 
@@ -570,102 +530,93 @@ void __fastcall hkxVertexBuffer::copy(hkxVertexBuffer *this, hkxVertexBuffer *ot
 // RVA: 0xE369E0
 void __fastcall hkxVertexBuffer::copyVertex(hkxVertexBuffer *this, hkxVertexBuffer *other, int vertFrom, int vertTo)
 {
-  hkxVertexDescription *v4; // r14
-  hkxVertexBuffer *v5; // rsi
-  hkxVertexBuffer *v6; // rdi
-  int v7; // ebp
-  int v8; // er13
+  hkxVertexDescription *p_m_desc; // r14
   bool v9; // bl
-  int v10; // er8
-  int v11; // er8
-  int v12; // er8
-  int v13; // er8
-  int v14; // er8
+  unsigned int m_uint8Stride; // r8d
+  unsigned int m_uint16Stride; // r8d
+  unsigned int m_uint32Stride; // r8d
+  unsigned int m_floatStride; // r8d
+  unsigned int m_vectorStride; // r8d
   int v15; // ebp
   __int64 v16; // r15
-  __int64 v17; // r10
+  __int64 m_size; // r10
   hkxVertexDescription::ElementDecl *v18; // r14
   int v19; // ecx
-  __int64 v20; // r9
-  int v21; // er8
+  __int64 m_storage; // r9
+  int v21; // r8d
   __int64 v22; // rdx
-  int v23; // er11
-  hkEnum<enum hkxVertexDescription::DataUsage,unsigned short> *v24; // rax
+  int v23; // r11d
+  hkEnum<enum hkxVertexDescription::DataUsage,unsigned short> *p_m_usage; // rax
   hkxVertexDescription::ElementDecl *v25; // rbx
-  char *v26; // rsi
+  char *VertexDataPtr; // rsi
   char *v27; // rax
-  int v28; // er8
-  char dst[1040]; // [rsp+20h] [rbp-448h]
+  unsigned int m_numElements; // r8d
+  _DWORD dst[260]; // [rsp+20h] [rbp-448h] BYREF
   hkxVertexDescription *v30; // [rsp+470h] [rbp+8h]
-  hkxVertexBuffer *v31; // [rsp+478h] [rbp+10h]
-  int v32; // [rsp+488h] [rbp+20h]
 
-  v32 = vertTo;
-  v31 = other;
-  v4 = &this->m_desc;
-  v5 = other;
-  v6 = this;
-  v7 = vertTo;
-  v8 = vertFrom;
+  p_m_desc = &this->m_desc;
   v30 = &other->m_desc;
   v9 = hkxVertexDescription::operator==(&this->m_desc, &other->m_desc);
-  hkString::memSet(dst, 0, 1028);
-  if ( v7 >= (signed int)v6->m_data.m_numVerts || v8 >= (signed int)v5->m_data.m_numVerts )
+  hkString::memSet(dst, 0, 0x404u);
+  if ( vertTo >= (signed int)this->m_data.m_numVerts || vertFrom >= (signed int)other->m_data.m_numVerts )
     return;
   if ( v9 )
   {
-    v10 = v6->m_data.m_uint8Stride;
-    if ( v10 )
-      hkString::memCpy(&v6->m_data.m_uint8Data.m_data[v7 * v10], &v5->m_data.m_uint8Data.m_data[v8 * v10], v10);
-    v11 = v6->m_data.m_uint16Stride;
-    if ( v11 )
+    m_uint8Stride = this->m_data.m_uint8Stride;
+    if ( m_uint8Stride )
       hkString::memCpy(
-        (char *)v6->m_data.m_uint16Data.m_data + (unsigned int)(v7 * v11),
-        (char *)v5->m_data.m_uint16Data.m_data + (unsigned int)(v8 * v11),
-        v11);
-    v12 = v6->m_data.m_uint32Stride;
-    if ( v12 )
+        &this->m_data.m_uint8Data.m_data[vertTo * m_uint8Stride],
+        &other->m_data.m_uint8Data.m_data[vertFrom * m_uint8Stride],
+        m_uint8Stride);
+    m_uint16Stride = this->m_data.m_uint16Stride;
+    if ( m_uint16Stride )
       hkString::memCpy(
-        (char *)v6->m_data.m_uint32Data.m_data + (unsigned int)(v7 * v12),
-        (char *)v5->m_data.m_uint32Data.m_data + (unsigned int)(v8 * v12),
-        v12);
-    v13 = v6->m_data.m_floatStride;
-    if ( v13 )
+        (char *)this->m_data.m_uint16Data.m_data + vertTo * m_uint16Stride,
+        (char *)other->m_data.m_uint16Data.m_data + vertFrom * m_uint16Stride,
+        m_uint16Stride);
+    m_uint32Stride = this->m_data.m_uint32Stride;
+    if ( m_uint32Stride )
       hkString::memCpy(
-        (char *)v6->m_data.m_floatData.m_data + (unsigned int)(v7 * v13),
-        (char *)v5->m_data.m_floatData.m_data + (unsigned int)(v8 * v13),
-        v13);
-    v14 = v6->m_data.m_vectorStride;
-    if ( v14 )
+        (char *)this->m_data.m_uint32Data.m_data + vertTo * m_uint32Stride,
+        (char *)other->m_data.m_uint32Data.m_data + vertFrom * m_uint32Stride,
+        m_uint32Stride);
+    m_floatStride = this->m_data.m_floatStride;
+    if ( m_floatStride )
       hkString::memCpy(
-        (char *)v6->m_data.m_vectorData.m_data + (unsigned int)(v7 * v14),
-        (char *)v5->m_data.m_vectorData.m_data + (unsigned int)(v8 * v14),
-        v14);
+        (char *)this->m_data.m_floatData.m_data + vertTo * m_floatStride,
+        (char *)other->m_data.m_floatData.m_data + vertFrom * m_floatStride,
+        m_floatStride);
+    m_vectorStride = this->m_data.m_vectorStride;
+    if ( m_vectorStride )
+      hkString::memCpy(
+        (char *)this->m_data.m_vectorData.m_data + vertTo * m_vectorStride,
+        (char *)other->m_data.m_vectorData.m_data + vertFrom * m_vectorStride,
+        m_vectorStride);
     return;
   }
   v15 = 0;
-  if ( v6->m_desc.m_decls.m_size <= 0 )
+  if ( this->m_desc.m_decls.m_size <= 0 )
     return;
   v16 = 0i64;
   do
   {
-    v17 = v30->m_decls.m_size;
-    v18 = &v4->m_decls.m_data[v16];
+    m_size = v30->m_decls.m_size;
+    v18 = &p_m_desc->m_decls.m_data[v16];
     v19 = 0;
-    v20 = v18->m_usage.m_storage;
+    m_storage = v18->m_usage.m_storage;
     v21 = 0;
     v22 = 0i64;
-    v23 = *(_DWORD *)&dst[4 * v20];
-    if ( v17 <= 0 )
+    v23 = dst[m_storage];
+    if ( m_size <= 0 )
       goto LABEL_36;
-    v24 = &v30->m_decls.m_data->m_usage;
-    while ( v24->m_storage != (_WORD)v20 )
+    p_m_usage = &v30->m_decls.m_data->m_usage;
+    while ( p_m_usage->m_storage != (_WORD)m_storage )
     {
 LABEL_21:
       ++v22;
       ++v21;
-      v24 += 8;
-      if ( v22 >= v17 )
+      p_m_usage += 8;
+      if ( v22 >= m_size )
         goto LABEL_36;
     }
     if ( v19 != v23 )
@@ -676,49 +627,46 @@ LABEL_21:
     v25 = &v30->m_decls.m_data[v21];
     if ( v25 && v18->m_type.m_storage == v25->m_type.m_storage )
     {
-      *(_DWORD *)&dst[4 * v20] = v23 + 1;
-      v26 = hkxVertexBuffer::getVertexDataPtr(v6, v18);
-      v27 = (char *)hkxVertexBuffer::getVertexDataPtr(v31, v25);
-      v28 = (unsigned __int8)v25->m_numElements;
+      dst[m_storage] = v23 + 1;
+      VertexDataPtr = hkxVertexBuffer::getVertexDataPtr(this, v18);
+      v27 = (char *)hkxVertexBuffer::getVertexDataPtr(other, v25);
+      m_numElements = (unsigned __int8)v25->m_numElements;
       switch ( v18->m_type.m_storage )
       {
         case 1u:
           break;
         case 2u:
-          v28 *= 2;
+          m_numElements *= 2;
           break;
         case 3u:
           goto LABEL_31;
         case 4u:
-          if ( (unsigned int)(v28 - 3) <= 1 )
+          if ( m_numElements - 3 <= 1 )
           {
-            v28 = 16;
+            m_numElements = 16;
           }
           else
           {
-            if ( v28 < 3 )
+            if ( (unsigned __int8)v25->m_numElements < 3u )
             {
 LABEL_31:
-              v28 *= 4;
+              m_numElements *= 4;
               break;
             }
 LABEL_33:
-            v28 = 0;
+            m_numElements = 0;
           }
           break;
         default:
           goto LABEL_33;
       }
-      hkString::memCpy(&v26[v32 * v18->m_byteStride], &v27[v8 * v25->m_byteStride], v28);
+      hkString::memCpy(&VertexDataPtr[vertTo * v18->m_byteStride], &v27[vertFrom * v25->m_byteStride], m_numElements);
     }
 LABEL_36:
     ++v15;
     ++v16;
-    v4 = &v6->m_desc;
+    p_m_desc = &this->m_desc;
   }
-  while ( v15 < v6->m_desc.m_decls.m_size );
-}v8 * v25->m_byteStride], v28);
-    }
-LABEL_36:
-
+  while ( v15 < this->m_desc.m_decls.m_size );
+}
 

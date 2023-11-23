@@ -5,11 +5,12 @@ char __fastcall OSuite::ZOMetadata::ClassMatch(OSuite::ZOMetadata *this, int nCl
   bool v2; // al
   char v3; // cl
 
-  if ( OSuite::ZOMetadata::s_nClassId == nClassId
-    || (v2 = OSuite::ZAtomBase::ClassMatch((OSuite::ZAtomBase *)&this->vfptr, nClassId), v3 = 0, v2) )
-  {
-    v3 = 1;
-  }
+  if ( OSuite::ZOMetadata::s_nClassId == nClassId )
+    return 1;
+  v2 = OSuite::ZAtomBase::ClassMatch(this, nClassId);
+  v3 = 0;
+  if ( v2 )
+    return 1;
   return v3;
 }
 

@@ -51,7 +51,7 @@ void dynamic_initializer_for__hkGeometryClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 121
@@ -63,23 +63,24 @@ hkClass *__fastcall hkGeometry::staticClass()
 
 // File Line: 128
 // RVA: 0xC54DE0
-void __fastcall finishLoadedObjecthkGeometry(void *p, int finishing)
+void __fastcall finishLoadedObjecthkGeometry(hkGeometry *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkGeometry::hkGeometry);
+  if ( p )
+    hkGeometry::hkGeometry(p, finishing);
 }
 
 // File Line: 134
 // RVA: 0xC54E00
-void __fastcall cleanupLoadedObjecthkGeometry(void *p)
+void __fastcall cleanupLoadedObjecthkGeometry(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 138
 // RVA: 0xC54E10
 hkBaseObjectVtbl *__fastcall getVtablehkGeometry()
 {
-  hkGeometry v1; // [rsp+20h] [rbp-38h]
+  hkGeometry v1; // [rsp+20h] [rbp-38h] BYREF
 
   hkGeometry::hkGeometry(&v1, 0);
   return v1.vfptr;
@@ -96,8 +97,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkGeometryTypeInfo__()
   hkGeometryTypeInfo.m_typeName = "hkGeometry";
   hkGeometryTypeInfo.m_vtable = result;
   hkGeometryTypeInfo.m_scopedName = "!hkGeometry";
-  hkGeometryTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkGeometry;
-  hkGeometryTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkGeometry;
+  hkGeometryTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkGeometry;
+  hkGeometryTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkGeometry;
   return result;
 }
 

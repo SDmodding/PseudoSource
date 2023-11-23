@@ -2,65 +2,61 @@
 // RVA: 0xAAA4A0
 void __fastcall CAkMusicCtx::CAkMusicCtx(CAkMusicCtx *this, CAkMusicCtx *in_parent)
 {
-  CAkMusicCtx *v2; // rbx
-
-  v2 = this;
-  CAkChildCtx::CAkChildCtx((CAkChildCtx *)&this->vfptr, in_parent);
-  v2->m_uRegisteredNotif = 0;
-  v2->vfptr = (CAkChildCtxVtbl *)&CAkMusicCtx::`vftable{for `CAkChildCtx};
-  v2->vfptr = (CAkTransportAwareVtbl *)&CAkMusicCtx::`vftable{for `CAkTransportAware};
-  v2->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable{for `ITransitionable};
-  v2->m_listChildren.m_pFirst = 0i64;
-  *((_BYTE *)&v2->m_PBTrans + 16) &= 0xFCu;
-  v2->m_PBTrans.pvPSTrans = 0i64;
-  v2->m_PBTrans.pvPRTrans = 0i64;
-  *((_BYTE *)v2 + 98) &= 0xE0u;
-  *(_QWORD *)&v2->m_uRefCount = 0i64;
-  v2->m_fPauseResumeFadeRatio = 1.0;
-  v2->m_uNumLastSamples = -1;
-  v2->m_uPauseCount = 0;
+  CAkChildCtx::CAkChildCtx(this, in_parent);
+  this->m_uRegisteredNotif = 0;
+  this->CAkChildCtx::vfptr = (CAkChildCtxVtbl *)&CAkMusicCtx::`vftable{for `CAkChildCtx};
+  this->CAkTransportAware::vfptr = (CAkTransportAwareVtbl *)&CAkMusicCtx::`vftable{for `CAkTransportAware};
+  this->ITransitionable::vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable{for `ITransitionable};
+  this->m_listChildren.m_pFirst = 0i64;
+  *((_BYTE *)&this->m_PBTrans + 16) &= 0xFCu;
+  this->m_PBTrans.pvPSTrans = 0i64;
+  this->m_PBTrans.pvPRTrans = 0i64;
+  *((_BYTE *)this + 98) &= 0xE0u;
+  *(_QWORD *)&this->m_uRefCount = 0i64;
+  this->m_fPauseResumeFadeRatio = 1.0;
+  this->m_uNumLastSamples = -1;
+  this->m_uPauseCount = 0;
 }
 
 // File Line: 53
 // RVA: 0xAAA510
 void __fastcall CAkMusicCtx::~CAkMusicCtx(CAkMusicCtx *this)
 {
-  CAkTransition *v1; // rdx
-  CAkMusicCtx *v2; // rbx
-  CAkTransition *v3; // rdx
+  CAkTransition *pvPSTrans; // rdx
+  CAkTransition *pvPRTrans; // rdx
 
-  v1 = this->m_PBTrans.pvPSTrans;
-  v2 = this;
-  this->vfptr = (CAkChildCtxVtbl *)&CAkMusicCtx::`vftable{for `CAkChildCtx};
-  this->vfptr = (CAkTransportAwareVtbl *)&CAkMusicCtx::`vftable{for `CAkTransportAware};
-  this->vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable{for `ITransitionable};
-  if ( v1 )
-    CAkTransitionManager::RemoveTransitionUser(g_pTransitionManager, v1, (ITransitionable *)&this->vfptr);
-  v3 = v2->m_PBTrans.pvPRTrans;
-  if ( v3 )
-    CAkTransitionManager::RemoveTransitionUser(g_pTransitionManager, v3, (ITransitionable *)&v2->vfptr);
-  v2->m_listChildren.m_pFirst = 0i64;
-  v2->vfptr = (CAkTransportAwareVtbl *)&CAkTransportAware::`vftable;
-  CAkChildCtx::~CAkChildCtx((CAkChildCtx *)&v2->vfptr);
+  pvPSTrans = this->m_PBTrans.pvPSTrans;
+  this->CAkChildCtx::vfptr = (CAkChildCtxVtbl *)&CAkMusicCtx::`vftable{for `CAkChildCtx};
+  this->CAkTransportAware::vfptr = (CAkTransportAwareVtbl *)&CAkMusicCtx::`vftable{for `CAkTransportAware};
+  this->ITransitionable::vfptr = (ITransitionableVtbl *)&CAkSegmentCtx::`vftable{for `ITransitionable};
+  if ( pvPSTrans )
+    CAkTransitionManager::RemoveTransitionUser(g_pTransitionManager, pvPSTrans, &this->ITransitionable);
+  pvPRTrans = this->m_PBTrans.pvPRTrans;
+  if ( pvPRTrans )
+    CAkTransitionManager::RemoveTransitionUser(g_pTransitionManager, pvPRTrans, &this->ITransitionable);
+  this->m_listChildren.m_pFirst = 0i64;
+  this->CAkTransportAware::vfptr = (CAkTransportAwareVtbl *)&CAkTransportAware::`vftable;
+  CAkChildCtx::~CAkChildCtx(this);
 }
 
 // File Line: 79
 // RVA: 0xAAA600
 void __fastcall CAkMusicCtx::Init(CAkMusicCtx *this, CAkRegisteredObj *__formal, UserParams *a3)
 {
-  JUMPOUT(this->m_pParentCtx, 0i64, CAkChildCtx::Connect);
+  if ( this->m_pParentCtx )
+    CAkChildCtx::Connect(this);
 }
 
 // File Line: 88
 // RVA: 0xAAA5D0
 void __fastcall CAkMusicCtx::AddChild(CAkMusicCtx *this, CAkChildCtx *in_pChildCtx)
 {
-  CAkChildCtx *v2; // rax
+  CAkChildCtx *m_pFirst; // rax
 
-  v2 = this->m_listChildren.m_pFirst;
-  if ( v2 )
+  m_pFirst = this->m_listChildren.m_pFirst;
+  if ( m_pFirst )
   {
-    in_pChildCtx->pNextLightItem = v2;
+    in_pChildCtx->pNextLightItem = m_pFirst;
     this->m_listChildren.m_pFirst = in_pChildCtx;
   }
   else
@@ -75,18 +71,16 @@ void __fastcall CAkMusicCtx::AddChild(CAkMusicCtx *this, CAkChildCtx *in_pChildC
 // RVA: 0xAAA830
 void __fastcall CAkMusicCtx::RemoveChild(CAkMusicCtx *this, CAkChildCtx *in_pChildCtx)
 {
-  CAkMusicCtx *v2; // r9
-  CAkChildCtx *v3; // rcx
+  CAkChildCtx *m_pFirst; // rcx
   CAkChildCtx *v4; // r8
   CAkChildCtx *v5; // rax
   bool v6; // zf
-  CAkChildCtx *v7; // rcx
+  CAkChildCtx *pNextLightItem; // rcx
 
-  v2 = this;
-  v3 = this->m_listChildren.m_pFirst;
+  m_pFirst = this->m_listChildren.m_pFirst;
   v4 = 0i64;
-  v5 = v3;
-  if ( v3 )
+  v5 = m_pFirst;
+  if ( m_pFirst )
   {
     while ( v5 != in_pChildCtx )
     {
@@ -97,13 +91,13 @@ void __fastcall CAkMusicCtx::RemoveChild(CAkMusicCtx *this, CAkChildCtx *in_pChi
     }
     if ( v5 )
     {
-      v6 = v5 == v3;
-      v7 = v5->pNextLightItem;
+      v6 = v5 == m_pFirst;
+      pNextLightItem = v5->pNextLightItem;
       if ( v6 )
-        v2->m_listChildren.m_pFirst = v7;
+        this->m_listChildren.m_pFirst = pNextLightItem;
       else
-        v4->pNextLightItem = v7;
-      CAkMusicCtx::Release(v2);
+        v4->pNextLightItem = pNextLightItem;
+      CAkMusicCtx::Release(this);
     }
   }
 }
@@ -113,82 +107,80 @@ void __fastcall CAkMusicCtx::RemoveChild(CAkMusicCtx *this, CAkChildCtx *in_pChi
 void __fastcall CAkMusicCtx::Release(CAkMusicCtx *this)
 {
   bool v1; // zf
-  CAkMatrixAwareCtx *v2; // rdi
-  CAkMusicCtx *v3; // rcx
-  CAkChildCtx *v4; // r8
-  CAkMatrixAwareCtx *v5; // rdx
-  CAkMatrixAwareCtx *v6; // rax
+  CAkMusicCtx *m_pParentCtx; // rcx
+  CAkMusicCtx *m_pFirst; // r8
+  CAkMusicCtx *v5; // rdx
+  CAkMusicCtx *pNextLightItem; // rax
   CAkChildCtx *v7; // rax
   int v8; // ebx
 
   v1 = this->m_uRefCount-- == 1;
-  v2 = (CAkMatrixAwareCtx *)this;
   if ( v1 )
   {
-    v3 = this->m_pParentCtx;
-    if ( v3 )
+    m_pParentCtx = this->m_pParentCtx;
+    if ( m_pParentCtx )
     {
-      v4 = v3->m_listChildren.m_pFirst;
+      m_pFirst = (CAkMusicCtx *)m_pParentCtx->m_listChildren.m_pFirst;
       v5 = 0i64;
-      v6 = (CAkMatrixAwareCtx *)v4;
-      if ( v4 )
+      pNextLightItem = m_pFirst;
+      if ( m_pFirst )
       {
-        while ( v6 != v2 )
+        while ( pNextLightItem != this )
         {
-          v5 = v6;
-          v6 = (CAkMatrixAwareCtx *)v6->pNextLightItem;
-          if ( !v6 )
+          v5 = pNextLightItem;
+          pNextLightItem = (CAkMusicCtx *)pNextLightItem->pNextLightItem;
+          if ( !pNextLightItem )
             goto LABEL_13;
         }
-        if ( v6 )
+        if ( pNextLightItem )
         {
-          v1 = v6 == (CAkMatrixAwareCtx *)v4;
-          v7 = v6->pNextLightItem;
+          v1 = pNextLightItem == m_pFirst;
+          v7 = pNextLightItem->pNextLightItem;
           if ( v1 )
-            v3->m_listChildren.m_pFirst = v7;
+            m_pParentCtx->m_listChildren.m_pFirst = v7;
           else
             v5->pNextLightItem = v7;
-          CAkMusicCtx::Release(v3);
+          CAkMusicCtx::Release(m_pParentCtx);
         }
       }
     }
     else
     {
-      CAkMusicRenderer::RemoveChild(CAkMusicRenderer::m_pMusicRenderer, v2);
+      CAkMusicRenderer::RemoveChild(CAkMusicRenderer::m_pMusicRenderer, (CAkMatrixAwareCtx *)this);
     }
 LABEL_13:
     v8 = g_DefaultPoolId;
-    ((void (__fastcall *)(CAkMatrixAwareCtx *, _QWORD))v2->vfptr->~CAkChildCtx)(v2, 0i64);
-    AK::MemoryMgr::Free(v8, v2);
+    ((void (__fastcall *)(CAkMusicCtx *, _QWORD))this->CAkChildCtx::vfptr->~CAkChildCtx)(this, 0i64);
+    AK::MemoryMgr::Free(v8, this);
   }
 }
 
 // File Line: 127
 // RVA: 0xAAA8D0
-void __fastcall CAkMusicCtx::TransUpdateValue(CAkMusicCtx *this, __int64 in_eTarget, float in_fValue, bool in_bIsTerminated)
+void __fastcall CAkMusicCtx::TransUpdateValue(
+        CAkMusicCtx *this,
+        __int64 in_eTarget,
+        float in_fValue,
+        bool in_bIsTerminated)
 {
   char v4; // bl
-  bool v5; // bp
-  CAkMusicCtx *v6; // rdi
   CAkTransition *v7; // rax
-  CAkTransition *v8; // rax
+  CAkTransition *pvPRTrans; // rax
 
   v4 = 0;
-  v5 = in_bIsTerminated;
-  v6 = this;
   switch ( (_DWORD)in_eTarget )
   {
     case 0x1000000:
 LABEL_11:
-      v8 = this[-1].m_PBTrans.pvPRTrans;
-      *((float *)&this->vfptr + 1) = in_fValue;
-      (*(void (__fastcall **)(CAkTransition **))&v8->m_uDurationInBufferTick)(&this[-1].m_PBTrans.pvPRTrans);
-      if ( v5 )
+      pvPRTrans = this[-1].m_PBTrans.pvPRTrans;
+      *((float *)&this->ITransitionable::vfptr + 1) = in_fValue;
+      (*(void (__fastcall **)(CAkTransition **))&pvPRTrans->m_uDurationInBufferTick)(&this[-1].m_PBTrans.pvPRTrans);
+      if ( in_bIsTerminated )
       {
-        v6->m_pParentCtx = 0i64;
+        this->m_pParentCtx = 0i64;
         if ( v4 )
-          ((void (__fastcall *)(CAkTransition **, signed __int64))v6[-1].m_PBTrans.pvPRTrans->m_eTarget)(
-            &v6[-1].m_PBTrans.pvPRTrans,
+          ((void (__fastcall *)(CAkTransition **, __int64))this[-1].m_PBTrans.pvPRTrans->m_eTarget)(
+            &this[-1].m_PBTrans.pvPRTrans,
             0xFFFFFFFFi64);
       }
       return;
@@ -206,11 +198,11 @@ LABEL_11:
   v7 = this[-1].m_PBTrans.pvPRTrans;
   *(float *)&this->m_listChildren.m_pFirst = in_fValue;
   (*(void (__fastcall **)(CAkTransition **))&v7->m_uDurationInBufferTick)(&this[-1].m_PBTrans.pvPRTrans);
-  if ( v5 )
+  if ( in_bIsTerminated )
   {
-    v6->vfptr = 0i64;
+    this->CAkTransportAware::vfptr = 0i64;
     if ( v4 )
-      (*(void (__fastcall **)(CAkTransition **))&v6[-1].m_PBTrans.pvPRTrans->m_fStartValue)(&v6[-1].m_PBTrans.pvPRTrans);
+      (*(void (__fastcall **)(CAkTransition **))&this[-1].m_PBTrans.pvPRTrans->m_fStartValue)(&this[-1].m_PBTrans.pvPRTrans);
   }
 }
 
@@ -226,40 +218,37 @@ void __fastcall CAkMusicCtx::OnPlayed(CAkMusicCtx *this)
 // RVA: 0xAAA610
 void __fastcall CAkMusicCtx::OnLastFrame(CAkMusicCtx *this, unsigned int in_uNumSamples)
 {
-  CAkChildCtx *v2; // rbx
-  unsigned int v3; // esi
-  CAkMusicCtx *i; // rdi
+  CAkChildCtx *m_pFirst; // rbx
   CAkChildCtx *v5; // rbx
   CAkChildCtx *v6; // rcx
   char v7; // al
 
-  v2 = this->m_listChildren.m_pFirst;
+  m_pFirst = this->m_listChildren.m_pFirst;
   ++this->m_uRefCount;
-  v3 = in_uNumSamples;
-  for ( i = this; v2; v2 = v2->pNextLightItem )
+  for ( ; m_pFirst; m_pFirst = m_pFirst->pNextLightItem )
   {
-    v2->vfptr->VirtualAddRef(v2);
-    v2->vfptr->OnLastFrame(v2, v3);
+    m_pFirst->vfptr->VirtualAddRef(m_pFirst);
+    m_pFirst->vfptr->OnLastFrame(m_pFirst, in_uNumSamples);
   }
-  v5 = i->m_listChildren.m_pFirst;
+  v5 = this->m_listChildren.m_pFirst;
   while ( v5 )
   {
     v6 = v5;
     v5 = v5->pNextLightItem;
-    ((void (*)(void))v6->vfptr->VirtualRelease)();
+    v6->vfptr->VirtualRelease(v6);
   }
-  if ( v3 < i->m_uNumLastSamples && v3 != -1 )
-    i->m_uNumLastSamples = v3;
-  if ( i->m_uNumLastSamples && (v7 = *((_BYTE *)i + 98), v7 & 0xF) && !(v7 & 0x10) )
+  if ( in_uNumSamples < this->m_uNumLastSamples && in_uNumSamples != -1 )
+    this->m_uNumLastSamples = in_uNumSamples;
+  if ( this->m_uNumLastSamples && (v7 = *((_BYTE *)this + 98), (v7 & 0xF) != 0) && (v7 & 0x10) == 0 )
   {
     if ( (v7 & 0xFu) <= 2 )
-      *((_BYTE *)i + 98) = v7 & 0xF2 | 2;
+      *((_BYTE *)this + 98) = v7 & 0xF0 | 2;
   }
   else
   {
-    i->vfptr[1].OnPaused((CAkChildCtx *)&i->vfptr);
+    this->CAkChildCtx::vfptr[1].OnPaused(this);
   }
-  CAkMusicCtx::Release(i);
+  CAkMusicCtx::Release(this);
 }
 
 // File Line: 229
@@ -274,34 +263,30 @@ void __fastcall CAkMusicCtx::OnStopped(CAkMusicCtx *this)
 // RVA: 0xAAA6D0
 void __fastcall CAkMusicCtx::OnPaused(CAkMusicCtx *this)
 {
-  CAkChildCtx *v1; // rbx
-  CAkMusicCtx *i; // rdi
-  CAkTransition *v3; // rdx
+  CAkChildCtx *i; // rbx
+  CAkTransition *pvPSTrans; // rdx
 
-  v1 = this->m_listChildren.m_pFirst;
-  for ( i = this; v1; v1 = v1->pNextLightItem )
-    v1->vfptr->OnPaused(v1);
-  v3 = i->m_PBTrans.pvPSTrans;
-  *((_BYTE *)i + 98) |= 0x10u;
-  if ( v3 )
-    CAkTransitionManager::Pause(g_pTransitionManager, v3);
+  for ( i = this->m_listChildren.m_pFirst; i; i = i->pNextLightItem )
+    i->vfptr->OnPaused(i);
+  pvPSTrans = this->m_PBTrans.pvPSTrans;
+  *((_BYTE *)this + 98) |= 0x10u;
+  if ( pvPSTrans )
+    CAkTransitionManager::Pause(g_pTransitionManager, pvPSTrans);
 }
 
 // File Line: 255
 // RVA: 0xAAA730
 void __fastcall CAkMusicCtx::OnResumed(CAkMusicCtx *this)
 {
-  CAkChildCtx *v1; // rbx
-  CAkMusicCtx *i; // rdi
-  CAkTransition *v3; // rdx
+  CAkChildCtx *i; // rbx
+  CAkTransition *pvPSTrans; // rdx
 
-  v1 = this->m_listChildren.m_pFirst;
-  for ( i = this; v1; v1 = v1->pNextLightItem )
-    v1->vfptr->OnResumed(v1);
-  v3 = i->m_PBTrans.pvPSTrans;
-  *((_BYTE *)i + 98) &= 0xEFu;
-  if ( v3 )
-    CAkTransitionManager::Resume(g_pTransitionManager, v3);
+  for ( i = this->m_listChildren.m_pFirst; i; i = i->pNextLightItem )
+    i->vfptr->OnResumed(i);
+  pvPSTrans = this->m_PBTrans.pvPSTrans;
+  *((_BYTE *)this + 98) &= ~0x10u;
+  if ( pvPSTrans )
+    CAkTransitionManager::Resume(g_pTransitionManager, pvPSTrans);
 }
 
 // File Line: 275
@@ -313,6 +298,7 @@ void __fastcall CAkMusicCtx::VirtualAddRef(CAkMusicCtx *this)
 
 // File Line: 279
 // RVA: 0xAAA9A0
+// attributes: thunk
 void __fastcall CAkMusicCtx::VirtualRelease(CAkMusicCtx *this)
 {
   CAkMusicCtx::Release(this);
@@ -320,58 +306,54 @@ void __fastcall CAkMusicCtx::VirtualRelease(CAkMusicCtx *this)
 
 // File Line: 319
 // RVA: 0xAAAA90
-void __fastcall CAkMusicCtx::_Play(CAkMusicCtx *this, AkMusicFade *in_fadeParams, __int64 a3)
+void __fastcall CAkMusicCtx::_Play(CAkMusicCtx *this, AkMusicFade *in_fadeParams, CAkTransition **a3)
 {
-  AkMusicFade *v3; // rdi
-  CAkMusicCtx *v4; // rbx
-  CAkTransition *v5; // rdx
-  AkCurveInterpolation v6; // eax
+  CAkTransition *pvPSTrans; // rdx
+  AkCurveInterpolation eFadeCurve; // eax
   ITransitionable *v7; // rsi
   CAkTransition *v8; // rax
   __int64 v9; // r9
   CAkTransition *v10; // r8
-  int v11; // eax
+  int iFadeOffset; // eax
   int v12; // eax
-  TransitionParameters in_Params; // [rsp+40h] [rbp-38h]
+  TransitionParameters in_Params; // [rsp+40h] [rbp-38h] BYREF
 
-  v3 = in_fadeParams;
-  v4 = this;
   if ( (*((_BYTE *)this + 98) & 0xFu) <= 1 )
   {
-    v5 = this->m_PBTrans.pvPSTrans;
-    if ( v5 )
+    pvPSTrans = this->m_PBTrans.pvPSTrans;
+    if ( pvPSTrans )
     {
       CAkTransitionManager::ChangeParameter(
         g_pTransitionManager,
-        v5,
+        pvPSTrans,
         0x1000000i64,
         1.0,
-        v3->transitionTime,
-        v3->eFadeCurve,
-        0);
+        in_fadeParams->transitionTime,
+        in_fadeParams->eFadeCurve,
+        AkValueMeaning_Default);
     }
-    else if ( v3->transitionTime > 0 )
+    else if ( in_fadeParams->transitionTime > 0 )
     {
-      in_Params.lDuration = v3->transitionTime;
-      v6 = v3->eFadeCurve;
-      v7 = (ITransitionable *)&this->vfptr;
+      in_Params.lDuration = in_fadeParams->transitionTime;
+      eFadeCurve = in_fadeParams->eFadeCurve;
+      v7 = &this->ITransitionable;
       LODWORD(in_Params.fTargetValue) = (_DWORD)FLOAT_1_0;
       in_Params.fStartValue = 0.0;
       LOBYTE(a3) = 1;
-      in_Params.eFadeCurve = v6;
-      in_Params.pUser = (ITransitionable *)&this->vfptr;
+      in_Params.eFadeCurve = eFadeCurve;
+      in_Params.pUser = &this->ITransitionable;
       in_Params.eTarget = 0x1000000i64;
       *(_WORD *)&in_Params.bdBs = 256;
       v8 = CAkTransitionManager::AddTransitionToList(g_pTransitionManager, &in_Params, a3, 0i64);
-      *((_BYTE *)&v4->m_PBTrans + 16) |= 1u;
+      *((_BYTE *)&this->m_PBTrans + 16) |= 1u;
       v10 = v8;
-      v4->m_PBTrans.pvPSTrans = v8;
+      this->m_PBTrans.pvPSTrans = v8;
       if ( v8 )
       {
-        v11 = v3->iFadeOffset;
-        if ( v11 )
+        iFadeOffset = in_fadeParams->iFadeOffset;
+        if ( iFadeOffset )
         {
-          v12 = v11 / 1024;
+          v12 = iFadeOffset / 1024;
           if ( v12 >= 0 || v10->m_uStartTimeInBufferTick > -v12 )
             v10->m_uStartTimeInBufferTick += v12;
           else
@@ -388,62 +370,60 @@ void __fastcall CAkMusicCtx::_Play(CAkMusicCtx *this, AkMusicFade *in_fadeParams
           v9);
       }
     }
-    ((void (__fastcall *)(CAkMusicCtx *))v4->vfptr[1].OnLastFrame)(v4);
+    ((void (__fastcall *)(CAkMusicCtx *))this->CAkChildCtx::vfptr[1].OnLastFrame)(this);
   }
 }
 
 // File Line: 387
 // RVA: 0xAAACF0
-void __fastcall CAkMusicCtx::_Stop(CAkMusicCtx *this, TransParams *in_transParams, __int64 in_uNumLastSamples)
+void __fastcall CAkMusicCtx::_Stop(CAkMusicCtx *this, TransParams *in_transParams, CAkTransition **in_uNumLastSamples)
 {
   char v3; // al
-  CAkMusicCtx *v4; // rbx
-  CAkTransition *v5; // rcx
-  AkCurveInterpolation v6; // eax
+  CAkTransition *pvPSTrans; // rcx
+  AkCurveInterpolation eFadeCurve; // eax
   CAkTransition *v7; // rax
   __int64 v8; // r8
   __int64 v9; // r9
-  TransitionParameters in_Params; // [rsp+40h] [rbp-38h]
+  TransitionParameters in_Params; // [rsp+40h] [rbp-38h] BYREF
 
   v3 = *((_BYTE *)this + 98);
-  v4 = this;
-  if ( v3 & 0x10 )
+  if ( (v3 & 0x10) != 0 )
   {
-    this->vfptr->OnLastFrame((CAkChildCtx *)this, in_uNumLastSamples);
+    this->CAkChildCtx::vfptr->OnLastFrame(this, (unsigned int)in_uNumLastSamples);
   }
   else
   {
-    v5 = this->m_PBTrans.pvPSTrans;
-    if ( v5 )
+    pvPSTrans = this->m_PBTrans.pvPSTrans;
+    if ( pvPSTrans )
     {
       CAkTransitionManager::ChangeParameter(
         g_pTransitionManager,
-        v5,
+        pvPSTrans,
         0x2000000i64,
         0.0,
         in_transParams->TransitionTime,
         in_transParams->eFadeCurve,
-        0);
+        AkValueMeaning_Default);
     }
-    else if ( in_transParams->TransitionTime > 0 && v3 & 3 )
+    else if ( in_transParams->TransitionTime > 0 && (v3 & 3) != 0 )
     {
-      v6 = in_transParams->eFadeCurve;
+      eFadeCurve = in_transParams->eFadeCurve;
       in_Params.lDuration = in_transParams->TransitionTime;
       LODWORD(in_Params.fStartValue) = (_DWORD)FLOAT_1_0;
       in_Params.fTargetValue = 0.0;
       LOBYTE(in_uNumLastSamples) = 1;
-      in_Params.eFadeCurve = v6;
+      in_Params.eFadeCurve = eFadeCurve;
       in_Params.eTarget = 0x2000000i64;
-      in_Params.pUser = (ITransitionable *)&v4->vfptr;
+      in_Params.pUser = &this->ITransitionable;
       *(_WORD *)&in_Params.bdBs = 256;
       v7 = CAkTransitionManager::AddTransitionToList(g_pTransitionManager, &in_Params, in_uNumLastSamples, 0i64);
-      *((_BYTE *)&v4->m_PBTrans + 16) |= 1u;
-      v4->m_PBTrans.pvPSTrans = v7;
+      *((_BYTE *)&this->m_PBTrans + 16) |= 1u;
+      this->m_PBTrans.pvPSTrans = v7;
       if ( !v7 )
       {
         LOBYTE(v9) = 1;
-        ((void (__fastcall *)(ITransitionableVtbl **, __int64, __int64, __int64))v4->vfptr->TransUpdateValue)(
-          &v4->vfptr,
+        ((void (__fastcall *)(ITransitionable *, __int64, __int64, __int64))this->ITransitionable::vfptr->TransUpdateValue)(
+          &this->ITransitionable,
           in_Params.eTarget,
           v8,
           v9);
@@ -451,56 +431,54 @@ void __fastcall CAkMusicCtx::_Stop(CAkMusicCtx *this, TransParams *in_transParam
     }
     else
     {
-      v4->vfptr->OnLastFrame((CAkChildCtx *)&v4->vfptr, in_uNumLastSamples);
+      this->CAkChildCtx::vfptr->OnLastFrame(this, (unsigned int)in_uNumLastSamples);
     }
   }
 }
 
 // File Line: 450
 // RVA: 0xAAA9B0
-void __fastcall CAkMusicCtx::_Pause(CAkMusicCtx *this, TransParams *in_transParams, __int64 a3)
+void __fastcall CAkMusicCtx::_Pause(CAkMusicCtx *this, TransParams *in_transParams, CAkTransition **a3)
 {
-  CAkMusicCtx *v3; // rbx
-  CAkTransition *v4; // rcx
-  AkCurveInterpolation v5; // eax
+  CAkTransition *pvPRTrans; // rcx
+  AkCurveInterpolation eFadeCurve; // eax
   CAkTransition *v6; // rax
   __int64 v7; // r8
   __int64 v8; // r9
-  TransitionParameters in_Params; // [rsp+40h] [rbp-38h]
+  TransitionParameters in_Params; // [rsp+40h] [rbp-38h] BYREF
 
   ++this->m_uPauseCount;
-  v3 = this;
-  v4 = this->m_PBTrans.pvPRTrans;
-  if ( v4 )
+  pvPRTrans = this->m_PBTrans.pvPRTrans;
+  if ( pvPRTrans )
   {
     CAkTransitionManager::ChangeParameter(
       g_pTransitionManager,
-      v4,
+      pvPRTrans,
       0x4000000i64,
       0.0,
       in_transParams->TransitionTime,
       in_transParams->eFadeCurve,
-      0);
+      AkValueMeaning_Default);
   }
   else
   {
     in_Params.lDuration = in_transParams->TransitionTime;
-    v5 = in_transParams->eFadeCurve;
+    eFadeCurve = in_transParams->eFadeCurve;
     LODWORD(in_Params.fStartValue) = (_DWORD)FLOAT_1_0;
     in_Params.fTargetValue = 0.0;
     LOBYTE(a3) = 1;
-    in_Params.eFadeCurve = v5;
-    in_Params.pUser = (ITransitionable *)&v3->vfptr;
+    in_Params.eFadeCurve = eFadeCurve;
+    in_Params.pUser = &this->ITransitionable;
     in_Params.eTarget = 0x4000000i64;
     *(_WORD *)&in_Params.bdBs = 256;
     v6 = CAkTransitionManager::AddTransitionToList(g_pTransitionManager, &in_Params, a3, 0i64);
-    *((_BYTE *)&v3->m_PBTrans + 16) |= 2u;
-    v3->m_PBTrans.pvPRTrans = v6;
+    *((_BYTE *)&this->m_PBTrans + 16) |= 2u;
+    this->m_PBTrans.pvPRTrans = v6;
     if ( !v6 )
     {
       LOBYTE(v8) = 1;
-      ((void (__fastcall *)(ITransitionableVtbl **, __int64, __int64, __int64))v3->vfptr->TransUpdateValue)(
-        &v3->vfptr,
+      ((void (__fastcall *)(ITransitionable *, __int64, __int64, __int64))this->ITransitionable::vfptr->TransUpdateValue)(
+        &this->ITransitionable,
         in_Params.eTarget,
         v7,
         v8);
@@ -510,71 +488,72 @@ void __fastcall CAkMusicCtx::_Pause(CAkMusicCtx *this, TransParams *in_transPara
 
 // File Line: 499
 // RVA: 0xAAABD0
-void __fastcall CAkMusicCtx::_Resume(CAkMusicCtx *this, TransParams *in_transParams, __int64 in_bIsMasterResume)
+void __fastcall CAkMusicCtx::_Resume(
+        CAkMusicCtx *this,
+        TransParams *in_transParams,
+        CAkTransition **in_bIsMasterResume)
 {
-  CAkMusicCtx *v3; // rbx
-  unsigned __int16 v4; // ax
-  CAkTransition *v5; // rcx
-  float v6; // xmm0_4
-  AkCurveInterpolation v7; // eax
+  unsigned __int16 m_uPauseCount; // ax
+  CAkTransition *pvPRTrans; // rcx
+  float m_fPauseResumeFadeRatio; // xmm0_4
+  AkCurveInterpolation eFadeCurve; // eax
   CAkTransition *v8; // rax
   __int64 v9; // r8
   __int64 v10; // r9
-  CAkChildCtxVtbl *v11; // rax
-  TransitionParameters in_Params; // [rsp+40h] [rbp-38h]
+  CAkChildCtxVtbl *vfptr; // rax
+  TransitionParameters in_Params; // [rsp+40h] [rbp-38h] BYREF
 
-  v3 = this;
-  if ( (_BYTE)in_bIsMasterResume || (v4 = this->m_uPauseCount, v4 <= 1u) )
+  if ( (_BYTE)in_bIsMasterResume || (m_uPauseCount = this->m_uPauseCount, m_uPauseCount <= 1u) )
   {
     this->m_uPauseCount = 0;
-    v5 = this->m_PBTrans.pvPRTrans;
-    if ( v5 )
+    pvPRTrans = this->m_PBTrans.pvPRTrans;
+    if ( pvPRTrans )
     {
       CAkTransitionManager::ChangeParameter(
         g_pTransitionManager,
-        v5,
+        pvPRTrans,
         0x8000000i64,
         1.0,
         in_transParams->TransitionTime,
         in_transParams->eFadeCurve,
-        0);
+        AkValueMeaning_Default);
     }
     else if ( in_transParams->TransitionTime <= 0 )
     {
-      v11 = v3->vfptr;
-      v3->m_fPauseResumeFadeRatio = 1.0;
-      ((void (__fastcall *)(CAkMusicCtx *))v11->SetPBIFade)(v3);
+      vfptr = this->CAkChildCtx::vfptr;
+      this->m_fPauseResumeFadeRatio = 1.0;
+      ((void (__fastcall *)(CAkMusicCtx *))vfptr->SetPBIFade)(this);
     }
     else
     {
-      v6 = v3->m_fPauseResumeFadeRatio;
+      m_fPauseResumeFadeRatio = this->m_fPauseResumeFadeRatio;
       in_Params.lDuration = in_transParams->TransitionTime;
-      v7 = in_transParams->eFadeCurve;
-      in_Params.fStartValue = v6;
+      eFadeCurve = in_transParams->eFadeCurve;
+      in_Params.fStartValue = m_fPauseResumeFadeRatio;
       LODWORD(in_Params.fTargetValue) = (_DWORD)FLOAT_1_0;
       LOBYTE(in_bIsMasterResume) = 1;
-      in_Params.eFadeCurve = v7;
-      in_Params.pUser = (ITransitionable *)&v3->vfptr;
+      in_Params.eFadeCurve = eFadeCurve;
+      in_Params.pUser = &this->ITransitionable;
       in_Params.eTarget = 0x8000000i64;
       *(_WORD *)&in_Params.bdBs = 256;
       v8 = CAkTransitionManager::AddTransitionToList(g_pTransitionManager, &in_Params, in_bIsMasterResume, 0i64);
-      *((_BYTE *)&v3->m_PBTrans + 16) |= 2u;
-      v3->m_PBTrans.pvPRTrans = v8;
+      *((_BYTE *)&this->m_PBTrans + 16) |= 2u;
+      this->m_PBTrans.pvPRTrans = v8;
       if ( !v8 )
       {
         LOBYTE(v10) = 1;
-        ((void (__fastcall *)(ITransitionableVtbl **, __int64, __int64, __int64))v3->vfptr->TransUpdateValue)(
-          &v3->vfptr,
+        ((void (__fastcall *)(ITransitionable *, __int64, __int64, __int64))this->ITransitionable::vfptr->TransUpdateValue)(
+          &this->ITransitionable,
           in_Params.eTarget,
           v9,
           v10);
       }
     }
-    v3->vfptr->OnResumed((CAkChildCtx *)&v3->vfptr);
+    this->CAkChildCtx::vfptr->OnResumed(this);
   }
   else
   {
-    this->m_uPauseCount = v4 - 1;
+    this->m_uPauseCount = m_uPauseCount - 1;
   }
 }
 
@@ -582,11 +561,9 @@ void __fastcall CAkMusicCtx::_Resume(CAkMusicCtx *this, TransParams *in_transPar
 // RVA: 0xAAA880
 void __fastcall CAkMusicCtx::SetPBIFade(CAkMusicCtx *this, void *in_pOwner, float in_fFadeRatio)
 {
-  CAkChildCtx *v3; // rbx
-  void *i; // rdi
+  CAkChildCtx *i; // rbx
 
-  v3 = this->m_listChildren.m_pFirst;
-  for ( i = in_pOwner; v3; v3 = v3->pNextLightItem )
-    ((void (__fastcall *)(CAkChildCtx *, void *))v3->vfptr->SetPBIFade)(v3, i);
+  for ( i = this->m_listChildren.m_pFirst; i; i = i->pNextLightItem )
+    ((void (__fastcall *)(CAkChildCtx *, void *))i->vfptr->SetPBIFade)(i, in_pOwner);
 }
 

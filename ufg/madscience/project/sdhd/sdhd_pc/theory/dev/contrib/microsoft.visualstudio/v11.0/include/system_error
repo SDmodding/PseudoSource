@@ -7,7 +7,10 @@ void __fastcall std::error_category::~error_category(std::error_category *this)
 
 // File Line: 401
 // RVA: 0x83AA0
-std::error_condition *__fastcall std::error_category::default_error_condition(std::error_category *this, std::error_condition *result, int _Errval)
+std::error_condition *__fastcall std::error_category::default_error_condition(
+        std::error_category *this,
+        std::error_condition *result,
+        int _Errval)
 {
   result->_Myval = _Errval;
   result->_Mycat = this;
@@ -16,15 +19,16 @@ std::error_condition *__fastcall std::error_category::default_error_condition(st
 
 // File Line: 408
 // RVA: 0x83BE0
-bool __fastcall std::error_category::equivalent(std::error_category *this, int _Errval, std::error_condition *_Cond)
+bool __fastcall std::error_category::equivalent(
+        std::error_category *this,
+        unsigned int _Errval,
+        std::error_condition *_Cond)
 {
-  std::error_condition *v3; // rbx
   std::error_condition *v4; // rax
-  char v6; // [rsp+20h] [rbp-18h]
+  char v6[24]; // [rsp+20h] [rbp-18h] BYREF
 
-  v3 = _Cond;
-  v4 = this->vfptr->default_error_condition(this, (std::error_condition *)&v6, _Errval);
-  return v4->_Mycat == v3->_Mycat && v4->_Myval == v3->_Myval;
+  v4 = this->vfptr->default_error_condition(this, v6, _Errval);
+  return v4->_Mycat == _Cond->_Mycat && v4->_Myval == _Cond->_Myval;
 }
 
 // File Line: 415
@@ -43,22 +47,23 @@ const char *__fastcall std::_Generic_error_category::name(std::_Generic_error_ca
 
 // File Line: 590
 // RVA: 0x83FE0
-std::basic_string<char,std::char_traits<char>,std::allocator<char> > *__fastcall std::_Generic_error_category::message(std::_Generic_error_category *this, std::basic_string<char,std::char_traits<char>,std::allocator<char> > *result, int _Errcode)
+std::string *__fastcall std::_Generic_error_category::message(
+        std::_Generic_error_category *this,
+        std::string *result,
+        int _Errcode)
 {
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v3; // rdi
   unsigned __int64 v4; // rbx
   const char *v5; // rax
   const char *v6; // rdx
 
-  v3 = result;
   v4 = 0i64;
   v5 = std::_Syserror_map(_Errcode);
   v6 = "unknown error";
   if ( v5 )
     v6 = v5;
-  v3->_Myres = 15i64;
-  v3->_Mysize = 0i64;
-  v3->_Bx._Buf[0] = 0;
+  result->_Myres = 15i64;
+  result->_Mysize = 0i64;
+  result->_Bx._Buf[0] = 0;
   if ( *v6 )
   {
     v4 = -1i64;
@@ -66,8 +71,8 @@ std::basic_string<char,std::char_traits<char>,std::allocator<char> > *__fastcall
       ++v4;
     while ( v6[v4] );
   }
-  std::basic_string<char,std::char_traits<char>,std::allocator<char>>::assign(v3, v6, v4);
-  return v3;
+  std::string::assign(result, v6, v4);
+  return result;
 }
 
 // File Line: 606
@@ -79,26 +84,23 @@ const char *__fastcall std::_Iostream_error_category::name(std::_Iostream_error_
 
 // File Line: 611
 // RVA: 0x84060
-std::basic_string<char,std::char_traits<char>,std::allocator<char> > *__fastcall std::_Iostream_error_category::message(std::_Iostream_error_category *this, std::basic_string<char,std::char_traits<char>,std::allocator<char> > *result, int _Errcode)
+std::string *__fastcall std::_Iostream_error_category::message(
+        std::_Iostream_error_category *this,
+        std::string *result,
+        int _Errcode)
 {
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v3; // rbx
-
-  v3 = result;
   if ( _Errcode == 1 )
   {
     result->_Myres = 15i64;
     result->_Mysize = 0i64;
     result->_Bx._Buf[0] = 0;
-    std::basic_string<char,std::char_traits<char>,std::allocator<char>>::assign(
-      result,
-      "iostream stream error",
-      0x15ui64);
+    std::string::assign(result, "iostream stream error", 0x15ui64);
   }
   else
   {
-    std::_Generic_error_category::message((std::_Generic_error_category *)&this->vfptr, result, _Errcode);
+    std::_Generic_error_category::message(this, result, _Errcode);
   }
-  return v3;
+  return result;
 }
 
 // File Line: 629
@@ -110,22 +112,23 @@ const char *__fastcall std::_System_error_category::name(std::_System_error_cate
 
 // File Line: 634
 // RVA: 0x840C0
-std::basic_string<char,std::char_traits<char>,std::allocator<char> > *__fastcall std::_System_error_category::message(std::_System_error_category *this, std::basic_string<char,std::char_traits<char>,std::allocator<char> > *result, int _Errcode)
+std::string *__fastcall std::_System_error_category::message(
+        std::_System_error_category *this,
+        std::string *result,
+        int _Errcode)
 {
-  std::basic_string<char,std::char_traits<char>,std::allocator<char> > *v3; // rdi
   unsigned __int64 v4; // rbx
   const char *v5; // rax
   const char *v6; // rdx
 
-  v3 = result;
   v4 = 0i64;
   v5 = std::_Winerror_map(_Errcode);
   v6 = "unknown error";
   if ( v5 )
     v6 = v5;
-  v3->_Myres = 15i64;
-  v3->_Mysize = 0i64;
-  v3->_Bx._Buf[0] = 0;
+  result->_Myres = 15i64;
+  result->_Mysize = 0i64;
+  result->_Bx._Buf[0] = 0;
   if ( *v6 )
   {
     v4 = -1i64;
@@ -133,29 +136,28 @@ std::basic_string<char,std::char_traits<char>,std::allocator<char> > *__fastcall
       ++v4;
     while ( v6[v4] );
   }
-  std::basic_string<char,std::char_traits<char>,std::allocator<char>>::assign(v3, v6, v4);
-  return v3;
+  std::string::assign(result, v6, v4);
+  return result;
 }
 
 // File Line: 641
 // RVA: 0x83A60
-std::error_condition *__fastcall std::_System_error_category::default_error_condition(std::_System_error_category *this, std::error_condition *result, int _Errval)
+std::error_condition *__fastcall std::_System_error_category::default_error_condition(
+        std::_System_error_category *this,
+        std::error_condition *result,
+        int _Errval)
 {
-  int v3; // edi
-  std::error_condition *v4; // rbx
   const char *v5; // rax
   bool v6; // zf
   std::_System_error_category *v7; // rax
 
-  v3 = _Errval;
-  v4 = result;
   v5 = std::_Syserror_map(_Errval);
-  v4->_Myval = v3;
+  result->_Myval = _Errval;
   v6 = v5 == 0i64;
   v7 = (std::_System_error_category *)&std::_Error_objects<int>::_Generic_object;
   if ( v6 )
     v7 = &std::_Error_objects<int>::_System_object;
-  v4->_Mycat = (std::error_category *)&v7->vfptr;
-  return v4;
+  result->_Mycat = v7;
+  return result;
 }
 

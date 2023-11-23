@@ -2,85 +2,79 @@
 // RVA: 0xE7A480
 void __fastcall hkReplayStreamReader::~hkReplayStreamReader(hkReplayStreamReader *this)
 {
-  hkReplayStreamReader *v1; // rbx
-  int v2; // er8
+  int m_capacityAndFlags; // r8d
 
-  v1 = this;
   this->vfptr = (hkBaseObjectVtbl *)&hkReplayStreamReader::`vftable;
-  hkReferencedObject::removeReference((hkReferencedObject *)&this->m_stream->vfptr);
-  v2 = v1->m_buf.m_capacityAndFlags;
-  v1->m_buf.m_size = 0;
-  if ( v2 >= 0 )
+  hkReferencedObject::removeReference(this->m_stream);
+  m_capacityAndFlags = this->m_buf.m_capacityAndFlags;
+  this->m_buf.m_size = 0;
+  if ( m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_buf.m_data,
-      v2 & 0x3FFFFFFF);
-  v1->m_buf.m_data = 0i64;
-  v1->m_buf.m_capacityAndFlags = 2147483648;
-  v1->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_buf.m_data,
+      m_capacityAndFlags & 0x3FFFFFFF);
+  this->m_buf.m_data = 0i64;
+  this->m_buf.m_capacityAndFlags = 0x80000000;
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 36
 // RVA: 0xE7A550
-__int64 __fastcall hkReplayStreamReader::read(hkReplayStreamReader *this, void *buf, int nbytes)
+__int64 __fastcall hkReplayStreamReader::read(hkReplayStreamReader *this, void *buf, unsigned int nbytes)
 {
-  int v3; // er14
+  int m_size; // r14d
   unsigned int v4; // esi
-  void *v5; // r15
-  hkReplayStreamReader *v6; // rbx
-  unsigned int v7; // edi
-  int v8; // er9
+  int v7; // edi
+  int v8; // r9d
   int v9; // eax
   int v10; // eax
   int v11; // esi
-  unsigned int v12; // eax
+  unsigned int m_current; // eax
   int v13; // edi
   int v14; // eax
   int v15; // eax
-  int v16; // er9
-  hkResult result; // [rsp+60h] [rbp+18h]
+  int v16; // r9d
+  hkResult result; // [rsp+60h] [rbp+18h] BYREF
 
-  v3 = this->m_buf.m_size;
+  m_size = this->m_buf.m_size;
   v4 = nbytes;
-  v5 = buf;
-  v6 = this;
-  v7 = nbytes + this->m_current - v3;
-  if ( (signed int)v7 > 0 )
+  v7 = nbytes + this->m_current - m_size;
+  if ( v7 > 0 )
   {
     v8 = nbytes + this->m_current;
     v9 = this->m_buf.m_capacityAndFlags & 0x3FFFFFFF;
-    if ( v9 >= (signed int)(nbytes + this->m_current) )
+    if ( v9 >= v8 )
     {
-      result.m_enum = 0;
+      result.m_enum = HK_SUCCESS;
     }
     else
     {
       v10 = 2 * v9;
       if ( v8 < v10 )
         v8 = v10;
-      hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &this->m_buf, v8, 1);
+      hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&this->m_buf.m_data, v8, 1);
     }
-    v6->m_buf.m_size += v7;
-    v11 = ((__int64 (__fastcall *)(hkStreamReader *, char *, _QWORD))v6->m_stream->vfptr[2].__vecDelDtor)(
-            v6->m_stream,
-            &v6->m_buf.m_data[v3],
-            v7);
-    v12 = v6->m_current;
-    v4 = v3 + v11 - v12;
-    v13 = v12 + v4;
-    v14 = v6->m_buf.m_capacityAndFlags & 0x3FFFFFFF;
+    this->m_buf.m_size += v7;
+    v11 = ((__int64 (__fastcall *)(hkStreamReader *, char *, _QWORD))this->m_stream->vfptr[2].__vecDelDtor)(
+            this->m_stream,
+            &this->m_buf.m_data[m_size],
+            (unsigned int)v7);
+    m_current = this->m_current;
+    v4 = m_size + v11 - m_current;
+    v13 = m_current + v4;
+    v14 = this->m_buf.m_capacityAndFlags & 0x3FFFFFFF;
     if ( v14 < v13 )
     {
       v15 = 2 * v14;
       v16 = v13;
       if ( v13 < v15 )
         v16 = v15;
-      hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v6->m_buf, v16, 1);
+      hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, (const void **)&this->m_buf.m_data, v16, 1);
     }
-    v6->m_buf.m_size = v13;
+    this->m_buf.m_size = v13;
   }
-  hkString::memCpy(v5, &v6->m_buf.m_data[v6->m_current], v4);
-  v6->m_current += v4;
+  hkString::memCpy(buf, &this->m_buf.m_data[this->m_current], v4);
+  this->m_current += v4;
   return v4;
 }
 
@@ -88,30 +82,26 @@ __int64 __fastcall hkReplayStreamReader::read(hkReplayStreamReader *this, void *
 // RVA: 0xE7A080
 void __fastcall hkCommandRouter::registerProcess(hkCommandRouter *this, hkProcess *handler)
 {
-  hkProcessVtbl *v2; // rax
-  hkProcess *v3; // rsi
-  hkCommandRouter *v4; // rbp
+  hkProcessVtbl *vfptr; // rax
   int v5; // ebx
   __int64 v6; // rdi
-  int v7; // [rsp+48h] [rbp+10h]
-  __int64 v8; // [rsp+50h] [rbp+18h]
+  int v7; // [rsp+48h] [rbp+10h] BYREF
+  __int64 v8; // [rsp+50h] [rbp+18h] BYREF
 
-  v2 = handler->vfptr;
-  v3 = handler;
-  v4 = this;
+  vfptr = handler->vfptr;
   v5 = 0;
   v8 = 0i64;
   v7 = 0;
-  v2->getConsumableCommands(handler, (char **)&v8, &v7);
+  vfptr->getConsumableCommands(handler, (char **)&v8, &v7);
   v6 = 0i64;
   if ( v7 > 0 )
   {
     do
     {
       hkMultiMap<unsigned __int64,unsigned __int64,hkMultiMapOperations<unsigned __int64>,hkContainerHeapAllocator>::insert(
-        &v4->m_commandMap.m_map,
+        &this->m_commandMap.m_map,
         *(unsigned __int8 *)(v6 + v8),
-        (unsigned __int64)v3);
+        (unsigned __int64)handler);
       ++v5;
       ++v6;
     }
@@ -123,32 +113,28 @@ void __fastcall hkCommandRouter::registerProcess(hkCommandRouter *this, hkProces
 // RVA: 0xE7A100
 void __fastcall hkCommandRouter::unregisterProcess(hkCommandRouter *this, hkProcess *handler)
 {
-  hkProcessVtbl *v2; // rax
-  hkProcess *v3; // rsi
-  hkCommandRouter *v4; // rbp
+  hkProcessVtbl *vfptr; // rax
   int v5; // ebx
   __int64 v6; // rdi
-  int v7; // [rsp+48h] [rbp+10h]
-  hkResult result; // [rsp+50h] [rbp+18h]
-  __int64 v9; // [rsp+58h] [rbp+20h]
+  int v7; // [rsp+48h] [rbp+10h] BYREF
+  hkResult result; // [rsp+50h] [rbp+18h] BYREF
+  __int64 v9; // [rsp+58h] [rbp+20h] BYREF
 
-  v2 = handler->vfptr;
-  v3 = handler;
-  v4 = this;
+  vfptr = handler->vfptr;
   v5 = 0;
   v9 = 0i64;
   v7 = 0;
-  v2->getConsumableCommands(handler, (char **)&v9, &v7);
+  vfptr->getConsumableCommands(handler, (char **)&v9, &v7);
   v6 = 0i64;
   if ( v7 > 0 )
   {
     do
     {
       hkMultiMap<unsigned __int64,unsigned __int64,hkMultiMapOperations<unsigned __int64>,hkContainerHeapAllocator>::remove(
-        &v4->m_commandMap.m_map,
+        &this->m_commandMap.m_map,
         &result,
         *(unsigned __int8 *)(v6 + v9),
-        (unsigned __int64)v3);
+        (unsigned __int64)handler);
       ++v5;
       ++v6;
     }
@@ -158,148 +144,141 @@ void __fastcall hkCommandRouter::unregisterProcess(hkCommandRouter *this, hkProc
 
 // File Line: 110
 // RVA: 0xE7A180
-hkBool *__fastcall hkCommandRouter::consumeCommands(hkCommandRouter *this, hkBool *result, hkDisplaySerializeIStream *stream)
+hkBool *__fastcall hkCommandRouter::consumeCommands(
+        hkCommandRouter *this,
+        hkBool *result,
+        hkDisplaySerializeIStream *stream)
 {
-  hkDisplaySerializeIStream *v3; // r15
-  hkBool *v4; // rbx
-  hkCommandRouter *v5; // r13
   unsigned __int8 v6; // bp
   char v7; // r12
-  hkStreamReader *v8; // rax
-  hkStreamReader *v9; // rbx
-  _QWORD **v10; // rax
-  __int64 v11; // rax
-  __int64 v12; // r14
-  int v13; // ebx
-  unsigned __int64 v14; // rcx
-  __int64 v15; // r10
-  int v16; // er8
+  hkStreamReader *StreamReader; // rbx
+  _QWORD **Value; // rax
+  __int64 v10; // rax
+  __int64 v11; // r14
+  int Key; // ebx
+  unsigned __int64 val; // rcx
+  __int64 m_hashMod; // r10
+  int v15; // r8d
   __int64 i; // rcx
-  hkMultiMap<unsigned __int64,unsigned __int64,hkMultiMapOperations<unsigned __int64>,hkContainerHeapAllocator>::Pair *v18; // rax
-  hkBool *v19; // rax
-  hkBool resulta; // [rsp+20h] [rbp-F8h]
+  hkMultiMap<unsigned __int64,unsigned __int64,hkMultiMapOperations<unsigned __int64>,hkContainerHeapAllocator>::Pair *v17; // rax
+  hkBool *v18; // rax
+  hkBool resulta; // [rsp+20h] [rbp-F8h] BYREF
   hkStreamReader *newBuf; // [rsp+28h] [rbp-F0h]
-  char v22; // [rsp+30h] [rbp-E8h]
-  hkVector4f v; // [rsp+40h] [rbp-D8h]
-  hkStringBuf v24; // [rsp+50h] [rbp-C8h]
-  hkBool *v25; // [rsp+128h] [rbp+10h]
-  unsigned __int8 array; // [rsp+138h] [rbp+20h]
+  char v21[16]; // [rsp+30h] [rbp-E8h] BYREF
+  hkVector4f v; // [rsp+40h] [rbp-D8h] BYREF
+  hkStringBuf v23; // [rsp+50h] [rbp-C8h] BYREF
+  unsigned __int8 array; // [rsp+138h] [rbp+20h] BYREF
 
-  v25 = result;
-  v3 = stream;
-  v4 = result;
-  v5 = this;
-  hkIArchive::readArrayGeneric((hkIArchive *)&stream->vfptr, &array, 1, 1);
+  hkIArchive::readArrayGeneric(stream, &array, 1, 1);
   v6 = array;
-  if ( hkIArchive::isOk((hkIArchive *)&v3->vfptr, &resulta)->m_bool )
+  if ( hkIArchive::isOk(stream, &resulta)->m_bool )
   {
-    while ( v6 != -16 )
+    while ( v6 != 0xF0 )
     {
       v7 = 0;
-      if ( (signed int)hkMultiMap<unsigned __int64,unsigned __int64,hkMultiMapOperations<unsigned __int64>,hkContainerHeapAllocator>::findKey(
-                         &v5->m_commandMap.m_map,
-                         v6) > v5->m_commandMap.m_map.m_hashMod )
-        goto LABEL_34;
-      v8 = hkIArchive::getStreamReader((hkIArchive *)&v3->vfptr);
-      v9 = v8;
-      newBuf = v8;
-      v10 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-      v11 = (*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v10[11] + 8i64))(v10[11], 48i64);
-      v12 = v11;
-      if ( v11 )
+      if ( (int)hkMultiMap<unsigned __int64,unsigned __int64,hkMultiMapOperations<unsigned __int64>,hkContainerHeapAllocator>::findKey(
+                  &this->m_commandMap.m_map,
+                  v6) > this->m_commandMap.m_map.m_hashMod )
+        goto LABEL_21;
+      StreamReader = hkIArchive::getStreamReader(stream);
+      newBuf = StreamReader;
+      Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+      v10 = (*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 48i64);
+      v11 = v10;
+      if ( v10 )
       {
-        *(_DWORD *)(v11 + 8) = 0x1FFFF;
-        *(_QWORD *)(v11 + 16) = v9;
-        *(_QWORD *)v11 = &hkReplayStreamReader::`vftable;
-        *(_DWORD *)(v11 + 24) = 0;
-        *(_QWORD *)(v11 + 32) = 0i64;
-        *(_DWORD *)(v11 + 40) = 0;
-        *(_DWORD *)(v11 + 44) = 2147483648;
-        hkReferencedObject::addReference(*(hkReferencedObject **)(v11 + 16));
+        *(_DWORD *)(v10 + 8) = 0x1FFFF;
+        *(_QWORD *)(v10 + 16) = StreamReader;
+        *(_QWORD *)v10 = &hkReplayStreamReader::`vftable;
+        *(_DWORD *)(v10 + 24) = 0;
+        *(_QWORD *)(v10 + 32) = 0i64;
+        *(_DWORD *)(v10 + 40) = 0;
+        *(_DWORD *)(v10 + 44) = 0x80000000;
+        hkReferencedObject::addReference(*(hkReferencedObject **)(v10 + 16));
       }
       else
       {
-        v12 = 0i64;
+        v11 = 0i64;
       }
-      hkIArchive::setStreamReader((hkIArchive *)&v3->vfptr, (hkStreamReader *)v12);
-      v13 = hkMultiMap<unsigned __int64,unsigned __int64,hkMultiMapOperations<unsigned __int64>,hkContainerHeapAllocator>::findKey(
-              &v5->m_commandMap.m_map,
+      hkIArchive::setStreamReader(stream, (hkStreamReader *)v11);
+      Key = hkMultiMap<unsigned __int64,unsigned __int64,hkMultiMapOperations<unsigned __int64>,hkContainerHeapAllocator>::findKey(
+              &this->m_commandMap.m_map,
               v6);
-      while ( v13 <= v5->m_commandMap.m_map.m_hashMod )
+      while ( Key <= this->m_commandMap.m_map.m_hashMod )
       {
-        v14 = v5->m_commandMap.m_map.m_elem[v13].val;
-        if ( v14 )
+        val = this->m_commandMap.m_map.m_elem[Key].val;
+        if ( val )
         {
           v7 = 1;
-          (*(void (__fastcall **)(unsigned __int64, _QWORD))(*(_QWORD *)v14 + 32i64))(v14, v6);
-          *(_DWORD *)(v12 + 24) = 0;
+          (*(void (__fastcall **)(unsigned __int64, _QWORD))(*(_QWORD *)val + 32i64))(val, v6);
+          *(_DWORD *)(v11 + 24) = 0;
         }
-        v15 = v5->m_commandMap.m_map.m_hashMod;
-        v16 = v13 + 1;
-        for ( i = v13 + 1; i > v15; i = 0i64 )
+        m_hashMod = this->m_commandMap.m_map.m_hashMod;
+        v15 = Key + 1;
+        for ( i = Key + 1; i > m_hashMod; i = 0i64 )
 LABEL_16:
-          v16 = 0;
-        v18 = &v5->m_commandMap.m_map.m_elem[i];
-        while ( v18->key != -1i64 )
+          v15 = 0;
+        v17 = &this->m_commandMap.m_map.m_elem[i];
+        while ( v17->key != -1i64 )
         {
-          if ( v18->key == v6 )
+          if ( v17->key == v6 )
           {
-            v13 = v16;
+            Key = v15;
             goto LABEL_19;
           }
           ++i;
-          ++v16;
-          ++v18;
-          if ( i > v15 )
+          ++v15;
+          ++v17;
+          if ( i > m_hashMod )
             goto LABEL_16;
         }
-        v13 = v15 + 1;
+        Key = m_hashMod + 1;
 LABEL_19:
         ;
       }
-      hkIArchive::setStreamReader((hkIArchive *)&v3->vfptr, newBuf);
-      hkReferencedObject::removeReference((hkReferencedObject *)v12);
+      hkIArchive::setStreamReader(stream, newBuf);
+      hkReferencedObject::removeReference((hkReferencedObject *)v11);
       if ( !v7 )
       {
-LABEL_34:
-        if ( v6 == -80 )
+LABEL_21:
+        if ( v6 == 0xB0 )
         {
-          hkDisplaySerializeIStream::readQuadVector4(v3, &v);
-          hkIArchive::readArrayGeneric((hkIArchive *)&v3->vfptr, &v22, 8, 1);
+          hkDisplaySerializeIStream::readQuadVector4(stream, &v);
+          hkIArchive::readArrayGeneric(stream, v21, 8, 1);
         }
-        else if ( v6 == -79 )
+        else if ( v6 == 0xB1 )
         {
-          hkDisplaySerializeIStream::readQuadVector4(v3, &v);
+          hkDisplaySerializeIStream::readQuadVector4(stream, &v);
         }
-        v24.m_string.m_capacityAndFlags = -2147483520;
-        v24.m_string.m_size = 1;
-        v24.m_string.m_data = v24.m_string.m_storage;
-        v24.m_string.m_storage[0] = 0;
-        hkStringBuf::printf(&v24, "VDB: Found a command (%x) with no handler. Could corrupt the stream.", v6);
-        v24.m_string.m_size = 0;
-        if ( v24.m_string.m_capacityAndFlags >= 0 )
+        v23.m_string.m_capacityAndFlags = -2147483520;
+        v23.m_string.m_size = 1;
+        v23.m_string.m_data = v23.m_string.m_storage;
+        v23.m_string.m_storage[0] = 0;
+        hkStringBuf::printf(&v23, "VDB: Found a command (%x) with no handler. Could corrupt the stream.", v6);
+        v23.m_string.m_size = 0;
+        if ( v23.m_string.m_capacityAndFlags >= 0 )
           hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-            (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-            v24.m_string.m_data,
-            v24.m_string.m_capacityAndFlags & 0x3FFFFFFF);
+            &hkContainerTempAllocator::s_alloc,
+            v23.m_string.m_data,
+            v23.m_string.m_capacityAndFlags & 0x3FFFFFFF);
       }
-      hkIArchive::readArrayGeneric((hkIArchive *)&v3->vfptr, &array, 1, 1);
+      hkIArchive::readArrayGeneric(stream, &array, 1, 1);
       v6 = array;
-      if ( !hkIArchive::isOk((hkIArchive *)&v3->vfptr, &resulta)->m_bool )
+      if ( !hkIArchive::isOk(stream, &resulta)->m_bool )
       {
-        v19 = v25;
-        v25->m_bool = 1;
-        return v19;
+        v18 = result;
+        result->m_bool = 1;
+        return v18;
       }
     }
-    v19 = v25;
-    v25->m_bool = 1;
+    v18 = result;
+    result->m_bool = 1;
   }
   else
   {
-    v4->m_bool = 1;
-    v19 = v4;
+    result->m_bool = 1;
+    return result;
   }
-  return v19;
+  return v18;
 }
 

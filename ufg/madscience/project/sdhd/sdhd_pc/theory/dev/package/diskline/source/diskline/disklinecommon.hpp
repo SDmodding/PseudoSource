@@ -3,7 +3,7 @@
 __int64 UFG::_dynamic_initializer_for__Key_AccessType__()
 {
   UFG::qString::qString(&Key_AccessType, "AccessType");
-  return atexit(UFG::_dynamic_atexit_destructor_for__Key_AccessType__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__Key_AccessType__);
 }
 
 // File Line: 20
@@ -11,7 +11,7 @@ __int64 UFG::_dynamic_initializer_for__Key_AccessType__()
 __int64 UFG::_dynamic_initializer_for__Key_Action__()
 {
   UFG::qString::qString(&Key_Action, "Action");
-  return atexit(UFG::_dynamic_atexit_destructor_for__Key_Action__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__Key_Action__);
 }
 
 // File Line: 21
@@ -19,7 +19,7 @@ __int64 UFG::_dynamic_initializer_for__Key_Action__()
 __int64 UFG::_dynamic_initializer_for__Key_Bytes__()
 {
   UFG::qString::qString(&Key_Bytes, "Bytes");
-  return atexit(UFG::_dynamic_atexit_destructor_for__Key_Bytes__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__Key_Bytes__);
 }
 
 // File Line: 22
@@ -27,7 +27,7 @@ __int64 UFG::_dynamic_initializer_for__Key_Bytes__()
 __int64 UFG::_dynamic_initializer_for__Key_Data__()
 {
   UFG::qString::qString(&Key_Data, "Data");
-  return atexit(UFG::_dynamic_atexit_destructor_for__Key_Data__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__Key_Data__);
 }
 
 // File Line: 23
@@ -35,7 +35,7 @@ __int64 UFG::_dynamic_initializer_for__Key_Data__()
 __int64 UFG::_dynamic_initializer_for__Key_Done__()
 {
   UFG::qString::qString(&Key_Done, "Done");
-  return atexit(UFG::_dynamic_atexit_destructor_for__Key_Done__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__Key_Done__);
 }
 
 // File Line: 24
@@ -43,7 +43,7 @@ __int64 UFG::_dynamic_initializer_for__Key_Done__()
 __int64 UFG::_dynamic_initializer_for__Key_Exists__()
 {
   UFG::qString::qString(&Key_Exists, "Exists");
-  return atexit(UFG::_dynamic_atexit_destructor_for__Key_Exists__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__Key_Exists__);
 }
 
 // File Line: 25
@@ -51,7 +51,7 @@ __int64 UFG::_dynamic_initializer_for__Key_Exists__()
 __int64 UFG::_dynamic_initializer_for__Key_Filename__()
 {
   UFG::qString::qString(&Key_Filename, "Filename");
-  return atexit(UFG::_dynamic_atexit_destructor_for__Key_Filename__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__Key_Filename__);
 }
 
 // File Line: 26
@@ -59,7 +59,7 @@ __int64 UFG::_dynamic_initializer_for__Key_Filename__()
 __int64 UFG::_dynamic_initializer_for__Key_Files__()
 {
   UFG::qString::qString(&Key_Files, "Files");
-  return atexit(UFG::_dynamic_atexit_destructor_for__Key_Files__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__Key_Files__);
 }
 
 // File Line: 27
@@ -67,7 +67,7 @@ __int64 UFG::_dynamic_initializer_for__Key_Files__()
 __int64 UFG::_dynamic_initializer_for__Key_FileSize__()
 {
   UFG::qString::qString(&Key_FileSize, "FileSize");
-  return atexit(UFG::_dynamic_atexit_destructor_for__Key_FileSize__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__Key_FileSize__);
 }
 
 // File Line: 28
@@ -75,7 +75,7 @@ __int64 UFG::_dynamic_initializer_for__Key_FileSize__()
 __int64 UFG::_dynamic_initializer_for__Key_FileTime__()
 {
   UFG::qString::qString(&Key_FileTime, "FileTime");
-  return atexit(UFG::_dynamic_atexit_destructor_for__Key_FileTime__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__Key_FileTime__);
 }
 
 // File Line: 29
@@ -83,7 +83,7 @@ __int64 UFG::_dynamic_initializer_for__Key_FileTime__()
 __int64 UFG::_dynamic_initializer_for__Key_Handle__()
 {
   UFG::qString::qString(&Key_Handle, "Handle");
-  return atexit(UFG::_dynamic_atexit_destructor_for__Key_Handle__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__Key_Handle__);
 }
 
 // File Line: 30
@@ -91,7 +91,7 @@ __int64 UFG::_dynamic_initializer_for__Key_Handle__()
 __int64 UFG::_dynamic_initializer_for__Key_InitialDir__()
 {
   UFG::qString::qString(&Key_InitialDir, "InitialDir");
-  return atexit(UFG::_dynamic_atexit_destructor_for__Key_InitialDir__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__Key_InitialDir__);
 }
 
 // File Line: 31
@@ -99,7 +99,7 @@ __int64 UFG::_dynamic_initializer_for__Key_InitialDir__()
 __int64 UFG::_dynamic_initializer_for__Key_Offset__()
 {
   UFG::qString::qString(&Key_Offset, "Offset");
-  return atexit(UFG::_dynamic_atexit_destructor_for__Key_Offset__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__Key_Offset__);
 }
 
 // File Line: 32
@@ -107,7 +107,7 @@ __int64 UFG::_dynamic_initializer_for__Key_Offset__()
 __int64 UFG::_dynamic_initializer_for__Key_Patterns__()
 {
   UFG::qString::qString(&Key_Patterns, "Patterns");
-  return atexit(UFG::_dynamic_atexit_destructor_for__Key_Patterns__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__Key_Patterns__);
 }
 
 // File Line: 33
@@ -115,7 +115,7 @@ __int64 UFG::_dynamic_initializer_for__Key_Patterns__()
 __int64 UFG::_dynamic_initializer_for__Key_Position__()
 {
   UFG::qString::qString(&Key_Position, "Position");
-  return atexit(UFG::_dynamic_atexit_destructor_for__Key_Position__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__Key_Position__);
 }
 
 // File Line: 34
@@ -123,7 +123,7 @@ __int64 UFG::_dynamic_initializer_for__Key_Position__()
 __int64 UFG::_dynamic_initializer_for__Key_PreSeek__()
 {
   UFG::qString::qString(&Key_PreSeek, "PreSeek");
-  return atexit(UFG::_dynamic_atexit_destructor_for__Key_PreSeek__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__Key_PreSeek__);
 }
 
 // File Line: 35
@@ -131,7 +131,7 @@ __int64 UFG::_dynamic_initializer_for__Key_PreSeek__()
 __int64 UFG::_dynamic_initializer_for__Key_Recursive__()
 {
   UFG::qString::qString(&Key_Recursive, "Recursive");
-  return atexit(UFG::_dynamic_atexit_destructor_for__Key_Recursive__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__Key_Recursive__);
 }
 
 // File Line: 36
@@ -139,7 +139,7 @@ __int64 UFG::_dynamic_initializer_for__Key_Recursive__()
 __int64 UFG::_dynamic_initializer_for__Key_SeekType__()
 {
   UFG::qString::qString(&Key_SeekType, "SeekType");
-  return atexit(UFG::_dynamic_atexit_destructor_for__Key_SeekType__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__Key_SeekType__);
 }
 
 // File Line: 37
@@ -147,6 +147,6 @@ __int64 UFG::_dynamic_initializer_for__Key_SeekType__()
 __int64 UFG::_dynamic_initializer_for__Key_Size__()
 {
   UFG::qString::qString(&Key_Size, "Size");
-  return atexit(UFG::_dynamic_atexit_destructor_for__Key_Size__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__Key_Size__);
 }
 

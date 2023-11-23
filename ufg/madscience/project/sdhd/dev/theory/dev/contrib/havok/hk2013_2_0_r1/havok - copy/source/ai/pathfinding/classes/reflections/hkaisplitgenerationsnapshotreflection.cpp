@@ -28,31 +28,21 @@ hkClass *__fastcall hkaiSplitGenerationSnapshot::staticClass()
 
 // File Line: 65
 // RVA: 0xBB80C0
-void __fastcall finishLoadedObjecthkaiSplitGenerationSnapshot(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiSplitGenerationSnapshot(char *p, hkFinishLoadedObjectFlag finishing)
 {
-  int v2; // edi
-  char *v3; // rbx
-
   if ( p )
   {
-    v2 = finishing;
-    v3 = (char *)p;
-    hkGeometry::hkGeometry((hkGeometry *)p, (hkFinishLoadedObjectFlag)finishing);
-    hkaiNavMeshGenerationSettings::hkaiNavMeshGenerationSettings(
-      (hkaiNavMeshGenerationSettings *)(v3 + 48),
-      (hkFinishLoadedObjectFlag)v2);
-    hkStringPtr::hkStringPtr((hkStringPtr *)v3 + 74);
+    hkGeometry::hkGeometry((hkGeometry *)p, finishing);
+    hkaiNavMeshGenerationSettings::hkaiNavMeshGenerationSettings((hkaiNavMeshGenerationSettings *)(p + 48), finishing);
+    hkStringPtr::hkStringPtr((hkStringPtr *)p + 74);
   }
 }
 
 // File Line: 71
 // RVA: 0xBB8110
-void __fastcall cleanupLoadedObjecthkaiSplitGenerationSnapshot(void *p)
+void __fastcall cleanupLoadedObjecthkaiSplitGenerationSnapshot(hkStringPtr *p)
 {
-  hkaiNavMeshGenerationSnapshot *v1; // rbx
-
-  v1 = (hkaiNavMeshGenerationSnapshot *)p;
-  hkStringPtr::~hkStringPtr((hkStringPtr *)p + 74);
-  hkaiNavMeshGenerationSnapshot::~hkaiNavMeshGenerationSnapshot(v1);
+  hkStringPtr::~hkStringPtr(p + 74);
+  hkaiNavMeshGenerationSnapshot::~hkaiNavMeshGenerationSnapshot((hkaiNavMeshGenerationSnapshot *)p);
 }
 

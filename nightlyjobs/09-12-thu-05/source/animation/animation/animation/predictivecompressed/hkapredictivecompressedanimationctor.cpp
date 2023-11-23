@@ -1,123 +1,114 @@
 // File Line: 58
 // RVA: 0xB389A0
-void __fastcall hkaPredictiveCompressedAnimationUtil::Remapper::Remapper(hkaPredictiveCompressedAnimationUtil::Remapper *this, hkaSkeleton *s, hkaAnimationBinding *b, hkaPredictiveCompressedAnimation::CompressionParams *params)
+void __fastcall hkaPredictiveCompressedAnimationUtil::Remapper::Remapper(
+        hkaPredictiveCompressedAnimationUtil::Remapper *this,
+        hkaSkeleton *s,
+        hkaAnimationBinding *b,
+        hkaPredictiveCompressedAnimation::CompressionParams *params)
 {
-  hkaInterleavedUncompressedAnimation *v4; // rax
-  hkaPredictiveCompressedAnimationUtil::Remapper *v5; // rbx
-  __int64 v6; // rcx
+  hkaInterleavedUncompressedAnimation *m_pntr; // rax
+  __int64 m_size; // rcx
   int v7; // ebp
-  unsigned int v8; // esi
-  hkaSkeleton *v9; // r14
+  int v8; // esi
   __int64 v10; // r15
   int *v11; // rdi
-  unsigned int v12; // eax
+  int v12; // eax
   __int64 v13; // rcx
   __int64 v14; // rax
   __int64 v15; // r14
   int *v16; // rdi
   __int64 v17; // rcx
-  hkaAnimationBinding *v18; // rax
+  hkaAnimationBinding *m_binding; // rax
   int v19; // esi
-  int v20; // er14
+  int v20; // r14d
   __int64 v21; // r15
-  signed __int64 v22; // rdi
-  signed int v23; // edx
-  signed __int64 v24; // rcx
+  hkaSkeleton::Partition *v22; // rdi
+  int v23; // edx
+  __int64 v24; // rcx
   int v25; // edi
   __int64 v26; // r8
   __int64 v27; // rdi
-  hkStringPtr v28; // [rsp+20h] [rbp-28h]
-  __int16 v29; // [rsp+28h] [rbp-20h]
-  __int16 v30; // [rsp+2Ah] [rbp-1Eh]
-  int v31; // [rsp+50h] [rbp+8h]
+  hkStringPtr v28; // [rsp+20h] [rbp-28h] BYREF
+  __int16 m_startBoneIndex; // [rsp+28h] [rbp-20h]
+  __int16 m_numBones; // [rsp+2Ah] [rbp-1Eh]
+  int v31; // [rsp+50h] [rbp+8h] BYREF
 
   this->m_skel = s;
   this->m_binding = b;
-  v4 = (hkaInterleavedUncompressedAnimation *)b->m_animation.m_pntr;
-  v5 = this;
+  m_pntr = (hkaInterleavedUncompressedAnimation *)b->m_animation.m_pntr;
   this->m_params = params;
-  this->m_anim = v4;
-  v6 = s->m_bones.m_size;
+  this->m_anim = m_pntr;
+  m_size = s->m_bones.m_size;
   v7 = 0;
-  v8 = 2147483648;
-  v9 = s;
-  v5->m_transformTrackFromBone.m_data = 0i64;
-  v5->m_transformTrackFromBone.m_size = 0;
-  v5->m_transformTrackFromBone.m_capacityAndFlags = 2147483648;
-  v10 = v6;
-  if ( (_DWORD)v6 )
+  v8 = 0x80000000;
+  this->m_transformTrackFromBone.m_data = 0i64;
+  this->m_transformTrackFromBone.m_size = 0;
+  this->m_transformTrackFromBone.m_capacityAndFlags = 0x80000000;
+  v10 = m_size;
+  if ( (_DWORD)m_size )
   {
-    v31 = 4 * v6;
-    v11 = (int *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
-                   (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-                   &v31);
-    LODWORD(v6) = v31 / 4;
+    v31 = 4 * m_size;
+    v11 = (int *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(&hkContainerHeapAllocator::s_alloc, &v31);
+    LODWORD(m_size) = v31 / 4;
   }
   else
   {
     v11 = 0i64;
   }
-  v12 = 2147483648;
-  v5->m_transformTrackFromBone.m_data = v11;
-  if ( (_DWORD)v6 )
-    v12 = v6;
-  v5->m_transformTrackFromBone.m_size = v10;
+  v12 = 0x80000000;
+  this->m_transformTrackFromBone.m_data = v11;
+  if ( (_DWORD)m_size )
+    v12 = m_size;
+  this->m_transformTrackFromBone.m_size = v10;
   v13 = v10;
-  v5->m_transformTrackFromBone.m_capacityAndFlags = v12;
-  if ( (signed int)v10 > 0 )
+  this->m_transformTrackFromBone.m_capacityAndFlags = v12;
+  if ( (int)v10 > 0 )
   {
     while ( v13 )
     {
-      *v11 = -1;
-      ++v11;
+      *v11++ = -1;
       --v13;
     }
   }
-  v14 = v9->m_floatSlots.m_size;
-  v5->m_floatTrackFromSlot.m_data = 0i64;
-  v5->m_floatTrackFromSlot.m_size = 0;
-  v5->m_floatTrackFromSlot.m_capacityAndFlags = 2147483648;
+  v14 = s->m_floatSlots.m_size;
+  this->m_floatTrackFromSlot.m_data = 0i64;
+  this->m_floatTrackFromSlot.m_size = 0;
+  this->m_floatTrackFromSlot.m_capacityAndFlags = 0x80000000;
   v15 = v14;
   if ( (_DWORD)v14 )
   {
     v31 = 4 * v14;
-    v16 = (int *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
-                   (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-                   &v31);
+    v16 = (int *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(&hkContainerHeapAllocator::s_alloc, &v31);
     LODWORD(v14) = v31 / 4;
   }
   else
   {
     v16 = 0i64;
   }
-  v5->m_floatTrackFromSlot.m_data = v16;
-  v5->m_floatTrackFromSlot.m_size = v15;
+  this->m_floatTrackFromSlot.m_data = v16;
+  this->m_floatTrackFromSlot.m_size = v15;
   if ( (_DWORD)v14 )
     v8 = v14;
   v17 = v15;
-  v5->m_floatTrackFromSlot.m_capacityAndFlags = v8;
-  if ( (signed int)v15 > 0 )
+  this->m_floatTrackFromSlot.m_capacityAndFlags = v8;
+  if ( (int)v15 > 0 )
   {
     while ( v17 )
     {
-      *v16 = -1;
-      ++v16;
+      *v16++ = -1;
       --v17;
     }
   }
-  v18 = v5->m_binding;
-  if ( v18->m_partitionIndices.m_size <= 0 )
+  m_binding = this->m_binding;
+  if ( m_binding->m_partitionIndices.m_size <= 0 )
   {
     v25 = 0;
-    if ( v18->m_transformTrackToBoneIndices.m_size > 0 )
+    if ( m_binding->m_transformTrackToBoneIndices.m_size > 0 )
     {
       v26 = 0i64;
       do
-      {
-        ++v26;
-        v5->m_transformTrackFromBone.m_data[v5->m_binding->m_transformTrackToBoneIndices.m_data[v26 - 1]] = v25++;
-      }
-      while ( v25 < v5->m_binding->m_transformTrackToBoneIndices.m_size );
+        this->m_transformTrackFromBone.m_data[this->m_binding->m_transformTrackToBoneIndices.m_data[v26++]] = v25++;
+      while ( v25 < this->m_binding->m_transformTrackToBoneIndices.m_size );
     }
   }
   else
@@ -127,39 +118,35 @@ void __fastcall hkaPredictiveCompressedAnimationUtil::Remapper::Remapper(hkaPred
     v21 = 0i64;
     do
     {
-      v22 = (signed __int64)&v5->m_skel->m_partitions.m_data[v5->m_binding->m_partitionIndices.m_data[v21]];
-      hkStringPtr::hkStringPtr(&v28, (hkStringPtr *)v22);
-      v29 = *(_WORD *)(v22 + 8);
-      v23 = v29;
-      v30 = *(_WORD *)(v22 + 10);
-      if ( v29 <= (signed __int16)(v30 + v29 - 1) )
+      v22 = &this->m_skel->m_partitions.m_data[this->m_binding->m_partitionIndices.m_data[v21]];
+      hkStringPtr::hkStringPtr(&v28, &v22->m_name);
+      m_startBoneIndex = v22->m_startBoneIndex;
+      v23 = m_startBoneIndex;
+      m_numBones = v22->m_numBones;
+      if ( m_startBoneIndex <= (__int16)(m_numBones + m_startBoneIndex - 1) )
       {
-        v24 = v29;
+        v24 = m_startBoneIndex;
         do
         {
           ++v23;
-          ++v24;
-          v5->m_transformTrackFromBone.m_data[v24 - 1] = v19++;
+          this->m_transformTrackFromBone.m_data[v24++] = v19++;
         }
-        while ( v23 <= (signed __int16)(v29 + v30 - 1) );
+        while ( v23 <= (__int16)(m_startBoneIndex + m_numBones - 1) );
       }
       hkStringPtr::~hkStringPtr(&v28);
       ++v20;
       ++v21;
     }
-    while ( v20 < v5->m_binding->m_partitionIndices.m_size );
+    while ( v20 < this->m_binding->m_partitionIndices.m_size );
   }
-  if ( v5->m_binding->m_floatTrackToFloatSlotIndices.m_size > 0 )
+  if ( this->m_binding->m_floatTrackToFloatSlotIndices.m_size > 0 )
   {
     v27 = 0i64;
     do
-    {
-      ++v27;
-      v5->m_floatTrackFromSlot.m_data[v5->m_binding->m_floatTrackToFloatSlotIndices.m_data[v27 - 1]] = v7++;
-    }
-    while ( v7 < v5->m_binding->m_floatTrackToFloatSlotIndices.m_size );
+      this->m_floatTrackFromSlot.m_data[this->m_binding->m_floatTrackToFloatSlotIndices.m_data[v27++]] = v7++;
+    while ( v7 < this->m_binding->m_floatTrackToFloatSlotIndices.m_size );
   }
-}
+}binding->m_floatTrackToFloatSlot
 
 // File Line: 134
 // RVA: 0xB39190
@@ -172,7 +159,7 @@ float __fastcall hkaPredictiveCompressedAnimationUtil::Remapper::getTransformCha
   __m128 v6; // xmm0
   __m128i v7; // xmm2
   __m128 v8; // xmm1
-  int v9[3]; // [rsp+0h] [rbp-24h]
+  float v9[3]; // [rsp+0h] [rbp-24h]
   __m128 v10; // [rsp+Ch] [rbp-18h]
 
   switch ( channel )
@@ -189,20 +176,20 @@ float __fastcall hkaPredictiveCompressedAnimationUtil::Remapper::getTransformCha
       v4 = _mm_xor_ps(
              (__m128)_mm_slli_epi32(
                        _mm_srli_epi32(
-                         (__m128i)_mm_cmpltps(_mm_shuffle_ps(v3.m_vec.m_quad, v3.m_vec.m_quad, 255), (__m128)0i64),
+                         (__m128i)_mm_cmplt_ps(_mm_shuffle_ps(v3.m_vec.m_quad, v3.m_vec.m_quad, 255), (__m128)0i64),
                          0x1Fu),
                        0x1Fu),
              v3.m_vec.m_quad);
       v5 = (__m128)_mm_srli_epi32(_mm_slli_epi32((__m128i)v3.m_vec.m_quad, 1u), 1u);
       v6 = _mm_add_ps(_mm_shuffle_ps(v5, v5, 78), v5);
       v7 = (__m128i)_mm_add_ps(_mm_shuffle_ps(v6, v6, 177), v6);
-      v8 = _mm_cmpeqps((__m128)v7, (__m128)0i64);
+      v8 = _mm_cmpeq_ps((__m128)v7, (__m128)0i64);
       v10 = _mm_mul_ps(
               v4,
               _mm_or_ps(
                 _mm_and_ps(_mm_xor_ps((__m128)_mm_slli_epi32(_mm_srli_epi32(v7, 0x1Fu), 0x1Fu), (__m128)_xmm), v8),
                 _mm_andnot_ps(v8, _mm_div_ps(query.m_quad, (__m128)v7))));
-      result = *(float *)&v9[channel];
+      result = v9[channel];
       break;
     case 6:
     case 7:
@@ -218,151 +205,143 @@ float __fastcall hkaPredictiveCompressedAnimationUtil::Remapper::getTransformCha
 
 // File Line: 199
 // RVA: 0xB39090
-float __fastcall hkaPredictiveCompressedAnimationUtil::Remapper::getDynamicTolerance(hkaPredictiveCompressedAnimationUtil::Remapper *this, int channel)
+float __fastcall hkaPredictiveCompressedAnimationUtil::Remapper::getDynamicTolerance(
+        hkaPredictiveCompressedAnimationUtil::Remapper *this,
+        int channel)
 {
-  hkaPredictiveCompressedAnimationUtil::Remapper *v2; // r8
-  __int64 v3; // rcx
-  int v4; // er9
+  __int64 m_size; // rcx
+  int v4; // r9d
   __int64 v5; // rdx
   hkaPredictiveCompressedAnimation::CompressionParams *v6; // r9
   unsigned int v7; // edx
-  float result; // xmm0_4
-  bool v9; // sf
-  unsigned __int8 v10; // of
-  hkaPredictiveCompressedAnimation::CompressionParams *v11; // r9
+  bool v9; // cc
+  hkaPredictiveCompressedAnimation::CompressionParams *v10; // r9
+  unsigned int v11; // edx
   unsigned int v12; // edx
-  unsigned int v13; // edx
-  hkaPredictiveCompressedAnimation::CompressionParams *v14; // r9
-  __int64 v15; // rcx
+  hkaPredictiveCompressedAnimation::CompressionParams *m_params; // r9
+  __int64 v14; // rcx
 
-  v2 = this;
-  v3 = this->m_skel->m_bones.m_size;
-  if ( channel >= 9 * (signed int)v3 )
+  m_size = this->m_skel->m_bones.m_size;
+  if ( channel >= 9 * (int)m_size )
   {
-    v14 = v2->m_params;
-    v15 = v2->m_floatTrackFromSlot.m_data[channel - 9 * v3];
-    if ( v14->m_floatTrackIndexToPaletteIndex.m_size <= (signed int)v15 )
-      result = v14->m_parameterPalette.m_data->m_dynamicFloatTolerance;
+    m_params = this->m_params;
+    v14 = this->m_floatTrackFromSlot.m_data[channel - 9 * m_size];
+    if ( m_params->m_floatTrackIndexToPaletteIndex.m_size <= (int)v14 )
+      return m_params->m_parameterPalette.m_data->m_dynamicFloatTolerance;
     else
-      result = v14->m_parameterPalette.m_data[v14->m_floatTrackIndexToPaletteIndex.m_data[v15]].m_dynamicFloatTolerance;
+      return m_params->m_parameterPalette.m_data[m_params->m_floatTrackIndexToPaletteIndex.m_data[v14]].m_dynamicFloatTolerance;
   }
   else
   {
     v4 = channel % 9;
-    v5 = v2->m_transformTrackFromBone.m_data[channel / 9];
+    v5 = this->m_transformTrackFromBone.m_data[channel / 9];
     if ( v4 >= 3 )
     {
-      v10 = __OFSUB__(v4, 6);
-      v9 = v4 - 6 < 0;
-      v11 = v2->m_params;
-      if ( v9 ^ v10 )
+      v9 = v4 < 6;
+      v10 = this->m_params;
+      if ( v9 )
       {
-        if ( v11->m_trackIndexToPaletteIndex.m_size <= (signed int)v5 )
-          v12 = 0;
+        if ( v10->m_trackIndexToPaletteIndex.m_size <= (int)v5 )
+          v11 = 0;
         else
-          v12 = v11->m_trackIndexToPaletteIndex.m_data[v5];
-        result = v11->m_parameterPalette.m_data[v12].m_dynamicRotationTolerance;
+          v11 = v10->m_trackIndexToPaletteIndex.m_data[v5];
+        return v10->m_parameterPalette.m_data[v11].m_dynamicRotationTolerance;
       }
       else
       {
-        if ( v11->m_trackIndexToPaletteIndex.m_size <= (signed int)v5 )
-          v13 = 0;
+        if ( v10->m_trackIndexToPaletteIndex.m_size <= (int)v5 )
+          v12 = 0;
         else
-          v13 = v11->m_trackIndexToPaletteIndex.m_data[v5];
-        result = v11->m_parameterPalette.m_data[v13].m_dynamicScaleTolerance;
+          v12 = v10->m_trackIndexToPaletteIndex.m_data[v5];
+        return v10->m_parameterPalette.m_data[v12].m_dynamicScaleTolerance;
       }
     }
     else
     {
-      v6 = v2->m_params;
-      if ( v6->m_trackIndexToPaletteIndex.m_size <= (signed int)v5 )
+      v6 = this->m_params;
+      if ( v6->m_trackIndexToPaletteIndex.m_size <= (int)v5 )
         v7 = 0;
       else
         v7 = v6->m_trackIndexToPaletteIndex.m_data[v5];
-      result = v6->m_parameterPalette.m_data[v7].m_dynamicTranslationTolerance;
+      return v6->m_parameterPalette.m_data[v7].m_dynamicTranslationTolerance;
     }
   }
-  return result;
 }
 
 // File Line: 257
 // RVA: 0xB38FF0
-void __fastcall hkaPredictiveCompressedAnimationUtil::Remapper::frameValue(hkaPredictiveCompressedAnimationUtil::Remapper *this, int frame, int channel)
+double __fastcall hkaPredictiveCompressedAnimationUtil::Remapper::frameValue(
+        hkaPredictiveCompressedAnimationUtil::Remapper *this,
+        int frame,
+        int channel)
 {
-  hkaPredictiveCompressedAnimationUtil::Remapper *v3; // r10
-  __int64 v4; // rcx
-  __int128 v5; // xmm0
+  __int64 m_size; // rcx
+  double result; // xmm0_8
 
-  v3 = this;
-  v4 = this->m_skel->m_bones.m_size;
-  if ( channel >= 9 * (signed int)v4 )
-    v5 = LODWORD(v3->m_anim->m_floats.m_data[frame * (signed __int64)v3->m_anim->m_numberOfFloatTracks
-                                           + v3->m_floatTrackFromSlot.m_data[channel - 9 * v4]]);
+  m_size = this->m_skel->m_bones.m_size;
+  if ( channel >= 9 * (int)m_size )
+    *(_QWORD *)&result = LODWORD(this->m_anim->m_floats.m_data[frame * (__int64)this->m_anim->m_numberOfFloatTracks
+                                                             + this->m_floatTrackFromSlot.m_data[channel - 9 * m_size]]);
   else
-    hkaPredictiveCompressedAnimationUtil::Remapper::getTransformChannel(
-      &v3->m_anim->m_transforms.m_data[frame * v3->m_anim->m_numberOfTransformTracks
-                                     + v3->m_transformTrackFromBone.m_data[channel / 9]],
-      channel % 9);
+    *(float *)&result = hkaPredictiveCompressedAnimationUtil::Remapper::getTransformChannel(
+                          &this->m_anim->m_transforms.m_data[frame * this->m_anim->m_numberOfTransformTracks
+                                                           + this->m_transformTrackFromBone.m_data[channel / 9]],
+                          channel % 9);
+  return result;
 }
 
 // File Line: 309
 // RVA: 0xB36530
-void __fastcall hkaPredictiveCompressedAnimation::hkaPredictiveCompressedAnimation(hkaPredictiveCompressedAnimation *this, hkaAnimationBinding *binding, hkaSkeleton *skeleton)
+void __fastcall hkaPredictiveCompressedAnimation::hkaPredictiveCompressedAnimation(
+        hkaPredictiveCompressedAnimation *this,
+        hkaAnimationBinding *binding,
+        hkaSkeleton *skeleton)
 {
-  hkaAnimationBinding *v3; // rdi
-  hkaSkeleton *v4; // rbx
-  hkaPredictiveCompressedAnimation *v5; // rsi
-  hkaPredictiveCompressedAnimation::CompressionParams params; // [rsp+20h] [rbp-38h]
+  hkaPredictiveCompressedAnimation::CompressionParams params; // [rsp+20h] [rbp-38h] BYREF
 
-  v3 = binding;
-  v4 = skeleton;
-  v5 = this;
-  hkaAnimation::hkaAnimation((hkaAnimation *)&this->vfptr, binding->m_animation.m_pntr);
-  v5->vfptr = (hkBaseObjectVtbl *)&hkaPredictiveCompressedAnimation::`vftable;
-  v5->m_compressedData.m_capacityAndFlags = 2147483648;
-  v5->m_compressedData.m_data = 0i64;
-  v5->m_compressedData.m_size = 0;
-  v5->m_intData.m_data = 0i64;
-  v5->m_intData.m_size = 0;
-  v5->m_intData.m_capacityAndFlags = 2147483648;
-  v5->m_floatData.m_data = 0i64;
-  v5->m_floatData.m_size = 0;
-  v5->m_floatData.m_capacityAndFlags = 2147483648;
+  hkaAnimation::hkaAnimation(this, binding->m_animation.m_pntr);
+  this->vfptr = (hkBaseObjectVtbl *)&hkaPredictiveCompressedAnimation::`vftable;
+  this->m_compressedData.m_capacityAndFlags = 0x80000000;
+  this->m_compressedData.m_data = 0i64;
+  this->m_compressedData.m_size = 0;
+  this->m_intData.m_data = 0i64;
+  this->m_intData.m_size = 0;
+  this->m_intData.m_capacityAndFlags = 0x80000000;
+  this->m_floatData.m_data = 0i64;
+  this->m_floatData.m_size = 0;
+  this->m_floatData.m_capacityAndFlags = 0x80000000;
   hkaPredictiveCompressedAnimation::CompressionParams::CompressionParams(&params);
-  hkaPredictiveCompressedAnimation::build(v5, v3, v4, &params);
+  hkaPredictiveCompressedAnimation::build(this, binding, skeleton, &params);
   hkaPredictiveCompressedAnimation::CompressionParams::~CompressionParams(&params);
 }
 
 // File Line: 316
 // RVA: 0xB365D0
-void __fastcall hkaPredictiveCompressedAnimation::hkaPredictiveCompressedAnimation(hkaPredictiveCompressedAnimation *this, hkaAnimationBinding *binding, hkaSkeleton *skeleton, hkaPredictiveCompressedAnimation::CompressionParams *params)
+void __fastcall hkaPredictiveCompressedAnimation::hkaPredictiveCompressedAnimation(
+        hkaPredictiveCompressedAnimation *this,
+        hkaAnimationBinding *binding,
+        hkaSkeleton *skeleton,
+        hkaPredictiveCompressedAnimation::CompressionParams *params)
 {
-  hkaAnimationBinding *v4; // rsi
-  hkaPredictiveCompressedAnimation::CompressionParams *v5; // rbx
-  hkaSkeleton *v6; // rdi
-  hkaPredictiveCompressedAnimation *v7; // r14
-
-  v4 = binding;
-  v5 = params;
-  v6 = skeleton;
-  v7 = this;
-  hkaAnimation::hkaAnimation((hkaAnimation *)&this->vfptr, binding->m_animation.m_pntr);
-  v7->vfptr = (hkBaseObjectVtbl *)&hkaPredictiveCompressedAnimation::`vftable;
-  v7->m_compressedData.m_capacityAndFlags = 2147483648;
-  v7->m_compressedData.m_data = 0i64;
-  v7->m_compressedData.m_size = 0;
-  v7->m_intData.m_data = 0i64;
-  v7->m_intData.m_size = 0;
-  v7->m_intData.m_capacityAndFlags = 2147483648;
-  v7->m_floatData.m_data = 0i64;
-  v7->m_floatData.m_size = 0;
-  v7->m_floatData.m_capacityAndFlags = 2147483648;
-  hkaPredictiveCompressedAnimation::build(v7, v4, v6, v5);
+  hkaAnimation::hkaAnimation(this, binding->m_animation.m_pntr);
+  this->vfptr = (hkBaseObjectVtbl *)&hkaPredictiveCompressedAnimation::`vftable;
+  this->m_compressedData.m_capacityAndFlags = 0x80000000;
+  this->m_compressedData.m_data = 0i64;
+  this->m_compressedData.m_size = 0;
+  this->m_intData.m_data = 0i64;
+  this->m_intData.m_size = 0;
+  this->m_intData.m_capacityAndFlags = 0x80000000;
+  this->m_floatData.m_data = 0i64;
+  this->m_floatData.m_size = 0;
+  this->m_floatData.m_capacityAndFlags = 0x80000000;
+  hkaPredictiveCompressedAnimation::build(this, binding, skeleton, params);
 }
 
 // File Line: 325
 // RVA: 0xB36670
-void __fastcall hkaPredictiveCompressedAnimation::hkaPredictiveCompressedAnimation(hkaPredictiveCompressedAnimation *this, hkFinishLoadedObjectFlag flag)
+void __fastcall hkaPredictiveCompressedAnimation::hkaPredictiveCompressedAnimation(
+        hkaPredictiveCompressedAnimation *this,
+        hkFinishLoadedObjectFlag flag)
 {
   this->vfptr = (hkBaseObjectVtbl *)&hkaPredictiveCompressedAnimation::`vftable;
   if ( flag.m_finishing )
@@ -371,11 +350,15 @@ void __fastcall hkaPredictiveCompressedAnimation::hkaPredictiveCompressedAnimati
 
 // File Line: 337
 // RVA: 0xB366A0
-void __usercall hkaPredictiveCompressedAnimation::build(hkaPredictiveCompressedAnimation *this@<rcx>, hkaAnimationBinding *binding@<rdx>, hkaSkeleton *skeleton@<r8>, hkaPredictiveCompressedAnimation::CompressionParams *params@<r9>, __int64 a5@<rbx>)
+void __fastcall hkaPredictiveCompressedAnimation::build(
+        hkaPredictiveCompressedAnimation *this,
+        hkaAnimationBinding *binding,
+        hkaSkeleton *skeleton,
+        hkaPredictiveCompressedAnimation::CompressionParams *params)
 {
-  hkaSkeleton *v5; // rbx
+  __int64 v4; // rbx
   __int64 v6; // r8
-  hkaSkeleton *v7; // r13
+  hkaSkeleton *m_skel; // r13
   int v8; // edx
   __int64 v9; // rdi
   __m128 *v10; // r8
@@ -387,34 +370,34 @@ void __usercall hkaPredictiveCompressedAnimation::build(hkaPredictiveCompressedA
   __int64 v16; // rdi
   _DWORD *v17; // r8
   unsigned int v18; // ecx
-  signed __int64 v19; // rdx
+  __int64 v19; // rdx
   __int64 v20; // rcx
   _DWORD *v21; // rax
-  hkaInterleavedUncompressedAnimation *v22; // r12
-  signed int v23; // er14
+  hkaInterleavedUncompressedAnimation *m_anim; // r12
+  int v23; // r14d
   __int64 v24; // r15
-  unsigned __int64 v25; // rdx
-  int v26; // er8
+  __int64 m_data; // rdx
+  int m_size; // r8d
   int v27; // ebx
-  int v28; // er9
+  int v28; // r9d
   __int64 v29; // rsi
   __m128 *v30; // rdi
-  int *v31; // rdx
-  bool v32; // zf
-  float v33; // xmm0_4
+  bool v31; // zf
+  float TransformChannel; // xmm0_4
+  __m128 v33; // xmm0
   __m128 v34; // xmm1
   __m128 v35; // xmm0
-  int v36; // er8
-  hkaPredictiveCompressedAnimation::CompressionParams *v37; // rsi
-  int v38; // er9
+  int v36; // r8d
+  hkaPredictiveCompressedAnimation::CompressionParams *m_params; // rsi
+  int v38; // r9d
   int v39; // ebx
   __int64 v40; // r14
   _DWORD *v41; // r15
-  __int64 v42; // rdi
+  __m128 *v42; // rdi
   int *v43; // rcx
   bool v44; // zf
   __int64 v45; // rcx
-  float v46; // xmm0_4
+  float m_staticFloatTolerance; // xmm0_4
   unsigned int v47; // edx
   unsigned int v48; // edx
   __int64 v49; // rcx
@@ -426,26 +409,26 @@ void __usercall hkaPredictiveCompressedAnimation::build(hkaPredictiveCompressedA
   int v55; // ecx
   float v56; // xmm0_4
   float v57; // xmm1_4
-  signed int v58; // eax
-  float v59; // xmm0_4
+  int v58; // eax
+  float DynamicTolerance; // xmm0_4
   __m128 v60; // xmm1
   int v61; // ecx
   int *v62; // r12
-  int v63; // er11
+  int v63; // r11d
   int *v64; // rbx
   __int64 v65; // r9
-  int v66; // er10
+  int v66; // r10d
   _DWORD *v67; // r8
   bool v68; // zf
-  signed int v69; // eax
+  int v69; // eax
   _DWORD *v70; // rax
-  signed __int64 v71; // rcx
-  unsigned int v72; // er10
+  __int64 v71; // rcx
+  int m_capacityAndFlags; // r10d
   int v73; // ecx
-  int v74; // er8
-  __int16 v75; // bx
-  int v76; // er9
-  int v77; // er14
+  int v74; // r8d
+  unsigned __int16 v75; // bx
+  int v76; // r9d
+  int v77; // r14d
   __int64 v78; // r15
   int *v79; // rsi
   int v80; // edi
@@ -461,18 +444,18 @@ void __usercall hkaPredictiveCompressedAnimation::build(hkaPredictiveCompressedA
   unsigned __int16 v90; // r12
   int v91; // edi
   __int64 v92; // r8
-  int v93; // er15
+  int v93; // r15d
   int *v94; // r10
   int v95; // ebx
   bool v96; // zf
   __int64 v97; // rcx
   int *v98; // r9
-  float *v99; // r14
+  __m128 *v99; // r14
   int v100; // eax
-  int v101; // er8
+  int v101; // r8d
   __int64 v102; // rcx
   unsigned int v103; // edx
-  float v104; // xmm0_4
+  float m_dynamicScaleTolerance; // xmm0_4
   unsigned int v105; // edx
   unsigned int v106; // edx
   char v107; // cl
@@ -482,12 +465,12 @@ void __usercall hkaPredictiveCompressedAnimation::build(hkaPredictiveCompressedA
   int v111; // ecx
   int v112; // ecx
   int v113; // ecx
-  bool v114; // sf
+  bool v114; // cc
   int v115; // ebx
   float *v116; // rsi
   __int64 v117; // rcx
   int *v118; // rcx
-  signed __int64 v119; // rax
+  __int64 v119; // rax
   float v120; // xmm6_4
   int v121; // ecx
   int v122; // ecx
@@ -500,113 +483,113 @@ void __usercall hkaPredictiveCompressedAnimation::build(hkaPredictiveCompressedA
   int v129; // ecx
   char v130; // cl
   hkaInterleavedUncompressedAnimation *v131; // rbx
-  hkBaseObjectVtbl *v132; // rax
-  signed int v133; // er15
+  hkBaseObjectVtbl *vfptr; // rax
+  int v133; // r15d
   int v134; // eax
-  int v135; // er14
+  int v135; // r14d
   int v136; // eax
   int v137; // edx
   __int64 v138; // rdi
-  int v139; // er9
-  __int64 v140; // r12
-  __int64 v141; // rsi
-  int *v142; // rbx
-  int v143; // er8
-  int v144; // eax
-  signed __int64 v145; // rcx
-  __int64 v146; // rdx
-  __int64 v147; // rax
-  __int64 v148; // r9
-  int v149; // er12
-  _DWORD *v150; // rbx
-  int v151; // er8
-  int v152; // esi
-  __int64 v153; // r14
-  __m128 *v154; // r15
-  int *v155; // rcx
-  signed __int64 v156; // rax
-  unsigned int v157; // xmm0_4
-  __m128 v158; // xmm1
-  __m128i v159; // xmm1
-  __m128 v160; // xmm2
-  __m128 v161; // xmm4
-  int v162; // edi
-  int v163; // eax
-  int v164; // ecx
-  signed __int64 v165; // r15
-  hkaPredictiveCompressedAnimation *v166; // r8
-  int v167; // er13
-  hkArray<unsigned char,hkContainerHeapAllocator> *v168; // rsi
-  int v169; // er14
-  int v170; // ecx
-  unsigned int v171; // ebx
-  int v172; // ecx
-  unsigned int v173; // ebx
-  char *v174; // rcx
-  signed int v175; // edx
-  char *v176; // rax
-  __int64 v177; // rbx
-  char *v178; // r11
-  signed __int64 v179; // r10
-  __int64 *v180; // rdx
-  char *v181; // r8
-  __int64 v182; // r9
-  __int64 v183; // rax
-  __int64 v184; // rbx
-  int v185; // er9
+  __int64 v139; // r12
+  __int64 v140; // rsi
+  int *v141; // rbx
+  int v142; // r8d
+  int v143; // eax
+  __int64 v144; // rcx
+  __int64 v145; // rdx
+  __int64 v146; // rax
+  __int64 v147; // r9
+  int v148; // r12d
+  _DWORD *v149; // rbx
+  int v150; // r8d
+  int v151; // esi
+  __int64 v152; // r14
+  __m128 *v153; // r15
+  int *v154; // rcx
+  __int64 v155; // rax
+  unsigned int v156; // xmm0_4
+  __m128 v157; // xmm1
+  __m128i v158; // xmm1
+  __m128 v159; // xmm2
+  __m128 v160; // xmm4
+  int v161; // edi
+  int v162; // eax
+  int v163; // ecx
+  __int64 v164; // r15
+  hkaPredictiveCompressedAnimation *v165; // r8
+  int v166; // r13d
+  hkArray<unsigned char,hkContainerHeapAllocator> *p_m_compressedData; // rsi
+  int v168; // r14d
+  int v169; // ecx
+  unsigned int v170; // ebx
+  int v171; // ecx
+  unsigned int v172; // ebx
+  hkaPredictiveBlockCompression::Block *p_buf; // rcx
+  int i; // edx
+  hkaPredictiveBlockCompression::Block *v175; // rax
+  __int64 v176; // rbx
+  hkaPredictiveBlockCompression::Block *v177; // r11
+  __int64 v178; // r10
+  __int64 *v179; // rdx
+  hkaPredictiveBlockCompression::Block *v180; // r8
+  __int64 v181; // r9
+  __int64 v182; // rax
+  __int64 v183; // rbx
+  int v184; // r9d
+  int v185; // eax
   int v186; // eax
-  int v187; // eax
-  int v188; // eax
-  int v189; // ecx
-  int v190; // ebx
-  int v191; // ecx
-  int v192; // er9
-  int v193; // ecx
-  int v194; // esi
-  int v195; // ecx
-  __int64 v196; // rdi
-  int *v197; // rbx
-  int v198; // er8
-  hkBaseObjectVtbl *v199; // rax
-  int v200; // er9
+  unsigned int v187; // eax
+  int v188; // ecx
+  int v189; // ebx
+  int v190; // ecx
+  int v191; // r9d
+  int v192; // ecx
+  int v193; // esi
+  int v194; // ecx
+  __int64 v195; // rdi
+  int *v196; // rbx
+  int v197; // r8d
+  hkBaseObjectVtbl *v198; // rax
+  int v199; // r9d
+  int v200; // eax
   int v201; // eax
-  int v202; // eax
-  int v203; // er9
+  int v202; // r9d
+  int v203; // eax
   int v204; // eax
-  int v205; // eax
+  int v205; // ecx
   int v206; // ecx
-  int v207; // ecx
-  __int64 v208; // rdx
-  __int64 v209; // r10
-  int v210; // er14
-  signed int v211; // ebx
-  int v212; // er15
-  int v213; // esi
-  __int64 v214; // r8
-  int v215; // er12
-  __int64 v216; // r9
-  int *v217; // r13
-  bool v218; // zf
-  int v219; // ebx
-  int v220; // edi
+  __int64 v207; // rdx
+  __int64 v208; // r10
+  int v209; // r14d
+  int v210; // ebx
+  int v211; // r15d
+  int v212; // esi
+  __int64 v213; // r8
+  int v214; // r12d
+  __int64 v215; // r9
+  int *v216; // r13
+  bool v217; // zf
+  int v218; // ebx
+  int v219; // edi
+  hkOstream *v220; // rax
   hkOstream *v221; // rax
   hkOstream *v222; // rax
   hkOstream *v223; // rax
   hkOstream *v224; // rax
   hkOstream *v225; // rax
-  hkOstream *v226; // rax
-  int v227; // edx
-  int v228; // ebx
-  int v229; // edi
+  int v226; // edx
+  int v227; // ebx
+  int v228; // edi
+  hkOstream *v229; // rax
   hkOstream *v230; // rax
   hkOstream *v231; // rax
   hkOstream *v232; // rax
   hkOstream *v233; // rax
   hkOstream *v234; // rax
   hkOstream *v235; // rax
-  hkOstream *v236; // rax
-  hkaInterleavedUncompressedAnimation *v237; // rbx
-  int v238; // eax
+  hkaInterleavedUncompressedAnimation *v236; // rbx
+  int v237; // eax
+  hkOstream *v238; // rax
   hkOstream *v239; // rax
   hkOstream *v240; // rax
   hkOstream *v241; // rax
@@ -614,76 +597,71 @@ void __usercall hkaPredictiveCompressedAnimation::build(hkaPredictiveCompressedA
   hkOstream *v243; // rax
   hkOstream *v244; // rax
   hkOstream *v245; // rax
-  hkOstream *v246; // rax
-  int v247; // ecx
-  hkArray<unsigned char,hkContainerHeapAllocator> *v248; // rdx
-  float v249; // eax
-  hkArrayBase<unsigned short> v250; // [rsp+30h] [rbp-C8h]
-  _WORD *array; // [rsp+40h] [rbp-B8h]
-  int v252; // [rsp+48h] [rbp-B0h]
-  int v253; // [rsp+4Ch] [rbp-ACh]
-  unsigned int v254; // [rsp+50h] [rbp-A8h]
-  int v255; // [rsp+54h] [rbp-A4h]
-  hkArrayBase<float> v256; // [rsp+58h] [rbp-A0h]
-  hkArrayBase<float> v257; // [rsp+68h] [rbp-90h]
-  hkArrayBase<float> v258; // [rsp+78h] [rbp-80h]
-  int v259; // [rsp+88h] [rbp-70h]
-  int v260; // [rsp+8Ch] [rbp-6Ch]
-  hkArrayBase<unsigned short> v261; // [rsp+98h] [rbp-60h]
-  hkArrayBase<unsigned short> arr; // [rsp+A8h] [rbp-50h]
-  __int64 v263; // [rsp+B8h] [rbp-40h]
-  _DWORD *v264; // [rsp+C0h] [rbp-38h]
+  int v246; // ecx
+  hkArray<unsigned char,hkContainerHeapAllocator> *v247; // rdx
+  float m_duration; // eax
+  hkArrayBase<unsigned short> v249; // [rsp+30h] [rbp-C8h] BYREF
+  hkArrayBase<unsigned short> array; // [rsp+40h] [rbp-B8h] BYREF
+  unsigned int v251; // [rsp+50h] [rbp-A8h]
+  int v252; // [rsp+54h] [rbp-A4h]
+  hkArrayBase<float> v253; // [rsp+58h] [rbp-A0h] BYREF
+  hkArrayBase<float> v254; // [rsp+68h] [rbp-90h] BYREF
+  hkArrayBase<float> v255; // [rsp+78h] [rbp-80h] BYREF
+  __int64 v256; // [rsp+88h] [rbp-70h]
+  hkArrayBase<unsigned short> v257; // [rsp+98h] [rbp-60h] BYREF
+  hkArrayBase<unsigned short> arr; // [rsp+A8h] [rbp-50h] BYREF
+  __int64 v259; // [rsp+B8h] [rbp-40h]
+  _DWORD *v260; // [rsp+C0h] [rbp-38h]
   int nframes[2]; // [rsp+C8h] [rbp-30h]
-  hkResult v266[2]; // [rsp+D0h] [rbp-28h]
-  hkResult v267[2]; // [rsp+D8h] [rbp-20h]
-  int v268; // [rsp+E0h] [rbp-18h]
-  hkArrayBase<unsigned short> v269; // [rsp+E8h] [rbp-10h]
-  hkArrayBase<unsigned short> v270; // [rsp+F8h] [rbp+0h]
-  hkArrayBase<unsigned short> v271; // [rsp+108h] [rbp+10h]
-  __m128 *v272; // [rsp+118h] [rbp+20h]
-  hkArrayBase<unsigned short> v273; // [rsp+120h] [rbp+28h]
-  hkArrayBase<unsigned short> v274; // [rsp+130h] [rbp+38h]
-  int v275; // [rsp+140h] [rbp+48h]
-  int v276; // [rsp+144h] [rbp+4Ch]
-  hkaPredictiveCompressedAnimationUtil::Remapper v277; // [rsp+148h] [rbp+50h]
-  __int64 v278; // [rsp+188h] [rbp+90h]
-  hkResult result; // [rsp+190h] [rbp+98h]
-  hkErrStream v280; // [rsp+198h] [rbp+A0h]
-  int v281; // [rsp+1B0h] [rbp+B8h]
-  int v282; // [rsp+1B4h] [rbp+BCh]
-  __int64 v283; // [rsp+1B8h] [rbp+C0h]
-  hkaPredictiveBlockCompression::Block buf; // [rsp+1C8h] [rbp+D0h]
+  hkResult v262[2]; // [rsp+D0h] [rbp-28h] BYREF
+  hkResult v263[2]; // [rsp+D8h] [rbp-20h] BYREF
+  int v264; // [rsp+E0h] [rbp-18h]
+  hkArrayBase<unsigned short> v265; // [rsp+E8h] [rbp-10h] BYREF
+  hkArrayBase<unsigned short> v266; // [rsp+F8h] [rbp+0h] BYREF
+  hkArrayBase<unsigned short> v267; // [rsp+108h] [rbp+10h] BYREF
+  __m128 *v268; // [rsp+118h] [rbp+20h]
+  hkArrayBase<unsigned short> v269; // [rsp+120h] [rbp+28h] BYREF
+  hkArrayBase<unsigned short> v270; // [rsp+130h] [rbp+38h] BYREF
+  int v271; // [rsp+140h] [rbp+48h] BYREF
+  int v272; // [rsp+144h] [rbp+4Ch] BYREF
+  hkaPredictiveCompressedAnimationUtil::Remapper v273; // [rsp+148h] [rbp+50h] BYREF
+  __int64 v274; // [rsp+188h] [rbp+90h]
+  hkResult result; // [rsp+190h] [rbp+98h] BYREF
+  hkErrStream v276; // [rsp+198h] [rbp+A0h] BYREF
+  int v277; // [rsp+1B0h] [rbp+B8h]
+  int v278; // [rsp+1B4h] [rbp+BCh]
+  __int64 v279; // [rsp+1B8h] [rbp+C0h]
+  hkaPredictiveBlockCompression::Block buf; // [rsp+1C8h] [rbp+D0h] BYREF
   hkaPredictiveCompressedAnimation *retaddr; // [rsp+468h] [rbp+370h]
-  __int64 v286; // [rsp+478h] [rbp+380h]
+  __int64 v282; // [rsp+478h] [rbp+380h] BYREF
 
-  v286 = a5;
-  v5 = skeleton;
+  v282 = v4;
   this->m_type.m_storage = 5;
-  hkaPredictiveCompressedAnimationUtil::Remapper::Remapper(&v277, skeleton, binding, params);
-  v7 = v277.m_skel;
-  v8 = v277.m_skel->m_floatSlots.m_size + 9 * v277.m_skel->m_bones.m_size;
+  hkaPredictiveCompressedAnimationUtil::Remapper::Remapper(&v273, skeleton, binding, params);
+  m_skel = v273.m_skel;
+  v8 = v273.m_skel->m_floatSlots.m_size + 9 * v273.m_skel->m_bones.m_size;
   v9 = v8;
   if ( v8 )
   {
-    v275 = 48 * v8;
+    v271 = 48 * v8;
     v10 = (__m128 *)((__int64 (__fastcall *)(hkContainerHeapAllocator::Allocator *, int *, __int64, _QWORD))hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc)(
                       &hkContainerHeapAllocator::s_alloc,
-                      &v275,
+                      &v271,
                       v6,
                       0i64);
-    v8 = v275 / 48;
+    v8 = v271 / 48;
   }
   else
   {
     v10 = 0i64;
   }
-  v11 = 2147483648;
-  v272 = v10;
+  v11 = 0x80000000;
+  v268 = v10;
   if ( v8 )
     v11 = v8;
   v12 = v9;
-  v281 = v11;
-  if ( (signed int)v9 > 0 )
+  v277 = v11;
+  if ( (int)v9 > 0 )
   {
     v13 = v10;
     do
@@ -699,32 +677,32 @@ void __usercall hkaPredictiveCompressedAnimation::build(hkaPredictiveCompressedA
     }
     while ( v12 );
   }
-  v14 = 9 * v7->m_bones.m_size;
-  v32 = v7->m_floatSlots.m_size + v14 == 0;
-  v15 = v7->m_floatSlots.m_size + v14;
+  v14 = 9 * m_skel->m_bones.m_size;
+  v31 = m_skel->m_floatSlots.m_size + v14 == 0;
+  v15 = m_skel->m_floatSlots.m_size + v14;
   v16 = v15;
-  if ( v32 )
+  if ( v31 )
   {
     v17 = 0i64;
   }
   else
   {
-    v276 = 4 * v15;
+    v272 = 4 * v15;
     v17 = (_DWORD *)((__int64 (__fastcall *)(hkContainerHeapAllocator::Allocator *, int *, __m128 *, _QWORD))hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc)(
                       &hkContainerHeapAllocator::s_alloc,
-                      &v276,
+                      &v272,
                       v10,
                       0i64);
-    v15 = v276 / 4;
+    v15 = v272 / 4;
   }
-  v18 = 2147483648;
-  v264 = v17;
+  v18 = 0x80000000;
+  v260 = v17;
   if ( v15 )
     v18 = v15;
   v19 = 1i64;
-  v282 = v18;
+  v278 = v18;
   v20 = v16;
-  if ( (signed int)v16 > 0 )
+  if ( (int)v16 > 0 )
   {
     v21 = v17;
     do
@@ -736,12 +714,12 @@ void __usercall hkaPredictiveCompressedAnimation::build(hkaPredictiveCompressedA
     }
     while ( v20 );
   }
-  v22 = v277.m_anim;
-  if ( !v5->m_referenceFloats.m_size && v277.m_anim->m_numberOfFloatTracks > 0 )
+  m_anim = v273.m_anim;
+  if ( !skeleton->m_referenceFloats.m_size && v273.m_anim->m_numberOfFloatTracks > 0 )
   {
-    hkErrStream::hkErrStream((hkErrStream *)&v258.m_size, &buf, 512);
+    hkErrStream::hkErrStream((hkErrStream *)&v255.m_size, &buf, 512);
     hkOstream::operator<<(
-      (hkOstream *)&v258.m_size,
+      (hkOstream *)&v255.m_size,
       "Your skeleton does not have reference floats but your animation does have float tracks.  Predictive compression re"
       "quires reference floats.  You must re-export your assets.  Compression will proceed assuming zero for all reference floats.");
     hkError::messageWarning(
@@ -749,94 +727,90 @@ void __usercall hkaPredictiveCompressedAnimation::build(hkaPredictiveCompressedA
       (const char *)&buf,
       "Animation\\PredictiveCompressed\\hkaPredictiveCompressedAnimationCtor.cpp",
       347);
-    hkOstream::~hkOstream((hkOstream *)&v258.m_size);
+    hkOstream::~hkOstream((hkOstream *)&v255.m_size);
   }
   v23 = 0;
   v24 = 0i64;
-  if ( (signed int)v22->vfptr[4].__vecDelDtor((hkBaseObject *)&v22->vfptr, v19) > 0 )
+  if ( (__int64)m_anim->vfptr[4].__vecDelDtor(m_anim, v19) > 0 )
   {
     do
     {
-      v26 = v7->m_bones.m_size;
+      m_size = m_skel->m_bones.m_size;
       v27 = 0;
-      v28 = 9 * v26;
+      v28 = 9 * m_size;
       v29 = 0i64;
-      if ( 9 * v26 + v7->m_floatSlots.m_size > 0 )
+      if ( 9 * m_size + m_skel->m_floatSlots.m_size > 0 )
       {
-        v30 = v272;
+        v30 = v268;
         do
         {
           if ( v27 >= v28 )
-          {
-            v31 = v277.m_floatTrackFromSlot.m_data;
-            v32 = v277.m_floatTrackFromSlot.m_data[v29 - 9i64 * v26] == -1;
-          }
+            v31 = v273.m_floatTrackFromSlot.m_data[v29 - 9i64 * m_size] == -1;
           else
-          {
-            v31 = v277.m_floatTrackFromSlot.m_data;
-            v32 = v277.m_transformTrackFromBone.m_data[v27 / 9] == -1;
-          }
-          if ( !v32 )
+            v31 = v273.m_transformTrackFromBone.m_data[v27 / 9] == -1;
+          if ( !v31 )
           {
             if ( v27 >= v28 )
-              v33 = v22->m_floats.m_data[v24 * v22->m_numberOfFloatTracks + v31[v29 - 9i64 * v26]];
+              TransformChannel = m_anim->m_floats.m_data[v24 * m_anim->m_numberOfFloatTracks
+                                                       + v273.m_floatTrackFromSlot.m_data[v29 - 9i64 * m_size]];
             else
-              v33 = hkaPredictiveCompressedAnimationUtil::Remapper::getTransformChannel(
-                      &v22->m_transforms.m_data[v23 * v22->m_numberOfTransformTracks
-                                              + v277.m_transformTrackFromBone.m_data[v27 / 9]],
-                      v27 % 9);
-            *(float *)&v286 = v33;
-            v34 = _mm_shuffle_ps((__m128)LODWORD(v33), (__m128)LODWORD(v33), 0);
-            v35 = _mm_max_ps(v34, v30[1]);
-            *v30 = _mm_min_ps(v34, *v30);
+              TransformChannel = hkaPredictiveCompressedAnimationUtil::Remapper::getTransformChannel(
+                                   &m_anim->m_transforms.m_data[v23 * m_anim->m_numberOfTransformTracks
+                                                              + v273.m_transformTrackFromBone.m_data[v27 / 9]],
+                                   v27 % 9);
+            *(float *)&v282 = TransformChannel;
+            v33 = _mm_shuffle_ps((__m128)LODWORD(TransformChannel), (__m128)LODWORD(TransformChannel), 0);
+            v34 = _mm_min_ps(v33, *v30);
+            v35 = _mm_max_ps(v33, v30[1]);
+            *v30 = v34;
             v30[1] = v35;
           }
-          v26 = v7->m_bones.m_size;
+          m_size = m_skel->m_bones.m_size;
           ++v27;
-          v28 = 9 * v26;
+          v28 = 9 * m_size;
           ++v29;
           v30 += 3;
         }
-        while ( v27 < 9 * v26 + v7->m_floatSlots.m_size );
+        while ( v27 < 9 * m_size + m_skel->m_floatSlots.m_size );
       }
       ++v23;
       ++v24;
     }
-    while ( v23 < ((signed int (__fastcall *)(hkaInterleavedUncompressedAnimation *))v22->vfptr[4].__vecDelDtor)(v22) );
+    while ( v23 < ((int (__fastcall *)(hkaInterleavedUncompressedAnimation *))m_anim->vfptr[4].__vecDelDtor)(m_anim) );
   }
-  v36 = v7->m_bones.m_size;
-  v37 = v277.m_params;
+  v36 = m_skel->m_bones.m_size;
+  m_params = v273.m_params;
   v38 = 9 * v36;
   v39 = 0;
   v40 = 0i64;
-  if ( 9 * v36 + v7->m_floatSlots.m_size > 0 )
+  if ( 9 * v36 + m_skel->m_floatSlots.m_size > 0 )
   {
-    v41 = v264;
-    v42 = (__int64)&v272[1];
+    v41 = v260;
+    v42 = v268 + 1;
     do
     {
       if ( v39 >= v38 )
       {
-        v25 = (unsigned __int64)v277.m_floatTrackFromSlot.m_data;
-        v43 = v277.m_transformTrackFromBone.m_data;
-        v44 = v277.m_floatTrackFromSlot.m_data[v40 - 9i64 * v36] == -1;
+        m_data = (__int64)v273.m_floatTrackFromSlot.m_data;
+        v43 = v273.m_transformTrackFromBone.m_data;
+        v44 = v273.m_floatTrackFromSlot.m_data[v40 - 9i64 * v36] == -1;
       }
       else
       {
-        v43 = v277.m_transformTrackFromBone.m_data;
-        v25 = (unsigned __int64)v277.m_floatTrackFromSlot.m_data;
-        v44 = v277.m_transformTrackFromBone.m_data[v39 / 9] == -1;
+        v43 = v273.m_transformTrackFromBone.m_data;
+        m_data = (__int64)v273.m_floatTrackFromSlot.m_data;
+        v44 = v273.m_transformTrackFromBone.m_data[v39 / 9] == -1;
       }
       if ( !v44 )
       {
         if ( v39 >= v38 )
         {
-          v49 = *(signed int *)(v25 + 4 * (v40 - 9i64 * v36));
-          if ( v37->m_floatTrackIndexToPaletteIndex.m_size <= (signed int)v49 )
+          v49 = *(int *)(m_data + 4 * (v40 - 9i64 * v36));
+          if ( m_params->m_floatTrackIndexToPaletteIndex.m_size <= (int)v49 )
             v50 = 0;
           else
-            v50 = v37->m_floatTrackIndexToPaletteIndex.m_data[v49];
-          v46 = v37->m_parameterPalette.m_data[v50].m_staticFloatTolerance;
+            v50 = m_params->m_floatTrackIndexToPaletteIndex.m_data[v49];
+          m_staticFloatTolerance = m_params->m_parameterPalette.m_data[v50].m_staticFloatTolerance;
         }
         else
         {
@@ -845,92 +819,92 @@ void __usercall hkaPredictiveCompressedAnimation::build(hkaPredictiveCompressedA
           {
             if ( v39 % 9 >= 6 )
             {
-              if ( v37->m_trackIndexToPaletteIndex.m_size <= (signed int)v45 )
+              if ( m_params->m_trackIndexToPaletteIndex.m_size <= (int)v45 )
                 v48 = 0;
               else
-                v48 = v37->m_trackIndexToPaletteIndex.m_data[v45];
-              v46 = v37->m_parameterPalette.m_data[v48].m_staticScaleTolerance;
+                v48 = m_params->m_trackIndexToPaletteIndex.m_data[v45];
+              m_staticFloatTolerance = m_params->m_parameterPalette.m_data[v48].m_staticScaleTolerance;
             }
             else
             {
-              if ( v37->m_trackIndexToPaletteIndex.m_size <= (signed int)v45 )
+              if ( m_params->m_trackIndexToPaletteIndex.m_size <= (int)v45 )
                 v47 = 0;
               else
-                v47 = v37->m_trackIndexToPaletteIndex.m_data[v45];
-              v46 = v37->m_parameterPalette.m_data[v47].m_staticRotationTolerance;
+                v47 = m_params->m_trackIndexToPaletteIndex.m_data[v45];
+              m_staticFloatTolerance = m_params->m_parameterPalette.m_data[v47].m_staticRotationTolerance;
             }
           }
-          else if ( v37->m_trackIndexToPaletteIndex.m_size <= (signed int)v45 )
+          else if ( m_params->m_trackIndexToPaletteIndex.m_size <= (int)v45 )
           {
-            v46 = v37->m_parameterPalette.m_data->m_staticTranslationTolerance;
+            m_staticFloatTolerance = m_params->m_parameterPalette.m_data->m_staticTranslationTolerance;
           }
           else
           {
-            v46 = v37->m_parameterPalette.m_data[v37->m_trackIndexToPaletteIndex.m_data[v45]].m_staticTranslationTolerance;
+            m_staticFloatTolerance = m_params->m_parameterPalette.m_data[m_params->m_trackIndexToPaletteIndex.m_data[v45]].m_staticTranslationTolerance;
           }
         }
-        v51 = *(__m128 *)v42;
-        v52 = *(__m128 *)(v42 - 16);
-        *(float *)&v286 = v46;
-        v255 = 947913728;
+        v51 = *v42;
+        v52 = v42[-1];
+        *(float *)&v282 = m_staticFloatTolerance;
+        v252 = 947913728;
         v53 = _mm_sub_ps(v51, v52);
         v54 = _mm_max_ps(
-                _mm_shuffle_ps((__m128)LODWORD(v46), (__m128)LODWORD(v46), 0),
+                _mm_shuffle_ps((__m128)LODWORD(m_staticFloatTolerance), (__m128)LODWORD(m_staticFloatTolerance), 0),
                 _mm_mul_ps(
                   _mm_shuffle_ps((__m128)0x38800400u, (__m128)0x38800400u, 0),
                   _mm_mul_ps(v53, (__m128)xmmword_141A711B0)));
-        *(__m128 *)(v42 + 16) = v54;
-        v55 = 9 * v7->m_bones.m_size;
+        v42[1] = v54;
+        v55 = 9 * m_skel->m_bones.m_size;
         if ( v39 >= v55 )
         {
-          if ( v7->m_referenceFloats.m_size > v39 - v55 )
-            v56 = v7->m_referenceFloats.m_data[v39 - v55];
+          if ( m_skel->m_referenceFloats.m_size > v39 - v55 )
+            v56 = m_skel->m_referenceFloats.m_data[v39 - v55];
           else
             v56 = 0.0;
         }
         else
         {
           v56 = hkaPredictiveCompressedAnimationUtil::Remapper::getTransformChannel(
-                  &v7->m_referencePose.m_data[v39 / 9],
+                  &m_skel->m_referencePose.m_data[v39 / 9],
                   v39 % 9);
         }
-        *(float *)&v286 = v56;
-        LODWORD(v57) = (unsigned __int128)_mm_shuffle_ps((__m128)LODWORD(v56), (__m128)LODWORD(v56), 0);
+        *(float *)&v282 = v56;
+        LODWORD(v57) = _mm_shuffle_ps((__m128)LODWORD(v56), (__m128)LODWORD(v56), 0).m128_u32[0];
         if ( v53.m128_f32[0] >= (float)(v54.m128_f32[0] + v54.m128_f32[0]) )
           v58 = 2;
         else
           v58 = fmax(
-                  COERCE_FLOAT((unsigned int)(2 * COERCE_SIGNED_INT(v51.m128_f32[0] - v57)) >> 1),
-                  COERCE_FLOAT((unsigned int)(2 * COERCE_SIGNED_INT(v52.m128_f32[0] - v57)) >> 1)) < v54.m128_f32[0];
+                  COERCE_FLOAT((unsigned int)(2 * COERCE_INT(v51.m128_f32[0] - v57)) >> 1),
+                  COERCE_FLOAT((unsigned int)(2 * COERCE_INT(v52.m128_f32[0] - v57)) >> 1)) < v54.m128_f32[0];
         v41[v40] = v58;
-        v59 = hkaPredictiveCompressedAnimationUtil::Remapper::getDynamicTolerance(&v277, v39);
-        v268 = 947913728;
-        v60 = _mm_sub_ps(*(__m128 *)v42, *(__m128 *)(v42 - 16));
-        *(float *)&v286 = v59;
-        *(__m128 *)(v42 + 16) = _mm_max_ps(
-                                  _mm_shuffle_ps((__m128)(unsigned int)v286, (__m128)(unsigned int)v286, 0),
-                                  _mm_mul_ps(
-                                    _mm_mul_ps(v60, (__m128)xmmword_141A711B0),
-                                    _mm_shuffle_ps((__m128)0x38800400u, (__m128)0x38800400u, 0)));
+        DynamicTolerance = hkaPredictiveCompressedAnimationUtil::Remapper::getDynamicTolerance(&v273, v39);
+        v264 = 947913728;
+        v60 = _mm_sub_ps(*v42, v42[-1]);
+        *(float *)&v282 = DynamicTolerance;
+        v42[1] = _mm_max_ps(
+                   _mm_shuffle_ps((__m128)LODWORD(DynamicTolerance), (__m128)LODWORD(DynamicTolerance), 0),
+                   _mm_mul_ps(
+                     _mm_mul_ps(v60, (__m128)xmmword_141A711B0),
+                     _mm_shuffle_ps((__m128)0x38800400u, (__m128)0x38800400u, 0)));
       }
-      v36 = v7->m_bones.m_size;
+      v36 = m_skel->m_bones.m_size;
       ++v39;
       v38 = 9 * v36;
       ++v40;
-      v42 += 48i64;
+      v42 += 3;
     }
-    while ( v39 < 9 * v36 + v7->m_floatSlots.m_size );
+    while ( v39 < 9 * v36 + m_skel->m_floatSlots.m_size );
   }
-  v61 = v7->m_bones.m_size;
-  v62 = v277.m_transformTrackFromBone.m_data;
+  v61 = m_skel->m_bones.m_size;
+  v62 = v273.m_transformTrackFromBone.m_data;
   v63 = 0;
   if ( v61 > 0 )
   {
-    v25 = (unsigned __int64)v264;
-    v64 = v277.m_floatTrackFromSlot.m_data;
+    m_data = (__int64)v260;
+    v64 = v273.m_floatTrackFromSlot.m_data;
     v65 = 0i64;
     v66 = 0;
-    v67 = v264 + 3;
+    v67 = v260 + 3;
     do
     {
       if ( v66 >= 9 * v61 )
@@ -939,17 +913,15 @@ void __usercall hkaPredictiveCompressedAnimation::build(hkaPredictiveCompressedA
       }
       else
       {
-        v25 = (unsigned __int64)v264;
+        m_data = (__int64)v260;
         v68 = v62[v66 / 9] == -1;
       }
       if ( !v68 )
       {
-        v69 = 0;
-        if ( *v67 == 1 )
-          v69 = 1;
+        v69 = *v67 == 1;
         if ( v67[1] == 1 )
           ++v69;
-        if ( *(_DWORD *)(v25 + 4 * v65 + 20) == 1 )
+        if ( *(_DWORD *)(m_data + 4 * v65 + 20) == 1 )
           ++v69;
         if ( (unsigned int)(v69 - 1) <= 1 )
         {
@@ -965,7 +937,7 @@ void __usercall hkaPredictiveCompressedAnimation::build(hkaPredictiveCompressedA
           while ( v71 );
         }
       }
-      v61 = v7->m_bones.m_size;
+      v61 = m_skel->m_bones.m_size;
       ++v63;
       v66 += 9;
       v65 += 9i64;
@@ -973,11 +945,11 @@ void __usercall hkaPredictiveCompressedAnimation::build(hkaPredictiveCompressedA
     }
     while ( v63 < v61 );
   }
-  v72 = 2147483648;
-  array = 0i64;
-  v252 = 0;
-  v253 = 2147483648;
-  v73 = v7->m_bones.m_size;
+  m_capacityAndFlags = 0x80000000;
+  array.m_data = 0i64;
+  array.m_size = 0;
+  array.m_capacityAndFlags = 0x80000000;
+  v73 = m_skel->m_bones.m_size;
   v74 = 0;
   v75 = 0;
   v76 = 0;
@@ -985,7 +957,7 @@ void __usercall hkaPredictiveCompressedAnimation::build(hkaPredictiveCompressedA
   v78 = 0i64;
   if ( v73 > 0 )
   {
-    v79 = v277.m_floatTrackFromSlot.m_data;
+    v79 = v273.m_floatTrackFromSlot.m_data;
     v80 = 0;
     do
     {
@@ -995,384 +967,393 @@ void __usercall hkaPredictiveCompressedAnimation::build(hkaPredictiveCompressedA
       }
       else
       {
-        v25 = (unsigned int)((signed int)((unsigned __int64)(954437177i64 * v80) >> 32) >> 1);
+        m_data = (unsigned int)((int)((unsigned __int64)(954437177i64 * v80) >> 32) >> 1);
         v81 = v62[v80 / 9] == -1;
       }
       v82 = v76++;
-      v75 |= (!v81 != 0) << v82;
+      v75 |= !v81 << v82;
       if ( v76 == 16 )
       {
-        if ( v74 == (v72 & 0x3FFFFFFF) )
+        if ( v74 == (m_capacityAndFlags & 0x3FFFFFFF) )
         {
-          hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, 2);
-          v74 = v252;
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &array, 2);
+          v74 = array.m_size;
         }
         v76 = 0;
-        array[v74] = v75;
-        v72 = v253;
-        v74 = v252 + 1;
+        array.m_data[v74] = v75;
+        m_capacityAndFlags = array.m_capacityAndFlags;
+        v74 = array.m_size + 1;
         v75 = 0;
-        ++v252;
+        ++array.m_size;
       }
-      v73 = v7->m_bones.m_size;
+      v73 = m_skel->m_bones.m_size;
       ++v77;
       v80 += 9;
       ++v78;
     }
     while ( v77 < v73 );
-    v37 = v277.m_params;
+    m_params = v273.m_params;
     if ( v76 > 0 )
     {
-      if ( v74 == (v72 & 0x3FFFFFFF) )
+      if ( v74 == (m_capacityAndFlags & 0x3FFFFFFF) )
       {
-        hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, 2);
-        v74 = v252;
+        hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &array, 2);
+        v74 = array.m_size;
       }
       v76 = 0;
-      array[v74] = v75;
-      v72 = v253;
-      v74 = v252 + 1;
+      array.m_data[v74] = v75;
+      m_capacityAndFlags = array.m_capacityAndFlags;
+      v74 = array.m_size + 1;
       v75 = 0;
-      ++v252;
+      ++array.m_size;
     }
   }
   v83 = 0;
-  if ( v7->m_floatSlots.m_size > 0 )
+  if ( m_skel->m_floatSlots.m_size > 0 )
   {
-    v84 = v277.m_floatTrackFromSlot.m_data;
+    v84 = v273.m_floatTrackFromSlot.m_data;
     do
     {
-      v85 = v7->m_bones.m_size;
-      v25 = (unsigned int)(9 * v85 + v83);
-      if ( (signed int)v25 >= 9 * (signed int)v85 )
+      v85 = m_skel->m_bones.m_size;
+      m_data = (unsigned int)(9 * v85 + v83);
+      if ( (int)m_data >= 9 * (int)v85 )
       {
-        v86 = v84[(signed int)v25 - 9 * v85] == -1;
+        v86 = v84[(int)m_data - 9 * v85] == -1;
       }
       else
       {
-        v25 = (unsigned int)((signed int)((unsigned __int64)(954437177i64 * (signed int)v25) >> 32) >> 1);
-        v86 = v62[(signed int)(v25 + ((unsigned int)v25 >> 31))] == -1;
+        m_data = (unsigned int)((int)((unsigned __int64)(954437177i64 * (int)m_data) >> 32) >> 1);
+        v86 = v62[(int)(m_data + ((unsigned int)m_data >> 31))] == -1;
       }
       v87 = v76++;
-      v75 |= (!v86 != 0) << v87;
+      v75 |= !v86 << v87;
       if ( v76 == 16 )
       {
-        if ( v74 == (v72 & 0x3FFFFFFF) )
+        if ( v74 == (m_capacityAndFlags & 0x3FFFFFFF) )
         {
-          hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, 2);
-          v74 = v252;
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &array, 2);
+          v74 = array.m_size;
         }
         v76 = 0;
-        array[v74] = v75;
-        v72 = v253;
-        v74 = v252 + 1;
+        array.m_data[v74] = v75;
+        m_capacityAndFlags = array.m_capacityAndFlags;
+        v74 = array.m_size + 1;
         v75 = 0;
-        ++v252;
+        ++array.m_size;
       }
       ++v83;
     }
-    while ( v83 < v7->m_floatSlots.m_size );
-    v37 = v277.m_params;
+    while ( v83 < m_skel->m_floatSlots.m_size );
+    m_params = v273.m_params;
   }
   if ( v76 > 0 )
   {
-    if ( v74 == (v72 & 0x3FFFFFFF) )
+    if ( v74 == (m_capacityAndFlags & 0x3FFFFFFF) )
     {
-      hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &array, 2);
-      v74 = v252;
+      hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &array, 2);
+      v74 = array.m_size;
     }
-    array[v74] = v75;
-    ++v252;
+    array.m_data[v74] = v75;
+    ++array.m_size;
   }
   v88 = retaddr;
-  v250.m_data = 0i64;
-  v250.m_size = 0;
-  v250.m_capacityAndFlags = 2147483648;
-  v270.m_data = 0i64;
-  v270.m_size = 0;
+  v249.m_data = 0i64;
+  v249.m_size = 0;
+  v249.m_capacityAndFlags = 0x80000000;
+  v266.m_data = 0i64;
+  v266.m_size = 0;
   retaddr->m_firstFloatBlockScaleAndOffsetIndex = 0;
-  v270.m_capacityAndFlags = 2147483648;
-  v271.m_data = 0i64;
-  v271.m_size = 0;
-  v271.m_capacityAndFlags = 2147483648;
-  v273.m_data = 0i64;
-  v273.m_size = 0;
-  v273.m_capacityAndFlags = 2147483648;
-  v274.m_data = 0i64;
-  v274.m_size = 0;
-  v274.m_capacityAndFlags = 2147483648;
+  v266.m_capacityAndFlags = 0x80000000;
+  v267.m_data = 0i64;
+  v267.m_size = 0;
+  v267.m_capacityAndFlags = 0x80000000;
   v269.m_data = 0i64;
   v269.m_size = 0;
-  v269.m_capacityAndFlags = 2147483648;
-  v256.m_data = 0i64;
-  v256.m_size = 0;
-  v256.m_capacityAndFlags = 2147483648;
-  v257.m_data = 0i64;
-  v257.m_size = 0;
-  v257.m_capacityAndFlags = 2147483648;
-  v258.m_data = (float *)0x8000000000000000i64;
-  v89 = v7->m_bones.m_size;
+  v269.m_capacityAndFlags = 0x80000000;
+  v270.m_data = 0i64;
+  v270.m_size = 0;
+  v270.m_capacityAndFlags = 0x80000000;
+  v265.m_data = 0i64;
+  v265.m_size = 0;
+  v265.m_capacityAndFlags = 0x80000000;
+  v253.m_data = 0i64;
+  v253.m_size = 0;
+  v253.m_capacityAndFlags = 0x80000000;
+  v254.m_data = 0i64;
+  v254.m_size = 0;
+  v254.m_capacityAndFlags = 0x80000000;
+  v255.m_data = (float *)0x8000000000000000i64;
+  v89 = m_skel->m_bones.m_size;
   v90 = 0;
   v91 = 0;
   v92 = 0i64;
   v93 = 0;
-  LODWORD(v286) = 0;
+  LODWORD(v282) = 0;
   if ( v89 > 0 )
   {
     while ( 1 )
     {
-      v94 = v277.m_transformTrackFromBone.m_data;
+      v94 = v273.m_transformTrackFromBone.m_data;
       v95 = 9 * v93;
       if ( 9 * v93 >= 9 * v89 )
       {
-        v96 = v277.m_floatTrackFromSlot.m_data[v95 - 9i64 * v89] == -1;
+        v96 = v273.m_floatTrackFromSlot.m_data[v95 - 9i64 * v89] == -1;
       }
       else
       {
-        v25 = (unsigned int)((signed int)((unsigned __int64)(954437177i64 * v95) >> 32) >> 1);
-        v96 = v277.m_transformTrackFromBone.m_data[v95 / 9] == -1;
+        m_data = (unsigned int)((int)((unsigned __int64)(954437177i64 * v95) >> 32) >> 1);
+        v96 = v273.m_transformTrackFromBone.m_data[v95 / 9] == -1;
       }
       if ( !v96 )
         break;
-LABEL_170:
-      v89 = v7->m_bones.m_size;
-      LODWORD(v286) = ++v93;
+LABEL_168:
+      v89 = m_skel->m_bones.m_size;
+      LODWORD(v282) = ++v93;
       if ( v93 >= v89 )
       {
         v88 = retaddr;
-        goto LABEL_172;
+        goto LABEL_170;
       }
     }
     v97 = v95;
-    v98 = &v264[v95];
-    v25 = 9i64;
-    *(_QWORD *)&v267[0].m_enum = v95;
-    *(_QWORD *)&v266[0].m_enum = &v264[v95];
+    v98 = &v260[v95];
+    m_data = 9i64;
+    *(_QWORD *)&v263[0].m_enum = v95;
+    *(_QWORD *)&v262[0].m_enum = v98;
     *(_QWORD *)nframes = 9i64;
-    v99 = v272[3 * v95 + 1].m128_f32;
+    v99 = &v268[3 * v95 + 1];
     while ( 1 )
     {
       v100 = *v98;
-      LODWORD(v263) = v100;
+      LODWORD(v259) = v100;
       if ( v100 == 2 )
         break;
       if ( !v100 )
       {
-        v120 = (float)(*(v99 - 4) + *v99) * 0.5;
-        if ( LODWORD(v258.m_data) == (HIDWORD(v258.m_data) & 0x3FFFFFFF) )
-          hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v258, 4);
-        v258.m_data[SLODWORD(v258.m_data)] = v120;
-        ++LODWORD(v258.m_data);
-        v121 = v273.m_size;
-        if ( v273.m_size == (v273.m_capacityAndFlags & 0x3FFFFFFF) )
+        v120 = (float)(v99[-1].m128_f32[0] + v99->m128_f32[0]) * 0.5;
+        if ( LODWORD(v255.m_data) == (HIDWORD(v255.m_data) & 0x3FFFFFFF) )
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &v255, 4);
+        v255.m_data[SLODWORD(v255.m_data)] = v120;
+        ++LODWORD(v255.m_data);
+        v121 = v269.m_size;
+        if ( v269.m_size == (v269.m_capacityAndFlags & 0x3FFFFFFF) )
         {
-          hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v273, 2);
-          v121 = v273.m_size;
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &v269, 2);
+          v121 = v269.m_size;
         }
-        v273.m_data[v121] = v95 % 9 + 12 * (v95 / 9) + v95 % 9 / 3;
-        ++v273.m_size;
-        v92 = (unsigned int)v269.m_size;
-LABEL_161:
-        v93 = v286;
-        if ( v95 < 9 * v7->m_bones.m_size
+        v269.m_data[v121] = v95 % 9 + 12 * (v95 / 9) + v95 % 9 / 3;
+        ++v269.m_size;
+        v92 = (unsigned int)v265.m_size;
+LABEL_159:
+        v93 = v282;
+        if ( v95 < 9 * m_skel->m_bones.m_size
           && (unsigned int)(v95 % 9 - 3) <= 2
-          && (!(_DWORD)v92 || v269.m_data[(signed int)v92 - 1] != (_DWORD)v286) )
+          && (!(_DWORD)v92 || v265.m_data[(int)v92 - 1] != (_DWORD)v282) )
         {
-          if ( (_DWORD)v92 == (v269.m_capacityAndFlags & 0x3FFFFFFF) )
+          if ( (_DWORD)v92 == (v265.m_capacityAndFlags & 0x3FFFFFFF) )
           {
-            hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v269, 2);
-            LODWORD(v92) = v269.m_size;
+            hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &v265, 2);
+            LODWORD(v92) = v265.m_size;
           }
-          v269.m_data[(signed int)v92] = v93;
-          v92 = (unsigned int)(v269.m_size++ + 1);
+          v265.m_data[(int)v92] = v93;
+          v92 = (unsigned int)++v265.m_size;
         }
-        v25 = *(_QWORD *)nframes;
-        v97 = *(_QWORD *)&v267[0].m_enum;
-        v98 = *(int **)&v266[0].m_enum;
-        goto LABEL_169;
+        m_data = *(_QWORD *)nframes;
+        v97 = *(_QWORD *)&v263[0].m_enum;
+        v98 = *(int **)&v262[0].m_enum;
+        goto LABEL_167;
       }
-LABEL_160:
+LABEL_158:
       if ( v100 != 1 )
-        goto LABEL_161;
-LABEL_169:
-      v94 = v277.m_transformTrackFromBone.m_data;
+        goto LABEL_159;
+LABEL_167:
+      v94 = v273.m_transformTrackFromBone.m_data;
       ++v97;
       ++v98;
       ++v95;
-      v99 += 12;
-      --v25;
-      *(_QWORD *)&v267[0].m_enum = v97;
-      *(_QWORD *)&v266[0].m_enum = v98;
-      *(_QWORD *)nframes = v25;
-      if ( !v25 )
-        goto LABEL_170;
+      v99 += 3;
+      --m_data;
+      *(_QWORD *)&v263[0].m_enum = v97;
+      *(_QWORD *)&v262[0].m_enum = v98;
+      *(_QWORD *)nframes = m_data;
+      if ( !m_data )
+        goto LABEL_168;
     }
-    if ( v95 >= 9 * v7->m_bones.m_size
-      || (v101 = v95 % 9, (unsigned int)(v95 % 9 - 3) > 2)
-      || ((v102 = v94[v95 / 9], v101 >= 3) ? (v101 >= 6 ? (v37->m_trackIndexToPaletteIndex.m_size <= (signed int)v102 ? (v106 = 0) : (v106 = v37->m_trackIndexToPaletteIndex.m_data[v102]),
-                                                           v104 = v37->m_parameterPalette.m_data[v106].m_dynamicScaleTolerance) : (v37->m_trackIndexToPaletteIndex.m_size <= (signed int)v102 ? (v105 = 0) : (v105 = v37->m_trackIndexToPaletteIndex.m_data[v102]), v104 = v37->m_parameterPalette.m_data[v105].m_dynamicRotationTolerance)) : (v37->m_trackIndexToPaletteIndex.m_size <= (signed int)v102 ? (v103 = 0) : (v103 = v37->m_trackIndexToPaletteIndex.m_data[v102]), v104 = v37->m_parameterPalette.m_data[v103].m_dynamicTranslationTolerance),
-          v104 != 0.0) )
+    if ( v95 < 9 * m_skel->m_bones.m_size
+      && (v101 = v95 % 9, (unsigned int)(v95 % 9 - 3) <= 2)
+      && ((v102 = v94[v95 / 9], v101 >= 3)
+        ? (v101 >= 6
+         ? (m_params->m_trackIndexToPaletteIndex.m_size <= (int)v102
+          ? (v106 = 0)
+          : (v106 = m_params->m_trackIndexToPaletteIndex.m_data[v102]),
+            m_dynamicScaleTolerance = m_params->m_parameterPalette.m_data[v106].m_dynamicScaleTolerance)
+         : (m_params->m_trackIndexToPaletteIndex.m_size <= (int)v102
+          ? (v105 = 0)
+          : (v105 = m_params->m_trackIndexToPaletteIndex.m_data[v102]),
+            m_dynamicScaleTolerance = m_params->m_parameterPalette.m_data[v105].m_dynamicRotationTolerance))
+        : (m_params->m_trackIndexToPaletteIndex.m_size <= (int)v102
+         ? (v103 = 0)
+         : (v103 = m_params->m_trackIndexToPaletteIndex.m_data[v102]),
+           m_dynamicScaleTolerance = m_params->m_parameterPalette.m_data[v103].m_dynamicTranslationTolerance),
+          m_dynamicScaleTolerance == 0.0) )
     {
-      v109 = v99[4] + v99[4];
-      v110 = (float)(*(v99 - 4) + *v99) * 0.5;
-      if ( v256.m_size == (v256.m_capacityAndFlags & 0x3FFFFFFF) )
-        hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v256, 4);
-      v256.m_data[v256.m_size] = v109;
-      v111 = v257.m_size;
-      ++v256.m_size;
-      if ( v257.m_size == (v257.m_capacityAndFlags & 0x3FFFFFFF) )
+      *v98 = 3;
+      v107 = v91;
+      v99[-1] = g_vectorfConstants[0];
+      v252 = 947913728;
+      ++v91;
+      LODWORD(v259) = 3;
+      *(hkVector4f *)v99 = (hkVector4f)query.m_quad;
+      v90 |= 1 << v107;
+      v99[1] = _mm_max_ps(
+                 aabbOut.m_quad,
+                 _mm_mul_ps(
+                   _mm_mul_ps(_mm_sub_ps(query.m_quad, v99[-1]), (__m128)xmmword_141A711B0),
+                   _mm_shuffle_ps((__m128)0x38800400u, (__m128)0x38800400u, 0)));
+      if ( v91 != 16 )
       {
-        hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v257, 4);
-        v111 = v257.m_size;
+LABEL_153:
+        v113 = v266.m_size;
+        if ( v266.m_size == (v266.m_capacityAndFlags & 0x3FFFFFFF) )
+        {
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &v266, 2);
+          v113 = v266.m_size;
+        }
+        v266.m_data[v113] = v95 % 9 + 12 * (v95 / 9) + v95 % 9 / 3;
+        ++v266.m_size;
+        v92 = (unsigned int)v265.m_size;
+        v98 = *(int **)&v262[0].m_enum;
+        v93 = v282;
+        m_data = *(_QWORD *)nframes;
+        if ( !(v266.m_size % 16) )
+          retaddr->m_firstFloatBlockScaleAndOffsetIndex = v253.m_size;
+        v100 = v259;
+        v97 = *(_QWORD *)&v263[0].m_enum;
+        goto LABEL_158;
       }
-      v257.m_data[v111] = v110;
-      ++v257.m_size;
-      if ( ++v91 != 16 )
-        goto LABEL_155;
-      v112 = v250.m_size;
-      if ( v250.m_size == (v250.m_capacityAndFlags & 0x3FFFFFFF) )
+      v108 = v249.m_size;
+      if ( v249.m_size == (v249.m_capacityAndFlags & 0x3FFFFFFF) )
       {
-        hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v250, 2);
-        v112 = v250.m_size;
+        hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &v249, 2);
+        v108 = v249.m_size;
       }
-      v250.m_data[v112] = v90;
+      v249.m_data[v108] = v90;
       v90 = 0;
     }
     else
     {
-      *v98 = 3;
-      v107 = v91;
-      *((__m128 *)v99 - 1) = g_vectorfConstants[0];
-      v255 = 947913728;
-      ++v91;
-      LODWORD(v263) = 3;
-      *(hkVector4f *)v99 = (hkVector4f)query.m_quad;
-      v90 |= 1 << v107;
-      *((__m128 *)v99 + 1) = _mm_max_ps(
-                               aabbOut.m_quad,
-                               _mm_mul_ps(
-                                 _mm_mul_ps(
-                                   _mm_sub_ps(query.m_quad, *(__m128 *)((char *)v99 - 16)),
-                                   (__m128)xmmword_141A711B0),
-                                 _mm_shuffle_ps((__m128)0x38800400u, (__m128)0x38800400u, 0)));
-      if ( v91 != 16 )
+      v109 = v99[1].m128_f32[0] + v99[1].m128_f32[0];
+      v110 = (float)(v99[-1].m128_f32[0] + v99->m128_f32[0]) * 0.5;
+      if ( v253.m_size == (v253.m_capacityAndFlags & 0x3FFFFFFF) )
+        hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &v253, 4);
+      v253.m_data[v253.m_size] = v109;
+      v111 = v254.m_size;
+      ++v253.m_size;
+      if ( v254.m_size == (v254.m_capacityAndFlags & 0x3FFFFFFF) )
       {
-LABEL_155:
-        v113 = v270.m_size;
-        if ( v270.m_size == (v270.m_capacityAndFlags & 0x3FFFFFFF) )
-        {
-          hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v270, 2);
-          v113 = v270.m_size;
-        }
-        v270.m_data[v113] = v95 % 9 + 12 * (v95 / 9) + v95 % 9 / 3;
-        ++v270.m_size;
-        v92 = (unsigned int)v269.m_size;
-        v98 = *(int **)&v266[0].m_enum;
-        v93 = v286;
-        v25 = *(_QWORD *)nframes;
-        if ( !(v270.m_size % 16) )
-          retaddr->m_firstFloatBlockScaleAndOffsetIndex = v256.m_size;
-        v100 = v263;
-        v97 = *(_QWORD *)&v267[0].m_enum;
-        goto LABEL_160;
+        hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &v254, 4);
+        v111 = v254.m_size;
       }
-      v108 = v250.m_size;
-      if ( v250.m_size == (v250.m_capacityAndFlags & 0x3FFFFFFF) )
+      v254.m_data[v111] = v110;
+      ++v254.m_size;
+      if ( ++v91 != 16 )
+        goto LABEL_153;
+      v112 = v249.m_size;
+      if ( v249.m_size == (v249.m_capacityAndFlags & 0x3FFFFFFF) )
       {
-        hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v250, 2);
-        v108 = v250.m_size;
+        hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &v249, 2);
+        v112 = v249.m_size;
       }
-      v250.m_data[v108] = v90;
+      v249.m_data[v112] = v90;
       v90 = 0;
     }
-    ++v250.m_size;
+    ++v249.m_size;
     v91 = 0;
-    goto LABEL_155;
+    goto LABEL_153;
   }
-LABEL_172:
-  v32 = v7->m_floatSlots.m_size == 0;
-  v114 = v7->m_floatSlots.m_size < 0;
-  LODWORD(v286) = v270.m_size;
+LABEL_170:
+  v114 = m_skel->m_floatSlots.m_size <= 0;
+  LODWORD(v282) = v266.m_size;
   v115 = 0;
-  if ( !v114 && !v32 )
+  if ( !v114 )
   {
-    v116 = (float *)v272;
+    v116 = (float *)v268;
     do
     {
-      v117 = v7->m_bones.m_size;
+      v117 = m_skel->m_bones.m_size;
       v92 = (unsigned int)(v115 + 9 * v117);
-      if ( (signed int)v92 >= 9 * (signed int)v117 )
+      if ( (int)v92 >= 9 * (int)v117 )
       {
-        v119 = (signed int)v92 - 9 * v117;
-        v118 = v277.m_floatTrackFromSlot.m_data;
+        v119 = (int)v92 - 9 * v117;
+        v118 = v273.m_floatTrackFromSlot.m_data;
       }
       else
       {
-        v118 = v277.m_transformTrackFromBone.m_data;
-        v25 = (unsigned int)((signed int)((unsigned __int64)(954437177i64 * (signed int)v92) >> 32) >> 1);
-        v119 = (signed int)v92 / 9;
+        v118 = v273.m_transformTrackFromBone.m_data;
+        m_data = (unsigned int)((int)((unsigned __int64)(954437177i64 * (int)v92) >> 32) >> 1);
+        v119 = (int)v92 / 9;
       }
       if ( v118[v119] != -1 )
       {
-        v122 = v264[(signed int)v92];
+        v122 = v260[(int)v92];
         if ( v122 == 2 )
         {
-          v123 = v116[12 * (signed int)v92 + 8] + v116[12 * (signed int)v92 + 8];
-          v124 = (float)(v116[12 * (signed int)v92 + 4] + v116[12 * (signed int)v92]) * 0.5;
-          if ( v256.m_size == (v256.m_capacityAndFlags & 0x3FFFFFFF) )
-            hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v256, 4);
-          v256.m_data[v256.m_size] = v123;
-          v125 = v257.m_size;
-          ++v256.m_size;
-          if ( v257.m_size == (v257.m_capacityAndFlags & 0x3FFFFFFF) )
+          v123 = v116[12 * (int)v92 + 8] + v116[12 * (int)v92 + 8];
+          v124 = (float)(v116[12 * (int)v92 + 4] + v116[12 * (int)v92]) * 0.5;
+          if ( v253.m_size == (v253.m_capacityAndFlags & 0x3FFFFFFF) )
+            hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &v253, 4);
+          v253.m_data[v253.m_size] = v123;
+          v125 = v254.m_size;
+          ++v253.m_size;
+          if ( v254.m_size == (v254.m_capacityAndFlags & 0x3FFFFFFF) )
           {
-            hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v257, 4);
-            v125 = v257.m_size;
+            hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &v254, 4);
+            v125 = v254.m_size;
           }
-          v257.m_data[v125] = v124;
-          ++v257.m_size;
+          v254.m_data[v125] = v124;
+          ++v254.m_size;
           if ( ++v91 == 16 )
           {
-            v126 = v250.m_size;
-            if ( v250.m_size == (v250.m_capacityAndFlags & 0x3FFFFFFF) )
+            v126 = v249.m_size;
+            if ( v249.m_size == (v249.m_capacityAndFlags & 0x3FFFFFFF) )
             {
-              hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v250, 2);
-              v126 = v250.m_size;
+              hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &v249, 2);
+              v126 = v249.m_size;
             }
             v91 = 0;
-            v250.m_data[v126] = v90;
-            ++v250.m_size;
+            v249.m_data[v126] = v90;
+            ++v249.m_size;
             v90 = 0;
           }
-          v127 = v271.m_size;
-          if ( v271.m_size == (v271.m_capacityAndFlags & 0x3FFFFFFF) )
+          v127 = v267.m_size;
+          if ( v267.m_size == (v267.m_capacityAndFlags & 0x3FFFFFFF) )
           {
-            hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v271, 2);
-            v127 = v271.m_size;
+            hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &v267, 2);
+            v127 = v267.m_size;
           }
-          v271.m_data[v127] = v115;
-          ++v271.m_size;
+          v267.m_data[v127] = v115;
+          ++v267.m_size;
         }
         else if ( !v122 )
         {
-          v128 = (float)(v116[12 * (signed int)v92 + 4] + v116[12 * (signed int)v92]) * 0.5;
-          if ( LODWORD(v258.m_data) == (HIDWORD(v258.m_data) & 0x3FFFFFFF) )
-            hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v258, 4);
-          v258.m_data[SLODWORD(v258.m_data)] = v128;
-          v129 = v274.m_size;
-          ++LODWORD(v258.m_data);
-          if ( v274.m_size == (v274.m_capacityAndFlags & 0x3FFFFFFF) )
+          v128 = (float)(v116[12 * (int)v92 + 4] + v116[12 * (int)v92]) * 0.5;
+          if ( LODWORD(v255.m_data) == (HIDWORD(v255.m_data) & 0x3FFFFFFF) )
+            hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &v255, 4);
+          v255.m_data[SLODWORD(v255.m_data)] = v128;
+          v129 = v270.m_size;
+          ++LODWORD(v255.m_data);
+          if ( v270.m_size == (v270.m_capacityAndFlags & 0x3FFFFFFF) )
           {
-            hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v274, 2);
-            v129 = v274.m_size;
+            hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &v270, 2);
+            v129 = v270.m_size;
           }
-          v274.m_data[v129] = v115;
-          ++v274.m_size;
+          v270.m_data[v129] = v115;
+          ++v270.m_size;
         }
       }
       ++v115;
     }
-    while ( v115 < v7->m_floatSlots.m_size );
+    while ( v115 < m_skel->m_floatSlots.m_size );
   }
   if ( v91 > 0 )
   {
@@ -1383,740 +1364,722 @@ LABEL_172:
       if ( v91 == 16 )
         break;
       if ( v91 <= 0 )
-        goto LABEL_210;
+        goto LABEL_208;
     }
-    if ( v250.m_size == (v250.m_capacityAndFlags & 0x3FFFFFFF) )
-      hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v250, 2);
-    v250.m_data[v250.m_size] = v90;
-    ++v250.m_size;
+    if ( v249.m_size == (v249.m_capacityAndFlags & 0x3FFFFFFF) )
+      hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &v249, 2);
+    v249.m_data[v249.m_size++] = v90;
   }
-LABEL_210:
-  v131 = v277.m_anim;
+LABEL_208:
+  v131 = v273.m_anim;
   *(_QWORD *)v88->m_intArrayOffsets = -1i64;
   *(_QWORD *)&v88->m_intArrayOffsets[2] = -1i64;
   *(_QWORD *)&v88->m_intArrayOffsets[4] = -1i64;
   *(_QWORD *)&v88->m_intArrayOffsets[6] = -1i64;
   v88->m_intArrayOffsets[8] = -1;
   *(_QWORD *)v88->m_floatArrayOffsets = -1i64;
-  arr.m_capacityAndFlags = 2147483648;
+  arr.m_capacityAndFlags = 0x80000000;
   v88->m_floatArrayOffsets[2] = -1;
   arr.m_data = 0i64;
   arr.m_size = 0;
-  v261.m_data = 0i64;
-  v261.m_size = 0;
-  v261.m_capacityAndFlags = 2147483648;
-  v132 = v131->vfptr;
-  v268 = 0;
+  v257.m_data = 0i64;
+  v257.m_size = 0;
+  v257.m_capacityAndFlags = 0x80000000;
+  vfptr = v131->vfptr;
+  v264 = 0;
   v133 = 0;
-  v255 = 0;
-  if ( ((signed int (__fastcall *)(hkaInterleavedUncompressedAnimation *, unsigned __int64, __int64))v132[4].__vecDelDtor)(
+  v252 = 0;
+  if ( ((int (__fastcall *)(hkaInterleavedUncompressedAnimation *, __int64, __int64))vfptr[4].__vecDelDtor)(
          v131,
-         v25,
+         m_data,
          v92) > 0 )
   {
     do
     {
       v134 = ((__int64 (__fastcall *)(hkaInterleavedUncompressedAnimation *))v131->vfptr[4].__vecDelDtor)(v131);
       v135 = 16;
-      v260 = 2147483648;
+      HIDWORD(v256) = 0x80000000;
       v136 = v134 - v133;
       if ( v136 < 16 )
         v135 = v136;
       v137 = 0;
       nframes[0] = v135;
       v138 = 0i64;
-      *(_QWORD *)&v258.m_size = 0i64;
-      v259 = 0;
+      *(_QWORD *)&v255.m_size = 0i64;
+      LODWORD(v256) = 0;
       if ( v135 <= 0 )
       {
-        result.m_enum = 0;
+        result.m_enum = HK_SUCCESS;
       }
       else
       {
-        v139 = v135;
-        if ( v135 < 0 )
-          v139 = 0;
-        hkArrayUtil::_reserve(
-          &result,
-          (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr,
-          &v258.m_size,
-          v139,
-          16);
-        v137 = v259;
-        v138 = *(_QWORD *)&v258.m_size;
+        hkArrayUtil::_reserve(&result, &hkContainerTempAllocator::s_alloc, &v255.m_size, v135, 16);
+        v137 = v256;
+        v138 = *(_QWORD *)&v255.m_size;
       }
-      v140 = v135;
-      v278 = v135;
-      v141 = v137 - v135 - 1;
+      v139 = v135;
+      v274 = v135;
+      v140 = v137 - v135 - 1;
       if ( v137 - v135 - 1 >= 0 )
       {
-        v142 = (int *)(16 * v141 + 16i64 * v135 + 12 + v138);
+        v141 = (int *)(16 * v140 + 16i64 * v135 + 12 + v138);
         do
         {
-          v143 = *v142;
-          *(v142 - 1) = 0;
-          if ( v143 >= 0 )
+          v142 = *v141;
+          *(v141 - 1) = 0;
+          if ( v142 >= 0 )
             hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-              (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-              *(void **)(v142 - 3),
-              2 * (v143 & 0x3FFFFFFF));
-          *(_QWORD *)(v142 - 3) = 0i64;
-          *v142 = 2147483648;
-          v142 -= 4;
-          --v141;
+              &hkContainerTempAllocator::s_alloc,
+              *(void **)(v141 - 3),
+              2 * (v142 & 0x3FFFFFFF));
+          *(_QWORD *)(v141 - 3) = 0i64;
+          *v141 = 0x80000000;
+          v141 -= 4;
+          --v140;
         }
-        while ( v141 >= 0 );
-        v137 = v259;
-        v138 = *(_QWORD *)&v258.m_size;
+        while ( v140 >= 0 );
+        v137 = v256;
+        v138 = *(_QWORD *)&v255.m_size;
       }
-      v144 = v135 - v137;
-      v145 = v138 + 16i64 * v137;
-      v146 = v135 - v137;
-      if ( v144 > 0 )
+      v143 = v135 - v137;
+      v144 = v138 + 16i64 * v137;
+      v145 = v135 - v137;
+      if ( v143 > 0 )
       {
         do
         {
-          if ( v145 )
+          if ( v144 )
           {
-            *(_QWORD *)v145 = 0i64;
-            *(_DWORD *)(v145 + 8) = 0;
-            *(_DWORD *)(v145 + 12) = 2147483648;
+            *(_QWORD *)v144 = 0i64;
+            *(_DWORD *)(v144 + 8) = 0;
+            *(_DWORD *)(v144 + 12) = 0x80000000;
           }
-          v145 += 16i64;
-          --v146;
+          v144 += 16i64;
+          --v145;
         }
-        while ( v146 );
-        v138 = *(_QWORD *)&v258.m_size;
+        while ( v145 );
+        v138 = *(_QWORD *)&v255.m_size;
       }
-      v259 = v135;
+      LODWORD(v256) = v135;
       if ( v135 > 0 )
       {
-        v147 = 0i64;
-        v148 = v135;
-        v283 = v135;
-        v263 = 0i64;
-        v149 = v133;
+        v146 = 0i64;
+        v147 = v135;
+        v279 = v135;
+        v259 = 0i64;
+        v148 = v133;
         do
         {
-          v146 = (unsigned int)v7->m_bones.m_size;
-          v150 = (_DWORD *)(v147 + v138);
-          v151 = 9 * v146;
-          v152 = 0;
-          v153 = 0i64;
-          if ( 9 * (signed int)v146 + v7->m_floatSlots.m_size > 0 )
+          v145 = (unsigned int)m_skel->m_bones.m_size;
+          v149 = (_DWORD *)(v146 + v138);
+          v150 = 9 * v145;
+          v151 = 0;
+          v152 = 0i64;
+          if ( 9 * (int)v145 + m_skel->m_floatSlots.m_size > 0 )
           {
-            v154 = v272 + 2;
+            v153 = v268 + 2;
             do
             {
-              if ( v152 >= v151 )
+              if ( v151 >= v150 )
               {
-                v156 = v153 - 9i64 * (signed int)v146;
-                v155 = v277.m_floatTrackFromSlot.m_data;
+                v155 = v152 - 9i64 * (int)v145;
+                v154 = v273.m_floatTrackFromSlot.m_data;
               }
               else
               {
-                v155 = v277.m_transformTrackFromBone.m_data;
-                v156 = v152 / 9;
+                v154 = v273.m_transformTrackFromBone.m_data;
+                v155 = v151 / 9;
               }
-              if ( v155[v156] != -1 && (unsigned int)(v264[v153] - 2) <= 1 )
+              if ( v154[v155] != -1 && (unsigned int)(v260[v152] - 2) <= 1 )
               {
-                *(float *)&v157 = hkaPredictiveCompressedAnimationUtil::Remapper::frameValue(&v277, v149, v152);
-                v158 = *v154;
-                v254 = v157;
-                v159 = (__m128i)_mm_add_ps(v158, v158);
-                v160 = _mm_cmpeqps((__m128)0i64, (__m128)v159);
-                v161 = _mm_mul_ps(
+                *(float *)&v156 = hkaPredictiveCompressedAnimationUtil::Remapper::frameValue(&v273, v148, v151);
+                v157 = *v153;
+                v251 = v156;
+                v158 = (__m128i)_mm_add_ps(v157, v157);
+                v159 = _mm_cmpeq_ps((__m128)0i64, (__m128)v158);
+                v160 = _mm_mul_ps(
                          _mm_or_ps(
                            _mm_and_ps(
-                             _mm_xor_ps((__m128)_mm_slli_epi32(_mm_srli_epi32(v159, 0x1Fu), 0x1Fu), (__m128)_xmm),
-                             v160),
-                           _mm_andnot_ps(v160, _mm_div_ps(query.m_quad, (__m128)v159))),
+                             _mm_xor_ps((__m128)_mm_slli_epi32(_mm_srli_epi32(v158, 0x1Fu), 0x1Fu), (__m128)_xmm),
+                             v159),
+                           _mm_andnot_ps(v159, _mm_div_ps(query.m_quad, (__m128)v158))),
                          _mm_sub_ps(
-                           _mm_shuffle_ps((__m128)v254, (__m128)v254, 0),
-                           _mm_mul_ps(_mm_add_ps(v154[-2], v154[-1]), (__m128)xmmword_141A711B0)));
-                v162 = _mm_cvtsi128_si32(
+                           _mm_shuffle_ps((__m128)v251, (__m128)v251, 0),
+                           _mm_mul_ps(_mm_add_ps(v153[-2], v153[-1]), (__m128)xmmword_141A711B0)));
+                v161 = _mm_cvtsi128_si32(
                          _mm_cvttps_epi32(
                            _mm_add_ps(
                              _mm_xor_ps(
                                (__m128)_mm_slli_epi32(
-                                         _mm_srli_epi32((__m128i)_mm_cmpltps(v161, (__m128)0i64), 0x1Fu),
+                                         _mm_srli_epi32((__m128i)_mm_cmplt_ps(v160, (__m128)0i64), 0x1Fu),
                                          0x1Fu),
                                (__m128)xmmword_141A711B0),
-                             v161)));
-                if ( v162 >= -8191 )
+                             v160)));
+                if ( v161 >= -8191 )
                 {
-                  if ( v162 > 0x1FFF )
-                    LOWORD(v162) = 0x1FFF;
+                  if ( v161 > 0x1FFF )
+                    LOWORD(v161) = 0x1FFF;
                 }
                 else
                 {
-                  LOWORD(v162) = -8191;
+                  LOWORD(v161) = -8191;
                 }
-                if ( v150[2] == (v150[3] & 0x3FFFFFFF) )
-                  hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, v150, 2);
-                *(_WORD *)(*(_QWORD *)v150 + 2i64 * (signed int)v150[2]++) = v162;
+                if ( v149[2] == (v149[3] & 0x3FFFFFFF) )
+                  hkArrayUtil::_reserveMore(&hkContainerTempAllocator::s_alloc, v149, 2);
+                *(_WORD *)(*(_QWORD *)v149 + 2i64 * (int)v149[2]++) = v161;
               }
-              v146 = (unsigned int)v7->m_bones.m_size;
+              v145 = (unsigned int)m_skel->m_bones.m_size;
+              ++v151;
+              v150 = 9 * v145;
               ++v152;
-              v151 = 9 * v146;
-              ++v153;
-              v154 += 3;
+              v153 += 3;
             }
-            while ( v152 < 9 * (signed int)v146 + v7->m_floatSlots.m_size );
-            v138 = *(_QWORD *)&v258.m_size;
-            v148 = v283;
+            while ( v151 < 9 * (int)v145 + m_skel->m_floatSlots.m_size );
+            v138 = *(_QWORD *)&v255.m_size;
+            v147 = v279;
           }
-          ++v149;
-          v147 = v263 + 16;
-          v283 = --v148;
-          v263 += 16i64;
+          ++v148;
+          v146 = v259 + 16;
+          v279 = --v147;
+          v259 += 16i64;
         }
-        while ( v148 );
-        v140 = v278;
+        while ( v147 );
+        v139 = v274;
       }
-      v164 = 0;
-      v165 = 0i64;
-      v254 = *(_DWORD *)(v138 + 8);
-      v163 = v254;
-      LODWORD(v263) = 0;
-      v278 = (signed int)v254;
-      if ( (signed int)v254 > 0 )
+      v163 = 0;
+      v164 = 0i64;
+      v251 = *(_DWORD *)(v138 + 8);
+      v162 = v251;
+      LODWORD(v259) = 0;
+      v274 = (int)v251;
+      if ( (int)v251 > 0 )
       {
-        v166 = retaddr;
-        v167 = nframes[0];
-        v168 = &retaddr->m_compressedData;
+        v165 = retaddr;
+        v166 = nframes[0];
+        p_m_compressedData = &retaddr->m_compressedData;
         while ( 1 )
         {
-          v169 = 16;
-          if ( v163 < 16 )
-            v169 = v163;
-          if ( (signed int)v286 >= v165 && (signed int)v286 < v169 + v164 )
+          v168 = 16;
+          if ( v162 < 16 )
+            v168 = v162;
+          if ( (int)v282 >= v164 && (int)v282 < v168 + v163 )
           {
-            v170 = v261.m_size;
-            v171 = v166->m_compressedData.m_size - v268;
-            if ( v261.m_size == (v261.m_capacityAndFlags & 0x3FFFFFFF) )
+            v169 = v257.m_size;
+            v170 = v165->m_compressedData.m_size - v264;
+            if ( v257.m_size == (v257.m_capacityAndFlags & 0x3FFFFFFF) )
             {
-              hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v261, 2);
-              v170 = v261.m_size;
+              hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &v257, 2);
+              v169 = v257.m_size;
             }
-            v261.m_data[v170] = v171;
-            v172 = v261.m_size + 1;
-            v173 = v171 >> 16;
-            v261.m_size = v172;
-            if ( v172 == (v261.m_capacityAndFlags & 0x3FFFFFFF) )
+            v257.m_data[v169] = v170;
+            v171 = v257.m_size + 1;
+            v172 = HIWORD(v170);
+            v257.m_size = v171;
+            if ( v171 == (v257.m_capacityAndFlags & 0x3FFFFFFF) )
             {
-              hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v261, 2);
-              v172 = v261.m_size;
+              hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &v257, 2);
+              v171 = v257.m_size;
             }
-            v261.m_data[v172] = v173;
-            ++v261.m_size;
-            v138 = *(_QWORD *)&v258.m_size;
+            v257.m_data[v171] = v172;
+            ++v257.m_size;
+            v138 = *(_QWORD *)&v255.m_size;
           }
-          if ( v167 < 16 || v169 < 16 )
+          if ( v166 < 16 || v168 < 16 )
           {
-            v174 = (char *)&buf;
-            v175 = 31;
+            p_buf = &buf;
+            for ( i = 31; i >= 0; --i )
+            {
+              v175 = p_buf;
+              p_buf = (hkaPredictiveBlockCompression::Block *)((char *)p_buf + 16);
+              *(_OWORD *)&v175->data[0][0] = 0i64;
+            }
+          }
+          v176 = v168;
+          if ( v168 > 0 )
+          {
+            v177 = &buf;
+            v178 = 2 * v164;
             do
             {
-              v176 = v174;
-              v174 += 16;
-              --v175;
-              *(_OWORD *)v176 = 0i64;
-            }
-            while ( v175 >= 0 );
-          }
-          v177 = v169;
-          if ( v169 > 0 )
-          {
-            v178 = (char *)&buf;
-            v179 = 2 * v165;
-            do
-            {
-              if ( v140 > 0 )
+              if ( v139 > 0 )
               {
-                v180 = (__int64 *)v138;
-                v181 = v178;
-                v182 = v140;
+                v179 = (__int64 *)v138;
+                v180 = v177;
+                v181 = v139;
                 do
                 {
-                  v183 = *v180;
-                  v181 += 2;
-                  v180 += 2;
-                  *((_WORD *)v181 - 1) = *(_WORD *)(v179 + v183);
-                  --v182;
+                  v182 = *v179;
+                  v180 = (hkaPredictiveBlockCompression::Block *)((char *)v180 + 2);
+                  v179 += 2;
+                  v180[-1].data[15][15] = *(_WORD *)(v178 + v182);
+                  --v181;
                 }
-                while ( v182 );
+                while ( v181 );
               }
-              v179 += 2i64;
-              v178 += 32;
-              --v177;
+              v178 += 2i64;
+              v177 = (hkaPredictiveBlockCompression::Block *)((char *)v177 + 32);
+              --v176;
             }
-            while ( v177 );
+            while ( v176 );
           }
-          v184 = retaddr->m_compressedData.m_size;
-          v185 = v184 + 528;
-          v186 = retaddr->m_compressedData.m_capacityAndFlags & 0x3FFFFFFF;
-          if ( v186 >= (signed int)v184 + 528 )
+          v183 = retaddr->m_compressedData.m_size;
+          v184 = v183 + 528;
+          v185 = retaddr->m_compressedData.m_capacityAndFlags & 0x3FFFFFFF;
+          if ( v185 >= (int)v183 + 528 )
           {
-            v266[0].m_enum = 0;
+            v262[0].m_enum = HK_SUCCESS;
           }
           else
           {
-            v187 = 2 * v186;
-            if ( v185 < v187 )
-              v185 = v187;
-            hkArrayUtil::_reserve(v266, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v168, v185, 1);
+            v186 = 2 * v185;
+            if ( v184 < v186 )
+              v184 = v186;
+            hkArrayUtil::_reserve(v262, &hkContainerHeapAllocator::s_alloc, p_m_compressedData, v184, 1);
           }
           retaddr->m_compressedData.m_size += 528;
-          v188 = (unsigned __int64)hkaPredictiveBlockCompression::encodeBlock(&buf, v167, v169, &v168->m_data[v184]);
-          v189 = retaddr->m_compressedData.m_capacityAndFlags & 0x3FFFFFFF;
-          v190 = v188 - LODWORD(v168->m_data);
-          if ( v189 >= v190 )
+          v187 = (unsigned int)hkaPredictiveBlockCompression::encodeBlock(
+                                 &buf,
+                                 v166,
+                                 v168,
+                                 &p_m_compressedData->m_data[v183]);
+          v188 = retaddr->m_compressedData.m_capacityAndFlags & 0x3FFFFFFF;
+          v189 = v187 - LODWORD(p_m_compressedData->m_data);
+          if ( v188 >= v189 )
           {
-            v267[0].m_enum = 0;
+            v263[0].m_enum = HK_SUCCESS;
           }
           else
           {
-            v191 = 2 * v189;
-            v192 = v188 - LODWORD(v168->m_data);
-            if ( v190 < v191 )
-              v192 = v191;
-            hkArrayUtil::_reserve(v267, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v168, v192, 1);
+            v190 = 2 * v188;
+            v191 = v187 - LODWORD(p_m_compressedData->m_data);
+            if ( v189 < v190 )
+              v191 = v190;
+            hkArrayUtil::_reserve(v263, &hkContainerHeapAllocator::s_alloc, p_m_compressedData, v191, 1);
           }
-          v165 += 16i64;
-          v164 = v263 + 16;
-          v163 = v254 - 16;
-          retaddr->m_compressedData.m_size = v190;
-          LODWORD(v263) = v164;
-          v254 = v163;
-          if ( v165 >= v278 )
+          v164 += 16i64;
+          v163 = v259 + 16;
+          v162 = v251 - 16;
+          retaddr->m_compressedData.m_size = v189;
+          LODWORD(v259) = v163;
+          v251 = v162;
+          if ( v164 >= v274 )
             break;
-          v138 = *(_QWORD *)&v258.m_size;
-          v166 = retaddr;
+          v138 = *(_QWORD *)&v255.m_size;
+          v165 = retaddr;
         }
-        v7 = v277.m_skel;
+        m_skel = v273.m_skel;
       }
       v88 = retaddr;
-      v193 = arr.m_size;
-      v194 = retaddr->m_compressedData.m_size;
-      v268 = retaddr->m_compressedData.m_size;
+      v192 = arr.m_size;
+      v193 = retaddr->m_compressedData.m_size;
+      v264 = v193;
       if ( arr.m_size == (arr.m_capacityAndFlags & 0x3FFFFFFF) )
       {
-        hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &arr, 2);
-        v193 = arr.m_size;
+        hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &arr, 2);
+        v192 = arr.m_size;
       }
-      arr.m_data[v193] = v194;
-      v195 = arr.m_size + 1;
-      arr.m_size = v195;
-      if ( v195 == (arr.m_capacityAndFlags & 0x3FFFFFFF) )
+      arr.m_data[v192] = v193;
+      v194 = arr.m_size + 1;
+      arr.m_size = v194;
+      if ( v194 == (arr.m_capacityAndFlags & 0x3FFFFFFF) )
       {
-        hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &arr, 2);
-        v195 = arr.m_size;
+        hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, &arr, 2);
+        v194 = arr.m_size;
       }
-      arr.m_data[v195] = HIWORD(v194);
+      arr.m_data[v194] = HIWORD(v193);
       ++arr.m_size;
-      v196 = v259 - 1;
-      if ( v259 - 1 >= 0 )
+      v195 = (int)v256 - 1;
+      if ( (int)v256 - 1 >= 0 )
       {
-        v197 = (int *)(16i64 * (v259 - 1) + *(_QWORD *)&v258.m_size + 12i64);
+        v196 = (int *)(16i64 * ((int)v256 - 1) + *(_QWORD *)&v255.m_size + 12i64);
         do
         {
-          v198 = *v197;
-          *(v197 - 1) = 0;
-          if ( v198 >= 0 )
+          v197 = *v196;
+          *(v196 - 1) = 0;
+          if ( v197 >= 0 )
             hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-              (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-              *(void **)(v197 - 3),
-              2 * (v198 & 0x3FFFFFFF));
-          *(_QWORD *)(v197 - 3) = 0i64;
-          *v197 = 2147483648;
-          v197 -= 4;
-          --v196;
+              &hkContainerTempAllocator::s_alloc,
+              *(void **)(v196 - 3),
+              2 * (v197 & 0x3FFFFFFF));
+          *(_QWORD *)(v196 - 3) = 0i64;
+          *v196 = 0x80000000;
+          v196 -= 4;
+          --v195;
         }
-        while ( v196 >= 0 );
+        while ( v195 >= 0 );
       }
-      v259 = 0;
-      if ( v260 >= 0 )
+      LODWORD(v256) = 0;
+      if ( v256 >= 0 )
         hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-          (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-          *(void **)&v258.m_size,
-          16 * v260);
-      v131 = v277.m_anim;
-      *(_QWORD *)&v258.m_size = 0i64;
-      v199 = v277.m_anim->vfptr;
-      v260 = 2147483648;
-      v255 += 15;
-      v133 = v255;
+          &hkContainerTempAllocator::s_alloc,
+          *(void **)&v255.m_size,
+          16 * HIDWORD(v256));
+      v131 = v273.m_anim;
+      *(_QWORD *)&v255.m_size = 0i64;
+      v198 = v273.m_anim->vfptr;
+      HIDWORD(v256) = 0x80000000;
+      v252 += 15;
+      v133 = v252;
     }
-    while ( v133 < (signed int)v199[4].__vecDelDtor((hkBaseObject *)&v277.m_anim->vfptr, v146) );
+    while ( v133 < (__int64)v198[4].__vecDelDtor(v273.m_anim, v145) );
   }
-  hkaPredictiveCompressedAnimation::addArray(v88, &arr, 0);
-  hkaPredictiveCompressedAnimation::addArray(v88, &v261, FIRST_FLOAT_BLOCK_OFFSETS);
-  hkaPredictiveCompressedAnimation::addArray(v88, (hkArrayBase<unsigned short> *)&array, IS_ANIMATED_BITMAP);
-  hkaPredictiveCompressedAnimation::addArray(v88, &v250, IS_FIXED_RANGE_BITMAP);
-  hkaPredictiveCompressedAnimation::addArray(v88, &v270, DYNAMIC_BONE_TRACK_INDEX);
-  hkaPredictiveCompressedAnimation::addArray(v88, &v271, DYNAMIC_FLOAT_TRACK_INDEX);
-  hkaPredictiveCompressedAnimation::addArray(v88, &v273, STATIC_BONE_TRACK_INDEX);
-  hkaPredictiveCompressedAnimation::addArray(v88, &v274, STATIC_FLOAT_TRACK_INDEX);
-  hkaPredictiveCompressedAnimation::addArray(v88, &v269, RENORM_QUATERNION_INDEX);
-  hkaPredictiveCompressedAnimation::addArray(v88, &v258, 0);
-  hkaPredictiveCompressedAnimation::addArray(v88, &v256, DYNAMIC_SCALES);
-  hkaPredictiveCompressedAnimation::addArray(v88, &v257, DYNAMIC_OFFSETS);
-  v200 = v88->m_intData.m_size + 8;
-  v201 = v88->m_intData.m_capacityAndFlags & 0x3FFFFFFF;
-  if ( v201 < v200 )
+  hkaPredictiveCompressedAnimation::addArray(v88, &arr, BLOCK_OFFSETS);
+  hkaPredictiveCompressedAnimation::addArray(v88, &v257, FIRST_FLOAT_BLOCK_OFFSETS);
+  hkaPredictiveCompressedAnimation::addArray(v88, &array, IS_ANIMATED_BITMAP);
+  hkaPredictiveCompressedAnimation::addArray(v88, &v249, IS_FIXED_RANGE_BITMAP);
+  hkaPredictiveCompressedAnimation::addArray(v88, &v266, DYNAMIC_BONE_TRACK_INDEX);
+  hkaPredictiveCompressedAnimation::addArray(v88, &v267, DYNAMIC_FLOAT_TRACK_INDEX);
+  hkaPredictiveCompressedAnimation::addArray(v88, &v269, STATIC_BONE_TRACK_INDEX);
+  hkaPredictiveCompressedAnimation::addArray(v88, &v270, STATIC_FLOAT_TRACK_INDEX);
+  hkaPredictiveCompressedAnimation::addArray(v88, &v265, RENORM_QUATERNION_INDEX);
+  hkaPredictiveCompressedAnimation::addArray(v88, &v255, STATIC_VALUES);
+  hkaPredictiveCompressedAnimation::addArray(v88, &v253, DYNAMIC_SCALES);
+  hkaPredictiveCompressedAnimation::addArray(v88, &v254, DYNAMIC_OFFSETS);
+  v199 = v88->m_intData.m_size + 8;
+  v200 = v88->m_intData.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v200 < v199 )
   {
-    v202 = 2 * v201;
-    if ( v200 < v202 )
-      v200 = v202;
-    hkArrayUtil::_reserve(
-      (hkResult *)&v286,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &v88->m_intData,
-      v200,
-      2);
+    v201 = 2 * v200;
+    if ( v199 < v201 )
+      v199 = v201;
+    hkArrayUtil::_reserve((hkResult *)&v282, &hkContainerHeapAllocator::s_alloc, &v88->m_intData, v199, 2);
   }
   v88->m_intData.m_size += 8;
-  v203 = v88->m_floatData.m_size + 4;
-  v204 = v88->m_floatData.m_capacityAndFlags & 0x3FFFFFFF;
-  if ( v204 < v203 )
+  v202 = v88->m_floatData.m_size + 4;
+  v203 = v88->m_floatData.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v203 < v202 )
   {
-    v205 = 2 * v204;
-    if ( v203 < v205 )
-      v203 = v205;
-    hkArrayUtil::_reserve(
-      (hkResult *)&v286,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &v88->m_floatData,
-      v203,
-      4);
+    v204 = 2 * v203;
+    if ( v202 < v204 )
+      v202 = v204;
+    hkArrayUtil::_reserve((hkResult *)&v282, &hkContainerHeapAllocator::s_alloc, &v88->m_floatData, v202, 4);
   }
   v88->m_floatData.m_size += 4;
-  v206 = v88->m_intData.m_size;
-  if ( v206 < (v88->m_intData.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reduce((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v88->m_intData, 2, 0i64, v206);
-  v207 = v88->m_floatData.m_size;
-  if ( v207 < (v88->m_floatData.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reduce(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &v88->m_floatData,
-      4,
-      0i64,
-      v207);
-  ((void (__fastcall *)(hkError *, signed __int64, const char *))hkSingleton<hkError>::s_instance->vfptr[4].__first_virtual_table_function__)(
+  v205 = v88->m_intData.m_size;
+  if ( v205 < (v88->m_intData.m_capacityAndFlags & 0x3FFFFFFF) )
+    hkArrayUtil::_reduce(&hkContainerHeapAllocator::s_alloc, &v88->m_intData, 2, 0i64, v205);
+  v206 = v88->m_floatData.m_size;
+  if ( v206 < (v88->m_floatData.m_capacityAndFlags & 0x3FFFFFFF) )
+    hkArrayUtil::_reduce(&hkContainerHeapAllocator::s_alloc, &v88->m_floatData, 4, 0i64, v206);
+  ((void (__fastcall *)(hkError *, __int64, const char *))hkSingleton<hkError>::s_instance->vfptr[4].__first_virtual_table_function__)(
     hkSingleton<hkError>::s_instance,
     840219356i64,
     "Compression");
-  v209 = v7->m_bones.m_size;
-  v210 = 0;
-  v211 = 9 * v209 + v7->m_floatSlots.m_size;
+  v208 = m_skel->m_bones.m_size;
+  v209 = 0;
+  v210 = 9 * v208 + m_skel->m_floatSlots.m_size;
+  v211 = 0;
+  *(_QWORD *)&v255.m_size = 0i64;
+  v256 = 0i64;
   v212 = 0;
-  *(_QWORD *)&v258.m_size = 0i64;
-  *(_QWORD *)&v259 = 0i64;
-  v213 = 0;
-  v214 = 0i64;
-  v215 = 0;
-  v216 = 0i64;
-  if ( v211 > 0 )
+  v213 = 0i64;
+  v214 = 0;
+  v215 = 0i64;
+  if ( v210 > 0 )
   {
-    v217 = v277.m_transformTrackFromBone.m_data;
+    v216 = v273.m_transformTrackFromBone.m_data;
     do
     {
-      if ( (signed int)v214 >= 9 * (signed int)v209 )
+      if ( (int)v213 >= 9 * (int)v208 )
       {
-        v218 = v277.m_floatTrackFromSlot.m_data[v216 - 9 * v209] == -1;
+        v217 = v273.m_floatTrackFromSlot.m_data[v215 - 9 * v208] == -1;
       }
       else
       {
-        v208 = (unsigned int)v214 / 9;
-        v218 = v217[v208] == -1;
+        v207 = (unsigned int)v213 / 9;
+        v217 = v216[v207] == -1;
       }
-      if ( !v218 )
+      if ( !v217 )
       {
-        ++*(&v258.m_size + (signed int)v264[v216]);
-        ++v213;
+        ++*(&v255.m_size + (int)v260[v215]);
+        ++v212;
       }
-      v214 = (unsigned int)(v214 + 1);
-      ++v216;
+      v213 = (unsigned int)(v213 + 1);
+      ++v215;
     }
-    while ( (signed int)v214 < v211 );
-    v215 = v259;
-    v210 = v258.m_capacityAndFlags;
-    v212 = v258.m_size;
-    v7 = v277.m_skel;
+    while ( (int)v213 < v210 );
+    v214 = v256;
+    v209 = v255.m_capacityAndFlags;
+    v211 = v255.m_size;
+    m_skel = v273.m_skel;
   }
-  v219 = ((__int64 (__fastcall *)(hkaInterleavedUncompressedAnimation *, __int64, __int64, __int64))v277.m_anim->vfptr[3].__first_virtual_table_function__)(
-           v277.m_anim,
-           v208,
-           v214,
-           v216);
-  v220 = ((__int64 (__fastcall *)(hkaPredictiveCompressedAnimation *))retaddr->vfptr[3].__first_virtual_table_function__)(retaddr);
-  hkErrStream::hkErrStream(&v280, &buf, 512);
-  v221 = hkOstream::operator<<((hkOstream *)&v280.vfptr, "Compression: ");
-  v222 = hkOstream::operator<<(v221, v219);
-  v223 = hkOstream::operator<<(v222, " -> ");
-  v224 = hkOstream::operator<<(v223, v220);
-  v225 = hkOstream::operator<<(v224, " (");
-  v226 = hkOstream::operator<<(v225, (float)v219 / (float)v220);
-  hkOstream::operator<<(v226, ":1)");
+  v218 = ((__int64 (__fastcall *)(hkaInterleavedUncompressedAnimation *, __int64, __int64, __int64))v273.m_anim->vfptr[3].__first_virtual_table_function__)(
+           v273.m_anim,
+           v207,
+           v213,
+           v215);
+  v219 = ((__int64 (__fastcall *)(hkaPredictiveCompressedAnimation *))retaddr->vfptr[3].__first_virtual_table_function__)(retaddr);
+  hkErrStream::hkErrStream(&v276, &buf, 512);
+  v220 = hkOstream::operator<<(&v276, "Compression: ");
+  v221 = hkOstream::operator<<(v220, v218);
+  v222 = hkOstream::operator<<(v221, " -> ");
+  v223 = hkOstream::operator<<(v222, v219);
+  v224 = hkOstream::operator<<(v223, " (");
+  v225 = hkOstream::operator<<(v224, (float)v218 / (float)v219);
+  hkOstream::operator<<(v225, ":1)");
   hkError::messageReport(
     -1,
     (const char *)&buf,
     "Animation\\PredictiveCompressed\\hkaPredictiveCompressedAnimationCtor.cpp",
     690);
-  hkOstream::~hkOstream((hkOstream *)&v280.vfptr);
-  hkErrStream::hkErrStream(&v280, &buf, 512);
-  v227 = v7->m_bones.m_size;
-  v228 = v7->m_floatSlots.m_size;
-  v229 = v227 + v228 + 8 * v227;
-  v230 = hkOstream::operator<<((hkOstream *)&v280.vfptr, v227);
-  v231 = hkOstream::operator<<(v230, " bones, ");
-  v232 = hkOstream::operator<<(v231, v228);
-  v233 = hkOstream::operator<<(v232, " floats, ");
-  v234 = hkOstream::operator<<(v233, v213);
-  v235 = hkOstream::operator<<(v234, "/");
-  v236 = hkOstream::operator<<(v235, v229);
-  hkOstream::operator<<(v236, " animated channels");
+  hkOstream::~hkOstream(&v276);
+  hkErrStream::hkErrStream(&v276, &buf, 512);
+  v226 = m_skel->m_bones.m_size;
+  v227 = m_skel->m_floatSlots.m_size;
+  v228 = v226 + v227 + 8 * v226;
+  v229 = hkOstream::operator<<(&v276, v226);
+  v230 = hkOstream::operator<<(v229, " bones, ");
+  v231 = hkOstream::operator<<(v230, v227);
+  v232 = hkOstream::operator<<(v231, " floats, ");
+  v233 = hkOstream::operator<<(v232, v212);
+  v234 = hkOstream::operator<<(v233, "/");
+  v235 = hkOstream::operator<<(v234, v228);
+  hkOstream::operator<<(v235, " animated channels");
   hkError::messageReport(
     -1,
     (const char *)&buf,
     "Animation\\PredictiveCompressed\\hkaPredictiveCompressedAnimationCtor.cpp",
     692);
-  hkOstream::~hkOstream((hkOstream *)&v280.vfptr);
-  hkErrStream::hkErrStream(&v280, &buf, 512);
-  v237 = v277.m_anim;
-  v238 = ((__int64 (__fastcall *)(hkaInterleavedUncompressedAnimation *))v277.m_anim->vfptr[4].__vecDelDtor)(v277.m_anim);
-  v239 = hkOstream::operator<<((hkOstream *)&v280.vfptr, v238);
-  hkOstream::operator<<(v239, " frames");
+  hkOstream::~hkOstream(&v276);
+  hkErrStream::hkErrStream(&v276, &buf, 512);
+  v236 = v273.m_anim;
+  v237 = ((__int64 (__fastcall *)(hkaInterleavedUncompressedAnimation *))v273.m_anim->vfptr[4].__vecDelDtor)(v273.m_anim);
+  v238 = hkOstream::operator<<(&v276, v237);
+  hkOstream::operator<<(v238, " frames");
   hkError::messageReport(
     -1,
     (const char *)&buf,
     "Animation\\PredictiveCompressed\\hkaPredictiveCompressedAnimationCtor.cpp",
     693);
-  hkOstream::~hkOstream((hkOstream *)&v280.vfptr);
-  hkErrStream::hkErrStream(&v280, &buf, 512);
-  v240 = hkOstream::operator<<((hkOstream *)&v280.vfptr, v212);
-  v241 = hkOstream::operator<<(v240, " static, ");
-  v242 = hkOstream::operator<<(v241, v210);
-  v243 = hkOstream::operator<<(v242, " reference, ");
-  v244 = hkOstream::operator<<(v243, v215);
-  v245 = hkOstream::operator<<(v244, " ranged, ");
-  v246 = hkOstream::operator<<(v245, v260);
-  hkOstream::operator<<(v246, " fixed channels");
+  hkOstream::~hkOstream(&v276);
+  hkErrStream::hkErrStream(&v276, &buf, 512);
+  v239 = hkOstream::operator<<(&v276, v211);
+  v240 = hkOstream::operator<<(v239, " static, ");
+  v241 = hkOstream::operator<<(v240, v209);
+  v242 = hkOstream::operator<<(v241, " reference, ");
+  v243 = hkOstream::operator<<(v242, v214);
+  v244 = hkOstream::operator<<(v243, " ranged, ");
+  v245 = hkOstream::operator<<(v244, SHIDWORD(v256));
+  hkOstream::operator<<(v245, " fixed channels");
   hkError::messageReport(
     -1,
     (const char *)&buf,
     "Animation\\PredictiveCompressed\\hkaPredictiveCompressedAnimationCtor.cpp",
     694);
-  hkOstream::~hkOstream((hkOstream *)&v280.vfptr);
-  ((void (*)(void))hkSingleton<hkError>::s_instance->vfptr[5].__vecDelDtor)();
-  v247 = retaddr->m_compressedData.m_size;
-  v248 = &retaddr->m_compressedData;
-  if ( v247 < (retaddr->m_compressedData.m_capacityAndFlags & 0x3FFFFFFF) )
-    hkArrayUtil::_reduce((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v248, 1, 0i64, v247);
-  retaddr->m_numFrames = (__int64)v237->vfptr[4].__vecDelDtor((hkBaseObject *)&v237->vfptr, (unsigned int)v248);
-  retaddr->m_numFloatSlots = v7->m_floatSlots.m_size;
-  retaddr->m_numBones = v7->m_bones.m_size;
-  v249 = v237->m_duration;
-  retaddr->m_skeleton = v7;
-  retaddr->m_duration = v249;
-  retaddr->m_numberOfTransformTracks = v237->m_numberOfTransformTracks;
-  retaddr->m_numberOfFloatTracks = v237->m_numberOfFloatTracks;
+  hkOstream::~hkOstream(&v276);
+  ((void (__fastcall *)(hkError *))hkSingleton<hkError>::s_instance->vfptr[5].__vecDelDtor)(hkSingleton<hkError>::s_instance);
+  v246 = retaddr->m_compressedData.m_size;
+  v247 = &retaddr->m_compressedData;
+  if ( v246 < (retaddr->m_compressedData.m_capacityAndFlags & 0x3FFFFFFF) )
+    hkArrayUtil::_reduce(&hkContainerHeapAllocator::s_alloc, v247, 1, 0i64, v246);
+  retaddr->m_numFrames = (int)v236->vfptr[4].__vecDelDtor(v236, (unsigned int)v247);
+  retaddr->m_numFloatSlots = m_skel->m_floatSlots.m_size;
+  retaddr->m_numBones = m_skel->m_bones.m_size;
+  m_duration = v236->m_duration;
+  retaddr->m_skeleton = m_skel;
+  retaddr->m_duration = m_duration;
+  retaddr->m_numberOfTransformTracks = v236->m_numberOfTransformTracks;
+  retaddr->m_numberOfFloatTracks = v236->m_numberOfFloatTracks;
   hkaPredictiveCompressedAnimation::computeMaxCompressedBytesPerFrame(retaddr);
-  v261.m_size = 0;
-  if ( v261.m_capacityAndFlags >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v261.m_data,
-      2 * (v261.m_capacityAndFlags & 0x3FFFFFFF));
-  v261.m_data = 0i64;
-  v261.m_capacityAndFlags = 2147483648;
-  arr.m_size = 0;
-  if ( arr.m_capacityAndFlags >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      arr.m_data,
-      2 * (arr.m_capacityAndFlags & 0x3FFFFFFF));
-  arr.m_data = 0i64;
-  arr.m_capacityAndFlags = 2147483648;
-  LODWORD(v258.m_data) = 0;
-  if ( SHIDWORD(v258.m_data) >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v258.m_data,
-      4 * HIDWORD(v258.m_data));
-  v258.m_data = 0i64;
-  HIDWORD(v258.m_data) = 2147483648;
   v257.m_size = 0;
   if ( v257.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       v257.m_data,
-      4 * v257.m_capacityAndFlags);
+      2 * (v257.m_capacityAndFlags & 0x3FFFFFFF));
   v257.m_data = 0i64;
-  v257.m_capacityAndFlags = 2147483648;
-  v256.m_size = 0;
-  if ( v256.m_capacityAndFlags >= 0 )
+  v257.m_capacityAndFlags = 0x80000000;
+  arr.m_size = 0;
+  if ( arr.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v256.m_data,
-      4 * v256.m_capacityAndFlags);
-  v256.m_data = 0i64;
-  v256.m_capacityAndFlags = 2147483648;
-  v269.m_size = 0;
-  if ( v269.m_capacityAndFlags >= 0 )
+      &hkContainerHeapAllocator::s_alloc,
+      arr.m_data,
+      2 * (arr.m_capacityAndFlags & 0x3FFFFFFF));
+  arr.m_data = 0i64;
+  arr.m_capacityAndFlags = 0x80000000;
+  LODWORD(v255.m_data) = 0;
+  if ( SHIDWORD(v255.m_data) >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v269.m_data,
-      2 * (v269.m_capacityAndFlags & 0x3FFFFFFF));
-  v269.m_data = 0i64;
-  v269.m_capacityAndFlags = 2147483648;
-  v274.m_size = 0;
-  if ( v274.m_capacityAndFlags >= 0 )
+      &hkContainerHeapAllocator::s_alloc,
+      v255.m_data,
+      4 * HIDWORD(v255.m_data));
+  v255.m_data = (float *)0x8000000000000000i64;
+  v254.m_size = 0;
+  if ( v254.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v274.m_data,
-      2 * (v274.m_capacityAndFlags & 0x3FFFFFFF));
-  v274.m_data = 0i64;
-  v274.m_capacityAndFlags = 2147483648;
-  v273.m_size = 0;
-  if ( v273.m_capacityAndFlags >= 0 )
+      &hkContainerHeapAllocator::s_alloc,
+      v254.m_data,
+      4 * v254.m_capacityAndFlags);
+  v254.m_data = 0i64;
+  v254.m_capacityAndFlags = 0x80000000;
+  v253.m_size = 0;
+  if ( v253.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v273.m_data,
-      2 * (v273.m_capacityAndFlags & 0x3FFFFFFF));
-  v273.m_data = 0i64;
-  v273.m_capacityAndFlags = 2147483648;
-  v271.m_size = 0;
-  if ( v271.m_capacityAndFlags >= 0 )
+      &hkContainerHeapAllocator::s_alloc,
+      v253.m_data,
+      4 * v253.m_capacityAndFlags);
+  v253.m_data = 0i64;
+  v253.m_capacityAndFlags = 0x80000000;
+  v265.m_size = 0;
+  if ( v265.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v271.m_data,
-      2 * (v271.m_capacityAndFlags & 0x3FFFFFFF));
-  v271.m_data = 0i64;
-  v271.m_capacityAndFlags = 2147483648;
+      &hkContainerHeapAllocator::s_alloc,
+      v265.m_data,
+      2 * (v265.m_capacityAndFlags & 0x3FFFFFFF));
+  v265.m_data = 0i64;
+  v265.m_capacityAndFlags = 0x80000000;
   v270.m_size = 0;
   if ( v270.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       v270.m_data,
       2 * (v270.m_capacityAndFlags & 0x3FFFFFFF));
   v270.m_data = 0i64;
-  v270.m_capacityAndFlags = 2147483648;
-  v250.m_size = 0;
-  if ( v250.m_capacityAndFlags >= 0 )
+  v270.m_capacityAndFlags = 0x80000000;
+  v269.m_size = 0;
+  if ( v269.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v250.m_data,
-      2 * (v250.m_capacityAndFlags & 0x3FFFFFFF));
-  v250.m_data = 0i64;
-  v250.m_capacityAndFlags = 2147483648;
-  v252 = 0;
-  if ( v253 >= 0 )
+      &hkContainerHeapAllocator::s_alloc,
+      v269.m_data,
+      2 * (v269.m_capacityAndFlags & 0x3FFFFFFF));
+  v269.m_data = 0i64;
+  v269.m_capacityAndFlags = 0x80000000;
+  v267.m_size = 0;
+  if ( v267.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      array,
-      2 * (v253 & 0x3FFFFFFF));
-  array = 0i64;
-  v253 = 2147483648;
-  if ( v282 >= 0 )
+      &hkContainerHeapAllocator::s_alloc,
+      v267.m_data,
+      2 * (v267.m_capacityAndFlags & 0x3FFFFFFF));
+  v267.m_data = 0i64;
+  v267.m_capacityAndFlags = 0x80000000;
+  v266.m_size = 0;
+  if ( v266.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v264,
-      4 * v282);
-  if ( v281 >= 0 )
+      &hkContainerHeapAllocator::s_alloc,
+      v266.m_data,
+      2 * (v266.m_capacityAndFlags & 0x3FFFFFFF));
+  v266.m_data = 0i64;
+  v266.m_capacityAndFlags = 0x80000000;
+  v249.m_size = 0;
+  if ( v249.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v272,
-      48 * (v281 & 0x3FFFFFFF));
-  hkaPredictiveCompressedAnimationUtil::Remapper::~Remapper(&v277);
-}ta = 0i64;
-  v273.m_capacityAndFlags = 2147483648;
-  v271.m_size = 0;
-  if ( v271.m_capacityAndFlags >= 0 )
+      &hkContainerHeapAllocator::s_alloc,
+      v249.m_data,
+      2 * (v249.m_capacityAndFlags & 0x3FFFFFFF));
+  v249.m_data = 0i64;
+  v249.m_capacityAndFlags = 0x80000000;
+  array.m_size = 0;
+  if ( array.m_capacityAndFlags >= 0 )
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
+      &hkContainerHeapAllocator::s_alloc,
+      array.m_data,
+      2 * (array.m_capacityAndFlags & 0x3FFFFFFF));
+  array.m_data = 0i64;
+  array.m_capacityAndFlags = 0x80000000;
+  if ( v278 >= 0 )
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v260, 4 * v278);
+  if ( v277 >= 0 )
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, v268, 48 * (v277 & 0x3FFFFFFF));
+  hkaPredictiveCompressedAnimationUtil::Remapper::~Remapper(&v273);
+}   2 * (v269.m_capacityAndFlags & 0x3FFFFFFF));
+  v269.m_data = 0i64;
+  v269.m_capacityAndFlags = 0x80000000;
+  v267.m_size = 0;
+  if ( v267.m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v271.m_data,
-      2 * (v271.m_capacityAndFlags & 0x3FFFFFFF));
-  v271.m_data = 0i64;
-  v271.m_capacityAndF
+      &hkContainerHeapAllocator::s_alloc,
+      v267.m_data,
+      2 * (v267.m_capacityAndFlags & 0x3FFFFFFF));
+  v267.m_data = 0i64;
+  v267.m_capacityAndFlags = 0x80000000;
+  v266.m_size = 0;
+  if ( v266.m_capacityAndFlags >= 0 )
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
+      &hkContainerHeapAllocator::s_alloc,
+      v266.m_data,
+      2 * (v266.m_capacityAndFlags & 0x3FFFFFFF));
+  v266.m_data = 0i64;
+  v266.m_capacityAndFlags = 0x80000000;
+  v249.m_size = 0;
+  if ( v249.m_capacityAndFlags >= 0 )
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
+      &hkContainerHeapAllocator::s_alloc,
+      v249.m_data,
+      2 * (v249.m_capacityAndFlags & 0x3FFFFFFF));
+  v249.m_data = 0i64;
+  v249.m_capacityAndFlags = 0x80000000;
+  array.m_size = 0;
+  if ( 
 
 // File Line: 713
 // RVA: 0xB38880
-void __fastcall hkaPredictiveCompressedAnimation::computeMaxCompressedBytesPerFrame(hkaPredictiveCompressedAnimation *this)
+void __fastcall hkaPredictiveCompressedAnimation::computeMaxCompressedBytesPerFrame(
+        hkaPredictiveCompressedAnimation *this)
 {
-  int v1; // er11
-  hkaPredictiveCompressedAnimation *v2; // r10
+  int v1; // r11d
   __int64 v3; // rdx
   int v4; // eax
-  __int64 v5; // rdi
-  unsigned __int16 *v6; // rsi
-  int v7; // ebx
-  signed __int64 v8; // r9
-  signed __int64 v9; // rcx
-  int v10; // er8
-  int v11; // eax
+  unsigned __int16 *m_data; // rsi
+  int v6; // ebx
+  __int64 v7; // r9
+  unsigned __int16 *v8; // rcx
+  int v9; // r8d
 
   v1 = 0;
-  v2 = this;
   this->m_maxCompressedBytesPerFrame = 0;
   v3 = 0i64;
   v4 = (this->m_intArrayOffsets[1] - this->m_intArrayOffsets[0]) / 2;
-  v5 = v4;
   if ( v4 > 0 )
   {
-    v6 = this->m_intData.m_data;
-    v7 = 0;
-    v8 = 2i64;
+    m_data = this->m_intData.m_data;
+    v6 = 0;
+    v7 = 1i64;
     do
     {
-      v9 = (signed __int64)&v6[v2->m_intArrayOffsets[0]];
-      v10 = *(unsigned __int16 *)(v9 + 4 * v3) | (*(unsigned __int16 *)(v8 + v9) << 16);
-      v11 = v10 - v1;
-      if ( v11 > v7 )
+      v8 = &m_data[this->m_intArrayOffsets[0]];
+      v9 = v8[2 * v3] | (v8[v7] << 16);
+      if ( v9 - v1 > v6 )
       {
-        v7 = (*(unsigned __int16 *)(v9 + 4 * v3) | (*(unsigned __int16 *)(v8 + v9) << 16)) - v1;
-        v2->m_maxCompressedBytesPerFrame = v11;
+        v6 = (v8[2 * v3] | (v8[v7] << 16)) - v1;
+        this->m_maxCompressedBytesPerFrame = v9 - v1;
       }
       ++v3;
-      v8 += 4i64;
-      v1 = v10;
+      v7 += 2i64;
+      v1 = v9;
     }
-    while ( v3 < v5 );
+    while ( v3 < v4 );
   }
 }
 
 // File Line: 736
 // RVA: 0xB38910
-void __fastcall hkaPredictiveCompressedAnimation::addArray(hkaPredictiveCompressedAnimation *this, hkArrayBase<unsigned short> *arr, hkaPredictiveCompressedAnimation::IntArrayID idx)
+void __fastcall hkaPredictiveCompressedAnimation::addArray(
+        hkaPredictiveCompressedAnimation *this,
+        hkArrayBase<unsigned short> *arr,
+        int idx)
 {
-  int v3; // eax
-  hkArrayBase<unsigned short> *v4; // rcx
+  int m_size; // eax
+  hkArray<unsigned short,hkContainerHeapAllocator> *p_m_intData; // rcx
 
-  v3 = this->m_intData.m_size;
-  v4 = (hkArrayBase<unsigned short> *)&this->m_intData.m_data;
-  *((_DWORD *)&v4[1].m_data + (signed int)idx) = v3;
-  hkArrayBase<unsigned short>::_append(
-    v4,
-    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-    arr->m_data,
-    arr->m_size);
+  m_size = this->m_intData.m_size;
+  p_m_intData = &this->m_intData;
+  *((_DWORD *)&p_m_intData[1].m_data + idx) = m_size;
+  hkArrayBase<unsigned short>::_append(p_m_intData, &hkContainerHeapAllocator::s_alloc, arr->m_data, arr->m_size);
 }
 
 // File Line: 744
 // RVA: 0xB38940
-void __fastcall hkaPredictiveCompressedAnimation::addArray(hkaPredictiveCompressedAnimation *this, hkArrayBase<float> *arr, hkaPredictiveCompressedAnimation::FloatArrayID idx)
+void __fastcall hkaPredictiveCompressedAnimation::addArray(
+        hkaPredictiveCompressedAnimation *this,
+        hkArrayBase<float> *arr,
+        int idx)
 {
-  int v3; // eax
-  hkArrayBase<float> *v4; // rcx
+  int m_size; // eax
+  hkArray<float,hkContainerHeapAllocator> *p_m_floatData; // rcx
 
-  v3 = this->m_floatData.m_size;
-  v4 = (hkArrayBase<float> *)&this->m_floatData.m_data;
-  *((_DWORD *)&v4[1].m_data + (signed int)idx) = v3;
-  hkArrayBase<float>::_append(
-    v4,
-    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-    arr->m_data,
-    arr->m_size);
+  m_size = this->m_floatData.m_size;
+  p_m_floatData = &this->m_floatData;
+  *((_DWORD *)&p_m_floatData[1].m_data + idx) = m_size;
+  hkArrayBase<float>::_append(p_m_floatData, &hkContainerHeapAllocator::s_alloc, arr->m_data, arr->m_size);
 }
 

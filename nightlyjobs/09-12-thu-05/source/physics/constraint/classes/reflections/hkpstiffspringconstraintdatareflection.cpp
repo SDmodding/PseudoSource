@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkpStiffSpringConstraintDataAtomsClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 61
@@ -70,30 +70,29 @@ hkClass *__fastcall hkpStiffSpringConstraintData::staticClass()
 
 // File Line: 122
 // RVA: 0xD43440
-void __fastcall finishLoadedObjecthkpStiffSpringConstraintData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpStiffSpringConstraintData(
+        hkpConstraintData *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  _QWORD *v2; // rbx
-
   if ( p )
   {
-    v2 = p;
-    hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpStiffSpringConstraintData::`vftable;
+    hkpConstraintData::hkpConstraintData(p, finishing);
+    p->vfptr = (hkBaseObjectVtbl *)&hkpStiffSpringConstraintData::`vftable;
   }
 }
 
 // File Line: 128
 // RVA: 0xD43470
-void __fastcall cleanupLoadedObjecthkpStiffSpringConstraintData(void *p)
+void __fastcall cleanupLoadedObjecthkpStiffSpringConstraintData(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 132
 // RVA: 0xD43480
 void **__fastcall getVtablehkpStiffSpringConstraintData()
 {
-  hkpConstraintData v1; // [rsp+20h] [rbp-78h]
+  hkpConstraintData v1; // [rsp+20h] [rbp-78h] BYREF
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
   return &hkpStiffSpringConstraintData::`vftable;
@@ -110,8 +109,8 @@ void **dynamic_initializer_for__hkpStiffSpringConstraintDataTypeInfo__()
   hkpStiffSpringConstraintDataTypeInfo.m_typeName = "hkpStiffSpringConstraintData";
   hkpStiffSpringConstraintDataTypeInfo.m_vtable = result;
   hkpStiffSpringConstraintDataTypeInfo.m_scopedName = "!hkpStiffSpringConstraintData";
-  hkpStiffSpringConstraintDataTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpStiffSpringConstraintData;
-  hkpStiffSpringConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpStiffSpringConstraintData;
+  hkpStiffSpringConstraintDataTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpStiffSpringConstraintData;
+  hkpStiffSpringConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpStiffSpringConstraintData;
   return result;
 }
 

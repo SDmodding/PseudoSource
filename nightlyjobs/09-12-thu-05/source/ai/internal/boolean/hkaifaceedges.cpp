@@ -2,210 +2,188 @@
 // RVA: 0xBA5F10
 hkResult *__fastcall hkaiFaceEdges::setGeometry(hkaiFaceEdges *this, hkResult *result, hkaiEdgeGeometry *geom)
 {
-  __int64 v3; // rbp
-  hkaiEdgeGeometry *v4; // r15
+  __int64 m_size; // rbp
   int v5; // eax
-  hkResult *v6; // r14
-  hkaiFaceEdges *v7; // rsi
   int v8; // eax
-  int v9; // er9
+  int v9; // r9d
   __int64 v10; // r13
-  int v11; // er12
-  signed __int64 v12; // r9
+  int v11; // r12d
+  __int64 v12; // r9
   int v13; // eax
   int v14; // eax
-  hkaiEdgeGeometry::Edge *const **v15; // rax
-  int v16; // er9
-  int v17; // er8
-  hkaiEdgeGeometry::Edge *v18; // rcx
-  EdgeFacePair *v19; // rdx
-  signed int v20; // eax
-  signed __int64 v21; // r8
-  unsigned int v22; // eax
-  __int64 v23; // r8
-  hkaiEdgeGeometry::Edge *v24; // rcx
+  hkaiEdgeGeometry::Edge *const **m_data; // rax
+  int v16; // r8d
+  hkaiEdgeGeometry::Edge *v17; // rcx
+  EdgeFacePair *v18; // rdx
+  int v19; // eax
+  hkaiEdgeGeometry::Edge *v20; // r8
+  unsigned int m_face; // eax
+  __int64 v22; // r8
+  hkaiEdgeGeometry::Edge *v23; // rcx
+  int v24; // eax
   int v25; // eax
-  int v26; // eax
-  int v27; // er9
-  hkaiEdgeGeometry::Edge **v28; // rax
-  unsigned int v29; // edx
-  __int64 v30; // r8
-  unsigned __int64 v31; // r9
-  EdgeFacePair *array; // [rsp+30h] [rbp-38h]
-  int v34; // [rsp+38h] [rbp-30h]
-  int v35; // [rsp+3Ch] [rbp-2Ch]
-  hkResult resulta; // [rsp+70h] [rbp+8h]
+  int v26; // r9d
+  hkaiEdgeGeometry::Edge **v27; // rax
+  unsigned int v28; // edx
+  __int64 v29; // r8
+  hkaiEdgeGeometry::Edge **v30; // r9
+  EdgeFacePair *array; // [rsp+30h] [rbp-38h] BYREF
+  int v33; // [rsp+38h] [rbp-30h]
+  int v34; // [rsp+3Ch] [rbp-2Ch]
+  hkResult resulta; // [rsp+70h] [rbp+8h] BYREF
 
-  v3 = geom->m_edges.m_size;
-  v4 = geom;
+  m_size = geom->m_edges.m_size;
   v5 = this->m_faceEdges.m_capacityAndFlags & 0x3FFFFFFF;
-  v6 = result;
-  v7 = this;
-  if ( v5 < (signed int)v3 )
+  if ( v5 < (int)m_size )
   {
     v8 = 2 * v5;
     v9 = geom->m_edges.m_size;
-    if ( (signed int)v3 < v8 )
+    if ( (int)m_size < v8 )
       v9 = v8;
-    hkArrayUtil::_reserve(&resulta, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, this, v9, 8);
+    hkArrayUtil::_reserve(&resulta, &hkContainerHeapAllocator::s_alloc, this, v9, 8);
   }
-  v7->m_faceEdges.m_size = v3;
-  v10 = v4->m_faces.m_size;
+  this->m_faceEdges.m_size = m_size;
+  v10 = geom->m_faces.m_size;
   v11 = v10 + 1;
   v12 = 2i64;
-  if ( (signed int)v10 + 1 > 2 )
+  if ( (int)v10 + 1 > 2 )
     v12 = (unsigned int)v11;
-  v13 = v7->m_faceStartEdges.m_capacityAndFlags & 0x3FFFFFFF;
-  if ( v13 < (signed int)v12 )
+  v13 = this->m_faceStartEdges.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v13 < (int)v12 )
   {
     v14 = 2 * v13;
-    if ( (signed int)v12 < v14 )
+    if ( (int)v12 < v14 )
       LODWORD(v12) = v14;
-    hkArrayUtil::_reserve(
-      &resulta,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &v7->m_faceStartEdges,
-      v12,
-      8);
+    hkArrayUtil::_reserve(&resulta, &hkContainerHeapAllocator::s_alloc, &this->m_faceStartEdges, v12, 8);
   }
-  if ( (v7->m_faceEdges.m_capacityAndFlags & 0x3FFFFFFF) > 0 && !v7->m_faceEdges.m_data
-    || (v7->m_faceStartEdges.m_capacityAndFlags & 0x3FFFFFFF) > 0 && !v7->m_faceStartEdges.m_data )
+  if ( (this->m_faceEdges.m_capacityAndFlags & 0x3FFFFFFF) != 0 && !this->m_faceEdges.m_data
+    || (this->m_faceStartEdges.m_capacityAndFlags & 0x3FFFFFFF) != 0 && !this->m_faceStartEdges.m_data )
   {
-    v6->m_enum = 1;
-    return v6;
+    result->m_enum = HK_FAILURE;
+    return result;
   }
-  if ( !(_DWORD)v3 )
+  if ( !(_DWORD)m_size )
   {
-    v15 = v7->m_faceStartEdges.m_data;
-    v7->m_faceStartEdges.m_size = 2;
-    *v15 = 0i64;
-    *((_QWORD *)v7->m_faceStartEdges.m_data + 1) = 0i64;
-LABEL_47:
-    v6->m_enum = 0;
-    return v6;
+    m_data = this->m_faceStartEdges.m_data;
+    this->m_faceStartEdges.m_size = 2;
+    *m_data = 0i64;
+    *((_QWORD *)this->m_faceStartEdges.m_data + 1) = 0i64;
+LABEL_45:
+    result->m_enum = HK_SUCCESS;
+    return result;
   }
   array = 0i64;
-  v34 = 0;
-  v35 = 2147483648;
-  if ( (signed int)v3 <= 0 )
+  v33 = 0;
+  v34 = 0x80000000;
+  if ( (int)m_size <= 0 )
   {
-    resulta.m_enum = 0;
-LABEL_25:
-    v18 = v4->m_edges.m_data;
-    v19 = array;
-    v20 = v3;
-    v21 = (signed __int64)&v18[v4->m_edges.m_size];
-    v34 = v3;
-    if ( v18 != (hkaiEdgeGeometry::Edge *)v21 )
+    resulta.m_enum = HK_SUCCESS;
+    goto LABEL_23;
+  }
+  hkArrayUtil::_reserve(&resulta, &hkContainerTempAllocator::s_alloc, &array, m_size, 16);
+  if ( resulta.m_enum == HK_SUCCESS )
+  {
+LABEL_23:
+    v17 = geom->m_edges.m_data;
+    v18 = array;
+    v19 = m_size;
+    v20 = &v17[geom->m_edges.m_size];
+    v33 = m_size;
+    if ( v17 != v20 )
     {
       do
       {
-        v19->m_edge = v18;
-        v22 = v18->m_face;
+        v18->m_edge = v17;
+        m_face = v17->m_face;
+        ++v17;
+        v18->m_face = m_face;
         ++v18;
-        v19->m_face = v22;
-        ++v19;
       }
-      while ( v18 != (hkaiEdgeGeometry::Edge *)v21 );
-      v20 = v34;
+      while ( v17 != v20 );
+      v19 = v33;
     }
-    if ( v20 > 1 )
-      hkAlgorithm::quickSortRecursive<EdgeFacePair,hkAlgorithm::less<EdgeFacePair>>(array, 0, v20 - 1, 0);
-    v23 = 0i64;
-    if ( (signed int)v3 > 0 )
+    if ( v19 > 1 )
+      hkAlgorithm::quickSortRecursive<EdgeFacePair,hkAlgorithm::less<EdgeFacePair>>(array, 0, v19 - 1, 0);
+    v22 = 0i64;
+    if ( (int)m_size > 0 )
     {
       v12 = 0i64;
       do
       {
-        ++v23;
-        v24 = *(hkaiEdgeGeometry::Edge **)((char *)&array->m_edge + v12);
+        ++v22;
+        v23 = *(hkaiEdgeGeometry::Edge **)((char *)&array->m_edge + v12);
         v12 += 16i64;
-        v7->m_faceEdges.m_data[v23 - 1] = v24;
+        this->m_faceEdges.m_data[v22 - 1] = v23;
       }
-      while ( v23 < v3 );
+      while ( v22 < m_size );
     }
-    v34 = 0;
-    if ( v35 >= 0 )
-      ((void (__fastcall *)(hkContainerTempAllocator::Allocator *, EdgeFacePair *, _QWORD, signed __int64))hkContainerTempAllocator::s_alloc.vfptr->bufFree)(
+    v33 = 0;
+    if ( v34 >= 0 )
+      ((void (__fastcall *)(hkContainerTempAllocator::Allocator *, EdgeFacePair *, _QWORD, __int64))hkContainerTempAllocator::s_alloc.vfptr->bufFree)(
         &hkContainerTempAllocator::s_alloc,
         array,
-        (unsigned int)(16 * v35),
+        (unsigned int)(16 * v34),
         v12);
-    v25 = v7->m_faceStartEdges.m_capacityAndFlags & 0x3FFFFFFF;
-    if ( v25 < v11 )
+    v24 = this->m_faceStartEdges.m_capacityAndFlags & 0x3FFFFFFF;
+    if ( v24 < v11 )
     {
-      v26 = 2 * v25;
-      v27 = v10 + 1;
-      if ( v11 < v26 )
-        v27 = v26;
-      hkArrayUtil::_reserve(
-        &resulta,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        &v7->m_faceStartEdges,
-        v27,
-        8);
+      v25 = 2 * v24;
+      v26 = v10 + 1;
+      if ( v11 < v25 )
+        v26 = v25;
+      hkArrayUtil::_reserve(&resulta, &hkContainerHeapAllocator::s_alloc, &this->m_faceStartEdges, v26, 8);
     }
-    v7->m_faceStartEdges.m_size = v11;
-    v28 = v7->m_faceEdges.m_data;
-    v29 = 0;
-    v30 = 0i64;
-    v31 = (unsigned __int64)&v7->m_faceEdges.m_data[v7->m_faceEdges.m_size];
-    if ( (signed int)v10 > 0 )
+    this->m_faceStartEdges.m_size = v11;
+    v27 = this->m_faceEdges.m_data;
+    v28 = 0;
+    v29 = 0i64;
+    v30 = &this->m_faceEdges.m_data[this->m_faceEdges.m_size];
+    if ( (int)v10 > 0 )
     {
       do
       {
-        for ( ; (*v28)->m_face > v29; v7->m_faceStartEdges.m_data[v30 - 1] = v28 )
+        for ( ; (*v27)->m_face > v28; this->m_faceStartEdges.m_data[v29 - 1] = v27 )
         {
+          ++v28;
           ++v29;
-          ++v30;
         }
-        for ( v7->m_faceStartEdges.m_data[v30] = v28; (unsigned __int64)v28 < v31; ++v28 )
+        for ( this->m_faceStartEdges.m_data[v29] = v27; v27 < v30; ++v27 )
         {
-          if ( (*v28)->m_face != v29 )
+          if ( (*v27)->m_face != v28 )
             break;
         }
-        ++v30;
         ++v29;
+        ++v28;
       }
-      while ( v30 < v10 );
+      while ( v29 < v10 );
     }
-    v7->m_faceStartEdges.m_data[v10] = v28;
-    goto LABEL_47;
+    this->m_faceStartEdges.m_data[v10] = v27;
+    goto LABEL_45;
   }
-  v16 = v3;
-  if ( (signed int)v3 < 0 )
-    v16 = 0;
-  hkArrayUtil::_reserve(&resulta, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, &array, v16, 16);
-  if ( resulta.m_enum == HK_SUCCESS )
-    goto LABEL_25;
-  v17 = v35;
-  v6->m_enum = 1;
-  v34 = 0;
-  if ( v17 >= 0 )
-    hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-      array,
-      16 * v17);
-  return v6;
+  v16 = v34;
+  result->m_enum = HK_FAILURE;
+  v33 = 0;
+  if ( v16 >= 0 )
+    hkContainerTempAllocator::s_alloc.vfptr->bufFree(&hkContainerTempAllocator::s_alloc, array, 16 * v16);
+  return result;
 }
 
 // File Line: 175
 // RVA: 0xBA6220
 hkaiEdgeGeometry::Edge *__fastcall hkaiFaceEdges::findEdgeWithStartVertex(hkaiFaceEdges *this, int face, int a)
 {
-  hkaiEdgeGeometry::Edge *const **v3; // rcx
+  hkaiEdgeGeometry::Edge *const **m_data; // rcx
   hkaiEdgeGeometry::Edge *const *v4; // rax
   hkaiEdgeGeometry::Edge *const *v5; // rdx
 
-  v3 = this->m_faceStartEdges.m_data;
-  v4 = v3[face];
-  v5 = v3[face + 1];
+  m_data = this->m_faceStartEdges.m_data;
+  v4 = m_data[face];
+  v5 = m_data[face + 1];
   if ( v4 == v5 )
     return 0i64;
   while ( **(_DWORD **)v4 != a )
   {
-    ++v4;
-    if ( v4 == v5 )
+    if ( ++v4 == v5 )
       return 0i64;
   }
   return *v4;
@@ -215,19 +193,18 @@ hkaiEdgeGeometry::Edge *__fastcall hkaiFaceEdges::findEdgeWithStartVertex(hkaiFa
 // RVA: 0xBA6260
 hkaiEdgeGeometry::Edge *__fastcall hkaiFaceEdges::findEdgeWithEndVertex(hkaiFaceEdges *this, int face, int b)
 {
-  hkaiEdgeGeometry::Edge *const **v3; // rcx
+  hkaiEdgeGeometry::Edge *const **m_data; // rcx
   hkaiEdgeGeometry::Edge *const *v4; // rax
   hkaiEdgeGeometry::Edge *const *v5; // rdx
 
-  v3 = this->m_faceStartEdges.m_data;
-  v4 = v3[face];
-  v5 = v3[face + 1];
+  m_data = this->m_faceStartEdges.m_data;
+  v4 = m_data[face];
+  v5 = m_data[face + 1];
   if ( v4 == v5 )
     return 0i64;
   while ( (*v4)->m_b != b )
   {
-    ++v4;
-    if ( v4 == v5 )
+    if ( ++v4 == v5 )
       return 0i64;
   }
   return *v4;

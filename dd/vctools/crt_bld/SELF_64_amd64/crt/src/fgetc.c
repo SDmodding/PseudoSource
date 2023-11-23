@@ -1,15 +1,12 @@
 // File Line: 38
 // RVA: 0x13340B8
-signed __int64 __fastcall fgetc(_iobuf *stream)
+__int64 __fastcall fgetc(_iobuf *stream)
 {
-  _iobuf *v1; // rbx
   unsigned int v2; // edi
   int v4; // eax
   ioinfo *v5; // rdx
   ioinfo *v6; // rcx
-  bool v7; // sf
 
-  v1 = stream;
   v2 = 0;
   if ( !stream )
   {
@@ -17,12 +14,12 @@ signed __int64 __fastcall fgetc(_iobuf *stream)
     invalid_parameter_noinfo();
     return 0xFFFFFFFFi64;
   }
-  if ( (signed int)ioinit() < 0 )
+  if ( (int)ioinit() < 0 )
     return 0xFFFFFFFFi64;
-  lock_file(v1);
-  if ( !(v1->_flag & 0x40) )
+  lock_file(stream);
+  if ( (stream->_flag & 0x40) == 0 )
   {
-    v4 = fileno(v1);
+    v4 = fileno(stream);
     if ( (unsigned int)(v4 + 2) <= 1 )
     {
       v6 = &_badioinfo;
@@ -30,16 +27,16 @@ signed __int64 __fastcall fgetc(_iobuf *stream)
     }
     else
     {
-      v5 = &_pioinfo[(signed __int64)v4 >> 5][v4 & 0x1F];
+      v5 = &_pioinfo[(__int64)v4 >> 5][v4 & 0x1F];
       v6 = &_badioinfo;
     }
-    if ( *((_BYTE *)v5 + 56) & 0x7F )
-      goto LABEL_21;
+    if ( (*((_BYTE *)v5 + 56) & 0x7F) != 0 )
+      goto LABEL_13;
     if ( (unsigned int)(v4 + 2) > 1 )
-      v6 = &_pioinfo[(signed __int64)v4 >> 5][v4 & 0x1F];
-    if ( *((_BYTE *)v6 + 56) < 0 )
+      v6 = &_pioinfo[(__int64)v4 >> 5][v4 & 0x1F];
+    if ( *((char *)v6 + 56) < 0 )
     {
-LABEL_21:
+LABEL_13:
       *errno() = 22;
       invalid_parameter_noinfo();
       v2 = -1;
@@ -47,13 +44,12 @@ LABEL_21:
   }
   if ( !v2 )
   {
-    v7 = v1->_cnt-- - 1 < 0;
-    if ( v7 )
-      v2 = filbuf(v1);
+    if ( --stream->_cnt < 0 )
+      v2 = filbuf(stream);
     else
-      v2 = *(unsigned __int8 *)v1->_ptr++;
+      v2 = *(unsigned __int8 *)stream->_ptr++;
   }
-  unlock_file(v1);
+  unlock_file(stream);
   return v2;
 }
 

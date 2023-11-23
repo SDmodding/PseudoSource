@@ -109,7 +109,7 @@ const char *dynamic_initializer_for__sPhonemeFactoryList__()
 __int64 dynamic_initializer_for__gPhonemeFactory__()
 {
   Expression::MemberMapFactory::MemberMapFactory(&gPhonemeFactory, sPhonemeFactoryList, sPhonemeFactoryListNum);
-  return atexit(dynamic_atexit_destructor_for__gPhonemeFactory__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gPhonemeFactory__);
 }
 
 // File Line: 132
@@ -134,6 +134,6 @@ __int64 dynamic_initializer_for__gDialogTrackFactory__()
     &gDialogTrackFactory,
     sDialogTrackFactoryList,
     sDialogTrackFactoryListNum);
-  return atexit(dynamic_atexit_destructor_for__gDialogTrackFactory__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gDialogTrackFactory__);
 }
 

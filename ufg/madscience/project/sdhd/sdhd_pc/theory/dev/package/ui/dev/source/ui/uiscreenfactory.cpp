@@ -10,36 +10,34 @@ void __fastcall UFG::UIScreenFactory::UIScreenFactory(UFG::UIScreenFactory *this
 // RVA: 0xA23E90
 void __fastcall UFG::UIScreenFactory::~UIScreenFactory(UFG::UIScreenFactory *this)
 {
-  Render::Skinning *v1; // rbx
+  UFG::qTreeRB<UFG::UIScreenFactoryNode,UFG::UIScreenFactoryNode,1> *p_m_factoryList; // rbx
 
   this->vfptr = (UFG::UIScreenFactoryVtbl *)&UFG::UIScreenFactory::`vftable;
-  v1 = (Render::Skinning *)&this->m_factoryList;
+  p_m_factoryList = &this->m_factoryList;
   UFG::qTreeRB<UFG::UIScreenFactoryNode,UFG::UIScreenFactoryNode,1>::DeleteAll(&this->m_factoryList);
-  UFG::qBaseTreeRB::~qBaseTreeRB(v1);
+  UFG::qBaseTreeRB::~qBaseTreeRB((Render::Skinning *)p_m_factoryList);
 }
 
 // File Line: 46
 // RVA: 0xA2A6E0
 UFG::allocator::free_link *__fastcall UFG::UIScreenFactory::createScreen(UFG::UIScreenFactory *this, const char *name)
 {
-  UFG::UIScreenFactory *v2; // rbx
   unsigned int v3; // eax
   UFG::qBaseTreeRB *v4; // rax
-  __int64 (***v5)(void); // rcx
+  UFG::qBaseNodeRB *mParent; // rcx
   UFG::allocator::free_link *v7; // rax
   UFG::allocator::free_link *v8; // rcx
   UFG::allocator::free_link *v9; // rax
 
-  v2 = this;
-  v3 = UFG::qStringHashUpper32(name, 0xFFFFFFFF);
+  v3 = UFG::qStringHashUpper32(name, -1);
   if ( v3 )
   {
-    v4 = UFG::qBaseTreeRB::Get(&v2->m_factoryList.mTree, v3);
+    v4 = UFG::qBaseTreeRB::Get(&this->m_factoryList.mTree, v3);
     if ( v4 )
     {
-      v5 = (__int64 (***)(void))v4->mNULL.mParent;
-      if ( v5 )
-        return (UFG::allocator::free_link *)(**v5)();
+      mParent = v4->mNULL.mParent;
+      if ( mParent )
+        return (UFG::allocator::free_link *)((__int64 (__fastcall *)(UFG::qBaseNodeRB *))mParent->mParent->mParent)(mParent);
     }
   }
   v7 = UFG::qMemoryPool::Allocate(&gScaleformMemoryPool, 0x90ui64, "UIScreenFactory::UIScreen", 0i64, 1u);
@@ -65,17 +63,14 @@ UFG::allocator::free_link *__fastcall UFG::UIScreenFactory::createScreen(UFG::UI
 
 // File Line: 75
 // RVA: 0xA292F0
-void __fastcall UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenFactory *this, const char *name, UFG::UIScreenFactoryBase *factory)
+void __fastcall UFG::UIScreenFactory::addScreenMapping(
+        UFG::UIScreenFactory *this,
+        const char *name,
+        UFG::qBaseNodeRB *factory)
 {
-  UFG::UIScreenFactoryBase *v3; // rsi
-  const char *v4; // rbp
-  UFG::UIScreenFactory *v5; // rdi
   UFG::qBaseNodeRB *v6; // rbx
   unsigned int v7; // eax
 
-  v3 = factory;
-  v4 = name;
-  v5 = this;
   v6 = (UFG::qBaseNodeRB *)UFG::qMemoryPool::Allocate(
                              &gScaleformMemoryPool,
                              0x28ui64,
@@ -84,17 +79,17 @@ void __fastcall UFG::UIScreenFactory::addScreenMapping(UFG::UIScreenFactory *thi
                              1u);
   if ( v6 )
   {
-    v7 = UFG::qStringHashUpper32(v4, 0xFFFFFFFF);
+    v7 = UFG::qStringHashUpper32(name, -1);
     v6->mParent = 0i64;
     v6->mChild[0] = 0i64;
     v6->mChild[1] = 0i64;
     v6->mUID = v7;
-    v6[1].mParent = (UFG::qBaseNodeRB *)v3;
+    v6[1].mParent = factory;
   }
   else
   {
     v6 = 0i64;
   }
-  UFG::qBaseTreeRB::Add(&v5->m_factoryList.mTree, v6);
+  UFG::qBaseTreeRB::Add(&this->m_factoryList.mTree, v6);
 }
 

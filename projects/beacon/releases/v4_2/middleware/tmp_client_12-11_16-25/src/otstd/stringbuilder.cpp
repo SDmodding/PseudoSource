@@ -2,49 +2,45 @@
 // RVA: 0xEE6E84
 void __fastcall OSuite::ZUtf8Buffer::~ZUtf8Buffer(OSuite::ZStringBuilder *this)
 {
-  char *v1; // rdx
-  OSuite::ZObject *v2; // rcx
+  char *m_pList; // rdx
+  OSuite::TList<char> *p_m_Chars; // rcx
 
   this->vfptr = (OSuite::ZObjectVtbl *)&OSuite::ZStringBuilder::`vftable;
-  v1 = this->m_Chars.m_pList;
-  v2 = (OSuite::ZObject *)&this->m_Chars.vfptr;
-  v2->vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<unsigned char>::`vftable{for `OSuite::ZListBase};
-  v2[3].vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<char>::`vftable{for `OSuite::IHashable};
-  OSuite::ZObject::free(v2, v1);
+  m_pList = this->m_Chars.m_pList;
+  p_m_Chars = &this->m_Chars;
+  p_m_Chars->OSuite::ZListBase::OSuite::ZObject::vfptr = (OSuite::ZObjectVtbl *)&OSuite::TList<unsigned char>::`vftable{for `OSuite::ZListBase};
+  p_m_Chars->OSuite::IHashable::vfptr = (OSuite::IHashableVtbl *)&OSuite::TList<char>::`vftable{for `OSuite::IHashable};
+  OSuite::ZObject::free(p_m_Chars, m_pList);
 }
 
 // File Line: 38
 // RVA: 0xEE6EB0
 OSuite::ZString *__fastcall OSuite::ZStringBuilder::ToString(OSuite::ZStringBuilder *this, OSuite::ZString *result)
 {
-  OSuite::TList<char> *v2; // rdi
-  OSuite::ZString *v3; // rbx
+  OSuite::ZRedBlackTreeBase *p_m_Chars; // rdi
 
-  v2 = &this->m_Chars;
-  v3 = result;
+  p_m_Chars = (OSuite::ZRedBlackTreeBase *)&this->m_Chars;
   if ( OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&this->m_Chars) )
-    OSuite::ZString::ZString(v3, v2);
+    OSuite::ZString::ZString(result, p_m_Chars);
   else
-    OSuite::ZString::ZString(v3, &customWorldMapCaption);
-  return v3;
+    OSuite::ZString::ZString(result, &customCaption);
+  return result;
 }
 
 // File Line: 60
 // RVA: 0xEE77B8
 void __fastcall OSuite::ZStringBuilder::Clear(OSuite::ZStringBuilder *this, unsigned __int64 nSize)
 {
-  OSuite::ZObject *v2; // rbx
-  unsigned __int64 v3; // rdi
+  OSuite::TList<char> *p_m_Chars; // rbx
 
-  v2 = (OSuite::ZObject *)&this->m_Chars.vfptr;
-  v3 = nSize;
-  OSuite::ZObject::free((OSuite::ZObject *)&this->m_Chars.vfptr, this->m_Chars.m_pList);
-  if ( v3 )
-    v2[4].vfptr = (OSuite::ZObjectVtbl *)OSuite::ZObject::malloc(v2, v3, 0i64);
+  p_m_Chars = &this->m_Chars;
+  OSuite::ZObject::free(&this->m_Chars, this->m_Chars.m_pList);
+  if ( nSize )
+    p_m_Chars->m_pList = (char *)OSuite::ZObject::malloc(p_m_Chars, nSize, 0i64);
   else
-    v2[4].vfptr = 0i64;
-  v2[2].vfptr = 0i64;
-  v2[1].vfptr = (OSuite::ZObjectVtbl *)v3;
+    p_m_Chars->m_pList = 0i64;
+  p_m_Chars->m_nTop = 0i64;
+  p_m_Chars->m_nSize = nSize;
 }
 
 // File Line: 66
@@ -65,39 +61,33 @@ unsigned __int64 __fastcall OSuite::ZStringBuilder::Count(OSuite::ZStringBuilder
 // RVA: 0xEE6F7C
 void __fastcall OSuite::ZStringBuilder::Append(OSuite::ZStringBuilder *this, OSuite::ZString *sStr)
 {
-  OSuite::ZStringBuilder *v2; // rdi
-  OSuite::ZString *v3; // rbx
   unsigned __int64 v4; // rsi
   char *v5; // rbx
 
-  v2 = this;
-  v3 = sStr;
   v4 = OSuite::ZString::Count(sStr);
-  v5 = OSuite::ZString::c_str(v3);
-  OSuite::TList<char>::Grow(&v2->m_Chars, v4 + v2->m_Chars.m_nTop);
+  v5 = OSuite::ZString::c_str(sStr);
+  OSuite::TList<char>::Grow(&this->m_Chars, v4 + this->m_Chars.m_nTop);
   for ( ; v4; --v4 )
-    v2->m_Chars.m_pList[v2->m_Chars.m_nTop++] = *v5++;
+    this->m_Chars.m_pList[this->m_Chars.m_nTop++] = *v5++;
 }
 
 // File Line: 85
 // RVA: 0xEE7054
-void __fastcall OSuite::ZStringBuilder::Append(OSuite::ZStringBuilder *this, const char *pszStr, unsigned __int64 nLength)
+void __fastcall OSuite::ZStringBuilder::Append(OSuite::ZStringBuilder *this, char *pszStr, unsigned __int64 nLength)
 {
   unsigned __int64 v3; // rsi
-  const char *v4; // r14
-  OSuite::TList<char> *v5; // rdi
+  OSuite::TList<char> *p_m_Chars; // rdi
   char v6; // bl
 
   if ( nLength )
   {
     v3 = nLength;
-    v4 = pszStr;
-    v5 = &this->m_Chars;
+    p_m_Chars = &this->m_Chars;
     do
     {
-      v6 = *v4++;
-      OSuite::TList<char>::Grow(v5, v5->m_nTop + 1);
-      v5->m_pList[v5->m_nTop++] = v6;
+      v6 = *pszStr++;
+      OSuite::TList<char>::Grow(p_m_Chars, p_m_Chars->m_nTop + 1);
+      p_m_Chars->m_pList[p_m_Chars->m_nTop++] = v6;
       --v3;
     }
     while ( v3 );
@@ -108,72 +98,62 @@ void __fastcall OSuite::ZStringBuilder::Append(OSuite::ZStringBuilder *this, con
 // RVA: 0xEE7024
 void __fastcall OSuite::ZStringBuilder::Append(OSuite::ZStringBuilder *this, const char *pszStr)
 {
-  OSuite::ZStringBuilder *v2; // rdi
-  const char *v3; // rbx
   unsigned __int64 v4; // rax
 
-  v2 = this;
-  v3 = pszStr;
   v4 = strlen(pszStr);
-  OSuite::ZStringBuilder::Append(v2, v3, v4);
+  OSuite::ZStringBuilder::Append(this, pszStr, v4);
 }
 
 // File Line: 100
 // RVA: 0xEE6FE8
 void __fastcall OSuite::ZStringBuilder::Append(OSuite::ZStringBuilder *this, char nChar)
 {
-  OSuite::TList<char> *v2; // rbx
-  char v3; // di
+  OSuite::TList<char> *p_m_Chars; // rbx
 
-  v2 = &this->m_Chars;
-  v3 = nChar;
+  p_m_Chars = &this->m_Chars;
   OSuite::TList<char>::Grow(&this->m_Chars, this->m_Chars.m_nTop + 1);
-  v2->m_pList[v2->m_nTop++] = v3;
+  p_m_Chars->m_pList[p_m_Chars->m_nTop++] = nChar;
 }
 
 // File Line: 106
 // RVA: 0xEE76E4
-void __fastcall OSuite::ZStringBuilder::AppendUtf8(OSuite::ZStringBuilder *this, const char *pszUtf8, unsigned __int64 nLength)
+void __fastcall OSuite::ZStringBuilder::AppendUtf8(
+        OSuite::ZStringBuilder *this,
+        char *pszUtf8,
+        unsigned __int64 nLength)
 {
-  char *v3; // rdi
-  OSuite::ZStringBuilder *v4; // rsi
-  unsigned __int64 v5; // rbx
-  int v6; // eax
+  int State; // eax
   int v7; // eax
-  OSuite::ZString sEncoding; // [rsp+20h] [rbp-58h]
-  OSuite::ZTextDecoder v9; // [rsp+38h] [rbp-40h]
+  OSuite::ZString sEncoding; // [rsp+20h] [rbp-58h] BYREF
+  OSuite::ZTextDecoder v9; // [rsp+38h] [rbp-40h] BYREF
 
   v9.m_pFeeder = 0i64;
   v9.m_sEncoding.m_pString = 0i64;
-  v3 = (char *)pszUtf8;
-  v4 = this;
-  v5 = nLength;
   OSuite::ZString::ZString(&sEncoding, "UTF-8");
   OSuite::ZTextDecoder::ZTextDecoder(&v9, &sEncoding);
   OSuite::ZString::~ZString(&sEncoding);
-  while ( v5 )
+  while ( nLength )
   {
-    --v5;
-    v6 = OSuitePrivate::ZEidosTransaction::GetState((OSuite::Statistics *)&v9);
-    if ( v6 != -1 )
-      OSuite::ZStringBuilder::Append(v4, v6);
-    OSuite::ZTextDecoder::Feed(&v9, *v3++);
+    --nLength;
+    State = OSuitePrivate::ZEidosTransaction::GetState((OSuite::Statistics *)&v9);
+    if ( State != -1 )
+      OSuite::ZStringBuilder::Append(this, State);
+    OSuite::ZTextDecoder::Feed(&v9, *pszUtf8++);
   }
   v7 = OSuitePrivate::ZEidosTransaction::GetState((OSuite::Statistics *)&v9);
   if ( v7 != -1 )
-    OSuite::ZStringBuilder::Append(v4, v7);
+    OSuite::ZStringBuilder::Append(this, v7);
   OSuite::ZTextDecoder::~ZTextDecoder(&v9);
 }
 
 // File Line: 133
 // RVA: 0xEE7638
-void __fastcall OSuite::ZStringBuilder::AppendInt(OSuite::ZStringBuilder *this, __int64 nInt)
+void __fastcall OSuite::ZStringBuilder::AppendInt(OSuite::ZStringBuilder *this, int nInt)
 {
-  nInt = (signed int)nInt;
-  if ( (signed __int64)(signed int)nInt >= 0 )
+  if ( nInt >= 0i64 )
     OSuite::ZStringBuilder::InternalAppendDecimal(this, nInt, 0, 1, 0, 0);
   else
-    OSuite::ZStringBuilder::InternalAppendDecimal(this, -nInt, 0, 1, 0, 45);
+    OSuite::ZStringBuilder::InternalAppendDecimal(this, -(__int64)nInt, 0, 1, 0, 45);
 }
 
 // File Line: 139
@@ -202,99 +182,92 @@ void __fastcall OSuite::ZStringBuilder::AppendInt(OSuite::ZStringBuilder *this, 
 
 // File Line: 170
 // RVA: 0xEE7A08
-void __fastcall OSuite::ZStringBuilder::InternalAppendDecimal(OSuite::ZStringBuilder *this, unsigned __int64 nInt, int nMinCharacters, int nMinDigits, char cPad, char cPositiveChar)
+void __fastcall OSuite::ZStringBuilder::InternalAppendDecimal(
+        OSuite::ZStringBuilder *this,
+        unsigned __int64 nInt,
+        int nMinCharacters,
+        int nMinDigits,
+        char cPad,
+        char cPositiveChar)
 {
-  int v6; // ebx
-  int v7; // esi
-  unsigned __int64 v8; // r15
-  OSuite::ZStringBuilder *v9; // rdi
   int v10; // eax
   int v11; // ebp
-  BOOL v12; // er10
+  BOOL v12; // r10d
   __int64 v13; // rsi
   __int64 v14; // rbx
 
-  v6 = nMinDigits;
-  v7 = nMinCharacters;
-  v8 = nInt;
-  v9 = this;
   v10 = OSuite::ZStringBuilder::DecimalLength(this, nInt);
   v11 = v10;
   v12 = cPositiveChar != 0;
-  if ( v10 > v6 )
-    v6 = v10;
-  if ( v7 > v12 + v6 )
+  if ( v10 > nMinDigits )
+    nMinDigits = v10;
+  if ( nMinCharacters > v12 + nMinDigits )
   {
-    v13 = (unsigned int)(v7 - (v12 + v6));
+    v13 = (unsigned int)(nMinCharacters - (v12 + nMinDigits));
     do
     {
-      OSuite::ZStringBuilder::Append(v9, cPad);
+      OSuite::ZStringBuilder::Append(this, cPad);
       --v13;
     }
     while ( v13 );
   }
   if ( cPositiveChar )
-    OSuite::ZStringBuilder::Append(v9, cPositiveChar);
-  if ( v6 > v11 )
+    OSuite::ZStringBuilder::Append(this, cPositiveChar);
+  if ( nMinDigits > v11 )
   {
-    v14 = (unsigned int)(v6 - v11);
+    v14 = (unsigned int)(nMinDigits - v11);
     do
     {
-      OSuite::ZStringBuilder::Append(v9, 48);
+      OSuite::ZStringBuilder::Append(this, 48);
       --v14;
     }
     while ( v14 );
   }
-  OSuite::ZStringBuilder::InternalAppendInt(v9, v8, 10, "0123456789");
+  OSuite::ZStringBuilder::InternalAppendInt(this, nInt, 10, "0123456789");
 }
 
 // File Line: 201
 // RVA: 0xEE7B98
-void __fastcall OSuite::ZStringBuilder::InternalAppendInt(OSuite::ZStringBuilder *this, unsigned __int64 nInt, int nBase, const char *pszBase)
+void __fastcall OSuite::ZStringBuilder::InternalAppendInt(
+        OSuite::ZStringBuilder *this,
+        unsigned __int64 nInt,
+        int nBase,
+        const char *pszBase)
 {
   unsigned __int64 v4; // rdi
-  const char *v5; // rsi
-  unsigned __int64 v6; // rbx
-  OSuite::ZStringBuilder *v7; // rbp
 
   v4 = nBase;
-  v5 = pszBase;
-  v6 = nInt;
-  v7 = this;
   if ( nInt >= nBase )
     OSuite::ZStringBuilder::InternalAppendInt(this, nInt / nBase, nBase, pszBase);
-  OSuite::ZStringBuilder::Append(v7, v5[v6 % v4]);
+  OSuite::ZStringBuilder::Append(this, pszBase[nInt % v4]);
 }
 
 // File Line: 212
 // RVA: 0xEE7910
-signed __int64 __fastcall OSuite::ZStringBuilder::DecimalLength(OSuite::ZStringBuilder *this, unsigned __int64 nInt)
+__int64 __fastcall OSuite::ZStringBuilder::DecimalLength(OSuite::ZStringBuilder *this, unsigned __int64 nInt)
 {
-  signed __int64 v2; // rcx
-  unsigned __int64 v3; // r8
-  unsigned __int64 v4; // rdx
+  __int64 v2; // rcx
+  unsigned __int64 i; // rdx
 
   v2 = 19i64;
-  v3 = nInt;
-  v4 = 1000000000000000000i64;
-  while ( v3 < v4 )
-  {
-    v4 = (unsigned __int64)(v4 * (unsigned __int128)0xCCCCCCCCCCCCCCCDui64 >> 64) >> 3;
+  for ( i = 1000000000000000000i64; nInt < i; i /= 0xAui64 )
     --v2;
-  }
   if ( !v2 )
-    v2 = 1i64;
+    return 1i64;
   return v2;
 }
 
 // File Line: 227
 // RVA: 0xEE7ABC
-void __fastcall OSuite::ZStringBuilder::InternalAppendHex(OSuite::ZStringBuilder *this, unsigned __int64 nInt, bool bCaps, const char *pPrefix, int nMinCharacters, int nMinDigits, char cPad)
+void __fastcall OSuite::ZStringBuilder::InternalAppendHex(
+        OSuite::ZStringBuilder *this,
+        unsigned __int64 nInt,
+        bool bCaps,
+        char *pPrefix,
+        int nMinCharacters,
+        int nMinDigits,
+        char cPad)
 {
-  const char *v7; // r15
-  bool v8; // r13
-  unsigned __int64 v9; // r12
-  OSuite::ZStringBuilder *v10; // rsi
   int v11; // ebp
   int v12; // edi
   int v13; // ebx
@@ -302,13 +275,9 @@ void __fastcall OSuite::ZStringBuilder::InternalAppendHex(OSuite::ZStringBuilder
   __int64 v15; // rbx
   const char *v16; // r9
 
-  v7 = pPrefix;
-  v8 = bCaps;
-  v9 = nInt;
-  v10 = this;
   v11 = OSuite::ZStringBuilder::HexLength(this, nInt);
-  if ( v7 )
-    v12 = strlen(v7);
+  if ( pPrefix )
+    v12 = strlen(pPrefix);
   else
     v12 = 0;
   v13 = nMinDigits;
@@ -319,27 +288,27 @@ void __fastcall OSuite::ZStringBuilder::InternalAppendHex(OSuite::ZStringBuilder
     v14 = (unsigned int)(nMinCharacters - (v12 + v13));
     do
     {
-      OSuite::ZStringBuilder::Append(v10, cPad);
+      OSuite::ZStringBuilder::Append(this, cPad);
       --v14;
     }
     while ( v14 );
   }
   if ( v12 )
-    OSuite::ZStringBuilder::Append(v10, v7, v12);
+    OSuite::ZStringBuilder::Append(this, pPrefix, v12);
   if ( v13 > v11 )
   {
     v15 = (unsigned int)(v13 - v11);
     do
     {
-      OSuite::ZStringBuilder::Append(v10, 48);
+      OSuite::ZStringBuilder::Append(this, 48);
       --v15;
     }
     while ( v15 );
   }
   v16 = "0123456789abcdef";
-  if ( v8 )
+  if ( bCaps )
     v16 = a01234567_0;
-  OSuite::ZStringBuilder::InternalAppendInt(v10, v9, 16, v16);
+  OSuite::ZStringBuilder::InternalAppendInt(this, nInt, 16, v16);
 }
 
 // File Line: 264
@@ -347,17 +316,13 @@ void __fastcall OSuite::ZStringBuilder::InternalAppendHex(OSuite::ZStringBuilder
 unsigned __int64 __fastcall OSuite::ZStringBuilder::HexLength(OSuite::ZStringBuilder *this, unsigned __int64 nInt)
 {
   unsigned __int64 result; // rax
-  unsigned __int64 v3; // rcx
+  unsigned __int64 i; // rcx
 
   result = 16i64;
-  v3 = 0x1000000000000000i64;
-  while ( nInt < v3 )
-  {
-    v3 >>= 4;
+  for ( i = 0x1000000000000000i64; nInt < i; i >>= 4 )
     --result;
-  }
   if ( !result )
-    result = 1i64;
+    return 1i64;
   return result;
 }
 
@@ -365,7 +330,7 @@ unsigned __int64 __fastcall OSuite::ZStringBuilder::HexLength(OSuite::ZStringBui
 // RVA: 0xEE71EC
 void OSuite::ZStringBuilder::AppendFormat(OSuite::ZStringBuilder *this, const char *pszFormat, ...)
 {
-  va_list va; // [rsp+40h] [rbp+18h]
+  va_list va; // [rsp+40h] [rbp+18h] BYREF
 
   va_start(va, pszFormat);
   OSuite::ZStringBuilder::AppendFormatList(this, pszFormat, va);
@@ -375,29 +340,22 @@ void OSuite::ZStringBuilder::AppendFormat(OSuite::ZStringBuilder *this, const ch
 // RVA: 0xEE70B8
 void __fastcall OSuite::ZStringBuilder::AppendBinaryExponential(OSuite::ZStringBuilder *this, long double dValue)
 {
-  OSuite::ZStringBuilder *v2; // rbx
-  signed __int64 v3; // rbp
+  __int64 v3; // rbp
   int v4; // edi
   const char *v5; // rdx
   unsigned __int64 v6; // rsi
 
-  v2 = this;
   v3 = *(_QWORD *)&dValue & 0xFFFFFFFFFFFFFi64;
   v4 = ((*(_QWORD *)&dValue >> 52) & 0x7FF) - 1023;
   if ( dValue < 0.0 )
     OSuite::ZStringBuilder::Append(this, 45);
-  if ( v4 == -1023 )
+  if ( ((*(_QWORD *)&dValue >> 52) & 0x7FF) != 0 )
   {
-    OSuite::ZStringBuilder::Append(v2, "0.");
-    v4 = -1022;
-  }
-  else
-  {
-    if ( v4 == 1024 )
+    if ( ((*(_QWORD *)&dValue >> 52) & 0x7FF) == 2047 )
     {
       if ( !v3 )
       {
-        OSuite::ZStringBuilder::Append(v2, "inf");
+        OSuite::ZStringBuilder::Append(this, "inf");
         return;
       }
       v5 = "nan#";
@@ -406,381 +364,375 @@ void __fastcall OSuite::ZStringBuilder::AppendBinaryExponential(OSuite::ZStringB
     {
       v5 = "1.";
     }
-    OSuite::ZStringBuilder::Append(v2, v5);
+    OSuite::ZStringBuilder::Append(this, v5);
+  }
+  else
+  {
+    OSuite::ZStringBuilder::Append(this, "0.");
+    v4 = -1022;
   }
   v6 = 0x8000000000000i64;
   do
   {
-    if ( !((v6 | (v6 - 1)) & v3) )
+    if ( ((v6 | (v6 - 1)) & v3) == 0 )
       break;
-    OSuite::ZStringBuilder::Append(v2, ((v6 & v3) != 0) + 48);
+    OSuite::ZStringBuilder::Append(this, ((v6 & v3) != 0) + 48);
     v6 >>= 1;
   }
   while ( v6 );
-  OSuite::ZStringBuilder::Append(v2, 98);
-  if ( v4 & 0xFFFFFBFF )
+  OSuite::ZStringBuilder::Append(this, 98);
+  if ( (v4 & 0xFFFFFBFF) != 0 )
   {
-    OSuite::ZStringBuilder::Append(v2, "*2");
+    OSuite::ZStringBuilder::Append(this, "*2");
     if ( v4 != 1 )
     {
-      OSuite::ZStringBuilder::Append(v2, 94);
-      OSuite::ZStringBuilder::AppendInt(v2, v4);
+      OSuite::ZStringBuilder::Append(this, 94);
+      OSuite::ZStringBuilder::AppendInt(this, v4);
     }
   }
 }
 
 // File Line: 432
 // RVA: 0xEE7210
-void __fastcall OSuite::ZStringBuilder::AppendFormatList(OSuite::ZStringBuilder *this, const char *pszFormat, char *arguments)
+void __fastcall OSuite::ZStringBuilder::AppendFormatList(
+        OSuite::ZStringBuilder *this,
+        char *pszFormat,
+        char *arguments)
 {
-  OSuite::ZStringBuilder *v3; // r13
-  char *v4; // rdi
-  const char *v5; // rsi
-  unsigned __int64 v6; // rax
-  int v7; // ebp
-  char v8; // dl
-  int v9; // er14
-  char v10; // r9
+  int v6; // ebp
+  char v7; // dl
+  int v8; // r14d
+  char v9; // r9
   char cPositiveChar; // r10
   char cPad; // r11
-  signed int v13; // er8
-  int v14; // er15
+  int v12; // r8d
+  int v13; // r15d
+  int v14; // eax
   int v15; // eax
-  int v16; // eax
-  signed __int64 v17; // rcx
-  long double v18; // xmm1_8
-  const char *v19; // rbp
-  int v20; // ebx
-  __int64 v21; // r14
-  unsigned __int64 v22; // rax
-  int v23; // ebx
-  __int64 v24; // r14
-  int v25; // er8
-  int v26; // er8
-  signed __int64 v27; // rdx
-  int v28; // er9
-  int v29; // er8
-  OSuite::ZStringBuilder *v30; // rcx
-  unsigned __int64 v31; // rdx
-  _DWORD *v32; // rbx
-  bool v33; // cl
-  int v34; // er8
-  int v35; // er8
-  unsigned __int64 v36; // rdx
-  const char *v37; // r9
-  int v38; // er8
-  int v39; // er8
-  unsigned __int64 v40; // [rsp+70h] [rbp+8h]
+  __int64 v16; // rcx
+  long double v17; // xmm1_8
+  char *v18; // rbp
+  int v19; // ebx
+  __int64 v20; // r14
+  unsigned __int64 v21; // rax
+  int v22; // ebx
+  __int64 v23; // r14
+  int v24; // r8d
+  signed __int64 v25; // rdx
+  int v26; // r9d
+  int v27; // r8d
+  OSuite::ZStringBuilder *v28; // rcx
+  unsigned __int64 v29; // rdx
+  _DWORD *v30; // rbx
+  bool v31; // cl
+  int v32; // r8d
+  unsigned __int64 v33; // rdx
+  const char *v34; // r9
+  int v35; // r8d
+  int v36; // [rsp+70h] [rbp+8h]
 
-  v3 = this;
-  v4 = arguments;
-  v5 = pszFormat;
   v6 = OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&this->m_Chars);
-  v7 = v6;
-  v40 = v6;
-LABEL_39:
-  v8 = *v5++;
-  while ( v8 )
+  v36 = v6;
+LABEL_38:
+  v7 = *pszFormat++;
+  while ( v7 )
   {
-    if ( v8 != 37 )
-      goto LABEL_38;
-    v8 = *v5;
+    if ( v7 != 37 )
+      goto LABEL_37;
+    v7 = *pszFormat;
+    v8 = 0;
     v9 = 0;
-    v10 = 0;
-    ++v5;
+    ++pszFormat;
     cPositiveChar = 0;
     cPad = 32;
-    v13 = 2;
-    v14 = -1;
-    while ( *v5 )
+    v12 = 2;
+    v13 = -1;
+    while ( *pszFormat )
     {
-      if ( v8 != 45 )
+      if ( v7 != 45 )
       {
-        switch ( v8 )
+        switch ( v7 )
         {
-          case 43:
+          case +:
             cPositiveChar = 43;
             break;
-          case 32:
+          case  :
             cPositiveChar = 32;
             break;
-          case 35:
-            v10 = 1;
+          case #:
+            v9 = 1;
             break;
-          case 48:
+          case 0:
             cPad = 48;
             break;
           default:
-            goto LABEL_16;
+            goto LABEL_15;
         }
       }
-      v8 = *v5++;
+      v7 = *pszFormat++;
     }
-LABEL_16:
-    if ( v8 == 42 )
+LABEL_15:
+    if ( v7 == 42 )
     {
-      v8 = *v5;
-      v9 = *(_DWORD *)v4;
-      v4 += 8;
-      ++v5;
+      v7 = *pszFormat;
+      v8 = *(_DWORD *)arguments;
+      arguments += 8;
+      ++pszFormat;
     }
     else
     {
-      while ( v8 >= 48 && v8 <= 57 )
+      while ( v7 >= 48 && v7 <= 57 )
       {
-        v15 = v8;
-        v8 = *v5++;
-        v9 = v15 + 2 * (5 * v9 - 24);
+        v14 = v7;
+        v7 = *pszFormat++;
+        v8 = v14 + 2 * (5 * v8 - 24);
       }
     }
-    if ( v8 == 46 )
+    if ( v7 == 46 )
     {
-      v8 = *v5++;
-      if ( v8 == 42 )
+      v7 = *pszFormat++;
+      if ( v7 == 42 )
       {
-        v8 = *v5;
-        v14 = *(_DWORD *)v4;
-        v4 += 8;
-        ++v5;
+        v7 = *pszFormat;
+        v13 = *(_DWORD *)arguments;
+        arguments += 8;
+        ++pszFormat;
       }
       else
       {
-        v14 = 0;
-        while ( v8 >= 48 && v8 <= 57 )
+        v13 = 0;
+        while ( v7 >= 48 && v7 <= 57 )
         {
-          v16 = v8;
-          v8 = *v5++;
-          v14 = v16 + 2 * (5 * v14 - 24);
+          v15 = v7;
+          v7 = *pszFormat++;
+          v13 = v15 + 2 * (5 * v13 - 24);
         }
       }
     }
-    switch ( v8 )
+    switch ( v7 )
     {
-      case 72:
-        v8 = *v5++;
-        v13 = 0;
-        goto LABEL_37;
-      case 104:
-        v13 = 1;
+      case H:
+        v7 = *pszFormat++;
+        v12 = 0;
+        goto LABEL_36;
+      case h:
+        v12 = 1;
         break;
-      case 108:
-        v13 = 3;
+      case l:
+        v12 = 3;
         break;
-      case 76:
-        v13 = 4;
+      case L:
+        v12 = 4;
         break;
       default:
-        goto LABEL_37;
+        goto LABEL_36;
     }
-    v8 = *v5++;
-LABEL_37:
-    if ( v8 == 37 )
-      goto LABEL_38;
-    if ( (unsigned __int8)(v8 - 69) <= 0x22u )
+    v7 = *pszFormat++;
+LABEL_36:
+    if ( v7 == 37 )
+      goto LABEL_37;
+    if ( (unsigned __int8)(v7 - 69) <= 0x22u )
     {
-      v17 = 30064771077i64;
-      if ( _bittest64(&v17, (char)(v8 - 69)) )
+      v16 = 0x700000005i64;
+      if ( _bittest64(&v16, (char)(v7 - 69)) )
       {
-        v18 = *(double *)v4;
-        v4 += 8;
-        OSuite::ZStringBuilder::AppendBinaryExponential(v3, v18);
-        goto LABEL_39;
+        v17 = *(double *)arguments;
+        arguments += 8;
+        OSuite::ZStringBuilder::AppendBinaryExponential(this, v17);
+        goto LABEL_38;
       }
     }
-    switch ( v8 )
+    switch ( v7 )
     {
-      case 99:
-        v8 = *v4;
-        v4 += 8;
-LABEL_38:
-        OSuite::ZStringBuilder::Append(v3, v8);
-        goto LABEL_39;
-      case 115:
-        v19 = *(const char **)v4;
-        v4 += 8;
-        if ( v13 <= 1 )
+      case c:
+        v7 = *arguments;
+        arguments += 8;
+LABEL_37:
+        OSuite::ZStringBuilder::Append(this, v7);
+        goto LABEL_38;
+      case s:
+        v18 = *(char **)arguments;
+        arguments += 8;
+        if ( v12 <= 1 )
         {
-          if ( v19 )
-            goto LABEL_52;
-          if ( v14 )
+          if ( v18 )
+            goto LABEL_51;
+          if ( v13 )
           {
-            v19 = "(null)";
-LABEL_52:
-            v20 = OSuite::ZTextDecoder::utf8len(v19);
+            v18 = "(null)";
+LABEL_51:
+            v19 = OSuite::ZTextDecoder::utf8len(v18);
           }
           else
           {
-            v20 = 0;
+            v19 = 0;
           }
-          if ( v20 < v9 )
+          if ( v19 < v8 )
           {
-            v21 = (unsigned int)(v9 - v20);
+            v20 = (unsigned int)(v8 - v19);
             do
             {
-              OSuite::ZStringBuilder::Append(v3, 32);
-              --v21;
+              OSuite::ZStringBuilder::Append(this, 32);
+              --v20;
             }
-            while ( v21 );
+            while ( v20 );
           }
-          if ( v19 )
+          if ( v18 )
           {
-            if ( v14 == -1 || v20 <= v14 )
-              v14 = v20;
-            v22 = OSuite::ZTextDecoder::utf8indexof(v19, v14);
-            OSuite::ZStringBuilder::AppendUtf8(v3, v19, v22);
+            if ( v13 == -1 || v19 <= v13 )
+              v13 = v19;
+            v21 = OSuite::ZTextDecoder::utf8indexof(v18, v13);
+            OSuite::ZStringBuilder::AppendUtf8(this, v18, v21);
           }
-LABEL_74:
-          v7 = v40;
-          goto LABEL_39;
+LABEL_73:
+          v6 = v36;
+          goto LABEL_38;
         }
-        if ( v19 )
+        if ( v18 )
         {
-LABEL_65:
-          v23 = strlen(v19);
+LABEL_64:
+          v22 = strlen(v18);
         }
         else
         {
-          if ( v14 )
+          if ( v13 )
           {
-            v19 = "(null)";
-            goto LABEL_65;
+            v18 = "(null)";
+            goto LABEL_64;
           }
-          v23 = 0;
+          v22 = 0;
         }
-        if ( v23 < v9 )
+        if ( v22 < v8 )
         {
-          v24 = (unsigned int)(v9 - v23);
+          v23 = (unsigned int)(v8 - v22);
           do
           {
-            OSuite::ZStringBuilder::Append(v3, 32);
-            --v24;
+            OSuite::ZStringBuilder::Append(this, 32);
+            --v23;
           }
-          while ( v24 );
+          while ( v23 );
         }
-        if ( v19 )
+        if ( v18 )
         {
-          if ( v14 == -1 || v23 <= v14 )
-            v14 = v23;
-          OSuite::ZStringBuilder::Append(v3, v19, v14);
+          if ( v13 == -1 || v22 <= v13 )
+            v13 = v22;
+          OSuite::ZStringBuilder::Append(this, v18, v13);
         }
-        goto LABEL_74;
-      case 105:
-      case 100:
-        if ( v14 == -1 )
-          v14 = 1;
-        v4 += 8;
-        if ( v13 )
+        goto LABEL_73;
+      case i:
+      case d:
+        if ( v13 == -1 )
+          v13 = 1;
+        arguments += 8;
+        if ( v12 )
         {
-          v38 = v13 - 1;
-          if ( v38 )
+          v35 = v12 - 1;
+          if ( v35 )
           {
-            v39 = v38 - 2;
-            if ( v39 && v39 == 1 )
-              v27 = *((_QWORD *)v4 - 1);
+            if ( v35 == 3 )
+              v25 = *((_QWORD *)arguments - 1);
             else
-              v27 = *((signed int *)v4 - 2);
+              v25 = *((int *)arguments - 2);
           }
           else
           {
-            v27 = *((signed __int16 *)v4 - 4);
+            v25 = *((__int16 *)arguments - 4);
           }
         }
         else
         {
-          v27 = *(v4 - 8);
+          v25 = *(arguments - 8);
         }
-        v28 = v14;
-        v29 = v9;
-        v30 = v3;
-        if ( v27 < 0 )
+        v26 = v13;
+        v27 = v8;
+        v28 = this;
+        if ( v25 < 0 )
         {
-          OSuite::ZStringBuilder::InternalAppendDecimal(v3, -v27, v9, v14, cPad, 45);
-          goto LABEL_39;
+          OSuite::ZStringBuilder::InternalAppendDecimal(this, -v25, v8, v13, cPad, 45);
+          goto LABEL_38;
         }
-LABEL_90:
-        OSuite::ZStringBuilder::InternalAppendDecimal(v30, v27, v29, v28, cPad, cPositiveChar);
-        goto LABEL_39;
-      case 117:
-        if ( v14 == -1 )
-          v14 = 1;
-        v4 += 8;
-        if ( v13 )
+LABEL_88:
+        OSuite::ZStringBuilder::InternalAppendDecimal(v28, v25, v27, v26, cPad, cPositiveChar);
+        goto LABEL_38;
+      case u:
+        if ( v13 == -1 )
+          v13 = 1;
+        arguments += 8;
+        if ( v12 )
         {
-          v25 = v13 - 1;
-          if ( v25 )
+          v24 = v12 - 1;
+          if ( v24 )
           {
-            v26 = v25 - 2;
-            if ( v26 && v26 == 1 )
-              v27 = *((_QWORD *)v4 - 1);
+            if ( v24 == 3 )
+              v25 = *((_QWORD *)arguments - 1);
             else
-              v27 = *((unsigned int *)v4 - 2);
+              v25 = *((unsigned int *)arguments - 2);
           }
           else
           {
-            v27 = *((unsigned __int16 *)v4 - 4);
+            v25 = *((unsigned __int16 *)arguments - 4);
           }
         }
         else
         {
-          v27 = (unsigned __int8)*(v4 - 8);
+          v25 = (unsigned __int8)*(arguments - 8);
         }
-        v28 = v14;
-        v29 = v9;
-        v30 = v3;
-        goto LABEL_90;
+        v26 = v13;
+        v27 = v8;
+        v28 = this;
+        goto LABEL_88;
     }
-    if ( !((v8 - 88) & 0xDF) )
+    if ( ((v7 - 88) & 0xDF) == 0 )
     {
-      if ( v14 == -1 )
-        v14 = 1;
-      v33 = v8 == 88;
-      v4 += 8;
-      if ( v13 )
+      if ( v13 == -1 )
+        v13 = 1;
+      v31 = v7 == 88;
+      arguments += 8;
+      if ( v12 )
       {
-        v34 = v13 - 1;
-        if ( v34 )
+        v32 = v12 - 1;
+        if ( v32 )
         {
-          v35 = v34 - 2;
-          if ( v35 && v35 == 1 )
-            v36 = *((_QWORD *)v4 - 1);
+          if ( v32 == 3 )
+            v33 = *((_QWORD *)arguments - 1);
           else
-            v36 = *((unsigned int *)v4 - 2);
+            v33 = *((unsigned int *)arguments - 2);
         }
         else
         {
-          v36 = *((unsigned __int16 *)v4 - 4);
+          v33 = *((unsigned __int16 *)arguments - 4);
         }
       }
       else
       {
-        v36 = (unsigned __int8)*(v4 - 8);
+        v33 = (unsigned __int8)*(arguments - 8);
       }
-      if ( v10 && v36 )
+      if ( v9 && v33 )
       {
-        v37 = "0x";
-        if ( v33 )
-          v37 = "0X";
+        v34 = "0x";
+        if ( v31 )
+          v34 = "0X";
       }
       else
       {
-        v37 = 0i64;
+        v34 = 0i64;
       }
-      OSuite::ZStringBuilder::InternalAppendHex(v3, v36, v33, v37, v9, v14, cPad);
-      goto LABEL_39;
+      OSuite::ZStringBuilder::InternalAppendHex(this, v33, v31, v34, v8, v13, cPad);
+      goto LABEL_38;
     }
-    if ( v8 == 112 )
+    if ( v7 == 112 )
     {
-      v31 = *(_QWORD *)v4;
-      v4 += 8;
-      OSuite::ZStringBuilder::InternalAppendHex(v3, v31, 1, 0i64, 0, 1, 0);
-      goto LABEL_39;
+      v29 = *(_QWORD *)arguments;
+      arguments += 8;
+      OSuite::ZStringBuilder::InternalAppendHex(this, v29, 1, 0i64, 0, 1, 0);
+      goto LABEL_38;
     }
-    if ( v8 == 110 )
+    if ( v7 == 110 )
     {
-      v32 = *(_DWORD **)v4;
-      v4 += 8;
-      *v32 = OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&v3->m_Chars) - v7;
-      goto LABEL_39;
+      v30 = *(_DWORD **)arguments;
+      arguments += 8;
+      *v30 = OSuite::ZHttpStreamReader::Tell((OSuite::ZRedBlackTreeBase *)&this->m_Chars) - v6;
+      goto LABEL_38;
     }
   }
 }

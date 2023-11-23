@@ -1,65 +1,60 @@
 // File Line: 61
 // RVA: 0x7FF2B0
-void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl::Catch::MakeObject(Scaleform::GFx::AS3::InstanceTraits::fl::Catch *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::InstanceTraits::Traits *t)
+void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl::Catch::MakeObject(
+        Scaleform::GFx::AS3::InstanceTraits::fl::Catch *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::InstanceTraits::fl::Catch *t)
 {
-  Scaleform::GFx::AS3::Value *v3; // rbx
-  Scaleform::GFx::AS3::Object **v4; // rax
-  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl::Catch> resulta; // [rsp+48h] [rbp+20h]
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl::Catch> *Instance; // rax
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl::Catch> resulta; // [rsp+48h] [rbp+20h] BYREF
 
-  v3 = result;
-  v4 = (Scaleform::GFx::AS3::Object **)Scaleform::GFx::AS3::InstanceTraits::fl::Catch::MakeInstance(
-                                         &resulta,
-                                         (Scaleform::GFx::AS3::InstanceTraits::fl::Catch *)t);
-  Scaleform::GFx::AS3::Value::Pick(v3, *v4);
+  Instance = Scaleform::GFx::AS3::InstanceTraits::fl::Catch::MakeInstance(&resulta, t);
+  Scaleform::GFx::AS3::Value::Pick(result, Instance->pV);
 }
 
 // File Line: 68
 // RVA: 0x77BD10
-void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl::Catch::Catch(Scaleform::GFx::AS3::InstanceTraits::fl::Catch *this, Scaleform::GFx::AS3::VMAbcFile *file, Scaleform::GFx::AS3::VM *vm, Scaleform::GFx::AS3::Abc::MethodBodyInfo::ExceptionInfo *e)
+void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl::Catch::Catch(
+        Scaleform::GFx::AS3::InstanceTraits::fl::Catch *this,
+        Scaleform::GFx::AS3::VMAbcFile *file,
+        Scaleform::GFx::AS3::VM *vm,
+        Scaleform::GFx::AS3::Abc::MethodBodyInfo::ExceptionInfo *e)
 {
-  Scaleform::GFx::AS3::Abc::MethodBodyInfo::ExceptionInfo *v4; // rbp
-  Scaleform::GFx::AS3::VM *v5; // rbx
-  Scaleform::GFx::AS3::VMAbcFile *v6; // rsi
-  Scaleform::GFx::AS3::InstanceTraits::fl::Catch *v7; // rdi
-  Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *v8; // rbx
-  __int64 v9; // rax
-  const char *v10; // r8
+  Scaleform::GFx::AS3::StringManager *StringManagerRef; // rbx
+  __int64 var_name_ind; // rax
+  const char *Data; // r8
   const char *v11; // r8
   unsigned __int64 v12; // r9
   char v13; // al
   unsigned int v14; // ecx
   char v15; // dl
-  Scaleform::GFx::ASStringNode *v16; // rbx
-  Scaleform::GFx::ASStringNode *v17; // rcx
-  bool v18; // zf
-  Scaleform::GFx::ASStringNode *v19; // rcx
-  __int64 v20; // rcx
-  Scaleform::GFx::AS3::SlotInfo::BindingType v21; // eax
-  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl::Namespace const > v22; // r8
-  Scaleform::GFx::ASStringNode *v23; // rcx
-  Scaleform::GFx::ASString result; // [rsp+70h] [rbp+18h]
-  Scaleform::GFx::ASString v25; // [rsp+78h] [rbp+20h]
+  Scaleform::GFx::ASString *v16; // rax
+  Scaleform::GFx::ASStringNode *pNode; // rbx
+  Scaleform::GFx::ASStringNode *v18; // rcx
+  bool v19; // zf
+  Scaleform::GFx::ASStringNode *v20; // rcx
+  __int64 exc_type_ind; // rcx
+  Scaleform::GFx::AS3::SlotInfo::BindingType BindingType; // eax
+  Scaleform::GFx::AS3::Instances::fl::Namespace *pObject; // r8
+  Scaleform::GFx::ASStringNode *v24; // rcx
+  Scaleform::GFx::ASString result; // [rsp+70h] [rbp+18h] BYREF
+  Scaleform::GFx::ASString v26; // [rsp+78h] [rbp+20h] BYREF
 
-  v4 = e;
-  v5 = vm;
-  v6 = file;
-  v7 = this;
-  Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(
-    (Scaleform::GFx::AS3::InstanceTraits::CTraits *)&this->vfptr,
-    vm,
-    &Scaleform::GFx::AS3::fl::CatchCI);
-  v7->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Catch::`vftable;
-  v7->TraitsType = 21;
-  v8 = (Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64> *)v5->StringManagerRef->Builtins;
-  Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(v8, &result);
-  v9 = v4->var_name_ind;
-  if ( (_DWORD)v9 )
+  Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(this, vm, &Scaleform::GFx::AS3::fl::CatchCI);
+  this->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Catch::`vftable;
+  this->TraitsType = Traits_Catch;
+  StringManagerRef = vm->StringManagerRef;
+  Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateEmptyString(
+    StringManagerRef,
+    &result);
+  var_name_ind = e->var_name_ind;
+  if ( (_DWORD)var_name_ind )
   {
-    v10 = v6->File.pObject->Const_Pool.ConstStr.Data.Data[v6->File.pObject->Const_Pool.const_multiname.Data.Data[v9].NameIndex].Data;
-    if ( v10 )
+    Data = file->File.pObject->Const_Pool.ConstStr.Data.Data[file->File.pObject->Const_Pool.const_multiname.Data.Data[var_name_ind].NameIndex].Data;
+    if ( Data )
     {
-      v13 = *v10;
-      v11 = v10 + 1;
+      v13 = *Data;
+      v11 = Data + 1;
       LODWORD(v12) = v13 & 0x7F;
       v14 = 7;
       if ( v13 < 0 )
@@ -74,96 +69,95 @@ void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl::Catch::Catch(Scaleform:
         }
         while ( v15 < 0 );
       }
-      v12 = (signed int)v12;
+      v12 = (int)v12;
     }
     else
     {
-      v11 = &customWorldMapCaption;
+      v11 = &customCaption;
       v12 = 0i64;
     }
-    v16 = Scaleform::GFx::ASStringBuiltinManagerT<enum  Scaleform::GFx::AS3::BuiltinType,64>::CreateString(
-            v8,
-            &v25,
+    v16 = Scaleform::GFx::ASStringBuiltinManagerT<enum Scaleform::GFx::AS3::BuiltinType,64>::CreateString(
+            StringManagerRef,
+            &v26,
             v11,
-            v12)->pNode;
-    ++v16->RefCount;
-    v17 = result.pNode;
-    v18 = result.pNode->RefCount == 1;
-    --v17->RefCount;
-    if ( v18 )
-      Scaleform::GFx::ASStringNode::ReleaseNode(v17);
-    result.pNode = v16;
-    v19 = v25.pNode;
-    v18 = v25.pNode->RefCount == 1;
-    --v19->RefCount;
-    if ( v18 )
-      Scaleform::GFx::ASStringNode::ReleaseNode(v19);
+            v12);
+    pNode = v16->pNode;
+    ++v16->pNode->RefCount;
+    v18 = result.pNode;
+    v19 = result.pNode->RefCount-- == 1;
+    if ( v19 )
+      Scaleform::GFx::ASStringNode::ReleaseNode(v18);
+    result.pNode = pNode;
+    v20 = v26.pNode;
+    v19 = v26.pNode->RefCount-- == 1;
+    if ( v19 )
+      Scaleform::GFx::ASStringNode::ReleaseNode(v20);
   }
-  v20 = (signed int)v4->exc_type_ind;
-  v21 = 2;
-  if ( (_DWORD)v20 )
-    v21 = Scaleform::GFx::AS3::Traits::GetBindingType(
-            (Scaleform::GFx::AS3::Traits *)&v7->vfptr,
-            v6,
-            &v6->File.pObject->Const_Pool.const_multiname.Data.Data[v20]);
-  v22.pV = v7->pVM->PublicNamespace.pObject;
-  if ( v22.pV )
-    v22.pV->RefCount = (v22.pV->RefCount + 1) & 0x8FBFFFFF;
-  Scaleform::GFx::AS3::Traits::AddSlot((Scaleform::GFx::AS3::Traits *)&v7->vfptr, &result, v22, v21, 0i64, 0);
-  Scaleform::GFx::AS3::Traits::CalculateMemSize((Scaleform::GFx::AS3::Traits *)&v7->vfptr, 0x38u);
-  v23 = result.pNode;
-  v18 = result.pNode->RefCount == 1;
-  --v23->RefCount;
-  if ( v18 )
-    Scaleform::GFx::ASStringNode::ReleaseNode(v23);
+  exc_type_ind = (int)e->exc_type_ind;
+  BindingType = BT_Value;
+  if ( (_DWORD)exc_type_ind )
+    BindingType = Scaleform::GFx::AS3::Traits::GetBindingType(
+                    this,
+                    file,
+                    &file->File.pObject->Const_Pool.const_multiname.Data.Data[exc_type_ind]);
+  pObject = this->pVM->PublicNamespace.pObject;
+  if ( pObject )
+    pObject->RefCount = (pObject->RefCount + 1) & 0x8FBFFFFF;
+  Scaleform::GFx::AS3::Traits::AddSlot(
+    this,
+    &result,
+    (Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl::Namespace const >)pObject,
+    BindingType,
+    0i64,
+    0);
+  Scaleform::GFx::AS3::Traits::CalculateMemSize(this, 0x38u);
+  v24 = result.pNode;
+  v19 = result.pNode->RefCount-- == 1;
+  if ( v19 )
+    Scaleform::GFx::ASStringNode::ReleaseNode(v24);
 }
 
 // File Line: 118
 // RVA: 0x7FE8D0
-Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::InstanceTraits::fl::Catch> *__fastcall Scaleform::GFx::AS3::Classes::fl::Catch::MakeInstanceTraits(Scaleform::GFx::AS3::Classes::fl::Catch *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::InstanceTraits::fl::Catch> *result, Scaleform::GFx::AS3::VMAbcFile *file, Scaleform::GFx::AS3::Abc::MethodBodyInfo::ExceptionInfo *e)
+Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::InstanceTraits::fl::Catch> *__fastcall Scaleform::GFx::AS3::Classes::fl::Catch::MakeInstanceTraits(
+        Scaleform::GFx::AS3::Classes::fl::Catch *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::InstanceTraits::fl::Catch> *result,
+        Scaleform::GFx::AS3::VMAbcFile *file,
+        Scaleform::GFx::AS3::Abc::MethodBodyInfo::ExceptionInfo *e)
 {
-  Scaleform::GFx::AS3::Abc::MethodBodyInfo::ExceptionInfo *v4; // rbp
-  Scaleform::GFx::AS3::VMAbcFile *v5; // r14
-  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::InstanceTraits::fl::Catch> *v6; // rbx
-  Scaleform::GFx::AS3::Classes::fl::Catch *v7; // rsi
   Scaleform::GFx::AS3::InstanceTraits::fl::Catch *v8; // rdi
   Scaleform::GFx::AS3::InstanceTraits::fl::Catch *v9; // rax
   Scaleform::GFx::AS3::InstanceTraits::fl::Catch *v10; // rax
-  __int64 v12; // [rsp+20h] [rbp-38h]
+  _DWORD v12[2]; // [rsp+20h] [rbp-38h] BYREF
   __int64 v13; // [rsp+28h] [rbp-30h]
   Scaleform::GFx::AS3::InstanceTraits::fl::Catch *v14; // [rsp+30h] [rbp-28h]
 
   v13 = -2i64;
-  v4 = e;
-  v5 = file;
-  v6 = result;
-  v7 = this;
   v8 = 0i64;
-  v12 = 328i64;
-  v9 = (Scaleform::GFx::AS3::InstanceTraits::fl::Catch *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, Scaleform::GFx::AS3::Classes::fl::Catch *, signed __int64, __int64 *, signed __int64, signed __int64))Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap)(
+  v12[1] = 0;
+  v12[0] = 328;
+  v9 = (Scaleform::GFx::AS3::InstanceTraits::fl::Catch *)Scaleform::Memory::pGlobalHeap->vfptr->AllocAutoHeap(
                                                            Scaleform::Memory::pGlobalHeap,
                                                            this,
                                                            240i64,
-                                                           &v12,
-                                                           328i64,
-                                                           -2i64);
+                                                           v12);
   v14 = v9;
   if ( v9 )
   {
-    Scaleform::GFx::AS3::InstanceTraits::fl::Catch::Catch(v9, v5, v7->pTraits.pObject->pVM, v4);
+    Scaleform::GFx::AS3::InstanceTraits::fl::Catch::Catch(v9, file, this->pTraits.pObject->pVM, e);
     v8 = v10;
   }
-  v6->pObject = v8;
-  return v6;
+  result->pObject = v8;
+  return result;
 }
 
 // File Line: 140
 // RVA: 0x753DF0
-Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl::Catch::MakeClassTraits(Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result, Scaleform::GFx::AS3::VM *vm)
+Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl::Catch::MakeClassTraits(
+        Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result,
+        Scaleform::GFx::AS3::VM *vm)
 {
-  Scaleform::GFx::AS3::VM *v2; // rbp
-  Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *v3; // rdi
-  Scaleform::MemoryHeap *v4; // rsi
+  Scaleform::MemoryHeap *MHeap; // rsi
   Scaleform::GFx::AS3::ClassTraits::Traits *v5; // rax
   Scaleform::GFx::AS3::ClassTraits::Traits *v6; // rbx
   Scaleform::GFx::AS3::InstanceTraits::CTraits *v7; // rax
@@ -171,44 +165,42 @@ Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scalef
   Scaleform::GFx::AS3::Class *v9; // rax
   Scaleform::GFx::AS3::Class *v10; // rbx
 
-  v2 = vm;
-  v3 = result;
-  v4 = vm->MHeap;
-  v5 = (Scaleform::GFx::AS3::ClassTraits::Traits *)v4->vfptr->Alloc(v4, 208ui64, 0i64);
+  MHeap = vm->MHeap;
+  v5 = (Scaleform::GFx::AS3::ClassTraits::Traits *)MHeap->vfptr->Alloc(MHeap, 208ui64, 0i64);
   v6 = v5;
   if ( v5 )
   {
-    Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl::CatchCI);
+    Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, vm, &Scaleform::GFx::AS3::fl::CatchCI);
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Catch::`vftable;
-    v6->TraitsType = 21;
+    v6->TraitsType = Traits_Catch;
   }
   else
   {
     v6 = 0i64;
   }
-  v3->pV = v6;
-  v7 = (Scaleform::GFx::AS3::InstanceTraits::CTraits *)v4->vfptr->Alloc(v4, 240ui64, 0i64);
-  v8.pV = (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v7->vfptr;
+  result->pV = v6;
+  v7 = (Scaleform::GFx::AS3::InstanceTraits::CTraits *)MHeap->vfptr->Alloc(MHeap, 240ui64, 0i64);
+  v8.pV = v7;
   if ( v7 )
   {
-    Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, v2, &Scaleform::GFx::AS3::fl::CatchCI);
+    Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, vm, &Scaleform::GFx::AS3::fl::CatchCI);
     v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Catch::`vftable;
-    v8.pV->TraitsType = 21;
+    v8.pV->TraitsType = Traits_Catch;
   }
   else
   {
     v8.pV = 0i64;
   }
-  Scaleform::GFx::AS3::ClassTraits::Traits::SetInstanceTraits(v3->pV, v8);
-  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))v4->vfptr->Alloc)(
-                                       v4,
+  Scaleform::GFx::AS3::ClassTraits::Traits::SetInstanceTraits(result->pV, v8);
+  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))MHeap->vfptr->Alloc)(
+                                       MHeap,
                                        72i64);
   v10 = v9;
   if ( v9 )
   {
-    Scaleform::GFx::AS3::Class::Class(v9, v3->pV);
+    Scaleform::GFx::AS3::Class::Class(v9, result->pV);
     v10->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::Classes::fl::Catch::`vftable;
   }
-  return v3;
+  return result;
 }
 

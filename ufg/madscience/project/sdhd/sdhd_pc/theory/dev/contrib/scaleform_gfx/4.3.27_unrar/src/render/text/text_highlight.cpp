@@ -1,73 +1,78 @@
 // File Line: 123
 // RVA: 0x9677A0
-Scaleform::Render::Text::HighlightDesc *__fastcall Scaleform::Render::Text::Highlighter::CreateHighlighter(Scaleform::Render::Text::Highlighter *this, Scaleform::Render::Text::HighlightDesc *desc)
+Scaleform::Render::Text::HighlightDesc *__fastcall Scaleform::Render::Text::Highlighter::CreateHighlighter(
+        Scaleform::Render::Text::Highlighter *this,
+        Scaleform::Render::Text::HighlightDesc *desc)
 {
-  unsigned int v2; // esi
-  Scaleform::Render::Text::HighlightDesc *v3; // rbp
-  Scaleform::Render::Text::Highlighter *v4; // rdi
-  signed __int64 v5; // r8
+  unsigned int Id; // esi
+  __int64 Size; // r8
   unsigned __int64 v6; // rbx
 
   *(_WORD *)&this->Valid = 0;
-  v2 = desc->Id;
-  v3 = desc;
-  v4 = this;
-  if ( Scaleform::Render::Text::Highlighter::GetHighlighterPtr(this, desc->Id) )
+  Id = desc->Id;
+  if ( Scaleform::Render::Text::Highlighter::GetHighlighterPtr(this, Id) )
     return 0i64;
-  v5 = v4->Highlighters.Data.Size;
+  Size = this->Highlighters.Data.Size;
   v6 = 0i64;
-  while ( v5 > 0 )
+  while ( Size > 0 )
   {
-    if ( (signed int)(v4->Highlighters.Data.Data[(v5 >> 1) + v6].Id - v2) >= 0 )
+    if ( (int)(this->Highlighters.Data.Data[(Size >> 1) + v6].Id - Id) >= 0 )
     {
-      v5 >>= 1;
+      Size >>= 1;
     }
     else
     {
-      v6 += (v5 >> 1) + 1;
-      v5 += -1 - (v5 >> 1);
+      v6 += (Size >> 1) + 1;
+      Size += -1 - (Size >> 1);
     }
   }
   Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::HighlightDesc,Scaleform::AllocatorLH<Scaleform::Render::Text::HighlightDesc,2>,Scaleform::ArrayDefaultPolicy>>::InsertAt(
-    (Scaleform::ArrayBase<Scaleform::ArrayData<Scaleform::Render::Text::HighlightDesc,Scaleform::AllocatorLH<Scaleform::Render::Text::HighlightDesc,2>,Scaleform::ArrayDefaultPolicy> > *)&v4->Highlighters.Data,
+    &this->Highlighters,
     v6,
-    v3);
-  return &v4->Highlighters.Data.Data[v6];
+    desc);
+  return &this->Highlighters.Data.Data[v6];
 }
 
 // File Line: 139
 // RVA: 0x9853C0
-Scaleform::Render::Text::HighlightDesc *__fastcall Scaleform::Render::Text::Highlighter::GetHighlighterPtr(Scaleform::Render::Text::Highlighter *this, unsigned int id)
+Scaleform::Render::Text::HighlightDesc *__fastcall Scaleform::Render::Text::Highlighter::GetHighlighterPtr(
+        Scaleform::Render::Text::Highlighter *this,
+        unsigned int id)
 {
-  signed __int64 v2; // rax
+  __int64 Size; // rax
   unsigned __int64 v3; // r9
   Scaleform::Render::Text::HighlightDesc *result; // rax
 
-  v2 = this->Highlighters.Data.Size;
+  Size = this->Highlighters.Data.Size;
   v3 = 0i64;
-  while ( v2 > 0 )
+  while ( Size > 0 )
   {
-    if ( (signed int)(this->Highlighters.Data.Data[(v2 >> 1) + v3].Id - id) >= 0 )
+    if ( (int)(this->Highlighters.Data.Data[(Size >> 1) + v3].Id - id) >= 0 )
     {
-      v2 >>= 1;
+      Size >>= 1;
     }
     else
     {
-      v3 += (v2 >> 1) + 1;
-      v2 += -1 - (v2 >> 1);
+      v3 += (Size >> 1) + 1;
+      Size += -1 - (Size >> 1);
     }
   }
-  if ( v3 >= this->Highlighters.Data.Size || (result = &this->Highlighters.Data.Data[v3], result->Id != id) )
-    result = 0i64;
+  if ( v3 >= this->Highlighters.Data.Size )
+    return 0i64;
+  result = &this->Highlighters.Data.Data[v3];
+  if ( result->Id != id )
+    return 0i64;
   return result;
 }
 
 // File Line: 180
 // RVA: 0x98AB80
-Scaleform::Render::Text::HighlighterPosIterator *__fastcall Scaleform::Render::Text::Highlighter::GetPosIterator(Scaleform::Render::Text::Highlighter *this, Scaleform::Render::Text::HighlighterPosIterator *result, unsigned __int64 startPos, unsigned __int64 len)
+Scaleform::Render::Text::HighlighterPosIterator *__fastcall Scaleform::Render::Text::Highlighter::GetPosIterator(
+        Scaleform::Render::Text::Highlighter *this,
+        Scaleform::Render::Text::HighlighterPosIterator *result,
+        unsigned __int64 startPos,
+        unsigned __int64 len)
 {
-  Scaleform::Render::Text::HighlighterPosIterator *v4; // rbx
-
   result->pManager = this;
   result->CurAdjStartPos = startPos;
   result->NumGlyphs = len;
@@ -79,65 +84,64 @@ Scaleform::Render::Text::HighlighterPosIterator *__fastcall Scaleform::Render::T
   *(_QWORD *)&result->CurDesc.Id = 0i64;
   *(_QWORD *)&result->CurDesc.Info.TextColor.Channels.Blue = 0i64;
   result->CurDesc.Info.Flags = 0;
-  v4 = result;
   Scaleform::Render::Text::HighlighterPosIterator::InitCurDesc(result);
-  return v4;
+  return result;
 }
 
 // File Line: 190
 // RVA: 0x9BE4B0
-void __fastcall Scaleform::Render::Text::Highlighter::UpdateGlyphIndices(Scaleform::Render::Text::Highlighter *this, Scaleform::Render::Text::CompositionStringBase *pcs)
+void __fastcall Scaleform::Render::Text::Highlighter::UpdateGlyphIndices(
+        Scaleform::Render::Text::Highlighter *this,
+        Scaleform::Render::Text::CompositionStringBase *pcs)
 {
-  unsigned __int64 v2; // rdi
+  unsigned __int64 Size; // rdi
   __int64 v3; // r8
-  Scaleform::Render::Text::Highlighter *v4; // r10
-  Scaleform::Render::Text::HighlightDesc *v5; // rax
-  unsigned __int64 v6; // rdx
-  unsigned __int64 v7; // r9
-  unsigned __int64 v8; // rbx
-  unsigned __int64 v9; // r11
-  __int64 v10; // rcx
+  Scaleform::Render::Text::HighlightDesc *Data; // rax
+  unsigned __int64 StartPos; // rdx
+  unsigned __int64 Length; // r9
+  unsigned __int64 CorrectionLen; // rbx
+  unsigned __int64 CorrectionPos; // r11
+  __int64 Offset; // rcx
   unsigned __int64 v11; // rcx
 
-  v2 = this->Highlighters.Data.Size;
+  Size = this->Highlighters.Data.Size;
   v3 = 0i64;
-  v4 = this;
   this->CorrectionLen = 0i64;
   this->CorrectionPos = 0i64;
-  for ( *(_WORD *)&this->Valid = 0; v2; --v2 )
+  for ( *(_WORD *)&this->Valid = 0; Size; --Size )
   {
-    v5 = v4->Highlighters.Data.Data;
-    v6 = v4->Highlighters.Data.Data[v3].StartPos;
-    v7 = v4->Highlighters.Data.Data[v3].Length;
-    v5[v3].AdjStartPos = v6;
-    v5[v3].GlyphNum = v7;
-    v8 = v4->CorrectionLen;
-    if ( v8 )
+    Data = this->Highlighters.Data.Data;
+    StartPos = this->Highlighters.Data.Data[v3].StartPos;
+    Length = this->Highlighters.Data.Data[v3].Length;
+    Data[v3].AdjStartPos = StartPos;
+    Data[v3].GlyphNum = Length;
+    CorrectionLen = this->CorrectionLen;
+    if ( CorrectionLen )
     {
-      v9 = v4->CorrectionPos;
-      if ( !v7 )
-        goto LABEL_15;
-      if ( v6 > v9 )
+      CorrectionPos = this->CorrectionPos;
+      if ( !Length )
+        goto LABEL_9;
+      if ( StartPos > CorrectionPos )
         goto LABEL_10;
-      if ( v9 < v7 + v6 )
+      if ( CorrectionPos < Length + StartPos )
       {
-        v10 = v5[v3].Offset;
-        if ( v10 >= 0 )
+        Offset = Data[v3].Offset;
+        if ( Offset >= 0 )
         {
-          v11 = v6 + v10;
+          v11 = StartPos + Offset;
 LABEL_11:
-          v5[v3].AdjStartPos = v11;
+          Data[v3].AdjStartPos = v11;
           goto LABEL_12;
         }
-        v5[v3].GlyphNum = v8 + v7;
+        Data[v3].GlyphNum = CorrectionLen + Length;
       }
       else
       {
-LABEL_15:
-        if ( v6 > v9 )
+LABEL_9:
+        if ( StartPos > CorrectionPos )
         {
 LABEL_10:
-          v11 = v8 + v6;
+          v11 = CorrectionLen + StartPos;
           goto LABEL_11;
         }
       }
@@ -149,88 +153,87 @@ LABEL_12:
 
 // File Line: 521
 // RVA: 0x992EE0
-void __fastcall Scaleform::Render::Text::HighlighterPosIterator::InitCurDesc(Scaleform::Render::Text::HighlighterPosIterator *this)
+void __fastcall Scaleform::Render::Text::HighlighterPosIterator::InitCurDesc(
+        Scaleform::Render::Text::HighlighterPosIterator *this)
 {
-  unsigned __int64 v1; // rbx
-  Scaleform::Render::Text::HighlighterPosIterator *v2; // r8
-  Scaleform::Render::Text::Highlighter *v3; // rcx
-  unsigned __int64 v4; // r11
+  unsigned __int64 CurAdjStartPos; // rbx
+  Scaleform::Render::Text::Highlighter *pManager; // rcx
+  unsigned __int64 Size; // r11
   char v5; // dl
   unsigned int v6; // edi
   unsigned int v7; // esi
   unsigned int v8; // ebp
-  char *v9; // rcx
+  char *p_Flags; // rcx
   __int64 v10; // rax
   unsigned __int64 v11; // r9
   char v12; // al
 
-  v1 = this->CurAdjStartPos;
-  v2 = this;
-  if ( v1 >= this->NumGlyphs )
+  CurAdjStartPos = this->CurAdjStartPos;
+  if ( CurAdjStartPos >= this->NumGlyphs )
   {
     *(_QWORD *)&this->CurDesc.Info.TextColor.Channels.Blue = 0i64;
     this->CurDesc.Info.BackgroundColor.Raw = 0;
     this->CurDesc.Info.Flags = 0;
     this->CurDesc.GlyphNum = 0i64;
-    this->CurDesc.AdjStartPos = v1;
+    this->CurDesc.AdjStartPos = CurAdjStartPos;
     this->CurDesc.Id = 0;
   }
   else
   {
-    v3 = this->pManager;
-    v4 = v3->Highlighters.Data.Size;
+    pManager = this->pManager;
+    Size = pManager->Highlighters.Data.Size;
     v5 = 0;
     v6 = 0;
     v7 = 0;
     v8 = 0;
-    if ( v4 )
+    if ( Size )
     {
-      v9 = &v3->Highlighters.Data.Data->Info.Flags;
+      p_Flags = &pManager->Highlighters.Data.Data->Info.Flags;
       do
       {
-        v10 = *((_QWORD *)v9 - 3);
+        v10 = *((_QWORD *)p_Flags - 3);
         if ( v10 )
         {
-          v11 = *((_QWORD *)v9 - 4);
-          if ( v1 >= v11 && v1 < v11 + v10 )
+          v11 = *((_QWORD *)p_Flags - 4);
+          if ( CurAdjStartPos >= v11 && CurAdjStartPos < v11 + v10 )
           {
-            v12 = *v9;
-            if ( *v9 & 7 )
+            v12 = *p_Flags;
+            if ( (*p_Flags & 7) != 0 )
               v5 = v12 & 7 | v5 & 0xF8;
-            if ( v12 & 8 )
+            if ( (v12 & 8) != 0 )
             {
-              v8 = *((_DWORD *)v9 - 3);
+              v8 = *((_DWORD *)p_Flags - 3);
               v5 |= 8u;
             }
-            if ( v12 & 0x10 )
+            if ( (v12 & 0x10) != 0 )
             {
-              v7 = *((_DWORD *)v9 - 2);
+              v7 = *((_DWORD *)p_Flags - 2);
               v5 |= 0x10u;
             }
-            if ( v12 & 0x20 )
+            if ( (v12 & 0x20) != 0 )
             {
-              v6 = *((_DWORD *)v9 - 1);
+              v6 = *((_DWORD *)p_Flags - 1);
               v5 |= 0x20u;
             }
           }
         }
-        v9 += 64;
-        --v4;
+        p_Flags += 64;
+        --Size;
       }
-      while ( v4 );
+      while ( Size );
     }
-    v2->CurDesc.StartPos = -1i64;
-    v2->CurDesc.Length = 0i64;
-    v2->CurDesc.Offset = -1i64;
-    v2->CurDesc.AdjStartPos = 0i64;
-    v2->CurDesc.Id = 0;
-    v2->CurDesc.Info.BackgroundColor.Raw = v8;
-    v2->CurDesc.Info.TextColor.Raw = v7;
-    v2->CurDesc.Info.UnderlineColor.Raw = v6;
-    v2->CurDesc.Info.Flags = v5;
-    v2->CurDesc.GlyphNum = 1i64;
-    v2->CurDesc.AdjStartPos = v1;
-    v2->CurDesc.Id = 0;
+    this->CurDesc.StartPos = -1i64;
+    this->CurDesc.Length = 0i64;
+    this->CurDesc.Offset = -1i64;
+    this->CurDesc.AdjStartPos = 0i64;
+    this->CurDesc.Id = 0;
+    this->CurDesc.Info.BackgroundColor.Raw = v8;
+    this->CurDesc.Info.TextColor.Raw = v7;
+    this->CurDesc.Info.UnderlineColor.Raw = v6;
+    this->CurDesc.Info.Flags = v5;
+    this->CurDesc.GlyphNum = 1i64;
+    this->CurDesc.AdjStartPos = CurAdjStartPos;
+    this->CurDesc.Id = 0;
   }
 }
 

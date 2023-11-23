@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkpConvexTransformShapeClass__()
     0i64,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 56
@@ -28,23 +28,26 @@ hkClass *__fastcall hkpConvexTransformShape::staticClass()
 
 // File Line: 63
 // RVA: 0xCEB3B0
-void __fastcall finishLoadedObjecthkpConvexTransformShape(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpConvexTransformShape(
+        hkpConvexTransformShape *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpConvexTransformShape::hkpConvexTransformShape);
+  if ( p )
+    hkpConvexTransformShape::hkpConvexTransformShape(p, finishing);
 }
 
 // File Line: 69
 // RVA: 0xCEB3D0
-void __fastcall cleanupLoadedObjecthkpConvexTransformShape(void *p)
+void __fastcall cleanupLoadedObjecthkpConvexTransformShape(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 73
 // RVA: 0xCEB3E0
 hkBaseObjectVtbl *__fastcall getVtablehkpConvexTransformShape()
 {
-  hkpConvexTransformShape v1; // [rsp+20h] [rbp-88h]
+  hkpConvexTransformShape v1; // [rsp+20h] [rbp-88h] BYREF
 
   hkpConvexTransformShape::hkpConvexTransformShape(&v1, 0);
   return v1.vfptr;
@@ -61,8 +64,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpConvexTransformShapeTypeInfo__()
   hkpConvexTransformShapeTypeInfo.m_typeName = "hkpConvexTransformShape";
   hkpConvexTransformShapeTypeInfo.m_vtable = result;
   hkpConvexTransformShapeTypeInfo.m_scopedName = "!hkpConvexTransformShape";
-  hkpConvexTransformShapeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpConvexTransformShape;
-  hkpConvexTransformShapeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpConvexTransformShape;
+  hkpConvexTransformShapeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpConvexTransformShape;
+  hkpConvexTransformShapeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpConvexTransformShape;
   return result;
 }
 

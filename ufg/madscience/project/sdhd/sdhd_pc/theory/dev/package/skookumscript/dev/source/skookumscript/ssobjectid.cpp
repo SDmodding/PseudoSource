@@ -1,49 +1,49 @@
 // File Line: 163
 // RVA: 0x11DF80
-SSInvokedBase *__fastcall SSObjectId::invoke(SSObjectId *this, SSObjectBase *scope_p, SSInvokedBase *caller_p, SSInstance **result_pp)
+SSInvokedBase *__fastcall SSObjectId::invoke(
+        SSObjectId *this,
+        SSObjectBase *scope_p,
+        SSInvokedBase *caller_p,
+        SSInstance **result_pp)
 {
-  SSInstance **v4; // rdi
-  SSObjectId *v5; // rbx
-  unsigned int v6; // eax
+  unsigned int i_flags; // eax
   SSInstance *v7; // rax
-  SSInstance *v8; // rcx
-  SSClass *v9; // rcx
+  SSInstance *i_obj_p; // rcx
+  SSClass *i_class_p; // rcx
 
-  v4 = result_pp;
-  v5 = this;
   if ( !result_pp )
     return 0i64;
-  v6 = this->i_flags;
-  if ( !(v6 & 2) )
+  i_flags = this->i_flags;
+  if ( (i_flags & 2) == 0 )
   {
-    if ( v6 & 4 )
+    if ( (i_flags & 4) != 0 )
     {
-      v8 = this->i_obj_p.i_obj_p;
-      if ( v8 && v5->i_obj_p.i_ptr_id == v8->i_ptr_id )
+      i_obj_p = this->i_obj_p.i_obj_p;
+      if ( i_obj_p && this->i_obj_p.i_ptr_id == i_obj_p->i_ptr_id )
       {
 LABEL_13:
-        ++v8->i_ref_count;
-        *v4 = v8;
+        ++i_obj_p->i_ref_count;
+        *result_pp = i_obj_p;
         return 0i64;
       }
-      v9 = v5->i_class_p;
+      i_class_p = this->i_class_p;
     }
     else
     {
-      v9 = this->i_class_p;
+      i_class_p = this->i_class_p;
     }
-    v8 = (SSInstance *)((__int64 (__fastcall *)(SSClass *, SSObjectId *, SSInvokedBase *))v9->vfptr[1].is_actor_class)(
-                         v9,
-                         v5,
-                         caller_p);
-    if ( !v8 )
-      v8 = SSBrain::c_nil_p;
+    i_obj_p = (SSInstance *)((__int64 (__fastcall *)(SSClass *, SSObjectId *, SSInvokedBase *))i_class_p->vfptr[1].is_actor_class)(
+                              i_class_p,
+                              this,
+                              caller_p);
+    if ( !i_obj_p )
+      i_obj_p = SSBrain::c_nil_p;
     goto LABEL_13;
   }
   v7 = SSInstance::pool_new(SSBrain::c_symbol_class_p);
   if ( v7 != (SSInstance *)-32i64 )
-    LODWORD(v7->i_user_data) = v5->i_name.i_uid;
-  *v4 = v7;
+    LODWORD(v7->i_user_data) = this->i_name.i_uid;
+  *result_pp = v7;
   return 0i64;
 }
 

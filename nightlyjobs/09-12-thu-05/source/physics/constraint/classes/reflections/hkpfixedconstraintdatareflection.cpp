@@ -70,30 +70,27 @@ hkClass *__fastcall hkpFixedConstraintData::staticClass()
 
 // File Line: 124
 // RVA: 0xD438D0
-void __fastcall finishLoadedObjecthkpFixedConstraintData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpFixedConstraintData(hkpConstraintData *p, hkFinishLoadedObjectFlag finishing)
 {
-  _QWORD *v2; // rbx
-
   if ( p )
   {
-    v2 = p;
-    hkpConstraintData::hkpConstraintData((hkpConstraintData *)p, (hkFinishLoadedObjectFlag)finishing);
-    *v2 = &hkpFixedConstraintData::`vftable;
+    hkpConstraintData::hkpConstraintData(p, finishing);
+    p->vfptr = (hkBaseObjectVtbl *)&hkpFixedConstraintData::`vftable;
   }
 }
 
 // File Line: 130
 // RVA: 0xD43900
-void __fastcall cleanupLoadedObjecthkpFixedConstraintData(void *p)
+void __fastcall cleanupLoadedObjecthkpFixedConstraintData(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 134
 // RVA: 0xD43910
 void **__fastcall getVtablehkpFixedConstraintData()
 {
-  hkpConstraintData v1; // [rsp+20h] [rbp-E8h]
+  hkpConstraintData v1; // [rsp+20h] [rbp-E8h] BYREF
 
   hkpConstraintData::hkpConstraintData(&v1, 0);
   return &hkpFixedConstraintData::`vftable;
@@ -110,8 +107,8 @@ void **dynamic_initializer_for__hkpFixedConstraintDataTypeInfo__()
   hkpFixedConstraintDataTypeInfo.m_typeName = "hkpFixedConstraintData";
   hkpFixedConstraintDataTypeInfo.m_vtable = result;
   hkpFixedConstraintDataTypeInfo.m_scopedName = "!hkpFixedConstraintData";
-  hkpFixedConstraintDataTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpFixedConstraintData;
-  hkpFixedConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpFixedConstraintData;
+  hkpFixedConstraintDataTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpFixedConstraintData;
+  hkpFixedConstraintDataTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpFixedConstraintData;
   return result;
 }
 

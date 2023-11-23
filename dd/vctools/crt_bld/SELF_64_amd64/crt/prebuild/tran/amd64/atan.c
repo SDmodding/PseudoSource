@@ -1,6 +1,6 @@
 // File Line: 19
 // RVA: 0x12B5AAC
-long double __fastcall atan(long double x)
+double __fastcall atan(long double x)
 {
   double v1; // xmm1_8
   unsigned __int64 v2; // rax
@@ -80,7 +80,7 @@ long double __fastcall atan(long double x)
       - v6
       - v7);
   if ( *(_QWORD *)&x != (*(_QWORD *)&x & 0x7FFFFFFFFFFFFFFFi64) )
-    v8 = -v8;
+    return -v8;
   return v8;
 }
 

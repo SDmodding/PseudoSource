@@ -1,20 +1,22 @@
 // File Line: 43
 // RVA: 0xAE7AE0
-signed __int64 __fastcall DSP::AllpassFilter::Init(DSP::AllpassFilter *this, AK::IAkPluginMemAlloc *in_pAllocator, unsigned int in_uDelayLineLength, float in_fG)
+__int64 __fastcall DSP::AllpassFilter::Init(
+        DSP::AllpassFilter *this,
+        AK::IAkPluginMemAlloc *in_pAllocator,
+        unsigned int in_uDelayLineLength,
+        float in_fG)
 {
-  DSP::AllpassFilter *v4; // rbx
   float *v5; // rax
 
-  v4 = this;
-  if ( in_uDelayLineLength < 1 )
+  if ( !in_uDelayLineLength )
     in_uDelayLineLength = 1;
   this->uDelayLineLength = in_uDelayLineLength;
   v5 = (float *)in_pAllocator->vfptr->Malloc(in_pAllocator, 8i64 * in_uDelayLineLength);
-  v4->pfDelay = v5;
+  this->pfDelay = v5;
   if ( !v5 )
     return 52i64;
-  v4->fG = in_fG;
-  v4->uCurOffset = 0;
+  this->fG = in_fG;
+  this->uCurOffset = 0;
   return 1i64;
 }
 
@@ -22,14 +24,11 @@ signed __int64 __fastcall DSP::AllpassFilter::Init(DSP::AllpassFilter *this, AK:
 // RVA: 0xAE7B60
 void __fastcall DSP::AllpassFilter::Term(DSP::AllpassFilter *this, AK::IAkPluginMemAlloc *in_pAllocator)
 {
-  DSP::AllpassFilter *v2; // rbx
-
-  v2 = this;
   if ( this->pfDelay )
   {
     ((void (__fastcall *)(AK::IAkPluginMemAlloc *))in_pAllocator->vfptr->Free)(in_pAllocator);
-    v2->pfDelay = 0i64;
-    v2->uDelayLineLength = 0;
+    this->pfDelay = 0i64;
+    this->uDelayLineLength = 0;
   }
   else
   {
@@ -47,13 +46,15 @@ void __fastcall DSP::AllpassFilter::Reset(DSP::AllpassFilter *this)
 
 // File Line: 77
 // RVA: 0xAE7BD0
-void __fastcall DSP::AllpassFilter::ProcessBuffer(DSP::AllpassFilter *this, float *io_pfBuffer, unsigned int in_uNumFrames)
+void __fastcall DSP::AllpassFilter::ProcessBuffer(
+        DSP::AllpassFilter *this,
+        float *io_pfBuffer,
+        unsigned int in_uNumFrames)
 {
-  unsigned int v3; // er11
-  unsigned int v4; // edi
-  float *v5; // rsi
-  DSP::AllpassFilter *v6; // rbx
-  unsigned int v7; // er9
+  unsigned int uCurOffset; // r11d
+  unsigned int uDelayLineLength; // edi
+  float *pfDelay; // rsi
+  unsigned int v7; // r9d
   float *v8; // r10
   unsigned int v9; // eax
   float v10; // xmm2_4
@@ -61,7 +62,7 @@ void __fastcall DSP::AllpassFilter::ProcessBuffer(DSP::AllpassFilter *this, floa
   float v12; // xmm0_4
   float v13; // xmm1_4
   unsigned int v14; // ecx
-  float v15; // xmm3_4
+  float fG; // xmm3_4
   __int64 v16; // rax
   float v17; // xmm0_4
   float v18; // xmm1_4
@@ -84,12 +85,11 @@ void __fastcall DSP::AllpassFilter::ProcessBuffer(DSP::AllpassFilter *this, floa
   float v35; // xmm0_4
   float v36; // xmm1_4
 
-  v3 = this->uCurOffset;
-  v4 = this->uDelayLineLength;
-  v5 = this->pfDelay;
-  v6 = this;
-  v7 = this->uDelayLineLength - v3;
-  v8 = &v5[2 * v3];
+  uCurOffset = this->uCurOffset;
+  uDelayLineLength = this->uDelayLineLength;
+  pfDelay = this->pfDelay;
+  v7 = this->uDelayLineLength - uCurOffset;
+  v8 = &pfDelay[2 * uCurOffset];
   if ( v7 <= in_uNumFrames )
   {
     do
@@ -97,9 +97,9 @@ void __fastcall DSP::AllpassFilter::ProcessBuffer(DSP::AllpassFilter *this, floa
       v14 = 0;
       if ( in_uNumFrames < v7 )
         v7 = in_uNumFrames;
-      if ( (signed int)v7 >= 4 )
+      if ( (int)v7 >= 4 )
       {
-        v15 = v6->fG;
+        fG = this->fG;
         v16 = ((v7 - 4) >> 2) + 1;
         v14 = 4 * v16;
         do
@@ -110,27 +110,27 @@ void __fastcall DSP::AllpassFilter::ProcessBuffer(DSP::AllpassFilter *this, floa
           v8 += 8;
           io_pfBuffer += 4;
           *(v8 - 8) = v18;
-          v20 = (float)((float)(v18 - *(v8 - 7)) * v15) + v17;
+          v20 = (float)((float)(v18 - *(v8 - 7)) * fG) + v17;
           *(v8 - 7) = v20;
           v21 = *(v8 - 6);
           *(v8 - 6) = v19;
           v22 = v19 - *(v8 - 5);
           *(io_pfBuffer - 4) = v20;
           v23 = *(io_pfBuffer - 2);
-          v24 = (float)(v22 * v15) + v21;
+          v24 = (float)(v22 * fG) + v21;
           *(v8 - 5) = v24;
           v25 = *(v8 - 4);
           *(v8 - 4) = v23;
           v26 = v23 - *(v8 - 3);
           *(io_pfBuffer - 3) = v24;
           v27 = *(io_pfBuffer - 1);
-          v28 = (float)(v26 * v15) + v25;
+          v28 = (float)(v26 * fG) + v25;
           *(v8 - 3) = v28;
           v29 = *(v8 - 2);
           *(v8 - 2) = v27;
           v30 = v27 - *(v8 - 1);
           *(io_pfBuffer - 2) = v28;
-          v31 = (float)(v30 * v15) + v29;
+          v31 = (float)(v30 * fG) + v29;
           *(v8 - 1) = v31;
           *(io_pfBuffer - 1) = v31;
           --v16;
@@ -139,7 +139,7 @@ void __fastcall DSP::AllpassFilter::ProcessBuffer(DSP::AllpassFilter *this, floa
       }
       if ( v14 < v7 )
       {
-        v32 = v6->fG;
+        v32 = this->fG;
         v33 = v7 - v14;
         do
         {
@@ -155,16 +155,16 @@ void __fastcall DSP::AllpassFilter::ProcessBuffer(DSP::AllpassFilter *this, floa
         }
         while ( v33 );
       }
-      v3 += v7;
-      v6->uCurOffset = v3;
-      if ( v3 == v4 )
+      uCurOffset += v7;
+      this->uCurOffset = uCurOffset;
+      if ( uCurOffset == uDelayLineLength )
       {
-        v8 = v5;
-        v3 = 0;
-        v6->uCurOffset = 0;
+        v8 = pfDelay;
+        uCurOffset = 0;
+        this->uCurOffset = 0;
       }
       in_uNumFrames -= v7;
-      v7 = v4 - v3;
+      v7 = uDelayLineLength - uCurOffset;
     }
     while ( in_uNumFrames );
   }
@@ -188,19 +188,22 @@ void __fastcall DSP::AllpassFilter::ProcessBuffer(DSP::AllpassFilter *this, floa
       }
       while ( v9 );
     }
-    this->uCurOffset = v3 + in_uNumFrames;
+    this->uCurOffset = uCurOffset + in_uNumFrames;
   }
 }
 
 // File Line: 167
 // RVA: 0xAE7DD0
-void __fastcall DSP::AllpassFilter::ProcessBuffer(DSP::AllpassFilter *this, float *in_pfInBuffer, float *out_pfOutBuffer, unsigned int in_uNumFrames)
+void __fastcall DSP::AllpassFilter::ProcessBuffer(
+        DSP::AllpassFilter *this,
+        float *in_pfInBuffer,
+        float *out_pfOutBuffer,
+        unsigned int in_uNumFrames)
 {
-  unsigned int v4; // ebx
-  unsigned int v5; // esi
-  float *v6; // r14
-  DSP::AllpassFilter *v7; // rdi
-  unsigned int v8; // er10
+  unsigned int uCurOffset; // ebx
+  unsigned int uDelayLineLength; // esi
+  float *pfDelay; // r14
+  unsigned int v8; // r10d
   float *v9; // r11
   unsigned int v10; // eax
   float v11; // xmm2_4
@@ -208,7 +211,7 @@ void __fastcall DSP::AllpassFilter::ProcessBuffer(DSP::AllpassFilter *this, floa
   float v13; // xmm1_4
   float v14; // xmm1_4
   unsigned int v15; // ecx
-  float v16; // xmm3_4
+  float fG; // xmm3_4
   __int64 v17; // rax
   float v18; // xmm0_4
   float v19; // xmm1_4
@@ -231,22 +234,21 @@ void __fastcall DSP::AllpassFilter::ProcessBuffer(DSP::AllpassFilter *this, floa
   float v36; // xmm1_4
   float v37; // xmm1_4
 
-  v4 = this->uCurOffset;
-  v5 = this->uDelayLineLength;
-  v6 = this->pfDelay;
-  v7 = this;
-  v8 = this->uDelayLineLength - v4;
-  v9 = &v6[2 * v4];
+  uCurOffset = this->uCurOffset;
+  uDelayLineLength = this->uDelayLineLength;
+  pfDelay = this->pfDelay;
+  v8 = this->uDelayLineLength - uCurOffset;
+  v9 = &pfDelay[2 * uCurOffset];
   if ( v8 <= in_uNumFrames )
   {
-    for ( ; in_uNumFrames; v8 = v5 - v4 )
+    for ( ; in_uNumFrames; v8 = uDelayLineLength - uCurOffset )
     {
       v15 = 0;
       if ( in_uNumFrames < v8 )
         v8 = in_uNumFrames;
-      if ( (signed int)v8 >= 4 )
+      if ( (int)v8 >= 4 )
       {
-        v16 = v7->fG;
+        fG = this->fG;
         v17 = ((v8 - 4) >> 2) + 1;
         v15 = 4 * v17;
         do
@@ -258,27 +260,27 @@ void __fastcall DSP::AllpassFilter::ProcessBuffer(DSP::AllpassFilter *this, floa
           out_pfOutBuffer += 4;
           in_pfInBuffer += 4;
           *(v9 - 8) = v19;
-          v21 = (float)((float)(v19 - *(v9 - 7)) * v16) + v18;
+          v21 = (float)((float)(v19 - *(v9 - 7)) * fG) + v18;
           *(v9 - 7) = v21;
           v22 = *(v9 - 6);
           *(v9 - 6) = v20;
           v23 = v20 - *(v9 - 5);
           *(out_pfOutBuffer - 4) = v21;
           v24 = *(in_pfInBuffer - 2);
-          v25 = (float)(v23 * v16) + v22;
+          v25 = (float)(v23 * fG) + v22;
           *(v9 - 5) = v25;
           v26 = *(v9 - 4);
           *(v9 - 4) = v24;
           v27 = v24 - *(v9 - 3);
           *(out_pfOutBuffer - 3) = v25;
           v28 = *(in_pfInBuffer - 1);
-          v29 = (float)(v27 * v16) + v26;
+          v29 = (float)(v27 * fG) + v26;
           *(v9 - 3) = v29;
           v30 = *(v9 - 2);
           *(v9 - 2) = v28;
           v31 = v28 - *(v9 - 1);
           *(out_pfOutBuffer - 2) = v29;
-          v32 = (float)(v31 * v16) + v30;
+          v32 = (float)(v31 * fG) + v30;
           *(v9 - 1) = v32;
           *(out_pfOutBuffer - 1) = v32;
           --v17;
@@ -287,7 +289,7 @@ void __fastcall DSP::AllpassFilter::ProcessBuffer(DSP::AllpassFilter *this, floa
       }
       if ( v15 < v8 )
       {
-        v33 = v7->fG;
+        v33 = this->fG;
         v34 = v8 - v15;
         do
         {
@@ -304,13 +306,13 @@ void __fastcall DSP::AllpassFilter::ProcessBuffer(DSP::AllpassFilter *this, floa
         }
         while ( v34 );
       }
-      v4 += v8;
-      v7->uCurOffset = v4;
-      if ( v4 == v5 )
+      uCurOffset += v8;
+      this->uCurOffset = uCurOffset;
+      if ( uCurOffset == uDelayLineLength )
       {
-        v9 = v6;
-        v4 = 0;
-        v7->uCurOffset = 0;
+        v9 = pfDelay;
+        uCurOffset = 0;
+        this->uCurOffset = 0;
       }
       in_uNumFrames -= v8;
     }
@@ -336,7 +338,7 @@ void __fastcall DSP::AllpassFilter::ProcessBuffer(DSP::AllpassFilter *this, floa
       }
       while ( v10 );
     }
-    this->uCurOffset = v4 + in_uNumFrames;
+    this->uCurOffset = uCurOffset + in_uNumFrames;
   }
 }
 

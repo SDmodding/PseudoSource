@@ -56,23 +56,24 @@ hkClass *__fastcall hkpMoppBvTreeShape::staticClass()
 
 // File Line: 101
 // RVA: 0xCEB0C0
-void __fastcall finishLoadedObjecthkpMoppBvTreeShape(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpMoppBvTreeShape(hkpMoppBvTreeShape *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpMoppBvTreeShape::hkpMoppBvTreeShape);
+  if ( p )
+    hkpMoppBvTreeShape::hkpMoppBvTreeShape(p, finishing);
 }
 
 // File Line: 107
 // RVA: 0xCEB0E0
-void __fastcall cleanupLoadedObjecthkpMoppBvTreeShape(void *p)
+void __fastcall cleanupLoadedObjecthkpMoppBvTreeShape(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 111
 // RVA: 0xCEB0F0
 hkBaseObjectVtbl *__fastcall getVtablehkpMoppBvTreeShape()
 {
-  hkpMoppBvTreeShape v1; // [rsp+20h] [rbp-78h]
+  hkpMoppBvTreeShape v1; // [rsp+20h] [rbp-78h] BYREF
 
   hkpMoppBvTreeShape::hkpMoppBvTreeShape(&v1, 0);
   return v1.vfptr;
@@ -89,8 +90,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpMoppBvTreeShapeTypeInfo__()
   hkpMoppBvTreeShapeTypeInfo.m_typeName = "hkpMoppBvTreeShape";
   hkpMoppBvTreeShapeTypeInfo.m_vtable = result;
   hkpMoppBvTreeShapeTypeInfo.m_scopedName = "!hkpMoppBvTreeShape";
-  hkpMoppBvTreeShapeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpMoppBvTreeShape;
-  hkpMoppBvTreeShapeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpMoppBvTreeShape;
+  hkpMoppBvTreeShapeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpMoppBvTreeShape;
+  hkpMoppBvTreeShapeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpMoppBvTreeShape;
   return result;
 }
 

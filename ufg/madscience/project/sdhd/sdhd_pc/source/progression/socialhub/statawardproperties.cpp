@@ -3,37 +3,35 @@
 signed __int64 __fastcall UFG::StatAwardPropertyData::GetFormat(const char *formatString)
 {
   unsigned int v1; // ebx
-  const char *v2; // rdi
   signed __int64 result; // rax
 
   v1 = -1;
-  v2 = formatString;
   result = UFG::qStringCompare(formatString, "Rank", -1);
   if ( (_DWORD)result )
   {
-    if ( (unsigned int)UFG::qStringCompare(v2, "Int32", -1) )
+    if ( (unsigned int)UFG::qStringCompare(formatString, "Int32", -1) )
     {
-      if ( (unsigned int)UFG::qStringCompare(v2, "Percentage", -1) )
+      if ( (unsigned int)UFG::qStringCompare(formatString, "Percentage", -1) )
       {
-        if ( (unsigned int)UFG::qStringCompare(v2, "RaceTime", -1) )
+        if ( (unsigned int)UFG::qStringCompare(formatString, "RaceTime", -1) )
         {
-          if ( !(unsigned int)UFG::qStringCompare(v2, "Money", -1) )
-            v1 = 4;
-          result = v1;
+          if ( !(unsigned int)UFG::qStringCompare(formatString, "Money", -1) )
+            return 4;
+          return v1;
         }
         else
         {
-          result = 3i64;
+          return 3i64;
         }
       }
       else
       {
-        result = 2i64;
+        return 2i64;
       }
     }
     else
     {
-      result = 1i64;
+      return 1i64;
     }
   }
   return result;
@@ -41,47 +39,43 @@ signed __int64 __fastcall UFG::StatAwardPropertyData::GetFormat(const char *form
 
 // File Line: 28
 // RVA: 0x4A1530
-void __fastcall UFG::StatAwardPropertyData::FormatScore(UFG::StatAwardPropertyData *this, UFG::qString *scoreStr, int score)
+void __fastcall UFG::StatAwardPropertyData::FormatScore(
+        UFG::StatAwardPropertyData *this,
+        UFG::qString *scoreStr,
+        __int64 score)
 {
   int v3; // ebx
-  UFG::qString *v4; // rdi
-  UFG::StatAwardPropertyData::Format v5; // eax
+  UFG::StatAwardPropertyData::Format m_eFormat; // eax
   UFG::qString *v6; // rax
-  UFG::qString *v7; // rax
+  UFG::qString *LocalizedTime; // rax
   UFG::qString *v8; // rax
-  UFG::qString *v9; // rax
-  UFG::qString result; // [rsp+38h] [rbp-60h]
-  UFG::qString v11; // [rsp+60h] [rbp-38h]
+  UFG::qString result; // [rsp+38h] [rbp-60h] BYREF
+  UFG::qString v10; // [rsp+60h] [rbp-38h] BYREF
 
   v3 = score;
-  v4 = scoreStr;
-  v5 = this->m_eFormat;
-  if ( v5 )
+  m_eFormat = this->m_eFormat;
+  if ( (unsigned int)m_eFormat > Format_Int32 )
   {
-    switch ( v5 )
+    switch ( m_eFormat )
     {
-      case 1u:
-        v7 = UFG::qString::FormatEx(&result, "%d");
-        UFG::qString::Set(v4, v7->mData, v7->mLength, 0i64, 0);
+      case Format_Percentage:
+        UFG::qString::qString(&result, "%.2f %%", (float)((float)(int)score * 0.001));
+        UFG::qString::Set(scoreStr, result.mData, result.mLength, 0i64, 0);
         break;
-      case 2u:
-        UFG::qString::qString(&result, "%.2f %%", (float)((float)score * 0.001));
-        UFG::qString::Set(v4, result.mData, result.mLength, 0i64, 0);
+      case Format_RaceTime:
+        LocalizedTime = UFG::UIGfxTranslator::getLocalizedTime(
+                          UFG::UIScreenManager::s_instance->m_translator,
+                          &result,
+                          (float)(int)score,
+                          eTS_SECONDS);
+        UFG::qString::Set(scoreStr, LocalizedTime->mData, LocalizedTime->mLength, 0i64, 0);
         break;
-      case 3u:
-        v8 = UFG::UIGfxTranslator::getLocalizedTime(
-               UFG::UIScreenManager::s_instance->m_translator,
-               &result,
-               (float)score,
-               eTS_SECONDS);
-        UFG::qString::Set(v4, v8->mData, v8->mLength, 0i64, 0);
-        break;
-      case 4u:
+      case Format_Money:
         UFG::qString::qString(&result);
         UFG::UI::FormatMoneyStr(v3, &result);
-        v9 = UFG::qString::FormatEx(&v11, "HK $%s", result.mData);
-        UFG::qString::Set(v4, v9->mData, v9->mLength, 0i64, 0);
-        UFG::qString::~qString(&v11);
+        v8 = UFG::qString::FormatEx(&v10, "HK $%s", result.mData);
+        UFG::qString::Set(scoreStr, v8->mData, v8->mLength, 0i64, 0);
+        UFG::qString::~qString(&v10);
         break;
       default:
         return;
@@ -89,99 +83,91 @@ void __fastcall UFG::StatAwardPropertyData::FormatScore(UFG::StatAwardPropertyDa
   }
   else
   {
-    v6 = UFG::qString::FormatEx(&result, "%d");
-    UFG::qString::Set(v4, v6->mData, v6->mLength, 0i64, 0);
+    v6 = UFG::qString::FormatEx(&result, "%d", score);
+    UFG::qString::Set(scoreStr, v6->mData, v6->mLength, 0i64, 0);
   }
   UFG::qString::~qString(&result);
 }
 
 // File Line: 64
 // RVA: 0x4A14D0
-UFG::qString *__fastcall UFG::StatAwardPropertyData::FormatScore(UFG::StatAwardPropertyData *this, UFG::qString *result, int score)
+UFG::qString *__fastcall UFG::StatAwardPropertyData::FormatScore(
+        UFG::StatAwardPropertyData *this,
+        UFG::qString *result,
+        int score)
 {
-  int v3; // edi
-  UFG::qString *v4; // rsi
-  UFG::StatAwardPropertyData *v5; // rbx
-
-  v3 = score;
-  v4 = result;
-  v5 = this;
   UFG::qString::qString(result);
-  UFG::StatAwardPropertyData::FormatScore(v5, v4, v3);
-  return v4;
+  UFG::StatAwardPropertyData::FormatScore(this, result, score);
+  return result;
 }
 
 // File Line: 71
 // RVA: 0x48DB10
 void __fastcall UFG::StatAwardPropertyManager::StatAwardPropertyManager(UFG::StatAwardPropertyManager *this)
 {
-  UFG::StatAwardPropertyManager *v1; // rbx
   UFG::OSuiteLeaderboardManager *v2; // rbp
   unsigned int v3; // edi
   __int64 v4; // rsi
-  UFG::OSuiteLeaderboardData *v5; // rax
-  UFG::StatAwardPropertyData::Format v6; // er13
+  UFG::OSuiteLeaderboardData *p; // rax
+  UFG::StatAwardPropertyData::Format Format; // r13d
   UFG::OSuiteLeaderboardData *v7; // rcx
-  int v8; // er14
-  int v9; // er15
-  int v10; // er12
+  int mGold; // r14d
+  int mSilver; // r15d
+  int mBronze; // r12d
   UFG::allocator::free_link *v11; // rax
-  signed __int64 v12; // rdx
-  UFG::allocator::free_link *v13; // rcx
-  UFG::allocator::free_link *v14; // rcx
-  UFG::qNode<UFG::StatAwardPropertyData,UFG::StatAwardPropertyData> *v15; // rax
-  unsigned int v16; // [rsp+78h] [rbp+10h]
+  __int64 v12; // rdx
+  UFG::qNode<UFG::StatAwardPropertyData,UFG::StatAwardPropertyData> *v13; // rcx
+  UFG::qNode<UFG::StatAwardPropertyData,UFG::StatAwardPropertyData> *mPrev; // rax
+  unsigned int size; // [rsp+78h] [rbp+10h]
 
-  v1 = this;
   this->m_lProperties.mNode.mPrev = &this->m_lProperties.mNode;
   this->m_lProperties.mNode.mNext = &this->m_lProperties.mNode;
   v2 = UFG::OSuiteLeaderboardManager::Instance();
-  v16 = v2->mLeaderboardData.size;
+  size = v2->mLeaderboardData.size;
   v3 = 0;
-  if ( v16 )
+  if ( size )
   {
     v4 = 0i64;
     do
     {
-      v5 = v2->mLeaderboardData.p;
-      if ( v5[v4].mCategory == LeaderboardCategory_StatAward )
+      p = v2->mLeaderboardData.p;
+      if ( p[v4].mCategory == LeaderboardCategory_StatAward )
       {
-        v6 = UFG::StatAwardPropertyData::GetFormat(v5[v4].mFormat);
+        Format = UFG::StatAwardPropertyData::GetFormat(p[v4].mFormat);
         v7 = v2->mLeaderboardData.p;
-        v8 = v7[v4].mGold;
-        v9 = v7[v4].mSilver;
-        v10 = v7[v4].mBronze;
-        if ( v6 - 2 <= 1 )
+        mGold = v7[v4].mGold;
+        mSilver = v7[v4].mSilver;
+        mBronze = v7[v4].mBronze;
+        if ( (unsigned int)(Format - 2) <= 1 )
         {
-          v8 *= (signed int)1000.0;
-          v9 *= (signed int)1000.0;
-          v10 *= (signed int)1000.0;
+          mGold *= (int)1000.0;
+          mSilver *= (int)1000.0;
+          mBronze *= (int)1000.0;
         }
         v11 = UFG::qMalloc(0x30ui64, "StatAwardPropertyManager", 0i64);
         if ( v11 )
         {
-          v12 = (signed __int64)&v2->mLeaderboardData.p[v3];
-          v13 = v11 + 1;
-          v13->mNext = v13;
-          v13[1].mNext = v13;
+          v12 = (__int64)&v2->mLeaderboardData.p[v3];
+          v11[1].mNext = v11 + 1;
+          v11[2].mNext = v11 + 1;
           v11->mNext = (UFG::allocator::free_link *)&UFG::StatAwardPropertyData::`vftable;
           v11[3].mNext = (UFG::allocator::free_link *)v12;
-          LODWORD(v11[4].mNext) = v6;
-          HIDWORD(v11[4].mNext) = v8;
-          LODWORD(v11[5].mNext) = v9;
-          HIDWORD(v11[5].mNext) = v10;
+          LODWORD(v11[4].mNext) = Format;
+          HIDWORD(v11[4].mNext) = mGold;
+          LODWORD(v11[5].mNext) = mSilver;
+          HIDWORD(v11[5].mNext) = mBronze;
         }
-        v14 = v11 + 1;
-        v15 = v1->m_lProperties.mNode.mPrev;
-        v15->mNext = (UFG::qNode<UFG::StatAwardPropertyData,UFG::StatAwardPropertyData> *)v14;
-        v14->mNext = (UFG::allocator::free_link *)v15;
-        v14[1].mNext = (UFG::allocator::free_link *)v1;
-        v1->m_lProperties.mNode.mPrev = (UFG::qNode<UFG::StatAwardPropertyData,UFG::StatAwardPropertyData> *)v14;
+        v13 = (UFG::qNode<UFG::StatAwardPropertyData,UFG::StatAwardPropertyData> *)&v11[1];
+        mPrev = this->m_lProperties.mNode.mPrev;
+        mPrev->mNext = v13;
+        v13->mPrev = mPrev;
+        v13->mNext = &this->m_lProperties.mNode;
+        this->m_lProperties.mNode.mPrev = v13;
       }
       ++v3;
       ++v4;
     }
-    while ( v3 < v16 );
+    while ( v3 < size );
   }
 }
 
@@ -189,7 +175,7 @@ void __fastcall UFG::StatAwardPropertyManager::StatAwardPropertyManager(UFG::Sta
 // RVA: 0x4AB860
 UFG::StatAwardPropertyManager *__fastcall UFG::StatAwardPropertyManager::Instance()
 {
-  if ( !(_S17_3 & 1) )
+  if ( (_S17_3 & 1) == 0 )
   {
     _S17_3 |= 1u;
     UFG::StatAwardPropertyManager::StatAwardPropertyManager(&instance_7);
@@ -200,21 +186,23 @@ UFG::StatAwardPropertyManager *__fastcall UFG::StatAwardPropertyManager::Instanc
 
 // File Line: 107
 // RVA: 0x4A5FB0
-UFG::StatGamePropertyData *__fastcall UFG::StatGamePropertyManager::GetPropertyData(UFG::StatGamePropertyManager *this, UFG::OSuiteLeaderboardData *pLBD)
+UFG::StatGamePropertyData *__fastcall UFG::StatGamePropertyManager::GetPropertyData(
+        UFG::StatGamePropertyManager *this,
+        UFG::OSuiteLeaderboardData *pLBD)
 {
-  UFG::qNode<UFG::StatGamePropertyData,UFG::StatGamePropertyData> *v2; // rax
-  UFG::StatGamePropertyData *v3; // rcx
+  UFG::qNode<UFG::StatGamePropertyData,UFG::StatGamePropertyData> *mNext; // rax
+  UFG::StatGamePropertyData *p_mNext; // rcx
   UFG::StatGamePropertyData *result; // rax
 
-  v2 = this->m_lProperties.mNode.mNext;
-  v3 = (UFG::StatGamePropertyData *)&this[-1].m_lProperties.mNode.mNext;
-  result = (UFG::StatGamePropertyData *)&v2[-1].mNext;
-  if ( result == v3 )
+  mNext = this->m_lProperties.mNode.mNext;
+  p_mNext = (UFG::StatGamePropertyData *)&this[-1].m_lProperties.mNode.mNext;
+  result = (UFG::StatGamePropertyData *)&mNext[-1].mNext;
+  if ( result == p_mNext )
     return 0i64;
   while ( result->m_pLBD != pLBD )
   {
     result = (UFG::StatGamePropertyData *)&result->mNext[-1].mNext;
-    if ( result == v3 )
+    if ( result == p_mNext )
       return 0i64;
   }
   return result;

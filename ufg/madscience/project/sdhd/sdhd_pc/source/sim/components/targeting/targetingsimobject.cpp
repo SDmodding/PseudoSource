@@ -1,12 +1,12 @@
 // File Line: 22
 // RVA: 0x52F300
-UFG::SimObject *__fastcall UFG::TargetingSimObject::GetOwner(UFG::TargetingSimObject *this)
+UFG::qBaseNodeRB *__fastcall UFG::TargetingSimObject::GetOwner(UFG::TargetingSimObject *this)
 {
-  UFG::SimObject *result; // rax
+  UFG::qBaseNodeRB *result; // rax
 
-  result = (UFG::SimObject *)this->m_pTSBC;
+  result = (UFG::qBaseNodeRB *)this->m_pTSBC;
   if ( result )
-    result = (UFG::SimObject *)result->mNode.mParent;
+    return result[1].mChild[0];
   return result;
 }
 
@@ -14,81 +14,77 @@ UFG::SimObject *__fastcall UFG::TargetingSimObject::GetOwner(UFG::TargetingSimOb
 // RVA: 0x54EB60
 void __fastcall UFG::TargetingSimObject::SetTarget(UFG::TargetingSimObject *this, UFG::SimObject *pNewTarget)
 {
-  UFG::SimObject *v2; // rbx
-  UFG::TargetingSimObject *v3; // rdi
-  UFG::qNode<UFG::TargetingSimObject,UFG::TargetingSimObject> *v4; // r8
-  UFG::qNode<UFG::TargetingSimObject,UFG::TargetingSimObject> *v5; // rax
-  unsigned __int16 v6; // cx
-  UFG::SimComponent *v7; // rax
-  unsigned int v8; // er8
-  unsigned int v9; // er9
+  UFG::qNode<UFG::TargetingSimObject,UFG::TargetingSimObject> *mPrev; // r8
+  UFG::qNode<UFG::TargetingSimObject,UFG::TargetingSimObject> *mNext; // rax
+  signed __int16 m_Flags; // cx
+  UFG::SimComponent *m_pComponent; // rax
+  unsigned int vfptr; // r8d
+  unsigned int size; // r9d
   UFG::SimComponentHolder *v10; // rdx
-  unsigned int v11; // er8
-  unsigned int v12; // er9
-  UFG::qNode<UFG::TargetingSimObject,UFG::TargetingSimObject> *v13; // rcx
-  UFG::qNode<UFG::TargetingSimObject,UFG::TargetingSimObject> *v14; // rax
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v15; // rdx
+  unsigned int v11; // r8d
+  unsigned int v12; // r9d
+  UFG::qNode<UFG::TargetingSimObject,UFG::TargetingSimObject> *p_m_pSimObject; // rcx
+  UFG::qNode<UFG::TargetingSimObject,UFG::TargetingSimObject> *m_pSimObject; // rax
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_m_pTarget; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v16; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v17; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v18; // rax
 
-  v2 = pNewTarget;
-  v3 = this;
   if ( pNewTarget == this->m_pTarget.m_pPointer )
     return;
-  v4 = this->mPrev;
-  v5 = this->mNext;
-  v4->mNext = v5;
-  v5->mPrev = v4;
-  this->mPrev = (UFG::qNode<UFG::TargetingSimObject,UFG::TargetingSimObject> *)&this->mPrev;
-  this->mNext = (UFG::qNode<UFG::TargetingSimObject,UFG::TargetingSimObject> *)&this->mPrev;
+  mPrev = this->mPrev;
+  mNext = this->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->mPrev = this;
+  this->mNext = this;
   if ( pNewTarget )
   {
-    v6 = pNewTarget->m_Flags;
-    if ( (v6 >> 14) & 1 )
+    m_Flags = pNewTarget->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v7 = pNewTarget->m_Components.p[20].m_pComponent;
+      m_pComponent = pNewTarget->m_Components.p[20].m_pComponent;
       goto LABEL_23;
     }
-    if ( (v6 & 0x8000u) != 0 )
+    if ( m_Flags < 0 )
     {
-      v7 = pNewTarget->m_Components.p[20].m_pComponent;
+      m_pComponent = pNewTarget->m_Components.p[20].m_pComponent;
       goto LABEL_23;
     }
-    if ( (v6 >> 13) & 1 )
+    if ( (m_Flags & 0x2000) != 0 )
     {
-      v8 = (unsigned int)pNewTarget[1].vfptr;
-      v9 = pNewTarget->m_Components.size;
-      if ( v8 < v9 )
+      vfptr = (unsigned int)pNewTarget[1].vfptr;
+      size = pNewTarget->m_Components.size;
+      if ( vfptr < size )
       {
-        v10 = &pNewTarget->m_Components.p[v8];
+        v10 = &pNewTarget->m_Components.p[vfptr];
         while ( (v10->m_TypeUID & 0xFE000000) != (UFG::TargetingSystemBaseComponent::_TypeUID & 0xFE000000)
-             || UFG::TargetingSystemBaseComponent::_TypeUID & ~v10->m_TypeUID & 0x1FFFFFF )
+             || (UFG::TargetingSystemBaseComponent::_TypeUID & ~v10->m_TypeUID & 0x1FFFFFF) != 0 )
         {
-          ++v8;
+          ++vfptr;
           ++v10;
-          if ( v8 >= v9 )
+          if ( vfptr >= size )
             goto LABEL_13;
         }
 LABEL_14:
-        v7 = v10->m_pComponent;
+        m_pComponent = v10->m_pComponent;
         goto LABEL_23;
       }
     }
     else
     {
-      if ( !((v6 >> 12) & 1) )
+      if ( (m_Flags & 0x1000) == 0 )
       {
-        v7 = UFG::SimObject::GetComponentOfType(pNewTarget, UFG::TargetingSystemBaseComponent::_TypeUID);
+        m_pComponent = UFG::SimObject::GetComponentOfType(pNewTarget, UFG::TargetingSystemBaseComponent::_TypeUID);
 LABEL_23:
-        if ( v7 )
+        if ( m_pComponent )
         {
-          v13 = (UFG::qNode<UFG::TargetingSimObject,UFG::TargetingSimObject> *)&v7[1].m_pSimObject;
-          v14 = (UFG::qNode<UFG::TargetingSimObject,UFG::TargetingSimObject> *)v7[1].m_pSimObject;
-          v14->mNext = (UFG::qNode<UFG::TargetingSimObject,UFG::TargetingSimObject> *)&v3->mPrev;
-          v3->mPrev = v14;
-          v3->mNext = v13;
-          v13->mPrev = (UFG::qNode<UFG::TargetingSimObject,UFG::TargetingSimObject> *)&v3->mPrev;
+          p_m_pSimObject = (UFG::qNode<UFG::TargetingSimObject,UFG::TargetingSimObject> *)&m_pComponent[1].m_pSimObject;
+          m_pSimObject = (UFG::qNode<UFG::TargetingSimObject,UFG::TargetingSimObject> *)m_pComponent[1].m_pSimObject;
+          m_pSimObject->mNext = this;
+          this->mPrev = m_pSimObject;
+          this->mNext = p_m_pSimObject;
+          p_m_pSimObject->mPrev = this;
         }
         goto LABEL_25;
       }
@@ -98,13 +94,13 @@ LABEL_23:
       {
         v10 = &pNewTarget->m_Components.p[v11];
         while ( (v10->m_TypeUID & 0xFE000000) != (UFG::TargetingSystemBaseComponent::_TypeUID & 0xFE000000)
-             || UFG::TargetingSystemBaseComponent::_TypeUID & ~v10->m_TypeUID & 0x1FFFFFF )
+             || (UFG::TargetingSystemBaseComponent::_TypeUID & ~v10->m_TypeUID & 0x1FFFFFF) != 0 )
         {
           ++v11;
           ++v10;
           if ( v11 >= v12 )
           {
-            v7 = 0i64;
+            m_pComponent = 0i64;
             goto LABEL_23;
           }
         }
@@ -112,28 +108,28 @@ LABEL_23:
       }
     }
 LABEL_13:
-    v7 = 0i64;
+    m_pComponent = 0i64;
     goto LABEL_23;
   }
 LABEL_25:
-  v15 = &v3->m_pTarget;
-  if ( v3->m_pTarget.m_pPointer )
+  p_m_pTarget = &this->m_pTarget;
+  if ( this->m_pTarget.m_pPointer )
   {
-    v16 = v15->mPrev;
-    v17 = v3->m_pTarget.mNext;
+    v16 = p_m_pTarget->mPrev;
+    v17 = this->m_pTarget.mNext;
     v16->mNext = v17;
     v17->mPrev = v16;
-    v15->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v15->mPrev;
-    v3->m_pTarget.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v3->m_pTarget.mPrev;
+    p_m_pTarget->mPrev = p_m_pTarget;
+    this->m_pTarget.mNext = &this->m_pTarget;
   }
-  v3->m_pTarget.m_pPointer = v2;
-  if ( v2 )
+  this->m_pTarget.m_pPointer = pNewTarget;
+  if ( pNewTarget )
   {
-    v18 = v2->m_SafePointerList.mNode.mPrev;
-    v18->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v15->mPrev;
-    v15->mPrev = v18;
-    v3->m_pTarget.mNext = &v2->m_SafePointerList.mNode;
-    v2->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v15->mPrev;
+    v18 = pNewTarget->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+    v18->mNext = p_m_pTarget;
+    p_m_pTarget->mPrev = v18;
+    this->m_pTarget.mNext = &pNewTarget->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+    pNewTarget->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = p_m_pTarget;
   }
 }
 

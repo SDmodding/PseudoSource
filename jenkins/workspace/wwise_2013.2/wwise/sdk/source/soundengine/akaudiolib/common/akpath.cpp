@@ -4,12 +4,12 @@ void __fastcall CAkPath::CAkPath(CAkPath *this)
 {
   this->m_PBIsList.m_pItems = 0i64;
   *(_QWORD *)&this->m_PBIsList.m_uLength = 0i64;
-  this->m_eState = 0;
+  this->m_eState = NotRunning;
   this->m_pPathsList = 0i64;
   this->m_pbPlayed = 0i64;
   this->m_pCurrentList = 0i64;
   this->m_ulListSize = 0;
-  this->m_PathMode = 0;
+  this->m_PathMode = AkStepSequence;
   *(_WORD *)&this->m_bWasStarted = 0;
   *(_WORD *)&this->m_iPotentialUsers = 0;
   *(_QWORD *)&this->m_StartTime = 0i64;
@@ -23,130 +23,127 @@ void __fastcall CAkPath::CAkPath(CAkPath *this)
 // RVA: 0xA86E10
 void __fastcall CAkPath::Term(CAkPath *this)
 {
-  CAkPath *v1; // rbx
-  CAkPBI **v2; // rdx
-  bool *v3; // rdx
-  float *v4; // rdx
+  CAkPBI **m_pItems; // rdx
+  bool *m_pbPlayed; // rdx
+  float *m_pNoFollowOrientationRotation; // rdx
 
-  v1 = this;
-  this->m_eState = 0;
-  v2 = this->m_PBIsList.m_pItems;
-  if ( v2 )
+  this->m_eState = NotRunning;
+  m_pItems = this->m_PBIsList.m_pItems;
+  if ( m_pItems )
   {
     this->m_PBIsList.m_uLength = 0;
-    AK::MemoryMgr::Free(g_DefaultPoolId, v2);
-    v1->m_PBIsList.m_pItems = 0i64;
-    v1->m_PBIsList.m_ulReserved = 0;
+    AK::MemoryMgr::Free(g_DefaultPoolId, m_pItems);
+    this->m_PBIsList.m_pItems = 0i64;
+    this->m_PBIsList.m_ulReserved = 0;
   }
-  if ( v1->m_PathMode & 2 )
+  if ( (this->m_PathMode & 2) != 0 )
   {
-    v3 = v1->m_pbPlayed;
-    if ( v3 )
+    m_pbPlayed = this->m_pbPlayed;
+    if ( m_pbPlayed )
     {
-      AK::MemoryMgr::Free(g_DefaultPoolId, v3);
-      v1->m_pbPlayed = 0i64;
+      AK::MemoryMgr::Free(g_DefaultPoolId, m_pbPlayed);
+      this->m_pbPlayed = 0i64;
     }
   }
-  v4 = v1->m_pNoFollowOrientationRotation;
-  if ( v4 )
-    AK::MemoryMgr::Free(g_DefaultPoolId, v4);
+  m_pNoFollowOrientationRotation = this->m_pNoFollowOrientationRotation;
+  if ( m_pNoFollowOrientationRotation )
+    AK::MemoryMgr::Free(g_DefaultPoolId, m_pNoFollowOrientationRotation);
 }
 
 // File Line: 88
 // RVA: 0xA86BC0
-signed __int64 __fastcall CAkPath::Start(CAkPath *this, unsigned int in_CurrentBufferTick)
+__int64 __fastcall CAkPath::Start(CAkPath *this, signed int in_CurrentBufferTick)
 {
-  AkPathListItem *v2; // r8
-  signed int v3; // esi
-  CAkPath *v4; // rbx
-  float *v5; // rcx
+  AkPathListItem *m_pCurrentList; // r8
+  AkPathVertex *pVertices; // rcx
   int v6; // eax
-  signed int v7; // ecx
-  float v8; // xmm8_4
-  float v9; // xmm7_4
-  float v10; // xmm9_4
+  int iNumVertices; // ecx
+  float X; // xmm8_4
+  float Z; // xmm7_4
+  float Y; // xmm9_4
   float v11; // xmm8_4
   float v12; // xmm7_4
   float v13; // xmm9_4
   float v14; // xmm7_4
-  CAkPBI **v15; // rax
-  CAkGen3DParams *v16; // rdx
-  signed int v17; // ecx
-  signed __int64 result; // rax
+  CAkPBI **m_pItems; // rax
+  CAkGen3DParams *m_p3DSound; // rdx
+  signed int m_Duration; // ecx
+  __int64 result; // rax
   float v19; // xmm10_4
 
-  v2 = this->m_pCurrentList;
-  v3 = in_CurrentBufferTick;
-  v4 = this;
-  if ( !v2 )
+  m_pCurrentList = this->m_pCurrentList;
+  if ( !m_pCurrentList )
     return 2i64;
   this->m_bWasStarted = 1;
-  if ( v2->iNumVertices <= 0 )
+  if ( m_pCurrentList->iNumVertices <= 0 )
     return 37i64;
   this->m_uCurrentVertex = 0;
-  v5 = &v2->pVertices->Vertex.X;
-  v4->m_uCurrentVertex = 1;
-  v4->m_StartPosition.X = *v5;
-  v4->m_StartPosition.Y = v5[1];
-  v4->m_StartPosition.Z = v5[2];
-  v6 = (AkAudioLibSettings::g_msPerBufferTick + *((_DWORD *)v5 + 3) - 1) / AkAudioLibSettings::g_msPerBufferTick;
+  pVertices = m_pCurrentList->pVertices;
+  this->m_uCurrentVertex = 1;
+  this->m_StartPosition.X = pVertices->Vertex.X;
+  this->m_StartPosition.Y = pVertices->Vertex.Y;
+  this->m_StartPosition.Z = pVertices->Vertex.Z;
+  v6 = (AkAudioLibSettings::g_msPerBufferTick + pVertices->Duration - 1) / AkAudioLibSettings::g_msPerBufferTick;
   if ( !v6 )
     v6 = 1;
-  v4->m_Duration = v6;
-  v7 = v2->iNumVertices;
-  if ( v7 <= 1 )
+  this->m_Duration = v6;
+  iNumVertices = m_pCurrentList->iNumVertices;
+  if ( iNumVertices <= 1 )
   {
-    *(_QWORD *)&v4->m_Direction.X = 0i64;
-    v4->m_Direction.Z = 0.0;
+    *(_QWORD *)&this->m_Direction.X = 0i64;
+    this->m_Direction.Z = 0.0;
   }
   else
   {
-    v8 = v2->pVertices[1].Vertex.X;
-    v9 = v2->pVertices[1].Vertex.Z;
-    v10 = v2->pVertices[1].Vertex.Y;
-    if ( v8 != v4->m_StartPosition.X || v10 != v4->m_StartPosition.Y || v9 != v4->m_StartPosition.Z || v7 > 2 )
+    X = m_pCurrentList->pVertices[1].Vertex.X;
+    Z = m_pCurrentList->pVertices[1].Vertex.Z;
+    Y = m_pCurrentList->pVertices[1].Vertex.Y;
+    if ( X == this->m_StartPosition.X
+      && Y == this->m_StartPosition.Y
+      && Z == this->m_StartPosition.Z
+      && iNumVertices <= 2 )
     {
-      CAkPath::RandomizePosition(v4, &v4->m_StartPosition);
-      v11 = v8 + (float)((float)((float)((float)rand() * 0.000061038882) - 1.0) * v4->m_pCurrentList->fRangeX);
-      v12 = v9 + (float)((float)((float)((float)rand() * 0.000061038882) - 1.0) * v4->m_pCurrentList->fRangeY);
+      CAkPath::RandomizePosition(this, &this->m_StartPosition);
+      v11 = this->m_StartPosition.X;
+      Y = this->m_StartPosition.Y;
+      v12 = this->m_StartPosition.Z;
     }
     else
     {
-      CAkPath::RandomizePosition(v4, &v4->m_StartPosition);
-      v11 = v4->m_StartPosition.X;
-      v10 = v4->m_StartPosition.Y;
-      v12 = v4->m_StartPosition.Z;
+      CAkPath::RandomizePosition(this, &this->m_StartPosition);
+      v11 = X + (float)((float)((float)((float)rand() * 0.000061038882) - 1.0) * this->m_pCurrentList->fRangeX);
+      v12 = Z + (float)((float)((float)((float)rand() * 0.000061038882) - 1.0) * this->m_pCurrentList->fRangeY);
     }
-    v13 = v10 - v4->m_StartPosition.Y;
-    v14 = v12 - v4->m_StartPosition.Z;
-    v4->m_Direction.X = v11 - v4->m_StartPosition.X;
-    v4->m_Direction.Y = v13;
-    v4->m_Direction.Z = v14;
+    v13 = Y - this->m_StartPosition.Y;
+    v14 = v12 - this->m_StartPosition.Z;
+    this->m_Direction.X = v11 - this->m_StartPosition.X;
+    this->m_Direction.Y = v13;
+    this->m_Direction.Z = v14;
   }
-  v15 = v4->m_PBIsList.m_pItems;
-  if ( v15 != &v15[v4->m_PBIsList.m_uLength] )
+  m_pItems = this->m_PBIsList.m_pItems;
+  if ( m_pItems != &m_pItems[this->m_PBIsList.m_uLength] )
   {
     do
     {
-      v16 = (*v15)->m_p3DSound;
-      if ( !(*((_BYTE *)&v16->m_Params + 68) & 4) )
+      m_p3DSound = (*m_pItems)->m_p3DSound;
+      if ( (*((_BYTE *)&m_p3DSound->m_Params + 68) & 4) == 0 )
       {
-        v16->m_Params.m_Position.X = v4->m_StartPosition.X;
-        v16->m_Params.m_Position.Y = v4->m_StartPosition.Y;
-        v16->m_Params.m_Position.Z = v4->m_StartPosition.Z;
+        m_p3DSound->m_Params.m_Position.X = this->m_StartPosition.X;
+        m_p3DSound->m_Params.m_Position.Y = this->m_StartPosition.Y;
+        m_p3DSound->m_Params.m_Position.Z = this->m_StartPosition.Z;
       }
-      ++v15;
+      ++m_pItems;
     }
-    while ( v15 != &v4->m_PBIsList.m_pItems[v4->m_PBIsList.m_uLength] );
+    while ( m_pItems != &this->m_PBIsList.m_pItems[this->m_PBIsList.m_uLength] );
   }
-  v17 = v4->m_Duration;
-  v4->m_eState = 1;
-  v4->m_StartTime = v3;
-  v4->m_EndTime = v17 + v3;
+  m_Duration = this->m_Duration;
+  this->m_eState = Running;
+  this->m_StartTime = in_CurrentBufferTick;
+  this->m_EndTime = m_Duration + in_CurrentBufferTick;
   result = 1i64;
-  v19 = 1.0 / (float)v17;
-  v4->m_fa = v19;
-  LODWORD(v4->m_fb) = COERCE_UNSIGNED_INT((float)v3 * v19) ^ _xmm[0];
+  v19 = 1.0 / (float)m_Duration;
+  this->m_fa = v19;
+  LODWORD(this->m_fb) = COERCE_UNSIGNED_INT((float)in_CurrentBufferTick * v19) ^ _xmm[0];
   return result;
 }
 
@@ -155,85 +152,83 @@ signed __int64 __fastcall CAkPath::Start(CAkPath *this, unsigned int in_CurrentB
 void __fastcall CAkPath::Pause(CAkPath *this, unsigned int in_CurrentBufferTick)
 {
   this->m_TimePaused = in_CurrentBufferTick;
-  this->m_eState = 2;
+  this->m_eState = Suspended;
 }
 
 // File Line: 194
 // RVA: 0xA86A90
 void __fastcall CAkPath::Resume(CAkPath *this, unsigned int in_CurrentBufferTick)
 {
-  unsigned int v2; // edx
-  signed int v3; // eax
+  int v2; // edx
+  signed int m_StartTime; // eax
 
   v2 = in_CurrentBufferTick - this->m_TimePaused;
-  this->m_eState = 1;
+  this->m_eState = Running;
   this->m_StartTime += v2;
-  v3 = this->m_StartTime;
+  m_StartTime = this->m_StartTime;
   this->m_EndTime += v2;
-  LODWORD(this->m_fb) = COERCE_UNSIGNED_INT((float)v3 * this->m_fa) ^ _xmm[0];
+  LODWORD(this->m_fb) = COERCE_UNSIGNED_INT((float)m_StartTime * this->m_fa) ^ _xmm[0];
 }
 
 // File Line: 208
 // RVA: 0xA867B0
 void __fastcall CAkPath::NextVertex(CAkPath *this)
 {
-  CAkPath *v1; // rdi
-  AkPathListItem *v2; // rcx
-  int v3; // eax
-  float *v4; // rbx
+  AkPathListItem *m_pCurrentList; // rcx
+  int m_uCurrentVertex; // eax
+  __int64 v4; // rbx
   int v5; // eax
-  AkPathVertex *v6; // rcx
-  float v7; // xmm7_4
-  float v8; // xmm8_4
-  float v9; // xmm9_4
+  AkPathVertex *pVertices; // rcx
+  float X; // xmm7_4
+  float Y; // xmm8_4
+  float Z; // xmm9_4
   float v10; // xmm7_4
-  signed int v11; // eax
-  signed int v12; // edx
-  signed int v13; // ecx
+  int v11; // eax
+  int m_EndTime; // edx
+  signed int m_Duration; // ecx
   float v14; // xmm8_4
   float v15; // xmm0_4
   float v16; // xmm10_4
 
-  v1 = this;
-  v2 = this->m_pCurrentList;
-  v3 = v1->m_uCurrentVertex;
-  if ( v3 < v2->iNumVertices )
+  m_pCurrentList = this->m_pCurrentList;
+  m_uCurrentVertex = this->m_uCurrentVertex;
+  if ( m_uCurrentVertex < m_pCurrentList->iNumVertices )
   {
-    v4 = &v2->pVertices[v1->m_uCurrentVertex].Vertex.X;
-    v1->m_uCurrentVertex = v3 + 1;
-    v1->m_StartPosition.X = *v4;
-    v1->m_StartPosition.Y = v4[1];
-    v1->m_StartPosition.Z = v4[2];
-    CAkPath::RandomizePosition(v1, &v1->m_StartPosition);
-    v5 = (AkAudioLibSettings::g_msPerBufferTick + *((_DWORD *)v4 + 3) - 1) / AkAudioLibSettings::g_msPerBufferTick;
+    v4 = (__int64)&m_pCurrentList->pVertices[this->m_uCurrentVertex];
+    this->m_uCurrentVertex = m_uCurrentVertex + 1;
+    this->m_StartPosition.X = *(float *)v4;
+    this->m_StartPosition.Y = *(float *)(v4 + 4);
+    this->m_StartPosition.Z = *(float *)(v4 + 8);
+    CAkPath::RandomizePosition(this, &this->m_StartPosition);
+    v5 = (AkAudioLibSettings::g_msPerBufferTick + *(_DWORD *)(v4 + 12) - 1) / AkAudioLibSettings::g_msPerBufferTick;
     if ( !v5 )
       v5 = 1;
-    v1->m_Duration = v5;
+    this->m_Duration = v5;
   }
-  if ( v1->m_uCurrentVertex < v1->m_pCurrentList->iNumVertices || (unsigned int)CAkPath::GetNextPathList(v1) == 1 )
+  if ( this->m_uCurrentVertex < this->m_pCurrentList->iNumVertices || (unsigned int)CAkPath::GetNextPathList(this) == 1 )
   {
-    v6 = v1->m_pCurrentList->pVertices;
-    v7 = v6[v1->m_uCurrentVertex].Vertex.X;
-    v8 = v6[v1->m_uCurrentVertex].Vertex.Y;
-    v9 = v6[v1->m_uCurrentVertex].Vertex.Z;
-    v10 = v7 + (float)((float)((float)((float)rand() * 0.000061038882) - 1.0) * v1->m_pCurrentList->fRangeX);
+    pVertices = this->m_pCurrentList->pVertices;
+    X = pVertices[this->m_uCurrentVertex].Vertex.X;
+    Y = pVertices[this->m_uCurrentVertex].Vertex.Y;
+    Z = pVertices[this->m_uCurrentVertex].Vertex.Z;
+    v10 = X + (float)((float)((float)((float)rand() * 0.000061038882) - 1.0) * this->m_pCurrentList->fRangeX);
     v11 = rand();
-    v12 = v1->m_EndTime;
-    v13 = v1->m_Duration;
-    v14 = v8 - v1->m_StartPosition.Y;
-    v15 = (float)((float)((float)v11 * 0.000061038882) - 1.0) * v1->m_pCurrentList->fRangeY;
-    v1->m_Direction.X = v10 - v1->m_StartPosition.X;
-    v1->m_Direction.Y = v14;
-    v1->m_StartTime = v12;
-    v1->m_EndTime = v13 + v12;
-    v16 = 1.0 / (float)v13;
-    v1->m_Direction.Z = (float)(v9 + v15) - v1->m_StartPosition.Z;
-    v1->m_fa = v16;
-    LODWORD(v1->m_fb) = COERCE_UNSIGNED_INT((float)v12 * v16) ^ _xmm[0];
+    m_EndTime = this->m_EndTime;
+    m_Duration = this->m_Duration;
+    v14 = Y - this->m_StartPosition.Y;
+    v15 = (float)((float)((float)v11 * 0.000061038882) - 1.0) * this->m_pCurrentList->fRangeY;
+    this->m_Direction.X = v10 - this->m_StartPosition.X;
+    this->m_Direction.Y = v14;
+    this->m_StartTime = m_EndTime;
+    this->m_EndTime = m_Duration + m_EndTime;
+    v16 = 1.0 / (float)m_Duration;
+    this->m_Direction.Z = (float)(Z + v15) - this->m_StartPosition.Z;
+    this->m_fa = v16;
+    LODWORD(this->m_fb) = COERCE_UNSIGNED_INT((float)m_EndTime * v16) ^ _xmm[0];
   }
   else
   {
-    v1->m_eState = 0;
+    this->m_eState = NotRunning;
   }
 }
 
@@ -241,7 +236,7 @@ void __fastcall CAkPath::NextVertex(CAkPath *this)
 // RVA: 0xA867A0
 _BOOL8 __fastcall CAkPath::IsIdle(CAkPath *this)
 {
-  return this->m_eState == 0;
+  return this->m_eState == NotRunning;
 }
 
 // File Line: 288
@@ -249,60 +244,62 @@ _BOOL8 __fastcall CAkPath::IsIdle(CAkPath *this)
 void __fastcall CAkPath::UpdatePosition(CAkPath *this, unsigned int in_CurrentBufferTick)
 {
   float v2; // xmm1_4
-  unsigned int v3; // er9
   float v4; // xmm0_4
-  CAkPBI **v5; // rax
+  CAkPBI **m_pItems; // rax
   float v6; // xmm1_4
   float v7; // xmm2_4
   float v8; // xmm0_4
   float v9; // xmm1_4
   float v10; // xmm2_4
-  CAkGen3DParams *v11; // rdx
+  CAkGen3DParams *m_p3DSound; // rdx
 
   v2 = *(float *)&FLOAT_1_0;
-  v3 = in_CurrentBufferTick;
-  v4 = (float)((float)(signed int)in_CurrentBufferTick * this->m_fa) + this->m_fb;
+  v4 = (float)((float)(int)in_CurrentBufferTick * this->m_fa) + this->m_fb;
   if ( v4 >= 1.0 || (v2 = 0.0, v4 <= 0.0) )
     v4 = v2;
-  v5 = this->m_PBIsList.m_pItems;
+  m_pItems = this->m_PBIsList.m_pItems;
   v6 = v4;
   v7 = v4;
   v8 = (float)(v4 * this->m_Direction.Z) + this->m_StartPosition.Z;
   v9 = (float)(v6 * this->m_Direction.X) + this->m_StartPosition.X;
   v10 = (float)(v7 * this->m_Direction.Y) + this->m_StartPosition.Y;
-  if ( v5 != &v5[this->m_PBIsList.m_uLength] )
+  if ( m_pItems != &m_pItems[this->m_PBIsList.m_uLength] )
   {
     do
     {
-      v11 = (*v5)->m_p3DSound;
-      if ( !(*((_BYTE *)&v11->m_Params + 68) & 4) )
+      m_p3DSound = (*m_pItems)->m_p3DSound;
+      if ( (*((_BYTE *)&m_p3DSound->m_Params + 68) & 4) == 0 )
       {
-        v11->m_Params.m_Position.X = v9;
-        v11->m_Params.m_Position.Y = v10;
-        v11->m_Params.m_Position.Z = v8;
+        m_p3DSound->m_Params.m_Position.X = v9;
+        m_p3DSound->m_Params.m_Position.Y = v10;
+        m_p3DSound->m_Params.m_Position.Z = v8;
       }
-      ++v5;
+      ++m_pItems;
     }
-    while ( v5 != &this->m_PBIsList.m_pItems[this->m_PBIsList.m_uLength] );
+    while ( m_pItems != &this->m_PBIsList.m_pItems[this->m_PBIsList.m_uLength] );
   }
-  if ( v3 >= this->m_EndTime )
+  if ( in_CurrentBufferTick >= this->m_EndTime )
     CAkPath::NextVertex(this);
 }
 
 // File Line: 328
 // RVA: 0xA86AD0
-__int64 __fastcall CAkPath::SetPathsList(CAkPath *this, AkPathListItem *in_pPathList, unsigned int in_ulListSize, AkPathMode in_PathMode, bool in_bIsLooping, AkPathState *in_pState)
+__int64 __fastcall CAkPath::SetPathsList(
+        CAkPath *this,
+        AkPathListItem *in_pPathList,
+        unsigned int in_ulListSize,
+        AkPathMode in_PathMode,
+        bool in_bIsLooping,
+        AkPathState *in_pState)
 {
   char v6; // bp
-  CAkPath *v7; // rbx
   unsigned int v8; // esi
-  bool *v9; // rcx
-  __int64 v10; // rax
+  bool *pbPlayed; // rcx
+  __int64 ulCurrentListIndex_low; // rax
   unsigned int v11; // edi
   bool *v12; // rcx
 
   v6 = in_PathMode;
-  v7 = this;
   v8 = 2;
   if ( this->m_eState == NotRunning )
   {
@@ -310,23 +307,23 @@ __int64 __fastcall CAkPath::SetPathsList(CAkPath *this, AkPathListItem *in_pPath
     this->m_ulListSize = in_ulListSize;
     this->m_bIsLooping = in_bIsLooping;
     this->m_PathMode = in_PathMode;
-    v9 = in_pState->pbPlayed;
-    if ( v9 )
+    pbPlayed = in_pState->pbPlayed;
+    if ( pbPlayed )
     {
-      v7->m_pbPlayed = v9;
-      v10 = LOWORD(in_pState->ulCurrentListIndex);
-      v7->m_ulCurrentListIndex = v10;
-      v7->m_pCurrentList = &in_pPathList[v10];
+      this->m_pbPlayed = pbPlayed;
+      ulCurrentListIndex_low = LOWORD(in_pState->ulCurrentListIndex);
+      this->m_ulCurrentListIndex = ulCurrentListIndex_low;
+      this->m_pCurrentList = &in_pPathList[ulCurrentListIndex_low];
       return 1;
     }
-    v7->m_pCurrentList = in_pPathList;
+    this->m_pCurrentList = in_pPathList;
     v11 = 0;
-    v7->m_ulCurrentListIndex = 0;
+    this->m_ulCurrentListIndex = 0;
     v12 = (bool *)AK::MemoryMgr::Malloc(g_DefaultPoolId, in_ulListSize);
-    v7->m_pbPlayed = v12;
+    this->m_pbPlayed = v12;
     if ( v12 )
     {
-      if ( v7->m_ulListSize > 0u )
+      if ( this->m_ulListSize )
       {
         do
         {
@@ -334,10 +331,10 @@ __int64 __fastcall CAkPath::SetPathsList(CAkPath *this, AkPathListItem *in_pPath
           ++v11;
           ++v12;
         }
-        while ( v11 < v7->m_ulListSize );
+        while ( v11 < this->m_ulListSize );
       }
-      if ( v6 & 1 )
-        CAkPath::PickRandomList(v7);
+      if ( (v6 & 1) != 0 )
+        CAkPath::PickRandomList(this);
       return 1;
     }
   }
@@ -346,20 +343,18 @@ __int64 __fastcall CAkPath::SetPathsList(CAkPath *this, AkPathListItem *in_pPath
 
 // File Line: 384
 // RVA: 0xA86600
-signed __int64 __fastcall CAkPath::GetNextPathList(CAkPath *this)
+__int64 __fastcall CAkPath::GetNextPathList(CAkPath *this)
 {
-  AkPathListItem *v1; // r8
-  CAkPath *v2; // rbx
-  AkPathMode v3; // edx
+  AkPathListItem *m_pCurrentList; // r8
+  AkPathMode m_PathMode; // edx
   bool v4; // cl
   unsigned __int16 v5; // ax
 
-  v1 = this->m_pCurrentList;
-  v2 = this;
-  if ( !v1 )
+  m_pCurrentList = this->m_pCurrentList;
+  if ( !m_pCurrentList )
     return 17i64;
-  v3 = this->m_PathMode;
-  if ( v3 & 1 )
+  m_PathMode = this->m_PathMode;
+  if ( (m_PathMode & 1) != 0 )
   {
     v4 = CAkPath::PickRandomList(this);
   }
@@ -367,21 +362,21 @@ signed __int64 __fastcall CAkPath::GetNextPathList(CAkPath *this)
   {
     v5 = ++this->m_ulCurrentListIndex;
     v4 = 0;
-    if ( v5 >= v2->m_ulListSize )
+    if ( v5 >= this->m_ulListSize )
     {
-      if ( v3 & 2 )
-        v2->m_pCurrentList = v2->m_pPathsList;
-      v2->m_ulCurrentListIndex = 0;
+      if ( (m_PathMode & 2) != 0 )
+        this->m_pCurrentList = this->m_pPathsList;
+      this->m_ulCurrentListIndex = 0;
       v4 = 1;
     }
-    else if ( v3 & 2 )
+    else if ( (m_PathMode & 2) != 0 )
     {
-      v2->m_pCurrentList = v1 + 1;
+      this->m_pCurrentList = m_pCurrentList + 1;
     }
   }
-  if ( !(v2->m_PathMode & 2) || v4 && !v2->m_bIsLooping )
+  if ( (this->m_PathMode & 2) == 0 || v4 && !this->m_bIsLooping )
     return 17i64;
-  v2->m_uCurrentVertex = 0;
+  this->m_uCurrentVertex = 0;
   return 1i64;
 }
 
@@ -389,9 +384,8 @@ signed __int64 __fastcall CAkPath::GetNextPathList(CAkPath *this)
 // RVA: 0xA86960
 _BOOL8 __fastcall CAkPath::PickRandomList(CAkPath *this)
 {
-  int v1; // er8
-  bool *v2; // rdx
-  CAkPath *v3; // rdi
+  int m_ulListSize; // r8d
+  bool *m_pbPlayed; // rdx
   bool v4; // bl
   bool *v5; // rax
   __int64 v6; // rcx
@@ -400,11 +394,10 @@ _BOOL8 __fastcall CAkPath::PickRandomList(CAkPath *this)
   bool v9; // zf
   bool *v10; // rax
 
-  v1 = this->m_ulListSize;
-  v2 = this->m_pbPlayed;
-  v3 = this;
+  m_ulListSize = this->m_ulListSize;
+  m_pbPlayed = this->m_pbPlayed;
   v4 = 1;
-  v5 = this->m_pbPlayed;
+  v5 = m_pbPlayed;
   if ( !this->m_ulListSize )
     goto LABEL_19;
   v6 = this->m_ulListSize;
@@ -417,27 +410,27 @@ _BOOL8 __fastcall CAkPath::PickRandomList(CAkPath *this)
   if ( v4 )
   {
 LABEL_19:
-    if ( v2 )
+    if ( m_pbPlayed )
     {
       v7 = 0;
-      if ( v1 )
+      if ( m_ulListSize )
       {
         do
         {
-          *v2 = 0;
+          *m_pbPlayed = 0;
           ++v7;
-          ++v2;
+          ++m_pbPlayed;
         }
-        while ( v7 < v3->m_ulListSize );
+        while ( v7 < this->m_ulListSize );
       }
     }
   }
-  v8 = rand() % v3->m_ulListSize;
-  v9 = (v3->m_PathMode & 2) == 0;
-  v3->m_ulCurrentListIndex = v8;
+  v8 = rand() % this->m_ulListSize;
+  v9 = (this->m_PathMode & 2) == 0;
+  this->m_ulCurrentListIndex = v8;
   if ( !v9 )
-    v3->m_pCurrentList = &v3->m_pPathsList[(unsigned __int16)v8];
-  v10 = v3->m_pbPlayed;
+    this->m_pCurrentList = &this->m_pPathsList[(unsigned __int16)v8];
+  v10 = this->m_pbPlayed;
   if ( v10 )
     v10[(unsigned __int16)v8] = 1;
   return v4;
@@ -468,58 +461,52 @@ void __fastcall CAkPath::SetIsLooping(CAkPath *this, bool in_bIsLooping)
 // RVA: 0xA86F40
 void __fastcall CAkPath::UpdateStartPosition(CAkPath *this)
 {
-  CAkPBI **v1; // rax
-  CAkGen3DParams *v2; // r8
+  CAkPBI **m_pItems; // rax
+  CAkGen3DParams *m_p3DSound; // r8
 
-  v1 = this->m_PBIsList.m_pItems;
-  if ( v1 != &v1[this->m_PBIsList.m_uLength] )
+  m_pItems = this->m_PBIsList.m_pItems;
+  if ( m_pItems != &m_pItems[this->m_PBIsList.m_uLength] )
   {
     do
     {
-      v2 = (*v1)->m_p3DSound;
-      if ( !(*((_BYTE *)&v2->m_Params + 68) & 4) )
-      {
-        v2->m_Params.m_Position.X = this->m_StartPosition.X;
-        v2->m_Params.m_Position.Y = this->m_StartPosition.Y;
-        v2->m_Params.m_Position.Z = this->m_StartPosition.Z;
-      }
-      ++v1;
+      m_p3DSound = (*m_pItems)->m_p3DSound;
+      if ( (*((_BYTE *)&m_p3DSound->m_Params + 68) & 4) == 0 )
+        m_p3DSound->m_Params.m_Position = this->m_StartPosition;
+      ++m_pItems;
     }
-    while ( v1 != &this->m_PBIsList.m_pItems[this->m_PBIsList.m_uLength] );
+    while ( m_pItems != &this->m_PBIsList.m_pItems[this->m_PBIsList.m_uLength] );
   }
 }
 
 // File Line: 529
 // RVA: 0xA866A0
-signed __int64 __fastcall CAkPath::InitRotationMatricesForNoFollowMode(CAkPath *this, unsigned int in_uListeners)
+__int64 __fastcall CAkPath::InitRotationMatricesForNoFollowMode(CAkPath *this, unsigned int in_uListeners)
 {
   unsigned int v2; // ebx
-  CAkPath *v3; // rdi
   float *v4; // rdx
   __int64 i; // r8
   float *v7; // rcx
 
   v2 = in_uListeners;
-  v3 = this;
   if ( !this->m_pNoFollowOrientationRotation )
   {
     v4 = (float *)AK::MemoryMgr::Malloc(
                     g_DefaultPoolId,
                     36i64
                   * (((in_uListeners >> 7) & 1)
-                   + ((in_uListeners >> 6) & 1)
-                   + ((in_uListeners >> 5) & 1)
-                   + ((in_uListeners >> 4) & 1)
-                   + ((in_uListeners >> 3) & 1)
-                   + ((in_uListeners >> 2) & 1)
-                   + ((in_uListeners >> 1) & 1)
+                   + ((in_uListeners & 0x40) != 0)
+                   + ((in_uListeners & 0x20) != 0)
+                   + ((in_uListeners & 0x10) != 0)
+                   + ((in_uListeners & 8) != 0)
+                   + ((in_uListeners & 4) != 0)
+                   + ((in_uListeners & 2) != 0)
                    + (in_uListeners & 1)));
-    v3->m_pNoFollowOrientationRotation = v4;
+    this->m_pNoFollowOrientationRotation = v4;
     if ( !v4 )
       return 2i64;
     for ( i = 0i64; v2; v2 >>= 1 )
     {
-      if ( v2 & 1 )
+      if ( (v2 & 1) != 0 )
       {
         v7 = (float *)((char *)&unk_14249EFE0 + 144 * i);
         v4 += 9;

@@ -11,25 +11,28 @@ void dynamic_initializer_for__hkOptionalComponent_hkpHeightFieldAgent__()
 
 // File Line: 24
 // RVA: 0xCFB6C0
-void __fastcall hkpHeightFieldAgent::hkpHeightFieldAgent(hkpHeightFieldAgent *this, hkpCdBody *A, hkpCdBody *B, hkpCollisionInput *input, hkpContactMgr *mgr)
+void __fastcall hkpHeightFieldAgent::hkpHeightFieldAgent(
+        hkpHeightFieldAgent *this,
+        hkpCdBody *A,
+        hkpCdBody *B,
+        hkpCollisionInput *input,
+        hkpContactMgr *mgr)
 {
   hkpContactMgr *v5; // rax
-  hkpHeightFieldAgent *v6; // rsi
   int v7; // eax
   int v8; // ecx
   int v9; // ebp
   int v10; // ecx
-  int v11; // er9
+  int v11; // r9d
   int v12; // edx
   unsigned __int16 *v13; // rdi
   __int64 v14; // rcx
 
   v5 = mgr;
-  v6 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->m_contactMgr = v5;
   this->vfptr = (hkBaseObjectVtbl *)&hkpHeightFieldAgent::`vftable;
-  this->m_contactPointId.m_capacityAndFlags = 2147483648;
+  this->m_contactPointId.m_capacityAndFlags = 0x80000000;
   this->m_contactPointId.m_data = 0i64;
   this->m_contactPointId.m_size = 0;
   if ( v5 )
@@ -39,7 +42,7 @@ void __fastcall hkpHeightFieldAgent::hkpHeightFieldAgent(hkpHeightFieldAgent *th
            A,
            B,
            input);
-    v8 = v6->m_contactPointId.m_capacityAndFlags & 0x3FFFFFFF;
+    v8 = this->m_contactPointId.m_capacityAndFlags & 0x3FFFFFFF;
     v9 = v7;
     if ( v8 < v7 )
     {
@@ -49,24 +52,23 @@ void __fastcall hkpHeightFieldAgent::hkpHeightFieldAgent(hkpHeightFieldAgent *th
         v11 = v10;
       hkArrayUtil::_reserve(
         (hkResult *)&mgr,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        &v6->m_contactPointId,
+        &hkContainerHeapAllocator::s_alloc,
+        (const void **)&this->m_contactPointId.m_data,
         v11,
         2);
     }
-    v12 = v9 - v6->m_contactPointId.m_size;
-    v13 = &v6->m_contactPointId.m_data[v6->m_contactPointId.m_size];
+    v12 = v9 - this->m_contactPointId.m_size;
+    v13 = &this->m_contactPointId.m_data[this->m_contactPointId.m_size];
     v14 = v12;
     if ( v12 > 0 )
     {
       while ( v14 )
       {
-        *v13 = -1;
-        ++v13;
+        *v13++ = -1;
         --v14;
       }
     }
-    v6->m_contactPointId.m_size = v9;
+    this->m_contactPointId.m_size = v9;
   }
 }
 
@@ -74,12 +76,10 @@ void __fastcall hkpHeightFieldAgent::hkpHeightFieldAgent(hkpHeightFieldAgent *th
 // RVA: 0xCFA930
 void __fastcall hkpHeightFieldAgent::registerAgent(hkpCollisionDispatcher *dispatcher)
 {
-  hkpCollisionDispatcher *v1; // rbx
-  hkpCollisionDispatcher::AgentFuncs f; // [rsp+20h] [rbp-38h]
+  hkpCollisionDispatcher::AgentFuncs f; // [rsp+20h] [rbp-38h] BYREF
 
   f.m_createFunc = hkpHeightFieldAgent::createHeightFieldAAgent;
   f.m_getPenetrationsFunc = hkpSymmetricAgentLinearCast<hkpHeightFieldAgent>::staticGetPenetrations;
-  v1 = dispatcher;
   f.m_getClosestPointFunc = hkpSymmetricAgentLinearCast<hkpHeightFieldAgent>::staticGetClosestPoints;
   hkOptionalComponent_hkpHeightFieldAgent.m_isUsed.m_bool = 1;
   f.m_linearCastFunc = hkpSymmetricAgentLinearCast<hkpHeightFieldAgent>::staticLinearCast;
@@ -90,54 +90,46 @@ void __fastcall hkpHeightFieldAgent::registerAgent(hkpCollisionDispatcher *dispa
   f.m_getClosestPointFunc = hkpHeightFieldAgent::staticGetClosestPoints;
   *(_WORD *)&f.m_isFlipped.m_bool = 256;
   f.m_linearCastFunc = hkpHeightFieldAgent::staticLinearCast;
-  hkpCollisionDispatcher::registerCollisionAgent(v1, &f, SPHERE_REP, HEIGHT_FIELD);
+  hkpCollisionDispatcher::registerCollisionAgent(dispatcher, &f, SPHERE_REP, HEIGHT_FIELD);
 }
 
 // File Line: 66
 // RVA: 0xCFB830
-void __fastcall hkpHeightFieldAgent::createHeightFieldBAgent(hkpCdBody *bodyA, hkpCdBody *bodyB, hkpCollisionInput *input, hkpContactMgr *mgr)
+void __fastcall hkpHeightFieldAgent::createHeightFieldBAgent(
+        hkpCdBody *bodyA,
+        hkpCdBody *bodyB,
+        hkpCollisionInput *input,
+        hkpContactMgr *mgr)
 {
-  hkpCdBody *v4; // rbp
-  hkpContactMgr *v5; // rbx
-  hkpCollisionInput *v6; // rdi
-  hkpCdBody *v7; // rsi
-  _QWORD **v8; // rax
+  _QWORD **Value; // rax
   hkpHeightFieldAgent *v9; // rax
 
-  v4 = bodyA;
-  v5 = mgr;
-  v6 = input;
-  v7 = bodyB;
-  v8 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v9 = (hkpHeightFieldAgent *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v8[11] + 8i64))(v8[11], 40i64);
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v9 = (hkpHeightFieldAgent *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 40i64);
   if ( v9 )
-    hkpHeightFieldAgent::hkpHeightFieldAgent(v9, v4, v7, v6, v5);
+    hkpHeightFieldAgent::hkpHeightFieldAgent(v9, bodyA, bodyB, input, mgr);
 }
 
 // File Line: 74
 // RVA: 0xCFB7A0
-hkpHeightFieldAgent *__fastcall hkpHeightFieldAgent::createHeightFieldAAgent(hkpCdBody *bodyA, hkpCdBody *bodyB, hkpCollisionInput *input, hkpContactMgr *mgr)
+hkpHeightFieldAgent *__fastcall hkpHeightFieldAgent::createHeightFieldAAgent(
+        hkpCdBody *bodyA,
+        hkpCdBody *bodyB,
+        hkpCollisionInput *input,
+        hkpContactMgr *mgr)
 {
-  hkpCdBody *v4; // r14
-  hkpContactMgr *v5; // rdi
-  hkpCollisionInput *v6; // rsi
-  hkpCdBody *v7; // rbp
-  _QWORD **v8; // rax
+  _QWORD **Value; // rax
   hkpHeightFieldAgent *result; // rax
-  hkpCollisionAgent *v10; // rbx
+  hkpHeightFieldAgent *v10; // rbx
 
-  v4 = bodyA;
-  v5 = mgr;
-  v6 = input;
-  v7 = bodyB;
-  v8 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  result = (hkpHeightFieldAgent *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v8[11] + 8i64))(v8[11], 40i64);
-  v10 = (hkpCollisionAgent *)&result->vfptr;
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  result = (hkpHeightFieldAgent *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 40i64);
+  v10 = result;
   if ( result )
   {
-    hkpHeightFieldAgent::hkpHeightFieldAgent(result, v7, v4, v6, v5);
+    hkpHeightFieldAgent::hkpHeightFieldAgent(result, bodyB, bodyA, input, mgr);
     v10->vfptr = (hkBaseObjectVtbl *)&hkpSymmetricAgent<hkpHeightFieldAgent>::`vftable;
-    result = (hkpHeightFieldAgent *)v10;
+    return v10;
   }
   return result;
 }
@@ -146,14 +138,10 @@ hkpHeightFieldAgent *__fastcall hkpHeightFieldAgent::createHeightFieldAAgent(hkp
 // RVA: 0xCFB620
 void __fastcall hkpHeightFieldAgent::cleanup(hkpHeightFieldAgent *this, hkpConstraintOwner *constraintOwner)
 {
-  hkpConstraintOwner *v2; // rbp
-  hkpHeightFieldAgent *v3; // rbx
   int v4; // edi
   __int64 v5; // rsi
   __int64 v6; // rdx
 
-  v2 = constraintOwner;
-  v3 = this;
   if ( this->m_contactMgr )
   {
     v4 = 0;
@@ -162,43 +150,45 @@ void __fastcall hkpHeightFieldAgent::cleanup(hkpHeightFieldAgent *this, hkpConst
       v5 = 0i64;
       do
       {
-        v6 = v3->m_contactPointId.m_data[v5];
-        if ( (_WORD)v6 != -1 )
-          ((void (__fastcall *)(hkpContactMgr *, __int64, hkpConstraintOwner *))v3->m_contactMgr->vfptr[2].__first_virtual_table_function__)(
-            v3->m_contactMgr,
+        v6 = this->m_contactPointId.m_data[v5];
+        if ( (_WORD)v6 != 0xFFFF )
+          ((void (__fastcall *)(hkpContactMgr *, __int64, hkpConstraintOwner *))this->m_contactMgr->hkpCollisionAgent::vfptr[2].__first_virtual_table_function__)(
+            this->m_contactMgr,
             v6,
-            v2);
+            constraintOwner);
         ++v4;
         ++v5;
       }
-      while ( v4 < v3->m_contactPointId.m_size );
+      while ( v4 < this->m_contactPointId.m_size );
     }
   }
-  v3->vfptr->__vecDelDtor((hkBaseObject *)&v3->vfptr, 1u);
+  this->vfptr->__vecDelDtor(this, 1i64);
 }
 
 // File Line: 98
 // RVA: 0xCFBCC0
-void __fastcall hkpHeightFieldAgent::processCollision(hkpHeightFieldAgent *this, hkpCdBody *csBody, hkpCdBody *hfBody, hkpProcessCollisionInput *input, hkpProcessCollisionOutput *processOutput)
+void __fastcall hkpHeightFieldAgent::processCollision(
+        hkpHeightFieldAgent *this,
+        hkpCdBody *csBody,
+        hkpCdBody *hfBody,
+        hkpProcessCollisionInput *input,
+        hkpProcessCollisionOutput *processOutput)
 {
   hkpHeightFieldAgent *v5; // r13
-  hkpProcessCollisionInput *v6; // rbp
-  hkpCdBody *v7; // rbx
-  hkpCdBody *v8; // rdi
-  _QWORD *v9; // rax
+  _QWORD *Value; // rax
   _QWORD *v10; // rcx
   _QWORD *v11; // r8
   unsigned __int64 v12; // rax
-  signed __int64 v13; // rcx
-  hkpShape *v14; // r15
-  int v15; // ebx
+  _QWORD *v13; // rcx
+  hkpShape *m_shape; // r15
+  int m_size; // ebx
   hkLifoAllocator *v16; // rax
-  _BYTE *v17; // r14
+  char *m_cur; // r14
   int v18; // esi
   char *v19; // rcx
-  unsigned __int16 *v20; // rdi
+  unsigned __int16 *m_data; // rdi
   __int64 v21; // rax
-  int v22; // er12
+  int v22; // r12d
   hkVector4f v23; // xmm4
   hkVector4f v24; // xmm5
   hkVector4f v25; // xmm6
@@ -208,9 +198,9 @@ void __fastcall hkpHeightFieldAgent::processCollision(hkpHeightFieldAgent *this,
   __m128 v29; // xmm2
   __m128 v30; // xmm3
   hkLifoAllocator *v31; // rax
-  __m128 *v32; // r15
+  char *v32; // r15
   char *v33; // rcx
-  hkBaseObjectVtbl *v34; // r9
+  hkBaseObjectVtbl *vfptr; // r9
   __m128 *v35; // rbp
   float v36; // xmm6_4
   signed __int64 v37; // rax
@@ -218,78 +208,65 @@ void __fastcall hkpHeightFieldAgent::processCollision(hkpHeightFieldAgent *this,
   __int64 v39; // rdx
   hkpProcessCdPoint *v40; // r13
   __m128 v41; // xmm2
-  __m128 v42; // xmm2
-  __m128 v43; // xmm3
-  unsigned __int16 v44; // ax
-  hkLifoAllocator *v45; // rax
-  int v46; // ebx
-  hkLifoAllocator *v47; // rax
-  _QWORD *v48; // r8
-  _QWORD *v49; // rcx
-  unsigned __int64 v50; // rax
-  signed __int64 v51; // rcx
-  hkpShape *v52; // [rsp+40h] [rbp-D8h]
-  _BYTE *v53; // [rsp+50h] [rbp-C8h]
-  __m128 *v54; // [rsp+58h] [rbp-C0h]
-  _BYTE *v55; // [rsp+60h] [rbp-B8h]
-  int v56; // [rsp+68h] [rbp-B0h]
-  float v57; // [rsp+6Ch] [rbp-ACh]
-  hkTransformf v58; // [rsp+70h] [rbp-A8h]
-  hkpHeightFieldAgent *v59; // [rsp+120h] [rbp+8h]
-  hkpCdBody *v60; // [rsp+128h] [rbp+10h]
-  hkpCdBody *v61; // [rsp+130h] [rbp+18h]
-  hkpProcessCollisionInput *v62; // [rsp+138h] [rbp+20h]
+  __m128 v42; // xmm3
+  unsigned __int16 v43; // ax
+  hkLifoAllocator *v44; // rax
+  int v45; // ebx
+  hkLifoAllocator *v46; // rax
+  _QWORD *v47; // r8
+  _QWORD *v48; // rcx
+  unsigned __int64 v49; // rax
+  _QWORD *v50; // rcx
+  hkpShape *v51; // [rsp+40h] [rbp-D8h]
+  char *v52; // [rsp+50h] [rbp-C8h]
+  char *v53; // [rsp+58h] [rbp-C0h]
+  char *v54; // [rsp+60h] [rbp-B8h] BYREF
+  int v55; // [rsp+68h] [rbp-B0h]
+  float m_storage; // [rsp+6Ch] [rbp-ACh]
+  hkTransformf v57; // [rsp+70h] [rbp-A8h] BYREF
 
-  v62 = input;
-  v61 = hfBody;
-  v60 = csBody;
-  v59 = this;
   v5 = this;
-  v6 = input;
-  v7 = hfBody;
-  v8 = csBody;
-  v9 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v10 = (_QWORD *)v9[1];
-  v11 = v9;
-  if ( (unsigned __int64)v10 < v9[3] )
+  Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v10 = (_QWORD *)Value[1];
+  v11 = Value;
+  if ( (unsigned __int64)v10 < Value[3] )
   {
     *v10 = "TtHeightField";
     v12 = __rdtsc();
-    v13 = (signed __int64)(v10 + 2);
-    *(_DWORD *)(v13 - 8) = v12;
+    v13 = v10 + 2;
+    *((_DWORD *)v13 - 2) = v12;
     v11[1] = v13;
   }
-  v14 = v8->m_shape;
-  v52 = v7->m_shape;
-  hkTransformf::setMulInverseMul(&v58, (hkTransformf *)v7->m_motion, (hkTransformf *)v8->m_motion);
-  v15 = v5->m_contactPointId.m_size;
+  m_shape = csBody->m_shape;
+  v51 = hfBody->m_shape;
+  hkTransformf::setMulInverseMul(&v57, (hkTransformf *)hfBody->m_motion, (hkTransformf *)csBody->m_motion);
+  m_size = v5->m_contactPointId.m_size;
   v16 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v17 = v16->m_cur;
-  v53 = v17;
-  v18 = (16 * v15 + 127) & 0xFFFFFF80;
-  v19 = &v17[v18];
+  m_cur = (char *)v16->m_cur;
+  v52 = m_cur;
+  v18 = (16 * m_size + 127) & 0xFFFFFF80;
+  v19 = &m_cur[v18];
   if ( v18 > v16->m_slabSize || v19 > v16->m_end )
   {
-    v17 = hkLifoAllocator::allocateFromNewSlab(v16, v18);
-    v53 = v17;
+    m_cur = (char *)hkLifoAllocator::allocateFromNewSlab(v16, v18);
+    v52 = m_cur;
   }
   else
   {
     v16->m_cur = v19;
   }
-  v20 = v5->m_contactPointId.m_data;
-  v21 = (__int64)v14->vfptr[6].__vecDelDtor((hkBaseObject *)&v14->vfptr, (unsigned int)v17);
-  v22 = v15 - 1;
-  v23.m_quad = (__m128)v58.m_rotation.m_col0;
-  v24.m_quad = (__m128)v58.m_rotation.m_col1;
-  v25.m_quad = (__m128)v58.m_rotation.m_col2;
-  v26 = v15 - 1;
+  m_data = v5->m_contactPointId.m_data;
+  v21 = (__int64)m_shape->vfptr[6].__vecDelDtor(m_shape, (unsigned int)m_cur);
+  v22 = m_size - 1;
+  v23.m_quad = (__m128)v57.m_rotation.m_col0;
+  v24.m_quad = (__m128)v57.m_rotation.m_col1;
+  v25.m_quad = (__m128)v57.m_rotation.m_col2;
+  v26 = m_size - 1;
   v27 = (__m128 *)(v21 + 16 * v26);
-  v28.m_quad = (__m128)v58.m_translation;
+  v28.m_quad = (__m128)v57.m_translation;
   do
   {
-    v29 = *v27;
-    --v27;
+    v29 = *v27--;
     --v26;
     v30 = _mm_add_ps(
             _mm_add_ps(
@@ -298,58 +275,58 @@ void __fastcall hkpHeightFieldAgent::processCollision(hkpHeightFieldAgent *this,
                 _mm_mul_ps(_mm_shuffle_ps(v29, v29, 0), v23.m_quad)),
               _mm_mul_ps(_mm_shuffle_ps(v29, v29, 170), v25.m_quad)),
             v28.m_quad);
-    *(__m128 *)&v17[(_QWORD)v27 - v21 + 16] = _mm_shuffle_ps(v30, _mm_unpackhi_ps(v30, v29), 196);
+    *(__m128 *)&m_cur[(_QWORD)v27 - v21 + 16] = _mm_shuffle_ps(v30, _mm_unpackhi_ps(v30, v29), 196);
   }
   while ( v26 >= 0 );
   v31 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v32 = (__m128 *)v31->m_cur;
-  v33 = (char *)v32 + v18;
-  v54 = (__m128 *)v31->m_cur;
+  v32 = (char *)v31->m_cur;
+  v33 = &v32[v18];
+  v53 = v32;
   if ( v18 > v31->m_slabSize || v33 > v31->m_end )
   {
-    v32 = (__m128 *)hkLifoAllocator::allocateFromNewSlab(v31, v18);
-    v54 = v32;
+    v32 = (char *)hkLifoAllocator::allocateFromNewSlab(v31, v18);
+    v53 = v32;
   }
   else
   {
     v31->m_cur = v33;
   }
-  v34 = v52->vfptr;
-  v57 = v6->m_tolerance.m_storage;
-  v55 = v17;
-  v56 = v15;
-  ((void (__fastcall *)(hkpShape *, _BYTE **, __m128 *))v34[8].__first_virtual_table_function__)(v52, &v55, v32);
-  v35 = v32;
-  LODWORD(v36) = (unsigned __int128)_mm_shuffle_ps(
-                                      (__m128)LODWORD(v62->m_tolerance.m_storage),
-                                      (__m128)LODWORD(v62->m_tolerance.m_storage),
-                                      0);
+  vfptr = v51->vfptr;
+  m_storage = input->m_tolerance.m_storage;
+  v54 = m_cur;
+  v55 = m_size;
+  ((void (__fastcall *)(hkpShape *, char **, char *))vfptr[8].__first_virtual_table_function__)(v51, &v54, v32);
+  v35 = (__m128 *)v32;
+  LODWORD(v36) = _mm_shuffle_ps(
+                   (__m128)LODWORD(input->m_tolerance.m_storage),
+                   (__m128)LODWORD(input->m_tolerance.m_storage),
+                   0).m128_u32[0];
   if ( v22 >= 0 )
   {
-    v37 = v17 - (_BYTE *)v32;
+    v37 = m_cur - v32;
     while ( 1 )
     {
       v38 = *v35;
-      if ( COERCE_FLOAT(_mm_shuffle_ps(v38, v38, 255)) <= v36 )
+      if ( _mm_shuffle_ps(v38, v38, 255).m128_f32[0] <= v36 )
         break;
-      v39 = *v20;
-      if ( (_WORD)v39 != -1 )
+      v39 = *m_data;
+      if ( (_WORD)v39 != 0xFFFF )
       {
-        ((void (__fastcall *)(hkpContactMgr *, __int64, hkpConstraintOwner *))v5->m_contactMgr->vfptr[2].__first_virtual_table_function__)(
+        ((void (__fastcall *)(hkpContactMgr *, __int64, hkpConstraintOwner *))v5->m_contactMgr->hkpCollisionAgent::vfptr[2].__first_virtual_table_function__)(
           v5->m_contactMgr,
           v39,
           processOutput->m_constraintOwner.m_storage);
-        *v20 = -1;
+        *m_data = -1;
 LABEL_22:
-        v37 = v17 - (_BYTE *)v32;
+        v37 = m_cur - v32;
       }
       ++v35;
-      ++v20;
+      ++m_data;
       if ( --v22 < 0 )
       {
-        v18 = (16 * v15 + 127) & 0xFFFFFF80;
-        v17 = v53;
-        v32 = v54;
+        v18 = (16 * m_size + 127) & 0xFFFFFF80;
+        m_cur = v52;
+        v32 = v53;
         goto LABEL_25;
       }
     }
@@ -364,87 +341,88 @@ LABEL_22:
     v40->m_contact.m_position.m_quad = _mm_add_ps(
                                          _mm_add_ps(
                                            _mm_add_ps(
-                                             _mm_mul_ps(_mm_shuffle_ps(v41, v41, 85), *((__m128 *)v61->m_motion + 1)),
-                                             _mm_mul_ps(_mm_shuffle_ps(v41, v41, 0), *(__m128 *)v61->m_motion)),
-                                           _mm_mul_ps(_mm_shuffle_ps(v41, v41, 170), *((__m128 *)v61->m_motion + 2))),
-                                         *((__m128 *)v61->m_motion + 3));
-    v42 = *v35;
-    v43 = _mm_add_ps(
+                                             _mm_mul_ps(_mm_shuffle_ps(v41, v41, 85), *((__m128 *)hfBody->m_motion + 1)),
+                                             _mm_mul_ps(_mm_shuffle_ps(v41, v41, 0), *(__m128 *)hfBody->m_motion)),
+                                           _mm_mul_ps(_mm_shuffle_ps(v41, v41, 170), *((__m128 *)hfBody->m_motion + 2))),
+                                         *((__m128 *)hfBody->m_motion + 3));
+    v42 = _mm_add_ps(
             _mm_add_ps(
-              _mm_mul_ps(_mm_shuffle_ps(v42, v42, 85), *((__m128 *)v61->m_motion + 1)),
-              _mm_mul_ps(_mm_shuffle_ps(*v35, *v35, 0), *(__m128 *)v61->m_motion)),
-            _mm_mul_ps(_mm_shuffle_ps(*v35, *v35, 170), *((__m128 *)v61->m_motion + 2)));
+              _mm_mul_ps(_mm_shuffle_ps(*v35, *v35, 85), *((__m128 *)hfBody->m_motion + 1)),
+              _mm_mul_ps(_mm_shuffle_ps(*v35, *v35, 0), *(__m128 *)hfBody->m_motion)),
+            _mm_mul_ps(_mm_shuffle_ps(*v35, *v35, 170), *((__m128 *)hfBody->m_motion + 2)));
     v40->m_contact.m_separatingNormal.m_quad = _mm_shuffle_ps(
-                                                 v43,
-                                                 _mm_unpackhi_ps(v43, _mm_shuffle_ps(v42, v42, 255)),
+                                                 v42,
+                                                 _mm_unpackhi_ps(v42, _mm_shuffle_ps(*v35, *v35, 255)),
                                                  196);
-    if ( *v20 != -1
-      || (v44 = ((__int64 (__fastcall *)(hkpContactMgr *, hkpCdBody *, hkpCdBody *, hkpProcessCollisionInput *, hkpProcessCollisionOutput *, _QWORD, hkpProcessCdPoint *))v59->m_contactMgr->vfptr[1].__first_virtual_table_function__)(
-                  v59->m_contactMgr,
-                  v60,
-                  v61,
-                  v62,
+    if ( *m_data != 0xFFFF
+      || (v43 = ((__int64 (__fastcall *)(hkpContactMgr *, hkpCdBody *, hkpCdBody *, hkpProcessCollisionInput *, hkpProcessCollisionOutput *, _QWORD, hkpProcessCdPoint *))this->m_contactMgr->hkpCollisionAgent::vfptr[1].__first_virtual_table_function__)(
+                  this->m_contactMgr,
+                  csBody,
+                  hfBody,
+                  input,
                   processOutput,
                   0i64,
                   v40),
-          *v20 = v44,
-          v44 != -1) )
+          *m_data = v43,
+          v43 != 0xFFFF) )
     {
       ++processOutput->m_firstFreeContactPoint.m_storage;
     }
-    v40->m_contactPointId = *v20;
-    v5 = v59;
+    v40->m_contactPointId = *m_data;
+    v5 = this;
     goto LABEL_22;
   }
 LABEL_25:
-  v45 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v46 = (v18 + 15) & 0xFFFFFFF0;
-  if ( v18 > v45->m_slabSize || (char *)v32 + v46 != v45->m_cur || v45->m_firstNonLifoEnd == v32 )
-    hkLifoAllocator::slowBlockFree(v45, v32, v46);
+  v44 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v45 = (v18 + 15) & 0xFFFFFFF0;
+  if ( v18 > v44->m_slabSize || &v32[v45] != v44->m_cur || v44->m_firstNonLifoEnd == v32 )
+    hkLifoAllocator::slowBlockFree(v44, v32, v45);
   else
-    v45->m_cur = v32;
-  v47 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  if ( v18 > v47->m_slabSize || &v17[v46] != v47->m_cur || v47->m_firstNonLifoEnd == v17 )
-    hkLifoAllocator::slowBlockFree(v47, v17, v46);
+    v44->m_cur = v32;
+  v46 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  if ( v18 > v46->m_slabSize || &m_cur[v45] != v46->m_cur || v46->m_firstNonLifoEnd == m_cur )
+    hkLifoAllocator::slowBlockFree(v46, m_cur, v45);
   else
-    v47->m_cur = v17;
-  v48 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v49 = (_QWORD *)v48[1];
-  if ( (unsigned __int64)v49 < v48[3] )
+    v46->m_cur = m_cur;
+  v47 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v48 = (_QWORD *)v47[1];
+  if ( (unsigned __int64)v48 < v47[3] )
   {
-    *v49 = "Et";
-    v50 = __rdtsc();
-    v51 = (signed __int64)(v49 + 2);
-    *(_DWORD *)(v51 - 8) = v50;
-    v48[1] = v51;
+    *v48 = "Et";
+    v49 = __rdtsc();
+    v50 = v48 + 2;
+    *((_DWORD *)v50 - 2) = v49;
+    v47[1] = v50;
   }
-}tream__m_instance.m_slotID);
-  v49 = (_QWORD *)v48[1];
-  if ( (unsigned __int64)v49 < v48[3] )
-  {
-    *
+}
 
 // File Line: 202
 // RVA: 0xCFA9F0
-void __fastcall hkpHeightFieldAgent::getPenetrations(hkpHeightFieldAgent *this, hkpCdBody *csBody, hkpCdBody *hfBody, hkpCollisionInput *input, hkpCdBodyPairCollector *collector)
+void __fastcall hkpHeightFieldAgent::getPenetrations(
+        hkpHeightFieldAgent *this,
+        hkpCdBody *csBody,
+        hkpCdBody *hfBody,
+        hkpCollisionInput *input,
+        hkpCdBodyPairCollector *collector)
 {
   hkpHeightFieldAgent::staticGetPenetrations(csBody, hfBody, input, collector);
 }
 
 // File Line: 208
 // RVA: 0xCFAA10
-void __fastcall hkpHeightFieldAgent::staticGetPenetrations(hkpCdBody *csBody, hkpCdBody *hfBody, hkpCollisionInput *input, hkpCdBodyPairCollector *collector)
+void __fastcall hkpHeightFieldAgent::staticGetPenetrations(
+        hkpCdBody *csBody,
+        hkpCdBody *hfBody,
+        hkpCollisionInput *input,
+        hkpCdBodyPairCollector *collector)
 {
-  hkpCdBody *v4; // r15
-  hkpCdBodyPairCollector *v5; // r12
-  hkpCdBody *v6; // r14
-  _QWORD *v7; // r11
+  _QWORD *Value; // r11
   unsigned __int64 v8; // r10
   unsigned __int64 v9; // rax
-  hkpShape *v10; // rdi
-  int v11; // er13
+  hkpShape *m_shape; // rdi
+  int v11; // r13d
   hkLifoAllocator *v12; // rax
-  char *v13; // rbp
+  char *m_cur; // rbp
   int v14; // ebx
   char *v15; // rcx
   __int64 v16; // rax
@@ -460,14 +438,14 @@ void __fastcall hkpHeightFieldAgent::staticGetPenetrations(hkpCdBody *csBody, hk
   _QWORD *v26; // r8
   _QWORD *v27; // rcx
   unsigned __int64 v28; // rax
-  signed __int64 v29; // rcx
+  _QWORD *v29; // rcx
   hkLifoAllocator *v30; // rax
-  float *v31; // rsi
+  char *v31; // rsi
   char *v32; // rcx
   _QWORD *v33; // r8
   _QWORD *v34; // rcx
   unsigned __int64 v35; // rax
-  signed __int64 v36; // rcx
+  _QWORD *v36; // rcx
   float *v37; // rax
   hkLifoAllocator *v38; // rax
   int v39; // edi
@@ -475,41 +453,36 @@ void __fastcall hkpHeightFieldAgent::staticGetPenetrations(hkpCdBody *csBody, hk
   _QWORD *v41; // r8
   _QWORD *v42; // rcx
   unsigned __int64 v43; // rax
-  signed __int64 v44; // rcx
-  char *v45; // [rsp+20h] [rbp-A8h]
+  _QWORD *v44; // rcx
+  char *v45; // [rsp+20h] [rbp-A8h] BYREF
   int v46; // [rsp+28h] [rbp-A0h]
-  float v47; // [rsp+2Ch] [rbp-9Ch]
-  hkTransformf v48; // [rsp+30h] [rbp-98h]
+  float m_storage; // [rsp+2Ch] [rbp-9Ch]
+  hkTransformf v48; // [rsp+30h] [rbp-98h] BYREF
   hkpShape *v49; // [rsp+D0h] [rbp+8h]
-  hkpCollisionInput *v50; // [rsp+E0h] [rbp+18h]
 
-  v50 = input;
-  v4 = csBody;
-  v5 = collector;
-  v6 = hfBody;
-  v7 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v8 = v7[1];
-  if ( v8 < v7[3] )
+  Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v8 = Value[1];
+  if ( v8 < Value[3] )
   {
     *(_QWORD *)v8 = "LtHeightField";
     *(_QWORD *)(v8 + 16) = "StGetSpheres";
     v9 = __rdtsc();
     *(_DWORD *)(v8 + 8) = v9;
-    v7[1] = v8 + 24;
+    Value[1] = v8 + 24;
   }
-  v10 = v4->m_shape;
-  v49 = v6->m_shape;
-  hkTransformf::setMulInverseMul(&v48, (hkTransformf *)v6->m_motion, (hkTransformf *)v4->m_motion);
-  v11 = ((__int64 (__fastcall *)(hkpShape *))v10->vfptr[5].__first_virtual_table_function__)(v10);
+  m_shape = csBody->m_shape;
+  v49 = hfBody->m_shape;
+  hkTransformf::setMulInverseMul(&v48, (hkTransformf *)hfBody->m_motion, (hkTransformf *)csBody->m_motion);
+  v11 = ((__int64 (__fastcall *)(hkpShape *))m_shape->vfptr[5].__first_virtual_table_function__)(m_shape);
   v12 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v13 = (char *)v12->m_cur;
+  m_cur = (char *)v12->m_cur;
   v14 = (16 * v11 + 127) & 0xFFFFFF80;
-  v15 = &v13[v14];
+  v15 = &m_cur[v14];
   if ( v14 > v12->m_slabSize || v15 > v12->m_end )
-    v13 = (char *)hkLifoAllocator::allocateFromNewSlab(v12, v14);
+    m_cur = (char *)hkLifoAllocator::allocateFromNewSlab(v12, v14);
   else
     v12->m_cur = v15;
-  v16 = (__int64)v10->vfptr[6].__vecDelDtor((hkBaseObject *)&v10->vfptr, (unsigned int)v13);
+  v16 = (__int64)m_shape->vfptr[6].__vecDelDtor(m_shape, (unsigned int)m_cur);
   v17 = v11 - 1;
   v18.m_quad = (__m128)v48.m_rotation.m_col0;
   v19.m_quad = (__m128)v48.m_rotation.m_col1;
@@ -519,8 +492,7 @@ void __fastcall hkpHeightFieldAgent::staticGetPenetrations(hkpCdBody *csBody, hk
   v23.m_quad = (__m128)v48.m_translation;
   do
   {
-    v24 = *v22;
-    --v22;
+    v24 = *v22--;
     --v21;
     v25 = _mm_add_ps(
             _mm_add_ps(
@@ -529,7 +501,7 @@ void __fastcall hkpHeightFieldAgent::staticGetPenetrations(hkpCdBody *csBody, hk
                 _mm_mul_ps(_mm_shuffle_ps(v24, v24, 0), v18.m_quad)),
               _mm_mul_ps(_mm_shuffle_ps(v24, v24, 170), v20.m_quad)),
             v23.m_quad);
-    *(__m128 *)&v13[(_QWORD)v22 - v16 + 16] = _mm_shuffle_ps(v25, _mm_unpackhi_ps(v25, v24), 196);
+    *(__m128 *)&m_cur[(_QWORD)v22 - v16 + 16] = _mm_shuffle_ps(v25, _mm_unpackhi_ps(v25, v24), 196);
   }
   while ( v21 >= 0 );
   v26 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
@@ -538,87 +510,93 @@ void __fastcall hkpHeightFieldAgent::staticGetPenetrations(hkpCdBody *csBody, hk
   {
     *v27 = "StCollide";
     v28 = __rdtsc();
-    v29 = (signed __int64)(v27 + 2);
-    *(_DWORD *)(v29 - 8) = v28;
+    v29 = v27 + 2;
+    *((_DWORD *)v29 - 2) = v28;
     v26[1] = v29;
   }
   v30 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v31 = (float *)v30->m_cur;
-  v32 = (char *)v31 + v14;
+  v31 = (char *)v30->m_cur;
+  v32 = &v31[v14];
   if ( v14 > v30->m_slabSize || v32 > v30->m_end )
-    v31 = (float *)hkLifoAllocator::allocateFromNewSlab(v30, v14);
+    v31 = (char *)hkLifoAllocator::allocateFromNewSlab(v30, v14);
   else
     v30->m_cur = v32;
-  v45 = v13;
+  v45 = m_cur;
   v46 = v11;
-  v47 = v50->m_tolerance.m_storage;
-  ((void (__fastcall *)(hkpShape *, char **, float *))v49->vfptr[8].__first_virtual_table_function__)(v49, &v45, v31);
+  m_storage = input->m_tolerance.m_storage;
+  ((void (__fastcall *)(hkpShape *, char **, char *))v49->vfptr[8].__first_virtual_table_function__)(v49, &v45, v31);
   v33 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
   v34 = (_QWORD *)v33[1];
   if ( (unsigned __int64)v34 < v33[3] )
   {
     *v34 = "StExamine";
     v35 = __rdtsc();
-    v36 = (signed __int64)(v34 + 2);
-    *(_DWORD *)(v36 - 8) = v35;
+    v36 = v34 + 2;
+    *((_DWORD *)v36 - 2) = v35;
     v33[1] = v36;
   }
   if ( v17 >= 0 )
   {
-    v37 = v31 + 3;
+    v37 = (float *)(v31 + 12);
     while ( *v37 >= 0.0 )
     {
       v37 += 4;
       if ( --v17 < 0 )
         goto LABEL_23;
     }
-    v5->vfptr->addCdBodyPair(v5, v4, v6);
+    collector->vfptr->addCdBodyPair(collector, csBody, hfBody);
   }
 LABEL_23:
   v38 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   v39 = (v14 + 15) & 0xFFFFFFF0;
-  if ( v14 > v38->m_slabSize || (char *)v31 + v39 != v38->m_cur || v38->m_firstNonLifoEnd == v31 )
+  if ( v14 > v38->m_slabSize || &v31[v39] != v38->m_cur || v38->m_firstNonLifoEnd == v31 )
     hkLifoAllocator::slowBlockFree(v38, v31, v39);
   else
     v38->m_cur = v31;
   v40 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  if ( v14 > v40->m_slabSize || &v13[v39] != v40->m_cur || v40->m_firstNonLifoEnd == v13 )
-    hkLifoAllocator::slowBlockFree(v40, v13, v39);
+  if ( v14 > v40->m_slabSize || &m_cur[v39] != v40->m_cur || v40->m_firstNonLifoEnd == m_cur )
+    hkLifoAllocator::slowBlockFree(v40, m_cur, v39);
   else
-    v40->m_cur = v13;
+    v40->m_cur = m_cur;
   v41 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
   v42 = (_QWORD *)v41[1];
   if ( (unsigned __int64)v42 < v41[3] )
   {
     *v42 = "lt";
     v43 = __rdtsc();
-    v44 = (signed __int64)(v42 + 2);
-    *(_DWORD *)(v44 - 8) = v43;
+    v44 = v42 + 2;
+    *((_DWORD *)v44 - 2) = v43;
     v41[1] = v44;
   }
 }
 
 // File Line: 269
 // RVA: 0xCFAD60
-void __fastcall hkpHeightFieldAgent::getClosestPoints(hkpHeightFieldAgent *this, hkpCdBody *bodyA, hkpCdBody *bodyB, hkpCollisionInput *input, hkpCdPointCollector *collector)
+void __fastcall hkpHeightFieldAgent::getClosestPoints(
+        hkpHeightFieldAgent *this,
+        hkpCdBody *bodyA,
+        hkpCdBody *bodyB,
+        hkpCollisionInput *input,
+        hkpCdPointCollector *collector)
 {
   hkpHeightFieldAgent::staticGetClosestPoints(bodyA, bodyB, input, collector);
 }
 
 // File Line: 275
 // RVA: 0xCFAD80
-void __fastcall hkpHeightFieldAgent::staticGetClosestPoints(hkpCdBody *csBody, hkpCdBody *hfBody, hkpCollisionInput *input, hkpCdPointCollector *collector)
+void __fastcall hkpHeightFieldAgent::staticGetClosestPoints(
+        hkpCdBody *csBody,
+        hkpCdBody *hfBody,
+        hkpCollisionInput *input,
+        hkpCdPointCollector *collector)
 {
-  hkpCdBody *v4; // rdi
-  hkpCollisionInput *v5; // r12
-  hkpCdBody *v6; // r13
-  _QWORD *v7; // r11
+  _QWORD *Value; // r11
   unsigned __int64 v8; // r10
   unsigned __int64 v9; // rax
-  hkpShape *v10; // rbx
-  int v11; // er15
+  hkpShape *m_shape; // rbx
+  int v11; // r15d
   hkLifoAllocator *v12; // rax
-  _BYTE *v13; // r14
+  char *m_cur; // r14
   int v14; // edi
   char *v15; // rcx
   _QWORD *v16; // rcx
@@ -629,7 +607,7 @@ void __fastcall hkpHeightFieldAgent::staticGetClosestPoints(hkpCdBody *csBody, h
   _QWORD *v21; // rcx
   _QWORD *v22; // r8
   unsigned __int64 v23; // rax
-  signed __int64 v24; // rcx
+  _QWORD *v24; // rcx
   hkVector4f v25; // xmm4
   hkVector4f v26; // xmm5
   hkVector4f v27; // xmm6
@@ -642,20 +620,20 @@ void __fastcall hkpHeightFieldAgent::staticGetClosestPoints(hkpCdBody *csBody, h
   _QWORD *v34; // r8
   _QWORD *v35; // rcx
   unsigned __int64 v36; // rax
-  signed __int64 v37; // rcx
+  _QWORD *v37; // rcx
   hkLifoAllocator *v38; // rax
-  __m128 *v39; // rbp
+  char *v39; // rbp
   char *v40; // rcx
-  hkBaseObjectVtbl *v41; // r9
+  hkBaseObjectVtbl *vfptr; // r9
   _QWORD *v42; // r8
   _QWORD *v43; // rcx
   unsigned __int64 v44; // rax
-  signed __int64 v45; // rcx
+  _QWORD *v45; // rcx
   __m128 *v46; // rbx
   float v47; // xmm6_4
   __m128 v48; // xmm5
   __m128 v49; // xmm4
-  __m128 *v50; // rax
+  __m128 *m_motion; // rax
   __m128 v51; // xmm2
   __m128 v52; // xmm1
   __m128 v53; // xmm3
@@ -669,45 +647,38 @@ void __fastcall hkpHeightFieldAgent::staticGetClosestPoints(hkpCdBody *csBody, h
   _QWORD *v61; // r8
   _QWORD *v62; // rcx
   unsigned __int64 v63; // rax
-  signed __int64 v64; // rcx
-  _BYTE *v65; // [rsp+20h] [rbp-F8h]
+  _QWORD *v64; // rcx
+  char *v65; // [rsp+20h] [rbp-F8h] BYREF
   int v66; // [rsp+28h] [rbp-F0h]
-  float v67; // [rsp+2Ch] [rbp-ECh]
-  __m128 v68; // [rsp+30h] [rbp-E8h]
+  float m_storage; // [rsp+2Ch] [rbp-ECh]
+  __m128 v68; // [rsp+30h] [rbp-E8h] BYREF
   __m128 v69; // [rsp+40h] [rbp-D8h]
   __m128 v70; // [rsp+50h] [rbp-C8h]
   hkpCdBody *v71; // [rsp+60h] [rbp-B8h]
   hkpCdBody *v72; // [rsp+68h] [rbp-B0h]
-  hkTransformf v73; // [rsp+70h] [rbp-A8h]
-  hkpCdBody *v74; // [rsp+120h] [rbp+8h]
+  hkTransformf v73; // [rsp+70h] [rbp-A8h] BYREF
   hkpShape *v75; // [rsp+130h] [rbp+18h]
-  hkpCdPointCollector *v76; // [rsp+138h] [rbp+20h]
 
-  v76 = collector;
-  v74 = csBody;
-  v4 = csBody;
-  v5 = input;
-  v6 = hfBody;
-  v7 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v8 = v7[1];
-  if ( v8 < v7[3] )
+  Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v8 = Value[1];
+  if ( v8 < Value[3] )
   {
     *(_QWORD *)v8 = "LtHeightField";
     *(_QWORD *)(v8 + 16) = "StbTA";
     v9 = __rdtsc();
     *(_DWORD *)(v8 + 8) = v9;
-    v7[1] = v8 + 24;
+    Value[1] = v8 + 24;
   }
-  v10 = v4->m_shape;
-  v75 = v6->m_shape;
-  hkTransformf::setMulInverseMul(&v73, (hkTransformf *)v6->m_motion, (hkTransformf *)v4->m_motion);
-  v11 = ((__int64 (__fastcall *)(hkpShape *))v10->vfptr[5].__first_virtual_table_function__)(v10);
+  m_shape = csBody->m_shape;
+  v75 = hfBody->m_shape;
+  hkTransformf::setMulInverseMul(&v73, (hkTransformf *)hfBody->m_motion, (hkTransformf *)csBody->m_motion);
+  v11 = ((__int64 (__fastcall *)(hkpShape *))m_shape->vfptr[5].__first_virtual_table_function__)(m_shape);
   v12 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v13 = v12->m_cur;
+  m_cur = (char *)v12->m_cur;
   v14 = (16 * v11 + 127) & 0xFFFFFF80;
-  v15 = &v13[v14];
+  v15 = &m_cur[v14];
   if ( v14 > v12->m_slabSize || v15 > v12->m_end )
-    v13 = hkLifoAllocator::allocateFromNewSlab(v12, v14);
+    m_cur = (char *)hkLifoAllocator::allocateFromNewSlab(v12, v14);
   else
     v12->m_cur = v15;
   v16 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
@@ -719,7 +690,7 @@ void __fastcall hkpHeightFieldAgent::staticGetClosestPoints(hkpCdBody *csBody, h
     *(_DWORD *)(v17 + 8) = v18;
     v16[1] = v17 + 16;
   }
-  v19 = (__int64)v10->vfptr[6].__vecDelDtor((hkBaseObject *)&v10->vfptr, (unsigned int)v13);
+  v19 = (__int64)m_shape->vfptr[6].__vecDelDtor(m_shape, (unsigned int)m_cur);
   v20 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
   v21 = (_QWORD *)v20[1];
   v22 = v20;
@@ -727,8 +698,8 @@ void __fastcall hkpHeightFieldAgent::staticGetClosestPoints(hkpCdBody *csBody, h
   {
     *v21 = "Sttransform";
     v23 = __rdtsc();
-    v24 = (signed __int64)(v21 + 2);
-    *(_DWORD *)(v24 - 8) = v23;
+    v24 = v21 + 2;
+    *((_DWORD *)v24 - 2) = v23;
     v22[1] = v24;
   }
   v25.m_quad = (__m128)v73.m_rotation.m_col0;
@@ -740,8 +711,7 @@ void __fastcall hkpHeightFieldAgent::staticGetClosestPoints(hkpCdBody *csBody, h
   v31.m_quad = (__m128)v73.m_translation;
   do
   {
-    v32 = *v30;
-    --v30;
+    v32 = *v30--;
     --v29;
     v33 = _mm_add_ps(
             _mm_add_ps(
@@ -750,7 +720,7 @@ void __fastcall hkpHeightFieldAgent::staticGetClosestPoints(hkpCdBody *csBody, h
                 _mm_mul_ps(_mm_shuffle_ps(v32, v32, 0), v25.m_quad)),
               _mm_mul_ps(_mm_shuffle_ps(v32, v32, 170), v27.m_quad)),
             v31.m_quad);
-    *(__m128 *)&v13[(_QWORD)v30 - v19 + 16] = _mm_shuffle_ps(v33, _mm_unpackhi_ps(v33, v32), 196);
+    *(__m128 *)&m_cur[(_QWORD)v30 - v19 + 16] = _mm_shuffle_ps(v33, _mm_unpackhi_ps(v33, v32), 196);
   }
   while ( v29 >= 0 );
   v34 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
@@ -759,37 +729,37 @@ void __fastcall hkpHeightFieldAgent::staticGetClosestPoints(hkpCdBody *csBody, h
   {
     *v35 = "Stcollide";
     v36 = __rdtsc();
-    v37 = (signed __int64)(v35 + 2);
-    *(_DWORD *)(v37 - 8) = v36;
+    v37 = v35 + 2;
+    *((_DWORD *)v37 - 2) = v36;
     v34[1] = v37;
   }
   v38 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v39 = (__m128 *)v38->m_cur;
-  v40 = (char *)v39 + v14;
+  v39 = (char *)v38->m_cur;
+  v40 = &v39[v14];
   if ( v14 > v38->m_slabSize || v40 > v38->m_end )
-    v39 = (__m128 *)hkLifoAllocator::allocateFromNewSlab(v38, v14);
+    v39 = (char *)hkLifoAllocator::allocateFromNewSlab(v38, v14);
   else
     v38->m_cur = v40;
-  v41 = v75->vfptr;
-  v67 = v5->m_tolerance.m_storage;
-  v65 = v13;
+  vfptr = v75->vfptr;
+  m_storage = input->m_tolerance.m_storage;
+  v65 = m_cur;
   v66 = v11;
-  ((void (__fastcall *)(hkpShape *, _BYTE **, __m128 *))v41[8].__first_virtual_table_function__)(v75, &v65, v39);
+  ((void (__fastcall *)(hkpShape *, char **, char *))vfptr[8].__first_virtual_table_function__)(v75, &v65, v39);
   v42 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
   v43 = (_QWORD *)v42[1];
   if ( (unsigned __int64)v43 < v42[3] )
   {
     *v43 = "Stexamine";
     v44 = __rdtsc();
-    v45 = (signed __int64)(v43 + 2);
-    *(_DWORD *)(v45 - 8) = v44;
+    v45 = v43 + 2;
+    *((_DWORD *)v45 - 2) = v44;
     v42[1] = v45;
   }
-  v46 = v39;
-  LODWORD(v47) = (unsigned __int128)_mm_shuffle_ps(
-                                      (__m128)LODWORD(v5->m_tolerance.m_storage),
-                                      (__m128)LODWORD(v5->m_tolerance.m_storage),
-                                      0);
+  v46 = (__m128 *)v39;
+  LODWORD(v47) = _mm_shuffle_ps(
+                   (__m128)LODWORD(input->m_tolerance.m_storage),
+                   (__m128)LODWORD(input->m_tolerance.m_storage),
+                   0).m128_u32[0];
   if ( v28 >= 0 )
   {
     do
@@ -798,37 +768,37 @@ void __fastcall hkpHeightFieldAgent::staticGetClosestPoints(hkpCdBody *csBody, h
       v49 = _mm_shuffle_ps(v48, v48, 255);
       if ( v49.m128_f32[0] <= v47 )
       {
-        v50 = (__m128 *)v6->m_motion;
+        m_motion = (__m128 *)hfBody->m_motion;
         v51 = _mm_add_ps(
                 _mm_mul_ps(
                   _mm_sub_ps(
                     _mm_sub_ps(
                       (__m128)0i64,
                       _mm_shuffle_ps(
-                        *(__m128 *)((char *)v46 + v13 - (_BYTE *)v39),
-                        *(__m128 *)((char *)v46 + v13 - (_BYTE *)v39),
+                        *(__m128 *)((char *)v46 + m_cur - v39),
+                        *(__m128 *)((char *)v46 + m_cur - v39),
                         255)),
                     v49),
                   v48),
-                *(__m128 *)((char *)v46 + v13 - (_BYTE *)v39));
-        v52 = _mm_mul_ps(_mm_shuffle_ps(v48, v48, 85), v50[1]);
+                *(__m128 *)((char *)v46 + m_cur - v39));
+        v52 = _mm_mul_ps(_mm_shuffle_ps(v48, v48, 85), m_motion[1]);
         v53 = _mm_add_ps(
                 _mm_add_ps(
                   _mm_add_ps(
-                    _mm_mul_ps(_mm_shuffle_ps(v51, v51, 85), v50[1]),
-                    _mm_mul_ps(_mm_shuffle_ps(v51, v51, 0), *v50)),
-                  _mm_mul_ps(_mm_shuffle_ps(v51, v51, 170), v50[2])),
-                v50[3]);
-        v54 = _mm_mul_ps(_mm_shuffle_ps(v48, v48, 0), *v50);
-        v55 = _mm_mul_ps(_mm_shuffle_ps(v48, v48, 170), v50[2]);
-        v56 = v76->vfptr;
+                    _mm_mul_ps(_mm_shuffle_ps(v51, v51, 85), m_motion[1]),
+                    _mm_mul_ps(_mm_shuffle_ps(v51, v51, 0), *m_motion)),
+                  _mm_mul_ps(_mm_shuffle_ps(v51, v51, 170), m_motion[2])),
+                m_motion[3]);
+        v54 = _mm_mul_ps(_mm_shuffle_ps(v48, v48, 0), *m_motion);
+        v55 = _mm_mul_ps(_mm_shuffle_ps(v48, v48, 170), m_motion[2]);
+        v56 = collector->vfptr;
         v68 = v53;
-        v71 = v74;
-        v72 = v6;
+        v71 = csBody;
+        v72 = hfBody;
         v57 = _mm_add_ps(_mm_add_ps(v52, v54), v55);
         v69 = _mm_shuffle_ps(v57, _mm_unpackhi_ps(v57, v49), 196);
         v70 = v69;
-        ((void (__fastcall *)(hkpCdPointCollector *, __m128 *, _QWORD *))v56->addCdPoint)(v76, &v68, v42);
+        ((void (__fastcall *)(hkpCdPointCollector *, __m128 *, _QWORD *))v56->addCdPoint)(collector, &v68, v42);
       }
       ++v46;
       --v28;
@@ -838,103 +808,98 @@ void __fastcall hkpHeightFieldAgent::staticGetClosestPoints(hkpCdBody *csBody, h
   }
   v58 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   v59 = (v14 + 15) & 0xFFFFFFF0;
-  if ( v14 > v58->m_slabSize || (char *)v39 + v59 != v58->m_cur || v58->m_firstNonLifoEnd == v39 )
+  if ( v14 > v58->m_slabSize || &v39[v59] != v58->m_cur || v58->m_firstNonLifoEnd == v39 )
     hkLifoAllocator::slowBlockFree(v58, v39, v59);
   else
     v58->m_cur = v39;
   v60 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  if ( v14 > v60->m_slabSize || &v13[v59] != v60->m_cur || v60->m_firstNonLifoEnd == v13 )
-    hkLifoAllocator::slowBlockFree(v60, v13, v59);
+  if ( v14 > v60->m_slabSize || &m_cur[v59] != v60->m_cur || v60->m_firstNonLifoEnd == m_cur )
+    hkLifoAllocator::slowBlockFree(v60, m_cur, v59);
   else
-    v60->m_cur = v13;
+    v60->m_cur = m_cur;
   v61 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
   v62 = (_QWORD *)v61[1];
   if ( (unsigned __int64)v62 < v61[3] )
   {
     *v62 = "lt";
     v63 = __rdtsc();
-    v64 = (signed __int64)(v62 + 2);
-    *(_DWORD *)(v64 - 8) = v63;
+    v64 = v62 + 2;
+    *((_DWORD *)v64 - 2) = v63;
     v61[1] = v64;
   }
-}(hkMonitorStream__m_instance.m_slotID);
-  v62 = (_QWORD *)v61[1];
-  if ( (unsigned __int64)v62 < v61[3] )
-  {
-    *v62 = "lt";
-    v63 = __rdtsc();
-    v64 = (signed __int64)(
+}
 
 // File Line: 351
 // RVA: 0xCFB980
-void __fastcall hkHeightFieldRayForwardingCollector::addRayHit(hkHeightFieldRayForwardingCollector *this, hkpCdBody *cdBody, hkpShapeRayCastCollectorOutput *hitInfo)
+void __fastcall hkHeightFieldRayForwardingCollector::addRayHit(
+        hkHeightFieldRayForwardingCollector *this,
+        hkpCdBody *cdBody,
+        hkpShapeRayCastCollectorOutput *hitInfo)
 {
   hkVector4f v3; // xmm1
-  __m128 *v4; // rax
-  hkHeightFieldRayForwardingCollector *v5; // rbx
+  __m128 *m_motion; // rax
   __m128 v6; // xmm3
   __m128 v7; // xmm2
   __m128 v8; // xmm1
   unsigned int v9; // xmm0_4
-  hkpCdBody *v10; // rax
-  hkpCdPointCollector *v11; // rcx
+  hkpCdBody *m_csBody; // rax
+  hkpCdPointCollector *m_collector; // rcx
   __m128 v12; // xmm2
-  __int128 v13; // ST30_16
-  __m128 v14; // [rsp+40h] [rbp-48h]
-  __int128 v15; // [rsp+50h] [rbp-38h]
-  __int128 v16; // [rsp+60h] [rbp-28h]
-  hkpCdBody *v17; // [rsp+70h] [rbp-18h]
-  hkpCdBody *v18; // [rsp+78h] [rbp-10h]
+  __int128 v13; // [rsp+30h] [rbp-58h]
+  __int128 v14[3]; // [rsp+40h] [rbp-48h] BYREF
+  hkpCdBody *v15; // [rsp+70h] [rbp-18h]
+  hkpCdBody *v16; // [rsp+78h] [rbp-10h]
 
   v3.m_quad = (__m128)hitInfo->m_normal;
-  v4 = (__m128 *)cdBody->m_motion;
-  v5 = this;
+  m_motion = (__m128 *)cdBody->m_motion;
   v6 = _mm_add_ps(
          _mm_mul_ps(
            _mm_shuffle_ps((__m128)LODWORD(hitInfo->m_hitFraction), (__m128)LODWORD(hitInfo->m_hitFraction), 0),
            this->m_path.m_quad),
          this->m_currentFrom.m_quad);
   v7 = _mm_add_ps(
-         _mm_mul_ps(_mm_shuffle_ps(v3.m_quad, v3.m_quad, 85), v4[1]),
-         _mm_mul_ps(_mm_shuffle_ps(hitInfo->m_normal.m_quad, hitInfo->m_normal.m_quad, 0), *v4));
-  v8 = _mm_mul_ps(_mm_shuffle_ps(v3.m_quad, v3.m_quad, 170), v4[2]);
+         _mm_mul_ps(_mm_shuffle_ps(v3.m_quad, v3.m_quad, 85), m_motion[1]),
+         _mm_mul_ps(_mm_shuffle_ps(hitInfo->m_normal.m_quad, hitInfo->m_normal.m_quad, 0), *m_motion));
+  v8 = _mm_mul_ps(_mm_shuffle_ps(v3.m_quad, v3.m_quad, 170), m_motion[2]);
   v9 = LODWORD(this->m_currentRadius) ^ _xmm[0];
-  v10 = this->m_csBody;
-  v11 = this->m_collector;
+  m_csBody = this->m_csBody;
+  m_collector = this->m_collector;
   v12 = _mm_add_ps(v7, v8);
   v13 = (__int128)v12;
   HIDWORD(v13) = LODWORD(hitInfo->m_hitFraction);
-  v15 = v13;
-  v14 = _mm_add_ps(v6, _mm_mul_ps(_mm_shuffle_ps((__m128)v9, (__m128)v9, 0), v12));
-  v18 = cdBody;
-  v17 = v10;
-  v16 = v13;
-  v11->vfptr->addCdPoint(v11, (hkpCdPoint *)&v14);
-  v5->m_earlyOutHitFraction = fminf(v5->m_collector->m_earlyOutDistance, v5->m_earlyOutHitFraction);
+  v14[1] = v13;
+  v14[0] = (__int128)_mm_add_ps(v6, _mm_mul_ps(_mm_shuffle_ps((__m128)v9, (__m128)v9, 0), v12));
+  v16 = cdBody;
+  v15 = m_csBody;
+  v14[2] = v13;
+  m_collector->vfptr->addCdPoint(m_collector, (hkpCdPoint *)v14);
+  this->m_earlyOutHitFraction = fminf(this->m_collector->m_earlyOutDistance, this->m_earlyOutHitFraction);
 }
 
 // File Line: 383
 // RVA: 0xCFB250
-void __fastcall hkpHeightFieldAgent::staticLinearCast(hkpCdBody *csBody, hkpCdBody *hfBody, hkpLinearCastCollisionInput *input, hkpCdPointCollector *collector, hkpCdPointCollector *startCollector)
+void __fastcall hkpHeightFieldAgent::staticLinearCast(
+        hkpCdBody *csBody,
+        hkpCdBody *hfBody,
+        hkpLinearCastCollisionInput *input,
+        hkpCdPointCollector *collector,
+        hkpCdPointCollector *startCollector)
 {
-  hkpCdBody *v5; // rsi
-  hkpLinearCastCollisionInput *v6; // rbp
-  hkpCdBody *v7; // r14
-  _QWORD *v8; // rcx
+  _QWORD *Value; // rcx
   unsigned __int64 v9; // r10
   unsigned __int64 v10; // rax
   _QWORD *v11; // r8
   _QWORD *v12; // rcx
   unsigned __int64 v13; // rax
-  signed __int64 v14; // rcx
-  hkpShape *v15; // r15
+  _QWORD *v14; // rcx
+  hkpShape *m_shape; // r15
   hkpShape *v16; // r13
   __int64 v17; // r12
   hkLifoAllocator *v18; // rax
-  char *v19; // rdi
+  char *m_cur; // rdi
   int v20; // ebx
   char *v21; // rcx
-  __m128 *v22; // rcx
+  __m128 *m_motion; // rcx
   __m128 v23; // xmm3
   __m128 v24; // xmm1
   __m128 v25; // xmm2
@@ -944,8 +909,8 @@ void __fastcall hkpHeightFieldAgent::staticLinearCast(hkpCdBody *csBody, hkpCdBo
   _QWORD *v29; // rcx
   _QWORD *v30; // r8
   unsigned __int64 v31; // rax
-  signed __int64 v32; // rcx
-  int v33; // xmm0_4
+  _QWORD *v32; // rcx
+  float m_maxExtraPenetration; // xmm0_4
   __int64 v34; // rbp
   __m128 v35; // xmm6
   __m128 *v36; // rax
@@ -953,84 +918,78 @@ void __fastcall hkpHeightFieldAgent::staticLinearCast(hkpCdBody *csBody, hkpCdBo
   __m128 v38; // xmm5
   __m128 v39; // xmm6
   __m128 v40; // xmm2
-  hkBaseObjectVtbl *v41; // rax
+  hkBaseObjectVtbl *vfptr; // rax
   hkLifoAllocator *v42; // rax
-  int v43; // er8
+  int v43; // r8d
   _QWORD *v44; // rax
   _QWORD *v45; // rcx
   _QWORD *v46; // r8
   unsigned __int64 v47; // rax
-  signed __int64 v48; // rcx
-  __m128 v49; // [rsp+20h] [rbp-128h]
-  __m128 v50; // [rsp+30h] [rbp-118h]
-  int v51; // [rsp+40h] [rbp-108h]
-  __int64 v52; // [rsp+48h] [rbp-100h]
-  __int64 v53; // [rsp+50h] [rbp-F8h]
-  __int64 v54; // [rsp+58h] [rbp-F0h]
-  int v55; // [rsp+60h] [rbp-E8h]
-  int v56; // [rsp+64h] [rbp-E4h]
-  void **v57; // [rsp+70h] [rbp-D8h]
-  int v58; // [rsp+78h] [rbp-D0h]
-  __m128 v59; // [rsp+80h] [rbp-C8h]
-  int v60; // [rsp+90h] [rbp-B8h]
-  __int128 v61; // [rsp+A0h] [rbp-A8h]
-  hkpCdBody *v62; // [rsp+B0h] [rbp-98h]
-  hkpCdPointCollector *v63; // [rsp+B8h] [rbp-90h]
-  hkTransformf v64; // [rsp+C0h] [rbp-88h]
-  hkpCdPointCollector *v65; // [rsp+168h] [rbp+20h]
+  _QWORD *v48; // rcx
+  __m128 v49[2]; // [rsp+20h] [rbp-128h] BYREF
+  int v50; // [rsp+40h] [rbp-108h]
+  __int64 v51; // [rsp+48h] [rbp-100h]
+  __int64 v52; // [rsp+50h] [rbp-F8h]
+  __int64 v53; // [rsp+58h] [rbp-F0h]
+  int v54; // [rsp+60h] [rbp-E8h]
+  float v55; // [rsp+64h] [rbp-E4h]
+  void **v56; // [rsp+70h] [rbp-D8h] BYREF
+  int v57; // [rsp+78h] [rbp-D0h]
+  __m128 v58; // [rsp+80h] [rbp-C8h]
+  int v59; // [rsp+90h] [rbp-B8h]
+  hkVector4f v60; // [rsp+A0h] [rbp-A8h]
+  hkpCdBody *v61; // [rsp+B0h] [rbp-98h]
+  hkpCdPointCollector *v62; // [rsp+B8h] [rbp-90h]
+  hkTransformf v63; // [rsp+C0h] [rbp-88h] BYREF
 
-  v65 = collector;
-  v5 = csBody;
-  v6 = input;
-  v7 = hfBody;
-  v8 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
-  v9 = v8[1];
-  if ( v9 < v8[3] )
+  Value = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
+  v9 = Value[1];
+  if ( v9 < Value[3] )
   {
     *(_QWORD *)v9 = "LtHeightField";
     *(_QWORD *)(v9 + 16) = "StClosestPoints";
     v10 = __rdtsc();
     *(_DWORD *)(v9 + 8) = v10;
-    v8[1] = v9 + 24;
+    Value[1] = v9 + 24;
   }
   if ( startCollector )
-    hkpHeightFieldAgent::staticGetClosestPoints(v5, v7, (hkpCollisionInput *)&v6->m_dispatcher, startCollector);
+    hkpHeightFieldAgent::staticGetClosestPoints(csBody, hfBody, input, startCollector);
   v11 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
   v12 = (_QWORD *)v11[1];
   if ( (unsigned __int64)v12 < v11[3] )
   {
     *v12 = "StGetSpheres";
     v13 = __rdtsc();
-    v14 = (signed __int64)(v12 + 2);
-    *(_DWORD *)(v14 - 8) = v13;
+    v14 = v12 + 2;
+    *((_DWORD *)v14 - 2) = v13;
     v11[1] = v14;
   }
-  v15 = v5->m_shape;
-  v16 = v7->m_shape;
-  hkTransformf::setMulInverseMul(&v64, (hkTransformf *)v7->m_motion, (hkTransformf *)v5->m_motion);
-  v17 = ((unsigned int (__fastcall *)(hkpShape *))v15->vfptr[5].__first_virtual_table_function__)(v15);
+  m_shape = csBody->m_shape;
+  v16 = hfBody->m_shape;
+  hkTransformf::setMulInverseMul(&v63, (hkTransformf *)hfBody->m_motion, (hkTransformf *)csBody->m_motion);
+  v17 = ((unsigned int (__fastcall *)(hkpShape *))m_shape->vfptr[5].__first_virtual_table_function__)(m_shape);
   v18 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v19 = (char *)v18->m_cur;
+  m_cur = (char *)v18->m_cur;
   v20 = (16 * v17 + 127) & 0xFFFFFF80;
-  v21 = &v19[v20];
+  v21 = &m_cur[v20];
   if ( v20 > v18->m_slabSize || v21 > v18->m_end )
-    v19 = (char *)hkLifoAllocator::allocateFromNewSlab(v18, v20);
+    m_cur = (char *)hkLifoAllocator::allocateFromNewSlab(v18, v20);
   else
     v18->m_cur = v21;
-  v22 = (__m128 *)v7->m_motion;
-  v23 = v22[2];
-  v24 = _mm_unpacklo_ps(*v22, v22[1]);
+  m_motion = (__m128 *)hfBody->m_motion;
+  v23 = m_motion[2];
+  v24 = _mm_unpacklo_ps(*m_motion, m_motion[1]);
   v25 = _mm_movelh_ps(v24, v23);
   v26 = _mm_add_ps(
           _mm_add_ps(
             _mm_mul_ps(
-              _mm_shuffle_ps(v6->m_path.m_quad, v6->m_path.m_quad, 85),
+              _mm_shuffle_ps(input->m_path.m_quad, input->m_path.m_quad, 85),
               _mm_shuffle_ps(_mm_movehl_ps(v25, v24), v23, 212)),
-            _mm_mul_ps(_mm_shuffle_ps(v6->m_path.m_quad, v6->m_path.m_quad, 0), v25)),
+            _mm_mul_ps(_mm_shuffle_ps(input->m_path.m_quad, input->m_path.m_quad, 0), v25)),
           _mm_mul_ps(
-            _mm_shuffle_ps(_mm_unpackhi_ps(*v22, v22[1]), v23, 228),
-            _mm_shuffle_ps(v6->m_path.m_quad, v6->m_path.m_quad, 170)));
-  v27 = (__int64)v15->vfptr[6].__vecDelDtor((hkBaseObject *)&v15->vfptr, (unsigned int)v19);
+            _mm_shuffle_ps(_mm_unpackhi_ps(*m_motion, m_motion[1]), v23, 228),
+            _mm_shuffle_ps(input->m_path.m_quad, input->m_path.m_quad, 170)));
+  v27 = (__int64)m_shape->vfptr[6].__vecDelDtor(m_shape, (unsigned int)m_cur);
   v28 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
   v29 = (_QWORD *)v28[1];
   v30 = v28;
@@ -1038,58 +997,47 @@ void __fastcall hkpHeightFieldAgent::staticLinearCast(hkpCdBody *csBody, hkpCdBo
   {
     *v29 = "StCastSpheres";
     v31 = __rdtsc();
-    v32 = (signed __int64)(v29 + 2);
-    *(_DWORD *)(v32 - 8) = v31;
+    v32 = v29 + 2;
+    *((_DWORD *)v32 - 2) = v31;
     v30[1] = v32;
   }
-  v33 = LODWORD(v6->m_maxExtraPenetration);
-  v51 = 0;
+  m_maxExtraPenetration = input->m_maxExtraPenetration;
+  v50 = 0;
+  v51 = 0i64;
   v52 = 0i64;
+  v55 = m_maxExtraPenetration;
+  v57 = (int)FLOAT_1_0;
   v53 = 0i64;
-  v56 = v33;
-  v58 = (signed int)FLOAT_1_0;
-  v54 = 0i64;
-  v62 = v5;
-  _mm_store_si128((__m128i *)&v61, (__m128i)v6->m_path.m_quad);
-  v57 = &hkHeightFieldRayForwardingCollector::`vftable;
-  v63 = v65;
-  if ( (signed int)v17 > 0 )
+  v61 = csBody;
+  v60.m_quad = (__m128)input->m_path;
+  v56 = &hkHeightFieldRayForwardingCollector::`vftable;
+  v62 = collector;
+  if ( (int)v17 > 0 )
   {
     v34 = v17;
     do
     {
       v35 = *(__m128 *)v27;
-      v36 = (__m128 *)v5->m_motion;
-      v55 = *(_DWORD *)(v27 + 12);
+      v36 = (__m128 *)csBody->m_motion;
+      v54 = *(_DWORD *)(v27 + 12);
       v37 = _mm_shuffle_ps(v35, v35, 85);
       v38 = _mm_shuffle_ps(v35, v35, 0);
       v39 = _mm_shuffle_ps(v35, v35, 170);
-      v49 = _mm_add_ps(
-              _mm_add_ps(
-                _mm_add_ps(_mm_mul_ps(v64.m_rotation.m_col0.m_quad, v38), _mm_mul_ps(v64.m_rotation.m_col1.m_quad, v37)),
-                _mm_mul_ps(v64.m_rotation.m_col2.m_quad, v39)),
-              v64.m_translation.m_quad);
-      v50 = _mm_add_ps(v49, v26);
+      v49[0] = _mm_add_ps(
+                 _mm_add_ps(
+                   _mm_add_ps(
+                     _mm_mul_ps(v63.m_rotation.m_col0.m_quad, v38),
+                     _mm_mul_ps(v63.m_rotation.m_col1.m_quad, v37)),
+                   _mm_mul_ps(v63.m_rotation.m_col2.m_quad, v39)),
+                 v63.m_translation.m_quad);
+      v49[1] = _mm_add_ps(v49[0], v26);
       v40 = _mm_add_ps(
               _mm_add_ps(_mm_add_ps(_mm_mul_ps(v36[1], v37), _mm_mul_ps(*v36, v38)), _mm_mul_ps(v36[2], v39)),
               v36[3]);
-      v60 = v55;
-      v41 = v16->vfptr;
-      v59 = v40;
-      ((void (__fastcall *)(hkpShape *, __m128 *, hkpCdBody *, void ***, unsigned __int64, unsigned __int64, unsigned __int64, unsigned __int64, _QWORD, __int64, __int64, __int64, _QWORD))v41[9].__vecDelDtor)(
-        v16,
-        &v49,
-        v7,
-        &v57,
-        v49.m128_u64[0],
-        v49.m128_u64[1],
-        v50.m128_u64[0],
-        v50.m128_u64[1],
-        *(_QWORD *)&v51,
-        v52,
-        v53,
-        v54,
-        *(_QWORD *)&v55);
+      v59 = v54;
+      vfptr = v16->vfptr;
+      v58 = v40;
+      ((void (__fastcall *)(hkpShape *, __m128 *, hkpCdBody *, void ***))vfptr[9].__vecDelDtor)(v16, v49, hfBody, &v56);
       v27 += 16i64;
       --v34;
     }
@@ -1097,10 +1045,10 @@ void __fastcall hkpHeightFieldAgent::staticLinearCast(hkpCdBody *csBody, hkpCdBo
   }
   v42 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
   v43 = (v20 + 15) & 0xFFFFFFF0;
-  if ( v20 > v42->m_slabSize || &v19[v43] != v42->m_cur || v42->m_firstNonLifoEnd == v19 )
-    hkLifoAllocator::slowBlockFree(v42, v19, v43);
+  if ( v20 > v42->m_slabSize || &m_cur[v43] != v42->m_cur || v42->m_firstNonLifoEnd == m_cur )
+    hkLifoAllocator::slowBlockFree(v42, m_cur, v43);
   else
-    v42->m_cur = v19;
+    v42->m_cur = m_cur;
   v44 = TlsGetValue(hkMonitorStream__m_instance.m_slotID);
   v45 = (_QWORD *)v44[1];
   v46 = v44;
@@ -1108,15 +1056,21 @@ void __fastcall hkpHeightFieldAgent::staticLinearCast(hkpCdBody *csBody, hkpCdBo
   {
     *v45 = "lt";
     v47 = __rdtsc();
-    v48 = (signed __int64)(v45 + 2);
-    *(_DWORD *)(v48 - 8) = v47;
+    v48 = v45 + 2;
+    *((_DWORD *)v48 - 2) = v47;
     v46[1] = v48;
   }
 }
 
 // File Line: 436
 // RVA: 0xCFB210
-void __fastcall hkpHeightFieldAgent::linearCast(hkpHeightFieldAgent *this, hkpCdBody *csBody, hkpCdBody *hfBody, hkpLinearCastCollisionInput *input, hkpCdPointCollector *collector, hkpCdPointCollector *startCollector)
+void __fastcall hkpHeightFieldAgent::linearCast(
+        hkpHeightFieldAgent *this,
+        hkpCdBody *csBody,
+        hkpCdBody *hfBody,
+        hkpLinearCastCollisionInput *input,
+        hkpCdPointCollector *collector,
+        hkpCdPointCollector *startCollector)
 {
   hkpHeightFieldAgent::staticLinearCast(csBody, hfBody, input, collector, startCollector);
 }

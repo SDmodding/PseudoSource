@@ -2,7 +2,7 @@
 // RVA: 0x15D8A70
 __int64 dynamic_initializer_for__g_HD3D__()
 {
-  return atexit(dynamic_atexit_destructor_for__g_HD3D__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__g_HD3D__);
 }
 
 // File Line: 34
@@ -20,94 +20,91 @@ void __fastcall AMD_HD3D::AMD_HD3D(AMD_HD3D *this)
 // RVA: 0xEBFAE0
 __int64 __fastcall AMD_HD3D::OpenStereoInterface(AMD_HD3D *this, ID3D11Device *pD3DDevice)
 {
-  AMD_HD3D *v2; // rdi
-  ID3D11Device *v3; // rbx
-  HMODULE v4; // rax
-  FARPROC v5; // rax
-  unsigned int v6; // ebx
-  __int64 v7; // rax
-  IAmdDxExtQuadBufferStereo *v8; // rcx
-  IAmdDxExt *v9; // rcx
+  HMODULE ModuleHandleW; // rax
+  FARPROC ProcAddress; // rax
+  int v6; // ebx
+  IAmdDxExtQuadBufferStereo *v7; // rax
+  IAmdDxExtQuadBufferStereo *mStereo; // rcx
+  IAmdDxExt *mExtension; // rcx
 
-  v2 = this;
-  v3 = pD3DDevice;
-  v4 = GetModuleHandleW(L"atidxx64.dll");
-  v5 = GetProcAddress(v4, "AmdDxExtCreate11");
-  if ( !v5 )
+  ModuleHandleW = GetModuleHandleW(L"atidxx64.dll");
+  ProcAddress = GetProcAddress(ModuleHandleW, "AmdDxExtCreate11");
+  if ( !ProcAddress )
   {
 LABEL_4:
     v6 = -2147467259;
     goto LABEL_5;
   }
-  v6 = ((__int64 (__fastcall *)(ID3D11Device *, IAmdDxExt **))v5)(v3, &v2->mExtension);
-  if ( (v6 & 0x80000000) == 0 )
+  v6 = ((__int64 (__fastcall *)(ID3D11Device *, IAmdDxExt **))ProcAddress)(pD3DDevice, &this->mExtension);
+  if ( v6 >= 0 )
   {
-    v7 = ((__int64 (__fastcall *)(IAmdDxExt *, signed __int64))v2->mExtension->vfptr[1].Release)(v2->mExtension, 2i64);
-    v2->mStereo = (IAmdDxExtQuadBufferStereo *)v7;
+    v7 = (IAmdDxExtQuadBufferStereo *)((__int64 (__fastcall *)(IAmdDxExt *, __int64))this->mExtension->vfptr[1].Release)(
+                                        this->mExtension,
+                                        2i64);
+    this->mStereo = v7;
     if ( v7 )
-      return v6;
+      return (unsigned int)v6;
     goto LABEL_4;
   }
 LABEL_5:
-  v8 = v2->mStereo;
-  if ( v8 )
+  mStereo = this->mStereo;
+  if ( mStereo )
   {
-    ((void (*)(void))v8->vfptr->Release)();
-    v2->mStereo = 0i64;
+    mStereo->vfptr->Release(mStereo);
+    this->mStereo = 0i64;
   }
-  v9 = v2->mExtension;
-  if ( v9 )
+  mExtension = this->mExtension;
+  if ( mExtension )
   {
-    ((void (*)(void))v9->vfptr->Release)();
-    v2->mExtension = 0i64;
+    mExtension->vfptr->Release(mExtension);
+    this->mExtension = 0i64;
   }
-  return v6;
+  return (unsigned int)v6;
 }
 
 // File Line: 116
 // RVA: 0xEBFB80
-__int64 __fastcall AMD_HD3D::CreateStereoSwapChain(AMD_HD3D *this, IDXGIFactory1 *pIDXGIFactory, ID3D11Device *pd3d11Device, DXGI_SWAP_CHAIN_DESC *pRequestedSwapChainDesc, IDXGISwapChain **ppSwapChain)
+__int64 __fastcall AMD_HD3D::CreateStereoSwapChain(
+        AMD_HD3D *this,
+        IDXGIFactory1 *pIDXGIFactory,
+        ID3D11Device *pd3d11Device,
+        DXGI_SWAP_CHAIN_DESC *pRequestedSwapChainDesc,
+        IDXGISwapChain **ppSwapChain)
 {
-  DXGI_SWAP_CHAIN_DESC *v5; // rbp
-  AMD_HD3D *v6; // rbx
   __int64 result; // rax
   int v8; // eax
-  IAmdDxExtQuadBufferStereo *v9; // rcx
+  IAmdDxExtQuadBufferStereo *mStereo; // rcx
   unsigned int v10; // edi
   unsigned int v11; // esi
-  IAmdDxExt *v12; // rcx
-  unsigned int v13; // er14
-  DXGI_MODE_SCANLINE_ORDER v14; // eax
-  DXGI_MODE_SCALING v15; // ST50_4
-  unsigned int v16; // er15
-  signed int v17; // er13
-  unsigned int v18; // esi
-  IAmdDxExtQuadBufferStereo *v19; // rcx
-  IAmdDxExtInterfaceVtbl *v20; // rax
-  char *v21; // rax
-  char *v22; // r12
-  bool v23; // zf
-  unsigned int v24; // esi
-  _DWORD *v25; // rax
-  signed int v26; // eax
-  signed __int64 v27; // rcx
-  IDXGISwapChain **v28; // rdi
-  int v29; // eax
-  IAmdDxExtQuadBufferStereo *v30; // rcx
-  unsigned int v31; // esi
-  unsigned int v32; // eax
-  unsigned int v33; // [rsp+30h] [rbp-78h]
-  unsigned int v34; // [rsp+34h] [rbp-74h]
-  unsigned int v35; // [rsp+B0h] [rbp+8h]
-  IDXGIFactory1 *v36; // [rsp+B8h] [rbp+10h]
-  ID3D11Device *v37; // [rsp+C0h] [rbp+18h]
-  unsigned int v38; // [rsp+C8h] [rbp+20h]
+  IAmdDxExt *mExtension; // rcx
+  unsigned int v13; // r14d
+  unsigned int Width; // r15d
+  int v15; // r13d
+  int v16; // esi
+  IAmdDxExtQuadBufferStereo *v17; // rcx
+  IAmdDxExtInterfaceVtbl *vfptr; // rax
+  char *v19; // rax
+  char *v20; // r12
+  bool v21; // zf
+  int v22; // esi
+  _DWORD *v23; // rax
+  int v24; // eax
+  __int64 v25; // rcx
+  IDXGISwapChain **v26; // rdi
+  int v27; // eax
+  IAmdDxExtQuadBufferStereo *v28; // rcx
+  unsigned int v29; // esi
+  unsigned int v30; // eax
+  unsigned int Numerator; // [rsp+30h] [rbp-78h]
+  unsigned int Denominator; // [rsp+34h] [rbp-74h]
+  unsigned int v33; // [rsp+B0h] [rbp+8h] BYREF
+  IDXGIFactory1 *v34; // [rsp+B8h] [rbp+10h]
+  ID3D11Device *v35; // [rsp+C0h] [rbp+18h]
+  unsigned int Height; // [rsp+C8h] [rbp+20h]
 
-  v37 = pd3d11Device;
-  v36 = pIDXGIFactory;
+  v35 = pd3d11Device;
+  v34 = pIDXGIFactory;
   this->mEnableStereo = 1;
-  v5 = pRequestedSwapChainDesc;
-  v6 = this;
   if ( pRequestedSwapChainDesc->Windowed )
   {
     this->mEnableStereo = 0;
@@ -116,189 +113,189 @@ __int64 __fastcall AMD_HD3D::CreateStereoSwapChain(AMD_HD3D *this, IDXGIFactory1
   if ( !this->mStereo )
   {
     result = AMD_HD3D::OpenStereoInterface(this, pd3d11Device);
-    if ( (signed int)result < 0 )
+    if ( (int)result < 0 )
     {
-      v6->mEnableStereo = 0;
+      this->mEnableStereo = 0;
       return result;
     }
   }
-  v8 = ((__int64 (__fastcall *)(IAmdDxExtQuadBufferStereo *, signed __int64))v6->mStereo->vfptr[1].AddRef)(
-         v6->mStereo,
+  v8 = ((__int64 (__fastcall *)(IAmdDxExtQuadBufferStereo *, __int64))this->mStereo->vfptr[1].AddRef)(
+         this->mStereo,
          1i64);
-  v9 = v6->mStereo;
+  mStereo = this->mStereo;
   v10 = 0;
   v11 = v8;
   if ( v8 >= 0 )
   {
-    v38 = v5->BufferDesc.Height;
-    v13 = *(_DWORD *)v5->BufferDesc.Format;
-    v33 = v5->BufferDesc.RefreshRate.Numerator;
-    v34 = v5->BufferDesc.RefreshRate.Denominator;
-    v14 = v5->BufferDesc.ScanlineOrdering;
-    v35 = 0;
-    v15 = v5->BufferDesc.Scaling;
-    v16 = v5->BufferDesc.Width;
-    v17 = -1;
-    v18 = ((__int64 (__fastcall *)(IAmdDxExtQuadBufferStereo *, _QWORD, _QWORD, unsigned int *, _QWORD))v9->vfptr[1].Release)(
-            v9,
+    Height = pRequestedSwapChainDesc->BufferDesc.Height;
+    v13 = *(_DWORD *)pRequestedSwapChainDesc->BufferDesc.Format;
+    Numerator = pRequestedSwapChainDesc->BufferDesc.RefreshRate.Numerator;
+    Denominator = pRequestedSwapChainDesc->BufferDesc.RefreshRate.Denominator;
+    v33 = 0;
+    Width = pRequestedSwapChainDesc->BufferDesc.Width;
+    v15 = -1;
+    v16 = ((__int64 (__fastcall *)(IAmdDxExtQuadBufferStereo *, _QWORD, _QWORD, unsigned int *, _QWORD))mStereo->vfptr[1].Release)(
+            mStereo,
             v13,
             0i64,
-            &v35,
+            &v33,
             0i64);
-    if ( (v18 & 0x80000000) != 0 )
+    if ( v16 < 0 )
     {
-      ((void (__fastcall *)(IAmdDxExtQuadBufferStereo *, _QWORD))v6->mStereo->vfptr[1].AddRef)(v6->mStereo, 0i64);
-      AMD_HD3D::~AMD_HD3D(v6);
-      v6->mEnableStereo = 0;
-      return v18;
+      ((void (__fastcall *)(IAmdDxExtQuadBufferStereo *, _QWORD))this->mStereo->vfptr[1].AddRef)(this->mStereo, 0i64);
+      AMD_HD3D::~AMD_HD3D(this);
+      this->mEnableStereo = 0;
+      return (unsigned int)v16;
     }
-    if ( v35 )
+    if ( v33 )
     {
-      v21 = AMemory::malloc_default(saturated_mul(v35, 0x1Cui64));
-      v19 = v6->mStereo;
-      v22 = v21;
-      v23 = v21 == 0i64;
-      v20 = v19->vfptr;
-      if ( !v23 )
+      v19 = AMemory::malloc_default(saturated_mul(v33, 0x1Cui64));
+      v17 = this->mStereo;
+      v20 = v19;
+      v21 = v19 == 0i64;
+      vfptr = v17->vfptr;
+      if ( !v21 )
       {
-        v24 = ((__int64 (__fastcall *)(IAmdDxExtQuadBufferStereo *, _QWORD, _QWORD, unsigned int *, char *))v20[1].Release)(
-                v19,
+        v22 = ((__int64 (__fastcall *)(IAmdDxExtQuadBufferStereo *, _QWORD, _QWORD, unsigned int *, char *))vfptr[1].Release)(
+                v17,
                 v13,
                 0i64,
-                &v35,
-                v22);
-        if ( (v24 & 0x80000000) != 0 )
+                &v33,
+                v20);
+        if ( v22 < 0 )
         {
-          ((void (__fastcall *)(IAmdDxExtQuadBufferStereo *, _QWORD))v6->mStereo->vfptr[1].AddRef)(v6->mStereo, 0i64);
-          Illusion::ShaderParam::operator delete(v22);
-          v6->mEnableStereo = 0;
-          AMD_HD3D::~AMD_HD3D(v6);
-          return v24;
+          ((void (__fastcall *)(IAmdDxExtQuadBufferStereo *, _QWORD))this->mStereo->vfptr[1].AddRef)(
+            this->mStereo,
+            0i64);
+          Illusion::ShaderParam::operator delete(v20);
+          this->mEnableStereo = 0;
+          AMD_HD3D::~AMD_HD3D(this);
+          return (unsigned int)v22;
         }
-        if ( !v35 )
-          goto LABEL_42;
-        v25 = v22 + 16;
+        if ( !v33 )
+          goto LABEL_38;
+        v23 = v20 + 16;
         while ( 1 )
         {
-          if ( *(v25 - 4) == v16 && *(v25 - 3) == v38 && *v25 == v13 )
+          if ( *(v23 - 4) == Width && *(v23 - 3) == Height && *v23 == v13 )
           {
-            v17 = v10;
-            if ( *(v25 - 2) == v33 && *(v25 - 1) == v34 )
+            v15 = v10;
+            if ( *(v23 - 2) == Numerator && *(v23 - 1) == Denominator )
               break;
           }
           ++v10;
-          v25 += 7;
-          if ( v10 >= v35 )
+          v23 += 7;
+          if ( v10 >= v33 )
           {
-            v26 = -1;
+            v24 = -1;
             goto LABEL_29;
           }
         }
-        v26 = v10;
+        v24 = v10;
 LABEL_29:
-        if ( v17 >= 0 )
+        if ( v15 >= 0 )
         {
-          if ( v26 >= 0 )
-            v17 = v26;
-          v27 = 28i64 * v17;
-          v5->BufferDesc.Width = *(_DWORD *)&v22[v27];
-          v5->BufferDesc.Height = *(_DWORD *)&v22[v27 + 4];
-          v5->BufferDesc.RefreshRate.Numerator = *(_DWORD *)&v22[v27 + 8];
-          v5->BufferDesc.RefreshRate.Denominator = *(_DWORD *)&v22[v27 + 12];
-          *(_DWORD *)v5->BufferDesc.Format = *(_DWORD *)&v22[v27 + 16];
-          v5->BufferDesc.ScanlineOrdering = *(_DWORD *)&v22[v27 + 20];
-          v5->BufferDesc.Scaling = *(_DWORD *)&v22[v27 + 24];
-          Illusion::ShaderParam::operator delete(v22);
-          v28 = ppSwapChain;
-          v29 = ((__int64 (__fastcall *)(IDXGIFactory1 *, ID3D11Device *, DXGI_SWAP_CHAIN_DESC *, IDXGISwapChain **))v36->vfptr[3].AddRef)(
-                  v36,
-                  v37,
-                  v5,
+          if ( v24 >= 0 )
+            v15 = v24;
+          v25 = 28i64 * v15;
+          pRequestedSwapChainDesc->BufferDesc.Width = *(_DWORD *)&v20[v25];
+          pRequestedSwapChainDesc->BufferDesc.Height = *(_DWORD *)&v20[v25 + 4];
+          pRequestedSwapChainDesc->BufferDesc.RefreshRate.Numerator = *(_DWORD *)&v20[v25 + 8];
+          pRequestedSwapChainDesc->BufferDesc.RefreshRate.Denominator = *(_DWORD *)&v20[v25 + 12];
+          *(_DWORD *)pRequestedSwapChainDesc->BufferDesc.Format = *(_DWORD *)&v20[v25 + 16];
+          pRequestedSwapChainDesc->BufferDesc.ScanlineOrdering = *(_DWORD *)&v20[v25 + 20];
+          pRequestedSwapChainDesc->BufferDesc.Scaling = *(_DWORD *)&v20[v25 + 24];
+          Illusion::ShaderParam::operator delete(v20);
+          v26 = ppSwapChain;
+          v27 = ((__int64 (__fastcall *)(IDXGIFactory1 *, ID3D11Device *, DXGI_SWAP_CHAIN_DESC *, IDXGISwapChain **))v34->vfptr[3].AddRef)(
+                  v34,
+                  v35,
+                  pRequestedSwapChainDesc,
                   ppSwapChain);
-          v30 = v6->mStereo;
-          v31 = v29;
-          if ( v29 < 0 )
+          v28 = this->mStereo;
+          v29 = v27;
+          if ( v27 < 0 )
           {
-            ((void (__fastcall *)(IAmdDxExtQuadBufferStereo *, _QWORD))v30->vfptr[1].AddRef)(v30, 0i64);
-            v6->mEnableStereo = 0;
-            AMD_HD3D::~AMD_HD3D(v6);
-            return v31;
+            ((void (__fastcall *)(IAmdDxExtQuadBufferStereo *, _QWORD))v28->vfptr[1].AddRef)(v28, 0i64);
+            this->mEnableStereo = 0;
+            AMD_HD3D::~AMD_HD3D(this);
+            return v29;
           }
-          v32 = ((__int64 (__fastcall *)(IAmdDxExtQuadBufferStereo *, IDXGISwapChain *))v30->vfptr[1].~IAmdDxExtInterface)(
-                  v30,
-                  *v28);
-          v6->mLineOffset = v32;
-          if ( v32 )
+          v30 = ((__int64 (__fastcall *)(IAmdDxExtQuadBufferStereo *, IDXGISwapChain *))v28->vfptr[1].~IAmdDxExtInterface)(
+                  v28,
+                  *v26);
+          this->mLineOffset = v30;
+          if ( v30 )
           {
-            v6->mWidth = v5->BufferDesc.Width;
-            v6->mHeight = v5->BufferDesc.Height;
+            this->mWidth = pRequestedSwapChainDesc->BufferDesc.Width;
+            this->mHeight = pRequestedSwapChainDesc->BufferDesc.Height;
             return 0i64;
           }
-          ((void (__fastcall *)(IAmdDxExtQuadBufferStereo *, _QWORD))v6->mStereo->vfptr[1].AddRef)(v6->mStereo, 0i64);
-          ((void (*)(void))(*v28)->vfptr->Release)();
-          v6->mEnableStereo = 0;
+          ((void (__fastcall *)(IAmdDxExtQuadBufferStereo *, _QWORD))this->mStereo->vfptr[1].AddRef)(
+            this->mStereo,
+            0i64);
+          (*v26)->vfptr->Release(*v26);
+          this->mEnableStereo = 0;
         }
         else
         {
-LABEL_42:
-          ((void (__fastcall *)(IAmdDxExtQuadBufferStereo *, _QWORD))v6->mStereo->vfptr[1].AddRef)(v6->mStereo, 0i64);
-          v6->mEnableStereo = 0;
-          Illusion::ShaderParam::operator delete(v22);
+LABEL_38:
+          ((void (__fastcall *)(IAmdDxExtQuadBufferStereo *, _QWORD))this->mStereo->vfptr[1].AddRef)(
+            this->mStereo,
+            0i64);
+          this->mEnableStereo = 0;
+          Illusion::ShaderParam::operator delete(v20);
         }
         goto LABEL_39;
       }
     }
     else
     {
-      v19 = v6->mStereo;
-      v20 = v19->vfptr;
+      v17 = this->mStereo;
+      vfptr = v17->vfptr;
     }
-    ((void (__fastcall *)(IAmdDxExtQuadBufferStereo *, _QWORD))v20[1].AddRef)(v19, 0i64);
-    v6->mEnableStereo = 0;
+    ((void (__fastcall *)(IAmdDxExtQuadBufferStereo *, _QWORD))vfptr[1].AddRef)(v17, 0i64);
+    this->mEnableStereo = 0;
 LABEL_39:
-    AMD_HD3D::~AMD_HD3D(v6);
+    AMD_HD3D::~AMD_HD3D(this);
     return 2147500037i64;
   }
-  v6->mEnableStereo = 0;
-  if ( v9 )
+  this->mEnableStereo = 0;
+  if ( mStereo )
   {
-    ((void (*)(void))v9->vfptr->Release)();
-    v6->mStereo = 0i64;
+    mStereo->vfptr->Release(mStereo);
+    this->mStereo = 0i64;
   }
-  v12 = v6->mExtension;
-  if ( v12 )
+  mExtension = this->mExtension;
+  if ( mExtension )
   {
-    ((void (*)(void))v12->vfptr->Release)();
-    v6->mExtension = 0i64;
+    mExtension->vfptr->Release(mExtension);
+    this->mExtension = 0i64;
   }
-  v6->mEnableStereo = 0;
+  this->mEnableStereo = 0;
   return v11;
 }
 
 // File Line: 273
 // RVA: 0xEBFA10
-void __fastcall AMD_HD3D::UpdateRightQuadBuffer(AMD_HD3D *this, ID3D11DeviceContext *pdeviceContext, ID3D11Resource *pBackBuffer, ID3D11Resource *pRightEyeTexture, const int pixelConvergence)
+void __fastcall AMD_HD3D::UpdateRightQuadBuffer(
+        AMD_HD3D *this,
+        ID3D11DeviceContext *pdeviceContext,
+        ID3D11Resource *pBackBuffer,
+        ID3D11Resource *pRightEyeTexture,
+        unsigned int pixelConvergence)
 {
-  int v5; // ST38_4
-  int v6; // ST28_4
-  unsigned int v7; // ST20_4
-
   if ( this->mEnableStereo )
-  {
-    v5 = 0;
-    v6 = 0;
-    v7 = this->mLineOffset;
-    ((void (__fastcall *)(ID3D11DeviceContext *, ID3D11Resource *, _QWORD, _QWORD, unsigned int, int, ID3D11Resource *, int, _QWORD))pdeviceContext->vfptr[15].AddRef)(
+    ((void (__fastcall *)(ID3D11DeviceContext *, ID3D11Resource *, _QWORD, _QWORD, unsigned int, _DWORD, ID3D11Resource *, _DWORD, _QWORD))pdeviceContext->vfptr[15].AddRef)(
       pdeviceContext,
       pBackBuffer,
       0i64,
-      (unsigned int)pixelConvergence,
-      v7,
-      v6,
+      pixelConvergence,
+      this->mLineOffset,
+      0,
       pRightEyeTexture,
-      v5,
+      0,
       0i64);
-  }
 }
 
 // File Line: 293
@@ -306,9 +303,7 @@ void __fastcall AMD_HD3D::UpdateRightQuadBuffer(AMD_HD3D *this, ID3D11DeviceCont
 void __fastcall AMD_HD3D::Enable(AMD_HD3D *this)
 {
   if ( this->mStereo )
-    ((void (__fastcall *)(IAmdDxExtQuadBufferStereo *, signed __int64))this->mStereo->vfptr[1].AddRef)(
-      this->mStereo,
-      1i64);
+    ((void (__fastcall *)(IAmdDxExtQuadBufferStereo *, __int64))this->mStereo->vfptr[1].AddRef)(this->mStereo, 1i64);
 }
 
 // File Line: 305
@@ -323,23 +318,21 @@ void __fastcall AMD_HD3D::Disable(AMD_HD3D *this)
 // RVA: 0xEBFAA0
 void __fastcall AMD_HD3D::~AMD_HD3D(AMD_HD3D *this)
 {
-  AMD_HD3D *v1; // rbx
-  IAmdDxExtQuadBufferStereo *v2; // rcx
-  IAmdDxExt *v3; // rcx
+  IAmdDxExtQuadBufferStereo *mStereo; // rcx
+  IAmdDxExt *mExtension; // rcx
 
-  v1 = this;
-  v2 = this->mStereo;
-  if ( v2 )
+  mStereo = this->mStereo;
+  if ( mStereo )
   {
-    ((void (*)(void))v2->vfptr->Release)();
-    v1->mStereo = 0i64;
+    mStereo->vfptr->Release(mStereo);
+    this->mStereo = 0i64;
   }
-  v3 = v1->mExtension;
-  if ( v3 )
+  mExtension = this->mExtension;
+  if ( mExtension )
   {
-    ((void (*)(void))v3->vfptr->Release)();
-    v1->mExtension = 0i64;
+    mExtension->vfptr->Release(mExtension);
+    this->mExtension = 0i64;
   }
-  v1->mEnableStereo = 0;
+  this->mEnableStereo = 0;
 }
 

@@ -1,13 +1,13 @@
 // File Line: 43
 // RVA: 0x12D59F0
-signed __int64 __fastcall _wtomb_environ()
+__int64 __fastcall _wtomb_environ()
 {
   LPCWSTR *v0; // rbx
   const wchar_t *v1; // rax
   int v2; // eax
   int cbMultiByte; // edi
   char *lpMultiByteStr; // rax
-  char *poption; // [rsp+50h] [rbp+8h]
+  char *poption; // [rsp+50h] [rbp+8h] BYREF
 
   poption = 0i64;
   v0 = (LPCWSTR *)wenviron;
@@ -37,8 +37,7 @@ signed __int64 __fastcall _wtomb_environ()
         poption = 0i64;
       }
     }
-    ++v0;
-    v1 = *v0;
+    v1 = *++v0;
     if ( !*v0 )
       return 0i64;
   }

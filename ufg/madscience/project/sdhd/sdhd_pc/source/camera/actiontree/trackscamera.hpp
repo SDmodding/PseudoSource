@@ -69,16 +69,13 @@ void __fastcall CameraDOFTrack::Create()
 // RVA: 0x3138F0
 void __fastcall SubjectFollowOverrideTrack::SubjectFollowOverrideTrack(SubjectFollowOverrideTrack *this)
 {
-  SubjectFollowOverrideTrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, SubjectFollowOverrideTrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SubjectFollowOverrideTask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SubjectFollowOverrideTrack::`vftable;
-  v1->mFollowContextOverride.mOffset = 1i64;
-  BinString::Set(&v1->mFollowContextOverride, &customWorldMapCaption);
-  v1->mFollowCameraType = 0;
-  *(_WORD *)&v1->bFollowCameraTypesAll = 256;
+  ITrack::ITrack(this, SubjectFollowOverrideTrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<SubjectFollowOverrideTask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&SubjectFollowOverrideTrack::`vftable;
+  this->mFollowContextOverride.mOffset = 1i64;
+  BinString::Set(&this->mFollowContextOverride, &customCaption);
+  this->mFollowCameraType = 0;
+  *(_WORD *)&this->bFollowCameraTypesAll = 256;
 }
 
 // File Line: 322
@@ -92,18 +89,15 @@ const char *__fastcall SubjectFollowOverrideTrack::GetClassname(SubjectFollowOve
 // RVA: 0x313870
 void __fastcall SubjectFollowOverridePOITrack::SubjectFollowOverridePOITrack(SubjectFollowOverridePOITrack *this)
 {
-  SubjectFollowOverridePOITrack *v1; // rbx
-
-  v1 = this;
-  ITrack::ITrack((ITrack *)&this->vfptr, SubjectFollowOverridePOITrack::sClassNameUID);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Track<SubjectFollowOverridePOITask>::`vftable;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&SubjectFollowOverridePOITrack::`vftable;
-  v1->mFollowContextLeftOverride.mOffset = 1i64;
-  BinString::Set(&v1->mFollowContextLeftOverride, &customWorldMapCaption);
-  v1->mFollowContextRightOverride.mOffset = 1i64;
-  BinString::Set(&v1->mFollowContextRightOverride, &customWorldMapCaption);
-  v1->mFollowCameraType = 0;
-  *(_WORD *)&v1->bFollowCameraTypesAll = 256;
+  ITrack::ITrack(this, SubjectFollowOverridePOITrack::sClassNameUID);
+  this->vfptr = (Expression::IMemberMapVtbl *)&Track<SubjectFollowOverridePOITask>::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&SubjectFollowOverridePOITrack::`vftable;
+  this->mFollowContextLeftOverride.mOffset = 1i64;
+  BinString::Set(&this->mFollowContextLeftOverride, &customCaption);
+  this->mFollowContextRightOverride.mOffset = 1i64;
+  BinString::Set(&this->mFollowContextRightOverride, &customCaption);
+  this->mFollowCameraType = 0;
+  *(_WORD *)&this->bFollowCameraTypesAll = 256;
 }
 
 // File Line: 349
@@ -151,24 +145,19 @@ const char *__fastcall CameraFollowTargetTrack::GetClassname(CameraFollowTargetT
 // RVA: 0x299FA0
 void __fastcall CameraSetSniperModeTrack::~CameraSetSniperModeTrack(CameraSetSniperModeTrack *this)
 {
-  CameraSetSniperModeTrack *v1; // rbx
-  ExpressionParameterFloat *v2; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   char *v3; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&CameraSetSniperModeTrack::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&ITrack::`vftable;
-  v2 = &this->mMasterRate;
-  if ( !(~LOBYTE(v2->text.mOffset) & 1) )
+  p_mMasterRate = &this->mMasterRate;
+  if ( (p_mMasterRate->text.mOffset & 1) != 0 && (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v3 = (char *)v2 + (v2->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v3 != BinString::sEmptyString )
-        operator delete[](v3);
-    }
+    v3 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v3 != BinString::sEmptyString )
+      operator delete[](v3);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 524

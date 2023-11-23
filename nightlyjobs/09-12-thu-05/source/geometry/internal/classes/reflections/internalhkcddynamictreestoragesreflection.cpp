@@ -35,27 +35,22 @@ void __fastcall finishLoadedObjecthkcdDynamicTreeDynamicStoragePtr(void *p, int 
 
 // File Line: 81
 // RVA: 0xC8DB40
-void __fastcall cleanupLoadedObjecthkcdDynamicTreeDynamicStoragePtr(void *p)
+void __fastcall cleanupLoadedObjecthkcdDynamicTreeDynamicStoragePtr(_DWORD *p)
 {
-  int v1; // er8
-  _DWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      *(void **)p,
-      v1 << 6);
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, *(void **)p, v1 << 6);
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 
@@ -96,27 +91,25 @@ void __fastcall finishLoadedObjecthkcdDynamicTreeDynamicStorage32(void *p, int f
 
 // File Line: 131
 // RVA: 0xC8DBC0
-void __fastcall cleanupLoadedObjecthkcdDynamicTreeDynamicStorage32(void *p)
+void __fastcall cleanupLoadedObjecthkcdDynamicTreeDynamicStorage32(_DWORD *p)
 {
   int v1; // eax
-  _DWORD *v2; // rbx
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       *(void **)p,
       48 * (v1 & 0x3FFFFFFF));
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 
@@ -157,27 +150,22 @@ void __fastcall finishLoadedObjecthkcdDynamicTreeDynamicStorage16(void *p, int f
 
 // File Line: 181
 // RVA: 0xC8DC40
-void __fastcall cleanupLoadedObjecthkcdDynamicTreeDynamicStorage16(void *p)
+void __fastcall cleanupLoadedObjecthkcdDynamicTreeDynamicStorage16(_DWORD *p)
 {
-  int v1; // er8
-  _DWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      *(void **)p,
-      32 * v1);
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, *(void **)p, 32 * v1);
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 
@@ -218,27 +206,22 @@ void __fastcall finishLoadedObjecthkcdDynamicTreeDynamicStorageInt16(void *p, in
 
 // File Line: 231
 // RVA: 0xC8DCC0
-void __fastcall cleanupLoadedObjecthkcdDynamicTreeDynamicStorageInt16(void *p)
+void __fastcall cleanupLoadedObjecthkcdDynamicTreeDynamicStorageInt16(_DWORD *p)
 {
-  int v1; // er8
-  _DWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      *(void **)p,
-      32 * v1);
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, *(void **)p, 32 * v1);
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 
@@ -265,34 +248,32 @@ void dynamic_initializer_for__hkcdDynamicTreeDynamicStorage0hkcdDynamicTreeAniso
 
 // File Line: 280
 // RVA: 0xC8DD30
-void __fastcall finishLoadedObjecthkcdDynamicTreeDynamicStorage0hkcdDynamicTreeAnisotropicMetrichkcdDynamicTreeCodecRawUlong(void *p, int finishing)
+void __fastcall finishLoadedObjecthkcdDynamicTreeDynamicStorage0hkcdDynamicTreeAnisotropicMetrichkcdDynamicTreeCodecRawUlong(
+        void *p,
+        int finishing)
 {
   ;
 }
 
 // File Line: 286
 // RVA: 0xC8DD40
-void __fastcall cleanupLoadedObjecthkcdDynamicTreeDynamicStorage0hkcdDynamicTreeAnisotropicMetrichkcdDynamicTreeCodecRawUlong(void *p)
+void __fastcall cleanupLoadedObjecthkcdDynamicTreeDynamicStorage0hkcdDynamicTreeAnisotropicMetrichkcdDynamicTreeCodecRawUlong(
+        _DWORD *p)
 {
-  int v1; // er8
-  _DWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      *(void **)p,
-      v1 << 6);
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, *(void **)p, v1 << 6);
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 
@@ -319,34 +300,31 @@ void dynamic_initializer_for__hkcdDynamicTreeDefaultDynamicStoragehkcdDynamicTre
 
 // File Line: 328
 // RVA: 0xC8DDB0
-void __fastcall finishLoadedObjecthkcdDynamicTreeDefaultDynamicStoragehkcdDynamicTreeCodecRawUlong(void *p, int finishing)
+void __fastcall finishLoadedObjecthkcdDynamicTreeDefaultDynamicStoragehkcdDynamicTreeCodecRawUlong(
+        void *p,
+        int finishing)
 {
   ;
 }
 
 // File Line: 334
 // RVA: 0xC8DDC0
-void __fastcall cleanupLoadedObjecthkcdDynamicTreeDefaultDynamicStoragehkcdDynamicTreeCodecRawUlong(void *p)
+void __fastcall cleanupLoadedObjecthkcdDynamicTreeDefaultDynamicStoragehkcdDynamicTreeCodecRawUlong(_DWORD *p)
 {
-  int v1; // er8
-  _DWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      *(void **)p,
-      v1 << 6);
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, *(void **)p, v1 << 6);
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 
@@ -373,34 +351,35 @@ void dynamic_initializer_for__hkcdDynamicTreeDynamicStorage0hkcdDynamicTreeAniso
 
 // File Line: 382
 // RVA: 0xC8DE30
-void __fastcall finishLoadedObjecthkcdDynamicTreeDynamicStorage0hkcdDynamicTreeAnisotropicMetrichkcdDynamicTreeCodecRawUint(void *p, int finishing)
+void __fastcall finishLoadedObjecthkcdDynamicTreeDynamicStorage0hkcdDynamicTreeAnisotropicMetrichkcdDynamicTreeCodecRawUint(
+        void *p,
+        int finishing)
 {
   ;
 }
 
 // File Line: 388
 // RVA: 0xC8DE40
-void __fastcall cleanupLoadedObjecthkcdDynamicTreeDynamicStorage0hkcdDynamicTreeAnisotropicMetrichkcdDynamicTreeCodecRawUint(void *p)
+void __fastcall cleanupLoadedObjecthkcdDynamicTreeDynamicStorage0hkcdDynamicTreeAnisotropicMetrichkcdDynamicTreeCodecRawUint(
+        _DWORD *p)
 {
   int v1; // eax
-  _DWORD *v2; // rbx
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       *(void **)p,
       48 * (v1 & 0x3FFFFFFF));
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 
@@ -427,34 +406,34 @@ void dynamic_initializer_for__hkcdDynamicTreeDefaultDynamicStoragehkcdDynamicTre
 
 // File Line: 430
 // RVA: 0xC8DEB0
-void __fastcall finishLoadedObjecthkcdDynamicTreeDefaultDynamicStoragehkcdDynamicTreeCodecRawUint(void *p, int finishing)
+void __fastcall finishLoadedObjecthkcdDynamicTreeDefaultDynamicStoragehkcdDynamicTreeCodecRawUint(
+        void *p,
+        int finishing)
 {
   ;
 }
 
 // File Line: 436
 // RVA: 0xC8DEC0
-void __fastcall cleanupLoadedObjecthkcdDynamicTreeDefaultDynamicStoragehkcdDynamicTreeCodecRawUint(void *p)
+void __fastcall cleanupLoadedObjecthkcdDynamicTreeDefaultDynamicStoragehkcdDynamicTreeCodecRawUint(_DWORD *p)
 {
   int v1; // eax
-  _DWORD *v2; // rbx
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       *(void **)p,
       48 * (v1 & 0x3FFFFFFF));
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 
@@ -481,34 +460,32 @@ void dynamic_initializer_for__hkcdDynamicTreeDynamicStorage0hkcdDynamicTreeAniso
 
 // File Line: 484
 // RVA: 0xC8DF30
-void __fastcall finishLoadedObjecthkcdDynamicTreeDynamicStorage0hkcdDynamicTreeAnisotropicMetrichkcdDynamicTreeCodec32(void *p, int finishing)
+void __fastcall finishLoadedObjecthkcdDynamicTreeDynamicStorage0hkcdDynamicTreeAnisotropicMetrichkcdDynamicTreeCodec32(
+        void *p,
+        int finishing)
 {
   ;
 }
 
 // File Line: 490
 // RVA: 0xC8DF40
-void __fastcall cleanupLoadedObjecthkcdDynamicTreeDynamicStorage0hkcdDynamicTreeAnisotropicMetrichkcdDynamicTreeCodec32(void *p)
+void __fastcall cleanupLoadedObjecthkcdDynamicTreeDynamicStorage0hkcdDynamicTreeAnisotropicMetrichkcdDynamicTreeCodec32(
+        _DWORD *p)
 {
-  int v1; // er8
-  _DWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      *(void **)p,
-      32 * v1);
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, *(void **)p, 32 * v1);
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 
@@ -542,27 +519,22 @@ void __fastcall finishLoadedObjecthkcdDynamicTreeDefaultDynamicStoragehkcdDynami
 
 // File Line: 538
 // RVA: 0xC8DFC0
-void __fastcall cleanupLoadedObjecthkcdDynamicTreeDefaultDynamicStoragehkcdDynamicTreeCodec32(void *p)
+void __fastcall cleanupLoadedObjecthkcdDynamicTreeDefaultDynamicStoragehkcdDynamicTreeCodec32(_DWORD *p)
 {
-  int v1; // er8
-  _DWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      *(void **)p,
-      32 * v1);
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, *(void **)p, 32 * v1);
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 
@@ -589,34 +561,32 @@ void dynamic_initializer_for__hkcdDynamicTreeDynamicStorage0hkcdDynamicTreeAniso
 
 // File Line: 586
 // RVA: 0xC8E030
-void __fastcall finishLoadedObjecthkcdDynamicTreeDynamicStorage0hkcdDynamicTreeAnisotropicMetrichkcdDynamicTreeCodecInt16(void *p, int finishing)
+void __fastcall finishLoadedObjecthkcdDynamicTreeDynamicStorage0hkcdDynamicTreeAnisotropicMetrichkcdDynamicTreeCodecInt16(
+        void *p,
+        int finishing)
 {
   ;
 }
 
 // File Line: 592
 // RVA: 0xC8E040
-void __fastcall cleanupLoadedObjecthkcdDynamicTreeDynamicStorage0hkcdDynamicTreeAnisotropicMetrichkcdDynamicTreeCodecInt16(void *p)
+void __fastcall cleanupLoadedObjecthkcdDynamicTreeDynamicStorage0hkcdDynamicTreeAnisotropicMetrichkcdDynamicTreeCodecInt16(
+        _DWORD *p)
 {
-  int v1; // er8
-  _DWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      *(void **)p,
-      32 * v1);
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, *(void **)p, 32 * v1);
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 
@@ -650,27 +620,22 @@ void __fastcall finishLoadedObjecthkcdDynamicTreeDefaultDynamicStoragehkcdDynami
 
 // File Line: 640
 // RVA: 0xC8E0C0
-void __fastcall cleanupLoadedObjecthkcdDynamicTreeDefaultDynamicStoragehkcdDynamicTreeCodecInt16(void *p)
+void __fastcall cleanupLoadedObjecthkcdDynamicTreeDefaultDynamicStoragehkcdDynamicTreeCodecInt16(_DWORD *p)
 {
-  int v1; // er8
-  _DWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      *(void **)p,
-      32 * v1);
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, *(void **)p, 32 * v1);
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 

@@ -2,48 +2,41 @@
 // RVA: 0x4CE5A0
 void UFG::TSAudio::BindAtomics(void)
 {
+  ASymbol rebind; // [rsp+20h] [rbp-18h]
+  ASymbol rebinda; // [rsp+20h] [rbp-18h]
+  ASymbol rebindb; // [rsp+20h] [rbp-18h]
+  ASymbol rebindc; // [rsp+20h] [rbp-18h]
+  ASymbol rebindd; // [rsp+20h] [rbp-18h]
+  ASymbol rebinde; // [rsp+20h] [rbp-18h]
+
   UFG::TSAudio::mspAudioClass = (SSActorClass *)SSBrain::get_class("Audio");
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSAudio::mspAudioClass->vfptr,
+    UFG::TSAudio::mspAudioClass,
     "destroy",
     (void (__fastcall *)(SSInvokedMethod *, SSInstance **))_,
-    0);
+    SSBindFlag_instance_no_rebind);
+  LOBYTE(rebind.i_uid) = 0;
+  SSClass::register_method_func(UFG::TSAudio::mspAudioClass, "create", UFG::TSAudio::MthdC_create, 1, rebind);
+  LOBYTE(rebinda.i_uid) = 0;
+  SSClass::register_method_func(UFG::TSAudio::mspAudioClass, "get_named", UFG::TSAudio::MthdC_get_named, 1, rebinda);
+  LOBYTE(rebindb.i_uid) = 0;
+  SSClass::register_method_func(UFG::TSAudio::mspAudioClass, "play_sound", UFG::TSAudio::MthdC_play_sound, 1, rebindb);
+  LOBYTE(rebindc.i_uid) = 0;
+  SSClass::register_method_func(UFG::TSAudio::mspAudioClass, "set_rtpc", UFG::TSAudio::MthdC_set_rtpc, 1, rebindc);
+  LOBYTE(rebindd.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSAudio::mspAudioClass->vfptr,
-    "create",
-    UFG::TSAudio::MthdC_create,
-    1,
-    0);
-  SSClass::register_method_func(
-    (SSClass *)&UFG::TSAudio::mspAudioClass->vfptr,
-    "get_named",
-    UFG::TSAudio::MthdC_get_named,
-    1,
-    0);
-  SSClass::register_method_func(
-    (SSClass *)&UFG::TSAudio::mspAudioClass->vfptr,
-    "play_sound",
-    UFG::TSAudio::MthdC_play_sound,
-    1,
-    0);
-  SSClass::register_method_func(
-    (SSClass *)&UFG::TSAudio::mspAudioClass->vfptr,
-    "set_rtpc",
-    UFG::TSAudio::MthdC_set_rtpc,
-    1,
-    0);
-  SSClass::register_method_func(
-    (SSClass *)&UFG::TSAudio::mspAudioClass->vfptr,
+    UFG::TSAudio::mspAudioClass,
     "load_file_package",
     UFG::TSAudio::MthdC_load_file_package,
     1,
-    0);
+    rebindd);
+  LOBYTE(rebinde.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::TSAudio::mspAudioClass->vfptr,
+    UFG::TSAudio::mspAudioClass,
     "unload_file_package",
     UFG::TSAudio::MthdC_unload_file_package,
     1,
-    0);
+    rebinde);
 }
 
 // File Line: 105
@@ -57,31 +50,31 @@ void __fastcall UFG::TSAudio::MthdC_create(SSInvokedMethod *pScope, SSInstance *
 // RVA: 0x4EB320
 void __fastcall UFG::TSAudio::MthdC_play_sound(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSData **v2; // rdx
-  SSInstance *v3; // rbx
+  SSData **i_array_p; // rdx
+  SSInstance *i_data_p; // rbx
   bool v4; // zf
-  const char ***v5; // rbx
-  UFG::qVector3 *v6; // rdx
+  const char ***p_i_user_data; // rbx
+  UFG::qVector3 *i_user_data; // rdx
   const char **v7; // rax
-  UFG::OneShot *v8; // rbx
+  UFG::OneShot *m_pOneShot; // rbx
   unsigned int v9; // eax
-  UFG::OneShotHandle pHandle; // [rsp+40h] [rbp+8h]
+  UFG::OneShotHandle pHandle; // [rsp+40h] [rbp+8h] BYREF
 
-  v2 = pScope->i_data.i_array_p;
-  v3 = (*v2)->i_data_p;
-  v4 = &v3->i_user_data == 0i64;
-  v5 = (const char ***)&v3->i_user_data;
-  v6 = (UFG::qVector3 *)v2[1]->i_data_p->i_user_data;
-  if ( !v4 && v6 )
+  i_array_p = pScope->i_data.i_array_p;
+  i_data_p = (*i_array_p)->i_data_p;
+  v4 = &i_data_p->i_user_data == 0i64;
+  p_i_user_data = (const char ***)&i_data_p->i_user_data;
+  i_user_data = (UFG::qVector3 *)i_array_p[1]->i_data_p->i_user_data;
+  if ( !v4 && i_user_data )
   {
     pHandle.m_pOneShot = 0i64;
-    UFG::OneShotPool::GetOneShotHandle(&pHandle, v6);
+    UFG::OneShotPool::GetOneShotHandle(&pHandle, i_user_data);
     if ( UFG::OneShotHandle::IsValid(&pHandle) )
     {
-      v7 = *v5;
-      v8 = pHandle.m_pOneShot;
+      v7 = *p_i_user_data;
+      m_pOneShot = pHandle.m_pOneShot;
       v9 = UFG::TiDo::CalcWwiseUid(*v7);
-      UFG::OneShot::Play(v8, v9);
+      UFG::OneShot::Play(m_pOneShot, v9);
     }
     UFG::OneShotHandle::Release(&pHandle);
   }
@@ -91,27 +84,27 @@ void __fastcall UFG::TSAudio::MthdC_play_sound(SSInvokedMethod *pScope, SSInstan
 // RVA: 0x4EE940
 void __fastcall UFG::TSAudio::MthdC_set_rtpc(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSData **v2; // rdx
+  SSData **i_array_p; // rdx
   SSData *v3; // rax
-  float *v4; // rbx
+  float *p_i_user_data; // rbx
   const char ***v5; // rsi
-  UFG::SimObject *v6; // rcx
-  UFG::SimComponent *v7; // rdi
+  UFG::SimObject *m_pPointer; // rcx
+  UFG::SimComponent *ComponentOfType; // rdi
   unsigned int v8; // eax
 
-  v2 = pScope->i_data.i_array_p;
-  v3 = v2[2];
-  v4 = (float *)&v3->i_data_p->i_user_data;
-  v5 = (const char ***)&v2[1]->i_data_p->i_user_data;
-  if ( v2[1]->i_data_p != (SSInstance *)-32i64 && v3->i_data_p != (SSInstance *)-32i64 )
+  i_array_p = pScope->i_data.i_array_p;
+  v3 = i_array_p[2];
+  p_i_user_data = (float *)&v3->i_data_p->i_user_data;
+  v5 = (const char ***)&i_array_p[1]->i_data_p->i_user_data;
+  if ( i_array_p[1]->i_data_p != (SSInstance *)-32i64 && v3->i_data_p != (SSInstance *)-32i64 )
   {
-    v6 = UFG::TSActor::GetArgByNameOrInstance((SSInvokedContextBase *)&pScope->vfptr, 0)->mpSimObj.m_pPointer;
-    if ( v6 )
-      v7 = UFG::SimObject::GetComponentOfType(v6, UFG::HkAudioEntityComponent::_TypeUID);
+    m_pPointer = UFG::TSActor::GetArgByNameOrInstance(pScope, 0)->mpSimObj.m_pPointer;
+    if ( m_pPointer )
+      ComponentOfType = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::HkAudioEntityComponent::_TypeUID);
     else
-      v7 = 0i64;
+      ComponentOfType = 0i64;
     v8 = UFG::TiDo::CalcWwiseUid(**v5);
-    UFG::AudioEntity::SetRtpcValue((UFG::AudioEntity *)&v7[1], v8, *v4);
+    UFG::AudioEntity::SetRtpcValue((UFG::AudioEntity *)&ComponentOfType[1], v8, *p_i_user_data);
   }
 }
 
@@ -119,21 +112,21 @@ void __fastcall UFG::TSAudio::MthdC_set_rtpc(SSInvokedMethod *pScope, SSInstance
 // RVA: 0x4EAB40
 void __fastcall UFG::TSAudio::MthdC_load_file_package(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSData **v2; // rdx
-  const char ***v3; // rax
+  SSData **i_array_p; // rdx
+  const char ***p_i_user_data; // rax
   const char ***v4; // rbx
   UFG::qSymbol *v5; // rax
-  UFG::qSymbol result; // [rsp+40h] [rbp+8h]
-  UFG::qSymbol *v7; // [rsp+50h] [rbp+18h]
+  UFG::qSymbol result; // [rsp+40h] [rbp+8h] BYREF
+  UFG::qSymbol *p_result; // [rsp+50h] [rbp+18h]
 
-  v2 = pScope->i_data.i_array_p;
-  v3 = (const char ***)&v2[1]->i_data_p->i_user_data;
-  v4 = (const char ***)&(*v2)->i_data_p->i_user_data;
-  if ( (*v2)->i_data_p != (SSInstance *)-32i64 && v2[1]->i_data_p != (SSInstance *)-32i64 )
+  i_array_p = pScope->i_data.i_array_p;
+  p_i_user_data = (const char ***)&i_array_p[1]->i_data_p->i_user_data;
+  v4 = (const char ***)&(*i_array_p)->i_data_p->i_user_data;
+  if ( (*i_array_p)->i_data_p != (SSInstance *)-32i64 && i_array_p[1]->i_data_p != (SSInstance *)-32i64 )
   {
-    v7 = &result;
-    v5 = UFG::qSymbol::create_from_string(&result, **v3);
-    UFG::TiDo::LoadFilePackage(**v4, (__int64)v5, 0, 0);
+    p_result = &result;
+    v5 = UFG::qSymbol::create_from_string(&result, **p_i_user_data);
+    UFG::TiDo::LoadFilePackage(**v4, &v5->mUID, 0, 0);
   }
 }
 
@@ -141,10 +134,10 @@ void __fastcall UFG::TSAudio::MthdC_load_file_package(SSInvokedMethod *pScope, S
 // RVA: 0x4F2AA0
 void __fastcall UFG::TSAudio::MthdC_unload_file_package(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSData **v2; // rax
+  SSData **i_array_p; // rax
 
-  v2 = pScope->i_data.i_array_p;
-  if ( (*v2)->i_data_p != (SSInstance *)-32i64 )
-    UFG::TiDo::UnloadFilePackage(*(const char **)(*v2)->i_data_p->i_user_data);
+  i_array_p = pScope->i_data.i_array_p;
+  if ( (*i_array_p)->i_data_p != (SSInstance *)-32i64 )
+    UFG::TiDo::UnloadFilePackage(*(const char **)(*i_array_p)->i_data_p->i_user_data);
 }
 

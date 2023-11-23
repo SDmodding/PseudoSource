@@ -2,370 +2,346 @@
 // RVA: 0xE49E50
 void __fastcall Copier::~Copier(Copier *this)
 {
-  Copier *v1; // rbx
-  hkPackfileData *v2; // rcx
-  hkReferencedObject *v3; // rcx
-  int v4; // er8
-  int v5; // er8
+  hkPackfileData *m_pntr; // rcx
+  hkClassNameRegistry *v3; // rcx
+  int m_capacityAndFlags; // r8d
+  int v5; // r8d
   int v6; // eax
-  int v7; // er8
+  int v7; // r8d
 
-  v1 = this;
-  v2 = this->m_trackedData.m_pntr;
-  if ( v2 )
-    hkReferencedObject::removeReference((hkReferencedObject *)&v2->vfptr);
-  v1->m_trackedData.m_pntr = 0i64;
-  v3 = (hkReferencedObject *)&v1->m_classReg.m_pntr->vfptr;
+  m_pntr = this->m_trackedData.m_pntr;
+  if ( m_pntr )
+    hkReferencedObject::removeReference(m_pntr);
+  this->m_trackedData.m_pntr = 0i64;
+  v3 = this->m_classReg.m_pntr;
   if ( v3 )
     hkReferencedObject::removeReference(v3);
-  v1->m_classReg.m_pntr = 0i64;
-  v4 = v1->m_postFinishObjects.m_capacityAndFlags;
-  v1->m_postFinishObjects.m_size = 0;
-  if ( v4 >= 0 )
+  this->m_classReg.m_pntr = 0i64;
+  m_capacityAndFlags = this->m_postFinishObjects.m_capacityAndFlags;
+  this->m_postFinishObjects.m_size = 0;
+  if ( m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_postFinishObjects.m_data,
-      16 * v4);
-  v1->m_postFinishObjects.m_data = 0i64;
-  v1->m_postFinishObjects.m_capacityAndFlags = 2147483648;
-  v5 = v1->m_copyStack.m_capacityAndFlags;
-  v1->m_copyStack.m_size = 0;
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_postFinishObjects.m_data,
+      16 * m_capacityAndFlags);
+  this->m_postFinishObjects.m_data = 0i64;
+  this->m_postFinishObjects.m_capacityAndFlags = 0x80000000;
+  v5 = this->m_copyStack.m_capacityAndFlags;
+  this->m_copyStack.m_size = 0;
   if ( v5 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_copyStack.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_copyStack.m_data,
       16 * v5);
-  v1->m_copyStack.m_data = 0i64;
-  v1->m_copyStack.m_capacityAndFlags = 2147483648;
+  this->m_copyStack.m_data = 0i64;
+  this->m_copyStack.m_capacityAndFlags = 0x80000000;
   hkMapBase<hkDataObject_Handle,Copier::LiveObjectInfo,hkMapOperations<hkDataObject_Handle>>::clearAndDeallocate(
-    (hkMapBase<hkDataObject_Handle,Copier::LiveObjectInfo,hkMapOperations<hkDataObject_Handle> > *)&v1->m_liveInfoFromHandle.m_elem,
-    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr);
+    &this->m_liveInfoFromHandle,
+    &hkContainerHeapAllocator::s_alloc);
   hkMapBase<hkDataObject_Handle,int,`anonymous namespace::Writer::HandleOps>::clearAndDeallocate(
-    (hkMapBase<hkDataObject_Handle,int,HandleOps> *)&v1->m_pointerPatchesFromHandle.m_indexMap,
-    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr);
-  v6 = v1->m_pointerPatchesFromHandle.m_valueChain.m_capacityAndFlags;
-  v1->m_pointerPatchesFromHandle.m_valueChain.m_size = 0;
+    (hkMapBase<hkDataObject_Handle,int,HandleOps> *)&this->m_pointerPatchesFromHandle.m_indexMap,
+    &hkContainerHeapAllocator::s_alloc);
+  v6 = this->m_pointerPatchesFromHandle.m_valueChain.m_capacityAndFlags;
+  this->m_pointerPatchesFromHandle.m_valueChain.m_size = 0;
   if ( v6 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_pointerPatchesFromHandle.m_valueChain.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_pointerPatchesFromHandle.m_valueChain.m_data,
       24 * (v6 & 0x3FFFFFFF));
-  v1->m_pointerPatchesFromHandle.m_valueChain.m_data = 0i64;
-  v1->m_pointerPatchesFromHandle.m_valueChain.m_capacityAndFlags = 2147483648;
-  v7 = v1->m_todos.m_capacityAndFlags;
-  v1->m_todos.m_size = 0;
+  this->m_pointerPatchesFromHandle.m_valueChain.m_data = 0i64;
+  this->m_pointerPatchesFromHandle.m_valueChain.m_capacityAndFlags = 0x80000000;
+  v7 = this->m_todos.m_capacityAndFlags;
+  this->m_todos.m_size = 0;
   if ( v7 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v1->m_todos.m_data,
-      16 * v7);
-  v1->m_todos.m_capacityAndFlags = 2147483648;
-  v1->m_todos.m_data = 0i64;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, this->m_todos.m_data, 16 * v7);
+  this->m_todos.m_capacityAndFlags = 0x80000000;
+  this->m_todos.m_data = 0i64;
 }
 
 // File Line: 121
 // RVA: 0xE4ACD0
-void __fastcall Copier::markAsDone(Copier *this, hkDataObject_Handle *handle, hkVariant *v, int objectSize)
+void __fastcall Copier::markAsDone(Copier *this, hkVariant *handle, hkVariant *v, int objectSize)
 {
-  hkDataObject_Handle *v4; // r15
-  Copier *v5; // r13
-  int v6; // er14
-  int v7; // er12
-  hkVariant *v8; // rbx
+  int v6; // r14d
   int v9; // esi
   int i; // eax
-  signed __int64 v11; // rcx
-  hkSerializeMultiMap<hkDataObject_Handle,Copier::PointerPatch,hkMap<hkDataObject_Handle,int,hkMapOperations<hkDataObject_Handle>,hkContainerHeapAllocator> >::Value *v12; // rax
-  signed __int64 v13; // r8
+  __int64 v11; // rcx
+  hkSerializeMultiMap<hkDataObject_Handle,Copier::PointerPatch,hkMap<hkDataObject_Handle,int,hkMapOperations<hkDataObject_Handle>,hkContainerHeapAllocator> >::Value *m_data; // rax
+  __int64 v13; // r8
   __int64 v14; // rcx
   void **v15; // rdx
-  hkClass *v16; // rbx
+  hkClass *m_class; // rbx
   bool v17; // zf
-  signed int v18; // eax
-  hkDataObject_Handle v19; // [rsp+20h] [rbp-40h]
+  int v18; // eax
+  hkVariant v19; // [rsp+20h] [rbp-40h] BYREF
   __int64 v20; // [rsp+30h] [rbp-30h]
-  hkDataObject_Handle v21; // [rsp+40h] [rbp-20h]
-  __int64 v22; // [rsp+50h] [rbp-10h]
-  hkBool v23; // [rsp+A0h] [rbp+40h]
-  hkBool result; // [rsp+B8h] [rbp+58h]
+  Copier::LiveObjectInfo v21; // [rsp+40h] [rbp-20h] BYREF
+  hkBool v22; // [rsp+A0h] [rbp+40h] BYREF
+  hkBool result; // [rsp+B8h] [rbp+58h] BYREF
 
-  v4 = handle;
-  v5 = this;
   v6 = 0;
-  v7 = objectSize;
-  v8 = v;
   v9 = 0;
   v19 = *handle;
   for ( i = hkSerializeMultiMap<hkDataObject_Handle,Copier::PointerPatch,hkMap<hkDataObject_Handle,int,hkMapOperations<hkDataObject_Handle>,hkContainerHeapAllocator>>::getFirstIndex(
               &this->m_pointerPatchesFromHandle,
-              &v19); i != -1; i = *(int *)((char *)&v5->m_pointerPatchesFromHandle.m_valueChain.m_data->next + v13) )
+              (hkDataObject_Handle *)&v19);
+        i != -1;
+        i = *(int *)((char *)&this->m_pointerPatchesFromHandle.m_valueChain.m_data->next + v13) )
   {
     v11 = 3i64 * i;
-    v12 = v5->m_pointerPatchesFromHandle.m_valueChain.m_data;
+    m_data = this->m_pointerPatchesFromHandle.m_valueChain.m_data;
     v13 = 8 * v11;
-    v14 = *(_QWORD *)&v12[(unsigned __int64)v11 / 3].value.m_isVariant.m_bool;
-    v15 = *(void ***)((char *)&v12->value.m_addr + v13);
-    *v15 = v8->m_object;
+    v14 = *(_QWORD *)&m_data[(unsigned __int64)v11 / 3].value.m_isVariant.m_bool;
+    v15 = *(void ***)((char *)&m_data->value.m_addr + v13);
+    *v15 = v->m_object;
     if ( (_BYTE)v14 )
-      v15[1] = v8->m_class;
+      v15[1] = v->m_class;
     v9 += BYTE1(v14) != 0;
   }
-  v19 = *v4;
+  v19 = *handle;
   hkSerializeMultiMap<hkDataObject_Handle,Copier::PointerPatch,hkMap<hkDataObject_Handle,int,hkMapOperations<hkDataObject_Handle>,hkContainerHeapAllocator>>::removeKey(
-    &v5->m_pointerPatchesFromHandle,
-    &v19);
-  v19 = (hkDataObject_Handle)*v8;
-  v16 = (hkClass *)v19.p1;
-  if ( !hkClass::hasVtable((hkClass *)v19.p1, &result)->m_bool
-    || (v17 = hkClass::isSuperClass(&hkReferencedObjectClass, &v23, v16)->m_bool == 0, v18 = 1, v17) )
+    &this->m_pointerPatchesFromHandle,
+    (hkDataObject_Handle *)&v19);
+  v19 = *v;
+  m_class = v19.m_class;
+  if ( !hkClass::hasVtable(v19.m_class, &result)->m_bool
+    || (v17 = hkClass::isSuperClass(&hkReferencedObjectClass, &v22, m_class)->m_bool == 0, v18 = 1, v17) )
   {
     v18 = 0;
   }
-  HIDWORD(v20) = v7;
+  HIDWORD(v20) = objectSize;
   if ( v18 )
     v6 = v9;
   LODWORD(v20) = v6;
-  v21 = v19;
-  v19 = *v4;
-  v22 = v20;
+  v21.m_variant = v19;
+  v19 = *handle;
+  *(_QWORD *)&v21.m_refCount = v20;
   hkMapBase<hkDataObject_Handle,Copier::LiveObjectInfo,hkMapOperations<hkDataObject_Handle>>::insert(
-    (hkMapBase<hkDataObject_Handle,Copier::LiveObjectInfo,hkMapOperations<hkDataObject_Handle> > *)&v5->m_liveInfoFromHandle.m_elem,
-    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-    &v19,
-    (Copier::LiveObjectInfo *)&v21);
+    &this->m_liveInfoFromHandle,
+    &hkContainerHeapAllocator::s_alloc,
+    (hkDataObject_Handle *)&v19,
+    &v21);
 }
 
 // File Line: 153
 // RVA: 0xE4B400
-hkResult *__fastcall Copier::resolvePointer(Copier *this, hkResult *result, Copier::PointerPatch *patch, hkDataObject_Handle *handle)
+hkResult *__fastcall Copier::resolvePointer(
+        Copier *this,
+        hkResult *result,
+        Copier::PointerPatch *patch,
+        hkDataObject_Handle *handle)
 {
-  hkDataObject_Handle *v4; // rdi
-  Copier::PointerPatch *v5; // rsi
-  hkResult *v6; // r15
-  Copier *v7; // rbx
-  __int64 v8; // r8
-  int v9; // er10
+  __int64 m_size; // r8
+  int v9; // r10d
   __int64 v10; // r9
-  hkDataObject_Handle *v11; // rcx
-  int v12; // eax
+  hkDataObject_Handle *m_data; // rcx
+  int Key; // eax
   bool v13; // zf
-  signed __int64 v14; // rcx
-  hkMapBase<hkDataObject_Handle,Copier::LiveObjectInfo,hkMapOperations<hkDataObject_Handle> >::Pair *v15; // rax
-  void *v16; // rdx
-  hkClass *v17; // r8
-  _QWORD *v18; // rax
+  __int64 v14; // rcx
+  hkMapBase<hkDataObject_Handle,Copier::LiveObjectInfo,hkMapOperations<hkDataObject_Handle> >::Pair *m_elem; // rax
+  void *m_object; // rdx
+  hkClass *m_class; // r8
+  _QWORD *m_addr; // rax
   hkMapBase<hkDataObject_Handle,Copier::LiveObjectInfo,hkMapOperations<hkDataObject_Handle> >::Pair *v19; // rax
-  signed __int64 v20; // rcx
+  hkMapBase<hkDataObject_Handle,Copier::LiveObjectInfo,hkMapOperations<hkDataObject_Handle> >::Pair *v20; // rcx
   __int64 v21; // rax
   hkDataObject_Handle *v22; // rcx
-  int v23; // eax
+  int FirstIndex; // eax
   hkSerializeMultiMap<hkDataObject_Handle,Copier::PointerPatch,hkMap<hkDataObject_Handle,int,hkMapOperations<hkDataObject_Handle>,hkContainerHeapAllocator> >::Value *v24; // r8
   hkDataObject_Handle *v25; // rdx
-  hkDataObject_Handle v27; // [rsp+20h] [rbp-28h]
+  hkDataObject_Handle v27; // [rsp+20h] [rbp-28h] BYREF
   __int64 v28; // [rsp+30h] [rbp-18h]
 
-  v4 = handle;
-  v5 = patch;
-  v6 = result;
-  v7 = this;
   if ( !this->m_allocatedOnHeap )
     goto LABEL_8;
   if ( !patch->m_isOwning.m_bool )
     goto LABEL_8;
-  v8 = this->m_copyStack.m_size;
+  m_size = this->m_copyStack.m_size;
   v9 = 0;
   v10 = 0i64;
-  if ( v8 <= 0 )
+  if ( m_size <= 0 )
     goto LABEL_8;
-  v11 = this->m_copyStack.m_data;
-  while ( v11->p0 != v4->p0 || v11->p1 != v4->p1 )
+  m_data = this->m_copyStack.m_data;
+  while ( m_data->p0 != handle->p0 || m_data->p1 != handle->p1 )
   {
     ++v10;
     ++v9;
-    ++v11;
-    if ( v10 >= v8 )
+    ++m_data;
+    if ( v10 >= m_size )
       goto LABEL_8;
   }
   if ( v9 == -1 )
   {
 LABEL_8:
-    v27 = *v4;
-    v12 = (unsigned __int64)hkMapBase<hkDataObject_Handle,Copier::LiveObjectInfo,hkMapOperations<hkDataObject_Handle>>::findKey(
-                              (hkMapBase<hkDataObject_Handle,Copier::LiveObjectInfo,hkMapOperations<hkDataObject_Handle> > *)&v7->m_liveInfoFromHandle.m_elem,
-                              &v27);
-    if ( v12 <= v7->m_liveInfoFromHandle.m_hashMod )
+    v27 = *handle;
+    Key = (unsigned int)hkMapBase<hkDataObject_Handle,Copier::LiveObjectInfo,hkMapOperations<hkDataObject_Handle>>::findKey(
+                          &this->m_liveInfoFromHandle,
+                          &v27);
+    if ( Key <= this->m_liveInfoFromHandle.m_hashMod )
     {
-      v13 = v5->m_isVariant.m_bool == 0;
-      v14 = v12;
-      v15 = v7->m_liveInfoFromHandle.m_elem;
-      v16 = v15[v14].val.m_variant.m_object;
-      v17 = v15[v14].val.m_variant.m_class;
-      v28 = *(_QWORD *)&v15[v14].val.m_refCount;
-      v18 = v5->m_addr;
-      *(_QWORD *)v5->m_addr = v16;
+      v13 = patch->m_isVariant.m_bool == 0;
+      v14 = Key;
+      m_elem = this->m_liveInfoFromHandle.m_elem;
+      m_object = m_elem[v14].val.m_variant.m_object;
+      m_class = m_elem[v14].val.m_variant.m_class;
+      v28 = *(_QWORD *)&m_elem[v14].val.m_refCount;
+      m_addr = patch->m_addr;
+      *(_QWORD *)patch->m_addr = m_object;
       if ( !v13 )
-        v18[1] = v17;
-      LODWORD(v28) = (v5->m_isOwning.m_bool != 0) + (_DWORD)v28;
-      v19 = v7->m_liveInfoFromHandle.m_elem;
-      v19[v14].val.m_variant.m_object = v16;
-      v20 = (signed __int64)&v19[v14];
+        m_addr[1] = m_class;
+      LODWORD(v28) = (patch->m_isOwning.m_bool != 0) + (_DWORD)v28;
+      v19 = this->m_liveInfoFromHandle.m_elem;
+      v19[v14].val.m_variant.m_object = m_object;
+      v20 = &v19[v14];
       v21 = v28;
-      *(_QWORD *)(v20 + 24) = v17;
-      *(_QWORD *)(v20 + 32) = v21;
+      v20->val.m_variant.m_class = m_class;
+      *(_QWORD *)&v20->val.m_refCount = v21;
       goto LABEL_33;
     }
-    v27 = *v4;
+    v27 = *handle;
     if ( hkSerializeMultiMap<hkDataObject_Handle,Copier::PointerPatch,hkMap<hkDataObject_Handle,int,hkMapOperations<hkDataObject_Handle>,hkContainerHeapAllocator>>::getFirstIndex(
-           &v7->m_pointerPatchesFromHandle,
+           &this->m_pointerPatchesFromHandle,
            &v27) == -1 )
     {
-      if ( !v5->m_isOwning.m_bool )
+      if ( patch->m_isOwning.m_bool )
       {
-LABEL_32:
-        v27 = *v4;
-        hkSerializeMultiMap<hkDataObject_Handle,Copier::PointerPatch,hkMap<hkDataObject_Handle,int,hkMapOperations<hkDataObject_Handle>,hkContainerHeapAllocator>>::insert(
-          &v7->m_pointerPatchesFromHandle,
-          &v27,
-          v5);
-LABEL_33:
-        v6->m_enum = 0;
-        return v6;
-      }
-      if ( v7->m_todos.m_size == (v7->m_todos.m_capacityAndFlags & 0x3FFFFFFF) )
-        hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v7, 16);
-      v22 = &v7->m_todos.m_data[v7->m_todos.m_size];
-      if ( v22 )
-      {
-        v22->p0 = v4->p0;
-        v22->p1 = v4->p1;
+        if ( this->m_todos.m_size == (this->m_todos.m_capacityAndFlags & 0x3FFFFFFF) )
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&this->m_todos.m_data, 16);
+        v22 = &this->m_todos.m_data[this->m_todos.m_size];
+        if ( v22 )
+        {
+          v22->p0 = handle->p0;
+          v22->p1 = handle->p1;
+        }
+LABEL_31:
+        ++this->m_todos.m_size;
       }
     }
-    else
+    else if ( patch->m_isOwning.m_bool )
     {
-      if ( !v5->m_isOwning.m_bool )
-        goto LABEL_32;
-      v27 = *v4;
-      v23 = hkSerializeMultiMap<hkDataObject_Handle,Copier::PointerPatch,hkMap<hkDataObject_Handle,int,hkMapOperations<hkDataObject_Handle>,hkContainerHeapAllocator>>::getFirstIndex(
-              &v7->m_pointerPatchesFromHandle,
-              &v27);
-      if ( v23 != -1 )
+      v27 = *handle;
+      FirstIndex = hkSerializeMultiMap<hkDataObject_Handle,Copier::PointerPatch,hkMap<hkDataObject_Handle,int,hkMapOperations<hkDataObject_Handle>,hkContainerHeapAllocator>>::getFirstIndex(
+                     &this->m_pointerPatchesFromHandle,
+                     &v27);
+      if ( FirstIndex != -1 )
       {
-        v24 = v7->m_pointerPatchesFromHandle.m_valueChain.m_data;
-        while ( !v24[v23].value.m_isOwning.m_bool )
+        v24 = this->m_pointerPatchesFromHandle.m_valueChain.m_data;
+        while ( !v24[FirstIndex].value.m_isOwning.m_bool )
         {
-          v23 = v24[v23].next;
-          if ( v23 == -1 )
+          FirstIndex = v24[FirstIndex].next;
+          if ( FirstIndex == -1 )
             goto LABEL_27;
         }
-        if ( v23 != -1 )
-          goto LABEL_32;
+        goto LABEL_32;
       }
 LABEL_27:
-      if ( v7->m_todos.m_size == (v7->m_todos.m_capacityAndFlags & 0x3FFFFFFF) )
-        hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v7, 16);
-      v25 = &v7->m_todos.m_data[v7->m_todos.m_size];
+      if ( this->m_todos.m_size == (this->m_todos.m_capacityAndFlags & 0x3FFFFFFF) )
+        hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&this->m_todos.m_data, 16);
+      v25 = &this->m_todos.m_data[this->m_todos.m_size];
       if ( v25 )
       {
-        v25->p0 = v4->p0;
-        v25->p1 = v4->p1;
+        v25->p0 = handle->p0;
+        v25->p1 = handle->p1;
       }
+      goto LABEL_31;
     }
-    ++v7->m_todos.m_size;
-    goto LABEL_32;
+LABEL_32:
+    v27 = *handle;
+    hkSerializeMultiMap<hkDataObject_Handle,Copier::PointerPatch,hkMap<hkDataObject_Handle,int,hkMapOperations<hkDataObject_Handle>,hkContainerHeapAllocator>>::insert(
+      &this->m_pointerPatchesFromHandle,
+      &v27,
+      patch);
+LABEL_33:
+    result->m_enum = HK_SUCCESS;
+    return result;
   }
-  result->m_enum = 1;
-  return v6;
+  result->m_enum = HK_FAILURE;
+  return result;
 }
 
 // File Line: 215
 // RVA: 0xE4A740
 void __fastcall Copier::finishAndTrackObjectsInPackfile(Copier *this, hkPackfileData *trackedData)
 {
-  int v2; // er9
-  Copier *v3; // rsi
-  __int64 v4; // rcx
-  hkPackfileData *v5; // r15
+  int v2; // r9d
+  __int64 m_hashMod; // rcx
   __int64 v6; // r8
-  hkMapBase<hkDataObject_Handle,Copier::LiveObjectInfo,hkMapOperations<hkDataObject_Handle> >::Pair *v7; // rax
+  hkMapBase<hkDataObject_Handle,Copier::LiveObjectInfo,hkMapOperations<hkDataObject_Handle> >::Pair *m_elem; // rax
   int v8; // edi
   hkMapBase<hkDataObject_Handle,Copier::LiveObjectInfo,hkMapOperations<hkDataObject_Handle> >::Pair *v9; // rax
-  hkClass *v10; // rbp
-  unsigned __int64 v11; // r14
-  __int64 v12; // ST30_8
-  const char *v13; // rax
-  _QWORD *v14; // rax
-  __int64 v15; // r10
-  int v16; // er9
-  __int64 v17; // rax
-  hkMapBase<hkDataObject_Handle,Copier::LiveObjectInfo,hkMapOperations<hkDataObject_Handle> >::Pair *v18; // r8
+  hkClass *m_class; // rbp
+  unsigned __int64 m_object; // r14
+  const char *Name; // rax
+  hkVariant *v13; // rax
+  __int64 v14; // r10
+  int v15; // r9d
+  __int64 v16; // rax
+  hkMapBase<hkDataObject_Handle,Copier::LiveObjectInfo,hkMapOperations<hkDataObject_Handle> >::Pair *v17; // r8
 
   v2 = 0;
-  v3 = this;
-  v4 = this->m_liveInfoFromHandle.m_hashMod;
-  v5 = trackedData;
+  m_hashMod = this->m_liveInfoFromHandle.m_hashMod;
   v6 = 0i64;
-  if ( v4 >= 0 )
+  if ( m_hashMod >= 0 )
   {
-    v7 = v3->m_liveInfoFromHandle.m_elem;
+    m_elem = this->m_liveInfoFromHandle.m_elem;
     do
     {
-      if ( v7->key.p0 != (void *)-1i64 )
+      if ( m_elem->key.p0 != (void *)-1i64 )
         break;
       ++v6;
       ++v2;
-      ++v7;
+      ++m_elem;
     }
-    while ( v6 <= v4 );
+    while ( v6 <= m_hashMod );
   }
   v8 = v2;
-  if ( v2 <= v3->m_liveInfoFromHandle.m_hashMod )
+  if ( v2 <= this->m_liveInfoFromHandle.m_hashMod )
   {
     do
     {
-      v9 = v3->m_liveInfoFromHandle.m_elem;
-      v10 = v9[v8].val.m_variant.m_class;
-      v11 = (unsigned __int64)v9[v8].val.m_variant.m_object;
-      v12 = *(_QWORD *)&v9[v8].val.m_refCount;
-      v13 = hkClass::getName(v10);
+      v9 = this->m_liveInfoFromHandle.m_elem;
+      m_class = v9[v8].val.m_variant.m_class;
+      m_object = (unsigned __int64)v9[v8].val.m_variant.m_object;
+      Name = hkClass::getName(m_class);
       hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::insert(
-        (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&v5->m_trackedObjects.m_map.m_elem,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        v11,
-        (unsigned __int64)v13);
-      if ( hkClass::getAttribute(v10, "hk.PostFinish") )
+        &trackedData->m_trackedObjects.m_map,
+        &hkContainerHeapAllocator::s_alloc,
+        m_object,
+        (unsigned __int64)Name);
+      if ( hkClass::getAttribute(m_class, "hk.PostFinish") )
       {
-        if ( v5->m_postFinishObjects.m_size == (v5->m_postFinishObjects.m_capacityAndFlags & 0x3FFFFFFF) )
+        if ( trackedData->m_postFinishObjects.m_size == (trackedData->m_postFinishObjects.m_capacityAndFlags & 0x3FFFFFFF) )
           hkArrayUtil::_reserveMore(
-            (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-            &v5->m_postFinishObjects,
+            &hkContainerHeapAllocator::s_alloc,
+            (const void **)&trackedData->m_postFinishObjects.m_data,
             16);
-        v14 = &v5->m_postFinishObjects.m_data[v5->m_postFinishObjects.m_size].m_object;
-        if ( v14 )
+        v13 = &trackedData->m_postFinishObjects.m_data[trackedData->m_postFinishObjects.m_size];
+        if ( v13 )
         {
-          *v14 = v11;
-          v14[1] = v10;
+          v13->m_object = (void *)m_object;
+          v13->m_class = m_class;
         }
-        ++v5->m_postFinishObjects.m_size;
+        ++trackedData->m_postFinishObjects.m_size;
       }
-      v15 = v3->m_liveInfoFromHandle.m_hashMod;
+      v14 = this->m_liveInfoFromHandle.m_hashMod;
+      v15 = v8 + 1;
       v16 = v8 + 1;
-      v17 = v8 + 1;
-      if ( v17 <= v15 )
+      if ( v16 <= v14 )
       {
-        v18 = &v3->m_liveInfoFromHandle.m_elem[v16];
+        v17 = &this->m_liveInfoFromHandle.m_elem[v15];
         do
         {
-          if ( v18->key.p0 != (void *)-1i64 )
+          if ( v17->key.p0 != (void *)-1i64 )
             break;
-          ++v17;
           ++v16;
-          ++v18;
+          ++v15;
+          ++v17;
         }
-        while ( v17 <= v15 );
+        while ( v16 <= v14 );
       }
-      v8 = v16;
+      v8 = v15;
     }
-    while ( v16 <= v3->m_liveInfoFromHandle.m_hashMod );
+    while ( v15 <= this->m_liveInfoFromHandle.m_hashMod );
   }
 }
 
@@ -373,89 +349,83 @@ void __fastcall Copier::finishAndTrackObjectsInPackfile(Copier *this, hkPackfile
 // RVA: 0xE4A5C0
 void __fastcall Copier::finishAndRefcountLiveObjects(Copier *this, hkTypeInfoRegistry *typeReg)
 {
-  int v2; // er9
-  Copier *v3; // rsi
-  __int64 v4; // rcx
-  hkTypeInfoRegistry *v5; // r12
+  int v2; // r9d
+  __int64 m_hashMod; // rcx
   __int64 v6; // r8
-  hkMapBase<hkDataObject_Handle,Copier::LiveObjectInfo,hkMapOperations<hkDataObject_Handle> >::Pair *v7; // rax
+  hkMapBase<hkDataObject_Handle,Copier::LiveObjectInfo,hkMapOperations<hkDataObject_Handle> >::Pair *m_elem; // rax
   int v8; // ebp
   hkMapBase<hkDataObject_Handle,Copier::LiveObjectInfo,hkMapOperations<hkDataObject_Handle> >::Pair *v9; // rax
   __int64 v10; // r15
-  hkClass *v11; // r14
-  _WORD *v12; // rdi
+  hkClass *m_class; // r14
+  _WORD *m_object; // rdi
   hkVariant *v13; // rax
-  __int16 v14; // ax
-  hkBaseObjectVtbl *v15; // rbx
-  const char *v16; // rax
+  __int16 ObjectSize; // ax
+  hkBaseObjectVtbl *vfptr; // rbx
+  const char *Name; // rax
   __int64 v17; // r10
-  int v18; // er9
+  int v18; // r9d
   __int64 v19; // rax
   hkMapBase<hkDataObject_Handle,Copier::LiveObjectInfo,hkMapOperations<hkDataObject_Handle> >::Pair *v20; // r8
-  __int64 v21; // [rsp+30h] [rbp-38h]
-  hkBool result; // [rsp+70h] [rbp+8h]
+  hkBool result; // [rsp+70h] [rbp+8h] BYREF
 
   v2 = 0;
-  v3 = this;
-  v4 = this->m_liveInfoFromHandle.m_hashMod;
-  v5 = typeReg;
+  m_hashMod = this->m_liveInfoFromHandle.m_hashMod;
   v6 = 0i64;
-  if ( v4 >= 0 )
+  if ( m_hashMod >= 0 )
   {
-    v7 = v3->m_liveInfoFromHandle.m_elem;
+    m_elem = this->m_liveInfoFromHandle.m_elem;
     do
     {
-      if ( v7->key.p0 != (void *)-1i64 )
+      if ( m_elem->key.p0 != (void *)-1i64 )
         break;
       ++v6;
       ++v2;
-      ++v7;
+      ++m_elem;
     }
-    while ( v6 <= v4 );
+    while ( v6 <= m_hashMod );
   }
   v8 = v2;
-  if ( v2 <= v3->m_liveInfoFromHandle.m_hashMod )
+  if ( v2 <= this->m_liveInfoFromHandle.m_hashMod )
   {
     do
     {
-      v9 = v3->m_liveInfoFromHandle.m_elem;
+      v9 = this->m_liveInfoFromHandle.m_elem;
       v10 = *(_QWORD *)&v9[v8].val.m_refCount;
-      v11 = v9[v8].val.m_variant.m_class;
-      v12 = v9[v8].val.m_variant.m_object;
-      v21 = *(_QWORD *)&v9[v8].val.m_refCount;
-      if ( hkClass::getAttribute(v9[v8].val.m_variant.m_class, "hk.PostFinish") )
+      m_class = v9[v8].val.m_variant.m_class;
+      m_object = v9[v8].val.m_variant.m_object;
+      if ( hkClass::getAttribute(m_class, "hk.PostFinish") )
       {
-        if ( v3->m_postFinishObjects.m_size == (v3->m_postFinishObjects.m_capacityAndFlags & 0x3FFFFFFF) )
+        if ( this->m_postFinishObjects.m_size == (this->m_postFinishObjects.m_capacityAndFlags & 0x3FFFFFFF) )
           hkArrayUtil::_reserveMore(
-            (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-            &v3->m_postFinishObjects,
+            &hkContainerHeapAllocator::s_alloc,
+            (const void **)&this->m_postFinishObjects.m_data,
             16);
-        v13 = &v3->m_postFinishObjects.m_data[v3->m_postFinishObjects.m_size];
+        v13 = &this->m_postFinishObjects.m_data[this->m_postFinishObjects.m_size];
         if ( v13 )
         {
-          v13->m_object = v12;
-          v13->m_class = v11;
+          v13->m_object = m_object;
+          v13->m_class = m_class;
         }
-        ++v3->m_postFinishObjects.m_size;
+        ++this->m_postFinishObjects.m_size;
       }
-      if ( (signed __int16)v10 > 0 )
+      if ( (__int16)v10 > 0 )
       {
-        v14 = WORD2(v21);
-        if ( SHIDWORD(v21) <= -1 )
-          v14 = hkClass::getObjectSize(v11);
-        v12[4] = v14;
-        v12[5] = v10;
+        ObjectSize = WORD2(v10);
+        if ( SHIDWORD(v10) <= -1 )
+          ObjectSize = hkClass::getObjectSize(m_class);
+        m_object[4] = ObjectSize;
+        m_object[5] = v10;
       }
-      v15 = v5->vfptr;
-      v16 = hkClass::getName(v11);
-      ((void (__fastcall *)(hkTypeInfoRegistry *, _WORD *, const char *))v15[2].__vecDelDtor)(v5, v12, v16);
-      hkClass::hasVtable(v11, &result);
-      v17 = v3->m_liveInfoFromHandle.m_hashMod;
+      vfptr = typeReg->vfptr;
+      Name = hkClass::getName(m_class);
+      ((void (__fastcall *)(hkTypeInfoRegistry *, _WORD *, const char *))vfptr[2].__vecDelDtor)(typeReg, m_object, Name);
+      hkClass::hasVtable(m_class, &result);
+      v17 = this->m_liveInfoFromHandle.m_hashMod;
       v18 = v8 + 1;
       v19 = v8 + 1;
       if ( v19 <= v17 )
       {
-        v20 = &v3->m_liveInfoFromHandle.m_elem[v18];
+        v20 = &this->m_liveInfoFromHandle.m_elem[v18];
         do
         {
           if ( v20->key.p0 != (void *)-1i64 )
@@ -468,7 +438,7 @@ void __fastcall Copier::finishAndRefcountLiveObjects(Copier *this, hkTypeInfoReg
       }
       v8 = v18;
     }
-    while ( v18 <= v3->m_liveInfoFromHandle.m_hashMod );
+    while ( v18 <= this->m_liveInfoFromHandle.m_hashMod );
   }
 }
 
@@ -476,318 +446,291 @@ void __fastcall Copier::finishAndRefcountLiveObjects(Copier *this, hkTypeInfoReg
 // RVA: 0xE4AE10
 void __fastcall Copier::postFinishObjects(Copier *this)
 {
-  hkVariant *v1; // rbx
-  Copier *v2; // rsi
-  void *v3; // rdi
-  hkVariant *v4; // rax
+  hkVariant *m_data; // rbx
+  void *m_object; // rdi
+  hkVariant *Attribute; // rax
 
-  v1 = this->m_postFinishObjects.m_data;
-  v2 = this;
-  if ( v1 < &v1[this->m_postFinishObjects.m_size] )
+  m_data = this->m_postFinishObjects.m_data;
+  if ( m_data < &m_data[this->m_postFinishObjects.m_size] )
   {
     do
     {
-      v3 = v1->m_object;
-      v4 = hkClass::getAttribute(v1->m_class, "hk.PostFinish");
-      (*(void (__fastcall **)(void *))v4->m_object)(v3);
-      ++v1;
+      m_object = m_data->m_object;
+      Attribute = hkClass::getAttribute(m_data->m_class, "hk.PostFinish");
+      (*(void (__fastcall **)(void *))Attribute->m_object)(m_object);
+      ++m_data;
     }
-    while ( v1 < &v2->m_postFinishObjects.m_data[v2->m_postFinishObjects.m_size] );
+    while ( m_data < &this->m_postFinishObjects.m_data[this->m_postFinishObjects.m_size] );
   }
 }
 
 // File Line: 299
 // RVA: 0xE4AE80
-hkResult *__fastcall Copier::processPointersAndAllocations(Copier *this, hkResult *result, hkDataObjectToNative::CopyInfoOut *infoOut)
+hkResult *__fastcall Copier::processPointersAndAllocations(
+        Copier *this,
+        hkResult *result,
+        hkDataObjectToNative::CopyInfoOut *infoOut)
 {
   int v3; // edi
-  hkDataObjectToNative::CopyInfoOut *v4; // rsi
-  hkResult *v5; // r15
-  Copier *v6; // r13
   __int64 v7; // r14
-  hkDataObjectToNative::Alloc *v8; // rcx
-  hkPackfileData *v9; // rbx
-  void *v10; // rbp
-  int v11; // eax
+  hkDataObjectToNative::Alloc *m_data; // rcx
+  hkPackfileData *m_pntr; // rbx
+  void *m_addr; // rbp
+  int m_capacityAndFlags; // eax
   hkPackfileData::Chunk *v12; // rcx
   __int64 v13; // rax
   int v14; // ebx
   __int64 v15; // rdi
   hkDataObjectToNative::PointerInfo *v16; // r9
-  hkResult *v17; // rax
-  Copier::PointerPatch patch; // [rsp+20h] [rbp-38h]
-  hkResult resulta; // [rsp+70h] [rbp+18h]
+  Copier::PointerPatch patch; // [rsp+20h] [rbp-38h] BYREF
+  hkResult resulta; // [rsp+70h] [rbp+18h] BYREF
 
   v3 = 0;
-  v4 = infoOut;
-  v5 = result;
-  v6 = this;
   if ( infoOut->allocs.m_size > 0 )
   {
     v7 = 0i64;
     do
     {
-      v8 = v4->allocs.m_data;
-      v9 = v6->m_trackedData.m_pntr;
-      v10 = v8[v7].m_addr;
-      if ( v8[v7].m_size == -1 )
+      m_data = infoOut->allocs.m_data;
+      m_pntr = this->m_trackedData.m_pntr;
+      m_addr = m_data[v7].m_addr;
+      if ( m_data[v7].m_size == -1 )
       {
-        if ( v9->m_memory.m_size == (v9->m_memory.m_capacityAndFlags & 0x3FFFFFFF) )
-          hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v9->m_memory, 8);
-        v9->m_memory.m_data[v9->m_memory.m_size++] = v10;
+        if ( m_pntr->m_memory.m_size == (m_pntr->m_memory.m_capacityAndFlags & 0x3FFFFFFF) )
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&m_pntr->m_memory.m_data, 8);
+        m_pntr->m_memory.m_data[m_pntr->m_memory.m_size++] = m_addr;
       }
       else
       {
-        *(_DWORD *)&patch.m_isVariant.m_bool = v8[v7].m_size;
-        v11 = v9->m_chunks.m_capacityAndFlags;
+        *(_DWORD *)&patch.m_isVariant.m_bool = m_data[v7].m_size;
+        m_capacityAndFlags = m_pntr->m_chunks.m_capacityAndFlags;
         *(_DWORD *)(&patch.m_isOwning + 3) = 7;
-        if ( v9->m_chunks.m_size == (v11 & 0x3FFFFFFF) )
-          hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v9->m_chunks, 16);
-        v12 = &v9->m_chunks.m_data[v9->m_chunks.m_size];
+        if ( m_pntr->m_chunks.m_size == (m_capacityAndFlags & 0x3FFFFFFF) )
+          hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&m_pntr->m_chunks.m_data, 16);
+        v12 = &m_pntr->m_chunks.m_data[m_pntr->m_chunks.m_size];
         if ( v12 )
         {
           v13 = *(_QWORD *)&patch.m_isVariant.m_bool;
-          v12->pointer = v10;
+          v12->pointer = m_addr;
           *(_QWORD *)&v12->numBytes = v13;
         }
-        ++v9->m_chunks.m_size;
+        ++m_pntr->m_chunks.m_size;
       }
       ++v3;
       ++v7;
     }
-    while ( v3 < v4->allocs.m_size );
+    while ( v3 < infoOut->allocs.m_size );
   }
   v14 = 0;
-  if ( v4->pointersOut.m_size <= 0 )
+  if ( infoOut->pointersOut.m_size <= 0 )
   {
 LABEL_17:
-    v5->m_enum = 0;
-    v17 = v5;
+    result->m_enum = HK_SUCCESS;
+    return result;
   }
   else
   {
     v15 = 0i64;
     while ( 1 )
     {
-      v16 = &v4->pointersOut.m_data[v15];
-      patch.m_addr = v16->m_addr;
-      patch.m_isVariant.m_bool = v16->m_isVariant.m_bool;
-      patch.m_isOwning.m_bool = v16->m_isOwning.m_bool;
-      if ( Copier::resolvePointer(v6, &resulta, &patch, &v16->m_handle)->m_enum == 1 )
+      v16 = &infoOut->pointersOut.m_data[v15];
+      patch = *(Copier::PointerPatch *)&v16->m_addr;
+      if ( Copier::resolvePointer(this, &resulta, &patch, &v16->m_handle)->m_enum == HK_FAILURE )
         break;
       ++v14;
       ++v15;
-      if ( v14 >= v4->pointersOut.m_size )
+      if ( v14 >= infoOut->pointersOut.m_size )
         goto LABEL_17;
     }
-    v5->m_enum = 1;
-    v17 = v5;
+    result->m_enum = HK_FAILURE;
+    return result;
   }
-  return v17;
 }
 
 // File Line: 337
 // RVA: 0xE4A160
 hkVariant *__fastcall Copier::deepCopyToNative(Copier *this, hkVariant *result, hkDataObject *topObj)
 {
-  Copier *v3; // rdi
-  hkDataObject *v4; // rbx
-  hkVariant *v5; // rsi
   __int64 v6; // rax
   __int64 v7; // rax
   __int64 v8; // r14
-  hkDataObjectImpl *v9; // rcx
-  void **v10; // rcx
-  int v11; // edx
-  hkDataObject_Handle *v12; // rax
-  void *v13; // r8
+  hkDataObjectImpl *m_impl; // rcx
+  hkDataObject_Handle *v10; // rcx
+  int m_size; // edx
+  hkDataObject_Handle *m_data; // rax
+  void *p0; // r8
   hkDataObject_Handle *v14; // rcx
   hkDataObject_Handle *v15; // rax
-  signed __int64 v16; // rcx
-  int v17; // er9
-  __int64 v18; // rcx
+  __int64 v16; // rcx
+  int v17; // r9d
+  hkDataObjectToNative::Alloc *v18; // rcx
   hkDataObjectImpl *v19; // rcx
   bool v20; // zf
   hkDataObjectImpl *v22; // rcx
-  Copier::PointerPatch patch; // [rsp+30h] [rbp-39h]
-  void *v24; // [rsp+40h] [rbp-29h]
+  Copier::PointerPatch patch; // [rsp+30h] [rbp-39h] BYREF
+  void *v24; // [rsp+40h] [rbp-29h] BYREF
   hkClass *v25; // [rsp+48h] [rbp-21h]
-  hkDataObject_Handle handle; // [rsp+50h] [rbp-19h]
-  hkDataObjectToNative v27; // [rsp+60h] [rbp-9h]
-  __int128 v28; // [rsp+70h] [rbp+7h]
-  void *array; // [rsp+80h] [rbp+17h]
-  int v30; // [rsp+88h] [rbp+1Fh]
-  int v31; // [rsp+8Ch] [rbp+23h]
-  char *v32; // [rsp+90h] [rbp+27h]
-  int v33; // [rsp+98h] [rbp+2Fh]
-  int v34; // [rsp+9Ch] [rbp+33h]
-  hkResult resulta; // [rsp+D0h] [rbp+67h]
-  hkResult v36; // [rsp+E0h] [rbp+77h]
-  hkDataObject obj; // [rsp+E8h] [rbp+7Fh]
+  hkDataObject_Handle handle; // [rsp+50h] [rbp-19h] BYREF
+  hkDataObjectToNative v27; // [rsp+60h] [rbp-9h] BYREF
+  hkDataObject_Handle v28; // [rsp+70h] [rbp+7h] BYREF
+  hkDataObjectToNative::CopyInfoOut array[2]; // [rsp+80h] [rbp+17h] BYREF
+  hkResult resulta; // [rsp+D0h] [rbp+67h] BYREF
+  hkResult v31; // [rsp+E0h] [rbp+77h] BYREF
+  hkDataObject obj; // [rsp+E8h] [rbp+7Fh] BYREF
 
-  v3 = this;
-  v4 = topObj;
-  v5 = result;
-  v6 = ((__int64 (*)(void))topObj->m_impl->vfptr[2].__vecDelDtor)();
+  v6 = ((__int64 (__fastcall *)(hkDataObjectImpl *))topObj->m_impl->vfptr[2].__vecDelDtor)(topObj->m_impl);
   v7 = (*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v6 + 8i64))(v6);
-  v27.m_classReg = v3->m_classReg.m_pntr;
-  v27.m_allocatedOnHeap = v3->m_allocatedOnHeap;
+  v27.m_classReg = this->m_classReg.m_pntr;
+  v27.m_allocatedOnHeap = this->m_allocatedOnHeap;
   v8 = v7;
-  array = 0i64;
-  v30 = 0;
-  v31 = 2147483648;
-  v32 = 0i64;
-  v33 = 0;
-  v34 = 2147483648;
-  hkArrayUtil::_reserve(&resulta, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, &array, 32, 32);
-  v9 = v4->m_impl;
+  array[0].pointersOut.m_data = 0i64;
+  array[0].pointersOut.m_size = 0;
+  array[0].pointersOut.m_capacityAndFlags = 0x80000000;
+  array[0].allocs.m_data = 0i64;
+  array[0].allocs.m_size = 0;
+  array[0].allocs.m_capacityAndFlags = 0x80000000;
+  hkArrayUtil::_reserve(
+    &resulta,
+    &hkContainerTempAllocator::s_alloc,
+    (const void **)&array[0].pointersOut.m_data,
+    32,
+    32);
+  m_impl = topObj->m_impl;
   v24 = 0i64;
   v25 = 0i64;
   patch.m_addr = &v24;
   *(_WORD *)&patch.m_isVariant.m_bool = 257;
   handle.p0 = 0i64;
   handle.p1 = 0i64;
-  if ( v9 )
+  if ( m_impl )
   {
-    v10 = (void **)v9->vfptr[1].__vecDelDtor((hkDataRefCounted *)&v9->vfptr, (unsigned int)&v28);
+    v10 = (hkDataObject_Handle *)m_impl->vfptr[1].__vecDelDtor(m_impl, (unsigned int)&v28);
   }
   else
   {
-    v10 = (void **)&v28;
-    _mm_store_si128((__m128i *)&v28, (__m128i)handle);
+    v10 = &v28;
+    v28 = handle;
   }
-  handle.p0 = *v10;
-  handle.p1 = v10[1];
-  Copier::resolvePointer(v3, &resulta, &patch, &handle);
-  v11 = v3->m_todos.m_size;
-  if ( !v11 )
+  handle = *v10;
+  Copier::resolvePointer(this, &resulta, &patch, &handle);
+  m_size = this->m_todos.m_size;
+  if ( !m_size )
   {
 LABEL_21:
-    v5->m_object = v24;
-    v5->m_class = v25;
+    result->m_object = v24;
+    result->m_class = v25;
     goto LABEL_22;
   }
   while ( 1 )
   {
-    v12 = v3->m_todos.m_data;
-    v13 = v3->m_todos.m_data[v11 - 1].p0;
-    patch.m_addr = v13;
-    *(_QWORD *)&patch.m_isVariant.m_bool = *((_QWORD *)&v12[v11] - 1);
-    if ( v13 )
+    m_data = this->m_todos.m_data;
+    p0 = this->m_todos.m_data[m_size - 1].p0;
+    patch.m_addr = p0;
+    *(_QWORD *)&patch.m_isVariant.m_bool = m_data[m_size - 1].p1;
+    if ( p0 )
       break;
-    v3->m_todos.m_size = v11 - 1;
-    --v3->m_copyStack.m_size;
+    this->m_todos.m_size = m_size - 1;
+    --this->m_copyStack.m_size;
 LABEL_20:
-    v11 = v3->m_todos.m_size;
-    if ( !v11 )
+    m_size = this->m_todos.m_size;
+    if ( !m_size )
       goto LABEL_21;
   }
-  if ( v3->m_copyStack.m_size == (v3->m_copyStack.m_capacityAndFlags & 0x3FFFFFFF) )
+  if ( this->m_copyStack.m_size == (this->m_copyStack.m_capacityAndFlags & 0x3FFFFFFF) )
   {
-    hkArrayUtil::_reserveMore((hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v3->m_copyStack, 16);
-    v13 = patch.m_addr;
+    hkArrayUtil::_reserveMore(&hkContainerHeapAllocator::s_alloc, (const void **)&this->m_copyStack.m_data, 16);
+    p0 = patch.m_addr;
   }
-  v14 = &v3->m_copyStack.m_data[v3->m_copyStack.m_size];
+  v14 = &this->m_copyStack.m_data[this->m_copyStack.m_size];
   if ( v14 )
   {
-    v14->p0 = v13;
+    v14->p0 = p0;
     v14->p1 = *(void **)&patch.m_isVariant.m_bool;
   }
-  ++v3->m_copyStack.m_size;
-  v15 = v3->m_todos.m_data;
-  v16 = v3->m_todos.m_size;
+  ++this->m_copyStack.m_size;
+  v15 = this->m_todos.m_data;
+  v16 = this->m_todos.m_size;
   v15[v16 - 1].p0 = 0i64;
-  *((_QWORD *)&v15[v16] - 1) = 0i64;
+  v15[v16 - 1].p1 = 0i64;
   (*(void (__fastcall **)(__int64, hkDataObject *, Copier::PointerPatch *))(*(_QWORD *)v8 + 80i64))(v8, &obj, &patch);
-  hkDataObjectToNative::allocateObject(&v27, (hkVariant *)&handle, &obj, (hkDataObjectToNative::CopyInfoOut *)&array);
+  hkDataObjectToNative::allocateObject(&v27, (hkVariant *)&handle, &obj, array);
   if ( handle.p0 )
   {
     v17 = -1;
-    v18 = (__int64)&v32[16 * (v33 - 1)];
-    if ( *(void **)v18 == handle.p0 )
-      v17 = *(_DWORD *)(v18 + 8);
-    Copier::markAsDone(v3, (hkDataObject_Handle *)&patch, (hkVariant *)&handle, v17);
-    hkDataObjectToNative::fillNativeMembers(
-      &v27,
-      &resulta,
-      handle.p0,
-      &obj,
-      (hkDataObjectToNative::CopyInfoOut *)&array);
-    if ( Copier::processPointersAndAllocations(v3, &v36, (hkDataObjectToNative::CopyInfoOut *)&array)->m_enum == HK_SUCCESS )
+    v18 = &array[0].allocs.m_data[array[0].allocs.m_size - 1];
+    if ( v18->m_addr == handle.p0 )
+      v17 = v18->m_size;
+    Copier::markAsDone(this, (hkDataObject_Handle *)&patch, (hkVariant *)&handle, v17);
+    hkDataObjectToNative::fillNativeMembers(&v27, &resulta, handle.p0, &obj, array);
+    if ( Copier::processPointersAndAllocations(this, &v31, array)->m_enum == HK_SUCCESS )
     {
-      v33 = 0;
-      v30 = 0;
-      if ( v3->m_destroyOnCopy )
-        ((void (*)(void))obj.m_impl->vfptr[28].__vecDelDtor)();
+      array[0].allocs.m_size = 0;
+      array[0].pointersOut.m_size = 0;
+      if ( this->m_destroyOnCopy )
+        ((void (__fastcall *)(hkDataObjectImpl *))obj.m_impl->vfptr[28].__vecDelDtor)(obj.m_impl);
       v19 = obj.m_impl;
       if ( obj.m_impl )
       {
         --obj.m_impl->m_externalCount;
         v20 = v19->m_count-- == 1;
         if ( v20 )
-          v19->vfptr->__vecDelDtor((hkDataRefCounted *)&v19->vfptr, 1u);
+          v19->vfptr->__vecDelDtor(v19, 1u);
       }
       goto LABEL_20;
     }
   }
-  hkSerializeMultiMap<hkDataObject_Handle,Copier::PointerPatch,hkMap<hkDataObject_Handle,int,hkMapOperations<hkDataObject_Handle>,hkContainerHeapAllocator>>::clear(&v3->m_pointerPatchesFromHandle);
-  v3->m_todos.m_size = 0;
-  hkMapBase<hkDataObject_Handle,Copier::LiveObjectInfo,hkMapOperations<hkDataObject_Handle>>::clear((hkMapBase<hkDataObject_Handle,Copier::LiveObjectInfo,hkMapOperations<hkDataObject_Handle> > *)&v3->m_liveInfoFromHandle.m_elem);
+  hkSerializeMultiMap<hkDataObject_Handle,Copier::PointerPatch,hkMap<hkDataObject_Handle,int,hkMapOperations<hkDataObject_Handle>,hkContainerHeapAllocator>>::clear(&this->m_pointerPatchesFromHandle);
+  this->m_todos.m_size = 0;
+  hkMapBase<hkDataObject_Handle,Copier::LiveObjectInfo,hkMapOperations<hkDataObject_Handle>>::clear(&this->m_liveInfoFromHandle);
   v22 = obj.m_impl;
-  v5->m_object = 0i64;
-  v5->m_class = 0i64;
+  result->m_object = 0i64;
+  result->m_class = 0i64;
   if ( v22 )
   {
     --v22->m_externalCount;
     v20 = v22->m_count-- == 1;
     if ( v20 )
-      v22->vfptr->__vecDelDtor((hkDataRefCounted *)&v22->vfptr, 1u);
+      v22->vfptr->__vecDelDtor(v22, 1u);
   }
 LABEL_22:
-  v33 = 0;
-  if ( v34 >= 0 )
+  array[0].allocs.m_size = 0;
+  if ( array[0].allocs.m_capacityAndFlags >= 0 )
     hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-      v32,
-      16 * v34);
-  v32 = 0i64;
-  v34 = 2147483648;
-  v30 = 0;
-  if ( v31 >= 0 )
+      &hkContainerTempAllocator::s_alloc,
+      array[0].allocs.m_data,
+      16 * array[0].allocs.m_capacityAndFlags);
+  array[0].allocs.m_data = 0i64;
+  array[0].allocs.m_capacityAndFlags = 0x80000000;
+  array[0].pointersOut.m_size = 0;
+  if ( array[0].pointersOut.m_capacityAndFlags >= 0 )
     hkContainerTempAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc,
-      array,
-      32 * v31);
-  return v5;
+      &hkContainerTempAllocator::s_alloc,
+      array[0].pointersOut.m_data,
+      32 * array[0].pointersOut.m_capacityAndFlags);
+  return result;
 }
 
 // File Line: 417
 // RVA: 0xE4B630
 hkObjectResource *__fastcall Copier::toObject(Copier *this, hkDataObject *obj, hkTypeInfoRegistry *typeReg)
 {
-  Copier *v3; // rbx
-  hkTypeInfoRegistry *v4; // rbp
-  hkDataObject *v5; // rsi
-  _QWORD **v6; // rax
+  _QWORD **Value; // rax
   hkPackfileData *v7; // rax
   hkPackfileData *v8; // rax
   hkPackfileData *v9; // rdi
-  hkReferencedObject *v10; // rcx
-  hkReferencedObject *v11; // rcx
+  hkPackfileData *m_pntr; // rcx
+  hkPackfileData *v11; // rcx
   hkObjectResource *v12; // rax
   _QWORD **v13; // rax
   hkObjectResource *v14; // rax
   hkObjectResource *v15; // rax
   hkObjectResource *v16; // rdi
   hkPackfileData *v17; // rax
-  hkReferencedObject *v18; // rcx
-  hkVariant result; // [rsp+20h] [rbp-18h]
+  hkPackfileData *v18; // rcx
+  hkVariant result; // [rsp+20h] [rbp-18h] BYREF
 
-  v3 = this;
-  v4 = typeReg;
-  v5 = obj;
-  v6 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-  v7 = (hkPackfileData *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v6[11] + 8i64))(v6[11], 168i64);
+  Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+  v7 = (hkPackfileData *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 168i64);
   if ( v7 )
   {
     hkPackfileData::hkPackfileData(v7, 0i64);
@@ -797,17 +740,17 @@ hkObjectResource *__fastcall Copier::toObject(Copier *this, hkDataObject *obj, h
   {
     v9 = 0i64;
   }
-  v10 = (hkReferencedObject *)&v3->m_trackedData.m_pntr->vfptr;
-  if ( v10 && v10 != (hkReferencedObject *)v9 )
-    hkReferencedObject::removeReference(v10);
-  v3->m_trackedData.m_pntr = v9;
-  Copier::deepCopyToNative(v3, &result, v5);
+  m_pntr = this->m_trackedData.m_pntr;
+  if ( m_pntr && m_pntr != v9 )
+    hkReferencedObject::removeReference(m_pntr);
+  this->m_trackedData.m_pntr = v9;
+  Copier::deepCopyToNative(this, &result, obj);
   if ( result.m_object )
   {
-    Copier::finishAndRefcountLiveObjects(v3, v4);
-    Copier::postFinishObjects(v3);
+    Copier::finishAndRefcountLiveObjects(this, typeReg);
+    Copier::postFinishObjects(this);
     v13 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v14 = (hkObjectResource *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v13[11] + 8i64))(v13[11], 48i64);
+    v14 = (hkObjectResource *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*v13[11] + 8i64))(v13[11], 48i64);
     if ( v14 )
     {
       hkObjectResource::hkObjectResource(v14, &result);
@@ -817,26 +760,26 @@ hkObjectResource *__fastcall Copier::toObject(Copier *this, hkDataObject *obj, h
     {
       v16 = 0i64;
     }
-    hkObjectResource::setClassNameRegistry(v16, v3->m_classReg.m_pntr);
-    hkObjectResource::setTypeInfoRegistry(v16, v4);
-    v17 = v3->m_trackedData.m_pntr;
+    hkObjectResource::setClassNameRegistry(v16, this->m_classReg.m_pntr);
+    hkObjectResource::setTypeInfoRegistry(v16, typeReg);
+    v17 = this->m_trackedData.m_pntr;
     v17->m_destructorsEnabled = 0;
     v17->m_memory.m_size = 0;
     v17->m_chunks.m_size = 0;
-    v18 = (hkReferencedObject *)&v3->m_trackedData.m_pntr->vfptr;
+    v18 = this->m_trackedData.m_pntr;
     if ( v18 )
       hkReferencedObject::removeReference(v18);
     v12 = v16;
   }
   else
   {
-    v3->m_trackedData.m_pntr->m_destructorsEnabled = 0;
-    v11 = (hkReferencedObject *)&v3->m_trackedData.m_pntr->vfptr;
+    this->m_trackedData.m_pntr->m_destructorsEnabled = 0;
+    v11 = this->m_trackedData.m_pntr;
     if ( v11 )
       hkReferencedObject::removeReference(v11);
     v12 = 0i64;
   }
-  v3->m_trackedData.m_pntr = 0i64;
+  this->m_trackedData.m_pntr = 0i64;
   return v12;
 }
 
@@ -845,35 +788,27 @@ hkObjectResource *__fastcall Copier::toObject(Copier *this, hkDataObject *obj, h
 hkObjectResource *__fastcall hkDataObjectUtil::toObject(hkDataObject *src, unsigned int destroyOnCopy)
 {
   hkBuiltinTypeRegistry *v2; // rdi
-  hkDataObject *v3; // rbp
-  unsigned int v4; // esi
   hkTypeInfoRegistry *v5; // rbx
   hkClassNameRegistry *v6; // rax
 
   v2 = hkSingleton<hkBuiltinTypeRegistry>::s_instance;
-  v3 = src;
-  v4 = destroyOnCopy;
   v5 = (hkTypeInfoRegistry *)((__int64 (__fastcall *)(hkBuiltinTypeRegistry *))hkSingleton<hkBuiltinTypeRegistry>::s_instance->vfptr[1].__first_virtual_table_function__)(hkSingleton<hkBuiltinTypeRegistry>::s_instance);
   v6 = (hkClassNameRegistry *)((__int64 (__fastcall *)(hkBuiltinTypeRegistry *))v2->vfptr[2].__vecDelDtor)(v2);
-  return hkDataObjectUtil::toObjectWithRegistry(v3, v6, v5, v4);
+  return hkDataObjectUtil::toObjectWithRegistry(src, v6, v5, destroyOnCopy);
 }
 
 // File Line: 473
 // RVA: 0xE499D0
-hkObjectResource *__fastcall hkDataObjectUtil::toObjectWithRegistry(hkDataObject *src, hkClassNameRegistry *classReg, hkTypeInfoRegistry *typeReg, unsigned int destroyOnCopy)
+hkObjectResource *__fastcall hkDataObjectUtil::toObjectWithRegistry(
+        hkDataObject *src,
+        hkClassNameRegistry *classReg,
+        hkTypeInfoRegistry *typeReg,
+        unsigned int destroyOnCopy)
 {
-  unsigned int v4; // edi
-  hkTypeInfoRegistry *v5; // rsi
-  hkClassNameRegistry *v6; // rbx
-  hkDataObject *v7; // r14
   hkObjectResource *v8; // rbx
-  Copier v10; // [rsp+20h] [rbp-39h]
+  Copier v10; // [rsp+20h] [rbp-39h] BYREF
 
-  v4 = destroyOnCopy;
-  v5 = typeReg;
-  v6 = classReg;
-  v7 = src;
-  v10.m_todos.m_capacityAndFlags = 2147483648;
+  v10.m_todos.m_capacityAndFlags = 0x80000000;
   v10.m_todos.m_data = 0i64;
   v10.m_todos.m_size = 0;
   v10.m_pointerPatchesFromHandle.m_valueChain.m_data = 0i64;
@@ -886,18 +821,18 @@ hkObjectResource *__fastcall hkDataObjectUtil::toObjectWithRegistry(hkDataObject
   v10.m_copyStack.m_size = 0;
   v10.m_postFinishObjects.m_data = 0i64;
   v10.m_postFinishObjects.m_size = 0;
-  v10.m_pointerPatchesFromHandle.m_valueChain.m_capacityAndFlags = 2147483648;
+  v10.m_pointerPatchesFromHandle.m_valueChain.m_capacityAndFlags = 0x80000000;
   *(_QWORD *)&v10.m_pointerPatchesFromHandle.m_indexMap.m_hashMod = -1i64;
   v10.m_liveInfoFromHandle.m_hashMod = -1;
-  v10.m_copyStack.m_capacityAndFlags = 2147483648;
-  v10.m_postFinishObjects.m_capacityAndFlags = 2147483648;
+  v10.m_copyStack.m_capacityAndFlags = 0x80000000;
+  v10.m_postFinishObjects.m_capacityAndFlags = 0x80000000;
   if ( classReg )
-    hkReferencedObject::addReference((hkReferencedObject *)&classReg->vfptr);
-  v10.m_classReg.m_pntr = v6;
+    hkReferencedObject::addReference(classReg);
+  v10.m_classReg.m_pntr = classReg;
   v10.m_trackedData.m_pntr = 0i64;
   v10.m_allocatedOnHeap = 1;
-  v10.m_destroyOnCopy = v4;
-  v8 = Copier::toObject(&v10, v7, v5);
+  v10.m_destroyOnCopy = destroyOnCopy;
+  v8 = Copier::toObject(&v10, src, typeReg);
   Copier::~Copier(&v10);
   return v8;
 }
@@ -906,42 +841,35 @@ hkObjectResource *__fastcall hkDataObjectUtil::toObjectWithRegistry(hkDataObject
 // RVA: 0xE49780
 hkResource *__fastcall hkDataObjectUtil::toResource(hkDataObject *src, unsigned int destroyOnCopy)
 {
-  hkDataObject *v2; // rdi
-  unsigned int v3; // ebx
   hkClassNameRegistry *v4; // rax
 
-  v2 = src;
-  v3 = destroyOnCopy;
-  v4 = (hkClassNameRegistry *)((__int64 (*)(void))hkSingleton<hkBuiltinTypeRegistry>::s_instance->vfptr[2].__vecDelDtor)();
-  return hkDataObjectUtil::toResourceWithRegistry(v2, v4, v3);
+  v4 = (hkClassNameRegistry *)((__int64 (__fastcall *)(hkBuiltinTypeRegistry *))hkSingleton<hkBuiltinTypeRegistry>::s_instance->vfptr[2].__vecDelDtor)(hkSingleton<hkBuiltinTypeRegistry>::s_instance);
+  return hkDataObjectUtil::toResourceWithRegistry(src, v4, destroyOnCopy);
 }
 
 // File Line: 484
 // RVA: 0xE497C0
-hkPackfileData *__fastcall hkDataObjectUtil::toResourceWithRegistry(hkDataObject *src, hkClassNameRegistry *classReg, unsigned int destroyOnCopy)
+hkPackfileData *__fastcall hkDataObjectUtil::toResourceWithRegistry(
+        hkDataObject *src,
+        hkClassNameRegistry *classReg,
+        unsigned int destroyOnCopy)
 {
   hkPackfileData *v3; // rdi
-  unsigned int v4; // er14
-  hkClassNameRegistry *v5; // rbx
-  hkDataObject *v6; // rsi
-  _QWORD **v7; // rax
+  _QWORD **Value; // rax
   hkPackfileData *v8; // rax
   hkPackfileData *v9; // rax
   hkPackfileData *v10; // rbx
-  void *v11; // r14
-  hkClass *v12; // rsi
-  hkPackfileData *v13; // rbx
-  const char *v14; // rax
+  void *m_object; // r14
+  hkClass *m_class; // rsi
+  hkPackfileData *m_pntr; // rbx
+  const char *Name; // rax
   hkPackfileData *v15; // rbx
-  Copier v17; // [rsp+20h] [rbp-39h]
-  hkVariant result; // [rsp+A0h] [rbp+47h]
+  Copier v17; // [rsp+20h] [rbp-39h] BYREF
+  hkVariant result; // [rsp+A0h] [rbp+47h] BYREF
 
   v3 = 0i64;
-  v4 = destroyOnCopy;
-  v5 = classReg;
-  v6 = src;
-  v17.m_todos.m_capacityAndFlags = 2147483648;
-  v17.m_pointerPatchesFromHandle.m_valueChain.m_capacityAndFlags = 2147483648;
+  v17.m_todos.m_capacityAndFlags = 0x80000000;
+  v17.m_pointerPatchesFromHandle.m_valueChain.m_capacityAndFlags = 0x80000000;
   v17.m_todos.m_data = 0i64;
   v17.m_todos.m_size = 0;
   v17.m_pointerPatchesFromHandle.m_valueChain.m_data = 0i64;
@@ -956,18 +884,18 @@ hkPackfileData *__fastcall hkDataObjectUtil::toResourceWithRegistry(hkDataObject
   v17.m_postFinishObjects.m_size = 0;
   *(_QWORD *)&v17.m_pointerPatchesFromHandle.m_indexMap.m_hashMod = -1i64;
   v17.m_liveInfoFromHandle.m_hashMod = -1;
-  v17.m_copyStack.m_capacityAndFlags = 2147483648;
-  v17.m_postFinishObjects.m_capacityAndFlags = 2147483648;
+  v17.m_copyStack.m_capacityAndFlags = 0x80000000;
+  v17.m_postFinishObjects.m_capacityAndFlags = 0x80000000;
   if ( classReg )
-    hkReferencedObject::addReference((hkReferencedObject *)&classReg->vfptr);
-  v17.m_classReg.m_pntr = v5;
+    hkReferencedObject::addReference(classReg);
+  v17.m_classReg.m_pntr = classReg;
   v17.m_trackedData.m_pntr = 0i64;
   v17.m_allocatedOnHeap = 0;
-  v17.m_destroyOnCopy = v4;
-  if ( v6->m_impl )
+  v17.m_destroyOnCopy = destroyOnCopy;
+  if ( src->m_impl )
   {
-    v7 = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v8 = (hkPackfileData *)(*(__int64 (__fastcall **)(_QWORD *, signed __int64))(*v7[11] + 8i64))(v7[11], 168i64);
+    Value = (_QWORD **)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    v8 = (hkPackfileData *)(*(__int64 (__fastcall **)(_QWORD *, __int64))(*Value[11] + 8i64))(Value[11], 168i64);
     if ( v8 )
     {
       hkPackfileData::hkPackfileData(v8, v17.m_classReg.m_pntr);
@@ -977,28 +905,26 @@ hkPackfileData *__fastcall hkDataObjectUtil::toResourceWithRegistry(hkDataObject
     {
       v10 = 0i64;
     }
-    if ( v17.m_trackedData.m_pntr && v17.m_trackedData.m_pntr != v10 )
-      hkReferencedObject::removeReference((hkReferencedObject *)&v17.m_trackedData.m_pntr->vfptr);
     v17.m_trackedData.m_pntr = v10;
-    Copier::deepCopyToNative(&v17, &result, v6);
-    v11 = result.m_object;
-    if ( result.m_object && (v12 = result.m_class) != 0i64 )
+    Copier::deepCopyToNative(&v17, &result, src);
+    m_object = result.m_object;
+    if ( result.m_object && (m_class = result.m_class) != 0i64 )
     {
       Copier::finishAndTrackObjectsInPackfile(&v17, v17.m_trackedData.m_pntr);
-      v13 = v17.m_trackedData.m_pntr;
-      v14 = hkClass::getName(v12);
-      hkPackfileData::setContentsWithName(v13, v11, v14);
+      m_pntr = v17.m_trackedData.m_pntr;
+      Name = hkClass::getName(m_class);
+      hkPackfileData::setContentsWithName(m_pntr, m_object, Name);
       v15 = v17.m_trackedData.m_pntr;
-      hkReferencedObject::addReference((hkReferencedObject *)&v17.m_trackedData.m_pntr->vfptr);
+      hkReferencedObject::addReference(v17.m_trackedData.m_pntr);
       if ( v17.m_trackedData.m_pntr )
-        hkReferencedObject::removeReference((hkReferencedObject *)&v17.m_trackedData.m_pntr->vfptr);
+        hkReferencedObject::removeReference(v17.m_trackedData.m_pntr);
       v17.m_trackedData.m_pntr = 0i64;
       v3 = v15;
     }
     else
     {
       if ( v17.m_trackedData.m_pntr )
-        hkReferencedObject::removeReference((hkReferencedObject *)&v17.m_trackedData.m_pntr->vfptr);
+        hkReferencedObject::removeReference(v17.m_trackedData.m_pntr);
       v17.m_trackedData.m_pntr = 0i64;
     }
   }
@@ -1008,72 +934,55 @@ hkPackfileData *__fastcall hkDataObjectUtil::toResourceWithRegistry(hkDataObject
 
 // File Line: 561
 // RVA: 0xE49AC0
-hkTypeManager::Type *__fastcall hkDataObjectUtil::getBasicType(hkTypeManager *typeManager, hkClassMember::Type type, const char *typeName)
+hkTypeManager::Type *__fastcall hkDataObjectUtil::getBasicType(
+        hkTypeManager *typeManager,
+        hkClassMember::Type type,
+        const char *typeName)
 {
-  hkTypeManager *v3; // rbx
   TypeInfo *v4; // rcx
-  int v5; // edx
-  int v6; // edx
-  int v7; // edx
-  int v8; // edx
-  hkTypeManager::Type *result; // rax
-  hkTypeManager::Type *v10; // rax
+  hkTypeManager::Type *v6; // rax
 
-  v3 = typeManager;
   v4 = &s_lut[type];
-  v5 = (unsigned __int8)s_lut[type].m_type - 1;
-  if ( !v5 )
-    return v3->m_builtInTypes[(unsigned __int8)v4->m_subType];
-  v6 = v5 - 3;
-  if ( !v6 )
-    return hkTypeManager::makeTuple(
-             v3,
-             v3->m_builtInTypes[(unsigned __int8)v4->m_subType],
-             (unsigned __int8)v4->m_tupleSize);
-  v7 = v6 - 1;
-  if ( v7 )
+  switch ( v4->m_type )
   {
-    v8 = v7 - 1;
-    if ( v8 )
-    {
-      if ( v8 == 1 )
-        result = hkTypeManager::makePointer(v3, v3->m_homogenousClass);
-      else
-        result = 0i64;
-    }
-    else
-    {
-      result = hkTypeManager::addClass(v3, typeName);
-    }
+    case 1:
+      return typeManager->m_builtInTypes[(unsigned __int8)v4->m_subType];
+    case 4:
+      return hkTypeManager::makeTuple(
+               typeManager,
+               typeManager->m_builtInTypes[(unsigned __int8)v4->m_subType],
+               (unsigned __int8)v4->m_tupleSize);
+    case 5:
+      if ( !typeName )
+        return hkTypeManager::makePointer(typeManager, typeManager->m_homogenousClass);
+      v6 = hkTypeManager::addClass(typeManager, typeName);
+      return hkTypeManager::makePointer(typeManager, v6);
+    case 6:
+      return hkTypeManager::addClass(typeManager, typeName);
+    case 7:
+      return hkTypeManager::makePointer(typeManager, typeManager->m_homogenousClass);
+    default:
+      return 0i64;
   }
-  else if ( typeName )
-  {
-    v10 = hkTypeManager::addClass(v3, typeName);
-    result = hkTypeManager::makePointer(v3, v10);
-  }
-  else
-  {
-    result = hkTypeManager::makePointer(v3, v3->m_homogenousClass);
-  }
-  return result;
 }
 
 // File Line: 608
 // RVA: 0xE49BD0
-hkTypeManager::Type *__fastcall hkDataObjectUtil::getTypeFromMemberTypeClassName(hkTypeManager *typeManager, hkClassMember::Type mtype, hkClassMember::Type stype, const char *typeName, int count)
+hkTypeManager::Type *__fastcall hkDataObjectUtil::getTypeFromMemberTypeClassName(
+        hkTypeManager *typeManager,
+        hkClassMember::Type mtype,
+        hkClassMember::Type stype,
+        const char *typeName,
+        int count)
 {
-  hkClassMember::Type v5; // er11
   hkTypeManager::Type *v6; // r10
-  hkTypeManager *v7; // rbx
   TypeInfo *v8; // r8
   const char *v9; // r8
   hkTypeManager::Type *v10; // rax
-  hkTypeManager::Type *v11; // rax
-  hkTypeManager::Type *v12; // rax
+  hkTypeManager::Type *Tuple; // rax
+  hkTypeManager::Type *BasicType; // rax
 
-  v5 = stype;
   v6 = 0i64;
-  v7 = typeManager;
   v8 = &s_lut[mtype];
   switch ( v8->m_type )
   {
@@ -1081,61 +990,66 @@ hkTypeManager::Type *__fastcall hkDataObjectUtil::getTypeFromMemberTypeClassName
       v6 = typeManager->m_builtInTypes[(unsigned __int8)v8->m_subType];
       break;
     case 2:
-      if ( v5 == 25 )
-        v12 = hkTypeManager::addClass(typeManager, typeName);
+      if ( stype == 25 )
+        BasicType = hkTypeManager::addClass(typeManager, typeName);
       else
-        v12 = hkDataObjectUtil::getBasicType(typeManager, v5, typeName);
+        BasicType = hkDataObjectUtil::getBasicType(typeManager, stype, typeName);
       if ( count )
-        v12 = hkTypeManager::makeTuple(v7, v12, count);
-      return hkTypeManager::makeArray(v7, v12);
+        BasicType = hkTypeManager::makeTuple(typeManager, BasicType, count);
+      return hkTypeManager::makeArray(typeManager, BasicType);
     case 3:
       v9 = 0i64;
-      mtype = v5;
+      mtype = stype;
       goto LABEL_13;
     case 4:
-      v11 = hkTypeManager::makeTuple(
-              typeManager,
-              typeManager->m_builtInTypes[(unsigned __int8)v8->m_subType],
-              (unsigned __int8)v8->m_tupleSize);
+      Tuple = hkTypeManager::makeTuple(
+                typeManager,
+                typeManager->m_builtInTypes[(unsigned __int8)v8->m_subType],
+                (unsigned __int8)v8->m_tupleSize);
       goto LABEL_14;
     case 5:
-      v10 = hkDataObjectUtil::getBasicType(typeManager, v5, typeName);
-      v11 = hkTypeManager::makePointer(v7, v10);
+      v10 = hkDataObjectUtil::getBasicType(typeManager, stype, typeName);
+      Tuple = hkTypeManager::makePointer(typeManager, v10);
       goto LABEL_14;
     case 6:
     case 7:
       v9 = typeName;
 LABEL_13:
-      v11 = hkDataObjectUtil::getBasicType(typeManager, mtype, v9);
+      Tuple = hkDataObjectUtil::getBasicType(typeManager, mtype, v9);
 LABEL_14:
-      v6 = v11;
+      v6 = Tuple;
       break;
     default:
       break;
   }
   if ( count )
-    v6 = hkTypeManager::makeTuple(v7, v6, count);
+    return hkTypeManager::makeTuple(typeManager, v6, count);
   return v6;
 }
 
 // File Line: 680
 // RVA: 0xE49B80
-hkTypeManager::Type *__fastcall hkDataObjectUtil::getTypeFromMemberType(hkTypeManager *typeManager, hkClassMember::Type mtype, hkClassMember::Type stype, hkClass *klass, int count)
+hkTypeManager::Type *__fastcall hkDataObjectUtil::getTypeFromMemberType(
+        hkTypeManager *typeManager,
+        hkClassMember::Type mtype,
+        hkClassMember::Type stype,
+        hkClass *klass,
+        int count)
 {
   hkClassMember::Type v5; // ebx
   hkClassMember::Type v6; // edi
   hkTypeManager *v7; // rsi
-  hkClass *v8; // rax
+  hkClass *Name; // rax
 
   v5 = stype;
   v6 = mtype;
   v7 = typeManager;
   if ( klass )
   {
-    v8 = (hkClass *)hkClass::getName(klass);
+    Name = (hkClass *)hkClass::getName(klass);
     stype = v5;
     mtype = v6;
-    klass = v8;
+    klass = Name;
     typeManager = v7;
   }
   return hkDataObjectUtil::getTypeFromMemberTypeClassName(typeManager, mtype, stype, (const char *)klass, count);
@@ -1145,51 +1059,43 @@ hkTypeManager::Type *__fastcall hkDataObjectUtil::getTypeFromMemberType(hkTypeMa
 // RVA: 0xE49D00
 hkResult *__fastcall hkDataObjectUtil::deepCopyWorld(hkResult *result, hkDataWorld *dst, hkDataWorld *src)
 {
-  hkResult *v3; // rbx
   hkDataWorldCloner *v4; // rax
-  hkDataWorldCloner v6; // [rsp+20h] [rbp-28h]
+  hkDataWorldCloner v6; // [rsp+20h] [rbp-28h] BYREF
 
-  v3 = result;
   hkDataWorldCloner::hkDataWorldCloner(&v6, dst, src);
-  hkDataWorldCloner::clone(v4, v3);
+  hkDataWorldCloner::clone(v4, result);
   hkMapBase<hkDataObject_Handle,hkDataObject_Handle,hkMapOperations<hkDataObject_Handle>>::clearAndDeallocate(
-    (hkMapBase<hkDataObject_Handle,hkDataObject_Handle,hkMapOperations<hkDataObject_Handle> > *)&v6.m_copied.m_elem,
-    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr);
-  return v3;
+    &v6.m_copied,
+    &hkContainerHeapAllocator::s_alloc);
+  return result;
 }
 
 // File Line: 697
 // RVA: 0xE49D40
 __int64 __fastcall hkDataObjectUtil::getExtraStorageSize(hkClass *klass, hkDataObject *obj)
 {
-  unsigned int v2; // er15
-  hkDataObject *v3; // r12
-  hkClass *v4; // rbp
+  unsigned int v2; // r15d
   int i; // edi
-  hkClassMember *v6; // rax
+  hkClassMember *Member; // rax
   hkClassMember *v7; // r14
   __int64 v8; // rax
   __int64 v9; // rbx
   int v10; // esi
-  int v11; // eax
-  bool v12; // zf
-  __int64 v14; // [rsp+20h] [rbp-28h]
-  __int64 v15; // [rsp+28h] [rbp-20h]
+  int ArrayMemberSize; // eax
+  __int64 v14[5]; // [rsp+20h] [rbp-28h] BYREF
 
   v2 = 0;
-  v3 = obj;
-  v4 = klass;
-  for ( i = 0; i < (signed int)hkClass::getNumMembers(v4); ++i )
+  for ( i = 0; i < (int)hkClass::getNumMembers(klass); ++i )
   {
-    v6 = hkClass::getMember(v4, i);
-    v7 = v6;
-    if ( v6->m_type.m_storage == 34 )
+    Member = hkClass::getMember(klass, i);
+    v7 = Member;
+    if ( Member->m_type.m_storage == 34 )
     {
-      ((void (__fastcall *)(hkDataObjectImpl *, __int64 *, const char *))v3->m_impl->vfptr[3].__vecDelDtor)(
-        v3->m_impl,
-        &v14,
-        v6->m_name);
-      v8 = (*(__int64 (__fastcall **)(__int64, __int64))(*(_QWORD *)v14 + 80i64))(v14, v15);
+      ((void (__fastcall *)(hkDataObjectImpl *, __int64 *, const char *))obj->m_impl->vfptr[3].__vecDelDtor)(
+        obj->m_impl,
+        v14,
+        Member->m_name);
+      v8 = (*(__int64 (__fastcall **)(__int64, __int64))(*(_QWORD *)v14[0] + 80i64))(v14[0], v14[1]);
       v9 = v8;
       if ( v8 )
       {
@@ -1199,12 +1105,11 @@ __int64 __fastcall hkDataObjectUtil::getExtraStorageSize(hkClass *klass, hkDataO
       v10 = (*(__int64 (__fastcall **)(__int64))(*(_QWORD *)v8 + 40i64))(v8);
       (*(void (__fastcall **)(__int64))(*(_QWORD *)v9 + 40i64))(v9);
       hkClassMember::getArrayMemberSize(v7);
-      v11 = hkClassMember::getArrayMemberSize(v7);
+      ArrayMemberSize = hkClassMember::getArrayMemberSize(v7);
       --*(_WORD *)(v9 + 10);
-      v2 += (v10 * v11 + 15) & 0xFFFFFFF0;
-      v12 = (*(_DWORD *)(v9 + 12))-- == 1;
-      if ( v12 )
-        (**(void (__fastcall ***)(__int64, signed __int64))v9)(v9, 1i64);
+      v2 += (v10 * ArrayMemberSize + 15) & 0xFFFFFFF0;
+      if ( (*(_DWORD *)(v9 + 12))-- == 1 )
+        (**(void (__fastcall ***)(__int64, __int64))v9)(v9, 1i64);
     }
   }
   return v2;

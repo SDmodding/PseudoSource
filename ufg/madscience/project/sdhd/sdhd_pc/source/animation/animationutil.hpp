@@ -1,91 +1,90 @@
 // File Line: 137
 // RVA: 0x3A6D70
-void __fastcall ERotation(TransformFloatParamRot axis, UFG::qMatrix44 *transform)
+double __fastcall ERotation(TransformFloatParamRot axis, UFG::qMatrix44 *transform)
 {
-  __int32 v2; // ecx
-  float v3; // xmm0_4
-  float v4; // xmm2_4
-  float v5; // xmm0_4
-  float v6; // xmm2_4
-  float v7; // xmm0_4
-  float v8; // xmm2_4
+  int v2; // ecx
+  double result; // xmm0_8
+  unsigned int v4; // xmm1_4
+  float y; // xmm2_4
+  float x; // xmm2_4
+  __int64 z_low; // xmm0_8
+  float z; // xmm2_4
 
-  if ( axis )
+  if ( axis == TFP_RX )
   {
-    v2 = axis - 1;
-    if ( v2 )
+    z_low = LODWORD(transform->v1.z);
+    v4 = (unsigned int)FLOAT_1_0;
+    if ( *(float *)&z_low <= -1.0 )
     {
-      if ( v2 == 1 )
-      {
-        v3 = transform->v1.x;
-        if ( v3 <= -1.0 )
-        {
-          v3 = FLOAT_N1_0;
-        }
-        else if ( v3 >= 1.0 )
-        {
-          v3 = *(float *)&FLOAT_1_0;
-        }
-        v4 = transform->v1.y;
-        if ( v4 <= -1.0 )
-        {
-          v4 = FLOAT_N1_0;
-        }
-        else if ( v4 >= 1.0 )
-        {
-          atan2f(v3, 1.0);
-          return;
-        }
-        atan2f(v3, v4);
-      }
+      z_low = LODWORD(FLOAT_N1_0);
     }
-    else
+    else if ( *(float *)&z_low >= 1.0 )
     {
-      v5 = transform->v0.x;
-      if ( transform->v0.x <= -1.0 )
-      {
-        v5 = FLOAT_N1_0;
-      }
-      else if ( v5 >= 1.0 )
-      {
-        v5 = *(float *)&FLOAT_1_0;
-      }
-      v6 = transform->v2.x;
-      if ( v6 <= -1.0 )
-      {
-        v6 = FLOAT_N1_0;
-      }
-      else if ( v6 >= 1.0 )
-      {
-        atan2f(v5, COERCE_FLOAT((unsigned int)FLOAT_1_0 ^ _xmm[0]));
-        return;
-      }
-      atan2f(v5, COERCE_FLOAT(LODWORD(v6) ^ _xmm[0]));
+      z_low = (unsigned int)FLOAT_1_0;
     }
+    z = transform->v2.z;
+    if ( z <= -1.0 )
+    {
+      z = FLOAT_N1_0;
+    }
+    else if ( z >= 1.0 )
+    {
+      *(_QWORD *)&result = z_low ^ *(_QWORD *)_xmm;
+      goto LABEL_10;
+    }
+    *(_QWORD *)&result = z_low ^ *(_QWORD *)_xmm;
+    *(float *)&result = atan2f(*(float *)&result, z);
+    return result;
   }
-  else
+  v2 = axis - 1;
+  if ( !v2 )
   {
-    v7 = transform->v1.z;
-    if ( v7 <= -1.0 )
+    *(_QWORD *)&result = LODWORD(transform->v0.x);
+    if ( *(float *)&result <= -1.0 )
     {
-      v7 = FLOAT_N1_0;
+      *(_QWORD *)&result = LODWORD(FLOAT_N1_0);
     }
-    else if ( v7 >= 1.0 )
+    else if ( *(float *)&result >= 1.0 )
     {
-      v7 = *(float *)&FLOAT_1_0;
+      *(_QWORD *)&result = (unsigned int)FLOAT_1_0;
     }
-    v8 = transform->v2.z;
-    if ( v8 <= -1.0 )
+    x = transform->v2.x;
+    if ( x <= -1.0 )
     {
-      v8 = FLOAT_N1_0;
+      x = FLOAT_N1_0;
     }
-    else if ( v8 >= 1.0 )
+    else if ( x >= 1.0 )
     {
-      atan2f(COERCE_FLOAT(LODWORD(v7) ^ _xmm[0]), 1.0);
-      return;
+      v4 = (unsigned int)FLOAT_1_0 ^ _xmm[0];
+      goto LABEL_10;
     }
-    atan2f(COERCE_FLOAT(LODWORD(v7) ^ _xmm[0]), v8);
+    v4 = LODWORD(x) ^ _xmm[0];
+    goto LABEL_10;
   }
+  if ( v2 != 1 )
+    return 0.0;
+  *(_QWORD *)&result = LODWORD(transform->v1.x);
+  v4 = (unsigned int)FLOAT_1_0;
+  if ( *(float *)&result <= -1.0 )
+  {
+    *(_QWORD *)&result = LODWORD(FLOAT_N1_0);
+  }
+  else if ( *(float *)&result >= 1.0 )
+  {
+    *(_QWORD *)&result = (unsigned int)FLOAT_1_0;
+  }
+  y = transform->v1.y;
+  if ( y <= -1.0 )
+  {
+    y = FLOAT_N1_0;
+    goto LABEL_13;
+  }
+  if ( y < 1.0 )
+LABEL_13:
+    v4 = LODWORD(y);
+LABEL_10:
+  *(float *)&result = atan2f(*(float *)&result, *(float *)&v4);
+  return result;
 }
 
 // File Line: 273
@@ -98,7 +97,7 @@ float __fastcall EaseInOut(float param)
   if ( result <= 0.0 )
     return 0.0;
   if ( result >= 1.0 )
-    result = *(float *)&FLOAT_1_0;
+    return *(float *)&FLOAT_1_0;
   return result;
 }
 

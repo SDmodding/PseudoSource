@@ -1,24 +1,22 @@
 // File Line: 26
 // RVA: 0xABB230
-CAkSrcFileBase *__fastcall CreateVorbisFilePlugin(void *in_pCtx)
+CAkSrcFileBase *__fastcall CreateVorbisFilePlugin(CAkPBI *in_pCtx)
 {
-  CAkPBI *v1; // rdi
   CAkSrcFileBase *result; // rax
-  IAkSoftwareCodec *v3; // rbx
+  CAkSrcFileBase *v3; // rbx
 
-  v1 = (CAkPBI *)in_pCtx;
   result = (CAkSrcFileBase *)AK::MemoryMgr::Malloc(g_LEngineDefaultPoolId, 0x1C8ui64);
-  v3 = (IAkSoftwareCodec *)&result->vfptr;
+  v3 = result;
   if ( result )
   {
-    CAkSrcFileBase::CAkSrcFileBase(result, v1);
+    CAkSrcFileBase::CAkSrcFileBase(result, in_pCtx);
     v3->vfptr = (CAkVPLNodeVtbl *)&CAkSrcFileVorbis::`vftable;
-    v3[26].m_pInput = 0i64;
-    v3[27].vfptr = 0i64;
-    v3[27].m_pInput = 0i64;
-    v3[28].vfptr = 0i64;
-    memset(&v3[8], 0, 0x128ui64);
-    result = (CAkSrcFileBase *)v3;
+    *(_QWORD *)&v3[3].m_uTotalSamples = 0i64;
+    *(_QWORD *)&v3[3].m_uDataSize = 0i64;
+    *(_QWORD *)&v3[3].m_uPCMLoopStart = 0i64;
+    *(_QWORD *)&v3[3].m_markers.m_hdrMarkers.uNumMarkers = 0i64;
+    memset(&v3[1], 0, 0x128ui64);
+    return v3;
   }
   return result;
 }
@@ -27,206 +25,198 @@ CAkSrcFileBase *__fastcall CreateVorbisFilePlugin(void *in_pCtx)
 // RVA: 0xABB0B0
 void __fastcall CAkSrcFileVorbis::~CAkSrcFileVorbis(CAkSrcFileVorbis *this)
 {
-  char *v1; // rdx
-  CAkSrcFileVorbis *v2; // rbx
-  unsigned int v3; // er8
+  char *pucData; // rdx
+  unsigned int uChannelMask; // r8d
   int i; // ecx
 
-  v1 = this->m_VorbisState.TremorInfo.pucData;
-  v2 = this;
+  pucData = this->m_VorbisState.TremorInfo.pucData;
   this->vfptr = (CAkVPLNodeVtbl *)&CAkSrcFileVorbis::`vftable;
-  if ( v1 )
+  if ( pucData )
   {
-    v3 = this->m_VorbisState.TremorInfo.uChannelMask;
-    for ( i = 0; v3; v3 &= v3 - 1 )
+    uChannelMask = this->m_VorbisState.TremorInfo.uChannelMask;
+    for ( i = 0; uChannelMask; uChannelMask &= uChannelMask - 1 )
       ++i;
-    CAkLEngine::ReleaseCachedAudioBuffer(i << 11, v1);
-    v2->m_VorbisState.TremorInfo.ReturnInfo.uFramesProduced = 0;
-    v2->m_VorbisState.TremorInfo.pucData = 0i64;
+    CAkLEngine::ReleaseCachedAudioBuffer(i << 11, pucData);
+    this->m_VorbisState.TremorInfo.ReturnInfo.uFramesProduced = 0;
+    this->m_VorbisState.TremorInfo.pucData = 0i64;
   }
-  if ( v2->m_VorbisState.TremorInfo.VorbisDSPState.csi )
-    AkVorbisCodebookMgr::ReleaseCodebook(&g_VorbisCodebookMgr, &v2->m_VorbisState);
-  CAkSrcFileBase::~CAkSrcFileBase((CAkSrcFileBase *)&v2->vfptr);
+  if ( this->m_VorbisState.TremorInfo.VorbisDSPState.csi )
+    AkVorbisCodebookMgr::ReleaseCodebook(&g_VorbisCodebookMgr, &this->m_VorbisState);
+  CAkSrcFileBase::~CAkSrcFileBase(this);
 }
 
 // File Line: 56
 // RVA: 0xABB4A0
 void __fastcall CAkSrcFileVorbis::GetBuffer(CAkSrcFileVorbis *this, AkVPLState *io_state)
 {
-  AkVPLState *v2; // rsi
-  CAkSrcFileVorbis *v3; // rbx
-  AKRESULT v4; // eax
-  __int64 v5; // rdx
-  unsigned __int64 v6; // rcx
+  AKRESULT IsPrebufferingReady; // eax
+  __int64 uMaxPacketSize; // rdx
+  unsigned __int64 m_ulSizeLeft; // rcx
   char *v7; // rcx
   unsigned __int16 v8; // ax
   size_t v9; // r8
-  char *v10; // rdx
-  unsigned int v11; // et1
-  char v12; // al
-  unsigned int v13; // eax
-  char *v14; // rdx
-  __int64 v15; // rcx
-  unsigned __int64 v16; // rdi
-  char *v17; // rax
-  char v18; // dl
-  bool v19; // al
-  char *v20; // r9
-  unsigned int v21; // ecx
-  int v22; // eax
-  unsigned __int16 v23; // dx
+  char *m_pNextAddress; // rdx
+  char v11; // al
+  AKRESULT StreamBuffer; // eax
+  char *m_pStitchStreamBuffer; // rdx
+  __int64 v14; // rcx
+  unsigned __int64 v15; // rdi
+  char *CachedAudioBuffer; // rax
+  bool v17; // dl
+  bool v18; // al
+  char *v19; // r9
+  unsigned int m_uStitchBufferLeft; // ecx
+  int m_uStitchBufferValidDataSize; // eax
+  unsigned __int16 v22; // dx
+  unsigned __int16 v23; // cx
   unsigned __int16 v24; // cx
-  unsigned __int16 v25; // cx
-  unsigned __int16 v26; // ax
-  unsigned int v27; // ecx
-  __int16 *v28; // r9
-  char *v29; // r8
-  unsigned __int16 v30; // dx
-  __int64 v31; // rcx
+  unsigned __int16 m_uStitchBufferEndOffset; // ax
+  unsigned int v26; // ecx
+  __int16 *pucData; // r9
+  char *v28; // r8
+  unsigned __int16 v29; // dx
+  __int64 uInputBytesConsumed; // rcx
 
-  v2 = io_state;
-  v3 = this;
-  if ( *((_BYTE *)&this->0 + 32) & 2 )
+  if ( (*((_BYTE *)&this->CAkVPLSrcNode + 32) & 2) != 0 )
   {
-    v4 = (unsigned int)AK::SrcFileServices::IsPrebufferingReady(this->m_pStream, this->m_ulSizeLeft);
-    if ( v4 != 45 )
+    IsPrebufferingReady = (unsigned int)AK::SrcFileServices::IsPrebufferingReady(this->m_pStream, this->m_ulSizeLeft);
+    if ( IsPrebufferingReady != AK_DataReady )
     {
-      v2->result = v4;
+      io_state->result = IsPrebufferingReady;
       return;
     }
-    *((_BYTE *)&v3->0 + 32) &= 0xFDu;
+    *((_BYTE *)&this->CAkVPLSrcNode + 32) &= ~2u;
   }
-  v5 = v3->m_VorbisState.VorbisInfo.uMaxPacketSize;
-  v6 = v3->m_ulSizeLeft;
-  v3->m_VorbisState.TremorInfo.uRequestedFrames = v2->uMaxFrames;
-  if ( v6 < v5 + 2 && !(*((_BYTE *)&v3->0 + 126) & 1) )
+  uMaxPacketSize = this->m_VorbisState.VorbisInfo.uMaxPacketSize;
+  m_ulSizeLeft = this->m_ulSizeLeft;
+  this->m_VorbisState.TremorInfo.uRequestedFrames = io_state->uMaxFrames;
+  if ( m_ulSizeLeft < uMaxPacketSize + 2 && (*((_BYTE *)&this->CAkSrcFileBase + 126) & 1) == 0 )
   {
-    if ( (_DWORD)v6 && !v3->m_pStitchStreamBuffer && !v3->m_uStreamLoopCntAhead )
+    if ( (_DWORD)m_ulSizeLeft && !this->m_pStitchStreamBuffer && !this->m_uStreamLoopCntAhead )
     {
-      v7 = (char *)AK::MemoryMgr::Malloc(g_LEngineDefaultPoolId, v6 + v5 + 2);
-      v3->m_pStitchStreamBuffer = v7;
+      v7 = (char *)AK::MemoryMgr::Malloc(g_LEngineDefaultPoolId, m_ulSizeLeft + uMaxPacketSize + 2);
+      this->m_pStitchStreamBuffer = v7;
       if ( !v7 )
       {
 LABEL_10:
-        v2->result = 2;
+        io_state->result = AK_Fail;
         return;
       }
-      v8 = v3->m_ulSizeLeft;
-      v9 = v3->m_ulSizeLeft;
-      v10 = v3->m_pNextAddress;
-      v3->m_uStitchBufferEndOffset = v8;
-      v3->m_uStitchBufferLeft = v8;
-      v3->m_uStitchBufferValidDataSize = v8;
-      memmove(v7, v10, v9);
-      v11 = v3->m_ulSizeLeft;
-      v3->m_pNextAddress = 0i64;
-      v3->m_ulSizeLeft = 0;
+      v8 = this->m_ulSizeLeft;
+      v9 = this->m_ulSizeLeft;
+      m_pNextAddress = this->m_pNextAddress;
+      this->m_uStitchBufferEndOffset = v8;
+      this->m_uStitchBufferLeft = v8;
+      this->m_uStitchBufferValidDataSize = v8;
+      memmove(v7, m_pNextAddress, v9);
+      this->m_pNextAddress = 0i64;
+      this->m_ulSizeLeft = 0;
     }
-    if ( !v3->m_ulSizeLeft )
+    if ( !this->m_ulSizeLeft )
     {
-      v12 = *((_BYTE *)&v3->0 + 126);
-      if ( v12 & 2 )
-        *((_BYTE *)&v3->0 + 126) = v12 & 0xFD;
+      v11 = *((_BYTE *)&this->CAkSrcFileBase + 126);
+      if ( (v11 & 2) != 0 )
+        *((_BYTE *)&this->CAkSrcFileBase + 126) = v11 & 0xFD;
       else
-        ((void (*)(void))v3->m_pStream->vfptr->ReleaseBuffer)();
-      v13 = CAkSrcFileBase::FetchStreamBuffer((CAkSrcFileBase *)&v3->vfptr);
-      v2->result = v13;
-      if ( v13 == 2 )
+        this->m_pStream->CAkSrcFileBase::vfptr->ReleaseBuffer(this->m_pStream);
+      StreamBuffer = CAkSrcFileBase::FetchStreamBuffer(this);
+      io_state->result = StreamBuffer;
+      if ( StreamBuffer == AK_Fail )
         return;
-      if ( v13 == 45 )
+      if ( StreamBuffer == AK_DataReady )
       {
-        v14 = v3->m_pStitchStreamBuffer;
-        if ( v14 )
+        m_pStitchStreamBuffer = this->m_pStitchStreamBuffer;
+        if ( m_pStitchStreamBuffer )
         {
-          v15 = v3->m_VorbisState.VorbisInfo.uMaxPacketSize;
-          v16 = v3->m_ulSizeLeft;
-          if ( v15 + 2 < v16 )
-            LODWORD(v16) = v15 + 2;
-          memmove(&v14[v3->m_uStitchBufferEndOffset], v3->m_pNextAddress, (unsigned int)v16);
-          v3->m_uStitchBufferLeft += v16;
-          v3->m_uStitchBufferValidDataSize += v16;
+          v14 = this->m_VorbisState.VorbisInfo.uMaxPacketSize;
+          v15 = this->m_ulSizeLeft;
+          if ( v14 + 2 < v15 )
+            LODWORD(v15) = v14 + 2;
+          memmove(&m_pStitchStreamBuffer[this->m_uStitchBufferEndOffset], this->m_pNextAddress, (unsigned int)v15);
+          this->m_uStitchBufferLeft += v15;
+          this->m_uStitchBufferValidDataSize += v15;
         }
       }
     }
   }
-  if ( !v3->m_VorbisState.TremorInfo.pucData )
+  if ( !this->m_VorbisState.TremorInfo.pucData )
   {
-    v17 = (char *)CAkLEngine::GetCachedAudioBuffer(v3->m_VorbisState.TremorInfo.VorbisDSPState.channels << 11);
-    v3->m_VorbisState.TremorInfo.ReturnInfo.uFramesProduced = 0;
-    v3->m_VorbisState.TremorInfo.pucData = v17;
-    if ( !v17 )
+    CachedAudioBuffer = (char *)CAkLEngine::GetCachedAudioBuffer(this->m_VorbisState.TremorInfo.VorbisDSPState.channels << 11);
+    this->m_VorbisState.TremorInfo.ReturnInfo.uFramesProduced = 0;
+    this->m_VorbisState.TremorInfo.pucData = CachedAudioBuffer;
+    if ( !CachedAudioBuffer )
       goto LABEL_10;
   }
-  v18 = 1;
-  v19 = v3->m_uStreamLoopCntAhead || *((_BYTE *)&v3->0 + 126) & 1;
-  v20 = v3->m_pStitchStreamBuffer;
-  v3->m_VorbisState.TremorInfo.bNoMoreInputPackets = v19;
-  if ( v20 )
+  v17 = 1;
+  v18 = this->m_uStreamLoopCntAhead || (*((_BYTE *)&this->CAkSrcFileBase + 126) & 1) != 0;
+  v19 = this->m_pStitchStreamBuffer;
+  this->m_VorbisState.TremorInfo.bNoMoreInputPackets = v18;
+  if ( v19 )
   {
-    if ( !v19 || v3->m_ulSizeLeft + v3->m_uStitchBufferEndOffset - v3->m_uStitchBufferValidDataSize )
-      v18 = 0;
-    v21 = v3->m_uStitchBufferLeft;
-    v22 = v3->m_uStitchBufferValidDataSize;
-    v3->m_VorbisState.TremorInfo.bNoMoreInputPackets = v18;
-    v23 = v3->m_VorbisState.VorbisInfo.uMaxPacketSize;
-    v3->m_VorbisState.TremorInfo.uInputDataSize = v21;
-    DecodeVorbis(&v3->m_VorbisState.TremorInfo, v23, &v20[v22 - v21], (__int16 *)v3->m_VorbisState.TremorInfo.pucData);
-    v24 = v3->m_uStitchBufferValidDataSize;
-    v3->m_uStitchBufferLeft -= LOWORD(v3->m_VorbisState.TremorInfo.ReturnInfo.uInputBytesConsumed);
-    v25 = v24 - v3->m_uStitchBufferLeft;
-    v26 = v3->m_uStitchBufferEndOffset;
-    if ( v25 >= v26 )
+    if ( !v18 || this->m_ulSizeLeft + this->m_uStitchBufferEndOffset - this->m_uStitchBufferValidDataSize )
+      v17 = 0;
+    m_uStitchBufferLeft = this->m_uStitchBufferLeft;
+    m_uStitchBufferValidDataSize = this->m_uStitchBufferValidDataSize;
+    this->m_VorbisState.TremorInfo.bNoMoreInputPackets = v17;
+    v22 = this->m_VorbisState.VorbisInfo.uMaxPacketSize;
+    this->m_VorbisState.TremorInfo.uInputDataSize = m_uStitchBufferLeft;
+    DecodeVorbis(
+      &this->m_VorbisState.TremorInfo,
+      v22,
+      &v19[m_uStitchBufferValidDataSize - m_uStitchBufferLeft],
+      (__int16 *)this->m_VorbisState.TremorInfo.pucData);
+    v23 = this->m_uStitchBufferValidDataSize;
+    this->m_uStitchBufferLeft -= LOWORD(this->m_VorbisState.TremorInfo.ReturnInfo.uInputBytesConsumed);
+    v24 = v23 - this->m_uStitchBufferLeft;
+    m_uStitchBufferEndOffset = this->m_uStitchBufferEndOffset;
+    if ( v24 >= m_uStitchBufferEndOffset )
     {
-      v27 = v25 - v26;
-      v3->m_ulSizeLeft -= v27;
-      v3->m_pNextAddress += v27;
-      CAkSrcFileVorbis::FreeStitchBuffer(v3);
+      v26 = v24 - m_uStitchBufferEndOffset;
+      this->m_ulSizeLeft -= v26;
+      this->m_pNextAddress += v26;
+      CAkSrcFileVorbis::FreeStitchBuffer(this);
     }
   }
   else
   {
-    v28 = (__int16 *)v3->m_VorbisState.TremorInfo.pucData;
-    v29 = v3->m_pNextAddress;
-    v30 = v3->m_VorbisState.VorbisInfo.uMaxPacketSize;
-    v3->m_VorbisState.TremorInfo.uInputDataSize = v3->m_ulSizeLeft;
-    DecodeVorbis(&v3->m_VorbisState.TremorInfo, v30, v29, v28);
-    v31 = v3->m_VorbisState.TremorInfo.ReturnInfo.uInputBytesConsumed;
-    v3->m_pNextAddress += v31;
-    v3->m_ulSizeLeft -= v31;
+    pucData = (__int16 *)this->m_VorbisState.TremorInfo.pucData;
+    v28 = this->m_pNextAddress;
+    v29 = this->m_VorbisState.VorbisInfo.uMaxPacketSize;
+    this->m_VorbisState.TremorInfo.uInputDataSize = this->m_ulSizeLeft;
+    DecodeVorbis(&this->m_VorbisState.TremorInfo, v29, v28, pucData);
+    uInputBytesConsumed = this->m_VorbisState.TremorInfo.ReturnInfo.uInputBytesConsumed;
+    this->m_pNextAddress += uInputBytesConsumed;
+    this->m_ulSizeLeft -= uInputBytesConsumed;
   }
-  CAkSrcFileVorbis::SubmitBufferAndUpdateVorbis(v3, v2);
+  CAkSrcFileVorbis::SubmitBufferAndUpdateVorbis(this, io_state);
 }
 
 // File Line: 170
 // RVA: 0xABC040
 void __fastcall CAkSrcFileVorbis::SubmitBufferAndUpdateVorbis(CAkSrcFileVorbis *this, AkVPLState *io_state)
 {
-  AKRESULT v2; // eax
-  AkVPLState *v3; // rdi
-  CAkSrcFileVorbis *v4; // rbx
-  signed int v5; // eax
+  AKRESULT eDecoderStatus; // eax
+  AKRESULT v5; // eax
 
-  v2 = this->m_VorbisState.TremorInfo.ReturnInfo.eDecoderStatus;
-  v3 = io_state;
-  v4 = this;
-  io_state->result = v2;
-  if ( v2 != 2 )
+  eDecoderStatus = this->m_VorbisState.TremorInfo.ReturnInfo.eDecoderStatus;
+  io_state->result = eDecoderStatus;
+  if ( eDecoderStatus != AK_Fail )
   {
     CAkSrcBaseEx::SubmitBufferAndUpdate(
-      (CAkSrcBaseEx *)&this->vfptr,
+      this,
       this->m_VorbisState.TremorInfo.pucData,
       this->m_VorbisState.TremorInfo.ReturnInfo.uFramesProduced,
       this->m_VorbisState.uSampleRate,
       this->m_VorbisState.TremorInfo.uChannelMask,
       io_state);
-    if ( v3->result == 46 )
+    if ( io_state->result == AK_NoDataReady )
     {
-      if ( v4->m_pNextAddress )
+      if ( this->m_pNextAddress )
       {
-        v5 = 2;
-        if ( v4->m_VorbisState.TremorInfo.ReturnInfo.uInputBytesConsumed )
-          v5 = 45;
-        v3->result = v5;
+        v5 = AK_Fail;
+        if ( this->m_VorbisState.TremorInfo.ReturnInfo.uInputBytesConsumed )
+          v5 = AK_DataReady;
+        io_state->result = v5;
       }
     }
   }
@@ -236,32 +226,30 @@ void __fastcall CAkSrcFileVorbis::SubmitBufferAndUpdateVorbis(CAkSrcFileVorbis *
 // RVA: 0xABB920
 __int64 __fastcall CAkSrcFileVorbis::OnLoopComplete(CAkSrcFileVorbis *this, bool in_bEndOfFile)
 {
-  CAkSrcFileVorbis *v2; // rbx
-  unsigned __int16 v3; // ax
+  unsigned __int16 m_uLoopCnt; // ax
   unsigned int v4; // edi
-  unsigned __int16 v5; // r8
+  unsigned __int16 uLastGranuleExtra; // r8
 
-  v2 = this;
   if ( !in_bEndOfFile )
     --this->m_uStreamLoopCntAhead;
-  v3 = this->m_uLoopCnt;
-  if ( v3 > 1u )
-    this->m_uLoopCnt = v3 - 1;
+  m_uLoopCnt = this->m_uLoopCnt;
+  if ( m_uLoopCnt > 1u )
+    this->m_uLoopCnt = m_uLoopCnt - 1;
   v4 = 45;
   if ( in_bEndOfFile )
     v4 = 17;
   if ( !in_bEndOfFile )
   {
     if ( this->m_uLoopCnt == 1 )
-      v5 = this->m_VorbisState.VorbisInfo.uLastGranuleExtra;
+      uLastGranuleExtra = this->m_VorbisState.VorbisInfo.uLastGranuleExtra;
     else
-      v5 = this->m_VorbisState.VorbisInfo.LoopInfo.uLoopEndExtra;
+      uLastGranuleExtra = this->m_VorbisState.VorbisInfo.LoopInfo.uLoopEndExtra;
     vorbis_dsp_restart(
       &this->m_VorbisState.TremorInfo.VorbisDSPState,
       this->m_VorbisState.VorbisInfo.LoopInfo.uLoopBeginExtra,
-      v5);
-    v2->m_VorbisState.TremorInfo.ReturnInfo.eDecoderState = 3;
-    v2->m_VorbisState.TremorInfo.ReturnInfo.eDecoderStatus = 45;
+      uLastGranuleExtra);
+    this->m_VorbisState.TremorInfo.ReturnInfo.eDecoderState = 3;
+    this->m_VorbisState.TremorInfo.ReturnInfo.eDecoderStatus = AK_DataReady;
   }
   return v4;
 }
@@ -270,45 +258,43 @@ __int64 __fastcall CAkSrcFileVorbis::OnLoopComplete(CAkSrcFileVorbis *this, bool
 // RVA: 0xABBDE0
 void __fastcall CAkSrcFileVorbis::ReleaseBuffer(CAkSrcFileVorbis *this)
 {
-  char *v1; // rdx
-  CAkSrcFileVorbis *v2; // rbx
-  unsigned int v3; // er8
+  char *pucData; // rdx
+  unsigned int uChannelMask; // r8d
   int i; // ecx
 
-  v1 = this->m_VorbisState.TremorInfo.pucData;
-  v2 = this;
-  if ( v1 )
+  pucData = this->m_VorbisState.TremorInfo.pucData;
+  if ( pucData )
   {
-    v3 = this->m_VorbisState.TremorInfo.uChannelMask;
-    for ( i = 0; v3; v3 &= v3 - 1 )
+    uChannelMask = this->m_VorbisState.TremorInfo.uChannelMask;
+    for ( i = 0; uChannelMask; uChannelMask &= uChannelMask - 1 )
       ++i;
-    CAkLEngine::ReleaseCachedAudioBuffer(i << 11, v1);
-    v2->m_VorbisState.TremorInfo.ReturnInfo.uFramesProduced = 0;
-    v2->m_VorbisState.TremorInfo.pucData = 0i64;
+    CAkLEngine::ReleaseCachedAudioBuffer(i << 11, pucData);
+    this->m_VorbisState.TremorInfo.ReturnInfo.uFramesProduced = 0;
+    this->m_VorbisState.TremorInfo.pucData = 0i64;
   }
 }
 
 // File Line: 243
 // RVA: 0xABBE40
-signed __int64 __usercall CAkSrcFileVorbis::StartStream@<rax>(CAkSrcFileVorbis *this@<rcx>, float a2@<xmm0>)
+__int64 __fastcall CAkSrcFileVorbis::StartStream(CAkSrcFileVorbis *this)
 {
-  CAkSrcFileVorbis *v2; // rdi
-  unsigned int v3; // edx
-  AK::IAkAutoStream *v4; // rcx
-  signed __int64 result; // rax
-  unsigned int v6; // ebx
-  unsigned int v7; // ebx
-  CAkPBI *v8; // rax
-  AkAutoStmBufSettings in_bufSettings; // [rsp+20h] [rbp-18h]
-  bool out_bUsePrefetchedData; // [rsp+40h] [rbp+8h]
+  CAkSrcFileVorbis *v1; // rdi
+  unsigned int m_ulSizeLeft; // edx
+  AK::IAkAutoStream *m_pStream; // rcx
+  __int64 result; // rax
+  unsigned int Buffer; // ebx
+  unsigned int IsPrebufferingReady; // ebx
+  CAkPBI *m_pCtx; // rax
+  AkAutoStmBufSettings in_bufSettings; // [rsp+20h] [rbp-18h] BYREF
+  bool out_bUsePrefetchedData; // [rsp+40h] [rbp+8h] BYREF
 
-  v2 = this;
-  if ( *((_BYTE *)&this->0 + 126) & 4 )
+  v1 = this;
+  if ( (*((_BYTE *)&this->CAkSrcFileBase + 126) & 4) != 0 )
   {
-    if ( *((_BYTE *)&this->0 + 32) & 2 )
+    if ( (*((_BYTE *)&this->CAkVPLSrcNode + 32) & 2) != 0 )
     {
-      v3 = this->m_ulSizeLeft;
-      v4 = this->m_pStream;
+      m_ulSizeLeft = this->m_ulSizeLeft;
+      m_pStream = this->m_pStream;
       goto LABEL_14;
     }
     return 1i64;
@@ -317,369 +303,354 @@ signed __int64 __usercall CAkSrcFileVorbis::StartStream@<rax>(CAkSrcFileVorbis *
   {
     in_bufSettings.uBufferSize = 0;
     *(_QWORD *)&in_bufSettings.uMinBufferSize = 2048i64;
-    result = CAkSrcFileBase::CreateStream((CAkSrcFileBase *)&this->vfptr, &in_bufSettings, 0);
+    result = CAkSrcFileBase::CreateStream(this, &in_bufSettings, 0);
     if ( (_DWORD)result != 1 )
       return result;
-    v6 = CAkSrcFileBase::HandlePrefetch((CAkSrcFileBase *)&v2->vfptr, &out_bUsePrefetchedData);
-    if ( v6 != 1 )
-      return v6;
-    result = ((__int64 (*)(void))v2->m_pStream->vfptr->Start)();
+    Buffer = CAkSrcFileBase::HandlePrefetch(v1, &out_bUsePrefetchedData);
+    if ( Buffer != 1 )
+      return Buffer;
+    result = ((__int64 (__fastcall *)(AK::IAkAutoStream *))v1->m_pStream->CAkSrcFileBase::vfptr->Start)(v1->m_pStream);
     if ( (_DWORD)result != 1 )
       return result;
     if ( out_bUsePrefetchedData )
     {
-      v8 = v2->m_pCtx;
-      v2->m_uCurSample = 0;
-      v2->m_uLoopCnt = v8->m_LoopCount;
-      result = CAkSrcFileVorbis::DecodeVorbisHeader(v2);
-      v6 = result;
+      m_pCtx = v1->m_pCtx;
+      v1->m_uCurSample = 0;
+      v1->m_uLoopCnt = m_pCtx->m_LoopCount;
+      result = CAkSrcFileVorbis::DecodeVorbisHeader(v1);
+      Buffer = result;
       if ( (_DWORD)result != 1 )
         return result;
-      CAkSrcFileVorbis::VorbisDSPRestart(v2, 0);
-      return v6;
+      CAkSrcFileVorbis::VorbisDSPRestart(v1, 0);
+      return Buffer;
     }
-    this = v2;
+    this = v1;
   }
-  v6 = CAkSrcFileVorbis::ProcessFirstBuffer(this, a2);
-  if ( v6 != 1 )
-    return v6;
-  if ( !(*((_BYTE *)&v2->0 + 32) & 2) )
+  Buffer = CAkSrcFileVorbis::ProcessFirstBuffer(this);
+  if ( Buffer != 1 )
+    return Buffer;
+  if ( (*((_BYTE *)&v1->CAkVPLSrcNode + 32) & 2) == 0 )
     return 1i64;
-  v3 = v2->m_ulSizeLeft;
-  v4 = v2->m_pStream;
+  m_ulSizeLeft = v1->m_ulSizeLeft;
+  m_pStream = v1->m_pStream;
 LABEL_14:
-  v7 = AK::SrcFileServices::IsPrebufferingReady(v4, v3);
-  if ( v7 == 46 )
+  IsPrebufferingReady = AK::SrcFileServices::IsPrebufferingReady(m_pStream, m_ulSizeLeft);
+  if ( IsPrebufferingReady == 46 )
     return 63i64;
-  if ( v7 == 45 )
-    v7 = 1;
-  return v7;
+  if ( IsPrebufferingReady == 45 )
+    return 1;
+  return IsPrebufferingReady;
 }
 
 // File Line: 306
 // RVA: 0xABBFA0
 void __fastcall CAkSrcFileVorbis::StopStream(CAkSrcFileVorbis *this)
 {
-  CAkSrcFileVorbis *v1; // rbx
-  AkVorbisSeekTableItem *v2; // rdx
-  char *v3; // rdx
-  char *v4; // rdx
+  AkVorbisSeekTableItem *pSeekTable; // rdx
+  char *m_pStitchStreamBuffer; // rdx
+  char *m_pOggPacketData; // rdx
 
-  v1 = this;
   vorbis_dsp_clear(&this->m_VorbisState.TremorInfo.VorbisDSPState);
-  v1->vfptr->ReleaseBuffer((CAkVPLNode *)&v1->vfptr);
-  v2 = v1->m_VorbisState.pSeekTable;
-  if ( v2 )
+  this->vfptr->ReleaseBuffer(this);
+  pSeekTable = this->m_VorbisState.pSeekTable;
+  if ( pSeekTable )
   {
-    AK::MemoryMgr::Free(g_LEngineDefaultPoolId, v2);
-    v1->m_VorbisState.pSeekTable = 0i64;
+    AK::MemoryMgr::Free(g_LEngineDefaultPoolId, pSeekTable);
+    this->m_VorbisState.pSeekTable = 0i64;
   }
-  v3 = v1->m_pStitchStreamBuffer;
-  if ( v3 )
+  m_pStitchStreamBuffer = this->m_pStitchStreamBuffer;
+  if ( m_pStitchStreamBuffer )
   {
-    AK::MemoryMgr::Free(g_LEngineDefaultPoolId, v3);
-    v1->m_pStitchStreamBuffer = 0i64;
-    *(_DWORD *)&v1->m_uStitchBufferEndOffset = 0;
-    v1->m_uStitchBufferLeft = 0;
+    AK::MemoryMgr::Free(g_LEngineDefaultPoolId, m_pStitchStreamBuffer);
+    this->m_pStitchStreamBuffer = 0i64;
+    *(_DWORD *)&this->m_uStitchBufferEndOffset = 0;
+    this->m_uStitchBufferLeft = 0;
   }
-  v4 = v1->m_pOggPacketData;
-  if ( v4 )
+  m_pOggPacketData = this->m_pOggPacketData;
+  if ( m_pOggPacketData )
   {
-    AK::MemoryMgr::Free(g_LEngineDefaultPoolId, v4);
-    v1->m_pOggPacketData = 0i64;
+    AK::MemoryMgr::Free(g_LEngineDefaultPoolId, m_pOggPacketData);
+    this->m_pOggPacketData = 0i64;
   }
-  CAkSrcFileBase::StopStream((CAkSrcFileBase *)&v1->vfptr);
+  CAkSrcFileBase::StopStream(this);
 }
 
 // File Line: 336
 // RVA: 0xABBF80
-signed __int64 __fastcall CAkSrcFileVorbis::StopLooping(CAkSrcFileVorbis *this)
+__int64 __fastcall CAkSrcFileVorbis::StopLooping(CAkSrcFileVorbis *this)
 {
   if ( !this->m_uStreamLoopCntAhead )
     this->m_VorbisState.TremorInfo.VorbisDSPState.state.extra_samples_end = this->m_VorbisState.VorbisInfo.uLastGranuleExtra;
-  return CAkSrcFileBase::StopLooping((CAkSrcFileBase *)&this->vfptr);
+  return CAkSrcFileBase::StopLooping(this);
 }
 
 // File Line: 348
 // RVA: 0xABC150
-void __fastcall CAkSrcFileVorbis::VirtualOn(CAkSrcFileVorbis *this, AkVirtualQueueBehavior eBehavior)
+void __fastcall CAkSrcFileVorbis::VirtualOn(CAkSrcFileVorbis *this, unsigned int eBehavior)
 {
-  AkVirtualQueueBehavior v2; // ebx
-  CAkSrcFileVorbis *v3; // rdi
-  char *v4; // rdx
+  char *m_pStitchStreamBuffer; // rdx
 
-  v2 = eBehavior;
-  v3 = this;
-  CAkSrcFileBase::VirtualOn((CAkSrcFileBase *)&this->vfptr, eBehavior);
-  if ( (unsigned int)v2 <= 1 )
+  CAkSrcFileBase::VirtualOn(this, eBehavior);
+  if ( eBehavior <= 1 )
   {
-    v4 = v3->m_pStitchStreamBuffer;
-    if ( v4 )
+    m_pStitchStreamBuffer = this->m_pStitchStreamBuffer;
+    if ( m_pStitchStreamBuffer )
     {
-      AK::MemoryMgr::Free(g_LEngineDefaultPoolId, v4);
-      v3->m_pStitchStreamBuffer = 0i64;
-      *(_DWORD *)&v3->m_uStitchBufferEndOffset = 0;
-      v3->m_uStitchBufferLeft = 0;
+      AK::MemoryMgr::Free(g_LEngineDefaultPoolId, m_pStitchStreamBuffer);
+      this->m_pStitchStreamBuffer = 0i64;
+      *(_DWORD *)&this->m_uStitchBufferEndOffset = 0;
+      this->m_uStitchBufferLeft = 0;
     }
   }
 }
 
 // File Line: 359
 // RVA: 0xABC0C0
-signed __int64 __usercall CAkSrcFileVorbis::VirtualOff@<rax>(CAkSrcFileVorbis *this@<rcx>, __int64 eBehavior@<rdx>, bool in_bUseSourceOffset@<r8b>, float a4@<xmm0>)
+__int64 __fastcall CAkSrcFileVorbis::VirtualOff(CAkSrcFileVorbis *this, __int64 eBehavior, bool in_bUseSourceOffset)
 {
-  unsigned int v4; // ebx
-  CAkSrcFileVorbis *v5; // rdi
-  signed __int64 result; // rax
-  unsigned int v7; // esi
-  CAkPBI *v8; // rcx
-  unsigned int v9; // edx
-  unsigned __int16 v10; // r8
+  unsigned int v3; // ebx
+  __int64 result; // rax
+  unsigned int v6; // esi
+  CAkPBI *m_pCtx; // rcx
+  unsigned int m_uSeekPosition; // edx
+  unsigned __int16 uLastGranuleExtra; // r8
 
-  v4 = eBehavior;
-  v5 = this;
-  result = CAkSrcFileBase::VirtualOff((CAkSrcFileBase *)&this->vfptr, eBehavior, in_bUseSourceOffset, a4);
-  v7 = result;
-  if ( v4 <= 1 )
+  v3 = eBehavior;
+  result = CAkSrcFileBase::VirtualOff(this, eBehavior, in_bUseSourceOffset);
+  v6 = result;
+  if ( v3 <= 1 )
   {
-    v8 = v5->m_pCtx;
-    if ( *((_BYTE *)v8 + 375) & 2 )
-      v9 = 0;
+    m_pCtx = this->m_pCtx;
+    if ( (*((_BYTE *)m_pCtx + 375) & 2) != 0 )
+      m_uSeekPosition = 0;
     else
-      v9 = v8->m_uSeekPosition;
-    *((_BYTE *)v8 + 375) &= 0xF1u;
-    v8->m_uSeekPosition = 0;
-    v5->m_uCurSample += v9;
-    if ( v5->m_uLoopCnt == 1 )
-      v10 = v5->m_VorbisState.VorbisInfo.uLastGranuleExtra;
+      m_uSeekPosition = m_pCtx->m_uSeekPosition;
+    *((_BYTE *)m_pCtx + 375) &= 0xF1u;
+    m_pCtx->m_uSeekPosition = 0;
+    this->m_uCurSample += m_uSeekPosition;
+    if ( this->m_uLoopCnt == 1 )
+      uLastGranuleExtra = this->m_VorbisState.VorbisInfo.uLastGranuleExtra;
     else
-      v10 = v5->m_VorbisState.VorbisInfo.LoopInfo.uLoopEndExtra;
-    vorbis_dsp_restart(&v5->m_VorbisState.TremorInfo.VorbisDSPState, v9, v10);
-    v5->m_VorbisState.TremorInfo.ReturnInfo.eDecoderState = 3;
-    result = v7;
+      uLastGranuleExtra = this->m_VorbisState.VorbisInfo.LoopInfo.uLoopEndExtra;
+    vorbis_dsp_restart(&this->m_VorbisState.TremorInfo.VorbisDSPState, m_uSeekPosition, uLastGranuleExtra);
+    this->m_VorbisState.TremorInfo.ReturnInfo.eDecoderState = 3;
+    return v6;
   }
   return result;
 }
 
 // File Line: 380
 // RVA: 0xABB2C0
-signed __int64 __fastcall CAkSrcFileVorbis::DecodeVorbisHeader(CAkSrcFileVorbis *this)
+__int64 __fastcall CAkSrcFileVorbis::DecodeVorbisHeader(CAkSrcFileVorbis *this)
 {
-  AkVorbisDecoderState v1; // eax
-  CAkSrcFileVorbis *v2; // rbx
-  unsigned int v3; // ecx
-  unsigned int v4; // eax
-  unsigned int v5; // esi
+  AkVorbisDecoderState eDecoderState; // eax
+  unsigned int m_ulSizeLeft; // ecx
+  unsigned int uSeekTableSizeRead; // eax
+  unsigned int dwSeekTableSize; // esi
   unsigned int v6; // esi
-  unsigned int v7; // er8
+  unsigned int uChannelMask; // r8d
   int v8; // edi
   int i; // edx
-  signed __int64 result; // rax
-  AKRESULT v11; // eax
-  CAkVorbisAllocator *v12; // rax
-  char *v13; // rax
-  ogg_packet out_OggPacket; // [rsp+20h] [rbp-28h]
+  AKRESULT NextPacket; // eax
+  codec_setup_info **v12; // rax
+  codec_setup_info *v13; // rax
+  ogg_packet out_OggPacket; // [rsp+20h] [rbp-28h] BYREF
 
-  v1 = this->m_VorbisState.TremorInfo.ReturnInfo.eDecoderState;
-  v2 = this;
-  if ( (signed int)v1 >= 3 )
+  eDecoderState = this->m_VorbisState.TremorInfo.ReturnInfo.eDecoderState;
+  if ( eDecoderState >= 3 )
   {
 LABEL_11:
-    v7 = v2->m_VorbisState.TremorInfo.uChannelMask;
+    uChannelMask = this->m_VorbisState.TremorInfo.uChannelMask;
     v8 = 0;
-    for ( i = 0; v7; v7 &= v7 - 1 )
+    for ( i = 0; uChannelMask; uChannelMask &= uChannelMask - 1 )
       ++i;
-    LOBYTE(v8) = vorbis_dsp_init(&v2->m_VorbisState.TremorInfo.VorbisDSPState, i) != 0;
-    result = (unsigned int)(v8 + 1);
+    LOBYTE(v8) = vorbis_dsp_init(&this->m_VorbisState.TremorInfo.VorbisDSPState, i) != 0;
+    return (unsigned int)(v8 + 1);
   }
   else
   {
     while ( 1 )
     {
-      v3 = v2->m_ulSizeLeft;
-      if ( !v3 )
+      m_ulSizeLeft = this->m_ulSizeLeft;
+      if ( !m_ulSizeLeft )
         return 63i64;
-      if ( (signed int)v1 < 2 )
+      if ( eDecoderState < 2 )
       {
-        v4 = v2->m_VorbisState.uSeekTableSizeRead;
-        v5 = v2->m_VorbisState.VorbisInfo.dwSeekTableSize;
-        if ( v4 < v5 )
+        uSeekTableSizeRead = this->m_VorbisState.uSeekTableSizeRead;
+        dwSeekTableSize = this->m_VorbisState.VorbisInfo.dwSeekTableSize;
+        if ( uSeekTableSizeRead < dwSeekTableSize )
         {
-          v6 = v5 - v4;
-          if ( v3 < v6 )
-            v6 = v2->m_ulSizeLeft;
-          memmove((char *)v2->m_VorbisState.pSeekTable + v4, v2->m_pNextAddress, v6);
-          v2->m_VorbisState.uSeekTableSizeRead += v6;
-          v2->m_pNextAddress += v6;
-          v2->m_ulSizeLeft -= v6;
+          v6 = dwSeekTableSize - uSeekTableSizeRead;
+          if ( m_ulSizeLeft < v6 )
+            v6 = this->m_ulSizeLeft;
+          memmove((char *)this->m_VorbisState.pSeekTable + uSeekTableSizeRead, this->m_pNextAddress, v6);
+          this->m_VorbisState.uSeekTableSizeRead += v6;
+          this->m_pNextAddress += v6;
+          this->m_ulSizeLeft -= v6;
         }
-        if ( v2->m_VorbisState.uSeekTableSizeRead == v2->m_VorbisState.VorbisInfo.dwSeekTableSize )
+        if ( this->m_VorbisState.uSeekTableSizeRead == this->m_VorbisState.VorbisInfo.dwSeekTableSize )
           break;
       }
-      v1 = v2->m_VorbisState.TremorInfo.ReturnInfo.eDecoderState;
-      if ( v1 == 2 )
+      eDecoderState = this->m_VorbisState.TremorInfo.ReturnInfo.eDecoderState;
+      if ( eDecoderState == 2 )
         goto LABEL_15;
-      if ( (signed int)v1 >= 3 )
+      if ( eDecoderState >= 3 )
         goto LABEL_11;
     }
-    v2->m_VorbisState.TremorInfo.ReturnInfo.eDecoderState = 2;
+    this->m_VorbisState.TremorInfo.ReturnInfo.eDecoderState = 2;
 LABEL_15:
-    v11 = CAkSrcFileVorbis::GetNextPacket(v2, &out_OggPacket);
-    if ( v11 == 46 )
+    NextPacket = CAkSrcFileVorbis::GetNextPacket(this, &out_OggPacket);
+    if ( NextPacket == AK_NoDataReady )
       return 63i64;
-    if ( v11 != 2 && v11 != 17 && v11 != 52 )
+    if ( NextPacket != AK_Fail && NextPacket != AK_NoMoreData && NextPacket != AK_InsufficientMemory )
     {
-      v12 = AkVorbisCodebookMgr::Decodebook(&g_VorbisCodebookMgr, &v2->m_VorbisState, v2->m_pCtx, &out_OggPacket);
+      v12 = (codec_setup_info **)AkVorbisCodebookMgr::Decodebook(
+                                   &g_VorbisCodebookMgr,
+                                   &this->m_VorbisState,
+                                   this->m_pCtx,
+                                   &out_OggPacket);
       if ( v12 )
       {
-        v13 = v12->pStartAddress;
-        v2->m_VorbisState.TremorInfo.ReturnInfo.eDecoderState = 3;
-        v2->m_VorbisState.TremorInfo.VorbisDSPState.csi = (codec_setup_info *)v13;
+        v13 = *v12;
+        this->m_VorbisState.TremorInfo.ReturnInfo.eDecoderState = 3;
+        this->m_VorbisState.TremorInfo.VorbisDSPState.csi = v13;
         goto LABEL_11;
       }
     }
-    result = 2i64;
+    return 2i64;
   }
-  return result;
 }
 
 // File Line: 483
 // RVA: 0xABBC20
-signed __int64 __usercall CAkSrcFileVorbis::ProcessFirstBuffer@<rax>(CAkSrcFileVorbis *this@<rcx>, float a2@<xmm0>)
+__int64 __fastcall CAkSrcFileVorbis::ProcessFirstBuffer(CAkSrcFileVorbis *this)
 {
-  CAkSrcFileVorbis *v2; // rbx
-  AKRESULT v3; // eax
-  signed __int64 result; // rax
-  CAkPBI *v5; // rax
-  char *v6; // rdx
-  __int64 v7; // rcx
-  unsigned int v8; // eax
-  unsigned int v9; // edi
-  char v10; // al
-  unsigned int v11; // ecx
-  char v12; // al
-  CAkPBI *v13; // rax
-  char *in_pBuffer; // [rsp+30h] [rbp+8h]
+  AKRESULT v2; // eax
+  __int64 result; // rax
+  CAkPBI *m_pCtx; // rax
+  char *v5; // rdx
+  __int64 m_uDataOffset; // rcx
+  unsigned int v7; // eax
+  unsigned int v8; // edi
+  char v9; // al
+  unsigned int m_uSeekPosition; // ecx
+  char v11; // al
+  CAkPBI *v12; // rax
+  char *in_pBuffer; // [rsp+30h] [rbp+8h] BYREF
 
-  v2 = this;
-  *((_BYTE *)&this->0 + 32) ^= (*((_BYTE *)&this->0 + 32) ^ (*((_BYTE *)this->m_pCtx + 374) >> 4)) & 2;
-  v3 = (unsigned int)this->m_pStream->vfptr->GetBuffer(this->m_pStream, (void **)&in_pBuffer, &this->m_ulSizeLeft, 0);
-  if ( v3 == 46 )
+  *((_BYTE *)&this->CAkVPLSrcNode + 32) ^= (*((_BYTE *)&this->CAkVPLSrcNode + 32) ^ (*((_BYTE *)this->m_pCtx + 374) >> 4)) & 2;
+  v2 = this->m_pStream->CAkSrcFileBase::vfptr->GetBuffer(this->m_pStream, (void **)&in_pBuffer, &this->m_ulSizeLeft, 0);
+  if ( v2 == AK_NoDataReady )
     return 63i64;
-  if ( v3 != 45 && v3 != 17 )
+  if ( v2 != AK_DataReady && v2 != AK_NoMoreData )
     return 2i64;
-  if ( v2->m_VorbisState.TremorInfo.ReturnInfo.eDecoderState )
+  if ( this->m_VorbisState.TremorInfo.ReturnInfo.eDecoderState )
   {
-    result = CAkSrcFileBase::ProcessStreamBuffer((CAkSrcFileBase *)&v2->vfptr, in_pBuffer, 0);
+    result = CAkSrcFileBase::ProcessStreamBuffer(this, in_pBuffer, 0);
     if ( (_DWORD)result != 1 )
       return result;
   }
   else
   {
-    result = ((__int64 (__fastcall *)(CAkSrcFileVorbis *, char *))v2->vfptr[2].VirtualOff)(v2, in_pBuffer);
+    result = ((__int64 (__fastcall *)(CAkSrcFileVorbis *, char *))this->vfptr[2].VirtualOff)(this, in_pBuffer);
     if ( (_DWORD)result != 1 )
       return result;
-    v5 = v2->m_pCtx;
-    v6 = in_pBuffer;
-    v2->m_uCurSample = 0;
-    v2->m_uLoopCnt = v5->m_LoopCount;
-    result = CAkSrcFileBase::ProcessStreamBuffer((CAkSrcFileBase *)&v2->vfptr, v6, 0);
+    m_pCtx = this->m_pCtx;
+    v5 = in_pBuffer;
+    this->m_uCurSample = 0;
+    this->m_uLoopCnt = m_pCtx->m_LoopCount;
+    result = CAkSrcFileBase::ProcessStreamBuffer(this, v5, 0);
     if ( (_DWORD)result != 1 )
       return result;
-    v7 = v2->m_uDataOffset;
-    v2->m_pNextAddress += v7;
-    v2->m_ulSizeLeft -= v7;
+    m_uDataOffset = this->m_uDataOffset;
+    this->m_pNextAddress += m_uDataOffset;
+    this->m_ulSizeLeft -= m_uDataOffset;
   }
-  v8 = CAkSrcFileVorbis::DecodeVorbisHeader(v2);
-  v9 = v8;
-  if ( v8 == 1 )
+  v7 = CAkSrcFileVorbis::DecodeVorbisHeader(this);
+  v8 = v7;
+  if ( v7 == 1 )
   {
-    LOWORD(v11) = 0;
-    if ( *((_BYTE *)v2->m_pCtx + 375) & 2 )
+    LOWORD(m_uSeekPosition) = 0;
+    if ( (*((_BYTE *)this->m_pCtx + 375) & 2) != 0 )
     {
-      v9 = CAkSrcFileBase::SeekToSourceOffset((CAkSrcFileBase *)&v2->vfptr, a2);
-      if ( v2->m_ulSizeLeft )
+      v8 = CAkSrcFileBase::SeekToSourceOffset(this);
+      if ( this->m_ulSizeLeft )
       {
-        v12 = *((_BYTE *)&v2->0 + 126);
-        if ( v12 & 2 )
-          *((_BYTE *)&v2->0 + 126) = v12 & 0xFD;
+        v11 = *((_BYTE *)&this->CAkSrcFileBase + 126);
+        if ( (v11 & 2) != 0 )
+          *((_BYTE *)&this->CAkSrcFileBase + 126) = v11 & 0xFD;
         else
-          ((void (*)(void))v2->m_pStream->vfptr->ReleaseBuffer)();
-        v2->m_pNextAddress = 0i64;
-        v2->m_ulSizeLeft = 0;
+          this->m_pStream->CAkSrcFileBase::vfptr->ReleaseBuffer(this->m_pStream);
+        this->m_pNextAddress = 0i64;
+        this->m_ulSizeLeft = 0;
       }
-      v13 = v2->m_pCtx;
-      if ( *((_BYTE *)v13 + 375) & 2 )
-        v11 = 0;
+      v12 = this->m_pCtx;
+      if ( (*((_BYTE *)v12 + 375) & 2) != 0 )
+        m_uSeekPosition = 0;
       else
-        v11 = v13->m_uSeekPosition;
-      *((_BYTE *)v13 + 375) &= 0xF1u;
-      v13->m_uSeekPosition = 0;
-      v2->m_uCurSample += v11;
+        m_uSeekPosition = v12->m_uSeekPosition;
+      *((_BYTE *)v12 + 375) &= 0xF1u;
+      v12->m_uSeekPosition = 0;
+      this->m_uCurSample += m_uSeekPosition;
     }
-    CAkSrcFileVorbis::VorbisDSPRestart(v2, v11);
-    *((_BYTE *)&v2->0 + 126) |= 4u;
+    CAkSrcFileVorbis::VorbisDSPRestart(this, m_uSeekPosition);
+    *((_BYTE *)&this->CAkSrcFileBase + 126) |= 4u;
   }
-  else if ( v8 == 63 && !v2->m_ulSizeLeft )
+  else if ( v7 == 63 && !this->m_ulSizeLeft )
   {
-    v10 = *((_BYTE *)&v2->0 + 126);
-    if ( v10 & 2 )
+    v9 = *((_BYTE *)&this->CAkSrcFileBase + 126);
+    if ( (v9 & 2) != 0 )
     {
-      v2->m_pNextAddress = 0i64;
-      *((_BYTE *)&v2->0 + 126) = v10 & 0xFD;
+      this->m_pNextAddress = 0i64;
+      *((_BYTE *)&this->CAkSrcFileBase + 126) = v9 & 0xFD;
     }
     else
     {
-      ((void (*)(void))v2->m_pStream->vfptr->ReleaseBuffer)();
-      v2->m_pNextAddress = 0i64;
+      this->m_pStream->CAkSrcFileBase::vfptr->ReleaseBuffer(this->m_pStream);
+      this->m_pNextAddress = 0i64;
     }
   }
-  return v9;
+  return v8;
 }
 
 // File Line: 577
 // RVA: 0xABB9B0
-unsigned int __fastcall CAkSrcFileVorbis::ParseHeader(CAkSrcFileVorbis *this, char *in_pBuffer)
+AKRESULT __fastcall CAkSrcFileVorbis::ParseHeader(CAkSrcFileVorbis *this, char *in_pBuffer)
 {
-  CAkSrcFileVorbis *v2; // rbx
-  unsigned int *v3; // r15
-  unsigned int *v4; // rbp
-  unsigned int *v5; // r14
-  unsigned int *v6; // r12
-  signed __int64 v7; // rsi
-  char *v8; // rax
-  unsigned int v9; // edx
-  unsigned int result; // eax
-  _DWORD *v11; // rdi
-  CAkPBI *v12; // rcx
+  unsigned int *p_m_uDataOffset; // r15
+  unsigned int *p_m_uDataSize; // rbp
+  unsigned int *p_m_uPCMLoopEnd; // r14
+  unsigned int *p_m_uPCMLoopStart; // r12
+  unsigned int *p_nSamplesPerSec; // rsi
+  unsigned int m_ulSizeLeft; // edx
+  AKRESULT result; // eax
+  WaveFormatExtensible *pFormat; // rdi
+  CAkPBI *m_pCtx; // rcx
   bool v13; // zf
-  unsigned int v14; // edx
+  unsigned int dwSeekTableSize; // edx
   unsigned int v15; // ecx
   CAkPBI *v16; // rax
   unsigned int v17; // eax
   AkVorbisSeekTableItem *v18; // rax
-  AK::IAkAutoStream *v19; // rcx
-  int v20; // edx
-  AkFileParser::AnalysisDataChunk in_analysisDataChunk; // [rsp+50h] [rbp-58h]
-  AkAutoStmHeuristics io_heuristics; // [rsp+60h] [rbp-48h]
-  __int64 v23; // [rsp+70h] [rbp-38h]
-  __int64 v24; // [rsp+78h] [rbp-30h]
-  AkAudioFormat v25; // [rsp+B0h] [rbp+8h]
+  AK::IAkAutoStream *m_pStream; // rcx
+  int uMaxPacketSize; // edx
+  AkFileParser::AnalysisDataChunk in_analysisDataChunk; // [rsp+50h] [rbp-58h] BYREF
+  AkAutoStmHeuristics io_heuristics; // [rsp+60h] [rbp-48h] BYREF
+  AkFileParser::FormatInfo v23; // [rsp+70h] [rbp-38h] BYREF
+  AkAudioFormat v24; // [rsp+B0h] [rbp+8h]
 
-  v2 = this;
-  v3 = &this->m_uDataOffset;
-  v4 = &this->m_uDataSize;
-  v5 = &this->m_uPCMLoopEnd;
-  v6 = &this->m_uPCMLoopStart;
-  v7 = 0i64;
-  v8 = in_pBuffer;
-  v9 = this->m_ulSizeLeft;
+  p_m_uDataOffset = &this->m_uDataOffset;
+  p_m_uDataSize = &this->m_uDataSize;
+  p_m_uPCMLoopEnd = &this->m_uPCMLoopEnd;
+  p_m_uPCMLoopStart = &this->m_uPCMLoopStart;
+  p_nSamplesPerSec = 0i64;
+  m_ulSizeLeft = this->m_ulSizeLeft;
   in_analysisDataChunk.uDataSize = 0;
   in_analysisDataChunk.pData = 0i64;
   result = AkFileParser::Parse(
-             v8,
-             v9,
-             (AkFileParser::FormatInfo *)&v23,
+             in_pBuffer,
+             m_ulSizeLeft,
+             &v23,
              &this->m_markers,
              &this->m_uPCMLoopStart,
              &this->m_uPCMLoopEnd,
@@ -687,68 +658,70 @@ unsigned int __fastcall CAkSrcFileVorbis::ParseHeader(CAkSrcFileVorbis *this, ch
              &this->m_uDataOffset,
              &in_analysisDataChunk,
              0i64);
-  if ( result == 1 )
+  if ( result == AK_Success )
   {
-    v11 = (_DWORD *)v24;
-    if ( *(_WORD *)v24 == -1 )
+    pFormat = v23.pFormat;
+    if ( v23.pFormat->wFormatTag == 0xFFFF )
     {
-      v25.uSampleRate = *(_DWORD *)(v24 + 4);
-      *((_DWORD *)&v25 + 1) = *(_DWORD *)(v24 + 20) & 0x3FFFF | (*(unsigned __int16 *)(v24 + 2) << 25) & 0x1F000000 | 0x400000;
-      v12 = v2->m_pCtx;
-      v12->m_sMediaFormat = v25;
-      CAkPBI::InvalidateFeedbackParameters(v12);
-      if ( in_analysisDataChunk.uDataSize > 0 )
-        CAkSrcFileBase::StoreAnalysisData((CAkSrcFileBase *)&v2->vfptr, &in_analysisDataChunk);
-      v2->m_uTotalSamples = v11[6];
-      if ( v11 != (_DWORD *)-24i64 )
-        v7 = (signed __int64)(v11 + 7);
-      v13 = *v6 == 0;
-      *(_QWORD *)&v2->m_VorbisState.VorbisInfo.LoopInfo.dwLoopStartPacketOffset = *(_QWORD *)v7;
-      *(_QWORD *)&v2->m_VorbisState.VorbisInfo.LoopInfo.uLoopBeginExtra = *(_QWORD *)(v7 + 8);
-      *(_QWORD *)&v2->m_VorbisState.VorbisInfo.dwVorbisDataOffset = *(_QWORD *)(v7 + 16);
-      *(_QWORD *)&v2->m_VorbisState.VorbisInfo.dwDecodeAllocSize = *(_QWORD *)(v7 + 24);
-      v2->m_VorbisState.VorbisInfo.uHashCodebook = *(_DWORD *)(v7 + 32);
-      *(_WORD *)v2->m_VorbisState.VorbisInfo.uBlockSizes = *(_WORD *)(v7 + 36);
-      v2->m_VorbisState.TremorInfo.uChannelMask = v11[5];
-      v2->m_VorbisState.uSampleRate = v11[1];
-      if ( v13 && !*v5 )
-        *v5 = v2->m_uTotalSamples - 1;
-      if ( v2->m_uLoopCnt == 1 )
+      v24.uSampleRate = v23.pFormat->nSamplesPerSec;
+      *((_DWORD *)&v24 + 1) = v23.pFormat->dwChannelMask & 0x3FFFF | (v23.pFormat->nChannels << 25) & 0x1F000000 | 0x400000;
+      m_pCtx = this->m_pCtx;
+      m_pCtx->m_sMediaFormat = v24;
+      CAkPBI::InvalidateFeedbackParameters(m_pCtx);
+      if ( in_analysisDataChunk.uDataSize )
+        CAkSrcFileBase::StoreAnalysisData(this, &in_analysisDataChunk);
+      this->m_uTotalSamples = *(_DWORD *)&pFormat[1].wFormatTag;
+      if ( pFormat != (WaveFormatExtensible *)-24i64 )
+        p_nSamplesPerSec = &pFormat[1].nSamplesPerSec;
+      v13 = *p_m_uPCMLoopStart == 0;
+      *(_QWORD *)&this->m_VorbisState.VorbisInfo.LoopInfo.dwLoopStartPacketOffset = *(_QWORD *)p_nSamplesPerSec;
+      *(_QWORD *)&this->m_VorbisState.VorbisInfo.LoopInfo.uLoopBeginExtra = *((_QWORD *)p_nSamplesPerSec + 1);
+      *(_QWORD *)&this->m_VorbisState.VorbisInfo.dwVorbisDataOffset = *((_QWORD *)p_nSamplesPerSec + 2);
+      *(_QWORD *)&this->m_VorbisState.VorbisInfo.dwDecodeAllocSize = *((_QWORD *)p_nSamplesPerSec + 3);
+      this->m_VorbisState.VorbisInfo.uHashCodebook = p_nSamplesPerSec[8];
+      *(_WORD *)this->m_VorbisState.VorbisInfo.uBlockSizes = *((_WORD *)p_nSamplesPerSec + 18);
+      this->m_VorbisState.TremorInfo.uChannelMask = pFormat->dwChannelMask;
+      this->m_VorbisState.uSampleRate = pFormat->nSamplesPerSec;
+      if ( v13 && !*p_m_uPCMLoopEnd )
+        *p_m_uPCMLoopEnd = this->m_uTotalSamples - 1;
+      if ( this->m_uLoopCnt == 1 )
       {
-        v2->m_ulLoopStart = *v3 + v2->m_VorbisState.VorbisInfo.dwVorbisDataOffset;
-        v2->m_ulLoopEnd = *v3 + *v4;
+        this->m_ulLoopStart = *p_m_uDataOffset + this->m_VorbisState.VorbisInfo.dwVorbisDataOffset;
+        this->m_ulLoopEnd = *p_m_uDataOffset + *p_m_uDataSize;
       }
       else
       {
-        v14 = v2->m_VorbisState.VorbisInfo.dwSeekTableSize;
-        v15 = *v3;
-        v2->m_ulLoopStart = v2->m_VorbisState.VorbisInfo.LoopInfo.dwLoopStartPacketOffset + *v3 + v14;
-        v2->m_ulLoopEnd = v14 + v15 + v2->m_VorbisState.VorbisInfo.LoopInfo.dwLoopEndPacketOffset;
+        dwSeekTableSize = this->m_VorbisState.VorbisInfo.dwSeekTableSize;
+        v15 = *p_m_uDataOffset;
+        this->m_ulLoopStart = this->m_VorbisState.VorbisInfo.LoopInfo.dwLoopStartPacketOffset
+                            + *p_m_uDataOffset
+                            + dwSeekTableSize;
+        this->m_ulLoopEnd = dwSeekTableSize + v15 + this->m_VorbisState.VorbisInfo.LoopInfo.dwLoopEndPacketOffset;
       }
-      v2->m_pStream->vfptr->GetHeuristics(v2->m_pStream, &io_heuristics);
-      CAkSrcFileBase::GetStreamLoopHeuristic((CAkSrcFileBase *)&v2->vfptr, v2->m_uLoopCnt != 1, &io_heuristics);
-      v16 = v2->m_pCtx;
-      io_heuristics.fThroughput = (float)(signed int)v11[2] * 0.001;
-      io_heuristics.priority = (signed int)v16->m_PriorityInfoCurrent.currentPriority.priority;
-      v2->m_pStream->vfptr->SetHeuristics(v2->m_pStream, &io_heuristics);
-      v17 = v2->m_VorbisState.VorbisInfo.dwSeekTableSize;
+      this->m_pStream->CAkSrcFileBase::vfptr->GetHeuristics(this->m_pStream, &io_heuristics);
+      CAkSrcFileBase::GetStreamLoopHeuristic(this, this->m_uLoopCnt != 1, &io_heuristics);
+      v16 = this->m_pCtx;
+      io_heuristics.fThroughput = (float)(int)pFormat->nAvgBytesPerSec * 0.001;
+      io_heuristics.priority = (int)v16->m_PriorityInfoCurrent.currentPriority.priority;
+      this->m_pStream->CAkSrcFileBase::vfptr->SetHeuristics(this->m_pStream, &io_heuristics);
+      v17 = this->m_VorbisState.VorbisInfo.dwSeekTableSize;
       if ( !v17
         || (v18 = (AkVorbisSeekTableItem *)AK::MemoryMgr::Malloc(g_LEngineDefaultPoolId, v17),
-            (v2->m_VorbisState.pSeekTable = v18) != 0i64) )
+            (this->m_VorbisState.pSeekTable = v18) != 0i64) )
       {
-        v19 = v2->m_pStream;
-        v20 = v2->m_VorbisState.VorbisInfo.uMaxPacketSize;
-        v2->m_VorbisState.TremorInfo.ReturnInfo.eDecoderState = 1;
-        result = v19->vfptr->SetMinimalBufferSize(v19, 2 * v20);
+        m_pStream = this->m_pStream;
+        uMaxPacketSize = this->m_VorbisState.VorbisInfo.uMaxPacketSize;
+        this->m_VorbisState.TremorInfo.ReturnInfo.eDecoderState = 1;
+        return m_pStream->vfptr->SetMinimalBufferSize(m_pStream, 2 * uMaxPacketSize);
       }
       else
       {
-        result = 52;
+        return 52;
       }
     }
     else
     {
-      result = 7;
+      return 7;
     }
   }
   return result;
@@ -756,19 +729,19 @@ unsigned int __fastcall CAkSrcFileVorbis::ParseHeader(CAkSrcFileVorbis *this, ch
 
 // File Line: 679
 // RVA: 0xABB420
-signed __int64 __fastcall CAkSrcFileVorbis::FindClosestFileOffset(CAkSrcFileVorbis *this, unsigned int in_uDesiredSample, unsigned int *out_uSeekedSample, unsigned int *out_uFileOffset)
+__int64 __fastcall CAkSrcFileVorbis::FindClosestFileOffset(
+        CAkSrcFileVorbis *this,
+        unsigned int in_uDesiredSample,
+        unsigned int *out_uSeekedSample,
+        unsigned int *out_uFileOffset)
 {
-  CAkSrcFileVorbis *v4; // rdi
-  unsigned int *v5; // rbx
-  signed __int64 result; // rax
+  __int64 result; // rax
 
-  v4 = this;
-  v5 = out_uFileOffset;
   result = VorbisSeek(&this->m_VorbisState, in_uDesiredSample, out_uSeekedSample, out_uFileOffset);
   if ( (_DWORD)result != 2 )
   {
-    *v5 += v4->m_uDataOffset;
-    result = 1i64;
+    *out_uFileOffset += this->m_uDataOffset;
+    return 1i64;
   }
   return result;
 }
@@ -777,160 +750,153 @@ signed __int64 __fastcall CAkSrcFileVorbis::FindClosestFileOffset(CAkSrcFileVorb
 // RVA: 0xABB460
 void __fastcall CAkSrcFileVorbis::FreeStitchBuffer(CAkSrcFileVorbis *this)
 {
-  char *v1; // rdx
-  CAkSrcFileVorbis *v2; // rbx
+  char *m_pStitchStreamBuffer; // rdx
 
-  v1 = this->m_pStitchStreamBuffer;
-  v2 = this;
-  if ( v1 )
+  m_pStitchStreamBuffer = this->m_pStitchStreamBuffer;
+  if ( m_pStitchStreamBuffer )
   {
-    AK::MemoryMgr::Free(g_LEngineDefaultPoolId, v1);
-    v2->m_pStitchStreamBuffer = 0i64;
-    *(_DWORD *)&v2->m_uStitchBufferEndOffset = 0;
-    v2->m_uStitchBufferLeft = 0;
+    AK::MemoryMgr::Free(g_LEngineDefaultPoolId, m_pStitchStreamBuffer);
+    this->m_pStitchStreamBuffer = 0i64;
+    *(_DWORD *)&this->m_uStitchBufferEndOffset = 0;
+    this->m_uStitchBufferLeft = 0;
   }
 }
 
 // File Line: 707
 // RVA: 0xABB760
-unsigned int __fastcall CAkSrcFileVorbis::GetNextPacket(CAkSrcFileVorbis *this, ogg_packet *out_OggPacket)
+AKRESULT __fastcall CAkSrcFileVorbis::GetNextPacket(CAkSrcFileVorbis *this, ogg_packet *out_OggPacket)
 {
-  ogg_packet *v2; // r14
-  CAkSrcFileVorbis *v3; // rbx
   char v4; // al
-  unsigned int result; // eax
-  __int64 v6; // rdx
-  unsigned __int64 v7; // rsi
+  AKRESULT result; // eax
+  __int64 m_uPacketHeaderGathered; // rdx
+  unsigned __int64 m_ulSizeLeft; // rsi
   char *v8; // rdx
   char *v9; // rax
   unsigned int v10; // esi
-  unsigned int v11; // eax
+  unsigned int m_uPacketDataGathered; // eax
   unsigned int v12; // ecx
   unsigned int v13; // esi
-  char *v14; // rax
-  int v15; // ecx
+  char *m_pOggPacketData; // rax
+  int uPacketSize; // ecx
 
-  v2 = out_OggPacket;
-  v3 = this;
   while ( 1 )
   {
-    if ( !v3->m_ulSizeLeft )
+    if ( !this->m_ulSizeLeft )
     {
-      v4 = *((_BYTE *)&v3->0 + 126);
-      if ( v4 & 1 )
+      v4 = *((_BYTE *)&this->CAkSrcFileBase + 126);
+      if ( (v4 & 1) != 0 )
         return 17;
-      if ( v4 & 2 )
-        *((_BYTE *)&v3->0 + 126) = v4 & 0xFD;
+      if ( (v4 & 2) != 0 )
+        *((_BYTE *)&this->CAkSrcFileBase + 126) = v4 & 0xFD;
       else
-        ((void (*)(void))v3->m_pStream->vfptr->ReleaseBuffer)();
-      result = CAkSrcFileBase::FetchStreamBuffer((CAkSrcFileBase *)&v3->vfptr);
-      if ( result != 45 )
+        this->m_pStream->CAkSrcFileBase::vfptr->ReleaseBuffer(this->m_pStream);
+      result = CAkSrcFileBase::FetchStreamBuffer(this);
+      if ( result != AK_DataReady )
         return result;
     }
-    v6 = v3->m_uPacketHeaderGathered;
-    if ( (unsigned int)v6 >= 2 )
+    m_uPacketHeaderGathered = this->m_uPacketHeaderGathered;
+    if ( (unsigned int)m_uPacketHeaderGathered >= 2 )
       break;
-    v7 = v3->m_ulSizeLeft;
-    if ( (_DWORD)v7 )
+    m_ulSizeLeft = this->m_ulSizeLeft;
+    if ( (_DWORD)m_ulSizeLeft )
     {
-      if ( v7 >= 2 - v6 )
-        LODWORD(v7) = 2 - v6;
-      memmove((char *)&v3->m_OggPacketHeader + v3->m_uPacketHeaderGathered, v3->m_pNextAddress, (unsigned int)v7);
-      v3->m_uPacketHeaderGathered += v7;
-      v3->m_pNextAddress += (unsigned int)v7;
-      v3->m_ulSizeLeft -= v7;
-      if ( v3->m_uPacketHeaderGathered == 2 )
+      if ( m_ulSizeLeft >= 2 - m_uPacketHeaderGathered )
+        LODWORD(m_ulSizeLeft) = 2 - m_uPacketHeaderGathered;
+      memmove(
+        (char *)&this->m_OggPacketHeader + this->m_uPacketHeaderGathered,
+        this->m_pNextAddress,
+        (unsigned int)m_ulSizeLeft);
+      this->m_uPacketHeaderGathered += m_ulSizeLeft;
+      this->m_pNextAddress += (unsigned int)m_ulSizeLeft;
+      this->m_ulSizeLeft -= m_ulSizeLeft;
+      if ( this->m_uPacketHeaderGathered == 2 )
         break;
     }
     else
     {
-LABEL_22:
-      if ( v3->m_uPacketHeaderGathered == 2 && v3->m_uPacketDataGathered == v3->m_OggPacketHeader.uPacketSize )
+LABEL_21:
+      if ( this->m_uPacketHeaderGathered == 2 && this->m_uPacketDataGathered == this->m_OggPacketHeader.uPacketSize )
       {
-        v14 = v3->m_pOggPacketData;
-        v15 = v3->m_OggPacketHeader.uPacketSize;
-        v2->e_o_s = 0;
-        v2->buffer.data = v14;
-        v2->buffer.size = v15;
-        *(_QWORD *)&v3->m_uPacketDataGathered = 0i64;
+        m_pOggPacketData = this->m_pOggPacketData;
+        uPacketSize = this->m_OggPacketHeader.uPacketSize;
+        out_OggPacket->e_o_s = 0;
+        out_OggPacket->buffer.data = m_pOggPacketData;
+        out_OggPacket->buffer.size = uPacketSize;
+        *(_QWORD *)&this->m_uPacketDataGathered = 0i64;
         return 45;
       }
     }
   }
-  if ( v3->m_uPacketDataGathered )
-    goto LABEL_30;
-  v8 = v3->m_pOggPacketData;
+  if ( this->m_uPacketDataGathered )
+    goto LABEL_16;
+  v8 = this->m_pOggPacketData;
   if ( v8 )
   {
     AK::MemoryMgr::Free(g_LEngineDefaultPoolId, v8);
-    v3->m_pOggPacketData = 0i64;
+    this->m_pOggPacketData = 0i64;
   }
-  v9 = (char *)AK::MemoryMgr::Malloc(g_LEngineDefaultPoolId, v3->m_OggPacketHeader.uPacketSize);
-  v3->m_pOggPacketData = v9;
+  v9 = (char *)AK::MemoryMgr::Malloc(g_LEngineDefaultPoolId, this->m_OggPacketHeader.uPacketSize);
+  this->m_pOggPacketData = v9;
   if ( v9 )
   {
-LABEL_30:
-    v10 = v3->m_OggPacketHeader.uPacketSize;
-    v11 = v3->m_uPacketDataGathered;
-    if ( v11 < v10 )
+LABEL_16:
+    v10 = this->m_OggPacketHeader.uPacketSize;
+    m_uPacketDataGathered = this->m_uPacketDataGathered;
+    if ( m_uPacketDataGathered < v10 )
     {
-      v12 = v3->m_ulSizeLeft;
+      v12 = this->m_ulSizeLeft;
       if ( v12 )
       {
-        v13 = v10 - v11;
+        v13 = v10 - m_uPacketDataGathered;
         if ( v12 < v13 )
-          v13 = v3->m_ulSizeLeft;
-        memmove(&v3->m_pOggPacketData[v11], v3->m_pNextAddress, v13);
-        v3->m_uPacketDataGathered += v13;
-        v3->m_pNextAddress += v13;
-        v3->m_ulSizeLeft -= v13;
+          v13 = this->m_ulSizeLeft;
+        memmove(&this->m_pOggPacketData[m_uPacketDataGathered], this->m_pNextAddress, v13);
+        this->m_uPacketDataGathered += v13;
+        this->m_pNextAddress += v13;
+        this->m_ulSizeLeft -= v13;
       }
     }
-    goto LABEL_22;
+    goto LABEL_21;
   }
   return 52;
 }
 
 // File Line: 800
 // RVA: 0xABB170
-signed __int64 __fastcall CAkSrcFileVorbis::ChangeSourcePosition(CAkSrcFileVorbis *this)
+__int64 __fastcall CAkSrcFileVorbis::ChangeSourcePosition(CAkSrcFileVorbis *this)
 {
-  CAkSrcFileVorbis *v1; // rbx
-  signed __int64 result; // rax
-  unsigned int v3; // edi
-  char *v4; // rdx
-  CAkPBI *v5; // rax
-  unsigned int v6; // edx
-  unsigned __int16 v7; // r8
+  __int64 result; // rax
+  char *m_pStitchStreamBuffer; // rdx
+  CAkPBI *m_pCtx; // rax
+  unsigned int m_uSeekPosition; // edx
+  unsigned __int16 uLastGranuleExtra; // r8
 
-  v1 = this;
-  result = CAkSrcFileBase::ChangeSourcePosition((CAkSrcFileBase *)&this->vfptr);
-  v3 = result;
+  result = CAkSrcFileBase::ChangeSourcePosition(this);
   if ( (_DWORD)result == 1 )
   {
-    v4 = v1->m_pStitchStreamBuffer;
-    if ( v4 )
+    m_pStitchStreamBuffer = this->m_pStitchStreamBuffer;
+    if ( m_pStitchStreamBuffer )
     {
-      AK::MemoryMgr::Free(g_LEngineDefaultPoolId, v4);
-      v1->m_pStitchStreamBuffer = 0i64;
-      *(_DWORD *)&v1->m_uStitchBufferEndOffset = 0;
-      v1->m_uStitchBufferLeft = 0;
+      AK::MemoryMgr::Free(g_LEngineDefaultPoolId, m_pStitchStreamBuffer);
+      this->m_pStitchStreamBuffer = 0i64;
+      *(_DWORD *)&this->m_uStitchBufferEndOffset = 0;
+      this->m_uStitchBufferLeft = 0;
     }
-    v5 = v1->m_pCtx;
-    if ( *((_BYTE *)v5 + 375) & 2 )
-      v6 = 0;
+    m_pCtx = this->m_pCtx;
+    if ( (*((_BYTE *)m_pCtx + 375) & 2) != 0 )
+      m_uSeekPosition = 0;
     else
-      v6 = v5->m_uSeekPosition;
-    *((_BYTE *)v5 + 375) &= 0xF1u;
-    v5->m_uSeekPosition = 0;
-    v1->m_uCurSample += v6;
-    if ( v1->m_uLoopCnt == 1 )
-      v7 = v1->m_VorbisState.VorbisInfo.uLastGranuleExtra;
+      m_uSeekPosition = m_pCtx->m_uSeekPosition;
+    *((_BYTE *)m_pCtx + 375) &= 0xF1u;
+    m_pCtx->m_uSeekPosition = 0;
+    this->m_uCurSample += m_uSeekPosition;
+    if ( this->m_uLoopCnt == 1 )
+      uLastGranuleExtra = this->m_VorbisState.VorbisInfo.uLastGranuleExtra;
     else
-      v7 = v1->m_VorbisState.VorbisInfo.LoopInfo.uLoopEndExtra;
-    vorbis_dsp_restart(&v1->m_VorbisState.TremorInfo.VorbisDSPState, v6, v7);
-    v1->m_VorbisState.TremorInfo.ReturnInfo.eDecoderState = 3;
-    result = v3;
+      uLastGranuleExtra = this->m_VorbisState.VorbisInfo.LoopInfo.uLoopEndExtra;
+    vorbis_dsp_restart(&this->m_VorbisState.TremorInfo.VorbisDSPState, m_uSeekPosition, uLastGranuleExtra);
+    this->m_VorbisState.TremorInfo.ReturnInfo.eDecoderState = 3;
+    return 1i64;
   }
   return result;
 }

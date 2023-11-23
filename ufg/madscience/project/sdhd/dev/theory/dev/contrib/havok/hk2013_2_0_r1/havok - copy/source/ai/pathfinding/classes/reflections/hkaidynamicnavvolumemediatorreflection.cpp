@@ -28,23 +28,26 @@ hkClass *__fastcall hkaiDynamicNavVolumeMediator::staticClass()
 
 // File Line: 67
 // RVA: 0xBB6740
-void __fastcall finishLoadedObjecthkaiDynamicNavVolumeMediator(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiDynamicNavVolumeMediator(
+        hkaiDynamicNavVolumeMediator *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiDynamicNavVolumeMediator::hkaiDynamicNavVolumeMediator);
+  if ( p )
+    hkaiDynamicNavVolumeMediator::hkaiDynamicNavVolumeMediator(p, finishing);
 }
 
 // File Line: 73
 // RVA: 0xBB6760
-void __fastcall cleanupLoadedObjecthkaiDynamicNavVolumeMediator(void *p)
+void __fastcall cleanupLoadedObjecthkaiDynamicNavVolumeMediator(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 77
 // RVA: 0xBB6770
 hkBaseObjectVtbl *__fastcall getVtablehkaiDynamicNavVolumeMediator()
 {
-  hkaiDynamicNavVolumeMediator v1; // [rsp+20h] [rbp-28h]
+  hkaiDynamicNavVolumeMediator v1; // [rsp+20h] [rbp-28h] BYREF
 
   hkaiDynamicNavVolumeMediator::hkaiDynamicNavVolumeMediator(&v1, 0);
   return v1.vfptr;
@@ -61,8 +64,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiDynamicNavVolumeMediatorTypeInfo_
   hkaiDynamicNavVolumeMediatorTypeInfo.m_typeName = "hkaiDynamicNavVolumeMediator";
   hkaiDynamicNavVolumeMediatorTypeInfo.m_vtable = result;
   hkaiDynamicNavVolumeMediatorTypeInfo.m_scopedName = "!hkaiDynamicNavVolumeMediator";
-  hkaiDynamicNavVolumeMediatorTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiDynamicNavVolumeMediator;
-  hkaiDynamicNavVolumeMediatorTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiDynamicNavVolumeMediator;
+  hkaiDynamicNavVolumeMediatorTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiDynamicNavVolumeMediator;
+  hkaiDynamicNavVolumeMediatorTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiDynamicNavVolumeMediator;
   return result;
 }
 

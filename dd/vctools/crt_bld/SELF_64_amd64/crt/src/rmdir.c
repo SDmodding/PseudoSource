@@ -1,16 +1,16 @@
 // File Line: 66
 // RVA: 0x12C2544
-signed __int64 __fastcall wrmdir(const wchar_t *path)
+__int64 __fastcall wrmdir(const wchar_t *path)
 {
-  unsigned int v1; // eax
+  unsigned int LastError; // eax
 
   if ( RemoveDirectoryW(path) )
-    v1 = 0;
+    LastError = 0;
   else
-    v1 = GetLastError();
-  if ( !v1 )
+    LastError = GetLastError();
+  if ( !LastError )
     return 0i64;
-  dosmaperr(v1);
+  dosmaperr(LastError);
   return 0xFFFFFFFFi64;
 }
 

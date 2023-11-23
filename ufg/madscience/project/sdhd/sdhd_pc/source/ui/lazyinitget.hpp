@@ -1,11 +1,12 @@
 // File Line: 27
 // RVA: 0x5C8D10
-void __fastcall UFG::LazyInitGet<UFG::UIFXManager>::~LazyInitGet<UFG::UIFXManager>(UFG::LazyInitGet<UFG::UIFXManager> *this)
+void __fastcall UFG::LazyInitGet<UFG::UIFXManager>::~LazyInitGet<UFG::UIFXManager>(
+        UFG::LazyInitGet<UFG::UIFXManager> *this)
 {
   UFG::UIFXManager *v1; // rax
 
   v1 = UFG::LazyInitGet<UFG::UIFXManager>::m_instance;
-  if ( UFG::LazyInitGet<UFG::UIFXManager>::m_instance == (UFG::UIFXManager *)this )
+  if ( UFG::LazyInitGet<UFG::UIFXManager>::m_instance == this )
     v1 = 0i64;
   UFG::LazyInitGet<UFG::UIFXManager>::m_instance = v1;
 }

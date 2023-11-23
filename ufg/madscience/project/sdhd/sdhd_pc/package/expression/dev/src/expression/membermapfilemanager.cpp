@@ -2,80 +2,60 @@
 // RVA: 0x151B60
 void __fastcall MemberMapFileNode::MemberMapFileNode(MemberMapFileNode *this)
 {
-  MemberMapFileNode *v1; // rbx
-  UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *v2; // rax
-  UFG::qList<MemberMapFileNode,MemberMapFileNodeListIdentifier,0,0> *v3; // [rsp+48h] [rbp+10h]
-
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
-  v2 = (UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *)&this->mPrev;
-  v2->mPrev = v2;
-  v2->mNext = v2;
+  this->mPrev = &this->UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier>;
+  this->mNext = &this->UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier>;
   this->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileNode::`vftable;
   UFG::qString::qString(&this->mName);
-  v3 = &v1->mChildren;
-  v3->mNode.mPrev = &v3->mNode;
-  v3->mNode.mNext = &v3->mNode;
-  v1->mMemberMapFileProject = 0i64;
+  this->mChildren.mNode.mPrev = &this->mChildren.mNode;
+  this->mChildren.mNode.mNext = &this->mChildren.mNode;
+  this->mMemberMapFileProject = 0i64;
 }
 
 // File Line: 37
 // RVA: 0x151DC0
 void __fastcall MemberMapFileNode::~MemberMapFileNode(MemberMapFileNode *this)
 {
-  MemberMapFileNode *v1; // rbx
-  UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *v2; // rdx
-  UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *v3; // rcx
-  UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *v4; // rax
+  UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *mPrev; // rcx
+  UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *mNext; // rax
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileNode::`vftable;
   UFG::qList<UFG::qTask,UFG::TaskPlat,0,0>::~qList<UFG::qTask,UFG::TaskPlat,0,0>(&this->mChildren);
-  UFG::qString::~qString(&v1->mName);
-  v2 = (UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *)&v1->mPrev;
-  v3 = v1->mPrev;
-  v4 = v1->mNext;
-  v3->mNext = v4;
-  v4->mPrev = v3;
-  v2->mPrev = v2;
-  v2->mNext = v2;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  UFG::qString::~qString(&this->mName);
+  mPrev = this->mPrev;
+  mNext = this->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->mPrev = &this->UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier>;
+  this->mNext = &this->UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier>;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 90
 // RVA: 0x152370
 void __fastcall MemberMapFileNode::GetResourcePath(MemberMapFileNode *this, char *path, int pathSize)
 {
-  int v3; // esi
-  char *v4; // rbp
-  MemberMapFileNode *v5; // rax
-  signed int v6; // edi
-  signed __int64 v7; // rbx
+  int v6; // edi
+  __int64 i; // rbx
   int v8; // eax
   __int64 v9; // rdi
   __int64 v10; // rbx
   const char *v11; // rax
-  UFG::qString v12; // [rsp+20h] [rbp-138h]
+  UFG::qString v12; // [rsp+20h] [rbp-138h] BYREF
   __int64 v13; // [rsp+48h] [rbp-110h]
   __int64 v14[32]; // [rsp+50h] [rbp-108h]
 
   v13 = -2i64;
-  v3 = pathSize;
-  v4 = path;
-  v5 = this;
   v6 = 0;
-  v7 = 0i64;
-  do
+  for ( i = 0i64; i < 32; ++i )
   {
-    if ( !v5 )
+    if ( !this )
       break;
-    v14[v7] = (__int64)v5;
+    v14[i] = (__int64)this;
     ++v6;
-    ++v7;
-    v5 = (MemberMapFileNode *)v5->vfptr->GetResourceOwner((Expression::IMemberMap *)&v5->vfptr);
+    this = (MemberMapFileNode *)this->vfptr->GetResourceOwner(this);
   }
-  while ( v7 < 32 );
   UFG::qString::qString(&v12, "Global");
   if ( v6 > 2 )
   {
@@ -94,7 +74,7 @@ void __fastcall MemberMapFileNode::GetResourcePath(MemberMapFileNode *this, char
       while ( v9 >= 0 );
     }
   }
-  UFG::qSPrintf(v4, v3, v12.mData);
+  UFG::qSPrintf(path, pathSize, v12.mData);
   UFG::qString::~qString(&v12);
 }
 
@@ -118,7 +98,7 @@ __int64 dynamic_initializer_for__gMemberMapFileObjectFactory__()
     &gMemberMapFileObjectFactory,
     sMemberMapFileObjectList,
     sMemberMapFileObjectListNum);
-  return atexit(dynamic_atexit_destructor_for__gMemberMapFileObjectFactory__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gMemberMapFileObjectFactory__);
 }
 
 // File Line: 136
@@ -136,80 +116,71 @@ __int64 dynamic_initializer_for__MemberMapFileObject::sClassNameUID__()
 // RVA: 0x151BD0
 void __fastcall MemberMapFileObject::MemberMapFileObject(MemberMapFileObject *this)
 {
-  MemberMapFileObject *v1; // rbx
-
-  v1 = this;
-  MemberMapFileNode::MemberMapFileNode((MemberMapFileNode *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileObject::`vftable;
-  v1->mFileTime = 0i64;
-  UFG::qString::qString(&v1->mRelativeFilePath);
-  UFG::qString::qString(&v1->mAbsoluteFilePath);
-  v1->mMemberMapResource = 0i64;
-  UFG::qString::qString(&v1->mResourcePath);
-  *(_WORD *)&v1->mModified = 0;
+  MemberMapFileNode::MemberMapFileNode(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileObject::`vftable;
+  this->mFileTime = 0i64;
+  UFG::qString::qString(&this->mRelativeFilePath);
+  UFG::qString::qString(&this->mAbsoluteFilePath);
+  this->mMemberMapResource = 0i64;
+  UFG::qString::qString(&this->mResourcePath);
+  *(_WORD *)&this->mModified = 0;
 }
 
 // File Line: 154
 // RVA: 0x151E20
 void __fastcall MemberMapFileObject::~MemberMapFileObject(MemberMapFileObject *this)
 {
-  MemberMapFileObject *v1; // rbx
-  UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *v2; // rdx
-  UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *v3; // rcx
-  UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *v4; // rax
+  UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *mPrev; // rcx
+  UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *mNext; // rax
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileObject::`vftable;
   UFG::qString::~qString(&this->mResourcePath);
-  UFG::qString::~qString(&v1->mAbsoluteFilePath);
-  UFG::qString::~qString(&v1->mRelativeFilePath);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileNode::`vftable;
-  UFG::qList<UFG::qTask,UFG::TaskPlat,0,0>::~qList<UFG::qTask,UFG::TaskPlat,0,0>(&v1->mChildren);
-  UFG::qString::~qString(&v1->mName);
-  v2 = (UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *)&v1->mPrev;
-  v3 = v1->mPrev;
-  v4 = v1->mNext;
-  v3->mNext = v4;
-  v4->mPrev = v3;
-  v2->mPrev = v2;
-  v2->mNext = v2;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  UFG::qString::~qString(&this->mAbsoluteFilePath);
+  UFG::qString::~qString(&this->mRelativeFilePath);
+  this->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileNode::`vftable;
+  UFG::qList<UFG::qTask,UFG::TaskPlat,0,0>::~qList<UFG::qTask,UFG::TaskPlat,0,0>(&this->mChildren);
+  UFG::qString::~qString(&this->mName);
+  mPrev = this->mPrev;
+  mNext = this->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->mPrev = &this->UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier>;
+  this->mNext = &this->UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier>;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 204
 // RVA: 0x152920
 void __fastcall MemberMapFileObject::UpdateDependentMembers(MemberMapFileObject *this)
 {
-  MemberMapFileObject *v1; // rbx
-  char *v2; // rdx
-  MemberMapFileProject *v3; // rdx
-  UFG::qString *v4; // rax
-  UFG::qString v5; // [rsp+30h] [rbp-88h]
+  char *mData; // rdx
+  MemberMapFileProject *mMemberMapFileProject; // rdx
+  UFG::qString *Filename; // rax
+  UFG::qString v5; // [rsp+30h] [rbp-88h] BYREF
   __int64 v6; // [rsp+58h] [rbp-60h]
-  UFG::qString result; // [rsp+60h] [rbp-58h]
-  UFG::qString v8; // [rsp+88h] [rbp-30h]
+  UFG::qString result; // [rsp+60h] [rbp-58h] BYREF
+  UFG::qString v8; // [rsp+88h] [rbp-30h] BYREF
 
   v6 = -2i64;
-  v1 = this;
   UFG::qString::qString(&v5);
-  if ( v1->vfptr->GetClassNameUID((Expression::IMemberMap *)&v1->vfptr) == MemberMapFileProject::sClassNameUID )
+  if ( this->vfptr->GetClassNameUID(this) == MemberMapFileProject::sClassNameUID )
   {
-    v2 = MemberMapFileManager::sMemberMapFileManager->mStartupPath.mData;
+    mData = MemberMapFileManager::sMemberMapFileManager->mStartupPath.mData;
   }
   else
   {
-    v3 = v1->mMemberMapFileProject;
-    if ( v3 )
-      v2 = v3->mAbsoluteDataPath.mData;
+    mMemberMapFileProject = this->mMemberMapFileProject;
+    if ( mMemberMapFileProject )
+      mData = mMemberMapFileProject->mAbsoluteDataPath.mData;
     else
-      v2 = MemberMapFileManager::sMemberMapFileManager->mActiveProject->mAbsoluteDataPath.mData;
+      mData = MemberMapFileManager::sMemberMapFileManager->mActiveProject->mAbsoluteDataPath.mData;
   }
-  UFG::qString::Set(&v5, v2);
-  UFG::qMakeFullPath(&result, v5.mData, v1->mRelativeFilePath.mData);
-  v4 = UFG::qString::GetFilename(&result, &v8);
-  UFG::qString::Set(&v1->mName, v4->mData, v4->mLength, 0i64, 0);
+  UFG::qString::Set(&v5, mData);
+  UFG::qMakeFullPath(&result, v5.mData, this->mRelativeFilePath.mData);
+  Filename = UFG::qString::GetFilename(&result, &v8);
+  UFG::qString::Set(&this->mName, Filename->mData, Filename->mLength, 0i64, 0);
   UFG::qString::~qString(&v8);
-  UFG::qString::Set(&v1->mAbsoluteFilePath, result.mData);
+  UFG::qString::Set(&this->mAbsoluteFilePath, result.mData);
   UFG::qString::~qString(&result);
   UFG::qString::~qString(&v5);
 }
@@ -218,14 +189,11 @@ void __fastcall MemberMapFileObject::UpdateDependentMembers(MemberMapFileObject 
 // RVA: 0x152810
 void __fastcall MemberMapFileObject::OnSubjectUpdate(MemberMapFileObject *this, const char *message)
 {
-  MemberMapFileObject *v2; // rbx
-
-  v2 = this;
   if ( (!message || strcmp("ReadOnlyVarChange", message))
-    && !v2->mIsLoading
+    && !this->mIsLoading
     && !MemberMapFileProject::sLoadingFileObjects )
   {
-    v2->mModified = 1;
+    this->mModified = 1;
   }
 }
 
@@ -255,7 +223,7 @@ __int64 dynamic_initializer_for__gMemberMapFileDependentFactory__()
     &gMemberMapFileDependentFactory,
     sMemberMapFileDependentList,
     sMemberMapFileDependentListNum);
-  return atexit(dynamic_atexit_destructor_for__gMemberMapFileDependentFactory__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gMemberMapFileDependentFactory__);
 }
 
 // File Line: 373
@@ -289,7 +257,7 @@ __int64 dynamic_initializer_for__gMemberMapFileGroupFactory__()
     &gMemberMapFileGroupFactory,
     sMemberMapFileGroupList,
     sMemberMapFileGroupListNum);
-  return atexit(dynamic_atexit_destructor_for__gMemberMapFileGroupFactory__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gMemberMapFileGroupFactory__);
 }
 
 // File Line: 416
@@ -307,24 +275,20 @@ __int64 dynamic_initializer_for__MemberMapFileGroup::sClassNameUID__()
 // RVA: 0x151D50
 void __fastcall MemberMapFileGroup::~MemberMapFileGroup(MemberMapFileGroup *this)
 {
-  MemberMapFileGroup *v1; // rbx
-  UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *v2; // rdx
-  UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *v3; // rcx
-  UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *v4; // rax
+  UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *mPrev; // rcx
+  UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *mNext; // rax
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileGroup::`vftable;
   this->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileNode::`vftable;
   UFG::qList<UFG::qTask,UFG::TaskPlat,0,0>::~qList<UFG::qTask,UFG::TaskPlat,0,0>(&this->mChildren);
-  UFG::qString::~qString(&v1->mName);
-  v2 = (UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *)&v1->mPrev;
-  v3 = v1->mPrev;
-  v4 = v1->mNext;
-  v3->mNext = v4;
-  v4->mPrev = v3;
-  v2->mPrev = v2;
-  v2->mNext = v2;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  UFG::qString::~qString(&this->mName);
+  mPrev = this->mPrev;
+  mNext = this->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->mPrev = &this->UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier>;
+  this->mNext = &this->UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier>;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 444
@@ -349,84 +313,79 @@ __int64 dynamic_initializer_for__MemberMapFileProject::sClassNameUID__()
 // RVA: 0x151C40
 void __fastcall MemberMapFileProject::MemberMapFileProject(MemberMapFileProject *this)
 {
-  MemberMapFileProject *v1; // rdi
   MemberMapFileManager *v2; // rbx
-  UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *v3; // rcx
-  UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *v4; // rax
+  UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *mPrev; // rax
 
-  v1 = this;
-  MemberMapFileObject::MemberMapFileObject((MemberMapFileObject *)&this->vfptr);
-  v1->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileProject::`vftable;
-  UFG::qString::qString(&v1->mRelativeDataPath);
-  UFG::qString::qString(&v1->mAbsoluteDataPath);
-  v1->mMemberMapResource = (Expression::IMemberMap *)&v1->vfptr;
+  MemberMapFileObject::MemberMapFileObject(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileProject::`vftable;
+  UFG::qString::qString(&this->mRelativeDataPath);
+  UFG::qString::qString(&this->mAbsoluteDataPath);
+  this->mMemberMapResource = this;
   v2 = MemberMapFileManager::sMemberMapFileManager;
-  MemberMapFileManager::sMemberMapFileManager->mActiveProject = v1;
-  v1->vfptr->SetResourceOwner((Expression::IMemberMap *)&v1->vfptr, (Expression::IMemberMap *)&v2->vfptr);
-  v3 = (UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *)&v1->mPrev;
-  v4 = v2->mChildren.mNode.mPrev;
-  v4->mNext = (UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *)&v1->mPrev;
-  v3->mPrev = v4;
-  v3->mNext = &v2->mChildren.mNode;
-  v2->mChildren.mNode.mPrev = (UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *)&v1->mPrev;
+  MemberMapFileManager::sMemberMapFileManager->mActiveProject = this;
+  this->vfptr->SetResourceOwner(this, v2);
+  mPrev = v2->mChildren.mNode.MemberMapFileGroup::MemberMapFileNode::mPrev;
+  mPrev->mNext = &this->UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier>;
+  this->mPrev = mPrev;
+  this->mNext = &v2->mChildren.mNode;
+  v2->mChildren.mNode.MemberMapFileGroup::MemberMapFileNode::mPrev = &this->UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier>;
 }
 
 // File Line: 477
 // RVA: 0x152570
 Expression::IMemberMap *__fastcall MemberMapFileProject::LoadMemberMapFileProject(const char *projectFileName)
 {
-  const char *v1; // rbx
-  UFG::qString *v2; // rax
-  void **v4; // [rsp+30h] [rbp-C8h]
-  __int64 v5; // [rsp+38h] [rbp-C0h]
-  __int64 v6; // [rsp+40h] [rbp-B8h]
-  UFG::qString v7; // [rsp+48h] [rbp-B0h]
-  UFG::qString result; // [rsp+70h] [rbp-88h]
-  UFG::qString v9; // [rsp+98h] [rbp-60h]
-  UFG::qString v10; // [rsp+C0h] [rbp-38h]
-  void **v11; // [rsp+108h] [rbp+10h]
+  UFG::qString *FullPath; // rax
+  __int64 v4[3]; // [rsp+30h] [rbp-C8h] BYREF
+  UFG::qString v5; // [rsp+48h] [rbp-B0h] BYREF
+  UFG::qString result; // [rsp+70h] [rbp-88h] BYREF
+  UFG::qString v7; // [rsp+98h] [rbp-60h] BYREF
+  UFG::qString v8; // [rsp+C0h] [rbp-38h] BYREF
+  void **v9; // [rsp+108h] [rbp+10h] BYREF
 
-  v6 = -2i64;
-  v1 = projectFileName;
-  UFG::qString::qString(&v10);
-  UFG::qMakeRelativePathFromDirToFile(&result, MemberMapFileManager::sMemberMapFileManager->mStartupPath.mData, v1);
+  v4[2] = -2i64;
+  UFG::qString::qString(&v8);
+  UFG::qMakeRelativePathFromDirToFile(
+    &result,
+    MemberMapFileManager::sMemberMapFileManager->mStartupPath.mData,
+    projectFileName);
   UFG::qString::Set((UFG::qString *)0x68, result.mData);
   MemberMapFileObject::UpdateDependentMembers(0i64);
   UFG::qString::Set((UFG::qString *)0xF0, MEMORY[0x108]);
-  UFG::qString::GetFilePath((UFG::qString *)0x90, &v7);
-  v2 = UFG::qMakeFullPath(&v9, v7.mData, MEMORY[0x108]);
-  UFG::qString::Set((UFG::qString *)0x118, v2->mData, v2->mLength, 0i64, 0);
-  UFG::qString::~qString(&v9);
-  v11 = &MemberMapFileProjectResolveRelativePathsVisitor::`vftable;
-  (*(void (__fastcall **)(_QWORD, void ***))(MEMORY[0] + 80))(0i64, &v11);
+  UFG::qString::GetFilePath((UFG::qString *)0x90, &v5);
+  FullPath = UFG::qMakeFullPath(&v7, v5.mData, MEMORY[0x108]);
+  UFG::qString::Set((UFG::qString *)0x118, FullPath->mData, FullPath->mLength, 0i64, 0);
   UFG::qString::~qString(&v7);
+  v9 = &MemberMapFileProjectResolveRelativePathsVisitor::`vftable;
+  (*(void (__fastcall **)(_QWORD, void ***))(MEMORY[0] + 80))(0i64, &v9);
+  UFG::qString::~qString(&v5);
   MemberMapFileProject::sLoadingFileObjects = 1;
-  v4 = &MemberMapFileNodeLoadAllFileObjectsVisitor::`vftable;
-  v5 = 0i64;
-  (*(void (__fastcall **)(_QWORD, void ***))(MEMORY[0] + 80))(0i64, &v4);
+  v4[0] = (__int64)&MemberMapFileNodeLoadAllFileObjectsVisitor::`vftable;
+  v4[1] = 0i64;
+  (*(void (__fastcall **)(_QWORD, __int64 *))(MEMORY[0] + 80))(0i64, v4);
   MemberMapFileProject::sLoadingFileObjects = 0;
   UFG::qString::~qString(&result);
-  UFG::qString::~qString(&v10);
+  UFG::qString::~qString(&v8);
   return 0i64;
 }
 
 // File Line: 498
 // RVA: 0x1526B0
-Expression::IMemberMap *__fastcall MemberMapFileProject::NewMemberMapFileProject(const char *fileName, unsigned __int64 toolVersion)
+Expression::IMemberMap *__fastcall MemberMapFileProject::NewMemberMapFileProject(
+        const char *fileName,
+        unsigned __int64 toolVersion)
 {
-  const char *v2; // rdi
   MemberMapFileProject *v3; // rax
   __int64 v4; // rax
   __int64 v5; // rbx
-  UFG::qString *v6; // rax
-  UFG::qString v8; // [rsp+38h] [rbp-80h]
-  UFG::qString result; // [rsp+60h] [rbp-58h]
-  UFG::qString v10; // [rsp+88h] [rbp-30h]
-  void **v11; // [rsp+D0h] [rbp+18h]
+  UFG::qString *FullPath; // rax
+  UFG::qString v8; // [rsp+38h] [rbp-80h] BYREF
+  UFG::qString result; // [rsp+60h] [rbp-58h] BYREF
+  UFG::qString v10; // [rsp+88h] [rbp-30h] BYREF
+  void **p_vfptr; // [rsp+D0h] [rbp+18h] BYREF
 
-  v2 = fileName;
   v3 = (MemberMapFileProject *)UFG::qMemoryPool2::Allocate(&gActionTreeMemoryPool, 0x140ui64, "IMemberMap", 0i64, 1u);
-  v11 = (void **)&v3->vfptr;
+  p_vfptr = (void **)&v3->vfptr;
   if ( v3 )
   {
     MemberMapFileProject::MemberMapFileProject(v3);
@@ -436,16 +395,19 @@ Expression::IMemberMap *__fastcall MemberMapFileProject::NewMemberMapFileProject
   {
     v5 = 0i64;
   }
-  UFG::qMakeRelativePathFromDirToFile(&result, MemberMapFileManager::sMemberMapFileManager->mStartupPath.mData, v2);
+  UFG::qMakeRelativePathFromDirToFile(
+    &result,
+    MemberMapFileManager::sMemberMapFileManager->mStartupPath.mData,
+    fileName);
   UFG::qString::Set((UFG::qString *)(v5 + 104), result.mData);
   MemberMapFileObject::UpdateDependentMembers((MemberMapFileObject *)v5);
   UFG::qString::Set((UFG::qString *)(v5 + 240), *(const char **)(v5 + 264));
   UFG::qString::GetFilePath((UFG::qString *)(v5 + 144), &v8);
-  v6 = UFG::qMakeFullPath(&v10, v8.mData, *(const char **)(v5 + 264));
-  UFG::qString::Set((UFG::qString *)(v5 + 280), v6->mData, v6->mLength, 0i64, 0);
+  FullPath = UFG::qMakeFullPath(&v10, v8.mData, *(const char **)(v5 + 264));
+  UFG::qString::Set((UFG::qString *)(v5 + 280), FullPath->mData, FullPath->mLength, 0i64, 0);
   UFG::qString::~qString(&v10);
-  v11 = &MemberMapFileProjectResolveRelativePathsVisitor::`vftable;
-  (*(void (__fastcall **)(__int64, void ***))(*(_QWORD *)v5 + 80i64))(v5, &v11);
+  p_vfptr = &MemberMapFileProjectResolveRelativePathsVisitor::`vftable;
+  (*(void (__fastcall **)(__int64, void ***))(*(_QWORD *)v5 + 80i64))(v5, &p_vfptr);
   UFG::qString::~qString(&v8);
   UFG::qString::~qString(&result);
   return (Expression::IMemberMap *)v5;
@@ -453,58 +415,63 @@ Expression::IMemberMap *__fastcall MemberMapFileProject::NewMemberMapFileProject
 
 // File Line: 580
 // RVA: 0x152BC0
-void __fastcall MemberMapFileProjectResolveRelativePathsVisitor::Visit(MemberMapFileProjectResolveRelativePathsVisitor *this, MemberMapFileObject *memberMapFileObject)
+void __fastcall MemberMapFileProjectResolveRelativePathsVisitor::Visit(
+        MemberMapFileProjectResolveRelativePathsVisitor *this,
+        MemberMapFileObject *memberMapFileObject)
 {
-  MemberMapFileProjectResolveRelativePathsVisitor *v2; // rsi
-  MemberMapFileObject *v3; // rdi
-  signed __int64 v4; // rdi
-  __int64 v5; // rbx
-  signed __int64 v6; // rdi
-  _QWORD *i; // rbx
+  UFG::qList<MemberMapFileNode,MemberMapFileNodeListIdentifier,0,0> *p_mChildren; // rdi
+  UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *mNext; // rbx
+  UFG::qList<MemberMapFileNode,MemberMapFileNodeListIdentifier,0,0> *v6; // rdi
+  UFG::qList<MemberMapFileNode,MemberMapFileNodeListIdentifier,0,0> *i; // rbx
 
-  v2 = this;
-  v3 = memberMapFileObject;
   MemberMapFileObject::UpdateDependentMembers(memberMapFileObject);
-  v4 = (signed __int64)&v3->mChildren;
-  if ( v4 )
+  p_mChildren = &memberMapFileObject->mChildren;
+  if ( p_mChildren )
   {
-    v5 = *(_QWORD *)(v4 + 8);
-    v6 = v4 - 16;
-    for ( i = (_QWORD *)(v5 - 16); i != (_QWORD *)v6; i = (_QWORD *)(i[3] - 16i64) )
-      (*(void (__fastcall **)(_QWORD *, MemberMapFileProjectResolveRelativePathsVisitor *))(*i + 80i64))(i, v2);
+    mNext = p_mChildren->mNode.mNext;
+    v6 = p_mChildren - 1;
+    for ( i = (UFG::qList<MemberMapFileNode,MemberMapFileNodeListIdentifier,0,0> *)&mNext[-1];
+          i != v6;
+          i = (UFG::qList<MemberMapFileNode,MemberMapFileNodeListIdentifier,0,0> *)&i[1].mNode.mNext[-1] )
+    {
+      ((void (__fastcall *)(UFG::qList<MemberMapFileNode,MemberMapFileNodeListIdentifier,0,0> *, MemberMapFileProjectResolveRelativePathsVisitor *))i->mNode.mPrev[5].mPrev)(
+        i,
+        this);
+    }
   }
 }
 
 // File Line: 603
 // RVA: 0x152A20
-void __fastcall MemberMapFileNodeLoadAllFileObjectsVisitor::Visit(MemberMapFileNodeLoadAllFileObjectsVisitor *this, MemberMapFileObject *memberMapFileObject)
+void __fastcall MemberMapFileNodeLoadAllFileObjectsVisitor::Visit(
+        MemberMapFileNodeLoadAllFileObjectsVisitor *this,
+        MemberMapFileObject *memberMapFileObject)
 {
-  MemberMapFileObject *v2; // rbx
-  MemberMapFileNodeLoadAllFileObjectsVisitor *v3; // rsi
-  signed __int64 v4; // rdi
+  UFG::qList<MemberMapFileNode,MemberMapFileNodeListIdentifier,0,0> *p_mChildren; // rdi
   UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *v5; // rbx
-  signed __int64 i; // rdi
-  UFG::qString result; // [rsp+28h] [rbp-30h]
+  UFG::qList<MemberMapFileNode,MemberMapFileNodeListIdentifier,0,0> *i; // rdi
+  UFG::qString result; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = memberMapFileObject;
-  v3 = this;
   UFG::qString::FormatEx(
     &result,
     "%s\\%s",
     this->mLoadingProject->mAbsoluteDataPath.mData,
-    memberMapFileObject->mRelativeFilePath.mData,
-    -2i64);
-  v2->mIsLoading = 1;
+    memberMapFileObject->mRelativeFilePath.mData);
+  memberMapFileObject->mIsLoading = 1;
   TargetVisibleInAIDataCondition::CreateClone((hkResourceHandle *)result.mData);
-  v2->mIsLoading = 0;
-  v4 = (signed __int64)&v2->mChildren;
-  if ( v2 != (MemberMapFileObject *)-72i64 )
+  memberMapFileObject->mIsLoading = 0;
+  p_mChildren = &memberMapFileObject->mChildren;
+  if ( memberMapFileObject != (MemberMapFileObject *)-72i64 )
   {
-    v5 = v2->mChildren.mNode.mNext - 1;
-    for ( i = v4 - 16; v5 != (UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *)i; v5 = v5[1].mNext - 1 )
+    v5 = memberMapFileObject->mChildren.mNode.mNext - 1;
+    for ( i = p_mChildren - 1;
+          v5 != (UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *)i;
+          v5 = v5[1].mNext - 1 )
+    {
       ((void (__fastcall *)(UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *, MemberMapFileNodeLoadAllFileObjectsVisitor *))v5->mPrev[5].mPrev)(
         v5,
-        v3);
+        this);
+    }
   }
   UFG::qString::~qString(&result);
 }
@@ -513,58 +480,58 @@ void __fastcall MemberMapFileNodeLoadAllFileObjectsVisitor::Visit(MemberMapFileN
 // RVA: 0x152B60
 void __fastcall MemberMapFileNodeVisitor::Visit(MemberMapFileNodeVisitor *this, MemberMapFileNode *memberMapFileNode)
 {
-  MemberMapFileNodeVisitor *v2; // rsi
-  char **v3; // rdi
+  char **p_mData; // rdi
   MemberMapFileNode *v4; // rbx
 
-  v2 = this;
   if ( memberMapFileNode != (MemberMapFileNode *)-72i64 )
   {
-    v3 = &memberMapFileNode->mName.mData;
+    p_mData = &memberMapFileNode->mName.mData;
     v4 = (MemberMapFileNode *)&memberMapFileNode->mChildren.mNode.mNext[-1];
     if ( v4 != (MemberMapFileNode *)&memberMapFileNode->mName.mData )
     {
       do
       {
-        v4->vfptr[1].FindWithOldPath((Expression::IMemberMap *)&v4->vfptr, (const char *)v2);
+        v4->vfptr[1].FindWithOldPath(v4, (const char *)this);
         v4 = (MemberMapFileNode *)&v4->mNext[-1];
       }
-      while ( v4 != (MemberMapFileNode *)v3 );
+      while ( v4 != (MemberMapFileNode *)p_mData );
     }
   }
 }
 
 // File Line: 623
 // RVA: 0x152AE0
-void __fastcall MemberMapFileNodeLoadAllFileObjectsVisitor::Visit(MemberMapFileNodeLoadAllFileObjectsVisitor *this, MemberMapFileProject *memberMapFileProject)
+void __fastcall MemberMapFileNodeLoadAllFileObjectsVisitor::Visit(
+        MemberMapFileNodeLoadAllFileObjectsVisitor *this,
+        MemberMapFileProject *memberMapFileProject)
 {
-  MemberMapFileNodeLoadAllFileObjectsVisitor *v2; // rdi
-  UFG::qList<MemberMapFileNode,MemberMapFileNodeListIdentifier,0,0> *v3; // rdx
-  signed __int64 v4; // rsi
-  char *v5; // rbx
+  UFG::qList<MemberMapFileNode,MemberMapFileNodeListIdentifier,0,0> *p_mChildren; // rdx
+  UFG::qList<MemberMapFileNode,MemberMapFileNodeListIdentifier,0,0> *v4; // rsi
+  UFG::qList<MemberMapFileNode,MemberMapFileNodeListIdentifier,0,0> *v5; // rbx
 
-  v2 = this;
   if ( memberMapFileProject == this->mLoadingProject )
   {
-    v3 = &memberMapFileProject->mChildren;
-    if ( v3 )
+    p_mChildren = &memberMapFileProject->mChildren;
+    if ( p_mChildren )
     {
-      v4 = (signed __int64)&v3[-1];
-      v5 = (char *)&v3->mNode.mNext[-1];
-      if ( v5 != (char *)&v3[-1] )
+      v4 = p_mChildren - 1;
+      v5 = (UFG::qList<MemberMapFileNode,MemberMapFileNodeListIdentifier,0,0> *)&p_mChildren->mNode.mNext[-1];
+      if ( v5 != &p_mChildren[-1] )
       {
         do
         {
-          (*(void (__fastcall **)(char *, MemberMapFileNodeLoadAllFileObjectsVisitor *))(*(_QWORD *)v5 + 80i64))(v5, v2);
-          v5 = (char *)(*((_QWORD *)v5 + 3) - 16i64);
+          ((void (__fastcall *)(UFG::qList<MemberMapFileNode,MemberMapFileNodeListIdentifier,0,0> *, MemberMapFileNodeLoadAllFileObjectsVisitor *))v5->mNode.mPrev[5].mPrev)(
+            v5,
+            this);
+          v5 = (UFG::qList<MemberMapFileNode,MemberMapFileNodeListIdentifier,0,0> *)&v5[1].mNode.mNext[-1];
         }
-        while ( v5 != (char *)v4 );
+        while ( v5 != v4 );
       }
     }
   }
   else
   {
-    ((void (*)(void))this->vfptr->Visit)();
+    ((void (__fastcall *)(MemberMapFileNodeLoadAllFileObjectsVisitor *))this->vfptr->Visit)(this);
   }
 }
 
@@ -583,33 +550,26 @@ __int64 dynamic_initializer_for__MemberMapFileManager::sClassNameUID__()
 // RVA: 0x151AD0
 void __fastcall MemberMapFileManager::MemberMapFileManager(MemberMapFileManager *this, const char *startupPath)
 {
-  const char *v2; // rdi
-  MemberMapFileManager *v3; // rsi
-
-  v2 = startupPath;
-  v3 = this;
-  MemberMapFileNode::MemberMapFileNode((MemberMapFileNode *)&this->vfptr);
-  v3->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileGroup::`vftable;
-  v3->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileManager::`vftable;
-  v3->mActiveProject = 0i64;
-  UFG::qString::qString(&v3->mStartupPath);
-  v3->mOnNewProjectFileEntryCallback = 0i64;
-  UFG::qString::Set(&v3->mName, "MemberMapFileManager");
-  UFG::qString::Set(&v3->mStartupPath, v2);
+  MemberMapFileNode::MemberMapFileNode(this);
+  this->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileGroup::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&MemberMapFileManager::`vftable;
+  this->mActiveProject = 0i64;
+  UFG::qString::qString(&this->mStartupPath);
+  this->mOnNewProjectFileEntryCallback = 0i64;
+  UFG::qString::Set(&this->mName, "MemberMapFileManager");
+  UFG::qString::Set(&this->mStartupPath, startupPath);
 }
 
 // File Line: 739
 // RVA: 0x152450
 void __fastcall MemberMapFileManager::Init(const char *startupPath)
 {
-  const char *v1; // rbx
   MemberMapFileManager *v2; // rax
   MemberMapFileManager *v3; // rax
   char *v4; // rax
   UFG::qNode<Expression::IMemberMapFileHandlerEntry,Expression::IMemberMapFileHandlerEntry> *v5; // rcx
-  UFG::qNode<Expression::IMemberMapFileHandlerEntry,Expression::IMemberMapFileHandlerEntry> *v6; // rax
+  UFG::qNode<Expression::IMemberMapFileHandlerEntry,Expression::IMemberMapFileHandlerEntry> *mPrev; // rax
 
-  v1 = startupPath;
   if ( !MemberMapFileManager::sMemberMapFileManager )
   {
     v2 = (MemberMapFileManager *)UFG::qMemoryPool2::Allocate(
@@ -619,7 +579,7 @@ void __fastcall MemberMapFileManager::Init(const char *startupPath)
                                    0i64,
                                    1u);
     if ( v2 )
-      MemberMapFileManager::MemberMapFileManager(v2, v1);
+      MemberMapFileManager::MemberMapFileManager(v2, startupPath);
     else
       v3 = 0i64;
     MemberMapFileManager::sMemberMapFileManager = v3;
@@ -645,9 +605,9 @@ void __fastcall MemberMapFileManager::Init(const char *startupPath)
     v5[2].mPrev = (UFG::qNode<Expression::IMemberMapFileHandlerEntry,Expression::IMemberMapFileHandlerEntry> *)MemberMapFileProject::LoadMemberMapFileProject;
     v5[2].mNext = (UFG::qNode<Expression::IMemberMapFileHandlerEntry,Expression::IMemberMapFileHandlerEntry> *)MemberMapFileProject::NewMemberMapFileProject;
     v5[3].mNext = (UFG::qNode<Expression::IMemberMapFileHandlerEntry,Expression::IMemberMapFileHandlerEntry> *)MemberMapFileManager::GetDataBaseRoot;
-    v6 = Expression::IMemberMap::smFileHandlers.mNode.mPrev;
+    mPrev = Expression::IMemberMap::smFileHandlers.mNode.mPrev;
     Expression::IMemberMap::smFileHandlers.mNode.mPrev->mNext = v5;
-    v5->mPrev = v6;
+    v5->mPrev = mPrev;
     v5->mNext = (UFG::qNode<Expression::IMemberMapFileHandlerEntry,Expression::IMemberMapFileHandlerEntry> *)&Expression::IMemberMap::smFileHandlers;
     Expression::IMemberMap::smFileHandlers.mNode.mPrev = v5;
     Expression::IMemberMapFileHandlerEntry::sOnNewMemberMapFromFileCallback = (void (__fastcall *)(const char *, Expression::IMemberMap *, Expression::IMemberMap *))_;
@@ -656,41 +616,41 @@ void __fastcall MemberMapFileManager::Init(const char *startupPath)
 
 // File Line: 911
 // RVA: 0x152850
-void __fastcall MemberMapFileManager::RemoveProject(MemberMapFileManager *this, MemberMapFileProject *memberMapFileProject)
+void __fastcall MemberMapFileManager::RemoveProject(
+        MemberMapFileManager *this,
+        MemberMapFileProject *memberMapFileProject)
 {
-  MemberMapFileProject *v2; // r8
-  MemberMapFileManager *v3; // rdi
-  UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *v4; // rdx
-  UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *v5; // rax
+  MemberMapFileProject *mActiveProject; // r8
+  UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *mPrev; // rdx
+  UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *mNext; // rax
   UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *v6; // r8
-  UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *v7; // rbx
+  MemberMapFileManager *v7; // rbx
 
-  v2 = this->mActiveProject;
-  v3 = this;
-  if ( v2 == memberMapFileProject )
+  mActiveProject = this->mActiveProject;
+  if ( mActiveProject == memberMapFileProject )
   {
-    v4 = v2->mPrev;
-    v5 = v2->mNext;
-    v6 = (UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *)&v2->mPrev;
-    v4->mNext = v5;
-    v5->mPrev = v4;
+    mPrev = mActiveProject->mPrev;
+    mNext = mActiveProject->mNext;
+    v6 = &mActiveProject->UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier>;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
     v6->mPrev = v6;
     v6->mNext = v6;
-    this->mActiveProject->vfptr->SetResourceOwner((Expression::IMemberMap *)this->mActiveProject, 0i64);
-    v3->mActiveProject = 0i64;
+    this->mActiveProject->vfptr->SetResourceOwner(this->mActiveProject, 0i64);
+    this->mActiveProject = 0i64;
   }
-  if ( !v3->mActiveProject )
+  if ( !this->mActiveProject )
   {
-    v7 = v3->mChildren.mNode.mNext - 1;
-    if ( v7 != (UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *)&v3->mName.mData )
+    v7 = (MemberMapFileManager *)&this->mChildren.mNode.mNext[-1];
+    if ( v7 != (MemberMapFileManager *)&this->mName.mData )
     {
-      while ( ((unsigned int (__fastcall *)(UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *))v7->mPrev[2].mNext)(v7) != MemberMapFileProject::sClassNameUID )
+      while ( v7->vfptr->GetClassNameUID(v7) != MemberMapFileProject::sClassNameUID )
       {
-        v7 = v7[1].mNext - 1;
-        if ( v7 == (UFG::qNode<MemberMapFileNode,MemberMapFileNodeListIdentifier> *)&v3->mName.mData )
+        v7 = (MemberMapFileManager *)&v7->mNext[-1];
+        if ( v7 == (MemberMapFileManager *)&this->mName.mData )
           return;
       }
-      v3->mActiveProject = (MemberMapFileProject *)&v3->mChildren.mNode.mNext[-1];
+      this->mActiveProject = (MemberMapFileProject *)&this->mChildren.mNode.mNext[-1];
     }
   }
 }
@@ -699,14 +659,12 @@ void __fastcall MemberMapFileManager::RemoveProject(MemberMapFileManager *this, 
 // RVA: 0x1522A0
 char *__fastcall MemberMapFileManager::GetActiveProjectAbsoluteDataPath(MemberMapFileManager *this)
 {
-  MemberMapFileProject *v1; // rax
-  char *result; // rax
+  MemberMapFileProject *mActiveProject; // rax
 
-  v1 = this->mActiveProject;
-  if ( v1 )
-    result = v1->mAbsoluteDataPath.mData;
+  mActiveProject = this->mActiveProject;
+  if ( mActiveProject )
+    return mActiveProject->mAbsoluteDataPath.mData;
   else
-    result = this->mStartupPath.mData;
-  return result;
+    return this->mStartupPath.mData;
 }
 

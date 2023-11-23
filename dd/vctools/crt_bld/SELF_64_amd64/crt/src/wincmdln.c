@@ -10,7 +10,7 @@ char *__fastcall wincmdln()
     _initmbctable();
   v1 = acmdln;
   if ( !acmdln )
-    v1 = &customWorldMapCaption;
+    v1 = &customCaption;
   while ( 1 )
   {
     if ( (unsigned __int8)*v1 <= 0x20u )
@@ -21,8 +21,8 @@ char *__fastcall wincmdln()
         break;
     }
     if ( *v1 == 34 )
-      v0 = v0 == 0;
-    if ( (unsigned int)ismbblead((unsigned __int8)*v1) )
+      v0 = !v0;
+    if ( (unsigned int)ismbblead(*v1) )
       ++v1;
     ++v1;
   }

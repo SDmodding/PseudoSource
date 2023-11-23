@@ -3,131 +3,91 @@
 __int64 dynamic_initializer_for__UFG::SelectSuitableVehicle::PrintChannel__()
 {
   UFG::qString::qString(&stru_14206D7E0);
-  return atexit(dynamic_atexit_destructor_for__UFG::SelectSuitableVehicle::PrintChannel__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::SelectSuitableVehicle::PrintChannel__);
 }
 
 // File Line: 36
 // RVA: 0x35FA00
-bool __fastcall UFG::SelectSuitableVehicle::GetFollowTarget(UFG::SimObject *pMySelf, UFG::SimObject **ppFollowTarget, UFG::SimObject **ppFollowTargetVehicle)
+bool __fastcall UFG::SelectSuitableVehicle::GetFollowTarget(
+        UFG::SimObjectCVBase *pMySelf,
+        UFG::SimObjectGame **ppFollowTarget,
+        UFG::SimObject **ppFollowTargetVehicle)
 {
-  UFG::SimObject **v3; // r14
-  UFG::SimObject **v4; // r15
-  UFG::SimObjectCVBase *v5; // rbx
   UFG::SimObjectGame *v6; // rdi
   UFG::SimObject *v7; // rbp
-  UFG::ActiveAIEntityComponent *v8; // rax
-  unsigned __int16 v9; // cx
-  UFG::eAIObjective v10; // ecx
-  unsigned __int16 v11; // cx
-  UFG::SimComponent *v12; // rdx
-  UFG::SimComponent *v13; // rax
-  unsigned __int16 v14; // cx
+  UFG::ActiveAIEntityComponent *ComponentOfTypeHK; // rax
+  signed __int16 m_Flags; // cx
+  UFG::eAIObjective m_CurrentObjective; // ecx
+  signed __int16 v11; // cx
+  UFG::SimComponent *m_pComponent; // rdx
+  UFG::SimComponent *ComponentOfType; // rax
+  __int16 v14; // cx
   UFG::SimComponent *v15; // rax
 
-  v3 = ppFollowTargetVehicle;
-  v4 = ppFollowTarget;
-  v5 = (UFG::SimObjectCVBase *)pMySelf;
   v6 = 0i64;
   v7 = 0i64;
   if ( pMySelf )
   {
-    v9 = pMySelf->m_Flags;
-    if ( (v9 >> 14) & 1 )
+    m_Flags = pMySelf->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
     {
-      v8 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v5);
+      ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(pMySelf);
     }
-    else if ( (v9 & 0x8000u) == 0 )
+    else if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v9 >> 13) & 1 )
-      {
-        v8 = (UFG::ActiveAIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                               (UFG::SimObjectGame *)&v5->vfptr,
-                                               UFG::ActiveAIEntityComponent::_TypeUID);
-      }
-      else if ( (v9 >> 12) & 1 )
-      {
-        v8 = (UFG::ActiveAIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                               (UFG::SimObjectGame *)&v5->vfptr,
-                                               UFG::ActiveAIEntityComponent::_TypeUID);
-      }
-      else
-      {
-        v8 = (UFG::ActiveAIEntityComponent *)UFG::SimObject::GetComponentOfType(
-                                               (UFG::SimObject *)&v5->vfptr,
-                                               UFG::ActiveAIEntityComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = (UFG::ActiveAIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                            pMySelf,
+                                                            UFG::ActiveAIEntityComponent::_TypeUID);
     }
     else
     {
-      v8 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v5);
+      ComponentOfTypeHK = (UFG::ActiveAIEntityComponent *)UFG::SimObject::GetComponentOfType(
+                                                            pMySelf,
+                                                            UFG::ActiveAIEntityComponent::_TypeUID);
     }
   }
   else
   {
-    v8 = 0i64;
+    ComponentOfTypeHK = 0i64;
   }
-  v10 = v8->m_CurrentObjective;
-  if ( (v10 == eAI_OBJECTIVE_FOLLOW_TARGET || v10 == eAI_OBJECTIVE_BE_ALLY) && v5 )
+  m_CurrentObjective = ComponentOfTypeHK->m_CurrentObjective;
+  if ( (m_CurrentObjective == eAI_OBJECTIVE_FOLLOW_TARGET || m_CurrentObjective == eAI_OBJECTIVE_BE_ALLY) && pMySelf )
   {
-    v11 = v5->m_Flags;
-    if ( (v11 >> 14) & 1 )
+    v11 = pMySelf->m_Flags;
+    if ( (v11 & 0x4000) != 0 )
     {
-      v12 = v5->m_Components.p[20].m_pComponent;
+      m_pComponent = pMySelf->m_Components.p[20].m_pComponent;
     }
-    else if ( (v11 & 0x8000u) == 0 )
+    else if ( v11 >= 0 )
     {
-      if ( (v11 >> 13) & 1 )
-      {
-        v13 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                (UFG::SimObjectGame *)&v5->vfptr,
-                UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
-      else if ( (v11 >> 12) & 1 )
-      {
-        v13 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                (UFG::SimObjectGame *)&v5->vfptr,
-                UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
+      if ( (v11 & 0x2000) != 0 || (v11 & 0x1000) != 0 )
+        ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(pMySelf, UFG::TargetingSystemBaseComponent::_TypeUID);
       else
-      {
-        v13 = UFG::SimObject::GetComponentOfType(
-                (UFG::SimObject *)&v5->vfptr,
-                UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
-      v12 = v13;
+        ComponentOfType = UFG::SimObject::GetComponentOfType(pMySelf, UFG::TargetingSystemBaseComponent::_TypeUID);
+      m_pComponent = ComponentOfType;
     }
     else
     {
-      v12 = v5->m_Components.p[20].m_pComponent;
+      m_pComponent = pMySelf->m_Components.p[20].m_pComponent;
     }
-    if ( v12 )
+    if ( m_pComponent )
     {
-      v6 = *(UFG::SimObjectGame **)(56i64 * *(unsigned __int8 *)(*(_QWORD *)&v12[1].m_Flags + 38i64)
-                                  + *(_QWORD *)&v12[1].m_TypeUID
+      v6 = *(UFG::SimObjectGame **)(56i64 * *(unsigned __int8 *)(*(_QWORD *)&m_pComponent[1].m_Flags + 38i64)
+                                  + *(_QWORD *)&m_pComponent[1].m_TypeUID
                                   + 40);
       if ( v6 )
       {
         v14 = v6->m_Flags;
-        if ( (v14 >> 14) & 1 )
+        if ( (v14 & 0x4000) != 0 )
         {
           v15 = v6->m_Components.p[20].m_pComponent;
         }
-        else if ( (v14 & 0x8000u) == 0 )
+        else if ( v14 >= 0 )
         {
-          if ( (v14 >> 13) & 1 )
-          {
+          if ( (v14 & 0x2000) != 0 || (v14 & 0x1000) != 0 )
             v15 = UFG::SimObjectGame::GetComponentOfTypeHK(v6, UFG::TargetingSystemBaseComponent::_TypeUID);
-          }
-          else if ( (v14 >> 12) & 1 )
-          {
-            v15 = UFG::SimObjectGame::GetComponentOfTypeHK(v6, UFG::TargetingSystemBaseComponent::_TypeUID);
-          }
           else
-          {
-            v15 = UFG::SimObject::GetComponentOfType(
-                    (UFG::SimObject *)&v6->vfptr,
-                    UFG::TargetingSystemBaseComponent::_TypeUID);
-          }
+            v15 = UFG::SimObject::GetComponentOfType(v6, UFG::TargetingSystemBaseComponent::_TypeUID);
         }
         else
         {
@@ -140,37 +100,40 @@ bool __fastcall UFG::SelectSuitableVehicle::GetFollowTarget(UFG::SimObject *pMyS
       }
     }
   }
-  *v4 = (UFG::SimObject *)&v6->vfptr;
-  *v3 = v7;
+  *ppFollowTarget = v6;
+  *ppFollowTargetVehicle = v7;
   return v6 != 0i64;
 }
 
 // File Line: 72
 // RVA: 0x36C1C0
-__int64 __fastcall UFG::SelectSuitableVehicle::IsValidTarget(ActionContext *pActionContext, UFG::SimObject *pMyself, UFG::SimObject *pVehicle, UFG::SimObject *pFollowTarget, UFG::SimObject *pFollowTargetVehicle)
+__int64 __fastcall UFG::SelectSuitableVehicle::IsValidTarget(
+        ActionContext *pActionContext,
+        UFG::SimObjectCVBase *pMyself,
+        UFG::SimObjectGame *pVehicle,
+        UFG::SimObjectCVBase *pFollowTarget,
+        UFG::SimObjectGame *pFollowTargetVehicle)
 {
-  UFG::SimObjectGame *v5; // rsi
-  UFG::SimObject *v6; // r13
-  unsigned __int16 v7; // cx
-  UFG::SimComponent *v8; // rax
-  UFG::SimComponent *v9; // r12
-  UFG::SimObjectGame *v10; // rax
-  unsigned __int16 v11; // dx
+  signed __int16 m_Flags; // cx
+  UFG::SimComponent *m_pComponent; // r12
+  UFG::SimComponent *ComponentOfTypeHK; // rax
+  UFG::SimObjectGame *Texture; // rax
+  __int16 v11; // dx
   UFG::SimComponent *v12; // rax
   signed int v13; // edi
-  __int64 v14; // rbx
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v15; // rax
+  __int64 NumberOfSeats; // rbx
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *ReservationList; // rax
   signed int v16; // ebp
   __int64 v17; // r14
-  UFG::SimObject **v18; // r15
+  UFG::SimObjectCVBase **v18; // r15
   __int64 v19; // rax
-  UFG::SimObjectGame *v20; // rbx
-  unsigned __int16 v21; // cx
-  UFG::SimComponent *v22; // rax
+  UFG::SimObjectCVBase *v20; // rbx
+  __int16 v21; // cx
+  UFG::SimComponent *ComponentOfType; // rax
   UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v23; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v24; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v25; // rax
-  unsigned __int16 v27; // cx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
+  signed __int16 v27; // cx
   UFG::PhysicsMoverInterface *v28; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v29; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v30; // rcx
@@ -179,175 +142,138 @@ __int64 __fastcall UFG::SelectSuitableVehicle::IsValidTarget(ActionContext *pAct
   __int64 v33; // [rsp+20h] [rbp-58h]
   UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v34; // [rsp+28h] [rbp-50h]
   bool v35; // [rsp+90h] [rbp+18h]
-  UFG::SimObject *v36; // [rsp+98h] [rbp+20h]
 
-  v36 = pFollowTarget;
-  v5 = (UFG::SimObjectGame *)pVehicle;
-  v6 = pMyself;
   v35 = pFollowTarget != 0i64;
   if ( !pVehicle )
     return 0i64;
-  v7 = pVehicle->m_Flags;
-  if ( (v7 >> 14) & 1 )
+  m_Flags = pVehicle->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 )
+    goto LABEL_8;
+  if ( m_Flags < 0 )
   {
-    v8 = UFG::SimObjectGame::GetComponentOfTypeHK(
-           (UFG::SimObjectGame *)pVehicle,
-           UFG::VehicleOccupantComponent::_TypeUID);
+    m_pComponent = pVehicle->m_Components.p[30].m_pComponent;
+    goto LABEL_11;
   }
+  if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+LABEL_8:
+    ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(pVehicle, UFG::VehicleOccupantComponent::_TypeUID);
   else
-  {
-    if ( (v7 & 0x8000u) != 0 )
-    {
-      v9 = pVehicle->m_Components.p[30].m_pComponent;
-      goto LABEL_12;
-    }
-    if ( (v7 >> 13) & 1 )
-    {
-      v8 = UFG::SimObjectGame::GetComponentOfTypeHK(
-             (UFG::SimObjectGame *)pVehicle,
-             UFG::VehicleOccupantComponent::_TypeUID);
-    }
-    else if ( (v7 >> 12) & 1 )
-    {
-      v8 = UFG::SimObjectGame::GetComponentOfTypeHK(
-             (UFG::SimObjectGame *)pVehicle,
-             UFG::VehicleOccupantComponent::_TypeUID);
-    }
-    else
-    {
-      v8 = UFG::SimObject::GetComponentOfType(pVehicle, UFG::VehicleOccupantComponent::_TypeUID);
-    }
-  }
-  v9 = v8;
-LABEL_12:
-  if ( !v9 )
+    ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(pVehicle, UFG::VehicleOccupantComponent::_TypeUID);
+  m_pComponent = ComponentOfTypeHK;
+LABEL_11:
+  if ( !m_pComponent )
     return 0i64;
-  v10 = (UFG::SimObjectGame *)Scaleform::Render::RBGenericImpl::RenderTarget::GetTexture((hkSimpleLocalFrame *)v9);
-  if ( v10 )
+  Texture = (UFG::SimObjectGame *)Scaleform::Render::RBGenericImpl::RenderTarget::GetTexture((hkSimpleLocalFrame *)m_pComponent);
+  if ( Texture )
   {
-    v11 = v10->m_Flags;
-    if ( (v11 >> 14) & 1 )
+    v11 = Texture->m_Flags;
+    if ( (v11 & 0x4000) != 0 )
     {
-      v12 = v10->m_Components.p[6].m_pComponent;
+      v12 = Texture->m_Components.p[6].m_pComponent;
     }
-    else if ( (v11 & 0x8000u) == 0 )
+    else if ( v11 >= 0 )
     {
-      if ( (v11 >> 13) & 1 )
-        v12 = UFG::SimObjectGame::GetComponentOfTypeHK(v10, UFG::HealthComponent::_TypeUID);
-      else
-        v12 = (v11 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v10, UFG::HealthComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v10->vfptr, UFG::HealthComponent::_TypeUID);
+      v12 = (v11 & 0x2000) != 0 || (v11 & 0x1000) != 0
+          ? UFG::SimObjectGame::GetComponentOfTypeHK(Texture, UFG::HealthComponent::_TypeUID)
+          : UFG::SimObject::GetComponentOfType(Texture, UFG::HealthComponent::_TypeUID);
     }
     else
     {
-      v12 = v10->m_Components.p[6].m_pComponent;
+      v12 = Texture->m_Components.p[6].m_pComponent;
     }
     if ( v12 && BYTE4(v12[1].m_BoundComponentHandles.mNode.mPrev) )
       return 0i64;
   }
   v13 = -1;
-  v14 = (signed int)UFG::VehicleOccupantComponent::GetNumberOfSeats((UFG::VehicleOccupantComponent *)v9);
-  v15 = UFG::VehicleOccupantComponent::GetReservationList((UFG::VehicleOccupantComponent *)v9);
-  v16 = v5 == (UFG::SimObjectGame *)pFollowTargetVehicle;
-  v33 = v14;
-  v17 = v5 == (UFG::SimObjectGame *)pFollowTargetVehicle;
-  v34 = v15;
-  if ( v17 >= v14 )
+  NumberOfSeats = (int)UFG::VehicleOccupantComponent::GetNumberOfSeats((UFG::VehicleOccupantComponent *)m_pComponent);
+  ReservationList = UFG::VehicleOccupantComponent::GetReservationList((UFG::VehicleOccupantComponent *)m_pComponent);
+  v16 = pVehicle == pFollowTargetVehicle;
+  v33 = NumberOfSeats;
+  v17 = pVehicle == pFollowTargetVehicle;
+  v34 = ReservationList;
+  if ( v17 >= NumberOfSeats )
     return 0i64;
-  v18 = (UFG::SimObject **)(&v15->mPrev
-                          + (v5 == (UFG::SimObjectGame *)pFollowTargetVehicle)
-                          + 2 * ((v5 == (UFG::SimObjectGame *)pFollowTargetVehicle) + 1i64));
-  v19 = v14;
+  v18 = (UFG::SimObjectCVBase **)(&ReservationList->m_pPointer
+                                + 2 * (pVehicle == pFollowTargetVehicle)
+                                + (pVehicle == pFollowTargetVehicle));
+  v19 = NumberOfSeats;
   do
   {
-    v20 = (UFG::SimObjectGame *)*v18;
-    if ( *v18 == v6 )
+    v20 = *v18;
+    if ( *v18 == pMyself )
     {
       v13 = v16;
-      goto LABEL_64;
+      goto LABEL_60;
     }
     if ( v20 )
     {
-      if ( !UFG::AreCharactersAllied(*v18, v6) && (!v35 || v36 != (UFG::SimObject *)v20) )
+      if ( !UFG::AreCharactersAllied(*v18, pMyself) && (!v35 || pFollowTarget != v20) )
       {
         v21 = v20->m_Flags;
-        if ( (v21 >> 14) & 1 )
+        if ( (v21 & 0x4000) != 0 )
         {
-          v22 = v20->m_Components.p[44].m_pComponent;
+          ComponentOfType = v20->m_Components.p[44].m_pComponent;
         }
-        else if ( (v21 & 0x8000u) == 0 )
+        else if ( v21 < 0 || (v21 & 0x2000) != 0 || (v21 & 0x1000) != 0 )
         {
-          if ( (v21 >> 13) & 1 )
-          {
-            v22 = UFG::SimObjectGame::GetComponentOfTypeHK(v20, UFG::CharacterOccupantComponent::_TypeUID);
-          }
-          else if ( (v21 >> 12) & 1 )
-          {
-            v22 = UFG::SimObjectGame::GetComponentOfTypeHK(v20, UFG::CharacterOccupantComponent::_TypeUID);
-          }
-          else
-          {
-            v22 = UFG::SimObject::GetComponentOfType(
-                    (UFG::SimObject *)&v20->vfptr,
-                    UFG::CharacterOccupantComponent::_TypeUID);
-          }
+          ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(v20, UFG::CharacterOccupantComponent::_TypeUID);
         }
         else
         {
-          v22 = UFG::SimObjectGame::GetComponentOfTypeHK(v20, UFG::CharacterOccupantComponent::_TypeUID);
+          ComponentOfType = UFG::SimObject::GetComponentOfType(v20, UFG::CharacterOccupantComponent::_TypeUID);
         }
-        if ( v22 && LODWORD(v22[1].m_SafePointerList.mNode.mNext) != 13 )
+        if ( ComponentOfType && LODWORD(ComponentOfType[1].m_SafePointerList.mNode.mNext) != 13 )
         {
-LABEL_47:
+LABEL_44:
           if ( v13 != -1
-            && UFG::VehicleOccupantComponent::GetOccupant((UFG::VehicleOccupantComponent *)v9, v13, 0i64) == v6 )
+            && UFG::VehicleOccupantComponent::GetOccupant((UFG::VehicleOccupantComponent *)m_pComponent, v13, 0i64) == pMyself )
           {
             v23 = &v34[v13];
-            if ( v34[v13].m_pPointer )
+            if ( v23->m_pPointer )
             {
-              v24 = v23->mPrev;
-              v25 = v23->mNext;
-              v24->mNext = v25;
-              v25->mPrev = v24;
-              v23->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v23->mPrev;
-              v23->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v23->mPrev;
+              mPrev = v23->mPrev;
+              mNext = v23->mNext;
+              mPrev->mNext = mNext;
+              mNext->mPrev = mPrev;
+              v23->mPrev = v23;
+              v23->mNext = v23;
             }
             v23->m_pPointer = 0i64;
           }
           return 0i64;
         }
-        goto LABEL_63;
+        goto LABEL_59;
       }
-      v27 = v5->m_Flags;
-      if ( !((v27 >> 14) & 1) )
+      v27 = pVehicle->m_Flags;
+      if ( (v27 & 0x4000) == 0 )
       {
-        if ( (v27 & 0x8000u) != 0 )
+        if ( v27 < 0 )
         {
-          v28 = (UFG::PhysicsMoverInterface *)v5->m_Components.p[34].m_pComponent;
-          goto LABEL_61;
+          v28 = (UFG::PhysicsMoverInterface *)pVehicle->m_Components.p[34].m_pComponent;
+          goto LABEL_57;
         }
-        if ( !((v27 >> 13) & 1) )
+        if ( (v27 & 0x2000) == 0 )
         {
-          if ( (v27 >> 12) & 1 )
+          if ( (v27 & 0x1000) != 0 )
             v28 = (UFG::PhysicsMoverInterface *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                  v5,
+                                                  pVehicle,
                                                   UFG::PhysicsMoverInterface::_TypeUID);
           else
             v28 = (UFG::PhysicsMoverInterface *)UFG::SimObject::GetComponentOfType(
-                                                  (UFG::SimObject *)&v5->vfptr,
+                                                  pVehicle,
                                                   UFG::PhysicsMoverInterface::_TypeUID);
-LABEL_61:
+LABEL_57:
           if ( v28 && UFG::PhysicsMoverInterface::GetLinearVelocityMagnitudeKPH(v28) > 40.0 )
-            goto LABEL_47;
-          goto LABEL_63;
+            goto LABEL_44;
         }
       }
-LABEL_63:
+LABEL_59:
       v19 = v33;
-      goto LABEL_64;
+      goto LABEL_60;
     }
     if ( v13 == -1 )
       v13 = v16;
-LABEL_64:
+LABEL_60:
     ++v17;
     ++v16;
     v18 += 3;
@@ -355,8 +281,8 @@ LABEL_64:
   while ( v17 < v19 );
   if ( v13 == -1 )
     return 0i64;
-  v29 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v34[v13].mPrev;
-  if ( v34[v13].m_pPointer )
+  v29 = &v34[v13];
+  if ( v29[1].mPrev )
   {
     v30 = v29->mPrev;
     v31 = v29->mNext;
@@ -365,14 +291,14 @@ LABEL_64:
     v29->mPrev = v29;
     v29->mNext = v29;
   }
-  v29[1].mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)v6;
-  if ( v6 )
+  v29[1].mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)pMyself;
+  if ( pMyself )
   {
-    v32 = v6->m_SafePointerList.mNode.mPrev;
+    v32 = pMyself->m_SafePointerList.UFG::SimObjectGame::UFG::SimObject::UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
     v32->mNext = v29;
     v29->mPrev = v32;
-    v29->mNext = &v6->m_SafePointerList.mNode;
-    v6->m_SafePointerList.mNode.mPrev = v29;
+    v29->mNext = &pMyself->m_SafePointerList.UFG::SimObjectGame::UFG::SimObject::UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+    pMyself->m_SafePointerList.UFG::SimObjectGame::UFG::SimObject::UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = v29;
   }
   return (unsigned int)(v13 + 4);
 }
@@ -381,495 +307,462 @@ LABEL_64:
 // RVA: 0x3842D0
 char __fastcall UFG::SelectSuitableVehicle::SelectVehicle(UFG::SelectSuitableVehicle::Params *params)
 {
-  UFG::SelectSuitableVehicle::Params *v1; // r12
-  UFG::TransformNodeComponent *v2; // rdi
-  UFG::SimObjectGame *v3; // rsi
-  UFG::SimObject *v4; // rcx
-  bool v5; // al
-  char v6; // bl
-  float v7; // xmm7_4
-  UFG::SceneObjectProperties *v8; // rax
-  UFG::qPropertySet *v9; // rcx
-  UFG::qSymbol *v10; // rax
-  unsigned int v11; // eax
-  UFG::SimObjectCVBase *v12; // rcx
-  UFG::ActiveAIEntityComponent *v13; // rax
-  unsigned __int16 v14; // dx
-  UFG::InteractorComponent *v15; // r13
-  unsigned __int16 v16; // cx
-  UFG::SimComponent *v17; // rax
-  UFG::qList<UFG::SimObjectVehiclePropertiesComponent,UFG::SimObjectVehiclePropertiesComponent,1,0> *v18; // rbp
-  char v19; // r13
-  UFG::SimObject *v20; // r14
-  UFG::SimObject *pFollowTargetVehicle; // r15
-  UFG::SimObjectGame *v22; // rbx
-  float v23; // xmm6_4
-  int v24; // er14
-  bool v25; // di
-  unsigned __int16 v26; // dx
-  UFG::InteractableComponent *v27; // r10
-  UFG::SimComponent *v28; // rax
-  bool v29; // r9
-  __int64 v30; // rdi
-  unsigned __int16 v31; // cx
-  UFG::TargetingSystemBaseComponent *v32; // rdi
-  UFG::SimComponent *v33; // rax
-  UFG::TargetingSimObject *v34; // rdx
-  UFG::SimObject *v35; // rsi
-  signed __int64 v36; // rbx
-  UFG::TargetingSimObject *v37; // rdx
-  UFG::SimObject *v38; // rsi
-  signed __int64 v39; // rbx
-  UFG::InteractorComponent *v41; // [rsp+30h] [rbp-A8h]
-  UFG::SimObject *ppFollowTarget; // [rsp+38h] [rbp-A0h]
-  UFG::SimObject *ppFollowTargetVehicle; // [rsp+40h] [rbp-98h]
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rdi
+  UFG::SimObjectCVBase *m_pPointer; // rsi
+  bool FollowTarget; // al
+  char v5; // bl
+  float v6; // xmm7_4
+  UFG::SceneObjectProperties *m_pSceneObj; // rax
+  UFG::qPropertySet *mpWritableProperties; // rcx
+  UFG::qSymbol *v9; // rax
+  unsigned int mUID; // eax
+  UFG::SimObjectCVBase *v11; // rcx
+  UFG::ActiveAIEntityComponent *ComponentOfTypeHK; // rax
+  __int16 m_Flags; // dx
+  UFG::InteractorComponent *m_pComponent; // r13
+  __int16 v15; // cx
+  UFG::SimComponent *ComponentOfType; // rax
+  UFG::qList<UFG::SimObjectVehiclePropertiesComponent,UFG::SimObjectVehiclePropertiesComponent,1,0> *p_mNext; // rbp
+  char v18; // r13
+  UFG::SimObjectCVBase *v19; // r14
+  UFG::SimObjectGame *pFollowTargetVehicle; // r15
+  UFG::SimObjectGame *mNext; // rbx
+  float v22; // xmm6_4
+  int IsValidTarget; // r14d
+  bool v24; // di
+  __int16 v25; // dx
+  UFG::InteractableComponent *v26; // r10
+  UFG::SimComponent *v27; // rax
+  bool ignoreMeshTest; // r9
+  UFG::SimObject *v29; // rdi
+  __int16 v30; // cx
+  UFG::TargetingSystemBaseComponent *v31; // rdi
+  UFG::SimComponent *v32; // rax
+  UFG::TargetingSimObject *m_pTargets; // rdx
+  UFG::SimObject *pVehicle; // rsi
+  __int64 v35; // rbx
+  UFG::TargetingSimObject *v36; // rdx
+  UFG::SimObject *v37; // rsi
+  __int64 v38; // rbx
+  UFG::InteractorComponent *v40; // [rsp+30h] [rbp-A8h]
+  UFG::SimObject *ppFollowTarget; // [rsp+38h] [rbp-A0h] BYREF
+  UFG::SimObject *ppFollowTargetVehicle; // [rsp+40h] [rbp-98h] BYREF
   UFG::InteractionPoint *pIP; // [rsp+48h] [rbp-90h]
-  UFG::TransformNodeComponent *v45; // [rsp+50h] [rbp-88h]
-  UFG::qStaticBitField<6> bfTestIP; // [rsp+E0h] [rbp+8h]
-  bool v47; // [rsp+E8h] [rbp+10h]
-  UFG::qSymbol targetClassType; // [rsp+F0h] [rbp+18h]
-  UFG::SimObjectGame *v49; // [rsp+F8h] [rbp+20h]
+  UFG::TransformNodeComponent *m_pSimComponent; // [rsp+50h] [rbp-88h]
+  UFG::qStaticBitField<6> bfTestIP; // [rsp+E0h] [rbp+8h] BYREF
+  bool v46; // [rsp+E8h] [rbp+10h]
+  UFG::qSymbol targetClassType; // [rsp+F0h] [rbp+18h] BYREF
+  UFG::SimObjectGame *v48; // [rsp+F8h] [rbp+20h]
 
-  v1 = params;
-  v2 = 0i64;
-  v3 = (UFG::SimObjectGame *)params->pActionContext->mSimObject.m_pPointer;
-  v4 = params->pActionContext->mSimObject.m_pPointer;
+  m_pTransformNodeComponent = 0i64;
+  m_pPointer = (UFG::SimObjectCVBase *)params->pActionContext->mSimObject.m_pPointer;
   ppFollowTarget = 0i64;
   ppFollowTargetVehicle = 0i64;
-  v5 = UFG::SelectSuitableVehicle::GetFollowTarget(v4, &ppFollowTarget, &ppFollowTargetVehicle);
-  v49 = 0i64;
-  v6 = v5;
-  v47 = v5;
-  if ( v5 )
-    v7 = FLOAT_9999999_0;
+  FollowTarget = UFG::SelectSuitableVehicle::GetFollowTarget(
+                   m_pPointer,
+                   (UFG::SimObjectGame **)&ppFollowTarget,
+                   &ppFollowTargetVehicle);
+  v48 = 0i64;
+  v5 = FollowTarget;
+  v46 = FollowTarget;
+  if ( FollowTarget )
+    v6 = FLOAT_9999999_0;
   else
-    v7 = v1->maxSearchRadius * v1->maxSearchRadius;
-  targetClassType.mUID = v1->filterClassSymbol.mUID;
+    v6 = params->maxSearchRadius * params->maxSearchRadius;
+  targetClassType.mUID = params->filterClassSymbol.mUID;
   LOBYTE(bfTestIP.mBits[0]) = targetClassType.mUID != -1;
   if ( targetClassType.mUID == -1 )
   {
-    if ( v3 && (v8 = v3->m_pSceneObj) != 0i64 )
+    if ( m_pPointer && (m_pSceneObj = m_pPointer->m_pSceneObj) != 0i64 )
     {
-      v9 = v8->mpWritableProperties;
-      if ( v9 )
+      mpWritableProperties = m_pSceneObj->mpWritableProperties;
+      if ( mpWritableProperties )
       {
 LABEL_11:
-        v10 = UFG::qPropertySet::Get<UFG::qSymbol>(v9, (UFG::qSymbol *)&qSymbol_VehicleSearchFilter.mUID, DEPTH_RECURSE);
-        if ( v10 )
+        v9 = UFG::qPropertySet::Get<UFG::qSymbol>(
+               mpWritableProperties,
+               (UFG::qArray<unsigned long,0> *)&qSymbol_VehicleSearchFilter,
+               DEPTH_RECURSE);
+        if ( v9 )
         {
-          v11 = v10->mUID;
-          if ( v11 != -1 )
+          mUID = v9->mUID;
+          if ( mUID != -1 )
           {
-            targetClassType.mUID = v11;
+            targetClassType.mUID = mUID;
             LOBYTE(bfTestIP.mBits[0]) = 1;
           }
         }
         goto LABEL_14;
       }
-      v9 = v8->mpConstProperties;
+      mpWritableProperties = m_pSceneObj->mpConstProperties;
     }
     else
     {
-      v9 = 0i64;
+      mpWritableProperties = 0i64;
     }
-    if ( v9 )
+    if ( mpWritableProperties )
       goto LABEL_11;
   }
 LABEL_14:
-  v12 = (UFG::SimObjectCVBase *)v1->pActionContext->mSimObject.m_pPointer;
-  if ( v12 )
+  v11 = (UFG::SimObjectCVBase *)params->pActionContext->mSimObject.m_pPointer;
+  if ( v11 )
   {
-    v14 = v12->m_Flags;
-    if ( (v14 >> 14) & 1 )
+    m_Flags = v11->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
     {
-      v13 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v12);
+      ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v11);
     }
-    else if ( (v14 & 0x8000u) == 0 )
+    else if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v14 >> 13) & 1 )
-      {
-        v13 = (UFG::ActiveAIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                (UFG::SimObjectGame *)&v12->vfptr,
-                                                UFG::ActiveAIEntityComponent::_TypeUID);
-      }
-      else if ( (v14 >> 12) & 1 )
-      {
-        v13 = (UFG::ActiveAIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                (UFG::SimObjectGame *)&v12->vfptr,
-                                                UFG::ActiveAIEntityComponent::_TypeUID);
-      }
-      else
-      {
-        v13 = (UFG::ActiveAIEntityComponent *)UFG::SimObject::GetComponentOfType(
-                                                (UFG::SimObject *)&v12->vfptr,
-                                                UFG::ActiveAIEntityComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = (UFG::ActiveAIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                            v11,
+                                                            UFG::ActiveAIEntityComponent::_TypeUID);
     }
     else
     {
-      v13 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v12);
+      ComponentOfTypeHK = (UFG::ActiveAIEntityComponent *)UFG::SimObject::GetComponentOfType(
+                                                            v11,
+                                                            UFG::ActiveAIEntityComponent::_TypeUID);
     }
   }
   else
   {
-    v13 = 0i64;
+    ComponentOfTypeHK = 0i64;
   }
-  v45 = (UFG::TransformNodeComponent *)v13->m_pTransformNodeComponent.m_pSimComponent;
-  UFG::TransformNodeComponent::UpdateWorldTransform(v45);
-  if ( v3 )
+  m_pSimComponent = (UFG::TransformNodeComponent *)ComponentOfTypeHK->m_pTransformNodeComponent.m_pSimComponent;
+  UFG::TransformNodeComponent::UpdateWorldTransform(m_pSimComponent);
+  if ( m_pPointer )
   {
-    v16 = v3->m_Flags;
-    if ( (v16 >> 14) & 1 )
+    v15 = m_pPointer->m_Flags;
+    if ( (v15 & 0x4000) != 0 )
     {
-      v15 = (UFG::InteractorComponent *)v3->m_Components.p[29].m_pComponent;
+      m_pComponent = (UFG::InteractorComponent *)m_pPointer->m_Components.p[29].m_pComponent;
     }
     else
     {
-      if ( (v16 & 0x8000u) == 0 )
-      {
-        if ( (v16 >> 13) & 1 )
-        {
-          v17 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::InteractorComponent::_TypeUID);
-        }
-        else if ( (v16 >> 12) & 1 )
-        {
-          v17 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::InteractorComponent::_TypeUID);
-        }
-        else
-        {
-          v17 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::InteractorComponent::_TypeUID);
-        }
-      }
+      if ( v15 < 0 || (v15 & 0x2000) != 0 || (v15 & 0x1000) != 0 )
+        ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::InteractorComponent::_TypeUID);
       else
-      {
-        v17 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::InteractorComponent::_TypeUID);
-      }
-      v15 = (UFG::InteractorComponent *)v17;
+        ComponentOfType = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::InteractorComponent::_TypeUID);
+      m_pComponent = (UFG::InteractorComponent *)ComponentOfType;
     }
   }
   else
   {
-    v15 = 0i64;
+    m_pComponent = 0i64;
   }
-  v41 = v15;
-  v18 = (UFG::qList<UFG::SimObjectVehiclePropertiesComponent,UFG::SimObjectVehiclePropertiesComponent,1,0> *)&UFG::SimObjectVehiclePropertiesComponent::s_SimObjectVehiclePropertiesComponentList.mNode.mNext[-10].mNext;
+  v40 = m_pComponent;
+  p_mNext = (UFG::qList<UFG::SimObjectVehiclePropertiesComponent,UFG::SimObjectVehiclePropertiesComponent,1,0> *)&UFG::SimObjectVehiclePropertiesComponent::s_SimObjectVehiclePropertiesComponentList.mNode.mNext[-10].mNext;
   pIP = 0i64;
   if ( &UFG::SimObjectVehiclePropertiesComponent::s_SimObjectVehiclePropertiesComponentList.mNode.mNext[-10].mNext == (UFG::qNode<UFG::SimObjectVehiclePropertiesComponent,UFG::SimObjectVehiclePropertiesComponent> **)((char *)&UFG::SimObjectVehiclePropertiesComponent::s_SimObjectVehiclePropertiesComponentList - 152) )
-    goto LABEL_97;
-  v19 = bfTestIP.mBits[0];
-  v20 = ppFollowTarget;
-  pFollowTargetVehicle = ppFollowTargetVehicle;
+    goto LABEL_92;
+  v18 = bfTestIP.mBits[0];
+  v19 = (UFG::SimObjectCVBase *)ppFollowTarget;
+  pFollowTargetVehicle = (UFG::SimObjectGame *)ppFollowTargetVehicle;
   while ( 1 )
   {
-    if ( !v6 || (v22 = (UFG::SimObjectGame *)pFollowTargetVehicle) == 0i64 )
-      v22 = (UFG::SimObjectGame *)v18[2].mNode.mNext;
+    if ( !v5 || (mNext = pFollowTargetVehicle) == 0i64 )
+      mNext = (UFG::SimObjectGame *)p_mNext[2].mNode.mNext;
     bfTestIP.mBits[0] = 0i64;
-    v23 = FLOAT_N1_0;
-    if ( v22 )
-      v2 = v22->m_pTransformNodeComponent;
-    if ( v22 == (UFG::SimObjectGame *)pFollowTargetVehicle )
+    v22 = FLOAT_N1_0;
+    if ( mNext )
+      m_pTransformNodeComponent = mNext->m_pTransformNodeComponent;
+    if ( mNext == pFollowTargetVehicle )
     {
-      v23 = FLOAT_N1_0;
+      v22 = FLOAT_N1_0;
     }
     else
     {
-      if ( v2 )
+      if ( m_pTransformNodeComponent )
       {
-        UFG::TransformNodeComponent::UpdateWorldTransform(v2);
-        v23 = (float)((float)((float)(v2->mWorldTransform.v3.y - v45->mWorldTransform.v3.y)
-                            * (float)(v2->mWorldTransform.v3.y - v45->mWorldTransform.v3.y))
-                    + (float)((float)(v2->mWorldTransform.v3.x - v45->mWorldTransform.v3.x)
-                            * (float)(v2->mWorldTransform.v3.x - v45->mWorldTransform.v3.x)))
-            + (float)((float)(v2->mWorldTransform.v3.z - v45->mWorldTransform.v3.z)
-                    * (float)(v2->mWorldTransform.v3.z - v45->mWorldTransform.v3.z));
-        if ( v23 > v7 )
-          goto LABEL_71;
+        UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+        v22 = (float)((float)((float)(m_pTransformNodeComponent->mWorldTransform.v3.y
+                                    - m_pSimComponent->mWorldTransform.v3.y)
+                            * (float)(m_pTransformNodeComponent->mWorldTransform.v3.y
+                                    - m_pSimComponent->mWorldTransform.v3.y))
+                    + (float)((float)(m_pTransformNodeComponent->mWorldTransform.v3.x
+                                    - m_pSimComponent->mWorldTransform.v3.x)
+                            * (float)(m_pTransformNodeComponent->mWorldTransform.v3.x
+                                    - m_pSimComponent->mWorldTransform.v3.x)))
+            + (float)((float)(m_pTransformNodeComponent->mWorldTransform.v3.z - m_pSimComponent->mWorldTransform.v3.z)
+                    * (float)(m_pTransformNodeComponent->mWorldTransform.v3.z - m_pSimComponent->mWorldTransform.v3.z));
+        if ( v22 > v6 )
+          goto LABEL_67;
       }
-      if ( v19 && !UFG::SimObjectUtility::IsClassType((UFG::SimObject *)&v22->vfptr, &targetClassType)
-        || UFG::SimObjectUtility::IsClassType((UFG::SimObject *)&v22->vfptr, (UFG::qSymbol *)&qSymbol_Taxi.mUID)
-        || UFG::SimObjectUtility::IsClassType((UFG::SimObject *)&v22->vfptr, (UFG::qSymbol *)&qSymbol_Minibus.mUID)
-        || UFG::SimObjectUtility::IsClassType((UFG::SimObject *)&v22->vfptr, (UFG::qSymbol *)&qSymbol_Tram.mUID) )
+      if ( v18 && !UFG::SimObjectUtility::IsClassType(mNext, &targetClassType)
+        || UFG::SimObjectUtility::IsClassType(mNext, &qSymbol_Taxi)
+        || UFG::SimObjectUtility::IsClassType(mNext, &qSymbol_Minibus)
+        || UFG::SimObjectUtility::IsClassType(mNext, &qSymbol_Tram) )
       {
-        goto LABEL_71;
+        goto LABEL_67;
       }
     }
-    v24 = UFG::SelectSuitableVehicle::IsValidTarget(
-            v1->pActionContext,
-            (UFG::SimObject *)&v3->vfptr,
-            (UFG::SimObject *)&v22->vfptr,
-            v20,
-            pFollowTargetVehicle);
-    v25 = v24 != 0;
-    if ( v24 )
+    IsValidTarget = UFG::SelectSuitableVehicle::IsValidTarget(
+                      params->pActionContext,
+                      m_pPointer,
+                      mNext,
+                      v19,
+                      pFollowTargetVehicle);
+    v24 = IsValidTarget != 0;
+    if ( IsValidTarget )
     {
-      if ( v22 )
+      if ( mNext )
       {
-        v26 = v22->m_Flags;
-        if ( (v26 >> 14) & 1 )
+        v25 = mNext->m_Flags;
+        if ( (v25 & 0x4000) != 0 )
         {
-          v27 = (UFG::InteractableComponent *)v22->m_Components.p[12].m_pComponent;
+          v26 = (UFG::InteractableComponent *)mNext->m_Components.p[12].m_pComponent;
         }
-        else if ( (v26 & 0x8000u) == 0 )
+        else if ( v25 >= 0 )
         {
-          if ( (v26 >> 13) & 1 )
-            v28 = UFG::SimObjectGame::GetComponentOfTypeHK(v22, UFG::InteractableComponent::_TypeUID);
-          else
-            v28 = (v26 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v22, UFG::InteractableComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v22->vfptr, UFG::InteractableComponent::_TypeUID);
-          v27 = (UFG::InteractableComponent *)v28;
+          v27 = (v25 & 0x2000) != 0 || (v25 & 0x1000) != 0
+              ? UFG::SimObjectGame::GetComponentOfTypeHK(mNext, UFG::InteractableComponent::_TypeUID)
+              : UFG::SimObject::GetComponentOfType(mNext, UFG::InteractableComponent::_TypeUID);
+          v26 = (UFG::InteractableComponent *)v27;
         }
         else
         {
-          v27 = (UFG::InteractableComponent *)v22->m_Components.p[12].m_pComponent;
+          v26 = (UFG::InteractableComponent *)mNext->m_Components.p[12].m_pComponent;
         }
-        if ( v27 )
+        if ( v26 )
         {
-          v29 = v1->ignoreMeshTest;
-          bfTestIP.mBits[(signed __int64)(v24 - 3) >> 6] |= 1i64 << ((v24 - 3) & 0x3F);
-          pIP = UFG::InteractableComponent::FindBestInteractionPoint(v27, (UFG::SimObject *)&v3->vfptr, &bfTestIP, v29);
-          v25 = pIP != 0i64;
+          ignoreMeshTest = params->ignoreMeshTest;
+          bfTestIP.mBits[(__int64)(IsValidTarget - 3) >> 6] |= 1i64 << ((IsValidTarget - 3) & 0x3F);
+          pIP = UFG::InteractableComponent::FindBestInteractionPoint(v26, m_pPointer, &bfTestIP, ignoreMeshTest);
+          v24 = pIP != 0i64;
         }
       }
-      v20 = ppFollowTarget;
-      if ( v25 )
+      v19 = (UFG::SimObjectCVBase *)ppFollowTarget;
+      if ( v24 )
       {
-        v30 = (__int64)v22;
-        v49 = v22;
-        v7 = v23;
-        goto LABEL_72;
+        v29 = mNext;
+        v48 = mNext;
+        v6 = v22;
+        goto LABEL_68;
       }
     }
     else
     {
-      v20 = ppFollowTarget;
+      v19 = (UFG::SimObjectCVBase *)ppFollowTarget;
     }
-LABEL_71:
-    v30 = (__int64)v49;
-LABEL_72:
-    v6 = v47;
-    if ( v47 )
+LABEL_67:
+    v29 = v48;
+LABEL_68:
+    v5 = v46;
+    if ( v46 )
     {
-      if ( v20 )
+      if ( v19 )
         break;
     }
-    v18 = (UFG::qList<UFG::SimObjectVehiclePropertiesComponent,UFG::SimObjectVehiclePropertiesComponent,1,0> *)&v18[10].mNode.mPrev[-10].mNext;
-    if ( v18 == (UFG::qList<UFG::SimObjectVehiclePropertiesComponent,UFG::SimObjectVehiclePropertiesComponent,1,0> *)((char *)&UFG::SimObjectVehiclePropertiesComponent::s_SimObjectVehiclePropertiesComponentList - 152) )
+    p_mNext = (UFG::qList<UFG::SimObjectVehiclePropertiesComponent,UFG::SimObjectVehiclePropertiesComponent,1,0> *)&p_mNext[10].mNode.mPrev[-10].mNext;
+    if ( p_mNext == (UFG::qList<UFG::SimObjectVehiclePropertiesComponent,UFG::SimObjectVehiclePropertiesComponent,1,0> *)((char *)&UFG::SimObjectVehiclePropertiesComponent::s_SimObjectVehiclePropertiesComponentList - 152) )
       break;
-    v2 = 0i64;
+    m_pTransformNodeComponent = 0i64;
   }
-  v15 = v41;
-  if ( !v30 )
+  m_pComponent = v40;
+  if ( !v29 )
   {
-LABEL_97:
-    UFG::InteractorComponent::SetBestInteractionPoint(v15, 0i64, 1);
+LABEL_92:
+    UFG::InteractorComponent::SetBestInteractionPoint(m_pComponent, 0i64, 1);
     return 0;
   }
-  v1->pVehicle = (UFG::SimObject *)v30;
-  if ( v3 )
+  params->pVehicle = v29;
+  if ( m_pPointer )
   {
-    v31 = v3->m_Flags;
-    if ( (v31 >> 14) & 1 )
+    v30 = m_pPointer->m_Flags;
+    if ( (v30 & 0x4000) != 0 )
     {
-      v32 = (UFG::TargetingSystemBaseComponent *)v3->m_Components.p[20].m_pComponent;
+      v31 = (UFG::TargetingSystemBaseComponent *)m_pPointer->m_Components.p[20].m_pComponent;
     }
-    else if ( (v31 & 0x8000u) == 0 )
+    else if ( v30 >= 0 )
     {
-      if ( (v31 >> 13) & 1 )
-        v33 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::TargetingSystemBaseComponent::_TypeUID);
-      else
-        v33 = (v31 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                  v3,
-                                  UFG::TargetingSystemBaseComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(
-                                                                                   (UFG::SimObject *)&v3->vfptr,
-                                                                                   UFG::TargetingSystemBaseComponent::_TypeUID);
-      v32 = (UFG::TargetingSystemBaseComponent *)v33;
+      v32 = (v30 & 0x2000) != 0 || (v30 & 0x1000) != 0
+          ? UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::TargetingSystemBaseComponent::_TypeUID)
+          : UFG::SimObject::GetComponentOfType(m_pPointer, UFG::TargetingSystemBaseComponent::_TypeUID);
+      v31 = (UFG::TargetingSystemBaseComponent *)v32;
     }
     else
     {
-      v32 = (UFG::TargetingSystemBaseComponent *)v3->m_Components.p[20].m_pComponent;
+      v31 = (UFG::TargetingSystemBaseComponent *)m_pPointer->m_Components.p[20].m_pComponent;
     }
-    if ( v32 )
+    if ( v31 )
     {
-      v34 = v32->m_pTargets;
-      v35 = v1->pVehicle;
-      if ( v34[(unsigned __int8)v32->m_pTargetingMap->m_Map.p[eTARGET_TYPE_VEHICLE]].m_pTarget.m_pPointer != v35 )
+      m_pTargets = v31->m_pTargets;
+      pVehicle = params->pVehicle;
+      if ( m_pTargets[(unsigned __int8)v31->m_pTargetingMap->m_Map.p[eTARGET_TYPE_VEHICLE]].m_pTarget.m_pPointer != pVehicle )
       {
-        if ( v32->m_pTargetingMap->m_Map.p[eTARGET_TYPE_VEHICLE] )
+        if ( v31->m_pTargetingMap->m_Map.p[eTARGET_TYPE_VEHICLE] )
         {
-          v36 = (unsigned __int8)v32->m_pTargetingMap->m_Map.p[eTARGET_TYPE_VEHICLE];
-          UFG::TargetingSimObject::SetTarget(&v34[v36], 0i64);
-          UFG::TargetingSimObject::SetLock(&v32->m_pTargets[v36], 0);
+          v35 = (unsigned __int8)v31->m_pTargetingMap->m_Map.p[eTARGET_TYPE_VEHICLE];
+          UFG::TargetingSimObject::SetTarget(&m_pTargets[v35], 0i64);
+          UFG::TargetingSimObject::SetLock(&v31->m_pTargets[v35], 0);
         }
-        UFG::TargetingSystemBaseComponent::SetTarget(v32, eTARGET_TYPE_VEHICLE, v35);
+        UFG::TargetingSystemBaseComponent::SetTarget(v31, eTARGET_TYPE_VEHICLE, pVehicle);
       }
-      v37 = v32->m_pTargets;
-      v38 = v1->pVehicle;
-      if ( v37[(unsigned __int8)v32->m_pTargetingMap->m_Map.p[40]].m_pTarget.m_pPointer != v38 )
+      v36 = v31->m_pTargets;
+      v37 = params->pVehicle;
+      if ( v36[(unsigned __int8)v31->m_pTargetingMap->m_Map.p[40]].m_pTarget.m_pPointer != v37 )
       {
-        if ( v32->m_pTargetingMap->m_Map.p[40] )
+        if ( v31->m_pTargetingMap->m_Map.p[40] )
         {
-          v39 = (unsigned __int8)v32->m_pTargetingMap->m_Map.p[40];
-          UFG::TargetingSimObject::SetTarget(&v37[v39], 0i64);
-          UFG::TargetingSimObject::SetLock(&v32->m_pTargets[v39], 0);
+          v38 = (unsigned __int8)v31->m_pTargetingMap->m_Map.p[40];
+          UFG::TargetingSimObject::SetTarget(&v36[v38], 0i64);
+          UFG::TargetingSimObject::SetLock(&v31->m_pTargets[v38], 0);
         }
-        UFG::TargetingSystemBaseComponent::SetTarget(v32, eTARGET_TYPE_INTERACTIVE_PROP, v38);
+        UFG::TargetingSystemBaseComponent::SetTarget(v31, eTARGET_TYPE_INTERACTIVE_PROP, v37);
       }
     }
   }
-  UFG::InteractorComponent::SetBestInteractionPoint(v41, pIP, 1);
+  UFG::InteractorComponent::SetBestInteractionPoint(v40, pIP, 1);
   return 1;
-}    UFG::TargetingSimObject::SetTarget(&v37[v39], 0i64);
-          UFG::TargetingSimObject::SetLock(&v32->m_pTargets[v39], 0);
-        
+}:SetTarget(&v36[v38], 0i64);
+          UFG::TargetingSimObject::SetLock(&v31->m_pTargets[v38], 0);
+        }
+        UFG::TargetingSystemBaseComponent::SetTarget(v31, eTARGET_TYPE_INTERACTIVE_PROP, v37);
+      }
+    }
+  }
+  UFG::InteractorComponent::SetBestInteractionPoint(v40, pIP, 1);
+ 
 
 // File Line: 362
 // RVA: 0x392AD0
 char __fastcall UFG::SelectSuitableVehicle::Update(UFG::SelectSuitableVehicle::Params *params)
 {
   UFG::InteractorComponent *v1; // rsi
-  UFG::SelectSuitableVehicle::Params *v2; // r14
-  UFG::SimObjectGame *v3; // rbx
-  UFG::TargetingSystemBaseComponent *v4; // rdi
-  unsigned __int16 v5; // cx
-  UFG::SimComponent *v6; // rax
-  signed __int64 v7; // rcx
+  UFG::SimObjectCVBase *m_pPointer; // rbx
+  UFG::TargetingSystemBaseComponent *m_pComponent; // rdi
+  __int16 m_Flags; // cx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
+  __int64 v7; // rcx
   char result; // al
-  int v9; // ebp
-  UFG::SimObjectGame *v10; // rcx
-  unsigned __int16 v11; // dx
+  int IsValidTarget; // ebp
+  UFG::SimObjectGame *pVehicle; // rcx
+  __int16 v11; // dx
   UFG::InteractableComponent *v12; // r10
   UFG::SimComponent *v13; // rax
-  bool v14; // r9
+  bool ignoreMeshTest; // r9
   _QWORD *v15; // rdx
-  UFG::InteractionPoint *v16; // rbp
-  unsigned __int16 v17; // cx
+  UFG::InteractionPoint *BestInteractionPoint; // rbp
+  __int16 v17; // cx
   unsigned int v18; // edx
   UFG::SimObjectGame *v19; // rcx
-  UFG::SimComponent *v20; // rax
+  UFG::SimComponent *ComponentOfType; // rax
   bool v21; // zf
-  __int128 ppFollowTargetVehicle; // [rsp+50h] [rbp+8h]
+  __int128 ppFollowTargetVehicle; // [rsp+50h] [rbp+8h] BYREF
 
   v1 = 0i64;
-  v2 = params;
-  v3 = (UFG::SimObjectGame *)params->pActionContext->mSimObject.m_pPointer;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectCVBase *)params->pActionContext->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v5 = v3->m_Flags;
-    if ( (v5 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v4 = (UFG::TargetingSystemBaseComponent *)v3->m_Components.p[20].m_pComponent;
+      m_pComponent = (UFG::TargetingSystemBaseComponent *)m_pPointer->m_Components.p[20].m_pComponent;
     }
-    else if ( (v5 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v5 >> 13) & 1 )
-      {
-        v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
-      else if ( (v5 >> 12) & 1 )
-      {
-        v6 = UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
+      if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                              m_pPointer,
+                              UFG::TargetingSystemBaseComponent::_TypeUID);
       else
-      {
-        v6 = UFG::SimObject::GetComponentOfType(
-               (UFG::SimObject *)&v3->vfptr,
-               UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
-      v4 = (UFG::TargetingSystemBaseComponent *)v6;
+        ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::TargetingSystemBaseComponent::_TypeUID);
+      m_pComponent = (UFG::TargetingSystemBaseComponent *)ComponentOfTypeHK;
     }
     else
     {
-      v4 = (UFG::TargetingSystemBaseComponent *)v3->m_Components.p[20].m_pComponent;
+      m_pComponent = (UFG::TargetingSystemBaseComponent *)m_pPointer->m_Components.p[20].m_pComponent;
     }
   }
   else
   {
-    v4 = 0i64;
+    m_pComponent = 0i64;
   }
-  v7 = (signed __int64)&v4->m_pTargets[(unsigned __int8)v4->m_pTargetingMap->m_Map.p[28]];
+  v7 = (__int64)&m_pComponent->m_pTargets[(unsigned __int8)m_pComponent->m_pTargetingMap->m_Map.p[28]];
   if ( *(_QWORD *)(v7 + 40) && *(_BYTE *)(v7 + 49) )
     return 0;
   ppFollowTargetVehicle = 0ui64;
   UFG::SelectSuitableVehicle::GetFollowTarget(
-    (UFG::SimObject *)&v3->vfptr,
-    (UFG::SimObject **)&ppFollowTargetVehicle + 1,
+    m_pPointer,
+    (UFG::SimObjectGame **)&ppFollowTargetVehicle + 1,
     (UFG::SimObject **)&ppFollowTargetVehicle);
-  v9 = UFG::SelectSuitableVehicle::IsValidTarget(
-         v2->pActionContext,
-         (UFG::SimObject *)&v3->vfptr,
-         v2->pVehicle,
-         *((UFG::SimObject **)&ppFollowTargetVehicle + 1),
-         (UFG::SimObject *)ppFollowTargetVehicle);
-  if ( v9 )
+  IsValidTarget = UFG::SelectSuitableVehicle::IsValidTarget(
+                    params->pActionContext,
+                    m_pPointer,
+                    (UFG::SimObjectGame *)params->pVehicle,
+                    *((UFG::SimObjectCVBase **)&ppFollowTargetVehicle + 1),
+                    (UFG::SimObjectGame *)ppFollowTargetVehicle);
+  if ( IsValidTarget )
   {
-    v10 = (UFG::SimObjectGame *)v2->pVehicle;
-    if ( !v10 )
-      goto LABEL_42;
-    v11 = v10->m_Flags;
-    if ( (v11 >> 14) & 1 )
+    pVehicle = (UFG::SimObjectGame *)params->pVehicle;
+    if ( !pVehicle )
+      goto LABEL_40;
+    v11 = pVehicle->m_Flags;
+    if ( (v11 & 0x4000) != 0 )
     {
-      v12 = (UFG::InteractableComponent *)v10->m_Components.p[12].m_pComponent;
+      v12 = (UFG::InteractableComponent *)pVehicle->m_Components.p[12].m_pComponent;
     }
-    else if ( (v11 & 0x8000u) == 0 )
+    else if ( v11 >= 0 )
     {
-      if ( (v11 >> 13) & 1 )
-        v13 = UFG::SimObjectGame::GetComponentOfTypeHK(v10, UFG::InteractableComponent::_TypeUID);
-      else
-        v13 = (v11 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v10, UFG::InteractableComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v10->vfptr, UFG::InteractableComponent::_TypeUID);
+      v13 = (v11 & 0x2000) != 0 || (v11 & 0x1000) != 0
+          ? UFG::SimObjectGame::GetComponentOfTypeHK(pVehicle, UFG::InteractableComponent::_TypeUID)
+          : UFG::SimObject::GetComponentOfType(pVehicle, UFG::InteractableComponent::_TypeUID);
       v12 = (UFG::InteractableComponent *)v13;
     }
     else
     {
-      v12 = (UFG::InteractableComponent *)v10->m_Components.p[12].m_pComponent;
+      v12 = (UFG::InteractableComponent *)pVehicle->m_Components.p[12].m_pComponent;
     }
     if ( !v12 )
-      goto LABEL_42;
-    v14 = v2->ignoreMeshTest;
+      goto LABEL_40;
+    ignoreMeshTest = params->ignoreMeshTest;
     *(_QWORD *)&ppFollowTargetVehicle = 0i64;
-    v15 = (_QWORD *)((char *)&ppFollowTargetVehicle + 8 * ((signed __int64)(v9 - 3) >> 6));
-    *v15 |= 1i64 << ((v9 - 3) & 0x3F);
-    v16 = UFG::InteractableComponent::FindBestInteractionPoint(
-            v12,
-            (UFG::SimObject *)&v3->vfptr,
-            (UFG::qStaticBitField<6> *)&ppFollowTargetVehicle,
-            v14);
-    if ( !v3 )
-      goto LABEL_41;
-    v17 = v3->m_Flags;
-    if ( (v17 >> 14) & 1 )
+    v15 = (_QWORD *)&ppFollowTargetVehicle + ((__int64)(IsValidTarget - 3) >> 6);
+    *v15 |= 1i64 << ((IsValidTarget - 3) & 0x3F);
+    BestInteractionPoint = UFG::InteractableComponent::FindBestInteractionPoint(
+                             v12,
+                             m_pPointer,
+                             (UFG::qStaticBitField<6> *)&ppFollowTargetVehicle,
+                             ignoreMeshTest);
+    if ( !m_pPointer )
+      goto LABEL_39;
+    v17 = m_pPointer->m_Flags;
+    if ( (v17 & 0x4000) != 0 )
     {
-      v1 = (UFG::InteractorComponent *)v3->m_Components.p[29].m_pComponent;
-LABEL_41:
-      UFG::InteractorComponent::SetBestInteractionPoint(v1, v16, 1);
-      goto LABEL_42;
+      v1 = (UFG::InteractorComponent *)m_pPointer->m_Components.p[29].m_pComponent;
+LABEL_39:
+      UFG::InteractorComponent::SetBestInteractionPoint(v1, BestInteractionPoint, 1);
+      goto LABEL_40;
     }
-    if ( (v17 & 0x8000u) != 0 || (v17 >> 13) & 1 )
+    if ( v17 < 0 || (v17 & 0x2000) != 0 )
     {
       v18 = UFG::InteractorComponent::_TypeUID;
-      v19 = v3;
+      v19 = m_pPointer;
     }
     else
     {
       v18 = UFG::InteractorComponent::_TypeUID;
-      v21 = ((v17 >> 12) & 1) == 0;
-      v19 = v3;
+      v21 = (v17 & 0x1000) == 0;
+      v19 = m_pPointer;
       if ( v21 )
       {
-        v20 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::InteractorComponent::_TypeUID);
-        goto LABEL_40;
+        ComponentOfType = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::InteractorComponent::_TypeUID);
+        goto LABEL_38;
       }
     }
-    v20 = UFG::SimObjectGame::GetComponentOfTypeHK(v19, v18);
-LABEL_40:
-    v1 = (UFG::InteractorComponent *)v20;
-    goto LABEL_41;
+    ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(v19, v18);
+LABEL_38:
+    v1 = (UFG::InteractorComponent *)ComponentOfType;
+    goto LABEL_39;
   }
-  result = UFG::SelectSuitableVehicle::SelectVehicle(v2);
+  result = UFG::SelectSuitableVehicle::SelectVehicle(params);
   if ( result )
   {
-LABEL_42:
-    UFG::TargetingSystemBaseComponent::AssignTarget(v4, eTARGET_TYPE_VEHICLE, v2->pVehicle);
-    UFG::TargetingSystemBaseComponent::AssignTarget(v4, eTARGET_TYPE_INTERACTIVE_PROP, v2->pVehicle);
-    result = 1;
+LABEL_40:
+    UFG::TargetingSystemBaseComponent::AssignTarget(m_pComponent, eTARGET_TYPE_VEHICLE, params->pVehicle);
+    UFG::TargetingSystemBaseComponent::AssignTarget(m_pComponent, eTARGET_TYPE_INTERACTIVE_PROP, params->pVehicle);
+    return 1;
   }
   return result;
 }
@@ -878,80 +771,72 @@ LABEL_42:
 // RVA: 0x34E810
 void __fastcall UFG::SelectSuitableVehicle::Cleanup(UFG::SelectSuitableVehicle::Params *params)
 {
-  UFG::SimObjectGame *v1; // r8
-  UFG::SimObject *v2; // r14
-  unsigned __int16 v3; // cx
-  UFG::SimComponent *v4; // rax
-  UFG::VehicleOccupantComponent *v5; // rbp
-  __int64 v6; // rbx
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v7; // rax
+  UFG::SimObjectGame *pVehicle; // r8
+  UFG::SimObject *m_pPointer; // r14
+  __int16 m_Flags; // cx
+  UFG::VehicleOccupantComponent *m_pComponent; // rbp
+  UFG::SimComponent *ComponentOfType; // rax
+  __int64 NumberOfSeats; // rbx
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *ReservationList; // rax
   signed int v8; // esi
   __int64 v9; // rdi
   __int64 v10; // r15
   UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v11; // r12
-  UFG::SimObject **v12; // rbx
+  UFG::SimObject **i; // rbx
   UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v13; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v14; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v15; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
 
-  v1 = (UFG::SimObjectGame *)params->pVehicle;
-  v2 = params->pActionContext->mSimObject.m_pPointer;
-  if ( !v1 || !v2 )
+  pVehicle = (UFG::SimObjectGame *)params->pVehicle;
+  m_pPointer = params->pActionContext->mSimObject.m_pPointer;
+  if ( !pVehicle || !m_pPointer )
     return;
-  v3 = v1->m_Flags;
-  if ( (v3 >> 14) & 1 )
+  m_Flags = pVehicle->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 )
+    goto LABEL_9;
+  if ( m_Flags >= 0 )
   {
-    v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v1, UFG::VehicleOccupantComponent::_TypeUID);
-LABEL_12:
-    v5 = (UFG::VehicleOccupantComponent *)v4;
-    goto LABEL_13;
-  }
-  if ( (v3 & 0x8000u) == 0 )
-  {
-    if ( (v3 >> 13) & 1 )
+    if ( (m_Flags & 0x2000) == 0 && (m_Flags & 0x1000) == 0 )
     {
-      v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v1, UFG::VehicleOccupantComponent::_TypeUID);
+      ComponentOfType = UFG::SimObject::GetComponentOfType(pVehicle, UFG::VehicleOccupantComponent::_TypeUID);
+      goto LABEL_11;
     }
-    else if ( (v3 >> 12) & 1 )
-    {
-      v4 = UFG::SimObjectGame::GetComponentOfTypeHK(v1, UFG::VehicleOccupantComponent::_TypeUID);
-    }
-    else
-    {
-      v4 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v1->vfptr, UFG::VehicleOccupantComponent::_TypeUID);
-    }
+LABEL_9:
+    ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(pVehicle, UFG::VehicleOccupantComponent::_TypeUID);
+LABEL_11:
+    m_pComponent = (UFG::VehicleOccupantComponent *)ComponentOfType;
     goto LABEL_12;
   }
-  v5 = (UFG::VehicleOccupantComponent *)v1->m_Components.p[30].m_pComponent;
-LABEL_13:
-  if ( v5 )
+  m_pComponent = (UFG::VehicleOccupantComponent *)pVehicle->m_Components.p[30].m_pComponent;
+LABEL_12:
+  if ( m_pComponent )
   {
-    v6 = (signed int)UFG::VehicleOccupantComponent::GetNumberOfSeats(v5);
-    v7 = UFG::VehicleOccupantComponent::GetReservationList(v5);
+    NumberOfSeats = (int)UFG::VehicleOccupantComponent::GetNumberOfSeats(m_pComponent);
+    ReservationList = UFG::VehicleOccupantComponent::GetReservationList(m_pComponent);
     v8 = 0;
     v9 = 0i64;
-    v10 = v6;
-    v11 = v7;
-    if ( (signed int)v6 > 0 )
+    v10 = NumberOfSeats;
+    v11 = ReservationList;
+    if ( (int)NumberOfSeats > 0 )
     {
-      v12 = &v7->m_pPointer;
-      while ( *v12 != v2 || UFG::VehicleOccupantComponent::GetOccupant(v5, v8, 0i64) == v2 )
+      for ( i = &ReservationList->m_pPointer;
+            *i != m_pPointer || UFG::VehicleOccupantComponent::GetOccupant(m_pComponent, v8, 0i64) == m_pPointer;
+            i += 3 )
       {
         ++v9;
         ++v8;
-        v12 += 3;
         if ( v9 >= v10 )
           return;
       }
       v13 = &v11[v8];
-      if ( v11[v8].m_pPointer )
+      if ( v13->m_pPointer )
       {
-        v14 = v13->mPrev;
-        v15 = v13->mNext;
-        v14->mNext = v15;
-        v15->mPrev = v14;
-        v13->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v13->mPrev;
-        v13->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v13->mPrev;
+        mPrev = v13->mPrev;
+        mNext = v13->mNext;
+        mPrev->mNext = mNext;
+        mNext->mPrev = mPrev;
+        v13->mPrev = v13;
+        v13->mNext = v13;
       }
       v13->m_pPointer = 0i64;
     }

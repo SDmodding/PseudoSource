@@ -1,18 +1,16 @@
 // File Line: 49
 // RVA: 0x6A2CC0
-signed __int64 __fastcall IntersectSphereFrustum(UFG::qVector4 *planes, UFG::qVector3 *pos, float radius)
+__int64 __fastcall IntersectSphereFrustum(UFG::qVector4 *planes, UFG::qVector3 *pos, float radius)
 {
-  signed __int64 v3; // rax
-  float *v4; // rcx
+  __int64 v3; // rax
+  float *i; // rcx
 
   v3 = 0i64;
-  v4 = &planes->z;
-  while ( (float)((float)((float)((float)(pos->y * *(v4 - 1)) + (float)(pos->x * *(v4 - 2))) + (float)(pos->z * *v4))
-                + v4[1]) <= radius )
+  for ( i = &planes->z;
+        (float)((float)((float)((float)(pos->y * *(i - 1)) + (float)(pos->x * *(i - 2))) + (float)(pos->z * *i)) + i[1]) <= radius;
+        i += 4 )
   {
-    ++v3;
-    v4 += 4;
-    if ( v3 >= 6 )
+    if ( ++v3 >= 6 )
       return 1i64;
   }
   return 2i64;
@@ -20,20 +18,24 @@ signed __int64 __fastcall IntersectSphereFrustum(UFG::qVector4 *planes, UFG::qVe
 
 // File Line: 68
 // RVA: 0x6A2B50
-signed __int64 __fastcall IntersectAABBFrustum(UFG::qVector4 *planes, UFG::qVector3 *min, UFG::qVector3 *max, float *centre_distance_to_nearplan)
+signed __int64 __fastcall IntersectAABBFrustum(
+        UFG::qVector4 *planes,
+        UFG::qVector3 *min,
+        UFG::qVector3 *max,
+        float *centre_distance_to_nearplan)
 {
   __int64 v4; // r10
-  unsigned int v5; // er11
-  float v6; // xmm6_4
+  unsigned int v5; // r11d
+  float x; // xmm6_4
   float v7; // xmm1_4
   float v8; // xmm9_4
-  float v9; // xmm2_4
+  float y; // xmm2_4
   float v10; // xmm0_4
   float v11; // xmm10_4
-  float v12; // xmm5_4
+  float z; // xmm5_4
   float v13; // xmm8_4
   float v14; // xmm7_4
-  float v15; // xmm11_4
+  float w; // xmm11_4
   float v16; // xmm4_4
   float v17; // xmm2_4
   float v18; // xmm0_4
@@ -42,8 +44,8 @@ signed __int64 __fastcall IntersectAABBFrustum(UFG::qVector4 *planes, UFG::qVect
   v5 = 1;
   while ( 1 )
   {
-    v6 = planes[v4].x;
-    if ( v6 <= 0.0 )
+    x = planes[v4].x;
+    if ( x <= 0.0 )
     {
       v7 = max->x;
       v8 = min->x;
@@ -53,8 +55,8 @@ signed __int64 __fastcall IntersectAABBFrustum(UFG::qVector4 *planes, UFG::qVect
       v7 = min->x;
       v8 = max->x;
     }
-    v9 = planes[v4].y;
-    if ( v9 <= 0.0 )
+    y = planes[v4].y;
+    if ( y <= 0.0 )
     {
       v10 = max->y;
       v11 = min->y;
@@ -64,8 +66,8 @@ signed __int64 __fastcall IntersectAABBFrustum(UFG::qVector4 *planes, UFG::qVect
       v10 = min->y;
       v11 = max->y;
     }
-    v12 = planes[v4].z;
-    if ( v12 <= 0.0 )
+    z = planes[v4].z;
+    if ( z <= 0.0 )
     {
       v13 = max->z;
       v14 = min->z;
@@ -75,11 +77,11 @@ signed __int64 __fastcall IntersectAABBFrustum(UFG::qVector4 *planes, UFG::qVect
       v13 = min->z;
       v14 = max->z;
     }
-    v15 = planes[v4].w;
-    v16 = (float)((float)((float)(v9 * v10) + (float)(v6 * v7)) + (float)(v12 * v13)) + v15;
+    w = planes[v4].w;
+    v16 = (float)((float)((float)(y * v10) + (float)(x * v7)) + (float)(z * v13)) + w;
     if ( v16 > 0.0 )
       break;
-    v17 = (float)((float)((float)(v9 * v11) + (float)(v6 * v8)) + (float)(v12 * v14)) + v15;
+    v17 = (float)((float)((float)(y * v11) + (float)(x * v8)) + (float)(z * v14)) + w;
     if ( v4 )
       v18 = *centre_distance_to_nearplan;
     else

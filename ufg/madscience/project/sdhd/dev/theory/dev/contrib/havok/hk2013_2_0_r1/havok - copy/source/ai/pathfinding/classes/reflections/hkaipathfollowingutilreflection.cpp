@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkaiPathFollowingPropertiesClass__()
     &hkaiPathFollowingProperties_Default,
     0i64,
     0,
-    6u);
+    6);
 }
 
 // File Line: 90
@@ -28,17 +28,17 @@ hkClass *__fastcall hkaiPathFollowingProperties::staticClass()
 
 // File Line: 97
 // RVA: 0xBB7230
-void __fastcall finishLoadedObjecthkaiPathFollowingProperties(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiPathFollowingProperties(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiPathFollowingProperties::`vftable;
+    *p = &hkaiPathFollowingProperties::`vftable;
 }
 
 // File Line: 103
 // RVA: 0xBB7250
-void __fastcall cleanupLoadedObjecthkaiPathFollowingProperties(void *p)
+void __fastcall cleanupLoadedObjecthkaiPathFollowingProperties(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 107
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkaiPathFollowingPropertiesTypeInfo__()
   hkaiPathFollowingPropertiesTypeInfo.m_typeName = "hkaiPathFollowingProperties";
   hkaiPathFollowingPropertiesTypeInfo.m_vtable = result;
   hkaiPathFollowingPropertiesTypeInfo.m_scopedName = "!hkaiPathFollowingProperties";
-  hkaiPathFollowingPropertiesTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiPathFollowingProperties;
-  hkaiPathFollowingPropertiesTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiPathFollowingProperties;
+  hkaiPathFollowingPropertiesTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiPathFollowingProperties;
+  hkaiPathFollowingPropertiesTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiPathFollowingProperties;
   return result;
 }
 

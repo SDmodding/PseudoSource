@@ -2,8 +2,8 @@
 // RVA: 0x2376E0
 void __fastcall UFG::RegionPolygon::RegionPolygon(UFG::RegionPolygon *this, UFG::RegionPolygon *rgnPoly)
 {
-  float v2; // xmm1_4
-  float v3; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
   float v4; // xmm1_4
   float v5; // xmm2_4
 
@@ -12,11 +12,11 @@ void __fastcall UFG::RegionPolygon::RegionPolygon(UFG::RegionPolygon *this, UFG:
   this->vfptr = (UFG::RegionBaseVtbl *)&UFG::RegionPolygon::`vftable;
   this->mpVerts = 0i64;
   this->mVertCount = 0;
-  v2 = UFG::qVector3::msZero.y;
-  v3 = UFG::qVector3::msZero.z;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
   this->mCenter.x = UFG::qVector3::msZero.x;
-  this->mCenter.y = v2;
-  this->mCenter.z = v3;
+  this->mCenter.y = y;
+  this->mCenter.z = z;
   v4 = UFG::qVector3::msDirUp.y;
   v5 = UFG::qVector3::msDirUp.z;
   this->mNormal.x = UFG::qVector3::msDirUp.x;
@@ -26,15 +26,15 @@ void __fastcall UFG::RegionPolygon::RegionPolygon(UFG::RegionPolygon *this, UFG:
   *(_QWORD *)&this->mBoundingBox.mMin.y = 0i64;
   *(_QWORD *)&this->mBoundingBox.mMax.x = 0i64;
   this->mBoundingBox.mMax.z = 0.0;
-  UFG::RegionPolygon::SetShape(this, (UFG::RegionBase *)&rgnPoly->vfptr);
+  UFG::RegionPolygon::SetShape(this, rgnPoly);
 }
 
 // File Line: 114
 // RVA: 0x237790
 void __fastcall UFG::RegionPolygon::RegionPolygon(UFG::RegionPolygon *this, UFG::qPropertySet *props)
 {
-  float v2; // xmm1_4
-  float v3; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
   float v4; // xmm1_4
   float v5; // xmm2_4
 
@@ -44,11 +44,11 @@ void __fastcall UFG::RegionPolygon::RegionPolygon(UFG::RegionPolygon *this, UFG:
   this->mpVerts = 0i64;
   *(_QWORD *)&this->mVertCount = 0i64;
   this->mExtentBelow = 0.0;
-  v2 = UFG::qVector3::msZero.y;
-  v3 = UFG::qVector3::msZero.z;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
   this->mCenter.x = UFG::qVector3::msZero.x;
-  this->mCenter.y = v2;
-  this->mCenter.z = v3;
+  this->mCenter.y = y;
+  this->mCenter.z = z;
   v4 = UFG::qVector3::msDirUp.y;
   v5 = UFG::qVector3::msDirUp.z;
   this->mNormal.x = UFG::qVector3::msDirUp.x;
@@ -65,78 +65,71 @@ void __fastcall UFG::RegionPolygon::RegionPolygon(UFG::RegionPolygon *this, UFG:
 // RVA: 0x23A370
 void __fastcall UFG::RegionPolygon::Clone(UFG::RegionPolygon *this)
 {
-  UFG::RegionPolygon *v1; // rbx
   UFG::allocator::free_link *v2; // rax
 
-  v1 = this;
   v2 = UFG::qMalloc(0x58ui64, UFG::gGlobalNewName, 0i64);
   if ( v2 )
-    UFG::RegionPolygon::RegionPolygon((UFG::RegionPolygon *)v2, v1);
+    UFG::RegionPolygon::RegionPolygon((UFG::RegionPolygon *)v2, this);
 }
 
 // File Line: 145
 // RVA: 0x23D350
 void __fastcall UFG::RegionPolygon::GetCenter(UFG::RegionPolygon *this, UFG::qVector3 *pPos)
 {
-  float v2; // xmm0_4
-  float v3; // xmm1_4
+  float y; // xmm0_4
+  float z; // xmm1_4
 
-  v2 = this->mCenter.y;
-  v3 = this->mCenter.z;
+  y = this->mCenter.y;
+  z = this->mCenter.z;
   pPos->x = this->mCenter.x;
-  pPos->y = v2;
-  pPos->z = v3;
+  pPos->y = y;
+  pPos->z = z;
 }
 
 // File Line: 155
 // RVA: 0x23DD60
 UFG::qVector3 *__fastcall UFG::RegionPolygon::GetRandomPosition(UFG::RegionPolygon *this, UFG::qVector3 *result)
 {
-  UFG::qVector3 *v2; // rbx
-  UFG::RegionPolygon *v3; // rdi
-  UFG::qVector3 *v4; // rax
-  float v5; // xmm7_4
-  float v6; // xmm8_4
-  float v7; // xmm4_4
+  UFG::qVector3 *RandomPosition; // rax
+  float y; // xmm7_4
+  float z; // xmm8_4
+  float x; // xmm4_4
   float v8; // xmm2_4
   float v9; // xmm7_4
   float v10; // xmm8_4
-  UFG::qVector3 resulta; // [rsp+20h] [rbp-48h]
+  UFG::qVector3 resulta; // [rsp+20h] [rbp-48h] BYREF
 
-  v2 = result;
-  v3 = this;
   do
   {
-    v4 = UFG::qBox::GetRandomPosition(&v3->mBoundingBox, &resulta);
-    v5 = v4->y;
-    v6 = v4->z;
-    v2->x = v4->x;
-    v7 = v2->x;
-    v2->y = v5;
-    v2->z = v6;
-    v8 = (float)((float)((float)(v3->mNormal.x * v7) + (float)(v3->mNormal.y * v5)) + (float)(v3->mNormal.z * v6))
-       - v3->mOrigDist;
-    v9 = v5 - (float)(v3->mNormal.y * v8);
-    v10 = v6 - (float)(v3->mNormal.z * v8);
-    v2->x = v7 - (float)(v3->mNormal.x * v8);
-    v2->y = v9;
-    v2->z = v10;
+    RandomPosition = UFG::qBox::GetRandomPosition(&this->mBoundingBox, &resulta);
+    y = RandomPosition->y;
+    z = RandomPosition->z;
+    result->x = RandomPosition->x;
+    x = result->x;
+    result->y = y;
+    result->z = z;
+    v8 = (float)((float)((float)(this->mNormal.x * x) + (float)(this->mNormal.y * y)) + (float)(this->mNormal.z * z))
+       - this->mOrigDist;
+    v9 = y - (float)(this->mNormal.y * v8);
+    v10 = z - (float)(this->mNormal.z * v8);
+    result->x = x - (float)(this->mNormal.x * v8);
+    result->y = v9;
+    result->z = v10;
   }
-  while ( !(unsigned __int8)UFG::qIsBoundPointPolyXY(v2, v3->mpVerts, v3->mVertCount) );
-  return v2;
+  while ( !UFG::qIsBoundPointPolyXY(result, this->mpVerts, this->mVertCount) );
+  return result;
 }
 
 // File Line: 184
 // RVA: 0x245F10
 void __fastcall UFG::RegionPolygon::Translate(UFG::RegionPolygon *this, UFG::qVector3 *offset)
 {
-  UFG::RegionPolygon *v2; // r10
-  UFG::qVector3 *v3; // rcx
-  __int64 v4; // rax
+  UFG::qVector3 *mpVerts; // rcx
+  __int64 mVertCount; // rax
   unsigned __int64 v5; // r11
-  float v6; // xmm2_4
-  float v7; // xmm1_4
-  float v8; // xmm0_4
+  float y; // xmm2_4
+  float z; // xmm1_4
+  float x; // xmm0_4
   float v9; // xmm2_4
   float v10; // xmm1_4
   float v11; // xmm0_4
@@ -151,7 +144,7 @@ void __fastcall UFG::RegionPolygon::Translate(UFG::RegionPolygon *this, UFG::qVe
   float v20; // xmm2_4
   float v21; // xmm2_4
   float v22; // xmm1_4
-  float *v23; // rcx
+  float *p_z; // rcx
   float v24; // xmm1_4
   float v25; // xmm0_4
   float v26; // xmm1_4
@@ -161,156 +154,154 @@ void __fastcall UFG::RegionPolygon::Translate(UFG::RegionPolygon *this, UFG::qVe
   float v30; // xmm1_4
   float v31; // xmm2_4
 
-  v2 = this;
-  v3 = this->mpVerts;
-  v4 = v2->mVertCount;
-  v5 = (unsigned __int64)&v3[v4];
-  if ( (unsigned __int64)v3 < v5 )
+  mpVerts = this->mpVerts;
+  mVertCount = this->mVertCount;
+  v5 = (unsigned __int64)&mpVerts[mVertCount];
+  if ( (unsigned __int64)mpVerts < v5 )
   {
-    if ( (signed __int64)(((unsigned __int64)((unsigned __int128)((12 * v4 + 11)
-                                                                * (signed __int128)3074457345618258603i64) >> 64) >> 63)
-                        + ((signed __int64)((unsigned __int128)((12 * v4 + 11) * (signed __int128)3074457345618258603i64) >> 64) >> 1)) >= 4 )
+    if ( (12 * mVertCount + 11) / 12 >= 4 )
     {
       do
       {
-        v6 = v3->y;
-        v7 = v3->z;
-        v8 = v3->x;
-        v3 += 4;
-        v9 = v6 + offset->y;
-        v10 = v7 + offset->z;
-        v3[-4].x = v8 + offset->x;
-        v11 = v3[-3].x;
-        v3[-4].y = v9;
-        v12 = v3[-3].y;
-        v3[-4].z = v10;
+        y = mpVerts->y;
+        z = mpVerts->z;
+        x = mpVerts->x;
+        mpVerts += 4;
+        v9 = y + offset->y;
+        v10 = z + offset->z;
+        mpVerts[-4].x = x + offset->x;
+        v11 = mpVerts[-3].x;
+        mpVerts[-4].y = v9;
+        v12 = mpVerts[-3].y;
+        mpVerts[-4].z = v10;
         v13 = v12 + offset->y;
-        v14 = v3[-3].z + offset->z;
-        v3[-3].x = v11 + offset->x;
-        v15 = v3[-2].x;
-        v3[-3].y = v13;
-        v16 = v3[-2].y;
-        v3[-3].z = v14;
+        v14 = mpVerts[-3].z + offset->z;
+        mpVerts[-3].x = v11 + offset->x;
+        v15 = mpVerts[-2].x;
+        mpVerts[-3].y = v13;
+        v16 = mpVerts[-2].y;
+        mpVerts[-3].z = v14;
         v17 = v16 + offset->y;
-        v18 = v3[-2].z + offset->z;
-        v3[-2].x = v15 + offset->x;
-        v19 = v3[-1].x;
-        v3[-2].y = v17;
-        v20 = v3[-1].y;
-        v3[-2].z = v18;
+        v18 = mpVerts[-2].z + offset->z;
+        mpVerts[-2].x = v15 + offset->x;
+        v19 = mpVerts[-1].x;
+        mpVerts[-2].y = v17;
+        v20 = mpVerts[-1].y;
+        mpVerts[-2].z = v18;
         v21 = v20 + offset->y;
-        v22 = v3[-1].z + offset->z;
-        v3[-1].x = v19 + offset->x;
-        v3[-1].y = v21;
-        v3[-1].z = v22;
+        v22 = mpVerts[-1].z + offset->z;
+        mpVerts[-1].x = v19 + offset->x;
+        mpVerts[-1].y = v21;
+        mpVerts[-1].z = v22;
       }
-      while ( (signed __int64)v3 < (signed __int64)(v5 - 36) );
+      while ( (__int64)mpVerts < (__int64)(v5 - 36) );
     }
-    if ( (unsigned __int64)v3 < v5 )
+    if ( (unsigned __int64)mpVerts < v5 )
     {
-      v23 = &v3->z;
+      p_z = &mpVerts->z;
       do
       {
-        v24 = *v23;
-        v25 = *(v23 - 2);
-        v23 += 3;
+        v24 = *p_z;
+        v25 = *(p_z - 2);
+        p_z += 3;
         v26 = v24 + offset->z;
-        v27 = offset->y + *(v23 - 4);
-        *(v23 - 5) = v25 + offset->x;
-        *(v23 - 4) = v27;
-        *(v23 - 3) = v26;
+        v27 = offset->y + *(p_z - 4);
+        *(p_z - 5) = v25 + offset->x;
+        *(p_z - 4) = v27;
+        *(p_z - 3) = v26;
       }
-      while ( (unsigned __int64)(v23 - 2) < v5 );
+      while ( (unsigned __int64)(p_z - 2) < v5 );
     }
   }
-  v28 = v2->mBoundingBox.mMin.y + offset->y;
-  v29 = v2->mBoundingBox.mMin.z + offset->z;
-  v2->mBoundingBox.mMin.x = v2->mBoundingBox.mMin.x + offset->x;
-  v2->mBoundingBox.mMin.y = v28;
-  v2->mBoundingBox.mMin.z = v29;
-  v30 = v2->mBoundingBox.mMax.z + offset->z;
-  v31 = offset->y + v2->mBoundingBox.mMax.y;
-  v2->mBoundingBox.mMax.x = offset->x + v2->mBoundingBox.mMax.x;
-  v2->mBoundingBox.mMax.y = v31;
-  v2->mBoundingBox.mMax.z = v30;
-  UFG::RegionPolygon::RecalcCachedValues(v2, 0);
+  v28 = this->mBoundingBox.mMin.y + offset->y;
+  v29 = this->mBoundingBox.mMin.z + offset->z;
+  this->mBoundingBox.mMin.x = this->mBoundingBox.mMin.x + offset->x;
+  this->mBoundingBox.mMin.y = v28;
+  this->mBoundingBox.mMin.z = v29;
+  v30 = this->mBoundingBox.mMax.z + offset->z;
+  v31 = offset->y + this->mBoundingBox.mMax.y;
+  this->mBoundingBox.mMax.x = offset->x + this->mBoundingBox.mMax.x;
+  this->mBoundingBox.mMax.y = v31;
+  this->mBoundingBox.mMax.z = v30;
+  UFG::RegionPolygon::RecalcCachedValues(this, 0);
 }
 
 // File Line: 205
 // RVA: 0x243CE0
 void __fastcall UFG::RegionPolygon::PropertiesLoad(UFG::RegionPolygon *this, UFG::qPropertySet *props)
 {
-  UFG::qPropertySet *v2; // rbx
-  UFG::RegionPolygon *v3; // rsi
   unsigned int v4; // edi
   UFG::qPropertyList *v5; // r14
-  unsigned __int64 v6; // rbp
+  unsigned __int64 mNumElements; // rbp
   unsigned __int64 v7; // rax
   UFG::allocator::free_link *v8; // rax
   UFG::allocator::free_link *v9; // rbx
   UFG::qVector3 *v10; // rax
-  float v11; // xmm0_4
-  float v12; // xmm1_4
+  float y; // xmm0_4
+  float z; // xmm1_4
 
-  v2 = props;
-  v3 = this;
   v4 = 0;
   if ( this->mVertCount )
   {
     this->mVertCount = 0;
     operator delete[](this->mpVerts);
-    v3->mpVerts = 0i64;
-    UFG::RegionPolygon::RecalcCachedValues(v3, 1);
+    this->mpVerts = 0i64;
+    UFG::RegionPolygon::RecalcCachedValues(this, 1);
   }
-  v3->mExtentAbove = *UFG::qPropertySet::Get<float>(v2, (UFG::qSymbol *)&SimSym_ExtentAbove.mUID, DEPTH_RECURSE);
-  v3->mExtentBelow = *UFG::qPropertySet::Get<float>(v2, (UFG::qSymbol *)&SimSym_ExtentBelow.mUID, DEPTH_RECURSE);
-  v5 = UFG::qPropertySet::Get<UFG::qPropertyList>(v2, (UFG::qSymbol *)&SimSym_Vertexes.mUID, DEPTH_RECURSE);
-  v6 = v5->mNumElements;
-  if ( (_DWORD)v6 )
+  this->mExtentAbove = *UFG::qPropertySet::Get<float>(
+                          props,
+                          (UFG::qArray<unsigned long,0> *)&SimSym_ExtentAbove,
+                          DEPTH_RECURSE);
+  this->mExtentBelow = *UFG::qPropertySet::Get<float>(
+                          props,
+                          (UFG::qArray<unsigned long,0> *)&SimSym_ExtentBelow,
+                          DEPTH_RECURSE);
+  v5 = UFG::qPropertySet::Get<UFG::qPropertyList>(
+         props,
+         (UFG::qArray<unsigned long,0> *)&SimSym_Vertexes,
+         DEPTH_RECURSE);
+  mNumElements = v5->mNumElements;
+  if ( (_DWORD)mNumElements )
   {
-    v3->mVertCount = v6;
-    v7 = 12 * v6;
-    if ( !is_mul_ok(v6, 0xCui64) )
+    this->mVertCount = mNumElements;
+    v7 = 12 * mNumElements;
+    if ( !is_mul_ok(mNumElements, 0xCui64) )
       v7 = -1i64;
     v8 = UFG::qMalloc(v7, "RegionPolygon.mpVerts", 0i64);
-    v3->mpVerts = (UFG::qVector3 *)v8;
-    if ( (_DWORD)v6 )
+    this->mpVerts = (UFG::qVector3 *)v8;
+    v9 = v8 + 1;
+    do
     {
-      v9 = v8 + 1;
-      do
-      {
-        v10 = UFG::qPropertyList::Get<UFG::qVector3>(v5, v4);
-        v11 = v10->y;
-        v12 = v10->z;
-        *(float *)&v9[-1].mNext = v10->x;
-        *((float *)&v9[-1].mNext + 1) = v11;
-        *(float *)&v9->mNext = v12;
-        ++v4;
-        v9 = (UFG::allocator::free_link *)((char *)v9 + 12);
-      }
-      while ( v4 < (unsigned int)v6 );
+      v10 = UFG::qPropertyList::Get<UFG::qVector3>(v5, v4);
+      y = v10->y;
+      z = v10->z;
+      *(float *)&v9[-1].mNext = v10->x;
+      *((float *)&v9[-1].mNext + 1) = y;
+      *(float *)&v9->mNext = z;
+      ++v4;
+      v9 = (UFG::allocator::free_link *)((char *)v9 + 12);
     }
+    while ( v4 < (unsigned int)mNumElements );
   }
-  UFG::RegionPolygon::RecalcCachedValues(v3, 1);
+  UFG::RegionPolygon::RecalcCachedValues(this, 1);
 }
 
 // File Line: 238
 // RVA: 0x244460
 void __fastcall UFG::RegionPolygon::PropertiesSave(UFG::RegionPolygon *this, UFG::qPropertySet *pProps)
 {
-  UFG::qPropertySet *v2; // rbx
-  UFG::RegionPolygon *v3; // rsi
   UFG::qPropertyList *v4; // rax
-  UFG::allocator::free_link *v5; // rdi
-  UFG::qVector3 *v6; // rbx
-  unsigned __int64 i; // rsi
+  UFG::qPropertyList *v5; // rdi
+  UFG::qVector3 *mpVerts; // rbx
+  UFG::qVector3 *i; // rsi
 
-  v2 = pProps;
-  v3 = this;
-  UFG::qPropertySet::Set<float>(pProps, (UFG::qSymbol *)&SimSym_ExtentAbove.mUID, this->mExtentAbove);
-  UFG::qPropertySet::Set<float>(v2, (UFG::qSymbol *)&SimSym_ExtentBelow.mUID, v3->mExtentBelow);
-  v4 = UFG::qPropertySet::Get<UFG::qPropertyList>(v2, (UFG::qSymbol *)&SimSym_Vertexes.mUID, DEPTH_RECURSE);
-  v5 = (UFG::allocator::free_link *)v4;
+  UFG::qPropertySet::Set<float>(pProps, (UFG::qArray<unsigned long,0> *)&SimSym_ExtentAbove, this->mExtentAbove);
+  UFG::qPropertySet::Set<float>(pProps, (UFG::qArray<unsigned long,0> *)&SimSym_ExtentBelow, this->mExtentBelow);
+  v4 = UFG::qPropertySet::Get<UFG::qPropertyList>(
+         pProps,
+         (UFG::qArray<unsigned long,0> *)&SimSym_Vertexes,
+         DEPTH_RECURSE);
+  v5 = v4;
   if ( v4 )
   {
     UFG::qPropertyList::RemoveAll(v4);
@@ -318,11 +309,11 @@ void __fastcall UFG::RegionPolygon::PropertiesSave(UFG::RegionPolygon *this, UFG
   else
   {
     v5 = UFG::qPropertyList::Create("pVertList");
-    UFG::qPropertySet::Set<UFG::qPropertyList>(v2, (UFG::qSymbol *)&SimSym_Vertexes.mUID, (UFG::qPropertyList *)v5);
+    UFG::qPropertySet::Set<UFG::qPropertyList>(pProps, (UFG::qArray<unsigned long,0> *)&SimSym_Vertexes, v5);
   }
-  v6 = v3->mpVerts;
-  for ( i = (unsigned __int64)&v6[v3->mVertCount]; (unsigned __int64)v6 < i; ++v6 )
-    UFG::qPropertyList::Add<UFG::qVector3>((UFG::qPropertyList *)v5, v6);
+  mpVerts = this->mpVerts;
+  for ( i = &mpVerts[this->mVertCount]; mpVerts < i; ++mpVerts )
+    UFG::qPropertyList::Add<UFG::qVector3>(v5, mpVerts);
 }
 
 // File Line: 304
@@ -330,16 +321,14 @@ void __fastcall UFG::RegionPolygon::PropertiesSave(UFG::RegionPolygon *this, UFG
 void __fastcall UFG::RegionPolygon::InsertVert(UFG::RegionPolygon *this, UFG::qVector3 *vert, unsigned int vertIdx)
 {
   __int64 v3; // rsi
-  UFG::qVector3 *v4; // r14
-  UFG::RegionPolygon *v5; // rbp
-  unsigned int v6; // edi
+  unsigned int mVertCount; // edi
   unsigned __int64 v7; // rax
-  signed __int64 v8; // rcx
-  float v9; // xmm1_4
-  float v10; // xmm0_4
+  __int64 v8; // rcx
+  float y; // xmm1_4
+  float z; // xmm0_4
   float v11; // xmm1_4
   float v12; // xmm0_4
-  float v13; // xmm3_4
+  float x; // xmm3_4
   float v14; // xmm2_4
   float v15; // xmm1_4
   float v16; // xmm1_4
@@ -347,142 +336,138 @@ void __fastcall UFG::RegionPolygon::InsertVert(UFG::RegionPolygon *this, UFG::qV
   float v18; // xmm3_4
   float v19; // xmm2_4
   float v20; // xmm1_4
-  UFG::allocator::free_link *v21; // [rsp+50h] [rbp+8h]
+  UFG::qVector3 *v21; // [rsp+50h] [rbp+8h]
 
   v3 = vertIdx;
-  v4 = vert;
-  v5 = this;
-  v6 = this->mVertCount;
-  v7 = 12i64 * (v6 + 1);
-  if ( !is_mul_ok(v6 + 1, 0xCui64) )
+  mVertCount = this->mVertCount;
+  v7 = 12i64 * (mVertCount + 1);
+  if ( !is_mul_ok(mVertCount + 1, 0xCui64) )
     v7 = -1i64;
-  v21 = UFG::qMalloc(v7, "RegionPolygon.mpVerts", 0i64);
-  UFG::qMemCopy(v21, v5->mpVerts, 12 * v3);
-  v8 = 3 * v3;
-  v9 = v4->y;
-  v10 = v4->z;
-  *((_DWORD *)&v21->mNext + v8) = LODWORD(v4->x);
-  *((float *)&v21->mNext + v8 + 1) = v9;
-  *((float *)&v21[1].mNext + v8) = v10;
-  UFG::qMemCopy((char *)v21 + 4 * (3 * v3 + 3), &v5->mpVerts[v3], 12 * (v6 - v3));
-  operator delete[](v5->mpVerts);
-  v5->mpVerts = (UFG::qVector3 *)v21;
-  if ( ++v5->mVertCount <= 3 )
+  v21 = (UFG::qVector3 *)UFG::qMalloc(v7, "RegionPolygon.mpVerts", 0i64);
+  UFG::qMemCopy(v21, this->mpVerts, 12 * v3);
+  v8 = v3;
+  y = vert->y;
+  z = vert->z;
+  v21[v8].x = vert->x;
+  v21[v8].y = y;
+  v21[v8].z = z;
+  UFG::qMemCopy(&v21[v3 + 1], &this->mpVerts[v3], 12 * (mVertCount - v3));
+  operator delete[](this->mpVerts);
+  this->mpVerts = v21;
+  if ( ++this->mVertCount <= 3 )
   {
-    UFG::RegionPolygon::RecalcCachedValues(v5, 1);
+    UFG::RegionPolygon::RecalcCachedValues(this, 1);
   }
   else
   {
-    v11 = (float)(v5->mExtentAbove * v5->mNormal.y) + v4->y;
-    v12 = (float)(v5->mExtentAbove * v5->mNormal.z) + v4->z;
-    v13 = v5->mBoundingBox.mMax.x;
-    if ( v13 <= (float)((float)(v5->mExtentAbove * v5->mNormal.x) + v4->x) )
-      v13 = (float)(v5->mExtentAbove * v5->mNormal.x) + v4->x;
-    v5->mBoundingBox.mMax.x = v13;
-    v14 = v5->mBoundingBox.mMax.y;
+    v11 = (float)(this->mExtentAbove * this->mNormal.y) + vert->y;
+    v12 = (float)(this->mExtentAbove * this->mNormal.z) + vert->z;
+    x = this->mBoundingBox.mMax.x;
+    if ( x <= (float)((float)(this->mExtentAbove * this->mNormal.x) + vert->x) )
+      x = (float)(this->mExtentAbove * this->mNormal.x) + vert->x;
+    this->mBoundingBox.mMax.x = x;
+    v14 = this->mBoundingBox.mMax.y;
     if ( v14 <= v11 )
       v14 = v11;
-    v5->mBoundingBox.mMax.y = v14;
-    v15 = v5->mBoundingBox.mMax.z;
+    this->mBoundingBox.mMax.y = v14;
+    v15 = this->mBoundingBox.mMax.z;
     if ( v15 <= v12 )
       v15 = v12;
-    v5->mBoundingBox.mMax.z = v15;
-    v16 = (float)(v5->mExtentBelow * v5->mNormal.y) + v4->y;
-    v17 = (float)(v5->mExtentBelow * v5->mNormal.z) + v4->z;
-    v18 = v5->mBoundingBox.mMin.x;
-    if ( v18 >= (float)((float)(v5->mExtentBelow * v5->mNormal.x) + v4->x) )
-      v18 = (float)(v5->mExtentBelow * v5->mNormal.x) + v4->x;
-    v5->mBoundingBox.mMin.x = v18;
-    v19 = v5->mBoundingBox.mMin.y;
+    this->mBoundingBox.mMax.z = v15;
+    v16 = (float)(this->mExtentBelow * this->mNormal.y) + vert->y;
+    v17 = (float)(this->mExtentBelow * this->mNormal.z) + vert->z;
+    v18 = this->mBoundingBox.mMin.x;
+    if ( v18 >= (float)((float)(this->mExtentBelow * this->mNormal.x) + vert->x) )
+      v18 = (float)(this->mExtentBelow * this->mNormal.x) + vert->x;
+    this->mBoundingBox.mMin.x = v18;
+    v19 = this->mBoundingBox.mMin.y;
     if ( v19 >= v16 )
       v19 = v16;
-    v5->mBoundingBox.mMin.y = v19;
-    v20 = v5->mBoundingBox.mMin.z;
+    this->mBoundingBox.mMin.y = v19;
+    v20 = this->mBoundingBox.mMin.z;
     if ( v20 >= v17 )
       v20 = v17;
-    v5->mBoundingBox.mMin.z = v20;
+    this->mBoundingBox.mMin.z = v20;
   }
 }
 
 // File Line: 380
 // RVA: 0x2457E0
-void __fastcall UFG::RegionPolygon::SetShape(UFG::RegionPolygon *this, UFG::RegionPolygon::eShape shape, float extentAbove, float extentBelow)
+void __fastcall UFG::RegionPolygon::SetShape(
+        UFG::RegionPolygon *this,
+        UFG::RegionPolygon::eShape shape,
+        float extentAbove,
+        float extentBelow)
 {
-  UFG::RegionPolygon::eShape v4; // edi
-  UFG::RegionPolygon *v5; // rbx
   int v6; // edi
   unsigned __int64 v7; // rax
-  _DWORD *v8; // rax
-  _DWORD *v9; // rax
+  UFG::qVector3 *mpVerts; // rax
+  UFG::qVector3 *v9; // rax
   UFG::qVector3 *v10; // rax
   unsigned __int64 v11; // rax
-  float v12; // xmm1_4
-  float v13; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
   UFG::allocator::free_link *v14; // [rsp+60h] [rbp+8h]
   UFG::allocator::free_link *v15; // [rsp+60h] [rbp+8h]
 
-  v4 = shape;
-  v5 = this;
   if ( this->mVertCount )
   {
     this->mVertCount = 0;
     operator delete[](this->mpVerts);
-    v5->mpVerts = 0i64;
-    UFG::RegionPolygon::RecalcCachedValues(v5, 1);
+    this->mpVerts = 0i64;
+    UFG::RegionPolygon::RecalcCachedValues(this, 1);
   }
-  v5->mExtentAbove = extentAbove;
-  v5->mExtentBelow = extentBelow;
-  v6 = v4 - 1;
+  this->mExtentAbove = extentAbove;
+  this->mExtentBelow = extentBelow;
+  v6 = shape - 1;
   if ( v6 )
   {
     if ( v6 != 1 )
       return;
-    v5->mVertCount = 4;
+    this->mVertCount = 4;
     v7 = 48i64;
     if ( !is_mul_ok(4ui64, 0xCui64) )
       v7 = -1i64;
     v14 = UFG::qMalloc(v7, "RegionPolygon.mpVerts", 0i64);
-    v5->mpVerts = (UFG::qVector3 *)v14;
+    this->mpVerts = (UFG::qVector3 *)v14;
     LODWORD(v14->mNext) = 1065353216;
     *(UFG::allocator::free_link **)((char *)&v14->mNext + 4) = (UFG::allocator::free_link *)1065353216;
-    v8 = (_DWORD *)&v5->mpVerts->x;
-    v8[3] = 1065353216;
-    v8[4] = -1082130432;
-    v8[5] = 0;
-    v9 = (_DWORD *)&v5->mpVerts->x;
-    v9[6] = -1082130432;
-    v9[7] = -1082130432;
-    v9[8] = 0;
-    v10 = v5->mpVerts;
+    mpVerts = this->mpVerts;
+    mpVerts[1].x = 1.0;
+    mpVerts[1].y = -1.0;
+    mpVerts[1].z = 0.0;
+    v9 = this->mpVerts;
+    v9[2].x = -1.0;
+    v9[2].y = -1.0;
+    v9[2].z = 0.0;
+    v10 = this->mpVerts;
     v10[3].x = -1.0;
     *(_QWORD *)&v10[3].y = 1065353216i64;
   }
   else
   {
-    v5->mVertCount = 1;
+    this->mVertCount = 1;
     v11 = 12i64;
     if ( !is_mul_ok(1ui64, 0xCui64) )
       v11 = -1i64;
     v15 = UFG::qMalloc(v11, "RegionPolygon.mpVerts", 0i64);
-    v5->mpVerts = (UFG::qVector3 *)v15;
+    this->mpVerts = (UFG::qVector3 *)v15;
     v15->mNext = 0i64;
     LODWORD(v15[1].mNext) = 0;
   }
-  v12 = UFG::qVector3::msDirUp.y;
-  v13 = UFG::qVector3::msDirUp.z;
-  v5->mNormal.x = UFG::qVector3::msDirUp.x;
-  v5->mNormal.y = v12;
-  v5->mNormal.z = v13;
-  UFG::RegionPolygon::RecalcCachedValues(v5, 0);
+  y = UFG::qVector3::msDirUp.y;
+  z = UFG::qVector3::msDirUp.z;
+  this->mNormal.x = UFG::qVector3::msDirUp.x;
+  this->mNormal.y = y;
+  this->mNormal.z = z;
+  UFG::RegionPolygon::RecalcCachedValues(this, 0);
 }
 
 // File Line: 418
 // RVA: 0x245660
 void __fastcall UFG::RegionPolygon::SetShape(UFG::RegionPolygon *this, UFG::RegionBase *region)
 {
-  UFG::RegionBase *v2; // rdi
-  UFG::RegionPolygon *v3; // rbx
-  int v4; // xmm1_4
+  int mRefCount; // xmm1_4
   float v5; // xmm2_4
   float v6; // xmm1_4
   int v7; // xmm2_4
@@ -491,137 +476,132 @@ void __fastcall UFG::RegionPolygon::SetShape(UFG::RegionPolygon *this, UFG::Regi
   float v10; // xmm1_4
   float v11; // xmm2_4
   unsigned __int64 v12; // rax
-  __int64 v13; // [rsp+28h] [rbp-20h]
+  __int64 v13; // [rsp+28h] [rbp-20h] BYREF
   float extentBelow[2]; // [rsp+30h] [rbp-18h]
   float extentAbove[2]; // [rsp+38h] [rbp-10h]
   UFG::allocator::free_link *v16; // [rsp+58h] [rbp+10h]
 
-  v2 = region;
-  v3 = this;
-  if ( region->vfptr->GetType(region) == 8 )
+  if ( region->vfptr->GetType(region) == RegionType_polygon )
   {
-    if ( v3->mVertCount )
+    if ( this->mVertCount )
     {
-      v3->mVertCount = 0;
-      operator delete[](v3->mpVerts);
-      v3->mpVerts = 0i64;
-      UFG::RegionPolygon::RecalcCachedValues(v3, 1);
+      this->mVertCount = 0;
+      operator delete[](this->mpVerts);
+      this->mpVerts = 0i64;
+      UFG::RegionPolygon::RecalcCachedValues(this, 1);
     }
-    v3->mVertCount = v2[1].mRefCount;
-    v3->mExtentAbove = *((float *)&v2[1].mRefCount + 1);
-    v3->mExtentBelow = *(float *)&v2[2].vfptr;
-    v4 = v2[2].mRefCount;
-    v5 = *((float *)&v2[2].mRefCount + 1);
-    v3->mCenter.x = *((float *)&v2[2].vfptr + 1);
-    LODWORD(v3->mCenter.y) = v4;
-    v3->mCenter.z = v5;
-    v6 = *((float *)&v2[3].vfptr + 1);
-    v7 = v2[3].mRefCount;
-    v3->mNormal.x = *(float *)&v2[3].vfptr;
-    v3->mNormal.y = v6;
-    LODWORD(v3->mNormal.z) = v7;
-    v3->mOrigDist = *((float *)&v2[3].mRefCount + 1);
-    v8 = *((float *)&v2[4].vfptr + 1);
-    v9 = v2[4].mRefCount;
-    v3->mBoundingBox.mMin.x = *(float *)&v2[4].vfptr;
-    v3->mBoundingBox.mMin.y = v8;
-    LODWORD(v3->mBoundingBox.mMin.z) = v9;
-    v10 = *(float *)&v2[5].vfptr;
-    v11 = *((float *)&v2[5].vfptr + 1);
-    v3->mBoundingBox.mMax.x = *((float *)&v2[4].mRefCount + 1);
-    v3->mBoundingBox.mMax.y = v10;
-    v3->mBoundingBox.mMax.z = v11;
-    v12 = 12i64 * (unsigned int)v2[1].mRefCount;
-    if ( !is_mul_ok((unsigned int)v2[1].mRefCount, 0xCui64) )
+    this->mVertCount = region[1].mRefCount;
+    this->mExtentAbove = *((float *)&region[1].mRefCount + 1);
+    this->mExtentBelow = *(float *)&region[2].vfptr;
+    mRefCount = region[2].mRefCount;
+    v5 = *((float *)&region[2].mRefCount + 1);
+    this->mCenter.x = *((float *)&region[2].vfptr + 1);
+    LODWORD(this->mCenter.y) = mRefCount;
+    this->mCenter.z = v5;
+    v6 = *((float *)&region[3].vfptr + 1);
+    v7 = region[3].mRefCount;
+    this->mNormal.x = *(float *)&region[3].vfptr;
+    this->mNormal.y = v6;
+    LODWORD(this->mNormal.z) = v7;
+    this->mOrigDist = *((float *)&region[3].mRefCount + 1);
+    v8 = *((float *)&region[4].vfptr + 1);
+    v9 = region[4].mRefCount;
+    this->mBoundingBox.mMin.x = *(float *)&region[4].vfptr;
+    this->mBoundingBox.mMin.y = v8;
+    LODWORD(this->mBoundingBox.mMin.z) = v9;
+    v10 = *(float *)&region[5].vfptr;
+    v11 = *((float *)&region[5].vfptr + 1);
+    this->mBoundingBox.mMax.x = *((float *)&region[4].mRefCount + 1);
+    this->mBoundingBox.mMax.y = v10;
+    this->mBoundingBox.mMax.z = v11;
+    v12 = 12i64 * (unsigned int)region[1].mRefCount;
+    if ( !is_mul_ok((unsigned int)region[1].mRefCount, 0xCui64) )
       v12 = -1i64;
     v16 = UFG::qMalloc(v12, "RegionPolygon.mpVerts", 0i64);
-    v3->mpVerts = (UFG::qVector3 *)v16;
-    UFG::qMemCopy(v16, v2[1].vfptr, 12 * v2[1].mRefCount);
+    this->mpVerts = (UFG::qVector3 *)v16;
+    UFG::qMemCopy(v16, region[1].vfptr, 12 * region[1].mRefCount);
   }
   v13 = 0i64;
   *(_QWORD *)extentBelow = 0i64;
   *(_QWORD *)extentAbove = 0i64;
-  v2->vfptr->GetBoundingBox(v2, (UFG::qBox *)&v13);
-  UFG::RegionPolygon::SetShape(v3, Shape_quad, extentAbove[1], extentBelow[0]);
+  region->vfptr->GetBoundingBox(region, (UFG::qBox *)&v13);
+  UFG::RegionPolygon::SetShape(this, Shape_quad, extentAbove[1], extentBelow[0]);
 }
 
 // File Line: 454
 // RVA: 0x23D400
-UFG::qVector3 *__fastcall UFG::RegionPolygon::GetClosestPointOutside(UFG::RegionPolygon *this, UFG::qVector3 *result, UFG::qVector3 *pos)
+UFG::qVector3 *__fastcall UFG::RegionPolygon::GetClosestPointOutside(
+        UFG::RegionPolygon *this,
+        UFG::qVector3 *result,
+        UFG::qVector3 *pos)
 {
-  UFG::qVector3 *v3; // r14
-  UFG::qVector3 *v4; // rdi
-  UFG::RegionPolygon *v5; // r12
   UFG::qVector3 *v6; // rax
-  int v7; // ebp
+  signed int v7; // ebp
   int v8; // ebx
-  signed int v9; // er15
+  int v9; // r15d
   float v10; // xmm6_4
-  UFG::qVector3 *v11; // rsi
-  float v12; // xmm7_4
-  float v13; // xmm9_4
-  float v14; // xmm8_4
+  UFG::qVector3 *mpVerts; // rsi
+  float x; // xmm7_4
+  float z; // xmm9_4
+  float y; // xmm8_4
   UFG::qVector3 *v15; // rax
   float v16; // xmm0_4
   float v17; // xmm0_4
   float v18; // xmm1_4
   float v19; // xmm2_4
   UFG::qVector3 *v20; // rax
-  UFG::qVector3 resulta; // [rsp+20h] [rbp-68h]
+  UFG::qVector3 resulta; // [rsp+20h] [rbp-68h] BYREF
 
-  v3 = result;
-  v4 = pos;
-  v5 = this;
-  if ( this->vfptr->IsHitPoint((UFG::RegionBase *)this, pos) )
+  if ( this->vfptr->IsHitPoint(this, pos) )
   {
-    v7 = v5->mVertCount - 1;
+    v7 = this->mVertCount - 1;
     v8 = 0;
     v9 = -1;
     v10 = FLOAT_9_9999996e24;
     if ( v7 > 0 )
     {
-      v11 = v5->mpVerts;
-      v12 = v4->x;
-      v13 = v4->z;
-      v14 = v4->y;
+      mpVerts = this->mpVerts;
+      x = pos->x;
+      z = pos->z;
+      y = pos->y;
       do
       {
-        v15 = UFG::qNearestSegPoint(&resulta, v11, v11 + 1, v4);
+        v15 = UFG::qNearestSegPoint(&resulta, mpVerts, mpVerts + 1, pos);
         v16 = fsqrt(
-                (float)((float)((float)(v12 - v15->x) * (float)(v12 - v15->x))
-                      + (float)((float)(v14 - v15->y) * (float)(v14 - v15->y)))
-              + (float)((float)(v13 - v15->z) * (float)(v13 - v15->z)));
+                (float)((float)((float)(x - v15->x) * (float)(x - v15->x))
+                      + (float)((float)(y - v15->y) * (float)(y - v15->y)))
+              + (float)((float)(z - v15->z) * (float)(z - v15->z)));
         if ( v16 < v10 )
         {
           v10 = v16;
           v9 = v8;
         }
         ++v8;
-        ++v11;
+        ++mpVerts;
       }
       while ( v8 < v7 );
     }
-    v17 = v4->x;
-    v18 = v4->y;
-    v19 = v4->z;
+    v17 = pos->x;
+    v18 = pos->y;
+    v19 = pos->z;
     if ( v9 != -1 )
     {
-      v20 = UFG::qNearestSegPoint(&resulta, &v5->mpVerts[v9], &v5->mpVerts[v9 + 1], v4);
+      v20 = UFG::qNearestSegPoint(&resulta, &this->mpVerts[v9], &this->mpVerts[v9 + 1], pos);
       v17 = v20->x;
       v18 = v20->y;
       v19 = v20->z;
     }
-    v3->x = v17;
-    v3->y = v18;
-    v6 = v3;
-    v3->z = v19;
+    result->x = v17;
+    result->y = v18;
+    v6 = result;
+    result->z = v19;
   }
   else
   {
-    v3->x = v4->x;
-    v3->y = v4->y;
-    v3->z = v4->z;
-    v6 = v3;
+    result->x = pos->x;
+    result->y = pos->y;
+    result->z = pos->z;
+    return result;
   }
   return v6;
 }
@@ -630,233 +610,226 @@ UFG::qVector3 *__fastcall UFG::RegionPolygon::GetClosestPointOutside(UFG::Region
 // RVA: 0x2405B0
 bool __fastcall UFG::RegionPolygon::IsHitPoint(UFG::RegionPolygon *this, UFG::qVector3 *pos)
 {
-  float v2; // xmm2_4
-  float v3; // xmm0_4
-  float v4; // xmm1_4
+  float x; // xmm2_4
+  float y; // xmm0_4
+  float z; // xmm1_4
   float v5; // xmm0_4
-  bool result; // al
 
-  v2 = pos->x;
-  if ( pos->x < this->mBoundingBox.mMin.x
-    || v2 > this->mBoundingBox.mMax.x
-    || (v3 = pos->y, v3 < this->mBoundingBox.mMin.y)
-    || v3 > this->mBoundingBox.mMax.y
-    || (v4 = pos->z, v4 < this->mBoundingBox.mMin.z)
-    || v4 > this->mBoundingBox.mMax.z
-    || (v5 = (float)((float)((float)(v3 * this->mNormal.y) + (float)(v2 * this->mNormal.x))
-                   + (float)(v4 * this->mNormal.z))
-           - this->mOrigDist,
-        v5 < this->mExtentBelow)
-    || v5 > this->mExtentAbove )
-  {
-    result = 0;
-  }
-  else
-  {
-    result = UFG::qIsBoundPointPolyXY(pos, this->mpVerts, this->mVertCount);
-  }
-  return result;
+  x = pos->x;
+  if ( pos->x < this->mBoundingBox.mMin.x )
+    return 0;
+  if ( x > this->mBoundingBox.mMax.x )
+    return 0;
+  y = pos->y;
+  if ( y < this->mBoundingBox.mMin.y )
+    return 0;
+  if ( y > this->mBoundingBox.mMax.y )
+    return 0;
+  z = pos->z;
+  if ( z < this->mBoundingBox.mMin.z )
+    return 0;
+  if ( z > this->mBoundingBox.mMax.z )
+    return 0;
+  v5 = (float)((float)((float)(y * this->mNormal.y) + (float)(x * this->mNormal.x)) + (float)(z * this->mNormal.z))
+     - this->mOrigDist;
+  return v5 >= this->mExtentBelow
+      && v5 <= this->mExtentAbove
+      && UFG::qIsBoundPointPolyXY(pos, this->mpVerts, this->mVertCount);
 }
 
 // File Line: 518
 // RVA: 0x240920
-bool __fastcall UFG::RegionPolygon::IsHitPointWS(UFG::RegionPolygon *this, UFG::qVector3 *pos, UFG::qMatrix44 *localWorld)
+bool __fastcall UFG::RegionPolygon::IsHitPointWS(
+        UFG::RegionPolygon *this,
+        UFG::qVector3 *pos,
+        UFG::qMatrix44 *localWorld)
 {
-  float v3; // xmm4_4
-  float v4; // xmm3_4
-  UFG::qVector3 *v5; // rdi
-  UFG::RegionPolygon *v6; // rbx
-  float v7; // xmm8_4
-  float v8; // xmm0_4
-  float v9; // xmm7_4
-  float v10; // xmm4_4
-  __m128 v11; // xmm2
-  float v12; // xmm8_4
-  float v13; // xmm0_4
-  float v14; // xmm8_4
-  float v15; // xmm4_4
-  float v16; // xmm5_4
-  __m128 v17; // xmm2
-  float v18; // xmm0_4
-  __m128 v19; // xmm4
-  float v20; // xmm2_4
-  float v21; // xmm4_4
-  float v22; // xmm5_4
-  float v23; // xmm6_4
-  float v24; // xmm7_4
-  float v25; // xmm2_4
-  unsigned int v26; // er8
-  UFG::qVector3 *v27; // rdx
-  UFG::qVector3 posXY; // [rsp+20h] [rbp-88h]
-  UFG::qMatrix44 d; // [rsp+30h] [rbp-78h]
+  float z; // xmm3_4
+  float x; // xmm8_4
+  float y; // xmm0_4
+  float v8; // xmm7_4
+  float v9; // xmm4_4
+  __m128 y_low; // xmm2
+  float v11; // xmm8_4
+  float v12; // xmm0_4
+  float v13; // xmm8_4
+  float v14; // xmm4_4
+  float mExtentAbove; // xmm5_4
+  __m128 v16; // xmm2
+  float v17; // xmm0_4
+  __m128 v18; // xmm4
+  float v19; // xmm2_4
+  float v20; // xmm4_4
+  float v21; // xmm5_4
+  float v22; // xmm6_4
+  float v23; // xmm7_4
+  float v24; // xmm2_4
+  unsigned int mVertCount; // r8d
+  UFG::qVector3 *mpVerts; // rdx
+  UFG::qVector3 posXY; // [rsp+20h] [rbp-88h] BYREF
+  UFG::qMatrix44 d; // [rsp+30h] [rbp-78h] BYREF
 
-  v3 = this->mCenter.x;
-  v4 = this->mCenter.z;
-  v5 = pos;
-  v6 = this;
-  v7 = v3;
-  v8 = this->mCenter.y;
-  v10 = (float)(v3 * localWorld->v0.z) + (float)(v8 * localWorld->v1.z);
-  v11 = (__m128)LODWORD(this->mBoundingBox.mMax.y);
-  v12 = (float)(v7 * localWorld->v0.y) + (float)(v8 * localWorld->v1.y);
-  v13 = this->mBoundingBox.mMax.z - this->mBoundingBox.mMin.z;
-  v14 = (float)(v12 + (float)(this->mCenter.z * localWorld->v2.y)) + localWorld->v3.y;
-  v15 = (float)(v10 + (float)(v4 * localWorld->v2.z)) + localWorld->v3.z;
-  v11.m128_f32[0] = (float)((float)((float)(v11.m128_f32[0] - this->mBoundingBox.mMin.y)
-                                  * (float)(v11.m128_f32[0] - this->mBoundingBox.mMin.y))
-                          + (float)((float)(this->mBoundingBox.mMax.x - this->mBoundingBox.mMin.x)
-                                  * (float)(this->mBoundingBox.mMax.x - this->mBoundingBox.mMin.x)))
-                  + (float)(v13 * v13);
-  v16 = COERCE_FLOAT(_mm_sqrt_ps(v11)) * 0.5;
-  if ( v16 <= this->mExtentAbove )
-    v16 = this->mExtentAbove;
-  if ( v16 <= this->mExtentBelow )
-    v16 = this->mExtentBelow;
-  v17 = (__m128)LODWORD(pos->y);
-  v18 = pos->z - v15;
-  v19 = (__m128)LODWORD(localWorld->v2.y);
-  v19.m128_f32[0] = (float)((float)(v19.m128_f32[0] * v19.m128_f32[0]) + (float)(localWorld->v2.x * localWorld->v2.x))
+  z = this->mCenter.z;
+  x = this->mCenter.x;
+  y = this->mCenter.y;
+  v9 = (float)(x * localWorld->v0.z) + (float)(y * localWorld->v1.z);
+  y_low = (__m128)LODWORD(this->mBoundingBox.mMax.y);
+  v11 = (float)(x * localWorld->v0.y) + (float)(y * localWorld->v1.y);
+  v12 = this->mBoundingBox.mMax.z - this->mBoundingBox.mMin.z;
+  v13 = (float)(v11 + (float)(z * localWorld->v2.y)) + localWorld->v3.y;
+  v14 = (float)(v9 + (float)(z * localWorld->v2.z)) + localWorld->v3.z;
+  y_low.m128_f32[0] = (float)((float)((float)(y_low.m128_f32[0] - this->mBoundingBox.mMin.y)
+                                    * (float)(y_low.m128_f32[0] - this->mBoundingBox.mMin.y))
+                            + (float)((float)(this->mBoundingBox.mMax.x - this->mBoundingBox.mMin.x)
+                                    * (float)(this->mBoundingBox.mMax.x - this->mBoundingBox.mMin.x)))
+                    + (float)(v12 * v12);
+  mExtentAbove = _mm_sqrt_ps(y_low).m128_f32[0] * 0.5;
+  if ( mExtentAbove <= this->mExtentAbove )
+    mExtentAbove = this->mExtentAbove;
+  if ( mExtentAbove <= this->mExtentBelow )
+    mExtentAbove = this->mExtentBelow;
+  v16 = (__m128)LODWORD(pos->y);
+  v17 = pos->z - v14;
+  v18 = (__m128)LODWORD(localWorld->v2.y);
+  v18.m128_f32[0] = (float)((float)(v18.m128_f32[0] * v18.m128_f32[0]) + (float)(localWorld->v2.x * localWorld->v2.x))
                   + (float)(localWorld->v2.z * localWorld->v2.z);
-  v9 = (float)((float)((float)(this->mCenter.y * localWorld->v1.x) + (float)(this->mCenter.x * localWorld->v0.x))
-             + (float)(localWorld->v2.x * v4))
+  v8 = (float)((float)((float)(this->mCenter.y * localWorld->v1.x) + (float)(this->mCenter.x * localWorld->v0.x))
+             + (float)(localWorld->v2.x * z))
      + localWorld->v3.x;
-  v17.m128_f32[0] = (float)((float)((float)(v17.m128_f32[0] - v14) * (float)(v17.m128_f32[0] - v14))
-                          + (float)((float)(pos->x - v9) * (float)(pos->x - v9)))
-                  + (float)(v18 * v18);
-  if ( COERCE_FLOAT(_mm_sqrt_ps(v17)) > (float)(COERCE_FLOAT(_mm_sqrt_ps(v19)) * v16) )
+  v16.m128_f32[0] = (float)((float)((float)(v16.m128_f32[0] - v13) * (float)(v16.m128_f32[0] - v13))
+                          + (float)((float)(pos->x - v8) * (float)(pos->x - v8)))
+                  + (float)(v17 * v17);
+  if ( _mm_sqrt_ps(v16).m128_f32[0] > (float)(_mm_sqrt_ps(v18).m128_f32[0] * mExtentAbove) )
     return 0;
   UFG::qInverse(&d, localWorld);
-  v20 = v5->y;
-  v21 = v5->z;
-  v22 = (float)((float)((float)(d.v1.x * v20) + (float)(d.v0.x * v5->x)) + (float)(d.v2.x * v21)) + d.v3.x;
-  v23 = (float)((float)((float)(d.v1.y * v20) + (float)(d.v0.y * v5->x)) + (float)(d.v2.y * v21)) + d.v3.y;
-  v24 = (float)((float)((float)(d.v1.z * v20) + (float)(d.v0.z * v5->x)) + (float)(d.v2.z * v21)) + d.v3.z;
-  v25 = (float)((float)((float)(v23 * v6->mNormal.y) + (float)(v22 * v6->mNormal.x)) + (float)(v24 * v6->mNormal.z))
-      - v6->mOrigDist;
-  if ( v25 < v6->mExtentBelow || v25 > v6->mExtentAbove )
+  v19 = pos->y;
+  v20 = pos->z;
+  v21 = (float)((float)((float)(d.v1.x * v19) + (float)(d.v0.x * pos->x)) + (float)(d.v2.x * v20)) + d.v3.x;
+  v22 = (float)((float)((float)(d.v1.y * v19) + (float)(d.v0.y * pos->x)) + (float)(d.v2.y * v20)) + d.v3.y;
+  v23 = (float)((float)((float)(d.v1.z * v19) + (float)(d.v0.z * pos->x)) + (float)(d.v2.z * v20)) + d.v3.z;
+  v24 = (float)((float)((float)(v22 * this->mNormal.y) + (float)(v21 * this->mNormal.x)) + (float)(v23 * this->mNormal.z))
+      - this->mOrigDist;
+  if ( v24 < this->mExtentBelow || v24 > this->mExtentAbove )
     return 0;
-  v26 = v6->mVertCount;
-  v27 = v6->mpVerts;
-  posXY.x = v22;
-  posXY.y = v23;
-  posXY.z = v24;
-  return UFG::qIsBoundPointPolyXY(&posXY, v27, v26);
+  mVertCount = this->mVertCount;
+  mpVerts = this->mpVerts;
+  posXY.x = v21;
+  posXY.y = v22;
+  posXY.z = v23;
+  return UFG::qIsBoundPointPolyXY(&posXY, mpVerts, mVertCount);
 }
 
 // File Line: 563
 // RVA: 0x241FE0
-char __fastcall UFG::RegionPolygon::IsHitSegment(UFG::RegionPolygon *this, UFG::qVector3 *start, UFG::qVector3 *end, UFG::qVector3 *pHitPos)
+char __fastcall UFG::RegionPolygon::IsHitSegment(
+        UFG::RegionPolygon *this,
+        UFG::qVector3 *start,
+        UFG::qVector3 *end,
+        UFG::qVector3 *pHitPos)
 {
-  UFG::qVector3 *v4; // rdi
-  UFG::RegionPolygon *v5; // rbx
-  UFG::qVector3 *v6; // rsi
-  UFG::qVector3 *v7; // r14
-  float v8; // xmm3_4
-  UFG::qVector3 *v9; // kr00_8
-  unsigned int v10; // er9
-  UFG::qVector3 *v11; // r8
-  float v12; // xmm9_4
-  float v13; // xmm8_4
-  float v14; // xmm10_4
-  float v15; // xmm3_4
-  float v16; // xmm0_4
-  float v17; // xmm2_4
-  float v18; // xmm1_4
-  float v19; // xmm3_4
-  float v20; // xmm5_4
-  float v21; // xmm0_4
-  float v22; // xmm3_4
+  float mOrigDist; // xmm3_4
+  float v9; // xmm5_4
+  float v10; // xmm6_4
+  unsigned int mVertCount; // r9d
+  UFG::qVector2 *mpVerts; // r8
+  float y; // xmm9_4
+  float x; // xmm8_4
+  float z; // xmm10_4
+  float v16; // xmm3_4
+  float v17; // xmm3_4
   char result; // al
-  float v24; // xmm5_4
-  float v25; // xmm4_4
-  UFG::qVector3 v26; // [rsp+18h] [rbp-49h]
-  UFG::qVector3 *hit_enter_p; // [rsp+28h] [rbp-39h]
+  float v19; // xmm5_4
+  float v20; // xmm4_4
+  UFG::qVector3 v21; // [rsp+18h] [rbp-49h] BYREF
+  UFG::qVector3 *hit_enter_p; // [rsp+28h] [rbp-39h] BYREF
   UFG::qVector3 *hit_exit_p; // [rsp+30h] [rbp-31h]
-  UFG::qVector3 endXY; // [rsp+38h] [rbp-29h]
-  UFG::qVector3 startXY; // [rsp+48h] [rbp-19h]
-  float pPDist; // [rsp+C8h] [rbp+67h]
+  UFG::qVector3 endXY; // [rsp+38h] [rbp-29h] BYREF
+  UFG::qVector3 startXY; // [rsp+48h] [rbp-19h] BYREF
+  float pPDist[6]; // [rsp+C8h] [rbp+67h] BYREF
 
-  v4 = pHitPos;
-  v5 = this;
-  v6 = end;
-  v7 = start;
   if ( !UFG::qBox::IsHitSeg(&this->mBoundingBox, start, end, 0i64, 0i64) )
     return 0;
-  v8 = v5->mOrigDist;
-  hit_exit_p = &v26;
+  mOrigDist = this->mOrigDist;
+  hit_exit_p = &v21;
   if ( !(unsigned int)UFG::qIntersectSegSlab(
-                        v7,
-                        v6,
-                        &v5->mNormal,
-                        v8 + v5->mExtentBelow,
-                        v8 + v5->mExtentAbove,
+                        start,
+                        end,
+                        &this->mNormal,
+                        mOrigDist + this->mExtentBelow,
+                        mOrigDist + this->mExtentAbove,
                         (UFG::qVector3 *)&hit_enter_p,
-                        &v26) )
+                        &v21) )
     return 0;
-  v9 = hit_enter_p;
-  v10 = v5->mVertCount;
-  v11 = v5->mpVerts;
+  v9 = *(float *)&hit_enter_p;
+  v10 = *((float *)&hit_enter_p + 1);
+  mVertCount = this->mVertCount;
+  mpVerts = (UFG::qVector2 *)this->mpVerts;
   hit_enter_p = 0i64;
-  v12 = v5->mNormal.y;
-  v13 = v5->mNormal.x;
-  v14 = v5->mNormal.z;
-  v15 = (float)((float)((float)(v5->mNormal.x * *(float *)&v9) + (float)(v5->mNormal.y * *((float *)&v9 + 1)))
-              + (float)(v5->mNormal.z * *(float *)&hit_exit_p))
-      - v5->mOrigDist;
-  v16 = v5->mNormal.x * v15;
-  v17 = v5->mNormal.z * v15;
-  v18 = v5->mNormal.y * v15;
-  v19 = v5->mNormal.x;
-  v20 = *(float *)&v9 - v16;
-  v21 = v5->mNormal.y;
-  startXY.x = v20;
-  startXY.z = *(float *)&hit_exit_p - v17;
-  startXY.y = *((float *)&v9 + 1) - v18;
-  v22 = (float)((float)((float)(v19 * v26.x) + (float)(v21 * v26.y)) + (float)(v14 * v26.z)) - v5->mOrigDist;
-  endXY.x = v26.x - (float)(v13 * v22);
-  endXY.y = v26.y - (float)(v12 * v22);
-  endXY.z = v26.z - (float)(v14 * v22);
-  if ( !v4 )
-    return UFG::qIntersectSegPolyXY(&startXY, &endXY, v11, v10, 0i64, hit_enter_p);
-  if ( !UFG::qIntersectSegPolyXY(&startXY, &endXY, v11, v10, &pPDist, hit_enter_p) )
+  y = this->mNormal.y;
+  x = this->mNormal.x;
+  z = this->mNormal.z;
+  v16 = (float)((float)((float)(x * v9) + (float)(y * v10)) + (float)(z * *(float *)&hit_exit_p)) - this->mOrigDist;
+  startXY.x = v9 - (float)(x * v16);
+  startXY.z = *(float *)&hit_exit_p - (float)(z * v16);
+  startXY.y = v10 - (float)(y * v16);
+  v17 = (float)((float)((float)(x * v21.x) + (float)(y * v21.y)) + (float)(z * v21.z)) - this->mOrigDist;
+  endXY.x = v21.x - (float)(x * v17);
+  endXY.y = v21.y - (float)(y * v17);
+  endXY.z = v21.z - (float)(z * v17);
+  if ( !pHitPos )
+    return UFG::qIntersectSegPolyXY(
+             (UFG::qVector2 *)&startXY,
+             (UFG::qVector2 *)&endXY,
+             mpVerts,
+             mVertCount,
+             0i64,
+             hit_enter_p);
+  if ( !UFG::qIntersectSegPolyXY(
+          (UFG::qVector2 *)&startXY,
+          (UFG::qVector2 *)&endXY,
+          mpVerts,
+          mVertCount,
+          pPDist,
+          hit_enter_p) )
     return 0;
   result = 1;
-  v24 = (float)((float)(v26.y - *((float *)&hit_enter_p + 1)) * pPDist) + *((float *)&hit_enter_p + 1);
-  v25 = (float)((float)(v26.z - *(float *)&hit_exit_p) * pPDist) + *(float *)&hit_exit_p;
-  v4->x = (float)((float)(v26.x - *(float *)&hit_enter_p) * pPDist) + *(float *)&hit_enter_p;
-  v4->y = v24;
-  v4->z = v25;
+  v19 = (float)((float)(v21.y - *((float *)&hit_enter_p + 1)) * pPDist[0]) + *((float *)&hit_enter_p + 1);
+  v20 = (float)((float)(v21.z - *(float *)&hit_exit_p) * pPDist[0]) + *(float *)&hit_exit_p;
+  pHitPos->x = (float)((float)(v21.x - *(float *)&hit_enter_p) * pPDist[0]) + *(float *)&hit_enter_p;
+  pHitPos->y = v19;
+  pHitPos->z = v20;
   return result;
 }
 
 // File Line: 617
 // RVA: 0x2428F0
-bool __fastcall UFG::RegionPolygon::IsHitSegmentWS(UFG::RegionPolygon *this, UFG::qVector3 *start, UFG::qVector3 *end, UFG::qMatrix44 *localWorld, UFG::qVector3 *pHitPos)
+bool __fastcall UFG::RegionPolygon::IsHitSegmentWS(
+        UFG::RegionPolygon *this,
+        UFG::qVector3 *start,
+        UFG::qVector3 *end,
+        UFG::qMatrix44 *localWorld,
+        UFG::qVector3 *pHitPos)
 {
-  float v5; // xmm3_4
-  float v6; // xmm4_4
-  UFG::qMatrix44 *v7; // rbx
-  UFG::qVector3 *v8; // rsi
-  UFG::qVector3 *v9; // r14
-  UFG::RegionPolygon *v10; // rdi
+  float z; // xmm3_4
+  float x; // xmm4_4
   float v11; // xmm7_4
   float v12; // xmm9_4
   float v13; // xmm8_4
-  __m128 v14; // xmm2
+  __m128 y_low; // xmm2
   float v15; // xmm0_4
   float v16; // xmm7_4
   float v17; // xmm1_4
   float v18; // xmm8_4
   float v19; // xmm8_4
-  float v20; // xmm0_4
-  float v21; // xmm3_4
+  float mExtentAbove; // xmm0_4
+  float mExtentBelow; // xmm3_4
   __m128 v22; // xmm1
   float v23; // xmm6_4
   UFG::qVector3 *v24; // rax
   bool v25; // al
-  UFG::RegionBaseVtbl *v26; // rax
+  UFG::RegionBaseVtbl *vfptr; // rax
   float v27; // xmm3_4
-  float v28; // xmm2_4
+  float y; // xmm2_4
   float v29; // xmm4_4
   float v30; // xmm13_4
   float v31; // xmm2_4
@@ -866,9 +839,9 @@ bool __fastcall UFG::RegionPolygon::IsHitSegmentWS(UFG::RegionPolygon *this, UFG
   float v35; // xmm1_4
   float v36; // xmm2_4
   float v37; // xmm6_4
-  UFG::qVector3 pos; // [rsp+20h] [rbp-79h]
+  UFG::qVector3 pos; // [rsp+20h] [rbp-79h] BYREF
   float v39; // [rsp+2Ch] [rbp-6Dh]
-  UFG::qVector3 result; // [rsp+30h] [rbp-69h]
+  UFG::qVector3 result; // [rsp+30h] [rbp-69h] BYREF
   float v41; // [rsp+3Ch] [rbp-5Dh]
   float v42; // [rsp+40h] [rbp-59h]
   float v43; // [rsp+48h] [rbp-51h]
@@ -880,73 +853,71 @@ bool __fastcall UFG::RegionPolygon::IsHitSegmentWS(UFG::RegionPolygon *this, UFG
   float v49; // [rsp+F8h] [rbp+5Fh]
   float *v50; // [rsp+118h] [rbp+7Fh]
 
-  v5 = this->mCenter.z;
-  v6 = localWorld->v2.x;
-  v7 = localWorld;
-  v8 = end;
-  v9 = start;
-  v10 = this;
+  z = this->mCenter.z;
+  x = localWorld->v2.x;
   v11 = this->mCenter.x;
-  v12 = (float)((float)((float)(this->mCenter.y * localWorld->v1.x) + (float)(this->mCenter.x * localWorld->v0.x))
-              + (float)(localWorld->v2.x * v5))
+  v12 = (float)((float)((float)(this->mCenter.y * localWorld->v1.x) + (float)(v11 * localWorld->v0.x)) + (float)(x * z))
       + localWorld->v3.x;
   v13 = (float)(this->mCenter.y * localWorld->v1.z) + (float)(v11 * localWorld->v0.z);
-  v14 = (__m128)LODWORD(this->mBoundingBox.mMax.y);
-  v14.m128_f32[0] = (float)(v14.m128_f32[0] - this->mBoundingBox.mMin.y)
-                  * (float)(v14.m128_f32[0] - this->mBoundingBox.mMin.y);
+  y_low = (__m128)LODWORD(this->mBoundingBox.mMax.y);
+  y_low.m128_f32[0] = (float)(y_low.m128_f32[0] - this->mBoundingBox.mMin.y)
+                    * (float)(y_low.m128_f32[0] - this->mBoundingBox.mMin.y);
   v15 = this->mBoundingBox.mMax.z - this->mBoundingBox.mMin.z;
   v16 = (float)((float)((float)(v11 * localWorld->v0.y) + (float)(this->mCenter.y * localWorld->v1.y))
-              + (float)(this->mCenter.z * localWorld->v2.y))
+              + (float)(z * localWorld->v2.y))
       + localWorld->v3.y;
   v17 = this->mBoundingBox.mMax.x - this->mBoundingBox.mMin.x;
-  v18 = v13 + (float)(v5 * localWorld->v2.z);
+  v18 = v13 + (float)(z * localWorld->v2.z);
   pos.x = (float)((float)((float)(this->mCenter.y * localWorld->v1.x) + (float)(this->mCenter.x * localWorld->v0.x))
-                + (float)(localWorld->v2.x * v5))
+                + (float)(x * z))
         + localWorld->v3.x;
   v19 = v18 + localWorld->v3.z;
   pos.y = v16;
-  v14.m128_f32[0] = (float)(v14.m128_f32[0] + (float)(v17 * v17)) + (float)(v15 * v15);
-  v20 = this->mExtentAbove;
+  y_low.m128_f32[0] = (float)(y_low.m128_f32[0] + (float)(v17 * v17)) + (float)(v15 * v15);
+  mExtentAbove = this->mExtentAbove;
   pos.z = v19;
-  v21 = COERCE_FLOAT(_mm_sqrt_ps(v14)) * 0.5;
-  if ( v21 <= v20 )
-    v21 = v20;
-  if ( v21 <= this->mExtentBelow )
-    v21 = this->mExtentBelow;
+  mExtentBelow = _mm_sqrt_ps(y_low).m128_f32[0] * 0.5;
+  if ( mExtentBelow <= mExtentAbove )
+    mExtentBelow = mExtentAbove;
+  if ( mExtentBelow <= this->mExtentBelow )
+    mExtentBelow = this->mExtentBelow;
   v22 = (__m128)LODWORD(localWorld->v2.y);
-  v22.m128_f32[0] = (float)((float)(v22.m128_f32[0] * v22.m128_f32[0]) + (float)(v6 * v6))
+  v22.m128_f32[0] = (float)((float)(v22.m128_f32[0] * v22.m128_f32[0]) + (float)(x * x))
                   + (float)(localWorld->v2.z * localWorld->v2.z);
-  v23 = COERCE_FLOAT(_mm_sqrt_ps(v22)) * v21;
+  v23 = _mm_sqrt_ps(v22).m128_f32[0] * mExtentBelow;
   v24 = UFG::qNearestSegPoint(&result, start, end, &pos);
   if ( (float)((float)((float)((float)(v16 - v24->y) * (float)(v16 - v24->y))
                      + (float)((float)(v12 - v24->x) * (float)(v12 - v24->x)))
              + (float)((float)(v19 - v24->z) * (float)(v19 - v24->z))) > (float)(v23 * v23) )
     return 0;
-  UFG::qInverse((UFG::qMatrix44 *)&pos.z, v7);
-  v26 = v10->vfptr;
-  v27 = v9->x;
-  v28 = v9->y;
-  v29 = v9->z;
-  v30 = v42 * v28;
-  v49 = (float)((float)((float)(result.z * v28) + (float)(pos.z * v9->x)) + (float)(v43 * v29)) + v46;
-  v31 = v8->z;
+  UFG::qInverse((UFG::qMatrix44 *)&pos.z, localWorld);
+  vfptr = this->vfptr;
+  v27 = start->x;
+  y = start->y;
+  v29 = start->z;
+  v30 = v42 * y;
+  v49 = (float)((float)((float)(result.z * y) + (float)(pos.z * start->x)) + (float)(v43 * v29)) + v46;
+  v31 = end->z;
   v32 = result.x;
   v33 = v30 + (float)(result.x * v27);
-  v34 = v8->y;
-  v35 = v8->x;
+  v34 = end->y;
+  v35 = end->x;
   result.x = v49;
   pos.y = (float)((float)((float)(v41 * v34) + (float)(v39 * v35)) + (float)(v44 * v31)) + v47;
   pos.z = (float)((float)((float)(v42 * v34) + (float)(v32 * v35)) + (float)(v45 * v31)) + v48;
   pos.x = (float)(v33 + (float)(v45 * v29)) + v48;
-  v25 = v26->IsHitSegment((UFG::RegionBase *)&v10->vfptr, &result, &pos, (UFG::qVector3 *)v50);
+  v25 = vfptr->IsHitSegment(this, &result, &pos, (UFG::qVector3 *)v50);
   if ( v50 )
   {
-    v36 = (float)((float)((float)(v50[1] * v7->v1.y) + (float)(*v50 * v7->v0.y)) + (float)(v50[2] * v7->v2.y))
-        + v7->v3.y;
-    v37 = (float)((float)((float)(v50[1] * v7->v1.z) + (float)(*v50 * v7->v0.z)) + (float)(v50[2] * v7->v2.z))
-        + v7->v3.z;
-    *v50 = (float)((float)((float)(v50[1] * v7->v1.x) + (float)(*v50 * v7->v0.x)) + (float)(v50[2] * v7->v2.x))
-         + v7->v3.x;
+    v36 = (float)((float)((float)(v50[1] * localWorld->v1.y) + (float)(*v50 * localWorld->v0.y))
+                + (float)(v50[2] * localWorld->v2.y))
+        + localWorld->v3.y;
+    v37 = (float)((float)((float)(v50[1] * localWorld->v1.z) + (float)(*v50 * localWorld->v0.z))
+                + (float)(v50[2] * localWorld->v2.z))
+        + localWorld->v3.z;
+    *v50 = (float)((float)((float)(v50[1] * localWorld->v1.x) + (float)(*v50 * localWorld->v0.x))
+                 + (float)(v50[2] * localWorld->v2.x))
+         + localWorld->v3.x;
     v50[1] = v36;
     v50[2] = v37;
   }
@@ -955,438 +926,429 @@ bool __fastcall UFG::RegionPolygon::IsHitSegmentWS(UFG::RegionPolygon *this, UFG
 
 // File Line: 664
 // RVA: 0x23F8B0
-char __fastcall UFG::RegionPolygon::IsHitPlaneRay(UFG::RegionPolygon *this, UFG::qVector3 *rayPos, UFG::qVector3 *rayDir, UFG::qVector3 *pHitPos)
+char __fastcall UFG::RegionPolygon::IsHitPlaneRay(
+        UFG::RegionPolygon *this,
+        UFG::qVector3 *rayPos,
+        UFG::qVector3 *rayDir,
+        UFG::qVector3 *pHitPos)
 {
-  UFG::RegionPolygon *v4; // rbx
-  UFG::qVector3 *v5; // rdi
-  float v6; // xmm1_4
-  float v7; // xmm0_4
-  UFG::qVector3 posXY; // [rsp+30h] [rbp-18h]
+  float y; // xmm1_4
+  float z; // xmm0_4
+  UFG::qVector3 posXY; // [rsp+30h] [rbp-18h] BYREF
 
-  v4 = this;
-  v5 = pHitPos;
   if ( !UFG::qIntersectRayPlane(rayPos, rayDir, &this->mNormal, this->mOrigDist, &posXY)
-    || posXY.x < v4->mBoundingBox.mMin.x
-    || posXY.x > v4->mBoundingBox.mMax.x
-    || posXY.y < v4->mBoundingBox.mMin.y
-    || posXY.y > v4->mBoundingBox.mMax.y
-    || posXY.z < v4->mBoundingBox.mMin.z
-    || posXY.z > v4->mBoundingBox.mMax.z
-    || !(unsigned __int8)UFG::qIsBoundPointPolyXY(&posXY, v4->mpVerts, v4->mVertCount) )
+    || posXY.x < this->mBoundingBox.mMin.x
+    || posXY.x > this->mBoundingBox.mMax.x
+    || posXY.y < this->mBoundingBox.mMin.y
+    || posXY.y > this->mBoundingBox.mMax.y
+    || posXY.z < this->mBoundingBox.mMin.z
+    || posXY.z > this->mBoundingBox.mMax.z
+    || !UFG::qIsBoundPointPolyXY(&posXY, this->mpVerts, this->mVertCount) )
   {
     return 0;
   }
-  if ( v5 )
+  if ( pHitPos )
   {
-    v6 = posXY.y;
-    v5->x = posXY.x;
-    v7 = posXY.z;
-    v5->y = v6;
-    v5->z = v7;
+    y = posXY.y;
+    pHitPos->x = posXY.x;
+    z = posXY.z;
+    pHitPos->y = y;
+    pHitPos->z = z;
   }
   return 1;
 }
 
 // File Line: 710
 // RVA: 0x23FEA0
-bool __fastcall UFG::RegionPolygon::IsHitPlaneRayWS(UFG::RegionPolygon *this, UFG::qVector3 *rayPos, UFG::qVector3 *rayDir, UFG::qMatrix44 *localWorld, UFG::qVector3 *pHitPos)
+bool __fastcall UFG::RegionPolygon::IsHitPlaneRayWS(
+        UFG::RegionPolygon *this,
+        UFG::qVector3 *rayPos,
+        UFG::qVector3 *rayDir,
+        UFG::qMatrix44 *localWorld,
+        UFG::qVector3 *pHitPos)
 {
-  float v5; // xmm5_4
-  UFG::qMatrix44 *v6; // rbx
-  UFG::qVector3 *v7; // rsi
-  UFG::qVector3 *v8; // r14
-  UFG::RegionPolygon *v9; // rdi
-  float v10; // xmm7_4
-  float v11; // xmm4_4
-  float v12; // xmm0_4
-  float v13; // xmm1_4
-  float v14; // xmm6_4
-  __m128 v15; // xmm2
-  float v16; // xmm3_4
-  __m128 v17; // xmm1
-  float v18; // xmm6_4
+  float z; // xmm5_4
+  float x; // xmm0_4
+  float v11; // xmm7_4
+  float v12; // xmm3_4
+  float v13; // xmm4_4
+  float v14; // xmm2_4
+  float v15; // xmm0_4
+  float v16; // xmm1_4
+  float v17; // xmm6_4
+  __m128 y_low; // xmm2
+  float mExtentAbove; // xmm3_4
+  __m128 v20; // xmm1
+  float v21; // xmm6_4
   bool result; // al
-  float v20; // xmm3_4
-  float v21; // xmm2_4
-  UFG::RegionBaseVtbl *v22; // rax
-  float v23; // xmm4_4
-  float v24; // xmm13_4
-  float v25; // xmm2_4
-  float v26; // xmm5_4
+  float v23; // xmm3_4
+  float y; // xmm2_4
+  UFG::RegionBaseVtbl *vfptr; // rax
+  float v26; // xmm4_4
   float v27; // xmm13_4
-  float v28; // xmm0_4
-  float v29; // xmm1_4
-  float v30; // xmm2_4
-  float v31; // xmm6_4
-  UFG::qVector3 pos; // [rsp+20h] [rbp-79h]
-  float v33; // [rsp+2Ch] [rbp-6Dh]
-  float v34; // [rsp+30h] [rbp-69h]
-  float v35; // [rsp+38h] [rbp-61h]
-  float v36; // [rsp+3Ch] [rbp-5Dh]
-  float v37; // [rsp+40h] [rbp-59h]
-  float v38; // [rsp+48h] [rbp-51h]
-  float v39; // [rsp+4Ch] [rbp-4Dh]
-  float v40; // [rsp+50h] [rbp-49h]
-  float v41; // [rsp+58h] [rbp-41h]
-  float v42; // [rsp+5Ch] [rbp-3Dh]
-  float v43; // [rsp+60h] [rbp-39h]
-  float v44; // [rsp+F8h] [rbp+5Fh]
-  float *v45; // [rsp+118h] [rbp+7Fh]
+  float v28; // xmm2_4
+  float v29; // xmm5_4
+  float v30; // xmm13_4
+  float v31; // xmm0_4
+  float v32; // xmm1_4
+  float v33; // xmm2_4
+  float v34; // xmm6_4
+  UFG::qVector3 pos; // [rsp+20h] [rbp-79h] BYREF
+  float v36; // [rsp+2Ch] [rbp-6Dh]
+  int v37[4]; // [rsp+30h] [rbp-69h] BYREF
+  float v38; // [rsp+40h] [rbp-59h]
+  float v39; // [rsp+48h] [rbp-51h]
+  float v40; // [rsp+4Ch] [rbp-4Dh]
+  float v41; // [rsp+50h] [rbp-49h]
+  float v42; // [rsp+58h] [rbp-41h]
+  float v43; // [rsp+5Ch] [rbp-3Dh]
+  float v44; // [rsp+60h] [rbp-39h]
+  float v45; // [rsp+F8h] [rbp+5Fh]
+  float *v46; // [rsp+118h] [rbp+7Fh]
 
-  v5 = this->mCenter.z;
-  v6 = localWorld;
-  v7 = rayDir;
-  v8 = rayPos;
-  v9 = this;
-  v10 = localWorld->v2.x;
-  v11 = (float)((float)((float)(this->mCenter.y * localWorld->v1.x) + (float)(this->mCenter.x * localWorld->v0.x))
-              + (float)(localWorld->v2.x * v5))
+  z = this->mCenter.z;
+  x = this->mCenter.x;
+  v11 = localWorld->v2.x;
+  v12 = x * localWorld->v0.z;
+  v13 = (float)((float)((float)(this->mCenter.y * localWorld->v1.x) + (float)(x * localWorld->v0.x)) + (float)(v11 * z))
       + localWorld->v3.x;
-  v12 = this->mBoundingBox.mMax.z - this->mBoundingBox.mMin.z;
-  v13 = (float)(this->mBoundingBox.mMax.x - this->mBoundingBox.mMin.x)
+  v14 = (float)(x * localWorld->v0.y) + (float)(this->mCenter.y * localWorld->v1.y);
+  v15 = this->mBoundingBox.mMax.z - this->mBoundingBox.mMin.z;
+  v16 = (float)(this->mBoundingBox.mMax.x - this->mBoundingBox.mMin.x)
       * (float)(this->mBoundingBox.mMax.x - this->mBoundingBox.mMin.x);
-  v14 = (float)((float)((float)(this->mCenter.y * localWorld->v1.z) + (float)(this->mCenter.x * localWorld->v0.z))
-              + (float)(v5 * localWorld->v2.z))
+  v17 = (float)((float)((float)(this->mCenter.y * localWorld->v1.z) + v12) + (float)(z * localWorld->v2.z))
       + localWorld->v3.z;
-  pos.y = (float)((float)((float)(this->mCenter.x * localWorld->v0.y) + (float)(this->mCenter.y * localWorld->v1.y))
-                + (float)(this->mCenter.z * localWorld->v2.y))
-        + localWorld->v3.y;
-  v15 = (__m128)LODWORD(this->mBoundingBox.mMax.y);
-  v15.m128_f32[0] = v15.m128_f32[0] - this->mBoundingBox.mMin.y;
-  pos.x = v11;
-  pos.z = v14;
-  v15.m128_f32[0] = (float)((float)(v15.m128_f32[0] * v15.m128_f32[0]) + v13) + (float)(v12 * v12);
-  v16 = COERCE_FLOAT(_mm_sqrt_ps(v15)) * 0.5;
-  if ( v16 <= this->mExtentAbove )
-    v16 = this->mExtentAbove;
-  if ( v16 <= this->mExtentBelow )
-    v16 = this->mExtentBelow;
-  v17 = (__m128)LODWORD(localWorld->v2.y);
-  v17.m128_f32[0] = (float)((float)(v17.m128_f32[0] * v17.m128_f32[0]) + (float)(v10 * v10))
+  pos.y = (float)(v14 + (float)(z * localWorld->v2.y)) + localWorld->v3.y;
+  y_low = (__m128)LODWORD(this->mBoundingBox.mMax.y);
+  y_low.m128_f32[0] = y_low.m128_f32[0] - this->mBoundingBox.mMin.y;
+  pos.x = v13;
+  pos.z = v17;
+  y_low.m128_f32[0] = (float)((float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + v16) + (float)(v15 * v15);
+  mExtentAbove = _mm_sqrt_ps(y_low).m128_f32[0] * 0.5;
+  if ( mExtentAbove <= this->mExtentAbove )
+    mExtentAbove = this->mExtentAbove;
+  if ( mExtentAbove <= this->mExtentBelow )
+    mExtentAbove = this->mExtentBelow;
+  v20 = (__m128)LODWORD(localWorld->v2.y);
+  v20.m128_f32[0] = (float)((float)(v20.m128_f32[0] * v20.m128_f32[0]) + (float)(v11 * v11))
                   + (float)(localWorld->v2.z * localWorld->v2.z);
-  v18 = COERCE_FLOAT(_mm_sqrt_ps(v17)) * v16;
-  if ( UFG::qDistanceSqrRayPoint(rayPos, rayDir, &pos) > (float)(v18 * v18) )
+  v21 = _mm_sqrt_ps(v20).m128_f32[0] * mExtentAbove;
+  if ( UFG::qDistanceSqrRayPoint(rayPos, rayDir, &pos) > (float)(v21 * v21) )
     return 0;
-  UFG::qInverse((UFG::qMatrix44 *)&pos.z, v6);
-  v20 = v8->x;
-  v21 = v8->y;
-  v22 = v9->vfptr;
-  v23 = v8->z;
-  v24 = v37 * v21;
-  v44 = (float)((float)((float)(v35 * v21) + (float)(pos.z * v8->x)) + (float)(v38 * v23)) + v41;
-  v25 = v7->z;
-  v26 = v34;
-  v27 = v24 + (float)(v34 * v20);
-  v28 = v7->y;
-  v29 = v7->x;
-  v34 = v44;
-  pos.y = (float)((float)((float)(v36 * v28) + (float)(v33 * v29)) + (float)(v39 * v25)) + v42;
-  pos.z = (float)((float)((float)(v37 * v28) + (float)(v26 * v29)) + (float)(v40 * v25)) + v43;
-  pos.x = (float)(v27 + (float)(v40 * v23)) + v43;
-  result = v22->IsHitPlaneRay((UFG::RegionBase *)&v9->vfptr, (UFG::qVector3 *)&v34, &pos, (UFG::qVector3 *)v45);
-  if ( v45 )
+  UFG::qInverse((UFG::qMatrix44 *)&pos.z, localWorld);
+  v23 = rayPos->x;
+  y = rayPos->y;
+  vfptr = this->vfptr;
+  v26 = rayPos->z;
+  v27 = v38 * y;
+  v45 = (float)((float)((float)(*(float *)&v37[2] * y) + (float)(pos.z * rayPos->x)) + (float)(v39 * v26)) + v42;
+  v28 = rayDir->z;
+  v29 = *(float *)v37;
+  v30 = v27 + (float)(*(float *)v37 * v23);
+  v31 = rayDir->y;
+  v32 = rayDir->x;
+  *(float *)v37 = v45;
+  pos.y = (float)((float)((float)(*(float *)&v37[3] * v31) + (float)(v36 * v32)) + (float)(v40 * v28)) + v43;
+  pos.z = (float)((float)((float)(v38 * v31) + (float)(v29 * v32)) + (float)(v41 * v28)) + v44;
+  pos.x = (float)(v30 + (float)(v41 * v26)) + v44;
+  result = vfptr->IsHitPlaneRay(this, (UFG::qVector3 *)v37, &pos, (UFG::qVector3 *)v46);
+  if ( v46 )
   {
-    v30 = (float)((float)((float)(v45[1] * v6->v1.y) + (float)(*v45 * v6->v0.y)) + (float)(v45[2] * v6->v2.y))
-        + v6->v3.y;
-    v31 = (float)((float)((float)(v45[1] * v6->v1.z) + (float)(*v45 * v6->v0.z)) + (float)(v45[2] * v6->v2.z))
-        + v6->v3.z;
-    *v45 = (float)((float)((float)(v45[1] * v6->v1.x) + (float)(*v45 * v6->v0.x)) + (float)(v45[2] * v6->v2.x))
-         + v6->v3.x;
-    v45[1] = v30;
-    v45[2] = v31;
+    v33 = (float)((float)((float)(v46[1] * localWorld->v1.y) + (float)(*v46 * localWorld->v0.y))
+                + (float)(v46[2] * localWorld->v2.y))
+        + localWorld->v3.y;
+    v34 = (float)((float)((float)(v46[1] * localWorld->v1.z) + (float)(*v46 * localWorld->v0.z))
+                + (float)(v46[2] * localWorld->v2.z))
+        + localWorld->v3.z;
+    *v46 = (float)((float)((float)(v46[1] * localWorld->v1.x) + (float)(*v46 * localWorld->v0.x))
+                 + (float)(v46[2] * localWorld->v2.x))
+         + localWorld->v3.x;
+    v46[1] = v33;
+    v46[2] = v34;
   }
   return result;
 }
 
 // File Line: 756
 // RVA: 0x240D10
-char __fastcall UFG::RegionPolygon::IsHitRay(UFG::RegionPolygon *this, UFG::qVector3 *rayPos, UFG::qVector3 *rayDir, UFG::qVector3 *pHitPos)
+char __fastcall UFG::RegionPolygon::IsHitRay(
+        UFG::RegionPolygon *this,
+        UFG::qVector3 *rayPos,
+        UFG::qVector3 *rayDir,
+        UFG::qVector3 *pHitPos)
 {
-  UFG::qVector3 *v4; // rdi
-  UFG::RegionPolygon *v5; // rbx
-  UFG::qVector3 *v6; // rsi
-  UFG::qVector3 *v7; // r14
-  float v8; // xmm3_4
-  UFG::qVector3 *v9; // kr00_8
-  unsigned int v10; // er9
-  UFG::qVector3 *v11; // r8
-  float v12; // xmm9_4
-  float v13; // xmm8_4
-  float v14; // xmm10_4
-  float v15; // xmm3_4
-  float v16; // xmm0_4
-  float v17; // xmm2_4
-  float v18; // xmm1_4
-  float v19; // xmm3_4
-  float v20; // xmm5_4
-  float v21; // xmm0_4
-  float v22; // xmm3_4
+  float mOrigDist; // xmm3_4
+  float v9; // xmm5_4
+  float v10; // xmm6_4
+  unsigned int mVertCount; // r9d
+  UFG::qVector2 *mpVerts; // r8
+  float y; // xmm9_4
+  float x; // xmm8_4
+  float z; // xmm10_4
+  float v16; // xmm3_4
+  float v17; // xmm3_4
   char result; // al
-  float v24; // xmm5_4
-  float v25; // xmm4_4
-  UFG::qVector3 v26; // [rsp+18h] [rbp-49h]
-  UFG::qVector3 *hit_enter_p; // [rsp+28h] [rbp-39h]
+  float v19; // xmm5_4
+  float v20; // xmm4_4
+  UFG::qVector3 v21; // [rsp+18h] [rbp-49h] BYREF
+  UFG::qVector3 *hit_enter_p; // [rsp+28h] [rbp-39h] BYREF
   UFG::qVector3 *hit_exit_p; // [rsp+30h] [rbp-31h]
-  UFG::qVector3 endXY; // [rsp+38h] [rbp-29h]
-  UFG::qVector3 startXY; // [rsp+48h] [rbp-19h]
-  float pPDist; // [rsp+C8h] [rbp+67h]
+  UFG::qVector3 endXY; // [rsp+38h] [rbp-29h] BYREF
+  UFG::qVector3 startXY; // [rsp+48h] [rbp-19h] BYREF
+  float pPDist[6]; // [rsp+C8h] [rbp+67h] BYREF
 
-  v4 = pHitPos;
-  v5 = this;
-  v6 = rayDir;
-  v7 = rayPos;
   if ( !UFG::qBox::IsHitRay(&this->mBoundingBox, rayPos, rayDir, 0i64, 0i64) )
     return 0;
-  v8 = v5->mOrigDist;
-  hit_exit_p = &v26;
+  mOrigDist = this->mOrigDist;
+  hit_exit_p = &v21;
   if ( !(unsigned int)UFG::qIntersectRaySlab(
-                        v7,
-                        v6,
-                        &v5->mNormal,
-                        v8 + v5->mExtentBelow,
-                        v8 + v5->mExtentAbove,
+                        rayPos,
+                        rayDir,
+                        &this->mNormal,
+                        mOrigDist + this->mExtentBelow,
+                        mOrigDist + this->mExtentAbove,
                         (UFG::qVector3 *)&hit_enter_p,
-                        &v26) )
+                        &v21) )
     return 0;
-  v9 = hit_enter_p;
-  v10 = v5->mVertCount;
-  v11 = v5->mpVerts;
+  v9 = *(float *)&hit_enter_p;
+  v10 = *((float *)&hit_enter_p + 1);
+  mVertCount = this->mVertCount;
+  mpVerts = (UFG::qVector2 *)this->mpVerts;
   hit_enter_p = 0i64;
-  v12 = v5->mNormal.y;
-  v13 = v5->mNormal.x;
-  v14 = v5->mNormal.z;
-  v15 = (float)((float)((float)(v5->mNormal.x * *(float *)&v9) + (float)(v5->mNormal.y * *((float *)&v9 + 1)))
-              + (float)(v5->mNormal.z * *(float *)&hit_exit_p))
-      - v5->mOrigDist;
-  v16 = v5->mNormal.x * v15;
-  v17 = v5->mNormal.z * v15;
-  v18 = v5->mNormal.y * v15;
-  v19 = v5->mNormal.x;
-  v20 = *(float *)&v9 - v16;
-  v21 = v5->mNormal.y;
-  startXY.x = v20;
-  startXY.z = *(float *)&hit_exit_p - v17;
-  startXY.y = *((float *)&v9 + 1) - v18;
-  v22 = (float)((float)((float)(v19 * v26.x) + (float)(v21 * v26.y)) + (float)(v14 * v26.z)) - v5->mOrigDist;
-  endXY.x = v26.x - (float)(v13 * v22);
-  endXY.y = v26.y - (float)(v12 * v22);
-  endXY.z = v26.z - (float)(v14 * v22);
-  if ( !v4 )
-    return UFG::qIntersectSegPolyXY(&startXY, &endXY, v11, v10, 0i64, hit_enter_p);
-  if ( !UFG::qIntersectSegPolyXY(&startXY, &endXY, v11, v10, &pPDist, hit_enter_p) )
+  y = this->mNormal.y;
+  x = this->mNormal.x;
+  z = this->mNormal.z;
+  v16 = (float)((float)((float)(x * v9) + (float)(y * v10)) + (float)(z * *(float *)&hit_exit_p)) - this->mOrigDist;
+  startXY.x = v9 - (float)(x * v16);
+  startXY.z = *(float *)&hit_exit_p - (float)(z * v16);
+  startXY.y = v10 - (float)(y * v16);
+  v17 = (float)((float)((float)(x * v21.x) + (float)(y * v21.y)) + (float)(z * v21.z)) - this->mOrigDist;
+  endXY.x = v21.x - (float)(x * v17);
+  endXY.y = v21.y - (float)(y * v17);
+  endXY.z = v21.z - (float)(z * v17);
+  if ( !pHitPos )
+    return UFG::qIntersectSegPolyXY(
+             (UFG::qVector2 *)&startXY,
+             (UFG::qVector2 *)&endXY,
+             mpVerts,
+             mVertCount,
+             0i64,
+             hit_enter_p);
+  if ( !UFG::qIntersectSegPolyXY(
+          (UFG::qVector2 *)&startXY,
+          (UFG::qVector2 *)&endXY,
+          mpVerts,
+          mVertCount,
+          pPDist,
+          hit_enter_p) )
     return 0;
   result = 1;
-  v24 = (float)((float)(v26.y - *((float *)&hit_enter_p + 1)) * pPDist) + *((float *)&hit_enter_p + 1);
-  v25 = (float)((float)(v26.z - *(float *)&hit_exit_p) * pPDist) + *(float *)&hit_exit_p;
-  v4->x = (float)((float)(v26.x - *(float *)&hit_enter_p) * pPDist) + *(float *)&hit_enter_p;
-  v4->y = v24;
-  v4->z = v25;
+  v19 = (float)((float)(v21.y - *((float *)&hit_enter_p + 1)) * pPDist[0]) + *((float *)&hit_enter_p + 1);
+  v20 = (float)((float)(v21.z - *(float *)&hit_exit_p) * pPDist[0]) + *(float *)&hit_exit_p;
+  pHitPos->x = (float)((float)(v21.x - *(float *)&hit_enter_p) * pPDist[0]) + *(float *)&hit_enter_p;
+  pHitPos->y = v19;
+  pHitPos->z = v20;
   return result;
 }
 
 // File Line: 811
 // RVA: 0x2414A0
-bool __fastcall UFG::RegionPolygon::IsHitRayWS(UFG::RegionPolygon *this, UFG::qVector3 *rayPos, UFG::qVector3 *rayDir, UFG::qMatrix44 *localWorld, UFG::qVector3 *pHitPos)
+bool __fastcall UFG::RegionPolygon::IsHitRayWS(
+        UFG::RegionPolygon *this,
+        UFG::qVector3 *rayPos,
+        UFG::qVector3 *rayDir,
+        UFG::qMatrix44 *localWorld,
+        UFG::qVector3 *pHitPos)
 {
-  float v5; // xmm5_4
-  UFG::qMatrix44 *v6; // rbx
-  UFG::qVector3 *v7; // rsi
-  UFG::qVector3 *v8; // r14
-  UFG::RegionPolygon *v9; // rdi
-  float v10; // xmm7_4
-  float v11; // xmm4_4
-  float v12; // xmm0_4
-  float v13; // xmm1_4
-  float v14; // xmm6_4
-  __m128 v15; // xmm2
-  float v16; // xmm3_4
-  __m128 v17; // xmm1
-  float v18; // xmm6_4
+  float z; // xmm5_4
+  float x; // xmm0_4
+  float v11; // xmm7_4
+  float v12; // xmm3_4
+  float v13; // xmm4_4
+  float v14; // xmm2_4
+  float v15; // xmm0_4
+  float v16; // xmm1_4
+  float v17; // xmm6_4
+  __m128 y_low; // xmm2
+  float mExtentAbove; // xmm3_4
+  __m128 v20; // xmm1
+  float v21; // xmm6_4
   bool result; // al
-  float v20; // xmm3_4
-  float v21; // xmm2_4
-  UFG::RegionBaseVtbl *v22; // rax
-  float v23; // xmm4_4
-  float v24; // xmm13_4
-  float v25; // xmm2_4
-  float v26; // xmm5_4
+  float v23; // xmm3_4
+  float y; // xmm2_4
+  UFG::RegionBaseVtbl *vfptr; // rax
+  float v26; // xmm4_4
   float v27; // xmm13_4
-  float v28; // xmm0_4
-  float v29; // xmm1_4
-  float v30; // xmm2_4
-  float v31; // xmm6_4
-  UFG::qVector3 pos; // [rsp+20h] [rbp-79h]
-  float v33; // [rsp+2Ch] [rbp-6Dh]
-  float v34; // [rsp+30h] [rbp-69h]
-  float v35; // [rsp+38h] [rbp-61h]
-  float v36; // [rsp+3Ch] [rbp-5Dh]
-  float v37; // [rsp+40h] [rbp-59h]
-  float v38; // [rsp+48h] [rbp-51h]
-  float v39; // [rsp+4Ch] [rbp-4Dh]
-  float v40; // [rsp+50h] [rbp-49h]
-  float v41; // [rsp+58h] [rbp-41h]
-  float v42; // [rsp+5Ch] [rbp-3Dh]
-  float v43; // [rsp+60h] [rbp-39h]
-  float v44; // [rsp+F8h] [rbp+5Fh]
-  float *v45; // [rsp+118h] [rbp+7Fh]
+  float v28; // xmm2_4
+  float v29; // xmm5_4
+  float v30; // xmm13_4
+  float v31; // xmm0_4
+  float v32; // xmm1_4
+  float v33; // xmm2_4
+  float v34; // xmm6_4
+  UFG::qVector3 pos; // [rsp+20h] [rbp-79h] BYREF
+  float v36; // [rsp+2Ch] [rbp-6Dh]
+  int v37[4]; // [rsp+30h] [rbp-69h] BYREF
+  float v38; // [rsp+40h] [rbp-59h]
+  float v39; // [rsp+48h] [rbp-51h]
+  float v40; // [rsp+4Ch] [rbp-4Dh]
+  float v41; // [rsp+50h] [rbp-49h]
+  float v42; // [rsp+58h] [rbp-41h]
+  float v43; // [rsp+5Ch] [rbp-3Dh]
+  float v44; // [rsp+60h] [rbp-39h]
+  float v45; // [rsp+F8h] [rbp+5Fh]
+  float *v46; // [rsp+118h] [rbp+7Fh]
 
-  v5 = this->mCenter.z;
-  v6 = localWorld;
-  v7 = rayDir;
-  v8 = rayPos;
-  v9 = this;
-  v10 = localWorld->v2.x;
-  v11 = (float)((float)((float)(this->mCenter.y * localWorld->v1.x) + (float)(this->mCenter.x * localWorld->v0.x))
-              + (float)(localWorld->v2.x * v5))
+  z = this->mCenter.z;
+  x = this->mCenter.x;
+  v11 = localWorld->v2.x;
+  v12 = x * localWorld->v0.z;
+  v13 = (float)((float)((float)(this->mCenter.y * localWorld->v1.x) + (float)(x * localWorld->v0.x)) + (float)(v11 * z))
       + localWorld->v3.x;
-  v12 = this->mBoundingBox.mMax.z - this->mBoundingBox.mMin.z;
-  v13 = (float)(this->mBoundingBox.mMax.x - this->mBoundingBox.mMin.x)
+  v14 = (float)(x * localWorld->v0.y) + (float)(this->mCenter.y * localWorld->v1.y);
+  v15 = this->mBoundingBox.mMax.z - this->mBoundingBox.mMin.z;
+  v16 = (float)(this->mBoundingBox.mMax.x - this->mBoundingBox.mMin.x)
       * (float)(this->mBoundingBox.mMax.x - this->mBoundingBox.mMin.x);
-  v14 = (float)((float)((float)(this->mCenter.y * localWorld->v1.z) + (float)(this->mCenter.x * localWorld->v0.z))
-              + (float)(v5 * localWorld->v2.z))
+  v17 = (float)((float)((float)(this->mCenter.y * localWorld->v1.z) + v12) + (float)(z * localWorld->v2.z))
       + localWorld->v3.z;
-  pos.y = (float)((float)((float)(this->mCenter.x * localWorld->v0.y) + (float)(this->mCenter.y * localWorld->v1.y))
-                + (float)(this->mCenter.z * localWorld->v2.y))
-        + localWorld->v3.y;
-  v15 = (__m128)LODWORD(this->mBoundingBox.mMax.y);
-  v15.m128_f32[0] = v15.m128_f32[0] - this->mBoundingBox.mMin.y;
-  pos.x = v11;
-  pos.z = v14;
-  v15.m128_f32[0] = (float)((float)(v15.m128_f32[0] * v15.m128_f32[0]) + v13) + (float)(v12 * v12);
-  v16 = COERCE_FLOAT(_mm_sqrt_ps(v15)) * 0.5;
-  if ( v16 <= this->mExtentAbove )
-    v16 = this->mExtentAbove;
-  if ( v16 <= this->mExtentBelow )
-    v16 = this->mExtentBelow;
-  v17 = (__m128)LODWORD(localWorld->v2.y);
-  v17.m128_f32[0] = (float)((float)(v17.m128_f32[0] * v17.m128_f32[0]) + (float)(v10 * v10))
+  pos.y = (float)(v14 + (float)(z * localWorld->v2.y)) + localWorld->v3.y;
+  y_low = (__m128)LODWORD(this->mBoundingBox.mMax.y);
+  y_low.m128_f32[0] = y_low.m128_f32[0] - this->mBoundingBox.mMin.y;
+  pos.x = v13;
+  pos.z = v17;
+  y_low.m128_f32[0] = (float)((float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + v16) + (float)(v15 * v15);
+  mExtentAbove = _mm_sqrt_ps(y_low).m128_f32[0] * 0.5;
+  if ( mExtentAbove <= this->mExtentAbove )
+    mExtentAbove = this->mExtentAbove;
+  if ( mExtentAbove <= this->mExtentBelow )
+    mExtentAbove = this->mExtentBelow;
+  v20 = (__m128)LODWORD(localWorld->v2.y);
+  v20.m128_f32[0] = (float)((float)(v20.m128_f32[0] * v20.m128_f32[0]) + (float)(v11 * v11))
                   + (float)(localWorld->v2.z * localWorld->v2.z);
-  v18 = COERCE_FLOAT(_mm_sqrt_ps(v17)) * v16;
-  if ( UFG::qDistanceSqrRayPoint(rayPos, rayDir, &pos) > (float)(v18 * v18) )
+  v21 = _mm_sqrt_ps(v20).m128_f32[0] * mExtentAbove;
+  if ( UFG::qDistanceSqrRayPoint(rayPos, rayDir, &pos) > (float)(v21 * v21) )
     return 0;
-  UFG::qInverse((UFG::qMatrix44 *)&pos.z, v6);
-  v20 = v8->x;
-  v21 = v8->y;
-  v22 = v9->vfptr;
-  v23 = v8->z;
-  v24 = v37 * v21;
-  v44 = (float)((float)((float)(v35 * v21) + (float)(pos.z * v8->x)) + (float)(v38 * v23)) + v41;
-  v25 = v7->z;
-  v26 = v34;
-  v27 = v24 + (float)(v34 * v20);
-  v28 = v7->y;
-  v29 = v7->x;
-  v34 = v44;
-  pos.y = (float)((float)((float)(v36 * v28) + (float)(v33 * v29)) + (float)(v39 * v25)) + v42;
-  pos.z = (float)((float)((float)(v37 * v28) + (float)(v26 * v29)) + (float)(v40 * v25)) + v43;
-  pos.x = (float)(v27 + (float)(v40 * v23)) + v43;
-  result = v22->IsHitRay((UFG::RegionBase *)&v9->vfptr, (UFG::qVector3 *)&v34, &pos, (UFG::qVector3 *)v45);
-  if ( v45 )
+  UFG::qInverse((UFG::qMatrix44 *)&pos.z, localWorld);
+  v23 = rayPos->x;
+  y = rayPos->y;
+  vfptr = this->vfptr;
+  v26 = rayPos->z;
+  v27 = v38 * y;
+  v45 = (float)((float)((float)(*(float *)&v37[2] * y) + (float)(pos.z * rayPos->x)) + (float)(v39 * v26)) + v42;
+  v28 = rayDir->z;
+  v29 = *(float *)v37;
+  v30 = v27 + (float)(*(float *)v37 * v23);
+  v31 = rayDir->y;
+  v32 = rayDir->x;
+  *(float *)v37 = v45;
+  pos.y = (float)((float)((float)(*(float *)&v37[3] * v31) + (float)(v36 * v32)) + (float)(v40 * v28)) + v43;
+  pos.z = (float)((float)((float)(v38 * v31) + (float)(v29 * v32)) + (float)(v41 * v28)) + v44;
+  pos.x = (float)(v30 + (float)(v41 * v26)) + v44;
+  result = vfptr->IsHitRay(this, (UFG::qVector3 *)v37, &pos, (UFG::qVector3 *)v46);
+  if ( v46 )
   {
-    v30 = (float)((float)((float)(v45[1] * v6->v1.y) + (float)(*v45 * v6->v0.y)) + (float)(v45[2] * v6->v2.y))
-        + v6->v3.y;
-    v31 = (float)((float)((float)(v45[1] * v6->v1.z) + (float)(*v45 * v6->v0.z)) + (float)(v45[2] * v6->v2.z))
-        + v6->v3.z;
-    *v45 = (float)((float)((float)(v45[1] * v6->v1.x) + (float)(*v45 * v6->v0.x)) + (float)(v45[2] * v6->v2.x))
-         + v6->v3.x;
-    v45[1] = v30;
-    v45[2] = v31;
+    v33 = (float)((float)((float)(v46[1] * localWorld->v1.y) + (float)(*v46 * localWorld->v0.y))
+                + (float)(v46[2] * localWorld->v2.y))
+        + localWorld->v3.y;
+    v34 = (float)((float)((float)(v46[1] * localWorld->v1.z) + (float)(*v46 * localWorld->v0.z))
+                + (float)(v46[2] * localWorld->v2.z))
+        + localWorld->v3.z;
+    *v46 = (float)((float)((float)(v46[1] * localWorld->v1.x) + (float)(*v46 * localWorld->v0.x))
+                 + (float)(v46[2] * localWorld->v2.x))
+         + localWorld->v3.x;
+    v46[1] = v33;
+    v46[2] = v34;
   }
   return result;
 }
 
 // File Line: 851
 // RVA: 0x23A7D0
-signed __int64 __fastcall UFG::RegionPolygon::CycleAspect(UFG::RegionPolygon *this, unsigned int aspect, bool forward)
+__int64 __fastcall UFG::RegionPolygon::CycleAspect(UFG::RegionPolygon *this, unsigned int aspect, bool forward)
 {
   unsigned int v3; // edx
-  signed __int64 result; // rax
 
   if ( forward )
   {
     v3 = aspect + 1;
     if ( v3 == this->mVertCount )
     {
-      result = 4294967195i64;
+      return 4294967195i64;
     }
     else
     {
       if ( v3 > 0xFFFFFF9C )
-        v3 = 0;
-      result = v3;
+        return 0;
+      return v3;
     }
   }
   else if ( aspect )
   {
     if ( aspect == -101 )
-      result = this->mVertCount - 1;
+      return this->mVertCount - 1;
     else
-      result = aspect - 1;
+      return aspect - 1;
   }
   else
   {
-    result = 4294967196i64;
+    return 4294967196i64;
   }
-  return result;
 }
 
 // File Line: 898
 // RVA: 0x23C380
-UFG::qVector3 *__fastcall UFG::RegionPolygon::GetAspectCenter(UFG::RegionPolygon *this, UFG::qVector3 *result, unsigned int aspect)
+UFG::qVector3 *__fastcall UFG::RegionPolygon::GetAspectCenter(
+        UFG::RegionPolygon *this,
+        UFG::qVector3 *result,
+        unsigned int aspect)
 {
-  UFG::qVector3 *v3; // rcx
-  signed __int64 v4; // r8
-  UFG::qVector3 *v5; // rax
-  float v6; // xmm2_4
-  float v7; // xmm1_4
-  float v8; // xmm0_4
+  UFG::qVector3 *v3; // rax
+  float mExtentAbove; // xmm2_4
+  float v5; // xmm1_4
+  float v6; // xmm0_4
 
   if ( aspect < this->mVertCount )
   {
-    v3 = this->mpVerts;
-    v4 = aspect;
-    result->x = v3[v4].x;
-    result->y = v3[v4].y;
-    result->z = v3[v4].z;
+    *result = this->mpVerts[aspect];
     return result;
   }
   if ( aspect == -101 )
   {
-    v6 = this->mExtentAbove;
+    mExtentAbove = this->mExtentAbove;
   }
   else
   {
     if ( aspect != -100 )
     {
-      result->x = this->mCenter.x;
-      result->y = this->mCenter.y;
-      result->z = this->mCenter.z;
+      *result = this->mCenter;
       return result;
     }
-    v6 = this->mExtentBelow;
+    mExtentAbove = this->mExtentBelow;
   }
-  v5 = result;
-  v7 = (float)(v6 * this->mNormal.y) + this->mCenter.y;
-  v8 = (float)(v6 * this->mNormal.x) + this->mCenter.x;
-  result->z = (float)(v6 * this->mNormal.z) + this->mCenter.z;
-  result->y = v7;
-  result->x = v8;
-  return v5;
+  v3 = result;
+  v5 = (float)(mExtentAbove * this->mNormal.y) + this->mCenter.y;
+  v6 = (float)(mExtentAbove * this->mNormal.x) + this->mCenter.x;
+  result->z = (float)(mExtentAbove * this->mNormal.z) + this->mCenter.z;
+  result->y = v5;
+  result->x = v6;
+  return v3;
 }
 
 // File Line: 922
 // RVA: 0x23C6B0
-UFG::qVector3 *__fastcall UFG::RegionPolygon::GetAspectNormal(UFG::RegionPolygon *this, UFG::qVector3 *result, unsigned int aspect)
+UFG::qVector3 *__fastcall UFG::RegionPolygon::GetAspectNormal(
+        UFG::RegionPolygon *this,
+        UFG::qVector3 *result,
+        unsigned int aspect)
 {
-  unsigned int v3; // er11
-  UFG::RegionPolygon *v4; // r10
+  unsigned int mVertCount; // r11d
   __int64 v5; // rax
   float v6; // xmm2_4
-  __m128 v7; // xmm5
-  float v8; // xmm6_4
-  signed __int64 v9; // rcx
-  UFG::qVector3 *v10; // r8
-  signed __int64 v11; // rcx
+  __m128 z_low; // xmm5
+  float x; // xmm6_4
+  __int64 v9; // rcx
+  UFG::qVector3 *mpVerts; // r8
+  __int64 v11; // rcx
   float v12; // xmm3_4
   float v13; // xmm1_4
   float v14; // xmm4_4
@@ -1396,57 +1358,54 @@ UFG::qVector3 *__fastcall UFG::RegionPolygon::GetAspectNormal(UFG::RegionPolygon
   __m128 v18; // xmm3
   UFG::qVector3 *v19; // rax
   int v20; // xmm1_4
-  float v21; // xmm0_4
+  float y; // xmm0_4
 
-  v3 = this->mVertCount;
-  v4 = this;
-  if ( aspect >= v3 )
+  mVertCount = this->mVertCount;
+  if ( aspect >= mVertCount )
   {
     if ( aspect == -100 )
     {
       v19 = result;
       v20 = LODWORD(this->mNormal.z) ^ _xmm[0];
       LODWORD(result->x) = LODWORD(this->mNormal.x) ^ _xmm[0];
-      v21 = this->mNormal.y;
+      y = this->mNormal.y;
       LODWORD(result->z) = v20;
-      LODWORD(result->y) = LODWORD(v21) ^ _xmm[0];
+      LODWORD(result->y) = LODWORD(y) ^ _xmm[0];
     }
     else
     {
-      result->x = this->mNormal.x;
-      result->y = this->mNormal.y;
-      result->z = this->mNormal.z;
-      v19 = result;
+      *result = this->mNormal;
+      return result;
     }
   }
   else
   {
-    v5 = v3 - 1;
+    v5 = mVertCount - 1;
     if ( aspect )
       v5 = aspect - 1;
     v6 = this->mNormal.y;
-    v7 = (__m128)LODWORD(this->mNormal.z);
-    v8 = this->mNormal.x;
+    z_low = (__m128)LODWORD(this->mNormal.z);
+    x = this->mNormal.x;
     v9 = aspect + 1;
-    v10 = v4->mpVerts;
-    if ( (_DWORD)v9 == v3 )
+    mpVerts = this->mpVerts;
+    if ( (_DWORD)v9 == mVertCount )
       v9 = 0i64;
     v11 = v9;
-    v12 = v10[v11].y - v10[v5].y;
-    v13 = v10[v11].z - v10[v5].z;
-    v14 = v10[v11].x - v10[v5].x;
-    v15 = (float)(v4->mNormal.y * v13) - (float)(v4->mNormal.z * v12);
-    v7.m128_f32[0] = (float)(v7.m128_f32[0] * v14) - (float)(v8 * v13);
-    v16 = (float)(v8 * v12) - (float)(v6 * v14);
+    v12 = mpVerts[v11].y - mpVerts[v5].y;
+    v13 = mpVerts[v11].z - mpVerts[v5].z;
+    v14 = mpVerts[v11].x - mpVerts[v5].x;
+    v15 = (float)(this->mNormal.y * v13) - (float)(this->mNormal.z * v12);
+    z_low.m128_f32[0] = (float)(z_low.m128_f32[0] * v14) - (float)(x * v13);
+    v16 = (float)(x * v12) - (float)(v6 * v14);
     v17 = 0.0;
-    v18 = v7;
-    v18.m128_f32[0] = (float)((float)(v7.m128_f32[0] * v7.m128_f32[0]) + (float)(v15 * v15)) + (float)(v16 * v16);
+    v18 = z_low;
+    v18.m128_f32[0] = (float)((float)(z_low.m128_f32[0] * z_low.m128_f32[0]) + (float)(v15 * v15)) + (float)(v16 * v16);
     if ( v18.m128_f32[0] != 0.0 )
-      v17 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v18));
+      v17 = 1.0 / _mm_sqrt_ps(v18).m128_f32[0];
     v19 = result;
     result->x = v15 * v17;
     result->z = v16 * v17;
-    result->y = v7.m128_f32[0] * v17;
+    result->y = z_low.m128_f32[0] * v17;
   }
   return v19;
 }
@@ -1455,23 +1414,23 @@ UFG::qVector3 *__fastcall UFG::RegionPolygon::GetAspectNormal(UFG::RegionPolygon
 // RVA: 0x23E7F0
 __int64 __fastcall UFG::RegionPolygon::InsertAspect(UFG::RegionPolygon *this, unsigned int aspect)
 {
-  unsigned int v2; // eax
-  UFG::qVector3 *v3; // r8
+  unsigned int mVertCount; // eax
+  UFG::qVector3 *mpVerts; // r8
   __int64 v4; // rbx
   float v5; // xmm2_4
   float v6; // xmm1_4
-  UFG::qVector3 vert; // [rsp+20h] [rbp-18h]
+  UFG::qVector3 vert; // [rsp+20h] [rbp-18h] BYREF
 
-  v2 = this->mVertCount;
-  if ( aspect >= v2 )
+  mVertCount = this->mVertCount;
+  if ( aspect >= mVertCount )
     return aspect;
-  v3 = this->mpVerts;
+  mpVerts = this->mpVerts;
   v4 = aspect + 1;
-  if ( (unsigned int)v4 >= v2 )
+  if ( (unsigned int)v4 >= mVertCount )
     v4 = 0i64;
-  v5 = v3[v4].y + v3[aspect].y;
-  v6 = v3[v4].z + v3[aspect].z;
-  vert.x = (float)(v3[v4].x + v3[aspect].x) * 0.5;
+  v5 = mpVerts[v4].y + mpVerts[aspect].y;
+  v6 = mpVerts[v4].z + mpVerts[aspect].z;
+  vert.x = (float)(mpVerts[v4].x + mpVerts[aspect].x) * 0.5;
   vert.y = v5 * 0.5;
   vert.z = v6 * 0.5;
   UFG::RegionPolygon::InsertVert(this, &vert, v4);
@@ -1480,64 +1439,59 @@ __int64 __fastcall UFG::RegionPolygon::InsertAspect(UFG::RegionPolygon *this, un
 
 // File Line: 975
 // RVA: 0x23F6B0
-char __fastcall UFG::RegionPolygon::IsHitAspect(UFG::RegionPolygon *this, UFG::qVector3 *rayPos, UFG::qVector3 *rayDir, unsigned int *pHitAspect)
+char __fastcall UFG::RegionPolygon::IsHitAspect(
+        UFG::RegionPolygon *this,
+        UFG::qVector3 *rayPos,
+        UFG::qVector3 *rayDir,
+        unsigned int *pHitAspect)
 {
-  unsigned int v4; // er14
-  int v5; // er13
-  UFG::RegionPolygon *v6; // rsi
-  UFG::qVector3 *v7; // rcx
-  unsigned int *v8; // rdi
-  UFG::qVector3 *v9; // r15
+  unsigned int mVertCount; // r14d
+  int v5; // r13d
+  UFG::qVector3 *mpVerts; // rcx
   float v10; // xmm6_4
-  UFG::qVector3 *v11; // r12
-  signed int v12; // ebp
-  signed int v13; // ebx
+  unsigned int v12; // ebp
+  unsigned int v13; // ebx
   float v14; // xmm0_4
   char result; // al
-  UFG::RegionBaseVtbl *v16; // rax
-  float v17; // [rsp+20h] [rbp-58h]
-  float v18; // [rsp+24h] [rbp-54h]
-  float v19; // [rsp+28h] [rbp-50h]
+  UFG::RegionBaseVtbl *vfptr; // rax
+  int v17[4]; // [rsp+20h] [rbp-58h] BYREF
 
-  v4 = this->mVertCount;
+  mVertCount = this->mVertCount;
   v5 = 0;
-  v6 = this;
-  v7 = this->mpVerts;
-  v8 = pHitAspect;
-  v9 = rayDir;
+  mpVerts = this->mpVerts;
   v10 = FLOAT_0_0099999998;
-  v11 = rayPos;
   v12 = -99;
   v13 = 0;
   while ( 1 )
   {
-    v14 = UFG::qDistanceSqrRayPoint(v11, v9, &v7[v13]);
+    v14 = UFG::qDistanceSqrRayPoint(rayPos, rayDir, &mpVerts[v13]);
     if ( v14 < v10 )
     {
-      if ( !v8 )
+      if ( !pHitAspect )
         return 1;
       v12 = v13;
       v10 = v14;
     }
-    if ( ++v13 > v4 )
+    if ( ++v13 > mVertCount )
       break;
-    v7 = v6->mpVerts;
+    mpVerts = this->mpVerts;
   }
   if ( v10 != 0.0099999998 )
   {
-    *v8 = v12;
+    *pHitAspect = v12;
     return 1;
   }
-  v16 = v6->vfptr;
-  if ( !v8 )
-    return v16->IsHitRay((UFG::RegionBase *)&v6->vfptr, v11, v9, 0i64);
-  if ( !v16->IsHitRay((UFG::RegionBase *)&v6->vfptr, v11, v9, (UFG::qVector3 *)&v17) )
+  vfptr = this->vfptr;
+  if ( !pHitAspect )
+    return vfptr->IsHitRay(this, rayPos, rayDir, 0i64);
+  if ( !vfptr->IsHitRay(this, rayPos, rayDir, (UFG::qVector3 *)v17) )
     return 0;
   result = 1;
-  LOBYTE(v5) = (float)((float)((float)((float)(v18 * v6->mNormal.y) + (float)(v17 * v6->mNormal.x))
-                             + (float)(v19 * v6->mNormal.z))
-                     - v6->mOrigDist) < 0.0;
-  *v8 = v5 - 101;
+  LOBYTE(v5) = (float)((float)((float)((float)(*(float *)&v17[1] * this->mNormal.y)
+                                     + (float)(*(float *)v17 * this->mNormal.x))
+                             + (float)(*(float *)&v17[2] * this->mNormal.z))
+                     - this->mOrigDist) < 0.0;
+  *pHitAspect = v5 - 101;
   return result;
 }
 
@@ -1545,40 +1499,41 @@ char __fastcall UFG::RegionPolygon::IsHitAspect(UFG::RegionPolygon *this, UFG::q
 // RVA: 0x245080
 __int64 __fastcall UFG::RegionPolygon::RemoveAspect(UFG::RegionPolygon *this, unsigned int aspect)
 {
-  unsigned int v2; // er8
+  unsigned int mVertCount; // r8d
   unsigned int v3; // ebx
-  UFG::RegionPolygon *v4; // rdi
-  UFG::qVector3 *v5; // rax
-  unsigned int v6; // er8
+  UFG::qVector3 *mpVerts; // rax
+  unsigned int v6; // r8d
 
-  v2 = this->mVertCount;
+  mVertCount = this->mVertCount;
   v3 = aspect;
-  v4 = this;
-  if ( aspect < v2 && v2 > 1 )
+  if ( aspect < mVertCount && mVertCount > 1 )
   {
-    v5 = this->mpVerts;
-    v6 = v2 - 1;
+    mpVerts = this->mpVerts;
+    v6 = mVertCount - 1;
     this->mVertCount = v6;
-    UFG::qMemMove(&v5[aspect], &v5[aspect + 1], 12 * (v6 - aspect));
-    UFG::RegionPolygon::RecalcCachedValues(v4, 1);
-    if ( v3 == v4->mVertCount )
-      v3 = 0;
+    UFG::qMemMove(&mpVerts[aspect], (char *)&mpVerts[aspect + 1], 12 * (v6 - aspect));
+    UFG::RegionPolygon::RecalcCachedValues(this, 1);
+    if ( v3 == this->mVertCount )
+      return 0;
   }
   return v3;
 }
 
 // File Line: 1073
 // RVA: 0x2462C0
-void __fastcall UFG::RegionPolygon::TranslateAspect(UFG::RegionPolygon *this, unsigned int aspect, UFG::qVector3 *delta)
+void __fastcall UFG::RegionPolygon::TranslateAspect(
+        UFG::RegionPolygon *this,
+        unsigned int aspect,
+        UFG::qVector3 *delta)
 {
-  signed __int64 v3; // rdx
-  UFG::qVector3 *v4; // rax
+  __int64 v3; // rdx
+  UFG::qVector3 *mpVerts; // rax
   float v5; // xmm2_4
   float v6; // xmm1_4
   UFG::qVector3 *v7; // rax
-  float v8; // xmm3_4
-  float v9; // xmm5_4
-  float v10; // xmm8_4
+  float x; // xmm3_4
+  float z; // xmm5_4
+  float y; // xmm8_4
   float v11; // xmm6_4
   float v12; // xmm4_4
   float v13; // xmm2_4
@@ -1589,24 +1544,24 @@ void __fastcall UFG::RegionPolygon::TranslateAspect(UFG::RegionPolygon *this, un
   if ( aspect < this->mVertCount )
   {
     v3 = aspect;
-    v4 = this->mpVerts;
-    v5 = delta->y + v4[v3].y;
-    v6 = delta->z + v4[v3].z;
-    v4[v3].x = delta->x + v4[v3].x;
-    v4[v3].y = v5;
-    v4[v3].z = v6;
+    mpVerts = this->mpVerts;
+    v5 = delta->y + mpVerts[v3].y;
+    v6 = delta->z + mpVerts[v3].z;
+    mpVerts[v3].x = delta->x + mpVerts[v3].x;
+    mpVerts[v3].y = v5;
+    mpVerts[v3].z = v6;
     if ( this->mVertCount >= 4 )
     {
       v7 = this->mpVerts;
-      v8 = this->mNormal.x;
-      v9 = this->mNormal.z;
-      v10 = v7[v3].y;
+      x = this->mNormal.x;
+      z = this->mNormal.z;
+      y = v7[v3].y;
       v11 = v7[v3].z;
       v12 = v7[v3].x;
-      v13 = (float)((float)((float)(v8 * v12) + (float)(this->mNormal.y * v10)) + (float)(v9 * v11)) - this->mOrigDist;
-      v7[v3].y = v10 - (float)(this->mNormal.y * v13);
-      v7[v3].z = v11 - (float)(v9 * v13);
-      v7[v3].x = v12 - (float)(v8 * v13);
+      v13 = (float)((float)((float)(x * v12) + (float)(this->mNormal.y * y)) + (float)(z * v11)) - this->mOrigDist;
+      v7[v3].y = y - (float)(this->mNormal.y * v13);
+      v7[v3].z = v11 - (float)(z * v13);
+      v7[v3].x = v12 - (float)(x * v13);
     }
     UFG::RegionPolygon::RecalcCachedValues(this, 1);
     return;
@@ -1638,85 +1593,84 @@ LABEL_13:
 // RVA: 0x244660
 void __fastcall UFG::RegionPolygon::RecalcCachedValues(UFG::RegionPolygon *this, bool recalcNormal)
 {
-  UFG::RegionPolygon *v2; // r8
-  unsigned int v3; // eax
+  unsigned int mVertCount; // eax
   bool v4; // zf
-  UFG::qVector3 *v5; // rax
+  UFG::qVector3 *mpVerts; // rax
   float v6; // xmm6_4
   float v7; // xmm4_4
-  float v8; // xmm5_4
-  __m128 v9; // xmm7
-  float v10; // xmm6_4
-  float v11; // xmm3_4
-  __m128 v12; // xmm2
-  float v13; // xmm3_4
-  float v14; // xmm4_4
-  float v15; // xmm5_4
-  float v16; // xmm3_4
-  float v17; // xmm5_4
-  float v18; // xmm8_4
-  __m128 v19; // xmm9
-  float v20; // xmm10_4
-  float v21; // xmm3_4
-  __m128 v22; // xmm4
-  float v23; // xmm1_4
-  float v24; // xmm8_4
-  float v25; // xmm9_4
-  float v26; // xmm10_4
-  float v27; // xmm11_4
-  __m128 v28; // xmm12
-  __m128 v29; // xmm13
-  __m128 v30; // xmm4
-  float v31; // xmm1_4
-  float v32; // xmm11_4
-  float v33; // xmm12_4
-  __m128 v34; // xmm14
-  __m128 v35; // xmm7
-  float v36; // xmm15_4
-  __m128 v37; // xmm4
-  float v38; // xmm1_4
-  float v39; // xmm7_4
-  float v40; // xmm15_4
-  float v41; // xmm4_4
-  __m128 v42; // xmm5
-  float v43; // xmm6_4
-  __m128 v44; // xmm0
-  float v45; // xmm1_4
-  float v46; // xmm4_4
-  float v47; // xmm5_4
-  float v48; // xmm6_4
-  float v49; // xmm1_4
-  float v50; // xmm0_4
-  __m128 v51; // xmm13
-  float v52; // xmm0_4
-  float v53; // xmm12_4
-  __m128 v54; // xmm11
-  float v55; // xmm11_4
-  float v56; // xmm0_4
-  float v57; // xmm1_4
-  float v58; // xmm11_4
-  float v59; // xmm6_4
-  float v60; // xmm5_4
-  float v61; // xmm0_4
-  float v62; // xmm4_4
-  __m128 v63; // xmm12
-  float v64; // xmm7_4
-  float v65; // xmm11_4
-  __m128 v66; // xmm8
-  float v67; // xmm1_4
-  float v68; // xmm6_4
-  float v69; // xmm4_4
-  __m128 v70; // xmm2
-  float v71; // xmm3_4
-  UFG::qVector3 *v72; // rdx
-  __int64 v73; // rax
-  float v74; // xmm5_4
-  float v75; // xmm6_4
-  float v76; // xmm7_4
+  float v8; // xmm0_4
+  float v9; // xmm5_4
+  __m128 z_low; // xmm7
+  float v11; // xmm6_4
+  float v12; // xmm3_4
+  __m128 v13; // xmm2
+  float v14; // xmm3_4
+  float x; // xmm4_4
+  float v16; // xmm5_4
+  float z; // xmm3_4
+  float y; // xmm5_4
+  float v19; // xmm8_4
+  __m128 y_low; // xmm9
+  float v21; // xmm10_4
+  float v22; // xmm3_4
+  __m128 v23; // xmm4
+  float v24; // xmm1_4
+  float v25; // xmm8_4
+  float v26; // xmm9_4
+  float v27; // xmm10_4
+  float v28; // xmm11_4
+  __m128 v29; // xmm12
+  __m128 v30; // xmm13
+  __m128 v31; // xmm4
+  float v32; // xmm1_4
+  float v33; // xmm11_4
+  float v34; // xmm12_4
+  __m128 x_low; // xmm14
+  __m128 v36; // xmm7
+  float v37; // xmm15_4
+  __m128 v38; // xmm4
+  float v39; // xmm1_4
+  float v40; // xmm7_4
+  float v41; // xmm15_4
+  float v42; // xmm4_4
+  __m128 v43; // xmm5
+  float v44; // xmm6_4
+  __m128 v45; // xmm0
+  float v46; // xmm1_4
+  float v47; // xmm4_4
+  float v48; // xmm5_4
+  float v49; // xmm6_4
+  float v50; // xmm1_4
+  float v51; // xmm0_4
+  __m128 v52; // xmm13
+  float v53; // xmm0_4
+  float v54; // xmm12_4
+  __m128 v55; // xmm11
+  float v56; // xmm11_4
+  float v57; // xmm0_4
+  float v58; // xmm1_4
+  float v59; // xmm11_4
+  float v60; // xmm6_4
+  float v61; // xmm5_4
+  float v62; // xmm0_4
+  float v63; // xmm4_4
+  __m128 v64; // xmm12
+  float v65; // xmm7_4
+  float v66; // xmm11_4
+  __m128 v67; // xmm8
+  float v68; // xmm1_4
+  float v69; // xmm6_4
+  float v70; // xmm4_4
+  __m128 v71; // xmm2
+  float v72; // xmm3_4
+  UFG::qVector3 *v73; // rdx
+  __int64 v74; // rax
+  float mExtentBelow; // xmm6_4
+  float mExtentAbove; // xmm7_4
   float v77; // xmm8_4
   float v78; // xmm5_4
   unsigned __int64 v79; // r9
-  float *v80; // rcx
+  float *p_z; // rcx
   float v81; // xmm9_4
   float v82; // xmm7_4
   float v83; // xmm8_4
@@ -1754,213 +1708,213 @@ void __fastcall UFG::RegionPolygon::RecalcCachedValues(UFG::RegionPolygon *this,
   float v115; // [rsp+B0h] [rbp+8h]
   unsigned int v116; // [rsp+B8h] [rbp+10h]
 
-  v2 = this;
   if ( recalcNormal )
   {
-    v3 = this->mVertCount;
-    if ( v3 <= 1 )
+    mVertCount = this->mVertCount;
+    if ( mVertCount <= 1 )
     {
-      v14 = UFG::qVector3::msDirUp.x;
-      v17 = UFG::qVector3::msDirUp.y;
-      v16 = UFG::qVector3::msDirUp.z;
+      x = UFG::qVector3::msDirUp.x;
+      y = UFG::qVector3::msDirUp.y;
+      z = UFG::qVector3::msDirUp.z;
     }
     else
     {
-      v4 = v3 == 2;
-      v5 = this->mpVerts;
+      v4 = mVertCount == 2;
+      mpVerts = this->mpVerts;
       if ( v4 )
       {
-        v9 = (__m128)LODWORD(v5[1].z);
-        v9.m128_f32[0] = v9.m128_f32[0] - v5->z;
-        v6 = v5[1].x - v5->x;
-        v7 = v5[1].y - v5->y;
-        v8 = (float)(v7 * UFG::qVector3::msDirFront.z) - (float)(v9.m128_f32[0] * UFG::qVector3::msDirFront.y);
-        v9.m128_f32[0] = (float)(v9.m128_f32[0] * UFG::qVector3::msDirFront.x)
-                       - (float)(v6 * UFG::qVector3::msDirFront.z);
-        v10 = (float)(v6 * UFG::qVector3::msDirFront.y) - (float)(v7 * UFG::qVector3::msDirFront.x);
-        if ( v10 >= 0.0 )
-          v11 = *(float *)&FLOAT_1_0;
+        z_low = (__m128)LODWORD(mpVerts[1].z);
+        v6 = mpVerts[1].x - mpVerts->x;
+        v7 = mpVerts[1].y - mpVerts->y;
+        v8 = z_low.m128_f32[0] - mpVerts->z;
+        v9 = (float)(v7 * UFG::qVector3::msDirFront.z) - (float)(v8 * UFG::qVector3::msDirFront.y);
+        z_low.m128_f32[0] = (float)(v8 * UFG::qVector3::msDirFront.x) - (float)(v6 * UFG::qVector3::msDirFront.z);
+        v11 = (float)(v6 * UFG::qVector3::msDirFront.y) - (float)(v7 * UFG::qVector3::msDirFront.x);
+        if ( v11 >= 0.0 )
+          v12 = *(float *)&FLOAT_1_0;
         else
-          v11 = FLOAT_N1_0;
-        v12 = v9;
-        v12.m128_f32[0] = (float)((float)(v9.m128_f32[0] * v9.m128_f32[0]) + (float)(v8 * v8)) + (float)(v10 * v10);
-        v13 = v11 / COERCE_FLOAT(_mm_sqrt_ps(v12));
-        v14 = v13 * v8;
-        v15 = v13;
-        v16 = v13 * v10;
-        v17 = v15 * v9.m128_f32[0];
+          v12 = FLOAT_N1_0;
+        v13 = z_low;
+        v13.m128_f32[0] = (float)((float)(z_low.m128_f32[0] * z_low.m128_f32[0]) + (float)(v9 * v9))
+                        + (float)(v11 * v11);
+        v14 = v12 / _mm_sqrt_ps(v13).m128_f32[0];
+        x = v14 * v9;
+        v16 = v14;
+        z = v14 * v11;
+        y = v16 * z_low.m128_f32[0];
       }
       else
       {
-        v19 = (__m128)LODWORD(v5[1].y);
-        v18 = v5[1].x - v5->x;
-        v19.m128_f32[0] = v19.m128_f32[0] - v5->y;
-        v20 = v5[1].z - v5->z;
-        v22 = v19;
-        v21 = *(float *)&FLOAT_1_0;
-        v22.m128_f32[0] = (float)((float)(v19.m128_f32[0] * v19.m128_f32[0]) + (float)(v18 * v18)) + (float)(v20 * v20);
-        if ( v22.m128_f32[0] == 0.0 )
-          v23 = 0.0;
+        y_low = (__m128)LODWORD(mpVerts[1].y);
+        v19 = mpVerts[1].x - mpVerts->x;
+        y_low.m128_f32[0] = y_low.m128_f32[0] - mpVerts->y;
+        v21 = mpVerts[1].z - mpVerts->z;
+        v23 = y_low;
+        v22 = *(float *)&FLOAT_1_0;
+        v23.m128_f32[0] = (float)((float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(v19 * v19))
+                        + (float)(v21 * v21);
+        if ( v23.m128_f32[0] == 0.0 )
+          v24 = 0.0;
         else
-          v23 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v22));
-        v28 = (__m128)LODWORD(v5[2].y);
-        v29 = (__m128)LODWORD(v5[2].z);
-        v24 = v18 * v23;
-        v25 = v19.m128_f32[0] * v23;
-        v26 = v20 * v23;
-        v27 = v5[2].x - v5[1].x;
-        v28.m128_f32[0] = v28.m128_f32[0] - v5[1].y;
-        v29.m128_f32[0] = v29.m128_f32[0] - v5[1].z;
-        v30 = v28;
-        v30.m128_f32[0] = (float)((float)(v28.m128_f32[0] * v28.m128_f32[0]) + (float)(v27 * v27))
-                        + (float)(v29.m128_f32[0] * v29.m128_f32[0]);
-        if ( v30.m128_f32[0] == 0.0 )
-          v31 = 0.0;
+          v24 = 1.0 / _mm_sqrt_ps(v23).m128_f32[0];
+        v29 = (__m128)LODWORD(mpVerts[2].y);
+        v30 = (__m128)LODWORD(mpVerts[2].z);
+        v25 = v19 * v24;
+        v26 = y_low.m128_f32[0] * v24;
+        v27 = v21 * v24;
+        v28 = mpVerts[2].x - mpVerts[1].x;
+        v29.m128_f32[0] = v29.m128_f32[0] - mpVerts[1].y;
+        v30.m128_f32[0] = v30.m128_f32[0] - mpVerts[1].z;
+        v31 = v29;
+        v31.m128_f32[0] = (float)((float)(v29.m128_f32[0] * v29.m128_f32[0]) + (float)(v28 * v28))
+                        + (float)(v30.m128_f32[0] * v30.m128_f32[0]);
+        if ( v31.m128_f32[0] == 0.0 )
+          v32 = 0.0;
         else
-          v31 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v30));
-        v34 = (__m128)LODWORD(v5->x);
-        v35 = (__m128)LODWORD(v5->y);
-        v32 = v27 * v31;
-        v33 = v28.m128_f32[0] * v31;
-        v29.m128_f32[0] = v29.m128_f32[0] * v31;
-        v34.m128_f32[0] = v34.m128_f32[0] - v5[2].x;
-        v35.m128_f32[0] = v35.m128_f32[0] - v5[2].y;
-        v36 = v5->z - v5[2].z;
-        v37 = v35;
-        v37.m128_f32[0] = (float)((float)(v35.m128_f32[0] * v35.m128_f32[0]) + (float)(v34.m128_f32[0] * v34.m128_f32[0]))
-                        + (float)(v36 * v36);
-        if ( v37.m128_f32[0] == 0.0 )
-          v38 = 0.0;
+          v32 = 1.0 / _mm_sqrt_ps(v31).m128_f32[0];
+        x_low = (__m128)LODWORD(mpVerts->x);
+        v36 = (__m128)LODWORD(mpVerts->y);
+        v33 = v28 * v32;
+        v34 = v29.m128_f32[0] * v32;
+        v30.m128_f32[0] = v30.m128_f32[0] * v32;
+        x_low.m128_f32[0] = x_low.m128_f32[0] - mpVerts[2].x;
+        v36.m128_f32[0] = v36.m128_f32[0] - mpVerts[2].y;
+        v37 = mpVerts->z - mpVerts[2].z;
+        v38 = v36;
+        v38.m128_f32[0] = (float)((float)(v36.m128_f32[0] * v36.m128_f32[0])
+                                + (float)(x_low.m128_f32[0] * x_low.m128_f32[0]))
+                        + (float)(v37 * v37);
+        if ( v38.m128_f32[0] == 0.0 )
+          v39 = 0.0;
         else
-          v38 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v37));
-        v34.m128_f32[0] = v34.m128_f32[0] * v38;
-        v39 = v35.m128_f32[0] * v38;
-        v40 = v36 * v38;
-        v42 = v29;
-        v41 = (float)(v33 * v26) - (float)(v29.m128_f32[0] * v25);
-        v42.m128_f32[0] = (float)(v29.m128_f32[0] * v24) - (float)(v32 * v26);
-        v43 = (float)(v32 * v25) - (float)(v33 * v24);
-        *(float *)&v116 = (float)(v42.m128_f32[0] * v42.m128_f32[0]) + (float)(v41 * v41);
-        v44 = (__m128)v116;
-        v44.m128_f32[0] = *(float *)&v116 + (float)(v43 * v43);
-        if ( v44.m128_f32[0] == 0.0 )
-          v45 = 0.0;
+          v39 = 1.0 / _mm_sqrt_ps(v38).m128_f32[0];
+        x_low.m128_f32[0] = x_low.m128_f32[0] * v39;
+        v40 = v36.m128_f32[0] * v39;
+        v41 = v37 * v39;
+        v43 = v30;
+        v42 = (float)(v34 * v27) - (float)(v30.m128_f32[0] * v26);
+        v43.m128_f32[0] = (float)(v30.m128_f32[0] * v25) - (float)(v33 * v27);
+        v44 = (float)(v33 * v26) - (float)(v34 * v25);
+        *(float *)&v116 = (float)(v43.m128_f32[0] * v43.m128_f32[0]) + (float)(v42 * v42);
+        v45 = (__m128)v116;
+        v45.m128_f32[0] = *(float *)&v116 + (float)(v44 * v44);
+        if ( v45.m128_f32[0] == 0.0 )
+          v46 = 0.0;
         else
-          v45 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v44));
-        v46 = v41 * v45;
-        v47 = v42.m128_f32[0] * v45;
-        v48 = v43 * v45;
-        v49 = (float)(v39 * v29.m128_f32[0]) - (float)(v40 * v33);
-        v115 = (float)(v39 * v29.m128_f32[0]) - (float)(v40 * v33);
-        v50 = v34.m128_f32[0] * v29.m128_f32[0];
-        v51 = (__m128)COERCE_UNSIGNED_INT(v40 * v32);
-        v51.m128_f32[0] = v51.m128_f32[0] - v50;
-        v52 = v39 * v32;
-        v54 = v51;
-        v53 = (float)(v34.m128_f32[0] * v33) - v52;
-        v54.m128_f32[0] = (float)((float)(v51.m128_f32[0] * v51.m128_f32[0]) + (float)(v49 * v49)) + (float)(v53 * v53);
-        if ( v54.m128_f32[0] == 0.0 )
-          v55 = 0.0;
+          v46 = 1.0 / _mm_sqrt_ps(v45).m128_f32[0];
+        v47 = v42 * v46;
+        v48 = v43.m128_f32[0] * v46;
+        v49 = v44 * v46;
+        v50 = (float)(v40 * v30.m128_f32[0]) - (float)(v41 * v34);
+        v115 = v50;
+        v51 = x_low.m128_f32[0] * v30.m128_f32[0];
+        v52 = (__m128)COERCE_UNSIGNED_INT(v41 * v33);
+        v52.m128_f32[0] = v52.m128_f32[0] - v51;
+        v53 = v40 * v33;
+        v55 = v52;
+        v54 = (float)(x_low.m128_f32[0] * v34) - v53;
+        v55.m128_f32[0] = (float)((float)(v52.m128_f32[0] * v52.m128_f32[0]) + (float)(v50 * v50)) + (float)(v54 * v54);
+        if ( v55.m128_f32[0] == 0.0 )
+          v56 = 0.0;
         else
-          v55 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v54));
-        v56 = v55;
-        v57 = v55;
-        v58 = v55 * v53;
-        v63 = v34;
-        v59 = v48 + v58;
-        v60 = v47 + (float)(v56 * v51.m128_f32[0]);
-        v61 = v39;
-        v62 = v46 + (float)(v57 * v115);
-        v63.m128_f32[0] = (float)(v34.m128_f32[0] * v26) - (float)(v40 * v24);
-        v64 = (float)(v39 * v24) - (float)(v34.m128_f32[0] * v25);
-        v66 = v63;
-        v65 = (float)(v40 * v25) - (float)(v61 * v26);
-        v66.m128_f32[0] = (float)((float)(v63.m128_f32[0] * v63.m128_f32[0]) + (float)(v65 * v65)) + (float)(v64 * v64);
-        if ( v66.m128_f32[0] == 0.0 )
-          v67 = 0.0;
+          v56 = 1.0 / _mm_sqrt_ps(v55).m128_f32[0];
+        v57 = v56;
+        v58 = v56;
+        v59 = v56 * v54;
+        v64 = x_low;
+        v60 = v49 + v59;
+        v61 = v48 + (float)(v57 * v52.m128_f32[0]);
+        v62 = v40;
+        v63 = v47 + (float)(v58 * v115);
+        v64.m128_f32[0] = (float)(x_low.m128_f32[0] * v27) - (float)(v41 * v25);
+        v65 = (float)(v40 * v25) - (float)(x_low.m128_f32[0] * v26);
+        v67 = v64;
+        v66 = (float)(v41 * v26) - (float)(v62 * v27);
+        v67.m128_f32[0] = (float)((float)(v64.m128_f32[0] * v64.m128_f32[0]) + (float)(v66 * v66)) + (float)(v65 * v65);
+        if ( v67.m128_f32[0] == 0.0 )
+          v68 = 0.0;
         else
-          v67 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v66));
-        v68 = v59 + (float)(v64 * v67);
-        v69 = v62 + (float)(v65 * v67);
-        v42.m128_f32[0] = v60 + (float)(v63.m128_f32[0] * v67);
-        if ( v68 < 0.0 )
-          v21 = FLOAT_N1_0;
-        v70 = v42;
-        v70.m128_f32[0] = (float)((float)(v42.m128_f32[0] * v42.m128_f32[0]) + (float)(v69 * v69)) + (float)(v68 * v68);
-        v71 = v21 / COERCE_FLOAT(_mm_sqrt_ps(v70));
-        v14 = v69 * v71;
-        v17 = v42.m128_f32[0] * v71;
-        v16 = v71 * v68;
+          v68 = 1.0 / _mm_sqrt_ps(v67).m128_f32[0];
+        v69 = v60 + (float)(v65 * v68);
+        v70 = v63 + (float)(v66 * v68);
+        v43.m128_f32[0] = v61 + (float)(v64.m128_f32[0] * v68);
+        if ( v69 < 0.0 )
+          v22 = FLOAT_N1_0;
+        v71 = v43;
+        v71.m128_f32[0] = (float)((float)(v43.m128_f32[0] * v43.m128_f32[0]) + (float)(v70 * v70)) + (float)(v69 * v69);
+        v72 = v22 / _mm_sqrt_ps(v71).m128_f32[0];
+        x = v70 * v72;
+        y = v43.m128_f32[0] * v72;
+        z = v72 * v69;
       }
     }
-    this->mNormal.x = v14;
-    this->mNormal.y = v17;
-    this->mNormal.z = v16;
+    this->mNormal.x = x;
+    this->mNormal.y = y;
+    this->mNormal.z = z;
   }
-  v72 = this->mpVerts;
-  v73 = this->mVertCount;
-  this->mOrigDist = (float)((float)(v72->y * this->mNormal.y) + (float)(v72->x * this->mNormal.x))
-                  + (float)(v72->z * this->mNormal.z);
-  if ( (_DWORD)v73 )
+  v73 = this->mpVerts;
+  v74 = this->mVertCount;
+  this->mOrigDist = (float)((float)(v73->y * this->mNormal.y) + (float)(v73->x * this->mNormal.x))
+                  + (float)(v73->z * this->mNormal.z);
+  if ( (_DWORD)v74 )
   {
-    v74 = this->mExtentAbove;
-    v75 = this->mExtentBelow;
-    v76 = v74;
-    v77 = this->mExtentAbove;
-    v78 = v74 * this->mNormal.z;
-    v79 = (unsigned __int64)&v72[v73];
-    v80 = &v72->z;
-    v81 = v75;
-    v82 = v76 * v2->mNormal.x;
-    v83 = v77 * v2->mNormal.y;
-    v84 = v75 * v2->mNormal.z;
-    v85 = v78 + v72->z;
-    v86 = v83 + v72->y;
-    v87 = v81 * v2->mNormal.x;
-    v88 = v2->mExtentBelow * v2->mNormal.y;
-    v2->mBoundingBox.mMax.x = v82 + v72->x;
-    v2->mBoundingBox.mMax.y = v86;
-    v2->mBoundingBox.mMax.z = v85;
-    v89 = v88 + v72->y;
-    v90 = v84 + v72->z;
-    v2->mBoundingBox.mMin.x = v87 + v72->x;
-    v2->mBoundingBox.mMin.y = v89;
-    v2->mBoundingBox.mMin.z = v90;
-    if ( (unsigned __int64)v72 < v79 )
+    mExtentBelow = this->mExtentBelow;
+    mExtentAbove = this->mExtentAbove;
+    v77 = mExtentAbove;
+    v78 = mExtentAbove * this->mNormal.z;
+    v79 = (unsigned __int64)&v73[v74];
+    p_z = &v73->z;
+    v81 = mExtentBelow;
+    v82 = mExtentAbove * this->mNormal.x;
+    v83 = v77 * this->mNormal.y;
+    v84 = mExtentBelow * this->mNormal.z;
+    v85 = v78 + v73->z;
+    v86 = v83 + v73->y;
+    v87 = v81 * this->mNormal.x;
+    v88 = this->mExtentBelow * this->mNormal.y;
+    this->mBoundingBox.mMax.x = v82 + v73->x;
+    this->mBoundingBox.mMax.y = v86;
+    this->mBoundingBox.mMax.z = v85;
+    v89 = v88 + v73->y;
+    v90 = v84 + v73->z;
+    this->mBoundingBox.mMin.x = v87 + v73->x;
+    this->mBoundingBox.mMin.y = v89;
+    this->mBoundingBox.mMin.z = v90;
+    if ( (unsigned __int64)v73 < v79 )
     {
       do
       {
-        v91 = v2->mBoundingBox.mMax.x;
-        v92 = v83 + *(v80 - 1);
-        v93 = v78 + *v80;
-        if ( v91 <= (float)(v82 + *(v80 - 2)) )
-          v91 = v82 + *(v80 - 2);
-        v2->mBoundingBox.mMax.x = v91;
-        v94 = v2->mBoundingBox.mMax.y;
+        v91 = this->mBoundingBox.mMax.x;
+        v92 = v83 + *(p_z - 1);
+        v93 = v78 + *p_z;
+        if ( v91 <= (float)(v82 + *(p_z - 2)) )
+          v91 = v82 + *(p_z - 2);
+        this->mBoundingBox.mMax.x = v91;
+        v94 = this->mBoundingBox.mMax.y;
         if ( v94 <= v92 )
           v94 = v92;
-        v2->mBoundingBox.mMax.y = v94;
-        v95 = v2->mBoundingBox.mMax.z;
+        this->mBoundingBox.mMax.y = v94;
+        v95 = this->mBoundingBox.mMax.z;
         if ( v95 <= v93 )
           v95 = v93;
-        v2->mBoundingBox.mMax.z = v95;
-        v96 = v2->mBoundingBox.mMin.x;
-        v97 = v88 + *(v80 - 1);
-        v98 = v84 + *v80;
-        if ( v96 >= (float)(v87 + *(v80 - 2)) )
-          v96 = v87 + *(v80 - 2);
-        v2->mBoundingBox.mMin.x = v96;
-        v99 = v2->mBoundingBox.mMin.y;
+        this->mBoundingBox.mMax.z = v95;
+        v96 = this->mBoundingBox.mMin.x;
+        v97 = v88 + *(p_z - 1);
+        v98 = v84 + *p_z;
+        if ( v96 >= (float)(v87 + *(p_z - 2)) )
+          v96 = v87 + *(p_z - 2);
+        this->mBoundingBox.mMin.x = v96;
+        v99 = this->mBoundingBox.mMin.y;
         if ( v99 >= v97 )
           v99 = v97;
-        v2->mBoundingBox.mMin.y = v99;
-        v100 = v2->mBoundingBox.mMin.z;
+        this->mBoundingBox.mMin.y = v99;
+        v100 = this->mBoundingBox.mMin.z;
         if ( v100 >= v98 )
           v100 = v98;
-        v80 += 3;
-        v2->mBoundingBox.mMin.z = v100;
+        p_z += 3;
+        this->mBoundingBox.mMin.z = v100;
       }
-      while ( (unsigned __int64)(v80 - 2) < v79 );
+      while ( (unsigned __int64)(p_z - 2) < v79 );
     }
   }
   else
@@ -1975,26 +1929,30 @@ void __fastcall UFG::RegionPolygon::RecalcCachedValues(UFG::RegionPolygon *this,
     this->mBoundingBox.mMax.y = v102;
     this->mBoundingBox.mMax.z = v103;
   }
-  v104 = v2->mBoundingBox.mMin.y;
-  v105 = v2->mBoundingBox.mMin.z;
-  v2->mCenter.x = v2->mBoundingBox.mMin.x;
-  v2->mCenter.y = v104;
-  v2->mCenter.z = v105;
-  v106 = (float)(v104 + v2->mBoundingBox.mMax.y) * 0.5;
-  v107 = v105 + v2->mBoundingBox.mMax.z;
-  v108 = v2->mBoundingBox.mMax.x;
-  v2->mCenter.y = v106;
+  v104 = this->mBoundingBox.mMin.y;
+  v105 = this->mBoundingBox.mMin.z;
+  this->mCenter.x = this->mBoundingBox.mMin.x;
+  this->mCenter.y = v104;
+  this->mCenter.z = v105;
+  v106 = (float)(v104 + this->mBoundingBox.mMax.y) * 0.5;
+  v107 = v105 + this->mBoundingBox.mMax.z;
+  v108 = this->mBoundingBox.mMax.x;
+  this->mCenter.y = v106;
   v109 = v107 * 0.5;
-  v110 = v108 + v2->mCenter.x;
-  v2->mCenter.z = v109;
+  v110 = v108 + this->mCenter.x;
+  this->mCenter.z = v109;
   v111 = v110 * 0.5;
-  v2->mCenter.x = v111;
-  v112 = (float)((float)((float)(v111 * v2->mNormal.x) + (float)(v106 * v2->mNormal.y)) + (float)(v109 * v2->mNormal.z))
-       - v2->mOrigDist;
-  v113 = v112 * v2->mNormal.x;
-  v114 = v112 * v2->mNormal.y;
-  v2->mCenter.z = v109 - (float)(v112 * v2->mNormal.z);
-  v2->mCenter.x = v111 - v113;
-  v2->mCenter.y = v106 - v114;
+  this->mCenter.x = v111;
+  v112 = (float)((float)((float)(v111 * this->mNormal.x) + (float)(v106 * this->mNormal.y))
+               + (float)(v109 * this->mNormal.z))
+       - this->mOrigDist;
+  v113 = v112 * this->mNormal.x;
+  v114 = v112 * this->mNormal.y;
+  this->mCenter.z = v109 - (float)(v112 * this->mNormal.z);
+  this->mCenter.x = v111 - v113;
+  this->mCenter.y = v106 - v114;
+}r.z = v109 - (float)(v112 * this->mNormal.z);
+  this->mCenter.x = v111 - v113;
+  this->mCenter.y = v106 - v114;
 }
 

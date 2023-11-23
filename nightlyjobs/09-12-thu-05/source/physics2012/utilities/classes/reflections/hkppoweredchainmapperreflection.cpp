@@ -98,17 +98,17 @@ hkClass *__fastcall hkpPoweredChainMapper::staticClass()
 
 // File Line: 165
 // RVA: 0xE0B4F0
-void __fastcall finishLoadedObjecthkpPoweredChainMapper(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpPoweredChainMapper(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpPoweredChainMapper::`vftable;
+    *p = &hkpPoweredChainMapper::`vftable;
 }
 
 // File Line: 171
 // RVA: 0xE0B510
-void __fastcall cleanupLoadedObjecthkpPoweredChainMapper(void *p)
+void __fastcall cleanupLoadedObjecthkpPoweredChainMapper(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 175
@@ -129,8 +129,8 @@ void **dynamic_initializer_for__hkpPoweredChainMapperTypeInfo__()
   hkpPoweredChainMapperTypeInfo.m_typeName = "hkpPoweredChainMapper";
   hkpPoweredChainMapperTypeInfo.m_vtable = result;
   hkpPoweredChainMapperTypeInfo.m_scopedName = "!hkpPoweredChainMapper";
-  hkpPoweredChainMapperTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpPoweredChainMapper;
-  hkpPoweredChainMapperTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpPoweredChainMapper;
+  hkpPoweredChainMapperTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpPoweredChainMapper;
+  hkpPoweredChainMapperTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpPoweredChainMapper;
   return result;
 }
 

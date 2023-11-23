@@ -10,10 +10,10 @@ void __fastcall hkProcess::getConsumableCommands(hkProcess *this, char **command
 // RVA: 0xC3F840
 bool __fastcall hkProcess::isOk(hkProcess *this)
 {
-  hkDisplaySerializeOStream *v1; // rcx
-  hkBool result; // [rsp+30h] [rbp+8h]
+  hkDisplaySerializeOStream *m_outStream; // rcx
+  hkBool result; // [rsp+30h] [rbp+8h] BYREF
 
-  v1 = this->m_outStream;
-  return v1 && hkOArchive::isOk((hkOArchive *)&v1->vfptr, &result)->m_bool;
+  m_outStream = this->m_outStream;
+  return m_outStream && hkOArchive::isOk(m_outStream, &result)->m_bool;
 }
 

@@ -10,19 +10,18 @@ void __fastcall Scaleform::Log::~Log(Scaleform::Log *this)
 
 // File Line: 56
 // RVA: 0x998C80
-void Scaleform::Log::LogMessageById(Scaleform::GFx::LogState *this, __int64 messageType, const char *pfmt, ...)
+void Scaleform::Log::LogMessageById(Scaleform::GFx::LogState *this, int *messageType, const char *pfmt, ...)
 {
-  int v3; // [rsp+20h] [rbp-18h]
-  va_list va; // [rsp+58h] [rbp+20h]
+  int v3[6]; // [rsp+20h] [rbp-18h] BYREF
+  va_list va; // [rsp+58h] [rbp+20h] BYREF
 
   va_start(va, pfmt);
-  v3 = *(_DWORD *)messageType;
-  ((void (__fastcall *)(Scaleform::GFx::LogState *, int *, const char *, __int64 *, _QWORD))this->vfptr[1].__vecDelDtor)(
+  v3[0] = *messageType;
+  ((void (__fastcall *)(Scaleform::GFx::LogState *, int *, const char *, __int64 *))this->Scaleform::GFx::State::Scaleform::RefCountBase<Scaleform::GFx::State,2>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountImpl,2>::Scaleform::RefCountImpl::Scaleform::RefCountImplCore::vfptr[1].__vecDelDtor)(
     this,
-    &v3,
+    v3,
     pfmt,
-    (__int64 *)va,
-    *(_QWORD *)&v3);
+    (__int64 *)va);
 }
 
 // File Line: 116
@@ -36,7 +35,7 @@ Scaleform::Log *__fastcall Scaleform::Log::GetGlobalLog()
 // RVA: 0x982C60
 Scaleform::Log *__fastcall Scaleform::Log::GetDefaultLog()
 {
-  if ( !(_S1_31 & 1) )
+  if ( (_S1_31 & 1) == 0 )
   {
     _S1_31 |= 1u;
     defaultLog.RefCount = 1;

@@ -13,7 +13,7 @@ BinString *__fastcall SubtitleTrack::Create()
   v1->mOffset = (__int64)&Track<SubtitleTask>::`vftable;
   v1->mOffset = (__int64)&SubtitleTrack::`vftable;
   v1[7].mOffset = 1i64;
-  BinString::Set(v1 + 7, &customWorldMapCaption);
+  BinString::Set(v1 + 7, &customCaption);
   return v1;
 }
 
@@ -32,7 +32,7 @@ BinString *__fastcall SubtitleGroupTrack::Create()
   v1->mOffset = (__int64)&Track<SubtitleGroupTask>::`vftable;
   v1->mOffset = (__int64)&SubtitleGroupTrack::`vftable;
   v1[7].mOffset = 1i64;
-  BinString::Set(v1 + 7, &customWorldMapCaption);
+  BinString::Set(v1 + 7, &customCaption);
   return v1;
 }
 
@@ -70,13 +70,13 @@ AudioTrackNIS *__fastcall AudioTrackNIS::Create()
   v1 = result;
   if ( result )
   {
-    ITrack::ITrack((ITrack *)&result->vfptr, AudioTrackNIS::sClassNameUID);
+    ITrack::ITrack(result, AudioTrackNIS::sClassNameUID);
     v1->vfptr = (Expression::IMemberMapVtbl *)&Track<AudioTaskNIS>::`vftable;
     v1->vfptr = (Expression::IMemberMapVtbl *)&AudioTrackNIS::`vftable;
     *(_QWORD *)v1->m_audioTagId = 0i64;
     *(_QWORD *)v1->m_audioTagUID = 0i64;
     v1->mMaster = 1;
-    result = v1;
+    return v1;
   }
   return result;
 }

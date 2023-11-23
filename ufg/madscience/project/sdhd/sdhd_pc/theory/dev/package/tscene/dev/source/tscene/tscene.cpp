@@ -3,6 +3,6 @@
 __int64 dynamic_initializer_for__UFG::tScenePrinter::sEmptyLogFile__()
 {
   UFG::qLogFile::qLogFile(&UFG::tScenePrinter::sEmptyLogFile);
-  return atexit(dynamic_atexit_destructor_for__UFG::tScenePrinter::sEmptyLogFile__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::tScenePrinter::sEmptyLogFile__);
 }
 

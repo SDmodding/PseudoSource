@@ -28,17 +28,17 @@ hkClass *__fastcall hkaiDuckUnderAnalyzer::staticClass()
 
 // File Line: 65
 // RVA: 0xC322B0
-void __fastcall finishLoadedObjecthkaiDuckUnderAnalyzer(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiDuckUnderAnalyzer(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkaiDuckUnderAnalyzer::`vftable;
+    *p = &hkaiDuckUnderAnalyzer::`vftable;
 }
 
 // File Line: 71
 // RVA: 0xC322D0
-void __fastcall cleanupLoadedObjecthkaiDuckUnderAnalyzer(void *p)
+void __fastcall cleanupLoadedObjecthkaiDuckUnderAnalyzer(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 75
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkaiDuckUnderAnalyzerTypeInfo__()
   hkaiDuckUnderAnalyzerTypeInfo.m_typeName = "hkaiDuckUnderAnalyzer";
   hkaiDuckUnderAnalyzerTypeInfo.m_vtable = result;
   hkaiDuckUnderAnalyzerTypeInfo.m_scopedName = "!hkaiDuckUnderAnalyzer";
-  hkaiDuckUnderAnalyzerTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiDuckUnderAnalyzer;
-  hkaiDuckUnderAnalyzerTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiDuckUnderAnalyzer;
+  hkaiDuckUnderAnalyzerTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiDuckUnderAnalyzer;
+  hkaiDuckUnderAnalyzerTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiDuckUnderAnalyzer;
   return result;
 }
 

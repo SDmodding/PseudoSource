@@ -4,7 +4,7 @@ void __cdecl __noreturn abort()
 {
   if ( _get_sigabrt() )
     raise(22);
-  if ( _abort_behavior & 2 )
+  if ( (_abort_behavior & 2) != 0 )
   {
     if ( IsProcessorFeaturePresent_0(0x17u) )
       __fastfail(7u);

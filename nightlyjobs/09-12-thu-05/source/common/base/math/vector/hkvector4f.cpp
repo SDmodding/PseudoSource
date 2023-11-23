@@ -82,8 +82,8 @@ void __fastcall hkVector4f::setTransformedPos(hkVector4f *this, hkQsTransformf *
 
   v3.m_vec.m_quad = (__m128)a->m_rotation;
   v4 = _mm_mul_ps(b->m_quad, a->m_scale.m_quad);
-  v5 = _mm_mul_ps(a->m_rotation.m_vec.m_quad, v4);
-  v6 = _mm_shuffle_ps(a->m_rotation.m_vec.m_quad, v3.m_vec.m_quad, 255);
+  v5 = _mm_mul_ps(v3.m_vec.m_quad, v4);
+  v6 = _mm_shuffle_ps(v3.m_vec.m_quad, v3.m_vec.m_quad, 255);
   v7 = _mm_sub_ps(
          _mm_mul_ps(_mm_shuffle_ps(v4, v4, 201), v3.m_vec.m_quad),
          _mm_mul_ps(_mm_shuffle_ps(v3.m_vec.m_quad, v3.m_vec.m_quad, 201), v4));
@@ -112,8 +112,8 @@ void __fastcall hkVector4f::setTransformedInversePos(hkVector4f *this, hkQsTrans
 
   v3.m_vec.m_quad = (__m128)a->m_rotation;
   v4 = _mm_sub_ps(b->m_quad, a->m_translation.m_quad);
-  v5 = _mm_shuffle_ps(a->m_rotation.m_vec.m_quad, v3.m_vec.m_quad, 255);
-  v6 = _mm_mul_ps(a->m_rotation.m_vec.m_quad, v4);
+  v5 = _mm_shuffle_ps(v3.m_vec.m_quad, v3.m_vec.m_quad, 255);
+  v6 = _mm_mul_ps(v3.m_vec.m_quad, v4);
   v7 = _mm_sub_ps(
          _mm_mul_ps(_mm_shuffle_ps(v3.m_vec.m_quad, v3.m_vec.m_quad, 201), v4),
          _mm_mul_ps(_mm_shuffle_ps(v4, v4, 201), v3.m_vec.m_quad));

@@ -28,36 +28,32 @@ hkClass *__fastcall hkxMesh::UserChannelInfo::staticClass()
 
 // File Line: 66
 // RVA: 0xE325E0
-void __fastcall finishLoadedObjecthkxMeshUserChannelInfo(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxMeshUserChannelInfo(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
-  hkStringPtr *v2; // rbx
   hkStringPtr *v3; // rcx
-  int v4; // edi
 
   if ( p )
   {
-    v2 = (hkStringPtr *)p;
-    v3 = (hkStringPtr *)((char *)p + 32);
+    v3 = p + 4;
     v3[-4].m_stringAndFlag = (const char *)&hkxMesh::UserChannelInfo::`vftable;
-    v4 = finishing;
-    hkStringPtr::hkStringPtr(v3, (hkFinishLoadedObjectFlag)finishing);
-    hkStringPtr::hkStringPtr(v2 + 5, (hkFinishLoadedObjectFlag)v4);
+    hkStringPtr::hkStringPtr(v3, finishing);
+    hkStringPtr::hkStringPtr(p + 5, finishing);
   }
 }
 
 // File Line: 72
 // RVA: 0xE32630
-void __fastcall cleanupLoadedObjecthkxMeshUserChannelInfo(void *p)
+void __fastcall cleanupLoadedObjecthkxMeshUserChannelInfo(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 76
 // RVA: 0xE32640
 void **__fastcall getVtablehkxMeshUserChannelInfo()
 {
-  hkStringPtr v1; // [rsp+40h] [rbp-18h]
-  hkStringPtr v2; // [rsp+48h] [rbp-10h]
+  hkStringPtr v1; // [rsp+40h] [rbp-18h] BYREF
+  hkStringPtr v2; // [rsp+48h] [rbp-10h] BYREF
 
   hkStringPtr::hkStringPtr(&v1, 0);
   hkStringPtr::hkStringPtr(&v2, 0);
@@ -75,8 +71,8 @@ void **dynamic_initializer_for__hkxMeshUserChannelInfoTypeInfo__()
   hkxMeshUserChannelInfoTypeInfo.m_typeName = "hkxMeshUserChannelInfo";
   hkxMeshUserChannelInfoTypeInfo.m_vtable = result;
   hkxMeshUserChannelInfoTypeInfo.m_scopedName = "!hkxMesh::UserChannelInfo";
-  hkxMeshUserChannelInfoTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxMeshUserChannelInfo;
-  hkxMeshUserChannelInfoTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxMeshUserChannelInfo;
+  hkxMeshUserChannelInfoTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxMeshUserChannelInfo;
+  hkxMeshUserChannelInfoTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxMeshUserChannelInfo;
   return result;
 }
 
@@ -98,7 +94,7 @@ void dynamic_initializer_for__hkxMeshClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 129
@@ -110,23 +106,24 @@ hkClass *__fastcall hkxMesh::staticClass()
 
 // File Line: 136
 // RVA: 0xE32680
-void __fastcall finishLoadedObjecthkxMesh(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxMesh(hkxMesh *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkxMesh::hkxMesh);
+  if ( p )
+    hkxMesh::hkxMesh(p, finishing);
 }
 
 // File Line: 142
 // RVA: 0xE326A0
-void __fastcall cleanupLoadedObjecthkxMesh(void *p)
+void __fastcall cleanupLoadedObjecthkxMesh(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 146
 // RVA: 0xE326B0
 hkBaseObjectVtbl *__fastcall getVtablehkxMesh()
 {
-  hkxMesh v1; // [rsp+20h] [rbp-38h]
+  hkxMesh v1; // [rsp+20h] [rbp-38h] BYREF
 
   hkxMesh::hkxMesh(&v1, 0);
   return v1.vfptr;
@@ -143,8 +140,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkxMeshTypeInfo__()
   hkxMeshTypeInfo.m_typeName = "hkxMesh";
   hkxMeshTypeInfo.m_vtable = result;
   hkxMeshTypeInfo.m_scopedName = "!hkxMesh";
-  hkxMeshTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxMesh;
-  hkxMeshTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxMesh;
+  hkxMeshTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxMesh;
+  hkxMeshTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxMesh;
   return result;
 }
 

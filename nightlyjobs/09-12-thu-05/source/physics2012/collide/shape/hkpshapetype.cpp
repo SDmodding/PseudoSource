@@ -2,30 +2,27 @@
 // RVA: 0xD19AC0
 void __fastcall hkpRegisterAlternateShapeTypes(hkpCollisionDispatcher *dis)
 {
-  hkpCollisionDispatcher *v1; // rbx
-
-  v1 = dis;
-  hkpCollisionDispatcher::registerAlternateShapeType(dis, 0, CONVEX);
-  hkpCollisionDispatcher::registerAlternateShapeType(v1, TRIANGLE, CONVEX);
-  hkpCollisionDispatcher::registerAlternateShapeType(v1, BOX, CONVEX);
-  hkpCollisionDispatcher::registerAlternateShapeType(v1, CAPSULE, CONVEX);
-  hkpCollisionDispatcher::registerAlternateShapeType(v1, CYLINDER, CONVEX);
-  hkpCollisionDispatcher::registerAlternateShapeType(v1, CONVEX_VERTICES, CONVEX);
-  hkpCollisionDispatcher::registerAlternateShapeType(v1, CONVEX_TRANSLATE, CONVEX);
-  hkpCollisionDispatcher::registerAlternateShapeType(v1, CONVEX_TRANSFORM, CONVEX);
-  hkpCollisionDispatcher::registerAlternateShapeType(v1, CONVEX_PIECE, CONVEX);
-  hkpCollisionDispatcher::registerAlternateShapeType(v1, TRIANGLE_COLLECTION, COLLECTION);
-  hkpCollisionDispatcher::registerAlternateShapeType(v1, LIST, COLLECTION);
-  hkpCollisionDispatcher::registerAlternateShapeType(v1, EXTENDED_MESH, COLLECTION);
-  hkpCollisionDispatcher::registerAlternateShapeType(v1, COMPRESSED_MESH, COLLECTION);
-  hkpCollisionDispatcher::registerAlternateShapeType(v1, TRI_SAMPLED_HEIGHT_FIELD_COLLECTION, COLLECTION);
-  hkpCollisionDispatcher::registerAlternateShapeType(v1, MOPP, BV_TREE);
-  hkpCollisionDispatcher::registerAlternateShapeType(v1, STATIC_COMPOUND, BV_TREE);
-  hkpCollisionDispatcher::registerAlternateShapeType(v1, BV_COMPRESSED_MESH, BV_TREE);
-  hkpCollisionDispatcher::registerAlternateShapeType(v1, TRI_SAMPLED_HEIGHT_FIELD_BV_TREE, BV_TREE);
-  hkpCollisionDispatcher::registerAlternateShapeType(v1, CONVEX, SPHERE_REP);
-  hkpCollisionDispatcher::registerAlternateShapeType(v1, PLANE, HEIGHT_FIELD);
-  hkpCollisionDispatcher::registerAlternateShapeType(v1, SAMPLED_HEIGHT_FIELD, HEIGHT_FIELD);
+  hkpCollisionDispatcher::registerAlternateShapeType(dis, SPHERE, CONVEX);
+  hkpCollisionDispatcher::registerAlternateShapeType(dis, TRIANGLE, CONVEX);
+  hkpCollisionDispatcher::registerAlternateShapeType(dis, BOX, CONVEX);
+  hkpCollisionDispatcher::registerAlternateShapeType(dis, CAPSULE, CONVEX);
+  hkpCollisionDispatcher::registerAlternateShapeType(dis, CYLINDER, CONVEX);
+  hkpCollisionDispatcher::registerAlternateShapeType(dis, CONVEX_VERTICES, CONVEX);
+  hkpCollisionDispatcher::registerAlternateShapeType(dis, CONVEX_TRANSLATE, CONVEX);
+  hkpCollisionDispatcher::registerAlternateShapeType(dis, CONVEX_TRANSFORM, CONVEX);
+  hkpCollisionDispatcher::registerAlternateShapeType(dis, CONVEX_PIECE, CONVEX);
+  hkpCollisionDispatcher::registerAlternateShapeType(dis, TRIANGLE_COLLECTION, COLLECTION);
+  hkpCollisionDispatcher::registerAlternateShapeType(dis, LIST, COLLECTION);
+  hkpCollisionDispatcher::registerAlternateShapeType(dis, EXTENDED_MESH, COLLECTION);
+  hkpCollisionDispatcher::registerAlternateShapeType(dis, COMPRESSED_MESH, COLLECTION);
+  hkpCollisionDispatcher::registerAlternateShapeType(dis, TRI_SAMPLED_HEIGHT_FIELD_COLLECTION, COLLECTION);
+  hkpCollisionDispatcher::registerAlternateShapeType(dis, MOPP, BV_TREE);
+  hkpCollisionDispatcher::registerAlternateShapeType(dis, STATIC_COMPOUND, BV_TREE);
+  hkpCollisionDispatcher::registerAlternateShapeType(dis, BV_COMPRESSED_MESH, BV_TREE);
+  hkpCollisionDispatcher::registerAlternateShapeType(dis, TRI_SAMPLED_HEIGHT_FIELD_BV_TREE, BV_TREE);
+  hkpCollisionDispatcher::registerAlternateShapeType(dis, CONVEX, SPHERE_REP);
+  hkpCollisionDispatcher::registerAlternateShapeType(dis, PLANE, HEIGHT_FIELD);
+  hkpCollisionDispatcher::registerAlternateShapeType(dis, SAMPLED_HEIGHT_FIELD, HEIGHT_FIELD);
 }
 
 // File Line: 45
@@ -34,117 +31,117 @@ const char *__fastcall hkGetShapeTypeName(hkcdShapeType::ShapeTypeEnum type)
 {
   const char *result; // rax
 
-  switch ( type + 1 )
+  switch ( type )
   {
-    case 0u:
+    case ALL_SHAPE_TYPES:
       result = "hkcdShapeType::ALL_SHAPE_TYPES";
       break;
-    case 1u:
+    case SPHERE:
       result = "hkcdShapeType::SPHERE";
       break;
-    case 2u:
+    case CYLINDER:
       result = "hkcdShapeType::CYLINDER";
       break;
-    case 3u:
+    case TRIANGLE:
       result = "hkcdShapeType::TRIANGLE";
       break;
-    case 4u:
+    case BOX:
       result = "hkcdShapeType::BOX";
       break;
-    case 5u:
+    case CAPSULE:
       result = "hkcdShapeType::CAPSULE";
       break;
-    case 6u:
+    case CONVEX_VERTICES:
       result = "hkcdShapeType::CONVEX_VERTICES";
       break;
-    case 7u:
+    case TRI_SAMPLED_HEIGHT_FIELD_COLLECTION:
       result = "hkcdShapeType::TRI_SAMPLED_HEIGHT_FIELD_COLLECTION";
       break;
-    case 8u:
+    case TRI_SAMPLED_HEIGHT_FIELD_BV_TREE:
       result = "hkcdShapeType::TRI_SAMPLED_HEIGHT_FIELD_BV_TREE";
       break;
-    case 9u:
+    case LIST:
       result = "hkcdShapeType::LIST";
       break;
-    case 0xAu:
+    case MOPP:
       result = "hkcdShapeType::MOPP";
       break;
-    case 0xBu:
+    case CONVEX_TRANSLATE:
       result = "hkcdShapeType::CONVEX_TRANSLATE";
       break;
-    case 0xCu:
+    case CONVEX_TRANSFORM:
       result = "hkcdShapeType::CONVEX_TRANSFORM";
       break;
-    case 0xDu:
+    case SAMPLED_HEIGHT_FIELD:
       result = "hkcdShapeType::SAMPLED_HEIGHT_FIELD";
       break;
-    case 0xEu:
+    case EXTENDED_MESH:
       result = "hkcdShapeType::EXTENDED_MESH";
       break;
-    case 0xFu:
+    case TRANSFORM:
       result = "hkcdShapeType::TRANSFORM";
       break;
-    case 0x10u:
+    case COMPRESSED_MESH:
       result = "hkcdShapeType::COMPRESSED_MESH";
       break;
-    case 0x11u:
+    case STATIC_COMPOUND:
       result = "hkcdShapeType::STATIC_COMPOUND";
       break;
-    case 0x12u:
+    case BV_COMPRESSED_MESH:
       result = "hkcdShapeType::BV_COMPRESSED_MESH";
       break;
-    case 0x13u:
+    case COLLECTION:
       result = "hkcdShapeType::COLLECTION";
       break;
-    case 0x14u:
+    case USER0:
       result = "hkcdShapeType::USER0";
       break;
-    case 0x15u:
+    case USER1:
       result = "hkcdShapeType::USER1";
       break;
-    case 0x16u:
+    case USER2:
       result = "hkcdShapeType::USER2";
       break;
-    case 0x17u:
+    case BV_TREE:
       result = "hkcdShapeType::BV_TREE";
       break;
-    case 0x18u:
+    case CONVEX:
       result = "hkcdShapeType::CONVEX";
       break;
-    case 0x19u:
+    case CONVEX_PIECE:
       result = "hkcdShapeType::CONVEX_PIECE";
       break;
-    case 0x1Au:
+    case MULTI_SPHERE:
       result = "hkcdShapeType::MULTI_SPHERE";
       break;
-    case 0x1Bu:
+    case CONVEX_LIST:
       result = "hkcdShapeType::CONVEX_LIST";
       break;
-    case 0x1Cu:
+    case TRIANGLE_COLLECTION:
       result = "hkcdShapeType::TRIANGLE_COLLECTION";
       break;
-    case 0x1Du:
+    case HEIGHT_FIELD:
       result = "hkcdShapeType::HEIGHT_FIELD";
       break;
-    case 0x1Eu:
+    case SPHERE_REP:
       result = "hkcdShapeType::SPHERE_REP";
       break;
-    case 0x1Fu:
+    case BV:
       result = "hkcdShapeType::BV";
       break;
-    case 0x20u:
+    case PLANE:
       result = "hkcdShapeType::PLANE";
       break;
-    case 0x21u:
+    case PHANTOM_CALLBACK:
       result = "hkcdShapeType::PHANTOM_CALLBACK";
       break;
-    case 0x22u:
+    case MULTI_RAY:
       result = "hkcdShapeType::MULTI_RAY";
       break;
-    case 0x23u:
+    case INVALID:
       result = "hkcdShapeType::INVALID";
       break;
-    case 0x24u:
+    case MAX_PPU_SHAPE_TYPE:
       result = "hkcdShapeType::MAX_PPU_SHAPE_TYPE";
       break;
     default:

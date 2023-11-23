@@ -6,6 +6,6 @@ __int64 UFG::_dynamic_initializer_for__UITurnHintIcon_NEXT_EXIT__()
 
   v0 = UFG::qStringHash32("NEXT_EXIT", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&UITurnHintIcon_NEXT_EXIT, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__UITurnHintIcon_NEXT_EXIT__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__UITurnHintIcon_NEXT_EXIT__);
 }
 

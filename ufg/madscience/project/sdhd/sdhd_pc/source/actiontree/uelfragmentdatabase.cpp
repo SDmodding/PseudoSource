@@ -2,36 +2,31 @@
 // RVA: 0x29EF80
 void __fastcall UELNode::~UELNode(UELNode *this)
 {
-  ActionNode *v1; // rbx
-  __int64 v2; // rax
+  __int64 mOffset; // rax
   __int64 v3; // rax
   BinPtrArray<ActionNode,0,0> *v4; // rcx
   char *v5; // rcx
 
-  v1 = (ActionNode *)this;
   this->vfptr = (Expression::IMemberMapVtbl *)&UELNode::`vftable;
-  v2 = this->mParent.mOffset;
-  if ( v2 && (UFG::qOffset64<UELGroupNode *> *)((char *)&this->mParent + v2) )
+  mOffset = this->mParent.mOffset;
+  if ( mOffset && (UFG::qOffset64<UELGroupNode *> *)((char *)&this->mParent + mOffset) )
   {
     v3 = this->mParent.mOffset;
     if ( v3 )
       v4 = (BinPtrArray<ActionNode,0,0> *)((char *)&this->mParent + v3);
     else
       v4 = 0i64;
-    BinPtrArray<UELNode,0,0>::Remove(v4 + 2, v1);
-    v1->mFirstCallback = 0i64;
-    v1->mFirstCallback = 0i64;
+    BinPtrArray<UELNode,0,0>::Remove(v4 + 2, (ActionNode *)this);
+    this->mParent.mOffset = 0i64;
+    this->mParent.mOffset = 0i64;
   }
-  if ( !(~LOBYTE(v1->mParent.mOffset) & 1) )
+  if ( (this->mHeader.mOffset & 1) != 0 && (this->mHeader.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v1->mParent.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v5 = (char *)&v1->mParent + (v1->mParent.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v5 != BinString::sEmptyString )
-        operator delete[](v5);
-    }
+    v5 = (char *)&this->mHeader + (this->mHeader.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v5 != BinString::sEmptyString )
+      operator delete[](v5);
   }
-  v1->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
+  this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
 }
 
 // File Line: 55
@@ -49,37 +44,33 @@ __int64 dynamic_initializer_for__UELFragmentNode::sClassNameUID__()
 // RVA: 0x298D20
 void __fastcall UELFragmentNode::UELFragmentNode(UELFragmentNode *this)
 {
-  UELFragmentNode *v1; // rbx
-  BinString *v2; // rcx
+  BinString *p_mHeader; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
   this->vfptr = (Expression::IMemberMapVtbl *)&UELNode::`vftable;
-  v2 = &this->mHeader;
-  v2->mOffset = 1i64;
-  BinString::Set(v2, &customWorldMapCaption);
-  v1->mParent.mOffset = 0i64;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&UELFragmentNode::`vftable;
-  v1->mBody.mOffset = 1i64;
-  BinString::Set(&v1->mBody, &customWorldMapCaption);
-  v1->mFragmentExpression.mOffset = 0i64;
+  p_mHeader = &this->mHeader;
+  p_mHeader->mOffset = 1i64;
+  BinString::Set(p_mHeader, &customCaption);
+  this->mParent.mOffset = 0i64;
+  this->vfptr = (Expression::IMemberMapVtbl *)&UELFragmentNode::`vftable;
+  this->mBody.mOffset = 1i64;
+  BinString::Set(&this->mBody, &customCaption);
+  this->mFragmentExpression.mOffset = 0i64;
 }
 
 // File Line: 69
 // RVA: 0x29EEE0
 void __fastcall UELFragmentNode::~UELFragmentNode(UELFragmentNode *this)
 {
-  UELFragmentNode *v1; // rbx
-  __int64 v2; // rax
+  __int64 mOffset; // rax
   __int64 v3; // rax
   char *v4; // rdi
   char *v5; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&UELFragmentNode::`vftable;
-  v2 = this->mFragmentExpression.mOffset;
-  if ( v2 && (UFG::qOffset64<UEL::FragmentExpression *> *)((char *)&this->mFragmentExpression + v2) )
+  mOffset = this->mFragmentExpression.mOffset;
+  if ( mOffset && (UFG::qOffset64<UEL::FragmentExpression *> *)((char *)&this->mFragmentExpression + mOffset) )
   {
     v3 = this->mFragmentExpression.mOffset;
     if ( v3 )
@@ -91,18 +82,15 @@ void __fastcall UELFragmentNode::~UELFragmentNode(UELFragmentNode *this)
         operator delete[](v4);
       }
     }
-    v1->mFragmentExpression.mOffset = 0i64;
+    this->mFragmentExpression.mOffset = 0i64;
   }
-  if ( !(~LOBYTE(v1->mBody.mOffset) & 1) )
+  if ( (this->mBody.mOffset & 1) != 0 && (this->mBody.mOffset & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v1->mBody.mOffset & 0xFFFFFFFFFFFFFFFEui64 )
-    {
-      v5 = (char *)&v1->mBody + (v1->mBody.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( v5 != BinString::sEmptyString )
-        operator delete[](v5);
-    }
+    v5 = (char *)&this->mBody + (this->mBody.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+    if ( v5 != BinString::sEmptyString )
+      operator delete[](v5);
   }
-  UELNode::~UELNode((UELNode *)&v1->vfptr);
+  UELNode::~UELNode(this);
 }
 
 // File Line: 120
@@ -122,7 +110,7 @@ const char *dynamic_initializer_for__sUELGroupNodeList__()
 __int64 dynamic_initializer_for__gUELGroupNodeFactory__()
 {
   Expression::MemberMapFactory::MemberMapFactory(&gUELGroupNodeFactory, sUELGroupNodeList, sUELGroupNodeListNum);
-  return atexit(dynamic_atexit_destructor_for__gUELGroupNodeFactory__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gUELGroupNodeFactory__);
 }
 
 // File Line: 127
@@ -140,42 +128,33 @@ __int64 dynamic_initializer_for__UELGroupNode::sClassNameUID__()
 // RVA: 0x298DB0
 void __fastcall UELGroupNode::UELGroupNode(UELGroupNode *this)
 {
-  UELGroupNode *v1; // rbx
-  BinString *v2; // rcx
+  BinString *p_mHeader; // rcx
 
-  v1 = this;
   this->vfptr = (Expression::IMemberMapVtbl *)&Expression::IMemberMap::`vftable;
   this->mResourceOwner = 0i64;
   this->vfptr = (Expression::IMemberMapVtbl *)&UELNode::`vftable;
-  v2 = &this->mHeader;
-  v2->mOffset = 1i64;
-  BinString::Set(v2, &customWorldMapCaption);
-  v1->mParent.mOffset = 0i64;
-  v1->vfptr = (Expression::IMemberMapVtbl *)&UELGroupNode::`vftable;
-  v1->mChildren.mCount = 0;
-  v1->mChildren.mData.mOffset = 0i64;
+  p_mHeader = &this->mHeader;
+  p_mHeader->mOffset = 1i64;
+  BinString::Set(p_mHeader, &customCaption);
+  this->mParent.mOffset = 0i64;
+  this->vfptr = (Expression::IMemberMapVtbl *)&UELGroupNode::`vftable;
+  this->mChildren.mCount = 0;
+  this->mChildren.mData.mOffset = 0i64;
 }
 
 // File Line: 187
 // RVA: 0x2DC940
 void __fastcall ConditionGroup::Serialize(ConditionGroup *this, IActionTreeSerializer *serializer)
 {
-  IActionTreeSerializer *v2; // r15
-  ConditionGroup *v3; // rsi
   unsigned int v4; // ebx
   char *v5; // r14
   char *v6; // rcx
   char *v7; // rdi
-  __int64 v8; // rax
-  __int64 v9; // [rsp+28h] [rbp-40h]
-  __int64 v10; // [rsp+30h] [rbp-38h]
-  __int64 v11; // [rsp+40h] [rbp-28h]
+  const char *v8; // rax
 
-  v2 = serializer;
-  v3 = this;
   v4 = 0;
   v5 = (char *)&this->mConditions.mData + this->mConditions.mData.mOffset;
-  if ( this->mConditions.mCount & 0x7FFFFFFF )
+  if ( (this->mConditions.mCount & 0x7FFFFFFF) != 0 )
   {
     do
     {
@@ -183,25 +162,22 @@ void __fastcall ConditionGroup::Serialize(ConditionGroup *this, IActionTreeSeria
       v7 = &v6[*(_QWORD *)v6];
       if ( v7 )
       {
-        v8 = (*(__int64 (__fastcall **)(char *))(*(_QWORD *)v7 + 32i64))(&v6[*(_QWORD *)v6]);
-        LODWORD(v11) = -1;
-        LODWORD(v10) = 0;
-        LODWORD(v9) = 1;
-        v2->vfptr->_PushObjectToSerialize(
-          v2,
+        v8 = (const char *)(*(__int64 (__fastcall **)(char *))(*(_QWORD *)v7 + 32i64))(&v6[*(_QWORD *)v6]);
+        serializer->vfptr->_PushObjectToSerialize(
+          serializer,
           v7,
           1u,
           (void (__fastcall *)(void *, unsigned int, IActionTreeSerializer *, const char *, unsigned int, void (__fastcall *)(IActionTreeSerializer *, void *)))_,
-          (const char *)v8,
-          (QUEUE_PRIORITY)v9,
-          v10,
+          v8,
+          PRIORITY_MEDIUM,
+          0,
           0i64,
-          v11,
+          -1u,
           0i64);
       }
       ++v4;
     }
-    while ( v4 < (v3->mConditions.mCount & 0x7FFFFFFFu) );
+    while ( v4 < (this->mConditions.mCount & 0x7FFFFFFFu) );
   }
 }
 
@@ -246,7 +222,7 @@ __int64 dynamic_initializer_for__gUELFragmentDatabaseFactory__()
     &gUELFragmentDatabaseFactory,
     sUELFragmentDatabaseList,
     sUELFragmentDatabaseListNum);
-  return atexit(dynamic_atexit_destructor_for__gUELFragmentDatabaseFactory__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gUELFragmentDatabaseFactory__);
 }
 
 // File Line: 326

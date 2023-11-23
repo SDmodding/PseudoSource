@@ -9,17 +9,17 @@ float __fastcall CAkVPLSrcNode::GetPitch(CAkVPLSrcNode *this)
 // RVA: 0xA667F0
 float __fastcall CAkVPLSrcNode::GetMakeupGain(CAkVPLSrcNode *this)
 {
-  CAkPBI *v1; // rdx
+  CAkPBI *m_pCtx; // rdx
   float v2; // xmm1_4
   float v3; // xmm1_4
   float v4; // xmm0_4
-  AkFileParser::AnalysisData *v5; // rax
+  AkFileParser::AnalysisData *m_pAnalysisData; // rax
 
-  v1 = this->m_pCtx;
-  v2 = v1->m_EffectiveParams.normalization.fMakeUpGain * 0.050000001;
+  m_pCtx = this->m_pCtx;
+  v2 = m_pCtx->m_EffectiveParams.normalization.fMakeUpGain * 0.050000001;
   if ( v2 >= -37.0 )
   {
-    if ( `AkMath::FastPow10::`4::`local static guard & 1 )
+    if ( (`AkMath::FastPow10::`4::`local static guard & 1) != 0 )
     {
       v4 = *(float *)&`AkMath::FastPow10::`4::SCALE;
     }
@@ -29,25 +29,23 @@ float __fastcall CAkVPLSrcNode::GetMakeupGain(CAkVPLSrcNode *this)
       `AkMath::FastPow10::`4::SCALE = LODWORD(FLOAT_2_7866352e7);
       `AkMath::FastPow10::`4::`local static guard |= 1u;
     }
-    v3 = (float)((float)((float)((float)(COERCE_FLOAT(
-                                           ((signed int)(float)((float)(v4 * v2) + 1065353200.0) & 0x7FFFFF)
-                                         + 1065353216)
+    v3 = (float)((float)((float)((float)(COERCE_FLOAT(((int)(float)((float)(v4 * v2) + 1065353200.0) & 0x7FFFFF) + 1065353216)
                                        * 0.32518977)
                                + 0.020805772)
-                       * COERCE_FLOAT(((signed int)(float)((float)(v4 * v2) + 1065353200.0) & 0x7FFFFF) + 1065353216))
+                       * COERCE_FLOAT(((int)(float)((float)(v4 * v2) + 1065353200.0) & 0x7FFFFF) + 1065353216))
                + 0.65304345)
-       * COERCE_FLOAT((signed int)(float)((float)(v4 * v2) + 1065353200.0) & 0xFF800000);
+       * COERCE_FLOAT((int)(float)((float)(v4 * v2) + 1065353200.0) & 0xFF800000);
   }
   else
   {
     v3 = 0.0;
   }
-  v5 = this->m_pAnalysisData;
-  if ( v5 )
+  m_pAnalysisData = this->m_pAnalysisData;
+  if ( m_pAnalysisData )
   {
-    v3 = v3 * v5->fDownmixNormalizationGain;
-    if ( *((_BYTE *)&v1->m_EffectiveParams.normalization + 4) & 1 )
-      v3 = v3 * v5->fLoudnessNormalizationGain;
+    v3 = v3 * m_pAnalysisData->fDownmixNormalizationGain;
+    if ( (*((_BYTE *)&m_pCtx->m_EffectiveParams.normalization + 4) & 1) != 0 )
+      return v3 * m_pAnalysisData->fLoudnessNormalizationGain;
   }
   return v3;
 }

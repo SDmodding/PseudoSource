@@ -2,7 +2,7 @@
 // RVA: 0x173FC0
 UFG::qReflectWarehouse *__fastcall UFG::qReflectWarehouse::Instance()
 {
-  if ( !(_S12 & 1) )
+  if ( (_S12 & 1) == 0 )
   {
     _S12 |= 1u;
     sReflectWarehouse.mInventoryTree.mTree.mHead.mUID = 0i64;
@@ -19,7 +19,9 @@ UFG::qReflectWarehouse *__fastcall UFG::qReflectWarehouse::Instance()
 
 // File Line: 53
 // RVA: 0x170B40
-UFG::qReflectInventoryBase *__fastcall UFG::qReflectWarehouse::GetInventory(UFG::qReflectWarehouse *this, unsigned __int64 type)
+UFG::qReflectInventoryBase *__fastcall UFG::qReflectWarehouse::GetInventory(
+        UFG::qReflectWarehouse *this,
+        unsigned __int64 type)
 {
   UFG::qReflectWarehouse *v2; // rax
 
@@ -66,112 +68,98 @@ __int64 UFG::_dynamic_initializer_for__gRootInventory__()
     v2 = *++v0;
   }
   while ( *v0 );
-  UFG::qReflectInventoryBase::qReflectInventoryBase(
-    (UFG::qReflectInventoryBase *)&UFG::gRootInventory.vfptr,
-    "UFG::qReflectObject",
-    v1);
+  UFG::qReflectInventoryBase::qReflectInventoryBase(&UFG::gRootInventory, "UFG::qReflectObject", v1);
   UFG::gRootInventory.vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventory<UFG::qReflectObject>::`vftable;
   UFG::qReflectInventory<UFG::qReflectObject>::OnAddToWarehouse(&UFG::gRootInventory);
   v3 = UFG::qReflectWarehouse::Instance();
   UFG::qTree64Base::Add(&v3->mInventoryTree.mTree, &stru_14235A7B8);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gRootInventory__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gRootInventory__);
 }
 
 // File Line: 97
 // RVA: 0x161940
-void __fastcall UFG::qReflectInventoryBase::qReflectInventoryBase(UFG::qReflectInventoryBase *this, const char *name, unsigned __int64 type_uid)
+void __fastcall UFG::qReflectInventoryBase::qReflectInventoryBase(
+        UFG::qReflectInventoryBase *this,
+        const char *name,
+        unsigned __int64 type_uid)
 {
-  unsigned __int64 v3; // rdi
-  UFG::qReflectInventoryBase *v4; // rsi
   UFG::qTreeNode64<UFG::qReflectInventoryBase,UFG::qReflectInventoryBase> *v5; // rbx
-  UFG::qTree64<UFG::qReflectObject,UFG::qReflectObject,0> *v6; // rax
-  UFG::qTree64<UFG::qReflectInventoryBase::NameLookup,UFG::qReflectInventoryBase::NameLookup,0> *v7; // rax
-  UFG::qTree64<UFG::qReflectInventoryBase::ObjectLookup,UFG::qReflectInventoryBase::ObjectLookup,0> *v8; // rax
 
-  v3 = type_uid;
-  v4 = this;
-  v5 = (UFG::qTreeNode64<UFG::qReflectInventoryBase,UFG::qReflectInventoryBase> *)&this->mBaseNode;
-  v5->mBaseNode.mUID = 0i64;
-  v5->mBaseNode.mParent = &v5->mBaseNode;
-  v5->mBaseNode.mChildren[0] = &v5->mBaseNode;
-  v5->mBaseNode.mChildren[1] = &v5->mBaseNode;
-  v5->mBaseNode.mNeighbours[0] = &v5->mBaseNode;
-  v5->mBaseNode.mNeighbours[1] = &v5->mBaseNode;
+  v5 = &this->UFG::qTreeNode64<UFG::qReflectInventoryBase,UFG::qReflectInventoryBase>;
+  this->mBaseNode.mUID = 0i64;
+  this->mBaseNode.mParent = &this->mBaseNode;
+  this->mBaseNode.mChildren[0] = &this->mBaseNode;
+  this->mBaseNode.mChildren[1] = &this->mBaseNode;
+  this->mBaseNode.mNeighbours[0] = &this->mBaseNode;
+  this->mBaseNode.mNeighbours[1] = &this->mBaseNode;
   this->vfptr = (UFG::qReflectInventoryBaseVtbl *)&UFG::qReflectInventoryBase::`vftable;
   this->mName = name;
-  v6 = &this->mItems;
-  v6->mTree.mHead.mUID = 0i64;
-  v6->mTree.mHead.mParent = &v6->mTree.mHead;
-  v6->mTree.mHead.mChildren[0] = &v6->mTree.mHead;
-  v6->mTree.mHead.mChildren[1] = &v6->mTree.mHead;
-  v6->mTree.mHead.mNeighbours[0] = &v6->mTree.mHead;
-  v6->mTree.mHead.mNeighbours[1] = &v6->mTree.mHead;
-  v6->mTree.mCount = 0i64;
-  v7 = &this->mNameLookups;
-  v7->mTree.mHead.mUID = 0i64;
-  v7->mTree.mHead.mParent = &v7->mTree.mHead;
-  v7->mTree.mHead.mChildren[0] = &v7->mTree.mHead;
-  v7->mTree.mHead.mChildren[1] = &v7->mTree.mHead;
-  v7->mTree.mHead.mNeighbours[0] = &v7->mTree.mHead;
-  v7->mTree.mHead.mNeighbours[1] = &v7->mTree.mHead;
-  v7->mTree.mCount = 0i64;
-  v8 = &this->mNameObjectLookups;
-  v8->mTree.mHead.mUID = 0i64;
-  v8->mTree.mHead.mParent = &v8->mTree.mHead;
-  v8->mTree.mHead.mChildren[0] = &v8->mTree.mHead;
-  v8->mTree.mHead.mChildren[1] = &v8->mTree.mHead;
-  v8->mTree.mHead.mNeighbours[0] = &v8->mTree.mHead;
-  v8->mTree.mHead.mNeighbours[1] = &v8->mTree.mHead;
-  v8->mTree.mCount = 0i64;
+  this->mItems.mTree.mHead.mUID = 0i64;
+  this->mItems.mTree.mHead.mParent = &this->mItems.mTree.mHead;
+  this->mItems.mTree.mHead.mChildren[0] = &this->mItems.mTree.mHead;
+  this->mItems.mTree.mHead.mChildren[1] = &this->mItems.mTree.mHead;
+  this->mItems.mTree.mHead.mNeighbours[0] = &this->mItems.mTree.mHead;
+  this->mItems.mTree.mHead.mNeighbours[1] = &this->mItems.mTree.mHead;
+  this->mItems.mTree.mCount = 0i64;
+  this->mNameLookups.mTree.mHead.mUID = 0i64;
+  this->mNameLookups.mTree.mHead.mParent = &this->mNameLookups.mTree.mHead;
+  this->mNameLookups.mTree.mHead.mChildren[0] = &this->mNameLookups.mTree.mHead;
+  this->mNameLookups.mTree.mHead.mChildren[1] = &this->mNameLookups.mTree.mHead;
+  this->mNameLookups.mTree.mHead.mNeighbours[0] = &this->mNameLookups.mTree.mHead;
+  this->mNameLookups.mTree.mHead.mNeighbours[1] = &this->mNameLookups.mTree.mHead;
+  this->mNameLookups.mTree.mCount = 0i64;
+  this->mNameObjectLookups.mTree.mHead.mUID = 0i64;
+  this->mNameObjectLookups.mTree.mHead.mParent = &this->mNameObjectLookups.mTree.mHead;
+  this->mNameObjectLookups.mTree.mHead.mChildren[0] = &this->mNameObjectLookups.mTree.mHead;
+  this->mNameObjectLookups.mTree.mHead.mChildren[1] = &this->mNameObjectLookups.mTree.mHead;
+  this->mNameObjectLookups.mTree.mHead.mNeighbours[0] = &this->mNameObjectLookups.mTree.mHead;
+  this->mNameObjectLookups.mTree.mHead.mNeighbours[1] = &this->mNameObjectLookups.mTree.mHead;
+  this->mNameObjectLookups.mTree.mCount = 0i64;
   `eh vector constructor iterator(
     this->mUnBoundHandles,
     0x10ui64,
     8,
     (void (__fastcall *)(void *))UFG::qReflectHandleBase::qReflectHandleBase);
-  v4->mBaseClassInventory = 0i64;
-  v4->mDerivedInventories.p = 0i64;
-  *(_QWORD *)&v4->mDerivedInventories.size = 0i64;
-  *(_QWORD *)&v4->mAddTime = 0i64;
-  *(_QWORD *)&v4->mUnresolvedTime = 0i64;
-  v5->mBaseNode.mUID = v3;
+  this->mBaseClassInventory = 0i64;
+  this->mDerivedInventories.p = 0i64;
+  *(_QWORD *)&this->mDerivedInventories.size = 0i64;
+  *(_QWORD *)&this->mAddTime = 0i64;
+  *(_QWORD *)&this->mUnresolvedTime = 0i64;
+  v5->mBaseNode.mUID = type_uid;
 }
 
 // File Line: 102
 // RVA: 0x1678B0
-void __fastcall UFG::qReflectInventoryBase::AttachHandle(UFG::qReflectInventoryBase *this, UFG::qReflectHandleBase *handle)
+void __fastcall UFG::qReflectInventoryBase::AttachHandle(
+        UFG::qReflectInventoryBase *this,
+        UFG::qReflectHandleBase *handle)
 {
-  unsigned __int64 v2; // rdi
-  UFG::qReflectHandleBase *v3; // rbx
-  UFG::qReflectInventoryBase *v4; // rsi
-  UFG::qReflectObject *v5; // rax
-  UFG::qReflectObject *v6; // rdx
-  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *v7; // rcx
-  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *v8; // rcx
-  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *v9; // rax
+  unsigned __int64 mNameUID; // rdi
+  UFG::qReflectObject *Object; // rax
+  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *mPrev; // rcx
+  UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0> *v7; // rcx
+  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *v8; // rax
 
-  v2 = handle->mNameUID;
-  v3 = handle;
-  v4 = this;
-  v5 = UFG::qReflectInventoryBase::FindObject(this, handle->mNameUID);
-  v6 = v5;
-  if ( v5 )
+  mNameUID = handle->mNameUID;
+  Object = UFG::qReflectInventoryBase::FindObject(this, mNameUID);
+  if ( Object )
   {
-    v7 = v5->mHandles.mNode.mPrev;
-    v7->mNext = (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)&v3->mPrev;
-    v3->mPrev = v7;
-    v3->mNext = &v5->mHandles.mNode;
-    v5->mHandles.mNode.mPrev = (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)&v3->mPrev;
-    v3->mData = v5;
+    mPrev = Object->mHandles.mNode.mPrev;
+    mPrev->mNext = handle;
+    handle->mPrev = mPrev;
+    handle->mNext = &Object->mHandles.mNode;
+    Object->mHandles.mNode.mPrev = handle;
+    handle->mData = Object;
   }
   else
   {
-    v8 = &v4->mUnBoundHandles[v2 & 7].mNode;
-    v9 = v8->mPrev;
-    v9->mNext = (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)&v3->mPrev;
-    v3->mPrev = v9;
-    v3->mNext = v8;
-    v8->mPrev = (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)&v3->mPrev;
-    v3->mData = v6;
+    v7 = &this->mUnBoundHandles[mNameUID & 7];
+    v8 = v7->mNode.mPrev;
+    v8->mNext = handle;
+    handle->mPrev = v8;
+    handle->mNext = &v7->mNode;
+    v7->mNode.mPrev = handle;
+    handle->mData = 0i64;
   }
 }
 
@@ -179,64 +167,60 @@ void __fastcall UFG::qReflectInventoryBase::AttachHandle(UFG::qReflectInventoryB
 // RVA: 0x1654D0
 void __fastcall UFG::qReflectInventoryBase::Add(UFG::qReflectInventoryBase *this, UFG::qReflectObject *data)
 {
-  UFG::qReflectObject *v2; // r15
-  UFG::qReflectInventoryBase *v3; // r13
   UFG::qReflectInventoryBase *v4; // rcx
-  signed __int64 v5; // rbp
-  signed __int64 v6; // r14
+  UFG::qTree64<UFG::qReflectObject,UFG::qReflectObject,0> *p_mItems; // rbp
+  UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0> *v6; // r14
   UFG::qReflectInventoryBase *i; // rax
-  _QWORD *v8; // r9
+  UFG::qReflectInventoryBase *v8; // r9
   unsigned __int64 v9; // rcx
   __int64 v10; // rdx
   unsigned __int64 v11; // rax
   unsigned __int64 j; // rcx
   char v13; // cl
-  signed __int64 v14; // rdi
-  UFG::qTree64Base::BaseNode *v15; // rbx
-  signed __int64 *v16; // r8
-  signed __int64 v17; // r9
+  UFG::qReflectInventoryBase *v14; // rdi
+  UFG::qTree64Base::BaseNode *p_mBaseNode; // rbx
+  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *mParent; // r8
+  UFG::qTree64<UFG::qReflectObject,UFG::qReflectObject,0> *v17; // r9
   unsigned int v18; // esi
-  signed __int64 v19; // rax
-  signed __int64 *v20; // rcx
-  signed __int64 **v21; // rax
+  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *mPrev; // rax
+  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *mNext; // rcx
+  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *v21; // rax
 
-  v2 = data;
-  v3 = this;
   if ( sHotSwapModeEnabled )
   {
     UFG::qReflectOnDemandLoader::LoadCachedReferences(data);
-    v4 = (UFG::qReflectInventoryBase *)v3->mItems.mTree.mHead.mChildren[0];
-    v5 = (signed __int64)&v3->mItems;
-    v6 = (signed __int64)&v3->mUnBoundHandles[v2->mBaseNode.mUID & 7];
-    if ( v4 != (UFG::qReflectInventoryBase *)&v3->mItems )
+    v4 = (UFG::qReflectInventoryBase *)this->mItems.mTree.mHead.mChildren[0];
+    p_mItems = &this->mItems;
+    v6 = &this->mUnBoundHandles[data->mBaseNode.mUID & 7];
+    if ( v4 != (UFG::qReflectInventoryBase *)&this->mItems )
     {
       for ( i = (UFG::qReflectInventoryBase *)v4->mBaseNode.mParent;
-            i != (UFG::qReflectInventoryBase *)v5;
+            i != (UFG::qReflectInventoryBase *)p_mItems;
             i = (UFG::qReflectInventoryBase *)i->mBaseNode.mParent )
       {
         v4 = i;
       }
-      v8 = (_QWORD *)&v4[-1].mUnresolvedTime;
+      v8 = (UFG::qReflectInventoryBase *)((char *)v4 - 8);
       if ( v4 != (UFG::qReflectInventoryBase *)8 )
       {
         do
         {
-          v9 = v8[6];
+          v9 = (unsigned __int64)v8->mBaseNode.mNeighbours[1];
           v10 = *(_QWORD *)(v9 + 8);
-          if ( *(_QWORD *)(v9 + 8) & 0xFFFFFFFFFFFFFFFCui64 )
+          if ( (v10 & 0xFFFFFFFFFFFFFFFCui64) != 0 )
           {
             v11 = *(_QWORD *)(v9 + 24);
             if ( v11 == *(_QWORD *)(v11 + 24) )
             {
               v11 = *(_QWORD *)(v9 + 8) & 0xFFFFFFFFFFFFFFFCui64;
-              if ( ((unsigned __int8)v10 >> 1) & 1 )
+              if ( (v10 & 2) != 0 )
               {
                 do
                 {
                   v13 = (unsigned __int8)*(_DWORD *)(v11 + 8) >> 1;
                   v11 = *(_QWORD *)(v11 + 8) & 0xFFFFFFFFFFFFFFFCui64;
                 }
-                while ( v13 & 1 );
+                while ( (v13 & 1) != 0 );
               }
             }
             else
@@ -245,201 +229,198 @@ void __fastcall UFG::qReflectInventoryBase::Add(UFG::qReflectInventoryBase *this
                 v11 = j;
             }
             v9 = 0i64;
-            if ( v11 != v5 )
+            if ( (UFG::qTree64<UFG::qReflectObject,UFG::qReflectObject,0> *)v11 != p_mItems )
               v9 = v11;
           }
-          v14 = v9 - 8;
+          v14 = (UFG::qReflectInventoryBase *)(v9 - 8);
           if ( !v9 )
             v14 = 0i64;
-          v15 = (UFG::qTree64Base::BaseNode *)(v8 + 1);
-          if ( v8[1] == v2->mBaseNode.mUID )
+          p_mBaseNode = &v8->mBaseNode;
+          if ( v8->mBaseNode.mUID == data->mBaseNode.mUID )
           {
-            v16 = (signed __int64 *)v8[9];
-            v17 = (signed __int64)(v8 + 8);
-            v18 = ~LODWORD(v15->mUID);
-            if ( v16 != (signed __int64 *)v17 )
+            mParent = (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)v8->mItems.mTree.mHead.mParent;
+            v17 = &v8->mItems;
+            v18 = ~LODWORD(p_mBaseNode->mUID);
+            if ( mParent != (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)v17 )
             {
               do
               {
-                v19 = *v16;
-                v20 = (signed __int64 *)v16[1];
-                *(_QWORD *)(v19 + 8) = v20;
-                *v20 = v19;
-                *v16 = (signed __int64)v16;
-                v16[1] = (signed __int64)v16;
-                v16[4] = 0i64;
-                v21 = *(signed __int64 ***)(v6 + 8);
-                *(_QWORD *)(v6 + 8) = v16;
-                v16[1] = (signed __int64)v21;
-                *v16 = v6;
-                *v21 = v16;
-                v16 = v20;
+                mPrev = mParent->mPrev;
+                mNext = mParent->mNext;
+                mPrev->mNext = mNext;
+                mNext->mPrev = mPrev;
+                mParent->mPrev = mParent;
+                mParent->mNext = mParent;
+                mParent[2].mPrev = 0i64;
+                v21 = v6->mNode.mNext;
+                v6->mNode.mNext = mParent;
+                mParent->mNext = v21;
+                mParent->mPrev = &v6->mNode;
+                v21->mPrev = mParent;
+                mParent = mNext;
               }
-              while ( v20 != (signed __int64 *)v17 );
+              while ( mNext != (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)v17 );
             }
-            UFG::qTree64Base::Remove(&v3->mItems.mTree, v15);
-            v15->mUID = v18;
-            UFG::qTree64Base::Add(&v3->mItems.mTree, v15);
+            UFG::qTree64Base::Remove(&this->mItems.mTree, p_mBaseNode);
+            p_mBaseNode->mUID = v18;
+            UFG::qTree64Base::Add(&this->mItems.mTree, p_mBaseNode);
           }
-          v8 = (_QWORD *)v14;
+          v8 = v14;
         }
         while ( v14 );
       }
     }
   }
-  if ( UFG::qReflectInventoryBase::sFilterFunc(v2) )
+  if ( UFG::qReflectInventoryBase::sFilterFunc(data) )
   {
-    UFG::qTree64Base::Add(&v3->mItems.mTree, &v2->mBaseNode);
-    UFG::qReflectInventoryBase::BindHandles(v3, v2);
+    UFG::qTree64Base::Add(&this->mItems.mTree, &data->mBaseNode);
+    UFG::qReflectInventoryBase::BindHandles(this, data);
   }
 }
 
 // File Line: 186
 // RVA: 0x1663D0
-void __fastcall UFG::qReflectInventoryBase::AddLookup(UFG::qReflectInventoryBase *this, UFG::qReflectInventoryBase::NameLookup *name_lookup, UFG::qReflectInventoryBase::ObjectLookup *object_lookup)
+void __fastcall UFG::qReflectInventoryBase::AddLookup(
+        UFG::qReflectInventoryBase *this,
+        UFG::qReflectInventoryBase::NameLookup *name_lookup,
+        UFG::qReflectInventoryBase::ObjectLookup *object_lookup)
 {
-  UFG::qReflectInventoryBase *v3; // rbx
-  UFG::qReflectInventoryBase::ObjectLookup *v4; // rdi
-
-  v3 = this;
-  v4 = object_lookup;
   UFG::qTree64Base::Add(&this->mNameLookups.mTree, &name_lookup->mBaseNode);
-  UFG::qTree64Base::Add(&v3->mNameObjectLookups.mTree, &v4->mBaseNode);
+  UFG::qTree64Base::Add(&this->mNameObjectLookups.mTree, &object_lookup->mBaseNode);
 }
 
 // File Line: 198
 // RVA: 0x16E200
-char *__fastcall UFG::qReflectInventoryBase::FindObjectName(UFG::qReflectInventoryBase *this, unsigned __int64 name_uid)
+char *__fastcall UFG::qReflectInventoryBase::FindObjectName(
+        UFG::qReflectInventoryBase *this,
+        UFG::qReflectInventoryBaseVtbl *name_uid)
 {
-  UFG::qReflectInventoryBase *v2; // rax
-  unsigned int v3; // er11
-  unsigned int v4; // er9
-  UFG::qReflectInventoryBase **v5; // r10
-  signed __int64 v6; // r8
+  UFG::qReflectInventoryBase *mParent; // rax
+  unsigned int size; // r11d
+  int v4; // r9d
+  UFG::qReflectInventoryBase **i; // r10
+  __int64 p_mNameLookups; // r8
 
-  v2 = (UFG::qReflectInventoryBase *)this->mNameLookups.mTree.mHead.mChildren[0];
-  while ( v2 != (UFG::qReflectInventoryBase *)&this->mNameLookups )
+  mParent = (UFG::qReflectInventoryBase *)this->mNameLookups.mTree.mHead.mChildren[0];
+  while ( mParent != (UFG::qReflectInventoryBase *)&this->mNameLookups )
   {
-    if ( v2->vfptr >= (UFG::qReflectInventoryBaseVtbl *)name_uid )
+    if ( mParent->vfptr >= name_uid )
     {
-      if ( v2->vfptr <= (UFG::qReflectInventoryBaseVtbl *)name_uid )
+      if ( mParent->vfptr <= name_uid )
         goto LABEL_8;
-      v2 = (UFG::qReflectInventoryBase *)v2->mBaseNode.mParent;
+      mParent = (UFG::qReflectInventoryBase *)mParent->mBaseNode.mParent;
     }
     else
     {
-      v2 = (UFG::qReflectInventoryBase *)v2->mBaseNode.mChildren[0];
+      mParent = (UFG::qReflectInventoryBase *)mParent->mBaseNode.mChildren[0];
     }
   }
-  v2 = 0i64;
+  mParent = 0i64;
 LABEL_8:
-  if ( !v2 )
+  if ( !mParent )
   {
-    v3 = this->mDerivedInventories.size;
+    size = this->mDerivedInventories.size;
     v4 = 0;
-    if ( !v3 )
-      return &customWorldMapCaption;
-    v5 = this->mDerivedInventories.p;
-    while ( 1 )
+    if ( !size )
+      return &customCaption;
+    for ( i = this->mDerivedInventories.p; ; ++i )
     {
-      v6 = (signed __int64)&(*v5)->mNameLookups;
-      v2 = (UFG::qReflectInventoryBase *)(*v5)->mNameLookups.mTree.mHead.mChildren[0];
-      while ( v2 != (UFG::qReflectInventoryBase *)v6 )
+      p_mNameLookups = (__int64)&(*i)->mNameLookups;
+      mParent = (UFG::qReflectInventoryBase *)(*i)->mNameLookups.mTree.mHead.mChildren[0];
+      while ( mParent != (UFG::qReflectInventoryBase *)p_mNameLookups )
       {
-        if ( v2->vfptr >= (UFG::qReflectInventoryBaseVtbl *)name_uid )
+        if ( mParent->vfptr >= name_uid )
         {
-          if ( v2->vfptr <= (UFG::qReflectInventoryBaseVtbl *)name_uid )
+          if ( mParent->vfptr <= name_uid )
             goto LABEL_18;
-          v2 = (UFG::qReflectInventoryBase *)v2->mBaseNode.mParent;
+          mParent = (UFG::qReflectInventoryBase *)mParent->mBaseNode.mParent;
         }
         else
         {
-          v2 = (UFG::qReflectInventoryBase *)v2->mBaseNode.mChildren[0];
+          mParent = (UFG::qReflectInventoryBase *)mParent->mBaseNode.mChildren[0];
         }
       }
-      v2 = 0i64;
+      mParent = 0i64;
 LABEL_18:
-      if ( v2 )
+      if ( mParent )
         break;
-      ++v4;
-      ++v5;
-      if ( v4 >= v3 )
-        return &customWorldMapCaption;
+      if ( ++v4 >= size )
+        return &customCaption;
     }
   }
-  return (char *)v2->mBaseNode.mNeighbours[1];
+  return (char *)mParent->mBaseNode.mNeighbours[1];
 }
 
 // File Line: 220
 // RVA: 0x16E060
-UFG::qReflectObject *__fastcall UFG::qReflectInventoryBase::FindObject(UFG::qReflectInventoryBase *this, unsigned __int64 name_uid)
+UFG::qReflectObject *__fastcall UFG::qReflectInventoryBase::FindObject(
+        UFG::qReflectInventoryBase *this,
+        UFG::qReflectInventoryBaseVtbl *name_uid)
 {
-  UFG::qReflectInventoryBase *v2; // rax
-  unsigned __int64 v3; // rsi
+  UFG::qReflectInventoryBase *mParent; // rax
   unsigned int v4; // ebx
   UFG::qReflectObject *result; // rax
-  unsigned int v6; // ebp
+  unsigned int size; // ebp
   __int64 v7; // rdi
   UFG::qReflectInventoryBase *v8; // [rsp+30h] [rbp+8h]
 
   v8 = this;
-  v2 = (UFG::qReflectInventoryBase *)this->mItems.mTree.mHead.mChildren[0];
-  v3 = name_uid;
+  mParent = (UFG::qReflectInventoryBase *)this->mItems.mTree.mHead.mChildren[0];
   v4 = 0;
-  while ( v2 != (UFG::qReflectInventoryBase *)&this->mItems )
+  while ( mParent != (UFG::qReflectInventoryBase *)&this->mItems )
   {
-    if ( v2->vfptr >= (UFG::qReflectInventoryBaseVtbl *)name_uid )
+    if ( mParent->vfptr >= name_uid )
     {
-      if ( v2->vfptr <= (UFG::qReflectInventoryBaseVtbl *)name_uid )
+      if ( mParent->vfptr <= name_uid )
       {
-        result = (UFG::qReflectObject *)&v2[-1].mUnresolvedTime;
+        result = (UFG::qReflectObject *)&mParent[-1].mUnresolvedTime;
         if ( result )
           return result;
         goto LABEL_8;
       }
-      v2 = (UFG::qReflectInventoryBase *)v2->mBaseNode.mParent;
+      mParent = (UFG::qReflectInventoryBase *)mParent->mBaseNode.mParent;
     }
     else
     {
-      v2 = (UFG::qReflectInventoryBase *)v2->mBaseNode.mChildren[0];
+      mParent = (UFG::qReflectInventoryBase *)mParent->mBaseNode.mChildren[0];
     }
   }
   result = 0i64;
 LABEL_8:
-  v6 = this->mDerivedInventories.size;
-  if ( v6 )
+  size = this->mDerivedInventories.size;
+  if ( size )
   {
     v7 = 0i64;
     do
     {
-      result = UFG::qReflectInventoryBase::FindObject(this->mDerivedInventories.p[v7], v3);
+      result = UFG::qReflectInventoryBase::FindObject(this->mDerivedInventories.p[v7], (unsigned __int64)name_uid);
       if ( result )
         break;
       this = v8;
       ++v4;
       ++v7;
     }
-    while ( v4 < v6 );
+    while ( v4 < size );
   }
   return result;
 }
 
 // File Line: 238
 // RVA: 0x16E110
-UFG::qReflectObject *__fastcall UFG::qReflectInventoryBase::FindObjectByName(UFG::qReflectInventoryBase *this, const char *name)
+UFG::qReflectObject *__fastcall UFG::qReflectInventoryBase::FindObjectByName(
+        UFG::qReflectInventoryBase *this,
+        char *name)
 {
   unsigned __int64 v2; // r8
-  UFG::qReflectInventoryBase *v3; // rbx
   char i; // al
-  UFG::qTree64<UFG::qReflectInventoryBase::ObjectLookup,UFG::qReflectInventoryBase::ObjectLookup,0> *v5; // rcx
-  UFG::qTree64<UFG::qReflectInventoryBase::ObjectLookup,UFG::qReflectInventoryBase::ObjectLookup,0> *v6; // rdx
-  unsigned int v7; // er11
-  unsigned int v8; // er9
-  UFG::qReflectInventoryBase **v9; // r10
-  signed __int64 v10; // rcx
+  UFG::qTree64<UFG::qReflectInventoryBase::ObjectLookup,UFG::qReflectInventoryBase::ObjectLookup,0> *p_mNameObjectLookups; // rcx
+  UFG::qTree64Base::BaseNode *v6; // rdx
+  unsigned int size; // r11d
+  int v8; // r9d
+  UFG::qReflectInventoryBase **j; // r10
+  __int64 v10; // rcx
 
   v2 = -1i64;
-  v3 = this;
   if ( name )
   {
     for ( i = *name; *name; i = *name )
@@ -448,151 +429,144 @@ UFG::qReflectObject *__fastcall UFG::qReflectInventoryBase::FindObjectByName(UFG
       v2 = (v2 >> 8) ^ sCrcTable64[(unsigned __int8)(v2 ^ i)];
     }
   }
-  v5 = &this->mNameObjectLookups;
-  v6 = (UFG::qTree64<UFG::qReflectInventoryBase::ObjectLookup,UFG::qReflectInventoryBase::ObjectLookup,0> *)v3->mNameObjectLookups.mTree.mHead.mChildren[0];
-  if ( v6 != &v3->mNameObjectLookups )
+  p_mNameObjectLookups = &this->mNameObjectLookups;
+  v6 = this->mNameObjectLookups.mTree.mHead.mChildren[0];
+  if ( v6 != (UFG::qTree64Base::BaseNode *)&this->mNameObjectLookups )
   {
     do
     {
-      if ( v6->mTree.mHead.mUID >= v2 )
+      if ( v6->mUID >= v2 )
       {
-        if ( v6->mTree.mHead.mUID <= v2 )
+        if ( v6->mUID <= v2 )
           goto LABEL_11;
-        v6 = (UFG::qTree64<UFG::qReflectInventoryBase::ObjectLookup,UFG::qReflectInventoryBase::ObjectLookup,0> *)v6->mTree.mHead.mChildren[0];
+        v6 = v6->mChildren[0];
       }
       else
       {
-        v6 = (UFG::qTree64<UFG::qReflectInventoryBase::ObjectLookup,UFG::qReflectInventoryBase::ObjectLookup,0> *)v6->mTree.mHead.mChildren[1];
+        v6 = v6->mChildren[1];
       }
     }
-    while ( v6 != v5 );
+    while ( v6 != (UFG::qTree64Base::BaseNode *)p_mNameObjectLookups );
   }
   v6 = 0i64;
 LABEL_11:
   if ( !v6 )
   {
-    v7 = v3->mDerivedInventories.size;
+    size = this->mDerivedInventories.size;
     v8 = 0;
-    if ( !v7 )
+    if ( !size )
       return 0i64;
-    v9 = v3->mDerivedInventories.p;
-    while ( 1 )
+    for ( j = this->mDerivedInventories.p; ; ++j )
     {
-      v10 = (signed __int64)&(*v9)->mNameObjectLookups;
-      v6 = (UFG::qTree64<UFG::qReflectInventoryBase::ObjectLookup,UFG::qReflectInventoryBase::ObjectLookup,0> *)(*v9)->mNameObjectLookups.mTree.mHead.mChildren[0];
-      while ( v6 != (UFG::qTree64<UFG::qReflectInventoryBase::ObjectLookup,UFG::qReflectInventoryBase::ObjectLookup,0> *)v10 )
+      v10 = (__int64)&(*j)->mNameObjectLookups;
+      v6 = (*j)->mNameObjectLookups.mTree.mHead.mChildren[0];
+      while ( v6 != (UFG::qTree64Base::BaseNode *)v10 )
       {
-        if ( v6->mTree.mHead.mUID >= v2 )
+        if ( v6->mUID >= v2 )
         {
-          if ( v6->mTree.mHead.mUID <= v2 )
+          if ( v6->mUID <= v2 )
             goto LABEL_21;
-          v6 = (UFG::qTree64<UFG::qReflectInventoryBase::ObjectLookup,UFG::qReflectInventoryBase::ObjectLookup,0> *)v6->mTree.mHead.mChildren[0];
+          v6 = v6->mChildren[0];
         }
         else
         {
-          v6 = (UFG::qTree64<UFG::qReflectInventoryBase::ObjectLookup,UFG::qReflectInventoryBase::ObjectLookup,0> *)v6->mTree.mHead.mChildren[1];
+          v6 = v6->mChildren[1];
         }
       }
       v6 = 0i64;
 LABEL_21:
       if ( v6 )
         break;
-      ++v8;
-      ++v9;
-      if ( v8 >= v7 )
+      if ( ++v8 >= size )
         return 0i64;
     }
   }
-  return UFG::qReflectInventoryBase::FindObject(v3, v6->mTree.mCount);
+  return UFG::qReflectInventoryBase::FindObject(this, (UFG::qReflectInventoryBaseVtbl *)v6[1].mUID);
 }
 
 // File Line: 261
 // RVA: 0x1679C0
-void __fastcall UFG::qReflectInventoryBase::BindHandles(UFG::qReflectInventoryBase *this, UFG::qReflectObject *data)
+void __fastcall UFG::qReflectInventoryBase::BindHandles(
+        UFG::qReflectInventoryBase *this,
+        UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *data)
 {
-  UFG::qReflectInventoryBase *v2; // r11
-  unsigned __int64 v3; // r10
-  unsigned __int64 v4; // r9
-  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *v5; // rax
-  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *v6; // r8
-  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *v7; // rcx
+  unsigned __int64 mNext; // r10
+  UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0> *v4; // r9
+  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *p_mNode; // rax
+  UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0> *v6; // r8
+  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *mPrev; // rcx
   UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *v8; // rcx
 
-  v2 = this;
   do
   {
-    v3 = data->mBaseNode.mUID;
-    v4 = (unsigned __int64)&v2->mUnBoundHandles[data->mBaseNode.mUID & 7];
-    v5 = *(UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> **)(v4 + 8);
-    if ( v5 != (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)v4 )
+    mNext = (unsigned __int64)data->mNext;
+    v4 = &this->mUnBoundHandles[mNext & 7];
+    p_mNode = v4->mNode.mNext;
+    if ( p_mNode != (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)v4 )
     {
       do
       {
-        v6 = v5->mNext;
-        if ( v5[1].mNext == (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)v3 )
+        v6 = (UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0> *)p_mNode->mNext;
+        if ( p_mNode[1].mNext == (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)mNext )
         {
-          v7 = v5->mPrev;
-          v7->mNext = v6;
-          v6->mPrev = v7;
-          v5->mPrev = v5;
-          v5->mNext = v5;
-          v5[2].mPrev = (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)data;
-          v8 = data->mHandles.mNode.mPrev;
-          v8->mNext = v5;
-          v5->mPrev = v8;
-          v5->mNext = &data->mHandles.mNode;
-          data->mHandles.mNode.mPrev = v5;
+          mPrev = p_mNode->mPrev;
+          mPrev->mNext = &v6->mNode;
+          v6->mNode.mPrev = mPrev;
+          p_mNode->mPrev = p_mNode;
+          p_mNode->mNext = p_mNode;
+          p_mNode[2].mPrev = data;
+          v8 = data[4].mPrev;
+          v8->mNext = p_mNode;
+          p_mNode->mPrev = v8;
+          p_mNode->mNext = data + 4;
+          data[4].mPrev = p_mNode;
         }
-        v5 = v6;
+        p_mNode = &v6->mNode;
       }
-      while ( v6 != (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)v4 );
+      while ( v6 != v4 );
     }
-    v2 = v2->mBaseClassInventory;
+    this = this->mBaseClassInventory;
   }
-  while ( v2 );
+  while ( this );
 }
 
 // File Line: 295
 // RVA: 0x17A260
 void __fastcall UFG::qReflectInventoryBase::Remove(UFG::qReflectInventoryBase *this, UFG::qReflectObject *data)
 {
-  UFG::qReflectInventoryBase *v2; // rdi
-  UFG::qReflectObject *v3; // rsi
-  unsigned int v4; // ebx
-  UFG::qReflectObject *v5; // rdi
-  UFG::qReflectHandleBase *v6; // rcx
-  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *v7; // r8
+  unsigned int mUID; // ebx
+  UFG::qReflectObject *Object; // rdi
+  UFG::qReflectHandleBase *mNext; // rcx
+  UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *mPrev; // r8
   UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *v8; // rdx
   UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *v9; // rax
 
-  v2 = this;
-  v3 = data;
   if ( UFG::qReflectInventoryBase::sFilterFunc(data) )
   {
-    v4 = v3->mBaseNode.mUID;
-    UFG::qTree64Base::Remove(&v2->mItems.mTree, &v3->mBaseNode);
-    v5 = UFG::qReflectInventoryBase::FindObject(v2, v4);
-    while ( (UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0> *)v3->mHandles.mNode.mNext != &v3->mHandles )
+    mUID = data->mBaseNode.mUID;
+    UFG::qTree64Base::Remove(&this->mItems.mTree, &data->mBaseNode);
+    Object = UFG::qReflectInventoryBase::FindObject(this, (UFG::qReflectInventoryBaseVtbl *)mUID);
+    while ( (UFG::qList<UFG::qReflectHandleBase,UFG::qReflectHandleBase,1,0> *)data->mHandles.mNode.mNext != &data->mHandles )
     {
-      v6 = (UFG::qReflectHandleBase *)v3->mHandles.mNode.mNext;
-      v7 = v6->mPrev;
-      v8 = v6->mNext;
-      v7->mNext = v8;
-      v8->mPrev = v7;
-      v6->mPrev = (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)&v6->mPrev;
-      v6->mNext = (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)&v6->mPrev;
-      if ( v5 )
+      mNext = (UFG::qReflectHandleBase *)data->mHandles.mNode.mNext;
+      mPrev = mNext->mPrev;
+      v8 = mNext->mNext;
+      mPrev->mNext = v8;
+      v8->mPrev = mPrev;
+      mNext->mPrev = mNext;
+      mNext->mNext = mNext;
+      if ( Object )
       {
-        v9 = v5->mHandles.mNode.mPrev;
-        v9->mNext = (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)&v6->mPrev;
-        v6->mPrev = v9;
-        v6->mNext = &v5->mHandles.mNode;
-        v5->mHandles.mNode.mPrev = (UFG::qNode<UFG::qReflectHandleBase,UFG::qReflectHandleBase> *)&v6->mPrev;
-        v6->mData = v5;
+        v9 = Object->mHandles.mNode.mPrev;
+        v9->mNext = mNext;
+        mNext->mPrev = v9;
+        mNext->mNext = &Object->mHandles.mNode;
+        Object->mHandles.mNode.mPrev = mNext;
+        mNext->mData = Object;
       }
       else
       {
-        UFG::qReflectHandleBase::Init(v6, v6->mTypeUID, v6->mNameUID);
+        UFG::qReflectHandleBase::Init(mNext, mNext->mTypeUID, mNext->mNameUID);
       }
     }
   }

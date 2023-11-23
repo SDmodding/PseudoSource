@@ -3,12 +3,16 @@
 __int64 dynamic_initializer_for__UFG::AudioUISystem::smScreenList__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::AudioUISystem::smScreenList.mTree);
-  return atexit(dynamic_atexit_destructor_for__UFG::AudioUISystem::smScreenList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::AudioUISystem::smScreenList__);
 }
 
 // File Line: 49
 // RVA: 0x597270
-void __fastcall UFG::AudioUISystem::BasicHandler(const char *pScreenName, unsigned int screenHash, unsigned int msgId, unsigned int resultId)
+void __fastcall UFG::AudioUISystem::BasicHandler(
+        const char *pScreenName,
+        unsigned int screenHash,
+        unsigned int msgId,
+        unsigned int resultId)
 {
   UFG::AudioUISystem::HandleInput(screenHash, msgId, 0, 1);
 }
@@ -17,70 +21,60 @@ void __fastcall UFG::AudioUISystem::BasicHandler(const char *pScreenName, unsign
 // RVA: 0x59E9E0
 char __fastcall UFG::AudioUISystem::HandleInput(const char *screenName, unsigned int inputUID, bool playEvent)
 {
-  bool v3; // bp
-  unsigned int v4; // edi
-  const char *v5; // rbx
-  char *v7; // rsi
+  char *Last; // rsi
   char *v8; // rax
   unsigned int v9; // eax
   char v10; // bl
-  UFG::qString v11; // [rsp+38h] [rbp-30h]
+  UFG::qString v11; // [rsp+38h] [rbp-30h] BYREF
 
-  v3 = playEvent;
-  v4 = inputUID;
-  v5 = screenName;
   if ( inputUID == UI_HASH_INVALID_27 )
     return 1;
   UFG::qString::qString(&v11);
-  v7 = UFG::qStringFindLast(v5, "/");
-  v8 = UFG::qStringFindLast(v5, ".");
-  if ( v7 && v8 )
-    UFG::qString::Set(&v11, v7 + 1, (_DWORD)v8 - (_DWORD)v7 - 1, 0i64, 0);
+  Last = UFG::qStringFindLast(screenName, "/");
+  v8 = UFG::qStringFindLast(screenName, ".");
+  if ( Last && v8 )
+    UFG::qString::Set(&v11, Last + 1, (_DWORD)v8 - (_DWORD)Last - 1, 0i64, 0);
   else
-    UFG::qString::Set(&v11, v5);
-  v9 = UFG::qStringHashUpper32(v11.mData, 0xFFFFFFFF);
-  v10 = UFG::AudioUISystem::HandleInput(v9, v4, 0, v3);
+    UFG::qString::Set(&v11, screenName);
+  v9 = UFG::qStringHashUpper32(v11.mData, -1);
+  v10 = UFG::AudioUISystem::HandleInput(v9, inputUID, 0, playEvent);
   UFG::qString::~qString(&v11);
   return v10;
 }
 
 // File Line: 66
 // RVA: 0x59E880
-char __fastcall UFG::AudioUISystem::HandleInput(unsigned int screenUID, unsigned int inputUID, unsigned int switchOverride, bool playEvent)
+char __fastcall UFG::AudioUISystem::HandleInput(
+        unsigned int screenUID,
+        unsigned int inputUID,
+        unsigned int switchOverride,
+        bool playEvent)
 {
-  unsigned int v4; // esi
-  unsigned int v5; // ebp
   unsigned int v6; // edi
   unsigned int v7; // eax
-  bool v9; // bl
+  char v9; // bl
   UFG::qBaseTreeRB *v10; // rax
-  signed __int64 v11; // rdi
+  int *p_mCount; // rdi
   UFG::qBaseTreeRB *v12; // rax
-  signed __int64 v13; // rax
+  int *v13; // rax
   unsigned int v14; // edx
-  unsigned int v15; // er8
+  unsigned int v15; // r8d
   UFG::qBaseTreeRB *v16; // rax
   UFG::qBaseTreeRB *v17; // rax
-  signed __int64 v18; // rax
-  unsigned int v19; // [rsp+50h] [rbp+8h]
-  bool v20; // [rsp+68h] [rbp+20h]
+  int *v18; // rax
 
-  v20 = playEvent;
-  v19 = screenUID;
-  v4 = switchOverride;
-  v5 = inputUID;
   v6 = screenUID;
-  if ( _S40_0 & 1 )
+  if ( (_S40_0 & 1) != 0 )
   {
     v7 = defaultScreenUID;
   }
   else
   {
     _S40_0 |= 1u;
-    v7 = UFG::qStringHashUpper32("Default", 0xFFFFFFFF);
+    v7 = UFG::qStringHashUpper32("Default", -1);
     defaultScreenUID = v7;
   }
-  if ( v5 == UI_HASH_INVALID_27 )
+  if ( inputUID == UI_HASH_INVALID_27 )
     return 1;
   v9 = 0;
   if ( !v6 )
@@ -92,28 +86,28 @@ LABEL_27:
     v7 = defaultScreenUID;
 LABEL_28:
     if ( v6 != v7 )
-      v9 = UFG::AudioUISystem::HandleInput(v7, v5, 0, v20);
+      return UFG::AudioUISystem::HandleInput(v7, inputUID, 0, playEvent);
     return v9;
   }
-  v11 = (signed __int64)&v10[-1].mCount;
+  p_mCount = &v10[-1].mCount;
   if ( v10 == (UFG::qBaseTreeRB *)8 )
   {
-    v6 = v19;
+    v6 = screenUID;
     goto LABEL_27;
   }
-  if ( v5
-    && (v12 = UFG::qBaseTreeRB::Get((UFG::qBaseTreeRB *)(v11 + 48), v5)) != 0i64
-    && (v13 = (signed __int64)&v12[-1].mCount) != 0 )
+  if ( inputUID
+    && (v12 = UFG::qBaseTreeRB::Get((UFG::qBaseTreeRB *)(p_mCount + 12), inputUID)) != 0i64
+    && (v13 = &v12[-1].mCount) != 0i64 )
   {
-    v14 = *(_DWORD *)(v13 + 48);
+    v14 = v13[12];
     if ( v14 == -1 )
-      v14 = *(_DWORD *)(v11 + 44);
-    if ( v4 )
-      v15 = v4;
+      v14 = p_mCount[11];
+    if ( switchOverride )
+      v15 = switchOverride;
     else
-      v15 = *(_DWORD *)(v13 + 52);
-    UFG::AudioEntity::SetWwiseSwitch((UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr, v14, v15);
-    v9 = 1;
+      v15 = v13[13];
+    UFG::AudioEntity::SetWwiseSwitch(UFG::HudAudio::m_instance, v14, v15);
+    return 1;
   }
   else
   {
@@ -122,20 +116,17 @@ LABEL_28:
     {
       if ( v16 != (UFG::qBaseTreeRB *)8 )
       {
-        if ( v5 )
+        if ( inputUID )
         {
-          v17 = UFG::qBaseTreeRB::Get((UFG::qBaseTreeRB *)((char *)v16 + 40), v5);
+          v17 = UFG::qBaseTreeRB::Get((UFG::qBaseTreeRB *)v16->mNULL.mChild, inputUID);
           if ( v17 )
           {
-            v18 = (signed __int64)&v17[-1].mCount;
+            v18 = &v17[-1].mCount;
             if ( v18 )
             {
-              if ( v20 )
-                UFG::AudioEntity::SetWwiseSwitch(
-                  (UFG::AudioEntity *)&UFG::HudAudio::m_instance->vfptr,
-                  *(_DWORD *)(v11 + 44),
-                  *(_DWORD *)(v18 + 52));
-              v9 = 1;
+              if ( playEvent )
+                UFG::AudioEntity::SetWwiseSwitch(UFG::HudAudio::m_instance, p_mCount[11], v18[13]);
+              return 1;
             }
           }
         }
@@ -150,13 +141,13 @@ LABEL_28:
 void __fastcall UFG::AudioUISystem::LoadUISoundDataCallback(SimpleXML::XMLDocument *pXmlDoc)
 {
   SimpleXML::XMLDocument *v1; // rdi
-  SimpleXML::XMLNode *v2; // rax
-  SimpleXML::XMLNode *v3; // rsi
-  char *v4; // rax
+  SimpleXML::XMLNode *Node; // rax
+  SimpleXML::XMLNode *ChildNode; // rsi
+  char *Attribute; // rax
   unsigned int v5; // eax
   unsigned int v6; // ebx
   UFG::qBaseTreeRB *v7; // rax
-  signed __int64 v8; // r15
+  UFG::allocator::free_link *p_mCount; // r15
   UFG::allocator::free_link *v9; // rax
   char *v10; // rax
   char *v11; // rax
@@ -165,9 +156,9 @@ void __fastcall UFG::AudioUISystem::LoadUISoundDataCallback(SimpleXML::XMLDocume
   char v14; // r12
   char v15; // r13
   char v16; // bl
-  int v17; // er14
+  int v17; // r14d
   char *v18; // rax
-  const char *v19; // r8
+  char *v19; // r8
   char *v20; // rax
   char *v21; // rax
   unsigned int v22; // eax
@@ -181,7 +172,7 @@ void __fastcall UFG::AudioUISystem::LoadUISoundDataCallback(SimpleXML::XMLDocume
   char *v30; // rax
   char *v31; // rax
   UFG::qBaseNodeRB *v32; // rdx
-  char dest; // [rsp+30h] [rbp-178h]
+  char dest; // [rsp+30h] [rbp-178h] BYREF
   __int64 v34; // [rsp+31h] [rbp-177h]
   int v35; // [rsp+39h] [rbp-16Fh]
   __int16 v36; // [rsp+3Dh] [rbp-16Bh]
@@ -189,37 +180,34 @@ void __fastcall UFG::AudioUISystem::LoadUISoundDataCallback(SimpleXML::XMLDocume
   SimpleXML::XMLNode *v38; // [rsp+40h] [rbp-168h]
   UFG::allocator::free_link *v39; // [rsp+48h] [rbp-160h]
   __int64 v40; // [rsp+50h] [rbp-158h]
-  char str; // [rsp+60h] [rbp-148h]
-  char Dst; // [rsp+61h] [rbp-147h]
-  SimpleXML::XMLDocument *v43; // [rsp+1B0h] [rbp+8h]
-  char v44; // [rsp+1B8h] [rbp+10h]
-  char v45; // [rsp+1C0h] [rbp+18h]
-  char *v46; // [rsp+1C8h] [rbp+20h]
+  char str[328]; // [rsp+60h] [rbp-148h] BYREF
+  char v43; // [rsp+1B8h] [rbp+10h]
+  char v44; // [rsp+1C0h] [rbp+18h]
+  char *v45; // [rsp+1C8h] [rbp+20h]
 
   if ( pXmlDoc )
   {
-    v43 = pXmlDoc;
     v40 = -2i64;
     v1 = pXmlDoc;
-    v2 = SimpleXML::XMLDocument::GetNode(pXmlDoc, "AudioUIMap", 0i64);
-    v3 = SimpleXML::XMLDocument::GetChildNode(v1, "Screen", v2);
-    v38 = v3;
-    if ( v3 )
+    Node = SimpleXML::XMLDocument::GetNode(pXmlDoc, "AudioUIMap", 0i64);
+    ChildNode = SimpleXML::XMLDocument::GetChildNode(v1, "Screen", Node);
+    v38 = ChildNode;
+    if ( ChildNode )
     {
       while ( 1 )
       {
-        v4 = SimpleXML::XMLNode::GetAttribute(v3, "Name", 0i64);
-        v5 = UFG::qStringHashUpper32(v4, 0xFFFFFFFF);
+        Attribute = SimpleXML::XMLNode::GetAttribute(ChildNode, "Name", 0i64);
+        v5 = UFG::qStringHashUpper32(Attribute, -1);
         v6 = v5;
-        v45 = 0;
+        v44 = 0;
         if ( v5 && (v7 = UFG::qBaseTreeRB::Get(&UFG::AudioUISystem::smScreenList.mTree, v5)) != 0i64 )
-          v8 = (signed __int64)&v7[-1].mCount;
+          p_mCount = (UFG::allocator::free_link *)&v7[-1].mCount;
         else
-          v8 = 0i64;
-        if ( !v8 )
+          p_mCount = 0i64;
+        if ( !p_mCount )
         {
           v9 = UFG::qMemoryPool::Allocate(&g_AudioMemoryPool, 0x78ui64, "AudioUIScreen", 0i64, 1u);
-          v8 = (signed __int64)v9;
+          p_mCount = v9;
           if ( v9 )
           {
             v9[1].mNext = 0i64;
@@ -231,38 +219,38 @@ void __fastcall UFG::AudioUISystem::LoadUISoundDataCallback(SimpleXML::XMLDocume
           }
           else
           {
-            v8 = 0i64;
+            p_mCount = 0i64;
           }
-          *(_DWORD *)(v8 + 32) = v6;
-          v45 = 1;
+          LODWORD(p_mCount[4].mNext) = v6;
+          v44 = 1;
         }
-        v10 = SimpleXML::XMLNode::GetAttribute(v3, "Event", 0i64);
-        *(_DWORD *)(v8 + 40) = UFG::TiDo::CalcWwiseUid(v10);
-        v11 = SimpleXML::XMLNode::GetAttribute(v3, "SwitchGroup", 0i64);
-        *(_DWORD *)(v8 + 44) = UFG::TiDo::CalcWwiseUid(v11);
-        v12 = SimpleXML::XMLDocument::GetChildNode(v1, "Input", v3);
+        v10 = SimpleXML::XMLNode::GetAttribute(ChildNode, "Event", 0i64);
+        LODWORD(p_mCount[5].mNext) = UFG::TiDo::CalcWwiseUid(v10);
+        v11 = SimpleXML::XMLNode::GetAttribute(ChildNode, "SwitchGroup", 0i64);
+        HIDWORD(p_mCount[5].mNext) = UFG::TiDo::CalcWwiseUid(v11);
+        v12 = SimpleXML::XMLDocument::GetChildNode(v1, "Input", ChildNode);
         if ( v12 )
           break;
 LABEL_59:
-        if ( v45 )
+        if ( v44 )
         {
-          if ( *(_DWORD *)(v8 + 112) <= 0 )
-            (**(void (__fastcall ***)(signed __int64, signed __int64))v8)(v8, 1i64);
+          if ( SLODWORD(p_mCount[14].mNext) <= 0 )
+            ((void (__fastcall *)(UFG::allocator::free_link *, __int64))p_mCount->mNext->mNext)(p_mCount, 1i64);
           else
-            UFG::qBaseTreeRB::Add(&UFG::AudioUISystem::smScreenList.mTree, (UFG::qBaseNodeRB *)(v8 + 8));
+            UFG::qBaseTreeRB::Add(&UFG::AudioUISystem::smScreenList.mTree, (UFG::qBaseNodeRB *)&p_mCount[1]);
         }
-        v3 = SimpleXML::XMLDocument::GetNode(v1, "Screen", v3);
-        v38 = v3;
-        if ( !v3 )
+        ChildNode = SimpleXML::XMLDocument::GetNode(v1, "Screen", ChildNode);
+        v38 = ChildNode;
+        if ( !ChildNode )
           goto LABEL_64;
       }
 LABEL_13:
       v13 = SimpleXML::XMLNode::GetAttribute(v12, "Type", 0i64);
-      v46 = v13;
+      v45 = v13;
       v14 = 0;
       v15 = 0;
       v16 = 0;
-      v44 = 0;
+      v43 = 0;
       v17 = 0;
       while ( 1 )
       {
@@ -288,22 +276,21 @@ LABEL_13:
             v18 = SimpleXML::XMLNode::GetAttribute(v12, "Released", 0i64);
             if ( v18 && !(unsigned int)UFG::qStringCompareInsensitive(v18, "On", -1) )
             {
-              v44 = 1;
+              v43 = 1;
               v19 = "_RELEASED";
 LABEL_31:
               UFG::qStringCopy(&dest, 0x7FFFFFFF, v19, -1);
 LABEL_32:
-              str = 0;
-              memset(&Dst, 0, 0xFFui64);
-              if ( (signed int)UFG::qStringLength(&dest) <= 0 )
-                UFG::qSPrintf(&str, "%s", v13);
+              memset(str, 0, 256);
+              if ( (int)UFG::qStringLength(&dest) <= 0 )
+                UFG::qSPrintf(str, "%s", v13);
               else
-                UFG::qSPrintf(&str, "%s%s", v13, &dest);
-              v22 = UFG::qStringHashUpper32(&str, 0xFFFFFFFF);
+                UFG::qSPrintf(str, "%s%s", v13, &dest);
+              v22 = UFG::qStringHashUpper32(str, -1);
               v23 = v22;
               v24 = 0;
               if ( !v22
-                || (v25 = UFG::qBaseTreeRB::Get((UFG::qBaseTreeRB *)(v8 + 48), v22)) == 0i64
+                || (v25 = UFG::qBaseTreeRB::Get((UFG::qBaseTreeRB *)&p_mCount[6], v22)) == 0i64
                 || (v26 = &v25[-1].mCount, v25 == (UFG::qBaseTreeRB *)8) )
               {
                 v27 = UFG::qMemoryPool::Allocate(&g_AudioMemoryPool, 0x38ui64, "AudioUIInput", 0i64, 1u);
@@ -343,11 +330,10 @@ LABEL_32:
                   v32 = (UFG::qBaseNodeRB *)(v26 + 2);
                 else
                   v32 = 0i64;
-                UFG::qBaseTreeRB::Add((UFG::qBaseTreeRB *)(v8 + 48), v32);
+                UFG::qBaseTreeRB::Add((UFG::qBaseTreeRB *)&p_mCount[6], v32);
               }
-              v13 = v46;
-              v16 = v44;
-              goto LABEL_56;
+              v13 = v45;
+              v16 = v43;
             }
           }
           else if ( v17 == 3 && !v14 && !v16 && !v15 )
@@ -365,14 +351,13 @@ LABEL_32:
             goto LABEL_31;
           }
         }
-LABEL_56:
         if ( ++v17 >= 4 )
         {
-          v1 = v43;
-          v12 = SimpleXML::XMLDocument::GetNode(v43, "Input", v12);
+          v1 = pXmlDoc;
+          v12 = SimpleXML::XMLDocument::GetNode(pXmlDoc, "Input", v12);
           if ( !v12 )
           {
-            v3 = v38;
+            ChildNode = v38;
             goto LABEL_59;
           }
           goto LABEL_13;

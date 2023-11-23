@@ -28,36 +28,31 @@ hkClass *__fastcall hkpCompressedSampledHeightFieldShape::staticClass()
 
 // File Line: 72
 // RVA: 0xCEC6E0
-void __fastcall finishLoadedObjecthkpCompressedSampledHeightFieldShape(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpCompressedSampledHeightFieldShape(
+        hkpSampledHeightFieldShape *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  int v2; // edi
-  _BYTE *v3; // rbx
-
   if ( p )
   {
-    v2 = finishing;
-    v3 = p;
-    hkpSampledHeightFieldShape::hkpSampledHeightFieldShape(
-      (hkpSampledHeightFieldShape *)p,
-      (hkFinishLoadedObjectFlag)finishing);
-    *(_QWORD *)v3 = &hkpCompressedSampledHeightFieldShape::`vftable;
-    if ( v2 )
-      v3[73] = 1;
+    hkpSampledHeightFieldShape::hkpSampledHeightFieldShape(p, finishing);
+    p->vfptr = (hkBaseObjectVtbl *)&hkpCompressedSampledHeightFieldShape::`vftable;
+    if ( finishing.m_finishing )
+      p->m_heightfieldType.m_storage = 1;
   }
 }
 
 // File Line: 78
 // RVA: 0xCEC720
-void __fastcall cleanupLoadedObjecthkpCompressedSampledHeightFieldShape(void *p)
+void __fastcall cleanupLoadedObjecthkpCompressedSampledHeightFieldShape(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 82
 // RVA: 0xCEC730
 void **__fastcall getVtablehkpCompressedSampledHeightFieldShape()
 {
-  hkpSampledHeightFieldShape v1; // [rsp+20h] [rbp-B8h]
+  hkpSampledHeightFieldShape v1; // [rsp+20h] [rbp-B8h] BYREF
 
   hkpSampledHeightFieldShape::hkpSampledHeightFieldShape(&v1, 0);
   return &hkpCompressedSampledHeightFieldShape::`vftable;
@@ -74,8 +69,8 @@ void **dynamic_initializer_for__hkpCompressedSampledHeightFieldShapeTypeInfo__()
   hkpCompressedSampledHeightFieldShapeTypeInfo.m_typeName = "hkpCompressedSampledHeightFieldShape";
   hkpCompressedSampledHeightFieldShapeTypeInfo.m_vtable = result;
   hkpCompressedSampledHeightFieldShapeTypeInfo.m_scopedName = "!hkpCompressedSampledHeightFieldShape";
-  hkpCompressedSampledHeightFieldShapeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpCompressedSampledHeightFieldShape;
-  hkpCompressedSampledHeightFieldShapeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpCompressedSampledHeightFieldShape;
+  hkpCompressedSampledHeightFieldShapeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpCompressedSampledHeightFieldShape;
+  hkpCompressedSampledHeightFieldShapeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpCompressedSampledHeightFieldShape;
   return result;
 }
 

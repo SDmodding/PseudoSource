@@ -2,7 +2,7 @@
 // RVA: 0x1573940
 __int64 dynamic_initializer_for__UFG::RoadSpaceComponent::s_RoadSpaceComponentList__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::RoadSpaceComponent::s_RoadSpaceComponentList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::RoadSpaceComponent::s_RoadSpaceComponentList__);
 }
 
 // File Line: 85
@@ -27,354 +27,302 @@ __int64 dynamic_initializer_for__UFG::RoadSpaceComponent::mNameUID__()
 // RVA: 0x642EB0
 void __fastcall UFG::RoadSpaceComponent::RoadSpaceComponent(UFG::RoadSpaceComponent *this)
 {
-  UFG::RoadSpaceComponent *v1; // rdi
-  UFG::qNode<UFG::RoadSpaceComponent,UFG::RoadSpaceComponent> *v2; // rbx
-  float v3; // xmm1_4
-  float v4; // xmm2_4
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v5; // rsi
-  UFG::qNode<UFG::RoadSpaceComponent,UFG::RoadSpaceComponent> *v6; // rax
-  __m128 v7; // xmm4
-  __m128 v8; // xmm3
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v9; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v10; // rax
-  float v11; // xmm1_4
-  float v12; // xmm2_4
-  float v13; // xmm1_4
-  float v14; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_m_pChaseTarget; // rsi
+  UFG::qNode<UFG::RoadSpaceComponent,UFG::RoadSpaceComponent> *mPrev; // rax
+  UFG::qVector4 v6; // xmm4
+  UFG::qVector4 v7; // xmm3
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v8; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
+  float v10; // xmm1_4
+  float v11; // xmm2_4
+  float v12; // xmm1_4
+  float v13; // xmm2_4
 
-  v1 = this;
-  UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, UFG::RoadSpaceComponent::mNameUID);
-  v2 = (UFG::qNode<UFG::RoadSpaceComponent,UFG::RoadSpaceComponent> *)&v1->mPrev;
-  v2->mPrev = v2;
-  v2->mNext = v2;
-  v1->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RoadSpaceComponent::`vftable;
-  UFG::NavGuide::NavGuide(&v1->m_NavGuide);
-  *(_QWORD *)&v1->m_DestNavRadius = 0x40000000i64;
-  v1->m_NavWanderDestPos.y = 0.0;
-  v1->m_NavWanderDestPos.z = -1000.0;
-  v1->m_NavWanderRadius = 5.0;
-  v1->m_HasNavWanderCenter = 0;
-  v3 = UFG::qVector3::msZero.y;
-  v4 = UFG::qVector3::msZero.z;
-  v1->m_NavWanderCenter.x = UFG::qVector3::msZero.x;
-  v1->m_NavWanderCenter.y = v3;
-  v1->m_NavWanderCenter.z = v4;
-  UFG::RoadNetworkGuide::RoadNetworkGuide(&v1->mGuide);
-  UFG::WayFinderClient::WayFinderClient((UFG::WayFinderClient *)&v1->mWayClient.vfptr);
-  v1->mWayClient.vfptr = (UFG::WayFinderClientVtbl *)&UFG::VehicleWayFinderClient::`vftable;
-  v1->mWayClient.m_RoadNetworkType = 0;
-  v1->mWayClient.m_LaneFlags = -1;
-  v1->mWayClient.m_RoadGuide = 0i64;
-  v1->mWayClient.m_AllowFootPaths = 0;
-  v5 = &v1->m_pChaseTarget;
-  v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v5->mPrev;
-  v5->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v5->mPrev;
-  v1->m_pChaseTarget.m_pPointer = 0i64;
-  UFG::RebindingComponentHandle<UFG::CameraSubject,0>::RebindingComponentHandle<UFG::CameraSubject,0>(&v1->m_pSubject);
+  UFG::SimComponent::SimComponent(this, UFG::RoadSpaceComponent::mNameUID);
+  this->mPrev = &this->UFG::qNode<UFG::RoadSpaceComponent,UFG::RoadSpaceComponent>;
+  this->mNext = &this->UFG::qNode<UFG::RoadSpaceComponent,UFG::RoadSpaceComponent>;
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RoadSpaceComponent::`vftable;
+  UFG::NavGuide::NavGuide(&this->m_NavGuide);
+  *(_QWORD *)&this->m_DestNavRadius = 0x40000000i64;
+  this->m_NavWanderDestPos.y = 0.0;
+  this->m_NavWanderDestPos.z = -1000.0;
+  this->m_NavWanderRadius = 5.0;
+  this->m_HasNavWanderCenter = 0;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
+  this->m_NavWanderCenter.x = UFG::qVector3::msZero.x;
+  this->m_NavWanderCenter.y = y;
+  this->m_NavWanderCenter.z = z;
+  UFG::RoadNetworkGuide::RoadNetworkGuide(&this->mGuide);
+  UFG::WayFinderClient::WayFinderClient(&this->mWayClient);
+  this->mWayClient.vfptr = (UFG::WayFinderClientVtbl *)&UFG::VehicleWayFinderClient::`vftable;
+  this->mWayClient.m_RoadNetworkType = 0;
+  this->mWayClient.m_LaneFlags = -1;
+  this->mWayClient.m_RoadGuide = 0i64;
+  this->mWayClient.m_AllowFootPaths = 0;
+  p_m_pChaseTarget = &this->m_pChaseTarget;
+  this->m_pChaseTarget.mPrev = &this->m_pChaseTarget;
+  this->m_pChaseTarget.mNext = &this->m_pChaseTarget;
+  this->m_pChaseTarget.m_pPointer = 0i64;
+  UFG::RebindingComponentHandle<UFG::CameraSubject,0>::RebindingComponentHandle<UFG::CameraSubject,0>(&this->m_pSubject);
   UFG::RingBuffer<UFG::Crumb>::RingBuffer<UFG::Crumb>(
-    &v1->m_PositionTrail.mTrail,
+    &this->m_PositionTrail.mTrail,
     UFG::AiDriverComponent::m_NumBreadCrumbs);
-  v1->m_LaneFlags = 2;
-  v1->m_NavGuideEnabled = 0;
-  v6 = UFG::RoadSpaceComponent::s_RoadSpaceComponentList.mNode.mPrev;
-  UFG::RoadSpaceComponent::s_RoadSpaceComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::RoadSpaceComponent,UFG::RoadSpaceComponent> *)&v1->mPrev;
-  v2->mPrev = v6;
-  v1->mNext = (UFG::qNode<UFG::RoadSpaceComponent,UFG::RoadSpaceComponent> *)&UFG::RoadSpaceComponent::s_RoadSpaceComponentList;
-  UFG::RoadSpaceComponent::s_RoadSpaceComponentList.mNode.mPrev = (UFG::qNode<UFG::RoadSpaceComponent,UFG::RoadSpaceComponent> *)&v1->mPrev;
-  UFG::SimComponent::AddType(
-    (UFG::SimComponent *)&v1->vfptr,
-    UFG::RoadSpaceComponent::_RoadSpaceComponentTypeUID,
-    "RoadSpaceComponent");
-  v1->mWayClient.m_RoadGuide = &v1->mGuide;
-  if ( v1->mGuide.m_Attached )
-    UFG::VehicleWayFinderClient::SetLaneFlagsFromGuide(&v1->mWayClient, &v1->mGuide);
+  this->m_LaneFlags = 2;
+  this->m_NavGuideEnabled = 0;
+  mPrev = UFG::RoadSpaceComponent::s_RoadSpaceComponentList.mNode.mPrev;
+  UFG::RoadSpaceComponent::s_RoadSpaceComponentList.mNode.mPrev->mNext = &this->UFG::qNode<UFG::RoadSpaceComponent,UFG::RoadSpaceComponent>;
+  this->mPrev = mPrev;
+  this->mNext = (UFG::qNode<UFG::RoadSpaceComponent,UFG::RoadSpaceComponent> *)&UFG::RoadSpaceComponent::s_RoadSpaceComponentList;
+  UFG::RoadSpaceComponent::s_RoadSpaceComponentList.mNode.mPrev = &this->UFG::qNode<UFG::RoadSpaceComponent,UFG::RoadSpaceComponent>;
+  UFG::SimComponent::AddType(this, UFG::RoadSpaceComponent::_RoadSpaceComponentTypeUID, "RoadSpaceComponent");
+  this->mWayClient.m_RoadGuide = &this->mGuide;
+  if ( this->mGuide.m_Attached )
+    UFG::VehicleWayFinderClient::SetLaneFlagsFromGuide(&this->mWayClient, &this->mGuide);
+  v6 = 0i64;
   v7 = 0i64;
-  v8 = 0i64;
-  v8.m128_f32[0] = (float)1;
-  v1->m_ChaseWorld.v0 = (UFG::qVector4)v8;
-  v1->m_ChaseWorld.v1 = (UFG::qVector4)_mm_shuffle_ps(v8, v8, 81);
-  v1->m_ChaseWorld.v2 = (UFG::qVector4)_mm_shuffle_ps(v8, v8, 69);
-  v1->m_ChaseWorld.v3 = (UFG::qVector4)_mm_shuffle_ps(v8, v8, 21);
-  v7.m128_f32[0] = (float)1;
-  v1->m_WorldChase.v0 = (UFG::qVector4)v7;
-  v1->m_WorldChase.v1 = (UFG::qVector4)_mm_shuffle_ps(v7, v7, 81);
-  v1->m_WorldChase.v2 = (UFG::qVector4)_mm_shuffle_ps(v7, v7, 69);
-  v1->m_WorldChase.v3 = (UFG::qVector4)_mm_shuffle_ps(v7, v7, 21);
-  if ( v1->m_pChaseTarget.m_pPointer )
+  v7.x = (float)1;
+  this->m_ChaseWorld.v0 = v7;
+  this->m_ChaseWorld.v1 = (UFG::qVector4)_mm_shuffle_ps((__m128)v7, (__m128)v7, 81);
+  this->m_ChaseWorld.v2 = (UFG::qVector4)_mm_shuffle_ps((__m128)v7, (__m128)v7, 69);
+  this->m_ChaseWorld.v3 = (UFG::qVector4)_mm_shuffle_ps((__m128)v7, (__m128)v7, 21);
+  v6.x = (float)1;
+  this->m_WorldChase.v0 = v6;
+  this->m_WorldChase.v1 = (UFG::qVector4)_mm_shuffle_ps((__m128)v6, (__m128)v6, 81);
+  this->m_WorldChase.v2 = (UFG::qVector4)_mm_shuffle_ps((__m128)v6, (__m128)v6, 69);
+  this->m_WorldChase.v3 = (UFG::qVector4)_mm_shuffle_ps((__m128)v6, (__m128)v6, 21);
+  if ( this->m_pChaseTarget.m_pPointer )
   {
-    v9 = v5->mPrev;
-    v10 = v1->m_pChaseTarget.mNext;
-    v9->mNext = v10;
-    v10->mPrev = v9;
-    v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v5->mPrev;
-    v1->m_pChaseTarget.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->m_pChaseTarget.mPrev;
+    v8 = p_m_pChaseTarget->mPrev;
+    mNext = this->m_pChaseTarget.mNext;
+    v8->mNext = mNext;
+    mNext->mPrev = v8;
+    p_m_pChaseTarget->mPrev = p_m_pChaseTarget;
+    this->m_pChaseTarget.mNext = &this->m_pChaseTarget;
   }
-  v1->m_pChaseTarget.m_pPointer = 0i64;
-  v1->m_pChaseFormation = 0i64;
-  v1->m_pRacePosition = 0i64;
-  v1->m_pRacePositionSteer = 0i64;
-  *(_QWORD *)&v1->m_fChaseCurvature = 0i64;
-  *(_QWORD *)&v1->m_fChaseDistance = 0i64;
-  v11 = UFG::qVector3::msZero.y;
-  v12 = UFG::qVector3::msZero.z;
-  v1->mDestinationPosition.x = UFG::qVector3::msZero.x;
-  v1->mDestinationPosition.y = v11;
-  v1->mDestinationPosition.z = v12;
-  v13 = UFG::qVector3::msZero.y;
-  v14 = UFG::qVector3::msZero.z;
-  v1->mDestinationDirection.x = UFG::qVector3::msZero.x;
-  v1->mDestinationDirection.y = v13;
-  v1->mDestinationDirection.z = v14;
-  *(_DWORD *)&v1->mBits &= 0xFFFFFFF8;
-  *(_DWORD *)&v1->mBits |= 8u;
+  this->m_pChaseTarget.m_pPointer = 0i64;
+  this->m_pChaseFormation = 0i64;
+  this->m_pRacePosition = 0i64;
+  this->m_pRacePositionSteer = 0i64;
+  *(_QWORD *)&this->m_fChaseCurvature = 0i64;
+  *(_QWORD *)&this->m_fChaseDistance = 0i64;
+  v10 = UFG::qVector3::msZero.y;
+  v11 = UFG::qVector3::msZero.z;
+  this->mDestinationPosition.x = UFG::qVector3::msZero.x;
+  this->mDestinationPosition.y = v10;
+  this->mDestinationPosition.z = v11;
+  v12 = UFG::qVector3::msZero.y;
+  v13 = UFG::qVector3::msZero.z;
+  this->mDestinationDirection.x = UFG::qVector3::msZero.x;
+  this->mDestinationDirection.y = v12;
+  this->mDestinationDirection.z = v13;
+  *(_DWORD *)&this->mBits &= 0xFFFFFFF8;
+  *(_DWORD *)&this->mBits |= 8u;
 }
 
 // File Line: 128
 // RVA: 0x643E80
 void __fastcall UFG::RoadSpaceComponent::~RoadSpaceComponent(UFG::RoadSpaceComponent *this)
 {
-  UFG::RoadSpaceComponent *v1; // rdi
-  UFG::SimObjectVehicle *v2; // rcx
-  unsigned __int16 v3; // dx
-  UFG::VehicleSubjectComponent *v4; // rax
-  UFG::VehicleFormations *v5; // rbx
+  UFG::SimObjectVehicle *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::VehicleSubjectComponent *ComponentOfTypeHK; // rax
+  UFG::VehicleFormations *m_pChaseFormation; // rbx
   UFG::qNode<UFG::RoadSpaceComponent,UFG::RoadSpaceComponent> *v6; // rsi
-  UFG::qNode<UFG::RoadSpaceComponent,UFG::RoadSpaceComponent> *v7; // rcx
-  UFG::qNode<UFG::RoadSpaceComponent,UFG::RoadSpaceComponent> *v8; // rax
-  UFG::Crumb *v9; // rcx
-  char *v10; // rbx
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v11; // rdx
+  UFG::qNode<UFG::RoadSpaceComponent,UFG::RoadSpaceComponent> *mPrev; // rcx
+  UFG::qNode<UFG::RoadSpaceComponent,UFG::RoadSpaceComponent> *mNext; // rax
+  UFG::Crumb *mData; // rcx
+  float *p_fCurvature; // rbx
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_m_pChaseTarget; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v12; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v13; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v14; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v15; // rax
   UFG::qNode<UFG::RoadSpaceComponent,UFG::RoadSpaceComponent> *v16; // rcx
   UFG::qNode<UFG::RoadSpaceComponent,UFG::RoadSpaceComponent> *v17; // rax
-  UFG::VehicleWayFinderClient *v18; // [rsp+48h] [rbp+10h]
 
-  v1 = this;
   this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::RoadSpaceComponent::`vftable;
-  v2 = (UFG::SimObjectVehicle *)this->m_pChaseTarget.m_pPointer;
-  if ( v2 )
+  m_pPointer = (UFG::SimObjectVehicle *)this->m_pChaseTarget.m_pPointer;
+  if ( m_pPointer )
   {
-    v3 = v2->m_Flags;
-    if ( (v3 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
+      goto LABEL_8;
+    if ( m_Flags < 0 )
     {
-      v4 = (UFG::VehicleSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                             (UFG::SimObjectGame *)&v2->vfptr,
-                                             UFG::VehicleSubjectComponent::_TypeUID);
+      ComponentOfTypeHK = UFG::SimObjectVehicle::GetComponent<UFG::VehicleSubjectComponent>(m_pPointer);
+      goto LABEL_11;
     }
-    else if ( (v3 & 0x8000u) == 0 )
-    {
-      if ( (v3 >> 13) & 1 )
-      {
-        v4 = (UFG::VehicleSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                               (UFG::SimObjectGame *)&v2->vfptr,
-                                               UFG::VehicleSubjectComponent::_TypeUID);
-      }
-      else if ( (v3 >> 12) & 1 )
-      {
-        v4 = (UFG::VehicleSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                               (UFG::SimObjectGame *)&v2->vfptr,
-                                               UFG::VehicleSubjectComponent::_TypeUID);
-      }
-      else
-      {
-        v4 = (UFG::VehicleSubjectComponent *)UFG::SimObject::GetComponentOfType(
-                                               (UFG::SimObject *)&v2->vfptr,
-                                               UFG::VehicleSubjectComponent::_TypeUID);
-      }
-    }
+    if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+LABEL_8:
+      ComponentOfTypeHK = (UFG::VehicleSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                            m_pPointer,
+                                                            UFG::VehicleSubjectComponent::_TypeUID);
     else
-    {
-      v4 = UFG::SimObjectVehicle::GetComponent<UFG::VehicleSubjectComponent>(v2);
-    }
+      ComponentOfTypeHK = (UFG::VehicleSubjectComponent *)UFG::SimObject::GetComponentOfType(
+                                                            m_pPointer,
+                                                            UFG::VehicleSubjectComponent::_TypeUID);
   }
   else
   {
-    v4 = 0i64;
+    ComponentOfTypeHK = 0i64;
   }
-  if ( v4 )
-    UFG::VehicleSubjectComponent::RemoveChaser(v4, v1->m_pSimObject);
-  UFG::RoadSpaceComponent::FlushRaceTrails(v1);
-  v5 = v1->m_pChaseFormation;
-  if ( v5 )
+LABEL_11:
+  if ( ComponentOfTypeHK )
+    UFG::VehicleSubjectComponent::RemoveChaser(ComponentOfTypeHK, this->m_pSimObject);
+  UFG::RoadSpaceComponent::FlushRaceTrails(this);
+  m_pChaseFormation = this->m_pChaseFormation;
+  if ( m_pChaseFormation )
   {
-    UFG::VehicleFormations::~VehicleFormations(v1->m_pChaseFormation);
-    operator delete[](v5);
-    v1->m_pChaseFormation = 0i64;
+    UFG::VehicleFormations::~VehicleFormations(this->m_pChaseFormation);
+    operator delete[](m_pChaseFormation);
+    this->m_pChaseFormation = 0i64;
   }
-  if ( v1 == UFG::RoadSpaceComponent::s_RoadSpaceComponentpCurrentIterator )
-    UFG::RoadSpaceComponent::s_RoadSpaceComponentpCurrentIterator = (UFG::RoadSpaceComponent *)&v1->mPrev[-4];
-  v6 = (UFG::qNode<UFG::RoadSpaceComponent,UFG::RoadSpaceComponent> *)&v1->mPrev;
-  v7 = v1->mPrev;
-  v8 = v1->mNext;
-  v7->mNext = v8;
-  v8->mPrev = v7;
-  v6->mPrev = v6;
-  v6->mNext = v6;
-  v9 = v1->m_PositionTrail.mTrail.mData;
-  if ( v9 )
+  if ( this == UFG::RoadSpaceComponent::s_RoadSpaceComponentpCurrentIterator )
+    UFG::RoadSpaceComponent::s_RoadSpaceComponentpCurrentIterator = (UFG::RoadSpaceComponent *)&this->mPrev[-4];
+  v6 = &this->UFG::qNode<UFG::RoadSpaceComponent,UFG::RoadSpaceComponent>;
+  mPrev = this->mPrev;
+  mNext = this->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->mPrev = &this->UFG::qNode<UFG::RoadSpaceComponent,UFG::RoadSpaceComponent>;
+  this->mNext = &this->UFG::qNode<UFG::RoadSpaceComponent,UFG::RoadSpaceComponent>;
+  mData = this->m_PositionTrail.mTrail.mData;
+  if ( mData )
   {
-    v10 = (char *)&v9[-1].fCurvature;
-    `eh vector destructor iterator(v9, 0x20ui64, LODWORD(v9[-1].fCurvature), (void (__fastcall *)(void *))_);
-    operator delete[](v10);
+    p_fCurvature = &mData[-1].fCurvature;
+    `eh vector destructor iterator(mData, 0x20ui64, LODWORD(mData[-1].fCurvature), (void (__fastcall *)(void *))_);
+    operator delete[](p_fCurvature);
   }
-  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&v1->m_pSubject);
-  v11 = &v1->m_pChaseTarget;
-  if ( v1->m_pChaseTarget.m_pPointer )
+  UFG::RebindingComponentHandle<UFG::RagdollComponent,0>::~RebindingComponentHandle<UFG::RagdollComponent,0>((UFG::RebindingComponentHandle<UFG::TransformNodeComponent,0> *)&this->m_pSubject);
+  p_m_pChaseTarget = &this->m_pChaseTarget;
+  if ( this->m_pChaseTarget.m_pPointer )
   {
-    v12 = v11->mPrev;
-    v13 = v1->m_pChaseTarget.mNext;
+    v12 = p_m_pChaseTarget->mPrev;
+    v13 = this->m_pChaseTarget.mNext;
     v12->mNext = v13;
     v13->mPrev = v12;
-    v11->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v11->mPrev;
-    v1->m_pChaseTarget.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->m_pChaseTarget.mPrev;
+    p_m_pChaseTarget->mPrev = p_m_pChaseTarget;
+    this->m_pChaseTarget.mNext = &this->m_pChaseTarget;
   }
-  v1->m_pChaseTarget.m_pPointer = 0i64;
-  v14 = v11->mPrev;
-  v15 = v1->m_pChaseTarget.mNext;
+  this->m_pChaseTarget.m_pPointer = 0i64;
+  v14 = p_m_pChaseTarget->mPrev;
+  v15 = this->m_pChaseTarget.mNext;
   v14->mNext = v15;
   v15->mPrev = v14;
-  v11->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v11->mPrev;
-  v1->m_pChaseTarget.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->m_pChaseTarget.mPrev;
-  v18 = &v1->mWayClient;
-  v18->vfptr = (UFG::WayFinderClientVtbl *)&UFG::VehicleWayFinderClient::`vftable;
-  v18->vfptr = (UFG::WayFinderClientVtbl *)&UFG::WayFinderClient::`vftable;
-  UFG::RoadNetworkGuide::~RoadNetworkGuide(&v1->mGuide);
-  UFG::NavGuide::~NavGuide(&v1->m_NavGuide);
+  p_m_pChaseTarget->mPrev = p_m_pChaseTarget;
+  this->m_pChaseTarget.mNext = &this->m_pChaseTarget;
+  this->mWayClient.vfptr = (UFG::WayFinderClientVtbl *)&UFG::VehicleWayFinderClient::`vftable;
+  this->mWayClient.vfptr = (UFG::WayFinderClientVtbl *)&UFG::WayFinderClient::`vftable;
+  UFG::RoadNetworkGuide::~RoadNetworkGuide(&this->mGuide);
+  UFG::NavGuide::~NavGuide(&this->m_NavGuide);
   v16 = v6->mPrev;
-  v17 = v1->mNext;
+  v17 = this->mNext;
   v16->mNext = v17;
   v17->mPrev = v16;
   v6->mPrev = v6;
-  v1->mNext = (UFG::qNode<UFG::RoadSpaceComponent,UFG::RoadSpaceComponent> *)&v1->mPrev;
-  UFG::SimComponent::~SimComponent((UFG::SimComponent *)&v1->vfptr);
+  this->mNext = &this->UFG::qNode<UFG::RoadSpaceComponent,UFG::RoadSpaceComponent>;
+  UFG::SimComponent::~SimComponent(this);
 }
 
 // File Line: 224
 // RVA: 0x65E8D0
 void __fastcall UFG::RoadSpaceComponent::TeleportEventHandler(UFG::RoadSpaceComponent *this, UFG::Event *event)
 {
-  bool v2; // si
-  UFG::Event *v3; // rdi
-  UFG::RoadSpaceComponent *v4; // rbx
-  UFG::RacePosition *v5; // rcx
-  UFG::qVector3 *v6; // rdi
-  UFG::RacePosition *v7; // rcx
+  bool m_Attached; // si
+  UFG::RacePosition *m_pRacePositionSteer; // rcx
+  UFG::qVector3 *p_mNext; // rdi
+  UFG::RacePosition *m_pRacePosition; // rcx
 
-  v2 = this->mGuide.m_Attached;
-  v3 = event;
-  v4 = this;
-  if ( v2 )
+  m_Attached = this->mGuide.m_Attached;
+  if ( m_Attached )
     UFG::RoadNetworkGuide::RemoveFromNetwork(&this->mGuide);
-  v5 = v4->m_pRacePositionSteer;
-  v6 = (UFG::qVector3 *)&v3[2].mNext;
-  if ( v5 )
-    UFG::RacePosition::InitPosition(v5, v6);
-  v7 = v4->m_pRacePosition;
-  if ( v7 )
-    UFG::RacePosition::InitPosition(v7, v6);
-  if ( v2 )
-    UFG::RoadSpaceComponent::AttachToRoadNetwork(v4, v6, 0i64);
-  v4->m_fChaseFailedTimer = 0.0;
+  m_pRacePositionSteer = this->m_pRacePositionSteer;
+  p_mNext = (UFG::qVector3 *)&event[2].mNext;
+  if ( m_pRacePositionSteer )
+    UFG::RacePosition::InitPosition(m_pRacePositionSteer, p_mNext);
+  m_pRacePosition = this->m_pRacePosition;
+  if ( m_pRacePosition )
+    UFG::RacePosition::InitPosition(m_pRacePosition, p_mNext);
+  if ( m_Attached )
+    UFG::RoadSpaceComponent::AttachToRoadNetwork(this, p_mNext, 0i64);
+  this->m_fChaseFailedTimer = 0.0;
 }
 
 // File Line: 240
 // RVA: 0x656800
-void __fastcall UFG::RoadSpaceComponent::OnAttach(UFG::RoadSpaceComponent *this, UFG::SimObject *object)
+void __fastcall UFG::RoadSpaceComponent::OnAttach(UFG::RoadSpaceComponent *this, UFG::SimObjectCVBase *object)
 {
-  UFG::RoadSpaceComponent *v2; // rdi
-  UFG::RebindingComponentHandle<UFG::CameraSubject,0> *v3; // rcx
-  UFG::SimObjectCVBase *v4; // rbx
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v5; // rax
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v6; // r8
+  UFG::RebindingComponentHandle<UFG::CameraSubject,0> *p_m_pSubject; // rcx
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mNext; // rax
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mPrev; // r8
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v7; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v8; // rdx
-  unsigned __int16 v9; // cx
+  signed __int16 m_Flags; // cx
   UFG::AiDriverComponent *v10; // rax
-  UFG::SimComponent *v11; // rcx
+  UFG::SimComponent *m_pSimComponent; // rcx
 
-  v2 = this;
-  v3 = &this->m_pSubject;
-  v4 = (UFG::SimObjectCVBase *)object;
-  if ( v3->m_pSimComponent )
+  p_m_pSubject = &this->m_pSubject;
+  if ( p_m_pSubject->m_pSimComponent )
   {
-    v5 = v3->mNext;
-    v6 = v3->mPrev;
-    v6->mNext = v5;
-    v5->mPrev = v6;
-    v3->m_pSimComponent = 0i64;
+    mNext = p_m_pSubject->mNext;
+    mPrev = p_m_pSubject->mPrev;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_m_pSubject->m_pSimComponent = 0i64;
   }
   else
   {
-    if ( !v3->m_pSimObject
-      || (UFG::RebindingComponentHandle<UFG::CameraSubject,0> *)v3->mPrev == v3
-      && (UFG::RebindingComponentHandle<UFG::CameraSubject,0> *)v3->mNext == v3 )
-    {
+    if ( !p_m_pSubject->m_pSimObject || p_m_pSubject->mPrev == p_m_pSubject && p_m_pSubject->mNext == p_m_pSubject )
       goto LABEL_8;
-    }
-    v7 = v3->mNext;
-    v8 = v3->mPrev;
+    v7 = p_m_pSubject->mNext;
+    v8 = p_m_pSubject->mPrev;
     v8->mNext = v7;
     v7->mPrev = v8;
   }
-  v3->m_pSimObject = 0i64;
-  v3->mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v3->mPrev;
-  v3->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v3->mPrev;
+  p_m_pSubject->m_pSimObject = 0i64;
+  p_m_pSubject->mNext = p_m_pSubject;
+  p_m_pSubject->mPrev = p_m_pSubject;
 LABEL_8:
-  v3->m_Changed = 1;
-  v3->m_pSimObject = (UFG::SimObject *)&v4->vfptr;
-  v3->m_TypeUID = UFG::CameraSubject::_TypeUID;
-  UFG::RebindingComponentHandle<UFG::CameraSubject,0>::BindInternal<UFG::SimObject>(v3, (UFG::SimObject *)&v4->vfptr);
-  if ( v4 )
+  p_m_pSubject->m_Changed = 1;
+  p_m_pSubject->m_pSimObject = object;
+  p_m_pSubject->m_TypeUID = UFG::CameraSubject::_TypeUID;
+  UFG::RebindingComponentHandle<UFG::CameraSubject,0>::BindInternal<UFG::SimObject>(p_m_pSubject, object);
+  if ( object )
   {
-    v9 = v4->m_Flags;
-    if ( (v9 >> 14) & 1 )
-    {
-      v10 = UFG::SimObjectCVBase::GetComponent<UFG::AiDriverComponent>(v4);
-    }
-    else if ( (v9 & 0x8000u) == 0 )
-    {
-      if ( (v9 >> 13) & 1 )
-        v10 = (UFG::AiDriverComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                          (UFG::SimObjectGame *)&v4->vfptr,
-                                          UFG::AiDriverComponent::_TypeUID);
-      else
-        v10 = (UFG::AiDriverComponent *)((v9 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                            (UFG::SimObjectGame *)&v4->vfptr,
-                                                            UFG::AiDriverComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(
-                                                                                                  (UFG::SimObject *)&v4->vfptr,
-                                                                                                  UFG::AiDriverComponent::_TypeUID));
-    }
+    m_Flags = object->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
+      v10 = UFG::SimObjectCVBase::GetComponent<UFG::AiDriverComponent>(object);
     else
-    {
-      v10 = UFG::SimObjectCVBase::GetComponent<UFG::AiDriverComponent>(v4);
-    }
+      v10 = (UFG::AiDriverComponent *)((m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+                                     ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                         object,
+                                         UFG::AiDriverComponent::_TypeUID)
+                                     : UFG::SimObject::GetComponentOfType(object, UFG::AiDriverComponent::_TypeUID));
     if ( v10 )
     {
-      if ( UFG::SimObjectUtility::IsClassType((UFG::SimObject *)&v4->vfptr, (UFG::qSymbol *)&qSymbol_Tram.mUID) )
+      if ( UFG::SimObjectUtility::IsClassType(object, &qSymbol_Tram) )
       {
-        v2->mWayClient.m_RoadNetworkType = 1;
+        this->mWayClient.m_RoadNetworkType = 1;
       }
-      else if ( UFG::SimObjectUtility::IsClassType((UFG::SimObject *)&v4->vfptr, (UFG::qSymbol *)&qSymbol_Ferry.mUID) )
+      else if ( UFG::SimObjectUtility::IsClassType(object, &qSymbol_Ferry) )
       {
-        v2->mWayClient.m_RoadNetworkType = 2;
+        this->mWayClient.m_RoadNetworkType = 2;
       }
       else
       {
-        v2->mWayClient.m_RoadNetworkType = UFG::SimObjectUtility::IsClassType(
-                                             (UFG::SimObject *)&v4->vfptr,
-                                             (UFG::qSymbol *)&qSymbol_Boat_21.mUID) != 0 ? 3 : 0;
+        this->mWayClient.m_RoadNetworkType = UFG::SimObjectUtility::IsClassType(object, &qSymbol_Boat_21) != 0 ? 3 : 0;
       }
     }
   }
-  UFG::RoadSpaceComponent::SetupLaneFlags(v2);
-  v11 = v2->m_pSubject.m_pSimComponent;
-  if ( v11 )
+  UFG::RoadSpaceComponent::SetupLaneFlags(this);
+  m_pSimComponent = this->m_pSubject.m_pSimComponent;
+  if ( m_pSimComponent )
   {
-    if ( ((unsigned __int8 (*)(void))v11->vfptr[46].__vecDelDtor)() )
-      UFG::RoadSpaceComponent::SnapToRoadNetwork(v2);
+    if ( ((unsigned __int8 (__fastcall *)(UFG::SimComponent *))m_pSimComponent->vfptr[46].__vecDelDtor)(m_pSimComponent) )
+      UFG::RoadSpaceComponent::SnapToRoadNetwork(this);
   }
 }
 
@@ -382,123 +330,104 @@ LABEL_8:
 // RVA: 0x656B30
 void __fastcall UFG::RoadSpaceComponent::OnDetach(UFG::RoadSpaceComponent *this)
 {
-  UFG::RoadSpaceComponent *v1; // rbx
-  UFG::SimObjectVehicle *v2; // rcx
-  unsigned __int16 v3; // dx
-  UFG::VehicleSubjectComponent *v4; // rax
-  UFG::RebindingComponentHandle<UFG::CameraSubject,0> *v5; // rdx
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v6; // rcx
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v7; // rax
+  UFG::SimObjectVehicle *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::VehicleSubjectComponent *ComponentOfTypeHK; // rax
+  UFG::RebindingComponentHandle<UFG::CameraSubject,0> *p_m_pSubject; // rdx
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mPrev; // rcx
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mNext; // rax
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v8; // rcx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v9; // rax
 
-  v1 = this;
-  v2 = (UFG::SimObjectVehicle *)this->m_pChaseTarget.m_pPointer;
-  if ( v2 )
+  m_pPointer = (UFG::SimObjectVehicle *)this->m_pChaseTarget.m_pPointer;
+  if ( m_pPointer )
   {
-    v3 = v2->m_Flags;
-    if ( (v3 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
+      goto LABEL_8;
+    if ( m_Flags < 0 )
     {
-      v4 = (UFG::VehicleSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                             (UFG::SimObjectGame *)&v2->vfptr,
-                                             UFG::VehicleSubjectComponent::_TypeUID);
+      ComponentOfTypeHK = UFG::SimObjectVehicle::GetComponent<UFG::VehicleSubjectComponent>(m_pPointer);
+      goto LABEL_11;
     }
-    else if ( (v3 & 0x8000u) == 0 )
-    {
-      if ( (v3 >> 13) & 1 )
-      {
-        v4 = (UFG::VehicleSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                               (UFG::SimObjectGame *)&v2->vfptr,
-                                               UFG::VehicleSubjectComponent::_TypeUID);
-      }
-      else if ( (v3 >> 12) & 1 )
-      {
-        v4 = (UFG::VehicleSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                               (UFG::SimObjectGame *)&v2->vfptr,
-                                               UFG::VehicleSubjectComponent::_TypeUID);
-      }
-      else
-      {
-        v4 = (UFG::VehicleSubjectComponent *)UFG::SimObject::GetComponentOfType(
-                                               (UFG::SimObject *)&v2->vfptr,
-                                               UFG::VehicleSubjectComponent::_TypeUID);
-      }
-    }
+    if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+LABEL_8:
+      ComponentOfTypeHK = (UFG::VehicleSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                            m_pPointer,
+                                                            UFG::VehicleSubjectComponent::_TypeUID);
     else
-    {
-      v4 = UFG::SimObjectVehicle::GetComponent<UFG::VehicleSubjectComponent>(v2);
-    }
+      ComponentOfTypeHK = (UFG::VehicleSubjectComponent *)UFG::SimObject::GetComponentOfType(
+                                                            m_pPointer,
+                                                            UFG::VehicleSubjectComponent::_TypeUID);
   }
   else
   {
-    v4 = 0i64;
+    ComponentOfTypeHK = 0i64;
   }
-  if ( v4 )
-    UFG::VehicleSubjectComponent::RemoveChaser(v4, v1->m_pSimObject);
-  v5 = &v1->m_pSubject;
-  if ( v1->m_pSubject.m_pSimComponent )
+LABEL_11:
+  if ( ComponentOfTypeHK )
+    UFG::VehicleSubjectComponent::RemoveChaser(ComponentOfTypeHK, this->m_pSimObject);
+  p_m_pSubject = &this->m_pSubject;
+  if ( this->m_pSubject.m_pSimComponent )
   {
-    v6 = v5->mPrev;
-    v7 = v1->m_pSubject.mNext;
-    v6->mNext = v7;
-    v7->mPrev = v6;
-    v1->m_pSubject.m_pSimComponent = 0i64;
-LABEL_20:
-    v1->m_pSubject.m_pSimObject = 0i64;
-    v1->m_pSubject.mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v1->m_pSubject.mPrev;
-    v5->mPrev = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)&v5->mPrev;
-    goto LABEL_21;
-  }
-  if ( v1->m_pSubject.m_pSimObject
-    && ((UFG::RebindingComponentHandle<UFG::CameraSubject,0> *)v5->mPrev != v5
-     || (UFG::RebindingComponentHandle<UFG::CameraSubject,0> *)v1->m_pSubject.mNext != &v1->m_pSubject) )
-  {
-    v8 = v5->mPrev;
-    v9 = v1->m_pSubject.mNext;
-    v8->mNext = v9;
-    v9->mPrev = v8;
+    mPrev = p_m_pSubject->mPrev;
+    mNext = this->m_pSubject.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    this->m_pSubject.m_pSimComponent = 0i64;
+LABEL_19:
+    this->m_pSubject.m_pSimObject = 0i64;
+    this->m_pSubject.mNext = &this->m_pSubject;
+    p_m_pSubject->mPrev = p_m_pSubject;
     goto LABEL_20;
   }
-LABEL_21:
-  v1->m_pSubject.m_Changed = 1;
-  UFG::RoadNetworkGuide::RemoveFromNetwork(&v1->mGuide);
-  UFG::RoadSpaceComponent::FlushRaceTrails(v1);
+  if ( this->m_pSubject.m_pSimObject
+    && (p_m_pSubject->mPrev != p_m_pSubject || this->m_pSubject.mNext != &this->m_pSubject) )
+  {
+    v8 = p_m_pSubject->mPrev;
+    v9 = this->m_pSubject.mNext;
+    v8->mNext = v9;
+    v9->mPrev = v8;
+    goto LABEL_19;
+  }
+LABEL_20:
+  this->m_pSubject.m_Changed = 1;
+  UFG::RoadNetworkGuide::RemoveFromNetwork(&this->mGuide);
+  UFG::RoadSpaceComponent::FlushRaceTrails(this);
 }
 
 // File Line: 290
 // RVA: 0x659A40
 void __fastcall UFG::RoadSpaceComponent::SetupLaneFlags(UFG::RoadSpaceComponent *this)
 {
-  UFG::SimObjectVehicle *v1; // rbx
-  UFG::RoadSpaceComponent *v2; // rdi
+  UFG::SimObjectVehicle *m_pSimObject; // rbx
   UFG::AiDriverComponent *v3; // rax
   UFG::VehicleSubjectComponent *v4; // rax
 
-  v1 = (UFG::SimObjectVehicle *)this->m_pSimObject;
-  v2 = this;
-  if ( (v1->m_Flags & 0x8000u) != 0 )
+  m_pSimObject = (UFG::SimObjectVehicle *)this->m_pSimObject;
+  if ( (m_pSimObject->m_Flags & 0x8000u) != 0 )
   {
-    if ( v1 )
+    if ( m_pSimObject )
     {
       v3 = UFG::SimObjectCVBase::GetComponent<UFG::AiDriverComponent>((UFG::SimObjectCVBase *)this->m_pSimObject);
       if ( v3 )
       {
-        if ( !((unsigned __int8 (__fastcall *)(UFG::AiDriverComponent *))v3->vfptr[16].__vecDelDtor)(v3) )
-          v2->m_LaneFlags |= 1u;
+        if ( !((unsigned __int8 (__fastcall *)(UFG::AiDriverComponent *))v3->UFG::VehicleDriverInterface::UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr[16].__vecDelDtor)(v3) )
+          this->m_LaneFlags |= 1u;
       }
     }
-    if ( UFG::SimObjectUtility::IsClassType((UFG::SimObject *)&v1->vfptr, (UFG::qSymbol *)&qSymbol_Tram.mUID)
-      || UFG::SimObjectUtility::IsClassType((UFG::SimObject *)&v1->vfptr, (UFG::qSymbol *)&qSymbol_Ferry.mUID)
-      || UFG::SimObjectUtility::IsClassType((UFG::SimObject *)&v1->vfptr, (UFG::qSymbol *)&qSymbol_Minibus.mUID) )
+    if ( UFG::SimObjectUtility::IsClassType(m_pSimObject, &qSymbol_Tram)
+      || UFG::SimObjectUtility::IsClassType(m_pSimObject, &qSymbol_Ferry)
+      || UFG::SimObjectUtility::IsClassType(m_pSimObject, &qSymbol_Minibus) )
     {
-      v2->m_LaneFlags = 16;
+      this->m_LaneFlags = 16;
     }
-    if ( v1 )
-      v4 = UFG::SimObjectVehicle::GetComponent<UFG::VehicleSubjectComponent>(v1);
+    if ( m_pSimObject )
+      v4 = UFG::SimObjectVehicle::GetComponent<UFG::VehicleSubjectComponent>(m_pSimObject);
     else
       v4 = 0i64;
     if ( ((unsigned __int8 (__fastcall *)(UFG::VehicleSubjectComponent *))v4->vfptr[30].__vecDelDtor)(v4) )
-      v2->m_LaneFlags = v2->m_LaneFlags & 0xFFFFFFFE | 4;
+      this->m_LaneFlags = this->m_LaneFlags & 0xFFFFFFFA | 4;
   }
 }
 
@@ -513,121 +442,115 @@ void __fastcall UFG::RoadSpaceComponent::SetLaneFlags(UFG::RoadSpaceComponent *t
 // RVA: 0x65F6F0
 void __fastcall UFG::RoadSpaceComponent::Update(UFG::RoadSpaceComponent *this, float delta_sec)
 {
-  UFG::RoadSpaceComponent *v2; // rdi
-  UFG::SimComponent *v3; // rcx
+  UFG::SimComponent *m_pSimComponent; // rcx
   __int64 v4; // rbx
   __int64 v5; // rax
   float v6; // xmm2_4
   float v7; // xmm3_4
-  UFG::SimObject *v8; // r14
-  UFG::TransformNodeComponent *v9; // r14
+  UFG::SimObject *m_pSimObject; // r14
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // r14
   UFG::qVector3 *v10; // r14
   UFG::SimComponent *v11; // rcx
-  bool v12; // bp
+  char v12; // bp
   char v13; // si
   bool v14; // r15
   float *v15; // rax
   float v16; // xmm2_4
-  UFG::WheeledVehicleNavigationData *v17; // rcx
-  unsigned int v18; // eax
-  UFG::WayFinder *v19; // rdx
+  UFG::WheeledVehicleNavigationData *m_NavigationData; // rcx
+  unsigned int m_RoadNetworkType; // eax
+  UFG::WayGraph **p_m_WayGraph; // rdx
   UFG::SimObject *v20; // rbx
   UFG::TransformNodeComponent *v21; // rbx
-  UFG::RacePosition *v22; // rcx
-  UFG::RacePosition *v23; // rcx
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v24; // rax
-  char v25; // [rsp+20h] [rbp-48h]
+  UFG::RacePosition *m_pRacePosition; // rcx
+  UFG::RacePosition *m_pRacePositionSteer; // rcx
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *CarChaseTargetFormation; // rax
+  char v25[16]; // [rsp+20h] [rbp-48h] BYREF
 
-  v2 = this;
-  v3 = this->m_pSubject.m_pSimComponent;
-  if ( v3 )
+  m_pSimComponent = this->m_pSubject.m_pSimComponent;
+  if ( m_pSimComponent )
   {
-    v4 = ((__int64 (*)(void))v3->vfptr[23].__vecDelDtor)();
-    v5 = ((__int64 (*)(void))v2->m_pSubject.m_pSimComponent->vfptr[24].__vecDelDtor)();
+    v4 = ((__int64 (__fastcall *)(UFG::SimComponent *))m_pSimComponent->vfptr[23].__vecDelDtor)(m_pSimComponent);
+    v5 = ((__int64 (__fastcall *)(UFG::SimComponent *))this->m_pSubject.m_pSimComponent->vfptr[24].__vecDelDtor)(this->m_pSubject.m_pSimComponent);
     LODWORD(v6) = *(_DWORD *)v4 & _xmm;
     v7 = *(float *)(v5 + 4) - *(float *)(v4 + 4);
-    LODWORD(v2->mGuide.m_FrontBoundary) = *(_DWORD *)v5 & _xmm;
-    v2->mGuide.m_RearBoundary = v6;
-    LODWORD(v2->mGuide.m_ObjectWidth) = LODWORD(v7) & _xmm;
+    LODWORD(this->mGuide.m_FrontBoundary) = *(_DWORD *)v5 & _xmm;
+    this->mGuide.m_RearBoundary = v6;
+    LODWORD(this->mGuide.m_ObjectWidth) = LODWORD(v7) & _xmm;
   }
-  UFG::RoadSpaceComponent::UpdateChaseMatrix(v2);
-  UFG::RoadSpaceComponent::UpdateNavGuide(v2);
-  v8 = v2->m_pSimObject;
-  if ( v8 )
-    v9 = v8->m_pTransformNodeComponent;
+  UFG::RoadSpaceComponent::UpdateChaseMatrix(this);
+  UFG::RoadSpaceComponent::UpdateNavGuide(this);
+  m_pSimObject = this->m_pSimObject;
+  if ( m_pSimObject )
+    m_pTransformNodeComponent = m_pSimObject->m_pTransformNodeComponent;
   else
-    v9 = 0i64;
-  UFG::TransformNodeComponent::UpdateWorldTransform(v9);
-  v10 = (UFG::qVector3 *)&v9->mWorldTransform.v3;
-  if ( v2->mGuide.m_Attached )
+    m_pTransformNodeComponent = 0i64;
+  UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+  v10 = (UFG::qVector3 *)&m_pTransformNodeComponent->mWorldTransform.v3;
+  if ( this->mGuide.m_Attached )
   {
-    UFG::RoadNetworkGuide::Update(&v2->mGuide, v10);
+    UFG::RoadNetworkGuide::Update(&this->mGuide, v10);
   }
   else
   {
-    v11 = v2->m_pSubject.m_pSimComponent;
-    v12 = v11 && ((unsigned __int8 (*)(void))v11->vfptr[46].__vecDelDtor)();
-    v13 = (*(_DWORD *)&v2->mBits >> 2) & 1;
-    v14 = v12 && !v13;
-    v15 = (float *)(*((__int64 (__fastcall **)(UFG::VehicleWayFinderClient *, char *))&v2->mWayClient.vfptr[1].__vecDelDtor
+    v11 = this->m_pSubject.m_pSimComponent;
+    v12 = v11 && ((unsigned __int8 (__fastcall *)(UFG::SimComponent *))v11->vfptr[46].__vecDelDtor)(v11);
+    v13 = (*(_DWORD *)&this->mBits & 4) != 0;
+    v14 = v12 && (*(_DWORD *)&this->mBits & 4) == 0;
+    v15 = (float *)(*((__int64 (__fastcall **)(UFG::VehicleWayFinderClient *, char *))&this->mWayClient.vfptr[1].__vecDelDtor
                     + 1))(
-                     &v2->mWayClient,
-                     &v25);
+                     &this->mWayClient,
+                     v25);
     v16 = (float)((float)((float)(v10->y - v15[1]) * (float)(v10->y - v15[1]))
                 + (float)((float)(v10->x - *v15) * (float)(v10->x - *v15)))
         + (float)((float)(v10->z - v15[2]) * (float)(v10->z - v15[2]));
     if ( v16 > 9.0 && v12 || v14 )
-      UFG::RoadSpaceComponent::SnapToRoadNetwork(v2);
+      UFG::RoadSpaceComponent::SnapToRoadNetwork(this);
     if ( v16 > 9.0 )
     {
-      v17 = UFG::WheeledVehicleManager::m_Instance->m_NavigationData;
-      v18 = v2->mWayClient.m_RoadNetworkType;
-      if ( v18 == 1 )
+      m_NavigationData = UFG::WheeledVehicleManager::m_Instance->m_NavigationData;
+      m_RoadNetworkType = this->mWayClient.m_RoadNetworkType;
+      if ( m_RoadNetworkType == 1 )
       {
-        v19 = &v17->mTramWayFinder;
+        p_m_WayGraph = &m_NavigationData->mTramWayFinder.m_WayGraph;
       }
-      else if ( v18 == 2 )
+      else if ( m_RoadNetworkType == 2 )
       {
-        v19 = &v17->mFerryWayFinder;
+        p_m_WayGraph = &m_NavigationData->mFerryWayFinder.m_WayGraph;
       }
       else
       {
-        v19 = &v17->mOceanWayFinder;
-        if ( v18 != 3 )
-          v19 = &v17->mTrafficWayFinder;
+        p_m_WayGraph = &m_NavigationData->mOceanWayFinder.m_WayGraph;
+        if ( m_RoadNetworkType != 3 )
+          p_m_WayGraph = &m_NavigationData->mTrafficWayFinder.m_WayGraph;
       }
-      v2->mWayClient.vfptr->SetPosition(
-        (UFG::WayFinderClient *)&v2->mWayClient.vfptr,
-        v19->m_WayGraph,
-        v10,
-        (UFG::qVector3 *)&v2->m_ChaseWorld);
+      this->mWayClient.vfptr->SetPosition(&this->mWayClient, *p_m_WayGraph, v10, (UFG::qVector3 *)&this->m_ChaseWorld);
     }
     if ( v13 != v12 )
     {
-      *(_DWORD *)&v2->mBits &= 0xFFFFFFFB;
-      *(_DWORD *)&v2->mBits |= 4 * (v12 != 0);
+      *(_DWORD *)&this->mBits &= ~4u;
+      *(_DWORD *)&this->mBits |= 4 * (v12 != 0);
     }
   }
-  UFG::RoadSpaceComponent::CleanupOnRaceDeleted(v2);
-  v20 = v2->m_pSimObject;
+  UFG::RoadSpaceComponent::CleanupOnRaceDeleted(this);
+  v20 = this->m_pSimObject;
   if ( v20 )
   {
     v21 = v20->m_pTransformNodeComponent;
     if ( v21 )
     {
       UFG::TransformNodeComponent::UpdateWorldTransform(v21);
-      UFG::CrumbTrail::Update(&v2->m_PositionTrail, (UFG::qVector3 *)&v21->mWorldTransform.v3);
+      UFG::CrumbTrail::Update(&this->m_PositionTrail, (UFG::qVector3 *)&v21->mWorldTransform.v3);
     }
   }
-  v22 = v2->m_pRacePosition;
-  if ( v22 )
-    UFG::RacePosition::Update(v22, v10, delta_sec);
-  v23 = v2->m_pRacePositionSteer;
-  if ( v23 )
-    UFG::RacePosition::UpdateRacePoint(v23, v10);
-  v24 = UFG::RoadSpaceComponent::GetCarChaseTargetFormation(v2);
-  if ( v24 )
-    UFG::VehicleFormations::Update((UFG::VehicleFormations *)v24, delta_sec);
+  m_pRacePosition = this->m_pRacePosition;
+  if ( m_pRacePosition )
+    UFG::RacePosition::Update(m_pRacePosition, v10, delta_sec);
+  m_pRacePositionSteer = this->m_pRacePositionSteer;
+  if ( m_pRacePositionSteer )
+    UFG::RacePosition::UpdateRacePoint(m_pRacePositionSteer, v10);
+  CarChaseTargetFormation = UFG::RoadSpaceComponent::GetCarChaseTargetFormation(this);
+  if ( CarChaseTargetFormation )
+    UFG::VehicleFormations::Update((UFG::VehicleFormations *)CarChaseTargetFormation, delta_sec);
 }
 
 // File Line: 780
@@ -641,60 +564,55 @@ _BOOL8 __fastcall UFG::RoadSpaceComponent::IsNavGuideEnabled(UFG::RoadSpaceCompo
 // RVA: 0x64D530
 void __fastcall UFG::RoadSpaceComponent::FindPath(UFG::RoadSpaceComponent *this)
 {
-  UFG::SimObject *v1; // rdi
-  UFG::RoadSpaceComponent *v2; // rbx
+  UFG::SimObject *m_pSimObject; // rdi
 
-  v1 = this->m_pSimObject;
-  v2 = this;
-  if ( v1 )
-    v1 = (UFG::SimObject *)v1->m_pTransformNodeComponent;
-  UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v1);
+  m_pSimObject = this->m_pSimObject;
+  if ( m_pSimObject )
+    m_pSimObject = (UFG::SimObject *)m_pSimObject->m_pTransformNodeComponent;
+  UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)m_pSimObject);
   UFG::NavGuide::FindPath(
-    &v2->m_NavGuide,
-    (UFG::qVector3 *)v1[1].mNode.mChild,
-    &v2->mDestinationPosition,
-    v2->m_DestNavRadius);
+    &this->m_NavGuide,
+    (UFG::qVector3 *)m_pSimObject[1].mNode.mChild,
+    &this->mDestinationPosition,
+    COERCE_DOUBLE((unsigned __int64)LODWORD(this->m_DestNavRadius)));
 }
 
 // File Line: 829
 // RVA: 0x6451F0
-void __fastcall UFG::RoadSpaceComponent::AttachToRoadNetwork(UFG::RoadSpaceComponent *this, UFG::qVector3 *position, UFG::qVector3 *forward)
+void __fastcall UFG::RoadSpaceComponent::AttachToRoadNetwork(
+        UFG::RoadSpaceComponent *this,
+        UFG::qVector3 *position,
+        UFG::qVector3 *forward)
 {
   UFG::RoadNetworkResource *v3; // rsi
-  UFG::qVector3 *v4; // rbp
-  UFG::qVector3 *v5; // r14
-  UFG::RoadSpaceComponent *v6; // rdi
   unsigned int type; // ebx
-  float v8; // xmm6_4
-  unsigned int v9; // ebx
-  UFG::RoadNetworkNode *v10; // rax
-  UFG::RoadNetworkLocation v11; // [rsp+30h] [rbp-28h]
+  float m_LaneT; // xmm6_4
+  unsigned int mLaneIndex; // ebx
+  UFG::RoadNetworkNode *RoadNetworkNode; // rax
+  UFG::RoadNetworkLocation v11; // [rsp+30h] [rbp-28h] BYREF
 
   v3 = UFG::gpRoadNetworkResource;
-  v4 = forward;
-  v5 = position;
-  v6 = this;
   if ( UFG::gpRoadNetworkResource )
   {
     type = 0;
-    if ( UFG::SimObjectUtility::IsClassType(this->m_pSimObject, (UFG::qSymbol *)&qSymbol_Tram.mUID) )
+    if ( UFG::SimObjectUtility::IsClassType(this->m_pSimObject, &qSymbol_Tram) )
     {
       type = 1;
     }
-    else if ( UFG::SimObjectUtility::IsClassType(v6->m_pSimObject, (UFG::qSymbol *)&qSymbol_Ferry.mUID) )
+    else if ( UFG::SimObjectUtility::IsClassType(this->m_pSimObject, &qSymbol_Ferry) )
     {
       type = 2;
     }
-    else if ( UFG::SimObjectUtility::IsClassType(v6->m_pSimObject, (UFG::qSymbol *)&qSymbol_Boat_21.mUID) )
+    else if ( UFG::SimObjectUtility::IsClassType(this->m_pSimObject, &qSymbol_Boat_21) )
     {
       type = 3;
     }
     Scaleform::GFx::AS3::Value::Value(&v11);
-    UFG::RoadNetworkLocation::AttachToNetwork(&v11, v3, v5, v4, type);
-    v8 = v11.m_LaneT;
-    v9 = v11.m_CurrentLane->mLaneIndex;
-    v10 = UFG::RoadNetworkLocation::GetRoadNetworkNode(&v11);
-    UFG::RoadNetworkGuide::AttachToNetwork(&v6->mGuide, v6->m_pSimObject, v10, v9, v8);
+    UFG::RoadNetworkLocation::AttachToNetwork(&v11, v3, position, forward, type);
+    m_LaneT = v11.m_LaneT;
+    mLaneIndex = v11.m_CurrentLane->mLaneIndex;
+    RoadNetworkNode = UFG::RoadNetworkLocation::GetRoadNetworkNode(&v11);
+    UFG::RoadNetworkGuide::AttachToNetwork(&this->mGuide, this->m_pSimObject, RoadNetworkNode, mLaneIndex, m_LaneT);
   }
 }
 
@@ -702,345 +620,348 @@ void __fastcall UFG::RoadSpaceComponent::AttachToRoadNetwork(UFG::RoadSpaceCompo
 // RVA: 0x65A5B0
 void __fastcall UFG::RoadSpaceComponent::SnapToRoadNetwork(UFG::RoadSpaceComponent *this)
 {
-  UFG::SimObject *v1; // rbx
-  UFG::RoadSpaceComponent *v2; // rdi
+  UFG::SimObject *m_pSimObject; // rbx
 
-  v1 = this->m_pSimObject;
-  v2 = this;
-  if ( v1 )
-    v1 = (UFG::SimObject *)v1->m_pTransformNodeComponent;
-  UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v1);
-  UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v1);
-  UFG::RoadSpaceComponent::AttachToRoadNetwork(v2, (UFG::qVector3 *)v1[1].mNode.mChild, (UFG::qVector3 *)&v1[1]);
-  UFG::RoadNetworkGuide::RemoveFromNetwork(&v2->mGuide);
+  m_pSimObject = this->m_pSimObject;
+  if ( m_pSimObject )
+    m_pSimObject = (UFG::SimObject *)m_pSimObject->m_pTransformNodeComponent;
+  UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)m_pSimObject);
+  UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)m_pSimObject);
+  UFG::RoadSpaceComponent::AttachToRoadNetwork(
+    this,
+    (UFG::qVector3 *)m_pSimObject[1].mNode.mChild,
+    (UFG::qVector3 *)&m_pSimObject[1]);
+  UFG::RoadNetworkGuide::RemoveFromNetwork(&this->mGuide);
 }
 
 // File Line: 866
 // RVA: 0x6452F0
 void __fastcall UFG::RoadSpaceComponent::AttachToRoadNetwork(UFG::RoadSpaceComponent *this, bool consider_heading)
 {
-  UFG::SimObject *v2; // rbx
-  UFG::qVector3 *v3; // rdi
-  UFG::RoadSpaceComponent *v4; // rsi
-  UFG::TransformNodeComponent *v5; // rbx
+  UFG::SimObject *m_pSimObject; // rbx
+  UFG::qVector3 *p_mWorldTransform; // rdi
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rbx
 
-  v2 = this->m_pSimObject;
-  v3 = 0i64;
-  v4 = this;
-  if ( v2 )
-    v5 = v2->m_pTransformNodeComponent;
+  m_pSimObject = this->m_pSimObject;
+  p_mWorldTransform = 0i64;
+  if ( m_pSimObject )
+    m_pTransformNodeComponent = m_pSimObject->m_pTransformNodeComponent;
   else
-    v5 = 0i64;
+    m_pTransformNodeComponent = 0i64;
   if ( consider_heading )
   {
-    UFG::TransformNodeComponent::UpdateWorldTransform(v5);
-    v3 = (UFG::qVector3 *)&v5->mWorldTransform;
+    UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+    p_mWorldTransform = (UFG::qVector3 *)&m_pTransformNodeComponent->mWorldTransform;
   }
-  UFG::TransformNodeComponent::UpdateWorldTransform(v5);
-  UFG::RoadSpaceComponent::AttachToRoadNetwork(v4, (UFG::qVector3 *)&v5->mWorldTransform.v3, v3);
+  UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+  UFG::RoadSpaceComponent::AttachToRoadNetwork(
+    this,
+    (UFG::qVector3 *)&m_pTransformNodeComponent->mWorldTransform.v3,
+    p_mWorldTransform);
 }
 
 // File Line: 878
 // RVA: 0x64FB10
-UFG::qVector3 *__fastcall UFG::RoadSpaceComponent::GetSteerToDestination(UFG::RoadSpaceComponent *this, UFG::qVector3 *result, float steerToDistance, bool isBoat, bool useDirection)
+UFG::qVector3 *__fastcall UFG::RoadSpaceComponent::GetSteerToDestination(
+        UFG::RoadSpaceComponent *this,
+        UFG::qVector3 *result,
+        float steerToDistance,
+        bool isBoat,
+        bool useDirection)
 {
-  float v5; // xmm0_4
-  float v6; // xmm1_4
-  bool v7; // bl
-  UFG::qVector3 *v8; // rsi
-  UFG::RoadSpaceComponent *v9; // rdi
-  __m128 v11; // xmm10
-  float v12; // xmm7_4
-  float v13; // xmm11_4
-  UFG::qSafePointerNode<UFG::SimComponent>Vtbl *v14; // rax
-  UFG::qVector3 *v15; // rbp
-  float v16; // xmm9_4
-  float v17; // xmm8_4
-  UFG::SimComponent *v18; // rdi
-  float *v19; // rbx
-  float v20; // xmm13_4
-  float v21; // xmm6_4
+  float y; // xmm0_4
+  float z; // xmm1_4
+  UFG::SimComponent *m_pSimComponent; // rcx
+  __m128 x_low; // xmm10
+  float v13; // xmm7_4
+  float v14; // xmm11_4
+  UFG::qSafePointerNode<UFG::SimComponent>Vtbl *vfptr; // rax
+  UFG::qVector3 *v16; // rbp
+  float v17; // xmm9_4
+  float v18; // xmm8_4
+  UFG::SimComponent *v19; // rdi
+  float *v20; // rbx
+  float v21; // xmm13_4
   float v22; // xmm6_4
-  float v23; // xmm15_4
-  float v24; // xmm4_4
-  float v25; // xmm5_4
-  float v26; // xmm8_4
-  __m128 v27; // xmm9
-  float v28; // xmm7_4
-  __m128 v29; // xmm2
-  float v30; // xmm1_4
-  float v31; // xmm11_4
-  float v32; // xmm9_4
-  float v33; // xmm7_4
-  float v34; // xmm8_4
-  float v35; // xmm12_4
-  float v36; // xmm2_4
-  float v37; // xmm8_4
-  float v38; // xmm9_4
-  __m128 v39; // xmm10
-  float v40; // xmm7_4
-  __m128 v41; // xmm11
-  float v42; // xmm12_4
-  __m128 v43; // xmm2
-  __m128 v44; // xmm0
-  __m128 v45; // xmm2
-  float v46; // xmm6_4
-  float v47; // xmm10_4
-  float v48; // xmm12_4
-  float v49; // xmm11_4
-  __m128 v50; // xmm3
-  float v51; // xmm5_4
-  __m128 v52; // xmm2
-  float v53; // xmm4_4
-  float v54; // xmm10_4
-  float v55; // xmm6_4
-  float v56; // xmm9_4
-  float v57; // xmm7_4
-  float v58; // xmm9_4
-  float v59; // xmm7_4
-  UFG::qVector3 *v60; // rax
-  float v61; // xmm0_4
-  float v62; // xmm1_4
-  UFG::qVector3 ray; // [rsp+30h] [rbp-D8h]
-  UFG::qVector3 resulta; // [rsp+40h] [rbp-C8h]
-  float v65; // [rsp+110h] [rbp+8h]
-  float radius; // [rsp+120h] [rbp+18h]
+  float v23; // xmm6_4
+  float v24; // xmm15_4
+  float v25; // xmm4_4
+  float x; // xmm5_4
+  float v27; // xmm8_4
+  __m128 v28; // xmm9
+  float v29; // xmm7_4
+  __m128 v30; // xmm2
+  float v31; // xmm1_4
+  float v32; // xmm11_4
+  float v33; // xmm9_4
+  float v34; // xmm7_4
+  float v35; // xmm8_4
+  float v36; // xmm12_4
+  float v37; // xmm2_4
+  float v38; // xmm8_4
+  float v39; // xmm9_4
+  __m128 y_low; // xmm10
+  float v41; // xmm7_4
+  __m128 v42; // xmm11
+  float v43; // xmm12_4
+  __m128 v44; // xmm2
+  __m128 v45; // xmm0
+  __m128 v46; // xmm2
+  float v47; // xmm6_4
+  float v48; // xmm10_4
+  float v49; // xmm12_4
+  float v50; // xmm11_4
+  __m128 v51; // xmm3
+  float v52; // xmm5_4
+  __m128 v53; // xmm2
+  float v54; // xmm4_4
+  float v55; // xmm10_4
+  float v56; // xmm6_4
+  float v57; // xmm9_4
+  float v58; // xmm7_4
+  float v59; // xmm9_4
+  float v60; // xmm7_4
+  UFG::qVector3 *v61; // rax
+  float v62; // xmm0_4
+  float v63; // xmm1_4
+  UFG::qVector3 ray; // [rsp+30h] [rbp-D8h] BYREF
+  UFG::qVector3 resulta; // [rsp+40h] [rbp-C8h] BYREF
+  float v66; // [rsp+110h] [rbp+8h]
 
-  radius = steerToDistance;
-  v5 = this->mDestinationPosition.y;
-  v6 = this->mDestinationPosition.z;
+  y = this->mDestinationPosition.y;
+  z = this->mDestinationPosition.z;
   result->x = this->mDestinationPosition.x;
-  v7 = isBoat;
-  v8 = result;
-  result->y = v5;
-  result->z = v6;
-  v9 = this;
+  result->y = y;
+  result->z = z;
   if ( !this->m_pSubject.m_pSimComponent )
     return result;
   Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 2u);
-  v11 = (__m128)LODWORD(v9->mDestinationDirection.x);
-  v12 = v9->mDestinationDirection.y;
-  v13 = v9->mDestinationDirection.z;
-  v14 = v9->m_pSubject.m_pSimComponent->vfptr;
-  ray.x = v9->mDestinationDirection.x;
-  ray.y = v12;
-  ray.z = v13;
-  v15 = (UFG::qVector3 *)((__int64 (*)(void))v14[17].__vecDelDtor)();
-  ((void (*)(void))v9->m_pSubject.m_pSimComponent->vfptr[16].__vecDelDtor)();
+  m_pSimComponent = this->m_pSubject.m_pSimComponent;
+  x_low = (__m128)LODWORD(this->mDestinationDirection.x);
+  v13 = this->mDestinationDirection.y;
+  v14 = this->mDestinationDirection.z;
+  vfptr = m_pSimComponent->vfptr;
+  ray.x = this->mDestinationDirection.x;
+  ray.y = v13;
+  ray.z = v14;
+  v16 = (UFG::qVector3 *)((__int64 (__fastcall *)(UFG::SimComponent *))vfptr[17].__vecDelDtor)(m_pSimComponent);
+  ((void (__fastcall *)(UFG::SimComponent *))this->m_pSubject.m_pSimComponent->vfptr[16].__vecDelDtor)(this->m_pSubject.m_pSimComponent);
   if ( useDirection
-    && (float)((float)((float)(v12 * v12) + (float)(v11.m128_f32[0] * v11.m128_f32[0])) + (float)(v13 * v13)) >= 0.001 )
+    && (float)((float)((float)(v13 * v13) + (float)(x_low.m128_f32[0] * x_low.m128_f32[0])) + (float)(v14 * v14)) >= 0.001 )
   {
-    if ( (float)((float)((float)((float)(v15->y - v8->y) * (float)(v15->y - v8->y))
-                       + (float)((float)(v15->x - v8->x) * (float)(v15->x - v8->x)))
-               + (float)((float)(v15->z - v8->z) * (float)(v15->z - v8->z))) > 4.0 )
+    if ( (float)((float)((float)((float)(v16->y - result->y) * (float)(v16->y - result->y))
+                       + (float)((float)(v16->x - result->x) * (float)(v16->x - result->x)))
+               + (float)((float)(v16->z - result->z) * (float)(v16->z - result->z))) > 4.0 )
     {
-      v16 = FLOAT_0_78539819;
-      if ( v7 )
-        v16 = FLOAT_0_39269909;
-      v17 = FLOAT_10_0;
-      if ( v7 )
-        v17 = FLOAT_20_0;
-      v18 = v9->m_pSubject.m_pSimComponent;
-      v19 = (float *)((__int64 (__fastcall *)(UFG::SimComponent *))v18->vfptr[24].__vecDelDtor)(v18);
-      v20 = *(float *)&FLOAT_1_0;
-      v21 = (float)(*v19 - *(float *)((__int64 (__fastcall *)(UFG::SimComponent *))v18->vfptr[23].__vecDelDtor)(v18))
+      v17 = FLOAT_0_78539819;
+      if ( isBoat )
+        v17 = FLOAT_0_39269909;
+      v18 = FLOAT_10_0;
+      if ( isBoat )
+        v18 = FLOAT_20_0;
+      v19 = this->m_pSubject.m_pSimComponent;
+      v20 = (float *)((__int64 (__fastcall *)(UFG::SimComponent *))v19->vfptr[24].__vecDelDtor)(v19);
+      v21 = *(float *)&FLOAT_1_0;
+      v22 = (float)(*v20 - *(float *)((__int64 (__fastcall *)(UFG::SimComponent *))v19->vfptr[23].__vecDelDtor)(v19))
           - 1.0;
-      if ( v21 < 1.0 )
-        v21 = *(float *)&FLOAT_1_0;
-      v22 = v21 / v16;
-      if ( v22 <= 2.0 )
-        v22 = FLOAT_2_0;
-      if ( v22 >= v17 )
-        v22 = v17;
-      v23 = UFG::qVector3::msDirUp.y;
-      v24 = UFG::qVector3::msDirUp.z;
-      v25 = UFG::qVector3::msDirUp.x;
-      v27 = v11;
-      v65 = v22 * v22;
-      v26 = (float)(v13 * UFG::qVector3::msDirUp.y) - (float)(v12 * UFG::qVector3::msDirUp.z);
-      v27.m128_f32[0] = (float)(v11.m128_f32[0] * UFG::qVector3::msDirUp.z) - (float)(v13 * UFG::qVector3::msDirUp.x);
-      v29 = v27;
-      v28 = (float)(v12 * UFG::qVector3::msDirUp.x) - (float)(v11.m128_f32[0] * UFG::qVector3::msDirUp.y);
-      v29.m128_f32[0] = (float)((float)(v27.m128_f32[0] * v27.m128_f32[0]) + (float)(v26 * v26)) + (float)(v28 * v28);
-      if ( v29.m128_f32[0] == 0.0 )
-        v30 = 0.0;
+      if ( v22 < 1.0 )
+        v22 = *(float *)&FLOAT_1_0;
+      v23 = v22 / v17;
+      if ( v23 <= 2.0 )
+        v23 = FLOAT_2_0;
+      if ( v23 >= v18 )
+        v23 = v18;
+      v24 = UFG::qVector3::msDirUp.y;
+      v25 = UFG::qVector3::msDirUp.z;
+      x = UFG::qVector3::msDirUp.x;
+      v28 = x_low;
+      v66 = v23 * v23;
+      v27 = (float)(v14 * UFG::qVector3::msDirUp.y) - (float)(v13 * UFG::qVector3::msDirUp.z);
+      v28.m128_f32[0] = (float)(x_low.m128_f32[0] * UFG::qVector3::msDirUp.z) - (float)(v14 * UFG::qVector3::msDirUp.x);
+      v30 = v28;
+      v29 = (float)(v13 * UFG::qVector3::msDirUp.x) - (float)(x_low.m128_f32[0] * UFG::qVector3::msDirUp.y);
+      v30.m128_f32[0] = (float)((float)(v28.m128_f32[0] * v28.m128_f32[0]) + (float)(v27 * v27)) + (float)(v29 * v29);
+      if ( v30.m128_f32[0] == 0.0 )
+        v31 = 0.0;
       else
-        v30 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v29));
-      v31 = v8->y;
-      v32 = v27.m128_f32[0] * v30;
-      v33 = v28 * v30;
-      v34 = v26 * v30;
-      v35 = v8->z;
-      v36 = (float)((float)((float)(v15->y - v31) * v32) + (float)((float)(v15->x - v8->x) * v34))
-          + (float)((float)(v15->z - v35) * v33);
-      if ( v36 <= 0.0 )
+        v31 = 1.0 / _mm_sqrt_ps(v30).m128_f32[0];
+      v32 = result->y;
+      v33 = v28.m128_f32[0] * v31;
+      v34 = v29 * v31;
+      v35 = v27 * v31;
+      v36 = result->z;
+      v37 = (float)((float)((float)(v16->y - v32) * v33) + (float)((float)(v16->x - result->x) * v35))
+          + (float)((float)(v16->z - v36) * v34);
+      if ( v37 <= 0.0 )
       {
-        if ( v36 >= 0.0 )
-          v20 = 0.0;
+        if ( v37 >= 0.0 )
+          v21 = 0.0;
         else
-          v20 = FLOAT_N1_0;
+          v21 = FLOAT_N1_0;
       }
-      v37 = (float)(v34 * (float)(v20 * v22)) + v8->x;
-      v39 = (__m128)LODWORD(v15->y);
-      v38 = (float)(v32 * (float)(v20 * v22)) + v31;
-      v41 = (__m128)LODWORD(v15->x);
-      v39.m128_f32[0] = v39.m128_f32[0] - v38;
-      v40 = (float)(v33 * (float)(v20 * v22)) + v35;
-      v43 = v39;
-      v41.m128_f32[0] = v41.m128_f32[0] - v37;
-      v42 = v15->z - v40;
-      v43.m128_f32[0] = (float)((float)(v39.m128_f32[0] * v39.m128_f32[0]) + (float)(v41.m128_f32[0] * v41.m128_f32[0]))
-                      + (float)(v42 * v42);
-      v44 = v43;
-      v44.m128_f32[0] = v43.m128_f32[0] - v65;
-      if ( (float)(v43.m128_f32[0] - v65) >= 0.001 )
+      v38 = (float)(v35 * (float)(v21 * v23)) + result->x;
+      y_low = (__m128)LODWORD(v16->y);
+      v39 = (float)(v33 * (float)(v21 * v23)) + v32;
+      v42 = (__m128)LODWORD(v16->x);
+      y_low.m128_f32[0] = y_low.m128_f32[0] - v39;
+      v41 = (float)(v34 * (float)(v21 * v23)) + v36;
+      v44 = y_low;
+      v42.m128_f32[0] = v42.m128_f32[0] - v38;
+      v43 = v16->z - v41;
+      v44.m128_f32[0] = (float)((float)(y_low.m128_f32[0] * y_low.m128_f32[0])
+                              + (float)(v42.m128_f32[0] * v42.m128_f32[0]))
+                      + (float)(v43 * v43);
+      v45 = v44;
+      v45.m128_f32[0] = v44.m128_f32[0] - v66;
+      if ( (float)(v44.m128_f32[0] - v66) >= 0.001 )
       {
-        v44.m128_f32[0] = v44.m128_f32[0] / v43.m128_f32[0];
-        v50 = v41;
-        LODWORD(v51) = (unsigned __int128)_mm_sqrt_ps(v44);
-        v50.m128_f32[0] = (float)(v41.m128_f32[0] * UFG::qVector3::msDirUp.z) - (float)(v42 * UFG::qVector3::msDirUp.x);
-        v52 = v50;
-        v53 = (float)(v42 * UFG::qVector3::msDirUp.y) - (float)(v39.m128_f32[0] * UFG::qVector3::msDirUp.z);
-        v54 = (float)(v39.m128_f32[0] * UFG::qVector3::msDirUp.x) - (float)(v41.m128_f32[0] * UFG::qVector3::msDirUp.y);
-        v52.m128_f32[0] = (float)((float)(v50.m128_f32[0] * v50.m128_f32[0]) + (float)(v53 * v53)) + (float)(v54 * v54);
-        v55 = (float)(v22 / v51) / COERCE_FLOAT(_mm_sqrt_ps(v52));
-        v56 = (float)(v38 + (float)((float)(v50.m128_f32[0] * v55) * v20)) - v15->y;
-        v57 = (float)(v40 + (float)((float)(v54 * v55) * v20)) - v15->z;
-        ray.x = (float)(v37 + (float)((float)(v53 * v55) * v20)) - v15->x;
-        ray.y = v56;
-        ray.z = v57;
-        v58 = (float)(v56 * v51) + v15->y;
-        v59 = (float)(v57 * v51) + v15->z;
-        v8->x = (float)(ray.x * v51) + v15->x;
-        v8->y = v58;
-        v8->z = v59;
+        v45.m128_f32[0] = v45.m128_f32[0] / v44.m128_f32[0];
+        v51 = v42;
+        v52 = _mm_sqrt_ps(v45).m128_f32[0];
+        v51.m128_f32[0] = (float)(v42.m128_f32[0] * UFG::qVector3::msDirUp.z) - (float)(v43 * UFG::qVector3::msDirUp.x);
+        v53 = v51;
+        v54 = (float)(v43 * UFG::qVector3::msDirUp.y) - (float)(y_low.m128_f32[0] * UFG::qVector3::msDirUp.z);
+        v55 = (float)(y_low.m128_f32[0] * UFG::qVector3::msDirUp.x)
+            - (float)(v42.m128_f32[0] * UFG::qVector3::msDirUp.y);
+        v53.m128_f32[0] = (float)((float)(v51.m128_f32[0] * v51.m128_f32[0]) + (float)(v54 * v54)) + (float)(v55 * v55);
+        v56 = (float)(v23 / v52) / _mm_sqrt_ps(v53).m128_f32[0];
+        v57 = (float)(v39 + (float)((float)(v51.m128_f32[0] * v56) * v21)) - v16->y;
+        v58 = (float)(v41 + (float)((float)(v55 * v56) * v21)) - v16->z;
+        ray.x = (float)(v38 + (float)((float)(v54 * v56) * v21)) - v16->x;
+        ray.y = v57;
+        ray.z = v58;
+        v59 = (float)(v57 * v52) + v16->y;
+        v60 = (float)(v58 * v52) + v16->z;
+        result->x = (float)(ray.x * v52) + v16->x;
+        result->y = v59;
+        result->z = v60;
       }
       else
       {
-        if ( v43.m128_f32[0] < 0.001 )
+        if ( v44.m128_f32[0] < 0.001 )
         {
-          v39 = (__m128)LODWORD(v8->y);
-          v41.m128_f32[0] = v8->x - v37;
-          v39.m128_f32[0] = v39.m128_f32[0] - v38;
-          v42 = v8->z - v40;
+          y_low = (__m128)LODWORD(result->y);
+          v42.m128_f32[0] = result->x - v38;
+          y_low.m128_f32[0] = y_low.m128_f32[0] - v39;
+          v43 = result->z - v41;
         }
-        v45 = v39;
-        v45.m128_f32[0] = (float)((float)(v39.m128_f32[0] * v39.m128_f32[0]) + (float)(v41.m128_f32[0] * v41.m128_f32[0]))
-                        + (float)(v42 * v42);
-        v46 = v22 / COERCE_FLOAT(_mm_sqrt_ps(v45));
-        v47 = v39.m128_f32[0] * v46;
-        v48 = v42 * v46;
-        v49 = v41.m128_f32[0] * v46;
-        v8->y = v47 + v38;
-        v8->z = v48 + v40;
-        ray.x = (float)((float)(v48 * v23) - (float)(v47 * v24)) * v20;
-        v8->x = v49 + v37;
-        ray.y = (float)((float)(v49 * v24) - (float)(v48 * v25)) * v20;
-        ray.z = (float)((float)(v47 * v25) - (float)(v49 * v23)) * v20;
+        v46 = y_low;
+        v46.m128_f32[0] = (float)((float)(y_low.m128_f32[0] * y_low.m128_f32[0])
+                                + (float)(v42.m128_f32[0] * v42.m128_f32[0]))
+                        + (float)(v43 * v43);
+        v47 = v23 / _mm_sqrt_ps(v46).m128_f32[0];
+        v48 = y_low.m128_f32[0] * v47;
+        v49 = v43 * v47;
+        v50 = v42.m128_f32[0] * v47;
+        result->y = v48 + v39;
+        result->z = v49 + v41;
+        ray.x = (float)((float)(v49 * v24) - (float)(v48 * v25)) * v21;
+        result->x = v50 + v38;
+        ray.y = (float)((float)(v50 * v25) - (float)(v49 * x)) * v21;
+        ray.z = (float)((float)(v48 * x) - (float)(v50 * v24)) * v21;
       }
     }
-    v60 = UFG::RoadSpaceComponent::SteerTo(&resulta, v15, radius, v8, &ray);
-    v61 = v60->y;
-    v62 = v60->z;
-    v8->x = v60->x;
-    v8->y = v61;
-    v8->z = v62;
+    v61 = UFG::RoadSpaceComponent::SteerTo(&resulta, v16, steerToDistance, result, &ray);
+    v62 = v61->y;
+    v63 = v61->z;
+    result->x = v61->x;
+    result->y = v62;
+    result->z = v63;
   }
-  return v8;
+  return result;
 }
 
 // File Line: 965
 // RVA: 0x64F8C0
-UFG::qVector3 *__fastcall UFG::RoadSpaceComponent::GetSteerTo(UFG::RoadSpaceComponent *this, UFG::qVector3 *result, UFG::qVector3 *steer_to, float offset, float steer_to_distance)
+UFG::qVector3 *__fastcall UFG::RoadSpaceComponent::GetSteerTo(
+        UFG::RoadSpaceComponent *this,
+        UFG::qVector3 *result,
+        UFG::qVector3 *steer_to,
+        float offset,
+        float steer_to_distance)
 {
-  float v5; // xmm0_4
-  float v6; // xmm1_4
+  float x; // xmm0_4
+  float y; // xmm1_4
   bool v7; // bp
-  UFG::qVector3 *v8; // rdi
-  UFG::qVector3 *v9; // rbx
-  UFG::RoadSpaceComponent *v10; // rsi
-  float v11; // xmm2_4
-  UFG::qVector3 *v12; // rax
-  UFG::NavPath *v13; // rax
+  float z; // xmm2_4
+  UFG::qVector3 *SteerToFollow; // rax
+  UFG::NavPath *m_pNavPath; // rax
   float v14; // xmm1_4
   float v15; // xmm0_4
   float v16; // xmm1_4
   float v17; // xmm0_4
-  UFG::qVector2 *v18; // rax
+  UFG::qVector2 *TargetLocation; // rax
   UFG::RoadNetworkLane *v19; // rdi
   float v20; // xmm6_4
-  float v21; // xmm0_4
+  float Length; // xmm0_4
   float v22; // xmm2_4
   float v23; // xmm1_4
   float v24; // xmm5_4
   float v25; // xmm1_4
   float v26; // xmm1_4
   float v27; // xmm0_4
-  UFG::qVector3 resulta; // [rsp+20h] [rbp-38h]
+  UFG::qVector3 resulta; // [rsp+20h] [rbp-38h] BYREF
 
-  v5 = UFG::qVector3::msZero.x;
-  v6 = UFG::qVector3::msZero.y;
+  x = UFG::qVector3::msZero.x;
+  y = UFG::qVector3::msZero.y;
   v7 = this->m_pChaseTarget.m_pPointer != 0i64;
-  v8 = steer_to;
-  v9 = result;
-  v10 = this;
-  v11 = UFG::qVector3::msZero.z;
+  z = UFG::qVector3::msZero.z;
   if ( this->m_pChaseTarget.m_pPointer )
   {
-    v12 = UFG::RoadSpaceComponent::GetSteerToFollow(this, &resulta, steer_to_distance);
-    v5 = v12->x;
-    v6 = v12->y;
-    v11 = v12->z;
+    SteerToFollow = UFG::RoadSpaceComponent::GetSteerToFollow(this, &resulta, steer_to_distance);
+    x = SteerToFollow->x;
+    y = SteerToFollow->y;
+    z = SteerToFollow->z;
   }
-  if ( v10->m_NavGuideEnabled && v10->m_NavGuide.m_Active )
+  if ( this->m_NavGuideEnabled && this->m_NavGuide.m_Active )
   {
-    v13 = v10->m_NavGuide.m_PathQueryOutput.m_pPath.m_pNavPath;
-    if ( v13 && v13->m_aWaypoints.size )
+    m_pNavPath = this->m_NavGuide.m_PathQueryOutput.m_pPath.m_pNavPath;
+    if ( m_pNavPath && m_pNavPath->m_aWaypoints.size )
     {
-      UFG::RoadSpaceComponent::GetSteerToNavPath(v10, &resulta, v8, steer_to_distance);
+      UFG::RoadSpaceComponent::GetSteerToNavPath(this, &resulta, steer_to, steer_to_distance);
       v14 = resulta.y;
-      v9->x = resulta.x;
+      result->x = resulta.x;
       v15 = resulta.z;
-      v9->y = v14;
-      v9->z = v15;
-      return v9;
+      result->y = v14;
+      result->z = v15;
+      return result;
     }
-    if ( v10->m_HasNavWanderCenter )
+    if ( this->m_HasNavWanderCenter )
     {
-      UFG::RoadSpaceComponent::GetSteerToNavWanderDestination(v10, &resulta, v8, steer_to_distance);
+      UFG::RoadSpaceComponent::GetSteerToNavWanderDestination(this, &resulta, steer_to, steer_to_distance);
       v16 = resulta.y;
-      v9->x = resulta.x;
+      result->x = resulta.x;
       v17 = resulta.z;
-      v9->y = v16;
-      v9->z = v17;
-      return v9;
+      result->y = v16;
+      result->z = v17;
+      return result;
     }
 LABEL_27:
-    v9->x = v8->x;
-    v9->y = v8->y;
-    v9->z = v8->z;
-    return v9;
+    result->x = steer_to->x;
+    result->y = steer_to->y;
+    result->z = steer_to->z;
+    return result;
   }
-  if ( !v10->mGuide.m_Attached )
+  if ( !this->mGuide.m_Attached )
   {
     if ( v7 )
     {
-      v9->x = v5;
-      v9->y = v6;
-      v9->z = v11;
-      return v9;
+      result->x = x;
+      result->y = y;
+      result->z = z;
+      return result;
     }
     goto LABEL_27;
   }
-  v18 = UFG::RoadNetworkGuide::GetTargetLocation((UFG::RippleGenerator *)&v10->mGuide);
-  v19 = (UFG::RoadNetworkLane *)v18[1];
-  v20 = v18->x;
-  v21 = UFG::RoadNetworkLane::GetLength(*(UFG::RoadNetworkLane **)&v18[1]);
+  TargetLocation = UFG::RoadNetworkGuide::GetTargetLocation((UFG::RippleGenerator *)&this->mGuide);
+  v19 = (UFG::RoadNetworkLane *)TargetLocation[1];
+  v20 = TargetLocation->x;
+  Length = UFG::RoadNetworkLane::GetLength(v19);
   v22 = 0.0;
-  if ( v21 > 0.0 )
+  if ( Length > 0.0 )
   {
-    v22 = 10.0 / v21;
-    if ( (float)(10.0 / v21) > 0.5 )
+    v22 = 10.0 / Length;
+    if ( (float)(10.0 / Length) > 0.5 )
       v22 = FLOAT_0_5;
   }
   if ( v20 >= 0.5 )
@@ -1067,11 +988,11 @@ LABEL_27:
   }
   UFG::RoadNetworkLane::GetOffsetPos(v19, &resulta, v20, offset - (float)((float)(1.0 - v25) * v19->mOffset));
   v26 = resulta.y;
-  v9->x = resulta.x;
+  result->x = resulta.x;
   v27 = resulta.z;
-  v9->y = v26;
-  v9->z = v27;
-  return v9;
+  result->y = v26;
+  result->z = v27;
+  return result;
 }
 
 // File Line: 1019
@@ -1090,20 +1011,19 @@ void __fastcall UFG::RoadSpaceComponent::DetachFromRoadNetwork(UFG::RoadSpaceCom
 
 // File Line: 1031
 // RVA: 0x652860
-void __fastcall UFG::RoadSpaceComponent::MoveCarToRoadNetworkPosition(UFG::RoadSpaceComponent *this, UFG::RoadNetworkLocation *location, bool snapToGround)
+void __fastcall UFG::RoadSpaceComponent::MoveCarToRoadNetworkPosition(
+        UFG::RoadSpaceComponent *this,
+        UFG::RoadNetworkLocation *location,
+        bool snapToGround)
 {
-  bool v3; // bl
-  UFG::RoadSpaceComponent *v4; // rdi
   UFG::allocator::free_link *v5; // rax
-  UFG::qVector3 position; // [rsp+48h] [rbp-40h]
-  UFG::qVector3 out; // [rsp+58h] [rbp-30h]
-  UFG::qVector3 dir; // [rsp+68h] [rbp-20h]
+  UFG::qVector3 position; // [rsp+48h] [rbp-40h] BYREF
+  UFG::qVector3 out; // [rsp+58h] [rbp-30h] BYREF
+  UFG::qVector3 dir; // [rsp+68h] [rbp-20h] BYREF
 
-  v3 = snapToGround;
-  v4 = this;
   UFG::RoadNetworkLocation::GetVectors(location, &position, &dir);
   out = position;
-  if ( v3 )
+  if ( snapToGround )
   {
     position.z = position.z + 0.5;
     UFG::SimObjectUtility::PlaceOnGround(&out, &position, 0.050000001, 6.0);
@@ -1114,7 +1034,7 @@ void __fastcall UFG::RoadSpaceComponent::MoveCarToRoadNetworkPosition(UFG::RoadS
       (UFG::TeleportEvent *)v5,
       &out,
       &dir,
-      v4->m_pSimObject->mNode.mUID,
+      this->m_pSimObject->mNode.mUID,
       0,
       UFG::TeleportEvent::m_Name,
       &UFG::qVector3::msDirUp);
@@ -1123,35 +1043,33 @@ void __fastcall UFG::RoadSpaceComponent::MoveCarToRoadNetworkPosition(UFG::RoadS
 
 // File Line: 1051
 // RVA: 0x6586A0
-void __fastcall UFG::RoadSpaceComponent::SetCarDestination(UFG::RoadSpaceComponent *this, UFG::TransformNodeComponent *xform)
+void __fastcall UFG::RoadSpaceComponent::SetCarDestination(
+        UFG::RoadSpaceComponent *this,
+        UFG::TransformNodeComponent *xform)
 {
-  UFG::TransformNodeComponent *v2; // rdi
-  UFG::RoadSpaceComponent *v3; // rbx
   float v4; // xmm1_4
   float v5; // xmm2_4
   float v6; // xmm1_4
   float v7; // xmm2_4
-  float v8; // xmm0_4
-  float v9; // xmm1_4
+  float y; // xmm0_4
+  float z; // xmm1_4
   float v10; // xmm0_4
   float v11; // xmm1_4
 
-  v2 = xform;
-  v3 = this;
   if ( xform )
   {
     UFG::TransformNodeComponent::UpdateWorldTransform(xform);
-    v8 = v2->mWorldTransform.v3.y;
-    v9 = v2->mWorldTransform.v3.z;
-    v3->mDestinationPosition.x = v2->mWorldTransform.v3.x;
-    v3->mDestinationPosition.y = v8;
-    v3->mDestinationPosition.z = v9;
-    UFG::TransformNodeComponent::UpdateWorldTransform(v2);
-    v10 = v2->mWorldTransform.v0.y;
-    v11 = v2->mWorldTransform.v0.z;
-    v3->mDestinationDirection.x = v2->mWorldTransform.v0.x;
-    v3->mDestinationDirection.y = v10;
-    v3->mDestinationDirection.z = v11;
+    y = xform->mWorldTransform.v3.y;
+    z = xform->mWorldTransform.v3.z;
+    this->mDestinationPosition.x = xform->mWorldTransform.v3.x;
+    this->mDestinationPosition.y = y;
+    this->mDestinationPosition.z = z;
+    UFG::TransformNodeComponent::UpdateWorldTransform(xform);
+    v10 = xform->mWorldTransform.v0.y;
+    v11 = xform->mWorldTransform.v0.z;
+    this->mDestinationDirection.x = xform->mWorldTransform.v0.x;
+    this->mDestinationDirection.y = v10;
+    this->mDestinationDirection.z = v11;
   }
   else
   {
@@ -1176,18 +1094,18 @@ void __fastcall UFG::RoadSpaceComponent::SetCarDestination(UFG::RoadSpaceCompone
   float v3; // xmm2_4
   float v4; // xmm1_4
   float v5; // xmm2_4
-  float v6; // xmm0_4
-  float v7; // xmm1_4
+  float y; // xmm0_4
+  float z; // xmm1_4
   float v8; // xmm0_4
   float v9; // xmm1_4
 
   if ( matrix )
   {
-    v6 = matrix->v3.y;
-    v7 = matrix->v3.z;
+    y = matrix->v3.y;
+    z = matrix->v3.z;
     this->mDestinationPosition.x = matrix->v3.x;
-    this->mDestinationPosition.y = v6;
-    this->mDestinationPosition.z = v7;
+    this->mDestinationPosition.y = y;
+    this->mDestinationPosition.z = z;
     v8 = matrix->v0.y;
     v9 = matrix->v0.z;
     this->mDestinationDirection.x = matrix->v0.x;
@@ -1211,148 +1129,151 @@ void __fastcall UFG::RoadSpaceComponent::SetCarDestination(UFG::RoadSpaceCompone
 
 // File Line: 1085
 // RVA: 0x6588B0
-void __fastcall UFG::RoadSpaceComponent::SetChaseTarget(UFG::RoadSpaceComponent *this, UFG::SimObject *target)
+void __fastcall UFG::RoadSpaceComponent::SetChaseTarget(UFG::RoadSpaceComponent *this, UFG::SimObjectVehicle *target)
 {
-  UFG::SimObject *v2; // rdi
-  UFG::RoadSpaceComponent *v3; // rbx
-  UFG::SimObjectVehicle *v4; // rcx
-  unsigned __int16 v5; // r8
+  UFG::SimObjectVehicle *m_pPointer; // rcx
+  __int16 v5; // r8
   UFG::VehicleSubjectComponent *v6; // rax
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v7; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v8; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v9; // rax
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_m_pChaseTarget; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v10; // rax
-  UFG::SimObject *v11; // rax
+  UFG::SimObject *m_pSimObject; // rax
   UFG::SimObjectVehicle *v12; // rcx
-  unsigned __int16 v13; // dx
-  UFG::VehicleSubjectComponent *v14; // rax
+  __int16 v13; // dx
+  UFG::VehicleSubjectComponent *ComponentOfType; // rax
   UFG::SimObjectGame *v15; // rcx
-  unsigned __int16 v16; // dx
-  UFG::SimComponent *v17; // rax
-  UFG::qMemoryPool *v18; // rax
+  __int16 v16; // dx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
   UFG::allocator::free_link *v19; // rax
   UFG::SimComponent *v20; // rax
   UFG::SimComponent *v21; // rsi
   UFG::SimObject *v22; // rdx
-  unsigned __int16 v23; // cx
+  __int16 m_Flags; // cx
   unsigned int v24; // edi
-  UFG::qVector3 result; // [rsp+38h] [rbp-40h]
-  UFG::SimObjectModifier v26; // [rsp+48h] [rbp-30h]
+  UFG::qVector3 result; // [rsp+38h] [rbp-40h] BYREF
+  UFG::SimObjectModifier v26; // [rsp+48h] [rbp-30h] BYREF
 
-  v2 = target;
-  v3 = this;
-  v4 = (UFG::SimObjectVehicle *)this->m_pChaseTarget.m_pPointer;
-  if ( v4 != (UFG::SimObjectVehicle *)target )
+  m_pPointer = (UFG::SimObjectVehicle *)this->m_pChaseTarget.m_pPointer;
+  if ( m_pPointer != target )
   {
-    if ( v4 )
+    if ( !m_pPointer )
     {
-      v5 = v4->m_Flags;
-      if ( (v5 >> 14) & 1 )
+LABEL_13:
+      p_m_pChaseTarget = &this->m_pChaseTarget;
+      if ( this->m_pChaseTarget.m_pPointer )
       {
-        v6 = (UFG::VehicleSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                               (UFG::SimObjectGame *)&v4->vfptr,
-                                               UFG::VehicleSubjectComponent::_TypeUID);
+        mPrev = p_m_pChaseTarget->mPrev;
+        mNext = this->m_pChaseTarget.mNext;
+        mPrev->mNext = mNext;
+        mNext->mPrev = mPrev;
+        p_m_pChaseTarget->mPrev = p_m_pChaseTarget;
+        this->m_pChaseTarget.mNext = &this->m_pChaseTarget;
       }
-      else if ( (v5 & 0x8000u) == 0 )
+      this->m_pChaseTarget.m_pPointer = target;
+      if ( target )
       {
-        if ( (v5 >> 13) & 1 )
-          v6 = (UFG::VehicleSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                 (UFG::SimObjectGame *)&v4->vfptr,
-                                                 UFG::VehicleSubjectComponent::_TypeUID);
-        else
-          v6 = (UFG::VehicleSubjectComponent *)((v5 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                   (UFG::SimObjectGame *)&v4->vfptr,
-                                                                   UFG::VehicleSubjectComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v4->vfptr, UFG::VehicleSubjectComponent::_TypeUID));
+        v10 = target->m_SafePointerList.UFG::SimObjectCVBase::UFG::SimObjectGame::UFG::SimObject::UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+        v10->mNext = p_m_pChaseTarget;
+        p_m_pChaseTarget->mPrev = v10;
+        this->m_pChaseTarget.mNext = &target->m_SafePointerList.UFG::SimObjectCVBase::UFG::SimObjectGame::UFG::SimObject::UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+        target->m_SafePointerList.UFG::SimObjectCVBase::UFG::SimObjectGame::UFG::SimObject::UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = p_m_pChaseTarget;
       }
-      else
+      if ( !this->m_pChaseTarget.m_pPointer )
+        goto LABEL_50;
+      m_pSimObject = this->m_pSimObject;
+      if ( m_pSimObject && m_pSimObject->m_pTransformNodeComponent )
+        UFG::RoadSpaceComponent::GetSteerToFollow(this, &result, 0.0);
+      v12 = (UFG::SimObjectVehicle *)this->m_pChaseTarget.m_pPointer;
+      if ( !v12 )
       {
-        v6 = UFG::SimObjectVehicle::GetComponent<UFG::VehicleSubjectComponent>(v4);
-      }
-      if ( v6 )
-        UFG::VehicleSubjectComponent::RemoveChaser(v6, v3->m_pSimObject);
-    }
-    v7 = &v3->m_pChaseTarget;
-    if ( v3->m_pChaseTarget.m_pPointer )
-    {
-      v8 = v7->mPrev;
-      v9 = v3->m_pChaseTarget.mNext;
-      v8->mNext = v9;
-      v9->mPrev = v8;
-      v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v7->mPrev;
-      v3->m_pChaseTarget.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v3->m_pChaseTarget.mPrev;
-    }
-    v3->m_pChaseTarget.m_pPointer = v2;
-    if ( v2 )
-    {
-      v10 = v2->m_SafePointerList.mNode.mPrev;
-      v10->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v7->mPrev;
-      v7->mPrev = v10;
-      v3->m_pChaseTarget.mNext = &v2->m_SafePointerList.mNode;
-      v2->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v7->mPrev;
-    }
-    if ( v3->m_pChaseTarget.m_pPointer )
-    {
-      v11 = v3->m_pSimObject;
-      if ( v11 && v11->m_pTransformNodeComponent )
-        UFG::RoadSpaceComponent::GetSteerToFollow(v3, &result, 0.0);
-      v12 = (UFG::SimObjectVehicle *)v3->m_pChaseTarget.m_pPointer;
-      if ( v12 )
-      {
-        v13 = v12->m_Flags;
-        if ( (v13 >> 14) & 1 )
+LABEL_32:
+        v15 = (UFG::SimObjectGame *)this->m_pChaseTarget.m_pPointer;
+        if ( !v15
+          || ((v16 = v15->m_Flags, (v16 & 0x4000) == 0)
+            ? (v16 >= 0
+             ? ((v16 & 0x2000) != 0 || (v16 & 0x1000) != 0
+              ? (ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(v15, UFG::RoadSpaceComponent::_TypeUID))
+              : (ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(v15, UFG::RoadSpaceComponent::_TypeUID)))
+             : (ComponentOfTypeHK = v15->m_Components.p[24].m_pComponent))
+            : (ComponentOfTypeHK = v15->m_Components.p[24].m_pComponent),
+              !ComponentOfTypeHK) )
         {
-          v14 = (UFG::VehicleSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                  (UFG::SimObjectGame *)&v12->vfptr,
-                                                  UFG::VehicleSubjectComponent::_TypeUID);
-        }
-        else if ( (v13 & 0x8000u) == 0 )
-        {
-          if ( (v13 >> 13) & 1 )
-            v14 = (UFG::VehicleSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                    (UFG::SimObjectGame *)&v12->vfptr,
-                                                    UFG::VehicleSubjectComponent::_TypeUID);
+          SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+          v19 = UFG::qMemoryPool::Allocate(SimulationMemoryPool, 0x7A0ui64, "RoadSpaceComponent", 0i64, 1u);
+          if ( v19 )
+          {
+            UFG::RoadSpaceComponent::RoadSpaceComponent((UFG::RoadSpaceComponent *)v19);
+            v21 = v20;
+          }
           else
-            v14 = (UFG::VehicleSubjectComponent *)((v13 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                       (UFG::SimObjectGame *)&v12->vfptr,
-                                                                       UFG::VehicleSubjectComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v12->vfptr, UFG::VehicleSubjectComponent::_TypeUID));
+          {
+            v21 = 0i64;
+          }
+          v22 = this->m_pChaseTarget.m_pPointer;
+          m_Flags = v22->m_Flags;
+          if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
+            v24 = 24;
+          else
+            v24 = -1;
+          UFG::SimObjectModifier::SimObjectModifier(&v26, v22, 1);
+          UFG::SimObjectModifier::AttachComponent(&v26, v21, v24);
+          UFG::SimObjectModifier::Close(&v26);
+          UFG::SimObjectModifier::~SimObjectModifier(&v26);
+          v21[30].m_TypeUID |= 1u;
         }
-        else
-        {
-          v14 = UFG::SimObjectVehicle::GetComponent<UFG::VehicleSubjectComponent>(v12);
-        }
-        if ( v14 )
-          UFG::VehicleSubjectComponent::AddChaser(v14, v3->m_pSimObject);
+LABEL_50:
+        this->m_fChaseFailedTimer = 0.0;
+        return;
       }
-      v15 = (UFG::SimObjectGame *)v3->m_pChaseTarget.m_pPointer;
-      if ( !v15
-        || ((v16 = v15->m_Flags, !((v16 >> 14) & 1)) ? ((v16 & 0x8000u) == 0 ? (!((v16 >> 13) & 1) ? (!((v16 >> 12) & 1) ? (v17 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v15->vfptr, UFG::RoadSpaceComponent::_TypeUID)) : (v17 = UFG::SimObjectGame::GetComponentOfTypeHK(v15, UFG::RoadSpaceComponent::_TypeUID))) : (v17 = UFG::SimObjectGame::GetComponentOfTypeHK(v15, UFG::RoadSpaceComponent::_TypeUID))) : (v17 = v15->m_Components.p[24].m_pComponent)) : (v17 = v15->m_Components.p[24].m_pComponent),
-            !v17) )
+      v13 = v12->m_Flags;
+      if ( (v13 & 0x4000) != 0 )
+        goto LABEL_28;
+      if ( v13 < 0 )
       {
-        v18 = UFG::GetSimulationMemoryPool();
-        v19 = UFG::qMemoryPool::Allocate(v18, 0x7A0ui64, "RoadSpaceComponent", 0i64, 1u);
-        if ( v19 )
-        {
-          UFG::RoadSpaceComponent::RoadSpaceComponent((UFG::RoadSpaceComponent *)v19);
-          v21 = v20;
-        }
-        else
-        {
-          v21 = 0i64;
-        }
-        v22 = v3->m_pChaseTarget.m_pPointer;
-        v23 = v22->m_Flags;
-        if ( (v23 >> 14) & 1 || (v23 & 0x8000u) != 0 )
-          v24 = 24;
-        else
-          v24 = -1;
-        UFG::SimObjectModifier::SimObjectModifier(&v26, v22, 1);
-        UFG::SimObjectModifier::AttachComponent(&v26, v21, v24);
-        UFG::SimObjectModifier::Close(&v26);
-        UFG::SimObjectModifier::~SimObjectModifier(&v26);
-        v21[30].m_TypeUID |= 1u;
+        ComponentOfType = UFG::SimObjectVehicle::GetComponent<UFG::VehicleSubjectComponent>(v12);
+        goto LABEL_30;
       }
+      if ( (v13 & 0x2000) != 0 || (v13 & 0x1000) != 0 )
+LABEL_28:
+        ComponentOfType = (UFG::VehicleSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                            v12,
+                                                            UFG::VehicleSubjectComponent::_TypeUID);
+      else
+        ComponentOfType = (UFG::VehicleSubjectComponent *)UFG::SimObject::GetComponentOfType(
+                                                            v12,
+                                                            UFG::VehicleSubjectComponent::_TypeUID);
+LABEL_30:
+      if ( ComponentOfType )
+        UFG::VehicleSubjectComponent::AddChaser(ComponentOfType, this->m_pSimObject);
+      goto LABEL_32;
     }
-    v3->m_fChaseFailedTimer = 0.0;
+    v5 = m_pPointer->m_Flags;
+    if ( (v5 & 0x4000) != 0 )
+      goto LABEL_4;
+    if ( v5 >= 0 )
+    {
+      if ( (v5 & 0x2000) != 0 || (v5 & 0x1000) != 0 )
+      {
+LABEL_4:
+        v6 = (UFG::VehicleSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                               m_pPointer,
+                                               UFG::VehicleSubjectComponent::_TypeUID);
+        goto LABEL_11;
+      }
+      v6 = (UFG::VehicleSubjectComponent *)UFG::SimObject::GetComponentOfType(
+                                             m_pPointer,
+                                             UFG::VehicleSubjectComponent::_TypeUID);
+    }
+    else
+    {
+      v6 = UFG::SimObjectVehicle::GetComponent<UFG::VehicleSubjectComponent>(m_pPointer);
+    }
+LABEL_11:
+    if ( v6 )
+      UFG::VehicleSubjectComponent::RemoveChaser(v6, this->m_pSimObject);
+    goto LABEL_13;
   }
 }
 
@@ -1360,79 +1281,74 @@ void __fastcall UFG::RoadSpaceComponent::SetChaseTarget(UFG::RoadSpaceComponent 
 // RVA: 0x662840
 void __fastcall UFG::RoadSpaceComponent::UpdateNavGuide(UFG::RoadSpaceComponent *this)
 {
-  UFG::RoadSpaceComponent *v1; // rbx
-  UFG::SimObjectGame *v2; // rcx
+  UFG::SimObjectGame *m_pSimObject; // rcx
   float v3; // xmm6_4
-  unsigned __int16 v4; // dx
-  UFG::PhysicsMoverInterface *v5; // rax
-  __m128 v6; // xmm1
-  __m128 v7; // xmm2
+  __int16 m_Flags; // dx
+  UFG::PhysicsMoverInterface *m_pComponent; // rax
+  __m128 x_low; // xmm1
+  __m128 y_low; // xmm2
   float v8; // xmm3_4
   float v9; // xmm6_4
-  UFG::qVector3 max; // [rsp+20h] [rbp-38h]
-  UFG::qVector3 min; // [rsp+30h] [rbp-28h]
+  UFG::qVector3 max; // [rsp+20h] [rbp-38h] BYREF
+  UFG::qVector3 min; // [rsp+30h] [rbp-28h] BYREF
 
-  v1 = this;
   if ( this->m_NavGuide.m_Initialized )
     goto LABEL_15;
-  v2 = (UFG::SimObjectGame *)this->m_pSimObject;
+  m_pSimObject = (UFG::SimObjectGame *)this->m_pSimObject;
   v3 = FLOAT_2_0;
-  if ( v2 )
+  if ( m_pSimObject )
   {
-    v4 = v2->m_Flags;
-    if ( !((v4 >> 14) & 1) )
+    m_Flags = m_pSimObject->m_Flags;
+    if ( (m_Flags & 0x4000) == 0 )
     {
-      if ( (v4 & 0x8000u) != 0 )
+      if ( m_Flags < 0 )
       {
-        v5 = (UFG::PhysicsMoverInterface *)v2->m_Components.p[34].m_pComponent;
+        m_pComponent = (UFG::PhysicsMoverInterface *)m_pSimObject->m_Components.p[34].m_pComponent;
         goto LABEL_10;
       }
-      if ( !((v4 >> 13) & 1) )
+      if ( (m_Flags & 0x2000) == 0 )
       {
-        if ( (v4 >> 12) & 1 )
-          v5 = (UFG::PhysicsMoverInterface *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                               v2,
-                                               UFG::PhysicsMoverInterface::_TypeUID);
+        if ( (m_Flags & 0x1000) != 0 )
+          m_pComponent = (UFG::PhysicsMoverInterface *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                         m_pSimObject,
+                                                         UFG::PhysicsMoverInterface::_TypeUID);
         else
-          v5 = (UFG::PhysicsMoverInterface *)UFG::SimObject::GetComponentOfType(
-                                               (UFG::SimObject *)&v2->vfptr,
-                                               UFG::PhysicsMoverInterface::_TypeUID);
+          m_pComponent = (UFG::PhysicsMoverInterface *)UFG::SimObject::GetComponentOfType(
+                                                         m_pSimObject,
+                                                         UFG::PhysicsMoverInterface::_TypeUID);
 LABEL_10:
-        if ( v5 )
+        if ( m_pComponent )
         {
-          UFG::PhysicsMoverInterface::GetBoundingBoxLocalSpace(v5, &min, &max);
-          v6 = (__m128)LODWORD(max.x);
-          v7 = (__m128)LODWORD(min.y);
-          v6.m128_f32[0] = (float)(v6.m128_f32[0] * v6.m128_f32[0]) + (float)(max.y * max.y);
-          LODWORD(v8) = (unsigned __int128)_mm_sqrt_ps(v6);
-          v7.m128_f32[0] = (float)(v7.m128_f32[0] * v7.m128_f32[0]) + (float)(min.x * min.x);
-          LODWORD(v9) = (unsigned __int128)_mm_sqrt_ps(v7);
+          UFG::PhysicsMoverInterface::GetBoundingBoxLocalSpace(m_pComponent, &min, &max);
+          x_low = (__m128)LODWORD(max.x);
+          y_low = (__m128)LODWORD(min.y);
+          x_low.m128_f32[0] = (float)(x_low.m128_f32[0] * x_low.m128_f32[0]) + (float)(max.y * max.y);
+          v8 = _mm_sqrt_ps(x_low).m128_f32[0];
+          y_low.m128_f32[0] = (float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(min.x * min.x);
+          v9 = _mm_sqrt_ps(y_low).m128_f32[0];
           if ( v9 <= v8 )
             v9 = v8;
           v3 = v9 + 0.5;
         }
-        goto LABEL_14;
       }
     }
   }
-LABEL_14:
-  v1->m_NavGuide.m_NavParams.m_fRadius = v3;
-  v1->m_NavGuide.m_Initialized = 1;
+  this->m_NavGuide.m_NavParams.m_fRadius = v3;
+  this->m_NavGuide.m_Initialized = 1;
 LABEL_15:
-  if ( v1->m_NavGuide.m_Active )
-    UFG::NavGuide::UpdatePathQuery(&v1->m_NavGuide);
+  if ( this->m_NavGuide.m_Active )
+    UFG::NavGuide::UpdatePathQuery(&this->m_NavGuide);
 }
 
 // File Line: 1150
 // RVA: 0x6603A0
 void __fastcall UFG::RoadSpaceComponent::UpdateChaseMatrix(UFG::RoadSpaceComponent *this)
 {
-  UFG::SimObject *rdi1; // rdi
-  UFG::RoadSpaceComponent *rbx1; // rbx
-  UFG::TransformNodeComponent *v3; // rdi
-  float v4; // xmm1_4
-  float v5; // xmm0_4
-  UFG::SimComponent *v6; // rcx
+  UFG::SimObject *m_pSimObject; // rdi
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rdi
+  float y; // xmm1_4
+  float z; // xmm0_4
+  UFG::SimComponent *m_pSimComponent; // rcx
   float v7; // xmm1_4
   float *v8; // rax
   float v9; // xmm7_4
@@ -1440,69 +1356,66 @@ void __fastcall UFG::RoadSpaceComponent::UpdateChaseMatrix(UFG::RoadSpaceCompone
   float v11; // xmm3_4
   __m128 v12; // xmm2
   float v13; // xmm1_4
-  float v14; // xmm6_4
+  float x; // xmm6_4
   float v15; // xmm7_4
-  UFG::VehicleFormations *v16; // rax
-  UFG::RoadNetworkNode *v17; // rcx
-  UFG::RoadNetworkLane *v18; // rdi
-  float v19; // xmm0_4
-  float v20; // xmm1_4
-  float v21; // xmm0_4
-  float v22; // xmm1_4
-  UFG::RoadNetworkNode *v23; // rcx
-  float v24; // xmm0_4
-  int v25; // xmm6_4
-  int v26; // xmm7_4
-  int v27; // xmm3_4
-  float v28; // xmm2_4
-  float v29; // xmm1_4
-  UFG::SimObjectVehicle *v30; // rcx
-  unsigned __int16 v31; // dx
-  UFG::VehicleSubjectComponent *v32; // rax
-  UFG::SimObjectGame *v33; // rcx
-  unsigned __int16 v34; // dx
-  UFG::CharacterOccupantComponent *v35; // rax
-  UFG::SimObjectVehicle *v36; // rax
-  UFG::VehicleSubjectComponent *v37; // rax
-  __m128 v38; // xmm1
-  float v39; // xmm1_4
-  float v40; // xmm12_4
-  float v41; // xmm11_4
-  float v42; // xmm10_4
-  float v43; // xmm2_4
-  float v44; // xmm9_4
-  float v45; // xmm3_4
-  float v46; // xmm1_4
-  signed __int64 v47; // rdx
-  float v48; // xmm12_4
-  float v49; // xmm10_4
-  float v50; // xmm11_4
-  UFG::qVector3 v1; // [rsp+18h] [rbp-59h]
-  UFG::qVector3 pos; // [rsp+28h] [rbp-49h]
-  UFG::qVector3 v2; // [rsp+38h] [rbp-39h]
-  UFG::qVector3 result; // [rsp+48h] [rbp-29h]
-  void *retaddr; // [rsp+D8h] [rbp+67h]
+  UFG::VehicleFormations *m_pChaseFormation; // rax
+  UFG::RoadNetworkNode *mpClosestSegment; // rcx
+  UFG::RoadNetworkLane *Lane; // rdi
+  float Length; // xmm1_4
+  float v20; // xmm0_4
+  float v21; // xmm1_4
+  UFG::RoadNetworkNode *v22; // rcx
+  float v23; // xmm0_4
+  int x_low; // xmm6_4
+  int y_low; // xmm7_4
+  int z_low; // xmm3_4
+  float v27; // xmm2_4
+  float v28; // xmm1_4
+  UFG::SimObjectVehicle *v29; // rcx
+  __int16 m_Flags; // dx
+  UFG::VehicleSubjectComponent *ComponentOfTypeHK; // rax
+  UFG::SimObjectGame *v32; // rcx
+  __int16 v33; // dx
+  UFG::CharacterOccupantComponent *m_pComponent; // rax
+  UFG::SimObjectVehicle *CurrentVehicle; // rax
+  UFG::VehicleSubjectComponent *v36; // rax
+  __m128 v37; // xmm1
+  float v38; // xmm1_4
+  float v39; // xmm12_4
+  float v40; // xmm11_4
+  float v41; // xmm10_4
+  float v42; // xmm2_4
+  float v43; // xmm9_4
+  float v44; // xmm3_4
+  float v45; // xmm1_4
+  float v46; // xmm12_4
+  float v47; // xmm10_4
+  float v48; // xmm11_4
+  UFG::qVector3 v1; // [rsp+18h] [rbp-59h] BYREF
+  UFG::qVector3 pos; // [rsp+28h] [rbp-49h] BYREF
+  UFG::qVector3 v2; // [rsp+38h] [rbp-39h] BYREF
+  UFG::qVector3 result; // [rsp+48h] [rbp-29h] BYREF
+  void *retaddr; // [rsp+D8h] [rbp+67h] BYREF
 
-  rdi1 = this->m_pSimObject;
-  rbx1 = this;
-  if ( !rdi1 )
+  m_pSimObject = this->m_pSimObject;
+  if ( !m_pSimObject )
     return;
-  v3 = rdi1->m_pTransformNodeComponent;
-  if ( !v3 || !this->m_pSubject.m_pSimComponent )
+  m_pTransformNodeComponent = m_pSimObject->m_pTransformNodeComponent;
+  if ( !m_pTransformNodeComponent || !this->m_pSubject.m_pSimComponent )
     return;
-  UFG::TransformNodeComponent::UpdateWorldTransform(v3);
-  v4 = v3->mWorldTransform.v3.y;
-  pos.x = v3->mWorldTransform.v3.x;
-  v5 = v3->mWorldTransform.v3.z;
-  pos.y = v4;
-  pos.z = v5;
-  UFG::TransformNodeComponent::UpdateWorldTransform(v3);
-  v6 = rbx1->m_pSubject.m_pSimComponent;
-  v7 = v3->mWorldTransform.v0.y;
-  v1.x = v3->mWorldTransform.v0.x;
-  v1.z = v3->mWorldTransform.v0.z;
+  UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+  y = m_pTransformNodeComponent->mWorldTransform.v3.y;
+  pos.x = m_pTransformNodeComponent->mWorldTransform.v3.x;
+  z = m_pTransformNodeComponent->mWorldTransform.v3.z;
+  pos.y = y;
+  pos.z = z;
+  UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+  m_pSimComponent = this->m_pSubject.m_pSimComponent;
+  v7 = m_pTransformNodeComponent->mWorldTransform.v0.y;
+  v1.x = m_pTransformNodeComponent->mWorldTransform.v0.x;
+  v1.z = m_pTransformNodeComponent->mWorldTransform.v0.z;
   v1.y = v7;
-  v8 = (float *)((__int64 (*)(void))v6->vfptr[20].__vecDelDtor)();
+  v8 = (float *)((__int64 (__fastcall *)(UFG::SimComponent *))m_pSimComponent->vfptr[20].__vecDelDtor)(m_pSimComponent);
   v9 = v8[1];
   v10 = (__m128)*(unsigned int *)v8;
   v11 = v8[2];
@@ -1511,287 +1424,262 @@ void __fastcall UFG::RoadSpaceComponent::UpdateChaseMatrix(UFG::RoadSpaceCompone
   if ( v12.m128_f32[0] <= 0.25 )
   {
     v15 = v1.y;
-    v14 = v1.x;
+    x = v1.x;
   }
   else
   {
     if ( v12.m128_f32[0] == 0.0 )
       v13 = 0.0;
     else
-      v13 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v12));
-    v14 = v10.m128_f32[0] * v13;
+      v13 = 1.0 / _mm_sqrt_ps(v12).m128_f32[0];
+    x = v10.m128_f32[0] * v13;
     v15 = v9 * v13;
-    v1.x = v14;
+    v1.x = x;
     v1.y = v15;
     v1.z = v11 * v13;
   }
-  v16 = rbx1->m_pChaseFormation;
-  if ( v16 )
+  m_pChaseFormation = this->m_pChaseFormation;
+  if ( m_pChaseFormation )
   {
     if ( UFG::gpRoadNetworkResource )
     {
-      v17 = (UFG::RoadNetworkNode *)&v16->mpClosestSegment->mType;
-      if ( v17 )
+      mpClosestSegment = m_pChaseFormation->mpClosestSegment;
+      if ( mpClosestSegment )
       {
-        v18 = UFG::RoadNetworkNode::GetLane(v17, v16->mClosestLaneIndex);
-        UFG::RoadNetworkLane::GetNearestPoint(v18, &result, &pos, (float *)&retaddr);
-        v19 = UFG::RoadNetworkLane::GetLength(v18);
-        v20 = v19;
-        v21 = v19 - 0.5;
-        v22 = v20 * 0.0;
-        if ( v21 < 0.0 )
-          v21 = 0.0;
-        if ( v22 < 0.5 || v22 > v21 )
+        Lane = UFG::RoadNetworkNode::GetLane(mpClosestSegment, m_pChaseFormation->mClosestLaneIndex);
+        UFG::RoadNetworkLane::GetNearestPoint(Lane, &result, &pos, (float *)&retaddr);
+        Length = UFG::RoadNetworkLane::GetLength(Lane);
+        v20 = Length - 0.5;
+        v21 = Length * 0.0;
+        if ( v20 < 0.0 )
+          v20 = 0.0;
+        if ( v21 < 0.5 || v21 > v20 )
         {
           v15 = v1.y;
-          v14 = v1.x;
+          x = v1.x;
         }
         else
         {
-          if ( v18->mNode.mOffset )
-            v23 = (UFG::RoadNetworkNode *)((char *)v18 + v18->mNode.mOffset);
+          if ( Lane->mNode.mOffset )
+            v22 = (UFG::RoadNetworkNode *)((char *)Lane + Lane->mNode.mOffset);
           else
-            v23 = 0i64;
-          UFG::RoadNetworkNode::GetTangent(v23, &v2, v18->mLaneIndex, 0.0);
+            v22 = 0i64;
+          UFG::RoadNetworkNode::GetTangent(v22, &v2, Lane->mLaneIndex, 0.0);
           pos.x = result.x + (float)((float)(pos.x - result.x) * 0.60000002);
           pos.y = result.y + (float)((float)(pos.y - result.y) * 0.60000002);
           pos.z = result.z + (float)((float)(pos.z - result.z) * 0.60000002);
-          v24 = UFG::qAngleBetween(&v1, &v2);
-          v25 = SLODWORD(v2.x);
-          v26 = SLODWORD(v2.y);
-          v27 = SLODWORD(v2.z);
-          if ( v24 > 1.5707964 )
+          v23 = UFG::qAngleBetween(&v1, &v2);
+          x_low = SLODWORD(v2.x);
+          y_low = SLODWORD(v2.y);
+          z_low = SLODWORD(v2.z);
+          if ( v23 > 1.5707964 )
           {
-            v25 = LODWORD(v2.x) ^ _xmm[0];
-            v26 = LODWORD(v2.y) ^ _xmm[0];
-            v27 = LODWORD(v2.z) ^ _xmm[0];
+            x_low = LODWORD(v2.x) ^ _xmm[0];
+            y_low = LODWORD(v2.y) ^ _xmm[0];
+            z_low = LODWORD(v2.z) ^ _xmm[0];
           }
-          v28 = (float)((float)(*(float *)&v25 * *(float *)&v25) + (float)(*(float *)&v26 * *(float *)&v26))
-              + (float)(*(float *)&v27 * *(float *)&v27);
-          if ( v28 == 0.0 )
-            v29 = 0.0;
+          v27 = (float)((float)(*(float *)&x_low * *(float *)&x_low) + (float)(*(float *)&y_low * *(float *)&y_low))
+              + (float)(*(float *)&z_low * *(float *)&z_low);
+          if ( v27 == 0.0 )
+            v28 = 0.0;
           else
-            v29 = 1.0 / fsqrt(v28);
-          v14 = *(float *)&v25 * v29;
-          v15 = *(float *)&v26 * v29;
-          v1.x = v14;
+            v28 = 1.0 / fsqrt(v27);
+          x = *(float *)&x_low * v28;
+          v15 = *(float *)&y_low * v28;
+          v1.x = x;
           v1.y = v15;
-          v1.z = *(float *)&v27 * v29;
+          v1.z = *(float *)&z_low * v28;
         }
       }
     }
   }
-  v30 = (UFG::SimObjectVehicle *)rbx1->m_pSimObject;
-  if ( v30 )
+  v29 = (UFG::SimObjectVehicle *)this->m_pSimObject;
+  if ( !v29 )
+    goto LABEL_39;
+  m_Flags = v29->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 )
+    goto LABEL_34;
+  if ( m_Flags < 0 )
   {
-    v31 = v30->m_Flags;
-    if ( (v31 >> 14) & 1 )
-    {
-      v32 = (UFG::VehicleSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                              (UFG::SimObjectGame *)&v30->vfptr,
-                                              UFG::VehicleSubjectComponent::_TypeUID);
-    }
-    else if ( (v31 & 0x8000u) == 0 )
-    {
-      if ( (v31 >> 13) & 1 )
-      {
-        v32 = (UFG::VehicleSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                (UFG::SimObjectGame *)&v30->vfptr,
-                                                UFG::VehicleSubjectComponent::_TypeUID);
-      }
-      else if ( (v31 >> 12) & 1 )
-      {
-        v32 = (UFG::VehicleSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                (UFG::SimObjectGame *)&v30->vfptr,
-                                                UFG::VehicleSubjectComponent::_TypeUID);
-      }
-      else
-      {
-        v32 = (UFG::VehicleSubjectComponent *)UFG::SimObject::GetComponentOfType(
-                                                (UFG::SimObject *)&v30->vfptr,
-                                                UFG::VehicleSubjectComponent::_TypeUID);
-      }
-    }
-    else
-    {
-      v32 = UFG::SimObjectVehicle::GetComponent<UFG::VehicleSubjectComponent>(v30);
-    }
-    if ( v32 && UFG::VehicleSubjectComponent::IsBoat(v32) )
-    {
-LABEL_55:
-      v14 = v1.x;
-      v15 = v1.y;
-      if ( (float)((float)((float)((float)(v1.x - (float)(v1.z * 0.0)) * (float)(v1.x - (float)(v1.z * 0.0)))
-                         + (float)((float)((float)(v1.z * 0.0) - v1.y) * (float)((float)(v1.z * 0.0) - v1.y)))
-                 + (float)((float)((float)(v1.y * 0.0) - (float)(v1.x * 0.0))
-                         * (float)((float)(v1.y * 0.0) - (float)(v1.x * 0.0)))) > 0.0000000099999991 )
-      {
-        v38 = (__m128)LODWORD(v1.y);
-        v38.m128_f32[0] = (float)(v1.y * v1.y) + (float)(v1.x * v1.x);
-        if ( v38.m128_f32[0] == 0.0 )
-          v39 = 0.0;
-        else
-          v39 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v38));
-        v14 = v1.x * v39;
-        v15 = v1.y * v39;
-        v1.z = v39 * 0.0;
-        v1.x = v1.x * v39;
-        v1.y = v1.y * v39;
-      }
-      goto LABEL_61;
-    }
-    v15 = v1.y;
-    v14 = v1.x;
+    ComponentOfTypeHK = UFG::SimObjectVehicle::GetComponent<UFG::VehicleSubjectComponent>(v29);
+    goto LABEL_36;
   }
-  v33 = (UFG::SimObjectGame *)rbx1->m_pSimObject;
-  if ( !v33 )
-    goto LABEL_61;
-  v34 = v33->m_Flags;
-  if ( (v34 >> 14) & 1 )
+  if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+LABEL_34:
+    ComponentOfTypeHK = (UFG::VehicleSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                          v29,
+                                                          UFG::VehicleSubjectComponent::_TypeUID);
+  else
+    ComponentOfTypeHK = (UFG::VehicleSubjectComponent *)UFG::SimObject::GetComponentOfType(
+                                                          v29,
+                                                          UFG::VehicleSubjectComponent::_TypeUID);
+LABEL_36:
+  if ( ComponentOfTypeHK && UFG::VehicleSubjectComponent::IsBoat(ComponentOfTypeHK) )
   {
-    v35 = (UFG::CharacterOccupantComponent *)v33->m_Components.p[44].m_pComponent;
+LABEL_53:
+    x = v1.x;
+    v15 = v1.y;
+    if ( (float)((float)((float)((float)(v1.x - (float)(v1.z * 0.0)) * (float)(v1.x - (float)(v1.z * 0.0)))
+                       + (float)((float)((float)(v1.z * 0.0) - v1.y) * (float)((float)(v1.z * 0.0) - v1.y)))
+               + (float)((float)((float)(v1.y * 0.0) - (float)(v1.x * 0.0))
+                       * (float)((float)(v1.y * 0.0) - (float)(v1.x * 0.0)))) > 0.0000000099999991 )
+    {
+      v37 = (__m128)LODWORD(v1.y);
+      v37.m128_f32[0] = (float)(v1.y * v1.y) + (float)(v1.x * v1.x);
+      if ( v37.m128_f32[0] == 0.0 )
+        v38 = 0.0;
+      else
+        v38 = 1.0 / _mm_sqrt_ps(v37).m128_f32[0];
+      x = v1.x * v38;
+      v15 = v1.y * v38;
+      v1.z = v38 * 0.0;
+      v1.x = v1.x * v38;
+      v1.y = v1.y * v38;
+    }
+    goto LABEL_59;
+  }
+  v15 = v1.y;
+  x = v1.x;
+LABEL_39:
+  v32 = (UFG::SimObjectGame *)this->m_pSimObject;
+  if ( !v32 )
+    goto LABEL_59;
+  v33 = v32->m_Flags;
+  if ( (v33 & 0x4000) != 0 )
+  {
+    m_pComponent = (UFG::CharacterOccupantComponent *)v32->m_Components.p[44].m_pComponent;
   }
   else
   {
-    if ( (v34 & 0x8000u) == 0 )
-    {
-      if ( (v34 >> 13) & 1 )
-        v35 = (UFG::CharacterOccupantComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                   v33,
-                                                   UFG::CharacterOccupantComponent::_TypeUID);
-      else
-        v35 = (UFG::CharacterOccupantComponent *)((v34 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                      v33,
-                                                                      UFG::CharacterOccupantComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v33->vfptr, UFG::CharacterOccupantComponent::_TypeUID));
-    }
-    else
-    {
-      v35 = (UFG::CharacterOccupantComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                 v33,
-                                                 UFG::CharacterOccupantComponent::_TypeUID);
-    }
-    v14 = v1.x;
+    m_pComponent = (UFG::CharacterOccupantComponent *)(v33 < 0 || (v33 & 0x2000) != 0 || (v33 & 0x1000) != 0
+                                                     ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                         v32,
+                                                         UFG::CharacterOccupantComponent::_TypeUID)
+                                                     : UFG::SimObject::GetComponentOfType(
+                                                         v32,
+                                                         UFG::CharacterOccupantComponent::_TypeUID));
+    x = v1.x;
     v15 = v1.y;
   }
-  if ( !v35 )
-    goto LABEL_61;
-  v36 = (UFG::SimObjectVehicle *)UFG::CharacterOccupantComponent::GetCurrentVehicle(v35);
-  if ( v36 )
+  if ( !m_pComponent )
+    goto LABEL_59;
+  CurrentVehicle = (UFG::SimObjectVehicle *)UFG::CharacterOccupantComponent::GetCurrentVehicle(m_pComponent);
+  if ( CurrentVehicle )
   {
-    v37 = UFG::SimObjectVehicle::GetComponent<UFG::VehicleSubjectComponent>(v36);
-    if ( v37 )
+    v36 = UFG::SimObjectVehicle::GetComponent<UFG::VehicleSubjectComponent>(CurrentVehicle);
+    if ( v36 )
     {
-      if ( UFG::VehicleSubjectComponent::IsBoat(v37) )
-        goto LABEL_55;
+      if ( UFG::VehicleSubjectComponent::IsBoat(v36) )
+        goto LABEL_53;
     }
   }
   v15 = v1.y;
-  v14 = v1.x;
-LABEL_61:
-  v40 = v14 - (float)(v1.z * 0.0);
-  v41 = (float)(v1.z * 0.0) - v15;
-  v42 = (float)(v15 * 0.0) - (float)(v14 * 0.0);
-  v43 = (float)((float)(v40 * v40) + (float)(v41 * v41)) + (float)(v42 * v42);
-  if ( v43 == 0.0 )
-    v44 = 0.0;
+  x = v1.x;
+LABEL_59:
+  v39 = x - (float)(v1.z * 0.0);
+  v40 = (float)(v1.z * 0.0) - v15;
+  v41 = (float)(v15 * 0.0) - (float)(x * 0.0);
+  v42 = (float)((float)(v39 * v39) + (float)(v40 * v40)) + (float)(v41 * v41);
+  if ( v42 == 0.0 )
+    v43 = 0.0;
   else
-    v44 = 1.0 / fsqrt(v43);
-  v45 = v1.z;
-  v46 = pos.y;
-  rbx1->m_ChaseWorld.v3.w = 1.0;
-  v47 = (signed __int64)&rbx1->m_ChaseWorld;
-  v48 = v40 * v44;
-  v49 = v42 * v44;
-  rbx1->m_ChaseWorld.v3.y = v46;
-  v50 = v41 * v44;
-  rbx1->m_ChaseWorld.v3.x = pos.x;
-  rbx1->m_ChaseWorld.v3.z = pos.z;
-  *(float *)v47 = v14;
-  *(float *)(v47 + 4) = v15;
-  *(_DWORD *)(v47 + 12) = 0;
-  *(float *)(v47 + 8) = v45;
-  rbx1->m_ChaseWorld.v1.x = v50;
-  rbx1->m_ChaseWorld.v1.y = v48;
-  rbx1->m_ChaseWorld.v1.w = 0.0;
-  rbx1->m_ChaseWorld.v1.z = v49;
-  rbx1->m_ChaseWorld.v2.x = (float)(v49 * v15) - (float)(v48 * v45);
-  rbx1->m_ChaseWorld.v2.y = (float)(v50 * v45) - (float)(v49 * v14);
-  rbx1->m_ChaseWorld.v2.w = 0.0;
-  rbx1->m_ChaseWorld.v2.z = (float)(v48 * v14) - (float)(v50 * v15);
-  UFG::qInverseAffine(&rbx1->m_WorldChase, &rbx1->m_ChaseWorld);
+    v43 = 1.0 / fsqrt(v42);
+  v44 = v1.z;
+  v45 = pos.y;
+  this->m_ChaseWorld.v3.w = 1.0;
+  v46 = v39 * v43;
+  v47 = v41 * v43;
+  this->m_ChaseWorld.v3.y = v45;
+  v48 = v40 * v43;
+  this->m_ChaseWorld.v3.x = pos.x;
+  this->m_ChaseWorld.v3.z = pos.z;
+  this->m_ChaseWorld.v0.x = x;
+  this->m_ChaseWorld.v0.y = v15;
+  this->m_ChaseWorld.v0.w = 0.0;
+  this->m_ChaseWorld.v0.z = v44;
+  this->m_ChaseWorld.v1.x = v48;
+  this->m_ChaseWorld.v1.y = v46;
+  this->m_ChaseWorld.v1.w = 0.0;
+  this->m_ChaseWorld.v1.z = v47;
+  this->m_ChaseWorld.v2.x = (float)(v47 * v15) - (float)(v46 * v44);
+  this->m_ChaseWorld.v2.y = (float)(v48 * v44) - (float)(v47 * x);
+  this->m_ChaseWorld.v2.w = 0.0;
+  this->m_ChaseWorld.v2.z = (float)(v46 * x) - (float)(v48 * v15);
+  UFG::qInverseAffine(&this->m_WorldChase, &this->m_ChaseWorld);
 }
 
 // File Line: 1258
 // RVA: 0x64D7A0
-UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *__fastcall UFG::RoadSpaceComponent::GetCarChaseTargetFormation(UFG::RoadSpaceComponent *this)
+UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *__fastcall UFG::RoadSpaceComponent::GetCarChaseTargetFormation(
+        UFG::RoadSpaceComponent *this)
 {
-  UFG::SimObjectGame *v1; // rcx
-  unsigned __int16 v2; // dx
-  UFG::SimComponent *v3; // rax
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *result; // rax
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
 
-  v1 = (UFG::SimObjectGame *)this->m_pChaseTarget.m_pPointer;
-  if ( v1
-    && ((v2 = v1->m_Flags, !((v2 >> 14) & 1)) ? ((v2 & 0x8000u) == 0 ? (!((v2 >> 13) & 1) ? (!((v2 >> 12) & 1) ? (v3 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v1->vfptr, UFG::RoadSpaceComponent::_TypeUID)) : (v3 = UFG::SimObjectGame::GetComponentOfTypeHK(v1, UFG::RoadSpaceComponent::_TypeUID))) : (v3 = UFG::SimObjectGame::GetComponentOfTypeHK(v1, UFG::RoadSpaceComponent::_TypeUID))) : (v3 = v1->m_Components.p[24].m_pComponent)) : (v3 = v1->m_Components.p[24].m_pComponent),
-        v3) )
+  m_pPointer = (UFG::SimObjectGame *)this->m_pChaseTarget.m_pPointer;
+  if ( m_pPointer
+    && ((m_Flags = m_pPointer->m_Flags, (m_Flags & 0x4000) == 0)
+      ? (m_Flags >= 0
+       ? ((m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+        ? (ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::RoadSpaceComponent::_TypeUID))
+        : (ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::RoadSpaceComponent::_TypeUID)))
+       : (ComponentOfTypeHK = m_pPointer->m_Components.p[24].m_pComponent))
+      : (ComponentOfTypeHK = m_pPointer->m_Components.p[24].m_pComponent),
+        ComponentOfTypeHK) )
   {
-    result = v3[26].m_BoundComponentHandles.mNode.mPrev;
+    return ComponentOfTypeHK[26].m_BoundComponentHandles.mNode.mPrev;
   }
   else
   {
-    result = 0i64;
+    return 0i64;
   }
-  return result;
 }
 
 // File Line: 1277
 // RVA: 0x6663F0
-UFG::qVector3 *__fastcall UFG::RoadSpaceComponent::WorldToChase(UFG::RoadSpaceComponent *this, UFG::qVector3 *result, UFG::qVector3 *position)
+UFG::qVector3 *__fastcall UFG::RoadSpaceComponent::WorldToChase(
+        UFG::RoadSpaceComponent *this,
+        UFG::qVector3 *result,
+        UFG::qVector3 *position)
 {
-  UFG::qVector3 *v3; // rsi
-  UFG::qVector3 *v4; // rdi
-  UFG::RoadSpaceComponent *v5; // rbx
   float v6; // xmm6_4
-  float v7; // xmm0_4
-  float v8; // xmm5_4
-  float v9; // xmm4_4
+  float fCurvature; // xmm0_4
+  float x; // xmm5_4
+  float y; // xmm4_4
   float v10; // xmm3_4
   float v11; // xmm7_4
   float v12; // xmm2_4
   float v13; // xmm0_4
   float v14; // xmm1_4
   float v15; // xmm0_4
-  __m128 v16; // xmm2
+  __m128 y_low; // xmm2
   float v17; // xmm1_4
   float v18; // xmm0_4
-  float v19; // xmm4_4
-  float v20; // xmm1_4
-  float v21; // xmm2_4
+  float z; // xmm4_4
+  float v20; // xmm2_4
+  float v21; // xmm6_4
   float v22; // xmm6_4
-  float v23; // xmm6_4
-  UFG::qVector3 b; // [rsp+20h] [rbp-48h]
-  UFG::qVector3 a; // [rsp+30h] [rbp-38h]
+  UFG::qVector3 b; // [rsp+20h] [rbp-48h] BYREF
+  UFG::qVector3 a; // [rsp+30h] [rbp-38h] BYREF
 
-  v3 = position;
-  v4 = result;
-  v5 = this;
   if ( this->m_PositionTrail.mTrail.mCount <= 0 )
     goto LABEL_13;
   v6 = FLOAT_N1_0;
-  v7 = this->m_PositionTrail.mTrail.mData[this->m_PositionTrail.mTrail.mLast].fCurvature;
-  if ( v7 <= -1.0 )
+  fCurvature = this->m_PositionTrail.mTrail.mData[this->m_PositionTrail.mTrail.mLast].fCurvature;
+  if ( fCurvature <= -1.0 )
   {
-    v7 = FLOAT_N1_0;
+    fCurvature = FLOAT_N1_0;
     goto LABEL_6;
   }
-  if ( v7 < 1.0 )
+  if ( fCurvature < 1.0 )
   {
 LABEL_6:
-    if ( v7 < -0.0099999998 || v7 > 0.0099999998 )
+    if ( fCurvature < -0.0099999998 || fCurvature > 0.0099999998 )
     {
-      if ( v7 <= 0.0 )
+      if ( fCurvature <= 0.0 )
       {
-        if ( v7 >= 0.0 )
+        if ( fCurvature >= 0.0 )
           v6 = 0.0;
       }
       else
@@ -1801,179 +1689,171 @@ LABEL_6:
       goto LABEL_12;
     }
 LABEL_13:
-    v19 = position->z;
-    v20 = position->z;
-    v21 = (float)(position->x * this->m_WorldChase.v0.y) + (float)(position->y * this->m_WorldChase.v1.y);
-    v22 = (float)(position->x * this->m_WorldChase.v0.z) + (float)(position->y * this->m_WorldChase.v1.z);
+    z = position->z;
+    v20 = (float)(position->x * this->m_WorldChase.v0.y) + (float)(position->y * this->m_WorldChase.v1.y);
+    v21 = (float)(position->x * this->m_WorldChase.v0.z) + (float)(position->y * this->m_WorldChase.v1.z);
     result->x = (float)((float)((float)(position->y * this->m_WorldChase.v1.x)
                               + (float)(position->x * this->m_WorldChase.v0.x))
-                      + (float)(position->z * this->m_WorldChase.v2.x))
+                      + (float)(z * this->m_WorldChase.v2.x))
               + this->m_WorldChase.v3.x;
-    v23 = (float)(v22 + (float)(v19 * this->m_WorldChase.v2.z)) + this->m_WorldChase.v3.z;
-    result->y = (float)(v21 + (float)(v20 * this->m_WorldChase.v2.y)) + this->m_WorldChase.v3.y;
-    result->z = v23;
-    return v4;
+    v22 = (float)(v21 + (float)(z * this->m_WorldChase.v2.z)) + this->m_WorldChase.v3.z;
+    result->y = (float)(v20 + (float)(z * this->m_WorldChase.v2.y)) + this->m_WorldChase.v3.y;
+    result->z = v22;
+    return result;
   }
-  v7 = *(float *)&FLOAT_1_0;
+  fCurvature = *(float *)&FLOAT_1_0;
   v6 = *(float *)&FLOAT_1_0;
 LABEL_12:
-  v8 = this->m_ChaseWorld.v1.x;
-  v9 = this->m_ChaseWorld.v1.y;
+  x = this->m_ChaseWorld.v1.x;
+  y = this->m_ChaseWorld.v1.y;
   v10 = this->m_ChaseWorld.v1.z;
-  v11 = 1.0 / v7;
-  v12 = (float)(this->m_ChaseWorld.v1.x * (float)(1.0 / v7)) + this->m_ChaseWorld.v3.x;
-  v13 = (float)((float)(this->m_ChaseWorld.v1.y * (float)(1.0 / v7)) + this->m_ChaseWorld.v3.y) - position->y;
-  v14 = (float)((float)(this->m_ChaseWorld.v1.z * v11) + this->m_ChaseWorld.v3.z) - position->z;
+  v11 = 1.0 / fCurvature;
+  v12 = (float)(x * (float)(1.0 / fCurvature)) + this->m_ChaseWorld.v3.x;
+  v13 = (float)((float)(y * (float)(1.0 / fCurvature)) + this->m_ChaseWorld.v3.y) - position->y;
+  v14 = (float)((float)(v10 * v11) + this->m_ChaseWorld.v3.z) - position->z;
   b.x = v12 - position->x;
   b.y = v13;
   b.z = v14;
-  a.x = v8 * v6;
-  a.y = v9 * v6;
+  a.x = x * v6;
+  a.y = y * v6;
   a.z = v10 * v6;
   v15 = UFG::qSignedAngleBetween(&a, &b);
-  v16 = (__m128)LODWORD(b.y);
+  y_low = (__m128)LODWORD(b.y);
   v17 = b.z;
-  v4->x = v15 * v11;
-  v16.m128_f32[0] = (float)((float)(v16.m128_f32[0] * v16.m128_f32[0]) + (float)(b.x * b.x)) + (float)(v17 * v17);
-  v18 = v3->z - v5->m_ChaseWorld.v3.z;
-  v4->y = v11 - (float)(COERCE_FLOAT(_mm_sqrt_ps(v16)) * v6);
-  v4->z = v18;
-  return v4;
+  result->x = v15 * v11;
+  y_low.m128_f32[0] = (float)((float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(b.x * b.x)) + (float)(v17 * v17);
+  v18 = position->z - this->m_ChaseWorld.v3.z;
+  result->y = v11 - (float)(_mm_sqrt_ps(y_low).m128_f32[0] * v6);
+  result->z = v18;
+  return result;
 }
 
 // File Line: 1296
 // RVA: 0x647BD0
-UFG::qVector3 *__fastcall UFG::RoadSpaceComponent::ChaseToWorld(UFG::RoadSpaceComponent *this, UFG::qVector3 *result, UFG::qVector3 *position, UFG::qVector3 *p_direction)
+UFG::qVector3 *__fastcall UFG::RoadSpaceComponent::ChaseToWorld(
+        UFG::RoadSpaceComponent *this,
+        UFG::qVector3 *result,
+        UFG::qVector3 *position,
+        UFG::qVector3 *p_direction)
 {
-  UFG::qVector3 *v4; // rdi
-  UFG::qVector3 *v5; // rsi
-  UFG::RoadSpaceComponent *v6; // rbx
   float v7; // xmm0_4
   float v8; // xmm1_4
   float v9; // xmm4_4
   UFG::qVector3 *v10; // rax
-  float v11; // xmm1_4
-  float v12; // xmm2_4
+  float v11; // xmm2_4
+  float v12; // xmm6_4
   float v13; // xmm6_4
-  float v14; // xmm6_4
-  float v15; // xmm13_4
-  float v16; // xmm11_4
-  float v17; // xmm6_4
-  float v18; // xmm14_4
-  float v19; // xmm7_4
+  float v14; // xmm13_4
+  float fCurvature; // xmm11_4
+  float v16; // xmm6_4
+  float v17; // xmm14_4
+  float v18; // xmm7_4
+  float v19; // xmm9_4
   float v20; // xmm10_4
-  float v21; // xmm9_4
-  float v22; // xmm10_4
-  float v23; // xmm8_4
-  float v24; // xmm9_4
-  float v25; // xmm7_4
-  float v26; // xmm15_4
-  float v27; // xmm6_4
-  float v28; // xmm7_4
+  float v21; // xmm8_4
+  float v22; // xmm9_4
+  float v23; // xmm7_4
+  float v24; // xmm15_4
+  float v25; // xmm6_4
+  float v26; // xmm7_4
+  float v27; // xmm4_4
+  float v28; // xmm6_4
   float v29; // xmm4_4
-  float v30; // xmm6_4
-  float v31; // xmm4_4
-  float v32; // xmm5_4
-  float v33; // xmm6_4
-  float v34; // xmm2_4
-  float v35; // xmm12_4
-  float v36; // xmm0_4
-  float v37; // xmm1_4
-  float v38; // xmm0_4
-  float v39; // xmm1_4
-  float v40; // xmm4_4
-  float v41; // xmm1_4
-  float v42; // xmm2_4
-  float v43; // xmm6_4
-  float v44; // xmm6_4
-  float v45; // [rsp+D0h] [rbp+8h]
+  float v30; // xmm5_4
+  float v31; // xmm6_4
+  float v32; // xmm2_4
+  float v33; // xmm12_4
+  float v34; // xmm0_4
+  float v35; // xmm1_4
+  float y; // xmm0_4
+  float z; // xmm1_4
+  float v38; // xmm4_4
+  float v39; // xmm2_4
+  float v40; // xmm6_4
+  float v41; // xmm6_4
+  float v42; // [rsp+D0h] [rbp+8h]
 
-  v4 = p_direction;
-  v5 = result;
-  v6 = this;
   if ( !this->m_pChaseFormation )
   {
     if ( this->m_PositionTrail.mTrail.mCount > 0 )
     {
-      v15 = FLOAT_N1_0;
-      v16 = this->m_PositionTrail.mTrail.mData[this->m_PositionTrail.mTrail.mLast].fCurvature;
-      if ( v16 <= -1.0 )
+      v14 = FLOAT_N1_0;
+      fCurvature = this->m_PositionTrail.mTrail.mData[this->m_PositionTrail.mTrail.mLast].fCurvature;
+      if ( fCurvature <= -1.0 )
       {
-        v16 = FLOAT_N1_0;
+        fCurvature = FLOAT_N1_0;
       }
-      else if ( v16 >= 1.0 )
+      else if ( fCurvature >= 1.0 )
       {
-        v16 = *(float *)&FLOAT_1_0;
+        fCurvature = *(float *)&FLOAT_1_0;
 LABEL_12:
-        v17 = v16 * position->x;
-        v18 = 1.0 / v16;
-        v19 = position->y - (float)(1.0 / v16);
-        v20 = sinf(v17);
-        v21 = v20 * v19;
-        v22 = (float)(v20 * v19) * v6->m_ChaseWorld.v0.z;
-        v23 = v21 * v6->m_ChaseWorld.v0.x;
-        v24 = v21 * v6->m_ChaseWorld.v0.y;
-        v25 = cosf(v17) * v19;
-        v26 = (float)(v25 * v6->m_ChaseWorld.v1.z) - v22;
-        v27 = (float)(v25 * v6->m_ChaseWorld.v1.y) - v24;
-        v28 = (float)(v25 * v6->m_ChaseWorld.v1.x) - v23;
-        v45 = v27;
-        if ( v4 )
+        v16 = fCurvature * position->x;
+        v17 = 1.0 / fCurvature;
+        v18 = position->y - (float)(1.0 / fCurvature);
+        v19 = sinf(v16) * v18;
+        v20 = v19 * this->m_ChaseWorld.v0.z;
+        v21 = v19 * this->m_ChaseWorld.v0.x;
+        v22 = v19 * this->m_ChaseWorld.v0.y;
+        v23 = cosf(v16) * v18;
+        v24 = (float)(v23 * this->m_ChaseWorld.v1.z) - v20;
+        v25 = (float)(v23 * this->m_ChaseWorld.v1.y) - v22;
+        v26 = (float)(v23 * this->m_ChaseWorld.v1.x) - v21;
+        v42 = v25;
+        if ( p_direction )
         {
-          v29 = (float)(v26 * UFG::qVector3::msAxisZ.y) - (float)(v27 * UFG::qVector3::msAxisZ.z);
-          v30 = (float)(v27 * UFG::qVector3::msAxisZ.x) - (float)(v28 * UFG::qVector3::msAxisZ.y);
-          if ( v16 <= 0.0 )
+          v27 = (float)(v24 * UFG::qVector3::msAxisZ.y) - (float)(v25 * UFG::qVector3::msAxisZ.z);
+          v28 = (float)(v25 * UFG::qVector3::msAxisZ.x) - (float)(v26 * UFG::qVector3::msAxisZ.y);
+          if ( fCurvature <= 0.0 )
           {
-            if ( v16 >= 0.0 )
-              v15 = 0.0;
+            if ( fCurvature >= 0.0 )
+              v14 = 0.0;
           }
           else
           {
-            v15 = *(float *)&FLOAT_1_0;
+            v14 = *(float *)&FLOAT_1_0;
           }
-          v31 = v29 * v15;
-          v32 = (float)((float)(v28 * UFG::qVector3::msAxisZ.z) - (float)(v26 * UFG::qVector3::msAxisZ.x)) * v15;
-          v33 = v30 * v15;
-          v34 = (float)((float)(v32 * v32) + (float)(v31 * v31)) + (float)(v33 * v33);
-          if ( v34 == 0.0 )
-            v35 = 0.0;
+          v29 = v27 * v14;
+          v30 = (float)((float)(v26 * UFG::qVector3::msAxisZ.z) - (float)(v24 * UFG::qVector3::msAxisZ.x)) * v14;
+          v31 = v28 * v14;
+          v32 = (float)((float)(v30 * v30) + (float)(v29 * v29)) + (float)(v31 * v31);
+          if ( v32 == 0.0 )
+            v33 = 0.0;
           else
-            v35 = 1.0 / fsqrt(v34);
-          v4->z = v33 * v35;
-          v27 = v45;
-          v4->x = v31 * v35;
-          v4->y = v32 * v35;
+            v33 = 1.0 / fsqrt(v32);
+          p_direction->z = v31 * v33;
+          v25 = v42;
+          p_direction->x = v29 * v33;
+          p_direction->y = v30 * v33;
         }
-        v36 = (float)((float)(v18 * v6->m_ChaseWorld.v1.x) + v6->m_ChaseWorld.v3.x) + v28;
-        v37 = (float)((float)(v18 * v6->m_ChaseWorld.v1.y) + v6->m_ChaseWorld.v3.y) + v27;
-        v5->z = (float)((float)(v18 * v6->m_ChaseWorld.v1.z) + v6->m_ChaseWorld.v3.z) + v26;
-        v5->x = v36;
-        v5->y = v37;
-        return v5;
+        v34 = (float)((float)(v17 * this->m_ChaseWorld.v1.x) + this->m_ChaseWorld.v3.x) + v26;
+        v35 = (float)((float)(v17 * this->m_ChaseWorld.v1.y) + this->m_ChaseWorld.v3.y) + v25;
+        result->z = (float)((float)(v17 * this->m_ChaseWorld.v1.z) + this->m_ChaseWorld.v3.z) + v24;
+        result->x = v34;
+        result->y = v35;
+        return result;
       }
-      if ( v16 < -0.0099999998 || v16 > 0.0099999998 )
+      if ( fCurvature < -0.0099999998 || fCurvature > 0.0099999998 )
         goto LABEL_12;
     }
     if ( p_direction )
     {
-      v38 = this->m_ChaseWorld.v0.y;
-      v39 = this->m_ChaseWorld.v0.z;
+      y = this->m_ChaseWorld.v0.y;
+      z = this->m_ChaseWorld.v0.z;
       p_direction->x = this->m_ChaseWorld.v0.x;
-      p_direction->y = v38;
-      p_direction->z = v39;
+      p_direction->y = y;
+      p_direction->z = z;
     }
-    v40 = position->z;
-    v41 = position->z;
-    v42 = (float)(position->y * this->m_ChaseWorld.v1.y) + (float)(position->x * this->m_ChaseWorld.v0.y);
-    v43 = (float)(position->y * this->m_ChaseWorld.v1.z) + (float)(position->x * this->m_ChaseWorld.v0.z);
+    v38 = position->z;
+    v39 = (float)(position->y * this->m_ChaseWorld.v1.y) + (float)(position->x * this->m_ChaseWorld.v0.y);
+    v40 = (float)(position->y * this->m_ChaseWorld.v1.z) + (float)(position->x * this->m_ChaseWorld.v0.z);
     result->x = (float)((float)((float)(position->y * this->m_ChaseWorld.v1.x)
                               + (float)(position->x * this->m_ChaseWorld.v0.x))
-                      + (float)(position->z * this->m_ChaseWorld.v2.x))
+                      + (float)(v38 * this->m_ChaseWorld.v2.x))
               + this->m_ChaseWorld.v3.x;
-    v44 = (float)(v43 + (float)(v40 * this->m_ChaseWorld.v2.z)) + this->m_ChaseWorld.v3.z;
-    result->y = (float)(v42 + (float)(v41 * this->m_ChaseWorld.v2.y)) + this->m_ChaseWorld.v3.y;
-    result->z = v44;
-    return v5;
+    v41 = (float)(v40 + (float)(v38 * this->m_ChaseWorld.v2.z)) + this->m_ChaseWorld.v3.z;
+    result->y = (float)(v39 + (float)(v38 * this->m_ChaseWorld.v2.y)) + this->m_ChaseWorld.v3.y;
+    result->z = v41;
+    return result;
   }
   if ( p_direction )
   {
@@ -1985,34 +1865,38 @@ LABEL_12:
   }
   v9 = position->z;
   v10 = result;
-  v11 = position->z;
-  v12 = (float)(position->y * this->m_ChaseWorld.v1.y) + (float)(position->x * this->m_ChaseWorld.v0.y);
-  v13 = (float)(position->y * this->m_ChaseWorld.v1.z) + (float)(position->x * this->m_ChaseWorld.v0.z);
+  v11 = (float)(position->y * this->m_ChaseWorld.v1.y) + (float)(position->x * this->m_ChaseWorld.v0.y);
+  v12 = (float)(position->y * this->m_ChaseWorld.v1.z) + (float)(position->x * this->m_ChaseWorld.v0.z);
   result->x = (float)((float)((float)(position->y * this->m_ChaseWorld.v1.x)
                             + (float)(position->x * this->m_ChaseWorld.v0.x))
-                    + (float)(position->z * this->m_ChaseWorld.v2.x))
+                    + (float)(v9 * this->m_ChaseWorld.v2.x))
             + this->m_ChaseWorld.v3.x;
-  v14 = (float)(v13 + (float)(v9 * this->m_ChaseWorld.v2.z)) + this->m_ChaseWorld.v3.z;
-  result->y = (float)(v12 + (float)(v11 * this->m_ChaseWorld.v2.y)) + this->m_ChaseWorld.v3.y;
-  result->z = v14;
+  v13 = (float)(v12 + (float)(v9 * this->m_ChaseWorld.v2.z)) + this->m_ChaseWorld.v3.z;
+  result->y = (float)(v11 + (float)(v9 * this->m_ChaseWorld.v2.y)) + this->m_ChaseWorld.v3.y;
+  result->z = v13;
   return v10;
 }
 
 // File Line: 1332
 // RVA: 0x65AE80
-UFG::qVector3 *__fastcall UFG::RoadSpaceComponent::SteerTo(UFG::qVector3 *result, UFG::qVector3 *centre, float radius, UFG::qVector3 *point, UFG::qVector3 *ray)
+UFG::qVector3 *__fastcall UFG::RoadSpaceComponent::SteerTo(
+        UFG::qVector3 *result,
+        UFG::qVector3 *centre,
+        float radius,
+        UFG::qVector3 *point,
+        UFG::qVector3 *ray)
 {
-  float v5; // xmm4_4
-  float v6; // xmm5_4
-  float v7; // xmm6_4
+  float x; // xmm4_4
+  float y; // xmm5_4
+  float z; // xmm6_4
   float v8; // xmm9_4
   float v9; // xmm8_4
   float v10; // xmm10_4
   float v11; // xmm11_4
-  __m128 v12; // xmm12
+  __m128 y_low; // xmm12
   float v13; // xmm13_4
   float v14; // xmm3_4
-  __m128 v15; // xmm7
+  __m128 x_low; // xmm7
   __m128 v16; // xmm14
   __m128 v17; // xmm15
   float v18; // xmm2_4
@@ -2022,70 +1906,73 @@ UFG::qVector3 *__fastcall UFG::RoadSpaceComponent::SteerTo(UFG::qVector3 *result
   float v22; // xmm3_4
   float v23; // xmm2_4
 
-  v5 = centre->x;
-  v6 = centre->y;
-  v7 = centre->z;
-  v12 = (__m128)LODWORD(point->y);
+  x = centre->x;
+  y = centre->y;
+  z = centre->z;
+  y_low = (__m128)LODWORD(point->y);
   v8 = ray->y;
   v9 = ray->x;
   v10 = ray->z;
   v11 = point->x - centre->x;
-  v12.m128_f32[0] = v12.m128_f32[0] - v6;
-  v15 = (__m128)LODWORD(ray->x);
-  v16 = v12;
-  v13 = point->z - v7;
+  y_low.m128_f32[0] = y_low.m128_f32[0] - y;
+  x_low = (__m128)LODWORD(ray->x);
+  v16 = y_low;
+  v13 = point->z - z;
   v14 = (float)((float)(v9 * v9) + (float)(v8 * v8)) + (float)(v10 * v10);
-  v15.m128_f32[0] = (float)((float)(v15.m128_f32[0] * v11) + (float)(ray->y * v12.m128_f32[0])) + (float)(ray->z * v13);
-  v17 = v15;
-  v16.m128_f32[0] = (float)((float)(v12.m128_f32[0] * v12.m128_f32[0]) + (float)(v11 * v11)) + (float)(v13 * v13);
-  v17.m128_f32[0] = (float)(v15.m128_f32[0] * v15.m128_f32[0])
+  x_low.m128_f32[0] = (float)((float)(x_low.m128_f32[0] * v11) + (float)(v8 * y_low.m128_f32[0])) + (float)(v10 * v13);
+  v17 = x_low;
+  v16.m128_f32[0] = (float)((float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(v11 * v11)) + (float)(v13 * v13);
+  v17.m128_f32[0] = (float)(x_low.m128_f32[0] * x_low.m128_f32[0])
                   - (float)((float)(v16.m128_f32[0] - (float)(radius * radius)) * v14);
   if ( v17.m128_f32[0] < 0.0 || v14 < 0.0000099999997 )
   {
-    v23 = radius / COERCE_FLOAT(_mm_sqrt_ps(v16));
-    result->z = (float)(v23 * v13) + v7;
-    result->x = (float)(v23 * v11) + v5;
-    result->y = (float)(v23 * v12.m128_f32[0]) + v6;
+    v23 = radius / _mm_sqrt_ps(v16).m128_f32[0];
+    result->z = (float)(v23 * v13) + z;
+    result->x = (float)(v23 * v11) + x;
+    result->y = (float)(v23 * y_low.m128_f32[0]) + y;
   }
   else
   {
-    v18 = COERCE_FLOAT(_mm_sqrt_ps(v17)) * 2.0;
+    v18 = _mm_sqrt_ps(v17).m128_f32[0] * 2.0;
     v19 = 1.0 / (float)(v14 * 2.0);
-    v20 = (float)(v15.m128_f32[0] * -2.0) - v18;
-    v21 = (float)(v18 - (float)(v15.m128_f32[0] * 2.0)) * v19;
+    v20 = (float)(x_low.m128_f32[0] * -2.0) - v18;
+    v21 = (float)(v18 - (float)(x_low.m128_f32[0] * 2.0)) * v19;
     v22 = v20 * v19;
     if ( v21 <= v22 )
       v21 = v22;
-    result->x = (float)(v5 + v11) + (float)(v9 * v21);
-    result->y = (float)(v6 + v12.m128_f32[0]) + (float)(v8 * v21);
-    result->z = (float)(v7 + v13) + (float)(v10 * v21);
+    result->x = (float)(x + v11) + (float)(v9 * v21);
+    result->y = (float)(y + y_low.m128_f32[0]) + (float)(v8 * v21);
+    result->z = (float)(z + v13) + (float)(v10 * v21);
   }
   return result;
 }
 
 // File Line: 1391
 // RVA: 0x650740
-UFG::qVector3 *__fastcall UFG::RoadSpaceComponent::GetSteerToNavPath(UFG::RoadSpaceComponent *this, UFG::qVector3 *result, UFG::qVector3 *defaultSteerTo, float steerToDist)
+UFG::qVector3 *__fastcall UFG::RoadSpaceComponent::GetSteerToNavPath(
+        UFG::RoadSpaceComponent *this,
+        UFG::qVector3 *result,
+        UFG::qVector3 *defaultSteerTo,
+        float steerToDist)
 {
-  UFG::NavPath *v4; // r14
-  UFG::qVector3 *v5; // rbx
-  unsigned int v6; // esi
-  unsigned int v7; // edi
+  UFG::NavPath *m_pNavPath; // r14
+  unsigned int size; // esi
+  unsigned int m_CurrPathPointIndex; // edi
   __int64 v8; // r12
-  UFG::qVector3 *v9; // r15
-  UFG::NavWaypoint *v10; // rax
-  float v11; // xmm0_4
-  float v12; // xmm1_4
-  float v13; // xmm2_4
+  UFG::qVector3 *p_m_Pos; // r15
+  UFG::NavWaypoint *p; // rax
+  float x; // xmm0_4
+  float y; // xmm1_4
+  float z; // xmm2_4
   UFG::qVector3 *v14; // rax
-  UFG::NavGuide *v15; // rbp
+  UFG::NavGuide *p_m_NavGuide; // rbp
   float v16; // xmm8_4
   float v17; // xmm9_4
   float v18; // xmm4_4
   float v19; // xmm10_4
   float v20; // xmm5_4
   unsigned int v21; // edi
-  UFG::qVector3 *v22; // rax
+  UFG::qVector3 *PathSegmentDir; // rax
   float v23; // xmm1_4
   float v24; // xmm0_4
   UFG::NavWaypoint *v25; // rax
@@ -2093,274 +1980,256 @@ UFG::qVector3 *__fastcall UFG::RoadSpaceComponent::GetSteerToNavPath(UFG::RoadSp
   float v27; // xmm2_4
   float v28; // xmm1_4
   float v29; // xmm0_4
-  UFG::qVector3 resulta; // [rsp+30h] [rbp-A8h]
-  UFG::qVector3 ray; // [rsp+40h] [rbp-98h]
-  UFG::qVector3 v32; // [rsp+50h] [rbp-88h]
-  UFG::qVector3 v33; // [rsp+60h] [rbp-78h]
+  UFG::qVector3 resulta; // [rsp+30h] [rbp-A8h] BYREF
+  UFG::qVector3 ray; // [rsp+40h] [rbp-98h] BYREF
+  UFG::qVector3 v32; // [rsp+50h] [rbp-88h] BYREF
+  UFG::qVector3 v33; // [rsp+60h] [rbp-78h] BYREF
 
-  v4 = this->m_NavGuide.m_PathQueryOutput.m_pPath.m_pNavPath;
-  v5 = result;
-  if ( v4 && (v6 = v4->m_aWaypoints.size) != 0 )
+  m_pNavPath = this->m_NavGuide.m_PathQueryOutput.m_pPath.m_pNavPath;
+  if ( m_pNavPath && (size = m_pNavPath->m_aWaypoints.size) != 0 )
   {
-    v7 = this->m_NavGuide.m_CurrPathPointIndex;
-    v8 = v6 - 1;
-    v9 = &this->m_NavGuide.m_Pos;
-    if ( v7 == (_DWORD)v8 )
+    m_CurrPathPointIndex = this->m_NavGuide.m_CurrPathPointIndex;
+    v8 = size - 1;
+    p_m_Pos = &this->m_NavGuide.m_Pos;
+    if ( m_CurrPathPointIndex == (_DWORD)v8 )
     {
-      v10 = v4->m_aWaypoints.p;
-      v11 = v10[v8].m_navPosition.m_vPosition.x;
-      v12 = v10[v8].m_navPosition.m_vPosition.y;
-      v13 = v10[v8].m_navPosition.m_vPosition.z;
+      p = m_pNavPath->m_aWaypoints.p;
+      x = p[v8].m_navPosition.m_vPosition.x;
+      y = p[v8].m_navPosition.m_vPosition.y;
+      z = p[v8].m_navPosition.m_vPosition.z;
       v14 = result;
-      result->x = v11;
-      result->y = v12;
-      result->z = v13;
+      result->x = x;
+      result->y = y;
+      result->z = z;
     }
     else
     {
-      v15 = &this->m_NavGuide;
-      UFG::NavGuide::GetPathSegmentPos(&this->m_NavGuide, &resulta, v7, &this->m_NavGuide.m_Pos);
-      v16 = v9->x;
-      v17 = v9->y;
+      p_m_NavGuide = &this->m_NavGuide;
+      UFG::NavGuide::GetPathSegmentPos(&this->m_NavGuide, &resulta, m_CurrPathPointIndex, &this->m_NavGuide.m_Pos);
+      v16 = p_m_Pos->x;
+      v17 = p_m_Pos->y;
       v18 = resulta.y;
-      v19 = v9->z;
+      v19 = p_m_Pos->z;
       v20 = resulta.z;
-      if ( (float)((float)((float)((float)(v9->y - resulta.y) * (float)(v9->y - resulta.y))
-                         + (float)((float)(v9->x - resulta.x) * (float)(v9->x - resulta.x)))
-                 + (float)((float)(v9->z - resulta.z) * (float)(v9->z - resulta.z))) <= (float)(steerToDist * steerToDist) )
+      if ( (float)((float)((float)((float)(v17 - resulta.y) * (float)(v17 - resulta.y))
+                         + (float)((float)(p_m_Pos->x - resulta.x) * (float)(p_m_Pos->x - resulta.x)))
+                 + (float)((float)(v19 - resulta.z) * (float)(v19 - resulta.z))) <= (float)(steerToDist * steerToDist) )
       {
-        UFG::NavGuide::GetPathSegmentDir(v15, &ray, v7);
-        v21 = v7 + 1;
-        if ( v21 >= v6 )
+        UFG::NavGuide::GetPathSegmentDir(p_m_NavGuide, &ray, m_CurrPathPointIndex);
+        v21 = m_CurrPathPointIndex + 1;
+        if ( v21 >= size )
         {
 LABEL_12:
-          v25 = v4->m_aWaypoints.p;
+          v25 = m_pNavPath->m_aWaypoints.p;
           v26 = v25[v8].m_navPosition.m_vPosition.y;
           v27 = v25[v8].m_navPosition.m_vPosition.z;
-          v5->x = v25[v8].m_navPosition.m_vPosition.x;
-          v5->y = v26;
-          v5->z = v27;
+          result->x = v25[v8].m_navPosition.m_vPosition.x;
+          result->y = v26;
+          result->z = v27;
         }
         else
         {
           while ( 1 )
           {
-            UFG::NavGuide::GetPathSegmentPos(v15, &v32, v21, v9);
+            UFG::NavGuide::GetPathSegmentPos(p_m_NavGuide, &v32, v21, p_m_Pos);
             if ( (float)((float)((float)((float)(v17 - v32.y) * (float)(v17 - v32.y))
                                + (float)((float)(v16 - v32.x) * (float)(v16 - v32.x)))
                        + (float)((float)(v19 - v32.z) * (float)(v19 - v32.z))) > (float)(steerToDist * steerToDist) )
               break;
             resulta = v32;
-            v22 = UFG::NavGuide::GetPathSegmentDir(v15, &v33, v21++);
-            v23 = v22->y;
-            ray.x = v22->x;
-            v24 = v22->z;
+            PathSegmentDir = UFG::NavGuide::GetPathSegmentDir(p_m_NavGuide, &v33, v21++);
+            v23 = PathSegmentDir->y;
+            ray.x = PathSegmentDir->x;
+            v24 = PathSegmentDir->z;
             ray.y = v23;
             ray.z = v24;
-            if ( v21 >= v6 )
+            if ( v21 >= size )
               goto LABEL_12;
           }
-          UFG::RoadSpaceComponent::SteerTo(&v32, v9, steerToDist, &resulta, &ray);
+          UFG::RoadSpaceComponent::SteerTo(&v32, p_m_Pos, steerToDist, &resulta, &ray);
           v28 = v32.y;
-          v5->x = v32.x;
+          result->x = v32.x;
           v29 = v32.z;
-          v5->y = v28;
-          v5->z = v29;
+          result->y = v28;
+          result->z = v29;
         }
       }
       else
       {
-        v5->x = resulta.x;
-        v5->y = v18;
-        v5->z = v20;
+        result->x = resulta.x;
+        result->y = v18;
+        result->z = v20;
       }
-      v14 = v5;
+      return result;
     }
   }
   else
   {
-    result->x = defaultSteerTo->x;
-    result->y = defaultSteerTo->y;
-    result->z = defaultSteerTo->z;
-    v14 = result;
+    *result = *defaultSteerTo;
+    return result;
   }
   return v14;
 }
 
 // File Line: 1438
 // RVA: 0x650A20
-UFG::qVector3 *__fastcall UFG::RoadSpaceComponent::GetSteerToNavWanderDestination(UFG::RoadSpaceComponent *this, UFG::qVector3 *result, UFG::qVector3 *defaultSteerTo, float steerToDist)
+UFG::qVector3 *__fastcall UFG::RoadSpaceComponent::GetSteerToNavWanderDestination(
+        UFG::RoadSpaceComponent *this,
+        UFG::qVector3 *result,
+        UFG::qVector3 *defaultSteerTo,
+        float steerToDist)
 {
-  UFG::RoadSpaceComponent *v4; // rbx
-  float v5; // xmm6_4
-  UFG::qVector3 *v6; // rdi
   UFG::qVector3 *v7; // rsi
   __int64 v8; // rax
   float v9; // xmm2_4
-  __m128 v10; // xmm3
+  __m128 y_low; // xmm3
   float v11; // xmm4_4
   float v12; // xmm1_4
   float v13; // xmm0_4
   __m128 v14; // xmm5
   float v15; // xmm1_4
-  UFG::qVector3 ray; // [rsp+30h] [rbp-28h]
+  UFG::qVector3 ray; // [rsp+30h] [rbp-28h] BYREF
 
-  v4 = this;
-  v5 = steerToDist;
-  v6 = result;
   v7 = (UFG::qVector3 *)((__int64 (__fastcall *)(UFG::SimComponent *, UFG::qVector3 *, UFG::qVector3 *))this->m_pSubject.m_pSimComponent->vfptr[17].__vecDelDtor)(
                           this->m_pSubject.m_pSimComponent,
                           result,
                           defaultSteerTo);
-  v8 = ((__int64 (*)(void))v4->m_pSubject.m_pSimComponent->vfptr[16].__vecDelDtor)();
-  v10 = (__m128)LODWORD(v4->m_NavWanderDestPos.y);
-  v9 = v4->m_NavWanderDestPos.x - v7->x;
-  v10.m128_f32[0] = v10.m128_f32[0] - v7->y;
-  v14 = v10;
-  v11 = v4->m_NavWanderDestPos.z - v7->z;
+  v8 = ((__int64 (__fastcall *)(UFG::SimComponent *))this->m_pSubject.m_pSimComponent->vfptr[16].__vecDelDtor)(this->m_pSubject.m_pSimComponent);
+  y_low = (__m128)LODWORD(this->m_NavWanderDestPos.y);
+  v9 = this->m_NavWanderDestPos.x - v7->x;
+  y_low.m128_f32[0] = y_low.m128_f32[0] - v7->y;
+  v14 = y_low;
+  v11 = this->m_NavWanderDestPos.z - v7->z;
   v12 = *(float *)(v8 + 4);
   ray.x = *(float *)v8;
   v13 = *(float *)(v8 + 8);
   ray.y = v12;
   ray.z = v13;
-  v14.m128_f32[0] = (float)((float)(v10.m128_f32[0] * v10.m128_f32[0]) + (float)(v9 * v9)) + (float)(v11 * v11);
+  v14.m128_f32[0] = (float)((float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(v9 * v9)) + (float)(v11 * v11);
   if ( v14.m128_f32[0] > 0.0000010000001 )
   {
     v15 = 0.0;
     if ( v14.m128_f32[0] != 0.0 )
-      v15 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v14));
+      v15 = 1.0 / _mm_sqrt_ps(v14).m128_f32[0];
     ray.x = v9 * v15;
-    ray.y = v10.m128_f32[0] * v15;
+    ray.y = y_low.m128_f32[0] * v15;
     ray.z = v11 * v15;
   }
-  UFG::RoadSpaceComponent::SteerTo(v6, v7, v5, &v4->m_NavWanderDestPos, &ray);
-  return v6;
+  UFG::RoadSpaceComponent::SteerTo(result, v7, steerToDist, &this->m_NavWanderDestPos, &ray);
+  return result;
 }
 
 // File Line: 1450
 // RVA: 0x650130
-UFG::qVector3 *__fastcall UFG::RoadSpaceComponent::GetSteerToFollow(UFG::RoadSpaceComponent *this, UFG::qVector3 *result, float steer_to_distance)
+UFG::qVector3 *__fastcall UFG::RoadSpaceComponent::GetSteerToFollow(
+        UFG::RoadSpaceComponent *this,
+        UFG::qVector3 *result,
+        float steer_to_distance)
 {
-  UFG::SimObject *v3; // rbp
-  signed int v4; // esi
-  UFG::qVector3 *v5; // r13
-  UFG::RoadSpaceComponent *v6; // r14
-  float v7; // xmm7_4
-  UFG::TransformNodeComponent *v8; // rbp
-  UFG::SimObjectGame *v9; // rcx
+  UFG::SimObject *m_pSimObject; // rbp
+  int v4; // esi
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rbp
+  UFG::SimObjectGame *m_pPointer; // rcx
   UFG::TransformNodeComponent *v10; // rdi
-  unsigned __int16 v11; // dx
-  UFG::SimComponent *v12; // rbx
-  UFG::SimComponent *v13; // rax
-  UFG::qVector3 *v14; // r15
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rbx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
+  UFG::qVector3 *p_m_pSimObject; // r15
   UFG::qVector3 *v15; // rax
-  float v16; // xmm10_4
-  __m128 v17; // xmm8
-  float v18; // xmm11_4
-  signed __int64 v19; // rbp
+  float x; // xmm10_4
+  __m128 y_low; // xmm8
+  float z; // xmm11_4
+  UFG::qVector4 *v19; // rbp
   __m128 v20; // xmm2
   float v21; // xmm6_4
   float v22; // xmm0_4
   float v23; // xmm13_4
   float v24; // xmm9_4
-  UFG::RingBuffer<UFG::Crumb> *v25; // rbx
-  signed int v26; // er12
+  UFG::RingBuffer<UFG::Crumb> *p_mNext; // rbx
+  int mCount; // r12d
   float v27; // xmm6_4
-  signed int v28; // er15
-  float *v29; // rax
-  signed int v30; // edi
+  int v28; // r15d
+  float *p_x; // rax
+  int v30; // edi
   float v31; // xmm9_4
   float v32; // xmm10_4
   float v33; // xmm8_4
   int v34; // eax
-  signed int v35; // ecx
+  int v35; // ecx
   __int64 v36; // rcx
   int v37; // eax
-  signed int v38; // ecx
+  int v38; // ecx
   int v39; // eax
   __m128 v40; // xmm2
   int v41; // eax
-  signed int v42; // ecx
+  int v42; // ecx
   int v43; // eax
-  signed int v44; // ecx
+  int v44; // ecx
   __int64 v45; // r12
   int v46; // eax
   float *v47; // r12
-  signed int v48; // edi
-  signed __int64 v49; // rcx
-  UFG::qVector3 *v50; // rax
-  int v51; // eax
-  signed int v52; // ecx
-  __m128 v53; // xmm2
-  float v54; // xmm8_4
-  float v55; // xmm0_4
-  float v56; // xmm1_4
+  int v48; // edi
+  UFG::qVector3 *p_vDirection; // rax
+  int v50; // eax
+  int v51; // ecx
+  __m128 v52; // xmm2
+  float v53; // xmm8_4
+  float v54; // xmm0_4
+  float v55; // xmm1_4
+  float v56; // xmm0_4
   float v57; // xmm0_4
-  float v58; // xmm0_4
-  int v59; // eax
-  UFG::Crumb *v60; // rax
-  UFG::qVector3 *v61; // r9
-  float v62; // xmm1_4
-  __m128 v63; // xmm5
-  float v64; // xmm0_4
+  int v58; // eax
+  UFG::Crumb *p_point; // rax
+  UFG::qVector3 *v60; // r9
+  float v61; // xmm1_4
+  __m128 v62; // xmm5
+  float v63; // xmm0_4
   UFG::qVector3 *ray; // rax
-  float v66; // xmm0_4
-  float v67; // xmm1_4
+  float v65; // xmm0_4
+  float v66; // xmm1_4
+  float v67; // xmm0_4
   float v68; // xmm0_4
-  float v69; // xmm0_4
-  UFG::qVector3 *v70; // rax
-  UFG::qVector3 point; // [rsp+30h] [rbp-C8h]
-  UFG::qVector3 v72; // [rsp+40h] [rbp-B8h]
-  float *v73; // [rsp+100h] [rbp+8h]
-  signed __int64 v74; // [rsp+100h] [rbp+8h]
+  UFG::qVector3 point; // [rsp+30h] [rbp-C8h] BYREF
+  UFG::qVector3 v71; // [rsp+40h] [rbp-B8h] BYREF
+  float *v72; // [rsp+100h] [rbp+8h]
+  UFG::qVector3 *v73; // [rsp+100h] [rbp+8h]
 
-  v3 = this->m_pSimObject;
+  m_pSimObject = this->m_pSimObject;
   v4 = 0;
-  v5 = result;
-  v6 = this;
-  v7 = steer_to_distance;
-  if ( v3 )
-    v8 = v3->m_pTransformNodeComponent;
+  if ( m_pSimObject )
+    m_pTransformNodeComponent = m_pSimObject->m_pTransformNodeComponent;
   else
-    v8 = 0i64;
-  v9 = (UFG::SimObjectGame *)this->m_pChaseTarget.m_pPointer;
+    m_pTransformNodeComponent = 0i64;
+  m_pPointer = (UFG::SimObjectGame *)this->m_pChaseTarget.m_pPointer;
   v10 = 0i64;
-  if ( v9 )
+  if ( m_pPointer )
   {
-    v11 = v9->m_Flags;
-    v10 = v9->m_pTransformNodeComponent;
-    if ( (v11 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    v10 = m_pPointer->m_pTransformNodeComponent;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v12 = v9->m_Components.p[24].m_pComponent;
+      m_pComponent = m_pPointer->m_Components.p[24].m_pComponent;
     }
-    else if ( (v11 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v11 >> 13) & 1 )
-      {
-        v13 = UFG::SimObjectGame::GetComponentOfTypeHK(v9, UFG::RoadSpaceComponent::_TypeUID);
-      }
-      else if ( (v11 >> 12) & 1 )
-      {
-        v13 = UFG::SimObjectGame::GetComponentOfTypeHK(v9, UFG::RoadSpaceComponent::_TypeUID);
-      }
+      if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::RoadSpaceComponent::_TypeUID);
       else
-      {
-        v13 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v9->vfptr, UFG::RoadSpaceComponent::_TypeUID);
-      }
-      v12 = v13;
+        ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::RoadSpaceComponent::_TypeUID);
+      m_pComponent = ComponentOfTypeHK;
     }
     else
     {
-      v12 = v9->m_Components.p[24].m_pComponent;
+      m_pComponent = m_pPointer->m_Components.p[24].m_pComponent;
     }
   }
   else
   {
-    v12 = 0i64;
+    m_pComponent = 0i64;
   }
-  v14 = &UFG::qVector3::msUnity;
-  if ( v12 )
-    v14 = (UFG::qVector3 *)&v12[27].m_pSimObject;
+  p_m_pSimObject = &UFG::qVector3::msUnity;
+  if ( m_pComponent )
+    p_m_pSimObject = (UFG::qVector3 *)&m_pComponent[27].m_pSimObject;
   if ( v10 )
   {
     UFG::TransformNodeComponent::UpdateWorldTransform(v10);
@@ -2370,210 +2239,206 @@ UFG::qVector3 *__fastcall UFG::RoadSpaceComponent::GetSteerToFollow(UFG::RoadSpa
   {
     v15 = &UFG::qVector3::msZero;
   }
-  v17 = (__m128)LODWORD(v15->y);
-  v18 = v15->z;
+  y_low = (__m128)LODWORD(v15->y);
+  z = v15->z;
   point.x = v15->x;
-  v16 = point.x;
-  LODWORD(point.y) = v17.m128_i32[0];
-  point.z = v18;
-  UFG::TransformNodeComponent::UpdateWorldTransform(v8);
-  v19 = (signed __int64)&v8->mWorldTransform.v3;
-  v20 = (__m128)*(unsigned int *)(v19 + 4);
-  v20.m128_f32[0] = (float)((float)((float)(v20.m128_f32[0] - v17.m128_f32[0])
-                                  * (float)(v20.m128_f32[0] - v17.m128_f32[0]))
-                          + (float)((float)(*(float *)v19 - v16) * (float)(*(float *)v19 - v16)))
-                  + (float)((float)(*(float *)(v19 + 8) - v18) * (float)(*(float *)(v19 + 8) - v18));
-  LODWORD(v21) = (unsigned __int128)_mm_sqrt_ps(v20);
-  if ( v7 <= v21 )
+  x = point.x;
+  LODWORD(point.y) = y_low.m128_i32[0];
+  point.z = z;
+  UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+  v19 = &m_pTransformNodeComponent->mWorldTransform.v3;
+  v20 = (__m128)LODWORD(v19->y);
+  v20.m128_f32[0] = (float)((float)((float)(v20.m128_f32[0] - y_low.m128_f32[0])
+                                  * (float)(v20.m128_f32[0] - y_low.m128_f32[0]))
+                          + (float)((float)(v19->x - x) * (float)(v19->x - x)))
+                  + (float)((float)(v19->z - z) * (float)(v19->z - z));
+  v21 = _mm_sqrt_ps(v20).m128_f32[0];
+  if ( steer_to_distance <= v21 )
     v22 = v21;
   else
-    v22 = v7;
+    v22 = steer_to_distance;
   v23 = *(float *)&FLOAT_1_0;
-  v6->m_fChaseDistance = v22;
-  v6->m_fTrailDistance = v21;
+  this->m_fChaseDistance = v22;
+  this->m_fTrailDistance = v21;
   if ( v21 >= 1.0 )
     v24 = v21;
   else
     v24 = *(float *)&FLOAT_1_0;
-  v6->m_fChaseCurvature = UFG::qSignedAngleBetween((UFG::qVector3 *)&v6->m_ChaseWorld, v14) / v24;
-  if ( v12 && v10 )
+  this->m_fChaseCurvature = UFG::qSignedAngleBetween((UFG::qVector3 *)&this->m_ChaseWorld, p_m_pSimObject) / v24;
+  if ( !m_pComponent || !v10 )
+    goto LABEL_78;
+  p_mNext = (UFG::RingBuffer<UFG::Crumb> *)&m_pComponent[29].m_BoundComponentHandles.mNode.mNext;
+  mCount = p_mNext->mCount;
+  if ( mCount > 2 )
+    this->m_fChaseCurvature = p_mNext->mData[p_mNext->mLast].fCurvature;
+  if ( mCount && v21 > steer_to_distance )
   {
-    v25 = (UFG::RingBuffer<UFG::Crumb> *)&v12[29].m_BoundComponentHandles.mNode.mNext;
-    v26 = v25->mCount;
-    if ( v26 > 2 )
-      v6->m_fChaseCurvature = v25->mData[v25->mLast].fCurvature;
-    if ( v26 && v21 > v7 )
+    v27 = 0.0;
+    v28 = 0;
+    p_x = &p_mNext->mData[p_mNext->mLast].vPosition.x;
+    v30 = 0;
+    v31 = 0.0;
+    y_low.m128_f32[0] = (float)((float)((float)(y_low.m128_f32[0] - p_x[1]) * (float)(y_low.m128_f32[0] - p_x[1]))
+                              + (float)((float)(x - *p_x) * (float)(x - *p_x)))
+                      + (float)((float)(z - p_x[2]) * (float)(z - p_x[2]));
+    LODWORD(v32) = _mm_sqrt_ps(y_low).m128_u32[0];
+    v33 = 0.0;
+    if ( mCount <= 0 )
     {
-      v27 = 0.0;
-      v28 = 0;
-      v29 = &v25->mData[v25->mLast].vPosition.x;
-      v30 = 0;
-      v31 = 0.0;
-      v17.m128_f32[0] = (float)((float)((float)(v17.m128_f32[0] - v29[1]) * (float)(v17.m128_f32[0] - v29[1]))
-                              + (float)((float)(v16 - *v29) * (float)(v16 - *v29)))
-                      + (float)((float)(v18 - v29[2]) * (float)(v18 - v29[2]));
-      LODWORD(v32) = (unsigned __int128)_mm_sqrt_ps(v17);
-      v33 = 0.0;
-      if ( v26 <= 0 )
+LABEL_46:
+      v41 = p_mNext->mCount;
+      v42 = 0;
+      if ( v28 > 0 )
+        v42 = v28;
+      if ( v42 < v41 )
+        v41 = v42;
+      v43 = UFG::qSignedMod(p_mNext->mLast - v41, p_mNext->mCapacity);
+      v44 = 0;
+      v45 = v43;
+      v46 = p_mNext->mCount;
+      v47 = &p_mNext->mData[v45].vPosition.x;
+      if ( v28 > 0 )
+        v44 = v28;
+      if ( v44 < v46 )
+        v46 = v44;
+      v48 = 1;
+      p_vDirection = &p_mNext->mData[(int)UFG::qSignedMod(p_mNext->mLast - v46, p_mNext->mCapacity)].vDirection;
+      v73 = p_vDirection;
+      if ( v28 > 1 )
       {
-LABEL_47:
-        v41 = v25->mCount;
-        v42 = 0;
-        if ( v28 > 0 )
-          v42 = v28;
-        if ( v42 < v41 )
-          v41 = v42;
-        v43 = UFG::qSignedMod(v25->mLast - v41, v25->mCapacity);
-        v44 = 0;
-        v45 = v43;
-        v46 = v25->mCount;
-        v47 = &v25->mData[v45].vPosition.x;
-        if ( v28 > 0 )
-          v44 = v28;
-        if ( v44 < v46 )
-          v46 = v44;
-        v48 = 1;
-        v49 = (signed int)UFG::qSignedMod(v25->mLast - v46, v25->mCapacity);
-        v50 = &v25->mData[v49].vDirection;
-        v74 = (signed __int64)&v25->mData[v49].vDirection;
-        if ( v28 > 1 )
+        do
         {
-          do
-          {
-            v51 = v25->mCount;
-            v52 = 0;
-            if ( v48 > 0 )
-              v52 = v48;
-            if ( v52 < v51 )
-              v51 = v52;
-            ++v48;
-            v27 = v27 + v25->mData[(signed int)UFG::qSignedMod(v25->mLast - v51, v25->mCapacity)].fLength;
-          }
-          while ( v48 < v28 );
-          v50 = (UFG::qVector3 *)v74;
+          v50 = p_mNext->mCount;
+          v51 = 0;
+          if ( v48 > 0 )
+            v51 = v48;
+          if ( v51 < v50 )
+            v50 = v51;
+          ++v48;
+          v27 = v27 + p_mNext->mData[(int)UFG::qSignedMod(p_mNext->mLast - v50, p_mNext->mCapacity)].fLength;
         }
-        v53 = (__m128)*(unsigned int *)(v19 + 4);
-        v53.m128_f32[0] = (float)((float)((float)(v53.m128_f32[0] - v47[1]) * (float)(v53.m128_f32[0] - v47[1]))
-                                + (float)((float)(*(float *)v19 - *v47) * (float)(*(float *)v19 - *v47)))
-                        + (float)((float)(*(float *)(v19 + 8) - v47[2]) * (float)(*(float *)(v19 + 8) - v47[2]));
-        LODWORD(v54) = (unsigned __int128)_mm_sqrt_ps(v53);
-        v55 = UFG::qAngleBetween((UFG::qVector3 *)&v6->m_ChaseWorld, v50);
-        v56 = FLOAT_1_5707964;
-        if ( v55 <= 1.5707964 )
-          v56 = v55;
-        if ( v7 <= v54 )
-          v57 = v54;
-        else
-          v57 = v7;
-        v69 = v57 * 2.0;
-        if ( v69 >= 1.0 )
-          v23 = v69;
-        ray = (UFG::qVector3 *)v74;
-        v6->m_fTrailDistance = v54;
-        v61 = (UFG::qVector3 *)v47;
-        v6->m_fChaseDistance = (float)(v27 + v32) + v54;
-        v6->m_fChaseCurvature = v56 / v23;
+        while ( v48 < v28 );
+        p_vDirection = v73;
       }
+      v52 = (__m128)LODWORD(v19->y);
+      v52.m128_f32[0] = (float)((float)((float)(v52.m128_f32[0] - v47[1]) * (float)(v52.m128_f32[0] - v47[1]))
+                              + (float)((float)(v19->x - *v47) * (float)(v19->x - *v47)))
+                      + (float)((float)(v19->z - v47[2]) * (float)(v19->z - v47[2]));
+      LODWORD(v53) = _mm_sqrt_ps(v52).m128_u32[0];
+      v54 = UFG::qAngleBetween((UFG::qVector3 *)&this->m_ChaseWorld, p_vDirection);
+      v55 = FLOAT_1_5707964;
+      if ( v54 <= 1.5707964 )
+        v55 = v54;
+      if ( steer_to_distance <= v53 )
+        v56 = v53;
       else
-      {
-        while ( 1 )
-        {
-          v34 = v25->mCount;
-          v35 = 0;
-          if ( v30 > 0 )
-            v35 = v30;
-          if ( v35 < v34 )
-            v34 = v35;
-          v36 = (signed int)UFG::qSignedMod(v25->mLast - v34, v25->mCapacity);
-          v37 = v25->mCount;
-          v33 = v33 + v25->mData[v36].fLength;
-          v38 = 0;
-          if ( v30 > 0 )
-            v38 = v30;
-          if ( v38 < v37 )
-            v37 = v38;
-          v39 = UFG::qSignedMod(v25->mLast - v37, v25->mCapacity);
-          v40 = (__m128)*(unsigned int *)(v19 + 4);
-          v73 = &v25->mData[v39].vPosition.x;
-          v40.m128_f32[0] = (float)((float)((float)(v40.m128_f32[0] - v73[1]) * (float)(v40.m128_f32[0] - v73[1]))
-                                  + (float)((float)(*(float *)v19 - *v73) * (float)(*(float *)v19 - *v73)))
-                          + (float)((float)(*(float *)(v19 + 8) - v73[2]) * (float)(*(float *)(v19 + 8) - v73[2]));
-          if ( !v30 || v40.m128_f32[0] < v31 )
-          {
-            v31 = v40.m128_f32[0];
-            v28 = v30;
-          }
-          if ( v40.m128_f32[0] < (float)(v7 * v7) )
-            break;
-          if ( ++v30 >= v26 )
-            goto LABEL_47;
-        }
-        LODWORD(v58) = (unsigned __int128)_mm_sqrt_ps(v40);
-        if ( v30 > 0 )
-          v4 = v30;
-        v6->m_fTrailDistance = v58;
-        v59 = v25->mCount;
-        if ( v4 < v59 )
-          v59 = v4;
-        v6->m_fChaseCurvature = v25->mData[(signed int)UFG::qSignedMod(v25->mLast - v59, v25->mCapacity)].fCurvature;
-        if ( v30 )
-          v60 = UFG::RingBuffer<UFG::Crumb>::NthNewest(v25, v30 - 1);
-        else
-          v60 = (UFG::Crumb *)&point;
-        v61 = (UFG::qVector3 *)v73;
-        v62 = v60->vPosition.y - v73[1];
-        v63 = (__m128)*(unsigned int *)(v19 + 4);
-        v63.m128_f32[0] = v63.m128_f32[0] - v73[1];
-        v72.x = v60->vPosition.x - *v73;
-        v64 = v60->vPosition.z;
-        ray = &v72;
-        v66 = v64 - v73[2];
-        v72.y = v62;
-        v67 = *(float *)v19 - *v73;
-        v72.z = v66;
-        v68 = *(float *)(v19 + 8) - v73[2];
-        v63.m128_f32[0] = (float)((float)(v63.m128_f32[0] * v63.m128_f32[0]) + (float)(v67 * v67)) + (float)(v68 * v68);
-        v6->m_fChaseDistance = COERCE_FLOAT(_mm_sqrt_ps(v63)) + (float)(v33 + v32);
-      }
-      UFG::RoadSpaceComponent::SteerTo(v5, (UFG::qVector3 *)v19, v7, v61, ray);
-      v70 = v5;
+        v56 = steer_to_distance;
+      v68 = v56 * 2.0;
+      if ( v68 >= 1.0 )
+        v23 = v68;
+      ray = v73;
+      this->m_fTrailDistance = v53;
+      v60 = (UFG::qVector3 *)v47;
+      this->m_fChaseDistance = (float)(v27 + v32) + v53;
+      this->m_fChaseCurvature = v55 / v23;
     }
     else
     {
-      UFG::RoadSpaceComponent::SteerTo(v5, (UFG::qVector3 *)v19, v7, &point, v14);
-      v70 = v5;
+      while ( 1 )
+      {
+        v34 = p_mNext->mCount;
+        v35 = 0;
+        if ( v30 > 0 )
+          v35 = v30;
+        if ( v35 < v34 )
+          v34 = v35;
+        v36 = (int)UFG::qSignedMod(p_mNext->mLast - v34, p_mNext->mCapacity);
+        v37 = p_mNext->mCount;
+        v33 = v33 + p_mNext->mData[v36].fLength;
+        v38 = 0;
+        if ( v30 > 0 )
+          v38 = v30;
+        if ( v38 < v37 )
+          v37 = v38;
+        v39 = UFG::qSignedMod(p_mNext->mLast - v37, p_mNext->mCapacity);
+        v40 = (__m128)LODWORD(v19->y);
+        v72 = &p_mNext->mData[v39].vPosition.x;
+        v40.m128_f32[0] = (float)((float)((float)(v40.m128_f32[0] - v72[1]) * (float)(v40.m128_f32[0] - v72[1]))
+                                + (float)((float)(v19->x - *v72) * (float)(v19->x - *v72)))
+                        + (float)((float)(v19->z - v72[2]) * (float)(v19->z - v72[2]));
+        if ( !v30 || v40.m128_f32[0] < v31 )
+        {
+          v31 = v40.m128_f32[0];
+          v28 = v30;
+        }
+        if ( v40.m128_f32[0] < (float)(steer_to_distance * steer_to_distance) )
+          break;
+        if ( ++v30 >= mCount )
+          goto LABEL_46;
+      }
+      LODWORD(v57) = _mm_sqrt_ps(v40).m128_u32[0];
+      if ( v30 > 0 )
+        v4 = v30;
+      this->m_fTrailDistance = v57;
+      v58 = p_mNext->mCount;
+      if ( v4 < v58 )
+        v58 = v4;
+      this->m_fChaseCurvature = p_mNext->mData[(int)UFG::qSignedMod(p_mNext->mLast - v58, p_mNext->mCapacity)].fCurvature;
+      if ( v30 )
+        p_point = UFG::RingBuffer<UFG::Crumb>::NthNewest(p_mNext, v30 - 1);
+      else
+        p_point = (UFG::Crumb *)&point;
+      v60 = (UFG::qVector3 *)v72;
+      v61 = p_point->vPosition.y - v72[1];
+      v62 = (__m128)LODWORD(v19->y);
+      v62.m128_f32[0] = v62.m128_f32[0] - v72[1];
+      v71.x = p_point->vPosition.x - *v72;
+      v63 = p_point->vPosition.z;
+      ray = &v71;
+      v65 = v63 - v72[2];
+      v71.y = v61;
+      v66 = v19->x - *v72;
+      v71.z = v65;
+      v67 = v19->z - v72[2];
+      v62.m128_f32[0] = (float)((float)(v62.m128_f32[0] * v62.m128_f32[0]) + (float)(v66 * v66)) + (float)(v67 * v67);
+      this->m_fChaseDistance = _mm_sqrt_ps(v62).m128_f32[0] + (float)(v33 + v32);
     }
+    UFG::RoadSpaceComponent::SteerTo(result, (UFG::qVector3 *)v19, steer_to_distance, v60, ray);
+    return result;
   }
   else
   {
-    UFG::RoadSpaceComponent::SteerTo(v5, (UFG::qVector3 *)v19, v7, &point, v14);
-    v70 = v5;
+LABEL_78:
+    UFG::RoadSpaceComponent::SteerTo(result, (UFG::qVector3 *)v19, steer_to_distance, &point, p_m_pSimObject);
+    return result;
   }
-  return v70;
 }
 
 // File Line: 1560
 // RVA: 0x649040
-UFG::qVector3 *__fastcall UFG::RoadSpaceComponent::ClampToRoad(UFG::RoadSpaceComponent *this, UFG::qVector3 *result, UFG::qVector3 *initialPos, UFG::qVector3 *targetPos)
+UFG::qVector3 *__fastcall UFG::RoadSpaceComponent::ClampToRoad(
+        UFG::RoadSpaceComponent *this,
+        UFG::qVector3 *result,
+        UFG::qVector3 *initialPos,
+        UFG::qVector3 *targetPos)
 {
   UFG::qVector3 *v4; // r14
-  unsigned int v5; // er8
+  unsigned int m_RoadNetworkType; // r8d
   UFG::qVector3 *v6; // rsi
-  UFG::WheeledVehicleNavigationData *v7; // rdx
-  UFG::qVector3 *v8; // r13
-  UFG::RoadNetworkResource *v10; // rcx
+  UFG::WheeledVehicleNavigationData *m_NavigationData; // rdx
+  UFG::RoadNetworkResource *pRoadNetworkResource; // rcx
   UFG::RoadNetworkNode *v11; // rbx
-  UFG::RoadNetworkIntersection *v12; // rax
+  UFG::RoadNetworkIntersection *ClosestNode; // rax
   UFG::RoadNetworkNode *v13; // rcx
-  unsigned int v14; // er12
-  unsigned int v15; // edx
+  unsigned int mNumLanes; // r12d
+  unsigned int mNumGates; // edx
   unsigned int v16; // eax
-  UFG::RoadNetworkGate *v17; // rax
+  UFG::RoadNetworkGate *IncomingConnection; // rax
   UFG::RoadNetworkConnection *v18; // rax
   UFG::RoadNetworkConnection *v19; // r12
-  unsigned int v20; // er15
+  unsigned int v20; // r15d
   unsigned int v21; // ebx
-  UFG::RoadNetworkLane *v22; // rdi
+  UFG::RoadNetworkLane *Path; // rdi
   UFG::RoadNetworkNode *v23; // rcx
   float v24; // xmm6_4
   __m128 v25; // xmm7
@@ -2586,308 +2451,277 @@ UFG::qVector3 *__fastcall UFG::RoadSpaceComponent::ClampToRoad(UFG::RoadSpaceCom
   float v32; // xmm4_4
   float v33; // xmm3_4
   unsigned int v34; // edx
-  unsigned int v35; // edi
-  UFG::RoadNetworkLane *v36; // rbx
-  bool v37; // r15
-  UFG::qVector3 *v38; // rax
-  float v39; // xmm1_4
-  float v40; // xmm6_4
-  float v41; // xmm0_4
-  float v42; // er13
-  float v43; // xmm6_4
-  float v44; // xmm1_4
-  float v45; // xmm0_4
-  float v46; // eax
-  float v47; // xmm6_4
-  UFG::qVector3 *v48; // r14
-  UFG::RoadNetworkLane *v49; // rbx
-  bool v50; // di
-  UFG::qVector3 *v51; // rax
-  float v52; // xmm2_4
-  unsigned int v53; // edi
-  UFG::RoadNetworkLane *v54; // rax
-  UFG::qVector3 *v55; // rax
-  float v56; // ST48_4
-  float v57; // ST4C_4
-  float v58; // ST50_4
-  UFG::RoadNetworkLane *v59; // rax
-  UFG::qVector3 *v60; // rax
-  float v61; // xmm10_4
-  float v62; // xmm11_4
-  float v63; // xmm12_4
-  __m128 v64; // xmm4
-  float v65; // xmm5_4
-  float v66; // xmm3_4
-  float v67; // xmm6_4
-  UFG::RoadNetworkLane *v68; // rdi
-  float v69; // xmm8_4
-  __m128 v70; // xmm9
-  float v71; // xmm7_4
-  __m128 v72; // xmm3
-  float v73; // xmm8_4
-  float v74; // xmm9_4
-  float v75; // xmm7_4
-  float v76; // xmm3_4
-  float v77; // xmm5_4
-  __m128 v78; // xmm2
-  float v79; // xmm6_4
-  float v80; // xmm0_4
-  float v81; // xmm6_4
-  float v82; // xmm3_4
-  float v83; // xmm4_4
-  float v84; // xmm5_4
-  float v85; // xmm1_4
-  float v86; // xmm2_4
-  float v87; // xmm1_4
-  unsigned int v88; // [rsp+30h] [rbp-D0h]
-  int v89; // [rsp+30h] [rbp-D0h]
-  unsigned int v90; // [rsp+34h] [rbp-CCh]
-  UFG::RoadNetworkNode *v91; // [rsp+38h] [rbp-C8h]
-  UFG::RoadNetworkLane *v92; // [rsp+40h] [rbp-C0h]
-  UFG::qVector3 v93; // [rsp+58h] [rbp-A8h]
-  UFG::qVector3 resulta; // [rsp+68h] [rbp-98h]
-  float laneT; // [rsp+140h] [rbp+40h]
-  UFG::qVector3 *v96; // [rsp+148h] [rbp+48h]
-  UFG::qVector3 *v97; // [rsp+150h] [rbp+50h]
+  UFG::RoadNetworkLane *Lane; // rbx
+  char IsReversedInNode; // r15
+  UFG::qVector3 *NearestPoint; // rax
+  float x; // xmm1_4
+  float y; // xmm6_4
+  float z; // xmm0_4
+  float v41; // r13d
+  float v42; // xmm6_4
+  UFG::qVector3 *v43; // r14
+  UFG::RoadNetworkLane *v44; // rbx
+  char v45; // di
+  UFG::qVector3 *v46; // rax
+  float v47; // xmm2_4
+  float v48; // eax
+  unsigned int v49; // edi
+  UFG::RoadNetworkLane *v50; // rax
+  UFG::RoadNetworkLane *v51; // rax
+  UFG::qVector3 *v52; // rax
+  float v53; // xmm10_4
+  float v54; // xmm11_4
+  float v55; // xmm12_4
+  __m128 y_low; // xmm4
+  float v57; // xmm5_4
+  float v58; // xmm3_4
+  float v59; // xmm6_4
+  UFG::RoadNetworkLane *v60; // rdi
+  float v61; // xmm8_4
+  __m128 x_low; // xmm9
+  float v63; // xmm7_4
+  __m128 v64; // xmm3
+  float v65; // xmm8_4
+  float v66; // xmm9_4
+  float v67; // xmm7_4
+  float v68; // xmm3_4
+  float v69; // xmm5_4
+  __m128 v70; // xmm2
+  float v71; // xmm6_4
+  float v72; // xmm0_4
+  float v73; // xmm6_4
+  float v74; // xmm3_4
+  float v75; // xmm4_4
+  float v76; // xmm5_4
+  float v77; // xmm1_4
+  float v78; // xmm2_4
+  float v79; // xmm1_4
+  unsigned int v80; // [rsp+30h] [rbp-D0h]
+  unsigned int v81; // [rsp+30h] [rbp-D0h]
+  unsigned int v82; // [rsp+34h] [rbp-CCh]
+  UFG::RoadNetworkNode *v83; // [rsp+38h] [rbp-C8h]
+  UFG::RoadNetworkLane *v84; // [rsp+40h] [rbp-C0h]
+  UFG::qVector3 v85; // [rsp+48h] [rbp-B8h]
+  UFG::qVector3 v86; // [rsp+58h] [rbp-A8h] BYREF
+  UFG::qVector3 resulta; // [rsp+68h] [rbp-98h] BYREF
+  float laneT; // [rsp+140h] [rbp+40h] BYREF
+  UFG::qVector3 *v89; // [rsp+148h] [rbp+48h]
+  UFG::qVector3 *v90; // [rsp+150h] [rbp+50h]
   UFG::qVector3 *pos; // [rsp+158h] [rbp+58h]
 
   pos = targetPos;
-  v97 = initialPos;
-  v96 = result;
+  v90 = initialPos;
+  v89 = result;
   v4 = initialPos;
-  v5 = this->mWayClient.m_RoadNetworkType;
+  m_RoadNetworkType = this->mWayClient.m_RoadNetworkType;
   v6 = result;
-  v7 = UFG::WheeledVehicleManager::m_Instance->m_NavigationData;
-  v8 = targetPos;
-  if ( v5 )
+  m_NavigationData = UFG::WheeledVehicleManager::m_Instance->m_NavigationData;
+  if ( m_RoadNetworkType )
   {
-    switch ( v5 )
+    switch ( m_RoadNetworkType )
     {
       case 1u:
-        v7 = (UFG::WheeledVehicleNavigationData *)((char *)v7 + 64);
+        m_NavigationData = (UFG::WheeledVehicleNavigationData *)((char *)m_NavigationData + 64);
         break;
       case 2u:
-        v7 = (UFG::WheeledVehicleNavigationData *)((char *)v7 + 96);
+        m_NavigationData = (UFG::WheeledVehicleNavigationData *)((char *)m_NavigationData + 96);
         break;
       case 3u:
-        v7 = (UFG::WheeledVehicleNavigationData *)((char *)v7 + 128);
+        m_NavigationData = (UFG::WheeledVehicleNavigationData *)((char *)m_NavigationData + 128);
         break;
     }
   }
   else
   {
-    v7 = (UFG::WheeledVehicleNavigationData *)((char *)v7 + 32);
+    m_NavigationData = (UFG::WheeledVehicleNavigationData *)((char *)m_NavigationData + 32);
   }
-  if ( !v7 || (v10 = v7->m_RoadNetworkGraph.pRoadNetworkResource) == 0i64 )
+  if ( m_NavigationData && (pRoadNetworkResource = m_NavigationData->m_RoadNetworkGraph.pRoadNetworkResource) != 0i64 )
   {
-    v6->x = v4->x;
-    v6->y = v4->y;
-    v6->z = v4->z;
-    return v6;
-  }
-  v11 = 0i64;
-  v12 = UFG::RoadNetworkResource::GetClosestNode(v10, v4, v5, 0i64, 0i64);
-  v13 = (UFG::RoadNetworkNode *)&v12->mType;
-  v91 = (UFG::RoadNetworkNode *)&v12->mType;
-  if ( v12 )
-  {
-    v14 = (unsigned __int8)v12->mNumLanes;
-    if ( v12->mNumLanes )
+    v11 = 0i64;
+    ClosestNode = UFG::RoadNetworkResource::GetClosestNode(pRoadNetworkResource, v4, m_RoadNetworkType, 0i64, 0i64);
+    v13 = ClosestNode;
+    v83 = ClosestNode;
+    if ( ClosestNode )
     {
-      v15 = (unsigned __int8)v12->mNumGates;
-      v90 = v15;
-      if ( v15 >= 2 )
+      mNumLanes = (unsigned __int8)ClosestNode->mNumLanes;
+      if ( ClosestNode->mNumLanes
+        && (mNumGates = (unsigned __int8)ClosestNode->mNumGates, v82 = mNumGates, mNumGates >= 2) )
       {
-        if ( v15 <= 2 )
+        if ( mNumGates <= 2 )
         {
           v34 = 0;
-          if ( v14 <= 1 )
-            goto LABEL_65;
-          v35 = v14 - 1;
-          v89 = v14 - 1;
-          v36 = UFG::RoadNetworkNode::GetLane((UFG::RoadNetworkNode *)&v12->mType, 0);
-          v37 = UFG::RoadNetworkLane::IsReversedInNode(v36);
-          v38 = UFG::RoadNetworkLane::GetNearestPoint(v36, &resulta, v8, 0i64);
-          v11 = 0i64;
+          if ( mNumLanes <= 1 )
+            goto LABEL_49;
+          v81 = mNumLanes - 1;
+          Lane = UFG::RoadNetworkNode::GetLane(ClosestNode, 0);
+          IsReversedInNode = UFG::RoadNetworkLane::IsReversedInNode(Lane);
+          NearestPoint = UFG::RoadNetworkLane::GetNearestPoint(Lane, &resulta, targetPos, 0i64);
           laneT = 0.0;
-          v39 = v8->x;
-          v40 = v8->y;
-          v41 = v8->z;
-          LODWORD(v42) = 1;
-          v43 = v40 - v38->y;
-          v44 = v39 - v38->x;
-          v45 = v41 - v38->z;
-          v46 = 0.0;
-          v47 = (float)((float)(v43 * v43) + (float)(v44 * v44)) + (float)(v45 * v45);
-          if ( v14 > 1 )
+          x = targetPos->x;
+          y = targetPos->y;
+          z = targetPos->z;
+          LODWORD(v41) = 1;
+          v42 = (float)((float)((float)(y - NearestPoint->y) * (float)(y - NearestPoint->y))
+                      + (float)((float)(x - NearestPoint->x) * (float)(x - NearestPoint->x)))
+              + (float)((float)(z - NearestPoint->z) * (float)(z - NearestPoint->z));
+          v43 = pos;
+          do
           {
-            v48 = pos;
-            do
+            v44 = UFG::RoadNetworkNode::GetLane(v83, LODWORD(v41));
+            v45 = UFG::RoadNetworkLane::IsReversedInNode(v44);
+            v46 = UFG::RoadNetworkLane::GetNearestPoint(v44, &resulta, v43, 0i64);
+            v47 = (float)((float)((float)(v43->y - v46->y) * (float)(v43->y - v46->y))
+                        + (float)((float)(v43->x - v46->x) * (float)(v43->x - v46->x)))
+                + (float)((float)(v43->z - v46->z) * (float)(v43->z - v46->z));
+            if ( v47 >= v42 )
             {
-              v49 = UFG::RoadNetworkNode::GetLane(v91, LODWORD(v42));
-              v50 = UFG::RoadNetworkLane::IsReversedInNode(v49);
-              v51 = UFG::RoadNetworkLane::GetNearestPoint(v49, &resulta, v48, 0i64);
-              v52 = (float)((float)((float)(v48->y - v51->y) * (float)(v48->y - v51->y))
-                          + (float)((float)(v48->x - v51->x) * (float)(v48->x - v51->x)))
-                  + (float)((float)(v48->z - v51->z) * (float)(v48->z - v51->z));
-              if ( v52 >= v47 )
-              {
-                v46 = laneT;
-              }
-              else
-              {
-                v46 = v42;
-                v47 = v52;
-                laneT = v42;
-              }
-              if ( v50 != v37 )
-              {
-                v89 = LODWORD(v42);
-                v37 = v50;
-              }
-              ++LODWORD(v42);
+              v48 = laneT;
             }
-            while ( LODWORD(v42) < v14 );
-            v6 = v96;
-            v4 = v97;
-            v35 = v89;
-            v11 = 0i64;
+            else
+            {
+              v48 = v41;
+              v42 = v47;
+              laneT = v41;
+            }
+            if ( v45 != IsReversedInNode )
+            {
+              v81 = LODWORD(v41);
+              IsReversedInNode = v45;
+            }
+            ++LODWORD(v41);
           }
-          if ( LODWORD(v46) >= v35 )
+          while ( LODWORD(v41) < mNumLanes );
+          v6 = v89;
+          v4 = v90;
+          v11 = 0i64;
+          if ( LODWORD(v48) >= v81 )
           {
-            v34 = v35;
-            v53 = v14 - 1;
+            v34 = v81;
+            v49 = mNumLanes - 1;
           }
           else
           {
             v34 = 0;
-            v53 = v35 - 1;
+            v49 = v81 - 1;
           }
-          v13 = v91;
-          if ( v34 == v53 )
+          v13 = v83;
+          if ( v34 == v49 )
           {
-LABEL_65:
-            v67 = 0.0;
+LABEL_49:
+            v59 = 0.0;
             laneT = 0.0;
-            v68 = UFG::RoadNetworkNode::GetLane(v13, v34);
-            UFG::RoadNetworkLane::GetNearestPoint(v68, &v93, v4, &laneT);
-            if ( v68->mNode.mOffset )
-              v11 = (UFG::RoadNetworkNode *)((char *)v68 + v68->mNode.mOffset);
-            UFG::RoadNetworkNode::GetTangent(v11, &resulta, v68->mLaneIndex, laneT);
-            v70 = (__m128)LODWORD(resulta.x);
-            v69 = (float)(resulta.z * UFG::qVector3::msDirUp.y) - (float)(resulta.y * UFG::qVector3::msDirUp.z);
-            v70.m128_f32[0] = (float)(resulta.x * UFG::qVector3::msDirUp.z)
-                            - (float)(resulta.z * UFG::qVector3::msDirUp.x);
-            v71 = (float)(resulta.y * UFG::qVector3::msDirUp.x) - (float)(resulta.x * UFG::qVector3::msDirUp.y);
-            v72 = v70;
-            v72.m128_f32[0] = (float)((float)(v70.m128_f32[0] * v70.m128_f32[0]) + (float)(v69 * v69))
-                            + (float)(v71 * v71);
-            if ( v72.m128_f32[0] != 0.0 )
-              v67 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v72));
-            v64 = (__m128)LODWORD(v93.y);
-            v73 = v69 * v67;
-            v74 = v70.m128_f32[0] * v67;
-            v75 = v71 * v67;
-            v63 = v93.x + v73;
-            v62 = v93.y + v74;
-            v61 = v93.z + v75;
-            v66 = v93.x - v73;
-            v64.m128_f32[0] = v93.y - v74;
-            v65 = v93.z - v75;
+            v60 = UFG::RoadNetworkNode::GetLane(v13, v34);
+            UFG::RoadNetworkLane::GetNearestPoint(v60, &v86, v4, &laneT);
+            if ( v60->mNode.mOffset )
+              v11 = (UFG::RoadNetworkNode *)((char *)v60 + v60->mNode.mOffset);
+            UFG::RoadNetworkNode::GetTangent(v11, &resulta, v60->mLaneIndex, laneT);
+            x_low = (__m128)LODWORD(resulta.x);
+            v61 = (float)(resulta.z * UFG::qVector3::msDirUp.y) - (float)(resulta.y * UFG::qVector3::msDirUp.z);
+            x_low.m128_f32[0] = (float)(resulta.x * UFG::qVector3::msDirUp.z)
+                              - (float)(resulta.z * UFG::qVector3::msDirUp.x);
+            v63 = (float)(resulta.y * UFG::qVector3::msDirUp.x) - (float)(resulta.x * UFG::qVector3::msDirUp.y);
+            v64 = x_low;
+            v64.m128_f32[0] = (float)((float)(x_low.m128_f32[0] * x_low.m128_f32[0]) + (float)(v61 * v61))
+                            + (float)(v63 * v63);
+            if ( v64.m128_f32[0] != 0.0 )
+              v59 = 1.0 / _mm_sqrt_ps(v64).m128_f32[0];
+            y_low = (__m128)LODWORD(v86.y);
+            v65 = v61 * v59;
+            v66 = x_low.m128_f32[0] * v59;
+            v67 = v63 * v59;
+            v55 = v86.x + v65;
+            v54 = v86.y + v66;
+            v53 = v86.z + v67;
+            v58 = v86.x - v65;
+            y_low.m128_f32[0] = v86.y - v66;
+            v57 = v86.z - v67;
           }
           else
           {
-            v54 = UFG::RoadNetworkNode::GetLane(v91, v34);
-            v55 = UFG::RoadNetworkLane::GetNearestPoint(v54, &resulta, v4, 0i64);
-            v56 = v55->x;
-            v57 = v55->y;
-            v58 = v55->z;
-            v59 = UFG::RoadNetworkNode::GetLane(v91, v53);
-            v60 = UFG::RoadNetworkLane::GetNearestPoint(v59, &resulta, v4, 0i64);
-            v61 = v58;
-            v62 = v57;
-            v63 = v56;
-            v64 = (__m128)LODWORD(v60->y);
-            v65 = v60->z;
-            v66 = v60->x;
+            v50 = UFG::RoadNetworkNode::GetLane(v83, v34);
+            v85 = *UFG::RoadNetworkLane::GetNearestPoint(v50, &resulta, v4, 0i64);
+            v51 = UFG::RoadNetworkNode::GetLane(v83, v49);
+            v52 = UFG::RoadNetworkLane::GetNearestPoint(v51, &resulta, v4, 0i64);
+            v53 = v85.z;
+            v54 = v85.y;
+            v55 = v85.x;
+            y_low = (__m128)LODWORD(v52->y);
+            v57 = v52->z;
+            v58 = v52->x;
           }
-          v76 = v66 - v63;
-          v64.m128_f32[0] = v64.m128_f32[0] - v62;
-          v77 = v65 - v61;
-          v78 = v64;
-          v78.m128_f32[0] = (float)((float)(v64.m128_f32[0] * v64.m128_f32[0]) + (float)(v76 * v76))
-                          + (float)(v77 * v77);
-          LODWORD(v79) = (unsigned __int128)_mm_sqrt_ps(v78);
-          v80 = 1.0 / v79;
-          v81 = v79 + 1.0;
-          v82 = v76 * v80;
-          v83 = v64.m128_f32[0] * v80;
-          v84 = v77 * v80;
-          v85 = FLOAT_N1_0;
-          v86 = (float)((float)((float)(v4->y - v62) * v83) + (float)((float)(v4->x - v63) * v82))
-              + (float)((float)(v4->z - v61) * v84);
-          if ( v86 > -1.0 )
-            v85 = (float)((float)((float)(v4->y - v62) * v83) + (float)((float)(v4->x - v63) * v82))
-                + (float)((float)(v4->z - v61) * v84);
-          if ( v85 >= v81 )
-            v85 = v81;
-          v87 = v85 - v86;
-          v33 = (float)(v82 * v87) + v4->x;
-          v32 = (float)(v83 * v87) + v4->y;
-          v6->z = (float)(v84 * v87) + v4->z;
+          v68 = v58 - v55;
+          y_low.m128_f32[0] = y_low.m128_f32[0] - v54;
+          v69 = v57 - v53;
+          v70 = y_low;
+          v70.m128_f32[0] = (float)((float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(v68 * v68))
+                          + (float)(v69 * v69);
+          v71 = _mm_sqrt_ps(v70).m128_f32[0];
+          v72 = 1.0 / v71;
+          v73 = v71 + 1.0;
+          v74 = v68 * v72;
+          v75 = y_low.m128_f32[0] * v72;
+          v76 = v69 * v72;
+          v77 = FLOAT_N1_0;
+          v78 = (float)((float)((float)(v4->y - v54) * v75) + (float)((float)(v4->x - v55) * v74))
+              + (float)((float)(v4->z - v53) * v76);
+          if ( v78 > -1.0 )
+            v77 = (float)((float)((float)(v4->y - v54) * v75) + (float)((float)(v4->x - v55) * v74))
+                + (float)((float)(v4->z - v53) * v76);
+          if ( v77 >= v73 )
+            v77 = v73;
+          v79 = v77 - v78;
+          v33 = (float)(v74 * v79) + v4->x;
+          v32 = (float)(v75 * v79) + v4->y;
+          v6->z = (float)(v76 * v79) + v4->z;
+LABEL_59:
+          v6->y = v32;
+          v6->x = v33;
         }
         else
         {
           v16 = 0;
-          v88 = 0;
-          if ( !v15 )
-          {
-LABEL_35:
-            v6->x = v4->x;
-            v6->y = v4->y;
-            v6->z = v4->z;
-            return v6;
-          }
+          v80 = 0;
           while ( 1 )
           {
-            v17 = (UFG::RoadNetworkGate *)UFG::RoadNetworkGate::GetIncomingConnection((UFG::RoadNetworkGate *)v13, v16);
-            if ( v17->mNumIncomingConnections )
+            IncomingConnection = (UFG::RoadNetworkGate *)UFG::RoadNetworkGate::GetIncomingConnection(
+                                                           (UFG::RoadNetworkGate *)v13,
+                                                           v16);
+            if ( IncomingConnection->mNumIncomingConnections )
             {
-              v18 = UFG::RoadNetworkGate::GetIncomingConnection(v17, 0);
+              v18 = UFG::RoadNetworkGate::GetIncomingConnection(IncomingConnection, 0);
               v19 = v18;
               v20 = v18->mNumLanes;
               if ( v18->mNumLanes )
               {
                 v21 = 1;
-                v22 = UFG::qBezierPathCollectionMemImaged::GetPath(v18, 0);
-                v92 = v22;
+                Path = UFG::qBezierPathCollectionMemImaged::GetPath(v18, 0);
+                v84 = Path;
                 if ( v20 > 1 )
                 {
                   while ( 1 )
                   {
-                    v22 = UFG::qBezierPathCollectionMemImaged::GetPath(v19, v21);
-                    if ( (unsigned int)UFG::RoadNetworkLane::GetTurnDirection(v22) == 1 )
+                    Path = UFG::qBezierPathCollectionMemImaged::GetPath(v19, v21);
+                    if ( (unsigned int)UFG::RoadNetworkLane::GetTurnDirection(Path) == 1 )
                       break;
                     if ( ++v21 >= v20 )
                     {
-                      v22 = v92;
+                      Path = v84;
                       break;
                     }
                   }
                 }
                 laneT = 0.0;
-                UFG::RoadNetworkLane::GetNearestPoint(v22, &resulta, v4, &laneT);
-                v23 = (UFG::RoadNetworkNode *)(v22->mNode.mOffset ? (UFG::RoadNetworkLane *)((char *)v22
-                                                                                           + v22->mNode.mOffset) : 0i64);
-                UFG::RoadNetworkNode::GetTangent(v23, &v93, v22->mLaneIndex, laneT);
-                v25 = (__m128)LODWORD(v93.x);
-                v24 = (float)(v93.z * UFG::qVector3::msDirUp.y) - (float)(v93.y * UFG::qVector3::msDirUp.z);
-                v25.m128_f32[0] = (float)(v93.x * UFG::qVector3::msDirUp.z) - (float)(v93.z * UFG::qVector3::msDirUp.x);
-                v26 = (float)(v93.y * UFG::qVector3::msDirUp.x) - (float)(v93.x * UFG::qVector3::msDirUp.y);
+                UFG::RoadNetworkLane::GetNearestPoint(Path, &resulta, v4, &laneT);
+                v23 = Path->mNode.mOffset ? (UFG::RoadNetworkNode *)((char *)Path + Path->mNode.mOffset) : 0i64;
+                UFG::RoadNetworkNode::GetTangent(v23, &v86, Path->mLaneIndex, laneT);
+                v25 = (__m128)LODWORD(v86.x);
+                v24 = (float)(v86.z * UFG::qVector3::msDirUp.y) - (float)(v86.y * UFG::qVector3::msDirUp.z);
+                v25.m128_f32[0] = (float)(v86.x * UFG::qVector3::msDirUp.z) - (float)(v86.z * UFG::qVector3::msDirUp.x);
+                v26 = (float)(v86.y * UFG::qVector3::msDirUp.x) - (float)(v86.x * UFG::qVector3::msDirUp.y);
                 v27 = v25;
                 v27.m128_f32[0] = (float)((float)(v25.m128_f32[0] * v25.m128_f32[0]) + (float)(v24 * v24))
                                 + (float)(v26 * v26);
-                v28 = v27.m128_f32[0] == 0.0 ? 0.0 : 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v27));
+                v28 = v27.m128_f32[0] == 0.0 ? 0.0 : 1.0 / _mm_sqrt_ps(v27).m128_f32[0];
                 v29 = v25.m128_f32[0] * v28;
                 v30 = v26 * v28;
                 v31 = v24 * v28;
@@ -2896,95 +2730,105 @@ LABEL_35:
                 if ( (float)((float)((float)((float)(v4->y - (float)(v29 + resulta.y)) * v29)
                                    + (float)((float)(v4->x - (float)(v31 + resulta.x)) * v31))
                            + (float)((float)(v4->z - (float)(v30 + resulta.z)) * v30)) > 0.0 )
-                  break;
+                {
+                  v6->z = v30 + resulta.z;
+                  goto LABEL_59;
+                }
               }
             }
-            v16 = v88 + 1;
-            v88 = v16;
-            if ( v16 >= v90 )
-              goto LABEL_35;
-            v13 = v91;
+            v16 = v80 + 1;
+            v80 = v16;
+            if ( v16 >= v82 )
+              break;
+            v13 = v83;
           }
-          v6->z = v30 + resulta.z;
+          v6->x = v4->x;
+          v6->y = v4->y;
+          v6->z = v4->z;
         }
-        v6->y = v32;
-        v6->x = v33;
-        return v6;
+      }
+      else
+      {
+        v6->x = v4->x;
+        v6->y = v4->y;
+        v6->z = v4->z;
       }
     }
-    v6->x = v4->x;
-    v6->y = v4->y;
-    v6->z = v4->z;
+    else
+    {
+      v6->x = v4->x;
+      v6->y = v4->y;
+      v6->z = v4->z;
+    }
+    return v6;
   }
   else
   {
     v6->x = v4->x;
     v6->y = v4->y;
     v6->z = v4->z;
+    return v6;
   }
-  return v6;
 }
 
 // File Line: 1709
 // RVA: 0x64D630
 void __fastcall UFG::RoadSpaceComponent::FlushRaceTrails(UFG::RoadSpaceComponent *this)
 {
-  UFG::RoadSpaceComponent *v1; // rbx
-  UFG::RacePosition *v2; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *v3; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *v4; // rax
+  UFG::RacePosition *m_pRacePositionSteer; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *mPrev; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *v5; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *v6; // rax
-  UFG::RacePosition *v7; // rcx
+  UFG::RacePosition *m_pRacePosition; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *v8; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *v9; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *v10; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *v11; // rax
 
-  v1 = this;
-  v2 = this->m_pRacePositionSteer;
-  if ( v2 )
+  m_pRacePositionSteer = this->m_pRacePositionSteer;
+  if ( m_pRacePositionSteer )
   {
-    if ( v2->pRaceTrail.m_pPointer )
+    if ( m_pRacePositionSteer->pRaceTrail.m_pPointer )
     {
-      v3 = v2->pRaceTrail.mPrev;
-      v4 = v2->pRaceTrail.mNext;
-      v3->mNext = v4;
-      v4->mPrev = v3;
-      v2->pRaceTrail.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *)&v2->pRaceTrail.mPrev;
-      v2->pRaceTrail.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *)&v2->pRaceTrail.mPrev;
+      mPrev = m_pRacePositionSteer->pRaceTrail.mPrev;
+      mNext = m_pRacePositionSteer->pRaceTrail.mNext;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
+      m_pRacePositionSteer->pRaceTrail.mPrev = &m_pRacePositionSteer->pRaceTrail;
+      m_pRacePositionSteer->pRaceTrail.mNext = &m_pRacePositionSteer->pRaceTrail;
     }
-    v2->pRaceTrail.m_pPointer = 0i64;
-    v5 = v2->pRaceTrail.mPrev;
-    v6 = v2->pRaceTrail.mNext;
+    m_pRacePositionSteer->pRaceTrail.m_pPointer = 0i64;
+    v5 = m_pRacePositionSteer->pRaceTrail.mPrev;
+    v6 = m_pRacePositionSteer->pRaceTrail.mNext;
     v5->mNext = v6;
     v6->mPrev = v5;
-    v2->pRaceTrail.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *)&v2->pRaceTrail.mPrev;
-    v2->pRaceTrail.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *)&v2->pRaceTrail.mPrev;
-    operator delete[](v2);
-    v1->m_pRacePositionSteer = 0i64;
+    m_pRacePositionSteer->pRaceTrail.mPrev = &m_pRacePositionSteer->pRaceTrail;
+    m_pRacePositionSteer->pRaceTrail.mNext = &m_pRacePositionSteer->pRaceTrail;
+    operator delete[](m_pRacePositionSteer);
+    this->m_pRacePositionSteer = 0i64;
   }
-  v7 = v1->m_pRacePosition;
-  if ( v7 )
+  m_pRacePosition = this->m_pRacePosition;
+  if ( m_pRacePosition )
   {
-    if ( v7->pRaceTrail.m_pPointer )
+    if ( m_pRacePosition->pRaceTrail.m_pPointer )
     {
-      v8 = v7->pRaceTrail.mPrev;
-      v9 = v7->pRaceTrail.mNext;
+      v8 = m_pRacePosition->pRaceTrail.mPrev;
+      v9 = m_pRacePosition->pRaceTrail.mNext;
       v8->mNext = v9;
       v9->mPrev = v8;
-      v7->pRaceTrail.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *)&v7->pRaceTrail.mPrev;
-      v7->pRaceTrail.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *)&v7->pRaceTrail.mPrev;
+      m_pRacePosition->pRaceTrail.mPrev = &m_pRacePosition->pRaceTrail;
+      m_pRacePosition->pRaceTrail.mNext = &m_pRacePosition->pRaceTrail;
     }
-    v7->pRaceTrail.m_pPointer = 0i64;
-    v10 = v7->pRaceTrail.mPrev;
-    v11 = v7->pRaceTrail.mNext;
+    m_pRacePosition->pRaceTrail.m_pPointer = 0i64;
+    v10 = m_pRacePosition->pRaceTrail.mPrev;
+    v11 = m_pRacePosition->pRaceTrail.mNext;
     v10->mNext = v11;
     v11->mPrev = v10;
-    v7->pRaceTrail.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *)&v7->pRaceTrail.mPrev;
-    v7->pRaceTrail.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *)&v7->pRaceTrail.mPrev;
-    operator delete[](v7);
-    v1->m_pRacePosition = 0i64;
+    m_pRacePosition->pRaceTrail.mPrev = &m_pRacePosition->pRaceTrail;
+    m_pRacePosition->pRaceTrail.mNext = &m_pRacePosition->pRaceTrail;
+    operator delete[](m_pRacePosition);
+    this->m_pRacePosition = 0i64;
   }
 }
 
@@ -2992,34 +2836,32 @@ void __fastcall UFG::RoadSpaceComponent::FlushRaceTrails(UFG::RoadSpaceComponent
 // RVA: 0x659740
 void __fastcall UFG::RoadSpaceComponent::SetRaceTrail(UFG::RoadSpaceComponent *this, UFG::RaceTrail *race_trail)
 {
-  UFG::RaceTrail *v2; // rbp
-  UFG::RoadSpaceComponent *v3; // rbx
-  UFG::SimObject *v4; // rsi
+  UFG::SimObject *m_pSimObject; // rsi
   UFG::RacePosition *v5; // rdi
-  UFG::TransformNodeComponent *v6; // rsi
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rsi
   UFG::allocator::free_link *v7; // rax
   UFG::RacePosition *v8; // rax
 
-  v2 = race_trail;
-  v3 = this;
   UFG::RoadSpaceComponent::FlushRaceTrails(this);
-  if ( v2 )
+  if ( race_trail )
   {
-    v4 = v3->m_pSimObject;
+    m_pSimObject = this->m_pSimObject;
     v5 = 0i64;
-    if ( v4 )
-      v6 = v4->m_pTransformNodeComponent;
+    if ( m_pSimObject )
+      m_pTransformNodeComponent = m_pSimObject->m_pTransformNodeComponent;
     else
-      v6 = 0i64;
+      m_pTransformNodeComponent = 0i64;
     v7 = UFG::qMalloc(0x48ui64, "RacePosition", 0i64);
     if ( v7 )
     {
-      UFG::RacePosition::RacePosition((UFG::RacePosition *)v7, v2);
+      UFG::RacePosition::RacePosition((UFG::RacePosition *)v7, race_trail);
       v5 = v8;
     }
-    v3->m_pRacePosition = v5;
-    UFG::TransformNodeComponent::UpdateWorldTransform(v6);
-    UFG::RacePosition::InitPosition(v3->m_pRacePosition, (UFG::qVector3 *)&v6->mWorldTransform.v3);
+    this->m_pRacePosition = v5;
+    UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+    UFG::RacePosition::InitPosition(
+      this->m_pRacePosition,
+      (UFG::qVector3 *)&m_pTransformNodeComponent->mWorldTransform.v3);
   }
 }
 
@@ -3027,352 +2869,321 @@ void __fastcall UFG::RoadSpaceComponent::SetRaceTrail(UFG::RoadSpaceComponent *t
 // RVA: 0x6597F0
 void __fastcall UFG::RoadSpaceComponent::SetRaceTrailSteer(UFG::RoadSpaceComponent *this, UFG::RaceTrail *race_trail)
 {
-  UFG::RaceTrail *v2; // rbp
-  UFG::RoadSpaceComponent *v3; // rbx
-  UFG::RacePosition *v4; // rcx
+  UFG::RacePosition *m_pRacePositionSteer; // rcx
   UFG::RacePosition *v5; // rdi
-  UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *v6; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *v7; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *mPrev; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *v8; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *v9; // rax
-  UFG::SimObject *v10; // rsi
-  UFG::TransformNodeComponent *v11; // rsi
+  UFG::SimObject *m_pSimObject; // rsi
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rsi
   UFG::allocator::free_link *v12; // rax
   UFG::RacePosition *v13; // rax
 
-  v2 = race_trail;
-  v3 = this;
-  v4 = this->m_pRacePositionSteer;
+  m_pRacePositionSteer = this->m_pRacePositionSteer;
   v5 = 0i64;
-  if ( v4 )
+  if ( m_pRacePositionSteer )
   {
-    if ( v4->pRaceTrail.m_pPointer )
+    if ( m_pRacePositionSteer->pRaceTrail.m_pPointer )
     {
-      v6 = v4->pRaceTrail.mPrev;
-      v7 = v4->pRaceTrail.mNext;
-      v6->mNext = v7;
-      v7->mPrev = v6;
-      v4->pRaceTrail.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *)&v4->pRaceTrail.mPrev;
-      v4->pRaceTrail.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *)&v4->pRaceTrail.mPrev;
+      mPrev = m_pRacePositionSteer->pRaceTrail.mPrev;
+      mNext = m_pRacePositionSteer->pRaceTrail.mNext;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
+      m_pRacePositionSteer->pRaceTrail.mPrev = &m_pRacePositionSteer->pRaceTrail;
+      m_pRacePositionSteer->pRaceTrail.mNext = &m_pRacePositionSteer->pRaceTrail;
     }
-    v4->pRaceTrail.m_pPointer = 0i64;
-    v8 = v4->pRaceTrail.mPrev;
-    v9 = v4->pRaceTrail.mNext;
+    m_pRacePositionSteer->pRaceTrail.m_pPointer = 0i64;
+    v8 = m_pRacePositionSteer->pRaceTrail.mPrev;
+    v9 = m_pRacePositionSteer->pRaceTrail.mNext;
     v8->mNext = v9;
     v9->mPrev = v8;
-    v4->pRaceTrail.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *)&v4->pRaceTrail.mPrev;
-    v4->pRaceTrail.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *)&v4->pRaceTrail.mPrev;
-    operator delete[](v4);
-    v3->m_pRacePositionSteer = 0i64;
+    m_pRacePositionSteer->pRaceTrail.mPrev = &m_pRacePositionSteer->pRaceTrail;
+    m_pRacePositionSteer->pRaceTrail.mNext = &m_pRacePositionSteer->pRaceTrail;
+    operator delete[](m_pRacePositionSteer);
+    this->m_pRacePositionSteer = 0i64;
   }
-  v10 = v3->m_pSimObject;
-  if ( v10 )
-    v11 = v10->m_pTransformNodeComponent;
+  m_pSimObject = this->m_pSimObject;
+  if ( m_pSimObject )
+    m_pTransformNodeComponent = m_pSimObject->m_pTransformNodeComponent;
   else
-    v11 = 0i64;
+    m_pTransformNodeComponent = 0i64;
   v12 = UFG::qMalloc(0x48ui64, "RacePositionSteer", 0i64);
   if ( v12 )
   {
-    UFG::RacePosition::RacePosition((UFG::RacePosition *)v12, v2);
+    UFG::RacePosition::RacePosition((UFG::RacePosition *)v12, race_trail);
     v5 = v13;
   }
-  v3->m_pRacePositionSteer = v5;
-  UFG::TransformNodeComponent::UpdateWorldTransform(v11);
-  UFG::RacePosition::InitPosition(v3->m_pRacePositionSteer, (UFG::qVector3 *)&v11->mWorldTransform.v3);
+  this->m_pRacePositionSteer = v5;
+  UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+  UFG::RacePosition::InitPosition(
+    this->m_pRacePositionSteer,
+    (UFG::qVector3 *)&m_pTransformNodeComponent->mWorldTransform.v3);
 }
 
 // File Line: 1753
 // RVA: 0x6497D0
 bool __fastcall UFG::RoadSpaceComponent::CleanupOnRaceDeleted(UFG::RoadSpaceComponent *this)
 {
-  UFG::RoadSpaceComponent *v1; // rdi
-  UFG::RacePosition *v2; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *v3; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *v4; // rax
-  UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *v5; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *v6; // rax
-  UFG::RacePosition *v7; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *v8; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *v9; // rax
-  UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *v10; // r8
-  UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *v11; // rdx
+  UFG::RacePosition *m_pRacePositionSteer; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *mPrev; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *mNext; // rax
+  UFG::RacePosition *m_pRacePosition; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *v6; // r8
+  UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *v7; // rdx
 
-  v1 = this;
-  v2 = this->m_pRacePositionSteer;
-  if ( v2 && !v2->pRaceTrail.m_pPointer )
+  m_pRacePositionSteer = this->m_pRacePositionSteer;
+  if ( m_pRacePositionSteer && !m_pRacePositionSteer->pRaceTrail.m_pPointer )
   {
-    if ( v2->pRaceTrail.m_pPointer )
-    {
-      v3 = v2->pRaceTrail.mPrev;
-      v4 = v2->pRaceTrail.mNext;
-      v3->mNext = v4;
-      v4->mPrev = v3;
-      v2->pRaceTrail.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *)&v2->pRaceTrail.mPrev;
-      v2->pRaceTrail.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *)&v2->pRaceTrail.mPrev;
-    }
-    v2->pRaceTrail.m_pPointer = 0i64;
-    v5 = v2->pRaceTrail.mPrev;
-    v6 = v2->pRaceTrail.mNext;
-    v5->mNext = v6;
-    v6->mPrev = v5;
-    v2->pRaceTrail.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *)&v2->pRaceTrail.mPrev;
-    v2->pRaceTrail.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *)&v2->pRaceTrail.mPrev;
-    operator delete[](v2);
-    v1->m_pRacePositionSteer = 0i64;
+    m_pRacePositionSteer->pRaceTrail.m_pPointer = 0i64;
+    mPrev = m_pRacePositionSteer->pRaceTrail.mPrev;
+    mNext = m_pRacePositionSteer->pRaceTrail.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    m_pRacePositionSteer->pRaceTrail.mPrev = &m_pRacePositionSteer->pRaceTrail;
+    m_pRacePositionSteer->pRaceTrail.mNext = &m_pRacePositionSteer->pRaceTrail;
+    operator delete[](m_pRacePositionSteer);
+    this->m_pRacePositionSteer = 0i64;
   }
-  v7 = v1->m_pRacePosition;
-  if ( v7 && !v7->pRaceTrail.m_pPointer )
+  m_pRacePosition = this->m_pRacePosition;
+  if ( m_pRacePosition && !m_pRacePosition->pRaceTrail.m_pPointer )
   {
-    if ( v7->pRaceTrail.m_pPointer )
-    {
-      v8 = v7->pRaceTrail.mPrev;
-      v9 = v7->pRaceTrail.mNext;
-      v8->mNext = v9;
-      v9->mPrev = v8;
-      v7->pRaceTrail.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *)&v7->pRaceTrail.mPrev;
-      v7->pRaceTrail.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *)&v7->pRaceTrail.mPrev;
-    }
-    v7->pRaceTrail.m_pPointer = 0i64;
-    v10 = v7->pRaceTrail.mPrev;
-    v11 = v7->pRaceTrail.mNext;
-    v10->mNext = v11;
-    v11->mPrev = v10;
-    v7->pRaceTrail.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *)&v7->pRaceTrail.mPrev;
-    v7->pRaceTrail.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *)&v7->pRaceTrail.mPrev;
-    operator delete[](v7);
-    v1->m_pRacePosition = 0i64;
+    m_pRacePosition->pRaceTrail.m_pPointer = 0i64;
+    v6 = m_pRacePosition->pRaceTrail.mPrev;
+    v7 = m_pRacePosition->pRaceTrail.mNext;
+    v6->mNext = v7;
+    v7->mPrev = v6;
+    m_pRacePosition->pRaceTrail.mPrev = &m_pRacePosition->pRaceTrail;
+    m_pRacePosition->pRaceTrail.mNext = &m_pRacePosition->pRaceTrail;
+    operator delete[](m_pRacePosition);
+    this->m_pRacePosition = 0i64;
   }
-  return v1->m_pRacePosition == 0i64;
+  return this->m_pRacePosition == 0i64;
 }
 
 // File Line: 1771
 // RVA: 0x650B40
-UFG::qVector3 *__fastcall UFG::RoadSpaceComponent::GetSteerToRace(UFG::RoadSpaceComponent *this, UFG::qVector3 *result, float steer_to_distance, float *speed_limit, float vehicle_mass, bool is_boat)
+UFG::qVector3 *__fastcall UFG::RoadSpaceComponent::GetSteerToRace(
+        UFG::RoadSpaceComponent *this,
+        UFG::qVector3 *result,
+        float steer_to_distance,
+        float *speed_limit,
+        float vehicle_mass,
+        bool is_boat)
 {
   int v6; // edi
-  float *v7; // rbp
-  UFG::qVector3 *v8; // r12
-  UFG::RoadSpaceComponent *v9; // r13
-  UFG::TransformNodeComponent *v10; // rbx
-  float v11; // xmm7_4
-  UFG::SimObject *v12; // rax
-  UFG::RacePosition *v13; // rax
-  UFG::RacePoint *v14; // rsi
-  signed __int64 v15; // r14
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rbx
+  UFG::SimObject *m_pSimObject; // rax
+  UFG::RacePosition *m_pRacePositionSteer; // rax
+  UFG::RacePoint *pRacePoint; // rsi
+  UFG::qVector4 *v15; // r14
   UFG::RaceTrail *v16; // r10
-  __m128 v17; // xmm2
-  float v18; // xmm8_4
+  __m128 y_low; // xmm2
+  float x; // xmm8_4
   __m128 v19; // xmm9
-  float v20; // xmm10_4
+  float z; // xmm10_4
   float v21; // xmm11_4
   float v22; // xmm0_4
   int v23; // xmm1_4
-  int v24; // er9
-  bool v25; // r8
-  signed __int64 v26; // rax
+  int nRacePoints; // r9d
+  bool bIsLoop; // r8
+  UFG::qVector3 *p_vDirection; // rax
   signed __int64 v27; // rsi
   int v28; // edx
   int v29; // esi
-  unsigned __int64 v30; // rdx
-  unsigned __int64 v31; // r15
-  __m128 v32; // xmm2
-  float v33; // xmm6_4
-  UFG::RacePoint *v34; // rbx
-  float v35; // xmm8_4
-  float v36; // xmm0_4
-  float v37; // xmm0_4
-  float v38; // xmm1_4
-  float v39; // xmm0_4
-  float v40; // xmm1_4
-  float v41; // xmm0_4
-  float v42; // xmm1_4
-  float v43; // xmm0_4
-  float v44; // xmm1_4
+  __int64 v30; // r15
+  __m128 v31; // xmm2
+  float SpeedLimitForCurvature; // xmm6_4
+  UFG::RacePoint *v33; // rbx
+  float v34; // xmm8_4
+  float fSpeed; // xmm0_4
+  float BrakingSpeedLimit; // xmm0_4
+  float v37; // xmm1_4
+  float v38; // xmm0_4
+  float y; // xmm1_4
+  float v40; // xmm0_4
+  float v41; // xmm1_4
+  float v42; // xmm0_4
+  float v43; // xmm1_4
   UFG::qVector3 *ray; // rax
-  UFG::qVector3 *v46; // rax
-  float v47; // xmm1_4
-  float v48; // xmm12_4
-  float v49; // xmm0_4
-  float v50; // xmm1_4
-  float v51; // xmm0_4
-  float v52; // xmm8_4
-  float v53; // xmm10_4
-  __m128 v54; // xmm2
-  float v55; // xmm7_4
-  float v56; // xmm0_4
-  float v57; // xmm1_4
-  UFG::RaceTrail *v58; // [rsp+30h] [rbp-C8h]
-  UFG::qVector3 *v59; // [rsp+38h] [rbp-C0h]
-  UFG::qVector3 resulta; // [rsp+40h] [rbp-B8h]
-  float v61; // [rsp+50h] [rbp-A8h]
-  float v62; // [rsp+54h] [rbp-A4h]
-  float v63; // [rsp+58h] [rbp-A0h]
-  int v64; // [rsp+100h] [rbp+8h]
+  UFG::qVector3 *v45; // rax
+  float v46; // xmm1_4
+  float v47; // xmm12_4
+  float v48; // xmm0_4
+  float v49; // xmm1_4
+  float v50; // xmm0_4
+  float v51; // xmm8_4
+  float v52; // xmm10_4
+  __m128 v53; // xmm2
+  float v54; // xmm7_4
+  float v55; // xmm0_4
+  float v56; // xmm1_4
+  UFG::RaceTrail *m_pPointer; // [rsp+30h] [rbp-C8h]
+  UFG::qVector3 *v58; // [rsp+38h] [rbp-C0h]
+  UFG::qVector3 resulta; // [rsp+40h] [rbp-B8h] BYREF
+  float v60; // [rsp+50h] [rbp-A8h] BYREF
+  float v61; // [rsp+54h] [rbp-A4h]
+  float v62; // [rsp+58h] [rbp-A0h]
+  int v63; // [rsp+100h] [rbp+8h]
 
   v6 = 0;
-  v7 = speed_limit;
-  v8 = result;
-  v9 = this;
-  v10 = 0i64;
-  v11 = steer_to_distance;
-  v12 = this->m_pSimObject;
-  if ( v12 )
-    v10 = v12->m_pTransformNodeComponent;
-  v13 = this->m_pRacePositionSteer;
-  if ( !v13 )
-    v13 = this->m_pRacePosition;
-  v14 = v13->pRacePoint;
-  v58 = v13->pRaceTrail.m_pPointer;
-  UFG::TransformNodeComponent::UpdateWorldTransform(v10);
-  v15 = (signed __int64)&v10->mWorldTransform.v3;
-  UFG::RacePoint::GetSegmentPosition(v14, &resulta, (UFG::qVector3 *)&v10->mWorldTransform.v3);
-  v16 = v58;
-  v17 = (__m128)LODWORD(v10->mWorldTransform.v3.y);
-  v18 = resulta.x;
+  m_pTransformNodeComponent = 0i64;
+  m_pSimObject = this->m_pSimObject;
+  if ( m_pSimObject )
+    m_pTransformNodeComponent = m_pSimObject->m_pTransformNodeComponent;
+  m_pRacePositionSteer = this->m_pRacePositionSteer;
+  if ( !m_pRacePositionSteer )
+    m_pRacePositionSteer = this->m_pRacePosition;
+  pRacePoint = m_pRacePositionSteer->pRacePoint;
+  m_pPointer = m_pRacePositionSteer->pRaceTrail.m_pPointer;
+  UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+  v15 = &m_pTransformNodeComponent->mWorldTransform.v3;
+  UFG::RacePoint::GetSegmentPosition(
+    pRacePoint,
+    &resulta,
+    (UFG::qVector3 *)&m_pTransformNodeComponent->mWorldTransform.v3);
+  v16 = m_pPointer;
+  y_low = (__m128)LODWORD(m_pTransformNodeComponent->mWorldTransform.v3.y);
+  x = resulta.x;
   v19 = (__m128)LODWORD(resulta.y);
-  v20 = resulta.z;
-  v17.m128_f32[0] = (float)((float)((float)(v17.m128_f32[0] - resulta.y) * (float)(v17.m128_f32[0] - resulta.y))
-                          + (float)((float)(*(float *)v15 - resulta.x) * (float)(*(float *)v15 - resulta.x)))
-                  + (float)((float)(v10->mWorldTransform.v3.z - resulta.z)
-                          * (float)(v10->mWorldTransform.v3.z - resulta.z));
-  LODWORD(v21) = (unsigned __int128)_mm_sqrt_ps(v17);
-  if ( v58 && v11 > v21 )
+  z = resulta.z;
+  y_low.m128_f32[0] = (float)((float)((float)(y_low.m128_f32[0] - resulta.y) * (float)(y_low.m128_f32[0] - resulta.y))
+                            + (float)((float)(v15->x - resulta.x) * (float)(v15->x - resulta.x)))
+                    + (float)((float)(m_pTransformNodeComponent->mWorldTransform.v3.z - resulta.z)
+                            * (float)(m_pTransformNodeComponent->mWorldTransform.v3.z - resulta.z));
+  LODWORD(v21) = _mm_sqrt_ps(y_low).m128_u32[0];
+  if ( m_pPointer && steer_to_distance > v21 )
   {
-    v22 = v14->vDirection.x;
-    v23 = LODWORD(v14->vDirection.y);
-    v24 = v58->nRacePoints;
-    v25 = v58->bIsLoop;
-    v26 = (signed __int64)&v14->vDirection;
-    v27 = (char *)v14 - (char *)v58->pRacePoints;
-    v61 = v22;
-    v62 = *(float *)&v23;
-    v59 = (UFG::qVector3 *)v26;
-    v63 = *(float *)(v26 + 8);
-    v64 = v24;
-    v28 = ((unsigned __int64)((unsigned __int128)(v27 * (signed __int128)5270498306774157605i64) >> 64) >> 63)
-        + ((signed __int64)((unsigned __int128)(v27 * (signed __int128)5270498306774157605i64) >> 64) >> 4)
-        + 1;
-    if ( v28 >= v24 )
+    v22 = pRacePoint->vDirection.x;
+    v23 = LODWORD(pRacePoint->vDirection.y);
+    nRacePoints = m_pPointer->nRacePoints;
+    bIsLoop = m_pPointer->bIsLoop;
+    p_vDirection = &pRacePoint->vDirection;
+    v27 = (char *)pRacePoint - (char *)m_pPointer->pRacePoints;
+    v60 = v22;
+    v61 = *(float *)&v23;
+    v58 = p_vDirection;
+    v62 = p_vDirection->z;
+    v63 = nRacePoints;
+    v28 = (int)v27 / 56 + 1;
+    if ( v28 >= nRacePoints )
     {
       v28 = 0;
-      if ( !v25 )
-        v28 = v24 - 1;
+      if ( !bIsLoop )
+        v28 = nRacePoints - 1;
     }
-    v29 = v24;
-    v30 = (unsigned __int128)(56i64 * v28 * (signed __int128)5270498306774157605i64) >> 64;
-    v31 = (v30 >> 63) + ((signed __int64)v30 >> 4);
-    if ( !v25 )
-      v29 = v24 - v31;
+    v29 = nRacePoints;
+    v30 = 56i64 * v28 / 56;
+    if ( !bIsLoop )
+      v29 = nRacePoints - v30;
     if ( v29 <= 0 )
     {
 LABEL_22:
-      ray = v59;
+      ray = v58;
     }
     else
     {
       while ( 1 )
       {
-        v32 = (__m128)*(unsigned int *)(v15 + 4);
-        v33 = FLOAT_100_0;
-        v34 = &v16->pRacePoints[(v6 + (signed int)v31) % v24];
-        v32.m128_f32[0] = (float)((float)((float)(v32.m128_f32[0] - v34->vPosition.y)
-                                        * (float)(v32.m128_f32[0] - v34->vPosition.y))
-                                + (float)((float)(*(float *)v15 - v34->vPosition.x)
-                                        * (float)(*(float *)v15 - v34->vPosition.x)))
-                        + (float)((float)(*(float *)(v15 + 8) - v34->vPosition.z)
-                                * (float)(*(float *)(v15 + 8) - v34->vPosition.z));
-        LODWORD(v35) = (unsigned __int128)_mm_sqrt_ps(v32);
-        if ( (*(_DWORD *)&v9->mBits >> 3) & 1 )
-          v33 = UFG::GetSpeedLimitForCurvature(v34->fCurvature, 100.0, 1.0);
-        v36 = v34->fSpeed;
-        if ( v36 >= 0.0 && v33 >= v36 )
-          v33 = v34->fSpeed;
-        v37 = UFG::GetBrakingSpeedLimit(v35, 100.0, vehicle_mass, is_boat);
-        v38 = *v7;
-        v39 = v37 + v33;
-        if ( *v7 >= v39 )
-          v38 = v39;
-        *v7 = v38;
-        if ( v11 <= v35 )
+        v31 = (__m128)LODWORD(v15->y);
+        SpeedLimitForCurvature = FLOAT_100_0;
+        v33 = &v16->pRacePoints[(v6 + (int)v30) % nRacePoints];
+        v31.m128_f32[0] = (float)((float)((float)(v31.m128_f32[0] - v33->vPosition.y)
+                                        * (float)(v31.m128_f32[0] - v33->vPosition.y))
+                                + (float)((float)(v15->x - v33->vPosition.x) * (float)(v15->x - v33->vPosition.x)))
+                        + (float)((float)(v15->z - v33->vPosition.z) * (float)(v15->z - v33->vPosition.z));
+        LODWORD(v34) = _mm_sqrt_ps(v31).m128_u32[0];
+        if ( (*(_DWORD *)&this->mBits & 8) != 0 )
+          SpeedLimitForCurvature = UFG::GetSpeedLimitForCurvature(v33->fCurvature, 100.0, 1.0);
+        fSpeed = v33->fSpeed;
+        if ( fSpeed >= 0.0 && SpeedLimitForCurvature >= fSpeed )
+          SpeedLimitForCurvature = v33->fSpeed;
+        BrakingSpeedLimit = UFG::GetBrakingSpeedLimit(v34, 100.0, vehicle_mass, is_boat);
+        v37 = *speed_limit;
+        v38 = BrakingSpeedLimit + SpeedLimitForCurvature;
+        if ( *speed_limit >= v38 )
+          v37 = v38;
+        *speed_limit = v37;
+        if ( steer_to_distance <= v34 )
           break;
-        v40 = v34->vDirection.y;
-        v24 = v64;
-        v16 = v58;
+        y = v33->vDirection.y;
+        nRacePoints = v63;
+        v16 = m_pPointer;
         ++v6;
-        v61 = v34->vDirection.x;
-        v41 = v34->vDirection.z;
+        v60 = v33->vDirection.x;
+        v40 = v33->vDirection.z;
+        v61 = y;
+        v41 = v33->vPosition.x;
         v62 = v40;
-        v42 = v34->vPosition.x;
-        v63 = v41;
-        v43 = v34->vPosition.y;
-        resulta.x = v42;
-        v44 = v34->vPosition.z;
-        resulta.y = v43;
-        resulta.z = v44;
+        v42 = v33->vPosition.y;
+        resulta.x = v41;
+        v43 = v33->vPosition.z;
+        resulta.y = v42;
+        resulta.z = v43;
         if ( v6 >= v29 )
           goto LABEL_22;
       }
-      ray = (UFG::qVector3 *)&v61;
+      ray = (UFG::qVector3 *)&v60;
     }
-    UFG::RoadSpaceComponent::SteerTo(v8, (UFG::qVector3 *)v15, v11, &resulta, ray);
-    v46 = v8;
+    UFG::RoadSpaceComponent::SteerTo(result, (UFG::qVector3 *)v15, steer_to_distance, &resulta, ray);
+    return result;
   }
   else
   {
-    if ( v11 >= 1.0 )
-      v47 = v11;
+    if ( steer_to_distance >= 1.0 )
+      v46 = steer_to_distance;
     else
-      v47 = *(float *)&FLOAT_1_0;
-    v48 = UFG::GetSpeedLimitForCurvature(1.5707964 / v47, 100.0, 1.0);
-    if ( (*(_DWORD *)&v9->mBits >> 3) & 1 )
+      v46 = *(float *)&FLOAT_1_0;
+    v47 = UFG::GetSpeedLimitForCurvature(1.5707964 / v46, 100.0, 1.0);
+    if ( (*(_DWORD *)&this->mBits & 8) != 0 )
     {
-      v49 = UFG::GetBrakingSpeedLimit(v21, 100.0, vehicle_mass, is_boat);
-      v50 = *v7;
-      v51 = v49 + v48;
-      if ( *v7 >= v51 )
-        v50 = v51;
-      *v7 = v50;
+      v48 = UFG::GetBrakingSpeedLimit(v21, 100.0, vehicle_mass, is_boat);
+      v49 = *speed_limit;
+      v50 = v48 + v47;
+      if ( *speed_limit >= v50 )
+        v49 = v50;
+      *speed_limit = v49;
     }
-    v52 = v18 - *(float *)v15;
-    v19.m128_f32[0] = v19.m128_f32[0] - v10->mWorldTransform.v3.y;
-    v53 = v20 - v10->mWorldTransform.v3.z;
-    v46 = v8;
-    v54 = v19;
-    v54.m128_f32[0] = (float)((float)(v19.m128_f32[0] * v19.m128_f32[0]) + (float)(v52 * v52)) + (float)(v53 * v53);
-    v55 = v11 / COERCE_FLOAT(_mm_sqrt_ps(v54));
-    v56 = (float)(v55 * v19.m128_f32[0]) + v10->mWorldTransform.v3.y;
-    v57 = (float)(v55 * v52) + *(float *)v15;
-    v8->z = (float)(v55 * v53) + v10->mWorldTransform.v3.z;
-    v8->x = v57;
-    v8->y = v56;
+    v51 = x - v15->x;
+    v19.m128_f32[0] = v19.m128_f32[0] - m_pTransformNodeComponent->mWorldTransform.v3.y;
+    v52 = z - m_pTransformNodeComponent->mWorldTransform.v3.z;
+    v45 = result;
+    v53 = v19;
+    v53.m128_f32[0] = (float)((float)(v19.m128_f32[0] * v19.m128_f32[0]) + (float)(v51 * v51)) + (float)(v52 * v52);
+    v54 = steer_to_distance / _mm_sqrt_ps(v53).m128_f32[0];
+    v55 = (float)(v54 * v19.m128_f32[0]) + m_pTransformNodeComponent->mWorldTransform.v3.y;
+    v56 = (float)(v54 * v51) + v15->x;
+    result->z = (float)(v54 * v52) + m_pTransformNodeComponent->mWorldTransform.v3.z;
+    result->x = v56;
+    result->y = v55;
   }
-  return v46;
+  return v45;
 }
 
 // File Line: 1831
 // RVA: 0x64E760
 float __fastcall UFG::RoadSpaceComponent::GetFractionRaceComplete(UFG::RoadSpaceComponent *this)
 {
-  UFG::RacePosition *v1; // rdx
+  UFG::RacePosition *m_pRacePosition; // rdx
   float result; // xmm0_4
-  UFG::RaceTrail *v3; // rax
-  float v4; // xmm1_4
+  UFG::RaceTrail *m_pPointer; // rax
+  float nLaps; // xmm1_4
   float v5; // xmm1_4
 
-  v1 = this->m_pRacePosition;
+  m_pRacePosition = this->m_pRacePosition;
   result = 0.0;
-  if ( v1 )
+  if ( m_pRacePosition )
   {
-    v3 = v1->pRaceTrail.m_pPointer;
-    if ( v3 )
+    m_pPointer = m_pRacePosition->pRaceTrail.m_pPointer;
+    if ( m_pPointer )
     {
-      if ( v3->bIsLoop )
-        v4 = (float)v3->nLaps;
+      if ( m_pPointer->bIsLoop )
+        nLaps = (float)m_pPointer->nLaps;
       else
-        v4 = *(float *)&FLOAT_1_0;
-      v5 = v4 * v3->fLength;
+        nLaps = *(float *)&FLOAT_1_0;
+      v5 = nLaps * m_pPointer->fLength;
       if ( v5 > 0.0 )
-        result = v1->fRaceDistance / v5;
+        return m_pRacePosition->fRaceDistance / v5;
     }
   }
   return result;

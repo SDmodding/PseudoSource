@@ -6,7 +6,7 @@ __int64 UFG::_dynamic_initializer_for__RlfSym_min___1()
 
   v0 = UFG::qStringHash32("min", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&RlfSym_min_1, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__RlfSym_min___1);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__RlfSym_min___1);
 }
 
 // File Line: 11
@@ -17,7 +17,7 @@ __int64 UFG::_dynamic_initializer_for__RlfSym_max___1()
 
   v0 = UFG::qStringHash32("max", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&RlfSym_max_1, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__RlfSym_max___1);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__RlfSym_max___1);
 }
 
 // File Line: 12
@@ -28,7 +28,7 @@ __int64 UFG::_dynamic_initializer_for__RlfSym_rise_rate___1()
 
   v0 = UFG::qStringHash32("rise_rate", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&RlfSym_rise_rate_1, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__RlfSym_rise_rate___1);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__RlfSym_rise_rate___1);
 }
 
 // File Line: 13
@@ -39,7 +39,7 @@ __int64 UFG::_dynamic_initializer_for__RlfSym_fall_rate___1()
 
   v0 = UFG::qStringHash32("fall_rate", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol((UFG::qWiseSymbol *)&RlfSym_fall_rate_1, v0);
-  return atexit(UFG::_dynamic_atexit_destructor_for__RlfSym_fall_rate___1);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__RlfSym_fall_rate___1);
 }
 
 // File Line: 21

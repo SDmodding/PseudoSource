@@ -2,7 +2,7 @@
 // RVA: 0x154D9A0
 __int64 dynamic_initializer_for__UFG::AudioEmitterComponent::s_AudioEmitterComponentList__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::AudioEmitterComponent::s_AudioEmitterComponentList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::AudioEmitterComponent::s_AudioEmitterComponentList__);
 }
 
 // File Line: 20
@@ -14,74 +14,68 @@ UFG::ComponentIDDesc *__fastcall UFG::AudioEmitterComponent::GetDesc(UFG::AudioE
 
 // File Line: 26
 // RVA: 0x57C330
-void __fastcall UFG::AudioEmitterComponent::AudioEmitterComponent(UFG::AudioEmitterComponent *this, unsigned __int64 emitter_definition_uid, unsigned int name_uid)
+void __fastcall UFG::AudioEmitterComponent::AudioEmitterComponent(
+        UFG::AudioEmitterComponent *this,
+        unsigned __int64 emitter_definition_uid,
+        unsigned int name_uid)
 {
-  unsigned __int64 v3; // rsi
-  UFG::AudioEmitterComponent *v4; // r14
-  UFG::qNode<UFG::AudioEmitterComponent,UFG::AudioEmitterComponent> *v5; // rbx
-  UFG::qReflectObjectType<UFG::AudioEmitterDefinition,UFG::qReflectObject> *v6; // rcx
-  const char *v7; // rax
-  unsigned int v8; // ebp
-  UFG::qNode<UFG::AudioEmitterComponent,UFG::AudioEmitterComponent> *v9; // rax
-  UFG::qReflectObject *v10; // rax
-  float v11; // xmm0_4
-  float v12; // xmm6_4
-  signed __int64 v13; // rdx
-  UFG::qBaseTreeRB *v14; // rax
-  UFG::qBaseNodeRB *v15; // rax
+  UFG::qReflectObjectType<UFG::AudioEmitterDefinition,UFG::qReflectObject> *v5; // rcx
+  const char *TypeName; // rax
+  unsigned int v7; // ebp
+  UFG::qNode<UFG::AudioEmitterComponent,UFG::AudioEmitterComponent> *mPrev; // rax
+  UFG::qReflectObject *mData; // rax
+  float v10; // xmm0_4
+  float v11; // xmm6_4
+  UFG::qReflectObjectVtbl *v12; // rdx
+  UFG::qBaseTreeRB *v13; // rax
+  UFG::qBaseNodeRB *v14; // rax
 
-  v3 = emitter_definition_uid;
-  v4 = this;
-  UFG::SimComponent::SimComponent((UFG::SimComponent *)&this->vfptr, name_uid);
-  v5 = (UFG::qNode<UFG::AudioEmitterComponent,UFG::AudioEmitterComponent> *)&v4->mPrev;
-  v5->mPrev = v5;
-  v5->mNext = v5;
-  v4->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AudioEmitterComponent::`vftable;
-  UFG::qReflectHandleBase::qReflectHandleBase((UFG::qReflectHandleBase *)&v4->m_audioEmitterDefinition.mPrev);
-  v7 = UFG::qReflectObjectType<UFG::AudioEmitterDefinition,UFG::qReflectObject>::GetTypeName(v6);
-  v4->m_audioEmitterDefinition.mTypeUID = UFG::qStringHash64(v7, 0xFFFFFFFFFFFFFFFFui64);
-  v8 = 0;
-  v4->m_oneShotHandle.m_pOneShot = 0i64;
-  *(_WORD *)&v4->m_bankLoadsRequested = 0;
-  v9 = UFG::AudioEmitterComponent::s_AudioEmitterComponentList.mNode.mPrev;
-  UFG::AudioEmitterComponent::s_AudioEmitterComponentList.mNode.mPrev->mNext = (UFG::qNode<UFG::AudioEmitterComponent,UFG::AudioEmitterComponent> *)&v4->mPrev;
-  v5->mPrev = v9;
-  v4->mNext = (UFG::qNode<UFG::AudioEmitterComponent,UFG::AudioEmitterComponent> *)&UFG::AudioEmitterComponent::s_AudioEmitterComponentList;
-  UFG::AudioEmitterComponent::s_AudioEmitterComponentList.mNode.mPrev = (UFG::qNode<UFG::AudioEmitterComponent,UFG::AudioEmitterComponent> *)&v4->mPrev;
-  UFG::SimComponent::AddType(
-    (UFG::SimComponent *)&v4->vfptr,
-    UFG::AudioEmitterComponent::_AudioEmitterComponentTypeUID,
-    "AudioEmitterComponent");
+  UFG::SimComponent::SimComponent(this, name_uid);
+  this->mPrev = &this->UFG::qNode<UFG::AudioEmitterComponent,UFG::AudioEmitterComponent>;
+  this->mNext = &this->UFG::qNode<UFG::AudioEmitterComponent,UFG::AudioEmitterComponent>;
+  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AudioEmitterComponent::`vftable;
+  UFG::qReflectHandleBase::qReflectHandleBase(&this->m_audioEmitterDefinition);
+  TypeName = UFG::qReflectObjectType<UFG::AudioEmitterDefinition,UFG::qReflectObject>::GetTypeName(v5);
+  this->m_audioEmitterDefinition.mTypeUID = UFG::qStringHash64(TypeName, 0xFFFFFFFFFFFFFFFFui64);
+  v7 = 0;
+  this->m_oneShotHandle.m_pOneShot = 0i64;
+  *(_WORD *)&this->m_bankLoadsRequested = 0;
+  mPrev = UFG::AudioEmitterComponent::s_AudioEmitterComponentList.mNode.mPrev;
+  UFG::AudioEmitterComponent::s_AudioEmitterComponentList.mNode.mPrev->mNext = &this->UFG::qNode<UFG::AudioEmitterComponent,UFG::AudioEmitterComponent>;
+  this->mPrev = mPrev;
+  this->mNext = (UFG::qNode<UFG::AudioEmitterComponent,UFG::AudioEmitterComponent> *)&UFG::AudioEmitterComponent::s_AudioEmitterComponentList;
+  UFG::AudioEmitterComponent::s_AudioEmitterComponentList.mNode.mPrev = &this->UFG::qNode<UFG::AudioEmitterComponent,UFG::AudioEmitterComponent>;
+  UFG::SimComponent::AddType(this, UFG::AudioEmitterComponent::_AudioEmitterComponentTypeUID, "AudioEmitterComponent");
   UFG::qReflectHandleBase::Init(
-    (UFG::qReflectHandleBase *)&v4->m_audioEmitterDefinition.mPrev,
-    v4->m_audioEmitterDefinition.mTypeUID,
-    v3);
-  v10 = v4->m_audioEmitterDefinition.mData;
-  v11 = *(float *)&v10[1].mBaseNode.mParent;
-  v4->m_activationRadius = v11;
-  v12 = 0.0;
-  if ( v11 <= 0.0 )
+    &this->m_audioEmitterDefinition,
+    this->m_audioEmitterDefinition.mTypeUID,
+    emitter_definition_uid);
+  mData = this->m_audioEmitterDefinition.mData;
+  v10 = *(float *)&mData[1].mBaseNode.mParent;
+  this->m_activationRadius = v10;
+  v11 = 0.0;
+  if ( v10 <= 0.0 )
   {
-    if ( LODWORD(v10[1].mBaseNode.mUID) > 0 )
+    if ( LODWORD(mData[1].mBaseNode.mUID) )
     {
       do
       {
-        v13 = (signed __int64)&v4->m_audioEmitterDefinition.mData[1].vfptr[6 * v8];
-        if ( *(_DWORD *)(v13 + 80) == 1 )
+        v12 = &this->m_audioEmitterDefinition.mData[1].vfptr[6 * v7];
+        if ( LODWORD(v12[5].__vecDelDtor) == 1 )
         {
-          v14 = UFG::AudioEventPropertyManager::Find(*(_DWORD *)(v13 + 84));
-          if ( v14 )
+          v13 = UFG::AudioEventPropertyManager::Find(HIDWORD(v12[5].__vecDelDtor));
+          if ( v13 )
           {
-            v15 = v14->mNULL.mChild[0];
-            if ( *((float *)v15[3].mChild + 1) > v12 )
-              v12 = *((float *)v15[3].mChild + 1);
+            v14 = v13->mNULL.mChild[0];
+            if ( *((float *)v14[3].mChild + 1) > v11 )
+              v11 = *((float *)v14[3].mChild + 1);
           }
         }
-        ++v8;
+        ++v7;
       }
-      while ( v8 < LODWORD(v4->m_audioEmitterDefinition.mData[1].mBaseNode.mUID) );
+      while ( v7 < LODWORD(this->m_audioEmitterDefinition.mData[1].mBaseNode.mUID) );
     }
-    v4->m_activationRadius = v12;
+    this->m_activationRadius = v11;
   }
 }
 
@@ -89,90 +83,85 @@ void __fastcall UFG::AudioEmitterComponent::AudioEmitterComponent(UFG::AudioEmit
 // RVA: 0x57D550
 void __fastcall UFG::AudioEmitterComponent::~AudioEmitterComponent(UFG::AudioEmitterComponent *this)
 {
-  UFG::AudioEmitterComponent *v1; // rdi
   UFG::qNode<UFG::AudioEmitterComponent,UFG::AudioEmitterComponent> *v2; // rbx
-  UFG::qNode<UFG::AudioEmitterComponent,UFG::AudioEmitterComponent> *v3; // rcx
-  UFG::qNode<UFG::AudioEmitterComponent,UFG::AudioEmitterComponent> *v4; // rax
+  UFG::qNode<UFG::AudioEmitterComponent,UFG::AudioEmitterComponent> *mPrev; // rcx
+  UFG::qNode<UFG::AudioEmitterComponent,UFG::AudioEmitterComponent> *mNext; // rax
   UFG::qNode<UFG::AudioEmitterComponent,UFG::AudioEmitterComponent> *v5; // rcx
   UFG::qNode<UFG::AudioEmitterComponent,UFG::AudioEmitterComponent> *v6; // rax
 
-  v1 = this;
   this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::AudioEmitterComponent::`vftable;
   if ( this == UFG::AudioEmitterComponent::s_AudioEmitterComponentpCurrentIterator )
     UFG::AudioEmitterComponent::s_AudioEmitterComponentpCurrentIterator = (UFG::AudioEmitterComponent *)&this->mPrev[-4];
-  v2 = (UFG::qNode<UFG::AudioEmitterComponent,UFG::AudioEmitterComponent> *)&this->mPrev;
-  v3 = this->mPrev;
-  v4 = v2->mNext;
-  v3->mNext = v4;
-  v4->mPrev = v3;
+  v2 = &this->UFG::qNode<UFG::AudioEmitterComponent,UFG::AudioEmitterComponent>;
+  mPrev = this->mPrev;
+  mNext = v2->mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
   v2->mPrev = v2;
   v2->mNext = v2;
-  UFG::OneShotHandle::Release(&v1->m_oneShotHandle);
-  UFG::qReflectHandleBase::~qReflectHandleBase((UFG::qReflectHandleBase *)&v1->m_audioEmitterDefinition.mPrev);
+  UFG::OneShotHandle::Release(&this->m_oneShotHandle);
+  UFG::qReflectHandleBase::~qReflectHandleBase(&this->m_audioEmitterDefinition);
   v5 = v2->mPrev;
   v6 = v2->mNext;
   v5->mNext = v6;
   v6->mPrev = v5;
   v2->mPrev = v2;
   v2->mNext = v2;
-  UFG::SimComponent::~SimComponent((UFG::SimComponent *)&v1->vfptr);
+  UFG::SimComponent::~SimComponent(this);
 }
 
 // File Line: 50
 // RVA: 0x5869F0
 void __fastcall UFG::AudioEmitterComponent::OnDetach(UFG::AudioEmitterComponent *this)
 {
-  UFG::AudioEmitterComponent *v1; // rbx
-
-  v1 = this;
   if ( UFG::OneShotHandle::IsValid(&this->m_oneShotHandle) )
-    ((void (*)(void))v1->m_oneShotHandle.m_pOneShot->vfptr->StopAndForgetAllEvents)();
-  v1->m_eventsPlaying = 0;
-  UFG::AudioEmitterComponent::UnloadBanks(v1);
+    ((void (__fastcall *)(UFG::OneShot *))this->m_oneShotHandle.m_pOneShot->vfptr->StopAndForgetAllEvents)(this->m_oneShotHandle.m_pOneShot);
+  this->m_eventsPlaying = 0;
+  UFG::AudioEmitterComponent::UnloadBanks(this);
 }
 
 // File Line: 56
 // RVA: 0x58D3F0
 void __fastcall UFG::AudioEmitterComponent::Update(UFG::AudioEmitterComponent *this, float delta_sec)
 {
-  UFG::SimObject *v2; // rdi
-  UFG::AudioEmitterComponent *v3; // rbx
-  UFG::OneShot *v4; // rcx
+  UFG::SimObject *m_pSimObject; // rdi
+  UFG::OneShot *m_pOneShot; // rcx
   UFG::qVector4 v5; // xmm3
   UFG::qVector4 v6; // xmm2
   UFG::qVector4 v7; // xmm1
 
-  v2 = this->m_pSimObject;
-  v3 = this;
-  if ( v2 )
-    v2 = (UFG::SimObject *)v2->m_pTransformNodeComponent;
-  UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v2);
-  if ( UFG::AudioListener::GetDistance2From(UFG::AudioListener::sm_pInstance, (UFG::qVector3 *)v2[1].mNode.mChild) <= (float)(v3->m_activationRadius * v3->m_activationRadius) )
+  m_pSimObject = this->m_pSimObject;
+  if ( m_pSimObject )
+    m_pSimObject = (UFG::SimObject *)m_pSimObject->m_pTransformNodeComponent;
+  UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)m_pSimObject);
+  if ( UFG::AudioListener::GetDistance2From(
+         UFG::AudioListener::sm_pInstance,
+         (UFG::qVector3 *)m_pSimObject[1].mNode.mChild) <= (float)(this->m_activationRadius * this->m_activationRadius) )
   {
-    if ( !v3->m_bankLoadsRequested )
-      UFG::AudioEmitterComponent::LoadBanks(v3);
-    if ( UFG::AudioEmitterComponent::AreBanksLoaded(v3) )
-      UFG::AudioEmitterComponent::PlayEvents(v3);
+    if ( !this->m_bankLoadsRequested )
+      UFG::AudioEmitterComponent::LoadBanks(this);
+    if ( UFG::AudioEmitterComponent::AreBanksLoaded(this) )
+      UFG::AudioEmitterComponent::PlayEvents(this);
   }
   else
   {
-    if ( UFG::OneShotHandle::IsValid(&v3->m_oneShotHandle) )
-      ((void (*)(void))v3->m_oneShotHandle.m_pOneShot->vfptr->StopAndForgetAllEvents)();
-    v3->m_eventsPlaying = 0;
-    UFG::AudioEmitterComponent::UnloadBanks(v3);
+    if ( UFG::OneShotHandle::IsValid(&this->m_oneShotHandle) )
+      ((void (__fastcall *)(UFG::OneShot *))this->m_oneShotHandle.m_pOneShot->vfptr->StopAndForgetAllEvents)(this->m_oneShotHandle.m_pOneShot);
+    this->m_eventsPlaying = 0;
+    UFG::AudioEmitterComponent::UnloadBanks(this);
   }
-  if ( UFG::OneShotHandle::IsValid(&v3->m_oneShotHandle) )
+  if ( UFG::OneShotHandle::IsValid(&this->m_oneShotHandle) )
   {
-    UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v2);
-    v4 = v3->m_oneShotHandle.m_pOneShot;
-    v5 = *(UFG::qVector4 *)&v2[1].m_SafePointerList.mNode.mNext;
-    v6 = *(UFG::qVector4 *)&v2[1].m_SafePointerWithCallbackList.mNode.mNext;
-    v7 = *(UFG::qVector4 *)v2[1].mNode.mChild;
-    v4->m_WorldMatrix.v0 = *(UFG::qVector4 *)&v2[1].vfptr;
-    v4->m_WorldMatrix.v1 = v5;
-    v4->m_WorldMatrix.v2 = v6;
-    v4->m_WorldMatrix.v3 = v7;
-    UFG::AudioEntity::ForcePositionUpdate((UFG::AudioEntity *)&v4->vfptr);
+    UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)m_pSimObject);
+    m_pOneShot = this->m_oneShotHandle.m_pOneShot;
+    v5 = *(UFG::qVector4 *)&m_pSimObject[1].m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mNext;
+    v6 = *(UFG::qVector4 *)&m_pSimObject[1].m_SafePointerWithCallbackList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::mNode.mNext;
+    v7 = *(UFG::qVector4 *)m_pSimObject[1].mNode.mChild;
+    m_pOneShot->m_WorldMatrix.v0 = *(UFG::qVector4 *)&m_pSimObject[1].vfptr;
+    m_pOneShot->m_WorldMatrix.v1 = v5;
+    m_pOneShot->m_WorldMatrix.v2 = v6;
+    m_pOneShot->m_WorldMatrix.v3 = v7;
+    UFG::AudioEntity::ForcePositionUpdate(m_pOneShot);
   }
 }
 
@@ -180,26 +169,20 @@ void __fastcall UFG::AudioEmitterComponent::Update(UFG::AudioEmitterComponent *t
 // RVA: 0x585840
 void __fastcall UFG::AudioEmitterComponent::LoadBanks(UFG::AudioEmitterComponent *this)
 {
-  UFG::AudioEmitterComponent *v1; // rdi
-  __int64 v2; // rbx
+  __int64 i; // rbx
   UFG::qWiseSymbol *v3; // rcx
 
-  v1 = this;
   if ( !this->m_bankLoadsRequested )
   {
-    v2 = 0i64;
-    if ( LODWORD(this->m_audioEmitterDefinition.mData[1].mBaseNode.mUID) )
+    for ( i = 0i64;
+          (unsigned int)i < LODWORD(this->m_audioEmitterDefinition.mData[1].mBaseNode.mUID);
+          i = (unsigned int)(i + 1) )
     {
-      do
-      {
-        v3 = (UFG::qWiseSymbol *)&v1->m_audioEmitterDefinition.mData[1].vfptr[6 * v2];
-        if ( v3[20].mUID == 5 )
-          UFG::SoundBankManager::QueueBankForLoad(v3 + 21);
-        v2 = (unsigned int)(v2 + 1);
-      }
-      while ( (unsigned int)v2 < LODWORD(v1->m_audioEmitterDefinition.mData[1].mBaseNode.mUID) );
+      v3 = (UFG::qWiseSymbol *)&this->m_audioEmitterDefinition.mData[1].vfptr[6 * i];
+      if ( v3[20].mUID == 5 )
+        UFG::SoundBankManager::QueueBankForLoad(v3 + 21);
     }
-    v1->m_bankLoadsRequested = 1;
+    this->m_bankLoadsRequested = 1;
   }
 }
 
@@ -207,26 +190,20 @@ void __fastcall UFG::AudioEmitterComponent::LoadBanks(UFG::AudioEmitterComponent
 // RVA: 0x58D380
 void __fastcall UFG::AudioEmitterComponent::UnloadBanks(UFG::AudioEmitterComponent *this)
 {
-  UFG::AudioEmitterComponent *v1; // rdi
-  __int64 v2; // rbx
+  __int64 i; // rbx
   UFG::qWiseSymbol *v3; // rcx
 
-  v1 = this;
   if ( this->m_bankLoadsRequested )
   {
-    v2 = 0i64;
-    if ( LODWORD(this->m_audioEmitterDefinition.mData[1].mBaseNode.mUID) )
+    for ( i = 0i64;
+          (unsigned int)i < LODWORD(this->m_audioEmitterDefinition.mData[1].mBaseNode.mUID);
+          i = (unsigned int)(i + 1) )
     {
-      do
-      {
-        v3 = (UFG::qWiseSymbol *)&v1->m_audioEmitterDefinition.mData[1].vfptr[6 * v2];
-        if ( v3[20].mUID == 5 )
-          UFG::SoundBankManager::QueueBankForUnload(v3 + 21);
-        v2 = (unsigned int)(v2 + 1);
-      }
-      while ( (unsigned int)v2 < LODWORD(v1->m_audioEmitterDefinition.mData[1].mBaseNode.mUID) );
+      v3 = (UFG::qWiseSymbol *)&this->m_audioEmitterDefinition.mData[1].vfptr[6 * i];
+      if ( v3[20].mUID == 5 )
+        UFG::SoundBankManager::QueueBankForUnload(v3 + 21);
     }
-    v1->m_bankLoadsRequested = 0;
+    this->m_bankLoadsRequested = 0;
   }
 }
 
@@ -234,72 +211,58 @@ void __fastcall UFG::AudioEmitterComponent::UnloadBanks(UFG::AudioEmitterCompone
 // RVA: 0x57F290
 char __fastcall UFG::AudioEmitterComponent::AreBanksLoaded(UFG::AudioEmitterComponent *this)
 {
-  UFG::AudioEmitterComponent *v1; // rsi
-  UFG::qReflectObject *v3; // rdx
+  UFG::qReflectObject *mData; // rdx
   __int64 v4; // rbx
-  char v5; // di
+  char i; // di
   UFG::qWiseSymbol *v6; // rcx
 
-  v1 = this;
   if ( !this->m_bankLoadsRequested )
     return 0;
-  v3 = this->m_audioEmitterDefinition.mData;
+  mData = this->m_audioEmitterDefinition.mData;
   v4 = 0i64;
-  v5 = 1;
-  if ( LODWORD(v3[1].mBaseNode.mUID) )
+  for ( i = 1; (unsigned int)v4 < LODWORD(mData[1].mBaseNode.mUID); v4 = (unsigned int)(v4 + 1) )
   {
-    do
-    {
-      v6 = (UFG::qWiseSymbol *)&v3[1].vfptr[6 * v4];
-      if ( v6[20].mUID == 5 )
-        v5 &= UFG::SoundBankManager::BankLoadRequestFinished(v6 + 21);
-      v3 = v1->m_audioEmitterDefinition.mData;
-      v4 = (unsigned int)(v4 + 1);
-    }
-    while ( (unsigned int)v4 < LODWORD(v3[1].mBaseNode.mUID) );
+    v6 = (UFG::qWiseSymbol *)&mData[1].vfptr[6 * v4];
+    if ( v6[20].mUID == 5 )
+      i &= UFG::SoundBankManager::BankLoadRequestFinished(v6 + 21);
+    mData = this->m_audioEmitterDefinition.mData;
   }
-  return v5;
+  return i;
 }
 
 // File Line: 147
 // RVA: 0x588690
 void __fastcall UFG::AudioEmitterComponent::PlayEvents(UFG::AudioEmitterComponent *this)
 {
-  UFG::AudioEmitterComponent *v1; // rdi
-  __int64 v2; // rsi
-  signed __int64 v3; // rbx
-  UFG::SimObject *v4; // rax
-  UFG::TransformNodeComponent *v5; // rbp
+  __int64 i; // rsi
+  UFG::qReflectObjectVtbl *v3; // rbx
+  UFG::SimObject *m_pSimObject; // rax
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rbp
 
-  v1 = this;
   if ( !this->m_eventsPlaying )
   {
-    v2 = 0i64;
-    if ( LODWORD(this->m_audioEmitterDefinition.mData[1].mBaseNode.mUID) )
+    for ( i = 0i64;
+          (unsigned int)i < LODWORD(this->m_audioEmitterDefinition.mData[1].mBaseNode.mUID);
+          i = (unsigned int)(i + 1) )
     {
-      do
+      v3 = &this->m_audioEmitterDefinition.mData[1].vfptr[6 * i];
+      if ( LODWORD(v3[5].__vecDelDtor) == 1 )
       {
-        v3 = (signed __int64)&v1->m_audioEmitterDefinition.mData[1].vfptr[6 * v2];
-        if ( *(_DWORD *)(v3 + 80) == 1 )
+        m_pSimObject = this->m_pSimObject;
+        if ( m_pSimObject )
+          m_pTransformNodeComponent = m_pSimObject->m_pTransformNodeComponent;
+        else
+          m_pTransformNodeComponent = 0i64;
+        if ( !UFG::OneShotHandle::IsValid(&this->m_oneShotHandle) )
         {
-          v4 = v1->m_pSimObject;
-          if ( v4 )
-            v5 = v4->m_pTransformNodeComponent;
-          else
-            v5 = 0i64;
-          if ( !UFG::OneShotHandle::IsValid(&v1->m_oneShotHandle) )
-          {
-            UFG::TransformNodeComponent::UpdateWorldTransform(v5);
-            UFG::OneShotPool::GetOneShotHandle(&v1->m_oneShotHandle, &v5->mWorldTransform);
-          }
-          if ( UFG::OneShotHandle::IsValid(&v1->m_oneShotHandle) )
-            UFG::OneShot::Play(v1->m_oneShotHandle.m_pOneShot, *(_DWORD *)(v3 + 84));
+          UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+          UFG::OneShotPool::GetOneShotHandle(&this->m_oneShotHandle, &m_pTransformNodeComponent->mWorldTransform);
         }
-        v2 = (unsigned int)(v2 + 1);
+        if ( UFG::OneShotHandle::IsValid(&this->m_oneShotHandle) )
+          UFG::OneShot::Play(this->m_oneShotHandle.m_pOneShot, HIDWORD(v3[5].__vecDelDtor));
       }
-      while ( (unsigned int)v2 < LODWORD(v1->m_audioEmitterDefinition.mData[1].mBaseNode.mUID) );
     }
-    v1->m_eventsPlaying = 1;
+    this->m_eventsPlaying = 1;
   }
 }
 

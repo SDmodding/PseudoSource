@@ -1,30 +1,28 @@
 // File Line: 28
 // RVA: 0xE79880
-void __fastcall hkDisplaySerializeOStream::hkDisplaySerializeOStream(hkDisplaySerializeOStream *this, hkStreamWriter *writer)
+void __fastcall hkDisplaySerializeOStream::hkDisplaySerializeOStream(
+        hkDisplaySerializeOStream *this,
+        hkStreamWriter *writer)
 {
-  hkDisplaySerializeOStream *v2; // rbx
-
-  v2 = this;
-  hkOArchive::hkOArchive((hkOArchive *)&this->vfptr, writer, 0);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkDisplaySerializeOStream::`vftable;
+  hkOArchive::hkOArchive(this, writer, 0);
+  this->vfptr = (hkBaseObjectVtbl *)&hkDisplaySerializeOStream::`vftable;
 }
 
 // File Line: 33
 // RVA: 0xE798B0
-void __fastcall hkDisplaySerializeOStream::hkDisplaySerializeOStream(hkDisplaySerializeOStream *this, hkArray<char,hkContainerHeapAllocator> *buf)
+void __fastcall hkDisplaySerializeOStream::hkDisplaySerializeOStream(
+        hkDisplaySerializeOStream *this,
+        hkArray<char,hkContainerHeapAllocator> *buf)
 {
-  hkDisplaySerializeOStream *v2; // rbx
-
-  v2 = this;
-  hkOArchive::hkOArchive((hkOArchive *)&this->vfptr, buf, 0);
-  v2->vfptr = (hkBaseObjectVtbl *)&hkDisplaySerializeOStream::`vftable;
+  hkOArchive::hkOArchive(this, buf, 0);
+  this->vfptr = (hkBaseObjectVtbl *)&hkDisplaySerializeOStream::`vftable;
 }
 
 // File Line: 37
 // RVA: 0xE798E0
 void __fastcall hkDisplaySerializeOStream::writeQuadVector4(hkDisplaySerializeOStream *this, hkVector4f *v)
 {
-  hkOArchive::writeArrayFloat32((hkOArchive *)&this->vfptr, v->m_quad.m128_f32, 3);
+  hkOArchive::writeArrayFloat32(this, v->m_quad.m128_f32, 3);
 }
 
 // File Line: 42
@@ -32,62 +30,52 @@ void __fastcall hkDisplaySerializeOStream::writeQuadVector4(hkDisplaySerializeOS
 void __fastcall hkDisplaySerializeOStream::writeTransform(hkDisplaySerializeOStream *this, hkTransformf *t)
 {
   hkVector4f v2; // xmm1
-  hkDisplaySerializeOStream *v3; // rbx
   hkVector4f v4; // xmm0
-  float array[4]; // [rsp+20h] [rbp-58h]
-  hkQuaternionf v6; // [rsp+30h] [rbp-48h]
-  hkRotationf r; // [rsp+40h] [rbp-38h]
+  float array[4]; // [rsp+20h] [rbp-58h] BYREF
+  hkQuaternionf v6; // [rsp+30h] [rbp-48h] BYREF
+  hkRotationf r; // [rsp+40h] [rbp-38h] BYREF
 
   v2.m_quad = (__m128)t->m_rotation.m_col1;
-  v3 = this;
-  _mm_store_si128((__m128i *)array, (__m128i)t->m_translation.m_quad);
+  *(hkVector4f *)array = t->m_translation;
   v4.m_quad = (__m128)t->m_rotation.m_col0;
   r.m_col1 = (hkVector4f)v2.m_quad;
   r.m_col0 = (hkVector4f)v4.m_quad;
   r.m_col2 = t->m_rotation.m_col2;
   hkRotationf::renormalize(&r);
   hkQuaternionf::set(&v6, &r);
-  hkOArchive::writeArrayFloat32((hkOArchive *)&v3->vfptr, array, 3);
-  hkOArchive::writeArrayFloat32((hkOArchive *)&v3->vfptr, v6.m_vec.m_quad.m128_f32, 4);
+  hkOArchive::writeArrayFloat32(this, array, 3);
+  hkOArchive::writeArrayFloat32(this, v6.m_vec.m_quad.m128_f32, 4);
 }
 
 // File Line: 62
 // RVA: 0xE79980
 void __fastcall hkDisplaySerializeOStream::writeTriangle(hkDisplaySerializeOStream *this, hkGeometry::Triangle *ti)
 {
-  hkGeometry::Triangle *v2; // rbx
-  hkDisplaySerializeOStream *v3; // rdi
-
-  v2 = ti;
-  v3 = this;
-  hkOArchive::write32((hkOArchive *)&this->vfptr, ti->m_a);
-  hkOArchive::write32((hkOArchive *)&v3->vfptr, v2->m_b);
-  hkOArchive::write32((hkOArchive *)&v3->vfptr, v2->m_c);
+  hkOArchive::write32(this, ti->m_a);
+  hkOArchive::write32(this, ti->m_b);
+  hkOArchive::write32(this, ti->m_c);
 }
 
 // File Line: 69
 // RVA: 0xE79A40
-void __fastcall hkDisplaySerializeOStream::writeVectorArray(hkDisplaySerializeOStream *this, hkArrayBase<hkVector4f> *v)
+void __fastcall hkDisplaySerializeOStream::writeVectorArray(
+        hkDisplaySerializeOStream *this,
+        hkArrayBase<hkVector4f> *v)
 {
-  __int64 v2; // rdi
-  hkArrayBase<hkVector4f> *v3; // rsi
-  hkDisplaySerializeOStream *v4; // rbp
+  __int64 m_size; // rdi
   __int64 v5; // rbx
 
-  v2 = (unsigned int)v->m_size;
-  v3 = v;
-  v4 = this;
-  hkOArchive::write32((hkOArchive *)&this->vfptr, v->m_size);
-  if ( (signed int)v2 > 0 )
+  m_size = (unsigned int)v->m_size;
+  hkOArchive::write32(this, v->m_size);
+  if ( (int)m_size > 0 )
   {
     v5 = 0i64;
     do
     {
-      hkDisplaySerializeOStream::writeQuadVector4(v4, &v3->m_data[v5]);
-      ++v5;
-      --v2;
+      hkDisplaySerializeOStream::writeQuadVector4(this, &v->m_data[v5++]);
+      --m_size;
     }
-    while ( v2 );
+    while ( m_size );
   }
 }
 
@@ -95,26 +83,21 @@ void __fastcall hkDisplaySerializeOStream::writeVectorArray(hkDisplaySerializeOS
 // RVA: 0xE799C0
 void __fastcall hkDisplaySerializeOStream::writeGeometry(hkDisplaySerializeOStream *this, hkGeometry *g)
 {
-  hkGeometry *v2; // rsi
-  hkDisplaySerializeOStream *v3; // rbp
-  __int64 v4; // rdi
+  __int64 m_size; // rdi
   __int64 v5; // rbx
 
-  v2 = g;
-  v3 = this;
-  hkDisplaySerializeOStream::writeVectorArray(this, (hkArrayBase<hkVector4f> *)&g->m_vertices.m_data);
-  v4 = (unsigned int)v2->m_triangles.m_size;
-  hkOArchive::write32((hkOArchive *)&v3->vfptr, v2->m_triangles.m_size);
-  if ( (signed int)v4 > 0 )
+  hkDisplaySerializeOStream::writeVectorArray(this, &g->m_vertices);
+  m_size = (unsigned int)g->m_triangles.m_size;
+  hkOArchive::write32(this, g->m_triangles.m_size);
+  if ( (int)m_size > 0 )
   {
     v5 = 0i64;
     do
     {
-      hkDisplaySerializeOStream::writeTriangle(v3, &v2->m_triangles.m_data[v5]);
-      ++v5;
-      --v4;
+      hkDisplaySerializeOStream::writeTriangle(this, &g->m_triangles.m_data[v5++]);
+      --m_size;
     }
-    while ( v4 );
+    while ( m_size );
   }
 }
 
@@ -122,9 +105,7 @@ void __fastcall hkDisplaySerializeOStream::writeGeometry(hkDisplaySerializeOStre
 // RVA: 0xE79EC0
 __int64 __fastcall hkDisplaySerializeOStream::computeBytesRequired(hkGeometry *g)
 {
-  return hkDisplaySerializeOStream::computeBytesRequired((hkArrayBase<hkVector4f> *)&g->m_vertices.m_data)
-       + 12 * g->m_triangles.m_size
-       + 4;
+  return hkDisplaySerializeOStream::computeBytesRequired(&g->m_vertices) + 12 * g->m_triangles.m_size + 4;
 }
 
 // File Line: 106
@@ -136,134 +117,130 @@ __int64 __fastcall hkDisplaySerializeOStream::computeBytesRequired(hkArrayBase<h
 
 // File Line: 113
 // RVA: 0xE79AB0
-void __fastcall hkDisplaySerializeOStream::writeDisplayGeometry(hkDisplaySerializeOStream *this, hkDisplayGeometry *dg)
+void __fastcall hkDisplaySerializeOStream::writeDisplayGeometry(hkDisplaySerializeOStream *this, hkDisplayAABB *dg)
 {
-  hkDisplayGeometryType v2; // ebx
-  unsigned __int128 v3; // di
-  hkVector4f *v4; // rax
-  hkVector4f *v5; // rax
-  hkVector4f *v6; // rax
-  hkVector4f *v7; // rax
-  float v8; // xmm0_4
-  float v9; // xmm0_4
-  int v10; // eax
-  hkVector4f *v11; // rax
-  hkVector4f *v12; // rax
-  hkVector4f *v13; // rax
-  float v14; // xmm0_4
-  float v15; // xmm0_4
-  float v16; // xmm0_4
-  int v17; // eax
-  hkVector4f *v18; // rax
+  hkDisplayGeometryType m_type; // ebx
+  hkVector4f *MinExtent; // rax
+  hkVector4f *MaxExtent; // rax
+  hkVector4f *Position; // rax
+  hkVector4f *Axis; // rax
+  float Angle; // xmm0_4
+  float Height; // xmm0_4
+  int NumSegments; // eax
+  hkVector4f *Center; // rax
+  hkVector4f *Normal; // rax
+  hkVector4f *Perp; // rax
+  float Radius; // xmm0_4
+  float ThetaMin; // xmm0_4
+  float ThetaMax; // xmm0_4
+  int v18; // eax
   hkVector4f *v19; // rax
   hkVector4f *v20; // rax
-  hkVector4f *v21; // rax
-  int v22; // eax
-  unsigned int v23; // ebx
-  const char *v24; // rax
-  hkVector4f v; // [rsp+20h] [rbp-68h]
-  hkVector4f result; // [rsp+30h] [rbp-58h]
-  hkVector4f v27; // [rsp+40h] [rbp-48h]
-  hkVector4f v28; // [rsp+50h] [rbp-38h]
-  hkVector4f v29; // [rsp+60h] [rbp-28h]
-  hkVector4f v30; // [rsp+70h] [rbp-18h]
+  hkVector4f *PerpToNormal; // rax
+  hkVector4f *Extents; // rax
+  int SeriaizedMeshDataSize; // eax
+  unsigned int v24; // ebx
+  const char *SeriaizedMeshData; // rax
+  hkVector4f v; // [rsp+20h] [rbp-68h] BYREF
+  hkVector4f result; // [rsp+30h] [rbp-58h] BYREF
+  hkVector4f v28; // [rsp+40h] [rbp-48h] BYREF
+  hkVector4f v29; // [rsp+50h] [rbp-38h] BYREF
+  hkVector4f v30; // [rsp+60h] [rbp-28h] BYREF
+  hkVector4f v31; // [rsp+70h] [rbp-18h] BYREF
 
-  v2 = dg->m_type;
-  v3 = __PAIR__((unsigned __int64)this, (unsigned __int64)dg);
-  hkOArchive::write8((hkOArchive *)&this->vfptr, dg->m_type);
-  switch ( v2 )
+  m_type = dg->m_type;
+  hkOArchive::write8(this, m_type);
+  switch ( m_type )
   {
-    case 1:
-      hkDisplaySerializeOStream::writeTransform(*((hkDisplaySerializeOStream **)&v3 + 1), (hkTransformf *)(v3 + 32));
-      v.m_quad = *(__m128 *)(v3 + 112);
-      hkOArchive::writeFloat32(*((hkOArchive **)&v3 + 1), *(float *)(v3 + 124));
-      hkDisplaySerializeOStream::writeQuadVector4(*((hkDisplaySerializeOStream **)&v3 + 1), &v);
-      hkOArchive::write32(*((hkOArchive **)&v3 + 1), *(_DWORD *)(v3 + 128));
-      hkOArchive::write32(*((hkOArchive **)&v3 + 1), *(_DWORD *)(v3 + 132));
+    case HK_DISPLAY_SPHERE:
+      hkDisplaySerializeOStream::writeTransform(this, &dg->m_transform);
+      v.m_quad = (__m128)dg->m_minExtent;
+      hkOArchive::writeFloat32(this, dg->m_minExtent.m_quad.m128_f32[3]);
+      hkDisplaySerializeOStream::writeQuadVector4(this, &v);
+      hkOArchive::write32(this, dg->m_maxExtent.m_quad.m128_i32[0]);
+      hkOArchive::write32(this, dg->m_maxExtent.m_quad.m128_i32[1]);
       break;
-    case 2:
-      hkDisplaySerializeOStream::writeTransform(*((hkDisplaySerializeOStream **)&v3 + 1), (hkTransformf *)(v3 + 32));
-      hkDisplaySerializeOStream::writeQuadVector4(*((hkDisplaySerializeOStream **)&v3 + 1), (hkVector4f *)(v3 + 112));
+    case HK_DISPLAY_BOX:
+      hkDisplaySerializeOStream::writeTransform(this, &dg->m_transform);
+      hkDisplaySerializeOStream::writeQuadVector4(this, &dg->m_minExtent);
       break;
-    case 3:
-      v4 = hkDisplayAABB::getMinExtent((hkDisplayAABB *)v3);
-      hkDisplaySerializeOStream::writeQuadVector4(*((hkDisplaySerializeOStream **)&v3 + 1), v4);
-      v5 = hkDisplayAABB::getMaxExtent((hkDisplayAABB *)v3);
-      hkDisplaySerializeOStream::writeQuadVector4(*((hkDisplaySerializeOStream **)&v3 + 1), v5);
+    case HK_DISPLAY_AABB:
+      MinExtent = hkDisplayAABB::getMinExtent(dg);
+      hkDisplaySerializeOStream::writeQuadVector4(this, MinExtent);
+      MaxExtent = hkDisplayAABB::getMaxExtent(dg);
+      hkDisplaySerializeOStream::writeQuadVector4(this, MaxExtent);
       break;
-    case 4:
-      v6 = hkDisplayCone::getPosition((hkDisplayCone *)v3, &result);
-      hkDisplaySerializeOStream::writeQuadVector4(*((hkDisplaySerializeOStream **)&v3 + 1), v6);
-      v7 = hkDisplayCone::getAxis((hkDisplayCone *)v3, &v27);
-      hkDisplaySerializeOStream::writeQuadVector4(*((hkDisplaySerializeOStream **)&v3 + 1), v7);
-      v8 = hkDisplayCone::getAngle((hkDisplayCone *)v3);
-      hkOArchive::writeFloat32(*((hkOArchive **)&v3 + 1), v8);
-      v9 = hkDisplayCone::getHeight((hkDisplayCone *)v3);
-      hkOArchive::writeFloat32(*((hkOArchive **)&v3 + 1), v9);
-      v10 = hkDisplayCone::getNumSegments((hkDisplayCone *)v3);
-      hkOArchive::write32(*((hkOArchive **)&v3 + 1), v10);
+    case HK_DISPLAY_CONE:
+      Position = hkDisplayCone::getPosition((hkDisplayCone *)dg, &result);
+      hkDisplaySerializeOStream::writeQuadVector4(this, Position);
+      Axis = hkDisplayCone::getAxis((hkDisplayCone *)dg, &v28);
+      hkDisplaySerializeOStream::writeQuadVector4(this, Axis);
+      Angle = hkDisplayCone::getAngle((hkDisplayCone *)dg);
+      hkOArchive::writeFloat32(this, Angle);
+      Height = hkDisplayCone::getHeight((hkDisplayCone *)dg);
+      hkOArchive::writeFloat32(this, Height);
+      NumSegments = hkDisplayCone::getNumSegments((hkDisplayCone *)dg);
+      hkOArchive::write32(this, NumSegments);
       break;
-    case 5:
-      v11 = hkDisplaySemiCircle::getCenter((hkDisplaySemiCircle *)v3, &v28);
-      hkDisplaySerializeOStream::writeQuadVector4(*((hkDisplaySerializeOStream **)&v3 + 1), v11);
-      v12 = hkDisplaySemiCircle::getNormal((hkDisplaySemiCircle *)v3, &v29);
-      hkDisplaySerializeOStream::writeQuadVector4(*((hkDisplaySerializeOStream **)&v3 + 1), v12);
-      v13 = hkDisplaySemiCircle::getPerp((hkDisplaySemiCircle *)v3, &v30);
-      hkDisplaySerializeOStream::writeQuadVector4(*((hkDisplaySerializeOStream **)&v3 + 1), v13);
-      v14 = hkDisplaySemiCircle::getRadius((hkDisplaySemiCircle *)v3);
-      hkOArchive::writeFloat32(*((hkOArchive **)&v3 + 1), v14);
-      v15 = hkDisplaySemiCircle::getThetaMin((hkDisplaySemiCircle *)v3);
-      hkOArchive::writeFloat32(*((hkOArchive **)&v3 + 1), v15);
-      v16 = hkDisplaySemiCircle::getThetaMax((hkDisplaySemiCircle *)v3);
-      hkOArchive::writeFloat32(*((hkOArchive **)&v3 + 1), v16);
-      v17 = hkDisplaySemiCircle::getNumSegments((hkDisplaySemiCircle *)v3);
-      hkOArchive::write32(*((hkOArchive **)&v3 + 1), v17);
+    case HK_DISPLAY_SEMICIRCLE:
+      Center = hkDisplaySemiCircle::getCenter((hkDisplaySemiCircle *)dg, &v29);
+      hkDisplaySerializeOStream::writeQuadVector4(this, Center);
+      Normal = hkDisplaySemiCircle::getNormal((hkDisplaySemiCircle *)dg, &v30);
+      hkDisplaySerializeOStream::writeQuadVector4(this, Normal);
+      Perp = hkDisplaySemiCircle::getPerp((hkDisplaySemiCircle *)dg, &v31);
+      hkDisplaySerializeOStream::writeQuadVector4(this, Perp);
+      Radius = hkDisplaySemiCircle::getRadius((hkDisplaySemiCircle *)dg);
+      hkOArchive::writeFloat32(this, Radius);
+      ThetaMin = hkDisplaySemiCircle::getThetaMin((hkDisplaySemiCircle *)dg);
+      hkOArchive::writeFloat32(this, ThetaMin);
+      ThetaMax = hkDisplaySemiCircle::getThetaMax((hkDisplaySemiCircle *)dg);
+      hkOArchive::writeFloat32(this, ThetaMax);
+      v18 = hkDisplaySemiCircle::getNumSegments((hkDisplaySemiCircle *)dg);
+      hkOArchive::write32(this, v18);
       break;
-    case 6:
-      hkDisplaySerializeOStream::writeTransform(*((hkDisplaySerializeOStream **)&v3 + 1), (hkTransformf *)(v3 + 32));
-      hkDisplaySerializeOStream::writeGeometry(*((hkDisplaySerializeOStream **)&v3 + 1), *(hkGeometry **)(v3 + 16));
+    case HK_DISPLAY_CONVEX:
+      hkDisplaySerializeOStream::writeTransform(this, &dg->m_transform);
+      hkDisplaySerializeOStream::writeGeometry(this, dg->m_geometry);
       break;
-    case 7:
-      v18 = hkDisplayPlane::getCenter((hkDisplayPlane *)v3);
-      hkDisplaySerializeOStream::writeQuadVector4(*((hkDisplaySerializeOStream **)&v3 + 1), v18);
-      v19 = hkDisplayPlane::getNormal((hkDisplayPlane *)v3);
-      hkDisplaySerializeOStream::writeQuadVector4(*((hkDisplaySerializeOStream **)&v3 + 1), v19);
-      v20 = hkDisplayPlane::getPerpToNormal((hkDisplayPlane *)v3);
-      hkDisplaySerializeOStream::writeQuadVector4(*((hkDisplaySerializeOStream **)&v3 + 1), v20);
-      v21 = hkDisplayPlane::getExtents((hkDisplayPlane *)v3);
-      hkOArchive::writeFloat32(*((hkOArchive **)&v3 + 1), v21->m_quad.m128_f32[0]);
+    case HK_DISPLAY_PLANE:
+      v19 = hkDisplayPlane::getCenter((hkDisplayPlane *)dg);
+      hkDisplaySerializeOStream::writeQuadVector4(this, v19);
+      v20 = hkDisplayPlane::getNormal((hkDisplayPlane *)dg);
+      hkDisplaySerializeOStream::writeQuadVector4(this, v20);
+      PerpToNormal = hkDisplayPlane::getPerpToNormal((hkDisplayPlane *)dg);
+      hkDisplaySerializeOStream::writeQuadVector4(this, PerpToNormal);
+      Extents = hkDisplayPlane::getExtents((hkDisplayPlane *)dg);
+      hkOArchive::writeFloat32(this, Extents->m_quad.m128_f32[0]);
       break;
-    case 8:
-    case 9:
-      hkDisplaySerializeOStream::writeTransform(*((hkDisplaySerializeOStream **)&v3 + 1), (hkTransformf *)(v3 + 32));
-      hkOArchive::writeFloat32(*((hkOArchive **)&v3 + 1), *(float *)(v3 + 144));
-      hkDisplaySerializeOStream::writeQuadVector4(*((hkDisplaySerializeOStream **)&v3 + 1), (hkVector4f *)(v3 + 112));
-      hkDisplaySerializeOStream::writeQuadVector4(*((hkDisplaySerializeOStream **)&v3 + 1), (hkVector4f *)(v3 + 128));
-      hkOArchive::write32(*((hkOArchive **)&v3 + 1), *(_DWORD *)(v3 + 148));
-      hkOArchive::write32(*((hkOArchive **)&v3 + 1), *(_DWORD *)(v3 + 152));
+    case HK_DISPLAY_CAPSULE:
+    case HK_DISPLAY_CYLINDER:
+      hkDisplaySerializeOStream::writeTransform(this, &dg->m_transform);
+      hkOArchive::writeFloat32(this, *(float *)&dg[1].vfptr);
+      hkDisplaySerializeOStream::writeQuadVector4(this, &dg->m_minExtent);
+      hkDisplaySerializeOStream::writeQuadVector4(this, &dg->m_maxExtent);
+      hkOArchive::write32(this, HIDWORD(dg[1].vfptr));
+      hkOArchive::write32(this, *(_DWORD *)&dg[1].m_memSizeAndFlags);
       break;
-    case 10:
-      hkDisplaySerializeOStream::writeTransform(*((hkDisplaySerializeOStream **)&v3 + 1), (hkTransformf *)(v3 + 32));
-      hkOArchive::writeFloat32(*((hkOArchive **)&v3 + 1), *(float *)(v3 + 148));
-      hkOArchive::writeFloat32(*((hkOArchive **)&v3 + 1), *(float *)(v3 + 144));
-      hkDisplaySerializeOStream::writeQuadVector4(*((hkDisplaySerializeOStream **)&v3 + 1), (hkVector4f *)(v3 + 112));
-      hkDisplaySerializeOStream::writeQuadVector4(*((hkDisplaySerializeOStream **)&v3 + 1), (hkVector4f *)(v3 + 128));
-      hkOArchive::write32(*((hkOArchive **)&v3 + 1), *(_DWORD *)(v3 + 152));
-      hkOArchive::write32(*((hkOArchive **)&v3 + 1), *(_DWORD *)(v3 + 156));
+    case HK_DISPLAY_TAPERED_CAPSULE:
+      hkDisplaySerializeOStream::writeTransform(this, &dg->m_transform);
+      hkOArchive::writeFloat32(this, *((float *)&dg[1].vfptr + 1));
+      hkOArchive::writeFloat32(this, *(float *)&dg[1].vfptr);
+      hkDisplaySerializeOStream::writeQuadVector4(this, &dg->m_minExtent);
+      hkDisplaySerializeOStream::writeQuadVector4(this, &dg->m_maxExtent);
+      hkOArchive::write32(this, *(_DWORD *)&dg[1].m_memSizeAndFlags);
+      hkOArchive::write32(this, *(_DWORD *)(&dg[1].m_referenceCount + 1));
       break;
-    case 11:
-      v22 = hkDisplayMesh::getSeriaizedMeshDataSize((hkDisplayMesh *)v3);
-      hkOArchive::write32(*((hkOArchive **)&v3 + 1), v22);
-      v23 = hkDisplayMesh::getSeriaizedMeshDataSize((hkDisplayMesh *)v3);
-      v24 = hkDisplayMesh::getSeriaizedMeshData((hkDisplayMesh *)v3);
-      hkOArchive::writeRaw(*((hkOArchive **)&v3 + 1), v24, v23);
-      hkDisplayMesh::freeSerializedMeshData((hkDisplayMesh *)v3);
+    case HK_DISPLAY_MESH:
+      SeriaizedMeshDataSize = hkDisplayMesh::getSeriaizedMeshDataSize((hkDisplayMesh *)dg);
+      hkOArchive::write32(this, SeriaizedMeshDataSize);
+      v24 = hkDisplayMesh::getSeriaizedMeshDataSize((hkDisplayMesh *)dg);
+      SeriaizedMeshData = hkDisplayMesh::getSeriaizedMeshData((hkDisplayMesh *)dg);
+      hkOArchive::writeRaw(this, SeriaizedMeshData, v24);
+      hkDisplayMesh::freeSerializedMeshData((hkDisplayMesh *)dg);
       break;
-    case 12:
-      hkDisplaySerializeOStream::writeTransform(*((hkDisplaySerializeOStream **)&v3 + 1), (hkTransformf *)(v3 + 32));
-      hkDisplaySerializeOStream::writeVectorArray(
-        *((hkDisplaySerializeOStream **)&v3 + 1),
-        (hkArrayBase<hkVector4f> *)(v3 + 112));
+    case HK_DISPLAY_WIREFRAME:
+      hkDisplaySerializeOStream::writeTransform(this, &dg->m_transform);
+      hkDisplaySerializeOStream::writeVectorArray(this, (hkArrayBase<hkVector4f> *)&dg->m_minExtent);
       break;
     default:
       return;
@@ -272,46 +249,44 @@ void __fastcall hkDisplaySerializeOStream::writeDisplayGeometry(hkDisplaySeriali
 
 // File Line: 250
 // RVA: 0xE79F10
-signed __int64 __fastcall hkDisplaySerializeOStream::computeBytesRequired(hkDisplayGeometry *dg)
+__int64 __fastcall hkDisplaySerializeOStream::computeBytesRequired(hkDisplayMesh *dg)
 {
-  hkDisplayMesh *v1; // rbx
-  unsigned int v2; // er8
-  signed __int64 result; // rax
+  unsigned int v2; // r8d
+  __int64 result; // rax
 
-  v1 = (hkDisplayMesh *)dg;
   v2 = 1;
   switch ( dg->m_type )
   {
-    case 1:
-    case 5:
+    case HK_DISPLAY_SPHERE:
+    case HK_DISPLAY_SEMICIRCLE:
       result = 53i64;
       break;
-    case 2:
-    case 7:
+    case HK_DISPLAY_BOX:
+    case HK_DISPLAY_PLANE:
       result = 41i64;
       break;
-    case 3:
+    case HK_DISPLAY_AABB:
       result = 25i64;
       break;
-    case 4:
+    case HK_DISPLAY_CONE:
       result = 37i64;
       break;
-    case 6:
+    case HK_DISPLAY_CONVEX:
       result = (unsigned int)hkDisplaySerializeOStream::computeBytesRequired(dg->m_geometry) + 29;
       break;
-    case 8:
-    case 9:
+    case HK_DISPLAY_CAPSULE:
+    case HK_DISPLAY_CYLINDER:
       result = 65i64;
       break;
-    case 0xA:
+    case HK_DISPLAY_TAPERED_CAPSULE:
       result = 69i64;
       break;
-    case 0xB:
-      hkDisplayMesh::serializeMeshData((hkDisplayMesh *)dg);
-      result = (unsigned int)(hkDisplayMesh::getSeriaizedMeshDataSize(v1) + 5);
+    case HK_DISPLAY_MESH:
+      hkDisplayMesh::serializeMeshData(dg);
+      result = (unsigned int)(hkDisplayMesh::getSeriaizedMeshDataSize(dg) + 5);
       break;
-    case 0xC:
-      v2 = (unsigned __int64)hkDisplaySerializeOStream::computeBytesRequired((hkArrayBase<hkVector4f> *)&dg[1]) + 29;
+    case HK_DISPLAY_WIREFRAME:
+      v2 = hkDisplaySerializeOStream::computeBytesRequired((hkArrayBase<hkVector4f> *)&dg->m_mesh) + 29;
       goto LABEL_11;
     default:
 LABEL_11:
@@ -325,19 +300,14 @@ LABEL_11:
 // RVA: 0xE79E70
 void __fastcall hkDisplaySerializeOStream::writeHash(hkDisplaySerializeOStream *this, const unsigned __int64 *hash)
 {
-  hkOArchive::write64u((hkOArchive *)&this->vfptr, *hash);
+  hkOArchive::write64u(this, *hash);
 }
 
 // File Line: 403
 // RVA: 0xE79E80
 void __fastcall hkDisplaySerializeOStream::writeAabb(hkDisplaySerializeOStream *this, hkAabb *aabb)
 {
-  hkAabb *v2; // rbx
-  hkDisplaySerializeOStream *v3; // rdi
-
-  v2 = aabb;
-  v3 = this;
   hkDisplaySerializeOStream::writeQuadVector4(this, &aabb->m_min);
-  hkDisplaySerializeOStream::writeQuadVector4(v3, &v2->m_max);
+  hkDisplaySerializeOStream::writeQuadVector4(this, &aabb->m_max);
 }
 

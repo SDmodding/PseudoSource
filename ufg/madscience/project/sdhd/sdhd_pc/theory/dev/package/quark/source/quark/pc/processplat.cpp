@@ -7,6 +7,7 @@ void __fastcall UFG::qMutex::qMutex(UFG::qMutex *this, const char *name)
 
 // File Line: 86
 // RVA: 0xA38CA0
+// attributes: thunk
 void __stdcall UFG::qMutex::Lock(LPCRITICAL_SECTION lpCriticalSection)
 {
   EnterCriticalSection(lpCriticalSection);
@@ -14,6 +15,7 @@ void __stdcall UFG::qMutex::Lock(LPCRITICAL_SECTION lpCriticalSection)
 
 // File Line: 96
 // RVA: 0xA397C0
+// attributes: thunk
 void __stdcall UFG::qMutex::Unlock(LPCRITICAL_SECTION lpCriticalSection)
 {
   LeaveCriticalSection(lpCriticalSection);
@@ -25,7 +27,7 @@ void __fastcall UFG::qEvent::qEvent(UFG::qEvent *this, const char *name, bool au
 {
   this->mName = name;
   this->mAutoReset = auto_reset;
-  this->mHandlePlat = CreateEventA(0i64, auto_reset == 0, 0, 0i64);
+  this->mHandlePlat = CreateEventA(0i64, !auto_reset, 0, 0i64);
 }
 
 // File Line: 123
@@ -40,14 +42,12 @@ void __fastcall UFG::qEvent::qEvent(UFG::qEvent *this)
 // RVA: 0xA37740
 void __fastcall UFG::qEvent::~qEvent(UFG::qEvent *this)
 {
-  UFG::qEvent *v1; // rbx
-  void *v2; // rcx
+  void *mHandlePlat; // rcx
 
-  v1 = this;
-  v2 = this->mHandlePlat;
-  if ( v2 != (void *)-1i64 )
-    CloseHandle(v2);
-  v1->mHandlePlat = (void *)-1i64;
+  mHandlePlat = this->mHandlePlat;
+  if ( mHandlePlat != (void *)-1i64 )
+    CloseHandle(mHandlePlat);
+  this->mHandlePlat = (void *)-1i64;
 }
 
 // File Line: 134
@@ -56,7 +56,7 @@ void __fastcall UFG::qEvent::Create(UFG::qEvent *this, const char *name, bool au
 {
   this->mName = name;
   this->mAutoReset = auto_reset;
-  this->mHandlePlat = CreateEventA(0i64, auto_reset == 0, 0, 0i64);
+  this->mHandlePlat = CreateEventA(0i64, !auto_reset, 0, 0i64);
 }
 
 // File Line: 152
@@ -84,12 +84,7 @@ bool __fastcall UFG::qEvent::Wait(UFG::qEvent *this)
 // RVA: 0xA398F0
 bool __fastcall UFG::qEvent::Wait(UFG::qEvent *this, unsigned __int64 micro_seconds)
 {
-  return WaitForSingleObject(
-           this->mHandlePlat,
-           (unsigned __int64)(((unsigned __int64)(micro_seconds
-                                                + 999
-                                                - ((micro_seconds + 999) * (unsigned __int128)0x624DD2F1A9FBE77ui64 >> 64)) >> 1)
-                            + ((micro_seconds + 999) * (unsigned __int128)0x624DD2F1A9FBE77ui64 >> 64)) >> 9) == 0;
+  return WaitForSingleObject(this->mHandlePlat, (micro_seconds + 999) / 0x3E8) == 0;
 }
 
 // File Line: 271
@@ -131,90 +126,84 @@ void __fastcall UFG::qBaseNodeRB::SetUID(UFG::qBaseNodeRB *this, unsigned int ui
 // RVA: 0xA39480
 bool __fastcall UFG::qThread::SetThreadPriority(UFG::qThread *this, int priority)
 {
-  void *v2; // rcx
-  bool result; // al
+  void *mHandlePlat; // rcx
 
   this->mPriority = priority;
-  v2 = this->mHandlePlat;
+  mHandlePlat = this->mHandlePlat;
   if ( priority == -1 )
     priority = UFG::qThread::mDefaultThreadPriority;
-  if ( v2 == (void *)-1i64 )
-    result = 1;
-  else
-    result = SetThreadPriority(v2, priority) != 0;
-  return result;
+  return mHandlePlat == (void *)-1i64 || SetThreadPriority(mHandlePlat, priority);
 }
 
 // File Line: 332
 // RVA: 0xA39440
-bool __fastcall UFG::qThread::SetLogicalCoreID(UFG::qThread *this, int logical_core_id)
+bool __fastcall UFG::qThread::SetLogicalCoreID(UFG::qThread *this, DWORD logical_core_id)
 {
-  void *v2; // rcx
-  bool result; // al
+  void *mHandlePlat; // rcx
 
   this->mLogicalCoreID = logical_core_id;
-  v2 = this->mHandlePlat;
-  if ( v2 == (void *)-1i64 || logical_core_id == -1 )
-    result = 1;
-  else
-    result = SetThreadIdealProcessor(v2, logical_core_id) != 0;
-  return result;
+  mHandlePlat = this->mHandlePlat;
+  return mHandlePlat == (void *)-1i64
+      || logical_core_id == -1
+      || SetThreadIdealProcessor(mHandlePlat, logical_core_id) != 0;
 }
 
 // File Line: 352
 // RVA: 0xA394D0
 void __fastcall UFG::qThread::Start(UFG::qThread *this, void (__fastcall *thread_function)(void *), void *thread_param)
 {
-  int v3; // er9
-  UFG::qThread *v4; // rbx
-  HANDLE v5; // rax
-  int v6; // edx
-  void *v7; // rcx
-  DWORD v8; // edx
+  int mStacksize; // r9d
+  HANDLE Thread; // rax
+  int mPriority; // edx
+  void *mHandlePlat; // rcx
+  int mLogicalCoreID; // edx
 
-  v3 = this->mStacksize;
+  mStacksize = this->mStacksize;
   this->mThreadFunction = thread_function;
   this->mThreadParam = thread_param;
-  if ( v3 <= 0 )
-    v3 = UFG::qThread::mDefaultThreadStackSize;
-  v4 = this;
-  v5 = CreateThread(0i64, v3, (LPTHREAD_START_ROUTINE)thread_function, thread_param, 0, &this->mThreadIDPlat);
-  v6 = v4->mPriority;
-  v4->mHandlePlat = v5;
-  if ( v6 == -1 )
-    v6 = UFG::qThread::mDefaultThreadPriority;
-  if ( v5 != (HANDLE)-1i64 )
-    SetThreadPriority(v5, v6);
-  v7 = v4->mHandlePlat;
-  v8 = v4->mLogicalCoreID;
-  if ( v7 != (void *)-1i64 && v8 != -1 )
-    SetThreadIdealProcessor(v7, v8);
+  if ( mStacksize <= 0 )
+    mStacksize = UFG::qThread::mDefaultThreadStackSize;
+  Thread = CreateThread(
+             0i64,
+             mStacksize,
+             (LPTHREAD_START_ROUTINE)thread_function,
+             thread_param,
+             0,
+             &this->mThreadIDPlat);
+  mPriority = this->mPriority;
+  this->mHandlePlat = Thread;
+  if ( mPriority == -1 )
+    mPriority = UFG::qThread::mDefaultThreadPriority;
+  if ( Thread != (HANDLE)-1i64 )
+    SetThreadPriority(Thread, mPriority);
+  mHandlePlat = this->mHandlePlat;
+  mLogicalCoreID = this->mLogicalCoreID;
+  if ( mHandlePlat != (void *)-1i64 && mLogicalCoreID != -1 )
+    SetThreadIdealProcessor(mHandlePlat, mLogicalCoreID);
 }
 
 // File Line: 368
 // RVA: 0xA39560
 void __fastcall UFG::qThread::Stop(UFG::qThread *this)
 {
-  UFG::qThread *v1; // rbx
-  void *v2; // rcx
-  unsigned int ExitCode; // [rsp+30h] [rbp+8h]
+  void *mHandlePlat; // rcx
+  unsigned int ExitCode; // [rsp+30h] [rbp+8h] BYREF
 
-  v1 = this;
-  v2 = this->mHandlePlat;
-  if ( v2 != (void *)-1i64 )
+  mHandlePlat = this->mHandlePlat;
+  if ( mHandlePlat != (void *)-1i64 )
   {
-    GetExitCodeThread(v2, &ExitCode);
+    GetExitCodeThread(mHandlePlat, &ExitCode);
     if ( ExitCode == 259 )
     {
       UFG::qPrintf(
         "ERROR: Thread is still active at shutdown!!  Forcefully stopping a thread like this will almost certainly screw "
         "the OS!  thread=0x%08x - %s\n",
-        v1->mHandlePlat,
-        v1->mName);
-      TerminateThread(v1->mHandlePlat, 0);
+        this->mHandlePlat,
+        this->mName);
+      TerminateThread(this->mHandlePlat, 0);
     }
-    CloseHandle(v1->mHandlePlat);
-    v1->mHandlePlat = (void *)-1i64;
+    CloseHandle(this->mHandlePlat);
+    this->mHandlePlat = (void *)-1i64;
   }
 }
 
@@ -222,15 +211,10 @@ void __fastcall UFG::qThread::Stop(UFG::qThread *this)
 // RVA: 0xA39930
 bool __fastcall UFG::qThread::WaitForCompletion(UFG::qThread *this)
 {
-  void *v1; // rcx
-  bool result; // al
+  void *mHandlePlat; // rcx
 
-  v1 = this->mHandlePlat;
-  if ( v1 == (void *)-1i64 )
-    result = 1;
-  else
-    result = WaitForSingleObject(v1, 0xFFFFFFFF) == 0;
-  return result;
+  mHandlePlat = this->mHandlePlat;
+  return mHandlePlat == (void *)-1i64 || WaitForSingleObject(mHandlePlat, 0xFFFFFFFF) == 0;
 }
 
 // File Line: 438
@@ -251,10 +235,10 @@ __int64 __fastcall UFG::qAtomicDecrement(volatile int *v)
 // RVA: 0xA399B0
 __int64 __fastcall UFG::qAtomicAdd(volatile int *v, int add_amount)
 {
-  volatile int v2; // er8
-  unsigned __int32 v3; // er9
+  int v2; // r8d
+  unsigned __int32 v3; // r9d
 
-  __asm { prefetchw byte ptr [rcx]; Prefetch processor cache line into L1 data cache (mark as modified) }
+  _m_prefetchw((const void *)v);
   do
   {
     v2 = *v;
@@ -266,6 +250,7 @@ __int64 __fastcall UFG::qAtomicAdd(volatile int *v, int add_amount)
 
 // File Line: 594
 // RVA: 0xA3A4C0
+// attributes: thunk
 void __stdcall UFG::qSleep(DWORD dwMilliseconds)
 {
   Sleep(dwMilliseconds);
@@ -283,7 +268,7 @@ unsigned __int64 __fastcall UFG::qGetCurrentThreadID()
 __int64 UFG::_dynamic_initializer_for__gExecutableFilenameMutex__()
 {
   InitializeCriticalSectionAndSpinCount((LPCRITICAL_SECTION)&UFG::gExecutableFilenameMutex, 0xFA0u);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gExecutableFilenameMutex__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gExecutableFilenameMutex__);
 }
 
 // File Line: 1092
@@ -291,7 +276,7 @@ __int64 UFG::_dynamic_initializer_for__gExecutableFilenameMutex__()
 __int64 UFG::_dynamic_initializer_for__gExceptionMutex__()
 {
   InitializeCriticalSectionAndSpinCount((LPCRITICAL_SECTION)&gExceptionMutex, 0xFA0u);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gExceptionMutex__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gExceptionMutex__);
 }
 
 // File Line: 1432
@@ -299,29 +284,25 @@ __int64 UFG::_dynamic_initializer_for__gExceptionMutex__()
 __int64 UFG::_dynamic_initializer_for__gCallstackDone__()
 {
   UFG::gCallstackDone.mHandlePlat = CreateEventA(0i64, 0, 0, 0i64);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gCallstackDone__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gCallstackDone__);
 }
 
 // File Line: 2267
 // RVA: 0xA39C10
 UFG::qString *__fastcall UFG::qGetLocalIP(UFG::qString *result)
 {
-  UFG::qString *v1; // rsi
   __int64 v2; // rbx
-  _IP_ADAPTER_INFO *v3; // rdx
+  _IP_ADAPTER_INFO *p_AdapterInfo; // rdx
   struct hostent *v4; // rdi
   struct in_addr *v5; // rdx
   char *v6; // rax
-  UFG::qString text; // [rsp+28h] [rbp-2DE0h]
+  UFG::qString text; // [rsp+28h] [rbp-2DE0h] BYREF
   __int64 v9; // [rsp+50h] [rbp-2DB8h]
-  WSAData WSAData; // [rsp+60h] [rbp-2DA8h]
-  _IP_ADAPTER_INFO AdapterInfo; // [rsp+200h] [rbp-2C08h]
-  UFG::qString *v12; // [rsp+2E10h] [rbp+8h]
-  unsigned int SizePointer; // [rsp+2E18h] [rbp+10h]
+  WSAData WSAData; // [rsp+60h] [rbp-2DA8h] BYREF
+  _IP_ADAPTER_INFO AdapterInfo; // [rsp+200h] [rbp-2C08h] BYREF
+  unsigned int SizePointer; // [rsp+2E18h] [rbp+10h] BYREF
 
-  v12 = result;
   v9 = -2i64;
-  v1 = result;
   v2 = 0i64;
   UFG::qString::qString(&text);
   SizePointer = 11264;
@@ -346,56 +327,51 @@ LABEL_8:
       }
       WSACleanup();
     }
-    UFG::qString::qString(v1, &text);
+    UFG::qString::qString(result, &text);
   }
   else
   {
-    v3 = &AdapterInfo;
-    while ( !v3->AddressLength || v3->IpAddressList.IpAddress.String[0] == 48 )
+    p_AdapterInfo = &AdapterInfo;
+    while ( !p_AdapterInfo->AddressLength || p_AdapterInfo->IpAddressList.IpAddress.String[0] == 48 )
     {
-      v3 = v3->Next;
-      if ( !v3 )
+      p_AdapterInfo = p_AdapterInfo->Next;
+      if ( !p_AdapterInfo )
         goto LABEL_8;
     }
-    UFG::qString::Set(&text, v3->IpAddressList.IpAddress.String);
-    UFG::qString::qString(v1, &text);
+    UFG::qString::Set(&text, p_AdapterInfo->IpAddressList.IpAddress.String);
+    UFG::qString::qString(result, &text);
   }
   UFG::qString::~qString(&text);
-  return v1;
+  return result;
 }
 
 // File Line: 2318
 // RVA: 0xA39F60
 UFG::qString *__fastcall UFG::qGetUserName(UFG::qString *result)
 {
-  UFG::qString *v1; // rbx
-  BOOLEAN v2; // al
+  BOOLEAN UserName; // al
   char v3; // dl
-  char NameBuffer; // [rsp+30h] [rbp-408h]
-  int v6; // [rsp+448h] [rbp+10h]
+  char NameBuffer[1032]; // [rsp+30h] [rbp-408h] BYREF
+  unsigned int v6; // [rsp+448h] [rbp+10h] BYREF
 
-  v1 = result;
   v6 = 1024;
-  v2 = GetUserNameExA_0(NameDisplay, &NameBuffer, (PULONG)&v6);
-  v3 = NameBuffer;
-  if ( !v2 )
+  UserName = GetUserNameExA_0(NameDisplay, NameBuffer, &v6);
+  v3 = NameBuffer[0];
+  if ( !UserName )
     v3 = 0;
-  NameBuffer = v3;
-  UFG::qString::qString(v1, &NameBuffer);
-  return v1;
+  NameBuffer[0] = v3;
+  UFG::qString::qString(result, NameBuffer);
+  return result;
 }
 
 // File Line: 2358
 // RVA: 0xA38D70
 __int64 __fastcall UFG::OpenRegKey(const char *key_name, HKEY__ **sub_key, UFG::qString *value_name, bool read_only)
 {
-  bool v4; // r12
-  UFG::qString *v5; // r15
-  HKEY__ **v6; // r14
   unsigned int v7; // esi
-  HKEY v8; // rdi
-  UFG::qString *v9; // rax
-  char *v10; // rbx
+  unsigned __int64 v8; // rdi
+  UFG::qString *Filename; // rax
+  char *mData; // rbx
   int v11; // eax
   char *v12; // rbx
   int v13; // eax
@@ -411,79 +387,76 @@ __int64 __fastcall UFG::OpenRegKey(const char *key_name, HKEY__ **sub_key, UFG::
   int v23; // eax
   char *v24; // rbx
   int v25; // eax
-  signed int v26; // eax
-  signed int v27; // er9
-  UFG::qString v29; // [rsp+18h] [rbp-41h]
-  UFG::qString v30; // [rsp+40h] [rbp-19h]
+  int v26; // eax
+  int v27; // r9d
+  UFG::qString v29; // [rsp+18h] [rbp-41h] BYREF
+  UFG::qString v30; // [rsp+40h] [rbp-19h] BYREF
   __int64 v31; // [rsp+68h] [rbp+Fh]
-  UFG::qString result; // [rsp+70h] [rbp+17h]
+  UFG::qString result; // [rsp+70h] [rbp+17h] BYREF
   int v33; // [rsp+D8h] [rbp+7Fh]
 
   v31 = -2i64;
-  v4 = read_only;
-  v5 = value_name;
-  v6 = sub_key;
-  UFG::qString::qString((UFG::qString *)((char *)&v30 + 24), key_name);
+  UFG::qString::qString((UFG::qString *)&v30.mData, key_name);
   UFG::qString::qString(&v29);
   v7 = 0;
   v8 = 0i64;
-  v9 = UFG::qString::GetFilename(&v30, &result);
-  UFG::qString::Set(v5, v9->mData, v9->mLength, 0i64, 0);
+  Filename = UFG::qString::GetFilename(&v30, &result);
+  UFG::qString::Set(value_name, Filename->mData, Filename->mLength, 0i64, 0);
   UFG::qString::~qString(&result);
-  *v6 = 0i64;
-  UFG::qString::Set(&v29, v30.mData, v30.mLength - v5->mLength - 1, 0i64, 0);
-  if ( (unsigned int)UFG::qString::StartsWith(&v30, "HKEY_CLASSES_ROOT", -1) )
+  *sub_key = 0i64;
+  UFG::qString::Set(&v29, v30.mData, v30.mLength - value_name->mLength - 1, 0i64, 0);
+  if ( UFG::qString::StartsWith(&v30, "HKEY_CLASSES_ROOT", -1) )
   {
-    v8 = HKEY_CLASSES_ROOT;
-    v10 = v29.mData;
+    v8 = 0xFFFFFFFF80000000ui64;
+    mData = v29.mData;
     v11 = UFG::qStringLength("HKEY_CLASSES_ROOT");
-    UFG::qString::Set(&v29, &v10[v11 + 1]);
+    UFG::qString::Set(&v29, &mData[v11 + 1]);
   }
-  if ( (unsigned int)UFG::qString::StartsWith(&v30, "HKEY_CURRENT_CONFIG", -1) )
+  if ( UFG::qString::StartsWith(&v30, "HKEY_CURRENT_CONFIG", -1) )
   {
-    v8 = HKEY_CURRENT_CONFIG;
+    v8 = -2147483643i64;
     v12 = v29.mData;
     v13 = UFG::qStringLength("HKEY_CURRENT_CONFIG");
     UFG::qString::Set(&v29, &v12[v13 + 1]);
   }
-  if ( (unsigned int)UFG::qString::StartsWith(&v30, "HKEY_CURRENT_USER", -1) )
+  if ( UFG::qString::StartsWith(&v30, "HKEY_CURRENT_USER", -1) )
   {
-    v8 = HKEY_CURRENT_USER;
+    v8 = -2147483647i64;
     v14 = v29.mData;
     v15 = UFG::qStringLength("HKEY_CURRENT_USER");
     UFG::qString::Set(&v29, &v14[v15 + 1]);
   }
-  if ( (unsigned int)UFG::qString::StartsWith(&v30, "HKEY_LOCAL_MACHINE", -1) )
+  if ( UFG::qString::StartsWith(&v30, "HKEY_LOCAL_MACHINE", -1) )
   {
-    v8 = HKEY_LOCAL_MACHINE;
+    v8 = -2147483646i64;
     v16 = v29.mData;
     v17 = UFG::qStringLength("HKEY_LOCAL_MACHINE");
     UFG::qString::Set(&v29, &v16[v17 + 1]);
   }
-  if ( (unsigned int)UFG::qString::StartsWith(&v30, "HKEY_PERFORMANCE_DATA", -1) )
+  if ( UFG::qString::StartsWith(&v30, "HKEY_PERFORMANCE_DATA", -1) )
   {
-    v8 = HKEY_PERFORMANCE_DATA;
+    v8 = -2147483644i64;
     v18 = v29.mData;
     v19 = UFG::qStringLength("HKEY_PERFORMANCE_DATA");
     UFG::qString::Set(&v29, &v18[v19 + 1]);
   }
-  if ( (unsigned int)UFG::qString::StartsWith(&v30, "HKEY_PERFORMANCE_NLSTEXT", -1) )
+  if ( UFG::qString::StartsWith(&v30, "HKEY_PERFORMANCE_NLSTEXT", -1) )
   {
-    v8 = HKEY_PERFORMANCE_NLSTEXT;
+    v8 = -2147483552i64;
     v20 = v29.mData;
     v21 = UFG::qStringLength("HKEY_PERFORMANCE_NLSTEXT");
     UFG::qString::Set(&v29, &v20[v21 + 1]);
   }
-  if ( (unsigned int)UFG::qString::StartsWith(&v30, "HKEY_PERFORMANCE_TEXT", -1) )
+  if ( UFG::qString::StartsWith(&v30, "HKEY_PERFORMANCE_TEXT", -1) )
   {
-    v8 = HKEY_PERFORMANCE_TEXT;
+    v8 = -2147483568i64;
     v22 = v29.mData;
     v23 = UFG::qStringLength("HKEY_PERFORMANCE_TEXT");
     UFG::qString::Set(&v29, &v22[v23 + 1]);
   }
-  if ( (unsigned int)UFG::qString::StartsWith(&v30, "HKEY_USERS", -1) )
+  if ( UFG::qString::StartsWith(&v30, "HKEY_USERS", -1) )
   {
-    v8 = HKEY_USERS;
+    v8 = -2147483645i64;
     v24 = v29.mData;
     v25 = UFG::qStringLength("HKEY_USERS");
     UFG::qString::Set(&v29, &v24[v25 + 1]);
@@ -491,8 +464,8 @@ __int64 __fastcall UFG::OpenRegKey(const char *key_name, HKEY__ **sub_key, UFG::
   else if ( !v8 )
   {
 LABEL_26:
-    UFG::qString::Set(v5, 0i64);
-    *v6 = 0i64;
+    UFG::qString::Set(value_name, 0i64);
+    *sub_key = 0i64;
     goto LABEL_27;
   }
   if ( v33 == 1 )
@@ -506,9 +479,9 @@ LABEL_26:
       v26 = 256;
   }
   v27 = 2;
-  if ( v4 )
+  if ( read_only )
     v27 = 0;
-  if ( RegOpenKeyExA(v8, v29.mData, 0, v26 | v27 | 1, v6) )
+  if ( RegOpenKeyExA((HKEY)v8, v29.mData, 0, v26 | v27 | 1, sub_key) )
     goto LABEL_26;
   v7 = 1;
 LABEL_27:
@@ -519,36 +492,32 @@ LABEL_27:
 
 // File Line: 2411
 // RVA: 0xA39D60
-UFG::qString *__fastcall UFG::qGetRegistryValue(UFG::qString *result, const char *key_name, const char *default_value, const unsigned int key_context)
+UFG::qString *__fastcall UFG::qGetRegistryValue(
+        UFG::qString *result,
+        const char *key_name,
+        const char *default_value,
+        const unsigned int key_context)
 {
-  const char *v4; // rdi
-  UFG::qString *v5; // rsi
-  unsigned int cbData; // [rsp+30h] [rbp-1048h]
-  int v8; // [rsp+34h] [rbp-1044h]
-  HKEY__ *sub_key; // [rsp+38h] [rbp-1040h]
-  __int64 v10; // [rsp+40h] [rbp-1038h]
-  UFG::qString value_name; // [rsp+48h] [rbp-1030h]
-  char Data[4096]; // [rsp+70h] [rbp-1008h]
-  UFG::qString *v13; // [rsp+1080h] [rbp+8h]
+  unsigned int cbData[2]; // [rsp+30h] [rbp-1048h] BYREF
+  HKEY__ *sub_key[2]; // [rsp+38h] [rbp-1040h] BYREF
+  UFG::qString value_name; // [rsp+48h] [rbp-1030h] BYREF
+  char Data[4096]; // [rsp+70h] [rbp-1008h] BYREF
 
-  v13 = result;
-  v10 = -2i64;
-  v4 = key_name;
-  v5 = result;
+  sub_key[1] = (HKEY__ *)-2i64;
   UFG::qString::qString(result, default_value);
-  v8 = 1;
+  cbData[1] = 1;
   UFG::qString::qString(&value_name);
-  if ( (unsigned int)UFG::OpenRegKey(v4, &sub_key, &value_name, 1) )
+  if ( (unsigned int)UFG::OpenRegKey(key_name, sub_key, &value_name, 1) )
   {
-    cbData = 4096;
-    if ( !RegQueryValueExA(sub_key, value_name.mData, 0i64, 0i64, Data, &cbData) )
+    cbData[0] = 4096;
+    if ( !RegQueryValueExA(sub_key[0], value_name.mData, 0i64, 0i64, Data, cbData) )
     {
-      Data[cbData] = 0;
-      UFG::qString::Set(v5, Data);
+      Data[cbData[0]] = 0;
+      UFG::qString::Set(result, Data);
     }
-    RegCloseKey(sub_key);
+    RegCloseKey(sub_key[0]);
   }
   UFG::qString::~qString(&value_name);
-  return v5;
+  return result;
 }
 

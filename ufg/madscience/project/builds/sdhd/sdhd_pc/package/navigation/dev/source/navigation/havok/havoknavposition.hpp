@@ -7,21 +7,23 @@ void UFG::_dynamic_initializer_for__hkvZero___0()
 
 // File Line: 90
 // RVA: 0xE6660
-UFG::HavokNavPosition *__fastcall UFG::HavokNavPosition::operator=(UFG::HavokNavPosition *this, UFG::HavokNavPosition *other)
+UFG::HavokNavPosition *__fastcall UFG::HavokNavPosition::operator=(
+        UFG::HavokNavPosition *this,
+        UFG::HavokNavPosition *other)
 {
-  float v2; // xmm0_4
-  float v3; // xmm1_4
-  bool v4; // al
+  float y; // xmm0_4
+  float z; // xmm1_4
+  bool m_bValid; // al
 
-  v2 = other->m_vPosition.y;
-  v3 = other->m_vPosition.z;
+  y = other->m_vPosition.y;
+  z = other->m_vPosition.z;
   this->m_vPosition.x = other->m_vPosition.x;
-  this->m_vPosition.y = v2;
-  this->m_vPosition.z = v3;
-  v4 = other->m_bValid;
-  if ( v4 )
+  this->m_vPosition.y = y;
+  this->m_vPosition.z = z;
+  m_bValid = other->m_bValid;
+  if ( m_bValid )
   {
-    this->m_bValid = v4;
+    this->m_bValid = m_bValid;
     this->m_hkvMeshPosition = other->m_hkvMeshPosition;
     this->m_packedKey = other->m_packedKey;
     this->m_aiMeshUid = other->m_aiMeshUid;
@@ -37,21 +39,23 @@ UFG::HavokNavPosition *__fastcall UFG::HavokNavPosition::operator=(UFG::HavokNav
 // RVA: 0xEE8E0
 bool __fastcall UFG::HavokNavPosition::HasBeenValidated(UFG::HavokNavPosition *this)
 {
-  unsigned int v1; // ebx
-  unsigned int v2; // edi
-  hkaiDynamicNavMeshQueryMediator *v3; // rax
+  unsigned int m_packedKey; // ebx
+  unsigned int m_aiMeshUid; // edi
+  hkaiDynamicNavMeshQueryMediator *DynamicQueryMediator; // rax
   bool result; // al
 
   result = 0;
   if ( this->m_bValid )
   {
-    v1 = this->m_packedKey;
-    v2 = this->m_aiMeshUid;
-    if ( v1 == -1
-      || (v3 = (hkaiDynamicNavMeshQueryMediator *)hkaiWorld::getDynamicQueryMediator((hkaiWorld *)UFG::NavManager::ms_pInstance[3].vfptr)) != 0i64
-      && UFG::HavokAIUtilGame::IsFaceKeyValid(v3, v1, v2) )
+    m_packedKey = this->m_packedKey;
+    m_aiMeshUid = this->m_aiMeshUid;
+    if ( m_packedKey == -1 )
+      return 1;
+    DynamicQueryMediator = (hkaiDynamicNavMeshQueryMediator *)hkaiWorld::getDynamicQueryMediator((hkaiWorld *)UFG::NavManager::ms_pInstance[3].vfptr);
+    if ( DynamicQueryMediator )
     {
-      result = 1;
+      if ( UFG::HavokAIUtilGame::IsFaceKeyValid(DynamicQueryMediator, m_packedKey, m_aiMeshUid) )
+        return 1;
     }
   }
   return result;
@@ -61,19 +65,17 @@ bool __fastcall UFG::HavokNavPosition::HasBeenValidated(UFG::HavokNavPosition *t
 // RVA: 0xEF6F0
 bool __fastcall UFG::HavokNavPosition::IsMeshPositionValid(UFG::HavokNavPosition *this)
 {
-  UFG::HavokNavPosition *v1; // rbx
-  unsigned int v2; // edi
-  unsigned int v3; // esi
-  hkaiDynamicNavMeshQueryMediator *v4; // rax
+  unsigned int m_packedKey; // edi
+  unsigned int m_aiMeshUid; // esi
+  hkaiDynamicNavMeshQueryMediator *DynamicQueryMediator; // rax
   bool result; // al
 
-  v1 = this;
   result = this->m_bValid
-        && ((v2 = this->m_packedKey, v3 = this->m_aiMeshUid, v2 == -1)
-         || (v4 = (hkaiDynamicNavMeshQueryMediator *)hkaiWorld::getDynamicQueryMediator((hkaiWorld *)UFG::NavManager::ms_pInstance[3].vfptr)) != 0i64
-         && UFG::HavokAIUtilGame::IsFaceKeyValid(v4, v2, v3))
-        && v1->m_packedKey != -1
-        && v1->m_aiMeshUid != -1;
+        && ((m_packedKey = this->m_packedKey, m_aiMeshUid = this->m_aiMeshUid, m_packedKey == -1)
+         || (DynamicQueryMediator = (hkaiDynamicNavMeshQueryMediator *)hkaiWorld::getDynamicQueryMediator((hkaiWorld *)UFG::NavManager::ms_pInstance[3].vfptr)) != 0i64
+         && UFG::HavokAIUtilGame::IsFaceKeyValid(DynamicQueryMediator, m_packedKey, m_aiMeshUid))
+        && this->m_packedKey != -1
+        && this->m_aiMeshUid != -1;
   return result;
 }
 
@@ -86,7 +88,7 @@ void __fastcall UFG::HavokNavPosition::GetMeshPosition(UFG::HavokNavPosition *th
 
   v2 = this->m_hkvMeshPosition.m_quad.m128_f32[1];
   v3 = this->m_hkvMeshPosition.m_quad.m128_f32[2];
-  vMeshPosOut->x = this->m_hkvMeshPosition.m_quad.m128_f32[0];
+  LODWORD(vMeshPosOut->x) = this->m_hkvMeshPosition.m_quad.m128_i32[0];
   vMeshPosOut->y = v2;
   vMeshPosOut->z = v3;
 }
@@ -110,17 +112,15 @@ void __fastcall UFG::HavokNavPosition::SetInvalidMeshPosition(UFG::HavokNavPosit
 // RVA: 0xEF770
 bool __fastcall UFG::HavokNavPosition::IsOnMesh(UFG::HavokNavPosition *this, float fToleranceXY)
 {
-  UFG::HavokNavPosition *v2; // rbx
-  float v4; // [rsp+20h] [rbp-28h]
+  float v4; // [rsp+20h] [rbp-28h] BYREF
   float v5; // [rsp+24h] [rbp-24h]
 
-  v2 = this;
-  if ( !((unsigned __int8 (*)(void))this->vfptr->IsMeshPositionValid)() )
+  if ( !this->vfptr->IsMeshPositionValid(this) )
     return 0;
-  v2->vfptr->GetMeshPosition((UFG::NavPositionBase *)&v2->vfptr, (UFG::qVector3 *)&v4);
-  return (float)(fToleranceXY * fToleranceXY) > (float)((float)((float)(v2->m_vPosition.y - v5)
-                                                              * (float)(v2->m_vPosition.y - v5))
-                                                      + (float)((float)(v2->m_vPosition.x - v4)
-                                                              * (float)(v2->m_vPosition.x - v4)));
+  this->vfptr->GetMeshPosition(this, (UFG::qVector3 *)&v4);
+  return (float)(fToleranceXY * fToleranceXY) > (float)((float)((float)(this->m_vPosition.y - v5)
+                                                              * (float)(this->m_vPosition.y - v5))
+                                                      + (float)((float)(this->m_vPosition.x - v4)
+                                                              * (float)(this->m_vPosition.x - v4)));
 }
 

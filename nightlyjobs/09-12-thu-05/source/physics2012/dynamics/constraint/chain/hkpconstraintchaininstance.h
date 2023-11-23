@@ -1,17 +1,15 @@
 // File Line: 78
 // RVA: 0xE245C0
-void __fastcall hkpConstraintChainInstance::insertEntityAtFront(hkpConstraintChainInstance *this, hkpEntity *entity)
+void __fastcall hkpConstraintChainInstance::insertEntityAtFront(hkpConstraintChainInstance *this, hkClass *entity)
 {
-  hkpEntity *v2; // rbx
-  hkClass *t; // [rsp+38h] [rbp+10h]
+  hkClass *t; // [rsp+38h] [rbp+10h] BYREF
 
-  t = (hkClass *)entity;
-  v2 = entity;
+  t = entity;
   hkArrayBase<hkClass *>::_insertAt(
     (hkArrayBase<hkClass *> *)&this->m_chainedEntities,
-    (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
+    &hkContainerHeapAllocator::s_alloc,
     0,
-    &t);
-  hkReferencedObject::addReference((hkReferencedObject *)&v2->vfptr);
+    (hkProcess *const *)&t);
+  hkReferencedObject::addReference((hkReferencedObject *)entity);
 }
 

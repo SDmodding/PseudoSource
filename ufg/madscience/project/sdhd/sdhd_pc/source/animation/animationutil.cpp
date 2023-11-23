@@ -3,7 +3,7 @@
 __int64 dynamic_initializer_for__gTransformSpaceEnum__()
 {
   TracksEnum<unsigned long>::TracksEnum<unsigned long>(&gTransformSpaceEnum, gTransformSpaceStringList, 4, 0i64);
-  return atexit(dynamic_atexit_destructor_for__gTransformSpaceEnum__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gTransformSpaceEnum__);
 }
 
 // File Line: 140
@@ -15,7 +15,7 @@ __int64 dynamic_initializer_for__gTransformFloatParamRotEnum__()
     gTransformFloatParamRotStringList,
     3,
     0i64);
-  return atexit(dynamic_atexit_destructor_for__gTransformFloatParamRotEnum__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gTransformFloatParamRotEnum__);
 }
 
 // File Line: 144
@@ -27,83 +27,86 @@ __int64 dynamic_initializer_for__gTransformFloatParamTransEnum__()
     gTransformFloatParamTransStringList,
     3,
     0i64);
-  return atexit(dynamic_atexit_destructor_for__gTransformFloatParamTransEnum__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gTransformFloatParamTransEnum__);
 }
 
 // File Line: 190
 // RVA: 0x3A9C90
-int GetUnitsTime_Frames_Ticks_Str(...)
+// local variable allocation has failed, the output may be wrong!
+void __fastcall GetUnitsTime_Frames_Ticks_Str(double timeSeconds, char *buff, int buffSize)
 {
   __m128 v3; // xmm2
   float v4; // xmm3_4
-  signed int v5; // ecx
-  signed int v6; // ecx
+  int v5; // ecx
+  int v6; // ecx
 
-  v3 = (__m128)timeSeconds;
+  v3 = *(__m128 *)&timeSeconds;
   v3.m128_f32[0] = *(float *)&timeSeconds * 30.0;
   v4 = *(float *)&timeSeconds * 30.0;
-  v5 = (signed int)(float)(*(float *)&timeSeconds * 30.0);
+  v5 = (int)(float)(*(float *)&timeSeconds * 30.0);
   if ( v5 != 0x80000000 && (float)v5 != v3.m128_f32[0] )
     v4 = (float)(v5 - (_mm_movemask_ps(_mm_unpacklo_ps(v3, v3)) & 1));
   v3.m128_f32[0] = (float)((float)(v3.m128_f32[0] - v4) * 4800.0) * 0.033333335;
-  v6 = (signed int)v3.m128_f32[0];
-  if ( (signed int)v3.m128_f32[0] != 0x80000000 && (float)v6 != v3.m128_f32[0] )
+  v6 = (int)v3.m128_f32[0];
+  if ( (int)v3.m128_f32[0] != 0x80000000 && (float)v6 != v3.m128_f32[0] )
     v3.m128_f32[0] = (float)(v6 - (_mm_movemask_ps(_mm_unpacklo_ps(v3, v3)) & 1));
   UFG::qSPrintf(buff, buffSize, "%0.f:%0.f", v4, v3.m128_f32[0]);
 }
 
 // File Line: 199
 // RVA: 0x3A9D40
-int GetUnitsTime_Minutes_Seconds_Ticks_Str(...)
+// local variable allocation has failed, the output may be wrong!
+void __fastcall GetUnitsTime_Minutes_Seconds_Ticks_Str(double timeSeconds, char *buff, int buffSize)
 {
   __m128 v3; // xmm2
   float v4; // xmm3_4
-  signed int v5; // ecx
+  int v5; // ecx
   float v6; // xmm1_4
-  signed int v7; // ecx
-  signed int v8; // ecx
+  int v7; // ecx
+  int v8; // ecx
 
-  v3 = (__m128)timeSeconds;
+  v3 = *(__m128 *)&timeSeconds;
   v4 = *(float *)&timeSeconds * 0.016666668;
-  v5 = (signed int)(float)(*(float *)&timeSeconds * 0.016666668);
+  v5 = (int)(float)(*(float *)&timeSeconds * 0.016666668);
   if ( v5 != 0x80000000 && (float)v5 != v4 )
-    v4 = (float)(v5 - (_mm_movemask_ps(_mm_unpacklo_ps((__m128)timeSeconds, (__m128)timeSeconds)) & 1));
+    v4 = (float)(v5 - (_mm_movemask_ps(_mm_unpacklo_ps(*(__m128 *)&timeSeconds, *(__m128 *)&timeSeconds)) & 1));
   v3.m128_f32[0] = *(float *)&timeSeconds - (float)(v4 * 60.0);
   v6 = v3.m128_f32[0];
-  v7 = (signed int)v3.m128_f32[0];
-  if ( (signed int)v3.m128_f32[0] != 0x80000000 && (float)v7 != v3.m128_f32[0] )
+  v7 = (int)v3.m128_f32[0];
+  if ( (int)v3.m128_f32[0] != 0x80000000 && (float)v7 != v3.m128_f32[0] )
     v6 = (float)(v7 - (_mm_movemask_ps(_mm_unpacklo_ps(v3, v3)) & 1));
   v3.m128_f32[0] = (float)(v3.m128_f32[0] - v6) * 4800.0;
-  v8 = (signed int)v3.m128_f32[0];
-  if ( (signed int)v3.m128_f32[0] != 0x80000000 && (float)v8 != v3.m128_f32[0] )
+  v8 = (int)v3.m128_f32[0];
+  if ( (int)v3.m128_f32[0] != 0x80000000 && (float)v8 != v3.m128_f32[0] )
     v3.m128_f32[0] = (float)(v8 - (_mm_movemask_ps(_mm_unpacklo_ps(v3, v3)) & 1));
   UFG::qSPrintf(buff, buffSize, "%0.f:%0.f:%0.f", v4, v6, v3.m128_f32[0]);
 }
 
 // File Line: 209
 // RVA: 0x3A9E30
-int GetUnitsTime_SMPTE_Str(...)
+// local variable allocation has failed, the output may be wrong!
+void __fastcall GetUnitsTime_SMPTE_Str(double timeSeconds, char *buff, int buffSize)
 {
   __m128 v3; // xmm2
   float v4; // xmm3_4
-  signed int v5; // ecx
+  int v5; // ecx
   float v6; // xmm1_4
-  signed int v7; // ecx
-  signed int v8; // ecx
+  int v7; // ecx
+  int v8; // ecx
 
-  v3 = (__m128)timeSeconds;
+  v3 = *(__m128 *)&timeSeconds;
   v4 = *(float *)&timeSeconds * 0.016666668;
-  v5 = (signed int)(float)(*(float *)&timeSeconds * 0.016666668);
+  v5 = (int)(float)(*(float *)&timeSeconds * 0.016666668);
   if ( v5 != 0x80000000 && (float)v5 != v4 )
-    v4 = (float)(v5 - (_mm_movemask_ps(_mm_unpacklo_ps((__m128)timeSeconds, (__m128)timeSeconds)) & 1));
+    v4 = (float)(v5 - (_mm_movemask_ps(_mm_unpacklo_ps(*(__m128 *)&timeSeconds, *(__m128 *)&timeSeconds)) & 1));
   v3.m128_f32[0] = *(float *)&timeSeconds - (float)(v4 * 60.0);
   v6 = v3.m128_f32[0];
-  v7 = (signed int)v3.m128_f32[0];
-  if ( (signed int)v3.m128_f32[0] != 0x80000000 && (float)v7 != v3.m128_f32[0] )
+  v7 = (int)v3.m128_f32[0];
+  if ( (int)v3.m128_f32[0] != 0x80000000 && (float)v7 != v3.m128_f32[0] )
     v6 = (float)(v7 - (_mm_movemask_ps(_mm_unpacklo_ps(v3, v3)) & 1));
   v3.m128_f32[0] = (float)(v3.m128_f32[0] - v6) * 30.0;
-  v8 = (signed int)v3.m128_f32[0];
-  if ( (signed int)v3.m128_f32[0] != 0x80000000 && (float)v8 != v3.m128_f32[0] )
+  v8 = (int)v3.m128_f32[0];
+  if ( (int)v3.m128_f32[0] != 0x80000000 && (float)v8 != v3.m128_f32[0] )
     v3.m128_f32[0] = (float)(v8 - (_mm_movemask_ps(_mm_unpacklo_ps(v3, v3)) & 1));
   UFG::qSPrintf(buff, buffSize, "%0.f:%0.f:%0.f", v4, v6, v3.m128_f32[0]);
 }
@@ -112,34 +115,32 @@ int GetUnitsTime_SMPTE_Str(...)
 // RVA: 0x3A9C00
 void __fastcall GetUnitsTime(float timeSeconds, char *buff, int buffSize, UnitsTime timeUnits)
 {
-  int v4; // er10
   const char *v5; // r8
 
-  v4 = buffSize;
   switch ( timeUnits )
   {
-    case 1:
+    case UT_FRAMES:
       timeSeconds = timeSeconds * 30.0;
       v5 = "%0.f";
       goto LABEL_5;
-    case 2:
+    case UT_FRAMES_RAW:
       timeSeconds = timeSeconds * 30.0;
       goto $LN1_12;
-    case 3:
+    case UT_FRAMES_TICKS:
       GetUnitsTime_Frames_Ticks_Str(timeSeconds, buff, buffSize);
-      break;
-    case 4:
+      return;
+    case UT_MINS_SECONDS_TICKS:
       GetUnitsTime_Minutes_Seconds_Ticks_Str(timeSeconds, buff, buffSize);
-      break;
-    case 5:
+      return;
+    case UT_SMPTE:
       GetUnitsTime_SMPTE_Str(timeSeconds, buff, buffSize);
-      break;
+      return;
     default:
 $LN1_12:
       v5 = "%0.3f";
 LABEL_5:
-      UFG::qSPrintf(buff, v4, v5, timeSeconds);
-      break;
+      UFG::qSPrintf(buff, buffSize, v5, timeSeconds);
+      return;
   }
 }
 
@@ -162,7 +163,7 @@ __int64 dynamic_initializer_for__gTimePlotPointFactory__()
     &gTimePlotPointFactory,
     sTimePlotPointFactoryList,
     sTimePlotPointFactoryListNum);
-  return atexit(dynamic_atexit_destructor_for__gTimePlotPointFactory__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gTimePlotPointFactory__);
 }
 
 // File Line: 280
@@ -191,8 +192,6 @@ __int64 dynamic_initializer_for__TimePlot::sClassNameUID__()
 // RVA: 0x3A4A20
 void __fastcall BlendSlerp(UFG::qMatrix44 *dest, UFG::qMatrix44 *sourceA, UFG::qMatrix44 *sourceB, float weight)
 {
-  UFG::qMatrix44 *v4; // rdi
-  UFG::qMatrix44 *v5; // rbx
   UFG::qVector4 v6; // xmm3
   UFG::qVector4 v7; // xmm2
   UFG::qVector4 v8; // xmm1
@@ -208,20 +207,18 @@ void __fastcall BlendSlerp(UFG::qMatrix44 *dest, UFG::qMatrix44 *sourceA, UFG::q
   __m128 v18; // xmm2
   __m128 v19; // xmm1
   __m128 v20; // xmm2
-  hkQsTransformf v21; // [rsp+20h] [rbp-E8h]
-  hkQsTransformf v22; // [rsp+50h] [rbp-B8h]
-  hkQsTransformf v23; // [rsp+80h] [rbp-88h]
-  hkTransformf transform; // [rsp+B0h] [rbp-58h]
+  hkQsTransformf v21; // [rsp+20h] [rbp-E8h] BYREF
+  hkQsTransformf v22; // [rsp+50h] [rbp-B8h] BYREF
+  hkQsTransformf v23; // [rsp+80h] [rbp-88h] BYREF
+  hkTransformf transform; // [rsp+B0h] [rbp-58h] BYREF
 
-  v4 = sourceB;
-  v5 = dest;
   if ( weight < 1.0 )
   {
     if ( weight > 0.0 )
     {
       hkTransformf::set4x4ColumnMajor(&transform, &sourceA->v0.x);
       hkQsTransformf::setFromTransformNoScale(&v21, &transform);
-      hkTransformf::set4x4ColumnMajor(&transform, &v4->v0.x);
+      hkTransformf::set4x4ColumnMajor(&transform, &sourceB->v0.x);
       hkQsTransformf::setFromTransformNoScale(&v23, &transform);
       v12.m128_f32[0] = weight;
       v13 = _mm_mul_ps(v23.m_rotation.m_vec.m_quad, v21.m_rotation.m_vec.m_quad);
@@ -238,7 +235,7 @@ void __fastcall BlendSlerp(UFG::qMatrix44 *dest, UFG::qMatrix44 *sourceA, UFG::q
                 _mm_xor_ps(
                   (__m128)_mm_slli_epi32(
                             _mm_srli_epi32(
-                              (__m128i)_mm_cmpltps(_mm_add_ps(_mm_shuffle_ps(v15, v15, 177), v15), (__m128)0i64),
+                              (__m128i)_mm_cmplt_ps(_mm_add_ps(_mm_shuffle_ps(v15, v15, 177), v15), (__m128)0i64),
                               0x1Fu),
                             0x1Fu),
                   v14),
@@ -253,7 +250,7 @@ void __fastcall BlendSlerp(UFG::qMatrix44 *dest, UFG::qMatrix44 *sourceA, UFG::q
                                         _mm_sub_ps((__m128)_xmm, _mm_mul_ps(_mm_mul_ps(v20, v19), v20)),
                                         _mm_mul_ps(*(__m128 *)_xmm, v20)),
                                       v16);
-      hkQsTransformf::get4x4ColumnMajor(&v22, &v5->v0.x);
+      hkQsTransformf::get4x4ColumnMajor(&v22, &dest->v0.x);
     }
     else
     {
@@ -280,20 +277,26 @@ void __fastcall BlendSlerp(UFG::qMatrix44 *dest, UFG::qMatrix44 *sourceA, UFG::q
 
 // File Line: 456
 // RVA: 0x3B66B0
-void __fastcall constrainPos(UFG::qVector3 *constrainedPos, UFG::qVector3 *sourcePos, UFG::qVector3 *origin, UFG::qVector3 *axis, const float length, const bool syncToClosestEndpoint)
+void __fastcall constrainPos(
+        UFG::qVector3 *constrainedPos,
+        UFG::qVector3 *sourcePos,
+        UFG::qVector3 *origin,
+        UFG::qVector3 *axis,
+        float length,
+        const bool syncToClosestEndpoint)
 {
-  float v6; // xmm4_4
-  float v7; // xmm5_4
-  float v8; // xmm6_4
+  float x; // xmm4_4
+  float y; // xmm5_4
+  float z; // xmm6_4
   float v9; // xmm3_4
   float v10; // xmm2_4
   float v11; // xmm1_4
 
-  v6 = origin->x;
-  v7 = origin->y;
-  v8 = origin->z;
-  v9 = (float)((float)((float)(sourcePos->y - v7) * axis->y) + (float)((float)(sourcePos->x - origin->x) * axis->x))
-     + (float)((float)(sourcePos->z - v8) * axis->z);
+  x = origin->x;
+  y = origin->y;
+  z = origin->z;
+  v9 = (float)((float)((float)(sourcePos->y - y) * axis->y) + (float)((float)(sourcePos->x - origin->x) * axis->x))
+     + (float)((float)(sourcePos->z - z) * axis->z);
   if ( v9 <= 0.0 )
     v9 = 0.0;
   if ( v9 >= length )
@@ -305,12 +308,12 @@ void __fastcall constrainPos(UFG::qVector3 *constrainedPos, UFG::qVector3 *sourc
     else
       v9 = length;
   }
-  constrainedPos->z = v8;
-  constrainedPos->x = v6;
-  constrainedPos->y = v7;
-  v10 = (float)(axis->z * v9) + v8;
-  v11 = (float)(axis->y * v9) + v7;
-  constrainedPos->x = (float)(axis->x * v9) + v6;
+  constrainedPos->z = z;
+  constrainedPos->x = x;
+  constrainedPos->y = y;
+  v10 = (float)(axis->z * v9) + z;
+  v11 = (float)(axis->y * v9) + y;
+  constrainedPos->x = (float)(axis->x * v9) + x;
   constrainedPos->y = v11;
   constrainedPos->z = v10;
 }

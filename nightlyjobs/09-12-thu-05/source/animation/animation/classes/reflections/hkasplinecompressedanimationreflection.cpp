@@ -112,20 +112,21 @@ hkClass *__fastcall hkaSplineCompressedAnimation::staticClass()
 
 // File Line: 210
 // RVA: 0xB1DD90
-void __fastcall finishLoadedObjecthkaSplineCompressedAnimation(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaSplineCompressedAnimation(hkaSplineCompressedAnimation *p, int finishing)
 {
   if ( p )
   {
-    *(_QWORD *)p = &hkaSplineCompressedAnimation::`vftable;
-    JUMPOUT(finishing, 0, hkaSplineCompressedAnimation::handleEndian);
+    p->vfptr = (hkBaseObjectVtbl *)&hkaSplineCompressedAnimation::`vftable;
+    if ( finishing )
+      hkaSplineCompressedAnimation::handleEndian(p);
   }
 }
 
 // File Line: 216
 // RVA: 0xB1DDB0
-void __fastcall cleanupLoadedObjecthkaSplineCompressedAnimation(void *p)
+void __fastcall cleanupLoadedObjecthkaSplineCompressedAnimation(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 220
@@ -146,8 +147,8 @@ void **dynamic_initializer_for__hkaSplineCompressedAnimationTypeInfo__()
   hkaSplineCompressedAnimationTypeInfo.m_typeName = "hkaSplineCompressedAnimation";
   hkaSplineCompressedAnimationTypeInfo.m_vtable = result;
   hkaSplineCompressedAnimationTypeInfo.m_scopedName = "!hkaSplineCompressedAnimation";
-  hkaSplineCompressedAnimationTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaSplineCompressedAnimation;
-  hkaSplineCompressedAnimationTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaSplineCompressedAnimation;
+  hkaSplineCompressedAnimationTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaSplineCompressedAnimation;
+  hkaSplineCompressedAnimationTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaSplineCompressedAnimation;
   return result;
 }
 

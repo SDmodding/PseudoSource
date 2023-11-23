@@ -27,7 +27,7 @@ void dynamic_initializer_for__hkaiNavVolumeGenerationSettingsMaterialConstructio
     &hkaiNavVolumeGenerationSettingsMaterialConstructionInfo_Default,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 114
@@ -39,9 +39,12 @@ hkClass *__fastcall hkaiNavVolumeGenerationSettings::MaterialConstructionInfo::s
 
 // File Line: 121
 // RVA: 0xB47C20
-void __fastcall finishLoadedObjecthkaiNavVolumeGenerationSettingsMaterialConstructionInfo(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiNavVolumeGenerationSettingsMaterialConstructionInfo(
+        hkaiNavVolumeGenerationSettings::MaterialConstructionInfo *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiNavVolumeGenerationSettings::MaterialConstructionInfo::MaterialConstructionInfo);
+  if ( p )
+    hkaiNavVolumeGenerationSettings::MaterialConstructionInfo::MaterialConstructionInfo(p, finishing);
 }
 
 // File Line: 127
@@ -111,7 +114,7 @@ void dynamic_initializer_for__hkaiNavVolumeGenerationSettingsMergingSettingsClas
     &hkaiNavVolumeGenerationSettingsMergingSettings_Default,
     0i64,
     0,
-    3u);
+    3);
 }
 
 // File Line: 306
@@ -164,7 +167,7 @@ void dynamic_initializer_for__hkaiNavVolumeGenerationSettingsClass__()
     &hkaiNavVolumeGenerationSettings_Default,
     0i64,
     0,
-    9u);
+    9);
 }
 
 // File Line: 485
@@ -176,15 +179,19 @@ hkClass *__fastcall hkaiNavVolumeGenerationSettings::staticClass()
 
 // File Line: 492
 // RVA: 0xB47C90
-void __fastcall finishLoadedObjecthkaiNavVolumeGenerationSettings(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiNavVolumeGenerationSettings(
+        hkaiNavVolumeGenerationSettings *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiNavVolumeGenerationSettings::hkaiNavVolumeGenerationSettings);
+  if ( p )
+    hkaiNavVolumeGenerationSettings::hkaiNavVolumeGenerationSettings(p, finishing);
 }
 
 // File Line: 498
 // RVA: 0xB47CB0
-void __fastcall cleanupLoadedObjecthkaiNavVolumeGenerationSettings(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkaiNavVolumeGenerationSettings(hkaiNavVolumeGenerationSettings *p)
 {
-  hkaiNavVolumeGenerationSettings::~hkaiNavVolumeGenerationSettings((hkaiNavVolumeGenerationSettings *)p);
+  hkaiNavVolumeGenerationSettings::~hkaiNavVolumeGenerationSettings(p);
 }
 

@@ -60,7 +60,7 @@ void __fastcall hkpCharacterMotion::setInertiaLocal(hkpCharacterMotion *this, hk
          _mm_and_ps(inertia->m_col2.m_quad, (__m128)xmmword_141A9B360));
   v3 = _mm_max_ps(_mm_shuffle_ps(v2, v2, 170), _mm_max_ps(_mm_shuffle_ps(v2, v2, 85), _mm_shuffle_ps(v2, v2, 0)));
   v4 = _mm_rcp_ps(v3);
-  v5 = _mm_andnot_ps(_mm_cmpeqps(v3, (__m128)0i64), _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v4, v3)), v4));
+  v5 = _mm_andnot_ps(_mm_cmpeq_ps(v3, (__m128)0i64), _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v4, v3)), v4));
   this->m_inertiaAndMassInv.m_quad = _mm_shuffle_ps(v5, _mm_unpackhi_ps(v5, this->m_inertiaAndMassInv.m_quad), 196);
 }
 
@@ -157,14 +157,18 @@ void __fastcall hkpCharacterMotion::applyForce(hkpCharacterMotion *this, const f
 
 // File Line: 125
 // RVA: 0xD78940
-void __fastcall hkpCharacterMotion::applyForce(hkpCharacterMotion *this, const float deltaTime, hkVector4f *force, hkVector4f *p)
+void __fastcall hkpCharacterMotion::applyForce(
+        hkpCharacterMotion *this,
+        const float deltaTime,
+        hkVector4f *force,
+        hkVector4f *p)
 {
-  hkBaseObjectVtbl *v4; // rax
-  __m128 v5; // [rsp+20h] [rbp-18h]
+  hkBaseObjectVtbl *vfptr; // rax
+  __m128 v5; // [rsp+20h] [rbp-18h] BYREF
 
-  v4 = this->vfptr;
+  vfptr = this->vfptr;
   v5 = _mm_mul_ps(_mm_shuffle_ps((__m128)LODWORD(deltaTime), (__m128)LODWORD(deltaTime), 0), force->m_quad);
-  ((void (__fastcall *)(hkpCharacterMotion *, __m128 *, hkVector4f *))v4[11].__first_virtual_table_function__)(
+  ((void (__fastcall *)(hkpCharacterMotion *, __m128 *, hkVector4f *))vfptr[11].__first_virtual_table_function__)(
     this,
     &v5,
     p);
@@ -174,17 +178,22 @@ void __fastcall hkpCharacterMotion::applyForce(hkpCharacterMotion *this, const f
 // RVA: 0xD78980
 void __fastcall hkpCharacterMotion::applyTorque(hkpCharacterMotion *this, const float deltaTime, hkVector4f *torque)
 {
-  hkBaseObjectVtbl *v3; // rax
-  __m128 v4; // [rsp+20h] [rbp-18h]
+  hkBaseObjectVtbl *vfptr; // rax
+  __m128 v4; // [rsp+20h] [rbp-18h] BYREF
 
-  v3 = this->vfptr;
+  vfptr = this->vfptr;
   v4 = _mm_mul_ps(_mm_shuffle_ps((__m128)LODWORD(deltaTime), (__m128)LODWORD(deltaTime), 0), torque->m_quad);
-  v3[12].__vecDelDtor((hkBaseObject *)&this->vfptr, (unsigned int)&v4);
+  vfptr[12].__vecDelDtor(this, (unsigned int)&v4);
 }
 
 // File Line: 139
 // RVA: 0xD78760
-void __fastcall hkpCharacterMotion::getProjectedPointVelocity(hkpCharacterMotion *this, hkVector4f *pos, hkVector4f *normal, float *velOut, float *invVirtMassOut)
+void __fastcall hkpCharacterMotion::getProjectedPointVelocity(
+        hkpCharacterMotion *this,
+        hkVector4f *pos,
+        hkVector4f *normal,
+        float *velOut,
+        float *invVirtMassOut)
 {
   __m128 v5; // xmm4
   __m128 v6; // xmm3
@@ -197,16 +206,21 @@ void __fastcall hkpCharacterMotion::getProjectedPointVelocity(hkpCharacterMotion
          _mm_mul_ps(_mm_shuffle_ps(v5, v5, 201), normal->m_quad),
          _mm_mul_ps(_mm_shuffle_ps(normal->m_quad, normal->m_quad, 201), v5));
   v8 = _mm_mul_ps(_mm_shuffle_ps(v7, v7, 201), this->m_angularVelocity.m_quad);
-  *velOut = (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v8, v8, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v8, v8, 0)))
-                  + COERCE_FLOAT(_mm_shuffle_ps(v8, v8, 170)))
-          + (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v6, v6, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v6, v6, 0)))
-                  + COERCE_FLOAT(_mm_shuffle_ps(v6, v6, 170)));
+  *velOut = (float)((float)(_mm_shuffle_ps(v8, v8, 85).m128_f32[0] + _mm_shuffle_ps(v8, v8, 0).m128_f32[0])
+                  + _mm_shuffle_ps(v8, v8, 170).m128_f32[0])
+          + (float)((float)(_mm_shuffle_ps(v6, v6, 85).m128_f32[0] + _mm_shuffle_ps(v6, v6, 0).m128_f32[0])
+                  + _mm_shuffle_ps(v6, v6, 170).m128_f32[0]);
   *invVirtMassOut = this->m_inertiaAndMassInv.m_quad.m128_f32[3];
 }
 
 // File Line: 150
 // RVA: 0xD787F0
-void __fastcall hkpCharacterMotion::getProjectedPointVelocitySimd(hkpCharacterMotion *this, hkVector4f *pos, hkVector4f *normal, hkSimdFloat32 *velOut, hkSimdFloat32 *invVirtMassOut)
+void __fastcall hkpCharacterMotion::getProjectedPointVelocitySimd(
+        hkpCharacterMotion *this,
+        hkVector4f *pos,
+        hkVector4f *normal,
+        hkSimdFloat32 *velOut,
+        hkSimdFloat32 *invVirtMassOut)
 {
   __m128 v5; // xmm4
   __m128 v6; // xmm3

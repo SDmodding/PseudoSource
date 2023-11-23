@@ -4,7 +4,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SAVELOAD_START_SAVING__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SAVELOAD_START_SAVING", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SAVELOAD_START_SAVING", -1);
   UI_HASH_SAVELOAD_START_SAVING = result;
   return result;
 }
@@ -15,7 +15,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SAVELOAD_STOP_SAVING__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SAVELOAD_STOP_SAVING", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SAVELOAD_STOP_SAVING", -1);
   UI_HASH_SAVELOAD_STOP_SAVING = result;
   return result;
 }
@@ -26,7 +26,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SAVELOAD_CORRUPTFILE_RETRY__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SAVELOAD_CORRUPTFILE_RETRY", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SAVELOAD_CORRUPTFILE_RETRY", -1);
   UI_HASH_SAVELOAD_CORRUPTFILE_RETRY = result;
   return result;
 }
@@ -37,7 +37,7 @@ __int64 UFG::_dynamic_initializer_for__UI_HASH_SAVELOAD_INSUFFICIENT_SPACE__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32("SAVELOAD_INSUFFICIENT_SPACE", 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32("SAVELOAD_INSUFFICIENT_SPACE", -1);
   UI_HASH_SAVELOAD_INSUFFICIENT_SPACE = result;
   return result;
 }

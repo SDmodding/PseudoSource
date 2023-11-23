@@ -7,7 +7,7 @@ OSuite::ZObjectAccessor *__fastcall OSuite::TSingleton<OSuite::ZObjectAccessor>:
   OSuite::ZObjectAccessor *v2; // rax
   OSuite::TDoublyLinkedList<OSuite::ZObject *> *v3; // rbx
   OSuite::ZRedBlackTreeBase *v4; // rax
-  OSuite::ZObject *data; // [rsp+30h] [rbp+8h]
+  OSuite::ZObject *data; // [rsp+30h] [rbp+8h] BYREF
 
   result = `OSuite::TSingleton<OSuite::ZObjectAccessor>::Object::`2::s_pObject;
   if ( !`OSuite::TSingleton<OSuite::ZObjectAccessor>::Object::`2::s_pObject )
@@ -42,9 +42,9 @@ OSuite::ZObjectAccessor *__fastcall OSuite::TSingleton<OSuite::ZObjectAccessor>:
       }
       OSuite::s_pSingletons = v3;
     }
-    data = (OSuite::ZObject *)&`OSuite::TSingleton<OSuite::ZObjectAccessor>::Object::`2::s_pObject->vfptr;
+    data = `OSuite::TSingleton<OSuite::ZObjectAccessor>::Object::`2::s_pObject;
     OSuite::TDoublyLinkedList<OSuite::ZObject *>::Append(v3, &data);
-    result = `OSuite::TSingleton<OSuite::ZObjectAccessor>::Object::`2::s_pObject;
+    return `OSuite::TSingleton<OSuite::ZObjectAccessor>::Object::`2::s_pObject;
   }
   return result;
 }

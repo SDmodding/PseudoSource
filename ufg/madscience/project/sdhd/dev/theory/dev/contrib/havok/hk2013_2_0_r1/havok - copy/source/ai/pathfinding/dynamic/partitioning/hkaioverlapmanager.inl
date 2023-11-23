@@ -1,12 +1,12 @@
 // File Line: 10
 // RVA: 0xBF7B70
-void __fastcall hkaiOverlapManagerSection::GeneratorData::GeneratorData(hkaiOverlapManagerSection::GeneratorData *this, hkaiSilhouetteGenerator *gen, hkQTransformf *initialTransform)
+void __fastcall hkaiOverlapManagerSection::GeneratorData::GeneratorData(
+        hkaiOverlapManagerSection::GeneratorData *this,
+        hkaiSilhouetteGenerator *gen,
+        hkQTransformf *initialTransform)
 {
   int v3; // esi
-  hkQTransformf *v4; // rbp
-  hkaiSilhouetteGenerator *v5; // rdi
-  hkaiOverlapManagerSection::GeneratorData *v6; // rbx
-  hkReferencedObject *v7; // rcx
+  hkaiSilhouetteGenerator *m_generator; // rcx
 
   v3 = 0;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
@@ -15,137 +15,136 @@ void __fastcall hkaiOverlapManagerSection::GeneratorData::GeneratorData(hkaiOver
   this->m_context.m_generatorSize = 0;
   this->m_overlappedFaces.m_data = 0i64;
   this->m_overlappedFaces.m_size = 0;
-  this->m_overlappedFaces.m_capacityAndFlags = 2147483648;
-  v4 = initialTransform;
-  v5 = gen;
-  v6 = this;
+  this->m_overlappedFaces.m_capacityAndFlags = 0x80000000;
   if ( gen )
-    hkReferencedObject::addReference((hkReferencedObject *)&gen->vfptr);
-  v7 = (hkReferencedObject *)&v6->m_context.m_generator->vfptr;
-  if ( v7 )
-    hkReferencedObject::removeReference(v7);
-  v6->m_context.m_generator = v5;
-  if ( v5 )
-    v3 = ((__int64 (__fastcall *)(hkaiSilhouetteGenerator *))v5->vfptr[6].__vecDelDtor)(v5);
-  v6->m_context.m_generatorSize = v3;
-  v6->m_context.m_lastRelativeTransform.m_rotation = v4->m_rotation;
-  v6->m_context.m_lastRelativeTransform.m_translation = v4->m_translation;
-  *(_WORD *)&v6->m_context.m_generatedLastFrame.m_bool = 257;
+    hkReferencedObject::addReference(gen);
+  m_generator = this->m_context.m_generator;
+  if ( m_generator )
+    hkReferencedObject::removeReference(m_generator);
+  this->m_context.m_generator = gen;
+  if ( gen )
+    v3 = ((__int64 (__fastcall *)(hkaiSilhouetteGenerator *))gen->vfptr[6].__vecDelDtor)(gen);
+  this->m_context.m_generatorSize = v3;
+  this->m_context.m_lastRelativeTransform.m_rotation = initialTransform->m_rotation;
+  this->m_context.m_lastRelativeTransform.m_translation = initialTransform->m_translation;
+  *(_WORD *)&this->m_context.m_generatedLastFrame.m_bool = 257;
 }
 
 // File Line: 18
 // RVA: 0xBF7F10
-hkReferencedObject *__fastcall hkaiOverlapManagerSection::getGeneratorData(hkaiOverlapManagerSection *this, hkaiSilhouetteGenerator *gen)
+hkaiOverlapManagerSection::GeneratorData *__fastcall hkaiOverlapManagerSection::getGeneratorData(
+        hkaiOverlapManagerSection *this,
+        hkaiSilhouetteGenerator *gen)
 {
-  hkaiOverlapManagerSection *v2; // rsi
   hkReferencedObject *v3; // rbx
   int v4; // eax
-  hkReferencedObject *v5; // rcx
+  hkReferencedObject *m_pntr; // rcx
   char v6; // di
-  hkReferencedObject **v7; // rbx
+  hkRefPtr<hkaiOverlapManagerSection::GeneratorData> *v7; // rbx
   hkReferencedObject *v9; // [rsp+30h] [rbp+8h]
 
-  v2 = this;
   v3 = 0i64;
   v4 = hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64>>::getWithDefault(
-         (hkMapBase<unsigned __int64,unsigned __int64,hkMapOperations<unsigned __int64> > *)&this->m_generatorDataMap->m_map.m_elem,
+         &this->m_generatorDataMap->m_map,
          (unsigned __int64)gen,
          0xFFFFFFFFFFFFFFFFui64);
   if ( v4 == -1 )
   {
     v9 = 0i64;
-    v5 = 0i64;
+    m_pntr = 0i64;
     v6 = 1;
   }
   else
   {
     v6 = 2;
-    v7 = (hkReferencedObject **)&v2->m_generatorData.m_data[v4];
-    if ( *v7 )
-      hkReferencedObject::addReference(*v7);
-    v5 = *v7;
-    v9 = *v7;
-    v3 = *v7;
+    v7 = &this->m_generatorData.m_data[v4];
+    if ( v7->m_pntr )
+      hkReferencedObject::addReference(v7->m_pntr);
+    m_pntr = v7->m_pntr;
+    v9 = v7->m_pntr;
+    v3 = v7->m_pntr;
   }
-  if ( v6 & 2 )
+  if ( (v6 & 2) != 0 )
   {
-    v6 &= 0xFDu;
-    if ( v5 )
-      hkReferencedObject::removeReference(v5);
+    v6 &= ~2u;
+    if ( m_pntr )
+      hkReferencedObject::removeReference(m_pntr);
   }
-  if ( v6 & 1 && v3 )
+  if ( (v6 & 1) != 0 && v3 )
     hkReferencedObject::removeReference(v3);
-  return v9;
+  return (hkaiOverlapManagerSection::GeneratorData *)v9;
 }
 
 // File Line: 30
 // RVA: 0xBF8470
-void __fastcall hkaiOverlapManagerSection::setFaceDirty(hkaiOverlapManagerSection *this, int f, float priorityDelta)
+void __fastcall hkaiOverlapManagerSection::setFaceDirty(
+        hkaiOverlapManagerSection *this,
+        unsigned int f,
+        float priorityDelta)
 {
-  int v3; // ebx
-  hkSet<hkIntRealPair,hkContainerHeapAllocator,hkMapOperations<hkIntRealPair> > *v4; // rdi
+  hkSetIntFloatPair *p_m_facePriorities; // rdi
   int v5; // edx
-  hkaiOverlapManagerSection *v6; // r10
-  int v7; // er8
-  int v8; // ecx
+  int v7; // r8d
+  int m_key; // ecx
   int v9; // ecx
-  hkIntRealPair *v10; // r8
-  int v11; // er9
-  signed int v12; // er10
+  hkIntRealPair *m_data; // r8
+  int v11; // r9d
+  int v12; // r10d
   int v13; // ecx
   int v14; // edx
   unsigned __int64 v15; // [rsp+30h] [rbp+8h]
-  hkResult result; // [rsp+38h] [rbp+10h]
+  hkResult result; // [rsp+38h] [rbp+10h] BYREF
 
-  v3 = f;
-  v15 = __PAIR__(LODWORD(priorityDelta), f);
-  v4 = (hkSet<hkIntRealPair,hkContainerHeapAllocator,hkMapOperations<hkIntRealPair> > *)&this->m_facePriorities.m_elem;
+  v15 = __PAIR64__(LODWORD(priorityDelta), f);
+  p_m_facePriorities = &this->m_facePriorities;
   v5 = this->m_facePriorities.m_elem.m_size - 1;
-  v6 = this;
-  if ( v5 <= 0 || (v7 = v5 & -1640531535 * v3, v8 = v4->m_elem.m_data[v7].m_key, v8 == -1) )
+  if ( v5 <= 0 || (v7 = v5 & (-1640531535 * f), m_key = p_m_facePriorities->m_elem.m_data[v7].m_key, m_key == -1) )
   {
 LABEL_5:
     v9 = v5 + 1;
   }
   else
   {
-    while ( v8 != v3 )
+    while ( m_key != f )
     {
       v7 = v5 & (v7 + 1);
-      v8 = v4->m_elem.m_data[v7].m_key;
-      if ( v8 == -1 )
+      m_key = p_m_facePriorities->m_elem.m_data[v7].m_key;
+      if ( m_key == -1 )
         goto LABEL_5;
     }
     v9 = v7;
   }
-  if ( v9 > v6->m_facePriorities.m_elem.m_size - 1 )
+  if ( v9 > this->m_facePriorities.m_elem.m_size - 1 )
   {
-    if ( 2 * v4->m_numElems > v5 )
-      hkSet<hkIntRealPair,hkContainerHeapAllocator,hkMapOperations<hkIntRealPair>>::resizeTable(v4, &result, 2 * v5 + 2);
-    v10 = v4->m_elem.m_data;
-    v11 = v4->m_elem.m_size - 1;
+    if ( 2 * p_m_facePriorities->m_numElems > v5 )
+      hkSet<hkIntRealPair,hkContainerHeapAllocator,hkMapOperations<hkIntRealPair>>::resizeTable(
+        p_m_facePriorities,
+        &result,
+        2 * v5 + 2);
+    m_data = p_m_facePriorities->m_elem.m_data;
+    v11 = p_m_facePriorities->m_elem.m_size - 1;
     v12 = 1;
-    v13 = v11 & -1640531535 * v3;
-    v14 = v4->m_elem.m_data[v13].m_key;
+    v13 = v11 & (-1640531535 * f);
+    v14 = p_m_facePriorities->m_elem.m_data[v13].m_key;
     if ( v14 != -1 )
     {
-      while ( v14 != v3 )
+      while ( v14 != f )
       {
         v13 = v11 & (v13 + 1);
-        v14 = v10[v13].m_key;
+        v14 = m_data[v13].m_key;
         if ( v14 == -1 )
           goto LABEL_16;
       }
       v12 = 0;
     }
 LABEL_16:
-    v4->m_numElems += v12;
-    v10[v13] = (hkIntRealPair)v15;
+    p_m_facePriorities->m_numElems += v12;
+    m_data[v13] = (hkIntRealPair)v15;
   }
   else
   {
-    *((float *)&v15 + 1) = COERCE_FLOAT(*(_QWORD *)&v4->m_elem.m_data[v9] >> 32) + priorityDelta;
-    v4->m_elem.m_data[v9] = (hkIntRealPair)v15;
+    *((float *)&v15 + 1) = COERCE_FLOAT(HIDWORD(*(_QWORD *)&p_m_facePriorities->m_elem.m_data[v9])) + priorityDelta;
+    p_m_facePriorities->m_elem.m_data[v9] = (hkIntRealPair)v15;
   }
 }
 

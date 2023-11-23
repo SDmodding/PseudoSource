@@ -7,7 +7,10 @@ void __fastcall McDSP::CAkWhiteNoise::CAkWhiteNoise(McDSP::CAkWhiteNoise *this)
 
 // File Line: 33
 // RVA: 0xB04B30
-void __fastcall McDSP::CAkWhiteNoise::GenerateBuffer(McDSP::CAkWhiteNoise *this, float *out_pfBuffer, unsigned int in_uNumFrames)
+void __fastcall McDSP::CAkWhiteNoise::GenerateBuffer(
+        McDSP::CAkWhiteNoise *this,
+        float *out_pfBuffer,
+        unsigned int in_uNumFrames)
 {
   float *v3; // r9
   float *v4; // r8
@@ -34,17 +37,17 @@ void __fastcall McDSP::CAkWhiteNoise::GenerateBuffer(McDSP::CAkWhiteNoise *this,
         v6 = 214013 * this->m_uLCGState + 2531011;
         v7 = _mm_cvtsi32_si128(v6);
         v8 = 214013 * v6 + 2531011;
-        *(v3 - 4) = COERCE_FLOAT(_mm_cvtepi32_ps(v7)) * v5;
+        *(v3 - 4) = _mm_cvtepi32_ps(v7).m128_f32[0] * v5;
         v9 = _mm_cvtsi32_si128(v8);
         v10 = 214013 * v8 + 2531011;
-        *(v3 - 3) = COERCE_FLOAT(_mm_cvtepi32_ps(v9)) * v5;
+        *(v3 - 3) = _mm_cvtepi32_ps(v9).m128_f32[0] * v5;
         v11 = _mm_cvtsi32_si128(v10);
         v12 = 214013 * v10 + 2531011;
         this->m_uLCGState = v12;
-        *(v3 - 2) = COERCE_FLOAT(_mm_cvtepi32_ps(v11)) * v5;
+        *(v3 - 2) = _mm_cvtepi32_ps(v11).m128_f32[0] * v5;
         *(v3 - 1) = (float)v12 * v5;
       }
-      while ( (signed __int64)v3 < (signed __int64)(v4 - 3) );
+      while ( (__int64)v3 < (__int64)(v4 - 3) );
     }
     for ( ; v3 < v4; *(v3 - 1) = (float)v13 * v5 )
     {

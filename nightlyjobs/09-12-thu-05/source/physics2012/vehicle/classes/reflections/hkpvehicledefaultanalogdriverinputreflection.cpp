@@ -28,17 +28,17 @@ hkClass *__fastcall hkpVehicleDriverInputAnalogStatus::staticClass()
 
 // File Line: 65
 // RVA: 0xE253E0
-void __fastcall finishLoadedObjecthkpVehicleDriverInputAnalogStatus(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpVehicleDriverInputAnalogStatus(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleDriverInputAnalogStatus::`vftable;
+    *p = &hkpVehicleDriverInputAnalogStatus::`vftable;
 }
 
 // File Line: 71
 // RVA: 0xE25400
-void __fastcall cleanupLoadedObjecthkpVehicleDriverInputAnalogStatus(void *p)
+void __fastcall cleanupLoadedObjecthkpVehicleDriverInputAnalogStatus(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 75
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkpVehicleDriverInputAnalogStatusTypeInfo__()
   hkpVehicleDriverInputAnalogStatusTypeInfo.m_typeName = "hkpVehicleDriverInputAnalogStatus";
   hkpVehicleDriverInputAnalogStatusTypeInfo.m_vtable = result;
   hkpVehicleDriverInputAnalogStatusTypeInfo.m_scopedName = "!hkpVehicleDriverInputAnalogStatus";
-  hkpVehicleDriverInputAnalogStatusTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpVehicleDriverInputAnalogStatus;
-  hkpVehicleDriverInputAnalogStatusTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpVehicleDriverInputAnalogStatus;
+  hkpVehicleDriverInputAnalogStatusTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpVehicleDriverInputAnalogStatus;
+  hkpVehicleDriverInputAnalogStatusTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpVehicleDriverInputAnalogStatus;
   return result;
 }
 
@@ -94,17 +94,17 @@ hkClass *__fastcall hkpVehicleDefaultAnalogDriverInput::staticClass()
 
 // File Line: 137
 // RVA: 0xE25420
-void __fastcall finishLoadedObjecthkpVehicleDefaultAnalogDriverInput(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpVehicleDefaultAnalogDriverInput(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpVehicleDefaultAnalogDriverInput::`vftable;
+    *p = &hkpVehicleDefaultAnalogDriverInput::`vftable;
 }
 
 // File Line: 143
 // RVA: 0xE25440
-void __fastcall cleanupLoadedObjecthkpVehicleDefaultAnalogDriverInput(void *p)
+void __fastcall cleanupLoadedObjecthkpVehicleDefaultAnalogDriverInput(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 147
@@ -125,8 +125,8 @@ void **dynamic_initializer_for__hkpVehicleDefaultAnalogDriverInputTypeInfo__()
   hkpVehicleDefaultAnalogDriverInputTypeInfo.m_typeName = "hkpVehicleDefaultAnalogDriverInput";
   hkpVehicleDefaultAnalogDriverInputTypeInfo.m_vtable = result;
   hkpVehicleDefaultAnalogDriverInputTypeInfo.m_scopedName = "!hkpVehicleDefaultAnalogDriverInput";
-  hkpVehicleDefaultAnalogDriverInputTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpVehicleDefaultAnalogDriverInput;
-  hkpVehicleDefaultAnalogDriverInputTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpVehicleDefaultAnalogDriverInput;
+  hkpVehicleDefaultAnalogDriverInputTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpVehicleDefaultAnalogDriverInput;
+  hkpVehicleDefaultAnalogDriverInputTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpVehicleDefaultAnalogDriverInput;
   return result;
 }
 

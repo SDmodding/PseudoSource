@@ -2,20 +2,15 @@
 // RVA: 0x12C1020
 char *__fastcall fgets(char *string, int count, _iobuf *str)
 {
-  _iobuf *v3; // rbx
   int v4; // esi
-  char *v5; // r15
   char *v6; // r14
   char *v7; // rdi
   int v9; // eax
   ioinfo *v10; // rdx
   ioinfo *v11; // rcx
-  bool v12; // sf
   int v13; // ecx
 
-  v3 = str;
   v4 = count;
-  v5 = string;
   v6 = string;
   v7 = string;
   if ( !string && count || count < 0 || !str )
@@ -24,12 +19,12 @@ char *__fastcall fgets(char *string, int count, _iobuf *str)
     invalid_parameter_noinfo();
     return 0i64;
   }
-  if ( (signed int)ioinit() < 0 || !v4 )
+  if ( (int)ioinit() < 0 || !v4 )
     return 0i64;
-  lock_file(v3);
-  if ( !(v3->_flag & 0x40) )
+  lock_file(str);
+  if ( (str->_flag & 0x40) == 0 )
   {
-    v9 = fileno(v3);
+    v9 = fileno(str);
     if ( (unsigned int)(v9 + 2) <= 1 )
     {
       v11 = &_badioinfo;
@@ -37,16 +32,16 @@ char *__fastcall fgets(char *string, int count, _iobuf *str)
     }
     else
     {
-      v10 = &_pioinfo[(signed __int64)v9 >> 5][v9 & 0x1F];
+      v10 = &_pioinfo[(__int64)v9 >> 5][v9 & 0x1F];
       v11 = &_badioinfo;
     }
-    if ( *((_BYTE *)v10 + 56) & 0x7F )
-      goto LABEL_31;
+    if ( (*((_BYTE *)v10 + 56) & 0x7F) != 0 )
+      goto LABEL_17;
     if ( (unsigned int)(v9 + 2) > 1 )
-      v11 = &_pioinfo[(signed __int64)v9 >> 5][v9 & 0x1F];
-    if ( *((_BYTE *)v11 + 56) < 0 )
+      v11 = &_pioinfo[(__int64)v9 >> 5][v9 & 0x1F];
+    if ( *((char *)v11 + 56) < 0 )
     {
-LABEL_31:
+LABEL_17:
       *errno() = 22;
       invalid_parameter_noinfo();
       v7 = 0i64;
@@ -58,14 +53,13 @@ LABEL_31:
     {
       if ( !--v4 )
         break;
-      v12 = v3->_cnt-- - 1 < 0;
-      if ( v12 )
-        v13 = filbuf(v3);
+      if ( --str->_cnt < 0 )
+        v13 = filbuf(str);
       else
-        v13 = *(unsigned __int8 *)v3->_ptr++;
+        v13 = *(unsigned __int8 *)str->_ptr++;
       if ( v13 == -1 )
       {
-        if ( v6 == v5 )
+        if ( v6 == string )
         {
           v7 = 0i64;
           goto $done_4;
@@ -78,7 +72,7 @@ LABEL_31:
     *v6 = 0;
   }
 $done_4:
-  unlock_file(v3);
+  unlock_file(str);
   return v7;
 }
 

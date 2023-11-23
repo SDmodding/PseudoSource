@@ -2,15 +2,13 @@
 // RVA: 0x62FD40
 void __fastcall UFG::UISlot::highlight(UFG::UISlot *this)
 {
-  UFG::UISlot *v1; // rbx
-  UFG::qString result; // [rsp+28h] [rbp-30h]
+  UFG::qString result; // [rsp+28h] [rbp-30h] BYREF
 
-  v1 = this;
   if ( !this->m_isHighlighted )
   {
     this->m_isHighlighted = 1;
     UFG::operator+(&result, &this->m_pathToSlot, ".highlight");
-    Scaleform::GFx::Movie::Invoke(v1->m_screen->mRenderable->m_movie.pObject, result.mData, &customWorldMapCaption);
+    Scaleform::GFx::Movie::Invoke(this->m_screen->mRenderable->m_movie.pObject, result.mData, &customCaption);
     UFG::qString::~qString(&result);
   }
 }
@@ -19,15 +17,13 @@ void __fastcall UFG::UISlot::highlight(UFG::UISlot *this)
 // RVA: 0x63B850
 void __fastcall UFG::UISlot::unhighlight(UFG::UISlot *this)
 {
-  UFG::UISlot *v1; // rbx
-  UFG::qString result; // [rsp+28h] [rbp-30h]
+  UFG::qString result; // [rsp+28h] [rbp-30h] BYREF
 
-  v1 = this;
   if ( this->m_isHighlighted )
   {
     this->m_isHighlighted = 0;
     UFG::operator+(&result, &this->m_pathToSlot, ".unhighlight");
-    Scaleform::GFx::Movie::Invoke(v1->m_screen->mRenderable->m_movie.pObject, result.mData, &customWorldMapCaption);
+    Scaleform::GFx::Movie::Invoke(this->m_screen->mRenderable->m_movie.pObject, result.mData, &customCaption);
     UFG::qString::~qString(&result);
   }
 }
@@ -36,12 +32,10 @@ void __fastcall UFG::UISlot::unhighlight(UFG::UISlot *this)
 // RVA: 0x63A420
 void __fastcall UFG::UISlot::select(UFG::UISlot *this)
 {
-  UFG::UISlot *v1; // rbx
-  UFG::qString result; // [rsp+28h] [rbp-30h]
+  UFG::qString result; // [rsp+28h] [rbp-30h] BYREF
 
-  v1 = this;
   UFG::operator+(&result, &this->m_pathToSlot, ".select");
-  Scaleform::GFx::Movie::Invoke(v1->m_screen->mRenderable->m_movie.pObject, result.mData, &customWorldMapCaption);
+  Scaleform::GFx::Movie::Invoke(this->m_screen->mRenderable->m_movie.pObject, result.mData, &customCaption);
   UFG::qString::~qString(&result);
 }
 
@@ -49,15 +43,13 @@ void __fastcall UFG::UISlot::select(UFG::UISlot *this)
 // RVA: 0x63B2E0
 void __fastcall UFG::UISlot::show(UFG::UISlot *this)
 {
-  UFG::UISlot *v1; // rbx
-  UFG::qString result; // [rsp+28h] [rbp-30h]
+  UFG::qString result; // [rsp+28h] [rbp-30h] BYREF
 
-  v1 = this;
   if ( this->m_isHidden )
   {
     this->m_isHidden = 0;
     UFG::operator+(&result, &this->m_pathToSlot, ".show");
-    Scaleform::GFx::Movie::Invoke(v1->m_screen->mRenderable->m_movie.pObject, result.mData, &customWorldMapCaption);
+    Scaleform::GFx::Movie::Invoke(this->m_screen->mRenderable->m_movie.pObject, result.mData, &customCaption);
     UFG::qString::~qString(&result);
   }
 }
@@ -66,15 +58,13 @@ void __fastcall UFG::UISlot::show(UFG::UISlot *this)
 // RVA: 0x62FC60
 void __fastcall UFG::UISlot::hide(UFG::UISlot *this)
 {
-  UFG::UISlot *v1; // rbx
-  UFG::qString result; // [rsp+28h] [rbp-30h]
+  UFG::qString result; // [rsp+28h] [rbp-30h] BYREF
 
-  v1 = this;
   if ( !this->m_isHidden )
   {
     this->m_isHidden = 1;
     UFG::operator+(&result, &this->m_pathToSlot, ".hide");
-    Scaleform::GFx::Movie::Invoke(v1->m_screen->mRenderable->m_movie.pObject, result.mData, &customWorldMapCaption);
+    Scaleform::GFx::Movie::Invoke(this->m_screen->mRenderable->m_movie.pObject, result.mData, &customCaption);
     UFG::qString::~qString(&result);
   }
 }

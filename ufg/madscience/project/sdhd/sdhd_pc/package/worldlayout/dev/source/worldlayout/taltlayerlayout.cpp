@@ -4,7 +4,7 @@ __int64 UFG::_dynamic_initializer_for__BASE_LAYER_UID__()
 {
   __int64 result; // rax
 
-  result = UFG::qStringHashUpper32(UFG::BASE_LAYER_NAME, 0xFFFFFFFF);
+  result = UFG::qStringHashUpper32(UFG::BASE_LAYER_NAME, -1);
   UFG::BASE_LAYER_UID = result;
   return result;
 }

@@ -2,14 +2,14 @@
 // RVA: 0x14AECB0
 __int64 dynamic_initializer_for__UFG::StimulusManager::s_UpdateList1__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::StimulusManager::s_UpdateList1__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::StimulusManager::s_UpdateList1__);
 }
 
 // File Line: 29
 // RVA: 0x14AECD0
 __int64 dynamic_initializer_for__UFG::StimulusManager::s_UpdateList2__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::StimulusManager::s_UpdateList2__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::StimulusManager::s_UpdateList2__);
 }
 
 // File Line: 78
@@ -45,18 +45,16 @@ void UFG::StimulusManager::DestroyInstance(void)
 // RVA: 0x3627E0
 __int64 __fastcall UFG::StimulusManager::GetStimulusType(const char *type_name)
 {
-  const char *v1; // rsi
   unsigned int v2; // edi
   const char **v3; // rbx
 
-  v1 = type_name;
   v2 = 0;
   v3 = UFG::g_StimulusName;
-  while ( (unsigned int)UFG::qStringCompareInsensitive(v1, *v3, -1) )
+  while ( (unsigned int)UFG::qStringCompareInsensitive(type_name, *v3, -1) )
   {
     ++v3;
     ++v2;
-    if ( (signed __int64)v3 >= (signed __int64)&OneShotCondition::sClassName )
+    if ( (__int64)v3 >= (__int64)&OneShotCondition::sClassName )
       return 0i64;
   }
   return v2;
@@ -64,21 +62,19 @@ __int64 __fastcall UFG::StimulusManager::GetStimulusType(const char *type_name)
 
 // File Line: 109
 // RVA: 0x362850
-__int64 __fastcall UFG::StimulusManager::GetStimulusType(__int64 type_name)
+__int64 __fastcall UFG::StimulusManager::GetStimulusType(_DWORD *type_name)
 {
-  _DWORD *v1; // rsi
   unsigned int v2; // edi
   const char **v3; // rbx
-  UFG::qSymbol result; // [rsp+38h] [rbp+10h]
+  UFG::qSymbol result; // [rsp+38h] [rbp+10h] BYREF
 
-  v1 = (_DWORD *)type_name;
   v2 = 0;
   v3 = UFG::g_StimulusName;
-  while ( *v1 != UFG::qSymbol::create_from_string(&result, *v3)->mUID )
+  while ( *type_name != UFG::qSymbol::create_from_string(&result, *v3)->mUID )
   {
     ++v3;
     ++v2;
-    if ( (signed __int64)v3 >= (signed __int64)&OneShotCondition::sClassName )
+    if ( (__int64)v3 >= (__int64)&OneShotCondition::sClassName )
       return 0i64;
   }
   return v2;
@@ -88,28 +84,27 @@ __int64 __fastcall UFG::StimulusManager::GetStimulusType(__int64 type_name)
 // RVA: 0x393060
 void __fastcall UFG::StimulusManager::Update(UFG::StimulusManager *this, float timestep)
 {
-  UFG::StimulusManager *v2; // rbx
-  UFG::qList<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList,0,0> *v3; // r8
-  UFG::qNode<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList> *v4; // rdx
-  UFG::qList<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList,0,0> *v5; // rdx
+  UFG::qList<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList,0,0> *m_pCurrentUpdateList; // r8
+  UFG::qNode<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList> *mNext; // rdx
+  UFG::qList<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList,0,0> *m_pOtherUpdateList; // rdx
   UFG::StimulusEmitterComponent *v6; // rdx
   __int64 v7; // rcx
   __int64 *v8; // rax
-  __int64 v9; // rax
+  __int64 mPrev; // rax
   UFG::qList<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList,0,0> *v10; // rdx
-  signed __int64 v11; // rdx
+  __int64 v11; // rdx
   __int64 *v12; // rcx
   __int64 **v13; // rax
   __int64 *v14; // rax
-  signed int v15; // edi
+  int v15; // edi
   bool v16; // r8
-  float v17; // xmm6_4
+  float mSimTime_Temp; // xmm6_4
   __int64 **v18; // rcx
   __int64 *v19; // rax
   UFG::qList<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList,0,0> *v20; // r8
   UFG::qNode<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList> *v21; // rdx
   UFG::qList<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList,0,0> *v22; // rdx
-  signed __int64 v23; // rdx
+  __int64 v23; // rdx
   __int64 *v24; // rcx
   __int64 **v25; // rax
   __int64 *v26; // rax
@@ -120,324 +115,315 @@ void __fastcall UFG::StimulusManager::Update(UFG::StimulusManager *this, float t
   UFG::StimulusEmitterComponent *v31; // rdx
   __int64 v32; // rcx
   __int64 *v33; // rax
-  __int64 *v34; // rcx
-  __int64 v35; // rax
-  UFG::qList<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList,0,0> *v36; // rdx
-  UFG::qNode<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList> *v37; // rcx
-  UFG::qNode<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList> *v38; // rax
-  __int64 *v39; // rcx
-  __int64 **v40; // rax
-  __int64 *v41; // rcx
-  __int64 **v42; // rax
-  __int64 *v43; // rcx
-  __int64 **v44; // rax
-  __int64 *v45; // rcx
-  __int64 **v46; // rax
-  __int64 *v47; // rcx
-  __int64 **v48; // rax
-  __int64 *v49; // rcx
-  __int64 **v50; // rax
-  __int64 v51; // rcx
-  __int64 *v52; // rax
-  __int64 v53; // rcx
-  __int64 *v54; // rax
-  __int64 **v55; // [rsp+18h] [rbp-39h]
-  __int64 *v56; // [rsp+20h] [rbp-31h]
-  UFG::StimulusEmitterComponent *v57; // [rsp+28h] [rbp-29h]
-  __int64 *v58; // [rsp+30h] [rbp-21h]
-  __int64 **v59; // [rsp+38h] [rbp-19h]
-  UFG::StimulusEmitterComponent *v60; // [rsp+40h] [rbp-11h]
-  __int64 *v61; // [rsp+48h] [rbp-9h]
-  __int64 **v62; // [rsp+50h] [rbp-1h]
-  __int64 v63; // [rsp+58h] [rbp+7h]
-  __int64 *v64; // [rsp+60h] [rbp+Fh]
-  __int64 **v65; // [rsp+68h] [rbp+17h]
-  UFG::StimulusEmitterComponent *v66; // [rsp+70h] [rbp+1Fh]
-  __int64 v67; // [rsp+78h] [rbp+27h]
+  __int64 v34; // rax
+  UFG::qList<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList,0,0> *v35; // rdx
+  UFG::qNode<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList> *v36; // rcx
+  UFG::qNode<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList> *v37; // rax
+  __int64 *v38; // rcx
+  __int64 **v39; // rax
+  __int64 *v40; // rcx
+  __int64 **v41; // rax
+  __int64 *v42; // rcx
+  __int64 **v43; // rax
+  __int64 *v44; // rcx
+  __int64 **v45; // rax
+  __int64 *v46; // rcx
+  __int64 **v47; // rax
+  __int64 *v48; // rcx
+  __int64 **v49; // rax
+  __int64 v50; // rcx
+  __int64 *v51; // rax
+  __int64 v52; // rcx
+  __int64 *v53; // rax
+  __int64 **v54; // [rsp+18h] [rbp-39h] BYREF
+  __int64 *p_m_SafePointerList; // [rsp+20h] [rbp-31h] BYREF
+  UFG::StimulusEmitterComponent *v56; // [rsp+28h] [rbp-29h]
+  __int64 *v57; // [rsp+30h] [rbp-21h] BYREF
+  __int64 **v58; // [rsp+38h] [rbp-19h]
+  UFG::StimulusEmitterComponent *v59; // [rsp+40h] [rbp-11h]
+  __int64 *v60; // [rsp+48h] [rbp-9h] BYREF
+  __int64 **v61; // [rsp+50h] [rbp-1h]
+  UFG::StimulusEmitterComponent *v62; // [rsp+58h] [rbp+7h]
+  __int64 *v63; // [rsp+60h] [rbp+Fh] BYREF
+  __int64 **v64; // [rsp+68h] [rbp+17h]
+  UFG::StimulusEmitterComponent *v65; // [rsp+70h] [rbp+1Fh]
+  __int64 v66; // [rsp+78h] [rbp+27h]
 
-  v67 = -2i64;
-  v2 = this;
-  v55 = &v56;
-  v56 = (__int64 *)&v56;
-  v57 = 0i64;
-  v61 = (__int64 *)&v61;
-  v62 = &v61;
-  v63 = 0i64;
-  v3 = this->m_pCurrentUpdateList;
+  v66 = -2i64;
+  v54 = &p_m_SafePointerList;
+  p_m_SafePointerList = (__int64 *)&p_m_SafePointerList;
+  v56 = 0i64;
+  v60 = (__int64 *)&v60;
+  v61 = &v60;
+  v62 = 0i64;
+  m_pCurrentUpdateList = this->m_pCurrentUpdateList;
   if ( &this->m_pCurrentUpdateList->mNode.mNext[-4] == &this->m_pCurrentUpdateList[-4].mNode )
   {
-    v5 = this->m_pOtherUpdateList;
-    this->m_pCurrentUpdateList = v5;
-    this->m_pOtherUpdateList = v3;
-    if ( (UFG::qList<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList,0,0> *)&v5->mNode.mNext[-4] == &v5[-4] )
+    m_pOtherUpdateList = this->m_pOtherUpdateList;
+    this->m_pCurrentUpdateList = m_pOtherUpdateList;
+    this->m_pOtherUpdateList = m_pCurrentUpdateList;
+    if ( (UFG::qList<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList,0,0> *)&m_pOtherUpdateList->mNode.mNext[-4] == &m_pOtherUpdateList[-4] )
       goto LABEL_9;
-    v4 = v5->mNode.mNext;
+    mNext = m_pOtherUpdateList->mNode.mNext;
   }
   else
   {
-    v4 = v3->mNode.mNext;
+    mNext = m_pCurrentUpdateList->mNode.mNext;
   }
-  v6 = (UFG::StimulusEmitterComponent *)&v4[-4];
-  if ( v57 )
+  v6 = (UFG::StimulusEmitterComponent *)&mNext[-4];
+  if ( v56 )
   {
-    v7 = (__int64)v55;
-    v8 = v56;
-    v55[1] = v56;
+    v7 = (__int64)v54;
+    v8 = p_m_SafePointerList;
+    v54[1] = p_m_SafePointerList;
     *v8 = v7;
-    v55 = (__int64 **)&v55;
-    v56 = (__int64 *)&v55;
+    v54 = (__int64 **)&v54;
+    p_m_SafePointerList = (__int64 *)&v54;
   }
-  v57 = v6;
+  v56 = v6;
   if ( v6 )
   {
-    v9 = (__int64)v6->m_SafePointerList.mNode.mPrev;
-    *(_QWORD *)(v9 + 8) = &v55;
-    v55 = (__int64 **)v9;
-    v56 = (__int64 *)&v6->m_SafePointerList;
-    v6->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v55;
+    mPrev = (__int64)v6->m_SafePointerList.mNode.UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mPrev;
+    *(_QWORD *)(mPrev + 8) = &v54;
+    v54 = (__int64 **)mPrev;
+    p_m_SafePointerList = (__int64 *)&v6->m_SafePointerList;
+    v6->m_SafePointerList.mNode.UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v54;
   }
 LABEL_9:
-  v10 = v2->m_pOtherUpdateList;
+  v10 = this->m_pOtherUpdateList;
   if ( (UFG::qList<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList,0,0> *)&v10->mNode.mNext[-4] != &v10[-4]
-    || (v10 = v2->m_pCurrentUpdateList, &v2->m_pCurrentUpdateList->mNode.mNext[-4] != &v2->m_pCurrentUpdateList[-4].mNode) )
+    || (v10 = this->m_pCurrentUpdateList,
+        &this->m_pCurrentUpdateList->mNode.mNext[-4] != &this->m_pCurrentUpdateList[-4].mNode) )
   {
-    v11 = (signed __int64)&v10->mNode.mPrev[-4];
-    if ( v63 )
+    v11 = (__int64)&v10->mNode.mPrev[-4];
+    if ( v62 )
     {
-      v12 = v61;
-      v13 = v62;
-      v61[1] = (__int64)v62;
+      v12 = v60;
+      v13 = v61;
+      v60[1] = (__int64)v61;
       *v13 = v12;
-      v61 = (__int64 *)&v61;
-      v62 = &v61;
+      v60 = (__int64 *)&v60;
+      v61 = &v60;
     }
-    v63 = v11;
+    v62 = (UFG::StimulusEmitterComponent *)v11;
     if ( v11 )
     {
       v14 = *(__int64 **)(v11 + 8);
-      v14[1] = (__int64)&v61;
-      v61 = v14;
-      v62 = (__int64 **)(v11 + 8);
-      *(_QWORD *)(v11 + 8) = &v61;
+      v14[1] = (__int64)&v60;
+      v60 = v14;
+      v61 = (__int64 **)(v11 + 8);
+      *(_QWORD *)(v11 + 8) = &v60;
     }
   }
   v15 = 0;
   v16 = 0;
-  v17 = UFG::Metrics::msInstance.mSimTime_Temp;
-  if ( v57 )
+  mSimTime_Temp = UFG::Metrics::msInstance.mSimTime_Temp;
+  if ( v56 )
   {
     while ( 1 )
     {
-      if ( v15 >= (signed int)(float)(timestep * 1000.0) || v16 )
+      if ( v15 >= (int)(float)(timestep * 1000.0) || v16 )
         goto LABEL_41;
-      v64 = (__int64 *)&v64;
-      v65 = &v64;
-      v66 = v57;
-      if ( v57 )
-      {
-        v18 = (__int64 **)&v57->m_SafePointerList;
-        v19 = (__int64 *)v57->m_SafePointerList.mNode.mPrev;
-        v19[1] = (__int64)&v64;
-        v64 = v19;
-        v65 = v18;
-        *v18 = (__int64 *)&v64;
-      }
-      v58 = (__int64 *)&v58;
-      v59 = &v58;
-      v60 = 0i64;
-      v20 = v2->m_pCurrentUpdateList;
-      if ( &v66->mNext[-4] != &v2->m_pCurrentUpdateList[-4].mNode )
+      v63 = (__int64 *)&v63;
+      v64 = &v63;
+      v65 = v56;
+      v18 = (__int64 **)&v56->m_SafePointerList;
+      v19 = (__int64 *)v56->m_SafePointerList.mNode.UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mPrev;
+      v19[1] = (__int64)&v63;
+      v63 = v19;
+      v64 = v18;
+      *v18 = (__int64 *)&v63;
+      v57 = (__int64 *)&v57;
+      v58 = &v57;
+      v59 = 0i64;
+      v20 = this->m_pCurrentUpdateList;
+      if ( &v65->mNext[-4] != &this->m_pCurrentUpdateList[-4].mNode )
         break;
-      v22 = v2->m_pOtherUpdateList;
-      v2->m_pCurrentUpdateList = v22;
-      v2->m_pOtherUpdateList = v20;
+      v22 = this->m_pOtherUpdateList;
+      this->m_pCurrentUpdateList = v22;
+      this->m_pOtherUpdateList = v20;
       if ( (UFG::qList<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList,0,0> *)&v22->mNode.mNext[-4] != &v22[-4] )
       {
         v21 = v22->mNode.mNext;
         goto LABEL_24;
       }
 LABEL_28:
-      v27 = (UFG::qNode<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList> *)&v66->mPrev;
-      v28 = v66->mPrev;
-      v29 = v66->mNext;
+      v27 = &v65->UFG::qNode<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList>;
+      v28 = v65->mPrev;
+      v29 = v65->mNext;
       v28->mNext = v29;
       v29->mPrev = v28;
       v27->mPrev = v27;
       v27->mNext = v27;
-      v30 = v66;
-      if ( v17 >= v66->m_NextUpdateTime )
+      v30 = v65;
+      if ( mSimTime_Temp >= v65->m_NextUpdateTime )
       {
-        UFG::StimulusEmitterComponent::Update(v66, timestep, (hkgpIndexedMeshDefinitions::Edge *)v27);
+        UFG::StimulusEmitterComponent::Update(v65, timestep);
         ++v15;
-        v30 = v66;
+        v30 = v65;
       }
-      v16 = v63 == (_QWORD)v30;
-      v31 = v60;
-      if ( v57 )
+      v16 = v62 == v30;
+      v31 = v59;
+      if ( v56 )
       {
-        v32 = (__int64)v55;
-        v33 = v56;
-        v55[1] = v56;
+        v32 = (__int64)v54;
+        v33 = p_m_SafePointerList;
+        v54[1] = p_m_SafePointerList;
         *v33 = v32;
-        v55 = (__int64 **)&v55;
-        v56 = (__int64 *)&v55;
-        v30 = v66;
+        v54 = (__int64 **)&v54;
+        p_m_SafePointerList = (__int64 *)&v54;
+        v30 = v65;
       }
-      v57 = v31;
+      v56 = v31;
       if ( v31 )
       {
-        v34 = (__int64 *)&v31->m_SafePointerList;
-        v35 = (__int64)v31->m_SafePointerList.mNode.mPrev;
-        *(_QWORD *)(v35 + 8) = &v55;
-        v55 = (__int64 **)v35;
-        v56 = v34;
-        *v34 = (__int64)&v55;
-        v30 = v66;
+        v34 = (__int64)v31->m_SafePointerList.mNode.UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mPrev;
+        *(_QWORD *)(v34 + 8) = &v54;
+        v54 = (__int64 **)v34;
+        p_m_SafePointerList = (__int64 *)&v31->m_SafePointerList;
+        v31->m_SafePointerList.mNode.UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v54;
+        v30 = v65;
       }
       if ( v30 )
       {
-        v36 = v2->m_pOtherUpdateList;
-        v37 = (UFG::qNode<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList> *)&v30->mPrev;
-        v38 = v36->mNode.mPrev;
-        v38->mNext = v37;
-        v37->mPrev = v38;
-        v37->mNext = &v36->mNode;
-        v36->mNode.mPrev = v37;
+        v35 = this->m_pOtherUpdateList;
+        v36 = &v30->UFG::qNode<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList>;
+        v37 = v35->mNode.mPrev;
+        v37->mNext = v36;
+        v36->mPrev = v37;
+        v36->mNext = &v35->mNode;
+        v35->mNode.mPrev = v36;
       }
-      if ( v60 )
+      if ( v59 )
       {
+        v38 = v57;
         v39 = v58;
-        v40 = v59;
-        v58[1] = (__int64)v59;
-        *v40 = v39;
-        v58 = (__int64 *)&v58;
-        v59 = &v58;
+        v57[1] = (__int64)v58;
+        *v39 = v38;
+        v57 = (__int64 *)&v57;
+        v58 = &v57;
       }
-      v60 = 0i64;
+      v59 = 0i64;
+      v40 = v57;
       v41 = v58;
-      v42 = v59;
-      v58[1] = (__int64)v59;
-      *v42 = v41;
-      v58 = (__int64 *)&v58;
-      v59 = &v58;
-      if ( v66 )
+      v57[1] = (__int64)v58;
+      *v41 = v40;
+      v57 = (__int64 *)&v57;
+      v58 = &v57;
+      if ( v65 )
       {
+        v42 = v63;
         v43 = v64;
-        v44 = v65;
-        v64[1] = (__int64)v65;
-        *v44 = v43;
-        v64 = (__int64 *)&v64;
-        v65 = &v64;
+        v63[1] = (__int64)v64;
+        *v43 = v42;
+        v63 = (__int64 *)&v63;
+        v64 = &v63;
       }
-      v66 = 0i64;
+      v65 = 0i64;
+      v44 = v63;
       v45 = v64;
-      v46 = v65;
-      v64[1] = (__int64)v65;
-      *v46 = v45;
-      v64 = (__int64 *)&v64;
-      v65 = &v64;
-      if ( !v57 )
+      v63[1] = (__int64)v64;
+      *v45 = v44;
+      v63 = (__int64 *)&v63;
+      v64 = &v63;
+      if ( !v56 )
         goto LABEL_41;
     }
-    v21 = v66->mNext;
+    v21 = v65->mNext;
 LABEL_24:
-    v23 = (signed __int64)&v21[-4];
-    if ( v60 )
+    v23 = (__int64)&v21[-4];
+    if ( v59 )
     {
-      v24 = v58;
-      v25 = v59;
-      v58[1] = (__int64)v59;
+      v24 = v57;
+      v25 = v58;
+      v57[1] = (__int64)v58;
       *v25 = v24;
-      v58 = (__int64 *)&v58;
-      v59 = &v58;
+      v57 = (__int64 *)&v57;
+      v58 = &v57;
     }
-    v60 = (UFG::StimulusEmitterComponent *)v23;
+    v59 = (UFG::StimulusEmitterComponent *)v23;
     if ( v23 )
     {
       v26 = *(__int64 **)(v23 + 8);
-      v26[1] = (__int64)&v58;
-      v58 = v26;
-      v59 = (__int64 **)(v23 + 8);
-      *(_QWORD *)(v23 + 8) = &v58;
+      v26[1] = (__int64)&v57;
+      v57 = v26;
+      v58 = (__int64 **)(v23 + 8);
+      *(_QWORD *)(v23 + 8) = &v57;
     }
     goto LABEL_28;
   }
 LABEL_41:
-  if ( v63 )
+  if ( v62 )
   {
+    v46 = v60;
     v47 = v61;
-    v48 = v62;
-    v61[1] = (__int64)v62;
-    *v48 = v47;
-    v61 = (__int64 *)&v61;
-    v62 = &v61;
+    v60[1] = (__int64)v61;
+    *v47 = v46;
+    v60 = (__int64 *)&v60;
+    v61 = &v60;
   }
-  v63 = 0i64;
+  v62 = 0i64;
+  v48 = v60;
   v49 = v61;
-  v50 = v62;
-  v61[1] = (__int64)v62;
-  *v50 = v49;
-  v61 = (__int64 *)&v61;
-  v62 = &v61;
-  if ( v57 )
+  v60[1] = (__int64)v61;
+  *v49 = v48;
+  v60 = (__int64 *)&v60;
+  v61 = &v60;
+  if ( v56 )
   {
-    v51 = (__int64)v55;
-    v52 = v56;
-    v55[1] = v56;
-    *v52 = v51;
-    v55 = (__int64 **)&v55;
-    v56 = (__int64 *)&v55;
+    v50 = (__int64)v54;
+    v51 = p_m_SafePointerList;
+    v54[1] = p_m_SafePointerList;
+    *v51 = v50;
+    v54 = (__int64 **)&v54;
+    p_m_SafePointerList = (__int64 *)&v54;
   }
-  v53 = (__int64)v55;
-  v54 = v56;
-  v55[1] = v56;
-  *v54 = v53;
+  v52 = (__int64)v54;
+  v53 = p_m_SafePointerList;
+  v54[1] = p_m_SafePointerList;
+  *v53 = v52;
 }
 
 // File Line: 239
 // RVA: 0x381F40
 void __fastcall UFG::StimulusManager::RenderDebug(UFG::StimulusManager *this, Render::View *pView)
 {
-  Render::View *v2; // rdi
-  UFG::StimulusManager *v3; // rsi
-  signed __int64 v4; // rbx
-  UFG::qList<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList,0,0> *emitter_list; // [rsp+20h] [rbp-18h]
-  UFG::qList<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList,0,0> *v6; // [rsp+28h] [rbp-10h]
+  __int64 v4; // rbx
+  UFG::qList<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList,0,0> *emitter_list[3]; // [rsp+20h] [rbp-18h]
 
-  v2 = pView;
-  v3 = this;
   if ( UFG::StimulusManager::s_EnableStimulusVisualization )
   {
     v4 = 0i64;
-    emitter_list = &UFG::StimulusManager::s_UpdateList1;
-    v6 = &UFG::StimulusManager::s_UpdateList2;
+    emitter_list[0] = &UFG::StimulusManager::s_UpdateList1;
+    emitter_list[1] = &UFG::StimulusManager::s_UpdateList2;
     do
-      UFG::StimulusManager::RenderDebug(v3, v2, 0i64, *(&emitter_list + v4++));
+      UFG::StimulusManager::RenderDebug(this, pView, 0i64, emitter_list[v4++]);
     while ( v4 < 2 );
   }
 }
 
 // File Line: 260
 // RVA: 0x381750
-void __fastcall UFG::StimulusManager::RenderDebug(UFG::StimulusManager *this, Render::View *pView, UFG::SimObject *pFocusObject, UFG::qList<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList,0,0> *emitter_list)
+void __fastcall UFG::StimulusManager::RenderDebug(
+        UFG::StimulusManager *this,
+        Render::View *pView,
+        UFG::SimObject *pFocusObject,
+        UFG::qList<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList,0,0> *emitter_list)
 {
-  UFG::SimObject *v4; // r12
-  Render::View *v5; // r14
-  UFG::StimulusManager *v6; // r15
   char v7; // bl
   UFG::qNode<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList> *v8; // rsi
   UFG::qList<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList,0,0> *v9; // r13
-  float v10; // xmm9_4
-  float v11; // xmm10_4
-  float v12; // xmm11_4
+  float z; // xmm9_4
+  float y; // xmm10_4
+  float x; // xmm11_4
   float v13; // xmm7_4
-  float v14; // xmm15_4
+  float m_Type; // xmm15_4
   float v15; // xmm8_4
   float v16; // xmm3_4
   float v17; // xmm4_4
   float v18; // xmm5_4
   float v19; // xmm0_4
-  float v20; // xmm14_4
+  float m_MinPerceptionRadiusMetres; // xmm14_4
   float v21; // xmm11_4
   float v22; // xmm5_4
   float v23; // xmm9_4
@@ -452,102 +438,97 @@ void __fastcall UFG::StimulusManager::RenderDebug(UFG::StimulusManager *this, Re
   float v32; // xmm6_4
   float v33; // xmm2_4
   float v34; // xmm1_4
-  float v35; // xmm4_4
+  float v35; // xmm3_4
   float v36; // xmm6_4
-  float v37; // xmm3_4
-  float v38; // xmm6_4
-  float v39; // xmm4_4
-  float v40; // xmm2_4
-  float v41; // xmm2_4
-  float v42; // xmm0_4
-  float v43; // xmm0_4
-  UFG::qColour v44; // xmm2
-  signed __int64 v45; // rbx
-  Render::DebugDrawContext *v46; // rdi
-  char *v47; // rax
-  UFG::ActiveAIEntityComponent *v48; // r9
-  UFG::qList<UFG::ActiveAIEntityComponent,UFG::ActiveAIEntityComponent,1,0> *v49; // rbx
-  UFG::SimObjectCVBase *v50; // rcx
-  unsigned __int16 v51; // dx
-  UFG::ActiveAIEntityComponent *v52; // rax
-  UFG::qVector3 world_position; // [rsp+30h] [rbp-98h]
-  float v54; // [rsp+40h] [rbp-88h]
-  float v55; // [rsp+44h] [rbp-84h]
-  float v56; // [rsp+48h] [rbp-80h]
-  unsigned __int64 v57; // [rsp+4Ch] [rbp-7Ch]
-  char v58[12]; // [rsp+54h] [rbp-74h]
-  UFG::qColour colour; // [rsp+60h] [rbp-68h]
-  UFG::qMatrix44 xform; // [rsp+70h] [rbp-58h]
-  __int16 v61; // [rsp+B0h] [rbp-18h]
-  char v62; // [rsp+B2h] [rbp-16h]
-  __int64 v63; // [rsp+B8h] [rbp-10h]
-  UFG::DrawInfo info; // [rsp+C0h] [rbp-8h]
-  __int64 v65; // [rsp+F8h] [rbp+30h]
-  UFG::Stimulus v66; // [rsp+108h] [rbp+40h]
-  bool v67; // [rsp+398h] [rbp+2D0h]
-  float v68; // [rsp+3A0h] [rbp+2D8h]
+  float v37; // xmm4_4
+  float v38; // xmm2_4
+  float v39; // xmm2_4
+  float m_EmitterHorizontalAngleCosine; // xmm0_4
+  float v41; // xmm0_4
+  unsigned int v42; // xmm15_4
+  const char *v43; // rbx
+  Render::DebugDrawContext *Context; // rdi
+  char *v45; // rax
+  UFG::ActiveAIEntityComponent *p_mNext; // r9
+  UFG::qList<UFG::ActiveAIEntityComponent,UFG::ActiveAIEntityComponent,1,0> *v47; // rbx
+  UFG::SimObjectCVBase *mPrev; // rcx
+  __int16 m_Flags; // dx
+  UFG::ActiveAIEntityComponent *ComponentOfTypeHK; // rax
+  UFG::qVector3 world_position; // [rsp+30h] [rbp-98h] BYREF
+  float v52; // [rsp+40h] [rbp-88h]
+  float v53; // [rsp+44h] [rbp-84h]
+  float v54; // [rsp+48h] [rbp-80h]
+  unsigned __int64 v55; // [rsp+4Ch] [rbp-7Ch]
+  UFG::qVector3 v56; // [rsp+54h] [rbp-74h]
+  UFG::qColour colour; // [rsp+60h] [rbp-68h] BYREF
+  UFG::qMatrix44 xform; // [rsp+70h] [rbp-58h] BYREF
+  __int16 v59; // [rsp+B0h] [rbp-18h]
+  char v60; // [rsp+B2h] [rbp-16h]
+  __int64 v61; // [rsp+B8h] [rbp-10h]
+  UFG::DrawInfo info; // [rsp+C0h] [rbp-8h] BYREF
+  __int64 v63; // [rsp+F8h] [rbp+30h]
+  UFG::Stimulus v64; // [rsp+108h] [rbp+40h] BYREF
+  bool v65; // [rsp+398h] [rbp+2D0h]
+  float v66; // [rsp+3A0h] [rbp+2D8h]
 
-  v65 = -2i64;
-  v4 = pFocusObject;
-  v5 = pView;
-  v6 = this;
+  v63 = -2i64;
   v7 = pFocusObject != 0i64;
-  v67 = pFocusObject != 0i64;
+  v65 = pFocusObject != 0i64;
   v8 = emitter_list->mNode.mNext - 4;
   v9 = emitter_list - 4;
   if ( v8 != (UFG::qNode<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList> *)&emitter_list[-4] )
   {
-    *(UFG::qVector3 *)v58 = world_position;
-    v10 = world_position.z;
-    v54 = world_position.z;
-    v11 = world_position.y;
-    v55 = world_position.y;
-    v12 = world_position.x;
-    v57 = *(_QWORD *)&world_position.x;
+    v56 = world_position;
+    z = world_position.z;
+    v52 = world_position.z;
+    y = world_position.y;
+    v53 = world_position.y;
+    x = world_position.x;
+    v55 = *(_QWORD *)&world_position.x;
     v13 = world_position.z;
-    v56 = world_position.z;
-    v68 = world_position.x;
+    v54 = world_position.z;
+    v66 = world_position.x;
     do
     {
-      UFG::Stimulus::Stimulus(&v66, (UFG::StimulusEmitterComponent *)v8, 0i64);
+      UFG::Stimulus::Stimulus(&v64, (UFG::StimulusEmitterComponent *)v8, 0i64);
       if ( UFG::StimulusManager::s_StimulusTypeToRender
         && LODWORD(v8[5].mPrev) != UFG::StimulusManager::s_StimulusTypeToRender
-        || v7 && v4 != v66.m_pStimulusProducer.m_pPointer )
+        || v7 && pFocusObject != v64.m_pStimulusProducer.m_pPointer )
       {
-        goto LABEL_48;
+        goto LABEL_46;
       }
-      v14 = (float)(signed int)v66.m_Description.m_Type;
-      v15 = (float)((float)(signed int)v66.m_Description.m_Type * 0.0049999999) + 0.5;
+      m_Type = (float)v64.m_Description.m_Type;
+      v15 = (float)((float)v64.m_Description.m_Type * 0.0049999999) + 0.5;
       if ( !BYTE4(v8[27].mPrev) )
       {
-        if ( v66.m_StimulusProducerInfoValid )
+        if ( v64.m_StimulusProducerInfoValid )
         {
-          v16 = v66.m_StimulusProducerPosition.x;
-          *(float *)v58 = v66.m_StimulusProducerPosition.x;
-          v17 = v66.m_StimulusProducerPosition.y;
-          v18 = v66.m_StimulusProducerPosition.z;
-          *(float *)&v58[8] = v66.m_StimulusProducerPosition.z;
-          v12 = v66.m_StimulusProducerVelocity.x;
-          v57 = __PAIR__(LODWORD(v66.m_StimulusProducerPosition.y), LODWORD(v66.m_StimulusProducerVelocity.x));
-          v11 = v66.m_StimulusProducerVelocity.y;
-          v55 = v66.m_StimulusProducerVelocity.y;
-          v10 = v66.m_StimulusProducerVelocity.z;
-          v54 = v66.m_StimulusProducerVelocity.z;
-          v68 = v66.m_StimulusProducerFacing.x;
-          *(float *)&v58[4] = v66.m_StimulusProducerFacing.y;
-          v13 = v66.m_StimulusProducerFacing.z;
-          v56 = v66.m_StimulusProducerFacing.z;
+          v16 = v64.m_StimulusProducerPosition.x;
+          v56.x = v64.m_StimulusProducerPosition.x;
+          v17 = v64.m_StimulusProducerPosition.y;
+          v18 = v64.m_StimulusProducerPosition.z;
+          v56.z = v64.m_StimulusProducerPosition.z;
+          x = v64.m_StimulusProducerVelocity.x;
+          v55 = __PAIR64__(LODWORD(v64.m_StimulusProducerPosition.y), LODWORD(v64.m_StimulusProducerVelocity.x));
+          y = v64.m_StimulusProducerVelocity.y;
+          v53 = v64.m_StimulusProducerVelocity.y;
+          z = v64.m_StimulusProducerVelocity.z;
+          v52 = v64.m_StimulusProducerVelocity.z;
+          v66 = v64.m_StimulusProducerFacing.x;
+          v56.y = v64.m_StimulusProducerFacing.y;
+          v13 = v64.m_StimulusProducerFacing.z;
+          v54 = v64.m_StimulusProducerFacing.z;
         }
         else
         {
-          v16 = *(float *)v58;
-          v17 = *((float *)&v57 + 1);
-          v18 = *(float *)&v58[8];
+          v16 = v56.x;
+          v17 = *((float *)&v55 + 1);
+          v18 = v56.z;
         }
-        v19 = fsqrt((float)((float)(v11 * v11) + (float)(v12 * v12)) + (float)(v10 * v10));
-        v20 = v66.m_Description.m_MinPerceptionRadiusMetres;
-        if ( v66.m_Description.m_MinPerceptionRadiusMetres <= (float)(v66.m_Description.m_PerceptionRadiusSeconds * v19) )
-          v20 = v66.m_Description.m_PerceptionRadiusSeconds * v19;
+        v19 = fsqrt((float)((float)(y * y) + (float)(x * x)) + (float)(z * z));
+        m_MinPerceptionRadiusMetres = v64.m_Description.m_MinPerceptionRadiusMetres;
+        if ( v64.m_Description.m_MinPerceptionRadiusMetres <= (float)(v64.m_Description.m_PerceptionRadiusSeconds * v19) )
+          m_MinPerceptionRadiusMetres = v64.m_Description.m_PerceptionRadiusSeconds * v19;
         v21 = v18 + v15;
         world_position.x = v16;
         world_position.y = v17;
@@ -557,7 +538,7 @@ void __fastcall UFG::StimulusManager::RenderDebug(UFG::StimulusManager *this, Re
                    + (float)(UFG::qVector3::msDirUp.z * UFG::qVector3::msDirUp.z)) == 0.0 )
           v22 = 0.0;
         else
-          v22 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps((__m128)LODWORD(UFG::qVector3::msDirUp.x)));
+          v22 = 1.0 / _mm_sqrt_ps((__m128)LODWORD(UFG::qVector3::msDirUp.x)).m128_f32[0];
         v23 = v22 * UFG::qVector3::msDirUp.z;
         v24 = v22 * UFG::qVector3::msDirUp.y;
         v25 = v22 * UFG::qVector3::msDirUp.x;
@@ -565,14 +546,14 @@ void __fastcall UFG::StimulusManager::RenderDebug(UFG::StimulusManager *this, Re
         xform.v0.y = v24;
         xform.v0.z = v23;
         xform.v0.w = 0.0;
-        if ( (float)((float)((float)(*(float *)&v58[4] * *(float *)&v58[4]) + (float)(v68 * v68)) + (float)(v13 * v13)) == 0.0 )
+        if ( (float)((float)((float)(v56.y * v56.y) + (float)(v66 * v66)) + (float)(v13 * v13)) == 0.0 )
           v26 = 0.0;
         else
-          v26 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps((__m128)*(unsigned int *)&v58[4]));
+          v26 = 1.0 / _mm_sqrt_ps((__m128)LODWORD(v56.y)).m128_f32[0];
         v27 = v13 * v26;
-        v28 = *(float *)&v58[4] * v26;
-        v29 = v68 * v26;
-        v30 = (float)(v24 * (float)(v68 * v26)) - (float)(v25 * (float)(*(float *)&v58[4] * v26));
+        v28 = v56.y * v26;
+        v29 = v66 * v26;
+        v30 = (float)(v24 * (float)(v66 * v26)) - (float)(v25 * (float)(v56.y * v26));
         v31 = (float)(v25 * v27) - (float)(v23 * v29);
         v32 = (float)(v23 * v28) - (float)(v24 * v27);
         v33 = (float)((float)(v32 * v32) + (float)(v31 * v31)) + (float)(v30 * v30);
@@ -580,193 +561,183 @@ void __fastcall UFG::StimulusManager::RenderDebug(UFG::StimulusManager *this, Re
           v34 = 0.0;
         else
           v34 = 1.0 / fsqrt(v33);
-        v35 = v30 * v34;
-        v36 = v32 * v34;
-        v56 = v36;
-        *(float *)&v57 = v31 * v34;
-        *((float *)&v57 + 1) = v35;
-        *(_DWORD *)v58 = 0;
-        v37 = (float)((float)(v31 * v34) * v25) - (float)(v36 * v24);
-        v38 = (float)(v36 * v23) - (float)(v35 * v25);
-        v39 = (float)(v35 * v24) - (float)((float)(v31 * v34) * v23);
-        v40 = (float)((float)(v38 * v38) + (float)(v39 * v39)) + (float)(v37 * v37);
-        if ( v40 == 0.0 )
-          v41 = 0.0;
+        v54 = v32 * v34;
+        *(float *)&v55 = v31 * v34;
+        *((float *)&v55 + 1) = v30 * v34;
+        v56.x = 0.0;
+        v35 = (float)((float)(v31 * v34) * v25) - (float)((float)(v32 * v34) * v24);
+        v36 = (float)((float)(v32 * v34) * v23) - (float)((float)(v30 * v34) * v25);
+        v37 = (float)((float)(v30 * v34) * v24) - (float)((float)(v31 * v34) * v23);
+        v38 = (float)((float)(v36 * v36) + (float)(v37 * v37)) + (float)(v35 * v35);
+        if ( v38 == 0.0 )
+          v39 = 0.0;
         else
-          v41 = 1.0 / fsqrt(v40);
-        *(float *)&v58[4] = v39 * v41;
-        *(float *)&v58[8] = v41 * v38;
-        colour.r = v41 * v37;
+          v39 = 1.0 / fsqrt(v38);
+        v56.y = v37 * v39;
+        v56.z = v39 * v36;
+        colour.r = v39 * v35;
         colour.g = 0.0;
-        colour.b = *(float *)v58;
-        colour.a = *((float *)&v57 + 1);
+        colour.b = v56.x;
+        colour.a = *((float *)&v55 + 1);
         xform.v0.x = v21;
         xform.v0.y = 1.0;
-        v42 = v66.m_Description.m_EmitterHorizontalAngleCosine;
-        if ( v66.m_Description.m_EmitterHorizontalAngleCosine <= -1.0 )
+        m_EmitterHorizontalAngleCosine = v64.m_Description.m_EmitterHorizontalAngleCosine;
+        if ( v64.m_Description.m_EmitterHorizontalAngleCosine <= -1.0 )
         {
-          v42 = FLOAT_N1_0;
+          m_EmitterHorizontalAngleCosine = FLOAT_N1_0;
         }
-        else if ( v66.m_Description.m_EmitterHorizontalAngleCosine >= 1.0 )
+        else if ( v64.m_Description.m_EmitterHorizontalAngleCosine >= 1.0 )
         {
-          v42 = *(float *)&FLOAT_1_0;
+          m_EmitterHorizontalAngleCosine = *(float *)&FLOAT_1_0;
         }
-        v43 = acosf(v42);
-        colour.r = v14 * 0.0086206896;
-        colour.g = 0.0;
-        colour.b = 1.0 - (float)(v14 * 0.0086206896);
+        v41 = acosf(m_EmitterHorizontalAngleCosine);
+        *(float *)&v42 = m_Type * 0.0086206896;
+        *(_QWORD *)&colour.r = v42;
+        colour.b = 1.0 - *(float *)&v42;
         colour.a = 1.0;
-        v44 = colour;
-        _mm_store_si128((__m128i *)&xform.v0.z, (__m128i)colour);
+        *(UFG::qColour *)&xform.v0.z = colour;
         xform.v1.y = desiredAlpha;
-        *(_QWORD *)&xform.v1.z = *(_QWORD *)&v44.r;
-        *(_QWORD *)&xform.v2.x = (unsigned __int128)_mm_srli_si128((__m128i)v44, 8);
-        *(_QWORD *)&xform.v2.z = *(_QWORD *)&v44.r;
+        *(_QWORD *)&xform.v1.z = v42;
+        *(_QWORD *)&xform.v2.x = _mm_srli_si128((__m128i)colour, 8).m128i_u64[0];
+        *(_QWORD *)&xform.v2.z = v42;
         *(_QWORD *)&xform.v3.x = *(_QWORD *)&xform.v2.x;
-        xform.v3.z = v20 * 2.0;
+        xform.v3.z = m_MinPerceptionRadiusMetres * 2.0;
         xform.v3.w = -1.4230097e-17;
-        v61 = 256;
-        v62 = 0;
-        v63 = 0i64;
-        *(_QWORD *)&info.mColour1.r = *(_QWORD *)&xform.v0.z;
+        v59 = 256;
+        v60 = 0;
+        v61 = 0i64;
+        *(_QWORD *)&info.mColour1.r = v42;
         *(_QWORD *)&info.mColour1.b = *(_QWORD *)&xform.v1.x;
-        *(_QWORD *)&info.mColour2.r = *(_QWORD *)&xform.v0.z;
+        *(_QWORD *)&info.mColour2.r = v42;
         *(_QWORD *)&info.mColour2.b = *(_QWORD *)&xform.v1.x;
-        info.mScale = v20 * 2.0;
-        info.mAlphaBlend = 1775952593;
+        info.mScale = m_MinPerceptionRadiusMetres * 2.0;
+        info.mAlphaBlend = AlphaState_additive;
         *(_WORD *)&info.mDepthBuffer = 257;
         info.mDepthBias = 0;
         info.mPreDrawCallback = 0i64;
-        Render::View::DrawArcSolid(v5, &xform, &info, 3.1415927 - v43, v43 + 3.1415927, 0x3Cu);
-        Render::View::DrawArc(v5, &xform, (UFG::DrawInfo *)&xform.v1.z, 3.1415927 - v43, v43 + 3.1415927, 0x3Cu);
+        Render::View::DrawArcSolid(pView, &xform, &info, 3.1415927 - v41, v41 + 3.1415927, 0x3Cu);
+        Render::View::DrawArc(pView, &xform, (UFG::DrawInfo *)&xform.v1.z, 3.1415927 - v41, v41 + 3.1415927, 0x3Cu);
         colour.a = 1.0;
-        v45 = (signed __int64)&v8[5].mNext->mNext + 2;
-        v46 = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(Render::DebugDrawManager::mInstance, 3u);
-        v47 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v8[2].mNext[4].mNext);
-        Render::DebugDrawContext::DrawText(v46, &world_position, &colour, "%s:%s", v47);
-        v48 = (UFG::ActiveAIEntityComponent *)&UFG::ActiveAIEntityComponent::s_ActiveAIEntityComponentList.mNode.mNext[-84].mNext;
+        v43 = (char *)&v8[5].mNext->mNext + 2;
+        Context = (Render::DebugDrawContext *)Render::DebugDrawManager::GetContext(
+                                                Render::DebugDrawManager::mInstance,
+                                                3u);
+        v45 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v8[2].mNext[4].mNext);
+        Render::DebugDrawContext::DrawText(Context, &world_position, &colour, "%s:%s", v45, v43);
+        p_mNext = (UFG::ActiveAIEntityComponent *)&UFG::ActiveAIEntityComponent::s_ActiveAIEntityComponentList.mNode.mNext[-84].mNext;
         if ( &UFG::ActiveAIEntityComponent::s_ActiveAIEntityComponentList.mNode.mNext[-84].mNext != (UFG::qNode<UFG::ActiveAIEntityComponent,UFG::ActiveAIEntityComponent> **)((char *)&UFG::ActiveAIEntityComponent::s_ActiveAIEntityComponentList - 1336) )
         {
           do
           {
-            v49 = (UFG::qList<UFG::ActiveAIEntityComponent,UFG::ActiveAIEntityComponent,1,0> *)&v48->mNext[-84].mNext;
-            UFG::StimulusManager::RenderPerceivedLine(v6, v5, (UFG::StimulusEmitterComponent *)v8, v48);
-            v48 = (UFG::ActiveAIEntityComponent *)v49;
+            v47 = (UFG::qList<UFG::ActiveAIEntityComponent,UFG::ActiveAIEntityComponent,1,0> *)&p_mNext->mNext[-84].mNext;
+            UFG::StimulusManager::RenderPerceivedLine(this, pView, (UFG::StimulusEmitterComponent *)v8, p_mNext);
+            p_mNext = (UFG::ActiveAIEntityComponent *)v47;
           }
-          while ( v49 != (UFG::qList<UFG::ActiveAIEntityComponent,UFG::ActiveAIEntityComponent,1,0> *)((char *)&UFG::ActiveAIEntityComponent::s_ActiveAIEntityComponentList - 1336) );
+          while ( v47 != (UFG::qList<UFG::ActiveAIEntityComponent,UFG::ActiveAIEntityComponent,1,0> *)((char *)&UFG::ActiveAIEntityComponent::s_ActiveAIEntityComponentList - 1336) );
         }
-        v7 = v67;
-        v12 = *(float *)&v57;
-        v11 = v55;
-        v10 = v54;
-        v13 = v56;
-        goto LABEL_48;
+        v7 = v65;
+        x = *(float *)&v55;
+        y = v53;
+        z = v52;
+        v13 = v54;
+        goto LABEL_46;
       }
       if ( v8[29].mPrev )
       {
-        v50 = (UFG::SimObjectCVBase *)*((_QWORD *)&v8[29].mPrev[5].mNext[2].mNext
-                                      + 7 * *((unsigned __int8 *)&v8[29].mPrev[6].mPrev->mNext + LODWORD(v8[30].mNext)));
+        mPrev = (UFG::SimObjectCVBase *)*((_QWORD *)&v8[29].mPrev[5].mNext[2].mNext
+                                        + 7
+                                        * *((unsigned __int8 *)&v8[29].mPrev[6].mPrev->mNext + LODWORD(v8[30].mNext)));
       }
       else
       {
-        v50 = (UFG::SimObjectCVBase *)v8[32].mPrev;
-        if ( !v50 )
-          goto LABEL_45;
+        mPrev = (UFG::SimObjectCVBase *)v8[32].mPrev;
+        if ( !mPrev )
+          goto LABEL_43;
       }
-      if ( v50 )
+      if ( mPrev )
       {
-        v51 = v50->m_Flags;
-        if ( (v51 >> 14) & 1 )
+        m_Flags = mPrev->m_Flags;
+        if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
         {
-          v52 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v50);
+          ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(mPrev);
         }
-        else if ( (v51 & 0x8000u) == 0 )
+        else if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
         {
-          if ( (v51 >> 13) & 1 )
-          {
-            v52 = (UFG::ActiveAIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                    (UFG::SimObjectGame *)&v50->vfptr,
-                                                    UFG::ActiveAIEntityComponent::_TypeUID);
-          }
-          else if ( (v51 >> 12) & 1 )
-          {
-            v52 = (UFG::ActiveAIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                    (UFG::SimObjectGame *)&v50->vfptr,
-                                                    UFG::ActiveAIEntityComponent::_TypeUID);
-          }
-          else
-          {
-            v52 = (UFG::ActiveAIEntityComponent *)UFG::SimObject::GetComponentOfType(
-                                                    (UFG::SimObject *)&v50->vfptr,
-                                                    UFG::ActiveAIEntityComponent::_TypeUID);
-          }
+          ComponentOfTypeHK = (UFG::ActiveAIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                mPrev,
+                                                                UFG::ActiveAIEntityComponent::_TypeUID);
         }
         else
         {
-          v52 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v50);
+          ComponentOfTypeHK = (UFG::ActiveAIEntityComponent *)UFG::SimObject::GetComponentOfType(
+                                                                mPrev,
+                                                                UFG::ActiveAIEntityComponent::_TypeUID);
         }
-        goto LABEL_46;
+        goto LABEL_44;
       }
-LABEL_45:
-      v52 = 0i64;
+LABEL_43:
+      ComponentOfTypeHK = 0i64;
+LABEL_44:
+      UFG::StimulusManager::RenderPerceivedLine(this, pView, (UFG::StimulusEmitterComponent *)v8, ComponentOfTypeHK);
 LABEL_46:
-      UFG::StimulusManager::RenderPerceivedLine(v6, v5, (UFG::StimulusEmitterComponent *)v8, v52);
-LABEL_48:
-      UFG::Stimulus::~Stimulus(&v66);
+      UFG::Stimulus::~Stimulus(&v64);
       v8 = v8[4].mNext - 4;
     }
     while ( v8 != (UFG::qNode<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList> *)v9 );
   }
-}46:
-      UFG::StimulusManager::RenderPerceivedLine(v6, v5, (UFG::StimulusEmitter
+}e<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList> *)v9 );
+  }
+}
 
 // File Line: 355
 // RVA: 0x381FB0
-void __fastcall UFG::StimulusManager::RenderPerceivedLine(UFG::StimulusManager *this, Render::View *pView, UFG::StimulusEmitterComponent *emitter, UFG::ActiveAIEntityComponent *target_ai_entity)
+void __fastcall UFG::StimulusManager::RenderPerceivedLine(
+        UFG::StimulusManager *this,
+        Render::View *pView,
+        UFG::StimulusEmitterComponent *emitter,
+        UFG::ActiveAIEntityComponent *target_ai_entity)
 {
-  UFG::ActiveAIEntityComponent *v4; // rbx
-  UFG::StimulusEmitterComponent *v5; // rdi
-  Render::View *v6; // rsi
-  UFG::TransformNodeComponent *v7; // rbx
+  UFG::SimComponent *m_pSimComponent; // rbx
   float v8; // xmm1_4
   float v9; // xmm3_4
   unsigned int v10; // xmm3_4
-  UFG::qVector3 position; // [rsp+30h] [rbp-C8h]
-  UFG::qVector3 p0; // [rsp+40h] [rbp-B8h]
+  UFG::qVector3 position; // [rsp+30h] [rbp-C8h] BYREF
+  UFG::qVector3 p0; // [rsp+40h] [rbp-B8h] BYREF
   __int64 v13; // [rsp+50h] [rbp-A8h]
-  __int64 v14; // [rsp+58h] [rbp-A0h]
-  UFG::DrawInfo info; // [rsp+60h] [rbp-98h]
-  UFG::Stimulus stimulus; // [rsp+98h] [rbp-60h]
-  float v17; // [rsp+268h] [rbp+170h]
+  float v14; // [rsp+58h] [rbp-A0h]
+  int v15; // [rsp+5Ch] [rbp-9Ch]
+  UFG::DrawInfo info; // [rsp+60h] [rbp-98h] BYREF
+  UFG::Stimulus stimulus; // [rsp+98h] [rbp-60h] BYREF
+  float v18; // [rsp+268h] [rbp+170h]
 
   if ( target_ai_entity )
   {
     info.mPreDrawCallback = (void (__fastcall *)(Illusion::Material *, Render::View *, Illusion::StateValues *, Illusion::Primitive *, Illusion::StateArgs *))-2i64;
-    v4 = target_ai_entity;
-    v5 = emitter;
-    v6 = pView;
-    UFG::Stimulus::Stimulus((UFG::Stimulus *)((char *)&stimulus + 8), emitter, target_ai_entity->m_pSimObject);
+    UFG::Stimulus::Stimulus(
+      (UFG::Stimulus *)&stimulus.UFG::qNode<UFG::Event,UFG::Event>,
+      emitter,
+      target_ai_entity->m_pSimObject);
     if ( UFG::StimulusReceiverComponent::CanPerceive(
            &stimulus,
-           (UFG::TransformNodeComponent *)v4->m_pTransformNodeComponent.m_pSimComponent) )
+           (UFG::TransformNodeComponent *)target_ai_entity->m_pTransformNodeComponent.m_pSimComponent) )
     {
-      if ( UFG::StimulusEmitterComponent::GetStimulusProducerPosition(v5, &position) )
+      if ( UFG::StimulusEmitterComponent::GetStimulusProducerPosition(emitter, &position) )
       {
         p0 = position;
-        v7 = (UFG::TransformNodeComponent *)v4->m_pTransformNodeComponent.m_pSimComponent;
-        UFG::TransformNodeComponent::UpdateWorldTransform(v7);
-        v8 = v7->mWorldTransform.v3.y;
-        v9 = v7->mWorldTransform.v3.z;
-        position.x = v7->mWorldTransform.v3.x;
+        m_pSimComponent = target_ai_entity->m_pTransformNodeComponent.m_pSimComponent;
+        UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)m_pSimComponent);
+        v8 = *((float *)&m_pSimComponent[2].m_BoundComponentHandles.mNode.mPrev + 1);
+        v9 = *(float *)&m_pSimComponent[2].m_BoundComponentHandles.mNode.mNext;
+        position.x = *(float *)&m_pSimComponent[2].m_BoundComponentHandles.mNode.mPrev;
         position.y = v8;
-        p0.z = p0.z + v17;
-        position.z = v9 + v17;
-        *(float *)&v10 = (float)(signed int)stimulus.m_Description.m_Type * 0.0086206896;
+        p0.z = p0.z + v18;
+        position.z = v9 + v18;
+        *(float *)&v10 = (float)stimulus.m_Description.m_Type * 0.0086206896;
         v13 = v10;
-        *(float *)&v14 = 1.0 - *(float *)&v10;
-        HIDWORD(v14) = 1065353216;
+        v14 = 1.0 - *(float *)&v10;
+        v15 = 1065353216;
         *(_QWORD *)&info.mColour1.r = v10;
-        *(_QWORD *)&info.mColour1.b = v14;
+        info.mColour1.b = 1.0 - *(float *)&v10;
         info.mColour2.r = UFG::qColour::White.r;
         info.mColour2.g = UFG::qColour::White.g;
         info.mColour2.b = 1.0;
@@ -775,7 +746,7 @@ void __fastcall UFG::StimulusManager::RenderPerceivedLine(UFG::StimulusManager *
         *(_QWORD *)&info.mDepthBuffer = Render::gXRayDrawCallback;
         LODWORD(info.mColour2.a) = `UFG::XRayDrawInfo::XRayDrawInfo::`2::alpha;
         LODWORD(info.mColour1.a) = `UFG::XRayDrawInfo::XRayDrawInfo::`2::alpha;
-        Render::View::DrawArrow(v6, &p0, &position, &info, &UFG::qMatrix44::msIdentity);
+        Render::View::DrawArrow(pView, &p0, &position, &info, &UFG::qMatrix44::msIdentity);
       }
     }
     UFG::Stimulus::~Stimulus(&stimulus);
@@ -784,32 +755,32 @@ void __fastcall UFG::StimulusManager::RenderPerceivedLine(UFG::StimulusManager *
 
 // File Line: 390
 // RVA: 0x351450
-UFG::SimObject *__fastcall UFG::StimulusManager::CreateSimObjectAtLocation(UFG::StimulusManager *this, UFG::qVector3 *location)
+UFG::SimObject *__fastcall UFG::StimulusManager::CreateSimObjectAtLocation(
+        UFG::StimulusManager *this,
+        UFG::qVector3 *location)
 {
-  UFG::qVector3 *v2; // rbp
   UFG::qSymbol *v3; // rax
   UFG::SimObject *v4; // rsi
-  UFG::qMemoryPool *v5; // rax
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
   UFG::allocator::free_link *v6; // rdi
   unsigned int v7; // ebx
   unsigned int v8; // eax
   UFG::TransformNodeComponent *v9; // rax
   UFG::TransformNodeComponent *v10; // rdi
   UFG::qVector4 v11; // xmm3
-  float v12; // xmm1_4
-  float v13; // xmm2_4
-  unsigned __int16 v14; // cx
-  UFG::SimObjectModifier v16; // [rsp+38h] [rbp-80h]
-  UFG::qMatrix44 m; // [rsp+60h] [rbp-58h]
-  UFG::qSymbol result; // [rsp+C8h] [rbp+10h]
-  UFG::allocator::free_link *v19; // [rsp+D0h] [rbp+18h]
+  float y; // xmm1_4
+  float z; // xmm2_4
+  __int16 m_Flags; // cx
+  UFG::SimObjectModifier v16; // [rsp+38h] [rbp-80h] BYREF
+  UFG::qMatrix44 m; // [rsp+60h] [rbp-58h] BYREF
+  UFG::qSymbol result; // [rsp+C8h] [rbp+10h] BYREF
+  UFG::allocator::free_link *v19; // [rsp+D0h] [rbp+18h] BYREF
 
-  v2 = location;
   v3 = UFG::qSymbol::create_from_string((UFG::qSymbol *)&v19, "StaticStimulusEmitterComponent");
   UFG::Simulation::GenerateUniqueName(&UFG::gSim, &result, v3);
   v4 = UFG::Simulation::CreateSimObject(&UFG::gSim, &result);
-  v5 = UFG::GetSimulationMemoryPool();
-  v6 = UFG::qMemoryPool::Allocate(v5, 0x110ui64, "StimulusManager", 0i64, 1u);
+  SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+  v6 = UFG::qMemoryPool::Allocate(SimulationMemoryPool, 0x110ui64, "StimulusManager", 0i64, 1u);
   v19 = v6;
   v7 = -1;
   if ( v6 )
@@ -828,24 +799,24 @@ UFG::SimObject *__fastcall UFG::StimulusManager::CreateSimObjectAtLocation(UFG::
   m.v1 = (UFG::qVector4)_mm_shuffle_ps((__m128)v11, (__m128)v11, 81);
   m.v2 = (UFG::qVector4)_mm_shuffle_ps((__m128)v11, (__m128)v11, 69);
   m.v3 = (UFG::qVector4)_mm_shuffle_ps((__m128)v11, (__m128)v11, 21);
-  v12 = v2->y;
-  v13 = v2->z;
-  m.v3.x = v2->x;
-  m.v3.y = v12;
-  m.v3.z = v13;
+  y = location->y;
+  z = location->z;
+  m.v3.x = location->x;
+  m.v3.y = y;
+  m.v3.z = z;
   LODWORD(m.v3.w) = (_DWORD)FLOAT_1_0;
   UFG::TransformNodeComponent::SetWorldTransform(v10, &m);
-  v14 = v4->m_Flags;
-  if ( (v14 >> 14) & 1 || (v14 & 0x8000u) != 0 || (v14 >> 13) & 1 )
+  m_Flags = v4->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 || (m_Flags & 0x2000) != 0 )
   {
     v7 = 2;
   }
-  else if ( (v14 >> 12) & 1 )
+  else if ( (m_Flags & 0x1000) != 0 )
   {
     v7 = 1;
   }
   UFG::SimObjectModifier::SimObjectModifier(&v16, v4, 1);
-  UFG::SimObjectModifier::AttachComponent(&v16, (UFG::SimComponent *)&v10->vfptr, v7);
+  UFG::SimObjectModifier::AttachComponent(&v16, v10, v7);
   UFG::SimObjectModifier::Close(&v16);
   UFG::SimObjectModifier::~SimObjectModifier(&v16);
   return v4;
@@ -853,44 +824,50 @@ UFG::SimObject *__fastcall UFG::StimulusManager::CreateSimObjectAtLocation(UFG::
 
 // File Line: 411
 // RVA: 0x349DD0
-void __fastcall UFG::StimulusManager::BeginStimulus(UFG::StimulusManager *this, UFG::eStimulusType stimulus_type, UFG::StimulusParameters *stimulus_parameters, UFG::qVector3 *location)
+void __fastcall UFG::StimulusManager::BeginStimulus(
+        UFG::StimulusManager *this,
+        UFG::eStimulusType stimulus_type,
+        UFG::StimulusParameters *stimulus_parameters,
+        UFG::qVector3 *location)
 {
   __int64 v4; // rbx
-  UFG::StimulusParameters *v5; // rsi
-  UFG::StimulusManager *v6; // rdi
-  UFG::SimObject *v7; // rax
+  UFG::SimObject *SimObjectAtLocation; // rax
 
   v4 = stimulus_type;
-  v5 = stimulus_parameters;
-  v6 = this;
-  v7 = UFG::StimulusManager::CreateSimObjectAtLocation(this, location);
-  UFG::StimulusManager::AttachStimulusEmitterComponent(v6, &UFG::g_StimulusDescriptions[v4], v5, v7, 1);
+  SimObjectAtLocation = UFG::StimulusManager::CreateSimObjectAtLocation(this, location);
+  UFG::StimulusManager::AttachStimulusEmitterComponent(
+    this,
+    &UFG::g_StimulusDescriptions[v4],
+    stimulus_parameters,
+    SimObjectAtLocation,
+    1);
 }
 
 // File Line: 439
 // RVA: 0x351C90
-void __fastcall UFG::StimulusManager::DeleteAllStimulusEmittersOfType(UFG::StimulusManager *this, UFG::eStimulusType stimulus_type, UFG::SimObject *sim_object)
+void __fastcall UFG::StimulusManager::DeleteAllStimulusEmittersOfType(
+        UFG::StimulusManager *this,
+        UFG::eStimulusType stimulus_type,
+        UFG::SimObject *sim_object)
 {
-  UFG::eStimulusType v3; // esi
-  UFG::SimComponent *v4; // rbx
+  UFG::SimComponent *ComponentOfType; // rbx
   UFG::TransformNodeComponent *v5; // rdi
 
   if ( sim_object )
   {
-    v3 = stimulus_type;
-    v4 = UFG::SimObject::GetComponentOfType(sim_object, UFG::StimulusEmitterComponent::_TypeUID);
-    if ( v4 )
+    ComponentOfType = UFG::SimObject::GetComponentOfType(sim_object, UFG::StimulusEmitterComponent::_TypeUID);
+    if ( ComponentOfType )
     {
       do
       {
         v5 = UFG::SimObject::GetComponentOfType(
-               v4->m_pSimObject,
+               ComponentOfType->m_pSimObject,
                UFG::StimulusEmitterComponent::_StimulusEmitterComponentTypeUID,
                0,
-               v4);
-        if ( LODWORD(v4[1].m_SafePointerList.mNode.mNext) == v3 )
-          UFG::Simulation::DestroySimComponent(&UFG::gSim, v4);
-        v4 = (UFG::SimComponent *)&v5->vfptr;
+               ComponentOfType);
+        if ( LODWORD(ComponentOfType[1].m_SafePointerList.mNode.mNext) == stimulus_type )
+          UFG::Simulation::DestroySimComponent(&UFG::gSim, ComponentOfType);
+        ComponentOfType = v5;
       }
       while ( v5 );
     }
@@ -899,34 +876,34 @@ void __fastcall UFG::StimulusManager::DeleteAllStimulusEmittersOfType(UFG::Stimu
 
 // File Line: 456
 // RVA: 0x351BF0
-void __fastcall UFG::StimulusManager::DeleteAllStimulusEmittersOfType(UFG::StimulusManager *this, UFG::eStimulusType stimulus_type, UFG::SimObject *sim_object, UFG::SimObject *stimulus_target_object)
+void __fastcall UFG::StimulusManager::DeleteAllStimulusEmittersOfType(
+        UFG::StimulusManager *this,
+        UFG::eStimulusType stimulus_type,
+        UFG::SimObject *sim_object,
+        UFG::SimObject *stimulus_target_object)
 {
-  UFG::eStimulusType v4; // ebp
-  UFG::SimObject *v5; // rsi
-  UFG::SimComponent *v6; // rbx
+  UFG::SimComponent *ComponentOfType; // rbx
   UFG::TransformNodeComponent *v7; // rdi
 
   if ( sim_object )
   {
-    v4 = stimulus_type;
-    v5 = stimulus_target_object;
-    v6 = UFG::SimObject::GetComponentOfType(sim_object, UFG::StimulusEmitterComponent::_TypeUID);
-    if ( v6 )
+    ComponentOfType = UFG::SimObject::GetComponentOfType(sim_object, UFG::StimulusEmitterComponent::_TypeUID);
+    if ( ComponentOfType )
     {
       do
       {
         v7 = UFG::SimObject::GetComponentOfType(
-               v6->m_pSimObject,
+               ComponentOfType->m_pSimObject,
                UFG::StimulusEmitterComponent::_StimulusEmitterComponentTypeUID,
                0,
-               v6);
-        if ( LODWORD(v6[1].m_SafePointerList.mNode.mNext) == v4
-          && BYTE4(v6[6].m_BoundComponentHandles.mNode.mPrev)
-          && (UFG::SimObject *)v6[8].vfptr == v5 )
+               ComponentOfType);
+        if ( LODWORD(ComponentOfType[1].m_SafePointerList.mNode.mNext) == stimulus_type
+          && BYTE4(ComponentOfType[6].m_BoundComponentHandles.mNode.mPrev)
+          && (UFG::SimObject *)ComponentOfType[8].vfptr == stimulus_target_object )
         {
-          UFG::Simulation::DestroySimComponent(&UFG::gSim, v6);
+          UFG::Simulation::DestroySimComponent(&UFG::gSim, ComponentOfType);
         }
-        v6 = (UFG::SimComponent *)&v7->vfptr;
+        ComponentOfType = v7;
       }
       while ( v7 );
     }
@@ -935,34 +912,34 @@ void __fastcall UFG::StimulusManager::DeleteAllStimulusEmittersOfType(UFG::Stimu
 
 // File Line: 475
 // RVA: 0x351D10
-void __fastcall UFG::StimulusManager::DeleteAllStimulusEmittersOfType(UFG::StimulusManager *this, UFG::eStimulusType stimulus_type, UFG::SimObject *sim_object, UFG::eTargetTypeEnum target_type)
+void __fastcall UFG::StimulusManager::DeleteAllStimulusEmittersOfType(
+        UFG::StimulusManager *this,
+        UFG::eStimulusType stimulus_type,
+        UFG::SimObject *sim_object,
+        UFG::eTargetTypeEnum target_type)
 {
-  UFG::eStimulusType v4; // ebp
-  UFG::eTargetTypeEnum v5; // esi
-  UFG::SimComponent *v6; // rbx
+  UFG::SimComponent *ComponentOfType; // rbx
   UFG::TransformNodeComponent *v7; // rdi
 
   if ( sim_object )
   {
-    v4 = stimulus_type;
-    v5 = target_type;
-    v6 = UFG::SimObject::GetComponentOfType(sim_object, UFG::StimulusEmitterComponent::_TypeUID);
-    if ( v6 )
+    ComponentOfType = UFG::SimObject::GetComponentOfType(sim_object, UFG::StimulusEmitterComponent::_TypeUID);
+    if ( ComponentOfType )
     {
       do
       {
         v7 = UFG::SimObject::GetComponentOfType(
-               v6->m_pSimObject,
+               ComponentOfType->m_pSimObject,
                UFG::StimulusEmitterComponent::_StimulusEmitterComponentTypeUID,
                0,
-               v6);
-        if ( LODWORD(v6[1].m_SafePointerList.mNode.mNext) == v4
-          && BYTE4(v6[6].m_BoundComponentHandles.mNode.mPrev)
-          && LODWORD(v6[7].m_pSimObject) == v5 )
+               ComponentOfType);
+        if ( LODWORD(ComponentOfType[1].m_SafePointerList.mNode.mNext) == stimulus_type
+          && BYTE4(ComponentOfType[6].m_BoundComponentHandles.mNode.mPrev)
+          && LODWORD(ComponentOfType[7].m_pSimObject) == target_type )
         {
-          UFG::Simulation::DestroySimComponent(&UFG::gSim, v6);
+          UFG::Simulation::DestroySimComponent(&UFG::gSim, ComponentOfType);
         }
-        v6 = (UFG::SimComponent *)&v7->vfptr;
+        ComponentOfType = v7;
       }
       while ( v7 );
     }
@@ -971,46 +948,48 @@ void __fastcall UFG::StimulusManager::DeleteAllStimulusEmittersOfType(UFG::Stimu
 
 // File Line: 494
 // RVA: 0x349EB0
-void __fastcall UFG::StimulusManager::BeginStimulus(UFG::StimulusManager *this, UFG::eStimulusType stimulus_type, UFG::StimulusParameters *stimulus_parameters, UFG::SimObject *stimulus_emitter_object)
+void __fastcall UFG::StimulusManager::BeginStimulus(
+        UFG::StimulusManager *this,
+        UFG::eStimulusType stimulus_type,
+        UFG::StimulusParameters *stimulus_parameters,
+        UFG::SimObject *stimulus_emitter_object)
 {
   __int64 v4; // rbx
-  UFG::StimulusParameters *v5; // rbp
-  UFG::SimObject *v6; // rsi
-  UFG::StimulusManager *v7; // rdi
 
   v4 = stimulus_type;
-  v5 = stimulus_parameters;
-  v6 = stimulus_emitter_object;
-  v7 = this;
   UFG::StimulusManager::DeleteAllStimulusEmittersOfType(this, stimulus_type, stimulus_emitter_object);
-  UFG::StimulusManager::AttachStimulusEmitterComponent(v7, &UFG::g_StimulusDescriptions[v4], v5, v6, 0);
+  UFG::StimulusManager::AttachStimulusEmitterComponent(
+    this,
+    &UFG::g_StimulusDescriptions[v4],
+    stimulus_parameters,
+    stimulus_emitter_object,
+    0);
 }
 
 // File Line: 510
 // RVA: 0x349E30
-void __fastcall UFG::StimulusManager::BeginStimulus(UFG::StimulusManager *this, UFG::eStimulusType stimulus_type, UFG::StimulusParameters *stimulus_parameters, UFG::SimObject *stimulus_emitter_object, UFG::SimObject *stimulus_target_object)
+void __fastcall UFG::StimulusManager::BeginStimulus(
+        UFG::StimulusManager *this,
+        UFG::eStimulusType stimulus_type,
+        UFG::StimulusParameters *stimulus_parameters,
+        UFG::SimObject *stimulus_emitter_object,
+        UFG::SimObject *stimulus_target_object)
 {
-  UFG::SimObject *v5; // rsi
   __int64 v6; // rbx
-  UFG::StimulusParameters *v7; // rbp
-  UFG::StimulusManager *v8; // rdi
   UFG::StimulusEmitterComponent *v9; // rax
 
-  v5 = stimulus_emitter_object;
   v6 = stimulus_type;
-  v7 = stimulus_parameters;
-  v8 = this;
   UFG::StimulusManager::DeleteAllStimulusEmittersOfType(
     this,
     stimulus_type,
     stimulus_emitter_object,
     stimulus_target_object);
-  v9 = (UFG::StimulusEmitterComponent *)UFG::StimulusManager::AttachStimulusEmitterComponent(
-                                          v8,
-                                          &UFG::g_StimulusDescriptions[v6],
-                                          v7,
-                                          v5,
-                                          0);
+  v9 = UFG::StimulusManager::AttachStimulusEmitterComponent(
+         this,
+         &UFG::g_StimulusDescriptions[v6],
+         stimulus_parameters,
+         stimulus_emitter_object,
+         0);
   if ( stimulus_target_object )
   {
     if ( v9 )
@@ -1020,99 +999,91 @@ void __fastcall UFG::StimulusManager::BeginStimulus(UFG::StimulusManager *this, 
 
 // File Line: 531
 // RVA: 0x349F20
-void __fastcall UFG::StimulusManager::BeginStimulus(UFG::StimulusManager *this, UFG::eStimulusType stimulus_type, UFG::StimulusParameters *stimulus_parameters, UFG::SimObject *stimulus_emitter_object, UFG::eTargetTypeEnum target_type)
+void __fastcall UFG::StimulusManager::BeginStimulus(
+        UFG::StimulusManager *this,
+        UFG::eStimulusType stimulus_type,
+        UFG::StimulusParameters *stimulus_parameters,
+        UFG::SimObjectGame *stimulus_emitter_object,
+        UFG::eTargetTypeEnum target_type)
 {
-  UFG::SimObjectGame *v5; // rbp
   __int64 v6; // rbx
-  UFG::StimulusParameters *v7; // rsi
-  UFG::StimulusManager *v8; // rdi
-  UFG::SimComponent *v9; // rax
+  UFG::StimulusEmitterComponent *v9; // rax
   UFG::StimulusEmitterComponent *v10; // rbx
-  unsigned __int16 v11; // dx
-  UFG::TargetingSystemBaseComponent *v12; // rax
+  signed __int16 m_Flags; // dx
+  UFG::TargetingSystemBaseComponent *m_pComponent; // rax
 
-  v5 = (UFG::SimObjectGame *)stimulus_emitter_object;
   v6 = stimulus_type;
-  v7 = stimulus_parameters;
-  v8 = this;
   UFG::StimulusManager::DeleteAllStimulusEmittersOfType(this, stimulus_type, stimulus_emitter_object, target_type);
   v9 = UFG::StimulusManager::AttachStimulusEmitterComponent(
-         v8,
+         this,
          &UFG::g_StimulusDescriptions[v6],
-         v7,
-         (UFG::SimObject *)&v5->vfptr,
+         stimulus_parameters,
+         stimulus_emitter_object,
          0);
-  v10 = (UFG::StimulusEmitterComponent *)v9;
-  if ( target_type && v9 && v5 )
+  v10 = v9;
+  if ( target_type && v9 && stimulus_emitter_object )
   {
-    v11 = v5->m_Flags;
-    if ( (v11 >> 14) & 1 )
+    m_Flags = stimulus_emitter_object->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v12 = (UFG::TargetingSystemBaseComponent *)v5->m_Components.p[20].m_pComponent;
+      m_pComponent = (UFG::TargetingSystemBaseComponent *)stimulus_emitter_object->m_Components.p[20].m_pComponent;
     }
-    else if ( (v11 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v11 >> 13) & 1 )
-      {
-        v12 = (UFG::TargetingSystemBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                     v5,
-                                                     UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
-      else if ( (v11 >> 12) & 1 )
-      {
-        v12 = (UFG::TargetingSystemBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                     v5,
-                                                     UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
+      if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        m_pComponent = (UFG::TargetingSystemBaseComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                              stimulus_emitter_object,
+                                                              UFG::TargetingSystemBaseComponent::_TypeUID);
       else
-      {
-        v12 = (UFG::TargetingSystemBaseComponent *)UFG::SimObject::GetComponentOfType(
-                                                     (UFG::SimObject *)&v5->vfptr,
-                                                     UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
+        m_pComponent = (UFG::TargetingSystemBaseComponent *)UFG::SimObject::GetComponentOfType(
+                                                              stimulus_emitter_object,
+                                                              UFG::TargetingSystemBaseComponent::_TypeUID);
     }
     else
     {
-      v12 = (UFG::TargetingSystemBaseComponent *)v5->m_Components.p[20].m_pComponent;
+      m_pComponent = (UFG::TargetingSystemBaseComponent *)stimulus_emitter_object->m_Components.p[20].m_pComponent;
     }
-    if ( v12 )
-      UFG::StimulusEmitterComponent::SetIsTargeted(v10, v12, target_type);
+    if ( m_pComponent )
+      UFG::StimulusEmitterComponent::SetIsTargeted(v10, m_pComponent, target_type);
   }
 }
 
 // File Line: 556
 // RVA: 0x355860
-void __fastcall UFG::StimulusManager::EndStimulus(UFG::StimulusManager *this, UFG::eStimulusType stimulus_type, UFG::SimObject *stimulus_emitter_object)
+void __fastcall UFG::StimulusManager::EndStimulus(
+        UFG::StimulusManager *this,
+        UFG::eStimulusType stimulus_type,
+        UFG::SimObject *stimulus_emitter_object)
 {
-  UFG::SimObject *v3; // rsi
   int v4; // ebp
-  UFG::SimComponent *v5; // rbx
+  UFG::SimComponent *ComponentOfType; // rbx
   UFG::TransformNodeComponent *v6; // rdi
 
   if ( stimulus_emitter_object )
   {
-    v3 = stimulus_emitter_object;
     v4 = *((_DWORD *)&unk_1423BF9B0 + 18 * stimulus_type);
-    v5 = UFG::SimObject::GetComponentOfType(stimulus_emitter_object, UFG::StimulusEmitterComponent::_TypeUID);
-    if ( v5 )
+    ComponentOfType = UFG::SimObject::GetComponentOfType(
+                        stimulus_emitter_object,
+                        UFG::StimulusEmitterComponent::_TypeUID);
+    if ( ComponentOfType )
     {
       do
       {
         v6 = UFG::SimObject::GetComponentOfType(
-               v5->m_pSimObject,
+               ComponentOfType->m_pSimObject,
                UFG::StimulusEmitterComponent::_StimulusEmitterComponentTypeUID,
                0,
-               v5);
-        if ( *(_DWORD *)&v5[1].m_Flags == v4 )
+               ComponentOfType);
+        if ( *(_DWORD *)&ComponentOfType[1].m_Flags == v4 )
         {
-          if ( LOBYTE(v5[2].m_BoundComponentHandles.mNode.mPrev) )
+          if ( LOBYTE(ComponentOfType[2].m_BoundComponentHandles.mNode.mPrev) )
           {
-            UFG::Simulation::DestroySimObject(&UFG::gSim, v3);
+            UFG::Simulation::DestroySimObject(&UFG::gSim, stimulus_emitter_object);
             return;
           }
-          UFG::Simulation::DestroySimComponent(&UFG::gSim, v5);
+          UFG::Simulation::DestroySimComponent(&UFG::gSim, ComponentOfType);
         }
-        v5 = (UFG::SimComponent *)&v6->vfptr;
+        ComponentOfType = v6;
       }
       while ( v6 );
     }
@@ -1132,36 +1103,32 @@ __int64 dynamic_initializer_for__uid_StimulusEmitterComponent__()
 
 // File Line: 602
 // RVA: 0x342670
-UFG::SimComponent *__fastcall UFG::StimulusManager::AttachStimulusEmitterComponent(UFG::StimulusManager *this, UFG::StimulusDescription *stimulus_description, UFG::StimulusParameters *stimulus_parameters, UFG::SimObject *stimulus_emitter_object, bool delete_simobject_upon_expiry)
+UFG::StimulusEmitterComponent *__fastcall UFG::StimulusManager::AttachStimulusEmitterComponent(
+        UFG::StimulusManager *this,
+        UFG::StimulusDescription *stimulus_description,
+        UFG::StimulusParameters *stimulus_parameters,
+        UFG::SimObject *stimulus_emitter_object,
+        bool delete_simobject_upon_expiry)
 {
-  UFG::SimObject *v5; // rdi
-  UFG::StimulusParameters *v6; // rbx
-  UFG::StimulusDescription *v7; // rsi
-  UFG::StimulusManager *v8; // rbp
-  UFG::qMemoryPool *v9; // rax
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
   UFG::allocator::free_link *v10; // rax
   UFG::SimComponent *v11; // rax
   UFG::SimComponent *v12; // rbx
-  UFG::qList<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList,0,0> *v13; // rdx
-  UFG::SimComponent *v14; // rcx
-  UFG::qSafePointerNode<UFG::SimComponent>Vtbl *v15; // rax
-  UFG::SimObjectModifier v17; // [rsp+38h] [rbp-30h]
+  UFG::qList<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList,0,0> *m_pOtherUpdateList; // rdx
+  UFG::qSafePointerNode<UFG::SimComponent>Vtbl *mPrev; // rax
+  UFG::SimObjectModifier v16; // [rsp+38h] [rbp-30h] BYREF
 
-  v5 = stimulus_emitter_object;
-  v6 = stimulus_parameters;
-  v7 = stimulus_description;
-  v8 = this;
   if ( !stimulus_emitter_object )
     return 0i64;
-  v9 = UFG::GetSimulationMemoryPool();
-  v10 = UFG::qMemoryPool::Allocate(v9, 0x208ui64, "StimulusEmitterComponent", 0i64, 1u);
+  SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+  v10 = UFG::qMemoryPool::Allocate(SimulationMemoryPool, 0x208ui64, "StimulusEmitterComponent", 0i64, 1u);
   if ( v10 )
   {
     UFG::StimulusEmitterComponent::StimulusEmitterComponent(
       (UFG::StimulusEmitterComponent *)v10,
       uid_StimulusEmitterComponent,
-      v7,
-      v6,
+      stimulus_description,
+      stimulus_parameters,
       delete_simobject_upon_expiry);
     v12 = v11;
   }
@@ -1169,17 +1136,16 @@ UFG::SimComponent *__fastcall UFG::StimulusManager::AttachStimulusEmitterCompone
   {
     v12 = 0i64;
   }
-  UFG::SimObjectModifier::SimObjectModifier(&v17, v5, 0);
-  UFG::SimObjectModifier::AttachComponent(&v17, v12, 0xFFFFFFFFi64);
-  UFG::SimObjectModifier::Close(&v17);
-  UFG::SimObjectModifier::~SimObjectModifier(&v17);
-  v13 = v8->m_pOtherUpdateList;
-  v14 = v12 + 1;
-  v15 = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)v13->mNode.mPrev;
-  v15[1].__vecDelDtor = (void *(__fastcall *)(UFG::qSafePointerNode<UFG::SimComponent> *, unsigned int))&v12[1];
-  v14->vfptr = v15;
-  v14->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)v13;
-  v13->mNode.mPrev = (UFG::qNode<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList> *)&v12[1];
-  return v12;
+  UFG::SimObjectModifier::SimObjectModifier(&v16, stimulus_emitter_object, 0);
+  UFG::SimObjectModifier::AttachComponent(&v16, v12, 0xFFFFFFFFi64);
+  UFG::SimObjectModifier::Close(&v16);
+  UFG::SimObjectModifier::~SimObjectModifier(&v16);
+  m_pOtherUpdateList = this->m_pOtherUpdateList;
+  mPrev = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)m_pOtherUpdateList->mNode.mPrev;
+  mPrev[1].__vecDelDtor = (void *(__fastcall *)(UFG::qSafePointerNode<UFG::SimComponent> *, unsigned int))&v12[1];
+  v12[1].vfptr = mPrev;
+  v12[1].m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)m_pOtherUpdateList;
+  m_pOtherUpdateList->mNode.mPrev = (UFG::qNode<UFG::StimulusEmitterComponent,UFG::StimulusManagerUpdateList> *)&v12[1];
+  return (UFG::StimulusEmitterComponent *)v12;
 }
 

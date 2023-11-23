@@ -13,22 +13,22 @@ void __fastcall hkaiNavMesh::hkaiNavMesh(hkaiNavMesh *this)
   this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMesh::`vftable;
   this->m_faces.m_data = 0i64;
   this->m_faces.m_size = 0;
-  this->m_faces.m_capacityAndFlags = 2147483648;
+  this->m_faces.m_capacityAndFlags = 0x80000000;
   this->m_edges.m_data = 0i64;
   this->m_edges.m_size = 0;
-  this->m_edges.m_capacityAndFlags = 2147483648;
+  this->m_edges.m_capacityAndFlags = 0x80000000;
   this->m_vertices.m_data = 0i64;
   this->m_vertices.m_size = 0;
-  this->m_vertices.m_capacityAndFlags = 2147483648;
+  this->m_vertices.m_capacityAndFlags = 0x80000000;
   this->m_streamingSets.m_data = 0i64;
   this->m_streamingSets.m_size = 0;
-  this->m_streamingSets.m_capacityAndFlags = 2147483648;
+  this->m_streamingSets.m_capacityAndFlags = 0x80000000;
   this->m_faceData.m_data = 0i64;
   this->m_faceData.m_size = 0;
-  this->m_faceData.m_capacityAndFlags = 2147483648;
+  this->m_faceData.m_capacityAndFlags = 0x80000000;
   this->m_edgeData.m_data = 0i64;
   this->m_edgeData.m_size = 0;
-  this->m_edgeData.m_capacityAndFlags = 2147483648;
+  this->m_edgeData.m_capacityAndFlags = 0x80000000;
   this->m_aabb.m_min = (hkVector4f)xmmword_141A712A0;
   this->m_aabb.m_max.m_quad = _mm_xor_ps(
                                 (__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 0),
@@ -44,101 +44,89 @@ void __fastcall hkaiNavMesh::hkaiNavMesh(hkaiNavMesh *this)
 // RVA: 0xBE37F0
 void __fastcall hkaiNavMesh::~hkaiNavMesh(hkaiNavMesh *this)
 {
-  int v1; // er8
-  hkaiNavMesh *v2; // rbx
-  int v3; // er8
+  int m_capacityAndFlags; // r8d
+  int v3; // r8d
   int v4; // edi
   hkaiStreamingSet *v5; // rsi
-  int v6; // er8
-  int v7; // er8
+  int v6; // r8d
+  int v7; // r8d
   int v8; // eax
-  int v9; // er8
+  int v9; // r8d
 
   this->vfptr = (hkBaseObjectVtbl *)&hkaiNavMesh::`vftable;
-  v1 = this->m_edgeData.m_capacityAndFlags;
-  v2 = this;
+  m_capacityAndFlags = this->m_edgeData.m_capacityAndFlags;
   this->m_edgeData.m_size = 0;
-  if ( v1 >= 0 )
+  if ( m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       this->m_edgeData.m_data,
-      4 * v1);
-  v2->m_edgeData.m_data = 0i64;
-  v2->m_edgeData.m_capacityAndFlags = 2147483648;
-  v3 = v2->m_faceData.m_capacityAndFlags;
-  v2->m_faceData.m_size = 0;
+      4 * m_capacityAndFlags);
+  this->m_edgeData.m_data = 0i64;
+  this->m_edgeData.m_capacityAndFlags = 0x80000000;
+  v3 = this->m_faceData.m_capacityAndFlags;
+  this->m_faceData.m_size = 0;
   if ( v3 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_faceData.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_faceData.m_data,
       4 * v3);
-  v2->m_faceData.m_data = 0i64;
-  v2->m_faceData.m_capacityAndFlags = 2147483648;
-  v4 = v2->m_streamingSets.m_size - 1;
+  this->m_faceData.m_data = 0i64;
+  this->m_faceData.m_capacityAndFlags = 0x80000000;
+  v4 = this->m_streamingSets.m_size - 1;
   if ( v4 >= 0 )
   {
-    v5 = &v2->m_streamingSets.m_data[v4];
+    v5 = &this->m_streamingSets.m_data[v4];
     do
     {
-      hkaiStreamingSet::~hkaiStreamingSet(v5);
-      --v5;
+      hkaiStreamingSet::~hkaiStreamingSet(v5--);
       --v4;
     }
     while ( v4 >= 0 );
   }
-  v6 = v2->m_streamingSets.m_capacityAndFlags;
-  v2->m_streamingSets.m_size = 0;
+  v6 = this->m_streamingSets.m_capacityAndFlags;
+  this->m_streamingSets.m_size = 0;
   if ( v6 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_streamingSets.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_streamingSets.m_data,
       56 * (v6 & 0x3FFFFFFF));
-  v2->m_streamingSets.m_data = 0i64;
-  v2->m_streamingSets.m_capacityAndFlags = 2147483648;
-  v7 = v2->m_vertices.m_capacityAndFlags;
-  v2->m_vertices.m_size = 0;
+  this->m_streamingSets.m_data = 0i64;
+  this->m_streamingSets.m_capacityAndFlags = 0x80000000;
+  v7 = this->m_vertices.m_capacityAndFlags;
+  this->m_vertices.m_size = 0;
   if ( v7 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_vertices.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_vertices.m_data,
       16 * v7);
-  v2->m_vertices.m_data = 0i64;
-  v2->m_vertices.m_capacityAndFlags = 2147483648;
-  v8 = v2->m_edges.m_capacityAndFlags;
-  v2->m_edges.m_size = 0;
+  this->m_vertices.m_data = 0i64;
+  this->m_vertices.m_capacityAndFlags = 0x80000000;
+  v8 = this->m_edges.m_capacityAndFlags;
+  this->m_edges.m_size = 0;
   if ( v8 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_edges.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_edges.m_data,
       20 * (v8 & 0x3FFFFFFF));
-  v2->m_edges.m_data = 0i64;
-  v2->m_edges.m_capacityAndFlags = 2147483648;
-  v9 = v2->m_faces.m_capacityAndFlags;
-  v2->m_faces.m_size = 0;
+  this->m_edges.m_data = 0i64;
+  this->m_edges.m_capacityAndFlags = 0x80000000;
+  v9 = this->m_faces.m_capacityAndFlags;
+  this->m_faces.m_size = 0;
   if ( v9 >= 0 )
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_faces.m_data,
-      16 * v9);
-  v2->m_faces.m_data = 0i64;
-  v2->m_faces.m_capacityAndFlags = 2147483648;
-  v2->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, this->m_faces.m_data, 16 * v9);
+  this->m_faces.m_data = 0i64;
+  this->m_faces.m_capacityAndFlags = 0x80000000;
+  this->vfptr = (hkBaseObjectVtbl *)&hkBaseObject::`vftable;
 }
 
 // File Line: 50
 // RVA: 0xBE41F0
 hkResult *__fastcall hkaiNavMesh::appendVertices(hkaiNavMesh *this, hkResult *result, hkVector4f *v, int numVerts)
 {
-  hkVector4f *v4; // rbp
-  hkArrayBase<hkVector4f> *v5; // rsi
-  int v6; // edi
-  hkResult *v7; // rbx
-  int v9; // [rsp+48h] [rbp+20h]
+  hkArray<hkVector4f,hkContainerHeapAllocator> *p_m_vertices; // rsi
+  int v9; // [rsp+48h] [rbp+20h] BYREF
 
-  v4 = v;
-  v5 = (hkArrayBase<hkVector4f> *)&this->m_vertices.m_data;
-  v6 = numVerts;
-  v7 = result;
+  p_m_vertices = &this->m_vertices;
   hkaiArrayUtil::reserveSmall<hkVector4f,hkContainerHeapAllocator>(
     (hkaiArrayUtil *)&v9,
     (hkResult *)&this->m_vertices,
@@ -146,27 +134,25 @@ hkResult *__fastcall hkaiNavMesh::appendVertices(hkaiNavMesh *this, hkResult *re
     -1);
   if ( v9 )
   {
-    v7->m_enum = 1;
+    result->m_enum = HK_FAILURE;
   }
   else
   {
-    hkArrayBase<hkVector4f>::_append(v5, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, v4, v6);
-    v7->m_enum = 0;
+    hkArrayBase<hkVector4f>::_append(p_m_vertices, &hkContainerHeapAllocator::s_alloc, v, numVerts);
+    result->m_enum = HK_SUCCESS;
   }
-  return v7;
+  return result;
 }
 
 // File Line: 60
 // RVA: 0xBE4280
 hkVector4f *__fastcall hkaiNavMesh::expandVerticesBy(hkaiNavMesh *this, int n)
 {
-  hkArray<hkVector4f,hkContainerHeapAllocator> *v2; // rbx
-  int v3; // edi
-  __int64 v5; // rcx
-  int v6; // [rsp+38h] [rbp+10h]
+  hkArray<hkVector4f,hkContainerHeapAllocator> *p_m_vertices; // rbx
+  __int64 m_size; // rcx
+  int v6; // [rsp+38h] [rbp+10h] BYREF
 
-  v2 = &this->m_vertices;
-  v3 = n;
+  p_m_vertices = &this->m_vertices;
   hkaiArrayUtil::reserveSmall<hkVector4f,hkContainerHeapAllocator>(
     (hkaiArrayUtil *)&v6,
     (hkResult *)&this->m_vertices,
@@ -174,186 +160,159 @@ hkVector4f *__fastcall hkaiNavMesh::expandVerticesBy(hkaiNavMesh *this, int n)
     -1);
   if ( v6 )
     return 0i64;
-  v5 = v2->m_size;
-  v2->m_size = v5 + v3;
-  return &v2->m_data[v5];
+  m_size = p_m_vertices->m_size;
+  p_m_vertices->m_size = m_size + n;
+  return &p_m_vertices->m_data[m_size];
 }
 
 // File Line: 69
 // RVA: 0xBE42F0
 hkaiNavMesh::Face *__fastcall hkaiNavMesh::expandFacesBy(hkaiNavMesh *this, int n, int estimatedMaxNumFaces)
 {
-  int v3; // er9
-  int v4; // er15
-  int v5; // er14
-  hkaiNavMesh *v6; // rbp
+  int m_faceDataStriding; // r9d
   int v7; // ebx
   int v9; // eax
   int v10; // eax
-  int v11; // er9
+  int v11; // r9d
   int v12; // edx
   int *v13; // rdi
   __int64 v14; // rcx
-  __int64 v15; // rcx
-  hkResult result; // [rsp+30h] [rbp-38h]
-  int v17; // [rsp+70h] [rbp+8h]
-  int v18; // [rsp+88h] [rbp+20h]
+  __int64 m_size; // rcx
+  hkResult result; // [rsp+30h] [rbp-38h] BYREF
+  int v17; // [rsp+70h] [rbp+8h] BYREF
+  int v18; // [rsp+88h] [rbp+20h] BYREF
 
-  v3 = this->m_faceDataStriding;
-  v4 = estimatedMaxNumFaces;
-  v5 = n;
-  v6 = this;
-  if ( v3 )
+  m_faceDataStriding = this->m_faceDataStriding;
+  if ( m_faceDataStriding )
   {
-    v7 = this->m_faceData.m_size + n * v3;
+    v7 = this->m_faceData.m_size + n * m_faceDataStriding;
     hkaiArrayUtil::reserveSmall<int,hkContainerHeapAllocator>(
       (hkaiArrayUtil *)&v17,
       (hkResult *)&this->m_faceData,
       (hkArray<unsigned int,hkContainerHeapAllocator> *)(unsigned int)v7,
-      estimatedMaxNumFaces * v3);
+      estimatedMaxNumFaces * m_faceDataStriding);
     if ( v17 )
       return 0i64;
-    v9 = v6->m_faceData.m_capacityAndFlags & 0x3FFFFFFF;
+    v9 = this->m_faceData.m_capacityAndFlags & 0x3FFFFFFF;
     if ( v9 < v7 )
     {
       v10 = 2 * v9;
       v11 = v7;
       if ( v7 < v10 )
         v11 = v10;
-      hkArrayUtil::_reserve(
-        &result,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        &v6->m_faceData,
-        v11,
-        4);
+      hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, &this->m_faceData, v11, 4);
     }
-    v12 = v7 - v6->m_faceData.m_size;
-    v13 = &v6->m_faceData.m_data[v6->m_faceData.m_size];
+    v12 = v7 - this->m_faceData.m_size;
+    v13 = &this->m_faceData.m_data[this->m_faceData.m_size];
     v14 = v12;
     if ( v12 > 0 )
     {
       while ( v14 )
       {
-        *v13 = 0;
-        ++v13;
+        *v13++ = 0;
         --v14;
       }
     }
-    v6->m_faceData.m_size = v7;
+    this->m_faceData.m_size = v7;
   }
   hkaiArrayUtil::reserveSmall<hkVector4f,hkContainerHeapAllocator>(
     (hkaiArrayUtil *)&v18,
-    (hkResult *)&v6->m_faces,
-    (hkArray<hkaiNavMesh::Face,hkContainerHeapAllocator> *)(unsigned int)(v5 + v6->m_faces.m_size),
-    v4);
+    (hkResult *)&this->m_faces,
+    (hkArray<hkaiNavMesh::Face,hkContainerHeapAllocator> *)(unsigned int)(n + this->m_faces.m_size),
+    estimatedMaxNumFaces);
   if ( v18 )
     return 0i64;
-  v15 = v6->m_faces.m_size;
-  v6->m_faces.m_size = v15 + v5;
-  return &v6->m_faces.m_data[v15];
+  m_size = this->m_faces.m_size;
+  this->m_faces.m_size = m_size + n;
+  return &this->m_faces.m_data[m_size];
 }
 
 // File Line: 87
 // RVA: 0xBE4550
 hkaiNavMesh::Edge *__fastcall hkaiNavMesh::expandEdgesBy(hkaiNavMesh *this, int n, int estimatedMaxNumEdges)
 {
-  int v3; // er9
-  int v4; // er15
-  int v5; // er14
-  hkaiNavMesh *v6; // rbp
+  int m_edgeDataStriding; // r9d
   int v7; // ebx
   int v9; // eax
   int v10; // eax
-  int v11; // er9
+  int v11; // r9d
   int v12; // edx
   int *v13; // rdi
   __int64 v14; // rcx
-  __int64 v15; // rcx
+  __int64 m_size; // rcx
   int sizeElem; // [rsp+20h] [rbp-48h]
-  hkResult result; // [rsp+30h] [rbp-38h]
-  int v18; // [rsp+70h] [rbp+8h]
-  int v19; // [rsp+88h] [rbp+20h]
+  hkResult result; // [rsp+30h] [rbp-38h] BYREF
+  int v18; // [rsp+70h] [rbp+8h] BYREF
+  int v19; // [rsp+88h] [rbp+20h] BYREF
 
-  v3 = this->m_edgeDataStriding;
-  v4 = estimatedMaxNumEdges;
-  v5 = n;
-  v6 = this;
-  if ( v3 )
+  m_edgeDataStriding = this->m_edgeDataStriding;
+  if ( m_edgeDataStriding )
   {
-    v7 = this->m_edgeData.m_size + n * v3;
+    v7 = this->m_edgeData.m_size + n * m_edgeDataStriding;
     hkaiArrayUtil::reserveSmall<int,hkContainerHeapAllocator>(
       (hkaiArrayUtil *)&v18,
       (hkResult *)&this->m_edgeData,
       (hkArray<unsigned int,hkContainerHeapAllocator> *)(unsigned int)v7,
-      estimatedMaxNumEdges * v3);
+      estimatedMaxNumEdges * m_edgeDataStriding);
     if ( v18 )
       return 0i64;
-    v9 = v6->m_edgeData.m_capacityAndFlags & 0x3FFFFFFF;
+    v9 = this->m_edgeData.m_capacityAndFlags & 0x3FFFFFFF;
     if ( v9 < v7 )
     {
       v10 = 2 * v9;
       v11 = v7;
       if ( v7 < v10 )
         v11 = v10;
-      hkArrayUtil::_reserve(
-        &result,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        &v6->m_edgeData,
-        v11,
-        4);
+      hkArrayUtil::_reserve(&result, &hkContainerHeapAllocator::s_alloc, &this->m_edgeData, v11, 4);
     }
-    v12 = v7 - v6->m_edgeData.m_size;
-    v13 = &v6->m_edgeData.m_data[v6->m_edgeData.m_size];
+    v12 = v7 - this->m_edgeData.m_size;
+    v13 = &this->m_edgeData.m_data[this->m_edgeData.m_size];
     v14 = v12;
     if ( v12 > 0 )
     {
       while ( v14 )
       {
-        *v13 = 0;
-        ++v13;
+        *v13++ = 0;
         --v14;
       }
     }
-    v6->m_edgeData.m_size = v7;
+    this->m_edgeData.m_size = v7;
   }
   hkaiArrayUtil::reserveSmall<hkaiNavMesh::Edge,hkContainerHeapAllocator>(
     (hkaiArrayUtil *)&v19,
-    (hkResult *)&v6->m_edges,
-    (hkArray<hkaiNavMesh::Edge,hkContainerHeapAllocator> *)(unsigned int)(v5 + v6->m_edges.m_size),
-    v4,
+    (hkResult *)&this->m_edges,
+    (hkArray<hkaiNavMesh::Edge,hkContainerHeapAllocator> *)(unsigned int)(n + this->m_edges.m_size),
+    estimatedMaxNumEdges,
     sizeElem);
   if ( v19 )
     return 0i64;
-  v15 = v6->m_edges.m_size;
-  v6->m_edges.m_size = v15 + v5;
-  return &v6->m_edges.m_data[v15];
+  m_size = this->m_edges.m_size;
+  this->m_edges.m_size = m_size + n;
+  return &this->m_edges.m_data[m_size];
 }
 
 // File Line: 104
 // RVA: 0xBE4400
-hkResult *__fastcall hkaiNavMesh::appendEdges(hkaiNavMesh *this, hkResult *result, hkaiNavMesh::Edge *edges, int *edgeData, int n)
+hkResult *__fastcall hkaiNavMesh::appendEdges(
+        hkaiNavMesh *this,
+        hkResult *result,
+        hkaiNavMesh::Edge *edges,
+        const unsigned int *edgeData,
+        int n)
 {
   int v5; // edi
-  int *v6; // rbp
-  hkaiNavMesh::Edge *v7; // r12
-  hkResult *v8; // rbx
-  hkaiNavMesh *v9; // r14
   int v10; // esi
-  int v11; // er9
+  int m_edgeDataStriding; // r9d
   int v12; // eax
   int v13; // eax
-  int v14; // er9
+  int v14; // r9d
   int v15; // edx
   int *v16; // rdi
   __int64 v17; // rcx
   int sizeElem; // [rsp+20h] [rbp-38h]
-  int v20; // [rsp+60h] [rbp+8h]
+  int v20; // [rsp+60h] [rbp+8h] BYREF
 
   v5 = n;
-  v6 = edgeData;
-  v7 = edges;
-  v8 = result;
-  v9 = this;
   v10 = this->m_edgeData.m_size + n * this->m_edgeDataStriding;
   if ( this->m_edgeDataStriding
     && (hkaiArrayUtil::reserveSmall<int,hkContainerHeapAllocator>(
@@ -363,686 +322,645 @@ hkResult *__fastcall hkaiNavMesh::appendEdges(hkaiNavMesh *this, hkResult *resul
           -1),
         n) )
   {
-    v8->m_enum = 1;
+    result->m_enum = HK_FAILURE;
   }
   else
   {
     hkaiArrayUtil::reserveSmall<hkaiNavMesh::Edge,hkContainerHeapAllocator>(
       (hkaiArrayUtil *)&v20,
-      (hkResult *)&v9->m_edges,
-      (hkArray<hkaiNavMesh::Edge,hkContainerHeapAllocator> *)(unsigned int)(v5 + v9->m_edges.m_size),
+      (hkResult *)&this->m_edges,
+      (hkArray<hkaiNavMesh::Edge,hkContainerHeapAllocator> *)(unsigned int)(v5 + this->m_edges.m_size),
       -1,
       sizeElem);
     if ( v20 )
     {
-      v8->m_enum = 1;
+      result->m_enum = HK_FAILURE;
     }
     else
     {
-      hkArrayBase<hkaiNavMesh::Edge>::_append(
-        (hkArrayBase<hkaiNavMesh::Edge> *)&v9->m_edges.m_data,
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-        v7,
-        v5);
-      v11 = v9->m_edgeDataStriding;
-      if ( v11 )
+      hkArrayBase<hkaiNavMesh::Edge>::_append(&this->m_edges, &hkContainerHeapAllocator::s_alloc, edges, v5);
+      m_edgeDataStriding = this->m_edgeDataStriding;
+      if ( m_edgeDataStriding )
       {
-        if ( v6 )
+        if ( edgeData )
         {
           hkArrayBase<unsigned int>::_append(
-            (hkArrayBase<unsigned int> *)&v9->m_edgeData,
-            (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-            (const unsigned int *)v6,
-            v5 * v11);
+            (hkArrayBase<unsigned int> *)&this->m_edgeData,
+            &hkContainerHeapAllocator::s_alloc,
+            edgeData,
+            v5 * m_edgeDataStriding);
         }
         else
         {
-          v12 = v9->m_edgeData.m_capacityAndFlags & 0x3FFFFFFF;
+          v12 = this->m_edgeData.m_capacityAndFlags & 0x3FFFFFFF;
           if ( v12 < v10 )
           {
             v13 = 2 * v12;
             v14 = v10;
             if ( v10 < v13 )
               v14 = v13;
-            hkArrayUtil::_reserve(
-              (hkResult *)&n,
-              (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-              &v9->m_edgeData,
-              v14,
-              4);
+            hkArrayUtil::_reserve((hkResult *)&n, &hkContainerHeapAllocator::s_alloc, &this->m_edgeData, v14, 4);
           }
-          v15 = v10 - v9->m_edgeData.m_size;
-          v16 = &v9->m_edgeData.m_data[v9->m_edgeData.m_size];
+          v15 = v10 - this->m_edgeData.m_size;
+          v16 = &this->m_edgeData.m_data[this->m_edgeData.m_size];
           v17 = v15;
           if ( v15 > 0 )
           {
             while ( v17 )
             {
-              *v16 = 0;
-              ++v16;
+              *v16++ = 0;
               --v17;
             }
           }
-          v9->m_edgeData.m_size = v10;
+          this->m_edgeData.m_size = v10;
         }
       }
-      v8->m_enum = 0;
+      result->m_enum = HK_SUCCESS;
     }
   }
-  return v8;
+  return result;
 }
 
 // File Line: 130
 // RVA: 0xBE39B0
 hkResult *__fastcall hkaiNavMesh::copy(hkaiNavMesh *this, hkResult *result, hkaiNavMesh *other)
 {
-  int v3; // er9
-  hkaiNavMesh *v4; // rbx
-  hkResult *v5; // r14
-  hkaiNavMesh *v6; // rsi
+  int m_size; // r9d
   __int64 v7; // rax
-  hkaiNavMesh::Face *v8; // rcx
+  hkaiNavMesh::Face *m_data; // rcx
   __int64 v9; // r8
   char *v10; // rdx
   int v11; // eax
-  int v12; // er9
+  int v12; // r9d
   int v13; // eax
   __int64 v14; // rax
   hkaiNavMesh::Edge *v15; // r9
   __int64 v16; // r8
-  signed __int64 v17; // rcx
+  int *p_m_b; // rcx
   char *v18; // rdx
   int v19; // eax
-  int v20; // er9
+  int v20; // r9d
   __int64 v21; // rax
   hkVector4f *v22; // rcx
   __int64 v23; // rdx
   char *v24; // r8
   hkVector4f v25; // xmm0
-  int v26; // er9
+  int v26; // r9d
   __int64 v27; // rax
   int *v28; // rcx
   __int64 v29; // rdx
   char *v30; // r8
   int v31; // eax
-  int v32; // er9
+  int v32; // r9d
   __int64 v33; // rax
   int *v34; // rcx
   __int64 v35; // rdx
   char *v36; // r8
   int v37; // eax
-  int v38; // eax
-  hkResult v40; // [rsp+30h] [rbp-10h]
-  hkResult v41; // [rsp+34h] [rbp-Ch]
-  int v42; // [rsp+38h] [rbp-8h]
-  hkResult v43; // [rsp+3Ch] [rbp-4h]
-  hkResult resulta; // [rsp+70h] [rbp+30h]
-  hkResult v45; // [rsp+80h] [rbp+40h]
-  hkResult v46; // [rsp+88h] [rbp+48h]
+  int m_faceDataStriding; // eax
+  hkResult v40; // [rsp+30h] [rbp-10h] BYREF
+  hkResult v41; // [rsp+34h] [rbp-Ch] BYREF
+  int v42; // [rsp+38h] [rbp-8h] BYREF
+  hkResult v43; // [rsp+3Ch] [rbp-4h] BYREF
+  hkResult resulta; // [rsp+70h] [rbp+30h] BYREF
+  hkResult v45; // [rsp+80h] [rbp+40h] BYREF
+  hkResult v46; // [rsp+88h] [rbp+48h] BYREF
 
-  v3 = other->m_faces.m_size;
-  v4 = other;
-  v5 = result;
-  v6 = this;
-  if ( (this->m_faces.m_capacityAndFlags & 0x3FFFFFFF) >= v3 )
+  m_size = other->m_faces.m_size;
+  if ( (this->m_faces.m_capacityAndFlags & 0x3FFFFFFF) >= m_size )
   {
-    resulta.m_enum = 0;
+    resulta.m_enum = HK_SUCCESS;
   }
   else
   {
-    hkArrayUtil::_reserve(
-      &resulta,
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr,
-      &this->m_faces,
-      v3,
-      16);
+    hkArrayUtil::_reserve(&resulta, &hkContainerHeapAllocator::s_alloc, &this->m_faces, m_size, 16);
     if ( resulta.m_enum )
       goto LABEL_12;
   }
-  if ( (v6->m_faces.m_capacityAndFlags & 0x3FFFFFFF) < v4->m_faces.m_size )
+  if ( (this->m_faces.m_capacityAndFlags & 0x3FFFFFFF) < other->m_faces.m_size )
   {
-    if ( v6->m_faces.m_capacityAndFlags >= 0 )
+    if ( this->m_faces.m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-        v6->m_faces.m_data,
-        16 * v6->m_faces.m_capacityAndFlags);
-    v42 = 16 * v4->m_faces.m_size;
-    v6->m_faces.m_data = (hkaiNavMesh::Face *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
-                                                (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-                                                &v42);
-    v6->m_faces.m_capacityAndFlags = v42 / 16;
+        &hkContainerHeapAllocator::s_alloc,
+        this->m_faces.m_data,
+        16 * this->m_faces.m_capacityAndFlags);
+    v42 = 16 * other->m_faces.m_size;
+    this->m_faces.m_data = (hkaiNavMesh::Face *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
+                                                  &hkContainerHeapAllocator::s_alloc,
+                                                  &v42);
+    this->m_faces.m_capacityAndFlags = v42 / 16;
   }
-  v7 = v4->m_faces.m_size;
-  v8 = v6->m_faces.m_data;
-  v6->m_faces.m_size = v7;
+  v7 = other->m_faces.m_size;
+  m_data = this->m_faces.m_data;
+  this->m_faces.m_size = v7;
   v9 = v7;
-  if ( (signed int)v7 > 0 )
+  if ( (int)v7 > 0 )
   {
-    v10 = (char *)((char *)v4->m_faces.m_data - (char *)v8);
+    v10 = (char *)((char *)other->m_faces.m_data - (char *)m_data);
     do
     {
-      v11 = *(int *)((char *)&v8->m_startEdgeIndex + (_QWORD)v10);
-      ++v8;
-      v8[-1].m_startEdgeIndex = v11;
-      v8[-1].m_startUserEdgeIndex = *(_DWORD *)((char *)v8 + (_QWORD)v10 - 12);
-      *(_DWORD *)&v8[-1].m_numEdges = *(_DWORD *)((char *)v8 + (_QWORD)v10 - 8);
-      *(_DWORD *)&v8[-1].m_clusterIndex = *(_DWORD *)((char *)v8 + (_QWORD)v10 - 4);
+      v11 = *(int *)((char *)&m_data->m_startEdgeIndex + (_QWORD)v10);
+      ++m_data;
+      m_data[-1].m_startEdgeIndex = v11;
+      m_data[-1].m_startUserEdgeIndex = *(_DWORD *)((char *)m_data + (_QWORD)v10 - 12);
+      *(_DWORD *)&m_data[-1].m_numEdges = *(_DWORD *)((char *)m_data + (_QWORD)v10 - 8);
+      *(_DWORD *)&m_data[-1].m_clusterIndex = *(_DWORD *)((char *)m_data + (_QWORD)v10 - 4);
       --v9;
     }
     while ( v9 );
   }
 LABEL_12:
-  v12 = v4->m_edges.m_size;
-  if ( (v6->m_edges.m_capacityAndFlags & 0x3FFFFFFF) >= v12 )
+  v12 = other->m_edges.m_size;
+  if ( (this->m_edges.m_capacityAndFlags & 0x3FFFFFFF) >= v12 )
   {
-    v45.m_enum = 0;
+    v45.m_enum = HK_SUCCESS;
   }
   else
   {
-    hkArrayUtil::_reserve(&v45, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v6->m_edges, v12, 20);
+    hkArrayUtil::_reserve(&v45, &hkContainerHeapAllocator::s_alloc, &this->m_edges, v12, 20);
     if ( v45.m_enum )
       goto LABEL_23;
   }
-  v13 = v6->m_edges.m_capacityAndFlags & 0x3FFFFFFF;
-  if ( v13 < v4->m_edges.m_size )
+  v13 = this->m_edges.m_capacityAndFlags & 0x3FFFFFFF;
+  if ( v13 < other->m_edges.m_size )
   {
-    if ( v6->m_edges.m_capacityAndFlags >= 0 )
+    if ( this->m_edges.m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-        v6->m_edges.m_data,
+        &hkContainerHeapAllocator::s_alloc,
+        this->m_edges.m_data,
         20 * v13);
-    v42 = 20 * v4->m_edges.m_size;
-    v6->m_edges.m_data = (hkaiNavMesh::Edge *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
-                                                (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-                                                &v42);
-    v6->m_edges.m_capacityAndFlags = v42 / 20;
+    v42 = 20 * other->m_edges.m_size;
+    this->m_edges.m_data = (hkaiNavMesh::Edge *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
+                                                  &hkContainerHeapAllocator::s_alloc,
+                                                  &v42);
+    this->m_edges.m_capacityAndFlags = v42 / 20;
   }
-  v14 = v4->m_edges.m_size;
-  v15 = v6->m_edges.m_data;
-  v6->m_edges.m_size = v14;
+  v14 = other->m_edges.m_size;
+  v15 = this->m_edges.m_data;
+  this->m_edges.m_size = v14;
   v16 = v14;
-  if ( (signed int)v14 > 0 )
+  if ( (int)v14 > 0 )
   {
-    v17 = (signed __int64)&v15->m_b;
-    v18 = (char *)((char *)v4->m_edges.m_data - (char *)v15);
+    p_m_b = &v15->m_b;
+    v18 = (char *)((char *)other->m_edges.m_data - (char *)v15);
     do
     {
-      v19 = *(_DWORD *)&v18[v17 - 4];
-      v17 += 20i64;
-      *(_DWORD *)(v17 - 24) = v19;
-      *(_DWORD *)(v17 - 20) = *(_DWORD *)&v18[v17 - 20];
-      *(_DWORD *)(v17 - 16) = *(_DWORD *)&v18[v17 - 16];
-      *(_DWORD *)(v17 - 12) = *(_DWORD *)&v18[v17 - 12];
-      *(_BYTE *)(v17 - 8) = v18[v17 - 8];
-      *(_BYTE *)(v17 - 7) = v18[v17 - 7];
-      *(_WORD *)(v17 - 6) = *(_WORD *)&v18[v17 - 6];
+      v19 = *(int *)((char *)p_m_b + (_QWORD)v18 - 4);
+      p_m_b += 5;
+      *(p_m_b - 6) = v19;
+      *(p_m_b - 5) = *(int *)((char *)p_m_b + (_QWORD)v18 - 20);
+      *(p_m_b - 4) = *(int *)((char *)p_m_b + (_QWORD)v18 - 16);
+      *(p_m_b - 3) = *(int *)((char *)p_m_b + (_QWORD)v18 - 12);
+      *((_BYTE *)p_m_b - 8) = *((_BYTE *)p_m_b + (_QWORD)v18 - 8);
+      *((_BYTE *)p_m_b - 7) = *((_BYTE *)p_m_b + (_QWORD)v18 - 7);
+      *((_WORD *)p_m_b - 3) = *(_WORD *)((char *)p_m_b + (_QWORD)v18 - 6);
       --v16;
     }
     while ( v16 );
   }
 LABEL_23:
-  v20 = v4->m_vertices.m_size;
-  if ( (v6->m_vertices.m_capacityAndFlags & 0x3FFFFFFF) >= v20 )
+  v20 = other->m_vertices.m_size;
+  if ( (this->m_vertices.m_capacityAndFlags & 0x3FFFFFFF) >= v20 )
   {
-    v46.m_enum = 0;
+    v46.m_enum = HK_SUCCESS;
   }
   else
   {
-    hkArrayUtil::_reserve(&v46, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v6->m_vertices, v20, 16);
+    hkArrayUtil::_reserve(&v46, &hkContainerHeapAllocator::s_alloc, &this->m_vertices, v20, 16);
     if ( v46.m_enum )
       goto LABEL_34;
   }
-  if ( (v6->m_vertices.m_capacityAndFlags & 0x3FFFFFFF) < v4->m_vertices.m_size )
+  if ( (this->m_vertices.m_capacityAndFlags & 0x3FFFFFFF) < other->m_vertices.m_size )
   {
-    if ( v6->m_vertices.m_capacityAndFlags >= 0 )
+    if ( this->m_vertices.m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-        v6->m_vertices.m_data,
-        16 * v6->m_vertices.m_capacityAndFlags);
-    v42 = 16 * v4->m_vertices.m_size;
-    v6->m_vertices.m_data = (hkVector4f *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
-                                            (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-                                            &v42);
-    v6->m_vertices.m_capacityAndFlags = v42 / 16;
+        &hkContainerHeapAllocator::s_alloc,
+        this->m_vertices.m_data,
+        16 * this->m_vertices.m_capacityAndFlags);
+    v42 = 16 * other->m_vertices.m_size;
+    this->m_vertices.m_data = (hkVector4f *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
+                                              &hkContainerHeapAllocator::s_alloc,
+                                              &v42);
+    this->m_vertices.m_capacityAndFlags = v42 / 16;
   }
-  v21 = v4->m_vertices.m_size;
-  v22 = v6->m_vertices.m_data;
-  v6->m_vertices.m_size = v21;
+  v21 = other->m_vertices.m_size;
+  v22 = this->m_vertices.m_data;
+  this->m_vertices.m_size = v21;
   v23 = v21;
-  if ( (signed int)v21 > 0 )
+  if ( (int)v21 > 0 )
   {
-    v24 = (char *)((char *)v4->m_vertices.m_data - (char *)v22);
+    v24 = (char *)((char *)other->m_vertices.m_data - (char *)v22);
     do
     {
-      v25.m_quad = *(__m128 *)((char *)v22 + (_QWORD)v24);
-      ++v22;
+      v25.m_quad = *(__m128 *)((char *)v22++ + (_QWORD)v24);
       v22[-1] = (hkVector4f)v25.m_quad;
       --v23;
     }
     while ( v23 );
   }
 LABEL_34:
-  v26 = v4->m_faceData.m_size;
-  if ( (v6->m_faceData.m_capacityAndFlags & 0x3FFFFFFF) >= v26 )
+  v26 = other->m_faceData.m_size;
+  if ( (this->m_faceData.m_capacityAndFlags & 0x3FFFFFFF) >= v26 )
   {
-    v40.m_enum = 0;
+    v40.m_enum = HK_SUCCESS;
   }
   else
   {
-    hkArrayUtil::_reserve(&v40, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v6->m_faceData, v26, 4);
+    hkArrayUtil::_reserve(&v40, &hkContainerHeapAllocator::s_alloc, &this->m_faceData, v26, 4);
     if ( v40.m_enum )
       goto LABEL_45;
   }
-  if ( (v6->m_faceData.m_capacityAndFlags & 0x3FFFFFFF) < v4->m_faceData.m_size )
+  if ( (this->m_faceData.m_capacityAndFlags & 0x3FFFFFFF) < other->m_faceData.m_size )
   {
-    if ( v6->m_faceData.m_capacityAndFlags >= 0 )
+    if ( this->m_faceData.m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-        v6->m_faceData.m_data,
-        4 * v6->m_faceData.m_capacityAndFlags);
-    v42 = 4 * v4->m_faceData.m_size;
-    v6->m_faceData.m_data = (int *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
-                                     (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-                                     &v42);
-    v6->m_faceData.m_capacityAndFlags = v42 / 4;
+        &hkContainerHeapAllocator::s_alloc,
+        this->m_faceData.m_data,
+        4 * this->m_faceData.m_capacityAndFlags);
+    v42 = 4 * other->m_faceData.m_size;
+    this->m_faceData.m_data = (int *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
+                                       &hkContainerHeapAllocator::s_alloc,
+                                       &v42);
+    this->m_faceData.m_capacityAndFlags = v42 / 4;
   }
-  v27 = v4->m_faceData.m_size;
-  v28 = v6->m_faceData.m_data;
-  v6->m_faceData.m_size = v27;
+  v27 = other->m_faceData.m_size;
+  v28 = this->m_faceData.m_data;
+  this->m_faceData.m_size = v27;
   v29 = v27;
-  if ( (signed int)v27 > 0 )
+  if ( (int)v27 > 0 )
   {
-    v30 = (char *)((char *)v4->m_faceData.m_data - (char *)v28);
+    v30 = (char *)((char *)other->m_faceData.m_data - (char *)v28);
     do
     {
-      v31 = *(int *)((char *)v28 + (_QWORD)v30);
-      ++v28;
+      v31 = *(int *)((char *)v28++ + (_QWORD)v30);
       *(v28 - 1) = v31;
       --v29;
     }
     while ( v29 );
   }
 LABEL_45:
-  v32 = v4->m_edgeData.m_size;
-  if ( (v6->m_edgeData.m_capacityAndFlags & 0x3FFFFFFF) >= v32 )
+  v32 = other->m_edgeData.m_size;
+  if ( (this->m_edgeData.m_capacityAndFlags & 0x3FFFFFFF) >= v32 )
   {
-    v41.m_enum = 0;
+    v41.m_enum = HK_SUCCESS;
   }
   else
   {
-    hkArrayUtil::_reserve(&v41, (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc.vfptr, &v6->m_edgeData, v32, 4);
+    hkArrayUtil::_reserve(&v41, &hkContainerHeapAllocator::s_alloc, &this->m_edgeData, v32, 4);
     if ( v41.m_enum )
       goto LABEL_56;
   }
-  if ( (v6->m_edgeData.m_capacityAndFlags & 0x3FFFFFFF) < v4->m_edgeData.m_size )
+  if ( (this->m_edgeData.m_capacityAndFlags & 0x3FFFFFFF) < other->m_edgeData.m_size )
   {
-    if ( v6->m_edgeData.m_capacityAndFlags >= 0 )
+    if ( this->m_edgeData.m_capacityAndFlags >= 0 )
       hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-        (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-        v6->m_edgeData.m_data,
-        4 * v6->m_edgeData.m_capacityAndFlags);
-    v42 = 4 * v4->m_edgeData.m_size;
-    v6->m_edgeData.m_data = (int *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
-                                     (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-                                     &v42);
-    v6->m_edgeData.m_capacityAndFlags = v42 / 4;
+        &hkContainerHeapAllocator::s_alloc,
+        this->m_edgeData.m_data,
+        4 * this->m_edgeData.m_capacityAndFlags);
+    v42 = 4 * other->m_edgeData.m_size;
+    this->m_edgeData.m_data = (int *)hkContainerHeapAllocator::s_alloc.vfptr->bufAlloc(
+                                       &hkContainerHeapAllocator::s_alloc,
+                                       &v42);
+    this->m_edgeData.m_capacityAndFlags = v42 / 4;
   }
-  v33 = v4->m_edgeData.m_size;
-  v34 = v6->m_edgeData.m_data;
-  v6->m_edgeData.m_size = v33;
+  v33 = other->m_edgeData.m_size;
+  v34 = this->m_edgeData.m_data;
+  this->m_edgeData.m_size = v33;
   v35 = v33;
-  if ( (signed int)v33 > 0 )
+  if ( (int)v33 > 0 )
   {
-    v36 = (char *)((char *)v4->m_edgeData.m_data - (char *)v34);
+    v36 = (char *)((char *)other->m_edgeData.m_data - (char *)v34);
     do
     {
-      v37 = *(int *)((char *)v34 + (_QWORD)v36);
-      ++v34;
+      v37 = *(int *)((char *)v34++ + (_QWORD)v36);
       *(v34 - 1) = v37;
       --v35;
     }
     while ( v35 );
   }
 LABEL_56:
-  hkaiStreamingSet::_copy(&v43, &v6->m_streamingSets, (hkArrayBase<hkaiStreamingSet> *)&v4->m_streamingSets.m_data);
+  hkaiStreamingSet::_copy(&v43, &this->m_streamingSets, &other->m_streamingSets);
   if ( resulta.m_enum || v45.m_enum || v46.m_enum || v43.m_enum || v40.m_enum || v41.m_enum )
   {
-    v5->m_enum = 1;
+    result->m_enum = HK_FAILURE;
   }
   else
   {
-    v38 = v4->m_faceDataStriding;
-    v5->m_enum = 0;
-    v6->m_faceDataStriding = v38;
-    v6->m_edgeDataStriding = v4->m_edgeDataStriding;
-    v6->m_flags.m_storage = v4->m_flags.m_storage;
-    v6->m_aabb.m_min = v4->m_aabb.m_min;
-    v6->m_aabb.m_max = v4->m_aabb.m_max;
-    v6->m_erosionRadius = v4->m_erosionRadius;
-    v6->m_userData = v4->m_userData;
+    m_faceDataStriding = other->m_faceDataStriding;
+    result->m_enum = HK_SUCCESS;
+    this->m_faceDataStriding = m_faceDataStriding;
+    this->m_edgeDataStriding = other->m_edgeDataStriding;
+    this->m_flags.m_storage = other->m_flags.m_storage;
+    this->m_aabb.m_min = other->m_aabb.m_min;
+    this->m_aabb.m_max = other->m_aabb.m_max;
+    this->m_erosionRadius = other->m_erosionRadius;
+    this->m_userData = other->m_userData;
   }
-  return v5;
+  return result;
 }
 
 // File Line: 157
 // RVA: 0xBE3EE0
 void __fastcall hkaiNavMesh::swap(hkaiNavMesh *this, hkaiNavMesh *other)
 {
-  hkaiNavMesh *v2; // rdi
-  hkaiNavMesh *v3; // rbx
-  int v4; // ecx
-  int v5; // ecx
-  char v6; // al
+  int m_faceDataStriding; // ecx
+  int m_edgeDataStriding; // ecx
+  char m_storage; // al
   hkVector4f v7; // xmm3
   hkVector4f v8; // xmm2
-  float v9; // xmm0_4
-  unsigned __int64 v10; // rcx
+  float m_erosionRadius; // xmm0_4
+  unsigned __int64 m_userData; // rcx
 
-  v2 = other;
-  v3 = this;
   hkArray<hkpTreeBroadPhase32::Handle,hkContainerHeapAllocator>::swap(
     (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&this->m_faces,
     (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&other->m_faces);
   hkArray<hkpTreeBroadPhase32::Handle,hkContainerHeapAllocator>::swap(
-    (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&v3->m_edges,
-    (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&v2->m_edges);
+    (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&this->m_edges,
+    (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&other->m_edges);
   hkArray<hkpTreeBroadPhase32::Handle,hkContainerHeapAllocator>::swap(
-    (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&v3->m_vertices,
-    (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&v2->m_vertices);
+    (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&this->m_vertices,
+    (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&other->m_vertices);
   hkArray<hkpTreeBroadPhase32::Handle,hkContainerHeapAllocator>::swap(
-    (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&v3->m_streamingSets,
-    (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&v2->m_streamingSets);
+    (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&this->m_streamingSets,
+    (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&other->m_streamingSets);
   hkArray<hkpTreeBroadPhase32::Handle,hkContainerHeapAllocator>::swap(
-    (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&v3->m_faceData,
-    (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&v2->m_faceData);
+    (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&this->m_faceData,
+    (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&other->m_faceData);
   hkArray<hkpTreeBroadPhase32::Handle,hkContainerHeapAllocator>::swap(
-    (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&v3->m_edgeData,
-    (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&v2->m_edgeData);
-  v4 = v3->m_faceDataStriding;
-  v3->m_faceDataStriding = v2->m_faceDataStriding;
-  v2->m_faceDataStriding = v4;
-  v5 = v3->m_edgeDataStriding;
-  v3->m_edgeDataStriding = v2->m_edgeDataStriding;
-  v2->m_edgeDataStriding = v5;
-  v6 = v3->m_flags.m_storage;
-  v3->m_flags.m_storage = v2->m_flags.m_storage;
-  v2->m_flags.m_storage = v6;
-  v7.m_quad = (__m128)v3->m_aabb.m_min;
-  v8.m_quad = (__m128)v3->m_aabb.m_max;
-  v3->m_aabb.m_min = v2->m_aabb.m_min;
-  v3->m_aabb.m_max = v2->m_aabb.m_max;
-  v2->m_aabb.m_min = (hkVector4f)v7.m_quad;
-  v2->m_aabb.m_max = (hkVector4f)v8.m_quad;
-  v9 = v3->m_erosionRadius;
-  v3->m_erosionRadius = v2->m_erosionRadius;
-  v2->m_erosionRadius = v9;
-  v10 = v3->m_userData;
-  v3->m_userData = v2->m_userData;
-  v2->m_userData = v10;
+    (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&this->m_edgeData,
+    (hkArray<hkRelocationInfo::Import,hkContainerHeapAllocator> *)&other->m_edgeData);
+  m_faceDataStriding = this->m_faceDataStriding;
+  this->m_faceDataStriding = other->m_faceDataStriding;
+  other->m_faceDataStriding = m_faceDataStriding;
+  m_edgeDataStriding = this->m_edgeDataStriding;
+  this->m_edgeDataStriding = other->m_edgeDataStriding;
+  other->m_edgeDataStriding = m_edgeDataStriding;
+  m_storage = this->m_flags.m_storage;
+  this->m_flags.m_storage = other->m_flags.m_storage;
+  other->m_flags.m_storage = m_storage;
+  v7.m_quad = (__m128)this->m_aabb.m_min;
+  v8.m_quad = (__m128)this->m_aabb.m_max;
+  this->m_aabb = other->m_aabb;
+  other->m_aabb.m_min = (hkVector4f)v7.m_quad;
+  other->m_aabb.m_max = (hkVector4f)v8.m_quad;
+  m_erosionRadius = this->m_erosionRadius;
+  this->m_erosionRadius = other->m_erosionRadius;
+  other->m_erosionRadius = m_erosionRadius;
+  m_userData = this->m_userData;
+  this->m_userData = other->m_userData;
+  other->m_userData = m_userData;
 }
 
 // File Line: 176
 // RVA: 0xBE3FF0
 void __fastcall hkaiNavMesh::clear(hkaiNavMesh *this)
 {
-  int v1; // er8
-  hkaiNavMesh *v2; // rbx
+  int m_capacityAndFlags; // r8d
   int v3; // eax
-  int v4; // er8
+  int v4; // r8d
   int v5; // edi
   hkaiStreamingSet *v6; // rsi
-  int v7; // er8
-  int v8; // er8
-  int v9; // er8
+  int v7; // r8d
+  int v8; // r8d
+  int v9; // r8d
 
-  v1 = this->m_faces.m_capacityAndFlags;
-  v2 = this;
+  m_capacityAndFlags = this->m_faces.m_capacityAndFlags;
   this->m_faces.m_size = 0;
-  if ( v1 >= 0 )
+  if ( m_capacityAndFlags >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       this->m_faces.m_data,
-      16 * v1);
-  v2->m_faces.m_data = 0i64;
-  v2->m_faces.m_capacityAndFlags = 2147483648;
-  v3 = v2->m_edges.m_capacityAndFlags;
-  v2->m_edges.m_size = 0;
+      16 * m_capacityAndFlags);
+  this->m_faces.m_data = 0i64;
+  this->m_faces.m_capacityAndFlags = 0x80000000;
+  v3 = this->m_edges.m_capacityAndFlags;
+  this->m_edges.m_size = 0;
   if ( v3 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_edges.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_edges.m_data,
       20 * (v3 & 0x3FFFFFFF));
-  v2->m_edges.m_data = 0i64;
-  v2->m_edges.m_capacityAndFlags = 2147483648;
-  v4 = v2->m_vertices.m_capacityAndFlags;
-  v2->m_vertices.m_size = 0;
+  this->m_edges.m_data = 0i64;
+  this->m_edges.m_capacityAndFlags = 0x80000000;
+  v4 = this->m_vertices.m_capacityAndFlags;
+  this->m_vertices.m_size = 0;
   if ( v4 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_vertices.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_vertices.m_data,
       16 * v4);
-  v2->m_vertices.m_data = 0i64;
-  v2->m_vertices.m_capacityAndFlags = 2147483648;
-  v5 = v2->m_streamingSets.m_size - 1;
+  this->m_vertices.m_data = 0i64;
+  this->m_vertices.m_capacityAndFlags = 0x80000000;
+  v5 = this->m_streamingSets.m_size - 1;
   if ( v5 >= 0 )
   {
-    v6 = &v2->m_streamingSets.m_data[v5];
+    v6 = &this->m_streamingSets.m_data[v5];
     do
     {
-      hkaiStreamingSet::~hkaiStreamingSet(v6);
-      --v6;
+      hkaiStreamingSet::~hkaiStreamingSet(v6--);
       --v5;
     }
     while ( v5 >= 0 );
   }
-  v7 = v2->m_streamingSets.m_capacityAndFlags;
-  v2->m_streamingSets.m_size = 0;
+  v7 = this->m_streamingSets.m_capacityAndFlags;
+  this->m_streamingSets.m_size = 0;
   if ( v7 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_streamingSets.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_streamingSets.m_data,
       56 * (v7 & 0x3FFFFFFF));
-  v2->m_streamingSets.m_data = 0i64;
-  v2->m_streamingSets.m_capacityAndFlags = 2147483648;
-  v8 = v2->m_faceData.m_capacityAndFlags;
-  v2->m_faceData.m_size = 0;
+  this->m_streamingSets.m_data = 0i64;
+  this->m_streamingSets.m_capacityAndFlags = 0x80000000;
+  v8 = this->m_faceData.m_capacityAndFlags;
+  this->m_faceData.m_size = 0;
   if ( v8 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_faceData.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_faceData.m_data,
       4 * v8);
-  v2->m_faceData.m_data = 0i64;
-  v2->m_faceData.m_capacityAndFlags = 2147483648;
-  v9 = v2->m_edgeData.m_capacityAndFlags;
-  v2->m_edgeData.m_size = 0;
+  this->m_faceData.m_data = 0i64;
+  this->m_faceData.m_capacityAndFlags = 0x80000000;
+  v9 = this->m_edgeData.m_capacityAndFlags;
+  this->m_edgeData.m_size = 0;
   if ( v9 >= 0 )
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      v2->m_edgeData.m_data,
+      &hkContainerHeapAllocator::s_alloc,
+      this->m_edgeData.m_data,
       4 * v9);
-  v2->m_edgeData.m_data = 0i64;
-  v2->m_edgeData.m_capacityAndFlags = 2147483648;
-  v2->m_faceDataStriding = 1;
-  v2->m_edgeDataStriding = 1;
-  v2->m_aabb.m_min = (hkVector4f)xmmword_141A712A0;
-  v2->m_aabb.m_max.m_quad = _mm_xor_ps(
-                              (__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 0),
-                              v2->m_aabb.m_min.m_quad);
-  v2->m_erosionRadius = 0.0;
-  v2->m_userData = 0i64;
-  v2->m_flags.m_storage = 0;
+  this->m_edgeData.m_data = 0i64;
+  this->m_edgeData.m_capacityAndFlags = 0x80000000;
+  this->m_faceDataStriding = 1;
+  this->m_edgeDataStriding = 1;
+  this->m_aabb.m_min = (hkVector4f)xmmword_141A712A0;
+  this->m_aabb.m_max.m_quad = _mm_xor_ps(
+                                (__m128)_mm_shuffle_epi32(_mm_insert_epi16((__m128i)0i64, 0x8000u, 1), 0),
+                                this->m_aabb.m_min.m_quad);
+  this->m_erosionRadius = 0.0;
+  this->m_userData = 0i64;
+  this->m_flags.m_storage = 0;
 }
 
 // File Line: 192
 // RVA: 0xBE41E0
 void __fastcall hkaiNavMesh::checkDeterminism(hkaiNavMesh *this)
 {
-  hkaiStreamingSet::checkDeterminism((hkArrayBase<hkaiStreamingSet> *)&this->m_streamingSets.m_data);
+  hkaiStreamingSet::checkDeterminism(&this->m_streamingSets);
 }
 
 // File Line: 210
 // RVA: 0xBE4890
-hkResult *__fastcall hkaiNavMesh::setFaceDataStriding(hkaiNavMesh *this, hkResult *result, int newStride, int fillValue)
+hkaiUserDataUtils *__fastcall hkaiNavMesh::setFaceDataStriding(
+        hkaiNavMesh *this,
+        hkaiUserDataUtils *result,
+        int newStride,
+        int fillValue)
 {
-  int v4; // eax
-  int v5; // er10
-  hkArray<int,hkContainerHeapAllocator> *v6; // r8
-  hkResult *v7; // rbx
+  int m_size; // eax
+  hkArray<int,hkContainerHeapAllocator> *m_faceDataStriding; // r8
   int v9; // [rsp+30h] [rbp-8h]
 
-  v4 = this->m_faces.m_size;
-  v5 = newStride;
-  v6 = (hkArray<int,hkContainerHeapAllocator> *)(unsigned int)this->m_faceDataStriding;
-  v7 = result;
-  this->m_faceDataStriding = v5;
+  m_size = this->m_faces.m_size;
+  m_faceDataStriding = (hkArray<int,hkContainerHeapAllocator> *)(unsigned int)this->m_faceDataStriding;
+  this->m_faceDataStriding = newStride;
   hkaiUserDataUtils::restride<int>(
-    (hkaiUserDataUtils *)result,
+    result,
     (hkResult *)&this->m_faceData,
-    v6,
-    v5,
-    v4,
+    m_faceDataStriding,
+    newStride,
+    m_size,
     fillValue,
     v9);
-  return v7;
+  return result;
 }
 
 // File Line: 217
 // RVA: 0xBE48D0
-hkResult *__fastcall hkaiNavMesh::setEdgeDataStriding(hkaiNavMesh *this, hkResult *result, int newStride, int fillValue)
+hkaiUserDataUtils *__fastcall hkaiNavMesh::setEdgeDataStriding(
+        hkaiNavMesh *this,
+        hkaiUserDataUtils *result,
+        int newStride,
+        int fillValue)
 {
-  int v4; // eax
-  int v5; // er10
-  hkArray<int,hkContainerHeapAllocator> *v6; // r8
-  hkResult *v7; // rbx
+  int m_size; // eax
+  hkArray<int,hkContainerHeapAllocator> *m_edgeDataStriding; // r8
   int v9; // [rsp+30h] [rbp-8h]
 
-  v4 = this->m_edges.m_size;
-  v5 = newStride;
-  v6 = (hkArray<int,hkContainerHeapAllocator> *)(unsigned int)this->m_edgeDataStriding;
-  v7 = result;
-  this->m_edgeDataStriding = v5;
+  m_size = this->m_edges.m_size;
+  m_edgeDataStriding = (hkArray<int,hkContainerHeapAllocator> *)(unsigned int)this->m_edgeDataStriding;
+  this->m_edgeDataStriding = newStride;
   hkaiUserDataUtils::restride<int>(
-    (hkaiUserDataUtils *)result,
+    result,
     (hkResult *)&this->m_edgeData,
-    v6,
-    v5,
-    v4,
+    m_edgeDataStriding,
+    newStride,
+    m_size,
     fillValue,
     v9);
-  return v7;
+  return result;
 }
 
 // File Line: 224
 // RVA: 0xBE4660
 hkResult *__fastcall hkaiNavMesh::setFacesSize(hkaiNavMesh *this, hkResult *result, int newSize)
 {
-  int v3; // eax
-  hkResult *v4; // rbx
-  int v5; // eax
+  int m_size; // eax
+  int m_faceDataStriding; // eax
 
-  v3 = this->m_faces.m_size;
-  v4 = result;
-  if ( newSize <= v3 )
+  m_size = this->m_faces.m_size;
+  if ( newSize <= m_size )
   {
-    v5 = this->m_faceDataStriding;
+    m_faceDataStriding = this->m_faceDataStriding;
     this->m_faces.m_size = newSize;
-    if ( v5 )
-      this->m_faceData.m_size = newSize * v5;
+    if ( m_faceDataStriding )
+      this->m_faceData.m_size = newSize * m_faceDataStriding;
     goto LABEL_4;
   }
-  if ( hkaiNavMesh::expandFacesBy(this, newSize - v3, -1) )
+  if ( hkaiNavMesh::expandFacesBy(this, newSize - m_size, -1) )
   {
 LABEL_4:
-    v4->m_enum = 0;
-    return v4;
+    result->m_enum = HK_SUCCESS;
+    return result;
   }
-  v4->m_enum = 1;
-  return v4;
+  result->m_enum = HK_FAILURE;
+  return result;
 }
 
 // File Line: 246
 // RVA: 0xBE46C0
 hkResult *__fastcall hkaiNavMesh::setEdgesSize(hkaiNavMesh *this, hkResult *result, int newSize)
 {
-  int v3; // eax
-  hkResult *v4; // rbx
-  int v5; // eax
+  int m_size; // eax
+  int m_edgeDataStriding; // eax
 
-  v3 = this->m_edges.m_size;
-  v4 = result;
-  if ( newSize <= v3 )
+  m_size = this->m_edges.m_size;
+  if ( newSize <= m_size )
   {
-    v5 = this->m_edgeDataStriding;
+    m_edgeDataStriding = this->m_edgeDataStriding;
     this->m_edges.m_size = newSize;
-    if ( v5 )
-      this->m_edgeData.m_size = newSize * v5;
+    if ( m_edgeDataStriding )
+      this->m_edgeData.m_size = newSize * m_edgeDataStriding;
     goto LABEL_4;
   }
-  if ( hkaiNavMesh::expandEdgesBy(this, newSize - v3, -1) )
+  if ( hkaiNavMesh::expandEdgesBy(this, newSize - m_size, -1) )
   {
 LABEL_4:
-    v4->m_enum = 0;
-    return v4;
+    result->m_enum = HK_SUCCESS;
+    return result;
   }
-  v4->m_enum = 1;
-  return v4;
+  result->m_enum = HK_FAILURE;
+  return result;
 }
 
 // File Line: 268
 // RVA: 0xBE47E0
 void __fastcall hkaiNavMesh::removeFaceAtAndCopy(hkaiNavMesh *this, int index)
 {
-  int v2; // er10
-  hkaiNavMesh *v3; // r9
   hkaiNavMesh::Face *v4; // rdx
   int v5; // ecx
   __int64 v6; // rcx
-  int v7; // eax
-  __int64 v8; // r8
-  int *v9; // rcx
-  int v10; // eax
-  int v11; // er10
+  int m_startEdgeIndex; // eax
+  __int64 m_faceDataStriding; // r8
+  int *m_data; // rcx
+  __int64 v10; // rdx
+  int v11; // r10d
   int *v12; // r8
-  signed __int64 v13; // rax
+  int *v13; // rax
   signed __int64 v14; // r8
   __int64 v15; // rdx
   int v16; // ecx
 
   --this->m_faces.m_size;
-  v2 = index;
-  v3 = this;
   v4 = &this->m_faces.m_data[index];
-  v5 = 16 * (this->m_faces.m_size - v2);
+  v5 = 16 * (this->m_faces.m_size - index);
   if ( v5 > 0 )
   {
     v6 = ((unsigned int)(v5 - 1) >> 2) + 1;
     do
     {
-      v7 = v4[1].m_startEdgeIndex;
+      m_startEdgeIndex = v4[1].m_startEdgeIndex;
       v4 = (hkaiNavMesh::Face *)((char *)v4 + 4);
-      *(_DWORD *)&v4[-1].m_clusterIndex = v7;
+      *(_DWORD *)&v4[-1].m_clusterIndex = m_startEdgeIndex;
       --v6;
     }
     while ( v6 );
   }
-  v8 = v3->m_faceDataStriding;
-  if ( (_DWORD)v8 )
+  m_faceDataStriding = this->m_faceDataStriding;
+  if ( (_DWORD)m_faceDataStriding )
   {
-    v3->m_faceData.m_size -= v8;
-    v9 = v3->m_faceData.m_data;
-    v10 = v2 * v8;
-    v11 = 4 * (v3->m_faceData.m_size - v2 * v8);
-    v12 = &v9[v10 + v8];
-    v13 = (signed __int64)&v9[v10];
+    this->m_faceData.m_size -= m_faceDataStriding;
+    m_data = this->m_faceData.m_data;
+    v10 = index * (int)m_faceDataStriding;
+    v11 = 4 * (this->m_faceData.m_size - index * m_faceDataStriding);
+    v12 = &m_data[v10 + m_faceDataStriding];
+    v13 = &m_data[v10];
     if ( v11 > 0 )
     {
-      v14 = (signed __int64)v12 - v13;
+      v14 = (char *)v12 - (char *)v13;
       v15 = ((unsigned int)(v11 - 1) >> 2) + 1;
       do
       {
-        v16 = *(_DWORD *)(v14 + v13);
-        v13 += 4i64;
-        *(_DWORD *)(v13 - 4) = v16;
+        v16 = *(int *)((char *)v13++ + v14);
+        *(v13 - 1) = v16;
         --v15;
       }
       while ( v15 );
@@ -1054,27 +972,22 @@ void __fastcall hkaiNavMesh::removeFaceAtAndCopy(hkaiNavMesh *this, int index)
 // RVA: 0xBE4720
 void __fastcall hkaiNavMesh::removeEdgeAtAndCopy(hkaiNavMesh *this, int index)
 {
-  int v2; // er11
-  hkaiNavMesh *v3; // r9
-  int v4; // er10
+  int v4; // r10d
   hkaiNavMesh::Edge *v5; // rcx
-  int v6; // er10
+  int v6; // r10d
   __int64 v7; // rdx
-  int v8; // eax
-  __int64 v9; // r8
-  int *v10; // rcx
+  int m_a; // eax
+  __int64 m_edgeDataStriding; // r8
+  int *m_data; // rcx
   __int64 v11; // rdx
-  int v12; // er10
-  signed __int64 v13; // r8
-  signed __int64 v14; // rax
+  int v12; // r10d
+  int *v13; // r8
+  int *v14; // rax
   signed __int64 v15; // r8
   __int64 v16; // rdx
   int v17; // ecx
 
-  --this->m_edges.m_size;
-  v2 = index;
-  v3 = this;
-  v4 = 5 * (this->m_edges.m_size - index);
+  v4 = 5 * (--this->m_edges.m_size - index);
   v5 = &this->m_edges.m_data[index];
   v6 = 4 * v4;
   if ( v6 > 0 )
@@ -1082,31 +995,30 @@ void __fastcall hkaiNavMesh::removeEdgeAtAndCopy(hkaiNavMesh *this, int index)
     v7 = ((unsigned int)(v6 - 1) >> 2) + 1;
     do
     {
-      v8 = v5[1].m_a;
+      m_a = v5[1].m_a;
       v5 = (hkaiNavMesh::Edge *)((char *)v5 + 4);
-      *(_DWORD *)&v5[-1].m_flags.m_storage = v8;
+      *(_DWORD *)&v5[-1].m_flags.m_storage = m_a;
       --v7;
     }
     while ( v7 );
   }
-  v9 = v3->m_edgeDataStriding;
-  if ( (_DWORD)v9 )
+  m_edgeDataStriding = this->m_edgeDataStriding;
+  if ( (_DWORD)m_edgeDataStriding )
   {
-    v3->m_edgeData.m_size -= v9;
-    v10 = v3->m_edgeData.m_data;
-    v11 = v2 * (signed int)v9;
-    v12 = 4 * (v3->m_edgeData.m_size - v2 * v9);
-    v13 = (signed __int64)&v10[v11 + v9];
-    v14 = (signed __int64)&v10[v11];
+    this->m_edgeData.m_size -= m_edgeDataStriding;
+    m_data = this->m_edgeData.m_data;
+    v11 = index * (int)m_edgeDataStriding;
+    v12 = 4 * (this->m_edgeData.m_size - index * m_edgeDataStriding);
+    v13 = &m_data[v11 + m_edgeDataStriding];
+    v14 = &m_data[v11];
     if ( v12 > 0 )
     {
-      v15 = v13 - v14;
+      v15 = (char *)v13 - (char *)v14;
       v16 = ((unsigned int)(v12 - 1) >> 2) + 1;
       do
       {
-        v17 = *(_DWORD *)(v15 + v14);
-        v14 += 4i64;
-        *(_DWORD *)(v14 - 4) = v17;
+        v17 = *(int *)((char *)v14++ + v15);
+        *(v14 - 1) = v17;
         --v16;
       }
       while ( v16 );

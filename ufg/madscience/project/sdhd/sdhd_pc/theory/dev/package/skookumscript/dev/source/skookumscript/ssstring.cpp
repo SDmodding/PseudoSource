@@ -2,28 +2,26 @@
 // RVA: 0x10F210
 SSInstance *__fastcall SSString::as_instance(AString *str)
 {
-  unsigned __int64 *v1; // rbx
   SSInstance *result; // rax
-  unsigned __int64 v3; // rcx
+  AStringRef *i_str_ref_p; // rcx
 
-  v1 = (unsigned __int64 *)str;
   result = SSInstance::pool_new(SSBrain::c_string_class_p);
   if ( result != (SSInstance *)-32i64 )
   {
-    v3 = *v1;
-    result->i_user_data = *v1;
-    ++*(_WORD *)(v3 + 16);
+    i_str_ref_p = str->i_str_ref_p;
+    result->i_user_data = (unsigned __int64)str->i_str_ref_p;
+    ++i_str_ref_p->i_ref_count;
   }
   return result;
 }
 
 // File Line: 50
 // RVA: 0x139240
-void __fastcall SSString::register_atomic(__int64 a1, signed __int64 a2, __int64 a3, __int64 a4)
+void __fastcall SSString::register_atomic(__int64 a1, SSMethodBase **a2, __int64 a3, __int64 i_uid)
 {
-  SSMethodBase **v4; // r8
-  __int64 v5; // rax
-  signed __int64 v6; // r10
+  SSMethodBase **i_array_p; // r8
+  __int64 i_count; // rax
+  SSMethodBase **v6; // r10
   _BOOL8 v7; // rcx
   __int64 v8; // rdi
   __int64 v9; // r15
@@ -32,7 +30,7 @@ void __fastcall SSString::register_atomic(__int64 a1, signed __int64 a2, __int64
   bool v12; // zf
   SSMethodBase **v13; // r8
   __int64 v14; // rax
-  signed __int64 v15; // r10
+  SSMethodBase **v15; // r10
   _BOOL8 v16; // rcx
   __int64 v17; // rdi
   __int64 v18; // r15
@@ -40,7 +38,7 @@ void __fastcall SSString::register_atomic(__int64 a1, signed __int64 a2, __int64
   SSParameters *v20; // r14
   SSMethodBase **v21; // r8
   __int64 v22; // rax
-  signed __int64 v23; // r10
+  SSMethodBase **v23; // r10
   _BOOL8 v24; // rcx
   __int64 v25; // rdi
   __int64 v26; // r15
@@ -48,7 +46,7 @@ void __fastcall SSString::register_atomic(__int64 a1, signed __int64 a2, __int64
   SSParameters *v28; // r14
   SSMethodBase **v29; // r8
   __int64 v30; // rax
-  signed __int64 v31; // r10
+  SSMethodBase **v31; // r10
   _BOOL8 v32; // rcx
   __int64 v33; // rdi
   __int64 v34; // r15
@@ -56,7 +54,7 @@ void __fastcall SSString::register_atomic(__int64 a1, signed __int64 a2, __int64
   SSParameters *v36; // r14
   SSMethodBase **v37; // r8
   __int64 v38; // rax
-  signed __int64 v39; // r10
+  SSMethodBase **v39; // r10
   _BOOL8 v40; // rcx
   __int64 v41; // rdi
   __int64 v42; // r15
@@ -64,7 +62,7 @@ void __fastcall SSString::register_atomic(__int64 a1, signed __int64 a2, __int64
   SSParameters *v44; // r14
   SSMethodBase **v45; // r8
   __int64 v46; // rax
-  signed __int64 v47; // r10
+  SSMethodBase **v47; // r10
   _BOOL8 v48; // rcx
   __int64 v49; // rdi
   __int64 v50; // r15
@@ -72,7 +70,7 @@ void __fastcall SSString::register_atomic(__int64 a1, signed __int64 a2, __int64
   SSParameters *v52; // r14
   SSMethodBase **v53; // r8
   __int64 v54; // rax
-  signed __int64 v55; // r10
+  SSMethodBase **v55; // r10
   _BOOL8 v56; // rcx
   __int64 v57; // rdi
   __int64 v58; // r15
@@ -80,7 +78,7 @@ void __fastcall SSString::register_atomic(__int64 a1, signed __int64 a2, __int64
   SSParameters *v60; // r14
   SSMethodBase **v61; // r8
   __int64 v62; // rax
-  signed __int64 v63; // r10
+  SSMethodBase **v63; // r10
   _BOOL8 v64; // rcx
   __int64 v65; // rdi
   __int64 v66; // r15
@@ -88,7 +86,7 @@ void __fastcall SSString::register_atomic(__int64 a1, signed __int64 a2, __int64
   SSParameters *v68; // r14
   SSMethodBase **v69; // r8
   __int64 v70; // rax
-  signed __int64 v71; // r10
+  SSMethodBase **v71; // r10
   _BOOL8 v72; // rcx
   __int64 v73; // rdi
   __int64 v74; // r15
@@ -96,7 +94,7 @@ void __fastcall SSString::register_atomic(__int64 a1, signed __int64 a2, __int64
   SSParameters *v76; // r14
   SSMethodBase **v77; // r8
   __int64 v78; // rax
-  signed __int64 v79; // r10
+  SSMethodBase **v79; // r10
   _BOOL8 v80; // rcx
   __int64 v81; // rdi
   __int64 v82; // r15
@@ -104,7 +102,7 @@ void __fastcall SSString::register_atomic(__int64 a1, signed __int64 a2, __int64
   SSParameters *v84; // r14
   SSMethodBase **v85; // r8
   __int64 v86; // rax
-  signed __int64 v87; // r10
+  SSMethodBase **v87; // r10
   _BOOL8 v88; // rcx
   __int64 v89; // rdi
   __int64 v90; // r15
@@ -124,56 +122,51 @@ void __fastcall SSString::register_atomic(__int64 a1, signed __int64 a2, __int64
   ASymbol *v104; // rax
   SSClass *v105; // rbx
   ASymbol *v106; // rax
-  signed __int64 v107; // [rsp+20h] [rbp-10h]
-  __int64 result; // [rsp+70h] [rbp+40h]
-  SSParameters *v109; // [rsp+78h] [rbp+48h]
-  __int64 v110; // [rsp+80h] [rbp+50h]
+  __int64 result; // [rsp+70h] [rbp+40h] BYREF
+  SSParameters *v108; // [rsp+78h] [rbp+48h]
+  __int64 v109; // [rsp+80h] [rbp+50h]
 
-  v107 = -2i64;
-  v4 = (SSMethodBase **)SSBrain::c_string_class_p;
-  v5 = SSBrain::c_string_class_p->i_methods.i_count;
-  if ( (_DWORD)v5 )
+  i_array_p = (SSMethodBase **)SSBrain::c_string_class_p;
+  i_count = SSBrain::c_string_class_p->i_methods.i_count;
+  if ( (_DWORD)i_count )
   {
-    v4 = SSBrain::c_string_class_p->i_methods.i_array_p;
-    v6 = (signed __int64)&v4[v5 - 1];
+    i_array_p = SSBrain::c_string_class_p->i_methods.i_array_p;
+    v6 = &i_array_p[i_count - 1];
     while ( 1 )
     {
-      a2 = (signed __int64)&v4[(v6 - (signed __int64)v4) >> 4];
-      a4 = *(unsigned int *)(*(_QWORD *)a2 + 8i64);
-      if ( ASymbolX_dtor.i_uid < (unsigned int)a4 )
-        goto LABEL_279;
-      v7 = ASymbolX_dtor.i_uid == (_DWORD)a4;
-      a4 = ASymbolX_dtor.i_uid != (_DWORD)a4;
-      if ( v7 == 1 )
+      while ( 1 )
       {
-        v8 = *(_QWORD *)a2;
-        goto LABEL_12;
-      }
-      if ( a4 < 0 )
-      {
-LABEL_279:
-        if ( v4 == (SSMethodBase **)a2 )
+        a2 = &i_array_p[((char *)v6 - (char *)i_array_p) >> 4];
+        i_uid = (*a2)->i_name.i_uid;
+        if ( ASymbolX_dtor.i_uid >= (unsigned int)i_uid )
           break;
-        v6 = a2 - 8;
+        if ( i_array_p == a2 )
+          goto LABEL_10;
+        v6 = a2 - 1;
       }
-      else
-      {
-        if ( v6 == a2 )
-          break;
-        v4 = (SSMethodBase **)(a2 + 8);
-      }
+      v7 = ASymbolX_dtor.i_uid == (_DWORD)i_uid;
+      i_uid = ASymbolX_dtor.i_uid != (_DWORD)i_uid;
+      if ( v7 )
+        break;
+      if ( v6 == a2 )
+        goto LABEL_10;
+      i_array_p = a2 + 1;
     }
+    v8 = (__int64)*a2;
   }
-  v8 = 0i64;
-LABEL_12:
+  else
+  {
+LABEL_10:
+    v8 = 0i64;
+  }
   result = v8;
   if ( v8 )
   {
-    if ( (*(unsigned int (__fastcall **)(__int64, signed __int64, SSMethodBase **, __int64, signed __int64))(*(_QWORD *)v8 + 16i64))(
+    if ( (*(unsigned int (__fastcall **)(__int64, SSMethodBase **, SSMethodBase **, __int64, __int64))(*(_QWORD *)v8 + 16i64))(
            v8,
            a2,
-           v4,
-           a4,
+           i_array_p,
+           i_uid,
            -2i64) == 1 )
     {
       *(_QWORD *)(v8 + 32) = SSString::mthd_destructor;
@@ -182,7 +175,7 @@ LABEL_12:
     {
       v9 = *(_QWORD *)(v8 + 16);
       v10 = *(SSParameters **)(v8 + 24);
-      v109 = v10;
+      v108 = v10;
       if ( v10 )
         ++v10->i_ref_count;
       v11 = *(SSParameters **)(v8 + 24);
@@ -191,13 +184,13 @@ LABEL_12:
         v12 = v11->i_ref_count-- == 1;
         if ( v12 )
         {
-          v11->i_ref_count = 2147483648;
+          v11->i_ref_count = 0x80000000;
           SSParameters::~SSParameters(v11);
           AMemory::c_free_func(v11);
         }
         *(_QWORD *)(v8 + 24) = 0i64;
       }
-      v110 = v8;
+      v109 = v8;
       *(ASymbol *)(v8 + 8) = ASymbolX_dtor;
       *(_QWORD *)(v8 + 16) = v9;
       *(_QWORD *)v8 = &SSInvokableBase::`vftable;
@@ -212,7 +205,7 @@ LABEL_12:
         v12 = v10->i_ref_count-- == 1;
         if ( v12 )
         {
-          v10->i_ref_count = 2147483648;
+          v10->i_ref_count = 0x80000000;
           SSParameters::~SSParameters(v10);
           AMemory::c_free_func(v10);
         }
@@ -224,46 +217,42 @@ LABEL_12:
   if ( (_DWORD)v14 )
   {
     v13 = SSBrain::c_string_class_p->i_methods.i_array_p;
-    v15 = (signed __int64)&v13[v14 - 1];
+    v15 = &v13[v14 - 1];
     while ( 1 )
     {
-      a2 = (signed __int64)&v13[(v15 - (signed __int64)v13) >> 4];
-      a4 = *(unsigned int *)(*(_QWORD *)a2 + 8i64);
-      if ( ASymbol_String.i_uid < (unsigned int)a4 )
-        goto LABEL_280;
-      v16 = ASymbol_String.i_uid == (_DWORD)a4;
-      a4 = ASymbol_String.i_uid != (_DWORD)a4;
-      if ( v16 == 1 )
+      while ( 1 )
       {
-        v17 = *(_QWORD *)a2;
-        goto LABEL_37;
-      }
-      if ( a4 < 0 )
-      {
-LABEL_280:
-        if ( v13 == (SSMethodBase **)a2 )
+        a2 = &v13[((char *)v15 - (char *)v13) >> 4];
+        i_uid = (*a2)->i_name.i_uid;
+        if ( ASymbol_String.i_uid >= (unsigned int)i_uid )
           break;
-        v15 = a2 - 8;
+        if ( v13 == a2 )
+          goto LABEL_34;
+        v15 = a2 - 1;
       }
-      else
-      {
-        if ( v15 == a2 )
-          break;
-        v13 = (SSMethodBase **)(a2 + 8);
-      }
+      v16 = ASymbol_String.i_uid == (_DWORD)i_uid;
+      i_uid = ASymbol_String.i_uid != (_DWORD)i_uid;
+      if ( v16 )
+        break;
+      if ( v15 == a2 )
+        goto LABEL_34;
+      v13 = a2 + 1;
     }
+    v17 = (__int64)*a2;
   }
-  v17 = 0i64;
-LABEL_37:
+  else
+  {
+LABEL_34:
+    v17 = 0i64;
+  }
   result = v17;
   if ( v17 )
   {
-    if ( (*(unsigned int (__fastcall **)(__int64, signed __int64, SSMethodBase **, __int64, signed __int64))(*(_QWORD *)v17 + 16i64))(
+    if ( (*(unsigned int (__fastcall **)(__int64, SSMethodBase **, SSMethodBase **, __int64))(*(_QWORD *)v17 + 16i64))(
            v17,
            a2,
            v13,
-           a4,
-           v107) == 1 )
+           i_uid) == 1 )
     {
       *(_QWORD *)(v17 + 32) = SSString::mthd_as_string;
     }
@@ -271,7 +260,7 @@ LABEL_37:
     {
       v18 = *(_QWORD *)(v17 + 16);
       v19 = *(SSParameters **)(v17 + 24);
-      v109 = v19;
+      v108 = v19;
       if ( v19 )
         ++v19->i_ref_count;
       v20 = *(SSParameters **)(v17 + 24);
@@ -280,13 +269,13 @@ LABEL_37:
         v12 = v20->i_ref_count-- == 1;
         if ( v12 )
         {
-          v20->i_ref_count = 2147483648;
+          v20->i_ref_count = 0x80000000;
           SSParameters::~SSParameters(v20);
           AMemory::c_free_func(v20);
         }
         *(_QWORD *)(v17 + 24) = 0i64;
       }
-      v110 = v17;
+      v109 = v17;
       *(ASymbol *)(v17 + 8) = ASymbol_String;
       *(_QWORD *)(v17 + 16) = v18;
       *(_QWORD *)v17 = &SSInvokableBase::`vftable;
@@ -301,7 +290,7 @@ LABEL_37:
         v12 = v19->i_ref_count-- == 1;
         if ( v12 )
         {
-          v19->i_ref_count = 2147483648;
+          v19->i_ref_count = 0x80000000;
           SSParameters::~SSParameters(v19);
           AMemory::c_free_func(v19);
         }
@@ -313,46 +302,42 @@ LABEL_37:
   if ( (_DWORD)v22 )
   {
     v21 = SSBrain::c_string_class_p->i_methods.i_array_p;
-    v23 = (signed __int64)&v21[v22 - 1];
+    v23 = &v21[v22 - 1];
     while ( 1 )
     {
-      a2 = (signed __int64)&v21[(v23 - (signed __int64)v21) >> 4];
-      a4 = *(unsigned int *)(*(_QWORD *)a2 + 8i64);
-      if ( ASymbol_Symbol.i_uid < (unsigned int)a4 )
-        goto LABEL_281;
-      v24 = ASymbol_Symbol.i_uid == (_DWORD)a4;
-      a4 = ASymbol_Symbol.i_uid != (_DWORD)a4;
-      if ( v24 == 1 )
+      while ( 1 )
       {
-        v25 = *(_QWORD *)a2;
-        goto LABEL_62;
-      }
-      if ( a4 < 0 )
-      {
-LABEL_281:
-        if ( v21 == (SSMethodBase **)a2 )
+        a2 = &v21[((char *)v23 - (char *)v21) >> 4];
+        i_uid = (*a2)->i_name.i_uid;
+        if ( ASymbol_Symbol.i_uid >= (unsigned int)i_uid )
           break;
-        v23 = a2 - 8;
+        if ( v21 == a2 )
+          goto LABEL_58;
+        v23 = a2 - 1;
       }
-      else
-      {
-        if ( v23 == a2 )
-          break;
-        v21 = (SSMethodBase **)(a2 + 8);
-      }
+      v24 = ASymbol_Symbol.i_uid == (_DWORD)i_uid;
+      i_uid = ASymbol_Symbol.i_uid != (_DWORD)i_uid;
+      if ( v24 )
+        break;
+      if ( v23 == a2 )
+        goto LABEL_58;
+      v21 = a2 + 1;
     }
+    v25 = (__int64)*a2;
   }
-  v25 = 0i64;
-LABEL_62:
+  else
+  {
+LABEL_58:
+    v25 = 0i64;
+  }
   result = v25;
   if ( v25 )
   {
-    if ( (*(unsigned int (__fastcall **)(__int64, signed __int64, SSMethodBase **, __int64, signed __int64))(*(_QWORD *)v25 + 16i64))(
+    if ( (*(unsigned int (__fastcall **)(__int64, SSMethodBase **, SSMethodBase **, __int64))(*(_QWORD *)v25 + 16i64))(
            v25,
            a2,
            v21,
-           a4,
-           v107) == 1 )
+           i_uid) == 1 )
     {
       *(_QWORD *)(v25 + 32) = SSString::mthd_as_symbol;
     }
@@ -360,7 +345,7 @@ LABEL_62:
     {
       v26 = *(_QWORD *)(v25 + 16);
       v27 = *(SSParameters **)(v25 + 24);
-      v109 = v27;
+      v108 = v27;
       if ( v27 )
         ++v27->i_ref_count;
       v28 = *(SSParameters **)(v25 + 24);
@@ -369,13 +354,13 @@ LABEL_62:
         v12 = v28->i_ref_count-- == 1;
         if ( v12 )
         {
-          v28->i_ref_count = 2147483648;
+          v28->i_ref_count = 0x80000000;
           SSParameters::~SSParameters(v28);
           AMemory::c_free_func(v28);
         }
         *(_QWORD *)(v25 + 24) = 0i64;
       }
-      v110 = v25;
+      v109 = v25;
       *(ASymbol *)(v25 + 8) = ASymbol_Symbol;
       *(_QWORD *)(v25 + 16) = v26;
       *(_QWORD *)v25 = &SSInvokableBase::`vftable;
@@ -390,7 +375,7 @@ LABEL_62:
         v12 = v27->i_ref_count-- == 1;
         if ( v12 )
         {
-          v27->i_ref_count = 2147483648;
+          v27->i_ref_count = 0x80000000;
           SSParameters::~SSParameters(v27);
           AMemory::c_free_func(v27);
         }
@@ -402,46 +387,42 @@ LABEL_62:
   if ( (_DWORD)v30 )
   {
     v29 = SSBrain::c_string_class_p->i_methods.i_array_p;
-    v31 = (signed __int64)&v29[v30 - 1];
+    v31 = &v29[v30 - 1];
     while ( 1 )
     {
-      a2 = (signed __int64)&v29[(v31 - (signed __int64)v29) >> 4];
-      a4 = *(unsigned int *)(*(_QWORD *)a2 + 8i64);
-      if ( ASymbol_add.i_uid < (unsigned int)a4 )
-        goto LABEL_282;
-      v32 = ASymbol_add.i_uid == (_DWORD)a4;
-      a4 = ASymbol_add.i_uid != (_DWORD)a4;
-      if ( v32 == 1 )
+      while ( 1 )
       {
-        v33 = *(_QWORD *)a2;
-        goto LABEL_87;
-      }
-      if ( a4 < 0 )
-      {
-LABEL_282:
-        if ( v29 == (SSMethodBase **)a2 )
+        a2 = &v29[((char *)v31 - (char *)v29) >> 4];
+        i_uid = (*a2)->i_name.i_uid;
+        if ( ASymbol_add.i_uid >= (unsigned int)i_uid )
           break;
-        v31 = a2 - 8;
+        if ( v29 == a2 )
+          goto LABEL_82;
+        v31 = a2 - 1;
       }
-      else
-      {
-        if ( v31 == a2 )
-          break;
-        v29 = (SSMethodBase **)(a2 + 8);
-      }
+      v32 = ASymbol_add.i_uid == (_DWORD)i_uid;
+      i_uid = ASymbol_add.i_uid != (_DWORD)i_uid;
+      if ( v32 )
+        break;
+      if ( v31 == a2 )
+        goto LABEL_82;
+      v29 = a2 + 1;
     }
+    v33 = (__int64)*a2;
   }
-  v33 = 0i64;
-LABEL_87:
+  else
+  {
+LABEL_82:
+    v33 = 0i64;
+  }
   result = v33;
   if ( v33 )
   {
-    if ( (*(unsigned int (__fastcall **)(__int64, signed __int64, SSMethodBase **, __int64, signed __int64))(*(_QWORD *)v33 + 16i64))(
+    if ( (*(unsigned int (__fastcall **)(__int64, SSMethodBase **, SSMethodBase **, __int64))(*(_QWORD *)v33 + 16i64))(
            v33,
            a2,
            v29,
-           a4,
-           v107) == 1 )
+           i_uid) == 1 )
     {
       *(_QWORD *)(v33 + 32) = SSString::mthd_op_add;
     }
@@ -449,7 +430,7 @@ LABEL_87:
     {
       v34 = *(_QWORD *)(v33 + 16);
       v35 = *(SSParameters **)(v33 + 24);
-      v109 = v35;
+      v108 = v35;
       if ( v35 )
         ++v35->i_ref_count;
       v36 = *(SSParameters **)(v33 + 24);
@@ -458,13 +439,13 @@ LABEL_87:
         v12 = v36->i_ref_count-- == 1;
         if ( v12 )
         {
-          v36->i_ref_count = 2147483648;
+          v36->i_ref_count = 0x80000000;
           SSParameters::~SSParameters(v36);
           AMemory::c_free_func(v36);
         }
         *(_QWORD *)(v33 + 24) = 0i64;
       }
-      v110 = v33;
+      v109 = v33;
       *(ASymbol *)(v33 + 8) = ASymbol_add;
       *(_QWORD *)(v33 + 16) = v34;
       *(_QWORD *)v33 = &SSInvokableBase::`vftable;
@@ -479,7 +460,7 @@ LABEL_87:
         v12 = v35->i_ref_count-- == 1;
         if ( v12 )
         {
-          v35->i_ref_count = 2147483648;
+          v35->i_ref_count = 0x80000000;
           SSParameters::~SSParameters(v35);
           AMemory::c_free_func(v35);
         }
@@ -491,46 +472,42 @@ LABEL_87:
   if ( (_DWORD)v38 )
   {
     v37 = SSBrain::c_string_class_p->i_methods.i_array_p;
-    v39 = (signed __int64)&v37[v38 - 1];
+    v39 = &v37[v38 - 1];
     while ( 1 )
     {
-      a2 = (signed __int64)&v37[(v39 - (signed __int64)v37) >> 4];
-      a4 = *(unsigned int *)(*(_QWORD *)a2 + 8i64);
-      if ( ASymbol_add_assign.i_uid < (unsigned int)a4 )
-        goto LABEL_283;
-      v40 = ASymbol_add_assign.i_uid == (_DWORD)a4;
-      a4 = ASymbol_add_assign.i_uid != (_DWORD)a4;
-      if ( v40 == 1 )
+      while ( 1 )
       {
-        v41 = *(_QWORD *)a2;
-        goto LABEL_112;
-      }
-      if ( a4 < 0 )
-      {
-LABEL_283:
-        if ( v37 == (SSMethodBase **)a2 )
+        a2 = &v37[((char *)v39 - (char *)v37) >> 4];
+        i_uid = (*a2)->i_name.i_uid;
+        if ( ASymbol_add_assign.i_uid >= (unsigned int)i_uid )
           break;
-        v39 = a2 - 8;
+        if ( v37 == a2 )
+          goto LABEL_106;
+        v39 = a2 - 1;
       }
-      else
-      {
-        if ( v39 == a2 )
-          break;
-        v37 = (SSMethodBase **)(a2 + 8);
-      }
+      v40 = ASymbol_add_assign.i_uid == (_DWORD)i_uid;
+      i_uid = ASymbol_add_assign.i_uid != (_DWORD)i_uid;
+      if ( v40 )
+        break;
+      if ( v39 == a2 )
+        goto LABEL_106;
+      v37 = a2 + 1;
     }
+    v41 = (__int64)*a2;
   }
-  v41 = 0i64;
-LABEL_112:
+  else
+  {
+LABEL_106:
+    v41 = 0i64;
+  }
   result = v41;
   if ( v41 )
   {
-    if ( (*(unsigned int (__fastcall **)(__int64, signed __int64, SSMethodBase **, __int64, signed __int64))(*(_QWORD *)v41 + 16i64))(
+    if ( (*(unsigned int (__fastcall **)(__int64, SSMethodBase **, SSMethodBase **, __int64))(*(_QWORD *)v41 + 16i64))(
            v41,
            a2,
            v37,
-           a4,
-           v107) == 1 )
+           i_uid) == 1 )
     {
       *(_QWORD *)(v41 + 32) = SSString::mthd_op_add_assign;
     }
@@ -538,7 +515,7 @@ LABEL_112:
     {
       v42 = *(_QWORD *)(v41 + 16);
       v43 = *(SSParameters **)(v41 + 24);
-      v109 = v43;
+      v108 = v43;
       if ( v43 )
         ++v43->i_ref_count;
       v44 = *(SSParameters **)(v41 + 24);
@@ -547,13 +524,13 @@ LABEL_112:
         v12 = v44->i_ref_count-- == 1;
         if ( v12 )
         {
-          v44->i_ref_count = 2147483648;
+          v44->i_ref_count = 0x80000000;
           SSParameters::~SSParameters(v44);
           AMemory::c_free_func(v44);
         }
         *(_QWORD *)(v41 + 24) = 0i64;
       }
-      v110 = v41;
+      v109 = v41;
       *(ASymbol *)(v41 + 8) = ASymbol_add_assign;
       *(_QWORD *)(v41 + 16) = v42;
       *(_QWORD *)v41 = &SSInvokableBase::`vftable;
@@ -568,7 +545,7 @@ LABEL_112:
         v12 = v43->i_ref_count-- == 1;
         if ( v12 )
         {
-          v43->i_ref_count = 2147483648;
+          v43->i_ref_count = 0x80000000;
           SSParameters::~SSParameters(v43);
           AMemory::c_free_func(v43);
         }
@@ -580,46 +557,42 @@ LABEL_112:
   if ( (_DWORD)v46 )
   {
     v45 = SSBrain::c_string_class_p->i_methods.i_array_p;
-    v47 = (signed __int64)&v45[v46 - 1];
+    v47 = &v45[v46 - 1];
     while ( 1 )
     {
-      a2 = (signed __int64)&v45[(v47 - (signed __int64)v45) >> 4];
-      a4 = *(unsigned int *)(*(_QWORD *)a2 + 8i64);
-      if ( ASymbol_assign.i_uid < (unsigned int)a4 )
-        goto LABEL_284;
-      v48 = ASymbol_assign.i_uid == (_DWORD)a4;
-      a4 = ASymbol_assign.i_uid != (_DWORD)a4;
-      if ( v48 == 1 )
+      while ( 1 )
       {
-        v49 = *(_QWORD *)a2;
-        goto LABEL_137;
-      }
-      if ( a4 < 0 )
-      {
-LABEL_284:
-        if ( v45 == (SSMethodBase **)a2 )
+        a2 = &v45[((char *)v47 - (char *)v45) >> 4];
+        i_uid = (*a2)->i_name.i_uid;
+        if ( ASymbol_assign.i_uid >= (unsigned int)i_uid )
           break;
-        v47 = a2 - 8;
+        if ( v45 == a2 )
+          goto LABEL_130;
+        v47 = a2 - 1;
       }
-      else
-      {
-        if ( v47 == a2 )
-          break;
-        v45 = (SSMethodBase **)(a2 + 8);
-      }
+      v48 = ASymbol_assign.i_uid == (_DWORD)i_uid;
+      i_uid = ASymbol_assign.i_uid != (_DWORD)i_uid;
+      if ( v48 )
+        break;
+      if ( v47 == a2 )
+        goto LABEL_130;
+      v45 = a2 + 1;
     }
+    v49 = (__int64)*a2;
   }
-  v49 = 0i64;
-LABEL_137:
+  else
+  {
+LABEL_130:
+    v49 = 0i64;
+  }
   result = v49;
   if ( v49 )
   {
-    if ( (*(unsigned int (__fastcall **)(__int64, signed __int64, SSMethodBase **, __int64, signed __int64))(*(_QWORD *)v49 + 16i64))(
+    if ( (*(unsigned int (__fastcall **)(__int64, SSMethodBase **, SSMethodBase **, __int64))(*(_QWORD *)v49 + 16i64))(
            v49,
            a2,
            v45,
-           a4,
-           v107) == 1 )
+           i_uid) == 1 )
     {
       *(_QWORD *)(v49 + 32) = SSString::mthd_op_assign;
     }
@@ -627,7 +600,7 @@ LABEL_137:
     {
       v50 = *(_QWORD *)(v49 + 16);
       v51 = *(SSParameters **)(v49 + 24);
-      v109 = v51;
+      v108 = v51;
       if ( v51 )
         ++v51->i_ref_count;
       v52 = *(SSParameters **)(v49 + 24);
@@ -636,13 +609,13 @@ LABEL_137:
         v12 = v52->i_ref_count-- == 1;
         if ( v12 )
         {
-          v52->i_ref_count = 2147483648;
+          v52->i_ref_count = 0x80000000;
           SSParameters::~SSParameters(v52);
           AMemory::c_free_func(v52);
         }
         *(_QWORD *)(v49 + 24) = 0i64;
       }
-      v110 = v49;
+      v109 = v49;
       *(ASymbol *)(v49 + 8) = ASymbol_assign;
       *(_QWORD *)(v49 + 16) = v50;
       *(_QWORD *)v49 = &SSInvokableBase::`vftable;
@@ -657,7 +630,7 @@ LABEL_137:
         v12 = v51->i_ref_count-- == 1;
         if ( v12 )
         {
-          v51->i_ref_count = 2147483648;
+          v51->i_ref_count = 0x80000000;
           SSParameters::~SSParameters(v51);
           AMemory::c_free_func(v51);
         }
@@ -669,46 +642,42 @@ LABEL_137:
   if ( (_DWORD)v54 )
   {
     v53 = SSBrain::c_string_class_p->i_methods.i_array_p;
-    v55 = (signed __int64)&v53[v54 - 1];
+    v55 = &v53[v54 - 1];
     while ( 1 )
     {
-      a2 = (signed __int64)&v53[(v55 - (signed __int64)v53) >> 4];
-      a4 = *(unsigned int *)(*(_QWORD *)a2 + 8i64);
-      if ( ASymbol_equals.i_uid < (unsigned int)a4 )
-        goto LABEL_285;
-      v56 = ASymbol_equals.i_uid == (_DWORD)a4;
-      a4 = ASymbol_equals.i_uid != (_DWORD)a4;
-      if ( v56 == 1 )
+      while ( 1 )
       {
-        v57 = *(_QWORD *)a2;
-        goto LABEL_162;
-      }
-      if ( a4 < 0 )
-      {
-LABEL_285:
-        if ( v53 == (SSMethodBase **)a2 )
+        a2 = &v53[((char *)v55 - (char *)v53) >> 4];
+        i_uid = (*a2)->i_name.i_uid;
+        if ( ASymbol_equals.i_uid >= (unsigned int)i_uid )
           break;
-        v55 = a2 - 8;
+        if ( v53 == a2 )
+          goto LABEL_154;
+        v55 = a2 - 1;
       }
-      else
-      {
-        if ( v55 == a2 )
-          break;
-        v53 = (SSMethodBase **)(a2 + 8);
-      }
+      v56 = ASymbol_equals.i_uid == (_DWORD)i_uid;
+      i_uid = ASymbol_equals.i_uid != (_DWORD)i_uid;
+      if ( v56 )
+        break;
+      if ( v55 == a2 )
+        goto LABEL_154;
+      v53 = a2 + 1;
     }
+    v57 = (__int64)*a2;
   }
-  v57 = 0i64;
-LABEL_162:
+  else
+  {
+LABEL_154:
+    v57 = 0i64;
+  }
   result = v57;
   if ( v57 )
   {
-    if ( (*(unsigned int (__fastcall **)(__int64, signed __int64, SSMethodBase **, __int64, signed __int64))(*(_QWORD *)v57 + 16i64))(
+    if ( (*(unsigned int (__fastcall **)(__int64, SSMethodBase **, SSMethodBase **, __int64))(*(_QWORD *)v57 + 16i64))(
            v57,
            a2,
            v53,
-           a4,
-           v107) == 1 )
+           i_uid) == 1 )
     {
       *(_QWORD *)(v57 + 32) = SSString::mthd_op_equals;
     }
@@ -716,7 +685,7 @@ LABEL_162:
     {
       v58 = *(_QWORD *)(v57 + 16);
       v59 = *(SSParameters **)(v57 + 24);
-      v109 = v59;
+      v108 = v59;
       if ( v59 )
         ++v59->i_ref_count;
       v60 = *(SSParameters **)(v57 + 24);
@@ -725,13 +694,13 @@ LABEL_162:
         v12 = v60->i_ref_count-- == 1;
         if ( v12 )
         {
-          v60->i_ref_count = 2147483648;
+          v60->i_ref_count = 0x80000000;
           SSParameters::~SSParameters(v60);
           AMemory::c_free_func(v60);
         }
         *(_QWORD *)(v57 + 24) = 0i64;
       }
-      v110 = v57;
+      v109 = v57;
       *(ASymbol *)(v57 + 8) = ASymbol_equals;
       *(_QWORD *)(v57 + 16) = v58;
       *(_QWORD *)v57 = &SSInvokableBase::`vftable;
@@ -746,7 +715,7 @@ LABEL_162:
         v12 = v59->i_ref_count-- == 1;
         if ( v12 )
         {
-          v59->i_ref_count = 2147483648;
+          v59->i_ref_count = 0x80000000;
           SSParameters::~SSParameters(v59);
           AMemory::c_free_func(v59);
         }
@@ -758,46 +727,42 @@ LABEL_162:
   if ( (_DWORD)v62 )
   {
     v61 = SSBrain::c_string_class_p->i_methods.i_array_p;
-    v63 = (signed __int64)&v61[v62 - 1];
+    v63 = &v61[v62 - 1];
     while ( 1 )
     {
-      a2 = (signed __int64)&v61[(v63 - (signed __int64)v61) >> 4];
-      a4 = *(unsigned int *)(*(_QWORD *)a2 + 8i64);
-      if ( ASymbol_greater.i_uid < (unsigned int)a4 )
-        goto LABEL_286;
-      v64 = ASymbol_greater.i_uid == (_DWORD)a4;
-      a4 = ASymbol_greater.i_uid != (_DWORD)a4;
-      if ( v64 == 1 )
+      while ( 1 )
       {
-        v65 = *(_QWORD *)a2;
-        goto LABEL_187;
-      }
-      if ( a4 < 0 )
-      {
-LABEL_286:
-        if ( v61 == (SSMethodBase **)a2 )
+        a2 = &v61[((char *)v63 - (char *)v61) >> 4];
+        i_uid = (*a2)->i_name.i_uid;
+        if ( ASymbol_greater.i_uid >= (unsigned int)i_uid )
           break;
-        v63 = a2 - 8;
+        if ( v61 == a2 )
+          goto LABEL_178;
+        v63 = a2 - 1;
       }
-      else
-      {
-        if ( v63 == a2 )
-          break;
-        v61 = (SSMethodBase **)(a2 + 8);
-      }
+      v64 = ASymbol_greater.i_uid == (_DWORD)i_uid;
+      i_uid = ASymbol_greater.i_uid != (_DWORD)i_uid;
+      if ( v64 )
+        break;
+      if ( v63 == a2 )
+        goto LABEL_178;
+      v61 = a2 + 1;
     }
+    v65 = (__int64)*a2;
   }
-  v65 = 0i64;
-LABEL_187:
+  else
+  {
+LABEL_178:
+    v65 = 0i64;
+  }
   result = v65;
   if ( v65 )
   {
-    if ( (*(unsigned int (__fastcall **)(__int64, signed __int64, SSMethodBase **, __int64, signed __int64))(*(_QWORD *)v65 + 16i64))(
+    if ( (*(unsigned int (__fastcall **)(__int64, SSMethodBase **, SSMethodBase **, __int64))(*(_QWORD *)v65 + 16i64))(
            v65,
            a2,
            v61,
-           a4,
-           v107) == 1 )
+           i_uid) == 1 )
     {
       *(_QWORD *)(v65 + 32) = SSString::mthd_op_greater;
     }
@@ -805,7 +770,7 @@ LABEL_187:
     {
       v66 = *(_QWORD *)(v65 + 16);
       v67 = *(SSParameters **)(v65 + 24);
-      v109 = v67;
+      v108 = v67;
       if ( v67 )
         ++v67->i_ref_count;
       v68 = *(SSParameters **)(v65 + 24);
@@ -814,13 +779,13 @@ LABEL_187:
         v12 = v68->i_ref_count-- == 1;
         if ( v12 )
         {
-          v68->i_ref_count = 2147483648;
+          v68->i_ref_count = 0x80000000;
           SSParameters::~SSParameters(v68);
           AMemory::c_free_func(v68);
         }
         *(_QWORD *)(v65 + 24) = 0i64;
       }
-      v110 = v65;
+      v109 = v65;
       *(ASymbol *)(v65 + 8) = ASymbol_greater;
       *(_QWORD *)(v65 + 16) = v66;
       *(_QWORD *)v65 = &SSInvokableBase::`vftable;
@@ -835,7 +800,7 @@ LABEL_187:
         v12 = v67->i_ref_count-- == 1;
         if ( v12 )
         {
-          v67->i_ref_count = 2147483648;
+          v67->i_ref_count = 0x80000000;
           SSParameters::~SSParameters(v67);
           AMemory::c_free_func(v67);
         }
@@ -847,46 +812,42 @@ LABEL_187:
   if ( (_DWORD)v70 )
   {
     v69 = SSBrain::c_string_class_p->i_methods.i_array_p;
-    v71 = (signed __int64)&v69[v70 - 1];
+    v71 = &v69[v70 - 1];
     while ( 1 )
     {
-      a2 = (signed __int64)&v69[(v71 - (signed __int64)v69) >> 4];
-      a4 = *(unsigned int *)(*(_QWORD *)a2 + 8i64);
-      if ( ASymbol_greater_or_equal.i_uid < (unsigned int)a4 )
-        goto LABEL_287;
-      v72 = ASymbol_greater_or_equal.i_uid == (_DWORD)a4;
-      a4 = ASymbol_greater_or_equal.i_uid != (_DWORD)a4;
-      if ( v72 == 1 )
+      while ( 1 )
       {
-        v73 = *(_QWORD *)a2;
-        goto LABEL_212;
-      }
-      if ( a4 < 0 )
-      {
-LABEL_287:
-        if ( v69 == (SSMethodBase **)a2 )
+        a2 = &v69[((char *)v71 - (char *)v69) >> 4];
+        i_uid = (*a2)->i_name.i_uid;
+        if ( ASymbol_greater_or_equal.i_uid >= (unsigned int)i_uid )
           break;
-        v71 = a2 - 8;
+        if ( v69 == a2 )
+          goto LABEL_202;
+        v71 = a2 - 1;
       }
-      else
-      {
-        if ( v71 == a2 )
-          break;
-        v69 = (SSMethodBase **)(a2 + 8);
-      }
+      v72 = ASymbol_greater_or_equal.i_uid == (_DWORD)i_uid;
+      i_uid = ASymbol_greater_or_equal.i_uid != (_DWORD)i_uid;
+      if ( v72 )
+        break;
+      if ( v71 == a2 )
+        goto LABEL_202;
+      v69 = a2 + 1;
     }
+    v73 = (__int64)*a2;
   }
-  v73 = 0i64;
-LABEL_212:
+  else
+  {
+LABEL_202:
+    v73 = 0i64;
+  }
   result = v73;
   if ( v73 )
   {
-    if ( (*(unsigned int (__fastcall **)(__int64, signed __int64, SSMethodBase **, __int64, signed __int64))(*(_QWORD *)v73 + 16i64))(
+    if ( (*(unsigned int (__fastcall **)(__int64, SSMethodBase **, SSMethodBase **, __int64))(*(_QWORD *)v73 + 16i64))(
            v73,
            a2,
            v69,
-           a4,
-           v107) == 1 )
+           i_uid) == 1 )
     {
       *(_QWORD *)(v73 + 32) = SSString::mthd_op_greater_or_equal;
     }
@@ -894,7 +855,7 @@ LABEL_212:
     {
       v74 = *(_QWORD *)(v73 + 16);
       v75 = *(SSParameters **)(v73 + 24);
-      v109 = v75;
+      v108 = v75;
       if ( v75 )
         ++v75->i_ref_count;
       v76 = *(SSParameters **)(v73 + 24);
@@ -903,13 +864,13 @@ LABEL_212:
         v12 = v76->i_ref_count-- == 1;
         if ( v12 )
         {
-          v76->i_ref_count = 2147483648;
+          v76->i_ref_count = 0x80000000;
           SSParameters::~SSParameters(v76);
           AMemory::c_free_func(v76);
         }
         *(_QWORD *)(v73 + 24) = 0i64;
       }
-      v110 = v73;
+      v109 = v73;
       *(ASymbol *)(v73 + 8) = ASymbol_greater_or_equal;
       *(_QWORD *)(v73 + 16) = v74;
       *(_QWORD *)v73 = &SSInvokableBase::`vftable;
@@ -924,7 +885,7 @@ LABEL_212:
         v12 = v75->i_ref_count-- == 1;
         if ( v12 )
         {
-          v75->i_ref_count = 2147483648;
+          v75->i_ref_count = 0x80000000;
           SSParameters::~SSParameters(v75);
           AMemory::c_free_func(v75);
         }
@@ -936,46 +897,42 @@ LABEL_212:
   if ( (_DWORD)v78 )
   {
     v77 = SSBrain::c_string_class_p->i_methods.i_array_p;
-    v79 = (signed __int64)&v77[v78 - 1];
+    v79 = &v77[v78 - 1];
     while ( 1 )
     {
-      a2 = (signed __int64)&v77[(v79 - (signed __int64)v77) >> 4];
-      a4 = *(unsigned int *)(*(_QWORD *)a2 + 8i64);
-      if ( ASymbol_less.i_uid < (unsigned int)a4 )
-        goto LABEL_288;
-      v80 = ASymbol_less.i_uid == (_DWORD)a4;
-      a4 = ASymbol_less.i_uid != (_DWORD)a4;
-      if ( v80 == 1 )
+      while ( 1 )
       {
-        v81 = *(_QWORD *)a2;
-        goto LABEL_237;
-      }
-      if ( a4 < 0 )
-      {
-LABEL_288:
-        if ( v77 == (SSMethodBase **)a2 )
+        a2 = &v77[((char *)v79 - (char *)v77) >> 4];
+        i_uid = (*a2)->i_name.i_uid;
+        if ( ASymbol_less.i_uid >= (unsigned int)i_uid )
           break;
-        v79 = a2 - 8;
+        if ( v77 == a2 )
+          goto LABEL_226;
+        v79 = a2 - 1;
       }
-      else
-      {
-        if ( v79 == a2 )
-          break;
-        v77 = (SSMethodBase **)(a2 + 8);
-      }
+      v80 = ASymbol_less.i_uid == (_DWORD)i_uid;
+      i_uid = ASymbol_less.i_uid != (_DWORD)i_uid;
+      if ( v80 )
+        break;
+      if ( v79 == a2 )
+        goto LABEL_226;
+      v77 = a2 + 1;
     }
+    v81 = (__int64)*a2;
   }
-  v81 = 0i64;
-LABEL_237:
+  else
+  {
+LABEL_226:
+    v81 = 0i64;
+  }
   result = v81;
   if ( v81 )
   {
-    if ( (*(unsigned int (__fastcall **)(__int64, signed __int64, SSMethodBase **, __int64, signed __int64))(*(_QWORD *)v81 + 16i64))(
+    if ( (*(unsigned int (__fastcall **)(__int64, SSMethodBase **, SSMethodBase **, __int64))(*(_QWORD *)v81 + 16i64))(
            v81,
            a2,
            v77,
-           a4,
-           v107) == 1 )
+           i_uid) == 1 )
     {
       *(_QWORD *)(v81 + 32) = SSString::mthd_op_less;
     }
@@ -983,7 +940,7 @@ LABEL_237:
     {
       v82 = *(_QWORD *)(v81 + 16);
       v83 = *(SSParameters **)(v81 + 24);
-      v109 = v83;
+      v108 = v83;
       if ( v83 )
         ++v83->i_ref_count;
       v84 = *(SSParameters **)(v81 + 24);
@@ -992,13 +949,13 @@ LABEL_237:
         v12 = v84->i_ref_count-- == 1;
         if ( v12 )
         {
-          v84->i_ref_count = 2147483648;
+          v84->i_ref_count = 0x80000000;
           SSParameters::~SSParameters(v84);
           AMemory::c_free_func(v84);
         }
         *(_QWORD *)(v81 + 24) = 0i64;
       }
-      v110 = v81;
+      v109 = v81;
       *(ASymbol *)(v81 + 8) = ASymbol_less;
       *(_QWORD *)(v81 + 16) = v82;
       *(_QWORD *)v81 = &SSInvokableBase::`vftable;
@@ -1013,7 +970,7 @@ LABEL_237:
         v12 = v83->i_ref_count-- == 1;
         if ( v12 )
         {
-          v83->i_ref_count = 2147483648;
+          v83->i_ref_count = 0x80000000;
           SSParameters::~SSParameters(v83);
           AMemory::c_free_func(v83);
         }
@@ -1025,46 +982,42 @@ LABEL_237:
   if ( (_DWORD)v86 )
   {
     v85 = SSBrain::c_string_class_p->i_methods.i_array_p;
-    v87 = (signed __int64)&v85[v86 - 1];
+    v87 = &v85[v86 - 1];
     while ( 1 )
     {
-      a2 = (signed __int64)&v85[(v87 - (signed __int64)v85) >> 4];
-      a4 = *(unsigned int *)(*(_QWORD *)a2 + 8i64);
-      if ( ASymbol_less_or_equal.i_uid < (unsigned int)a4 )
-        goto LABEL_289;
-      v88 = ASymbol_less_or_equal.i_uid == (_DWORD)a4;
-      a4 = ASymbol_less_or_equal.i_uid != (_DWORD)a4;
-      if ( v88 == 1 )
+      while ( 1 )
       {
-        v89 = *(_QWORD *)a2;
-        goto LABEL_262;
-      }
-      if ( a4 < 0 )
-      {
-LABEL_289:
-        if ( v85 == (SSMethodBase **)a2 )
+        a2 = &v85[((char *)v87 - (char *)v85) >> 4];
+        i_uid = (*a2)->i_name.i_uid;
+        if ( ASymbol_less_or_equal.i_uid >= (unsigned int)i_uid )
           break;
-        v87 = a2 - 8;
+        if ( v85 == a2 )
+          goto LABEL_250;
+        v87 = a2 - 1;
       }
-      else
-      {
-        if ( v87 == a2 )
-          break;
-        v85 = (SSMethodBase **)(a2 + 8);
-      }
+      v88 = ASymbol_less_or_equal.i_uid == (_DWORD)i_uid;
+      i_uid = ASymbol_less_or_equal.i_uid != (_DWORD)i_uid;
+      if ( v88 )
+        break;
+      if ( v87 == a2 )
+        goto LABEL_250;
+      v85 = a2 + 1;
     }
+    v89 = (__int64)*a2;
   }
-  v89 = 0i64;
-LABEL_262:
+  else
+  {
+LABEL_250:
+    v89 = 0i64;
+  }
   result = v89;
   if ( v89 )
   {
-    if ( (*(unsigned int (__fastcall **)(__int64, signed __int64, SSMethodBase **, __int64, signed __int64))(*(_QWORD *)v89 + 16i64))(
+    if ( (*(unsigned int (__fastcall **)(__int64, SSMethodBase **, SSMethodBase **, __int64))(*(_QWORD *)v89 + 16i64))(
            v89,
            a2,
            v85,
-           a4,
-           v107) == 1 )
+           i_uid) == 1 )
     {
       *(_QWORD *)(v89 + 32) = SSString::mthd_op_less_or_equal;
     }
@@ -1072,7 +1025,7 @@ LABEL_262:
     {
       v90 = *(_QWORD *)(v89 + 16);
       v91 = *(SSParameters **)(v89 + 24);
-      v109 = v91;
+      v108 = v91;
       if ( v91 )
         ++v91->i_ref_count;
       v92 = *(SSParameters **)(v89 + 24);
@@ -1081,13 +1034,13 @@ LABEL_262:
         v12 = v92->i_ref_count-- == 1;
         if ( v12 )
         {
-          v92->i_ref_count = 2147483648;
+          v92->i_ref_count = 0x80000000;
           SSParameters::~SSParameters(v92);
           AMemory::c_free_func(v92);
         }
         *(_QWORD *)(v89 + 24) = 0i64;
       }
-      v110 = v89;
+      v109 = v89;
       *(ASymbol *)(v89 + 8) = ASymbol_less_or_equal;
       *(_QWORD *)(v89 + 16) = v90;
       *(_QWORD *)v89 = &SSInvokableBase::`vftable;
@@ -1102,66 +1055,75 @@ LABEL_262:
         v12 = v91->i_ref_count-- == 1;
         if ( v12 )
         {
-          v91->i_ref_count = 2147483648;
+          v91->i_ref_count = 0x80000000;
           SSParameters::~SSParameters(v91);
           AMemory::c_free_func(v91);
         }
       }
     }
   }
-  SSClass::register_method_func(SSBrain::c_string_class_p, &ASymbol_not_equal, SSString::mthd_op_not_equal, 0);
-  SSClass::register_method_func(SSBrain::c_string_class_p, &ASymbol_append, SSString::mthd_op_add_assign, 0);
+  SSClass::register_method_func(
+    SSBrain::c_string_class_p,
+    &ASymbol_not_equal,
+    SSString::mthd_op_not_equal,
+    SSBindFlag_instance_no_rebind);
+  SSClass::register_method_func(
+    SSBrain::c_string_class_p,
+    &ASymbol_append,
+    (void (__fastcall *)(SSInvokedMethod *, SSInstance **))SSString::mthd_op_add_assign,
+    SSBindFlag_instance_no_rebind);
   v93 = SSBrain::c_string_class_p;
   v94 = ASymbol::create((ASymbol *)&result, "as_crc32", 0xFFFFFFFF, ATerm_long);
-  SSClass::register_method_func(v93, v94, SSString::mthd_as_crc32, 0);
+  SSClass::register_method_func(v93, v94, SSString::mthd_as_crc32, SSBindFlag_instance_no_rebind);
   v95 = SSBrain::c_string_class_p;
   v96 = ASymbol::create((ASymbol *)&result, "empty", 0xFFFFFFFF, ATerm_long);
-  SSClass::register_method_func(v95, v96, SSString::mthd_empty, 0);
+  SSClass::register_method_func(v95, v96, SSString::mthd_empty, SSBindFlag_instance_no_rebind);
   v97 = SSBrain::c_string_class_p;
   v98 = ASymbol::create((ASymbol *)&result, "enumerate", 0xFFFFFFFF, ATerm_long);
-  SSClass::register_method_func(v97, v98, SSString::mthd_enumerate, 0);
+  SSClass::register_method_func(v97, v98, SSString::mthd_enumerate, SSBindFlag_instance_no_rebind);
   v99 = SSBrain::c_string_class_p;
   v100 = ASymbol::create((ASymbol *)&result, "is_empty", 0xFFFFFFFF, ATerm_long);
-  SSClass::register_method_func(v99, v100, SSString::mthd_is_empty, 0);
+  SSClass::register_method_func(v99, v100, SSString::mthd_is_empty, SSBindFlag_instance_no_rebind);
   v101 = SSBrain::c_string_class_p;
   v102 = ASymbol::create((ASymbol *)&result, "is_filled", 0xFFFFFFFF, ATerm_long);
-  SSClass::register_method_func(v101, v102, SSString::mthd_is_filled, 0);
+  SSClass::register_method_func(v101, v102, SSString::mthd_is_filled, SSBindFlag_instance_no_rebind);
   v103 = SSBrain::c_string_class_p;
   v104 = ASymbol::create((ASymbol *)&result, "lowercase", 0xFFFFFFFF, ATerm_long);
-  SSClass::register_method_func(v103, v104, SSString::mthd_lowercase, 0);
+  SSClass::register_method_func(v103, v104, SSString::mthd_lowercase, SSBindFlag_instance_no_rebind);
   v105 = SSBrain::c_string_class_p;
   v106 = ASymbol::create((ASymbol *)&result, "uppercase", 0xFFFFFFFF, ATerm_long);
-  SSClass::register_method_func(v105, v106, SSString::mthd_uppercase, 0);
+  SSClass::register_method_func(v105, v106, SSString::mthd_uppercase, SSBindFlag_instance_no_rebind);
 }
 
 // File Line: 89
 // RVA: 0x1220D0
 void __fastcall SSString::mthd_destructor(SSInvokedMethod *scope_p, SSInstance **result_pp)
 {
-  SSObjectBase *v2; // rbx
-  AStringRef *v3; // rbx
-  bool v4; // zf
-  AObjReusePool<AStringRef> *v5; // rax
-  AObjBlock<AStringRef> *v6; // rcx
-  unsigned __int64 v7; // rdx
+  SSObjectBase *i_obj_p; // rbx
+  AStringRef *vfptr; // rbx
+  AObjReusePool<AStringRef> *pool; // rax
+  AObjBlock<AStringRef> *i_block_p; // rcx
+  unsigned __int64 i_objects_a; // rdx
   bool v8; // cf
-  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *v9; // rcx
+  APArray<AStringRef,AStringRef,ACompareAddress<AStringRef> > *p_i_exp_pool; // rcx
 
-  v2 = scope_p->i_scope_p.i_obj_p;
-  if ( !v2 || scope_p->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  v3 = (AStringRef *)v2[2].vfptr;
-  v4 = v3->i_ref_count-- == 1;
-  if ( v4 )
+  i_obj_p = scope_p->i_scope_p.i_obj_p;
+  if ( !i_obj_p || scope_p->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  vfptr = (AStringRef *)i_obj_p[2].vfptr;
+  if ( vfptr->i_ref_count-- == 1 )
   {
-    if ( v3->i_deallocate )
-      AMemory::c_free_func(v3->i_cstr_p);
-    v5 = AStringRef::get_pool();
-    v6 = v5->i_block_p;
-    v7 = (unsigned __int64)v6->i_objects_a;
-    if ( (unsigned __int64)v3 < v7 || (v8 = (unsigned __int64)v3 < v7 + 24i64 * v6->i_size, v9 = &v5->i_pool, !v8) )
-      v9 = &v5->i_exp_pool;
-    APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(v9, v3);
+    if ( vfptr->i_deallocate )
+      AMemory::c_free_func(vfptr->i_cstr_p);
+    pool = AStringRef::get_pool();
+    i_block_p = pool->i_block_p;
+    i_objects_a = (unsigned __int64)i_block_p->i_objects_a;
+    if ( (unsigned __int64)vfptr < i_objects_a
+      || (v8 = (unsigned __int64)vfptr < i_objects_a + 24i64 * i_block_p->i_size, p_i_exp_pool = &pool->i_pool, !v8) )
+    {
+      p_i_exp_pool = &pool->i_exp_pool;
+    }
+    APArray<AStringRef,AStringRef,ACompareAddress<AStringRef>>::append(p_i_exp_pool, vfptr);
   }
 }
 
@@ -1169,15 +1131,15 @@ void __fastcall SSString::mthd_destructor(SSInvokedMethod *scope_p, SSInstance *
 // RVA: 0x121870
 void __fastcall SSString::mthd_as_string(SSInvokedMethod *scope_p, SSInstance **result_pp)
 {
-  SSInstance *v2; // r8
+  SSInstance *i_obj_p; // r8
 
   if ( result_pp )
   {
-    v2 = (SSInstance *)scope_p->i_scope_p.i_obj_p;
-    if ( !v2 || scope_p->i_scope_p.i_ptr_id != v2->i_ptr_id )
-      v2 = 0i64;
-    ++v2->i_ref_count;
-    *result_pp = v2;
+    i_obj_p = (SSInstance *)scope_p->i_scope_p.i_obj_p;
+    if ( !i_obj_p || scope_p->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    ++i_obj_p->i_ref_count;
+    *result_pp = i_obj_p;
   }
 }
 
@@ -1185,77 +1147,71 @@ void __fastcall SSString::mthd_as_string(SSInvokedMethod *scope_p, SSInstance **
 // RVA: 0x1218A0
 void __fastcall SSString::mthd_as_symbol(SSInvokedMethod *scope_p, SSInstance **result_pp)
 {
-  SSInstance **v2; // rbx
-  SSObjectBase *v3; // rdx
+  SSObjectBase *i_obj_p; // rdx
   ASymbol *v4; // rdi
   SSInstance *v5; // rax
-  ASymbol result; // [rsp+48h] [rbp+10h]
+  ASymbol result; // [rsp+48h] [rbp+10h] BYREF
   SSInstance *v7; // [rsp+50h] [rbp+18h]
-  unsigned __int64 *v8; // [rsp+58h] [rbp+20h]
+  unsigned __int64 *p_i_user_data; // [rsp+58h] [rbp+20h]
 
   if ( result_pp )
   {
-    v2 = result_pp;
-    v3 = scope_p->i_scope_p.i_obj_p;
-    if ( !v3 || scope_p->i_scope_p.i_ptr_id != v3->i_ptr_id )
-      v3 = 0i64;
-    v4 = ASymbol::create(&result, (AString *)&v3[2], ATerm_long);
+    i_obj_p = scope_p->i_scope_p.i_obj_p;
+    if ( !i_obj_p || scope_p->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    v4 = ASymbol::create(&result, (AString *)&i_obj_p[2], ATerm_long);
     v5 = SSInstance::pool_new(SSBrain::c_symbol_class_p);
     v7 = v5;
-    v8 = &v5->i_user_data;
+    p_i_user_data = &v5->i_user_data;
     if ( v5 != (SSInstance *)-32i64 )
       LODWORD(v5->i_user_data) = (ASymbol)v4->i_uid;
-    *v2 = v5;
+    *result_pp = v5;
   }
 }
 
 // File Line: 156
 // RVA: 0x1209A0
-void __fastcall SSString::mthd_op_add_assign(SSInvokedMethod *scope_p, SSInstance **result_pp)
+void __fastcall SSString::mthd_op_add_assign(SSInvokedMethod *scope_p, SSObjectBase **result_pp)
 {
-  SSObjectBase *v2; // rbx
-  SSInstance **v3; // rdi
+  SSObjectBase *i_obj_p; // rbx
 
-  v2 = scope_p->i_scope_p.i_obj_p;
-  v3 = result_pp;
+  i_obj_p = scope_p->i_scope_p.i_obj_p;
   if ( result_pp )
   {
-    if ( !v2 || scope_p->i_scope_p.i_ptr_id != v2->i_ptr_id )
-      v2 = 0i64;
-    AString::append((AString *)&v2[2], (AString *)&(*scope_p->i_data.i_array_p)->i_data_p->i_user_data);
-    ++LODWORD(v2[1].vfptr);
-    *v3 = (SSInstance *)v2;
+    if ( !i_obj_p || scope_p->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    AString::append((AString *)&i_obj_p[2], (AString *)&(*scope_p->i_data.i_array_p)->i_data_p->i_user_data);
+    ++LODWORD(i_obj_p[1].vfptr);
+    *result_pp = i_obj_p;
   }
   else
   {
-    if ( !v2 || scope_p->i_scope_p.i_ptr_id != v2->i_ptr_id )
-      v2 = 0i64;
-    AString::append((AString *)&v2[2], (AString *)&(*scope_p->i_data.i_array_p)->i_data_p->i_user_data);
+    if ( !i_obj_p || scope_p->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    AString::append((AString *)&i_obj_p[2], (AString *)&(*scope_p->i_data.i_array_p)->i_data_p->i_user_data);
   }
 }
 
 // File Line: 188
 // RVA: 0x123890
-void __fastcall SSString::mthd_op_assign(SSInvokedMethod *scope_p, SSInstance **result_pp)
+void __fastcall SSString::mthd_op_assign(SSInvokedMethod *scope_p, SSObjectBase **result_pp)
 {
-  SSObjectBase *v2; // rbx
-  SSInstance **v3; // rdi
+  SSObjectBase *i_obj_p; // rbx
 
-  v2 = scope_p->i_scope_p.i_obj_p;
-  v3 = result_pp;
+  i_obj_p = scope_p->i_scope_p.i_obj_p;
   if ( result_pp )
   {
-    if ( !v2 || scope_p->i_scope_p.i_ptr_id != v2->i_ptr_id )
-      v2 = 0i64;
-    AString::operator=((AString *)&v2[2], (AString *)&(*scope_p->i_data.i_array_p)->i_data_p->i_user_data);
-    ++LODWORD(v2[1].vfptr);
-    *v3 = (SSInstance *)v2;
+    if ( !i_obj_p || scope_p->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    AString::operator=((AString *)&i_obj_p[2], (AString *)&(*scope_p->i_data.i_array_p)->i_data_p->i_user_data);
+    ++LODWORD(i_obj_p[1].vfptr);
+    *result_pp = i_obj_p;
   }
   else
   {
-    if ( !v2 || scope_p->i_scope_p.i_ptr_id != v2->i_ptr_id )
-      v2 = 0i64;
-    AString::operator=((AString *)&v2[2], (AString *)&(*scope_p->i_data.i_array_p)->i_data_p->i_user_data);
+    if ( !i_obj_p || scope_p->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    AString::operator=((AString *)&i_obj_p[2], (AString *)&(*scope_p->i_data.i_array_p)->i_data_p->i_user_data);
   }
 }
 
@@ -1263,50 +1219,48 @@ void __fastcall SSString::mthd_op_assign(SSInvokedMethod *scope_p, SSInstance **
 // RVA: 0x123D00
 void __fastcall SSString::mthd_op_equals(SSInvokedMethod *scope_p, SSInstance **result_pp)
 {
-  SSInstance **v2; // rbx
-  SSInstance *v3; // r9
-  SSObjectBase *v4; // r8
-  SSObjectBaseVtbl *v5; // rcx
-  unsigned __int64 v6; // rax
-  __int64 v7; // rdx
-  void *(__fastcall *v8)(SSObjectBase *, unsigned int); // rcx
+  SSInstance *i_data_p; // r9
+  SSObjectBase *i_obj_p; // r8
+  SSObjectBaseVtbl *vfptr; // rcx
+  unsigned __int64 i_user_data; // rax
+  __int64 get_obj_type_low; // rdx
+  void *(__fastcall *vecDelDtor)(SSObjectBase *, unsigned int); // rcx
   void *(__fastcall *v9)(SSObjectBase *, unsigned int); // rdx
   __int64 v10; // r8
 
   if ( result_pp )
   {
-    v2 = result_pp;
-    v3 = (*scope_p->i_data.i_array_p)->i_data_p;
-    v4 = scope_p->i_scope_p.i_obj_p;
-    if ( !v4 || scope_p->i_scope_p.i_ptr_id != v4->i_ptr_id )
-      v4 = 0i64;
-    v5 = v4[2].vfptr;
-    v6 = v3->i_user_data;
-    v7 = LODWORD(v5->get_obj_type);
-    if ( (_DWORD)v7 != *(_DWORD *)(v6 + 8) )
+    i_data_p = (*scope_p->i_data.i_array_p)->i_data_p;
+    i_obj_p = scope_p->i_scope_p.i_obj_p;
+    if ( !i_obj_p || scope_p->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    vfptr = i_obj_p[2].vfptr;
+    i_user_data = i_data_p->i_user_data;
+    get_obj_type_low = LODWORD(vfptr->get_obj_type);
+    if ( (_DWORD)get_obj_type_low != *(_DWORD *)(i_user_data + 8) )
     {
 LABEL_6:
-      *v2 = (SSInstance *)SSBoolean::pool_new(0);
+      *result_pp = SSBoolean::pool_new(0);
       return;
     }
-    v8 = v5->__vecDelDtor;
-    if ( v8 != *(void *(__fastcall **)(SSObjectBase *, unsigned int))v6 )
+    vecDelDtor = vfptr->__vecDelDtor;
+    if ( vecDelDtor != *(void *(__fastcall **)(SSObjectBase *, unsigned int))i_user_data )
     {
-      v9 = (void *(__fastcall *)(SSObjectBase *, unsigned int))((char *)v8 + v7);
-      if ( (unsigned __int64)v8 < (unsigned __int64)v9 )
+      v9 = (void *(__fastcall *)(SSObjectBase *, unsigned int))((char *)vecDelDtor + get_obj_type_low);
+      if ( (unsigned __int64)vecDelDtor < (unsigned __int64)v9 )
       {
-        v10 = *(_QWORD *)v6 - (_QWORD)v8;
-        while ( *(_BYTE *)v8 == *((_BYTE *)v8 + v10) )
+        v10 = *(_QWORD *)i_user_data - (_QWORD)vecDelDtor;
+        while ( *(_BYTE *)vecDelDtor == *((_BYTE *)vecDelDtor + v10) )
         {
-          v8 = (void *(__fastcall *)(SSObjectBase *, unsigned int))((char *)v8 + 1);
-          if ( (unsigned __int64)v8 >= (unsigned __int64)v9 )
+          vecDelDtor = (void *(__fastcall *)(SSObjectBase *, unsigned int))((char *)vecDelDtor + 1);
+          if ( (unsigned __int64)vecDelDtor >= (unsigned __int64)v9 )
             goto LABEL_12;
         }
         goto LABEL_6;
       }
     }
 LABEL_12:
-    *v2 = (SSInstance *)SSBoolean::pool_new(1);
+    *result_pp = SSBoolean::pool_new(1);
   }
 }
 
@@ -1314,50 +1268,48 @@ LABEL_12:
 // RVA: 0x124730
 void __fastcall SSString::mthd_op_not_equal(SSInvokedMethod *scope_p, SSInstance **result_pp)
 {
-  SSInstance **v2; // rbx
-  SSInstance *v3; // r9
-  SSObjectBase *v4; // r8
-  SSObjectBaseVtbl *v5; // rcx
-  unsigned __int64 v6; // rax
-  __int64 v7; // rdx
-  void *(__fastcall *v8)(SSObjectBase *, unsigned int); // rcx
+  SSInstance *i_data_p; // r9
+  SSObjectBase *i_obj_p; // r8
+  SSObjectBaseVtbl *vfptr; // rcx
+  unsigned __int64 i_user_data; // rax
+  __int64 get_obj_type_low; // rdx
+  void *(__fastcall *vecDelDtor)(SSObjectBase *, unsigned int); // rcx
   void *(__fastcall *v9)(SSObjectBase *, unsigned int); // rdx
   __int64 v10; // r8
 
   if ( result_pp )
   {
-    v2 = result_pp;
-    v3 = (*scope_p->i_data.i_array_p)->i_data_p;
-    v4 = scope_p->i_scope_p.i_obj_p;
-    if ( !v4 || scope_p->i_scope_p.i_ptr_id != v4->i_ptr_id )
-      v4 = 0i64;
-    v5 = v4[2].vfptr;
-    v6 = v3->i_user_data;
-    v7 = LODWORD(v5->get_obj_type);
-    if ( (_DWORD)v7 != *(_DWORD *)(v6 + 8) )
+    i_data_p = (*scope_p->i_data.i_array_p)->i_data_p;
+    i_obj_p = scope_p->i_scope_p.i_obj_p;
+    if ( !i_obj_p || scope_p->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    vfptr = i_obj_p[2].vfptr;
+    i_user_data = i_data_p->i_user_data;
+    get_obj_type_low = LODWORD(vfptr->get_obj_type);
+    if ( (_DWORD)get_obj_type_low != *(_DWORD *)(i_user_data + 8) )
     {
 LABEL_6:
-      *v2 = (SSInstance *)SSBoolean::pool_new(1);
+      *result_pp = SSBoolean::pool_new(1);
       return;
     }
-    v8 = v5->__vecDelDtor;
-    if ( v8 != *(void *(__fastcall **)(SSObjectBase *, unsigned int))v6 )
+    vecDelDtor = vfptr->__vecDelDtor;
+    if ( vecDelDtor != *(void *(__fastcall **)(SSObjectBase *, unsigned int))i_user_data )
     {
-      v9 = (void *(__fastcall *)(SSObjectBase *, unsigned int))((char *)v8 + v7);
-      if ( (unsigned __int64)v8 < (unsigned __int64)v9 )
+      v9 = (void *(__fastcall *)(SSObjectBase *, unsigned int))((char *)vecDelDtor + get_obj_type_low);
+      if ( (unsigned __int64)vecDelDtor < (unsigned __int64)v9 )
       {
-        v10 = *(_QWORD *)v6 - (_QWORD)v8;
-        while ( *(_BYTE *)v8 == *((_BYTE *)v8 + v10) )
+        v10 = *(_QWORD *)i_user_data - (_QWORD)vecDelDtor;
+        while ( *(_BYTE *)vecDelDtor == *((_BYTE *)vecDelDtor + v10) )
         {
-          v8 = (void *(__fastcall *)(SSObjectBase *, unsigned int))((char *)v8 + 1);
-          if ( (unsigned __int64)v8 >= (unsigned __int64)v9 )
+          vecDelDtor = (void *(__fastcall *)(SSObjectBase *, unsigned int))((char *)vecDelDtor + 1);
+          if ( (unsigned __int64)vecDelDtor >= (unsigned __int64)v9 )
             goto LABEL_12;
         }
         goto LABEL_6;
       }
     }
 LABEL_12:
-    *v2 = (SSInstance *)SSBoolean::pool_new(0);
+    *result_pp = SSBoolean::pool_new(0);
   }
 }
 
@@ -1365,32 +1317,28 @@ LABEL_12:
 // RVA: 0x123E80
 void __fastcall SSString::mthd_op_greater(SSInvokedMethod *scope_p, SSInstance **result_pp)
 {
-  SSData **v2; // rax
-  SSInvokedMethod *v3; // r9
-  SSObjectBase *v4; // rcx
-  SSInstance **v5; // rbx
-  SSObjectBaseVtbl *v6; // rcx
-  unsigned __int64 v7; // rdx
-  size_t v8; // r8
+  SSData **i_array_p; // rax
+  SSObjectBase *i_obj_p; // rcx
+  SSObjectBaseVtbl *vfptr; // rcx
+  unsigned __int64 i_user_data; // rdx
+  size_t get_obj_type_low; // r8
   const char *v9; // rdx
   int v10; // eax
 
   if ( result_pp )
   {
-    v2 = scope_p->i_data.i_array_p;
-    v3 = scope_p;
-    v4 = scope_p->i_scope_p.i_obj_p;
-    v5 = result_pp;
-    if ( !v4 || v3->i_scope_p.i_ptr_id != v4->i_ptr_id )
-      v4 = 0i64;
-    v6 = v4[2].vfptr;
-    v7 = (*v2)->i_data_p->i_user_data;
-    v8 = *(unsigned int *)(v7 + 8);
-    v9 = *(const char **)v7;
-    if ( LODWORD(v6->get_obj_type) < (unsigned int)v8 )
-      v8 = LODWORD(v6->get_obj_type);
-    v10 = strncmp((const char *)v6->__vecDelDtor, v9, v8);
-    *v5 = (SSInstance *)SSBoolean::pool_new(v10 > 0);
+    i_array_p = scope_p->i_data.i_array_p;
+    i_obj_p = scope_p->i_scope_p.i_obj_p;
+    if ( !i_obj_p || scope_p->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    vfptr = i_obj_p[2].vfptr;
+    i_user_data = (*i_array_p)->i_data_p->i_user_data;
+    get_obj_type_low = *(unsigned int *)(i_user_data + 8);
+    v9 = *(const char **)i_user_data;
+    if ( LODWORD(vfptr->get_obj_type) < (unsigned int)get_obj_type_low )
+      get_obj_type_low = LODWORD(vfptr->get_obj_type);
+    v10 = strncmp((const char *)vfptr->__vecDelDtor, v9, get_obj_type_low);
+    *result_pp = SSBoolean::pool_new(v10 > 0);
   }
 }
 
@@ -1398,32 +1346,28 @@ void __fastcall SSString::mthd_op_greater(SSInvokedMethod *scope_p, SSInstance *
 // RVA: 0x123FE0
 void __fastcall SSString::mthd_op_greater_or_equal(SSInvokedMethod *scope_p, SSInstance **result_pp)
 {
-  SSData **v2; // rax
-  SSInvokedMethod *v3; // r9
-  SSObjectBase *v4; // rcx
-  SSInstance **v5; // rbx
-  SSObjectBaseVtbl *v6; // rcx
-  unsigned __int64 v7; // rdx
-  size_t v8; // r8
+  SSData **i_array_p; // rax
+  SSObjectBase *i_obj_p; // rcx
+  SSObjectBaseVtbl *vfptr; // rcx
+  unsigned __int64 i_user_data; // rdx
+  size_t get_obj_type_low; // r8
   const char *v9; // rdx
   int v10; // eax
 
   if ( result_pp )
   {
-    v2 = scope_p->i_data.i_array_p;
-    v3 = scope_p;
-    v4 = scope_p->i_scope_p.i_obj_p;
-    v5 = result_pp;
-    if ( !v4 || v3->i_scope_p.i_ptr_id != v4->i_ptr_id )
-      v4 = 0i64;
-    v6 = v4[2].vfptr;
-    v7 = (*v2)->i_data_p->i_user_data;
-    v8 = *(unsigned int *)(v7 + 8);
-    v9 = *(const char **)v7;
-    if ( LODWORD(v6->get_obj_type) < (unsigned int)v8 )
-      v8 = LODWORD(v6->get_obj_type);
-    v10 = strncmp((const char *)v6->__vecDelDtor, v9, v8);
-    *v5 = (SSInstance *)SSBoolean::pool_new(v10 >= 0);
+    i_array_p = scope_p->i_data.i_array_p;
+    i_obj_p = scope_p->i_scope_p.i_obj_p;
+    if ( !i_obj_p || scope_p->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    vfptr = i_obj_p[2].vfptr;
+    i_user_data = (*i_array_p)->i_data_p->i_user_data;
+    get_obj_type_low = *(unsigned int *)(i_user_data + 8);
+    v9 = *(const char **)i_user_data;
+    if ( LODWORD(vfptr->get_obj_type) < (unsigned int)get_obj_type_low )
+      get_obj_type_low = LODWORD(vfptr->get_obj_type);
+    v10 = strncmp((const char *)vfptr->__vecDelDtor, v9, get_obj_type_low);
+    *result_pp = SSBoolean::pool_new(v10 >= 0);
   }
 }
 
@@ -1431,32 +1375,28 @@ void __fastcall SSString::mthd_op_greater_or_equal(SSInvokedMethod *scope_p, SSI
 // RVA: 0x1241E0
 void __fastcall SSString::mthd_op_less(SSInvokedMethod *scope_p, SSInstance **result_pp)
 {
-  SSData **v2; // rax
-  SSInvokedMethod *v3; // r9
-  SSObjectBase *v4; // rcx
-  SSInstance **v5; // rbx
-  SSObjectBaseVtbl *v6; // rcx
-  unsigned __int64 v7; // rdx
-  size_t v8; // r8
+  SSData **i_array_p; // rax
+  SSObjectBase *i_obj_p; // rcx
+  SSObjectBaseVtbl *vfptr; // rcx
+  unsigned __int64 i_user_data; // rdx
+  size_t get_obj_type_low; // r8
   const char *v9; // rdx
   int v10; // eax
 
   if ( result_pp )
   {
-    v2 = scope_p->i_data.i_array_p;
-    v3 = scope_p;
-    v4 = scope_p->i_scope_p.i_obj_p;
-    v5 = result_pp;
-    if ( !v4 || v3->i_scope_p.i_ptr_id != v4->i_ptr_id )
-      v4 = 0i64;
-    v6 = v4[2].vfptr;
-    v7 = (*v2)->i_data_p->i_user_data;
-    v8 = *(unsigned int *)(v7 + 8);
-    v9 = *(const char **)v7;
-    if ( LODWORD(v6->get_obj_type) < (unsigned int)v8 )
-      v8 = LODWORD(v6->get_obj_type);
-    v10 = strncmp((const char *)v6->__vecDelDtor, v9, v8);
-    *v5 = (SSInstance *)SSBoolean::pool_new(v10 < 0);
+    i_array_p = scope_p->i_data.i_array_p;
+    i_obj_p = scope_p->i_scope_p.i_obj_p;
+    if ( !i_obj_p || scope_p->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    vfptr = i_obj_p[2].vfptr;
+    i_user_data = (*i_array_p)->i_data_p->i_user_data;
+    get_obj_type_low = *(unsigned int *)(i_user_data + 8);
+    v9 = *(const char **)i_user_data;
+    if ( LODWORD(vfptr->get_obj_type) < (unsigned int)get_obj_type_low )
+      get_obj_type_low = LODWORD(vfptr->get_obj_type);
+    v10 = strncmp((const char *)vfptr->__vecDelDtor, v9, get_obj_type_low);
+    *result_pp = SSBoolean::pool_new(v10 < 0);
   }
 }
 
@@ -1464,32 +1404,28 @@ void __fastcall SSString::mthd_op_less(SSInvokedMethod *scope_p, SSInstance **re
 // RVA: 0x124340
 void __fastcall SSString::mthd_op_less_or_equal(SSInvokedMethod *scope_p, SSInstance **result_pp)
 {
-  SSData **v2; // rax
-  SSInvokedMethod *v3; // r9
-  SSObjectBase *v4; // rcx
-  SSInstance **v5; // rbx
-  SSObjectBaseVtbl *v6; // rcx
-  unsigned __int64 v7; // rdx
-  size_t v8; // r8
+  SSData **i_array_p; // rax
+  SSObjectBase *i_obj_p; // rcx
+  SSObjectBaseVtbl *vfptr; // rcx
+  unsigned __int64 i_user_data; // rdx
+  size_t get_obj_type_low; // r8
   const char *v9; // rdx
   int v10; // eax
 
   if ( result_pp )
   {
-    v2 = scope_p->i_data.i_array_p;
-    v3 = scope_p;
-    v4 = scope_p->i_scope_p.i_obj_p;
-    v5 = result_pp;
-    if ( !v4 || v3->i_scope_p.i_ptr_id != v4->i_ptr_id )
-      v4 = 0i64;
-    v6 = v4[2].vfptr;
-    v7 = (*v2)->i_data_p->i_user_data;
-    v8 = *(unsigned int *)(v7 + 8);
-    v9 = *(const char **)v7;
-    if ( LODWORD(v6->get_obj_type) < (unsigned int)v8 )
-      v8 = LODWORD(v6->get_obj_type);
-    v10 = strncmp((const char *)v6->__vecDelDtor, v9, v8);
-    *v5 = (SSInstance *)SSBoolean::pool_new(v10 <= 0);
+    i_array_p = scope_p->i_data.i_array_p;
+    i_obj_p = scope_p->i_scope_p.i_obj_p;
+    if ( !i_obj_p || scope_p->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    vfptr = i_obj_p[2].vfptr;
+    i_user_data = (*i_array_p)->i_data_p->i_user_data;
+    get_obj_type_low = *(unsigned int *)(i_user_data + 8);
+    v9 = *(const char **)i_user_data;
+    if ( LODWORD(vfptr->get_obj_type) < (unsigned int)get_obj_type_low )
+      get_obj_type_low = LODWORD(vfptr->get_obj_type);
+    v10 = strncmp((const char *)vfptr->__vecDelDtor, v9, get_obj_type_low);
+    *result_pp = SSBoolean::pool_new(v10 <= 0);
   }
 }
 
@@ -1497,22 +1433,20 @@ void __fastcall SSString::mthd_op_less_or_equal(SSInvokedMethod *scope_p, SSInst
 // RVA: 0x1234F0
 void __fastcall SSString::mthd_op_add(SSInvokedMethod *scope_p, SSInstance **result_pp)
 {
-  SSInstance **v2; // rbx
-  SSObjectBase *v3; // r8
-  AString v4; // [rsp+48h] [rbp+10h]
+  SSObjectBase *i_obj_p; // r8
+  AString v4; // [rsp+48h] [rbp+10h] BYREF
   AString *v5; // [rsp+50h] [rbp+18h]
 
   if ( result_pp )
   {
-    v2 = result_pp;
     v5 = &v4;
-    v3 = scope_p->i_scope_p.i_obj_p;
-    if ( !v3 || scope_p->i_scope_p.i_ptr_id != v3->i_ptr_id )
-      v3 = 0i64;
-    v4.i_str_ref_p = (AStringRef *)v3[2].vfptr;
+    i_obj_p = scope_p->i_scope_p.i_obj_p;
+    if ( !i_obj_p || scope_p->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    v4.i_str_ref_p = (AStringRef *)i_obj_p[2].vfptr;
     ++v4.i_str_ref_p->i_ref_count;
     AString::append(&v4, (AString *)&(*scope_p->i_data.i_array_p)->i_data_p->i_user_data);
-    *v2 = SSInstance::pool_new(SSBrain::c_string_class_p, (unsigned __int64)v4.i_str_ref_p);
+    *result_pp = SSInstance::pool_new(SSBrain::c_string_class_p, (unsigned __int64)v4.i_str_ref_p);
   }
 }
 
@@ -1520,23 +1454,19 @@ void __fastcall SSString::mthd_op_add(SSInvokedMethod *scope_p, SSInstance **res
 // RVA: 0x120E80
 void __fastcall SSString::mthd_as_crc32(SSInvokedMethod *scope_p, SSInstance **result_pp)
 {
-  SSInvokedMethod *v2; // r8
-  SSObjectBase *v3; // rcx
-  SSInstance **v4; // rbx
-  unsigned int v5; // eax
+  SSObjectBase *i_obj_p; // rcx
+  unsigned int crc32_cstr; // eax
 
   if ( result_pp )
   {
-    v2 = scope_p;
-    v3 = scope_p->i_scope_p.i_obj_p;
-    v4 = result_pp;
-    if ( !v3 || v2->i_scope_p.i_ptr_id != v3->i_ptr_id )
-      v3 = 0i64;
-    v5 = AChecksum::generate_crc32_cstr(
-           (const char *)v3[2].vfptr->__vecDelDtor,
-           (unsigned int)v3[2].vfptr->get_obj_type,
-           0xFFFFFFFF);
-    *v4 = SSInstance::pool_new(SSBrain::c_integer_class_p, v5);
+    i_obj_p = scope_p->i_scope_p.i_obj_p;
+    if ( !i_obj_p || scope_p->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    crc32_cstr = AChecksum::generate_crc32_cstr(
+                   (const char *)i_obj_p[2].vfptr->__vecDelDtor,
+                   (unsigned int)i_obj_p[2].vfptr->get_obj_type,
+                   0xFFFFFFFF);
+    *result_pp = SSInstance::pool_new(SSBrain::c_integer_class_p, crc32_cstr);
   }
 }
 
@@ -1544,25 +1474,25 @@ void __fastcall SSString::mthd_as_crc32(SSInvokedMethod *scope_p, SSInstance **r
 // RVA: 0x1223C0
 void __fastcall SSString::mthd_empty(SSInvokedMethod *scope_p, SSInstance **result_pp)
 {
-  SSObjectBase *v2; // rbx
-  SSObjectBaseVtbl *v3; // rdx
-  AStringRef *v4; // rax
+  SSObjectBase *i_obj_p; // rbx
+  SSObjectBaseVtbl *vfptr; // rdx
+  AStringRef *empty; // rax
 
-  v2 = scope_p->i_scope_p.i_obj_p;
-  if ( !v2 || scope_p->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  v3 = v2[2].vfptr;
-  if ( LOWORD(v3->is_actor) + BYTE3(v3->is_actor) == 1 )
+  i_obj_p = scope_p->i_scope_p.i_obj_p;
+  if ( !i_obj_p || scope_p->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  vfptr = i_obj_p[2].vfptr;
+  if ( LOWORD(vfptr->is_actor) + BYTE3(vfptr->is_actor) == 1 )
   {
-    *(_BYTE *)v3->__vecDelDtor = 0;
-    LODWORD(v2[2].vfptr->get_obj_type) = 0;
+    *(_BYTE *)vfptr->__vecDelDtor = 0;
+    LODWORD(i_obj_p[2].vfptr->get_obj_type) = 0;
   }
   else
   {
-    AStringRef::dereference((AStringRef *)v2[2].vfptr);
-    v4 = AStringRef::get_empty();
-    v2[2].vfptr = (SSObjectBaseVtbl *)v4;
-    ++v4->i_ref_count;
+    AStringRef::dereference((AStringRef *)i_obj_p[2].vfptr);
+    empty = AStringRef::get_empty();
+    i_obj_p[2].vfptr = (SSObjectBaseVtbl *)empty;
+    ++empty->i_ref_count;
   }
 }
 
@@ -1570,35 +1500,34 @@ void __fastcall SSString::mthd_empty(SSInvokedMethod *scope_p, SSInstance **resu
 // RVA: 0x122420
 void __fastcall SSString::mthd_enumerate(SSInvokedMethod *scope_p, SSInstance **result_pp)
 {
-  SSData **v2; // r8
-  SSInstance **v3; // rbx
-  SSInvokedMethod *v4; // r9
-  SSObjectBase *v5; // rcx
+  SSData **i_array_p; // r8
+  SSObjectBase *i_obj_p; // rcx
   unsigned int v6; // eax
 
-  v2 = scope_p->i_data.i_array_p;
-  v3 = result_pp;
-  v4 = scope_p;
-  v5 = scope_p->i_scope_p.i_obj_p;
-  if ( !v5 || v4->i_scope_p.i_ptr_id != v5->i_ptr_id )
-    v5 = 0i64;
-  v6 = AString::increment((AString *)&v5[2], (*v2)->i_data_p->i_user_data, v2[1]->i_data_p->i_user_data);
-  if ( v3 )
-    *v3 = SSInstance::pool_new(SSBrain::c_integer_class_p, v6);
+  i_array_p = scope_p->i_data.i_array_p;
+  i_obj_p = scope_p->i_scope_p.i_obj_p;
+  if ( !i_obj_p || scope_p->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  v6 = AString::increment(
+         (AString *)&i_obj_p[2],
+         (*i_array_p)->i_data_p->i_user_data,
+         i_array_p[1]->i_data_p->i_user_data);
+  if ( result_pp )
+    *result_pp = SSInstance::pool_new(SSBrain::c_integer_class_p, v6);
 }
 
 // File Line: 468
 // RVA: 0x122D40
 void __fastcall SSString::mthd_is_empty(SSInvokedMethod *scope_p, SSInstance **result_pp)
 {
-  SSObjectBase *v2; // r8
+  SSObjectBase *i_obj_p; // r8
 
   if ( result_pp )
   {
-    v2 = scope_p->i_scope_p.i_obj_p;
-    if ( !v2 || scope_p->i_scope_p.i_ptr_id != v2->i_ptr_id )
-      v2 = 0i64;
-    *result_pp = (SSInstance *)SSBoolean::pool_new(LODWORD(v2[2].vfptr->get_obj_type) == 0);
+    i_obj_p = scope_p->i_scope_p.i_obj_p;
+    if ( !i_obj_p || scope_p->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    *result_pp = SSBoolean::pool_new(LODWORD(i_obj_p[2].vfptr->get_obj_type) == 0);
   }
 }
 
@@ -1606,14 +1535,14 @@ void __fastcall SSString::mthd_is_empty(SSInvokedMethod *scope_p, SSInstance **r
 // RVA: 0x122DC0
 void __fastcall SSString::mthd_is_filled(SSInvokedMethod *scope_p, SSInstance **result_pp)
 {
-  SSObjectBase *v2; // r8
+  SSObjectBase *i_obj_p; // r8
 
   if ( result_pp )
   {
-    v2 = scope_p->i_scope_p.i_obj_p;
-    if ( !v2 || scope_p->i_scope_p.i_ptr_id != v2->i_ptr_id )
-      v2 = 0i64;
-    *result_pp = (SSInstance *)SSBoolean::pool_new(LODWORD(v2[2].vfptr->get_obj_type) != 0);
+    i_obj_p = scope_p->i_scope_p.i_obj_p;
+    if ( !i_obj_p || scope_p->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+      i_obj_p = 0i64;
+    *result_pp = SSBoolean::pool_new(LODWORD(i_obj_p[2].vfptr->get_obj_type) != 0);
   }
 }
 
@@ -1621,27 +1550,27 @@ void __fastcall SSString::mthd_is_filled(SSInvokedMethod *scope_p, SSInstance **
 // RVA: 0x122E90
 void __fastcall SSString::mthd_lowercase(SSInvokedMethod *scope_p, SSInstance **result_pp)
 {
-  SSObjectBase *v2; // rdx
-  SSObjectBaseVtbl *v3; // rax
+  SSObjectBase *i_obj_p; // rdx
+  SSObjectBaseVtbl *vfptr; // rax
   SSObjectBase *v4; // rbx
-  __int64 v5; // rdi
-  unsigned __int8 *v6; // rcx
+  __int64 get_obj_type_low; // rdi
+  unsigned __int8 *vecDelDtor; // rcx
   unsigned __int8 *i; // rdx
   __int64 v8; // rax
 
-  v2 = scope_p->i_scope_p.i_obj_p;
-  if ( !v2 || scope_p->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  v3 = v2[2].vfptr;
-  v4 = v2 + 2;
-  v5 = LODWORD(v3->get_obj_type);
-  if ( (_DWORD)v5 )
+  i_obj_p = scope_p->i_scope_p.i_obj_p;
+  if ( !i_obj_p || scope_p->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  vfptr = i_obj_p[2].vfptr;
+  v4 = i_obj_p + 2;
+  get_obj_type_low = LODWORD(vfptr->get_obj_type);
+  if ( (_DWORD)get_obj_type_low )
   {
-    if ( LOWORD(v3->is_actor) + BYTE3(v3->is_actor) != 1 )
-      AString::make_writeable((AString *)&v2[2]);
-    v6 = (unsigned __int8 *)v4->vfptr->__vecDelDtor;
-    for ( i = &v6[v5]; v6 < i; *(v6 - 1) = AString::c_char2lower[v8] )
-      v8 = *v6++;
+    if ( LOWORD(vfptr->is_actor) + BYTE3(vfptr->is_actor) != 1 )
+      AString::make_writeable((AString *)&i_obj_p[2]);
+    vecDelDtor = (unsigned __int8 *)v4->vfptr->__vecDelDtor;
+    for ( i = &vecDelDtor[get_obj_type_low]; vecDelDtor < i; *(vecDelDtor - 1) = AString::c_char2lower[v8] )
+      v8 = *vecDelDtor++;
   }
 }
 
@@ -1649,27 +1578,27 @@ void __fastcall SSString::mthd_lowercase(SSInvokedMethod *scope_p, SSInstance **
 // RVA: 0x125EB0
 void __fastcall SSString::mthd_uppercase(SSInvokedMethod *scope_p, SSInstance **result_pp)
 {
-  SSObjectBase *v2; // rdx
-  SSObjectBaseVtbl *v3; // rax
+  SSObjectBase *i_obj_p; // rdx
+  SSObjectBaseVtbl *vfptr; // rax
   SSObjectBase *v4; // rbx
-  __int64 v5; // rdi
-  unsigned __int8 *v6; // rcx
+  __int64 get_obj_type_low; // rdi
+  unsigned __int8 *vecDelDtor; // rcx
   unsigned __int8 *i; // rdx
   __int64 v8; // rax
 
-  v2 = scope_p->i_scope_p.i_obj_p;
-  if ( !v2 || scope_p->i_scope_p.i_ptr_id != v2->i_ptr_id )
-    v2 = 0i64;
-  v3 = v2[2].vfptr;
-  v4 = v2 + 2;
-  v5 = LODWORD(v3->get_obj_type);
-  if ( (_DWORD)v5 )
+  i_obj_p = scope_p->i_scope_p.i_obj_p;
+  if ( !i_obj_p || scope_p->i_scope_p.i_ptr_id != i_obj_p->i_ptr_id )
+    i_obj_p = 0i64;
+  vfptr = i_obj_p[2].vfptr;
+  v4 = i_obj_p + 2;
+  get_obj_type_low = LODWORD(vfptr->get_obj_type);
+  if ( (_DWORD)get_obj_type_low )
   {
-    if ( LOWORD(v3->is_actor) + BYTE3(v3->is_actor) != 1 )
-      AString::make_writeable((AString *)&v2[2]);
-    v6 = (unsigned __int8 *)v4->vfptr->__vecDelDtor;
-    for ( i = &v6[v5]; v6 < i; *(v6 - 1) = AString::c_char2uppper[v8] )
-      v8 = *v6++;
+    if ( LOWORD(vfptr->is_actor) + BYTE3(vfptr->is_actor) != 1 )
+      AString::make_writeable((AString *)&i_obj_p[2]);
+    vecDelDtor = (unsigned __int8 *)v4->vfptr->__vecDelDtor;
+    for ( i = &vecDelDtor[get_obj_type_low]; vecDelDtor < i; *(vecDelDtor - 1) = AString::c_char2uppper[v8] )
+      v8 = *vecDelDtor++;
   }
 }
 

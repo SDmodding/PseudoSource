@@ -12,14 +12,9 @@ void __fastcall UFG::qStaticInitAllocator::qStaticInitAllocator(UFG::qStaticInit
 // RVA: 0x16CE70
 void __fastcall UFG::qStaticInitAllocator::Done(UFG::qStaticInitAllocator *this)
 {
-  UFG::qRegionAllocator<UFG::qMainPoolAllocator<1>,0>::Block *v1; // rax
+  UFG::qRegionAllocator<UFG::qMainPoolAllocator<1>,0>::Block *i; // rax
 
-  v1 = this->mBlocks;
-  if ( this->mBlocks )
-  {
-    do
-      v1 = v1->next;
-    while ( v1 );
-  }
+  for ( i = this->mBlocks; i; i = i->next )
+    ;
 }
 

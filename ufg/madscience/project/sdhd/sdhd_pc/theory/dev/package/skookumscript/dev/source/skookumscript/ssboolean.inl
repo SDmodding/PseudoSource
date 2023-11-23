@@ -17,46 +17,40 @@ void __fastcall SSBoolean::SSBoolean(SSBoolean *this)
 // RVA: 0x130AB0
 SSBoolean *__fastcall SSBoolean::pool_new(bool bool_value)
 {
-  bool v1; // di
-  AObjReusePool<SSBoolean> *v2; // rax
-  AObjReusePool<SSBoolean> *v3; // rbx
+  AObjReusePool<SSBoolean> *pool; // rbx
+  unsigned int i_count; // eax
   unsigned int v4; // eax
-  unsigned int v5; // eax
-  unsigned int v6; // eax
-  __int64 v7; // rcx
-  SSBoolean **v8; // rax
+  __int64 v5; // rcx
+  SSBoolean **i_array_p; // rax
   SSBoolean *result; // rax
-  unsigned int v10; // eax
+  unsigned int v8; // eax
 
-  v1 = bool_value;
-  v2 = SSBoolean::get_pool();
-  v3 = v2;
-  v4 = v2->i_pool.i_count;
-  if ( v4 )
+  pool = SSBoolean::get_pool();
+  if ( pool->i_pool.i_count )
   {
-    v10 = v4 - 1;
-    v3->i_pool.i_count = v10;
-    v7 = v10;
-    v8 = v3->i_pool.i_array_p;
+    v8 = pool->i_pool.i_count - 1;
+    pool->i_pool.i_count = v8;
+    v5 = v8;
+    i_array_p = pool->i_pool.i_array_p;
     goto LABEL_8;
   }
-  if ( !v3->i_exp_pool.i_count )
-    AObjReusePool<SSBoolean>::append_block(v3, v3->i_expand_size);
-  v5 = v3->i_exp_pool.i_count;
-  if ( v5 )
+  if ( !pool->i_exp_pool.i_count )
+    AObjReusePool<SSBoolean>::append_block(pool, pool->i_expand_size);
+  i_count = pool->i_exp_pool.i_count;
+  if ( i_count )
   {
-    v6 = v5 - 1;
-    v3->i_exp_pool.i_count = v6;
-    v7 = v6;
-    v8 = v3->i_exp_pool.i_array_p;
+    v4 = i_count - 1;
+    pool->i_exp_pool.i_count = v4;
+    v5 = v4;
+    i_array_p = pool->i_exp_pool.i_array_p;
 LABEL_8:
-    result = v8[v7];
+    result = i_array_p[v5];
     goto LABEL_9;
   }
   result = 0i64;
 LABEL_9:
   result->i_ref_count = 1;
-  result->i_user_data = v1;
+  result->i_user_data = bool_value;
   result->i_ptr_id = ++SSObjectBase::c_ptr_id_prev;
   return result;
 }
@@ -65,45 +59,39 @@ LABEL_9:
 // RVA: 0x130A30
 SSBoolean *__fastcall SSBoolean::pool_new(unsigned __int64 bool_value)
 {
-  unsigned __int64 v1; // rdi
-  AObjReusePool<SSBoolean> *v2; // rax
-  AObjReusePool<SSBoolean> *v3; // rbx
+  AObjReusePool<SSBoolean> *pool; // rbx
+  unsigned int i_count; // eax
   unsigned int v4; // eax
-  unsigned int v5; // eax
-  unsigned int v6; // eax
-  __int64 v7; // rcx
-  SSBoolean **v8; // rax
+  __int64 v5; // rcx
+  SSBoolean **i_array_p; // rax
   SSBoolean *result; // rax
-  unsigned int v10; // eax
+  unsigned int v8; // eax
 
-  v1 = bool_value;
-  v2 = SSBoolean::get_pool();
-  v3 = v2;
-  v4 = v2->i_pool.i_count;
-  if ( v4 )
+  pool = SSBoolean::get_pool();
+  if ( pool->i_pool.i_count )
   {
-    v10 = v4 - 1;
-    v3->i_pool.i_count = v10;
-    v7 = v10;
-    v8 = v3->i_pool.i_array_p;
+    v8 = pool->i_pool.i_count - 1;
+    pool->i_pool.i_count = v8;
+    v5 = v8;
+    i_array_p = pool->i_pool.i_array_p;
     goto LABEL_8;
   }
-  if ( !v3->i_exp_pool.i_count )
-    AObjReusePool<SSBoolean>::append_block(v3, v3->i_expand_size);
-  v5 = v3->i_exp_pool.i_count;
-  if ( v5 )
+  if ( !pool->i_exp_pool.i_count )
+    AObjReusePool<SSBoolean>::append_block(pool, pool->i_expand_size);
+  i_count = pool->i_exp_pool.i_count;
+  if ( i_count )
   {
-    v6 = v5 - 1;
-    v3->i_exp_pool.i_count = v6;
-    v7 = v6;
-    v8 = v3->i_exp_pool.i_array_p;
+    v4 = i_count - 1;
+    pool->i_exp_pool.i_count = v4;
+    v5 = v4;
+    i_array_p = pool->i_exp_pool.i_array_p;
 LABEL_8:
-    result = v8[v7];
+    result = i_array_p[v5];
     goto LABEL_9;
   }
   result = 0i64;
 LABEL_9:
-  result->i_user_data = v1;
+  result->i_user_data = bool_value;
   result->i_ref_count = 1;
   result->i_ptr_id = ++SSObjectBase::c_ptr_id_prev;
   return result;

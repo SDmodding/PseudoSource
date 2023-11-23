@@ -2,13 +2,10 @@
 // RVA: 0xD77DD0
 void __fastcall hkpBoxMotion::hkpBoxMotion(hkpBoxMotion *this, hkVector4f *position, hkQuaternionf *rotation)
 {
-  hkpBoxMotion *v3; // rbx
-
-  v3 = this;
-  hkpMotion::hkpMotion((hkpMotion *)&this->vfptr, position, rotation, 0);
-  v3->vfptr = (hkBaseObjectVtbl *)&hkpBoxMotion::`vftable;
-  v3->m_type.m_storage = 3;
-  v3->m_inertiaAndMassInv = (hkVector4f)query.m_quad;
+  hkpMotion::hkpMotion(this, position, rotation, 0);
+  this->vfptr = (hkBaseObjectVtbl *)&hkpBoxMotion::`vftable;
+  this->m_type.m_storage = 3;
+  this->m_inertiaAndMassInv = (hkVector4f)query.m_quad;
 }
 
 // File Line: 24
@@ -51,14 +48,12 @@ void __fastcall hkpBoxMotion::setInertiaLocal(hkpBoxMotion *this, hkMatrix3f *in
 // RVA: 0xD77FF0
 void __fastcall hkpBoxMotion::getInertiaInvLocal(hkpBoxMotion *this, hkMatrix3f *inertiaInv)
 {
-  hkVector4f v2; // xmm2
-  hkVector4f v3; // xmm0
+  hkVector4f v2; // xmm0
 
   v2.m_quad = (__m128)this->m_inertiaAndMassInv;
-  v3.m_quad = _mm_mul_ps(this->m_inertiaAndMassInv.m_quad, stru_141A71280.m_quad);
   inertiaInv->m_col0.m_quad = _mm_mul_ps(v2.m_quad, transform.m_quad);
   inertiaInv->m_col1.m_quad = _mm_mul_ps(v2.m_quad, direction.m_quad);
-  inertiaInv->m_col2 = (hkVector4f)v3.m_quad;
+  inertiaInv->m_col2.m_quad = _mm_mul_ps(v2.m_quad, stru_141A71280.m_quad);
 }
 
 // File Line: 49
@@ -83,7 +78,7 @@ void __fastcall hkpBoxMotion::getInertiaInvWorld(hkpBoxMotion *this, hkMatrix3f 
 {
   hkVector4f v2; // xmm1
   hkVector4f v3; // xmm0
-  hkMatrix3f aTb; // [rsp+20h] [rbp-38h]
+  hkMatrix3f aTb; // [rsp+20h] [rbp-38h] BYREF
 
   v2.m_quad = _mm_mul_ps(
                 _mm_shuffle_ps(this->m_inertiaAndMassInv.m_quad, this->m_inertiaAndMassInv.m_quad, 170),
@@ -103,13 +98,8 @@ void __fastcall hkpBoxMotion::getInertiaInvWorld(hkpBoxMotion *this, hkMatrix3f 
 // RVA: 0xD77E70
 void __fastcall hkpBoxMotion::getInertiaWorld(hkpBoxMotion *this, hkMatrix3f *inertia)
 {
-  hkMatrix3f *v2; // rdi
-  hkpBoxMotion *v3; // rbx
-
-  v2 = inertia;
-  v3 = this;
-  ((void (*)(void))this->vfptr[3].__first_virtual_table_function__)();
-  hkMatrix3f::changeBasis(v2, &v3->m_motionState.m_transform.m_rotation);
+  this->vfptr[3].__first_virtual_table_function__(this);
+  hkMatrix3f::changeBasis(inertia, &this->m_motionState.m_transform.m_rotation);
 }
 
 // File Line: 75
@@ -208,41 +198,36 @@ void __fastcall hkpBoxMotion::applyPointImpulse(hkpBoxMotion *this, hkVector4f *
 void __fastcall hkpBoxMotion::applyAngularImpulse(hkpBoxMotion *this, hkVector4f *imp)
 {
   hkVector4f v2; // xmm3
-  __m128 v3; // xmm1
-  __m128 v4; // xmm0
-  __m128 v5; // xmm5
+  hkVector4f v3; // xmm1
+  __m128 v4; // xmm4
+  __m128 v5; // xmm1
+  __m128 v6; // xmm0
+  __m128 v7; // xmm5
 
   v2.m_quad = (__m128)this->m_motionState.m_transform.m_rotation.m_col2;
-  v3 = _mm_unpacklo_ps(
-         this->m_motionState.m_transform.m_rotation.m_col0.m_quad,
-         this->m_motionState.m_transform.m_rotation.m_col1.m_quad);
-  v4 = _mm_movelh_ps(v3, v2.m_quad);
-  v5 = _mm_mul_ps(
+  v3.m_quad = (__m128)this->m_motionState.m_transform.m_rotation.m_col0;
+  v4 = _mm_unpackhi_ps(v3.m_quad, this->m_motionState.m_transform.m_rotation.m_col1.m_quad);
+  v5 = _mm_unpacklo_ps(v3.m_quad, this->m_motionState.m_transform.m_rotation.m_col1.m_quad);
+  v6 = _mm_movelh_ps(v5, v2.m_quad);
+  v7 = _mm_mul_ps(
          _mm_add_ps(
            _mm_add_ps(
-             _mm_mul_ps(_mm_shuffle_ps(imp->m_quad, imp->m_quad, 0), v4),
+             _mm_mul_ps(_mm_shuffle_ps(imp->m_quad, imp->m_quad, 0), v6),
              _mm_mul_ps(
                _mm_shuffle_ps(imp->m_quad, imp->m_quad, 85),
-               _mm_shuffle_ps(_mm_movehl_ps(v4, v3), v2.m_quad, 212))),
-           _mm_mul_ps(
-             _mm_shuffle_ps(imp->m_quad, imp->m_quad, 170),
-             _mm_shuffle_ps(
-               _mm_unpackhi_ps(
-                 this->m_motionState.m_transform.m_rotation.m_col0.m_quad,
-                 this->m_motionState.m_transform.m_rotation.m_col1.m_quad),
-               v2.m_quad,
-               228))),
+               _mm_shuffle_ps(_mm_movehl_ps(v6, v5), v2.m_quad, 212))),
+           _mm_mul_ps(_mm_shuffle_ps(imp->m_quad, imp->m_quad, 170), _mm_shuffle_ps(v4, v2.m_quad, 228))),
          this->m_inertiaAndMassInv.m_quad);
   this->m_angularVelocity.m_quad = _mm_add_ps(
                                      _mm_add_ps(
                                        _mm_add_ps(
                                          _mm_mul_ps(
-                                           _mm_shuffle_ps(v5, v5, 85),
+                                           _mm_shuffle_ps(v7, v7, 85),
                                            this->m_motionState.m_transform.m_rotation.m_col1.m_quad),
                                          _mm_mul_ps(
-                                           _mm_shuffle_ps(v5, v5, 0),
+                                           _mm_shuffle_ps(v7, v7, 0),
                                            this->m_motionState.m_transform.m_rotation.m_col0.m_quad)),
-                                       _mm_mul_ps(_mm_shuffle_ps(v5, v5, 170), v2.m_quad)),
+                                       _mm_mul_ps(_mm_shuffle_ps(v7, v7, 170), v2.m_quad)),
                                      this->m_angularVelocity.m_quad);
 }
 
@@ -266,80 +251,89 @@ void __fastcall hkpBoxMotion::applyForce(hkpBoxMotion *this, const float deltaTi
 // RVA: 0xD78240
 void __fastcall hkpBoxMotion::applyForce(hkpBoxMotion *this, const float deltaTime, hkVector4f *force, hkVector4f *p)
 {
-  hkBaseObjectVtbl *v4; // rax
-  __m128 v5; // [rsp+20h] [rbp-18h]
+  hkBaseObjectVtbl *vfptr; // rax
+  __m128 v5; // [rsp+20h] [rbp-18h] BYREF
 
-  v4 = this->vfptr;
+  vfptr = this->vfptr;
   v5 = _mm_mul_ps(_mm_shuffle_ps((__m128)LODWORD(deltaTime), (__m128)LODWORD(deltaTime), 0), force->m_quad);
-  ((void (__fastcall *)(hkpBoxMotion *, __m128 *, hkVector4f *))v4[11].__first_virtual_table_function__)(this, &v5, p);
+  ((void (__fastcall *)(hkpBoxMotion *, __m128 *, hkVector4f *))vfptr[11].__first_virtual_table_function__)(
+    this,
+    &v5,
+    p);
 }
 
 // File Line: 130
 // RVA: 0xD78280
 void __fastcall hkpBoxMotion::applyTorque(hkpBoxMotion *this, const float deltaTime, hkVector4f *torque)
 {
-  hkBaseObjectVtbl *v3; // rax
-  __m128 v4; // [rsp+20h] [rbp-18h]
+  hkBaseObjectVtbl *vfptr; // rax
+  __m128 v4; // [rsp+20h] [rbp-18h] BYREF
 
-  v3 = this->vfptr;
+  vfptr = this->vfptr;
   v4 = _mm_mul_ps(_mm_shuffle_ps((__m128)LODWORD(deltaTime), (__m128)LODWORD(deltaTime), 0), torque->m_quad);
-  v3[12].__vecDelDtor((hkBaseObject *)&this->vfptr, (unsigned int)&v4);
+  vfptr[12].__vecDelDtor(this, (unsigned int)&v4);
 }
 
 // File Line: 137
 // RVA: 0xD782C0
-void __fastcall hkpBoxMotion::getProjectedPointVelocity(hkpBoxMotion *this, hkVector4f *pos, hkVector4f *normal, float *velOut, float *invVirtMassOut)
+void __fastcall hkpBoxMotion::getProjectedPointVelocity(
+        hkpBoxMotion *this,
+        hkVector4f *pos,
+        hkVector4f *normal,
+        float *velOut,
+        float *invVirtMassOut)
 {
   hkVector4f v5; // xmm4
   __m128 v6; // xmm0
   __m128 v7; // xmm8
-  __m128 v8; // xmm6
-  __m128 v9; // xmm1
+  hkVector4f v8; // xmm1
+  __m128 v9; // xmm5
   __m128 v10; // xmm6
-  __m128 v11; // xmm2
-  __m128 v12; // xmm7
-  __m128 v13; // xmm3
-  __m128 v14; // xmm1
+  __m128 v11; // xmm1
+  __m128 v12; // xmm6
+  __m128 v13; // xmm2
+  __m128 v14; // xmm7
+  __m128 v15; // xmm3
+  hkVector4f v16; // xmm1
+  __m128 v17; // xmm3
+  __m128 v18; // xmm1
 
   v5.m_quad = (__m128)this->m_motionState.m_transform.m_rotation.m_col2;
   v6 = _mm_sub_ps(pos->m_quad, this->m_motionState.m_sweptTransform.m_centerOfMass1.m_quad);
   v7 = _mm_mul_ps(this->m_linearVelocity.m_quad, normal->m_quad);
-  v8 = _mm_sub_ps(
-         _mm_mul_ps(_mm_shuffle_ps(normal->m_quad, normal->m_quad, 201), v6),
-         _mm_mul_ps(_mm_shuffle_ps(v6, v6, 201), normal->m_quad));
-  v9 = _mm_unpacklo_ps(
-         this->m_motionState.m_transform.m_rotation.m_col0.m_quad,
-         this->m_motionState.m_transform.m_rotation.m_col1.m_quad);
-  v10 = _mm_shuffle_ps(v8, v8, 201);
-  v11 = _mm_movelh_ps(v9, v5.m_quad);
-  v12 = _mm_mul_ps(this->m_angularVelocity.m_quad, v10);
-  v13 = _mm_add_ps(
-          _mm_add_ps(
-            _mm_mul_ps(_mm_shuffle_ps(v10, v10, 85), _mm_shuffle_ps(_mm_movehl_ps(v11, v9), v5.m_quad, 212)),
-            _mm_mul_ps(_mm_shuffle_ps(v10, v10, 0), v11)),
-          _mm_mul_ps(
-            _mm_shuffle_ps(v10, v10, 170),
-            _mm_shuffle_ps(
-              _mm_unpackhi_ps(
-                this->m_motionState.m_transform.m_rotation.m_col0.m_quad,
-                this->m_motionState.m_transform.m_rotation.m_col1.m_quad),
-              v5.m_quad,
-              228)));
-  v14 = _mm_mul_ps(_mm_mul_ps(this->m_inertiaAndMassInv.m_quad, v13), v13);
-  v13.m128_f32[0] = (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v14, v14, 85))
-                                  + COERCE_FLOAT(_mm_shuffle_ps(v14, v14, 0)))
-                          + COERCE_FLOAT(_mm_shuffle_ps(v14, v14, 170)))
-                  + COERCE_FLOAT(_mm_shuffle_ps(this->m_inertiaAndMassInv.m_quad, this->m_inertiaAndMassInv.m_quad, 255));
-  *velOut = (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v12, v12, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v12, v12, 0)))
-                  + COERCE_FLOAT(_mm_shuffle_ps(v12, v12, 170)))
-          + (float)((float)(COERCE_FLOAT(_mm_shuffle_ps(v7, v7, 85)) + COERCE_FLOAT(_mm_shuffle_ps(v7, v7, 0)))
-                  + COERCE_FLOAT(_mm_shuffle_ps(v7, v7, 170)));
-  *invVirtMassOut = v13.m128_f32[0];
+  v8.m_quad = (__m128)this->m_motionState.m_transform.m_rotation.m_col0;
+  v9 = _mm_unpackhi_ps(v8.m_quad, this->m_motionState.m_transform.m_rotation.m_col1.m_quad);
+  v10 = _mm_sub_ps(
+          _mm_mul_ps(_mm_shuffle_ps(normal->m_quad, normal->m_quad, 201), v6),
+          _mm_mul_ps(_mm_shuffle_ps(v6, v6, 201), normal->m_quad));
+  v11 = _mm_unpacklo_ps(v8.m_quad, this->m_motionState.m_transform.m_rotation.m_col1.m_quad);
+  v12 = _mm_shuffle_ps(v10, v10, 201);
+  v13 = _mm_movelh_ps(v11, v5.m_quad);
+  v14 = _mm_mul_ps(this->m_angularVelocity.m_quad, v12);
+  v15 = _mm_mul_ps(_mm_shuffle_ps(v12, v12, 85), _mm_shuffle_ps(_mm_movehl_ps(v13, v11), v5.m_quad, 212));
+  v16.m_quad = (__m128)this->m_inertiaAndMassInv;
+  v17 = _mm_add_ps(
+          _mm_add_ps(v15, _mm_mul_ps(_mm_shuffle_ps(v12, v12, 0), v13)),
+          _mm_mul_ps(_mm_shuffle_ps(v12, v12, 170), _mm_shuffle_ps(v9, v5.m_quad, 228)));
+  v13.m128_f32[0] = _mm_shuffle_ps(v16.m_quad, v16.m_quad, 255).m128_f32[0];
+  v18 = _mm_mul_ps(_mm_mul_ps(v16.m_quad, v17), v17);
+  *velOut = (float)((float)(_mm_shuffle_ps(v14, v14, 85).m128_f32[0] + _mm_shuffle_ps(v14, v14, 0).m128_f32[0])
+                  + _mm_shuffle_ps(v14, v14, 170).m128_f32[0])
+          + (float)((float)(_mm_shuffle_ps(v7, v7, 85).m128_f32[0] + _mm_shuffle_ps(v7, v7, 0).m128_f32[0])
+                  + _mm_shuffle_ps(v7, v7, 170).m128_f32[0]);
+  *invVirtMassOut = (float)((float)(_mm_shuffle_ps(v18, v18, 85).m128_f32[0] + _mm_shuffle_ps(v18, v18, 0).m128_f32[0])
+                          + _mm_shuffle_ps(v18, v18, 170).m128_f32[0])
+                  + v13.m128_f32[0];
 }
 
 // File Line: 152
 // RVA: 0xD783F0
-void __fastcall hkpBoxMotion::getProjectedPointVelocitySimd(hkpBoxMotion *this, hkVector4f *pos, hkVector4f *normal, hkSimdFloat32 *velOut, hkSimdFloat32 *invVirtMassOut)
+void __fastcall hkpBoxMotion::getProjectedPointVelocitySimd(
+        hkpBoxMotion *this,
+        hkVector4f *pos,
+        hkVector4f *normal,
+        hkSimdFloat32 *velOut,
+        hkSimdFloat32 *invVirtMassOut)
 {
   __m128 v5; // xmm0
   __m128 v6; // xmm3
@@ -347,10 +341,16 @@ void __fastcall hkpBoxMotion::getProjectedPointVelocitySimd(hkpBoxMotion *this, 
   __m128 v8; // xmm6
   __m128 v9; // xmm1
   hkVector4f v10; // xmm3
-  __m128 v11; // xmm1
-  __m128 v12; // xmm2
-  __m128 v13; // xmm4
-  __m128 v14; // xmm1
+  hkVector4f v11; // xmm1
+  __m128 v12; // xmm5
+  __m128 v13; // xmm1
+  __m128 v14; // xmm5
+  __m128 v15; // xmm2
+  __m128 v16; // xmm4
+  hkVector4f v17; // xmm1
+  __m128 v18; // xmm3
+  __m128 v19; // xmm4
+  __m128 v20; // xmm1
 
   v5 = _mm_sub_ps(pos->m_quad, this->m_motionState.m_sweptTransform.m_centerOfMass1.m_quad);
   v6 = _mm_mul_ps(this->m_linearVelocity.m_quad, normal->m_quad);
@@ -367,27 +367,22 @@ void __fastcall hkpBoxMotion::getProjectedPointVelocitySimd(hkpBoxMotion *this, 
                        _mm_add_ps(_mm_shuffle_ps(v6, v6, 85), _mm_shuffle_ps(v6, v6, 0)),
                        _mm_shuffle_ps(v6, v6, 170)));
   v10.m_quad = (__m128)this->m_motionState.m_transform.m_rotation.m_col2;
-  v11 = _mm_unpacklo_ps(
-          this->m_motionState.m_transform.m_rotation.m_col0.m_quad,
-          this->m_motionState.m_transform.m_rotation.m_col1.m_quad);
-  v12 = _mm_movelh_ps(v11, v10.m_quad);
-  v13 = _mm_add_ps(
-          _mm_add_ps(
-            _mm_mul_ps(_mm_shuffle_ps(v8, v8, 85), _mm_shuffle_ps(_mm_movehl_ps(v12, v11), v10.m_quad, 212)),
-            _mm_mul_ps(_mm_shuffle_ps(v8, v8, 0), v12)),
-          _mm_mul_ps(
-            _mm_shuffle_ps(v8, v8, 170),
-            _mm_shuffle_ps(
-              _mm_unpackhi_ps(
-                this->m_motionState.m_transform.m_rotation.m_col0.m_quad,
-                this->m_motionState.m_transform.m_rotation.m_col1.m_quad),
-              v10.m_quad,
-              228)));
-  v14 = _mm_mul_ps(_mm_mul_ps(this->m_inertiaAndMassInv.m_quad, v13), v13);
+  v11.m_quad = (__m128)this->m_motionState.m_transform.m_rotation.m_col0;
+  v12 = _mm_unpackhi_ps(v11.m_quad, this->m_motionState.m_transform.m_rotation.m_col1.m_quad);
+  v13 = _mm_unpacklo_ps(v11.m_quad, this->m_motionState.m_transform.m_rotation.m_col1.m_quad);
+  v14 = _mm_shuffle_ps(v12, v10.m_quad, 228);
+  v15 = _mm_movelh_ps(v13, v10.m_quad);
+  v16 = _mm_mul_ps(_mm_shuffle_ps(v8, v8, 85), _mm_shuffle_ps(_mm_movehl_ps(v15, v13), v10.m_quad, 212));
+  v17.m_quad = (__m128)this->m_inertiaAndMassInv;
+  v18 = _mm_shuffle_ps(v17.m_quad, v17.m_quad, 255);
+  v19 = _mm_add_ps(
+          _mm_add_ps(v16, _mm_mul_ps(_mm_shuffle_ps(v8, v8, 0), v15)),
+          _mm_mul_ps(_mm_shuffle_ps(v8, v8, 170), v14));
+  v20 = _mm_mul_ps(_mm_mul_ps(v17.m_quad, v19), v19);
   invVirtMassOut->m_real = _mm_add_ps(
                              _mm_add_ps(
-                               _mm_add_ps(_mm_shuffle_ps(v14, v14, 85), _mm_shuffle_ps(v14, v14, 0)),
-                               _mm_shuffle_ps(v14, v14, 170)),
-                             _mm_shuffle_ps(this->m_inertiaAndMassInv.m_quad, this->m_inertiaAndMassInv.m_quad, 255));
+                               _mm_add_ps(_mm_shuffle_ps(v20, v20, 85), _mm_shuffle_ps(v20, v20, 0)),
+                               _mm_shuffle_ps(v20, v20, 170)),
+                             v18);
 }
 

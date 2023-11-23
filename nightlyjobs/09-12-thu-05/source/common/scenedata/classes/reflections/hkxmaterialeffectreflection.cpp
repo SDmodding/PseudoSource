@@ -27,7 +27,7 @@ void dynamic_initializer_for__hkxMaterialEffectClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 78
@@ -39,30 +39,30 @@ hkClass *__fastcall hkxMaterialEffect::staticClass()
 
 // File Line: 85
 // RVA: 0xE32290
-void __fastcall finishLoadedObjecthkxMaterialEffect(void *p, int finishing)
+void __fastcall finishLoadedObjecthkxMaterialEffect(hkStringPtr *p, hkFinishLoadedObjectFlag finishing)
 {
   hkStringPtr *v2; // rcx
 
   if ( p )
   {
-    v2 = (hkStringPtr *)((char *)p + 16);
+    v2 = p + 2;
     v2[-2].m_stringAndFlag = (const char *)&hkxMaterialEffect::`vftable;
-    hkStringPtr::hkStringPtr(v2, (hkFinishLoadedObjectFlag)finishing);
+    hkStringPtr::hkStringPtr(v2, finishing);
   }
 }
 
 // File Line: 91
 // RVA: 0xE322C0
-void __fastcall cleanupLoadedObjecthkxMaterialEffect(void *p)
+void __fastcall cleanupLoadedObjecthkxMaterialEffect(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 95
 // RVA: 0xE322D0
 void **__fastcall getVtablehkxMaterialEffect()
 {
-  hkStringPtr v1; // [rsp+30h] [rbp-28h]
+  hkStringPtr v1; // [rsp+30h] [rbp-28h] BYREF
 
   hkStringPtr::hkStringPtr(&v1, 0);
   return &hkxMaterialEffect::`vftable;
@@ -79,8 +79,8 @@ void **dynamic_initializer_for__hkxMaterialEffectTypeInfo__()
   hkxMaterialEffectTypeInfo.m_typeName = "hkxMaterialEffect";
   hkxMaterialEffectTypeInfo.m_vtable = result;
   hkxMaterialEffectTypeInfo.m_scopedName = "!hkxMaterialEffect";
-  hkxMaterialEffectTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkxMaterialEffect;
-  hkxMaterialEffectTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkxMaterialEffect;
+  hkxMaterialEffectTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkxMaterialEffect;
+  hkxMaterialEffectTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkxMaterialEffect;
   return result;
 }
 

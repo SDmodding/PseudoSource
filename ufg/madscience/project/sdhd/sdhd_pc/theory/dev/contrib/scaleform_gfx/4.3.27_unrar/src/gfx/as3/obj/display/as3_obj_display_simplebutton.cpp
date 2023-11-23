@@ -22,7 +22,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243C460 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_display::SimpleButton,1,Scaleform::GFx::AS3::Value const,Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *>::Method = Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::downStateSet;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_display::SimpleButton,1,Scaleform::GFx::AS3::Value const,Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *, Scaleform::GFx::AS3::Value *, Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *))Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::downStateSet;
   return result;
 }
 
@@ -78,7 +78,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243C4A0 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_display::SimpleButton,5,Scaleform::GFx::AS3::Value const,Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *>::Method = Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::hitTestStateSet;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_display::SimpleButton,5,Scaleform::GFx::AS3::Value const,Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *, Scaleform::GFx::AS3::Value *, Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *))Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::hitTestStateSet;
   return result;
 }
 
@@ -92,7 +92,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243C4B0 = v1;
-  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_display::SimpleButton,6,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *))Scaleform::GFx::AS3::Instances::fl_display::Loader::contentLoaderInfoGet;
+  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_display::SimpleButton,6,Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject>>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *))Scaleform::GFx::AS3::Instances::fl_display::Loader::contentLoaderInfoGet;
   return result;
 }
 
@@ -106,7 +106,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243C4C0 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_display::SimpleButton,7,Scaleform::GFx::AS3::Value const,Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *>::Method = Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::overStateSet;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_display::SimpleButton,7,Scaleform::GFx::AS3::Value const,Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *, Scaleform::GFx::AS3::Value *, Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *))Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::overStateSet;
   return result;
 }
 
@@ -190,7 +190,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243C520 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_display::SimpleButton,13,Scaleform::GFx::AS3::Value const,Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *>::Method = Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::upStateSet;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_display::SimpleButton,13,Scaleform::GFx::AS3::Value const,Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *, Scaleform::GFx::AS3::Value *, Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *))Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::upStateSet;
   return result;
 }
 
@@ -204,7 +204,7 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc0_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243C530 = v1;
-  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_display::SimpleButton,14,bool>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *, bool *))Scaleform::GFx::AS3::Instances::fl_display::Sprite::useHandCursorGet;
+  Scaleform::GFx::AS3::ThunkFunc0<Scaleform::GFx::AS3::Instances::fl_display::SimpleButton,14,bool>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *, bool *))Scaleform::GFx::AS3::Instances::fl_display::Sprite::useHandCursorGet;
   return result;
 }
 
@@ -218,257 +218,263 @@ __int64 dynamic_initializer_for__Scaleform::GFx::AS3::ThunkFunc1_Scaleform::GFx:
   LODWORD(v1) = 0;
   result = v1;
   qword_14243C540 = v1;
-  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_display::SimpleButton,15,Scaleform::GFx::AS3::Value const,bool>::Method = (void (__fastcall *const )(Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *, Scaleform::GFx::AS3::Value *, bool))Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::useHandCursorSet;
+  Scaleform::GFx::AS3::ThunkFunc1<Scaleform::GFx::AS3::Instances::fl_display::SimpleButton,15,Scaleform::GFx::AS3::Value const,bool>::Method = (void (__fastcall *const)(Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *, Scaleform::GFx::AS3::Value *, bool))Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::useHandCursorSet;
   return result;
 }
 
 // File Line: 81
 // RVA: 0x8356E0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::downStateGet(Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::downStateGet(
+        Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *result)
 {
-  Scaleform::GFx::AS3::Instances::fl_display::DisplayObject **v2; // rdi
-  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *v3; // rbx
-  Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *v4; // rcx
-  unsigned int v5; // eax
+  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *p_DownStateObject; // rdi
+  Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *pObject; // rcx
+  unsigned int RefCount; // eax
 
-  v2 = &this->DownStateObject.pObject;
-  v3 = result;
+  p_DownStateObject = &this->DownStateObject;
   if ( &this->DownStateObject != result )
   {
-    if ( *v2 )
-      (*v2)->RefCount = ((*v2)->RefCount + 1) & 0x8FBFFFFF;
-    v4 = result->pObject;
+    if ( p_DownStateObject->pObject )
+      p_DownStateObject->pObject->RefCount = (p_DownStateObject->pObject->RefCount + 1) & 0x8FBFFFFF;
+    pObject = result->pObject;
     if ( result->pObject )
     {
-      if ( (unsigned __int8)v4 & 1 )
+      if ( ((unsigned __int8)pObject & 1) != 0 )
       {
-        result->pObject = (Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *)((char *)v4 - 1);
-        result->pObject = *v2;
+        result->pObject = (Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *)((char *)pObject - 1);
+        result->pObject = p_DownStateObject->pObject;
         return;
       }
-      v5 = v4->RefCount;
-      if ( v5 & 0x3FFFFF )
+      RefCount = pObject->RefCount;
+      if ( (RefCount & 0x3FFFFF) != 0 )
       {
-        v4->RefCount = v5 - 1;
-        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v4->vfptr);
+        pObject->RefCount = RefCount - 1;
+        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(pObject);
       }
     }
-    v3->pObject = *v2;
+    result->pObject = p_DownStateObject->pObject;
   }
 }
 
 // File Line: 87
 // RVA: 0x835760
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::downStateSet(Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::downStateSet(
+        Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Instances::fl::XMLList *value)
 {
-  Scaleform::GFx::DisplayObject *v3; // rdx
-  Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *v4; // rbx
-  Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *v5; // rdi
+  Scaleform::GFx::DisplayObject *pObject; // rdx
   Scaleform::GFx::AS3::AvmButton *v6; // rcx
 
-  v3 = this->pDispObj.pObject;
-  v4 = value;
-  v5 = this;
-  if ( v3 )
-    v6 = (Scaleform::GFx::AS3::AvmButton *)((char *)v3 + 4 * (unsigned __int8)v3->AvmObjOffset);
+  pObject = this->pDispObj.pObject;
+  if ( pObject )
+    v6 = (Scaleform::GFx::AS3::AvmButton *)((char *)pObject + 4 * (unsigned __int8)pObject->AvmObjOffset);
   else
     v6 = 0i64;
-  Scaleform::GFx::AS3::AvmButton::SetStateObject(v6, Down, value->pDispObj.pObject);
+  Scaleform::GFx::AS3::AvmButton::SetStateObject(v6, Down, (Scaleform::GFx::DisplayObject *)value->List.Data.Size);
   Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(
-    (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&v5->DownStateObject,
-    (Scaleform::GFx::AS3::Instances::fl::XMLList *)v4);
+    (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&this->DownStateObject,
+    value);
 }
 
 // File Line: 111
 // RVA: 0x84F410
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::hitTestStateGet(Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::hitTestStateGet(
+        Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *result)
 {
-  Scaleform::GFx::AS3::Instances::fl_display::DisplayObject **v2; // rdi
-  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *v3; // rbx
-  Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *v4; // rcx
-  unsigned int v5; // eax
+  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *p_HitTestStateObject; // rdi
+  Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *pObject; // rcx
+  unsigned int RefCount; // eax
 
-  v2 = &this->HitTestStateObject.pObject;
-  v3 = result;
+  p_HitTestStateObject = &this->HitTestStateObject;
   if ( &this->HitTestStateObject != result )
   {
-    if ( *v2 )
-      (*v2)->RefCount = ((*v2)->RefCount + 1) & 0x8FBFFFFF;
-    v4 = result->pObject;
+    if ( p_HitTestStateObject->pObject )
+      p_HitTestStateObject->pObject->RefCount = (p_HitTestStateObject->pObject->RefCount + 1) & 0x8FBFFFFF;
+    pObject = result->pObject;
     if ( result->pObject )
     {
-      if ( (unsigned __int8)v4 & 1 )
+      if ( ((unsigned __int8)pObject & 1) != 0 )
       {
-        result->pObject = (Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *)((char *)v4 - 1);
-        result->pObject = *v2;
+        result->pObject = (Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *)((char *)pObject - 1);
+        result->pObject = p_HitTestStateObject->pObject;
         return;
       }
-      v5 = v4->RefCount;
-      if ( v5 & 0x3FFFFF )
+      RefCount = pObject->RefCount;
+      if ( (RefCount & 0x3FFFFF) != 0 )
       {
-        v4->RefCount = v5 - 1;
-        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v4->vfptr);
+        pObject->RefCount = RefCount - 1;
+        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(pObject);
       }
     }
-    v3->pObject = *v2;
+    result->pObject = p_HitTestStateObject->pObject;
   }
 }
 
 // File Line: 117
 // RVA: 0x84F490
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::hitTestStateSet(Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::hitTestStateSet(
+        Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Instances::fl::XMLList *value)
 {
-  Scaleform::GFx::DisplayObject *v3; // rdx
-  Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *v4; // rbx
-  Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *v5; // rdi
+  Scaleform::GFx::DisplayObject *pObject; // rdx
   Scaleform::GFx::AS3::AvmButton *v6; // rcx
 
-  v3 = this->pDispObj.pObject;
-  v4 = value;
-  v5 = this;
-  if ( v3 )
-    v6 = (Scaleform::GFx::AS3::AvmButton *)((char *)v3 + 4 * (unsigned __int8)v3->AvmObjOffset);
+  pObject = this->pDispObj.pObject;
+  if ( pObject )
+    v6 = (Scaleform::GFx::AS3::AvmButton *)((char *)pObject + 4 * (unsigned __int8)pObject->AvmObjOffset);
   else
     v6 = 0i64;
-  Scaleform::GFx::AS3::AvmButton::SetHitStateObject(v6, value->pDispObj.pObject);
+  Scaleform::GFx::AS3::AvmButton::SetHitStateObject(v6, (Scaleform::GFx::DisplayObject *)value->List.Data.Size);
   Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(
-    (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&v5->HitTestStateObject,
-    (Scaleform::GFx::AS3::Instances::fl::XMLList *)v4);
+    (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&this->HitTestStateObject,
+    value);
 }
 
 // File Line: 132
 // RVA: 0x855B30
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::overStateSet(Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::overStateSet(
+        Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Instances::fl::XMLList *value)
 {
-  Scaleform::GFx::DisplayObject *v3; // rdx
-  Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *v4; // rbx
-  Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *v5; // rdi
+  Scaleform::GFx::DisplayObject *pObject; // rdx
   Scaleform::GFx::AS3::AvmButton *v6; // rcx
 
-  v3 = this->pDispObj.pObject;
-  v4 = value;
-  v5 = this;
-  if ( v3 )
-    v6 = (Scaleform::GFx::AS3::AvmButton *)((char *)v3 + 4 * (unsigned __int8)v3->AvmObjOffset);
+  pObject = this->pDispObj.pObject;
+  if ( pObject )
+    v6 = (Scaleform::GFx::AS3::AvmButton *)((char *)pObject + 4 * (unsigned __int8)pObject->AvmObjOffset);
   else
     v6 = 0i64;
-  Scaleform::GFx::AS3::AvmButton::SetStateObject(v6, Over, value->pDispObj.pObject);
+  Scaleform::GFx::AS3::AvmButton::SetStateObject(v6, Over, (Scaleform::GFx::DisplayObject *)value->List.Data.Size);
   Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(
-    (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&v5->OverStateObject,
-    (Scaleform::GFx::AS3::Instances::fl::XMLList *)v4);
+    (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&this->OverStateObject,
+    value);
 }
 
 // File Line: 140
 // RVA: 0x85F6E0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::soundTransformGet(Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_media::SoundTransform> *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::soundTransformGet(
+        Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_media::SoundTransform> *result)
 {
-  Scaleform::GFx::AS3::FlashUI *v2; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v2 = this->pTraits.pObject->pVM->UI;
-  v2->vfptr->Output(v2, Output_Warning, "The method SimpleButton::soundTransformGet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method SimpleButton::soundTransformGet() is not implemented\n");
 }
 
 // File Line: 147
 // RVA: 0x85F770
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::soundTransformSet(Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::soundTransformSet(
+        Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Instances::fl_media::SoundTransform *value)
 {
-  Scaleform::GFx::AS3::FlashUI *v3; // rcx
+  Scaleform::GFx::AS3::FlashUI *UI; // rcx
 
-  v3 = this->pTraits.pObject->pVM->UI;
-  v3->vfptr->Output(v3, Output_Warning, "The method SimpleButton::soundTransformSet() is not implemented\n");
+  UI = this->pTraits.pObject->pVM->UI;
+  UI->vfptr->Output(UI, Output_Warning, "The method SimpleButton::soundTransformSet() is not implemented\n");
 }
 
 // File Line: 174
 // RVA: 0x86B3D0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::upStateGet(Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *this, Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::upStateGet(
+        Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *this,
+        Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *result)
 {
-  Scaleform::GFx::AS3::Instances::fl_display::DisplayObject **v2; // rdi
-  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *v3; // rbx
-  Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *v4; // rcx
-  unsigned int v5; // eax
+  Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_display::DisplayObject> *p_UpStateObject; // rdi
+  Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *pObject; // rcx
+  unsigned int RefCount; // eax
 
-  v2 = &this->UpStateObject.pObject;
-  v3 = result;
+  p_UpStateObject = &this->UpStateObject;
   if ( &this->UpStateObject != result )
   {
-    if ( *v2 )
-      (*v2)->RefCount = ((*v2)->RefCount + 1) & 0x8FBFFFFF;
-    v4 = result->pObject;
+    if ( p_UpStateObject->pObject )
+      p_UpStateObject->pObject->RefCount = (p_UpStateObject->pObject->RefCount + 1) & 0x8FBFFFFF;
+    pObject = result->pObject;
     if ( result->pObject )
     {
-      if ( (unsigned __int8)v4 & 1 )
+      if ( ((unsigned __int8)pObject & 1) != 0 )
       {
-        result->pObject = (Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *)((char *)v4 - 1);
-        result->pObject = *v2;
+        result->pObject = (Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *)((char *)pObject - 1);
+        result->pObject = p_UpStateObject->pObject;
         return;
       }
-      v5 = v4->RefCount;
-      if ( v5 & 0x3FFFFF )
+      RefCount = pObject->RefCount;
+      if ( (RefCount & 0x3FFFFF) != 0 )
       {
-        v4->RefCount = v5 - 1;
-        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal((Scaleform::GFx::AS3::RefCountBaseGC<328> *)&v4->vfptr);
+        pObject->RefCount = RefCount - 1;
+        Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(pObject);
       }
     }
-    v3->pObject = *v2;
+    result->pObject = p_UpStateObject->pObject;
   }
 }
 
 // File Line: 180
 // RVA: 0x86B450
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::upStateSet(Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::upStateSet(
+        Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::Instances::fl::XMLList *value)
 {
-  Scaleform::GFx::DisplayObject *v3; // rdx
-  Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *v4; // rbx
-  Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *v5; // rdi
+  Scaleform::GFx::DisplayObject *pObject; // rdx
   Scaleform::GFx::AS3::AvmButton *v6; // rcx
 
-  v3 = this->pDispObj.pObject;
-  v4 = value;
-  v5 = this;
-  if ( v3 )
-    v6 = (Scaleform::GFx::AS3::AvmButton *)((char *)v3 + 4 * (unsigned __int8)v3->AvmObjOffset);
+  pObject = this->pDispObj.pObject;
+  if ( pObject )
+    v6 = (Scaleform::GFx::AS3::AvmButton *)((char *)pObject + 4 * (unsigned __int8)pObject->AvmObjOffset);
   else
     v6 = 0i64;
-  Scaleform::GFx::AS3::AvmButton::SetStateObject(v6, 0, value->pDispObj.pObject);
+  Scaleform::GFx::AS3::AvmButton::SetStateObject(v6, Up, (Scaleform::GFx::DisplayObject *)value->List.Data.Size);
   Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl_geom::Vector3D>::SetPtr(
-    (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&v5->UpStateObject,
-    (Scaleform::GFx::AS3::Instances::fl::XMLList *)v4);
+    (Scaleform::GFx::AS3::SPtr<Scaleform::GFx::AS3::Instances::fl::XMLList> *)&this->UpStateObject,
+    value);
 }
 
 // File Line: 188
 // RVA: 0x86BB70
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::useHandCursorGet(Scaleform::GFx::AS3::Instances::fl_display::Sprite *this, bool *result)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::Sprite::useHandCursorGet(
+        Scaleform::GFx::AS3::Instances::fl_display::Sprite *this,
+        bool *result)
 {
   *result = (this->pDispObj.pObject[1].Id.Id & 0x600) == 1536;
 }
 
 // File Line: 196
 // RVA: 0x86BB90
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::useHandCursorSet(Scaleform::GFx::AS3::Instances::fl_display::Sprite *this, Scaleform::GFx::AS3::Value *result, bool value)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::useHandCursorSet(
+        Scaleform::GFx::AS3::Instances::fl_display::Sprite *this,
+        Scaleform::GFx::AS3::Value *result,
+        bool value)
 {
-  Scaleform::GFx::DisplayObject *v3; // rax
+  Scaleform::GFx::DisplayObject *pObject; // rax
 
-  v3 = this->pDispObj.pObject;
+  pObject = this->pDispObj.pObject;
   if ( value )
   {
-    v3[1].Id.Id |= 0x600u;
+    pObject[1].Id.Id |= 0x600u;
   }
   else
   {
-    v3[1].Id.Id &= 0xFFFFFDFF;
-    v3[1].Id.Id |= 0x400u;
+    pObject[1].Id.Id &= ~0x200u;
+    pObject[1].Id.Id |= 0x400u;
   }
 }
 
 // File Line: 242
 // RVA: 0x7991A0
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::AS3Constructor(Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *this, unsigned int argc, Scaleform::GFx::AS3::Value *argv)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::AS3Constructor(
+        Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *this,
+        unsigned int argc,
+        Scaleform::GFx::AS3::Value *argv)
 {
   Scaleform::GFx::AS3::AvmButton *v3; // rsi
-  Scaleform::GFx::AS3::Value *v4; // rbx
-  unsigned int v5; // ebp
-  Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *v6; // rdi
-  Scaleform::GFx::DisplayObject *v7; // rcx
+  Scaleform::GFx::DisplayObject *pObject; // rcx
   Scaleform::GFx::AS3::AvmButton *v8; // rcx
   Scaleform::GFx::DisplayObject *v9; // rcx
   Scaleform::GFx::AS3::AvmButton *v10; // rcx
@@ -477,34 +483,31 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::AS3Con
   Scaleform::GFx::DisplayObject *v13; // rcx
 
   v3 = 0i64;
-  v4 = argv;
-  v5 = argc;
-  v6 = this;
-  if ( argc >= 1
+  if ( argc
     && Scaleform::GFx::AS3::VM::IsOfType(
          this->pTraits.pObject->pVM,
          argv,
          "flash.display.DisplayObject",
          this->pTraits.pObject->pVM->CurrentDomain.pObject) )
   {
-    v7 = v6->pDispObj.pObject;
-    if ( v7 )
-      v8 = (Scaleform::GFx::AS3::AvmButton *)((char *)v7 + 4 * (unsigned __int8)v7->AvmObjOffset);
+    pObject = this->pDispObj.pObject;
+    if ( pObject )
+      v8 = (Scaleform::GFx::AS3::AvmButton *)((char *)pObject + 4 * (unsigned __int8)pObject->AvmObjOffset);
     else
       v8 = 0i64;
     Scaleform::GFx::AS3::AvmButton::SetStateObject(
       v8,
-      0,
-      *(Scaleform::GFx::DisplayObject **)(*(_QWORD *)&v4->value.VNumber + 88i64));
+      Up,
+      (Scaleform::GFx::DisplayObject *)argv->value.VS._1.VStr[2].pManager);
   }
-  if ( v5 >= 2
+  if ( argc >= 2
     && Scaleform::GFx::AS3::VM::IsOfType(
-         v6->pTraits.pObject->pVM,
-         v4 + 1,
+         this->pTraits.pObject->pVM,
+         argv + 1,
          "flash.display.DisplayObject",
-         v6->pTraits.pObject->pVM->CurrentDomain.pObject) )
+         this->pTraits.pObject->pVM->CurrentDomain.pObject) )
   {
-    v9 = v6->pDispObj.pObject;
+    v9 = this->pDispObj.pObject;
     if ( v9 )
       v10 = (Scaleform::GFx::AS3::AvmButton *)((char *)v9 + 4 * (unsigned __int8)v9->AvmObjOffset);
     else
@@ -512,16 +515,16 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::AS3Con
     Scaleform::GFx::AS3::AvmButton::SetStateObject(
       v10,
       Over,
-      *(Scaleform::GFx::DisplayObject **)(*(_QWORD *)&v4[1].value.VNumber + 88i64));
+      (Scaleform::GFx::DisplayObject *)argv[1].value.VS._1.VStr[2].pManager);
   }
-  if ( v5 >= 3
+  if ( argc >= 3
     && Scaleform::GFx::AS3::VM::IsOfType(
-         v6->pTraits.pObject->pVM,
-         v4 + 2,
+         this->pTraits.pObject->pVM,
+         argv + 2,
          "flash.display.DisplayObject",
-         v6->pTraits.pObject->pVM->CurrentDomain.pObject) )
+         this->pTraits.pObject->pVM->CurrentDomain.pObject) )
   {
-    v11 = v6->pDispObj.pObject;
+    v11 = this->pDispObj.pObject;
     if ( v11 )
       v12 = (Scaleform::GFx::AS3::AvmButton *)((char *)v11 + 4 * (unsigned __int8)v11->AvmObjOffset);
     else
@@ -529,208 +532,200 @@ void __fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::AS3Con
     Scaleform::GFx::AS3::AvmButton::SetStateObject(
       v12,
       Down,
-      *(Scaleform::GFx::DisplayObject **)(*(_QWORD *)&v4[2].value.VNumber + 88i64));
+      (Scaleform::GFx::DisplayObject *)argv[2].value.VS._1.VStr[2].pManager);
   }
-  if ( v5 >= 4
+  if ( argc >= 4
     && Scaleform::GFx::AS3::VM::IsOfType(
-         v6->pTraits.pObject->pVM,
-         v4 + 3,
+         this->pTraits.pObject->pVM,
+         argv + 3,
          "flash.display.DisplayObject",
-         v6->pTraits.pObject->pVM->CurrentDomain.pObject) )
+         this->pTraits.pObject->pVM->CurrentDomain.pObject) )
   {
-    v13 = v6->pDispObj.pObject;
+    v13 = this->pDispObj.pObject;
     if ( v13 )
       v3 = (Scaleform::GFx::AS3::AvmButton *)((char *)v13 + 4 * (unsigned __int8)v13->AvmObjOffset);
     Scaleform::GFx::AS3::AvmButton::SetHitStateObject(
       v3,
-      *(Scaleform::GFx::DisplayObject **)(*(_QWORD *)&v4[3].value.VNumber + 88i64));
+      (Scaleform::GFx::DisplayObject *)argv[3].value.VS._1.VStr[2].pManager);
   }
 }
 
 // File Line: 278
 // RVA: 0x7F2E60
-void __fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::InitInstance(Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *this, bool extCall)
+void __fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::InitInstance(
+        Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *this,
+        bool extCall)
 {
-  JUMPOUT(extCall, 0, Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::CreateStageObject);
+  if ( !extCall )
+    Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::CreateStageObject(this);
 }
 
 // File Line: 284
 // RVA: 0x7BF010
-Scaleform::GFx::DisplayObject *__fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::CreateStageObject(Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *this)
+Scaleform::GFx::DisplayObject *__fastcall Scaleform::GFx::AS3::Instances::fl_display::SimpleButton::CreateStageObject(
+        Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *this)
 {
-  Scaleform::GFx::AS3::Instances::fl_display::SimpleButton *v1; // rbx
-  Scaleform::GFx::AS3::ASVM *v2; // rcx
-  Scaleform::GFx::AS3::MovieRoot *v3; // rsi
-  Scaleform::GFx::MovieDefImpl *v4; // rax
+  Scaleform::GFx::AS3::ASVM *pVM; // rcx
+  Scaleform::GFx::AS3::MovieRoot *pMovieRoot; // rsi
+  Scaleform::GFx::MovieDefImpl *ResourceMovieDef; // rax
   Scaleform::GFx::MovieDefImpl *v5; // rdi
-  Scaleform::GFx::CharacterCreateInfo *v6; // rax
-  Scaleform::GFx::AS3::VM *v7; // rax
-  Scaleform::GFx::ASSupport *v8; // rcx
-  __int64 v9; // rax
-  Scaleform::RefCountNTSImpl *v10; // rcx
-  Scaleform::GFx::DisplayObject *v11; // rdi
-  _QWORD *v12; // rdi
-  Scaleform::GFx::AS3::RefCountBaseGC<328> *v13; // rcx
-  unsigned int v14; // eax
-  Scaleform::GFx::AS3::Traits *v15; // rsi
-  __int64 v16; // rax
-  Scaleform::GFx::AS3::VMAppDomain *v17; // rax
-  Scaleform::GFx::CharacterCreateInfo pccinfo; // [rsp+30h] [rbp-38h]
-  Scaleform::GFx::CharacterCreateInfo result; // [rsp+48h] [rbp-20h]
-  Scaleform::GFx::ResourceId rid; // [rsp+70h] [rbp+8h]
+  Scaleform::GFx::AS3::VM *v6; // rax
+  Scaleform::GFx::ASSupport *pObject; // rcx
+  __int64 v8; // rax
+  Scaleform::GFx::DisplayObject *v9; // rcx
+  Scaleform::GFx::DisplayObject *v10; // rdi
+  _QWORD *v11; // rdi
+  Scaleform::GFx::AS3::RefCountBaseGC<328> *v12; // rcx
+  unsigned int RefCount; // eax
+  Scaleform::GFx::AS3::Traits *v14; // rsi
+  __int64 v15; // rax
+  Scaleform::GFx::AS3::VMAppDomain *v16; // rax
+  Scaleform::GFx::CharacterCreateInfo pccinfo; // [rsp+30h] [rbp-38h] BYREF
+  Scaleform::GFx::CharacterCreateInfo result; // [rsp+48h] [rbp-20h] BYREF
+  Scaleform::GFx::ResourceId rid; // [rsp+70h] [rbp+8h] BYREF
 
-  v1 = this;
   if ( this->pDispObj.pObject )
     return this->pDispObj.pObject;
-  v2 = (Scaleform::GFx::AS3::ASVM *)this->pTraits.pObject->pVM;
-  v3 = v2->pMovieRoot;
-  v4 = Scaleform::GFx::AS3::ASVM::GetResourceMovieDef(v2, (Scaleform::GFx::AS3::Instances::fl::Object *)&v1->vfptr);
-  v5 = v4;
-  if ( v4 )
+  pVM = (Scaleform::GFx::AS3::ASVM *)this->pTraits.pObject->pVM;
+  pMovieRoot = pVM->pMovieRoot;
+  ResourceMovieDef = Scaleform::GFx::AS3::ASVM::GetResourceMovieDef(pVM, this);
+  v5 = ResourceMovieDef;
+  if ( ResourceMovieDef )
   {
-    pccinfo.pResource = 0i64;
-    *(_OWORD *)&pccinfo.pCharDef = 0ui64;
-    Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::FindLibarySymbol(
-      (Scaleform::GFx::AS3::Instances::fl_display::DisplayObject *)&v1->vfptr,
-      &pccinfo,
-      v4);
+    memset(&pccinfo, 0, sizeof(pccinfo));
+    Scaleform::GFx::AS3::Instances::fl_display::DisplayObject::FindLibarySymbol(this, &pccinfo, ResourceMovieDef);
     if ( !pccinfo.pCharDef )
     {
       rid.Id = 65539;
-      v6 = Scaleform::GFx::MovieDefImpl::GetCharacterCreateInfo(v5, &result, (Scaleform::GFx::ResourceId)&rid);
-      pccinfo.pCharDef = v6->pCharDef;
-      pccinfo.pBindDefImpl = v6->pBindDefImpl;
-      pccinfo.pResource = v6->pResource;
-      v7 = v1->pTraits.pObject->pVM;
-      if ( v7->CallStack.Size <= 0 )
-        pccinfo.pBindDefImpl = v5;
+      pccinfo = *Scaleform::GFx::MovieDefImpl::GetCharacterCreateInfo(v5, &result, (Scaleform::GFx::ResourceId)&rid);
+      v6 = this->pTraits.pObject->pVM;
+      if ( v6->CallStack.Size )
+        pccinfo.pBindDefImpl = (Scaleform::GFx::MovieDefImpl *)v6->CallStack.Pages[(v6->CallStack.Size - 1) >> 6][((unsigned int)v6->CallStack.Size - 1) & 0x3F].pFile->File.pObject[1].vfptr;
       else
-        pccinfo.pBindDefImpl = (Scaleform::GFx::MovieDefImpl *)v7->CallStack.Pages[(v7->CallStack.Size - 1) >> 6][(LODWORD(v7->CallStack.Size) - 1) & 0x3F].pFile->File.pObject[1].vfptr;
+        pccinfo.pBindDefImpl = v5;
     }
-    v8 = v3->pASSupport.pObject;
+    pObject = pMovieRoot->pASSupport.pObject;
     rid.Id = 0x40000;
-    v9 = ((__int64 (__fastcall *)(Scaleform::GFx::ASSupport *, Scaleform::GFx::MovieImpl *, Scaleform::GFx::CharacterCreateInfo *, _QWORD, Scaleform::GFx::ResourceId *, signed int))v8->vfptr[4].__vecDelDtor)(
-           v8,
-           v3->pMovieImpl,
+    v8 = ((__int64 (__fastcall *)(Scaleform::GFx::ASSupport *, Scaleform::GFx::MovieImpl *, Scaleform::GFx::CharacterCreateInfo *, _QWORD, Scaleform::GFx::ResourceId *, int))pObject->vfptr[4].__vecDelDtor)(
+           pObject,
+           pMovieRoot->pMovieImpl,
            &pccinfo,
            0i64,
            &rid,
            6);
-    v10 = (Scaleform::RefCountNTSImpl *)&v1->pDispObj.pObject->vfptr;
-    v11 = (Scaleform::GFx::DisplayObject *)v9;
+    v9 = this->pDispObj.pObject;
+    v10 = (Scaleform::GFx::DisplayObject *)v8;
+    if ( v9 )
+      Scaleform::RefCountNTSImpl::Release(v9);
+    this->pDispObj.pObject = v10;
     if ( v10 )
-      Scaleform::RefCountNTSImpl::Release(v10);
-    v1->pDispObj.pObject = v11;
-    if ( v11 )
-      v12 = (Scaleform::RefCountNTSImplCoreVtbl **)((char *)&v11->vfptr + 4 * (unsigned __int8)v11->AvmObjOffset);
+      v11 = (Scaleform::RefCountNTSImplCoreVtbl **)((char *)&v10->Scaleform::GFx::DisplayObjectBase::Scaleform::RefCountBaseWeakSupport<Scaleform::GFx::DisplayObjectBase,322>::Scaleform::RefCountBaseStatImpl<Scaleform::RefCountWeakSupportImpl,322>::Scaleform::RefCountWeakSupportImpl::Scaleform::RefCountNTSImpl::Scaleform::RefCountNTSImplCore::vfptr
+                                                  + 4 * (unsigned __int8)v10->AvmObjOffset);
     else
-      v12 = 0i64;
-    v12[2] = v1;
-    v13 = (Scaleform::GFx::AS3::RefCountBaseGC<328> *)v12[1];
-    if ( v13 )
+      v11 = 0i64;
+    v11[2] = this;
+    v12 = (Scaleform::GFx::AS3::RefCountBaseGC<328> *)v11[1];
+    if ( v12 )
     {
-      if ( (unsigned __int8)v13 & 1 )
+      if ( ((unsigned __int8)v12 & 1) != 0 )
       {
-        v12[1] = (char *)v13 - 1;
+        v11[1] = (char *)v12 - 1;
       }
       else
       {
-        v14 = v13->RefCount;
-        if ( v14 & 0x3FFFFF )
+        RefCount = v12->RefCount;
+        if ( (RefCount & 0x3FFFFF) != 0 )
         {
-          v13->RefCount = v14 - 1;
-          Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(v13);
+          v12->RefCount = RefCount - 1;
+          Scaleform::GFx::AS3::RefCountBaseGC<328>::ReleaseInternal(v12);
         }
       }
-      v12[1] = 0i64;
+      v11[1] = 0i64;
     }
-    v15 = v1->pTraits.pObject;
-    v16 = ((__int64 (__fastcall *)(Scaleform::GFx::AS3::Traits *))v15->vfptr[2].~RefCountBaseGC<328>)(v15);
-    if ( v16 )
-      v17 = *(Scaleform::GFx::AS3::VMAppDomain **)(v16 + 48);
+    v14 = this->pTraits.pObject;
+    v15 = ((__int64 (__fastcall *)(Scaleform::GFx::AS3::Traits *))v14->vfptr[2].~RefCountBaseGC<328>)(v14);
+    if ( v15 )
+      v16 = *(Scaleform::GFx::AS3::VMAppDomain **)(v15 + 48);
     else
-      v17 = v15->pVM->SystemDomain.pObject;
+      v16 = v14->pVM->SystemDomain.pObject;
     if ( Scaleform::GFx::AS3::VMAppDomain::Enabled )
-      v12[5] = v17;
-    Scaleform::GFx::Button::CreateCharacters((Scaleform::GFx::Button *)v1->pDispObj.pObject);
+      v11[5] = v16;
+    Scaleform::GFx::Button::CreateCharacters((Scaleform::GFx::Button *)this->pDispObj.pObject);
   }
-  return v1->pDispObj.pObject;
+  return this->pDispObj.pObject;
 }
 
 // File Line: 382
 // RVA: 0x7FFFD0
-void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl_display::SimpleButton::MakeObject(Scaleform::GFx::AS3::InstanceTraits::fl_display::SimpleButton *this, Scaleform::GFx::AS3::Value *result, Scaleform::GFx::AS3::InstanceTraits::Traits *t)
+void __fastcall Scaleform::GFx::AS3::InstanceTraits::fl_display::SimpleButton::MakeObject(
+        Scaleform::GFx::AS3::InstanceTraits::fl_display::SimpleButton *this,
+        Scaleform::GFx::AS3::Value *result,
+        Scaleform::GFx::AS3::InstanceTraits::fl_display::SimpleButton *t)
 {
-  Scaleform::GFx::AS3::Value *v3; // rbx
-  Scaleform::GFx::AS3::Object **v4; // rax
-  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_display::SimpleButton> resulta; // [rsp+48h] [rbp+20h]
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_display::SimpleButton> *Instance; // rax
+  Scaleform::Pickable<Scaleform::GFx::AS3::Instances::fl_display::SimpleButton> resulta; // [rsp+48h] [rbp+20h] BYREF
 
-  v3 = result;
-  v4 = (Scaleform::GFx::AS3::Object **)Scaleform::GFx::AS3::InstanceTraits::fl_display::SimpleButton::MakeInstance(
-                                         &resulta,
-                                         (Scaleform::GFx::AS3::InstanceTraits::fl_display::SimpleButton *)t);
-  Scaleform::GFx::AS3::Value::Pick(v3, *v4);
+  Instance = Scaleform::GFx::AS3::InstanceTraits::fl_display::SimpleButton::MakeInstance(&resulta, t);
+  Scaleform::GFx::AS3::Value::Pick(result, Instance->pV);
 }
 
 // File Line: 405
 // RVA: 0x72FD10
-Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl_display::SimpleButton::MakeClassTraits(Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result, Scaleform::GFx::AS3::VM *vm)
+Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *__fastcall Scaleform::GFx::AS3::ClassTraits::fl_display::SimpleButton::MakeClassTraits(
+        Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *result,
+        Scaleform::GFx::AS3::VM *vm)
 {
-  Scaleform::GFx::AS3::VM *v2; // rbp
-  Scaleform::Pickable<Scaleform::GFx::AS3::ClassTraits::Traits> *v3; // rdi
-  Scaleform::MemoryHeap *v4; // rsi
+  Scaleform::MemoryHeap *MHeap; // rsi
   Scaleform::GFx::AS3::ClassTraits::Traits *v5; // rax
   Scaleform::GFx::AS3::ClassTraits::Traits *v6; // rbx
   Scaleform::GFx::AS3::InstanceTraits::CTraits *v7; // rax
   Scaleform::Pickable<Scaleform::GFx::AS3::InstanceTraits::Traits> v8; // rbx
   Scaleform::GFx::AS3::Class *v9; // rax
 
-  v2 = vm;
-  v3 = result;
-  v4 = vm->MHeap;
-  v5 = (Scaleform::GFx::AS3::ClassTraits::Traits *)v4->vfptr->Alloc(v4, 208ui64, 0i64);
+  MHeap = vm->MHeap;
+  v5 = (Scaleform::GFx::AS3::ClassTraits::Traits *)MHeap->vfptr->Alloc(MHeap, 208ui64, 0i64);
   v6 = v5;
   if ( v5 )
   {
-    Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, v2, &Scaleform::GFx::AS3::fl_display::SimpleButtonCI);
+    Scaleform::GFx::AS3::ClassTraits::Traits::Traits(v5, vm, &Scaleform::GFx::AS3::fl_display::SimpleButtonCI);
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl::Object::`vftable;
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_events::EventDispatcher::`vftable;
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_display::DisplayObject::`vftable;
-    v6->TraitsType = 22;
+    v6->TraitsType = Traits_DisplayObject_Begin;
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_display::InteractiveObject::`vftable;
-    v6->TraitsType = 23;
+    v6->TraitsType = Traits_InteractiveObject;
     v6->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::ClassTraits::fl_display::SimpleButton::`vftable;
-    v6->TraitsType = 28;
+    v6->TraitsType = Traits_SimpleButton;
   }
   else
   {
     v6 = 0i64;
   }
-  v3->pV = v6;
-  v7 = (Scaleform::GFx::AS3::InstanceTraits::CTraits *)v4->vfptr->Alloc(v4, 240ui64, 0i64);
-  v8.pV = (Scaleform::GFx::AS3::InstanceTraits::Traits *)&v7->vfptr;
+  result->pV = v6;
+  v7 = (Scaleform::GFx::AS3::InstanceTraits::CTraits *)MHeap->vfptr->Alloc(MHeap, 240ui64, 0i64);
+  v8.pV = v7;
   if ( v7 )
   {
-    Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, v2, &Scaleform::GFx::AS3::fl_display::SimpleButtonCI);
+    Scaleform::GFx::AS3::InstanceTraits::CTraits::CTraits(v7, vm, &Scaleform::GFx::AS3::fl_display::SimpleButtonCI);
     v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl::Object::`vftable;
     v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_events::EventDispatcher::`vftable;
     v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_display::DisplayObject::`vftable;
-    v8.pV->TraitsType = 22;
+    v8.pV->TraitsType = Traits_DisplayObject_Begin;
     v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_display::InteractiveObject::`vftable;
-    v8.pV->TraitsType = 23;
+    v8.pV->TraitsType = Traits_InteractiveObject;
     v8.pV->vfptr = (Scaleform::GFx::AS3::RefCountBaseGC<328>Vtbl *)&Scaleform::GFx::AS3::InstanceTraits::fl_display::SimpleButton::`vftable;
-    v8.pV->TraitsType = 28;
+    v8.pV->TraitsType = Traits_SimpleButton;
   }
   else
   {
     v8.pV = 0i64;
   }
-  Scaleform::GFx::AS3::ClassTraits::Traits::SetInstanceTraits(v3->pV, v8);
-  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))v4->vfptr->Alloc)(
-                                       v4,
+  Scaleform::GFx::AS3::ClassTraits::Traits::SetInstanceTraits(result->pV, v8);
+  v9 = (Scaleform::GFx::AS3::Class *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))MHeap->vfptr->Alloc)(
+                                       MHeap,
                                        72i64);
   if ( v9 )
-    Scaleform::GFx::AS3::Class::Class(v9, v3->pV);
-  return v3;
+    Scaleform::GFx::AS3::Class::Class(v9, result->pV);
+  return result;
 }
 

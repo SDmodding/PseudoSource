@@ -28,17 +28,17 @@ hkClass *__fastcall hkpConvexPieceStreamData::staticClass()
 
 // File Line: 64
 // RVA: 0xD99090
-void __fastcall finishLoadedObjecthkpConvexPieceStreamData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpConvexPieceStreamData(_QWORD *p, int finishing)
 {
   if ( p )
-    *(_QWORD *)p = &hkpConvexPieceStreamData::`vftable;
+    *p = &hkpConvexPieceStreamData::`vftable;
 }
 
 // File Line: 70
 // RVA: 0xD990B0
-void __fastcall cleanupLoadedObjecthkpConvexPieceStreamData(void *p)
+void __fastcall cleanupLoadedObjecthkpConvexPieceStreamData(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 74
@@ -59,8 +59,8 @@ void **dynamic_initializer_for__hkpConvexPieceStreamDataTypeInfo__()
   hkpConvexPieceStreamDataTypeInfo.m_typeName = "hkpConvexPieceStreamData";
   hkpConvexPieceStreamDataTypeInfo.m_vtable = result;
   hkpConvexPieceStreamDataTypeInfo.m_scopedName = "!hkpConvexPieceStreamData";
-  hkpConvexPieceStreamDataTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpConvexPieceStreamData;
-  hkpConvexPieceStreamDataTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpConvexPieceStreamData;
+  hkpConvexPieceStreamDataTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpConvexPieceStreamData;
+  hkpConvexPieceStreamDataTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpConvexPieceStreamData;
   return result;
 }
 

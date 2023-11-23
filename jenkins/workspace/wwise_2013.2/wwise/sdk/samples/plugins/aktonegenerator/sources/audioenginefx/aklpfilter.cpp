@@ -13,24 +13,20 @@ void __fastcall CAkLpFilter::CAkLpFilter(CAkLpFilter *this)
 // RVA: 0xAD2A30
 void __fastcall CAkLpFilter::SetCoefs(CAkLpFilter *this, float in_fCutFreq, float in_fSampRate)
 {
-  CAkLpFilter *v3; // rbx
-  float v4; // xmm5_4
-  float v5; // xmm4_4
-  float v6; // xmm5_4
-  float v7; // xmm4_4
-  float v8; // xmm3_4
+  float v4; // xmm0_4
+  float v5; // xmm5_4
+  float v6; // xmm4_4
+  float v7; // xmm3_4
 
-  v3 = this;
-  v4 = 1.0 / tanf((float)(in_fCutFreq * 3.1415927) / in_fSampRate);
-  v5 = v4;
-  v6 = v4 * v4;
-  v7 = v5 * 1.4142135;
-  v8 = 1.0 / (float)((float)(v7 + 1.0) + v6);
-  v3->m_fB0 = v8;
-  v3->m_fB2 = v8;
-  v3->m_fA2 = (float)((float)(1.0 - v7) + v6) * v8;
-  v3->m_fA1 = (float)((float)(1.0 - v6) * 2.0) * v8;
-  v3->m_fB1 = v8 * 2.0;
+  v4 = tanf((float)(in_fCutFreq * 3.1415927) / in_fSampRate);
+  v5 = (float)(1.0 / v4) * (float)(1.0 / v4);
+  v6 = (float)(1.0 / v4) * 1.4142135;
+  v7 = 1.0 / (float)((float)(v6 + 1.0) + v5);
+  this->m_fB0 = v7;
+  this->m_fB2 = v7;
+  this->m_fA2 = (float)((float)(1.0 - v6) + v5) * v7;
+  this->m_fA1 = (float)((float)(1.0 - v5) * 2.0) * v7;
+  this->m_fB1 = v7 * 2.0;
 }
 
 // File Line: 52

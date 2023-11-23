@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkaiCuttingGeometryInfoClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 68
@@ -28,30 +28,30 @@ hkClass *__fastcall hkaiCuttingGeometryInfo::staticClass()
 
 // File Line: 75
 // RVA: 0xBB6330
-void __fastcall finishLoadedObjecthkaiCuttingGeometryInfo(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiCuttingGeometryInfo(char *p, hkFinishLoadedObjectFlag finishing)
 {
   hkGeometry *v2; // rcx
 
   if ( p )
   {
-    v2 = (hkGeometry *)((char *)p + 16);
+    v2 = (hkGeometry *)(p + 16);
     v2[-1].m_triangles.m_data = (hkGeometry::Triangle *)&hkaiCuttingGeometryInfo::`vftable;
-    hkGeometry::hkGeometry(v2, (hkFinishLoadedObjectFlag)finishing);
+    hkGeometry::hkGeometry(v2, finishing);
   }
 }
 
 // File Line: 81
 // RVA: 0xBB6360
-void __fastcall cleanupLoadedObjecthkaiCuttingGeometryInfo(void *p)
+void __fastcall cleanupLoadedObjecthkaiCuttingGeometryInfo(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 85
 // RVA: 0xBB6370
 void **__fastcall getVtablehkaiCuttingGeometryInfo()
 {
-  hkGeometry v1; // [rsp+30h] [rbp-58h]
+  hkGeometry v1; // [rsp+30h] [rbp-58h] BYREF
 
   hkGeometry::hkGeometry(&v1, 0);
   return &hkaiCuttingGeometryInfo::`vftable;
@@ -68,8 +68,8 @@ void **dynamic_initializer_for__hkaiCuttingGeometryInfoTypeInfo__()
   hkaiCuttingGeometryInfoTypeInfo.m_typeName = "hkaiCuttingGeometryInfo";
   hkaiCuttingGeometryInfoTypeInfo.m_vtable = result;
   hkaiCuttingGeometryInfoTypeInfo.m_scopedName = "!hkaiCuttingGeometryInfo";
-  hkaiCuttingGeometryInfoTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiCuttingGeometryInfo;
-  hkaiCuttingGeometryInfoTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiCuttingGeometryInfo;
+  hkaiCuttingGeometryInfoTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiCuttingGeometryInfo;
+  hkaiCuttingGeometryInfoTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiCuttingGeometryInfo;
   return result;
 }
 
@@ -103,7 +103,7 @@ void dynamic_initializer_for__hkaiSplitGenerationUtilsSettingsClass__()
     &hkaiSplitGenerationUtilsSettings_Default,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 201
@@ -115,17 +115,17 @@ hkClass *__fastcall hkaiSplitGenerationUtils::Settings::staticClass()
 
 // File Line: 208
 // RVA: 0xBB63B0
-void __fastcall finishLoadedObjecthkaiSplitGenerationUtilsSettings(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiSplitGenerationUtilsSettings(hkStringPtr *p, int finishing)
 {
   if ( p )
-    hkStringPtr::hkStringPtr((hkStringPtr *)p + 6);
+    hkStringPtr::hkStringPtr(p + 6);
 }
 
 // File Line: 214
 // RVA: 0xBB63D0
-void __fastcall cleanupLoadedObjecthkaiSplitGenerationUtilsSettings(void *p)
+void __fastcall cleanupLoadedObjecthkaiSplitGenerationUtilsSettings(hkStringPtr *p)
 {
-  hkStringPtr::~hkStringPtr((hkStringPtr *)p + 6);
+  hkStringPtr::~hkStringPtr(p + 6);
 }
 
 // File Line: 247

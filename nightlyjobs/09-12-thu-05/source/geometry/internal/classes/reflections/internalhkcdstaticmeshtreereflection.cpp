@@ -121,7 +121,7 @@ void dynamic_initializer_for__hkcdStaticMeshTreeBaseSectionClass__()
     0i64,
     0i64,
     0,
-    3u);
+    3);
 }
 
 // File Line: 248
@@ -140,27 +140,22 @@ void __fastcall finishLoadedObjecthkcdStaticMeshTreeBaseSection(void *p, int fin
 
 // File Line: 261
 // RVA: 0xC8E760
-void __fastcall cleanupLoadedObjecthkcdStaticMeshTreeBaseSection(void *p)
+void __fastcall cleanupLoadedObjecthkcdStaticMeshTreeBaseSection(_DWORD *p)
 {
-  int v1; // er8
-  _DWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 3);
-  v2 = p;
-  *((_DWORD *)p + 2) = 0;
+  v1 = p[3];
+  p[2] = 0;
   if ( v1 < 0 )
   {
     *(_QWORD *)p = 0i64;
-    *((_DWORD *)p + 3) = 2147483648;
+    p[3] = 0x80000000;
   }
   else
   {
-    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
-      *(void **)p,
-      4 * v1);
-    *(_QWORD *)v2 = 0i64;
-    v2[3] = 2147483648;
+    hkContainerHeapAllocator::s_alloc.vfptr->bufFree(&hkContainerHeapAllocator::s_alloc, *(void **)p, 4 * v1);
+    *(_QWORD *)p = 0i64;
+    p[3] = 0x80000000;
   }
 }
 
@@ -229,16 +224,18 @@ hkClass *__fastcall hkcdStaticMeshTreeBase::staticClass()
 
 // File Line: 375
 // RVA: 0xC8E7E0
-void __fastcall finishLoadedObjecthkcdStaticMeshTreeBase(void *p, int finishing)
+void __fastcall finishLoadedObjecthkcdStaticMeshTreeBase(hkcdStaticMeshTreeBase *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkcdStaticMeshTreeBase::hkcdStaticMeshTreeBase);
+  if ( p )
+    hkcdStaticMeshTreeBase::hkcdStaticMeshTreeBase(p, finishing);
 }
 
 // File Line: 381
 // RVA: 0xC8E800
-void __fastcall cleanupLoadedObjecthkcdStaticMeshTreeBase(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkcdStaticMeshTreeBase(hkcdStaticMeshTreeBase *p)
 {
-  hkcdStaticMeshTreeBase::~hkcdStaticMeshTreeBase((hkcdStaticMeshTreeBase *)p);
+  hkcdStaticMeshTreeBase::~hkcdStaticMeshTreeBase(p);
 }
 
 // File Line: 415

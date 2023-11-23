@@ -1,89 +1,84 @@
 // File Line: 111
 // RVA: 0xC0EA80
-void __fastcall hkaiSearchMemoryLocalStorage::hkaiSearchMemoryLocalStorage(hkaiSearchMemoryLocalStorage *this, hkaiSearchParameters::BufferSizes *bufferSizes)
+void __fastcall hkaiSearchMemoryLocalStorage::hkaiSearchMemoryLocalStorage(
+        hkaiSearchMemoryLocalStorage *this,
+        hkaiSearchParameters::BufferSizes *bufferSizes)
 {
-  int v2; // edi
-  hkaiSearchParameters::BufferSizes *v3; // rsi
-  hkaiSearchMemoryLocalStorage *v4; // rbx
-  hkLifoAllocator *v5; // rax
-  hkLifoAllocator *v6; // rcx
-  char *v7; // rax
-  int v8; // er8
-  char *v9; // rdx
-  int v10; // edi
-  hkLifoAllocator *v11; // rax
-  char *v12; // rcx
-  int v13; // er8
-  char *v14; // rdx
+  int m_maxOpenSetSizeBytes; // edi
+  hkLifoAllocator *Value; // rcx
+  char *m_cur; // rax
+  int v7; // r8d
+  char *v8; // rdx
+  int m_maxSearchStateSizeBytes; // edi
+  hkLifoAllocator *v10; // rax
+  char *v11; // rcx
+  int v12; // r8d
+  char *v13; // rdx
 
-  v2 = bufferSizes->m_maxOpenSetSizeBytes;
-  v3 = bufferSizes;
-  v4 = this;
-  this->m_openSetStorage.m_capacityAndFlags = 2147483648;
+  m_maxOpenSetSizeBytes = bufferSizes->m_maxOpenSetSizeBytes;
+  this->m_openSetStorage.m_capacityAndFlags = 0x80000000;
   this->m_openSetStorage.m_data = 0i64;
   this->m_openSetStorage.m_size = 0;
-  this->m_openSetStorage.m_initialCapacity = v2;
-  if ( v2 )
+  this->m_openSetStorage.m_initialCapacity = m_maxOpenSetSizeBytes;
+  if ( m_maxOpenSetSizeBytes )
   {
-    v5 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v6 = v5;
-    v7 = (char *)v5->m_cur;
-    v8 = (v2 + 127) & 0xFFFFFF80;
-    v9 = &v7[v8];
-    if ( v8 > v6->m_slabSize || v9 > v6->m_end )
-      v7 = (char *)hkLifoAllocator::allocateFromNewSlab(v6, v8);
+    Value = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    m_cur = (char *)Value->m_cur;
+    v7 = (m_maxOpenSetSizeBytes + 127) & 0xFFFFFF80;
+    v8 = &m_cur[v7];
+    if ( v7 > Value->m_slabSize || v8 > Value->m_end )
+      m_cur = (char *)hkLifoAllocator::allocateFromNewSlab(Value, v7);
     else
-      v6->m_cur = v9;
+      Value->m_cur = v8;
   }
   else
   {
-    v7 = 0i64;
+    m_cur = 0i64;
   }
-  v4->m_openSetStorage.m_data = v7;
-  v4->m_openSetStorage.m_localMemory = v7;
-  v4->m_openSetStorage.m_capacityAndFlags = v2 | 0x80000000;
-  v10 = v3->m_maxSearchStateSizeBytes;
-  v4->m_searchStateStorage.m_data = 0i64;
-  v4->m_searchStateStorage.m_size = 0;
-  v4->m_searchStateStorage.m_capacityAndFlags = 2147483648;
-  v4->m_searchStateStorage.m_initialCapacity = v10;
-  if ( v10 )
+  this->m_openSetStorage.m_data = m_cur;
+  this->m_openSetStorage.m_localMemory = m_cur;
+  this->m_openSetStorage.m_capacityAndFlags = m_maxOpenSetSizeBytes | 0x80000000;
+  m_maxSearchStateSizeBytes = bufferSizes->m_maxSearchStateSizeBytes;
+  this->m_searchStateStorage.m_data = 0i64;
+  this->m_searchStateStorage.m_size = 0;
+  this->m_searchStateStorage.m_capacityAndFlags = 0x80000000;
+  this->m_searchStateStorage.m_initialCapacity = m_maxSearchStateSizeBytes;
+  if ( m_maxSearchStateSizeBytes )
   {
-    v11 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
-    v12 = (char *)v11->m_cur;
-    v13 = (v10 + 127) & 0xFFFFFF80;
-    v14 = &v12[v13];
-    if ( v13 > v11->m_slabSize || v14 > v11->m_end )
-      v12 = (char *)hkLifoAllocator::allocateFromNewSlab(v11, v13);
+    v10 = (hkLifoAllocator *)TlsGetValue(hkMemoryRouter::s_memoryRouter.m_slotID);
+    v11 = (char *)v10->m_cur;
+    v12 = (m_maxSearchStateSizeBytes + 127) & 0xFFFFFF80;
+    v13 = &v11[v12];
+    if ( v12 > v10->m_slabSize || v13 > v10->m_end )
+      v11 = (char *)hkLifoAllocator::allocateFromNewSlab(v10, v12);
     else
-      v11->m_cur = v14;
+      v10->m_cur = v13;
   }
   else
   {
-    v12 = 0i64;
+    v11 = 0i64;
   }
-  v4->m_searchStateStorage.m_data = v12;
-  v4->m_searchStateStorage.m_localMemory = v12;
-  v4->m_searchStateStorage.m_capacityAndFlags = v10 | 0x80000000;
-  v4->m_openSetBuffer = v4->m_openSetStorage.m_data;
-  v4->m_openSetSize = v4->m_openSetStorage.m_capacityAndFlags & 0x3FFFFFFF;
-  v4->m_searchStateBuffer = v4->m_searchStateStorage.m_data;
-  v4->m_searchStateSize = v4->m_searchStateStorage.m_capacityAndFlags & 0x3FFFFFFF;
+  this->m_searchStateStorage.m_data = v11;
+  this->m_searchStateStorage.m_localMemory = v11;
+  this->m_searchStateStorage.m_capacityAndFlags = m_maxSearchStateSizeBytes | 0x80000000;
+  this->m_openSetBuffer = this->m_openSetStorage.m_data;
+  this->m_openSetSize = this->m_openSetStorage.m_capacityAndFlags & 0x3FFFFFFF;
+  this->m_searchStateBuffer = this->m_searchStateStorage.m_data;
+  this->m_searchStateSize = this->m_searchStateStorage.m_capacityAndFlags & 0x3FFFFFFF;
 }
 
 // File Line: 132
 // RVA: 0xBBF0F0
-void __fastcall hkaiSearchMemoryStorage::_setupArray(hkArray<char,hkContainerTempAllocator> *array, char *buffer, int size)
+void __fastcall hkaiSearchMemoryStorage::_setupArray(
+        hkArray<char,hkContainerTempAllocator> *array,
+        char *buffer,
+        int size)
 {
-  int v3; // ebx
-  hkArray<char,hkContainerTempAllocator> *v4; // rdi
   int v5; // eax
   int v6; // eax
-  int v7; // er9
-  hkResult result; // [rsp+48h] [rbp+10h]
+  int v7; // r9d
+  hkResult result; // [rsp+48h] [rbp+10h] BYREF
 
-  v3 = size;
-  v4 = array;
   if ( buffer )
   {
     array->m_data = buffer;
@@ -99,9 +94,9 @@ void __fastcall hkaiSearchMemoryStorage::_setupArray(hkArray<char,hkContainerTem
       v7 = size;
       if ( size < v6 )
         v7 = v6;
-      hkArrayUtil::_reserve(&result, (hkMemoryAllocator *)&hkContainerTempAllocator::s_alloc.vfptr, array, v7, 1);
+      hkArrayUtil::_reserve(&result, &hkContainerTempAllocator::s_alloc, array, v7, 1);
     }
-    v4->m_size = v3;
+    array->m_size = size;
   }
 }
 

@@ -2,79 +2,74 @@
 // RVA: 0xD60480
 void __fastcall hkpMotion::hkpMotion(hkpMotion *this)
 {
-  hkpMotion *v1; // rbx
-  hkMotionState *v2; // rcx
-  hkQuaternionf rotation; // [rsp+20h] [rbp-38h]
-  hkVector4f position; // [rsp+30h] [rbp-28h]
+  hkMotionState *p_m_motionState; // rcx
+  hkQuaternionf rotation; // [rsp+20h] [rbp-38h] BYREF
+  hkVector4f position; // [rsp+30h] [rbp-28h] BYREF
 
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
-  v1 = this;
   this->vfptr = (hkBaseObjectVtbl *)&hkpMotion::`vftable;
   position.m_quad = 0i64;
-  v2 = &this->m_motionState;
-  v2[1].m_transform.m_rotation.m_col1 = 0i64;
-  v2[1].m_transform.m_rotation.m_col2 = 0i64;
+  p_m_motionState = &this->m_motionState;
+  p_m_motionState[1].m_transform.m_rotation.m_col1 = 0i64;
+  p_m_motionState[1].m_transform.m_rotation.m_col2 = 0i64;
   rotation.m_vec.m_quad = qi.m_vec.m_quad;
-  hkMotionState::initMotionState(v2, &position, &rotation);
-  *(_DWORD *)&v1->m_motionState.m_linearDamping.m_value = 0;
-  *(_DWORD *)&v1->m_type.m_storage = 65280;
-  *(_QWORD *)v1->m_deactivationRefOrientation = 0i64;
-  v1->m_deactivationRefPosition[0] = 0i64;
-  v1->m_deactivationRefPosition[1] = 0i64;
-  v1->m_deactivationNumInactiveFrames[1] = 0;
-  v1->m_gravityFactor.m_value = 16256;
+  hkMotionState::initMotionState(p_m_motionState, &position, &rotation);
+  *(_DWORD *)&this->m_motionState.m_linearDamping.m_value = 0;
+  *(_DWORD *)&this->m_type.m_storage = 65280;
+  *(_QWORD *)this->m_deactivationRefOrientation = 0i64;
+  this->m_deactivationRefPosition[0] = 0i64;
+  this->m_deactivationRefPosition[1] = 0i64;
+  this->m_deactivationNumInactiveFrames[1] = 0;
+  this->m_gravityFactor.m_value = 16256;
 }
 
 // File Line: 27
 // RVA: 0xD60520
-void __fastcall hkpMotion::hkpMotion(hkpMotion *this, hkVector4f *position, hkQuaternionf *rotation, bool wantDeactivation)
+void __fastcall hkpMotion::hkpMotion(
+        hkpMotion *this,
+        hkVector4f *position,
+        hkQuaternionf *rotation,
+        bool wantDeactivation)
 {
-  hkpMotion *v4; // rdi
-  bool v5; // bl
-  hkVector4f *v6; // rsi
-
-  v4 = this;
   *(_DWORD *)&this->m_memSizeAndFlags = 0x1FFFF;
   this->vfptr = (hkBaseObjectVtbl *)&hkpMotion::`vftable;
   this->m_linearVelocity = 0i64;
   this->m_angularVelocity = 0i64;
-  v5 = wantDeactivation;
-  v6 = position;
   hkMotionState::initMotionState(&this->m_motionState, position, rotation);
-  *(_DWORD *)&v4->m_motionState.m_linearDamping.m_value = 0;
-  v4->m_type.m_storage = 0;
-  if ( v5 )
-    v4->m_deactivationIntegrateCounter = (signed int)v6->m_quad.m128_f32[0] & 0xF;
+  *(_DWORD *)&this->m_motionState.m_linearDamping.m_value = 0;
+  this->m_type.m_storage = 0;
+  if ( wantDeactivation )
+    this->m_deactivationIntegrateCounter = (int)position->m_quad.m128_f32[0] & 0xF;
   else
-    v4->m_deactivationIntegrateCounter = -1;
-  v4->m_deactivationRefPosition[0] = 0i64;
-  v4->m_deactivationRefPosition[1] = 0i64;
-  *(_DWORD *)v4->m_deactivationNumInactiveFrames = 0;
-  *(_QWORD *)v4->m_deactivationRefOrientation = 0i64;
-  v4->m_gravityFactor.m_value = 16256;
+    this->m_deactivationIntegrateCounter = -1;
+  this->m_deactivationRefPosition[0] = 0i64;
+  this->m_deactivationRefPosition[1] = 0i64;
+  *(_DWORD *)this->m_deactivationNumInactiveFrames = 0;
+  *(_QWORD *)this->m_deactivationRefOrientation = 0i64;
+  this->m_gravityFactor.m_value = 16256;
 }
 
 // File Line: 69
 // RVA: 0xD60610
 void __fastcall hkpMotion::setMass(hkpMotion *this, float mass)
 {
-  ((void (*)(void))this->vfptr[3].__vecDelDtor)();
+  ((void (__fastcall *)(hkpMotion *))this->vfptr[3].__vecDelDtor)(this);
 }
 
 // File Line: 82
 // RVA: 0xD60640
 void __fastcall hkpMotion::setMass(hkpMotion *this, hkSimdFloat32 *mass)
 {
-  hkBaseObjectVtbl *v2; // rax
+  hkBaseObjectVtbl *vfptr; // rax
   __m128 v3; // xmm1
-  __m128 v4; // [rsp+20h] [rbp-18h]
+  __m128 v4; // [rsp+20h] [rbp-18h] BYREF
 
-  v2 = this->vfptr;
+  vfptr = this->vfptr;
   v3 = _mm_rcp_ps(mass->m_real);
   v4 = _mm_andnot_ps(
-         _mm_cmpeqps(mass->m_real, (__m128)0i64),
+         _mm_cmpeq_ps(mass->m_real, (__m128)0i64),
          _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(mass->m_real, v3)), v3));
-  ((void (__fastcall *)(hkpMotion *, __m128 *))v2[2].__first_virtual_table_function__)(this, &v4);
+  ((void (__fastcall *)(hkpMotion *, __m128 *))vfptr[2].__first_virtual_table_function__)(this, &v4);
 }
 
 // File Line: 89
@@ -87,9 +82,9 @@ float __fastcall hkpMotion::getMass(hkpMotion *this)
 
   v1 = _mm_shuffle_ps(this->m_inertiaAndMassInv.m_quad, this->m_inertiaAndMassInv.m_quad, 255);
   v2 = _mm_rcp_ps(v1);
-  LODWORD(result) = (unsigned __int128)_mm_andnot_ps(
-                                         _mm_cmpeqps(v1, (__m128)0i64),
-                                         _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v2, v1)), v2));
+  LODWORD(result) = _mm_andnot_ps(
+                      _mm_cmpeq_ps(v1, (__m128)0i64),
+                      _mm_mul_ps(_mm_sub_ps((__m128)_xmm, _mm_mul_ps(v2, v1)), v2)).m128_u32[0];
   return result;
 }
 
@@ -184,20 +179,15 @@ void __fastcall hkpMotion::applyLinearImpulse(hkpMotion *this, hkVector4f *imp)
 // RVA: 0xD607F0
 void __fastcall hkpMotion::getMotionStateAndVelocitiesAndDeactivationType(hkpMotion *this, hkpMotion *motionOut)
 {
-  hkpMotion *v2; // rdi
-  hkpMotion *v3; // rbx
-
-  v2 = motionOut;
-  v3 = this;
   hkMotionState::operator=(&motionOut->m_motionState, &this->m_motionState);
-  v2->m_linearVelocity = v3->m_linearVelocity;
-  v2->m_angularVelocity = v3->m_angularVelocity;
-  v2->m_deactivationIntegrateCounter = v3->m_deactivationIntegrateCounter;
+  motionOut->m_linearVelocity = this->m_linearVelocity;
+  motionOut->m_angularVelocity = this->m_angularVelocity;
+  motionOut->m_deactivationIntegrateCounter = this->m_deactivationIntegrateCounter;
 }
 
 // File Line: 164
 // RVA: 0xD607E0
-void __fastcall hkpMotion::setDeactivationClass(hkpMotion *this, int deactivationClass)
+void __fastcall hkpMotion::setDeactivationClass(hkpMotion *this, char deactivationClass)
 {
   this->m_motionState.m_deactivationClass = deactivationClass;
 }
@@ -207,22 +197,20 @@ void __fastcall hkpMotion::setDeactivationClass(hkpMotion *this, int deactivatio
 void __fastcall hkpMotion::requestDeactivation(hkpMotion *this)
 {
   hkVector4f v1; // xmm1
-  hkpMotion *v2; // rbx
-  hkQuaternionf *v3; // rcx
+  hkQuaternionf *p_m_rotation1; // rcx
   __m128 v4; // xmm1
   unsigned int v5; // eax
 
   v1.m_quad = (__m128)this->m_motionState.m_transform.m_translation;
-  v2 = this;
-  v3 = &this->m_motionState.m_sweptTransform.m_rotation1;
-  v3[7].m_vec = (hkVector4f)v1.m_quad;
+  p_m_rotation1 = &this->m_motionState.m_sweptTransform.m_rotation1;
+  p_m_rotation1[7].m_vec = (hkVector4f)v1.m_quad;
   v4 = _mm_shuffle_ps(v1.m_quad, _mm_unpackhi_ps(v1.m_quad, (__m128)xmmword_141A712A0), 196);
-  v3[7] = (hkQuaternionf)v4;
-  v3[8] = (hkQuaternionf)v4;
-  v5 = hkVector4UtilImpl<float>::packQuaternionIntoInt32(&v3->m_vec);
-  v2->m_deactivationRefOrientation[0] = v5;
-  v2->m_deactivationRefOrientation[1] = v5;
-  v2->m_deactivationNumInactiveFrames[0] = v2->m_deactivationNumInactiveFrames[0] & 0xFF86 | 6;
-  v2->m_deactivationNumInactiveFrames[1] = v2->m_deactivationNumInactiveFrames[1] & 0xFF86 | 6;
+  p_m_rotation1[7] = (hkQuaternionf)v4;
+  p_m_rotation1[8] = (hkQuaternionf)v4;
+  v5 = hkVector4UtilImpl<float>::packQuaternionIntoInt32(&p_m_rotation1->m_vec);
+  this->m_deactivationRefOrientation[0] = v5;
+  this->m_deactivationRefOrientation[1] = v5;
+  this->m_deactivationNumInactiveFrames[0] = this->m_deactivationNumInactiveFrames[0] & 0xFF80 | 6;
+  this->m_deactivationNumInactiveFrames[1] = this->m_deactivationNumInactiveFrames[1] & 0xFF80 | 6;
 }
 

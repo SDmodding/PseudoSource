@@ -2,14 +2,12 @@
 // RVA: 0x76E520
 __int64 __fastcall Scaleform::GFx::AS3::Abc::ReadU30<unsigned char>(const char *data, unsigned __int64 *cp)
 {
-  const char *v2; // r11
   char v3; // r8
-  unsigned int v4; // er9
+  unsigned int v4; // r9d
   __int64 result; // rax
   char v6; // r8
   char v7; // cl
 
-  v2 = data;
   v3 = data[*cp];
   v4 = 7;
   ++*cp;
@@ -20,7 +18,7 @@ __int64 __fastcall Scaleform::GFx::AS3::Abc::ReadU30<unsigned char>(const char *
     {
       if ( v4 >= 0x20 )
         break;
-      v6 = v2[(*cp)++];
+      v6 = data[(*cp)++];
       v7 = v4;
       v4 += 7;
       result = ((v6 & 0x7F) << v7) | (unsigned int)result;
@@ -32,9 +30,9 @@ __int64 __fastcall Scaleform::GFx::AS3::Abc::ReadU30<unsigned char>(const char *
 
 // File Line: 211
 // RVA: 0x7F9650
-char __fastcall Scaleform::GFx::AS3::Abc::IsValidValueKind(char vk)
+bool __fastcall Scaleform::GFx::AS3::Abc::IsValidValueKind(char vk)
 {
-  char result; // al
+  bool result; // al
 
   switch ( vk )
   {
@@ -45,14 +43,14 @@ char __fastcall Scaleform::GFx::AS3::Abc::IsValidValueKind(char vk)
     case 5:
     case 6:
     case 8:
-    case 0xA:
-    case 0xB:
-    case 0xC:
-    case 0x16:
-    case 0x17:
-    case 0x18:
-    case 0x19:
-    case 0x1A:
+    case 10:
+    case 11:
+    case 12:
+    case 22:
+    case 23:
+    case 24:
+    case 25:
+    case 26:
       result = 1;
       break;
     default:
@@ -66,123 +64,111 @@ char __fastcall Scaleform::GFx::AS3::Abc::IsValidValueKind(char vk)
 // RVA: 0x7B4790
 void __fastcall Scaleform::GFx::AS3::Abc::File::Clear(Scaleform::GFx::AS3::Abc::File *this)
 {
-  Scaleform::GFx::AS3::Abc::File *v1; // rbx
-  Scaleform::GFx::AS3::Abc::ConstPool *v2; // rcx
+  Scaleform::GFx::AS3::Abc::ConstPool *p_Const_Pool; // rcx
 
-  v1 = this;
-  v2 = &this->Const_Pool;
-  LODWORD(v2[-1].any_namespace.NameURI.Size) = 0;
-  Scaleform::GFx::AS3::Abc::ConstPool::Clear(v2);
-  if ( v1->Methods.Info.Data.Size > 0 && v1->Methods.Info.Data.Policy.Capacity & 0xFFFFFFFFFFFFFFFEui64 )
+  p_Const_Pool = &this->Const_Pool;
+  LODWORD(p_Const_Pool[-1].any_namespace.NameURI.Size) = 0;
+  Scaleform::GFx::AS3::Abc::ConstPool::Clear(p_Const_Pool);
+  if ( this->Methods.Info.Data.Size && (this->Methods.Info.Data.Policy.Capacity & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v1->Methods.Info.Data.Data )
+    if ( this->Methods.Info.Data.Data )
     {
-      ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-      v1->Methods.Info.Data.Data = 0i64;
+      ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+      this->Methods.Info.Data.Data = 0i64;
     }
-    v1->Methods.Info.Data.Policy.Capacity = 0i64;
+    this->Methods.Info.Data.Policy.Capacity = 0i64;
   }
-  v1->Methods.Info.Data.Size = 0i64;
-  if ( v1->Metadata.Info.Data.Size > 0 && v1->Metadata.Info.Data.Policy.Capacity & 0xFFFFFFFFFFFFFFFEui64 )
+  this->Methods.Info.Data.Size = 0i64;
+  if ( this->Metadata.Info.Data.Size && (this->Metadata.Info.Data.Policy.Capacity & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v1->Metadata.Info.Data.Data )
+    if ( this->Metadata.Info.Data.Data )
     {
-      ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-      v1->Metadata.Info.Data.Data = 0i64;
+      ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+      this->Metadata.Info.Data.Data = 0i64;
     }
-    v1->Metadata.Info.Data.Policy.Capacity = 0i64;
+    this->Metadata.Info.Data.Policy.Capacity = 0i64;
   }
-  v1->Metadata.Info.Data.Size = 0i64;
-  if ( v1->Traits.TraitInfos.Data.Size > 0 && v1->Traits.TraitInfos.Data.Policy.Capacity & 0xFFFFFFFFFFFFFFFEui64 )
+  this->Metadata.Info.Data.Size = 0i64;
+  if ( this->Traits.TraitInfos.Data.Size && (this->Traits.TraitInfos.Data.Policy.Capacity & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v1->Traits.TraitInfos.Data.Data )
+    if ( this->Traits.TraitInfos.Data.Data )
     {
-      ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-      v1->Traits.TraitInfos.Data.Data = 0i64;
+      ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+      this->Traits.TraitInfos.Data.Data = 0i64;
     }
-    v1->Traits.TraitInfos.Data.Policy.Capacity = 0i64;
+    this->Traits.TraitInfos.Data.Policy.Capacity = 0i64;
   }
-  v1->Traits.TraitInfos.Data.Size = 0i64;
-  if ( v1->AS3_Classes.Info.Data.Size > 0 && v1->AS3_Classes.Info.Data.Policy.Capacity & 0xFFFFFFFFFFFFFFFEui64 )
+  this->Traits.TraitInfos.Data.Size = 0i64;
+  if ( this->AS3_Classes.Info.Data.Size && (this->AS3_Classes.Info.Data.Policy.Capacity & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v1->AS3_Classes.Info.Data.Data )
+    if ( this->AS3_Classes.Info.Data.Data )
     {
-      ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-      v1->AS3_Classes.Info.Data.Data = 0i64;
+      ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+      this->AS3_Classes.Info.Data.Data = 0i64;
     }
-    v1->AS3_Classes.Info.Data.Policy.Capacity = 0i64;
+    this->AS3_Classes.Info.Data.Policy.Capacity = 0i64;
   }
-  v1->AS3_Classes.Info.Data.Size = 0i64;
-  if ( v1->Scripts.Info.Data.Size > 0 && v1->Scripts.Info.Data.Policy.Capacity & 0xFFFFFFFFFFFFFFFEui64 )
+  this->AS3_Classes.Info.Data.Size = 0i64;
+  if ( this->Scripts.Info.Data.Size && (this->Scripts.Info.Data.Policy.Capacity & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v1->Scripts.Info.Data.Data )
+    if ( this->Scripts.Info.Data.Data )
     {
-      ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-      v1->Scripts.Info.Data.Data = 0i64;
+      ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+      this->Scripts.Info.Data.Data = 0i64;
     }
-    v1->Scripts.Info.Data.Policy.Capacity = 0i64;
+    this->Scripts.Info.Data.Policy.Capacity = 0i64;
   }
-  v1->Scripts.Info.Data.Size = 0i64;
-  if ( v1->MethodBodies.Info.Data.Size > 0 && v1->MethodBodies.Info.Data.Policy.Capacity & 0xFFFFFFFFFFFFFFFEui64 )
+  this->Scripts.Info.Data.Size = 0i64;
+  if ( this->MethodBodies.Info.Data.Size && (this->MethodBodies.Info.Data.Policy.Capacity & 0xFFFFFFFFFFFFFFFEui64) != 0 )
   {
-    if ( v1->MethodBodies.Info.Data.Data )
+    if ( this->MethodBodies.Info.Data.Data )
     {
-      ((void (*)(void))Scaleform::Memory::pGlobalHeap->vfptr->Free)();
-      v1->MethodBodies.Info.Data.Data = 0i64;
+      ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+      this->MethodBodies.Info.Data.Data = 0i64;
     }
-    v1->MethodBodies.Info.Data.Policy.Capacity = 0i64;
+    this->MethodBodies.Info.Data.Policy.Capacity = 0i64;
   }
-  v1->MethodBodies.Info.Data.Size = 0i64;
+  this->MethodBodies.Info.Data.Size = 0i64;
 }
 
 // File Line: 655
 // RVA: 0x78A970
 void __fastcall Scaleform::GFx::AS3::Abc::File::~File(Scaleform::GFx::AS3::Abc::File *this)
 {
-  Scaleform::GFx::AS3::Abc::File *v1; // rbx
-
-  v1 = this;
   this->vfptr = (Scaleform::RefCountImplCoreVtbl *)&Scaleform::GFx::AS3::Abc::File::`vftable;
   Scaleform::GFx::AS3::Abc::MethodBodyTable::~MethodBodyTable(&this->MethodBodies);
-  Scaleform::GFx::AS3::Abc::ScriptTable::~ScriptTable(&v1->Scripts);
-  Scaleform::GFx::AS3::Abc::ClassTable::~ClassTable(&v1->AS3_Classes);
-  Scaleform::GFx::AS3::Abc::TraitTable::~TraitTable(&v1->Traits);
-  Scaleform::GFx::AS3::Abc::MetadataTable::~MetadataTable(&v1->Metadata);
-  Scaleform::GFx::AS3::Abc::MethodTable::~MethodTable(&v1->Methods);
-  Scaleform::GFx::AS3::Abc::ConstPool::~ConstPool(&v1->Const_Pool);
-  if ( !_InterlockedDecrement((volatile signed __int32 *)((v1->Source.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
-    ((void (__cdecl *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
-  Scaleform::RefCountImplCore::~RefCountImplCore((Scaleform::RefCountImplCore *)&v1->vfptr);
+  Scaleform::GFx::AS3::Abc::ScriptTable::~ScriptTable(&this->Scripts);
+  Scaleform::GFx::AS3::Abc::ClassTable::~ClassTable(&this->AS3_Classes);
+  Scaleform::GFx::AS3::Abc::TraitTable::~TraitTable(&this->Traits);
+  Scaleform::GFx::AS3::Abc::MetadataTable::~MetadataTable(&this->Metadata);
+  Scaleform::GFx::AS3::Abc::MethodTable::~MethodTable(&this->Methods);
+  Scaleform::GFx::AS3::Abc::ConstPool::~ConstPool(&this->Const_Pool);
+  if ( !_InterlockedDecrement((volatile signed __int32 *)((this->Source.HeapTypeBits & 0xFFFFFFFFFFFFFFFCui64) + 8)) )
+    ((void (__fastcall *)(Scaleform::MemoryHeap *))Scaleform::Memory::pGlobalHeap->vfptr->Free)(Scaleform::Memory::pGlobalHeap);
+  Scaleform::RefCountImplCore::~RefCountImplCore(this);
 }
 
 // File Line: 660
 // RVA: 0x78C7C0
-void __fastcall Scaleform::GFx::AS3::Abc::MethodBodyTable::~MethodBodyTable(Scaleform::GFx::AS3::Abc::MethodBodyTable *this)
+void __fastcall Scaleform::GFx::AS3::Abc::MethodBodyTable::~MethodBodyTable(
+        Scaleform::GFx::AS3::Abc::MethodBodyTable *this)
 {
-  Scaleform::GFx::AS3::Abc::MethodBodyTable *v1; // rsi
-  unsigned __int64 v2; // rbp
-  unsigned __int64 v3; // rbx
+  unsigned __int64 Size; // rbp
+  unsigned __int64 i; // rbx
   Scaleform::GFx::AS3::Abc::MethodBodyInfo *v4; // rdi
 
-  v1 = this;
-  v2 = this->Info.Data.Size;
-  v3 = 0i64;
-  if ( v2 )
+  Size = this->Info.Data.Size;
+  for ( i = 0i64; i < Size; ++i )
   {
-    do
+    v4 = this->Info.Data.Data[i];
+    if ( v4 )
     {
-      v4 = v1->Info.Data.Data[v3];
-      if ( v4 )
-      {
-        Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v4->exception.info.Data.Data);
-        v4->code.vfptr = (Scaleform::GFx::AS3::Abc::CodeVtbl *)&Scaleform::GFx::AS3::Abc::Code::`vftable;
-        Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v4->obj_traits.Data.Data);
-        Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v4);
-      }
-      ++v3;
+      Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v4->exception.info.Data.Data);
+      v4->code.vfptr = (Scaleform::GFx::AS3::Abc::CodeVtbl *)&Scaleform::GFx::AS3::Abc::Code::`vftable;
+      Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v4->obj_traits.Data.Data);
+      Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v4);
     }
-    while ( v3 < v2 );
   }
-  Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, v1->Info.Data.Data);
+  Scaleform::Memory::pGlobalHeap->vfptr->Free(Scaleform::Memory::pGlobalHeap, this->Info.Data.Data);
 }
 

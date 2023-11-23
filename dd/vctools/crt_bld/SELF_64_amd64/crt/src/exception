@@ -3,6 +3,6 @@
 void __fastcall std::bad_alloc::~bad_alloc(std::bad_alloc *this)
 {
   this->vfptr = (std::exceptionVtbl *)&std::bad_alloc::`vftable;
-  std::bad_cast::~bad_cast((std::exception *)&this->vfptr);
+  std::bad_cast::~bad_cast(this);
 }
 

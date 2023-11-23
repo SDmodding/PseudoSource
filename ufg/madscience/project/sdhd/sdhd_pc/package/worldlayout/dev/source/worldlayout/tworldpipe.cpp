@@ -3,7 +3,7 @@
 __int64 UFG::tWorldPipe::_dynamic_initializer_for__smMessages__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::tWorldPipe::smMessages.mTree);
-  return atexit(UFG::tWorldPipe::_dynamic_atexit_destructor_for__smMessages__);
+  return atexit((int (__fastcall *)())UFG::tWorldPipe::_dynamic_atexit_destructor_for__smMessages__);
 }
 
 // File Line: 47
@@ -11,6 +11,6 @@ __int64 UFG::tWorldPipe::_dynamic_initializer_for__smMessages__()
 __int64 UFG::tWorldPipe::_dynamic_initializer_for__smMessageTypes__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::tWorldPipe::smMessageTypes.mTree);
-  return atexit(UFG::tWorldPipe::_dynamic_atexit_destructor_for__smMessageTypes__);
+  return atexit((int (__fastcall *)())UFG::tWorldPipe::_dynamic_atexit_destructor_for__smMessageTypes__);
 }
 

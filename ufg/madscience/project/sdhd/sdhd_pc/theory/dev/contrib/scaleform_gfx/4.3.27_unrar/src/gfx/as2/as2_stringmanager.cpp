@@ -1,9 +1,11 @@
 // File Line: 216
 // RVA: 0x6CBC50
-void __fastcall Scaleform::GFx::AS2::StringManager::StringManager(Scaleform::GFx::AS2::StringManager *this, Scaleform::GFx::ASStringManager *pstrMgr)
+void __fastcall Scaleform::GFx::AS2::StringManager::StringManager(
+        Scaleform::GFx::AS2::StringManager *this,
+        Scaleform::GFx::ASStringManager *pstrMgr)
 {
   Scaleform::GFx::AS2::StringManager *v2; // rax
-  signed __int64 v3; // r8
+  __int64 v3; // r8
 
   v2 = this;
   v3 = 19i64;

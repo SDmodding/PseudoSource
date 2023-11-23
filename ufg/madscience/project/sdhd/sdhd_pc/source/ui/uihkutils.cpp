@@ -3,7 +3,7 @@
 __int64 UFG::UI::_dynamic_initializer_for__gOldFocus__()
 {
   Render::DepthOfField::Focus::Focus(&gOldFocus);
-  return atexit(UFG::UI::_dynamic_atexit_destructor_for__gOldFocus__);
+  return atexit((int (__fastcall *)())UFG::UI::_dynamic_atexit_destructor_for__gOldFocus__);
 }
 
 // File Line: 133
@@ -14,115 +14,115 @@ char *__fastcall UFG::UI::GetGamepadButtonTextureName(UFG::UI::eButtons button, 
 
   switch ( button )
   {
-    case 1:
+    case ACCEPT_BUTTON:
       if ( remappable )
         goto $LN44_3;
       result = "BUTTON_BACK";
       if ( !gButtonsSwapped )
         goto $LN44_3;
       break;
-    case 2:
+    case BACK_BUTTON:
       if ( remappable )
         goto $LN46_5;
       result = "BUTTON_ACCEPT";
       if ( !gButtonsSwapped )
         goto $LN46_5;
       break;
-    case 3:
-    case 29:
+    case BUTTON1_BUTTON:
+    case BUTTON1_BUTTON_HOLD:
       result = "BUTTON_BUTTON1";
       break;
-    case 4:
-    case 30:
+    case BUTTON2_BUTTON:
+    case BUTTON2_BUTTON_HOLD:
       result = "BUTTON_BUTTON2";
       break;
-    case 5:
+    case START_BUTTON:
       result = "BUTTON_START";
       break;
-    case 6:
+    case SELECT_BUTTON:
       result = "BUTTON_SELECT";
       break;
-    case 7:
-    case 31:
+    case L1_BUTTON:
+    case L1_BUTTON_HOLD:
       result = "BUTTON_L1";
       break;
-    case 8:
-    case 32:
+    case R1_BUTTON:
+    case R1_BUTTON_HOLD:
       result = "BUTTON_R1";
       break;
-    case 9:
-    case 33:
+    case L2_BUTTON:
+    case L2_BUTTON_HOLD:
       result = "BUTTON_L2";
       break;
-    case 10:
-    case 34:
+    case R2_BUTTON:
+    case R2_BUTTON_HOLD:
       result = "BUTTON_R2";
       break;
-    case 11:
+    case L3_BUTTON:
       result = "BUTTON_L3";
       break;
-    case 12:
+    case R3_BUTTON:
       result = "BUTTON_R3";
       break;
-    case 13:
+    case L1R1_BUTTON:
       result = "BUTTON_L1R1";
       break;
-    case 14:
+    case L2R2_BUTTON:
       result = "BUTTON_L2R2";
       break;
-    case 15:
+    case DPAD_UP_BUTTON:
       result = "BUTTON_DPAD_UP";
       break;
-    case 16:
+    case DPAD_DOWN_BUTTON:
       result = "BUTTON_DPAD_DOWN";
       break;
-    case 17:
+    case DPAD_LEFT_BUTTON:
       result = "BUTTON_DPAD_LEFT";
       break;
-    case 18:
+    case DPAD_RIGHT_BUTTON:
       result = "BUTTON_DPAD_RIGHT";
       break;
-    case 19:
+    case DPAD_LR_BUTTON:
       result = "BUTTON_DPAD_LR";
       break;
-    case 20:
+    case DPAD_UD_BUTTON:
       result = "BUTTON_DPAD_UD";
       break;
-    case 21:
+    case L_STICK_BUTTON:
       result = "BUTTON_L_STICK";
       break;
-    case 22:
+    case R_STICK_BUTTON:
       result = "BUTTON_R_STICK";
       break;
-    case 23:
+    case L_STICK_LR_BUTTON:
       result = "BUTTON_L_STICK_LR";
       break;
-    case 24:
+    case L_STICK_UD_BUTTON:
       result = "BUTTON_L_STICK_UD";
       break;
-    case 25:
+    case R_STICK_LR_BUTTON:
       result = "BUTTON_R_STICK_LR";
       break;
-    case 26:
+    case R_STICK_UD_BUTTON:
       result = "BUTTON_R_STICK_UD";
       break;
-    case 27:
+    case ACCEPT_BUTTON_HOLD:
 $LN44_3:
       result = "BUTTON_ACCEPT";
       break;
-    case 28:
+    case BACK_BUTTON_HOLD:
 $LN46_5:
       result = "BUTTON_BACK";
       break;
-    case 35:
+    case F1_BUTTON:
       result = "BUTTON_F1";
       break;
-    case 36:
-    case 37:
+    case WHEEL_UP_BUTTON:
+    case WHEEL_DOWN_BUTTON:
       result = "INVALID";
       break;
     default:
-      result = &customWorldMapCaption;
+      result = &customCaption;
       break;
   }
   return result;
@@ -136,89 +136,89 @@ char *__fastcall UFG::UI::GetKeyboardButtonTextureNameNonRemappable(UFG::UI::eBu
 
   switch ( button )
   {
-    case 1:
-    case 5:
-    case 27:
+    case ACCEPT_BUTTON:
+    case START_BUTTON:
+    case ACCEPT_BUTTON_HOLD:
       result = "BUTTON_ENTER";
       break;
-    case 2:
-    case 28:
+    case BACK_BUTTON:
+    case BACK_BUTTON_HOLD:
       result = "BUTTON_BACKSPACE";
       break;
-    case 3:
-    case 29:
+    case BUTTON1_BUTTON:
+    case BUTTON1_BUTTON_HOLD:
       result = "BUTTON_Q";
       break;
-    case 4:
-    case 30:
+    case BUTTON2_BUTTON:
+    case BUTTON2_BUTTON_HOLD:
       result = "BUTTON_E";
       break;
-    case 6:
+    case SELECT_BUTTON:
       result = "BUTTON_TAB";
       break;
-    case 7:
-    case 9:
-    case 31:
-    case 33:
+    case L1_BUTTON:
+    case L2_BUTTON:
+    case L1_BUTTON_HOLD:
+    case L2_BUTTON_HOLD:
       result = "BUTTON_LCTRL";
       break;
-    case 8:
-    case 32:
+    case R1_BUTTON:
+    case R1_BUTTON_HOLD:
       result = "BUTTON_RCTRL";
       break;
-    case 10:
-    case 34:
+    case R2_BUTTON:
+    case R2_BUTTON_HOLD:
       result = "BUTTON_LSHIFT";
       break;
-    case 11:
+    case L3_BUTTON:
       result = "BUTTON_M";
       break;
-    case 12:
+    case R3_BUTTON:
       result = "BUTTON_T";
       break;
-    case 13:
+    case L1R1_BUTTON:
       result = "BUTTON_CTRL";
       break;
-    case 14:
+    case L2R2_BUTTON:
       result = "BUTTON_MOUSE_M";
       break;
-    case 15:
+    case DPAD_UP_BUTTON:
       result = "BUTTON_ARROW_U";
       break;
-    case 16:
+    case DPAD_DOWN_BUTTON:
       result = "BUTTON_ARROW_D";
       break;
-    case 17:
+    case DPAD_LEFT_BUTTON:
       result = "BUTTON_ARROW_L";
       break;
-    case 18:
+    case DPAD_RIGHT_BUTTON:
       result = "BUTTON_ARROW_R";
       break;
-    case 19:
-    case 23:
-    case 25:
+    case DPAD_LR_BUTTON:
+    case L_STICK_LR_BUTTON:
+    case R_STICK_LR_BUTTON:
       result = "BUTTON_ARROW_LR";
       break;
-    case 20:
-    case 24:
-    case 26:
+    case DPAD_UD_BUTTON:
+    case L_STICK_UD_BUTTON:
+    case R_STICK_UD_BUTTON:
       result = "BUTTON_ARROW_UD";
       break;
-    case 21:
-    case 22:
+    case L_STICK_BUTTON:
+    case R_STICK_BUTTON:
       result = "BUTTON_MOUSE";
       break;
-    case 35:
+    case F1_BUTTON:
       result = "BUTTON_F1";
       break;
-    case 36:
+    case WHEEL_UP_BUTTON:
       result = "BUTTON_MOUSE_M_U";
       break;
-    case 37:
+    case WHEEL_DOWN_BUTTON:
       result = "BUTTON_MOUSE_M_D";
       break;
     default:
-      result = &customWorldMapCaption;
+      result = &customCaption;
       break;
   }
   return result;
@@ -226,73 +226,71 @@ char *__fastcall UFG::UI::GetKeyboardButtonTextureNameNonRemappable(UFG::UI::eBu
 
 // File Line: 286
 // RVA: 0x5E6DC0
-signed __int64 __fastcall UFG::UI::GetButton(const char *text)
+__int64 __fastcall UFG::UI::GetButton(const char *text)
 {
-  const char *v1; // rbx
   int v3; // eax
   unsigned int v4; // ecx
 
-  v1 = text;
   if ( !text )
     return 0i64;
   if ( !(unsigned int)UFG::qStringCompare(text, "BUTTON_ACCEPT", -1) )
     return 1i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "BUTTON_BACK", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(text, "BUTTON_BACK", -1) )
     return 2i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "BUTTON_BUTTON1", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(text, "BUTTON_BUTTON1", -1) )
     return 3i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "BUTTON_BUTTON2", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(text, "BUTTON_BUTTON2", -1) )
     return 4i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "BUTTON_L1", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(text, "BUTTON_L1", -1) )
     return 7i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "BUTTON_L2", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(text, "BUTTON_L2", -1) )
     return 9i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "BUTTON_R1", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(text, "BUTTON_R1", -1) )
     return 8i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "BUTTON_R2", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(text, "BUTTON_R2", -1) )
     return 10i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "BUTTON_L1R1", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(text, "BUTTON_L1R1", -1) )
     return 13i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "BUTTON_L2R2", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(text, "BUTTON_L2R2", -1) )
     return 14i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "BUTTON_DPAD_UP", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(text, "BUTTON_DPAD_UP", -1) )
     return 15i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "BUTTON_DPAD_DOWN", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(text, "BUTTON_DPAD_DOWN", -1) )
     return 16i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "BUTTON_DPAD_LEFT", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(text, "BUTTON_DPAD_LEFT", -1) )
     return 17i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "BUTTON_DPAD_RIGHT", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(text, "BUTTON_DPAD_RIGHT", -1) )
     return 18i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "BUTTON_DPAD_LR", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(text, "BUTTON_DPAD_LR", -1) )
     return 19i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "BUTTON_DPAD_UD", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(text, "BUTTON_DPAD_UD", -1) )
     return 20i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "BUTTON_L_STICK", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(text, "BUTTON_L_STICK", -1) )
     return 21i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "BUTTON_R_STICK", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(text, "BUTTON_R_STICK", -1) )
     return 22i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "BUTTON_SELECT", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(text, "BUTTON_SELECT", -1) )
     return 6i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "BUTTON_START", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(text, "BUTTON_START", -1) )
     return 5i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "BUTTON_ACCEPT_HOLD", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(text, "BUTTON_ACCEPT_HOLD", -1) )
     return 27i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "BUTTON_BACK_HOLD", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(text, "BUTTON_BACK_HOLD", -1) )
     return 28i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "BUTTON_BUTTON1_HOLD", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(text, "BUTTON_BUTTON1_HOLD", -1) )
     return 29i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "BUTTON_BUTTON2_HOLD", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(text, "BUTTON_BUTTON2_HOLD", -1) )
     return 30i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "BUTTON_L1_HOLD", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(text, "BUTTON_L1_HOLD", -1) )
     return 31i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "BUTTON_R1_HOLD", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(text, "BUTTON_R1_HOLD", -1) )
     return 32i64;
-  if ( !(unsigned int)UFG::qStringCompare(v1, "BUTTON_L2_HOLD", -1) )
+  if ( !(unsigned int)UFG::qStringCompare(text, "BUTTON_L2_HOLD", -1) )
     return 33i64;
-  v3 = UFG::qStringCompare(v1, "BUTTON_R2_HOLD", -1);
+  v3 = UFG::qStringCompare(text, "BUTTON_R2_HOLD", -1);
   v4 = 0;
   if ( !v3 )
-    v4 = 34;
+    return 34;
   return v4;
 }
 
@@ -300,14 +298,9 @@ signed __int64 __fastcall UFG::UI::GetButton(const char *text)
 // RVA: 0x5ED5D0
 void __fastcall UFG::UI::InitHDSettings(UFG::UI *this)
 {
-  Illusion::Target *v1; // rax
-  float v2; // xmm0_4
-
   gUIHorizontalResolution = (float)Render::GetBackBufferTarget()->mWidth;
-  v1 = Render::GetBackBufferTarget();
-  v2 = (float)v1->mHeight;
-  gUIVerticalResolution = (float)v1->mHeight;
-  gIsUIHighDef = v2 >= 720.0;
+  gUIVerticalResolution = (float)Render::GetBackBufferTarget()->mHeight;
+  gIsUIHighDef = gUIVerticalResolution >= 720.0;
 }
 
 // File Line: 478
@@ -321,134 +314,115 @@ _BOOL8 __fastcall UFG::UI::IsInHDMode()
 // RVA: 0x6008B0
 void __fastcall UFG::UI::RefreshScreenHD(UFG::UIScreen *screen)
 {
-  Scaleform::GFx::Movie *v1; // rbx
-  Scaleform::GFx::Value pargs; // [rsp+38h] [rbp-40h]
+  Scaleform::GFx::Movie *pObject; // rbx
+  Scaleform::GFx::Value pargs; // [rsp+38h] [rbp-40h] BYREF
 
-  v1 = screen->mRenderable->m_movie.pObject;
+  pObject = screen->mRenderable->m_movie.pObject;
   pargs.pObjectInterface = 0i64;
-  pargs.Type = 2;
+  pargs.Type = VT_Boolean;
   pargs.mValue.BValue = gIsUIHighDef;
-  Scaleform::GFx::Movie::Invoke(v1, "HandleHighDef", 0i64, &pargs, 1u);
-  if ( ((unsigned int)pargs.Type >> 6) & 1 )
-    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
+  Scaleform::GFx::Movie::Invoke(pObject, "HandleHighDef", 0i64, &pargs, 1u);
+  if ( (pargs.Type & 0x40) != 0 )
+    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&pargs.pObjectInterface->vfptr->gap8[8])(
       pargs.pObjectInterface,
       &pargs,
-      *(_QWORD *)&pargs.mValue.NValue);
+      pargs.mValue);
 }
 
 // File Line: 505
 // RVA: 0x603B50
 void __fastcall UFG::UI::ScreenInitCallback(UFG::UIScreen *screen)
 {
-  UFG::UIScreen *v1; // rbx
-  Scaleform::GFx::Movie *v2; // rbx
-  double v3; // xmm6_8
+  Scaleform::GFx::Movie *pObject; // rbx
+  Scaleform::GFx::Value::ValueUnion v3; // xmm6_8
   double v4; // xmm6_8
   UFG::GameStatTracker *v5; // rax
-  signed int v6; // edi
-  double v7; // xmm6_8
-  const char *v8; // rdi
-  bool v9; // di
-  Scaleform::GFx::Value pargs; // [rsp+28h] [rbp-59h]
-  char ptr; // [rsp+58h] [rbp-29h]
-  __int64 v12; // [rsp+68h] [rbp-19h]
-  unsigned int v13; // [rsp+70h] [rbp-11h]
-  double v14; // [rsp+78h] [rbp-9h]
-  char v15; // [rsp+88h] [rbp+7h]
-  __int64 v16; // [rsp+98h] [rbp+17h]
-  unsigned int v17; // [rsp+A0h] [rbp+1Fh]
-  double v18; // [rsp+A8h] [rbp+27h]
-  __int64 v19; // [rsp+B8h] [rbp+37h]
+  Scaleform::GFx::Value::ValueUnion v6; // xmm6_8
+  const char *LanguageString; // rdi
+  bool v8; // di
+  Scaleform::GFx::Value pargs; // [rsp+28h] [rbp-59h] BYREF
+  Scaleform::GFx::Value ptr; // [rsp+58h] [rbp-29h] BYREF
+  char v11[16]; // [rsp+88h] [rbp+7h] BYREF
+  __int64 v12; // [rsp+98h] [rbp+17h]
+  int v13; // [rsp+A0h] [rbp+1Fh]
+  double v14; // [rsp+A8h] [rbp+27h]
+  __int64 v15; // [rsp+B8h] [rbp+37h]
 
-  v19 = -2i64;
-  v1 = screen;
+  v15 = -2i64;
   UFG::UI::RefreshScreenHD(screen);
-  v2 = v1->mRenderable->m_movie.pObject;
+  pObject = screen->mRenderable->m_movie.pObject;
   pargs.pObjectInterface = 0i64;
-  pargs.Type = 0;
+  pargs.Type = VT_Undefined;
   `eh vector constructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::Value);
-  v3 = gUIHorizontalResolution;
-  if ( (v13 >> 6) & 1 )
+  v3.NValue = gUIHorizontalResolution;
+  if ( (ptr.Type & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v12 + 16i64))(
-      v12,
+    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&ptr.pObjectInterface->vfptr->gap8[8])(
+      ptr.pObjectInterface,
       &ptr,
-      COERCE_DOUBLE(*(_QWORD *)&v14));
+      ptr.mValue);
+    ptr.pObjectInterface = 0i64;
+  }
+  ptr.Type = VT_Number;
+  ptr.mValue = v3;
+  v4 = gUIVerticalResolution;
+  if ( (v13 & 0x40) != 0 )
+  {
+    (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v12 + 16i64))(v12, v11, COERCE_DOUBLE(*(_QWORD *)&v14));
     v12 = 0i64;
   }
   v13 = 5;
-  v14 = v3;
-  v4 = gUIVerticalResolution;
-  if ( (v17 >> 6) & 1 )
-  {
-    (*(void (__fastcall **)(__int64, char *, double))(*(_QWORD *)v16 + 16i64))(
-      v16,
-      &v15,
-      COERCE_DOUBLE(*(_QWORD *)&v18));
-    v16 = 0i64;
-  }
-  v17 = 5;
-  v18 = v4;
-  Scaleform::GFx::Movie::Invoke(v2, "HandleResolution", 0i64, (Scaleform::GFx::Value *)&ptr, 2u);
+  v14 = v4;
+  Scaleform::GFx::Movie::Invoke(pObject, "HandleResolution", 0i64, &ptr, 2u);
   v5 = UFG::GameStatTracker::Instance();
-  v6 = UFG::GameStatTracker::GetStat(v5, UIScale);
-  if ( ((unsigned int)pargs.Type >> 6) & 1 )
+  pargs.Type = VT_Number;
+  pargs.mValue.NValue = (float)((float)((float)((float)(int)UFG::GameStatTracker::GetStat(v5, UIScale) * 0.1)
+                                      * 0.15000001)
+                              + 0.85000002);
+  Scaleform::GFx::Movie::Invoke(pObject, "HandleUIScale", 0i64, &pargs, 1u);
+  v6.NValue = (double)UFG::UI::gPlatform;
+  if ( (pargs.Type & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
+    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&pargs.pObjectInterface->vfptr->gap8[8])(
       pargs.pObjectInterface,
       &pargs,
-      *(_QWORD *)&pargs.mValue.NValue);
+      pargs.mValue);
     pargs.pObjectInterface = 0i64;
   }
-  pargs.Type = 5;
-  pargs.mValue.NValue = (float)((float)((float)((float)v6 * 0.1) * 0.15000001) + 0.85000002);
-  Scaleform::GFx::Movie::Invoke(v2, "HandleUIScale", 0i64, &pargs, 1u);
-  v7 = (double)UFG::UI::gPlatform;
-  if ( ((unsigned int)pargs.Type >> 6) & 1 )
+  pargs.Type = VT_Number;
+  pargs.mValue = v6;
+  Scaleform::GFx::Movie::Invoke(pObject, "HandlePlatform", 0i64, &pargs, 1u);
+  LanguageString = UFG::UIGfxTranslator::getLanguageString(UFG::UIScreenManager::s_instance->m_translator);
+  if ( (pargs.Type & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
+    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&pargs.pObjectInterface->vfptr->gap8[8])(
       pargs.pObjectInterface,
       &pargs,
-      *(_QWORD *)&pargs.mValue.NValue);
+      pargs.mValue);
     pargs.pObjectInterface = 0i64;
   }
-  pargs.Type = 5;
-  pargs.mValue.NValue = v7;
-  Scaleform::GFx::Movie::Invoke(v2, "HandlePlatform", 0i64, &pargs, 1u);
-  v8 = UFG::UIGfxTranslator::getLanguageString(UFG::UIScreenManager::s_instance->m_translator);
-  if ( ((unsigned int)pargs.Type >> 6) & 1 )
+  pargs.Type = VT_String;
+  pargs.mValue.pString = LanguageString;
+  Scaleform::GFx::Movie::Invoke(pObject, "HandleLanguage", 0i64, &pargs, 1u);
+  v8 = gButtonsSwapped;
+  if ( (pargs.Type & 0x40) != 0 )
   {
-    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
+    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&pargs.pObjectInterface->vfptr->gap8[8])(
       pargs.pObjectInterface,
       &pargs,
-      *(_QWORD *)&pargs.mValue.NValue);
+      pargs.mValue);
     pargs.pObjectInterface = 0i64;
   }
-  pargs.Type = 6;
-  *(_QWORD *)&pargs.mValue.NValue = v8;
-  Scaleform::GFx::Movie::Invoke(v2, "HandleLanguage", 0i64, &pargs, 1u);
-  v9 = gButtonsSwapped;
-  if ( ((unsigned int)pargs.Type >> 6) & 1 )
-  {
-    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
-      pargs.pObjectInterface,
-      &pargs,
-      *(_QWORD *)&pargs.mValue.NValue);
-    pargs.pObjectInterface = 0i64;
-  }
-  pargs.Type = 2;
-  pargs.mValue.BValue = v9;
-  Scaleform::GFx::Movie::Invoke(v2, "HandleButtonsSwapped", 0i64, &pargs, 1u);
+  pargs.Type = VT_Boolean;
+  pargs.mValue.BValue = v8;
+  Scaleform::GFx::Movie::Invoke(pObject, "HandleButtonsSwapped", 0i64, &pargs, 1u);
   `eh vector destructor iterator(&ptr, 0x30ui64, 2, (void (__fastcall *)(void *))Scaleform::GFx::Value::~Value);
-  if ( ((unsigned int)pargs.Type >> 6) & 1 )
-    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, _QWORD))&pargs.pObjectInterface->vfptr->gap8[8])(
+  if ( (pargs.Type & 0x40) != 0 )
+    (*(void (__fastcall **)(Scaleform::GFx::Value::ObjectInterface *, Scaleform::GFx::Value *, Scaleform::GFx::Value::ValueUnion))&pargs.pObjectInterface->vfptr->gap8[8])(
       pargs.pObjectInterface,
       &pargs,
-      *(_QWORD *)&pargs.mValue.NValue);
-}>vfptr->gap8[8])(
-      pargs.pObjectInterface,
-      &pargs,
-      *(_Q
+      pargs.mValue);
+}
 
 // File Line: 532
 // RVA: 0x5FF020
@@ -456,33 +430,25 @@ void __fastcall UFG::UI::QuitGame(const char *frontEndScreen)
 {
   const char *v1; // rbx
   UFG::ProgressionTracker *v2; // rax
-  UFG::GameSetup *v3; // rax
+  UFG::GameSetup *GameSetup; // rax
 
   v1 = "MainMenu";
   if ( frontEndScreen )
     v1 = frontEndScreen;
-  UFG::UIScreenManagerBase::queueMessage(
-    (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-    UI_HASH_QUIT_TO_MAIN_MENU_20,
-    0xFFFFFFFF);
+  UFG::UIScreenManagerBase::queueMessage(UFG::UIScreenManager::s_instance, UI_HASH_QUIT_TO_MAIN_MENU_20, 0xFFFFFFFF);
   if ( UFG::UIHKPlayerObjectiveManager::mInstance )
     *(_WORD *)&UFG::UIHKPlayerObjectiveManager::mInstance->mWorldMapObjective_IsSet = 0;
-  UFG::UIScreenManagerBase::queuePopOverlay(
-    (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-    "OpeningCredits");
+  UFG::UIScreenManagerBase::queuePopOverlay(UFG::UIScreenManager::s_instance, "OpeningCredits");
   UFG::UIHKScreenHud::ResetWidgets();
   if ( (unsigned int)UFG::FlowController::RequestSetNewState(&UFG::gFlowController, uidGameStateUnloadGame_13) )
   {
-    UFG::UIScreenManagerBase::queuePushScreen(
-      (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-      v1,
-      -1);
+    UFG::UIScreenManagerBase::queuePushScreen(UFG::UIScreenManager::s_instance, v1, -1);
   }
   else
   {
     v2 = UFG::ProgressionTracker::Instance();
-    v3 = UFG::ProgressionTracker::GetGameSetup(v2);
-    UFG::GameSetup::SetInitMenu(v3, v1);
+    GameSetup = UFG::ProgressionTracker::GetGameSetup(v2);
+    UFG::GameSetup::SetInitMenu(GameSetup, v1);
   }
 }
 
@@ -490,58 +456,51 @@ void __fastcall UFG::UI::QuitGame(const char *frontEndScreen)
 // RVA: 0x5F3910
 char __fastcall UFG::UI::PauseGame(const char *pauseScreen)
 {
-  const char *v1; // rdi
-  unsigned int v2; // eax
-  unsigned int v3; // ebx
-  UFG::GameState *v4; // rax
-  UFG::GameState *v5; // rsi
-  ANTLR3_INPUT_STREAM_struct *v7; // rax
-  unsigned int v8; // edx
-  UFG::UIScreenTextureManager *v9; // rax
-  UFG::SimComponent *v10; // rax
-  UFG::SimComponent *v11; // rbx
-  _BOOL8 v12; // r8
+  unsigned int CurrentState; // ebx
+  UFG::GameState *GameStateObj; // rax
+  UFG::GameState *v4; // rsi
+  ANTLR3_INPUT_STREAM_struct *v6; // rax
+  unsigned int v7; // edx
+  UFG::UIScreenTextureManager *v8; // rax
+  UFG::SimComponent *CurrentGameCamera; // rax
+  UFG::SimComponent *v10; // rbx
+  _BOOL8 v11; // r8
 
-  v1 = pauseScreen;
-  v2 = UFG::FlowController::GetCurrentState(&UFG::gFlowController);
-  v3 = v2;
-  v4 = UFG::FlowController::GetGameStateObj(&UFG::gFlowController, v2);
-  v5 = v4;
-  if ( v3 != uidGameStateInGame_13 || !v4 )
+  CurrentState = UFG::FlowController::GetCurrentState(&UFG::gFlowController);
+  GameStateObj = UFG::FlowController::GetGameStateObj(&UFG::gFlowController, CurrentState);
+  v4 = GameStateObj;
+  if ( CurrentState != uidGameStateInGame_13 || !GameStateObj )
     return 0;
-  if ( (unsigned int)UFG::qStringCompare(v1, "NISPause", -1) )
+  if ( (unsigned int)UFG::qStringCompare(pauseScreen, "NISPause", -1) )
   {
-    v7 = (ANTLR3_INPUT_STREAM_struct *)UFG::UIScreenTextureManager::Instance();
-    v8 = 16;
+    v6 = (ANTLR3_INPUT_STREAM_struct *)UFG::UIScreenTextureManager::Instance();
+    v7 = 16;
   }
   else
   {
-    v7 = (ANTLR3_INPUT_STREAM_struct *)UFG::UIScreenTextureManager::Instance();
-    v8 = 32;
+    v6 = (ANTLR3_INPUT_STREAM_struct *)UFG::UIScreenTextureManager::Instance();
+    v7 = 32;
   }
-  UFG::UIScreenTextureManager::SetGameState(v7, v8);
-  UFG::UIScreenManagerBase::queueMessage(
-    (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-    UI_HASH_GAME_PAUSE_20,
-    0xFFFFFFFF);
-  if ( v1 )
+  UFG::UIScreenTextureManager::SetGameState(v6, v7);
+  UFG::UIScreenManagerBase::queueMessage(UFG::UIScreenManager::s_instance, UI_HASH_GAME_PAUSE_20, 0xFFFFFFFF);
+  if ( pauseScreen )
   {
-    UFG::qString::Set(&v5->mGameStateUserDataStr, v1);
-    v9 = UFG::UIScreenTextureManager::Instance();
-    UFG::UIScreenTextureManager::QueueLoadAndPush(v9, v1, 0i64);
+    UFG::qString::Set(&v4->mGameStateUserDataStr, pauseScreen);
+    v8 = UFG::UIScreenTextureManager::Instance();
+    UFG::UIScreenTextureManager::QueueLoadAndPush(v8, pauseScreen, 0i64);
   }
-  v10 = UFG::GetCurrentGameCamera();
-  v11 = v10;
-  if ( v10 )
+  CurrentGameCamera = (UFG::SimComponent *)UFG::GetCurrentGameCamera();
+  v10 = CurrentGameCamera;
+  if ( CurrentGameCamera )
   {
-    if ( UFG::SimComponent::IsType(v10, UFG::ScriptCameraComponent::_ScriptCameraComponentTypeUID) )
-      v11->vfptr[20].__vecDelDtor((UFG::qSafePointerNode<UFG::SimComponent> *)&v11->vfptr, 0);
+    if ( UFG::SimComponent::IsType(CurrentGameCamera, UFG::ScriptCameraComponent::_ScriptCameraComponentTypeUID) )
+      v10->vfptr[20].__vecDelDtor(v10, 0);
   }
   UFG::InputSystem::SetShouldRestrictCursor(0, 0, 1, 1);
   UFG::InputSystem::SetShouldHideCursor(1, 0, 1, 0);
   UFG::InputSystem::msRelativeMouseMode = 0;
-  LOBYTE(v12) = 1;
-  v5->vfptr->ModeSet(v5, eGSM_PAUSED, v12);
+  LOBYTE(v11) = 1;
+  v4->vfptr->ModeSet(v4, eGSM_PAUSED, v11);
   return 1;
 }
 
@@ -549,56 +508,52 @@ char __fastcall UFG::UI::PauseGame(const char *pauseScreen)
 // RVA: 0x6132A0
 void __fastcall UFG::UI::UnpauseGame(UFG::UI *this)
 {
-  unsigned int v1; // eax
-  UFG::GameState *v2; // rax
-  UFG::SimComponent *v3; // rax
+  unsigned int CurrentState; // eax
+  UFG::GameState *GameStateObj; // rax
+  UFG::SimComponent *CurrentGameCamera; // rax
   UFG::SimComponent *v4; // rbx
   __int64 v5; // rdx
   ANTLR3_INPUT_STREAM_struct *v6; // rax
 
-  v1 = UFG::FlowController::GetCurrentState(&UFG::gFlowController);
-  v2 = UFG::FlowController::GetGameStateObj(&UFG::gFlowController, v1);
-  ((void (__fastcall *)(UFG::GameState *, signed __int64))v2->vfptr->ModeSet)(v2, 1i64);
+  CurrentState = UFG::FlowController::GetCurrentState(&UFG::gFlowController);
+  GameStateObj = UFG::FlowController::GetGameStateObj(&UFG::gFlowController, CurrentState);
+  ((void (__fastcall *)(UFG::GameState *, __int64))GameStateObj->vfptr->ModeSet)(GameStateObj, 1i64);
   UFG::InputSystem::SetShouldRestrictCursor(0, 1, 1, 1);
   UFG::InputSystem::SetShouldHideCursor(1, 1, 1, 1);
   UFG::InputSystem::msRelativeMouseMode = 1;
-  v3 = UFG::GetCurrentGameCamera();
-  v4 = v3;
-  if ( v3 && UFG::SimComponent::IsType(v3, UFG::ScriptCameraComponent::_ScriptCameraComponentTypeUID) )
+  CurrentGameCamera = (UFG::SimComponent *)UFG::GetCurrentGameCamera();
+  v4 = CurrentGameCamera;
+  if ( CurrentGameCamera
+    && UFG::SimComponent::IsType(CurrentGameCamera, UFG::ScriptCameraComponent::_ScriptCameraComponentTypeUID) )
   {
     LOBYTE(v5) = 1;
-    v4->vfptr[20].__vecDelDtor((UFG::qSafePointerNode<UFG::SimComponent> *)&v4->vfptr, v5);
+    v4->vfptr[20].__vecDelDtor(v4, v5);
   }
   v6 = (ANTLR3_INPUT_STREAM_struct *)UFG::UIScreenTextureManager::Instance();
   UFG::UIScreenTextureManager::SetGameState(v6, 2u);
-  UFG::UIScreenManagerBase::queueMessage(
-    (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-    UI_HASH_GAME_UNPAUSE_20,
-    0xFFFFFFFF);
+  UFG::UIScreenManagerBase::queueMessage(UFG::UIScreenManager::s_instance, UI_HASH_GAME_UNPAUSE_20, 0xFFFFFFFF);
 }
 
 // File Line: 637
 // RVA: 0x5EE1B0
 UFG::GameState *__fastcall UFG::UI::IsGamePaused()
 {
-  unsigned int v0; // eax
+  unsigned int CurrentState; // eax
   UFG::GameState *result; // rax
   UFG::GameState *v2; // rdi
   unsigned __int8 v3; // bl
 
-  v0 = UFG::FlowController::GetCurrentState(&UFG::gFlowController);
-  result = UFG::FlowController::GetGameStateObj(&UFG::gFlowController, v0);
+  CurrentState = UFG::FlowController::GetCurrentState(&UFG::gFlowController);
+  result = UFG::FlowController::GetGameStateObj(&UFG::gFlowController, CurrentState);
   v2 = result;
   if ( result )
   {
-    if ( UFG::UIScreenManagerBase::getScreen(
-           (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-           "NISPause")
-      || (v3 = 1, !v2->vfptr->ModeIsSet(v2, eGSM_PAUSED)) )
-    {
-      v3 = 0;
-    }
-    result = (UFG::GameState *)v3;
+    if ( UFG::UIScreenManagerBase::getScreen(UFG::UIScreenManager::s_instance, "NISPause") )
+      return 0;
+    v3 = 1;
+    if ( !v2->vfptr->ModeIsSet(v2, eGSM_PAUSED) )
+      return 0;
+    return (UFG::GameState *)v3;
   }
   return result;
 }
@@ -610,9 +565,7 @@ char __fastcall UFG::UI::TryNISPause()
   if ( (unsigned int)UFG::FlowController::GetCurrentState(&UFG::gFlowController) != uidGameStateInGame_13 )
     return 0;
   if ( (unsigned __int8)UFG::UI::IsGamePaused()
-    || UFG::UIScreenManagerBase::getScreen(
-         (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-         "NISPause") )
+    || UFG::UIScreenManagerBase::getScreen(UFG::UIScreenManager::s_instance, "NISPause") )
   {
     return 1;
   }
@@ -654,10 +607,11 @@ void __fastcall UFG::UI::UnlockGameplayInput(UFG::UI *this)
 
 // File Line: 725
 // RVA: 0x602930
-void __fastcall UFG::UI::ResetInputCounterHack(int counter)
+void __fastcall UFG::UI::ResetInputCounterHack(UFG::UI *counter)
 {
-  UFG::UI::gUIInputLocked = counter;
-  JUMPOUT(counter, 0, UFG::UI::ResetGameplayInput);
+  UFG::UI::gUIInputLocked = (unsigned int)counter;
+  if ( !(_DWORD)counter )
+    UFG::UI::ResetGameplayInput(counter);
 }
 
 // File Line: 736
@@ -673,7 +627,7 @@ void __fastcall UFG::UI::ResetGameplayInput(UFG::UI *this)
     if ( g_saved_gameplay_controller_mode )
     {
       UFG::SetInputMode(g_saved_gameplay_controller_mode, v1->mControllerIndex);
-      g_saved_gameplay_controller_mode = 0;
+      g_saved_gameplay_controller_mode = IM_INVALID;
     }
     else if ( v1->m_ActiveMapSet == 8 )
     {
@@ -686,57 +640,53 @@ void __fastcall UFG::UI::ResetGameplayInput(UFG::UI *this)
 // RVA: 0x5E89E0
 char __fastcall UFG::UI::GetPlayerWorldPosition(UFG::qVector3 *pos, UFG::qVector3 *dir)
 {
-  UFG::qVector3 *v2; // rdi
-  UFG::qVector3 *v3; // rsi
-  UFG::SimObjectCharacter *v4; // rax
+  UFG::SimObjectCharacter *LocalPlayer; // rax
   char result; // al
-  UFG::TransformNodeComponent *v6; // rbx
-  float v7; // xmm1_4
-  float v8; // xmm2_4
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rbx
+  float y; // xmm1_4
+  float z; // xmm2_4
   float v9; // xmm1_4
   float v10; // xmm2_4
-  float v11; // xmm0_4
+  float x; // xmm0_4
   float v12; // xmm1_4
   float v13; // xmm2_4
   float v14; // xmm3_4
   float v15; // xmm1_4
 
-  v2 = dir;
-  v3 = pos;
   if ( UFG::UI::gUpdateWorldPos )
   {
-    v4 = UFG::GetLocalPlayer();
-    if ( !v4 )
+    LocalPlayer = UFG::GetLocalPlayer();
+    if ( !LocalPlayer )
       return 0;
-    v6 = v4->m_pTransformNodeComponent;
-    if ( !v6 )
+    m_pTransformNodeComponent = LocalPlayer->m_pTransformNodeComponent;
+    if ( !m_pTransformNodeComponent )
       return 0;
-    UFG::TransformNodeComponent::UpdateWorldTransform(v4->m_pTransformNodeComponent);
-    v7 = v6->mWorldTransform.v3.y;
-    v8 = v6->mWorldTransform.v3.z;
-    cachedPos.x = v6->mWorldTransform.v3.x;
-    cachedPos.y = v7;
-    cachedPos.z = v8;
-    UFG::TransformNodeComponent::UpdateWorldTransform(v6);
-    v9 = v6->mWorldTransform.v0.y;
-    v10 = v6->mWorldTransform.v0.z;
-    v11 = v6->mWorldTransform.v0.x;
+    UFG::TransformNodeComponent::UpdateWorldTransform(LocalPlayer->m_pTransformNodeComponent);
+    y = m_pTransformNodeComponent->mWorldTransform.v3.y;
+    z = m_pTransformNodeComponent->mWorldTransform.v3.z;
+    cachedPos.x = m_pTransformNodeComponent->mWorldTransform.v3.x;
+    cachedPos.y = y;
+    cachedPos.z = z;
+    UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+    v9 = m_pTransformNodeComponent->mWorldTransform.v0.y;
+    v10 = m_pTransformNodeComponent->mWorldTransform.v0.z;
+    x = m_pTransformNodeComponent->mWorldTransform.v0.x;
     UFG::UI::gUpdateWorldPos = 0;
-    cachedDir.x = v11;
+    cachedDir.x = x;
     cachedDir.y = v9;
     cachedDir.z = v10;
   }
   v12 = cachedPos.y;
   v13 = cachedPos.z;
   result = 1;
-  v3->x = cachedPos.x;
-  v3->y = v12;
-  v3->z = v13;
+  pos->x = cachedPos.x;
+  pos->y = v12;
+  pos->z = v13;
   v14 = cachedDir.y;
   v15 = cachedDir.z;
-  v2->x = cachedDir.x;
-  v2->y = v14;
-  v2->z = v15;
+  dir->x = cachedDir.x;
+  dir->y = v14;
+  dir->z = v15;
   return result;
 }
 
@@ -747,17 +697,20 @@ const char *__fastcall UFG::UI::LocalizeText(const char *tag)
   const char *v1; // rbx
   const char *result; // rax
   unsigned int v3; // eax
-  UFG::UIGfxTranslator *v4; // rcx
+  UFG::UIGfxTranslator *m_translator; // rcx
 
   v1 = tag;
   if ( !tag )
     return 0i64;
   if ( *tag == 36 )
     v1 = tag + 1;
-  v3 = UFG::qStringHashUpper32(v1, 0xFFFFFFFF);
-  v4 = UFG::UIScreenManager::s_instance->m_translator;
-  if ( !v4 || (result = (const char *)v4->vfptr[5].__vecDelDtor((Scaleform::RefCountImplCore *)&v4->vfptr, v3)) == 0i64 )
-    result = v1;
+  v3 = UFG::qStringHashUpper32(v1, -1);
+  m_translator = UFG::UIScreenManager::s_instance->m_translator;
+  if ( !m_translator )
+    return v1;
+  result = (const char *)m_translator->vfptr[5].__vecDelDtor(m_translator, v3);
+  if ( !result )
+    return v1;
   return result;
 }
 
@@ -766,59 +719,59 @@ const char *__fastcall UFG::UI::LocalizeText(const char *tag)
 char *__fastcall UFG::UI::GetPlayerDisplayName()
 {
   UFG::OnlineManager *v0; // rax
-  char *v1; // r8
-  UFG::qString result; // [rsp+28h] [rbp-30h]
+  char *mData; // r8
+  UFG::qString result; // [rsp+28h] [rbp-30h] BYREF
 
   v0 = UFG::OnlineManager::Instance();
   UFG::OnlineManager::GetOnlineName(v0, &result);
-  v1 = "Wei Shen";
+  mData = "Wei Shen";
   if ( result.mLength )
-    v1 = result.mData;
-  UFG::qStringCopy(displayName, 512, v1, -1);
+    mData = result.mData;
+  UFG::qStringCopy(displayName, 512, mData, -1);
   UFG::qString::~qString(&result);
   return displayName;
 }
 
 // File Line: 863
 // RVA: 0x5EE420
-unsigned __int64 __fastcall UFG::UI::IsMissionActive(bool includeEvents)
+UFG::GameSlice *__fastcall UFG::UI::IsMissionActive(bool includeEvents)
 {
-  bool v1; // bl
   UFG::ProgressionTracker *v2; // rax
-  unsigned __int64 result; // rax
+  UFG::GameSlice *result; // rax
   UFG::GameSlice *v4; // rdx
 
-  v1 = includeEvents;
   v2 = UFG::ProgressionTracker::Instance();
-  result = (unsigned __int64)UFG::ProgressionTracker::GetActiveMaster(v2);
-  v4 = (UFG::GameSlice *)result;
+  result = UFG::ProgressionTracker::GetActiveMaster(v2);
+  v4 = result;
   if ( result )
   {
-    LOBYTE(result) = !*(_BYTE *)(result + 331) && (unsigned int)(*(_DWORD *)(result + 268) - 6) <= 5;
-    if ( v1 && v4->mType == 5 )
-      result = (unsigned __int8)result | 1u;
+    LOBYTE(result) = !result->mInternalSlice && (unsigned int)(result->mType - 6) <= 5;
+    if ( includeEvents && v4->mType == 5 )
+      return (UFG::GameSlice *)((unsigned __int8)result | 1u);
     else
-      result = (unsigned __int8)result;
+      return (UFG::GameSlice *)(unsigned __int8)result;
   }
   return result;
 }
 
 // File Line: 888
 // RVA: 0x5EE490
-bool __fastcall UFG::UI::IsMissionWithCheckpointsActive(bool includeEvents)
+unsigned __int8 __fastcall UFG::UI::IsMissionWithCheckpointsActive(bool includeEvents)
 {
-  bool result; // al
+  unsigned __int8 result; // al
   UFG::ProgressionTracker *v2; // rbx
-  UFG::GameSlice *v3; // rdi
-  UFG::GameSlice *v4; // rax
+  UFG::GameSlice *ActiveMaster; // rdi
+  UFG::GameSlice *LastCheckpoint; // rax
 
-  result = UFG::UI::IsMissionActive(includeEvents);
+  result = (unsigned __int8)UFG::UI::IsMissionActive(includeEvents);
   if ( result )
   {
     v2 = UFG::ProgressionTracker::Instance();
-    v3 = UFG::ProgressionTracker::GetActiveMaster(v2);
-    v4 = UFG::ProgressionTracker::GetLastCheckpoint(v2);
-    result = v3 && v4 && (v4 == v3 || UFG::GameSlice::GetParent(v4) == v3);
+    ActiveMaster = UFG::ProgressionTracker::GetActiveMaster(v2);
+    LastCheckpoint = UFG::ProgressionTracker::GetLastCheckpoint(v2);
+    return ActiveMaster
+        && LastCheckpoint
+        && (LastCheckpoint == ActiveMaster || UFG::GameSlice::GetParent(LastCheckpoint) == ActiveMaster);
   }
   return result;
 }
@@ -827,70 +780,70 @@ bool __fastcall UFG::UI::IsMissionWithCheckpointsActive(bool includeEvents)
 // RVA: 0x5EE720
 char __fastcall UFG::UI::IsPlayerInWater()
 {
-  return UFG::SimObjectUtility::IsInWater((UFG::SimObject *)&LocalPlayer->vfptr);
+  return UFG::SimObjectUtility::IsInWater(LocalPlayer);
 }
 
 // File Line: 919
 // RVA: 0x5EE690
 bool __fastcall UFG::UI::IsPlayerInVehicle()
 {
-  unsigned __int16 v0; // dx
-  UFG::CharacterSubjectComponent *v1; // rax
-  bool result; // al
+  signed __int16 m_Flags; // dx
+  UFG::CharacterSubjectComponent *ComponentOfType; // rax
 
   if ( LocalPlayer
-    && ((v0 = LocalPlayer->m_Flags, !((v0 >> 14) & 1)) ? ((v0 & 0x8000u) == 0 ? (!((v0 >> 13) & 1) ? (!((v0 >> 12) & 1) ? (v1 = (UFG::CharacterSubjectComponent *)UFG::SimObject::GetComponentOfType((UFG::SimObject *)&LocalPlayer->vfptr, UFG::CharacterSubjectComponent::_TypeUID)) : (v1 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)&LocalPlayer->vfptr, UFG::CharacterSubjectComponent::_TypeUID))) : (v1 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)&LocalPlayer->vfptr, UFG::CharacterSubjectComponent::_TypeUID))) : (v1 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK((UFG::SimObjectGame *)&LocalPlayer->vfptr, UFG::CharacterSubjectComponent::_TypeUID))) : (v1 = UFG::SimObjectCharacter::GetComponent<UFG::CharacterSubjectComponent>(LocalPlayer)),
-        v1) )
+    && ((m_Flags = LocalPlayer->m_Flags, (m_Flags & 0x4000) == 0)
+      ? (m_Flags >= 0 && (m_Flags & 0x2000) == 0 && (m_Flags & 0x1000) == 0
+       ? (ComponentOfType = (UFG::CharacterSubjectComponent *)UFG::SimObject::GetComponentOfType(
+                                                                LocalPlayer,
+                                                                UFG::CharacterSubjectComponent::_TypeUID))
+       : (ComponentOfType = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                LocalPlayer,
+                                                                UFG::CharacterSubjectComponent::_TypeUID)))
+      : (ComponentOfType = UFG::SimObjectCharacter::GetComponent<UFG::CharacterSubjectComponent>(LocalPlayer)),
+        ComponentOfType) )
   {
-    result = ((__int64 (__fastcall *)(UFG::CharacterSubjectComponent *))v1->vfptr[42].__vecDelDtor)(v1);
+    return ((__int64 (__fastcall *)(UFG::CharacterSubjectComponent *))ComponentOfType->vfptr[42].__vecDelDtor)(ComponentOfType);
   }
   else
   {
-    result = 0;
+    return 0;
   }
-  return result;
 }
 
 // File Line: 926
 // RVA: 0x5EE730
 bool __fastcall UFG::UI::IsPlayerVehiclePassenger()
 {
-  unsigned __int16 v0; // dx
-  UFG::CharacterOccupantComponent *v1; // rax
-  unsigned int v2; // ecx
-  signed int v3; // eax
+  signed __int16 m_Flags; // dx
+  UFG::CharacterOccupantComponent *m_pComponent; // rax
+  unsigned int mTargetType; // ecx
+  int v3; // eax
   bool result; // al
 
   result = 0;
   if ( LocalPlayer )
   {
-    v0 = LocalPlayer->m_Flags;
-    if ( (v0 >> 14) & 1 )
-    {
-      v1 = (UFG::CharacterOccupantComponent *)LocalPlayer->m_Components.p[44].m_pComponent;
-    }
-    else if ( (v0 & 0x8000u) == 0 )
-    {
-      if ( (v0 >> 13) & 1 )
-        v1 = (UFG::CharacterOccupantComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                  (UFG::SimObjectGame *)&LocalPlayer->vfptr,
-                                                  UFG::CharacterOccupantComponent::_TypeUID);
-      else
-        v1 = (UFG::CharacterOccupantComponent *)((v0 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                    (UFG::SimObjectGame *)&LocalPlayer->vfptr,
-                                                                    UFG::CharacterOccupantComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&LocalPlayer->vfptr, UFG::CharacterOccupantComponent::_TypeUID));
-    }
+    m_Flags = LocalPlayer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
+      m_pComponent = (UFG::CharacterOccupantComponent *)LocalPlayer->m_Components.p[44].m_pComponent;
     else
+      m_pComponent = (UFG::CharacterOccupantComponent *)(m_Flags < 0
+                                                      || (m_Flags & 0x2000) != 0
+                                                      || (m_Flags & 0x1000) != 0
+                                                       ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                           LocalPlayer,
+                                                           UFG::CharacterOccupantComponent::_TypeUID)
+                                                       : UFG::SimObject::GetComponentOfType(
+                                                           LocalPlayer,
+                                                           UFG::CharacterOccupantComponent::_TypeUID));
+    if ( m_pComponent )
     {
-      v1 = (UFG::CharacterOccupantComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                (UFG::SimObjectGame *)&LocalPlayer->vfptr,
-                                                UFG::CharacterOccupantComponent::_TypeUID);
-    }
-    if ( v1 )
-    {
-      v2 = v1->mTargetType;
-      if ( v2 > eTARGET_TYPE_VEHICLE_PASSENGER_TRUNK || (v3 = 0x2210, !_bittest(&v3, v2)) )
-        result = 1;
+      mTargetType = m_pComponent->mTargetType;
+      if ( mTargetType > eTARGET_TYPE_VEHICLE_PASSENGER_TRUNK )
+        return 1;
+      v3 = 0x2210;
+      if ( !_bittest(&v3, mTargetType) )
+        return 1;
     }
   }
   return result;
@@ -908,7 +861,7 @@ bool __fastcall UFG::UI::IsPlayerInCombat()
 __int64 __fastcall UFG::UI::GetFlashArgsInt(UFG::UIMessage *msg)
 {
   unsigned int v2; // ebx
-  UFG::qString v3; // [rsp+28h] [rbp-30h]
+  UFG::qString v3; // [rsp+28h] [rbp-30h] BYREF
 
   if ( !msg )
     return 0i64;
@@ -920,46 +873,44 @@ __int64 __fastcall UFG::UI::GetFlashArgsInt(UFG::UIMessage *msg)
 
 // File Line: 963
 // RVA: 0x603AB0
-void __usercall UFG::UI::ScaleViewCoordsToUIScreen(UFG::UIScreen *screen@<rcx>, float *posX@<rdx>, float *posY@<r8>, float a4@<xmm0>)
+void __fastcall UFG::UI::ScaleViewCoordsToUIScreen(UFG::UIScreen *screen, float *posX, float *posY)
 {
-  float *v4; // rbp
-  float *v5; // rbx
-  UFG::UIScreen *v6; // rdi
-  Illusion::Target *v7; // rsi
-  Scaleform::GFx::ResourceVtbl *v8; // rax
+  Illusion::Target *BackBufferTarget; // rsi
+  float v7; // xmm0_4
+  Scaleform::GFx::MovieDef *pObject; // rcx
+  Scaleform::GFx::ResourceVtbl *vfptr; // rax
 
-  v4 = posY;
-  v5 = posX;
-  v6 = screen;
-  v7 = Render::GetBackBufferTarget();
-  ((void (*)(void))v6->mRenderable->m_movieDef.pObject->vfptr[1].GetResourceTypeCode)();
-  v8 = v6->mRenderable->m_movieDef.pObject->vfptr;
-  *v5 = (float)((float)(signed int)a4 / (float)v7->mWidth) * *v5;
-  ((void (*)(void))v8[1].GetResourceReport)();
-  *v4 = (float)((float)(signed int)a4 / (float)v7->mHeight) * *v4;
+  BackBufferTarget = Render::GetBackBufferTarget();
+  v7 = ((float (__fastcall *)(Scaleform::GFx::MovieDef *))screen->mRenderable->m_movieDef.pObject->vfptr[1].GetResourceTypeCode)(screen->mRenderable->m_movieDef.pObject);
+  pObject = screen->mRenderable->m_movieDef.pObject;
+  vfptr = pObject->Scaleform::GFx::Resource::vfptr;
+  *posX = (float)((float)(int)v7 / (float)BackBufferTarget->mWidth) * *posX;
+  *posY = (float)((float)(int)((float (__fastcall *)(Scaleform::GFx::MovieDef *))vfptr[1].GetResourceReport)(pObject)
+                / (float)BackBufferTarget->mHeight)
+        * *posY;
 }
 
 // File Line: 1123
 // RVA: 0x5E6640
 void __fastcall UFG::UI::FormatMoneyStr(int money, UFG::qString *string)
 {
-  signed int v2; // er9
-  unsigned int v3; // er9
-  _QWORD v4[3]; // [rsp+20h] [rbp-18h]
+  int v2; // r9d
+  unsigned int v3; // r9d
+  int v4; // [rsp+20h] [rbp-18h]
 
-  v2 = abs(money);
+  v2 = abs32(money);
   if ( v2 < 1000000 )
   {
     if ( v2 < 1000 )
       UFG::qString::Format(string, "%d", (unsigned int)money);
     else
-      UFG::qString::Format(string, "%d,%03d", money / 1000, (unsigned int)(v2 % 1000));
+      UFG::qString::Format(string, "%d,%03d", (unsigned int)(money / 1000), (unsigned int)(v2 % 1000));
   }
   else
   {
-    LODWORD(v4[0]) = v2 % 1000;
-    v3 = (signed int)((unsigned __int64)(274877907i64 * (v2 % 1000000)) >> 32) >> 6;
-    UFG::qString::Format(string, "%d,%03d,%03d", money / 1000000, (v3 >> 31) + v3, v4[0]);
+    v4 = v2 % 1000;
+    v3 = (int)((unsigned __int64)(274877907i64 * (v2 % 1000000)) >> 32) >> 6;
+    UFG::qString::Format(string, "%d,%03d,%03d", (unsigned int)(money / 1000000), (v3 >> 31) + v3, v4);
   }
 }
 
@@ -967,51 +918,49 @@ void __fastcall UFG::UI::FormatMoneyStr(int money, UFG::qString *string)
 // RVA: 0x5E7550
 UFG::qString *__fastcall UFG::UI::GetDateString(UFG::qString *result, unsigned __int64 systemTime, bool includeSeconds)
 {
-  UFG::qString *v3; // rbx
-  __int64 v4; // r9
-  __int64 v5; // r8
-  int v6; // er10
+  __int64 mDay; // r9
+  __int64 mMonth; // r8
+  int mYear; // r10d
   const char *v7; // rdx
-  __int64 v9; // [rsp+20h] [rbp-40h]
-  __int64 v10; // [rsp+28h] [rbp-38h]
-  __int64 v11; // [rsp+30h] [rbp-30h]
-  __int64 v12; // [rsp+38h] [rbp-28h]
-  __int64 v13; // [rsp+40h] [rbp-20h]
-  UFG::qDateTime date_time; // [rsp+50h] [rbp-10h]
+  int v9; // [rsp+20h] [rbp-40h]
+  int mHour; // [rsp+28h] [rbp-38h]
+  int mMinute; // [rsp+30h] [rbp-30h]
+  int mSecond; // [rsp+38h] [rbp-28h]
+  int v13; // [rsp+40h] [rbp-20h]
+  UFG::qDateTime date_time; // [rsp+50h] [rbp-10h] BYREF
 
-  v3 = result;
   UFG::qConvertSystemTimeToDateTime(&date_time, systemTime);
-  UFG::qString::qString(v3);
-  LODWORD(v13) = 1;
+  UFG::qString::qString(result);
+  v13 = 1;
   switch ( UFG::UIScreenManager::s_instance->m_translator->mLanguage )
   {
-    case 7u:
-      v4 = date_time.mDay;
-      v5 = date_time.mMonth;
+    case eLang_English:
+      mDay = date_time.mDay;
+      mMonth = date_time.mMonth;
       goto LABEL_5;
-    case 0xEu:
-      v6 = date_time.mDay;
-      v4 = date_time.mMonth;
-      v5 = date_time.mYear;
-      LODWORD(v12) = date_time.mSecond;
-      LODWORD(v11) = date_time.mMinute;
-      LODWORD(v10) = date_time.mHour;
+    case eLang_Japanese:
+      mYear = date_time.mDay;
+      mDay = date_time.mMonth;
+      mMonth = date_time.mYear;
+      mSecond = date_time.mSecond;
+      mMinute = date_time.mMinute;
+      mHour = date_time.mHour;
       v7 = "%04d/%02d/%02d %02d:%02d:%02d";
       break;
     default:
-      v4 = date_time.mMonth;
-      v5 = date_time.mDay;
+      mDay = date_time.mMonth;
+      mMonth = date_time.mDay;
 LABEL_5:
-      LODWORD(v12) = date_time.mSecond;
-      LODWORD(v11) = date_time.mMinute;
-      LODWORD(v10) = date_time.mHour;
-      v6 = date_time.mYear;
+      mSecond = date_time.mSecond;
+      mMinute = date_time.mMinute;
+      mHour = date_time.mHour;
+      mYear = date_time.mYear;
       v7 = "%02d/%02d/%04d %02d:%02d:%02d";
       break;
   }
-  LODWORD(v9) = v6;
-  UFG::qString::Format(v3, v7, v5, v4, v9, v10, v11, v12, v13, -2i64);
-  return v3;
+  v9 = mYear;
+  UFG::qString::Format(result, v7, mMonth, mDay, v9, mHour, mMinute, mSecond, v13, -2i64);
+  return result;
 }
 
 // File Line: 1244
@@ -1020,9 +969,7 @@ void __fastcall UFG::UI::HandleGameCheckpointRestore(UFG::UI *this)
 {
   if ( UFG::UIHKPlayerObjectiveManager::mInstance )
     *(_WORD *)&UFG::UIHKPlayerObjectiveManager::mInstance->mWorldMapObjective_IsSet = 0;
-  UFG::UIScreenManagerBase::queuePopOverlay(
-    (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-    "OpeningCredits");
+  UFG::UIScreenManagerBase::queuePopOverlay(UFG::UIScreenManager::s_instance, "OpeningCredits");
   UFG::UIHKScreenHud::ResetWidgets();
 }
 
@@ -1045,8 +992,8 @@ void __fastcall UFG::UI::StartPauseVFX(unsigned int hashID)
 // RVA: 0x612670
 void __fastcall UFG::UI::StopPauseVFX(bool fade)
 {
-  if ( --gPauseVFXLock < 1 )
-    JUMPOUT(gPauseVFXEnable, 0, UFG::RenderWorld::FrontEndPauseEffect_End);
+  if ( --gPauseVFXLock < 1 && gPauseVFXEnable )
+    UFG::RenderWorld::FrontEndPauseEffect_End(fade);
 }
 
 // File Line: 1303
@@ -1055,7 +1002,7 @@ bool __fastcall UFG::UI::InGameIntroChapter()
 {
   UFG::ProgressionTracker *v0; // rax
   UFG::qBaseTreeRB *v1; // rax
-  UFG::qSymbol result; // [rsp+30h] [rbp+8h]
+  UFG::qSymbol result; // [rsp+30h] [rbp+8h] BYREF
 
   UFG::qSymbol::create_from_string(&result, "M_NMC");
   v0 = UFG::ProgressionTracker::Instance();
@@ -1067,7 +1014,7 @@ bool __fastcall UFG::UI::InGameIntroChapter()
 
 // File Line: 1330
 // RVA: 0x5ED510
-bool __fastcall UFG::UI::InMinigame()
+_BOOL8 __fastcall UFG::UI::InMinigame()
 {
   return UFG::UIHKMinigameScreen::mNumMinigameScreens != 0;
 }
@@ -1076,88 +1023,83 @@ bool __fastcall UFG::UI::InMinigame()
 // RVA: 0x5D6670
 void __fastcall UFG::UI::DisplayChangeCallback(Render::RenderOutputParams *settings)
 {
-  Render::RenderOutputParams *v1; // rbx
-  UFG::UIScreen *v2; // rax
-  bool v3; // cl
+  UFG::UIScreen *Screen; // rax
+  bool mEnableFullscreen; // cl
 
-  v1 = settings;
   if ( UFG::UIScreenManager::s_instance )
   {
-    v2 = UFG::UIScreenManagerBase::getScreen(
-           (UFG::UIScreenManagerBase *)&UFG::UIScreenManager::s_instance->vfptr,
-           "Options");
-    if ( v2 )
+    Screen = UFG::UIScreenManagerBase::getScreen(UFG::UIScreenManager::s_instance, "Options");
+    if ( Screen )
     {
-      v3 = v1->mEnableFullscreen;
-      v2[11].m_screenName[56] = 1;
-      v2[13].m_screenName[8] = v3;
+      mEnableFullscreen = settings->mEnableFullscreen;
+      Screen[11].m_screenName[56] = 1;
+      Screen[13].m_screenName[8] = mEnableFullscreen;
     }
   }
 }
 
 // File Line: 1366
 // RVA: 0x5E7340
-UFG::qPropertySet *__fastcall UFG::UI::GetDLCPropertyNode(const char *rootName, const char *listName, const char *nodeName, UFG::qSymbol *nodeCompare)
+UFG::qPropertySet *__fastcall UFG::UI::GetDLCPropertyNode(
+        const char *rootName,
+        const char *listName,
+        const char *nodeName,
+        UFG::qSymbol *nodeCompare)
 {
-  UFG::qSymbol *v4; // r14
-  const char *v5; // rbx
   UFG::qSymbol *v6; // rax
-  UFG::qPropertySet *v7; // rax
+  UFG::qPropertySet *PropertySet; // rax
   UFG::qPropertySet *v8; // rax
-  char *v9; // rax
+  char *MemImagePtr; // rax
   char *v10; // rcx
   __int64 v11; // rax
   UFG::qPropertyList *v12; // rbp
-  unsigned int v13; // esi
+  unsigned int mNumElements; // esi
   unsigned int v14; // edi
-  char *v15; // rax
+  char *ValuePtr; // rax
   UFG::qPropertySet *v16; // rbx
   UFG::qSymbol *v17; // rax
   UFG::qSymbol *v18; // rdx
-  UFG::qSymbol name; // [rsp+20h] [rbp-28h]
-  UFG::qSymbol result; // [rsp+24h] [rbp-24h]
+  UFG::qArray<unsigned long,0> name; // [rsp+20h] [rbp-28h] BYREF
 
-  v4 = nodeCompare;
-  v5 = nodeName;
-  v6 = UFG::qSymbol::create_from_string(&result, rootName);
-  v7 = UFG::PropertySetManager::FindPropertySet(v6);
-  if ( !v7 )
+  v6 = UFG::qSymbol::create_from_string((UFG::qSymbol *)&name.capacity, rootName);
+  PropertySet = UFG::PropertySetManager::FindPropertySet(v6);
+  if ( !PropertySet )
     return 0i64;
   v8 = UFG::qPropertySet::Get<UFG::qPropertySet>(
-         v7,
-         (UFG::qSymbol *)&schema_classlist::sPropertyName.mUID,
+         PropertySet,
+         (UFG::qArray<unsigned long,0> *)&schema_classlist::sPropertyName,
          DEPTH_RECURSE);
   if ( !v8 )
     return 0i64;
-  v9 = UFG::qPropertySet::GetMemImagePtr(v8);
-  v10 = v9;
-  if ( !v9 )
+  MemImagePtr = UFG::qPropertySet::GetMemImagePtr(v8);
+  v10 = MemImagePtr;
+  if ( !MemImagePtr )
     return 0i64;
-  v11 = *((_QWORD *)v9 + 1);
+  v11 = *((_QWORD *)MemImagePtr + 1);
   if ( !v11 )
     return 0i64;
   v12 = (UFG::qPropertyList *)&v10[v11 + 8];
   if ( !v12 )
     return 0i64;
-  UFG::qSymbol::create_from_string(&name, v5);
-  v13 = v12->mNumElements;
+  UFG::qSymbol::create_from_string((UFG::qSymbol *)&name, nodeName);
+  mNumElements = v12->mNumElements;
   v14 = 0;
-  if ( !v13 )
+  if ( !mNumElements )
     return 0i64;
   while ( 1 )
   {
-    v15 = UFG::qPropertyList::GetValuePtr(v12, 0x1Au, v14);
-    if ( v15 && *(_QWORD *)v15 )
-      v16 = (UFG::qPropertySet *)&v15[*(_QWORD *)v15];
+    ValuePtr = UFG::qPropertyList::GetValuePtr(v12, 0x1Au, v14);
+    if ( ValuePtr && *(_QWORD *)ValuePtr )
+      v16 = (UFG::qPropertySet *)&ValuePtr[*(_QWORD *)ValuePtr];
     else
       v16 = 0i64;
     v17 = UFG::qPropertySet::Get<UFG::qSymbol>(v16, &name, DEPTH_RECURSE);
     v18 = &UFG::gNullQSymbol;
     if ( v17 )
       v18 = v17;
-    if ( v18->mUID == v4->mUID )
+    if ( v18->mUID == nodeCompare->mUID )
       break;
-    if ( ++v14 >= v13 )
+    if ( ++v14 >= mNumElements )
       return 0i64;
   }
   return v16;
@@ -1167,15 +1109,11 @@ UFG::qPropertySet *__fastcall UFG::UI::GetDLCPropertyNode(const char *rootName, 
 // RVA: 0x5E7480
 UFG::qPropertySet *__fastcall UFG::UI::GetDLCPropertyNode(const char *rootName, const char *listName)
 {
-  const char *v2; // rbx
-  const char *v3; // rdi
   UFG::ProgressionTracker *v4; // rax
-  UFG::qSymbol *v5; // rax
+  UFG::qSymbol *ActiveFlow; // rax
 
-  v2 = listName;
-  v3 = rootName;
   v4 = UFG::ProgressionTracker::Instance();
-  v5 = UFG::ProgressionTracker::GetActiveFlow(v4);
-  return UFG::UI::GetDLCPropertyNode(v3, v2, "DLC", v5);
+  ActiveFlow = UFG::ProgressionTracker::GetActiveFlow(v4);
+  return UFG::UI::GetDLCPropertyNode(rootName, listName, "DLC", ActiveFlow);
 }
 

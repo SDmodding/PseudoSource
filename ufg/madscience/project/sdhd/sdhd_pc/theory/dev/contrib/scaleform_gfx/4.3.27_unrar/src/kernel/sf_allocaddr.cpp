@@ -9,6 +9,7 @@ void __fastcall Scaleform::AllocAddr::AllocAddr(Scaleform::AllocAddr *this, Scal
 
 // File Line: 42
 // RVA: 0x948CF0
+// attributes: thunk
 void __fastcall Scaleform::AllocAddr::~AllocAddr(Scaleform::AllocAddr *this)
 {
   Scaleform::AllocAddr::destroyAll(this);
@@ -16,24 +17,24 @@ void __fastcall Scaleform::AllocAddr::~AllocAddr(Scaleform::AllocAddr *this)
 
 // File Line: 48
 // RVA: 0x9E9660
-void __fastcall Scaleform::linearizeTree(Scaleform::AllocAddrNode *root, Scaleform::List<Scaleform::AllocAddrNode,Scaleform::AllocAddrNode> *nodes)
+void __fastcall Scaleform::linearizeTree(
+        Scaleform::AllocAddrNode *root,
+        Scaleform::List<Scaleform::AllocAddrNode,Scaleform::AllocAddrNode> *nodes)
 {
-  Scaleform::List<Scaleform::AllocAddrNode,Scaleform::AllocAddrNode> *v2; // rdi
   Scaleform::AllocAddrNode *v3; // rbx
-  Scaleform::AllocAddrNode *v4; // rax
+  Scaleform::AllocAddrNode *pPrev; // rax
 
   if ( root )
   {
-    v2 = nodes;
     v3 = root;
     do
     {
-      Scaleform::linearizeTree(v3->AddrChild[0], v2);
-      v4 = v2->Root.pPrev;
-      v3->pNext = (Scaleform::AllocAddrNode *)v2;
-      v3->pPrev = v4;
-      v2->Root.pPrev->pNext = v3;
-      v2->Root.pPrev = v3;
+      Scaleform::linearizeTree(v3->AddrChild[0], nodes);
+      pPrev = nodes->Root.pPrev;
+      v3->pNext = (Scaleform::AllocAddrNode *)nodes;
+      v3->pPrev = pPrev;
+      nodes->Root.pPrev->pNext = v3;
+      nodes->Root.pPrev = v3;
       v3 = v3->AddrChild[1];
     }
     while ( v3 );
@@ -44,37 +45,35 @@ void __fastcall Scaleform::linearizeTree(Scaleform::AllocAddrNode *root, Scalefo
 // RVA: 0x9DF7A0
 void __fastcall Scaleform::AllocAddr::destroyAll(Scaleform::AllocAddr *this)
 {
-  Scaleform::AllocAddrNode *v1; // r9
-  Scaleform::AllocAddr *v2; // rbx
-  Scaleform::List<Scaleform::AllocAddrNode,Scaleform::AllocAddrNode> *v3; // rax
+  Scaleform::AllocAddrNode *Root; // r9
+  Scaleform::List<Scaleform::AllocAddrNode,Scaleform::AllocAddrNode> *p_nodes; // rax
   Scaleform::AllocAddrNode *v4; // r9
-  Scaleform::List<Scaleform::AllocAddrNode,Scaleform::AllocAddrNode> nodes; // [rsp+20h] [rbp-18h]
+  Scaleform::List<Scaleform::AllocAddrNode,Scaleform::AllocAddrNode> nodes; // [rsp+20h] [rbp-18h] BYREF
 
-  v1 = this->AddrTree.Root;
-  v2 = this;
+  Root = this->AddrTree.Root;
   nodes.Root.pPrev = (Scaleform::AllocAddrNode *)&nodes;
-  v3 = &nodes;
+  p_nodes = &nodes;
   nodes.Root.pNext = (Scaleform::AllocAddrNode *)&nodes;
-  if ( v1 )
+  if ( Root )
   {
-    Scaleform::linearizeTree(v1->AddrChild[0], &nodes);
+    Scaleform::linearizeTree(Root->AddrChild[0], &nodes);
     v4->pPrev = nodes.Root.pPrev;
     v4->pNext = (Scaleform::AllocAddrNode *)&nodes;
     nodes.Root.pPrev->pNext = v4;
     nodes.Root.pPrev = v4;
     Scaleform::linearizeTree(v4->AddrChild[1], &nodes);
-    v3 = (Scaleform::List<Scaleform::AllocAddrNode,Scaleform::AllocAddrNode> *)nodes.Root.pNext;
+    p_nodes = (Scaleform::List<Scaleform::AllocAddrNode,Scaleform::AllocAddrNode> *)nodes.Root.pNext;
   }
-  v2->AddrTree.Root = 0i64;
-  v2->SizeTree.Tree.Root = 0i64;
-  if ( v3 != &nodes )
+  this->AddrTree.Root = 0i64;
+  this->SizeTree.Tree.Root = 0i64;
+  if ( p_nodes != &nodes )
   {
     do
     {
-      v3->Root.pPrev->pNext = v3->Root.pNext;
-      v3->Root.pNext->pPrev = v3->Root.pPrev;
-      v2->pNodeHeap->vfptr->Free(v2->pNodeHeap, v3);
-      v3 = (Scaleform::List<Scaleform::AllocAddrNode,Scaleform::AllocAddrNode> *)nodes.Root.pNext;
+      p_nodes->Root.pPrev->pNext = p_nodes->Root.pNext;
+      p_nodes->Root.pNext->pPrev = p_nodes->Root.pPrev;
+      this->pNodeHeap->vfptr->Free(this->pNodeHeap, p_nodes);
+      p_nodes = (Scaleform::List<Scaleform::AllocAddrNode,Scaleform::AllocAddrNode> *)nodes.Root.pNext;
     }
     while ( (Scaleform::List<Scaleform::AllocAddrNode,Scaleform::AllocAddrNode> *)nodes.Root.pNext != &nodes );
   }
@@ -82,80 +81,77 @@ void __fastcall Scaleform::AllocAddr::destroyAll(Scaleform::AllocAddr *this)
 
 // File Line: 75
 // RVA: 0x9EE740
-void __fastcall Scaleform::AllocAddr::pushNode(Scaleform::AllocAddr *this, Scaleform::AllocAddrNode *node, unsigned __int64 addr, unsigned __int64 size)
+void __fastcall Scaleform::AllocAddr::pushNode(
+        Scaleform::AllocAddr *this,
+        Scaleform::AllocAddrNode *node,
+        unsigned __int64 addr,
+        unsigned __int64 size)
 {
-  Scaleform::AllocAddr *v4; // rbx
-  Scaleform::AllocAddrNode *v5; // rdi
-  Scaleform::RadixTree<Scaleform::AllocAddrNode,Scaleform::AllocAddr::AddrAccessor> *v6; // rax
+  Scaleform::AllocAddrNode *p_AddrTree; // rax
   unsigned __int64 v7; // r9
-  Scaleform::AllocAddrNode *v8; // rax
+  Scaleform::AllocAddrNode *pPrev; // rax
   unsigned __int64 v9; // rdx
   unsigned __int64 v10; // rcx
-  signed __int64 v11; // r8
+  Scaleform::AllocAddrNode **v11; // r8
   Scaleform::AllocAddrNode *v12; // rcx
 
-  v4 = this;
-  v5 = node;
   node->Addr = addr;
   node->Size = size;
   Scaleform::RadixTreeMulti<Scaleform::AllocAddrNode,Scaleform::AllocAddr::SizeAccessor>::Insert(&this->SizeTree, node);
-  v6 = &v4->AddrTree;
-  v5->AddrChild[1] = 0i64;
-  v5->AddrChild[0] = 0i64;
-  v5->AddrParent = 0i64;
-  if ( v4->AddrTree.Root )
+  p_AddrTree = (Scaleform::AllocAddrNode *)&this->AddrTree;
+  node->AddrChild[1] = 0i64;
+  node->AddrChild[0] = 0i64;
+  node->AddrParent = 0i64;
+  if ( this->AddrTree.Root )
   {
-    v7 = v5->Addr;
-    v8 = v6->Root;
+    v7 = node->Addr;
+    pPrev = p_AddrTree->pPrev;
     v9 = v7;
-    if ( v8->Addr != v7 )
+    if ( pPrev->Addr != v7 )
     {
       while ( 1 )
       {
         v10 = v9;
         v9 *= 2i64;
-        v10 >>= 63;
-        v11 = (signed __int64)v8 + 8 * v10;
-        v12 = v8->AddrChild[v10];
+        v11 = &pPrev->pPrev + (v10 >> 63);
+        v12 = v11[3];
         if ( !v12 )
           break;
-        v8 = v12;
+        pPrev = v11[3];
         if ( v12->Addr == v7 )
           return;
       }
-      *(_QWORD *)(v11 + 24) = v5;
-      v5->AddrParent = v8;
+      v11[3] = node;
+      node->AddrParent = pPrev;
     }
   }
   else
   {
-    v6->Root = v5;
-    v5->AddrParent = (Scaleform::AllocAddrNode *)v6;
+    p_AddrTree->pPrev = node;
+    node->AddrParent = p_AddrTree;
   }
 }
 
 // File Line: 105
 // RVA: 0x9F31F0
-void __fastcall Scaleform::AllocAddr::splitNode(Scaleform::AllocAddr *this, Scaleform::AllocAddrNode *node, unsigned __int64 addr, unsigned __int64 size)
+void __fastcall Scaleform::AllocAddr::splitNode(
+        Scaleform::AllocAddr *this,
+        Scaleform::AllocAddrNode *node,
+        unsigned __int64 addr,
+        unsigned __int64 size)
 {
-  unsigned __int64 v4; // rsi
   unsigned __int64 v5; // r8
-  unsigned __int64 v6; // rbp
-  Scaleform::AllocAddr *v7; // rdi
   unsigned __int64 v8; // rbx
   unsigned __int64 v9; // r9
   Scaleform::AllocAddrNode *v10; // rax
 
-  v4 = addr;
   v5 = node->Addr;
-  v6 = size;
-  v7 = this;
-  v8 = v5 + node->Size - v4 - size;
-  v9 = v4 - v5;
-  if ( v4 == v5 )
+  v8 = v5 + node->Size - addr - size;
+  v9 = addr - v5;
+  if ( addr == v5 )
   {
     if ( v8 )
-      Scaleform::AllocAddr::pushNode(this, node, v4 + v6, v8);
+      Scaleform::AllocAddr::pushNode(this, node, addr + size, v8);
     else
       ((void (__fastcall *)(Scaleform::MemoryHeap *, Scaleform::AllocAddrNode *, unsigned __int64, unsigned __int64))this->pNodeHeap->vfptr->Free)(
         this->pNodeHeap,
@@ -168,60 +164,58 @@ void __fastcall Scaleform::AllocAddr::splitNode(Scaleform::AllocAddr *this, Scal
     Scaleform::AllocAddr::pushNode(this, node, v5, v9);
     if ( v8 )
     {
-      v10 = (Scaleform::AllocAddrNode *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))v7->pNodeHeap->vfptr->Alloc)(
-                                          v7->pNodeHeap,
+      v10 = (Scaleform::AllocAddrNode *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))this->pNodeHeap->vfptr->Alloc)(
+                                          this->pNodeHeap,
                                           80i64);
-      Scaleform::AllocAddr::pushNode(v7, v10, v4 + v6, v8);
+      Scaleform::AllocAddr::pushNode(this, v10, addr + size, v8);
     }
   }
 }
 
 // File Line: 131
 // RVA: 0x9E9850
-unsigned __int64 __fastcall Scaleform::AllocAddr::mergeNodes(Scaleform::AllocAddr *this, Scaleform::AllocAddrNode *prev, Scaleform::AllocAddrNode *next, unsigned __int64 addr, unsigned __int64 size)
+unsigned __int64 __fastcall Scaleform::AllocAddr::mergeNodes(
+        Scaleform::AllocAddr *this,
+        Scaleform::AllocAddrNode *prev,
+        Scaleform::AllocAddrNode *next,
+        unsigned __int64 addr,
+        unsigned __int64 size)
 {
-  unsigned __int64 v5; // rdi
-  Scaleform::AllocAddrNode *v6; // rbp
-  Scaleform::AllocAddrNode *v7; // r15
-  Scaleform::AllocAddr *v8; // r14
-  Scaleform::RadixTreeMulti<Scaleform::AllocAddrNode,Scaleform::AllocAddr::SizeAccessor> *v9; // rcx
+  Scaleform::RadixTreeMulti<Scaleform::AllocAddrNode,Scaleform::AllocAddr::SizeAccessor> *p_SizeTree; // rcx
   unsigned __int64 v10; // rsi
-  unsigned __int64 result; // rax
   unsigned __int64 v12; // rbx
   unsigned __int64 v13; // rbx
   Scaleform::AllocAddrNode *v14; // rax
 
-  v5 = addr;
-  v6 = next;
-  v7 = prev;
-  v8 = this;
   if ( prev )
   {
-    v9 = &this->SizeTree;
+    p_SizeTree = &this->SizeTree;
     if ( next )
     {
       v10 = size + next->Size + prev->Size;
-      Scaleform::RadixTreeMulti<Scaleform::AllocAddrNode,Scaleform::AllocAddr::SizeAccessor>::Remove(v9, prev);
+      Scaleform::RadixTreeMulti<Scaleform::AllocAddrNode,Scaleform::AllocAddr::SizeAccessor>::Remove(p_SizeTree, prev);
       Scaleform::RadixTree<Scaleform::AllocAddrNode,Scaleform::AllocAddr::AddrAccessor>::Remove(
-        (Scaleform::RadixTree<Scaleform::HeapPT::DualTNode,Scaleform::HeapPT::AllocLite::SizeAccessor> *)&v8->AddrTree,
-        (Scaleform::HeapPT::DualTNode *)v7);
-      Scaleform::RadixTreeMulti<Scaleform::AllocAddrNode,Scaleform::AllocAddr::SizeAccessor>::Remove(&v8->SizeTree, v6);
+        (Scaleform::RadixTree<Scaleform::HeapPT::DualTNode,Scaleform::HeapPT::AllocLite::SizeAccessor> *)&this->AddrTree,
+        (Scaleform::HeapPT::DualTNode *)prev);
+      Scaleform::RadixTreeMulti<Scaleform::AllocAddrNode,Scaleform::AllocAddr::SizeAccessor>::Remove(
+        &this->SizeTree,
+        next);
       Scaleform::RadixTree<Scaleform::AllocAddrNode,Scaleform::AllocAddr::AddrAccessor>::Remove(
-        (Scaleform::RadixTree<Scaleform::HeapPT::DualTNode,Scaleform::HeapPT::AllocLite::SizeAccessor> *)&v8->AddrTree,
-        (Scaleform::HeapPT::DualTNode *)v6);
-      Scaleform::AllocAddr::pushNode(v8, v7, v7->Addr, v10);
-      v8->pNodeHeap->vfptr->Free(v8->pNodeHeap, v6);
-      result = v10;
+        (Scaleform::RadixTree<Scaleform::HeapPT::DualTNode,Scaleform::HeapPT::AllocLite::SizeAccessor> *)&this->AddrTree,
+        (Scaleform::HeapPT::DualTNode *)next);
+      Scaleform::AllocAddr::pushNode(this, prev, prev->Addr, v10);
+      this->pNodeHeap->vfptr->Free(this->pNodeHeap, next);
+      return v10;
     }
     else
     {
       v12 = prev->Size + size;
-      Scaleform::RadixTreeMulti<Scaleform::AllocAddrNode,Scaleform::AllocAddr::SizeAccessor>::Remove(v9, prev);
+      Scaleform::RadixTreeMulti<Scaleform::AllocAddrNode,Scaleform::AllocAddr::SizeAccessor>::Remove(p_SizeTree, prev);
       Scaleform::RadixTree<Scaleform::AllocAddrNode,Scaleform::AllocAddr::AddrAccessor>::Remove(
-        (Scaleform::RadixTree<Scaleform::HeapPT::DualTNode,Scaleform::HeapPT::AllocLite::SizeAccessor> *)&v8->AddrTree,
-        (Scaleform::HeapPT::DualTNode *)v7);
-      Scaleform::AllocAddr::pushNode(v8, v7, v7->Addr, v12);
-      result = v12;
+        (Scaleform::RadixTree<Scaleform::HeapPT::DualTNode,Scaleform::HeapPT::AllocLite::SizeAccessor> *)&this->AddrTree,
+        (Scaleform::HeapPT::DualTNode *)prev);
+      Scaleform::AllocAddr::pushNode(this, prev, prev->Addr, v12);
+      return v12;
     }
   }
   else if ( next )
@@ -231,127 +225,116 @@ unsigned __int64 __fastcall Scaleform::AllocAddr::mergeNodes(Scaleform::AllocAdd
       &this->SizeTree,
       next);
     Scaleform::RadixTree<Scaleform::AllocAddrNode,Scaleform::AllocAddr::AddrAccessor>::Remove(
-      (Scaleform::RadixTree<Scaleform::HeapPT::DualTNode,Scaleform::HeapPT::AllocLite::SizeAccessor> *)&v8->AddrTree,
-      (Scaleform::HeapPT::DualTNode *)v6);
-    Scaleform::AllocAddr::pushNode(v8, v6, v5, v13);
-    result = v13;
+      (Scaleform::RadixTree<Scaleform::HeapPT::DualTNode,Scaleform::HeapPT::AllocLite::SizeAccessor> *)&this->AddrTree,
+      (Scaleform::HeapPT::DualTNode *)next);
+    Scaleform::AllocAddr::pushNode(this, next, addr, v13);
+    return v13;
   }
   else
   {
-    v14 = (Scaleform::AllocAddrNode *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, signed __int64))this->pNodeHeap->vfptr->Alloc)(
+    v14 = (Scaleform::AllocAddrNode *)((__int64 (__fastcall *)(Scaleform::MemoryHeap *, __int64))this->pNodeHeap->vfptr->Alloc)(
                                         this->pNodeHeap,
                                         80i64);
-    Scaleform::AllocAddr::pushNode(v8, v14, v5, size);
-    result = size;
+    Scaleform::AllocAddr::pushNode(this, v14, addr, size);
+    return size;
   }
-  return result;
 }
 
 // File Line: 176
 // RVA: 0x955840
 unsigned __int64 __fastcall Scaleform::AllocAddr::Alloc(Scaleform::AllocAddr *this, unsigned __int64 size)
 {
-  Scaleform::AllocAddr *v2; // rsi
-  unsigned __int64 v3; // rbp
-  Scaleform::AllocAddrNode *v4; // rax
-  Scaleform::AllocAddrNode *v5; // rdi
-  unsigned __int64 v6; // rbx
+  Scaleform::AllocAddrNode *GrEq; // rax
+  Scaleform::AllocAddrNode *pNext; // rdi
+  unsigned __int64 Addr; // rbx
 
-  v2 = this;
-  v3 = size;
-  v4 = Scaleform::RadixTree<Scaleform::AllocAddrNode,Scaleform::AllocAddr::SizeAccessor>::FindGrEq(
-         &this->SizeTree.Tree,
-         size);
-  if ( !v4 )
+  GrEq = Scaleform::RadixTree<Scaleform::AllocAddrNode,Scaleform::AllocAddr::SizeAccessor>::FindGrEq(
+           &this->SizeTree.Tree,
+           size);
+  if ( !GrEq )
     return -1i64;
-  v5 = v4->pNext;
-  Scaleform::RadixTreeMulti<Scaleform::AllocAddrNode,Scaleform::AllocAddr::SizeAccessor>::Remove(
-    &v2->SizeTree,
-    v4->pNext);
-  if ( !v5 )
+  pNext = GrEq->pNext;
+  Scaleform::RadixTreeMulti<Scaleform::AllocAddrNode,Scaleform::AllocAddr::SizeAccessor>::Remove(&this->SizeTree, pNext);
+  if ( !pNext )
     return -1i64;
   Scaleform::RadixTree<Scaleform::AllocAddrNode,Scaleform::AllocAddr::AddrAccessor>::Remove(
-    (Scaleform::RadixTree<Scaleform::HeapPT::DualTNode,Scaleform::HeapPT::AllocLite::SizeAccessor> *)&v2->AddrTree,
-    (Scaleform::HeapPT::DualTNode *)v5);
-  v6 = v5->Addr;
-  Scaleform::AllocAddr::splitNode(v2, v5, v5->Addr, v3);
-  return v6;
+    (Scaleform::RadixTree<Scaleform::HeapPT::DualTNode,Scaleform::HeapPT::AllocLite::SizeAccessor> *)&this->AddrTree,
+    (Scaleform::HeapPT::DualTNode *)pNext);
+  Addr = pNext->Addr;
+  Scaleform::AllocAddr::splitNode(this, pNext, Addr, size);
+  return Addr;
 }
 
 // File Line: 235
 // RVA: 0x97D340
-unsigned __int64 __fastcall Scaleform::AllocAddr::Free(Scaleform::AllocAddr *this, unsigned __int64 addr, unsigned __int64 size)
+unsigned __int64 __fastcall Scaleform::AllocAddr::Free(
+        Scaleform::AllocAddr *this,
+        unsigned __int64 addr,
+        unsigned __int64 size)
 {
-  unsigned __int64 v3; // rbp
-  unsigned __int64 v4; // rsi
-  Scaleform::AllocAddr *v5; // r14
-  unsigned __int64 v7; // r15
-  Scaleform::AllocAddrNode *v8; // rdi
-  Scaleform::AllocAddrNode *v9; // rax
+  __int64 v7; // r15
+  Scaleform::AllocAddrNode *LeEq; // rdi
+  Scaleform::AllocAddrNode *GrEq; // rax
 
-  v3 = size;
-  v4 = addr;
-  v5 = this;
   if ( !size )
     return 0i64;
   v7 = addr + size;
-  v8 = Scaleform::RadixTree<Scaleform::AllocAddrNode,Scaleform::AllocAddr::AddrAccessor>::FindLeEq(
-         &this->AddrTree,
-         addr);
-  v9 = Scaleform::RadixTree<Scaleform::AllocAddrNode,Scaleform::AllocAddr::AddrAccessor>::FindGrEq(
-         &v5->AddrTree,
-         v4 + v3);
-  if ( !v8 || v8->Addr + v8->Size != v4 )
-    v8 = 0i64;
-  if ( !v9 || v9->Addr != v7 )
-    v9 = 0i64;
-  return Scaleform::AllocAddr::mergeNodes(v5, v8, v9, v4, v3);
+  LeEq = Scaleform::RadixTree<Scaleform::AllocAddrNode,Scaleform::AllocAddr::AddrAccessor>::FindLeEq(
+           &this->AddrTree,
+           addr);
+  GrEq = Scaleform::RadixTree<Scaleform::AllocAddrNode,Scaleform::AllocAddr::AddrAccessor>::FindGrEq(
+           &this->AddrTree,
+           addr + size);
+  if ( !LeEq || LeEq->Addr + LeEq->Size != addr )
+    LeEq = 0i64;
+  if ( !GrEq || GrEq->Addr != v7 )
+    GrEq = 0i64;
+  return Scaleform::AllocAddr::mergeNodes(this, LeEq, GrEq, addr, size);
 }
 
 // File Line: 265
 // RVA: 0x954A60
-void __fastcall Scaleform::AllocAddr::AddSegment(Scaleform::AllocAddr *this, unsigned __int64 addr, unsigned __int64 size)
+// attributes: thunk
+void __fastcall Scaleform::AllocAddr::AddSegment(
+        Scaleform::AllocAddr *this,
+        unsigned __int64 addr,
+        unsigned __int64 size)
 {
   Scaleform::AllocAddr::Free(this, addr, size);
 }
 
 // File Line: 271
 // RVA: 0x9AA450
-void __fastcall Scaleform::AllocAddr::RemoveSegment(Scaleform::AllocAddr *this, unsigned __int64 addr, unsigned __int64 size)
+void __fastcall Scaleform::AllocAddr::RemoveSegment(
+        Scaleform::AllocAddr *this,
+        unsigned __int64 addr,
+        unsigned __int64 size)
 {
-  Scaleform::AllocAddr *v3; // r14
-  unsigned __int64 v4; // rsi
-  unsigned __int64 v5; // rbp
-  Scaleform::AllocAddrNode *v6; // rdi
+  Scaleform::AllocAddrNode *LeEq; // rdi
 
-  v3 = this;
-  v4 = size;
-  v5 = addr;
-  v6 = Scaleform::RadixTree<Scaleform::AllocAddrNode,Scaleform::AllocAddr::AddrAccessor>::FindLeEq(
-         &this->AddrTree,
-         addr);
-  Scaleform::RadixTreeMulti<Scaleform::AllocAddrNode,Scaleform::AllocAddr::SizeAccessor>::Remove(&v3->SizeTree, v6);
+  LeEq = Scaleform::RadixTree<Scaleform::AllocAddrNode,Scaleform::AllocAddr::AddrAccessor>::FindLeEq(
+           &this->AddrTree,
+           addr);
+  Scaleform::RadixTreeMulti<Scaleform::AllocAddrNode,Scaleform::AllocAddr::SizeAccessor>::Remove(&this->SizeTree, LeEq);
   Scaleform::RadixTree<Scaleform::AllocAddrNode,Scaleform::AllocAddr::AddrAccessor>::Remove(
-    (Scaleform::RadixTree<Scaleform::HeapPT::DualTNode,Scaleform::HeapPT::AllocLite::SizeAccessor> *)&v3->AddrTree,
-    (Scaleform::HeapPT::DualTNode *)v6);
-  Scaleform::AllocAddr::splitNode(v3, v6, v5, v4);
+    (Scaleform::RadixTree<Scaleform::HeapPT::DualTNode,Scaleform::HeapPT::AllocLite::SizeAccessor> *)&this->AddrTree,
+    (Scaleform::HeapPT::DualTNode *)LeEq);
+  Scaleform::AllocAddr::splitNode(this, LeEq, addr, size);
 }
 
 // File Line: 281
 // RVA: 0x9D5660
 void __fastcall Scaleform::calcTreeSize(Scaleform::AllocAddrNode *node, unsigned __int64 *size)
 {
-  unsigned __int64 *v2; // rdi
   Scaleform::AllocAddrNode *v3; // rbx
 
   if ( node )
   {
-    v2 = size;
     v3 = node;
     do
     {
-      *v2 += v3->Size;
-      Scaleform::calcTreeSize(v3->AddrChild[0], v2);
+      *size += v3->Size;
+      Scaleform::calcTreeSize(v3->AddrChild[0], size);
       v3 = v3->AddrChild[1];
     }
     while ( v3 );
@@ -362,16 +345,16 @@ void __fastcall Scaleform::calcTreeSize(Scaleform::AllocAddrNode *node, unsigned
 // RVA: 0x984D00
 unsigned __int64 __fastcall Scaleform::AllocAddr::GetFreeSize(Scaleform::AllocAddr *this)
 {
-  Scaleform::AllocAddrNode *v1; // r8
+  Scaleform::AllocAddrNode *Root; // r8
   __int64 v2; // r8
-  unsigned __int64 size; // [rsp+30h] [rbp+8h]
+  unsigned __int64 size; // [rsp+30h] [rbp+8h] BYREF
 
-  v1 = this->AddrTree.Root;
+  Root = this->AddrTree.Root;
   size = 0i64;
-  if ( !v1 )
+  if ( !Root )
     return 0i64;
-  size = v1->Size;
-  Scaleform::calcTreeSize(v1->AddrChild[0], &size);
+  size = Root->Size;
+  Scaleform::calcTreeSize(Root->AddrChild[0], &size);
   Scaleform::calcTreeSize(*(Scaleform::AllocAddrNode **)(v2 + 32), &size);
   return size;
 }

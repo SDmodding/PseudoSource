@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkpExtendedMeshShapeSubpartClass__()
     &hkpExtendedMeshShapeSubpart_Default,
     0i64,
     0,
-    3u);
+    3);
 }
 
 // File Line: 144
@@ -69,7 +69,7 @@ void dynamic_initializer_for__hkpExtendedMeshShapeTrianglesSubpartClass__()
     &hkpExtendedMeshShapeTrianglesSubpart_Default,
     0i64,
     0,
-    3u);
+    3);
 }
 
 // File Line: 227
@@ -111,7 +111,7 @@ void dynamic_initializer_for__hkpExtendedMeshShapeShapesSubpartClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 281
@@ -123,16 +123,20 @@ hkClass *__fastcall hkpExtendedMeshShape::ShapesSubpart::staticClass()
 
 // File Line: 288
 // RVA: 0xCEC4F0
-void __fastcall finishLoadedObjecthkpExtendedMeshShapeShapesSubpart(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpExtendedMeshShapeShapesSubpart(
+        hkpExtendedMeshShape::ShapesSubpart *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpExtendedMeshShape::ShapesSubpart::ShapesSubpart);
+  if ( p )
+    hkpExtendedMeshShape::ShapesSubpart::ShapesSubpart(p, finishing);
 }
 
 // File Line: 294
 // RVA: 0xCEC510
-void __fastcall cleanupLoadedObjecthkpExtendedMeshShapeShapesSubpart(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkpExtendedMeshShapeShapesSubpart(hkpExtendedMeshShape::ShapesSubpart *p)
 {
-  hkpExtendedMeshShape::ShapesSubpart::~ShapesSubpart((hkpExtendedMeshShape::ShapesSubpart *)p);
+  hkpExtendedMeshShape::ShapesSubpart::~ShapesSubpart(p);
 }
 
 // File Line: 324
@@ -164,7 +168,7 @@ void dynamic_initializer_for__hkpExtendedMeshShapeClass__()
     &hkpExtendedMeshShape_Default,
     0i64,
     0,
-    4u);
+    4);
 }
 
 // File Line: 370
@@ -176,26 +180,27 @@ hkClass *__fastcall hkpExtendedMeshShape::staticClass()
 
 // File Line: 377
 // RVA: 0xCEC520
-void __fastcall finishLoadedObjecthkpExtendedMeshShape(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpExtendedMeshShape(hkpExtendedMeshShape *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpExtendedMeshShape::hkpExtendedMeshShape);
+  if ( p )
+    hkpExtendedMeshShape::hkpExtendedMeshShape(p, finishing);
 }
 
 // File Line: 383
 // RVA: 0xCEC540
-void __fastcall cleanupLoadedObjecthkpExtendedMeshShape(void *p)
+void __fastcall cleanupLoadedObjecthkpExtendedMeshShape(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 387
 // RVA: 0xCEC550
 hkBaseObjectVtbl *__fastcall getVtablehkpExtendedMeshShape()
 {
-  hkpExtendedMeshShape v1; // [rsp+20h] [rbp-148h]
+  hkpExtendedMeshShape v1; // [rsp+20h] [rbp-148h] BYREF
 
   hkpExtendedMeshShape::hkpExtendedMeshShape(&v1, 0);
-  return v1.vfptr;
+  return v1.hkpShapeCollection::hkpShape::hkpShapeBase::hkcdShape::hkReferencedObject::hkBaseObject::vfptr;
 }
 
 // File Line: 409
@@ -209,8 +214,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpExtendedMeshShapeTypeInfo__()
   hkpExtendedMeshShapeTypeInfo.m_typeName = "hkpExtendedMeshShape";
   hkpExtendedMeshShapeTypeInfo.m_vtable = result;
   hkpExtendedMeshShapeTypeInfo.m_scopedName = "!hkpExtendedMeshShape";
-  hkpExtendedMeshShapeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpExtendedMeshShape;
-  hkpExtendedMeshShapeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpExtendedMeshShape;
+  hkpExtendedMeshShapeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpExtendedMeshShape;
+  hkpExtendedMeshShapeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpExtendedMeshShape;
   return result;
 }
 

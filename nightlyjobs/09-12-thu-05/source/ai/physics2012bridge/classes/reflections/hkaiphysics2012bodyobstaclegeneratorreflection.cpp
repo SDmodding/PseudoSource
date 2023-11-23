@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkaiPhysics2012BodyObstacleGeneratorClass__()
     &hkaiPhysics2012BodyObstacleGenerator_Default,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 80
@@ -28,23 +28,26 @@ hkClass *__fastcall hkaiPhysics2012BodyObstacleGenerator::staticClass()
 
 // File Line: 87
 // RVA: 0xC2E370
-void __fastcall finishLoadedObjecthkaiPhysics2012BodyObstacleGenerator(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiPhysics2012BodyObstacleGenerator(
+        hkaiPhysics2012BodyObstacleGenerator *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiPhysics2012BodyObstacleGenerator::hkaiPhysics2012BodyObstacleGenerator);
+  if ( p )
+    hkaiPhysics2012BodyObstacleGenerator::hkaiPhysics2012BodyObstacleGenerator(p, finishing);
 }
 
 // File Line: 93
 // RVA: 0xC2E390
-void __fastcall cleanupLoadedObjecthkaiPhysics2012BodyObstacleGenerator(void *p)
+void __fastcall cleanupLoadedObjecthkaiPhysics2012BodyObstacleGenerator(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 97
 // RVA: 0xC2E3A0
 hkBaseObjectVtbl *__fastcall getVtablehkaiPhysics2012BodyObstacleGenerator()
 {
-  hkaiPhysics2012BodyObstacleGenerator v1; // [rsp+20h] [rbp-A8h]
+  hkaiPhysics2012BodyObstacleGenerator v1; // [rsp+20h] [rbp-A8h] BYREF
 
   hkaiPhysics2012BodyObstacleGenerator::hkaiPhysics2012BodyObstacleGenerator(&v1, 0);
   return v1.vfptr;
@@ -61,8 +64,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkaiPhysics2012BodyObstacleGeneratorT
   hkaiPhysics2012BodyObstacleGeneratorTypeInfo.m_typeName = "hkaiPhysics2012BodyObstacleGenerator";
   hkaiPhysics2012BodyObstacleGeneratorTypeInfo.m_vtable = result;
   hkaiPhysics2012BodyObstacleGeneratorTypeInfo.m_scopedName = "!hkaiPhysics2012BodyObstacleGenerator";
-  hkaiPhysics2012BodyObstacleGeneratorTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkaiPhysics2012BodyObstacleGenerator;
-  hkaiPhysics2012BodyObstacleGeneratorTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkaiPhysics2012BodyObstacleGenerator;
+  hkaiPhysics2012BodyObstacleGeneratorTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkaiPhysics2012BodyObstacleGenerator;
+  hkaiPhysics2012BodyObstacleGeneratorTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkaiPhysics2012BodyObstacleGenerator;
   return result;
 }
 

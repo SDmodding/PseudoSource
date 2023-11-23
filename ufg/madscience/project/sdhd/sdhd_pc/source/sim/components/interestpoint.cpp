@@ -4,13 +4,13 @@ signed __int64 __fastcall `anonymous namespace::GetActionMostUsedIndex_Interacti
 {
   signed __int64 result; // rax
 
-  if ( _S10_11 & 1 )
+  if ( (_S10_11 & 1) != 0 )
     return index_2;
   _S10_11 |= 1u;
-  if ( !(_S9_16 & 1) )
+  if ( (_S9_16 & 1) == 0 )
   {
     _S9_16 |= 1u;
-    node_id.mUID = UFG::qStringHashUpper32("Interactions", 0xFFFFFFFF);
+    node_id.mUID = UFG::qStringHashUpper32("Interactions", -1);
   }
   result = GetMostUsedIndex(node_id.mUID);
   index_2 = result;
@@ -36,7 +36,7 @@ __int64 dynamic_initializer_for__UFG::InterestPoint::_TypeIDesc__()
 // RVA: 0x154D850
 __int64 dynamic_initializer_for__UFG::InterestPoint::msLastUsedType__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::InterestPoint::msLastUsedType__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::InterestPoint::msLastUsedType__);
 }
 
 // File Line: 128
@@ -44,7 +44,7 @@ __int64 dynamic_initializer_for__UFG::InterestPoint::msLastUsedType__()
 __int64 dynamic_initializer_for__UFG::InterestPoint::mspCharacterToShowPOIsFor__()
 {
   UFG::InterestPoint::mspCharacterToShowPOIsFor.m_pPointer = 0i64;
-  return atexit(dynamic_atexit_destructor_for__UFG::InterestPoint::mspCharacterToShowPOIsFor__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::InterestPoint::mspCharacterToShowPOIsFor__);
 }
 
 // File Line: 130
@@ -52,7 +52,7 @@ __int64 dynamic_initializer_for__UFG::InterestPoint::mspCharacterToShowPOIsFor__
 __int64 dynamic_initializer_for__UFG::InterestPoint::msLookInterestPoints__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::InterestPoint::msLookInterestPoints.mTree);
-  return atexit(dynamic_atexit_destructor_for__UFG::InterestPoint::msLookInterestPoints__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::InterestPoint::msLookInterestPoints__);
 }
 
 // File Line: 131
@@ -60,14 +60,14 @@ __int64 dynamic_initializer_for__UFG::InterestPoint::msLookInterestPoints__()
 __int64 dynamic_initializer_for__UFG::InterestPoint::msUseInterestPoints__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::InterestPoint::msUseInterestPoints.mTree);
-  return atexit(dynamic_atexit_destructor_for__UFG::InterestPoint::msUseInterestPoints__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::InterestPoint::msUseInterestPoints__);
 }
 
 // File Line: 133
 // RVA: 0x154D7A0
 __int64 dynamic_initializer_for__UFG::InterestPoint::msCellNotLoadedCanPathList__()
 {
-  return atexit(dynamic_atexit_destructor_for__UFG::InterestPoint::msCellNotLoadedCanPathList__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::InterestPoint::msCellNotLoadedCanPathList__);
 }
 
 // File Line: 138
@@ -83,12 +83,12 @@ __int64 dynamic_initializer_for__UFG::InterestPoint::msAIHintColour__()
 __int64 dynamic_initializer_for__UFG::InterestPoint::msInterestPointTypePool__()
 {
   `eh vector constructor iterator(
-    UFG::InterestPoint::msInterestPointTypePool.p,
+    (char *)UFG::InterestPoint::msInterestPointTypePool.p,
     0xA8ui64,
     500,
     (void (__fastcall *)(void *))UFG::InterestPointType::InterestPointType);
   UFG::InterestPoint::msInterestPointTypePool.size = 0;
-  return atexit(dynamic_atexit_destructor_for__UFG::InterestPoint::msInterestPointTypePool__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::InterestPoint::msInterestPointTypePool__);
 }
 
 // File Line: 141
@@ -96,7 +96,7 @@ __int64 dynamic_initializer_for__UFG::InterestPoint::msInterestPointTypePool__()
 __int64 dynamic_initializer_for__UFG::InterestPoint::msInterestPointTypeTree__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::InterestPoint::msInterestPointTypeTree.mTree);
-  return atexit(dynamic_atexit_destructor_for__UFG::InterestPoint::msInterestPointTypeTree__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__UFG::InterestPoint::msInterestPointTypeTree__);
 }
 
 // File Line: 277
@@ -106,7 +106,7 @@ void __fastcall UFG::InterestPointProperties::InterestPointProperties(UFG::Inter
   this->mNode.mParent = 0i64;
   this->mNode.mChild[0] = 0i64;
   this->mNode.mChild[1] = 0i64;
-  this->mPriority = 0;
+  this->mPriority = InterestPointPriority_None;
   this->mStartActive = 0;
   *(_QWORD *)&this->mAppeal = 0i64;
   this->mMinAppealRadius = 0.0;
@@ -135,83 +135,76 @@ void __fastcall UFG::InterestPointProperties::InterestPointProperties(UFG::Inter
 // RVA: 0x582860
 UFG::qVector3 *__fastcall UFG::InterestPoint::GetPosition(UFG::InterestPoint *this)
 {
-  UFG::InterestPoint *v1; // rdi
-  UFG::TransformNodeComponent *v2; // rbx
-  float v3; // xmm0_4
-  float v4; // xmm1_4
+  UFG::TransformNodeComponent *mpXformNode; // rbx
+  float y; // xmm0_4
+  float z; // xmm1_4
   UFG::qVector3 *result; // rax
 
-  v1 = this;
   if ( this->mIsPositionCached )
     return &this->mCachedPosition;
-  v2 = this->mpXformNode;
-  UFG::TransformNodeComponent::UpdateWorldTransform(this->mpXformNode);
-  v3 = v2->mWorldTransform.v3.y;
-  v4 = v2->mWorldTransform.v3.z;
-  v1->mCachedPosition.x = v2->mWorldTransform.v3.x;
-  result = &v1->mCachedPosition;
-  v1->mCachedPosition.y = v3;
-  v1->mCachedPosition.z = v4;
-  v1->mIsPositionCached = 1;
+  mpXformNode = this->mpXformNode;
+  UFG::TransformNodeComponent::UpdateWorldTransform(mpXformNode);
+  y = mpXformNode->mWorldTransform.v3.y;
+  z = mpXformNode->mWorldTransform.v3.z;
+  this->mCachedPosition.x = mpXformNode->mWorldTransform.v3.x;
+  result = &this->mCachedPosition;
+  this->mCachedPosition.y = y;
+  this->mCachedPosition.z = z;
+  this->mIsPositionCached = 1;
   return result;
 }
 
 // File Line: 297
 // RVA: 0x5856B0
-void __fastcall UFG::InterestPointProperties::Load(UFG::InterestPointProperties *this, UFG::qPropertySet *pProps, component_InterestPoint *interest_point_data)
+void __fastcall UFG::InterestPointProperties::Load(
+        UFG::InterestPointProperties *this,
+        UFG::qPropertySet *pProps,
+        component_InterestPoint *interest_point_data)
 {
-  UFG::qPropertySet *v3; // rsi
-  component_InterestPoint *v4; // rdi
-  UFG::InterestPointProperties *v5; // rbp
   UFG::qPropertySet *v6; // rax
-  schema_classlist *v7; // rbx
+  schema_classlist *MemImagePtr; // rbx
 
-  v3 = pProps;
-  v4 = interest_point_data;
-  v5 = this;
   v6 = UFG::qPropertySet::Get<UFG::qPropertySet>(
          pProps,
-         (UFG::qSymbol *)&schema_classlist::sPropertyName.mUID,
+         (UFG::qArray<unsigned long,0> *)&schema_classlist::sPropertyName,
          DEPTH_RECURSE);
   if ( v6 )
-    v7 = (schema_classlist *)UFG::qPropertySet::GetMemImagePtr(v6);
+    MemImagePtr = (schema_classlist *)UFG::qPropertySet::GetMemImagePtr(v6);
   else
-    v7 = 0i64;
-  UFG::InterestPointProperties::LoadCommonProperties(v5, v3, v4, v7);
-  if ( v4->InterestPointType.mUID != qSymbol_look.mUID )
-    UFG::InterestPointProperties::LoadUseProperties(v5, v3, v4, v7);
+    MemImagePtr = 0i64;
+  UFG::InterestPointProperties::LoadCommonProperties(this, pProps, interest_point_data, MemImagePtr);
+  if ( interest_point_data->InterestPointType.mUID != qSymbol_look.mUID )
+    UFG::InterestPointProperties::LoadUseProperties(this, pProps, interest_point_data, MemImagePtr);
 }
 
 // File Line: 311
 // RVA: 0x5858B0
-void __fastcall UFG::InterestPointProperties::LoadCommonProperties(UFG::InterestPointProperties *this, UFG::qPropertySet *pProps, component_InterestPoint *interest_point_data, schema_classlist *class_list_data)
+void __fastcall UFG::InterestPointProperties::LoadCommonProperties(
+        UFG::InterestPointProperties *this,
+        UFG::qPropertySet *pProps,
+        component_InterestPoint *interest_point_data,
+        schema_classlist *class_list_data)
 {
-  schema_classlist *v4; // r15
   component_InterestPoint *v5; // r14
   UFG::InterestPointProperties *v6; // rbp
-  UFG::qArray<UFG::qSymbol,0> *v7; // rdi
-  UFG::qSymbol *v8; // rcx
+  UFG::qArray<UFG::qSymbol,0> *p_mUseClassList; // rdi
+  UFG::qSymbol *p; // rcx
   UFG::qSymbol *v9; // rbx
   unsigned int v10; // esi
-  __int64 v11; // rax
-  unsigned int v12; // er12
+  __int64 mOffset; // rax
+  unsigned int v12; // r12d
   UFG::qPropertyList *v13; // r14
   UFG::qSymbol *v14; // r13
-  __int64 v15; // r15
+  __int64 size; // r15
   unsigned int v16; // ebx
-  unsigned int v17; // edx
+  unsigned int capacity; // edx
   unsigned int v18; // edx
-  __int64 v19; // [rsp+30h] [rbp-58h]
+  UFG::qSymbolUC v19; // [rsp+30h] [rbp-58h] BYREF
   __int64 v20; // [rsp+38h] [rbp-50h]
   UFG::qPropertyList **v21; // [rsp+40h] [rbp-48h]
-  UFG::InterestPointProperties *v22; // [rsp+90h] [rbp+8h]
-  component_InterestPoint *v23; // [rsp+A0h] [rbp+18h]
-  UFG::qPropertyList *v24; // [rsp+A8h] [rbp+20h]
+  UFG::qPropertyList *v24; // [rsp+A8h] [rbp+20h] BYREF
 
-  v23 = interest_point_data;
-  v22 = this;
   v20 = -2i64;
-  v4 = class_list_data;
   v5 = interest_point_data;
   v6 = this;
   this->mStartActive = interest_point_data->StartActive;
@@ -224,33 +217,33 @@ void __fastcall UFG::InterestPointProperties::LoadCommonProperties(UFG::Interest
   v21 = &v24;
   LODWORD(v24) = UFG::gNullQSymbolUC;
   this->mBoneName = (UFG::qSymbolUC)PropertyUtils::GetWithDefault<UFG::qSymbolUC>(
-                                      (UFG::qSymbolUC *)&v19,
+                                      &v19,
                                       pProps,
-                                      (UFG::qSymbol *)&qSymbol_InterestPointParentBone.mUID,
-                                      (__int64)&v24,
+                                      (UFG::qArray<unsigned long,0> *)&qSymbol_InterestPointParentBone,
+                                      (unsigned int *)&v24,
                                       DEPTH_RECURSE)->mUID;
   v6->mClassListIsAllowed = 0;
-  v7 = &v6->mUseClassList;
-  v8 = v6->mUseClassList.p;
-  if ( v8 )
+  p_mUseClassList = &v6->mUseClassList;
+  p = v6->mUseClassList.p;
+  if ( p )
   {
-    v9 = v8 - 1;
-    `eh vector destructor iterator(v8, 4ui64, v8[-1].mUID, (void (__fastcall *)(void *))_);
+    v9 = p - 1;
+    `eh vector destructor iterator(p, 4ui64, p[-1].mUID, (void (__fastcall *)(void *))_);
     operator delete[](v9);
   }
   v10 = 0;
   v6->mUseClassList.p = 0i64;
-  *(_QWORD *)&v7->size = 0i64;
-  if ( v4 )
+  *(_QWORD *)&p_mUseClassList->size = 0i64;
+  if ( class_list_data )
   {
-    v6->mClassListIsAllowed = v4->ClassTypeIsAllowable;
-    v11 = v4->ClassTypeList.mOffset;
-    if ( v11 )
+    v6->mClassListIsAllowed = class_list_data->ClassTypeIsAllowable;
+    mOffset = class_list_data->ClassTypeList.mOffset;
+    if ( mOffset )
     {
-      v24 = (UFG::qPropertyList *)((char *)&v4->ClassTypeList + v11);
-      if ( (UFG::qOffset64<UFG::qPropertyList *> *)((char *)&v4->ClassTypeList + v11) )
+      v24 = (UFG::qPropertyList *)((char *)&class_list_data->ClassTypeList + mOffset);
+      if ( v24 )
       {
-        v12 = *(_DWORD *)(&v4[3].ClassTypeIsAllowable + v11);
+        v12 = *(_DWORD *)(&class_list_data[3].ClassTypeIsAllowable + mOffset);
         if ( v12 > v6->mUseClassList.capacity )
           UFG::qArray<UFG::qSymbol,0>::Reallocate(&v6->mUseClassList, v12, "mUseClassList Reserve");
         if ( v12 )
@@ -259,13 +252,13 @@ void __fastcall UFG::InterestPointProperties::LoadCommonProperties(UFG::Interest
           do
           {
             v14 = UFG::qPropertyList::Get<UFG::qSymbol>(v13, v10);
-            v15 = v7->size;
-            v16 = v15 + 1;
-            v17 = v6->mUseClassList.capacity;
-            if ( (signed int)v15 + 1 > v17 )
+            size = p_mUseClassList->size;
+            v16 = size + 1;
+            capacity = v6->mUseClassList.capacity;
+            if ( (int)size + 1 > capacity )
             {
-              if ( v17 )
-                v18 = 2 * v17;
+              if ( capacity )
+                v18 = 2 * capacity;
               else
                 v18 = 1;
               for ( ; v18 < v16; v18 *= 2 )
@@ -273,16 +266,16 @@ void __fastcall UFG::InterestPointProperties::LoadCommonProperties(UFG::Interest
               if ( v18 <= 4 )
                 v18 = 4;
               if ( v18 - v16 > 0x10000 )
-                v18 = v15 + 65537;
-              UFG::qArray<UFG::qSymbol,0>::Reallocate(v7, v18, "mUseClassList");
+                v18 = size + 65537;
+              UFG::qArray<UFG::qSymbol,0>::Reallocate(p_mUseClassList, v18, "mUseClassList");
             }
-            v7->size = v16;
-            v6->mUseClassList.p[v15] = (UFG::qSymbol)v14->mUID;
+            p_mUseClassList->size = v16;
+            v6->mUseClassList.p[size] = (UFG::qSymbol)v14->mUID;
             ++v10;
           }
           while ( v10 < v12 );
-          v6 = v22;
-          v5 = v23;
+          v6 = this;
+          v5 = interest_point_data;
         }
       }
     }
@@ -302,11 +295,15 @@ void __fastcall UFG::InterestPointProperties::LoadCommonProperties(UFG::Interest
 
 // File Line: 373
 // RVA: 0x585E70
-void __fastcall UFG::InterestPointProperties::LoadUseProperties(UFG::InterestPointProperties *this, UFG::qPropertySet *pProps, component_InterestPoint *interest_point_data, schema_classlist *class_list_data)
+void __fastcall UFG::InterestPointProperties::LoadUseProperties(
+        UFG::InterestPointProperties *this,
+        UFG::qPropertySet *pProps,
+        component_InterestPoint *interest_point_data,
+        schema_classlist *class_list_data)
 {
-  bool v4; // al
-  unsigned int v5; // edx
-  UFG::InterestPoint::eInterestPointPriority v6; // eax
+  bool UserCanBeRecycled; // al
+  unsigned int mUID; // edx
+  UFG::InterestPoint::eInterestPointPriority mPriority; // eax
 
   this->mRequiresSync = interest_point_data->RequiresSync;
   this->mPositionSyncRequired = interest_point_data->PositionSyncRequired;
@@ -323,28 +320,28 @@ void __fastcall UFG::InterestPointProperties::LoadUseProperties(UFG::InterestPoi
   this->mMaxGroupSize = interest_point_data->MaxGroupSize;
   this->mMaxDistanceFromPlayer = interest_point_data->MaxDistanceFromPlayer;
   this->mSpawnAmbientUserDistance = interest_point_data->SpawnAmbientUserDistance;
-  v4 = interest_point_data->UserCanBeRecycled;
-  this->mPriority = 0;
-  this->mUserCanBeRecycled = v4;
-  v5 = interest_point_data->InterestPointPriority.mUID;
-  if ( v5 == qSymbol_Critical.mUID )
+  UserCanBeRecycled = interest_point_data->UserCanBeRecycled;
+  this->mPriority = InterestPointPriority_None;
+  this->mUserCanBeRecycled = UserCanBeRecycled;
+  mUID = interest_point_data->InterestPointPriority.mUID;
+  if ( mUID == qSymbol_Critical.mUID )
   {
-    this->mPriority = 4;
+    this->mPriority = InterestPointPriority_Critical;
   }
-  else if ( v5 == qSymbol_High.mUID )
+  else if ( mUID == qSymbol_High.mUID )
   {
-    this->mPriority = 3;
+    this->mPriority = InterestPointPriority_High;
   }
-  else if ( v5 == qSymbol_Medium.mUID )
+  else if ( mUID == qSymbol_Medium.mUID )
   {
-    this->mPriority = 2;
+    this->mPriority = InterestPointPriority_Medium;
   }
   else
   {
-    v6 = this->mPriority;
-    if ( v5 == qSymbol_Low.mUID )
-      v6 = 1;
-    this->mPriority = v6;
+    mPriority = this->mPriority;
+    if ( mUID == qSymbol_Low.mUID )
+      mPriority = InterestPointPriority_Low;
+    this->mPriority = mPriority;
   }
 }
 
@@ -353,45 +350,43 @@ void __fastcall UFG::InterestPointProperties::LoadUseProperties(UFG::InterestPoi
 __int64 UFG::_dynamic_initializer_for__gInterestPointCachedProperties__()
 {
   UFG::qBaseTreeRB::qBaseTreeRB(&UFG::gInterestPointCachedProperties.mTree);
-  return atexit(UFG::_dynamic_atexit_destructor_for__gInterestPointCachedProperties__);
+  return atexit((int (__fastcall *)())UFG::_dynamic_atexit_destructor_for__gInterestPointCachedProperties__);
 }
 
 // File Line: 427
 // RVA: 0x57DB20
-void __fastcall UFG::InterestPointPropertiesHandle::~InterestPointPropertiesHandle(UFG::InterestPointPropertiesHandle *this)
+void __fastcall UFG::InterestPointPropertiesHandle::~InterestPointPropertiesHandle(
+        UFG::InterestPointPropertiesHandle *this)
 {
   UFG::InterestPointPropertiesHandle::Set(this, 0i64, 1);
 }
 
 // File Line: 432
 // RVA: 0x58B5D0
-void __fastcall UFG::InterestPointPropertiesHandle::Set(UFG::InterestPointPropertiesHandle *this, UFG::InterestPointProperties *pProperties, const bool isOwner)
+void __fastcall UFG::InterestPointPropertiesHandle::Set(
+        UFG::InterestPointPropertiesHandle *this,
+        UFG::InterestPointProperties *pProperties,
+        bool isOwner)
 {
-  bool v3; // bp
-  UFG::InterestPointProperties *v4; // r14
-  UFG::InterestPointPropertiesHandle *v5; // rdi
-  UFG::InterestPointProperties *v6; // rsi
-  UFG::qSymbol *v7; // rcx
+  UFG::InterestPointProperties *mProperties; // rsi
+  UFG::qSymbol *p; // rcx
   UFG::qSymbol *v8; // rbx
 
-  v3 = isOwner;
-  v4 = pProperties;
-  v5 = this;
-  v6 = this->mProperties;
+  mProperties = this->mProperties;
   if ( this->mProperties && this->mIsOwner )
   {
-    v7 = v6->mUseClassList.p;
-    if ( v7 )
+    p = mProperties->mUseClassList.p;
+    if ( p )
     {
-      v8 = v7 - 1;
-      `eh vector destructor iterator(v7, 4ui64, v7[-1].mUID, (void (__fastcall *)(void *))_);
+      v8 = p - 1;
+      `eh vector destructor iterator(p, 4ui64, p[-1].mUID, (void (__fastcall *)(void *))_);
       operator delete[](v8);
     }
-    v6->mUseClassList.p = 0i64;
-    *(_QWORD *)&v6->mUseClassList.size = 0i64;
-    operator delete[](v6);
-    v5->mProperties = v4;
-    v5->mIsOwner = v3;
+    mProperties->mUseClassList.p = 0i64;
+    *(_QWORD *)&mProperties->mUseClassList.size = 0i64;
+    operator delete[](mProperties);
+    this->mProperties = pProperties;
+    this->mIsOwner = isOwner;
   }
   else
   {
@@ -402,12 +397,13 @@ void __fastcall UFG::InterestPointPropertiesHandle::Set(UFG::InterestPointProper
 
 // File Line: 444
 // RVA: 0x585740
-void __fastcall UFG::InterestPointPropertiesHandle::Load(UFG::InterestPointPropertiesHandle *this, UFG::InterestPointProperties *pCachedProperties, UFG::qPropertySet *pProps)
+void __fastcall UFG::InterestPointPropertiesHandle::Load(
+        UFG::InterestPointPropertiesHandle *this,
+        UFG::InterestPointProperties *pCachedProperties,
+        UFG::qPropertySet *pProps)
 {
-  UFG::qPropertySet *v3; // rsi
-  UFG::InterestPointPropertiesHandle *v4; // rbx
   UFG::qPropertySet *v5; // rax
-  char *v6; // rdi
+  char *MemImagePtr; // rdi
   component_InterestPoint *v7; // r8
   UFG::qPropertySet *v8; // rax
   UFG::InterestPointProperties *v9; // rdi
@@ -415,8 +411,6 @@ void __fastcall UFG::InterestPointPropertiesHandle::Load(UFG::InterestPointPrope
   UFG::allocator::free_link *v11; // rax
   UFG::InterestPointProperties *v12; // rax
 
-  v3 = pProps;
-  v4 = this;
   if ( pCachedProperties )
   {
     UFG::InterestPointPropertiesHandle::Set(this, pCachedProperties, 0);
@@ -427,19 +421,19 @@ void __fastcall UFG::InterestPointPropertiesHandle::Load(UFG::InterestPointPrope
     {
       v5 = UFG::qPropertySet::Get<UFG::qPropertySet>(
              pProps,
-             (UFG::qSymbol *)&component_InterestPoint::sPropertyName.mUID,
+             (UFG::qArray<unsigned long,0> *)&component_InterestPoint::sPropertyName,
              DEPTH_RECURSE);
       if ( v5 )
-        v6 = UFG::qPropertySet::GetMemImagePtr(v5);
+        MemImagePtr = UFG::qPropertySet::GetMemImagePtr(v5);
       else
-        v6 = 0i64;
-      v7 = (component_InterestPoint *)v6;
+        MemImagePtr = 0i64;
+      v7 = (component_InterestPoint *)MemImagePtr;
     }
     else
     {
       v8 = UFG::qPropertySet::Get<UFG::qPropertySet>(
              pProps,
-             (UFG::qSymbol *)&component_InterestPoint::sPropertyName.mUID,
+             (UFG::qArray<unsigned long,0> *)&component_InterestPoint::sPropertyName,
              DEPTH_RECURSE);
       v9 = 0i64;
       if ( v8 )
@@ -452,31 +446,31 @@ void __fastcall UFG::InterestPointPropertiesHandle::Load(UFG::InterestPointPrope
         UFG::InterestPointProperties::InterestPointProperties((UFG::InterestPointProperties *)v11);
         v9 = v12;
       }
-      UFG::InterestPointPropertiesHandle::Set(v4, v9, 1);
+      UFG::InterestPointPropertiesHandle::Set(this, v9, 1);
       v7 = (component_InterestPoint *)v10;
     }
-    UFG::InterestPointProperties::Load(v4->mProperties, v3, v7);
+    UFG::InterestPointProperties::Load(this->mProperties, pProps, v7);
   }
 }
 
 // File Line: 503
 // RVA: 0x57EF80
-void __fastcall UFG::InterestPointProperties::AddToCache(UFG::qPropertySet *pPropertySet, UFG::qSymbol *interestPointTypeSymbol)
+void __fastcall UFG::InterestPointProperties::AddToCache(
+        UFG::qPropertySet *pPropertySet,
+        UFG::qSymbol *interestPointTypeSymbol)
 {
-  UFG::qPropertySet *v2; // rbp
-  unsigned int v3; // edi
+  unsigned int mUID; // edi
   UFG::allocator::free_link *v4; // rax
-  char *v5; // rsi
+  char *MemImagePtr; // rsi
   UFG::InterestPointProperties *v6; // rax
   UFG::InterestPointProperties *v7; // rbx
   UFG::qPropertySet *v8; // rax
 
-  v2 = pPropertySet;
-  v3 = interestPointTypeSymbol->mUID;
-  if ( !interestPointTypeSymbol->mUID || !UFG::qBaseTreeRB::Get(&UFG::gInterestPointCachedProperties.mTree, v3) )
+  mUID = interestPointTypeSymbol->mUID;
+  if ( !interestPointTypeSymbol->mUID || !UFG::qBaseTreeRB::Get(&UFG::gInterestPointCachedProperties.mTree, mUID) )
   {
     v4 = UFG::qMalloc(0xA0ui64, "InterestPointProperties", 0i64);
-    v5 = 0i64;
+    MemImagePtr = 0i64;
     if ( v4 )
     {
       UFG::InterestPointProperties::InterestPointProperties((UFG::InterestPointProperties *)v4);
@@ -489,13 +483,13 @@ void __fastcall UFG::InterestPointProperties::AddToCache(UFG::qPropertySet *pPro
     if ( v7 )
     {
       v8 = UFG::qPropertySet::Get<UFG::qPropertySet>(
-             v2,
-             (UFG::qSymbol *)&component_InterestPoint::sPropertyName.mUID,
+             pPropertySet,
+             (UFG::qArray<unsigned long,0> *)&component_InterestPoint::sPropertyName,
              DEPTH_RECURSE);
       if ( v8 )
-        v5 = UFG::qPropertySet::GetMemImagePtr(v8);
-      v7->mNode.mUID = v3;
-      UFG::InterestPointProperties::Load(v7, v2, (component_InterestPoint *)v5);
+        MemImagePtr = UFG::qPropertySet::GetMemImagePtr(v8);
+      v7->mNode.mUID = mUID;
+      UFG::InterestPointProperties::Load(v7, pPropertySet, (component_InterestPoint *)MemImagePtr);
       UFG::qBaseTreeRB::Add(&UFG::gInterestPointCachedProperties.mTree, &v7->mNode);
     }
   }
@@ -505,9 +499,6 @@ void __fastcall UFG::InterestPointProperties::AddToCache(UFG::qPropertySet *pPro
 // RVA: 0x57CD20
 void __fastcall UFG::InterestPointType::InterestPointType(UFG::InterestPointType *this)
 {
-  UFG::InterestPointType *v1; // rbx
-
-  v1 = this;
   this->mNode.mParent = 0i64;
   this->mNode.mChild[0] = 0i64;
   this->mNode.mChild[1] = 0i64;
@@ -516,124 +507,120 @@ void __fastcall UFG::InterestPointType::InterestPointType(UFG::InterestPointType
     0x10ui64,
     3,
     (void (__fastcall *)(void *))UFG::qArray<UFG::qSymbolUC,0>::qArray<UFG::qSymbolUC,0>);
-  v1->mUseItemList.p = 0i64;
-  *(_QWORD *)&v1->mUseItemList.size = 0i64;
-  *(_WORD *)&v1->mItemListMatchesNoItem = 0;
-  v1->mHasBehaviourFile = 0;
-  UFG::qSharedString::qSharedString(&v1->mBehaviourFileName);
-  v1->mBehaviour = 0i64;
-  v1->mBehaviourInteractions = 0i64;
-  v1->mBehaviourConditions = 0i64;
-  *(_WORD *)&v1->mHasBeginningScript = 0;
-  v1->mHasOnReservationScript = 0;
-  *(_QWORD *)&v1->mBeginningScriptHash = 0i64;
-  v1->mOnReservationScriptHash = 0;
-  v1->mDescription.mUID = -1;
-  v1->mInterestPointTypePropertySet = 0i64;
+  this->mUseItemList.p = 0i64;
+  *(_QWORD *)&this->mUseItemList.size = 0i64;
+  *(_WORD *)&this->mItemListMatchesNoItem = 0;
+  this->mHasBehaviourFile = 0;
+  UFG::qSharedString::qSharedString(&this->mBehaviourFileName);
+  this->mBehaviour = 0i64;
+  this->mBehaviourInteractions = 0i64;
+  this->mBehaviourConditions = 0i64;
+  *(_WORD *)&this->mHasBeginningScript = 0;
+  this->mHasOnReservationScript = 0;
+  *(_QWORD *)&this->mBeginningScriptHash = 0i64;
+  this->mOnReservationScriptHash = 0;
+  this->mDescription.mUID = -1;
+  this->mInterestPointTypePropertySet = 0i64;
 }
 
 // File Line: 554
 // RVA: 0x582F30
 void __fastcall UFG::InterestPointType::InitActionTree(UFG::InterestPointType *this)
 {
-  UFG::InterestPointType *v1; // rbx
-  Expression::IMemberMap *v2; // rax
-  __int64 v3; // rax
+  ActionNode *v2; // rax
+  ActionNode *v3; // rax
 
-  v1 = this;
-  v2 = ActionNode::Load(this->mBehaviourFileName.mText);
-  v1->mBehaviour = (ActionNode *)v2;
+  v2 = (ActionNode *)ActionNode::Load(this->mBehaviourFileName.mText);
+  this->mBehaviour = v2;
   if ( v2 )
   {
-    if ( !(_S7_14 & 1) )
+    if ( (_S7_14 & 1) == 0 )
     {
       _S7_14 |= 1u;
-      dword_14242E450 = UFG::qStringHashUpper32("UseConditions", 0xFFFFFFFF);
+      dword_14242E450 = UFG::qStringHashUpper32("UseConditions", -1);
     }
-    v1->mBehaviourConditions = (ActionNode *)((__int64 (__fastcall *)(ActionNode *, int *, _QWORD))v1->mBehaviour->vfptr[1].CreateClone)(
-                                               v1->mBehaviour,
-                                               &dword_14242E450,
-                                               0i64);
-    if ( !(_S9_16 & 1) )
+    this->mBehaviourConditions = (ActionNode *)((__int64 (__fastcall *)(ActionNode *, int *, _QWORD))this->mBehaviour->vfptr[1].CreateClone)(
+                                                 this->mBehaviour,
+                                                 &dword_14242E450,
+                                                 0i64);
+    if ( (_S9_16 & 1) == 0 )
     {
       _S9_16 |= 1u;
-      node_id.mUID = UFG::qStringHashUpper32("Interactions", 0xFFFFFFFF);
+      node_id.mUID = UFG::qStringHashUpper32("Interactions", -1);
     }
-    v3 = ((__int64 (__fastcall *)(ActionNode *, ActionID *, _QWORD))v1->mBehaviour->vfptr[1].CreateClone)(
-           v1->mBehaviour,
-           &node_id,
-           0i64);
-    v1->mBehaviourInteractions = (ActionNode *)v3;
+    v3 = (ActionNode *)((__int64 (__fastcall *)(ActionNode *, ActionID *, _QWORD))this->mBehaviour->vfptr[1].CreateClone)(
+                         this->mBehaviour,
+                         &node_id,
+                         0i64);
+    this->mBehaviourInteractions = v3;
     if ( !v3 )
-      UFG::qPrintf("Invalid POI Behaviour, no node: %s!\n", v1->mBehaviourFileName.mText);
+      UFG::qPrintf("Invalid POI Behaviour, no node: %s!\n", this->mBehaviourFileName.mText);
   }
   else
   {
-    UFG::qPrintf("Invalid POI Behaviour: %s!\n", v1->mBehaviourFileName.mText);
-    v1->mBehaviourConditions = 0i64;
-    v1->mBehaviourInteractions = 0i64;
+    UFG::qPrintf("Invalid POI Behaviour: %s!\n", this->mBehaviourFileName.mText);
+    this->mBehaviourConditions = 0i64;
+    this->mBehaviourInteractions = 0i64;
   }
 }
 
 // File Line: 586
 // RVA: 0x58AAC0
-void __fastcall UFG::InterestPointType::ReadAnimBankSymbols(UFG::InterestPointType *this, UFG::qPropertySet *pInterestPointTypePropertySet)
+void __fastcall UFG::InterestPointType::ReadAnimBankSymbols(
+        UFG::InterestPointType *this,
+        UFG::qPropertySet *pInterestPointTypePropertySet)
 {
   UFG::qPropertySet *v2; // rdi
-  UFG::InterestPointType *v3; // rsi
-  UFG::qArray<UFG::qSymbolUC,0> *v4; // rsi
-  UFG::qSymbol *v5; // r12
-  signed __int64 v6; // rbx
+  UFG::qArray<UFG::qSymbolUC,0> *mAnimBankSymbols; // rsi
+  UFG::qSymbol *p_name; // r12
+  __int64 v6; // rbx
   UFG::qPropertyList *v7; // rax
   UFG::qPropertyList *v8; // r13
-  unsigned int v9; // er14
+  unsigned int mNumElements; // r14d
   unsigned int v10; // ebp
   unsigned int v11; // ebx
-  __int64 v12; // r15
+  __int64 size; // r15
   unsigned int v13; // edi
-  unsigned int v14; // edx
+  unsigned int capacity; // edx
   unsigned int v15; // edx
-  UFG::qSymbol name; // [rsp+38h] [rbp-50h]
-  unsigned int v17; // [rsp+3Ch] [rbp-4Ch]
+  UFG::qSymbol name; // [rsp+38h] [rbp-50h] BYREF
+  unsigned int mUID; // [rsp+3Ch] [rbp-4Ch]
   unsigned int v18; // [rsp+40h] [rbp-48h]
-  UFG::qPropertySet *v19; // [rsp+98h] [rbp+10h]
   UFG::qSymbol *v20; // [rsp+A0h] [rbp+18h]
-  signed __int64 v21; // [rsp+A8h] [rbp+20h]
+  __int64 v21; // [rsp+A8h] [rbp+20h]
 
-  v19 = pInterestPointTypePropertySet;
   v2 = pInterestPointTypePropertySet;
-  v3 = this;
   `eh vector constructor iterator(&name, 4ui64, 3, (void (__fastcall *)(void *))BackInfo::BackInfo);
   name.mUID = qSymbol_AnimBankFileNames.mUID;
-  v17 = qSymbol_AnimBankFileNamesMale.mUID;
+  mUID = qSymbol_AnimBankFileNamesMale.mUID;
   v18 = qSymbol_AnimBankFileNamesFemale.mUID;
-  v4 = v3->mAnimBankSymbols;
-  v5 = &name;
+  mAnimBankSymbols = this->mAnimBankSymbols;
+  p_name = &name;
   v20 = &name;
   v6 = 3i64;
   v21 = 3i64;
   do
   {
-    v7 = UFG::qPropertySet::Get<UFG::qPropertyList>(v2, v5, DEPTH_RECURSE);
+    v7 = UFG::qPropertySet::Get<UFG::qPropertyList>(v2, (UFG::qArray<unsigned long,0> *)p_name, DEPTH_RECURSE);
     v8 = v7;
     if ( v7 )
     {
-      v9 = v7->mNumElements;
-      if ( v9 > v4->capacity )
-        UFG::qArray<UFG::qSymbolUC,0>::Reallocate(v4, v9, "qArray.Reallocate(Reserve)");
+      mNumElements = v7->mNumElements;
+      if ( mNumElements > mAnimBankSymbols->capacity )
+        UFG::qArray<UFG::qSymbolUC,0>::Reallocate(mAnimBankSymbols, mNumElements, "qArray.Reallocate(Reserve)");
       v10 = 0;
-      if ( v9 )
+      if ( mNumElements )
       {
         do
         {
           v11 = UFG::qPropertyList::Get<UFG::qSymbolUC>(v8, v10)->mUID;
-          v12 = v4->size;
-          v13 = v12 + 1;
-          v14 = v4->capacity;
-          if ( (signed int)v12 + 1 > v14 )
+          size = mAnimBankSymbols->size;
+          v13 = size + 1;
+          capacity = mAnimBankSymbols->capacity;
+          if ( (int)size + 1 > capacity )
           {
-            if ( v14 )
-              v15 = 2 * v14;
+            if ( capacity )
+              v15 = 2 * capacity;
             else
               v15 = 1;
             for ( ; v15 < v13; v15 *= 2 )
@@ -641,22 +628,21 @@ void __fastcall UFG::InterestPointType::ReadAnimBankSymbols(UFG::InterestPointTy
             if ( v15 <= 4 )
               v15 = 4;
             if ( v15 - v13 > 0x10000 )
-              v15 = v12 + 65537;
-            UFG::qArray<UFG::qSymbolUC,0>::Reallocate(v4, v15, "qArray.Add");
+              v15 = size + 65537;
+            UFG::qArray<UFG::qSymbolUC,0>::Reallocate(mAnimBankSymbols, v15, "qArray.Add");
           }
-          v4->size = v13;
-          v4->p[v12].mUID = v11;
+          mAnimBankSymbols->size = v13;
+          mAnimBankSymbols->p[size].mUID = v11;
           ++v10;
         }
-        while ( v10 < v9 );
-        v5 = v20;
+        while ( v10 < mNumElements );
+        p_name = v20;
         v6 = v21;
-        v2 = v19;
+        v2 = pInterestPointTypePropertySet;
       }
     }
-    ++v5;
-    v20 = v5;
-    ++v4;
+    v20 = ++p_name;
+    ++mAnimBankSymbols;
     v21 = --v6;
   }
   while ( v6 );
@@ -665,17 +651,18 @@ void __fastcall UFG::InterestPointType::ReadAnimBankSymbols(UFG::InterestPointTy
 
 // File Line: 610
 // RVA: 0x583290
-void __fastcall UFG::InterestPointType::InitFromPropertySet(UFG::InterestPointType *this, UFG::qPropertySet *pInterestPointTypePropertySet)
+void __fastcall UFG::InterestPointType::InitFromPropertySet(
+        UFG::InterestPointType *this,
+        UFG::qPropertySet *pInterestPointTypePropertySet)
 {
   UFG::qPropertySet *v2; // r15
-  UFG::InterestPointType *v3; // rbx
   UFG::qSymbol *v4; // rax
   UFG::qSymbol *v5; // rdx
   UFG::qPropertySet *v6; // rax
-  char *v7; // rax
+  char *MemImagePtr; // rax
   char *v8; // rdi
   char v9; // cl
-  char v10; // si
+  bool v10; // si
   __int64 v11; // rax
   const char *v12; // rcx
   char v13; // al
@@ -687,69 +674,66 @@ void __fastcall UFG::InterestPointType::InitFromPropertySet(UFG::InterestPointTy
   UFG::qPropertySet *v19; // rax
   char *v20; // rdi
   bool *v21; // rax
-  int *v22; // rcx
-  char v23; // al
+  bool *v22; // rcx
+  bool v23; // al
   char *v24; // rax
-  UFG::eInventoryItemEnum *v25; // rcx
+  UFG::eInventoryItemEnum *p; // rcx
   __int64 v26; // rax
-  signed __int64 v27; // rax
+  __int64 v27; // rax
   bool v28; // zf
   UFG::qPropertyList *v29; // rax
-  unsigned int v30; // edi
-  unsigned int v31; // er12
+  unsigned int mNumElements; // edi
+  unsigned int v31; // r12d
   UFG::qSymbol *v32; // rax
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v33; // rax
-  unsigned int v34; // er15
-  __int64 v35; // r13
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mPrev; // rax
+  unsigned int m_EnumValue; // r15d
+  __int64 size; // r13
   unsigned int v36; // edi
-  unsigned int v37; // edx
+  unsigned int capacity; // edx
   unsigned int v38; // edx
   char *v39; // rax
   UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v40; // rcx
-  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *v41; // rax
-  TracksEnumBinding<unsigned long> pTrackEnumBinding; // [rsp+28h] [rbp-28h]
-  UFG::qPropertySet *v43; // [rsp+98h] [rbp+48h]
-  unsigned int v44; // [rsp+A0h] [rbp+50h]
+  UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *mNext; // rax
+  TracksEnumBinding<unsigned long> pTrackEnumBinding; // [rsp+28h] [rbp-28h] BYREF
+  unsigned int v44; // [rsp+A0h] [rbp+50h] BYREF
   UFG::qPropertyList *v45; // [rsp+A8h] [rbp+58h]
 
   if ( !pInterestPointTypePropertySet )
     return;
-  v43 = pInterestPointTypePropertySet;
   v2 = pInterestPointTypePropertySet;
-  v3 = this;
   this->mInterestPointTypePropertySet = pInterestPointTypePropertySet;
   v4 = UFG::qPropertySet::Get<UFG::qSymbol>(
          pInterestPointTypePropertySet,
-         (UFG::qSymbol *)&qSymbol_Description_17.mUID,
+         (UFG::qArray<unsigned long,0> *)&qSymbol_Description_17,
          DEPTH_RECURSE);
   v5 = &UFG::gNullQSymbol;
   if ( v4 )
     v5 = v4;
-  v3->mDescription = (UFG::qSymbol)v5->mUID;
+  this->mDescription = (UFG::qSymbol)v5->mUID;
   v6 = UFG::qPropertySet::Get<UFG::qPropertySet>(
          v2,
-         (UFG::qSymbol *)&schema_interestpoint_script::sPropertyName.mUID,
+         (UFG::qArray<unsigned long,0> *)&schema_interestpoint_script::sPropertyName,
          DEPTH_RECURSE);
-  if ( v6 && (v7 = UFG::qPropertySet::GetMemImagePtr(v6), (v8 = v7) != 0i64) )
+  if ( v6 && (MemImagePtr = UFG::qPropertySet::GetMemImagePtr(v6), (v8 = MemImagePtr) != 0i64) )
   {
-    v9 = *v7;
-    v3->mHasBeginningScript = *v7;
+    v9 = *MemImagePtr;
+    this->mHasBeginningScript = *MemImagePtr;
     v10 = 0;
     if ( v9 )
     {
-      v11 = *((_QWORD *)v7 + 1);
+      v11 = *((_QWORD *)MemImagePtr + 1);
       if ( v11 )
         v12 = &v8[v11 + 8];
       else
         v12 = 0i64;
-      v3->mBeginningScriptHash = UFG::qStringHash32(v12, 0xFFFFFFFF);
+      this->mBeginningScriptHash = UFG::qStringHash32(v12, 0xFFFFFFFF);
     }
     else
     {
-      v3->mBeginningScriptHash = 0;
+      this->mBeginningScriptHash = 0;
     }
     v13 = v8[1];
-    v3->mHasEndingScript = v13;
+    this->mHasEndingScript = v13;
     if ( v13 )
     {
       v14 = *((_QWORD *)v8 + 2);
@@ -757,14 +741,14 @@ void __fastcall UFG::InterestPointType::InitFromPropertySet(UFG::InterestPointTy
         v15 = &v8[v14 + 16];
       else
         v15 = 0i64;
-      v3->mEndingScriptHash = UFG::qStringHash32(v15, 0xFFFFFFFF);
+      this->mEndingScriptHash = UFG::qStringHash32(v15, 0xFFFFFFFF);
     }
     else
     {
-      v3->mEndingScriptHash = 0;
+      this->mEndingScriptHash = 0;
     }
     v16 = v8[40];
-    v3->mHasOnReservationScript = v16;
+    this->mHasOnReservationScript = v16;
     if ( v16 )
     {
       v17 = *((_QWORD *)v8 + 6);
@@ -772,49 +756,52 @@ void __fastcall UFG::InterestPointType::InitFromPropertySet(UFG::InterestPointTy
         v18 = &v8[v17 + 48];
       else
         v18 = 0i64;
-      v3->mOnReservationScriptHash = UFG::qStringHash32(v18, 0xFFFFFFFF);
+      this->mOnReservationScriptHash = UFG::qStringHash32(v18, 0xFFFFFFFF);
       goto LABEL_25;
     }
   }
   else
   {
-    *(_WORD *)&v3->mHasBeginningScript = 0;
+    *(_WORD *)&this->mHasBeginningScript = 0;
     v10 = 0;
-    *(_QWORD *)&v3->mBeginningScriptHash = 0i64;
-    v3->mHasOnReservationScript = 0;
+    *(_QWORD *)&this->mBeginningScriptHash = 0i64;
+    this->mHasOnReservationScript = 0;
   }
-  v3->mOnReservationScriptHash = 0;
+  this->mOnReservationScriptHash = 0;
 LABEL_25:
   v19 = UFG::qPropertySet::Get<UFG::qPropertySet>(
           v2,
-          (UFG::qSymbol *)&component_InterestPoint::sPropertyName.mUID,
+          (UFG::qArray<unsigned long,0> *)&component_InterestPoint::sPropertyName,
           DEPTH_RECURSE);
   if ( v19 )
     v20 = UFG::qPropertySet::GetMemImagePtr(v19);
   else
     v20 = 0i64;
   LOBYTE(v44) = 0;
-  v21 = UFG::qPropertySet::Get<bool>(v2, (UFG::qSymbol *)&qSymbol_HasBehaviour.mUID, DEPTH_RECURSE);
-  v22 = (int *)&v44;
+  v21 = UFG::qPropertySet::Get<bool>(v2, (UFG::qArray<unsigned long,0> *)&qSymbol_HasBehaviour, DEPTH_RECURSE);
+  v22 = (bool *)&v44;
   if ( v21 )
-    v22 = (int *)v21;
-  v23 = *(_BYTE *)v22;
-  v3->mHasBehaviourFile = *(_BYTE *)v22;
+    v22 = v21;
+  v23 = *v22;
+  this->mHasBehaviourFile = *v22;
   if ( v23 )
   {
-    v24 = UFG::qPropertySet::Get<char const *>(v2, (UFG::qSymbol *)&qSymbol_BehaviourFile.mUID, DEPTH_RECURSE);
-    UFG::qSharedString::operator=(&v3->mBehaviourFileName, v24);
-    UFG::InterestPointType::InitActionTree(v3);
+    v24 = UFG::qPropertySet::Get<char const *>(
+            v2,
+            (UFG::qArray<unsigned long,0> *)&qSymbol_BehaviourFile,
+            DEPTH_RECURSE);
+    UFG::qSharedString::operator=(&this->mBehaviourFileName, v24);
+    UFG::InterestPointType::InitActionTree(this);
   }
   else
   {
-    UFG::qSharedString::Set(&v3->mBehaviourFileName, &customWorldMapCaption);
+    UFG::qSharedString::Set(&this->mBehaviourFileName, &customCaption);
   }
-  v25 = v3->mUseItemList.p;
-  if ( v25 )
-    operator delete[](v25);
-  v3->mUseItemList.p = 0i64;
-  *(_QWORD *)&v3->mUseItemList.size = 0i64;
+  p = this->mUseItemList.p;
+  if ( p )
+    operator delete[](p);
+  this->mUseItemList.p = 0i64;
+  *(_QWORD *)&this->mUseItemList.size = 0i64;
   v26 = *((_QWORD *)v20 + 8);
   if ( v26 )
   {
@@ -824,31 +811,34 @@ LABEL_25:
     v45 = v29;
     if ( !v28 )
     {
-      v30 = v29->mNumElements;
-      v44 = v30;
-      if ( v30 )
+      mNumElements = v29->mNumElements;
+      v44 = mNumElements;
+      if ( mNumElements )
       {
-        UFG::qArray<long,0>::Reallocate((UFG::qArray<unsigned long,0> *)&v3->mUseItemList, v30, "mUseItemList Reserve");
+        UFG::qArray<long,0>::Reallocate(
+          (UFG::qArray<unsigned long,0> *)&this->mUseItemList,
+          mNumElements,
+          "mUseItemList Reserve");
         v29 = v45;
       }
       v31 = 0;
-      if ( v30 )
+      if ( mNumElements )
       {
         do
         {
           v32 = UFG::qPropertyList::Get<UFG::qSymbol>(v29, v31);
           if ( v32->mUID == qSymbol_None.mUID )
           {
-            v3->mItemListMatchesNoItem = 1;
+            this->mItemListMatchesNoItem = 1;
           }
           else if ( v32->mUID == qSymbol_Weapon_17.mUID )
           {
-            v3->mItemListMatchesWeapons = 1;
+            this->mItemListMatchesWeapons = 1;
           }
           else
           {
-            pTrackEnumBinding.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&pTrackEnumBinding;
-            pTrackEnumBinding.mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&pTrackEnumBinding;
+            pTrackEnumBinding.mPrev = &pTrackEnumBinding;
+            pTrackEnumBinding.mNext = &pTrackEnumBinding;
             pTrackEnumBinding.m_EnumSymbol.mUID = -1;
             pTrackEnumBinding.m_EnumSymbol = (UFG::qSymbol)v32->mUID;
             *(_QWORD *)&pTrackEnumBinding.m_EnumValue = 0i64;
@@ -859,22 +849,22 @@ LABEL_25:
             }
             else
             {
-              v33 = UFG::gInventoryItemTracksEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
-              UFG::gInventoryItemTracksEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&pTrackEnumBinding;
-              pTrackEnumBinding.mPrev = v33;
+              mPrev = UFG::gInventoryItemTracksEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev;
+              UFG::gInventoryItemTracksEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev->mNext = &pTrackEnumBinding;
+              pTrackEnumBinding.mPrev = mPrev;
               pTrackEnumBinding.mNext = &UFG::gInventoryItemTracksEnum.m_UnresolvedTracksEnumBindingList.mNode;
-              UFG::gInventoryItemTracksEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&pTrackEnumBinding;
+              UFG::gInventoryItemTracksEnum.m_UnresolvedTracksEnumBindingList.mNode.mPrev = &pTrackEnumBinding;
             }
-            v34 = pTrackEnumBinding.m_EnumValue;
+            m_EnumValue = pTrackEnumBinding.m_EnumValue;
             if ( pTrackEnumBinding.m_EnumValue )
             {
-              v35 = v3->mUseItemList.size;
-              v36 = v35 + 1;
-              v37 = v3->mUseItemList.capacity;
-              if ( (signed int)v35 + 1 > v37 )
+              size = this->mUseItemList.size;
+              v36 = size + 1;
+              capacity = this->mUseItemList.capacity;
+              if ( (int)size + 1 > capacity )
               {
-                if ( v37 )
-                  v38 = 2 * v37;
+                if ( capacity )
+                  v38 = 2 * capacity;
                 else
                   v38 = 1;
                 for ( ; v38 < v36; v38 *= 2 )
@@ -882,128 +872,112 @@ LABEL_25:
                 if ( v38 <= 4 )
                   v38 = 4;
                 if ( v38 - v36 > 0x10000 )
-                  v38 = v35 + 65537;
-                UFG::qArray<long,0>::Reallocate((UFG::qArray<unsigned long,0> *)&v3->mUseItemList, v38, "mUseItemList");
+                  v38 = size + 65537;
+                UFG::qArray<long,0>::Reallocate(
+                  (UFG::qArray<unsigned long,0> *)&this->mUseItemList,
+                  v38,
+                  "mUseItemList");
               }
-              v3->mUseItemList.size = v36;
-              v3->mUseItemList.p[v35] = v34;
-              v30 = v44;
+              this->mUseItemList.size = v36;
+              this->mUseItemList.p[size] = m_EnumValue;
+              mNumElements = v44;
             }
             else
             {
-              v39 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v3->mInterestPointTypePropertySet->mName);
+              v39 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&this->mInterestPointTypePropertySet->mName);
               UFG::qPrintf("Interest point with invalid item list element, check the property set for %s\n", v39);
             }
             v40 = pTrackEnumBinding.mPrev;
-            v41 = pTrackEnumBinding.mNext;
+            mNext = pTrackEnumBinding.mNext;
             pTrackEnumBinding.mPrev->mNext = pTrackEnumBinding.mNext;
-            v41->mPrev = v40;
-            pTrackEnumBinding.mPrev = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&pTrackEnumBinding;
-            pTrackEnumBinding.mNext = (UFG::qNode<TracksEnumBinding<unsigned long>,TracksEnumBinding<unsigned long> > *)&pTrackEnumBinding;
+            mNext->mPrev = v40;
+            pTrackEnumBinding.mPrev = &pTrackEnumBinding;
+            pTrackEnumBinding.mNext = &pTrackEnumBinding;
           }
           ++v31;
           v29 = v45;
         }
-        while ( v31 < v30 );
-        v2 = v43;
+        while ( v31 < mNumElements );
+        v2 = pInterestPointTypePropertySet;
       }
     }
   }
-  if ( v3->mItemListMatchesNoItem || !v3->mUseItemList.size )
+  if ( this->mItemListMatchesNoItem || !this->mUseItemList.size )
     v10 = 1;
-  v3->mItemListMatchesNoItem = v10;
-  v3->mNode.mUID = v2->mName.mUID;
-  UFG::InterestPointType::ReadAnimBankSymbols(v3, v2);
+  this->mItemListMatchesNoItem = v10;
+  this->mNode.mUID = v2->mName.mUID;
+  UFG::InterestPointType::ReadAnimBankSymbols(this, v2);
 }
 
 // File Line: 761
 // RVA: 0x57CA30
 void __fastcall UFG::InterestPoint::InterestPoint(UFG::InterestPoint *this, UFG::qSymbol *name)
 {
-  UFG::qSymbol *v2; // rbx
-  UFG::InterestPoint *v3; // rdi
-  unsigned int v4; // eax
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *v5; // rax
-  char v6; // cl
-  UFG::GridIntrusiveNode<UFG::InterestPoint> *v7; // [rsp+58h] [rbp+10h]
-  UFG::qSafePointer<UFG::SimComponent,UFG::CharacterAnimationComponent> *v8; // [rsp+58h] [rbp+10h]
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v9; // [rsp+58h] [rbp+10h]
-  UFG::qSafePointer<UFG::SimComponent,UFG::InterestPointUserComponent> *v10; // [rsp+58h] [rbp+10h]
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v11; // [rsp+58h] [rbp+10h]
+  unsigned int mUID; // eax
+  char v5; // cl
 
-  v2 = name;
-  v3 = this;
-  UFG::MarkerBase::MarkerBase((UFG::MarkerBase *)&this->vfptr, name, 0i64, 0x10000u);
-  v4 = v2->mUID;
-  v3->mNode.mParent = 0i64;
-  v3->mNode.mChild[0] = 0i64;
-  v3->mNode.mChild[1] = 0i64;
-  v3->mNode.mUID = v4;
-  v5 = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *)&v3->mPrev;
-  v5->mPrev = v5;
-  v5->mNext = v5;
-  UFG::qSafePointerNode<UFG::InterestPoint>::qSafePointerNode<UFG::InterestPoint>((UFG::qSafePointerNode<UFG::InterestPoint> *)&v3->vfptr);
-  v7 = (UFG::GridIntrusiveNode<UFG::InterestPoint> *)&v3->mPrev;
-  v7->mPrev = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *)&v7->mPrev;
-  v7->mNext = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *)&v7->mPrev;
-  v3->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InterestPoint::`vftable{for `UFG::MarkerBase};
-  v3->vfptr = (UFG::qSafePointerNode<UFG::InterestPoint>Vtbl *)&UFG::InterestPoint::`vftable{for `UFG::qSafePointerNode<UFG::InterestPoint>};
+  UFG::MarkerBase::MarkerBase(this, name, 0i64, 0x10000u);
+  mUID = name->mUID;
+  this->UFG::qNodeRB<UFG::InterestPoint>::mNode.mParent = 0i64;
+  this->UFG::qNodeRB<UFG::InterestPoint>::mNode.mChild[0] = 0i64;
+  this->UFG::qNodeRB<UFG::InterestPoint>::mNode.mChild[1] = 0i64;
+  this->UFG::qNodeRB<UFG::InterestPoint>::mNode.mUID = mUID;
+  this->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>::mPrev = &this->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>;
+  this->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>::mNext = &this->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>;
+  UFG::qSafePointerNode<UFG::InterestPoint>::qSafePointerNode<UFG::InterestPoint>(&this->UFG::qSafePointerNode<UFG::InterestPoint>);
+  this->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mPrev = &this->UFG::GridIntrusiveNode<UFG::InterestPoint>;
+  this->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mNext = &this->UFG::GridIntrusiveNode<UFG::InterestPoint>;
+  this->UFG::MarkerBase::UFG::HintComponentBase::UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InterestPoint::`vftable{for `UFG::MarkerBase};
+  this->UFG::qSafePointerNode<UFG::InterestPoint>::vfptr = (UFG::qSafePointerNode<UFG::InterestPoint>Vtbl *)&UFG::InterestPoint::`vftable{for `UFG::qSafePointerNode<UFG::InterestPoint>};
   `eh vector constructor iterator(
-    v3->mAnimGroupHandles,
+    this->mAnimGroupHandles,
     0x18ui64,
     3,
     (void (__fastcall *)(void *))AnimationGroupHandleContainer::AnimationGroupHandleContainer);
-  v3->mReferenceSubPriority = 0;
-  *(_QWORD *)&v3->mMinimumDistanceToPlayerSquared = 2139095039i64;
-  v3->mPoiType.mUID = -1;
-  v3->mIsPositionCached = 0;
-  v3->mBoneId = -1;
-  v8 = &v3->mpParentCharacterAnimationComponent;
-  v8->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v8->mPrev;
-  v8->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v8->mPrev;
-  v3->mpParentCharacterAnimationComponent.m_pPointer = 0i64;
-  *(_WORD *)&v3->mFullUpdateRequired = 256;
-  v9 = &v3->mpUser;
-  v9->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v9->mPrev;
-  v9->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v9->mPrev;
-  v3->mpUser.m_pPointer = 0i64;
-  v10 = &v3->mpInterestPointUserComponent;
-  v10->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v10->mPrev;
-  v10->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v10->mPrev;
-  v3->mpInterestPointUserComponent.m_pPointer = 0i64;
-  v3->mInterestPointType = 0i64;
-  v3->mUseTime = -1.0;
-  *(_QWORD *)&v3->mCooldownTime = 0i64;
-  *(_DWORD *)&v3->mIsInterrupted = 50397184;
-  *(_QWORD *)&v3->mTimeSinceBeginUse = 0i64;
-  v3->mNeedsBoneFixupWhenRigAvailable = 0;
-  v3->mBeginningScriptInfo.mpCachedScript = 0i64;
-  *(_WORD *)&v3->mBeginningScriptInfo.mHasScript = 0;
-  v3->mEndingScriptInfo.mpCachedScript = 0i64;
-  *(_WORD *)&v3->mEndingScriptInfo.mHasScript = 0;
-  v3->mOnReservationScriptInfo.mpCachedScript = 0i64;
-  *(_WORD *)&v3->mOnReservationScriptInfo.mHasScript = 0;
-  v3->mPropertiesHandle.mProperties = 0i64;
-  v3->mPropertiesHandle.mIsOwner = 1;
-  v3->mpPedInfoUser = 0i64;
-  v11 = &v3->mLinkObject;
-  v11->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v11->mPrev;
-  v11->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v11->mPrev;
-  v3->mLinkObject.m_pPointer = 0i64;
-  UFG::SimComponent::AddType(
-    (UFG::SimComponent *)&v3->vfptr,
-    UFG::InterestPoint::_InterestPointTypeUID,
-    "InterestPoint");
-  *(_QWORD *)v3->mLastPriority = -1i64;
-  *(_QWORD *)&v3->mLastPriority[2] = -1i64;
-  v3->mLastSubPriority[2] = -1;
+  this->mReferenceSubPriority = 0;
+  *(_QWORD *)&this->mMinimumDistanceToPlayerSquared = 2139095039i64;
+  this->mPoiType.mUID = -1;
+  this->mIsPositionCached = 0;
+  this->mBoneId = -1;
+  this->mpParentCharacterAnimationComponent.mPrev = &this->mpParentCharacterAnimationComponent;
+  this->mpParentCharacterAnimationComponent.mNext = &this->mpParentCharacterAnimationComponent;
+  this->mpParentCharacterAnimationComponent.m_pPointer = 0i64;
+  *(_WORD *)&this->mFullUpdateRequired = 256;
+  this->mpUser.mPrev = &this->mpUser;
+  this->mpUser.mNext = &this->mpUser;
+  this->mpUser.m_pPointer = 0i64;
+  this->mpInterestPointUserComponent.mPrev = &this->mpInterestPointUserComponent;
+  this->mpInterestPointUserComponent.mNext = &this->mpInterestPointUserComponent;
+  this->mpInterestPointUserComponent.m_pPointer = 0i64;
+  this->mInterestPointType = 0i64;
+  this->mUseTime = -1.0;
+  *(_QWORD *)&this->mCooldownTime = 0i64;
+  *(_DWORD *)&this->mIsInterrupted = 50397184;
+  *(_QWORD *)&this->mTimeSinceBeginUse = 0i64;
+  this->mNeedsBoneFixupWhenRigAvailable = 0;
+  this->mBeginningScriptInfo.mpCachedScript = 0i64;
+  *(_WORD *)&this->mBeginningScriptInfo.mHasScript = 0;
+  this->mEndingScriptInfo.mpCachedScript = 0i64;
+  *(_WORD *)&this->mEndingScriptInfo.mHasScript = 0;
+  this->mOnReservationScriptInfo.mpCachedScript = 0i64;
+  *(_WORD *)&this->mOnReservationScriptInfo.mHasScript = 0;
+  this->mPropertiesHandle.mProperties = 0i64;
+  this->mPropertiesHandle.mIsOwner = 1;
+  this->mpPedInfoUser = 0i64;
+  this->mLinkObject.mPrev = &this->mLinkObject;
+  this->mLinkObject.mNext = &this->mLinkObject;
+  this->mLinkObject.m_pPointer = 0i64;
+  UFG::SimComponent::AddType(this, UFG::InterestPoint::_InterestPointTypeUID, "InterestPoint");
+  *(_QWORD *)this->mLastPriority = -1i64;
+  *(_QWORD *)&this->mLastPriority[2] = -1i64;
+  this->mLastSubPriority[2] = -1;
   ++UFG::InterestPoint::msNumPOIsThisFrame;
-  v6 = initedTweakables;
+  v5 = initedTweakables;
   if ( !initedTweakables )
-    v6 = 1;
-  initedTweakables = v6;
-  *(_WORD *)&v3->mAddedToGrid = 0;
-  v3->mGridIndex = -1;
+    v5 = 1;
+  initedTweakables = v5;
+  *(_WORD *)&this->mAddedToGrid = 0;
+  this->mGridIndex = -1;
 }
 
 // File Line: 820
@@ -1039,7 +1013,8 @@ _BOOL8 __fastcall UFG::InterestPoint::GetWeatherFilterIsRaining(UFG::InterestPoi
 void __fastcall UFG::InterestPoint::SetPedInfoUser(UFG::InterestPoint *this, UFG::PedSpawningInfo *pedInfo)
 {
   this->mpPedInfoUser = pedInfo;
-  JUMPOUT(pedInfo, 0i64, UFG::InterestPoint::EndReservation);
+  if ( pedInfo )
+    UFG::InterestPoint::EndReservation(this);
 }
 
 // File Line: 855
@@ -1076,13 +1051,12 @@ void __fastcall UFG::InterestPoint::SetFemalePedestrianReference(UFG::InterestPo
 // RVA: 0x583030
 void __fastcall UFG::InterestPoint::InitAnimHandles(UFG::InterestPoint *this)
 {
-  UFG::InterestPoint *v1; // r13
-  signed __int64 v2; // r15
-  AnimationGroupHandleContainer *v3; // r14
-  UFG::InterestPointType *v4; // rax
-  signed int v5; // er12
+  __int64 v2; // r15
+  AnimationGroupHandleContainer *mAnimGroupHandles; // r14
+  UFG::InterestPointType *mInterestPointType; // rax
+  int v5; // r12d
   __int64 v6; // rbp
-  signed __int64 v7; // r15
+  char *v7; // r15
   int v8; // eax
   int v9; // eax
   int v10; // eax
@@ -1091,25 +1065,23 @@ void __fastcall UFG::InterestPoint::InitAnimHandles(UFG::InterestPoint *this)
   UFG::allocator::free_link *v13; // rax
   AnimationGroupHandle *v14; // rax
   AnimationGroupHandle *v15; // rdi
-  UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *v16; // rcx
-  UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *v17; // rax
-  signed __int64 v18; // [rsp+78h] [rbp+10h]
+  UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *mPrev; // rax
+  __int64 v17; // [rsp+78h] [rbp+10h]
 
-  v1 = this;
   v2 = 32i64;
-  v18 = 32i64;
-  v3 = this->mAnimGroupHandles;
+  v17 = 32i64;
+  mAnimGroupHandles = this->mAnimGroupHandles;
   do
   {
-    v4 = v1->mInterestPointType;
-    v5 = *(_DWORD *)((char *)&v4->mNode.mParent + v2);
+    mInterestPointType = this->mInterestPointType;
+    v5 = *(_DWORD *)((char *)&mInterestPointType->mNode.mParent + v2);
     v6 = 0i64;
     if ( v5 > 0 )
     {
-      v7 = (signed __int64)v4 + v2;
+      v7 = (char *)mInterestPointType + v2;
       do
       {
-        v8 = (unsigned __int64)UFG::InterestPoint::GetPriority(v1) - 1;
+        v8 = UFG::InterestPoint::GetPriority(this) - 1;
         if ( v8 )
         {
           v9 = v8 - 1;
@@ -1119,25 +1091,25 @@ void __fastcall UFG::InterestPoint::InitAnimHandles(UFG::InterestPoint *this)
             if ( v10 )
             {
               if ( v10 == 1 )
-                v11 = 9;
+                v11 = eANIM_PRIORITY_POI_CRITICAL;
               else
-                v11 = 2;
+                v11 = eANIM_PRIORITY_INACTIVE_POI;
             }
             else
             {
-              v11 = 5;
+              v11 = eANIM_PRIORITY_ACTIVE_POI;
             }
           }
           else
           {
-            v11 = 4;
+            v11 = eANIM_PRIORITY_PREDICTIVE_POI;
           }
         }
         else
         {
-          v11 = 3;
+          v11 = eANIM_PRIORITY_INSTANCED_POI;
         }
-        v12 = (UFG::qSymbolUC *)(*(_QWORD *)(v7 + 8) + 4 * v6);
+        v12 = (UFG::qSymbolUC *)(*((_QWORD *)v7 + 1) + 4 * v6);
         v13 = UFG::qMalloc(0x50ui64, "AnimationGroupHandle", 0i64);
         if ( v13 )
         {
@@ -1149,39 +1121,41 @@ void __fastcall UFG::InterestPoint::InitAnimHandles(UFG::InterestPoint *this)
           v15 = 0i64;
         }
         AnimationGroupHandle::Init(v15, v12, v11);
-        v16 = (UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *)&v15->mPrev;
-        v17 = v3->m_AnimationGroupHandleList.mNode.mPrev;
-        v17->mNext = (UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *)&v15->mPrev;
-        v16->mPrev = v17;
-        v16->mNext = &v3->m_AnimationGroupHandleList.mNode;
-        v3->m_AnimationGroupHandleList.mNode.mPrev = (UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *)&v15->mPrev;
+        mPrev = mAnimGroupHandles->m_AnimationGroupHandleList.mNode.mPrev;
+        mPrev->mNext = &v15->UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer>;
+        v15->UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer>::mPrev = mPrev;
+        v15->UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer>::mNext = &mAnimGroupHandles->m_AnimationGroupHandleList.mNode;
+        mAnimGroupHandles->m_AnimationGroupHandleList.mNode.mPrev = &v15->UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer>;
         v6 = (unsigned int)(v6 + 1);
       }
-      while ( (signed int)v6 < v5 );
-      v2 = v18;
+      while ( (int)v6 < v5 );
+      v2 = v17;
     }
     v2 += 16i64;
-    v18 = v2;
-    ++v3;
+    v17 = v2;
+    ++mAnimGroupHandles;
   }
   while ( v2 < 80 );
 }
 
 // File Line: 923
 // RVA: 0x58DC80
-void __fastcall UFG::InterestPoint::UpdateAnimHandles(UFG::InterestPoint *this, AnimationGroupHandleContainer *animGroupHandles, const float minimumDistanceToPlayerSquared, const bool isReferencedByPlayer, const bool isReferencedByPedestrian, UFG::eAnimationPriorityEnum *lastPriority, unsigned __int16 *lastSubPriority)
+void __fastcall UFG::InterestPoint::UpdateAnimHandles(
+        UFG::InterestPoint *this,
+        AnimationGroupHandleContainer *animGroupHandles,
+        const float minimumDistanceToPlayerSquared,
+        const bool isReferencedByPlayer,
+        bool isReferencedByPedestrian,
+        UFG::eAnimationPriorityEnum *lastPriority,
+        unsigned __int16 *lastSubPriority)
 {
-  AnimationGroupHandleContainer *v7; // rdi
-  UFG::InterestPoint *v8; // rsi
-  signed int v9; // er8
-  UFG::eAnimationPriorityEnum v10; // ebx
-  UFG::InterestPoint::eInterestPointPriority v11; // ecx
-  int v12; // ecx
-  int v13; // ecx
-  int v14; // ecx
+  int v9; // r8d
+  int v10; // ebx
+  UFG::InterestPoint::eInterestPointPriority mPriority; // ecx
+  __int32 v12; // ecx
+  __int32 v13; // ecx
+  __int32 v14; // ecx
 
-  v7 = animGroupHandles;
-  v8 = this;
   if ( (UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> **)&animGroupHandles->m_AnimationGroupHandleList.mNode.mNext[-1] != &animGroupHandles[-1].m_AnimationGroupHandleList.mNode.mNext )
   {
     v9 = 2;
@@ -1198,10 +1172,10 @@ void __fastcall UFG::InterestPoint::UpdateAnimHandles(UFG::InterestPoint *this, 
         v10 = 5;
     }
     if ( this->mOnDetachCalled )
-      v11 = 0;
+      mPriority = InterestPointPriority_None;
     else
-      v11 = this->mPropertiesHandle.mProperties->mPriority;
-    v12 = v11 - 1;
+      mPriority = this->mPropertiesHandle.mProperties->mPriority;
+    v12 = mPriority - 1;
     if ( v12 )
     {
       v13 = v12 - 1;
@@ -1229,20 +1203,23 @@ void __fastcall UFG::InterestPoint::UpdateAnimHandles(UFG::InterestPoint *this, 
     }
     if ( v10 <= v9 )
       v10 = v9;
-    if ( (signed int)v10 <= 2 )
+    if ( v10 <= 2 )
     {
       if ( animGroupHandles->m_bHasBeenBound )
         AnimationGroupHandleContainer::Unbind(animGroupHandles);
       *lastPriority = -1;
       *lastSubPriority = -1;
     }
-    else if ( v10 != *lastPriority || v8->mReferenceSubPriority != *lastSubPriority )
+    else if ( v10 != *lastPriority || this->mReferenceSubPriority != *lastSubPriority )
     {
-      AnimationGroupHandleContainer::SetAnimationPriority(animGroupHandles, v10, v8->mReferenceSubPriority);
-      if ( !v7->m_bHasBeenBound )
-        AnimationGroupHandleContainer::Bind(v7);
+      AnimationGroupHandleContainer::SetAnimationPriority(
+        animGroupHandles,
+        (UFG::eAnimationPriorityEnum)v10,
+        this->mReferenceSubPriority);
+      if ( !animGroupHandles->m_bHasBeenBound )
+        AnimationGroupHandleContainer::Bind(animGroupHandles);
       *lastPriority = v10;
-      *lastSubPriority = v8->mReferenceSubPriority;
+      *lastSubPriority = this->mReferenceSubPriority;
     }
   }
 }
@@ -1251,70 +1228,71 @@ void __fastcall UFG::InterestPoint::UpdateAnimHandles(UFG::InterestPoint *this, 
 // RVA: 0x58DDD0
 void __fastcall UFG::InterestPoint::UpdateAnimHandles(UFG::InterestPoint *this)
 {
-  UFG::InterestPoint *v1; // rbx
+  bool isReferencedByPedestrian; // r8
 
-  v1 = this;
+  isReferencedByPedestrian = this->mReferencedByMalePedestrian || this->mReferencedByFemalePedestrian;
   UFG::InterestPoint::UpdateAnimHandles(
     this,
     this->mAnimGroupHandles,
     this->mMinimumDistanceToPlayerSquared,
     this->mReferencedByPlayer != 0,
-    *(_WORD *)&this->mReferencedByMalePedestrian != 0,
+    isReferencedByPedestrian,
     this->mLastPriority,
     this->mLastSubPriority);
   UFG::InterestPoint::UpdateAnimHandles(
-    v1,
-    &v1->mAnimGroupHandles[1],
-    v1->mMinimumDistanceToPlayerSquared,
-    v1->mReferencedByPlayer != 0,
-    v1->mReferencedByMalePedestrian != 0,
-    &v1->mLastPriority[1],
-    &v1->mLastSubPriority[1]);
+    this,
+    &this->mAnimGroupHandles[1],
+    this->mMinimumDistanceToPlayerSquared,
+    this->mReferencedByPlayer != 0,
+    this->mReferencedByMalePedestrian != 0,
+    &this->mLastPriority[1],
+    &this->mLastSubPriority[1]);
   UFG::InterestPoint::UpdateAnimHandles(
-    v1,
-    &v1->mAnimGroupHandles[2],
-    v1->mMinimumDistanceToPlayerSquared,
+    this,
+    &this->mAnimGroupHandles[2],
+    this->mMinimumDistanceToPlayerSquared,
     0,
-    v1->mReferencedByFemalePedestrian != 0,
-    &v1->mLastPriority[2],
-    &v1->mLastSubPriority[2]);
+    this->mReferencedByFemalePedestrian != 0,
+    &this->mLastPriority[2],
+    &this->mLastSubPriority[2]);
 }
 
 // File Line: 1001
 // RVA: 0x584110
-char __fastcall UFG::InterestPoint::IsAvailable(UFG::InterestPoint *this, UFG::SimObject *simObject, const bool ensureReferenced)
+char __fastcall UFG::InterestPoint::IsAvailable(
+        UFG::InterestPoint *this,
+        UFG::SimObjectCVBase *simObject,
+        const bool ensureReferenced)
 {
-  UFG::InterestPoint *v3; // rdi
-  bool v4; // al
-  signed __int64 v5; // rsi
-  signed __int64 v6; // rbx
+  bool IsFemale; // al
+  UFG::GridIntrusiveNode<UFG::InterestPoint> *v5; // rsi
+  UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *v6; // rbx
   AnimationGroup *v7; // rcx
   UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *v8; // rax
-  signed __int64 v9; // rdi
-  signed __int64 v10; // rbx
+  UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> **v9; // rdi
+  __int64 v10; // rbx
   AnimationGroup *v11; // rcx
-  AnimationGroup *v13; // rcx
+  AnimationGroup *mNext; // rcx
   UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *v14; // rax
-  signed __int64 v15; // rdi
-  signed __int64 v16; // rbx
+  UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> **p_mNext; // rdi
+  __int64 v16; // rbx
   AnimationGroup *v17; // rcx
 
-  v3 = this;
-  v4 = UFG::IsFemale(simObject);
-  v5 = (signed __int64)&v3->mPrev;
-  v6 = (signed __int64)&v3->mAnimGroupHandles[0].m_AnimationGroupHandleList.mNode.mNext[-1];
-  if ( !v4 )
+  IsFemale = UFG::IsFemale(simObject);
+  v5 = &this->UFG::GridIntrusiveNode<UFG::InterestPoint>;
+  v6 = this->mAnimGroupHandles[0].m_AnimationGroupHandleList.mNode.mNext - 1;
+  if ( !IsFemale )
   {
-    for ( ; v6 != v5; v6 = *(_QWORD *)(v6 + 24) - 16i64 )
+    for ( ; v6 != (UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *)v5; v6 = v6[1].mNext - 1 )
     {
-      v13 = *(AnimationGroup **)(v6 + 56);
-      if ( !v13 || !AnimationGroup::IsStreamedIn(v13) )
+      mNext = (AnimationGroup *)v6[3].mNext;
+      if ( !mNext || !AnimationGroup::IsStreamedIn(mNext) )
         return 0;
     }
-    v14 = v3->mAnimGroupHandles[1].m_AnimationGroupHandleList.mNode.mNext;
-    v15 = (signed __int64)&v3->mAnimGroupHandles[0].m_AnimationGroupHandleList.mNode.mNext;
-    v16 = (signed __int64)&v14[-1];
-    if ( &v14[-1] != (UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *)v15 )
+    v14 = this->mAnimGroupHandles[1].m_AnimationGroupHandleList.mNode.mNext;
+    p_mNext = &this->mAnimGroupHandles[0].m_AnimationGroupHandleList.mNode.mNext;
+    v16 = (__int64)&v14[-1];
+    if ( &v14[-1] != (UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *)p_mNext )
     {
       while ( 1 )
       {
@@ -1322,22 +1300,22 @@ char __fastcall UFG::InterestPoint::IsAvailable(UFG::InterestPoint *this, UFG::S
         if ( !v17 || !AnimationGroup::IsStreamedIn(v17) )
           break;
         v16 = *(_QWORD *)(v16 + 24) - 16i64;
-        if ( v16 == v15 )
+        if ( (UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> **)v16 == p_mNext )
           return 1;
       }
       return 0;
     }
     return 1;
   }
-  for ( ; v6 != v5; v6 = *(_QWORD *)(v6 + 24) - 16i64 )
+  for ( ; v6 != (UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *)v5; v6 = v6[1].mNext - 1 )
   {
-    v7 = *(AnimationGroup **)(v6 + 56);
+    v7 = (AnimationGroup *)v6[3].mNext;
     if ( !v7 || !AnimationGroup::IsStreamedIn(v7) )
       return 0;
   }
-  v8 = v3->mAnimGroupHandles[2].m_AnimationGroupHandleList.mNode.mNext;
-  v9 = (signed __int64)&v3->mAnimGroupHandles[1].m_AnimationGroupHandleList.mNode.mNext;
-  v10 = (signed __int64)&v8[-1];
+  v8 = this->mAnimGroupHandles[2].m_AnimationGroupHandleList.mNode.mNext;
+  v9 = &this->mAnimGroupHandles[1].m_AnimationGroupHandleList.mNode.mNext;
+  v10 = (__int64)&v8[-1];
   if ( &v8[-1] == (UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> *)v9 )
     return 1;
   while ( 1 )
@@ -1346,7 +1324,7 @@ char __fastcall UFG::InterestPoint::IsAvailable(UFG::InterestPoint *this, UFG::S
     if ( !v11 || !AnimationGroup::IsStreamedIn(v11) )
       break;
     v10 = *(_QWORD *)(v10 + 24) - 16i64;
-    if ( v10 == v9 )
+    if ( (UFG::qNode<AnimationGroupHandle,AnimationGroupHandleContainer> **)v10 == v9 )
       return 1;
   }
   return 0;
@@ -1357,35 +1335,32 @@ char __fastcall UFG::InterestPoint::IsAvailable(UFG::InterestPoint *this, UFG::S
 UFG::InterestPointType *__fastcall UFG::InterestPoint::AddInterestPointType(UFG::qPropertySet *pInterestPointTypeProps)
 {
   UFG::InterestPointType *v1; // rbx
-  UFG::InterestPointType *result; // rax
   char *v3; // rax
 
   if ( UFG::InterestPoint::msInterestPointTypePool.size >= 0x1F4 )
   {
     v3 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&pInterestPointTypeProps->mName);
     UFG::qPrintf("WARNING: InterestPoint::AddInterestPointType: Pool is Full (%d) Not Adding (%s)\n", 500i64, v3);
-    result = 0i64;
+    return 0i64;
   }
   else
   {
-    v1 = &UFG::InterestPoint::msInterestPointTypePool.p[UFG::InterestPoint::msInterestPointTypePool.size];
-    ++UFG::InterestPoint::msInterestPointTypePool.size;
+    v1 = &UFG::InterestPoint::msInterestPointTypePool.p[UFG::InterestPoint::msInterestPointTypePool.size++];
     UFG::InterestPointType::InitFromPropertySet(v1, pInterestPointTypeProps);
     UFG::qBaseTreeRB::Add(&UFG::InterestPoint::msInterestPointTypeTree.mTree, &v1->mNode);
-    result = v1;
+    return v1;
   }
-  return result;
 }
 
 // File Line: 1060
 // RVA: 0x58C790
 void UFG::InterestPoint::StaticInit(void)
 {
-  UFG::qPropertySet *v0; // rbx
+  UFG::qPropertySet *PropertySet; // rbx
   UFG::qPropertyList *v1; // rax
   UFG::qPropertyList *v2; // r14
-  unsigned int v3; // ebp
-  unsigned int v4; // ebx
+  unsigned int mNumElements; // ebp
+  unsigned int i; // ebx
   UFG::qSymbol *v5; // rax
   UFG::qSymbol *v6; // rdi
   UFG::qPropertySet *v7; // rax
@@ -1394,51 +1369,44 @@ void UFG::InterestPoint::StaticInit(void)
   char *v10; // rax
   char *v11; // rax
   char *v12; // rax
-  UFG::qSymbol name; // [rsp+40h] [rbp+8h]
-  UFG::qSymbol result; // [rsp+48h] [rbp+10h]
+  UFG::qArray<unsigned long,0> name; // [rsp+40h] [rbp+8h] BYREF
 
-  UFG::qSymbol::create_from_string(&result, "config-InterestPointTypes");
-  v0 = UFG::PropertySetManager::GetPropertySet(&result);
-  if ( v0 )
+  UFG::qSymbol::create_from_string((UFG::qSymbol *)&name.p, "config-InterestPointTypes");
+  PropertySet = UFG::PropertySetManager::GetPropertySet((UFG::qSymbol *)&name.p);
+  if ( PropertySet )
   {
-    UFG::qSymbol::create_from_string(&name, "types");
-    v1 = UFG::qPropertySet::Get<UFG::qPropertyList>(v0, &name, DEPTH_RECURSE);
+    UFG::qSymbol::create_from_string((UFG::qSymbol *)&name, "types");
+    v1 = UFG::qPropertySet::Get<UFG::qPropertyList>(PropertySet, &name, DEPTH_RECURSE);
     v2 = v1;
     if ( v1 )
     {
-      v3 = v1->mNumElements;
-      v4 = 0;
-      if ( v3 )
+      mNumElements = v1->mNumElements;
+      for ( i = 0; i < mNumElements; ++i )
       {
-        do
+        v5 = UFG::qPropertyList::Get<UFG::qSymbol>(v2, i);
+        v6 = v5;
+        if ( v5 )
         {
-          v5 = UFG::qPropertyList::Get<UFG::qSymbol>(v2, v4);
-          v6 = v5;
-          if ( v5 )
+          v7 = UFG::PropertySetManager::GetPropertySet(v5);
+          v8 = v7;
+          if ( v7 )
           {
-            v7 = UFG::PropertySetManager::GetPropertySet(v5);
-            v8 = v7;
-            if ( v7 )
+            if ( UFG::InterestPoint::AddInterestPointType(v7) )
             {
-              if ( UFG::InterestPoint::AddInterestPointType(v7) )
-              {
-                UFG::InterestPointProperties::AddToCache(v8, v6);
-              }
-              else
-              {
-                v9 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)v6);
-                UFG::qPrintf("WARNING: InterestPoint::StaticInit: Pool is Full (%d) Not Adding (%s)\n", 500i64, v9);
-              }
+              UFG::InterestPointProperties::AddToCache(v8, v6);
             }
             else
             {
-              v10 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)v6);
-              UFG::qPrintf("WARNING: InterestPoint::StaticInit: Interest Point Type Not Found: %s\n", v10);
+              v9 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)v6);
+              UFG::qPrintf("WARNING: InterestPoint::StaticInit: Pool is Full (%d) Not Adding (%s)\n", 500i64, v9);
             }
           }
-          ++v4;
+          else
+          {
+            v10 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)v6);
+            UFG::qPrintf("WARNING: InterestPoint::StaticInit: Interest Point Type Not Found: %s\n", v10);
+          }
         }
-        while ( v4 < v3 );
       }
     }
     else
@@ -1449,7 +1417,7 @@ void UFG::InterestPoint::StaticInit(void)
   }
   else
   {
-    v12 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&result);
+    v12 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&name.p);
     UFG::qPrintf("WARNING: InterestPoint::StaticInit: Manifest File Not Found: %s\n", v12);
   }
 }
@@ -1458,141 +1426,135 @@ void UFG::InterestPoint::StaticInit(void)
 // RVA: 0x57D920
 void __fastcall UFG::InterestPoint::~InterestPoint(UFG::InterestPoint *this)
 {
-  UFG::InterestPoint *v1; // rdi
   UFG::qSafePointerNode<UFG::ParkourHandle> *v2; // rbx
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v3; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v4; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v5; // rax
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mLinkObject; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v6; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v7; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::InterestPointUserComponent> *v8; // rdx
+  UFG::qSafePointer<UFG::SimComponent,UFG::InterestPointUserComponent> *p_mpInterestPointUserComponent; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v9; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v10; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v11; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v12; // rax
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v13; // rdx
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mpUser; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v14; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v15; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v16; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v17; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::CharacterAnimationComponent> *v18; // rdx
+  UFG::qSafePointer<UFG::SimComponent,UFG::CharacterAnimationComponent> *p_mpParentCharacterAnimationComponent; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v19; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v20; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v21; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v22; // rax
-  UFG::GridIntrusiveNode<UFG::InterestPoint> *v23; // rdx
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *v24; // rcx
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *v25; // rax
-  UFG::qList<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList,1,0> *v26; // rbx
-  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v27; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v28; // rax
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *v29; // rdx
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *v30; // rcx
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *v31; // rax
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *v23; // rcx
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *v24; // rax
+  UFG::qList<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList,1,0> *p_m_SafePointerList; // rbx
+  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v26; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v27; // rax
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *v28; // rcx
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *v29; // rax
 
-  v1 = this;
-  this->vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InterestPoint::`vftable{for `UFG::MarkerBase};
-  v2 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)&this->vfptr;
-  this->vfptr = (UFG::qSafePointerNode<UFG::InterestPoint>Vtbl *)&UFG::InterestPoint::`vftable{for `UFG::qSafePointerNode<UFG::InterestPoint>};
-  v3 = &this->mLinkObject;
+  this->UFG::MarkerBase::UFG::HintComponentBase::UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&UFG::InterestPoint::`vftable{for `UFG::MarkerBase};
+  v2 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)&this->UFG::qSafePointerNode<UFG::InterestPoint>;
+  this->UFG::qSafePointerNode<UFG::InterestPoint>::vfptr = (UFG::qSafePointerNode<UFG::InterestPoint>Vtbl *)&UFG::InterestPoint::`vftable{for `UFG::qSafePointerNode<UFG::InterestPoint>};
+  p_mLinkObject = &this->mLinkObject;
   if ( this->mLinkObject.m_pPointer )
   {
-    v4 = v3->mPrev;
-    v5 = v3->mNext;
-    v4->mNext = v5;
-    v5->mPrev = v4;
-    v3->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v3->mPrev;
-    v3->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v3->mPrev;
+    mPrev = p_mLinkObject->mPrev;
+    mNext = p_mLinkObject->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mLinkObject->mPrev = p_mLinkObject;
+    p_mLinkObject->mNext = p_mLinkObject;
   }
-  v3->m_pPointer = 0i64;
-  v6 = v3->mPrev;
-  v7 = v3->mNext;
+  p_mLinkObject->m_pPointer = 0i64;
+  v6 = p_mLinkObject->mPrev;
+  v7 = p_mLinkObject->mNext;
   v6->mNext = v7;
   v7->mPrev = v6;
-  v3->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v3->mPrev;
-  v3->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v3->mPrev;
-  UFG::InterestPointPropertiesHandle::Set(&v1->mPropertiesHandle, 0i64, 1);
-  v8 = &v1->mpInterestPointUserComponent;
-  if ( v1->mpInterestPointUserComponent.m_pPointer )
+  p_mLinkObject->mPrev = p_mLinkObject;
+  p_mLinkObject->mNext = p_mLinkObject;
+  UFG::InterestPointPropertiesHandle::Set(&this->mPropertiesHandle, 0i64, 1);
+  p_mpInterestPointUserComponent = &this->mpInterestPointUserComponent;
+  if ( this->mpInterestPointUserComponent.m_pPointer )
   {
-    v9 = v8->mPrev;
-    v10 = v1->mpInterestPointUserComponent.mNext;
+    v9 = p_mpInterestPointUserComponent->mPrev;
+    v10 = this->mpInterestPointUserComponent.mNext;
     v9->mNext = v10;
     v10->mPrev = v9;
-    v8->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v8->mPrev;
-    v1->mpInterestPointUserComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->mpInterestPointUserComponent.mPrev;
+    p_mpInterestPointUserComponent->mPrev = p_mpInterestPointUserComponent;
+    this->mpInterestPointUserComponent.mNext = &this->mpInterestPointUserComponent;
   }
-  v1->mpInterestPointUserComponent.m_pPointer = 0i64;
-  v11 = v8->mPrev;
-  v12 = v1->mpInterestPointUserComponent.mNext;
+  this->mpInterestPointUserComponent.m_pPointer = 0i64;
+  v11 = p_mpInterestPointUserComponent->mPrev;
+  v12 = this->mpInterestPointUserComponent.mNext;
   v11->mNext = v12;
   v12->mPrev = v11;
-  v8->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v8->mPrev;
-  v1->mpInterestPointUserComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->mpInterestPointUserComponent.mPrev;
-  v13 = &v1->mpUser;
-  if ( v1->mpUser.m_pPointer )
+  p_mpInterestPointUserComponent->mPrev = p_mpInterestPointUserComponent;
+  this->mpInterestPointUserComponent.mNext = &this->mpInterestPointUserComponent;
+  p_mpUser = &this->mpUser;
+  if ( this->mpUser.m_pPointer )
   {
-    v14 = v13->mPrev;
-    v15 = v1->mpUser.mNext;
+    v14 = p_mpUser->mPrev;
+    v15 = this->mpUser.mNext;
     v14->mNext = v15;
     v15->mPrev = v14;
-    v13->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v13->mPrev;
-    v1->mpUser.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->mpUser.mPrev;
+    p_mpUser->mPrev = p_mpUser;
+    this->mpUser.mNext = &this->mpUser;
   }
-  v1->mpUser.m_pPointer = 0i64;
-  v16 = v13->mPrev;
-  v17 = v1->mpUser.mNext;
+  this->mpUser.m_pPointer = 0i64;
+  v16 = p_mpUser->mPrev;
+  v17 = this->mpUser.mNext;
   v16->mNext = v17;
   v17->mPrev = v16;
-  v13->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v13->mPrev;
-  v1->mpUser.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->mpUser.mPrev;
-  v18 = &v1->mpParentCharacterAnimationComponent;
-  if ( v1->mpParentCharacterAnimationComponent.m_pPointer )
+  p_mpUser->mPrev = p_mpUser;
+  this->mpUser.mNext = &this->mpUser;
+  p_mpParentCharacterAnimationComponent = &this->mpParentCharacterAnimationComponent;
+  if ( this->mpParentCharacterAnimationComponent.m_pPointer )
   {
-    v19 = v18->mPrev;
-    v20 = v1->mpParentCharacterAnimationComponent.mNext;
+    v19 = p_mpParentCharacterAnimationComponent->mPrev;
+    v20 = this->mpParentCharacterAnimationComponent.mNext;
     v19->mNext = v20;
     v20->mPrev = v19;
-    v18->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v18->mPrev;
-    v1->mpParentCharacterAnimationComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->mpParentCharacterAnimationComponent.mPrev;
+    p_mpParentCharacterAnimationComponent->mPrev = p_mpParentCharacterAnimationComponent;
+    this->mpParentCharacterAnimationComponent.mNext = &this->mpParentCharacterAnimationComponent;
   }
-  v1->mpParentCharacterAnimationComponent.m_pPointer = 0i64;
-  v21 = v18->mPrev;
-  v22 = v1->mpParentCharacterAnimationComponent.mNext;
+  this->mpParentCharacterAnimationComponent.m_pPointer = 0i64;
+  v21 = p_mpParentCharacterAnimationComponent->mPrev;
+  v22 = this->mpParentCharacterAnimationComponent.mNext;
   v21->mNext = v22;
   v22->mPrev = v21;
-  v18->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v18->mPrev;
-  v1->mpParentCharacterAnimationComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->mpParentCharacterAnimationComponent.mPrev;
+  p_mpParentCharacterAnimationComponent->mPrev = p_mpParentCharacterAnimationComponent;
+  this->mpParentCharacterAnimationComponent.mNext = &this->mpParentCharacterAnimationComponent;
   `eh vector destructor iterator(
-    v1->mAnimGroupHandles,
+    this->mAnimGroupHandles,
     0x18ui64,
     3,
     (void (__fastcall *)(void *))AnimationGroupHandleContainer::~AnimationGroupHandleContainer);
-  v23 = (UFG::GridIntrusiveNode<UFG::InterestPoint> *)&v1->mPrev;
-  v24 = v1->mPrev;
-  v25 = v1->mNext;
-  v24->mNext = v25;
-  v25->mPrev = v24;
-  v23->mPrev = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *)&v23->mPrev;
-  v23->mNext = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *)&v23->mPrev;
+  v23 = this->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mPrev;
+  v24 = this->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mNext;
+  v23->mNext = v24;
+  v24->mPrev = v23;
+  this->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mPrev = &this->UFG::GridIntrusiveNode<UFG::InterestPoint>;
+  this->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mNext = &this->UFG::GridIntrusiveNode<UFG::InterestPoint>;
   v2->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::InterestPoint>::`vftable;
   UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull(v2);
-  v26 = &v2->m_SafePointerList;
-  UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes(v26);
-  v27 = v26->mNode.mPrev;
-  v28 = v26->mNode.mNext;
-  v27->mNext = v28;
-  v28->mPrev = v27;
-  v26->mNode.mPrev = &v26->mNode;
-  v26->mNode.mNext = &v26->mNode;
-  v29 = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *)&v1->mPrev;
-  v30 = v1->mPrev;
-  v31 = v1->mNext;
-  v30->mNext = v31;
-  v31->mPrev = v30;
-  v29->mPrev = v29;
-  v29->mNext = v29;
-  UFG::MarkerBase::~MarkerBase((UFG::MarkerBase *)&v1->vfptr);
+  p_m_SafePointerList = &v2->m_SafePointerList;
+  UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes(p_m_SafePointerList);
+  v26 = p_m_SafePointerList->mNode.mPrev;
+  v27 = p_m_SafePointerList->mNode.mNext;
+  v26->mNext = v27;
+  v27->mPrev = v26;
+  p_m_SafePointerList->mNode.mPrev = &p_m_SafePointerList->mNode;
+  p_m_SafePointerList->mNode.mNext = &p_m_SafePointerList->mNode;
+  v28 = this->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>::mPrev;
+  v29 = this->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>::mNext;
+  v28->mNext = v29;
+  v29->mPrev = v28;
+  this->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>::mPrev = &this->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>;
+  this->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>::mNext = &this->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>;
+  UFG::MarkerBase::~MarkerBase(this);
 }
 
 // File Line: 1126
@@ -1601,8 +1563,8 @@ void UFG::InterestPoint::InitGrid(void)
 {
   UFG::GridIntrusive<UFG::InterestPoint> *v0; // rbx
   float y_max; // xmm8_4
-  float v2; // xmm7_4
-  float v3; // xmm6_4
+  float x; // xmm7_4
+  float y; // xmm6_4
   float v4; // xmm1_4
   UFG::GridIntrusive<UFG::InterestPoint> *v5; // rbx
   float v6; // xmm8_4
@@ -1614,11 +1576,11 @@ void UFG::InterestPoint::InitGrid(void)
   if ( v0 )
   {
     y_max = UFG::GetWorldExtents_max()->y;
-    v2 = UFG::GetWorldExtents_max()->x;
-    v3 = UFG::GetWorldExtents_min()->y;
+    x = UFG::GetWorldExtents_max()->x;
+    y = UFG::GetWorldExtents_min()->y;
     v4 = UFG::GetWorldExtents_min()->x;
     v0->mGridNodes = 0i64;
-    UFG::GridIntrusive<UFG::InterestPoint>::Init(v0, v4, v3, v2, y_max, 50.0);
+    UFG::GridIntrusive<UFG::InterestPoint>::Init(v0, v4, y, x, y_max, 50.0);
   }
   else
   {
@@ -1658,69 +1620,63 @@ void UFG::InterestPoint::DeleteGrid(void)
 // RVA: 0x586C40
 void __fastcall UFG::InterestPoint::OnDetach(UFG::InterestPoint *this)
 {
-  UFG::InterestPoint *v1; // rbx
   UFG::GridIntrusive<UFG::InterestPoint> *v2; // r8
-  UFG::GridIntrusiveNode<UFG::InterestPoint> *v3; // rdx
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *v4; // rcx
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *v5; // rax
-  UFG::InterestPointProperties *v6; // rax
-  UFG::SimObject *v7; // rax
-  UFG::SceneObjectProperties *v8; // rdi
-  UFG::PedSpawnManager *v9; // rax
-  UFG::qTreeRB<UFG::InterestPoint,UFG::InterestPoint,1> *v10; // rcx
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *v11; // rdx
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *v12; // rcx
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *v13; // rax
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *mPrev; // rcx
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *mNext; // rax
+  UFG::InterestPointProperties *mProperties; // rax
+  UFG::SimObject *m_pSimObject; // rax
+  UFG::SceneObjectProperties *m_pSceneObj; // rdi
+  UFG::PedSpawnManager *Instance; // rax
+  UFG::qTreeRB<UFG::InterestPoint,UFG::InterestPoint,1> *v9; // rcx
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *v10; // rcx
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *v11; // rax
 
-  v1 = this;
   if ( this->mAddedToGrid )
   {
     UFG::InterestPoint::GetPosition(this);
     v2 = UFG::InterestPoint::mspUseInterestPointGrid;
-    if ( v1->mPoiType.mUID == qSymbol_look.mUID )
+    if ( this->mPoiType.mUID == qSymbol_look.mUID )
       v2 = UFG::InterestPoint::mspLookInterestPointGrid;
     if ( v2 )
     {
-      v3 = (UFG::GridIntrusiveNode<UFG::InterestPoint> *)&v1->mPrev;
-      v4 = v1->mPrev;
-      v5 = v1->mNext;
-      v4->mNext = v5;
-      v5->mPrev = v4;
-      v3->mPrev = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *)&v3->mPrev;
-      v3->mNext = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *)&v3->mPrev;
+      mPrev = this->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mPrev;
+      mNext = this->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mNext;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
+      this->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mPrev = &this->UFG::GridIntrusiveNode<UFG::InterestPoint>;
+      this->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mNext = &this->UFG::GridIntrusiveNode<UFG::InterestPoint>;
       --v2->mNodeCount;
-      *(_WORD *)&v1->mAddedToGrid = 256;
+      *(_WORD *)&this->mAddedToGrid = 256;
     }
   }
-  v6 = v1->mPropertiesHandle.mProperties;
-  if ( v6 && v6->mSpawnAmbientUserDistance > 0.0 )
+  mProperties = this->mPropertiesHandle.mProperties;
+  if ( mProperties && mProperties->mSpawnAmbientUserDistance > 0.0 )
   {
-    v7 = v1->m_pSimObject;
-    if ( v7 )
-      v8 = v7->m_pSceneObj;
+    m_pSimObject = this->m_pSimObject;
+    if ( m_pSimObject )
+      m_pSceneObj = m_pSimObject->m_pSceneObj;
     else
-      v8 = 0i64;
-    v9 = UFG::PedSpawnManager::GetInstance();
-    UFG::PedSpawnManager::UnRegisterSpawningPOI(v9, v1, v8);
+      m_pSceneObj = 0i64;
+    Instance = UFG::PedSpawnManager::GetInstance();
+    UFG::PedSpawnManager::UnRegisterSpawningPOI(Instance, this, m_pSceneObj);
   }
-  if ( v1->mIsReserved )
-    UFG::InterestPoint::EndReservation(v1);
-  v10 = &UFG::InterestPoint::msLookInterestPoints;
-  if ( v1->mPoiType.mUID != qSymbol_look.mUID )
-    v10 = &UFG::InterestPoint::msUseInterestPoints;
+  if ( this->mIsReserved )
+    UFG::InterestPoint::EndReservation(this);
+  v9 = &UFG::InterestPoint::msLookInterestPoints;
+  if ( this->mPoiType.mUID != qSymbol_look.mUID )
+    v9 = &UFG::InterestPoint::msUseInterestPoints;
   UFG::qBaseTreeVariableRB<unsigned __int64>::Remove(
-    (UFG::qBaseTreeVariableRB<unsigned __int64> *)v10,
-    (UFG::qBaseNodeVariableRB<unsigned __int64> *)&v1->mNode);
-  v1->mFullUpdateRequired = 0;
-  v11 = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *)&v1->mPrev;
-  v12 = v1->mPrev;
-  v13 = v1->mNext;
-  v12->mNext = v13;
-  v13->mPrev = v12;
-  v11->mPrev = v11;
-  v11->mNext = v11;
-  v1->mOnDetachCalled = 1;
-  UFG::InterestPoint::UpdateAnimHandles(v1);
+    (UFG::qBaseTreeVariableRB<unsigned __int64> *)v9,
+    (UFG::qBaseNodeVariableRB<unsigned __int64> *)&this->UFG::qNodeRB<UFG::InterestPoint>);
+  this->mFullUpdateRequired = 0;
+  v10 = this->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>::mPrev;
+  v11 = this->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>::mNext;
+  v10->mNext = v11;
+  v11->mPrev = v10;
+  this->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>::mPrev = &this->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>;
+  this->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>::mNext = &this->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>;
+  this->mOnDetachCalled = 1;
+  UFG::InterestPoint::UpdateAnimHandles(this);
 }
 
 // File Line: 1205
@@ -1735,41 +1691,39 @@ float __fastcall UFG::InterestPoint::GetRawAppeal(UFG::InterestPoint *this)
 void __fastcall UFG::InterestPoint::TeleportEventHandler(UFG::InterestPoint *this, UFG::Event *this_event)
 {
   UFG::GridIntrusive<UFG::InterestPoint> *v2; // r8
-  UFG::InterestPoint *v3; // r9
-  int v4; // er10
+  int v4; // r10d
   UFG::GridIntrusiveNode<UFG::InterestPoint> *v5; // rdx
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *v6; // rcx
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *v7; // rax
-  UFG::qList<UFG::InterestPoint,UFG::InterestPoint,1,0> *v8; // rcx
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *mPrev; // rcx
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *mNext; // rax
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *p_mNode; // rcx
   UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *v9; // rax
 
   this->mIsPositionCached = 0;
   v2 = UFG::InterestPoint::mspUseInterestPointGrid;
-  v3 = this;
   if ( this->mPoiType.mUID == qSymbol_look.mUID )
     v2 = UFG::InterestPoint::mspLookInterestPointGrid;
   if ( v2 && this->mAddedToGrid && !this->mRemovedFromGrid )
   {
-    v4 = (signed int)(float)((float)(*(float *)&this_event[2].mNext - v2->mXMin) * v2->mGridSizeInv)
-       + v2->mXDim * (signed int)(float)((float)(*((float *)&this_event[2].mNext + 1) - v2->mYMin) * v2->mGridSizeInv);
+    v4 = (int)(float)((float)(*(float *)&this_event[2].mNext - v2->mXMin) * v2->mGridSizeInv)
+       + v2->mXDim * (int)(float)((float)(*((float *)&this_event[2].mNext + 1) - v2->mYMin) * v2->mGridSizeInv);
     if ( v4 != this->mGridIndex )
     {
-      v5 = (UFG::GridIntrusiveNode<UFG::InterestPoint> *)&this->mPrev;
-      v6 = this->mPrev;
-      v7 = v5->mNext;
-      v6->mNext = v7;
-      v7->mPrev = v6;
-      v5->mPrev = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *)&v5->mPrev;
-      v5->mNext = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *)&v5->mPrev;
+      v5 = &this->UFG::GridIntrusiveNode<UFG::InterestPoint>;
+      mPrev = this->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mPrev;
+      mNext = v5->mNext;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
+      v5->mPrev = v5;
+      v5->mNext = v5;
       --v2->mNodeCount;
-      v8 = &v2->mGridNodes[v4];
-      v9 = v8->mNode.mPrev;
-      v9->mNext = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *)&v5->mPrev;
+      p_mNode = &v2->mGridNodes[v4].mNode;
+      v9 = p_mNode->mPrev;
+      v9->mNext = v5;
       v5->mPrev = v9;
-      v5->mNext = &v8->mNode;
-      v8->mNode.mPrev = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *)&v5->mPrev;
+      v5->mNext = p_mNode;
+      p_mNode->mPrev = v5;
       ++v2->mNodeCount;
-      v3->mGridIndex = v4;
+      this->mGridIndex = v4;
     }
   }
 }
@@ -1806,13 +1760,10 @@ _BOOL8 __fastcall UFG::InterestPoint::GetAllowSocialInteraction(UFG::InterestPoi
 // RVA: 0x5828F0
 __int64 __fastcall UFG::InterestPoint::GetPriority(UFG::InterestPoint *this)
 {
-  __int64 result; // rax
-
   if ( this->mOnDetachCalled )
-    result = 0i64;
+    return 0i64;
   else
-    result = (unsigned int)this->mPropertiesHandle.mProperties->mPriority;
-  return result;
+    return (unsigned int)this->mPropertiesHandle.mProperties->mPriority;
 }
 
 // File Line: 1319
@@ -1826,37 +1777,40 @@ _BOOL8 __fastcall UFG::InterestPoint::IsAutoInteractable(UFG::InterestPoint *thi
 // RVA: 0x591B60
 bool __fastcall UFG::InterestPoint::WantsToResume(UFG::InterestPoint *this, bool *allowNoInterruptResume)
 {
-  UFG::InterestPointProperties *v2; // r9
-  bool v3; // r8
+  UFG::InterestPointProperties *mProperties; // r9
+  bool mResumeIfInterrupted; // r8
   bool result; // al
 
-  v2 = this->mPropertiesHandle.mProperties;
-  v3 = v2->mResumeIfInterrupted;
-  result = v3 && this->mIsReserved && (this->mIsInterrupted || !this->mIsCompleted);
-  *allowNoInterruptResume = !v2->mInitialUseOnly || v3;
+  mProperties = this->mPropertiesHandle.mProperties;
+  mResumeIfInterrupted = mProperties->mResumeIfInterrupted;
+  result = mResumeIfInterrupted && this->mIsReserved && (this->mIsInterrupted || !this->mIsCompleted);
+  *allowNoInterruptResume = !mProperties->mInitialUseOnly || mResumeIfInterrupted;
   return result;
 }
 
 // File Line: 1341
 // RVA: 0x5853F0
-bool __fastcall UFG::InterestPoint::IsReservationMatch(UFG::InterestPoint *this, unsigned int matchReservationFlags, UFG::InterestPoint::eReserveReason reserveReason)
+bool __fastcall UFG::InterestPoint::IsReservationMatch(
+        UFG::InterestPoint *this,
+        char matchReservationFlags,
+        UFG::InterestPoint::eReserveReason reserveReason)
 {
   bool result; // al
 
   result = 0;
-  if ( matchReservationFlags & 1 )
+  if ( (matchReservationFlags & 1) != 0 )
     result = this->mIsReserved != 0;
-  if ( matchReservationFlags & 2 && (result || this->mIsInUse) )
+  if ( (matchReservationFlags & 2) != 0 && (result || this->mIsInUse) )
     result = 1;
-  if ( matchReservationFlags & 0x10 && (result || this->mIsCompleted) )
+  if ( (matchReservationFlags & 0x10) != 0 && (result || this->mIsCompleted) )
     result = 1;
-  if ( matchReservationFlags & 4 && (result || this->mCooldownTime > this->mTimeSinceFinished) )
+  if ( (matchReservationFlags & 4) != 0 && (result || this->mCooldownTime > this->mTimeSinceFinished) )
     result = 1;
-  if ( matchReservationFlags & 8 )
-    result = result
-          || !this->mIsReserved
-          && this->mActive
-          && (this->mCooldownTime <= this->mTimeSinceFinished || reserveReason == 2);
+  if ( (matchReservationFlags & 8) != 0 )
+    return result
+        || !this->mIsReserved
+        && this->mActive
+        && (this->mCooldownTime <= this->mTimeSinceFinished || reserveReason == ReserveReason_resume);
   return result;
 }
 
@@ -1864,28 +1818,22 @@ bool __fastcall UFG::InterestPoint::IsReservationMatch(UFG::InterestPoint *this,
 // RVA: 0x5822A0
 char __fastcall UFG::InterestPoint::ForceUser(UFG::InterestPoint *this, UFG::SimObject *pUser)
 {
-  UFG::SimObject *v2; // rdi
-  UFG::InterestPoint *v3; // rbx
-
-  v2 = pUser;
-  v3 = this;
   if ( this->mpUser.m_pPointer )
     UFG::InterestPoint::EndReservation(this);
-  return UFG::InterestPoint::BeginReservation(v3, v2, ReserveReason_normal);
+  return UFG::InterestPoint::BeginReservation(this, pUser, ReserveReason_normal);
 }
 
 // File Line: 1415
 // RVA: 0x58BA60
 void __fastcall UFG::InterestPoint::SetUser(UFG::InterestPoint *this, UFG::SimObject *pUser)
 {
-  UFG::InterestPoint *v2; // rbx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v3; // r9
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v4; // r8
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v5; // rax
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mpUser; // r9
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // r8
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v6; // rax
-  unsigned __int16 v7; // cx
-  UFG::SimComponent *v8; // r8
-  UFG::qSafePointer<UFG::SimComponent,UFG::InterestPointUserComponent> *v9; // r9
+  signed __int16 m_Flags; // cx
+  UFG::SimComponent *m_pComponent; // r8
+  UFG::qSafePointer<UFG::SimComponent,UFG::InterestPointUserComponent> *p_mpInterestPointUserComponent; // r9
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v10; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v11; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v12; // rax
@@ -1896,67 +1844,66 @@ void __fastcall UFG::InterestPoint::SetUser(UFG::InterestPoint *this, UFG::SimOb
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v17; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v18; // rax
 
-  v2 = this;
   if ( pUser )
   {
-    v3 = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&this->mpUser.mPrev;
+    p_mpUser = &this->mpUser;
     if ( this->mpUser.m_pPointer )
     {
-      v4 = v3->mPrev;
-      v5 = this->mpUser.mNext;
-      v4->mNext = v5;
-      v5->mPrev = v4;
-      v3->mPrev = v3;
-      this->mpUser.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&this->mpUser.mPrev;
+      mPrev = p_mpUser->mPrev;
+      mNext = this->mpUser.mNext;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
+      p_mpUser->mPrev = p_mpUser;
+      this->mpUser.mNext = &this->mpUser;
     }
     this->mpUser.m_pPointer = pUser;
-    v6 = pUser->m_SafePointerList.mNode.mPrev;
-    v6->mNext = v3;
-    v3->mPrev = v6;
-    this->mpUser.mNext = &pUser->m_SafePointerList.mNode;
-    pUser->m_SafePointerList.mNode.mPrev = v3;
-    v7 = pUser->m_Flags;
-    if ( (v7 >> 14) & 1 )
+    v6 = pUser->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev;
+    v6->mNext = p_mpUser;
+    p_mpUser->mPrev = v6;
+    this->mpUser.mNext = &pUser->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode;
+    pUser->m_SafePointerList.UFG::qSafePointerNodeWithCallbacks<UFG::SimObject>::UFG::qSafePointerNode<UFG::SimObject>::mNode.mPrev = p_mpUser;
+    m_Flags = pUser->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v8 = pUser->m_Components.p[43].m_pComponent;
+      m_pComponent = pUser->m_Components.p[43].m_pComponent;
     }
-    else if ( (v7 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v7 >> 13) & 1 )
+      if ( (m_Flags & 0x2000) != 0 )
       {
-        v8 = pUser->m_Components.p[12].m_pComponent;
+        m_pComponent = pUser->m_Components.p[12].m_pComponent;
       }
-      else if ( (v7 >> 12) & 1 )
+      else if ( (m_Flags & 0x1000) != 0 )
       {
-        v8 = 0i64;
+        m_pComponent = 0i64;
       }
       else
       {
-        v8 = UFG::SimObject::GetComponentOfType(pUser, UFG::InterestPointUserComponent::_TypeUID);
+        m_pComponent = UFG::SimObject::GetComponentOfType(pUser, UFG::InterestPointUserComponent::_TypeUID);
       }
     }
     else
     {
-      v8 = 0i64;
+      m_pComponent = 0i64;
     }
-    v9 = &v2->mpInterestPointUserComponent;
-    if ( v2->mpInterestPointUserComponent.m_pPointer )
+    p_mpInterestPointUserComponent = &this->mpInterestPointUserComponent;
+    if ( this->mpInterestPointUserComponent.m_pPointer )
     {
-      v10 = v9->mPrev;
-      v11 = v2->mpInterestPointUserComponent.mNext;
+      v10 = p_mpInterestPointUserComponent->mPrev;
+      v11 = this->mpInterestPointUserComponent.mNext;
       v10->mNext = v11;
       v11->mPrev = v10;
-      v9->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v9->mPrev;
-      v2->mpInterestPointUserComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mpInterestPointUserComponent.mPrev;
+      p_mpInterestPointUserComponent->mPrev = p_mpInterestPointUserComponent;
+      this->mpInterestPointUserComponent.mNext = &this->mpInterestPointUserComponent;
     }
-    v2->mpInterestPointUserComponent.m_pPointer = v8;
-    if ( v8 )
+    this->mpInterestPointUserComponent.m_pPointer = m_pComponent;
+    if ( m_pComponent )
     {
-      v12 = v8->m_SafePointerList.mNode.mPrev;
-      v12->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v9->mPrev;
-      v9->mPrev = v12;
-      v2->mpInterestPointUserComponent.mNext = &v8->m_SafePointerList.mNode;
-      v8->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v9->mPrev;
+      v12 = m_pComponent->m_SafePointerList.mNode.mPrev;
+      v12->mNext = p_mpInterestPointUserComponent;
+      p_mpInterestPointUserComponent->mPrev = v12;
+      this->mpInterestPointUserComponent.mNext = &m_pComponent->m_SafePointerList.mNode;
+      m_pComponent->m_SafePointerList.mNode.mPrev = p_mpInterestPointUserComponent;
     }
   }
   else
@@ -1968,75 +1915,72 @@ void __fastcall UFG::InterestPoint::SetUser(UFG::InterestPoint *this, UFG::SimOb
       v15 = v13->mNext;
       v14->mNext = v15;
       v15->mPrev = v14;
-      v13->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v13->mPrev;
-      v13->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v13->mPrev;
+      v13->mPrev = v13;
+      v13->mNext = v13;
     }
     v13->m_pPointer = 0i64;
-    v16 = &v2->mpInterestPointUserComponent;
-    if ( v2->mpInterestPointUserComponent.m_pPointer )
+    v16 = &this->mpInterestPointUserComponent;
+    if ( this->mpInterestPointUserComponent.m_pPointer )
     {
       v17 = v16->mPrev;
-      v18 = v2->mpInterestPointUserComponent.mNext;
+      v18 = this->mpInterestPointUserComponent.mNext;
       v17->mNext = v18;
       v18->mPrev = v17;
-      v16->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v16->mPrev;
-      v2->mpInterestPointUserComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mpInterestPointUserComponent.mPrev;
+      v16->mPrev = v16;
+      this->mpInterestPointUserComponent.mNext = &this->mpInterestPointUserComponent;
     }
-    v2->mpInterestPointUserComponent.m_pPointer = 0i64;
+    this->mpInterestPointUserComponent.m_pPointer = 0i64;
   }
 }
 
 // File Line: 1433
 // RVA: 0x57F470
-char __fastcall UFG::InterestPoint::BeginReservation(UFG::InterestPoint *this, UFG::SimObject *pUser, UFG::InterestPoint::eReserveReason reserveReason)
+char __fastcall UFG::InterestPoint::BeginReservation(
+        UFG::InterestPoint *this,
+        UFG::SimObject *pUser,
+        UFG::InterestPoint::eReserveReason reserveReason)
 {
   char v3; // si
-  UFG::SimObject *v4; // rdi
-  UFG::InterestPoint *v5; // rbx
-  unsigned __int16 v7; // cx
-  UFG::qSymbol *v8; // rax
+  signed __int16 m_Flags; // cx
+  UFG::SimComponent *m_pComponent; // rax
 
   v3 = reserveReason;
-  v4 = pUser;
-  v5 = this;
   if ( !pUser )
     return 0;
   UFG::InterestPoint::SetUser(this, pUser);
-  v5->mIsReserved = 1;
-  v5->mReserveReason.mValue = v3;
-  if ( v5->mPoiType.mUID != qSymbol_look.mUID && v5->mpUser.m_pPointer )
+  this->mIsReserved = 1;
+  this->mReserveReason.mValue = v3;
+  if ( this->mPoiType.mUID != qSymbol_look.mUID && this->mpUser.m_pPointer )
   {
-    v7 = v4->m_Flags;
-    if ( (v7 >> 14) & 1 )
+    m_Flags = pUser->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v8 = (UFG::qSymbol *)v4->m_Components.p[43].m_pComponent;
+      m_pComponent = pUser->m_Components.p[43].m_pComponent;
       goto LABEL_12;
     }
-    if ( (v7 & 0x8000u) == 0 )
+    if ( m_Flags >= 0 )
     {
-      if ( (v7 >> 13) & 1 )
+      if ( (m_Flags & 0x2000) != 0 )
       {
-        v8 = (UFG::qSymbol *)v4->m_Components.p[12].m_pComponent;
+        m_pComponent = pUser->m_Components.p[12].m_pComponent;
         goto LABEL_12;
       }
-      if ( !((v7 >> 12) & 1) )
+      if ( (m_Flags & 0x1000) == 0 )
       {
-        v8 = (UFG::qSymbol *)UFG::SimObject::GetComponentOfType(v4, UFG::InterestPointUserComponent::_TypeUID);
+        m_pComponent = UFG::SimObject::GetComponentOfType(pUser, UFG::InterestPointUserComponent::_TypeUID);
 LABEL_12:
-        if ( v8 )
+        if ( m_pComponent )
         {
-          v8[138].mUID = UFG::gNullQSymbol.mUID;
-          v8[139].mUID = UFG::gNullQSymbol.mUID;
+          LODWORD(m_pComponent[8].m_pSimObject) = UFG::gNullQSymbol;
+          HIDWORD(m_pComponent[8].m_pSimObject) = UFG::gNullQSymbol;
         }
-        goto LABEL_14;
       }
     }
   }
-LABEL_14:
-  if ( v5->mOnReservationScriptInfo.mHasScript )
+  if ( this->mOnReservationScriptInfo.mHasScript )
   {
-    if ( !v5->mOnReservationScriptInfo.mScriptFired )
-      UFG::InterestPoint::StartScript(v5, &v5->mOnReservationScriptInfo);
+    if ( !this->mOnReservationScriptInfo.mScriptFired )
+      UFG::InterestPoint::StartScript(this, &this->mOnReservationScriptInfo);
   }
   return 1;
 }
@@ -2045,144 +1989,129 @@ LABEL_14:
 // RVA: 0x580C30
 void __fastcall UFG::InterestPoint::EndReservation(UFG::InterestPoint *this)
 {
-  UFG::InterestPoint *v1; // rbx
-  unsigned int v2; // edx
-  UFG::SimComponent *v3; // rcx
-  UFG::InterestPointType *v4; // rax
+  unsigned int mUID; // edx
+  UFG::SimComponent *m_pPointer; // rcx
+  UFG::InterestPointType *mInterestPointType; // rax
   UFG::SimObjectCVBase *v5; // rcx
-  unsigned __int16 v6; // dx
+  __int16 m_Flags; // dx
   UFG::ActiveAIEntityComponent *v7; // rax
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v8; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v9; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v10; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::InterestPointUserComponent> *v11; // rdx
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mpUser; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
+  UFG::qSafePointer<UFG::SimComponent,UFG::InterestPointUserComponent> *p_mpInterestPointUserComponent; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v12; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v13; // rax
 
-  v1 = this;
   UFG::InterestPoint::FinishUsing(this);
-  v2 = v1->mPoiType.mUID;
-  if ( v2 != qSymbol_look.mUID && v1->mpUser.m_pPointer )
+  mUID = this->mPoiType.mUID;
+  if ( mUID != qSymbol_look.mUID && this->mpUser.m_pPointer )
   {
-    v3 = v1->mpInterestPointUserComponent.m_pPointer;
-    if ( v3 )
+    m_pPointer = this->mpInterestPointUserComponent.m_pPointer;
+    if ( m_pPointer )
     {
-      v4 = v1->mInterestPointType;
-      LODWORD(v3[8].m_pSimObject) = v2;
-      HIDWORD(v3[8].m_pSimObject) = v4->mDescription.mUID;
+      mInterestPointType = this->mInterestPointType;
+      LODWORD(m_pPointer[8].m_pSimObject) = mUID;
+      HIDWORD(m_pPointer[8].m_pSimObject) = mInterestPointType->mDescription.mUID;
     }
-    v5 = (UFG::SimObjectCVBase *)v1->mpUser.m_pPointer;
+    v5 = (UFG::SimObjectCVBase *)this->mpUser.m_pPointer;
     if ( v5 )
     {
-      v6 = v5->m_Flags;
-      if ( (v6 >> 14) & 1 )
-      {
+      m_Flags = v5->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
         v7 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v5);
-      }
-      else if ( (v6 & 0x8000u) == 0 )
-      {
-        if ( (v6 >> 13) & 1 )
-          v7 = (UFG::ActiveAIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                 (UFG::SimObjectGame *)&v5->vfptr,
-                                                 UFG::ActiveAIEntityComponent::_TypeUID);
-        else
-          v7 = (UFG::ActiveAIEntityComponent *)((v6 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                   (UFG::SimObjectGame *)&v5->vfptr,
-                                                                   UFG::ActiveAIEntityComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v5->vfptr, UFG::ActiveAIEntityComponent::_TypeUID));
-      }
       else
-      {
-        v7 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v5);
-      }
+        v7 = (UFG::ActiveAIEntityComponent *)((m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+                                            ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                v5,
+                                                UFG::ActiveAIEntityComponent::_TypeUID)
+                                            : UFG::SimObject::GetComponentOfType(
+                                                v5,
+                                                UFG::ActiveAIEntityComponent::_TypeUID));
       if ( v7 )
         UFG::ActiveAIEntityComponent::RestartPoiCooldown(v7);
     }
   }
-  v8 = &v1->mpUser;
-  if ( v1->mpUser.m_pPointer )
+  p_mpUser = &this->mpUser;
+  if ( this->mpUser.m_pPointer )
   {
-    v9 = v8->mPrev;
-    v10 = v1->mpUser.mNext;
-    v9->mNext = v10;
-    v10->mPrev = v9;
-    v8->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v8->mPrev;
-    v1->mpUser.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->mpUser.mPrev;
+    mPrev = p_mpUser->mPrev;
+    mNext = this->mpUser.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mpUser->mPrev = p_mpUser;
+    this->mpUser.mNext = &this->mpUser;
   }
-  v1->mpUser.m_pPointer = 0i64;
-  v11 = &v1->mpInterestPointUserComponent;
-  if ( v1->mpInterestPointUserComponent.m_pPointer )
+  this->mpUser.m_pPointer = 0i64;
+  p_mpInterestPointUserComponent = &this->mpInterestPointUserComponent;
+  if ( this->mpInterestPointUserComponent.m_pPointer )
   {
-    v12 = v11->mPrev;
-    v13 = v1->mpInterestPointUserComponent.mNext;
+    v12 = p_mpInterestPointUserComponent->mPrev;
+    v13 = this->mpInterestPointUserComponent.mNext;
     v12->mNext = v13;
     v13->mPrev = v12;
-    v11->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v11->mPrev;
-    v1->mpInterestPointUserComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v1->mpInterestPointUserComponent.mPrev;
+    p_mpInterestPointUserComponent->mPrev = p_mpInterestPointUserComponent;
+    this->mpInterestPointUserComponent.mNext = &this->mpInterestPointUserComponent;
   }
-  v1->mpInterestPointUserComponent.m_pPointer = 0i64;
-  *(_DWORD *)&v1->mIsInUse = 0;
-  v1->mIsTimedOut = 0;
-  v1->mIsReserved = 0;
-  v1->mOnReservationScriptInfo.mScriptFired = 0;
+  this->mpInterestPointUserComponent.m_pPointer = 0i64;
+  *(_DWORD *)&this->mIsInUse = 0;
+  this->mIsTimedOut = 0;
+  this->mIsReserved = 0;
+  this->mOnReservationScriptInfo.mScriptFired = 0;
 }
 
 // File Line: 1504
 // RVA: 0x57F570
 void __fastcall UFG::InterestPoint::BeginUsing(UFG::InterestPoint *this)
 {
-  UFG::InterestPointProperties *v1; // rax
-  UFG::InterestPoint *v2; // rbx
-  float v3; // xmm0_4
+  UFG::InterestPointProperties *mProperties; // rax
+  float RandomNumberInRange; // xmm0_4
   UFG::InterestPointProperties *v4; // rax
   float v5; // xmm0_4
 
-  v1 = this->mPropertiesHandle.mProperties;
+  mProperties = this->mPropertiesHandle.mProperties;
   this->mIsInUse = 1;
-  v2 = this;
-  v3 = UFG::GetRandomNumberInRange(v1->mUseTimeMin, v1->mUseTimeMax);
-  v4 = v2->mPropertiesHandle.mProperties;
-  v2->mUseTime = v3;
+  RandomNumberInRange = UFG::GetRandomNumberInRange(mProperties->mUseTimeMin, mProperties->mUseTimeMax);
+  v4 = this->mPropertiesHandle.mProperties;
+  this->mUseTime = RandomNumberInRange;
   v5 = UFG::GetRandomNumberInRange(v4->mCoolDownTimeMin, v4->mCoolDownTimeMax);
-  v2->mFullUpdateRequired = 1;
-  v2->mBeginningScriptInfo.mScriptFired = 0;
-  v2->mEndingScriptInfo.mScriptFired = 0;
-  *(_QWORD *)&v2->mTimeSinceBeginUse = 0i64;
-  v2->mCooldownTime = v5;
-  if ( v2->mBeginningScriptInfo.mHasScript )
-    UFG::InterestPoint::StartScript(v2, &v2->mBeginningScriptInfo);
+  this->mFullUpdateRequired = 1;
+  this->mBeginningScriptInfo.mScriptFired = 0;
+  this->mEndingScriptInfo.mScriptFired = 0;
+  *(_QWORD *)&this->mTimeSinceBeginUse = 0i64;
+  this->mCooldownTime = v5;
+  if ( this->mBeginningScriptInfo.mHasScript )
+    UFG::InterestPoint::StartScript(this, &this->mBeginningScriptInfo);
 }
 
 // File Line: 1524
 // RVA: 0x58FBD0
 void __fastcall UFG::InterestPoint::UpdateInterestPointTransform(UFG::InterestPoint *this)
 {
-  UFG::InterestPoint *v1; // rbx
-  UFG::SimComponent *v2; // rax
+  UFG::SimComponent *m_pPointer; // rax
   Creature *v3; // rcx
-  float v4; // xmm1_4
-  float v5; // xmm0_4
-  UFG::qMatrix44 transform; // [rsp+20h] [rbp-48h]
+  float y; // xmm1_4
+  float z; // xmm0_4
+  UFG::qMatrix44 transform; // [rsp+20h] [rbp-48h] BYREF
 
-  v1 = this;
   if ( this->mBoneId >= 0 || this->mNeedsBoneFixupWhenRigAvailable )
   {
-    v2 = this->mpParentCharacterAnimationComponent.m_pPointer;
-    if ( v2 )
+    m_pPointer = this->mpParentCharacterAnimationComponent.m_pPointer;
+    if ( m_pPointer )
     {
-      if ( *(_QWORD *)&v2[2].m_TypeUID && !BYTE1(v2[3].vfptr) && *(_QWORD *)&v2[1].m_Flags )
+      if ( *(_QWORD *)&m_pPointer[2].m_TypeUID && !BYTE1(m_pPointer[3].vfptr) && *(_QWORD *)&m_pPointer[1].m_Flags )
       {
         if ( this->mNeedsBoneFixupWhenRigAvailable )
           UFG::InterestPoint::SetBoneIDFromProperties(this);
-        v3 = *(Creature **)&v1->mpParentCharacterAnimationComponent.m_pPointer[2].m_TypeUID;
+        v3 = *(Creature **)&this->mpParentCharacterAnimationComponent.m_pPointer[2].m_TypeUID;
         if ( v3 )
         {
-          Creature::GetTransform(v3, v1->mBoneId, &transform);
-          UFG::TransformNodeComponent::SetWorldTransform(v1->mpXformNode, &transform);
-          v4 = transform.v3.y;
-          v1->mCachedPosition.x = transform.v3.x;
-          v5 = transform.v3.z;
-          v1->mCachedPosition.y = v4;
-          v1->mCachedPosition.z = v5;
+          Creature::GetTransform(v3, this->mBoneId, &transform);
+          UFG::TransformNodeComponent::SetWorldTransform(this->mpXformNode, &transform);
+          y = transform.v3.y;
+          this->mCachedPosition.x = transform.v3.x;
+          z = transform.v3.z;
+          this->mCachedPosition.y = y;
+          this->mCachedPosition.z = z;
         }
       }
     }
@@ -2193,260 +2122,259 @@ void __fastcall UFG::InterestPoint::UpdateInterestPointTransform(UFG::InterestPo
 // RVA: 0x58FC90
 void __fastcall UFG::InterestPoint::UpdateInterestPoints(float deltaTime)
 {
-  unsigned int v1; // er14
-  UFG::SimObjectCharacter *v2; // rax
-  UFG::SimComponent *v3; // rbp
-  UFG::qVector3 *v4; // rax
-  float v5; // xmm7_4
-  float v6; // xmm8_4
-  float v7; // xmm9_4
-  Render::SkinningCacheNode *v8; // rax
-  UFG::InterestPoint *v9; // rbx
-  UFG::qBaseNodeRB *v10; // rdx
-  UFG::SimComponentHolder *v11; // rax
-  UFG::qBaseTreeRB *v12; // rax
-  signed __int64 v13; // rdi
-  UFG::qVector3 *v14; // rax
+  unsigned int mSimFrameCount; // r14d
+  UFG::SimObjectCharacter *LocalPlayer; // rax
+  UFG::SimComponent *m_pComponent; // rbp
+  UFG::qVector3 *p_m_BoundComponentHandles; // rax
+  float x; // xmm7_4
+  float y; // xmm8_4
+  float z; // xmm9_4
+  Render::SkinningCacheNode *Head; // rax
+  UFG::InterestPoint *p_mUID; // rbx
+  UFG::qBaseNodeRB *p_mNode; // rdx
+  UFG::SimComponentHolder *p; // rax
+  UFG::qBaseTreeRB *Next; // rax
+  UFG::InterestPoint *mChild; // rdi
+  UFG::qVector3 *Position; // rax
   UFG::GridIntrusive<UFG::InterestPoint> *v15; // rdx
-  int v16; // er9
-  UFG::GridIntrusiveNode<UFG::InterestPoint> *v17; // r8
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *v18; // rcx
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *v19; // rax
-  UFG::GridIntrusive<UFG::InterestPoint> *v20; // rdx
-  UFG::qList<UFG::InterestPoint,UFG::InterestPoint,1,0> *v21; // rcx
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *v22; // rax
-  Render::SkinningCacheNode *v23; // rax
-  signed __int64 v24; // rdi
-  UFG::qBaseNodeRB *v25; // rdx
-  UFG::qBaseTreeRB *v26; // rax
-  signed __int64 v27; // rsi
-  _DWORD *v28; // rbx
-  float v29; // xmm0_4
-  unsigned int v30; // eax
-  UFG::GridIntrusive<UFG::InterestPoint> *v31; // r9
-  UFG::GridIntrusive<UFG::InterestPoint> *v32; // r8
-  UFG::GridIntrusive<UFG::InterestPoint> *v33; // rdx
-  int v34; // er10
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *v35; // r8
-  _QWORD *v36; // rax
-  __int64 v37; // rcx
-  UFG::GridIntrusive<UFG::InterestPoint> *v38; // rdx
-  UFG::qList<UFG::InterestPoint,UFG::InterestPoint,1,0> *v39; // rcx
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *v40; // rax
-  bool v41; // zf
-  _QWORD *v42; // rdx
-  __int64 v43; // rcx
-  _QWORD *v44; // rax
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> **v45; // rcx
-  int v46; // er8
-  UFG::qList<UFG::InterestPoint,UFG::InterestPoint,1,0> *v47; // rdx
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *v48; // rax
+  int v16; // r9d
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *mPrev; // rcx
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *mNext; // rax
+  UFG::GridIntrusive<UFG::InterestPoint> *v19; // rdx
+  UFG::qList<UFG::InterestPoint,UFG::InterestPoint,1,0> *v20; // rcx
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *v21; // rax
+  Render::SkinningCacheNode *v22; // rax
+  UFG::InterestPoint *v23; // rdi
+  UFG::qBaseNodeRB *v24; // rdx
+  UFG::qBaseTreeRB *v25; // rax
+  UFG::qBaseNodeRB **v26; // rsi
+  UFG::TransformNodeComponent *mpXformNode; // rbx
+  float mMinimumDistanceToPlayerSquared; // xmm0_4
+  unsigned int mUID; // eax
+  UFG::GridIntrusive<UFG::InterestPoint> *v30; // r9
+  UFG::GridIntrusive<UFG::InterestPoint> *v31; // r8
+  UFG::GridIntrusive<UFG::InterestPoint> *v32; // rdx
+  int v33; // r10d
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *v34; // r8
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *v35; // rax
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *v36; // rcx
+  UFG::GridIntrusive<UFG::InterestPoint> *v37; // rdx
+  UFG::qList<UFG::InterestPoint,UFG::InterestPoint,1,0> *v38; // rcx
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *v39; // rax
+  bool v40; // zf
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *v41; // rcx
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *v42; // rax
+  int v43; // r8d
+  UFG::qList<UFG::InterestPoint,UFG::InterestPoint,1,0> *v44; // rdx
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *v45; // rax
 
-  v1 = UFG::Metrics::msInstance.mSimFrameCount;
+  mSimFrameCount = UFG::Metrics::msInstance.mSimFrameCount;
   UFG::GetLocalPlayer();
-  v2 = UFG::GetLocalPlayer();
-  if ( v2 )
+  LocalPlayer = UFG::GetLocalPlayer();
+  if ( LocalPlayer )
   {
-    v11 = v2->m_Components.p;
-    v3 = v11[2].m_pComponent;
-    if ( v3 )
+    p = LocalPlayer->m_Components.p;
+    m_pComponent = p[2].m_pComponent;
+    if ( m_pComponent )
     {
-      UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v11[2].m_pComponent);
-      v4 = (UFG::qVector3 *)&v3[2].m_BoundComponentHandles;
+      UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)p[2].m_pComponent);
+      p_m_BoundComponentHandles = (UFG::qVector3 *)&m_pComponent[2].m_BoundComponentHandles;
       goto LABEL_4;
     }
   }
   else
   {
-    v3 = 0i64;
+    m_pComponent = 0i64;
   }
-  v4 = &UFG::qVector3::msZero;
+  p_m_BoundComponentHandles = &UFG::qVector3::msZero;
 LABEL_4:
-  v5 = v4->x;
-  v6 = v4->y;
-  v7 = v4->z;
-  v8 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::InterestPoint::msLookInterestPoints);
-  if ( v8 )
+  x = p_m_BoundComponentHandles->x;
+  y = p_m_BoundComponentHandles->y;
+  z = p_m_BoundComponentHandles->z;
+  Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::InterestPoint::msLookInterestPoints);
+  if ( Head )
   {
-    v9 = (UFG::InterestPoint *)&v8[-4].mNode.mUID;
-    if ( v8 != (Render::SkinningCacheNode *)136 )
+    p_mUID = (UFG::InterestPoint *)&Head[-4].mNode.mUID;
+    if ( Head != (Render::SkinningCacheNode *)136 )
     {
       do
       {
-        if ( v9 )
-          v10 = &v9->mNode;
+        if ( p_mUID )
+          p_mNode = &p_mUID->UFG::qNodeRB<UFG::InterestPoint>::mNode;
         else
-          v10 = 0i64;
-        v12 = UFG::qBaseTreeRB::GetNext(&UFG::InterestPoint::msLookInterestPoints.mTree, v10);
-        if ( v12 )
-          v13 = (signed __int64)v12[-2].mRoot.mChild;
+          p_mNode = 0i64;
+        Next = UFG::qBaseTreeRB::GetNext(&UFG::InterestPoint::msLookInterestPoints.mTree, p_mNode);
+        if ( Next )
+          mChild = (UFG::InterestPoint *)Next[-2].mRoot.mChild;
         else
-          v13 = 0i64;
-        if ( v1 + v9->m_NameUID == 120 * ((v1 + v9->m_NameUID) / 0x78) )
+          mChild = 0i64;
+        if ( mSimFrameCount + p_mUID->m_NameUID == 120 * ((mSimFrameCount + p_mUID->m_NameUID) / 0x78) )
         {
-          if ( v9->mAddedToGrid )
+          if ( p_mUID->mAddedToGrid )
           {
-            if ( !v9->mRemovedFromGrid )
+            if ( !p_mUID->mRemovedFromGrid )
             {
-              v14 = UFG::InterestPoint::GetPosition(v9);
+              Position = UFG::InterestPoint::GetPosition(p_mUID);
               v15 = UFG::InterestPoint::mspLookInterestPointGrid;
-              v16 = (signed int)(float)((float)(v14->x - UFG::InterestPoint::mspLookInterestPointGrid->mXMin)
-                                      * UFG::InterestPoint::mspLookInterestPointGrid->mGridSizeInv)
+              v16 = (int)(float)((float)(Position->x - UFG::InterestPoint::mspLookInterestPointGrid->mXMin)
+                               * UFG::InterestPoint::mspLookInterestPointGrid->mGridSizeInv)
                   + UFG::InterestPoint::mspLookInterestPointGrid->mXDim
-                  * (signed int)(float)((float)(v14->y - UFG::InterestPoint::mspLookInterestPointGrid->mYMin)
-                                      * UFG::InterestPoint::mspLookInterestPointGrid->mGridSizeInv);
-              if ( v16 != v9->mGridIndex )
+                  * (int)(float)((float)(Position->y - UFG::InterestPoint::mspLookInterestPointGrid->mYMin)
+                               * UFG::InterestPoint::mspLookInterestPointGrid->mGridSizeInv);
+              if ( v16 != p_mUID->mGridIndex )
               {
-                v17 = (UFG::GridIntrusiveNode<UFG::InterestPoint> *)&v9->mPrev;
-                v18 = v9->mPrev;
-                v19 = v9->mNext;
-                v18->mNext = v19;
-                v19->mPrev = v18;
+                mPrev = p_mUID->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mPrev;
+                mNext = p_mUID->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mNext;
+                mPrev->mNext = mNext;
+                mNext->mPrev = mPrev;
                 --v15->mNodeCount;
-                v20 = UFG::InterestPoint::mspLookInterestPointGrid;
-                v21 = &UFG::InterestPoint::mspLookInterestPointGrid->mGridNodes[v16];
-                v17->mNext = &v21->mNode;
-                v22 = v21->mNode.mPrev;
-                v17->mPrev = v21->mNode.mPrev;
-                v9->mGridIndex = v16;
-                v22->mNext = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *)&v9->mPrev;
-                v21->mNode.mPrev = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *)&v9->mPrev;
-                ++v20->mNodeCount;
+                v19 = UFG::InterestPoint::mspLookInterestPointGrid;
+                v20 = &UFG::InterestPoint::mspLookInterestPointGrid->mGridNodes[v16];
+                p_mUID->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mNext = &v20->mNode;
+                v21 = v20->mNode.mPrev;
+                p_mUID->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mPrev = v20->mNode.mPrev;
+                p_mUID->mGridIndex = v16;
+                v21->mNext = &p_mUID->UFG::GridIntrusiveNode<UFG::InterestPoint>;
+                v20->mNode.mPrev = &p_mUID->UFG::GridIntrusiveNode<UFG::InterestPoint>;
+                ++v19->mNodeCount;
               }
             }
           }
         }
-        v9 = (UFG::InterestPoint *)v13;
+        p_mUID = mChild;
       }
-      while ( v13 );
+      while ( mChild );
     }
   }
-  v23 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::InterestPoint::msUseInterestPoints);
-  if ( v23 )
+  v22 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::InterestPoint::msUseInterestPoints);
+  if ( v22 )
   {
-    v24 = (signed __int64)&v23[-4].mNode.mUID;
-    if ( v23 != (Render::SkinningCacheNode *)136 )
+    v23 = (UFG::InterestPoint *)&v22[-4].mNode.mUID;
+    if ( v22 != (Render::SkinningCacheNode *)136 )
     {
       while ( 1 )
       {
-        if ( v24 )
-          v25 = (UFG::qBaseNodeRB *)(v24 + 136);
+        if ( v23 )
+          v24 = &v23->UFG::qNodeRB<UFG::InterestPoint>::mNode;
         else
-          v25 = 0i64;
-        v26 = UFG::qBaseTreeRB::GetNext(&UFG::InterestPoint::msUseInterestPoints.mTree, v25);
-        if ( v26 )
-          v27 = (signed __int64)v26[-2].mRoot.mChild;
+          v24 = 0i64;
+        v25 = UFG::qBaseTreeRB::GetNext(&UFG::InterestPoint::msUseInterestPoints.mTree, v24);
+        if ( v25 )
+          v26 = v25[-2].mRoot.mChild;
         else
-          v27 = 0i64;
-        if ( *(_DWORD *)(v24 + 320) < 0 && !*(_BYTE *)(v24 + 440)
-          || v1 + *(_DWORD *)(v24 + 28) != 60 * ((v1 + *(_DWORD *)(v24 + 28)) / 0x3C) )
+          v26 = 0i64;
+        if ( v23->mBoneId < 0 && !v23->mNeedsBoneFixupWhenRigAvailable
+          || mSimFrameCount + v23->m_NameUID != 60 * ((mSimFrameCount + v23->m_NameUID) / 0x3C) )
         {
           goto LABEL_56;
         }
-        UFG::InterestPoint::UpdateInterestPointTransform((UFG::InterestPoint *)v24);
-        if ( !*(_BYTE *)(v24 + 316) )
+        UFG::InterestPoint::UpdateInterestPointTransform(v23);
+        if ( !v23->mIsPositionCached )
         {
-          v28 = *(_DWORD **)(v24 + 104);
-          UFG::TransformNodeComponent::UpdateWorldTransform(*(UFG::TransformNodeComponent **)(v24 + 104));
-          *(_DWORD *)(v24 + 304) = v28[44];
-          *(_DWORD *)(v24 + 308) = v28[45];
-          *(_DWORD *)(v24 + 312) = v28[46];
-          *(_BYTE *)(v24 + 316) = 1;
+          mpXformNode = v23->mpXformNode;
+          UFG::TransformNodeComponent::UpdateWorldTransform(mpXformNode);
+          v23->mCachedPosition.x = mpXformNode->mWorldTransform.v3.x;
+          v23->mCachedPosition.y = mpXformNode->mWorldTransform.v3.y;
+          v23->mCachedPosition.z = mpXformNode->mWorldTransform.v3.z;
+          v23->mIsPositionCached = 1;
         }
-        if ( v3 )
+        if ( m_pComponent )
         {
-          v29 = *(float *)(v24 + 292);
-          if ( v29 >= (float)((float)((float)((float)(v6 - *(float *)(v24 + 308)) * (float)(v6 - *(float *)(v24 + 308)))
-                                    + (float)((float)(v5 - *(float *)(v24 + 304)) * (float)(v5 - *(float *)(v24 + 304))))
-                            + (float)((float)(v7 - *(float *)(v24 + 312)) * (float)(v7 - *(float *)(v24 + 312)))) )
-            v29 = (float)((float)((float)(v6 - *(float *)(v24 + 308)) * (float)(v6 - *(float *)(v24 + 308)))
-                        + (float)((float)(v5 - *(float *)(v24 + 304)) * (float)(v5 - *(float *)(v24 + 304))))
-                + (float)((float)(v7 - *(float *)(v24 + 312)) * (float)(v7 - *(float *)(v24 + 312)));
-          *(float *)(v24 + 292) = v29;
-          UFG::InterestPoint::UpdateAnimHandles((UFG::InterestPoint *)v24);
+          mMinimumDistanceToPlayerSquared = v23->mMinimumDistanceToPlayerSquared;
+          if ( mMinimumDistanceToPlayerSquared >= (float)((float)((float)((float)(y - v23->mCachedPosition.y)
+                                                                        * (float)(y - v23->mCachedPosition.y))
+                                                                + (float)((float)(x - v23->mCachedPosition.x)
+                                                                        * (float)(x - v23->mCachedPosition.x)))
+                                                        + (float)((float)(z - v23->mCachedPosition.z)
+                                                                * (float)(z - v23->mCachedPosition.z))) )
+            mMinimumDistanceToPlayerSquared = (float)((float)((float)(y - v23->mCachedPosition.y)
+                                                            * (float)(y - v23->mCachedPosition.y))
+                                                    + (float)((float)(x - v23->mCachedPosition.x)
+                                                            * (float)(x - v23->mCachedPosition.x)))
+                                            + (float)((float)(z - v23->mCachedPosition.z)
+                                                    * (float)(z - v23->mCachedPosition.z));
+          v23->mMinimumDistanceToPlayerSquared = mMinimumDistanceToPlayerSquared;
+          UFG::InterestPoint::UpdateAnimHandles(v23);
         }
-        if ( !*(_BYTE *)(v24 + 356) || *(_BYTE *)(v24 + 357) )
+        if ( !v23->mAddedToGrid || v23->mRemovedFromGrid )
           goto LABEL_46;
-        v30 = qSymbol_look.mUID;
-        v31 = UFG::InterestPoint::mspUseInterestPointGrid;
-        v32 = UFG::InterestPoint::mspLookInterestPointGrid;
-        v33 = UFG::InterestPoint::mspUseInterestPointGrid;
-        if ( *(_DWORD *)(v24 + 300) == qSymbol_look.mUID )
-          v33 = UFG::InterestPoint::mspLookInterestPointGrid;
-        v34 = (signed int)(float)((float)(*(float *)(v24 + 304) - v33->mXMin) * v33->mGridSizeInv)
-            + v33->mXDim * (signed int)(float)((float)(*(float *)(v24 + 308) - v33->mYMin) * v33->mGridSizeInv);
-        if ( v34 >= 0 && v34 != *(_DWORD *)(v24 + 352) )
+        mUID = qSymbol_look.mUID;
+        v30 = UFG::InterestPoint::mspUseInterestPointGrid;
+        v31 = UFG::InterestPoint::mspLookInterestPointGrid;
+        v32 = UFG::InterestPoint::mspUseInterestPointGrid;
+        if ( v23->mPoiType.mUID == qSymbol_look.mUID )
+          v32 = UFG::InterestPoint::mspLookInterestPointGrid;
+        v33 = (int)(float)((float)(v23->mCachedPosition.x - v32->mXMin) * v32->mGridSizeInv)
+            + v32->mXDim * (int)(float)((float)(v23->mCachedPosition.y - v32->mYMin) * v32->mGridSizeInv);
+        if ( v33 >= 0 && v33 != v23->mGridIndex )
           break;
 LABEL_47:
-        if ( *(_QWORD *)(v24 + 536) )
+        if ( v23->mLinkObject.m_pPointer )
         {
-          if ( !*(_BYTE *)(v24 + 356) )
+          if ( !v23->mAddedToGrid )
             goto LABEL_53;
-          v41 = *(_DWORD *)(v24 + 300) == v30;
-          v42 = (_QWORD *)(v24 + 184);
-          v43 = *(_QWORD *)(v24 + 184);
-          v44 = *(_QWORD **)(v24 + 192);
-          *v42 = v42;
-          *(_QWORD *)(v43 + 8) = v44;
-          v42[1] = v42;
-          if ( v41 )
-            v31 = v32;
-          *v44 = v43;
-          --v31->mNodeCount;
-          *(_WORD *)(v24 + 356) = 256;
-          *(_DWORD *)(v24 + 352) = -1;
+          v40 = v23->mPoiType.mUID == mUID;
+          v41 = v23->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mPrev;
+          v42 = v23->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mNext;
+          v23->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mPrev = &v23->UFG::GridIntrusiveNode<UFG::InterestPoint>;
+          v41->mNext = v42;
+          v23->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mNext = &v23->UFG::GridIntrusiveNode<UFG::InterestPoint>;
+          if ( v40 )
+            v30 = v31;
+          v42->mPrev = v41;
+          --v30->mNodeCount;
+          *(_WORD *)&v23->mAddedToGrid = 256;
+          v23->mGridIndex = -1;
         }
-        else if ( !*(_BYTE *)(v24 + 356) )
+        else if ( !v23->mAddedToGrid )
         {
 LABEL_53:
-          if ( *(_DWORD *)(v24 + 300) == v30 )
-            v31 = v32;
-          v45 = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> **)(v24 + 184);
-          v46 = (signed int)(float)((float)(*(float *)(v24 + 304) - v31->mXMin) * v31->mGridSizeInv)
-              + v31->mXDim * (signed int)(float)((float)(*(float *)(v24 + 308) - v31->mYMin) * v31->mGridSizeInv);
-          v47 = &v31->mGridNodes[v46];
-          v45[1] = &v47->mNode;
-          v48 = v47->mNode.mPrev;
-          *v45 = v47->mNode.mPrev;
-          *(_DWORD *)(v24 + 352) = v46;
-          *(_WORD *)(v24 + 356) = 1;
-          v48->mNext = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *)(v24 + 184);
-          v47->mNode.mPrev = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *)(v24 + 184);
-          ++v31->mNodeCount;
-          goto LABEL_56;
+          if ( v23->mPoiType.mUID == mUID )
+            v30 = v31;
+          v43 = (int)(float)((float)(v23->mCachedPosition.x - v30->mXMin) * v30->mGridSizeInv)
+              + v30->mXDim * (int)(float)((float)(v23->mCachedPosition.y - v30->mYMin) * v30->mGridSizeInv);
+          v44 = &v30->mGridNodes[v43];
+          v23->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mNext = &v44->mNode;
+          v45 = v44->mNode.mPrev;
+          v23->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mPrev = v44->mNode.mPrev;
+          v23->mGridIndex = v43;
+          *(_WORD *)&v23->mAddedToGrid = 1;
+          v45->mNext = &v23->UFG::GridIntrusiveNode<UFG::InterestPoint>;
+          v44->mNode.mPrev = &v23->UFG::GridIntrusiveNode<UFG::InterestPoint>;
+          ++v30->mNodeCount;
         }
 LABEL_56:
-        if ( *(_BYTE *)(v24 + 358) )
-          *(_BYTE *)(v24 + 358) = (*(unsigned __int8 (__fastcall **)(signed __int64))(*(_QWORD *)v24 + 136i64))(v24) == 0;
-        UFG::InterestPoint::UpdateReservation((UFG::InterestPoint *)v24);
-        v24 = v27;
-        if ( !v27 )
+        if ( v23->mFullUpdateRequired )
+          v23->mFullUpdateRequired = ((unsigned __int8 (__fastcall *)(UFG::InterestPoint *))v23->UFG::MarkerBase::UFG::HintComponentBase::UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr[17].__vecDelDtor)(v23) == 0;
+        UFG::InterestPoint::UpdateReservation(v23);
+        v23 = (UFG::InterestPoint *)v26;
+        if ( !v26 )
           return;
       }
-      v35 = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *)(v24 + 184);
-      v36 = *(_QWORD **)(v24 + 192);
-      v37 = *(_QWORD *)(v24 + 184);
-      v35->mPrev = v35;
-      *(_QWORD *)(v37 + 8) = v36;
-      *v36 = v37;
-      --v33->mNodeCount;
-      LODWORD(v36) = qSymbol_look;
-      v38 = UFG::InterestPoint::mspUseInterestPointGrid;
-      v35->mNext = v35;
-      if ( *(_DWORD *)(v24 + 300) == (_DWORD)v36 )
-        v38 = UFG::InterestPoint::mspLookInterestPointGrid;
-      v39 = &v38->mGridNodes[v34];
-      *(_QWORD *)(v24 + 192) = v39;
-      v40 = v39->mNode.mPrev;
-      v35->mPrev = v39->mNode.mPrev;
-      *(_DWORD *)(v24 + 352) = v34;
-      v40->mNext = v35;
-      v39->mNode.mPrev = v35;
-      ++v38->mNodeCount;
+      v34 = &v23->UFG::GridIntrusiveNode<UFG::InterestPoint>;
+      v35 = v23->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mNext;
+      v36 = v23->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mPrev;
+      v23->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mPrev = &v23->UFG::GridIntrusiveNode<UFG::InterestPoint>;
+      v36->mNext = v35;
+      v35->mPrev = v36;
+      --v32->mNodeCount;
+      LODWORD(v35) = qSymbol_look;
+      v37 = UFG::InterestPoint::mspUseInterestPointGrid;
+      v23->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mNext = &v23->UFG::GridIntrusiveNode<UFG::InterestPoint>;
+      if ( v23->mPoiType.mUID == (_DWORD)v35 )
+        v37 = UFG::InterestPoint::mspLookInterestPointGrid;
+      v38 = &v37->mGridNodes[v33];
+      v23->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mNext = &v38->mNode;
+      v39 = v38->mNode.mPrev;
+      v34->mPrev = v38->mNode.mPrev;
+      v23->mGridIndex = v33;
+      v39->mNext = v34;
+      v38->mNode.mPrev = v34;
+      ++v37->mNodeCount;
 LABEL_46:
-      v31 = UFG::InterestPoint::mspUseInterestPointGrid;
-      v30 = qSymbol_look.mUID;
-      v32 = UFG::InterestPoint::mspLookInterestPointGrid;
+      v30 = UFG::InterestPoint::mspUseInterestPointGrid;
+      mUID = qSymbol_look.mUID;
+      v31 = UFG::InterestPoint::mspLookInterestPointGrid;
       goto LABEL_47;
     }
   }
@@ -2456,22 +2384,19 @@ LABEL_46:
 // RVA: 0x590A20
 void __fastcall UFG::InterestPoint::UpdateReservation(UFG::InterestPoint *this)
 {
-  UFG::SimObject *v1; // rdx
-  UFG::InterestPoint *v2; // rbx
-  UFG::qVector3 *v3; // rax
-  UFG::qVector3 result; // [rsp+20h] [rbp-18h]
+  UFG::SimObjectGame *m_pPointer; // rdx
+  UFG::qVector3 *Position; // rax
+  UFG::qVector3 result; // [rsp+20h] [rbp-18h] BYREF
 
-  v1 = this->mpUser.m_pPointer;
-  v2 = this;
-  if ( v1 && this->mReserveReason.mValue == 2 && this->mIsReserved && !*(_WORD *)&this->mIsInUse )
+  m_pPointer = (UFG::SimObjectGame *)this->mpUser.m_pPointer;
+  if ( m_pPointer && this->mReserveReason.mValue == 2 && this->mIsReserved && !this->mIsInUse && !this->mIsCompleted )
   {
-    UFG::GetPosition(&result, v1);
-    v3 = UFG::InterestPoint::GetPosition(v2);
-    if ( (float)((float)((float)((float)(result.y - v3->y) * (float)(result.y - v3->y))
-                       + (float)((float)(result.x - v3->x) * (float)(result.x - v3->x)))
-               + (float)((float)(result.z - v3->z) * (float)(result.z - v3->z))) > (float)(v2->mPropertiesHandle.mProperties->mMaxAppealRadius
-                                                                                         * v2->mPropertiesHandle.mProperties->mMaxAppealRadius) )
-      UFG::InterestPoint::EndReservation(v2);
+    UFG::GetPosition(&result, m_pPointer);
+    Position = UFG::InterestPoint::GetPosition(this);
+    if ( (float)((float)((float)((float)(result.y - Position->y) * (float)(result.y - Position->y))
+                       + (float)((float)(result.x - Position->x) * (float)(result.x - Position->x)))
+               + (float)((float)(result.z - Position->z) * (float)(result.z - Position->z))) > (float)(this->mPropertiesHandle.mProperties->mMaxAppealRadius * this->mPropertiesHandle.mProperties->mMaxAppealRadius) )
+      UFG::InterestPoint::EndReservation(this);
   }
 }
 
@@ -2479,107 +2404,102 @@ void __fastcall UFG::InterestPoint::UpdateReservation(UFG::InterestPoint *this)
 // RVA: 0x587760
 bool __fastcall UFG::InterestPoint::OnUpdate(UFG::InterestPoint *this, float deltaTime)
 {
-  UFG::InterestPoint *v2; // rbx
   bool v3; // al
-  UFG::SimComponent *v4; // rdx
-  char v5; // cl
+  UFG::SimComponent *m_pPointer; // rdx
+  bool v5; // cl
   float v6; // xmm0_4
-  float v7; // xmm1_4
-  bool isPlayingOpeningBranch; // [rsp+58h] [rbp+10h]
+  float mUseTime; // xmm1_4
+  bool isPlayingOpeningBranch; // [rsp+58h] [rbp+10h] BYREF
 
-  v2 = this;
   isPlayingOpeningBranch = 0;
   v3 = this->mTimeSinceBeginUse != 0.0 && UFG::InterestPoint::CheckOutsideForInteruption(this, &isPlayingOpeningBranch);
-  v4 = v2->mpInterestPointUserComponent.m_pPointer;
+  m_pPointer = this->mpInterestPointUserComponent.m_pPointer;
   v5 = 1;
-  if ( v4 )
-  {
-    v5 = 1;
-    if ( LODWORD(v4[7].m_BoundComponentHandles.mNode.mNext) == 3 )
-      v5 = 0;
-  }
-  v6 = deltaTime + v2->mTimeSinceBeginUse;
-  v2->mTimeSinceBeginUse = v6;
-  if ( v2->mIsInUse )
+  if ( m_pPointer )
+    v5 = LODWORD(m_pPointer[7].m_BoundComponentHandles.mNode.mNext) != 3;
+  v6 = deltaTime + this->mTimeSinceBeginUse;
+  this->mTimeSinceBeginUse = v6;
+  if ( this->mIsInUse )
   {
     if ( v3 && !isPlayingOpeningBranch )
-      v2->mIsInterrupted = 1;
+      this->mIsInterrupted = 1;
     if ( v5 )
     {
-      v7 = v2->mUseTime;
-      if ( v6 > v7 && v7 > 0.0 )
-        v2->mIsTimedOut = 1;
+      mUseTime = this->mUseTime;
+      if ( v6 > mUseTime && mUseTime > 0.0 )
+        this->mIsTimedOut = 1;
     }
-    if ( v2->mIsTimedOut || v3 )
+    if ( this->mIsTimedOut || v3 )
     {
-      *(_WORD *)&v2->mIsInUse = 256;
-      if ( UFG::GetLocalPlayer() == (UFG::SimObjectCharacter *)v2->mpUser.m_pPointer
-        || v2->mPropertiesHandle.mProperties->mIsAutoInteractable )
-      {
-        UFG::InterestPoint::EndReservation(v2);
-      }
+      *(_WORD *)&this->mIsInUse = 256;
+      if ( UFG::GetLocalPlayer() == this->mpUser.m_pPointer || this->mPropertiesHandle.mProperties->mIsAutoInteractable )
+        UFG::InterestPoint::EndReservation(this);
     }
   }
   else
   {
-    v2->mTimeSinceFinished = deltaTime + v2->mTimeSinceFinished;
+    this->mTimeSinceFinished = deltaTime + this->mTimeSinceFinished;
   }
-  return v2->mCooldownTime < v2->mTimeSinceFinished;
+  return this->mCooldownTime < this->mTimeSinceFinished;
 }
 
 // File Line: 1895
 // RVA: 0x57F600
 bool __fastcall UFG::InterestPoint::CheckOutsideForInteruption(UFG::InterestPoint *this, bool *isPlayingOpeningBranch)
 {
-  bool *v2; // rsi
-  UFG::SimObjectGame *v3; // rcx
-  unsigned __int16 v4; // r8
-  UFG::SimComponent *v5; // rbx
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // r8
+  UFG::SimComponent *m_pComponent; // rbx
   UFG::SimComponent *v6; // rax
-  unsigned int v7; // eax
-  unsigned __int8 v8; // al
+  unsigned int ActionMostUsedIndex_Interactions; // eax
+  unsigned __int8 IsPlaying; // al
   bool v9; // di
 
-  v2 = isPlayingOpeningBranch;
   *isPlayingOpeningBranch = 0;
-  v3 = (UFG::SimObjectGame *)this->mpUser.m_pPointer;
-  if ( !v3 )
+  m_pPointer = (UFG::SimObjectGame *)this->mpUser.m_pPointer;
+  if ( !m_pPointer )
     return 1;
-  v4 = v3->m_Flags;
-  if ( (v4 >> 14) & 1 )
+  m_Flags = m_pPointer->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 )
   {
-    v5 = v3->m_Components.p[7].m_pComponent;
+    m_pComponent = m_pPointer->m_Components.p[7].m_pComponent;
   }
-  else if ( (v4 & 0x8000u) == 0 )
+  else if ( m_Flags >= 0 )
   {
-    if ( (v4 >> 13) & 1 )
+    if ( (m_Flags & 0x2000) != 0 )
     {
-      v5 = v3->m_Components.p[6].m_pComponent;
+      m_pComponent = m_pPointer->m_Components.p[6].m_pComponent;
     }
     else
     {
-      v6 = (v4 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v3, UFG::ActionTreeComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v3->vfptr, UFG::ActionTreeComponent::_TypeUID);
-      v5 = v6;
+      v6 = (m_Flags & 0x1000) != 0
+         ? UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::ActionTreeComponent::_TypeUID)
+         : UFG::SimObject::GetComponentOfType(m_pPointer, UFG::ActionTreeComponent::_TypeUID);
+      m_pComponent = v6;
     }
   }
   else
   {
-    v5 = v3->m_Components.p[7].m_pComponent;
+    m_pComponent = m_pPointer->m_Components.p[7].m_pComponent;
   }
-  if ( !v5 )
+  if ( !m_pComponent )
     return 1;
-  if ( !(_S9_16 & 1) )
+  if ( (_S9_16 & 1) == 0 )
   {
     _S9_16 |= 1u;
-    node_id.mUID = UFG::qStringHashUpper32("Interactions", 0xFFFFFFFF);
+    node_id.mUID = UFG::qStringHashUpper32("Interactions", -1);
   }
-  v7 = `anonymous namespace::GetActionMostUsedIndex_Interactions();
-  v8 = ActionController::IsPlaying((ActionController *)&v5[3], &node_id, v7, 0);
-  v9 = v8 == 0;
-  if ( !v8 )
-    *v2 = ActionController::IsPlaying(
-            (ActionController *)&v5[3],
-            (ActionNode *)v5[2].m_BoundComponentHandles.mNode.mNext[1].mNext);
+  ActionMostUsedIndex_Interactions = `anonymous namespace::GetActionMostUsedIndex_Interactions();
+  IsPlaying = ActionController::IsPlaying(
+                (ActionController *)&m_pComponent[3],
+                &node_id,
+                ActionMostUsedIndex_Interactions,
+                0);
+  v9 = IsPlaying == 0;
+  if ( !IsPlaying )
+    *isPlayingOpeningBranch = ActionController::IsPlaying(
+                                (ActionController *)&m_pComponent[3],
+                                (ActionNodePlayable *)m_pComponent[2].m_BoundComponentHandles.mNode.mNext[1].mNext);
   return v9;
 }
 
@@ -2605,75 +2525,73 @@ float __fastcall UFG::InterestPoint::GetDistanceAttenuation(float dist, float re
 // RVA: 0x581EB0
 void __fastcall UFG::InterestPoint::FinishUsing(UFG::InterestPoint *this)
 {
-  UFG::InterestPoint *v1; // rbx
-  UFG::SimObject *v2; // rcx
-  unsigned __int16 v3; // dx
-  UFG::SimComponent *v4; // rax
-  UFG::qSafePointerNode<UFG::SimComponent>Vtbl *v5; // rcx
+  UFG::SimObject *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rax
+  UFG::qSafePointerNode<UFG::SimComponent>Vtbl *vfptr; // rcx
   UFG::InterestPointLink *v6; // rcx
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v7; // rbx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v8; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v9; // rax
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mLinkObject; // rbx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
 
-  v1 = this;
-  v2 = this->mpUser.m_pPointer;
-  if ( !v2 )
+  m_pPointer = this->mpUser.m_pPointer;
+  if ( !m_pPointer )
     return;
-  v3 = v2->m_Flags;
-  if ( (v3 >> 14) & 1 )
+  m_Flags = m_pPointer->m_Flags;
+  if ( (m_Flags & 0x4000) != 0 )
   {
-    v4 = v2->m_Components.p[4].m_pComponent;
+    m_pComponent = m_pPointer->m_Components.p[4].m_pComponent;
   }
-  else if ( (v3 & 0x8000u) == 0 )
+  else if ( m_Flags >= 0 )
   {
-    if ( (v3 >> 13) & 1 )
-      v4 = v2->m_Components.p[3].m_pComponent;
+    if ( (m_Flags & 0x2000) != 0 )
+      m_pComponent = m_pPointer->m_Components.p[3].m_pComponent;
     else
-      v4 = (v3 >> 12) & 1 ? v2->m_Components.p[2].m_pComponent : UFG::SimObject::GetComponentOfType(
-                                                                   v2,
-                                                                   UFG::TSActorComponent::_TypeUID);
+      m_pComponent = (m_Flags & 0x1000) != 0
+                   ? m_pPointer->m_Components.p[2].m_pComponent
+                   : UFG::SimObject::GetComponentOfType(m_pPointer, UFG::TSActorComponent::_TypeUID);
   }
   else
   {
-    v4 = v2->m_Components.p[4].m_pComponent;
+    m_pComponent = m_pPointer->m_Components.p[4].m_pComponent;
   }
-  if ( !v4 )
+  if ( !m_pComponent )
     return;
-  v5 = v4[1].vfptr;
-  if ( !v5 || LODWORD(v4[1].m_SafePointerList.mNode.mPrev) != LODWORD(v5[1].__vecDelDtor) )
+  vfptr = m_pComponent[1].vfptr;
+  if ( !vfptr || LODWORD(m_pComponent[1].m_SafePointerList.mNode.mPrev) != LODWORD(vfptr[1].__vecDelDtor) )
     return;
-  if ( !v1->mIsInUse )
+  if ( !this->mIsInUse )
     goto LABEL_18;
-  if ( v1->mBeginningScriptInfo.mHasScript )
+  if ( this->mBeginningScriptInfo.mHasScript )
   {
-    if ( !v1->mBeginningScriptInfo.mScriptFired )
-      UFG::InterestPoint::StartScript(v1, &v1->mBeginningScriptInfo);
+    if ( !this->mBeginningScriptInfo.mScriptFired )
+      UFG::InterestPoint::StartScript(this, &this->mBeginningScriptInfo);
 LABEL_18:
-    if ( v1->mBeginningScriptInfo.mHasScript
-      && v1->mBeginningScriptInfo.mScriptFired
-      && v1->mEndingScriptInfo.mHasScript
-      && !v1->mEndingScriptInfo.mScriptFired )
+    if ( this->mBeginningScriptInfo.mHasScript
+      && this->mBeginningScriptInfo.mScriptFired
+      && this->mEndingScriptInfo.mHasScript
+      && !this->mEndingScriptInfo.mScriptFired )
     {
-      UFG::InterestPoint::StartScript(v1, &v1->mEndingScriptInfo);
+      UFG::InterestPoint::StartScript(this, &this->mEndingScriptInfo);
     }
   }
-  if ( v1->mLinkObject.m_pPointer )
+  if ( this->mLinkObject.m_pPointer )
   {
-    v6 = (UFG::InterestPointLink *)v1->mpInterestPointUserComponent.m_pPointer;
+    v6 = (UFG::InterestPointLink *)this->mpInterestPointUserComponent.m_pPointer;
     if ( !v6[14].mIsExclusive )
     {
       UFG::InterestPointLink::Reset(v6 + 14);
-      v7 = &v1->mLinkObject;
-      if ( v7->m_pPointer )
+      p_mLinkObject = &this->mLinkObject;
+      if ( p_mLinkObject->m_pPointer )
       {
-        v8 = v7->mPrev;
-        v9 = v7->mNext;
-        v8->mNext = v9;
-        v9->mPrev = v8;
-        v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v7->mPrev;
-        v7->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v7->mPrev;
+        mPrev = p_mLinkObject->mPrev;
+        mNext = p_mLinkObject->mNext;
+        mPrev->mNext = mNext;
+        mNext->mPrev = mPrev;
+        p_mLinkObject->mPrev = p_mLinkObject;
+        p_mLinkObject->mNext = p_mLinkObject;
       }
-      v7->m_pPointer = 0i64;
+      p_mLinkObject->m_pPointer = 0i64;
     }
   }
 }
@@ -2683,28 +2601,26 @@ LABEL_18:
 void __fastcall UFG::InterestPoint::StartScript(UFG::InterestPoint *this, UFG::ScriptInfo *scriptInfo)
 {
   bool v2; // zf
-  UFG::ScriptInfo *v3; // rdi
-  UFG::SimObject *v4; // rcx
+  UFG::SimObject *m_pPointer; // rcx
   UFG::TSActor *v5; // rax
   SSInstance *v6; // rsi
-  SSClass *v7; // rbx
-  SSCode *v8; // rax
+  SSClass *i_class_p; // rbx
+  SSCode *ScriptCode; // rax
 
   v2 = scriptInfo->mpCachedScript == 0i64;
-  v3 = scriptInfo;
   scriptInfo->mScriptFired = 1;
   if ( !v2 )
   {
-    v4 = this->mpUser.m_pPointer;
-    if ( v4 )
+    m_pPointer = this->mpUser.m_pPointer;
+    if ( m_pPointer )
     {
-      v5 = UFG::TSActor::FromSimObject(v4);
-      v6 = (SSInstance *)&v5->vfptr;
+      v5 = UFG::TSActor::FromSimObject(m_pPointer);
+      v6 = v5;
       if ( v5 )
       {
-        v7 = v5->i_class_p;
-        v8 = UFG::ScriptCache::GetScriptCode(v3->mpCachedScript);
-        UFG::SkookumMgr::RunExternalCodeBlock(v8, v7, v6, 0i64, 0i64);
+        i_class_p = v5->i_class_p;
+        ScriptCode = UFG::ScriptCache::GetScriptCode(scriptInfo->mpCachedScript);
+        UFG::SkookumMgr::RunExternalCodeBlock(ScriptCode, i_class_p, v6, 0i64, 0i64);
       }
     }
   }
@@ -2712,113 +2628,110 @@ void __fastcall UFG::InterestPoint::StartScript(UFG::InterestPoint *this, UFG::S
 
 // File Line: 1988
 // RVA: 0x57FEA0
-UFG::qSymbol *__fastcall UFG::InterestPoint::ConvertTypeToPropertiesName(UFG::qSymbol *result, UFG::qSymbol *type)
+UFG::qSymbol *__fastcall UFG::InterestPoint::ConvertTypeToPropertiesName(UFG::qSymbol *result, UFG::qSymbolUC *type)
 {
-  UFG::qSymbol *v2; // rbx
-  UFG::qSymbol *v3; // rdi
   char *v4; // rbx
   char *v5; // rax
-  UFG::qString v7; // [rsp+28h] [rbp-30h]
+  UFG::qString v7; // [rsp+28h] [rbp-30h] BYREF
 
-  v2 = type;
-  v3 = result;
   UFG::qString::qString(&v7);
-  v4 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)v2);
+  v4 = UFG::qSymbol::as_cstr_dbg(type);
   v5 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&qSymbolX_propset_componentPOI);
-  UFG::qString::Format(&v7, "%s-%s", v5, v4, -2i64);
-  UFG::qSymbol::create_from_string(v3, v7.mData);
+  UFG::qString::Format(&v7, "%s-%s", v5, v4);
+  UFG::qSymbol::create_from_string(result, v7.mData);
   UFG::qString::~qString(&v7);
-  return v3;
+  return result;
 }
 
 // File Line: 2032
 // RVA: 0x581230
-UFG::InterestPoint *__fastcall UFG::InterestPoint::FindNearestMinMaxOfType(UFG::qVector3 *pos, const bool includeActive, const bool includeInactive, UFG::qSymbol *type, float minDistSquared, float maxDistSquared, float *pDistSquared)
+UFG::InterestPoint *__fastcall UFG::InterestPoint::FindNearestMinMaxOfType(
+        UFG::qVector3 *pos,
+        const bool includeActive,
+        const bool includeInactive,
+        UFG::qSymbol *type,
+        float minDistSquared,
+        float maxDistSquared,
+        float *pDistSquared)
 {
   UFG::InterestPoint *v7; // rsi
-  UFG::qSymbol *v8; // r14
-  bool v9; // bp
-  UFG::qVector3 *v10; // r12
-  bool v11; // r15
   float v12; // xmm6_4
-  unsigned int v13; // eax
+  unsigned int mUID; // eax
   UFG::qBaseTreeRB *i; // rax
   UFG::InterestPoint *v15; // rbx
-  UFG::qVector3 *v16; // rax
+  UFG::qVector3 *Position; // rax
   float v17; // xmm2_4
   UFG::qBaseTreeRB *j; // rax
-  signed __int64 v19; // rdi
-  _DWORD *v20; // rbx
+  __int64 v19; // rdi
+  __int64 v20; // rbx
   int v21; // xmm0_4
   int v22; // xmm1_4
   float v23; // xmm2_4
   UFG::InterestPoint *result; // rax
 
   v7 = 0i64;
-  v8 = type;
-  v9 = includeInactive;
-  v10 = pos;
-  v11 = includeActive;
   v12 = maxDistSquared;
-  v13 = qSymbol_Any.mUID;
+  mUID = qSymbol_Any.mUID;
   if ( type->mUID == qSymbol_Any.mUID || type->mUID == qSymbol_look.mUID )
   {
     for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::InterestPoint::msLookInterestPoints);
           ;
-          i = UFG::qBaseTreeRB::GetNext(&UFG::InterestPoint::msLookInterestPoints.mTree, &v15->mNode) )
+          i = UFG::qBaseTreeRB::GetNext(
+                &UFG::InterestPoint::msLookInterestPoints.mTree,
+                &v15->UFG::qNodeRB<UFG::InterestPoint>::mNode) )
     {
-      v15 = (UFG::InterestPoint *)(i ? i[-2].mRoot.mChild : 0i64);
+      v15 = i ? (UFG::InterestPoint *)i[-2].mRoot.mChild : 0i64;
       if ( !v15 )
         break;
-      if ( (v8->mUID == qSymbol_Any.mUID || v8->mUID == v15->mPoiType.mUID)
-        && (v11 && v15->mActive || v9 && !v15->mActive) )
+      if ( (type->mUID == qSymbol_Any.mUID || type->mUID == v15->mPoiType.mUID)
+        && (includeActive && v15->mActive || includeInactive && !v15->mActive) )
       {
-        v16 = UFG::InterestPoint::GetPosition(v15);
-        v17 = (float)((float)((float)(v10->y - v16->y) * (float)(v10->y - v16->y))
-                    + (float)((float)(v10->x - v16->x) * (float)(v10->x - v16->x)))
-            + (float)((float)(v10->z - v16->z) * (float)(v10->z - v16->z));
+        Position = UFG::InterestPoint::GetPosition(v15);
+        v17 = (float)((float)((float)(pos->y - Position->y) * (float)(pos->y - Position->y))
+                    + (float)((float)(pos->x - Position->x) * (float)(pos->x - Position->x)))
+            + (float)((float)(pos->z - Position->z) * (float)(pos->z - Position->z));
         if ( v17 < v12 && v17 > minDistSquared && v17 < maxDistSquared )
         {
-          v12 = (float)((float)((float)(v10->y - v16->y) * (float)(v10->y - v16->y))
-                      + (float)((float)(v10->x - v16->x) * (float)(v10->x - v16->x)))
-              + (float)((float)(v10->z - v16->z) * (float)(v10->z - v16->z));
+          v12 = (float)((float)((float)(pos->y - Position->y) * (float)(pos->y - Position->y))
+                      + (float)((float)(pos->x - Position->x) * (float)(pos->x - Position->x)))
+              + (float)((float)(pos->z - Position->z) * (float)(pos->z - Position->z));
           v7 = v15;
         }
       }
     }
-    v13 = qSymbol_Any.mUID;
+    mUID = qSymbol_Any.mUID;
   }
-  if ( v8->mUID == v13 )
+  if ( type->mUID == mUID )
   {
     for ( j = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::InterestPoint::msUseInterestPoints);
           ;
           j = UFG::qBaseTreeRB::GetNext(&UFG::InterestPoint::msUseInterestPoints.mTree, (UFG::qBaseNodeRB *)(v19 + 136)) )
     {
-      v19 = (signed __int64)(j ? j[-2].mRoot.mChild : 0i64);
+      v19 = j ? (__int64)j[-2].mRoot.mChild : 0i64;
       if ( !v19 )
         break;
-      if ( (v8->mUID == qSymbol_Any.mUID || v8->mUID == *(_DWORD *)(v19 + 300))
-        && (v11 && *(_BYTE *)(v19 + 430) || v9 && !*(_BYTE *)(v19 + 430)) )
+      if ( (type->mUID == qSymbol_Any.mUID || type->mUID == *(_DWORD *)(v19 + 300))
+        && (includeActive && *(_BYTE *)(v19 + 430) || includeInactive && !*(_BYTE *)(v19 + 430)) )
       {
         if ( !*(_BYTE *)(v19 + 316) )
         {
-          v20 = *(_DWORD **)(v19 + 104);
-          UFG::TransformNodeComponent::UpdateWorldTransform(*(UFG::TransformNodeComponent **)(v19 + 104));
-          v21 = v20[45];
-          v22 = v20[46];
-          *(_DWORD *)(v19 + 304) = v20[44];
+          v20 = *(_QWORD *)(v19 + 104);
+          UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v20);
+          v21 = *(_DWORD *)(v20 + 180);
+          v22 = *(_DWORD *)(v20 + 184);
+          *(_DWORD *)(v19 + 304) = *(_DWORD *)(v20 + 176);
           *(_DWORD *)(v19 + 308) = v21;
           *(_DWORD *)(v19 + 312) = v22;
           *(_BYTE *)(v19 + 316) = 1;
         }
-        v23 = (float)((float)((float)(v10->x - *(float *)(v19 + 304)) * (float)(v10->x - *(float *)(v19 + 304)))
-                    + (float)((float)(v10->y - *(float *)(v19 + 308)) * (float)(v10->y - *(float *)(v19 + 308))))
-            + (float)((float)(v10->z - *(float *)(v19 + 312)) * (float)(v10->z - *(float *)(v19 + 312)));
+        v23 = (float)((float)((float)(pos->x - *(float *)(v19 + 304)) * (float)(pos->x - *(float *)(v19 + 304)))
+                    + (float)((float)(pos->y - *(float *)(v19 + 308)) * (float)(pos->y - *(float *)(v19 + 308))))
+            + (float)((float)(pos->z - *(float *)(v19 + 312)) * (float)(pos->z - *(float *)(v19 + 312)));
         if ( v23 < v12 && v23 > minDistSquared && v23 < maxDistSquared )
         {
-          v12 = (float)((float)((float)(v10->x - *(float *)(v19 + 304)) * (float)(v10->x - *(float *)(v19 + 304)))
-                      + (float)((float)(v10->y - *(float *)(v19 + 308)) * (float)(v10->y - *(float *)(v19 + 308))))
-              + (float)((float)(v10->z - *(float *)(v19 + 312)) * (float)(v10->z - *(float *)(v19 + 312)));
+          v12 = (float)((float)((float)(pos->x - *(float *)(v19 + 304)) * (float)(pos->x - *(float *)(v19 + 304)))
+                      + (float)((float)(pos->y - *(float *)(v19 + 308)) * (float)(pos->y - *(float *)(v19 + 308))))
+              + (float)((float)(pos->z - *(float *)(v19 + 312)) * (float)(pos->z - *(float *)(v19 + 312)));
           v7 = (UFG::InterestPoint *)v19;
         }
       }
@@ -2832,36 +2745,33 @@ UFG::InterestPoint *__fastcall UFG::InterestPoint::FindNearestMinMaxOfType(UFG::
 
 // File Line: 2107
 // RVA: 0x5814E0
-UFG::InterestPoint *__fastcall UFG::InterestPoint::FindNearestMinOfType(UFG::qVector3 *pos, UFG::qSymbol *type, float minDistSquared, float maxDistSquared, float *pDistSquared)
+UFG::InterestPoint *__fastcall UFG::InterestPoint::FindNearestMinOfType(
+        UFG::qVector3 *pos,
+        UFG::qSymbol *type,
+        float minDistSquared,
+        float maxDistSquared,
+        float *pDistSquared)
 {
-  unsigned int v5; // eax
-  float v6; // xmm6_4
-  float v7; // xmm7_4
-  UFG::qSymbol *v8; // r14
+  unsigned int mUID; // eax
   unsigned int v9; // edx
   UFG::InterestPoint *v10; // rsi
-  UFG::qVector3 *v11; // rbp
   UFG::qBaseTreeRB *i; // rax
-  signed __int64 v13; // rdi
-  _DWORD *v14; // rbx
+  __int64 v13; // rdi
+  __int64 v14; // rbx
   int v15; // xmm0_4
   int v16; // xmm1_4
   float v17; // xmm2_4
   UFG::qBaseTreeRB *j; // rax
-  signed __int64 v19; // rdi
-  _DWORD *v20; // rbx
+  __int64 v19; // rdi
+  __int64 v20; // rbx
   int v21; // xmm0_4
   int v22; // xmm1_4
   float v23; // xmm2_4
   UFG::InterestPoint *result; // rax
 
-  v5 = qSymbol_Any.mUID;
-  v6 = maxDistSquared;
-  v7 = minDistSquared;
-  v8 = type;
+  mUID = qSymbol_Any.mUID;
   v9 = type->mUID;
   v10 = 0i64;
-  v11 = pos;
   if ( v9 == qSymbol_Any.mUID || v9 == qSymbol_look.mUID )
   {
     for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::InterestPoint::msLookInterestPoints);
@@ -2870,66 +2780,70 @@ UFG::InterestPoint *__fastcall UFG::InterestPoint::FindNearestMinOfType(UFG::qVe
                 &UFG::InterestPoint::msLookInterestPoints.mTree,
                 (UFG::qBaseNodeRB *)(v13 + 136)) )
     {
-      v13 = (signed __int64)(i ? i[-2].mRoot.mChild : 0i64);
+      v13 = i ? (__int64)i[-2].mRoot.mChild : 0i64;
       if ( !v13 )
         break;
-      if ( v8->mUID == qSymbol_Any.mUID || v8->mUID == *(_DWORD *)(v13 + 300) )
+      if ( type->mUID == qSymbol_Any.mUID || type->mUID == *(_DWORD *)(v13 + 300) )
       {
         if ( !*(_BYTE *)(v13 + 316) )
         {
-          v14 = *(_DWORD **)(v13 + 104);
-          UFG::TransformNodeComponent::UpdateWorldTransform(*(UFG::TransformNodeComponent **)(v13 + 104));
-          v15 = v14[45];
-          v16 = v14[46];
-          *(_DWORD *)(v13 + 304) = v14[44];
+          v14 = *(_QWORD *)(v13 + 104);
+          UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v14);
+          v15 = *(_DWORD *)(v14 + 180);
+          v16 = *(_DWORD *)(v14 + 184);
+          *(_DWORD *)(v13 + 304) = *(_DWORD *)(v14 + 176);
           *(_DWORD *)(v13 + 308) = v15;
           *(_DWORD *)(v13 + 312) = v16;
           *(_BYTE *)(v13 + 316) = 1;
         }
-        v17 = (float)((float)((float)(v11->y - *(float *)(v13 + 308)) * (float)(v11->y - *(float *)(v13 + 308)))
-                    + (float)((float)(v11->x - *(float *)(v13 + 304)) * (float)(v11->x - *(float *)(v13 + 304))))
-            + (float)((float)(v11->z - *(float *)(v13 + 312)) * (float)(v11->z - *(float *)(v13 + 312)));
-        if ( v17 < v6 && v17 > v7 )
+        v17 = (float)((float)((float)(pos->y - *(float *)(v13 + 308)) * (float)(pos->y - *(float *)(v13 + 308)))
+                    + (float)((float)(pos->x - *(float *)(v13 + 304)) * (float)(pos->x - *(float *)(v13 + 304))))
+            + (float)((float)(pos->z - *(float *)(v13 + 312)) * (float)(pos->z - *(float *)(v13 + 312)));
+        if ( v17 < maxDistSquared && v17 > minDistSquared )
         {
-          v6 = (float)((float)((float)(v11->y - *(float *)(v13 + 308)) * (float)(v11->y - *(float *)(v13 + 308)))
-                     + (float)((float)(v11->x - *(float *)(v13 + 304)) * (float)(v11->x - *(float *)(v13 + 304))))
-             + (float)((float)(v11->z - *(float *)(v13 + 312)) * (float)(v11->z - *(float *)(v13 + 312)));
+          maxDistSquared = (float)((float)((float)(pos->y - *(float *)(v13 + 308))
+                                         * (float)(pos->y - *(float *)(v13 + 308)))
+                                 + (float)((float)(pos->x - *(float *)(v13 + 304))
+                                         * (float)(pos->x - *(float *)(v13 + 304))))
+                         + (float)((float)(pos->z - *(float *)(v13 + 312)) * (float)(pos->z - *(float *)(v13 + 312)));
           v10 = (UFG::InterestPoint *)v13;
         }
       }
     }
-    v5 = qSymbol_Any.mUID;
+    mUID = qSymbol_Any.mUID;
   }
-  if ( v8->mUID == v5 )
+  if ( type->mUID == mUID )
   {
     for ( j = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::InterestPoint::msUseInterestPoints);
           ;
           j = UFG::qBaseTreeRB::GetNext(&UFG::InterestPoint::msUseInterestPoints.mTree, (UFG::qBaseNodeRB *)(v19 + 136)) )
     {
-      v19 = (signed __int64)(j ? j[-2].mRoot.mChild : 0i64);
+      v19 = j ? (__int64)j[-2].mRoot.mChild : 0i64;
       if ( !v19 )
         break;
-      if ( v8->mUID == qSymbol_Any.mUID || v8->mUID == *(_DWORD *)(v19 + 300) )
+      if ( type->mUID == qSymbol_Any.mUID || type->mUID == *(_DWORD *)(v19 + 300) )
       {
         if ( !*(_BYTE *)(v19 + 316) )
         {
-          v20 = *(_DWORD **)(v19 + 104);
-          UFG::TransformNodeComponent::UpdateWorldTransform(*(UFG::TransformNodeComponent **)(v19 + 104));
-          v21 = v20[45];
-          v22 = v20[46];
-          *(_DWORD *)(v19 + 304) = v20[44];
+          v20 = *(_QWORD *)(v19 + 104);
+          UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v20);
+          v21 = *(_DWORD *)(v20 + 180);
+          v22 = *(_DWORD *)(v20 + 184);
+          *(_DWORD *)(v19 + 304) = *(_DWORD *)(v20 + 176);
           *(_DWORD *)(v19 + 308) = v21;
           *(_DWORD *)(v19 + 312) = v22;
           *(_BYTE *)(v19 + 316) = 1;
         }
-        v23 = (float)((float)((float)(v11->x - *(float *)(v19 + 304)) * (float)(v11->x - *(float *)(v19 + 304)))
-                    + (float)((float)(v11->y - *(float *)(v19 + 308)) * (float)(v11->y - *(float *)(v19 + 308))))
-            + (float)((float)(v11->z - *(float *)(v19 + 312)) * (float)(v11->z - *(float *)(v19 + 312)));
-        if ( v23 < v6 && v23 > v7 )
+        v23 = (float)((float)((float)(pos->x - *(float *)(v19 + 304)) * (float)(pos->x - *(float *)(v19 + 304)))
+                    + (float)((float)(pos->y - *(float *)(v19 + 308)) * (float)(pos->y - *(float *)(v19 + 308))))
+            + (float)((float)(pos->z - *(float *)(v19 + 312)) * (float)(pos->z - *(float *)(v19 + 312)));
+        if ( v23 < maxDistSquared && v23 > minDistSquared )
         {
-          v6 = (float)((float)((float)(v11->x - *(float *)(v19 + 304)) * (float)(v11->x - *(float *)(v19 + 304)))
-                     + (float)((float)(v11->y - *(float *)(v19 + 308)) * (float)(v11->y - *(float *)(v19 + 308))))
-             + (float)((float)(v11->z - *(float *)(v19 + 312)) * (float)(v11->z - *(float *)(v19 + 312)));
+          maxDistSquared = (float)((float)((float)(pos->x - *(float *)(v19 + 304))
+                                         * (float)(pos->x - *(float *)(v19 + 304)))
+                                 + (float)((float)(pos->y - *(float *)(v19 + 308))
+                                         * (float)(pos->y - *(float *)(v19 + 308))))
+                         + (float)((float)(pos->z - *(float *)(v19 + 312)) * (float)(pos->z - *(float *)(v19 + 312)));
           v10 = (UFG::InterestPoint *)v19;
         }
       }
@@ -2937,27 +2851,30 @@ UFG::InterestPoint *__fastcall UFG::InterestPoint::FindNearestMinOfType(UFG::qVe
   }
   result = v10;
   if ( pDistSquared )
-    *pDistSquared = v6;
+    *pDistSquared = maxDistSquared;
   return result;
 }
 
 // File Line: 2176
 // RVA: 0x580FD0
-UFG::InterestPoint *__fastcall UFG::InterestPoint::FindNearestMaxOfType(UFG::qVector3 *pos, UFG::qSymbol *type, float minDistSquared, float maxDistSquared, float *pDistSquared)
+UFG::InterestPoint *__fastcall UFG::InterestPoint::FindNearestMaxOfType(
+        UFG::qVector3 *pos,
+        UFG::qSymbol *type,
+        float minDistSquared,
+        float maxDistSquared,
+        float *pDistSquared)
 {
   float v5; // xmm6_4
   UFG::InterestPoint *v6; // rsi
-  UFG::qSymbol *v7; // r14
-  UFG::qVector3 *v8; // rbp
   UFG::qBaseTreeRB *i; // rax
-  signed __int64 v10; // rdi
-  _DWORD *v11; // rbx
+  __int64 v10; // rdi
+  __int64 v11; // rbx
   int v12; // xmm0_4
   int v13; // xmm1_4
   float v14; // xmm2_4
   UFG::qBaseTreeRB *j; // rax
-  signed __int64 v16; // rdi
-  _DWORD *v17; // rbx
+  __int64 v16; // rdi
+  __int64 v17; // rbx
   int v18; // xmm0_4
   int v19; // xmm1_4
   float v20; // xmm2_4
@@ -2965,73 +2882,71 @@ UFG::InterestPoint *__fastcall UFG::InterestPoint::FindNearestMaxOfType(UFG::qVe
 
   v5 = maxDistSquared;
   v6 = 0i64;
-  v7 = type;
-  v8 = pos;
   if ( type->mUID != qSymbol_Any.mUID && type->mUID != qSymbol_look.mUID )
-    goto LABEL_34;
+    goto LABEL_17;
   for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::InterestPoint::msLookInterestPoints);
         ;
         i = UFG::qBaseTreeRB::GetNext(&UFG::InterestPoint::msLookInterestPoints.mTree, (UFG::qBaseNodeRB *)(v10 + 136)) )
   {
-    v10 = (signed __int64)(i ? i[-2].mRoot.mChild : 0i64);
+    v10 = i ? (__int64)i[-2].mRoot.mChild : 0i64;
     if ( !v10 )
       break;
-    if ( v7->mUID == qSymbol_Any.mUID || v7->mUID == *(_DWORD *)(v10 + 300) )
+    if ( type->mUID == qSymbol_Any.mUID || type->mUID == *(_DWORD *)(v10 + 300) )
     {
       if ( !*(_BYTE *)(v10 + 316) )
       {
-        v11 = *(_DWORD **)(v10 + 104);
-        UFG::TransformNodeComponent::UpdateWorldTransform(*(UFG::TransformNodeComponent **)(v10 + 104));
-        v12 = v11[45];
-        v13 = v11[46];
-        *(_DWORD *)(v10 + 304) = v11[44];
+        v11 = *(_QWORD *)(v10 + 104);
+        UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v11);
+        v12 = *(_DWORD *)(v11 + 180);
+        v13 = *(_DWORD *)(v11 + 184);
+        *(_DWORD *)(v10 + 304) = *(_DWORD *)(v11 + 176);
         *(_DWORD *)(v10 + 308) = v12;
         *(_DWORD *)(v10 + 312) = v13;
         *(_BYTE *)(v10 + 316) = 1;
       }
-      v14 = (float)((float)((float)(v8->y - *(float *)(v10 + 308)) * (float)(v8->y - *(float *)(v10 + 308)))
-                  + (float)((float)(v8->x - *(float *)(v10 + 304)) * (float)(v8->x - *(float *)(v10 + 304))))
-          + (float)((float)(v8->z - *(float *)(v10 + 312)) * (float)(v8->z - *(float *)(v10 + 312)));
+      v14 = (float)((float)((float)(pos->y - *(float *)(v10 + 308)) * (float)(pos->y - *(float *)(v10 + 308)))
+                  + (float)((float)(pos->x - *(float *)(v10 + 304)) * (float)(pos->x - *(float *)(v10 + 304))))
+          + (float)((float)(pos->z - *(float *)(v10 + 312)) * (float)(pos->z - *(float *)(v10 + 312)));
       if ( v14 < v5 && v14 < maxDistSquared )
       {
-        v5 = (float)((float)((float)(v8->y - *(float *)(v10 + 308)) * (float)(v8->y - *(float *)(v10 + 308)))
-                   + (float)((float)(v8->x - *(float *)(v10 + 304)) * (float)(v8->x - *(float *)(v10 + 304))))
-           + (float)((float)(v8->z - *(float *)(v10 + 312)) * (float)(v8->z - *(float *)(v10 + 312)));
+        v5 = (float)((float)((float)(pos->y - *(float *)(v10 + 308)) * (float)(pos->y - *(float *)(v10 + 308)))
+                   + (float)((float)(pos->x - *(float *)(v10 + 304)) * (float)(pos->x - *(float *)(v10 + 304))))
+           + (float)((float)(pos->z - *(float *)(v10 + 312)) * (float)(pos->z - *(float *)(v10 + 312)));
         v6 = (UFG::InterestPoint *)v10;
       }
     }
   }
-  if ( v7->mUID != qSymbol_look.mUID )
+  if ( type->mUID != qSymbol_look.mUID )
   {
-LABEL_34:
+LABEL_17:
     for ( j = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::InterestPoint::msUseInterestPoints);
           ;
           j = UFG::qBaseTreeRB::GetNext(&UFG::InterestPoint::msUseInterestPoints.mTree, (UFG::qBaseNodeRB *)(v16 + 136)) )
     {
-      v16 = (signed __int64)(j ? j[-2].mRoot.mChild : 0i64);
+      v16 = j ? (__int64)j[-2].mRoot.mChild : 0i64;
       if ( !v16 )
         break;
-      if ( v7->mUID == qSymbol_Any.mUID || v7->mUID == *(_DWORD *)(v16 + 300) )
+      if ( type->mUID == qSymbol_Any.mUID || type->mUID == *(_DWORD *)(v16 + 300) )
       {
         if ( !*(_BYTE *)(v16 + 316) )
         {
-          v17 = *(_DWORD **)(v16 + 104);
-          UFG::TransformNodeComponent::UpdateWorldTransform(*(UFG::TransformNodeComponent **)(v16 + 104));
-          v18 = v17[45];
-          v19 = v17[46];
-          *(_DWORD *)(v16 + 304) = v17[44];
+          v17 = *(_QWORD *)(v16 + 104);
+          UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v17);
+          v18 = *(_DWORD *)(v17 + 180);
+          v19 = *(_DWORD *)(v17 + 184);
+          *(_DWORD *)(v16 + 304) = *(_DWORD *)(v17 + 176);
           *(_DWORD *)(v16 + 308) = v18;
           *(_DWORD *)(v16 + 312) = v19;
           *(_BYTE *)(v16 + 316) = 1;
         }
-        v20 = (float)((float)((float)(v8->x - *(float *)(v16 + 304)) * (float)(v8->x - *(float *)(v16 + 304)))
-                    + (float)((float)(v8->y - *(float *)(v16 + 308)) * (float)(v8->y - *(float *)(v16 + 308))))
-            + (float)((float)(v8->z - *(float *)(v16 + 312)) * (float)(v8->z - *(float *)(v16 + 312)));
+        v20 = (float)((float)((float)(pos->x - *(float *)(v16 + 304)) * (float)(pos->x - *(float *)(v16 + 304)))
+                    + (float)((float)(pos->y - *(float *)(v16 + 308)) * (float)(pos->y - *(float *)(v16 + 308))))
+            + (float)((float)(pos->z - *(float *)(v16 + 312)) * (float)(pos->z - *(float *)(v16 + 312)));
         if ( v20 < v5 && v20 < maxDistSquared )
         {
-          v5 = (float)((float)((float)(v8->x - *(float *)(v16 + 304)) * (float)(v8->x - *(float *)(v16 + 304)))
-                     + (float)((float)(v8->y - *(float *)(v16 + 308)) * (float)(v8->y - *(float *)(v16 + 308))))
-             + (float)((float)(v8->z - *(float *)(v16 + 312)) * (float)(v8->z - *(float *)(v16 + 312)));
+          v5 = (float)((float)((float)(pos->x - *(float *)(v16 + 304)) * (float)(pos->x - *(float *)(v16 + 304)))
+                     + (float)((float)(pos->y - *(float *)(v16 + 308)) * (float)(pos->y - *(float *)(v16 + 308))))
+             + (float)((float)(pos->z - *(float *)(v16 + 312)) * (float)(pos->z - *(float *)(v16 + 312)));
           v6 = (UFG::InterestPoint *)v16;
         }
       }
@@ -3045,35 +2960,32 @@ LABEL_34:
 
 // File Line: 2232
 // RVA: 0x585230
-char __fastcall UFG::InterestPoint::IsRelevantToPropertySet(UFG::InterestPoint *this, UFG::qPropertySet *pCharacterProperties)
+bool __fastcall UFG::InterestPoint::IsRelevantToPropertySet(
+        UFG::InterestPoint *this,
+        UFG::PropertySetManager *pCharacterProperties)
 {
-  UFG::qPropertySet *v2; // rsi
-  UFG::InterestPoint *v3; // rbx
   float v4; // xmm1_4
-  __int128 v5; // xmm0
-  UFG::InterestPointProperties *v6; // rax
+  float m_SecondsSinceMidnight; // xmm0_4
+  UFG::InterestPointProperties *mProperties; // rax
   float v7; // xmm0_4
-  float v8; // xmm2_4
-  float v9; // xmm1_4
-  char result; // al
-  UFG::qPropertySet *v11; // rax
-  int v12; // ecx
+  float mTimeOfDayToBecomeActive; // xmm2_4
+  float mTimeOfDayToBecomeInactive; // xmm1_4
+  UFG::qPropertySet *ComponentData; // rax
+  int mOffset_high; // ecx
   bool v13; // di
-  UFG::qPropertySet *v14; // rax
-  __int64 v15; // rcx
+  schema_classlist *v14; // rax
+  __int64 mOffset; // rcx
   UFG::qPropertyList *v16; // r14
-  unsigned int v17; // ebp
-  unsigned int v18; // esi
+  unsigned int mNumElements; // ebp
+  unsigned int i; // esi
   UFG::qSymbol *v19; // rax
   unsigned int v20; // ecx
   UFG::qSymbol *v21; // r8
   UFG::InterestPointProperties *v22; // rax
-  unsigned int v23; // edx
-  unsigned int v24; // er8
-  UFG::qSymbol *v25; // rax
+  unsigned int size; // edx
+  unsigned int mUID; // r8d
+  UFG::qSymbol *p; // rax
 
-  v2 = pCharacterProperties;
-  v3 = this;
   if ( !this->mActive
     || this->mLinkObject.m_pPointer
     || this->mpPedInfoUser
@@ -3088,126 +3000,116 @@ char __fastcall UFG::InterestPoint::IsRelevantToPropertySet(UFG::InterestPoint *
     LODWORD(v4) ^= _xmm[0];
   if ( v4 >= 0.001 )
   {
-    v5 = LODWORD(UFG::TimeOfDayManager::GetInstance()->m_SecondsSinceMidnight);
-    v6 = v3->mPropertiesHandle.mProperties;
-    v7 = *(float *)&v5 * 0.00027777778;
-    v8 = v6->mTimeOfDayToBecomeActive;
-    v9 = v6->mTimeOfDayToBecomeInactive;
-    if ( v8 >= v9 )
+    m_SecondsSinceMidnight = UFG::TimeOfDayManager::GetInstance()->m_SecondsSinceMidnight;
+    mProperties = this->mPropertiesHandle.mProperties;
+    v7 = m_SecondsSinceMidnight * 0.00027777778;
+    mTimeOfDayToBecomeActive = mProperties->mTimeOfDayToBecomeActive;
+    mTimeOfDayToBecomeInactive = mProperties->mTimeOfDayToBecomeInactive;
+    if ( mTimeOfDayToBecomeActive >= mTimeOfDayToBecomeInactive )
     {
-      if ( v8 <= v7 )
+      if ( mTimeOfDayToBecomeActive <= v7 )
         goto LABEL_14;
     }
-    else if ( v8 < v7 )
+    else if ( mTimeOfDayToBecomeActive < v7 )
     {
       return 0;
     }
-    if ( v7 > v9 )
+    if ( v7 > mTimeOfDayToBecomeInactive )
       return 0;
   }
 LABEL_14:
-  if ( v3->mPropertiesHandle.mProperties->mGendersAllowed.mUID != qSymbol_Any.mUID )
+  if ( this->mPropertiesHandle.mProperties->mGendersAllowed.mUID != qSymbol_Any.mUID )
   {
-    v11 = UFG::PropertySetManager::GetComponentDataPtr<component_CharacterProperties>(
-            (UFG::PropertySetManager *)v2,
-            pCharacterProperties);
-    if ( v11 )
+    ComponentData = UFG::PropertySetManager::GetComponentDataPtr<component_CharacterProperties>(
+                      pCharacterProperties,
+                      (UFG::qPropertySet *)pCharacterProperties);
+    if ( ComponentData )
     {
-      v12 = HIDWORD(v11->mParents.mOffset);
-      if ( v12 == UFG::gNullQSymbol.mUID || v3->mPropertiesHandle.mProperties->mGendersAllowed.mUID != v12 )
+      mOffset_high = HIDWORD(ComponentData->mParents.mOffset);
+      if ( mOffset_high == UFG::gNullQSymbol.mUID
+        || this->mPropertiesHandle.mProperties->mGendersAllowed.mUID != mOffset_high )
+      {
         return 0;
+      }
     }
   }
-  if ( !v3->mPropertiesHandle.mProperties->mUseClassList.size )
-    goto LABEL_35;
+  if ( !this->mPropertiesHandle.mProperties->mUseClassList.size )
+    return 1;
   v13 = 0;
   v14 = UFG::PropertySetManager::GetComponentDataPtr<schema_classlist>(
-          (UFG::PropertySetManager *)v2,
-          pCharacterProperties);
+          pCharacterProperties,
+          (UFG::qPropertySet *)pCharacterProperties);
   if ( !v14 )
-    goto LABEL_35;
-  v15 = v14->mOwner.mOffset;
-  if ( !v15 )
-    goto LABEL_35;
-  v16 = (UFG::qPropertyList *)((char *)&v14->mOwner + v15);
+    return 1;
+  mOffset = v14->ClassTypeList.mOffset;
+  if ( !mOffset )
+    return 1;
+  v16 = (UFG::qPropertyList *)((char *)&v14->ClassTypeList + mOffset);
   if ( !v16 )
-    goto LABEL_35;
-  v17 = v16->mNumElements;
-  v18 = 0;
-  if ( v17 )
+    return 1;
+  mNumElements = v16->mNumElements;
+  for ( i = 0; i < mNumElements; ++i )
   {
-    do
+    v19 = UFG::qPropertyList::Get<UFG::qSymbol>(v16, i);
+    v20 = 0;
+    v21 = v19;
+    v22 = this->mPropertiesHandle.mProperties;
+    size = v22->mUseClassList.size;
+    if ( size )
     {
-      v19 = UFG::qPropertyList::Get<UFG::qSymbol>(v16, v18);
-      v20 = 0;
-      v21 = v19;
-      v22 = v3->mPropertiesHandle.mProperties;
-      v23 = v22->mUseClassList.size;
-      if ( v23 )
+      mUID = v21->mUID;
+      p = v22->mUseClassList.p;
+      while ( mUID != p->mUID )
       {
-        v24 = v21->mUID;
-        v25 = v22->mUseClassList.p;
-        while ( v24 != v25->mUID )
-        {
-          ++v20;
-          ++v25;
-          if ( v20 >= v23 )
-            goto LABEL_27;
-        }
+        ++v20;
+        ++p;
+        if ( v20 >= size )
+          goto LABEL_27;
       }
-      else
-      {
-LABEL_27:
-        v20 = -1;
-      }
-      v13 = v20 != -1;
-      if ( v20 != -1 )
-        break;
-      ++v18;
     }
-    while ( v18 < v17 );
+    else
+    {
+LABEL_27:
+      v20 = -1;
+    }
+    v13 = v20 != -1;
+    if ( v20 != -1 )
+      break;
   }
-  if ( v13 ^ v3->mPropertiesHandle.mProperties->mClassListIsAllowed )
-    result = 0;
-  else
-LABEL_35:
-    result = 1;
-  return result;
+  return v13 == this->mPropertiesHandle.mProperties->mClassListIsAllowed;
 }
 
 // File Line: 2416
 // RVA: 0x584D70
-bool __fastcall UFG::InterestPoint::IsRelevantToCharacter(UFG::InterestPoint *this, UFG::SimObject *_pCharacter, UFG::InterestPoint::eReserveReason reserveReason)
+bool __fastcall UFG::InterestPoint::IsRelevantToCharacter(
+        UFG::InterestPoint *this,
+        UFG::SimObjectCharacter *_pCharacter,
+        UFG::InterestPoint::eReserveReason reserveReason)
 {
-  UFG::SimObjectCVBase *v3; // rbx
-  UFG::InterestPoint *v4; // rbp
   UFG::TargetingSystemPedBaseComponent *v5; // rax
   UFG::TransformNodeComponent *v6; // rsi
   UFG::TargetingSystemPedBaseComponent *v7; // rdi
-  UFG::InterestPointUserComponent *v8; // r15
+  UFG::InterestPointUserComponent *m_pComponent; // r15
   UFG::SimObjectCharacterPropertiesComponent *pCharacterPropertiesComponent; // r12
   UFG::ActiveAIEntityComponent *pAAEC; // r13
-  UFG::TargetingMap *v11; // rax
-  signed __int64 v12; // rcx
-  UFG::TargetingSimObject *v13; // rax
-  signed __int64 v14; // rcx
+  UFG::TargetingMap *m_pTargetingMap; // rax
+  __int64 v12; // rcx
+  UFG::TargetingSimObject *m_pTargets; // rax
+  __int64 v14; // rcx
   bool v15; // r14
-  UFG::SimObjectCharacter *v16; // rax
+  UFG::SimObjectCharacter *LocalPlayer; // rax
   UFG::TransformNodeComponent *v17; // rsi
-  float v18; // xmm1_4
-  float v19; // xmm0_4
+  float y; // xmm1_4
+  float z; // xmm0_4
   UFG::SpawnPoint *pCharacterSpawnPoint; // rax
-  char v21; // bl
+  bool IsRelevantToCharacter; // bl
   __int64 v22; // r9
-  UFG::SimObjectCharacterPropertiesComponent *ST20_8_18; // ST20_8
   UFG::qMatrix44 *characterTransform; // [rsp+80h] [rbp-58h]
   UFG::SimObject *pSimObject; // [rsp+88h] [rbp-50h]
-  UFG::qVector3 vPlayerPosition; // [rsp+90h] [rbp-48h]
-  float appealScale; // [rsp+E0h] [rbp+8h]
+  UFG::qVector3 vPlayerPosition; // [rsp+90h] [rbp-48h] BYREF
+  float appealScale; // [rsp+E0h] [rbp+8h] BYREF
   UFG::qVector3 *poiWorldPos; // [rsp+F8h] [rbp+20h]
 
-  v3 = (UFG::SimObjectCVBase *)_pCharacter;
-  v4 = this;
   if ( this->mpPedInfoUser )
   {
     LOBYTE(v5) = 0;
@@ -3215,76 +3117,72 @@ bool __fastcall UFG::InterestPoint::IsRelevantToCharacter(UFG::InterestPoint *th
   else
   {
     poiWorldPos = UFG::InterestPoint::GetPosition(this);
-    if ( v3 && (v6 = (UFG::TransformNodeComponent *)v3->m_Components.p[2].m_pComponent) != 0i64 )
+    if ( _pCharacter && (v6 = (UFG::TransformNodeComponent *)_pCharacter->m_Components.p[2].m_pComponent) != 0i64 )
     {
-      v5 = UFG::SimObjectCVBase::GetComponent<UFG::TargetingSystemPedBaseComponent>(v3);
+      v5 = UFG::SimObjectCVBase::GetComponent<UFG::TargetingSystemPedBaseComponent>(_pCharacter);
       v7 = v5;
       if ( v5 )
       {
-        v8 = (UFG::InterestPointUserComponent *)v3->m_Components.p[43].m_pComponent;
-        if ( v8 )
+        m_pComponent = (UFG::InterestPointUserComponent *)_pCharacter->m_Components.p[43].m_pComponent;
+        if ( m_pComponent )
         {
-          v5 = (UFG::TargetingSystemPedBaseComponent *)UFG::SimObjectCVBase::GetComponent<UFG::SimObjectCharacterPropertiesComponent>(v3);
+          v5 = (UFG::TargetingSystemPedBaseComponent *)UFG::SimObjectCVBase::GetComponent<UFG::SimObjectCharacterPropertiesComponent>(_pCharacter);
           pCharacterPropertiesComponent = (UFG::SimObjectCharacterPropertiesComponent *)v5;
           if ( v5 )
           {
-            v5 = (UFG::TargetingSystemPedBaseComponent *)UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(v3);
+            v5 = (UFG::TargetingSystemPedBaseComponent *)UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(_pCharacter);
             pAAEC = (UFG::ActiveAIEntityComponent *)v5;
             if ( v5 )
             {
               UFG::TransformNodeComponent::UpdateWorldTransform(v6);
               characterTransform = &v6->mWorldTransform;
-              v11 = v7->m_pTargetingMap;
-              appealScale = *(float *)&FLOAT_1_0;
-              v12 = (unsigned __int8)v11->m_Map.p[26];
-              v13 = v7->m_pTargets;
+              m_pTargetingMap = v7->m_pTargetingMap;
+              LODWORD(appealScale) = (_DWORD)FLOAT_1_0;
+              v12 = (unsigned __int8)m_pTargetingMap->m_Map.p[26];
+              m_pTargets = v7->m_pTargets;
               v14 = v12;
-              pSimObject = v13[v14].m_pTarget.m_pPointer;
-              v15 = pSimObject && v13[v14].m_bLock;
-              v16 = UFG::GetLocalPlayer();
-              if ( v16 )
-                v17 = (UFG::TransformNodeComponent *)v16->m_Components.p[2].m_pComponent;
+              pSimObject = m_pTargets[v14].m_pTarget.m_pPointer;
+              v15 = pSimObject && m_pTargets[v14].m_bLock;
+              LocalPlayer = UFG::GetLocalPlayer();
+              if ( LocalPlayer )
+                v17 = (UFG::TransformNodeComponent *)LocalPlayer->m_Components.p[2].m_pComponent;
               else
                 v17 = 0i64;
               UFG::TransformNodeComponent::UpdateWorldTransform(v17);
-              v18 = v17->mWorldTransform.v3.y;
+              y = v17->mWorldTransform.v3.y;
               vPlayerPosition.x = v17->mWorldTransform.v3.x;
-              v19 = v17->mWorldTransform.v3.z;
-              vPlayerPosition.y = v18;
-              vPlayerPosition.z = v19;
-              pCharacterSpawnPoint = (UFG::SpawnPoint *)UFG::GetOriginatingSpawnPoint((UFG::SimObject *)&v3->vfptr);
-              v21 = UFG::InterestPoint::IsRelevantToCharacter(
-                      v4,
-                      (UFG::SimObject *)&v3->vfptr,
-                      v7,
-                      v8,
-                      pCharacterPropertiesComponent,
-                      pAAEC,
-                      &vPlayerPosition,
-                      pCharacterSpawnPoint,
-                      characterTransform,
-                      poiWorldPos,
-                      &appealScale,
-                      (UFG::qSymbol *)&qSymbol_use.mUID,
-                      8u,
-                      ReserveReason_resume,
-                      0);
-              UFG::TargetingSystemBaseComponent::SetTarget(
-                (UFG::TargetingSystemBaseComponent *)&v7->vfptr,
-                eTARGET_TYPE_POI_USE,
-                pSimObject);
+              z = v17->mWorldTransform.v3.z;
+              vPlayerPosition.y = y;
+              vPlayerPosition.z = z;
+              pCharacterSpawnPoint = UFG::GetOriginatingSpawnPoint(_pCharacter);
+              IsRelevantToCharacter = UFG::InterestPoint::IsRelevantToCharacter(
+                                        this,
+                                        _pCharacter,
+                                        v7,
+                                        m_pComponent,
+                                        pCharacterPropertiesComponent,
+                                        pAAEC,
+                                        &vPlayerPosition,
+                                        pCharacterSpawnPoint,
+                                        characterTransform,
+                                        poiWorldPos,
+                                        &appealScale,
+                                        &qSymbol_use,
+                                        8u,
+                                        ReserveReason_resume,
+                                        0);
+              UFG::TargetingSystemBaseComponent::SetTarget(v7, 0x1Au, pSimObject);
               LOBYTE(v22) = 1;
-              LODWORD(ST20_8_18) = 0;
-              ((void (__fastcall *)(UFG::TargetingSystemPedBaseComponent *, signed __int64, bool, __int64, UFG::SimObjectCharacterPropertiesComponent *, const char *, _QWORD, _QWORD))v7->vfptr[14].__vecDelDtor)(
+              ((void (__fastcall *)(UFG::TargetingSystemPedBaseComponent *, __int64, bool, __int64, _DWORD, const char *, _QWORD, _QWORD))v7->UFG::TargetingSystemBaseComponent::UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr[14].__vecDelDtor)(
                 v7,
                 26i64,
                 v15,
                 v22,
-                ST20_8_18,
+                0,
                 "InterestPoint::IsRelevantToCharacter",
                 0i64,
                 0i64);
-              LOBYTE(v5) = v21;
+              LOBYTE(v5) = IsRelevantToCharacter;
             }
           }
         }
@@ -3306,143 +3204,140 @@ bool __fastcall UFG::InterestPoint::IsRelevantToCharacter(UFG::InterestPoint *th
 // RVA: 0x5823B0
 __int64 __fastcall UFG::InterestPoint::GetCanPathToCached(UFG::InterestPoint *this)
 {
-  UFG::InterestPoint *v1; // rbx
-
-  v1 = this;
   if ( this->mCanPathToCached.mValue != 3 )
     return (unsigned __int8)this->mCanPathToCached.mValue;
   UFG::InterestPoint::UpdateCanPathToCached(this);
-  return (unsigned __int8)v1->mCanPathToCached.mValue;
+  return (unsigned __int8)this->mCanPathToCached.mValue;
 }
 
 // File Line: 2554
 // RVA: 0x584250
-char __fastcall UFG::InterestPoint::IsRelevantToCharacter(UFG::InterestPoint *this, UFG::SimObject *pCharacter, UFG::TargetingSystemPedBaseComponent *pCharacterTargetComp, UFG::InterestPointUserComponent *pInterestPointUserComp, UFG::SimObjectCharacterPropertiesComponent *pCharacterPropertiesComponent, UFG::ActiveAIEntityComponent *pAAEC, UFG::qVector3 *vPlayerPosition, UFG::SpawnPoint *pCharacterSpawnPoint, UFG::qMatrix44 *characterTransform, UFG::qVector3 *poiWorldPos, float *appealScale, UFG::qSymbol *type, unsigned int matchReservationFlags, UFG::InterestPoint::eReserveReason reserveReason, bool bSkipChecksInPlayerRel)
+bool __fastcall UFG::InterestPoint::IsRelevantToCharacter(
+        UFG::InterestPoint *this,
+        UFG::SimObjectCharacter *pCharacter,
+        UFG::TargetingSystemPedBaseComponent *pCharacterTargetComp,
+        UFG::InterestPointUserComponent *pInterestPointUserComp,
+        UFG::SimObjectCharacterPropertiesComponent *pCharacterPropertiesComponent,
+        UFG::ActiveAIEntityComponent *pAAEC,
+        UFG::qVector3 *vPlayerPosition,
+        UFG::SpawnPoint *pCharacterSpawnPoint,
+        UFG::qMatrix44 *characterTransform,
+        UFG::qVector3 *poiWorldPos,
+        float *appealScale,
+        UFG::qSymbol *type,
+        unsigned int matchReservationFlags,
+        UFG::InterestPoint::eReserveReason reserveReason,
+        bool bSkipChecksInPlayerRel)
 {
-  UFG::InterestPointUserComponent *v15; // r13
-  UFG::SimObject *v16; // rsi
-  UFG::InterestPoint *v17; // rdi
-  UFG::SimObject *v19; // rax
+  UFG::SimObject *m_pPointer; // rax
   UFG::SimObject *v20; // rcx
   UFG::SimObject *v21; // rcx
   ActionContext *v22; // r15
   UFG::GroupComponent *v23; // r14
-  UFG::InterestPointProperties *v24; // rax
-  int v25; // ebp
-  int v26; // ebx
-  int v27; // eax
+  UFG::InterestPointProperties *mProperties; // rax
+  int mMinGroupSize; // ebp
+  int mMaxGroupSize; // ebx
+  int GroupSize; // eax
   UFG::InterestPointProperties *v28; // rcx
-  unsigned int v29; // edx
+  unsigned int mUID; // edx
   UFG::qStaticSymbol *v30; // rax
   unsigned int v31; // eax
   float v32; // xmm0_4
-  __int128 v33; // xmm0
+  float m_SecondsSinceMidnight; // xmm0_4
   UFG::InterestPointProperties *v34; // rax
   float v35; // xmm0_4
-  bool v36; // r12
+  bool IsAnyLocalPlayer; // r12
   unsigned int v37; // ecx
-  float v38; // xmm2_4
-  __m128 v39; // xmm1
-  UFG::qVector3 *v40; // rax
+  float mMaxDistanceFromPlayer; // xmm2_4
+  __m128 y_low; // xmm1
+  UFG::qVector3 *Position; // rax
   __m128 v41; // xmm0
   float v42; // xmm10_4
   float v43; // xmm1_4
   float v44; // xmm14_4
   bool v45; // bl
   UFG::InterestPointProperties *v46; // rbx
-  UFG::SimObject *v47; // rax
+  UFG::SimObject *m_pSimObject; // rax
   UFG::SceneObjectProperties *v48; // rcx
-  UFG::SceneObjectProperties *v49; // rcx
+  UFG::SceneObjectProperties *mpParent; // rcx
   UFG::SimObject *v50; // rcx
-  unsigned __int16 v51; // dx
-  UFG::SimComponent *v52; // rbx
-  UFG::qSafePointerNode<UFG::SimComponent>Vtbl *v53; // rbp
-  UFG::SimObject *v54; // rcx
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rbx
+  UFG::qSafePointerNode<UFG::SimComponent>Vtbl *Leader; // rbp
+  UFG::SimObjectGame *mNext; // rcx
   UFG::ActiveAIEntityComponent *v55; // rbp
-  unsigned __int16 v56; // cx
-  UFG::ActiveAIEntityComponent *v57; // rax
-  float v58; // xmm0_4
+  signed __int16 v56; // cx
+  UFG::ActiveAIEntityComponent *ComponentOfTypeHK; // rax
+  float DefaultLoad; // xmm0_4
   unsigned int v59; // edx
   UFG::qVector3 *v60; // rax
   UFG::qMatrix44 *v61; // r12
-  signed __int64 v62; // rbp
-  UFG::TargetingSystemBaseComponent *v63; // rbx
-  _BOOL8 v64; // rdx
-  __int64 v65; // r8
-  __int64 v66; // r9
-  UFG::SimObject *v67; // rcx
-  UFG::TransformNodeComponent *v68; // rbx
-  float v69; // xmm7_4
-  __m128 v70; // xmm6
-  float v71; // xmm8_4
-  UFG::qPropertySet *v72; // r14
-  UFG::qPropertySet *v73; // rbx
-  UFG::qPropertySet *v74; // rax
-  char v75; // al
+  UFG::SidewalkWanderData *p_m_WanderData; // rbp
+  UFG::TargetingSystemPedBaseComponent *v63; // rbx
+  UFG::SimObject *v64; // rcx
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rbx
+  float x; // xmm7_4
+  __m128 v67; // xmm6
+  float z; // xmm8_4
+  float *v69; // r14
+  float *v70; // rbx
+  bool *v71; // rax
+  bool v72; // al
+  float v73; // xmm1_4
+  float v74; // xmm2_4
+  char *v75; // rax
   float v76; // xmm1_4
-  float v77; // xmm2_4
-  char *v78; // rax
+  float y; // xmm0_4
+  float v78; // xmm3_4
   float v79; // xmm1_4
-  float v80; // xmm0_4
-  float v81; // xmm3_4
-  float v82; // xmm1_4
-  float v83; // xmm2_4
-  unsigned __int16 v84; // cx
-  char v85; // al
-  UFG::SimComponent *v86; // rbx
-  unsigned __int16 v87; // cx
-  UFG::SimComponent *v88; // rax
-  ActionNodeRoot *v89; // rax
-  __int64 v90; // rdx
-  __int64 v91; // r8
-  __int64 v92; // r9
-  ActionNodeRoot *v93; // rax
-  ActionNode *v94; // rcx
-  UFG::qVector3 v2; // [rsp+20h] [rbp-B8h]
-  UFG::qVector3 v1; // [rsp+30h] [rbp-A8h]
-  char v97; // [rsp+E0h] [rbp+8h]
-  UFG::TargetingSystemPedBaseComponent *pCharacterTargetCompa; // [rsp+F0h] [rbp+18h]
+  float v80; // xmm2_4
+  signed __int16 v81; // cx
+  UFG::SimComponent *v82; // rbx
+  signed __int16 v83; // cx
+  UFG::SimComponent *ComponentOfType; // rax
+  ActionNodeRoot *v85; // rax
+  ActionNodeRoot *v86; // rax
+  ActionNode *mBehaviourConditions; // rcx
+  UFG::qVector3 v2; // [rsp+20h] [rbp-B8h] BYREF
+  UFG::qVector3 v1; // [rsp+30h] [rbp-A8h] BYREF
+  char v90; // [rsp+E0h] [rbp+8h]
 
-  pCharacterTargetCompa = pCharacterTargetComp;
-  v15 = pInterestPointUserComp;
-  v16 = pCharacter;
-  v17 = this;
   UFG::qGetTicks();
-  if ( v17->mpPedInfoUser )
+  if ( this->mpPedInfoUser )
     return 0;
   if ( type->mUID == qSymbol_use.mUID )
   {
-    if ( v17->mPoiType.mUID != qSymbol_look.mUID )
+    if ( this->mPoiType.mUID != qSymbol_look.mUID )
       goto LABEL_7;
     return 0;
   }
-  if ( type->mUID != v17->mPoiType.mUID )
+  if ( type->mUID != this->mPoiType.mUID )
     return 0;
 LABEL_7:
-  if ( !v17->mPassedActivationChance )
+  if ( !this->mPassedActivationChance )
     return 0;
-  if ( !bSkipChecksInPlayerRel && !v17->mActive )
+  if ( !bSkipChecksInPlayerRel && !this->mActive )
     return 0;
-  v19 = v17->mLinkObject.m_pPointer;
-  if ( v19 )
+  m_pPointer = this->mLinkObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v20 = v15->mInterestPointLink.mLinkObject.m_pPointer;
-    if ( !v20 || v20 != v19 )
+    v20 = pInterestPointUserComp->mInterestPointLink.mLinkObject.m_pPointer;
+    if ( !v20 || v20 != m_pPointer )
       return 0;
   }
-  v21 = v15->mInterestPointLink.mLinkObject.m_pPointer;
-  v97 = 0;
+  v21 = pInterestPointUserComp->mInterestPointLink.mLinkObject.m_pPointer;
+  v90 = 0;
   if ( v21 )
   {
-    if ( v15->mInterestPointLink.mIsExclusive )
+    if ( pInterestPointUserComp->mInterestPointLink.mIsExclusive )
     {
-      v97 = 1;
-      if ( v21 != v19 )
+      v90 = 1;
+      if ( v21 != m_pPointer )
         return 0;
     }
   }
-  if ( !UFG::InterestPoint::IsReservationMatch(v17, matchReservationFlags, reserveReason)
-    && v17->mpUser.m_pPointer != v16 )
+  if ( !UFG::InterestPoint::IsReservationMatch(this, matchReservationFlags, reserveReason)
+    && this->mpUser.m_pPointer != pCharacter )
   {
     return 0;
   }
@@ -3450,28 +3345,28 @@ LABEL_7:
   v23 = 0i64;
   if ( pAAEC )
     v23 = pAAEC->m_pGroupComponent.m_pPointer;
-  v24 = v17->mPropertiesHandle.mProperties;
-  v25 = v24->mMinGroupSize;
-  v26 = v24->mMaxGroupSize;
-  if ( v25 >= 0 || v26 >= 0 )
+  mProperties = this->mPropertiesHandle.mProperties;
+  mMinGroupSize = mProperties->mMinGroupSize;
+  mMaxGroupSize = mProperties->mMaxGroupSize;
+  if ( mMinGroupSize >= 0 || mMaxGroupSize >= 0 )
   {
-    v27 = UFG::GroupComponent::GetGroupSize(v23);
-    if ( v25 >= 0 && v27 < v25 )
+    GroupSize = UFG::GroupComponent::GetGroupSize(v23);
+    if ( mMinGroupSize >= 0 && GroupSize < mMinGroupSize )
       return 0;
-    if ( v26 >= 0 && v27 > v26 )
+    if ( mMaxGroupSize >= 0 && GroupSize > mMaxGroupSize )
       return 0;
   }
   if ( !bSkipChecksInPlayerRel )
   {
-    v28 = v17->mPropertiesHandle.mProperties;
-    v29 = v28->mGendersAllowed.mUID;
-    if ( v29 != qSymbol_Any.mUID )
+    v28 = this->mPropertiesHandle.mProperties;
+    mUID = v28->mGendersAllowed.mUID;
+    if ( mUID != qSymbol_Any.mUID )
     {
       v30 = &qSymbol_Female;
-      if ( pCharacterPropertiesComponent->m_eGender == 1 )
+      if ( pCharacterPropertiesComponent->m_eGender == eGENDER_MALE )
         v30 = &qSymbol_Male;
       v31 = v30->mUID;
-      if ( v31 == -1 || v29 != v31 )
+      if ( v31 == -1 || mUID != v31 )
         return 0;
     }
     v32 = v28->mTimeOfDayToBecomeActive - v28->mTimeOfDayToBecomeInactive;
@@ -3479,38 +3374,38 @@ LABEL_7:
       LODWORD(v32) ^= _xmm[0];
     if ( v32 >= 0.001 )
     {
-      v33 = LODWORD(UFG::TimeOfDayManager::GetInstance()->m_SecondsSinceMidnight);
-      v34 = v17->mPropertiesHandle.mProperties;
-      v35 = *(float *)&v33 * 0.00027777778;
+      m_SecondsSinceMidnight = UFG::TimeOfDayManager::GetInstance()->m_SecondsSinceMidnight;
+      v34 = this->mPropertiesHandle.mProperties;
+      v35 = m_SecondsSinceMidnight * 0.00027777778;
       if ( v35 > v34->mTimeOfDayToBecomeActive && v35 < v34->mTimeOfDayToBecomeInactive )
         return 0;
     }
   }
-  if ( v17->mPoiType.mUID != qSymbol_look.mUID
-    && reserveReason == 1
-    && !v97
-    && !v17->mPropertiesHandle.mProperties->mIgnoreCharacterCooldown
+  if ( this->mPoiType.mUID != qSymbol_look.mUID
+    && reserveReason == ReserveReason_normal
+    && !v90
+    && !this->mPropertiesHandle.mProperties->mIgnoreCharacterCooldown
     && pCharacterPropertiesComponent
     && pCharacterPropertiesComponent->m_CharacterStats[2].m_fStat > 0.0 )
   {
     return 0;
   }
-  v36 = UFG::IsAnyLocalPlayer(v16);
-  if ( !v36 )
+  IsAnyLocalPlayer = UFG::IsAnyLocalPlayer(pCharacter);
+  if ( !IsAnyLocalPlayer )
   {
     if ( v23 )
     {
       v37 = qSymbol_look.mUID;
-      if ( v17->mPoiType.mUID != qSymbol_look.mUID )
+      if ( this->mPoiType.mUID != qSymbol_look.mUID )
       {
-        if ( !v17->mPropertiesHandle.mProperties->mAllowFollowers )
+        if ( !this->mPropertiesHandle.mProperties->mAllowFollowers )
         {
-          if ( (unsigned __int8)UFG::GroupComponent::IsFollower(v23) )
+          if ( UFG::GroupComponent::IsFollower(v23) )
             return 0;
           v37 = qSymbol_look.mUID;
         }
-        if ( v17->mPoiType.mUID != v37
-          && !v17->mPropertiesHandle.mProperties->mAllowLeaders
+        if ( this->mPoiType.mUID != v37
+          && !this->mPropertiesHandle.mProperties->mAllowLeaders
           && UFG::GroupComponent::IsLeader(v23) )
         {
           return 0;
@@ -3520,117 +3415,107 @@ LABEL_7:
   }
   if ( !bSkipChecksInPlayerRel )
   {
-    v38 = v17->mPropertiesHandle.mProperties->mMaxDistanceFromPlayer;
-    if ( v38 >= 0.0 )
+    mMaxDistanceFromPlayer = this->mPropertiesHandle.mProperties->mMaxDistanceFromPlayer;
+    if ( mMaxDistanceFromPlayer >= 0.0 )
     {
-      v39 = (__m128)LODWORD(characterTransform->v3.y);
-      v39.m128_f32[0] = (float)((float)(v39.m128_f32[0] - vPlayerPosition->y)
-                              * (float)(v39.m128_f32[0] - vPlayerPosition->y))
-                      + (float)((float)(characterTransform->v3.x - vPlayerPosition->x)
-                              * (float)(characterTransform->v3.x - vPlayerPosition->x));
-      if ( COERCE_FLOAT(_mm_sqrt_ps(v39)) > v38 )
+      y_low = (__m128)LODWORD(characterTransform->v3.y);
+      y_low.m128_f32[0] = (float)((float)(y_low.m128_f32[0] - vPlayerPosition->y)
+                                * (float)(y_low.m128_f32[0] - vPlayerPosition->y))
+                        + (float)((float)(characterTransform->v3.x - vPlayerPosition->x)
+                                * (float)(characterTransform->v3.x - vPlayerPosition->x));
+      if ( _mm_sqrt_ps(y_low).m128_f32[0] > mMaxDistanceFromPlayer )
         return 0;
     }
   }
-  v40 = UFG::InterestPoint::GetPosition(v17);
+  Position = UFG::InterestPoint::GetPosition(this);
   v41 = (__m128)LODWORD(characterTransform->v3.y);
-  LODWORD(v42) = COERCE_UNSIGNED_INT(characterTransform->v3.z - v40->z) & _xmm;
-  v43 = (float)(characterTransform->v3.x - v40->x) * (float)(characterTransform->v3.x - v40->x);
-  v41.m128_f32[0] = (float)((float)(v41.m128_f32[0] - v40->y) * (float)(v41.m128_f32[0] - v40->y)) + v43;
-  LODWORD(v44) = (unsigned __int128)_mm_sqrt_ps(v41);
+  LODWORD(v42) = COERCE_UNSIGNED_INT(characterTransform->v3.z - Position->z) & _xmm;
+  v43 = (float)(characterTransform->v3.x - Position->x) * (float)(characterTransform->v3.x - Position->x);
+  v41.m128_f32[0] = (float)((float)(v41.m128_f32[0] - Position->y) * (float)(v41.m128_f32[0] - Position->y)) + v43;
+  v44 = _mm_sqrt_ps(v41).m128_f32[0];
   v45 = v44 <= 0.5 && v42 <= 1.5;
-  if ( v17->mPropertiesHandle.mProperties->mInitialUseOnly && (!UFG::IsSpawning(v16) || !v45) )
+  if ( this->mPropertiesHandle.mProperties->mInitialUseOnly && (!UFG::IsSpawning(pCharacter) || !v45) )
     return 0;
   if ( !bSkipChecksInPlayerRel )
   {
-    v46 = v17->mPropertiesHandle.mProperties;
-    if ( v46->mWeatherFilterOn )
+    v46 = this->mPropertiesHandle.mProperties;
+    if ( v46->mWeatherFilterOn
+      && v46->mWeatherFilterIsRaining != UFG::TimeOfDayManager::GetInstance()->m_WeatherState > 1.0 )
     {
-      if ( v46->mWeatherFilterIsRaining != 1.0 < UFG::TimeOfDayManager::GetInstance()->m_WeatherState )
-        return 0;
+      return 0;
     }
   }
-  if ( !v36 && v23 && v17->mPoiType.mUID != qSymbol_look.mUID && v17->mPropertiesHandle.mProperties->mAllowFollowers )
+  if ( !IsAnyLocalPlayer
+    && v23
+    && this->mPoiType.mUID != qSymbol_look.mUID
+    && this->mPropertiesHandle.mProperties->mAllowFollowers )
   {
-    v47 = v17->m_pSimObject;
-    v48 = v47 ? v47->m_pSceneObj : 0i64;
-    v49 = v48->mpParent;
-    if ( v49 )
+    m_pSimObject = this->m_pSimObject;
+    v48 = m_pSimObject ? m_pSimObject->m_pSceneObj : 0i64;
+    mpParent = v48->mpParent;
+    if ( mpParent )
     {
-      v50 = v49->m_pSimObject;
+      v50 = mpParent->m_pSimObject;
       if ( v50 )
       {
-        v51 = v50->m_Flags;
-        if ( (v51 >> 14) & 1 )
+        m_Flags = v50->m_Flags;
+        if ( (m_Flags & 0x4000) != 0 )
         {
-          v52 = v50->m_Components.p[25].m_pComponent;
+          m_pComponent = v50->m_Components.p[25].m_pComponent;
         }
-        else if ( (v51 & 0x8000u) == 0 )
+        else if ( m_Flags >= 0 )
         {
-          if ( (v51 >> 13) & 1 )
-            v52 = v50->m_Components.p[10].m_pComponent;
+          if ( (m_Flags & 0x2000) != 0 )
+            m_pComponent = v50->m_Components.p[10].m_pComponent;
           else
-            v52 = (v51 >> 12) & 1 ? v50->m_Components.p[3].m_pComponent : UFG::SimObject::GetComponentOfType(
-                                                                            v50,
-                                                                            UFG::InterestPoint::_TypeUID);
+            m_pComponent = (m_Flags & 0x1000) != 0
+                         ? v50->m_Components.p[3].m_pComponent
+                         : UFG::SimObject::GetComponentOfType(v50, UFG::InterestPoint::_TypeUID);
         }
         else
         {
-          v52 = v50->m_Components.p[25].m_pComponent;
+          m_pComponent = v50->m_Components.p[25].m_pComponent;
         }
-        if ( v52 )
+        if ( m_pComponent )
         {
-          v53 = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)UFG::GroupComponent::GetLeader(v23);
-          if ( v53 )
+          Leader = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)UFG::GroupComponent::GetLeader(v23);
+          if ( Leader )
           {
-            v54 = (UFG::SimObject *)v52[5].m_BoundComponentHandles.mNode.mNext;
-            if ( !v54 || UFG::GroupComponent::GetGroupComponent(v54) != v53 )
+            mNext = (UFG::SimObjectGame *)m_pComponent[5].m_BoundComponentHandles.mNode.mNext;
+            if ( !mNext || UFG::GroupComponent::GetGroupComponent(mNext) != Leader )
               return 0;
           }
         }
       }
     }
   }
-  if ( v16 )
+  if ( pCharacter )
   {
-    v56 = v16->m_Flags;
-    if ( (v56 >> 14) & 1 )
+    v56 = pCharacter->m_Flags;
+    if ( (v56 & 0x4000) != 0 || v56 < 0 )
     {
-      v57 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>((UFG::SimObjectCVBase *)v16);
+      ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>(pCharacter);
     }
-    else if ( (v56 & 0x8000u) == 0 )
+    else if ( (v56 & 0x2000) != 0 || (v56 & 0x1000) != 0 )
     {
-      if ( (v56 >> 13) & 1 )
-      {
-        v57 = (UFG::ActiveAIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                (UFG::SimObjectGame *)v16,
-                                                UFG::ActiveAIEntityComponent::_TypeUID);
-      }
-      else if ( (v56 >> 12) & 1 )
-      {
-        v57 = (UFG::ActiveAIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                (UFG::SimObjectGame *)v16,
-                                                UFG::ActiveAIEntityComponent::_TypeUID);
-      }
-      else
-      {
-        v57 = (UFG::ActiveAIEntityComponent *)UFG::SimObject::GetComponentOfType(
-                                                v16,
-                                                UFG::ActiveAIEntityComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = (UFG::ActiveAIEntityComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                            pCharacter,
+                                                            UFG::ActiveAIEntityComponent::_TypeUID);
     }
     else
     {
-      v57 = UFG::SimObjectCVBase::GetComponent<UFG::ActiveAIEntityComponent>((UFG::SimObjectCVBase *)v16);
+      ComponentOfTypeHK = (UFG::ActiveAIEntityComponent *)UFG::SimObject::GetComponentOfType(
+                                                            pCharacter,
+                                                            UFG::ActiveAIEntityComponent::_TypeUID);
     }
-    v55 = v57;
-    if ( v57 )
+    v55 = ComponentOfTypeHK;
+    if ( ComponentOfTypeHK )
     {
-      if ( v17->mpXformNode )
+      if ( this->mpXformNode )
       {
-        UFG::InterestPoint::GetPosition(v17);
-        v58 = UFG::Drifting_EngineState::GetDefaultLoad((PoseNode *)v55, v43);
-        if ( UFG::Drifting_EngineState::GetDefaultLoad((PoseNode *)v55, v43) > v58 )
+        UFG::InterestPoint::GetPosition(this);
+        DefaultLoad = UFG::Drifting_EngineState::GetDefaultLoad((PoseNode *)v55, v43);
+        if ( UFG::Drifting_EngineState::GetDefaultLoad((PoseNode *)v55, v43) > DefaultLoad )
           return 0;
       }
     }
@@ -3639,30 +3524,30 @@ LABEL_7:
   {
     v55 = 0i64;
   }
-  if ( !v17->mPropertiesHandle.mProperties->mAllowRepeatedUse )
+  if ( !this->mPropertiesHandle.mProperties->mAllowRepeatedUse )
   {
-    v59 = v17->mPoiType.mUID;
+    v59 = this->mPoiType.mUID;
     if ( v59 != qSymbol_look.mUID
-      && reserveReason == 1
-      && !v97
-      && !v36
-      && v15->mLastUsedPOIType.mUID == v59
-      && v15->mLastUsedPOIDesc.mUID == v17->mInterestPointType->mDescription.mUID
+      && reserveReason == ReserveReason_normal
+      && !v90
+      && !IsAnyLocalPlayer
+      && pInterestPointUserComp->mLastUsedPOIType.mUID == v59
+      && pInterestPointUserComp->mLastUsedPOIDesc.mUID == this->mInterestPointType->mDescription.mUID
       && v59 != -1 )
     {
       return 0;
     }
   }
-  if ( v55->m_bCanWander && v17->mpXformNode )
+  if ( v55->m_bCanWander && this->mpXformNode )
   {
-    v60 = UFG::InterestPoint::GetPosition(v17);
+    v60 = UFG::InterestPoint::GetPosition(this);
     v61 = characterTransform;
-    v62 = (signed __int64)&v55->m_WanderData;
-    if ( v62
-      && *(_BYTE *)(v62 + 256)
-      && (float)((float)((float)(*(float *)(v62 + 248) * (float)(v60->y - characterTransform->v3.y))
-                       + (float)(*(float *)(v62 + 244) * (float)(v60->x - characterTransform->v3.x)))
-               + (float)(*(float *)(v62 + 252) * (float)(v60->z - characterTransform->v3.z))) < 0.0 )
+    p_m_WanderData = &v55->m_WanderData;
+    if ( p_m_WanderData
+      && p_m_WanderData->mPreviousDesiredDirectionValid
+      && (float)((float)((float)(p_m_WanderData->mPreviousDesiredDirection.y * (float)(v60->y - characterTransform->v3.y))
+                       + (float)(p_m_WanderData->mPreviousDesiredDirection.x * (float)(v60->x - characterTransform->v3.x)))
+               + (float)(p_m_WanderData->mPreviousDesiredDirection.z * (float)(v60->z - characterTransform->v3.z))) < 0.0 )
     {
       return 0;
     }
@@ -3671,43 +3556,49 @@ LABEL_7:
   {
     v61 = characterTransform;
   }
-  v63 = (UFG::TargetingSystemBaseComponent *)&pCharacterTargetCompa->vfptr;
-  if ( !UFG::InterestPoint::PassesItemFilter(v17, v16, pCharacterTargetCompa) )
+  v63 = pCharacterTargetComp;
+  if ( !UFG::InterestPoint::PassesItemFilter(this, pCharacter, pCharacterTargetComp) )
     return 0;
   if ( pCharacterSpawnPoint )
   {
-    v67 = pCharacterSpawnPoint->m_pSimObject;
-    if ( v67 )
+    v64 = pCharacterSpawnPoint->m_pSimObject;
+    if ( v64 )
     {
-      v68 = v67->m_pTransformNodeComponent;
-      if ( v68 )
+      m_pTransformNodeComponent = v64->m_pTransformNodeComponent;
+      if ( m_pTransformNodeComponent )
       {
-        UFG::TransformNodeComponent::UpdateWorldTransform(v67->m_pTransformNodeComponent);
-        v69 = v68->mWorldTransform.v3.x;
-        v70 = (__m128)LODWORD(v68->mWorldTransform.v3.y);
-        v71 = v68->mWorldTransform.v3.z;
-        v72 = PropertyUtils::Get<float>(v16->m_pSceneObj, (UFG::qSymbol *)&qSymbol_TetherAttenuation.mUID);
-        v73 = PropertyUtils::Get<float>(v16->m_pSceneObj, (UFG::qSymbol *)&qSymbol_TetherDistance.mUID);
-        v74 = PropertyUtils::Get<bool>(v16->m_pSceneObj, (UFG::qSymbol *)&qSymbol_TetherDistanceIsHardLimit.mUID);
-        if ( v72 && v73 && v74 )
+        UFG::TransformNodeComponent::UpdateWorldTransform(v64->m_pTransformNodeComponent);
+        x = m_pTransformNodeComponent->mWorldTransform.v3.x;
+        v67 = (__m128)LODWORD(m_pTransformNodeComponent->mWorldTransform.v3.y);
+        z = m_pTransformNodeComponent->mWorldTransform.v3.z;
+        v69 = PropertyUtils::Get<float>(
+                pCharacter->m_pSceneObj,
+                (UFG::qArray<unsigned long,0> *)&qSymbol_TetherAttenuation);
+        v70 = PropertyUtils::Get<float>(
+                pCharacter->m_pSceneObj,
+                (UFG::qArray<unsigned long,0> *)&qSymbol_TetherDistance);
+        v71 = PropertyUtils::Get<bool>(
+                pCharacter->m_pSceneObj,
+                (UFG::qArray<unsigned long,0> *)&qSymbol_TetherDistanceIsHardLimit);
+        if ( v69 && v70 && v71 )
         {
-          v75 = v74->mFlags;
-          v76 = *(float *)&v73->mFlags;
-          v77 = *(float *)&v72->mFlags;
-          if ( v75 || v77 > 0.0 )
+          v72 = *v71;
+          v73 = *v70;
+          v74 = *v69;
+          if ( v72 || v74 > 0.0 )
           {
-            v70.m128_f32[0] = (float)((float)((float)(v70.m128_f32[0] - poiWorldPos->y)
-                                            * (float)(v70.m128_f32[0] - poiWorldPos->y))
-                                    + (float)((float)(v69 - poiWorldPos->x) * (float)(v69 - poiWorldPos->x)))
-                            + (float)((float)(v71 - poiWorldPos->z) * (float)(v71 - poiWorldPos->z));
-            if ( v70.m128_f32[0] > (float)(v76 * v76) )
+            v67.m128_f32[0] = (float)((float)((float)(v67.m128_f32[0] - poiWorldPos->y)
+                                            * (float)(v67.m128_f32[0] - poiWorldPos->y))
+                                    + (float)((float)(x - poiWorldPos->x) * (float)(x - poiWorldPos->x)))
+                            + (float)((float)(z - poiWorldPos->z) * (float)(z - poiWorldPos->z));
+            if ( v67.m128_f32[0] > (float)(v73 * v73) )
             {
-              if ( v75 )
+              if ( v72 )
               {
                 *appealScale = 0.0;
                 return 0;
               }
-              *appealScale = UFG::InterestPoint::GetDistanceAttenuation(COERCE_FLOAT(_mm_sqrt_ps(v70)), v76, v77);
+              *appealScale = UFG::InterestPoint::GetDistanceAttenuation(_mm_sqrt_ps(v67).m128_f32[0], v73, v74);
             }
           }
           if ( *appealScale <= 0.0 )
@@ -3715,172 +3606,155 @@ LABEL_7:
         }
         else
         {
-          v78 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&v16->m_Name);
-          UFG::qPrintf("Character %s has no tether settings\n", v78);
+          v75 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)&pCharacter->m_Name);
+          UFG::qPrintf("Character %s has no tether settings\n", v75);
         }
       }
-      v63 = (UFG::TargetingSystemBaseComponent *)&pCharacterTargetCompa->vfptr;
+      v63 = pCharacterTargetComp;
     }
   }
-  if ( v17->mPoiType.mUID != qSymbol_look.mUID && reserveReason == 1 && !v97 )
+  if ( this->mPoiType.mUID != qSymbol_look.mUID && reserveReason == ReserveReason_normal && !v90 )
   {
-    v79 = poiWorldPos->x;
-    v80 = poiWorldPos->y;
-    v81 = v61->v0.x;
+    v76 = poiWorldPos->x;
+    y = poiWorldPos->y;
+    v78 = v61->v0.x;
     v2.z = 0.0;
     v1.z = 0.0;
-    v82 = v79 - v61->v3.x;
-    v83 = v61->v0.y;
-    v2.y = v80 - v61->v3.y;
-    v2.x = v82;
-    v1.x = v81;
-    v1.y = v83;
-    if ( (float)((float)(v2.y * v2.y) + (float)(v82 * v82)) > 1.0
-      && (float)((float)(v83 * v83) + (float)(v81 * v81)) > 0.001
-      && COERCE_FLOAT(COERCE_UNSIGNED_INT(UFG::qAngleBetween(&v1, &v2)) & _xmm) > (float)(v17->mPropertiesHandle.mProperties->mUserRelativeAngleRange
+    v79 = v76 - v61->v3.x;
+    v80 = v61->v0.y;
+    v2.y = y - v61->v3.y;
+    v2.x = v79;
+    v1.x = v78;
+    v1.y = v80;
+    if ( (float)((float)(v2.y * v2.y) + (float)(v79 * v79)) > 1.0
+      && (float)((float)(v80 * v80) + (float)(v78 * v78)) > 0.001
+      && COERCE_FLOAT(COERCE_UNSIGNED_INT(UFG::qAngleBetween(&v1, &v2)) & _xmm) > (float)(this->mPropertiesHandle.mProperties->mUserRelativeAngleRange
                                                                                         * 0.5) )
     {
       return 0;
     }
   }
-  if ( !bSkipChecksInPlayerRel && v17->mPropertiesHandle.mProperties->mUseClassList.size > 0 )
+  if ( !bSkipChecksInPlayerRel && this->mPropertiesHandle.mProperties->mUseClassList.size )
   {
-    if ( v16 )
+    if ( pCharacter )
     {
-      v84 = v16->m_Flags;
-      if ( !((v84 >> 14) & 1) && (v84 & 0x8000u) == 0 && !((v84 >> 13) & 1) )
+      v81 = pCharacter->m_Flags;
+      if ( (v81 & 0x4000) == 0 && v81 >= 0 && (v81 & 0x2000) == 0 )
       {
-        if ( (v84 >> 12) & 1 )
-          UFG::SimObjectGame::GetComponentOfTypeHK(
-            (UFG::SimObjectGame *)v16,
-            UFG::SimObjectPropertiesComponent::_TypeUID);
+        if ( (v81 & 0x1000) != 0 )
+          UFG::SimObjectGame::GetComponentOfTypeHK(pCharacter, UFG::SimObjectPropertiesComponent::_TypeUID);
         else
-          UFG::SimObject::GetComponentOfType(v16, UFG::SimObjectPropertiesComponent::_TypeUID);
+          UFG::SimObject::GetComponentOfType(pCharacter, UFG::SimObjectPropertiesComponent::_TypeUID);
       }
     }
-    v85 = UFG::SimObjectUtility::IsClassTypeInArray(v16, &v17->mPropertiesHandle.mProperties->mUseClassList);
-    v64 = v17->mPropertiesHandle.mProperties->mClassListIsAllowed;
-    LOBYTE(v64) = v85 ^ v64;
-    if ( (_BYTE)v64 )
+    if ( UFG::SimObjectUtility::IsClassTypeInArray(pCharacter, &this->mPropertiesHandle.mProperties->mUseClassList) != this->mPropertiesHandle.mProperties->mClassListIsAllowed )
       return 0;
   }
-  if ( v17->mInterestPointType->mBehaviour )
+  if ( this->mInterestPointType->mBehaviour )
   {
     if ( v63 )
     {
       UFG::TargetingSystemBaseComponent::ClearTarget(
         v63,
         (UFG::eTargetTypeEnum)((type->mUID != qSymbol_look.mUID) + 25));
-      UFG::TargetingSystemBaseComponent::SetTarget(
-        v63,
-        (UFG::eTargetTypeEnum)((type->mUID != qSymbol_look.mUID) + 25),
-        v17->m_pSimObject);
+      UFG::TargetingSystemBaseComponent::SetTarget(v63, (type->mUID != qSymbol_look.mUID) + 25, this->m_pSimObject);
     }
-    if ( v16 )
+    if ( pCharacter )
     {
-      v87 = v16->m_Flags;
-      if ( (v87 >> 14) & 1 )
+      v83 = pCharacter->m_Flags;
+      if ( (v83 & 0x4000) != 0 )
       {
-        v86 = v16->m_Components.p[7].m_pComponent;
+        v82 = pCharacter->m_Components.p[7].m_pComponent;
       }
-      else if ( (v87 & 0x8000u) == 0 )
+      else if ( v83 >= 0 )
       {
-        if ( (v87 >> 13) & 1 )
+        if ( (v83 & 0x2000) != 0 )
         {
-          v86 = v16->m_Components.p[6].m_pComponent;
+          v82 = pCharacter->m_Components.p[6].m_pComponent;
         }
         else
         {
-          if ( (v87 >> 12) & 1 )
-            v88 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                    (UFG::SimObjectGame *)v16,
-                    UFG::ActionTreeComponent::_TypeUID);
+          if ( (v83 & 0x1000) != 0 )
+            ComponentOfType = UFG::SimObjectGame::GetComponentOfTypeHK(pCharacter, UFG::ActionTreeComponent::_TypeUID);
           else
-            v88 = UFG::SimObject::GetComponentOfType(v16, UFG::ActionTreeComponent::_TypeUID);
-          v86 = v88;
+            ComponentOfType = UFG::SimObject::GetComponentOfType(pCharacter, UFG::ActionTreeComponent::_TypeUID);
+          v82 = ComponentOfType;
         }
       }
       else
       {
-        v86 = v16->m_Components.p[7].m_pComponent;
+        v82 = pCharacter->m_Components.p[7].m_pComponent;
       }
-      if ( !v86 )
+      if ( !v82 )
       {
-LABEL_173:
+LABEL_171:
         if ( v22 )
         {
-          v94 = v17->mInterestPointType->mBehaviourConditions;
-          if ( !v94 || ((__int64 (__fastcall *)(ActionNode *, ActionContext *))v94->vfptr[2].GetClassNameUID)(v94, v22) )
-            goto LABEL_176;
+          mBehaviourConditions = this->mInterestPointType->mBehaviourConditions;
+          if ( !mBehaviourConditions
+            || ((__int64 (__fastcall *)(ActionNode *, ActionContext *))mBehaviourConditions->vfptr[2].GetClassNameUID)(
+                 mBehaviourConditions,
+                 v22) )
+          {
+            return this->mPoiType.mUID == qSymbol_look.mUID
+                || UFG::IsAnyLocalPlayer(pCharacter)
+                || v44 <= 1.0 && v42 <= 2.0
+                || (unsigned int)UFG::InterestPoint::GetCanPathToCached(this) == 1;
+          }
         }
         return 0;
       }
-      v22 = (ActionContext *)v86[2].m_BoundComponentHandles.mNode.mNext;
+      v22 = (ActionContext *)v82[2].m_BoundComponentHandles.mNode.mNext;
     }
     else
     {
-      v86 = 0i64;
+      v82 = 0i64;
     }
-    if ( v86 )
+    if ( v82 )
     {
-      v89 = (ActionNodeRoot *)((__int64 (__cdecl *)(ActionNode *, _BOOL8, __int64, __int64))v17->mInterestPointType->mBehaviour->vfptr[1].GetResourceOwner)(
-                                v17->mInterestPointType->mBehaviour,
-                                v64,
-                                v65,
-                                v66);
-      if ( UFG::ActionTreeComponentBase::AllocateFor((UFG::ActionTreeComponentBase *)&v86[1], v89) )
+      v85 = (ActionNodeRoot *)this->mInterestPointType->mBehaviour->vfptr[1].GetResourceOwner(this->mInterestPointType->mBehaviour);
+      if ( UFG::ActionTreeComponentBase::AllocateFor((UFG::ActionTreeComponentBase *)&v82[1], v85) )
       {
-        v93 = (ActionNodeRoot *)((__int64 (__cdecl *)(ActionNode *, __int64, __int64, __int64))v17->mInterestPointType->mBehaviour->vfptr[1].GetResourceOwner)(
-                                  v17->mInterestPointType->mBehaviour,
-                                  v90,
-                                  v91,
-                                  v92);
-        ActionNodeRoot::Init(v93, v22);
+        v86 = (ActionNodeRoot *)this->mInterestPointType->mBehaviour->vfptr[1].GetResourceOwner(this->mInterestPointType->mBehaviour);
+        ActionNodeRoot::Init(v86, v22);
       }
     }
-    goto LABEL_173;
+    goto LABEL_171;
   }
-LABEL_176:
-  if ( v17->mPoiType.mUID != qSymbol_look.mUID
-    && !UFG::IsAnyLocalPlayer(v16)
-    && (v44 > 1.0 || v42 > 2.0)
-    && (unsigned int)UFG::InterestPoint::GetCanPathToCached(v17) != 1 )
-  {
-    return 0;
-  }
-  return 1;
+  return this->mPoiType.mUID == qSymbol_look.mUID
+      || UFG::IsAnyLocalPlayer(pCharacter)
+      || v44 <= 1.0 && v42 <= 2.0
+      || (unsigned int)UFG::InterestPoint::GetCanPathToCached(this) == 1;
 }
 
 // File Line: 3727
 // RVA: 0x588390
-bool __fastcall UFG::InterestPoint::PassesItemFilter(UFG::InterestPoint *this, UFG::SimObject *pCharacter, UFG::TargetingSystemPedBaseComponent *pCharacterTargetComp)
+bool __fastcall UFG::InterestPoint::PassesItemFilter(
+        UFG::InterestPoint *this,
+        UFG::SimObjectCharacter *pCharacter,
+        UFG::TargetingSystemPedBaseComponent *pCharacterTargetComp)
 {
-  UFG::TargetingSystemPedBaseComponent *v3; // r13
-  UFG::InterestPoint *v4; // r14
   char v5; // di
-  int v6; // er15
+  int v6; // r15d
   unsigned int v7; // esi
   int *v8; // rbp
-  UFG::SimObjectProp *v9; // rbx
-  unsigned __int16 v10; // cx
-  UFG::SimObjectWeaponPropertiesComponent *v11; // rax
-  unsigned __int16 v12; // cx
-  UFG::SimComponent *v13; // rax
-  int v14; // edx
-  UFG::InterestPointType *v15; // rax
+  UFG::SimObjectProp *m_pPointer; // rbx
+  __int16 m_Flags; // cx
+  UFG::SimObjectWeaponPropertiesComponent *ComponentOfType; // rax
+  __int16 v12; // cx
+  UFG::SimComponent *m_pComponent; // rax
+  int m_pSimObject; // edx
+  UFG::InterestPointType *mInterestPointType; // rax
   unsigned int v16; // ecx
-  unsigned int v17; // er8
-  UFG::eInventoryItemEnum *v18; // rax
-  bool result; // al
-  int v20; // [rsp+58h] [rbp+10h]
+  unsigned int size; // r8d
+  UFG::eInventoryItemEnum *p; // rax
+  int v20; // [rsp+58h] [rbp+10h] BYREF
   int v21; // [rsp+5Ch] [rbp+14h]
 
-  v3 = pCharacterTargetComp;
-  v4 = this;
   if ( !pCharacter || !pCharacterTargetComp )
     return 0;
   if ( !this->mPropertiesHandle.mProperties->mItemFilterOn
-    || UFG::IsAnyLocalPlayer(pCharacter) && !v4->mPropertiesHandle.mProperties->mItemFilterAppliesToPlayer )
+    || UFG::IsAnyLocalPlayer(pCharacter) && !this->mPropertiesHandle.mProperties->mItemFilterAppliesToPlayer )
   {
     return 1;
   }
@@ -3892,117 +3766,107 @@ bool __fastcall UFG::InterestPoint::PassesItemFilter(UFG::InterestPoint *this, U
   v8 = &v20;
   while ( !v5 )
   {
-    v9 = (UFG::SimObjectProp *)v3->m_pTargets[(unsigned __int8)v3->m_pTargetingMap->m_Map.p[*v8]].m_pTarget.m_pPointer;
-    if ( v9 )
+    m_pPointer = (UFG::SimObjectProp *)pCharacterTargetComp->m_pTargets[(unsigned __int8)pCharacterTargetComp->m_pTargetingMap->m_Map.p[*v8]].m_pTarget.m_pPointer;
+    if ( m_pPointer )
     {
       ++v6;
-      if ( v4->mInterestPointType->mItemListMatchesWeapons )
+      if ( !this->mInterestPointType->mItemListMatchesWeapons )
+        goto LABEL_19;
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) == 0 && m_Flags >= 0 )
       {
-        v10 = v9->m_Flags;
-        if ( (v10 >> 14) & 1 )
+        if ( (m_Flags & 0x2000) != 0 )
         {
-          v11 = (UFG::SimObjectWeaponPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                             (UFG::SimObjectGame *)&v9->vfptr,
-                                                             UFG::SimObjectWeaponPropertiesComponent::_TypeUID);
-        }
-        else if ( (v10 & 0x8000u) == 0 )
-        {
-          if ( (v10 >> 13) & 1 )
-            v11 = UFG::SimObjectProp::GetComponent<UFG::SimObjectWeaponPropertiesComponent>(v9);
-          else
-            v11 = (UFG::SimObjectWeaponPropertiesComponent *)((v10 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                                  (UFG::SimObjectGame *)&v9->vfptr,
-                                                                                  UFG::SimObjectWeaponPropertiesComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v9->vfptr, UFG::SimObjectWeaponPropertiesComponent::_TypeUID));
-        }
-        else
-        {
-          v11 = (UFG::SimObjectWeaponPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                             (UFG::SimObjectGame *)&v9->vfptr,
-                                                             UFG::SimObjectWeaponPropertiesComponent::_TypeUID);
-        }
-        if ( v11 )
-        {
-          v5 = 1;
-          break;
-        }
-      }
-      v12 = v9->m_Flags;
-      if ( !((v12 >> 14) & 1) && (v12 & 0x8000u) == 0 )
-      {
-        if ( (v12 >> 13) & 1 )
-          v13 = v9->m_Components.p[11].m_pComponent;
-        else
-          v13 = (v12 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                    (UFG::SimObjectGame *)&v9->vfptr,
-                                    UFG::InventoryItemComponent::_TypeUID) : UFG::SimObject::GetComponentOfType(
-                                                                               (UFG::SimObject *)&v9->vfptr,
-                                                                               UFG::InventoryItemComponent::_TypeUID);
-        if ( v13 )
-        {
-          v14 = (int)v13[1].m_pSimObject;
-          if ( v14 )
+          ComponentOfType = UFG::SimObjectProp::GetComponent<UFG::SimObjectWeaponPropertiesComponent>(m_pPointer);
+LABEL_18:
+          if ( ComponentOfType )
           {
-            v15 = v4->mInterestPointType;
-            v16 = 0;
-            v17 = v15->mUseItemList.size;
-            if ( v17 )
+            v5 = 1;
+            break;
+          }
+LABEL_19:
+          v12 = m_pPointer->m_Flags;
+          if ( (v12 & 0x4000) == 0 && v12 >= 0 )
+          {
+            if ( (v12 & 0x2000) != 0 )
+              m_pComponent = m_pPointer->m_Components.p[11].m_pComponent;
+            else
+              m_pComponent = (v12 & 0x1000) != 0
+                           ? UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::InventoryItemComponent::_TypeUID)
+                           : UFG::SimObject::GetComponentOfType(m_pPointer, UFG::InventoryItemComponent::_TypeUID);
+            if ( m_pComponent )
             {
-              v18 = v15->mUseItemList.p;
-              while ( v14 != *v18 )
+              m_pSimObject = (int)m_pComponent[1].m_pSimObject;
+              if ( m_pSimObject )
               {
-                ++v16;
-                ++v18;
-                if ( v16 >= v17 )
-                  goto LABEL_35;
+                mInterestPointType = this->mInterestPointType;
+                v16 = 0;
+                size = mInterestPointType->mUseItemList.size;
+                if ( size )
+                {
+                  p = mInterestPointType->mUseItemList.p;
+                  while ( m_pSimObject != *p )
+                  {
+                    ++v16;
+                    ++p;
+                    if ( v16 >= size )
+                      goto LABEL_34;
+                  }
+                  v5 = 1;
+                }
               }
-              v5 = 1;
             }
           }
+          goto LABEL_34;
+        }
+        if ( (m_Flags & 0x1000) == 0 )
+        {
+          ComponentOfType = (UFG::SimObjectWeaponPropertiesComponent *)UFG::SimObject::GetComponentOfType(
+                                                                         m_pPointer,
+                                                                         UFG::SimObjectWeaponPropertiesComponent::_TypeUID);
+          goto LABEL_18;
         }
       }
+      ComponentOfType = (UFG::SimObjectWeaponPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                     m_pPointer,
+                                                                     UFG::SimObjectWeaponPropertiesComponent::_TypeUID);
+      goto LABEL_18;
     }
-LABEL_35:
+LABEL_34:
     ++v7;
     ++v8;
     if ( v7 >= 2 )
       break;
   }
-  if ( v4->mInterestPointType->mItemListMatchesNoItem && !v6 )
+  if ( this->mInterestPointType->mItemListMatchesNoItem && !v6 )
     v5 = 1;
-  result = 1;
-  if ( (unsigned __int8)v5 ^ v4->mPropertiesHandle.mProperties->mItemListIsAllowed )
-    result = 0;
-  return result;
+  return v5 == this->mPropertiesHandle.mProperties->mItemListIsAllowed;
 }
 
 // File Line: 3810
 // RVA: 0x585000
-char __fastcall UFG::InterestPoint::IsRelevantToPlayer(UFG::InterestPoint *this, UFG::SimObject *pCharacter, UFG::qVector3 *characterPosition)
+bool __fastcall UFG::InterestPoint::IsRelevantToPlayer(
+        UFG::InterestPoint *this,
+        UFG::SimObjectCVBase *pCharacter,
+        UFG::qVector3 *characterPosition)
 {
-  UFG::qVector3 *v3; // rbp
-  UFG::SimObjectCVBase *v4; // rdi
-  UFG::InterestPoint *v5; // rbx
-  char result; // al
   float v7; // xmm0_4
-  __int128 v8; // xmm0
-  UFG::InterestPointProperties *v9; // rax
+  float m_SecondsSinceMidnight; // xmm0_4
+  UFG::InterestPointProperties *mProperties; // rax
   float v10; // xmm0_4
   UFG::SimObjectCharacterPropertiesComponent *v11; // rcx
-  unsigned __int16 v12; // cx
-  UFG::SimObjectCharacterPropertiesComponent *v13; // rax
+  signed __int16 m_Flags; // cx
+  UFG::SimObjectCharacterPropertiesComponent *ComponentOfTypeHK; // rax
   UFG::InterestPointProperties *v14; // rsi
-  unsigned int v15; // edx
+  unsigned int mUID; // edx
   UFG::qStaticSymbol *v16; // rax
-  char v17; // al
-  UFG::SimObjectCharacter *v18; // rax
-  UFG::SimComponentHolder *v19; // rax
-  UFG::TransformNodeComponent *v20; // rdi
-  __m128 v21; // xmm7
+  char IsClassTypeInArray; // al
+  UFG::SimObjectCharacter *LocalPlayer; // rax
+  UFG::SimComponentHolder *p; // rax
+  UFG::TransformNodeComponent *m_pComponent; // rdi
+  __m128 y_low; // xmm7
   float v22; // xmm6_4
 
-  v3 = characterPosition;
-  v4 = (UFG::SimObjectCVBase *)pCharacter;
-  v5 = this;
   if ( !this->mInterestPointType->mBehaviour || this->mpPedInfoUser || !this->mActive )
     return 0;
   v7 = this->mPropertiesHandle.mProperties->mTimeOfDayToBecomeActive
@@ -4011,239 +3875,218 @@ char __fastcall UFG::InterestPoint::IsRelevantToPlayer(UFG::InterestPoint *this,
     LODWORD(v7) ^= _xmm[0];
   if ( v7 >= 0.001 )
   {
-    v8 = LODWORD(UFG::TimeOfDayManager::GetInstance()->m_SecondsSinceMidnight);
-    v9 = v5->mPropertiesHandle.mProperties;
-    v10 = *(float *)&v8 * 0.00027777778;
-    if ( v10 > v9->mTimeOfDayToBecomeActive && v10 < v9->mTimeOfDayToBecomeInactive )
+    m_SecondsSinceMidnight = UFG::TimeOfDayManager::GetInstance()->m_SecondsSinceMidnight;
+    mProperties = this->mPropertiesHandle.mProperties;
+    v10 = m_SecondsSinceMidnight * 0.00027777778;
+    if ( v10 > mProperties->mTimeOfDayToBecomeActive && v10 < mProperties->mTimeOfDayToBecomeInactive )
       return 0;
   }
-  if ( v4 )
+  if ( pCharacter )
   {
-    v12 = v4->m_Flags;
-    if ( (v12 >> 14) & 1 )
+    m_Flags = pCharacter->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
     {
-      v13 = UFG::SimObjectCVBase::GetComponent<UFG::SimObjectCharacterPropertiesComponent>(v4);
+      ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::SimObjectCharacterPropertiesComponent>(pCharacter);
     }
-    else if ( (v12 & 0x8000u) == 0 )
+    else if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v12 >> 13) & 1 )
-      {
-        v13 = (UFG::SimObjectCharacterPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                              (UFG::SimObjectGame *)&v4->vfptr,
-                                                              UFG::SimObjectCharacterPropertiesComponent::_TypeUID);
-      }
-      else if ( (v12 >> 12) & 1 )
-      {
-        v13 = (UFG::SimObjectCharacterPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                              (UFG::SimObjectGame *)&v4->vfptr,
-                                                              UFG::SimObjectCharacterPropertiesComponent::_TypeUID);
-      }
-      else
-      {
-        v13 = (UFG::SimObjectCharacterPropertiesComponent *)UFG::SimObject::GetComponentOfType(
-                                                              (UFG::SimObject *)&v4->vfptr,
-                                                              UFG::SimObjectCharacterPropertiesComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = (UFG::SimObjectCharacterPropertiesComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                          pCharacter,
+                                                                          UFG::SimObjectCharacterPropertiesComponent::_TypeUID);
     }
     else
     {
-      v13 = UFG::SimObjectCVBase::GetComponent<UFG::SimObjectCharacterPropertiesComponent>(v4);
+      ComponentOfTypeHK = (UFG::SimObjectCharacterPropertiesComponent *)UFG::SimObject::GetComponentOfType(
+                                                                          pCharacter,
+                                                                          UFG::SimObjectCharacterPropertiesComponent::_TypeUID);
     }
-    v11 = v13;
+    v11 = ComponentOfTypeHK;
   }
   else
   {
     v11 = 0i64;
   }
-  v14 = v5->mPropertiesHandle.mProperties;
-  v15 = v14->mGendersAllowed.mUID;
-  if ( v15 != qSymbol_Any.mUID )
+  v14 = this->mPropertiesHandle.mProperties;
+  mUID = v14->mGendersAllowed.mUID;
+  if ( mUID != qSymbol_Any.mUID )
   {
     v16 = &qSymbol_Female;
-    if ( v11->m_eGender == 1 )
+    if ( v11->m_eGender == eGENDER_MALE )
       v16 = &qSymbol_Male;
-    if ( v15 != v16->mUID )
-      goto LABEL_39;
+    if ( mUID != v16->mUID )
+      return 0;
   }
   if ( v14->mUseClassList.size )
   {
-    v17 = UFG::SimObjectUtility::IsClassTypeInArray((UFG::SimObject *)&v4->vfptr, &v14->mUseClassList);
-    v14 = v5->mPropertiesHandle.mProperties;
-    if ( (unsigned __int8)v17 ^ v14->mClassListIsAllowed )
-      goto LABEL_39;
+    IsClassTypeInArray = UFG::SimObjectUtility::IsClassTypeInArray(pCharacter, &v14->mUseClassList);
+    v14 = this->mPropertiesHandle.mProperties;
+    if ( IsClassTypeInArray != v14->mClassListIsAllowed )
+      return 0;
   }
   if ( v14->mWeatherFilterOn
-    && v14->mWeatherFilterIsRaining != 1.0 < UFG::TimeOfDayManager::GetInstance()->m_WeatherState )
+    && v14->mWeatherFilterIsRaining != UFG::TimeOfDayManager::GetInstance()->m_WeatherState > 1.0 )
   {
-    goto LABEL_39;
+    return 0;
   }
-  if ( v5->mPropertiesHandle.mProperties->mMaxDistanceFromPlayer < 0.0 )
-    goto LABEL_40;
-  v18 = UFG::GetLocalPlayer();
-  if ( !v18 )
-    goto LABEL_40;
-  v19 = v18->m_Components.p;
-  v20 = (UFG::TransformNodeComponent *)v19[2].m_pComponent;
-  if ( !v20 )
-    goto LABEL_40;
-  UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v19[2].m_pComponent);
-  v21 = (__m128)LODWORD(v3->y);
-  v22 = v3->x - v20->mWorldTransform.v3.x;
-  v21.m128_f32[0] = v21.m128_f32[0] - v20->mWorldTransform.v3.y;
-  UFG::TransformNodeComponent::UpdateWorldTransform(v20);
-  v21.m128_f32[0] = (float)(v21.m128_f32[0] * v21.m128_f32[0]) + (float)(v22 * v22);
-  if ( COERCE_FLOAT(_mm_sqrt_ps(v21)) > v5->mPropertiesHandle.mProperties->mMaxDistanceFromPlayer )
-LABEL_39:
-    result = 0;
-  else
-LABEL_40:
-    result = 1;
-  return result;
-}
+  if ( this->mPropertiesHandle.mProperties->mMaxDistanceFromPlayer < 0.0 )
+    return 1;
+  LocalPlayer = UFG::GetLocalPlayer();
+  if ( !LocalPlayer )
+    return 1;
+  p = LocalPlayer->m_Components.p;
+  m_pComponent = (UFG::TransformNodeComponent *)p[2].m_pComponent;
+  if ( !m_pComponent )
+    return 1;
+  UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)p[2].m_pComponent);
+  y_low = (__m128)LODWORD(characterPosition->y);
+  v22 = characterPosition->x - m_pComponent->mWorldTransform.v3.x;
+  y_low.m128_f32[0] = y_low.m128_f32[0] - m_pComponent->mWorldTransform.v3.y;
+  UFG::TransformNodeComponent::UpdateWorldTransform(m_pComponent);
+  y_low.m128_f32[0] = (float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(v22 * v22);
+  return _mm_sqrt_ps(y_low).m128_f32[0] <= this->mPropertiesHandle.mProperties->mMaxDistanceFromPlayer;
+}n _mm_sqrt_ps(y_low).m128_f32[0] <= this->mPropertiesHandle.mPrope
 
 // File Line: 4047
 // RVA: 0x581740
-UFG::InterestPoint *__fastcall UFG::InterestPoint::FindNearestRelevent(UFG::SimObjectCharacter *pCharacter, bool bIsPlayer, UFG::InterestPointUserComponent *pInterestPointUserComp, UFG::TargetingSystemPedBaseComponent *pCharacterTargetComp, UFG::ActiveAIEntityComponent *pAAEC, UFG::qMatrix44 *characterTransform, UFG::qVector3 *vPlayerPosition, UFG::qSymbol *type, unsigned int matchReservationFlags, float maxDistSquared, float *pDistSquared, UFG::qArray<UFG::InterestPointQuery::Candidate,0> *pCandidates, UFG::qFixedArray<UFG::InterestPoint *,4> *apNearestPOIWithBehaviour)
+UFG::InterestPoint *__fastcall UFG::InterestPoint::FindNearestRelevent(
+        UFG::SimObjectCharacter *pCharacter,
+        bool bIsPlayer,
+        UFG::InterestPointUserComponent *pInterestPointUserComp,
+        UFG::TargetingSystemPedBaseComponent *pCharacterTargetComp,
+        UFG::ActiveAIEntityComponent *pAAEC,
+        UFG::qMatrix44 *characterTransform,
+        UFG::qVector3 *vPlayerPosition,
+        UFG::qSymbol *type,
+        unsigned int matchReservationFlags,
+        float maxDistSquared,
+        float *pDistSquared,
+        UFG::qArray<UFG::InterestPointQuery::Candidate,0> *pCandidates,
+        UFG::qFixedArray<UFG::InterestPoint *,4> *apNearestPOIWithBehaviour)
 {
   UFG::TargetingSystemPedBaseComponent *v13; // r13
-  UFG::InterestPointUserComponent *v14; // rsi
-  bool v15; // bl
-  UFG::SimObjectCharacter *v16; // rdi
   __int64 v18; // r12
   float v19; // xmm8_4
   float v20; // xmm9_4
-  unsigned int v21; // er15
-  unsigned int v22; // eax
-  signed __int64 v23; // r8
-  UFG::TargetingSimObject *v24; // rcx
+  unsigned int v21; // r15d
+  unsigned int mUID; // eax
+  __int64 v23; // r8
+  UFG::TargetingSimObject *m_pTargets; // rcx
   float v25; // xmm4_4
   UFG::GridIntrusive<UFG::InterestPoint> *v26; // r14
-  float v27; // xmm3_4
-  float v28; // xmm5_4
-  signed int v29; // ebx
-  signed int v30; // edi
-  __int64 v31; // r10
-  signed int v32; // er9
-  int v33; // er8
-  int v34; // ecx
+  float y; // xmm3_4
+  float mGridSizeInv; // xmm5_4
+  int v29; // ebx
+  int v30; // edi
+  __int64 mXDim; // r10
+  int v32; // r9d
+  int v33; // r8d
+  int mYDim; // ecx
   unsigned int v35; // edx
-  signed __int64 v36; // r11
-  signed __int64 v37; // rbp
+  __int64 v36; // r11
+  __int64 v37; // rbp
   __int64 v38; // rsi
   __int64 v39; // r9
-  signed __int64 v40; // r8
+  __int64 v40; // r8
   __int64 v41; // r10
   __int64 *v42; // rax
   __int64 v43; // rcx
   __int64 v44; // rax
-  signed __int64 v45; // r13
+  __int64 v45; // r13
   UFG::InterestPoint *v46; // rsi
-  signed __int64 v47; // rbp
+  __int64 p_mNext; // rbp
   UFG::qVector3 *poiWorldPos; // rbx
   int v49; // xmm7_4
   bool bSkipChecksInPlayerRel; // r11
-  __int64 v51; // rdx
+  __int64 size; // rdx
   __int64 v52; // rax
-  unsigned int v53; // er9
+  unsigned int v53; // r9d
   __int64 v54; // rdx
   int *v55; // r8
   __int64 v56; // rdx
   UFG::InterestPoint **v57; // r8
   float v58; // xmm0_4
-  float *v59; // rax
+  float *mProperties; // rax
   float v60; // xmm6_4
   float v61; // xmm6_4
   __int64 v62; // rdi
   unsigned int v63; // ebx
-  unsigned int v64; // edx
+  unsigned int capacity; // edx
   unsigned int v65; // edx
   float v66; // xmm0_4
   __int64 v67; // r9
-  UFG::SimObjectCharacterPropertiesComponent *pCharacterPropertiesComponent; // [rsp+20h] [rbp-258h]
-  unsigned __int8 v69; // [rsp+80h] [rbp-1F8h]
-  float appealScale; // [rsp+84h] [rbp-1F4h]
-  unsigned int v71; // [rsp+88h] [rbp-1F0h]
-  int v72[5]; // [rsp+8Ch] [rbp-1ECh]
-  UFG::InterestPoint *v73; // [rsp+A0h] [rbp-1D8h]
-  __int64 v74; // [rsp+A8h] [rbp-1D0h]
+  unsigned __int8 v68; // [rsp+80h] [rbp-1F8h]
+  float appealScale; // [rsp+84h] [rbp-1F4h] BYREF
+  unsigned int v70; // [rsp+88h] [rbp-1F0h]
+  float v71[5]; // [rsp+8Ch] [rbp-1ECh] BYREF
+  UFG::InterestPoint *v72; // [rsp+A0h] [rbp-1D8h]
+  __int64 v73; // [rsp+A8h] [rbp-1D0h]
   UFG::SimObject *pSimObject; // [rsp+B0h] [rbp-1C8h]
-  __int64 *v76; // [rsp+B8h] [rbp-1C0h]
+  __int64 *v75; // [rsp+B8h] [rbp-1C0h]
   UFG::SpawnPoint *pCharacterSpawnPoint; // [rsp+C0h] [rbp-1B8h]
-  UFG::SimObjectCharacterPropertiesComponent *v78; // [rsp+C8h] [rbp-1B0h]
-  __int64 v79; // [rsp+D0h] [rbp-1A8h]
-  __int64 v80[25]; // [rsp+E0h] [rbp-198h]
-  int v81; // [rsp+1A8h] [rbp-D0h]
-  UFG::SimObjectCharacter *pCharactera; // [rsp+280h] [rbp+8h]
-  bool v83; // [rsp+288h] [rbp+10h]
-  UFG::InterestPointUserComponent *pInterestPointUserCompa; // [rsp+290h] [rbp+18h]
-  UFG::TargetingSystemPedBaseComponent *pCharacterTargetCompa; // [rsp+298h] [rbp+20h]
+  UFG::SimObjectCharacterPropertiesComponent *pCharacterPropertiesComponent; // [rsp+C8h] [rbp-1B0h]
+  __int64 v78; // [rsp+D0h] [rbp-1A8h]
+  __int64 v79[25]; // [rsp+E0h] [rbp-198h] BYREF
+  int v80; // [rsp+1A8h] [rbp-D0h]
 
-  pCharacterTargetCompa = pCharacterTargetComp;
-  pInterestPointUserCompa = pInterestPointUserComp;
-  v83 = bIsPlayer;
-  pCharactera = pCharacter;
-  v79 = -2i64;
+  v78 = -2i64;
   v13 = pCharacterTargetComp;
-  v14 = pInterestPointUserComp;
-  v15 = bIsPlayer;
-  v16 = pCharacter;
   if ( !pCharacter )
     return 0i64;
   if ( !pCharacter->m_pSceneObj )
     return 0i64;
-  v78 = UFG::SimObjectCVBase::GetComponent<UFG::SimObjectCharacterPropertiesComponent>((UFG::SimObjectCVBase *)&pCharacter->vfptr);
-  if ( !v78 )
+  pCharacterPropertiesComponent = UFG::SimObjectCVBase::GetComponent<UFG::SimObjectCharacterPropertiesComponent>(pCharacter);
+  if ( !pCharacterPropertiesComponent )
     return 0i64;
-  if ( v15 )
+  if ( bIsPlayer )
     pCharacterSpawnPoint = 0i64;
   else
-    pCharacterSpawnPoint = (UFG::SpawnPoint *)UFG::GetOriginatingSpawnPoint((UFG::SimObject *)&v16->vfptr);
+    pCharacterSpawnPoint = UFG::GetOriginatingSpawnPoint(pCharacter);
   v18 = 0i64;
-  v73 = 0i64;
+  v72 = 0i64;
   v19 = 0.0;
   v20 = maxDistSquared;
   v21 = 0;
-  v71 = 0;
+  v70 = 0;
   pSimObject = 0i64;
-  v69 = 0;
-  v22 = qSymbol_look.mUID;
-  if ( v14 )
+  v68 = 0;
+  mUID = qSymbol_look.mUID;
+  if ( pInterestPointUserComp )
   {
     if ( v13 )
     {
       v23 = (unsigned __int8)v13->m_pTargetingMap->m_Map.p[(type->mUID != qSymbol_look.mUID) + 25];
-      v24 = v13->m_pTargets;
-      pSimObject = v24[v23].m_pTarget.m_pPointer;
-      if ( !pSimObject || (v69 = 1, !v24[v23].m_bLock) )
-        v69 = 0;
+      m_pTargets = v13->m_pTargets;
+      pSimObject = m_pTargets[v23].m_pTarget.m_pPointer;
+      if ( !pSimObject || (v68 = 1, !m_pTargets[v23].m_bLock) )
+        v68 = 0;
     }
   }
-  LODWORD(v25) = (unsigned __int128)_mm_sqrt_ps((__m128)LODWORD(maxDistSquared));
+  LODWORD(v25) = _mm_sqrt_ps((__m128)LODWORD(maxDistSquared)).m128_u32[0];
   v26 = UFG::InterestPoint::mspUseInterestPointGrid;
   if ( type->mUID == qSymbol_look.mUID )
     v26 = UFG::InterestPoint::mspLookInterestPointGrid;
-  v27 = characterTransform->v3.y;
-  v28 = v26->mGridSizeInv;
-  v29 = (signed int)(float)((float)((float)(characterTransform->v3.x - v25) - v26->mXMin) * v28);
+  y = characterTransform->v3.y;
+  mGridSizeInv = v26->mGridSizeInv;
+  v29 = (int)(float)((float)((float)(characterTransform->v3.x - v25) - v26->mXMin) * mGridSizeInv);
   if ( v29 < 0 )
     v29 = 0;
-  v30 = (signed int)(float)((float)((float)(characterTransform->v3.x + v25) - v26->mXMin) * v28);
-  v31 = v26->mXDim;
-  if ( v30 >= (signed int)v31 )
-    v30 = v31 - 1;
-  v32 = (signed int)(float)((float)((float)(v27 - v25) - v26->mYMin) * v28);
+  v30 = (int)(float)((float)((float)(characterTransform->v3.x + v25) - v26->mXMin) * mGridSizeInv);
+  mXDim = v26->mXDim;
+  if ( v30 >= (int)mXDim )
+    v30 = mXDim - 1;
+  v32 = (int)(float)((float)((float)(y - v25) - v26->mYMin) * mGridSizeInv);
   if ( v32 < 0 )
     v32 = 0;
-  v33 = (signed int)(float)((float)((float)(v27 + v25) - v26->mYMin) * v28);
-  v34 = v26->mYDim;
-  if ( v33 >= v34 )
-    v33 = v34 - 1;
+  v33 = (int)(float)((float)((float)(y + v25) - v26->mYMin) * mGridSizeInv);
+  mYDim = v26->mYDim;
+  if ( v33 >= mYDim )
+    v33 = mYDim - 1;
   v35 = 0;
-  v81 = 0;
+  v80 = 0;
   if ( v32 <= v33 )
   {
-    v36 = 16i64 * (v29 + v32 * (signed int)v31);
-    v37 = 16 * v31;
+    v36 = 16i64 * (v29 + v32 * (int)mXDim);
+    v37 = 16 * mXDim;
     v38 = (unsigned int)(v33 - v32 + 1);
     do
     {
@@ -4256,8 +4099,8 @@ UFG::InterestPoint *__fastcall UFG::InterestPoint::FindNearestRelevent(UFG::SimO
         {
           if ( *(_QWORD *)(v40 + 192) - 184i64 != v40 )
           {
-            v80[v35] = v39;
-            v35 = v81++ + 1;
+            v79[v35] = v39;
+            v35 = ++v80;
           }
           v39 += 16i64;
           v40 += 16i64;
@@ -4272,10 +4115,10 @@ UFG::InterestPoint *__fastcall UFG::InterestPoint::FindNearestRelevent(UFG::SimO
   }
   if ( v35 )
   {
-    v42 = v80;
-    v76 = v80;
+    v42 = v79;
+    v75 = v79;
     v43 = v35;
-    v74 = v35;
+    v73 = v35;
     do
     {
       v44 = *v42;
@@ -4285,7 +4128,7 @@ UFG::InterestPoint *__fastcall UFG::InterestPoint::FindNearestRelevent(UFG::SimO
       {
         do
         {
-          v47 = (signed __int64)&v46->mNext[-12].mNext;
+          p_mNext = (__int64)&v46->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mNext[-12].mNext;
           if ( v46->mPoiType.mUID != -1 )
           {
             poiWorldPos = UFG::InterestPoint::GetPosition(v46);
@@ -4297,67 +4140,62 @@ UFG::InterestPoint *__fastcall UFG::InterestPoint::FindNearestRelevent(UFG::SimO
                                    * (float)(characterTransform->v3.z - poiWorldPos->z));
             if ( *(float *)&v49 < maxDistSquared )
             {
-              if ( v83
-                && UFG::InterestPoint::IsRelevantToPlayer(
-                     v46,
-                     (UFG::SimObject *)&pCharactera->vfptr,
-                     (UFG::qVector3 *)&characterTransform->v3) )
+              if ( bIsPlayer
+                && UFG::InterestPoint::IsRelevantToPlayer(v46, pCharacter, (UFG::qVector3 *)&characterTransform->v3) )
               {
                 bSkipChecksInPlayerRel = 1;
-                v51 = apNearestPOIWithBehaviour->size;
+                size = apNearestPOIWithBehaviour->size;
                 v52 = 0i64;
                 v53 = 0;
                 while ( 1 )
                 {
-                  if ( v52 >= v51 )
+                  if ( v52 >= size )
                   {
-                    v71 = v21 + 1;
-                    v72[v21] = v49;
-                    apNearestPOIWithBehaviour->size = v51 + 1;
-                    apNearestPOIWithBehaviour->p[v51] = v46;
-                    v21 = v71;
+                    v70 = v21 + 1;
+                    v71[v21] = *(float *)&v49;
+                    apNearestPOIWithBehaviour->size = size + 1;
+                    apNearestPOIWithBehaviour->p[size] = v46;
+                    v21 = v70;
                     goto LABEL_54;
                   }
-                  if ( *(float *)&v49 < *(float *)&v72[v52] )
+                  if ( *(float *)&v49 < v71[v52] )
                     break;
                   ++v53;
                   if ( ++v52 >= 4 )
                     goto LABEL_54;
                 }
-                if ( (_DWORD)v51 == 4 )
+                if ( (_DWORD)size == 4 )
                 {
                   apNearestPOIWithBehaviour->size = 3;
                   v21 = 3;
-                  v71 = 3;
+                  v70 = 3;
                 }
-                v71 = v21 + 1;
+                v70 = v21 + 1;
                 LODWORD(v54) = v21;
                 if ( v21 > v53 )
                 {
-                  v55 = &v72[v21];
+                  v55 = (int *)&v71[v21];
                   do
                   {
                     v54 = (unsigned int)(v54 - 1);
-                    *v55 = v72[v54];
-                    --v55;
+                    *v55-- = LODWORD(v71[v54]);
                   }
                   while ( (unsigned int)v54 > v53 );
                 }
-                v72[v53] = v49;
-                v56 = ++apNearestPOIWithBehaviour->size - 1;
+                v71[v53] = *(float *)&v49;
+                v56 = apNearestPOIWithBehaviour->size++;
                 if ( (unsigned int)v56 > v53 )
                 {
                   v57 = &apNearestPOIWithBehaviour->p[v56];
                   do
                   {
                     v56 = (unsigned int)(v56 - 1);
-                    *v57 = apNearestPOIWithBehaviour->p[v56];
-                    --v57;
+                    *v57-- = apNearestPOIWithBehaviour->p[v56];
                   }
                   while ( (unsigned int)v56 > v53 );
                 }
                 apNearestPOIWithBehaviour->p[v53] = v46;
-                v21 = v71;
+                v21 = v70;
               }
               else
               {
@@ -4368,100 +4206,98 @@ LABEL_54:
                                           * v46->mPropertiesHandle.mProperties->mMaxAppealRadius) )
               {
                 appealScale = 1.0;
-                if ( (!v83 || bSkipChecksInPlayerRel)
-                  && UFG::InterestPoint::IsRelevantToCharacter(
-                       v46,
-                       (UFG::SimObject *)&pCharactera->vfptr,
-                       pCharacterTargetCompa,
-                       pInterestPointUserCompa,
-                       v78,
-                       pAAEC,
-                       vPlayerPosition,
-                       pCharacterSpawnPoint,
-                       characterTransform,
-                       poiWorldPos,
-                       &appealScale,
-                       type,
-                       matchReservationFlags,
-                       ReserveReason_normal,
-                       bSkipChecksInPlayerRel) )
+                if ( !bIsPlayer || bSkipChecksInPlayerRel )
                 {
-                  v58 = fsqrt(*(float *)&v49);
-                  v59 = (float *)v46->mPropertiesHandle.mProperties;
-                  if ( v58 >= v59[12] )
-                    v60 = (float)((float)(v59[11] - v58) / (float)(v59[11] - v59[12])) * v59[10];
-                  else
-                    v60 = v59[10];
-                  v61 = v60 * appealScale;
-                  if ( pCandidates )
+                  if ( UFG::InterestPoint::IsRelevantToCharacter(
+                         v46,
+                         pCharacter,
+                         pCharacterTargetComp,
+                         pInterestPointUserComp,
+                         pCharacterPropertiesComponent,
+                         pAAEC,
+                         vPlayerPosition,
+                         pCharacterSpawnPoint,
+                         characterTransform,
+                         poiWorldPos,
+                         &appealScale,
+                         type,
+                         matchReservationFlags,
+                         ReserveReason_normal,
+                         bSkipChecksInPlayerRel) )
                   {
-                    v62 = pCandidates->size;
-                    v63 = v62 + 1;
-                    v64 = pCandidates->capacity;
-                    if ( (signed int)v62 + 1 > v64 )
+                    v58 = fsqrt(*(float *)&v49);
+                    mProperties = (float *)v46->mPropertiesHandle.mProperties;
+                    if ( v58 >= mProperties[12] )
+                      v60 = (float)((float)(mProperties[11] - v58) / (float)(mProperties[11] - mProperties[12]))
+                          * mProperties[10];
+                    else
+                      v60 = mProperties[10];
+                    v61 = v60 * appealScale;
+                    if ( pCandidates )
                     {
-                      if ( v64 )
-                        v65 = 2 * v64;
-                      else
-                        v65 = 1;
-                      for ( ; v65 < v63; v65 *= 2 )
-                        ;
-                      if ( v65 - v63 > 0x10000 )
-                        v65 = v62 + 65537;
-                      UFG::qArray<UFG::InterestPointQuery::Candidate,0>::Reallocate(
-                        pCandidates,
-                        v65,
-                        "InterestPointQuery::Candidate");
+                      v62 = pCandidates->size;
+                      v63 = v62 + 1;
+                      capacity = pCandidates->capacity;
+                      if ( (int)v62 + 1 > capacity )
+                      {
+                        if ( capacity )
+                          v65 = 2 * capacity;
+                        else
+                          v65 = 1;
+                        for ( ; v65 < v63; v65 *= 2 )
+                          ;
+                        if ( v65 - v63 > 0x10000 )
+                          v65 = v62 + 65537;
+                        UFG::qArray<UFG::InterestPointQuery::Candidate,0>::Reallocate(
+                          pCandidates,
+                          v65,
+                          "InterestPointQuery::Candidate");
+                      }
+                      pCandidates->size = v63;
+                      UFG::InterestPointQuery::Candidate::Init(&pCandidates->p[v62], v46, v61);
                     }
-                    pCandidates->size = v63;
-                    UFG::InterestPointQuery::Candidate::Init(&pCandidates->p[v62], v46, v61);
-                  }
-                  v66 = v19 - v61;
-                  if ( (float)(v19 - v61) < 0.0 )
-                    LODWORD(v66) ^= _xmm[0];
-                  if ( v66 < 0.001 && *(float *)&v49 < v20 || v19 < v61 )
-                  {
-                    v73 = v46;
-                    v20 = *(float *)&v49;
-                    v19 = v61;
+                    v66 = v19 - v61;
+                    if ( (float)(v19 - v61) < 0.0 )
+                      LODWORD(v66) ^= _xmm[0];
+                    if ( v66 < 0.001 && *(float *)&v49 < v20 || v19 < v61 )
+                    {
+                      v72 = v46;
+                      v20 = *(float *)&v49;
+                      v19 = v61;
+                    }
                   }
                 }
               }
             }
           }
-          v46 = (UFG::InterestPoint *)v47;
+          v46 = (UFG::InterestPoint *)p_mNext;
         }
-        while ( v47 != v45 );
-        v43 = v74;
+        while ( p_mNext != v45 );
+        v43 = v73;
       }
-      v42 = v76 + 1;
-      ++v76;
-      v74 = --v43;
+      v42 = ++v75;
+      v73 = --v43;
     }
     while ( v43 );
-    v22 = qSymbol_look.mUID;
-    v18 = (__int64)v73;
-    v13 = pCharacterTargetCompa;
+    mUID = qSymbol_look.mUID;
+    v18 = (__int64)v72;
+    v13 = pCharacterTargetComp;
   }
   if ( pDistSquared )
   {
     *pDistSquared = v20;
-    v22 = qSymbol_look.mUID;
+    mUID = qSymbol_look.mUID;
   }
   if ( v13 )
   {
-    UFG::TargetingSystemBaseComponent::SetTarget(
-      (UFG::TargetingSystemBaseComponent *)&v13->vfptr,
-      (UFG::eTargetTypeEnum)((type->mUID != v22) + 25),
-      pSimObject);
-    LODWORD(pCharacterPropertiesComponent) = 0;
+    UFG::TargetingSystemBaseComponent::SetTarget(v13, (type->mUID != mUID) + 25, pSimObject);
     LOBYTE(v67) = 1;
-    ((void (__fastcall *)(UFG::TargetingSystemPedBaseComponent *, _QWORD, _QWORD, __int64, UFG::SimObjectCharacterPropertiesComponent *, const char *, _QWORD, _QWORD))v13->vfptr[14].__vecDelDtor)(
+    ((void (__fastcall *)(UFG::TargetingSystemPedBaseComponent *, _QWORD, _QWORD, __int64, _DWORD, const char *, _QWORD, _QWORD))v13->UFG::TargetingSystemBaseComponent::UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::vfptr[14].__vecDelDtor)(
       v13,
       (unsigned int)(type->mUID != qSymbol_look.mUID) + 25,
-      v69,
+      v68,
       v67,
-      pCharacterPropertiesComponent,
+      0,
       "InterestPoint::FindNearestRelevent",
       0i64,
       0i64);
@@ -4473,24 +4309,22 @@ LABEL_54:
 // RVA: 0x585560
 void __fastcall UFG::InterestPoint::ListParents(int childNum)
 {
-  int v1; // ebp
   unsigned int v2; // edi
   const char *v3; // rdx
-  Render::SkinningCacheNode *v4; // rax
-  signed __int64 v5; // rbx
+  Render::SkinningCacheNode *Head; // rax
+  char *p_mUID; // rbx
   __int64 v6; // rax
   __int64 v7; // rcx
   unsigned int v8; // esi
   char *v9; // rax
-  UFG::qBaseTreeRB *v10; // rax
+  UFG::qBaseTreeRB *Next; // rax
   UFG::qBaseTreeRB *i; // rax
-  signed __int64 v12; // rbx
+  __int64 v12; // rbx
   __int64 v13; // rax
   __int64 v14; // rcx
   unsigned int v15; // esi
   char *v16; // rax
 
-  v1 = childNum;
   v2 = childNum;
   if ( childNum < 0 )
     v2 = -childNum;
@@ -4498,42 +4332,42 @@ void __fastcall UFG::InterestPoint::ListParents(int childNum)
   if ( childNum >= 0 )
     v3 = "exactly";
   ADebug::print_format("InterestPoint objects with %s %u children:\n", v3, v2);
-  v4 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::InterestPoint::msUseInterestPoints);
-  if ( v4 )
-    v5 = (signed __int64)&v4[-4].mNode.mUID;
+  Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::InterestPoint::msUseInterestPoints);
+  if ( Head )
+    p_mUID = (char *)&Head[-4].mNode.mUID;
   else
-    v5 = 0i64;
-  while ( v5 )
+    p_mUID = 0i64;
+  while ( p_mUID )
   {
-    v6 = *(_QWORD *)(v5 + 40);
+    v6 = *((_QWORD *)p_mUID + 5);
     if ( v6 )
       v7 = *(_QWORD *)(v6 + 80);
     else
       v7 = 0i64;
     v8 = *(_DWORD *)(v7 + 120);
-    if ( v1 >= 0 )
+    if ( childNum >= 0 )
     {
       if ( v8 != v2 )
         goto LABEL_17;
 LABEL_16:
-      v9 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)(v5 + 64));
+      v9 = UFG::qSymbol::as_cstr_dbg((UFG::qSymbolUC *)p_mUID + 16);
       ADebug::print_format("  %s : %u\n", v9, v8);
       goto LABEL_17;
     }
     if ( v8 >= v2 )
       goto LABEL_16;
 LABEL_17:
-    v10 = UFG::qBaseTreeRB::GetNext(&UFG::InterestPoint::msUseInterestPoints.mTree, (UFG::qBaseNodeRB *)(v5 + 136));
-    if ( v10 )
-      v5 = (signed __int64)v10[-2].mRoot.mChild;
+    Next = UFG::qBaseTreeRB::GetNext(&UFG::InterestPoint::msUseInterestPoints.mTree, (UFG::qBaseNodeRB *)(p_mUID + 136));
+    if ( Next )
+      p_mUID = (char *)Next[-2].mRoot.mChild;
     else
-      v5 = 0i64;
+      p_mUID = 0i64;
   }
   for ( i = (UFG::qBaseTreeRB *)UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::InterestPoint::msLookInterestPoints);
         ;
         i = UFG::qBaseTreeRB::GetNext(&UFG::InterestPoint::msLookInterestPoints.mTree, (UFG::qBaseNodeRB *)(v12 + 136)) )
   {
-    v12 = (signed __int64)(i ? i[-2].mRoot.mChild : 0i64);
+    v12 = i ? (__int64)i[-2].mRoot.mChild : 0i64;
     if ( !v12 )
       break;
     v13 = *(_QWORD *)(v12 + 40);
@@ -4542,7 +4376,7 @@ LABEL_17:
     else
       v14 = 0i64;
     v15 = *(_DWORD *)(v14 + 120);
-    if ( v1 < 0 )
+    if ( childNum < 0 )
     {
       if ( v15 < v2 )
         continue;
@@ -4560,64 +4394,66 @@ LABEL_32:
 // RVA: 0x582170
 void UFG::InterestPoint::ForceUpdateCanPathTo(void)
 {
-  Render::SkinningCacheNode *v0; // rax
-  UFG::InterestPoint *v1; // rbx
-  UFG::qVector3 *v2; // rdi
+  Render::SkinningCacheNode *Head; // rax
+  UFG::InterestPoint *p_mUID; // rbx
+  UFG::qVector3 *Position; // rdi
   bool v3; // al
   char v4; // cl
   UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *v5; // rcx
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *v6; // rax
-  UFG::qBaseTreeRB *v7; // rax
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *mPrev; // rax
+  UFG::qBaseTreeRB *Next; // rax
 
-  v0 = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::InterestPoint::msUseInterestPoints);
-  v1 = (UFG::InterestPoint *)&v0[-4].mNode.mUID;
-  if ( !v0 )
-    v1 = 0i64;
-  while ( v1 )
+  Head = UFG::qTreeRB64<UFG::tOffset,UFG::tOffset,1>::GetHead((UFG::qTreeRB64<Render::SkinningCacheNode,Render::SkinningCacheNode,1> *)&UFG::InterestPoint::msUseInterestPoints);
+  p_mUID = (UFG::InterestPoint *)&Head[-4].mNode.mUID;
+  if ( !Head )
+    p_mUID = 0i64;
+  while ( p_mUID )
   {
-    if ( v1->mCanPathToCached.mValue != 1 )
+    if ( p_mUID->mCanPathToCached.mValue != 1 )
     {
-      if ( v1->mpXformNode )
+      if ( p_mUID->mpXformNode )
       {
-        v2 = UFG::InterestPoint::GetPosition(v1);
+        Position = UFG::InterestPoint::GetPosition(p_mUID);
         if ( ((unsigned __int8 (__fastcall *)(UFG::NavManager *, UFG::qVector3 *))UFG::NavManager::ms_pInstance->vfptr->IsInsideAIMesh)(
                UFG::NavManager::ms_pInstance,
-               v2) )
+               Position) )
         {
-          v1->mCanPathToCached.mValue = 1;
+          p_mUID->mCanPathToCached.mValue = 1;
         }
         else
         {
-          v3 = UFG::NavManager::ms_pInstance->vfptr->IsAIMeshLoadedAt(UFG::NavManager::ms_pInstance, v2);
+          v3 = UFG::NavManager::ms_pInstance->vfptr->IsAIMeshLoadedAt(UFG::NavManager::ms_pInstance, Position);
           v4 = 2;
           if ( v3 )
             v4 = 0;
-          v1->mCanPathToCached.mValue = v4;
+          p_mUID->mCanPathToCached.mValue = v4;
         }
       }
       else
       {
-        v1->mCanPathToCached.mValue = 3;
+        p_mUID->mCanPathToCached.mValue = 3;
       }
-      if ( v1->mCanPathToCached.mValue == 2 )
+      if ( p_mUID->mCanPathToCached.mValue == 2 )
       {
-        v5 = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *)&v1->mPrev;
+        v5 = &p_mUID->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>;
         if ( v5->mPrev == v5
-          && (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> **)v1->mNext == &v1->mPrev )
+          && p_mUID->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>::mNext == &p_mUID->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> )
         {
-          v6 = UFG::InterestPoint::msCellNotLoadedCanPathList.mNode.mPrev;
+          mPrev = UFG::InterestPoint::msCellNotLoadedCanPathList.mNode.mPrev;
           UFG::InterestPoint::msCellNotLoadedCanPathList.mNode.mPrev->mNext = v5;
-          v5->mPrev = v6;
-          v1->mNext = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *)&UFG::InterestPoint::msCellNotLoadedCanPathList;
-          UFG::InterestPoint::msCellNotLoadedCanPathList.mNode.mPrev = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *)&v1->mPrev;
+          v5->mPrev = mPrev;
+          p_mUID->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>::mNext = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *)&UFG::InterestPoint::msCellNotLoadedCanPathList;
+          UFG::InterestPoint::msCellNotLoadedCanPathList.mNode.mPrev = &p_mUID->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>;
         }
       }
     }
-    v7 = UFG::qBaseTreeRB::GetNext(&UFG::InterestPoint::msUseInterestPoints.mTree, &v1->mNode);
-    if ( v7 )
-      v1 = (UFG::InterestPoint *)v7[-2].mRoot.mChild;
+    Next = UFG::qBaseTreeRB::GetNext(
+             &UFG::InterestPoint::msUseInterestPoints.mTree,
+             &p_mUID->UFG::qNodeRB<UFG::InterestPoint>::mNode);
+    if ( Next )
+      p_mUID = (UFG::InterestPoint *)Next[-2].mRoot.mChild;
     else
-      v1 = 0i64;
+      p_mUID = 0i64;
   }
 }
 
@@ -4632,45 +4468,43 @@ float __fastcall UFG::InterestPoint::GetSpawnAmbientUserDistance(UFG::InterestPo
 // RVA: 0x58DF10
 void __fastcall UFG::InterestPoint::UpdateCanPathToCached(UFG::InterestPoint *this)
 {
-  UFG::InterestPoint *v1; // rbx
-  UFG::qVector3 *v2; // rdi
+  UFG::qVector3 *Position; // rdi
   UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *v3; // rcx
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *v4; // rax
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *mPrev; // rax
 
-  v1 = this;
   if ( this->mpXformNode )
   {
-    v2 = UFG::InterestPoint::GetPosition(this);
+    Position = UFG::InterestPoint::GetPosition(this);
     if ( ((unsigned __int8 (__fastcall *)(UFG::NavManager *, UFG::qVector3 *))UFG::NavManager::ms_pInstance->vfptr->IsInsideAIMesh)(
            UFG::NavManager::ms_pInstance,
-           v2) )
+           Position) )
     {
-      v1->mCanPathToCached.mValue = 1;
+      this->mCanPathToCached.mValue = 1;
     }
-    else if ( UFG::NavManager::ms_pInstance->vfptr->IsAIMeshLoadedAt(UFG::NavManager::ms_pInstance, v2) )
+    else if ( UFG::NavManager::ms_pInstance->vfptr->IsAIMeshLoadedAt(UFG::NavManager::ms_pInstance, Position) )
     {
-      v1->mCanPathToCached.mValue = 0;
+      this->mCanPathToCached.mValue = 0;
     }
     else
     {
-      v1->mCanPathToCached.mValue = 2;
+      this->mCanPathToCached.mValue = 2;
     }
   }
   else
   {
     this->mCanPathToCached.mValue = 3;
   }
-  if ( v1->mCanPathToCached.mValue == 2 )
+  if ( this->mCanPathToCached.mValue == 2 )
   {
-    v3 = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *)&v1->mPrev;
+    v3 = &this->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>;
     if ( v3->mPrev == v3
-      && (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> **)v1->mNext == &v1->mPrev )
+      && this->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>::mNext == &this->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> )
     {
-      v4 = UFG::InterestPoint::msCellNotLoadedCanPathList.mNode.mPrev;
+      mPrev = UFG::InterestPoint::msCellNotLoadedCanPathList.mNode.mPrev;
       UFG::InterestPoint::msCellNotLoadedCanPathList.mNode.mPrev->mNext = v3;
-      v3->mPrev = v4;
-      v1->mNext = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *)&UFG::InterestPoint::msCellNotLoadedCanPathList;
-      UFG::InterestPoint::msCellNotLoadedCanPathList.mNode.mPrev = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *)&v1->mPrev;
+      v3->mPrev = mPrev;
+      this->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>::mNext = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *)&UFG::InterestPoint::msCellNotLoadedCanPathList;
+      UFG::InterestPoint::msCellNotLoadedCanPathList.mNode.mPrev = &this->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>;
     }
   }
 }
@@ -4679,25 +4513,22 @@ void __fastcall UFG::InterestPoint::UpdateCanPathToCached(UFG::InterestPoint *th
 // RVA: 0x58B380
 void __fastcall UFG::InterestPoint::ResetInterestPoint(UFG::InterestPoint *this)
 {
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v1; // rdx
-  UFG::InterestPoint *v2; // r9
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v3; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v4; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::InterestPointUserComponent> *v5; // rdx
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mpUser; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
+  UFG::qSafePointer<UFG::SimComponent,UFG::InterestPointUserComponent> *p_mpInterestPointUserComponent; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v6; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v7; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::CharacterAnimationComponent> *v8; // rdx
+  UFG::qSafePointer<UFG::SimComponent,UFG::CharacterAnimationComponent> *p_mpParentCharacterAnimationComponent; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v9; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v10; // rax
   UFG::GridIntrusive<UFG::InterestPoint> *v11; // r8
   UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *v12; // rcx
   UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *v13; // rax
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *v14; // rdx
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *v15; // rcx
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *v16; // rax
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *v14; // rcx
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *v15; // rax
 
-  v1 = &this->mpUser;
-  v2 = this;
+  p_mpUser = &this->mpUser;
   this->mBeginningScriptInfo.mpCachedScript = 0i64;
   *(_WORD *)&this->mBeginningScriptInfo.mHasScript = 0;
   this->mEndingScriptInfo.mpCachedScript = 0i64;
@@ -4706,105 +4537,103 @@ void __fastcall UFG::InterestPoint::ResetInterestPoint(UFG::InterestPoint *this)
   *(_WORD *)&this->mOnReservationScriptInfo.mHasScript = 0;
   if ( this->mpUser.m_pPointer )
   {
-    v3 = v1->mPrev;
-    v4 = v1->mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v1->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->mPrev;
-    v1->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v1->mPrev;
+    mPrev = p_mpUser->mPrev;
+    mNext = p_mpUser->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mpUser->mPrev = p_mpUser;
+    p_mpUser->mNext = p_mpUser;
   }
-  v1->m_pPointer = 0i64;
-  v5 = &v2->mpInterestPointUserComponent;
-  if ( v2->mpInterestPointUserComponent.m_pPointer )
+  p_mpUser->m_pPointer = 0i64;
+  p_mpInterestPointUserComponent = &this->mpInterestPointUserComponent;
+  if ( this->mpInterestPointUserComponent.m_pPointer )
   {
-    v6 = v5->mPrev;
-    v7 = v2->mpInterestPointUserComponent.mNext;
+    v6 = p_mpInterestPointUserComponent->mPrev;
+    v7 = this->mpInterestPointUserComponent.mNext;
     v6->mNext = v7;
     v7->mPrev = v6;
-    v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v5->mPrev;
-    v2->mpInterestPointUserComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mpInterestPointUserComponent.mPrev;
+    p_mpInterestPointUserComponent->mPrev = p_mpInterestPointUserComponent;
+    this->mpInterestPointUserComponent.mNext = &this->mpInterestPointUserComponent;
   }
-  v2->mpInterestPointUserComponent.m_pPointer = 0i64;
-  v8 = &v2->mpParentCharacterAnimationComponent;
-  *(_QWORD *)&v2->mUseTime = 0i64;
-  *(_DWORD *)&v2->mIsReserved = 0;
-  v2->mIsInterrupted = 0;
-  *(_WORD *)&v2->mActive = 768;
-  *(_QWORD *)&v2->mTimeSinceBeginUse = 0i64;
-  v2->mPassedActivationChance = 1;
-  v2->mBoneId = -1;
-  if ( v2->mpParentCharacterAnimationComponent.m_pPointer )
+  this->mpInterestPointUserComponent.m_pPointer = 0i64;
+  p_mpParentCharacterAnimationComponent = &this->mpParentCharacterAnimationComponent;
+  *(_QWORD *)&this->mUseTime = 0i64;
+  *(_DWORD *)&this->mIsReserved = 0;
+  this->mIsInterrupted = 0;
+  *(_WORD *)&this->mActive = 768;
+  *(_QWORD *)&this->mTimeSinceBeginUse = 0i64;
+  this->mPassedActivationChance = 1;
+  this->mBoneId = -1;
+  if ( this->mpParentCharacterAnimationComponent.m_pPointer )
   {
-    v9 = v8->mPrev;
-    v10 = v2->mpParentCharacterAnimationComponent.mNext;
+    v9 = p_mpParentCharacterAnimationComponent->mPrev;
+    v10 = this->mpParentCharacterAnimationComponent.mNext;
     v9->mNext = v10;
     v10->mPrev = v9;
-    v8->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v8->mPrev;
-    v2->mpParentCharacterAnimationComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mpParentCharacterAnimationComponent.mPrev;
+    p_mpParentCharacterAnimationComponent->mPrev = p_mpParentCharacterAnimationComponent;
+    this->mpParentCharacterAnimationComponent.mNext = &this->mpParentCharacterAnimationComponent;
   }
-  v2->mpParentCharacterAnimationComponent.m_pPointer = 0i64;
-  if ( v2->mAddedToGrid )
+  this->mpParentCharacterAnimationComponent.m_pPointer = 0i64;
+  if ( this->mAddedToGrid )
   {
     v11 = UFG::InterestPoint::mspUseInterestPointGrid;
-    v12 = v2->mPrev;
-    v13 = v2->mNext;
-    if ( v2->mPoiType.mUID == qSymbol_look.mUID )
+    v12 = this->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mPrev;
+    v13 = this->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mNext;
+    if ( this->mPoiType.mUID == qSymbol_look.mUID )
       v11 = UFG::InterestPoint::mspLookInterestPointGrid;
     v12->mNext = v13;
     v13->mPrev = v12;
-    v2->mPrev = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *)&v2->mPrev;
-    v2->mNext = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *)&v2->mPrev;
+    this->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mPrev = &this->UFG::GridIntrusiveNode<UFG::InterestPoint>;
+    this->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mNext = &this->UFG::GridIntrusiveNode<UFG::InterestPoint>;
     --v11->mNodeCount;
   }
-  v14 = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *)&v2->mPrev;
-  v2->mPoiType = UFG::gNullQSymbol;
-  v2->mGridIndex = -1;
-  *(_WORD *)&v2->mAddedToGrid = 0;
-  v2->mFullUpdateRequired = 0;
-  v15 = v2->mPrev;
-  v16 = v2->mNext;
-  v15->mNext = v16;
-  v16->mPrev = v15;
-  v14->mPrev = v14;
-  v14->mNext = v14;
-  v2->mpPedInfoUser = 0i64;
+  this->mPoiType = UFG::gNullQSymbol;
+  this->mGridIndex = -1;
+  *(_WORD *)&this->mAddedToGrid = 0;
+  this->mFullUpdateRequired = 0;
+  v14 = this->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>::mPrev;
+  v15 = this->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>::mNext;
+  v14->mNext = v15;
+  v15->mPrev = v14;
+  this->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>::mPrev = &this->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>;
+  this->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>::mNext = &this->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>;
+  this->mpPedInfoUser = 0i64;
 }
 
 // File Line: 4502
 // RVA: 0x580F50
 UFG::InterestPointType *__fastcall UFG::InterestPoint::FindInterestPointTypeR(UFG::qPropertySet *pProps)
 {
-  unsigned int v1; // edx
-  UFG::qPropertySet *v2; // rdi
+  unsigned int mUID; // edx
+  UFG::qPropertySet *ParentFromIdx; // rdi
   UFG::InterestPointType *result; // rax
   unsigned int v4; // ebx
   unsigned int v5; // esi
-  UFG::qPropertySet *v6; // rax
 
-  v1 = pProps->mName.mUID;
-  v2 = pProps;
-  if ( !v1
-    || (result = (UFG::InterestPointType *)UFG::qBaseTreeRB::Get(&UFG::InterestPoint::msInterestPointTypeTree.mTree, v1)) == 0i64 )
+  mUID = pProps->mName.mUID;
+  ParentFromIdx = pProps;
+  if ( !mUID
+    || (result = (UFG::InterestPointType *)UFG::qBaseTreeRB::Get(
+                                             &UFG::InterestPoint::msInterestPointTypeTree.mTree,
+                                             mUID)) == 0i64 )
   {
     v4 = 0;
-    v5 = UFG::qPropertySet::NumParents(v2);
+    v5 = UFG::qPropertySet::NumParents(ParentFromIdx);
     if ( v5 )
     {
       while ( 1 )
       {
-        v6 = (UFG::qPropertySet *)UFG::qPropertySet::GetParentFromIdx(v2, v4);
-        v2 = v6;
-        result = UFG::InterestPoint::FindInterestPointTypeR(v6);
+        ParentFromIdx = (UFG::qPropertySet *)UFG::qPropertySet::GetParentFromIdx(ParentFromIdx, v4);
+        result = UFG::InterestPoint::FindInterestPointTypeR(ParentFromIdx);
         if ( result )
           break;
         if ( ++v4 >= v5 )
-          goto LABEL_6;
+          return 0i64;
       }
     }
     else
     {
-LABEL_6:
-      result = 0i64;
+      return 0i64;
     }
   }
   return result;
@@ -4814,85 +4643,77 @@ LABEL_6:
 // RVA: 0x588B60
 void __fastcall UFG::InterestPoint::PropertiesLoad(UFG::InterestPoint *this, UFG::SceneObjectProperties *pSceneObj)
 {
-  UFG::SceneObjectProperties *v2; // rsi
-  UFG::InterestPoint *v3; // rbx
-  UFG::qPropertySet *v4; // rax
-  UFG::qPropertySet *v5; // rdi
-  UFG::qPropertySet *v6; // rax
-  char *v7; // rax
-  unsigned int v8; // eax
-  UFG::qTreeRB<UFG::InterestPoint,UFG::InterestPoint,1> *v9; // rcx
-  UFG::InterestPointType *v10; // rax
-  UFG::qPropertySet *v11; // rax
-  UFG::PedSpawnManager *v12; // rax
-  UFG::qVector3 *v13; // rax
-  UFG::GridIntrusive<UFG::InterestPoint> *v14; // r9
-  UFG::GridIntrusiveNode<UFG::InterestPoint> *v15; // rcx
-  int v16; // er8
-  UFG::qList<UFG::InterestPoint,UFG::InterestPoint,1,0> *v17; // rdx
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *v18; // rax
+  UFG::qPropertySet *v4; // rdi
+  UFG::qPropertySet *v5; // rax
+  char *MemImagePtr; // rax
+  unsigned int v7; // eax
+  UFG::qTreeRB<UFG::InterestPoint,UFG::InterestPoint,1> *v8; // rcx
+  UFG::InterestPointType *InterestPointTypeR; // rax
+  UFG::qPropertySet *ParentFromIdx; // rax
+  UFG::PedSpawnManager *Instance; // rax
+  UFG::qVector3 *Position; // rax
+  UFG::GridIntrusive<UFG::InterestPoint> *v13; // r9
+  int v14; // r8d
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *p_mNode; // rdx
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *mPrev; // rax
 
-  v2 = pSceneObj;
-  v3 = this;
   if ( this->m_pSimObject )
     UFG::InterestPoint::ResetInterestPoint(this);
   else
-    UFG::MarkerBase::Initialize((UFG::MarkerBase *)&this->vfptr, pSceneObj->m_pSimObject);
-  v4 = PropertyUtils::Get<UFG::qPropertySet>(v2, (UFG::qSymbol *)&qSymbolX_propset_componentPOI.mUID);
-  v5 = v4;
-  v6 = UFG::qPropertySet::Get<UFG::qPropertySet>(
+    UFG::MarkerBase::Initialize(this, pSceneObj->m_pSimObject);
+  v4 = PropertyUtils::Get<UFG::qPropertySet>(pSceneObj, (UFG::qArray<unsigned long,0> *)&qSymbolX_propset_componentPOI);
+  v5 = UFG::qPropertySet::Get<UFG::qPropertySet>(
          v4,
-         (UFG::qSymbol *)&component_InterestPoint::sPropertyName.mUID,
+         (UFG::qArray<unsigned long,0> *)&component_InterestPoint::sPropertyName,
          DEPTH_RECURSE);
-  if ( v6 )
+  if ( v5 )
   {
-    v7 = UFG::qPropertySet::GetMemImagePtr(v6);
-    if ( v7 )
+    MemImagePtr = UFG::qPropertySet::GetMemImagePtr(v5);
+    if ( MemImagePtr )
     {
-      v8 = *(_DWORD *)v7;
-      v9 = &UFG::InterestPoint::msLookInterestPoints;
-      v3->mPoiType.mUID = v8;
-      if ( v8 != qSymbol_look.mUID )
-        v9 = &UFG::InterestPoint::msUseInterestPoints;
-      UFG::qBaseTreeRB::Add(&v9->mTree, &v3->mNode);
-      if ( v3->mPoiType.mUID != -1 )
+      v7 = *(_DWORD *)MemImagePtr;
+      v8 = &UFG::InterestPoint::msLookInterestPoints;
+      this->mPoiType.mUID = v7;
+      if ( v7 != qSymbol_look.mUID )
+        v8 = &UFG::InterestPoint::msUseInterestPoints;
+      UFG::qBaseTreeRB::Add(&v8->mTree, &this->UFG::qNodeRB<UFG::InterestPoint>::mNode);
+      if ( this->mPoiType.mUID != -1 )
       {
-        v10 = UFG::InterestPoint::FindInterestPointTypeR(v5);
-        v3->mInterestPointType = v10;
-        if ( !v10 )
+        InterestPointTypeR = UFG::InterestPoint::FindInterestPointTypeR(v4);
+        this->mInterestPointType = InterestPointTypeR;
+        if ( !InterestPointTypeR )
         {
-          v11 = (UFG::qPropertySet *)UFG::qPropertySet::GetParentFromIdx(v5, 0);
-          v3->mInterestPointType = UFG::InterestPoint::AddInterestPointType(v11);
+          ParentFromIdx = (UFG::qPropertySet *)UFG::qPropertySet::GetParentFromIdx(v4, 0);
+          this->mInterestPointType = UFG::InterestPoint::AddInterestPointType(ParentFromIdx);
         }
-        UFG::InterestPoint::LoadStaticProperties(v3, v5);
-        UFG::InterestPoint::InitBasePOI(v3, v2);
-        if ( v3->mPoiType.mUID != qSymbol_look.mUID )
+        UFG::InterestPoint::LoadStaticProperties(this, v4);
+        UFG::InterestPoint::InitBasePOI(this, pSceneObj);
+        if ( this->mPoiType.mUID != qSymbol_look.mUID )
         {
-          UFG::InterestPoint::InitUsePOI(v3, v5);
-          if ( v3->mPropertiesHandle.mProperties->mSpawnAmbientUserDistance > 0.0 )
+          UFG::InterestPoint::InitUsePOI(this, v4);
+          if ( this->mPropertiesHandle.mProperties->mSpawnAmbientUserDistance > 0.0 )
           {
-            v12 = UFG::PedSpawnManager::GetInstance();
-            UFG::PedSpawnManager::RegisterSpawningPOI(v12, v3, v2);
+            Instance = UFG::PedSpawnManager::GetInstance();
+            UFG::PedSpawnManager::RegisterSpawningPOI(Instance, this, pSceneObj);
           }
         }
-        UFG::InterestPoint::UpdateInterestPointTransform(v3);
-        v13 = UFG::InterestPoint::GetPosition(v3);
-        v14 = UFG::InterestPoint::mspUseInterestPointGrid;
-        if ( v3->mPoiType.mUID == qSymbol_look.mUID )
-          v14 = UFG::InterestPoint::mspLookInterestPointGrid;
-        v15 = (UFG::GridIntrusiveNode<UFG::InterestPoint> *)&v3->mPrev;
-        v16 = (signed int)(float)((float)(v13->x - v14->mXMin) * v14->mGridSizeInv)
-            + v14->mXDim * (signed int)(float)((float)(v13->y - v14->mYMin) * v14->mGridSizeInv);
-        v17 = &v14->mGridNodes[v16];
-        v18 = v17->mNode.mPrev;
-        v18->mNext = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *)&v3->mPrev;
-        v15->mPrev = v18;
-        v15->mNext = &v17->mNode;
-        v17->mNode.mPrev = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint> *)&v3->mPrev;
-        ++v14->mNodeCount;
-        v3->mGridIndex = v16;
-        *(_WORD *)&v3->mAddedToGrid = 1;
-        UFG::InterestPoint::InitAnimHandles(v3);
+        UFG::InterestPoint::UpdateInterestPointTransform(this);
+        Position = UFG::InterestPoint::GetPosition(this);
+        v13 = UFG::InterestPoint::mspUseInterestPointGrid;
+        if ( this->mPoiType.mUID == qSymbol_look.mUID )
+          v13 = UFG::InterestPoint::mspLookInterestPointGrid;
+        v14 = (int)(float)((float)(Position->x - v13->mXMin) * v13->mGridSizeInv)
+            + v13->mXDim * (int)(float)((float)(Position->y - v13->mYMin) * v13->mGridSizeInv);
+        p_mNode = &v13->mGridNodes[v14].mNode;
+        mPrev = p_mNode->mPrev;
+        mPrev->mNext = &this->UFG::GridIntrusiveNode<UFG::InterestPoint>;
+        this->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mPrev = mPrev;
+        this->UFG::GridIntrusiveNode<UFG::InterestPoint>::UFG::qNode<UFG::InterestPoint,UFG::InterestPoint>::mNext = p_mNode;
+        p_mNode->mPrev = &this->UFG::GridIntrusiveNode<UFG::InterestPoint>;
+        ++v13->mNodeCount;
+        this->mGridIndex = v14;
+        *(_WORD *)&this->mAddedToGrid = 1;
+        UFG::InterestPoint::InitAnimHandles(this);
       }
     }
   }
@@ -4902,55 +4723,49 @@ void __fastcall UFG::InterestPoint::PropertiesLoad(UFG::InterestPoint *this, UFG
 // RVA: 0x585DF0
 void __fastcall UFG::InterestPoint::LoadStaticProperties(UFG::InterestPoint *this, UFG::qPropertySet *pProps)
 {
-  int v2; // ebx
-  UFG::InterestPoint *v3; // rbp
-  UFG::qPropertySet *v4; // rsi
+  int mNumProperties; // ebx
   UFG::qBaseTreeRB *v5; // rdi
   int v6; // eax
   unsigned int v7; // edx
 
-  v2 = pProps->mNumProperties;
-  v3 = this;
-  v4 = pProps;
+  mNumProperties = pProps->mNumProperties;
   v5 = 0i64;
   v6 = UFG::qPropertySet::NumParents(pProps);
-  if ( !v2 && v6 == 1 )
+  if ( !mNumProperties && v6 == 1 )
   {
-    v7 = *(_DWORD *)&UFG::qPropertySet::GetParentFromIdx(v4, 0)->mDebugName[12];
+    v7 = *(_DWORD *)&UFG::qPropertySet::GetParentFromIdx(pProps, 0)->mDebugName[12];
     if ( v7 )
       v5 = UFG::qBaseTreeRB::Get(&UFG::gInterestPointCachedProperties.mTree, v7);
   }
-  UFG::InterestPointPropertiesHandle::Load(&v3->mPropertiesHandle, (UFG::InterestPointProperties *)v5, v4);
+  UFG::InterestPointPropertiesHandle::Load(&this->mPropertiesHandle, (UFG::InterestPointProperties *)v5, pProps);
 }
 
 // File Line: 4686
 // RVA: 0x58B860
 void __fastcall UFG::InterestPoint::SetBoneIDFromProperties(UFG::InterestPoint *this)
 {
-  UFG::InterestPoint *v1; // rbx
-  UFG::SimComponent *v2; // rcx
+  UFG::SimComponent *m_pPointer; // rcx
   __int64 v3; // rcx
-  signed int v4; // eax
+  int BoneID; // eax
   UFG::SimComponent *v5; // rax
 
-  v1 = this;
-  v2 = this->mpParentCharacterAnimationComponent.m_pPointer;
-  if ( v2 )
+  m_pPointer = this->mpParentCharacterAnimationComponent.m_pPointer;
+  if ( m_pPointer )
   {
-    v3 = *(_QWORD *)&v2[2].m_TypeUID;
+    v3 = *(_QWORD *)&m_pPointer[2].m_TypeUID;
     if ( v3 )
     {
       if ( *(_QWORD *)(v3 + 440) )
-        v4 = Skeleton::GetBoneID(*(Skeleton **)(v3 + 480), v1->mPropertiesHandle.mProperties->mBoneName.mUID);
+        BoneID = Skeleton::GetBoneID(*(Skeleton **)(v3 + 480), this->mPropertiesHandle.mProperties->mBoneName.mUID);
       else
-        v4 = -1;
-      v1->mBoneId = v4;
-      v5 = v1->mpParentCharacterAnimationComponent.m_pPointer;
-      v1->mNeedsBoneFixupWhenRigAvailable = BYTE1(v5[3].vfptr) || !*(_QWORD *)&v5[1].m_Flags;
+        BoneID = -1;
+      this->mBoneId = BoneID;
+      v5 = this->mpParentCharacterAnimationComponent.m_pPointer;
+      this->mNeedsBoneFixupWhenRigAvailable = BYTE1(v5[3].vfptr) || !*(_QWORD *)&v5[1].m_Flags;
     }
     else
     {
-      v1->mNeedsBoneFixupWhenRigAvailable = 1;
+      this->mNeedsBoneFixupWhenRigAvailable = 1;
     }
   }
 }
@@ -4959,191 +4774,172 @@ void __fastcall UFG::InterestPoint::SetBoneIDFromProperties(UFG::InterestPoint *
 // RVA: 0x583160
 void __fastcall UFG::InterestPoint::InitBasePOI(UFG::InterestPoint *this, UFG::SceneObjectProperties *pSceneObj)
 {
-  UFG::InterestPointProperties *v2; // r8
-  UFG::InterestPoint *v3; // rbx
-  UFG::SimObjectCVBase *v4; // rcx
-  UFG::CharacterAnimationComponent *v5; // r8
-  unsigned __int16 v6; // dx
-  UFG::CharacterAnimationComponent *v7; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::CharacterAnimationComponent> *v8; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v9; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v10; // rax
+  UFG::InterestPointProperties *mProperties; // r8
+  UFG::SimObjectCVBase *m_pSimObject; // rcx
+  UFG::SimComponent *v5; // r8
+  __int16 m_Flags; // dx
+  UFG::CharacterAnimationComponent *ComponentOfTypeHK; // rax
+  UFG::qSafePointer<UFG::SimComponent,UFG::CharacterAnimationComponent> *p_mpParentCharacterAnimationComponent; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v11; // rax
   UFG::InterestPointProperties *v12; // rdi
 
-  v2 = this->mPropertiesHandle.mProperties;
-  v3 = this;
-  this->mActive = v2->mStartActive;
-  if ( v2->mBoneName.mUID != -1 )
+  mProperties = this->mPropertiesHandle.mProperties;
+  this->mActive = mProperties->mStartActive;
+  if ( mProperties->mBoneName.mUID != -1 )
   {
-    v4 = (UFG::SimObjectCVBase *)pSceneObj->mpParent->m_pSimObject;
-    if ( v4 )
+    m_pSimObject = (UFG::SimObjectCVBase *)pSceneObj->mpParent->m_pSimObject;
+    if ( m_pSimObject )
     {
-      v6 = v4->m_Flags;
-      if ( (v6 >> 14) & 1 )
+      m_Flags = m_pSimObject->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 )
       {
-        v7 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v4);
+        ComponentOfTypeHK = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(m_pSimObject);
       }
-      else if ( (v6 & 0x8000u) == 0 )
+      else if ( (m_Flags & 0x2000) != 0 )
       {
-        if ( (v6 >> 13) & 1 )
-        {
-          v7 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v4);
-        }
-        else if ( (v6 >> 12) & 1 )
-        {
-          v7 = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                     (UFG::SimObjectGame *)&v4->vfptr,
-                                                     UFG::CharacterAnimationComponent::_TypeUID);
-        }
-        else
-        {
-          v7 = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
-                                                     (UFG::SimObject *)&v4->vfptr,
-                                                     UFG::CharacterAnimationComponent::_TypeUID);
-        }
+        ComponentOfTypeHK = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)m_pSimObject);
+      }
+      else if ( (m_Flags & 0x1000) != 0 )
+      {
+        ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                  m_pSimObject,
+                                                                  UFG::CharacterAnimationComponent::_TypeUID);
       }
       else
       {
-        v7 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v4);
+        ComponentOfTypeHK = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                                  m_pSimObject,
+                                                                  UFG::CharacterAnimationComponent::_TypeUID);
       }
-      v5 = v7;
+      v5 = ComponentOfTypeHK;
     }
     else
     {
       v5 = 0i64;
     }
-    v8 = &v3->mpParentCharacterAnimationComponent;
-    if ( v3->mpParentCharacterAnimationComponent.m_pPointer )
+    p_mpParentCharacterAnimationComponent = &this->mpParentCharacterAnimationComponent;
+    if ( this->mpParentCharacterAnimationComponent.m_pPointer )
     {
-      v9 = v8->mPrev;
-      v10 = v3->mpParentCharacterAnimationComponent.mNext;
-      v9->mNext = v10;
-      v10->mPrev = v9;
-      v8->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v8->mPrev;
-      v3->mpParentCharacterAnimationComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v3->mpParentCharacterAnimationComponent.mPrev;
+      mPrev = p_mpParentCharacterAnimationComponent->mPrev;
+      mNext = this->mpParentCharacterAnimationComponent.mNext;
+      mPrev->mNext = mNext;
+      mNext->mPrev = mPrev;
+      p_mpParentCharacterAnimationComponent->mPrev = p_mpParentCharacterAnimationComponent;
+      this->mpParentCharacterAnimationComponent.mNext = &this->mpParentCharacterAnimationComponent;
     }
-    v3->mpParentCharacterAnimationComponent.m_pPointer = (UFG::SimComponent *)&v5->vfptr;
+    this->mpParentCharacterAnimationComponent.m_pPointer = v5;
     if ( v5 )
     {
       v11 = v5->m_SafePointerList.mNode.mPrev;
-      v11->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v8->mPrev;
-      v8->mPrev = v11;
-      v3->mpParentCharacterAnimationComponent.mNext = &v5->m_SafePointerList.mNode;
-      v5->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v8->mPrev;
+      v11->mNext = p_mpParentCharacterAnimationComponent;
+      p_mpParentCharacterAnimationComponent->mPrev = v11;
+      this->mpParentCharacterAnimationComponent.mNext = &v5->m_SafePointerList.mNode;
+      v5->m_SafePointerList.mNode.mPrev = p_mpParentCharacterAnimationComponent;
     }
-    UFG::InterestPoint::SetBoneIDFromProperties(v3);
+    UFG::InterestPoint::SetBoneIDFromProperties(this);
   }
-  v12 = v3->mPropertiesHandle.mProperties;
-  if ( v12->mPercentChanceIsActive >= 100.0 )
-    v3->mPassedActivationChance = 1;
-  else
-    v3->mPassedActivationChance = UFG::qRandom(100.0, &UFG::qDefaultSeed) < v12->mPercentChanceIsActive;
+  v12 = this->mPropertiesHandle.mProperties;
+  this->mPassedActivationChance = v12->mPercentChanceIsActive >= 100.0
+                               || UFG::qRandom(100.0, (unsigned int *)&UFG::qDefaultSeed) < v12->mPercentChanceIsActive;
 }
 
 // File Line: 4735
 // RVA: 0x583DD0
 void __fastcall UFG::InterestPoint::InitUsePOI(UFG::InterestPoint *this, UFG::qPropertySet *pProps)
 {
-  UFG::InterestPointType *v2; // rax
-  const char *v3; // rsi
-  char v4; // r8
-  UFG::InterestPoint *v5; // rbx
-  bool v6; // cl
-  UFG::qPropertySet *v7; // r9
-  bool v8; // dl
+  UFG::InterestPointType *mInterestPointType; // rax
+  char *v3; // rsi
+  char mHasBeginningScript; // r8
+  char mHasEndingScript; // cl
+  char mHasOnReservationScript; // dl
   UFG::qPropertySet *v9; // rax
-  char *v10; // rdi
+  char *MemImagePtr; // rdi
   __int64 v11; // rax
   const char *v12; // rdx
   __int64 v13; // rax
-  const char *v14; // rcx
+  char *v14; // rcx
   __int64 v15; // rax
   const char *v16; // rdx
   __int64 v17; // rax
-  const char *v18; // rcx
+  char *v18; // rcx
   __int64 v19; // rax
   const char *v20; // rdx
   __int64 v21; // rax
-  unsigned int v22; // [rsp+40h] [rbp+8h]
 
-  v2 = this->mInterestPointType;
+  mInterestPointType = this->mInterestPointType;
   v3 = 0i64;
   this->mUseTime = -1.0;
   *(_QWORD *)&this->mCooldownTime = 0i64;
   this->mIsInterrupted = 0;
-  v4 = v2->mHasBeginningScript;
-  v5 = this;
-  this->mBeginningScriptInfo.mHasScript = v4;
-  v6 = v2->mHasEndingScript;
-  v7 = pProps;
-  v5->mEndingScriptInfo.mHasScript = v6;
-  v8 = v2->mHasOnReservationScript;
-  v5->mOnReservationScriptInfo.mHasScript = v8;
-  if ( v4 || v6 || v8 )
+  mHasBeginningScript = mInterestPointType->mHasBeginningScript;
+  this->mBeginningScriptInfo.mHasScript = mHasBeginningScript;
+  mHasEndingScript = mInterestPointType->mHasEndingScript;
+  this->mEndingScriptInfo.mHasScript = mHasEndingScript;
+  mHasOnReservationScript = mInterestPointType->mHasOnReservationScript;
+  this->mOnReservationScriptInfo.mHasScript = mHasOnReservationScript;
+  if ( mHasBeginningScript || mHasEndingScript || mHasOnReservationScript )
   {
     v9 = UFG::qPropertySet::Get<UFG::qPropertySet>(
-           v7,
-           (UFG::qSymbol *)&schema_interestpoint_script::sPropertyName.mUID,
+           pProps,
+           (UFG::qArray<unsigned long,0> *)&schema_interestpoint_script::sPropertyName,
            DEPTH_RECURSE);
     if ( v9 )
-      v10 = UFG::qPropertySet::GetMemImagePtr(v9);
+      MemImagePtr = UFG::qPropertySet::GetMemImagePtr(v9);
     else
-      v10 = 0i64;
-    if ( v5->mBeginningScriptInfo.mHasScript )
+      MemImagePtr = 0i64;
+    if ( this->mBeginningScriptInfo.mHasScript )
     {
-      v11 = *((_QWORD *)v10 + 3);
+      v11 = *((_QWORD *)MemImagePtr + 3);
       if ( v11 )
-        v12 = &v10[v11 + 24];
+        v12 = &MemImagePtr[v11 + 24];
       else
         v12 = 0i64;
-      v13 = *((_QWORD *)v10 + 1);
+      v13 = *((_QWORD *)MemImagePtr + 1);
       if ( v13 )
-        v14 = &v10[v13 + 8];
+        v14 = &MemImagePtr[v13 + 8];
       else
         v14 = 0i64;
-      v22 = v5->mInterestPointType->mBeginningScriptHash;
-      v5->mBeginningScriptInfo.mpCachedScript = (UFG::ScriptCache::Script *)UFG::ScriptCache::GetScript(
-                                                                              v14,
-                                                                              v12,
-                                                                              0i64,
-                                                                              0i64);
+      this->mBeginningScriptInfo.mpCachedScript = (UFG::ScriptCache::Script *)UFG::ScriptCache::GetScript(
+                                                                                v14,
+                                                                                v12,
+                                                                                0i64,
+                                                                                0i64);
     }
-    if ( v5->mEndingScriptInfo.mHasScript )
+    if ( this->mEndingScriptInfo.mHasScript )
     {
-      v15 = *((_QWORD *)v10 + 4);
+      v15 = *((_QWORD *)MemImagePtr + 4);
       if ( v15 )
-        v16 = &v10[v15 + 32];
+        v16 = &MemImagePtr[v15 + 32];
       else
         v16 = 0i64;
-      v17 = *((_QWORD *)v10 + 2);
+      v17 = *((_QWORD *)MemImagePtr + 2);
       if ( v17 )
-        v18 = &v10[v17 + 16];
+        v18 = &MemImagePtr[v17 + 16];
       else
         v18 = 0i64;
-      v22 = v5->mInterestPointType->mEndingScriptHash;
-      v5->mEndingScriptInfo.mpCachedScript = (UFG::ScriptCache::Script *)UFG::ScriptCache::GetScript(
-                                                                           v18,
-                                                                           v16,
-                                                                           0i64,
-                                                                           0i64);
+      this->mEndingScriptInfo.mpCachedScript = (UFG::ScriptCache::Script *)UFG::ScriptCache::GetScript(
+                                                                             v18,
+                                                                             v16,
+                                                                             0i64,
+                                                                             0i64);
     }
-    if ( v5->mOnReservationScriptInfo.mHasScript )
+    if ( this->mOnReservationScriptInfo.mHasScript )
     {
-      v19 = *((_QWORD *)v10 + 7);
+      v19 = *((_QWORD *)MemImagePtr + 7);
       if ( v19 )
-        v20 = &v10[v19 + 56];
+        v20 = &MemImagePtr[v19 + 56];
       else
         v20 = 0i64;
-      v21 = *((_QWORD *)v10 + 6);
+      v21 = *((_QWORD *)MemImagePtr + 6);
       if ( v21 )
-        v3 = &v10[v21 + 48];
-      v22 = v5->mInterestPointType->mOnReservationScriptHash;
-      v5->mOnReservationScriptInfo.mpCachedScript = (UFG::ScriptCache::Script *)UFG::ScriptCache::GetScript(
-                                                                                  v3,
-                                                                                  v20,
-                                                                                  0i64,
-                                                                                  0i64);
+        v3 = &MemImagePtr[v21 + 48];
+      this->mOnReservationScriptInfo.mpCachedScript = (UFG::ScriptCache::Script *)UFG::ScriptCache::GetScript(
+                                                                                    v3,
+                                                                                    v20,
+                                                                                    0i64,
+                                                                                    0i64);
     }
   }
 }
@@ -5152,39 +4948,35 @@ void __fastcall UFG::InterestPoint::InitUsePOI(UFG::InterestPoint *this, UFG::qP
 // RVA: 0x58AA70
 void __fastcall UFG::InterestPoint::PropertiesSave(UFG::InterestPoint *this, UFG::SceneObjectProperties *pSceneObj)
 {
-  UFG::InterestPoint *v2; // rbx
-  UFG::SceneObjectProperties *v3; // rdi
-  UFG::qPropertySet *v4; // rax
+  UFG::qPropertySet *WritablePersistentProperties; // rax
   UFG::qPropertySet *v5; // rax
 
-  v2 = this;
-  v3 = pSceneObj;
-  v4 = UFG::SceneObjectProperties::GetWritablePersistentProperties(pSceneObj);
-  UFG::qPropertySet::RemovePropertyByName(v4, (UFG::qSymbol *)&qSymbolX_propset_componentPOI.mUID);
-  v5 = UFG::SceneObjectProperties::GetWritablePersistentProperties(v3);
-  UFG::InterestPoint::PropertiesAppendProperty(v5, &v2->mPoiType);
+  WritablePersistentProperties = UFG::SceneObjectProperties::GetWritablePersistentProperties(pSceneObj);
+  UFG::qPropertySet::RemovePropertyByName(
+    WritablePersistentProperties,
+    (UFG::qArray<unsigned long,0> *)&qSymbolX_propset_componentPOI);
+  v5 = UFG::SceneObjectProperties::GetWritablePersistentProperties(pSceneObj);
+  UFG::InterestPoint::PropertiesAppendProperty(v5, (UFG::qSymbolUC *)&this->mPoiType);
 }
 
 // File Line: 4857
 // RVA: 0x58A360
 UFG::InterestPoint *__fastcall UFG::InterestPoint::PropertiesOnActivate(UFG::SceneObjectProperties *pSceneObj)
 {
-  UFG::SceneObjectProperties *v1; // rsi
-  UFG::qMemoryPool *v2; // rax
+  UFG::qMemoryPool *SimulationMemoryPool; // rax
   UFG::allocator::free_link *v3; // rbp
   UFG::qSymbol *v4; // rax
   __int64 v5; // rax
   __int64 v6; // rdi
-  UFG::qSymbol result; // [rsp+68h] [rbp+10h]
+  UFG::qSymbol result; // [rsp+68h] [rbp+10h] BYREF
   UFG::allocator::free_link *v9; // [rsp+70h] [rbp+18h]
 
-  v1 = pSceneObj;
-  v2 = UFG::GetSimulationMemoryPool();
-  v3 = UFG::qMemoryPool::Allocate(v2, 0x220ui64, "InterestPoint", 0i64, 1u);
+  SimulationMemoryPool = UFG::GetSimulationMemoryPool();
+  v3 = UFG::qMemoryPool::Allocate(SimulationMemoryPool, 0x220ui64, "InterestPoint", 0i64, 1u);
   v9 = v3;
   if ( v3 )
   {
-    v4 = UFG::SceneObjectProperties::operator UFG::qSymbol const(v1, &result);
+    v4 = (UFG::qSymbol *)UFG::SceneObjectProperties::operator UFG::qSymbol const(pSceneObj, (UFG::qWiseSymbol *)&result);
     UFG::InterestPoint::InterestPoint((UFG::InterestPoint *)v3, v4);
     v6 = v5;
   }
@@ -5192,29 +4984,30 @@ UFG::InterestPoint *__fastcall UFG::InterestPoint::PropertiesOnActivate(UFG::Sce
   {
     v6 = 0i64;
   }
-  (*(void (__fastcall **)(__int64, UFG::SceneObjectProperties *))(*(_QWORD *)v6 + 96i64))(v6, v1);
+  (*(void (__fastcall **)(__int64, UFG::SceneObjectProperties *))(*(_QWORD *)v6 + 96i64))(v6, pSceneObj);
   return (UFG::InterestPoint *)v6;
 }
 
 // File Line: 4874
 // RVA: 0x588970
-UFG::qPropertySet *__fastcall UFG::InterestPoint::PropertiesAppendProperty(UFG::qPropertySet *pProps, UFG::qSymbol *type)
+UFG::qPropertySet *__fastcall UFG::InterestPoint::PropertiesAppendProperty(
+        UFG::qPropertySet *pProps,
+        UFG::qSymbolUC *type)
 {
-  UFG::qSymbol *v2; // rbx
-  UFG::qPropertySet *v3; // rsi
-  UFG::qPropertySet *v4; // rdi
+  UFG::qPropertySet *ContainedSet; // rdi
   UFG::qSymbol *v5; // rax
-  UFG::qPropertySet *v6; // rax
-  UFG::qSymbol result; // [rsp+40h] [rbp+18h]
+  UFG::qPropertySet *PropertySet; // rax
+  UFG::qSymbol result; // [rsp+40h] [rbp+18h] BYREF
 
-  v2 = type;
-  v3 = pProps;
-  v4 = UFG::qPropertySet::CreateContainedSet((UFG::qSymbol *)&qSymbolX_propset_componentPOI.mUID, "InterestPointProps");
-  v5 = UFG::InterestPoint::ConvertTypeToPropertiesName(&result, v2);
-  v6 = UFG::PropertySetManager::GetPropertySet(v5);
-  UFG::PSWrapper::AppendParentLocal(v4, v6);
-  UFG::qPropertySet::Set<UFG::qPropertySet>(v3, (UFG::qSymbol *)&qSymbolX_propset_componentPOI.mUID, v4);
-  return v4;
+  ContainedSet = UFG::qPropertySet::CreateContainedSet(&qSymbolX_propset_componentPOI, "InterestPointProps");
+  v5 = UFG::InterestPoint::ConvertTypeToPropertiesName(&result, type);
+  PropertySet = UFG::PropertySetManager::GetPropertySet(v5);
+  UFG::PSWrapper::AppendParentLocal(ContainedSet, PropertySet);
+  UFG::qPropertySet::Set<UFG::qPropertySet>(
+    pProps,
+    (UFG::qArray<unsigned long,0> *)&qSymbolX_propset_componentPOI,
+    ContainedSet);
+  return ContainedSet;
 }
 
 // File Line: 4935
@@ -5228,18 +5021,18 @@ _BOOL8 __fastcall UFG::InterestPoint::IsTraversalsEnabled()
 // RVA: 0x5826E0
 UFG::qBaseNodeRB **__fastcall UFG::InterestPoint::GetNamed(UFG::qSymbol *name)
 {
-  unsigned int v1; // ebx
+  unsigned int mUID; // ebx
   UFG::qBaseTreeRB *v2; // rax
   UFG::qBaseNodeRB **result; // rax
   UFG::qBaseTreeRB *v4; // rax
 
-  v1 = name->mUID;
+  mUID = name->mUID;
   if ( !name->mUID )
     return 0i64;
-  v2 = UFG::qBaseTreeRB::Get(&UFG::InterestPoint::msUseInterestPoints.mTree, v1);
+  v2 = UFG::qBaseTreeRB::Get(&UFG::InterestPoint::msUseInterestPoints.mTree, mUID);
   if ( !v2 || (result = v2[-2].mRoot.mChild) == 0i64 )
   {
-    v4 = UFG::qBaseTreeRB::Get(&UFG::InterestPoint::msLookInterestPoints.mTree, v1);
+    v4 = UFG::qBaseTreeRB::Get(&UFG::InterestPoint::msLookInterestPoints.mTree, mUID);
     if ( v4 )
       return v4[-2].mRoot.mChild;
     return 0i64;
@@ -5252,32 +5045,32 @@ UFG::qBaseNodeRB **__fastcall UFG::InterestPoint::GetNamed(UFG::qSymbol *name)
 __int64 __fastcall UFG::InterestPoint::AISectionLoadedCallback()
 {
   unsigned int v0; // esi
-  UFG::InterestPoint *v1; // rbx
+  UFG::InterestPoint *p_mNext; // rbx
   UFG::qList<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList,1,0> *v2; // rdi
   UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *v3; // rbx
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *v4; // rdx
-  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *v5; // rcx
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *mPrev; // rdx
+  UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *mNext; // rcx
 
   v0 = 0;
-  v1 = (UFG::InterestPoint *)&UFG::InterestPoint::msCellNotLoadedCanPathList.mNode.mNext[-11].mNext;
+  p_mNext = (UFG::InterestPoint *)&UFG::InterestPoint::msCellNotLoadedCanPathList.mNode.mNext[-11].mNext;
   if ( &UFG::InterestPoint::msCellNotLoadedCanPathList.mNode.mNext[-11].mNext != (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> **)((char *)&UFG::InterestPoint::msCellNotLoadedCanPathList - 168) )
   {
     do
     {
-      v2 = (UFG::qList<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList,1,0> *)&v1->mNext[-11].mNext;
-      UFG::InterestPoint::UpdateCanPathToCached(v1);
+      v2 = (UFG::qList<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList,1,0> *)&p_mNext->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>::mNext[-11].mNext;
+      UFG::InterestPoint::UpdateCanPathToCached(p_mNext);
       ++v0;
-      if ( v1->mCanPathToCached.mValue != 2 )
+      if ( p_mNext->mCanPathToCached.mValue != 2 )
       {
-        v3 = (UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList> *)&v1->mPrev;
-        v4 = v3->mPrev;
-        v5 = v3->mNext;
-        v4->mNext = v5;
-        v5->mPrev = v4;
+        v3 = &p_mNext->UFG::qNode<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList>;
+        mPrev = v3->mPrev;
+        mNext = v3->mNext;
+        mPrev->mNext = mNext;
+        mNext->mPrev = mPrev;
         v3->mPrev = v3;
         v3->mNext = v3;
       }
-      v1 = (UFG::InterestPoint *)v2;
+      p_mNext = (UFG::InterestPoint *)v2;
     }
     while ( v2 != (UFG::qList<UFG::InterestPoint,UFG::InterestPoint_CellNotLoadedCanPathList,1,0> *)((char *)&UFG::InterestPoint::msCellNotLoadedCanPathList - 168) );
   }
@@ -5288,64 +5081,65 @@ __int64 __fastcall UFG::InterestPoint::AISectionLoadedCallback()
 // RVA: 0x582760
 UFG::qBaseNodeRB *__fastcall UFG::InterestPoint::GetParent(UFG::InterestPoint *this)
 {
-  UFG::SimObject *v1; // rax
+  UFG::SimObject *m_pSimObject; // rax
   UFG::qBaseNodeRB *result; // rax
 
-  v1 = this->m_pSimObject;
-  if ( v1 )
-    v1 = (UFG::SimObject *)v1->m_pSceneObj;
-  result = (UFG::qBaseNodeRB *)v1->m_UnboundComponentHandles.mNode.mPrev;
+  m_pSimObject = this->m_pSimObject;
+  if ( m_pSimObject )
+    m_pSimObject = (UFG::SimObject *)m_pSimObject->m_pSceneObj;
+  result = (UFG::qBaseNodeRB *)m_pSimObject->m_UnboundComponentHandles.mNode.mPrev;
   if ( result )
-    result = result[1].mChild[0];
+    return result[1].mChild[0];
   return result;
 }
 
 // File Line: 5157
 // RVA: 0x582780
-UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *__fastcall UFG::InterestPoint::GetParentObject(UFG::InterestPoint *this)
+UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *__fastcall UFG::InterestPoint::GetParentObject(
+        UFG::InterestPoint *this)
 {
-  UFG::SimObject *v1; // rdi
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v2; // rdi
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v3; // rbx
-  unsigned __int16 v4; // cx
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v5; // rax
+  UFG::SimObject *m_pSimObject; // rdi
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mPrev; // rdi
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *mNext; // rbx
+  __int16 v4; // cx
+  UFG::SimComponent *v5; // rax
 
-  v1 = this->m_pSimObject;
-  if ( v1 )
-    v1 = (UFG::SimObject *)v1->m_pSceneObj;
-  v2 = v1->m_UnboundComponentHandles.mNode.mPrev;
-  if ( !v2 )
+  m_pSimObject = this->m_pSimObject;
+  if ( m_pSimObject )
+    m_pSimObject = (UFG::SimObject *)m_pSimObject->m_pSceneObj;
+  mPrev = m_pSimObject->m_UnboundComponentHandles.mNode.mPrev;
+  if ( !mPrev )
     return 0i64;
   while ( 1 )
   {
-    v3 = v2[2].mNext;
-    if ( !v3 )
+    mNext = mPrev[2].mNext;
+    if ( !mNext )
       break;
-    v4 = WORD2(v3[4].mNext);
-    if ( (v4 >> 14) & 1 )
+    v4 = WORD2(mNext[4].mNext);
+    if ( (v4 & 0x4000) != 0 )
     {
-      v5 = v3[6].mNext[25].mPrev;
+      v5 = (UFG::SimComponent *)mNext[6].mNext[25].mPrev;
     }
-    else if ( (v4 & 0x8000u) == 0 )
+    else if ( v4 >= 0 )
     {
-      if ( (v4 >> 13) & 1 )
-        v5 = v3[6].mNext[10].mPrev;
+      if ( (v4 & 0x2000) != 0 )
+        v5 = (UFG::SimComponent *)mNext[6].mNext[10].mPrev;
       else
-        v5 = (v4 >> 12) & 1 ? v3[6].mNext[3].mPrev : UFG::SimObject::GetComponentOfType(
-                                                       (UFG::SimObject *)v2[2].mNext,
-                                                       UFG::InterestPoint::_TypeUID);
+        v5 = (v4 & 0x1000) != 0
+           ? (UFG::SimComponent *)mNext[6].mNext[3].mPrev
+           : UFG::SimObject::GetComponentOfType((UFG::SimObject *)mPrev[2].mNext, UFG::InterestPoint::_TypeUID);
     }
     else
     {
-      v5 = v3[6].mNext[25].mPrev;
+      v5 = (UFG::SimComponent *)mNext[6].mNext[25].mPrev;
     }
     if ( !v5 )
       break;
-    v2 = v2[7].mPrev;
-    if ( !v2 )
+    mPrev = mPrev[7].mPrev;
+    if ( !mPrev )
       return 0i64;
   }
-  return v3;
+  return mNext;
 }
 
 // File Line: 5178
@@ -5353,53 +5147,49 @@ UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> 
 UFG::SimObject *__fastcall UFG::InterestPoint::GetChild(UFG::InterestPoint *this, unsigned int index)
 {
   int v2; // edi
-  unsigned int v3; // er14
-  UFG::InterestPoint *v4; // rbp
   unsigned int v5; // esi
-  UFG::SceneObjectProperties *v6; // rax
-  UFG::SimObject *v7; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *SceneObj; // rax
+  UFG::SimObject *ChildAsSimObject; // rax
   UFG::SimObject *v8; // rbx
-  unsigned __int16 v9; // dx
-  UFG::SimComponent *v10; // rax
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rax
 
   v2 = 0;
-  v3 = index;
-  v4 = this;
   v5 = 0;
-  if ( UFG::SimComponent::GetSceneObj((UFG::SimComponent *)&this->vfptr)->mChildren.mCount <= 0 )
+  if ( !LODWORD(UFG::SimComponent::GetSceneObj(this)[7].mNext) )
     return 0i64;
   while ( 1 )
   {
-    v6 = UFG::SimComponent::GetSceneObj((UFG::SimComponent *)&v4->vfptr);
-    v7 = UFG::SceneObjectProperties::GetChildAsSimObject(v6, v5);
-    v8 = v7;
-    if ( !v7 )
+    SceneObj = UFG::SimComponent::GetSceneObj(this);
+    ChildAsSimObject = UFG::SceneObjectProperties::GetChildAsSimObject((UFG::SceneObjectProperties *)SceneObj, v5);
+    v8 = ChildAsSimObject;
+    if ( !ChildAsSimObject )
       goto LABEL_15;
-    v9 = v7->m_Flags;
-    if ( (v9 >> 14) & 1 )
+    m_Flags = ChildAsSimObject->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v10 = v7->m_Components.p[25].m_pComponent;
+      m_pComponent = ChildAsSimObject->m_Components.p[25].m_pComponent;
     }
-    else if ( (v9 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v9 >> 13) & 1 )
-        v10 = v7->m_Components.p[10].m_pComponent;
+      if ( (m_Flags & 0x2000) != 0 )
+        m_pComponent = ChildAsSimObject->m_Components.p[10].m_pComponent;
       else
-        v10 = (v9 >> 12) & 1 ? v7->m_Components.p[3].m_pComponent : UFG::SimObject::GetComponentOfType(
-                                                                      v7,
-                                                                      UFG::InterestPoint::_TypeUID);
+        m_pComponent = (m_Flags & 0x1000) != 0
+                     ? ChildAsSimObject->m_Components.p[3].m_pComponent
+                     : UFG::SimObject::GetComponentOfType(ChildAsSimObject, UFG::InterestPoint::_TypeUID);
     }
     else
     {
-      v10 = v7->m_Components.p[25].m_pComponent;
+      m_pComponent = ChildAsSimObject->m_Components.p[25].m_pComponent;
     }
-    if ( !v10 )
+    if ( !m_pComponent )
       goto LABEL_15;
-    if ( v2 == v3 )
+    if ( v2 == index )
       return v8;
     ++v2;
 LABEL_15:
-    if ( ++v5 >= UFG::SimComponent::GetSceneObj((UFG::SimComponent *)&v4->vfptr)->mChildren.mCount )
+    if ( ++v5 >= LODWORD(UFG::SimComponent::GetSceneObj(this)[7].mNext) )
       return 0i64;
   }
 }
@@ -5409,96 +5199,88 @@ LABEL_15:
 UFG::SimObject *__fastcall UFG::InterestPoint::GetChild(UFG::InterestPoint *this, UFG::qSymbol *childName)
 {
   int v2; // ebx
-  UFG::qSymbol *v3; // r14
-  UFG::InterestPoint *v4; // rsi
   unsigned int v5; // edi
-  UFG::SceneObjectProperties *v6; // rax
-  UFG::SimObject *v7; // rbp
-  UFG::SceneObjectProperties *v8; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *SceneObj; // rax
+  UFG::SimObject *ChildAsSimObject; // rbp
+  UFG::SceneObjectProperties *m_pSceneObj; // rcx
   bool v9; // al
-  UFG::qSymbol result; // [rsp+60h] [rbp+18h]
+  UFG::qSymbol result; // [rsp+60h] [rbp+18h] BYREF
 
   v2 = 0;
-  v3 = childName;
-  v4 = this;
   v5 = 0;
-  if ( UFG::SimComponent::GetSceneObj((UFG::SimComponent *)&this->vfptr)->mChildren.mCount <= 0 )
+  if ( !LODWORD(UFG::SimComponent::GetSceneObj(this)[7].mNext) )
     return 0i64;
   while ( 1 )
   {
-    v6 = UFG::SimComponent::GetSceneObj((UFG::SimComponent *)&v4->vfptr);
-    v7 = UFG::SceneObjectProperties::GetChildAsSimObject(v6, v5);
-    v8 = v7->m_pSceneObj;
+    SceneObj = UFG::SimComponent::GetSceneObj(this);
+    ChildAsSimObject = UFG::SceneObjectProperties::GetChildAsSimObject((UFG::SceneObjectProperties *)SceneObj, v5);
+    m_pSceneObj = ChildAsSimObject->m_pSceneObj;
     v9 = 0;
-    if ( v8 )
+    if ( m_pSceneObj )
     {
       v2 |= 1u;
-      if ( UFG::SceneObjectProperties::operator UFG::qSymbol const(v8, &result)->mUID == v3->mUID )
+      if ( UFG::SceneObjectProperties::operator UFG::qSymbol const(m_pSceneObj, (UFG::qWiseSymbol *)&result)->mUID == childName->mUID )
         v9 = 1;
     }
-    if ( v2 & 1 )
-      v2 &= 0xFFFFFFFE;
+    if ( (v2 & 1) != 0 )
+      v2 &= ~1u;
     if ( v9 )
       break;
-    if ( ++v5 >= UFG::SimComponent::GetSceneObj((UFG::SimComponent *)&v4->vfptr)->mChildren.mCount )
+    if ( ++v5 >= LODWORD(UFG::SimComponent::GetSceneObj(this)[7].mNext) )
       return 0i64;
   }
-  return v7;
+  return ChildAsSimObject;
 }
 
 // File Line: 5214
 // RVA: 0x58B670
 void __fastcall UFG::InterestPoint::SetActive(UFG::InterestPoint *this, bool val, bool applyToChildren)
 {
-  bool v3; // bp
-  bool v4; // si
-  UFG::InterestPoint *v5; // rdi
   unsigned int i; // ebx
-  UFG::SceneObjectProperties *v7; // rax
-  UFG::SimObject *v8; // rax
-  unsigned __int16 v9; // dx
-  UFG::InterestPoint *v10; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *SceneObj; // rax
+  UFG::SimObject *ChildAsSimObject; // rax
+  __int16 m_Flags; // dx
+  UFG::InterestPoint *m_pComponent; // rax
 
-  v3 = applyToChildren;
-  v4 = val;
-  v5 = this;
   this->mActive = val;
   if ( !val )
     UFG::InterestPoint::EndReservation(this);
-  if ( v3 )
+  if ( applyToChildren )
   {
-    for ( i = 0; i < UFG::SimComponent::GetSceneObj((UFG::SimComponent *)&v5->vfptr)->mChildren.mCount; ++i )
+    for ( i = 0; i < LODWORD(UFG::SimComponent::GetSceneObj(this)[7].mNext); ++i )
     {
-      v7 = UFG::SimComponent::GetSceneObj((UFG::SimComponent *)&v5->vfptr);
-      v8 = UFG::SceneObjectProperties::GetChildAsSimObject(v7, i);
-      if ( v8 )
+      SceneObj = UFG::SimComponent::GetSceneObj(this);
+      ChildAsSimObject = UFG::SceneObjectProperties::GetChildAsSimObject((UFG::SceneObjectProperties *)SceneObj, i);
+      if ( ChildAsSimObject )
       {
-        v9 = v8->m_Flags;
-        if ( (v9 >> 14) & 1 )
+        m_Flags = ChildAsSimObject->m_Flags;
+        if ( (m_Flags & 0x4000) != 0 )
         {
-          v10 = (UFG::InterestPoint *)v8->m_Components.p[25].m_pComponent;
+          m_pComponent = (UFG::InterestPoint *)ChildAsSimObject->m_Components.p[25].m_pComponent;
         }
-        else if ( (v9 & 0x8000u) == 0 )
+        else if ( m_Flags >= 0 )
         {
-          if ( (v9 >> 13) & 1 )
+          if ( (m_Flags & 0x2000) != 0 )
           {
-            v10 = (UFG::InterestPoint *)v8->m_Components.p[10].m_pComponent;
+            m_pComponent = (UFG::InterestPoint *)ChildAsSimObject->m_Components.p[10].m_pComponent;
           }
-          else if ( (v9 >> 12) & 1 )
+          else if ( (m_Flags & 0x1000) != 0 )
           {
-            v10 = (UFG::InterestPoint *)v8->m_Components.p[3].m_pComponent;
+            m_pComponent = (UFG::InterestPoint *)ChildAsSimObject->m_Components.p[3].m_pComponent;
           }
           else
           {
-            v10 = (UFG::InterestPoint *)UFG::SimObject::GetComponentOfType(v8, UFG::InterestPoint::_TypeUID);
+            m_pComponent = (UFG::InterestPoint *)UFG::SimObject::GetComponentOfType(
+                                                   ChildAsSimObject,
+                                                   UFG::InterestPoint::_TypeUID);
           }
         }
         else
         {
-          v10 = (UFG::InterestPoint *)v8->m_Components.p[25].m_pComponent;
+          m_pComponent = (UFG::InterestPoint *)ChildAsSimObject->m_Components.p[25].m_pComponent;
         }
-        if ( v10 )
-          UFG::InterestPoint::SetActive(v10, v4, v3);
+        if ( m_pComponent )
+          UFG::InterestPoint::SetActive(m_pComponent, val, applyToChildren);
       }
     }
   }

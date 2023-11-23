@@ -23,9 +23,7 @@ void __fastcall UFG::WayFinderClient::~WayFinderClient(UFG::WayFinderClient *thi
 // RVA: 0xC49A0
 UFG::qVector3 *__fastcall UFG::WayFinderClient::GetPosition(UFG::WayFinderClient *this, UFG::qVector3 *result)
 {
-  result->x = this->m_CurrPos.x;
-  result->y = this->m_CurrPos.y;
-  result->z = this->m_CurrPos.z;
+  *result = this->m_CurrPos;
   return result;
 }
 
@@ -33,9 +31,7 @@ UFG::qVector3 *__fastcall UFG::WayFinderClient::GetPosition(UFG::WayFinderClient
 // RVA: 0xC0F20
 UFG::qVector3 *__fastcall UFG::WayFinderClient::GetDirection(UFG::WayFinderClient *this, UFG::qVector3 *result)
 {
-  result->x = this->m_CurrDir.x;
-  result->y = this->m_CurrDir.y;
-  result->z = this->m_CurrDir.z;
+  *result = this->m_CurrDir;
   return result;
 }
 
@@ -43,63 +39,63 @@ UFG::qVector3 *__fastcall UFG::WayFinderClient::GetDirection(UFG::WayFinderClien
 // RVA: 0xE2610
 char *__fastcall UFG::WayStarNode::operator new(unsigned __int64 size)
 {
-  char *v1; // rbx
+  char *mFreeListHead; // rbx
 
-  v1 = UFG::WayFinder::s_NodePool.mFreeListHead;
+  mFreeListHead = UFG::WayFinder::s_NodePool.mFreeListHead;
   if ( UFG::WayFinder::s_NodePool.mFreeListHead )
   {
     UFG::WayFinder::s_NodePool.mFreeListHead = *(char **)UFG::WayFinder::s_NodePool.mFreeListHead;
     if ( UFG::WayFinder::s_NodePool.mMostSlotsAllocated <= ++UFG::WayFinder::s_NodePool.mNumSlotsAllocated )
     {
       UFG::WayFinder::s_NodePool.mMostSlotsAllocated = UFG::WayFinder::s_NodePool.mNumSlotsAllocated;
-      return v1;
+      return mFreeListHead;
     }
   }
   else
   {
     UFG::qFixedAllocator::ReportFull(&UFG::WayFinder::s_NodePool);
   }
-  return v1;
+  return mFreeListHead;
 }
 
 // File Line: 191
 // RVA: 0xE26D0
-void __fastcall UFG::WayStarNode::operator delete(void *ptr)
+void __fastcall UFG::WayStarNode::operator delete(char *ptr)
 {
   *(_QWORD *)ptr = UFG::WayFinder::s_NodePool.mFreeListHead;
   --UFG::WayFinder::s_NodePool.mNumSlotsAllocated;
-  UFG::WayFinder::s_NodePool.mFreeListHead = (char *)ptr;
+  UFG::WayFinder::s_NodePool.mFreeListHead = ptr;
 }
 
 // File Line: 228
 // RVA: 0xE2670
 char *__fastcall UFG::WayStarSearch::operator new(unsigned __int64 size)
 {
-  char *v1; // rbx
+  char *mFreeListHead; // rbx
 
-  v1 = UFG::WayFinder::s_SearchPool.mFreeListHead;
+  mFreeListHead = UFG::WayFinder::s_SearchPool.mFreeListHead;
   if ( UFG::WayFinder::s_SearchPool.mFreeListHead )
   {
     UFG::WayFinder::s_SearchPool.mFreeListHead = *(char **)UFG::WayFinder::s_SearchPool.mFreeListHead;
     if ( UFG::WayFinder::s_SearchPool.mMostSlotsAllocated <= ++UFG::WayFinder::s_SearchPool.mNumSlotsAllocated )
     {
       UFG::WayFinder::s_SearchPool.mMostSlotsAllocated = UFG::WayFinder::s_SearchPool.mNumSlotsAllocated;
-      return v1;
+      return mFreeListHead;
     }
   }
   else
   {
     UFG::qFixedAllocator::ReportFull(&UFG::WayFinder::s_SearchPool);
   }
-  return v1;
+  return mFreeListHead;
 }
 
 // File Line: 229
 // RVA: 0xE26F0
-void __fastcall UFG::WayStarSearch::operator delete(void *ptr)
+void __fastcall UFG::WayStarSearch::operator delete(char *ptr)
 {
   *(_QWORD *)ptr = UFG::WayFinder::s_SearchPool.mFreeListHead;
   --UFG::WayFinder::s_SearchPool.mNumSlotsAllocated;
-  UFG::WayFinder::s_SearchPool.mFreeListHead = (char *)ptr;
+  UFG::WayFinder::s_SearchPool.mFreeListHead = ptr;
 }
 

@@ -16,7 +16,7 @@ void dynamic_initializer_for__hkpCollidableBoundingVolumeDataClass__()
     0i64,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 81
@@ -28,17 +28,17 @@ hkClass *__fastcall hkpCollidable::BoundingVolumeData::staticClass()
 
 // File Line: 88
 // RVA: 0xCEAE30
-void __fastcall finishLoadedObjecthkpCollidableBoundingVolumeData(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpCollidableBoundingVolumeData(_DWORD *p, int finishing)
 {
   if ( p )
   {
     if ( finishing )
     {
-      *((_DWORD *)p + 8) = 0;
+      p[8] = 0;
       *((_QWORD *)p + 5) = 0i64;
       *((_QWORD *)p + 6) = 0i64;
-      *(_DWORD *)p = 1;
-      *((_DWORD *)p + 4) = 0;
+      *p = 1;
+      p[4] = 0;
     }
   }
 }
@@ -80,17 +80,17 @@ hkClass *__fastcall hkpCollidable::staticClass()
 
 // File Line: 147
 // RVA: 0xCEAE70
-void __fastcall finishLoadedObjecthkpCollidable(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpCollidable(_DWORD *p, int finishing)
 {
   if ( p )
   {
     if ( finishing )
     {
-      *((_DWORD *)p + 20) = 0;
+      p[20] = 0;
       *((_QWORD *)p + 11) = 0i64;
       *((_QWORD *)p + 12) = 0i64;
-      *((_DWORD *)p + 16) = 0;
-      *((_DWORD *)p + 12) = 1;
+      p[16] = 0;
+      p[12] = 1;
       *((_BYTE *)p + 41) = -36;
     }
   }

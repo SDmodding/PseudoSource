@@ -2,58 +2,61 @@
 // RVA: 0x64F370
 float __fastcall UFG::RacePoint::GetSegmentDistance(UFG::RacePoint *this, UFG::qVector3 *position)
 {
-  __m128 v2; // xmm4
-  float v3; // xmm11_4
-  float v4; // xmm12_4
-  float v5; // xmm3_4
+  __m128 y_low; // xmm4
+  float y; // xmm11_4
+  float z; // xmm12_4
+  float fLength; // xmm3_4
   float v6; // xmm6_4
   float v7; // xmm5_4
   float result; // xmm0_4
 
-  v2 = (__m128)LODWORD(position->y);
-  v3 = this->vPosition.y;
-  v4 = this->vPosition.z;
-  v5 = (float)((float)(this->vDirection.x * (float)(position->x - this->vPosition.x))
-             + (float)(this->vDirection.y * (float)(position->y - v3)))
-     + (float)(this->vDirection.z * (float)(position->z - v4));
-  if ( v5 <= 0.0 )
-    v5 = 0.0;
-  if ( v5 >= this->fLength )
-    v5 = this->fLength;
-  v2.m128_f32[0] = v2.m128_f32[0] - (float)(v3 + (float)(this->vDirection.y * v5));
-  v6 = position->z - (float)(v4 + (float)(this->vDirection.z * v5));
-  v7 = position->x - (float)(this->vPosition.x + (float)(this->vDirection.x * v5));
-  v2.m128_f32[0] = (float)((float)(v2.m128_f32[0] * v2.m128_f32[0]) + (float)(v7 * v7)) + (float)(v6 * v6);
-  LODWORD(result) = (unsigned __int128)_mm_sqrt_ps(v2);
+  y_low = (__m128)LODWORD(position->y);
+  y = this->vPosition.y;
+  z = this->vPosition.z;
+  fLength = (float)((float)(this->vDirection.x * (float)(position->x - this->vPosition.x))
+                  + (float)(this->vDirection.y * (float)(position->y - y)))
+          + (float)(this->vDirection.z * (float)(position->z - z));
+  if ( fLength <= 0.0 )
+    fLength = 0.0;
+  if ( fLength >= this->fLength )
+    fLength = this->fLength;
+  y_low.m128_f32[0] = y_low.m128_f32[0] - (float)(y + (float)(this->vDirection.y * fLength));
+  v6 = position->z - (float)(z + (float)(this->vDirection.z * fLength));
+  v7 = position->x - (float)(this->vPosition.x + (float)(this->vDirection.x * fLength));
+  y_low.m128_f32[0] = (float)((float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(v7 * v7)) + (float)(v6 * v6);
+  LODWORD(result) = _mm_sqrt_ps(y_low).m128_u32[0];
   return result;
 }
 
 // File Line: 69
 // RVA: 0x64F490
-UFG::qVector3 *__fastcall UFG::RacePoint::GetSegmentPosition(UFG::RacePoint *this, UFG::qVector3 *result, UFG::qVector3 *position)
+UFG::qVector3 *__fastcall UFG::RacePoint::GetSegmentPosition(
+        UFG::RacePoint *this,
+        UFG::qVector3 *result,
+        UFG::qVector3 *position)
 {
-  float v3; // xmm8_4
+  float y; // xmm8_4
   float v4; // xmm5_4
-  float v5; // xmm9_4
-  float v6; // xmm3_4
+  float z; // xmm9_4
+  float fLength; // xmm3_4
   UFG::qVector3 *v7; // rax
   float v8; // xmm9_4
 
-  v3 = this->vPosition.y;
+  y = this->vPosition.y;
   v4 = this->vDirection.y;
-  v5 = this->vPosition.z;
-  v6 = (float)((float)(this->vDirection.x * (float)(position->x - this->vPosition.x))
-             + (float)(this->vDirection.y * (float)(position->y - v3)))
-     + (float)(this->vDirection.z * (float)(position->z - v5));
-  if ( v6 <= 0.0 )
-    v6 = 0.0;
-  if ( v6 >= this->fLength )
-    v6 = this->fLength;
+  z = this->vPosition.z;
+  fLength = (float)((float)(this->vDirection.x * (float)(position->x - this->vPosition.x))
+                  + (float)(v4 * (float)(position->y - y)))
+          + (float)(this->vDirection.z * (float)(position->z - z));
+  if ( fLength <= 0.0 )
+    fLength = 0.0;
+  if ( fLength >= this->fLength )
+    fLength = this->fLength;
   v7 = result;
-  v8 = v5 + (float)(this->vDirection.z * v6);
-  result->x = this->vPosition.x + (float)(this->vDirection.x * v6);
+  v8 = z + (float)(this->vDirection.z * fLength);
+  result->x = this->vPosition.x + (float)(this->vDirection.x * fLength);
   result->z = v8;
-  result->y = v3 + (float)(v4 * v6);
+  result->y = y + (float)(v4 * fLength);
   return v7;
 }
 
@@ -62,15 +65,19 @@ UFG::qVector3 *__fastcall UFG::RacePoint::GetSegmentPosition(UFG::RacePoint *thi
 UFG::qVector3 *__fastcall UFG::RacePoint::GetNextPosition(UFG::RacePoint *this, UFG::qVector3 *result)
 {
   UFG::qVector3 *v2; // rax
-  float v3; // xmm0_4
-  float v4; // xmm1_4
+  float fLength; // xmm0_4
+  float v4; // xmm2_4
+  float v5; // xmm0_4
+  float v6; // xmm1_4
 
   v2 = result;
-  v3 = (float)(this->fLength * this->vDirection.x) + this->vPosition.x;
-  v4 = (float)(this->fLength * this->vDirection.y) + this->vPosition.y;
-  result->z = (float)(this->fLength * this->vDirection.z) + this->vPosition.z;
-  result->x = v3;
-  result->y = v4;
+  fLength = this->fLength;
+  v4 = (float)(fLength * this->vDirection.z) + this->vPosition.z;
+  v5 = (float)(fLength * this->vDirection.x) + this->vPosition.x;
+  v6 = (float)(this->fLength * this->vDirection.y) + this->vPosition.y;
+  result->z = v4;
+  result->x = v5;
+  result->y = v6;
   return v2;
 }
 
@@ -78,26 +85,22 @@ UFG::qVector3 *__fastcall UFG::RacePoint::GetNextPosition(UFG::RacePoint *this, 
 // RVA: 0x642DE0
 void __fastcall UFG::RaceTrail::RaceTrail(UFG::RaceTrail *this, int num_points, int raceIndex)
 {
-  int v3; // ebx
   unsigned __int64 v4; // rdi
-  UFG::RaceTrail *v5; // rsi
-  signed __int64 v6; // rbp
-  signed __int64 v7; // rax
-  unsigned __int8 v8; // cf
+  UFG::RacePoint *v6; // rbp
+  __int64 v7; // rax
+  bool v8; // cf
   unsigned __int64 v9; // rax
   UFG::allocator::free_link *v10; // rax
 
-  v3 = raceIndex;
   v4 = num_points;
-  v5 = this;
-  UFG::qSafePointerNode<UFG::RaceTrail>::qSafePointerNode<UFG::RaceTrail>((UFG::qSafePointerNode<UFG::RaceTrail> *)&this->vfptr);
-  v5->vfptr = (UFG::qSafePointerNode<UFG::RaceTrail>Vtbl *)&UFG::RaceTrail::`vftable;
-  *(_QWORD *)&v5->nLaps = 1i64;
+  UFG::qSafePointerNode<UFG::RaceTrail>::qSafePointerNode<UFG::RaceTrail>(this);
+  this->vfptr = (UFG::qSafePointerNode<UFG::RaceTrail>Vtbl *)&UFG::RaceTrail::`vftable;
+  *(_QWORD *)&this->nLaps = 1i64;
   v6 = 0i64;
-  v5->fLength = 0.0;
-  v5->bIsLoop = 0;
-  v5->mRaceIndex = v3;
-  v5->nRacePoints = v4;
+  this->fLength = 0.0;
+  this->bIsLoop = 0;
+  this->mRaceIndex = raceIndex;
+  this->nRacePoints = v4;
   v7 = 0x38 * v4;
   if ( !is_mul_ok(v4, 0x38ui64) )
     v7 = -1i64;
@@ -109,66 +112,66 @@ void __fastcall UFG::RaceTrail::RaceTrail(UFG::RaceTrail *this, int num_points, 
   if ( v10 )
   {
     LODWORD(v10->mNext) = v4;
-    v6 = (signed __int64)&v10->mNext + 4;
+    v6 = (UFG::RacePoint *)((char *)&v10->mNext + 4);
     `eh vector constructor iterator(
       (char *)&v10->mNext + 4,
       0x38ui64,
       v4,
       (void (__fastcall *)(void *))Assembly::GetRCX);
   }
-  v5->pRacePoints = (UFG::RacePoint *)v6;
+  this->pRacePoints = v6;
 }
 
 // File Line: 95
 // RVA: 0x643DB0
 void __fastcall UFG::RaceTrail::~RaceTrail(UFG::RaceTrail *this)
 {
-  UFG::qSafePointerNode<UFG::ParkourHandle> *v1; // rdi
-  UFG::RacePoint *v2; // rcx
-  float *v3; // rbx
-  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v4; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList> *v5; // rax
+  UFG::RacePoint *pRacePoints; // rcx
+  float *p_fTimeBonus; // rbx
+  UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *mNext; // rax
 
-  v1 = (UFG::qSafePointerNode<UFG::ParkourHandle> *)this;
   this->vfptr = (UFG::qSafePointerNode<UFG::RaceTrail>Vtbl *)&UFG::RaceTrail::`vftable;
-  v2 = this->pRacePoints;
-  if ( v2 )
+  pRacePoints = this->pRacePoints;
+  if ( pRacePoints )
   {
-    v3 = &v2[-1].fTimeBonus;
-    `eh vector destructor iterator(v2, 0x38ui64, LODWORD(v2[-1].fTimeBonus), (void (__fastcall *)(void *))_);
-    operator delete[](v3);
+    p_fTimeBonus = &pRacePoints[-1].fTimeBonus;
+    `eh vector destructor iterator(
+      pRacePoints,
+      0x38ui64,
+      LODWORD(pRacePoints[-1].fTimeBonus),
+      (void (__fastcall *)(void *))_);
+    operator delete[](p_fTimeBonus);
   }
-  v1->vfptr = (UFG::qSafePointerNode<UFG::ParkourHandle>Vtbl *)&UFG::qSafePointerNode<UFG::RaceTrail>::`vftable;
-  UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull(v1);
-  UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes(&v1->m_SafePointerList);
-  v4 = v1->m_SafePointerList.mNode.mPrev;
-  v5 = v1->m_SafePointerList.mNode.mNext;
-  v4->mNext = v5;
-  v5->mPrev = v4;
-  v1->m_SafePointerList.mNode.mPrev = &v1->m_SafePointerList.mNode;
-  v1->m_SafePointerList.mNode.mNext = &v1->m_SafePointerList.mNode;
+  this->vfptr = (UFG::qSafePointerNode<UFG::RaceTrail>Vtbl *)&UFG::qSafePointerNode<UFG::RaceTrail>::`vftable;
+  UFG::qSafePointerNode<UFG::DynamicCoverCorner>::SetAllPointersToNull((UFG::qSafePointerNode<UFG::ParkourHandle> *)this);
+  UFG::qList<UFG::qSafePointerBase<CanAttackConditionGroup>,UFG::qSafePointerNodeList,1,0>::DeleteNodes((UFG::qList<UFG::qSafePointerBase<UFG::ParkourHandle>,UFG::qSafePointerNodeList,1,0> *)&this->m_SafePointerList);
+  mPrev = this->m_SafePointerList.mNode.mPrev;
+  mNext = this->m_SafePointerList.mNode.mNext;
+  mPrev->mNext = mNext;
+  mNext->mPrev = mPrev;
+  this->m_SafePointerList.mNode.mPrev = &this->m_SafePointerList.mNode;
+  this->m_SafePointerList.mNode.mNext = &this->m_SafePointerList.mNode;
 }
 
 // File Line: 101
 // RVA: 0x6448D0
 void __fastcall UFG::RaceTrail::AddRacePoint(UFG::RaceTrail *this, UFG::qVector3 *position, float speed, float bonus)
 {
-  __int64 v4; // rax
-  UFG::RaceTrail *v5; // r9
+  __int64 nPoint; // rax
   int v6; // eax
   UFG::RacePoint *v7; // rcx
   float v8; // xmm2_4
   float v9; // xmm1_4
 
-  v4 = this->nPoint;
-  v5 = this;
-  if ( (signed int)v4 < this->nRacePoints )
+  nPoint = this->nPoint;
+  if ( (int)nPoint < this->nRacePoints )
   {
-    this->pRacePoints[v4].fSpeed = speed;
+    this->pRacePoints[nPoint].fSpeed = speed;
     this->pRacePoints[this->nPoint].fTimeBonus = bonus;
     v6 = this->nPoint;
-    v7 = &this->pRacePoints[this->nPoint];
-    v5->nPoint = v6 + 1;
+    v7 = &this->pRacePoints[v6];
+    this->nPoint = v6 + 1;
     v8 = (float)(UFG::qVector3::msDirUp.y * 0.5) + position->y;
     v9 = (float)(UFG::qVector3::msDirUp.z * 0.5) + position->z;
     v7->vPosition.x = (float)(UFG::qVector3::msDirUp.x * 0.5) + position->x;
@@ -181,20 +184,17 @@ void __fastcall UFG::RaceTrail::AddRacePoint(UFG::RaceTrail *this, UFG::qVector3
 // RVA: 0x64EFC0
 UFG::RacePoint *__fastcall UFG::RaceTrail::GetRacePoint(UFG::RaceTrail *this, UFG::qVector3 *position, float *distSq)
 {
-  UFG::RacePoint *v3; // rdi
-  UFG::RaceTrail *v4; // rbp
-  float *v5; // r14
-  UFG::qVector3 *v6; // rbx
-  signed int v7; // esi
+  UFG::RacePoint *pRacePoints; // rdi
+  int v7; // esi
   float v8; // xmm6_4
-  float v9; // xmm0_4
-  signed int v10; // edx
-  signed int v11; // er9
+  float SegmentDistance; // xmm0_4
+  int nRacePoints; // edx
+  int v11; // r9d
   float v12; // xmm12_4
-  float *v13; // rcx
-  float *v14; // rax
-  float v15; // xmm14_4
-  float v16; // xmm15_4
+  float *p_x; // rcx
+  float *p_z; // rax
+  float x; // xmm14_4
+  float y; // xmm15_4
   float v17; // xmm10_4
   float v18; // xmm11_4
   float v19; // xmm3_4
@@ -202,39 +202,36 @@ UFG::RacePoint *__fastcall UFG::RaceTrail::GetRacePoint(UFG::RaceTrail *this, UF
   float v21; // xmm3_4
   float v22; // xmm1_4
 
-  v3 = this->pRacePoints;
-  v4 = this;
-  v5 = distSq;
-  v6 = position;
+  pRacePoints = this->pRacePoints;
   v7 = 0;
   v8 = 0.0;
-  v9 = UFG::RacePoint::GetSegmentDistance(this->pRacePoints, position);
-  v10 = v4->nRacePoints;
+  SegmentDistance = UFG::RacePoint::GetSegmentDistance(pRacePoints, position);
+  nRacePoints = this->nRacePoints;
   v11 = 1;
-  v12 = v9;
-  if ( v10 > 1 )
+  v12 = SegmentDistance;
+  if ( nRacePoints > 1 )
   {
-    v13 = &v3[1].vPosition.x;
-    v14 = &v3[1].vDirection.z;
-    v15 = v6->x;
-    v16 = v6->y;
+    p_x = &pRacePoints[1].vPosition.x;
+    p_z = &pRacePoints[1].vDirection.z;
+    x = position->x;
+    y = position->y;
     do
     {
-      v17 = *(v14 - 5);
-      v18 = *(v14 - 4);
-      v19 = (float)((float)(*(v14 - 2) * (float)(v15 - *v13)) + (float)(*(v14 - 1) * (float)(v16 - v17)))
-          + (float)(*v14 * (float)(v6->z - v18));
+      v17 = *(p_z - 5);
+      v18 = *(p_z - 4);
+      v19 = (float)((float)(*(p_z - 2) * (float)(x - *p_x)) + (float)(*(p_z - 1) * (float)(y - v17)))
+          + (float)(*p_z * (float)(position->z - v18));
       if ( v19 <= 0.0 )
         v19 = 0.0;
-      if ( v19 >= v14[1] )
-        v19 = v14[1];
-      v20 = *v13 + (float)(*(v14 - 2) * v19);
+      if ( v19 >= p_z[1] )
+        v19 = p_z[1];
+      v20 = *p_x + (float)(*(p_z - 2) * v19);
       v21 = fsqrt(
-              (float)((float)((float)(v16 - (float)(v17 + (float)(*(v14 - 1) * v19)))
-                            * (float)(v16 - (float)(v17 + (float)(*(v14 - 1) * v19))))
-                    + (float)((float)(v15 - v20) * (float)(v15 - v20)))
-            + (float)((float)(v6->z - (float)(v18 + (float)(*v14 * v19)))
-                    * (float)(v6->z - (float)(v18 + (float)(*v14 * v19)))));
+              (float)((float)((float)(y - (float)(v17 + (float)(*(p_z - 1) * v19)))
+                            * (float)(y - (float)(v17 + (float)(*(p_z - 1) * v19))))
+                    + (float)((float)(x - v20) * (float)(x - v20)))
+            + (float)((float)(position->z - (float)(v18 + (float)(*p_z * v19)))
+                    * (float)(position->z - (float)(v18 + (float)(*p_z * v19)))));
       v22 = v21 - v12;
       if ( (float)(v21 - v12) >= 0.0 )
       {
@@ -248,34 +245,33 @@ UFG::RacePoint *__fastcall UFG::RaceTrail::GetRacePoint(UFG::RaceTrail *this, UF
         LODWORD(v8) = LODWORD(v22) ^ _xmm[0];
       }
       ++v11;
-      v13 += 14;
-      v14 += 14;
+      p_x += 14;
+      p_z += 14;
     }
-    while ( v11 < v10 );
+    while ( v11 < nRacePoints );
   }
-  *v5 = (float)(v8 * 0.5) * (float)(v8 * 0.5);
-  return &v4->pRacePoints[v7];
+  *distSq = (float)(v8 * 0.5) * (float)(v8 * 0.5);
+  return &this->pRacePoints[v7];
 }
 
 // File Line: 149
 // RVA: 0x64CD70
 void __fastcall UFG::RaceTrail::Finalize(UFG::RaceTrail *this)
 {
-  int v1; // eax
-  UFG::RaceTrail *v2; // rbx
+  int nPoint; // eax
   int v3; // edx
   float v4; // xmm3_4
   __int64 v5; // rcx
-  UFG::RacePoint *v6; // rax
+  UFG::RacePoint *pRacePoints; // rax
   float v7; // xmm5_4
-  __m128 v8; // xmm6
+  __m128 y_low; // xmm6
   float v9; // xmm7_4
   __m128 v10; // xmm2
   float v11; // xmm4_4
-  float v12; // xmm1_4
-  float v13; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
   UFG::RacePoint *v14; // rcx
-  signed __int64 v15; // rdx
+  __int64 v15; // rdx
   float v16; // xmm4_4
   __m128 v17; // xmm5
   float v18; // xmm6_4
@@ -284,23 +280,23 @@ void __fastcall UFG::RaceTrail::Finalize(UFG::RaceTrail *this)
   float v21; // xmm1_4
   float v22; // xmm2_4
   UFG::RacePoint *v23; // rdx
-  signed __int64 v24; // rcx
+  __int64 v24; // rcx
   __m128 v25; // xmm4
   float v26; // xmm5_4
   float v27; // xmm2_4
   __m128 v28; // xmm6
   float v29; // xmm1_4
-  int v30; // ecx
+  int nRacePoints; // ecx
   UFG::RacePoint *v31; // r8
-  signed __int64 v32; // rdx
-  signed __int64 v33; // rcx
-  float v34; // eax
+  __int64 v32; // rdx
+  __int64 v33; // rcx
+  float x; // eax
   float v35; // xmm1_4
-  _DWORD *v36; // rcx
-  int v37; // xmm0_4
-  int v38; // xmm1_4
-  signed int v39; // esi
-  signed __int64 v40; // rdi
+  UFG::RacePoint *v36; // rcx
+  float v37; // xmm0_4
+  float v38; // xmm1_4
+  int v39; // esi
+  __int64 v40; // rdi
   float v41; // xmm0_4
   UFG::RacePoint *v42; // rax
   float v43; // xmm1_4
@@ -312,58 +308,56 @@ void __fastcall UFG::RaceTrail::Finalize(UFG::RaceTrail *this)
   float v49; // xmm1_4
   UFG::RacePoint *v50; // rax
 
-  v1 = this->nPoint;
-  this->nRacePoints = v1;
-  v2 = this;
+  nPoint = this->nPoint;
+  this->nRacePoints = nPoint;
   v3 = 0;
   v4 = 0.0;
-  if ( v1 - 1 > 0 )
+  if ( nPoint - 1 > 0 )
   {
     v5 = 0i64;
     do
     {
-      v6 = v2->pRacePoints;
-      v8 = (__m128)LODWORD(v6[v5 + 1].vPosition.y);
-      v7 = v6[v5 + 1].vPosition.x - v6[v5].vPosition.x;
-      v8.m128_f32[0] = v8.m128_f32[0] - v6[v5].vPosition.y;
-      v9 = v6[v5 + 1].vPosition.z - v6[v5].vPosition.z;
-      v10 = v8;
-      v10.m128_f32[0] = (float)((float)(v8.m128_f32[0] * v8.m128_f32[0]) + (float)(v7 * v7)) + (float)(v9 * v9);
-      LODWORD(v11) = (unsigned __int128)_mm_sqrt_ps(v10);
+      pRacePoints = this->pRacePoints;
+      y_low = (__m128)LODWORD(pRacePoints[v5 + 1].vPosition.y);
+      v7 = pRacePoints[v5 + 1].vPosition.x - pRacePoints[v5].vPosition.x;
+      y_low.m128_f32[0] = y_low.m128_f32[0] - pRacePoints[v5].vPosition.y;
+      v9 = pRacePoints[v5 + 1].vPosition.z - pRacePoints[v5].vPosition.z;
+      v10 = y_low;
+      v10.m128_f32[0] = (float)((float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(v7 * v7)) + (float)(v9 * v9);
+      v11 = _mm_sqrt_ps(v10).m128_f32[0];
       if ( v11 >= 0.0000099999997 )
       {
-        v13 = (float)(1.0 / v11) * v9;
-        v6[v5].vDirection.x = (float)(1.0 / v11) * v7;
-        v6[v5].vDirection.y = (float)(1.0 / v11) * v8.m128_f32[0];
+        z = (float)(1.0 / v11) * v9;
+        pRacePoints[v5].vDirection.x = (float)(1.0 / v11) * v7;
+        pRacePoints[v5].vDirection.y = (float)(1.0 / v11) * y_low.m128_f32[0];
       }
       else
       {
-        v12 = UFG::qVector3::msDirFront.y;
-        v13 = UFG::qVector3::msDirFront.z;
-        v6[v5].vDirection.x = UFG::qVector3::msDirFront.x;
-        v6[v5].vDirection.y = v12;
+        y = UFG::qVector3::msDirFront.y;
+        z = UFG::qVector3::msDirFront.z;
+        pRacePoints[v5].vDirection.x = UFG::qVector3::msDirFront.x;
+        pRacePoints[v5].vDirection.y = y;
       }
-      v6[v5].vDirection.z = v13;
+      pRacePoints[v5].vDirection.z = z;
       ++v3;
-      ++v5;
-      *((float *)&v2->pRacePoints[v5] - 2) = v4;
+      this->pRacePoints[v5++].fRaceDistance = v4;
       v4 = v4 + v11;
-      *((float *)&v2->pRacePoints[v5] - 7) = v11;
+      this->pRacePoints[v5 - 1].fLength = v11;
     }
-    while ( v3 < v2->nRacePoints - 1 );
+    while ( v3 < this->nRacePoints - 1 );
   }
-  *((float *)&v2->pRacePoints[v2->nRacePoints] - 2) = v4;
-  if ( v2->bIsLoop )
+  this->pRacePoints[this->nRacePoints - 1].fRaceDistance = v4;
+  if ( this->bIsLoop )
   {
-    v14 = v2->pRacePoints;
+    v14 = this->pRacePoints;
     v17 = (__m128)LODWORD(v14->vPosition.y);
-    v15 = v2->nRacePoints - 1;
+    v15 = this->nRacePoints - 1;
     v16 = v14->vPosition.x - v14[v15].vPosition.x;
     v17.m128_f32[0] = v17.m128_f32[0] - v14[v15].vPosition.y;
     v18 = v14->vPosition.z - v14[v15].vPosition.z;
     v19 = v17;
     v19.m128_f32[0] = (float)((float)(v17.m128_f32[0] * v17.m128_f32[0]) + (float)(v16 * v16)) + (float)(v18 * v18);
-    LODWORD(v20) = (unsigned __int128)_mm_sqrt_ps(v19);
+    v20 = _mm_sqrt_ps(v19).m128_f32[0];
     if ( v20 >= 0.0000099999997 )
     {
       v22 = (float)(1.0 / v20) * v18;
@@ -379,10 +373,10 @@ void __fastcall UFG::RaceTrail::Finalize(UFG::RaceTrail *this)
     }
     v14[v15].vDirection.z = v22;
     v4 = v4 + v20;
-    *((float *)&v2->pRacePoints[v2->nRacePoints] - 7) = v20;
-    v23 = v2->pRacePoints;
+    this->pRacePoints[this->nRacePoints - 1].fLength = v20;
+    v23 = this->pRacePoints;
     v25 = (__m128)LODWORD(v23->vDirection.y);
-    v24 = v2->nRacePoints - 1;
+    v24 = this->nRacePoints - 1;
     v25.m128_f32[0] = v25.m128_f32[0] + v23[v24].vDirection.y;
     v26 = v23->vDirection.z + v23[v24].vDirection.z;
     v28 = v25;
@@ -391,46 +385,46 @@ void __fastcall UFG::RaceTrail::Finalize(UFG::RaceTrail *this)
     if ( v28.m128_f32[0] == 0.0 )
       v29 = 0.0;
     else
-      v29 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v28));
+      v29 = 1.0 / _mm_sqrt_ps(v28).m128_f32[0];
     v23->vDistanceRay.x = v27 * v29;
     v23->vDistanceRay.y = v25.m128_f32[0] * v29;
     v23->vDistanceRay.z = v26 * v29;
   }
   else
   {
-    v30 = v2->nRacePoints;
-    v31 = v2->pRacePoints;
-    v32 = v30 - 2;
-    v33 = v30 - 1;
-    v34 = v31[v32].vDirection.x;
+    nRacePoints = this->nRacePoints;
+    v31 = this->pRacePoints;
+    v32 = nRacePoints - 2;
+    v33 = nRacePoints - 1;
+    x = v31[v32].vDirection.x;
     v35 = v31[v32].vDirection.z;
     v31[v33].vDirection.y = v31[v32].vDirection.y;
     v31[v33].vDirection.z = v35;
-    v31[v33].vDirection.x = v34;
-    *((_DWORD *)&v2->pRacePoints[v2->nRacePoints] - 3) = 0;
-    *((_DWORD *)&v2->pRacePoints[v2->nRacePoints] - 7) = 0;
-    v36 = (_DWORD *)&v2->pRacePoints->vPosition.x;
-    v37 = v36[5];
-    v38 = v36[6];
-    v36[8] = v36[4];
-    v36[9] = v37;
-    v36[10] = v38;
+    v31[v33].vDirection.x = x;
+    this->pRacePoints[this->nRacePoints - 1].fCurvature = 0.0;
+    this->pRacePoints[this->nRacePoints - 1].fLength = 0.0;
+    v36 = this->pRacePoints;
+    v37 = v36->vDirection.y;
+    v38 = v36->vDirection.z;
+    v36->vDistanceRay.x = v36->vDirection.x;
+    v36->vDistanceRay.y = v37;
+    v36->vDistanceRay.z = v38;
   }
   v39 = 1;
-  v2->fLength = v4;
-  if ( v2->nRacePoints > 1 )
+  this->fLength = v4;
+  if ( this->nRacePoints > 1 )
   {
     v40 = 1i64;
     do
     {
-      v41 = UFG::qSignedAngleBetween(&v2->pRacePoints[v39 - 1].vDirection, &v2->pRacePoints[v39].vDirection);
-      v42 = v2->pRacePoints;
+      v41 = UFG::qSignedAngleBetween(&this->pRacePoints[v39 - 1].vDirection, &this->pRacePoints[v39].vDirection);
+      v42 = this->pRacePoints;
       v43 = v41;
       v46 = (__m128)LODWORD(v42[v40].vDirection.y);
-      v44 = v42[v40].vDirection.x + *((float *)&v42[v40] - 10);
-      v45 = (float)(*((float *)&v42[v40] - 7) + v42[v40].fLength) * 0.5;
-      v46.m128_f32[0] = v46.m128_f32[0] + *((float *)&v42[v40] - 9);
-      v47 = v42[v40].vDirection.z + *((float *)&v42[v40] - 8);
+      v44 = v42[v40].vDirection.x + v42[v40 - 1].vDirection.x;
+      v45 = (float)(v42[v40 - 1].fLength + v42[v40].fLength) * 0.5;
+      v46.m128_f32[0] = v46.m128_f32[0] + v42[v40 - 1].vDirection.y;
+      v47 = v42[v40].vDirection.z + v42[v40 - 1].vDirection.z;
       if ( v45 <= 1.0 )
       {
         v45 = *(float *)&FLOAT_1_0;
@@ -440,20 +434,19 @@ void __fastcall UFG::RaceTrail::Finalize(UFG::RaceTrail *this)
         v45 = FLOAT_25_0;
       }
       v48 = v46;
-      *((float *)&v42[v40] - 3) = v43 / v45;
+      v42[v40 - 1].fCurvature = v43 / v45;
       v48.m128_f32[0] = (float)((float)(v46.m128_f32[0] * v46.m128_f32[0]) + (float)(v44 * v44)) + (float)(v47 * v47);
       if ( v48.m128_f32[0] == 0.0 )
         v49 = 0.0;
       else
-        v49 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v48));
-      v50 = v2->pRacePoints;
+        v49 = 1.0 / _mm_sqrt_ps(v48).m128_f32[0];
+      v50 = this->pRacePoints;
       ++v39;
-      ++v40;
-      *((float *)&v50[v40] - 6) = v44 * v49;
-      *((float *)&v50[v40] - 5) = v46.m128_f32[0] * v49;
-      *((float *)&v50[v40] - 4) = v47 * v49;
+      v50[v40++].vDistanceRay.x = v44 * v49;
+      v50[v40 - 1].vDistanceRay.y = v46.m128_f32[0] * v49;
+      v50[v40 - 1].vDistanceRay.z = v47 * v49;
     }
-    while ( v39 < v2->nRacePoints );
+    while ( v39 < this->nRacePoints );
   }
 }
 
@@ -461,79 +454,76 @@ void __fastcall UFG::RaceTrail::Finalize(UFG::RaceTrail *this)
 // RVA: 0x642D30
 void __fastcall UFG::RacePosition::RacePosition(UFG::RacePosition *this, UFG::RaceTrail *race_trail)
 {
-  UFG::RacePosition *v2; // r8
-  UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *v3; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *v4; // rax
+  UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *v5; // rax
-  float v6; // xmm1_4
-  float v7; // xmm2_4
+  float y; // xmm1_4
+  float z; // xmm2_4
 
-  v2 = this;
-  this->pRaceTrail.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *)&this->pRaceTrail.mPrev;
-  this->pRaceTrail.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *)&this->pRaceTrail.mPrev;
+  this->pRaceTrail.mPrev = &this->pRaceTrail;
+  this->pRaceTrail.mNext = &this->pRaceTrail;
   this->pRaceTrail.m_pPointer = 0i64;
   this->pRacePoint = 0i64;
   if ( this->pRaceTrail.m_pPointer )
   {
-    v3 = this->pRaceTrail.mPrev;
-    v4 = v2->pRaceTrail.mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v2->pRaceTrail.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *)&v2->pRaceTrail.mPrev;
-    v2->pRaceTrail.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *)&v2->pRaceTrail.mPrev;
+    mPrev = this->pRaceTrail.mPrev;
+    mNext = this->pRaceTrail.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    this->pRaceTrail.mPrev = &this->pRaceTrail;
+    this->pRaceTrail.mNext = &this->pRaceTrail;
   }
-  v2->pRaceTrail.m_pPointer = race_trail;
+  this->pRaceTrail.m_pPointer = race_trail;
   if ( race_trail )
   {
     v5 = race_trail->m_SafePointerList.mNode.mPrev;
-    v5->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *)&v2->pRaceTrail.mPrev;
-    v2->pRaceTrail.mPrev = v5;
-    v2->pRaceTrail.mNext = &race_trail->m_SafePointerList.mNode;
-    race_trail->m_SafePointerList.mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::RaceTrail>,UFG::qSafePointerNodeList> *)&v2->pRaceTrail.mPrev;
+    v5->mNext = &this->pRaceTrail;
+    this->pRaceTrail.mPrev = v5;
+    this->pRaceTrail.mNext = &race_trail->m_SafePointerList.mNode;
+    race_trail->m_SafePointerList.mNode.mPrev = &this->pRaceTrail;
   }
-  v6 = UFG::qVector3::msZero.y;
-  v7 = UFG::qVector3::msZero.z;
-  v2->vUpdatePosition.x = UFG::qVector3::msZero.x;
-  v2->vUpdatePosition.y = v6;
-  v2->vUpdatePosition.z = v7;
-  *(_QWORD *)&v2->fUpdateDistanceSq = 0i64;
-  *(_QWORD *)&v2->fRaceProximity = 0i64;
-  *(_QWORD *)&v2->fRaceTime = 0i64;
+  y = UFG::qVector3::msZero.y;
+  z = UFG::qVector3::msZero.z;
+  this->vUpdatePosition.x = UFG::qVector3::msZero.x;
+  this->vUpdatePosition.y = y;
+  this->vUpdatePosition.z = z;
+  *(_QWORD *)&this->fUpdateDistanceSq = 0i64;
+  *(_QWORD *)&this->fRaceProximity = 0i64;
+  *(_QWORD *)&this->fRaceTime = 0i64;
 }
 
 // File Line: 289
 // RVA: 0x651970
 void __fastcall UFG::RacePosition::InitPosition(UFG::RacePosition *this, UFG::qVector3 *position)
 {
-  UFG::qVector3 *v2; // rdi
-  UFG::RacePosition *v3; // rbx
-  UFG::RaceTrail *v4; // rax
-  float v5; // xmm1_4
-  float *v6; // rax
+  UFG::RaceTrail *m_pPointer; // rax
+  float fRaceDistance; // xmm1_4
+  UFG::RacePoint *pRacePoints; // rax
 
-  v2 = position;
-  v3 = this;
   this->pRacePoint = 0i64;
   this->fRaceDistance = 0.0;
   this->fBonusDistance = 0.0;
   if ( this->pRaceTrail.m_pPointer )
   {
     UFG::RacePosition::UpdateRacePoint(this, position);
-    UFG::RacePosition::UpdateRaceDistance(v3, v2);
-    v4 = v3->pRaceTrail.m_pPointer;
-    if ( v4->bIsLoop )
+    UFG::RacePosition::UpdateRaceDistance(this, position);
+    m_pPointer = this->pRaceTrail.m_pPointer;
+    if ( m_pPointer->bIsLoop )
     {
-      v5 = v3->fRaceDistance;
-      if ( v5 > (float)(v4->fLength * 0.5) )
-        v3->fRaceDistance = v5 - v4->fLength;
+      fRaceDistance = this->fRaceDistance;
+      if ( fRaceDistance > (float)(m_pPointer->fLength * 0.5) )
+        this->fRaceDistance = fRaceDistance - m_pPointer->fLength;
     }
-    else if ( v3->fRaceDistance <= 0.0 )
+    else if ( this->fRaceDistance <= 0.0 )
     {
-      v6 = &v4->pRacePoints->vPosition.x;
-      v3->pRacePoint = (UFG::RacePoint *)v6;
-      v3->fUpdateDistanceSq = (float)((float)((float)(v2->y - v6[1]) * (float)(v2->y - v6[1]))
-                                    + (float)((float)(v2->x - *v6) * (float)(v2->x - *v6)))
-                            + (float)((float)(v2->z - v6[2]) * (float)(v2->z - v6[2]));
+      pRacePoints = m_pPointer->pRacePoints;
+      this->pRacePoint = pRacePoints;
+      this->fUpdateDistanceSq = (float)((float)((float)(position->y - pRacePoints->vPosition.y)
+                                              * (float)(position->y - pRacePoints->vPosition.y))
+                                      + (float)((float)(position->x - pRacePoints->vPosition.x)
+                                              * (float)(position->x - pRacePoints->vPosition.x)))
+                              + (float)((float)(position->z - pRacePoints->vPosition.z)
+                                      * (float)(position->z - pRacePoints->vPosition.z));
     }
   }
 }
@@ -542,27 +532,23 @@ void __fastcall UFG::RacePosition::InitPosition(UFG::RacePosition *this, UFG::qV
 // RVA: 0x65F660
 void __fastcall UFG::RacePosition::Update(UFG::RacePosition *this, UFG::qVector3 *position, float delta_seconds)
 {
-  UFG::RacePoint *v3; // rsi
+  UFG::RacePoint *pRacePoint; // rsi
   float v4; // xmm1_4
-  UFG::qVector3 *v5; // rbx
-  UFG::RacePosition *v6; // rdi
-  float *v7; // rax
+  UFG::RacePoint *v7; // rax
 
-  v3 = this->pRacePoint;
+  pRacePoint = this->pRacePoint;
   v4 = this->fCountDownTime - delta_seconds;
-  v5 = position;
-  v6 = this;
   this->fRaceTime = delta_seconds + this->fRaceTime;
   this->fCountDownTime = v4;
   UFG::RacePosition::UpdateRacePoint(this, position);
-  UFG::RacePosition::UpdateRaceDistance(v6, v5);
-  if ( v3 )
+  UFG::RacePosition::UpdateRaceDistance(this, position);
+  if ( pRacePoint )
   {
-    v7 = &v6->pRacePoint->vPosition.x;
-    if ( v7 != (float *)v3 && v6->fBonusDistance <= v6->fRaceDistance )
+    v7 = this->pRacePoint;
+    if ( v7 != pRacePoint && this->fBonusDistance <= this->fRaceDistance )
     {
-      v6->fBonusDistance = v7[12] + v7[7];
-      v6->fCountDownTime = v7[13] + v6->fCountDownTime;
+      this->fBonusDistance = v7->fRaceDistance + v7->fLength;
+      this->fCountDownTime = v7->fTimeBonus + this->fCountDownTime;
     }
   }
 }
@@ -571,13 +557,9 @@ void __fastcall UFG::RacePosition::Update(UFG::RacePosition *this, UFG::qVector3
 // RVA: 0x663450
 void __fastcall UFG::RacePosition::UpdateRacePoint(UFG::RacePosition *this, UFG::qVector3 *position)
 {
-  UFG::qVector3 *v2; // rdi
-  UFG::RacePosition *v3; // rbx
-  float v4; // xmm0_4
-  float v5; // xmm1_4
+  float y; // xmm0_4
+  float z; // xmm1_4
 
-  v2 = position;
-  v3 = this;
   if ( !this->pRacePoint
     || (float)((float)((float)((float)(position->y - this->vUpdatePosition.y)
                              * (float)(position->y - this->vUpdatePosition.y))
@@ -586,11 +568,11 @@ void __fastcall UFG::RacePosition::UpdateRacePoint(UFG::RacePosition *this, UFG:
              + (float)((float)(position->z - this->vUpdatePosition.z) * (float)(position->z - this->vUpdatePosition.z))) > this->fUpdateDistanceSq )
   {
     this->pRacePoint = UFG::RaceTrail::GetRacePoint(this->pRaceTrail.m_pPointer, position, &this->fUpdateDistanceSq);
-    v4 = v2->y;
-    v5 = v2->z;
-    v3->vUpdatePosition.x = v2->x;
-    v3->vUpdatePosition.y = v4;
-    v3->vUpdatePosition.z = v5;
+    y = position->y;
+    z = position->z;
+    this->vUpdatePosition.x = position->x;
+    this->vUpdatePosition.y = y;
+    this->vUpdatePosition.z = z;
   }
 }
 
@@ -598,125 +580,133 @@ void __fastcall UFG::RacePosition::UpdateRacePoint(UFG::RacePosition *this, UFG:
 // RVA: 0x663150
 void __fastcall UFG::RacePosition::UpdateRaceDistance(UFG::RacePosition *this, UFG::qVector3 *position)
 {
-  UFG::RaceTrail *v2; // rdi
-  UFG::RacePoint *v3; // rbx
-  UFG::qVector3 *v4; // rbp
-  UFG::RacePosition *v5; // rsi
-  UFG::RacePoint *v6; // rcx
-  int v7; // eax
+  UFG::RaceTrail *m_pPointer; // rdi
+  UFG::RacePoint *pRacePoint; // rbx
+  UFG::RacePoint *pRacePoints; // rcx
+  int nRacePoints; // eax
   int v8; // edx
-  float *v9; // r14
-  float v10; // xmm7_4
-  float v11; // xmm8_4
-  float v12; // xmm6_4
+  float *p_x; // r14
+  double v10; // xmm7_8
+  __int64 x_low; // xmm8_8
+  double v12; // xmm6_8
   float v13; // xmm1_4
-  float v14; // xmm6_4
-  bool v15; // dl
-  UFG::RacePoint *v16; // rcx
-  float v17; // xmm0_4
-  float v18; // xmm3_4
-  float v19; // xmm1_4
+  bool bIsLoop; // dl
+  UFG::RacePoint *v15; // rcx
+  float fLength; // xmm0_4
+  float v17; // xmm3_4
+  float v18; // xmm1_4
+  float v19; // xmm0_4
   float v20; // xmm0_4
-  float v21; // xmm0_4
-  __m128 v22; // xmm2
-  float v23; // xmm1_4
-  float v24; // xmm6_4
+  __m128 y_low; // xmm2
+  float v22; // xmm1_4
 
-  v2 = this->pRaceTrail.m_pPointer;
-  v3 = this->pRacePoint;
-  v4 = position;
-  v5 = this;
-  v6 = v2->pRacePoints;
-  v7 = v2->nRacePoints;
-  v8 = ((unsigned __int64)((unsigned __int128)(((char *)v3 - (char *)v6) * (signed __int128)5270498306774157605i64) >> 64) >> 63)
-     + ((signed __int64)((unsigned __int128)(((char *)v3 - (char *)v6) * (signed __int128)5270498306774157605i64) >> 64) >> 4)
-     + 1;
-  if ( v8 >= v7 )
+  m_pPointer = this->pRaceTrail.m_pPointer;
+  pRacePoint = this->pRacePoint;
+  pRacePoints = m_pPointer->pRacePoints;
+  nRacePoints = m_pPointer->nRacePoints;
+  v8 = ((int)pRacePoint - (int)pRacePoints) / 56 + 1;
+  if ( v8 >= nRacePoints )
   {
-    if ( v2->bIsLoop )
+    if ( m_pPointer->bIsLoop )
       v8 = 0;
     else
-      v8 = v7 - 1;
+      v8 = nRacePoints - 1;
   }
-  v9 = &v6[v8].vPosition.x;
-  v10 = (float)((float)((float)(v4->y - v3->vPosition.y) * v3->vDistanceRay.y)
-              + (float)((float)(v4->x - v3->vPosition.x) * v3->vDistanceRay.x))
-      + (float)((float)(v4->z - v3->vPosition.z) * v3->vDistanceRay.z);
-  v11 = (float)((float)((float)(v4->x - (float)((float)(v3->fLength * v3->vDirection.x) + v3->vPosition.x)) * v9[8])
-              + (float)((float)(v4->y - (float)((float)(v3->fLength * v3->vDirection.y) + v3->vPosition.y)) * v9[9]))
-      + (float)((float)(v4->z - (float)((float)(v3->fLength * v3->vDirection.z) + v3->vPosition.z)) * v9[10]);
-  if ( v10 >= 0.0 )
-    v12 = (float)((float)((float)(v4->y - v3->vPosition.y) * v3->vDistanceRay.y)
-                + (float)((float)(v4->x - v3->vPosition.x) * v3->vDistanceRay.x))
-        + (float)((float)(v4->z - v3->vPosition.z) * v3->vDistanceRay.z);
+  x_low = LODWORD(position->x);
+  *(_QWORD *)&v10 = LODWORD(position->y);
+  p_x = &pRacePoints[v8].vPosition.x;
+  *(float *)&v10 = (float)((float)((float)(*(float *)&v10 - pRacePoint->vPosition.y) * pRacePoint->vDistanceRay.y)
+                         + (float)((float)(position->x - pRacePoint->vPosition.x) * pRacePoint->vDistanceRay.x))
+                 + (float)((float)(position->z - pRacePoint->vPosition.z) * pRacePoint->vDistanceRay.z);
+  *(float *)&x_low = (float)((float)((float)(*(float *)&x_low
+                                           - (float)((float)(pRacePoint->fLength * pRacePoint->vDirection.x)
+                                                   + pRacePoint->vPosition.x))
+                                   * p_x[8])
+                           + (float)((float)(position->y
+                                           - (float)((float)(pRacePoint->fLength * pRacePoint->vDirection.y)
+                                                   + pRacePoint->vPosition.y))
+                                   * p_x[9]))
+                   + (float)((float)(position->z
+                                   - (float)((float)(pRacePoint->fLength * pRacePoint->vDirection.z)
+                                           + pRacePoint->vPosition.z))
+                           * p_x[10]);
+  if ( *(float *)&v10 >= 0.0 )
+    v12 = v10;
   else
     v12 = 0.0;
-  if ( v11 <= 0.0 )
-    v13 = (float)((float)((float)(v4->x - (float)((float)(v3->fLength * v3->vDirection.x) + v3->vPosition.x)) * v9[8])
-                + (float)((float)(v4->y - (float)((float)(v3->fLength * v3->vDirection.y) + v3->vPosition.y)) * v9[9]))
-        + (float)((float)(v4->z - (float)((float)(v3->fLength * v3->vDirection.z) + v3->vPosition.z)) * v9[10]);
+  if ( *(float *)&x_low <= 0.0 )
+    v13 = *(float *)&x_low;
   else
     v13 = 0.0;
-  if ( (float)(v12 - v13) >= 0.001 )
-    v14 = v12 / (float)(v12 - v13);
+  if ( (float)(*(float *)&v12 - v13) >= 0.001 )
+    *(float *)&v12 = *(float *)&v12 / (float)(*(float *)&v12 - v13);
   else
-    v14 = FLOAT_0_5;
-  v5->fRaceProximity = UFG::RacePoint::GetSegmentDistance(v3, v4);
-  v15 = v2->bIsLoop;
-  if ( !v15 )
+    *(_QWORD *)&v12 = LODWORD(FLOAT_0_5);
+  this->fRaceProximity = UFG::RacePoint::GetSegmentDistance(pRacePoint, position);
+  bIsLoop = m_pPointer->bIsLoop;
+  if ( !bIsLoop )
   {
-    v16 = v2->pRacePoints;
-    if ( v3 != v16 || v10 >= 0.0 )
+    v15 = m_pPointer->pRacePoints;
+    if ( pRacePoint == v15 && *(float *)&v10 < 0.0 )
     {
-      if ( v3 != &v16[v2->nRacePoints - 1] || v11 <= 0.0 )
-        goto LABEL_30;
-      if ( v11 >= 60.0 )
-        v11 = FLOAT_60_0;
-      v21 = v3->fLength;
-      if ( v21 > 0.001 )
-        v14 = v11 / v21;
-      v19 = v4->x - (float)((float)((float)(v21 * v3->vDirection.x) + v3->vPosition.x) + (float)(v10 * v9[8]));
-      v18 = (float)((float)(v21 * v3->vDirection.y) + v3->vPosition.y) + (float)(v10 * v9[9]);
-      v20 = v4->z - (float)((float)((float)(v21 * v3->vDirection.z) + v3->vPosition.z) + (float)(v10 * v9[10]));
+      if ( *(float *)&v10 <= -40.0 )
+        *(_QWORD *)&v10 = LODWORD(FLOAT_N40_0);
+      fLength = pRacePoint->fLength;
+      if ( fLength > 0.001 )
+      {
+        HIDWORD(v12) = HIDWORD(v10);
+        *(float *)&v12 = *(float *)&v10 / fLength;
+      }
+      v17 = (float)(*(float *)&v10 * pRacePoint->vDistanceRay.y) + pRacePoint->vPosition.y;
+      v18 = position->x - (float)((float)(*(float *)&v10 * pRacePoint->vDistanceRay.x) + pRacePoint->vPosition.x);
+      v19 = position->z - (float)((float)(*(float *)&v10 * pRacePoint->vDistanceRay.z) + pRacePoint->vPosition.z);
     }
     else
     {
-      if ( v10 <= -40.0 )
-        v10 = FLOAT_N40_0;
-      v17 = v3->fLength;
-      if ( v17 > 0.001 )
-        v14 = v10 / v17;
-      v18 = (float)(v10 * v3->vDistanceRay.y) + v3->vPosition.y;
-      v19 = v4->x - (float)((float)(v10 * v3->vDistanceRay.x) + v3->vPosition.x);
-      v20 = v4->z - (float)((float)(v10 * v3->vDistanceRay.z) + v3->vPosition.z);
+      if ( pRacePoint != &v15[m_pPointer->nRacePoints - 1] || *(float *)&x_low <= 0.0 )
+        goto LABEL_30;
+      if ( *(float *)&x_low >= 60.0 )
+        x_low = LODWORD(FLOAT_60_0);
+      v20 = pRacePoint->fLength;
+      if ( v20 > 0.001 )
+      {
+        HIDWORD(v12) = HIDWORD(x_low);
+        *(float *)&v12 = *(float *)&x_low / v20;
+      }
+      v18 = position->x
+          - (float)((float)((float)(v20 * pRacePoint->vDirection.x) + pRacePoint->vPosition.x)
+                  + (float)(*(float *)&v10 * p_x[8]));
+      v17 = (float)((float)(v20 * pRacePoint->vDirection.y) + pRacePoint->vPosition.y)
+          + (float)(*(float *)&v10 * p_x[9]);
+      v19 = position->z
+          - (float)((float)((float)(v20 * pRacePoint->vDirection.z) + pRacePoint->vPosition.z)
+                  + (float)(*(float *)&v10 * p_x[10]));
     }
-    v22 = (__m128)LODWORD(v4->y);
-    v22.m128_f32[0] = (float)((float)((float)(v22.m128_f32[0] - v18) * (float)(v22.m128_f32[0] - v18))
-                            + (float)(v19 * v19))
-                    + (float)(v20 * v20);
-    LODWORD(v5->fRaceProximity) = (unsigned __int128)_mm_sqrt_ps(v22);
+    y_low = (__m128)LODWORD(position->y);
+    y_low.m128_f32[0] = (float)((float)((float)(y_low.m128_f32[0] - v17) * (float)(y_low.m128_f32[0] - v17))
+                              + (float)(v18 * v18))
+                      + (float)(v19 * v19);
+    LODWORD(this->fRaceProximity) = _mm_sqrt_ps(y_low).m128_u32[0];
   }
 LABEL_30:
-  v23 = v2->fLength;
-  v24 = (float)(v14 * v3->fLength) + v3->fRaceDistance;
-  v5->fRaceDistance = v24;
-  if ( v15 )
-    v5->fRaceDistance = UFG::qSignedMod(v24, v23);
+  v22 = m_pPointer->fLength;
+  *(float *)&v12 = (float)(*(float *)&v12 * pRacePoint->fLength) + pRacePoint->fRaceDistance;
+  this->fRaceDistance = *(float *)&v12;
+  if ( bIsLoop )
+    this->fRaceDistance = UFG::qSignedMod(v12, v22);
 }
 
 // File Line: 385
 // RVA: 0x64EFA0
 signed __int64 __fastcall UFG::RacePosition::GetRaceIndex(UFG::RacePosition *this)
 {
-  UFG::RaceTrail *v1; // rax
-  signed __int64 result; // rax
+  UFG::RaceTrail *m_pPointer; // rax
 
-  v1 = this->pRaceTrail.m_pPointer;
-  if ( v1 )
-    result = (unsigned int)v1->mRaceIndex;
+  m_pPointer = this->pRaceTrail.m_pPointer;
+  if ( m_pPointer )
+    return (unsigned int)m_pPointer->mRaceIndex;
   else
-    result = 0xFFFFFFFFi64;
-  return result;
+    return 0xFFFFFFFFi64;
 }
 
 // File Line: 417
@@ -729,9 +719,9 @@ bool __fastcall UFG::TimeTrial::Exits(UFG::TimeTrial *this, UFG::qVector3 *p0, U
   float v7; // xmm8_4
   float v8; // xmm11_4
   float v9; // xmm10_4
-  float v10; // xmm2_4
-  float v11; // xmm3_4
-  float v12; // xmm9_4
+  float x; // xmm9_4
+  float y; // xmm0_4
+  float z; // xmm1_4
   float v13; // xmm6_4
   float v14; // xmm9_4
   float v15; // xmm0_4
@@ -743,11 +733,11 @@ bool __fastcall UFG::TimeTrial::Exits(UFG::TimeTrial *this, UFG::qVector3 *p0, U
   v7 = p1->z - this->vPosition[exit].z;
   v8 = p0->z - this->vPosition[exit].z;
   v9 = p0->x - this->vPosition[exit].x;
-  v10 = this->fRadius[3 * (exit + 3i64)];
-  v11 = this->fRadius[3 * (exit + 3i64) + 1];
-  v12 = *((float *)&this->nUid + 3 * (exit + 3i64));
-  v13 = (float)((float)(v12 * v5) + (float)(v10 * v6)) + (float)(v11 * v7);
-  v14 = (float)((float)(v12 * v9) + (float)(v10 * v4)) + (float)(v11 * v8);
+  x = this->vDirection[exit].x;
+  y = this->vDirection[exit].y;
+  z = this->vDirection[exit].z;
+  v13 = (float)((float)(x * v5) + (float)(y * v6)) + (float)(z * v7);
+  v14 = (float)((float)(x * v9) + (float)(y * v4)) + (float)(z * v8);
   if ( v14 < 0.0 || v13 >= 0.0 )
     return 0;
   v15 = this->fRadius[exit];
@@ -760,15 +750,13 @@ bool __fastcall UFG::TimeTrial::Exits(UFG::TimeTrial *this, UFG::qVector3 *p0, U
 // RVA: 0x642C70
 void __fastcall UFG::RaceManager::RaceManager(UFG::RaceManager *this)
 {
-  UFG::RaceManager *v1; // rbx
   UFG::RaceTrail **v2; // rax
-  signed __int64 v3; // rcx
+  __int64 v3; // rcx
   UFG::TimeTrial *v4; // rax
-  signed __int64 v5; // rcx
+  __int64 v5; // rcx
 
-  v1 = this;
-  UFG::TSActor::TSActor((UFG::TSActor *)&this->vfptr, &UFG::RaceManager::mClass->i_name, UFG::RaceManager::mClass);
-  v1->vfptr = (SSObjectBaseVtbl *)&UFG::RaceManager::`vftable;
+  UFG::TSActor::TSActor(this, &UFG::RaceManager::mClass->i_name, UFG::RaceManager::mClass);
+  this->vfptr = (SSObjectBaseVtbl *)&UFG::RaceManager::`vftable;
   v2 = UFG::RaceManager::aRaceTrails;
   v3 = 8i64;
   do
@@ -813,8 +801,7 @@ UFG::TimeTrial *__fastcall UFG::RaceManager::GetTimeTrial(unsigned int uid)
   v1 = UFG::RaceManager::aTimeTrials;
   while ( !*v1 || uid != (*v1)->nUid )
   {
-    ++v1;
-    if ( (signed __int64)v1 >= (signed __int64)&UFG::AiDriverComponent::m_nNumAmbientSpawnPerFrame )
+    if ( (__int64)++v1 >= (__int64)&UFG::AiDriverComponent::m_nNumAmbientSpawnPerFrame )
       return 0i64;
   }
   return *v1;
@@ -825,7 +812,6 @@ UFG::TimeTrial *__fastcall UFG::RaceManager::GetTimeTrial(unsigned int uid)
 UFG::RaceTrail *__fastcall UFG::RaceManager::GetRaceTrail(int index)
 {
   int v1; // eax
-  UFG::RaceTrail *result; // rax
 
   if ( index <= 0 )
   {
@@ -838,10 +824,9 @@ UFG::RaceTrail *__fastcall UFG::RaceManager::GetRaceTrail(int index)
       v1 = 63;
   }
   if ( index == v1 )
-    result = UFG::RaceManager::aRaceTrails[index];
+    return UFG::RaceManager::aRaceTrails[index];
   else
-    result = 0i64;
-  return result;
+    return 0i64;
 }
 
 // File Line: 517
@@ -856,12 +841,12 @@ void UFG::RaceManager::Release(void)
   {
     if ( *v0 )
     {
-      (*v0)->vfptr->__vecDelDtor((UFG::qSafePointerNode<UFG::RaceTrail> *)&(*v0)->vfptr, 1u);
+      (*v0)->vfptr->__vecDelDtor(*v0, 1u);
       *v0 = 0i64;
     }
     ++v0;
   }
-  while ( (signed __int64)v0 < (signed __int64)UFG::RaceManager::aTimeTrials );
+  while ( (__int64)v0 < (__int64)UFG::RaceManager::aTimeTrials );
   v1 = (void **)UFG::RaceManager::aTimeTrials;
   do
   {
@@ -872,7 +857,7 @@ void UFG::RaceManager::Release(void)
     }
     ++v1;
   }
-  while ( (signed __int64)v1 < (signed __int64)&UFG::AiDriverComponent::m_nNumAmbientSpawnPerFrame );
+  while ( (__int64)v1 < (__int64)&UFG::AiDriverComponent::m_nNumAmbientSpawnPerFrame );
 }
 
 // File Line: 556
@@ -892,70 +877,83 @@ void UFG::RaceManager::Create(void)
 // RVA: 0x645710
 void UFG::RaceManager::BindAtomics(void)
 {
+  ASymbol rebind; // [rsp+20h] [rbp-18h]
+  ASymbol rebinda; // [rsp+20h] [rbp-18h]
+  ASymbol rebindb; // [rsp+20h] [rbp-18h]
+  ASymbol rebindc; // [rsp+20h] [rbp-18h]
+  ASymbol rebindd; // [rsp+20h] [rbp-18h]
+  ASymbol rebinde; // [rsp+20h] [rbp-18h]
+  ASymbol rebindf; // [rsp+20h] [rbp-18h]
+  ASymbol rebindg; // [rsp+20h] [rbp-18h]
+
+  LOBYTE(rebind.i_uid) = 0;
   UFG::RaceManager::mClass = (SSActorClass *)SSBrain::get_class("RaceManager");
+  SSClass::register_method_func(UFG::RaceManager::mClass, "time_trial", UFG::RaceManager::MthdC_time_trial, 1, rebind);
+  LOBYTE(rebinda.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::RaceManager::mClass->vfptr,
-    "time_trial",
-    UFG::RaceManager::MthdC_time_trial,
-    1,
-    0);
-  SSClass::register_method_func(
-    (SSClass *)&UFG::RaceManager::mClass->vfptr,
+    UFG::RaceManager::mClass,
     "race_release",
     UFG::RaceManager::MthdC_race_release,
     1,
-    0);
+    rebinda);
+  LOBYTE(rebindb.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::RaceManager::mClass->vfptr,
+    UFG::RaceManager::mClass,
     "race_release_trail",
     UFG::RaceManager::MthdC_race_release_trail,
     1,
-    0);
+    rebindb);
+  LOBYTE(rebindc.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::RaceManager::mClass->vfptr,
+    UFG::RaceManager::mClass,
     "race_allocate",
     UFG::RaceManager::MthdC_race_allocate,
     1,
-    0);
+    rebindc);
+  LOBYTE(rebindd.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::RaceManager::mClass->vfptr,
+    UFG::RaceManager::mClass,
     "race_finalize",
     UFG::RaceManager::MthdC_race_finalize,
     1,
-    0);
+    rebindd);
+  LOBYTE(rebinde.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::RaceManager::mClass->vfptr,
+    UFG::RaceManager::mClass,
     "race_add_xform",
     UFG::RaceManager::MthdC_race_add_xform,
     1,
-    0);
+    rebinde);
+  LOBYTE(rebindf.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::RaceManager::mClass->vfptr,
+    UFG::RaceManager::mClass,
     "race_set_is_loop",
     UFG::RaceManager::MthdC_race_set_is_loop,
     1,
-    0);
+    rebindf);
+  LOBYTE(rebindg.i_uid) = 0;
   SSClass::register_method_func(
-    (SSClass *)&UFG::RaceManager::mClass->vfptr,
+    UFG::RaceManager::mClass,
     "race_set_num_laps",
     UFG::RaceManager::MthdC_race_set_num_laps,
     1,
-    0);
+    rebindg);
 }
 
 // File Line: 585
 // RVA: 0x65E960
-char __fastcall UFG::RaceManager::TimeTrialEntered(UFG::qVector3 *p0, UFG::qVector3 *p1, unsigned int *p_uid, unsigned int *p_exit)
+char __fastcall UFG::RaceManager::TimeTrialEntered(
+        UFG::qVector3 *p0,
+        UFG::qVector3 *p1,
+        unsigned int *p_uid,
+        unsigned int *p_exit)
 {
-  unsigned int *v4; // rsi
-  UFG::qVector3 *v5; // rbx
-  UFG::qVector3 *v6; // rdi
-  UFG::TimeTrial **v7; // r10
-  UFG::TimeTrial *v8; // r11
-  int v9; // er8
+  unsigned int **v7; // r10
+  unsigned int *v8; // r11
+  int v9; // r8d
   float *v10; // rdx
   float *v11; // rcx
-  signed __int64 v12; // rax
+  __int64 v12; // rax
   float v13; // xmm10_4
   float v14; // xmm5_4
   float v15; // xmm11_4
@@ -966,32 +964,28 @@ char __fastcall UFG::RaceManager::TimeTrialEntered(UFG::qVector3 *p0, UFG::qVect
   float v20; // xmm6_4
   float v21; // xmm0_4
 
-  v4 = p_uid;
-  v5 = p1;
-  v6 = p0;
-  v7 = UFG::RaceManager::aTimeTrials;
+  v7 = (unsigned int **)UFG::RaceManager::aTimeTrials;
   while ( 1 )
   {
     v8 = *v7;
     if ( *v7 )
       break;
 LABEL_9:
-    ++v7;
-    if ( (signed __int64)v7 >= (signed __int64)&UFG::AiDriverComponent::m_nNumAmbientSpawnPerFrame )
+    if ( (__int64)++v7 >= (__int64)&UFG::AiDriverComponent::m_nNumAmbientSpawnPerFrame )
       return 0;
   }
   v9 = 0;
-  v10 = v8->fRadius;
-  v11 = &v8->vPosition[0].z;
+  v10 = (float *)(v8 + 1);
+  v11 = (float *)(v8 + 5);
   v12 = 0i64;
   while ( 1 )
   {
-    v13 = v6->x - *(v11 - 2);
-    v14 = v6->y - *(v11 - 1);
-    v15 = v6->z - *v11;
-    v16 = v5->x - *(v11 - 2);
-    v17 = v5->y - *(v11 - 1);
-    v18 = v5->z - *v11;
+    v13 = p0->x - *(v11 - 2);
+    v14 = p0->y - *(v11 - 1);
+    v15 = p0->z - *v11;
+    v16 = p1->x - *(v11 - 2);
+    v17 = p1->y - *(v11 - 1);
+    v18 = p1->z - *v11;
     v19 = (float)((float)(v11[4] * v13) + (float)(v11[5] * v14)) + (float)(v11[6] * v15);
     v20 = (float)((float)(v11[4] * v16) + (float)(v11[5] * v17)) + (float)(v11[6] * v18);
     if ( v19 < 0.0 && v20 >= 0.0 )
@@ -1011,7 +1005,7 @@ LABEL_9:
       goto LABEL_9;
   }
   *p_exit = v9 ^ 1;
-  *v4 = v8->nUid;
+  *p_uid = *v8;
   return 1;
 }
 
@@ -1019,26 +1013,22 @@ LABEL_9:
 // RVA: 0x652C00
 void __fastcall UFG::RaceManager::MthdC_race_allocate(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInstance **v2; // r14
   unsigned int v3; // ebp
   SSInstance *v4; // rdi
   int v5; // ebx
   UFG::RaceTrail **v6; // rax
-  int v7; // esi
+  int i_user_data; // esi
   UFG::allocator::free_link *v8; // rax
   UFG::RaceTrail *v9; // rax
   UFG::RaceTrail *v10; // rcx
   SSClass *v11; // rsi
-  AObjReusePool<SSInstance> *v12; // rax
-  AObjReusePool<SSInstance> *v13; // rbx
+  AObjReusePool<SSInstance> *pool; // rbx
+  unsigned int i_count; // eax
   unsigned int v14; // eax
-  unsigned int v15; // eax
-  unsigned int v16; // eax
-  __int64 v17; // rcx
-  SSInstance **v18; // rax
-  unsigned int v19; // eax
+  __int64 v15; // rcx
+  SSInstance **i_array_p; // rax
+  unsigned int v17; // eax
 
-  v2 = ppResult;
   v3 = -1;
   v4 = 0i64;
   v5 = 0;
@@ -1046,16 +1036,15 @@ void __fastcall UFG::RaceManager::MthdC_race_allocate(SSInvokedMethod *pScope, S
   while ( *v6 )
   {
     ++v5;
-    ++v6;
-    if ( (signed __int64)v6 >= (signed __int64)UFG::RaceManager::aTimeTrials )
+    if ( (__int64)++v6 >= (__int64)UFG::RaceManager::aTimeTrials )
       goto LABEL_9;
   }
   v3 = v5;
-  v7 = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
+  i_user_data = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
   v8 = UFG::qMalloc(0x38ui64, "RaceTrail", 0i64);
   if ( v8 )
   {
-    UFG::RaceTrail::RaceTrail((UFG::RaceTrail *)v8, v7, v5);
+    UFG::RaceTrail::RaceTrail((UFG::RaceTrail *)v8, i_user_data, v5);
     v10 = v9;
   }
   else
@@ -1065,38 +1054,37 @@ void __fastcall UFG::RaceManager::MthdC_race_allocate(SSInvokedMethod *pScope, S
   UFG::RaceManager::aRaceTrails[v5] = v10;
 LABEL_9:
   v11 = SSBrain::c_integer_class_p;
-  v12 = SSInstance::get_pool();
-  v13 = v12;
-  v14 = v12->i_pool.i_count;
-  if ( v14 )
+  pool = SSInstance::get_pool();
+  if ( pool->i_pool.i_count )
   {
-    v19 = v14 - 1;
-    v13->i_pool.i_count = v19;
-    v17 = v19;
-    v18 = v13->i_pool.i_array_p;
+    v17 = pool->i_pool.i_count - 1;
+    pool->i_pool.i_count = v17;
+    v15 = v17;
+    i_array_p = pool->i_pool.i_array_p;
     goto LABEL_15;
   }
-  if ( !v13->i_exp_pool.i_count )
-    AObjReusePool<SSInstance>::append_block(v13, v13->i_expand_size);
-  v15 = v13->i_exp_pool.i_count;
-  if ( v15 )
+  if ( !pool->i_exp_pool.i_count )
+    AObjReusePool<SSInstance>::append_block(pool, pool->i_expand_size);
+  i_count = pool->i_exp_pool.i_count;
+  if ( i_count )
   {
-    v16 = v15 - 1;
-    v13->i_exp_pool.i_count = v16;
-    v17 = v16;
-    v18 = v13->i_exp_pool.i_array_p;
+    v14 = i_count - 1;
+    pool->i_exp_pool.i_count = v14;
+    v15 = v14;
+    i_array_p = pool->i_exp_pool.i_array_p;
 LABEL_15:
-    v4 = v18[v17];
+    v4 = i_array_p[v15];
   }
   v4->i_class_p = v11;
   v4->i_user_data = v3;
   v4->i_ref_count = 1;
   v4->i_ptr_id = ++SSObjectBase::c_ptr_id_prev;
-  *v2 = v4;
+  *ppResult = v4;
 }
 
 // File Line: 617
 // RVA: 0x652D60
+// attributes: thunk
 void __fastcall UFG::RaceManager::MthdC_race_release(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
   UFG::RaceManager::Release();
@@ -1106,13 +1094,13 @@ void __fastcall UFG::RaceManager::MthdC_race_release(SSInvokedMethod *pScope, SS
 // RVA: 0x652D70
 void __fastcall UFG::RaceManager::MthdC_race_release_trail(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  int v2; // ecx
+  int i_user_data; // ecx
   int v3; // eax
   UFG::RaceTrail **v4; // rbx
 
-  v2 = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
+  i_user_data = (*pScope->i_data.i_array_p)->i_data_p->i_user_data;
   v3 = 0;
-  while ( v3 != v2 )
+  while ( v3 != i_user_data )
   {
     if ( ++v3 >= 64 )
       return;
@@ -1120,7 +1108,7 @@ void __fastcall UFG::RaceManager::MthdC_race_release_trail(SSInvokedMethod *pSco
   v4 = &UFG::RaceManager::aRaceTrails[v3];
   if ( *v4 )
   {
-    (*v4)->vfptr->__vecDelDtor((UFG::qSafePointerNode<UFG::RaceTrail> *)&(*v4)->vfptr, 1u);
+    (*v4)->vfptr->__vecDelDtor(*v4, 1u);
     *v4 = 0i64;
   }
 }
@@ -1129,58 +1117,63 @@ void __fastcall UFG::RaceManager::MthdC_race_release_trail(SSInvokedMethod *pSco
 // RVA: 0x652D20
 void __fastcall UFG::RaceManager::MthdC_race_finalize(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  __int64 v2; // rcx
-  signed int v3; // eax
+  __int64 i_user_data_low; // rcx
+  int v3; // eax
+  UFG::RaceTrail *v4; // rcx
 
-  v2 = SLODWORD((*pScope->i_data.i_array_p)->i_data_p->i_user_data);
-  if ( (signed int)v2 <= 0 )
+  i_user_data_low = SLODWORD((*pScope->i_data.i_array_p)->i_data_p->i_user_data);
+  if ( (int)i_user_data_low <= 0 )
   {
     v3 = 0;
   }
   else
   {
-    v3 = v2;
-    if ( (signed int)v2 >= 63 )
+    v3 = i_user_data_low;
+    if ( (int)i_user_data_low >= 63 )
       v3 = 63;
   }
-  if ( (_DWORD)v2 == v3 )
-    JUMPOUT(UFG::RaceManager::aRaceTrails[v2], 0i64, UFG::RaceTrail::Finalize);
+  if ( (_DWORD)i_user_data_low == v3 )
+  {
+    v4 = UFG::RaceManager::aRaceTrails[i_user_data_low];
+    if ( v4 )
+      UFG::RaceTrail::Finalize(v4);
+  }
 }
 
 // File Line: 635
 // RVA: 0x652B50
 void __fastcall UFG::RaceManager::MthdC_race_add_xform(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSData **v2; // rdx
+  SSData **i_array_p; // rdx
   float v3; // xmm6_4
   float v4; // xmm7_4
-  unsigned __int64 v5; // rdi
-  __int64 v6; // rax
-  signed int v7; // ecx
+  unsigned __int64 i_user_data; // rdi
+  __int64 i_user_data_low; // rax
+  int v7; // ecx
   UFG::RaceTrail *v8; // rbx
 
-  v2 = pScope->i_data.i_array_p;
-  v3 = *(float *)&v2[2]->i_data_p->i_user_data;
-  v4 = *(float *)&v2[3]->i_data_p->i_user_data;
-  v5 = v2[1]->i_data_p->i_user_data;
-  v6 = SLODWORD((*v2)->i_data_p->i_user_data);
-  if ( (signed int)v6 <= 0 )
+  i_array_p = pScope->i_data.i_array_p;
+  v3 = *(float *)&i_array_p[2]->i_data_p->i_user_data;
+  v4 = *(float *)&i_array_p[3]->i_data_p->i_user_data;
+  i_user_data = i_array_p[1]->i_data_p->i_user_data;
+  i_user_data_low = SLODWORD((*i_array_p)->i_data_p->i_user_data);
+  if ( (int)i_user_data_low <= 0 )
   {
     v7 = 0;
   }
   else
   {
-    v7 = v6;
-    if ( (signed int)v6 >= 63 )
+    v7 = (*i_array_p)->i_data_p->i_user_data;
+    if ( (int)i_user_data_low >= 63 )
       v7 = 63;
   }
-  if ( (_DWORD)v6 == v7 )
+  if ( (_DWORD)i_user_data_low == v7 )
   {
-    v8 = UFG::RaceManager::aRaceTrails[v6];
+    v8 = UFG::RaceManager::aRaceTrails[i_user_data_low];
     if ( v8 )
     {
-      UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v5);
-      UFG::RaceTrail::AddRacePoint(v8, (UFG::qVector3 *)(v5 + 176), v3 * 0.27777779, v4);
+      UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)i_user_data);
+      UFG::RaceTrail::AddRacePoint(v8, (UFG::qVector3 *)(i_user_data + 176), v3 * 0.27777779, v4);
     }
   }
 }
@@ -1189,28 +1182,28 @@ void __fastcall UFG::RaceManager::MthdC_race_add_xform(SSInvokedMethod *pScope, 
 // RVA: 0x652DD0
 void __fastcall UFG::RaceManager::MthdC_race_set_is_loop(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSData **v2; // r8
-  __int64 v3; // rax
-  signed int v4; // ecx
+  SSData **i_array_p; // r8
+  __int64 i_user_data_low; // rax
+  int i_user_data; // ecx
   UFG::RaceTrail *v5; // rdx
 
-  v2 = pScope->i_data.i_array_p;
-  v3 = SLODWORD((*v2)->i_data_p->i_user_data);
-  if ( (signed int)v3 <= 0 )
+  i_array_p = pScope->i_data.i_array_p;
+  i_user_data_low = SLODWORD((*i_array_p)->i_data_p->i_user_data);
+  if ( (int)i_user_data_low <= 0 )
   {
-    v4 = 0;
+    i_user_data = 0;
   }
   else
   {
-    v4 = v3;
-    if ( (signed int)v3 >= 63 )
-      v4 = 63;
+    i_user_data = (*i_array_p)->i_data_p->i_user_data;
+    if ( (int)i_user_data_low >= 63 )
+      i_user_data = 63;
   }
-  if ( (_DWORD)v3 == v4 )
+  if ( (_DWORD)i_user_data_low == i_user_data )
   {
-    v5 = UFG::RaceManager::aRaceTrails[v3];
+    v5 = UFG::RaceManager::aRaceTrails[i_user_data_low];
     if ( v5 )
-      v5->bIsLoop = v2[1]->i_data_p->i_user_data != 0;
+      v5->bIsLoop = i_array_p[1]->i_data_p->i_user_data != 0;
   }
 }
 
@@ -1218,28 +1211,28 @@ void __fastcall UFG::RaceManager::MthdC_race_set_is_loop(SSInvokedMethod *pScope
 // RVA: 0x652E20
 void __fastcall UFG::RaceManager::MthdC_race_set_num_laps(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSData **v2; // r8
-  __int64 v3; // rax
-  signed int v4; // ecx
+  SSData **i_array_p; // r8
+  __int64 i_user_data_low; // rax
+  int i_user_data; // ecx
   UFG::RaceTrail *v5; // rdx
 
-  v2 = pScope->i_data.i_array_p;
-  v3 = SLODWORD((*v2)->i_data_p->i_user_data);
-  if ( (signed int)v3 <= 0 )
+  i_array_p = pScope->i_data.i_array_p;
+  i_user_data_low = SLODWORD((*i_array_p)->i_data_p->i_user_data);
+  if ( (int)i_user_data_low <= 0 )
   {
-    v4 = 0;
+    i_user_data = 0;
   }
   else
   {
-    v4 = v3;
-    if ( (signed int)v3 >= 63 )
-      v4 = 63;
+    i_user_data = (*i_array_p)->i_data_p->i_user_data;
+    if ( (int)i_user_data_low >= 63 )
+      i_user_data = 63;
   }
-  if ( (_DWORD)v3 == v4 )
+  if ( (_DWORD)i_user_data_low == i_user_data )
   {
-    v5 = UFG::RaceManager::aRaceTrails[v3];
+    v5 = UFG::RaceManager::aRaceTrails[i_user_data_low];
     if ( v5 )
-      v5->nLaps = v2[1]->i_data_p->i_user_data;
+      v5->nLaps = i_array_p[1]->i_data_p->i_user_data;
   }
 }
 
@@ -1247,12 +1240,11 @@ void __fastcall UFG::RaceManager::MthdC_race_set_num_laps(SSInvokedMethod *pScop
 // RVA: 0x652FA0
 void __fastcall UFG::RaceManager::MthdC_time_trial(SSInvokedMethod *pScope, SSInstance **ppResult)
 {
-  SSInvokedMethod *v2; // r15
   int v3; // ebx
   UFG::TimeTrial **v4; // rax
-  SSData **v5; // rdx
-  SSInstance *v6; // rsi
-  unsigned __int64 v7; // rbp
+  SSData **i_array_p; // rdx
+  SSInstance *i_data_p; // rsi
+  unsigned __int64 i_user_data; // rbp
   unsigned __int64 v8; // r14
   UFG::allocator::free_link *v9; // rax
   UFG::allocator::free_link *v10; // rdi
@@ -1266,34 +1258,32 @@ void __fastcall UFG::RaceManager::MthdC_time_trial(SSInvokedMethod *pScope, SSIn
   int v18; // xmm0_4
   int v19; // xmm1_4
 
-  v2 = pScope;
   v3 = 0;
   v4 = UFG::RaceManager::aTimeTrials;
   while ( *v4 )
   {
     ++v3;
-    ++v4;
-    if ( (signed __int64)v4 >= (signed __int64)&UFG::AiDriverComponent::m_nNumAmbientSpawnPerFrame )
+    if ( (__int64)++v4 >= (__int64)&UFG::AiDriverComponent::m_nNumAmbientSpawnPerFrame )
       return;
   }
-  v5 = pScope->i_data.i_array_p;
-  v6 = (*v5)->i_data_p;
-  v7 = v5[1]->i_data_p->i_user_data;
-  v8 = v5[3]->i_data_p->i_user_data;
+  i_array_p = pScope->i_data.i_array_p;
+  i_data_p = (*i_array_p)->i_data_p;
+  i_user_data = i_array_p[1]->i_data_p->i_user_data;
+  v8 = i_array_p[3]->i_data_p->i_user_data;
   v9 = UFG::qMalloc(0x3Cui64, "TimeTrial", 0i64);
   v10 = v9;
   if ( v9 )
-    LODWORD(v9->mNext) = v6->i_user_data;
+    LODWORD(v9->mNext) = i_data_p->i_user_data;
   else
     v10 = 0i64;
   UFG::RaceManager::aTimeTrials[v3] = (UFG::TimeTrial *)v10;
-  v11 = v2->i_data.i_array_p;
+  v11 = pScope->i_data.i_array_p;
   HIDWORD(v10->mNext) = v11[2]->i_data_p->i_user_data;
   LODWORD(v10[1].mNext) = v11[4]->i_data_p->i_user_data;
-  UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v7);
-  v12 = *(_DWORD *)(v7 + 180);
-  v13 = *(_DWORD *)(v7 + 184);
-  HIDWORD(v10[1].mNext) = *(_DWORD *)(v7 + 176);
+  UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)i_user_data);
+  v12 = *(_DWORD *)(i_user_data + 180);
+  v13 = *(_DWORD *)(i_user_data + 184);
+  HIDWORD(v10[1].mNext) = *(_DWORD *)(i_user_data + 176);
   LODWORD(v10[2].mNext) = v12;
   HIDWORD(v10[2].mNext) = v13;
   UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v8);
@@ -1302,10 +1292,10 @@ void __fastcall UFG::RaceManager::MthdC_time_trial(SSInvokedMethod *pScope, SSIn
   LODWORD(v10[3].mNext) = *(_DWORD *)(v8 + 176);
   HIDWORD(v10[3].mNext) = v14;
   LODWORD(v10[4].mNext) = v15;
-  UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v7);
-  v16 = *(_DWORD *)(v7 + 132);
-  v17 = *(_DWORD *)(v7 + 136);
-  HIDWORD(v10[4].mNext) = *(_DWORD *)(v7 + 128);
+  UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)i_user_data);
+  v16 = *(_DWORD *)(i_user_data + 132);
+  v17 = *(_DWORD *)(i_user_data + 136);
+  HIDWORD(v10[4].mNext) = *(_DWORD *)(i_user_data + 128);
   LODWORD(v10[5].mNext) = v16;
   HIDWORD(v10[5].mNext) = v17;
   UFG::TransformNodeComponent::UpdateWorldTransform((UFG::TransformNodeComponent *)v8);

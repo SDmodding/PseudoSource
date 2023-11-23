@@ -2,72 +2,72 @@
 // RVA: 0x410A90
 void __fastcall UFG::GameStateRestoreCheckpoint::OnEnter(UFG::GameStateRestoreCheckpoint *this, float deltaSeconds)
 {
-  UFG::GameStateRestoreCheckpoint *v2; // rsi
-  UFG::TiDo *v3; // rax
+  UFG::TiDo *Instance; // rax
   UFG::TiDo *v4; // rax
-  char v5; // bp
-  UFG::GameSlice *v6; // rdi
+  bool v5; // bp
+  UFG::GameSlice *mpLastCheckpoint; // rdi
   UFG::qSharedStringData *v7; // rbx
   UFG::qSharedStringData *v8; // rbx
   UFG::ProgressionTracker *v9; // rax
   UFG::UI *v10; // rcx
-  UFG::qWiseSymbol result; // [rsp+50h] [rbp+8h]
-  UFG::qWiseSymbol source; // [rsp+60h] [rbp+18h]
+  UFG::qWiseSymbol result; // [rsp+50h] [rbp+8h] BYREF
+  UFG::qWiseSymbol source; // [rsp+60h] [rbp+18h] BYREF
 
-  v2 = this;
   UFG::qWiseSymbol::create_from_string(&result, "loadstart");
   UFG::qWiseSymbol::create_from_string(&source, "loadfinish");
   UFG::qWiseSymbol::operator=(&stru_14207B268, &source);
-  if ( unk_14207B260 != 1 )
+  if ( byte_14207B260 != 1 )
   {
     UFG::qWiseSymbol::operator=(&stru_14207B264, &result);
-    if ( unk_14207B26C )
+    if ( (_BYTE)word_14207B26C )
     {
-      if ( unk_14207B260 && (unsigned __int8)UFG::TiDo::GetIsInstantiated() )
+      if ( byte_14207B260 && UFG::TiDo::GetIsInstantiated() )
       {
-        v3 = UFG::TiDo::GetInstance();
-        v3->vfptr->LoadingGameEnd(v3, &stru_14207B268);
+        Instance = UFG::TiDo::GetInstance();
+        Instance->vfptr->LoadingGameEnd(Instance, &stru_14207B268);
       }
-      if ( unk_14207B26C )
+      if ( (_BYTE)word_14207B26C )
       {
         UFG::qWiseSymbol::operator=(&stru_14207B264, &result);
-        if ( (unsigned __int8)UFG::TiDo::GetIsInstantiated() )
+        if ( UFG::TiDo::GetIsInstantiated() )
         {
           v4 = UFG::TiDo::GetInstance();
           v4->vfptr->LoadingGameStart(v4, &stru_14207B264);
         }
       }
     }
-    unk_14207B260 = 1;
+    byte_14207B260 = 1;
   }
   UFG::UIHK_NISOverlay::ShowCurtains(0.0, 1);
   _((AMD_HD3D *)source.mUID);
-  unk_14207B26E = 1;
+  byte_14207B26E = 1;
   v5 = 1;
   _((AMD_HD3D *)1);
-  v2->mLoadStage = 0;
-  v2->mHasNis = 0;
-  v6 = UFG::ProgressionTracker::Instance()->mpLastCheckpoint;
-  if ( v6 )
+  this->mLoadStage = eLS_INIT;
+  this->mHasNis = 0;
+  mpLastCheckpoint = UFG::ProgressionTracker::Instance()->mpLastCheckpoint;
+  if ( mpLastCheckpoint )
   {
-    v7 = (UFG::qSharedStringData *)(v6->mNisPath.mText - 48);
+    v7 = (UFG::qSharedStringData *)(mpLastCheckpoint->mNisPath.mText - 48);
     if ( v7 != UFG::qSharedStringData::GetEmptyString() )
     {
 LABEL_18:
-      v2->mHasNis = v5;
+      this->mHasNis = v5;
       goto LABEL_19;
     }
-    if ( !v6->mpParent && v6->mType > 0 && (signed int)UFG::GameSlice::GetNumChildren(v6) > 0 )
+    if ( !mpLastCheckpoint->mpParent
+      && mpLastCheckpoint->mType > TYPE_CULL
+      && (int)UFG::GameSlice::GetNumChildren(mpLastCheckpoint) > 0 )
     {
-      v8 = (UFG::qSharedStringData *)(UFG::GameSlice::GetChild(v6, 0)->mNisPath.mText - 48);
-      if ( v8 == UFG::qSharedStringData::GetEmptyString() || UFG::GameSlice::HasProgressionTrigger(v6) )
+      v8 = (UFG::qSharedStringData *)(UFG::GameSlice::GetChild(mpLastCheckpoint, 0)->mNisPath.mText - 48);
+      if ( v8 == UFG::qSharedStringData::GetEmptyString() || UFG::GameSlice::HasProgressionTrigger(mpLastCheckpoint) )
         v5 = 0;
       goto LABEL_18;
     }
   }
 LABEL_19:
   UFG::SectionChooser::EnableStreamsUpdate(1);
-  if ( v2->mHasNis )
+  if ( this->mHasNis )
   {
     v9 = UFG::ProgressionTracker::Instance();
     UFG::ProgressionTracker::SetResourceFreezeMode(v9, 1);
@@ -86,9 +86,9 @@ LABEL_19:
 // RVA: 0x410EB0
 void __fastcall UFG::GameStateRestoreCheckpoint::OnExit(UFG::GameStateRestoreCheckpoint *this, float deltaSeconds)
 {
-  UFG::qWiseSymbol *v2; // rax
-  UFG::TiDo *v3; // rax
-  UFG::qWiseSymbol result; // [rsp+50h] [rbp+18h]
+  UFG::qWiseSymbol *null; // rax
+  UFG::TiDo *Instance; // rax
+  UFG::qWiseSymbol result; // [rsp+50h] [rbp+18h] BYREF
 
   UFG::UI::LockGameplayInput((UFG::UI *)this);
   UFG::UI::ResetInputCounterHack(1);
@@ -96,16 +96,16 @@ void __fastcall UFG::GameStateRestoreCheckpoint::OnExit(UFG::GameStateRestoreChe
   {
     UFG::qWiseSymbol::create_from_string(&result, "loadfinish");
     UFG::qWiseSymbol::operator=(&stru_14207B268, &result);
-    v2 = UFG::qWiseSymbol::get_null();
-    if ( unk_14207B260 )
+    null = UFG::qWiseSymbol::get_null();
+    if ( byte_14207B260 )
     {
-      UFG::qWiseSymbol::operator=(&stru_14207B264, v2);
-      if ( unk_14207B26C && unk_14207B260 && (unsigned __int8)UFG::TiDo::GetIsInstantiated() )
+      UFG::qWiseSymbol::operator=(&stru_14207B264, null);
+      if ( (_BYTE)word_14207B26C && byte_14207B260 && UFG::TiDo::GetIsInstantiated() )
       {
-        v3 = UFG::TiDo::GetInstance();
-        v3->vfptr->LoadingGameEnd(v3, &stru_14207B268);
+        Instance = UFG::TiDo::GetInstance();
+        Instance->vfptr->LoadingGameEnd(Instance, &stru_14207B268);
       }
-      unk_14207B260 = 0;
+      byte_14207B260 = 0;
     }
     UFG::UIHK_NISOverlay::HideCurtains(2.5, 1);
     _((AMD_HD3D *)result.mUID);
@@ -117,270 +117,270 @@ void __fastcall UFG::GameStateRestoreCheckpoint::OnExit(UFG::GameStateRestoreChe
 // RVA: 0x412F80
 void __fastcall UFG::GameStateRestoreCheckpoint::OnUpdate(UFG::GameStateRestoreCheckpoint *this, float deltaSeconds)
 {
-  UFG::GameStateRestoreCheckpoint *v2; // rsi
-  UFG::ProgressionTracker *v3; // rax
-  UFG::ProgressionTracker *v4; // rbp
-  UFG::ProgressionTracker::State v5; // eax
-  UFG::SimObjectCharacter *v6; // rax
-  AMD_HD3D *v7; // rcx
-  UFG::TransformNodeComponent *v8; // rbx
-  int v9; // eax
-  UFG::ProgressionTracker *v10; // rax
-  int v11; // ebx
-  UFG::ObjectResourceManager *v12; // rax
-  int v13; // ebx
-  UFG::PartDatabase *v14; // rax
-  unsigned int v15; // ebx
-  int v16; // eax
-  UFG::TriggerUpdateContext *v17; // rax
-  UFG::GeographicalLayerManager *v18; // rax
-  UFG::qVector3 *v19; // rbx
-  UFG::GeographicalLayerManager *v20; // rax
-  UFG::PropSpawnManager *v21; // rax
-  UFG::ObjectResourceManager *v22; // rax
-  UFG::PartDatabase *v23; // rax
+  UFG::ProgressionTracker *v3; // rbp
+  UFG::ProgressionTracker::State mState; // eax
+  UFG::SimObjectCharacter *LocalPlayer; // rax
+  AMD_HD3D *v6; // rcx
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rbx
+  int CurrentState; // eax
+  UFG::ProgressionTracker *v9; // rax
+  int BytesRemainingToLoad; // ebx
+  UFG::ObjectResourceManager *v11; // rax
+  int v12; // ebx
+  UFG::PartDatabase *v13; // rax
+  int v14; // ebx
+  int v15; // eax
+  UFG::TriggerUpdateContext *TriggerUpdateContext; // rax
+  UFG::GeographicalLayerManager *Instance; // rax
+  UFG::qVector3 *LayerLoadPosition; // rbx
+  UFG::GeographicalLayerManager *v19; // rax
+  UFG::PropSpawnManager *v20; // rax
+  UFG::ObjectResourceManager *v21; // rax
+  UFG::PartDatabase *v22; // rax
+  UFG::ObjectResourceManager *v23; // rax
   UFG::ObjectResourceManager *v24; // rax
-  UFG::ObjectResourceManager *v25; // rax
-  int v26; // ebx
-  int v27; // eax
-  UFG::TriggerUpdateContext *v28; // rax
-  UFG::GeographicalLayerManager *v29; // rax
-  UFG::qVector3 *v30; // rbx
-  UFG::GeographicalLayerManager *v31; // rax
-  UFG::PropSpawnManager *v32; // rax
-  UFG::ObjectResourceManager *v33; // rax
-  UFG::PartDatabase *v34; // rax
-  UFG::ObjectResourceManager *v35; // rax
-  UFG::PartDatabase *v36; // rax
-  UFG::qVector3 velocity; // [rsp+40h] [rbp-68h]
-  UFG::qVector3 v38; // [rsp+50h] [rbp-58h]
-  UFG::TriggerUpdateContext result; // [rsp+60h] [rbp-48h]
-  UFG::TriggerUpdateContext v40; // [rsp+78h] [rbp-30h]
+  int v25; // ebx
+  int v26; // eax
+  UFG::TriggerUpdateContext *v27; // rax
+  UFG::GeographicalLayerManager *v28; // rax
+  UFG::qVector3 *v29; // rbx
+  UFG::GeographicalLayerManager *v30; // rax
+  UFG::PropSpawnManager *v31; // rax
+  UFG::ObjectResourceManager *v32; // rax
+  UFG::PartDatabase *v33; // rax
+  UFG::ObjectResourceManager *v34; // rax
+  UFG::PartDatabase *v35; // rax
+  UFG::qVector3 velocity; // [rsp+40h] [rbp-68h] BYREF
+  UFG::qVector3 v37; // [rsp+50h] [rbp-58h] BYREF
+  UFG::TriggerUpdateContext result; // [rsp+60h] [rbp-48h] BYREF
+  UFG::TriggerUpdateContext v39; // [rsp+78h] [rbp-30h] BYREF
 
-  v2 = this;
   v3 = UFG::ProgressionTracker::Instance();
-  v4 = v3;
-  v5 = v3->mState;
-  if ( v5 == 8 )
+  mState = v3->mState;
+  if ( mState == 8 )
   {
-    if ( v2->mHasNis )
+    if ( this->mHasNis )
     {
-      v4->mIsWorldDataRestored = 1;
+      v3->mIsWorldDataRestored = 1;
     }
     else
     {
-      v6 = UFG::GetLocalPlayer();
-      if ( v6 )
+      LocalPlayer = UFG::GetLocalPlayer();
+      if ( LocalPlayer )
       {
-        v8 = v6->m_pTransformNodeComponent;
-        UFG::TransformNodeComponent::UpdateWorldTransform(v8);
-        UFG::TransformNodeComponent::UpdateWorldTransform(v8);
+        m_pTransformNodeComponent = LocalPlayer->m_pTransformNodeComponent;
+        UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+        UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
         *(_QWORD *)&velocity.x = 0i64;
         velocity.z = 0.0;
-        v9 = UFG::FlowController::GetCurrentState(&UFG::gFlowController);
+        CurrentState = UFG::FlowController::GetCurrentState(&UFG::gFlowController);
         UFG::SectionChooser::AddPOV(
-          (UFG::qVector3 *)&v8->mWorldTransform.v3,
-          (UFG::qVector3 *)&v8->mWorldTransform,
-          (UFG::qVector3 *)&v8->mWorldTransform,
+          (UFG::qVector3 *)&m_pTransformNodeComponent->mWorldTransform.v3,
+          (UFG::qVector3 *)&m_pTransformNodeComponent->mWorldTransform,
+          (UFG::qVector3 *)&m_pTransformNodeComponent->mWorldTransform,
           &velocity,
           deltaSeconds,
           0i64,
-          7u,
-          v9 == uidGameStateInGame_3);
+          7,
+          CurrentState == uidGameStateInGame_3);
       }
-      UFG::UpdateCamera(deltaSeconds, v7);
-      switch ( v2->mLoadStage )
+      UFG::UpdateCamera(deltaSeconds, v6);
+      switch ( this->mLoadStage )
       {
         case 0:
-          v2->mLoadStage = 1;
-          v10 = UFG::ProgressionTracker::Instance();
-          UFG::ProgressionTracker::SetupGlobalAlternateLayer(v10);
+          this->mLoadStage = eLS_PARENT;
+          v9 = UFG::ProgressionTracker::Instance();
+          UFG::ProgressionTracker::SetupGlobalAlternateLayer(v9);
           break;
         case 1:
-          v11 = UFG::SectionChooser::GetBytesRemainingToLoad();
-          v12 = UFG::ObjectResourceManager::Instance();
-          v13 = (unsigned __int64)UFG::ObjectResourceManager::GetBytesRemainingToLoad(v12) + v11;
-          v14 = UFG::PartDatabase::Instance();
-          v15 = UFG::PartDatabase::GetBytesRemainingToLoad(v14) + v13;
-          v16 = UFG::SoundBankManager::GetBytesRemainingToLoad();
-          UFG::LoadingLogic::SetLoadLengthHint(&UFG::gLoadingLogic, v16 + v15);
-          v2->mLoadStage = 2;
+          BytesRemainingToLoad = UFG::SectionChooser::GetBytesRemainingToLoad();
+          v11 = UFG::ObjectResourceManager::Instance();
+          v12 = UFG::ObjectResourceManager::GetBytesRemainingToLoad(v11) + BytesRemainingToLoad;
+          v13 = UFG::PartDatabase::Instance();
+          v14 = UFG::PartDatabase::GetBytesRemainingToLoad(v13) + v12;
+          v15 = UFG::SoundBankManager::GetBytesRemainingToLoad();
+          UFG::LoadingLogic::SetLoadLengthHint(&UFG::gLoadingLogic, v15 + v14);
+          this->mLoadStage = eLS_FINAL;
           break;
         case 2:
-          if ( UFG::LoadingLogic::IsComplete(&UFG::gLoadingLogic, 4u) )
+          if ( UFG::LoadingLogic::IsComplete(&UFG::gLoadingLogic, 4) )
           {
             if ( UFG::UpdateRigs(0x64u) )
             {
               UFG::TSGameSlice::FromCPP_setup_interior_triggers();
-              v2->mLoadStage = 3;
+              this->mLoadStage = eLS_FINAL|eLS_PARENT;
             }
           }
           break;
         case 3:
-          v17 = UFG::GetTriggerUpdateContext(&result);
-          UFG::TriggerRegion::UpdateAll(v17);
-          v18 = UFG::GeographicalLayerManager::GetInstance();
-          UFG::GeographicalLayerManager::ClearDeactivationTimers(v18);
+          TriggerUpdateContext = UFG::GetTriggerUpdateContext(&result);
+          UFG::TriggerRegion::UpdateAll(TriggerUpdateContext);
+          Instance = UFG::GeographicalLayerManager::GetInstance();
+          UFG::GeographicalLayerManager::ClearDeactivationTimers(Instance);
           UFG::GeographicalLayerManager::GetInstance()->mAllowImmediateActivation = 1;
-          v19 = UFG::GetLayerLoadPosition(&velocity);
-          v20 = UFG::GeographicalLayerManager::GetInstance();
-          LOBYTE(v19) = UFG::GeographicalLayerManager::Update(v20, deltaSeconds, v19);
-          LOBYTE(v19) = UFG::IncrementalActivateManager::Flush() | (unsigned __int8)v19;
-          LOBYTE(v19) = UFG::WheeledVehicleManager::UpdateTrafficSet(UFG::WheeledVehicleManager::m_Instance) | (unsigned __int8)v19;
+          LayerLoadPosition = UFG::GetLayerLoadPosition(&velocity);
+          v19 = UFG::GeographicalLayerManager::GetInstance();
+          LOBYTE(LayerLoadPosition) = UFG::GeographicalLayerManager::Update(v19, deltaSeconds, LayerLoadPosition);
+          LOBYTE(LayerLoadPosition) = UFG::IncrementalActivateManager::Flush() | (unsigned __int8)LayerLoadPosition;
+          LOBYTE(LayerLoadPosition) = UFG::WheeledVehicleManager::UpdateTrafficSet(UFG::WheeledVehicleManager::m_Instance) | (unsigned __int8)LayerLoadPosition;
           UFG::PedSpawnManager::Update(UFG::gpPedSpawnManager, deltaSeconds);
-          v21 = UFG::PropSpawnManager::GetInstance();
-          UFG::PropSpawnManager::Update(v21);
-          v22 = UFG::ObjectResourceManager::Instance();
-          UFG::ObjectResourceManager::Update(v22, deltaSeconds);
-          v23 = UFG::PartDatabase::Instance();
-          UFG::PartDatabase::Update(v23, deltaSeconds);
+          v20 = UFG::PropSpawnManager::GetInstance();
+          UFG::PropSpawnManager::Update(v20);
+          v21 = UFG::ObjectResourceManager::Instance();
+          UFG::ObjectResourceManager::Update(v21, deltaSeconds);
+          v22 = UFG::PartDatabase::Instance();
+          UFG::PartDatabase::Update(v22, deltaSeconds);
           UFG::StoreMeshHelper::Update();
-          ((void (*)(void))UFG::AudioListener::sm_pInstance->vfptr->Update)();
-          if ( !(_BYTE)v19 )
+          ((void (__fastcall *)(UFG::AudioListener *))UFG::AudioListener::sm_pInstance->vfptr->Update)(UFG::AudioListener::sm_pInstance);
+          if ( !(_BYTE)LayerLoadPosition )
           {
+            v23 = UFG::ObjectResourceManager::Instance();
+            UFG::ObjectResourceManager::PopulateAmbience(v23);
             v24 = UFG::ObjectResourceManager::Instance();
-            UFG::ObjectResourceManager::PopulateAmbience(v24);
-            v25 = UFG::ObjectResourceManager::Instance();
-            v26 = UFG::ObjectResourceManager::GetBytesRemainingToLoad(v25);
-            v27 = UFG::SoundBankManager::GetBytesRemainingToLoad();
-            UFG::LoadingLogic::SetLoadLengthHint(&UFG::gLoadingLogic, v27 + v26);
-            v2->mLoadStage = 4;
+            v25 = UFG::ObjectResourceManager::GetBytesRemainingToLoad(v24);
+            v26 = UFG::SoundBankManager::GetBytesRemainingToLoad();
+            UFG::LoadingLogic::SetLoadLengthHint(&UFG::gLoadingLogic, v26 + v25);
+            this->mLoadStage = 4;
           }
           break;
         case 4:
-          v28 = UFG::GetTriggerUpdateContext(&v40);
-          UFG::TriggerRegion::UpdateAll(v28);
-          v29 = UFG::GeographicalLayerManager::GetInstance();
-          UFG::GeographicalLayerManager::ClearDeactivationTimers(v29);
-          v30 = UFG::GetLayerLoadPosition(&v38);
-          v31 = UFG::GeographicalLayerManager::GetInstance();
-          UFG::GeographicalLayerManager::Update(v31, deltaSeconds, v30);
+          v27 = UFG::GetTriggerUpdateContext(&v39);
+          UFG::TriggerRegion::UpdateAll(v27);
+          v28 = UFG::GeographicalLayerManager::GetInstance();
+          UFG::GeographicalLayerManager::ClearDeactivationTimers(v28);
+          v29 = UFG::GetLayerLoadPosition(&v37);
+          v30 = UFG::GeographicalLayerManager::GetInstance();
+          UFG::GeographicalLayerManager::Update(v30, deltaSeconds, v29);
           UFG::IncrementalActivateManager::Flush();
           UFG::WheeledVehicleManager::UpdateTrafficSet(UFG::WheeledVehicleManager::m_Instance);
           UFG::PedSpawnManager::Update(UFG::gpPedSpawnManager, deltaSeconds);
-          v32 = UFG::PropSpawnManager::GetInstance();
-          UFG::PropSpawnManager::Update(v32);
-          v33 = UFG::ObjectResourceManager::Instance();
-          UFG::ObjectResourceManager::Update(v33, deltaSeconds);
-          v34 = UFG::PartDatabase::Instance();
-          UFG::PartDatabase::Update(v34, deltaSeconds);
+          v31 = UFG::PropSpawnManager::GetInstance();
+          UFG::PropSpawnManager::Update(v31);
+          v32 = UFG::ObjectResourceManager::Instance();
+          UFG::ObjectResourceManager::Update(v32, deltaSeconds);
+          v33 = UFG::PartDatabase::Instance();
+          UFG::PartDatabase::Update(v33, deltaSeconds);
           UFG::StoreMeshHelper::Update();
-          ((void (*)(void))UFG::AudioListener::sm_pInstance->vfptr->Update)();
-          if ( UFG::LoadingLogic::IsComplete(&UFG::gLoadingLogic, 3u)
+          ((void (__fastcall *)(UFG::AudioListener *))UFG::AudioListener::sm_pInstance->vfptr->Update)(UFG::AudioListener::sm_pInstance);
+          if ( UFG::LoadingLogic::IsComplete(&UFG::gLoadingLogic, 3)
             && !UFG::PedSpawnManager::SpawnsQueued()
             && UFG::SoundBankManager::AreAllImportantBankLoadsComplete() )
           {
-            v2->mLoadStage = 5;
+            this->mLoadStage = 5;
           }
           break;
         case 5:
-          v4->mIsWorldDataRestored = 1;
+          v3->mIsWorldDataRestored = 1;
           break;
         default:
           return;
       }
     }
   }
-  else if ( v5 == 3 )
+  else if ( mState == STATE_COMPLETE )
   {
-    v35 = UFG::ObjectResourceManager::Instance();
-    UFG::ObjectResourceManager::Update(v35, deltaSeconds);
-    v36 = UFG::PartDatabase::Instance();
-    UFG::PartDatabase::Update(v36, deltaSeconds);
+    v34 = UFG::ObjectResourceManager::Instance();
+    UFG::ObjectResourceManager::Update(v34, deltaSeconds);
+    v35 = UFG::PartDatabase::Instance();
+    UFG::PartDatabase::Update(v35, deltaSeconds);
     UFG::StoreMeshHelper::Update();
     if ( !UFG::StoreMeshHelper::SwapInProgress() )
     {
-      if ( v2->mHasNis )
+      if ( this->mHasNis )
         UFG::FlowController::RequestSetNewState(&UFG::gFlowController, uidGameStateLoadNIS_3);
       else
         UFG::FlowController::RequestSetNewState(&UFG::gFlowController, uidGameStateInGame_3);
     }
   }
+}questSetNewState(&UFG::gFlowController, uidGameStateInGame_3);
+    }
+  }
 }
 
 // File Line: 297
 // RVA: 0x415980
 void UFG::GameStateRestoreCheckpoint::ResetScene(void)
 {
-  UFG::SimObjectCharacter *v0; // rdi
+  UFG::SimObjectCharacter *LocalPlayer; // rdi
   UFG::GameStatTracker *v1; // rax
   UFG::CopSystem *v2; // rax
   unsigned int v3; // ebp
   UFG::PedSpawnManager *v4; // rbx
-  UFG::qNode<UFG::SimObjectCharacterPropertiesComponent,UFG::SimObjectCharacterPropertiesComponent> *v5; // rbx
+  UFG::qNode<UFG::SimObjectCharacterPropertiesComponent,UFG::SimObjectCharacterPropertiesComponent> *p_mNode; // rbx
   UFG::qList<UFG::SimObjectCharacterPropertiesComponent,UFG::SimObjectCharacterPropertiesComponent,1,0> *v6; // rsi
-  UFG::SimObject *v7; // rbx
-  UFG::SceneObjectProperties *v8; // rcx
-  UFG::SceneLayerResource *v9; // rax
-  UFG::qList<UFG::PhysicsMoverInterface,UFG::PhysicsMoverInterface,1,0> *v10; // rbx
-  UFG::qList<UFG::PhysicsMoverInterface,UFG::PhysicsMoverInterface,1,0> *v11; // rsi
-  UFG::SimObject *v12; // rbx
-  UFG::SceneObjectProperties *v13; // rcx
-  UFG::SceneLayerResource *v14; // rax
-  UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent> *v15; // rbx
-  UFG::qList<UFG::InventoryItemComponent,UFG::InventoryItemComponent,1,0> *v16; // rsi
-  UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent> *v17; // rcx
-  UFG::SceneLayerResource *v18; // rax
-  UFG::GameStatTracker *v19; // rbx
-  unsigned __int16 v20; // dx
-  UFG::RagdollComponent *v21; // rax
-  unsigned __int16 v22; // cx
-  UFG::SimComponent *v23; // rax
-  unsigned __int16 v24; // cx
-  UFG::HealthComponent *v25; // rax
-  UFG::TransformNodeComponent *v26; // rbx
-  float v27; // xmm11_4
-  float v28; // xmm12_4
-  float v29; // xmm13_4
-  float v30; // xmm5_4
-  __m128 v31; // xmm8
-  __m128 v32; // xmm1
-  __m128 v33; // xmm2
-  float v34; // xmm6_4
-  __m128 v35; // xmm7
-  float v36; // xmm2_4
-  __m128 v37; // xmm5
-  float v38; // xmm1_4
-  float v39; // xmm9_4
-  float v40; // xmm7_4
-  float v41; // xmm2_4
-  __m128 v42; // xmm6
-  __m128 v43; // xmm5
-  float v44; // xmm0_4
-  __m128 v45; // xmm5
-  float v46; // xmm1_4
-  __m128 v47; // xmm6
-  float v48; // xmm10_4
-  __m128 v49; // xmm8
-  __m128 v50; // xmm5
-  float v51; // xmm1_4
-  float v52; // xmm8_4
-  float v53; // xmm5_4
-  float v54; // xmm8_4
-  __m128 v55; // xmm2
-  float v56; // xmm3_4
-  UFG *v57; // rcx
-  UFG::GeographicalLayerManager *v58; // rax
-  UFG::TimeOfDayManager *v59; // rax
+  UFG::SimObjectCharacter *mNext; // rbx
+  UFG::SceneObjectProperties *m_pSceneObj; // rcx
+  UFG::SceneLayerResource *Layer; // rax
+  unsigned int mTypeUID; // ecx
+  UFG::qList<UFG::PhysicsMoverInterface,UFG::PhysicsMoverInterface,1,0> *p_mNext; // rbx
+  UFG::qList<UFG::PhysicsMoverInterface,UFG::PhysicsMoverInterface,1,0> *v12; // rsi
+  UFG::SimObject *v13; // rbx
+  UFG::SceneObjectProperties *v14; // rcx
+  UFG::SceneLayerResource *v15; // rax
+  unsigned int v16; // ecx
+  UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent> *v17; // rbx
+  UFG::qList<UFG::InventoryItemComponent,UFG::InventoryItemComponent,1,0> *v18; // rsi
+  UFG::qNode<UFG::InventoryItemComponent,UFG::InventoryItemComponent> *mPrev; // rcx
+  UFG::SceneLayerResource *v20; // rax
+  unsigned int v21; // ecx
+  UFG::GameStatTracker *v22; // rbx
+  __int16 m_Flags; // dx
+  UFG::RagdollComponent *m_pComponent; // rax
+  __int16 v25; // cx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
+  __int16 v27; // cx
+  UFG::HealthComponent *ComponentOfType; // rax
+  UFG::TransformNodeComponent *m_pTransformNodeComponent; // rbx
+  float x; // xmm11_4
+  float y; // xmm12_4
+  float z; // xmm13_4
+  float v33; // xmm5_4
+  __m128 y_low; // xmm8
+  __m128 v35; // xmm1
+  __m128 v36; // xmm2
+  float v37; // xmm6_4
+  __m128 v38; // xmm7
+  float v39; // xmm2_4
+  __m128 v40; // xmm5
+  float v41; // xmm1_4
+  float v42; // xmm9_4
+  float v43; // xmm7_4
+  float v44; // xmm2_4
+  __m128 x_low; // xmm5
+  float v46; // xmm0_4
+  __m128 v47; // xmm5
+  float v48; // xmm1_4
+  __m128 v49; // xmm6
+  float v50; // xmm10_4
+  __m128 v51; // xmm8
+  __m128 v52; // xmm5
+  float v53; // xmm1_4
+  float v54; // xmm5_4
+  float v55; // xmm8_4
+  __m128 v56; // xmm2
+  float v57; // xmm3_4
+  UFG *v58; // rcx
+  UFG::GeographicalLayerManager *Instance; // rax
   UFG::TimeOfDayManager *v60; // rax
-  unsigned int v61; // ebx
-  const char *v62; // rax
-  UFG::qMatrix44 xform; // [rsp+30h] [rbp-D8h]
-  UFG::qWiseSymbol result; // [rsp+110h] [rbp+8h]
+  UFG::TimeOfDayManager *v61; // rax
+  unsigned int LayerCount; // ebx
+  const char *LayerName; // rax
+  UFG::qMatrix44 xform; // [rsp+30h] [rbp-D8h] BYREF
+  UFG::qWiseSymbol result; // [rsp+110h] [rbp+8h] BYREF
 
   KillAllSectionEffects();
   Render::FXManager::KillAllEffects(&Render::gFXManager);
   Render::DecalManager::DestroyDecals(&Render::gDecalManager);
   UFG::RenderWorld::VisualTreatmentPostEffect_StopAllVisualTreatments();
-  v0 = UFG::GetLocalPlayer();
-  UFG::ResetCameraObjects((UFG::SimObject *)&v0->vfptr);
+  LocalPlayer = UFG::GetLocalPlayer();
+  UFG::ResetCameraObjects(LocalPlayer);
   v1 = UFG::FactionInterface::Get();
   UFG::FactionInterface::Reset(&v1->mFactionInterface);
   v2 = UFG::CopSystem::Instance();
   ((void (__fastcall *)(UFG::CopSystem *))v2->vfptr[86].__vecDelDtor)(v2);
   sAmbientPedEnableLocked = 0;
   v3 = 1;
-  if ( UFG::PedSpawnManager::msAmbientSpawningEnable == 1 )
+  if ( UFG::PedSpawnManager::msAmbientSpawningEnable )
   {
     v4 = UFG::gpPedSpawnManager;
     UFG::PedSpawnManager::ReInitAmbient(UFG::gpPedSpawnManager);
@@ -392,299 +392,269 @@ void UFG::GameStateRestoreCheckpoint::ResetScene(void)
     UFG::ObjectResourceManager::Instance()->mEntityStates[0].mUpdateRequired = 1;
   }
   UFG::WheeledVehicleManager::ResetTrafficSystem(UFG::WheeledVehicleManager::m_Instance);
-  v5 = UFG::SimObjectCharacterPropertiesComponent::s_SimObjectCharacterPropertiesComponentList.mNode.mNext - 10;
+  p_mNode = UFG::SimObjectCharacterPropertiesComponent::s_SimObjectCharacterPropertiesComponentList.mNode.mNext - 10;
   if ( (UFG::qList<UFG::SimObjectCharacterPropertiesComponent,UFG::SimObjectCharacterPropertiesComponent,1,0> *)&UFG::SimObjectCharacterPropertiesComponent::s_SimObjectCharacterPropertiesComponentList.mNode.mNext[-10] != &UFG::SimObjectCharacterPropertiesComponent::s_SimObjectCharacterPropertiesComponentList - 10 )
   {
     do
     {
-      v6 = (UFG::qList<UFG::SimObjectCharacterPropertiesComponent,UFG::SimObjectCharacterPropertiesComponent,1,0> *)&v5[10].mNext[-10];
-      v7 = (UFG::SimObject *)v5[2].mNext;
-      if ( v7 )
+      v6 = (UFG::qList<UFG::SimObjectCharacterPropertiesComponent,UFG::SimObjectCharacterPropertiesComponent,1,0> *)&p_mNode[10].mNext[-10];
+      mNext = (UFG::SimObjectCharacter *)p_mNode[2].mNext;
+      if ( mNext )
       {
-        if ( !UFG::IsAnyLocalPlayer(v7) && !((v7->m_Flags >> 10) & 1) )
+        if ( !UFG::IsAnyLocalPlayer(mNext) && (mNext->m_Flags & 0x400) == 0 )
         {
-          v8 = v7->m_pSceneObj;
-          if ( !v8
-            || (v9 = UFG::SceneObjectProperties::GetLayer(v8)) == 0i64
-            || !((v9->mTypeUID >> 1) & 1)
-            || !((v9->mTypeUID >> 13) & 1) )
+          m_pSceneObj = mNext->m_pSceneObj;
+          if ( !m_pSceneObj
+            || (Layer = UFG::SceneObjectProperties::GetLayer(m_pSceneObj)) == 0i64
+            || (mTypeUID = Layer->mTypeUID, (mTypeUID & 2) == 0)
+            || (mTypeUID & 0x2000) == 0 )
           {
-            UFG::Simulation::QueueSimObjectToBeDestroyed(&UFG::gSim, v7);
+            UFG::Simulation::QueueSimObjectToBeDestroyed(&UFG::gSim, mNext);
           }
         }
       }
-      v5 = &v6->mNode;
+      p_mNode = &v6->mNode;
     }
     while ( v6 != &UFG::SimObjectCharacterPropertiesComponent::s_SimObjectCharacterPropertiesComponentList - 10 );
   }
-  v10 = (UFG::qList<UFG::PhysicsMoverInterface,UFG::PhysicsMoverInterface,1,0> *)&UFG::PhysicsMoverInterface::s_PhysicsMoverInterfaceList.mNode.mNext[-5].mNext;
+  p_mNext = (UFG::qList<UFG::PhysicsMoverInterface,UFG::PhysicsMoverInterface,1,0> *)&UFG::PhysicsMoverInterface::s_PhysicsMoverInterfaceList.mNode.mNext[-5].mNext;
   if ( &UFG::PhysicsMoverInterface::s_PhysicsMoverInterfaceList.mNode.mNext[-5].mNext != (UFG::qNode<UFG::PhysicsMoverInterface,UFG::PhysicsMoverInterface> **)((char *)&UFG::PhysicsMoverInterface::s_PhysicsMoverInterfaceList - 72) )
   {
     do
     {
-      v11 = (UFG::qList<UFG::PhysicsMoverInterface,UFG::PhysicsMoverInterface,1,0> *)&v10[5].mNode.mPrev[-5].mNext;
-      v12 = (UFG::SimObject *)v10[2].mNode.mNext;
-      if ( v12 )
+      v12 = (UFG::qList<UFG::PhysicsMoverInterface,UFG::PhysicsMoverInterface,1,0> *)&p_mNext[5].mNode.mPrev[-5].mNext;
+      v13 = (UFG::SimObject *)p_mNext[2].mNode.mNext;
+      if ( v13 )
       {
-        if ( !((v12->m_Flags >> 10) & 1) )
+        if ( (v13->m_Flags & 0x400) == 0 )
         {
-          v13 = v12->m_pSceneObj;
-          if ( !v13
-            || (v14 = UFG::SceneObjectProperties::GetLayer(v13)) == 0i64
-            || !((v14->mTypeUID >> 1) & 1)
-            || !((v14->mTypeUID >> 13) & 1) )
+          v14 = v13->m_pSceneObj;
+          if ( !v14
+            || (v15 = UFG::SceneObjectProperties::GetLayer(v14)) == 0i64
+            || (v16 = v15->mTypeUID, (v16 & 2) == 0)
+            || (v16 & 0x2000) == 0 )
           {
-            UFG::Simulation::QueueTrackedSimObjectToBeDestroyed(&UFG::gSim, v12);
+            UFG::Simulation::QueueTrackedSimObjectToBeDestroyed(&UFG::gSim, v13);
           }
         }
       }
-      v10 = v11;
+      p_mNext = v12;
     }
-    while ( v11 != (UFG::qList<UFG::PhysicsMoverInterface,UFG::PhysicsMoverInterface,1,0> *)((char *)&UFG::PhysicsMoverInterface::s_PhysicsMoverInterfaceList
+    while ( v12 != (UFG::qList<UFG::PhysicsMoverInterface,UFG::PhysicsMoverInterface,1,0> *)((char *)&UFG::PhysicsMoverInterface::s_PhysicsMoverInterfaceList
                                                                                            - 72) );
   }
-  v15 = UFG::InventoryItemComponent::s_InventoryItemComponentList.mNode.mNext - 4;
+  v17 = UFG::InventoryItemComponent::s_InventoryItemComponentList.mNode.mNext - 4;
   if ( (UFG::qList<UFG::InventoryItemComponent,UFG::InventoryItemComponent,1,0> *)&UFG::InventoryItemComponent::s_InventoryItemComponentList.mNode.mNext[-4] != &UFG::InventoryItemComponent::s_InventoryItemComponentList - 4 )
   {
     do
     {
-      v16 = (UFG::qList<UFG::InventoryItemComponent,UFG::InventoryItemComponent,1,0> *)&v15[4].mNext[-4];
-      v17 = v15[2].mNext;
-      if ( SLODWORD(v15[7].mPrev) > 0 && !v15[6].mPrev && !((WORD2(v17[4].mNext) >> 10) & 1) )
+      v18 = (UFG::qList<UFG::InventoryItemComponent,UFG::InventoryItemComponent,1,0> *)&v17[4].mNext[-4];
+      mPrev = v17[2].mNext;
+      if ( SLODWORD(v17[7].mPrev) > 0 && !v17[6].mPrev && (WORD2(mPrev[4].mNext) & 0x400) == 0 )
       {
-        if ( v17 )
-          v17 = v17[5].mPrev;
-        if ( !v17
-          || (v18 = UFG::SceneObjectProperties::GetLayer((UFG::SceneObjectProperties *)v17)) == 0i64
-          || !((v18->mTypeUID >> 1) & 1)
-          || !((v18->mTypeUID >> 13) & 1) )
+        if ( mPrev )
+          mPrev = mPrev[5].mPrev;
+        if ( !mPrev
+          || (v20 = UFG::SceneObjectProperties::GetLayer((UFG::SceneObjectProperties *)mPrev)) == 0i64
+          || (v21 = v20->mTypeUID, (v21 & 2) == 0)
+          || (v21 & 0x2000) == 0 )
         {
-          UFG::Simulation::QueueSimObjectToBeDestroyed(&UFG::gSim, (UFG::SimObject *)v15[2].mNext);
+          UFG::Simulation::QueueSimObjectToBeDestroyed(&UFG::gSim, (UFG::SimObject *)v17[2].mNext);
         }
       }
-      v15 = &v16->mNode;
+      v17 = &v18->mNode;
     }
-    while ( v16 != &UFG::InventoryItemComponent::s_InventoryItemComponentList - 4 );
+    while ( v18 != &UFG::InventoryItemComponent::s_InventoryItemComponentList - 4 );
   }
-  v19 = UFG::GameStatTracker::Instance();
-  *((_BYTE *)v19 + 6216) |= 1u;
-  UFG::SimObjectUtility::ReinitializeSimObject((UFG::SimObject *)&v0->vfptr, 1, 0);
-  if ( v0 )
+  v22 = UFG::GameStatTracker::Instance();
+  *((_BYTE *)v22 + 6216) |= 1u;
+  UFG::SimObjectUtility::ReinitializeSimObject(LocalPlayer, 1, 0);
+  if ( LocalPlayer )
   {
-    v20 = v0->m_Flags;
-    if ( (v20 >> 14) & 1 )
+    m_Flags = LocalPlayer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v21 = (UFG::RagdollComponent *)v0->m_Components.p[42].m_pComponent;
+      m_pComponent = (UFG::RagdollComponent *)LocalPlayer->m_Components.p[42].m_pComponent;
     }
-    else if ( (v20 & 0x8000u) == 0 )
+    else if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v20 >> 13) & 1 )
+      m_pComponent = (UFG::RagdollComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                LocalPlayer,
+                                                UFG::RagdollComponent::_TypeUID);
+    }
+    else
+    {
+      m_pComponent = (UFG::RagdollComponent *)UFG::SimObject::GetComponentOfType(
+                                                LocalPlayer,
+                                                UFG::RagdollComponent::_TypeUID);
+    }
+    if ( m_pComponent )
+      UFG::RagdollComponent::ResetState(m_pComponent);
+    v25 = LocalPlayer->m_Flags;
+    if ( (v25 & 0x4000) != 0 )
+    {
+      ComponentOfTypeHK = LocalPlayer->m_Components.p[7].m_pComponent;
+    }
+    else if ( v25 >= 0 )
+    {
+      if ( (v25 & 0x2000) != 0 )
       {
-        v21 = (UFG::RagdollComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                         (UFG::SimObjectGame *)&v0->vfptr,
-                                         UFG::RagdollComponent::_TypeUID);
+        ComponentOfTypeHK = LocalPlayer->m_Components.p[6].m_pComponent;
       }
-      else if ( (v20 >> 12) & 1 )
+      else if ( (v25 & 0x1000) != 0 )
       {
-        v21 = (UFG::RagdollComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                         (UFG::SimObjectGame *)&v0->vfptr,
-                                         UFG::RagdollComponent::_TypeUID);
+        ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(LocalPlayer, UFG::ActionTreeComponent::_TypeUID);
       }
       else
       {
-        v21 = (UFG::RagdollComponent *)UFG::SimObject::GetComponentOfType(
-                                         (UFG::SimObject *)&v0->vfptr,
-                                         UFG::RagdollComponent::_TypeUID);
+        ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(LocalPlayer, UFG::ActionTreeComponent::_TypeUID);
       }
     }
     else
     {
-      v21 = (UFG::RagdollComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                       (UFG::SimObjectGame *)&v0->vfptr,
-                                       UFG::RagdollComponent::_TypeUID);
+      ComponentOfTypeHK = LocalPlayer->m_Components.p[7].m_pComponent;
     }
-    if ( v21 )
-      UFG::RagdollComponent::ResetState(v21);
-    v22 = v0->m_Flags;
-    if ( (v22 >> 14) & 1 )
-    {
-      v23 = v0->m_Components.p[7].m_pComponent;
-    }
-    else if ( (v22 & 0x8000u) == 0 )
-    {
-      if ( (v22 >> 13) & 1 )
-      {
-        v23 = v0->m_Components.p[6].m_pComponent;
-      }
-      else if ( (v22 >> 12) & 1 )
-      {
-        v23 = UFG::SimObjectGame::GetComponentOfTypeHK(
-                (UFG::SimObjectGame *)&v0->vfptr,
-                UFG::ActionTreeComponent::_TypeUID);
-      }
-      else
-      {
-        v23 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v0->vfptr, UFG::ActionTreeComponent::_TypeUID);
-      }
-    }
-    else
-    {
-      v23 = v0->m_Components.p[7].m_pComponent;
-    }
-    if ( v23 )
-      LOBYTE(v23[2].m_pSimObject) = 0;
+    if ( ComponentOfTypeHK )
+      LOBYTE(ComponentOfTypeHK[2].m_pSimObject) = 0;
   }
-  *((_BYTE *)v19 + 6216) &= 0xFEu;
-  if ( v0 )
+  *((_BYTE *)v22 + 6216) &= ~1u;
+  if ( LocalPlayer )
   {
-    v24 = v0->m_Flags;
-    if ( (v24 >> 14) & 1 )
+    v27 = LocalPlayer->m_Flags;
+    if ( (v27 & 0x4000) != 0 )
     {
-      v25 = (UFG::HealthComponent *)v0->m_Components.p[6].m_pComponent;
+      ComponentOfType = (UFG::HealthComponent *)LocalPlayer->m_Components.p[6].m_pComponent;
     }
-    else if ( (v24 & 0x8000u) == 0 )
+    else if ( v27 >= 0 )
     {
-      if ( (v24 >> 13) & 1 )
-      {
-        v25 = (UFG::HealthComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                        (UFG::SimObjectGame *)&v0->vfptr,
-                                        UFG::HealthComponent::_TypeUID);
-      }
-      else if ( (v24 >> 12) & 1 )
-      {
-        v25 = (UFG::HealthComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                        (UFG::SimObjectGame *)&v0->vfptr,
-                                        UFG::HealthComponent::_TypeUID);
-      }
+      if ( (v27 & 0x2000) != 0 || (v27 & 0x1000) != 0 )
+        ComponentOfType = (UFG::HealthComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                    LocalPlayer,
+                                                    UFG::HealthComponent::_TypeUID);
       else
-      {
-        v25 = (UFG::HealthComponent *)UFG::SimObject::GetComponentOfType(
-                                        (UFG::SimObject *)&v0->vfptr,
-                                        UFG::HealthComponent::_TypeUID);
-      }
+        ComponentOfType = (UFG::HealthComponent *)UFG::SimObject::GetComponentOfType(
+                                                    LocalPlayer,
+                                                    UFG::HealthComponent::_TypeUID);
     }
     else
     {
-      v25 = (UFG::HealthComponent *)v0->m_Components.p[6].m_pComponent;
+      ComponentOfType = (UFG::HealthComponent *)LocalPlayer->m_Components.p[6].m_pComponent;
     }
-    if ( v25 )
-      UFG::HealthComponent::LoadHealthSettings(v25);
-    v26 = v0->m_pTransformNodeComponent;
-    if ( v26 )
+    if ( ComponentOfType )
+      UFG::HealthComponent::LoadHealthSettings(ComponentOfType);
+    m_pTransformNodeComponent = LocalPlayer->m_pTransformNodeComponent;
+    if ( m_pTransformNodeComponent )
     {
-      UFG::TransformNodeComponent::UpdateWorldTransform(v0->m_pTransformNodeComponent);
-      v27 = v26->mWorldTransform.v3.x;
-      v28 = v26->mWorldTransform.v3.y;
-      v29 = v26->mWorldTransform.v3.z;
-      UFG::TransformNodeComponent::UpdateWorldTransform(v26);
-      v30 = v26->mWorldTransform.v0.x;
-      v31 = (__m128)LODWORD(v26->mWorldTransform.v0.y);
-      v32 = v31;
-      v32.m128_f32[0] = (float)(v31.m128_f32[0] * v31.m128_f32[0]) + (float)(v30 * v30);
-      if ( v32.m128_f32[0] == 0.0 )
+      UFG::TransformNodeComponent::UpdateWorldTransform(LocalPlayer->m_pTransformNodeComponent);
+      x = m_pTransformNodeComponent->mWorldTransform.v3.x;
+      y = m_pTransformNodeComponent->mWorldTransform.v3.y;
+      z = m_pTransformNodeComponent->mWorldTransform.v3.z;
+      UFG::TransformNodeComponent::UpdateWorldTransform(m_pTransformNodeComponent);
+      v33 = m_pTransformNodeComponent->mWorldTransform.v0.x;
+      y_low = (__m128)LODWORD(m_pTransformNodeComponent->mWorldTransform.v0.y);
+      v35 = y_low;
+      v35.m128_f32[0] = (float)(y_low.m128_f32[0] * y_low.m128_f32[0]) + (float)(v33 * v33);
+      if ( v35.m128_f32[0] == 0.0 )
       {
-        v33 = 0i64;
+        v36 = 0i64;
       }
       else
       {
-        v33 = (__m128)(unsigned int)FLOAT_1_0;
-        v33.m128_f32[0] = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v32));
+        v36 = (__m128)(unsigned int)FLOAT_1_0;
+        v36.m128_f32[0] = 1.0 / _mm_sqrt_ps(v35).m128_f32[0];
       }
-      v34 = v33.m128_f32[0] * 0.0;
-      v35 = v33;
-      v35.m128_f32[0] = v33.m128_f32[0] * v31.m128_f32[0];
-      v36 = v33.m128_f32[0] * v30;
-      v37 = v35;
-      v37.m128_f32[0] = (float)((float)(v35.m128_f32[0] * v35.m128_f32[0]) + (float)(v36 * v36)) + (float)(v34 * v34);
-      if ( v37.m128_f32[0] == 0.0 )
-        v38 = 0.0;
+      v37 = v36.m128_f32[0] * 0.0;
+      v38 = v36;
+      v38.m128_f32[0] = v36.m128_f32[0] * y_low.m128_f32[0];
+      v39 = v36.m128_f32[0] * v33;
+      v40 = v38;
+      v40.m128_f32[0] = (float)((float)(v38.m128_f32[0] * v38.m128_f32[0]) + (float)(v39 * v39)) + (float)(v37 * v37);
+      if ( v40.m128_f32[0] == 0.0 )
+        v41 = 0.0;
       else
-        v38 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v37));
-      v39 = v38 * v34;
-      v40 = v35.m128_f32[0] * v38;
-      v41 = v36 * v38;
-      xform.v0.x = v41;
-      xform.v0.y = v40;
-      xform.v0.z = v38 * v34;
+        v41 = 1.0 / _mm_sqrt_ps(v40).m128_f32[0];
+      v42 = v41 * v37;
+      v43 = v38.m128_f32[0] * v41;
+      v44 = v39 * v41;
+      xform.v0.x = v44;
+      xform.v0.y = v43;
+      xform.v0.z = v41 * v37;
       xform.v0.w = 0.0;
-      v42 = (__m128)LODWORD(UFG::qVector3::msDirUp.x);
-      v43 = v42;
-      v43.m128_f32[0] = (float)((float)(v42.m128_f32[0] * v42.m128_f32[0])
-                              + (float)(UFG::qVector3::msDirUp.y * UFG::qVector3::msDirUp.y))
-                      + (float)(UFG::qVector3::msDirUp.z * UFG::qVector3::msDirUp.z);
-      if ( v43.m128_f32[0] == 0.0 )
+      x_low = (__m128)LODWORD(UFG::qVector3::msDirUp.x);
+      x_low.m128_f32[0] = (float)((float)(x_low.m128_f32[0] * x_low.m128_f32[0])
+                                + (float)(UFG::qVector3::msDirUp.y * UFG::qVector3::msDirUp.y))
+                        + (float)(UFG::qVector3::msDirUp.z * UFG::qVector3::msDirUp.z);
+      if ( x_low.m128_f32[0] == 0.0 )
       {
-        v45 = 0i64;
+        v47 = 0i64;
       }
       else
       {
-        LODWORD(v44) = (unsigned __int128)_mm_sqrt_ps(v43);
-        v45 = (__m128)(unsigned int)FLOAT_1_0;
-        v45.m128_f32[0] = 1.0 / v44;
+        v46 = _mm_sqrt_ps(x_low).m128_f32[0];
+        v47 = (__m128)(unsigned int)FLOAT_1_0;
+        v47.m128_f32[0] = 1.0 / v46;
       }
-      v46 = v45.m128_f32[0] * UFG::qVector3::msDirUp.z;
-      v49 = v45;
-      v49.m128_f32[0] = v45.m128_f32[0] * UFG::qVector3::msDirUp.y;
-      v45.m128_f32[0] = v45.m128_f32[0] * UFG::qVector3::msDirUp.x;
-      v47 = v45;
-      v47.m128_f32[0] = (float)(v45.m128_f32[0] * v40) - (float)(v41 * v49.m128_f32[0]);
-      v48 = (float)(v41 * v46) - (float)(v45.m128_f32[0] * v39);
-      v49.m128_f32[0] = (float)(v49.m128_f32[0] * v39) - (float)(v46 * v40);
-      v50 = v49;
-      v50.m128_f32[0] = (float)((float)(v49.m128_f32[0] * v49.m128_f32[0]) + (float)(v48 * v48))
-                      + (float)(v47.m128_f32[0] * v47.m128_f32[0]);
-      if ( v50.m128_f32[0] == 0.0 )
-        v51 = 0.0;
+      v48 = v47.m128_f32[0] * UFG::qVector3::msDirUp.z;
+      v51 = v47;
+      v51.m128_f32[0] = v47.m128_f32[0] * UFG::qVector3::msDirUp.y;
+      v47.m128_f32[0] = v47.m128_f32[0] * UFG::qVector3::msDirUp.x;
+      v49 = v47;
+      v49.m128_f32[0] = (float)(v47.m128_f32[0] * v43) - (float)(v44 * v51.m128_f32[0]);
+      v50 = (float)(v44 * v48) - (float)(v47.m128_f32[0] * v42);
+      v51.m128_f32[0] = (float)(v51.m128_f32[0] * v42) - (float)(v48 * v43);
+      v52 = v51;
+      v52.m128_f32[0] = (float)((float)(v51.m128_f32[0] * v51.m128_f32[0]) + (float)(v50 * v50))
+                      + (float)(v49.m128_f32[0] * v49.m128_f32[0]);
+      if ( v52.m128_f32[0] == 0.0 )
+        v53 = 0.0;
       else
-        v51 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v50));
-      v47.m128_f32[0] = v47.m128_f32[0] * v51;
-      v52 = v49.m128_f32[0] * v51;
-      xform.v1.x = v52;
-      xform.v1.y = v48 * v51;
-      LODWORD(xform.v1.z) = v47.m128_i32[0];
+        v53 = 1.0 / _mm_sqrt_ps(v52).m128_f32[0];
+      xform.v1.x = v51.m128_f32[0] * v53;
+      xform.v1.y = v50 * v53;
+      xform.v1.z = v49.m128_f32[0] * v53;
       xform.v1.w = 0.0;
-      v53 = (float)(v41 * (float)(v48 * v51)) - (float)(v52 * v40);
-      v54 = (float)(v52 * v39) - (float)(v41 * v47.m128_f32[0]);
-      v47.m128_f32[0] = (float)(v47.m128_f32[0] * v40) - (float)((float)(v48 * v51) * v39);
-      v55 = v47;
-      v55.m128_f32[0] = (float)((float)(v47.m128_f32[0] * v47.m128_f32[0]) + (float)(v54 * v54)) + (float)(v53 * v53);
-      if ( v55.m128_f32[0] == 0.0 )
-        v56 = 0.0;
+      v54 = (float)(v44 * (float)(v50 * v53)) - (float)((float)(v51.m128_f32[0] * v53) * v43);
+      v55 = (float)((float)(v51.m128_f32[0] * v53) * v42) - (float)(v44 * (float)(v49.m128_f32[0] * v53));
+      v49.m128_f32[0] = (float)((float)(v49.m128_f32[0] * v53) * v43) - (float)((float)(v50 * v53) * v42);
+      v56 = v49;
+      v56.m128_f32[0] = (float)((float)(v49.m128_f32[0] * v49.m128_f32[0]) + (float)(v55 * v55)) + (float)(v54 * v54);
+      if ( v56.m128_f32[0] == 0.0 )
+        v57 = 0.0;
       else
-        v56 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v55));
-      xform.v2.x = v47.m128_f32[0] * v56;
-      xform.v2.y = v56 * v54;
-      xform.v2.z = v56 * v53;
+        v57 = 1.0 / _mm_sqrt_ps(v56).m128_f32[0];
+      xform.v2.x = v49.m128_f32[0] * v57;
+      xform.v2.y = v57 * v55;
+      xform.v2.z = v57 * v54;
       xform.v2.w = 0.0;
-      xform.v3.x = v27;
-      xform.v3.y = v28;
-      xform.v3.z = v29;
+      xform.v3.x = x;
+      xform.v3.y = y;
+      xform.v3.z = z;
       xform.v3.w = 1.0;
-      UFG::SimObjectUtility::Teleport((UFG::SimObject *)&v0->vfptr, &xform);
+      UFG::SimObjectUtility::Teleport(LocalPlayer, &xform);
     }
   }
-  UFG::PhysicsSystem::ResetScene((UFG::PhysicsSystem *)UFG::BasePhysicsSystem::mInstance, 0);
-  UFG::ResetRigInstances(v57);
+  UFG::PhysicsSystem::ResetScene((UFG::PhysicsSystem *)UFG::BasePhysicsSystem::mInstance, PartialReset);
+  UFG::ResetRigInstances(v58);
   UFG::SceneryGroup::MakeAllVisible();
-  v58 = UFG::GeographicalLayerManager::GetInstance();
-  UFG::GeographicalLayerManager::DeactivateActiveGeoLayers(v58);
-  v59 = UFG::TimeOfDayManager::GetInstance();
-  TimePlotPoint::SetTimeValue(v59, 40.0);
+  Instance = UFG::GeographicalLayerManager::GetInstance();
+  UFG::GeographicalLayerManager::DeactivateActiveGeoLayers(Instance);
   v60 = UFG::TimeOfDayManager::GetInstance();
-  UFG::TimeOfDayManager::LockWeather(v60, 0);
+  TimePlotPoint::SetTimeValue(v60, 40.0);
+  v61 = UFG::TimeOfDayManager::GetInstance();
+  UFG::TimeOfDayManager::LockWeather(v61, 0);
   UFG::qWiseSymbol::create_from_string(&result, "stop_mus_score");
   UFG::Music::MusicEvent(result.mUID);
-  v61 = UFG::SectionLayout::GetLayerCount();
-  if ( v61 > 1 )
+  LayerCount = UFG::SectionLayout::GetLayerCount();
+  if ( LayerCount > 1 )
   {
     do
     {
       UFG::SectionLayout::SetLayerActive(v3, 0);
-      v62 = UFG::SectionLayout::GetLayerName(v3);
-      UFG::SectionChooser::FlushAltLayer(v62, 0);
+      LayerName = UFG::SectionLayout::GetLayerName(v3);
+      UFG::SectionChooser::FlushAltLayer(LayerName, 0);
       ++v3;
     }
-    while ( v3 < v61 );
+    while ( v3 < LayerCount );
   }
   UFG::Scene::OnRestoreCheckpoint(&UFG::Scene::msDefault);
   _((AMD_HD3D *)result.mUID);

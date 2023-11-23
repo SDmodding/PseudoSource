@@ -2,26 +2,24 @@
 // RVA: 0x260AF0
 UFG::allocator::free_link *__fastcall antlr3StringFactoryNew(unsigned int encoding)
 {
-  unsigned int v1; // edi
   UFG::allocator::free_link *v2; // rbx
-  UFG::allocator::free_link *v3; // rax
+  __int64 v3; // rax
   ANTLR3_STRING_struct *(__fastcall *v5)(ANTLR3_STRING_FACTORY_struct *, ANTLR3_STRING_struct *); // rax
 
-  v1 = encoding;
   v2 = antlrCalloc(1u, 0x58u);
   if ( !v2 )
     return 0i64;
   v3 = antlr3VectorNew(0);
   LODWORD(v2[1].mNext) = 0;
-  v2->mNext = v3;
+  v2->mNext = (UFG::allocator::free_link *)v3;
   if ( !v3 )
   {
-    antlrFree(v2);
+    antlrFree((char *)v2);
     return 0i64;
   }
-  if ( v1 < 0x10 )
-    goto LABEL_14;
-  if ( v1 <= 0x12 )
+  if ( encoding < 0x10 )
+    goto LABEL_8;
+  if ( encoding <= 0x12 )
   {
     v2[2].mNext = (UFG::allocator::free_link *)newRawUTF16;
     v2[3].mNext = (UFG::allocator::free_link *)newSizeUTF16;
@@ -32,9 +30,9 @@ UFG::allocator::free_link *__fastcall antlr3StringFactoryNew(unsigned int encodi
     v5 = printableUTF16;
     goto LABEL_9;
   }
-  if ( v1 - 32 > 2 )
+  if ( encoding - 32 > 2 )
   {
-LABEL_14:
+LABEL_8:
     v2[2].mNext = (UFG::allocator::free_link *)newRaw8;
     v2[3].mNext = (UFG::allocator::free_link *)newSize8;
     v2[4].mNext = (UFG::allocator::free_link *)newPtr8;
@@ -54,22 +52,20 @@ LABEL_9:
 // RVA: 0x260150
 ANTLR3_STRING_struct *__fastcall newRaw8(ANTLR3_STRING_FACTORY_struct *factory)
 {
-  ANTLR3_STRING_FACTORY_struct *v1; // rdi
   ANTLR3_STRING_struct *result; // rax
   ANTLR3_STRING_struct *v3; // rbx
-  char v4; // ST20_1
+  char v4; // [rsp+20h] [rbp-18h]
 
-  v1 = factory;
   result = (ANTLR3_STRING_struct *)antlrMalloc(0xC0ui64);
   v3 = result;
   if ( result )
   {
     stringInit8(result);
-    v3->factory = v1;
+    v3->factory = factory;
     v4 = 1;
-    v1->strings->set(v1->strings, v1->index, v3, (void (__fastcall *)(void *))stringFree, v4);
-    v3->index = v1->index++;
-    result = v3;
+    factory->strings->set(factory->strings, factory->index, v3, (void (__fastcall *)(void *))stringFree, v4);
+    v3->index = factory->index++;
+    return v3;
   }
   return result;
 }
@@ -78,22 +74,20 @@ ANTLR3_STRING_struct *__fastcall newRaw8(ANTLR3_STRING_FACTORY_struct *factory)
 // RVA: 0x2601C0
 ANTLR3_STRING_struct *__fastcall newRawUTF16(ANTLR3_STRING_FACTORY_struct *factory)
 {
-  ANTLR3_STRING_FACTORY_struct *v1; // rdi
   ANTLR3_STRING_struct *result; // rax
   ANTLR3_STRING_struct *v3; // rbx
-  char v4; // ST20_1
+  char v4; // [rsp+20h] [rbp-18h]
 
-  v1 = factory;
   result = (ANTLR3_STRING_struct *)antlrMalloc(0xC0ui64);
   v3 = result;
   if ( result )
   {
     stringInitUTF16(result);
-    v3->factory = v1;
+    v3->factory = factory;
     v4 = 1;
-    v1->strings->set(v1->strings, v1->index, v3, (void (__fastcall *)(void *))stringFree, v4);
-    v3->index = v1->index++;
-    result = v3;
+    factory->strings->set(factory->strings, factory->index, v3, (void (__fastcall *)(void *))stringFree, v4);
+    v3->index = factory->index++;
+    return v3;
   }
   return result;
 }
@@ -102,14 +96,12 @@ ANTLR3_STRING_struct *__fastcall newRawUTF16(ANTLR3_STRING_FACTORY_struct *facto
 // RVA: 0x260670
 void __fastcall stringFree(ANTLR3_STRING_struct *string)
 {
-  ANTLR3_STRING_struct *v1; // rbx
-  char *v2; // rcx
+  char *chars; // rcx
 
-  v1 = string;
-  v2 = string->chars;
-  if ( v2 )
-    antlrFree(v2);
-  antlrFree(v1);
+  chars = string->chars;
+  if ( chars )
+    antlrFree(chars);
+  antlrFree((char *)string);
 }
 
 // File Line: 264
@@ -119,15 +111,15 @@ void __fastcall stringInit8(ANTLR3_STRING_struct *string)
   string->encoding = 4;
   *(_QWORD *)&string->len = 0i64;
   string->chars = 0i64;
-  string->set = set8;
-  string->set8 = set8;
-  string->append = append8;
-  string->append8 = append8;
-  string->insert = insert8;
-  string->insert8 = insert8;
-  string->addi = addiUTF16;
+  string->set = (char *(__fastcall *)(ANTLR3_STRING_struct *, const char *))set8;
+  string->set8 = (char *(__fastcall *)(ANTLR3_STRING_struct *, const char *))set8;
+  string->append = (char *(__fastcall *)(ANTLR3_STRING_struct *, const char *))append8;
+  string->append8 = (char *(__fastcall *)(ANTLR3_STRING_struct *, const char *))append8;
+  string->insert = (char *(__fastcall *)(ANTLR3_STRING_struct *, unsigned int, const char *))insert8;
+  string->insert8 = (char *(__fastcall *)(ANTLR3_STRING_struct *, unsigned int, const char *))insert8;
+  string->addi = (char *(__fastcall *)(ANTLR3_STRING_struct *, int))addiUTF16;
   string->inserti = (char *(__fastcall *)(ANTLR3_STRING_struct *, unsigned int, int))insertiUTF16;
-  string->addc = addc8;
+  string->addc = (char *(__fastcall *)(ANTLR3_STRING_struct *, unsigned int))addc8;
   string->charAt = (unsigned int (__fastcall *)(ANTLR3_STRING_struct *, unsigned int))charAt8;
   string->compare = (unsigned int (__fastcall *)(ANTLR3_STRING_struct *, const char *))compare8;
   string->compare8 = (unsigned int (__fastcall *)(ANTLR3_STRING_struct *, const char *))compare8;
@@ -148,15 +140,15 @@ void __fastcall stringInitUTF16(ANTLR3_STRING_struct *string)
   string->encoding = 4;
   *(_QWORD *)&string->len = 0i64;
   string->chars = 0i64;
-  string->set = setUTF16_UTF16;
+  string->set = (char *(__fastcall *)(ANTLR3_STRING_struct *, const char *))setUTF16_UTF16;
   string->set8 = setUTF16_8;
-  string->append = appendUTF16_UTF16;
+  string->append = (char *(__fastcall *)(ANTLR3_STRING_struct *, const char *))appendUTF16_UTF16;
   string->append8 = appendUTF16_8;
-  string->insert = insertUTF16_UTF16;
+  string->insert = (char *(__fastcall *)(ANTLR3_STRING_struct *, unsigned int, const char *))insertUTF16_UTF16;
   string->insert8 = insertUTF16_8;
-  string->addi = addiUTF16;
+  string->addi = (char *(__fastcall *)(ANTLR3_STRING_struct *, int))addiUTF16;
   string->inserti = (char *(__fastcall *)(ANTLR3_STRING_struct *, unsigned int, int))insertiUTF16;
-  string->addc = addcUTF16;
+  string->addc = (char *(__fastcall *)(ANTLR3_STRING_struct *, unsigned int))addcUTF16;
   string->charAt = (unsigned int (__fastcall *)(ANTLR3_STRING_struct *, unsigned int))charAtUTF16;
   string->compare = (unsigned int (__fastcall *)(ANTLR3_STRING_struct *, const char *))compareUTF16_UTF16;
   string->compare8 = (unsigned int (__fastcall *)(ANTLR3_STRING_struct *, const char *))compareUTF16_8;
@@ -174,45 +166,43 @@ void __fastcall stringInitUTF16(ANTLR3_STRING_struct *string)
 // RVA: 0x260A20
 ANTLR3_STRING_struct *__fastcall toUTF8_8(ANTLR3_STRING_struct *string)
 {
-  return (ANTLR3_STRING_struct *)string->factory->newPtr(string->factory, string->chars, string->len);
+  return string->factory->newPtr(string->factory, string->chars, string->len);
 }
 
 // File Line: 364
 // RVA: 0x260A40
 ANTLR3_STRING_struct *__fastcall toUTF8_UTF16(ANTLR3_STRING_struct *string)
 {
-  ANTLR3_STRING_struct *v1; // rdi
   ANTLR3_STRING_struct *result; // rax
   ANTLR3_STRING_struct *v3; // rbx
-  unsigned int v4; // edx
+  unsigned int len; // edx
   UFG::allocator::free_link *v5; // rax
-  char *targetStart; // [rsp+40h] [rbp+8h]
-  unsigned __int16 *sourceStart; // [rsp+48h] [rbp+10h]
+  char *targetStart; // [rsp+40h] [rbp+8h] BYREF
+  unsigned __int16 *sourceStart; // [rsp+48h] [rbp+10h] BYREF
 
-  v1 = string;
-  result = string->factory->newStr8(string->factory, &customWorldMapCaption);
+  result = string->factory->newStr8(string->factory, &customCaption);
   v3 = result;
   if ( result )
   {
     antlrFree(result->chars);
-    v4 = v1->len;
-    v3->size = 3 * v4;
-    v5 = antlrMalloc(3 * v4 + 1);
+    len = string->len;
+    v3->size = 3 * len;
+    v5 = antlrMalloc(3 * len + 1);
     v3->chars = (char *)v5;
     if ( v5 )
     {
-      sourceStart = (unsigned __int16 *)v1->chars;
+      sourceStart = (unsigned __int16 *)string->chars;
       targetStart = v3->chars;
       ConvertUTF16toUTF8(
         (const unsigned __int16 **)&sourceStart,
-        &sourceStart[v1->len],
+        &sourceStart[string->len],
         &targetStart,
         &targetStart[v3->size - 1],
         lenientConversion);
       v3->len = (_DWORD)targetStart - LODWORD(v3->chars);
       targetStart[1] = 0;
     }
-    result = v3;
+    return v3;
   }
   return result;
 }
@@ -221,23 +211,21 @@ ANTLR3_STRING_struct *__fastcall toUTF8_UTF16(ANTLR3_STRING_struct *string)
 // RVA: 0x260230
 ANTLR3_STRING_struct *__fastcall newSize8(ANTLR3_STRING_FACTORY_struct *factory, unsigned int size)
 {
-  unsigned int v2; // ebx
   ANTLR3_STRING_struct *result; // rax
   ANTLR3_STRING_struct *v4; // rdi
   unsigned int v5; // ebx
   UFG::allocator::free_link *v6; // rax
 
-  v2 = size;
   result = (ANTLR3_STRING_struct *)((__int64 (*)(void))factory->newRaw)();
   v4 = result;
   if ( result )
   {
-    v5 = v2 + 1;
+    v5 = size + 1;
     v6 = antlrMalloc(v5);
     v4->chars = (char *)v6;
     LOBYTE(v6->mNext) = 0;
     v4->size = v5;
-    result = v4;
+    return v4;
   }
   return result;
 }
@@ -246,23 +234,21 @@ ANTLR3_STRING_struct *__fastcall newSize8(ANTLR3_STRING_FACTORY_struct *factory,
 // RVA: 0x260280
 ANTLR3_STRING_struct *__fastcall newSizeUTF16(ANTLR3_STRING_FACTORY_struct *factory, unsigned int size)
 {
-  unsigned int v2; // ebx
   ANTLR3_STRING_struct *result; // rax
   ANTLR3_STRING_struct *v4; // rdi
   unsigned int v5; // ebx
   UFG::allocator::free_link *v6; // rax
 
-  v2 = size;
   result = (ANTLR3_STRING_struct *)((__int64 (*)(void))factory->newRaw)();
   v4 = result;
   if ( result )
   {
-    v5 = v2 + 1;
+    v5 = size + 1;
     v6 = antlrMalloc(2i64 * v5);
     v4->chars = (char *)v6;
     LOBYTE(v6->mNext) = 0;
     v4->size = v5;
-    result = v4;
+    return v4;
   }
   return result;
 }
@@ -271,24 +257,22 @@ ANTLR3_STRING_struct *__fastcall newSizeUTF16(ANTLR3_STRING_FACTORY_struct *fact
 // RVA: 0x25FFF0
 ANTLR3_STRING_struct *__fastcall newPtr8(ANTLR3_STRING_FACTORY_struct *factory, char *ptr, unsigned int size)
 {
-  char *v3; // rsi
   __int64 v4; // rdi
   ANTLR3_STRING_struct *result; // rax
   ANTLR3_STRING_struct *v6; // rbx
 
-  v3 = ptr;
   v4 = size;
   result = factory->newSize(factory, size);
   v6 = result;
   if ( result && (_DWORD)v4 )
   {
-    if ( v3 )
+    if ( ptr )
     {
-      UFG::qMemMove(result->chars, v3, v4);
+      UFG::qMemMove(result->chars, ptr, v4);
       v6->chars[v4] = 0;
       v6->len = v4;
     }
-    result = v6;
+    return v6;
   }
   return result;
 }
@@ -297,28 +281,21 @@ ANTLR3_STRING_struct *__fastcall newPtr8(ANTLR3_STRING_FACTORY_struct *factory, 
 // RVA: 0x260060
 ANTLR3_STRING_struct *__fastcall newPtrUTF16_8(ANTLR3_STRING_FACTORY_struct *factory, char *ptr, unsigned int size)
 {
-  char *v3; // rbx
   __int64 v4; // rdi
   ANTLR3_STRING_struct *result; // rax
-  char *v6; // rcx
-  int v7; // edx
+  char *chars; // rcx
+  int i; // edx
 
-  v3 = ptr;
   v4 = size;
   result = factory->newSize(factory, size);
-  if ( result && (_DWORD)v4 && v3 )
+  if ( result && (_DWORD)v4 && ptr )
   {
-    v6 = result->chars;
-    v7 = v4;
-    if ( (signed int)v4 > 0 )
+    chars = result->chars;
+    for ( i = v4; i > 0; ++ptr )
     {
-      do
-      {
-        --v7;
-        v6 += 2;
-        *((_WORD *)v6 - 1) = (unsigned __int8)*v3++;
-      }
-      while ( v7 > 0 );
+      --i;
+      chars += 2;
+      *((_WORD *)chars - 1) = (unsigned __int8)*ptr;
     }
     *(_WORD *)&result->chars[2 * v4] = 0;
     result->len = v4;
@@ -330,24 +307,22 @@ ANTLR3_STRING_struct *__fastcall newPtrUTF16_8(ANTLR3_STRING_FACTORY_struct *fac
 // RVA: 0x2600E0
 ANTLR3_STRING_struct *__fastcall newPtrUTF16_UTF16(ANTLR3_STRING_FACTORY_struct *factory, char *ptr, unsigned int size)
 {
-  char *v3; // rsi
   __int64 v4; // rdi
   ANTLR3_STRING_struct *result; // rax
   ANTLR3_STRING_struct *v6; // rbx
 
-  v3 = ptr;
   v4 = size;
   result = factory->newSize(factory, size);
   v6 = result;
   if ( result && (_DWORD)v4 )
   {
-    if ( v3 )
+    if ( ptr )
     {
-      UFG::qMemMove(result->chars, v3, 2 * v4);
+      UFG::qMemMove(result->chars, ptr, 2 * v4);
       *(_WORD *)&v6->chars[2 * v4] = 0;
       v6->len = v4;
     }
-    result = v6;
+    return v6;
   }
   return result;
 }
@@ -356,7 +331,7 @@ ANTLR3_STRING_struct *__fastcall newPtrUTF16_UTF16(ANTLR3_STRING_FACTORY_struct 
 // RVA: 0x2602D0
 ANTLR3_STRING_struct *__fastcall newStrUTF16_8(ANTLR3_STRING_FACTORY_struct *factory, char *ptr)
 {
-  signed __int64 v2; // r8
+  __int64 v2; // r8
 
   v2 = -1i64;
   do
@@ -369,7 +344,7 @@ ANTLR3_STRING_struct *__fastcall newStrUTF16_8(ANTLR3_STRING_FACTORY_struct *fac
 // RVA: 0x2602F0
 ANTLR3_STRING_struct *__fastcall newStrUTF16_UTF16(ANTLR3_STRING_FACTORY_struct *factory, char *ptr)
 {
-  int v2; // er8
+  int v2; // r8d
   char *i; // rax
 
   v2 = 0;
@@ -382,20 +357,18 @@ ANTLR3_STRING_struct *__fastcall newStrUTF16_UTF16(ANTLR3_STRING_FACTORY_struct 
 // RVA: 0x25FC70
 void __fastcall destroy(ANTLR3_STRING_FACTORY_struct *factory, ANTLR3_STRING_struct *string)
 {
-  unsigned int v2; // ebx
-  ANTLR3_STRING_FACTORY_struct *v3; // rdi
+  unsigned int index; // ebx
 
-  v2 = string->index;
-  v3 = factory;
-  factory->strings->del(factory->strings, string->index);
-  if ( v2 < --v3->index )
+  index = string->index;
+  factory->strings->del(factory->strings, index);
+  if ( index < --factory->index )
   {
     do
     {
-      *((_DWORD *)v3->strings->elements[v2].element + 6) = v2;
-      ++v2;
+      *((_DWORD *)factory->strings->elements[index].element + 6) = index;
+      ++index;
     }
-    while ( v2 < v3->index );
+    while ( index < factory->index );
   }
 }
 
@@ -403,93 +376,81 @@ void __fastcall destroy(ANTLR3_STRING_FACTORY_struct *factory, ANTLR3_STRING_str
 // RVA: 0x260320
 ANTLR3_STRING_struct *__fastcall printable8(ANTLR3_STRING_FACTORY_struct *factory, ANTLR3_STRING_struct *instr)
 {
-  ANTLR3_STRING_struct *v2; // rsi
   ANTLR3_STRING_struct *v3; // rax
   __int64 v4; // rdi
-  _WORD *v5; // rbx
-  ANTLR3_STRING_struct *v6; // rbp
+  _WORD *chars; // rbx
+  ANTLR3_STRING_struct *i; // rbp
   unsigned __int8 v7; // dl
 
-  v2 = instr;
   v3 = factory->newSize(factory, 2 * instr->len + 1);
   v4 = 0i64;
-  v5 = v3->chars;
-  v6 = v3;
-  if ( v2->len )
+  chars = v3->chars;
+  for ( i = v3; (unsigned int)v4 < instr->len; v4 = (unsigned int)(v4 + 1) )
   {
-    do
+    v7 = instr->chars[v4];
+    if ( v7 == 10 )
     {
-      v7 = v2->chars[v4];
-      if ( v7 == 10 )
-      {
-        *v5 = 28252;
-        ++v5;
-      }
-      else if ( v7 == 13 )
-      {
-        *v5 = 29276;
-        ++v5;
-      }
-      else
-      {
-        if ( isprint(v7) )
-          *(_BYTE *)v5 = v2->chars[v4];
-        else
-          *(_BYTE *)v5 = 63;
-        v5 = (_WORD *)((char *)v5 + 1);
-      }
-      v4 = (unsigned int)(v4 + 1);
+      *chars++ = 28252;
     }
-    while ( (unsigned int)v4 < v2->len );
+    else if ( v7 == 13 )
+    {
+      *chars++ = 29276;
+    }
+    else
+    {
+      if ( isprint(v7) )
+        *(_BYTE *)chars = instr->chars[v4];
+      else
+        *(_BYTE *)chars = 63;
+      chars = (_WORD *)((char *)chars + 1);
+    }
   }
-  *(_BYTE *)v5 = 0;
-  v6->len = (_DWORD)v5 - LODWORD(v6->chars);
-  return v6;
+  *(_BYTE *)chars = 0;
+  i->len = (_DWORD)chars - LODWORD(i->chars);
+  return i;
 }
 
 // File Line: 728
 // RVA: 0x2603E0
 ANTLR3_STRING_struct *__fastcall printableUTF16(ANTLR3_STRING_FACTORY_struct *factory, ANTLR3_STRING_struct *instr)
 {
-  ANTLR3_STRING_struct *v2; // rbp
   ANTLR3_STRING_struct *v3; // rax
-  char *v4; // r12
+  char *chars; // r12
   _DWORD *v5; // rbx
   ANTLR3_STRING_struct *v6; // r15
   unsigned int v7; // edi
   unsigned int v8; // esi
-  unsigned __int16 v9; // ax
-  ANTLR3_STRING_struct *v11; // [rsp+50h] [rbp+8h]
+  char *v9; // r14
+  unsigned __int16 v10; // ax
+  ANTLR3_STRING_struct *v12; // [rsp+50h] [rbp+8h]
 
-  v2 = instr;
   v3 = factory->newSize(factory, 2 * instr->len + 1);
-  v4 = v2->chars;
+  chars = instr->chars;
   v5 = v3->chars;
   v6 = v3;
-  v11 = v3;
+  v12 = v3;
   v7 = 0;
   v8 = 0;
-  if ( v2->len )
+  if ( instr->len )
   {
     do
     {
-      v9 = *(_WORD *)&v4[2 * v8];
-      if ( v9 == 10 )
+      v9 = &chars[2 * v8];
+      v10 = *(_WORD *)v9;
+      if ( *(_WORD *)v9 == 10 )
       {
-        *v5 = 7209052;
-        ++v5;
+        *v5++ = 7209052;
         v7 += 2;
       }
-      else if ( v9 == 13 )
+      else if ( v10 == 13 )
       {
-        *v5 = 7471196;
-        ++v5;
+        *v5++ = 7471196;
         v7 += 2;
       }
       else
       {
-        if ( isprint(v9) )
-          *(_WORD *)v5 = *(_WORD *)&v4[2 * v8];
+        if ( isprint(v10) )
+          *(_WORD *)v5 = *(_WORD *)v9;
         else
           *(_WORD *)v5 = 63;
         v5 = (_DWORD *)((char *)v5 + 2);
@@ -497,8 +458,8 @@ ANTLR3_STRING_struct *__fastcall printableUTF16(ANTLR3_STRING_FACTORY_struct *fa
       }
       ++v8;
     }
-    while ( v8 < v2->len );
-    v6 = v11;
+    while ( v8 < instr->len );
+    v6 = v12;
   }
   *(_WORD *)v5 = 0;
   v6->len = v7;
@@ -509,42 +470,35 @@ ANTLR3_STRING_struct *__fastcall printableUTF16(ANTLR3_STRING_FACTORY_struct *fa
 // RVA: 0x25FB70
 void __fastcall closeFactory(ANTLR3_STRING_FACTORY_struct *factory)
 {
-  ANTLR3_STRING_FACTORY_struct *v1; // rbx
-
-  v1 = factory;
   factory->strings->free(factory->strings);
-  antlrFree(v1);
+  antlrFree((char *)factory);
 }
 
 // File Line: 799
 // RVA: 0x25F950
-char *__fastcall append8(ANTLR3_STRING_struct *string, const char *newbit)
+char *__fastcall append8(ANTLR3_STRING_struct *string, char *newbit)
 {
-  const char *v2; // rsi
-  ANTLR3_STRING_struct *v3; // rdi
-  signed __int64 v4; // rbx
-  __int64 v5; // rcx
+  __int64 v4; // rbx
+  __int64 len; // rcx
   unsigned int v6; // eax
-  UFG::allocator::free_link *v7; // rax
+  char *v7; // rax
 
-  v2 = newbit;
-  v3 = string;
   v4 = -1i64;
   do
     ++v4;
   while ( newbit[v4] );
-  v5 = string->len;
-  v6 = v4 + v5 + 1;
-  if ( v3->size < v6 )
+  len = string->len;
+  v6 = v4 + len + 1;
+  if ( string->size < v6 )
   {
-    v7 = antlrRealloc(v3->chars, v6);
-    v5 = v3->len;
-    v3->chars = (char *)v7;
-    v3->size = v4 + v5 + 1;
+    v7 = (char *)antlrRealloc(string->chars, v6);
+    len = string->len;
+    string->chars = v7;
+    string->size = v4 + len + 1;
   }
-  UFG::qMemMove(&v3->chars[v5], v2, v4 + 1);
-  v3->len += v4;
-  return v3->chars;
+  UFG::qMemMove(&string->chars[len], newbit, v4 + 1);
+  string->len += v4;
+  return string->chars;
 }
 
 // File Line: 820
@@ -552,35 +506,33 @@ char *__fastcall append8(ANTLR3_STRING_struct *string, const char *newbit)
 char *__fastcall appendUTF16_8(ANTLR3_STRING_struct *string, const char *newbit)
 {
   const char *v2; // rbx
-  ANTLR3_STRING_struct *v3; // rsi
-  signed __int64 v4; // rdi
-  __int64 v5; // rcx
-  unsigned int v6; // er8
-  UFG::allocator::free_link *v7; // rax
-  char *v8; // rax
+  __int64 v4; // rdi
+  __int64 len; // rcx
+  unsigned int v6; // r8d
+  char *v7; // rax
+  char *chars; // rax
   char *v9; // rdx
   __int64 v10; // rcx
   __int16 v11; // ax
 
   v2 = newbit;
-  v3 = string;
   v4 = -1i64;
   do
     ++v4;
   while ( newbit[v4] );
-  v5 = string->len;
-  v6 = v5 + v4;
-  if ( v3->size < (unsigned int)(v5 + v4 + 1) )
+  len = string->len;
+  v6 = len + v4;
+  if ( string->size < (unsigned int)(len + v4 + 1) )
   {
-    v7 = antlrRealloc(v3->chars, 2 * v6 + 2);
-    v5 = v3->len;
-    v6 = v5 + v4;
-    v3->chars = (char *)v7;
-    v3->size = v5 + v4 + 1;
+    v7 = (char *)antlrRealloc(string->chars, 2 * v6 + 2);
+    len = string->len;
+    v6 = len + v4;
+    string->chars = v7;
+    string->size = len + v4 + 1;
   }
-  v8 = v3->chars;
-  v3->len = v6;
-  v9 = &v8[2 * v5];
+  chars = string->chars;
+  string->len = v6;
+  v9 = &chars[2 * len];
   if ( (_DWORD)v4 )
   {
     v10 = (unsigned int)v4;
@@ -595,51 +547,43 @@ char *__fastcall appendUTF16_8(ANTLR3_STRING_struct *string, const char *newbit)
     while ( v10 );
   }
   *(_WORD *)v9 = 0;
-  return v3->chars;
+  return string->chars;
 }
 
 // File Line: 847
 // RVA: 0x25FAA0
-char *__fastcall appendUTF16_UTF16(ANTLR3_STRING_struct *string, const char *newbit)
+char *__fastcall appendUTF16_UTF16(ANTLR3_STRING_struct *string, char *newbit)
 {
   int v2; // ebx
-  const char *v3; // rsi
-  ANTLR3_STRING_struct *v4; // rdi
-  const char *i; // rax
-  __int64 v6; // rcx
-  UFG::allocator::free_link *v7; // rax
+  char *i; // rax
+  __int64 len; // rcx
+  char *v7; // rax
 
   v2 = 0;
-  v3 = newbit;
-  v4 = string;
   for ( i = newbit; *(_WORD *)i; ++v2 )
     i += 2;
-  v6 = string->len;
-  if ( v4->size < (unsigned int)(v6 + v2 + 1) )
+  len = string->len;
+  if ( string->size < (unsigned int)(len + v2 + 1) )
   {
-    v7 = antlrRealloc(v4->chars, (unsigned int)(2 * (v6 + v2) + 2));
-    v6 = v4->len;
-    v4->chars = (char *)v7;
-    v4->size = v2 + v6 + 1;
+    v7 = (char *)antlrRealloc(string->chars, (unsigned int)(2 * (len + v2) + 2));
+    len = string->len;
+    string->chars = v7;
+    string->size = v2 + len + 1;
   }
-  UFG::qMemMove(&v4->chars[2 * v6], v3, 2 * v2 + 2);
-  v4->len += v2;
-  return v4->chars;
+  UFG::qMemMove(&string->chars[2 * len], newbit, 2 * v2 + 2);
+  string->len += v2;
+  return string->chars;
 }
 
 // File Line: 877
 // RVA: 0x2604D0
-char *__fastcall set8(ANTLR3_STRING_struct *string, const char *chars)
+char *__fastcall set8(ANTLR3_STRING_struct *string, char *chars)
 {
-  const char *v2; // rdi
-  ANTLR3_STRING_struct *v3; // rsi
-  signed __int64 v4; // rbx
+  __int64 v4; // rbx
   unsigned int v5; // ebp
-  UFG::allocator::free_link *v6; // rax
+  char *v6; // rax
   char *result; // rax
 
-  v2 = chars;
-  v3 = string;
   v4 = -1i64;
   do
     ++v4;
@@ -647,13 +591,13 @@ char *__fastcall set8(ANTLR3_STRING_struct *string, const char *chars)
   v5 = v4 + 1;
   if ( string->size < (unsigned int)(v4 + 1) )
   {
-    v6 = antlrRealloc(string->chars, v5);
-    v3->size = v5;
-    v3->chars = (char *)v6;
+    v6 = (char *)antlrRealloc(string->chars, v5);
+    string->size = v5;
+    string->chars = v6;
   }
-  UFG::qMemMove(v3->chars, v2, v5);
-  result = v3->chars;
-  v3->len = v4;
+  UFG::qMemMove(string->chars, chars, v5);
+  result = string->chars;
+  string->len = v4;
   return result;
 }
 
@@ -661,260 +605,217 @@ char *__fastcall set8(ANTLR3_STRING_struct *string, const char *chars)
 // RVA: 0x260550
 char *__fastcall setUTF16_8(ANTLR3_STRING_struct *string, const char *chars)
 {
-  const char *v2; // rsi
-  ANTLR3_STRING_struct *v3; // rdi
-  signed __int64 v4; // rbx
-  UFG::allocator::free_link *v5; // rax
+  __int64 v4; // rbx
+  char *v5; // rax
   char *v6; // r8
-  unsigned int v7; // edx
+  unsigned int i; // edx
   __int64 v8; // rax
 
-  v2 = chars;
-  v3 = string;
   v4 = -1i64;
   do
     ++v4;
   while ( chars[v4] );
   if ( string->size < (unsigned int)(v4 + 1) )
   {
-    v5 = antlrRealloc(string->chars, (unsigned int)(2 * v4 + 2));
-    v3->size = v4 + 1;
-    v3->chars = (char *)v5;
+    v5 = (char *)antlrRealloc(string->chars, (unsigned int)(2 * v4 + 2));
+    string->size = v4 + 1;
+    string->chars = v5;
   }
-  v6 = v3->chars;
-  v3->len = v4;
-  v7 = 0;
-  if ( (_DWORD)v4 )
+  v6 = string->chars;
+  string->len = v4;
+  for ( i = 0; i < string->len; *((_WORD *)v6 - 1) = chars[v8] )
   {
-    do
-    {
-      v8 = v7++;
-      v6 += 2;
-      *((_WORD *)v6 - 1) = v2[v8];
-    }
-    while ( v7 < v3->len );
+    v8 = i++;
+    v6 += 2;
   }
   *(_WORD *)v6 = 0;
-  return v3->chars;
+  return string->chars;
 }
 
 // File Line: 923
 // RVA: 0x2605F0
-char *__fastcall setUTF16_UTF16(ANTLR3_STRING_struct *string, const char *chars)
+char *__fastcall setUTF16_UTF16(ANTLR3_STRING_struct *string, char *chars)
 {
   unsigned int v2; // ebx
-  const char *v3; // rsi
-  ANTLR3_STRING_struct *v4; // rdi
-  const char *i; // rax
-  UFG::allocator::free_link *v6; // rax
+  char *i; // rax
+  char *v6; // rax
   char *result; // rax
 
   v2 = 0;
-  v3 = chars;
-  v4 = string;
   for ( i = chars; *(_WORD *)i; ++v2 )
     i += 2;
   if ( string->size < v2 + 1 )
   {
-    v6 = antlrRealloc(string->chars, 2 * v2 + 2);
-    v4->size = v2 + 1;
-    v4->chars = (char *)v6;
+    v6 = (char *)antlrRealloc(string->chars, 2 * v2 + 2);
+    string->size = v2 + 1;
+    string->chars = v6;
   }
-  UFG::qMemMove(v4->chars, v3, 2 * v2 + 2);
-  result = v4->chars;
-  v4->len = v2;
+  UFG::qMemMove(string->chars, chars, 2 * v2 + 2);
+  result = string->chars;
+  string->len = v2;
   return result;
 }
 
 // File Line: 954
 // RVA: 0x25F860
-char *__fastcall addc8(ANTLR3_STRING_struct *string, unsigned int c)
+char *__fastcall addc8(ANTLR3_STRING_struct *string, char c)
 {
-  ANTLR3_STRING_struct *v2; // rbx
-  __int64 v3; // rcx
-  char v4; // di
-  UFG::allocator::free_link *v5; // rax
+  __int64 len; // rcx
+  char *v5; // rax
 
-  v2 = string;
-  v3 = string->len;
-  v4 = c;
-  if ( v2->size < (unsigned int)(v3 + 2) )
+  len = string->len;
+  if ( string->size < (unsigned int)(len + 2) )
   {
-    v5 = antlrRealloc(v2->chars, (unsigned int)(v3 + 2));
-    v3 = v2->len;
-    v2->chars = (char *)v5;
-    v2->size = v3 + 2;
+    v5 = (char *)antlrRealloc(string->chars, (unsigned int)(len + 2));
+    len = string->len;
+    string->chars = v5;
+    string->size = len + 2;
   }
-  v2->chars[v3] = v4;
-  v2->chars[v2->len++ + 1] = 0;
-  return v2->chars;
+  string->chars[len] = c;
+  string->chars[++string->len] = 0;
+  return string->chars;
 }
 
 // File Line: 969
 // RVA: 0x25F8C0
-char *__fastcall addcUTF16(ANTLR3_STRING_struct *string, unsigned int c)
+char *__fastcall addcUTF16(ANTLR3_STRING_struct *string, __int16 c)
 {
-  unsigned int v2; // er8
-  __int16 v3; // di
-  ANTLR3_STRING_struct *v4; // rbx
-  UFG::allocator::free_link *v5; // rax
-  char *v6; // rcx
+  unsigned int len; // r8d
+  char *v5; // rax
+  char *chars; // rcx
 
-  v2 = string->len;
-  v3 = c;
-  v4 = string;
-  if ( string->size < v2 + 2 )
+  len = string->len;
+  if ( string->size < len + 2 )
   {
-    v5 = antlrRealloc(string->chars, 2 * (v2 + 2));
-    v2 = v4->len;
-    v4->chars = (char *)v5;
-    v4->size = v2 + 2;
+    v5 = (char *)antlrRealloc(string->chars, 2 * (len + 2));
+    len = string->len;
+    string->chars = v5;
+    string->size = len + 2;
   }
-  v6 = v4->chars;
-  *(_WORD *)&v6[2 * v2] = v3;
-  *(_WORD *)&v6[2 * v4->len++ + 2] = 0;
-  return v4->chars;
+  chars = string->chars;
+  *(_WORD *)&chars[2 * len] = c;
+  *(_WORD *)&chars[2 * string->len++ + 2] = 0;
+  return string->chars;
 }
 
 // File Line: 988
 // RVA: 0x25F920
-char *__fastcall addiUTF16(ANTLR3_STRING_struct *string, int i)
+char *__fastcall addiUTF16(ANTLR3_STRING_struct *string, unsigned int i)
 {
-  ANTLR3_STRING_struct *v2; // rbx
-  char stringa; // [rsp+20h] [rbp-28h]
+  char stringa[40]; // [rsp+20h] [rbp-28h] BYREF
 
-  v2 = string;
-  sprintf(&stringa, "%d", (unsigned int)i);
-  return (char *)v2->append8(v2, &stringa);
+  sprintf(stringa, "%d", i);
+  return string->append8(string, stringa);
 }
 
 // File Line: 1007
 // RVA: 0x25FFB0
 char *__fastcall insertiUTF16(ANTLR3_STRING_struct *string, unsigned int point, __int64 i)
 {
-  unsigned int v3; // ebx
-  ANTLR3_STRING_struct *v4; // rdi
-  char stringa; // [rsp+20h] [rbp-28h]
+  char stringa[40]; // [rsp+20h] [rbp-28h] BYREF
 
-  v3 = point;
-  v4 = string;
-  sprintf(&stringa, "%d", i);
-  return (char *)v4->insert8(v4, v3, &stringa);
+  sprintf(stringa, "%d", i);
+  return string->insert8(string, point, stringa);
 }
 
 // File Line: 1024
 // RVA: 0x25FCD0
-char *__fastcall insert8(ANTLR3_STRING_struct *string, unsigned int point, const char *newbit)
+char *__fastcall insert8(ANTLR3_STRING_struct *string, unsigned int point, char *newbit)
 {
-  const char *v3; // rbp
-  unsigned int v4; // er8
+  unsigned int len; // r8d
   __int64 v5; // r14
-  ANTLR3_STRING_struct *v6; // rsi
-  signed __int64 v8; // rbx
+  __int64 v8; // rbx
   unsigned int v9; // eax
-  UFG::allocator::free_link *v10; // rax
+  char *v10; // rax
 
-  v3 = newbit;
-  v4 = string->len;
+  len = string->len;
   v5 = point;
-  v6 = string;
-  if ( point >= v4 )
-    return (char *)string->append(string, v3);
+  if ( point >= len )
+    return string->append(string, newbit);
   v8 = -1i64;
   do
     ++v8;
-  while ( v3[v8] );
+  while ( newbit[v8] );
   if ( !(_DWORD)v8 )
     return string->chars;
-  v9 = v8 + v4 + 1;
+  v9 = v8 + len + 1;
   if ( string->size < v9 )
   {
-    v10 = antlrRealloc(string->chars, v9);
-    v4 = v6->len;
-    v6->chars = (char *)v10;
-    v6->size = v8 + v4 + 1;
+    v10 = (char *)antlrRealloc(string->chars, v9);
+    len = string->len;
+    string->chars = v10;
+    string->size = v8 + len + 1;
   }
-  UFG::qMemMove(&v6->chars[v5 + (unsigned int)v8], &v6->chars[v5], v4 - v5 + 1);
-  UFG::qMemMove(&v6->chars[v5], v3, v8);
-  v6->len += v8;
-  return v6->chars;
+  UFG::qMemMove(&string->chars[v5 + (unsigned int)v8], &string->chars[v5], len - v5 + 1);
+  UFG::qMemMove(&string->chars[v5], newbit, v8);
+  string->len += v8;
+  return string->chars;
 }
 
 // File Line: 1060
 // RVA: 0x25FDB0
 char *__fastcall insertUTF16_8(ANTLR3_STRING_struct *string, unsigned int point, const char *newbit)
 {
-  const char *v3; // rbx
-  unsigned int v4; // er8
+  unsigned int len; // r8d
   __int64 v5; // r15
-  ANTLR3_STRING_struct *v6; // rbp
-  signed __int64 v8; // rsi
-  UFG::allocator::free_link *v9; // rax
+  __int64 v8; // rsi
+  char *v9; // rax
   __int64 v10; // r14
-  char *v11; // rcx
-  signed __int64 v12; // rcx
+  char *chars; // rcx
+  char *v12; // rcx
   __int16 v13; // ax
 
-  v3 = newbit;
-  v4 = string->len;
+  len = string->len;
   v5 = point;
-  v6 = string;
-  if ( point >= v4 )
-    return (char *)string->append8(string, v3);
+  if ( point >= len )
+    return string->append8(string, newbit);
   v8 = -1i64;
   do
     ++v8;
-  while ( v3[v8] );
+  while ( newbit[v8] );
   if ( !(_DWORD)v8 )
     return string->chars;
-  if ( string->size < v4 + (unsigned int)v8 + 1 )
+  if ( string->size < len + (unsigned int)v8 + 1 )
   {
-    v9 = antlrRealloc(string->chars, 2 * (v4 + (unsigned int)v8) + 2);
-    v4 = v6->len;
-    v6->chars = (char *)v9;
-    v6->size = v8 + v4 + 1;
+    v9 = (char *)antlrRealloc(string->chars, 2 * (len + (unsigned int)v8) + 2);
+    len = string->len;
+    string->chars = v9;
+    string->size = v8 + len + 1;
   }
   v10 = (unsigned int)v8;
-  UFG::qMemMove(&v6->chars[2 * ((unsigned int)v8 + v5)], &v6->chars[2 * v5], 2 * (v4 - v5) + 2);
-  v11 = v6->chars;
-  v6->len += v8;
-  v12 = (signed __int64)&v11[2 * v5];
-  if ( (_DWORD)v8 )
+  UFG::qMemMove(&string->chars[2 * (unsigned int)v8 + 2 * v5], &string->chars[2 * v5], 2 * (len - v5) + 2);
+  chars = string->chars;
+  string->len += v8;
+  v12 = &chars[2 * v5];
+  do
   {
-    do
-    {
-      v13 = *v3;
-      v12 += 2i64;
-      ++v3;
-      *(_WORD *)(v12 - 2) = v13;
-      --v10;
-    }
-    while ( v10 );
+    v13 = *newbit;
+    v12 += 2;
+    ++newbit;
+    *((_WORD *)v12 - 1) = v13;
+    --v10;
   }
-  return v6->chars;
+  while ( v10 );
+  return string->chars;
 }
 
 // File Line: 1100
 // RVA: 0x25FEB0
-char *__fastcall insertUTF16_UTF16(ANTLR3_STRING_struct *string, unsigned int point, const char *newbit)
+char *__fastcall insertUTF16_UTF16(ANTLR3_STRING_struct *string, unsigned int point, char *newbit)
 {
-  const char *v3; // rbp
-  unsigned int v4; // er8
+  unsigned int len; // r8d
   __int64 v5; // r14
-  ANTLR3_STRING_struct *v6; // rsi
   unsigned int v8; // edi
-  const char *v9; // rax
-  UFG::allocator::free_link *v10; // rax
+  char *v9; // rax
+  char *v10; // rax
 
-  v3 = newbit;
-  v4 = string->len;
+  len = string->len;
   v5 = point;
-  v6 = string;
-  if ( point >= v4 )
-    return (char *)string->append(string, v3);
+  if ( point >= len )
+    return string->append(string, newbit);
   v8 = 0;
-  v9 = v3;
-  if ( !*(_WORD *)v3 )
+  v9 = newbit;
+  if ( !*(_WORD *)newbit )
     return string->chars;
   do
   {
@@ -924,173 +825,164 @@ char *__fastcall insertUTF16_UTF16(ANTLR3_STRING_struct *string, unsigned int po
   while ( *(_WORD *)v9 );
   if ( !v8 )
     return string->chars;
-  if ( string->size < v4 + v8 + 1 )
+  if ( string->size < len + v8 + 1 )
   {
-    v10 = antlrRealloc(string->chars, 2 * (v4 + v8) + 2);
-    v4 = v6->len;
-    v6->chars = (char *)v10;
-    v6->size = v8 + v4 + 1;
+    v10 = (char *)antlrRealloc(string->chars, 2 * (len + v8) + 2);
+    len = string->len;
+    string->chars = v10;
+    string->size = v8 + len + 1;
   }
-  UFG::qMemMove(&v6->chars[2 * (v5 + v8)], &v6->chars[2 * v5], 2 * (v4 - v5) + 2);
-  UFG::qMemMove(&v6->chars[2 * v5], v3, 2 * v8);
-  v6->len += v8;
-  return v6->chars;
+  UFG::qMemMove(&string->chars[2 * v5 + 2 * v8], &string->chars[2 * v5], 2 * (len - v5) + 2);
+  UFG::qMemMove(&string->chars[2 * v5], newbit, 2 * v8);
+  string->len += v8;
+  return string->chars;
 }
 
 // File Line: 1145
 // RVA: 0x260540
 char *__fastcall setS(ANTLR3_STRING_struct *string, ANTLR3_STRING_struct *chars)
 {
-  return (char *)string->set(string, chars->chars);
+  return string->set(string, chars->chars);
 }
 
 // File Line: 1150
 // RVA: 0x25F9D0
 char *__fastcall appendS(ANTLR3_STRING_struct *string, ANTLR3_STRING_struct *newbit)
 {
-  char *result; // rax
-
   if ( newbit && newbit->len && newbit->size && newbit->chars )
-    result = (char *)((__int64 (*)(void))string->append)();
+    return (char *)((__int64 (*)(void))string->append)();
   else
-    result = string->chars;
-  return result;
+    return string->chars;
 }
 
 // File Line: 1164
 // RVA: 0x25FDA0
 char *__fastcall insertS(ANTLR3_STRING_struct *string, __int64 point, ANTLR3_STRING_struct *newbit)
 {
-  return (char *)string->insert(string, point, newbit->chars);
+  return string->insert(string, point, newbit->chars);
 }
 
 // File Line: 1173
 // RVA: 0x25FBA0
 __int64 __fastcall compare8(ANTLR3_STRING_struct *string, const char *compStr)
 {
-  char *v2; // rax
+  char *chars; // rax
   const char *v3; // rdx
   unsigned __int8 v4; // cl
 
-  v2 = string->chars;
-  v3 = (const char *)(compStr - v2);
+  chars = string->chars;
+  v3 = (const char *)(compStr - chars);
   while ( 1 )
   {
-    v4 = *v2;
-    if ( *v2 != v3[(_QWORD)v2] )
+    v4 = *chars;
+    if ( *chars != v3[(_QWORD)chars] )
       break;
-    ++v2;
+    ++chars;
     if ( !v4 )
       return 0i64;
   }
-  return -(v4 < v3[(_QWORD)v2]) | 1u;
+  return v4 < (unsigned int)v3[(_QWORD)chars] ? -1 : 1;
 }
 
 // File Line: 1183
 // RVA: 0x25FBD0
-__int64 __fastcall compareUTF16_8(ANTLR3_STRING_struct *string, const char *compStr)
+__int64 __fastcall compareUTF16_8(ANTLR3_STRING_struct *string, char *compStr)
 {
-  char *v2; // rax
+  char *chars; // rax
   unsigned __int16 i; // r8
   char v4; // cl
 
-  v2 = string->chars;
-  for ( i = *(_WORD *)v2; i; ++compStr )
+  chars = string->chars;
+  for ( i = *(_WORD *)chars; i; ++compStr )
   {
     v4 = *compStr;
     if ( !*compStr )
       break;
     if ( i != v4 )
       return (unsigned int)i - v4;
-    i = *((_WORD *)v2 + 1);
-    v2 += 2;
+    i = *((_WORD *)chars + 1);
+    chars += 2;
   }
-  return (unsigned int)*(unsigned __int16 *)v2 - *compStr;
+  return (unsigned int)*(unsigned __int16 *)chars - *compStr;
 }
 
 // File Line: 1212
 // RVA: 0x25FC20
 __int64 __fastcall compareUTF16_UTF16(ANTLR3_STRING_struct *string, const char *compStr8)
 {
-  char *v2; // rax
+  char *chars; // rax
   unsigned __int16 i; // r8
   unsigned __int16 v4; // cx
 
-  v2 = string->chars;
-  for ( i = *(_WORD *)v2; i; compStr8 += 2 )
+  chars = string->chars;
+  for ( i = *(_WORD *)chars; i; compStr8 += 2 )
   {
     v4 = *(_WORD *)compStr8;
     if ( !*(_WORD *)compStr8 )
       break;
     if ( i != v4 )
       return i - (unsigned int)v4;
-    i = *((_WORD *)v2 + 1);
-    v2 += 2;
+    i = *((_WORD *)chars + 1);
+    chars += 2;
   }
-  return *(unsigned __int16 *)v2 - (unsigned int)*(unsigned __int16 *)compStr8;
+  return *(unsigned __int16 *)chars - (unsigned int)*(unsigned __int16 *)compStr8;
 }
 
 // File Line: 1242
 // RVA: 0x25FBC0
 __int64 __fastcall compareS(ANTLR3_STRING_struct *string, ANTLR3_STRING_struct *compStr)
 {
-  return string->compare(string, compStr->chars);
+  return ((__int64 (__fastcall *)(ANTLR3_STRING_struct *, char *))string->compare)(string, compStr->chars);
 }
 
 // File Line: 1252
 // RVA: 0x25FB30
 __int64 __fastcall charAt8(ANTLR3_STRING_struct *string, unsigned int offset)
 {
-  __int64 result; // rax
-
   if ( offset <= string->len )
-    result = (unsigned __int8)string->chars[offset];
+    return (unsigned __int8)string->chars[offset];
   else
-    result = 0i64;
-  return result;
+    return 0i64;
 }
 
 // File Line: 1268
 // RVA: 0x25FB50
 __int64 __fastcall charAtUTF16(ANTLR3_STRING_struct *string, unsigned int offset)
 {
-  __int64 result; // rax
-
   if ( offset <= string->len )
-    result = *(unsigned __int16 *)&string->chars[2 * offset];
+    return *(unsigned __int16 *)&string->chars[2 * offset];
   else
-    result = 0i64;
-  return result;
+    return 0i64;
 }
 
 // File Line: 1284
 // RVA: 0x2608A0
-ANTLR3_STRING_struct *__fastcall subString8(ANTLR3_STRING_struct *string, unsigned int startIndex, unsigned int endIndex)
+ANTLR3_STRING_struct *__fastcall subString8(
+        ANTLR3_STRING_struct *string,
+        unsigned int startIndex,
+        unsigned int endIndex)
 {
-  unsigned int v3; // eax
+  unsigned int len; // eax
 
-  v3 = string->len;
-  if ( endIndex > v3 )
-    endIndex = v3 + 1;
-  return (ANTLR3_STRING_struct *)string->factory->newPtr(
-                                   string->factory,
-                                   &string->chars[startIndex],
-                                   endIndex - startIndex);
+  len = string->len;
+  if ( endIndex > len )
+    endIndex = len + 1;
+  return string->factory->newPtr(string->factory, &string->chars[startIndex], endIndex - startIndex);
 }
 
 // File Line: 1301
 // RVA: 0x2608C0
-ANTLR3_STRING_struct *__fastcall subStringUTF16(ANTLR3_STRING_struct *string, unsigned int startIndex, unsigned int endIndex)
+ANTLR3_STRING_struct *__fastcall subStringUTF16(
+        ANTLR3_STRING_struct *string,
+        unsigned int startIndex,
+        unsigned int endIndex)
 {
-  unsigned int v3; // eax
+  unsigned int len; // eax
 
-  v3 = string->len;
-  if ( endIndex > v3 )
-    endIndex = v3 + 1;
-  return (ANTLR3_STRING_struct *)string->factory->newPtr(
-                                   string->factory,
-                                   &string->chars[2 * startIndex],
-                                   endIndex - startIndex);
+  len = string->len;
+  if ( endIndex > len )
+    endIndex = len + 1;
+  return string->factory->newPtr(string->factory, &string->chars[2 * startIndex], endIndex - startIndex);
 }
 
 // File Line: 1317
@@ -1104,35 +996,35 @@ int __fastcall toInt32_8(ANTLR3_STRING_struct *string)
 // RVA: 0x2609A0
 __int64 __fastcall toInt32_UTF16(ANTLR3_STRING_struct *string)
 {
-  char *v1; // rbx
+  char *chars; // rbx
   unsigned int v2; // edi
   char v3; // si
   unsigned __int16 i; // ax
   int v5; // eax
 
-  v1 = string->chars;
+  chars = string->chars;
   v2 = 0;
   v3 = 0;
-  if ( *(_WORD *)v1 == 45 )
+  if ( *(_WORD *)chars == 45 )
   {
     v3 = 1;
   }
-  else if ( *(_WORD *)v1 != 43 )
+  else if ( *(_WORD *)chars != 43 )
   {
     goto LABEL_5;
   }
-  v1 += 2;
+  chars += 2;
 LABEL_5:
-  for ( i = *(_WORD *)v1; *(_WORD *)v1; i = *(_WORD *)v1 )
+  for ( i = *(_WORD *)chars; *(_WORD *)chars; i = *(_WORD *)chars )
   {
     if ( !isdigit(i) )
       break;
-    v5 = *(unsigned __int16 *)v1;
-    v1 += 2;
+    v5 = *(unsigned __int16 *)chars;
+    chars += 2;
     v2 = v5 + 2 * (5 * v2 - 24);
   }
   if ( v3 )
-    v2 = -v2;
+    return -v2;
   return v2;
 }
 
@@ -1140,37 +1032,29 @@ LABEL_5:
 // RVA: 0x2608F0
 ANTLR3_STRING_struct *__fastcall to8_UTF16(ANTLR3_STRING_struct *string)
 {
-  ANTLR3_STRING_struct *v1; // rdi
   ANTLR3_STRING_struct *result; // rax
   ANTLR3_STRING_struct *v3; // rbx
   UFG::allocator::free_link *v4; // rax
   __int64 v5; // r9
   char v6; // dl
 
-  v1 = string;
   result = newRaw8(string->factory);
   v3 = result;
   if ( result )
   {
-    v4 = antlrMalloc(v1->len + 1);
+    v4 = antlrMalloc(string->len + 1);
     v5 = 0i64;
     v3->chars = (char *)v4;
-    v3->size = v1->len + 1;
-    v3->len = v1->len;
-    if ( v1->len )
+    v3->size = string->len + 1;
+    for ( v3->len = string->len; (unsigned int)v5 < string->len; v5 = (unsigned int)(v5 + 1) )
     {
-      do
-      {
-        v6 = *(_WORD *)&v1->chars[2 * v5];
-        if ( *(unsigned __int16 *)&v1->chars[2 * v5] > 0xFFu )
-          v6 = 95;
-        v3->chars[v5] = v6;
-        v5 = (unsigned int)(v5 + 1);
-      }
-      while ( (unsigned int)v5 < v1->len );
+      v6 = *(_WORD *)&string->chars[2 * v5];
+      if ( *(unsigned __int16 *)&string->chars[2 * v5] > 0xFFu )
+        v6 = 95;
+      v3->chars[v5] = v6;
     }
     v3->chars[v3->len] = 0;
-    result = v3;
+    return v3;
   }
   return result;
 }

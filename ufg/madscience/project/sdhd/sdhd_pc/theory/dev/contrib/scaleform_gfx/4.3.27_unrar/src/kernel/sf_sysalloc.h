@@ -25,7 +25,7 @@ void __fastcall Scaleform::SysAllocPaged::~SysAllocPaged(Scaleform::SysAllocPage
 // RVA: 0x51910
 Scaleform::SysAllocBase_SingletonSupport<Scaleform::SysAllocMalloc,Scaleform::SysAlloc>::SysAllocContainer *__fastcall Scaleform::SysAllocBase_SingletonSupport<Scaleform::SysAllocMalloc,Scaleform::SysAlloc>::InitSystemSingleton()
 {
-  if ( !(`Scaleform::SysAllocBase_SingletonSupport<Scaleform::SysAllocMalloc,Scaleform::SysAlloc>::InitSystemSingleton::`2::`local static guard & 1) )
+  if ( (`Scaleform::SysAllocBase_SingletonSupport<Scaleform::SysAllocMalloc,Scaleform::SysAlloc>::InitSystemSingleton::`2::`local static guard & 1) == 0 )
   {
     `Scaleform::SysAllocBase_SingletonSupport<Scaleform::SysAllocMalloc,Scaleform::SysAlloc>::InitSystemSingleton::`2::`local static guard |= 1u;
     `Scaleform::SysAllocBase_SingletonSupport<Scaleform::SysAllocMalloc,Scaleform::SysAlloc>::InitSystemSingleton::`2::Container.Initialized = 0;
@@ -38,21 +38,20 @@ Scaleform::SysAllocBase_SingletonSupport<Scaleform::SysAllocMalloc,Scaleform::Sy
 
 // File Line: 298
 // RVA: 0x9F2420
-__int64 __fastcall Scaleform::SysAllocBase_SingletonSupport<Scaleform::SysAllocPagedMalloc,Scaleform::SysAllocPaged>::shutdownHeapEngine(Scaleform::SysAllocBase_SingletonSupport<Scaleform::SysAllocPagedMalloc,Scaleform::SysAllocPaged> *this)
+__int64 __fastcall Scaleform::SysAllocBase_SingletonSupport<Scaleform::SysAllocPagedMalloc,Scaleform::SysAllocPaged>::shutdownHeapEngine(
+        Scaleform::SysAllocBase_SingletonSupport<Scaleform::SysAllocPagedMalloc,Scaleform::SysAllocPaged> *this)
 {
-  Scaleform::SysAllocBase_SingletonSupport<Scaleform::SysAllocPagedMalloc,Scaleform::SysAllocPaged> *v1; // rbx
   unsigned __int8 v2; // di
-  Scaleform::SysAllocBase_SingletonSupport<Scaleform::SysAllocPagedMalloc,Scaleform::SysAllocPaged>::SysAllocContainer *v3; // rax
+  Scaleform::SysAllocBase_SingletonSupport<Scaleform::SysAllocPagedMalloc,Scaleform::SysAllocPaged>::SysAllocContainer *pContainer; // rax
 
-  v1 = this;
   v2 = Scaleform::MemoryHeap::ReleaseRootHeapPT();
   Scaleform::MemoryHeap::CleanUpPT();
-  v3 = v1->pContainer;
-  if ( v3 )
+  pContainer = this->pContainer;
+  if ( pContainer )
   {
-    v3->Initialized = 0;
-    v1->vfptr->__vecDelDtor((Scaleform::SysAllocBase *)&v1->vfptr, 0);
-    v1->pContainer = 0i64;
+    pContainer->Initialized = 0;
+    this->vfptr->__vecDelDtor(this, 0i64);
+    this->pContainer = 0i64;
   }
   return v2;
 }

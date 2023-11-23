@@ -2,33 +2,29 @@
 // RVA: 0x12B2C40
 __int64 __fastcall stricmp_l(const char *dst, const char *src, localeinfo_struct *plocinfo)
 {
-  const char *v3; // rsi
-  const char *v4; // rdi
   unsigned int v5; // ebx
-  signed __int64 v6; // rsi
+  __int64 v6; // rsi
   int v7; // ebx
   int v8; // eax
-  _LocaleUpdate v10; // [rsp+20h] [rbp-28h]
+  _LocaleUpdate v10; // [rsp+20h] [rbp-28h] BYREF
 
-  v3 = dst;
-  v4 = src;
   _LocaleUpdate::_LocaleUpdate(&v10, plocinfo);
-  if ( v3 && v4 )
+  if ( dst && src )
   {
     if ( v10.localeinfo.locinfo->locale_name[2] )
     {
-      v6 = v3 - v4;
+      v6 = dst - src;
       do
       {
-        v7 = tolower_l((unsigned __int8)v4[v6], &v10.localeinfo);
-        v8 = tolower_l(*(unsigned __int8 *)v4++, &v10.localeinfo);
+        v7 = tolower_l((unsigned __int8)src[v6], &v10.localeinfo);
+        v8 = tolower_l(*(unsigned __int8 *)src++, &v10.localeinfo);
       }
       while ( v7 && v7 == v8 );
       v5 = v7 - v8;
     }
     else
     {
-      v5 = _ascii_stricmp(v3, v4);
+      v5 = _ascii_stricmp(dst, src);
     }
   }
   else
@@ -38,7 +34,7 @@ __int64 __fastcall stricmp_l(const char *dst, const char *src, localeinfo_struct
     v5 = 0x7FFFFFFF;
   }
   if ( v10.updated )
-    v10.ptd->_ownlocale &= 0xFFFFFFFD;
+    v10.ptd->_ownlocale &= ~2u;
   return v5;
 }
 
@@ -46,14 +42,12 @@ __int64 __fastcall stricmp_l(const char *dst, const char *src, localeinfo_struct
 // RVA: 0x12B2BBC
 __int64 __fastcall _ascii_stricmp(const char *dst, const char *src)
 {
-  const char *v2; // r9
-  int v3; // er8
+  int v3; // r8d
   int v4; // ecx
 
-  v2 = dst;
   do
   {
-    v3 = *(unsigned __int8 *)v2++;
+    v3 = *(unsigned __int8 *)dst++;
     if ( (unsigned int)(v3 - 65) <= 0x19 )
       v3 += 32;
     v4 = *(unsigned __int8 *)src++;

@@ -73,7 +73,7 @@ void dynamic_initializer_for__hkaiNavMeshGenerationSettingsOverrideSettingsClass
     &hkaiNavMeshGenerationSettingsOverrideSettings_Default,
     0i64,
     0,
-    3u);
+    3);
 }
 
 // File Line: 189
@@ -85,16 +85,21 @@ hkClass *__fastcall hkaiNavMeshGenerationSettings::OverrideSettings::staticClass
 
 // File Line: 196
 // RVA: 0xB479A0
-void __fastcall finishLoadedObjecthkaiNavMeshGenerationSettingsOverrideSettings(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiNavMeshGenerationSettingsOverrideSettings(
+        hkaiNavMeshGenerationSettings::OverrideSettings *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiNavMeshGenerationSettings::OverrideSettings::OverrideSettings);
+  if ( p )
+    hkaiNavMeshGenerationSettings::OverrideSettings::OverrideSettings(p, finishing);
 }
 
 // File Line: 202
 // RVA: 0xB479C0
-void __fastcall cleanupLoadedObjecthkaiNavMeshGenerationSettingsOverrideSettings(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkaiNavMeshGenerationSettingsOverrideSettings(
+        hkaiNavMeshGenerationSettings::OverrideSettings *p)
 {
-  hkaiNavMeshGenerationSettings::OverrideSettings::~OverrideSettings((hkaiNavMeshGenerationSettings::OverrideSettings *)p);
+  hkaiNavMeshGenerationSettings::OverrideSettings::~OverrideSettings(p);
 }
 
 // File Line: 280
@@ -115,7 +120,7 @@ void dynamic_initializer_for__hkaiNavMeshGenerationSettingsRegionPruningSettings
     &hkaiNavMeshGenerationSettingsRegionPruningSettings_Default,
     0i64,
     0,
-    2u);
+    2);
 }
 
 // File Line: 283
@@ -134,27 +139,25 @@ void __fastcall finishLoadedObjecthkaiNavMeshGenerationSettingsRegionPruningSett
 
 // File Line: 296
 // RVA: 0xB479E0
-void __fastcall cleanupLoadedObjecthkaiNavMeshGenerationSettingsRegionPruningSettings(void *p)
+void __fastcall cleanupLoadedObjecthkaiNavMeshGenerationSettingsRegionPruningSettings(_DWORD *p)
 {
-  int v1; // er8
-  _QWORD *v2; // rbx
+  int v1; // r8d
 
-  v1 = *((_DWORD *)p + 7);
-  v2 = p;
-  *((_DWORD *)p + 6) = 0;
+  v1 = p[7];
+  p[6] = 0;
   if ( v1 < 0 )
   {
     *((_QWORD *)p + 2) = 0i64;
-    *((_DWORD *)p + 7) = 2147483648;
+    p[7] = 0x80000000;
   }
   else
   {
     hkContainerHeapAllocator::s_alloc.vfptr->bufFree(
-      (hkMemoryAllocator *)&hkContainerHeapAllocator::s_alloc,
+      &hkContainerHeapAllocator::s_alloc,
       (void *)*((_QWORD *)p + 2),
       16 * v1);
-    v2[2] = 0i64;
-    *((_DWORD *)v2 + 7) = 2147483648;
+    *((_QWORD *)p + 2) = 0i64;
+    p[7] = 0x80000000;
   }
 }
 
@@ -176,7 +179,7 @@ void dynamic_initializer_for__hkaiNavMeshGenerationSettingsWallClimbingSettingsC
     &hkaiNavMeshGenerationSettingsWallClimbingSettings_Default,
     0i64,
     0,
-    1u);
+    1);
 }
 
 // File Line: 355
@@ -232,7 +235,7 @@ void dynamic_initializer_for__hkaiNavMeshGenerationSettingsClass__()
     &hkaiNavMeshGenerationSettings_Default,
     0i64,
     0,
-    0x19u);
+    25);
 }
 
 // File Line: 510
@@ -244,15 +247,19 @@ hkClass *__fastcall hkaiNavMeshGenerationSettings::staticClass()
 
 // File Line: 517
 // RVA: 0xB47A70
-void __fastcall finishLoadedObjecthkaiNavMeshGenerationSettings(void *p, int finishing)
+void __fastcall finishLoadedObjecthkaiNavMeshGenerationSettings(
+        hkaiNavMeshGenerationSettings *p,
+        hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkaiNavMeshGenerationSettings::hkaiNavMeshGenerationSettings);
+  if ( p )
+    hkaiNavMeshGenerationSettings::hkaiNavMeshGenerationSettings(p, finishing);
 }
 
 // File Line: 523
 // RVA: 0xB47A90
-void __fastcall cleanupLoadedObjecthkaiNavMeshGenerationSettings(void *p)
+// attributes: thunk
+void __fastcall cleanupLoadedObjecthkaiNavMeshGenerationSettings(hkaiNavMeshGenerationSettings *p)
 {
-  hkaiNavMeshGenerationSettings::~hkaiNavMeshGenerationSettings((hkaiNavMeshGenerationSettings *)p);
+  hkaiNavMeshGenerationSettings::~hkaiNavMeshGenerationSettings(p);
 }
 

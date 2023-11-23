@@ -74,26 +74,27 @@ hkClass *__fastcall hkpTriggerVolume::staticClass()
 
 // File Line: 147
 // RVA: 0xE0BC70
-void __fastcall finishLoadedObjecthkpTriggerVolume(void *p, int finishing)
+void __fastcall finishLoadedObjecthkpTriggerVolume(hkpTriggerVolume *p, hkFinishLoadedObjectFlag finishing)
 {
-  JUMPOUT(p, 0i64, hkpTriggerVolume::hkpTriggerVolume);
+  if ( p )
+    hkpTriggerVolume::hkpTriggerVolume(p, finishing);
 }
 
 // File Line: 153
 // RVA: 0xE0BC90
-void __fastcall cleanupLoadedObjecthkpTriggerVolume(void *p)
+void __fastcall cleanupLoadedObjecthkpTriggerVolume(void (__fastcall ***p)(_QWORD, _QWORD))
 {
-  (**(void (__fastcall ***)(void *, _QWORD))p)(p, 0i64);
+  (**p)(p, 0i64);
 }
 
 // File Line: 157
 // RVA: 0xE0BCA0
 hkBaseObjectVtbl *__fastcall getVtablehkpTriggerVolume()
 {
-  hkpTriggerVolume v1; // [rsp+20h] [rbp-78h]
+  hkpTriggerVolume v1; // [rsp+20h] [rbp-78h] BYREF
 
   hkpTriggerVolume::hkpTriggerVolume(&v1, 0);
-  return v1.vfptr;
+  return v1.hkReferencedObject::hkBaseObject::vfptr;
 }
 
 // File Line: 179
@@ -107,8 +108,8 @@ hkBaseObjectVtbl *dynamic_initializer_for__hkpTriggerVolumeTypeInfo__()
   hkpTriggerVolumeTypeInfo.m_typeName = "hkpTriggerVolume";
   hkpTriggerVolumeTypeInfo.m_vtable = result;
   hkpTriggerVolumeTypeInfo.m_scopedName = "!hkpTriggerVolume";
-  hkpTriggerVolumeTypeInfo.m_finishLoadedObjectFunction = finishLoadedObjecthkpTriggerVolume;
-  hkpTriggerVolumeTypeInfo.m_cleanupLoadedObjectFunction = cleanupLoadedObjecthkpTriggerVolume;
+  hkpTriggerVolumeTypeInfo.m_finishLoadedObjectFunction = (void (__fastcall *)(void *, int))finishLoadedObjecthkpTriggerVolume;
+  hkpTriggerVolumeTypeInfo.m_cleanupLoadedObjectFunction = (void (__fastcall *)(void *))cleanupLoadedObjecthkpTriggerVolume;
   return result;
 }
 

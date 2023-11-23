@@ -1,32 +1,28 @@
 // File Line: 55
 // RVA: 0x12C1258
-__int64 __fastcall isleadbyte_l(int c, localeinfo_struct *plocinfo)
+__int64 __fastcall isleadbyte_l(unsigned __int8 c, localeinfo_struct *plocinfo)
 {
-  unsigned __int8 v2; // bl
   __int64 result; // rax
-  _LocaleUpdate v4; // [rsp+20h] [rbp-28h]
+  _LocaleUpdate v4; // [rsp+20h] [rbp-28h] BYREF
 
-  v2 = c;
   _LocaleUpdate::_LocaleUpdate(&v4, plocinfo);
-  result = v4.localeinfo.locinfo->pctype[v2] & 0x8000;
+  result = v4.localeinfo.locinfo->pctype[c] & 0x8000;
   if ( v4.updated )
-    v4.ptd->_ownlocale &= 0xFFFFFFFD;
+    v4.ptd->_ownlocale &= ~2u;
   return result;
 }
 
 // File Line: 63
 // RVA: 0x12C129C
-__int64 __fastcall isleadbyte(int c)
+__int64 __fastcall isleadbyte(unsigned __int8 c)
 {
-  unsigned __int8 v1; // bl
   __int64 result; // rax
-  _LocaleUpdate v3; // [rsp+20h] [rbp-28h]
+  _LocaleUpdate v3; // [rsp+20h] [rbp-28h] BYREF
 
-  v1 = c;
   _LocaleUpdate::_LocaleUpdate(&v3, 0i64);
-  result = v3.localeinfo.locinfo->pctype[v1] & 0x8000;
+  result = v3.localeinfo.locinfo->pctype[c] & 0x8000;
   if ( v3.updated )
-    v3.ptd->_ownlocale &= 0xFFFFFFFD;
+    v3.ptd->_ownlocale &= ~2u;
   return result;
 }
 

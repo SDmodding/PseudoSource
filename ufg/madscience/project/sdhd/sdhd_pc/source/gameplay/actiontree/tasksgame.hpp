@@ -2,214 +2,194 @@
 // RVA: 0x29D030
 void __fastcall ParkourSyncPositionTask::~ParkourSyncPositionTask(ParkourSyncPositionTask *this)
 {
-  ParkourSyncPositionTask *v1; // r8
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v2; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v3; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v4; // rax
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mParkourSimObject; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v5; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v6; // rax
-  UFG::qNode<ITask,ITask> *v7; // rdx
-  UFG::qNode<ITask,ITask> *v8; // rcx
-  UFG::qNode<ITask,ITask> *v9; // rax
+  UFG::qNode<ITask,ITask> *v7; // rcx
+  UFG::qNode<ITask,ITask> *v8; // rax
 
-  v1 = this;
   this->vfptr = (ITaskVtbl *)&ParkourSyncPositionTask::`vftable;
-  v2 = &this->mParkourSimObject;
+  p_mParkourSimObject = &this->mParkourSimObject;
   if ( this->mParkourSimObject.m_pPointer )
   {
-    v3 = v2->mPrev;
-    v4 = v2->mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-    v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
+    mPrev = p_mParkourSimObject->mPrev;
+    mNext = p_mParkourSimObject->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mParkourSimObject->mPrev = p_mParkourSimObject;
+    p_mParkourSimObject->mNext = p_mParkourSimObject;
   }
-  v2->m_pPointer = 0i64;
-  v5 = v2->mPrev;
-  v6 = v2->mNext;
+  p_mParkourSimObject->m_pPointer = 0i64;
+  v5 = p_mParkourSimObject->mPrev;
+  v6 = p_mParkourSimObject->mNext;
   v5->mNext = v6;
   v6->mPrev = v5;
-  v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
-  v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
-  v8 = v1->mPrev;
-  v9 = v1->mNext;
-  v8->mNext = v9;
-  v9->mPrev = v8;
-  v7->mPrev = v7;
-  v7->mNext = v7;
+  p_mParkourSimObject->mPrev = p_mParkourSimObject;
+  p_mParkourSimObject->mNext = p_mParkourSimObject;
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  v7 = this->mPrev;
+  v8 = this->mNext;
+  v7->mNext = v8;
+  v8->mPrev = v7;
+  this->mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->mNext = &this->UFG::qNode<ITask,ITask>;
 }
 
 // File Line: 424
 // RVA: 0x29CF30
 void __fastcall ParkourConstrainTask::~ParkourConstrainTask(ParkourConstrainTask *this)
 {
-  ParkourConstrainTask *v1; // r8
-  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *v2; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v3; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v4; // rax
+  UFG::qSafePointer<UFG::SimObject,UFG::SimObject> *p_mParkourSimObject; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v5; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *v6; // rax
-  UFG::qNode<ITask,ITask> *v7; // rdx
-  UFG::qNode<ITask,ITask> *v8; // rcx
-  UFG::qNode<ITask,ITask> *v9; // rax
+  UFG::qNode<ITask,ITask> *v7; // rcx
+  UFG::qNode<ITask,ITask> *v8; // rax
 
-  v1 = this;
   this->vfptr = (ITaskVtbl *)&ParkourConstrainTask::`vftable;
-  v2 = &this->mParkourSimObject;
+  p_mParkourSimObject = &this->mParkourSimObject;
   if ( this->mParkourSimObject.m_pPointer )
   {
-    v3 = v2->mPrev;
-    v4 = v2->mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-    v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
+    mPrev = p_mParkourSimObject->mPrev;
+    mNext = p_mParkourSimObject->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mParkourSimObject->mPrev = p_mParkourSimObject;
+    p_mParkourSimObject->mNext = p_mParkourSimObject;
   }
-  v2->m_pPointer = 0i64;
-  v5 = v2->mPrev;
-  v6 = v2->mNext;
+  p_mParkourSimObject->m_pPointer = 0i64;
+  v5 = p_mParkourSimObject->mPrev;
+  v6 = p_mParkourSimObject->mNext;
   v5->mNext = v6;
   v6->mPrev = v5;
-  v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimObject>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
-  v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
-  v8 = v1->mPrev;
-  v9 = v1->mNext;
-  v8->mNext = v9;
-  v9->mPrev = v8;
-  v7->mPrev = v7;
-  v7->mNext = v7;
+  p_mParkourSimObject->mPrev = p_mParkourSimObject;
+  p_mParkourSimObject->mNext = p_mParkourSimObject;
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  v7 = this->mPrev;
+  v8 = this->mNext;
+  v7->mNext = v8;
+  v8->mPrev = v7;
+  this->mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->mNext = &this->UFG::qNode<ITask,ITask>;
 }
 
 // File Line: 568
 // RVA: 0x2E3240
 void __fastcall AttackRightsTask::~AttackRightsTask(AttackRightsTask *this)
 {
-  AttackRightsTask *v1; // r8
-  UFG::qSafePointer<UFG::SimComponent,UFG::AttackRightsComponent> *v2; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v3; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v4; // rax
+  UFG::qSafePointer<UFG::SimComponent,UFG::AttackRightsComponent> *p_mAttackRightsComponent; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v5; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v6; // rax
-  UFG::qNode<ITask,ITask> *v7; // rdx
-  UFG::qNode<ITask,ITask> *v8; // rcx
-  UFG::qNode<ITask,ITask> *v9; // rax
+  UFG::qNode<ITask,ITask> *v7; // rcx
+  UFG::qNode<ITask,ITask> *v8; // rax
 
-  v1 = this;
   this->vfptr = (ITaskVtbl *)&AttackRightsTask::`vftable;
-  v2 = &this->mAttackRightsComponent;
+  p_mAttackRightsComponent = &this->mAttackRightsComponent;
   if ( this->mAttackRightsComponent.m_pPointer )
   {
-    v3 = v2->mPrev;
-    v4 = v2->mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-    v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
+    mPrev = p_mAttackRightsComponent->mPrev;
+    mNext = p_mAttackRightsComponent->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mAttackRightsComponent->mPrev = p_mAttackRightsComponent;
+    p_mAttackRightsComponent->mNext = p_mAttackRightsComponent;
   }
-  v2->m_pPointer = 0i64;
-  v5 = v2->mPrev;
-  v6 = v2->mNext;
+  p_mAttackRightsComponent->m_pPointer = 0i64;
+  v5 = p_mAttackRightsComponent->mPrev;
+  v6 = p_mAttackRightsComponent->mNext;
   v5->mNext = v6;
   v6->mPrev = v5;
-  v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
-  v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
-  v8 = v1->mPrev;
-  v9 = v1->mNext;
-  v8->mNext = v9;
-  v9->mPrev = v8;
-  v7->mPrev = v7;
-  v7->mNext = v7;
+  p_mAttackRightsComponent->mPrev = p_mAttackRightsComponent;
+  p_mAttackRightsComponent->mNext = p_mAttackRightsComponent;
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  v7 = this->mPrev;
+  v8 = this->mNext;
+  v7->mNext = v8;
+  v8->mPrev = v7;
+  this->mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->mNext = &this->UFG::qNode<ITask,ITask>;
 }
 
 // File Line: 1039
 // RVA: 0x29D810
 void __fastcall ReticleSizeOverrideTask::~ReticleSizeOverrideTask(ReticleSizeOverrideTask *this)
 {
-  ReticleSizeOverrideTask *v1; // r8
-  UFG::qSafePointer<UFG::SimComponent,UFG::AimingPlayerComponent> *v2; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v3; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v4; // rax
+  UFG::qSafePointer<UFG::SimComponent,UFG::AimingPlayerComponent> *p_m_AimingPlayerComponent; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v5; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v6; // rax
-  UFG::qNode<ITask,ITask> *v7; // rdx
-  UFG::qNode<ITask,ITask> *v8; // rcx
-  UFG::qNode<ITask,ITask> *v9; // rax
+  UFG::qNode<ITask,ITask> *v7; // rcx
+  UFG::qNode<ITask,ITask> *v8; // rax
 
-  v1 = this;
   this->vfptr = (ITaskVtbl *)&ReticleSizeOverrideTask::`vftable;
-  v2 = &this->m_AimingPlayerComponent;
+  p_m_AimingPlayerComponent = &this->m_AimingPlayerComponent;
   if ( this->m_AimingPlayerComponent.m_pPointer )
   {
-    v3 = v2->mPrev;
-    v4 = v2->mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-    v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
+    mPrev = p_m_AimingPlayerComponent->mPrev;
+    mNext = p_m_AimingPlayerComponent->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_m_AimingPlayerComponent->mPrev = p_m_AimingPlayerComponent;
+    p_m_AimingPlayerComponent->mNext = p_m_AimingPlayerComponent;
   }
-  v2->m_pPointer = 0i64;
-  v5 = v2->mPrev;
-  v6 = v2->mNext;
+  p_m_AimingPlayerComponent->m_pPointer = 0i64;
+  v5 = p_m_AimingPlayerComponent->mPrev;
+  v6 = p_m_AimingPlayerComponent->mNext;
   v5->mNext = v6;
   v6->mPrev = v5;
-  v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
-  v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
-  v8 = v1->mPrev;
-  v9 = v1->mNext;
-  v8->mNext = v9;
-  v9->mPrev = v8;
-  v7->mPrev = v7;
-  v7->mNext = v7;
+  p_m_AimingPlayerComponent->mPrev = p_m_AimingPlayerComponent;
+  p_m_AimingPlayerComponent->mNext = p_m_AimingPlayerComponent;
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  v7 = this->mPrev;
+  v8 = this->mNext;
+  v7->mNext = v8;
+  v8->mPrev = v7;
+  this->mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->mNext = &this->UFG::qNode<ITask,ITask>;
 }
 
 // File Line: 1111
 // RVA: 0x29DDB0
 void __fastcall SetStateFlagTask::~SetStateFlagTask(SetStateFlagTask *this)
 {
-  SetStateFlagTask *v1; // r8
-  UFG::qSafePointer<UFG::SimComponent,UFG::SimObjectCharacterPropertiesComponent> *v2; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v3; // rcx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v4; // rax
+  UFG::qSafePointer<UFG::SimComponent,UFG::SimObjectCharacterPropertiesComponent> *p_m_pSOCPC; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rax
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v5; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v6; // rax
-  UFG::qNode<ITask,ITask> *v7; // rdx
-  UFG::qNode<ITask,ITask> *v8; // rcx
-  UFG::qNode<ITask,ITask> *v9; // rax
+  UFG::qNode<ITask,ITask> *v7; // rcx
+  UFG::qNode<ITask,ITask> *v8; // rax
 
-  v1 = this;
   this->vfptr = (ITaskVtbl *)&SetStateFlagTask::`vftable;
-  v2 = &this->m_pSOCPC;
+  p_m_pSOCPC = &this->m_pSOCPC;
   if ( this->m_pSOCPC.m_pPointer )
   {
-    v3 = v2->mPrev;
-    v4 = v2->mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-    v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
+    mPrev = p_m_pSOCPC->mPrev;
+    mNext = p_m_pSOCPC->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_m_pSOCPC->mPrev = p_m_pSOCPC;
+    p_m_pSOCPC->mNext = p_m_pSOCPC;
   }
-  v2->m_pPointer = 0i64;
-  v5 = v2->mPrev;
-  v6 = v2->mNext;
+  p_m_pSOCPC->m_pPointer = 0i64;
+  v5 = p_m_pSOCPC->mPrev;
+  v6 = p_m_pSOCPC->mNext;
   v5->mNext = v6;
   v6->mPrev = v5;
-  v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v2->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v1->vfptr = (ITaskVtbl *)&ITask::`vftable;
-  v7 = (UFG::qNode<ITask,ITask> *)&v1->mPrev;
-  v8 = v1->mPrev;
-  v9 = v1->mNext;
-  v8->mNext = v9;
-  v9->mPrev = v8;
-  v7->mPrev = v7;
-  v7->mNext = v7;
+  p_m_pSOCPC->mPrev = p_m_pSOCPC;
+  p_m_pSOCPC->mNext = p_m_pSOCPC;
+  this->vfptr = (ITaskVtbl *)&ITask::`vftable;
+  v7 = this->mPrev;
+  v8 = this->mNext;
+  v7->mNext = v8;
+  v8->mPrev = v7;
+  this->mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->mNext = &this->UFG::qNode<ITask,ITask>;
 }
 

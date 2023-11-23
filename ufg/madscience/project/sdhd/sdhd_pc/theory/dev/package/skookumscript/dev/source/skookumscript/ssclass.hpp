@@ -2,15 +2,15 @@
 // RVA: 0x11EC30
 bool __fastcall SSClass::is_demand_loaded(SSClass *this)
 {
-  SSClass *v1; // rcx
+  SSClass *i_superclass_p; // rcx
   bool result; // al
 
   result = 1;
-  if ( !(this->i_flags & 2) )
+  if ( (this->i_flags & 2) == 0 )
   {
-    v1 = this->i_superclass_p;
-    if ( !v1 || !SSClass::is_demand_loaded(v1) )
-      result = 0;
+    i_superclass_p = this->i_superclass_p;
+    if ( !i_superclass_p || !SSClass::is_demand_loaded(i_superclass_p) )
+      return 0;
   }
   return result;
 }
@@ -27,41 +27,36 @@ void __fastcall SSClass::track_memory(SSClass *this, AMemoryStats *mem_stats_p, 
 // RVA: 0x11EB80
 char __fastcall SSClass::is_coroutine_valid(SSClass *this, ASymbol *coroutine_name)
 {
-  unsigned int v2; // eax
-  SSCoroutineBase **v3; // r8
-  unsigned int v4; // er10
-  signed __int64 v5; // r9
-  signed __int64 v6; // rax
+  unsigned int i_count; // eax
+  SSCoroutineBase **i_array_p; // r8
+  unsigned int i_uid; // r10d
+  SSCoroutineBase **v5; // r9
+  SSCoroutineBase **v6; // rax
   unsigned int v7; // edx
-  _BOOL8 v8; // rdx
 
-  v2 = this->i_coroutines.i_count;
-  if ( !v2 )
+  i_count = this->i_coroutines.i_count;
+  if ( !i_count )
     return 0;
-  v3 = this->i_coroutines.i_array_p;
-  v4 = coroutine_name->i_uid;
-  v5 = (signed __int64)&v3[v2 - 1];
+  i_array_p = this->i_coroutines.i_array_p;
+  i_uid = coroutine_name->i_uid;
+  v5 = &i_array_p[i_count - 1];
   while ( 1 )
   {
     while ( 1 )
     {
-      v6 = (signed __int64)&v3[(v5 - (signed __int64)v3) >> 4];
-      v7 = *(_DWORD *)(*(_QWORD *)v6 + 8i64);
-      if ( v4 >= v7 )
-      {
-        v8 = v4 != v7;
-        if ( v8 >= 0 )
-          break;
-      }
-      if ( v3 == (SSCoroutineBase **)v6 )
+      v6 = &i_array_p[((char *)v5 - (char *)i_array_p) >> 4];
+      v7 = (*v6)->i_name.i_uid;
+      if ( i_uid >= v7 )
+        break;
+      if ( i_array_p == v6 )
         return 0;
-      v5 = v6 - 8;
+      v5 = v6 - 1;
     }
-    if ( v8 <= 0 )
+    if ( i_uid == v7 )
       break;
     if ( v5 == v6 )
       return 0;
-    v3 = (SSCoroutineBase **)(v6 + 8);
+    i_array_p = v6 + 1;
   }
   return 1;
 }

@@ -2,39 +2,33 @@
 // RVA: 0x2E9E00
 void __fastcall CameraChangeTask::Begin(CameraChangeTask *this, ActionContext *context)
 {
-  ActionContext *v2; // rsi
-  CameraChangeTask *v3; // rbx
-  UFG::GameCameraComponent *v4; // rax
+  UFG::GameCameraComponent *CurrentGameCamera; // rax
   UFG::SimComponent *v5; // rdi
-  ITrack *v6; // rax
+  ITrack *m_Track; // rax
   UFG::allocator::free_link *v7; // rax
 
-  v2 = context;
-  v3 = this;
-  v4 = UFG::GetCurrentGameCamera();
-  v5 = (UFG::SimComponent *)&v4->vfptr;
-  if ( v4
-    && (!UFG::SimComponent::IsType(
-           (UFG::SimComponent *)&v4->vfptr,
-           UFG::FollowCameraComponent::_FollowCameraComponentTypeUID)
-     || LOBYTE(v3->m_Track[1].vfptr))
+  CurrentGameCamera = UFG::GetCurrentGameCamera();
+  v5 = CurrentGameCamera;
+  if ( CurrentGameCamera
+    && (!UFG::SimComponent::IsType(CurrentGameCamera, UFG::FollowCameraComponent::_FollowCameraComponentTypeUID)
+     || LOBYTE(this->m_Track[1].vfptr))
     && (!UFG::SimComponent::IsType(v5, UFG::ChaseCameraComponent::_ChaseCameraComponentTypeUID)
-     || LOBYTE(v3->m_Track[1].vfptr) != 1) )
+     || LOBYTE(this->m_Track[1].vfptr) != 1) )
   {
-    v6 = v3->m_Track;
-    if ( LOBYTE(v6[1].vfptr) )
+    m_Track = this->m_Track;
+    if ( LOBYTE(m_Track[1].vfptr) )
     {
-      if ( LOBYTE(v6[1].vfptr) != 1 )
+      if ( LOBYTE(m_Track[1].vfptr) != 1 )
         return;
       v7 = UFG::qMalloc(0x50ui64, "CameraChangeTask", 0i64);
       if ( v7 )
-        UFG::AnimatedEvent::AnimatedEvent((UFG::AnimatedEvent *)v7, "EVT_MOUNT_VEHICLE_CAMERA", &v2->mSimObject);
+        UFG::AnimatedEvent::AnimatedEvent((UFG::AnimatedEvent *)v7, "EVT_MOUNT_VEHICLE_CAMERA", &context->mSimObject);
     }
     else
     {
       v7 = UFG::qMalloc(0x50ui64, "CameraChangeTask", 0i64);
       if ( v7 )
-        UFG::AnimatedEvent::AnimatedEvent((UFG::AnimatedEvent *)v7, "EVT_DISMOUNT_VEHICLE_CAMERA", &v2->mSimObject);
+        UFG::AnimatedEvent::AnimatedEvent((UFG::AnimatedEvent *)v7, "EVT_DISMOUNT_VEHICLE_CAMERA", &context->mSimObject);
     }
     UFG::EventDispatcher::DispatchEvent(&UFG::EventDispatcher::mInstance, (UFG::Event *)v7);
   }
@@ -44,61 +38,42 @@ void __fastcall CameraChangeTask::Begin(CameraChangeTask *this, ActionContext *c
 // RVA: 0x2EA680
 void __fastcall CameraShakeTask::Begin(CameraShakeTask *this, ActionContext *context)
 {
-  ActionContext *v2; // rdi
-  CameraShakeTask *v3; // rsi
-  UFG::GameCameraComponent *v4; // rbx
-  UFG::SimObjectGame *v5; // rcx
-  unsigned __int16 v6; // r9
-  UFG::SimComponent *v7; // rax
+  UFG::GameCameraComponent *CurrentGameCamera; // rbx
+  UFG::SimObjectGame *m_pPointer; // rcx
+  __int16 m_Flags; // r9
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   __int64 v8; // rax
 
-  v2 = context;
-  v3 = this;
-  v4 = UFG::GetCurrentGameCamera();
-  if ( v4 )
+  CurrentGameCamera = UFG::GetCurrentGameCamera();
+  if ( CurrentGameCamera )
   {
-    v5 = (UFG::SimObjectGame *)v2->mSimObject.m_pPointer;
-    if ( v5 )
+    m_pPointer = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
+    if ( m_pPointer )
     {
-      v6 = v5->m_Flags;
-      if ( (v6 >> 14) & 1 )
-      {
-        v7 = UFG::SimObjectGame::GetComponentOfTypeHK(v5, UFG::GunComponent::_TypeUID);
-      }
-      else if ( (v6 & 0x8000u) == 0 )
-      {
-        if ( (v6 >> 13) & 1 )
-          v7 = UFG::SimObjectGame::GetComponentOfTypeHK(v5, UFG::GunComponent::_TypeUID);
-        else
-          v7 = (v6 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v5, UFG::GunComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v5->vfptr, UFG::GunComponent::_TypeUID);
-      }
+      m_Flags = m_pPointer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 || m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(m_pPointer, UFG::GunComponent::_TypeUID);
       else
+        ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::GunComponent::_TypeUID);
+      if ( ComponentOfTypeHK )
       {
-        v7 = UFG::SimObjectGame::GetComponentOfTypeHK(v5, UFG::GunComponent::_TypeUID);
-      }
-      if ( v7 )
-      {
-        v8 = ((__int64 (__fastcall *)(UFG::GameCameraComponent *))v4->vfptr[41].__vecDelDtor)(v4);
+        v8 = ((__int64 (__fastcall *)(UFG::GameCameraComponent *))CurrentGameCamera->vfptr[41].__vecDelDtor)(CurrentGameCamera);
         if ( !v8
-          || *(UFG::SimObject **)(56i64 * *(unsigned __int8 *)(*(_QWORD *)(v8 + 96) + 25i64) + *(_QWORD *)(v8 + 88) + 40) != v2->mSimObject.m_pPointer )
+          || *(UFG::SimObject **)(56i64 * *(unsigned __int8 *)(*(_QWORD *)(v8 + 96) + 25i64) + *(_QWORD *)(v8 + 88) + 40) != context->mSimObject.m_pPointer )
         {
           return;
         }
-LABEL_20:
-        UFG::GameCameraComponent::AddShakeAmplitude(v4, *(float *)&v3->m_Track[1].vfptr);
+LABEL_18:
+        UFG::GameCameraComponent::AddShakeAmplitude(CurrentGameCamera, *(float *)&this->m_Track[1].vfptr);
         return;
       }
     }
-    if ( !BYTE4(v3->m_Track[1].vfptr)
-      || UFG::IsAnyLocalPlayer(v2->mSimObject.m_pPointer)
-      || !UFG::SimComponent::IsType(
-            (UFG::SimComponent *)&v4->vfptr,
-            UFG::FollowCameraComponent::_FollowCameraComponentTypeUID)
-      && !UFG::SimComponent::IsType(
-            (UFG::SimComponent *)&v4->vfptr,
-            UFG::ScriptCameraComponent::_ScriptCameraComponentTypeUID) )
+    if ( !BYTE4(this->m_Track[1].vfptr)
+      || UFG::IsAnyLocalPlayer(context->mSimObject.m_pPointer)
+      || !UFG::SimComponent::IsType(CurrentGameCamera, UFG::FollowCameraComponent::_FollowCameraComponentTypeUID)
+      && !UFG::SimComponent::IsType(CurrentGameCamera, UFG::ScriptCameraComponent::_ScriptCameraComponentTypeUID) )
     {
-      goto LABEL_20;
+      goto LABEL_18;
     }
   }
 }
@@ -107,52 +82,42 @@ LABEL_20:
 // RVA: 0x2EA550
 void __fastcall CameraResetTask::Begin(CameraResetTask *this, ActionContext *context)
 {
-  CameraResetTask *v2; // rdi
-  char v3; // bl
+  bool IsType; // bl
   char v4; // bp
-  UFG::GameCameraComponent *v5; // rax
+  UFG::GameCameraComponent *CurrentGameCamera; // rax
   UFG::SimComponent *v6; // rsi
-  UFG::SimObject *v7; // rcx
-  UFG::SimComponent *v8; // rax
+  UFG::SimObject *m_pSimObject; // rcx
+  UFG::SimComponent *ComponentOfType; // rax
   UFG::SimObject *v9; // rcx
   UFG::SimComponent *v10; // rax
 
-  v2 = this;
   if ( UFG::IsAnyLocalPlayer(context->mSimObject.m_pPointer) )
   {
-    v3 = 0;
+    IsType = 0;
     v4 = 0;
-    if ( BYTE2(v2->m_Track[1].vfptr) )
+    if ( BYTE2(this->m_Track[1].vfptr) )
     {
-      v5 = UFG::GetCurrentGameCamera();
-      v6 = (UFG::SimComponent *)&v5->vfptr;
-      if ( v5 )
+      CurrentGameCamera = UFG::GetCurrentGameCamera();
+      v6 = CurrentGameCamera;
+      if ( CurrentGameCamera )
       {
-        if ( UFG::SimComponent::IsType(
-               (UFG::SimComponent *)&v5->vfptr,
-               UFG::ChaseCameraComponent::_ChaseCameraComponentTypeUID) )
-        {
+        if ( UFG::SimComponent::IsType(CurrentGameCamera, UFG::ChaseCameraComponent::_ChaseCameraComponentTypeUID) )
           v4 = 1;
-        }
         else
-        {
-          v3 = 0;
-          if ( UFG::SimComponent::IsType(v6, UFG::FollowCameraComponent::_FollowCameraComponentTypeUID) )
-            v3 = 1;
-        }
+          IsType = UFG::SimComponent::IsType(v6, UFG::FollowCameraComponent::_FollowCameraComponentTypeUID);
       }
     }
-    if ( LOBYTE(v2->m_Track[1].vfptr) || v4 )
+    if ( LOBYTE(this->m_Track[1].vfptr) || v4 )
     {
-      v7 = UFG::Director::Get()->mCurrentCamera->m_pSimObject;
-      if ( v7 )
+      m_pSimObject = UFG::Director::Get()->mCurrentCamera->m_pSimObject;
+      if ( m_pSimObject )
       {
-        v8 = UFG::SimObject::GetComponentOfType(v7, UFG::ChaseCameraComponent::_TypeUID);
-        if ( v8 )
-          ((void (__fastcall *)(UFG::SimComponent *))v8->vfptr[14].__vecDelDtor)(v8);
+        ComponentOfType = UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::ChaseCameraComponent::_TypeUID);
+        if ( ComponentOfType )
+          ((void (__fastcall *)(UFG::SimComponent *))ComponentOfType->vfptr[14].__vecDelDtor)(ComponentOfType);
       }
     }
-    if ( BYTE1(v2->m_Track[1].vfptr) || v3 )
+    if ( BYTE1(this->m_Track[1].vfptr) || IsType )
     {
       v9 = UFG::Director::Get()->mCurrentCamera->m_pSimObject;
       if ( v9 )
@@ -169,33 +134,19 @@ void __fastcall CameraResetTask::Begin(CameraResetTask *this, ActionContext *con
 // RVA: 0x2EA4D0
 void __fastcall CameraRecoilTask::Begin(CameraRecoilTask *this, ActionContext *context)
 {
-  ActionContext *v2; // rdi
-  CameraRecoilTask *v3; // rsi
-  UFG::GameCameraComponent *v4; // rax
-  UFG::GameCameraComponent *v5; // rbx
-  __int64 v6; // rax
-  unsigned int *v7; // rax
-  __int128 v8; // xmm3
-  __int128 v9; // xmm2
-  __int128 v10; // xmm1
+  UFG::GameCameraComponent *CurrentGameCamera; // rax
+  UFG::GameCameraComponent *v4; // rbx
+  __int64 v5; // rax
 
-  v2 = context;
-  v3 = this;
-  v4 = UFG::GetCurrentGameCamera();
-  v5 = v4;
-  if ( v4 )
+  CurrentGameCamera = UFG::GetCurrentGameCamera();
+  v4 = CurrentGameCamera;
+  if ( CurrentGameCamera )
   {
-    v6 = ((__int64 (__fastcall *)(UFG::GameCameraComponent *))v4->vfptr[41].__vecDelDtor)(v4);
-    if ( v6 )
+    v5 = ((__int64 (__fastcall *)(UFG::GameCameraComponent *))CurrentGameCamera->vfptr[41].__vecDelDtor)(CurrentGameCamera);
+    if ( v5 )
     {
-      if ( *(UFG::SimObject **)(56i64 * *(unsigned __int8 *)(*(_QWORD *)(v6 + 96) + 25i64) + *(_QWORD *)(v6 + 88) + 40) == v2->mSimObject.m_pPointer )
-      {
-        v7 = (unsigned int *)v3->m_Track;
-        v8 = v7[16];
-        v9 = v7[15];
-        v10 = v7[14];
-        ((void (__fastcall *)(UFG::GameCameraComponent *))v5->vfptr[40].__vecDelDtor)(v5);
-      }
+      if ( *(UFG::SimObject **)(56i64 * *(unsigned __int8 *)(*(_QWORD *)(v5 + 96) + 25i64) + *(_QWORD *)(v5 + 88) + 40) == context->mSimObject.m_pPointer )
+        ((void (__fastcall *)(UFG::GameCameraComponent *))v4->vfptr[40].__vecDelDtor)(v4);
     }
   }
 }
@@ -204,25 +155,21 @@ void __fastcall CameraRecoilTask::Begin(CameraRecoilTask *this, ActionContext *c
 // RVA: 0x2E9F10
 void __fastcall CameraCollisionGotoAngleTask::Begin(CameraCollisionGotoAngleTask *this, ActionContext *context)
 {
-  CameraCollisionGotoAngleTask *v2; // rdi
-  UFG::GameCameraComponent *v3; // rax
+  UFG::GameCameraComponent *CurrentGameCamera; // rax
   UFG::FollowCameraComponent *v4; // rbx
-  bool v5; // al
+  bool IsType; // al
   UFG::FollowCameraComponent *v6; // rcx
 
-  v2 = this;
-  v3 = UFG::GetCurrentGameCamera();
-  v4 = (UFG::FollowCameraComponent *)v3;
-  if ( v3 )
+  CurrentGameCamera = UFG::GetCurrentGameCamera();
+  v4 = (UFG::FollowCameraComponent *)CurrentGameCamera;
+  if ( CurrentGameCamera )
   {
-    v5 = UFG::SimComponent::IsType(
-           (UFG::SimComponent *)&v3->vfptr,
-           UFG::FollowCameraComponent::_FollowCameraComponentTypeUID);
+    IsType = UFG::SimComponent::IsType(CurrentGameCamera, UFG::FollowCameraComponent::_FollowCameraComponentTypeUID);
     v6 = 0i64;
-    if ( v5 )
+    if ( IsType )
       v6 = v4;
     if ( v6 )
-      UFG::FollowCameraComponent::GotoAngleCollisionQueue(v6, *(float *)&v2->m_Track[1].vfptr);
+      UFG::FollowCameraComponent::GotoAngleCollisionQueue(v6, *(float *)&this->m_Track[1].vfptr);
   }
 }
 
@@ -230,34 +177,34 @@ void __fastcall CameraCollisionGotoAngleTask::Begin(CameraCollisionGotoAngleTask
 // RVA: 0x2E9F60
 void __fastcall CameraConstrainYawTask::Begin(CameraConstrainYawTask *this, ActionContext *context)
 {
-  CameraConstrainYawTask *v2; // rbx
-  bool v3; // al
-  UFG::SimObject *v4; // rcx
-  UFG::SimComponent *v5; // rax
-  float *v6; // rcx
+  bool IsAnyLocalPlayer; // al
+  UFG::SimObject *m_pSimObject; // rcx
+  UFG::SimComponent *ComponentOfType; // rax
+  float *m_Track; // rcx
   float v7; // xmm0_4
   float v8; // xmm3_4
   float v9; // xmm4_4
 
-  v2 = this;
-  v3 = UFG::IsAnyLocalPlayer(context->mSimObject.m_pPointer);
-  v2->mLocalPlayer = v3;
-  if ( v3 )
+  IsAnyLocalPlayer = UFG::IsAnyLocalPlayer(context->mSimObject.m_pPointer);
+  this->mLocalPlayer = IsAnyLocalPlayer;
+  if ( IsAnyLocalPlayer )
   {
-    v4 = UFG::Director::Get()->mCurrentCamera->m_pSimObject;
-    if ( v4 )
+    m_pSimObject = UFG::Director::Get()->mCurrentCamera->m_pSimObject;
+    if ( m_pSimObject )
     {
-      v5 = UFG::SimObject::GetComponentOfType(v4, UFG::FollowCameraComponent::_TypeUID);
-      if ( v5 )
+      ComponentOfType = UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::FollowCameraComponent::_TypeUID);
+      if ( ComponentOfType )
       {
-        v6 = (float *)v2->m_Track;
-        v7 = v6[14];
-        v8 = v6[15];
-        v9 = v6[16];
-        LOBYTE(v5[128].m_BoundComponentHandles.mNode.mPrev) = 1;
-        *((float *)&v5[128].m_BoundComponentHandles.mNode.mPrev + 1) = (float)(v7 * 3.1415927) * 0.0055555557;
-        *(float *)&v5[128].m_BoundComponentHandles.mNode.mNext = (float)(v8 * 3.1415927) * 0.0055555557;
-        *((float *)&v5[128].m_BoundComponentHandles.mNode.mNext + 1) = (float)(v9 * 3.1415927) * 0.0055555557;
+        m_Track = (float *)this->m_Track;
+        v7 = m_Track[14];
+        v8 = m_Track[15];
+        v9 = m_Track[16];
+        LOBYTE(ComponentOfType[128].m_BoundComponentHandles.mNode.mPrev) = 1;
+        *((float *)&ComponentOfType[128].m_BoundComponentHandles.mNode.mPrev + 1) = (float)(v7 * 3.1415927)
+                                                                                  * 0.0055555557;
+        *(float *)&ComponentOfType[128].m_BoundComponentHandles.mNode.mNext = (float)(v8 * 3.1415927) * 0.0055555557;
+        *((float *)&ComponentOfType[128].m_BoundComponentHandles.mNode.mNext + 1) = (float)(v9 * 3.1415927)
+                                                                                  * 0.0055555557;
       }
     }
   }
@@ -267,17 +214,17 @@ void __fastcall CameraConstrainYawTask::Begin(CameraConstrainYawTask *this, Acti
 // RVA: 0x2FE380
 void __fastcall CameraConstrainYawTask::End(CameraConstrainYawTask *this)
 {
-  UFG::SimObject *v1; // rcx
-  UFG::SimComponent *v2; // rax
+  UFG::SimObject *m_pSimObject; // rcx
+  UFG::SimComponent *ComponentOfType; // rax
 
   if ( this->mLocalPlayer )
   {
-    v1 = UFG::Director::Get()->mCurrentCamera->m_pSimObject;
-    if ( v1 )
+    m_pSimObject = UFG::Director::Get()->mCurrentCamera->m_pSimObject;
+    if ( m_pSimObject )
     {
-      v2 = UFG::SimObject::GetComponentOfType(v1, UFG::FollowCameraComponent::_TypeUID);
-      if ( v2 )
-        LOBYTE(v2[128].m_BoundComponentHandles.mNode.mPrev) = 0;
+      ComponentOfType = UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::FollowCameraComponent::_TypeUID);
+      if ( ComponentOfType )
+        LOBYTE(ComponentOfType[128].m_BoundComponentHandles.mNode.mPrev) = 0;
     }
   }
 }
@@ -286,23 +233,21 @@ void __fastcall CameraConstrainYawTask::End(CameraConstrainYawTask *this)
 // RVA: 0x2EA470
 void __fastcall CameraIgnoreCollisionTask::Begin(CameraIgnoreCollisionTask *this, ActionContext *context)
 {
-  CameraIgnoreCollisionTask *v2; // rbx
-  bool v3; // al
-  ITrack *v4; // rax
+  bool IsAnyLocalPlayer; // al
+  ITrack *m_Track; // rax
   bool v5; // dl
 
-  v2 = this;
-  v3 = UFG::IsAnyLocalPlayer(context->mSimObject.m_pPointer);
-  v2->mLocalPlayer = v3;
-  if ( v3 )
+  IsAnyLocalPlayer = UFG::IsAnyLocalPlayer(context->mSimObject.m_pPointer);
+  this->mLocalPlayer = IsAnyLocalPlayer;
+  if ( IsAnyLocalPlayer )
   {
-    v4 = v2->m_Track;
-    v5 = LOBYTE(v4[1].vfptr) != 0;
-    v2->mIgnoreCharacters = v5;
-    v2->mIgnoreVehicles = BYTE1(v4[1].vfptr) != 0;
+    m_Track = this->m_Track;
+    v5 = LOBYTE(m_Track[1].vfptr) != 0;
+    this->mIgnoreCharacters = v5;
+    this->mIgnoreVehicles = BYTE1(m_Track[1].vfptr) != 0;
     if ( v5 )
       UFG::GameCameraComponent::SetCollisionIgnoreCharacters(1);
-    if ( v2->mIgnoreVehicles )
+    if ( this->mIgnoreVehicles )
       UFG::GameCameraComponent::SetCollisionIgnoreVehicles(1);
   }
 }
@@ -311,14 +256,11 @@ void __fastcall CameraIgnoreCollisionTask::Begin(CameraIgnoreCollisionTask *this
 // RVA: 0x2FE3D0
 void __fastcall CameraIgnoreCollisionTask::End(CameraIgnoreCollisionTask *this)
 {
-  CameraIgnoreCollisionTask *v1; // rbx
-
-  v1 = this;
   if ( this->mLocalPlayer )
   {
     if ( this->mIgnoreCharacters )
       UFG::GameCameraComponent::SetCollisionIgnoreCharacters(0);
-    if ( v1->mIgnoreVehicles )
+    if ( this->mIgnoreVehicles )
       UFG::GameCameraComponent::SetCollisionIgnoreVehicles(0);
   }
 }
@@ -327,145 +269,135 @@ void __fastcall CameraIgnoreCollisionTask::End(CameraIgnoreCollisionTask *this)
 // RVA: 0x2DE220
 void __fastcall CameraAnimationTask::CameraAnimationTask(CameraAnimationTask *this)
 {
-  UFG::qNode<ITask,ITask> *v1; // rax
-  UFG::qSafePointer<AnimationNode,AnimationNode> *v2; // rdx
-  UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *v3; // rcx
-  UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *v4; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::AnimatedCameraComponent> *v5; // [rsp+28h] [rbp+10h]
-  UFG::qSafePointer<UFG::SimComponent,UFG::GameCameraComponent> *v6; // [rsp+28h] [rbp+10h]
+  UFG::qSafePointer<AnimationNode,AnimationNode> *p_mController; // rdx
+  UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *mNext; // rax
 
-  v1 = (UFG::qNode<ITask,ITask> *)&this->mPrev;
-  v1->mPrev = v1;
-  v1->mNext = v1;
+  this->mPrev = &this->UFG::qNode<ITask,ITask>;
+  this->mNext = &this->UFG::qNode<ITask,ITask>;
   this->vfptr = (ITaskVtbl *)&ITask::`vftable;
   this->vfptr = (ITaskVtbl *)&Task<CameraAnimationTrack>::`vftable;
   this->vfptr = (ITaskVtbl *)&CameraAnimationTask::`vftable;
-  v2 = &this->mController;
-  v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-  v2->mNext = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
+  p_mController = &this->mController;
+  this->mController.mPrev = &this->mController;
+  this->mController.mNext = &this->mController;
   this->mController.m_pPointer = 0i64;
-  v5 = &this->mAnimatedCameraComponent;
-  v5->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v5->mPrev;
-  v5->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v5->mPrev;
+  this->mAnimatedCameraComponent.mPrev = &this->mAnimatedCameraComponent;
+  this->mAnimatedCameraComponent.mNext = &this->mAnimatedCameraComponent;
   this->mAnimatedCameraComponent.m_pPointer = 0i64;
-  v6 = &this->mPreviousCameraComponent;
-  v6->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v6->mPrev;
-  v6->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v6->mPrev;
+  this->mPreviousCameraComponent.mPrev = &this->mPreviousCameraComponent;
+  this->mPreviousCameraComponent.mNext = &this->mPreviousCameraComponent;
   this->mPreviousCameraComponent.m_pPointer = 0i64;
   if ( this->mController.m_pPointer )
   {
-    v3 = v2->mPrev;
-    v4 = v2->mNext;
-    v3->mNext = v4;
-    v4->mPrev = v3;
-    v2->mPrev = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
-    v2->mNext = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v2->mPrev;
+    mPrev = p_mController->mPrev;
+    mNext = p_mController->mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mController->mPrev = p_mController;
+    p_mController->mNext = p_mController;
   }
-  v2->m_pPointer = 0i64;
+  p_mController->m_pPointer = 0i64;
 }
 
 // File Line: 237
 // RVA: 0x2E9A70
 void __fastcall CameraAnimationTask::Begin(CameraAnimationTask *this, ActionContext *context)
 {
-  ITrack *v2; // rdi
-  ActionContext *v3; // rsi
-  CameraAnimationTask *v4; // rbx
-  UFG::SimObject *v5; // rcx
-  UFG::SimComponent *v6; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::AnimatedCameraComponent> *v7; // r8
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v8; // rdx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v9; // rcx
-  UFG::qList<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList,1,0> *v10; // rcx
+  ITrack *m_Track; // rdi
+  UFG::SimObject *m_pSimObject; // rcx
+  UFG::SimComponent *ComponentOfType; // rax
+  UFG::qSafePointer<UFG::SimComponent,UFG::AnimatedCameraComponent> *p_mAnimatedCameraComponent; // r8
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mNext; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *p_mNode; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v11; // rax
-  UFG::GameCameraComponent *v12; // rax
-  UFG::qSafePointer<UFG::SimComponent,UFG::GameCameraComponent> *v13; // r8
+  UFG::GameCameraComponent *CurrentGameCamera; // rax
+  UFG::qSafePointer<UFG::SimComponent,UFG::GameCameraComponent> *p_mPreviousCameraComponent; // r8
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v14; // rdx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v15; // rcx
-  UFG::qList<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList,1,0> *v16; // rcx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v16; // rcx
   UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v17; // rax
-  UFG::SimObjectCharacter *v18; // rdx
+  UFG::SimObjectCharacter *m_pPointer; // rdx
   bool v19; // al
   float *v20; // rax
   AnimationNode *v21; // rax
   UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *v22; // rdx
-  UFG::qSafePointer<AnimationNode,AnimationNode> *v23; // r8
+  UFG::qSafePointer<AnimationNode,AnimationNode> *p_mController; // r8
   UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *v24; // rcx
-  UFG::qList<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList,1,0> *v25; // rcx
+  UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *v25; // rcx
   UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *v26; // rax
   AnimationNode *v27; // rcx
   UFG::SimObjectGame *v28; // rcx
-  unsigned __int16 v29; // dx
-  UFG::SimComponent *v30; // rax
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // rax
   Creature *v31; // rdi
-  NISManager *v32; // rax
+  NISManager *Instance; // rax
 
-  v2 = this->m_Track;
-  v3 = context;
-  v4 = this;
+  m_Track = this->m_Track;
   this->mContext = context;
-  v5 = UFG::Director::Get()->mCurrentCamera->m_pSimObject;
-  if ( v5 )
-    v6 = UFG::SimObject::GetComponentOfType(v5, UFG::AnimatedCameraComponent::_TypeUID);
+  m_pSimObject = UFG::Director::Get()->mCurrentCamera->m_pSimObject;
+  if ( m_pSimObject )
+    ComponentOfType = UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::AnimatedCameraComponent::_TypeUID);
   else
-    v6 = 0i64;
-  v7 = &v4->mAnimatedCameraComponent;
-  if ( v4->mAnimatedCameraComponent.m_pPointer )
+    ComponentOfType = 0i64;
+  p_mAnimatedCameraComponent = &this->mAnimatedCameraComponent;
+  if ( this->mAnimatedCameraComponent.m_pPointer )
   {
-    v8 = v7->mPrev;
-    v9 = v4->mAnimatedCameraComponent.mNext;
-    v8->mNext = v9;
-    v9->mPrev = v8;
-    v7->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v7->mPrev;
-    v4->mAnimatedCameraComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v4->mAnimatedCameraComponent.mPrev;
+    mPrev = p_mAnimatedCameraComponent->mPrev;
+    mNext = this->mAnimatedCameraComponent.mNext;
+    mPrev->mNext = mNext;
+    mNext->mPrev = mPrev;
+    p_mAnimatedCameraComponent->mPrev = p_mAnimatedCameraComponent;
+    this->mAnimatedCameraComponent.mNext = &this->mAnimatedCameraComponent;
   }
-  v4->mAnimatedCameraComponent.m_pPointer = v6;
-  if ( v6 )
+  this->mAnimatedCameraComponent.m_pPointer = ComponentOfType;
+  if ( ComponentOfType )
   {
-    v10 = &v6->m_SafePointerList;
-    v11 = v6->m_SafePointerList.mNode.mPrev;
-    v11->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v7->mPrev;
-    v7->mPrev = v11;
-    v4->mAnimatedCameraComponent.mNext = &v10->mNode;
-    v10->mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v7->mPrev;
+    p_mNode = &ComponentOfType->m_SafePointerList.mNode;
+    v11 = ComponentOfType->m_SafePointerList.mNode.mPrev;
+    v11->mNext = p_mAnimatedCameraComponent;
+    p_mAnimatedCameraComponent->mPrev = v11;
+    this->mAnimatedCameraComponent.mNext = p_mNode;
+    p_mNode->mPrev = p_mAnimatedCameraComponent;
   }
-  if ( v4->mAnimatedCameraComponent.m_pPointer )
+  if ( this->mAnimatedCameraComponent.m_pPointer )
   {
-    v12 = UFG::GetCurrentGameCamera();
-    v13 = &v4->mPreviousCameraComponent;
-    if ( v4->mPreviousCameraComponent.m_pPointer )
+    CurrentGameCamera = UFG::GetCurrentGameCamera();
+    p_mPreviousCameraComponent = &this->mPreviousCameraComponent;
+    if ( this->mPreviousCameraComponent.m_pPointer )
     {
-      v14 = v13->mPrev;
-      v15 = v4->mPreviousCameraComponent.mNext;
+      v14 = p_mPreviousCameraComponent->mPrev;
+      v15 = this->mPreviousCameraComponent.mNext;
       v14->mNext = v15;
       v15->mPrev = v14;
-      v13->mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v13->mPrev;
-      v4->mPreviousCameraComponent.mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v4->mPreviousCameraComponent.mPrev;
+      p_mPreviousCameraComponent->mPrev = p_mPreviousCameraComponent;
+      this->mPreviousCameraComponent.mNext = &this->mPreviousCameraComponent;
     }
-    v4->mPreviousCameraComponent.m_pPointer = (UFG::SimComponent *)&v12->vfptr;
-    if ( v12 )
+    this->mPreviousCameraComponent.m_pPointer = CurrentGameCamera;
+    if ( CurrentGameCamera )
     {
-      v16 = &v12->m_SafePointerList;
-      v17 = v12->m_SafePointerList.mNode.mPrev;
-      v17->mNext = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v13->mPrev;
-      v13->mPrev = v17;
-      v4->mPreviousCameraComponent.mNext = &v16->mNode;
-      v16->mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *)&v13->mPrev;
+      v16 = &CurrentGameCamera->m_SafePointerList.mNode;
+      v17 = CurrentGameCamera->m_SafePointerList.mNode.UFG::BaseCameraComponent::UFG::SimComponent::UFG::qSafePointerNode<UFG::SimComponent>::mPrev;
+      v17->mNext = p_mPreviousCameraComponent;
+      p_mPreviousCameraComponent->mPrev = v17;
+      this->mPreviousCameraComponent.mNext = v16;
+      v16->mPrev = p_mPreviousCameraComponent;
     }
-    v18 = (UFG::SimObjectCharacter *)v3->mSimObject.m_pPointer;
-    LODWORD(v4->mAnimatedCameraComponent.m_pPointer[22].vfptr) = HIDWORD(v4->m_Track[1].mResourceOwner);
-    if ( !v18 )
-      v18 = LocalPlayer;
-    ((void (__fastcall *)(UFG::SimComponent *, UFG::SimObjectCharacter *, UFG::qSafePointer<UFG::SimComponent,UFG::GameCameraComponent> *))v4->mAnimatedCameraComponent.m_pPointer->vfptr[16].__vecDelDtor)(
-      v4->mAnimatedCameraComponent.m_pPointer,
-      v18,
-      v13);
-    LOBYTE(v4->mAnimatedCameraComponent.m_pPointer[22].m_SafePointerList.mNode.mNext) = BYTE5(v4->m_Track[2].mResourceOwner) != 0;
-    BYTE1(v4->mAnimatedCameraComponent.m_pPointer[22].m_SafePointerList.mNode.mNext) = LOBYTE(v4->m_Track[2].m_TrackClassNameUID) != 0;
-    BYTE2(v4->mAnimatedCameraComponent.m_pPointer[22].m_SafePointerList.mNode.mNext) = BYTE1(v4->m_Track[2].m_TrackClassNameUID) != 0;
-    BYTE3(v4->mAnimatedCameraComponent.m_pPointer[22].m_SafePointerList.mNode.mNext) = BYTE2(v4->m_Track[2].m_TrackClassNameUID) != 0;
-    BYTE4(v4->mAnimatedCameraComponent.m_pPointer[22].m_SafePointerList.mNode.mNext) = HIBYTE(v4->m_Track[2].mResourceOwner) != 0;
-    if ( v4->m_Track[2].mDisable )
+    m_pPointer = (UFG::SimObjectCharacter *)context->mSimObject.m_pPointer;
+    LODWORD(this->mAnimatedCameraComponent.m_pPointer[22].vfptr) = HIDWORD(this->m_Track[1].mResourceOwner);
+    if ( !m_pPointer )
+      m_pPointer = LocalPlayer;
+    ((void (__fastcall *)(UFG::SimComponent *, UFG::SimObjectCharacter *, UFG::qSafePointer<UFG::SimComponent,UFG::GameCameraComponent> *))this->mAnimatedCameraComponent.m_pPointer->vfptr[16].__vecDelDtor)(
+      this->mAnimatedCameraComponent.m_pPointer,
+      m_pPointer,
+      p_mPreviousCameraComponent);
+    LOBYTE(this->mAnimatedCameraComponent.m_pPointer[22].m_SafePointerList.mNode.mNext) = BYTE5(this->m_Track[2].mResourceOwner) != 0;
+    BYTE1(this->mAnimatedCameraComponent.m_pPointer[22].m_SafePointerList.mNode.mNext) = LOBYTE(this->m_Track[2].m_TrackClassNameUID) != 0;
+    BYTE2(this->mAnimatedCameraComponent.m_pPointer[22].m_SafePointerList.mNode.mNext) = BYTE1(this->m_Track[2].m_TrackClassNameUID) != 0;
+    BYTE3(this->mAnimatedCameraComponent.m_pPointer[22].m_SafePointerList.mNode.mNext) = BYTE2(this->m_Track[2].m_TrackClassNameUID) != 0;
+    BYTE4(this->mAnimatedCameraComponent.m_pPointer[22].m_SafePointerList.mNode.mNext) = HIBYTE(this->m_Track[2].mResourceOwner) != 0;
+    if ( this->m_Track[2].mDisable )
       goto LABEL_20;
     if ( UFG::Metrics::msInstance.mSimTimeScaleMax <= 1.0 )
     {
@@ -486,102 +418,102 @@ LABEL_19:
     UFG::Metrics::msInstance.mSimTimeDeltaStep = 0.0;
     bRestrictSimTimeScaleChange = 1;
 LABEL_20:
-    v20 = (float *)v4->m_Track;
+    v20 = (float *)this->m_Track;
     UFG::AnimatedCameraComponent::SetDofParameters(
-      (UFG::AnimatedCameraComponent *)v4->mAnimatedCameraComponent.m_pPointer,
+      (UFG::AnimatedCameraComponent *)this->mAnimatedCameraComponent.m_pPointer,
       v20[18],
       v20[19],
       v20[21],
       v20[20],
       v20[23],
       v20[22]);
-    UFG::AttachCameraToView((UFG::BaseCameraComponent *)v4->mAnimatedCameraComponent.m_pPointer);
+    UFG::AttachCameraToView((UFG::BaseCameraComponent *)this->mAnimatedCameraComponent.m_pPointer);
     v21 = UFG::AnimatedCameraComponent::Play(
-            (UFG::AnimatedCameraComponent *)v4->mAnimatedCameraComponent.m_pPointer,
-            (UFG::qSymbolUC *)&v2[2].mResourceOwner,
-            *((float *)&v4->m_Track[1].vfptr + 1));
-    v23 = &v4->mController;
-    if ( v4->mController.m_pPointer )
+            (UFG::AnimatedCameraComponent *)this->mAnimatedCameraComponent.m_pPointer,
+            (UFG::qSymbolUC *)&m_Track[2].mResourceOwner,
+            *((float *)&this->m_Track[1].vfptr + 1));
+    p_mController = &this->mController;
+    if ( this->mController.m_pPointer )
     {
-      v22 = v23->mPrev;
-      v24 = v4->mController.mNext;
+      v22 = p_mController->mPrev;
+      v24 = this->mController.mNext;
       v22->mNext = v24;
       v24->mPrev = v22;
-      v23->mPrev = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v23->mPrev;
-      v4->mController.mNext = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v4->mController.mPrev;
+      p_mController->mPrev = p_mController;
+      this->mController.mNext = &this->mController;
     }
-    v4->mController.m_pPointer = v21;
+    this->mController.m_pPointer = v21;
     if ( v21 )
     {
-      v25 = &v21->m_SafePointerList;
-      v26 = v21->m_SafePointerList.mNode.mPrev;
-      v26->mNext = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v23->mPrev;
-      v23->mPrev = v26;
-      v4->mController.mNext = &v25->mNode;
-      v25->mNode.mPrev = (UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *)&v23->mPrev;
+      v25 = &v21->UFG::qSafePointerNode<AnimationNode>::m_SafePointerList.mNode;
+      v26 = v21->UFG::qSafePointerNode<AnimationNode>::m_SafePointerList.mNode.UFG::qSafePointerNode<AnimationNode>::mPrev;
+      v26->mNext = p_mController;
+      p_mController->mPrev = v26;
+      this->mController.mNext = v25;
+      v25->mPrev = p_mController;
     }
-    v27 = v4->mController.m_pPointer;
+    v27 = this->mController.m_pPointer;
     if ( v27 )
     {
-      LOBYTE(v22) = BYTE4(v4->m_Track[2].mResourceOwner) != 0;
-      v27->vfptr[3].__vecDelDtor((Expression::IMemberMap *)&v27->vfptr, (unsigned int)v22);
-      v4->mController.m_pPointer->vfptr[2].FindWithOldPath(
-        (Expression::IMemberMap *)v4->mController.m_pPointer,
-        (const char *)LOBYTE(v4->m_Track[1].vfptr));
-      ((void (__fastcall *)(AnimationNode *, ActionContext *))v4->mController.m_pPointer->vfptr[2].GetResourceOwner)(
-        v4->mController.m_pPointer,
-        v4->mContext);
+      LOBYTE(v22) = BYTE4(this->m_Track[2].mResourceOwner) != 0;
+      v27->PoseNode::Expression::IMemberMap::vfptr[3].__vecDelDtor(v27, (unsigned int)v22);
+      this->mController.m_pPointer->vfptr[2].FindWithOldPath(
+        this->mController.m_pPointer,
+        (const char *)LOBYTE(this->m_Track[1].vfptr));
+      ((void (__fastcall *)(AnimationNode *, ActionContext *))this->mController.m_pPointer->vfptr[2].GetResourceOwner)(
+        this->mController.m_pPointer,
+        this->mContext);
     }
-    LOBYTE(v23) = 1;
-    ((void (__fastcall *)(AnimationNode *, UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *, UFG::qSafePointer<AnimationNode,AnimationNode> *))v4->mController.m_pPointer->vfptr[1].GetClassNameUID)(
-      v4->mController.m_pPointer,
+    LOBYTE(p_mController) = 1;
+    ((void (__fastcall *)(AnimationNode *, UFG::qNode<UFG::qSafePointerBase<AnimationNode>,UFG::qSafePointerNodeList> *, UFG::qSafePointer<AnimationNode,AnimationNode> *))this->mController.m_pPointer->vfptr[1].GetClassNameUID)(
+      this->mController.m_pPointer,
       v22,
-      v23);
-    v28 = (UFG::SimObjectGame *)v4->mAnimatedCameraComponent.m_pPointer->m_pSimObject;
+      p_mController);
+    v28 = (UFG::SimObjectGame *)this->mAnimatedCameraComponent.m_pPointer->m_pSimObject;
     if ( v28 )
     {
-      v29 = v28->m_Flags;
-      if ( (v29 >> 14) & 1 )
+      m_Flags = v28->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
       {
-        v30 = v28->m_Components.p[9].m_pComponent;
+        m_pComponent = v28->m_Components.p[9].m_pComponent;
       }
-      else if ( (v29 & 0x8000u) == 0 )
+      else if ( m_Flags >= 0 )
       {
-        if ( (v29 >> 13) & 1 )
-          v30 = v28->m_Components.p[8].m_pComponent;
+        if ( (m_Flags & 0x2000) != 0 )
+          m_pComponent = v28->m_Components.p[8].m_pComponent;
         else
-          v30 = (v29 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(v28, UFG::BaseAnimationComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v28->vfptr, UFG::BaseAnimationComponent::_TypeUID);
+          m_pComponent = (m_Flags & 0x1000) != 0
+                       ? UFG::SimObjectGame::GetComponentOfTypeHK(v28, UFG::BaseAnimationComponent::_TypeUID)
+                       : UFG::SimObject::GetComponentOfType(v28, UFG::BaseAnimationComponent::_TypeUID);
       }
       else
       {
-        v30 = v28->m_Components.p[9].m_pComponent;
+        m_pComponent = v28->m_Components.p[9].m_pComponent;
       }
-      if ( v30 )
+      if ( m_pComponent )
       {
-        v31 = *(Creature **)&v30[2].m_TypeUID;
+        v31 = *(Creature **)&m_pComponent[2].m_TypeUID;
         if ( v31 )
         {
-          Creature::Update(*(Creature **)&v30[2].m_TypeUID, 0.0);
+          Creature::Update(*(Creature **)&m_pComponent[2].m_TypeUID, 0.0);
           Creature::UpdateTransforms(v31);
         }
-        ((void (*)(void))v4->mAnimatedCameraComponent.m_pPointer->vfptr[15].__vecDelDtor)();
+        ((void (__fastcall *)(UFG::SimComponent *))this->mAnimatedCameraComponent.m_pPointer->vfptr[15].__vecDelDtor)(this->mAnimatedCameraComponent.m_pPointer);
       }
     }
   }
-  v32 = NISManager::GetInstance();
-  NISManager::OnCameraAttached(v32, v4);
+  Instance = NISManager::GetInstance();
+  NISManager::OnCameraAttached(Instance, this);
 }
 
 // File Line: 298
 // RVA: 0x303DE0
 bool __fastcall CameraAnimationTask::Update(CameraAnimationTask *this, float timeDelta)
 {
-  CameraAnimationTask *v2; // rbx
   bool v3; // al
-  AnimationNode *v4; // rcx
-  int v5; // edi
+  AnimationNode *m_pPointer; // rcx
+  int vfptr_low; // edi
 
-  v2 = this;
   if ( !this->m_Track[2].mDisable )
   {
     if ( UFG::Metrics::msInstance.mSimTimeScaleMax <= 1.0 )
@@ -602,72 +534,74 @@ LABEL_5:
     UFG::Metrics::msInstance.mSimPausedInGame = v3;
     UFG::Metrics::msInstance.mSimTimeDeltaStep = 0.0;
   }
-  v4 = this->mController.m_pPointer;
-  if ( !v4 )
+  m_pPointer = this->mController.m_pPointer;
+  if ( !m_pPointer )
     return 0;
-  v5 = LOBYTE(v2->m_Track[1].vfptr);
-  if ( v5 == 1 || v5 == 6 || !((unsigned __int8 (*)(void))v4->vfptr[1].SetResourceOwner)() )
+  vfptr_low = LOBYTE(this->m_Track[1].vfptr);
+  if ( vfptr_low == 1
+    || vfptr_low == 6
+    || !((unsigned __int8 (__fastcall *)(AnimationNode *))m_pPointer->PoseNode::Expression::IMemberMap::vfptr[1].SetResourceOwner)(m_pPointer) )
+  {
     return 1;
-  ((void (*)(void))v2->mController.m_pPointer->vfptr[1].GetResourceOwner)();
-  return v5 == 2;
+  }
+  this->mController.m_pPointer->vfptr[1].GetResourceOwner(this->mController.m_pPointer);
+  return vfptr_low == 2;
 }
 
 // File Line: 337
 // RVA: 0x2FE1B0
 void __fastcall CameraAnimationTask::End(CameraAnimationTask *this)
 {
-  CameraAnimationTrack *v1; // rbx
-  CameraAnimationTask *v2; // rdi
-  NISManager *v3; // rax
-  UFG::SimComponent *v4; // rcx
+  CameraAnimationTrack *m_Track; // rbx
+  NISManager *Instance; // rax
+  UFG::SimComponent *m_pPointer; // rcx
   UFG::FollowCameraComponent *v5; // rbx
   ITrack *v6; // rax
   bool withVelocity; // si
-  float v8; // xmm6_4
+  float value; // xmm6_4
   float v9; // xmm7_4
   float orientRateMin; // xmm8_4
   float orientRateMax; // xmm9_4
   UFG::SimComponent *v12; // rbx
-  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *v13; // rcx
-  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> **v14; // rdx
+  UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *mPrev; // rcx
+  UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> **p_mNext; // rdx
   UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *v15; // rcx
-  UFG::qSafePointerNode<UFG::SimComponent>Vtbl *v16; // rax
+  UFG::qSafePointerNode<UFG::SimComponent>Vtbl *vfptr; // rax
 
   bRestrictSimTimeScaleChange = 0;
-  v1 = (CameraAnimationTrack *)this->m_Track;
-  v2 = this;
-  v3 = NISManager::GetInstance();
-  NISManager::OnCameraDetached(v3, v1);
-  v4 = v2->mPreviousCameraComponent.m_pPointer;
-  if ( v4 )
+  m_Track = (CameraAnimationTrack *)this->m_Track;
+  Instance = NISManager::GetInstance();
+  NISManager::OnCameraDetached(Instance, m_Track);
+  m_pPointer = this->mPreviousCameraComponent.m_pPointer;
+  if ( m_pPointer )
   {
-    if ( UFG::SimComponent::IsType(v4, UFG::FollowCameraComponent::_FollowCameraComponentTypeUID) )
-      v5 = (UFG::FollowCameraComponent *)v2->mPreviousCameraComponent.m_pPointer;
+    if ( UFG::SimComponent::IsType(m_pPointer, UFG::FollowCameraComponent::_FollowCameraComponentTypeUID) )
+      v5 = (UFG::FollowCameraComponent *)this->mPreviousCameraComponent.m_pPointer;
     else
       v5 = 0i64;
-    UFG::AttachCameraToView((UFG::BaseCameraComponent *)v2->mPreviousCameraComponent.m_pPointer);
-    ((void (*)(void))v2->mPreviousCameraComponent.m_pPointer->vfptr[14].__vecDelDtor)();
+    UFG::AttachCameraToView((UFG::BaseCameraComponent *)this->mPreviousCameraComponent.m_pPointer);
+    ((void (__fastcall *)(UFG::SimComponent *))this->mPreviousCameraComponent.m_pPointer->vfptr[14].__vecDelDtor)(this->mPreviousCameraComponent.m_pPointer);
     if ( v5 )
       UFG::FollowCameraComponent::UpdateLocalWorld(v5, 0.0);
-    v6 = v2->m_Track;
+    v6 = this->m_Track;
     if ( BYTE6(v6[2].mResourceOwner) )
     {
       withVelocity = HIBYTE(v6[2].m_TrackClassNameUID) != 0;
       if ( v5 )
       {
-        v8 = v6[1].mMasterRate.value;
+        value = v6[1].mMasterRate.value;
         v9 = *(&v6[1].mMasterRate.value + 1);
         orientRateMin = v6[1].mTimeBegin;
         orientRateMax = v6[1].mTimeEnd;
         if ( v6[2].mBreakPoint )
         {
           UFG::FollowCameraComponent::GotoAngleSnap(v5, (float)(*(float *)&v6[2].vfptr * 3.1415927) * 0.0055555557, 1);
-          UFG::FollowCameraComponent::GotoRiseSnap(v5, *((float *)&v2->m_Track[2].vfptr + 1));
+          UFG::FollowCameraComponent::GotoRiseSnap(v5, *((float *)&this->m_Track[2].vfptr + 1));
         }
         UFG::FollowCameraComponent::TransitionFromBlendOrientation(
           v5,
-          (UFG::BaseCameraComponent *)v2->mAnimatedCameraComponent.m_pPointer,
-          v8,
+          (UFG::BaseCameraComponent *)this->mAnimatedCameraComponent.m_pPointer,
+          value,
           v9,
           orientRateMin,
           orientRateMax,
@@ -675,30 +609,30 @@ void __fastcall CameraAnimationTask::End(CameraAnimationTask *this)
       }
       else
       {
-        ((void (__fastcall *)(UFG::SimComponent *, UFG::SimComponent *, bool))v2->mPreviousCameraComponent.m_pPointer->vfptr[29].__vecDelDtor)(
-          v2->mPreviousCameraComponent.m_pPointer,
-          v2->mAnimatedCameraComponent.m_pPointer,
+        ((void (__fastcall *)(UFG::SimComponent *, UFG::SimComponent *, bool))this->mPreviousCameraComponent.m_pPointer->vfptr[29].__vecDelDtor)(
+          this->mPreviousCameraComponent.m_pPointer,
+          this->mAnimatedCameraComponent.m_pPointer,
           withVelocity);
       }
     }
-    ((void (*)(void))v2->mPreviousCameraComponent.m_pPointer->vfptr[15].__vecDelDtor)();
+    ((void (__fastcall *)(UFG::SimComponent *))this->mPreviousCameraComponent.m_pPointer->vfptr[15].__vecDelDtor)(this->mPreviousCameraComponent.m_pPointer);
   }
-  v12 = v2->mAnimatedCameraComponent.m_pPointer;
+  v12 = this->mAnimatedCameraComponent.m_pPointer;
   if ( v12 )
   {
-    v13 = v12[23].m_SafePointerList.mNode.mPrev;
-    if ( v13 )
-      ((void (__fastcall *)(UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *, signed __int64))v13->mPrev->mNext)(
-        v13,
+    mPrev = v12[23].m_SafePointerList.mNode.mPrev;
+    if ( mPrev )
+      ((void (__fastcall *)(UFG::qNode<UFG::qSafePointerBase<UFG::SimComponent>,UFG::qSafePointerNodeList> *, __int64))mPrev->mPrev->mNext)(
+        mPrev,
         1i64);
-    v14 = &v12[22].m_BoundComponentHandles.mNode.mNext;
+    p_mNext = &v12[22].m_BoundComponentHandles.mNode.mNext;
     if ( v12[23].m_SafePointerList.mNode.mPrev )
     {
-      v15 = *v14;
-      v16 = v12[23].vfptr;
-      v15->mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)v16;
-      v16->__vecDelDtor = (void *(__fastcall *)(UFG::qSafePointerNode<UFG::SimComponent> *, unsigned int))v15;
-      *v14 = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)v14;
+      v15 = *p_mNext;
+      vfptr = v12[23].vfptr;
+      v15->mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)vfptr;
+      vfptr->__vecDelDtor = (void *(__fastcall *)(UFG::qSafePointerNode<UFG::SimComponent> *, unsigned int))v15;
+      *p_mNext = (UFG::qNode<UFG::RebindingComponentHandleBase,UFG::RebindingComponentHandleBase> *)p_mNext;
       v12[23].vfptr = (UFG::qSafePointerNode<UFG::SimComponent>Vtbl *)&v12[22].m_BoundComponentHandles.mNode.mNext;
     }
     v12[23].m_SafePointerList.mNode.mPrev = 0i64;
@@ -709,49 +643,32 @@ void __fastcall CameraAnimationTask::End(CameraAnimationTask *this)
 // RVA: 0x2F5730
 void __fastcall SubjectSprintTask::Begin(SubjectSprintTask *this, ActionContext *context)
 {
-  SubjectSprintTask *v2; // rbx
-  UFG::SimObjectCharacter *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::CharacterSubjectComponent *v5; // rax
+  UFG::SimObjectCharacter *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::CharacterSubjectComponent *ComponentOfTypeHK; // rax
 
-  v2 = this;
-  v3 = (UFG::SimObjectCharacter *)context->mSimObject.m_pPointer;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectCharacter *)context->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v4 = v3->m_Flags;
-    if ( (v4 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v5 = UFG::SimObjectCharacter::GetComponent<UFG::CharacterSubjectComponent>(v3);
+      ComponentOfTypeHK = UFG::SimObjectCharacter::GetComponent<UFG::CharacterSubjectComponent>(m_pPointer);
     }
-    else if ( (v4 & 0x8000u) == 0 )
+    else if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v4 >> 13) & 1 )
-      {
-        v5 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                 (UFG::SimObjectGame *)&v3->vfptr,
-                                                 UFG::CharacterSubjectComponent::_TypeUID);
-      }
-      else if ( (v4 >> 12) & 1 )
-      {
-        v5 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                 (UFG::SimObjectGame *)&v3->vfptr,
-                                                 UFG::CharacterSubjectComponent::_TypeUID);
-      }
-      else
-      {
-        v5 = (UFG::CharacterSubjectComponent *)UFG::SimObject::GetComponentOfType(
-                                                 (UFG::SimObject *)&v3->vfptr,
-                                                 UFG::CharacterSubjectComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                              m_pPointer,
+                                                              UFG::CharacterSubjectComponent::_TypeUID);
     }
     else
     {
-      v5 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                               (UFG::SimObjectGame *)&v3->vfptr,
-                                               UFG::CharacterSubjectComponent::_TypeUID);
+      ComponentOfTypeHK = (UFG::CharacterSubjectComponent *)UFG::SimObject::GetComponentOfType(
+                                                              m_pPointer,
+                                                              UFG::CharacterSubjectComponent::_TypeUID);
     }
-    if ( v5 )
-      v5->mSprinting = LOBYTE(v2->m_Track[1].vfptr) != 0;
+    if ( ComponentOfTypeHK )
+      ComponentOfTypeHK->mSprinting = LOBYTE(this->m_Track[1].vfptr) != 0;
   }
 }
 
@@ -759,49 +676,32 @@ void __fastcall SubjectSprintTask::Begin(SubjectSprintTask *this, ActionContext 
 // RVA: 0x2F4D30
 void __fastcall SubjectElevationTask::Begin(SubjectElevationTask *this, ActionContext *context)
 {
-  SubjectElevationTask *v2; // rbx
-  UFG::SimObjectCharacter *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::CharacterSubjectComponent *v5; // rax
+  UFG::SimObjectCharacter *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::CharacterSubjectComponent *ComponentOfTypeHK; // rax
 
-  v2 = this;
-  v3 = (UFG::SimObjectCharacter *)context->mSimObject.m_pPointer;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectCharacter *)context->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v4 = v3->m_Flags;
-    if ( (v4 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v5 = UFG::SimObjectCharacter::GetComponent<UFG::CharacterSubjectComponent>(v3);
+      ComponentOfTypeHK = UFG::SimObjectCharacter::GetComponent<UFG::CharacterSubjectComponent>(m_pPointer);
     }
-    else if ( (v4 & 0x8000u) == 0 )
+    else if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v4 >> 13) & 1 )
-      {
-        v5 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                 (UFG::SimObjectGame *)&v3->vfptr,
-                                                 UFG::CharacterSubjectComponent::_TypeUID);
-      }
-      else if ( (v4 >> 12) & 1 )
-      {
-        v5 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                 (UFG::SimObjectGame *)&v3->vfptr,
-                                                 UFG::CharacterSubjectComponent::_TypeUID);
-      }
-      else
-      {
-        v5 = (UFG::CharacterSubjectComponent *)UFG::SimObject::GetComponentOfType(
-                                                 (UFG::SimObject *)&v3->vfptr,
-                                                 UFG::CharacterSubjectComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                              m_pPointer,
+                                                              UFG::CharacterSubjectComponent::_TypeUID);
     }
     else
     {
-      v5 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                               (UFG::SimObjectGame *)&v3->vfptr,
-                                               UFG::CharacterSubjectComponent::_TypeUID);
+      ComponentOfTypeHK = (UFG::CharacterSubjectComponent *)UFG::SimObject::GetComponentOfType(
+                                                              m_pPointer,
+                                                              UFG::CharacterSubjectComponent::_TypeUID);
     }
-    if ( v5 )
-      UFG::CharacterSubjectComponent::SetElevationLock(v5, LOBYTE(v2->m_Track[1].vfptr) != 0);
+    if ( ComponentOfTypeHK )
+      UFG::CharacterSubjectComponent::SetElevationLock(ComponentOfTypeHK, LOBYTE(this->m_Track[1].vfptr) != 0);
   }
 }
 
@@ -809,49 +709,32 @@ void __fastcall SubjectElevationTask::Begin(SubjectElevationTask *this, ActionCo
 // RVA: 0x2F4DD0
 void __fastcall SubjectFallingAttackTask::Begin(SubjectFallingAttackTask *this, ActionContext *context)
 {
-  SubjectFallingAttackTask *v2; // rbx
-  UFG::SimObjectCharacter *v3; // rcx
-  unsigned __int16 v4; // dx
-  UFG::CharacterSubjectComponent *v5; // rax
+  UFG::SimObjectCharacter *m_pPointer; // rcx
+  __int16 m_Flags; // dx
+  UFG::CharacterSubjectComponent *ComponentOfTypeHK; // rax
 
-  v2 = this;
-  v3 = (UFG::SimObjectCharacter *)context->mSimObject.m_pPointer;
-  if ( v3 )
+  m_pPointer = (UFG::SimObjectCharacter *)context->mSimObject.m_pPointer;
+  if ( m_pPointer )
   {
-    v4 = v3->m_Flags;
-    if ( (v4 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v5 = UFG::SimObjectCharacter::GetComponent<UFG::CharacterSubjectComponent>(v3);
+      ComponentOfTypeHK = UFG::SimObjectCharacter::GetComponent<UFG::CharacterSubjectComponent>(m_pPointer);
     }
-    else if ( (v4 & 0x8000u) == 0 )
+    else if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
     {
-      if ( (v4 >> 13) & 1 )
-      {
-        v5 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                 (UFG::SimObjectGame *)&v3->vfptr,
-                                                 UFG::CharacterSubjectComponent::_TypeUID);
-      }
-      else if ( (v4 >> 12) & 1 )
-      {
-        v5 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                 (UFG::SimObjectGame *)&v3->vfptr,
-                                                 UFG::CharacterSubjectComponent::_TypeUID);
-      }
-      else
-      {
-        v5 = (UFG::CharacterSubjectComponent *)UFG::SimObject::GetComponentOfType(
-                                                 (UFG::SimObject *)&v3->vfptr,
-                                                 UFG::CharacterSubjectComponent::_TypeUID);
-      }
+      ComponentOfTypeHK = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                              m_pPointer,
+                                                              UFG::CharacterSubjectComponent::_TypeUID);
     }
     else
     {
-      v5 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                               (UFG::SimObjectGame *)&v3->vfptr,
-                                               UFG::CharacterSubjectComponent::_TypeUID);
+      ComponentOfTypeHK = (UFG::CharacterSubjectComponent *)UFG::SimObject::GetComponentOfType(
+                                                              m_pPointer,
+                                                              UFG::CharacterSubjectComponent::_TypeUID);
     }
-    if ( v5 )
-      v5->mFallingAttack = LOBYTE(v2->m_Track[1].vfptr) != 0;
+    if ( ComponentOfTypeHK )
+      ComponentOfTypeHK->mFallingAttack = LOBYTE(this->m_Track[1].vfptr) != 0;
   }
 }
 
@@ -879,97 +762,92 @@ void __fastcall CameraDOFTask::End(CameraDOFTask *this)
 // RVA: 0x2F54F0
 void __fastcall SubjectFollowOverrideTask::Begin(SubjectFollowOverrideTask *this, ActionContext *context)
 {
-  ActionContext *v2; // rbp
-  SubjectFollowOverrideTask *v3; // rsi
   int v4; // ebx
   bool v5; // r14
-  bool v6; // al
+  bool IsAnyLocalPlayer; // al
   ITrack *v7; // rcx
   const char *v8; // r8
-  UFG::SimObjectCharacter *v9; // rcx
-  unsigned __int16 v10; // dx
+  UFG::SimObjectCharacter *m_pPointer; // rcx
+  __int16 m_Flags; // dx
   UFG::CharacterSubjectComponent *v11; // rax
   UFG::CharacterSubjectComponent *v12; // rdi
-  ITrack *v13; // rax
-  UFG::qSymbol v14; // eax
-  UFG::qSymbol v15; // eax
-  UFG::qSymbol v16; // eax
-  UFG::qString result; // [rsp+38h] [rbp-50h]
-  UFG::qSymbol v18; // [rsp+90h] [rbp+8h]
-  UFG::qSymbol v19; // [rsp+A0h] [rbp+18h]
+  ITrack *m_Track; // rax
+  unsigned int v14; // eax
+  unsigned int v15; // eax
+  unsigned int v16; // eax
+  UFG::qString result; // [rsp+38h] [rbp-50h] BYREF
+  UFG::qSymbol v18; // [rsp+90h] [rbp+8h] BYREF
+  UFG::qSymbol *v19; // [rsp+A0h] [rbp+18h] BYREF
   UFG::qSymbol *v20; // [rsp+A8h] [rbp+20h]
 
-  v2 = context;
-  v3 = this;
   v4 = 0;
   this->mActionContext = 0i64;
   this->mUniqueID = -1;
   v5 = BYTE5(this->m_Track[1].mResourceOwner) != 0;
-  v6 = UFG::IsAnyLocalPlayer(context->mSimObject.m_pPointer);
+  IsAnyLocalPlayer = UFG::IsAnyLocalPlayer(context->mSimObject.m_pPointer);
   if ( v5 )
   {
-    if ( !v6 )
+    if ( !IsAnyLocalPlayer )
       return;
   }
-  else if ( v6 )
+  else if ( IsAnyLocalPlayer )
   {
     return;
   }
-  v7 = v3->m_Track + 1;
-  v8 = (char *)v7 + ((_QWORD)v7->vfptr & 0xFFFFFFFFFFFFFFFEui64);
-  if ( !((_QWORD)v7->vfptr & 0xFFFFFFFFFFFFFFFEui64) )
+  v7 = this->m_Track + 1;
+  v8 = (char *)v7 + ((unsigned __int64)v7->vfptr & 0xFFFFFFFFFFFFFFFEui64);
+  if ( ((unsigned __int64)v7->vfptr & 0xFFFFFFFFFFFFFFFEui64) == 0 )
     v8 = BinString::sEmptyString;
   UFG::qString::FormatEx(&result, "Cameras-%s", v8);
-  if ( UFG::IsAnyLocalPlayer(v2->mSimObject.m_pPointer) )
-    v9 = (UFG::SimObjectCharacter *)v2->mSimObject.m_pPointer;
+  if ( UFG::IsAnyLocalPlayer(context->mSimObject.m_pPointer) )
+    m_pPointer = (UFG::SimObjectCharacter *)context->mSimObject.m_pPointer;
   else
-    v9 = UFG::GetLocalPlayer();
-  if ( v9 )
+    m_pPointer = UFG::GetLocalPlayer();
+  if ( m_pPointer )
   {
-    v10 = v9->m_Flags;
-    if ( (v10 >> 14) & 1 )
-    {
-      v11 = UFG::SimObjectCharacter::GetComponent<UFG::CharacterSubjectComponent>(v9);
-    }
-    else if ( (v10 & 0x8000u) == 0 )
-    {
-      if ( (v10 >> 13) & 1 )
-        v11 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                  (UFG::SimObjectGame *)&v9->vfptr,
-                                                  UFG::CharacterSubjectComponent::_TypeUID);
-      else
-        v11 = (UFG::CharacterSubjectComponent *)((v10 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                     (UFG::SimObjectGame *)&v9->vfptr,
-                                                                     UFG::CharacterSubjectComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v9->vfptr, UFG::CharacterSubjectComponent::_TypeUID));
-    }
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
+      v11 = UFG::SimObjectCharacter::GetComponent<UFG::CharacterSubjectComponent>(m_pPointer);
     else
-    {
-      v11 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                (UFG::SimObjectGame *)&v9->vfptr,
-                                                UFG::CharacterSubjectComponent::_TypeUID);
-    }
+      v11 = (UFG::CharacterSubjectComponent *)(m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+                                             ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                 m_pPointer,
+                                                 UFG::CharacterSubjectComponent::_TypeUID)
+                                             : UFG::SimObject::GetComponentOfType(
+                                                 m_pPointer,
+                                                 UFG::CharacterSubjectComponent::_TypeUID));
     v12 = v11;
     if ( v11 )
     {
-      v3->mActionContext = v2;
-      v3->mUniqueID = SubjectFollowOverrideTask::gUniqueIDNext++;
-      v13 = v3->m_Track;
-      if ( BYTE4(v13[1].mResourceOwner) )
+      this->mActionContext = context;
+      this->mUniqueID = SubjectFollowOverrideTask::gUniqueIDNext++;
+      m_Track = this->m_Track;
+      if ( BYTE4(m_Track[1].mResourceOwner) )
       {
-        v12->mTypeOverrideFreeman = (int)v13[1].mResourceOwner;
+        v12->mTypeOverrideFreeman = (int)m_Track[1].mResourceOwner;
         do
         {
           if ( v5 )
           {
             v20 = &v18;
-            v14.mUID = (unsigned int)UFG::qSymbol::create_from_string(&v18, result.mData);
-            UFG::CharacterSubjectComponent::SetContextOverrideFreemanPlayer(v12, v2, v4, v14, v3->mUniqueID);
+            v14 = (unsigned int)UFG::qSymbol::create_from_string(&v18, result.mData);
+            UFG::CharacterSubjectComponent::SetContextOverrideFreemanPlayer(
+              v12,
+              context,
+              v4,
+              (UFG::qSymbol)v14,
+              this->mUniqueID);
           }
           else
           {
-            v20 = &v19;
-            v15.mUID = (unsigned int)UFG::qSymbol::create_from_string(&v19, result.mData);
-            UFG::CharacterSubjectComponent::SetContextOverrideFreemanNPC(v12, v2, v4, v15, v3->mUniqueID);
+            v20 = (UFG::qSymbol *)&v19;
+            v15 = (unsigned int)UFG::qSymbol::create_from_string((UFG::qSymbol *)&v19, result.mData);
+            UFG::CharacterSubjectComponent::SetContextOverrideFreemanNPC(
+              v12,
+              context,
+              v4,
+              (UFG::qSymbol)v15,
+              this->mUniqueID);
           }
           ++v4;
         }
@@ -977,161 +855,158 @@ void __fastcall SubjectFollowOverrideTask::Begin(SubjectFollowOverrideTask *this
       }
       else
       {
-        *(_QWORD *)&v19.mUID = &v18;
-        v16.mUID = (unsigned int)UFG::qSymbol::create_from_string(&v18, result.mData);
+        v19 = &v18;
+        v16 = (unsigned int)UFG::qSymbol::create_from_string(&v18, result.mData);
         if ( v5 )
           UFG::CharacterSubjectComponent::SetContextOverrideFreemanPlayer(
             v12,
-            v2,
-            (int)v3->m_Track[1].mResourceOwner,
-            v16,
-            v3->mUniqueID);
+            context,
+            (int)this->m_Track[1].mResourceOwner,
+            (UFG::qSymbol)v16,
+            this->mUniqueID);
         else
           UFG::CharacterSubjectComponent::SetContextOverrideFreemanNPC(
             v12,
-            v2,
-            (int)v3->m_Track[1].mResourceOwner,
-            v16,
-            v3->mUniqueID);
+            context,
+            (int)this->m_Track[1].mResourceOwner,
+            (UFG::qSymbol)v16,
+            this->mUniqueID);
       }
     }
   }
   UFG::qString::~qString(&result);
-}
+}      (UFG::qSymbol)v16,
+            this->mUniqueID);
+      }
+    }
+  }
+  UFG::qString::~qString(&resul
 
 // File Line: 462
 // RVA: 0x300720
 void __fastcall SubjectFollowOverrideTask::End(SubjectFollowOverrideTask *this)
 {
-  SubjectFollowOverrideTask *v1; // rbx
-  ActionContext *v2; // rcx
+  ActionContext *mActionContext; // rcx
   bool v3; // r14
-  bool v4; // al
+  bool IsAnyLocalPlayer; // al
   UFG::SimObjectCharacter *v5; // rcx
-  unsigned __int16 v6; // dx
+  __int16 m_Flags; // dx
   UFG::CharacterSubjectComponent *v7; // rax
   UFG::CharacterSubjectComponent *v8; // rdi
-  unsigned int v9; // esi
+  unsigned int mUniqueID; // esi
   char v10; // bp
-  ITrack *v11; // rax
+  ITrack *m_Track; // rax
   int v12; // ebx
-  UFG::qSymbol v13; // eax
-  UFG::qSymbol v14; // eax
-  int v15; // edx
-  UFG::qSymbol v16; // eax
-  UFG::qSymbol v17; // eax
-  UFG::qWiseSymbol result; // [rsp+70h] [rbp+8h]
-  UFG::qWiseSymbol v19; // [rsp+78h] [rbp+10h]
-  UFG::qWiseSymbol *v20; // [rsp+80h] [rbp+18h]
+  unsigned int v13; // eax
+  unsigned int v14; // eax
+  int mResourceOwner; // edx
+  unsigned int v16; // eax
+  unsigned int v17; // eax
+  UFG::qWiseSymbol result; // [rsp+70h] [rbp+8h] BYREF
+  UFG::qWiseSymbol v19; // [rsp+78h] [rbp+10h] BYREF
+  UFG::qWiseSymbol *p_result; // [rsp+80h] [rbp+18h]
 
-  v1 = this;
-  v2 = this->mActionContext;
-  if ( v2 )
+  mActionContext = this->mActionContext;
+  if ( mActionContext )
   {
-    v3 = BYTE5(v1->m_Track[1].mResourceOwner) != 0;
-    v4 = UFG::IsAnyLocalPlayer(v2->mSimObject.m_pPointer);
+    v3 = BYTE5(this->m_Track[1].mResourceOwner) != 0;
+    IsAnyLocalPlayer = UFG::IsAnyLocalPlayer(mActionContext->mSimObject.m_pPointer);
     if ( v3 )
     {
-      if ( !v4 )
+      if ( !IsAnyLocalPlayer )
         return;
     }
-    else if ( v4 )
+    else if ( IsAnyLocalPlayer )
     {
       return;
     }
-    v5 = (UFG::SimObjectCharacter *)(UFG::IsAnyLocalPlayer(v1->mActionContext->mSimObject.m_pPointer) ? v1->mActionContext->mSimObject.m_pPointer : UFG::GetLocalPlayer());
+    v5 = UFG::IsAnyLocalPlayer(this->mActionContext->mSimObject.m_pPointer)
+       ? (UFG::SimObjectCharacter *)this->mActionContext->mSimObject.m_pPointer
+       : UFG::GetLocalPlayer();
     if ( v5 )
     {
-      v6 = v5->m_Flags;
-      if ( (v6 >> 14) & 1 )
-      {
+      m_Flags = v5->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
         v7 = UFG::SimObjectCharacter::GetComponent<UFG::CharacterSubjectComponent>(v5);
-      }
-      else if ( (v6 & 0x8000u) == 0 )
-      {
-        if ( (v6 >> 13) & 1 )
-          v7 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                   (UFG::SimObjectGame *)&v5->vfptr,
-                                                   UFG::CharacterSubjectComponent::_TypeUID);
-        else
-          v7 = (UFG::CharacterSubjectComponent *)((v6 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                     (UFG::SimObjectGame *)&v5->vfptr,
-                                                                     UFG::CharacterSubjectComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v5->vfptr, UFG::CharacterSubjectComponent::_TypeUID));
-      }
       else
-      {
-        v7 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                 (UFG::SimObjectGame *)&v5->vfptr,
-                                                 UFG::CharacterSubjectComponent::_TypeUID);
-      }
+        v7 = (UFG::CharacterSubjectComponent *)(m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+                                              ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                  v5,
+                                                  UFG::CharacterSubjectComponent::_TypeUID)
+                                              : UFG::SimObject::GetComponentOfType(
+                                                  v5,
+                                                  UFG::CharacterSubjectComponent::_TypeUID));
       v8 = v7;
       if ( v7 )
       {
-        v9 = v1->mUniqueID;
+        mUniqueID = this->mUniqueID;
         v10 = 0;
-        v11 = v1->m_Track;
-        if ( BYTE4(v11[1].mResourceOwner) )
+        m_Track = this->m_Track;
+        if ( BYTE4(m_Track[1].mResourceOwner) )
         {
           v12 = 0;
           while ( 1 )
           {
             if ( v3 )
             {
-              if ( UFG::CharacterSubjectComponent::GetContextOverrideFreemanPlayer_ID(v8, v12) == v9 )
+              if ( UFG::CharacterSubjectComponent::GetContextOverrideFreemanPlayer_ID(v8, v12) == mUniqueID )
               {
-                v20 = &result;
-                v13.mUID = (unsigned int)UFG::qSymbol::qSymbol(&result, 0xFFFFFFFF);
-                UFG::CharacterSubjectComponent::SetContextOverrideFreemanPlayer(v8, 0i64, v12, v13, 0xFFFFFFFF);
-LABEL_27:
+                p_result = &result;
+                v13 = (unsigned int)UFG::qSymbol::qSymbol(&result, 0xFFFFFFFF);
+                UFG::CharacterSubjectComponent::SetContextOverrideFreemanPlayer(
+                  v8,
+                  0i64,
+                  v12,
+                  (UFG::qSymbol)v13,
+                  0xFFFFFFFF);
+LABEL_26:
                 v10 = 1;
-                goto LABEL_28;
               }
             }
-            else if ( UFG::CharacterSubjectComponent::GetContextOverrideFreemanNPC_ID(v8, v12) == v9 )
+            else if ( UFG::CharacterSubjectComponent::GetContextOverrideFreemanNPC_ID(v8, v12) == mUniqueID )
             {
-              v20 = &v19;
-              v14.mUID = (unsigned int)UFG::qSymbol::qSymbol(&v19, 0xFFFFFFFF);
-              UFG::CharacterSubjectComponent::SetContextOverrideFreemanNPC(v8, 0i64, v12, v14, 0xFFFFFFFF);
-              goto LABEL_27;
+              p_result = &v19;
+              v14 = (unsigned int)UFG::qSymbol::qSymbol(&v19, 0xFFFFFFFF);
+              UFG::CharacterSubjectComponent::SetContextOverrideFreemanNPC(v8, 0i64, v12, (UFG::qSymbol)v14, 0xFFFFFFFF);
+              goto LABEL_26;
             }
-LABEL_28:
             if ( ++v12 >= 4 )
             {
               if ( v10 )
-LABEL_36:
+LABEL_35:
                 v8->mTypeOverrideFreeman = -1;
               return;
             }
           }
         }
-        UFG::CharacterSubjectComponent::GetContextOverride(v8, (UFG::qSymbol *)&v19, (int)v11[1].mResourceOwner);
-        v15 = (int)v1->m_Track[1].mResourceOwner;
+        UFG::CharacterSubjectComponent::GetContextOverride(v8, (UFG::qSymbol *)&v19, (int)m_Track[1].mResourceOwner);
+        mResourceOwner = (int)this->m_Track[1].mResourceOwner;
         if ( v3 )
         {
-          if ( UFG::CharacterSubjectComponent::GetContextOverrideFreemanPlayer_ID(v8, v15) == v9 )
+          if ( UFG::CharacterSubjectComponent::GetContextOverrideFreemanPlayer_ID(v8, mResourceOwner) == mUniqueID )
           {
-            v20 = &result;
-            v16.mUID = (unsigned int)UFG::qSymbol::qSymbol(&result, 0xFFFFFFFF);
+            p_result = &result;
+            v16 = (unsigned int)UFG::qSymbol::qSymbol(&result, 0xFFFFFFFF);
             UFG::CharacterSubjectComponent::SetContextOverrideFreemanPlayer(
               v8,
               0i64,
-              (int)v1->m_Track[1].mResourceOwner,
-              v16,
+              (int)this->m_Track[1].mResourceOwner,
+              (UFG::qSymbol)v16,
               0xFFFFFFFF);
-            goto LABEL_36;
+            goto LABEL_35;
           }
         }
-        else if ( UFG::CharacterSubjectComponent::GetContextOverrideFreemanNPC_ID(v8, v15) == v9 )
+        else if ( UFG::CharacterSubjectComponent::GetContextOverrideFreemanNPC_ID(v8, mResourceOwner) == mUniqueID )
         {
-          v20 = &result;
-          v17.mUID = (unsigned int)UFG::qSymbol::qSymbol(&result, 0xFFFFFFFF);
+          p_result = &result;
+          v17 = (unsigned int)UFG::qSymbol::qSymbol(&result, 0xFFFFFFFF);
           UFG::CharacterSubjectComponent::SetContextOverrideFreemanNPC(
             v8,
             0i64,
-            (int)v1->m_Track[1].mResourceOwner,
-            v17,
+            (int)this->m_Track[1].mResourceOwner,
+            (UFG::qSymbol)v17,
             0xFFFFFFFF);
-          goto LABEL_36;
+          goto LABEL_35;
         }
       }
     }
@@ -1142,182 +1017,184 @@ LABEL_36:
 // RVA: 0x2F5130
 void __fastcall SubjectFollowOverridePOITask::Begin(SubjectFollowOverridePOITask *this, ActionContext *context)
 {
-  ActionContext *v2; // r14
-  SubjectFollowOverridePOITask *v3; // r15
-  signed int v4; // edi
+  int v4; // edi
   bool v5; // al
-  UFG::SimObject *v6; // rcx
-  UFG::SimObjectCharacter *v7; // rcx
-  unsigned __int16 v8; // dx
+  UFG::SimObject *m_pPointer; // rcx
+  UFG::SimObjectCharacter *LocalPlayer; // rcx
+  __int16 m_Flags; // dx
   UFG::CharacterSubjectComponent *v9; // rax
   UFG::CharacterSubjectComponent *v10; // rsi
   ITrack *v11; // rcx
   const char *v12; // r8
-  Expression::IMemberMap **v13; // rcx
+  _QWORD *p_mResourceOwner; // rcx
   const char *v14; // r8
   UFG::SimObjectGame *v15; // rcx
-  unsigned __int16 v16; // dx
-  UFG::SimComponent *v17; // rdx
-  UFG::SimComponent *v18; // rax
+  __int16 v16; // dx
+  UFG::SimComponent *m_pComponent; // rdx
+  UFG::SimComponent *ComponentOfTypeHK; // rax
   UFG::SimObject *v19; // r12
-  ITrack *v20; // rax
-  UFG::qSymbol v21; // eax
-  UFG::qSymbol v22; // eax
-  int v23; // er8
-  UFG::qSymbol override_right; // ebx
-  UFG::qSymbol v25; // eax
-  UFG::qSymbol v26; // ebx
-  UFG::qSymbol v27; // eax
-  ITrack *v28; // rax
-  UFG::qSymbol v29; // eax
-  UFG::qString result; // [rsp+40h] [rbp-29h]
-  UFG::qString v31; // [rsp+68h] [rbp-1h]
-  UFG::qSymbol v32; // [rsp+D0h] [rbp+67h]
-  UFG::qSymbol *v33; // [rsp+E0h] [rbp+77h]
-  UFG::qSymbol *v34; // [rsp+E8h] [rbp+7Fh]
+  ITrack *m_Track; // rax
+  unsigned int v21; // eax
+  unsigned int override_right; // ebx
+  unsigned int v23; // eax
+  unsigned int v24; // ebx
+  unsigned int v25; // eax
+  ITrack *v26; // rax
+  unsigned int v27; // eax
+  unsigned int v28; // eax
+  UFG::qString result; // [rsp+40h] [rbp-29h] BYREF
+  UFG::qString v30; // [rsp+68h] [rbp-1h] BYREF
+  UFG::qSymbol v31; // [rsp+D0h] [rbp+67h] BYREF
+  UFG::qSymbol *v32; // [rsp+E0h] [rbp+77h] BYREF
+  UFG::qSymbol *v33; // [rsp+E8h] [rbp+7Fh]
 
-  v2 = context;
-  v3 = this;
   v4 = 0;
   this->mActionContext = 0i64;
   v5 = this->m_Track[1].mDisable != 0;
-  v6 = context->mSimObject.m_pPointer;
+  m_pPointer = context->mSimObject.m_pPointer;
   if ( v5 )
   {
-    if ( !UFG::IsAnyLocalPlayer(v6) )
+    if ( !UFG::IsAnyLocalPlayer(m_pPointer) )
       return;
   }
-  else if ( UFG::IsAnyLocalPlayer(v6) )
+  else if ( UFG::IsAnyLocalPlayer(m_pPointer) )
   {
     return;
   }
-  if ( UFG::IsAnyLocalPlayer(v2->mSimObject.m_pPointer) )
-    v7 = (UFG::SimObjectCharacter *)v2->mSimObject.m_pPointer;
+  if ( UFG::IsAnyLocalPlayer(context->mSimObject.m_pPointer) )
+    LocalPlayer = (UFG::SimObjectCharacter *)context->mSimObject.m_pPointer;
   else
-    v7 = UFG::GetLocalPlayer();
-  if ( v7 )
+    LocalPlayer = UFG::GetLocalPlayer();
+  if ( LocalPlayer )
   {
-    v8 = v7->m_Flags;
-    if ( (v8 >> 14) & 1 )
-    {
-      v9 = UFG::SimObjectCharacter::GetComponent<UFG::CharacterSubjectComponent>(v7);
-    }
-    else if ( (v8 & 0x8000u) == 0 )
-    {
-      if ( (v8 >> 13) & 1 )
-        v9 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                 (UFG::SimObjectGame *)&v7->vfptr,
-                                                 UFG::CharacterSubjectComponent::_TypeUID);
-      else
-        v9 = (UFG::CharacterSubjectComponent *)((v8 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                   (UFG::SimObjectGame *)&v7->vfptr,
-                                                                   UFG::CharacterSubjectComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v7->vfptr, UFG::CharacterSubjectComponent::_TypeUID));
-    }
+    m_Flags = LocalPlayer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
+      v9 = UFG::SimObjectCharacter::GetComponent<UFG::CharacterSubjectComponent>(LocalPlayer);
     else
-    {
-      v9 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                               (UFG::SimObjectGame *)&v7->vfptr,
-                                               UFG::CharacterSubjectComponent::_TypeUID);
-    }
+      v9 = (UFG::CharacterSubjectComponent *)(m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+                                            ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                LocalPlayer,
+                                                UFG::CharacterSubjectComponent::_TypeUID)
+                                            : UFG::SimObject::GetComponentOfType(
+                                                LocalPlayer,
+                                                UFG::CharacterSubjectComponent::_TypeUID));
     v10 = v9;
     if ( v9 )
     {
-      v3->mActionContext = v2;
-      v11 = v3->m_Track + 1;
-      v12 = (char *)v11 + ((_QWORD)v11->vfptr & 0xFFFFFFFFFFFFFFFEui64);
-      if ( !((_QWORD)v11->vfptr & 0xFFFFFFFFFFFFFFFEui64) )
+      this->mActionContext = context;
+      v11 = this->m_Track + 1;
+      v12 = (char *)v11 + ((unsigned __int64)v11->vfptr & 0xFFFFFFFFFFFFFFFEui64);
+      if ( ((unsigned __int64)v11->vfptr & 0xFFFFFFFFFFFFFFFEui64) == 0 )
         v12 = BinString::sEmptyString;
       UFG::qString::FormatEx(&result, "Cameras-%s", v12);
-      v13 = &v3->m_Track[1].mResourceOwner;
-      v14 = (char *)v13 + ((unsigned __int64)*v13 & 0xFFFFFFFFFFFFFFFEui64);
-      if ( !((unsigned __int64)*v13 & 0xFFFFFFFFFFFFFFFEui64) )
+      p_mResourceOwner = &this->m_Track[1].mResourceOwner;
+      v14 = (char *)p_mResourceOwner + (*p_mResourceOwner & 0xFFFFFFFFFFFFFFFEui64);
+      if ( (*p_mResourceOwner & 0xFFFFFFFFFFFFFFFEui64) == 0 )
         v14 = BinString::sEmptyString;
-      UFG::qString::FormatEx(&v31, "Cameras-%s", v14);
-      v15 = (UFG::SimObjectGame *)v2->mSimObject.m_pPointer;
+      UFG::qString::FormatEx(&v30, "Cameras-%s", v14);
+      v15 = (UFG::SimObjectGame *)context->mSimObject.m_pPointer;
       if ( v15
-        && ((v16 = v15->m_Flags, !((v16 >> 14) & 1)) ? ((v16 & 0x8000u) == 0 ? (!((v16 >> 13) & 1) ? (!((v16 >> 12) & 1) ? (v18 = UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v15->vfptr, UFG::TargetingSystemBaseComponent::_TypeUID)) : (v18 = UFG::SimObjectGame::GetComponentOfTypeHK(v15, UFG::TargetingSystemBaseComponent::_TypeUID))) : (v18 = UFG::SimObjectGame::GetComponentOfTypeHK(v15, UFG::TargetingSystemBaseComponent::_TypeUID)),
-                                                                                v17 = v18) : (v17 = v15->m_Components.p[20].m_pComponent)) : (v17 = v15->m_Components.p[20].m_pComponent),
-            v17) )
+        && ((v16 = v15->m_Flags, (v16 & 0x4000) == 0)
+          ? (v16 >= 0
+           ? ((v16 & 0x2000) != 0 || (v16 & 0x1000) != 0
+            ? (ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                                     v15,
+                                     UFG::TargetingSystemBaseComponent::_TypeUID))
+            : (ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(v15, UFG::TargetingSystemBaseComponent::_TypeUID)),
+              m_pComponent = ComponentOfTypeHK)
+           : (m_pComponent = v15->m_Components.p[20].m_pComponent))
+          : (m_pComponent = v15->m_Components.p[20].m_pComponent),
+            m_pComponent) )
       {
-        v19 = *(UFG::SimObject **)(56i64 * *(unsigned __int8 *)(*(_QWORD *)&v17[1].m_Flags + 35i64)
-                                 + *(_QWORD *)&v17[1].m_TypeUID
+        v19 = *(UFG::SimObject **)(56i64 * *(unsigned __int8 *)(*(_QWORD *)&m_pComponent[1].m_Flags + 35i64)
+                                 + *(_QWORD *)&m_pComponent[1].m_TypeUID
                                  + 40);
-        v20 = v3->m_Track;
+        m_Track = this->m_Track;
         if ( v19 )
         {
-          if ( v20[1].mBreakPoint )
+          if ( m_Track[1].mBreakPoint )
           {
-            v10->mTypeOverrideFreeman = v20[1].m_TrackClassNameUID;
-            v34 = &v32;
+            v10->mTypeOverrideFreeman = m_Track[1].m_TrackClassNameUID;
+            v33 = &v31;
             do
             {
-              override_right.mUID = (unsigned int)UFG::qSymbol::create_from_string(&v32, v31.mData);
-              v25.mUID = (unsigned int)UFG::qSymbol::create_from_string((UFG::qSymbol *)&v33, result.mData);
+              override_right = (unsigned int)UFG::qSymbol::create_from_string(&v31, v30.mData);
+              v23 = (unsigned int)UFG::qSymbol::create_from_string((UFG::qSymbol *)&v32, result.mData);
               UFG::CharacterSubjectComponent::SetContextOverrideFreemanPlayerPOI(
                 v10,
-                v2,
+                context,
                 v19,
                 v4++,
-                v25,
-                override_right);
+                (UFG::qSymbol)v23,
+                (UFG::qSymbol)override_right);
             }
             while ( v4 < 4 );
           }
           else
           {
-            v34 = &v32;
-            v26.mUID = (unsigned int)UFG::qSymbol::create_from_string(&v32, v31.mData);
-            v27.mUID = (unsigned int)UFG::qSymbol::create_from_string((UFG::qSymbol *)&v33, result.mData);
+            v33 = &v31;
+            v24 = (unsigned int)UFG::qSymbol::create_from_string(&v31, v30.mData);
+            v25 = (unsigned int)UFG::qSymbol::create_from_string((UFG::qSymbol *)&v32, result.mData);
             UFG::CharacterSubjectComponent::SetContextOverrideFreemanPlayerPOI(
               v10,
-              v2,
+              context,
               v19,
-              v3->m_Track[1].m_TrackClassNameUID,
-              v27,
-              v26);
+              this->m_Track[1].m_TrackClassNameUID,
+              (UFG::qSymbol)v25,
+              (UFG::qSymbol)v24);
           }
-          goto LABEL_52;
+          goto LABEL_49;
         }
-        if ( v20[1].mBreakPoint )
+        if ( m_Track[1].mBreakPoint )
         {
-          v10->mTypeOverrideFreeman = v20[1].m_TrackClassNameUID;
-          v33 = &v32;
+          v10->mTypeOverrideFreeman = m_Track[1].m_TrackClassNameUID;
+          v32 = &v31;
           do
           {
-            v21.mUID = (unsigned int)UFG::qSymbol::create_from_string(&v32, result.mData);
-            UFG::CharacterSubjectComponent::SetContextOverrideFreemanPlayer(v10, v2, v4++, v21, 0xFFFFFFFF);
+            v21 = (unsigned int)UFG::qSymbol::create_from_string(&v31, result.mData);
+            UFG::CharacterSubjectComponent::SetContextOverrideFreemanPlayer(
+              v10,
+              context,
+              v4++,
+              (UFG::qSymbol)v21,
+              0xFFFFFFFF);
           }
           while ( v4 < 4 );
-          goto LABEL_52;
+          goto LABEL_49;
         }
-        v33 = &v32;
-        v22.mUID = (unsigned int)UFG::qSymbol::create_from_string(&v32, result.mData);
-        v23 = v3->m_Track[1].m_TrackClassNameUID;
       }
       else
       {
-        v28 = v3->m_Track;
-        if ( v28[1].mBreakPoint )
+        v26 = this->m_Track;
+        if ( v26[1].mBreakPoint )
         {
-          v10->mTypeOverrideFreeman = v28[1].m_TrackClassNameUID;
-          v33 = &v32;
+          v10->mTypeOverrideFreeman = v26[1].m_TrackClassNameUID;
+          v32 = &v31;
           do
           {
-            v29.mUID = (unsigned int)UFG::qSymbol::create_from_string(&v32, result.mData);
-            UFG::CharacterSubjectComponent::SetContextOverrideFreemanPlayer(v10, v2, v4++, v29, 0xFFFFFFFF);
+            v27 = (unsigned int)UFG::qSymbol::create_from_string(&v31, result.mData);
+            UFG::CharacterSubjectComponent::SetContextOverrideFreemanPlayer(
+              v10,
+              context,
+              v4++,
+              (UFG::qSymbol)v27,
+              0xFFFFFFFF);
           }
           while ( v4 < 4 );
-          goto LABEL_52;
+          goto LABEL_49;
         }
-        v33 = &v32;
-        v22.mUID = (unsigned int)UFG::qSymbol::create_from_string(&v32, result.mData);
-        v23 = v3->m_Track[1].m_TrackClassNameUID;
       }
-      UFG::CharacterSubjectComponent::SetContextOverrideFreemanPlayer(v10, v2, v23, v22, 0xFFFFFFFF);
-LABEL_52:
-      UFG::qString::~qString(&v31);
+      v32 = &v31;
+      v28 = (unsigned int)UFG::qSymbol::create_from_string(&v31, result.mData);
+      UFG::CharacterSubjectComponent::SetContextOverrideFreemanPlayer(
+        v10,
+        context,
+        this->m_Track[1].m_TrackClassNameUID,
+        (UFG::qSymbol)v28,
+        0xFFFFFFFF);
+LABEL_49:
+      UFG::qString::~qString(&v30);
       UFG::qString::~qString(&result);
-      return;
     }
   }
 }
@@ -1326,111 +1203,92 @@ LABEL_52:
 // RVA: 0x300580
 void __fastcall SubjectFollowOverridePOITask::End(SubjectFollowOverridePOITask *this)
 {
-  SubjectFollowOverridePOITask *v1; // rsi
-  ActionContext *v2; // rcx
-  UFG::SimObject *v3; // rcx
-  UFG::SimObjectCharacter *v4; // rcx
-  unsigned __int16 v5; // dx
-  UFG::CharacterSubjectComponent *v6; // rax
+  ActionContext *mActionContext; // rcx
+  UFG::SimObject *m_pPointer; // rcx
+  UFG::SimObjectCharacter *LocalPlayer; // rcx
+  __int16 m_Flags; // dx
+  UFG::CharacterSubjectComponent *ComponentOfTypeHK; // rax
   UFG::CharacterSubjectComponent *v7; // rdi
   bool v8; // zf
-  int v9; // esi
-  UFG::qSymbol override_right; // ebx
-  UFG::qSymbol override_left; // eax
-  UFG::qSymbol v12; // ebx
-  UFG::qSymbol v13; // eax
-  UFG::qWiseSymbol result; // [rsp+60h] [rbp+8h]
-  UFG::qWiseSymbol v15; // [rsp+68h] [rbp+10h]
-  UFG::qWiseSymbol *v16; // [rsp+70h] [rbp+18h]
+  int i; // esi
+  unsigned int override_right; // ebx
+  unsigned int override_left; // eax
+  unsigned int v12; // ebx
+  unsigned int v13; // eax
+  UFG::qWiseSymbol result; // [rsp+60h] [rbp+8h] BYREF
+  UFG::qWiseSymbol v15; // [rsp+68h] [rbp+10h] BYREF
+  UFG::qWiseSymbol *p_result; // [rsp+70h] [rbp+18h]
   UFG::qWiseSymbol *v17; // [rsp+78h] [rbp+20h]
 
-  v1 = this;
-  v2 = this->mActionContext;
-  if ( v2 )
+  mActionContext = this->mActionContext;
+  if ( mActionContext )
   {
-    v3 = v2->mSimObject.m_pPointer;
-    if ( v1->m_Track[1].mDisable )
+    m_pPointer = mActionContext->mSimObject.m_pPointer;
+    if ( this->m_Track[1].mDisable )
     {
-      if ( !UFG::IsAnyLocalPlayer(v3) )
+      if ( !UFG::IsAnyLocalPlayer(m_pPointer) )
         return;
     }
-    else if ( UFG::IsAnyLocalPlayer(v3) )
+    else if ( UFG::IsAnyLocalPlayer(m_pPointer) )
     {
       return;
     }
-    if ( UFG::IsAnyLocalPlayer(v1->mActionContext->mSimObject.m_pPointer) )
-      v4 = (UFG::SimObjectCharacter *)v1->mActionContext->mSimObject.m_pPointer;
+    if ( UFG::IsAnyLocalPlayer(this->mActionContext->mSimObject.m_pPointer) )
+      LocalPlayer = (UFG::SimObjectCharacter *)this->mActionContext->mSimObject.m_pPointer;
     else
-      v4 = UFG::GetLocalPlayer();
-    if ( v4 )
+      LocalPlayer = UFG::GetLocalPlayer();
+    if ( LocalPlayer )
     {
-      v5 = v4->m_Flags;
-      if ( (v5 >> 14) & 1 )
+      m_Flags = LocalPlayer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
       {
-        v6 = UFG::SimObjectCharacter::GetComponent<UFG::CharacterSubjectComponent>(v4);
+        ComponentOfTypeHK = UFG::SimObjectCharacter::GetComponent<UFG::CharacterSubjectComponent>(LocalPlayer);
       }
-      else if ( (v5 & 0x8000u) == 0 )
+      else if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
       {
-        if ( (v5 >> 13) & 1 )
-        {
-          v6 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                   (UFG::SimObjectGame *)&v4->vfptr,
-                                                   UFG::CharacterSubjectComponent::_TypeUID);
-        }
-        else if ( (v5 >> 12) & 1 )
-        {
-          v6 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                   (UFG::SimObjectGame *)&v4->vfptr,
-                                                   UFG::CharacterSubjectComponent::_TypeUID);
-        }
-        else
-        {
-          v6 = (UFG::CharacterSubjectComponent *)UFG::SimObject::GetComponentOfType(
-                                                   (UFG::SimObject *)&v4->vfptr,
-                                                   UFG::CharacterSubjectComponent::_TypeUID);
-        }
+        ComponentOfTypeHK = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                LocalPlayer,
+                                                                UFG::CharacterSubjectComponent::_TypeUID);
       }
       else
       {
-        v6 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                 (UFG::SimObjectGame *)&v4->vfptr,
-                                                 UFG::CharacterSubjectComponent::_TypeUID);
+        ComponentOfTypeHK = (UFG::CharacterSubjectComponent *)UFG::SimObject::GetComponentOfType(
+                                                                LocalPlayer,
+                                                                UFG::CharacterSubjectComponent::_TypeUID);
       }
-      v7 = v6;
-      if ( v6 )
+      v7 = ComponentOfTypeHK;
+      if ( ComponentOfTypeHK )
       {
-        v6->mTypeOverrideFreeman = -1;
-        v8 = v1->m_Track[1].mBreakPoint == 0;
-        v16 = &result;
+        ComponentOfTypeHK->mTypeOverrideFreeman = -1;
+        v8 = this->m_Track[1].mBreakPoint == 0;
+        p_result = &result;
         v17 = &v15;
         if ( v8 )
         {
-          v12.mUID = (unsigned int)UFG::qSymbol::qSymbol(&result, 0xFFFFFFFF);
-          v13.mUID = (unsigned int)UFG::qSymbol::qSymbol(&v15, 0xFFFFFFFF);
+          v12 = (unsigned int)UFG::qSymbol::qSymbol(&result, 0xFFFFFFFF);
+          v13 = (unsigned int)UFG::qSymbol::qSymbol(&v15, 0xFFFFFFFF);
           UFG::CharacterSubjectComponent::SetContextOverrideFreemanPlayerPOI(
             v7,
             0i64,
             0i64,
-            v1->m_Track[1].m_TrackClassNameUID,
-            v13,
-            v12);
+            this->m_Track[1].m_TrackClassNameUID,
+            (UFG::qSymbol)v13,
+            (UFG::qSymbol)v12);
         }
         else
         {
-          v9 = 0;
-          do
+          for ( i = 0; i < 4; ++i )
           {
-            override_right.mUID = (unsigned int)UFG::qSymbol::qSymbol(&result, 0xFFFFFFFF);
-            override_left.mUID = (unsigned int)UFG::qSymbol::qSymbol(&v15, 0xFFFFFFFF);
+            override_right = (unsigned int)UFG::qSymbol::qSymbol(&result, 0xFFFFFFFF);
+            override_left = (unsigned int)UFG::qSymbol::qSymbol(&v15, 0xFFFFFFFF);
             UFG::CharacterSubjectComponent::SetContextOverrideFreemanPlayerPOI(
               v7,
               0i64,
               0i64,
-              v9++,
-              override_left,
-              override_right);
+              i,
+              (UFG::qSymbol)override_left,
+              (UFG::qSymbol)override_right);
           }
-          while ( v9 < 4 );
         }
       }
     }
@@ -1441,118 +1299,103 @@ void __fastcall SubjectFollowOverridePOITask::End(SubjectFollowOverridePOITask *
 // RVA: 0x2F4E70
 void __fastcall SubjectFollowOverrideChooseTask::Begin(SubjectFollowOverrideChooseTask *this, ActionContext *context)
 {
-  ActionContext *v2; // rsi
-  SubjectFollowOverrideChooseTask *v3; // r14
   int v4; // ebx
   bool v5; // al
-  UFG::SimObject *v6; // rcx
-  UFG::SimObjectCharacter *v7; // rcx
-  unsigned __int16 v8; // dx
+  UFG::SimObject *m_pPointer; // rcx
+  UFG::SimObjectCharacter *LocalPlayer; // rcx
+  __int16 m_Flags; // dx
   UFG::CharacterSubjectComponent *v9; // rax
   UFG::CharacterSubjectComponent *v10; // rdi
   ITrack *v11; // rcx
   const char *v12; // r8
-  Expression::IMemberMap **v13; // rcx
+  _QWORD *p_mResourceOwner; // rcx
   const char *v14; // r8
-  unsigned int *v15; // rcx
+  unsigned int *p_m_TrackClassNameUID; // rcx
   const char *v16; // rdx
-  ExpressionParameterFloat *v17; // rcx
+  ExpressionParameterFloat *p_mMasterRate; // rcx
   const char *v18; // rdx
-  ITrack *v19; // rax
-  UFG::qSymbol left; // [rsp+40h] [rbp-59h]
-  UFG::qSymbol v21; // [rsp+44h] [rbp-55h]
-  UFG::qSymbol v22; // [rsp+48h] [rbp-51h]
-  UFG::qSymbol v23; // [rsp+4Ch] [rbp-4Dh]
-  UFG::qSymbol v24; // [rsp+50h] [rbp-49h]
+  ITrack *m_Track; // rax
+  UFG::qSymbol left; // [rsp+40h] [rbp-59h] BYREF
+  UFG::qSymbol v21; // [rsp+44h] [rbp-55h] BYREF
+  UFG::qSymbol v22; // [rsp+48h] [rbp-51h] BYREF
+  UFG::qSymbol v23; // [rsp+4Ch] [rbp-4Dh] BYREF
+  UFG::qSymbol v24; // [rsp+50h] [rbp-49h] BYREF
   UFG::qSymbol *v25; // [rsp+58h] [rbp-41h]
   UFG::qSymbol *v26; // [rsp+60h] [rbp-39h]
-  UFG::qSymbol *v27; // [rsp+68h] [rbp-31h]
+  UFG::qSymbol *p_left; // [rsp+68h] [rbp-31h]
   UFG::qSymbol *v28; // [rsp+70h] [rbp-29h]
   __int64 v29; // [rsp+78h] [rbp-21h]
-  UFG::qString v30; // [rsp+80h] [rbp-19h]
-  UFG::qString result; // [rsp+A8h] [rbp+Fh]
-  UFG::qSymbol v32; // [rsp+100h] [rbp+67h]
-  UFG::qSymbol v33; // [rsp+110h] [rbp+77h]
-  UFG::qSymbol v34; // [rsp+118h] [rbp+7Fh]
+  UFG::qString v30; // [rsp+80h] [rbp-19h] BYREF
+  UFG::qString result; // [rsp+A8h] [rbp+Fh] BYREF
+  UFG::qSymbol v32; // [rsp+100h] [rbp+67h] BYREF
+  UFG::qSymbol v33; // [rsp+110h] [rbp+77h] BYREF
+  UFG::qSymbol v34; // [rsp+118h] [rbp+7Fh] BYREF
 
   v29 = -2i64;
-  v2 = context;
-  v3 = this;
   v4 = 0;
   this->mActionContext = 0i64;
   v5 = BYTE5(this->m_Track[1].mMasterRate.expression.mOffset) != 0;
-  v6 = context->mSimObject.m_pPointer;
+  m_pPointer = context->mSimObject.m_pPointer;
   if ( v5 )
   {
-    if ( !UFG::IsAnyLocalPlayer(v6) )
+    if ( !UFG::IsAnyLocalPlayer(m_pPointer) )
       return;
   }
-  else if ( UFG::IsAnyLocalPlayer(v6) )
+  else if ( UFG::IsAnyLocalPlayer(m_pPointer) )
   {
     return;
   }
-  if ( UFG::IsAnyLocalPlayer(v2->mSimObject.m_pPointer) )
-    v7 = (UFG::SimObjectCharacter *)v2->mSimObject.m_pPointer;
+  if ( UFG::IsAnyLocalPlayer(context->mSimObject.m_pPointer) )
+    LocalPlayer = (UFG::SimObjectCharacter *)context->mSimObject.m_pPointer;
   else
-    v7 = UFG::GetLocalPlayer();
-  if ( v7 )
+    LocalPlayer = UFG::GetLocalPlayer();
+  if ( LocalPlayer )
   {
-    v8 = v7->m_Flags;
-    if ( (v8 >> 14) & 1 )
-    {
-      v9 = UFG::SimObjectCharacter::GetComponent<UFG::CharacterSubjectComponent>(v7);
-    }
-    else if ( (v8 & 0x8000u) == 0 )
-    {
-      if ( (v8 >> 13) & 1 )
-        v9 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                 (UFG::SimObjectGame *)&v7->vfptr,
-                                                 UFG::CharacterSubjectComponent::_TypeUID);
-      else
-        v9 = (UFG::CharacterSubjectComponent *)((v8 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                   (UFG::SimObjectGame *)&v7->vfptr,
-                                                                   UFG::CharacterSubjectComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v7->vfptr, UFG::CharacterSubjectComponent::_TypeUID));
-    }
+    m_Flags = LocalPlayer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
+      v9 = UFG::SimObjectCharacter::GetComponent<UFG::CharacterSubjectComponent>(LocalPlayer);
     else
-    {
-      v9 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                               (UFG::SimObjectGame *)&v7->vfptr,
-                                               UFG::CharacterSubjectComponent::_TypeUID);
-    }
+      v9 = (UFG::CharacterSubjectComponent *)(m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+                                            ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                LocalPlayer,
+                                                UFG::CharacterSubjectComponent::_TypeUID)
+                                            : UFG::SimObject::GetComponentOfType(
+                                                LocalPlayer,
+                                                UFG::CharacterSubjectComponent::_TypeUID));
     v10 = v9;
     if ( v9 )
     {
-      v3->mActionContext = v2;
-      v11 = v3->m_Track + 1;
-      v12 = (char *)v11 + ((_QWORD)v11->vfptr & 0xFFFFFFFFFFFFFFFEui64);
-      if ( !((_QWORD)v11->vfptr & 0xFFFFFFFFFFFFFFFEui64) )
+      this->mActionContext = context;
+      v11 = this->m_Track + 1;
+      v12 = (char *)v11 + ((unsigned __int64)v11->vfptr & 0xFFFFFFFFFFFFFFFEui64);
+      if ( ((unsigned __int64)v11->vfptr & 0xFFFFFFFFFFFFFFFEui64) == 0 )
         v12 = BinString::sEmptyString;
       UFG::qString::FormatEx(&result, "Cameras-%s", v12);
-      v13 = &v3->m_Track[1].mResourceOwner;
-      v14 = (char *)v13 + ((unsigned __int64)*v13 & 0xFFFFFFFFFFFFFFFEui64);
-      if ( !((unsigned __int64)*v13 & 0xFFFFFFFFFFFFFFFEui64) )
+      p_mResourceOwner = &this->m_Track[1].mResourceOwner;
+      v14 = (char *)p_mResourceOwner + (*p_mResourceOwner & 0xFFFFFFFFFFFFFFFEui64);
+      if ( (*p_mResourceOwner & 0xFFFFFFFFFFFFFFFEui64) == 0 )
         v14 = BinString::sEmptyString;
       UFG::qString::FormatEx(&v30, "Cameras-%s", v14);
       UFG::qSymbol::create_from_string(&v21, result.mData);
       UFG::qSymbol::create_from_string(&v24, v30.mData);
-      v15 = &v3->m_Track[1].m_TrackClassNameUID;
-      v16 = (char *)v15 + (*(_QWORD *)v15 & 0xFFFFFFFFFFFFFFFEui64);
-      if ( !(*(_QWORD *)v15 & 0xFFFFFFFFFFFFFFFEui64) )
+      p_m_TrackClassNameUID = &this->m_Track[1].m_TrackClassNameUID;
+      v16 = (char *)p_m_TrackClassNameUID + (*(_QWORD *)p_m_TrackClassNameUID & 0xFFFFFFFFFFFFFFFEui64);
+      if ( (*(_QWORD *)p_m_TrackClassNameUID & 0xFFFFFFFFFFFFFFFEui64) == 0 )
         v16 = BinString::sEmptyString;
       UFG::qSymbol::create_from_string(&v23, v16);
-      v17 = &v3->m_Track[1].mMasterRate;
-      v18 = (char *)v17 + (v17->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
-      if ( !(v17->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) )
+      p_mMasterRate = &this->m_Track[1].mMasterRate;
+      v18 = (char *)p_mMasterRate + (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64);
+      if ( (p_mMasterRate->text.mOffset & 0xFFFFFFFFFFFFFFFEui64) == 0 )
         v18 = BinString::sEmptyString;
       UFG::qSymbol::create_from_string(&v22, v18);
-      v19 = v3->m_Track;
-      if ( BYTE4(v19[1].mMasterRate.expression.mOffset) )
+      m_Track = this->m_Track;
+      if ( BYTE4(m_Track[1].mMasterRate.expression.mOffset) )
       {
-        v10->mTypeOverrideFreeman = v19[1].mMasterRate.expression.mOffset;
+        v10->mTypeOverrideFreeman = m_Track[1].mMasterRate.expression.mOffset;
         v25 = &v32;
         v26 = &v33;
         v28 = &v34;
-        v27 = &left;
+        p_left = &left;
         do
         {
           v32.mUID = v22.mUID;
@@ -1561,7 +1404,7 @@ void __fastcall SubjectFollowOverrideChooseTask::Begin(SubjectFollowOverrideChoo
           left.mUID = v21.mUID;
           UFG::CharacterSubjectComponent::SetContextOverrideFreemanPlayerChoose(
             v10,
-            v2,
+            context,
             v4++,
             (UFG::qSymbol)&left,
             (UFG::qSymbol)&v34,
@@ -1572,7 +1415,7 @@ void __fastcall SubjectFollowOverrideChooseTask::Begin(SubjectFollowOverrideChoo
       }
       else
       {
-        v27 = &v32;
+        p_left = &v32;
         v28 = &v33;
         v26 = &v34;
         v25 = &left;
@@ -1582,8 +1425,8 @@ void __fastcall SubjectFollowOverrideChooseTask::Begin(SubjectFollowOverrideChoo
         left.mUID = v21.mUID;
         UFG::CharacterSubjectComponent::SetContextOverrideFreemanPlayerChoose(
           v10,
-          v2,
-          v3->m_Track[1].mMasterRate.expression.mOffset,
+          context,
+          this->m_Track[1].mMasterRate.expression.mOffset,
           (UFG::qSymbol)&left,
           (UFG::qSymbol)&v34,
           (UFG::qSymbol)&v33,
@@ -1599,90 +1442,73 @@ void __fastcall SubjectFollowOverrideChooseTask::Begin(SubjectFollowOverrideChoo
 // RVA: 0x300390
 void __fastcall SubjectFollowOverrideChooseTask::End(SubjectFollowOverrideChooseTask *this)
 {
-  SubjectFollowOverrideChooseTask *v1; // rbx
-  ActionContext *v2; // rcx
-  UFG::SimObject *v3; // rcx
-  UFG::SimObjectCharacter *v4; // rcx
-  unsigned __int16 v5; // dx
-  UFG::CharacterSubjectComponent *v6; // rax
+  ActionContext *mActionContext; // rcx
+  UFG::SimObject *m_pPointer; // rcx
+  UFG::SimObjectCharacter *LocalPlayer; // rcx
+  __int16 m_Flags; // dx
+  UFG::CharacterSubjectComponent *ComponentOfTypeHK; // rax
   UFG::CharacterSubjectComponent *v7; // rdi
   int v8; // ebx
-  UFG::qSymbol left; // [rsp+40h] [rbp-30h]
+  UFG::qSymbol left; // [rsp+40h] [rbp-30h] BYREF
   __int64 v10; // [rsp+48h] [rbp-28h]
   UFG::qSymbol *v11; // [rsp+50h] [rbp-20h]
   UFG::qSymbol *v12; // [rsp+58h] [rbp-18h]
   UFG::qSymbol *v13; // [rsp+60h] [rbp-10h]
-  UFG::qSymbol *v14; // [rsp+68h] [rbp-8h]
-  UFG::qWiseSymbol result; // [rsp+90h] [rbp+20h]
-  UFG::qSymbol v16; // [rsp+98h] [rbp+28h]
-  UFG::qSymbol v17; // [rsp+A0h] [rbp+30h]
-  UFG::qSymbol v18; // [rsp+A8h] [rbp+38h]
+  UFG::qSymbol *p_left; // [rsp+68h] [rbp-8h]
+  UFG::qWiseSymbol result; // [rsp+90h] [rbp+20h] BYREF
+  UFG::qSymbol v16; // [rsp+98h] [rbp+28h] BYREF
+  UFG::qSymbol v17; // [rsp+A0h] [rbp+30h] BYREF
+  UFG::qSymbol v18; // [rsp+A8h] [rbp+38h] BYREF
 
   v10 = -2i64;
-  v1 = this;
-  v2 = this->mActionContext;
-  if ( v2 )
+  mActionContext = this->mActionContext;
+  if ( mActionContext )
   {
-    v3 = v2->mSimObject.m_pPointer;
-    if ( BYTE5(v1->m_Track[1].mMasterRate.expression.mOffset) )
+    m_pPointer = mActionContext->mSimObject.m_pPointer;
+    if ( BYTE5(this->m_Track[1].mMasterRate.expression.mOffset) )
     {
-      if ( !UFG::IsAnyLocalPlayer(v3) )
+      if ( !UFG::IsAnyLocalPlayer(m_pPointer) )
         return;
     }
-    else if ( UFG::IsAnyLocalPlayer(v3) )
+    else if ( UFG::IsAnyLocalPlayer(m_pPointer) )
     {
       return;
     }
-    if ( UFG::IsAnyLocalPlayer(v1->mActionContext->mSimObject.m_pPointer) )
-      v4 = (UFG::SimObjectCharacter *)v1->mActionContext->mSimObject.m_pPointer;
+    if ( UFG::IsAnyLocalPlayer(this->mActionContext->mSimObject.m_pPointer) )
+      LocalPlayer = (UFG::SimObjectCharacter *)this->mActionContext->mSimObject.m_pPointer;
     else
-      v4 = UFG::GetLocalPlayer();
-    if ( v4 )
+      LocalPlayer = UFG::GetLocalPlayer();
+    if ( LocalPlayer )
     {
-      v5 = v4->m_Flags;
-      if ( (v5 >> 14) & 1 )
+      m_Flags = LocalPlayer->m_Flags;
+      if ( (m_Flags & 0x4000) != 0 )
       {
-        v6 = UFG::SimObjectCharacter::GetComponent<UFG::CharacterSubjectComponent>(v4);
+        ComponentOfTypeHK = UFG::SimObjectCharacter::GetComponent<UFG::CharacterSubjectComponent>(LocalPlayer);
       }
-      else if ( (v5 & 0x8000u) == 0 )
+      else if ( m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
       {
-        if ( (v5 >> 13) & 1 )
-        {
-          v6 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                   (UFG::SimObjectGame *)&v4->vfptr,
-                                                   UFG::CharacterSubjectComponent::_TypeUID);
-        }
-        else if ( (v5 >> 12) & 1 )
-        {
-          v6 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                   (UFG::SimObjectGame *)&v4->vfptr,
-                                                   UFG::CharacterSubjectComponent::_TypeUID);
-        }
-        else
-        {
-          v6 = (UFG::CharacterSubjectComponent *)UFG::SimObject::GetComponentOfType(
-                                                   (UFG::SimObject *)&v4->vfptr,
-                                                   UFG::CharacterSubjectComponent::_TypeUID);
-        }
+        ComponentOfTypeHK = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                                LocalPlayer,
+                                                                UFG::CharacterSubjectComponent::_TypeUID);
       }
       else
       {
-        v6 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                 (UFG::SimObjectGame *)&v4->vfptr,
-                                                 UFG::CharacterSubjectComponent::_TypeUID);
+        ComponentOfTypeHK = (UFG::CharacterSubjectComponent *)UFG::SimObject::GetComponentOfType(
+                                                                LocalPlayer,
+                                                                UFG::CharacterSubjectComponent::_TypeUID);
       }
-      v7 = v6;
-      if ( v6 )
+      v7 = ComponentOfTypeHK;
+      if ( ComponentOfTypeHK )
       {
         UFG::qSymbol::qSymbol(&result, 0xFFFFFFFF);
         v7->mTypeOverrideFreeman = -1;
-        if ( BYTE4(v1->m_Track[1].mMasterRate.expression.mOffset) )
+        if ( BYTE4(this->m_Track[1].mMasterRate.expression.mOffset) )
         {
           v8 = 0;
           v11 = &v16;
           v12 = &v17;
           v13 = &v18;
-          v14 = &left;
+          p_left = &left;
           do
           {
             v16.mUID = result.mUID;
@@ -1702,7 +1528,7 @@ void __fastcall SubjectFollowOverrideChooseTask::End(SubjectFollowOverrideChoose
         }
         else
         {
-          v14 = &v16;
+          p_left = &v16;
           v13 = &v17;
           v12 = &v18;
           v11 = &left;
@@ -1713,7 +1539,7 @@ void __fastcall SubjectFollowOverrideChooseTask::End(SubjectFollowOverrideChoose
           UFG::CharacterSubjectComponent::SetContextOverrideFreemanPlayerChoose(
             v7,
             0i64,
-            v1->m_Track[1].mMasterRate.expression.mOffset,
+            this->m_Track[1].mMasterRate.expression.mOffset,
             (UFG::qSymbol)&left,
             (UFG::qSymbol)&v18,
             (UFG::qSymbol)&v17,
@@ -1728,85 +1554,70 @@ void __fastcall SubjectFollowOverrideChooseTask::End(SubjectFollowOverrideChoose
 // RVA: 0x2EA040
 void __fastcall CameraFollowGotoTask::Begin(CameraFollowGotoTask *this, ActionContext *context)
 {
-  ITrack *v2; // rax
-  CameraFollowGotoTask *v3; // rbx
-  UFG::SimObject *v4; // rcx
-  ActionContext *v5; // rdi
-  UFG::SimObjectCharacter *v6; // rcx
-  unsigned __int16 v7; // dx
+  ITrack *m_Track; // rax
+  UFG::SimObject *m_pPointer; // rcx
+  UFG::SimObjectCharacter *LocalPlayer; // rcx
+  __int16 m_Flags; // dx
   UFG::CharacterSubjectComponent *v8; // rax
   UFG::CharacterSubjectComponent *v9; // rdi
   ITrack *v10; // rax
   ITrack *v11; // rax
   ITrack *v12; // r9
   ITrack *v13; // rax
-  UFG::SimObject *v14; // rcx
-  UFG::FollowCameraComponent *v15; // rax
+  UFG::SimObject *m_pSimObject; // rcx
+  UFG::FollowCameraComponent *ComponentOfType; // rax
   ITrack *v16; // rax
   UFG::SimObject *v17; // rcx
   UFG::FollowCameraComponent *v18; // rax
   UFG::SimObject *v19; // rcx
   UFG::ChaseCameraComponent *v20; // rax
 
-  v2 = this->m_Track;
-  v3 = this;
-  v4 = context->mSimObject.m_pPointer;
-  v5 = context;
-  if ( *((_BYTE *)&v2[1].mMasterRate.value + 6) )
+  m_Track = this->m_Track;
+  m_pPointer = context->mSimObject.m_pPointer;
+  if ( *((_BYTE *)&m_Track[1].mMasterRate.value + 6) )
   {
-    if ( !UFG::IsAnyLocalPlayer(v4) )
+    if ( !UFG::IsAnyLocalPlayer(m_pPointer) )
       return;
   }
-  else if ( UFG::IsAnyLocalPlayer(v4) )
+  else if ( UFG::IsAnyLocalPlayer(m_pPointer) )
   {
     return;
   }
-  if ( UFG::IsAnyLocalPlayer(v5->mSimObject.m_pPointer) )
-    v6 = (UFG::SimObjectCharacter *)v5->mSimObject.m_pPointer;
+  if ( UFG::IsAnyLocalPlayer(context->mSimObject.m_pPointer) )
+    LocalPlayer = (UFG::SimObjectCharacter *)context->mSimObject.m_pPointer;
   else
-    v6 = UFG::GetLocalPlayer();
-  if ( v6 )
+    LocalPlayer = UFG::GetLocalPlayer();
+  if ( LocalPlayer )
   {
-    v7 = v6->m_Flags;
-    if ( (v7 >> 14) & 1 )
-    {
-      v8 = UFG::SimObjectCharacter::GetComponent<UFG::CharacterSubjectComponent>(v6);
-    }
-    else if ( (v7 & 0x8000u) == 0 )
-    {
-      if ( (v7 >> 13) & 1 )
-        v8 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                 (UFG::SimObjectGame *)&v6->vfptr,
-                                                 UFG::CharacterSubjectComponent::_TypeUID);
-      else
-        v8 = (UFG::CharacterSubjectComponent *)((v7 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                   (UFG::SimObjectGame *)&v6->vfptr,
-                                                                   UFG::CharacterSubjectComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v6->vfptr, UFG::CharacterSubjectComponent::_TypeUID));
-    }
+    m_Flags = LocalPlayer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
+      v8 = UFG::SimObjectCharacter::GetComponent<UFG::CharacterSubjectComponent>(LocalPlayer);
     else
-    {
-      v8 = (UFG::CharacterSubjectComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
-                                               (UFG::SimObjectGame *)&v6->vfptr,
-                                               UFG::CharacterSubjectComponent::_TypeUID);
-    }
+      v8 = (UFG::CharacterSubjectComponent *)(m_Flags < 0 || (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0
+                                            ? UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                LocalPlayer,
+                                                UFG::CharacterSubjectComponent::_TypeUID)
+                                            : UFG::SimObject::GetComponentOfType(
+                                                LocalPlayer,
+                                                UFG::CharacterSubjectComponent::_TypeUID));
     v9 = v8;
     if ( v8 )
     {
-      v10 = v3->m_Track;
+      v10 = this->m_Track;
       if ( LOBYTE(v10[1].mMasterRate.value) && !BYTE1(v10[1].mMasterRate.value) )
         UFG::CharacterSubjectComponent::SetGotoRise(
           v9,
           *(float *)&v10[1].vfptr,
           *((float *)&v10[1].vfptr + 1),
           *(float *)&v10[1].mResourceOwner);
-      v11 = v3->m_Track;
+      v11 = this->m_Track;
       if ( BYTE2(v11[1].mMasterRate.value) )
         UFG::CharacterSubjectComponent::SetGotoRadius(
           v9,
           *((float *)&v11[1].mResourceOwner + 1),
           *(float *)&v11[1].m_TrackClassNameUID,
           *(float *)&v11[1].mBreakPoint);
-      v12 = v3->m_Track;
+      v12 = this->m_Track;
       if ( HIBYTE(v12[1].mMasterRate.value) && !*((_BYTE *)&v12[1].mMasterRate.value + 5) )
         UFG::CharacterSubjectComponent::SetGotoAngle(
           v9,
@@ -1818,23 +1629,23 @@ void __fastcall CameraFollowGotoTask::Begin(CameraFollowGotoTask *this, ActionCo
           *((float *)&v12[1].mMasterRate.expression.mOffset + 1),
           LOBYTE(v12[1].mTimeBegin) != 0,
           BYTE1(v12[1].mTimeBegin) != 0);
-      v13 = v3->m_Track;
+      v13 = this->m_Track;
       if ( LOBYTE(v13[1].mMasterRate.value) )
       {
         if ( BYTE1(v13[1].mMasterRate.value) )
         {
-          v14 = UFG::Director::Get()->mCurrentCamera->m_pSimObject;
-          if ( v14 )
+          m_pSimObject = UFG::Director::Get()->mCurrentCamera->m_pSimObject;
+          if ( m_pSimObject )
           {
-            v15 = (UFG::FollowCameraComponent *)UFG::SimObject::GetComponentOfType(
-                                                  v14,
-                                                  UFG::FollowCameraComponent::_TypeUID);
-            if ( v15 )
-              UFG::FollowCameraComponent::GotoRiseSnap(v15, *(float *)&v3->m_Track[1].vfptr);
+            ComponentOfType = (UFG::FollowCameraComponent *)UFG::SimObject::GetComponentOfType(
+                                                              m_pSimObject,
+                                                              UFG::FollowCameraComponent::_TypeUID);
+            if ( ComponentOfType )
+              UFG::FollowCameraComponent::GotoRiseSnap(ComponentOfType, *(float *)&this->m_Track[1].vfptr);
           }
         }
       }
-      v16 = v3->m_Track;
+      v16 = this->m_Track;
       if ( HIBYTE(v16[1].mMasterRate.value) && *((_BYTE *)&v16[1].mMasterRate.value + 5) )
       {
         v17 = UFG::Director::Get()->mCurrentCamera->m_pSimObject;
@@ -1846,8 +1657,8 @@ void __fastcall CameraFollowGotoTask::Begin(CameraFollowGotoTask *this, ActionCo
           if ( v18 )
             UFG::FollowCameraComponent::GotoAngleSnap(
               v18,
-              (float)(*(float *)&v3->m_Track[1].mMasterRate.text.mOffset * 3.1415927) * 0.0055555557,
-              *((_BYTE *)&v3->m_Track[1].mMasterRate.value + 4) != 0);
+              (float)(*(float *)&this->m_Track[1].mMasterRate.text.mOffset * 3.1415927) * 0.0055555557,
+              *((_BYTE *)&this->m_Track[1].mMasterRate.value + 4) != 0);
         }
         v19 = UFG::Director::Get()->mCurrentCamera->m_pSimObject;
         if ( v19 )
@@ -1858,8 +1669,8 @@ void __fastcall CameraFollowGotoTask::Begin(CameraFollowGotoTask *this, ActionCo
           if ( v20 )
             UFG::ChaseCameraComponent::GotoAngleSnap(
               v20,
-              (float)(*(float *)&v3->m_Track[1].mMasterRate.text.mOffset * 3.1415927) * 0.0055555557,
-              *((_BYTE *)&v3->m_Track[1].mMasterRate.value + 4) != 0);
+              (float)(*(float *)&this->m_Track[1].mMasterRate.text.mOffset * 3.1415927) * 0.0055555557,
+              *((_BYTE *)&this->m_Track[1].mMasterRate.value + 4) != 0);
         }
       }
     }
@@ -1870,103 +1681,94 @@ void __fastcall CameraFollowGotoTask::Begin(CameraFollowGotoTask *this, ActionCo
 // RVA: 0x2EA2C0
 void __fastcall CameraFollowTargetTask::Begin(CameraFollowTargetTask *this, ActionContext *context)
 {
-  UFG::SimObjectCVBase *v2; // rbx
-  CameraFollowTargetTask *v3; // rbp
-  __int64 v4; // rdi
-  unsigned __int16 v5; // dx
-  UFG::SimComponent *v6; // r8
-  UFG::SimComponent *v7; // rax
-  unsigned __int16 v8; // cx
-  UFG::CharacterAnimationComponent *v9; // rax
+  UFG::SimObjectCVBase *m_pPointer; // rbx
+  __int64 vfptr_low; // rdi
+  __int16 m_Flags; // dx
+  UFG::SimComponent *m_pComponent; // r8
+  UFG::SimComponent *ComponentOfTypeHK; // rax
+  __int16 v8; // cx
+  UFG::CharacterAnimationComponent *ComponentOfType; // rax
   UFG::CharacterAnimationComponent *v10; // rdi
-  UFG::SimObject *v11; // rcx
+  UFG::SimObject *m_pSimObject; // rcx
   UFG::ScriptCameraComponent *v12; // rsi
-  Creature *v13; // rdi
-  int v14; // eax
+  Creature *mCreature; // rdi
+  int BoneID; // eax
 
-  v2 = (UFG::SimObjectCVBase *)context->mSimObject.m_pPointer;
-  v3 = this;
-  v4 = LODWORD(this->m_Track[1].vfptr);
-  if ( (_DWORD)v4 != 1 )
+  m_pPointer = (UFG::SimObjectCVBase *)context->mSimObject.m_pPointer;
+  vfptr_low = LODWORD(this->m_Track[1].vfptr);
+  if ( (_DWORD)vfptr_low != 1 )
   {
-    if ( !v2 )
+    if ( !m_pPointer )
       return;
-    v5 = v2->m_Flags;
-    if ( (v5 >> 14) & 1 )
+    m_Flags = m_pPointer->m_Flags;
+    if ( (m_Flags & 0x4000) != 0 )
     {
-      v6 = v2->m_Components.p[20].m_pComponent;
+      m_pComponent = m_pPointer->m_Components.p[20].m_pComponent;
     }
-    else if ( (v5 & 0x8000u) == 0 )
+    else if ( m_Flags >= 0 )
     {
-      if ( (v5 >> 13) & 1 )
-      {
-        v7 = UFG::SimObjectGame::GetComponentOfTypeHK(
-               (UFG::SimObjectGame *)&v2->vfptr,
-               UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
-      else if ( (v5 >> 12) & 1 )
-      {
-        v7 = UFG::SimObjectGame::GetComponentOfTypeHK(
-               (UFG::SimObjectGame *)&v2->vfptr,
-               UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
+      if ( (m_Flags & 0x2000) != 0 || (m_Flags & 0x1000) != 0 )
+        ComponentOfTypeHK = UFG::SimObjectGame::GetComponentOfTypeHK(
+                              m_pPointer,
+                              UFG::TargetingSystemBaseComponent::_TypeUID);
       else
-      {
-        v7 = UFG::SimObject::GetComponentOfType(
-               (UFG::SimObject *)&v2->vfptr,
-               UFG::TargetingSystemBaseComponent::_TypeUID);
-      }
-      v6 = v7;
+        ComponentOfTypeHK = UFG::SimObject::GetComponentOfType(m_pPointer, UFG::TargetingSystemBaseComponent::_TypeUID);
+      m_pComponent = ComponentOfTypeHK;
     }
     else
     {
-      v6 = v2->m_Components.p[20].m_pComponent;
+      m_pComponent = m_pPointer->m_Components.p[20].m_pComponent;
     }
-    if ( v6 )
-      v2 = *(UFG::SimObjectCVBase **)(56i64 * *(unsigned __int8 *)(*(_QWORD *)&v6[1].m_Flags + v4 + 8)
-                                    + *(_QWORD *)&v6[1].m_TypeUID
-                                    + 40);
+    if ( m_pComponent )
+      m_pPointer = *(UFG::SimObjectCVBase **)(56i64
+                                            * *(unsigned __int8 *)(*(_QWORD *)&m_pComponent[1].m_Flags + vfptr_low + 8)
+                                            + *(_QWORD *)&m_pComponent[1].m_TypeUID
+                                            + 40);
   }
-  if ( v2 )
+  if ( m_pPointer )
   {
-    v8 = v2->m_Flags;
-    if ( (v8 >> 14) & 1 )
+    v8 = m_pPointer->m_Flags;
+    if ( (v8 & 0x4000) != 0 || v8 < 0 )
     {
-      v9 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v2);
+      ComponentOfType = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(m_pPointer);
     }
-    else if ( (v8 & 0x8000u) == 0 )
+    else if ( (v8 & 0x2000) != 0 )
     {
-      if ( (v8 >> 13) & 1 )
-        v9 = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)v2);
-      else
-        v9 = (UFG::CharacterAnimationComponent *)((v8 >> 12) & 1 ? UFG::SimObjectGame::GetComponentOfTypeHK(
-                                                                     (UFG::SimObjectGame *)&v2->vfptr,
-                                                                     UFG::CharacterAnimationComponent::_TypeUID) : UFG::SimObject::GetComponentOfType((UFG::SimObject *)&v2->vfptr, UFG::CharacterAnimationComponent::_TypeUID));
+      ComponentOfType = UFG::SimObjectProp::GetComponent<UFG::CharacterAnimationComponent>((UFG::SimObjectProp *)m_pPointer);
+    }
+    else if ( (v8 & 0x1000) != 0 )
+    {
+      ComponentOfType = (UFG::CharacterAnimationComponent *)UFG::SimObjectGame::GetComponentOfTypeHK(
+                                                              m_pPointer,
+                                                              UFG::CharacterAnimationComponent::_TypeUID);
     }
     else
     {
-      v9 = UFG::SimObjectCVBase::GetComponent<UFG::CharacterAnimationComponent>(v2);
+      ComponentOfType = (UFG::CharacterAnimationComponent *)UFG::SimObject::GetComponentOfType(
+                                                              m_pPointer,
+                                                              UFG::CharacterAnimationComponent::_TypeUID);
     }
-    v10 = v9;
-    if ( v9 )
+    v10 = ComponentOfType;
+    if ( ComponentOfType )
     {
-      v11 = UFG::Director::Get()->mCurrentCamera->m_pSimObject;
-      if ( v11 )
+      m_pSimObject = UFG::Director::Get()->mCurrentCamera->m_pSimObject;
+      if ( m_pSimObject )
       {
         v12 = (UFG::ScriptCameraComponent *)UFG::SimObject::GetComponentOfType(
-                                              v11,
+                                              m_pSimObject,
                                               UFG::ScriptCameraComponent::_TypeUID);
         if ( v12 )
         {
-          v13 = v10->mCreature;
-          if ( v13->mPose.mRigHandle.mData
-            && (v14 = Skeleton::GetBoneID(v13->mPose.mRigHandle.mUFGSkeleton, HIDWORD(v3->m_Track[1].vfptr)), v14 >= 0) )
+          mCreature = v10->mCreature;
+          if ( mCreature->mPose.mRigHandle.mData
+            && (BoneID = Skeleton::GetBoneID(mCreature->mPose.mRigHandle.mUFGSkeleton, HIDWORD(this->m_Track[1].vfptr)),
+                BoneID >= 0) )
           {
-            UFG::ScriptCameraComponent::SetCameraCreature(v12, v13, v14);
+            UFG::ScriptCameraComponent::SetCameraCreature(v12, mCreature, BoneID);
           }
           else
           {
-            UFG::ScriptCameraComponent::SetTarget(v12, v2->m_pTransformNodeComponent);
+            UFG::ScriptCameraComponent::SetTarget(v12, m_pPointer->m_pTransformNodeComponent);
           }
         }
       }
@@ -1978,10 +1780,10 @@ void __fastcall CameraFollowTargetTask::Begin(CameraFollowTargetTask *this, Acti
 // RVA: 0x2EA650
 void __fastcall CameraSetSniperModeTask::Begin(CameraSetSniperModeTask *this, ActionContext *context)
 {
-  UFG::SimObject *v2; // rcx
+  UFG::SimObject *m_pSimObject; // rcx
 
-  v2 = UFG::Director::Get()->mCurrentCamera->m_pSimObject;
-  if ( v2 )
-    UFG::SimObject::GetComponentOfType(v2, UFG::FollowCameraComponent::_TypeUID);
+  m_pSimObject = UFG::Director::Get()->mCurrentCamera->m_pSimObject;
+  if ( m_pSimObject )
+    UFG::SimObject::GetComponentOfType(m_pSimObject, UFG::FollowCameraComponent::_TypeUID);
 }
 

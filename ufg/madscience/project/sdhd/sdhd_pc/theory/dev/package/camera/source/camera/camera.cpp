@@ -2,94 +2,99 @@
 // RVA: 0xB9280
 void __fastcall UFG::Camera::Camera(UFG::Camera *this)
 {
-  UFG::Camera *v1; // rbx
-  __m128 v2; // xmm2
+  UFG::qVector4 v2; // xmm2
   UFG::qVector4 v3; // xmm3
   UFG::qVector4 v4; // xmm2
   UFG::qVector4 v5; // xmm1
   UFG::qVector4 v6; // xmm3
   UFG::qVector4 v7; // xmm2
   UFG::qVector4 v8; // xmm1
-  float v9; // xmm0_4
+  float x; // xmm0_4
 
-  v1 = this;
   Render::DepthOfField::Focus::Focus(&this->mDepthOfFieldFocus);
-  v1->mFOVOffset = 0.0;
-  UFG::qPerspectiveMatrix(&v1->mProjection, 1.0471976, 1.7777778, 0.33000001, 4200.0);
+  this->mFOVOffset = 0.0;
+  UFG::qPerspectiveMatrix(&this->mProjection, 1.0471976, 1.7777778, 0.33000001, 4200.0);
   v2 = 0i64;
-  v1->mMotionBlur = 0.0;
-  v1->mMotionBlurIsTimeLimited = 0;
-  v1->mDesaturation = 0.0;
-  v2.m128_f32[0] = (float)1;
-  v1->mView.v0 = (UFG::qVector4)v2;
-  v1->mView.v1 = (UFG::qVector4)_mm_shuffle_ps(v2, v2, 81);
-  v1->mView.v2 = (UFG::qVector4)_mm_shuffle_ps(v2, v2, 69);
-  v1->mView.v3 = (UFG::qVector4)_mm_shuffle_ps(v2, v2, 21);
-  v1->mTransformation.v0 = (UFG::qVector4)v2;
-  v1->mTransformation.v1 = (UFG::qVector4)_mm_shuffle_ps(v2, v2, 81);
-  v1->mTransformation.v2 = (UFG::qVector4)_mm_shuffle_ps(v2, v2, 69);
-  v1->mTransformation.v3 = (UFG::qVector4)_mm_shuffle_ps(v2, v2, 21);
-  v1->bUseOverrideMatrices = 0;
-  v1->mOverrideView.v0 = (UFG::qVector4)v2;
-  v1->mOverrideView.v1 = (UFG::qVector4)_mm_shuffle_ps(v2, v2, 81);
-  v1->mOverrideView.v2 = (UFG::qVector4)_mm_shuffle_ps(v2, v2, 69);
-  v1->mOverrideView.v3 = (UFG::qVector4)_mm_shuffle_ps(v2, v2, 21);
-  v1->mOverrideTrans.v0 = (UFG::qVector4)v2;
-  v1->mOverrideTrans.v1 = (UFG::qVector4)_mm_shuffle_ps(v2, v2, 81);
-  v1->mOverrideTrans.v2 = (UFG::qVector4)_mm_shuffle_ps(v2, v2, 69);
-  v1->mOverrideTrans.v3 = (UFG::qVector4)_mm_shuffle_ps(v2, v2, 21);
-  v1->mOverrideProj.v0 = (UFG::qVector4)v2;
-  v1->mOverrideProj.v1 = (UFG::qVector4)_mm_shuffle_ps(v2, v2, 81);
-  v1->mOverrideProj.v2 = (UFG::qVector4)_mm_shuffle_ps(v2, v2, 69);
-  v1->mOverrideProj.v3 = (UFG::qVector4)_mm_shuffle_ps(v2, v2, 21);
-  v3 = v1->mView.v1;
-  v4 = v1->mView.v2;
-  v5 = v1->mView.v3;
-  v1->mPreviousView.v0 = v1->mView.v0;
-  v1->mPreviousView.v1 = v3;
-  v1->mPreviousView.v2 = v4;
-  v1->mPreviousView.v3 = v5;
-  v6 = v1->mTransformation.v1;
-  v7 = v1->mTransformation.v2;
-  v8 = v1->mTransformation.v3;
-  v1->mPreviousTransformation.v0 = v1->mTransformation.v0;
-  v1->mPreviousTransformation.v1 = v6;
-  v1->mPreviousTransformation.v2 = v7;
-  v1->mPreviousTransformation.v3 = v8;
+  this->mMotionBlur = 0.0;
+  this->mMotionBlurIsTimeLimited = 0;
+  this->mDesaturation = 0.0;
+  v2.x = (float)1;
+  this->mView.v0 = v2;
+  this->mView.v1 = (UFG::qVector4)_mm_shuffle_ps((__m128)v2, (__m128)v2, 81);
+  this->mView.v2 = (UFG::qVector4)_mm_shuffle_ps((__m128)v2, (__m128)v2, 69);
+  this->mView.v3 = (UFG::qVector4)_mm_shuffle_ps((__m128)v2, (__m128)v2, 21);
+  this->mTransformation.v0 = v2;
+  this->mTransformation.v1 = (UFG::qVector4)_mm_shuffle_ps((__m128)v2, (__m128)v2, 81);
+  this->mTransformation.v2 = (UFG::qVector4)_mm_shuffle_ps((__m128)v2, (__m128)v2, 69);
+  this->mTransformation.v3 = (UFG::qVector4)_mm_shuffle_ps((__m128)v2, (__m128)v2, 21);
+  this->bUseOverrideMatrices = 0;
+  this->mOverrideView.v0 = v2;
+  this->mOverrideView.v1 = (UFG::qVector4)_mm_shuffle_ps((__m128)v2, (__m128)v2, 81);
+  this->mOverrideView.v2 = (UFG::qVector4)_mm_shuffle_ps((__m128)v2, (__m128)v2, 69);
+  this->mOverrideView.v3 = (UFG::qVector4)_mm_shuffle_ps((__m128)v2, (__m128)v2, 21);
+  this->mOverrideTrans.v0 = v2;
+  this->mOverrideTrans.v1 = (UFG::qVector4)_mm_shuffle_ps((__m128)v2, (__m128)v2, 81);
+  this->mOverrideTrans.v2 = (UFG::qVector4)_mm_shuffle_ps((__m128)v2, (__m128)v2, 69);
+  this->mOverrideTrans.v3 = (UFG::qVector4)_mm_shuffle_ps((__m128)v2, (__m128)v2, 21);
+  this->mOverrideProj.v0 = v2;
+  this->mOverrideProj.v1 = (UFG::qVector4)_mm_shuffle_ps((__m128)v2, (__m128)v2, 81);
+  this->mOverrideProj.v2 = (UFG::qVector4)_mm_shuffle_ps((__m128)v2, (__m128)v2, 69);
+  this->mOverrideProj.v3 = (UFG::qVector4)_mm_shuffle_ps((__m128)v2, (__m128)v2, 21);
+  v3 = this->mView.v1;
+  v4 = this->mView.v2;
+  v5 = this->mView.v3;
+  this->mPreviousView.v0 = this->mView.v0;
+  this->mPreviousView.v1 = v3;
+  this->mPreviousView.v2 = v4;
+  this->mPreviousView.v3 = v5;
+  v6 = this->mTransformation.v1;
+  v7 = this->mTransformation.v2;
+  v8 = this->mTransformation.v3;
+  this->mPreviousTransformation.v0 = this->mTransformation.v0;
+  this->mPreviousTransformation.v1 = v6;
+  this->mPreviousTransformation.v2 = v7;
+  this->mPreviousTransformation.v3 = v8;
   v7.x = UFG::qVector3::msZero.z;
-  v9 = UFG::qVector3::msZero.x;
-  v1->mVelocity.y = UFG::qVector3::msZero.y;
-  v1->mVelocity.x = v9;
-  v1->mVelocity.z = v7.x;
+  x = UFG::qVector3::msZero.x;
+  this->mVelocity.y = UFG::qVector3::msZero.y;
+  this->mVelocity.x = x;
+  this->mVelocity.z = v7.x;
 }
 
 // File Line: 42
 // RVA: 0xB99F0
 void __fastcall UFG::Camera::ApplyDutch(UFG::Camera *this, float radians)
 {
-  UFG::Camera *v2; // rdi
-  UFG::qMatrix44 dest; // [rsp+20h] [rbp-48h]
+  UFG::qMatrix44 dest; // [rsp+20h] [rbp-48h] BYREF
 
-  v2 = this;
   UFG::qRotationMatrixZ(&dest, radians);
-  UFG::qMatrix44::operator*=(&v2->mView, &dest);
-  UFG::qInverseAffine(&v2->mTransformation, &v2->mView);
+  UFG::qMatrix44::operator*=(&this->mView, &dest);
+  UFG::qInverseAffine(&this->mTransformation, &this->mView);
 }
 
 // File Line: 51
 // RVA: 0xBA680
-void __fastcall UFG::Camera::SetLookAtMatrix(UFG::Camera *this, UFG::qVector3 *eye, UFG::qVector3 *look, UFG::qVector3 *up)
+void __fastcall UFG::Camera::SetLookAtMatrix(
+        UFG::Camera *this,
+        UFG::qVector3 *eye,
+        UFG::qVector3 *look,
+        UFG::qVector3 *up)
 {
-  UFG::Camera *v4; // rdi
-
-  v4 = this;
   UFG::qLookAtMatrix(&this->mView, eye, look, up);
-  UFG::qInverseAffine(&v4->mTransformation, &v4->mView);
+  UFG::qInverseAffine(&this->mTransformation, &this->mView);
 }
 
 // File Line: 85
 // RVA: 0xBA6E0
-void __fastcall UFG::Camera::SetViewProjection(UFG::Camera *this, float fov, float aspect, float nearPlane, float farPlane, float xOffset, float yOffset, bool applyFovOffset)
+void __fastcall UFG::Camera::SetViewProjection(
+        UFG::Camera *this,
+        float fov,
+        float aspect,
+        float nearPlane,
+        float farPlane,
+        float xOffset,
+        float yOffset,
+        bool applyFovOffset)
 {
   float v8; // xmm4_4
 
@@ -105,17 +110,17 @@ void __fastcall UFG::Camera::SetViewProjection(UFG::Camera *this, float fov, flo
 // RVA: 0xBA5E0
 void __fastcall UFG::Camera::SetFov(UFG::Camera *this, float fov)
 {
-  UFG::qMatrix44 *v2; // rbx
-  float near_plane; // [rsp+40h] [rbp-28h]
-  float aspect; // [rsp+44h] [rbp-24h]
-  __int64 v5; // [rsp+48h] [rbp-20h]
-  float pan_y; // [rsp+70h] [rbp+8h]
-  float pan_x; // [rsp+80h] [rbp+18h]
-  float far_plane; // [rsp+88h] [rbp+20h]
+  UFG::qMatrix44 *p_mProjection; // rbx
+  float near_plane; // [rsp+40h] [rbp-28h] BYREF
+  float aspect; // [rsp+44h] [rbp-24h] BYREF
+  float v5; // [rsp+48h] [rbp-20h] BYREF
+  float pan_y; // [rsp+70h] [rbp+8h] BYREF
+  float pan_x; // [rsp+80h] [rbp+18h] BYREF
+  float far_plane; // [rsp+88h] [rbp+20h] BYREF
 
-  v2 = &this->mProjection;
-  UFG::qDecomposePerspective((float *)&v5, &aspect, &near_plane, &far_plane, &pan_x, &pan_y, &this->mProjection);
-  UFG::qPerspectiveObliqueMatrix(v2, fov, aspect, near_plane, far_plane, pan_x, pan_y);
+  p_mProjection = &this->mProjection;
+  UFG::qDecomposePerspective(&v5, &aspect, &near_plane, &far_plane, &pan_x, &pan_y, &this->mProjection);
+  UFG::qPerspectiveObliqueMatrix(p_mProjection, fov, aspect, near_plane, far_plane, pan_x, pan_y);
 }
 
 // File Line: 103
@@ -165,7 +170,7 @@ UFG::qMatrix44 *__fastcall UFG::Camera::GetWorldView(UFG::Camera *this)
 
   result = &this->mOverrideView;
   if ( !this->bUseOverrideMatrices )
-    result = &this->mView;
+    return &this->mView;
   return result;
 }
 
@@ -177,7 +182,7 @@ UFG::qMatrix44 *__fastcall UFG::Camera::GetViewWorld(UFG::Camera *this)
 
   result = &this->mOverrideTrans;
   if ( !this->bUseOverrideMatrices )
-    result = &this->mTransformation;
+    return &this->mTransformation;
   return result;
 }
 
@@ -189,39 +194,38 @@ UFG::qMatrix44 *__fastcall UFG::Camera::GetViewProjection(UFG::Camera *this)
 
   result = &this->mOverrideProj;
   if ( !this->bUseOverrideMatrices )
-    result = &this->mProjection;
+    return &this->mProjection;
   return result;
 }
 
 // File Line: 140
 // RVA: 0xB9B70
-UFG::qVector3 *__fastcall UFG::Camera::GetScreenCoord(UFG::Camera *this, UFG::qVector3 *result, UFG::qVector3 *world_pos, UFG::qVector2 *viewport_scale, bool *is_on_screen)
+UFG::qVector3 *__fastcall UFG::Camera::GetScreenCoord(
+        UFG::Camera *this,
+        UFG::qVector3 *result,
+        UFG::qVector3 *world_pos,
+        UFG::qVector2 *viewport_scale,
+        bool *is_on_screen)
 {
-  UFG::qVector3 *v5; // rbx
-  UFG::qVector2 *v6; // rdi
-  UFG::qVector3 *v7; // rsi
-  UFG::qMatrix44 *v8; // r8
-  UFG::qMatrix44 *v9; // rcx
+  UFG::qMatrix44 *p_mOverrideProj; // r8
+  UFG::qMatrix44 *p_mOverrideView; // rcx
   UFG::qMatrix44 *v10; // rax
   UFG::qVector4 v11; // xmm3
   UFG::qVector4 v12; // xmm0
   UFG::qVector4 v13; // xmm1
-  UFG::qMatrix44 resulta; // [rsp+30h] [rbp-48h]
+  UFG::qMatrix44 resulta; // [rsp+30h] [rbp-48h] BYREF
 
-  v5 = result;
-  v6 = viewport_scale;
-  v7 = world_pos;
   if ( this->bUseOverrideMatrices )
   {
-    v8 = &this->mOverrideProj;
-    v9 = &this->mOverrideView;
+    p_mOverrideProj = &this->mOverrideProj;
+    p_mOverrideView = &this->mOverrideView;
   }
   else
   {
-    v8 = &this->mProjection;
-    v9 = &this->mView;
+    p_mOverrideProj = &this->mProjection;
+    p_mOverrideView = &this->mView;
   }
-  v10 = UFG::qMatrix44::operator*(v9, &resulta, v8);
+  v10 = UFG::qMatrix44::operator*(p_mOverrideView, &resulta, p_mOverrideProj);
   v11 = v10->v1;
   v12 = v10->v0;
   v13 = v10->v3;
@@ -229,25 +233,25 @@ UFG::qVector3 *__fastcall UFG::Camera::GetScreenCoord(UFG::Camera *this, UFG::qV
   resulta.v1 = v11;
   resulta.v3 = v13;
   resulta.v0 = v12;
-  UFG::qGetScreenCoord(v5, v7, &resulta, v6, is_on_screen);
-  return v5;
+  UFG::qGetScreenCoord(result, world_pos, &resulta, viewport_scale, is_on_screen);
+  return result;
 }
 
 // File Line: 198
 // RVA: 0xBA0B0
-UFG::qVector3 *__fastcall UFG::Camera::ScreenToWorldRay(UFG::Camera *this, UFG::qVector3 *result, UFG::qVector2 *screen_pos, UFG::qVector2 *viewport_scale)
+UFG::qVector3 *__fastcall UFG::Camera::ScreenToWorldRay(
+        UFG::Camera *this,
+        UFG::qVector3 *result,
+        UFG::qVector2 *screen_pos,
+        UFG::qVector2 *viewport_scale)
 {
-  float v4; // xmm1_4
-  UFG::qVector2 *v5; // rdi
-  UFG::qVector2 *v6; // rsi
-  UFG::qVector3 *v7; // rbp
-  UFG::Camera *v8; // rbx
+  float x; // xmm1_4
   float v9; // xmm0_4
   float v10; // xmm6_4
   float v11; // xmm9_4
-  __m128 v12; // xmm10
+  __m128 x_low; // xmm10
   float v13; // xmm6_4
-  float *v14; // rbx
+  UFG::qMatrix44 *p_mOverrideTrans; // rbx
   __m128 v15; // xmm2
   float v16; // xmm7_4
   UFG::qVector3 *v17; // rax
@@ -257,40 +261,38 @@ UFG::qVector3 *__fastcall UFG::Camera::ScreenToWorldRay(UFG::Camera *this, UFG::
   float v21; // xmm5_4
   float v22; // xmm6_4
 
-  v4 = this->mProjection.v0.x;
-  v5 = viewport_scale;
-  v6 = screen_pos;
-  v7 = result;
-  v8 = this;
-  if ( v4 == 0.0 )
+  x = this->mProjection.v0.x;
+  if ( x == 0.0 )
     v9 = 0.0;
   else
-    v9 = atan2f(1.0, v4) * 2.0;
-  v10 = v5->x * 0.5;
-  v12 = (__m128)LODWORD(v6->x);
-  v11 = (float)(v5->y * 0.5) - v6->y;
-  v12.m128_f32[0] = v12.m128_f32[0] - v10;
+    v9 = atan2f(1.0, x) * 2.0;
+  v10 = viewport_scale->x * 0.5;
+  x_low = (__m128)LODWORD(screen_pos->x);
+  v11 = (float)(viewport_scale->y * 0.5) - screen_pos->y;
+  x_low.m128_f32[0] = x_low.m128_f32[0] - v10;
   LODWORD(v13) = COERCE_UNSIGNED_INT(v10 / tanf(v9 * 0.5)) ^ _xmm[0];
-  if ( v8->bUseOverrideMatrices )
-    v14 = &v8->mOverrideTrans.v0.x;
+  if ( this->bUseOverrideMatrices )
+    p_mOverrideTrans = &this->mOverrideTrans;
   else
-    v14 = &v8->mTransformation.v0.x;
-  v15 = v12;
-  v15.m128_f32[0] = (float)((float)(v12.m128_f32[0] * v12.m128_f32[0]) + (float)(v11 * v11)) + (float)(v13 * v13);
+    p_mOverrideTrans = &this->mTransformation;
+  v15 = x_low;
+  v15.m128_f32[0] = (float)((float)(x_low.m128_f32[0] * x_low.m128_f32[0]) + (float)(v11 * v11)) + (float)(v13 * v13);
   if ( v15.m128_f32[0] == 0.0 )
     v16 = 0.0;
   else
-    v16 = 1.0 / COERCE_FLOAT(_mm_sqrt_ps(v15));
-  v17 = v7;
-  v18 = (float)(v16 * v11) * v14[5];
-  v19 = (float)(v16 * v12.m128_f32[0]) * v14[1];
+    v16 = 1.0 / _mm_sqrt_ps(v15).m128_f32[0];
+  v17 = result;
+  v18 = (float)(v16 * v11) * p_mOverrideTrans->v1.y;
+  v19 = (float)(v16 * x_low.m128_f32[0]) * p_mOverrideTrans->v0.y;
   v20 = v13 * v16;
-  v21 = (float)((float)(v16 * v11) * v14[6]) + (float)((float)(v16 * v12.m128_f32[0]) * v14[2]);
-  v7->x = (float)((float)((float)(v16 * v11) * v14[4]) + (float)((float)(v16 * v12.m128_f32[0]) * *v14))
-        + (float)((float)(v13 * v16) * v14[8]);
-  v22 = (float)(v13 * v16) * v14[10];
-  v7->y = (float)(v18 + v19) + (float)(v20 * v14[9]);
-  v7->z = v21 + v22;
+  v21 = (float)((float)(v16 * v11) * p_mOverrideTrans->v1.z)
+      + (float)((float)(v16 * x_low.m128_f32[0]) * p_mOverrideTrans->v0.z);
+  result->x = (float)((float)((float)(v16 * v11) * p_mOverrideTrans->v1.x)
+                    + (float)((float)(v16 * x_low.m128_f32[0]) * p_mOverrideTrans->v0.x))
+            + (float)((float)(v13 * v16) * p_mOverrideTrans->v2.x);
+  v22 = (float)(v13 * v16) * p_mOverrideTrans->v2.z;
+  result->y = (float)(v18 + v19) + (float)(v20 * p_mOverrideTrans->v2.y);
+  result->z = v21 + v22;
   return v17;
 }
 

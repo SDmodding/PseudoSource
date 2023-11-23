@@ -2,14 +2,14 @@
 // RVA: 0x15BE030
 __int64 dynamic_initializer_for__AkFXMemAlloc::m_instanceUpper__()
 {
-  return atexit(dynamic_atexit_destructor_for__AkFXMemAlloc::m_instanceUpper__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__AkFXMemAlloc::m_instanceUpper__);
 }
 
 // File Line: 20
 // RVA: 0x15BE020
 __int64 dynamic_initializer_for__AkFXMemAlloc::m_instanceLower__()
 {
-  return atexit(dynamic_atexit_destructor_for__AkFXMemAlloc::m_instanceLower__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__AkFXMemAlloc::m_instanceLower__);
 }
 
 // File Line: 46

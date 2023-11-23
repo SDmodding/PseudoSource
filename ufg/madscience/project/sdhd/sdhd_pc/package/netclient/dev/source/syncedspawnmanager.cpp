@@ -2,7 +2,7 @@
 // RVA: 0x14671C0
 __int64 dynamic_initializer_for__SyncedSpawnManager::mSyncedObjects__()
 {
-  return atexit(dynamic_atexit_destructor_for__SyncedSpawnManager::mSyncedObjects__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__SyncedSpawnManager::mSyncedObjects__);
 }
 
 // File Line: 322
@@ -19,6 +19,6 @@ __int64 dynamic_initializer_for__gRemotePlayerNames__()
   UFG::qSymbol::qSymbol(&stru_1422554C4, v1);
   v2 = UFG::qStringHash32("PlayerFour_Havok", 0xFFFFFFFF);
   UFG::qSymbol::qSymbol(&stru_1422554C8, v2);
-  return atexit(dynamic_atexit_destructor_for__gRemotePlayerNames__);
+  return atexit((int (__fastcall *)())dynamic_atexit_destructor_for__gRemotePlayerNames__);
 }
 

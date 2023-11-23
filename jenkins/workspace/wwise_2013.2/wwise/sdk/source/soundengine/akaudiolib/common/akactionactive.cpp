@@ -1,13 +1,13 @@
 // File Line: 39
 // RVA: 0xA97970
-void __fastcall CAkActionActive::CAkActionActive(CAkActionActive *this, AkActionType in_eActionType, unsigned int in_ulID)
+void __fastcall CAkActionActive::CAkActionActive(
+        CAkActionActive *this,
+        AkActionType in_eActionType,
+        unsigned int in_ulID)
 {
-  CAkActionActive *v3; // rbx
-
-  v3 = this;
-  CAkActionExcept::CAkActionExcept((CAkActionExcept *)&this->vfptr, in_eActionType, in_ulID);
-  v3->vfptr = (CAkIndexableVtbl *)&CAkActionActive::`vftable;
-  v3->m_bIsMasterResume = 0;
+  CAkActionExcept::CAkActionExcept(this, in_eActionType, in_ulID);
+  this->vfptr = (CAkIndexableVtbl *)&CAkActionActive::`vftable;
+  this->m_bIsMasterResume = 0;
 }
 
 // File Line: 43
@@ -15,229 +15,223 @@ void __fastcall CAkActionActive::CAkActionActive(CAkActionActive *this, AkAction
 void __fastcall CAkActionActive::~CAkActionActive(CAkActionActive *this)
 {
   this->vfptr = (CAkIndexableVtbl *)&CAkActionActive::`vftable;
-  CAkActionExcept::~CAkActionExcept((CAkActionExcept *)&this->vfptr);
+  CAkActionExcept::~CAkActionExcept(this);
 }
 
 // File Line: 47
 // RVA: 0xA97CF0
-signed __int64 __fastcall CAkActionSetValue::SetActionParams(CAkActionSetValue *this, char **io_rpData, unsigned int *io_rulDataSize)
+__int64 __fastcall CAkActionSetValue::SetActionParams(
+        CAkActionSetValue *this,
+        char **io_rpData,
+        unsigned int *io_rulDataSize)
 {
-  unsigned int *v3; // rsi
-  char **v4; // rdi
   char v5; // r9
-  CAkActionSetValue *v6; // rbx
-  CAkIndexableVtbl *v7; // rax
-  signed __int64 result; // rax
+  CAkIndexableVtbl *vfptr; // rax
+  __int64 result; // rax
 
-  v3 = io_rulDataSize;
-  v4 = io_rpData;
-  v5 = **io_rpData;
-  v6 = this;
-  ++*io_rpData;
-  *((_BYTE *)&this->0 + 54) &= 0xE0u;
-  v7 = this->vfptr;
-  *((_BYTE *)&this->0 + 54) |= v5 & 0x1F;
-  result = ((__int64 (*)(void))v7[2].Release)();
+  v5 = *(*io_rpData)++;
+  *((_BYTE *)&this->CAkAction + 54) &= 0xE0u;
+  vfptr = this->vfptr;
+  *((_BYTE *)&this->CAkAction + 54) |= v5 & 0x1F;
+  result = ((__int64 (*)(void))vfptr[2].Release)();
   if ( (_DWORD)result == 1 )
-    result = CAkActionExcept::SetExceptParams((CAkActionExcept *)&v6->vfptr, v4, v3);
+    return CAkActionExcept::SetExceptParams(this, io_rpData, io_rulDataSize);
   return result;
 }
 
 // File Line: 61
 // RVA: 0xA97C40
-signed __int64 __fastcall CAkActionActive::Exec(CAkActionActive *this, ActionParamType in_eType, CAkRegisteredObj *in_pGameObj, unsigned int in_TargetPlayingID)
+__int64 __fastcall CAkActionActive::Exec(
+        CAkActionActive *this,
+        ActionParamType in_eType,
+        CAkRegisteredObj *in_pGameObj,
+        unsigned int in_TargetPlayingID)
 {
-  unsigned int v4; // esi
-  CAkRegisteredObj *v5; // rbp
-  ActionParamType v6; // er14
-  CAkActionActive *v7; // rbx
-  CAkIndexable *v8; // rdi
-  char v9; // r10
-  int v10; // er9
+  CAkParameterNodeBase *v8; // rdi
+  bool m_bIsMasterResume; // r10
+  int v10; // r9d
   unsigned int v11; // ebx
-  ActionParamType v13; // [rsp+20h] [rbp-38h]
+  ActionParamType v13; // [rsp+20h] [rbp-38h] BYREF
   CAkRegisteredObj *v14; // [rsp+28h] [rbp-30h]
   unsigned int v15; // [rsp+30h] [rbp-28h]
-  int v16; // [rsp+34h] [rbp-24h]
+  int TransitionTime; // [rsp+34h] [rbp-24h]
   int v17; // [rsp+38h] [rbp-20h]
   __int16 v18; // [rsp+3Ch] [rbp-1Ch]
-  char v19; // [rsp+3Eh] [rbp-1Ah]
+  bool v19; // [rsp+3Eh] [rbp-1Ah]
 
-  v4 = in_TargetPlayingID;
-  v5 = in_pGameObj;
-  v6 = in_eType;
-  v7 = this;
-  v8 = CAkAction::GetAndRefTarget((CAkAction *)&this->vfptr);
+  v8 = CAkAction::GetAndRefTarget(this);
   if ( !v8 )
     return 15i64;
-  v9 = v7->m_bIsMasterResume;
-  v10 = *((_BYTE *)&v7->0 + 54) & 0x1F;
+  m_bIsMasterResume = this->m_bIsMasterResume;
+  v10 = *((_BYTE *)&this->CAkAction + 54) & 0x1F;
   v18 = 0;
-  v13 = v6;
-  v19 = v9;
-  v14 = v5;
-  v15 = v4;
+  v13 = in_eType;
+  v19 = m_bIsMasterResume;
+  v14 = in_pGameObj;
+  v15 = in_TargetPlayingID;
   v17 = v10;
-  v16 = CAkAction::GetTransitionTime((CAkAction *)&v7->vfptr);
-  v11 = (__int64)v8->vfptr[4].__vecDelDtor(v8, (unsigned int)&v13);
+  TransitionTime = CAkAction::GetTransitionTime(this);
+  v11 = (unsigned int)v8->vfptr[4].__vecDelDtor(v8, (unsigned int)&v13);
   v8->vfptr->Release(v8);
   return v11;
 }
 
 // File Line: 88
 // RVA: 0xA979F0
-void __fastcall CAkActionActive::AllExec(CAkActionActive *this, ActionParamType in_eType, CAkRegisteredObj *in_pGameObj, unsigned int in_TargetPlayingID)
+void __fastcall CAkActionActive::AllExec(
+        CAkActionActive *this,
+        ActionParamType in_eType,
+        CAkRegisteredObj *in_pGameObj,
+        unsigned int in_TargetPlayingID)
 {
   CAkAudioLibIndex *v4; // r15
-  CAkActionActive *v5; // r14
-  unsigned int v6; // er12
-  CAkRegisteredObj *v7; // rsi
-  ActionParamType v8; // ebp
-  CAkDynamicSequence *v9; // rdi
+  CAkDynamicSequence *pNextItem; // rdi
   __int64 v10; // rbx
   char v11; // al
-  CAkBus *v12; // rax
+  CAkBus *PrimaryMasterBusAndAddRef; // rax
   CAkBus *v13; // rbx
-  CAkBus *v14; // rax
+  CAkBus *SecondaryMasterBusAndAddRef; // rax
   CAkBus *v15; // rbx
-  CAkFeedbackBus *v16; // rax
+  CAkFeedbackBus *MasterMotionBusAndAddRef; // rax
   CAkFeedbackBus *v17; // rbx
-  ActionParamType v18; // [rsp+20h] [rbp-48h]
+  ActionParamType v18; // [rsp+20h] [rbp-48h] BYREF
   CAkRegisteredObj *v19; // [rsp+28h] [rbp-40h]
   unsigned int v20; // [rsp+30h] [rbp-38h]
-  int v21; // [rsp+34h] [rbp-34h]
+  int TransitionTime; // [rsp+34h] [rbp-34h]
   int v22; // [rsp+38h] [rbp-30h]
   char v23; // [rsp+3Ch] [rbp-2Ch]
   bool v24; // [rsp+3Dh] [rbp-2Bh]
-  bool v25; // [rsp+3Eh] [rbp-2Ah]
+  bool m_bIsMasterResume; // [rsp+3Eh] [rbp-2Ah]
 
   v4 = g_pIndex;
-  v5 = this;
-  v6 = in_TargetPlayingID;
-  v7 = in_pGameObj;
-  v8 = in_eType;
   EnterCriticalSection(&g_pIndex->m_idxDynamicSequences.m_IndexLock.m_csLock);
-  v9 = (CAkDynamicSequence *)v4->m_idxDynamicSequences.m_mapIDToPtr.m_table[0];
+  pNextItem = (CAkDynamicSequence *)v4->m_idxDynamicSequences.m_mapIDToPtr.m_table[0];
   LODWORD(v10) = 0;
-  if ( v9 )
-    goto LABEL_19;
-  while ( 1 )
+  if ( pNextItem )
   {
-    v10 = (unsigned int)(v10 + 1);
-    if ( (unsigned int)v10 >= 0xC1 )
-      break;
-    v9 = (CAkDynamicSequence *)v4->m_idxDynamicSequences.m_mapIDToPtr.m_table[v10];
-    if ( v9 )
-      goto LABEL_6;
-  }
-  if ( v9 )
-  {
-LABEL_19:
     do
     {
-      do
-      {
 LABEL_6:
-        CAkDynamicSequence::AllExec(v9, v8, v7);
-        v9 = (CAkDynamicSequence *)v9->pNextItem;
-      }
-      while ( v9 );
-      while ( 1 )
-      {
-        v10 = (unsigned int)(v10 + 1);
-        if ( (unsigned int)v10 >= 0xC1 )
-          break;
-        v9 = (CAkDynamicSequence *)v4->m_idxDynamicSequences.m_mapIDToPtr.m_table[v10];
-        if ( v9 )
-          goto LABEL_6;
-      }
+      CAkDynamicSequence::AllExec(pNextItem, in_eType, in_pGameObj);
+      pNextItem = (CAkDynamicSequence *)pNextItem->pNextItem;
     }
-    while ( v9 );
+    while ( pNextItem );
+    while ( 1 )
+    {
+      v10 = (unsigned int)(v10 + 1);
+      if ( (unsigned int)v10 >= 0xC1 )
+        break;
+      pNextItem = (CAkDynamicSequence *)v4->m_idxDynamicSequences.m_mapIDToPtr.m_table[v10];
+      if ( pNextItem )
+        goto LABEL_6;
+    }
+  }
+  else
+  {
+    while ( 1 )
+    {
+      v10 = (unsigned int)(v10 + 1);
+      if ( (unsigned int)v10 >= 0xC1 )
+        break;
+      pNextItem = (CAkDynamicSequence *)v4->m_idxDynamicSequences.m_mapIDToPtr.m_table[v10];
+      if ( pNextItem )
+        goto LABEL_6;
+    }
   }
   LeaveCriticalSection(&v4->m_idxDynamicSequences.m_IndexLock.m_csLock);
-  v25 = v5->m_bIsMasterResume;
-  v11 = *((_BYTE *)&v5->0 + 54);
+  m_bIsMasterResume = this->m_bIsMasterResume;
+  v11 = *((_BYTE *)&this->CAkAction + 54);
   v23 = 0;
-  v18 = v8;
-  v19 = v7;
+  v18 = in_eType;
+  v19 = in_pGameObj;
   v22 = v11 & 0x1F;
-  v20 = v6;
-  v21 = CAkAction::GetTransitionTime((CAkAction *)&v5->vfptr);
-  v24 = v7 == 0i64;
-  v12 = CAkBus::GetPrimaryMasterBusAndAddRef();
-  v13 = v12;
-  if ( v12 )
+  v20 = in_TargetPlayingID;
+  TransitionTime = CAkAction::GetTransitionTime(this);
+  v24 = in_pGameObj == 0i64;
+  PrimaryMasterBusAndAddRef = CAkBus::GetPrimaryMasterBusAndAddRef();
+  v13 = PrimaryMasterBusAndAddRef;
+  if ( PrimaryMasterBusAndAddRef )
   {
-    v12->vfptr[4].__vecDelDtor((CAkIndexable *)&v12->vfptr, (unsigned int)&v18);
-    v13->vfptr->Release((CAkIndexable *)&v13->vfptr);
+    PrimaryMasterBusAndAddRef->vfptr[4].__vecDelDtor(PrimaryMasterBusAndAddRef, (unsigned int)&v18);
+    v13->vfptr->Release(v13);
   }
-  v14 = CAkBus::GetSecondaryMasterBusAndAddRef();
-  v15 = v14;
-  if ( v14 )
+  SecondaryMasterBusAndAddRef = CAkBus::GetSecondaryMasterBusAndAddRef();
+  v15 = SecondaryMasterBusAndAddRef;
+  if ( SecondaryMasterBusAndAddRef )
   {
-    v14->vfptr[4].__vecDelDtor((CAkIndexable *)&v14->vfptr, (unsigned int)&v18);
-    v15->vfptr->Release((CAkIndexable *)&v15->vfptr);
+    SecondaryMasterBusAndAddRef->vfptr[4].__vecDelDtor(SecondaryMasterBusAndAddRef, (unsigned int)&v18);
+    v15->vfptr->Release(v15);
   }
-  v16 = CAkFeedbackBus::GetMasterMotionBusAndAddRef();
-  v17 = v16;
-  if ( v16 )
+  MasterMotionBusAndAddRef = CAkFeedbackBus::GetMasterMotionBusAndAddRef();
+  v17 = MasterMotionBusAndAddRef;
+  if ( MasterMotionBusAndAddRef )
   {
-    v16->vfptr[4].__vecDelDtor((CAkIndexable *)&v16->vfptr, (unsigned int)&v18);
-    v17->vfptr->Release((CAkIndexable *)&v17->vfptr);
+    MasterMotionBusAndAddRef->vfptr[4].__vecDelDtor(MasterMotionBusAndAddRef, (unsigned int)&v18);
+    v17->vfptr->Release(v17);
   }
 }
 
 // File Line: 131
 // RVA: 0xA97B80
-void __fastcall CAkActionActive::AllExecExcept(CAkActionActive *this, ActionParamType in_eType, CAkRegisteredObj *in_pGameObj, unsigned int in_TargetPlayingID)
+void __fastcall CAkActionActive::AllExecExcept(
+        CAkActionActive *this,
+        ActionParamType in_eType,
+        CAkRegisteredObj *in_pGameObj,
+        unsigned int in_TargetPlayingID)
 {
-  bool v4; // al
+  bool m_bIsMasterResume; // al
   char v5; // al
-  CAkBus *v6; // rax
+  CAkBus *PrimaryMasterBusAndAddRef; // rax
   CAkBus *v7; // rbx
-  CAkBus *v8; // rax
+  CAkBus *SecondaryMasterBusAndAddRef; // rax
   CAkBus *v9; // rbx
-  CAkFeedbackBus *v10; // rax
+  CAkFeedbackBus *MasterMotionBusAndAddRef; // rax
   CAkFeedbackBus *v11; // rbx
-  ActionParamType v12; // [rsp+20h] [rbp-38h]
-  AkArray<WwiseObjectIDext,WwiseObjectIDext const &,ArrayPoolDefault,4,AkArrayAllocatorDefault> *v13; // [rsp+28h] [rbp-30h]
+  ActionParamType v12; // [rsp+20h] [rbp-38h] BYREF
+  AkArray<WwiseObjectIDext,WwiseObjectIDext const &,ArrayPoolDefault,4,AkArrayAllocatorDefault> *p_m_listElementException; // [rsp+28h] [rbp-30h]
   CAkRegisteredObj *v14; // [rsp+30h] [rbp-28h]
   unsigned int v15; // [rsp+38h] [rbp-20h]
-  int v16; // [rsp+3Ch] [rbp-1Ch]
+  int TransitionTime; // [rsp+3Ch] [rbp-1Ch]
   int v17; // [rsp+40h] [rbp-18h]
   char v18; // [rsp+44h] [rbp-14h]
   bool v19; // [rsp+45h] [rbp-13h]
 
-  v4 = this->m_bIsMasterResume;
+  m_bIsMasterResume = this->m_bIsMasterResume;
   v18 = 0;
   v12 = in_eType;
-  v19 = v4;
-  v5 = *((_BYTE *)&this->0 + 54);
+  v19 = m_bIsMasterResume;
+  v5 = *((_BYTE *)&this->CAkAction + 54);
   v14 = in_pGameObj;
   v15 = in_TargetPlayingID;
   v17 = v5 & 0x1F;
-  v13 = &this->m_listElementException;
-  v16 = CAkAction::GetTransitionTime((CAkAction *)&this->vfptr);
-  v6 = CAkBus::GetPrimaryMasterBusAndAddRef();
-  v7 = v6;
-  if ( v6 )
+  p_m_listElementException = &this->m_listElementException;
+  TransitionTime = CAkAction::GetTransitionTime(this);
+  PrimaryMasterBusAndAddRef = CAkBus::GetPrimaryMasterBusAndAddRef();
+  v7 = PrimaryMasterBusAndAddRef;
+  if ( PrimaryMasterBusAndAddRef )
   {
-    ((void (__fastcall *)(CAkBus *, ActionParamType *))v6->vfptr[4].AddRef)(v6, &v12);
-    v7->vfptr->Release((CAkIndexable *)&v7->vfptr);
+    ((void (__fastcall *)(CAkBus *, ActionParamType *))PrimaryMasterBusAndAddRef->vfptr[4].AddRef)(
+      PrimaryMasterBusAndAddRef,
+      &v12);
+    v7->vfptr->Release(v7);
   }
-  v8 = CAkBus::GetSecondaryMasterBusAndAddRef();
-  v9 = v8;
-  if ( v8 )
+  SecondaryMasterBusAndAddRef = CAkBus::GetSecondaryMasterBusAndAddRef();
+  v9 = SecondaryMasterBusAndAddRef;
+  if ( SecondaryMasterBusAndAddRef )
   {
-    ((void (__fastcall *)(CAkBus *, ActionParamType *))v8->vfptr[4].AddRef)(v8, &v12);
-    v9->vfptr->Release((CAkIndexable *)&v9->vfptr);
+    ((void (__fastcall *)(CAkBus *, ActionParamType *))SecondaryMasterBusAndAddRef->vfptr[4].AddRef)(
+      SecondaryMasterBusAndAddRef,
+      &v12);
+    v9->vfptr->Release(v9);
   }
-  v10 = CAkFeedbackBus::GetMasterMotionBusAndAddRef();
-  v11 = v10;
-  if ( v10 )
+  MasterMotionBusAndAddRef = CAkFeedbackBus::GetMasterMotionBusAndAddRef();
+  v11 = MasterMotionBusAndAddRef;
+  if ( MasterMotionBusAndAddRef )
   {
-    ((void (__fastcall *)(CAkFeedbackBus *, ActionParamType *))v10->vfptr[4].AddRef)(v10, &v12);
-    v11->vfptr->Release((CAkIndexable *)&v11->vfptr);
+    ((void (__fastcall *)(CAkFeedbackBus *, ActionParamType *))MasterMotionBusAndAddRef->vfptr[4].AddRef)(
+      MasterMotionBusAndAddRef,
+      &v12);
+    v11->vfptr->Release(v11);
   }
 }
 
